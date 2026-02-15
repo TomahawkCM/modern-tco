@@ -1,4 +1,3 @@
- 
 import { type Question, TCODomain, Difficulty, QuestionCategory } from "@/types/exam";
 
 // Temporary fallback questions for testing

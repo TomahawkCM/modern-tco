@@ -4,7 +4,7 @@
 
 ## Scenario
 
-A security manager messages: *"Confirm which laptops in APAC have the CrowdStrike Falcon sensor missing or stale in the last 24 hours."*
+A security manager messages: _"Confirm which laptops in APAC have the CrowdStrike Falcon sensor missing or stale in the last 24 hours."_
 
 ## Steps
 

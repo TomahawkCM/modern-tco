@@ -30,11 +30,11 @@ export interface PdfTextResult {
  * Dynamically import PDF.js (client-side only)
  */
 async function loadPdfJs() {
-  if (typeof window === 'undefined') {
-    throw new Error('PDF.js can only be used in browser environment');
+  if (typeof window === "undefined") {
+    throw new Error("PDF.js can only be used in browser environment");
   }
 
-  const pdfjs = await import('pdfjs-dist');
+  const pdfjs = await import("pdfjs-dist");
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
   return pdfjs;
 }
@@ -70,7 +70,7 @@ export async function extractPdfText(
     const items: TextItem[] = textContent.items
       .filter((item: any) => item.str !== undefined)
       .map((item: any) => ({
-        str: item.str || '',
+        str: item.str || "",
         x: item.transform?.[4] ?? 0,
         y: item.transform?.[5] ?? 0,
         width: item.width ?? 0,
@@ -90,10 +90,10 @@ export async function extractPdfText(
     allText.push(pageText);
   }
 
-  const fullText = allText.join('\n\n');
+  const fullText = allText.join("\n\n");
 
   // hasText = true if we extracted more than 100 chars of meaningful text
-  const meaningfulText = fullText.replace(/\s+/g, '').length;
+  const meaningfulText = fullText.replace(/\s+/g, "").length;
   const hasText = meaningfulText > 100;
 
   return {
@@ -109,7 +109,7 @@ export async function extractPdfText(
  * where the Y coordinate changes significantly (new row).
  */
 function reconstructTextWithLineBreaks(items: TextItem[]): string {
-  if (items.length === 0) return '';
+  if (items.length === 0) return "";
 
   // Sort items by Y (descending, since PDF Y=0 is bottom) then by X
   const sorted = [...items].sort((a, b) => {
@@ -131,7 +131,7 @@ function reconstructTextWithLineBreaks(items: TextItem[]): string {
     const yDelta = Math.abs(item.y - lastY);
 
     if (yDelta > lineHeight * 0.5 && currentLine.length > 0) {
-      lines.push(currentLine.join(''));
+      lines.push(currentLine.join(""));
       currentLine = [];
       lastX = 0;
     }
@@ -141,9 +141,9 @@ function reconstructTextWithLineBreaks(items: TextItem[]): string {
       // Large gap suggests a column separator
       const gap = item.x - lastX;
       if (gap > 30) {
-        currentLine.push('\t');
+        currentLine.push("\t");
       } else if (gap > 3) {
-        currentLine.push(' ');
+        currentLine.push(" ");
       }
     }
 
@@ -154,19 +154,17 @@ function reconstructTextWithLineBreaks(items: TextItem[]): string {
 
   // Don't forget last line
   if (currentLine.length > 0) {
-    lines.push(currentLine.join(''));
+    lines.push(currentLine.join(""));
   }
 
-  return lines.join('\n');
+  return lines.join("\n");
 }
 
 /**
  * Quick check if PDF has extractable text (without full extraction).
  * Checks only the first page for speed.
  */
-export async function pdfHasText(
-  pdfData: ArrayBuffer | Uint8Array | File
-): Promise<boolean> {
+export async function pdfHasText(pdfData: ArrayBuffer | Uint8Array | File): Promise<boolean> {
   let data: ArrayBuffer | Uint8Array;
 
   if (pdfData instanceof File) {
@@ -182,10 +180,9 @@ export async function pdfHasText(
     const textContent = await page.getTextContent();
 
     const textLength = textContent.items
-      .map((item: any) => item.str || '')
-      .join('')
-      .trim()
-      .length;
+      .map((item: any) => item.str || "")
+      .join("")
+      .trim().length;
 
     return textLength > 100;
   } catch {

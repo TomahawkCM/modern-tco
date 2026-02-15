@@ -1,5 +1,5 @@
-import type { Question, TCODomain, Difficulty, QuestionCategory } from '@/types/exam';
-import { questionService } from './questionService';
+import type { Question, TCODomain, Difficulty, QuestionCategory } from "@/types/exam";
+import { questionService } from "./questionService";
 
 export interface ImportResult {
   success: boolean;
@@ -19,22 +19,32 @@ export class QuestionBulkService {
    * Parse CSV content into questions
    */
   parseCSV(csvContent: string): { questions: Partial<Question>[]; errors: string[] } {
-    const lines = csvContent.split('\n').filter((line) => line.trim());
+    const lines = csvContent.split("\n").filter((line) => line.trim());
     const errors: string[] = [];
     const questions: Partial<Question>[] = [];
 
     if (lines.length < 2) {
-      errors.push('CSV must contain at least a header row and one data row');
+      errors.push("CSV must contain at least a header row and one data row");
       return { questions, errors };
     }
 
     // Parse header
-    const header = lines[0].split(',').map((h) => h.trim().toLowerCase());
-    const requiredColumns = ['question', 'choice_a', 'choice_b', 'choice_c', 'choice_d', 'correct_answer', 'explanation', 'domain', 'difficulty'];
+    const header = lines[0].split(",").map((h) => h.trim().toLowerCase());
+    const requiredColumns = [
+      "question",
+      "choice_a",
+      "choice_b",
+      "choice_c",
+      "choice_d",
+      "correct_answer",
+      "explanation",
+      "domain",
+      "difficulty",
+    ];
 
     const missingColumns = requiredColumns.filter((col) => !header.includes(col));
     if (missingColumns.length > 0) {
-      errors.push(`Missing required columns: ${missingColumns.join(', ')}`);
+      errors.push(`Missing required columns: ${missingColumns.join(", ")}`);
       return { questions, errors };
     }
 
@@ -46,31 +56,33 @@ export class QuestionBulkService {
 
         const row: Record<string, string> = {};
         header.forEach((col, index) => {
-          row[col] = values[index] || '';
+          row[col] = values[index] || "";
         });
 
         // Map CSV row to Question object
         const question: Partial<Question> = {
           question: row.question,
           choices: [
-            { id: 'a', text: row.choice_a },
-            { id: 'b', text: row.choice_b },
-            { id: 'c', text: row.choice_c },
-            { id: 'd', text: row.choice_d },
+            { id: "a", text: row.choice_a },
+            { id: "b", text: row.choice_b },
+            { id: "c", text: row.choice_c },
+            { id: "d", text: row.choice_d },
           ],
           correctAnswerId: row.correct_answer.toLowerCase(),
           explanation: row.explanation,
           domain: row.domain as TCODomain,
           difficulty: row.difficulty as Difficulty,
-          category: (row.category || 'Platform Fundamentals') as QuestionCategory,
-          tags: row.tags ? row.tags.split('|').map((t) => t.trim()) : [],
+          category: (row.category || "Platform Fundamentals") as QuestionCategory,
+          tags: row.tags ? row.tags.split("|").map((t) => t.trim()) : [],
           studyGuideRef: row.study_guide_ref,
-          consoleSteps: row.console_steps ? row.console_steps.split('|').map((s) => s.trim()) : undefined,
+          consoleSteps: row.console_steps
+            ? row.console_steps.split("|").map((s) => s.trim())
+            : undefined,
         };
 
         questions.push(question);
       } catch (error) {
-        errors.push(`Row ${i + 1}: ${error instanceof Error ? error.message : 'Parse error'}`);
+        errors.push(`Row ${i + 1}: ${error instanceof Error ? error.message : "Parse error"}`);
       }
     }
 
@@ -82,7 +94,7 @@ export class QuestionBulkService {
    */
   private parseCSVLine(line: string): string[] {
     const values: string[] = [];
-    let current = '';
+    let current = "";
     let inQuotes = false;
 
     for (let i = 0; i < line.length; i++) {
@@ -90,9 +102,9 @@ export class QuestionBulkService {
 
       if (char === '"') {
         inQuotes = !inQuotes;
-      } else if (char === ',' && !inQuotes) {
+      } else if (char === "," && !inQuotes) {
         values.push(current.trim());
-        current = '';
+        current = "";
       } else {
         current += char;
       }
@@ -113,13 +125,13 @@ export class QuestionBulkService {
       const parsed = JSON.parse(jsonContent);
 
       if (!Array.isArray(parsed)) {
-        errors.push('JSON must be an array of questions');
+        errors.push("JSON must be an array of questions");
         return { questions, errors };
       }
 
       questions = parsed;
     } catch (error) {
-      errors.push(`Invalid JSON: ${error instanceof Error ? error.message : 'Parse error'}`);
+      errors.push(`Invalid JSON: ${error instanceof Error ? error.message : "Parse error"}`);
     }
 
     return { questions, errors };
@@ -144,13 +156,13 @@ export class QuestionBulkService {
         if (!choice.text || choice.text.trim().length < 2) {
           errors.push(`Row ${rowNumber}: Choice ${index + 1} is too short`);
         }
-        if (!choice.id || !['a', 'b', 'c', 'd'].includes(choice.id)) {
+        if (!choice.id || !["a", "b", "c", "d"].includes(choice.id)) {
           errors.push(`Row ${rowNumber}: Choice ${index + 1} has invalid ID`);
         }
       });
     }
 
-    if (!question.correctAnswerId || !['a', 'b', 'c', 'd'].includes(question.correctAnswerId)) {
+    if (!question.correctAnswerId || !["a", "b", "c", "d"].includes(question.correctAnswerId)) {
       errors.push(`Row ${rowNumber}: Invalid correct answer ID (must be a, b, c, or d)`);
     }
 
@@ -227,7 +239,7 @@ export class QuestionBulkService {
         result.failed++;
         result.errors.push({
           row: i + 1,
-          error: validation.errors.join(', '),
+          error: validation.errors.join(", "),
           data: question,
         });
         continue;
@@ -235,13 +247,13 @@ export class QuestionBulkService {
 
       // Import
       try {
-        await questionService.addQuestion(question as Omit<Question, 'id'>);
+        await questionService.addQuestion(question as Omit<Question, "id">);
         result.imported++;
       } catch (error) {
         result.failed++;
         result.errors.push({
           row: i + 1,
-          error: error instanceof Error ? error.message : 'Failed to save question',
+          error: error instanceof Error ? error.message : "Failed to save question",
           data: question,
         });
       }
@@ -256,41 +268,41 @@ export class QuestionBulkService {
    */
   exportToCSV(questions: Question[]): string {
     const header = [
-      'question',
-      'choice_a',
-      'choice_b',
-      'choice_c',
-      'choice_d',
-      'correct_answer',
-      'explanation',
-      'domain',
-      'difficulty',
-      'category',
-      'tags',
-      'study_guide_ref',
-      'console_steps',
+      "question",
+      "choice_a",
+      "choice_b",
+      "choice_c",
+      "choice_d",
+      "correct_answer",
+      "explanation",
+      "domain",
+      "difficulty",
+      "category",
+      "tags",
+      "study_guide_ref",
+      "console_steps",
     ];
 
     const rows = questions.map((q) => {
       const choices = q.choices || [];
       return [
         this.escapeCSV(q.question),
-        this.escapeCSV(choices[0]?.text || ''),
-        this.escapeCSV(choices[1]?.text || ''),
-        this.escapeCSV(choices[2]?.text || ''),
-        this.escapeCSV(choices[3]?.text || ''),
+        this.escapeCSV(choices[0]?.text || ""),
+        this.escapeCSV(choices[1]?.text || ""),
+        this.escapeCSV(choices[2]?.text || ""),
+        this.escapeCSV(choices[3]?.text || ""),
         q.correctAnswerId,
-        this.escapeCSV(q.explanation || ''),
+        this.escapeCSV(q.explanation || ""),
         q.domain,
         q.difficulty,
-        q.category || '',
-        (q.tags || []).join('|'),
-        q.studyGuideRef || '',
-        (q.consoleSteps || []).join('|'),
-      ].join(',');
+        q.category || "",
+        (q.tags || []).join("|"),
+        q.studyGuideRef || "",
+        (q.consoleSteps || []).join("|"),
+      ].join(",");
     });
 
-    return [header.join(','), ...rows].join('\n');
+    return [header.join(","), ...rows].join("\n");
   }
 
   /**
@@ -304,10 +316,10 @@ export class QuestionBulkService {
    * Escape CSV special characters
    */
   private escapeCSV(value: string): string {
-    if (!value) return '';
+    if (!value) return "";
 
     // If value contains comma, newline, or quote, wrap in quotes and escape internal quotes
-    if (value.includes(',') || value.includes('\n') || value.includes('"')) {
+    if (value.includes(",") || value.includes("\n") || value.includes('"')) {
       return `"${value.replace(/"/g, '""')}"`;
     }
 
@@ -319,41 +331,38 @@ export class QuestionBulkService {
    */
   generateCSVTemplate(): string {
     const header = [
-      'question',
-      'choice_a',
-      'choice_b',
-      'choice_c',
-      'choice_d',
-      'correct_answer',
-      'explanation',
-      'domain',
-      'difficulty',
-      'category',
-      'tags',
-      'study_guide_ref',
-      'console_steps',
+      "question",
+      "choice_a",
+      "choice_b",
+      "choice_c",
+      "choice_d",
+      "correct_answer",
+      "explanation",
+      "domain",
+      "difficulty",
+      "category",
+      "tags",
+      "study_guide_ref",
+      "console_steps",
     ];
 
     const exampleRow = [
-      'What is the Tanium Linear Chain Architecture?',
-      'A peer-to-peer communication model',
-      'A client-server architecture',
-      'A cloud-based system',
-      'A distributed database',
-      'a',
-      'The Linear Chain Architecture (LCA) is a peer-to-peer communication model where clients communicate with each other in a chain...',
-      'Fundamentals',
-      'Beginner',
-      'Platform Fundamentals',
-      'architecture|fundamentals|lca',
-      'TCO Study Guide Chapter 2',
-      'Open Console|Navigate to Administration|View Architecture Diagram',
+      "What is the Tanium Linear Chain Architecture?",
+      "A peer-to-peer communication model",
+      "A client-server architecture",
+      "A cloud-based system",
+      "A distributed database",
+      "a",
+      "The Linear Chain Architecture (LCA) is a peer-to-peer communication model where clients communicate with each other in a chain...",
+      "Fundamentals",
+      "Beginner",
+      "Platform Fundamentals",
+      "architecture|fundamentals|lca",
+      "TCO Study Guide Chapter 2",
+      "Open Console|Navigate to Administration|View Architecture Diagram",
     ];
 
-    return [
-      header.join(','),
-      exampleRow.map((v) => this.escapeCSV(v)).join(','),
-    ].join('\n');
+    return [header.join(","), exampleRow.map((v) => this.escapeCSV(v)).join(",")].join("\n");
   }
 }
 

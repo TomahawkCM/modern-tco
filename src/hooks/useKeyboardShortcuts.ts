@@ -1,12 +1,12 @@
 /**
  * Keyboard Shortcuts Hook (Phase 5)
  * Task 5.3.1: Implement keyboard shortcuts
- * 
+ *
  * Global keyboard shortcuts for Budget App
  */
 
-import { useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 interface ShortcutHandlers {
   onNewTransaction?: () => void;
@@ -28,16 +28,16 @@ export function useKeyboardShortcuts(handlers: ShortcutHandlers) {
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       const target = e.target as HTMLElement;
-      
+
       // Ignore if typing in input/textarea/select or contenteditable
       if (
-        target.tagName === 'INPUT' ||
-        target.tagName === 'TEXTAREA' ||
-        target.tagName === 'SELECT' ||
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.tagName === "SELECT" ||
         target.isContentEditable
       ) {
         // Allow Esc to close modals even when in inputs
-        if (e.key === 'Escape' && handlers.onCloseModal) {
+        if (e.key === "Escape" && handlers.onCloseModal) {
           handlers.onCloseModal();
         }
         return;
@@ -50,64 +50,64 @@ export function useKeyboardShortcuts(handlers: ShortcutHandlers) {
       }
 
       switch (e.key.toLowerCase()) {
-        case 'n':
+        case "n":
           e.preventDefault();
           handlers.onNewTransaction?.();
           break;
 
-        case '/':
+        case "/":
           e.preventDefault();
           handlers.onSearch?.();
           break;
 
-        case 'b':
+        case "b":
           e.preventDefault();
-          router.push('/budget-app/budgets');
+          router.push("/budget-app/budgets");
           break;
 
-        case 'd':
+        case "d":
           e.preventDefault();
-          router.push('/budget-app');
+          router.push("/budget-app");
           break;
 
-        case 't':
+        case "t":
           e.preventDefault();
-          router.push('/budget-app/transactions');
+          router.push("/budget-app/transactions");
           break;
 
-        case 'i':
+        case "i":
           e.preventDefault();
-          router.push('/budget-app/investments');
+          router.push("/budget-app/investments");
           break;
 
-        case 'r':
+        case "r":
           e.preventDefault();
-          router.push('/budget-app/reports');
+          router.push("/budget-app/reports");
           break;
 
         // Row navigation (vim-style)
-        case 'j':
+        case "j":
           e.preventDefault();
           handlers.onNextRow?.();
           break;
 
-        case 'k':
+        case "k":
           e.preventDefault();
           handlers.onPrevRow?.();
           break;
 
-        case 'x':
+        case "x":
           e.preventDefault();
           handlers.onToggleRow?.();
           break;
 
-        case 'a':
+        case "a":
           e.preventDefault();
           handlers.onSelectAll?.();
           break;
 
-        case 'delete':
-        case 'backspace':
+        case "delete":
+        case "backspace":
           // Only trigger delete if something is selected
           if (e.shiftKey) {
             e.preventDefault();
@@ -115,12 +115,12 @@ export function useKeyboardShortcuts(handlers: ShortcutHandlers) {
           }
           break;
 
-        case '?':
+        case "?":
           e.preventDefault();
           handlers.onShowHelp?.();
           break;
 
-        case 'escape':
+        case "escape":
           e.preventDefault();
           handlers.onCloseModal?.();
           break;
@@ -130,8 +130,8 @@ export function useKeyboardShortcuts(handlers: ShortcutHandlers) {
       }
     }
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [router, handlers]);
 }
 
@@ -140,38 +140,41 @@ export function useKeyboardShortcuts(handlers: ShortcutHandlers) {
  */
 export const KEYBOARD_SHORTCUTS = [
   {
-    category: 'Navigation',
+    category: "Navigation",
     shortcuts: [
-      { key: 'D', description: 'Go to Dashboard', action: 'Navigate to home page' },
-      { key: 'T', description: 'Go to Transactions', action: 'View all transactions' },
-      { key: 'B', description: 'Go to Budgets', action: 'Manage budgets' },
-      { key: 'I', description: 'Go to Investments', action: 'View portfolio' },
-      { key: 'R', description: 'Go to Reports', action: 'View financial reports' },
+      { key: "D", description: "Go to Dashboard", action: "Navigate to home page" },
+      { key: "T", description: "Go to Transactions", action: "View all transactions" },
+      { key: "B", description: "Go to Budgets", action: "Manage budgets" },
+      { key: "I", description: "Go to Investments", action: "View portfolio" },
+      { key: "R", description: "Go to Reports", action: "View financial reports" },
     ],
   },
   {
-    category: 'Actions',
+    category: "Actions",
     shortcuts: [
-      { key: 'N', description: 'New Transaction', action: 'Open new transaction modal' },
-      { key: '/', description: 'Search', action: 'Focus search input' },
+      { key: "N", description: "New Transaction", action: "Open new transaction modal" },
+      { key: "/", description: "Search", action: "Focus search input" },
     ],
   },
   {
-    category: 'Row Navigation (Vim-style)',
+    category: "Row Navigation (Vim-style)",
     shortcuts: [
-      { key: 'J', description: 'Next Row', action: 'Move focus to next transaction' },
-      { key: 'K', description: 'Previous Row', action: 'Move focus to previous transaction' },
-      { key: 'X', description: 'Toggle Selection', action: 'Select/deselect current row' },
-      { key: 'A', description: 'Select All', action: 'Select all visible transactions' },
-      { key: 'Shift+Del', description: 'Delete Selected', action: 'Delete all selected transactions' },
+      { key: "J", description: "Next Row", action: "Move focus to next transaction" },
+      { key: "K", description: "Previous Row", action: "Move focus to previous transaction" },
+      { key: "X", description: "Toggle Selection", action: "Select/deselect current row" },
+      { key: "A", description: "Select All", action: "Select all visible transactions" },
+      {
+        key: "Shift+Del",
+        description: "Delete Selected",
+        action: "Delete all selected transactions",
+      },
     ],
   },
   {
-    category: 'General',
+    category: "General",
     shortcuts: [
-      { key: '?', description: 'Show Shortcuts', action: 'Display this help dialog' },
-      { key: 'Esc', description: 'Close Modal', action: 'Close any open modal or dialog' },
+      { key: "?", description: "Show Shortcuts", action: "Display this help dialog" },
+      { key: "Esc", description: "Close Modal", action: "Close any open modal or dialog" },
     ],
   },
 ];
-

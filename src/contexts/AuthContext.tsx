@@ -6,7 +6,7 @@ import type { AuthError, Session, User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 // Offline mode flag - when true, use local user instead of Supabase auth
-const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === 'true';
+const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === "true";
 
 // Create a singleton browser client that uses cookies for session storage
 // This allows server actions to access the auth session
@@ -14,27 +14,27 @@ const supabase = createClient();
 
 // Local user for offline mode - auto-created, no sign-in required
 const LOCAL_USER: User = {
-  id: 'local-user-offline',
-  aud: 'authenticated',
-  role: 'authenticated',
-  email: 'local@budgetapp.local',
+  id: "local-user-offline",
+  aud: "authenticated",
+  role: "authenticated",
+  email: "local@budgetapp.local",
   email_confirmed_at: new Date().toISOString(),
-  phone: '',
+  phone: "",
   confirmed_at: new Date().toISOString(),
   last_sign_in_at: new Date().toISOString(),
-  app_metadata: { provider: 'local', providers: ['local'] },
-  user_metadata: { first_name: 'Local', last_name: 'User' },
+  app_metadata: { provider: "local", providers: ["local"] },
+  user_metadata: { first_name: "Local", last_name: "User" },
   identities: [],
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
 };
 
 const LOCAL_SESSION: Session = {
-  access_token: 'offline-mode-token',
-  token_type: 'bearer',
+  access_token: "offline-mode-token",
+  token_type: "bearer",
   expires_in: 31536000, // 1 year
   expires_at: Math.floor(Date.now() / 1000) + 31536000,
-  refresh_token: 'offline-mode-refresh',
+  refresh_token: "offline-mode-refresh",
   user: LOCAL_USER,
 };
 
@@ -102,11 +102,11 @@ export function useIsAdmin(): boolean {
       }
 
       try {
-        const response = await fetch('/api/auth/check-admin');
+        const response = await fetch("/api/auth/check-admin");
         const data = await response.json();
         setIsAdmin(data.isAdmin || false);
       } catch (error) {
-        console.error('Failed to check admin status:', error);
+        console.error("Failed to check admin status:", error);
         setIsAdmin(false);
       }
     }

@@ -17,16 +17,16 @@
  * ```
  */
 
-import { LOCALE_METADATA, type SupportedLocale } from '@/i18n/config';
-import { getCurrentLocale } from './locale-storage';
+import { LOCALE_METADATA, type SupportedLocale } from "@/i18n/config";
+import { getCurrentLocale } from "./locale-storage";
 
 /**
  * Get the text direction for a given locale
  * @param locale - The locale to check (e.g., 'ar-SA', 'en-US')
  * @returns 'rtl' or 'ltr'
  */
-export function getLocaleDirection(locale: SupportedLocale): 'rtl' | 'ltr' {
-  return LOCALE_METADATA[locale]?.dir || 'ltr';
+export function getLocaleDirection(locale: SupportedLocale): "rtl" | "ltr" {
+  return LOCALE_METADATA[locale]?.dir || "ltr";
 }
 
 /**
@@ -35,16 +35,16 @@ export function getLocaleDirection(locale: SupportedLocale): 'rtl' | 'ltr' {
  * @returns true if the locale is RTL
  */
 export function isRTLLocale(locale: SupportedLocale): boolean {
-  return getLocaleDirection(locale) === 'rtl';
+  return getLocaleDirection(locale) === "rtl";
 }
 
 /**
  * Get the current text direction based on the active locale
  * @returns 'rtl' or 'ltr'
  */
-export function getCurrentDirection(): 'rtl' | 'ltr' {
-  if (typeof window === 'undefined') {
-    return 'ltr'; // Default for SSR
+export function getCurrentDirection(): "rtl" | "ltr" {
+  if (typeof window === "undefined") {
+    return "ltr"; // Default for SSR
   }
 
   const locale = getCurrentLocale();
@@ -56,7 +56,7 @@ export function getCurrentDirection(): 'rtl' | 'ltr' {
  * @returns true if current locale is RTL
  */
 export function isCurrentLocaleRTL(): boolean {
-  return getCurrentDirection() === 'rtl';
+  return getCurrentDirection() === "rtl";
 }
 
 /**
@@ -81,7 +81,7 @@ export function isCurrentLocaleRTL(): boolean {
  * ```
  */
 export function useRTL(): boolean {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return false;
   }
 
@@ -102,9 +102,9 @@ export function useRTL(): boolean {
  * }
  * ```
  */
-export function useDirection(): 'rtl' | 'ltr' {
-  if (typeof window === 'undefined') {
-    return 'ltr';
+export function useDirection(): "rtl" | "ltr" {
+  if (typeof window === "undefined") {
+    return "ltr";
   }
 
   return getCurrentDirection();
@@ -122,13 +122,13 @@ export function useDirection(): 'rtl' | 'ltr' {
  * const alignment = getRTLAlignment('left'); // returns 'right' in RTL mode
  * ```
  */
-export function getRTLAlignment(align: 'left' | 'right'): 'left' | 'right' {
+export function getRTLAlignment(align: "left" | "right"): "left" | "right" {
   const isRTL = isCurrentLocaleRTL();
 
   if (!isRTL) return align;
 
   // Flip alignment in RTL mode
-  return align === 'left' ? 'right' : 'left';
+  return align === "left" ? "right" : "left";
 }
 
 /**
@@ -143,13 +143,13 @@ export function getRTLAlignment(align: 'left' | 'right'): 'left' | 'right' {
  * const paddingClass = `p${getRTLSide('start')}-4`; // 'pl-4' in LTR, 'pr-4' in RTL
  * ```
  */
-export function getRTLSide(side: 'start' | 'end'): 'left' | 'right' {
+export function getRTLSide(side: "start" | "end"): "left" | "right" {
   const isRTL = isCurrentLocaleRTL();
 
-  if (side === 'start') {
-    return isRTL ? 'right' : 'left';
+  if (side === "start") {
+    return isRTL ? "right" : "left";
   } else {
-    return isRTL ? 'left' : 'right';
+    return isRTL ? "left" : "right";
   }
 }
 
@@ -158,11 +158,11 @@ export function getRTLSide(side: 'start' | 'end'): 'left' | 'right' {
  * Useful for validation and filtering
  */
 export const RTL_LOCALES: SupportedLocale[] = [
-  'ar-AE',  // Arabic (UAE)
-  'ar-SA',  // Arabic (Saudi Arabia)
-  'fa-IR',  // Persian (Iran)
-  'he-IL',  // Hebrew (Israel)
-  'ur-PK',  // Urdu (Pakistan)
+  "ar-AE", // Arabic (UAE)
+  "ar-SA", // Arabic (Saudi Arabia)
+  "fa-IR", // Persian (Iran)
+  "he-IL", // Hebrew (Israel)
+  "ur-PK", // Urdu (Pakistan)
 ];
 
 /**

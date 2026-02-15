@@ -9,6 +9,7 @@
 ## Phase 2: Global Config Fix (Optional)
 
 ### Issue
+
 The global config at `/home/robne/.claude.json` (831KB) contains project-specific overrides using the OLD `"mcpServers"` schema, causing a validation warning:
 
 ```
@@ -17,7 +18,9 @@ The global config at `/home/robne/.claude.json` (831KB) contains project-specifi
 ```
 
 ### Current State
+
 Only 4 of 11 servers connecting:
+
 - ✔ `claude-flow` (from `.vscode/mcp.json`)
 - ✔ `context7` (from global config, HTTP)
 - ✔ `postgresql` (from `.vscode/mcp.json`)
@@ -28,6 +31,7 @@ Only 4 of 11 servers connecting:
 **Location:** `/home/robne/.claude.json` around line 1164
 
 **Change:**
+
 ```json
 "/home/robne/projects/active/tanium-tco/modern-tco": {
   "mcpServers": {  ← OLD SCHEMA
@@ -38,6 +42,7 @@ Only 4 of 11 servers connecting:
 ```
 
 **To:**
+
 ```json
 "/home/robne/projects/active/tanium-tco/modern-tco": {
   "servers": {  ← NEW SCHEMA
@@ -50,11 +55,13 @@ Only 4 of 11 servers connecting:
 ### Manual Fix Steps
 
 1. **Backup global config:**
+
    ```bash
    cp /home/robne/.claude.json /home/robne/.claude.json.backup-$(date +%Y%m%d)
    ```
 
 2. **Edit with sed:**
+
    ```bash
    # Find the project section and change mcpServers to servers
    # (Around line 1164 in the 831KB file)
@@ -74,6 +81,7 @@ Only 4 of 11 servers connecting:
 ### Expected Result After Phase 2
 
 All 11 servers should connect:
+
 1. shadcn
 2. filesystem
 3. claude-flow
@@ -87,6 +95,7 @@ All 11 servers should connect:
 11. serena
 
 Plus the 2 HTTP servers from global config:
+
 - context7
 - pv-bhat-vibe-check-mcp-server (HTTP version)
 

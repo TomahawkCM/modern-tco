@@ -79,7 +79,9 @@ function buildSectionProgress(config: LearnExperimentalModuleConfig): SectionPro
 }
 
 function useModuleProgress(config: LearnExperimentalModuleConfig, enabled: boolean) {
-  const [sections, setSections] = useState<SectionProgressState[]>(() => buildSectionProgress(config));
+  const [sections, setSections] = useState<SectionProgressState[]>(() =>
+    buildSectionProgress(config)
+  );
 
   useEffect(() => {
     if (!enabled) return;
@@ -134,7 +136,10 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
     const [enabled, setEnabled] = useState(enabledServer);
     const [loadingModule, setLoadingModule] = useState(true);
     const [ModuleComponent, setModuleComponent] = useState<React.ComponentType<any> | null>(null);
-    const { modules, sections, completedSections, totalSections } = useModuleProgress(config, enabled);
+    const { modules, sections, completedSections, totalSections } = useModuleProgress(
+      config,
+      enabled
+    );
     const moduleCompleteEmitted = useRef(false);
     const unitCompletionRef = useRef<Record<string, boolean>>({});
     const unitStartRef = useRef<Record<string, boolean>>({});
@@ -237,9 +242,13 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
             <CardContent className="space-y-3 text-sm text-muted-foreground">
               <p>
                 The Learn-style modules are behind a feature flag. Launch the dev server with
-                <code className="ml-1 rounded bg-card px-2 py-1 text-xs">NEXT_PUBLIC_LEARN_EXPERIMENTAL=1</code>
+                <code className="ml-1 rounded bg-card px-2 py-1 text-xs">
+                  NEXT_PUBLIC_LEARN_EXPERIMENTAL=1
+                </code>
                 or append
-                <code className="ml-1 rounded bg-card px-2 py-1 text-xs">?path=learn-experimental</code>
+                <code className="ml-1 rounded bg-card px-2 py-1 text-xs">
+                  ?path=learn-experimental
+                </code>
                 to the URL.
               </p>
               <div className="pt-2">
@@ -264,7 +273,10 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
       );
     }
 
-    const totalMinutes = config.sections.reduce((sum, section) => sum + section.estimatedMinutes, 0);
+    const totalMinutes = config.sections.reduce(
+      (sum, section) => sum + section.estimatedMinutes,
+      0
+    );
 
     return (
       <div className="mx-auto max-w-6xl space-y-10 px-4 py-10">
@@ -310,7 +322,9 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
           <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
             <span>Total units: {config.sections.length}</span>
             <span>Estimated time: {totalMinutes} min</span>
-            <span>Completion: {completedSections}/{totalSections}</span>
+            <span>
+              Completion: {completedSections}/{totalSections}
+            </span>
           </div>
         </header>
 
@@ -327,7 +341,10 @@ export function createLearnExperimentalModulePage(config: LearnExperimentalModul
           </div>
           <div className="grid gap-4 md:grid-cols-2">
             {config.labs.map((lab) => (
-              <Card key={lab.href} className="border-border/50 bg-slate-950/40 transition hover:border-primary/50">
+              <Card
+                key={lab.href}
+                className="border-border/50 bg-slate-950/40 transition hover:border-primary/50"
+              >
                 <CardHeader>
                   <CardTitle className="text-lg text-foreground">{lab.title}</CardTitle>
                 </CardHeader>

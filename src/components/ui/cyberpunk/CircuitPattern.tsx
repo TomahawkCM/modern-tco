@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import React from "react"
+import React from "react";
 
 export interface CircuitPatternProps {
-  className?: string
+  className?: string;
 }
 
 export const CircuitPattern: React.FC<CircuitPatternProps> = ({ className }) => {
   return (
     <div className={`absolute inset-0 opacity-20 ${className}`}>
-      <svg width="100%" height="100%" viewBox="0 0 100 100" className="w-full h-full">
+      <svg width="100%" height="100%" viewBox="0 0 100 100" className="h-full w-full">
         <defs>
           <pattern id="circuit" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
             <path
@@ -28,7 +28,7 @@ export const CircuitPattern: React.FC<CircuitPatternProps> = ({ className }) => 
         <rect width="100%" height="100%" fill="url(#circuit)" />
       </svg>
     </div>
-  )
-}
+  );
+};
 
-export default CircuitPattern
+export default CircuitPattern;

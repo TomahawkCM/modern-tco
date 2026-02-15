@@ -19,6 +19,7 @@ Implemented a **graceful degradation pattern** that enables browsing without aut
 ### User Experience
 
 **Without Login (Browse Mode)**:
+
 - ✅ Browse all 157 AI-curated flashcards
 - ✅ Filter by domain (6 TCO domains)
 - ✅ Filter by difficulty (easy, medium, hard)
@@ -29,6 +30,7 @@ Implemented a **graceful degradation pattern** that enables browsing without aut
 - ❌ Review sessions hidden
 
 **With Login (Progress Mode)** - Future:
+
 - ✅ All browse features PLUS
 - ✅ SuperMemo2 spaced repetition tracking
 - ✅ Statistics dashboard (accuracy, streaks, etc.)
@@ -44,6 +46,7 @@ Implemented a **graceful degradation pattern** that enables browsing without aut
 **File**: `src/components/flashcards/FlashcardDashboard.tsx`
 
 **Before** (lines 233-258):
+
 ```typescript
 <TabsContent value="library" className="mt-6">
   {user?.id ? (
@@ -63,6 +66,7 @@ Implemented a **graceful degradation pattern** that enables browsing without aut
 ```
 
 **After** (lines 233-242):
+
 ```typescript
 <TabsContent value="library" className="mt-6">
   <FlashcardLibrary
@@ -73,6 +77,7 @@ Implemented a **graceful degradation pattern** that enables browsing without aut
 ```
 
 **Changes**:
+
 - Removed authentication gate
 - Changed `userId={user.id}` to `userId={user?.id}` (optional)
 - Removed "Login Required" card entirely
@@ -87,28 +92,31 @@ Implemented a **graceful degradation pattern** that enables browsing without aut
 #### 2.1 Import Changes
 
 **Added**:
+
 ```typescript
 import {
-  getLibraryFlashcards,  // ← New: Doesn't require userId
+  getLibraryFlashcards, // ← New: Doesn't require userId
   getLibraryFlashcardsWithProgress,
   getLibraryFlashcardStats,
-} from '@/lib/flashcard-library-service';
+} from "@/lib/flashcard-library-service";
 ```
 
 #### 2.2 Props Interface Change
 
 **Before**:
+
 ```typescript
 interface FlashcardLibraryProps {
-  userId: string;  // Required
+  userId: string; // Required
   onStartReview?: (cardIds: string[]) => void;
 }
 ```
 
 **After**:
+
 ```typescript
 interface FlashcardLibraryProps {
-  userId?: string;  // Optional
+  userId?: string; // Optional
   onStartReview?: (cardIds: string[]) => void;
 }
 ```
@@ -116,6 +124,7 @@ interface FlashcardLibraryProps {
 #### 2.3 Component Logic
 
 **Added** (line 57):
+
 ```typescript
 export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLibraryProps) {
   const isBrowseMode = !userId;  // ← New mode detection
@@ -126,6 +135,7 @@ export default function FlashcardLibrary({ userId, onStartReview }: FlashcardLib
 #### 2.4 Data Loading Function
 
 **Before** (lines 77-97):
+
 ```typescript
 async function loadFlashcardsAndStats() {
   setLoading(true);
@@ -144,6 +154,7 @@ async function loadFlashcardsAndStats() {
 ```
 
 **After** (lines 77-115):
+
 ```typescript
 async function loadFlashcardsAndStats() {
   setLoading(true);
@@ -182,6 +193,7 @@ async function loadFlashcardsAndStats() {
 ```
 
 **Key Changes**:
+
 - Added conditional logic based on `isBrowseMode`
 - Browse mode: Calls `getLibraryFlashcards()` (no userId required)
 - Browse mode: Transforms data to match expected type with null progress
@@ -190,6 +202,7 @@ async function loadFlashcardsAndStats() {
 #### 2.5 UI Changes
 
 **Added Browse Mode Banner** (lines 122-139):
+
 ```typescript
 {/* Browse Mode Banner */}
 {isBrowseMode && (
@@ -212,6 +225,7 @@ async function loadFlashcardsAndStats() {
 ```
 
 **Hidden Stats Dashboard in Browse Mode** (lines 142-196):
+
 ```typescript
 {/* Header Stats */}
 {!isBrowseMode && (
@@ -222,6 +236,7 @@ async function loadFlashcardsAndStats() {
 ```
 
 **Hidden Tabs in Browse Mode** (lines 200-208):
+
 ```typescript
 <TabsList className={isBrowseMode ? "w-full" : "grid w-full grid-cols-3"}>
   <TabsTrigger value="browse">Browse Library</TabsTrigger>
@@ -263,11 +278,13 @@ async function loadFlashcardsAndStats() {
 ## Testing Results
 
 ### Build Status
+
 ✅ **No build errors**
 ✅ **No TypeScript errors**
 ✅ **Dev server running successfully**
 
 ### Dev Server Output
+
 ```
 ✓ Compiled /flashcards in 9.5s
 GET /flashcards 200 in 10751ms
@@ -275,6 +292,7 @@ GET /flashcards 200 in 10751ms
 ```
 
 ### Page Load
+
 ✅ FlashcardDashboard renders successfully
 ✅ Library tab accessible without authentication
 ✅ Browse mode banner displays
@@ -289,11 +307,13 @@ When authentication is implemented, the system will automatically enable progres
 ### Seamless Upgrade Path
 
 **Before Login**:
+
 ```
 userId = undefined → isBrowseMode = true → Browse features only
 ```
 
 **After Login**:
+
 ```
 userId = "user-123" → isBrowseMode = false → Full progress tracking
 ```
@@ -301,6 +321,7 @@ userId = "user-123" → isBrowseMode = false → Full progress tracking
 ### Required Changes: **NONE**
 
 The component will automatically:
+
 1. Detect `userId` is present
 2. Set `isBrowseMode = false`
 3. Call progress-enabled service functions
@@ -312,12 +333,14 @@ The component will automatically:
 ## User Impact
 
 ### Immediate Benefits
+
 - ✅ Users can browse 157 flashcards without authentication
 - ✅ Full filtering and search functionality
 - ✅ Clear communication about browse mode limitations
 - ✅ Smooth path to progress tracking when ready
 
 ### No Negative Impact
+
 - ❌ No database changes required
 - ❌ No breaking changes to existing code
 - ❌ No loss of functionality
@@ -337,10 +360,10 @@ The component will automatically:
 
 ## Files Modified
 
-| File | Lines Changed | Type |
-|------|---------------|------|
-| `src/components/flashcards/FlashcardDashboard.tsx` | 24 → 9 (-15 lines) | Simplification |
-| `src/components/flashcards/FlashcardLibrary.tsx` | +60 lines | Feature enhancement |
+| File                                               | Lines Changed      | Type                |
+| -------------------------------------------------- | ------------------ | ------------------- |
+| `src/components/flashcards/FlashcardDashboard.tsx` | 24 → 9 (-15 lines) | Simplification      |
+| `src/components/flashcards/FlashcardLibrary.tsx`   | +60 lines          | Feature enhancement |
 
 **Total Impact**: 2 files, ~45 net new lines of code
 

@@ -52,9 +52,7 @@ export function ReviewScreen({ onBack, onSubmit, onJumpToQuestion }: ReviewScree
   const answeredQuestions = Object.keys(answers).filter(
     (qId) => answers[qId] !== undefined && answers[qId] !== ""
   );
-  const unansweredQuestions = questions.filter(
-    (q) => !answers[q.id] || answers[q.id] === ""
-  );
+  const unansweredQuestions = questions.filter((q) => !answers[q.id] || answers[q.id] === "");
   const answeredCount = answeredQuestions.length;
   const unansweredCount = unansweredQuestions.length;
 
@@ -80,31 +78,25 @@ export function ReviewScreen({ onBack, onSubmit, onJumpToQuestion }: ReviewScree
       {/* Header */}
       <div className="text-center">
         <h1 className="mb-2 text-3xl font-bold text-foreground">Review Your Exam</h1>
-        <p className="text-muted-foreground">
-          Review your answers before final submission
-        </p>
+        <p className="text-muted-foreground">Review your answers before final submission</p>
       </div>
 
       {/* Summary Statistics Card */}
       <Card className="glass border-white/10">
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-foreground">
-            <FileText className="h-6 w-6 text-tanium-accent" />
+            <FileText className="text-tanium-accent h-6 w-6" />
             Exam Summary
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid gap-6 md:grid-cols-3">
             <div className="text-center">
-              <div className="mb-2 text-4xl font-bold text-tanium-accent">
-                {progress.total}
-              </div>
+              <div className="text-tanium-accent mb-2 text-4xl font-bold">{progress.total}</div>
               <div className="text-sm text-muted-foreground">Total Questions</div>
             </div>
             <div className="text-center">
-              <div className="mb-2 text-4xl font-bold text-green-500">
-                {answeredCount}
-              </div>
+              <div className="mb-2 text-4xl font-bold text-green-500">{answeredCount}</div>
               <div className="text-sm text-muted-foreground">Answered</div>
             </div>
             <div className="text-center">
@@ -168,8 +160,7 @@ export function ReviewScreen({ onBack, onSubmit, onJumpToQuestion }: ReviewScree
             <ScrollArea className="h-[300px]">
               <div className="space-y-3 pr-4">
                 {unansweredQuestions.map((question, idx) => {
-                  const questionNumber =
-                    questions.findIndex((q) => q.id === question.id) + 1;
+                  const questionNumber = questions.findIndex((q) => q.id === question.id) + 1;
                   return (
                     <div
                       key={question.id}
@@ -180,13 +171,9 @@ export function ReviewScreen({ onBack, onSubmit, onJumpToQuestion }: ReviewScree
                           <Badge variant="outline" className="border-red-500 text-red-400">
                             Question {questionNumber}
                           </Badge>
-                          <span className="text-xs text-muted-foreground">
-                            {question.domain}
-                          </span>
+                          <span className="text-xs text-muted-foreground">{question.domain}</span>
                         </div>
-                        <p className="line-clamp-2 text-sm text-foreground">
-                          {question.question}
-                        </p>
+                        <p className="line-clamp-2 text-sm text-foreground">{question.question}</p>
                       </div>
                       <Button
                         size="sm"
@@ -219,8 +206,7 @@ export function ReviewScreen({ onBack, onSubmit, onJumpToQuestion }: ReviewScree
             <ScrollArea className="h-[300px]">
               <div className="space-y-3 pr-4">
                 {markedQuestions.map((question: any, idx: number) => {
-                  const questionNumber =
-                    questions.findIndex((q) => q.id === question.id) + 1;
+                  const questionNumber = questions.findIndex((q) => q.id === question.id) + 1;
                   return (
                     <div
                       key={question.id}
@@ -231,13 +217,9 @@ export function ReviewScreen({ onBack, onSubmit, onJumpToQuestion }: ReviewScree
                           <Badge variant="outline" className="border-amber-500 text-amber-400">
                             Question {questionNumber}
                           </Badge>
-                          <span className="text-xs text-muted-foreground">
-                            {question.domain}
-                          </span>
+                          <span className="text-xs text-muted-foreground">{question.domain}</span>
                         </div>
-                        <p className="line-clamp-2 text-sm text-foreground">
-                          {question.question}
-                        </p>
+                        <p className="line-clamp-2 text-sm text-foreground">{question.question}</p>
                       </div>
                       <Button
                         size="sm"
@@ -268,11 +250,7 @@ export function ReviewScreen({ onBack, onSubmit, onJumpToQuestion }: ReviewScree
           Back to Exam
         </Button>
 
-        <Button
-          onClick={handleSubmitClick}
-          size="lg"
-          className="bg-green-600 hover:bg-green-700"
-        >
+        <Button onClick={handleSubmitClick} size="lg" className="bg-green-600 hover:bg-green-700">
           <CheckCircle className="mr-2 h-5 w-5" />
           Submit Exam
         </Button>
@@ -288,15 +266,15 @@ export function ReviewScreen({ onBack, onSubmit, onJumpToQuestion }: ReviewScree
             </DialogTitle>
             <DialogDescription className="text-muted-foreground">
               You have <span className="font-semibold text-red-400">{unansweredCount}</span>{" "}
-              unanswered question{unansweredCount !== 1 ? "s" : ""}. Unanswered questions
-              will be marked as incorrect.
+              unanswered question{unansweredCount !== 1 ? "s" : ""}. Unanswered questions will be
+              marked as incorrect.
             </DialogDescription>
           </DialogHeader>
 
           <div className="my-4 rounded-lg border border-red-500/50 bg-red-900/20 p-4">
             <p className="text-sm text-red-400">
-              Are you sure you want to submit your exam with {unansweredCount} unanswered
-              question{unansweredCount !== 1 ? "s" : ""}?
+              Are you sure you want to submit your exam with {unansweredCount} unanswered question
+              {unansweredCount !== 1 ? "s" : ""}?
             </p>
           </div>
 
@@ -308,10 +286,7 @@ export function ReviewScreen({ onBack, onSubmit, onJumpToQuestion }: ReviewScree
             >
               Cancel
             </Button>
-            <Button
-              onClick={handleConfirmSubmit}
-              className="bg-red-600 hover:bg-red-700"
-            >
+            <Button onClick={handleConfirmSubmit} className="bg-red-600 hover:bg-red-700">
               Submit Anyway
             </Button>
           </DialogFooter>

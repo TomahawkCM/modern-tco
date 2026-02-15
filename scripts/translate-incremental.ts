@@ -12,29 +12,29 @@
  *   npm run translate:incremental -- --dry-run       # Preview without translating
  */
 
-import dotenv from 'dotenv';
-import * as fs from 'fs';
-import * as path from 'path';
+import dotenv from "dotenv";
+import * as fs from "fs";
+import * as path from "path";
 
 // Load environment variables
-dotenv.config({ path: path.join(__dirname, '../.env.local') });
+dotenv.config({ path: path.join(__dirname, "../.env.local") });
 
-import { SUPPORTED_LOCALES, type SupportedLocale } from '../src/i18n/config';
-import { OpenAIAPIClient } from './lib/openai-api-client';
-import { CacheManager } from './lib/cache-manager';
-import { shouldUseBaseTranslation, getBaseLocale } from './lib/prompt-builder';
-import { validate, formatValidationResult } from './lib/translation-validator';
+import { SUPPORTED_LOCALES, type SupportedLocale } from "../src/i18n/config";
+import { OpenAIAPIClient } from "./lib/openai-api-client";
+import { CacheManager } from "./lib/cache-manager";
+import { shouldUseBaseTranslation, getBaseLocale } from "./lib/prompt-builder";
+import { validate, formatValidationResult } from "./lib/translation-validator";
 import {
   detectChangedKeys,
   detectStagedChanges,
   extractKeyValues,
   unflattenKeys,
   type KeyChanges,
-} from './lib/key-differ';
+} from "./lib/key-differ";
 
 // Paths
-const SOURCE_FILE = path.join(__dirname, '../src/i18n/messages/en-US.json');
-const MESSAGES_DIR = path.join(__dirname, '../src/i18n/messages');
+const SOURCE_FILE = path.join(__dirname, "../src/i18n/messages/en-US.json");
+const MESSAGES_DIR = path.join(__dirname, "../src/i18n/messages");
 
 // CLI Options
 interface CLIOptions {
@@ -49,13 +49,13 @@ interface CLIOptions {
  * Main entry point
  */
 async function main() {
-  console.log('⚡ Incremental Translation Script\n');
+  console.log("⚡ Incremental Translation Script\n");
 
   // Parse CLI arguments
   const options = parseArgs(process.argv.slice(2));
 
   // Detect changed keys
-  console.log('🔍 Detecting changed keys...');
+  console.log("🔍 Detecting changed keys...");
   const changes = options.staged
     ? await detectStagedChanges(SOURCE_FILE)
     : await detectChangedKeys(SOURCE_FILE, options.commit);
@@ -69,15 +69,13 @@ async function main() {
   const totalChanges = changes.added.length + changes.modified.length + changes.removed.length;
 
   if (totalChanges === 0) {
-    console.log('✅ No translation changes needed!');
+    console.log("✅ No translation changes needed!");
     return;
   }
 
   // Extract values for changed keys
   const changedKeys = [...changes.added, ...changes.modified];
-  const changedKeyValues = changedKeys.length > 0
-    ? extractKeyValues(SOURCE_FILE, changedKeys)
-    : {};
+  const changedKeyValues = changedKeys.length > 0 ? extractKeyValues(SOURCE_FILE, changedKeys) : {};
 
   console.log(`📋 Translation Plan:`);
   console.log(`   Keys to translate: ${changedKeys.length}`);
@@ -86,11 +84,11 @@ async function main() {
 
   // Dry run check
   if (options.dryRun) {
-    console.log('🏃 Dry run mode - showing changes only\n');
+    console.log("🏃 Dry run mode - showing changes only\n");
 
     if (changes.added.length > 0) {
-      console.log('Added keys (first 10):');
-      changes.added.slice(0, 10).forEach(key => {
+      console.log("Added keys (first 10):");
+      changes.added.slice(0, 10).forEach((key) => {
         console.log(`   + ${key}: "${changedKeyValues[key]}"`);
       });
       if (changes.added.length > 10) {
@@ -100,8 +98,8 @@ async function main() {
     }
 
     if (changes.modified.length > 0) {
-      console.log('Modified keys (first 10):');
-      changes.modified.slice(0, 10).forEach(key => {
+      console.log("Modified keys (first 10):");
+      changes.modified.slice(0, 10).forEach((key) => {
         console.log(`   ~ ${key}: "${changedKeyValues[key]}"`);
       });
       if (changes.modified.length > 10) {
@@ -111,8 +109,8 @@ async function main() {
     }
 
     if (changes.removed.length > 0) {
-      console.log('Removed keys (first 10):');
-      changes.removed.slice(0, 10).forEach(key => {
+      console.log("Removed keys (first 10):");
+      changes.removed.slice(0, 10).forEach((key) => {
         console.log(`   - ${key}`);
       });
       if (changes.removed.length > 10) {
@@ -130,30 +128,20 @@ async function main() {
 
   // Get locales to process (exclude en and en-* variants)
   const localesToProcess = SUPPORTED_LOCALES.filter(
-    locale => locale !== 'en' && !locale.startsWith('en-')
+    (locale) => locale !== "en" && !locale.startsWith("en-")
   );
 
   // Categorize locales
   const { baseLocales, adaptedLocales } = categorizeLocales(localesToProcess);
 
-  console.log('🚀 Starting incremental translation...\n');
+  console.log("🚀 Starting incremental translation...\n");
   const startTime = Date.now();
 
   // Process base locales first
   if (changedKeys.length > 0) {
-    await processBaseLocalesIncremental(
-      baseLocales,
-      changedKeyValues,
-      client,
-      options
-    );
+    await processBaseLocalesIncremental(baseLocales, changedKeyValues, client, options);
 
-    await processAdaptedLocalesIncremental(
-      adaptedLocales,
-      changedKeyValues,
-      client,
-      options
-    );
+    await processAdaptedLocalesIncremental(adaptedLocales, changedKeyValues, client, options);
   }
 
   // Remove deleted keys from all locales
@@ -162,17 +150,19 @@ async function main() {
     for (const locale of localesToProcess) {
       removeKeysFromLocale(locale, changes.removed);
     }
-    console.log('   ✅ Deleted keys removed\n');
+    console.log("   ✅ Deleted keys removed\n");
   }
 
   // Summary
   const elapsed = Date.now() - startTime;
   const costActual = client.getCostEstimate();
 
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('✅ Incremental Translation Complete!\n');
-  console.log('📊 Results:');
-  console.log(`   Time: ${(elapsed / 1000).toFixed(1)}s (${(elapsed / 1000 / 60).toFixed(1)} minutes)`);
+  console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+  console.log("✅ Incremental Translation Complete!\n");
+  console.log("📊 Results:");
+  console.log(
+    `   Time: ${(elapsed / 1000).toFixed(1)}s (${(elapsed / 1000 / 60).toFixed(1)} minutes)`
+  );
   console.log(`   Keys translated: ${changedKeys.length}`);
   console.log(`   Keys removed: ${changes.removed.length}`);
   console.log(`   Locales updated: ${localesToProcess.length}`);
@@ -188,7 +178,7 @@ function parseArgs(args: string[]): CLIOptions {
   const options: CLIOptions = {
     dryRun: false,
     staged: false,
-    commit: 'HEAD',
+    commit: "HEAD",
     concurrency: 5,
     verbose: false,
   };
@@ -197,28 +187,28 @@ function parseArgs(args: string[]): CLIOptions {
     const arg = args[i];
 
     switch (arg) {
-      case '--dry-run':
+      case "--dry-run":
         options.dryRun = true;
         break;
-      case '--staged':
+      case "--staged":
         options.staged = true;
         break;
-      case '--commit':
+      case "--commit":
         if (i + 1 < args.length) {
           options.commit = args[++i];
         }
         break;
-      case '--concurrency':
+      case "--concurrency":
         if (i + 1 < args.length) {
           options.concurrency = parseInt(args[++i], 10);
         }
         break;
-      case '--verbose':
-      case '-v':
+      case "--verbose":
+      case "-v":
         options.verbose = true;
         break;
-      case '--help':
-      case '-h':
+      case "--help":
+      case "-h":
         printHelp();
         process.exit(0);
     }
@@ -259,7 +249,9 @@ async function processBaseLocalesIncremental(
 ): Promise<void> {
   if (locales.length === 0) return;
 
-  console.log(`🔤 Translating ${Object.keys(changedKeyValues).length} keys for ${locales.length} base locales...`);
+  console.log(
+    `🔤 Translating ${Object.keys(changedKeyValues).length} keys for ${locales.length} base locales...`
+  );
 
   let completed = 0;
   let failed = 0;
@@ -278,14 +270,14 @@ async function processBaseLocalesIncremental(
       const existingFile = path.join(MESSAGES_DIR, `${locale}.json`);
       let existing = {};
       if (fs.existsSync(existingFile)) {
-        existing = JSON.parse(fs.readFileSync(existingFile, 'utf-8'));
+        existing = JSON.parse(fs.readFileSync(existingFile, "utf-8"));
       }
 
       // Merge partial translation into existing
       const merged = deepMerge(existing, partialTranslation);
 
       // Validate merged result
-      const sourceContent = JSON.parse(fs.readFileSync(SOURCE_FILE, 'utf-8'));
+      const sourceContent = JSON.parse(fs.readFileSync(SOURCE_FILE, "utf-8"));
       const validation = validate(merged, sourceContent, locale);
 
       if (!validation.valid) {
@@ -298,7 +290,7 @@ async function processBaseLocalesIncremental(
       }
 
       // Save merged file
-      fs.writeFileSync(existingFile, JSON.stringify(merged, null, 2), 'utf-8');
+      fs.writeFileSync(existingFile, JSON.stringify(merged, null, 2), "utf-8");
 
       process.stdout.write(`\r   ✅ ${locale} (${++completed}/${locales.length})\n`);
 
@@ -325,7 +317,9 @@ async function processAdaptedLocalesIncremental(
 ): Promise<void> {
   if (locales.length === 0) return;
 
-  console.log(`🌎 Adapting ${Object.keys(changedKeyValues).length} keys for ${locales.length} regional variants...`);
+  console.log(
+    `🌎 Adapting ${Object.keys(changedKeyValues).length} keys for ${locales.length} regional variants...`
+  );
 
   let completed = 0;
   let failed = 0;
@@ -346,7 +340,7 @@ async function processAdaptedLocalesIncremental(
       if (!fs.existsSync(baseFile)) {
         throw new Error(`Base translation ${baseLocale} not found`);
       }
-      const baseTranslation = JSON.parse(fs.readFileSync(baseFile, 'utf-8'));
+      const baseTranslation = JSON.parse(fs.readFileSync(baseFile, "utf-8"));
 
       // Extract only changed keys from base translation
       const flatBase = flattenKeysObj(baseTranslation);
@@ -367,14 +361,14 @@ async function processAdaptedLocalesIncremental(
       const existingFile = path.join(MESSAGES_DIR, `${locale}.json`);
       let existing = {};
       if (fs.existsSync(existingFile)) {
-        existing = JSON.parse(fs.readFileSync(existingFile, 'utf-8'));
+        existing = JSON.parse(fs.readFileSync(existingFile, "utf-8"));
       }
 
       // Merge
       const merged = deepMerge(existing, partialTranslation);
 
       // Validate
-      const sourceContent = JSON.parse(fs.readFileSync(SOURCE_FILE, 'utf-8'));
+      const sourceContent = JSON.parse(fs.readFileSync(SOURCE_FILE, "utf-8"));
       const validation = validate(merged, sourceContent, locale);
 
       if (!validation.valid) {
@@ -384,7 +378,7 @@ async function processAdaptedLocalesIncremental(
       }
 
       // Save
-      fs.writeFileSync(existingFile, JSON.stringify(merged, null, 2), 'utf-8');
+      fs.writeFileSync(existingFile, JSON.stringify(merged, null, 2), "utf-8");
 
       process.stdout.write(`\r   ✅ ${locale} (${++completed}/${locales.length})\n`);
     } catch (error: any) {
@@ -406,7 +400,7 @@ function removeKeysFromLocale(locale: SupportedLocale, keysToRemove: string[]): 
     return; // File doesn't exist, nothing to remove
   }
 
-  const content = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  const content = JSON.parse(fs.readFileSync(filePath, "utf-8"));
   const flatKeys = flattenKeysObj(content);
 
   // Remove keys
@@ -416,7 +410,7 @@ function removeKeysFromLocale(locale: SupportedLocale, keysToRemove: string[]): 
 
   // Reconstruct and save
   const updated = unflattenKeys(flatKeys);
-  fs.writeFileSync(filePath, JSON.stringify(updated, null, 2), 'utf-8');
+  fs.writeFileSync(filePath, JSON.stringify(updated, null, 2), "utf-8");
 }
 
 /**
@@ -426,7 +420,7 @@ function deepMerge(a: any, b: any): any {
   const result = { ...a };
 
   for (const [key, value] of Object.entries(b)) {
-    if (value && typeof value === 'object' && !Array.isArray(value)) {
+    if (value && typeof value === "object" && !Array.isArray(value)) {
       result[key] = deepMerge(result[key] || {}, value);
     } else {
       result[key] = value;
@@ -439,13 +433,13 @@ function deepMerge(a: any, b: any): any {
 /**
  * Flatten object to dot notation (helper for this file)
  */
-function flattenKeysObj(obj: any, prefix: string = ''): Record<string, any> {
+function flattenKeysObj(obj: any, prefix: string = ""): Record<string, any> {
   const result: Record<string, any> = {};
 
   for (const [key, value] of Object.entries(obj)) {
     const fullKey = prefix ? `${prefix}.${key}` : key;
 
-    if (value && typeof value === 'object' && !Array.isArray(value)) {
+    if (value && typeof value === "object" && !Array.isArray(value)) {
       Object.assign(result, flattenKeysObj(value, fullKey));
     } else {
       result[fullKey] = value;
@@ -482,7 +476,7 @@ Examples:
 }
 
 // Run main function
-main().catch(error => {
-  console.error('\n❌ Fatal error:', error);
+main().catch((error) => {
+  console.error("\n❌ Fatal error:", error);
   process.exit(1);
 });

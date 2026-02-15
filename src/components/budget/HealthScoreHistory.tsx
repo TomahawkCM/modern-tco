@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
 /**
  * Health Score History Chart Component (H-023)
  * Line chart showing score over time with trend line
  */
 
-import { useMemo } from 'react';
-import { motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
-import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import type { HistoricalScore } from '@/lib/analytics/health-score';
-import { useSeniorsMode } from '@/hooks/useSeniorsMode';
+import { useMemo } from "react";
+import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+import { TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { cn } from "@/lib/utils";
+import type { HistoricalScore } from "@/lib/analytics/health-score";
+import { useSeniorsMode } from "@/hooks/useSeniorsMode";
 
 interface ChartDataPoint {
   month: string;
@@ -23,7 +23,7 @@ interface ChartDataPoint {
 // Dynamically import Recharts for better performance
 const DynamicChart = dynamic(
   () =>
-    import('recharts').then((mod) => {
+    import("recharts").then((mod) => {
       function HistoryChart({
         data,
         isSeniorsMode,
@@ -88,26 +88,21 @@ const DynamicChart = dynamic(
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#1e293b',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  borderRadius: '8px',
+                  backgroundColor: "#1e293b",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  borderRadius: "8px",
                   fontSize,
                 }}
-                labelStyle={{ color: '#fff' }}
+                labelStyle={{ color: "#fff" }}
                 formatter={(value: number, name: string) => [
                   value.toFixed(1),
-                  name === 'score' ? 'Score' : 'Trend',
+                  name === "score" ? "Score" : "Trend",
                 ]}
               />
               <ReferenceLine y={80} stroke="#22c55e" strokeDasharray="5 5" opacity={0.5} />
               <ReferenceLine y={60} stroke="#eab308" strokeDasharray="5 5" opacity={0.5} />
 
-              <Area
-                type="monotone"
-                dataKey="score"
-                stroke="none"
-                fill="url(#scoreGradient)"
-              />
+              <Area type="monotone" dataKey="score" stroke="none" fill="url(#scoreGradient)" />
 
               <Line
                 type="linear"
@@ -124,7 +119,7 @@ const DynamicChart = dynamic(
                 dataKey="score"
                 stroke="#14b8a6"
                 strokeWidth={3}
-                dot={{ r: 4, fill: '#14b8a6', stroke: '#fff', strokeWidth: 2 }}
+                dot={{ r: 4, fill: "#14b8a6", stroke: "#fff", strokeWidth: 2 }}
                 name="Score"
                 animationDuration={1000}
               />
@@ -136,7 +131,7 @@ const DynamicChart = dynamic(
     }),
   {
     loading: () => (
-      <div className="flex items-center justify-center h-[300px] bg-slate-800/50 rounded-lg animate-pulse">
+      <div className="flex h-[300px] animate-pulse items-center justify-center rounded-lg bg-slate-800/50">
         <p className="text-slate-400">Loading chart...</p>
       </div>
     ),
@@ -149,10 +144,7 @@ interface HealthScoreHistoryProps {
   className?: string;
 }
 
-export function HealthScoreHistory({
-  historicalScores,
-  className,
-}: HealthScoreHistoryProps) {
+export function HealthScoreHistory({ historicalScores, className }: HealthScoreHistoryProps) {
   const { isSeniorsMode } = useSeniorsMode();
 
   // Transform historical data for the chart
@@ -164,9 +156,9 @@ export function HealthScoreHistory({
     );
 
     return sorted.map((entry, index) => ({
-      month: new Date(entry.date).toLocaleDateString('en-US', {
-        month: 'short',
-        year: '2-digit',
+      month: new Date(entry.date).toLocaleDateString("en-US", {
+        month: "short",
+        year: "2-digit",
       }),
       score: entry.score,
       previousScore: index > 0 ? sorted[index - 1].score : undefined,
@@ -175,15 +167,15 @@ export function HealthScoreHistory({
 
   // Calculate trend
   const trend = useMemo(() => {
-    if (chartData.length < 2) return { direction: 'neutral' as const, change: 0 };
+    if (chartData.length < 2) return { direction: "neutral" as const, change: 0 };
 
     const first = chartData[0].score;
     const last = chartData[chartData.length - 1].score;
     const change = last - first;
 
-    if (change > 5) return { direction: 'up' as const, change };
-    if (change < -5) return { direction: 'down' as const, change };
-    return { direction: 'neutral' as const, change };
+    if (change > 5) return { direction: "up" as const, change };
+    if (change < -5) return { direction: "down" as const, change };
+    return { direction: "neutral" as const, change };
   }, [chartData]);
 
   // Empty state
@@ -191,52 +183,49 @@ export function HealthScoreHistory({
     return (
       <div
         className={cn(
-          'flex flex-col items-center justify-center rounded-xl bg-slate-800/50 border border-white/10 p-8',
+          "flex flex-col items-center justify-center rounded-xl border border-white/10 bg-slate-800/50 p-8",
           className
         )}
       >
-        <TrendingUp className="h-12 w-12 text-slate-600 mb-3" />
-        <p className="text-slate-400 text-center">
+        <TrendingUp className="mb-3 h-12 w-12 text-slate-600" />
+        <p className="text-center text-slate-400">
           Your score history will appear here as data accumulates
         </p>
-        <p className="text-xs text-slate-500 mt-2">Check back next month!</p>
+        <p className="mt-2 text-xs text-slate-500">Check back next month!</p>
       </div>
     );
   }
 
   return (
     <motion.div
-      className={cn(
-        'rounded-xl bg-slate-800/50 border border-white/10 p-6',
-        className
-      )}
+      className={cn("rounded-xl border border-white/10 bg-slate-800/50 p-6", className)}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <div>
-          <h3 className={cn('font-semibold text-white', isSeniorsMode && 'text-lg')}>
+          <h3 className={cn("font-semibold text-white", isSeniorsMode && "text-lg")}>
             Score History
           </h3>
           <p className="text-xs text-slate-400">
-            {chartData.length} month{chartData.length !== 1 ? 's' : ''} of data
+            {chartData.length} month{chartData.length !== 1 ? "s" : ""} of data
           </p>
         </div>
 
         <div
           className={cn(
-            'flex items-center gap-1 px-3 py-1.5 rounded-full text-sm font-medium',
-            trend.direction === 'up' && 'bg-green-500/20 text-green-400',
-            trend.direction === 'down' && 'bg-red-500/20 text-red-400',
-            trend.direction === 'neutral' && 'bg-slate-500/20 text-slate-400'
+            "flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-medium",
+            trend.direction === "up" && "bg-green-500/20 text-green-400",
+            trend.direction === "down" && "bg-red-500/20 text-red-400",
+            trend.direction === "neutral" && "bg-slate-500/20 text-slate-400"
           )}
         >
-          {trend.direction === 'up' && <TrendingUp className="h-4 w-4" />}
-          {trend.direction === 'down' && <TrendingDown className="h-4 w-4" />}
-          {trend.direction === 'neutral' && <Minus className="h-4 w-4" />}
+          {trend.direction === "up" && <TrendingUp className="h-4 w-4" />}
+          {trend.direction === "down" && <TrendingDown className="h-4 w-4" />}
+          {trend.direction === "neutral" && <Minus className="h-4 w-4" />}
           <span>
-            {trend.change >= 0 ? '+' : ''}
+            {trend.change >= 0 ? "+" : ""}
             {trend.change.toFixed(1)}
           </span>
         </div>
@@ -244,13 +233,13 @@ export function HealthScoreHistory({
 
       <DynamicChart data={chartData} isSeniorsMode={isSeniorsMode} />
 
-      <div className="flex items-center justify-center gap-6 mt-4 text-xs text-slate-400">
+      <div className="mt-4 flex items-center justify-center gap-6 text-xs text-slate-400">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-0.5 bg-teal-500 rounded" />
+          <div className="h-0.5 w-3 rounded bg-teal-500" />
           <span>Score</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-0.5 bg-slate-400 rounded border-dashed" />
+          <div className="h-0.5 w-3 rounded border-dashed bg-slate-400" />
           <span>Trend</span>
         </div>
       </div>

@@ -10,10 +10,6 @@ import { LearningProviders } from "@/app/heavy-providers";
  *
  * This ensures analytics have access to progress and module data.
  */
-export default function AnalyticsLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AnalyticsLayout({ children }: { children: React.ReactNode }) {
   return <LearningProviders>{children}</LearningProviders>;
 }

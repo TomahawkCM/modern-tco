@@ -4,10 +4,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Flame, TrendingUp, TrendingDown, Minus } from "lucide-react";
-import {
-  generateConceptMastery,
-  type ConceptMastery,
-} from "@/lib/progressVisualization";
+import { generateConceptMastery, type ConceptMastery } from "@/lib/progressVisualization";
 
 interface ConceptMasteryHeatmapProps {
   /** Optional module ID to filter concepts */
@@ -23,10 +20,7 @@ interface ConceptMasteryHeatmapProps {
  *
  * Research: Heatmaps improve pattern recognition by 45% (Wilkinson & Friendly, 2009)
  */
-export function ConceptMasteryHeatmap({
-  moduleId,
-  className,
-}: ConceptMasteryHeatmapProps) {
+export function ConceptMasteryHeatmap({ moduleId, className }: ConceptMasteryHeatmapProps) {
   const [concepts, setConcepts] = useState<ConceptMastery[]>([]);
   const [view, setView] = useState<"all" | "mastered" | "learning" | "struggling">("all");
 
@@ -58,9 +52,9 @@ export function ConceptMasteryHeatmap({
             Concept Mastery
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-center py-12">
+        <CardContent className="py-12 text-center">
           <p className="text-muted-foreground">No concept data yet</p>
-          <p className="text-sm text-muted-foreground mt-2">
+          <p className="mt-2 text-sm text-muted-foreground">
             Start reviewing to see your concept mastery
           </p>
         </CardContent>
@@ -69,7 +63,7 @@ export function ConceptMasteryHeatmap({
   }
 
   // Filter concepts based on view
-  const filteredConcepts = concepts.filter(concept => {
+  const filteredConcepts = concepts.filter((concept) => {
     switch (view) {
       case "mastered":
         return concept.masteryLevel === "mastered";
@@ -125,10 +119,10 @@ export function ConceptMasteryHeatmap({
 
   // Calculate statistics
   const stats = {
-    mastered: concepts.filter(c => c.masteryLevel === "mastered").length,
-    advanced: concepts.filter(c => c.masteryLevel === "advanced").length,
-    intermediate: concepts.filter(c => c.masteryLevel === "intermediate").length,
-    beginner: concepts.filter(c => c.masteryLevel === "beginner").length,
+    mastered: concepts.filter((c) => c.masteryLevel === "mastered").length,
+    advanced: concepts.filter((c) => c.masteryLevel === "advanced").length,
+    intermediate: concepts.filter((c) => c.masteryLevel === "intermediate").length,
+    beginner: concepts.filter((c) => c.masteryLevel === "beginner").length,
   };
 
   return (
@@ -148,19 +142,19 @@ export function ConceptMasteryHeatmap({
         {/* Summary Stats */}
         <div className="grid grid-cols-4 gap-3">
           <div className="rounded border border-[#22c55e]/30 bg-[#22c55e]/10 p-3 text-center">
-            <div className="text-xs text-muted-foreground mb-1">Mastered</div>
+            <div className="mb-1 text-xs text-muted-foreground">Mastered</div>
             <div className="text-xl font-bold text-[#22c55e]">{stats.mastered}</div>
           </div>
           <div className="rounded border border-primary/30 bg-primary/10 p-3 text-center">
-            <div className="text-xs text-muted-foreground mb-1">Advanced</div>
+            <div className="mb-1 text-xs text-muted-foreground">Advanced</div>
             <div className="text-xl font-bold text-primary">{stats.advanced}</div>
           </div>
           <div className="rounded border border-[#f97316]/30 bg-[#f97316]/10 p-3 text-center">
-            <div className="text-xs text-muted-foreground mb-1">Learning</div>
+            <div className="mb-1 text-xs text-muted-foreground">Learning</div>
             <div className="text-xl font-bold text-[#f97316]">{stats.intermediate}</div>
           </div>
           <div className="rounded border border-orange-500/30 bg-orange-500/10 p-3 text-center">
-            <div className="text-xs text-muted-foreground mb-1">Beginner</div>
+            <div className="mb-1 text-xs text-muted-foreground">Beginner</div>
             <div className="text-xl font-bold text-orange-400">{stats.beginner}</div>
           </div>
         </div>
@@ -169,7 +163,7 @@ export function ConceptMasteryHeatmap({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setView("all")}
-            className={`px-3 py-1 rounded text-sm transition-colors ${
+            className={`rounded px-3 py-1 text-sm transition-colors ${
               view === "all"
                 ? "bg-accent text-foreground"
                 : "bg-card text-muted-foreground hover:bg-gray-700"
@@ -179,7 +173,7 @@ export function ConceptMasteryHeatmap({
           </button>
           <button
             onClick={() => setView("mastered")}
-            className={`px-3 py-1 rounded text-sm transition-colors ${
+            className={`rounded px-3 py-1 text-sm transition-colors ${
               view === "mastered"
                 ? "bg-[#22c55e] text-foreground"
                 : "bg-card text-muted-foreground hover:bg-gray-700"
@@ -189,7 +183,7 @@ export function ConceptMasteryHeatmap({
           </button>
           <button
             onClick={() => setView("learning")}
-            className={`px-3 py-1 rounded text-sm transition-colors ${
+            className={`rounded px-3 py-1 text-sm transition-colors ${
               view === "learning"
                 ? "bg-blue-600 text-foreground"
                 : "bg-card text-muted-foreground hover:bg-gray-700"
@@ -199,7 +193,7 @@ export function ConceptMasteryHeatmap({
           </button>
           <button
             onClick={() => setView("struggling")}
-            className={`px-3 py-1 rounded text-sm transition-colors ${
+            className={`rounded px-3 py-1 text-sm transition-colors ${
               view === "struggling"
                 ? "bg-orange-600 text-foreground"
                 : "bg-card text-muted-foreground hover:bg-gray-700"
@@ -212,7 +206,7 @@ export function ConceptMasteryHeatmap({
         {/* Heatmap Grid */}
         <div className="space-y-2">
           {filteredConcepts.length === 0 ? (
-            <div className="text-center py-8 text-muted-foreground">
+            <div className="py-8 text-center text-muted-foreground">
               No concepts in this category
             </div>
           ) : (
@@ -223,32 +217,28 @@ export function ConceptMasteryHeatmap({
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-medium text-sm">{concept.concept}</h4>
+                    <div className="mb-1 flex items-center gap-2">
+                      <h4 className="text-sm font-medium">{concept.concept}</h4>
                       {getTrendIcon(concept.trend)}
                     </div>
                     <div className="flex items-center gap-3 text-xs opacity-80">
                       <span>{concept.reviewCount} reviews</span>
                       <span>•</span>
-                      <span>
-                        Last: {new Date(concept.lastReviewed).toLocaleDateString()}
-                      </span>
+                      <span>Last: {new Date(concept.lastReviewed).toLocaleDateString()}</span>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-lg font-bold mb-1">
-                      {Math.round(concept.retention)}%
-                    </div>
+                    <div className="mb-1 text-lg font-bold">{Math.round(concept.retention)}%</div>
                     <Badge
                       variant="outline"
                       className={`text-xs ${
                         concept.masteryLevel === "mastered"
                           ? "border-green-500 text-[#22c55e]"
                           : concept.masteryLevel === "advanced"
-                          ? "border-blue-500 text-primary"
-                          : concept.masteryLevel === "intermediate"
-                          ? "border-yellow-500 text-[#f97316]"
-                          : "border-orange-500 text-orange-400"
+                            ? "border-blue-500 text-primary"
+                            : concept.masteryLevel === "intermediate"
+                              ? "border-yellow-500 text-[#f97316]"
+                              : "border-orange-500 text-orange-400"
                       }`}
                     >
                       {getMasteryLabel(concept.masteryLevel)}
@@ -257,16 +247,16 @@ export function ConceptMasteryHeatmap({
                 </div>
 
                 {/* Retention Bar */}
-                <div className="mt-2 h-1 bg-gray-700/50 rounded-full overflow-hidden">
+                <div className="mt-2 h-1 overflow-hidden rounded-full bg-gray-700/50">
                   <div
                     className={`h-full transition-all ${
                       concept.masteryLevel === "mastered"
                         ? "bg-[#22c55e]"
                         : concept.masteryLevel === "advanced"
-                        ? "bg-primary"
-                        : concept.masteryLevel === "intermediate"
-                        ? "bg-yellow-500"
-                        : "bg-orange-500"
+                          ? "bg-primary"
+                          : concept.masteryLevel === "intermediate"
+                            ? "bg-yellow-500"
+                            : "bg-orange-500"
                     }`}
                     style={{ width: `${concept.retention}%` }}
                   />
@@ -278,22 +268,22 @@ export function ConceptMasteryHeatmap({
 
         {/* Legend */}
         <div className="rounded-lg border border-gray-700 bg-card/30 p-3">
-          <div className="text-xs text-muted-foreground mb-2">Mastery Levels:</div>
+          <div className="mb-2 text-xs text-muted-foreground">Mastery Levels:</div>
           <div className="grid grid-cols-2 gap-2 text-xs">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[#22c55e]" />
+              <div className="h-3 w-3 rounded bg-[#22c55e]" />
               <span className="text-muted-foreground">Mastered (90%+)</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-primary" />
+              <div className="h-3 w-3 rounded bg-primary" />
               <span className="text-muted-foreground">Advanced (70-89%)</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-yellow-500" />
+              <div className="h-3 w-3 rounded bg-yellow-500" />
               <span className="text-muted-foreground">Learning (50-69%)</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-orange-500" />
+              <div className="h-3 w-3 rounded bg-orange-500" />
               <span className="text-muted-foreground">Beginner (&lt;50%)</span>
             </div>
           </div>

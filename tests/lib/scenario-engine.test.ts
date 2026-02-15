@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest';
-import { runScenario } from '@/lib/scenarios/scenario-engine';
-import type { FinancialState, ScenarioInput } from '@/lib/scenarios/scenario-types';
+import { describe, it, expect } from "vitest";
+import { runScenario } from "@/lib/scenarios/scenario-engine";
+import type { FinancialState, ScenarioInput } from "@/lib/scenarios/scenario-types";
 
 const baseState: FinancialState = {
   monthlyIncome: 5000,
@@ -10,14 +10,14 @@ const baseState: FinancialState = {
   totalDebt: 10000,
   monthlyDebtPayment: 500,
   healthScore: 70,
-  debtFreeDate: new Date('2028-01-01'),
+  debtFreeDate: new Date("2028-01-01"),
 };
 
-describe('scenario-engine', () => {
-  describe('cancel_subscription', () => {
-    it('reduces monthly expenses and increases savings', () => {
+describe("scenario-engine", () => {
+  describe("cancel_subscription", () => {
+    it("reduces monthly expenses and increases savings", () => {
       const input: ScenarioInput = {
-        type: 'cancel_subscription',
+        type: "cancel_subscription",
         subscriptionAmount: 15,
       };
 
@@ -29,10 +29,10 @@ describe('scenario-engine', () => {
     });
   });
 
-  describe('change_income', () => {
-    it('updates savings and savings rate on income increase', () => {
+  describe("change_income", () => {
+    it("updates savings and savings rate on income increase", () => {
       const input: ScenarioInput = {
-        type: 'change_income',
+        type: "change_income",
         newMonthlyIncome: 6000,
       };
 
@@ -42,9 +42,9 @@ describe('scenario-engine', () => {
       expect(result.impact.monthlyCashFlowChange).toBe(1000);
     });
 
-    it('handles income decrease', () => {
+    it("handles income decrease", () => {
       const input: ScenarioInput = {
-        type: 'change_income',
+        type: "change_income",
         newMonthlyIncome: 4000,
       };
 
@@ -55,10 +55,10 @@ describe('scenario-engine', () => {
     });
   });
 
-  describe('add_expense', () => {
-    it('increases expenses and decreases savings', () => {
+  describe("add_expense", () => {
+    it("increases expenses and decreases savings", () => {
       const input: ScenarioInput = {
-        type: 'add_expense',
+        type: "add_expense",
         newExpenseAmount: 200,
       };
 
@@ -69,10 +69,10 @@ describe('scenario-engine', () => {
     });
   });
 
-  describe('pay_off_debt', () => {
-    it('accelerates debt payoff timeline', () => {
+  describe("pay_off_debt", () => {
+    it("accelerates debt payoff timeline", () => {
       const input: ScenarioInput = {
-        type: 'pay_off_debt',
+        type: "pay_off_debt",
         extraDebtPayment: 200,
       };
 
@@ -83,10 +83,10 @@ describe('scenario-engine', () => {
     });
   });
 
-  describe('increase_savings_rate', () => {
-    it('adjusts expenses to hit target savings rate', () => {
+  describe("increase_savings_rate", () => {
+    it("adjusts expenses to hit target savings rate", () => {
       const input: ScenarioInput = {
-        type: 'increase_savings_rate',
+        type: "increase_savings_rate",
         newSavingsRate: 40,
       };
 
@@ -97,10 +97,10 @@ describe('scenario-engine', () => {
     });
   });
 
-  describe('health score', () => {
-    it('health score changes with financial changes', () => {
+  describe("health score", () => {
+    it("health score changes with financial changes", () => {
       const input: ScenarioInput = {
-        type: 'increase_savings_rate',
+        type: "increase_savings_rate",
         newSavingsRate: 40,
       };
 

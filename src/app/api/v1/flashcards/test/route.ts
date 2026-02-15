@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { NextResponse } from "next/server";
+import { supabase } from "@/lib/supabase";
 
-const DEV_USER_ID = '5e244287-40af-4cad-aa90-5a7be354940a';
+const DEV_USER_ID = "5e244287-40af-4cad-aa90-5a7be354940a";
 
 export async function GET() {
   try {
@@ -38,22 +38,25 @@ export async function GET() {
         getDueFlashcards: {
           count: dueCards?.length || 0,
           error: dueError?.message || null,
-          sample: dueCards?.[0] || null
+          sample: dueCards?.[0] || null,
         },
         getNewFlashcards: {
           count: newCards?.length || 0,
-          error: newError?.message || null
+          error: newError?.message || null,
         },
         getFlashcardStats: {
           count: allCards?.length || 0,
-          error: statsError?.message || null
-        }
-      }
+          error: statsError?.message || null,
+        },
+      },
     });
   } catch (error) {
-    return NextResponse.json({
-      error: 'Test failed',
-      details: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: "Test failed",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
   }
 }

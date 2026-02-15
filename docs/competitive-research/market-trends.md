@@ -1,7 +1,7 @@
 # Market Trends & Emerging Features in Personal Finance Apps (2025-2026)
 
-*Research conducted: February 13, 2026*
-*Sources: Industry publications, market research firms, academic papers, app documentation, community forums*
+_Research conducted: February 13, 2026_
+_Sources: Industry publications, market research firms, academic papers, app documentation, community forums_
 
 ---
 
@@ -104,13 +104,13 @@ AI is moving from "nice to have" to table stakes. The most successful implementa
 
 **Regulatory Drivers:**
 
-| Regulation | Region | Date | Impact |
-|-----------|--------|------|--------|
-| EU Digital Identity Wallet (EUDI) | EU | Legally binding 2026 | Public/private services must accept |
-| CFPB Personal Financial Data Rights Rule | US | October 2024 | Codifies consumers' data access rights |
-| FCA Open Finance Sprint | UK | March 2025 | Data must be available, portable, standardized |
-| PSD2/PSD3 | EU | Ongoing | Stricter consent-based data sharing |
-| GDPR | EU | Ongoing | Data minimization, right to erasure |
+| Regulation                               | Region | Date                 | Impact                                         |
+| ---------------------------------------- | ------ | -------------------- | ---------------------------------------------- |
+| EU Digital Identity Wallet (EUDI)        | EU     | Legally binding 2026 | Public/private services must accept            |
+| CFPB Personal Financial Data Rights Rule | US     | October 2024         | Codifies consumers' data access rights         |
+| FCA Open Finance Sprint                  | UK     | March 2025           | Data must be available, portable, standardized |
+| PSD2/PSD3                                | EU     | Ongoing              | Stricter consent-based data sharing            |
+| GDPR                                     | EU     | Ongoing              | Data minimization, right to erasure            |
 
 **What Users Want:**
 
@@ -133,25 +133,25 @@ Privacy is becoming a first-class differentiator, not just a technical checkbox.
 
 **Major Aggregation Providers:**
 
-| Provider | Coverage | Strength |
-|----------|----------|----------|
-| Plaid | 11,500+ US banks | US market leader |
-| Tink (Visa) | 6,000+ EU connections | EU-wide, part of Visa |
-| TrueLayer | UK + Europe | Payments + data + identity |
-| Salt Edge | 5,000+ worldwide | PSD2 compliant, global |
-| Nordigen/GoCardless | 2,300+ EU banks | Freemium model (shrinking free tier) |
-| MX | US credit unions/banks | Strong in credit union space |
-| Finicity | US | Used by Monarch as fallback |
-| SimpleFIN | US/Canada | Low cost ($1.50/mo), privacy-focused |
+| Provider            | Coverage               | Strength                             |
+| ------------------- | ---------------------- | ------------------------------------ |
+| Plaid               | 11,500+ US banks       | US market leader                     |
+| Tink (Visa)         | 6,000+ EU connections  | EU-wide, part of Visa                |
+| TrueLayer           | UK + Europe            | Payments + data + identity           |
+| Salt Edge           | 5,000+ worldwide       | PSD2 compliant, global               |
+| Nordigen/GoCardless | 2,300+ EU banks        | Freemium model (shrinking free tier) |
+| MX                  | US credit unions/banks | Strong in credit union space         |
+| Finicity            | US                     | Used by Monarch as fallback          |
+| SimpleFIN           | US/Canada              | Low cost ($1.50/mo), privacy-focused |
 
 **Screen Scraping vs. API: The Numbers**
 
-| Metric | API-Based | Screen Scraping |
-|--------|-----------|-----------------|
-| Consent conversion | 81% | 50% |
-| Sync failure rate | 0.5% | 22% |
-| Transactions with merchant names | 52% | 31% |
-| User trust | High | Low |
+| Metric                           | API-Based | Screen Scraping |
+| -------------------------------- | --------- | --------------- |
+| Consent conversion               | 81%       | 50%             |
+| Sync failure rate                | 0.5%      | 22%             |
+| Transactions with merchant names | 52%       | 31%             |
+| User trust                       | High      | Low             |
 
 Screen scraping is being phased out but remains necessary where APIs are unavailable (smaller FIs, credit unions).
 
@@ -191,22 +191,26 @@ The hybrid approach is the pragmatic path: offer manual import as the privacy-fi
 ### What Works (Evidence-Based)
 
 **Streaks & Daily Engagement:**
+
 - CoinDCX streak mechanics drive daily logins
 - Monzo's 1p Savings Challenge: auto-increases daily save by 1p, resulting in 667.95 by year-end
 - Daily budget reminders: 54% of users who set daily nudges feel comfortable about finances
 
 **Progress Visualization:**
+
 - Progress bars for goal tracking (Intuit Mint style)
 - Visual representation of savings growth
 - Fortune City: each expense logged creates a building in a virtual city
 
 **Savings Challenges:**
+
 - Plum's adjustable "Mood" settings (Shy to Beast Mode)
 - Round-ups (Plum, Acorns): round spending up and save the change
 - "Naughty Rule" (Plum): save extra when shopping at guilty-pleasure retailers
 - The 52-week challenge, penny challenge, etc.
 
 **Achievement Systems:**
+
 - Milestone badges ("Master of Saving" in Fortune City)
 - Completion rewards for sustained behavior
 - Social proof through achievement sharing
@@ -232,6 +236,7 @@ The most effective gamification is **subtle and behavior-reinforcing** rather th
 ### How Top Apps Handle Shared Finances
 
 **Monarch Money (Best Overall for Couples/Families):**
+
 - Separate logins with 2FA
 - Shared dashboard with all accounts, budgets, goals
 - Connect individual AND joint accounts
@@ -241,6 +246,7 @@ The most effective gamification is **subtle and behavior-reinforcing** rather th
 - $14.99/month or $99.99/year
 
 **Honeydue (Best Free, Purpose-Built for Couples):**
+
 - Designed exclusively for couples
 - Sync from 20,000+ FIs in 5 countries
 - In-app messaging for discussing transactions
@@ -249,18 +255,21 @@ The most effective gamification is **subtle and behavior-reinforcing** rather th
 - Free
 
 **YNAB (Zero-Based Budgeting for Families):**
+
 - YNAB Together: 6 people per subscription
 - Shared budgets with full coordination
 - Every dollar allocated collaboratively
 - $14.99/month or $109/year
 
 **Goodbudget (Envelope Budgeting for Couples):**
+
 - Digital envelopes shared between partners
 - Real-time notifications when envelopes are tapped
 - Free tier: 1 account, 2 devices, 10 envelopes
 - Paid: unlimited accounts, 5 devices, unlimited envelopes
 
 **Lunch Money (Web-First Collaboration):**
+
 - Every collaborator gets own login at no extra cost
 - $10/month or $40/year
 
@@ -290,6 +299,7 @@ Collaborative budgeting is a major differentiator and premium feature. A minimal
 ### How Leading Apps Track Subscriptions
 
 **Rocket Money (Market Leader):**
+
 - Auto-detects subscriptions from transaction history
 - List or calendar view of recurring charges
 - Shows: service name, last 4 digits, next payment date, amount
@@ -299,6 +309,7 @@ Collaborative budgeting is a major differentiator and premium feature. A minimal
 - Free basic tier; Premium $7-14/month
 
 **Trim by OneMain:**
+
 - Scans transaction history for recurring charges
 - Emphasis on bill negotiation and cancellation
 - Connects to 15,000+ FIs
@@ -332,33 +343,37 @@ Intelligent auto-detection from imported transactions using pattern matching is 
 
 ### The Spectrum of Integration
 
-| Approach | Examples | Depth |
-|----------|----------|-------|
-| Net worth only | Most basic apps | Show balance, no analysis |
+| Approach           | Examples         | Depth                             |
+| ------------------ | ---------------- | --------------------------------- |
+| Net worth only     | Most basic apps  | Show balance, no analysis         |
 | Portfolio overview | Monarch, Empower | Holdings, allocation, performance |
-| Full analytics | Empower, getquin | Cost basis, benchmarking, risk |
-| AI-powered | Origin, Copilot | Personalized investment advice |
+| Full analytics     | Empower, getquin | Cost basis, benchmarking, risk    |
+| AI-powered         | Origin, Copilot  | Personalized investment advice    |
 
 ### Leading Implementations
 
 **Empower (formerly Personal Capital) - Gold Standard:**
+
 - Free Investment Checkup: portfolio risk assessment, past performance, alternative allocation
 - View holdings across multiple brokerages on one dashboard
 - Retirement planning tools
 - Fee analyzer
 
 **Monarch Money:**
+
 - Track expenses, net worth, AND investment portfolio
 - Collaborate with financial advisor
 - Zillow integration for real estate values
 - Auto-updating car values via aggregator
 
 **Copilot Money:**
+
 - Tracks spending, cash flow, net worth, and investments in one place
 - AI learns spending patterns to suggest savings goals
 - Amazon and Venmo integrations
 
 **getquin (Dedicated Investment Tracker):**
+
 - Connect all financial accounts via API (thousands of providers)
 - Advanced analytics: asset allocation, historical performance, AI-powered risk ratings
 - Real-time KPIs, live price updates, dynamic benchmarking
@@ -383,6 +398,7 @@ The minimum viable feature is manual asset entry with periodic value updates and
 ### State of the Art (2025-2026)
 
 **Technology Evolution:**
+
 ```
 Traditional OCR -> AI-powered OCR -> Vision-Language Models (VLMs)
 ```
@@ -394,6 +410,7 @@ Traditional OCR -> AI-powered OCR -> Vision-Language Models (VLMs)
 - BERT-based post-processing for neural network correction
 
 **Key Capabilities in 2026:**
+
 - Instant extraction: merchant names, dates, amounts, payment methods, line items
 - Smart categorization that learns from habits
 - Transaction matching against bank imports
@@ -403,12 +420,12 @@ Traditional OCR -> AI-powered OCR -> Vision-Language Models (VLMs)
 
 ### Leading Solutions
 
-| Solution | Key Strength |
-|----------|-------------|
-| SparkReceipt | AI understands context, not just text |
-| Ramp | OCR + automatic transaction matching |
-| HyperVerge | 95%+ accuracy, 150+ languages |
-| Veryfi | Exceptional accuracy and speed |
+| Solution          | Key Strength                                    |
+| ----------------- | ----------------------------------------------- |
+| SparkReceipt      | AI understands context, not just text           |
+| Ramp              | OCR + automatic transaction matching            |
+| HyperVerge        | 95%+ accuracy, 150+ languages                   |
+| Veryfi            | Exceptional accuracy and speed                  |
 | Klippa DocHorizon | OCR + fraud detection + multi-language/currency |
 
 ### The Processing Pipeline
@@ -435,12 +452,14 @@ Vision-language model integration provides better contextual understanding than 
 ### Purpose-Built Multi-Currency Apps
 
 **Lunch Money:**
+
 - Track every dollar, euro, and yen in primary currency of choice
 - Cryptocurrency support
 - Individual-focused, not designed for families
 - $10/month or $40/year
 
 **PocketSmith:**
+
 - Bank feeds in 49 countries
 - Real-time currency conversion
 - Multi-country net worth management
@@ -448,12 +467,14 @@ Vision-language model integration provides better contextual understanding than 
 - Freelancer/contractor-friendly
 
 **Know Your Dosh:**
+
 - Purpose-built for multi-currency
 - Real-time conversion across all accounts/goals
 - Consolidated family wealth in true net worth
 - International investment tracking (performance + FX impact)
 
 **Firefly III:**
+
 - Full multi-currency support
 - Different accounts in different currencies
 - Currency movements fully balanced with double-entry
@@ -488,11 +509,13 @@ Most competitors are US-only or handle one currency. International users, expats
 ### The 2025-2026 Landscape
 
 **The Paradigm Shift:**
+
 - "Local-First is a new paradigm: You own your data, in spite of the cloud"
 - In 2025, offline-first is becoming the baseline expectation for serious applications
 - Enterprises report **+38% productivity improvement** and **50% decrease in customer complaints** after switching to offline-first
 
 **CRDT (Conflict-Free Replicated Data Types):**
+
 - Multiple replicas update independently, offline, concurrently, out of order, and still converge
 - Expert consensus in 2025: "default to CRDTs unless you have a hard requirement that only OT satisfies"
 - Key CRDT types for finance:
@@ -502,14 +525,14 @@ Most competitors are US-only or handle one currency. International users, expats
 
 ### Tooling Ecosystem
 
-| Tool | Type | Best For |
-|------|------|----------|
-| Automerge | CRDT library | Prototypes, small datasets |
-| Yjs | CRDT library | Higher performance, robust adapters |
-| RxDB | Database | NoSQL documents with CRDT replication |
-| PouchDB/CouchDB | Database | Built-in replication protocol |
-| PowerSync | Sync engine | SQLite client <-> Postgres/MongoDB server |
-| SQLite OPFS | Storage | Browser-based SQLite via filesystem APIs |
+| Tool            | Type         | Best For                                  |
+| --------------- | ------------ | ----------------------------------------- |
+| Automerge       | CRDT library | Prototypes, small datasets                |
+| Yjs             | CRDT library | Higher performance, robust adapters       |
+| RxDB            | Database     | NoSQL documents with CRDT replication     |
+| PouchDB/CouchDB | Database     | Built-in replication protocol             |
+| PowerSync       | Sync engine  | SQLite client <-> Postgres/MongoDB server |
+| SQLite OPFS     | Storage      | Browser-based SQLite via filesystem APIs  |
 
 ### Critical Caveat for Finance
 
@@ -522,7 +545,7 @@ CRDTs resolve **data structure** conflicts, NOT **business logic** conflicts.
 ### Actual Budget's Architecture (Reference Implementation)
 
 - SQLite as core data store
-- Views (v_ prefix) normalize data shape without touching tables
+- Views (v\_ prefix) normalize data shape without touching tables
 - Views recreated on every app start
 - Migrations system for schema evolution
 - Server stores binary blobs of budget files
@@ -551,6 +574,7 @@ Local-first architecture with cloud sync is the emerging gold standard. For fina
 ### Detailed Comparison
 
 **Actual Budget:**
+
 - Philosophy: Envelope/YNAB-style ("every dollar gets a job")
 - Stack: React + Node.js, SQLite, TypeScript
 - License: MIT
@@ -562,6 +586,7 @@ Local-first architecture with cloud sync is the emerging gold standard. For fina
 - Key lesson: **Beautiful UI + local-first + envelope budgeting = strong user retention**
 
 **Firefly III:**
+
 - Philosophy: Full financial tracking, double-entry accounting
 - Stack: PHP/Laravel + MySQL/PostgreSQL
 - License: AGPL v3
@@ -574,6 +599,7 @@ Local-first architecture with cloud sync is the emerging gold standard. For fina
 - Key lesson: **Comprehensive REST API + rule engine + multi-currency = power user magnet**
 
 **GnuCash:**
+
 - Philosophy: Double-entry bookkeeping for personal and small business
 - Stack: C + Scheme
 - License: GPL v2+
@@ -585,12 +611,14 @@ Local-first architecture with cloud sync is the emerging gold standard. For fina
 - Key lesson: **Longevity comes from solid accounting fundamentals, but dated UI drives users away**
 
 **ExpenseOwl:**
+
 - Philosophy: Simplicity, no bloat, full data ownership
 - Features: Lightning-fast entry, modern visualizations, CSV/JSON import/export
 - Data: Local JSON file
 - Key lesson: **Simplicity and data portability attract privacy-conscious users**
 
 **HomeBank:**
+
 - Philosophy: Lightweight, open-source, desktop-first
 - Features: Multi-currency, import from Quicken/Money
 - Limitations: No mobile app, no cloud sync
@@ -622,31 +650,37 @@ Local-first architecture with cloud sync is the emerging gold standard. For fina
 ### Why People Quit
 
 **1. The Psychological Paradox:**
+
 - "Knowledge is power, but not necessarily comforting"
 - 24% of consumers feel highly anxious about finances, 36% somewhat concerned
 - People download apps seeking control but confronting finances creates discomfort
 
 **2. Cognitive Overload:**
+
 - Cluttered UIs amplify financial stress
 - Complex layouts prevent understanding of what to do next
 - Users abandon when they "must think too much, click too much, or learn too much before seeing results"
 
 **3. The Restriction Misconception:**
+
 - People think budgeting = restriction
 - YNAB counters this: "It doesn't mean restriction. It means choice."
 - Successful apps make users feel in control, not poor
 
 **4. Tedious Daily Tracking:**
+
 - Logging expenses manually is the #1 friction point
 - If it feels like homework, users quit
 - Automation is key to overcoming this
 
 **5. Trust & Data Accuracy:**
+
 - Incorrect/delayed sync kills trust instantly
 - Wrong categories make users question the entire system
 - "The fastest way to lose a budgeting app user is showing incorrect financial information"
 
 **6. The Behavioral Economics Trap:**
+
 - Counterintuitively, budget apps can **increase** spending at end of budget period
 - Having a budget gives "permission" to spend what's left
 - Complex psychological dynamics at play
@@ -654,27 +688,32 @@ Local-first architecture with cloud sync is the emerging gold standard. For fina
 ### What Keeps Users Engaged
 
 **Progress & Feedback Loops:**
+
 - "People come back when they feel like they're winning"
 - If a user sees they've saved $150, they're hooked
 - If they've done nothing but link an account, they're gone
 - Small wins create momentum
 
 **Daily Nudges:**
+
 - 54% who set daily reminders feel comfortable about finances
 - Push notifications increase weekly engagement 3x
 - Non-intrusive, positive-framed reminders work best
 
 **Habit Formation:**
+
 - "When an app becomes a habit, it stops competing for attention"
 - Average engagement: 4.5 logins/week, 6.2 minutes/session
 - The goal is instinctive return, not notification-driven
 
 **Emotional Design:**
+
 - Micro-interactions, supportive copy, progress visuals, small wins
 - Build emotional momentum
 - When design fails to connect emotionally, app becomes "tool users abandon when they don't feel like budgeting"
 
 **The YNAB Effect:**
+
 - Flexibility helps retention: overspend? Just move money between envelopes
 - No "failure" state - just reallocation
 - Creates psychological barrier to overspending without shame
@@ -738,6 +777,7 @@ Every budget app MUST have these features to be considered viable:
 A next-generation budget app in 2026 would be built on seven pillars:
 
 **1. AI-Native, Not AI-Bolted-On**
+
 - AI isn't a feature; it's the core architecture
 - Every interaction is informed by ML models trained on user behavior
 - Proactive suggestions, not reactive reporting
@@ -745,6 +785,7 @@ A next-generation budget app in 2026 would be built on seven pillars:
 - Voice-first capability for hands-free financial management
 
 **2. Local-First with Seamless Sync**
+
 - All data lives on device by default
 - End-to-end encrypted sync when opted in
 - Works fully offline
@@ -752,6 +793,7 @@ A next-generation budget app in 2026 would be built on seven pillars:
 - Sub-second sync when online
 
 **3. Holistic Financial Dashboard**
+
 - Checking, savings, credit, investments, real estate, vehicles
 - Real-time net worth
 - Predictive cash flow for 30/60/90 days
@@ -759,6 +801,7 @@ A next-generation budget app in 2026 would be built on seven pillars:
 - Debt payoff optimization
 
 **4. Behavioral, Not Just Transactional**
+
 - Understanding WHY you spend, not just WHAT
 - Emotional spending detection
 - Life event awareness (new job, baby, move)
@@ -766,6 +809,7 @@ A next-generation budget app in 2026 would be built on seven pillars:
 - Micro-coaching at decision points
 
 **5. Collaborative by Default**
+
 - Household finances as first-class concept
 - Individual + shared budgets
 - In-app communication about money
@@ -773,6 +817,7 @@ A next-generation budget app in 2026 would be built on seven pillars:
 - Privacy controls per person
 
 **6. Open and Interoperable**
+
 - Open banking API integration
 - Import/export in all standard formats
 - Webhook support for external automation
@@ -780,6 +825,7 @@ A next-generation budget app in 2026 would be built on seven pillars:
 - Data portability as a core promise
 
 **7. Beautiful and Effortless**
+
 - Sub-2-second load times
 - Minimal manual input required
 - Progressive disclosure (simple by default, powerful on demand)
@@ -813,23 +859,23 @@ User Action -> Local DB (immediate) -> Sync Queue -> Background Sync -> Server
 
 ### Sync Trigger Strategies
 
-| Strategy | Description | Best For |
-|----------|-------------|----------|
-| Manual Sync | User-initiated | Privacy-conscious users |
-| Scheduled Sync | Periodic (e.g., every 15 min when online) | Background operation |
-| Push Notification Sync | Server triggers client sync | Real-time collaboration |
-| Delta Sync | Only modified data after initial full sync | Bandwidth efficiency |
-| Event-Driven Sync | Sync on specific actions | Critical operations |
+| Strategy               | Description                                | Best For                |
+| ---------------------- | ------------------------------------------ | ----------------------- |
+| Manual Sync            | User-initiated                             | Privacy-conscious users |
+| Scheduled Sync         | Periodic (e.g., every 15 min when online)  | Background operation    |
+| Push Notification Sync | Server triggers client sync                | Real-time collaboration |
+| Delta Sync             | Only modified data after initial full sync | Bandwidth efficiency    |
+| Event-Driven Sync      | Sync on specific actions                   | Critical operations     |
 
 ### Conflict Resolution for Finance Apps
 
-| Data Type | Strategy | Rationale |
-|-----------|----------|-----------|
-| Financial transactions | Server-authoritative (LWW with audit trail) | Must enforce business rules |
-| Budget categories | CRDT merge | Can safely auto-merge |
-| Notes/comments | LWW-Register (timestamp-based) | Latest wins is acceptable |
-| Account settings | LWW with user notification | User should know about changes |
-| Spending limits | Server-authoritative | Must enforce constraints |
+| Data Type              | Strategy                                    | Rationale                      |
+| ---------------------- | ------------------------------------------- | ------------------------------ |
+| Financial transactions | Server-authoritative (LWW with audit trail) | Must enforce business rules    |
+| Budget categories      | CRDT merge                                  | Can safely auto-merge          |
+| Notes/comments         | LWW-Register (timestamp-based)              | Latest wins is acceptable      |
+| Account settings       | LWW with user notification                  | User should know about changes |
+| Spending limits        | Server-authoritative                        | Must enforce constraints       |
 
 ### Special Considerations
 
@@ -843,12 +889,12 @@ User Action -> Local DB (immediate) -> Sync Queue -> Background Sync -> Server
 
 ### Reference Implementations
 
-| Implementation | Approach |
-|---------------|----------|
-| Actual Budget | SQLite + binary blob sync via custom server |
-| PouchDB/CouchDB | Built-in replication protocol |
-| PowerSync | SQLite client <-> Postgres server bridge |
-| RxDB | NoSQL with CRDT-based replication |
+| Implementation  | Approach                                    |
+| --------------- | ------------------------------------------- |
+| Actual Budget   | SQLite + binary blob sync via custom server |
+| PouchDB/CouchDB | Built-in replication protocol               |
+| PowerSync       | SQLite client <-> Postgres server bridge    |
+| RxDB            | NoSQL with CRDT-based replication           |
 
 ### Key Takeaway
 
@@ -862,13 +908,13 @@ For an app transitioning from offline to online: implement a sync queue for pend
 
 ### Market Size (2025-2026)
 
-| Segment | 2024-2025 Value | Projected | CAGR |
-|---------|----------------|-----------|------|
-| Global personal finance apps | $17.75B (2024) | $115.26B (2033) | 20.57% |
-| Personal finance software | $1.35B (2025) | $2.57B (2034) | 7.60% |
-| Mobile personal finance apps | $2.9B (2024) | $12.58B (2034) | 15.8% |
-| Budget planner segment | $2B (2025) | $3.68B (2030) | 12.8% |
-| AI in personal finance | $1B (2025) | $3.7B (2033) | 18.1% |
+| Segment                      | 2024-2025 Value | Projected       | CAGR   |
+| ---------------------------- | --------------- | --------------- | ------ |
+| Global personal finance apps | $17.75B (2024)  | $115.26B (2033) | 20.57% |
+| Personal finance software    | $1.35B (2025)   | $2.57B (2034)   | 7.60%  |
+| Mobile personal finance apps | $2.9B (2024)    | $12.58B (2034)  | 15.8%  |
+| Budget planner segment       | $2B (2025)      | $3.68B (2030)   | 12.8%  |
+| AI in personal finance       | $1B (2025)      | $3.7B (2033)    | 18.1%  |
 
 ### User Adoption
 
@@ -881,35 +927,35 @@ For an app transitioning from offline to online: implement a sync queue for pend
 
 ### Retention Benchmarks
 
-| Metric | Value |
-|--------|-------|
-| Day 1 retention | 23% |
-| Day 7 retention | 14% |
-| Day 14 retention | 12% |
-| Day 30 retention | 10% |
-| 90-day retention | 35% (improving) |
-| AI-powered apps | 40% better retention |
+| Metric           | Value                |
+| ---------------- | -------------------- |
+| Day 1 retention  | 23%                  |
+| Day 7 retention  | 14%                  |
+| Day 14 retention | 12%                  |
+| Day 30 retention | 10%                  |
+| 90-day retention | 35% (improving)      |
+| AI-powered apps  | 40% better retention |
 
 ### Market Leaders by Users (2025)
 
-| App | Users | Notable |
-|-----|-------|---------|
-| Cash App | 57M | Payments-first |
-| Mint (pre-shutdown) | 30M active | Now defunct |
-| Acorns | 15.5M | Investment micro-savings |
-| Cleo | 1M+ paid | AI coaching, $250M+ ARR |
-| Rocket Money | 5M+ | Subscription management |
-| EveryDollar | 12M+ downloads | Ramsey ecosystem |
-| Rocket Money | 2.7M+ users | Bill negotiation |
+| App                 | Users          | Notable                  |
+| ------------------- | -------------- | ------------------------ |
+| Cash App            | 57M            | Payments-first           |
+| Mint (pre-shutdown) | 30M active     | Now defunct              |
+| Acorns              | 15.5M          | Investment micro-savings |
+| Cleo                | 1M+ paid       | AI coaching, $250M+ ARR  |
+| Rocket Money        | 5M+            | Subscription management  |
+| EveryDollar         | 12M+ downloads | Ramsey ecosystem         |
+| Rocket Money        | 2.7M+ users    | Bill negotiation         |
 
 ### Regional Differences
 
-| Region | Market Share | Characteristics |
-|--------|-------------|-----------------|
-| North America | 35.3% | Mature infrastructure, API-first |
-| Asia Pacific | Fastest growing | Mobile-first, large underbanked population |
-| Europe | Strong growth | Open banking leader (PSD2/PSD3), privacy-focused |
-| Cloud segment | 62.24% of global market | Dominant architecture |
+| Region        | Market Share            | Characteristics                                  |
+| ------------- | ----------------------- | ------------------------------------------------ |
+| North America | 35.3%                   | Mature infrastructure, API-first                 |
+| Asia Pacific  | Fastest growing         | Mobile-first, large underbanked population       |
+| Europe        | Strong growth           | Open banking leader (PSD2/PSD3), privacy-focused |
+| Cloud segment | 62.24% of global market | Dominant architecture                            |
 
 ### Key Market Dynamics
 

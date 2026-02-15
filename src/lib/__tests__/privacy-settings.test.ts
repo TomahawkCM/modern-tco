@@ -3,7 +3,7 @@
  * Tests AI feature opt-in/opt-out, data export, and privacy controls
  */
 
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from "vitest";
 import {
   getPrivacySettings,
   savePrivacySettings,
@@ -11,13 +11,13 @@ import {
   isSmartDuplicateDetectionEnabled,
   isClaudeAPIEnabled,
   isEncryptionEnabled,
-} from '@/lib/budget-privacy-settings';
-import type { PrivacySettings } from '@/lib/budget-privacy-settings';
+} from "@/lib/budget-privacy-settings";
+import type { PrivacySettings } from "@/lib/budget-privacy-settings";
 
-describe('Privacy Settings Module', () => {
+describe("Privacy Settings Module", () => {
   beforeEach(() => {
     // Clear localStorage before each test
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       localStorage.clear();
     }
   });
@@ -25,8 +25,8 @@ describe('Privacy Settings Module', () => {
   // ========================================
   // Default Settings Tests
   // ========================================
-  describe('Default Settings', () => {
-    it('should return default settings when none exist', () => {
+  describe("Default Settings", () => {
+    it("should return default settings when none exist", () => {
       const settings = getPrivacySettings();
 
       expect(settings.enableClaudeAPI).toBe(false);
@@ -40,15 +40,15 @@ describe('Privacy Settings Module', () => {
       expect(settings.allowDataDeletion).toBe(true);
     });
 
-    it('should merge new fields with defaults', () => {
+    it("should merge new fields with defaults", () => {
       // Simulate old settings without new fields
       const oldSettings = {
         enableClaudeAPI: true,
         updatedAt: Date.now(),
       };
 
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('budget-app-privacy-settings', JSON.stringify(oldSettings));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("budget-app-privacy-settings", JSON.stringify(oldSettings));
       }
 
       const settings = getPrivacySettings();
@@ -64,8 +64,8 @@ describe('Privacy Settings Module', () => {
   // ========================================
   // Save/Load Settings Tests
   // ========================================
-  describe('Save/Load Settings', () => {
-    it('should save and load settings correctly', () => {
+  describe("Save/Load Settings", () => {
+    it("should save and load settings correctly", () => {
       const newSettings: Partial<PrivacySettings> = {
         enableClaudeAPI: true,
         enableSmartDuplicateDetection: true,
@@ -81,12 +81,12 @@ describe('Privacy Settings Module', () => {
       expect(loaded.updatedAt).toBeGreaterThan(0);
     });
 
-    it('should update timestamp on save', () => {
+    it("should update timestamp on save", () => {
       const initial = getPrivacySettings();
       const initialTime = initial.updatedAt;
 
       // Wait a bit
-      const wait = new Promise(resolve => setTimeout(resolve, 10));
+      const wait = new Promise((resolve) => setTimeout(resolve, 10));
 
       wait.then(() => {
         savePrivacySettings({ enableClaudeAPI: true });
@@ -95,7 +95,7 @@ describe('Privacy Settings Module', () => {
       });
     });
 
-    it('should handle partial updates', () => {
+    it("should handle partial updates", () => {
       savePrivacySettings({ enableClaudeAPI: true });
       savePrivacySettings({ enableOCR: false });
 
@@ -110,8 +110,8 @@ describe('Privacy Settings Module', () => {
   // ========================================
   // Reset Settings Tests
   // ========================================
-  describe('Reset Settings', () => {
-    it('should reset all settings to defaults', () => {
+  describe("Reset Settings", () => {
+    it("should reset all settings to defaults", () => {
       // Set some custom settings
       savePrivacySettings({
         enableClaudeAPI: true,
@@ -131,8 +131,8 @@ describe('Privacy Settings Module', () => {
   // ========================================
   // Feature Enablement Tests
   // ========================================
-  describe('Feature Enablement Checks', () => {
-    it('isSmartDuplicateDetectionEnabled() should require both flags', () => {
+  describe("Feature Enablement Checks", () => {
+    it("isSmartDuplicateDetectionEnabled() should require both flags", () => {
       savePrivacySettings({
         enableClaudeAPI: true,
         enableSmartDuplicateDetection: false,
@@ -152,7 +152,7 @@ describe('Privacy Settings Module', () => {
       expect(isSmartDuplicateDetectionEnabled()).toBe(true);
     });
 
-    it('isClaudeAPIEnabled() should check master switch', () => {
+    it("isClaudeAPIEnabled() should check master switch", () => {
       savePrivacySettings({ enableClaudeAPI: false });
       expect(isClaudeAPIEnabled()).toBe(false);
 
@@ -160,7 +160,7 @@ describe('Privacy Settings Module', () => {
       expect(isClaudeAPIEnabled()).toBe(true);
     });
 
-    it('isEncryptionEnabled() should check encryption flag', () => {
+    it("isEncryptionEnabled() should check encryption flag", () => {
       savePrivacySettings({ enableEncryption: false });
       expect(isEncryptionEnabled()).toBe(false);
 
@@ -172,8 +172,8 @@ describe('Privacy Settings Module', () => {
   // ========================================
   // Privacy Controls Integration Tests
   // ========================================
-  describe('Privacy Controls Integration', () => {
-    it('should disable Claude features when master switch is off', () => {
+  describe("Privacy Controls Integration", () => {
+    it("should disable Claude features when master switch is off", () => {
       // Enable all Claude features
       savePrivacySettings({
         enableClaudeAPI: true,
@@ -191,7 +191,7 @@ describe('Privacy Settings Module', () => {
       expect(isSmartDuplicateDetectionEnabled()).toBe(false);
     });
 
-    it('should enable master switch when enabling Claude feature', () => {
+    it("should enable master switch when enabling Claude feature", () => {
       // Start with master switch off
       savePrivacySettings({ enableClaudeAPI: false });
 
@@ -207,10 +207,10 @@ describe('Privacy Settings Module', () => {
   // ========================================
   // Edge Cases
   // ========================================
-  describe('Edge Cases', () => {
-    it('should handle corrupted localStorage data', () => {
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('budget-app-privacy-settings', 'invalid json');
+  describe("Edge Cases", () => {
+    it("should handle corrupted localStorage data", () => {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("budget-app-privacy-settings", "invalid json");
       }
 
       // Should return defaults without crashing
@@ -219,7 +219,7 @@ describe('Privacy Settings Module', () => {
       expect(settings.enableClaudeAPI).toBe(false);
     });
 
-    it('should handle missing localStorage', () => {
+    it("should handle missing localStorage", () => {
       // Simulate SSR environment
       const originalWindow = global.window;
       // @ts-ignore
@@ -232,12 +232,15 @@ describe('Privacy Settings Module', () => {
       global.window = originalWindow;
     });
 
-    it('should handle very old settings format', () => {
-      if (typeof window !== 'undefined') {
+    it("should handle very old settings format", () => {
+      if (typeof window !== "undefined") {
         // Simulate very old format
-        localStorage.setItem('budget-app-privacy-settings', JSON.stringify({
-          someOldField: true,
-        }));
+        localStorage.setItem(
+          "budget-app-privacy-settings",
+          JSON.stringify({
+            someOldField: true,
+          })
+        );
       }
 
       const settings = getPrivacySettings();
@@ -247,4 +250,3 @@ describe('Privacy Settings Module', () => {
     });
   });
 });
-

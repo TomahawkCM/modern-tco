@@ -124,19 +124,15 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
     // Calculate and award points for correct answers
     if (correct) {
       const userPoints = getUserPoints();
-      const streakDays = userPoints.pointsHistory.filter(entry =>
-        entry.reason === "review_correct"
-      ).length > 0 ? 1 : 0; // Simplified streak calculation
+      const streakDays =
+        userPoints.pointsHistory.filter((entry) => entry.reason === "review_correct").length > 0
+          ? 1
+          : 0; // Simplified streak calculation
 
       const difficulty = currentQuestion?.difficulty || currentItem.difficulty || "medium";
-      const {retention} = currentItem;
+      const { retention } = currentItem;
 
-      const pointsResult = calculateReviewPoints(
-        correct,
-        difficulty,
-        streakDays,
-        retention
-      );
+      const pointsResult = calculateReviewPoints(correct, difficulty, streakDays, retention);
 
       // Award points
       addPoints(
@@ -147,7 +143,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
       );
 
       setPointsEarned(pointsResult.points);
-      setSessionPoints(prev => prev + pointsResult.points);
+      setSessionPoints((prev) => prev + pointsResult.points);
       setPointsBreakdown(pointsResult.breakdown);
     } else {
       setPointsEarned(0);
@@ -193,8 +189,8 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
       const allModuleItems = getAllModuleItems(moduleId);
 
       // Replace updated items
-      const updatedAllItems = allModuleItems.map(item => {
-        const updated = moduleItems.find(u => u.id === item.id);
+      const updatedAllItems = allModuleItems.map((item) => {
+        const updated = moduleItems.find((u) => u.id === item.id);
         return updated || item;
       });
 
@@ -202,9 +198,9 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
     });
 
     // Calculate results
-    const itemsCorrect = answers.filter(a => a.correct).length;
+    const itemsCorrect = answers.filter((a) => a.correct).length;
     const totalRetention = items.reduce((sum, item) => {
-      const answer = answers.find(a => a.itemId === item.id);
+      const answer = answers.find((a) => a.itemId === item.id);
       return sum + (answer?.correct ? 100 : 0);
     }, 0);
     const averageRetention = Math.round(totalRetention / items.length);
@@ -222,13 +218,13 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
     // Award perfect session bonus
     if (itemsCorrect === items.length && items.length > 0) {
       addPoints(50, "perfect_session", 1.0, "Perfect session!");
-      setSessionPoints(prev => prev + 50);
+      setSessionPoints((prev) => prev + 50);
     }
 
     // Check for achievements
     const userPoints = getUserPoints();
     const allItems = getAllModuleItems(items[0]?.moduleId || "");
-    const itemsMastered = allItems.filter(item => item.retention > 90).length;
+    const itemsMastered = allItems.filter((item) => item.retention > 90).length;
 
     const newAchievements = checkAchievements({
       streakDays: 1, // TODO: Calculate actual streak
@@ -240,7 +236,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
     });
 
     // Notify about new achievements
-    newAchievements.forEach(achievement => {
+    newAchievements.forEach((achievement) => {
       notifyAchievementUnlocked(achievement);
     });
 
@@ -270,7 +266,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
   // Final results view
   if (showFinalResults) {
-    const itemsCorrect = answers.filter(a => a.correct).length;
+    const itemsCorrect = answers.filter((a) => a.correct).length;
     const scorePercentage = Math.round((itemsCorrect / items.length) * 100);
     const sessionDuration = Math.floor((Date.now() - sessionStartTime) / 1000);
     const minutes = Math.floor(sessionDuration / 60);
@@ -295,9 +291,9 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
               </p>
             </div>
 
-            <Progress 
-              value={scorePercentage} 
-              className="h-3 bg-green-900/30" 
+            <Progress
+              value={scorePercentage}
+              className="h-3 bg-green-900/30"
               aria-label={`Review session score: ${scorePercentage}% (${itemsCorrect} of ${items.length} items correct)`}
             />
           </div>
@@ -353,7 +349,10 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                         )}
                         <span className="text-muted-foreground">{item.title}</span>
                       </div>
-                      <Badge variant="outline" className="text-xs border-accent/30 text-accent-foreground">
+                      <Badge
+                        variant="outline"
+                        className="border-accent/30 text-xs text-accent-foreground"
+                      >
                         {daysUntil} day{daysUntil !== 1 ? "s" : ""}
                       </Badge>
                     </div>
@@ -365,11 +364,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
           {/* Action Buttons */}
           <div className="flex gap-3">
-            <Button
-              onClick={onExit}
-              variant="outline"
-              className="flex-1"
-            >
+            <Button onClick={onExit} variant="outline" className="flex-1">
               Back to Dashboard
             </Button>
           </div>
@@ -388,9 +383,9 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
             {currentIndex + 1} of {items.length}
           </Badge>
         </div>
-        <Progress 
-          value={progress} 
-          className="h-2" 
+        <Progress
+          value={progress}
+          className="h-2"
           aria-label={`Review session progress: ${currentIndex + 1} of ${items.length} items (${Math.round(progress)}%)`}
         />
       </CardHeader>
@@ -399,7 +394,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
         {/* Current Item */}
         <div>
           <div className="mb-4">
-            <Badge variant="outline" className="mb-2 text-xs border-primary/30 text-primary">
+            <Badge variant="outline" className="mb-2 border-primary/30 text-xs text-primary">
               {currentItem.type === "micro-section" ? "Micro-Section" : "Weak Concept"}
             </Badge>
             <h3 className="text-lg font-semibold text-foreground">{currentItem.title}</h3>
@@ -415,14 +410,22 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                   <div className="space-y-4">
                     <div className="mb-4">
                       <div className="mb-2 flex items-center justify-between">
-                        <Badge variant="outline" className="text-xs border-accent/30 text-accent-foreground">
+                        <Badge
+                          variant="outline"
+                          className="border-accent/30 text-xs text-accent-foreground"
+                        >
                           {currentQuestion.type === "true-false" ? "True/False" : "Multiple Choice"}
                         </Badge>
-                        <Badge variant="outline" className="text-xs border-[#f97316]/30 text-[#f97316]">
+                        <Badge
+                          variant="outline"
+                          className="border-[#f97316]/30 text-xs text-[#f97316]"
+                        >
                           Difficulty: {currentQuestion.difficulty}
                         </Badge>
                       </div>
-                      <p className="text-base font-medium text-foreground">{currentQuestion.question}</p>
+                      <p className="text-base font-medium text-foreground">
+                        {currentQuestion.question}
+                      </p>
                     </div>
 
                     <div className="space-y-2">
@@ -488,7 +491,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                     <Button
                       onClick={handleSubmitAnswer}
                       disabled={!selectedAnswer}
-                      className="w-full bg-accent hover:bg-purple-700 disabled:bg-muted disabled:cursor-not-allowed"
+                      className="w-full bg-accent hover:bg-purple-700 disabled:cursor-not-allowed disabled:bg-muted"
                     >
                       Submit Answer
                     </Button>
@@ -525,12 +528,14 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
           {/* Result Feedback */}
           {showResult && currentAnswer !== null && (
-            <Card className={cn(
-              "border-2",
-              currentAnswer
-                ? "border-[#22c55e]/30 bg-[#22c55e]/5"
-                : "border-orange-500/30 bg-orange-500/5"
-            )}>
+            <Card
+              className={cn(
+                "border-2",
+                currentAnswer
+                  ? "border-[#22c55e]/30 bg-[#22c55e]/5"
+                  : "border-orange-500/30 bg-orange-500/5"
+              )}
+            >
               <CardContent className="py-6">
                 <div className="mb-4 text-center">
                   {currentAnswer ? (
@@ -538,7 +543,8 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                       <CheckCircle2 className="mx-auto mb-2 h-12 w-12 text-[#22c55e]" />
                       <h4 className="text-lg font-semibold text-[#22c55e]">Great Job! 🎉</h4>
                       <p className="mt-1 text-sm text-muted-foreground">
-                        You'll see this again in {getNextIntervalDays(currentItem.intervalIndex + 1)} days
+                        You'll see this again in{" "}
+                        {getNextIntervalDays(currentItem.intervalIndex + 1)} days
                       </p>
                     </>
                   ) : (
@@ -555,18 +561,16 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                 {/* Points Earned */}
                 {pointsEarned > 0 && (
                   <div className="mb-4 rounded-lg border border-[#f97316]/20 bg-yellow-500/5 p-3">
-                    <div className="flex items-center justify-between mb-2">
+                    <div className="mb-2 flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Trophy className="h-5 w-5 text-[#f97316]" />
-                        <span className="font-semibold text-[#f97316]">
-                          +{pointsEarned} Points
-                        </span>
+                        <span className="font-semibold text-[#f97316]">+{pointsEarned} Points</span>
                       </div>
                       <Badge variant="outline" className="text-[#f97316]">
                         Total: {sessionPoints}
                       </Badge>
                     </div>
-                    <div className="text-xs text-muted-foreground space-y-1">
+                    <div className="space-y-1 text-xs text-muted-foreground">
                       {pointsBreakdown.map((line, idx) => (
                         <div key={idx}>{line}</div>
                       ))}
@@ -594,16 +598,22 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                     <div className="mb-3 rounded bg-[#22c55e]/10 px-3 py-2">
                       <div className="mb-1 flex items-center gap-2">
                         <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
-                        <span className="text-xs font-semibold text-[#22c55e]">Correct Answer:</span>
+                        <span className="text-xs font-semibold text-[#22c55e]">
+                          Correct Answer:
+                        </span>
                       </div>
-                      <p className="text-sm text-muted-foreground">{currentQuestion.correctAnswer}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {currentQuestion.correctAnswer}
+                      </p>
                     </div>
 
                     {selectedAnswer && selectedAnswer !== currentQuestion.correctAnswer && (
                       <div className="mb-3 rounded bg-orange-500/10 px-3 py-2">
                         <div className="mb-1 flex items-center gap-2">
                           <XCircle className="h-4 w-4 text-orange-500" />
-                          <span className="text-xs font-semibold text-orange-400">Your Answer:</span>
+                          <span className="text-xs font-semibold text-orange-400">
+                            Your Answer:
+                          </span>
                         </div>
                         <p className="text-sm text-muted-foreground">{selectedAnswer}</p>
                       </div>
@@ -622,10 +632,7 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
                 )}
 
                 <div className="mt-6">
-                  <Button
-                    onClick={handleNext}
-                    className="w-full bg-accent hover:bg-purple-700"
-                  >
+                  <Button onClick={handleNext} className="w-full bg-accent hover:bg-purple-700">
                     {isLastItem ? "Complete Session" : "Next Item"}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -637,12 +644,8 @@ export function ReviewSession({ items, onComplete, onExit }: ReviewSessionProps)
 
         {/* Progress Stats */}
         <div className="flex items-center justify-between text-sm text-muted-foreground">
-          <span>
-            Current retention: {currentItem.retention}%
-          </span>
-          <span>
-            {currentItem.totalReviews} previous reviews
-          </span>
+          <span>Current retention: {currentItem.retention}%</span>
+          <span>{currentItem.totalReviews} previous reviews</span>
         </div>
       </CardContent>
     </Card>

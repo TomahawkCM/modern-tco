@@ -12,27 +12,27 @@
  */
 export interface PairingQRData {
   version: 1;
-  ip: string;           // e.g., "192.168.1.100"
-  port: number;         // e.g., 8765
-  code: string;         // 6-digit pairing code
-  pubKey: string;       // ECDH public key (base64)
-  deviceName: string;   // e.g., "Rob's Phone"
-  timestamp: number;    // For expiry check (5 minutes)
+  ip: string; // e.g., "192.168.1.100"
+  port: number; // e.g., 8765
+  code: string; // 6-digit pairing code
+  pubKey: string; // ECDH public key (base64)
+  deviceName: string; // e.g., "Rob's Phone"
+  timestamp: number; // For expiry check (5 minutes)
 }
 
 /**
  * Paired device stored in IndexedDB
  */
 export interface PairedDevice {
-  id: string;                   // UUID
-  deviceId: string;             // Remote device's unique ID
-  deviceName: string;           // Human-readable name
-  publicKey: string;            // Stored public key for future connections
-  lastSyncAt: Date | null;      // Last successful sync timestamp
-  lastSeenAt: Date;             // Last connection timestamp
-  lastIP: string;               // Last known IP address
-  lastPort: number;             // Last known port
-  trustLevel: 'trusted' | 'pending' | 'blocked';
+  id: string; // UUID
+  deviceId: string; // Remote device's unique ID
+  deviceName: string; // Human-readable name
+  publicKey: string; // Stored public key for future connections
+  lastSyncAt: Date | null; // Last successful sync timestamp
+  lastSeenAt: Date; // Last connection timestamp
+  lastIP: string; // Last known IP address
+  lastPort: number; // Last known port
+  trustLevel: "trusted" | "pending" | "blocked";
   createdAt: Date;
   updatedAt: Date;
 }
@@ -41,10 +41,10 @@ export interface PairedDevice {
  * This device's identity
  */
 export interface DeviceIdentity {
-  id: string;                   // This device's unique ID
-  deviceName: string;           // User-configurable name
-  privateKey?: string;          // ECDH private key (encrypted storage)
-  publicKey: string;            // ECDH public key
+  id: string; // This device's unique ID
+  deviceName: string; // User-configurable name
+  privateKey?: string; // ECDH private key (encrypted storage)
+  publicKey: string; // ECDH public key
   createdAt: Date;
 }
 
@@ -53,16 +53,16 @@ export interface DeviceIdentity {
 // ============================================================================
 
 export type SyncMessageType =
-  | 'HELLO'
-  | 'HELLO_ACK'
-  | 'SYNC_REQUEST'
-  | 'SYNC_RESPONSE'
-  | 'PUSH_CHANGES'
-  | 'PUSH_ACK'
-  | 'CONFLICT'
-  | 'CONFLICT_RESOLUTION'
-  | 'HEARTBEAT'
-  | 'GOODBYE';
+  | "HELLO"
+  | "HELLO_ACK"
+  | "SYNC_REQUEST"
+  | "SYNC_RESPONSE"
+  | "PUSH_CHANGES"
+  | "PUSH_ACK"
+  | "CONFLICT"
+  | "CONFLICT_RESOLUTION"
+  | "HEARTBEAT"
+  | "GOODBYE";
 
 /**
  * Message envelope for all sync messages
@@ -83,9 +83,9 @@ export interface SyncMessage {
 export interface HelloPayload {
   deviceName: string;
   deviceId: string;
-  pairingCode?: string;         // 6-digit code (first-time only)
-  publicKey: string;            // ECDH public key (base64)
-  protocolVersion: number;      // Current: 1
+  pairingCode?: string; // 6-digit code (first-time only)
+  publicKey: string; // ECDH public key (base64)
+  protocolVersion: number; // Current: 1
   appVersion: string;
 }
 
@@ -97,30 +97,30 @@ export interface HelloAckPayload {
   deviceName: string;
   deviceId: string;
   publicKey: string;
-  sessionKey?: string;          // Encrypted with shared secret
-  reason?: string;              // If not accepted
+  sessionKey?: string; // Encrypted with shared secret
+  reason?: string; // If not accepted
 }
 
 /**
  * Syncable entity types
  */
 export type EntityType =
-  | 'accounts'
-  | 'transactions'
-  | 'categories'
-  | 'budgets'
-  | 'receipts'
-  | 'subscriptions'
-  | 'loans'
-  | 'loanPayments'
-  | 'futurePurchases'
-  | 'retirementPlans'
-  | 'investments'
-  | 'portfolios'
-  | 'investmentHoldings'
-  | 'investmentTransactions'
-  | 'importMappings'
-  | 'importMetadata';
+  | "accounts"
+  | "transactions"
+  | "categories"
+  | "budgets"
+  | "receipts"
+  | "subscriptions"
+  | "loans"
+  | "loanPayments"
+  | "futurePurchases"
+  | "retirementPlans"
+  | "investments"
+  | "portfolios"
+  | "investmentHoldings"
+  | "investmentTransactions"
+  | "importMappings"
+  | "importMetadata";
 
 /**
  * Vector clock for conflict detection
@@ -136,18 +136,18 @@ export interface SyncEntity {
   id: string;
   data: Record<string, unknown>;
   updatedAt: number;
-  deletedAt?: number;           // Soft delete timestamp (tombstone)
-  version: number;              // Incrementing version for OCC
-  deviceId: string;             // Device that made the change
+  deletedAt?: number; // Soft delete timestamp (tombstone)
+  version: number; // Incrementing version for OCC
+  deviceId: string; // Device that made the change
 }
 
 /**
  * SYNC_REQUEST payload
  */
 export interface SyncRequestPayload {
-  mode: 'full' | 'delta';
+  mode: "full" | "delta";
   entities: EntityType[];
-  since?: number;               // Timestamp for delta sync
+  since?: number; // Timestamp for delta sync
   vectorClock?: VectorClock;
 }
 
@@ -155,7 +155,7 @@ export interface SyncRequestPayload {
  * SYNC_RESPONSE payload
  */
 export interface SyncResponsePayload {
-  mode: 'full' | 'delta';
+  mode: "full" | "delta";
   entities: {
     [K in EntityType]?: SyncEntity[];
   };
@@ -168,7 +168,7 @@ export interface SyncResponsePayload {
  * Change operation
  */
 export interface Operation {
-  type: 'create' | 'update' | 'delete';
+  type: "create" | "update" | "delete";
   id: string;
   data?: Record<string, unknown>;
   version: number;
@@ -197,7 +197,7 @@ export interface PushChangesPayload {
 export interface RejectedChange {
   id: string;
   entity: EntityType;
-  reason: 'version_conflict' | 'validation_error' | 'unknown';
+  reason: "version_conflict" | "validation_error" | "unknown";
   currentVersion?: number;
   currentData?: Record<string, unknown>;
 }
@@ -227,7 +227,7 @@ export interface ConflictPayload {
 export interface ConflictResolutionPayload {
   entity: EntityType;
   id: string;
-  resolution: 'keep_local' | 'keep_remote' | 'merge';
+  resolution: "keep_local" | "keep_remote" | "merge";
   mergedData?: Record<string, unknown>;
   newVersion: number;
 }
@@ -244,7 +244,7 @@ export interface HeartbeatPayload {
  * GOODBYE payload
  */
 export interface GoodbyePayload {
-  reason: 'user_request' | 'timeout' | 'error';
+  reason: "user_request" | "timeout" | "error";
   finalVectorClock: VectorClock;
 }
 
@@ -253,12 +253,12 @@ export interface GoodbyePayload {
 // ============================================================================
 
 export type ConnectionState =
-  | 'disconnected'
-  | 'connecting'
-  | 'handshaking'
-  | 'connected'
-  | 'syncing'
-  | 'error';
+  | "disconnected"
+  | "connecting"
+  | "handshaking"
+  | "connected"
+  | "syncing"
+  | "error";
 
 export interface ConnectionInfo {
   state: ConnectionState;
@@ -299,7 +299,7 @@ export interface FieldConflict {
   field: string;
   localValue: unknown;
   remoteValue: unknown;
-  resolution: 'local' | 'remote' | 'manual';
+  resolution: "local" | "remote" | "manual";
 }
 
 /**

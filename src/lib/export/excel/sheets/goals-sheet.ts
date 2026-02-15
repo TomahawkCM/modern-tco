@@ -3,9 +3,9 @@
  * Savings goals progress and projections
  */
 
-import type { Workbook, Worksheet } from 'exceljs';
-import type { ExcelExportOptions, GoalProgressData } from '../types';
-import type { FuturePurchase } from '@/types/budget';
+import type { Workbook, Worksheet } from "exceljs";
+import type { ExcelExportOptions, GoalProgressData } from "../types";
+import type { FuturePurchase } from "@/types/budget";
 import {
   FONTS,
   FILLS,
@@ -19,7 +19,7 @@ import {
   freezePanes,
   createTitleSection,
   EXCEL_COLORS,
-} from '../styles';
+} from "../styles";
 
 interface GoalsSheetData {
   goals: FuturePurchase[];
@@ -31,9 +31,9 @@ interface GoalsSheetData {
 function isGoalOnTrack(goal: FuturePurchase): boolean {
   const now = new Date();
   const targetDate = new Date(goal.targetDate);
-  const monthsRemaining = Math.max(0,
-    (targetDate.getFullYear() - now.getFullYear()) * 12 +
-    (targetDate.getMonth() - now.getMonth())
+  const monthsRemaining = Math.max(
+    0,
+    (targetDate.getFullYear() - now.getFullYear()) * 12 + (targetDate.getMonth() - now.getMonth())
   );
 
   const amountRemaining = goal.targetAmount - goal.currentSavings;
@@ -70,18 +70,22 @@ function createProgressBar(percent: number, width = 20): string {
   const normalizedPercent = Math.min(1, Math.max(0, percent));
   const filled = Math.round(normalizedPercent * width);
   const empty = width - filled;
-  return '█'.repeat(filled) + '░'.repeat(empty);
+  return "█".repeat(filled) + "░".repeat(empty);
 }
 
 /**
  * Get priority display with color
  */
-function getPriorityInfo(priority: FuturePurchase['priority']): { display: string; color: string } {
+function getPriorityInfo(priority: FuturePurchase["priority"]): { display: string; color: string } {
   switch (priority) {
-    case 'high': return { display: 'High', color: 'EF4444' };
-    case 'medium': return { display: 'Medium', color: 'F59E0B' };
-    case 'low': return { display: 'Low', color: '10B981' };
-    default: return { display: priority, color: '6B7280' };
+    case "high":
+      return { display: "High", color: "EF4444" };
+    case "medium":
+      return { display: "Medium", color: "F59E0B" };
+    case "low":
+      return { display: "Low", color: "10B981" };
+    default:
+      return { display: priority, color: "6B7280" };
   }
 }
 
@@ -93,34 +97,34 @@ export async function generateGoalsSheet(
   data: GoalsSheetData,
   options: ExcelExportOptions
 ): Promise<Worksheet> {
-  const worksheet = workbook.addWorksheet('Goals', {
-    properties: { tabColor: { argb: 'FF0EA5E9' } }, // Sky blue tab
+  const worksheet = workbook.addWorksheet("Goals", {
+    properties: { tabColor: { argb: "FF0EA5E9" } }, // Sky blue tab
   });
 
   // Column definitions
   const columns = [
-    { header: 'Goal', key: 'name', width: 24 },
-    { header: 'Target', key: 'target', width: 14 },
-    { header: 'Current', key: 'current', width: 14 },
-    { header: 'Remaining', key: 'remaining', width: 14 },
-    { header: 'Progress', key: 'progress', width: 24 },
-    { header: 'Monthly', key: 'monthly', width: 12 },
-    { header: 'Target Date', key: 'targetDate', width: 12 },
-    { header: 'On Track?', key: 'onTrack', width: 10 },
-    { header: 'Priority', key: 'priority', width: 10 },
+    { header: "Goal", key: "name", width: 24 },
+    { header: "Target", key: "target", width: 14 },
+    { header: "Current", key: "current", width: 14 },
+    { header: "Remaining", key: "remaining", width: 14 },
+    { header: "Progress", key: "progress", width: 24 },
+    { header: "Monthly", key: "monthly", width: 12 },
+    { header: "Target Date", key: "targetDate", width: 12 },
+    { header: "On Track?", key: "onTrack", width: 10 },
+    { header: "Priority", key: "priority", width: 10 },
   ];
 
   // Create title section
   let currentRow = createTitleSection(
     worksheet,
-    'Savings Goals',
-    'Track progress toward your financial goals',
+    "Savings Goals",
+    "Track progress toward your financial goals",
     new Date()
   );
 
   // Separate active and completed goals
-  const activeGoals = data.goals.filter(g => !g.isCompleted);
-  const completedGoals = data.goals.filter(g => g.isCompleted);
+  const activeGoals = data.goals.filter((g) => !g.isCompleted);
+  const completedGoals = data.goals.filter((g) => g.isCompleted);
 
   // Calculate summary stats
   const totalTargetAmount = activeGoals.reduce((sum, g) => sum + g.targetAmount, 0);
@@ -130,27 +134,27 @@ export async function generateGoalsSheet(
 
   // Summary section
   const summaryRow = worksheet.getRow(currentRow);
-  summaryRow.getCell(1).value = 'GOALS SUMMARY';
+  summaryRow.getCell(1).value = "GOALS SUMMARY";
   summaryRow.getCell(1).font = { ...FONTS.subheader, size: 12 };
   summaryRow.getCell(1).fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'FFF3F4F6' },
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFF3F4F6" },
   };
   worksheet.mergeCells(`A${currentRow}:I${currentRow}`);
   currentRow++;
 
   // Summary stats
   const summaryData = [
-    ['Total Target:', totalTargetAmount, NUMBER_FORMATS.currency],
-    ['Total Saved:', totalCurrentAmount, NUMBER_FORMATS.currency],
-    ['Total Remaining:', totalTargetAmount - totalCurrentAmount, NUMBER_FORMATS.currency],
-    ['Monthly Contributions:', totalMonthlyContribution, NUMBER_FORMATS.currency],
-    ['Active Goals:', activeGoals.length, null],
-    ['Completed Goals:', completedGoals.length, null],
+    ["Total Target:", totalTargetAmount, NUMBER_FORMATS.currency],
+    ["Total Saved:", totalCurrentAmount, NUMBER_FORMATS.currency],
+    ["Total Remaining:", totalTargetAmount - totalCurrentAmount, NUMBER_FORMATS.currency],
+    ["Monthly Contributions:", totalMonthlyContribution, NUMBER_FORMATS.currency],
+    ["Active Goals:", activeGoals.length, null],
+    ["Completed Goals:", completedGoals.length, null],
   ];
 
-  summaryData.forEach(item => {
+  summaryData.forEach((item) => {
     const row = worksheet.getRow(currentRow);
     row.getCell(1).value = item[0];
     row.getCell(1).font = FONTS.body;
@@ -164,13 +168,16 @@ export async function generateGoalsSheet(
 
   // Overall progress bar
   const progressRow = worksheet.getRow(currentRow);
-  progressRow.getCell(1).value = 'Overall Progress:';
+  progressRow.getCell(1).value = "Overall Progress:";
   progressRow.getCell(1).font = FONTS.body;
-  progressRow.getCell(2).value = `${createProgressBar(overallProgress)} ${(overallProgress * 100).toFixed(0)}%`;
+  progressRow.getCell(2).value =
+    `${createProgressBar(overallProgress)} ${(overallProgress * 100).toFixed(0)}%`;
   progressRow.getCell(2).font = {
-    name: 'Consolas',
+    name: "Consolas",
     size: 10,
-    color: { argb: overallProgress >= 0.75 ? 'FF10B981' : overallProgress >= 0.5 ? 'FFF59E0B' : 'FF6B7280' },
+    color: {
+      argb: overallProgress >= 0.75 ? "FF10B981" : overallProgress >= 0.5 ? "FFF59E0B" : "FF6B7280",
+    },
   };
   currentRow += 2;
 
@@ -178,12 +185,12 @@ export async function generateGoalsSheet(
   if (activeGoals.length > 0) {
     const activeHeaderRow = worksheet.getRow(currentRow);
     worksheet.mergeCells(`A${currentRow}:I${currentRow}`);
-    activeHeaderRow.getCell(1).value = 'ACTIVE GOALS';
+    activeHeaderRow.getCell(1).value = "ACTIVE GOALS";
     activeHeaderRow.getCell(1).font = { ...FONTS.subheader, size: 11 };
     activeHeaderRow.getCell(1).fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FFCCFBF1' }, // Light teal
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "FFCCFBF1" }, // Light teal
     };
     currentRow++;
 
@@ -197,7 +204,10 @@ export async function generateGoalsSheet(
     currentRow++;
 
     // Set column widths
-    setColumnWidths(worksheet, columns.map(c => c.width));
+    setColumnWidths(
+      worksheet,
+      columns.map((c) => c.width)
+    );
 
     // Sort by priority (high first) then by progress (closest to completion first)
     const sortedGoals = [...activeGoals].sort((a, b) => {
@@ -231,7 +241,7 @@ export async function generateGoalsSheet(
       row.getCell(3).value = goal.currentSavings;
       row.getCell(3).numFmt = NUMBER_FORMATS.currency;
       row.getCell(3).alignment = ALIGNMENTS.right;
-      row.getCell(3).font = { ...FONTS.body, color: { argb: 'FF10B981' } };
+      row.getCell(3).font = { ...FONTS.body, color: { argb: "FF10B981" } };
 
       // Remaining
       row.getCell(4).value = remaining;
@@ -241,9 +251,9 @@ export async function generateGoalsSheet(
       // Progress bar
       row.getCell(5).value = `${createProgressBar(progress, 15)} ${(progress * 100).toFixed(0)}%`;
       row.getCell(5).font = {
-        name: 'Consolas',
+        name: "Consolas",
         size: 10,
-        color: { argb: progress >= 0.75 ? 'FF10B981' : progress >= 0.5 ? 'FFF59E0B' : 'FF6B7280' },
+        color: { argb: progress >= 0.75 ? "FF10B981" : progress >= 0.5 ? "FFF59E0B" : "FF6B7280" },
       };
 
       // Monthly contribution
@@ -257,8 +267,8 @@ export async function generateGoalsSheet(
       row.getCell(7).alignment = ALIGNMENTS.center;
 
       // On track indicator
-      row.getCell(8).value = onTrack ? '✓ Yes' : '⚠ Behind';
-      row.getCell(8).font = { ...FONTS.body, color: { argb: onTrack ? 'FF10B981' : 'FFF59E0B' } };
+      row.getCell(8).value = onTrack ? "✓ Yes" : "⚠ Behind";
+      row.getCell(8).font = { ...FONTS.body, color: { argb: onTrack ? "FF10B981" : "FFF59E0B" } };
       row.getCell(8).alignment = ALIGNMENTS.center;
 
       // Priority
@@ -272,9 +282,9 @@ export async function generateGoalsSheet(
       if (!onTrack) {
         for (let i = 1; i <= columns.length; i++) {
           row.getCell(i).fill = {
-            type: 'pattern',
-            pattern: 'solid',
-            fgColor: { argb: 'FFFEF3C7' }, // Light amber
+            type: "pattern",
+            pattern: "solid",
+            fgColor: { argb: "FFFEF3C7" }, // Light amber
           };
         }
       }
@@ -285,7 +295,7 @@ export async function generateGoalsSheet(
     // Totals row
     currentRow++;
     const totalRow = worksheet.getRow(currentRow);
-    totalRow.getCell(1).value = 'TOTAL';
+    totalRow.getCell(1).value = "TOTAL";
     totalRow.getCell(1).font = { ...FONTS.body, bold: true };
 
     totalRow.getCell(2).value = totalTargetAmount;
@@ -294,7 +304,7 @@ export async function generateGoalsSheet(
 
     totalRow.getCell(3).value = totalCurrentAmount;
     totalRow.getCell(3).numFmt = NUMBER_FORMATS.currency;
-    totalRow.getCell(3).font = { ...FONTS.body, bold: true, color: { argb: 'FF10B981' } };
+    totalRow.getCell(3).font = { ...FONTS.body, bold: true, color: { argb: "FF10B981" } };
 
     totalRow.getCell(4).value = totalTargetAmount - totalCurrentAmount;
     totalRow.getCell(4).numFmt = NUMBER_FORMATS.currency;
@@ -306,9 +316,9 @@ export async function generateGoalsSheet(
 
     for (let i = 1; i <= columns.length; i++) {
       totalRow.getCell(i).fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFE5E7EB' },
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "FFE5E7EB" },
       };
       totalRow.getCell(i).border = BORDERS.all;
     }
@@ -320,12 +330,12 @@ export async function generateGoalsSheet(
 
     const completedHeaderRow = worksheet.getRow(currentRow);
     worksheet.mergeCells(`A${currentRow}:I${currentRow}`);
-    completedHeaderRow.getCell(1).value = 'COMPLETED GOALS';
+    completedHeaderRow.getCell(1).value = "COMPLETED GOALS";
     completedHeaderRow.getCell(1).font = { ...FONTS.subheader, size: 11 };
     completedHeaderRow.getCell(1).fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FFD1FAE5' }, // Light green
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "FFD1FAE5" }, // Light green
     };
     currentRow++;
 
@@ -339,10 +349,10 @@ export async function generateGoalsSheet(
       row.getCell(2).numFmt = NUMBER_FORMATS.currency;
 
       row.getCell(5).value = `${createProgressBar(1, 15)} 100%`;
-      row.getCell(5).font = { name: 'Consolas', size: 10, color: { argb: 'FF10B981' } };
+      row.getCell(5).font = { name: "Consolas", size: 10, color: { argb: "FF10B981" } };
 
-      row.getCell(8).value = '✓ Complete';
-      row.getCell(8).font = { ...FONTS.body, color: { argb: 'FF10B981' } };
+      row.getCell(8).value = "✓ Complete";
+      row.getCell(8).font = { ...FONTS.body, color: { argb: "FF10B981" } };
       row.getCell(8).alignment = ALIGNMENTS.center;
 
       styleDataRow(row, index, columns.length);

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
 /**
  * Recommendations Panel Component (H-032)
  * Shows top 3 financial health recommendations with links to relevant sections
  */
 
-import { useMemo } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+import { useMemo } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   Lightbulb,
   TrendingUp,
@@ -17,10 +17,10 @@ import {
   BarChart3,
   PiggyBank,
   ChevronRight,
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
-import type { HealthScoreResult, FactorType } from '@/lib/analytics/health-score';
-import { useSeniorsMode } from '@/hooks/useSeniorsMode';
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import type { HealthScoreResult, FactorType } from "@/lib/analytics/health-score";
+import { useSeniorsMode } from "@/hooks/useSeniorsMode";
 
 interface RecommendationsPanelProps {
   result: HealthScoreResult | null;
@@ -35,39 +35,39 @@ const FACTOR_CONFIG: Record<
 > = {
   savingsRate: {
     icon: PiggyBank,
-    label: 'Savings',
-    link: '/budget-app/transactions?filter=income',
-    linkLabel: 'View Income',
+    label: "Savings",
+    link: "/budget-app/transactions?filter=income",
+    linkLabel: "View Income",
   },
   debtToIncome: {
     icon: CreditCard,
-    label: 'Debt',
-    link: '/budget-app/loans',
-    linkLabel: 'Manage Loans',
+    label: "Debt",
+    link: "/budget-app/loans",
+    linkLabel: "Manage Loans",
   },
   budgetAdherence: {
     icon: Target,
-    label: 'Budget',
-    link: '/budget-app/budgets',
-    linkLabel: 'Adjust Budgets',
+    label: "Budget",
+    link: "/budget-app/budgets",
+    linkLabel: "Adjust Budgets",
   },
   emergencyFund: {
     icon: Shield,
-    label: 'Emergency Fund',
-    link: '/budget-app/planning/future',
-    linkLabel: 'Plan Savings',
+    label: "Emergency Fund",
+    link: "/budget-app/planning/future",
+    linkLabel: "Plan Savings",
   },
   investmentGrowth: {
     icon: TrendingUp,
-    label: 'Investments',
-    link: '/budget-app/investments',
-    linkLabel: 'View Portfolio',
+    label: "Investments",
+    link: "/budget-app/investments",
+    linkLabel: "View Portfolio",
   },
   expenseStability: {
     icon: BarChart3,
-    label: 'Expenses',
-    link: '/budget-app/reports',
-    linkLabel: 'View Reports',
+    label: "Expenses",
+    link: "/budget-app/reports",
+    linkLabel: "View Reports",
   },
 };
 
@@ -97,12 +97,12 @@ export function RecommendationsPanel({
     return (
       <div
         className={cn(
-          'flex flex-col items-center justify-center rounded-xl bg-slate-800/50 border border-white/10 p-8',
+          "flex flex-col items-center justify-center rounded-xl border border-white/10 bg-slate-800/50 p-8",
           className
         )}
       >
-        <Lightbulb className="h-12 w-12 text-slate-600 mb-3" />
-        <p className="text-slate-400 text-center">
+        <Lightbulb className="mb-3 h-12 w-12 text-slate-600" />
+        <p className="text-center text-slate-400">
           Add more financial data to receive personalized recommendations
         </p>
       </div>
@@ -111,26 +111,21 @@ export function RecommendationsPanel({
 
   return (
     <motion.div
-      className={cn(
-        'rounded-xl bg-slate-800/50 border border-white/10 p-6',
-        className
-      )}
+      className={cn("rounded-xl border border-white/10 bg-slate-800/50 p-6", className)}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
       {/* Header */}
-      <div className="flex items-center gap-3 mb-6">
+      <div className="mb-6 flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-500/20">
           <Lightbulb className="h-5 w-5 text-amber-400" />
         </div>
         <div>
-          <h3 className={cn('font-semibold text-white', isSeniorsMode && 'text-lg')}>
+          <h3 className={cn("font-semibold text-white", isSeniorsMode && "text-lg")}>
             Top Recommendations
           </h3>
-          <p className="text-xs text-slate-400">
-            Ways to improve your financial health
-          </p>
+          <p className="text-xs text-slate-400">Ways to improve your financial health</p>
         </div>
       </div>
 
@@ -142,7 +137,7 @@ export function RecommendationsPanel({
           return (
             <motion.div
               key={rec.type}
-              className="rounded-lg bg-white/5 border border-white/10 p-4"
+              className="rounded-lg border border-white/10 bg-white/5 p-4"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -150,28 +145,32 @@ export function RecommendationsPanel({
               <div className="flex items-start gap-3">
                 {/* Icon */}
                 <div
-                  className="flex h-8 w-8 items-center justify-center rounded-lg shrink-0"
-                  style={{ backgroundColor: `${rec.config.label === 'Savings' ? '#22c55e' : '#94a3b8'}20` }}
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+                  style={{
+                    backgroundColor: `${rec.config.label === "Savings" ? "#22c55e" : "#94a3b8"}20`,
+                  }}
                 >
                   <Icon
                     className="h-4 w-4"
-                    style={{ color: rec.config.label === 'Savings' ? '#22c55e' : '#94a3b8' }}
+                    style={{ color: rec.config.label === "Savings" ? "#22c55e" : "#94a3b8" }}
                   />
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 min-w-0">
+                <div className="min-w-0 flex-1">
                   {/* Factor Label & Score */}
-                  <div className="flex items-center justify-between mb-1">
-                    <span className={cn('font-medium text-white', isSeniorsMode && 'text-base')}>
+                  <div className="mb-1 flex items-center justify-between">
+                    <span className={cn("font-medium text-white", isSeniorsMode && "text-base")}>
                       {rec.config.label}
                     </span>
                     <span
                       className={cn(
-                        'text-xs font-medium px-2 py-0.5 rounded',
-                        rec.percentage >= 60 && 'bg-green-500/20 text-green-400',
-                        rec.percentage >= 40 && rec.percentage < 60 && 'bg-yellow-500/20 text-yellow-400',
-                        rec.percentage < 40 && 'bg-red-500/20 text-red-400'
+                        "rounded px-2 py-0.5 text-xs font-medium",
+                        rec.percentage >= 60 && "bg-green-500/20 text-green-400",
+                        rec.percentage >= 40 &&
+                          rec.percentage < 60 &&
+                          "bg-yellow-500/20 text-yellow-400",
+                        rec.percentage < 40 && "bg-red-500/20 text-red-400"
                       )}
                     >
                       {rec.score.toFixed(0)}/{rec.maxScore}
@@ -179,7 +178,7 @@ export function RecommendationsPanel({
                   </div>
 
                   {/* Tip */}
-                  <p className={cn('text-slate-400 mb-3', isSeniorsMode ? 'text-sm' : 'text-xs')}>
+                  <p className={cn("mb-3 text-slate-400", isSeniorsMode ? "text-sm" : "text-xs")}>
                     {rec.improvementTip}
                   </p>
 
@@ -187,8 +186,8 @@ export function RecommendationsPanel({
                   <Link
                     href={rec.config.link}
                     className={cn(
-                      'inline-flex items-center gap-1 text-teal-400 hover:text-teal-300 transition-colors',
-                      isSeniorsMode ? 'text-sm' : 'text-xs'
+                      "inline-flex items-center gap-1 text-teal-400 transition-colors hover:text-teal-300",
+                      isSeniorsMode ? "text-sm" : "text-xs"
                     )}
                   >
                     {rec.config.linkLabel}
@@ -198,16 +197,16 @@ export function RecommendationsPanel({
               </div>
 
               {/* Progress Bar */}
-              <div className="mt-3 h-1.5 rounded-full bg-white/10 overflow-hidden">
+              <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10">
                 <motion.div
                   className="h-full rounded-full"
                   style={{
                     backgroundColor:
                       rec.percentage >= 60
-                        ? '#22c55e'
+                        ? "#22c55e"
                         : rec.percentage >= 40
-                        ? '#eab308'
-                        : '#ef4444',
+                          ? "#eab308"
+                          : "#ef4444",
                   }}
                   initial={{ width: 0 }}
                   animate={{ width: `${rec.percentage}%` }}
@@ -223,7 +222,7 @@ export function RecommendationsPanel({
       {result.factors.length > maxRecommendations && (
         <Link
           href="/budget-app/reports"
-          className="mt-4 flex items-center justify-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
+          className="mt-4 flex items-center justify-center gap-2 text-sm text-slate-400 transition-colors hover:text-white"
         >
           View all factors
           <ChevronRight className="h-4 w-4" />

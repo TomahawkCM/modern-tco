@@ -12,14 +12,14 @@ const nextConfig = {
 
   // Disable static optimization for error pages to avoid build issues
   generateBuildId: async () => {
-    return 'build-' + Date.now()
+    return "build-" + Date.now();
   },
 
   // Performance optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
-  
+
   // Optimize CSS and imports
   experimental: {
     optimizeCss: true,
@@ -50,10 +50,10 @@ const nextConfig = {
       "@radix-ui/react-toast",
       "class-variance-authority",
       "tailwind-merge",
-      "clsx"
+      "clsx",
     ],
   },
-  
+
   // Image optimization
   images: {
     formats: ["image/avif", "image/webp"],
@@ -97,9 +97,7 @@ const nextConfig = {
             },
             shared: {
               name(module, chunks) {
-                return `shared-${chunks
-                  .map((chunk) => chunk.name)
-                  .join("-")}`.substring(0, 30);
+                return `shared-${chunks.map((chunk) => chunk.name).join("-")}`.substring(0, 30);
               },
               priority: 10,
               reuseExistingChunk: true,
@@ -164,7 +162,7 @@ const nextConfig = {
               "base-uri 'self'",
               "form-action 'self'",
               "frame-ancestors 'none'",
-              "upgrade-insecure-requests"
+              "upgrade-insecure-requests",
             ].join("; "),
           },
         ],

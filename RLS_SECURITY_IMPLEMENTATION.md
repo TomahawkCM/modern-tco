@@ -11,12 +11,14 @@ Added comprehensive Row Level Security (RLS) policies to protect user data in co
 ## Tables Secured
 
 ### 1. **users**
+
 - **Policies**:
   - `users_select_own`: Users can read their own profile
   - `users_update_own`: Users can update their own profile
 - **Auto-insert**: New users automatically created via trigger on `auth.users`
 
 ### 2. **user_progress**
+
 - **Policies**:
   - `user_progress_select_own`: View own progress
   - `user_progress_insert_own`: Create own progress records
@@ -24,6 +26,7 @@ Added comprehensive Row Level Security (RLS) policies to protect user data in co
   - `user_progress_delete_own`: Delete own progress (for resets)
 
 ### 3. **exam_sessions**
+
 - **Policies**:
   - `exam_sessions_select_own`: View own exam sessions
   - `exam_sessions_insert_own`: Create own sessions
@@ -31,6 +34,7 @@ Added comprehensive Row Level Security (RLS) policies to protect user data in co
   - `exam_sessions_delete_own`: Delete own sessions
 
 ### 4. **user_statistics**
+
 - **Policies**:
   - `user_statistics_select_own`: View own statistics
   - `user_statistics_insert_own`: Manual corrections allowed
@@ -38,6 +42,7 @@ Added comprehensive Row Level Security (RLS) policies to protect user data in co
 - **Note**: Statistics are automatically updated via triggers
 
 ### 5. **questions** (Shared Resource)
+
 - **Policies**:
   - `questions_select_auth`: All authenticated users can read
   - `questions_update_creator`: Only creator can update
@@ -46,11 +51,13 @@ Added comprehensive Row Level Security (RLS) policies to protect user data in co
 ## Security Model
 
 All policies follow the pattern:
+
 ```sql
 auth.uid() = user_id
 ```
 
 This ensures:
+
 - ✅ Users can only access their own data
 - ✅ No cross-user data leakage
 - ✅ Automatic enforcement at database level
@@ -73,6 +80,7 @@ CREATE TRIGGER on_auth_user_created
 ### ✅ Already Using `user_id`
 
 The following services already include `user_id` in operations:
+
 - `profileService.ts` - All queries filtered by `user_id`
 - Progress tracking - Uses `auth.uid()`
 - Exam sessions - Creates with `user_id`
@@ -94,7 +102,7 @@ psql $DATABASE_URL -f supabase/migrations/20251012000001_add_rls_policies_core_t
 - [ ] Sign in as User A
 - [ ] Create progress records
 - [ ] Verify User A can see their own data
-- [ ] Sign in as User B  
+- [ ] Sign in as User B
 - [ ] Verify User B cannot see User A's data
 - [ ] Verify User B can create their own data
 - [ ] Test admin access (if applicable)

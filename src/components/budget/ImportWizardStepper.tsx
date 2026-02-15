@@ -3,13 +3,13 @@
  * Visual progress indicator for multi-step import process
  */
 
-import { Check } from 'lucide-react';
+import { Check } from "lucide-react";
 
 export interface WizardStep {
   id: string;
   title: string;
   description: string;
-  status: 'pending' | 'current' | 'complete';
+  status: "pending" | "current" | "complete";
 }
 
 interface ImportWizardStepperProps {
@@ -24,34 +24,29 @@ export function ImportWizardStepper({ steps, currentStep }: ImportWizardStepperP
         {steps.map((step, stepIdx) => (
           <li
             key={step.id}
-            className={`relative ${stepIdx !== steps.length - 1 ? 'pr-8 sm:pr-20 flex-1' : ''}`}
+            className={`relative ${stepIdx !== steps.length - 1 ? "flex-1 pr-8 sm:pr-20" : ""}`}
           >
             {/* Connector Line */}
             {stepIdx !== steps.length - 1 && (
-              <div
-                className="absolute top-4 left-4 w-full h-0.5"
-                aria-hidden="true"
-              >
+              <div className="absolute left-4 top-4 h-0.5 w-full" aria-hidden="true">
                 <div
                   className={`h-full transition-all duration-500 ${
-                    stepIdx < currentStep
-                      ? 'bg-teal-600'
-                      : 'bg-gray-200'
+                    stepIdx < currentStep ? "bg-teal-600" : "bg-gray-200"
                   }`}
                 />
               </div>
             )}
 
             {/* Step Circle */}
-            <div className="relative flex items-start group">
+            <div className="group relative flex items-start">
               <span className="flex h-9 items-center">
-                {step.status === 'complete' ? (
-                  <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 group-hover:bg-teal-700 transition-colors">
+                {step.status === "complete" ? (
+                  <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 transition-colors group-hover:bg-teal-700">
                     <Check className="h-5 w-5 text-white" aria-hidden="true" />
                   </span>
-                ) : step.status === 'current' ? (
+                ) : step.status === "current" ? (
                   <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-teal-600 bg-white">
-                    <span className="h-2.5 w-2.5 rounded-full bg-teal-600 animate-pulse" />
+                    <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-teal-600" />
                   </span>
                 ) : (
                   <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border-2 border-gray-300 bg-white group-hover:border-gray-400">
@@ -64,16 +59,16 @@ export function ImportWizardStepper({ steps, currentStep }: ImportWizardStepperP
               <span className="ml-4 flex min-w-0 flex-col">
                 <span
                   className={`text-sm font-medium ${
-                    step.status === 'complete'
-                      ? 'text-teal-600'
-                      : step.status === 'current'
-                      ? 'text-teal-600'
-                      : 'text-gray-500'
+                    step.status === "complete"
+                      ? "text-teal-600"
+                      : step.status === "current"
+                        ? "text-teal-600"
+                        : "text-gray-500"
                   }`}
                 >
                   {step.title}
                 </span>
-                <span className="text-xs text-gray-500 hidden sm:block">{step.description}</span>
+                <span className="hidden text-xs text-gray-500 sm:block">{step.description}</span>
               </span>
             </div>
           </li>

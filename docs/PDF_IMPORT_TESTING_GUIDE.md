@@ -31,6 +31,7 @@ This guide provides a comprehensive testing checklist for PDF bank statement imp
 **Purpose**: Verify basic PDF upload and extraction works correctly
 
 **Steps**:
+
 1. Upload a single-page PDF bank statement
 2. Verify format detection shows "PDF (Bank Statement)"
 3. Observe progress indicator ("Processing page 1/1...")
@@ -38,6 +39,7 @@ This guide provides a comprehensive testing checklist for PDF bank statement imp
 5. Review extracted transactions in preview table
 
 **Expected Results**:
+
 - ✅ All transactions extracted (count matches PDF)
 - ✅ Dates parsed correctly
 - ✅ Amounts accurate (negative for debits, positive for credits)
@@ -46,6 +48,7 @@ This guide provides a comprehensive testing checklist for PDF bank statement imp
 - ✅ Processing time <5 seconds
 
 **Known Issues**:
+
 - Multi-line descriptions may be concatenated (this is expected)
 
 ---
@@ -55,6 +58,7 @@ This guide provides a comprehensive testing checklist for PDF bank statement imp
 **Purpose**: Verify multi-page processing and performance
 
 **Steps**:
+
 1. Upload a 5-10 page PDF statement
 2. Watch real-time progress ("Processing page 3/8...")
 3. Verify progress bar updates smoothly
@@ -62,6 +66,7 @@ This guide provides a comprehensive testing checklist for PDF bank statement imp
 5. Review all transactions from all pages
 
 **Expected Results**:
+
 - ✅ All pages processed sequentially
 - ✅ Transaction count matches total across all pages
 - ✅ No missing transactions from middle pages
@@ -70,6 +75,7 @@ This guide provides a comprehensive testing checklist for PDF bank statement imp
 - ✅ No browser crashes or memory errors
 
 **Performance Monitoring**:
+
 ```
 Chrome DevTools → Performance tab
 - Check memory usage stays <500MB
@@ -83,18 +89,21 @@ Chrome DevTools → Performance tab
 **Purpose**: Verify high OCR accuracy for digital PDFs
 
 **Steps**:
+
 1. Upload a text-based PDF (not scanned)
 2. Check OCR confidence badge (should be green, >90%)
 3. Review transaction accuracy
 4. Verify no "⚠️ Review" flags on transactions
 
 **Expected Results**:
+
 - ✅ OCR confidence 95-99%
 - ✅ 100% extraction accuracy
 - ✅ All dates, amounts, descriptions perfect
 - ✅ No low-confidence warnings
 
 **How to Identify Text-Based PDF**:
+
 - Open PDF in viewer → can select and copy text
 - File size usually smaller than scanned equivalents
 
@@ -105,6 +114,7 @@ Chrome DevTools → Performance tab
 **Purpose**: Verify graceful degradation for scanned images
 
 **Steps**:
+
 1. Upload a scanned/image-based PDF
 2. Check for low OCR confidence warning (orange badge <70%)
 3. Verify warning message appears: "This may be a scanned/image-based PDF"
@@ -112,6 +122,7 @@ Chrome DevTools → Performance tab
 5. Manually verify flagged transactions against PDF
 
 **Expected Results**:
+
 - ✅ OCR confidence 70-90%
 - ✅ Warning displayed proactively
 - ✅ Low-confidence transactions flagged (orange badge)
@@ -119,6 +130,7 @@ Chrome DevTools → Performance tab
 - ✅ Users prompted to review carefully
 
 **Known Limitations**:
+
 - Handwritten text: <50% accuracy (unsupported)
 - Very blurry scans: May fail entirely
 - Recommend requesting CSV from bank instead
@@ -130,18 +142,21 @@ Chrome DevTools → Performance tab
 **Purpose**: Verify intelligent column detection for Home Trust format
 
 **Steps**:
+
 1. Upload Home Trust Bank PDF statement
 2. Verify format detected (check console logs)
 3. Check preview table for correct amounts
 4. Verify debits are negative, credits are positive
 
 **Expected Results**:
+
 - ✅ Console log shows: `bankFormat: 'home-trust'`
 - ✅ Debit transactions show as negative (e.g., -$50.00)
 - ✅ Credit transactions show as positive (e.g., +$1000.00)
 - ✅ Column detection confidence >70%
 
 **Home Trust Format Example**:
+
 ```
 Date       | Description    | Debit  | Credit | Balance
 01/15/2025 | STARBUCKS      | 12.45  | 0.00   | 1500.00
@@ -149,6 +164,7 @@ Date       | Description    | Debit  | Credit | Balance
 ```
 
 **Console Log to Verify**:
+
 ```
 [parseTableRows] Column detection: {
   bankFormat: 'home-trust',
@@ -165,18 +181,21 @@ Date       | Description    | Debit  | Credit | Balance
 **Purpose**: Verify warnings for large files
 
 **Steps**:
+
 1. Upload a PDF with >10 pages
 2. Check for orange warning banner
 3. Verify warning suggests CSV export alternative
 4. Monitor browser performance during processing
 
 **Expected Results**:
+
 - ✅ Warning appears: "Large PDF detected (15 pages)"
 - ✅ Suggests CSV export for faster processing
 - ✅ Processing still works (may be slow)
 - ✅ No crashes even on 20-page PDFs
 
 **Warning Message**:
+
 ```
 ⚠️ Large PDF detected (15 pages). Processing may take longer and use significant memory.
 💡 For very large statements, consider requesting a CSV export from your bank for faster processing.
@@ -189,18 +208,21 @@ Date       | Description    | Debit  | Credit | Balance
 **Purpose**: Verify PDF transactions integrate with duplicate detection
 
 **Steps**:
+
 1. Import a PDF statement
 2. Immediately re-import the same PDF
 3. Check for duplicate warnings in preview table
 4. Verify "DUPLICATE" badges on transactions
 
 **Expected Results**:
+
 - ✅ Second import shows all transactions as duplicates
 - ✅ Yellow "DUPLICATE" badges visible
 - ✅ Summary shows: "X duplicates will be skipped"
 - ✅ No false positives (<5% error rate)
 
 **Known Behavior**:
+
 - PDFs don't have FITID like OFX, so fuzzy matching is used
 - Minor OCR variations may cause false negatives
 
@@ -210,27 +232,28 @@ Date       | Description    | Debit  | Credit | Balance
 
 **Purpose**: Verify error handling and edge cases
 
-| Test Case | Steps | Expected Result |
-|-----------|-------|-----------------|
-| **Non-PDF file** | Upload .jpg image | Error: "File must be a PDF" |
-| **Corrupted PDF** | Upload broken PDF | Error: "Failed to read file" |
-| **Empty PDF** | Upload PDF with no transactions | Warning: "No transactions found" |
-| **Mixed formats** | PDF with tables + text | Best-effort extraction |
-| **Special characters** | Transactions with é, ñ, etc. | Characters preserved |
-| **Large amounts** | $1,000,000.00 | Commas handled correctly |
+| Test Case              | Steps                           | Expected Result                  |
+| ---------------------- | ------------------------------- | -------------------------------- |
+| **Non-PDF file**       | Upload .jpg image               | Error: "File must be a PDF"      |
+| **Corrupted PDF**      | Upload broken PDF               | Error: "Failed to read file"     |
+| **Empty PDF**          | Upload PDF with no transactions | Warning: "No transactions found" |
+| **Mixed formats**      | PDF with tables + text          | Best-effort extraction           |
+| **Special characters** | Transactions with é, ñ, etc.    | Characters preserved             |
+| **Large amounts**      | $1,000,000.00                   | Commas handled correctly         |
 
 ---
 
 ## 📊 Performance Benchmarks
 
-| PDF Type | Pages | Transactions | Expected Time | Memory Usage |
-|----------|-------|--------------|---------------|--------------|
-| Small    | 1-2   | 5-10         | <5s           | <100MB       |
-| Medium   | 3-5   | 20-50        | 10-30s        | 200-300MB    |
-| Large    | 6-10  | 50-100       | 30-60s        | 300-500MB    |
-| Very Large| 10+  | 100+         | 60-120s       | 400-600MB    |
+| PDF Type   | Pages | Transactions | Expected Time | Memory Usage |
+| ---------- | ----- | ------------ | ------------- | ------------ |
+| Small      | 1-2   | 5-10         | <5s           | <100MB       |
+| Medium     | 3-5   | 20-50        | 10-30s        | 200-300MB    |
+| Large      | 6-10  | 50-100       | 30-60s        | 300-500MB    |
+| Very Large | 10+   | 100+         | 60-120s       | 400-600MB    |
 
 **Testing Performance**:
+
 ```
 Chrome DevTools → Performance Monitor
 1. Start monitoring
@@ -246,6 +269,7 @@ Chrome DevTools → Performance Monitor
 After each test scenario, verify:
 
 ### **Data Accuracy**
+
 - [ ] Transaction count matches PDF
 - [ ] All dates within valid range (not future, <10 years old)
 - [ ] Amounts match PDF exactly (±$0.01 tolerance)
@@ -253,6 +277,7 @@ After each test scenario, verify:
 - [ ] No phantom transactions (not in PDF)
 
 ### **UI/UX**
+
 - [ ] Format detection badge displays correctly
 - [ ] Page count badge shows accurate number
 - [ ] OCR confidence badge color-coded (green/yellow/orange)
@@ -262,12 +287,14 @@ After each test scenario, verify:
 - [ ] Low-confidence rows flagged with "⚠️ Review"
 
 ### **Error Handling**
+
 - [ ] Invalid files rejected gracefully
 - [ ] Error messages are clear and actionable
 - [ ] No console errors (except expected warnings)
 - [ ] Can reset and try again after error
 
 ### **Performance**
+
 - [ ] Processing completes within expected time
 - [ ] Browser remains responsive during OCR
 - [ ] Memory released after completion
@@ -278,24 +305,28 @@ After each test scenario, verify:
 ## 🐛 Known Issues & Workarounds
 
 ### **Issue 1: Multi-line Descriptions Concatenated**
+
 **Symptom**: Long merchant addresses become single line
 **Example**: "STARBUCKS COFFEE 123 MAIN ST NEW YORK NY"
 **Workaround**: This is expected behavior (groupMultiLineTransactions)
 **Fix**: None needed - descriptions are still readable
 
 ### **Issue 2: OCR Errors on Scanned PDFs**
+
 **Symptom**: Confidence <70%, some characters misread
 **Example**: "O" read as "0", "l" read as "1"
 **Workaround**: Manual review of flagged transactions
 **Fix**: Request text-based PDF or CSV from bank
 
 ### **Issue 3: Date Format Ambiguity**
+
 **Symptom**: 01/05/2025 could be Jan 5 or May 1
 **Example**: Depends on bank format (US vs international)
 **Workaround**: Verify first transaction date against PDF
 **Fix**: Bank-specific date format detection (future enhancement)
 
 ### **Issue 4: Balance Column Confusion**
+
 **Symptom**: Final balance extracted as transaction amount
 **Example**: Rare cases where balance column has no header
 **Workaround**: Check amounts against PDF
@@ -317,22 +348,24 @@ After completing testing, document results:
 
 ### Test Results
 
-| Scenario | Status | Notes |
-|----------|--------|-------|
-| Scenario 1 | ✅ PASS | All 5 transactions extracted |
-| Scenario 2 | ✅ PASS | 8 pages in 42 seconds |
-| Scenario 3 | ✅ PASS | 96% OCR confidence |
-| Scenario 4 | N/A | No scanned PDF available |
-| Scenario 5 | ✅ PASS | Debit/Credit detected correctly |
-| Scenario 6 | N/A | <10 pages |
-| Scenario 7 | ✅ PASS | Duplicates flagged correctly |
-| Scenario 8 | ⚠️ PARTIAL | Empty PDF shows no error |
+| Scenario   | Status     | Notes                           |
+| ---------- | ---------- | ------------------------------- |
+| Scenario 1 | ✅ PASS    | All 5 transactions extracted    |
+| Scenario 2 | ✅ PASS    | 8 pages in 42 seconds           |
+| Scenario 3 | ✅ PASS    | 96% OCR confidence              |
+| Scenario 4 | N/A        | No scanned PDF available        |
+| Scenario 5 | ✅ PASS    | Debit/Credit detected correctly |
+| Scenario 6 | N/A        | <10 pages                       |
+| Scenario 7 | ✅ PASS    | Duplicates flagged correctly    |
+| Scenario 8 | ⚠️ PARTIAL | Empty PDF shows no error        |
 
 ### Issues Found
+
 1. Empty PDF shows "0 transactions" but no warning message
 2. Performance slower than expected (8 pages took 55s)
 
 ### Recommendations
+
 - Add warning for empty PDFs
 - Optimize OCR for multi-page processing
 ```

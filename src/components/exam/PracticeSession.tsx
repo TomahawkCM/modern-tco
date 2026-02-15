@@ -350,14 +350,22 @@ export function PracticeSession({
       <Card className="border-tanium-secondary/20 bg-tanium-dark/50">
         <CardHeader>
           <div className="flex items-start justify-between gap-3">
-            <CardTitle className="leading-relaxed text-foreground">{currentQuestion.question}</CardTitle>
+            <CardTitle className="leading-relaxed text-foreground">
+              {currentQuestion.question}
+            </CardTitle>
             <Button
               variant="outline"
               size="sm"
               onClick={async () => {
                 const text = `Q: ${currentQuestion.question}\nAnswer: ${currentQuestion.choices.find((c) => c.id === currentQuestion.correctAnswerId)?.text ?? ""}${currentQuestion.explanation ? `\nWhy: ${currentQuestion.explanation}` : ""}`;
-                await saveQuickNote(text, { tags: ["practice", currentQuestion.domain, currentQuestion.difficulty], user });
-                toast({ title: "Added to Notes", description: "View it under Notes for spaced review." });
+                await saveQuickNote(text, {
+                  tags: ["practice", currentQuestion.domain, currentQuestion.difficulty],
+                  user,
+                });
+                toast({
+                  title: "Added to Notes",
+                  description: "View it under Notes for spaced review.",
+                });
               }}
             >
               Add to Notes

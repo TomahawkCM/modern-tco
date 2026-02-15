@@ -2,17 +2,18 @@
 
 ## 1. Market Benchmark: What "Best-in-Class" Looks Like
 
-| Platform | Key Strengths | Notable Learning Science Hooks |
-| --- | --- | --- |
-| **Anki** | Open ecosystem, custom SM-2*/FSRS scheduling, community marketplaces, powerful add-ons | Fine-grained spaced repetition controls, leech suspension, incremental card creation |
-| **SuperMemo (SM18)** | Originator of SM-2 with incremental reading, detailed forgetting curve analytics | Algorithm tunes retention % targets per topic, promotes active recall + metacognitive reflection |
-| **Quizlet** | Massive shared decks, multimodal study modes (flashcards, tests, games) | Retrieval practice through varied formats, lightweight gamification, AI explanations |
-| **Brainscape** | Adaptive confidence-based repetition, polished UX | Confidence ratings map to spaced repetition intervals, analytics on mastery |
-| **RemNote** | Knowledge graph, backlinks, PDF/lecture capture, incremental elaboration | Integrates elaborative interrogation, dual coding (text + media), active recall workflows |
-| **Mochi / Memrise** | AI-assisted generation, streak mechanics, native mobile UX | Contextual hints, audio/visual embeds, interleaving through smart mixes |
-| **Art of Memory / Memory League** | Competitive training drills, mnemonic system coaching | Spaced retrieval, deliberate practice, community challenges reinforcing motivation |
+| Platform                          | Key Strengths                                                                           | Notable Learning Science Hooks                                                                   |
+| --------------------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Anki**                          | Open ecosystem, custom SM-2\*/FSRS scheduling, community marketplaces, powerful add-ons | Fine-grained spaced repetition controls, leech suspension, incremental card creation             |
+| **SuperMemo (SM18)**              | Originator of SM-2 with incremental reading, detailed forgetting curve analytics        | Algorithm tunes retention % targets per topic, promotes active recall + metacognitive reflection |
+| **Quizlet**                       | Massive shared decks, multimodal study modes (flashcards, tests, games)                 | Retrieval practice through varied formats, lightweight gamification, AI explanations             |
+| **Brainscape**                    | Adaptive confidence-based repetition, polished UX                                       | Confidence ratings map to spaced repetition intervals, analytics on mastery                      |
+| **RemNote**                       | Knowledge graph, backlinks, PDF/lecture capture, incremental elaboration                | Integrates elaborative interrogation, dual coding (text + media), active recall workflows        |
+| **Mochi / Memrise**               | AI-assisted generation, streak mechanics, native mobile UX                              | Contextual hints, audio/visual embeds, interleaving through smart mixes                          |
+| **Art of Memory / Memory League** | Competitive training drills, mnemonic system coaching                                   | Spaced retrieval, deliberate practice, community challenges reinforcing motivation               |
 
 **Patterns to emulate**
+
 - Rich authoring pipeline: bulk import, AI-assisted drafting, duplicate detection, readability checks.
 - Adaptive scheduling: modern FSRS-style algorithms, deck-level retention targets, auto-adjusted ease factors.
 - Contextual scaffolding: multi-step hints, linked resources, mnemonic suggestions, incremental elaboration.
@@ -51,24 +52,28 @@
 ## 5. Initiative Roadmap
 
 ### Phase 0 – Foundation & Hygiene (Weeks 1-2)
+
 - Run automated duplicate + similarity detection with rewrite queue.
 - Normalize metadata (`difficulty`, `source`, `domain`, hints) and ensure generator enforces schema.
 - Align taxonomy between generator, seeder, and UI filters; add automated tests for taxonomy drift.
 - Author style guide for tone, reading level (≤ Grade 8 target), and card templates by persona.
 
 ### Phase 1 – Learner Experience Lift (Weeks 3-5)
+
 - Onboarding microcopy + interactive tutorial explaining SM-2, ratings, and daily goals.
 - Replace JS alerts with inline progressive hints (keyword → question → explanation) and track usage.
 - Introduce diversified card templates (definition, scenario, decision tree, “why it matters”), with review mode mixing.
 - Surface readability + clarity checks in authoring pipeline; enforce acceptance criteria before publish.
 
 ### Phase 2 – Adaptive & Motivational Layer (Weeks 6-9)
+
 - Upgrade scheduler to FSRS-style adaptive intervals; expose mastery targets per domain/difficulty.
 - Add confidence slider / self-assessment to feed scheduling, with metacognitive prompts post-session.
 - Implement mastery heatmap dashboard + streak goals with recovery buffers (“soft streaks”).
 - Build deck diagnostics showing hardest cards, hint frequency, average recall time; feed author backlog.
 
 ### Phase 3 – Authoring & Community Scale (Weeks 10-14)
+
 - AI-assisted card drafting from modules, transcripts, and practice question misses (human-in-the-loop review).
 - Collaborative deck workflows: review queue, change history, tagging suggestions, duplicate warnings.
 - Marketplace-style sharing for curated decks (per release or customer vertical) with versioning.
@@ -114,4 +119,4 @@
 
 ---
 
-*SM-2 is the classic SuperMemo algorithm; FSRS (Free Spaced Repetition Scheduler) is a modern successor emphasizing speed, retention targets, and personalization.
+\*SM-2 is the classic SuperMemo algorithm; FSRS (Free Spaced Repetition Scheduler) is a modern successor emphasizing speed, retention targets, and personalization.

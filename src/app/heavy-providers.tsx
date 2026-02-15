@@ -47,9 +47,7 @@ export function HeavyProviders({ children }: { children: React.ReactNode }) {
             <ExamProvider>
               <AssessmentProvider>
                 <PracticeProvider>
-                  <SearchProvider>
-                    {children}
-                  </SearchProvider>
+                  <SearchProvider>{children}</SearchProvider>
                 </PracticeProvider>
               </AssessmentProvider>
             </ExamProvider>
@@ -68,9 +66,7 @@ export function LearningProviders({ children }: { children: React.ReactNode }) {
   return (
     <DatabaseProvider>
       <ProgressProvider>
-        <ModuleProvider>
-          {children}
-        </ModuleProvider>
+        <ModuleProvider>{children}</ModuleProvider>
       </ProgressProvider>
     </DatabaseProvider>
   );
@@ -86,9 +82,7 @@ export function PracticeOnlyProviders({ children }: { children: React.ReactNode 
     <DatabaseProvider>
       <ProgressProvider>
         <QuestionsProvider>
-          <PracticeProvider>
-            {children}
-          </PracticeProvider>
+          <PracticeProvider>{children}</PracticeProvider>
         </QuestionsProvider>
       </ProgressProvider>
     </DatabaseProvider>
@@ -105,9 +99,7 @@ export function ExamOnlyProviders({ children }: { children: React.ReactNode }) {
       <ProgressProvider>
         <QuestionsProvider>
           <ExamProvider>
-            <AssessmentProvider>
-              {children}
-            </AssessmentProvider>
+            <AssessmentProvider>{children}</AssessmentProvider>
           </ExamProvider>
         </QuestionsProvider>
       </ProgressProvider>

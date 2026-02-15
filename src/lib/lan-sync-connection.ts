@@ -14,7 +14,7 @@ import type {
   SyncEventType,
   SyncEvent,
   SyncEventListener,
-} from './lan-sync';
+} from "./lan-sync";
 
 import {
   CONNECTION_TIMEOUT,
@@ -28,7 +28,7 @@ import {
   createGoodbyeMessage,
   generateMessageId,
   SyncError,
-} from './lan-sync';
+} from "./lan-sync";
 
 // ============================================================================
 // Connection Manager
@@ -61,36 +61,36 @@ export class SyncConnection {
    */
   async connect(url: string): Promise<void> {
     if (this.ws) {
-      throw new SyncError('Already connected', 'SYNC_IN_PROGRESS');
+      throw new SyncError("Already connected", "SYNC_IN_PROGRESS");
     }
 
     this.isClosing = false;
-    this.updateState('connecting');
+    this.updateState("connecting");
 
     return new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
         this.ws?.close();
-        reject(new SyncError('Connection timeout', 'CONNECTION_TIMEOUT'));
+        reject(new SyncError("Connection timeout", "CONNECTION_TIMEOUT"));
       }, CONNECTION_TIMEOUT);
 
       try {
         this.ws = new WebSocket(url);
-        this.ws.binaryType = 'arraybuffer';
+        this.ws.binaryType = "arraybuffer";
 
         this.ws.onopen = () => {
           clearTimeout(timeout);
           this.reconnectAttempts = 0;
           this.initSession();
           this.startHeartbeat();
-          this.updateState('handshaking');
-          this.emit('device_connected', { url });
+          this.updateState("handshaking");
+          this.emit("device_connected", { url });
           resolve();
         };
 
         this.ws.onerror = (event) => {
           clearTimeout(timeout);
           this.handleError(event);
-          reject(new SyncError('Connection failed', 'CONNECTION_FAILED'));
+          reject(new SyncError("Connection failed", "CONNECTION_FAILED"));
         };
 
         this.ws.onclose = (event) => {
@@ -103,13 +103,7 @@ export class SyncConnection {
         };
       } catch (error) {
         clearTimeout(timeout);
-        reject(
-          new SyncError(
-            'Failed to create WebSocket',
-            'CONNECTION_FAILED',
-            error
-          )
-        );
+        reject(new SyncError("Failed to create WebSocket", "CONNECTION_FAILED", error));
       }
     });
   }
@@ -117,19 +111,15 @@ export class SyncConnection {
   /**
    * Disconnect from remote device
    */
-  async disconnect(reason: 'user_request' | 'timeout' | 'error' = 'user_request'): Promise<void> {
+  async disconnect(reason: "user_request" | "timeout" | "error" = "user_request"): Promise<void> {
     if (!this.ws || this.isClosing) return;
 
     this.isClosing = true;
-    this.updateState('disconnecting');
+    this.updateState("disconnecting");
 
     // Send GOODBYE message
     try {
-      const goodbye = createGoodbyeMessage(
-        this.deviceId,
-        reason,
-        this.vectorClock
-      );
+      const goodbye = createGoodbyeMessage(this.deviceId, reason, this.vectorClock);
       await this.sendMessage(goodbye);
     } catch {
       // Ignore send errors during disconnect
@@ -157,7 +147,7 @@ export class SyncConnection {
    * Get session state
    */
   get state(): SyncSessionState {
-    return this.session?.state || 'connecting';
+    return this.session?.state || "connecting";
   }
 
   // ==========================================================================
@@ -169,7 +159,7 @@ export class SyncConnection {
    */
   async sendMessage<T>(message: SyncMessage<T>): Promise<void> {
     if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
-      throw new SyncError('Not connected', 'NO_ACTIVE_SESSION');
+      throw new SyncError("Not connected", "NO_ACTIVE_SESSION");
     }
 
     const serialized = serializeMessage(message);
@@ -179,7 +169,7 @@ export class SyncConnection {
       const timeout = setTimeout(() => {
         this.messageTimeouts.delete(message.messageId);
         this.session?.pendingMessages.delete(message.messageId);
-        reject(new SyncError('Message timeout', 'MESSAGE_TIMEOUT'));
+        reject(new SyncError("Message timeout", "MESSAGE_TIMEOUT"));
       }, MESSAGE_TIMEOUT);
 
       this.messageTimeouts.set(message.messageId, timeout);
@@ -198,7 +188,7 @@ export class SyncConnection {
         this.ws!.send(serialized);
 
         // For fire-and-forget messages, resolve immediately
-        if (['HEARTBEAT', 'GOODBYE'].includes(message.type)) {
+        if (["HEARTBEAT", "GOODBYE"].includes(message.type)) {
           clearTimeout(timeout);
           this.messageTimeouts.delete(message.messageId);
           resolve();
@@ -210,7 +200,7 @@ export class SyncConnection {
       } catch (error) {
         clearTimeout(timeout);
         this.messageTimeouts.delete(message.messageId);
-        reject(new SyncError('Send failed', 'CONNECTION_FAILED', error));
+        reject(new SyncError("Send failed", "CONNECTION_FAILED", error));
       }
     });
   }
@@ -228,7 +218,7 @@ export class SyncConnection {
    */
   sendMessageNoWait<T>(message: SyncMessage<T>): void {
     if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
-      throw new SyncError('Not connected', 'NO_ACTIVE_SESSION');
+      throw new SyncError("Not connected", "NO_ACTIVE_SESSION");
     }
 
     const serialized = serializeMessage(message);
@@ -260,9 +250,7 @@ export class SyncConnection {
   private handleMessage(event: MessageEvent): void {
     try {
       const data =
-        typeof event.data === 'string'
-          ? event.data
-          : new TextDecoder().decode(event.data);
+        typeof event.data === "string" ? event.data : new TextDecoder().decode(event.data);
 
       const message = deserializeMessage(data);
 
@@ -272,18 +260,18 @@ export class SyncConnection {
       }
 
       // Emit message event for handlers
-      this.emit('message_received' as SyncEventType, {
+      this.emit("message_received" as SyncEventType, {
         message,
         deviceId: message.deviceId,
       });
 
       // Handle specific message types
       switch (message.type) {
-        case 'HEARTBEAT':
+        case "HEARTBEAT":
           // Update last seen time
           break;
 
-        case 'GOODBYE':
+        case "GOODBYE":
           this.handleRemoteDisconnect(message);
           break;
 
@@ -292,9 +280,8 @@ export class SyncConnection {
           break;
       }
     } catch (error) {
-      this.emit('error', {
-        error:
-          error instanceof Error ? error.message : 'Failed to parse message',
+      this.emit("error", {
+        error: error instanceof Error ? error.message : "Failed to parse message",
       });
     }
   }
@@ -303,9 +290,9 @@ export class SyncConnection {
    * Handle remote disconnect
    */
   private handleRemoteDisconnect(message: SyncMessage): void {
-    this.emit('device_disconnected', {
+    this.emit("device_disconnected", {
       deviceId: message.deviceId,
-      reason: 'remote_goodbye',
+      reason: "remote_goodbye",
     });
     this.cleanup();
   }
@@ -318,11 +305,11 @@ export class SyncConnection {
    * Handle WebSocket error
    */
   private handleError(event: Event): void {
-    this.emit('error', {
-      error: 'WebSocket error',
+    this.emit("error", {
+      error: "WebSocket error",
       event,
     });
-    this.updateState('error');
+    this.updateState("error");
   }
 
   /**
@@ -331,14 +318,14 @@ export class SyncConnection {
   private handleClose(event: CloseEvent): void {
     if (this.isClosing) {
       // Intentional close
-      this.emit('device_disconnected', {
-        reason: 'intentional',
+      this.emit("device_disconnected", {
+        reason: "intentional",
         code: event.code,
       });
     } else {
       // Unexpected close - attempt reconnect
-      this.emit('device_disconnected', {
-        reason: 'unexpected',
+      this.emit("device_disconnected", {
+        reason: "unexpected",
         code: event.code,
       });
       this.attemptReconnect();
@@ -352,8 +339,8 @@ export class SyncConnection {
    */
   private async attemptReconnect(): Promise<void> {
     if (this.isClosing || this.reconnectAttempts >= RETRY_ATTEMPTS) {
-      this.emit('sync_failed', {
-        reason: 'max_retries_exceeded',
+      this.emit("sync_failed", {
+        reason: "max_retries_exceeded",
         attempts: this.reconnectAttempts,
       });
       return;
@@ -365,8 +352,8 @@ export class SyncConnection {
     await new Promise((resolve) => setTimeout(resolve, delay));
 
     // Emit event for external handler to trigger reconnect
-    this.emit('status_changed', {
-      state: 'reconnecting',
+    this.emit("status_changed", {
+      state: "reconnecting",
       attempt: this.reconnectAttempts,
     });
   }
@@ -385,7 +372,7 @@ export class SyncConnection {
       deviceName: this.deviceName,
       startedAt: new Date(),
       lastMessageAt: new Date(),
-      state: 'connecting',
+      state: "connecting",
       vectorClock: { ...this.vectorClock },
       pendingMessages: new Map(),
     };
@@ -397,7 +384,7 @@ export class SyncConnection {
   updateState(state: SyncSessionState): void {
     if (this.session) {
       this.session.state = state;
-      this.emit('status_changed', { state });
+      this.emit("status_changed", { state });
     }
   }
 
@@ -471,7 +458,7 @@ export class SyncConnection {
   /**
    * Emit event to all listeners
    */
-  private emit(type: SyncEventType | 'message_received', data?: unknown): void {
+  private emit(type: SyncEventType | "message_received", data?: unknown): void {
     const event: SyncEvent = {
       type: type as SyncEventType,
       timestamp: new Date(),
@@ -506,7 +493,7 @@ export class SyncConnection {
 
     // Reject all pending resolvers
     Array.from(this.pendingResolvers.values()).forEach((resolver) => {
-      resolver.reject(new SyncError('Connection closed', 'NO_ACTIVE_SESSION'));
+      resolver.reject(new SyncError("Connection closed", "NO_ACTIVE_SESSION"));
     });
     this.pendingResolvers.clear();
 
@@ -518,7 +505,7 @@ export class SyncConnection {
       this.ws.onmessage = null;
 
       if (this.ws.readyState === WebSocket.OPEN) {
-        this.ws.close(1000, 'Normal closure');
+        this.ws.close(1000, "Normal closure");
       }
       this.ws = null;
     }
@@ -578,11 +565,7 @@ export class ConnectionPool {
     }
 
     // Create new connection
-    const connection = new SyncConnection(
-      this.deviceId,
-      this.deviceName,
-      this.getVectorClock()
-    );
+    const connection = new SyncConnection(this.deviceId, this.deviceName, this.getVectorClock());
 
     // Forward events
     connection.addEventListener((event) => {
@@ -616,9 +599,7 @@ export class ConnectionPool {
    * Disconnect from all devices
    */
   async disconnectAll(): Promise<void> {
-    const promises = Array.from(this.connections.keys()).map((id) =>
-      this.disconnect(id)
-    );
+    const promises = Array.from(this.connections.keys()).map((id) => this.disconnect(id));
     await Promise.all(promises);
   }
 
@@ -631,12 +612,9 @@ export class ConnectionPool {
     const promises = this.getActiveConnections().map(async (connection) => {
       try {
         await connection.sendMessage(message);
-        results.set(connection.currentSession?.deviceId || '', null);
+        results.set(connection.currentSession?.deviceId || "", null);
       } catch (error) {
-        results.set(
-          connection.currentSession?.deviceId || '',
-          error as Error
-        );
+        results.set(connection.currentSession?.deviceId || "", error as Error);
       }
     });
 
@@ -684,8 +662,8 @@ export class ConnectionPool {
     return {
       total: connections.length,
       connected: connections.filter((c) => c.isConnected).length,
-      connecting: connections.filter((c) => c.state === 'connecting').length,
-      error: connections.filter((c) => c.state === 'error').length,
+      connecting: connections.filter((c) => c.state === "connecting").length,
+      error: connections.filter((c) => c.state === "error").length,
     };
   }
 

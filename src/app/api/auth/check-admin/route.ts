@@ -13,7 +13,10 @@ export async function GET(request: NextRequest) {
   try {
     // Get authenticated user from Supabase server client (reads cookies)
     const supabase = await createClient();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
 
     if (authError || !user?.email) {
       return NextResponse.json({ isAdmin: false }, { status: 200 });
@@ -31,7 +34,7 @@ export async function GET(request: NextRequest) {
     // Return admin status
     return NextResponse.json({ isAdmin }, { status: 200 });
   } catch (error) {
-    console.error('[check-admin] Error:', error);
+    console.error("[check-admin] Error:", error);
     // Fail closed: return false on error
     return NextResponse.json({ isAdmin: false }, { status: 200 });
   }

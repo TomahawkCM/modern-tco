@@ -16,14 +16,12 @@ vi.mock("framer-motion", () => ({
       ...props
     }: React.HTMLAttributes<HTMLDivElement> & Record<string, unknown>) => {
       // Strip framer-motion-specific props before passing to DOM
-      const {
-        drag,
-        dragConstraints,
-        dragElastic,
-        onDragEnd,
-        ...htmlProps
-      } = props;
-      return <div data-testid="motion-div" {...htmlProps}>{children}</div>;
+      const { drag, dragConstraints, dragElastic, onDragEnd, ...htmlProps } = props;
+      return (
+        <div data-testid="motion-div" {...htmlProps}>
+          {children}
+        </div>
+      );
     },
   },
 }));

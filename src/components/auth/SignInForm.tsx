@@ -36,7 +36,7 @@ export function SignInForm({ onSuccess }: SignInFormProps = {}) {
 
     if (!email || !password) {
       const errorMsg = ErrorMessages.fieldRequired("Email and password");
-      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`);
       return;
     }
 
@@ -44,14 +44,14 @@ export function SignInForm({ onSuccess }: SignInFormProps = {}) {
       const { error } = await signIn(email, password);
       if (error) {
         const errorMsg = ErrorMessages.loginFailed;
-        setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
+        setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`);
       } else {
         onSuccess?.();
         router.push("/dashboard");
       }
     } catch (error) {
       const errorMsg = humanizeError(error);
-      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`);
     }
   };
 

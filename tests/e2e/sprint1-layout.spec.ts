@@ -35,9 +35,7 @@ test.describe("Mobile layout (375×812)", () => {
 
   test("Home tab is active on dashboard", async ({ page }) => {
     await page.goto(`${BASE_URL}/budget-app`);
-    const homeTab = page.locator(
-      'nav[aria-label="Mobile navigation"] a[href="/budget-app"]'
-    );
+    const homeTab = page.locator('nav[aria-label="Mobile navigation"] a[href="/budget-app"]');
     // Active tab should have teal text color class
     await expect(homeTab).toHaveClass(/text-teal-400/);
   });
@@ -61,15 +59,11 @@ test.describe("Mobile layout (375×812)", () => {
     await expect(header).toContainText("Budget App");
   });
 
-  test("content area has bottom padding for tab bar clearance", async ({
-    page,
-  }) => {
+  test("content area has bottom padding for tab bar clearance", async ({ page }) => {
     await page.goto(`${BASE_URL}/budget-app`);
     const main = page.locator("#main-content");
     // pb-16 = 4rem = 64px padding-bottom
-    const paddingBottom = await main.evaluate(
-      (el) => getComputedStyle(el).paddingBottom
-    );
+    const paddingBottom = await main.evaluate((el) => getComputedStyle(el).paddingBottom);
     expect(parseFloat(paddingBottom)).toBeGreaterThanOrEqual(56);
   });
 
@@ -93,9 +87,7 @@ test.describe("Tablet layout (768×1024)", () => {
     await expect(sidebar).toBeVisible();
 
     // Sidebar should be narrow (icon-only = 72px = w-18)
-    const width = await sidebar.evaluate(
-      (el) => el.getBoundingClientRect().width
-    );
+    const width = await sidebar.evaluate((el) => el.getBoundingClientRect().width);
     expect(width).toBeLessThanOrEqual(80); // Allow small tolerance
     expect(width).toBeGreaterThanOrEqual(64);
   });
@@ -121,14 +113,10 @@ test.describe("Tablet layout (768×1024)", () => {
     await expect(firstLabel).not.toBeVisible();
   });
 
-  test("collapse toggle is NOT visible on tablet (only lg+)", async ({
-    page,
-  }) => {
+  test("collapse toggle is NOT visible on tablet (only lg+)", async ({ page }) => {
     await page.goto(`${BASE_URL}/budget-app`);
     // The collapse button has class "hidden lg:flex"
-    const collapseBtn = page
-      .locator('aside[aria-label="Main sidebar"] > button')
-      .first();
+    const collapseBtn = page.locator('aside[aria-label="Main sidebar"] > button').first();
     await expect(collapseBtn).not.toBeVisible();
   });
 
@@ -151,9 +139,7 @@ test.describe("Desktop layout (1440×900)", () => {
     const sidebar = page.locator('aside[aria-label="Main sidebar"]');
     await expect(sidebar).toBeVisible();
 
-    const width = await sidebar.evaluate(
-      (el) => el.getBoundingClientRect().width
-    );
+    const width = await sidebar.evaluate((el) => el.getBoundingClientRect().width);
     // w-60 = 15rem = 240px
     expect(width).toBeGreaterThanOrEqual(230);
     expect(width).toBeLessThanOrEqual(250);
@@ -167,28 +153,20 @@ test.describe("Desktop layout (1440×900)", () => {
 
   test("collapse toggle is visible on desktop", async ({ page }) => {
     await page.goto(`${BASE_URL}/budget-app`);
-    const collapseBtn = page
-      .locator('aside[aria-label="Main sidebar"] > button')
-      .first();
+    const collapseBtn = page.locator('aside[aria-label="Main sidebar"] > button').first();
     await expect(collapseBtn).toBeVisible();
   });
 
-  test("clicking collapse toggle shrinks sidebar to icon-only", async ({
-    page,
-  }) => {
+  test("clicking collapse toggle shrinks sidebar to icon-only", async ({ page }) => {
     await page.goto(`${BASE_URL}/budget-app`);
     const sidebar = page.locator('aside[aria-label="Main sidebar"]');
-    const collapseBtn = page
-      .locator('aside[aria-label="Main sidebar"] > button')
-      .first();
+    const collapseBtn = page.locator('aside[aria-label="Main sidebar"] > button').first();
 
     await collapseBtn.click();
     // Wait for CSS transition
     await page.waitForTimeout(300);
 
-    const width = await sidebar.evaluate(
-      (el) => el.getBoundingClientRect().width
-    );
+    const width = await sidebar.evaluate((el) => el.getBoundingClientRect().width);
     // Should collapse to ~72px (w-18)
     expect(width).toBeLessThanOrEqual(80);
     expect(width).toBeGreaterThanOrEqual(64);
@@ -201,15 +179,11 @@ test.describe("Desktop layout (1440×900)", () => {
 
     const contentContainer = page.locator(".max-w-\\[1440px\\]");
     await expect(contentContainer).toBeVisible();
-    const width = await contentContainer.evaluate(
-      (el) => el.getBoundingClientRect().width
-    );
+    const width = await contentContainer.evaluate((el) => el.getBoundingClientRect().width);
     expect(width).toBeLessThanOrEqual(1440);
   });
 
-  test("bottom tab bar and FAB are NOT visible on desktop", async ({
-    page,
-  }) => {
+  test("bottom tab bar and FAB are NOT visible on desktop", async ({ page }) => {
     await page.goto(`${BASE_URL}/budget-app`);
     const nav = page.locator('nav[aria-label="Mobile navigation"]');
     await expect(nav).not.toBeVisible();
@@ -237,19 +211,13 @@ test.describe("PWA and meta tags", () => {
 
   test("apple-mobile-web-app-capable meta exists", async ({ page }) => {
     await page.goto(`${BASE_URL}/budget-app`);
-    const meta = page.locator(
-      'meta[name="apple-mobile-web-app-capable"]'
-    );
+    const meta = page.locator('meta[name="apple-mobile-web-app-capable"]');
     await expect(meta).toHaveAttribute("content", "yes");
   });
 
-  test("apple-mobile-web-app-status-bar-style is black-translucent", async ({
-    page,
-  }) => {
+  test("apple-mobile-web-app-status-bar-style is black-translucent", async ({ page }) => {
     await page.goto(`${BASE_URL}/budget-app`);
-    const meta = page.locator(
-      'meta[name="apple-mobile-web-app-status-bar-style"]'
-    );
+    const meta = page.locator('meta[name="apple-mobile-web-app-status-bar-style"]');
     await expect(meta).toHaveAttribute("content", "black-translucent");
   });
 
@@ -260,9 +228,7 @@ test.describe("PWA and meta tags", () => {
     expect(content).toContain("viewport-fit=cover");
   });
 
-  test("theme-color meta tags exist for both color schemes", async ({
-    page,
-  }) => {
+  test("theme-color meta tags exist for both color schemes", async ({ page }) => {
     await page.goto(`${BASE_URL}/budget-app`);
     const darkTheme = page.locator(
       'meta[name="theme-color"][media="(prefers-color-scheme: dark)"]'

@@ -71,6 +71,7 @@ Create a **world-class, local-first home budget application** that empowers user
 ## v1 Scope Summary
 
 **What We're Building**:
+
 - Modern UI/UX upgrade (research-driven, seniors-optimized)
 - 3 theme modes (light, dark, high-contrast) + reduced motion
 - Reorganized navigation (mobile-first hybrid: tab bar + hamburger)
@@ -80,6 +81,7 @@ Create a **world-class, local-first home budget application** that empowers user
 - Comprehensive documentation (user guides + developer docs)
 
 **What We're NOT Building** (defer to v1.1+):
+
 - Live bank connections
 - Advanced ML/AI predictions
 - Multi-user household accounts
@@ -104,6 +106,7 @@ Create a **world-class, local-first home budget application** that empowers user
 ## Alignment with Existing Codebase
 
 **Current State (Before v1)**:
+
 - ✅ 9 major sections (Dashboard, Transactions, Budgets, Loans, Investments, Future Plans, Retirement, Reports, OCR)
 - ✅ CSV/PDF/OFX imports with duplicate detection
 - ✅ Full loan amortization with extra payment calc
@@ -112,6 +115,7 @@ Create a **world-class, local-first home budget application** that empowers user
 - ✅ Basic accessibility (keyboard nav, ARIA labels)
 
 **v1 Enhancements**:
+
 - 🎨 UI/UX modernization (not rebuilding features!)
 - ♿ Accessibility modes (dark/high-contrast/reduced motion)
 - 🗺️ Navigation reorganization (better discoverability)

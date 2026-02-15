@@ -42,14 +42,14 @@
 
     /* Typography - Standard */
     --base-font-size: 16px;
-    --font-size-xs: 0.75rem;    /* 12px */
-    --font-size-sm: 0.875rem;   /* 14px */
-    --font-size-base: 1rem;     /* 16px */
-    --font-size-lg: 1.125rem;   /* 18px */
-    --font-size-xl: 1.25rem;    /* 20px */
-    --font-size-2xl: 1.5rem;    /* 24px */
-    --font-size-3xl: 1.875rem;  /* 30px */
-    --font-size-4xl: 2.25rem;   /* 36px */
+    --font-size-xs: 0.75rem; /* 12px */
+    --font-size-sm: 0.875rem; /* 14px */
+    --font-size-base: 1rem; /* 16px */
+    --font-size-lg: 1.125rem; /* 18px */
+    --font-size-xl: 1.25rem; /* 20px */
+    --font-size-2xl: 1.5rem; /* 24px */
+    --font-size-3xl: 1.875rem; /* 30px */
+    --font-size-4xl: 2.25rem; /* 36px */
 
     /* Seniors Mode Multiplier (set by SeniorsModeContext) */
     --seniors-font-multiplier: 1;
@@ -86,21 +86,21 @@
     --touch-fab: 56px;
 
     /* Financial Semantic Colors — Light Mode */
-    --color-income: #0099E6;
-    --color-expense: #E6005E;
-    --color-savings: #00CC62;
-    --color-financial-warning: #D97706;
-    --color-financial-danger: #DC2626;
-    --color-financial-accent: #0D9488;
+    --color-income: #0099e6;
+    --color-expense: #e6005e;
+    --color-savings: #00cc62;
+    --color-financial-warning: #d97706;
+    --color-financial-danger: #dc2626;
+    --color-financial-accent: #0d9488;
 
     /* Surface Colors — Light Mode */
-    --color-bg: #FAFAFA;
-    --color-surface: #FFFFFF;
-    --color-surface-hover: #F8F9FA;
-    --color-border-subtle: #DEE2E6;
+    --color-bg: #fafafa;
+    --color-surface: #ffffff;
+    --color-surface-hover: #f8f9fa;
+    --color-border-subtle: #dee2e6;
     --color-text-primary: #212529;
-    --color-text-secondary: #868E96;
-    --color-text-disabled: #ADB5BD;
+    --color-text-secondary: #868e96;
+    --color-text-disabled: #adb5bd;
 
     /* Animation Tokens */
     --duration-instant: 0ms;
@@ -108,13 +108,13 @@
     --duration-normal: 200ms;
     --duration-emphasized: 300ms;
     --duration-dramatic: 500ms;
-    --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1.0);
-    --ease-in: cubic-bezier(0.4, 0.0, 1.0, 1.0);
-    --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1.0);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
 
     /* Font Stacks */
-    --font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
-    --font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
+    --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", "SF Mono", "Cascadia Code", monospace;
 
     /* Safe Area Insets (env() with fallbacks) */
     --safe-top: env(safe-area-inset-top, 0px);
@@ -154,21 +154,21 @@
     --ring: 173 80% 40%; /* teal-500 */
 
     /* Financial Semantic Colors — Dark Mode */
-    --color-income: #1AB5FF;
-    --color-expense: #FF1A7A;
-    --color-savings: #1AFF88;
-    --color-financial-warning: #F59E0B;
-    --color-financial-danger: #EF4444;
-    --color-financial-accent: #14B8A6;
+    --color-income: #1ab5ff;
+    --color-expense: #ff1a7a;
+    --color-savings: #1aff88;
+    --color-financial-warning: #f59e0b;
+    --color-financial-danger: #ef4444;
+    --color-financial-accent: #14b8a6;
 
     /* Surface Colors — Dark Mode */
-    --color-bg: #1A1B1E;
-    --color-surface: #25262B;
-    --color-surface-hover: #2C2E33;
-    --color-border-subtle: #373A40;
-    --color-text-primary: #C1C2C5;
+    --color-bg: #1a1b1e;
+    --color-surface: #25262b;
+    --color-surface-hover: #2c2e33;
+    --color-border-subtle: #373a40;
+    --color-text-primary: #c1c2c5;
     --color-text-secondary: #909296;
-    --color-text-disabled: #5C5F66;
+    --color-text-disabled: #5c5f66;
   }
 }
 
@@ -269,14 +269,30 @@
 }
 
 /* Seniors Mode - Typography Scale */
-.seniors-mode .text-xs { font-size: calc(var(--font-size-xs) * var(--seniors-font-multiplier, 1)); }
-.seniors-mode .text-sm { font-size: calc(var(--font-size-sm) * var(--seniors-font-multiplier, 1)); }
-.seniors-mode .text-base { font-size: calc(var(--font-size-base) * var(--seniors-font-multiplier, 1)); }
-.seniors-mode .text-lg { font-size: calc(var(--font-size-lg) * var(--seniors-font-multiplier, 1)); }
-.seniors-mode .text-xl { font-size: calc(var(--font-size-xl) * var(--seniors-font-multiplier, 1)); }
-.seniors-mode .text-2xl { font-size: calc(var(--font-size-2xl) * var(--seniors-font-multiplier, 1)); }
-.seniors-mode .text-3xl { font-size: calc(var(--font-size-3xl) * var(--seniors-font-multiplier, 1)); }
-.seniors-mode .text-4xl { font-size: calc(var(--font-size-4xl) * var(--seniors-font-multiplier, 1)); }
+.seniors-mode .text-xs {
+  font-size: calc(var(--font-size-xs) * var(--seniors-font-multiplier, 1));
+}
+.seniors-mode .text-sm {
+  font-size: calc(var(--font-size-sm) * var(--seniors-font-multiplier, 1));
+}
+.seniors-mode .text-base {
+  font-size: calc(var(--font-size-base) * var(--seniors-font-multiplier, 1));
+}
+.seniors-mode .text-lg {
+  font-size: calc(var(--font-size-lg) * var(--seniors-font-multiplier, 1));
+}
+.seniors-mode .text-xl {
+  font-size: calc(var(--font-size-xl) * var(--seniors-font-multiplier, 1));
+}
+.seniors-mode .text-2xl {
+  font-size: calc(var(--font-size-2xl) * var(--seniors-font-multiplier, 1));
+}
+.seniors-mode .text-3xl {
+  font-size: calc(var(--font-size-3xl) * var(--seniors-font-multiplier, 1));
+}
+.seniors-mode .text-4xl {
+  font-size: calc(var(--font-size-4xl) * var(--seniors-font-multiplier, 1));
+}
 
 /* Seniors Mode - Touch Targets (52px for enhanced accessibility) */
 .seniors-mode button,
@@ -351,12 +367,24 @@
   --spacing-unit: 1.5;
 }
 
-.seniors-increased-spacing .gap-1 { gap: calc(0.25rem * var(--spacing-unit)); }
-.seniors-increased-spacing .gap-2 { gap: calc(0.5rem * var(--spacing-unit)); }
-.seniors-increased-spacing .gap-3 { gap: calc(0.75rem * var(--spacing-unit)); }
-.seniors-increased-spacing .gap-4 { gap: calc(1rem * var(--spacing-unit)); }
-.seniors-increased-spacing .gap-6 { gap: calc(1.5rem * var(--spacing-unit)); }
-.seniors-increased-spacing .gap-8 { gap: calc(2rem * var(--spacing-unit)); }
+.seniors-increased-spacing .gap-1 {
+  gap: calc(0.25rem * var(--spacing-unit));
+}
+.seniors-increased-spacing .gap-2 {
+  gap: calc(0.5rem * var(--spacing-unit));
+}
+.seniors-increased-spacing .gap-3 {
+  gap: calc(0.75rem * var(--spacing-unit));
+}
+.seniors-increased-spacing .gap-4 {
+  gap: calc(1rem * var(--spacing-unit));
+}
+.seniors-increased-spacing .gap-6 {
+  gap: calc(1.5rem * var(--spacing-unit));
+}
+.seniors-increased-spacing .gap-8 {
+  gap: calc(2rem * var(--spacing-unit));
+}
 
 /* Seniors Mode - Simplified UI */
 .seniors-simplified {
@@ -467,7 +495,9 @@
 .seniors-high-contrast :focus-visible {
   outline: 4px solid hsl(var(--foreground)) !important;
   outline-offset: 4px !important;
-  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 6px hsl(var(--foreground));
+  box-shadow:
+    0 0 0 2px hsl(var(--background)),
+    0 0 0 6px hsl(var(--foreground));
 }
 
 /* Seniors Mode - Enhanced Cursor */

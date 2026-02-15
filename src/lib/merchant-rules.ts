@@ -6,8 +6,8 @@
  * that automatically applies to future transactions from the same merchant.
  */
 
-import { db } from '@/lib/budget-db';
-import type { MerchantRule, Transaction } from '@/types/budget';
+import { db } from "@/lib/budget-db";
+import type { MerchantRule, Transaction } from "@/types/budget";
 
 /**
  * Create a new merchant auto-categorization rule.
@@ -26,17 +26,14 @@ export async function createRule(
     category,
     subcategory,
     confidence: 1.0,
-    source: 'user',
+    source: "user",
     applyCount: 0,
     createdAt: now,
     updatedAt: now,
   };
 
   // Check if rule already exists for this merchant token
-  const existing = await db.merchantRules
-    .where('merchantToken')
-    .equals(merchantToken)
-    .first();
+  const existing = await db.merchantRules.where("merchantToken").equals(merchantToken).first();
 
   if (existing) {
     // Update existing rule
@@ -57,10 +54,7 @@ export async function createRule(
  * Find a rule matching a given merchant token.
  */
 export async function findRule(merchantToken: string): Promise<MerchantRule | undefined> {
-  return db.merchantRules
-    .where('merchantToken')
-    .equals(merchantToken)
-    .first();
+  return db.merchantRules.where("merchantToken").equals(merchantToken).first();
 }
 
 /**
@@ -87,11 +81,11 @@ export async function applyRules(
 
   for (const tx of transactions) {
     // Skip already-categorized transactions
-    if (tx.category && tx.category.trim() !== '') continue;
+    if (tx.category && tx.category.trim() !== "") continue;
 
     // Try to find a matching merchant token from the transaction description
-    const { extractMerchantToken } = await import('@/lib/merchant-tokenizer');
-    const token = extractMerchantToken(tx.description || tx.originalDescription || '');
+    const { extractMerchantToken } = await import("@/lib/merchant-tokenizer");
+    const token = extractMerchantToken(tx.description || tx.originalDescription || "");
 
     if (token && ruleMap.has(token)) {
       const rule = ruleMap.get(token)!;
@@ -125,5 +119,5 @@ export async function deleteRule(ruleId: string): Promise<void> {
  * Get all merchant rules, sorted by most recently updated.
  */
 export async function getAllRules(): Promise<MerchantRule[]> {
-  return db.merchantRules.orderBy('createdAt').reverse().toArray();
+  return db.merchantRules.orderBy("createdAt").reverse().toArray();
 }

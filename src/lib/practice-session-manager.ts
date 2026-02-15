@@ -8,7 +8,7 @@ import {
 } from "@/types/practice-session";
 import { type Question, TCODomain, type Difficulty } from "@/types/exam";
 import { createId } from "@paralleldrive/cuid2";
-import { defaultDifficultyRecord } from '@/lib/difficulty';
+import { defaultDifficultyRecord } from "@/lib/difficulty";
 
 export class PracticeSessionManager {
   private session: PracticeSession | null = null;
@@ -188,10 +188,13 @@ export class PracticeSessionManager {
     const domainBreakdown: Record<
       TCODomain,
       { correct: number; total: number; percentage: number }
-    > = domainValues.reduce((acc, d) => {
-      acc[d] = { correct: 0, total: 0, percentage: 0 };
-      return acc;
-    }, {} as Record<TCODomain, { correct: number; total: number; percentage: number }>);
+    > = domainValues.reduce(
+      (acc, d) => {
+        acc[d] = { correct: 0, total: 0, percentage: 0 };
+        return acc;
+      },
+      {} as Record<TCODomain, { correct: number; total: number; percentage: number }>
+    );
 
     // Calculate difficulty breakdown
     const difficultyBreakdown: Record<

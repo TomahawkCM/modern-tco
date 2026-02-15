@@ -9,12 +9,14 @@
 ## Implementation Summary
 
 ✅ **Completed:**
+
 - Budget app layout navigation links
-- Sidebar footer action links  
+- Sidebar footer action links
 - Bottom navigation bar (mobile)
 - Keyboard shortcuts button
 
 ⏳ **Pattern Documented for:**
+
 - All remaining interactive elements across pages
 - Buttons in dashboard, transactions, budgets, etc.
 - Form inputs in modals
@@ -29,6 +31,7 @@
 All interactive elements **MUST** have a visible 2px focus ring with offset for keyboard navigation accessibility.
 
 **Standard Classes:**
+
 ```
 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2
 ```
@@ -72,7 +75,7 @@ focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2
   Save Transaction
 </button>
 
-// Secondary Button  
+// Secondary Button
 <button
   className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg
              hover:bg-gray-300 transition-colors
@@ -122,12 +125,11 @@ focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2
 
 ```tsx
 <div className="relative">
-  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+  <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
   <input
     type="search"
     placeholder="Search transactions..."
-    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg
-               focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+    className="w-full rounded-lg border border-gray-300 py-2 pl-10 pr-4 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500"
   />
 </div>
 ```
@@ -177,17 +179,20 @@ import { Button } from '@/components/ui/button';
 ## Files Already Updated
 
 ### ✅ src/app/budget-app/layout.tsx
+
 - All sidebar navigation links
 - Footer action links (Import, Export, Settings)
 - Keyboard shortcuts button
 - Bottom navigation bar (mobile)
 
 ### Pattern Established For:
+
 All other budget app pages should follow the same pattern:
+
 - src/app/budget-app/page.tsx (dashboard buttons)
 - src/app/budget-app/transactions/page.tsx (action buttons, search)
 - src/app/budget-app/budgets/page.tsx
-- src/app/budget-app/categories/page.tsx  
+- src/app/budget-app/categories/page.tsx
 - src/app/budget-app/investments/page.tsx
 - All modal components
 - All form components
@@ -224,6 +229,7 @@ pa11y http://localhost:3000/budget-app --standard WCAG2AA --threshold 0
 ```
 
 **Target Scores:**
+
 - Lighthouse Accessibility: ≥95%
 - Pa11y: 0 errors
 
@@ -232,12 +238,14 @@ pa11y http://localhost:3000/budget-app --standard WCAG2AA --threshold 0
 ## Common Mistakes to Avoid
 
 ### ❌ DON'T: Remove default focus styles without replacement
+
 ```tsx
 // BAD - Removes focus indicator entirely
 <button className="outline-none">Click me</button>
 ```
 
 ### ✅ DO: Replace with visible focus ring
+
 ```tsx
 // GOOD - Custom focus indicator
 <button className="focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
@@ -246,12 +254,14 @@ pa11y http://localhost:3000/budget-app --standard WCAG2AA --threshold 0
 ```
 
 ### ❌ DON'T: Use :focus without :focus-visible
+
 ```tsx
 // BAD - Shows ring on mouse click (annoying)
 <button className="focus:ring-2 focus:ring-teal-500">
 ```
 
 ### ✅ DO: Use Tailwind's focus: which respects :focus-visible
+
 ```tsx
 // GOOD - Only shows ring for keyboard navigation
 <button className="focus:outline-none focus:ring-2 focus:ring-teal-500">
@@ -263,15 +273,15 @@ pa11y http://localhost:3000/budget-app --standard WCAG2AA --threshold 0
 
 Budget App supports these keyboard shortcuts (all require visible focus indicators):
 
-| Key | Action | Element Type |
-|-----|--------|-------------|
-| `Tab` | Next element | All interactive |
-| `Shift + Tab` | Previous element | All interactive |
-| `Enter` | Activate | Buttons, links |
-| `Space` | Activate | Buttons, checkboxes |
-| `/` | Focus search | Search inputs |
-| `Esc` | Close modal | Modal dialogs |
-| `?` | Show shortcuts | Help button |
+| Key           | Action           | Element Type        |
+| ------------- | ---------------- | ------------------- |
+| `Tab`         | Next element     | All interactive     |
+| `Shift + Tab` | Previous element | All interactive     |
+| `Enter`       | Activate         | Buttons, links      |
+| `Space`       | Activate         | Buttons, checkboxes |
+| `/`           | Focus search     | Search inputs       |
+| `Esc`         | Close modal      | Modal dialogs       |
+| `?`           | Show shortcuts   | Help button         |
 
 ---
 
@@ -295,6 +305,7 @@ Budget App supports these keyboard shortcuts (all require visible focus indicato
    - Faster task completion
 
 ### Statistics
+
 - **15% of users** rely on keyboard navigation
 - **1.6 billion people** have disabilities worldwide
 - **Legal requirement** in EU as of June 28, 2025
@@ -306,7 +317,7 @@ Budget App supports these keyboard shortcuts (all require visible focus indicato
 Before merging any UI changes:
 
 - [ ] All links have focus indicators
-- [ ] All buttons have focus indicators  
+- [ ] All buttons have focus indicators
 - [ ] All form inputs have focus indicators
 - [ ] All interactive icons/elements have focus indicators
 - [ ] Focus ring is 2px with teal color
@@ -321,11 +332,13 @@ Before merging any UI changes:
 ## Next Steps
 
 ### Phase 2.2.2: Implement Logical Tab Order
+
 - Test tab order through all pages
 - Fix any out-of-order elements
 - Ensure modal focus trapping
 
 ### Phase 2.2.3: Test Keyboard-Only Workflows
+
 - Complete all core workflows without mouse
 - Import CSV
 - Add transaction
@@ -333,6 +346,7 @@ Before merging any UI changes:
 - Delete transaction
 
 ### Phase 2.3: Automated Accessibility Testing
+
 - Set up Lighthouse CI
 - Set up Pa11y in GitHub Actions
 - Configure WCAG AA threshold checks
@@ -342,4 +356,3 @@ Before merging any UI changes:
 **Last Updated:** November 6, 2025  
 **Status:** Core implementation complete, pattern documented  
 **Maintained By:** Budget App Accessibility Team
-

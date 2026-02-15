@@ -1,25 +1,21 @@
-'use client';
+"use client";
 
 import { Section } from "@/components/budget/landing/Section";
 import { useLandingContent } from "@/components/budget/landing/content";
 import { LandingCard } from "@/components/budget/landing/LandingCard";
 import { ArrowUpRight } from "lucide-react";
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
 export function OutcomesSection() {
   const content = useLandingContent();
-  const t = useTranslations('landing.outcomesSection');
+  const t = useTranslations("landing.outcomesSection");
 
   return (
     <Section>
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-            {t('title')}
-          </h2>
-          <p className="mt-3 max-w-2xl text-base text-slate-400">
-            {t('description')}
-          </p>
+          <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">{t("title")}</h2>
+          <p className="mt-3 max-w-2xl text-base text-slate-400">{t("description")}</p>
         </div>
       </div>
 
@@ -41,5 +37,3 @@ export function OutcomesSection() {
     </Section>
   );
 }
-
-

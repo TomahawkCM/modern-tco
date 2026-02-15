@@ -103,19 +103,12 @@ export default function ReviewNotification({
   };
 
   return (
-    <Alert
-      className={cn(
-        "relative",
-        style.bgClass,
-        style.textClass,
-        className
-      )}
-    >
+    <Alert className={cn("relative", style.bgClass, style.textClass, className)}>
       {/* Dismiss Button */}
       <Button
         variant="ghost"
         size="icon"
-        className="absolute top-2 right-2 h-6 w-6"
+        className="absolute right-2 top-2 h-6 w-6"
         onClick={handleDismiss}
         aria-label="Dismiss notification"
       >
@@ -133,7 +126,8 @@ export default function ReviewNotification({
               <div className="flex items-center gap-1.5">
                 <Brain className={cn("h-4 w-4", style.iconClass)} />
                 <span>
-                  <span className="font-semibold">{flashcardsDue}</span> flashcard{flashcardsDue > 1 ? "s" : ""}
+                  <span className="font-semibold">{flashcardsDue}</span> flashcard
+                  {flashcardsDue > 1 ? "s" : ""}
                 </span>
               </div>
             )}
@@ -142,7 +136,8 @@ export default function ReviewNotification({
               <div className="flex items-center gap-1.5">
                 <Target className={cn("h-4 w-4", style.iconClass)} />
                 <span>
-                  <span className="font-semibold">{questionsDue}</span> question{questionsDue > 1 ? "s" : ""}
+                  <span className="font-semibold">{questionsDue}</span> question
+                  {questionsDue > 1 ? "s" : ""}
                 </span>
               </div>
             )}
@@ -173,22 +168,14 @@ export default function ReviewNotification({
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-2 pt-1">
             <Link href="/review">
-              <Button
-                variant={style.buttonVariant}
-                size="sm"
-                className="gap-2"
-              >
+              <Button variant={style.buttonVariant} size="sm" className="gap-2">
                 <Clock className="h-4 w-4" />
                 Start Review
               </Button>
             </Link>
 
             <Link href="/review">
-              <Button
-                variant="outline"
-                size="sm"
-                className={style.textClass}
-              >
+              <Button variant="outline" size="sm" className={style.textClass}>
                 View Dashboard
               </Button>
             </Link>

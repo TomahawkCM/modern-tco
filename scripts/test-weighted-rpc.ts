@@ -1,9 +1,9 @@
 #!/usr/bin/env tsx
-import fs from 'fs';
-import path from 'path';
-import dotenv from 'dotenv';
+import fs from "fs";
+import path from "path";
+import dotenv from "dotenv";
 // Load env from .env.local if present
-const envLocal = path.resolve(process.cwd(), '.env.local');
+const envLocal = path.resolve(process.cwd(), ".env.local");
 if (fs.existsSync(envLocal)) dotenv.config({ path: envLocal });
 else dotenv.config();
 
@@ -25,7 +25,6 @@ async function main() {
 }
 
 main().catch((e) => {
-  console.error('RPC test failed:', e?.message || e);
+  console.error("RPC test failed:", e?.message || e);
   process.exit(1);
 });
-

@@ -69,16 +69,19 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
     }
   }, [queue, activeSession?.currentIndex]);
 
-  const handleFlashcardRating = useCallback(async (rating: SRRating) => {
-    if (!currentItem || !isFlashcardItem(currentItem)) return;
+  const handleFlashcardRating = useCallback(
+    async (rating: SRRating) => {
+      if (!currentItem || !isFlashcardItem(currentItem)) return;
 
-    const timeSpent = Math.floor((Date.now() - itemStartTime) / 1000);
-    await reviewFlashcard(currentItem.flashcard.id, rating, timeSpent);
+      const timeSpent = Math.floor((Date.now() - itemStartTime) / 1000);
+      await reviewFlashcard(currentItem.flashcard.id, rating, timeSpent);
 
-    // Move to next item
-    setShowAnswer(false);
-    nextItem();
-  }, [currentItem, itemStartTime, reviewFlashcard, nextItem]);
+      // Move to next item
+      setShowAnswer(false);
+      nextItem();
+    },
+    [currentItem, itemStartTime, reviewFlashcard, nextItem]
+  );
 
   const handleQuestionSubmit = useCallback(async () => {
     if (!currentItem || !isQuestionItem(currentItem) || !selectedAnswer) return;
@@ -96,9 +99,11 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
 
   const handleSessionComplete = useCallback(async () => {
     await completeSession();
-    trackReviewEvent('review_session_completed_ui', {
+    trackReviewEvent("review_session_completed_ui", {
       itemsReviewed: activeSession?.reviewed,
-      accuracy: activeSession?.reviewed ? (activeSession.correct / activeSession.reviewed) * 100 : 0,
+      accuracy: activeSession?.reviewed
+        ? (activeSession.correct / activeSession.reviewed) * 100
+        : 0,
     });
     onComplete?.();
   }, [completeSession, trackReviewEvent, activeSession, onComplete]);
@@ -119,51 +124,47 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
 
   if (!activeSession || !currentItem) {
     return (
-      <div className="text-center py-12">
+      <div className="py-12 text-center">
         <p className="text-muted-foreground">No active review session</p>
       </div>
     );
   }
 
-  const progress = activeSession.reviewed > 0
-    ? (activeSession.reviewed / (queue?.length || 1)) * 100
-    : 0;
-  const accuracy = activeSession.reviewed > 0
-    ? (activeSession.correct / activeSession.reviewed) * 100
-    : 0;
+  const progress =
+    activeSession.reviewed > 0 ? (activeSession.reviewed / (queue?.length || 1)) * 100 : 0;
+  const accuracy =
+    activeSession.reviewed > 0 ? (activeSession.correct / activeSession.reviewed) * 100 : 0;
 
   const isComplete = activeSession.currentIndex >= (queue?.length || 0);
   const targetDuration = activeSession.session?.target_duration_minutes;
-  const remainingTime = targetDuration
-    ? Math.max(0, targetDuration * 60 - elapsedTime)
-    : null;
+  const remainingTime = targetDuration ? Math.max(0, targetDuration * 60 - elapsedTime) : null;
 
   // Session complete screen
   if (isComplete) {
     return (
-      <Card className="max-w-2xl mx-auto">
+      <Card className="mx-auto max-w-2xl">
         <CardHeader>
           <div className="text-center">
-            <CheckCircle2 className="h-16 w-16 mx-auto mb-4 text-[#22c55e]" />
+            <CheckCircle2 className="mx-auto mb-4 h-16 w-16 text-[#22c55e]" />
             <CardTitle className="text-2xl">Session Complete!</CardTitle>
           </div>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="text-center p-4 bg-muted rounded-lg">
+            <div className="rounded-lg bg-muted p-4 text-center">
               <p className="text-3xl font-bold">{activeSession.reviewed}</p>
               <p className="text-sm text-muted-foreground">Items Reviewed</p>
             </div>
-            <div className="text-center p-4 bg-muted rounded-lg">
+            <div className="rounded-lg bg-muted p-4 text-center">
               <p className="text-3xl font-bold">{Math.round(accuracy)}%</p>
               <p className="text-sm text-muted-foreground">Accuracy</p>
             </div>
-            <div className="text-center p-4 bg-muted rounded-lg">
+            <div className="rounded-lg bg-muted p-4 text-center">
               <p className="text-3xl font-bold">{activeSession.flashcardsReviewed}</p>
               <p className="text-sm text-muted-foreground">Flashcards</p>
             </div>
-            <div className="text-center p-4 bg-muted rounded-lg">
+            <div className="rounded-lg bg-muted p-4 text-center">
               <p className="text-3xl font-bold">{activeSession.questionsReviewed}</p>
               <p className="text-sm text-muted-foreground">Questions</p>
             </div>
@@ -187,12 +188,12 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-4">
+    <div className="mx-auto max-w-4xl space-y-4">
       {/* Header Stats */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <Badge variant="outline" className="gap-2">
-            {currentItem.itemType === 'flashcard' ? (
+            {currentItem.itemType === "flashcard" ? (
               <>
                 <Brain className="h-3 w-3" />
                 Flashcard
@@ -213,7 +214,7 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
           {remainingTime !== null && (
             <div className="flex items-center gap-2 text-sm">
               <Clock className="h-4 w-4" />
-              <span className={remainingTime < 60 ? "text-orange-500 font-semibold" : ""}>
+              <span className={remainingTime < 60 ? "font-semibold text-orange-500" : ""}>
                 {formatTimeRemaining(remainingTime)}
               </span>
             </div>
@@ -247,14 +248,14 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
       {/* Pause Overlay */}
       {activeSession.isPaused && (
         <Card className="bg-muted/50 backdrop-blur">
-          <CardContent className="text-center py-12">
-            <Pause className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-            <p className="text-lg font-semibold mb-2">Session Paused</p>
-            <p className="text-sm text-muted-foreground mb-4">
+          <CardContent className="py-12 text-center">
+            <Pause className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+            <p className="mb-2 text-lg font-semibold">Session Paused</p>
+            <p className="mb-4 text-sm text-muted-foreground">
               Take a break. Resume when you're ready.
             </p>
             <Button onClick={handleResume}>
-              <Play className="h-4 w-4 mr-2" />
+              <Play className="mr-2 h-4 w-4" />
               Resume Review
             </Button>
           </CardContent>
@@ -267,31 +268,31 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
           <CardHeader>
             <div className="flex items-start justify-between">
               <Badge variant="secondary">
-                {currentItem.flashcard.srs_reps === 0 ? "New Card" : `Review #${currentItem.flashcard.srs_reps + 1}`}
+                {currentItem.flashcard.srs_reps === 0
+                  ? "New Card"
+                  : `Review #${currentItem.flashcard.srs_reps + 1}`}
               </Badge>
-              <Badge variant="outline">
-                Mastery: {Math.round(currentItem.mastery * 100)}%
-              </Badge>
+              <Badge variant="outline">Mastery: {Math.round(currentItem.mastery * 100)}%</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Question */}
-            <div className="min-h-[200px] flex items-center justify-center">
-              <p className="text-2xl text-center font-semibold">
+            <div className="flex min-h-[200px] items-center justify-center">
+              <p className="text-center text-2xl font-semibold">
                 {currentItem.flashcard.front_text}
               </p>
             </div>
 
             {/* Answer (revealed) */}
             {showAnswer && (
-              <div className="border-t pt-6 space-y-4">
-                <div className="bg-muted p-6 rounded-lg">
+              <div className="space-y-4 border-t pt-6">
+                <div className="rounded-lg bg-muted p-6">
                   <p className="text-lg">{currentItem.flashcard.back_text}</p>
                 </div>
 
                 {currentItem.flashcard.explanation && (
                   <div className="text-sm text-muted-foreground">
-                    <p className="font-semibold mb-1">Explanation:</p>
+                    <p className="mb-1 font-semibold">Explanation:</p>
                     <p>{currentItem.flashcard.explanation}</p>
                   </div>
                 )}
@@ -300,35 +301,39 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
                 <div className="grid grid-cols-4 gap-2">
                   <Button
                     variant="outline"
-                    className="flex-col h-auto py-4 border-red-200 hover:bg-red-50"
-                    onClick={() => handleFlashcardRating('again')}
+                    className="h-auto flex-col border-red-200 py-4 hover:bg-red-50"
+                    onClick={() => handleFlashcardRating("again")}
                   >
                     <span className="font-semibold">Again</span>
                     <span className="text-xs text-muted-foreground">&lt;1d</span>
                   </Button>
                   <Button
                     variant="outline"
-                    className="flex-col h-auto py-4 border-orange-200 hover:bg-orange-50"
-                    onClick={() => handleFlashcardRating('hard')}
+                    className="h-auto flex-col border-orange-200 py-4 hover:bg-orange-50"
+                    onClick={() => handleFlashcardRating("hard")}
                   >
                     <span className="font-semibold">Hard</span>
                     <span className="text-xs text-muted-foreground">~3d</span>
                   </Button>
                   <Button
                     variant="outline"
-                    className="flex-col h-auto py-4 border-blue-200 hover:bg-blue-50"
-                    onClick={() => handleFlashcardRating('good')}
+                    className="h-auto flex-col border-blue-200 py-4 hover:bg-blue-50"
+                    onClick={() => handleFlashcardRating("good")}
                   >
                     <span className="font-semibold">Good</span>
-                    <span className="text-xs text-muted-foreground">{currentItem.intervalDays}d</span>
+                    <span className="text-xs text-muted-foreground">
+                      {currentItem.intervalDays}d
+                    </span>
                   </Button>
                   <Button
                     variant="outline"
-                    className="flex-col h-auto py-4 border-green-200 hover:bg-green-50"
-                    onClick={() => handleFlashcardRating('easy')}
+                    className="h-auto flex-col border-green-200 py-4 hover:bg-green-50"
+                    onClick={() => handleFlashcardRating("easy")}
                   >
                     <span className="font-semibold">Easy</span>
-                    <span className="text-xs text-muted-foreground">&gt;{currentItem.intervalDays}d</span>
+                    <span className="text-xs text-muted-foreground">
+                      &gt;{currentItem.intervalDays}d
+                    </span>
                   </Button>
                 </div>
               </div>
@@ -350,17 +355,17 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
           <CardHeader>
             <div className="flex items-start justify-between">
               <Badge variant="secondary">
-                {currentItem.questionReview?.srs_reps === 0 ? "New Question" : `Attempt #${currentItem.questionReview?.total_attempts || 0 + 1}`}
+                {currentItem.questionReview?.srs_reps === 0
+                  ? "New Question"
+                  : `Attempt #${currentItem.questionReview?.total_attempts || 0 + 1}`}
               </Badge>
-              <Badge variant="outline">
-                Mastery: {Math.round(currentItem.mastery * 100)}%
-              </Badge>
+              <Badge variant="outline">Mastery: {Math.round(currentItem.mastery * 100)}%</Badge>
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Question Text */}
             <div>
-              <p className="text-lg font-semibold mb-4">{currentItem.question?.question}</p>
+              <p className="mb-4 text-lg font-semibold">{currentItem.question?.question}</p>
             </div>
 
             {/* Answer Options */}
@@ -369,7 +374,7 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
                 <Button
                   key={choice.id}
                   variant={selectedAnswer === choice.id ? "default" : "outline"}
-                  className="w-full justify-start text-left h-auto py-3"
+                  className="h-auto w-full justify-start py-3 text-left"
                   onClick={() => setSelectedAnswer(choice.id)}
                   disabled={showAnswer}
                 >
@@ -377,17 +382,19 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
                   {showAnswer && choice.id === currentItem.question?.correctAnswerId && (
                     <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />
                   )}
-                  {showAnswer && selectedAnswer === choice.id && choice.id !== currentItem.question?.correctAnswerId && (
-                    <XCircle className="h-5 w-5 text-red-500" />
-                  )}
+                  {showAnswer &&
+                    selectedAnswer === choice.id &&
+                    choice.id !== currentItem.question?.correctAnswerId && (
+                      <XCircle className="h-5 w-5 text-red-500" />
+                    )}
                 </Button>
               ))}
             </div>
 
             {/* Explanation (after submission) */}
             {showAnswer && currentItem.question?.explanation && (
-              <div className="bg-muted p-4 rounded-lg">
-                <p className="font-semibold mb-2">Explanation:</p>
+              <div className="rounded-lg bg-muted p-4">
+                <p className="mb-2 font-semibold">Explanation:</p>
                 <p className="text-sm">{currentItem.question.explanation}</p>
               </div>
             )}
@@ -403,11 +410,7 @@ export default function StudySession({ onComplete, onExit }: StudySessionProps) 
                 Submit Answer
               </Button>
             ) : (
-              <Button
-                className="w-full"
-                size="lg"
-                onClick={handleQuestionSubmit}
-              >
+              <Button className="w-full" size="lg" onClick={handleQuestionSubmit}>
                 Next Question
               </Button>
             )}

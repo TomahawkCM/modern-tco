@@ -179,7 +179,7 @@ Guidelines:
  * Get system prompt based on access level and context
  */
 export function getSystemPrompt(params: {
-  accessLevel: 'read-only' | 'full-access';
+  accessLevel: "read-only" | "full-access";
   isFirstTime?: boolean;
   hasError?: boolean;
 }): string {
@@ -193,7 +193,7 @@ export function getSystemPrompt(params: {
     return ONBOARDING_PROMPT;
   }
 
-  if (accessLevel === 'full-access') {
+  if (accessLevel === "full-access") {
     return FINANCIAL_ASSISTANT_FULL_ACCESS_PROMPT;
   }
 

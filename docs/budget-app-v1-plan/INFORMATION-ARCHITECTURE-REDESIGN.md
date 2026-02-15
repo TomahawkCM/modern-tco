@@ -30,6 +30,7 @@
 9. **OCR** (`/budget-app/ocr`) - Receipt scanning
 
 ### **Additional Utility Sections** (not in core 9):
+
 - **Settings** (`/budget-app/settings`) - App configuration
 - **Import** (`/budget-app/import`) - CSV import tool
 - **Export** (`/budget-app/export`) - Data export tool
@@ -78,21 +79,24 @@ Budget App
 ## 📐 Detailed Category Breakdown
 
 ### **Category 1: Core** 📊
+
 **Purpose**: Daily financial operations and foundational data
 
-| Section | Route | Description | Frequency |
-|---------|-------|-------------|-----------|
-| **Dashboard** | `/budget-app` | Overview, key metrics, quick actions | Daily |
-| **Transactions** | `/budget-app/transactions` | View, add, edit, categorize transactions | Daily |
-| **Categories** | `/budget-app/categories` | Manage transaction categories | Monthly |
+| Section          | Route                      | Description                              | Frequency |
+| ---------------- | -------------------------- | ---------------------------------------- | --------- |
+| **Dashboard**    | `/budget-app`              | Overview, key metrics, quick actions     | Daily     |
+| **Transactions** | `/budget-app/transactions` | View, add, edit, categorize transactions | Daily     |
+| **Categories**   | `/budget-app/categories`   | Manage transaction categories            | Monthly   |
 
 **User Flow**:
+
 ```
 Dashboard → See recent transactions → Click "Add Transaction" → Return to Dashboard
 Dashboard → See budget status → Navigate to Transactions → Filter by category
 ```
 
 **Rationale**:
+
 - Most frequently accessed sections
 - Foundation for all other financial features
 - Users need these for daily money management
@@ -100,15 +104,17 @@ Dashboard → See budget status → Navigate to Transactions → Filter by categ
 ---
 
 ### **Category 2: Planning** 🎯
+
 **Purpose**: Forward-looking financial planning and goal setting
 
-| Section | Route | Description | Frequency |
-|---------|-------|-------------|-----------|
-| **Budgets** | `/budget-app/planning/budgets` | Create/track monthly budgets | Weekly |
-| **Future Plans** | `/budget-app/planning/future` | Major purchases, savings goals | Monthly |
-| **Retirement** | `/budget-app/planning/retirement` | Retirement projections, 401k tracking | Quarterly |
+| Section          | Route                             | Description                           | Frequency |
+| ---------------- | --------------------------------- | ------------------------------------- | --------- |
+| **Budgets**      | `/budget-app/planning/budgets`    | Create/track monthly budgets          | Weekly    |
+| **Future Plans** | `/budget-app/planning/future`     | Major purchases, savings goals        | Monthly   |
+| **Retirement**   | `/budget-app/planning/retirement` | Retirement projections, 401k tracking | Quarterly |
 
 **User Flow**:
+
 ```
 Dashboard → Notice overspending → Navigate to Budgets → Adjust budget limits
 Planning → Set future goal (house down payment) → Track progress monthly
@@ -116,6 +122,7 @@ Planning → Review retirement contributions → Adjust allocations
 ```
 
 **Rationale**:
+
 - All about future financial health
 - Natural grouping: budgets → short-term goals → long-term goals
 - Progression from immediate (budgets) to distant (retirement)
@@ -123,14 +130,16 @@ Planning → Review retirement contributions → Adjust allocations
 ---
 
 ### **Category 3: Wealth & Debt** 💰
+
 **Purpose**: Asset and liability management
 
-| Section | Route | Description | Frequency |
-|---------|-------|-------------|-----------|
-| **Loans** | `/budget-app/wealth/loans` | Track mortgages, auto loans, student loans | Monthly |
-| **Investments** | `/budget-app/wealth/investments` | Stocks, bonds, retirement accounts | Weekly |
+| Section         | Route                            | Description                                | Frequency |
+| --------------- | -------------------------------- | ------------------------------------------ | --------- |
+| **Loans**       | `/budget-app/wealth/loans`       | Track mortgages, auto loans, student loans | Monthly   |
+| **Investments** | `/budget-app/wealth/investments` | Stocks, bonds, retirement accounts         | Weekly    |
 
 **User Flow**:
+
 ```
 Dashboard → See net worth → Navigate to Wealth → View loan balances + investments
 Wealth → Check investment performance → Compare to loan interest rates → Rebalance
@@ -138,11 +147,13 @@ Wealth → Make extra loan payment → See payoff date update
 ```
 
 **Rationale**:
+
 - Balancing assets (investments) and liabilities (loans)
 - Both affect net worth calculations
 - Users often compare investment returns vs. loan interest rates
 
 **Alternative Naming**:
+
 - "Assets & Liabilities"
 - "Net Worth"
 - "Portfolio" (if focusing more on investments)
@@ -150,16 +161,18 @@ Wealth → Make extra loan payment → See payoff date update
 ---
 
 ### **Category 4: Tools** 🔧
+
 **Purpose**: Utilities, analytics, and app management
 
-| Section | Route | Description | Frequency |
-|---------|-------|-------------|-----------|
-| **Reports** | `/budget-app/tools/reports` | Spending trends, income analysis, charts | Weekly |
-| **Import/Export** | `/budget-app/tools/data` | Import CSV, export data backups | Monthly |
-| **OCR Scanner** | `/budget-app/tools/ocr` | Scan receipts, extract transaction data | Weekly |
-| **Settings** | `/budget-app/tools/settings` | App preferences, privacy, accessibility | Rarely |
+| Section           | Route                        | Description                              | Frequency |
+| ----------------- | ---------------------------- | ---------------------------------------- | --------- |
+| **Reports**       | `/budget-app/tools/reports`  | Spending trends, income analysis, charts | Weekly    |
+| **Import/Export** | `/budget-app/tools/data`     | Import CSV, export data backups          | Monthly   |
+| **OCR Scanner**   | `/budget-app/tools/ocr`      | Scan receipts, extract transaction data  | Weekly    |
+| **Settings**      | `/budget-app/tools/settings` | App preferences, privacy, accessibility  | Rarely    |
 
 **User Flow**:
+
 ```
 Tools → Generate spending report → Download PDF → Share with tax advisor
 Tools → Import bank CSV → Review transactions → Categorize bulk items
@@ -168,6 +181,7 @@ Tools → Adjust font size → Enable high-contrast mode
 ```
 
 **Rationale**:
+
 - Secondary features that support primary workflows
 - Used less frequently than core sections
 - Clearly separated from financial data management
@@ -240,12 +254,14 @@ Categories              Plans  Retirement
 ```
 
 **Pros**:
+
 - Clear visual grouping
 - Supports collapsible categories
 - Desktop-optimized
 - Progressive disclosure
 
 **Cons**:
+
 - Requires sidebar component
 - Mobile needs drawer/menu
 
@@ -270,11 +286,13 @@ Categories              Plans  Retirement
 ```
 
 **Pros**:
+
 - Horizontal layout (more familiar)
 - Works on mobile
 - Less vertical space
 
 **Cons**:
+
 - Nested navigation harder to scan
 - Dropdowns require hover/click
 - Less clear hierarchy
@@ -297,11 +315,13 @@ Categories              Plans  Retirement
 ```
 
 **Pros**:
+
 - Optimized for each viewport
 - Thumb-friendly on mobile
 - Clear hierarchy on desktop
 
 **Cons**:
+
 - More implementation work
 - Maintain two nav systems
 
@@ -310,18 +330,21 @@ Categories              Plans  Retirement
 ## 🎨 Visual Design Recommendations
 
 ### **Category Icons**:
+
 - **Core**: `LayoutGrid` or `Home` (foundation)
 - **Planning**: `Target` or `Calendar` (goals)
 - **Wealth & Debt**: `TrendingUp` or `Wallet` (money)
 - **Tools**: `Wrench` or `Settings` (utilities)
 
 ### **Category Colors** (using design system):
+
 - **Core**: Primary blue (`#3b82f6`) - most important
 - **Planning**: Purple (`#8b5cf6`) - future-focused
 - **Wealth & Debt**: Green (`#22c55e`) - growth/money
 - **Tools**: Orange (`#f97316`) - secondary actions
 
 ### **Spacing**:
+
 - Category header: `mb-4` (18px)
 - Nav item height: `min-h-touch` (54px)
 - Category gap: `mb-6` (27px)
@@ -331,6 +354,7 @@ Categories              Plans  Retirement
 ## 📱 Mobile Navigation Strategy
 
 ### **Bottom Navigation** (4 items):
+
 ```
 ┌─────────────────────────────────────────┐
 │           [Page Content]                │
@@ -343,11 +367,13 @@ Categories              Plans  Retirement
 ```
 
 **On Tab Click**:
+
 - Open sheet/drawer with category sections
 - First item in category selected by default
 - Breadcrumbs show: Core > Transactions
 
 **"More" Menu**:
+
 - Settings
 - Help
 - Accessibility
@@ -358,6 +384,7 @@ Categories              Plans  Retirement
 ## 🔄 User Flows
 
 ### **Flow 1: Daily Transaction Entry**
+
 ```
 1. Open app → Dashboard (Core)
 2. Tap "Add Transaction" quick action
@@ -367,6 +394,7 @@ Categories              Plans  Retirement
 ```
 
 ### **Flow 2: Monthly Budget Review**
+
 ```
 1. Dashboard → Notice overspending alert
 2. Navigate: Planning > Budgets
@@ -379,6 +407,7 @@ Categories              Plans  Retirement
 ```
 
 ### **Flow 3: Loan Payment Analysis**
+
 ```
 1. Dashboard → Net worth widget
 2. Navigate: Wealth & Debt > Loans
@@ -391,6 +420,7 @@ Categories              Plans  Retirement
 ```
 
 ### **Flow 4: Monthly Report Generation**
+
 ```
 1. End of month → Need report for taxes
 2. Navigate: Tools > Reports
@@ -406,12 +436,14 @@ Categories              Plans  Retirement
 ## 🏗️ Implementation Plan
 
 ### **Phase 1: Foundation** (Week 1)
+
 - [ ] Create `NavGroup` component (collapsible category)
 - [ ] Create `NavLink` component (active state, icons)
 - [ ] Update `layout.tsx` with new sidebar structure
 - [ ] Add category icons from lucide-react
 
 ### **Phase 2: Route Restructuring** (Week 2)
+
 - [ ] Move `/budgets` → `/planning/budgets`
 - [ ] Move `/loans` → `/wealth/loans`
 - [ ] Move `/investments` → `/wealth/investments`
@@ -420,12 +452,14 @@ Categories              Plans  Retirement
 - [ ] Add redirects for old URLs
 
 ### **Phase 3: Mobile Navigation** (Week 3)
+
 - [ ] Create `BottomNav` component
 - [ ] Add tab switching logic
 - [ ] Create category sheet/drawer
 - [ ] Test thumb-friendly touch targets (48px+)
 
 ### **Phase 4: Polish** (Week 4)
+
 - [ ] Add navigation animations
 - [ ] Implement keyboard shortcuts (1-4 keys for categories)
 - [ ] Add "Recently Visited" section
@@ -437,6 +471,7 @@ Categories              Plans  Retirement
 ## ♿ Accessibility Considerations
 
 ### **ARIA Landmarks**:
+
 ```tsx
 <nav aria-label="Primary navigation">
   <section aria-label="Core features">...</section>
@@ -447,6 +482,7 @@ Categories              Plans  Retirement
 ```
 
 ### **Keyboard Navigation**:
+
 - **Tab**: Move between nav items
 - **Enter/Space**: Activate link
 - **Arrow Keys**: Move within category (optional)
@@ -454,11 +490,13 @@ Categories              Plans  Retirement
 - **1-4 Keys**: Jump to category (with modifier)
 
 ### **Screen Reader Announcements**:
+
 - "Core navigation group, 3 items"
 - "Dashboard link, current page"
 - "Planning navigation group, collapsed"
 
 ### **Focus Management**:
+
 - Visible focus rings (3px)
 - Skip link to main content
 - Focus trap in mobile drawer
@@ -469,17 +507,20 @@ Categories              Plans  Retirement
 ## 📊 Success Metrics
 
 ### **Pre-Launch Baseline**:
+
 - Average clicks to reach section: 1.5
 - Navigation time: 3.2 seconds
 - User confusion rate: 22% (from surveys)
 
 ### **Post-Launch Goals**:
+
 - Average clicks to reach section: ≤1.2 (20% reduction)
 - Navigation time: ≤2.5 seconds (22% reduction)
 - User confusion rate: ≤10% (55% reduction)
 - Task completion rate: ≥95%
 
 ### **Tracking Methods**:
+
 - PostHog event tracking on nav clicks
 - Time between page loads
 - Exit rate on nav interactions
@@ -490,18 +531,20 @@ Categories              Plans  Retirement
 ## 🔄 Migration Strategy
 
 ### **Backwards Compatibility**:
+
 ```typescript
 // Redirect old URLs to new structure
 const redirects = [
-  { from: '/budget-app/budgets', to: '/budget-app/planning/budgets' },
-  { from: '/budget-app/loans', to: '/budget-app/wealth/loans' },
-  { from: '/budget-app/investments', to: '/budget-app/wealth/investments' },
-  { from: '/budget-app/reports', to: '/budget-app/tools/reports' },
-  { from: '/budget-app/ocr', to: '/budget-app/tools/ocr' },
+  { from: "/budget-app/budgets", to: "/budget-app/planning/budgets" },
+  { from: "/budget-app/loans", to: "/budget-app/wealth/loans" },
+  { from: "/budget-app/investments", to: "/budget-app/wealth/investments" },
+  { from: "/budget-app/reports", to: "/budget-app/tools/reports" },
+  { from: "/budget-app/ocr", to: "/budget-app/tools/ocr" },
 ];
 ```
 
 ### **Announcement to Users**:
+
 - In-app banner: "We've reorganized navigation to help you find things faster!"
 - Tooltip on first visit to new category
 - "What's New" modal on first login after update
@@ -511,30 +554,36 @@ const redirects = [
 ## 🎯 Alternative IA Structures (Considered)
 
 ### **Option A: Task-Based**
+
 ```
 ├── Track Money (Transactions, Categories)
 ├── Plan Spending (Budgets, Goals)
 ├── Manage Accounts (Loans, Investments)
 └── Analyze & Tools (Reports, OCR, Settings)
 ```
+
 **Rejected**: Too vague, "Track Money" doesn't clearly indicate transactions
 
 ### **Option B: Time-Based**
+
 ```
 ├── Today (Dashboard, Quick Actions)
 ├── This Month (Transactions, Budgets)
 ├── This Year (Goals, Investments)
 └── Long-Term (Retirement, Loans)
 ```
+
 **Rejected**: Doesn't map to mental model, sections overlap time ranges
 
 ### **Option C: Financial Lifecycle**
+
 ```
 ├── Earn (Income tracking)
 ├── Spend (Transactions, Budgets)
 ├── Save (Goals, Investments)
 └── Owe (Loans, Debt)
 ```
+
 **Rejected**: Forces artificial grouping, missing tools/settings
 
 ---
@@ -542,12 +591,14 @@ const redirects = [
 ## ✨ Summary
 
 **Proposed 4-Category Structure**:
+
 1. **Core** 📊: Dashboard, Transactions, Categories
 2. **Planning** 🎯: Budgets, Future Plans, Retirement
 3. **Wealth & Debt** 💰: Loans, Investments
 4. **Tools** 🔧: Reports, Import/Export, OCR, Settings
 
 **Benefits**:
+
 - ✅ Reduced cognitive load (4 categories vs. 9 flat items)
 - ✅ Clear relationships and grouping
 - ✅ Progressive disclosure (categories → sections)
@@ -557,6 +608,7 @@ const redirects = [
 - ✅ Backwards compatible with redirects
 
 **Next Steps**:
+
 1. Review with stakeholders
 2. Create interactive prototype
 3. User testing with 5-8 participants

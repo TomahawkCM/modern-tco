@@ -5,6 +5,7 @@ This guide explains how to import questions into the question bank system for sp
 ## 🎯 Overview
 
 The question bank system is separate from the exam system:
+
 - **Question Bank**: For spaced repetition reviews (using adaptive difficulty)
 - **Exam System**: For practice exams and assessments
 
@@ -101,29 +102,31 @@ addQuestions(importedQuestions);
 2. Paste the JSON content:
 
 ```javascript
-const questions = [/* paste your questions here */];
-localStorage.setItem('question-bank', JSON.stringify(questions));
+const questions = [
+  /* paste your questions here */
+];
+localStorage.setItem("question-bank", JSON.stringify(questions));
 ```
 
 ## 📝 Question Field Mapping
 
 ### Module IDs
 
-| Legacy Domain | New Module ID |
-|---------------|---------------|
-| AQ | asking-questions |
-| RQ | refining-questions |
-| TA | taking-action |
-| NB | navigation-modules |
-| RD | reporting-export |
+| Legacy Domain | New Module ID      |
+| ------------- | ------------------ |
+| AQ            | asking-questions   |
+| RQ            | refining-questions |
+| TA            | taking-action      |
+| NB            | navigation-modules |
+| RD            | reporting-export   |
 
 ### Difficulty Levels
 
-| Legacy | New |
-|--------|-----|
-| 1 (Beginner) | easy |
+| Legacy           | New    |
+| ---------------- | ------ |
+| 1 (Beginner)     | easy   |
 | 2 (Intermediate) | medium |
-| 3 (Advanced) | hard |
+| 3 (Advanced)     | hard   |
 
 ## 🎯 Best Practices
 
@@ -133,8 +136,8 @@ Use clear, descriptive concept names that match your MDX content:
 
 ```json
 {
-  "concept": "Linear Chain Architecture",  // ✅ Good
-  "concept": "LC",                         // ❌ Too vague
+  "concept": "Linear Chain Architecture", // ✅ Good
+  "concept": "LC" // ❌ Too vague
 }
 ```
 
@@ -144,8 +147,8 @@ Match these to your content structure:
 
 ```json
 {
-  "moduleId": "asking-questions",           // Matches /content/modules/asking-questions.mdx
-  "sectionId": "natural-language",          // Matches section in MDX
+  "moduleId": "asking-questions", // Matches /content/modules/asking-questions.mdx
+  "sectionId": "natural-language" // Matches section in MDX
 }
 ```
 
@@ -163,7 +166,7 @@ For multiple-choice, the `correctAnswer` must match one of the `options` exactly
 ```json
 {
   "options": ["Option A", "Option B", "Option C"],
-  "correctAnswer": "Option B"  // Must match exactly
+  "correctAnswer": "Option B" // Must match exactly
 }
 ```
 
@@ -209,8 +212,8 @@ Tanium uses a simple format: `Get [sensor] from [targets] where [filters]`
 ```json
 {
   "moduleId": "asking-questions",
-  "sectionId": "natural-language",  // Matches ## Natural Language Queries
-  "concept": "Basic Syntax"         // Matches ### Basic Syntax
+  "sectionId": "natural-language", // Matches ## Natural Language Queries
+  "concept": "Basic Syntax" // Matches ### Basic Syntax
 }
 ```
 
@@ -298,6 +301,7 @@ npx tsx scripts/import-to-question-bank.ts data/taking-action.json
 ### Question Not Appearing in Reviews
 
 **Check:**
+
 - Module ID matches your content structure
 - Section ID exists in the MDX file
 - Question bank localStorage has the questions
@@ -305,6 +309,7 @@ npx tsx scripts/import-to-question-bank.ts data/taking-action.json
 ### Import Fails
 
 **Common issues:**
+
 - Invalid JSON syntax
 - Missing required fields (id, moduleId, question, correctAnswer)
 - Multiple-choice with < 2 options
@@ -312,6 +317,7 @@ npx tsx scripts/import-to-question-bank.ts data/taking-action.json
 ### Statistics Don't Match
 
 **Verify:**
+
 - All questions have valid moduleId
 - Domain mapping is correct (see mapping table above)
 

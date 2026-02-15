@@ -10,10 +10,6 @@ import { LearningProviders } from "@/app/heavy-providers";
  *
  * This ensures the welcome/home page has access to user progress data.
  */
-export default function WelcomeLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function WelcomeLayout({ children }: { children: React.ReactNode }) {
   return <LearningProviders>{children}</LearningProviders>;
 }

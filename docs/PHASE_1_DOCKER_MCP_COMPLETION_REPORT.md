@@ -74,6 +74,7 @@ docs/
 **Binary**: `mcp-sqlite-server` (globally installed, in PATH)
 
 **Security Features**:
+
 - ✅ Non-root user (mcp:1001) for all operations
 - ✅ Automated volume permission fixing (entrypoint.sh)
 - ✅ Resource limits (0.5 CPU, 512MB RAM max)
@@ -82,6 +83,7 @@ docs/
 - ⚠️ Read-only filesystem (temporarily disabled for Phase 1, re-enable in Phase 2)
 
 **Database Configuration**:
+
 - Path: `/data/db/tanium_tco.db`
 - Volume: `tanium-tco-db` (Docker named volume, persistent)
 - Initialization: Auto-created by healthcheck.sh on first run
@@ -89,6 +91,7 @@ docs/
 - Integrity: PRAGMA integrity_check on every health check
 
 **Health Check**:
+
 - Interval: 30 seconds
 - Timeout: 10 seconds
 - Start Period: 5 seconds (grace period for initialization)
@@ -106,11 +109,13 @@ docs/
 **Root Cause**: Runtime package download attempt without network access.
 
 **Solution**:
+
 - Pre-install `mcp-sqlite` globally during Docker build (when network available)
 - Changed CMD from `npx -y mcp-sqlite` → `mcp-sqlite-server` (pre-installed binary)
 - Result: No runtime network needed ✅
 
 **Files Modified**:
+
 - `Dockerfile` line 30: `RUN npm install --global mcp-sqlite@latest`
 - `Dockerfile` line 94: `CMD ["mcp-sqlite-server", ...]`
 
@@ -123,6 +128,7 @@ docs/
 **Root Cause**: Package installs as `mcp-sqlite-server`, not `mcp-sqlite`
 
 **Discovery**: `ls -la /usr/local/bin/ | grep mcp` revealed symbolic link:
+
 ```
 mcp-sqlite-server -> ../lib/node_modules/mcp-sqlite/mcp-sqlite-server.js
 ```
@@ -130,6 +136,7 @@ mcp-sqlite-server -> ../lib/node_modules/mcp-sqlite/mcp-sqlite-server.js
 **Solution**: Updated all references from `mcp-sqlite` → `mcp-sqlite-server`
 
 **Files Modified**:
+
 - `Dockerfile` CMD: `mcp-sqlite-server`
 - `docker-mcp-wrapper.sh` line 41: `docker exec -i ... mcp-sqlite-server`
 - `healthcheck.sh` line 57: `which mcp-sqlite-server`
@@ -145,12 +152,14 @@ mcp-sqlite-server -> ../lib/node_modules/mcp-sqlite/mcp-sqlite-server.js
 **Additional Issue**: Docker volume `/data/db` owned by root, but container ran as non-root `mcp` user, preventing writes.
 
 **Solution**:
+
 - Created `entrypoint.sh` to fix permissions before switching to mcp user
 - Added `su-exec` package for secure user switching
 - Changed CMD to `tail -f /dev/null` (keep-alive pattern for Docker MCP)
 - MCP server executed on-demand via `docker exec -i` by wrapper script
 
 **Files Created/Modified**:
+
 - `entrypoint.sh` (new): Auto-fix permissions, then `su-exec mcp`
 - `Dockerfile` line 50: Added `su-exec` package
 - `Dockerfile` line 90: `ENTRYPOINT ["/usr/local/bin/entrypoint.sh", ...]`
@@ -169,6 +178,7 @@ mcp-sqlite-server -> ../lib/node_modules/mcp-sqlite/mcp-sqlite-server.js
 **Phase 2 Plan**: Re-enable with proper tmpfs mounts once all integration testing complete.
 
 **Files Modified**:
+
 - `docker-compose.yml` lines 68-70: Commented out `read_only: true` and `tmpfs`
 - Added comment: `# TEMPORARILY DISABLED FOR DEBUGGING`
 
@@ -181,6 +191,7 @@ mcp-sqlite-server -> ../lib/node_modules/mcp-sqlite/mcp-sqlite-server.js
 **Root Cause**: Script assumed `jq` availability, but WSL2 environment didn't have it installed.
 
 **Solution**: Updated all `jq` commands to use Python fallback:
+
 ```bash
 # Before
 jq empty '$MCP_CONFIG'
@@ -190,6 +201,7 @@ python3 -m json.tool < '$MCP_CONFIG' > /dev/null
 ```
 
 **Files Modified**:
+
 - `.claude/scripts/mcp-diagnostics.sh`: 4 jq commands → Python equivalents
 - Lines 57, 58, 60, 71, 152, 289
 
@@ -301,6 +313,7 @@ $ bash docker/mcp-sqlite-tanium/docker-mcp-wrapper.sh
 ```
 
 **Transport Methods**:
+
 - **Docker** (1): sqlite-tanium
 - **npx** (7): shadcn, filesystem, claude-flow, github, firecrawl, playwright, postgresql
 
@@ -497,6 +510,7 @@ The `sqlite-tanium` MCP server is now fully containerized with enterprise-grade 
 4. Document any integration issues for Phase 2 improvements
 
 **Key Deliverables**:
+
 - ✅ Production-ready Docker container
 - ✅ Comprehensive diagnostic suite
 - ✅ Complete documentation for future sessions

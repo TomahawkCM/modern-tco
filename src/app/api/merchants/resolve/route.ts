@@ -17,9 +17,9 @@
  * Privacy: Only sends merchant token + country to OpenAI, never raw PII
  */
 
-import { type NextRequest, NextResponse } from 'next/server';
-import OpenAI from 'openai';
-import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { type NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 // Types
 interface MerchantClassification {
@@ -30,7 +30,7 @@ interface MerchantClassification {
   business_type: string;
   is_subscription: boolean;
   confidence: number;
-  source: 'openai' | 'user' | 'rule' | 'mixed';
+  source: "openai" | "user" | "rule" | "mixed";
   explanation: string;
 }
 
@@ -59,13 +59,13 @@ async function classifyMerchantWithOpenAI(
 ): Promise<OpenAIMerchantResponse> {
   const openaiKey = process.env.OPENAI_API_KEY;
   if (!openaiKey) {
-    throw new Error('OPENAI_API_KEY not configured');
+    throw new Error("OPENAI_API_KEY not configured");
   }
 
   const openai = new OpenAI({ apiKey: openaiKey });
 
   // Build context-aware prompt (minimal data, no PII)
-  const contextHint = country ? ` (Country: ${country})` : '';
+  const contextHint = country ? ` (Country: ${country})` : "";
   const prompt = `Classify the merchant "${merchantToken}"${contextHint}.
 
 Provide:
@@ -81,25 +81,26 @@ Return ONLY valid JSON matching this schema.`;
 
   try {
     const response = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',  // Cost-effective model (can upgrade to gpt-4o-mini if needed)
+      model: "gpt-3.5-turbo", // Cost-effective model (can upgrade to gpt-4o-mini if needed)
       messages: [
         {
-          role: 'system',
-          content: 'You are a merchant classification expert. Classify businesses based on their name. Return only valid JSON.',
+          role: "system",
+          content:
+            "You are a merchant classification expert. Classify businesses based on their name. Return only valid JSON.",
         },
         {
-          role: 'user',
+          role: "user",
           content: prompt,
         },
       ],
-      response_format: { type: 'json_object' },
-      temperature: 0.3,  // Low temperature for consistent classification
+      response_format: { type: "json_object" },
+      temperature: 0.3, // Low temperature for consistent classification
       max_tokens: 300,
     });
 
     const content = response.choices[0]?.message?.content;
     if (!content) {
-      throw new Error('Empty response from OpenAI');
+      throw new Error("Empty response from OpenAI");
     }
 
     const classification = JSON.parse(content) as OpenAIMerchantResponse;
@@ -108,24 +109,24 @@ Return ONLY valid JSON matching this schema.`;
     if (
       !classification.canonical_name ||
       !classification.category ||
-      typeof classification.is_subscription !== 'boolean'
+      typeof classification.is_subscription !== "boolean"
     ) {
-      throw new Error('Invalid classification response from OpenAI');
+      throw new Error("Invalid classification response from OpenAI");
     }
 
     return classification;
   } catch (error) {
-    console.error('OpenAI classification error:', error);
+    console.error("OpenAI classification error:", error);
 
     // Safe fallback classification
     return {
       canonical_name: merchantToken,
-      business_type: 'other',
-      category: 'Miscellaneous',
-      subcategory: 'Other',
+      business_type: "other",
+      category: "Miscellaneous",
+      subcategory: "Other",
       is_subscription: false,
       confidence: 0.1,
-      reason: 'Failed to classify merchant, using safe defaults',
+      reason: "Failed to classify merchant, using safe defaults",
     };
   }
 }
@@ -142,9 +143,9 @@ async function getMerchantByToken(
   merchantToken: string
 ): Promise<MerchantClassification | null> {
   const { data, error } = await supabase
-    .from('merchants')
-    .select('*')
-    .eq('merchant_token', merchantToken)
+    .from("merchants")
+    .select("*")
+    .eq("merchant_token", merchantToken)
     .single();
 
   if (error || !data) {
@@ -153,9 +154,9 @@ async function getMerchantByToken(
 
   // Update last_seen_at
   await supabase
-    .from('merchants')
+    .from("merchants")
     .update({ last_seen_at: new Date().toISOString() } as any)
-    .eq('merchant_token', merchantToken);
+    .eq("merchant_token", merchantToken);
 
   return data as MerchantClassification;
 }
@@ -176,7 +177,7 @@ async function storeMerchantClassification(
     business_type: classification.business_type,
     is_subscription: classification.is_subscription,
     confidence: classification.confidence,
-    source: 'openai' as const,
+    source: "openai" as const,
     explanation: classification.reason,
     classification_count: 1,
     user_agreement_count: 0,
@@ -184,14 +185,14 @@ async function storeMerchantClassification(
   };
 
   const { data, error } = await supabase
-    .from('merchants')
+    .from("merchants")
     .insert(merchantData as any)
     .select()
     .single();
 
   if (error) {
-    console.error('Error storing merchant:', error);
-    throw new Error('Failed to store merchant classification');
+    console.error("Error storing merchant:", error);
+    throw new Error("Failed to store merchant classification");
   }
 
   return data as MerchantClassification;
@@ -205,16 +206,16 @@ export async function GET(request: NextRequest) {
   try {
     // Extract query parameters
     const { searchParams } = new URL(request.url);
-    const token = searchParams.get('token');
-    const country = searchParams.get('country');
-    const mcc = searchParams.get('mcc');  // Optional Merchant Category Code
+    const token = searchParams.get("token");
+    const country = searchParams.get("country");
+    const mcc = searchParams.get("mcc"); // Optional Merchant Category Code
 
     // Validation
     if (!token) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Missing required parameter: token',
+          error: "Missing required parameter: token",
         },
         { status: 400 }
       );
@@ -224,7 +225,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Invalid merchant token (too short)',
+          error: "Invalid merchant token (too short)",
         },
         { status: 400 }
       );
@@ -238,7 +239,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Database configuration missing',
+          error: "Database configuration missing",
         },
         { status: 500 }
       );
@@ -269,12 +270,12 @@ export async function GET(request: NextRequest) {
       explanation: merchant.explanation,
     });
   } catch (error) {
-    console.error('Merchant resolution error:', error);
+    console.error("Merchant resolution error:", error);
 
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : 'Internal server error',
+        error: error instanceof Error ? error.message : "Internal server error",
       },
       { status: 500 }
     );

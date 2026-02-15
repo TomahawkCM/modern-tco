@@ -6,7 +6,7 @@ import {
   StudyContentQuerySchema,
   StudyContentResponseSchema,
   validateQuery,
-  createValidatedResponse
+  createValidatedResponse,
 } from "@/lib/api/schemas";
 
 interface ParsedSection {
@@ -201,7 +201,7 @@ export async function GET(request: NextRequest) {
           {
             success: false,
             error: "Study content not found",
-            details: `File not found: ${contentPath}`
+            details: `File not found: ${contentPath}`,
           },
           404
         );
@@ -210,18 +210,15 @@ export async function GET(request: NextRequest) {
       const parsed = ServerSideContentParser.parseDomain1(contentPath);
       const studyContent = ServerSideContentParser.convertToStudyModuleContent(parsed);
 
-      return createValidatedResponse(
-        StudyContentResponseSchema,
-        {
-          success: true,
-          content: studyContent,
-          metadata: {
-            contentLength: studyContent.sections.length,
-            totalObjectives: studyContent.learningObjectives.length,
-            parseTimestamp: new Date().toISOString(),
-          },
-        }
-      );
+      return createValidatedResponse(StudyContentResponseSchema, {
+        success: true,
+        content: studyContent,
+        metadata: {
+          contentLength: studyContent.sections.length,
+          totalObjectives: studyContent.learningObjectives.length,
+          parseTimestamp: new Date().toISOString(),
+        },
+      });
     }
 
     return createValidatedResponse(
@@ -229,7 +226,7 @@ export async function GET(request: NextRequest) {
       {
         success: false,
         error: "Domain not supported",
-        details: "Available domains: asking-questions"
+        details: "Available domains: asking-questions",
       },
       400
     );

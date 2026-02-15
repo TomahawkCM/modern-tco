@@ -13,13 +13,19 @@ import {
   type Module3Section,
   MODULE_3_SECTIONS,
   getSectionCoverage,
-  getModule3LearningPath
+  getModule3LearningPath,
 } from "@/lib/module3-section-definitions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { Separator } from "@/components/ui/separator";
@@ -33,7 +39,7 @@ import {
   CheckCircle,
   AlertCircle,
   BookOpen,
-  Zap
+  Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -46,7 +52,7 @@ interface Module3PracticeSessionProps {
 export function Module3PracticeSession({
   initialSectionId,
   autoStart = false,
-  className
+  className,
 }: Module3PracticeSessionProps) {
   const router = useRouter();
   const { user } = useAuth();
@@ -57,7 +63,7 @@ export function Module3PracticeSession({
     getModule3Recommendations,
     validateModule3SectionAvailability,
     currentSession,
-    isLoading
+    isLoading,
   } = usePractice();
 
   // Session Configuration State
@@ -77,7 +83,9 @@ export function Module3PracticeSession({
   // Progress and Recommendations
   const [sectionProgress, setSectionProgress] = useState<Partial<Record<Module3Section, any>>>({});
   const [recommendations, setRecommendations] = useState<any>(null);
-  const [availabilitySummary, setAvailabilitySummary] = useState<Partial<Record<Module3Section, any>>>({});
+  const [availabilitySummary, setAvailabilitySummary] = useState<
+    Partial<Record<Module3Section, any>>
+  >({});
 
   const learningPath = getModule3LearningPath();
 
@@ -104,7 +112,7 @@ export function Module3PracticeSession({
   // Validate section availability
   useEffect(() => {
     const summary: Partial<Record<Module3Section, any>> = {};
-    learningPath.forEach(sectionId => {
+    learningPath.forEach((sectionId) => {
       try {
         summary[sectionId] = validateModule3SectionAvailability(sectionId);
       } catch (error) {
@@ -123,11 +131,11 @@ export function Module3PracticeSession({
   }, [autoStart, initialSectionId]);
 
   const handleSectionToggle = useCallback((sectionId: Module3Section, checked: boolean) => {
-    setSelectedSections(prev => {
+    setSelectedSections((prev) => {
       if (checked) {
         return [...prev, sectionId];
       } else {
-        return prev.filter(id => id !== sectionId);
+        return prev.filter((id) => id !== sectionId);
       }
     });
   }, []);
@@ -147,14 +155,14 @@ export function Module3PracticeSession({
           includeRelatedSections,
           adaptiveDifficulty,
           focusOnGaps,
-          questionCount: questionCount[0]
+          questionCount: questionCount[0],
         });
       } else {
         success = await startModule3ComprehensivePractice(selectedSections, {
           questionsPerSection: Math.floor(questionCount[0] / selectedSections.length),
           randomizeOrder,
           focusOnWeakAreas: focusOnGaps,
-          timeLimit: timeLimit[0]
+          timeLimit: timeLimit[0],
         });
       }
 
@@ -178,7 +186,7 @@ export function Module3PracticeSession({
     startModule3SectionPractice,
     startModule3ComprehensivePractice,
     currentSession,
-    router
+    router,
   ]);
 
   const getSectionStatusIcon = (sectionId: Module3Section) => {
@@ -186,15 +194,15 @@ export function Module3PracticeSession({
     const progress = sectionProgress[sectionId];
 
     if (!availability?.available) {
-      return <AlertCircle className="w-4 h-4 text-red-500" />;
+      return <AlertCircle className="h-4 w-4 text-red-500" />;
     }
     if (progress?.accuracy >= 0.8) {
-      return <CheckCircle className="w-4 h-4 text-[#22c55e]" />;
+      return <CheckCircle className="h-4 w-4 text-[#22c55e]" />;
     }
     if (progress?.questionsAttempted > 0) {
-      return <TrendingUp className="w-4 h-4 text-primary" />;
+      return <TrendingUp className="h-4 w-4 text-primary" />;
     }
-    return <Target className="w-4 h-4 text-muted-foreground" />;
+    return <Target className="h-4 w-4 text-muted-foreground" />;
   };
 
   const getEstimatedTime = () => {
@@ -211,13 +219,13 @@ export function Module3PracticeSession({
         <Card className="border-blue-200 bg-blue-50/50">
           <CardHeader className="pb-3">
             <div className="flex items-center gap-2">
-              <Brain className="w-5 h-5 text-blue-600" />
+              <Brain className="h-5 w-5 text-blue-600" />
               <CardTitle className="text-lg">Smart Recommendations</CardTitle>
             </div>
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex items-center gap-2">
-              <Badge variant="outline" className="text-blue-700 border-blue-300">
+              <Badge variant="outline" className="border-blue-300 text-blue-700">
                 {recommendations.recommendedSessionType}
               </Badge>
               <span className="text-sm text-muted-foreground">
@@ -242,7 +250,7 @@ export function Module3PracticeSession({
                 setTimeLimit([recommendations.suggestedDuration]);
               }}
             >
-              <Zap className="w-3 h-3 mr-1" />
+              <Zap className="mr-1 h-3 w-3" />
               Use Smart Recommendations
             </Button>
           </CardContent>
@@ -253,7 +261,7 @@ export function Module3PracticeSession({
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Settings className="w-5 h-5" />
+            <Settings className="h-5 w-5" />
             Practice Session Configuration
           </CardTitle>
         </CardHeader>
@@ -276,8 +284,8 @@ export function Module3PracticeSession({
           {/* Section Selection */}
           <div className="space-y-3">
             <label className="text-sm font-medium">Select Sections</label>
-            <div className="grid grid-cols-1 gap-2 max-h-64 overflow-y-auto">
-              {learningPath.map(sectionId => {
+            <div className="grid max-h-64 grid-cols-1 gap-2 overflow-y-auto">
+              {learningPath.map((sectionId) => {
                 const section = MODULE_3_SECTIONS[sectionId];
                 const availability = availabilitySummary[sectionId];
                 const progress = sectionProgress[sectionId];
@@ -288,25 +296,27 @@ export function Module3PracticeSession({
                   <div
                     key={sectionId}
                     className={cn(
-                      "flex items-center space-x-3 p-3 rounded-lg border transition-colors",
-                      isSelected ? "bg-accent border-accent" : "hover:bg-muted/50",
+                      "flex items-center space-x-3 rounded-lg border p-3 transition-colors",
+                      isSelected ? "border-accent bg-accent" : "hover:bg-muted/50",
                       !availability?.available && "opacity-50"
                     )}
                   >
                     <Checkbox
                       checked={isSelected}
-                      onCheckedChange={(checked) => handleSectionToggle(sectionId, checked as boolean)}
+                      onCheckedChange={(checked) =>
+                        handleSectionToggle(sectionId, checked as boolean)
+                      }
                       disabled={!availability?.available}
                     />
-                    <div className="flex-1 min-w-0">
+                    <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
                         {getSectionStatusIcon(sectionId)}
-                        <span className="font-medium text-sm">{section.title}</span>
+                        <span className="text-sm font-medium">{section.title}</span>
                         <Badge variant="outline" className="text-xs">
                           {section.difficulty}
                         </Badge>
                       </div>
-                      <div className="flex items-center gap-4 mt-1">
+                      <div className="mt-1 flex items-center gap-4">
                         <span className="text-xs text-muted-foreground">
                           {availability?.questionCount ?? 0} questions ({coverage}% coverage)
                         </span>
@@ -361,7 +371,7 @@ export function Module3PracticeSession({
             </Button>
 
             {showAdvanced && (
-              <div className="space-y-3 pt-2 border-t">
+              <div className="space-y-3 border-t pt-2">
                 <div className="grid grid-cols-2 gap-3">
                   <label className="flex items-center space-x-2">
                     <Checkbox
@@ -406,7 +416,7 @@ export function Module3PracticeSession({
           <Separator />
 
           {/* Session Summary */}
-          <div className="bg-muted/30 p-4 rounded-lg space-y-2">
+          <div className="space-y-2 rounded-lg bg-muted/30 p-4">
             <h4 className="font-medium">Session Summary</h4>
             <div className="grid grid-cols-3 gap-4 text-sm">
               <div>
@@ -435,7 +445,7 @@ export function Module3PracticeSession({
               "Starting..."
             ) : (
               <>
-                <Play className="w-4 h-4 mr-2" />
+                <Play className="mr-2 h-4 w-4" />
                 Start Practice Session
               </>
             )}

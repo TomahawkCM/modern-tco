@@ -4,9 +4,9 @@
  * Returns structured transaction data.
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import OpenAI from 'openai';
-import { z } from 'zod';
+import { type NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
+import { z } from "zod";
 
 // Zod schema for validated response
 const TransactionSchema = z.object({
@@ -14,20 +14,22 @@ const TransactionSchema = z.object({
   description: z.string(),
   amount: z.number(),
   currency: z.string().optional(),
-  type: z.enum(['debit', 'credit']).optional(),
+  type: z.enum(["debit", "credit"]).optional(),
   balance: z.number().optional(),
 });
 
 const ExtractionResponseSchema = z.object({
   transactions: z.array(TransactionSchema),
   currency: z.string().optional(),
-  statementInfo: z.object({
-    bankName: z.string().optional(),
-    accountNumber: z.string().optional(),
-    statementPeriod: z.string().optional(),
-    openingBalance: z.number().optional(),
-    closingBalance: z.number().optional(),
-  }).optional(),
+  statementInfo: z
+    .object({
+      bankName: z.string().optional(),
+      accountNumber: z.string().optional(),
+      statementPeriod: z.string().optional(),
+      openingBalance: z.number().optional(),
+      closingBalance: z.number().optional(),
+    })
+    .optional(),
 });
 
 const EXTRACTION_PROMPT = `Extract all transactions from this bank statement PDF.
@@ -55,32 +57,32 @@ export async function POST(request: NextRequest) {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
-        { error: 'OpenAI API key not configured. AI extraction requires an active subscription.' },
+        { error: "OpenAI API key not configured. AI extraction requires an active subscription." },
         { status: 503 }
       );
     }
 
     // Parse multipart form data
     const formData = await request.formData();
-    const file = formData.get('file') as File | null;
+    const file = formData.get("file") as File | null;
 
     if (!file) {
-      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
+      return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
     // Validate file type
-    if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
-      return NextResponse.json({ error: 'File must be a PDF' }, { status: 400 });
+    if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
+      return NextResponse.json({ error: "File must be a PDF" }, { status: 400 });
     }
 
     // Validate file size (max 20MB)
     if (file.size > 20 * 1024 * 1024) {
-      return NextResponse.json({ error: 'File too large. Maximum 20MB.' }, { status: 400 });
+      return NextResponse.json({ error: "File too large. Maximum 20MB." }, { status: 400 });
     }
 
     // Convert PDF to base64 for the file content type
     const buffer = await file.arrayBuffer();
-    const base64 = Buffer.from(buffer).toString('base64');
+    const base64 = Buffer.from(buffer).toString("base64");
     const fileData = `data:application/pdf;base64,${base64}`;
 
     // Initialize OpenAI client
@@ -89,18 +91,18 @@ export async function POST(request: NextRequest) {
     // Call GPT-4o with native PDF file input
     // Uses the 'file' content type which supports PDFs directly (added March 2025)
     const response = await openai.chat.completions.create({
-      model: 'gpt-4o',
+      model: "gpt-4o",
       max_tokens: 16384,
       messages: [
         {
-          role: 'user',
+          role: "user",
           content: [
-            { type: 'text', text: EXTRACTION_PROMPT },
+            { type: "text", text: EXTRACTION_PROMPT },
             {
-              type: 'file',
+              type: "file",
               file: {
                 file_data: fileData,
-                filename: file.name || 'statement.pdf',
+                filename: file.name || "statement.pdf",
               },
             },
           ],
@@ -110,10 +112,7 @@ export async function POST(request: NextRequest) {
 
     const content = response.choices[0]?.message?.content;
     if (!content) {
-      return NextResponse.json(
-        { error: 'No response from AI model' },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: "No response from AI model" }, { status: 500 });
     }
 
     // Parse and validate JSON response
@@ -121,14 +120,14 @@ export async function POST(request: NextRequest) {
     try {
       // Clean potential markdown formatting from response
       const cleaned = content
-        .replace(/^```json?\s*/i, '')
-        .replace(/```\s*$/, '')
+        .replace(/^```json?\s*/i, "")
+        .replace(/```\s*$/, "")
         .trim();
       parsed = JSON.parse(cleaned);
     } catch (parseError) {
-      console.error('[PDF Extract] Failed to parse AI response:', content);
+      console.error("[PDF Extract] Failed to parse AI response:", content);
       return NextResponse.json(
-        { error: 'Failed to parse AI response as JSON', rawResponse: content },
+        { error: "Failed to parse AI response as JSON", rawResponse: content },
         { status: 500 }
       );
     }
@@ -136,11 +135,11 @@ export async function POST(request: NextRequest) {
     // Validate with Zod
     const validated = ExtractionResponseSchema.safeParse(parsed);
     if (!validated.success) {
-      console.error('[PDF Extract] Validation failed:', validated.error);
+      console.error("[PDF Extract] Validation failed:", validated.error);
       // Return the raw parsed data anyway, with a warning
       return NextResponse.json({
         ...parsed,
-        warning: 'Response structure validation had issues',
+        warning: "Response structure validation had issues",
         confidence: 0.7,
         tokensUsed: response.usage?.total_tokens,
       });
@@ -152,12 +151,12 @@ export async function POST(request: NextRequest) {
       tokensUsed: response.usage?.total_tokens,
     });
   } catch (error) {
-    console.error('[PDF Extract] Error:', error);
+    console.error("[PDF Extract] Error:", error);
 
     if (error instanceof OpenAI.APIError) {
       if (error.status === 429) {
         return NextResponse.json(
-          { error: 'Rate limit exceeded. Please try again later.' },
+          { error: "Rate limit exceeded. Please try again later." },
           { status: 429 }
         );
       }
@@ -168,7 +167,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Unknown error' },
+      { error: error instanceof Error ? error.message : "Unknown error" },
       { status: 500 }
     );
   }

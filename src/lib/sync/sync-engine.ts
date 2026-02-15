@@ -5,8 +5,8 @@
  * conflict detection and resolution, and bidirectional data sync.
  */
 
-import type { Table } from 'dexie';
-import { db } from '../budget-db';
+import type { Table } from "dexie";
+import { db } from "../budget-db";
 import type {
   EntityType,
   SyncEntity,
@@ -16,36 +16,32 @@ import type {
   ConflictPayload,
   FieldConflict,
   MergeResult,
-} from './types';
+} from "./types";
 
 // ============================================================================
 // Constants
 // ============================================================================
 
 const HIGH_PRIORITY_ENTITIES: EntityType[] = [
-  'accounts',
-  'transactions',
-  'categories',
-  'budgets',
-  'subscriptions',
+  "accounts",
+  "transactions",
+  "categories",
+  "budgets",
+  "subscriptions",
 ];
 
 const MEDIUM_PRIORITY_ENTITIES: EntityType[] = [
-  'receipts',
-  'loans',
-  'loanPayments',
-  'futurePurchases',
-  'investments',
-  'portfolios',
-  'investmentHoldings',
-  'investmentTransactions',
+  "receipts",
+  "loans",
+  "loanPayments",
+  "futurePurchases",
+  "investments",
+  "portfolios",
+  "investmentHoldings",
+  "investmentTransactions",
 ];
 
-const LOW_PRIORITY_ENTITIES: EntityType[] = [
-  'retirementPlans',
-  'importMappings',
-  'importMetadata',
-];
+const LOW_PRIORITY_ENTITIES: EntityType[] = ["retirementPlans", "importMappings", "importMetadata"];
 
 export const ALL_ENTITY_TYPES: EntityType[] = [
   ...HIGH_PRIORITY_ENTITIES,
@@ -55,10 +51,10 @@ export const ALL_ENTITY_TYPES: EntityType[] = [
 
 // Fields that require manual resolution on conflict
 const CRITICAL_FIELDS: Record<string, string[]> = {
-  transactions: ['amount'],
-  accounts: ['balance'],
-  budgets: ['amount'],
-  loans: ['balance', 'interestRate'],
+  transactions: ["amount"],
+  accounts: ["balance"],
+  budgets: ["amount"],
+  loans: ["balance", "interestRate"],
 };
 
 // ============================================================================
@@ -111,7 +107,9 @@ export class SyncEngine {
   /**
    * Perform a full sync - get all data from remote device
    */
-  async performFullSync(remoteEntities: Partial<Record<EntityType, SyncEntity[]>>): Promise<SyncResult> {
+  async performFullSync(
+    remoteEntities: Partial<Record<EntityType, SyncEntity[]>>
+  ): Promise<SyncResult> {
     const startTime = Date.now();
     const result: SyncResult = {
       success: true,
@@ -129,7 +127,7 @@ export class SyncEngine {
         const entities = remoteEntities[entityType];
         if (!entities || entities.length === 0) continue;
 
-        const entityResult = await this.syncEntities(entityType, entities, 'full');
+        const entityResult = await this.syncEntities(entityType, entities, "full");
         result.entitiesSynced += entityResult.synced;
         result.conflictsDetected += entityResult.conflicts.length;
 
@@ -147,8 +145,8 @@ export class SyncEngine {
     } catch (error) {
       result.success = false;
       result.errors.push({
-        entity: 'accounts',
-        id: '',
+        entity: "accounts",
+        id: "",
         error: error instanceof Error ? error.message : String(error),
       });
     }
@@ -164,10 +162,7 @@ export class SyncEngine {
   /**
    * Perform a delta sync - only sync changes since last sync
    */
-  async performDeltaSync(
-    remoteChanges: ChangeSet[],
-    since: number
-  ): Promise<SyncResult> {
+  async performDeltaSync(remoteChanges: ChangeSet[], since: number): Promise<SyncResult> {
     const startTime = Date.now();
     const result: SyncResult = {
       success: true,
@@ -202,8 +197,8 @@ export class SyncEngine {
     } catch (error) {
       result.success = false;
       result.errors.push({
-        entity: 'accounts',
-        id: '',
+        entity: "accounts",
+        id: "",
         error: error instanceof Error ? error.message : String(error),
       });
     }
@@ -231,20 +226,18 @@ export class SyncEngine {
       // Get all entities updated since the timestamp
       const entities = await table
         .filter((entity) => {
-          const updatedAt = entity.updatedAt instanceof Date
-            ? entity.updatedAt.getTime()
-            : entity.updatedAt;
+          const updatedAt =
+            entity.updatedAt instanceof Date ? entity.updatedAt.getTime() : entity.updatedAt;
           return updatedAt > since;
         })
         .toArray();
 
       for (const entity of entities) {
-        const updatedAt = entity.updatedAt instanceof Date
-          ? entity.updatedAt.getTime()
-          : entity.updatedAt;
+        const updatedAt =
+          entity.updatedAt instanceof Date ? entity.updatedAt.getTime() : entity.updatedAt;
 
         operations.push({
-          type: 'update', // We don't track create vs update separately
+          type: "update", // We don't track create vs update separately
           id: entity.id,
           data: this.serializeEntity(entityType, entity),
           version: entity.version || 1,
@@ -274,9 +267,10 @@ export class SyncEngine {
       const syncEntities: SyncEntity[] = entities.map((entity) => ({
         id: entity.id,
         data: this.serializeEntity(entityType, entity),
-        updatedAt: entity.updatedAt instanceof Date
-          ? entity.updatedAt.getTime()
-          : entity.updatedAt || Date.now(),
+        updatedAt:
+          entity.updatedAt instanceof Date
+            ? entity.updatedAt.getTime()
+            : entity.updatedAt || Date.now(),
         version: entity.version || 1,
         deviceId: this.deviceId,
       }));
@@ -296,7 +290,7 @@ export class SyncEngine {
   private async syncEntities(
     entityType: EntityType,
     remoteEntities: SyncEntity[],
-    mode: 'full' | 'delta'
+    mode: "full" | "delta"
   ): Promise<{
     synced: number;
     conflicts: ConflictPayload[];
@@ -308,7 +302,7 @@ export class SyncEngine {
     if (!table) {
       result.errors.push({
         entity: entityType,
-        id: '',
+        id: "",
         error: `Unknown entity type: ${entityType}`,
       });
       return result;
@@ -338,9 +332,10 @@ export class SyncEngine {
             result.conflicts.push(conflict);
           } else {
             // No conflict - update if remote is newer
-            const localUpdatedAt = localEntity.updatedAt instanceof Date
-              ? localEntity.updatedAt.getTime()
-              : localEntity.updatedAt;
+            const localUpdatedAt =
+              localEntity.updatedAt instanceof Date
+                ? localEntity.updatedAt.getTime()
+                : localEntity.updatedAt;
 
             if (remoteEntity.updatedAt > localUpdatedAt) {
               await this.updateEntity(entityType, remoteEntity);
@@ -371,7 +366,7 @@ export class SyncEngine {
     if (!table) {
       result.errors.push({
         entity: changeSet.entity,
-        id: '',
+        id: "",
         error: `Unknown entity type: ${changeSet.entity}`,
       });
       return result;
@@ -380,12 +375,12 @@ export class SyncEngine {
     for (const operation of changeSet.operations) {
       try {
         switch (operation.type) {
-          case 'create':
+          case "create":
             await table.add(this.deserializeEntity(changeSet.entity, operation.data!));
             result.synced++;
             break;
 
-          case 'update':
+          case "update":
             const localEntity = await table.get(operation.id);
             if (localEntity) {
               const remoteEntity: SyncEntity = {
@@ -400,7 +395,10 @@ export class SyncEngine {
               if (conflict) {
                 result.conflicts.push(conflict);
               } else {
-                await table.update(operation.id, this.deserializeEntity(changeSet.entity, operation.data!));
+                await table.update(
+                  operation.id,
+                  this.deserializeEntity(changeSet.entity, operation.data!)
+                );
                 result.synced++;
               }
             } else {
@@ -410,7 +408,7 @@ export class SyncEngine {
             }
             break;
 
-          case 'delete':
+          case "delete":
             await table.delete(operation.id);
             result.synced++;
             break;
@@ -436,9 +434,10 @@ export class SyncEngine {
     localEntity: Record<string, unknown>,
     remoteEntity: SyncEntity
   ): ConflictPayload | null {
-    const localUpdatedAt = localEntity.updatedAt instanceof Date
-      ? localEntity.updatedAt.getTime()
-      : localEntity.updatedAt as number;
+    const localUpdatedAt =
+      localEntity.updatedAt instanceof Date
+        ? localEntity.updatedAt.getTime()
+        : (localEntity.updatedAt as number);
 
     const remoteUpdatedAt = remoteEntity.updatedAt;
 
@@ -495,7 +494,7 @@ export class SyncEngine {
     const remoteKeys = Object.keys(remote);
 
     // Ignore metadata fields
-    const ignoreFields = ['id', 'createdAt', 'updatedAt', 'version', 'deviceId'];
+    const ignoreFields = ["id", "createdAt", "updatedAt", "version", "deviceId"];
 
     for (const key of localKeys) {
       if (ignoreFields.includes(key)) continue;
@@ -530,28 +529,28 @@ export class SyncEngine {
         await this.applyResolution(entityType, conflict, resolution);
         resolved++;
       } catch (error) {
-        console.error('Failed to auto-resolve conflict:', error);
+        console.error("Failed to auto-resolve conflict:", error);
       }
     }
 
     return resolved;
   }
 
-  private determineResolution(conflict: ConflictPayload): 'keep_local' | 'keep_remote' | 'merge' {
+  private determineResolution(conflict: ConflictPayload): "keep_local" | "keep_remote" | "merge" {
     const { localVersion, remoteVersion } = conflict;
 
     // Try field-level merge first
     const mergeResult = this.attemptFieldMerge(localVersion.data, remoteVersion.data);
 
     if (mergeResult.conflicts.length === 0) {
-      return 'merge';
+      return "merge";
     }
 
     // Fall back to LWW (Last Write Wins)
     if (this.preferLocal) {
-      return localVersion.updatedAt >= remoteVersion.updatedAt ? 'keep_local' : 'keep_remote';
+      return localVersion.updatedAt >= remoteVersion.updatedAt ? "keep_local" : "keep_remote";
     } else {
-      return remoteVersion.updatedAt >= localVersion.updatedAt ? 'keep_remote' : 'keep_local';
+      return remoteVersion.updatedAt >= localVersion.updatedAt ? "keep_remote" : "keep_local";
     }
   }
 
@@ -579,7 +578,7 @@ export class SyncEngine {
           field: key,
           localValue: local[key],
           remoteValue: remote[key],
-          resolution: 'manual',
+          resolution: "manual",
         });
         // For automatic merge, use the more recent value
         merged[key] = remote[key];
@@ -592,7 +591,7 @@ export class SyncEngine {
   private async applyResolution(
     entityType: EntityType,
     conflict: ConflictPayload,
-    resolution: 'keep_local' | 'keep_remote' | 'merge'
+    resolution: "keep_local" | "keep_remote" | "merge"
   ): Promise<void> {
     const table = this.getTable(entityType);
     if (!table) return;
@@ -600,15 +599,15 @@ export class SyncEngine {
     let dataToApply: Record<string, unknown>;
 
     switch (resolution) {
-      case 'keep_local':
+      case "keep_local":
         // Nothing to do, local data stays
         return;
 
-      case 'keep_remote':
+      case "keep_remote":
         dataToApply = conflict.remoteVersion.data;
         break;
 
-      case 'merge':
+      case "merge":
         const mergeResult = this.attemptFieldMerge(
           conflict.localVersion.data,
           conflict.remoteVersion.data
@@ -626,7 +625,7 @@ export class SyncEngine {
   async resolveConflict(
     entityType: EntityType,
     conflictId: string,
-    resolution: 'keep_local' | 'keep_remote' | 'merge',
+    resolution: "keep_local" | "keep_remote" | "merge",
     mergedData?: Record<string, unknown>
   ): Promise<boolean> {
     const conflict = this.pendingConflicts.find(
@@ -639,10 +638,13 @@ export class SyncEngine {
     if (!table) return false;
 
     try {
-      if (resolution === 'merge' && mergedData) {
+      if (resolution === "merge" && mergedData) {
         await table.update(conflictId, this.deserializeEntity(entityType, mergedData));
-      } else if (resolution === 'keep_remote') {
-        await table.update(conflictId, this.deserializeEntity(entityType, conflict.remoteVersion.data));
+      } else if (resolution === "keep_remote") {
+        await table.update(
+          conflictId,
+          this.deserializeEntity(entityType, conflict.remoteVersion.data)
+        );
       }
       // keep_local requires no action
 
@@ -653,7 +655,7 @@ export class SyncEngine {
 
       return true;
     } catch (error) {
-      console.error('Failed to resolve conflict:', error);
+      console.error("Failed to resolve conflict:", error);
       return false;
     }
   }
@@ -741,10 +743,19 @@ export class SyncEngine {
     const entity = { ...data };
 
     // Convert timestamps back to Date objects for known date fields
-    const dateFields = ['createdAt', 'updatedAt', 'date', 'startDate', 'endDate', 'targetDate', 'nextPaymentDate', 'nextBillingDate'];
+    const dateFields = [
+      "createdAt",
+      "updatedAt",
+      "date",
+      "startDate",
+      "endDate",
+      "targetDate",
+      "nextPaymentDate",
+      "nextBillingDate",
+    ];
 
     for (const field of dateFields) {
-      if (entity[field] && typeof entity[field] === 'number') {
+      if (entity[field] && typeof entity[field] === "number") {
         entity[field] = new Date(entity[field]);
       }
     }

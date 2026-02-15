@@ -33,7 +33,7 @@ const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-
  * Validates if a string is a valid UUID
  */
 function isValidUUID(value: string | null | undefined): boolean {
-  if (!value || typeof value !== 'string') return false;
+  if (!value || typeof value !== "string") return false;
   return UUID_REGEX.test(value);
 }
 
@@ -62,9 +62,7 @@ function calculateStreaks(reviewDates: string[]): {
 } {
   if (reviewDates.length === 0) return { longest: 0, current: 0 };
 
-  const reviewDays = new Set(
-    reviewDates.map((date) => new Date(date).toDateString())
-  );
+  const reviewDays = new Set(reviewDates.map((date) => new Date(date).toDateString()));
 
   const sortedDays = Array.from(reviewDays).sort(
     (a, b) => new Date(b).getTime() - new Date(a).getTime()
@@ -77,9 +75,7 @@ function calculateStreaks(reviewDates: string[]): {
 
   for (const dayStr of sortedDays) {
     const day = new Date(dayStr);
-    const diffDays = Math.floor(
-      (prevDate.getTime() - day.getTime()) / (1000 * 60 * 60 * 24)
-    );
+    const diffDays = Math.floor((prevDate.getTime() - day.getTime()) / (1000 * 60 * 60 * 24));
 
     if (diffDays <= 1) {
       streakCount++;
@@ -99,9 +95,7 @@ function calculateStreaks(reviewDates: string[]): {
     for (let i = 1; i < sortedDays.length; i++) {
       const prevDay = new Date(sortedDays[i - 1]);
       const currDay = new Date(sortedDays[i]);
-      const diff = Math.floor(
-        (prevDay.getTime() - currDay.getTime()) / (1000 * 60 * 60 * 24)
-      );
+      const diff = Math.floor((prevDay.getTime() - currDay.getTime()) / (1000 * 60 * 60 * 24));
       if (diff === 1) currentStreak++;
       else break;
     }
@@ -138,14 +132,9 @@ async function fetchCards(query: CardsQuery) {
 
     if (dueOnly) {
       cards = cards.filter((card) => card.srs_due <= nowIso);
-      cards.sort(
-        (a, b) => new Date(a.srs_due).getTime() - new Date(b.srs_due).getTime()
-      );
+      cards.sort((a, b) => new Date(a.srs_due).getTime() - new Date(b.srs_due).getTime());
     } else {
-      cards.sort(
-        (a, b) =>
-          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-      );
+      cards.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
     }
 
     if (newOnly) {
@@ -159,10 +148,7 @@ async function fetchCards(query: CardsQuery) {
     return cards;
   }
 
-  let builder = client
-    .from("flashcards")
-    .select("*")
-    .eq("user_id", STATIC_USER_ID);
+  let builder = client.from("flashcards").select("*").eq("user_id", STATIC_USER_ID);
 
   if (moduleId) {
     builder = builder.eq("module_id", moduleId);
@@ -227,21 +213,12 @@ async function buildStats(): Promise<FlashcardStats> {
   const totalCards = flashcards.length;
   const dueToday = flashcards.filter((card) => card.srs_due <= nowIso).length;
   const newCards = flashcards.filter((card) => card.srs_reps === 0).length;
-  const learningCards = flashcards.filter(
-    (card) => card.srs_reps > 0 && card.srs_reps < 2
-  ).length;
+  const learningCards = flashcards.filter((card) => card.srs_reps > 0 && card.srs_reps < 2).length;
   const matureCards = flashcards.filter((card) => card.srs_reps >= 2).length;
 
-  const totalReviews = flashcards.reduce(
-    (sum, card) => sum + card.total_reviews,
-    0
-  );
-  const totalCorrect = flashcards.reduce(
-    (sum, card) => sum + card.correct_reviews,
-    0
-  );
-  const avgRetentionRate =
-    totalReviews > 0 ? Math.round((totalCorrect / totalReviews) * 100) : 0;
+  const totalReviews = flashcards.reduce((sum, card) => sum + card.total_reviews, 0);
+  const totalCorrect = flashcards.reduce((sum, card) => sum + card.correct_reviews, 0);
+  const avgRetentionRate = totalReviews > 0 ? Math.round((totalCorrect / totalReviews) * 100) : 0;
 
   const { data: reviewRows } = await client
     .from("flashcard_reviews")
@@ -249,9 +226,7 @@ async function buildStats(): Promise<FlashcardStats> {
     .eq("user_id", STATIC_USER_ID)
     .order("reviewed_at", { ascending: false });
 
-  const streaks = calculateStreaks(
-    (reviewRows || []).map((row) => row.reviewed_at)
-  );
+  const streaks = calculateStreaks((reviewRows || []).map((row) => row.reviewed_at));
 
   return {
     totalCards,
@@ -300,13 +275,11 @@ async function handleReview(body: Record<string, unknown>) {
 
   const isCorrect = rating === "good" || rating === "easy";
   const newTotalReviews = typedFlashcard.total_reviews + 1;
-  const newCorrectReviews =
-    typedFlashcard.correct_reviews + (isCorrect ? 1 : 0);
+  const newCorrectReviews = typedFlashcard.correct_reviews + (isCorrect ? 1 : 0);
 
   const avgTime = typedFlashcard.average_recall_time_seconds || 0;
   const newAvgTime = Math.round(
-    (avgTime * typedFlashcard.total_reviews + timeSpentSeconds) /
-      newTotalReviews
+    (avgTime * typedFlashcard.total_reviews + timeSpentSeconds) / newTotalReviews
   );
 
   const { data: updatedFlashcard, error: updateError } = await client
@@ -409,19 +382,13 @@ export async function GET(request: Request) {
         return NextResponse.json({ cards }, { status: 200 });
       }
       default:
-        return NextResponse.json(
-          { error: "Unsupported action" },
-          { status: 400 }
-        );
+        return NextResponse.json({ error: "Unsupported action" }, { status: 400 });
     }
   } catch (error) {
     console.error("[flashcards/public] GET error:", error);
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Unexpected error retrieving flashcards",
+        error: error instanceof Error ? error.message : "Unexpected error retrieving flashcards",
       },
       { status: 500 }
     );
@@ -442,18 +409,13 @@ export async function POST(request: Request) {
       return await handleReview(body);
     }
 
-    return NextResponse.json(
-      { error: "Unsupported action" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Unsupported action" }, { status: 400 });
   } catch (error) {
     console.error("[flashcards/public] POST error:", error);
     return NextResponse.json(
       {
         error:
-          error instanceof Error
-            ? error.message
-            : "Unexpected error handling flashcard request",
+          error instanceof Error ? error.message : "Unexpected error handling flashcard request",
       },
       { status: 500 }
     );

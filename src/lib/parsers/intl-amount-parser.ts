@@ -8,50 +8,50 @@
  * - CH: 1'234.56
  */
 
-import { NumberParser } from '@internationalized/number';
+import { NumberParser } from "@internationalized/number";
 
 // Currency symbol to ISO 4217 code mapping
 const CURRENCY_SYMBOLS: Record<string, string> = {
-  '$': 'USD',
-  '€': 'EUR',
-  '£': 'GBP',
-  '¥': 'JPY',
-  '₹': 'INR',
-  '₽': 'RUB',
-  '₩': 'KRW',
-  '₪': 'ILS',
-  '₫': 'VND',
-  '₱': 'PHP',
-  '฿': 'THB',
-  '₺': 'TRY',
-  '₴': 'UAH',
-  '₸': 'KZT',
-  '₦': 'NGN',
-  '₵': 'GHS',
-  '﷼': 'SAR',
-  'R$': 'BRL',
-  'kr': 'SEK', // Also NOK, DKK, ISK - ambiguous
-  'Kč': 'CZK',
-  'zł': 'PLN',
-  'Ft': 'HUF',
-  'lei': 'RON',
-  'лв': 'BGN',
-  'RM': 'MYR',
-  'Rp': 'IDR',
-  'Rs': 'INR',
-  'S$': 'SGD',
-  'HK$': 'HKD',
-  'NT$': 'TWD',
-  'A$': 'AUD',
-  'NZ$': 'NZD',
-  'C$': 'CAD',
-  'CHF': 'CHF',
-  'CA$': 'CAD',
-  'US$': 'USD',
-  'AU$': 'AUD',
-  'R': 'ZAR',
-  'Br': 'ETB',
-  'KSh': 'KES',
+  $: "USD",
+  "€": "EUR",
+  "£": "GBP",
+  "¥": "JPY",
+  "₹": "INR",
+  "₽": "RUB",
+  "₩": "KRW",
+  "₪": "ILS",
+  "₫": "VND",
+  "₱": "PHP",
+  "฿": "THB",
+  "₺": "TRY",
+  "₴": "UAH",
+  "₸": "KZT",
+  "₦": "NGN",
+  "₵": "GHS",
+  "﷼": "SAR",
+  R$: "BRL",
+  kr: "SEK", // Also NOK, DKK, ISK - ambiguous
+  Kč: "CZK",
+  zł: "PLN",
+  Ft: "HUF",
+  lei: "RON",
+  лв: "BGN",
+  RM: "MYR",
+  Rp: "IDR",
+  Rs: "INR",
+  S$: "SGD",
+  HK$: "HKD",
+  NT$: "TWD",
+  A$: "AUD",
+  NZ$: "NZD",
+  C$: "CAD",
+  CHF: "CHF",
+  CA$: "CAD",
+  US$: "USD",
+  AU$: "AUD",
+  R: "ZAR",
+  Br: "ETB",
+  KSh: "KES",
 };
 
 // Pre-created parser cache for performance
@@ -59,7 +59,7 @@ const parserCache = new Map<string, NumberParser>();
 
 function getParser(locale: string): NumberParser {
   if (!parserCache.has(locale)) {
-    parserCache.set(locale, new NumberParser(locale, { style: 'decimal' }));
+    parserCache.set(locale, new NumberParser(locale, { style: "decimal" }));
   }
   return parserCache.get(locale)!;
 }
@@ -72,7 +72,7 @@ function getParser(locale: string): NumberParser {
  * @returns Parsed number or null if parsing fails
  */
 export function parseAmount(str: string, locale?: string): number | null {
-  if (!str || typeof str !== 'string') return null;
+  if (!str || typeof str !== "string") return null;
 
   // Clean the string
   let cleaned = str.trim();
@@ -88,20 +88,20 @@ export function parseAmount(str: string, locale?: string): number | null {
   }
 
   // Check for leading minus or trailing minus (some locales use trailing)
-  if (cleaned.startsWith('-') || cleaned.startsWith('−') || cleaned.startsWith('–')) {
+  if (cleaned.startsWith("-") || cleaned.startsWith("−") || cleaned.startsWith("–")) {
     cleaned = cleaned.substring(1).trim();
     isNegative = true;
-  } else if (cleaned.endsWith('-') || cleaned.endsWith('−')) {
+  } else if (cleaned.endsWith("-") || cleaned.endsWith("−")) {
     cleaned = cleaned.slice(0, -1).trim();
     isNegative = true;
   }
 
   // Check for CR/DR suffix (common in bank statements)
   if (/\s*DR\.?\s*$/i.test(cleaned)) {
-    cleaned = cleaned.replace(/\s*DR\.?\s*$/i, '').trim();
+    cleaned = cleaned.replace(/\s*DR\.?\s*$/i, "").trim();
     isNegative = true;
   } else if (/\s*CR\.?\s*$/i.test(cleaned)) {
-    cleaned = cleaned.replace(/\s*CR\.?\s*$/i, '').trim();
+    cleaned = cleaned.replace(/\s*CR\.?\s*$/i, "").trim();
     isNegative = false;
   }
 
@@ -130,7 +130,7 @@ export function parseAmount(str: string, locale?: string): number | null {
   }
 
   // Last resort: try common locales
-  const fallbackLocales = ['en-US', 'de-DE', 'fr-FR', 'pt-BR', 'hi-IN'];
+  const fallbackLocales = ["en-US", "de-DE", "fr-FR", "pt-BR", "hi-IN"];
   for (const fallbackLocale of fallbackLocales) {
     try {
       const parser = getParser(fallbackLocale);
@@ -152,10 +152,10 @@ export function parseAmount(str: string, locale?: string): number | null {
  */
 function heuristicParse(str: string): number | null {
   // Remove spaces and thin spaces (French format: 1 234,56)
-  let cleaned = str.replace(/[\s\u00A0\u202F]/g, '');
+  let cleaned = str.replace(/[\s\u00A0\u202F]/g, "");
 
   // Remove apostrophes (Swiss format: 1'234.56)
-  cleaned = cleaned.replace(/'/g, '');
+  cleaned = cleaned.replace(/'/g, "");
 
   const dots = (cleaned.match(/\./g) || []).length;
   const commas = (cleaned.match(/,/g) || []).length;
@@ -169,35 +169,35 @@ function heuristicParse(str: string): number | null {
   // Single comma or dot at end with exactly 2-3 digits after it = decimal separator
   const trailingDecimalMatch = cleaned.match(/^([\d.,]+)[.,](\d{1,3})$/);
   if (trailingDecimalMatch) {
-    const lastSep = cleaned.lastIndexOf(',') > cleaned.lastIndexOf('.') ? ',' : '.';
-    const lastSepPos = Math.max(cleaned.lastIndexOf(','), cleaned.lastIndexOf('.'));
+    const lastSep = cleaned.lastIndexOf(",") > cleaned.lastIndexOf(".") ? "," : ".";
+    const lastSepPos = Math.max(cleaned.lastIndexOf(","), cleaned.lastIndexOf("."));
     const afterLast = cleaned.substring(lastSepPos + 1);
 
     if (afterLast.length <= 3) {
       // The last separator is the decimal separator
-      const intPart = cleaned.substring(0, lastSepPos).replace(/[.,]/g, '');
+      const intPart = cleaned.substring(0, lastSepPos).replace(/[.,]/g, "");
       const result = parseFloat(`${intPart}.${afterLast}`);
       return isNaN(result) ? null : result;
     }
   }
 
   // Multiple dots, one comma at end → comma is decimal (EU: 1.234.567,89)
-  if (dots >= 1 && commas === 1 && cleaned.lastIndexOf(',') > cleaned.lastIndexOf('.')) {
-    const normalized = cleaned.replace(/\./g, '').replace(',', '.');
+  if (dots >= 1 && commas === 1 && cleaned.lastIndexOf(",") > cleaned.lastIndexOf(".")) {
+    const normalized = cleaned.replace(/\./g, "").replace(",", ".");
     const result = parseFloat(normalized);
     return isNaN(result) ? null : result;
   }
 
   // Multiple commas, one dot at end → dot is decimal (US: 1,234,567.89)
-  if (commas >= 1 && dots === 1 && cleaned.lastIndexOf('.') > cleaned.lastIndexOf(',')) {
-    const normalized = cleaned.replace(/,/g, '');
+  if (commas >= 1 && dots === 1 && cleaned.lastIndexOf(".") > cleaned.lastIndexOf(",")) {
+    const normalized = cleaned.replace(/,/g, "");
     const result = parseFloat(normalized);
     return isNaN(result) ? null : result;
   }
 
   // One dot, no commas → dot is decimal (1234.56) or thousands (1.234 → 1234)
   if (dots === 1 && commas === 0) {
-    const afterDot = cleaned.split('.')[1];
+    const afterDot = cleaned.split(".")[1];
     // If 1-2 digits after dot, treat as decimal. If 3, ambiguous but assume decimal.
     const result = parseFloat(cleaned);
     return isNaN(result) ? null : result;
@@ -205,16 +205,16 @@ function heuristicParse(str: string): number | null {
 
   // One comma, no dots → comma could be decimal (EU) or thousands (US)
   if (commas === 1 && dots === 0) {
-    const afterComma = cleaned.split(',')[1];
+    const afterComma = cleaned.split(",")[1];
     if (afterComma.length <= 2) {
       // Likely decimal separator (1234,56 → 1234.56)
-      const normalized = cleaned.replace(',', '.');
+      const normalized = cleaned.replace(",", ".");
       const result = parseFloat(normalized);
       return isNaN(result) ? null : result;
     } else if (afterComma.length === 3) {
       // Ambiguous: could be 1,234 (US thousands) or 1,234 (EU decimal with 3 places)
       // Default to treating comma as thousands separator (more common for exactly 3 digits)
-      const normalized = cleaned.replace(',', '');
+      const normalized = cleaned.replace(",", "");
       const result = parseFloat(normalized);
       return isNaN(result) ? null : result;
     }
@@ -224,8 +224,8 @@ function heuristicParse(str: string): number | null {
   const allSeps = [...cleaned.matchAll(/[.,]/g)];
   if (allSeps.length > 0) {
     const lastSep = allSeps[allSeps.length - 1];
-    const pos = lastSep.index!;
-    const before = cleaned.substring(0, pos).replace(/[.,]/g, '');
+    const pos = lastSep.index;
+    const before = cleaned.substring(0, pos).replace(/[.,]/g, "");
     const after = cleaned.substring(pos + 1);
     const result = parseFloat(`${before}.${after}`);
     return isNaN(result) ? null : result;
@@ -241,19 +241,40 @@ function removeCurrencySymbols(str: string): string {
   let result = str;
 
   // Remove multi-char symbols first (order matters)
-  const multiCharSymbols = ['CA$', 'AU$', 'NZ$', 'US$', 'HK$', 'NT$', 'S$', 'R$', 'RM', 'Rp', 'Rs', 'KSh', 'Kč', 'zł', 'Ft', 'lei', 'лв', 'Br', 'kr', 'CHF'];
+  const multiCharSymbols = [
+    "CA$",
+    "AU$",
+    "NZ$",
+    "US$",
+    "HK$",
+    "NT$",
+    "S$",
+    "R$",
+    "RM",
+    "Rp",
+    "Rs",
+    "KSh",
+    "Kč",
+    "zł",
+    "Ft",
+    "lei",
+    "лв",
+    "Br",
+    "kr",
+    "CHF",
+  ];
   for (const symbol of multiCharSymbols) {
-    result = result.replace(new RegExp(escapeRegex(symbol), 'g'), '');
+    result = result.replace(new RegExp(escapeRegex(symbol), "g"), "");
   }
 
   // Remove single-char symbols
-  result = result.replace(/[$€£¥₹₽₩₪₫₱฿₺₴₸₦₵﷼]/g, '');
+  result = result.replace(/[$€£¥₹₽₩₪₫₱฿₺₴₸₦₵﷼]/g, "");
 
   return result.trim();
 }
 
 function escapeRegex(str: string): string {
-  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 /**
@@ -271,12 +292,60 @@ export function detectCurrencySymbol(str: string): string | null {
     const code = isoMatch[1];
     // Validate it's a known currency code (common ones)
     const knownCodes = [
-      'USD', 'EUR', 'GBP', 'JPY', 'CNY', 'INR', 'CAD', 'AUD', 'CHF',
-      'SEK', 'NOK', 'DKK', 'NZD', 'SGD', 'HKD', 'KRW', 'TWD', 'THB',
-      'MYR', 'IDR', 'PHP', 'VND', 'BRL', 'MXN', 'ARS', 'CLP', 'COP',
-      'PEN', 'ZAR', 'NGN', 'KES', 'GHS', 'EGP', 'TRY', 'RUB', 'UAH',
-      'PLN', 'CZK', 'HUF', 'RON', 'BGN', 'ISK', 'ILS', 'SAR', 'AED',
-      'QAR', 'KWD', 'BHD', 'OMR', 'PKR', 'BDT', 'LKR', 'MMK', 'KZT',
+      "USD",
+      "EUR",
+      "GBP",
+      "JPY",
+      "CNY",
+      "INR",
+      "CAD",
+      "AUD",
+      "CHF",
+      "SEK",
+      "NOK",
+      "DKK",
+      "NZD",
+      "SGD",
+      "HKD",
+      "KRW",
+      "TWD",
+      "THB",
+      "MYR",
+      "IDR",
+      "PHP",
+      "VND",
+      "BRL",
+      "MXN",
+      "ARS",
+      "CLP",
+      "COP",
+      "PEN",
+      "ZAR",
+      "NGN",
+      "KES",
+      "GHS",
+      "EGP",
+      "TRY",
+      "RUB",
+      "UAH",
+      "PLN",
+      "CZK",
+      "HUF",
+      "RON",
+      "BGN",
+      "ISK",
+      "ILS",
+      "SAR",
+      "AED",
+      "QAR",
+      "KWD",
+      "BHD",
+      "OMR",
+      "PKR",
+      "BDT",
+      "LKR",
+      "MMK",
+      "KZT",
     ];
     if (knownCodes.includes(code)) {
       return code;
@@ -284,8 +353,7 @@ export function detectCurrencySymbol(str: string): string | null {
   }
 
   // Check for multi-char symbols (check longest first)
-  const sortedSymbols = Object.entries(CURRENCY_SYMBOLS)
-    .sort((a, b) => b[0].length - a[0].length);
+  const sortedSymbols = Object.entries(CURRENCY_SYMBOLS).sort((a, b) => b[0].length - a[0].length);
 
   for (const [symbol, code] of sortedSymbols) {
     if (str.includes(symbol)) {

@@ -9,14 +9,14 @@
 // Constants
 // ============================================================================
 
-const ECDH_ALGORITHM = 'ECDH';
-const ECDH_CURVE = 'P-256'; // NIST P-256 curve
-const AES_ALGORITHM = 'AES-GCM';
+const ECDH_ALGORITHM = "ECDH";
+const ECDH_CURVE = "P-256"; // NIST P-256 curve
+const AES_ALGORITHM = "AES-GCM";
 const AES_KEY_LENGTH = 256; // bits
 const IV_LENGTH = 12; // bytes (96 bits for GCM)
 const AUTH_TAG_LENGTH = 128; // bits (16 bytes)
 
-const KEY_STORAGE_PREFIX = 'lan_sync_key_';
+const KEY_STORAGE_PREFIX = "lan_sync_key_";
 
 // ============================================================================
 // Types
@@ -56,10 +56,10 @@ export async function generateKeyPair(): Promise<KeyPair> {
       namedCurve: ECDH_CURVE,
     },
     true, // extractable
-    ['deriveBits', 'deriveKey']
+    ["deriveBits", "deriveKey"]
   );
 
-  const publicKeyExported = await crypto.subtle.exportKey('spki', keyPair.publicKey);
+  const publicKeyExported = await crypto.subtle.exportKey("spki", keyPair.publicKey);
   const publicKeyBase64 = arrayBufferToBase64(publicKeyExported);
 
   return {
@@ -76,7 +76,7 @@ export async function importPublicKey(publicKeyBase64: string): Promise<CryptoKe
   const publicKeyData = base64ToArrayBuffer(publicKeyBase64);
 
   return await crypto.subtle.importKey(
-    'spki',
+    "spki",
     publicKeyData,
     {
       name: ECDH_ALGORITHM,
@@ -94,14 +94,14 @@ export async function importPrivateKey(privateKeyBase64: string): Promise<Crypto
   const privateKeyData = base64ToArrayBuffer(privateKeyBase64);
 
   return await crypto.subtle.importKey(
-    'pkcs8',
+    "pkcs8",
     privateKeyData,
     {
       name: ECDH_ALGORITHM,
       namedCurve: ECDH_CURVE,
     },
     true,
-    ['deriveBits', 'deriveKey']
+    ["deriveBits", "deriveKey"]
   );
 }
 
@@ -109,7 +109,7 @@ export async function importPrivateKey(privateKeyBase64: string): Promise<Crypto
  * Export a private key to base64 string for storage
  */
 export async function exportPrivateKey(privateKey: CryptoKey): Promise<string> {
-  const exported = await crypto.subtle.exportKey('pkcs8', privateKey);
+  const exported = await crypto.subtle.exportKey("pkcs8", privateKey);
   return arrayBufferToBase64(exported);
 }
 
@@ -139,21 +139,17 @@ export async function deriveAESKey(
   info: string
 ): Promise<CryptoKey> {
   // Import the shared secret as an HKDF key
-  const hkdfKey = await crypto.subtle.importKey(
-    'raw',
-    sharedSecret,
-    { name: 'HKDF' },
-    false,
-    ['deriveKey']
-  );
+  const hkdfKey = await crypto.subtle.importKey("raw", sharedSecret, { name: "HKDF" }, false, [
+    "deriveKey",
+  ]);
 
   // Derive an AES key using HKDF
   const encoder = new TextEncoder();
 
   return await crypto.subtle.deriveKey(
     {
-      name: 'HKDF',
-      hash: 'SHA-256',
+      name: "HKDF",
+      hash: "SHA-256",
       salt: new Uint8Array(salt).buffer,
       info: new Uint8Array(encoder.encode(info)).buffer,
     },
@@ -163,7 +159,7 @@ export async function deriveAESKey(
       length: AES_KEY_LENGTH,
     },
     false, // not extractable
-    ['encrypt', 'decrypt']
+    ["encrypt", "decrypt"]
   );
 }
 
@@ -211,7 +207,7 @@ export async function encrypt(
   const iv = crypto.getRandomValues(new Uint8Array(IV_LENGTH));
 
   let dataBytes: Uint8Array;
-  if (typeof data === 'string') {
+  if (typeof data === "string") {
     const encoder = new TextEncoder();
     dataBytes = encoder.encode(data);
   } else {
@@ -240,10 +236,7 @@ export async function encrypt(
 /**
  * Decrypt a message using AES-256-GCM
  */
-export async function decrypt(
-  key: CryptoKey,
-  encrypted: EncryptedMessage
-): Promise<Uint8Array> {
+export async function decrypt(key: CryptoKey, encrypted: EncryptedMessage): Promise<Uint8Array> {
   const iv = new Uint8Array(base64ToArrayBuffer(encrypted.iv));
   const ciphertext = base64ToArrayBuffer(encrypted.ciphertext);
 
@@ -275,10 +268,7 @@ export async function decryptToString(
 /**
  * Encrypt a JSON object
  */
-export async function encryptObject<T>(
-  key: CryptoKey,
-  obj: T
-): Promise<EncryptedMessage> {
+export async function encryptObject<T>(key: CryptoKey, obj: T): Promise<EncryptedMessage> {
   const json = JSON.stringify(obj);
   return encrypt(key, json);
 }
@@ -286,10 +276,7 @@ export async function encryptObject<T>(
 /**
  * Decrypt to a JSON object
  */
-export async function decryptObject<T>(
-  key: CryptoKey,
-  encrypted: EncryptedMessage
-): Promise<T> {
+export async function decryptObject<T>(key: CryptoKey, encrypted: EncryptedMessage): Promise<T> {
   const json = await decryptToString(key, encrypted);
   return JSON.parse(json) as T;
 }
@@ -301,12 +288,9 @@ export async function decryptObject<T>(
 /**
  * Store a key pair securely in browser storage
  */
-export async function storeKeyPair(
-  deviceId: string,
-  keyPair: KeyPair
-): Promise<void> {
-  if (typeof window === 'undefined') {
-    throw new Error('Key storage is only available in the browser');
+export async function storeKeyPair(deviceId: string, keyPair: KeyPair): Promise<void> {
+  if (typeof window === "undefined") {
+    throw new Error("Key storage is only available in the browser");
   }
 
   const privateKeyBase64 = await exportPrivateKey(keyPair.privateKey);
@@ -326,7 +310,7 @@ export async function storeKeyPair(
  * Load a key pair from browser storage
  */
 export async function loadKeyPair(deviceId: string): Promise<KeyPair | null> {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return null;
   }
 
@@ -349,7 +333,7 @@ export async function loadKeyPair(deviceId: string): Promise<KeyPair | null> {
       publicKeyBase64: keyData.publicKey,
     };
   } catch (error) {
-    console.error('Failed to load key pair:', error);
+    console.error("Failed to load key pair:", error);
     return null;
   }
 }
@@ -358,7 +342,7 @@ export async function loadKeyPair(deviceId: string): Promise<KeyPair | null> {
  * Delete a key pair from storage
  */
 export function deleteKeyPair(deviceId: string): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   const storageKey = `${KEY_STORAGE_PREFIX}${deviceId}`;
   localStorage.removeItem(storageKey);
@@ -425,7 +409,7 @@ export function clearAllSessionKeys(): void {
  */
 function arrayBufferToBase64(buffer: ArrayBuffer): string {
   const bytes = new Uint8Array(buffer);
-  let binary = '';
+  let binary = "";
   for (let i = 0; i < bytes.byteLength; i++) {
     binary += String.fromCharCode(bytes[i]);
   }
@@ -450,8 +434,8 @@ function base64ToArrayBuffer(base64: string): ArrayBuffer {
 export function generateSessionId(): string {
   const bytes = crypto.getRandomValues(new Uint8Array(16));
   return Array.from(bytes)
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 /**
@@ -466,23 +450,18 @@ export async function verifyIntegrity(
     // For GCM, integrity is verified during decryption
     // This function is for additional HMAC verification if needed
     const hmacKey = await crypto.subtle.importKey(
-      'raw',
-      await crypto.subtle.exportKey('raw', key),
-      { name: 'HMAC', hash: 'SHA-256' },
+      "raw",
+      await crypto.subtle.exportKey("raw", key),
+      { name: "HMAC", hash: "SHA-256" },
       false,
-      ['verify']
+      ["verify"]
     );
 
     // Create copies as ArrayBuffer to avoid SharedArrayBuffer type issues
     const sigBuffer = new Uint8Array(signature).buffer;
     const dataBuffer = new Uint8Array(data).buffer;
 
-    return await crypto.subtle.verify(
-      'HMAC',
-      hmacKey,
-      sigBuffer,
-      dataBuffer
-    );
+    return await crypto.subtle.verify("HMAC", hmacKey, sigBuffer, dataBuffer);
   } catch {
     return false;
   }

@@ -16,11 +16,11 @@ export function FloatingActionButton({ onClick, className }: FloatingActionButto
       size="icon"
       className={cn(
         "fixed z-40 rounded-full shadow-lg",
-        "w-14 h-14",
+        "h-14 w-14",
         "md:hidden",
         "bg-primary hover:bg-primary/90",
-        "active:scale-95 transition-transform",
-        className,
+        "transition-transform active:scale-95",
+        className
       )}
       style={{
         bottom: "calc(env(safe-area-inset-bottom, 0px) + 72px)",

@@ -53,11 +53,7 @@ export function BottomSheet({
     <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetContent
         side={isMobile ? "bottom" : "right"}
-        className={cn(
-          isMobile
-            ? cn("rounded-t-2xl", `max-h-[${maxHeight}]`)
-            : "w-[400px]"
-        )}
+        className={cn(isMobile ? cn("rounded-t-2xl", `max-h-[${maxHeight}]`) : "w-[400px]")}
       >
         {isMobile ? (
           <motion.div
@@ -78,9 +74,7 @@ export function BottomSheet({
             )}
             <SheetHeader>
               <SheetTitle>{title}</SheetTitle>
-              {description && (
-                <SheetDescription>{description}</SheetDescription>
-              )}
+              {description && <SheetDescription>{description}</SheetDescription>}
             </SheetHeader>
             <div className="flex-1 overflow-y-auto">{children}</div>
           </motion.div>
@@ -88,9 +82,7 @@ export function BottomSheet({
           <>
             <SheetHeader>
               <SheetTitle>{title}</SheetTitle>
-              {description && (
-                <SheetDescription>{description}</SheetDescription>
-              )}
+              {description && <SheetDescription>{description}</SheetDescription>}
             </SheetHeader>
             <div className="flex-1 overflow-y-auto">{children}</div>
           </>

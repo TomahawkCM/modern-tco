@@ -13,6 +13,7 @@
 **Recommendation**: **Refine existing hybrid approach** with priority-based organization
 
 **Key Changes Needed**:
+
 1. Reduce mobile tab bar from 5 to 4 items (industry standard)
 2. Reorganize sections by usage frequency (Core → Planning → Tools)
 3. Add grouped navigation in "More" menu for discoverability
@@ -23,14 +24,18 @@
 ## 1. Current Navigation Structure
 
 ### Desktop (≥768px)
+
 **Left Sidebar - All Items Visible**
+
 - 10 main navigation items
 - 3 footer items (Import CSV, Export Data, Settings)
 - 1 help button (Keyboard Shortcuts)
 - **Total**: 14 clickable items
 
 ### Mobile (<768px)
+
 **Bottom Tab Bar (Persistent)**
+
 - Home
 - Transactions
 - Loans
@@ -38,11 +43,13 @@
 - More (opens Sheet/hamburger menu)
 
 **Hamburger Sheet (Opened via "More")**
+
 - All 10 main navigation items
 - 3 footer items
 - 1 help button
 
 **Mobile Header**
+
 - Hamburger menu button (alternative access to Sheet)
 - "Budget App" title
 
@@ -53,6 +60,7 @@
 ### Current 13 Sections (by code analysis)
 
 **Primary Navigation** (10 items):
+
 1. Dashboard (Home icon)
 2. Transactions (Receipt icon)
 3. Scan Receipt / OCR (Camera icon)
@@ -64,10 +72,7 @@
 9. Retirement (TrendingUp icon)
 10. Reports (BarChart3 icon)
 
-**Footer/Utility** (3 items):
-11. Import CSV (Upload icon)
-12. Export Data (Download icon)
-13. Settings (Settings icon)
+**Footer/Utility** (3 items): 11. Import CSV (Upload icon) 12. Export Data (Download icon) 13. Settings (Settings icon)
 
 **Note**: Planning docs reference "9 sections" but code shows 10+ (Categories is extra, Scan Receipt vs Reports distinction)
 
@@ -77,14 +82,14 @@
 
 ### Apps with 9+ Sections
 
-| App | Sections | Mobile Nav | Pattern | Tabs Count |
-|-----|----------|------------|---------|------------|
-| **Notion** | 8+ | Bottom tab bar + sidebar | Hybrid | 4 tabs (Home, Search, Inbox, Create) |
-| **Todoist** | 10+ | Bottom nav bar + Browse | Hybrid | 4-5 customizable tabs + Browse |
-| **Chase Bank** | 8+ | Tab bar for core functions | Hybrid | ~4-5 tabs (moved from hamburger) |
-| **Monarch Money** | 9+ | Tab bar + menu | Hybrid | Unknown count |
-| **Simplifi** | 9+ | Hamburger menu + tiles | Hamburger-first | N/A |
-| **Budget App (Current)** | 13 | Bottom tab bar + Sheet | Hybrid | 5 tabs (Home, Trans, Loans, Budgets, More) |
+| App                      | Sections | Mobile Nav                 | Pattern         | Tabs Count                                 |
+| ------------------------ | -------- | -------------------------- | --------------- | ------------------------------------------ |
+| **Notion**               | 8+       | Bottom tab bar + sidebar   | Hybrid          | 4 tabs (Home, Search, Inbox, Create)       |
+| **Todoist**              | 10+      | Bottom nav bar + Browse    | Hybrid          | 4-5 customizable tabs + Browse             |
+| **Chase Bank**           | 8+       | Tab bar for core functions | Hybrid          | ~4-5 tabs (moved from hamburger)           |
+| **Monarch Money**        | 9+       | Tab bar + menu             | Hybrid          | Unknown count                              |
+| **Simplifi**             | 9+       | Hamburger menu + tiles     | Hamburger-first | N/A                                        |
+| **Budget App (Current)** | 13       | Bottom tab bar + Sheet     | Hybrid          | 5 tabs (Home, Trans, Loans, Budgets, More) |
 
 ### Key Insights
 
@@ -101,6 +106,7 @@
 ### Nielsen Norman Group (NN/g) Guidelines
 
 **Tab Bar Best Practices:**
+
 - **Limit to 5 items maximum** (Budget App: ✅ compliant at 5)
 - Use for **primary navigation** only
 - **Persistent visibility** (always visible, not hidden)
@@ -108,6 +114,7 @@
 - **Icons + labels**: Don't use icons-only (confusing)
 
 **Hamburger Menu Considerations:**
+
 - **Trade-off**: Hides content but saves space
 - **Discovery issue**: "Out of sight, out of mind" problem
 - **Best for**: Browse-mostly apps, less frequent actions
@@ -124,6 +131,7 @@
 5. **Grouped navigation**: Organize hamburger menu with headers/sections
 
 **Example: Canva's Approach**
+
 - High-priority items: Bottom tab bar
 - Other main pages: Hamburger menu
 - Result: Best of both worlds
@@ -135,26 +143,17 @@
 ### Estimated Usage Tiers (based on typical budgeting workflows)
 
 **Tier 1: Daily/Multiple Times per Week (Tab Bar Candidates)**
+
 1. **Dashboard** - Homepage, overview metrics (Home tab) ✅
 2. **Transactions** - Add/edit/review transactions (Transactions tab) ✅
 3. **Budgets** - Check spending vs budget (Budgets tab) ✅
 4. **More** - Access to all other sections (More tab) ✅
 
-**Tier 2: Weekly/Multiple Times per Month (Hamburger Menu - Top Section)**
-5. **Reports** - Monthly spending analysis
-6. **Loans** - Check loan balances, make extra payments
-7. **Scan Receipt / OCR** - Quick transaction entry via photo
-8. **Categories** - Manage spending categories
+**Tier 2: Weekly/Multiple Times per Month (Hamburger Menu - Top Section)** 5. **Reports** - Monthly spending analysis 6. **Loans** - Check loan balances, make extra payments 7. **Scan Receipt / OCR** - Quick transaction entry via photo 8. **Categories** - Manage spending categories
 
-**Tier 3: Monthly/Infrequent (Hamburger Menu - Middle Section)**
-9. **Investments** - Track portfolio performance
-10. **Future Plans** - Long-term savings goals
-11. **Retirement** - Retirement planning projections
+**Tier 3: Monthly/Infrequent (Hamburger Menu - Middle Section)** 9. **Investments** - Track portfolio performance 10. **Future Plans** - Long-term savings goals 11. **Retirement** - Retirement planning projections
 
-**Tier 4: Utility/Infrequent (Hamburger Menu - Bottom Section)**
-12. **Import CSV** - Bulk import transactions
-13. **Export Data** - Backup/export for analysis
-14. **Settings** - App preferences, theme, privacy
+**Tier 4: Utility/Infrequent (Hamburger Menu - Bottom Section)** 12. **Import CSV** - Bulk import transactions 13. **Export Data** - Backup/export for analysis 14. **Settings** - App preferences, theme, privacy
 
 ---
 
@@ -167,18 +166,21 @@
 Recommendation: **Remove Loans from tab bar, add to menu**
 
 **Option A: 4-Tab Simplified** (Recommended)
+
 ```
 [Home] [Transactions] [Budgets] [More]
   🏠      💳           📊        ≡
 ```
 
 **Rationale**:
+
 - Aligns with industry standard (4 tabs like Notion, Todoist)
 - Loans usage is Tier 2 (weekly), not daily like Transactions/Budgets
 - Cleaner, more spacious tab bar (better for 48px touch targets)
 - Reduces cognitive load (fewer choices)
 
 **Option B: Keep 5-Tab Current** (If user testing shows Loans is frequently accessed)
+
 ```
 [Home] [Transactions] [Loans] [Budgets] [More]
   🏠      💳          💰      📊        ≡
@@ -212,6 +214,7 @@ Recommendation: **Remove Loans from tab bar, add to menu**
 ```
 
 **Benefits of Grouped Navigation**:
+
 - **Discoverability**: Users can scan categories to find features
 - **Context**: Related features grouped together
 - **Scalability**: Easy to add new features to existing groups
@@ -255,6 +258,7 @@ Household Finance Manager
 ```
 
 **Collapsible Behavior**:
+
 - **WEALTH group**: Collapsed by default (less frequent use)
 - Click group header to expand/collapse
 - Save state to localStorage (user preference)
@@ -320,15 +324,15 @@ Household Finance Manager
 
 ## 8. Comparison: Current vs Recommended
 
-| Aspect | Current | Recommended (Option A) | Change |
-|--------|---------|----------------------|--------|
-| **Mobile Tab Bar** | 5 items | 4 items | Reduce Loans to menu |
-| **Tab Bar Items** | Home, Trans, Loans, Budgets, More | Home, Trans, Budgets, More | -1 item |
-| **Touch Targets** | 44px (min-h-[44px]) | 48px (WCAG 2.2 AA) | +4px |
-| **More Menu** | Flat list (10+ items) | Grouped (3 sections) | Add categories |
-| **Desktop Sidebar** | Flat list (13 items) | Grouped + collapsible | Add groups |
-| **Active States** | Hover only | Hover + active highlight | Add aria-current |
-| **Breadcrumbs** | None | Dashboard > Section > Page | Add component |
+| Aspect              | Current                           | Recommended (Option A)     | Change               |
+| ------------------- | --------------------------------- | -------------------------- | -------------------- |
+| **Mobile Tab Bar**  | 5 items                           | 4 items                    | Reduce Loans to menu |
+| **Tab Bar Items**   | Home, Trans, Loans, Budgets, More | Home, Trans, Budgets, More | -1 item              |
+| **Touch Targets**   | 44px (min-h-[44px])               | 48px (WCAG 2.2 AA)         | +4px                 |
+| **More Menu**       | Flat list (10+ items)             | Grouped (3 sections)       | Add categories       |
+| **Desktop Sidebar** | Flat list (13 items)              | Grouped + collapsible      | Add groups           |
+| **Active States**   | Hover only                        | Hover + active highlight   | Add aria-current     |
+| **Breadcrumbs**     | None                              | Dashboard > Section > Page | Add component        |
 
 **Net Impact**: Cleaner, more organized, more accessible
 
@@ -341,44 +345,47 @@ Household Finance Manager
 **File**: `src/app/budget-app/layout.tsx`
 
 1. **Grouped "More" Menu**
+
    ```typescript
    const moreMenuSections = [
      {
        title: "TRACKING & ANALYSIS",
        items: [
-         { name: 'Scan Receipt', href: '/budget-app/ocr', icon: Camera },
-         { name: 'Loans', href: '/budget-app/loans', icon: CreditCard }, // If removed from tab bar
-         { name: 'Reports', href: '/budget-app/reports', icon: BarChart3 },
-         { name: 'Categories', href: '/budget-app/categories', icon: Tags },
-       ]
+         { name: "Scan Receipt", href: "/budget-app/ocr", icon: Camera },
+         { name: "Loans", href: "/budget-app/loans", icon: CreditCard }, // If removed from tab bar
+         { name: "Reports", href: "/budget-app/reports", icon: BarChart3 },
+         { name: "Categories", href: "/budget-app/categories", icon: Tags },
+       ],
      },
      {
        title: "WEALTH & PLANNING",
        items: [
-         { name: 'Investments', href: '/budget-app/investments', icon: Wallet },
-         { name: 'Future Plans', href: '/budget-app/planning/future', icon: Target },
-         { name: 'Retirement', href: '/budget-app/planning/retirement', icon: TrendingUp },
-       ]
+         { name: "Investments", href: "/budget-app/investments", icon: Wallet },
+         { name: "Future Plans", href: "/budget-app/planning/future", icon: Target },
+         { name: "Retirement", href: "/budget-app/planning/retirement", icon: TrendingUp },
+       ],
      },
      {
        title: "TOOLS & SETTINGS",
        items: [
-         { name: 'Import CSV', href: '/budget-app/import', icon: Upload },
-         { name: 'Export Data', href: '/budget-app/export', icon: Download },
-         { name: 'Settings', href: '/budget-app/settings', icon: Settings },
-       ]
-     }
+         { name: "Import CSV", href: "/budget-app/import", icon: Upload },
+         { name: "Export Data", href: "/budget-app/export", icon: Download },
+         { name: "Settings", href: "/budget-app/settings", icon: Settings },
+       ],
+     },
    ];
    ```
 
 2. **48px Touch Targets**
+
    ```typescript
    // Current: min-h-[44px]
    // Change to: min-h-[48px]
-   className="... min-h-[48px] ..." // Tab bar items
+   className = "... min-h-[48px] ..."; // Tab bar items
    ```
 
 3. **Active State Indicators**
+
    ```typescript
    const pathname = usePathname();
    const isActive = pathname === item.href;
@@ -425,16 +432,19 @@ Before finalizing tab bar changes, conduct usability testing:
 ### Test Scenarios
 
 **Scenario 1: Current (5 tabs)**
+
 - Ask 10 users to navigate budget app for 1 week
 - Track: Which tabs do they use most frequently?
 - Measure: Tap counts per tab
 
 **Scenario 2: Proposed (4 tabs, Loans in menu)**
+
 - Ask 10 different users to use 4-tab version
 - Track: Do they struggle to find Loans?
 - Measure: Time to locate Loans feature
 
 **Success Criteria**:
+
 - If Loans usage <20% of total taps → Remove from tab bar ✅
 - If Loans usage >30% of total taps → Keep in tab bar ⚠️
 - If users can't find Loans in menu >50% of time → Keep in tab bar ⚠️
@@ -477,6 +487,7 @@ Before finalizing tab bar changes, conduct usability testing:
 ### Theme Mode Support
 
 Ensure navigation works in all 3 theme modes:
+
 - **Light Mode**: Gray-50 bg, Gray-700 text, Teal-500 active
 - **Dark Mode**: Gray-900 bg, Gray-300 text, Teal-400 active
 - **High-Contrast**: Black bg, White text, Teal-300 active (7:1+ contrast)
@@ -488,11 +499,13 @@ Ensure navigation works in all 3 theme modes:
 ### Mobile Navigation (Recommended)
 
 **Bottom Tab Bar** (4 items)
+
 ```
 [Home] [Transactions] [Budgets] [More]
 ```
 
 **"More" Menu** (Grouped, 3 sections)
+
 - TRACKING & ANALYSIS (4 items)
 - WEALTH & PLANNING (3 items)
 - TOOLS & SETTINGS (3 items)
@@ -502,6 +515,7 @@ Ensure navigation works in all 3 theme modes:
 ### Desktop Navigation (Recommended)
 
 **Left Sidebar** (Grouped + Collapsible)
+
 - Dashboard (always visible)
 - CORE (3 items)
 - TRACKING (3 items)

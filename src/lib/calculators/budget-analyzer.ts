@@ -7,7 +7,7 @@
  * - 20% Savings (savings, investments, debt repayment)
  */
 
-import { roundToCents, sumAmounts, divideAmount, multiplyAmount, percentageOf } from '@/lib/money';
+import { roundToCents, sumAmounts, divideAmount, multiplyAmount, percentageOf } from "@/lib/money";
 import type {
   BudgetAnalyzerInput,
   BudgetAnalyzerResult,
@@ -15,7 +15,7 @@ import type {
   BudgetBucket,
   CategoryMapping,
   DEFAULT_BUCKET_MAPPINGS,
-} from './types';
+} from "./types";
 
 /**
  * Target percentages for each bucket
@@ -47,7 +47,10 @@ export function calculateBudgetAnalysis(input: BudgetAnalyzerInput): BudgetAnaly
   });
 
   // Group transaction totals by bucket
-  const bucketTotals: Record<BudgetBucket, { categories: typeof transactionTotals; total: number }> = {
+  const bucketTotals: Record<
+    BudgetBucket,
+    { categories: typeof transactionTotals; total: number }
+  > = {
     needs: { categories: [], total: 0 },
     wants: { categories: [], total: 0 },
     savings: { categories: [], total: 0 },
@@ -68,9 +71,9 @@ export function calculateBudgetAnalysis(input: BudgetAnalyzerInput): BudgetAnaly
   });
 
   // Calculate analysis for each bucket
-  const needs = createBucketAnalysis('needs', monthlyNetIncome, bucketTotals.needs);
-  const wants = createBucketAnalysis('wants', monthlyNetIncome, bucketTotals.wants);
-  const savings = createBucketAnalysis('savings', monthlyNetIncome, bucketTotals.savings);
+  const needs = createBucketAnalysis("needs", monthlyNetIncome, bucketTotals.needs);
+  const wants = createBucketAnalysis("wants", monthlyNetIncome, bucketTotals.wants);
+  const savings = createBucketAnalysis("savings", monthlyNetIncome, bucketTotals.savings);
 
   // Calculate totals
   const totalSpending = roundToCents(needs.actualAmount + wants.actualAmount);
@@ -102,7 +105,7 @@ export function calculateBudgetAnalysis(input: BudgetAnalyzerInput): BudgetAnaly
 function createBucketAnalysis(
   bucket: BudgetBucket,
   income: number,
-  data: { categories: BudgetAnalyzerInput['transactionTotals']; total: number }
+  data: { categories: BudgetAnalyzerInput["transactionTotals"]; total: number }
 ): BucketAnalysis {
   const targetPercent = TARGET_PERCENTAGES[bucket];
   const targetAmount = roundToCents(percentageOf(income, targetPercent));
@@ -118,7 +121,8 @@ function createBucketAnalysis(
       categoryId: cat.categoryId,
       categoryName: cat.categoryName,
       amount: Math.abs(cat.total),
-      percentOfBucket: actualAmount > 0 ? roundToCents((Math.abs(cat.total) / actualAmount) * 100) : 0,
+      percentOfBucket:
+        actualAmount > 0 ? roundToCents((Math.abs(cat.total) / actualAmount) * 100) : 0,
     }))
     .sort((a, b) => b.amount - a.amount);
 
@@ -143,26 +147,48 @@ function inferBucket(categoryName: string): BudgetBucket {
 
   // Check against common patterns
   const needsPatterns = [
-    'rent', 'mortgage', 'utilities', 'groceries', 'grocery', 'insurance',
-    'healthcare', 'health', 'medical', 'transportation', 'gas', 'fuel',
-    'childcare', 'phone', 'internet', 'water', 'electric', 'heat',
+    "rent",
+    "mortgage",
+    "utilities",
+    "groceries",
+    "grocery",
+    "insurance",
+    "healthcare",
+    "health",
+    "medical",
+    "transportation",
+    "gas",
+    "fuel",
+    "childcare",
+    "phone",
+    "internet",
+    "water",
+    "electric",
+    "heat",
   ];
 
   const savingsPatterns = [
-    'savings', 'investment', 'retirement', '401k', 'rrsp', 'tfsa',
-    'emergency', 'debt repayment', 'extra payment',
+    "savings",
+    "investment",
+    "retirement",
+    "401k",
+    "rrsp",
+    "tfsa",
+    "emergency",
+    "debt repayment",
+    "extra payment",
   ];
 
   if (needsPatterns.some((pattern) => name.includes(pattern))) {
-    return 'needs';
+    return "needs";
   }
 
   if (savingsPatterns.some((pattern) => name.includes(pattern))) {
-    return 'savings';
+    return "savings";
   }
 
   // Default to wants for discretionary spending
-  return 'wants';
+  return "wants";
 }
 
 /**
@@ -243,9 +269,9 @@ function createEmptyResult(): BudgetAnalyzerResult {
   });
 
   return {
-    needs: emptyBucket('needs'),
-    wants: emptyBucket('wants'),
-    savings: emptyBucket('savings'),
+    needs: emptyBucket("needs"),
+    wants: emptyBucket("wants"),
+    savings: emptyBucket("savings"),
     totalSpending: 0,
     totalSavings: 0,
     isBalanced: true,
@@ -257,9 +283,9 @@ function createEmptyResult(): BudgetAnalyzerResult {
  * Get default category to bucket mappings
  */
 export function getDefaultMappings(): CategoryMapping[] {
-  const { DEFAULT_BUCKET_MAPPINGS } = require('./types');
+  const { DEFAULT_BUCKET_MAPPINGS } = require("./types");
   return Object.entries(DEFAULT_BUCKET_MAPPINGS).map(([categoryName, bucket]) => ({
-    categoryId: categoryName.toLowerCase().replace(/\s+/g, '_'),
+    categoryId: categoryName.toLowerCase().replace(/\s+/g, "_"),
     categoryName,
     bucket: bucket as BudgetBucket,
   }));

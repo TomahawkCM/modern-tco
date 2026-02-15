@@ -43,7 +43,7 @@ export default function MicroQuiz({
       const error = ErrorMessages.noAnswerSelected;
       toast({
         title: error.title,
-        description: `${error.message}${error.action ? ` ${error.action}` : ''}`,
+        description: `${error.message}${error.action ? ` ${error.action}` : ""}`,
         variant: error.variant as "default" | "destructive",
       });
       return;
@@ -54,8 +54,8 @@ export default function MicroQuiz({
     setIsSubmitted(true);
 
     // Track analytics (PostHog integration point)
-    if (typeof window !== 'undefined' && (window as any).posthog) {
-      (window as any).posthog.capture('micro_quiz_answered', {
+    if (typeof window !== "undefined" && (window as any).posthog) {
+      (window as any).posthog.capture("micro_quiz_answered", {
         question,
         correct,
         moduleId,
@@ -70,19 +70,14 @@ export default function MicroQuiz({
 
     try {
       // Create flashcard from failed quiz question
-      await flashcardService.createFlashcard(
-        user.id,
-        question,
-        correctAnswer,
-        {
-          type: 'basic',
-          source: 'quiz_failure',
-          moduleId,
-          sectionId,
-          explanation: explanation || undefined,
-          tags: concept ? [concept, 'micro-quiz', 'needs-review'] : ['micro-quiz', 'needs-review'],
-        }
-      );
+      await flashcardService.createFlashcard(user.id, question, correctAnswer, {
+        type: "basic",
+        source: "quiz_failure",
+        moduleId,
+        sectionId,
+        explanation: explanation || undefined,
+        tags: concept ? [concept, "micro-quiz", "needs-review"] : ["micro-quiz", "needs-review"],
+      });
 
       setFlashcardCreated(true);
       toast({
@@ -91,8 +86,8 @@ export default function MicroQuiz({
       });
 
       // Track flashcard creation
-      if (typeof window !== 'undefined' && (window as any).posthog) {
-        (window as any).posthog.capture('flashcard_created_from_micro_quiz', {
+      if (typeof window !== "undefined" && (window as any).posthog) {
+        (window as any).posthog.capture("flashcard_created_from_micro_quiz", {
           question,
           moduleId,
           concept,
@@ -103,7 +98,7 @@ export default function MicroQuiz({
       const errorMsg = ErrorMessages.flashcardCreationFailed;
       toast({
         title: errorMsg.title,
-        description: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`,
+        description: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`,
         variant: errorMsg.variant as "default" | "destructive",
       });
     }
@@ -178,17 +173,10 @@ export default function MicroQuiz({
                 }`}
               >
                 <RadioGroupItem value={option} id={`option-${index}`} />
-                <Label
-                  htmlFor={`option-${index}`}
-                  className="flex-1 cursor-pointer font-normal"
-                >
+                <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer font-normal">
                   {option}
-                  {showCorrect && (
-                    <CheckCircle2 className="ml-2 inline h-4 w-4 text-[#22c55e]" />
-                  )}
-                  {showIncorrect && (
-                    <XCircle className="ml-2 inline h-4 w-4 text-red-600" />
-                  )}
+                  {showCorrect && <CheckCircle2 className="ml-2 inline h-4 w-4 text-[#22c55e]" />}
+                  {showIncorrect && <XCircle className="ml-2 inline h-4 w-4 text-red-600" />}
                 </Label>
               </div>
             );
@@ -209,11 +197,7 @@ export default function MicroQuiz({
         {/* Action Buttons */}
         <div className="flex items-center gap-3">
           {!isSubmitted ? (
-            <Button
-              onClick={handleSubmit}
-              disabled={!selectedAnswer}
-              className="flex-1"
-            >
+            <Button onClick={handleSubmit} disabled={!selectedAnswer} className="flex-1">
               Check Answer
             </Button>
           ) : (
@@ -254,7 +238,8 @@ export default function MicroQuiz({
 
         {isSubmitted && !isCorrect && !flashcardCreated && user?.id && (
           <p className="text-xs text-muted-foreground">
-            💡 Create a flashcard to review this concept with spaced repetition for better retention!
+            💡 Create a flashcard to review this concept with spaced repetition for better
+            retention!
           </p>
         )}
       </CardContent>

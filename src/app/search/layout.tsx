@@ -10,10 +10,6 @@ import { HeavyProviders } from "@/app/heavy-providers";
  *
  * Search needs access to all content types, so it uses HeavyProviders.
  */
-export default function SearchLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function SearchLayout({ children }: { children: React.ReactNode }) {
   return <HeavyProviders>{children}</HeavyProviders>;
 }

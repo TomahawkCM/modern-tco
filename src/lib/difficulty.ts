@@ -1,4 +1,4 @@
-import { Difficulty } from '../types/exam';
+import { Difficulty } from "../types/exam";
 
 export const ALL_DIFFICULTIES: Difficulty[] = [
   Difficulty.BEGINNER,
@@ -11,22 +11,27 @@ export function canonicalizeDifficulty(input: string | undefined | null): Diffic
   if (!input) return undefined;
   const normalized = input.trim().toLowerCase();
   switch (normalized) {
-    case 'beginner':
+    case "beginner":
       return Difficulty.BEGINNER;
-    case 'intermediate':
+    case "intermediate":
       return Difficulty.INTERMEDIATE;
-    case 'advanced':
+    case "advanced":
       return Difficulty.ADVANCED;
-    case 'expert':
+    case "expert":
       return Difficulty.EXPERT;
     default:
       return undefined;
   }
 }
 
-export function defaultDifficultyRecord<T>(valueFactory: (d: Difficulty) => T): Record<Difficulty, T> {
-  return ALL_DIFFICULTIES.reduce((acc, d) => {
-    acc[d] = valueFactory(d);
-    return acc;
-  }, {} as Record<Difficulty, T>);
+export function defaultDifficultyRecord<T>(
+  valueFactory: (d: Difficulty) => T
+): Record<Difficulty, T> {
+  return ALL_DIFFICULTIES.reduce(
+    (acc, d) => {
+      acc[d] = valueFactory(d);
+      return acc;
+    },
+    {} as Record<Difficulty, T>
+  );
 }

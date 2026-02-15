@@ -3,10 +3,18 @@
  * Executive summary with key metrics, charts, and quick navigation
  */
 
-import type { Workbook, Worksheet } from 'exceljs';
-import type { ExcelExportOptions, DashboardMetric } from '../types';
-import type { Transaction, Account, Category, Budget, FuturePurchase, Loan, Subscription } from '@/types/budget';
-import type { InvestmentAccount, Holding } from '@/lib/budget-db';
+import type { Workbook, Worksheet } from "exceljs";
+import type { ExcelExportOptions, DashboardMetric } from "../types";
+import type {
+  Transaction,
+  Account,
+  Category,
+  Budget,
+  FuturePurchase,
+  Loan,
+  Subscription,
+} from "@/types/budget";
+import type { InvestmentAccount, Holding } from "@/lib/budget-db";
 import {
   FONTS,
   FILLS,
@@ -17,7 +25,7 @@ import {
   addSheetLink,
   getArgbColor,
   EXCEL_COLORS,
-} from '../styles';
+} from "../styles";
 
 interface DashboardSheetData {
   transactions: Transaction[];
@@ -42,28 +50,36 @@ function calculateMetrics(data: DashboardSheetData) {
   const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
   const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0);
 
-  const currentMonthTx = data.transactions.filter(tx => new Date(tx.date) >= currentMonthStart);
-  const lastMonthTx = data.transactions.filter(tx => {
+  const currentMonthTx = data.transactions.filter((tx) => new Date(tx.date) >= currentMonthStart);
+  const lastMonthTx = data.transactions.filter((tx) => {
     const date = new Date(tx.date);
     return date >= lastMonthStart && date <= lastMonthEnd;
   });
 
   // Calculate income and expenses
-  const currentIncome = currentMonthTx.filter(tx => tx.amount > 0).reduce((sum, tx) => sum + tx.amount, 0);
-  const currentExpenses = Math.abs(currentMonthTx.filter(tx => tx.amount < 0).reduce((sum, tx) => sum + tx.amount, 0));
-  const lastIncome = lastMonthTx.filter(tx => tx.amount > 0).reduce((sum, tx) => sum + tx.amount, 0);
-  const lastExpenses = Math.abs(lastMonthTx.filter(tx => tx.amount < 0).reduce((sum, tx) => sum + tx.amount, 0));
+  const currentIncome = currentMonthTx
+    .filter((tx) => tx.amount > 0)
+    .reduce((sum, tx) => sum + tx.amount, 0);
+  const currentExpenses = Math.abs(
+    currentMonthTx.filter((tx) => tx.amount < 0).reduce((sum, tx) => sum + tx.amount, 0)
+  );
+  const lastIncome = lastMonthTx
+    .filter((tx) => tx.amount > 0)
+    .reduce((sum, tx) => sum + tx.amount, 0);
+  const lastExpenses = Math.abs(
+    lastMonthTx.filter((tx) => tx.amount < 0).reduce((sum, tx) => sum + tx.amount, 0)
+  );
 
   // Net worth calculation
   const cashBalance = data.accounts
-    .filter(a => a.type === 'checking' || a.type === 'savings')
+    .filter((a) => a.type === "checking" || a.type === "savings")
     .reduce((sum, a) => sum + a.balance, 0);
 
   const creditBalance = data.accounts
-    .filter(a => a.type === 'credit')
+    .filter((a) => a.type === "credit")
     .reduce((sum, a) => sum + Math.abs(a.balance), 0);
 
-  const investmentValue = data.holdings.reduce((sum, h) => sum + (h.quantity * h.purchasePrice), 0);
+  const investmentValue = data.holdings.reduce((sum, h) => sum + h.quantity * h.purchasePrice, 0);
 
   const totalDebt = data.loans.reduce((sum, l) => sum + l.currentBalance, 0) + creditBalance;
 
@@ -74,25 +90,38 @@ function calculateMetrics(data: DashboardSheetData) {
 
   // Monthly subscription cost
   const monthlySubscriptions = data.subscriptions
-    .filter(s => s.status === 'active')
+    .filter((s) => s.status === "active")
     .reduce((sum, s) => {
       switch (s.billingCycle) {
-        case 'weekly': return sum + s.amount * 4.33;
-        case 'bi-weekly': return sum + s.amount * 2.17;
-        case 'monthly': return sum + s.amount;
-        case 'quarterly': return sum + s.amount / 3;
-        case 'annual': return sum + s.amount / 12;
-        default: return sum + s.amount;
+        case "weekly":
+          return sum + s.amount * 4.33;
+        case "bi-weekly":
+          return sum + s.amount * 2.17;
+        case "monthly":
+          return sum + s.amount;
+        case "quarterly":
+          return sum + s.amount / 3;
+        case "annual":
+          return sum + s.amount / 12;
+        default:
+          return sum + s.amount;
       }
     }, 0);
 
   // Budget status
-  const totalBudget = data.budgets.reduce((sum, b) => sum + (b.period === 'annual' ? b.amount / 12 : b.amount), 0);
+  const totalBudget = data.budgets.reduce(
+    (sum, b) => sum + (b.period === "annual" ? b.amount / 12 : b.amount),
+    0
+  );
   const budgetUsed = totalBudget > 0 ? currentExpenses / totalBudget : 0;
 
   // Goals progress
-  const totalGoalTarget = data.goals.filter(g => !g.isCompleted).reduce((sum, g) => sum + g.targetAmount, 0);
-  const totalGoalCurrent = data.goals.filter(g => !g.isCompleted).reduce((sum, g) => sum + g.currentSavings, 0);
+  const totalGoalTarget = data.goals
+    .filter((g) => !g.isCompleted)
+    .reduce((sum, g) => sum + g.targetAmount, 0);
+  const totalGoalCurrent = data.goals
+    .filter((g) => !g.isCompleted)
+    .reduce((sum, g) => sum + g.currentSavings, 0);
   const goalsProgress = totalGoalTarget > 0 ? totalGoalCurrent / totalGoalTarget : 0;
 
   return {
@@ -120,9 +149,9 @@ function getTopCategories(transactions: Transaction[], categories: Category[], l
   const categorySpending = new Map<string, number>();
 
   transactions
-    .filter(tx => tx.amount < 0)
-    .forEach(tx => {
-      const catName = tx.category || 'Uncategorized';
+    .filter((tx) => tx.amount < 0)
+    .forEach((tx) => {
+      const catName = tx.category || "Uncategorized";
       categorySpending.set(catName, (categorySpending.get(catName) || 0) + Math.abs(tx.amount));
     });
 
@@ -132,13 +161,13 @@ function getTopCategories(transactions: Transaction[], categories: Category[], l
     .sort((a, b) => b[1] - a[1])
     .slice(0, limit)
     .map(([name, amount]) => {
-      const cat = categories.find(c => c.name === name);
+      const cat = categories.find((c) => c.name === name);
       return {
         name,
         amount,
         percentage: totalSpending > 0 ? amount / totalSpending : 0,
-        color: cat?.color || '#6B7280',
-        icon: cat?.icon || 'circle',
+        color: cat?.color || "#6B7280",
+        icon: cat?.icon || "circle",
       };
     });
 }
@@ -149,7 +178,7 @@ function getTopCategories(transactions: Transaction[], categories: Category[], l
 function createProgressBar(percent: number, width = 20): string {
   const filled = Math.min(Math.round(percent * width), width);
   const empty = width - filled;
-  return '█'.repeat(filled) + '░'.repeat(empty);
+  return "█".repeat(filled) + "░".repeat(empty);
 }
 
 /**
@@ -160,8 +189,8 @@ export async function generateDashboardSheet(
   data: DashboardSheetData,
   options: ExcelExportOptions
 ): Promise<Worksheet> {
-  const worksheet = workbook.addWorksheet('Dashboard', {
-    properties: { tabColor: { argb: 'FF14B8A6' } }, // Teal tab
+  const worksheet = workbook.addWorksheet("Dashboard", {
+    properties: { tabColor: { argb: "FF14B8A6" } }, // Teal tab
   });
 
   // Set column widths for dashboard layout
@@ -174,7 +203,7 @@ export async function generateDashboardSheet(
   // ==================== HEADER ====================
   const titleRow = worksheet.getRow(currentRow);
   worksheet.mergeCells(`B${currentRow}:I${currentRow}`);
-  titleRow.getCell(2).value = '💰 FINANCIAL SUMMARY';
+  titleRow.getCell(2).value = "💰 FINANCIAL SUMMARY";
   titleRow.getCell(2).font = { ...FONTS.title, size: 24 };
   titleRow.getCell(2).alignment = ALIGNMENTS.left;
   titleRow.height = 40;
@@ -183,19 +212,20 @@ export async function generateDashboardSheet(
   // Export date
   const dateRow = worksheet.getRow(currentRow);
   worksheet.mergeCells(`B${currentRow}:I${currentRow}`);
-  dateRow.getCell(2).value = `Export Date: ${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
+  dateRow.getCell(2).value =
+    `Export Date: ${new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}`;
   dateRow.getCell(2).font = FONTS.bodyMuted;
   currentRow += 2;
 
   // ==================== KEY METRICS ====================
   const metricsHeaderRow = worksheet.getRow(currentRow);
   worksheet.mergeCells(`B${currentRow}:I${currentRow}`);
-  metricsHeaderRow.getCell(2).value = 'KEY METRICS';
+  metricsHeaderRow.getCell(2).value = "KEY METRICS";
   metricsHeaderRow.getCell(2).font = { ...FONTS.subheader, size: 14 };
   metricsHeaderRow.getCell(2).fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'FFF3F4F6' },
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFF3F4F6" },
   };
   metricsHeaderRow.height = 28;
   currentRow++;
@@ -205,17 +235,17 @@ export async function generateDashboardSheet(
   const metricRow1 = worksheet.getRow(currentRow);
 
   // Net Worth
-  metricRow1.getCell(2).value = 'Net Worth';
+  metricRow1.getCell(2).value = "Net Worth";
   metricRow1.getCell(2).font = FONTS.metricLabel;
   metricRow1.getCell(2).alignment = ALIGNMENTS.center;
 
   // Monthly Income
-  metricRow1.getCell(5).value = 'Monthly Income';
+  metricRow1.getCell(5).value = "Monthly Income";
   metricRow1.getCell(5).font = FONTS.metricLabel;
   metricRow1.getCell(5).alignment = ALIGNMENTS.center;
 
   // Savings Rate
-  metricRow1.getCell(8).value = 'Savings Rate';
+  metricRow1.getCell(8).value = "Savings Rate";
   metricRow1.getCell(8).font = FONTS.metricLabel;
   metricRow1.getCell(8).alignment = ALIGNMENTS.center;
   currentRow++;
@@ -227,30 +257,53 @@ export async function generateDashboardSheet(
   // Net Worth value
   valueRow1.getCell(2).value = metrics.netWorth;
   valueRow1.getCell(2).numFmt = NUMBER_FORMATS.currency;
-  valueRow1.getCell(2).font = { ...FONTS.metric, color: { argb: metrics.netWorth >= 0 ? 'FF10B981' : 'FFEF4444' } };
+  valueRow1.getCell(2).font = {
+    ...FONTS.metric,
+    color: { argb: metrics.netWorth >= 0 ? "FF10B981" : "FFEF4444" },
+  };
   valueRow1.getCell(2).alignment = ALIGNMENTS.center;
 
   // Monthly Income value
   valueRow1.getCell(5).value = metrics.monthlyIncome;
   valueRow1.getCell(5).numFmt = NUMBER_FORMATS.currency;
-  valueRow1.getCell(5).font = { ...FONTS.metric, color: { argb: 'FF10B981' } };
+  valueRow1.getCell(5).font = { ...FONTS.metric, color: { argb: "FF10B981" } };
   valueRow1.getCell(5).alignment = ALIGNMENTS.center;
 
   // Savings Rate value
   valueRow1.getCell(8).value = metrics.savingsRate;
   valueRow1.getCell(8).numFmt = NUMBER_FORMATS.percent;
-  valueRow1.getCell(8).font = { ...FONTS.metric, color: { argb: metrics.savingsRate >= 0.2 ? 'FF10B981' : metrics.savingsRate >= 0.1 ? 'FFF59E0B' : 'FFEF4444' } };
+  valueRow1.getCell(8).font = {
+    ...FONTS.metric,
+    color: {
+      argb:
+        metrics.savingsRate >= 0.2
+          ? "FF10B981"
+          : metrics.savingsRate >= 0.1
+            ? "FFF59E0B"
+            : "FFEF4444",
+    },
+  };
   valueRow1.getCell(8).alignment = ALIGNMENTS.center;
   currentRow++;
 
   // Trend indicators row 1
   const trendRow1 = worksheet.getRow(currentRow);
-  trendRow1.getCell(2).value = metrics.netWorthChange >= 0 ? `▲ +$${metrics.netWorthChange.toLocaleString()}` : `▼ -$${Math.abs(metrics.netWorthChange).toLocaleString()}`;
-  trendRow1.getCell(2).font = { ...FONTS.bodyMuted, color: { argb: metrics.netWorthChange >= 0 ? 'FF10B981' : 'FFEF4444' } };
+  trendRow1.getCell(2).value =
+    metrics.netWorthChange >= 0
+      ? `▲ +$${metrics.netWorthChange.toLocaleString()}`
+      : `▼ -$${Math.abs(metrics.netWorthChange).toLocaleString()}`;
+  trendRow1.getCell(2).font = {
+    ...FONTS.bodyMuted,
+    color: { argb: metrics.netWorthChange >= 0 ? "FF10B981" : "FFEF4444" },
+  };
   trendRow1.getCell(2).alignment = ALIGNMENTS.center;
 
-  trendRow1.getCell(5).value = `${metrics.incomeVsLastMonth >= 0 ? '▲' : '▼'} ${(metrics.incomeVsLastMonth * 100).toFixed(1)}% vs last month`;
-  trendRow1.getCell(5).font = { ...FONTS.bodyMuted, color: { argb: metrics.incomeVsLastMonth >= 0 ? 'FF10B981' : 'FFEF4444' } };
+  trendRow1.getCell(5).value =
+    `${metrics.incomeVsLastMonth >= 0 ? "▲" : "▼"} ${(metrics.incomeVsLastMonth * 100).toFixed(1)}% vs last month`;
+  trendRow1.getCell(5).font = {
+    ...FONTS.bodyMuted,
+    color: { argb: metrics.incomeVsLastMonth >= 0 ? "FF10B981" : "FFEF4444" },
+  };
   trendRow1.getCell(5).alignment = ALIGNMENTS.center;
 
   trendRow1.getCell(8).value = `Target: 20%+`;
@@ -262,17 +315,17 @@ export async function generateDashboardSheet(
   const metricRow2 = worksheet.getRow(currentRow);
 
   // Monthly Expenses
-  metricRow2.getCell(2).value = 'Monthly Expenses';
+  metricRow2.getCell(2).value = "Monthly Expenses";
   metricRow2.getCell(2).font = FONTS.metricLabel;
   metricRow2.getCell(2).alignment = ALIGNMENTS.center;
 
   // Total Debt
-  metricRow2.getCell(5).value = 'Total Debt';
+  metricRow2.getCell(5).value = "Total Debt";
   metricRow2.getCell(5).font = FONTS.metricLabel;
   metricRow2.getCell(5).alignment = ALIGNMENTS.center;
 
   // Subscriptions/mo
-  metricRow2.getCell(8).value = 'Subscriptions/mo';
+  metricRow2.getCell(8).value = "Subscriptions/mo";
   metricRow2.getCell(8).font = FONTS.metricLabel;
   metricRow2.getCell(8).alignment = ALIGNMENTS.center;
   currentRow++;
@@ -284,33 +337,39 @@ export async function generateDashboardSheet(
   // Monthly Expenses value
   valueRow2.getCell(2).value = metrics.monthlyExpenses;
   valueRow2.getCell(2).numFmt = NUMBER_FORMATS.currency;
-  valueRow2.getCell(2).font = { ...FONTS.metric, color: { argb: 'FFEF4444' } };
+  valueRow2.getCell(2).font = { ...FONTS.metric, color: { argb: "FFEF4444" } };
   valueRow2.getCell(2).alignment = ALIGNMENTS.center;
 
   // Total Debt value
   valueRow2.getCell(5).value = metrics.totalDebt;
   valueRow2.getCell(5).numFmt = NUMBER_FORMATS.currency;
-  valueRow2.getCell(5).font = { ...FONTS.metric, color: { argb: 'FFEF4444' } };
+  valueRow2.getCell(5).font = { ...FONTS.metric, color: { argb: "FFEF4444" } };
   valueRow2.getCell(5).alignment = ALIGNMENTS.center;
 
   // Subscriptions value
   valueRow2.getCell(8).value = metrics.monthlySubscriptions;
   valueRow2.getCell(8).numFmt = NUMBER_FORMATS.currency;
-  valueRow2.getCell(8).font = { ...FONTS.metric, color: { argb: 'FF6B7280' } };
+  valueRow2.getCell(8).font = { ...FONTS.metric, color: { argb: "FF6B7280" } };
   valueRow2.getCell(8).alignment = ALIGNMENTS.center;
   currentRow++;
 
   // Trend indicators row 2
   const trendRow2 = worksheet.getRow(currentRow);
-  trendRow2.getCell(2).value = `${metrics.expensesVsLastMonth >= 0 ? '▲' : '▼'} ${(Math.abs(metrics.expensesVsLastMonth) * 100).toFixed(1)}% vs last month`;
-  trendRow2.getCell(2).font = { ...FONTS.bodyMuted, color: { argb: metrics.expensesVsLastMonth <= 0 ? 'FF10B981' : 'FFEF4444' } };
+  trendRow2.getCell(2).value =
+    `${metrics.expensesVsLastMonth >= 0 ? "▲" : "▼"} ${(Math.abs(metrics.expensesVsLastMonth) * 100).toFixed(1)}% vs last month`;
+  trendRow2.getCell(2).font = {
+    ...FONTS.bodyMuted,
+    color: { argb: metrics.expensesVsLastMonth <= 0 ? "FF10B981" : "FFEF4444" },
+  };
   trendRow2.getCell(2).alignment = ALIGNMENTS.center;
 
-  trendRow2.getCell(5).value = data.loans.length > 0 ? `${data.loans.length} active loans` : 'No loans';
+  trendRow2.getCell(5).value =
+    data.loans.length > 0 ? `${data.loans.length} active loans` : "No loans";
   trendRow2.getCell(5).font = FONTS.bodyMuted;
   trendRow2.getCell(5).alignment = ALIGNMENTS.center;
 
-  trendRow2.getCell(8).value = `${data.subscriptions.filter(s => s.status === 'active').length} active`;
+  trendRow2.getCell(8).value =
+    `${data.subscriptions.filter((s) => s.status === "active").length} active`;
   trendRow2.getCell(8).font = FONTS.bodyMuted;
   trendRow2.getCell(8).alignment = ALIGNMENTS.center;
   currentRow += 3;
@@ -318,22 +377,22 @@ export async function generateDashboardSheet(
   // ==================== TOP SPENDING CATEGORIES ====================
   const catHeaderRow = worksheet.getRow(currentRow);
   worksheet.mergeCells(`B${currentRow}:E${currentRow}`);
-  catHeaderRow.getCell(2).value = 'TOP SPENDING CATEGORIES';
+  catHeaderRow.getCell(2).value = "TOP SPENDING CATEGORIES";
   catHeaderRow.getCell(2).font = { ...FONTS.subheader, size: 14 };
   catHeaderRow.getCell(2).fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'FFF3F4F6' },
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFF3F4F6" },
   };
 
   // Budget Status header
   worksheet.mergeCells(`F${currentRow}:I${currentRow}`);
-  catHeaderRow.getCell(6).value = 'BUDGET STATUS';
+  catHeaderRow.getCell(6).value = "BUDGET STATUS";
   catHeaderRow.getCell(6).font = { ...FONTS.subheader, size: 14 };
   catHeaderRow.getCell(6).fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'FFF3F4F6' },
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFF3F4F6" },
   };
   catHeaderRow.height = 28;
   currentRow++;
@@ -346,7 +405,7 @@ export async function generateDashboardSheet(
     catRow.getCell(2).value = cat.name;
     catRow.getCell(2).font = FONTS.body;
     catRow.getCell(2).border = {
-      left: { style: 'thick', color: getArgbColor(cat.color) },
+      left: { style: "thick", color: getArgbColor(cat.color) },
     };
 
     // Amount
@@ -362,9 +421,21 @@ export async function generateDashboardSheet(
 
   // Budget status indicators
   const budgetStatuses = [
-    { label: 'On Track', percent: metrics.budgetUsed < 0.8 ? (1 - metrics.budgetUsed) : 0, color: '10B981' },
-    { label: 'Near Limit', percent: metrics.budgetUsed >= 0.8 && metrics.budgetUsed < 1 ? 0.5 : 0, color: 'F59E0B' },
-    { label: 'Over Budget', percent: metrics.budgetUsed >= 1 ? (metrics.budgetUsed - 1) : 0, color: 'EF4444' },
+    {
+      label: "On Track",
+      percent: metrics.budgetUsed < 0.8 ? 1 - metrics.budgetUsed : 0,
+      color: "10B981",
+    },
+    {
+      label: "Near Limit",
+      percent: metrics.budgetUsed >= 0.8 && metrics.budgetUsed < 1 ? 0.5 : 0,
+      color: "F59E0B",
+    },
+    {
+      label: "Over Budget",
+      percent: metrics.budgetUsed >= 1 ? metrics.budgetUsed - 1 : 0,
+      color: "EF4444",
+    },
   ];
 
   budgetStatuses.forEach((status, index) => {
@@ -374,17 +445,25 @@ export async function generateDashboardSheet(
     statusRow.getCell(6).font = FONTS.body;
 
     const barWidth = Math.max(1, Math.round(status.percent * 10));
-    statusRow.getCell(7).value = '█'.repeat(barWidth);
-    statusRow.getCell(7).font = { name: 'Consolas', size: 11, color: { argb: `FF${status.color}` } };
+    statusRow.getCell(7).value = "█".repeat(barWidth);
+    statusRow.getCell(7).font = {
+      name: "Consolas",
+      size: 11,
+      color: { argb: `FF${status.color}` },
+    };
   });
 
   // Overall budget progress
   const budgetProgressRow = worksheet.getRow(currentRow + 4);
-  budgetProgressRow.getCell(6).value = `Overall: ${(metrics.budgetUsed * 100).toFixed(0)}% of budget used`;
+  budgetProgressRow.getCell(6).value =
+    `Overall: ${(metrics.budgetUsed * 100).toFixed(0)}% of budget used`;
   budgetProgressRow.getCell(6).font = {
     ...FONTS.body,
     bold: true,
-    color: { argb: metrics.budgetUsed > 1 ? 'FFEF4444' : metrics.budgetUsed > 0.8 ? 'FFF59E0B' : 'FF10B981' },
+    color: {
+      argb:
+        metrics.budgetUsed > 1 ? "FFEF4444" : metrics.budgetUsed > 0.8 ? "FFF59E0B" : "FF10B981",
+    },
   };
 
   currentRow += 7;
@@ -392,19 +471,26 @@ export async function generateDashboardSheet(
   // ==================== QUICK LINKS ====================
   const linksHeaderRow = worksheet.getRow(currentRow);
   worksheet.mergeCells(`B${currentRow}:I${currentRow}`);
-  linksHeaderRow.getCell(2).value = 'QUICK LINKS';
+  linksHeaderRow.getCell(2).value = "QUICK LINKS";
   linksHeaderRow.getCell(2).font = { ...FONTS.subheader, size: 14 };
   linksHeaderRow.getCell(2).fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'FFF3F4F6' },
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFF3F4F6" },
   };
   linksHeaderRow.height = 28;
   currentRow++;
 
   // Links row
   const linksRow = worksheet.getRow(currentRow);
-  const sheets = ['Transactions', 'Monthly Summary', 'Category Analysis', 'Budgets', 'Investments', 'Loans'];
+  const sheets = [
+    "Transactions",
+    "Monthly Summary",
+    "Category Analysis",
+    "Budgets",
+    "Investments",
+    "Loans",
+  ];
   sheets.forEach((sheet, index) => {
     const col = 2 + index;
     if (col <= 9) {
@@ -416,23 +502,23 @@ export async function generateDashboardSheet(
   // ==================== DATA SUMMARY ====================
   const summaryHeaderRow = worksheet.getRow(currentRow);
   worksheet.mergeCells(`B${currentRow}:I${currentRow}`);
-  summaryHeaderRow.getCell(2).value = 'DATA SUMMARY';
+  summaryHeaderRow.getCell(2).value = "DATA SUMMARY";
   summaryHeaderRow.getCell(2).font = { ...FONTS.subheader, size: 14 };
   summaryHeaderRow.getCell(2).fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'FFF3F4F6' },
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFF3F4F6" },
   };
   summaryHeaderRow.height = 28;
   currentRow++;
 
   const summaryItems = [
-    ['Accounts', data.accounts.length],
-    ['Transactions', data.transactions.length],
-    ['Budgets', data.budgets.length],
-    ['Goals', data.goals.filter(g => !g.isCompleted).length],
-    ['Loans', data.loans.length],
-    ['Subscriptions', data.subscriptions.filter(s => s.status === 'active').length],
+    ["Accounts", data.accounts.length],
+    ["Transactions", data.transactions.length],
+    ["Budgets", data.budgets.length],
+    ["Goals", data.goals.filter((g) => !g.isCompleted).length],
+    ["Loans", data.loans.length],
+    ["Subscriptions", data.subscriptions.filter((s) => s.status === "active").length],
   ];
 
   summaryItems.forEach((item, index) => {

@@ -3,11 +3,11 @@
  * Reusable styling utilities for consistent workbook appearance
  */
 
-import type { Worksheet, Row, Cell, Style, Fill, Border, Font, Alignment, Column } from 'exceljs';
-import { EXCEL_COLORS, NUMBER_FORMATS } from './types';
+import type { Worksheet, Row, Cell, Style, Fill, Border, Font, Alignment, Column } from "exceljs";
+import { EXCEL_COLORS, NUMBER_FORMATS } from "./types";
 
 // Re-export for convenience
-export { EXCEL_COLORS, NUMBER_FORMATS } from './types';
+export { EXCEL_COLORS, NUMBER_FORMATS } from "./types";
 
 // ============================================
 // FILL STYLES
@@ -15,43 +15,43 @@ export { EXCEL_COLORS, NUMBER_FORMATS } from './types';
 
 export const FILLS = {
   header: {
-    type: 'pattern' as const,
-    pattern: 'solid' as const,
+    type: "pattern" as const,
+    pattern: "solid" as const,
     fgColor: { argb: `FF${EXCEL_COLORS.headerBg}` },
   },
   subheader: {
-    type: 'pattern' as const,
-    pattern: 'solid' as const,
+    type: "pattern" as const,
+    pattern: "solid" as const,
     fgColor: { argb: `FF${EXCEL_COLORS.subheaderBg}` },
   },
   rowEven: {
-    type: 'pattern' as const,
-    pattern: 'solid' as const,
+    type: "pattern" as const,
+    pattern: "solid" as const,
     fgColor: { argb: `FF${EXCEL_COLORS.rowEven}` },
   },
   rowOdd: {
-    type: 'pattern' as const,
-    pattern: 'solid' as const,
+    type: "pattern" as const,
+    pattern: "solid" as const,
     fgColor: { argb: `FF${EXCEL_COLORS.rowOdd}` },
   },
   income: {
-    type: 'pattern' as const,
-    pattern: 'solid' as const,
+    type: "pattern" as const,
+    pattern: "solid" as const,
     fgColor: { argb: `FF${EXCEL_COLORS.incomeLight}` },
   },
   expense: {
-    type: 'pattern' as const,
-    pattern: 'solid' as const,
+    type: "pattern" as const,
+    pattern: "solid" as const,
     fgColor: { argb: `FF${EXCEL_COLORS.expenseLight}` },
   },
   warning: {
-    type: 'pattern' as const,
-    pattern: 'solid' as const,
+    type: "pattern" as const,
+    pattern: "solid" as const,
     fgColor: { argb: `FF${EXCEL_COLORS.warningLight}` },
   },
   primaryLight: {
-    type: 'pattern' as const,
-    pattern: 'solid' as const,
+    type: "pattern" as const,
+    pattern: "solid" as const,
     fgColor: { argb: `FF${EXCEL_COLORS.primaryLight}` },
   },
 } as const;
@@ -60,8 +60,8 @@ export const FILLS = {
 // BORDER STYLES
 // ============================================
 
-const thinBorder = { style: 'thin' as const, color: { argb: `FF${EXCEL_COLORS.border}` } };
-const mediumBorder = { style: 'medium' as const, color: { argb: `FF${EXCEL_COLORS.primary}` } };
+const thinBorder = { style: "thin" as const, color: { argb: `FF${EXCEL_COLORS.border}` } };
+const mediumBorder = { style: "medium" as const, color: { argb: `FF${EXCEL_COLORS.primary}` } };
 
 export const BORDERS = {
   all: {
@@ -99,62 +99,62 @@ export const BORDERS = {
 
 export const FONTS = {
   header: {
-    name: 'Calibri',
+    name: "Calibri",
     size: 12,
     bold: true,
     color: { argb: `FF${EXCEL_COLORS.headerText}` },
   },
   subheader: {
-    name: 'Calibri',
+    name: "Calibri",
     size: 11,
     bold: true,
     color: { argb: `FF${EXCEL_COLORS.subheaderText}` },
   },
   title: {
-    name: 'Calibri',
+    name: "Calibri",
     size: 18,
     bold: true,
     color: { argb: `FF${EXCEL_COLORS.text}` },
   },
   subtitle: {
-    name: 'Calibri',
+    name: "Calibri",
     size: 14,
     bold: true,
     color: { argb: `FF${EXCEL_COLORS.textMuted}` },
   },
   body: {
-    name: 'Calibri',
+    name: "Calibri",
     size: 11,
     color: { argb: `FF${EXCEL_COLORS.text}` },
   },
   bodyMuted: {
-    name: 'Calibri',
+    name: "Calibri",
     size: 11,
     color: { argb: `FF${EXCEL_COLORS.textMuted}` },
   },
   metric: {
-    name: 'Calibri',
+    name: "Calibri",
     size: 24,
     bold: true,
     color: { argb: `FF${EXCEL_COLORS.text}` },
   },
   metricLabel: {
-    name: 'Calibri',
+    name: "Calibri",
     size: 10,
     color: { argb: `FF${EXCEL_COLORS.textMuted}` },
   },
   income: {
-    name: 'Calibri',
+    name: "Calibri",
     size: 11,
     color: { argb: `FF${EXCEL_COLORS.income}` },
   },
   expense: {
-    name: 'Calibri',
+    name: "Calibri",
     size: 11,
     color: { argb: `FF${EXCEL_COLORS.expense}` },
   },
   link: {
-    name: 'Calibri',
+    name: "Calibri",
     size: 11,
     color: { argb: `FF${EXCEL_COLORS.primary}` },
     underline: true,
@@ -166,13 +166,13 @@ export const FONTS = {
 // ============================================
 
 export const ALIGNMENTS = {
-  left: { horizontal: 'left' as const, vertical: 'middle' as const },
-  center: { horizontal: 'center' as const, vertical: 'middle' as const },
-  right: { horizontal: 'right' as const, vertical: 'middle' as const },
-  leftTop: { horizontal: 'left' as const, vertical: 'top' as const },
-  centerTop: { horizontal: 'center' as const, vertical: 'top' as const },
-  rightTop: { horizontal: 'right' as const, vertical: 'top' as const },
-  wrap: { horizontal: 'left' as const, vertical: 'middle' as const, wrapText: true },
+  left: { horizontal: "left" as const, vertical: "middle" as const },
+  center: { horizontal: "center" as const, vertical: "middle" as const },
+  right: { horizontal: "right" as const, vertical: "middle" as const },
+  leftTop: { horizontal: "left" as const, vertical: "top" as const },
+  centerTop: { horizontal: "center" as const, vertical: "top" as const },
+  rightTop: { horizontal: "right" as const, vertical: "top" as const },
+  wrap: { horizontal: "left" as const, vertical: "middle" as const, wrapText: true },
 } as const;
 
 // ============================================
@@ -283,7 +283,7 @@ export function styleDataRow(row: Row, rowIndex: number, columnCount: number): v
   for (let i = 1; i <= columnCount; i++) {
     const cell = row.getCell(i);
     cell.font = FONTS.body;
-    cell.fill = isEven ? FILLS.rowEven as Fill : FILLS.rowOdd as Fill;
+    cell.fill = isEven ? (FILLS.rowEven as Fill) : (FILLS.rowOdd as Fill);
     cell.border = BORDERS.all;
   }
 }
@@ -307,7 +307,11 @@ export function styleCurrencyCell(cell: Cell, amount: number): void {
 /**
  * Apply percent formatting with conditional coloring
  */
-export function stylePercentCell(cell: Cell, percent: number, thresholds?: { warning: number; danger: number }): void {
+export function stylePercentCell(
+  cell: Cell,
+  percent: number,
+  thresholds?: { warning: number; danger: number }
+): void {
   cell.numFmt = NUMBER_FORMATS.percent;
   cell.alignment = ALIGNMENTS.right;
 
@@ -366,7 +370,7 @@ export function autoFitColumns(worksheet: Worksheet, minWidth = 10, maxWidth = 5
 export function freezePanes(worksheet: Worksheet, rows = 1, columns = 0): void {
   worksheet.views = [
     {
-      state: 'frozen',
+      state: "frozen",
       xSplit: columns,
       ySplit: rows,
       topLeftCell: `${String.fromCharCode(65 + columns)}${rows + 1}`,
@@ -378,7 +382,12 @@ export function freezePanes(worksheet: Worksheet, rows = 1, columns = 0): void {
 /**
  * Add auto-filter to a range
  */
-export function addAutoFilter(worksheet: Worksheet, startCol: string, endCol: string, headerRow: number): void {
+export function addAutoFilter(
+  worksheet: Worksheet,
+  startCol: string,
+  endCol: string,
+  headerRow: number
+): void {
   const lastRow = worksheet.rowCount;
   worksheet.autoFilter = `${startCol}${headerRow}:${endCol}${lastRow}`;
 }
@@ -469,16 +478,20 @@ export function addSheetLink(cell: Cell, targetSheet: string, displayText: strin
  * Returns the rule that can be added to worksheet.addConditionalFormatting
  */
 export function createConditionalRule(
-  type: 'greaterThan' | 'lessThan' | 'between' | 'containsText',
+  type: "greaterThan" | "lessThan" | "between" | "containsText",
   value: number | string | [number, number],
   style: Partial<Style>
 ): object {
   const baseRule: Record<string, unknown> = {
-    type: 'cellIs',
-    operator: type === 'greaterThan' ? 'greaterThan' :
-              type === 'lessThan' ? 'lessThan' :
-              type === 'between' ? 'between' :
-              'containsText',
+    type: "cellIs",
+    operator:
+      type === "greaterThan"
+        ? "greaterThan"
+        : type === "lessThan"
+          ? "lessThan"
+          : type === "between"
+            ? "between"
+            : "containsText",
     style,
   };
 
@@ -497,15 +510,15 @@ export function createConditionalRule(
  */
 export function getProgressBarConfig(min = 0, max = 100): object {
   return {
-    type: 'dataBar',
+    type: "dataBar",
     minLength: 0,
     maxLength: 100,
     showValue: true,
     gradient: true,
     color: { argb: `FF${EXCEL_COLORS.primary}` },
     cfvo: [
-      { type: 'num', value: min },
-      { type: 'num', value: max },
+      { type: "num", value: min },
+      { type: "num", value: max },
     ],
   };
 }
@@ -514,9 +527,9 @@ export function getProgressBarConfig(min = 0, max = 100): object {
  * Add a trend arrow indicator
  */
 export function getTrendArrow(current: number, previous: number): string {
-  if (current > previous) return '▲';
-  if (current < previous) return '▼';
-  return '─';
+  if (current > previous) return "▲";
+  if (current < previous) return "▼";
+  return "─";
 }
 
 /**
@@ -537,7 +550,7 @@ export function formatCompactNumber(num: number): string {
  */
 export function getArgbColor(hex: string): { argb: string } {
   // Remove # if present and ensure 6 characters
-  const cleanHex = hex.replace('#', '').padStart(6, '0');
+  const cleanHex = hex.replace("#", "").padStart(6, "0");
   return { argb: `FF${cleanHex.toUpperCase()}` };
 }
 
@@ -548,7 +561,7 @@ export function createProgressBar(percent: number, width = 20): string {
   const normalizedPercent = Math.min(1, Math.max(0, percent));
   const filled = Math.round(normalizedPercent * width);
   const empty = width - filled;
-  return '█'.repeat(filled) + '░'.repeat(empty);
+  return "█".repeat(filled) + "░".repeat(empty);
 }
 
 /**
@@ -579,7 +592,7 @@ export function createSummaryRow(
     cell.fill = FILLS.subheader as Fill;
     cell.border = BORDERS.all;
 
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       cell.numFmt = NUMBER_FORMATS.currency;
       cell.alignment = ALIGNMENTS.right;
     }

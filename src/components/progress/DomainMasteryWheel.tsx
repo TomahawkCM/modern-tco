@@ -68,9 +68,7 @@ export default function DomainMasteryWheel({
             Domain Mastery Overview
           </CardTitle>
           <div className="text-center">
-            <div className="text-3xl font-bold text-primary">
-              {Math.round(overallMastery)}%
-            </div>
+            <div className="text-3xl font-bold text-primary">{Math.round(overallMastery)}%</div>
             <p className="text-xs text-muted-foreground">Overall</p>
           </div>
         </div>
@@ -81,16 +79,15 @@ export default function DomainMasteryWheel({
         <div className="space-y-4">
           {domains.map((domain, idx) => {
             const color = domainColors[idx % domainColors.length];
-            const completionPercentage =
-              (domain.completedSections / domain.totalSections) * 100;
+            const completionPercentage = (domain.completedSections / domain.totalSections) * 100;
 
             return (
               <div key={domain.domain} className="space-y-2">
                 {/* Domain Header */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className={`w-3 h-3 rounded-full ${color}`} />
-                    <span className="font-medium text-sm">{domain.domain}</span>
+                    <div className={`h-3 w-3 rounded-full ${color}`} />
+                    <span className="text-sm font-medium">{domain.domain}</span>
                     {domain.blueprintWeight > 0 && (
                       <Badge variant="outline" className="text-xs">
                         {domain.blueprintWeight}% of exam
@@ -118,15 +115,12 @@ export default function DomainMasteryWheel({
                     className="h-3"
                     style={
                       {
-                        "--progress-background": `hsl(var(--${color.replace(
-                          "bg-",
-                          ""
-                        )}))`,
+                        "--progress-background": `hsl(var(--${color.replace("bg-", "")}))`,
                       } as React.CSSProperties
                     }
                   />
                   {completionPercentage === 100 && (
-                    <CheckCircle2 className="absolute right-1 top-1/2 -translate-y-1/2 h-4 w-4 text-[#22c55e]" />
+                    <CheckCircle2 className="absolute right-1 top-1/2 h-4 w-4 -translate-y-1/2 text-[#22c55e]" />
                   )}
                 </div>
 
@@ -136,7 +130,7 @@ export default function DomainMasteryWheel({
                     Mastery: {Math.round(domain.masteryPercentage)}%
                   </span>
                   {domain.masteryPercentage >= 80 && (
-                    <span className="text-[#22c55e] flex items-center gap-1">
+                    <span className="flex items-center gap-1 text-[#22c55e]">
                       <TrendingUp className="h-3 w-3" />
                       Ready for exam
                     </span>
@@ -148,18 +142,18 @@ export default function DomainMasteryWheel({
         </div>
 
         {/* Legend */}
-        <div className="pt-4 border-t">
+        <div className="border-t pt-4">
           <div className="grid grid-cols-3 gap-4 text-xs">
             <div>
-              <p className="font-medium mb-1">Progress</p>
+              <p className="mb-1 font-medium">Progress</p>
               <p className="text-muted-foreground">Sections completed</p>
             </div>
             <div>
-              <p className="font-medium mb-1">Confidence</p>
+              <p className="mb-1 font-medium">Confidence</p>
               <p className="text-muted-foreground">Self-assessment</p>
             </div>
             <div>
-              <p className="font-medium mb-1">Mastery</p>
+              <p className="mb-1 font-medium">Mastery</p>
               <p className="text-muted-foreground">Quiz + review score</p>
             </div>
           </div>
@@ -167,10 +161,8 @@ export default function DomainMasteryWheel({
 
         {/* Study Recommendations */}
         {domains.some((d) => d.masteryPercentage < 70) && (
-          <div className="p-3 bg-orange-500/10 border border-orange-500/20 rounded-lg">
-            <p className="text-sm font-medium text-orange-500 mb-1">
-              Focus Areas
-            </p>
+          <div className="rounded-lg border border-orange-500/20 bg-orange-500/10 p-3">
+            <p className="mb-1 text-sm font-medium text-orange-500">Focus Areas</p>
             <p className="text-xs text-muted-foreground">
               {domains
                 .filter((d) => d.masteryPercentage < 70)

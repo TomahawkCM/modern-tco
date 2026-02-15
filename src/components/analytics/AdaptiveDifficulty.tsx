@@ -195,7 +195,7 @@ export function AdaptiveDifficulty() {
       <CardHeader>
         <CardTitle className="flex items-center justify-between text-foreground">
           <div className="flex items-center gap-2">
-            <Brain className="h-5 w-5 text-tanium-accent" />
+            <Brain className="text-tanium-accent h-5 w-5" />
             Adaptive Difficulty System
           </div>
           <div className="flex items-center gap-2">
@@ -222,7 +222,7 @@ export function AdaptiveDifficulty() {
                   className="glass flex items-center justify-between rounded-lg border border-white/5 p-3"
                 >
                   <div className="flex items-center gap-3">
-                    <Icon className="h-4 w-4 text-tanium-accent" />
+                    <Icon className="text-tanium-accent h-4 w-4" />
                     <span className="text-sm text-foreground">{domain}</span>
                   </div>
                   <Badge variant="outline" className={difficultyInfo.color}>
@@ -237,7 +237,10 @@ export function AdaptiveDifficulty() {
             <h4 className="font-medium text-foreground">Adjustment Settings</h4>
             <div className="glass space-y-4 rounded-lg border border-white/5 p-4">
               <div>
-                <label htmlFor="sensitivity-select" className="mb-2 block text-sm text-muted-foreground">
+                <label
+                  htmlFor="sensitivity-select"
+                  className="mb-2 block text-sm text-muted-foreground"
+                >
                   Sensitivity
                 </label>
                 <select
@@ -357,7 +360,7 @@ export function AdaptiveDifficulty() {
         {/* Information Panel */}
         <div className="glass rounded-lg border border-white/10 p-4">
           <h4 className="mb-3 flex items-center gap-2 font-medium text-foreground">
-            <Settings className="h-4 w-4 text-tanium-accent" />
+            <Settings className="text-tanium-accent h-4 w-4" />
             How Adaptive Difficulty Works
           </h4>
           <ul className="space-y-2 text-sm text-muted-foreground">

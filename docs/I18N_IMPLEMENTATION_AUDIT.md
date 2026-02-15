@@ -9,10 +9,12 @@
 ## 1) Repo Map (i18n + Offline-Related)
 
 ### Core i18n Configuration
+
 - **`src/i18n/config.ts`** (960 lines) - Locale definitions (114 locales), metadata, validation, browser detection
 - **`src/i18n/middleware.ts`** (58 lines) - Accept-Language header parsing for SSR
 
 ### Translation Data
+
 - **`src/i18n/messages/*.json`** (114 files, 2.3MB total) - Pre-generated locale files
   - Each file ~17KB (example: es-ES.json)
   - Structure: Nested JSON matching source file
@@ -22,21 +24,26 @@
 - **`src/i18n/glossaries/README.md`** (142 lines) - Glossary documentation
 
 ### React Integration
+
 - **`src/components/budget/ClientI18nProvider.tsx`** (65 lines) - next-intl wrapper, dynamic locale loading
 - **`src/components/budget/LanguageSelector.tsx`** (86 lines) - Language dropdown UI (114 locales)
 
 ### Storage & Persistence
+
 - **`src/lib/locale-storage.ts`** (233 lines) - localStorage + Supabase sync, conflict resolution
 
 ### Formatting Utilities
+
 - **`src/i18n/utils/formatCurrency.ts`** (115 lines) - 8 currencies, NO conversion, validation
 - **`src/i18n/utils/formatDate.ts`** (212 lines) - Timezone-aware, relative time, long dates
 - **`src/i18n/utils/formatNumber.ts`** (157 lines) - Indian numbering (lakh/crore), compact notation
 
 ### RTL Support
+
 - **`src/lib/rtl-utils.ts`** (176 lines) - Direction detection, alignment/side flipping
 
 ### Build Scripts
+
 - **`scripts/translate-messages.ts`** (429 lines) - Full translation with OpenAI GPT-4o-mini
 - **`scripts/translate-incremental.ts`** (489 lines) - Git diff detection, incremental translation
 - **`scripts/lib/claude-api-client.ts`** (100+ lines) - **⚠️ MISLEADING NAME** - Actually OpenAI client
@@ -48,13 +55,16 @@
 - **Total script LOC**: 1,800+ lines
 
 ### PWA & Offline
+
 - **`public/sw.js`** (272 lines) - Service worker with cache-first/network-first strategies
 - **`public/manifest.json`** (94 lines) - PWA manifest (NO lang/dir specified)
 
 ### CI/CD
+
 - **`.github/workflows/i18n-translation.yml`** (197 lines) - **⚠️ BROKEN** - References ANTHROPIC_API_KEY but code uses OPENAI_API_KEY
 
 ### App Integration
+
 - **`src/app/layout.tsx`** (104 lines) - Root HTML with dynamic lang/dir from locale preferences
 - **`src/app/budget-app/layout.tsx`** (190 lines) - Budget app wrapper with ClientI18nProvider
 
@@ -89,6 +99,7 @@ Next.js build: Dynamic imports enabled via Webpack
 ```
 
 **Evidence**:
+
 - `scripts/lib/claude-api-client.ts:11` - `import OpenAI from 'openai';`
 - `scripts/lib/claude-api-client.ts:15` - `const OPENAI_MODEL = 'gpt-4o-mini';`
 - `scripts/lib/claude-api-client.ts:62-69` - API key check for OPENAI_API_KEY
@@ -134,6 +145,7 @@ src/components/budget/LanguageSelector.tsx:42-44
 ```
 
 **Evidence**:
+
 - `src/app/layout.tsx:42-44` - `const locale = getLocalePreferences().locale || 'en-US';`
 - `src/components/budget/ClientI18nProvider.tsx:27` - Dynamic import pattern
 - `src/lib/locale-storage.ts:72-78` - setLocalePreferences() implementation
@@ -141,6 +153,7 @@ src/components/budget/LanguageSelector.tsx:42-44
 ### Formatting
 
 #### Currency (`src/i18n/utils/formatCurrency.ts`)
+
 ```typescript
 // Line 24-32
 export function formatCurrency(
@@ -149,7 +162,7 @@ export function formatCurrency(
   locale: SupportedLocale
 ): string {
   return new Intl.NumberFormat(locale, {
-    style: 'currency',
+    style: "currency",
     currency,
     minimumFractionDigits: getDecimalPlaces(currency),
     maximumFractionDigits: getDecimalPlaces(currency),
@@ -158,6 +171,7 @@ export function formatCurrency(
 ```
 
 **Behaviors**:
+
 - Multi-currency display: ✅ Supported (8 currencies)
 - Currency conversion: ❌ NOT implemented
 - Safety: `validateSameCurrency()` throws error if mixing currencies in sums
@@ -166,13 +180,14 @@ export function formatCurrency(
 **Evidence**: `src/i18n/utils/formatCurrency.ts:64-77` - validateSameCurrency(), sumCurrencyAmounts()
 
 #### Date/Time (`src/i18n/utils/formatDate.ts`)
+
 ```typescript
 // Line 12-20
 export function formatDate(date: Date, locale: SupportedLocale): string {
   return new Intl.DateTimeFormat(locale, {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
   }).format(date);
 }
 
@@ -183,6 +198,7 @@ export function getUserTimezone(): string {
 ```
 
 **Behaviors**:
+
 - Locale-specific formats: ✅ en-US (12/31/2025), ko-KR (2025. 12. 31.)
 - Timezone support: ✅ Via `getUserTimezone()` + formatDateWithTimezone()
 - Relative time: ✅ Via `Intl.RelativeTimeFormat` ("2 days ago", "2일 전")
@@ -190,6 +206,7 @@ export function getUserTimezone(): string {
 **Evidence**: `src/i18n/utils/formatDate.ts:12-20, 100-120, 148-154`
 
 #### Numbers (`src/i18n/utils/formatNumber.ts`)
+
 ```typescript
 // Line 11-18
 export function formatNumber(
@@ -207,11 +224,12 @@ export function formatIndianNumber(num: number): string {
   } else if (num >= 100000) {
     return `${(num / 100000).toFixed(2)} lakh`;
   }
-  return num.toLocaleString('en-IN');
+  return num.toLocaleString("en-IN");
 }
 ```
 
 **Behaviors**:
+
 - Standard grouping: ✅ en-US (1,234,567), de-DE (1.234.567)
 - Indian numbering: ✅ en-IN (12,34,567) with lakh/crore labels
 - Compact notation: ✅ 1.5M, 150만, 150万
@@ -222,28 +240,32 @@ export function formatIndianNumber(num: number): string {
 ### RTL
 
 #### Locale Detection (`src/lib/rtl-utils.ts`)
+
 ```typescript
 // Line 8-14
 const RTL_LOCALES: SupportedLocale[] = [
-  'ar-AE', 'ar-SA', // Arabic
-  'fa-IR',          // Persian
-  'he-IL',          // Hebrew
-  'ur-PK',          // Urdu
+  "ar-AE",
+  "ar-SA", // Arabic
+  "fa-IR", // Persian
+  "he-IL", // Hebrew
+  "ur-PK", // Urdu
 ];
 
 // Line 16-18
-export function getLocaleDirection(locale: SupportedLocale): 'rtl' | 'ltr' {
-  return RTL_LOCALES.includes(locale) ? 'rtl' : 'ltr';
+export function getLocaleDirection(locale: SupportedLocale): "rtl" | "ltr" {
+  return RTL_LOCALES.includes(locale) ? "rtl" : "ltr";
 }
 ```
 
 **What Actually Happens**:
+
 1. Root HTML gets `dir="rtl"` attribute (`src/app/layout.tsx:44`)
 2. Browser applies default RTL text flow
 3. **NO automatic UI mirroring** - alignment helpers exist but unused in components
 4. **NO icon/image flipping** - requires manual implementation
 
 **Evidence**:
+
 - `src/lib/rtl-utils.ts:8-18` - RTL locale list and direction function
 - `src/app/layout.tsx:44` - `<html dir={dir}>`
 - **MISSING**: No usage of `getRTLAlignment()` or `getRTLSide()` in components
@@ -269,6 +291,7 @@ try {
 ```
 
 **Fallback Chain**:
+
 1. User-selected locale
 2. Browser locale (via `getBrowserLocale()` in config)
 3. `DEFAULT_LOCALE` ('en-US')
@@ -285,17 +308,20 @@ try {
 **Finding**: NO custom plural rules implemented. Relying on next-intl defaults.
 
 **Search Results**:
+
 - `grep -r "plural" src/i18n/` → No results
 - No `messages` with array values for plural forms
 - No ICU MessageFormat syntax in translation files
 
 **Evidence**:
+
 ```bash
 $ grep -r "plural\|Plural" src/i18n/**/*.ts
 (no output)
 ```
 
 **Example from next-intl docs** (NOT IMPLEMENTED):
+
 ```json
 {
   "items": "{count, plural, one {# item} other {# items}}"
@@ -313,18 +339,21 @@ $ grep -r "plural\|Plural" src/i18n/**/*.ts
 ### 🟡 PARTIAL: RTL Layout Support
 
 **What Works**:
+
 - ✅ `<html dir="rtl">` set correctly (`src/app/layout.tsx:44`)
 - ✅ Browser applies default RTL text flow
 - ✅ RTL detection function exists (`src/lib/rtl-utils.ts:16-18`)
 - ✅ Translation validation checks for RTL characters (`scripts/lib/translation-validator.ts:40-46`)
 
 **What's Missing**:
+
 - ❌ UI components don't use `getRTLAlignment()` or `getRTLSide()`
 - ❌ No icon/image flipping for RTL
 - ❌ No RTL-specific CSS classes or utilities
 - ❌ Tailwind RTL plugin not configured
 
 **Evidence - Functions Exist**:
+
 ```typescript
 // src/lib/rtl-utils.ts:42-68
 export function getRTLAlignment(align: 'left' | 'right'): 'left' | 'right' {...}
@@ -332,6 +361,7 @@ export function getRTLSide(side: 'start' | 'end'): 'left' | 'right' {...}
 ```
 
 **Evidence - NOT USED**:
+
 ```bash
 $ grep -r "getRTLAlignment\|getRTLSide" src/components/
 (no output - functions defined but never called)
@@ -349,13 +379,13 @@ $ grep -r "getRTLAlignment\|getRTLSide" src/components/
 
 ```typescript
 export function validateSameCurrency(items: { currency: CurrencyCode }[]): boolean {
-  const currencies = new Set(items.map(i => i.currency));
+  const currencies = new Set(items.map((i) => i.currency));
   return currencies.size <= 1;
 }
 
 export function sumCurrencyAmounts(items: { amount: number; currency: CurrencyCode }[]): number {
   if (!validateSameCurrency(items)) {
-    throw new Error('Cannot sum amounts with different currencies');
+    throw new Error("Cannot sum amounts with different currencies");
   }
   return items.reduce((sum, item) => sum + item.amount, 0);
 }
@@ -364,6 +394,7 @@ export function sumCurrencyAmounts(items: { amount: number; currency: CurrencyCo
 **Supported Currencies**: 8 (USD, CAD, INR, KRW, SGD, PHP, EUR, GBP)
 
 **What's Missing**:
+
 - ❌ No exchange rate API integration
 - ❌ No currency conversion function
 - ❌ No FX rate caching
@@ -388,11 +419,11 @@ export function formatDateWithTimezone(
   timeZone: string = getUserTimezone()
 ): string {
   return new Intl.DateTimeFormat(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+    year: "numeric",
+    month: "long",
+    day: "numeric",
     timeZone,
-    timeZoneName: 'short',
+    timeZoneName: "short",
   }).format(date);
 }
 
@@ -402,6 +433,7 @@ export function getUserTimezone(): string {
 ```
 
 **Features**:
+
 - ✅ Browser timezone detection
 - ✅ Timezone-aware formatting
 - ✅ Relative time ("2 days ago", "2일 전")
@@ -413,6 +445,7 @@ export function getUserTimezone(): string {
 ### 🟡 PARTIAL: Offline Behavior
 
 **What Works Offline**:
+
 - ✅ App shell cached (`public/sw.js:16-25`)
 - ✅ Static assets cached (icons, manifest)
 - ✅ Translation files bundled in build (no network needed)
@@ -422,22 +455,24 @@ export function getUserTimezone(): string {
 **Evidence**: `public/sw.js:34-52, 145-178`
 
 **What Doesn't Work Offline**:
+
 - ❌ Translation files NOT explicitly cached in service worker
 - ❌ Supabase sync (obviously requires network)
 - ❌ Dynamic locale switching may fail if new locale not cached
 
 **Service Worker Evidence**:
+
 ```javascript
 // public/sw.js:16-32
 const APP_SHELL = [
-  '/budget-app',
-  '/budget-app/transactions',
+  "/budget-app",
+  "/budget-app/transactions",
   // ... routes only, NO locale files
 ];
 
 const STATIC_ASSETS = [
-  '/manifest.json',
-  '/icons/budget-app-192.png',
+  "/manifest.json",
+  "/icons/budget-app-192.png",
   // ... NO /i18n/messages/*.json
 ];
 ```
@@ -445,6 +480,7 @@ const STATIC_ASSETS = [
 **Critical Gap**: Locale files rely on Next.js code-splitting cache, NOT explicit service worker caching
 
 **Evidence of Partial Success**:
+
 - First-loaded locale: ✅ Works offline (in Next.js cache)
 - Switching to new locale: ❌ May fail offline (not pre-cached)
 
@@ -455,22 +491,26 @@ const STATIC_ASSETS = [
 ### 🟡 PARTIAL: Performance (Code-Splitting, Caching, Bundle Size)
 
 **What Works**:
+
 - ✅ Dynamic imports for locales (`ClientI18nProvider.tsx:27`)
 - ✅ Translation cache prevents re-translation (`scripts/.translation-cache.json`)
 - ✅ Incremental builds only translate changed keys
 - ✅ Rate limiting (5 concurrent API calls)
 
 **Evidence**: `src/components/budget/ClientI18nProvider.tsx:27`
+
 ```typescript
 const loadedMessages = (await import(`../../i18n/messages/${currentLocale}.json`)).default;
 ```
 
 **What's Problematic**:
+
 - ⚠️ Bundle size: 2.3MB total (all 114 locales bundled)
 - ⚠️ No locale preloading for likely switches
 - ⚠️ No bundle size optimization (tree-shaking doesn't apply to JSON)
 
 **Evidence**:
+
 ```bash
 $ du -sh src/i18n/messages/
 2.3M    src/i18n/messages/
@@ -505,17 +545,17 @@ $ ls -lh src/i18n/messages/es-ES.json
 
 - name: Run incremental translation
   env:
-    ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}  # ❌ WRONG!
+    ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }} # ❌ WRONG!
   run: npm run translate:incremental
 ```
 
 **Actual Code**: `scripts/lib/claude-api-client.ts:62-69`
 
 ```typescript
-const apiKey = process.env.OPENAI_API_KEY;  // ✅ CORRECT
+const apiKey = process.env.OPENAI_API_KEY; // ✅ CORRECT
 
 if (!apiKey) {
-  throw new Error('OPENAI_API_KEY environment variable is not set.');
+  throw new Error("OPENAI_API_KEY environment variable is not set.");
 }
 ```
 
@@ -526,6 +566,7 @@ if (!apiKey) {
 #### 2. Misleading Class/File Names
 
 **Evidence**:
+
 - File: `scripts/lib/claude-api-client.ts` ❌ (should be `openai-api-client.ts`)
 - Class: `ClaudeAPIClient` ❌ (should be `OpenAIAPIClient`)
 - Imports: `import OpenAI from 'openai';` ✅
@@ -538,6 +579,7 @@ if (!apiKey) {
 #### 3. API Key in Source Control Check
 
 **Evidence**:
+
 ```bash
 $ grep -r "OPENAI_API_KEY\|ANTHROPIC_API_KEY" .env* .env.local
 (no output - correctly NOT in git)
@@ -554,11 +596,13 @@ $ grep -r "OPENAI_API_KEY\|ANTHROPIC_API_KEY" .env* .env.local
 **Issue**: Translations are simple strings, no plural rules or variable interpolation.
 
 **Impact**:
+
 - Grammatically incorrect plurals ("1 items", "0 transaction")
 - Cannot display dynamic values in translations ("Hello {name}")
 - Breaks UX for languages with complex plural rules (ru, ar, pl, cs, uk)
 
 **Where to Change**:
+
 1. `src/i18n/messages/en.json` - Add ICU MessageFormat syntax
 2. `src/components/budget/ClientI18nProvider.tsx` - No changes needed (next-intl supports ICU)
 3. All component usages - Update to use `t()` with variables
@@ -566,6 +610,7 @@ $ grep -r "OPENAI_API_KEY\|ANTHROPIC_API_KEY" .env* .env.local
 **Proposed Fix**:
 
 **Step 1**: Update source file with ICU syntax
+
 ```json
 // src/i18n/messages/en.json
 {
@@ -579,6 +624,7 @@ $ grep -r "OPENAI_API_KEY\|ANTHROPIC_API_KEY" .env* .env.local
 ```
 
 **Step 2**: Update component usage
+
 ```typescript
 // Before
 <span>{t('transactions.label')}</span>
@@ -628,9 +674,7 @@ npm install tailwindcss-rtl
 ```javascript
 // tailwind.config.js
 module.exports = {
-  plugins: [
-    require('tailwindcss-rtl'),
-  ],
+  plugins: [require("tailwindcss-rtl")],
 };
 ```
 
@@ -640,6 +684,7 @@ module.exports = {
 ```
 
 **Files to Update**:
+
 - `src/components/budget/layout/Sidebar.tsx`
 - `src/components/budget/layout/MobileNav.tsx`
 - `src/components/budget/LanguageSelector.tsx`
@@ -696,6 +741,7 @@ module.exports = {
 ```
 
 **Additional Step**: Add GitHub secret
+
 ```bash
 # In repo settings: Settings → Secrets → Actions
 # Add new secret:
@@ -753,13 +799,14 @@ function shouldCacheFirst(url) {
   // ... existing code ...
 
   // Cache locale files
-  if (url.pathname.includes('/i18n/messages/')) {
+  if (url.pathname.includes("/i18n/messages/")) {
     return true;
   }
 }
 ```
 
 **Verification**:
+
 1. Install PWA
 2. Go offline (DevTools → Network → Offline)
 3. Switch locale → Should work from cache
@@ -773,6 +820,7 @@ function shouldCacheFirst(url) {
 **Impact**: Developer confusion, incorrect documentation.
 
 **Where to Change**:
+
 1. `scripts/lib/claude-api-client.ts` → Rename to `openai-api-client.ts`
 2. Class `ClaudeAPIClient` → Rename to `OpenAIAPIClient`
 
@@ -788,11 +836,13 @@ sed -i "s/ClaudeAPIClient/OpenAIAPIClient/g" scripts/**/*.ts
 ```
 
 **Files to Update**:
+
 - `scripts/translate-messages.ts:22` - Import statement
 - `scripts/translate-incremental.ts:23` - Import statement
 - `scripts/lib/openai-api-client.ts:54` - Class name
 
 **Diff**:
+
 ```diff
 --- a/scripts/lib/claude-api-client.ts
 +++ b/scripts/lib/openai-api-client.ts
@@ -829,7 +879,7 @@ sed -i "s/ClaudeAPIClient/OpenAIAPIClient/g" scripts/**/*.ts
 
 ```typescript
 // src/lib/currency-conversion.ts
-import type { CurrencyCode } from '@/i18n/utils/formatCurrency';
+import type { CurrencyCode } from "@/i18n/utils/formatCurrency";
 
 interface ExchangeRates {
   base: CurrencyCode;
@@ -840,7 +890,9 @@ interface ExchangeRates {
 const CACHE_DURATION = 1000 * 60 * 60; // 1 hour
 let cachedRates: ExchangeRates | null = null;
 
-export async function fetchExchangeRates(baseCurrency: CurrencyCode = 'USD'): Promise<ExchangeRates> {
+export async function fetchExchangeRates(
+  baseCurrency: CurrencyCode = "USD"
+): Promise<ExchangeRates> {
   // Check cache
   if (cachedRates && Date.now() - cachedRates.timestamp < CACHE_DURATION) {
     return cachedRates;
@@ -917,11 +969,13 @@ export function convertCurrency(
 **Proposed Fix**:
 
 **Option A**: Manual creation (high quality, slow)
+
 - Hire native speakers for each locale
 - Estimated time: 2-3 months
 - Estimated cost: $5,000-$10,000
 
 **Option B**: AI-generated with human review (fast, good quality)
+
 - Use GPT-4o to generate glossaries for remaining 100 locales
 - Native speaker review for top 30 locales
 - Estimated time: 1-2 weeks
@@ -931,27 +985,24 @@ export function convertCurrency(
 
 ```typescript
 // scripts/generate-glossaries.ts
-import { SUPPORTED_LOCALES } from '../src/i18n/config';
-import fs from 'fs';
-import path from 'path';
+import { SUPPORTED_LOCALES } from "../src/i18n/config";
+import fs from "fs";
+import path from "path";
 
-const GLOSSARIES_DIR = path.join(__dirname, '../src/i18n/glossaries');
+const GLOSSARIES_DIR = path.join(__dirname, "../src/i18n/glossaries");
 const CORE_TERMS = {
-  "dashboard": ["primary_translation", "alternative1"],
-  "budget": ["primary_translation"],
+  dashboard: ["primary_translation", "alternative1"],
+  budget: ["primary_translation"],
   // ... all core terms
 };
 
 async function generateGlossary(locale: string) {
-  const prompt = `Create a terminology glossary for ${locale} with these financial terms: ${Object.keys(CORE_TERMS).join(', ')}. Return JSON with primary + alternative translations.`;
+  const prompt = `Create a terminology glossary for ${locale} with these financial terms: ${Object.keys(CORE_TERMS).join(", ")}. Return JSON with primary + alternative translations.`;
 
   // Call OpenAI API
   const glossary = await translateGlossary(prompt, locale);
 
-  fs.writeFileSync(
-    path.join(GLOSSARIES_DIR, `${locale}.json`),
-    JSON.stringify(glossary, null, 2)
-  );
+  fs.writeFileSync(path.join(GLOSSARIES_DIR, `${locale}.json`), JSON.stringify(glossary, null, 2));
 }
 ```
 
@@ -1090,6 +1141,7 @@ npm run dev
 ### Test RTL + Formatting (Manual Checklist)
 
 **RTL Layout Test**:
+
 ```bash
 # 1. Open app in Chrome
 # 2. Open language selector
@@ -1113,6 +1165,7 @@ npm run dev
 ```
 
 **Currency Formatting Test**:
+
 ```bash
 # 1. Open /budget-app/transactions
 # 2. Add transaction: $1,234.56 USD
@@ -1130,6 +1183,7 @@ npm run dev
 ```
 
 **Date Formatting Test**:
+
 ```bash
 # 1. Create transaction on 2025-12-31
 # 2. Switch locales and verify format:
@@ -1145,6 +1199,7 @@ npm run dev
 ```
 
 **Number Formatting Test**:
+
 ```bash
 # 1. Display large number: 1234567.89
 # 2. Switch locales:

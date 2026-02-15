@@ -26,7 +26,7 @@ export type {
   Receipt,
   ImportMapping,
   ImportMetadata,
-} from '@/types/budget';
+} from "@/types/budget";
 
 /**
  * Export file metadata
@@ -43,7 +43,7 @@ export interface BudgetFileMetadata {
   /** Whether data is encrypted */
   encrypted: boolean;
   /** Encryption algorithm (if encrypted) */
-  encryptionMethod: 'AES-256-GCM' | null;
+  encryptionMethod: "AES-256-GCM" | null;
   /** Hash of original data (pre-encryption) */
   dataHash: string;
   /** User identifier (anonymized) */
@@ -63,7 +63,7 @@ export interface BudgetFileMetadata {
  */
 export interface EncryptedDataPayload {
   encrypted: true;
-  algorithm: 'AES-256-GCM';
+  algorithm: "AES-256-GCM";
   /** Base64-encoded initialization vector */
   iv: string;
   /** Base64-encoded salt for key derivation */
@@ -104,11 +104,11 @@ export interface ReceiptExport {
  */
 export interface SettingsExport {
   // Display preferences
-  theme: 'light' | 'dark' | 'system';
+  theme: "light" | "dark" | "system";
   seniorsMode: boolean;
   reducedMotion: boolean;
   highContrast: boolean;
-  fontSize: 'small' | 'medium' | 'large' | 'extra-large';
+  fontSize: "small" | "medium" | "large" | "extra-large";
 
   // Regional settings
   locale: string;
@@ -140,7 +140,7 @@ export interface PreferencesExport {
   // Import preferences
   defaultDateFormat: string;
   autoCategorizationEnabled: boolean;
-  duplicateDetectionSensitivity: 'low' | 'medium' | 'high';
+  duplicateDetectionSensitivity: "low" | "medium" | "high";
 
   // Chart preferences
   chartColorScheme: string;
@@ -153,7 +153,7 @@ export interface PreferencesExport {
 export interface AccountExport {
   id: string;
   name: string;
-  type: 'checking' | 'savings' | 'credit';
+  type: "checking" | "savings" | "credit";
   institution: string;
   balance: number;
   currency: string;
@@ -172,7 +172,7 @@ export interface TransactionExport {
   subcategory: string | null;
   notes: string;
   isRecurring: boolean;
-  recurringPattern?: 'daily' | 'weekly' | 'biweekly' | 'monthly' | 'quarterly' | 'annually';
+  recurringPattern?: "daily" | "weekly" | "biweekly" | "monthly" | "quarterly" | "annually";
   tags: string[];
   merchant?: string;
   receiptIds?: string[];
@@ -192,7 +192,7 @@ export interface TransactionExport {
 export interface CategoryExport {
   id: string;
   name: string;
-  type: 'expense' | 'income';
+  type: "expense" | "income";
   subcategories: string[];
   color: string;
   icon: string;
@@ -207,13 +207,13 @@ export interface BudgetExportItem {
   id: string;
   categoryId: string;
   amount: number;
-  period: 'monthly' | 'annual';
+  period: "monthly" | "annual";
   startDate: string;
   endDate: string | null;
   rollover: boolean;
   // Multi-Profile Support
   ownerId?: string | null;
-  visibility?: 'shared' | 'private';
+  visibility?: "shared" | "private";
   createdAt: string;
   updatedAt: string;
 }
@@ -240,8 +240,25 @@ export interface ActivityLogExport {
   id: string;
   profileId: string;
   profileName: string;
-  action: 'create' | 'update' | 'delete' | 'login' | 'logout' | 'export' | 'import' | 'pin_change' | 'profile_switch';
-  entityType: 'profile' | 'transaction' | 'budget' | 'category' | 'account' | 'subscription' | 'loan' | 'system';
+  action:
+    | "create"
+    | "update"
+    | "delete"
+    | "login"
+    | "logout"
+    | "export"
+    | "import"
+    | "pin_change"
+    | "profile_switch";
+  entityType:
+    | "profile"
+    | "transaction"
+    | "budget"
+    | "category"
+    | "account"
+    | "subscription"
+    | "loan"
+    | "system";
   entityId: string | null;
   entityName?: string;
   details?: Record<string, unknown>;
@@ -256,7 +273,7 @@ export interface GoalExport {
   currentSavings: number;
   monthlyContribution: number;
   targetDate: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: "low" | "medium" | "high";
   category?: string;
   notes: string;
   isCompleted: boolean;
@@ -267,7 +284,7 @@ export interface GoalExport {
 export interface LoanExport {
   id: string;
   name: string;
-  type: 'mortgage' | 'auto' | 'personal' | 'student';
+  type: "mortgage" | "auto" | "personal" | "student";
   lender: string;
   originalPrincipal: number;
   interestRate: number;
@@ -275,9 +292,9 @@ export interface LoanExport {
   startDate: string;
   currentBalance: number;
   monthlyPayment: number;
-  paymentFrequency: 'weekly' | 'bi-weekly' | 'monthly';
+  paymentFrequency: "weekly" | "bi-weekly" | "monthly";
   nextPaymentDate: string;
-  status: 'active' | 'paid-off' | 'refinanced' | 'defaulted';
+  status: "active" | "paid-off" | "refinanced" | "defaulted";
   totalPaid: number;
   totalInterestPaid: number;
   extraPayments: number;
@@ -316,12 +333,12 @@ export interface SubscriptionExport {
   description?: string;
   amount: number;
   currency: string;
-  billingCycle: 'weekly' | 'bi-weekly' | 'monthly' | 'quarterly' | 'annual';
+  billingCycle: "weekly" | "bi-weekly" | "monthly" | "quarterly" | "annual";
   startDate: string;
   nextBillingDate: string;
   trialEndDate?: string;
   cancelledDate?: string;
-  status: 'active' | 'paused' | 'cancelled' | 'trial';
+  status: "active" | "paused" | "cancelled" | "trial";
   autoRenew: boolean;
   category?: string;
   linkedTransactionIds: string[];
@@ -331,7 +348,7 @@ export interface SubscriptionExport {
   paymentMethod?: string;
   websiteUrl?: string;
   notes?: string;
-  source: 'manual' | 'auto-detected' | 'merged';
+  source: "manual" | "auto-detected" | "merged";
   createdAt: string;
   updatedAt: string;
 }
@@ -348,7 +365,7 @@ export interface InvestmentExport {
   id: string;
   symbol: string;
   name: string;
-  type: 'stock' | 'etf' | 'crypto' | 'mutual-fund' | 'bond' | 'other';
+  type: "stock" | "etf" | "crypto" | "mutual-fund" | "bond" | "other";
   exchange?: string;
   currency: string;
   sector?: string;
@@ -366,7 +383,7 @@ export interface PortfolioExport {
     targetPercentage: number;
     currentPercentage?: number;
   }[];
-  rebalanceFrequency?: 'monthly' | 'quarterly' | 'annually' | 'never';
+  rebalanceFrequency?: "monthly" | "quarterly" | "annually" | "never";
   createdAt: string;
   updatedAt: string;
 }
@@ -392,7 +409,7 @@ export interface InvestmentTransactionExport {
   id: string;
   portfolioId: string;
   investmentId: string;
-  type: 'buy' | 'sell' | 'dividend' | 'split' | 'transfer-in' | 'transfer-out';
+  type: "buy" | "sell" | "dividend" | "split" | "transfer-in" | "transfer-out";
   date: string;
   quantity: number;
   pricePerShare: number;
@@ -407,7 +424,7 @@ export interface InvestmentTransactionExport {
 export interface InvestmentAccountExport {
   id: string;
   name: string;
-  type: 'RRSP' | 'TFSA' | 'Non-registered' | 'Company shares';
+  type: "RRSP" | "TFSA" | "Non-registered" | "Company shares";
   institution?: string;
   accountNumber?: string;
   createdAt: string;
@@ -469,7 +486,7 @@ export interface ImportMappingExport {
 export interface ImportHistoryExport {
   id: string;
   fileName: string;
-  fileFormat: 'csv' | 'ofx' | 'qfx' | 'qbo' | 'pdf' | 'qif' | 'mt940' | 'camt053';
+  fileFormat: "csv" | "ofx" | "qfx" | "qbo" | "pdf" | "qif" | "mt940" | "camt053";
   bank?: string;
   importDate: string;
   transactionCount: number;
@@ -522,7 +539,7 @@ export interface BudgetFile {
 export function isEncryptedData(
   data: BudgetExportData | EncryptedDataPayload
 ): data is EncryptedDataPayload {
-  return 'encrypted' in data && data.encrypted === true;
+  return "encrypted" in data && data.encrypted === true;
 }
 
 /**
@@ -548,7 +565,7 @@ export interface ExportOptions {
  */
 export interface ImportProgress {
   /** Current stage of the import process */
-  stage: 'validating' | 'decrypting' | 'importing' | 'complete';
+  stage: "validating" | "decrypting" | "importing" | "complete";
   /** Name of the current table being imported */
   currentTable: string;
   /** Index of current table (0-based) */
@@ -568,7 +585,7 @@ export interface ImportProgress {
  */
 export interface ImportOptions {
   /** How to handle ID conflicts */
-  conflictResolution: 'skip' | 'overwrite' | 'rename';
+  conflictResolution: "skip" | "overwrite" | "rename";
   /** Validate data before import */
   validateBeforeImport?: boolean;
   /** Password for decryption (required if encrypted) */
@@ -613,7 +630,7 @@ export interface ValidationResult {
   errors: Array<{
     path: string;
     message: string;
-    severity: 'error' | 'warning';
+    severity: "error" | "warning";
   }>;
   warnings: string[];
   metadata?: BudgetFileMetadata;
@@ -622,26 +639,26 @@ export interface ValidationResult {
 /**
  * Current schema version
  */
-export const BUDGET_FILE_VERSION = '1.0.0';
+export const BUDGET_FILE_VERSION = "1.0.0";
 
 /**
  * Current app version (should match package.json)
  */
-export const APP_VERSION = '2.0.0';
+export const APP_VERSION = "2.0.0";
 
 /**
  * Default export settings
  */
 export const DEFAULT_SETTINGS: SettingsExport = {
-  theme: 'dark',
+  theme: "dark",
   seniorsMode: false,
   reducedMotion: false,
   highContrast: false,
-  fontSize: 'medium',
-  locale: 'en-CA',
-  currency: 'CAD',
-  dateFormat: 'YYYY-MM-DD',
-  timezone: 'America/Toronto',
+  fontSize: "medium",
+  locale: "en-CA",
+  currency: "CAD",
+  dateFormat: "YYYY-MM-DD",
+  timezone: "America/Toronto",
   analyticsEnabled: true,
   crashReportingEnabled: true,
   reminderNotifications: true,
@@ -654,11 +671,11 @@ export const DEFAULT_SETTINGS: SettingsExport = {
  * Default export preferences
  */
 export const DEFAULT_PREFERENCES: PreferencesExport = {
-  dashboardWidgets: ['spending', 'budgets', 'goals'],
-  defaultView: 'dashboard',
-  defaultDateFormat: 'YYYY-MM-DD',
+  dashboardWidgets: ["spending", "budgets", "goals"],
+  defaultView: "dashboard",
+  defaultDateFormat: "YYYY-MM-DD",
   autoCategorizationEnabled: true,
-  duplicateDetectionSensitivity: 'medium',
-  chartColorScheme: 'teal',
-  defaultChartPeriod: 'month',
+  duplicateDetectionSensitivity: "medium",
+  chartColorScheme: "teal",
+  defaultChartPeriod: "month",
 };

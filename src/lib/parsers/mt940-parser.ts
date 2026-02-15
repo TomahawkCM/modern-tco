@@ -12,7 +12,7 @@
  *   :62F: Closing balance
  */
 
-import type { ParsedTransaction } from '@/types/budget';
+import type { ParsedTransaction } from "@/types/budget";
 
 export interface MT940ParseOptions {
   locale?: string;
@@ -25,21 +25,23 @@ export interface MT940ParseOptions {
  * @param content - Raw MT940 file content
  * @returns Array of parsed transactions
  */
-export async function parseMT940File(content: string, options: MT940ParseOptions = {}): Promise<ParsedTransaction[]> {
+export async function parseMT940File(
+  content: string,
+  options: MT940ParseOptions = {}
+): Promise<ParsedTransaction[]> {
   try {
-    const mt940 = await import('mt940-js');
+    const mt940 = await import("mt940-js");
 
     // mt940-js expects ArrayBuffer — convert string to ArrayBuffer
     const encoder = new TextEncoder();
-    const buffer = encoder.encode(content).buffer;
+    const {buffer} = encoder.encode(content);
 
     const statements = await mt940.read(buffer);
     const transactions: ParsedTransaction[] = [];
 
     for (const statement of statements) {
-      const currency = statement.openingBalance?.currency
-        || statement.closingBalance?.currency
-        || null;
+      const currency =
+        statement.openingBalance?.currency || statement.closingBalance?.currency || null;
 
       if (statement.transactions) {
         for (const tx of statement.transactions) {
@@ -50,7 +52,7 @@ export async function parseMT940File(content: string, options: MT940ParseOptions
           if (tx.description) parts.push(tx.description);
           if (tx.customerReference) parts.push(tx.customerReference);
           if (tx.bankReference) parts.push(tx.bankReference);
-          const description = parts.join(' ').replace(/\s+/g, ' ').trim() || 'Unknown Transaction';
+          const description = parts.join(" ").replace(/\s+/g, " ").trim() || "Unknown Transaction";
 
           transactions.push({
             date: date || new Date(),
@@ -59,8 +61,8 @@ export async function parseMT940File(content: string, options: MT940ParseOptions
             isDuplicate: false,
             confidence: date ? 0.95 : 0.6,
             currency: currency || undefined,
-            transactionType: tx.isCredit ? 'CREDIT' : 'DEBIT',
-            sourceFormat: 'mt940',
+            transactionType: tx.isCredit ? "CREDIT" : "DEBIT",
+            sourceFormat: "mt940",
             requiresReview: !date,
           });
         }
@@ -69,7 +71,7 @@ export async function parseMT940File(content: string, options: MT940ParseOptions
 
     return transactions;
   } catch (error) {
-    console.error('[MT940 Parser] Library failed, using manual parser:', error);
+    console.error("[MT940 Parser] Library failed, using manual parser:", error);
     return parseMT940Manual(content);
   }
 }
@@ -129,34 +131,34 @@ function parseMT940Manual(content: string): ParsedTransaction[] {
     const txMatch = line.match(/:61:(\d{6})(\d{4})?([CD]R?)([\d,]+)([A-Z]\d{3})(.+)?/);
     if (txMatch) {
       const dateStr = txMatch[1];
-      const isCredit = txMatch[3].startsWith('C');
-      const amountStr = txMatch[4].replace(',', '.');
+      const isCredit = txMatch[3].startsWith("C");
+      const amountStr = txMatch[4].replace(",", ".");
       const amount = parseFloat(amountStr);
       const date = parseTransactionDate(dateStr);
-      const ref = txMatch[6]?.trim() || '';
+      const ref = txMatch[6]?.trim() || "";
 
       // Look for :86: description on next lines
       let description = ref;
       let j = i + 1;
-      while (j < lines.length && lines[j].startsWith(':86:')) {
-        description += ' ' + lines[j].substring(4).trim();
+      while (j < lines.length && lines[j].startsWith(":86:")) {
+        description += ` ${  lines[j].substring(4).trim()}`;
         j++;
       }
       // Also append continuation lines (not starting with :)
-      while (j < lines.length && !lines[j].startsWith(':') && lines[j].trim().length > 0) {
-        description += ' ' + lines[j].trim();
+      while (j < lines.length && !lines[j].startsWith(":") && lines[j].trim().length > 0) {
+        description += ` ${  lines[j].trim()}`;
         j++;
       }
 
       transactions.push({
         date: date || new Date(),
-        description: description.replace(/\s+/g, ' ').trim() || 'Unknown Transaction',
+        description: description.replace(/\s+/g, " ").trim() || "Unknown Transaction",
         amount: isCredit ? Math.abs(amount) : -Math.abs(amount),
         isDuplicate: false,
         confidence: date ? 0.85 : 0.5,
         currency: currency || undefined,
-        transactionType: isCredit ? 'CREDIT' : 'DEBIT',
-        sourceFormat: 'mt940',
+        transactionType: isCredit ? "CREDIT" : "DEBIT",
+        sourceFormat: "mt940",
         requiresReview: !date || isNaN(amount),
       });
 
@@ -174,5 +176,5 @@ function parseMT940Manual(content: string): ParsedTransaction[] {
  * Detect if content is an MT940 file.
  */
 export function isMT940Content(content: string): boolean {
-  return content.includes(':20:') && (content.includes(':60F:') || content.includes(':61:'));
+  return content.includes(":20:") && (content.includes(":60F:") || content.includes(":61:"));
 }

@@ -632,10 +632,7 @@ export class Parser {
 
   private checkOrderByColumnContinuation(): boolean {
     // In ORDER BY context, also stop at LIMIT (and comma is handled by outer loop)
-    const stopTokens = [
-      TokenType.LIMIT,
-      TokenType.COMMA,
-    ];
+    const stopTokens = [TokenType.LIMIT, TokenType.COMMA];
     return !stopTokens.includes(this.peek().type);
   }
 

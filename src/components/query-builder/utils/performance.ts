@@ -3,7 +3,7 @@
  * Includes debouncing, throttling, and memoization helpers
  */
 
-import { useEffect, useRef, useCallback, useMemo } from 'react';
+import { useEffect, useRef, useCallback, useMemo } from "react";
 
 /**
  * Custom hook for debouncing a value
@@ -45,15 +45,18 @@ export function useDebouncedCallback<T extends (...args: any[]) => any>(
     callbackRef.current = callback;
   }, [callback]);
 
-  return useCallback((...args: Parameters<T>) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+  return useCallback(
+    (...args: Parameters<T>) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
 
-    timeoutRef.current = setTimeout(() => {
-      callbackRef.current(...args);
-    }, delay);
-  }, [delay]);
+      timeoutRef.current = setTimeout(() => {
+        callbackRef.current(...args);
+      }, delay);
+    },
+    [delay]
+  );
 }
 
 /**
@@ -69,24 +72,27 @@ export function useThrottledCallback<T extends (...args: any[]) => any>(
   const lastRun = useRef(Date.now());
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  return useCallback((...args: Parameters<T>) => {
-    const now = Date.now();
-    const timeSinceLastRun = now - lastRun.current;
+  return useCallback(
+    (...args: Parameters<T>) => {
+      const now = Date.now();
+      const timeSinceLastRun = now - lastRun.current;
 
-    if (timeSinceLastRun >= delay) {
-      callback(...args);
-      lastRun.current = now;
-    } else {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
-      timeoutRef.current = setTimeout(() => {
+      if (timeSinceLastRun >= delay) {
         callback(...args);
-        lastRun.current = Date.now();
-      }, delay - timeSinceLastRun);
-    }
-  }, [callback, delay]);
+        lastRun.current = now;
+      } else {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+
+        timeoutRef.current = setTimeout(() => {
+          callback(...args);
+          lastRun.current = Date.now();
+        }, delay - timeSinceLastRun);
+      }
+    },
+    [callback, delay]
+  );
 }
 
 /**
@@ -160,7 +166,7 @@ export function getVisibleItems<T>(
     startIndex: bufferedStartIndex,
     endIndex: bufferedEndIndex,
     offsetY: bufferedStartIndex * itemHeight,
-    totalHeight
+    totalHeight,
   };
 }
 
@@ -170,14 +176,14 @@ export function getVisibleItems<T>(
  */
 export function batchUpdates(updates: (() => void)[]): void {
   // React 18+ automatically batches updates, but this ensures compatibility
-  if ('startTransition' in React) {
+  if ("startTransition" in React) {
     React.startTransition(() => {
-      updates.forEach(update => update());
+      updates.forEach((update) => update());
     });
   } else {
-    updates.forEach(update => update());
+    updates.forEach((update) => update());
   }
 }
 
 // Import React for hooks
-import * as React from 'react';
+import * as React from "react";

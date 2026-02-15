@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 /**
  * Export/Backup Page
  * Export data to JSON/CSV/Excel and restore from backups
  */
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 import {
   Download,
   Upload,
@@ -19,54 +19,70 @@ import {
   ChevronDown,
   ChevronUp,
   Loader2,
-} from 'lucide-react';
-import { db } from '@/lib/budget-db';
+} from "lucide-react";
+import { db } from "@/lib/budget-db";
 import {
   downloadExcelExport,
   type ExcelExportOptions,
   type ExportProgress,
-} from '@/lib/export/excel/workbook-generator';
+} from "@/lib/export/excel/workbook-generator";
 
-type DateRangeOption = ExcelExportOptions['dateRange'];
+type DateRangeOption = ExcelExportOptions["dateRange"];
 
 const DATE_RANGE_OPTIONS: { value: DateRangeOption; label: string }[] = [
-  { value: 'all', label: 'All Time' },
-  { value: 'ytd', label: 'Year to Date' },
-  { value: 'last12months', label: 'Last 12 Months' },
-  { value: 'last6months', label: 'Last 6 Months' },
-  { value: 'last3months', label: 'Last 3 Months' },
-  { value: 'custom', label: 'Custom Range' },
+  { value: "all", label: "All Time" },
+  { value: "ytd", label: "Year to Date" },
+  { value: "last12months", label: "Last 12 Months" },
+  { value: "last6months", label: "Last 6 Months" },
+  { value: "last3months", label: "Last 3 Months" },
+  { value: "custom", label: "Custom Range" },
 ];
 
 const SHEET_OPTIONS = [
-  { key: 'includeDashboard', label: 'Dashboard', description: 'Executive summary with key metrics' },
-  { key: 'includeTransactions', label: 'Transactions', description: 'Complete transaction history' },
-  { key: 'includeMonthlySummary', label: 'Monthly Summary', description: 'Month-by-month overview' },
-  { key: 'includeCategoryAnalysis', label: 'Category Analysis', description: 'Spending by category' },
-  { key: 'includeAccounts', label: 'Accounts', description: 'All accounts with balances' },
-  { key: 'includeBudgets', label: 'Budgets', description: 'Budget vs actual comparison' },
-  { key: 'includeSubscriptions', label: 'Subscriptions', description: 'Recurring costs tracking' },
-  { key: 'includeLoans', label: 'Loans', description: 'Debt with amortization schedules' },
-  { key: 'includeInvestments', label: 'Investments', description: 'Portfolio holdings' },
-  { key: 'includeNetWorth', label: 'Net Worth', description: 'Assets vs liabilities' },
-  { key: 'includeGoals', label: 'Goals', description: 'Savings goals progress' },
-  { key: 'includeDataDictionary', label: 'Data Dictionary', description: 'Field explanations' },
+  {
+    key: "includeDashboard",
+    label: "Dashboard",
+    description: "Executive summary with key metrics",
+  },
+  {
+    key: "includeTransactions",
+    label: "Transactions",
+    description: "Complete transaction history",
+  },
+  {
+    key: "includeMonthlySummary",
+    label: "Monthly Summary",
+    description: "Month-by-month overview",
+  },
+  {
+    key: "includeCategoryAnalysis",
+    label: "Category Analysis",
+    description: "Spending by category",
+  },
+  { key: "includeAccounts", label: "Accounts", description: "All accounts with balances" },
+  { key: "includeBudgets", label: "Budgets", description: "Budget vs actual comparison" },
+  { key: "includeSubscriptions", label: "Subscriptions", description: "Recurring costs tracking" },
+  { key: "includeLoans", label: "Loans", description: "Debt with amortization schedules" },
+  { key: "includeInvestments", label: "Investments", description: "Portfolio holdings" },
+  { key: "includeNetWorth", label: "Net Worth", description: "Assets vs liabilities" },
+  { key: "includeGoals", label: "Goals", description: "Savings goals progress" },
+  { key: "includeDataDictionary", label: "Data Dictionary", description: "Field explanations" },
 ] as const;
 
-type SheetOptionKey = (typeof SHEET_OPTIONS)[number]['key'];
+type SheetOptionKey = (typeof SHEET_OPTIONS)[number]["key"];
 
 export default function ExportPage() {
   const [isExporting, setIsExporting] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
-  const [exportStatus, setExportStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [importStatus, setImportStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [statusMessage, setStatusMessage] = useState('');
+  const [exportStatus, setExportStatus] = useState<"idle" | "success" | "error">("idle");
+  const [importStatus, setImportStatus] = useState<"idle" | "success" | "error">("idle");
+  const [statusMessage, setStatusMessage] = useState("");
 
   // Excel export options
   const [showExcelOptions, setShowExcelOptions] = useState(false);
-  const [dateRange, setDateRange] = useState<DateRangeOption>('last12months');
-  const [customStartDate, setCustomStartDate] = useState('');
-  const [customEndDate, setCustomEndDate] = useState('');
+  const [dateRange, setDateRange] = useState<DateRangeOption>("last12months");
+  const [customStartDate, setCustomStartDate] = useState("");
+  const [customEndDate, setCustomEndDate] = useState("");
   const [sheetOptions, setSheetOptions] = useState<Record<SheetOptionKey, boolean>>({
     includeDashboard: true,
     includeTransactions: true,
@@ -84,13 +100,13 @@ export default function ExportPage() {
   const [exportProgress, setExportProgress] = useState<ExportProgress | null>(null);
 
   const toggleSheet = useCallback((key: SheetOptionKey) => {
-    setSheetOptions(prev => ({ ...prev, [key]: !prev[key] }));
+    setSheetOptions((prev) => ({ ...prev, [key]: !prev[key] }));
   }, []);
 
   const selectAllSheets = useCallback(() => {
-    setSheetOptions(prev => {
+    setSheetOptions((prev) => {
       const newOptions = { ...prev };
-      SHEET_OPTIONS.forEach(opt => {
+      SHEET_OPTIONS.forEach((opt) => {
         newOptions[opt.key] = true;
       });
       return newOptions;
@@ -98,9 +114,9 @@ export default function ExportPage() {
   }, []);
 
   const deselectAllSheets = useCallback(() => {
-    setSheetOptions(prev => {
+    setSheetOptions((prev) => {
       const newOptions = { ...prev };
-      SHEET_OPTIONS.forEach(opt => {
+      SHEET_OPTIONS.forEach((opt) => {
         newOptions[opt.key] = false;
       });
       return newOptions;
@@ -109,14 +125,15 @@ export default function ExportPage() {
 
   async function exportToExcel() {
     setIsExporting(true);
-    setExportStatus('idle');
+    setExportStatus("idle");
     setExportProgress(null);
 
     try {
       const options: ExcelExportOptions = {
         dateRange,
-        startDate: dateRange === 'custom' && customStartDate ? new Date(customStartDate) : undefined,
-        endDate: dateRange === 'custom' && customEndDate ? new Date(customEndDate) : undefined,
+        startDate:
+          dateRange === "custom" && customStartDate ? new Date(customStartDate) : undefined,
+        endDate: dateRange === "custom" && customEndDate ? new Date(customEndDate) : undefined,
         ...sheetOptions,
         includeCharts: true,
         includeFormulas: true,
@@ -127,15 +144,17 @@ export default function ExportPage() {
       });
 
       if (result.success) {
-        setExportStatus('success');
-        setStatusMessage(`Excel workbook exported successfully! (${result.sheetsIncluded.length} sheets, ${(result.fileSize / 1024).toFixed(1)} KB)`);
+        setExportStatus("success");
+        setStatusMessage(
+          `Excel workbook exported successfully! (${result.sheetsIncluded.length} sheets, ${(result.fileSize / 1024).toFixed(1)} KB)`
+        );
       } else {
-        throw new Error(result.error || 'Export failed');
+        throw new Error(result.error || "Export failed");
       }
     } catch (error) {
-      console.error('Excel export error:', error);
-      setExportStatus('error');
-      setStatusMessage(error instanceof Error ? error.message : 'Failed to export Excel workbook');
+      console.error("Excel export error:", error);
+      setExportStatus("error");
+      setStatusMessage(error instanceof Error ? error.message : "Failed to export Excel workbook");
     } finally {
       setIsExporting(false);
       setExportProgress(null);
@@ -144,11 +163,20 @@ export default function ExportPage() {
 
   async function exportToJSON() {
     setIsExporting(true);
-    setExportStatus('idle');
+    setExportStatus("idle");
 
     try {
       // Export all data from each table
-      const [accounts, transactions, categories, budgets, futurePurchases, retirementPlans, importMappings, receipts] = await Promise.all([
+      const [
+        accounts,
+        transactions,
+        categories,
+        budgets,
+        futurePurchases,
+        retirementPlans,
+        importMappings,
+        receipts,
+      ] = await Promise.all([
         db.accounts.toArray(),
         db.transactions.toArray(),
         db.categories.toArray(),
@@ -160,7 +188,7 @@ export default function ExportPage() {
       ]);
 
       const exportData = {
-        version: '1.0.0',
+        version: "1.0.0",
         exportDate: new Date().toISOString(),
         accounts,
         transactions,
@@ -169,7 +197,7 @@ export default function ExportPage() {
         futurePurchases,
         retirementPlans,
         importMappings,
-        receipts: receipts.map(r => ({
+        receipts: receipts.map((r) => ({
           ...r,
           blob: null, // Don't export blob data - too large
           thumbnail: null,
@@ -177,24 +205,24 @@ export default function ExportPage() {
       };
 
       const blob = new Blob([JSON.stringify(exportData, null, 2)], {
-        type: 'application/json',
+        type: "application/json",
       });
 
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = `budget-backup-${new Date().toISOString().split('T')[0]}.json`;
+      a.download = `budget-backup-${new Date().toISOString().split("T")[0]}.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      setExportStatus('success');
-      setStatusMessage('Data exported successfully!');
+      setExportStatus("success");
+      setStatusMessage("Data exported successfully!");
     } catch (error) {
-      console.error('Export error:', error);
-      setExportStatus('error');
-      setStatusMessage('Failed to export data');
+      console.error("Export error:", error);
+      setExportStatus("error");
+      setStatusMessage("Failed to export data");
     } finally {
       setIsExporting(false);
     }
@@ -202,47 +230,47 @@ export default function ExportPage() {
 
   async function exportTransactionsToCSV() {
     setIsExporting(true);
-    setExportStatus('idle');
+    setExportStatus("idle");
 
     try {
       const allTxs = await db.transactions.toArray();
 
       // Filter out parent transactions that have been split
       // Export only visible transactions (children + non-split) to match what users see
-      const transactions = allTxs.filter(tx => !tx.isSplit);
+      const transactions = allTxs.filter((tx) => !tx.isSplit);
 
       // Create CSV header
-      const headers = ['Date', 'Description', 'Category', 'Subcategory', 'Amount', 'Notes'];
-      const rows = transactions.map(tx => [
+      const headers = ["Date", "Description", "Category", "Subcategory", "Amount", "Notes"];
+      const rows = transactions.map((tx) => [
         new Date(tx.date).toLocaleDateString(),
         tx.description,
-        tx.category || '',
-        tx.subcategory || '',
+        tx.category || "",
+        tx.subcategory || "",
         tx.amount.toFixed(2),
-        tx.notes || '',
+        tx.notes || "",
       ]);
 
       const csvContent = [
-        headers.join(','),
-        ...rows.map(row => row.map(cell => `"${cell}"`).join(',')),
-      ].join('\n');
+        headers.join(","),
+        ...rows.map((row) => row.map((cell) => `"${cell}"`).join(",")),
+      ].join("\n");
 
-      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const blob = new Blob([csvContent], { type: "text/csv" });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = `transactions-${new Date().toISOString().split('T')[0]}.csv`;
+      a.download = `transactions-${new Date().toISOString().split("T")[0]}.csv`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
 
-      setExportStatus('success');
-      setStatusMessage('Transactions exported to CSV!');
+      setExportStatus("success");
+      setStatusMessage("Transactions exported to CSV!");
     } catch (error) {
-      console.error('CSV export error:', error);
-      setExportStatus('error');
-      setStatusMessage('Failed to export to CSV');
+      console.error("CSV export error:", error);
+      setExportStatus("error");
+      setStatusMessage("Failed to export to CSV");
     } finally {
       setIsExporting(false);
     }
@@ -250,14 +278,14 @@ export default function ExportPage() {
 
   async function importFromJSON(file: File) {
     setIsImporting(true);
-    setImportStatus('idle');
+    setImportStatus("idle");
 
     try {
       const text = await file.text();
       const data = JSON.parse(text);
 
       if (!data.version || !data.exportDate) {
-        throw new Error('Invalid backup file format');
+        throw new Error("Invalid backup file format");
       }
 
       // Confirm before importing
@@ -271,38 +299,36 @@ export default function ExportPage() {
       }
 
       // Clear existing data first
-      await db.transaction('rw',
-        db.accounts, db.transactions, db.categories,
-        async () => {
-          // Clear all tables
-          await Promise.all([
-            db.accounts.clear(),
-            db.transactions.clear(),
-            db.categories.clear(),
-            db.budgets.clear(),
-            db.futurePurchases.clear(),
-            db.retirementPlans.clear(),
-            db.importMappings.clear(),
-            db.receipts.clear(),
-          ]);
+      await db.transaction("rw", db.accounts, db.transactions, db.categories, async () => {
+        // Clear all tables
+        await Promise.all([
+          db.accounts.clear(),
+          db.transactions.clear(),
+          db.categories.clear(),
+          db.budgets.clear(),
+          db.futurePurchases.clear(),
+          db.retirementPlans.clear(),
+          db.importMappings.clear(),
+          db.receipts.clear(),
+        ]);
 
-          // Import new data
-          if (data.accounts?.length) await db.accounts.bulkAdd(data.accounts);
-          if (data.transactions?.length) await db.transactions.bulkAdd(data.transactions);
-          if (data.categories?.length) await db.categories.bulkAdd(data.categories);
-          if (data.budgets?.length) await db.budgets.bulkAdd(data.budgets);
-          if (data.futurePurchases?.length) await db.futurePurchases.bulkAdd(data.futurePurchases);
-          if (data.retirementPlans?.length) await db.retirementPlans.bulkAdd(data.retirementPlans);
-          if (data.importMappings?.length) await db.importMappings.bulkAdd(data.importMappings);
-          // Note: Receipts without blob data won't be very useful, so skip them
-        });
+        // Import new data
+        if (data.accounts?.length) await db.accounts.bulkAdd(data.accounts);
+        if (data.transactions?.length) await db.transactions.bulkAdd(data.transactions);
+        if (data.categories?.length) await db.categories.bulkAdd(data.categories);
+        if (data.budgets?.length) await db.budgets.bulkAdd(data.budgets);
+        if (data.futurePurchases?.length) await db.futurePurchases.bulkAdd(data.futurePurchases);
+        if (data.retirementPlans?.length) await db.retirementPlans.bulkAdd(data.retirementPlans);
+        if (data.importMappings?.length) await db.importMappings.bulkAdd(data.importMappings);
+        // Note: Receipts without blob data won't be very useful, so skip them
+      });
 
-      setImportStatus('success');
-      setStatusMessage('Data imported successfully! Refresh the page to see changes.');
+      setImportStatus("success");
+      setStatusMessage("Data imported successfully! Refresh the page to see changes.");
     } catch (error) {
-      console.error('Import error:', error);
-      setImportStatus('error');
-      setStatusMessage('Failed to import data. Please check the file format.');
+      console.error("Import error:", error);
+      setImportStatus("error");
+      setStatusMessage("Failed to import data. Please check the file format.");
     } finally {
       setIsImporting(false);
     }
@@ -317,14 +343,12 @@ export default function ExportPage() {
 
   async function clearAllData() {
     const confirmed = confirm(
-      'Are you sure you want to delete ALL data? This action cannot be undone.\n\nMake sure you have exported a backup first!'
+      "Are you sure you want to delete ALL data? This action cannot be undone.\n\nMake sure you have exported a backup first!"
     );
 
     if (!confirmed) return;
 
-    const doubleConfirm = confirm(
-      'This is your last chance. Really delete EVERYTHING?'
-    );
+    const doubleConfirm = confirm("This is your last chance. Really delete EVERYTHING?");
 
     if (!doubleConfirm) return;
 
@@ -340,122 +364,129 @@ export default function ExportPage() {
         db.importMappings.clear(),
         db.receipts.clear(),
       ]);
-      alert('All data has been deleted. The page will now refresh.');
+      alert("All data has been deleted. The page will now refresh.");
       window.location.reload();
     } catch (error) {
-      console.error('Error clearing data:', error);
-      alert('Failed to clear data');
+      console.error("Error clearing data:", error);
+      alert("Failed to clear data");
     }
   }
 
   const selectedSheetCount = Object.values(sheetOptions).filter(Boolean).length;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="mx-auto max-w-4xl space-y-6">
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold text-white">Export & Backup</h1>
-        <p className="text-slate-400 mt-2">
-          Backup your data or export to different formats
-        </p>
+        <p className="mt-2 text-slate-400">Backup your data or export to different formats</p>
       </div>
 
       {/* Status Messages */}
-      {exportStatus !== 'idle' && (
+      {exportStatus !== "idle" && (
         <div
-          className={`p-4 rounded-lg flex items-center gap-4 ${
-            exportStatus === 'success'
-              ? 'bg-green-50 text-green-800'
-              : 'bg-red-50 text-red-800'
+          className={`flex items-center gap-4 rounded-lg p-4 ${
+            exportStatus === "success" ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"
           }`}
         >
-          {exportStatus === 'success' ? (
-            <CheckCircle className="w-5 h-5" />
+          {exportStatus === "success" ? (
+            <CheckCircle className="h-5 w-5" />
           ) : (
-            <AlertCircle className="w-5 h-5" />
+            <AlertCircle className="h-5 w-5" />
           )}
           <p className="font-medium">{statusMessage}</p>
         </div>
       )}
 
-      {importStatus !== 'idle' && (
+      {importStatus !== "idle" && (
         <div
-          className={`p-4 rounded-lg flex items-center gap-4 ${
-            importStatus === 'success'
-              ? 'bg-green-50 text-green-800'
-              : 'bg-red-50 text-red-800'
+          className={`flex items-center gap-4 rounded-lg p-4 ${
+            importStatus === "success" ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"
           }`}
         >
-          {importStatus === 'success' ? (
-            <CheckCircle className="w-5 h-5" />
+          {importStatus === "success" ? (
+            <CheckCircle className="h-5 w-5" />
           ) : (
-            <AlertCircle className="w-5 h-5" />
+            <AlertCircle className="h-5 w-5" />
           )}
           <p className="font-medium">{statusMessage}</p>
         </div>
       )}
 
       {/* Export Options */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Export Data</h2>
+      <div className="rounded-lg bg-white p-6 shadow">
+        <h2 className="mb-4 text-xl font-semibold text-gray-900">Export Data</h2>
 
         <div className="space-y-4">
           {/* Excel Export - Featured */}
-          <div className="border-2 border-teal-500 rounded-lg overflow-hidden">
-            <div className="flex items-start gap-4 p-4 bg-gradient-to-r from-teal-50 to-emerald-50">
-              <div className="bg-teal-100 rounded-full p-4">
-                <FileSpreadsheet className="w-6 h-6 text-teal-600" />
+          <div className="overflow-hidden rounded-lg border-2 border-teal-500">
+            <div className="flex items-start gap-4 bg-gradient-to-r from-teal-50 to-emerald-50 p-4">
+              <div className="rounded-full bg-teal-100 p-4">
+                <FileSpreadsheet className="h-6 w-6 text-teal-600" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-semibold text-gray-900">Financial Summary Workbook (Excel)</h3>
-                  <span className="px-2 py-0.5 bg-teal-500 text-white text-xs rounded-full font-medium">Recommended</span>
+                  <h3 className="font-semibold text-gray-900">
+                    Financial Summary Workbook (Excel)
+                  </h3>
+                  <span className="rounded-full bg-teal-500 px-2 py-0.5 text-xs font-medium text-white">
+                    Recommended
+                  </span>
                 </div>
-                <p className="text-sm text-gray-600 mt-2">
-                  Comprehensive Excel workbook with 12 sheets: Dashboard, Transactions, Monthly Summary,
-                  Category Analysis, Accounts, Budgets, Subscriptions, Loans, Investments, Net Worth, Goals, and Data Dictionary.
-                  Includes professional formatting, formulas, and charts.
+                <p className="mt-2 text-sm text-gray-600">
+                  Comprehensive Excel workbook with 12 sheets: Dashboard, Transactions, Monthly
+                  Summary, Category Analysis, Accounts, Budgets, Subscriptions, Loans, Investments,
+                  Net Worth, Goals, and Data Dictionary. Includes professional formatting, formulas,
+                  and charts.
                 </p>
               </div>
               <div className="flex flex-col gap-2">
                 <button
                   onClick={exportToExcel}
                   disabled={isExporting || selectedSheetCount === 0}
-                  className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:bg-gray-400 transition-colors flex items-center gap-2 whitespace-nowrap"
+                  className="flex items-center gap-2 whitespace-nowrap rounded-lg bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-700 disabled:bg-gray-400"
                 >
                   {isExporting && exportProgress ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="h-4 w-4 animate-spin" />
                       {Math.round(exportProgress.percent)}%
                     </>
                   ) : (
                     <>
-                      <Download className="w-4 h-4" />
+                      <Download className="h-4 w-4" />
                       Export Excel
                     </>
                   )}
                 </button>
                 <button
                   onClick={() => setShowExcelOptions(!showExcelOptions)}
-                  className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800 flex items-center gap-1 justify-center"
+                  className="flex items-center justify-center gap-1 px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
                 >
-                  <Settings2 className="w-4 h-4" />
+                  <Settings2 className="h-4 w-4" />
                   Options
-                  {showExcelOptions ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  {showExcelOptions ? (
+                    <ChevronUp className="h-4 w-4" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4" />
+                  )}
                 </button>
               </div>
             </div>
 
             {/* Export Progress */}
             {exportProgress && (
-              <div className="px-4 py-3 bg-teal-50 border-t border-teal-200">
-                <div className="flex items-center justify-between text-sm mb-2">
-                  <span className="text-teal-700">{exportProgress.currentSheet || exportProgress.message}</span>
-                  <span className="text-teal-600">{exportProgress.sheetsCompleted} of {exportProgress.totalSheets}</span>
+              <div className="border-t border-teal-200 bg-teal-50 px-4 py-3">
+                <div className="mb-2 flex items-center justify-between text-sm">
+                  <span className="text-teal-700">
+                    {exportProgress.currentSheet || exportProgress.message}
+                  </span>
+                  <span className="text-teal-600">
+                    {exportProgress.sheetsCompleted} of {exportProgress.totalSheets}
+                  </span>
                 </div>
-                <div className="w-full bg-teal-200 rounded-full h-2">
+                <div className="h-2 w-full rounded-full bg-teal-200">
                   <div
-                    className="bg-teal-600 h-2 rounded-full transition-all duration-300"
+                    className="h-2 rounded-full bg-teal-600 transition-all duration-300"
                     style={{ width: `${exportProgress.percent}%` }}
                   />
                 </div>
@@ -464,22 +495,22 @@ export default function ExportPage() {
 
             {/* Excel Options Panel */}
             {showExcelOptions && (
-              <div className="p-4 bg-gray-50 border-t border-gray-200 space-y-4">
+              <div className="space-y-4 border-t border-gray-200 bg-gray-50 p-4">
                 {/* Date Range */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
+                  <label className="mb-2 block flex items-center gap-2 text-sm font-medium text-gray-700">
+                    <Calendar className="h-4 w-4" />
                     Date Range
                   </label>
                   <div className="flex flex-wrap gap-2">
-                    {DATE_RANGE_OPTIONS.map(option => (
+                    {DATE_RANGE_OPTIONS.map((option) => (
                       <button
                         key={option.value}
                         onClick={() => setDateRange(option.value)}
-                        className={`px-3 py-1.5 text-sm rounded-lg border transition-colors ${
+                        className={`rounded-lg border px-3 py-1.5 text-sm transition-colors ${
                           dateRange === option.value
-                            ? 'bg-teal-600 text-white border-teal-600'
-                            : 'bg-white text-gray-700 border-gray-300 hover:border-teal-500'
+                            ? "border-teal-600 bg-teal-600 text-white"
+                            : "border-gray-300 bg-white text-gray-700 hover:border-teal-500"
                         }`}
                       >
                         {option.label}
@@ -488,24 +519,24 @@ export default function ExportPage() {
                   </div>
 
                   {/* Custom Date Range Inputs */}
-                  {dateRange === 'custom' && (
+                  {dateRange === "custom" && (
                     <div className="mt-3 flex gap-4">
                       <div>
-                        <label className="block text-xs text-gray-500 mb-1">Start Date</label>
+                        <label className="mb-1 block text-xs text-gray-500">Start Date</label>
                         <input
                           type="date"
                           value={customStartDate}
-                          onChange={e => setCustomStartDate(e.target.value)}
-                          className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                          onChange={(e) => setCustomStartDate(e.target.value)}
+                          className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs text-gray-500 mb-1">End Date</label>
+                        <label className="mb-1 block text-xs text-gray-500">End Date</label>
                         <input
                           type="date"
                           value={customEndDate}
-                          onChange={e => setCustomEndDate(e.target.value)}
-                          className="px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                          onChange={(e) => setCustomEndDate(e.target.value)}
+                          className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
                         />
                       </div>
                     </div>
@@ -514,7 +545,7 @@ export default function ExportPage() {
 
                 {/* Sheet Selection */}
                 <div>
-                  <div className="flex items-center justify-between mb-2">
+                  <div className="mb-2 flex items-center justify-between">
                     <label className="block text-sm font-medium text-gray-700">
                       Sheets to Include ({selectedSheetCount} of {SHEET_OPTIONS.length})
                     </label>
@@ -534,14 +565,14 @@ export default function ExportPage() {
                       </button>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                    {SHEET_OPTIONS.map(option => (
+                  <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+                    {SHEET_OPTIONS.map((option) => (
                       <label
                         key={option.key}
-                        className={`flex items-start gap-2 p-2 rounded-lg border cursor-pointer transition-colors ${
+                        className={`flex cursor-pointer items-start gap-2 rounded-lg border p-2 transition-colors ${
                           sheetOptions[option.key]
-                            ? 'bg-teal-50 border-teal-300'
-                            : 'bg-white border-gray-200 hover:border-gray-300'
+                            ? "border-teal-300 bg-teal-50"
+                            : "border-gray-200 bg-white hover:border-gray-300"
                         }`}
                       >
                         <input
@@ -563,44 +594,44 @@ export default function ExportPage() {
           </div>
 
           {/* Full Backup */}
-          <div className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg hover:border-teal-500 transition-colors">
-            <div className="bg-teal-50 rounded-full p-4">
-              <Database className="w-6 h-6 text-teal-600" />
+          <div className="flex items-start gap-4 rounded-lg border border-gray-200 p-4 transition-colors hover:border-teal-500">
+            <div className="rounded-full bg-teal-50 p-4">
+              <Database className="h-6 w-6 text-teal-600" />
             </div>
             <div className="flex-1">
               <h3 className="font-semibold text-gray-900">Full Backup (JSON)</h3>
-              <p className="text-sm text-gray-600 mt-2">
-                Export all data including accounts, transactions, budgets, goals, and settings.
-                Use this for complete backups that can be restored later.
+              <p className="mt-2 text-sm text-gray-600">
+                Export all data including accounts, transactions, budgets, goals, and settings. Use
+                this for complete backups that can be restored later.
               </p>
             </div>
             <button
               onClick={exportToJSON}
               disabled={isExporting}
-              className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 disabled:bg-gray-400 transition-colors flex items-center gap-2"
+              className="flex items-center gap-2 rounded-lg bg-gray-700 px-4 py-2 text-white transition-colors hover:bg-gray-800 disabled:bg-gray-400"
             >
-              <Download className="w-4 h-4" />
+              <Download className="h-4 w-4" />
               Export JSON
             </button>
           </div>
 
           {/* Transactions CSV */}
-          <div className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg hover:border-green-500 transition-colors">
-            <div className="bg-green-50 rounded-full p-4">
-              <FileText className="w-6 h-6 text-green-600" />
+          <div className="flex items-start gap-4 rounded-lg border border-gray-200 p-4 transition-colors hover:border-green-500">
+            <div className="rounded-full bg-green-50 p-4">
+              <FileText className="h-6 w-6 text-green-600" />
             </div>
             <div className="flex-1">
               <h3 className="font-semibold text-gray-900">Transactions (CSV)</h3>
-              <p className="text-sm text-gray-600 mt-2">
+              <p className="mt-2 text-sm text-gray-600">
                 Export transactions to simple CSV format for use in other spreadsheet tools
               </p>
             </div>
             <button
               onClick={exportTransactionsToCSV}
               disabled={isExporting}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400 transition-colors flex items-center gap-2"
+              className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white transition-colors hover:bg-green-700 disabled:bg-gray-400"
             >
-              <Download className="w-4 h-4" />
+              <Download className="h-4 w-4" />
               Export CSV
             </button>
           </div>
@@ -608,19 +639,19 @@ export default function ExportPage() {
       </div>
 
       {/* Import Options */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Import Data</h2>
+      <div className="rounded-lg bg-white p-6 shadow">
+        <h2 className="mb-4 text-xl font-semibold text-gray-900">Import Data</h2>
 
-        <div className="flex items-start gap-4 p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">
-          <div className="bg-gray-100 rounded-full p-4">
-            <Upload className="w-6 h-6 text-gray-700" />
+        <div className="flex items-start gap-4 rounded-lg border border-gray-200 p-4 transition-colors hover:border-gray-300">
+          <div className="rounded-full bg-gray-100 p-4">
+            <Upload className="h-6 w-6 text-gray-700" />
           </div>
           <div className="flex-1">
             <h3 className="font-semibold text-gray-900">Restore from Backup</h3>
-            <p className="text-sm text-gray-600 mt-2 mb-4">
+            <p className="mb-4 mt-2 text-sm text-gray-600">
               Import a previously exported JSON backup file
             </p>
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-yellow-800">
+            <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 text-sm text-yellow-800">
               Warning: This will replace ALL existing data with the backup
             </div>
           </div>
@@ -635,31 +666,32 @@ export default function ExportPage() {
             />
             <label
               htmlFor="import-file"
-              className={`px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors flex items-center gap-2 cursor-pointer ${
-                isImporting ? 'opacity-50 cursor-not-allowed' : ''
+              className={`flex cursor-pointer items-center gap-2 rounded-lg bg-gray-700 px-4 py-2 text-white transition-colors hover:bg-gray-800 ${
+                isImporting ? "cursor-not-allowed opacity-50" : ""
               }`}
             >
-              <Upload className="w-4 h-4" />
-              {isImporting ? 'Importing...' : 'Import JSON'}
+              <Upload className="h-4 w-4" />
+              {isImporting ? "Importing..." : "Import JSON"}
             </label>
           </div>
         </div>
       </div>
 
       {/* Danger Zone */}
-      <div className="bg-white rounded-lg shadow p-6 border-2 border-red-200">
-        <h2 className="text-xl font-semibold text-red-900 mb-4">Danger Zone</h2>
+      <div className="rounded-lg border-2 border-red-200 bg-white p-6 shadow">
+        <h2 className="mb-4 text-xl font-semibold text-red-900">Danger Zone</h2>
 
-        <div className="flex items-start gap-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+        <div className="flex items-start gap-4 rounded-lg border border-red-200 bg-red-50 p-4">
           <div className="flex-1">
             <h3 className="font-semibold text-red-900">Delete All Data</h3>
-            <p className="text-sm text-red-700 mt-2">
-              Permanently delete all accounts, transactions, budgets, and settings. This action cannot be undone.
+            <p className="mt-2 text-sm text-red-700">
+              Permanently delete all accounts, transactions, budgets, and settings. This action
+              cannot be undone.
             </p>
           </div>
           <button
             onClick={clearAllData}
-            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors whitespace-nowrap"
+            className="whitespace-nowrap rounded-lg bg-red-600 px-4 py-2 text-white transition-colors hover:bg-red-700"
           >
             Delete Everything
           </button>
@@ -667,31 +699,37 @@ export default function ExportPage() {
       </div>
 
       {/* Tips */}
-      <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-        <h3 className="font-semibold text-gray-900 mb-4">Backup Tips</h3>
+      <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
+        <h3 className="mb-4 font-semibold text-gray-900">Backup Tips</h3>
         <ul className="space-y-2 text-sm text-gray-700">
           <li className="flex items-start gap-2">
-            <span className="text-teal-500 mt-0.5">•</span>
-            <span><strong>Excel export</strong> is best for analysis and sharing - it includes formatting, formulas, and multiple sheets</span>
+            <span className="mt-0.5 text-teal-500">•</span>
+            <span>
+              <strong>Excel export</strong> is best for analysis and sharing - it includes
+              formatting, formulas, and multiple sheets
+            </span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-teal-500 mt-0.5">•</span>
-            <span><strong>JSON backup</strong> is best for restoring data - keep regular backups in a safe location</span>
+            <span className="mt-0.5 text-teal-500">•</span>
+            <span>
+              <strong>JSON backup</strong> is best for restoring data - keep regular backups in a
+              safe location
+            </span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-teal-500 mt-0.5">•</span>
+            <span className="mt-0.5 text-teal-500">•</span>
             <span>Back up your data regularly (weekly recommended)</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-teal-500 mt-0.5">•</span>
+            <span className="mt-0.5 text-teal-500">•</span>
             <span>Store backups in a safe location (cloud storage, external drive)</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-teal-500 mt-0.5">•</span>
+            <span className="mt-0.5 text-teal-500">•</span>
             <span>Test your backups by importing them to ensure they work</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-teal-500 mt-0.5">•</span>
+            <span className="mt-0.5 text-teal-500">•</span>
             <span>All data is stored locally in your browser's IndexedDB</span>
           </li>
         </ul>

@@ -8,8 +8,8 @@
  *   Each <Ntry> contains: <BookgDt>, <Amt>, <CdtDbtInd>, <NtryDtls>
  */
 
-import type { ParsedTransaction } from '@/types/budget';
-import { XMLParser } from 'fast-xml-parser';
+import type { ParsedTransaction } from "@/types/budget";
+import { XMLParser } from "fast-xml-parser";
 
 export interface CAMT053ParseOptions {
   locale?: string;
@@ -31,14 +31,17 @@ export interface CAMT053Statement {
  * @param options - Parsing options
  * @returns Array of parsed transactions
  */
-export function parseCAMT053File(content: string, options: CAMT053ParseOptions = {}): ParsedTransaction[] {
+export function parseCAMT053File(
+  content: string,
+  options: CAMT053ParseOptions = {}
+): ParsedTransaction[] {
   const parser = new XMLParser({
     ignoreAttributes: false,
-    attributeNamePrefix: '@_',
-    textNodeName: '#text',
+    attributeNamePrefix: "@_",
+    textNodeName: "#text",
     isArray: (name) => {
       // These elements can appear multiple times
-      return ['Ntry', 'NtryDtls', 'TxDtls', 'Stmt', 'Bal'].includes(name);
+      return ["Ntry", "NtryDtls", "TxDtls", "Stmt", "Bal"].includes(name);
     },
   });
 
@@ -47,13 +50,13 @@ export function parseCAMT053File(content: string, options: CAMT053ParseOptions =
   // Navigate the XML structure
   const document = parsed.Document || parsed.document;
   if (!document) {
-    console.error('[CAMT.053] No Document root element found');
+    console.error("[CAMT.053] No Document root element found");
     return [];
   }
 
-  const stmtRoot = document.BkToCstmrStmt || document['BkToCstmrStmt'];
+  const stmtRoot = document.BkToCstmrStmt || document["BkToCstmrStmt"];
   if (!stmtRoot) {
-    console.error('[CAMT.053] No BkToCstmrStmt element found');
+    console.error("[CAMT.053] No BkToCstmrStmt element found");
     return [];
   }
 
@@ -64,7 +67,7 @@ export function parseCAMT053File(content: string, options: CAMT053ParseOptions =
     if (!stmt) continue;
 
     const statementCurrency = extractStatementCurrency(stmt);
-    const entries = Array.isArray(stmt.Ntry) ? stmt.Ntry : (stmt.Ntry ? [stmt.Ntry] : []);
+    const entries = Array.isArray(stmt.Ntry) ? stmt.Ntry : stmt.Ntry ? [stmt.Ntry] : [];
 
     for (const entry of entries) {
       if (!entry) continue;
@@ -86,9 +89,9 @@ function extractStatementCurrency(stmt: any): string | null {
   if (acct?.Ccy) return acct.Ccy;
 
   // Try from balance entries
-  const balances = Array.isArray(stmt.Bal) ? stmt.Bal : (stmt.Bal ? [stmt.Bal] : []);
+  const balances = Array.isArray(stmt.Bal) ? stmt.Bal : stmt.Bal ? [stmt.Bal] : [];
   for (const bal of balances) {
-    if (bal?.Amt?.['@_Ccy']) return bal.Amt['@_Ccy'];
+    if (bal?.Amt?.["@_Ccy"]) return bal.Amt["@_Ccy"];
   }
 
   return null;
@@ -103,10 +106,10 @@ function parseEntry(entry: any, statementCurrency: string | null): ParsedTransac
 
   // Basic entry fields
   const amount = parseEntryAmount(entry);
-  const isCredit = entry.CdtDbtInd === 'CRDT';
+  const isCredit = entry.CdtDbtInd === "CRDT";
   const date = parseEntryDate(entry);
-  const currency = entry.Amt?.['@_Ccy'] || statementCurrency || undefined;
-  const balance = parseFloat(entry.Bal?.Amt?.['#text'] || entry.Bal?.Amt || '0') || undefined;
+  const currency = entry.Amt?.["@_Ccy"] || statementCurrency || undefined;
+  const balance = parseFloat(entry.Bal?.Amt?.["#text"] || entry.Bal?.Amt || "0") || undefined;
 
   // Try to get transaction details from NtryDtls > TxDtls
   const entryDetails = getArray(entry.NtryDtls);
@@ -118,7 +121,7 @@ function parseEntry(entry: any, statementCurrency: string | null): ParsedTransac
     for (const txDetail of txDetails) {
       hasDetailTransactions = true;
       const detailAmount = parseTxDetailAmount(txDetail) || amount;
-      const detailIsCredit = txDetail.CdtDbtInd ? txDetail.CdtDbtInd === 'CRDT' : isCredit;
+      const detailIsCredit = txDetail.CdtDbtInd ? txDetail.CdtDbtInd === "CRDT" : isCredit;
       const description = buildEntryDescription(txDetail, entry);
 
       transactions.push({
@@ -128,8 +131,8 @@ function parseEntry(entry: any, statementCurrency: string | null): ParsedTransac
         isDuplicate: false,
         confidence: date && detailAmount !== null ? 0.95 : 0.6,
         currency,
-        transactionType: detailIsCredit ? 'CREDIT' : 'DEBIT',
-        sourceFormat: 'camt053',
+        transactionType: detailIsCredit ? "CREDIT" : "DEBIT",
+        sourceFormat: "camt053",
         balance,
         fitid: extractEndToEndId(txDetail),
         requiresReview: !date || detailAmount === null,
@@ -148,8 +151,8 @@ function parseEntry(entry: any, statementCurrency: string | null): ParsedTransac
       isDuplicate: false,
       confidence: date ? 0.9 : 0.5,
       currency,
-      transactionType: isCredit ? 'CREDIT' : 'DEBIT',
-      sourceFormat: 'camt053',
+      transactionType: isCredit ? "CREDIT" : "DEBIT",
+      sourceFormat: "camt053",
       balance,
       requiresReview: !date,
     });
@@ -166,8 +169,8 @@ function parseEntryAmount(entry: any): number | null {
   if (!amt) return null;
 
   // Amt can be { '#text': '1234.56', '@_Ccy': 'EUR' } or just a string/number
-  const value = typeof amt === 'object' ? amt['#text'] || amt : amt;
-  const num = parseFloat(String(value).replace(',', '.'));
+  const value = typeof amt === "object" ? amt["#text"] || amt : amt;
+  const num = parseFloat(String(value).replace(",", "."));
   return isNaN(num) ? null : num;
 }
 
@@ -178,8 +181,8 @@ function parseTxDetailAmount(txDetail: any): number | null {
   const amt = txDetail.Amt || txDetail.AmtDtls?.TxAmt?.Amt;
   if (!amt) return null;
 
-  const value = typeof amt === 'object' ? amt['#text'] || amt : amt;
-  const num = parseFloat(String(value).replace(',', '.'));
+  const value = typeof amt === "object" ? amt["#text"] || amt : amt;
+  const num = parseFloat(String(value).replace(",", "."));
   return isNaN(num) ? null : num;
 }
 
@@ -213,10 +216,10 @@ function buildEntryDescription(txDetail: any, entry: any): string {
   // Remittance information (payment reference)
   const rmtInf = txDetail.RmtInf;
   if (rmtInf) {
-    if (typeof rmtInf.Ustrd === 'string') {
+    if (typeof rmtInf.Ustrd === "string") {
       parts.push(rmtInf.Ustrd);
     } else if (Array.isArray(rmtInf.Ustrd)) {
-      parts.push(rmtInf.Ustrd.join(' '));
+      parts.push(rmtInf.Ustrd.join(" "));
     }
     if (rmtInf.Strd?.CdtrRefInf?.Ref) {
       parts.push(`Ref: ${rmtInf.Strd.CdtrRefInf.Ref}`);
@@ -233,8 +236,8 @@ function buildEntryDescription(txDetail: any, entry: any): string {
     parts.push(txDetail.AddtlTxInf);
   }
 
-  const description = parts.join(' - ').replace(/\s+/g, ' ').trim();
-  return description || 'Unknown Transaction';
+  const description = parts.join(" - ").replace(/\s+/g, " ").trim();
+  return description || "Unknown Transaction";
 }
 
 /**
@@ -257,6 +260,8 @@ function getArray(value: any): any[] {
  * Detect if content is a CAMT.053 file.
  */
 export function isCAMT053Content(content: string): boolean {
-  return content.includes('urn:iso:std:iso:20022:tech:xsd:camt.053') ||
-    (content.includes('<Document') && content.includes('<BkToCstmrStmt'));
+  return (
+    content.includes("urn:iso:std:iso:20022:tech:xsd:camt.053") ||
+    (content.includes("<Document") && content.includes("<BkToCstmrStmt"))
+  );
 }

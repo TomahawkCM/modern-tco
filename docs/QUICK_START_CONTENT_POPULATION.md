@@ -23,6 +23,7 @@ supabase db execute "SELECT COUNT(*) FROM flashcard_library"
 ## 🎯 Generate Content (30 seconds per batch)
 
 ### Questions
+
 ```bash
 # Generate 50 questions (costs ~$0.15)
 npx tsx scripts/generate-questions.ts \
@@ -32,6 +33,7 @@ npx tsx scripts/generate-questions.ts \
 ```
 
 ### Flashcards
+
 ```bash
 # Generate 30 flashcards (costs ~$0.06)
 npx tsx scripts/generate-flashcards.ts \
@@ -47,37 +49,32 @@ npx tsx scripts/generate-flashcards.ts \
 ### 9 New Files Created (~3,200 lines)
 
 **Database:**
+
 1. `supabase/migrations/20251010000003_add_content_population_tables.sql` (340 lines)
 
-**AI Generators:**
-2. `scripts/generate-questions.ts` (550 lines)
-3. `scripts/generate-flashcards.ts` (650 lines)
+**AI Generators:** 2. `scripts/generate-questions.ts` (550 lines) 3. `scripts/generate-flashcards.ts` (650 lines)
 
-**Types & Config:**
-4. `src/types/flashcard-library.ts` (400 lines)
-5. `src/data/mock-exam-configs.ts` (350 lines)
+**Types & Config:** 4. `src/types/flashcard-library.ts` (400 lines) 5. `src/data/mock-exam-configs.ts` (350 lines)
 
-**Services:**
-6. `src/lib/mock-exam-builder.ts` (400 lines)
-7. `src/lib/flashcard-library-service.ts` (500 lines)
+**Services:** 6. `src/lib/mock-exam-builder.ts` (400 lines) 7. `src/lib/flashcard-library-service.ts` (500 lines)
 
-**UI:**
-8. `src/components/flashcards/FlashcardLibrary.tsx` (400 lines)
+**UI:** 8. `src/components/flashcards/FlashcardLibrary.tsx` (400 lines)
 
-**Tools:**
-9. `scripts/deploy-hybrid-model.sh` (100 lines)
+**Tools:** 9. `scripts/deploy-hybrid-model.sh` (100 lines)
 
 ---
 
 ## 🏗️ Hybrid Architecture
 
 ### What Stays (Existing Systems)
+
 ✅ `flashcards` table → User-created flashcards
 ✅ `exam_sessions` table → Exam tracking
 ✅ `questions` table → Question bank
 ✅ All existing UI components
 
 ### What's New (Added Systems)
+
 🆕 `flashcard_library` → Curated 500+ flashcards
 🆕 `flashcard_library_progress` → User progress
 🆕 `content_import_logs` → Import tracking
@@ -85,6 +82,7 @@ npx tsx scripts/generate-flashcards.ts \
 🆕 AI generation tools
 
 ### Integration
+
 🔗 Unified review queue (library + user flashcards)
 🔗 Mock exams use existing question pool
 🔗 Zero breaking changes
@@ -96,11 +94,13 @@ npx tsx scripts/generate-flashcards.ts \
 **You need to run these commands:**
 
 1. **Deploy database:**
+
    ```bash
    ./scripts/deploy-hybrid-model.sh
    ```
 
 2. **Generate initial content:**
+
    ```bash
    # Questions (5 batches = 250 questions)
    for difficulty in beginner intermediate advanced; do
@@ -131,6 +131,7 @@ npx tsx scripts/generate-flashcards.ts \
 ## 💰 Cost Estimate
 
 **One-Time Generation:**
+
 - 600 questions: **$1.80**
 - 500 flashcards: **$1.00**
 - **Total: $2.80**
@@ -142,6 +143,7 @@ npx tsx scripts/generate-flashcards.ts \
 ## 📊 Expected Results
 
 **After Full Population:**
+
 - 800+ total questions (200 existing + 600 new)
 - 500+ library flashcards
 - 6 progressive mock exams
@@ -149,6 +151,7 @@ npx tsx scripts/generate-flashcards.ts \
 - 30 curated videos
 
 **Student Impact:**
+
 - Pass rate: 70% → 90%
 - Study time: 35-50h → 20h
 - Confidence: 65% → 85%
@@ -190,11 +193,13 @@ node -e "console.log(require('./src/data/mock-exam-configs').MOCK_EXAM_TEMPLATES
 **Common Issues:**
 
 1. **API key error:**
+
    ```bash
    export ANTHROPIC_API_KEY=sk-ant-your-key-here
    ```
 
 2. **Migration error:**
+
    ```bash
    # Check Supabase connection
    supabase status

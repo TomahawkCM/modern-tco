@@ -17,7 +17,7 @@ export enum Module3Section {
   SECURITY_CONSIDERATIONS = "security-considerations",
   BATCH_OPERATIONS = "batch-operations",
   SCHEDULING_AUTOMATION = "scheduling-automation",
-  DEPENDENCY_MANAGEMENT = "dependency-management"
+  DEPENDENCY_MANAGEMENT = "dependency-management",
 }
 
 /**
@@ -44,19 +44,25 @@ export const MODULE_3_SECTIONS: Record<Module3Section, SectionMetadata> = {
   [Module3Section.PACKAGE_VALIDATION]: {
     id: Module3Section.PACKAGE_VALIDATION,
     title: "Package Validation",
-    description: "Learn to validate package integrity, dependencies, and prerequisites before deployment",
+    description:
+      "Learn to validate package integrity, dependencies, and prerequisites before deployment",
     learningObjectives: [
       "PV1: Validate package integrity before deployment",
       "PV2: Verify package dependencies and prerequisites",
       "PV3: Handle validation failures effectively",
-      "PV4: Implement automated validation workflows"
+      "PV4: Implement automated validation workflows",
     ],
     estimatedTime: 20,
     difficulty: "Intermediate",
-    tags: ["package-integrity", "validation-procedures", "testing-protocols", "checksum-verification"],
+    tags: [
+      "package-integrity",
+      "validation-procedures",
+      "testing-protocols",
+      "checksum-verification",
+    ],
     questionTargetCount: 10,
     currentQuestionCount: 0,
-    primaryTag: "taking-action-package-validation"
+    primaryTag: "taking-action-package-validation",
   },
 
   [Module3Section.DEPLOYMENT_STRATEGIES]: {
@@ -67,14 +73,14 @@ export const MODULE_3_SECTIONS: Record<Module3Section, SectionMetadata> = {
       "ADS1: Design effective pilot group strategies",
       "ADS2: Implement geographic and time-zone aware deployments",
       "ADS3: Create precision targeting with layered filtering",
-      "ADS4: Manage multi-domain deployment scenarios"
+      "ADS4: Manage multi-domain deployment scenarios",
     ],
     estimatedTime: 30,
     difficulty: "Advanced",
     tags: ["pilot-groups", "time-zones", "layered-filtering", "multi-domain", "precise-targeting"],
     questionTargetCount: 15,
     currentQuestionCount: 8,
-    primaryTag: "taking-action-deployment-strategies"
+    primaryTag: "taking-action-deployment-strategies",
   },
 
   [Module3Section.ERROR_HANDLING]: {
@@ -85,14 +91,20 @@ export const MODULE_3_SECTIONS: Record<Module3Section, SectionMetadata> = {
       "EH1: Identify and classify deployment errors",
       "EH2: Apply systematic troubleshooting procedures",
       "EH3: Implement intelligent retry mechanisms",
-      "EH4: Protect critical infrastructure during failures"
+      "EH4: Protect critical infrastructure during failures",
     ],
     estimatedTime: 25,
     difficulty: "Intermediate",
-    tags: ["troubleshooting", "failure-handling", "retry-logic", "error-handling", "root-cause-analysis"],
+    tags: [
+      "troubleshooting",
+      "failure-handling",
+      "retry-logic",
+      "error-handling",
+      "root-cause-analysis",
+    ],
     questionTargetCount: 10,
     currentQuestionCount: 6,
-    primaryTag: "taking-action-error-handling"
+    primaryTag: "taking-action-error-handling",
   },
 
   [Module3Section.ROLLBACK_PROCEDURES]: {
@@ -103,7 +115,7 @@ export const MODULE_3_SECTIONS: Record<Module3Section, SectionMetadata> = {
       "RP1: Design comprehensive rollback strategies",
       "RP2: Implement state restoration procedures",
       "RP3: Execute emergency rollback procedures",
-      "RP4: Validate rollback completion and success"
+      "RP4: Validate rollback completion and success",
     ],
     estimatedTime: 20,
     difficulty: "Advanced",
@@ -111,7 +123,7 @@ export const MODULE_3_SECTIONS: Record<Module3Section, SectionMetadata> = {
     tags: ["rollback-strategies", "state-restoration", "recovery-procedures", "emergency-rollback"],
     questionTargetCount: 8,
     currentQuestionCount: 0,
-    primaryTag: "taking-action-rollback-procedures"
+    primaryTag: "taking-action-rollback-procedures",
   },
 
   [Module3Section.PERFORMANCE_MONITORING]: {
@@ -122,14 +134,14 @@ export const MODULE_3_SECTIONS: Record<Module3Section, SectionMetadata> = {
       "PM1: Monitor system health and performance metrics",
       "PM2: Optimize resource usage for large-scale deployments",
       "PM3: Analyze scalability limits and bottlenecks",
-      "PM4: Implement performance trend analysis"
+      "PM4: Implement performance trend analysis",
     ],
     estimatedTime: 25,
     difficulty: "Intermediate",
     tags: ["monitoring", "performance", "scalability", "resource-usage", "system-health"],
     questionTargetCount: 10,
     currentQuestionCount: 6,
-    primaryTag: "taking-action-performance-monitoring"
+    primaryTag: "taking-action-performance-monitoring",
   },
 
   [Module3Section.SECURITY_CONSIDERATIONS]: {
@@ -140,14 +152,14 @@ export const MODULE_3_SECTIONS: Record<Module3Section, SectionMetadata> = {
       "SC1: Manage security boundaries and access controls",
       "SC2: Ensure compliance with data sovereignty requirements",
       "SC3: Implement proper authorization procedures",
-      "SC4: Validate security policies during deployments"
+      "SC4: Validate security policies during deployments",
     ],
     estimatedTime: 20,
     difficulty: "Advanced",
     tags: ["security-boundaries", "data-sovereignty", "access-control", "compliance", "gdpr"],
     questionTargetCount: 10,
     currentQuestionCount: 2,
-    primaryTag: "taking-action-security-considerations"
+    primaryTag: "taking-action-security-considerations",
   },
 
   [Module3Section.BATCH_OPERATIONS]: {
@@ -158,14 +170,14 @@ export const MODULE_3_SECTIONS: Record<Module3Section, SectionMetadata> = {
       "BO1: Design efficient bulk operation strategies",
       "BO2: Monitor and control batch operations",
       "BO3: Manage concurrent execution limits",
-      "BO4: Optimize batch operations for enterprise scale"
+      "BO4: Optimize batch operations for enterprise scale",
     ],
     estimatedTime: 20,
     difficulty: "Intermediate",
     tags: ["bulk-operations", "mass-deployment", "batch-processing", "parallel-execution"],
     questionTargetCount: 10,
     currentQuestionCount: 0,
-    primaryTag: "taking-action-batch-operations"
+    primaryTag: "taking-action-batch-operations",
   },
 
   [Module3Section.SCHEDULING_AUTOMATION]: {
@@ -176,14 +188,14 @@ export const MODULE_3_SECTIONS: Record<Module3Section, SectionMetadata> = {
       "SA1: Design automated deployment workflows",
       "SA2: Implement time-based scheduling strategies",
       "SA3: Manage dynamic group automation",
-      "SA4: Integrate with enterprise management tools"
+      "SA4: Integrate with enterprise management tools",
     ],
     estimatedTime: 25,
     difficulty: "Advanced",
     tags: ["automation", "scheduling", "workflow-orchestration", "dynamic-groups", "integration"],
     questionTargetCount: 10,
     currentQuestionCount: 1,
-    primaryTag: "taking-action-scheduling-automation"
+    primaryTag: "taking-action-scheduling-automation",
   },
 
   [Module3Section.DEPENDENCY_MANAGEMENT]: {
@@ -194,23 +206,30 @@ export const MODULE_3_SECTIONS: Record<Module3Section, SectionMetadata> = {
       "DM1: Identify and map operational dependencies",
       "DM2: Implement automated prerequisite checking",
       "DM3: Optimize execution order and dependency resolution",
-      "DM4: Handle dependency failures gracefully"
+      "DM4: Handle dependency failures gracefully",
     ],
     estimatedTime: 20,
     difficulty: "Intermediate",
     prerequisites: [Module3Section.PACKAGE_VALIDATION],
-    tags: ["dependency-tracking", "prerequisite-validation", "execution-order", "dependency-resolution"],
+    tags: [
+      "dependency-tracking",
+      "prerequisite-validation",
+      "execution-order",
+      "dependency-resolution",
+    ],
     questionTargetCount: 8,
     currentQuestionCount: 0,
-    primaryTag: "taking-action-dependency-management"
-  }
+    primaryTag: "taking-action-dependency-management",
+  },
 };
 
 /**
  * Get sections by difficulty level
  */
-export function getSectionsByDifficulty(difficulty: "Beginner" | "Intermediate" | "Advanced"): SectionMetadata[] {
-  return Object.values(MODULE_3_SECTIONS).filter(section => section.difficulty === difficulty);
+export function getSectionsByDifficulty(
+  difficulty: "Beginner" | "Intermediate" | "Advanced"
+): SectionMetadata[] {
+  return Object.values(MODULE_3_SECTIONS).filter((section) => section.difficulty === difficulty);
 }
 
 /**
@@ -218,7 +237,7 @@ export function getSectionsByDifficulty(difficulty: "Beginner" | "Intermediate" 
  */
 export function getSectionsWithGaps(): SectionMetadata[] {
   return Object.values(MODULE_3_SECTIONS).filter(
-    section => section.currentQuestionCount < section.questionTargetCount
+    (section) => section.currentQuestionCount < section.questionTargetCount
   );
 }
 
@@ -242,9 +261,13 @@ export function getOverallModule3Coverage(): {
   overallCoverage: number;
 } {
   const sections = Object.values(MODULE_3_SECTIONS);
-  const completeSections = sections.filter(s => s.currentQuestionCount >= s.questionTargetCount).length;
-  const partialSections = sections.filter(s => s.currentQuestionCount > 0 && s.currentQuestionCount < s.questionTargetCount).length;
-  const emptySections = sections.filter(s => s.currentQuestionCount === 0).length;
+  const completeSections = sections.filter(
+    (s) => s.currentQuestionCount >= s.questionTargetCount
+  ).length;
+  const partialSections = sections.filter(
+    (s) => s.currentQuestionCount > 0 && s.currentQuestionCount < s.questionTargetCount
+  ).length;
+  const emptySections = sections.filter((s) => s.currentQuestionCount === 0).length;
 
   const totalTarget = sections.reduce((sum, s) => sum + s.questionTargetCount, 0);
   const totalCurrent = sections.reduce((sum, s) => sum + s.currentQuestionCount, 0);
@@ -255,7 +278,7 @@ export function getOverallModule3Coverage(): {
     completeSections,
     partialSections,
     emptySections,
-    overallCoverage
+    overallCoverage,
   };
 }
 
@@ -268,12 +291,12 @@ export function createSectionPracticeTargeting(sectionId: Module3Section) {
   return {
     moduleId: "module-taking-action",
     primaryDomain: TCODomain.TAKING_ACTION,
-    targetObjectives: section.learningObjectives.map(obj => obj.split(":")[0]), // Extract objective IDs
+    targetObjectives: section.learningObjectives.map((obj) => obj.split(":")[0]), // Extract objective IDs
     requiredTags: [section.primaryTag],
     optionalTags: section.tags,
     minQuestions: 5,
     idealQuestions: 15,
-    fallbackStrategy: "expand-domain" as const
+    fallbackStrategy: "expand-domain" as const,
   };
 }
 
@@ -290,14 +313,14 @@ export function getModule3LearningPath(): Module3Section[] {
 
     const section = MODULE_3_SECTIONS[sectionId];
     if (section.prerequisites) {
-      section.prerequisites.forEach(prereq => visit(prereq));
+      section.prerequisites.forEach((prereq) => visit(prereq));
     }
 
     visited.add(sectionId);
     path.push(sectionId);
   }
 
-  Object.keys(MODULE_3_SECTIONS).forEach(sectionId => {
+  Object.keys(MODULE_3_SECTIONS).forEach((sectionId) => {
     visit(sectionId as Module3Section);
   });
 

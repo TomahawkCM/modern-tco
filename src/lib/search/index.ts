@@ -19,7 +19,7 @@ export {
   clearSearchIndex,
   type SearchResult,
   type SearchableTransaction,
-} from './transaction-search';
+} from "./transaction-search";
 
 // Query parser for structured search
 export {
@@ -28,7 +28,7 @@ export {
   getFilterSuggestions,
   type ParsedQuery,
   type ParsedFilters,
-} from './query-parser';
+} from "./query-parser";
 
 // Autocomplete engine
 export {
@@ -47,14 +47,14 @@ export {
   clearAutocompleteCache,
   type AutocompleteSuggestion,
   type SavedFilter,
-} from './autocomplete';
+} from "./autocomplete";
 
 // Natural language parser
 export {
   parseNaturalLanguage,
   getSearchExamples,
   type NaturalLanguageResult,
-} from './natural-language-parser';
+} from "./natural-language-parser";
 
 // Offline search index (IndexedDB)
 export {
@@ -67,4 +67,4 @@ export {
   getIndexStats,
   clearSearchIndex as clearOfflineIndex,
   initializeSearchIndex as initializeOfflineIndex,
-} from './offline-search-index';
+} from "./offline-search-index";

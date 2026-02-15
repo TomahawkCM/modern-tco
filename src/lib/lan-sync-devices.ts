@@ -5,19 +5,9 @@
  * Handles device trust, pairing history, and sync metadata.
  */
 
-import Dexie, { type Table } from 'dexie';
-import type {
-  PairedDevice,
-  TrustLevel,
-  VectorClock,
-  Tombstone,
-  EntityType,
-} from './lan-sync';
-import {
-  generateDeviceId,
-  TOMBSTONE_RETENTION_MS,
-  shouldPurgeTombstone,
-} from './lan-sync';
+import Dexie, { type Table } from "dexie";
+import type { PairedDevice, TrustLevel, VectorClock, Tombstone, EntityType } from "./lan-sync";
+import { generateDeviceId, TOMBSTONE_RETENTION_MS, shouldPurgeTombstone } from "./lan-sync";
 
 // ============================================================================
 // Database Schema
@@ -53,7 +43,7 @@ export interface ChangeLogEntry {
   id: string;
   entityType: EntityType;
   entityId: string;
-  operation: 'create' | 'update' | 'delete';
+  operation: "create" | "update" | "delete";
   timestamp: number;
   deviceId: string;
   version: number;
@@ -76,7 +66,7 @@ export interface ConflictRecord {
   remoteDeviceId: string;
   createdAt: Date;
   resolvedAt?: Date;
-  resolution?: 'keep_local' | 'keep_remote' | 'merge';
+  resolution?: "keep_local" | "keep_remote" | "merge";
   mergedData?: Record<string, unknown>;
 }
 
@@ -96,15 +86,15 @@ export class SyncDatabase extends Dexie {
   conflicts!: Table<ConflictRecord>;
 
   constructor() {
-    super('BudgetAppSync');
+    super("BudgetAppSync");
 
     this.version(1).stores({
-      localDevice: 'id',
-      pairedDevices: 'id, trustLevel, pairedAt',
-      syncMetadata: 'id, deviceId, lastSyncAt',
-      changeLog: 'id, entityType, entityId, timestamp, synced, [entityType+entityId]',
-      tombstones: 'id, entity, deletedAt',
-      conflicts: 'id, entityType, entityId, createdAt, resolvedAt',
+      localDevice: "id",
+      pairedDevices: "id, trustLevel, pairedAt",
+      syncMetadata: "id, deviceId, lastSyncAt",
+      changeLog: "id, entityType, entityId, timestamp, synced, [entityType+entityId]",
+      tombstones: "id, entity, deletedAt",
+      conflicts: "id, entityType, entityId, createdAt, resolvedAt",
     });
   }
 }
@@ -150,7 +140,7 @@ export class DeviceManager {
     }
 
     // Try to load from DB
-    const existing = await this.db.localDevice.get('local');
+    const existing = await this.db.localDevice.get("local");
     if (existing) {
       this.localDevice = existing;
       return existing;
@@ -158,7 +148,7 @@ export class DeviceManager {
 
     // Create new device
     const newDevice: LocalDeviceInfo = {
-      id: 'local',
+      id: "local",
       deviceId: generateDeviceId(),
       deviceName: defaultName || this.generateDefaultDeviceName(),
       createdAt: new Date(),
@@ -204,18 +194,18 @@ export class DeviceManager {
    * Detect platform for device naming
    */
   private detectPlatform(): string {
-    if (typeof navigator === 'undefined') return 'Device';
+    if (typeof navigator === "undefined") return "Device";
 
     const ua = navigator.userAgent.toLowerCase();
 
-    if (ua.includes('iphone')) return 'iPhone';
-    if (ua.includes('ipad')) return 'iPad';
-    if (ua.includes('android')) return 'Android';
-    if (ua.includes('mac')) return 'Mac';
-    if (ua.includes('windows')) return 'Windows';
-    if (ua.includes('linux')) return 'Linux';
+    if (ua.includes("iphone")) return "iPhone";
+    if (ua.includes("ipad")) return "iPad";
+    if (ua.includes("android")) return "Android";
+    if (ua.includes("mac")) return "Mac";
+    if (ua.includes("windows")) return "Windows";
+    if (ua.includes("linux")) return "Linux";
 
-    return 'Device';
+    return "Device";
   }
 
   // ==========================================================================
@@ -240,17 +230,14 @@ export class DeviceManager {
    * Get devices by trust level
    */
   async getDevicesByTrust(trustLevel: TrustLevel): Promise<PairedDevice[]> {
-    return this.db.pairedDevices.where('trustLevel').equals(trustLevel).toArray();
+    return this.db.pairedDevices.where("trustLevel").equals(trustLevel).toArray();
   }
 
   /**
    * Get trusted devices (not blocked)
    */
   async getTrustedDevices(): Promise<PairedDevice[]> {
-    return this.db.pairedDevices
-      .where('trustLevel')
-      .anyOf(['paired', 'trusted'])
-      .toArray();
+    return this.db.pairedDevices.where("trustLevel").anyOf(["paired", "trusted"]).toArray();
   }
 
   /**
@@ -263,17 +250,13 @@ export class DeviceManager {
   /**
    * Add new paired device
    */
-  async addPairedDevice(
-    deviceId: string,
-    name: string,
-    publicKey: string
-  ): Promise<PairedDevice> {
+  async addPairedDevice(deviceId: string, name: string, publicKey: string): Promise<PairedDevice> {
     const device: PairedDevice = {
       id: deviceId,
       name,
       publicKey,
       pairedAt: new Date(),
-      trustLevel: 'paired',
+      trustLevel: "paired",
     };
 
     await this.db.pairedDevices.put(device);
@@ -283,10 +266,7 @@ export class DeviceManager {
   /**
    * Update device trust level
    */
-  async updateTrustLevel(
-    deviceId: string,
-    trustLevel: TrustLevel
-  ): Promise<void> {
+  async updateTrustLevel(deviceId: string, trustLevel: TrustLevel): Promise<void> {
     await this.db.pairedDevices.update(deviceId, { trustLevel });
   }
 
@@ -302,11 +282,7 @@ export class DeviceManager {
   /**
    * Update device connection info
    */
-  async updateConnectionInfo(
-    deviceId: string,
-    ip: string,
-    port: number
-  ): Promise<void> {
+  async updateConnectionInfo(deviceId: string, ip: string, port: number): Promise<void> {
     await this.db.pairedDevices.update(deviceId, {
       lastKnownIp: ip,
       lastKnownPort: port,
@@ -317,14 +293,14 @@ export class DeviceManager {
    * Block a device
    */
   async blockDevice(deviceId: string): Promise<void> {
-    await this.updateTrustLevel(deviceId, 'blocked');
+    await this.updateTrustLevel(deviceId, "blocked");
   }
 
   /**
    * Unblock a device
    */
   async unblockDevice(deviceId: string): Promise<void> {
-    await this.updateTrustLevel(deviceId, 'paired');
+    await this.updateTrustLevel(deviceId, "paired");
   }
 
   /**
@@ -333,7 +309,7 @@ export class DeviceManager {
   async removePairedDevice(deviceId: string): Promise<void> {
     await this.db.pairedDevices.delete(deviceId);
     // Also clean up related sync metadata
-    await this.db.syncMetadata.where('deviceId').equals(deviceId).delete();
+    await this.db.syncMetadata.where("deviceId").equals(deviceId).delete();
   }
 
   /**
@@ -341,7 +317,7 @@ export class DeviceManager {
    */
   async isDeviceTrusted(deviceId: string): Promise<boolean> {
     const device = await this.getPairedDevice(deviceId);
-    return device !== undefined && device.trustLevel !== 'blocked';
+    return device !== undefined && device.trustLevel !== "blocked";
   }
 
   // ==========================================================================
@@ -425,7 +401,7 @@ export class ChangeLogManager {
   async logChange(
     entityType: EntityType,
     entityId: string,
-    operation: 'create' | 'update' | 'delete',
+    operation: "create" | "update" | "delete",
     deviceId: string,
     version: number,
     data?: Record<string, unknown>
@@ -449,40 +425,31 @@ export class ChangeLogManager {
    * Get unsynced changes
    */
   async getUnsyncedChanges(): Promise<ChangeLogEntry[]> {
-    return this.db.changeLog.where('synced').equals(0).toArray();
+    return this.db.changeLog.where("synced").equals(0).toArray();
   }
 
   /**
    * Get changes since timestamp
    */
   async getChangesSince(timestamp: number): Promise<ChangeLogEntry[]> {
-    return this.db.changeLog
-      .where('timestamp')
-      .above(timestamp)
-      .sortBy('timestamp');
+    return this.db.changeLog.where("timestamp").above(timestamp).sortBy("timestamp");
   }
 
   /**
    * Get changes for entity
    */
-  async getChangesForEntity(
-    entityType: EntityType,
-    entityId: string
-  ): Promise<ChangeLogEntry[]> {
+  async getChangesForEntity(entityType: EntityType, entityId: string): Promise<ChangeLogEntry[]> {
     return this.db.changeLog
-      .where('[entityType+entityId]')
+      .where("[entityType+entityId]")
       .equals([entityType, entityId])
-      .sortBy('timestamp');
+      .sortBy("timestamp");
   }
 
   /**
    * Mark changes as synced
    */
   async markAsSynced(changeIds: string[]): Promise<void> {
-    await this.db.changeLog
-      .where('id')
-      .anyOf(changeIds)
-      .modify({ synced: true });
+    await this.db.changeLog.where("id").anyOf(changeIds).modify({ synced: true });
   }
 
   /**
@@ -491,7 +458,7 @@ export class ChangeLogManager {
   async cleanupOldChanges(): Promise<number> {
     const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
     return this.db.changeLog
-      .where('synced')
+      .where("synced")
       .equals(1)
       .and((entry) => entry.timestamp < cutoff)
       .delete();
@@ -501,7 +468,7 @@ export class ChangeLogManager {
    * Get pending changes count
    */
   async getPendingCount(): Promise<number> {
-    return this.db.changeLog.where('synced').equals(0).count();
+    return this.db.changeLog.where("synced").equals(0).count();
   }
 }
 
@@ -556,7 +523,7 @@ export class TombstoneManager {
    * Get tombstones for entity type
    */
   async getTombstonesForType(entityType: EntityType): Promise<Tombstone[]> {
-    return this.db.tombstones.where('entity').equals(entityType).toArray();
+    return this.db.tombstones.where("entity").equals(entityType).toArray();
   }
 
   /**
@@ -572,10 +539,7 @@ export class TombstoneManager {
    */
   async purgeExpiredTombstones(): Promise<number> {
     const cutoff = Date.now() - TOMBSTONE_RETENTION_MS;
-    return this.db.tombstones
-      .where('deletedAt')
-      .below(cutoff)
-      .delete();
+    return this.db.tombstones.where("deletedAt").below(cutoff).delete();
   }
 
   /**
@@ -634,20 +598,15 @@ export class ConflictManager {
    * Get unresolved conflicts
    */
   async getUnresolvedConflicts(): Promise<ConflictRecord[]> {
-    return this.db.conflicts
-      .filter((c) => !c.resolvedAt)
-      .sortBy('createdAt');
+    return this.db.conflicts.filter((c) => !c.resolvedAt).sortBy("createdAt");
   }
 
   /**
    * Get conflicts for entity
    */
-  async getConflictsForEntity(
-    entityType: EntityType,
-    entityId: string
-  ): Promise<ConflictRecord[]> {
+  async getConflictsForEntity(entityType: EntityType, entityId: string): Promise<ConflictRecord[]> {
     return this.db.conflicts
-      .where('[entityType+entityId]')
+      .where("[entityType+entityId]")
       .equals([entityType, entityId])
       .toArray();
   }
@@ -657,7 +616,7 @@ export class ConflictManager {
    */
   async resolveConflict(
     conflictId: string,
-    resolution: 'keep_local' | 'keep_remote' | 'merge',
+    resolution: "keep_local" | "keep_remote" | "merge",
     mergedData?: Record<string, unknown>
   ): Promise<void> {
     await this.db.conflicts.update(conflictId, {
@@ -679,10 +638,7 @@ export class ConflictManager {
    */
   async cleanupOldConflicts(): Promise<number> {
     const cutoff = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-    return this.db.conflicts
-      .where('resolvedAt')
-      .below(cutoff)
-      .delete();
+    return this.db.conflicts.where("resolvedAt").below(cutoff).delete();
   }
 }
 

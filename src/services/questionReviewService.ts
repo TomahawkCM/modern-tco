@@ -58,11 +58,14 @@ export interface QuestionReviewStats {
   learningQuestions: number; // srs_reps < 2
   masteredQuestions: number; // srs_reps >= 2 && mastery >= 0.8
   avgMasteryLevel: number; // 0-100
-  questionsByDomain: Record<string, {
-    total: number;
-    due: number;
-    avgMastery: number;
-  }>;
+  questionsByDomain: Record<
+    string,
+    {
+      total: number;
+      due: number;
+      avgMastery: number;
+    }
+  >;
 }
 
 // Convert between database and SM-2 algorithm
@@ -248,30 +251,26 @@ class QuestionReviewService {
   /**
    * Calculate SM-2 rating based on correctness and mastery
    */
-  private calculateRating(
-    isCorrect: boolean,
-    masteryLevel: number,
-    currentReps: number
-  ): SRRating {
+  private calculateRating(isCorrect: boolean, masteryLevel: number, currentReps: number): SRRating {
     if (!isCorrect) {
-      return 'again'; // Wrong answer = reset interval
+      return "again"; // Wrong answer = reset interval
     }
 
     // Correct answer - determine difficulty
     if (currentReps === 0) {
       // First time correct = 'good'
-      return 'good';
+      return "good";
     }
 
     if (masteryLevel >= 0.9) {
       // High mastery + correct = 'easy'
-      return 'easy';
+      return "easy";
     } else if (masteryLevel >= 0.7) {
       // Good mastery + correct = 'good'
-      return 'good';
+      return "good";
     } else {
       // Struggling but correct = 'hard'
-      return 'hard';
+      return "hard";
     }
   }
 
@@ -347,10 +346,12 @@ class QuestionReviewService {
     const now = new Date().toISOString();
 
     const totalQuestions = reviews.length;
-    const dueToday = reviews.filter(r => r.srs_due <= now).length;
-    const newQuestions = reviews.filter(r => r.srs_reps === 0).length;
-    const learningQuestions = reviews.filter(r => r.srs_reps > 0 && r.srs_reps < 2).length;
-    const masteredQuestions = reviews.filter(r => r.srs_reps >= 2 && r.mastery_level >= 0.8).length;
+    const dueToday = reviews.filter((r) => r.srs_due <= now).length;
+    const newQuestions = reviews.filter((r) => r.srs_reps === 0).length;
+    const learningQuestions = reviews.filter((r) => r.srs_reps > 0 && r.srs_reps < 2).length;
+    const masteredQuestions = reviews.filter(
+      (r) => r.srs_reps >= 2 && r.mastery_level >= 0.8
+    ).length;
 
     const totalMastery = reviews.reduce((sum, r) => sum + r.mastery_level, 0);
     const avgMasteryLevel = (totalMastery / totalQuestions) * 100;
@@ -359,20 +360,24 @@ class QuestionReviewService {
     const { data: questions } = await supabase
       .from("questions")
       .select("id, domain")
-      .in("id", reviews.map(r => r.question_id));
+      .in(
+        "id",
+        reviews.map((r) => r.question_id)
+      );
 
-    const questionDomainMap = new Map(
-      (questions || []).map((q: any) => [q.id, q.domain])
-    );
+    const questionDomainMap = new Map((questions || []).map((q: any) => [q.id, q.domain]));
 
-    const questionsByDomain: Record<string, {
-      total: number;
-      due: number;
-      avgMastery: number;
-    }> = {};
+    const questionsByDomain: Record<
+      string,
+      {
+        total: number;
+        due: number;
+        avgMastery: number;
+      }
+    > = {};
 
     for (const review of reviews) {
-      const domain = questionDomainMap.get(review.question_id) || 'Unknown';
+      const domain = questionDomainMap.get(review.question_id) || "Unknown";
       if (!questionsByDomain[domain]) {
         questionsByDomain[domain] = { total: 0, due: 0, avgMastery: 0 };
       }

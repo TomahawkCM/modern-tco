@@ -4,7 +4,7 @@
  * See docs/BUDGET_FILE_FORMAT.md for specification.
  */
 
-import { db } from '@/lib/budget-db';
+import { db } from "@/lib/budget-db";
 import {
   type BudgetFile,
   type BudgetFileMetadata,
@@ -16,7 +16,7 @@ import {
   type ValidationResult,
   isEncryptedData,
   BUDGET_FILE_VERSION,
-} from './types';
+} from "./types";
 
 // PBKDF2 configuration
 const PBKDF2_ITERATIONS = 100000;
@@ -32,9 +32,9 @@ async function calculateChecksum(data: object): Promise<string> {
   const encoder = new TextEncoder();
   const dataBuffer = encoder.encode(dataString);
 
-  const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", dataBuffer);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
 
   return `sha256:${hashHex}`;
 }
@@ -47,26 +47,23 @@ async function deriveKey(password: string, salt: Uint8Array): Promise<CryptoKey>
   const passwordBuffer = encoder.encode(password);
 
   // Import password as key material
-  const keyMaterial = await crypto.subtle.importKey(
-    'raw',
-    passwordBuffer,
-    'PBKDF2',
-    false,
-    ['deriveBits', 'deriveKey']
-  );
+  const keyMaterial = await crypto.subtle.importKey("raw", passwordBuffer, "PBKDF2", false, [
+    "deriveBits",
+    "deriveKey",
+  ]);
 
   // Derive AES-GCM key - cast salt to BufferSource for TypeScript compatibility
   return crypto.subtle.deriveKey(
     {
-      name: 'PBKDF2',
+      name: "PBKDF2",
       salt: salt.buffer as ArrayBuffer,
       iterations: PBKDF2_ITERATIONS,
-      hash: 'SHA-256',
+      hash: "SHA-256",
     },
     keyMaterial,
-    { name: 'AES-GCM', length: KEY_LENGTH },
+    { name: "AES-GCM", length: KEY_LENGTH },
     false,
-    ['encrypt', 'decrypt']
+    ["encrypt", "decrypt"]
   );
 }
 
@@ -89,11 +86,7 @@ export async function encryptData(
   const dataBuffer = encoder.encode(JSON.stringify(data));
 
   // Encrypt with AES-GCM
-  const encryptedBuffer = await crypto.subtle.encrypt(
-    { name: 'AES-GCM', iv },
-    key,
-    dataBuffer
-  );
+  const encryptedBuffer = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, dataBuffer);
 
   // Extract ciphertext and auth tag (GCM appends 16-byte tag)
   const encryptedArray = new Uint8Array(encryptedBuffer);
@@ -102,7 +95,7 @@ export async function encryptData(
 
   return {
     encrypted: true,
-    algorithm: 'AES-256-GCM',
+    algorithm: "AES-256-GCM",
     iv: btoa(String.fromCharCode(...iv)),
     salt: btoa(String.fromCharCode(...salt)),
     ciphertext: btoa(String.fromCharCode(...ciphertext)),
@@ -118,10 +111,10 @@ export async function decryptData(
   password: string
 ): Promise<BudgetExportData> {
   // Decode base64 values
-  const iv = Uint8Array.from(atob(encryptedPayload.iv), c => c.charCodeAt(0));
-  const salt = Uint8Array.from(atob(encryptedPayload.salt), c => c.charCodeAt(0));
-  const ciphertext = Uint8Array.from(atob(encryptedPayload.ciphertext), c => c.charCodeAt(0));
-  const authTag = Uint8Array.from(atob(encryptedPayload.authTag), c => c.charCodeAt(0));
+  const iv = Uint8Array.from(atob(encryptedPayload.iv), (c) => c.charCodeAt(0));
+  const salt = Uint8Array.from(atob(encryptedPayload.salt), (c) => c.charCodeAt(0));
+  const ciphertext = Uint8Array.from(atob(encryptedPayload.ciphertext), (c) => c.charCodeAt(0));
+  const authTag = Uint8Array.from(atob(encryptedPayload.authTag), (c) => c.charCodeAt(0));
 
   // Derive key from password
   const key = await deriveKey(password, salt);
@@ -134,7 +127,7 @@ export async function decryptData(
   try {
     // Decrypt with AES-GCM
     const decryptedBuffer = await crypto.subtle.decrypt(
-      { name: 'AES-GCM', iv },
+      { name: "AES-GCM", iv },
       key,
       encryptedData
     );
@@ -144,7 +137,7 @@ export async function decryptData(
     const jsonString = decoder.decode(decryptedBuffer);
     return JSON.parse(jsonString) as BudgetExportData;
   } catch (error) {
-    throw new Error('Decryption failed. Please check your password.');
+    throw new Error("Decryption failed. Please check your password.");
   }
 }
 
@@ -156,13 +149,13 @@ export function parseBudgetFile(content: string): BudgetFile {
     const file = JSON.parse(content) as BudgetFile;
 
     if (!file.metadata || !file.data) {
-      throw new Error('Invalid file format: missing metadata or data');
+      throw new Error("Invalid file format: missing metadata or data");
     }
 
     return file;
   } catch (error) {
     if (error instanceof SyntaxError) {
-      throw new Error('Invalid JSON format');
+      throw new Error("Invalid JSON format");
     }
     throw error;
   }
@@ -175,30 +168,30 @@ export async function validateBudgetFile(
   file: BudgetFile,
   password?: string
 ): Promise<ValidationResult> {
-  const errors: ValidationResult['errors'] = [];
+  const errors: ValidationResult["errors"] = [];
   const warnings: string[] = [];
 
   // Check metadata
   if (!file.metadata.version) {
-    errors.push({ path: 'metadata.version', message: 'Missing version', severity: 'error' });
+    errors.push({ path: "metadata.version", message: "Missing version", severity: "error" });
   }
 
   if (!file.metadata.exportedAt) {
-    errors.push({ path: 'metadata.exportedAt', message: 'Missing export date', severity: 'error' });
+    errors.push({ path: "metadata.exportedAt", message: "Missing export date", severity: "error" });
   }
 
   if (!file.metadata.checksum) {
-    errors.push({ path: 'metadata.checksum', message: 'Missing checksum', severity: 'error' });
+    errors.push({ path: "metadata.checksum", message: "Missing checksum", severity: "error" });
   }
 
   // Check version compatibility
-  const [major] = file.metadata.version.split('.');
-  const [currentMajor] = BUDGET_FILE_VERSION.split('.');
+  const [major] = file.metadata.version.split(".");
+  const [currentMajor] = BUDGET_FILE_VERSION.split(".");
   if (major !== currentMajor) {
     errors.push({
-      path: 'metadata.version',
+      path: "metadata.version",
       message: `Incompatible version: ${file.metadata.version} (expected ${BUDGET_FILE_VERSION})`,
-      severity: 'error',
+      severity: "error",
     });
   }
 
@@ -206,9 +199,9 @@ export async function validateBudgetFile(
   if (isEncryptedData(file.data)) {
     if (!password) {
       errors.push({
-        path: 'data',
-        message: 'File is encrypted but no password provided',
-        severity: 'error',
+        path: "data",
+        message: "File is encrypted but no password provided",
+        severity: "error",
       });
     } else {
       // Try to decrypt to validate password
@@ -216,9 +209,9 @@ export async function validateBudgetFile(
         await decryptData(file.data, password);
       } catch {
         errors.push({
-          path: 'data',
-          message: 'Decryption failed - incorrect password',
-          severity: 'error',
+          path: "data",
+          message: "Decryption failed - incorrect password",
+          severity: "error",
         });
       }
     }
@@ -227,24 +220,24 @@ export async function validateBudgetFile(
     const calculatedChecksum = await calculateChecksum(file.data);
     if (calculatedChecksum !== file.metadata.checksum) {
       errors.push({
-        path: 'metadata.checksum',
-        message: 'Checksum mismatch - file may be corrupted',
-        severity: 'error',
+        path: "metadata.checksum",
+        message: "Checksum mismatch - file may be corrupted",
+        severity: "error",
       });
     }
   }
 
   // Validate data structure
   if (!isEncryptedData(file.data)) {
-    const {data} = file;
+    const { data } = file;
 
     // Check required arrays exist
     const requiredArrays: (keyof BudgetExportData)[] = [
-      'accounts',
-      'transactions',
-      'categories',
-      'budgets',
-      'goals',
+      "accounts",
+      "transactions",
+      "categories",
+      "budgets",
+      "goals",
     ];
 
     for (const arrayName of requiredArrays) {
@@ -252,15 +245,15 @@ export async function validateBudgetFile(
         errors.push({
           path: `data.${arrayName}`,
           message: `Missing or invalid ${arrayName} array`,
-          severity: 'error',
+          severity: "error",
         });
       }
     }
 
     // Check for orphaned references
     if (Array.isArray(data.transactions) && Array.isArray(data.accounts)) {
-      const accountIds = new Set(data.accounts.map(a => a.id));
-      const orphanedTxns = data.transactions.filter(t => !accountIds.has(t.accountId));
+      const accountIds = new Set(data.accounts.map((a) => a.id));
+      const orphanedTxns = data.transactions.filter((t) => !accountIds.has(t.accountId));
       if (orphanedTxns.length > 0) {
         warnings.push(`${orphanedTxns.length} transactions reference missing accounts`);
       }
@@ -268,7 +261,7 @@ export async function validateBudgetFile(
   }
 
   return {
-    valid: errors.filter(e => e.severity === 'error').length === 0,
+    valid: errors.filter((e) => e.severity === "error").length === 0,
     errors,
     warnings,
     metadata: file.metadata,
@@ -306,17 +299,17 @@ export async function importBudgetData(
   file: BudgetFile,
   options: ImportOptions
 ): Promise<ImportResult> {
-  const { conflictResolution = 'skip', password, onProgress } = options;
+  const { conflictResolution = "skip", password, onProgress } = options;
 
   // Emit validating progress
   emitProgress(onProgress, {
-    stage: 'validating',
-    currentTable: '',
+    stage: "validating",
+    currentTable: "",
     tableIndex: 0,
     totalTables: 0,
     itemsProcessed: 0,
     totalItems: 0,
-    message: 'Validating file...',
+    message: "Validating file...",
   });
 
   // Validate first
@@ -324,11 +317,11 @@ export async function importBudgetData(
   if (!validation.valid) {
     return {
       success: false,
-      message: validation.errors.map(e => e.message).join('; '),
+      message: validation.errors.map((e) => e.message).join("; "),
       stats: createEmptyStats(),
-      errors: validation.errors.map(e => ({
-        table: e.path.split('.')[1] || 'unknown',
-        id: '',
+      errors: validation.errors.map((e) => ({
+        table: e.path.split(".")[1] || "unknown",
+        id: "",
         message: e.message,
       })),
     };
@@ -340,20 +333,20 @@ export async function importBudgetData(
     if (!password) {
       return {
         success: false,
-        message: 'Password required for encrypted file',
+        message: "Password required for encrypted file",
         stats: createEmptyStats(),
-        errors: [{ table: 'data', id: '', message: 'Password required' }],
+        errors: [{ table: "data", id: "", message: "Password required" }],
       };
     }
 
     emitProgress(onProgress, {
-      stage: 'decrypting',
-      currentTable: '',
+      stage: "decrypting",
+      currentTable: "",
       tableIndex: 0,
       totalTables: 0,
       itemsProcessed: 0,
       totalItems: 0,
-      message: 'Decrypting data...',
+      message: "Decrypting data...",
     });
 
     data = await decryptData(file.data, password);
@@ -362,21 +355,21 @@ export async function importBudgetData(
   }
 
   const stats = createEmptyStats();
-  const errors: ImportResult['errors'] = [];
+  const errors: ImportResult["errors"] = [];
 
   // Determine which tables to import
   const tablesToImport = options.includeTables || [
-    'accounts',
-    'transactions',
-    'categories',
-    'budgets',
-    'goals',
-    'loans',
-    'subscriptions',
-    'investments',
-    'receipts',
-    'profiles',
-    'activityLog',
+    "accounts",
+    "transactions",
+    "categories",
+    "budgets",
+    "goals",
+    "loans",
+    "subscriptions",
+    "investments",
+    "receipts",
+    "profiles",
+    "activityLog",
   ];
 
   // Build list of tables with their data for progress tracking
@@ -393,10 +386,10 @@ export async function importBudgetData(
   const tableConfigs: TableConfig[] = [];
 
   // Configure tables in import order
-  if (tablesToImport.includes('profiles') && data.profiles?.length) {
+  if (tablesToImport.includes("profiles") && data.profiles?.length) {
     tableConfigs.push({
-      name: 'profiles',
-      displayName: 'profiles',
+      name: "profiles",
+      displayName: "profiles",
       data: data.profiles,
       importFn: async () => {
         await importProfilesWithProgress(
@@ -406,17 +399,17 @@ export async function importBudgetData(
           errors,
           profileIdMap,
           onProgress,
-          tableConfigs.findIndex(t => t.name === 'profiles'),
+          tableConfigs.findIndex((t) => t.name === "profiles"),
           tableConfigs.length
         );
       },
     });
   }
 
-  if (tablesToImport.includes('accounts') && data.accounts?.length) {
+  if (tablesToImport.includes("accounts") && data.accounts?.length) {
     tableConfigs.push({
-      name: 'accounts',
-      displayName: 'accounts',
+      name: "accounts",
+      displayName: "accounts",
       data: data.accounts,
       importFn: async () => {
         await importAccountsWithProgress(
@@ -425,17 +418,17 @@ export async function importBudgetData(
           stats,
           errors,
           onProgress,
-          tableConfigs.findIndex(t => t.name === 'accounts'),
+          tableConfigs.findIndex((t) => t.name === "accounts"),
           tableConfigs.length
         );
       },
     });
   }
 
-  if (tablesToImport.includes('categories') && data.categories?.length) {
+  if (tablesToImport.includes("categories") && data.categories?.length) {
     tableConfigs.push({
-      name: 'categories',
-      displayName: 'categories',
+      name: "categories",
+      displayName: "categories",
       data: data.categories,
       importFn: async () => {
         await importCategoriesWithProgress(
@@ -444,17 +437,17 @@ export async function importBudgetData(
           stats,
           errors,
           onProgress,
-          tableConfigs.findIndex(t => t.name === 'categories'),
+          tableConfigs.findIndex((t) => t.name === "categories"),
           tableConfigs.length
         );
       },
     });
   }
 
-  if (tablesToImport.includes('transactions') && data.transactions?.length) {
+  if (tablesToImport.includes("transactions") && data.transactions?.length) {
     tableConfigs.push({
-      name: 'transactions',
-      displayName: 'transactions',
+      name: "transactions",
+      displayName: "transactions",
       data: data.transactions,
       importFn: async () => {
         await importTransactionsWithProgress(
@@ -463,17 +456,17 @@ export async function importBudgetData(
           stats,
           errors,
           onProgress,
-          tableConfigs.findIndex(t => t.name === 'transactions'),
+          tableConfigs.findIndex((t) => t.name === "transactions"),
           tableConfigs.length
         );
       },
     });
   }
 
-  if (tablesToImport.includes('budgets') && data.budgets?.length) {
+  if (tablesToImport.includes("budgets") && data.budgets?.length) {
     tableConfigs.push({
-      name: 'budgets',
-      displayName: 'budgets',
+      name: "budgets",
+      displayName: "budgets",
       data: data.budgets,
       importFn: async () => {
         await importBudgetsWithProgress(
@@ -483,17 +476,17 @@ export async function importBudgetData(
           errors,
           profileIdMap,
           onProgress,
-          tableConfigs.findIndex(t => t.name === 'budgets'),
+          tableConfigs.findIndex((t) => t.name === "budgets"),
           tableConfigs.length
         );
       },
     });
   }
 
-  if (tablesToImport.includes('goals') && data.goals?.length) {
+  if (tablesToImport.includes("goals") && data.goals?.length) {
     tableConfigs.push({
-      name: 'goals',
-      displayName: 'goals',
+      name: "goals",
+      displayName: "goals",
       data: data.goals,
       importFn: async () => {
         await importGoalsWithProgress(
@@ -502,17 +495,17 @@ export async function importBudgetData(
           stats,
           errors,
           onProgress,
-          tableConfigs.findIndex(t => t.name === 'goals'),
+          tableConfigs.findIndex((t) => t.name === "goals"),
           tableConfigs.length
         );
       },
     });
   }
 
-  if (tablesToImport.includes('loans') && data.loans?.length) {
+  if (tablesToImport.includes("loans") && data.loans?.length) {
     tableConfigs.push({
-      name: 'loans',
-      displayName: 'loans',
+      name: "loans",
+      displayName: "loans",
       data: data.loans,
       importFn: async () => {
         await importLoansWithProgress(
@@ -521,17 +514,17 @@ export async function importBudgetData(
           stats,
           errors,
           onProgress,
-          tableConfigs.findIndex(t => t.name === 'loans'),
+          tableConfigs.findIndex((t) => t.name === "loans"),
           tableConfigs.length
         );
       },
     });
   }
 
-  if (tablesToImport.includes('subscriptions') && data.subscriptions?.length) {
+  if (tablesToImport.includes("subscriptions") && data.subscriptions?.length) {
     tableConfigs.push({
-      name: 'subscriptions',
-      displayName: 'subscriptions',
+      name: "subscriptions",
+      displayName: "subscriptions",
       data: data.subscriptions,
       importFn: async () => {
         await importSubscriptionsWithProgress(
@@ -540,17 +533,17 @@ export async function importBudgetData(
           stats,
           errors,
           onProgress,
-          tableConfigs.findIndex(t => t.name === 'subscriptions'),
+          tableConfigs.findIndex((t) => t.name === "subscriptions"),
           tableConfigs.length
         );
       },
     });
   }
 
-  if (tablesToImport.includes('activityLog') && data.activityLog?.length) {
+  if (tablesToImport.includes("activityLog") && data.activityLog?.length) {
     tableConfigs.push({
-      name: 'activityLog',
-      displayName: 'activity log',
+      name: "activityLog",
+      displayName: "activity log",
       data: data.activityLog,
       importFn: async () => {
         await importActivityLogWithProgress(
@@ -560,7 +553,7 @@ export async function importBudgetData(
           errors,
           profileIdMap,
           onProgress,
-          tableConfigs.findIndex(t => t.name === 'activityLog'),
+          tableConfigs.findIndex((t) => t.name === "activityLog"),
           tableConfigs.length
         );
       },
@@ -575,10 +568,10 @@ export async function importBudgetData(
 
     // Save settings and preferences to localStorage
     if (data.settings) {
-      localStorage.setItem('budget-settings', JSON.stringify(data.settings));
+      localStorage.setItem("budget-settings", JSON.stringify(data.settings));
     }
     if (data.preferences) {
-      localStorage.setItem('budget-preferences', JSON.stringify(data.preferences));
+      localStorage.setItem("budget-preferences", JSON.stringify(data.preferences));
     }
 
     const totalImported = Object.values(stats).reduce((sum, s) => sum + s.imported, 0);
@@ -586,34 +579,35 @@ export async function importBudgetData(
 
     // Emit complete progress
     emitProgress(onProgress, {
-      stage: 'complete',
-      currentTable: '',
+      stage: "complete",
+      currentTable: "",
       tableIndex: tableConfigs.length,
       totalTables: tableConfigs.length,
       itemsProcessed: totalImported,
       totalItems: totalImported,
-      message: 'Import complete',
+      message: "Import complete",
     });
 
     return {
       success: totalErrors === 0,
-      message: totalErrors === 0
-        ? `Successfully imported ${totalImported} records`
-        : `Imported ${totalImported} records with ${totalErrors} errors`,
+      message:
+        totalErrors === 0
+          ? `Successfully imported ${totalImported} records`
+          : `Imported ${totalImported} records with ${totalErrors} errors`,
       stats,
       errors,
     };
   } catch (error) {
     return {
       success: false,
-      message: error instanceof Error ? error.message : 'Import failed',
+      message: error instanceof Error ? error.message : "Import failed",
       stats,
-      errors: [...errors, { table: 'unknown', id: '', message: String(error) }],
+      errors: [...errors, { table: "unknown", id: "", message: String(error) }],
     };
   }
 }
 
-function createEmptyStats(): ImportResult['stats'] {
+function createEmptyStats(): ImportResult["stats"] {
   return {
     accounts: { imported: 0, skipped: 0, errors: 0 },
     transactions: { imported: 0, skipped: 0, errors: 0 },
@@ -629,24 +623,24 @@ function createEmptyStats(): ImportResult['stats'] {
   };
 }
 
-type ConflictResolution = 'skip' | 'overwrite' | 'rename';
-type Stats = ImportResult['stats'][keyof ImportResult['stats']];
+type ConflictResolution = "skip" | "overwrite" | "rename";
+type Stats = ImportResult["stats"][keyof ImportResult["stats"]];
 
 async function importAccounts(
-  accounts: BudgetExportData['accounts'],
+  accounts: BudgetExportData["accounts"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors']
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"]
 ) {
   for (const account of accounts) {
     try {
       const existing = await db.accounts.get(account.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.accounts.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           account.id = `${account.id}-imported-${Date.now()}`;
         }
         // overwrite: continue with put
@@ -660,26 +654,26 @@ async function importAccounts(
       stats.accounts.imported++;
     } catch (error) {
       stats.accounts.errors++;
-      errors.push({ table: 'accounts', id: account.id, message: String(error) });
+      errors.push({ table: "accounts", id: account.id, message: String(error) });
     }
   }
 }
 
 async function importCategories(
-  categories: BudgetExportData['categories'],
+  categories: BudgetExportData["categories"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors']
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"]
 ) {
   for (const category of categories) {
     try {
       const existing = await db.categories.get(category.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.categories.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           category.id = `${category.id}-imported-${Date.now()}`;
         }
       }
@@ -692,26 +686,26 @@ async function importCategories(
       stats.categories.imported++;
     } catch (error) {
       stats.categories.errors++;
-      errors.push({ table: 'categories', id: category.id, message: String(error) });
+      errors.push({ table: "categories", id: category.id, message: String(error) });
     }
   }
 }
 
 async function importTransactions(
-  transactions: BudgetExportData['transactions'],
+  transactions: BudgetExportData["transactions"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors']
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"]
 ) {
   for (const tx of transactions) {
     try {
       const existing = await db.transactions.get(tx.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.transactions.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           tx.id = `${tx.id}-imported-${Date.now()}`;
         }
       }
@@ -725,16 +719,16 @@ async function importTransactions(
       stats.transactions.imported++;
     } catch (error) {
       stats.transactions.errors++;
-      errors.push({ table: 'transactions', id: tx.id, message: String(error) });
+      errors.push({ table: "transactions", id: tx.id, message: String(error) });
     }
   }
 }
 
 async function importBudgets(
-  budgets: BudgetExportData['budgets'],
+  budgets: BudgetExportData["budgets"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors'],
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"],
   profileIdMap: Map<string, string>
 ) {
   for (const budget of budgets) {
@@ -742,10 +736,10 @@ async function importBudgets(
       const existing = await db.budgets.get(budget.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.budgets.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           budget.id = `${budget.id}-imported-${Date.now()}`;
         }
       }
@@ -767,26 +761,26 @@ async function importBudgets(
       stats.budgets.imported++;
     } catch (error) {
       stats.budgets.errors++;
-      errors.push({ table: 'budgets', id: budget.id, message: String(error) });
+      errors.push({ table: "budgets", id: budget.id, message: String(error) });
     }
   }
 }
 
 async function importGoals(
-  goals: BudgetExportData['goals'],
+  goals: BudgetExportData["goals"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors']
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"]
 ) {
   for (const goal of goals) {
     try {
       const existing = await db.futurePurchases.get(goal.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.goals.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           goal.id = `${goal.id}-imported-${Date.now()}`;
         }
       }
@@ -800,26 +794,26 @@ async function importGoals(
       stats.goals.imported++;
     } catch (error) {
       stats.goals.errors++;
-      errors.push({ table: 'goals', id: goal.id, message: String(error) });
+      errors.push({ table: "goals", id: goal.id, message: String(error) });
     }
   }
 }
 
 async function importLoans(
-  loans: BudgetExportData['loans'],
+  loans: BudgetExportData["loans"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors']
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"]
 ) {
   for (const loan of loans) {
     try {
       const existing = await db.loans.get(loan.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.loans.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           loan.id = `${loan.id}-imported-${Date.now()}`;
         }
       }
@@ -828,33 +822,35 @@ async function importLoans(
         ...loan,
         startDate: parseDate(loan.startDate) || new Date(),
         nextPaymentDate: parseDate(loan.nextPaymentDate) || new Date(),
-        defermentEndDate: loan.defermentEndDate ? parseDate(loan.defermentEndDate) || undefined : undefined,
+        defermentEndDate: loan.defermentEndDate
+          ? parseDate(loan.defermentEndDate) || undefined
+          : undefined,
         createdAt: parseDate(loan.createdAt) || new Date(),
         updatedAt: parseDate(loan.updatedAt) || new Date(),
       });
       stats.loans.imported++;
     } catch (error) {
       stats.loans.errors++;
-      errors.push({ table: 'loans', id: loan.id, message: String(error) });
+      errors.push({ table: "loans", id: loan.id, message: String(error) });
     }
   }
 }
 
 async function importSubscriptions(
-  subscriptions: BudgetExportData['subscriptions'],
+  subscriptions: BudgetExportData["subscriptions"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors']
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"]
 ) {
   for (const sub of subscriptions) {
     try {
       const existing = await db.subscriptions.get(sub.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.subscriptions.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           sub.id = `${sub.id}-imported-${Date.now()}`;
         }
       }
@@ -871,16 +867,16 @@ async function importSubscriptions(
       stats.subscriptions.imported++;
     } catch (error) {
       stats.subscriptions.errors++;
-      errors.push({ table: 'subscriptions', id: sub.id, message: String(error) });
+      errors.push({ table: "subscriptions", id: sub.id, message: String(error) });
     }
   }
 }
 
 async function importProfiles(
-  profiles: BudgetExportData['profiles'],
+  profiles: BudgetExportData["profiles"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors'],
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"],
   profileIdMap: Map<string, string>
 ) {
   for (const profile of profiles) {
@@ -889,12 +885,12 @@ async function importProfiles(
       const originalId = profile.id;
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.profiles.skipped++;
           // Map to existing profile for reference updates
           profileIdMap.set(originalId, existing.id);
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           profile.id = `${profile.id}-imported-${Date.now()}`;
           // Track the ID mapping for updating references
           profileIdMap.set(originalId, profile.id);
@@ -919,16 +915,16 @@ async function importProfiles(
       stats.profiles.imported++;
     } catch (error) {
       stats.profiles.errors++;
-      errors.push({ table: 'profiles', id: profile.id, message: String(error) });
+      errors.push({ table: "profiles", id: profile.id, message: String(error) });
     }
   }
 }
 
 async function importActivityLog(
-  activityLog: BudgetExportData['activityLog'],
+  activityLog: BudgetExportData["activityLog"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors'],
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"],
   profileIdMap: Map<string, string>
 ) {
   for (const entry of activityLog) {
@@ -936,10 +932,10 @@ async function importActivityLog(
       const existing = await db.activityLog.get(entry.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.activityLog.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           entry.id = `${entry.id}-imported-${Date.now()}`;
         }
       }
@@ -964,7 +960,7 @@ async function importActivityLog(
       stats.activityLog.imported++;
     } catch (error) {
       stats.activityLog.errors++;
-      errors.push({ table: 'activityLog', id: entry.id, message: String(error) });
+      errors.push({ table: "activityLog", id: entry.id, message: String(error) });
     }
   }
 }
@@ -975,18 +971,18 @@ async function importActivityLog(
 const PROGRESS_UPDATE_INTERVAL = 10; // Emit progress every N items for responsiveness
 
 async function importAccountsWithProgress(
-  accounts: BudgetExportData['accounts'],
+  accounts: BudgetExportData["accounts"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors'],
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"],
   onProgress: ((progress: ImportProgress) => void) | undefined,
   tableIndex: number,
   totalTables: number
 ) {
   const total = accounts.length;
   emitProgress(onProgress, {
-    stage: 'importing',
-    currentTable: 'accounts',
+    stage: "importing",
+    currentTable: "accounts",
     tableIndex,
     totalTables,
     itemsProcessed: 0,
@@ -1000,10 +996,10 @@ async function importAccountsWithProgress(
       const existing = await db.accounts.get(account.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.accounts.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           account.id = `${account.id}-imported-${Date.now()}`;
         }
       }
@@ -1016,14 +1012,14 @@ async function importAccountsWithProgress(
       stats.accounts.imported++;
     } catch (error) {
       stats.accounts.errors++;
-      errors.push({ table: 'accounts', id: account.id, message: String(error) });
+      errors.push({ table: "accounts", id: account.id, message: String(error) });
     }
 
     // Emit progress periodically
     if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === accounts.length - 1) {
       emitProgress(onProgress, {
-        stage: 'importing',
-        currentTable: 'accounts',
+        stage: "importing",
+        currentTable: "accounts",
         tableIndex,
         totalTables,
         itemsProcessed: i + 1,
@@ -1035,18 +1031,18 @@ async function importAccountsWithProgress(
 }
 
 async function importCategoriesWithProgress(
-  categories: BudgetExportData['categories'],
+  categories: BudgetExportData["categories"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors'],
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"],
   onProgress: ((progress: ImportProgress) => void) | undefined,
   tableIndex: number,
   totalTables: number
 ) {
   const total = categories.length;
   emitProgress(onProgress, {
-    stage: 'importing',
-    currentTable: 'categories',
+    stage: "importing",
+    currentTable: "categories",
     tableIndex,
     totalTables,
     itemsProcessed: 0,
@@ -1060,10 +1056,10 @@ async function importCategoriesWithProgress(
       const existing = await db.categories.get(category.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.categories.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           category.id = `${category.id}-imported-${Date.now()}`;
         }
       }
@@ -1076,13 +1072,13 @@ async function importCategoriesWithProgress(
       stats.categories.imported++;
     } catch (error) {
       stats.categories.errors++;
-      errors.push({ table: 'categories', id: category.id, message: String(error) });
+      errors.push({ table: "categories", id: category.id, message: String(error) });
     }
 
     if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === categories.length - 1) {
       emitProgress(onProgress, {
-        stage: 'importing',
-        currentTable: 'categories',
+        stage: "importing",
+        currentTable: "categories",
         tableIndex,
         totalTables,
         itemsProcessed: i + 1,
@@ -1094,18 +1090,18 @@ async function importCategoriesWithProgress(
 }
 
 async function importTransactionsWithProgress(
-  transactions: BudgetExportData['transactions'],
+  transactions: BudgetExportData["transactions"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors'],
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"],
   onProgress: ((progress: ImportProgress) => void) | undefined,
   tableIndex: number,
   totalTables: number
 ) {
   const total = transactions.length;
   emitProgress(onProgress, {
-    stage: 'importing',
-    currentTable: 'transactions',
+    stage: "importing",
+    currentTable: "transactions",
     tableIndex,
     totalTables,
     itemsProcessed: 0,
@@ -1119,10 +1115,10 @@ async function importTransactionsWithProgress(
       const existing = await db.transactions.get(tx.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.transactions.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           tx.id = `${tx.id}-imported-${Date.now()}`;
         }
       }
@@ -1136,13 +1132,13 @@ async function importTransactionsWithProgress(
       stats.transactions.imported++;
     } catch (error) {
       stats.transactions.errors++;
-      errors.push({ table: 'transactions', id: tx.id, message: String(error) });
+      errors.push({ table: "transactions", id: tx.id, message: String(error) });
     }
 
     if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === transactions.length - 1) {
       emitProgress(onProgress, {
-        stage: 'importing',
-        currentTable: 'transactions',
+        stage: "importing",
+        currentTable: "transactions",
         tableIndex,
         totalTables,
         itemsProcessed: i + 1,
@@ -1154,10 +1150,10 @@ async function importTransactionsWithProgress(
 }
 
 async function importBudgetsWithProgress(
-  budgets: BudgetExportData['budgets'],
+  budgets: BudgetExportData["budgets"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors'],
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"],
   profileIdMap: Map<string, string>,
   onProgress: ((progress: ImportProgress) => void) | undefined,
   tableIndex: number,
@@ -1165,8 +1161,8 @@ async function importBudgetsWithProgress(
 ) {
   const total = budgets.length;
   emitProgress(onProgress, {
-    stage: 'importing',
-    currentTable: 'budgets',
+    stage: "importing",
+    currentTable: "budgets",
     tableIndex,
     totalTables,
     itemsProcessed: 0,
@@ -1180,10 +1176,10 @@ async function importBudgetsWithProgress(
       const existing = await db.budgets.get(budget.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.budgets.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           budget.id = `${budget.id}-imported-${Date.now()}`;
         }
       }
@@ -1204,13 +1200,13 @@ async function importBudgetsWithProgress(
       stats.budgets.imported++;
     } catch (error) {
       stats.budgets.errors++;
-      errors.push({ table: 'budgets', id: budget.id, message: String(error) });
+      errors.push({ table: "budgets", id: budget.id, message: String(error) });
     }
 
     if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === budgets.length - 1) {
       emitProgress(onProgress, {
-        stage: 'importing',
-        currentTable: 'budgets',
+        stage: "importing",
+        currentTable: "budgets",
         tableIndex,
         totalTables,
         itemsProcessed: i + 1,
@@ -1222,18 +1218,18 @@ async function importBudgetsWithProgress(
 }
 
 async function importGoalsWithProgress(
-  goals: BudgetExportData['goals'],
+  goals: BudgetExportData["goals"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors'],
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"],
   onProgress: ((progress: ImportProgress) => void) | undefined,
   tableIndex: number,
   totalTables: number
 ) {
   const total = goals.length;
   emitProgress(onProgress, {
-    stage: 'importing',
-    currentTable: 'goals',
+    stage: "importing",
+    currentTable: "goals",
     tableIndex,
     totalTables,
     itemsProcessed: 0,
@@ -1247,10 +1243,10 @@ async function importGoalsWithProgress(
       const existing = await db.futurePurchases.get(goal.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.goals.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           goal.id = `${goal.id}-imported-${Date.now()}`;
         }
       }
@@ -1264,13 +1260,13 @@ async function importGoalsWithProgress(
       stats.goals.imported++;
     } catch (error) {
       stats.goals.errors++;
-      errors.push({ table: 'goals', id: goal.id, message: String(error) });
+      errors.push({ table: "goals", id: goal.id, message: String(error) });
     }
 
     if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === goals.length - 1) {
       emitProgress(onProgress, {
-        stage: 'importing',
-        currentTable: 'goals',
+        stage: "importing",
+        currentTable: "goals",
         tableIndex,
         totalTables,
         itemsProcessed: i + 1,
@@ -1282,18 +1278,18 @@ async function importGoalsWithProgress(
 }
 
 async function importLoansWithProgress(
-  loans: BudgetExportData['loans'],
+  loans: BudgetExportData["loans"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors'],
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"],
   onProgress: ((progress: ImportProgress) => void) | undefined,
   tableIndex: number,
   totalTables: number
 ) {
   const total = loans.length;
   emitProgress(onProgress, {
-    stage: 'importing',
-    currentTable: 'loans',
+    stage: "importing",
+    currentTable: "loans",
     tableIndex,
     totalTables,
     itemsProcessed: 0,
@@ -1307,10 +1303,10 @@ async function importLoansWithProgress(
       const existing = await db.loans.get(loan.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.loans.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           loan.id = `${loan.id}-imported-${Date.now()}`;
         }
       }
@@ -1319,20 +1315,22 @@ async function importLoansWithProgress(
         ...loan,
         startDate: parseDate(loan.startDate) || new Date(),
         nextPaymentDate: parseDate(loan.nextPaymentDate) || new Date(),
-        defermentEndDate: loan.defermentEndDate ? parseDate(loan.defermentEndDate) || undefined : undefined,
+        defermentEndDate: loan.defermentEndDate
+          ? parseDate(loan.defermentEndDate) || undefined
+          : undefined,
         createdAt: parseDate(loan.createdAt) || new Date(),
         updatedAt: parseDate(loan.updatedAt) || new Date(),
       });
       stats.loans.imported++;
     } catch (error) {
       stats.loans.errors++;
-      errors.push({ table: 'loans', id: loan.id, message: String(error) });
+      errors.push({ table: "loans", id: loan.id, message: String(error) });
     }
 
     if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === loans.length - 1) {
       emitProgress(onProgress, {
-        stage: 'importing',
-        currentTable: 'loans',
+        stage: "importing",
+        currentTable: "loans",
         tableIndex,
         totalTables,
         itemsProcessed: i + 1,
@@ -1344,18 +1342,18 @@ async function importLoansWithProgress(
 }
 
 async function importSubscriptionsWithProgress(
-  subscriptions: BudgetExportData['subscriptions'],
+  subscriptions: BudgetExportData["subscriptions"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors'],
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"],
   onProgress: ((progress: ImportProgress) => void) | undefined,
   tableIndex: number,
   totalTables: number
 ) {
   const total = subscriptions.length;
   emitProgress(onProgress, {
-    stage: 'importing',
-    currentTable: 'subscriptions',
+    stage: "importing",
+    currentTable: "subscriptions",
     tableIndex,
     totalTables,
     itemsProcessed: 0,
@@ -1369,10 +1367,10 @@ async function importSubscriptionsWithProgress(
       const existing = await db.subscriptions.get(sub.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.subscriptions.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           sub.id = `${sub.id}-imported-${Date.now()}`;
         }
       }
@@ -1389,13 +1387,13 @@ async function importSubscriptionsWithProgress(
       stats.subscriptions.imported++;
     } catch (error) {
       stats.subscriptions.errors++;
-      errors.push({ table: 'subscriptions', id: sub.id, message: String(error) });
+      errors.push({ table: "subscriptions", id: sub.id, message: String(error) });
     }
 
     if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === subscriptions.length - 1) {
       emitProgress(onProgress, {
-        stage: 'importing',
-        currentTable: 'subscriptions',
+        stage: "importing",
+        currentTable: "subscriptions",
         tableIndex,
         totalTables,
         itemsProcessed: i + 1,
@@ -1407,10 +1405,10 @@ async function importSubscriptionsWithProgress(
 }
 
 async function importProfilesWithProgress(
-  profiles: BudgetExportData['profiles'],
+  profiles: BudgetExportData["profiles"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors'],
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"],
   profileIdMap: Map<string, string>,
   onProgress: ((progress: ImportProgress) => void) | undefined,
   tableIndex: number,
@@ -1418,8 +1416,8 @@ async function importProfilesWithProgress(
 ) {
   const total = profiles.length;
   emitProgress(onProgress, {
-    stage: 'importing',
-    currentTable: 'profiles',
+    stage: "importing",
+    currentTable: "profiles",
     tableIndex,
     totalTables,
     itemsProcessed: 0,
@@ -1434,11 +1432,11 @@ async function importProfilesWithProgress(
       const originalId = profile.id;
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.profiles.skipped++;
           profileIdMap.set(originalId, existing.id);
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           profile.id = `${profile.id}-imported-${Date.now()}`;
           profileIdMap.set(originalId, profile.id);
         }
@@ -1459,13 +1457,13 @@ async function importProfilesWithProgress(
       stats.profiles.imported++;
     } catch (error) {
       stats.profiles.errors++;
-      errors.push({ table: 'profiles', id: profile.id, message: String(error) });
+      errors.push({ table: "profiles", id: profile.id, message: String(error) });
     }
 
     if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === profiles.length - 1) {
       emitProgress(onProgress, {
-        stage: 'importing',
-        currentTable: 'profiles',
+        stage: "importing",
+        currentTable: "profiles",
         tableIndex,
         totalTables,
         itemsProcessed: i + 1,
@@ -1477,10 +1475,10 @@ async function importProfilesWithProgress(
 }
 
 async function importActivityLogWithProgress(
-  activityLog: BudgetExportData['activityLog'],
+  activityLog: BudgetExportData["activityLog"],
   resolution: ConflictResolution,
-  stats: ImportResult['stats'],
-  errors: ImportResult['errors'],
+  stats: ImportResult["stats"],
+  errors: ImportResult["errors"],
   profileIdMap: Map<string, string>,
   onProgress: ((progress: ImportProgress) => void) | undefined,
   tableIndex: number,
@@ -1488,8 +1486,8 @@ async function importActivityLogWithProgress(
 ) {
   const total = activityLog.length;
   emitProgress(onProgress, {
-    stage: 'importing',
-    currentTable: 'activityLog',
+    stage: "importing",
+    currentTable: "activityLog",
     tableIndex,
     totalTables,
     itemsProcessed: 0,
@@ -1503,10 +1501,10 @@ async function importActivityLogWithProgress(
       const existing = await db.activityLog.get(entry.id);
 
       if (existing) {
-        if (resolution === 'skip') {
+        if (resolution === "skip") {
           stats.activityLog.skipped++;
           continue;
-        } else if (resolution === 'rename') {
+        } else if (resolution === "rename") {
           entry.id = `${entry.id}-imported-${Date.now()}`;
         }
       }
@@ -1530,13 +1528,13 @@ async function importActivityLogWithProgress(
       stats.activityLog.imported++;
     } catch (error) {
       stats.activityLog.errors++;
-      errors.push({ table: 'activityLog', id: entry.id, message: String(error) });
+      errors.push({ table: "activityLog", id: entry.id, message: String(error) });
     }
 
     if ((i + 1) % PROGRESS_UPDATE_INTERVAL === 0 || i === activityLog.length - 1) {
       emitProgress(onProgress, {
-        stage: 'importing',
-        currentTable: 'activityLog',
+        stage: "importing",
+        currentTable: "activityLog",
         tableIndex,
         totalTables,
         itemsProcessed: i + 1,
@@ -1568,7 +1566,7 @@ export async function previewImport(
       metadata: file.metadata,
       counts: {},
       conflicts: {},
-      errors: validation.errors.map(e => e.message),
+      errors: validation.errors.map((e) => e.message),
     };
   }
 
@@ -1581,7 +1579,7 @@ export async function previewImport(
         metadata: file.metadata,
         counts: {},
         conflicts: {},
-        errors: ['Password required for encrypted file'],
+        errors: ["Password required for encrypted file"],
       };
     }
     data = await decryptData(file.data, password);
@@ -1659,7 +1657,7 @@ export async function readBudgetFile(file: File): Promise<BudgetFile> {
     };
 
     reader.onerror = () => {
-      reject(new Error('Failed to read file'));
+      reject(new Error("Failed to read file"));
     };
 
     reader.readAsText(file);

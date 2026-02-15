@@ -1,13 +1,20 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { CheckCircle2, XCircle, Lock, Unlock, RefreshCw, Trophy } from 'lucide-react';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
-import { Progress } from '@/components/ui/progress';
+import React, { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardFooter,
+} from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { CheckCircle2, XCircle, Lock, Unlock, RefreshCw, Trophy } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Progress } from "@/components/ui/progress";
 
 interface Question {
   question: string;
@@ -31,7 +38,7 @@ export default function SkillGate({
   questions,
   nextSection = "next section",
   prerequisite,
-  onComplete
+  onComplete,
 }: SkillGateProps) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<(number | null)[]>(
@@ -44,7 +51,7 @@ export default function SkillGate({
 
   useEffect(() => {
     // Check if this gate was previously completed
-    const progress = JSON.parse(localStorage.getItem('skillGateProgress') || '{}');
+    const progress = JSON.parse(localStorage.getItem("skillGateProgress") || "{}");
     if (progress[title]?.completed) {
       setIsUnlocked(true);
     }
@@ -88,14 +95,14 @@ export default function SkillGate({
     setIsUnlocked(passed);
 
     // Save progress
-    const progress = JSON.parse(localStorage.getItem('skillGateProgress') || '{}');
+    const progress = JSON.parse(localStorage.getItem("skillGateProgress") || "{}");
     progress[title] = {
       completed: passed,
       score: finalScore,
       attempts: attempts + 1,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
-    localStorage.setItem('skillGateProgress', JSON.stringify(progress));
+    localStorage.setItem("skillGateProgress", JSON.stringify(progress));
 
     if (passed && onComplete) {
       onComplete();
@@ -114,8 +121,8 @@ export default function SkillGate({
       <Card className="my-6 border-2 border-green-500 bg-green-50">
         <CardContent className="pt-6">
           <div className="flex items-center justify-center space-x-3">
-            <Unlock className="w-6 h-6 text-[#22c55e]" />
-            <p className="text-green-700 font-medium">
+            <Unlock className="h-6 w-6 text-[#22c55e]" />
+            <p className="font-medium text-green-700">
               ✓ Checkpoint Complete - {nextSection} is unlocked!
             </p>
           </div>
@@ -133,7 +140,7 @@ export default function SkillGate({
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2">
-              <Lock className="w-5 h-5" />
+              <Lock className="h-5 w-5" />
               {title}
             </CardTitle>
             <span className="text-sm text-muted-foreground">
@@ -150,16 +157,19 @@ export default function SkillGate({
 
         <CardContent className="space-y-4">
           <div className="space-y-4">
-            <p className="font-medium text-lg">{question.question}</p>
+            <p className="text-lg font-medium">{question.question}</p>
 
             <RadioGroup
               value={selectedAnswers[currentQuestion]?.toString()}
               onValueChange={(value) => handleAnswerSelect(parseInt(value))}
             >
               {question.options.map((option, index) => (
-                <div key={index} className="flex items-center space-x-2 p-3 rounded-lg hover:bg-gray-50">
+                <div
+                  key={index}
+                  className="flex items-center space-x-2 rounded-lg p-3 hover:bg-gray-50"
+                >
                   <RadioGroupItem value={index.toString()} id={`option-${index}`} />
-                  <Label htmlFor={`option-${index}`} className="cursor-pointer flex-1">
+                  <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
                     {option}
                   </Label>
                 </div>
@@ -169,16 +179,12 @@ export default function SkillGate({
         </CardContent>
 
         <CardFooter className="flex justify-between">
-          <Button
-            onClick={handlePrevious}
-            disabled={currentQuestion === 0}
-            variant="outline"
-          >
+          <Button onClick={handlePrevious} disabled={currentQuestion === 0} variant="outline">
             Previous
           </Button>
 
           <span className="text-sm text-muted-foreground">
-            {selectedAnswers.filter(a => a !== null).length} of {questions.length} answered
+            {selectedAnswers.filter((a) => a !== null).length} of {questions.length} answered
           </span>
 
           {currentQuestion === questions.length - 1 ? (
@@ -190,10 +196,7 @@ export default function SkillGate({
               Submit Checkpoint
             </Button>
           ) : (
-            <Button
-              onClick={handleNext}
-              disabled={selectedAnswers[currentQuestion] === null}
-            >
+            <Button onClick={handleNext} disabled={selectedAnswers[currentQuestion] === null}>
               Next
             </Button>
           )}
@@ -206,17 +209,17 @@ export default function SkillGate({
   const passed = score >= requiredScore;
 
   return (
-    <Card className={`my-6 border-2 ${passed ? 'border-green-500' : 'border-red-500'}`}>
+    <Card className={`my-6 border-2 ${passed ? "border-green-500" : "border-red-500"}`}>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           {passed ? (
             <>
-              <Trophy className="w-6 h-6 text-[#22c55e]" />
+              <Trophy className="h-6 w-6 text-[#22c55e]" />
               Checkpoint Passed!
             </>
           ) : (
             <>
-              <XCircle className="w-6 h-6 text-red-600" />
+              <XCircle className="h-6 w-6 text-red-600" />
               Not Quite There Yet
             </>
           )}
@@ -225,7 +228,7 @@ export default function SkillGate({
 
       <CardContent className="space-y-4">
         <div className="text-center">
-          <p className="text-4xl font-bold mb-2">{score}%</p>
+          <p className="mb-2 text-4xl font-bold">{score}%</p>
           <p className="text-gray-600">
             Required: {requiredScore}% | Attempts: {attempts}
           </p>
@@ -233,18 +236,18 @@ export default function SkillGate({
 
         {passed ? (
           <Alert className="border-green-500 bg-green-50">
-            <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
+            <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />
             <AlertDescription className="text-green-700">
-              Excellent work! You've demonstrated mastery of this content.
-              You can now proceed to {nextSection}.
+              Excellent work! You've demonstrated mastery of this content. You can now proceed to{" "}
+              {nextSection}.
             </AlertDescription>
           </Alert>
         ) : (
           <Alert className="border-red-500 bg-red-50">
-            <XCircle className="w-5 h-5 text-red-600" />
+            <XCircle className="h-5 w-5 text-red-600" />
             <AlertDescription className="text-red-700">
               You need {requiredScore}% to pass. Review the content and try again.
-              {attempts >= 2 && ' Consider reviewing the prerequisite material.'}
+              {attempts >= 2 && " Consider reviewing the prerequisite material."}
             </AlertDescription>
           </Alert>
         )}
@@ -254,25 +257,28 @@ export default function SkillGate({
           {questions.map((q, index) => {
             const isCorrect = selectedAnswers[index] === q.correctAnswer;
             return (
-              <div key={index} className={`p-3 rounded-lg ${isCorrect ? 'bg-green-50' : 'bg-red-50'}`}>
+              <div
+                key={index}
+                className={`rounded-lg p-3 ${isCorrect ? "bg-green-50" : "bg-red-50"}`}
+              >
                 <div className="flex items-start gap-2">
                   {isCorrect ? (
-                    <CheckCircle2 className="w-5 h-5 text-[#22c55e] mt-0.5" />
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 text-[#22c55e]" />
                   ) : (
-                    <XCircle className="w-5 h-5 text-red-600 mt-0.5" />
+                    <XCircle className="mt-0.5 h-5 w-5 text-red-600" />
                   )}
                   <div className="flex-1">
                     <p className="font-medium">{q.question}</p>
-                    <p className="text-sm mt-1">
+                    <p className="mt-1 text-sm">
                       Your answer: {q.options[selectedAnswers[index] || 0]}
                     </p>
                     {!isCorrect && (
-                      <p className="text-sm text-green-700 mt-1">
+                      <p className="mt-1 text-sm text-green-700">
                         Correct: {q.options[q.correctAnswer]}
                       </p>
                     )}
                     {q.explanation && !isCorrect && (
-                      <p className="text-sm text-gray-600 mt-2">{q.explanation}</p>
+                      <p className="mt-2 text-sm text-gray-600">{q.explanation}</p>
                     )}
                   </div>
                 </div>
@@ -284,18 +290,12 @@ export default function SkillGate({
 
       <CardFooter className="flex justify-center">
         {passed ? (
-          <Button
-            onClick={() => setShowResults(false)}
-            className="bg-[#22c55e] hover:bg-green-700"
-          >
+          <Button onClick={() => setShowResults(false)} className="bg-[#22c55e] hover:bg-green-700">
             Continue to {nextSection}
           </Button>
         ) : (
-          <Button
-            onClick={handleRetry}
-            className="flex items-center gap-2"
-          >
-            <RefreshCw className="w-4 h-4" />
+          <Button onClick={handleRetry} className="flex items-center gap-2">
+            <RefreshCw className="h-4 w-4" />
             Try Again
           </Button>
         )}

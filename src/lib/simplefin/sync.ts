@@ -10,7 +10,7 @@ import SimpleFINClient, {
   type SimpleFINTransaction,
   type SimpleFINAccountSet,
   SimpleFINError,
-} from './client';
+} from "./client";
 import type {
   SyncResult,
   AccountSyncResult,
@@ -19,8 +19,8 @@ import type {
   ImportPreview,
   LinkedAccount,
   SimpleFINSettings,
-} from './types';
-import type { Transaction } from '@/types/budget';
+} from "./types";
+import type { Transaction } from "@/types/budget";
 
 // =============================================================================
 // CONSTANTS
@@ -41,22 +41,18 @@ function simpleHash(str: string): string {
   let hash = 5381;
   for (let i = 0; i < str.length; i++) {
     const char = str.charCodeAt(i);
-    hash = ((hash << 5) + hash) + char; // hash * 33 + char
+    hash = (hash << 5) + hash + char; // hash * 33 + char
     hash = hash & hash; // Convert to 32-bit integer
   }
-  return Math.abs(hash).toString(16).padStart(8, '0');
+  return Math.abs(hash).toString(16).padStart(8, "0");
 }
 
 /**
  * Generate hash for duplicate detection
  * Uses date + amount + description to create unique identifier
  */
-export function generateTransactionHash(
-  date: Date,
-  amount: number,
-  description: string
-): string {
-  const normalized = `${date.toISOString().split('T')[0]}|${amount.toFixed(2)}|${description.toLowerCase().trim()}`;
+export function generateTransactionHash(date: Date, amount: number, description: string): string {
+  const normalized = `${date.toISOString().split("T")[0]}|${amount.toFixed(2)}|${description.toLowerCase().trim()}`;
   return `sfin_${simpleHash(normalized)}`;
 }
 
@@ -88,7 +84,7 @@ export function mapSimpleFINTransaction(
 export function toBudgetTransaction(
   mapped: MappedTransaction,
   accountId: string
-): Omit<Transaction, 'id'> {
+): Omit<Transaction, "id"> {
   const now = new Date();
   return {
     date: mapped.date,
@@ -102,7 +98,7 @@ export function toBudgetTransaction(
       ? `Pending transaction from SimpleFIN (ID: ${mapped.sourceId})`
       : `Imported from SimpleFIN (ID: ${mapped.sourceId})`,
     isRecurring: false,
-    tags: ['simplefin-import'],
+    tags: ["simplefin-import"],
     createdAt: now,
     updatedAt: now,
   };
@@ -125,7 +121,7 @@ export function findDuplicates(
 
   for (const tx of existingTransactions) {
     // Check notes for SimpleFIN ID pattern
-    if (tx.notes?.includes('SimpleFIN (ID:')) {
+    if (tx.notes?.includes("SimpleFIN (ID:")) {
       const match = tx.notes.match(/SimpleFIN \(ID: ([^)]+)\)/);
       if (match) {
         existingSourceIds.add(`simplefin_${match[1]}`);
@@ -183,12 +179,12 @@ export class SimpleFINSyncService {
   private reportProgress(progress: Partial<SyncProgress>): void {
     if (this.onProgress) {
       this.onProgress({
-        stage: 'connecting',
+        stage: "connecting",
         accountIndex: 0,
         totalAccounts: 0,
-        currentAccount: '',
+        currentAccount: "",
         transactionsProcessed: 0,
-        message: '',
+        message: "",
         ...progress,
       });
     }
@@ -199,8 +195,8 @@ export class SimpleFINSyncService {
    */
   async fetchAccounts(): Promise<SimpleFINAccountSet> {
     this.reportProgress({
-      stage: 'connecting',
-      message: 'Connecting to SimpleFIN...',
+      stage: "connecting",
+      message: "Connecting to SimpleFIN...",
     });
 
     return this.client.getAccounts({ balancesOnly: true });
@@ -219,14 +215,14 @@ export class SimpleFINSyncService {
     startDate.setDate(startDate.getDate() - Math.min(daysBack, MAX_SYNC_DAYS));
 
     this.reportProgress({
-      stage: 'fetching',
-      message: 'Fetching transactions from SimpleFIN...',
+      stage: "fetching",
+      message: "Fetching transactions from SimpleFIN...",
     });
 
     // Fetch accounts with transactions
     const accountIds = linkedAccounts
-      .filter(a => a.importEnabled && a.localAccountId)
-      .map(a => a.simplefinAccountId);
+      .filter((a) => a.importEnabled && a.localAccountId)
+      .map((a) => a.simplefinAccountId);
 
     if (accountIds.length === 0) {
       return [];
@@ -240,13 +236,13 @@ export class SimpleFINSyncService {
 
     // Generate preview for each account
     for (const account of result.accounts) {
-      const linked = linkedAccounts.find(a => a.simplefinAccountId === account.id);
+      const linked = linkedAccounts.find((a) => a.simplefinAccountId === account.id);
       if (!linked?.localAccountId) continue;
 
       const existing = existingTransactions[linked.localAccountId] || [];
 
       // Map transactions
-      const mapped = (account.transactions || []).map(tx =>
+      const mapped = (account.transactions || []).map((tx) =>
         mapSimpleFINTransaction(tx, account.id)
       );
 
@@ -259,7 +255,7 @@ export class SimpleFINSyncService {
         transactions: unique,
         duplicates,
         balance: parseFloat(account.balance),
-        balanceDate: new Date(account['balance-date'] * 1000),
+        balanceDate: new Date(account["balance-date"] * 1000),
       });
     }
 
@@ -272,7 +268,7 @@ export class SimpleFINSyncService {
   async sync(
     linkedAccounts: LinkedAccount[],
     existingTransactions: Record<string, Transaction[]>,
-    importTransaction: (tx: Omit<Transaction, 'id'>) => Promise<Transaction>,
+    importTransaction: (tx: Omit<Transaction, "id">) => Promise<Transaction>,
     daysBack: number = DEFAULT_SYNC_DAYS
   ): Promise<SyncResult> {
     const startTime = Date.now();
@@ -284,9 +280,7 @@ export class SimpleFINSyncService {
 
     try {
       // Get accounts to sync
-      const accountsToSync = linkedAccounts.filter(
-        a => a.importEnabled && a.localAccountId
-      );
+      const accountsToSync = linkedAccounts.filter((a) => a.importEnabled && a.localAccountId);
 
       if (accountsToSync.length === 0) {
         return {
@@ -296,13 +290,13 @@ export class SimpleFINSyncService {
           totalTransactionsImported: 0,
           totalTransactionsSkipped: 0,
           errors: [],
-          warnings: ['No accounts configured for import'],
+          warnings: ["No accounts configured for import"],
           durationMs: Date.now() - startTime,
         };
       }
 
       this.reportProgress({
-        stage: 'fetching',
+        stage: "fetching",
         totalAccounts: accountsToSync.length,
         message: `Fetching data for ${accountsToSync.length} accounts...`,
       });
@@ -312,7 +306,7 @@ export class SimpleFINSyncService {
       startDate.setDate(startDate.getDate() - Math.min(daysBack, MAX_SYNC_DAYS));
 
       // Fetch from SimpleFIN
-      const accountIds = accountsToSync.map(a => a.simplefinAccountId);
+      const accountIds = accountsToSync.map((a) => a.simplefinAccountId);
       const data = await this.client.getAccounts({
         startDate,
         accountIds,
@@ -327,12 +321,12 @@ export class SimpleFINSyncService {
       // Process each account
       for (let i = 0; i < data.accounts.length; i++) {
         const account = data.accounts[i];
-        const linked = accountsToSync.find(a => a.simplefinAccountId === account.id);
+        const linked = accountsToSync.find((a) => a.simplefinAccountId === account.id);
 
         if (!linked?.localAccountId) continue;
 
         this.reportProgress({
-          stage: 'processing',
+          stage: "processing",
           accountIndex: i + 1,
           totalAccounts: data.accounts.length,
           currentAccount: account.name,
@@ -351,7 +345,7 @@ export class SimpleFINSyncService {
           totalImported += result.transactionsImported;
           totalSkipped += result.transactionsSkipped;
         } catch (error) {
-          const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+          const errorMessage = error instanceof Error ? error.message : "Unknown error";
           results.push({
             accountId: account.id,
             accountName: account.name,
@@ -359,7 +353,7 @@ export class SimpleFINSyncService {
             transactionsImported: 0,
             transactionsSkipped: 0,
             balance: parseFloat(account.balance),
-            balanceDate: new Date(account['balance-date'] * 1000),
+            balanceDate: new Date(account["balance-date"] * 1000),
             error: errorMessage,
           });
           errors.push(`${account.name}: ${errorMessage}`);
@@ -367,7 +361,7 @@ export class SimpleFINSyncService {
       }
 
       this.reportProgress({
-        stage: 'complete',
+        stage: "complete",
         message: `Sync complete. Imported ${totalImported} transactions.`,
       });
 
@@ -382,14 +376,15 @@ export class SimpleFINSyncService {
         durationMs: Date.now() - startTime,
       };
     } catch (error) {
-      const errorMessage = error instanceof SimpleFINError
-        ? error.message
-        : error instanceof Error
+      const errorMessage =
+        error instanceof SimpleFINError
           ? error.message
-          : 'Unknown error during sync';
+          : error instanceof Error
+            ? error.message
+            : "Unknown error during sync";
 
       this.reportProgress({
-        stage: 'error',
+        stage: "error",
         message: errorMessage,
       });
 
@@ -413,14 +408,12 @@ export class SimpleFINSyncService {
     account: SimpleFINAccount,
     localAccountId: string,
     existingTransactions: Transaction[],
-    importTransaction: (tx: Omit<Transaction, 'id'>) => Promise<Transaction>
+    importTransaction: (tx: Omit<Transaction, "id">) => Promise<Transaction>
   ): Promise<AccountSyncResult> {
     const transactions = account.transactions || [];
 
     // Map to our format
-    const mapped = transactions.map(tx =>
-      mapSimpleFINTransaction(tx, account.id)
-    );
+    const mapped = transactions.map((tx) => mapSimpleFINTransaction(tx, account.id));
 
     // Find duplicates
     const { unique, duplicates } = findDuplicates(mapped, existingTransactions);
@@ -434,7 +427,7 @@ export class SimpleFINSyncService {
         imported++;
 
         this.reportProgress({
-          stage: 'importing',
+          stage: "importing",
           currentAccount: account.name,
           transactionsProcessed: imported,
           message: `Importing transactions for ${account.name}... (${imported}/${unique.length})`,
@@ -452,7 +445,7 @@ export class SimpleFINSyncService {
       transactionsImported: imported,
       transactionsSkipped: duplicates.length,
       balance: parseFloat(account.balance),
-      balanceDate: new Date(account['balance-date'] * 1000),
+      balanceDate: new Date(account["balance-date"] * 1000),
     };
   }
 }
@@ -472,10 +465,7 @@ export class SyncScheduler {
   /**
    * Start auto-sync schedule
    */
-  start(
-    frequencyHours: number,
-    syncFunction: () => Promise<void>
-  ): void {
+  start(frequencyHours: number, syncFunction: () => Promise<void>): void {
     this.stop(); // Clear any existing schedule
 
     const intervalMs = frequencyHours * 60 * 60 * 1000;
@@ -485,7 +475,7 @@ export class SyncScheduler {
         await syncFunction();
         this.lastSyncTime = new Date();
       } catch (error) {
-        console.error('Auto-sync failed:', error);
+        console.error("Auto-sync failed:", error);
       }
     }, intervalMs);
 

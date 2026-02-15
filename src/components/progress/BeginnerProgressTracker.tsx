@@ -126,7 +126,7 @@ const getConfidenceLevelConfig = (level: string) => {
     case "growing":
       return {
         color: "text-[#22c55e]",
-        bgColor: "bg-green-900/20", 
+        bgColor: "bg-green-900/20",
         borderColor: "border-green-400",
         icon: Zap,
         message: "Growing stronger every day!",
@@ -143,7 +143,7 @@ const getConfidenceLevelConfig = (level: string) => {
       return {
         color: "text-orange-400",
         bgColor: "bg-orange-900/20",
-        borderColor: "border-orange-400", 
+        borderColor: "border-orange-400",
         icon: Award,
         message: "Expert level achieved!",
       };
@@ -170,7 +170,7 @@ const getPhaseConfig = (phase: string) => {
       };
     case "fundamentals":
       return {
-        title: "Phase 1: Fundamentals", 
+        title: "Phase 1: Fundamentals",
         description: "Learning Tanium core concepts",
         color: "text-primary",
         bgColor: "bg-blue-900/20",
@@ -181,7 +181,7 @@ const getPhaseConfig = (phase: string) => {
         title: "Phase 2: Questions",
         description: "Mastering query techniques",
         color: "text-[#22c55e]",
-        bgColor: "bg-green-900/20", 
+        bgColor: "bg-green-900/20",
         icon: Target,
       };
     case "mastery":
@@ -203,7 +203,7 @@ const getPhaseConfig = (phase: string) => {
   }
 };
 
-export function BeginnerProgressTracker({ 
+export function BeginnerProgressTracker({
   className,
   showCelebration = true,
   compactView = false,
@@ -227,11 +227,15 @@ export function BeginnerProgressTracker({
                   {mockProgressData.overallProgress}% Complete
                 </div>
                 <div className="text-xs text-muted-foreground">
-                  {mockProgressData.completedMilestones}/{mockProgressData.totalMilestones} milestones
+                  {mockProgressData.completedMilestones}/{mockProgressData.totalMilestones}{" "}
+                  milestones
                 </div>
               </div>
             </div>
-            <Badge variant="outline" className={cn("text-xs", confidenceConfig.color, confidenceConfig.borderColor)}>
+            <Badge
+              variant="outline"
+              className={cn("text-xs", confidenceConfig.color, confidenceConfig.borderColor)}
+            >
               {mockProgressData.confidenceLevel}
             </Badge>
           </div>
@@ -254,28 +258,30 @@ export function BeginnerProgressTracker({
         <CardContent className="space-y-6">
           {/* Current Phase */}
           <div className={cn("rounded-lg border p-4", phaseConfig.bgColor, "border-white/10")}>
-            <div className="flex items-center gap-3 mb-3">
+            <div className="mb-3 flex items-center gap-3">
               <PhaseIcon className={cn("h-6 w-6", phaseConfig.color)} />
               <div>
                 <h3 className="text-lg font-semibold text-foreground">{phaseConfig.title}</h3>
                 <p className="text-sm text-muted-foreground">{phaseConfig.description}</p>
               </div>
             </div>
-            
+
             {/* Progress Bar */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Overall Progress</span>
-                <span className="text-sm font-medium text-foreground">{mockProgressData.overallProgress}%</span>
+                <span className="text-sm font-medium text-foreground">
+                  {mockProgressData.overallProgress}%
+                </span>
               </div>
               <Progress value={mockProgressData.overallProgress} className="h-3" />
             </div>
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             <div className="text-center">
-              <div className="text-2xl font-bold text-tanium-accent">
+              <div className="text-tanium-accent text-2xl font-bold">
                 {mockProgressData.completedMilestones}
               </div>
               <div className="text-xs text-muted-foreground">Milestones</div>
@@ -302,22 +308,24 @@ export function BeginnerProgressTracker({
 
           {/* Encouragement Message */}
           {showCelebration && (
-            <div className="rounded-lg bg-gradient-to-r from-cyan-900/30 to-blue-900/30 border border-cyan-400/20 p-4">
+            <div className="rounded-lg border border-cyan-400/20 bg-gradient-to-r from-cyan-900/30 to-blue-900/30 p-4">
               <div className="flex items-start gap-3">
-                <Sparkles className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
                 <div>
-                  <p className="text-sm text-cyan-200 font-medium mb-1">Keep Going!</p>
-                  <p className="text-sm text-muted-foreground">{mockProgressData.encouragementMessage}</p>
+                  <p className="mb-1 text-sm font-medium text-cyan-200">Keep Going!</p>
+                  <p className="text-sm text-muted-foreground">
+                    {mockProgressData.encouragementMessage}
+                  </p>
                 </div>
               </div>
             </div>
           )}
 
           {/* Next Goal */}
-          <div className="flex items-start gap-3 rounded-lg bg-blue-900/20 border border-blue-400/20 p-4">
-            <Target className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+          <div className="flex items-start gap-3 rounded-lg border border-blue-400/20 bg-blue-900/20 p-4">
+            <Target className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-1">Next Goal:</p>
+              <p className="mb-1 text-sm font-medium text-muted-foreground">Next Goal:</p>
               <p className="text-sm text-muted-foreground">{mockProgressData.nextGoal}</p>
             </div>
           </div>
@@ -342,44 +350,53 @@ export function BeginnerProgressTracker({
                   className={cn(
                     "flex items-start gap-4 rounded-lg border p-4 transition-all",
                     milestone.isCompleted
-                      ? "bg-green-900/20 border-green-400/20"
-                      : "bg-gray-900/20 border-gray-400/20"
+                      ? "border-green-400/20 bg-green-900/20"
+                      : "border-gray-400/20 bg-gray-900/20"
                   )}
                 >
-                  <div className={cn(
-                    "rounded-full p-2 shrink-0",
-                    milestone.isCompleted ? "bg-green-900/30" : "bg-gray-900/30"
-                  )}>
+                  <div
+                    className={cn(
+                      "shrink-0 rounded-full p-2",
+                      milestone.isCompleted ? "bg-green-900/30" : "bg-gray-900/30"
+                    )}
+                  >
                     {milestone.isCompleted ? (
                       <CheckCircle className="h-5 w-5 text-[#22c55e]" />
                     ) : (
                       <MilestoneIcon className="h-5 w-5 text-muted-foreground" />
                     )}
                   </div>
-                  
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className={cn(
-                        "font-medium",
-                        milestone.isCompleted ? "text-green-200" : "text-muted-foreground"
-                      )}>
+
+                  <div className="min-w-0 flex-1">
+                    <div className="mb-1 flex items-center gap-2">
+                      <h4
+                        className={cn(
+                          "font-medium",
+                          milestone.isCompleted ? "text-green-200" : "text-muted-foreground"
+                        )}
+                      >
                         {milestone.title}
                       </h4>
                       {milestone.isCompleted && (
-                        <Badge variant="outline" className="text-xs text-[#22c55e] border-green-400/20">
+                        <Badge
+                          variant="outline"
+                          className="border-green-400/20 text-xs text-[#22c55e]"
+                        >
                           ✓ Complete
                         </Badge>
                       )}
                     </div>
-                    <p className="text-sm text-muted-foreground mb-2">{milestone.description}</p>
-                    <p className={cn(
-                      "text-xs font-medium",
-                      milestone.isCompleted ? "text-[#22c55e]" : "text-primary"
-                    )}>
+                    <p className="mb-2 text-sm text-muted-foreground">{milestone.description}</p>
+                    <p
+                      className={cn(
+                        "text-xs font-medium",
+                        milestone.isCompleted ? "text-[#22c55e]" : "text-primary"
+                      )}
+                    >
                       💪 {milestone.confidenceBoost}
                     </p>
                     {milestone.celebrationMessage && milestone.isCompleted && (
-                      <p className="text-xs text-[#f97316] mt-1">{milestone.celebrationMessage}</p>
+                      <p className="mt-1 text-xs text-[#f97316]">{milestone.celebrationMessage}</p>
                     )}
                   </div>
                 </div>
@@ -404,7 +421,7 @@ export function BeginnerProgressTracker({
                 <Badge
                   key={index}
                   variant="outline"
-                  className="text-xs text-[#f97316] border-yellow-400/20 bg-yellow-900/20"
+                  className="border-yellow-400/20 bg-yellow-900/20 text-xs text-[#f97316]"
                 >
                   🏆 {achievement}
                 </Badge>

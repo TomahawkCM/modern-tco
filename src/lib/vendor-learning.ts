@@ -7,9 +7,9 @@
  * Storage: localStorage (client-side only, no sync)
  */
 
-import { extractVendorName } from '@/lib/vendor-matcher';
+import { extractVendorName } from "@/lib/vendor-matcher";
 
-const STORAGE_KEY = 'budget-app-vendor-categories';
+const STORAGE_KEY = "budget-app-vendor-categories";
 
 export interface VendorCategory {
   category: string;
@@ -21,7 +21,7 @@ export interface VendorCategory {
 type VendorCategoryMap = Record<string, VendorCategory>;
 
 function loadVendorMap(): VendorCategoryMap {
-  if (typeof window === 'undefined') return {};
+  if (typeof window === "undefined") return {};
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return {};
@@ -32,7 +32,7 @@ function loadVendorMap(): VendorCategoryMap {
 }
 
 function saveVendorMap(map: VendorCategoryMap): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(map));
   } catch {
@@ -51,12 +51,12 @@ export function learnVendorCategory(
   category: string,
   subcategory: string | null
 ): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   const vendor = extractVendorName(description).trim();
   if (!vendor || vendor.length < 5) return;
 
-  const genericVendors = ['ONLINE PURCHASE', 'PURCHASE', 'PAYMENT', 'TRANSFER'];
+  const genericVendors = ["ONLINE PURCHASE", "PURCHASE", "PAYMENT", "TRANSFER"];
   if (genericVendors.includes(vendor.toUpperCase())) return;
 
   const map = loadVendorMap();
@@ -76,7 +76,7 @@ export function learnVendorCategory(
  * Get a learned category for the given description, if any.
  */
 export function getVendorLearnedCategory(description: string): VendorCategory | null {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === "undefined") return null;
 
   const vendor = extractVendorName(description).trim();
   if (!vendor) return null;
@@ -84,4 +84,3 @@ export function getVendorLearnedCategory(description: string): VendorCategory | 
   const map = loadVendorMap();
   return map[vendor] ?? null;
 }
-

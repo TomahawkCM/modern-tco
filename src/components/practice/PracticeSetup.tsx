@@ -30,7 +30,11 @@ interface PracticeSetupProps {
  *
  * Configure and start a practice session
  */
-export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: initialConcept }: PracticeSetupProps) {
+export function PracticeSetup({
+  onStart,
+  moduleId: initialModuleId,
+  concept: initialConcept,
+}: PracticeSetupProps) {
   const [mode, setMode] = useState<"concept" | "module" | "random" | "missed">("random");
   const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard" | "mixed">("mixed");
   const [questionCount, setQuestionCount] = useState(10);
@@ -96,13 +100,11 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
                     : "border-gray-700 hover:border-gray-600"
                 }`}
               >
-                <div className="flex items-center gap-2 mb-2">
+                <div className="mb-2 flex items-center gap-2">
                   <Shuffle className="h-5 w-5 text-accent-foreground" />
                   <span className="font-semibold">Random</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Mix of questions from all topics
-                </p>
+                <p className="text-sm text-muted-foreground">Mix of questions from all topics</p>
               </button>
 
               <button
@@ -113,13 +115,11 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
                     : "border-gray-700 hover:border-gray-600"
                 }`}
               >
-                <div className="flex items-center gap-2 mb-2">
+                <div className="mb-2 flex items-center gap-2">
                   <Target className="h-5 w-5 text-primary" />
                   <span className="font-semibold">Specific Concept</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Focus on one concept
-                </p>
+                <p className="text-sm text-muted-foreground">Focus on one concept</p>
               </button>
 
               <button
@@ -130,13 +130,11 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
                     : "border-gray-700 hover:border-gray-600"
                 }`}
               >
-                <div className="flex items-center gap-2 mb-2">
+                <div className="mb-2 flex items-center gap-2">
                   <Book className="h-5 w-5 text-[#22c55e]" />
                   <span className="font-semibold">Module</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Practice entire module
-                </p>
+                <p className="text-sm text-muted-foreground">Practice entire module</p>
               </button>
 
               <button
@@ -147,13 +145,11 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
                     : "border-gray-700 hover:border-gray-600"
                 }`}
               >
-                <div className="flex items-center gap-2 mb-2">
+                <div className="mb-2 flex items-center gap-2">
                   <AlertCircle className="h-5 w-5 text-orange-400" />
                   <span className="font-semibold">Missed Questions</span>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  Review incorrect answers
-                </p>
+                <p className="text-sm text-muted-foreground">Review incorrect answers</p>
               </button>
             </div>
           </div>
@@ -206,25 +202,33 @@ export function PracticeSetup({ onStart, moduleId: initialModuleId, concept: ini
                 <SelectItem value="easy">
                   <span className="flex items-center gap-2">
                     Easy
-                    <Badge variant="outline" className="text-xs">Beginner</Badge>
+                    <Badge variant="outline" className="text-xs">
+                      Beginner
+                    </Badge>
                   </span>
                 </SelectItem>
                 <SelectItem value="medium">
                   <span className="flex items-center gap-2">
                     Medium
-                    <Badge variant="outline" className="text-xs">Intermediate</Badge>
+                    <Badge variant="outline" className="text-xs">
+                      Intermediate
+                    </Badge>
                   </span>
                 </SelectItem>
                 <SelectItem value="hard">
                   <span className="flex items-center gap-2">
                     Hard
-                    <Badge variant="outline" className="text-xs">Advanced</Badge>
+                    <Badge variant="outline" className="text-xs">
+                      Advanced
+                    </Badge>
                   </span>
                 </SelectItem>
                 <SelectItem value="mixed">
                   <span className="flex items-center gap-2">
                     Mixed
-                    <Badge variant="outline" className="text-xs">All Levels</Badge>
+                    <Badge variant="outline" className="text-xs">
+                      All Levels
+                    </Badge>
                   </span>
                 </SelectItem>
               </SelectContent>

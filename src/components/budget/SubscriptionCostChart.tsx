@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Subscription Cost Analysis Component
@@ -10,10 +10,10 @@
  * - Upcoming charges timeline
  */
 
-import { useMemo, lazy, Suspense } from 'react';
-import { useTranslations } from 'next-intl';
-import type { Subscription } from '@/types/budget';
-import type { SubscriptionPattern } from '@/lib/subscription-detector';
+import { useMemo, lazy, Suspense } from "react";
+import { useTranslations } from "next-intl";
+import type { Subscription } from "@/types/budget";
+import type { SubscriptionPattern } from "@/lib/subscription-detector";
 import {
   DollarSign,
   TrendingUp,
@@ -23,8 +23,8 @@ import {
   Calendar,
   PieChart,
   BarChart2,
-} from 'lucide-react';
-import { format, differenceInDays, addDays } from 'date-fns';
+} from "lucide-react";
+import { format, differenceInDays, addDays } from "date-fns";
 
 interface SubscriptionCostChartProps {
   manualSubscriptions: Subscription[];
@@ -40,7 +40,7 @@ interface CategoryCost {
 }
 
 interface SavingSuggestion {
-  type: 'inactive' | 'duplicate' | 'high-cost' | 'unused-trial';
+  type: "inactive" | "duplicate" | "high-cost" | "unused-trial";
   title: string;
   description: string;
   potentialSavings: number;
@@ -49,23 +49,23 @@ interface SavingSuggestion {
 
 // Color palette for categories
 const CATEGORY_COLORS = [
-  '#14b8a6', // teal
-  '#3b82f6', // blue
-  '#8b5cf6', // purple
-  '#f97316', // orange
-  '#ef4444', // red
-  '#22c55e', // green
-  '#eab308', // yellow
-  '#ec4899', // pink
-  '#06b6d4', // cyan
-  '#6366f1', // indigo
+  "#14b8a6", // teal
+  "#3b82f6", // blue
+  "#8b5cf6", // purple
+  "#f97316", // orange
+  "#ef4444", // red
+  "#22c55e", // green
+  "#eab308", // yellow
+  "#ec4899", // pink
+  "#06b6d4", // cyan
+  "#6366f1", // indigo
 ];
 
 function ChartLoadingSkeleton() {
-  const t = useTranslations('subscriptionCostChart');
+  const t = useTranslations("subscriptionCostChart");
   return (
-    <div className="w-full h-64 bg-muted/50 rounded-lg animate-pulse flex items-center justify-center">
-      <span className="text-muted-foreground text-sm">{t('loadingChart')}</span>
+    <div className="flex h-64 w-full animate-pulse items-center justify-center rounded-lg bg-muted/50">
+      <span className="text-sm text-muted-foreground">{t("loadingChart")}</span>
     </div>
   );
 }
@@ -74,7 +74,7 @@ export function SubscriptionCostChart({
   manualSubscriptions,
   autoDetectedPatterns,
 }: SubscriptionCostChartProps) {
-  const t = useTranslations('subscriptionCostChart');
+  const t = useTranslations("subscriptionCostChart");
 
   // Calculate costs by category
   const categoryBreakdown = useMemo((): CategoryCost[] => {
@@ -82,17 +82,25 @@ export function SubscriptionCostChart({
 
     // Process manual subscriptions
     for (const sub of manualSubscriptions) {
-      if (sub.status !== 'active' && sub.status !== 'trial') continue;
+      if (sub.status !== "active" && sub.status !== "trial") continue;
 
-      const cat = sub.category || 'Uncategorized';
+      const cat = sub.category || "Uncategorized";
       const current = categoryMap.get(cat) || { monthly: 0, count: 0 };
 
       let monthlyCost = sub.amount;
       switch (sub.billingCycle) {
-        case 'weekly': monthlyCost = sub.amount * 4.33; break;
-        case 'bi-weekly': monthlyCost = sub.amount * 2.17; break;
-        case 'quarterly': monthlyCost = sub.amount / 3; break;
-        case 'annual': monthlyCost = sub.amount / 12; break;
+        case "weekly":
+          monthlyCost = sub.amount * 4.33;
+          break;
+        case "bi-weekly":
+          monthlyCost = sub.amount * 2.17;
+          break;
+        case "quarterly":
+          monthlyCost = sub.amount / 3;
+          break;
+        case "annual":
+          monthlyCost = sub.amount / 12;
+          break;
       }
 
       categoryMap.set(cat, {
@@ -103,20 +111,24 @@ export function SubscriptionCostChart({
 
     // Process auto-detected patterns (excluding those merged with manual)
     const manualTokens = new Set(
-      manualSubscriptions.filter(s => s.merchantToken).map(s => s.merchantToken?.toLowerCase())
+      manualSubscriptions.filter((s) => s.merchantToken).map((s) => s.merchantToken?.toLowerCase())
     );
 
     for (const pattern of autoDetectedPatterns) {
       if (!pattern.is_active) continue;
       if (manualTokens.has(pattern.merchant_token.toLowerCase())) continue;
 
-      const cat = pattern.category || 'Uncategorized';
+      const cat = pattern.category || "Uncategorized";
       const current = categoryMap.get(cat) || { monthly: 0, count: 0 };
 
       let monthlyCost = pattern.average_amount;
       switch (pattern.interval_type) {
-        case 'weekly': monthlyCost = pattern.average_amount * 4.33; break;
-        case 'annual': monthlyCost = pattern.average_amount / 12; break;
+        case "weekly":
+          monthlyCost = pattern.average_amount * 4.33;
+          break;
+        case "annual":
+          monthlyCost = pattern.average_amount / 12;
+          break;
       }
 
       categoryMap.set(cat, {
@@ -152,29 +164,32 @@ export function SubscriptionCostChart({
     const suggestions: SavingSuggestion[] = [];
 
     // Check for inactive/cancelled subscriptions that might still be charging
-    const inactivePatterns = autoDetectedPatterns.filter(p => !p.is_active);
+    const inactivePatterns = autoDetectedPatterns.filter((p) => !p.is_active);
     if (inactivePatterns.length > 0) {
       const totalInactive = inactivePatterns.reduce((sum, p) => {
-        const monthly = p.interval_type === 'weekly' ? p.average_amount * 4.33 :
-                       p.interval_type === 'annual' ? p.average_amount / 12 :
-                       p.average_amount;
+        const monthly =
+          p.interval_type === "weekly"
+            ? p.average_amount * 4.33
+            : p.interval_type === "annual"
+              ? p.average_amount / 12
+              : p.average_amount;
         return sum + monthly;
       }, 0);
 
       if (totalInactive > 0) {
         suggestions.push({
-          type: 'inactive',
-          title: 'Potentially cancelled subscriptions',
+          type: "inactive",
+          title: "Potentially cancelled subscriptions",
           description: `${inactivePatterns.length} subscription(s) haven't charged recently. Verify they're actually cancelled.`,
           potentialSavings: totalInactive,
-          subscriptionIds: inactivePatterns.map(p => p.id),
+          subscriptionIds: inactivePatterns.map((p) => p.id),
         });
       }
     }
 
     // Check for trials ending soon
-    const trialsSoon = manualSubscriptions.filter(s => {
-      if (s.status !== 'trial' || !s.trialEndDate) return false;
+    const trialsSoon = manualSubscriptions.filter((s) => {
+      if (s.status !== "trial" || !s.trialEndDate) return false;
       const daysLeft = differenceInDays(new Date(s.trialEndDate), new Date());
       return daysLeft >= 0 && daysLeft <= 7;
     });
@@ -182,31 +197,37 @@ export function SubscriptionCostChart({
     if (trialsSoon.length > 0) {
       const trialTotal = trialsSoon.reduce((sum, s) => sum + s.amount, 0);
       suggestions.push({
-        type: 'unused-trial',
-        title: 'Trials ending soon',
+        type: "unused-trial",
+        title: "Trials ending soon",
         description: `${trialsSoon.length} trial(s) ending in the next 7 days. Cancel if you're not using them.`,
         potentialSavings: trialTotal,
-        subscriptionIds: trialsSoon.map(s => s.id),
+        subscriptionIds: trialsSoon.map((s) => s.id),
       });
     }
 
     // Check for high-cost subscriptions (> 25% of total)
     const highCostThreshold = totals.monthly * 0.25;
-    const highCost = [...manualSubscriptions, ...autoDetectedPatterns.filter(p => p.is_active)]
-      .filter(sub => {
-        const amount = 'billingCycle' in sub ? sub.amount :
-                      sub.interval_type === 'annual' ? sub.average_amount / 12 :
-                      sub.average_amount;
-        return amount > highCostThreshold && amount > 50;
-      });
+    const highCost = [
+      ...manualSubscriptions,
+      ...autoDetectedPatterns.filter((p) => p.is_active),
+    ].filter((sub) => {
+      const amount =
+        "billingCycle" in sub
+          ? sub.amount
+          : sub.interval_type === "annual"
+            ? sub.average_amount / 12
+            : sub.average_amount;
+      return amount > highCostThreshold && amount > 50;
+    });
 
     if (highCost.length > 0) {
       suggestions.push({
-        type: 'high-cost',
-        title: 'High-cost subscriptions',
-        description: 'These subscriptions represent a large portion of your spending. Consider if you\'re getting full value.',
+        type: "high-cost",
+        title: "High-cost subscriptions",
+        description:
+          "These subscriptions represent a large portion of your spending. Consider if you're getting full value.",
         potentialSavings: 0,
-        subscriptionIds: highCost.map(s => s.id),
+        subscriptionIds: highCost.map((s) => s.id),
       });
     }
 
@@ -220,7 +241,7 @@ export function SubscriptionCostChart({
     const thirtyDaysOut = addDays(now, 30);
 
     for (const sub of manualSubscriptions) {
-      if (sub.status !== 'active' && sub.status !== 'trial') continue;
+      if (sub.status !== "active" && sub.status !== "trial") continue;
       const nextDate = new Date(sub.nextBillingDate);
       if (nextDate >= now && nextDate <= thirtyDaysOut) {
         charges.push({
@@ -237,7 +258,7 @@ export function SubscriptionCostChart({
       if (nextDate >= now && nextDate <= thirtyDaysOut) {
         // Skip if already covered by manual subscription
         const hasMerged = manualSubscriptions.some(
-          s => s.merchantToken?.toLowerCase() === pattern.merchant_token.toLowerCase()
+          (s) => s.merchantToken?.toLowerCase() === pattern.merchant_token.toLowerCase()
         );
         if (!hasMerged) {
           charges.push({
@@ -253,7 +274,7 @@ export function SubscriptionCostChart({
   }, [manualSubscriptions, autoDetectedPatterns]);
 
   // Data for pie chart
-  const pieData = categoryBreakdown.map(cat => ({
+  const pieData = categoryBreakdown.map((cat) => ({
     name: cat.name,
     value: cat.monthly,
     color: cat.color,
@@ -262,60 +283,54 @@ export function SubscriptionCostChart({
   return (
     <div className="space-y-6">
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-card border border-border rounded-lg p-5">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-medium text-muted-foreground">{t('summary.monthlyCost')}</h3>
-            <DollarSign className="w-5 h-5 text-green-500" />
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="rounded-lg border border-border bg-card p-5">
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-sm font-medium text-muted-foreground">
+              {t("summary.monthlyCost")}
+            </h3>
+            <DollarSign className="h-5 w-5 text-green-500" />
           </div>
-          <p className="text-2xl font-bold text-foreground">
-            ${totals.monthly.toFixed(2)}
-          </p>
-          <p className="text-xs text-muted-foreground mt-1">
-            {t('summary.activeSubscriptions', { count: totals.count })}
+          <p className="text-2xl font-bold text-foreground">${totals.monthly.toFixed(2)}</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            {t("summary.activeSubscriptions", { count: totals.count })}
           </p>
         </div>
 
-        <div className="bg-card border border-border rounded-lg p-5">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-medium text-muted-foreground">{t('summary.annualCost')}</h3>
-            <TrendingUp className="w-5 h-5 text-blue-500" />
+        <div className="rounded-lg border border-border bg-card p-5">
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-sm font-medium text-muted-foreground">{t("summary.annualCost")}</h3>
+            <TrendingUp className="h-5 w-5 text-blue-500" />
           </div>
-          <p className="text-2xl font-bold text-foreground">
-            ${totals.annual.toFixed(2)}
-          </p>
-          <p className="text-xs text-muted-foreground mt-1">
-            {t('summary.projectedYearly')}
-          </p>
+          <p className="text-2xl font-bold text-foreground">${totals.annual.toFixed(2)}</p>
+          <p className="mt-1 text-xs text-muted-foreground">{t("summary.projectedYearly")}</p>
         </div>
 
-        <div className="bg-card border border-border rounded-lg p-5">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-medium text-muted-foreground">{t('summary.next30Days')}</h3>
-            <Calendar className="w-5 h-5 text-purple-500" />
+        <div className="rounded-lg border border-border bg-card p-5">
+          <div className="mb-2 flex items-center justify-between">
+            <h3 className="text-sm font-medium text-muted-foreground">{t("summary.next30Days")}</h3>
+            <Calendar className="h-5 w-5 text-purple-500" />
           </div>
           <p className="text-2xl font-bold text-foreground">
             ${upcomingCharges.reduce((sum, c) => sum + c.amount, 0).toFixed(2)}
           </p>
-          <p className="text-xs text-muted-foreground mt-1">
-            {t('summary.upcomingCharges', { count: upcomingCharges.length })}
+          <p className="mt-1 text-xs text-muted-foreground">
+            {t("summary.upcomingCharges", { count: upcomingCharges.length })}
           </p>
         </div>
       </div>
 
       {/* Cost by Category */}
-      <div className="bg-card border border-border rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-          <PieChart className="w-5 h-5 text-teal-500" />
-          {t('sections.costByCategory')}
+      <div className="rounded-lg border border-border bg-card p-6">
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+          <PieChart className="h-5 w-5 text-teal-500" />
+          {t("sections.costByCategory")}
         </h3>
 
         {categoryBreakdown.length === 0 ? (
-          <p className="text-muted-foreground text-center py-8">
-            {t('emptyState')}
-          </p>
+          <p className="py-8 text-center text-muted-foreground">{t("emptyState")}</p>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {/* Pie Chart */}
             <div className="h-64">
               <Suspense fallback={<ChartLoadingSkeleton />}>
@@ -328,24 +343,15 @@ export function SubscriptionCostChart({
               {categoryBreakdown.map((cat) => (
                 <div key={cat.name} className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div
-                      className="w-3 h-3 rounded-full"
-                      style={{ backgroundColor: cat.color }}
-                    />
-                    <span className="text-sm font-medium text-foreground">
-                      {cat.name}
-                    </span>
-                    <span className="text-xs text-muted-foreground">
-                      ({cat.count})
-                    </span>
+                    <div className="h-3 w-3 rounded-full" style={{ backgroundColor: cat.color }} />
+                    <span className="text-sm font-medium text-foreground">{cat.name}</span>
+                    <span className="text-xs text-muted-foreground">({cat.count})</span>
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-semibold text-foreground">
                       ${cat.monthly.toFixed(2)}/mo
                     </p>
-                    <p className="text-xs text-muted-foreground">
-                      ${cat.annual.toFixed(2)}/yr
-                    </p>
+                    <p className="text-xs text-muted-foreground">${cat.annual.toFixed(2)}/yr</p>
                   </div>
                 </div>
               ))}
@@ -356,42 +362,46 @@ export function SubscriptionCostChart({
 
       {/* Savings Suggestions */}
       {suggestions.length > 0 && (
-        <div className="bg-card border border-border rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-            <Lightbulb className="w-5 h-5 text-yellow-500" />
-            {t('sections.potentialSavings')}
+        <div className="rounded-lg border border-border bg-card p-6">
+          <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+            <Lightbulb className="h-5 w-5 text-yellow-500" />
+            {t("sections.potentialSavings")}
           </h3>
 
           <div className="space-y-4">
             {suggestions.map((suggestion, index) => (
               <div
                 key={index}
-                className={`p-4 rounded-lg border ${
-                  suggestion.type === 'inactive'
-                    ? 'bg-yellow-50 dark:bg-yellow-950 border-yellow-200 dark:border-yellow-800'
-                    : suggestion.type === 'unused-trial'
-                    ? 'bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800'
-                    : 'bg-orange-50 dark:bg-orange-950 border-orange-200 dark:border-orange-800'
+                className={`rounded-lg border p-4 ${
+                  suggestion.type === "inactive"
+                    ? "border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-950"
+                    : suggestion.type === "unused-trial"
+                      ? "border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950"
+                      : "border-orange-200 bg-orange-50 dark:border-orange-800 dark:bg-orange-950"
                 }`}
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <h4 className="font-medium text-foreground flex items-center gap-2">
-                      {suggestion.type === 'inactive' && <AlertTriangle className="w-4 h-4 text-yellow-600" />}
-                      {suggestion.type === 'unused-trial' && <Calendar className="w-4 h-4 text-blue-600" />}
-                      {suggestion.type === 'high-cost' && <TrendingDown className="w-4 h-4 text-orange-600" />}
+                    <h4 className="flex items-center gap-2 font-medium text-foreground">
+                      {suggestion.type === "inactive" && (
+                        <AlertTriangle className="h-4 w-4 text-yellow-600" />
+                      )}
+                      {suggestion.type === "unused-trial" && (
+                        <Calendar className="h-4 w-4 text-blue-600" />
+                      )}
+                      {suggestion.type === "high-cost" && (
+                        <TrendingDown className="h-4 w-4 text-orange-600" />
+                      )}
                       {suggestion.title}
                     </h4>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      {suggestion.description}
-                    </p>
+                    <p className="mt-1 text-sm text-muted-foreground">{suggestion.description}</p>
                   </div>
                   {suggestion.potentialSavings > 0 && (
                     <div className="text-right">
                       <p className="text-lg font-bold text-green-600">
                         ${suggestion.potentialSavings.toFixed(2)}
                       </p>
-                      <p className="text-xs text-muted-foreground">{t('perMonth')}</p>
+                      <p className="text-xs text-muted-foreground">{t("perMonth")}</p>
                     </div>
                   )}
                 </div>
@@ -403,10 +413,10 @@ export function SubscriptionCostChart({
 
       {/* Upcoming Charges Timeline */}
       {upcomingCharges.length > 0 && (
-        <div className="bg-card border border-border rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-            <BarChart2 className="w-5 h-5 text-purple-500" />
-            {t('sections.upcomingCharges')}
+        <div className="rounded-lg border border-border bg-card p-6">
+          <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+            <BarChart2 className="h-5 w-5 text-purple-500" />
+            {t("sections.upcomingCharges")}
           </h3>
 
           <div className="space-y-3">
@@ -415,35 +425,35 @@ export function SubscriptionCostChart({
               return (
                 <div
                   key={index}
-                  className="flex items-center justify-between p-3 bg-muted/50 rounded-lg"
+                  className="flex items-center justify-between rounded-lg bg-muted/50 p-3"
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                      daysUntil <= 3
-                        ? 'bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400'
-                        : daysUntil <= 7
-                        ? 'bg-yellow-100 dark:bg-yellow-900 text-yellow-600 dark:text-yellow-400'
-                        : 'bg-muted text-muted-foreground'
-                    }`}>
+                    <div
+                      className={`flex h-10 w-10 items-center justify-center rounded-lg ${
+                        daysUntil <= 3
+                          ? "bg-red-100 text-red-600 dark:bg-red-900 dark:text-red-400"
+                          : daysUntil <= 7
+                            ? "bg-yellow-100 text-yellow-600 dark:bg-yellow-900 dark:text-yellow-400"
+                            : "bg-muted text-muted-foreground"
+                      }`}
+                    >
                       <span className="text-sm font-bold">{daysUntil}</span>
                     </div>
                     <div>
                       <p className="font-medium text-foreground">{charge.name}</p>
                       <p className="text-xs text-muted-foreground">
-                        {format(charge.date, 'MMM d, yyyy')}
+                        {format(charge.date, "MMM d, yyyy")}
                       </p>
                     </div>
                   </div>
-                  <p className="font-semibold text-foreground">
-                    ${charge.amount.toFixed(2)}
-                  </p>
+                  <p className="font-semibold text-foreground">${charge.amount.toFixed(2)}</p>
                 </div>
               );
             })}
 
             {upcomingCharges.length > 10 && (
-              <p className="text-sm text-muted-foreground text-center pt-2">
-                {t('moreCharges', { count: upcomingCharges.length - 10 })}
+              <p className="pt-2 text-center text-sm text-muted-foreground">
+                {t("moreCharges", { count: upcomingCharges.length - 10 })}
               </p>
             )}
           </div>
@@ -463,9 +473,9 @@ function PieChartComponent({ data }: { data: { name: string; value: number; colo
 }
 
 const LazyPieChart = lazy(() =>
-  import('recharts').then((mod) => {
+  import("recharts").then((mod) => {
     const { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } = mod;
-    
+
     const Chart = ({ data }: { data: { name: string; value: number; color: string }[] }) => (
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
@@ -483,18 +493,17 @@ const LazyPieChart = lazy(() =>
             ))}
           </Pie>
           <Tooltip
-            formatter={(value: number) => [`$${value.toFixed(2)}/mo`, 'Cost']}
+            formatter={(value: number) => [`$${value.toFixed(2)}/mo`, "Cost"]}
             contentStyle={{
-              backgroundColor: 'hsl(var(--card))',
-              border: '1px solid hsl(var(--border))',
-              borderRadius: '8px',
+              backgroundColor: "hsl(var(--card))",
+              border: "1px solid hsl(var(--border))",
+              borderRadius: "8px",
             }}
           />
         </PieChart>
       </ResponsiveContainer>
     );
-    
+
     return { default: Chart };
   })
 );
-

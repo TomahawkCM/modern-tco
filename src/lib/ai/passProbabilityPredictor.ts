@@ -13,8 +13,8 @@
  * - Actionable recommendations
  */
 
-import { supabase } from '@/lib/supabase';
-import { gatherPerformanceData, type PerformanceData } from './adaptiveLearningPath';
+import { supabase } from "@/lib/supabase";
+import { gatherPerformanceData, type PerformanceData } from "./adaptiveLearningPath";
 
 // ==================== TYPES ====================
 
@@ -24,7 +24,7 @@ export interface PassProbability {
   predictedProbability: number; // 0-100%
   confidenceInterval: number; // +/- range
   modelVersion: string;
-  predictionMethod: 'bayesian' | 'regression' | 'neural_network' | 'ensemble' | 'rule_based';
+  predictionMethod: "bayesian" | "regression" | "neural_network" | "ensemble" | "rule_based";
   featuresUsed: any;
   domainScores: Record<string, number>; // Predicted score per domain
   strengths: {
@@ -42,7 +42,7 @@ export interface PassProbability {
   predictionForDate?: Date; // When is this prediction for
   daysUntilExam?: number;
   recommendedActions: {
-    priority: 'high' | 'medium' | 'low';
+    priority: "high" | "medium" | "low";
     action: string;
     estimatedImpact: string;
   }[];
@@ -82,11 +82,11 @@ interface PredictionFeatures {
 // ==================== CONSTANTS ====================
 
 const TCO_DOMAINS = [
-  'asking_questions',
-  'refining_questions',
-  'taking_action',
-  'navigation_basic_functions',
-  'report_generation_export',
+  "asking_questions",
+  "refining_questions",
+  "taking_action",
+  "navigation_basic_functions",
+  "report_generation_export",
 ] as const;
 
 const DOMAIN_WEIGHTS = {
@@ -98,20 +98,20 @@ const DOMAIN_WEIGHTS = {
 } as const;
 
 const DOMAIN_NAMES = {
-  asking_questions: 'Asking Questions',
-  refining_questions: 'Refining Questions',
-  taking_action: 'Taking Action',
-  navigation_basic_functions: 'Navigation & Modules',
-  report_generation_export: 'Reporting & Export',
+  asking_questions: "Asking Questions",
+  refining_questions: "Refining Questions",
+  taking_action: "Taking Action",
+  navigation_basic_functions: "Navigation & Modules",
+  report_generation_export: "Reporting & Export",
 } as const;
 
 // Model weights (derived from research and pilot data)
 const FEATURE_WEIGHTS = {
   completion: 0.25, // Module completion
   accuracy: 0.35, // Overall accuracy
-  mockExams: 0.20, // Mock exam performance
-  practice: 0.10, // Practice question performance
-  engagement: 0.10, // Study consistency
+  mockExams: 0.2, // Mock exam performance
+  practice: 0.1, // Practice question performance
+  engagement: 0.1, // Study consistency
 };
 
 // Passing threshold for TCO
@@ -124,11 +124,11 @@ async function extractFeatures(userId: string): Promise<PredictionFeatures> {
 
   // Get mock exam data
   const { data: mockExams } = await supabase
-    .from('exam_sessions')
-    .select('score')
-    .eq('user_id', userId)
-    .eq('status', 'completed')
-    .not('score', 'is', null);
+    .from("exam_sessions")
+    .select("score")
+    .eq("user_id", userId)
+    .eq("status", "completed")
+    .not("score", "is", null);
 
   const mockExamScores = mockExams?.map((e: any) => e.score || 0) || [];
   const mockExamAverage =
@@ -139,10 +139,10 @@ async function extractFeatures(userId: string): Promise<PredictionFeatures> {
 
   // Get practice question data
   const { data: practiceData } = await supabase
-    .from('user_progress')
-    .select('score, question_id')
-    .eq('user_id', userId)
-    .not('score', 'is', null);
+    .from("user_progress")
+    .select("score, question_id")
+    .eq("user_id", userId)
+    .not("score", "is", null);
 
   const practiceScores = practiceData?.map((p: any) => p.score || 0) || [];
   const practiceAccuracy =
@@ -151,47 +151,43 @@ async function extractFeatures(userId: string): Promise<PredictionFeatures> {
       : 0;
 
   // Get study streak
-  const { data: streakData } = await supabase.rpc('calculate_review_streak', {
+  const { data: streakData } = await supabase.rpc("calculate_review_streak", {
     p_user_id: userId,
   });
   const studyStreak = streakData || 0;
 
   // Get session count
   const { count: sessionCount } = await supabase
-    .from('exam_sessions')
-    .select('*', { count: 'exact', head: true })
-    .eq('user_id', userId);
+    .from("exam_sessions")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", userId);
 
   // Get student goals for target score and exam date
   const { data: goalData } = await supabase
-    .from('student_goals')
-    .select('target_pass_score, target_exam_date')
-    .eq('user_id', userId)
-    .order('created_at', { ascending: false })
+    .from("student_goals")
+    .select("target_pass_score, target_exam_date")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
     .limit(1)
     .single();
 
   const daysUntilExam = goalData?.target_exam_date
     ? Math.ceil(
-        (new Date(goalData.target_exam_date).getTime() - Date.now()) /
-          (1000 * 60 * 60 * 24)
+        (new Date(goalData.target_exam_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
       )
     : undefined;
 
   // Calculate days of preparation
   const { data: firstSession } = await supabase
-    .from('exam_sessions')
-    .select('created_at')
-    .eq('user_id', userId)
-    .order('created_at', { ascending: true })
+    .from("exam_sessions")
+    .select("created_at")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: true })
     .limit(1)
     .single();
 
   const daysOfPreparation = firstSession
-    ? Math.ceil(
-        (Date.now() - new Date(firstSession.created_at).getTime()) /
-          (1000 * 60 * 60 * 24)
-      )
+    ? Math.ceil((Date.now() - new Date(firstSession.created_at).getTime()) / (1000 * 60 * 60 * 24))
     : 0;
 
   return {
@@ -223,7 +219,7 @@ async function extractFeatures(userId: string): Promise<PredictionFeatures> {
  */
 function predictBayesian(features: PredictionFeatures): number {
   // Prior probability (baseline pass rate: ~70% for prepared students)
-  const prior = 0.70;
+  const prior = 0.7;
 
   // Likelihood factors
   const completionLikelihood = features.completionPercentage / 100;
@@ -318,15 +314,13 @@ function predictEnsemble(features: PredictionFeatures): {
   const ruleBased = predictRuleBased(features);
 
   // Weighted average (more weight on Bayesian and regression)
-  const probability =
-    bayesian * 0.4 + regression * 0.4 + ruleBased * 0.2;
+  const probability = bayesian * 0.4 + regression * 0.4 + ruleBased * 0.2;
 
   // Confidence based on model agreement
   const predictions = [bayesian, regression, ruleBased];
   const mean = predictions.reduce((a, b) => a + b, 0) / predictions.length;
   const variance =
-    predictions.reduce((sum, p) => sum + Math.pow(p - mean, 2), 0) /
-    predictions.length;
+    predictions.reduce((sum, p) => sum + Math.pow(p - mean, 2), 0) / predictions.length;
   const stdDev = Math.sqrt(variance);
 
   // Lower variance = higher confidence
@@ -362,15 +356,13 @@ function predictDomainScores(
 
 // ==================== STRENGTHS & WEAKNESSES ====================
 
-function identifyStrengthsWeaknesses(
-  domainScores: Record<string, number>
-): {
-  strengths: PassProbability['strengths'];
-  weaknesses: PassProbability['weaknesses'];
+function identifyStrengthsWeaknesses(domainScores: Record<string, number>): {
+  strengths: PassProbability["strengths"];
+  weaknesses: PassProbability["weaknesses"];
   riskFactors: string[];
 } {
-  const strengths: PassProbability['strengths'] = [];
-  const weaknesses: PassProbability['weaknesses'] = [];
+  const strengths: PassProbability["strengths"] = [];
+  const weaknesses: PassProbability["weaknesses"] = [];
   const riskFactors: string[] = [];
 
   TCO_DOMAINS.forEach((domain) => {
@@ -394,7 +386,7 @@ function identifyStrengthsWeaknesses(
       });
 
       // High-weight domains below threshold are risk factors
-      if (weight > 0.20) {
+      if (weight > 0.2) {
         riskFactors.push(
           `Low score in high-weight domain: ${domainName} (${(weight * 100).toFixed(0)}% of exam)`
         );
@@ -410,16 +402,16 @@ function identifyStrengthsWeaknesses(
 function generateRecommendations(
   features: PredictionFeatures,
   probability: number,
-  weaknesses: PassProbability['weaknesses']
-): PassProbability['recommendedActions'] {
-  const recommendations: PassProbability['recommendedActions'] = [];
+  weaknesses: PassProbability["weaknesses"]
+): PassProbability["recommendedActions"] {
+  const recommendations: PassProbability["recommendedActions"] = [];
 
   // Critical: Low pass probability
   if (probability < 60) {
     recommendations.push({
-      priority: 'high',
-      action: 'Intensive study needed. Consider extending prep time or postponing exam.',
-      estimatedImpact: 'Critical for exam success',
+      priority: "high",
+      action: "Intensive study needed. Consider extending prep time or postponing exam.",
+      estimatedImpact: "Critical for exam success",
     });
   }
 
@@ -428,7 +420,7 @@ function generateRecommendations(
     .filter((w) => w.gap > 10)
     .forEach((w) => {
       recommendations.push({
-        priority: 'high',
+        priority: "high",
         action: `Focus heavily on ${w.domain} - complete module + 30 practice questions`,
         estimatedImpact: `+${(w.gap * 0.7).toFixed(1)}% potential score improvement`,
       });
@@ -437,27 +429,27 @@ function generateRecommendations(
   // Medium: Need more practice
   if (features.practiceQuestionsAnswered < 100) {
     recommendations.push({
-      priority: 'medium',
+      priority: "medium",
       action: `Complete ${100 - features.practiceQuestionsAnswered} more practice questions`,
-      estimatedImpact: '+5-10% pass probability',
+      estimatedImpact: "+5-10% pass probability",
     });
   }
 
   // Medium: Need mock exams
   if (features.mockExamCount < 2) {
     recommendations.push({
-      priority: 'medium',
-      action: 'Take 2 full mock exams before actual exam',
-      estimatedImpact: '+15% confidence, better time management',
+      priority: "medium",
+      action: "Take 2 full mock exams before actual exam",
+      estimatedImpact: "+15% confidence, better time management",
     });
   }
 
   // Low: Complete all modules
   if (features.modulesCompleted < 6) {
     recommendations.push({
-      priority: 'high',
+      priority: "high",
       action: `Complete remaining ${6 - features.modulesCompleted} modules`,
-      estimatedImpact: '+10-15% pass probability',
+      estimatedImpact: "+10-15% pass probability",
     });
   }
 
@@ -500,15 +492,10 @@ export async function predictPassProbability(userId: string): Promise<PassProbab
   const domainScores = predictDomainScores(features, probability);
 
   // Identify strengths/weaknesses
-  const { strengths, weaknesses, riskFactors } =
-    identifyStrengthsWeaknesses(domainScores);
+  const { strengths, weaknesses, riskFactors } = identifyStrengthsWeaknesses(domainScores);
 
   // Generate recommendations
-  const recommendedActions = generateRecommendations(
-    features,
-    probability,
-    weaknesses
-  );
+  const recommendedActions = generateRecommendations(features, probability, weaknesses);
 
   // Estimate study hours needed
   const estimatedStudyHoursNeeded = estimateStudyHoursNeeded(
@@ -517,12 +504,12 @@ export async function predictPassProbability(userId: string): Promise<PassProbab
     features.targetScore
   );
 
-  const prediction: Omit<PassProbability, 'id' | 'createdAt'> = {
+  const prediction: Omit<PassProbability, "id" | "createdAt"> = {
     userId,
     predictedProbability: Math.round(probability * 10) / 10, // Round to 1 decimal
     confidenceInterval: Math.round(confidence * 10) / 10,
-    modelVersion: 'v1.0',
-    predictionMethod: 'ensemble',
+    modelVersion: "v1.0",
+    predictionMethod: "ensemble",
     featuresUsed: features,
     domainScores,
     strengths,
@@ -538,7 +525,7 @@ export async function predictPassProbability(userId: string): Promise<PassProbab
 
   // Save to database
   const { data, error } = await supabase
-    .from('pass_probability_predictions')
+    .from("pass_probability_predictions")
     .insert({
       user_id: prediction.userId,
       predicted_probability: prediction.predictedProbability,
@@ -569,14 +556,12 @@ export async function predictPassProbability(userId: string): Promise<PassProbab
 
 // ==================== RETRIEVAL ====================
 
-export async function getLatestPrediction(
-  userId: string
-): Promise<PassProbability | null> {
-  const { data, error } = await supabase.rpc('get_latest_pass_probability', {
+export async function getLatestPrediction(userId: string): Promise<PassProbability | null> {
+  const { data, error } = await supabase.rpc("get_latest_pass_probability", {
     p_user_id: userId,
   });
 
-  if (error && error.code !== 'PGRST116') throw error;
+  if (error && error.code !== "PGRST116") throw error;
   return data ? camelCaseKeys(data) : null;
 }
 
@@ -585,10 +570,10 @@ export async function getPredictionHistory(
   limit: number = 10
 ): Promise<PassProbability[]> {
   const { data, error } = await supabase
-    .from('pass_probability_predictions')
-    .select('*')
-    .eq('user_id', userId)
-    .order('created_at', { ascending: false })
+    .from("pass_probability_predictions")
+    .select("*")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
     .limit(limit);
 
   if (error) throw error;

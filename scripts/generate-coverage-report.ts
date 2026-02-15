@@ -17,23 +17,23 @@
  *   npm run coverage:report -- --output reports/
  */
 
-import * as fs from 'fs';
-import * as path from 'path';
-import { SUPPORTED_LOCALES, LOCALE_METADATA, type SupportedLocale } from '../src/i18n/config';
-import { validate } from './lib/translation-validator';
-import { validateQuality, formatQualityReport } from './lib/translation-quality';
+import * as fs from "fs";
+import * as path from "path";
+import { SUPPORTED_LOCALES, LOCALE_METADATA, type SupportedLocale } from "../src/i18n/config";
+import { validate } from "./lib/translation-validator";
+import { validateQuality, formatQualityReport } from "./lib/translation-quality";
 
 // Paths
-const BUDGET_COMPONENTS_DIR = path.join(__dirname, '../src/components/budget');
-const MESSAGES_DIR = path.join(__dirname, '../src/i18n/messages');
-const SOURCE_FILE = path.join(MESSAGES_DIR, 'en-US.json');
-const DEFAULT_OUTPUT_DIR = path.join(__dirname, '../reports');
+const BUDGET_COMPONENTS_DIR = path.join(__dirname, "../src/components/budget");
+const MESSAGES_DIR = path.join(__dirname, "../src/i18n/messages");
+const SOURCE_FILE = path.join(MESSAGES_DIR, "en-US.json");
+const DEFAULT_OUTPUT_DIR = path.join(__dirname, "../reports");
 
 // CLI Options
 interface CLIOptions {
   verbose: boolean;
   output: string;
-  format: 'json' | 'html' | 'both';
+  format: "json" | "html" | "both";
 }
 
 // Report interfaces
@@ -83,7 +83,7 @@ interface CoverageReport {
  * Main entry point
  */
 async function main() {
-  console.log('📊 Translation Coverage Report Generator\\n');
+  console.log("📊 Translation Coverage Report Generator\\n");
 
   // Parse CLI arguments
   const options = parseArgs(process.argv.slice(2));
@@ -93,18 +93,18 @@ async function main() {
     fs.mkdirSync(options.output, { recursive: true });
   }
 
-  console.log('🔍 Scanning components...');
+  console.log("🔍 Scanning components...");
   const componentScan = scanComponents(BUDGET_COMPONENTS_DIR);
   console.log(`   Found: ${componentScan.total} components`);
   console.log(`   Using translations: ${componentScan.usingTranslations}`);
   console.log(`   Coverage: ${componentScan.coverage.toFixed(1)}%\\n`);
 
-  console.log('🌍 Validating translations...');
-  const sourceContent = JSON.parse(fs.readFileSync(SOURCE_FILE, 'utf-8'));
+  console.log("🌍 Validating translations...");
+  const sourceContent = JSON.parse(fs.readFileSync(SOURCE_FILE, "utf-8"));
   const localeValidations: LocaleValidationResult[] = [];
 
   let completed = 0;
-  const localesToValidate = SUPPORTED_LOCALES.filter(l => l !== 'en');
+  const localesToValidate = SUPPORTED_LOCALES.filter((l) => l !== "en");
 
   for (const locale of localesToValidate) {
     process.stdout.write(`   ⏳ ${locale}... (${++completed}/${localesToValidate.length})\\r`);
@@ -115,7 +115,7 @@ async function main() {
 
   console.log(`\\n   ✅ Validated ${localeValidations.length} locales\\n`);
 
-  console.log('🔄 Checking RTL support...');
+  console.log("🔄 Checking RTL support...");
   const rtlStatus = checkRTLStatus();
   console.log(`   RTL locales: ${rtlStatus.length}\\n`);
 
@@ -123,16 +123,16 @@ async function main() {
   const report = generateReport(componentScan, localeValidations, rtlStatus);
 
   // Output report
-  if (options.format === 'json' || options.format === 'both') {
-    const jsonPath = path.join(options.output, 'coverage-report.json');
-    fs.writeFileSync(jsonPath, JSON.stringify(report, null, 2), 'utf-8');
+  if (options.format === "json" || options.format === "both") {
+    const jsonPath = path.join(options.output, "coverage-report.json");
+    fs.writeFileSync(jsonPath, JSON.stringify(report, null, 2), "utf-8");
     console.log(`✅ JSON report: ${jsonPath}`);
   }
 
-  if (options.format === 'html' || options.format === 'both') {
-    const htmlPath = path.join(options.output, 'coverage-report.html');
+  if (options.format === "html" || options.format === "both") {
+    const htmlPath = path.join(options.output, "coverage-report.html");
     const html = generateHTML(report);
-    fs.writeFileSync(htmlPath, html, 'utf-8');
+    fs.writeFileSync(htmlPath, html, "utf-8");
     console.log(`✅ HTML dashboard: ${htmlPath}`);
   }
 
@@ -147,28 +147,28 @@ function parseArgs(args: string[]): CLIOptions {
   const options: CLIOptions = {
     verbose: false,
     output: DEFAULT_OUTPUT_DIR,
-    format: 'both',
+    format: "both",
   };
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
 
     switch (arg) {
-      case '--verbose':
-      case '-v':
+      case "--verbose":
+      case "-v":
         options.verbose = true;
         break;
-      case '--output':
-      case '-o':
+      case "--output":
+      case "-o":
         if (i + 1 < args.length) {
           options.output = args[++i];
         }
         break;
-      case '--format':
-      case '-f':
+      case "--format":
+      case "-f":
         if (i + 1 < args.length) {
           const format = args[++i];
-          if (format === 'json' || format === 'html' || format === 'both') {
+          if (format === "json" || format === "html" || format === "both") {
             options.format = format;
           }
         }
@@ -193,17 +193,17 @@ function scanComponents(dir: string): ComponentScanResult {
 
       if (entry.isDirectory()) {
         scanDir(fullPath);
-      } else if (entry.name.endsWith('.tsx') || entry.name.endsWith('.ts')) {
+      } else if (entry.name.endsWith(".tsx") || entry.name.endsWith(".ts")) {
         // Skip test files and types
-        if (entry.name.endsWith('.test.tsx') || entry.name.endsWith('.d.ts')) {
+        if (entry.name.endsWith(".test.tsx") || entry.name.endsWith(".d.ts")) {
           continue;
         }
 
-        const content = fs.readFileSync(fullPath, 'utf-8');
-        const usesTranslations = content.includes('useTranslations(');
+        const content = fs.readFileSync(fullPath, "utf-8");
+        const usesTranslations = content.includes("useTranslations(");
 
         components.push({
-          path: path.relative(path.join(__dirname, '..'), fullPath),
+          path: path.relative(path.join(__dirname, ".."), fullPath),
           usesTranslations,
         });
       }
@@ -212,7 +212,7 @@ function scanComponents(dir: string): ComponentScanResult {
 
   scanDir(dir);
 
-  const usingTranslations = components.filter(c => c.usesTranslations).length;
+  const usingTranslations = components.filter((c) => c.usesTranslations).length;
   const total = components.length;
   const coverage = total > 0 ? (usingTranslations / total) * 100 : 0;
 
@@ -239,7 +239,7 @@ function validateLocale(
     return {
       locale,
       valid: false,
-      errors: ['Translation file does not exist'],
+      errors: ["Translation file does not exist"],
       warnings: [],
       missingKeys: [],
       qualityScore: 0,
@@ -247,7 +247,7 @@ function validateLocale(
   }
 
   try {
-    const translationContent = JSON.parse(fs.readFileSync(localeFile, 'utf-8'));
+    const translationContent = JSON.parse(fs.readFileSync(localeFile, "utf-8"));
 
     // Run structure validation
     const validation = validate(translationContent, sourceContent, locale);
@@ -284,7 +284,7 @@ function validateLocale(
 /**
  * Extract missing keys between source and translation
  */
-function extractMissingKeys(source: any, translation: any, prefix: string = ''): string[] {
+function extractMissingKeys(source: any, translation: any, prefix: string = ""): string[] {
   const missing: string[] = [];
 
   for (const [key, value] of Object.entries(source)) {
@@ -292,7 +292,7 @@ function extractMissingKeys(source: any, translation: any, prefix: string = ''):
 
     if (!(key in translation)) {
       missing.push(fullKey);
-    } else if (value && typeof value === 'object' && !Array.isArray(value)) {
+    } else if (value && typeof value === "object" && !Array.isArray(value)) {
       missing.push(...extractMissingKeys(value, translation[key] || {}, fullKey));
     }
   }
@@ -304,11 +304,9 @@ function extractMissingKeys(source: any, translation: any, prefix: string = ''):
  * Check RTL locale support status
  */
 function checkRTLStatus(): RTLStatus[] {
-  const rtlLocales = SUPPORTED_LOCALES.filter(
-    locale => LOCALE_METADATA[locale]?.dir === 'rtl'
-  );
+  const rtlLocales = SUPPORTED_LOCALES.filter((locale) => LOCALE_METADATA[locale]?.dir === "rtl");
 
-  return rtlLocales.map(locale => {
+  return rtlLocales.map((locale) => {
     // Check if locale file exists and has content
     const localeFile = path.join(MESSAGES_DIR, `${locale}.json`);
     const exists = fs.existsSync(localeFile);
@@ -316,7 +314,7 @@ function checkRTLStatus(): RTLStatus[] {
     const issues: string[] = [];
 
     if (!exists) {
-      issues.push('Translation file missing');
+      issues.push("Translation file missing");
     }
 
     // TODO: Add actual RTL testing checks (e.g., visual regression tests)
@@ -339,7 +337,7 @@ function generateReport(
   localeValidations: LocaleValidationResult[],
   rtlStatus: RTLStatus[]
 ): CoverageReport {
-  const validLocales = localeValidations.filter(l => l.valid);
+  const validLocales = localeValidations.filter((l) => l.valid);
   const averageQualityScore =
     validLocales.length > 0
       ? validLocales.reduce((sum, l) => sum + l.qualityScore, 0) / validLocales.length
@@ -502,17 +500,17 @@ function generateHTML(report: CoverageReport): string {
         <tbody>
           ${top10
             .map(
-              locale => `
+              (locale) => `
             <tr>
               <td>${locale.locale}</td>
               <td><span class="score ${getScoreClass(locale.qualityScore)}">${locale.qualityScore}/100</span></td>
-              <td><span class="badge ${locale.valid ? 'success' : 'error'}">${locale.valid ? 'Valid' : 'Invalid'}</span></td>
+              <td><span class="badge ${locale.valid ? "success" : "error"}">${locale.valid ? "Valid" : "Invalid"}</span></td>
               <td>${locale.errors.length}</td>
               <td>${locale.warnings.length}</td>
             </tr>
           `
             )
-            .join('')}
+            .join("")}
         </tbody>
       </table>
     </div>
@@ -532,17 +530,17 @@ function generateHTML(report: CoverageReport): string {
         <tbody>
           ${bottom10
             .map(
-              locale => `
+              (locale) => `
             <tr>
               <td>${locale.locale}</td>
               <td><span class="score ${getScoreClass(locale.qualityScore)}">${locale.qualityScore}/100</span></td>
-              <td><span class="badge ${locale.valid ? 'success' : 'error'}">${locale.valid ? 'Valid' : 'Invalid'}</span></td>
+              <td><span class="badge ${locale.valid ? "success" : "error"}">${locale.valid ? "Valid" : "Invalid"}</span></td>
               <td>${locale.errors.length}</td>
               <td>${locale.warnings.length}</td>
             </tr>
           `
             )
-            .join('')}
+            .join("")}
         </tbody>
       </table>
     </div>
@@ -560,15 +558,15 @@ function generateHTML(report: CoverageReport): string {
         <tbody>
           ${rtlStatus
             .map(
-              rtl => `
+              (rtl) => `
             <tr>
               <td>${rtl.locale}</td>
-              <td><span class="badge ${rtl.tested ? 'success' : 'warning'}">${rtl.tested ? 'Tested' : 'Not Tested'}</span></td>
-              <td>${rtl.issues.length > 0 ? rtl.issues.join(', ') : '-'}</td>
+              <td><span class="badge ${rtl.tested ? "success" : "warning"}">${rtl.tested ? "Tested" : "Not Tested"}</span></td>
+              <td>${rtl.issues.length > 0 ? rtl.issues.join(", ") : "-"}</td>
             </tr>
           `
             )
-            .join('')}
+            .join("")}
         </tbody>
       </table>
     </div>
@@ -587,9 +585,9 @@ function generateHTML(report: CoverageReport): string {
 </html>`;
 
   function getScoreClass(score: number): string {
-    if (score >= 90) return 'high';
-    if (score >= 70) return 'medium';
-    return 'low';
+    if (score >= 90) return "high";
+    if (score >= 70) return "medium";
+    return "low";
   }
 }
 
@@ -597,11 +595,11 @@ function generateHTML(report: CoverageReport): string {
  * Print summary to console
  */
 function printSummary(report: CoverageReport, verbose: boolean) {
-  console.log('\\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('📊 Coverage Report Summary');
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\n');
+  console.log("\\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+  console.log("📊 Coverage Report Summary");
+  console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\n");
 
-  console.log('Overall Metrics:');
+  console.log("Overall Metrics:");
   console.log(`   Component Coverage: ${report.summary.componentCoverage.toFixed(1)}%`);
   console.log(`   Average Quality Score: ${report.summary.averageQualityScore}/100`);
   console.log(`   Total Locales: ${report.summary.totalLocales}`);
@@ -611,10 +609,10 @@ function printSummary(report: CoverageReport, verbose: boolean) {
 
   // Components not using translations
   if (verbose) {
-    const notUsing = report.components.components.filter(c => !c.usesTranslations);
+    const notUsing = report.components.components.filter((c) => !c.usesTranslations);
     if (notUsing.length > 0) {
-      console.log('Components not using translations:');
-      notUsing.slice(0, 10).forEach(c => console.log(`   - ${c.path}`));
+      console.log("Components not using translations:");
+      notUsing.slice(0, 10).forEach((c) => console.log(`   - ${c.path}`));
       if (notUsing.length > 10) {
         console.log(`   ... and ${notUsing.length - 10} more`);
       }
@@ -623,13 +621,13 @@ function printSummary(report: CoverageReport, verbose: boolean) {
   }
 
   // Locales with issues
-  const localesWithIssues = report.locales.filter(l => l.errors.length > 0);
+  const localesWithIssues = report.locales.filter((l) => l.errors.length > 0);
   if (localesWithIssues.length > 0) {
     console.log(`⚠️  ${localesWithIssues.length} locales have issues:`);
-    localesWithIssues.slice(0, 5).forEach(l => {
+    localesWithIssues.slice(0, 5).forEach((l) => {
       console.log(`   - ${l.locale}: ${l.errors.length} errors`);
       if (verbose) {
-        l.errors.slice(0, 3).forEach(e => console.log(`      • ${e}`));
+        l.errors.slice(0, 3).forEach((e) => console.log(`      • ${e}`));
       }
     });
     if (localesWithIssues.length > 5) {
@@ -638,11 +636,11 @@ function printSummary(report: CoverageReport, verbose: boolean) {
     console.log();
   }
 
-  console.log('✅ Report generation complete!\\n');
+  console.log("✅ Report generation complete!\\n");
 }
 
 // Run main function
-main().catch(error => {
-  console.error('\\n❌ Fatal error:', error);
+main().catch((error) => {
+  console.error("\\n❌ Fatal error:", error);
   process.exit(1);
 });

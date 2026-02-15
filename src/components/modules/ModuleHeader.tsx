@@ -28,7 +28,10 @@ export default function ModuleHeader({ frontmatter }: ModuleHeaderProps) {
   return (
     <div className="mb-8">
       <div className="mb-4 flex flex-wrap items-center gap-3">
-        <Badge variant="outline" className="border-blue-500/50 bg-blue-900/50 text-muted-foreground">
+        <Badge
+          variant="outline"
+          className="border-blue-500/50 bg-blue-900/50 text-muted-foreground"
+        >
           {frontmatter.domainEnum.replace(/_/g, " ")}
         </Badge>
         <Badge variant="outline" className={getDifficultyColor(frontmatter.difficulty)}>
@@ -45,7 +48,9 @@ export default function ModuleHeader({ frontmatter }: ModuleHeaderProps) {
       </h1>
 
       {frontmatter.description && (
-        <p className="mb-6 text-xl leading-relaxed text-muted-foreground">{frontmatter.description}</p>
+        <p className="mb-6 text-xl leading-relaxed text-muted-foreground">
+          {frontmatter.description}
+        </p>
       )}
 
       {/* Learning Objectives */}

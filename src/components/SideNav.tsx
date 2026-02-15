@@ -68,11 +68,16 @@ export default function SideNav() {
   }
 
   return (
-    <nav aria-label="Study modules navigation" className="w-full md:w-64 md:min-h-[calc(100vh-4rem)] md:border-r md:border-slate-200 dark:md:border-border md:pr-4">
+    <nav
+      aria-label="Study modules navigation"
+      className="w-full md:min-h-[calc(100vh-4rem)] md:w-64 md:border-r md:border-slate-200 md:pr-4 dark:md:border-border"
+    >
       <div className="px-4 py-3 md:px-0">
-        <h2 className="text-sm font-semibold text-slate-700 dark:text-muted-foreground">Curriculum</h2>
+        <h2 className="text-sm font-semibold text-slate-700 dark:text-muted-foreground">
+          Curriculum
+        </h2>
       </div>
-      <ul className="space-y-1 px-2 md:px-0 pb-4">
+      <ul className="space-y-1 px-2 pb-4 md:px-0">
         {modules.map((m) => {
           const active = isActive(pathname, m.slug);
           return (
@@ -88,10 +93,10 @@ export default function SideNav() {
                 aria-current={active ? "page" : undefined}
               >
                 <div className="flex items-center justify-between gap-3">
-                  <div className="flex flex-col min-w-0">
-                    <span className="font-medium truncate">{m.title}</span>
+                  <div className="flex min-w-0 flex-col">
+                    <span className="truncate font-medium">{m.title}</span>
                     {m.description ? (
-                      <span className="text-xs opacity-75 truncate">{m.description}</span>
+                      <span className="truncate text-xs opacity-75">{m.description}</span>
                     ) : null}
                   </div>
                   <ProgressDots pct={progress[m.id]?.percentage} />

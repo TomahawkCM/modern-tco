@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 /**
  * Profile Delete Dialog
  * Confirmation dialog for deleting a profile
  */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,12 +15,12 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Loader2, AlertTriangle } from 'lucide-react';
-import { useProfile } from '@/contexts/ProfileContext';
-import type { Profile } from '@/types/profile';
-import { getProfileInitials } from '@/types/profile';
+} from "@/components/ui/alert-dialog";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Loader2, AlertTriangle } from "lucide-react";
+import { useProfile } from "@/contexts/ProfileContext";
+import type { Profile } from "@/types/profile";
+import { getProfileInitials } from "@/types/profile";
 
 interface ProfileDeleteDialogProps {
   open: boolean;
@@ -50,7 +50,7 @@ export function ProfileDeleteDialog({
       onOpenChange(false);
       onSuccess?.();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete profile');
+      setError(err instanceof Error ? err.message : "Failed to delete profile");
     } finally {
       setIsLoading(false);
     }
@@ -70,10 +70,10 @@ export function ProfileDeleteDialog({
           </AlertDialogTitle>
           <AlertDialogDescription asChild>
             <div className="space-y-3">
-              <div className="flex items-center gap-3 p-3 border rounded-lg bg-muted/50">
+              <div className="flex items-center gap-3 rounded-lg border bg-muted/50 p-3">
                 <Avatar className="h-10 w-10">
                   <AvatarFallback
-                    style={{ backgroundColor: profile.avatarColor || '#10b981' }}
+                    style={{ backgroundColor: profile.avatarColor || "#10b981" }}
                     className="text-white"
                   >
                     {getProfileInitials(profile.name)}
@@ -82,31 +82,24 @@ export function ProfileDeleteDialog({
                 <div>
                   <p className="font-medium text-foreground">{profile.name}</p>
                   {profile.isDefault && (
-                    <p className="text-xs text-muted-foreground">
-                      Default profile
-                    </p>
+                    <p className="text-xs text-muted-foreground">Default profile</p>
                   )}
                 </div>
               </div>
 
               {isLastProfile ? (
-                <p className="text-destructive">
-                  This is the only profile. You cannot delete it.
-                </p>
+                <p className="text-destructive">This is the only profile. You cannot delete it.</p>
               ) : (
                 <>
                   <p>
-                    This will permanently delete this profile. Any private
-                    budgets owned by this profile will become shared with all
-                    profiles.
+                    This will permanently delete this profile. Any private budgets owned by this
+                    profile will become shared with all profiles.
                   </p>
                   <p className="font-medium">This action cannot be undone.</p>
                 </>
               )}
 
-              {error && (
-                <p className="text-sm text-destructive">{error}</p>
-              )}
+              {error && <p className="text-sm text-destructive">{error}</p>}
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>

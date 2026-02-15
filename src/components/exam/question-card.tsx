@@ -70,7 +70,9 @@ export const QuestionCard = memo(function QuestionCard({
               Question {questionNumber} of {totalQuestions}
             </Badge>
             <div className="flex items-center gap-1">
-              <Badge variant="secondary" className="text-xs">{question.domain}</Badge>
+              <Badge variant="secondary" className="text-xs">
+                {question.domain}
+              </Badge>
             </div>
             <div className="flex items-center gap-1">
               <Badge
@@ -87,9 +89,7 @@ export const QuestionCard = memo(function QuestionCard({
           </div>
         </div>
 
-        <CardTitle className="text-lg leading-snug text-foreground">
-          {question.question}
-        </CardTitle>
+        <CardTitle className="text-lg leading-snug text-foreground">{question.question}</CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-3 pt-3">
@@ -167,7 +167,7 @@ export const QuestionCard = memo(function QuestionCard({
             />
             <label
               htmlFor={`mark-for-review-${question.id}`}
-              className="flex items-center gap-2 text-sm font-medium leading-none cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              className="flex cursor-pointer items-center gap-2 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               <AlertCircle className={cn("h-4 w-4", isMarked && "text-amber-500")} />
               <span className={cn(isMarked && "text-amber-600 dark:text-amber-400")}>
@@ -178,7 +178,7 @@ export const QuestionCard = memo(function QuestionCard({
         )}
 
         {showResult && question.explanation && (
-          <Alert className="border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-900/20 py-2">
+          <Alert className="border-blue-200 bg-blue-50 py-2 dark:border-blue-800 dark:bg-blue-900/20">
             <BookOpen className="h-3 w-3 text-blue-600" />
             <AlertDescription className="text-xs text-blue-800 dark:text-muted-foreground">
               <strong>Explanation:</strong> {question.explanation}

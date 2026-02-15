@@ -12,6 +12,7 @@
 **Current Status**: ⚠️ **NOT READY FOR LAUNCH**
 
 **Blockers**:
+
 - ❌ P0 accessibility fixes incomplete (form label associations)
 - ⚠️ UAT not yet conducted
 - ⚠️ Production deployment not configured
@@ -26,6 +27,7 @@
 ### 1. Code Quality & Testing (6/8 Complete)
 
 #### ✅ Completed
+
 - [x] All TypeScript errors resolved
 - [x] Production build successful (`npm run build`)
 - [x] ESLint checks passing
@@ -34,6 +36,7 @@
 - [x] All dependencies updated and secure
 
 #### ❌ Blockers (Must Complete Before Launch)
+
 - [ ] **P0**: All accessibility tests passing (12/20 currently passing)
   - **Blocker**: Fix form label associations in 7 pages
   - **Task**: [Fix missing form label associations](https://archon/tasks/2247ae04-4b9f-4b4e-9945-6b364c21964c)
@@ -50,10 +53,12 @@
 ### 2. Performance & Optimization (2/4 Complete)
 
 #### ✅ Completed
+
 - [x] Lighthouse audit completed (Performance: 69/100)
 - [x] Bundle analysis completed (1.6MB identified)
 
 #### ⚠️ Recommended (Not Blocking Launch)
+
 - [ ] **P1**: Performance score ≥85/100 (currently 69/100)
   - **Status**: Optimizations identified, not launch-blocking
   - **Tasks**:
@@ -72,9 +77,11 @@
 ### 3. Accessibility (1/3 Complete)
 
 #### ✅ Completed
+
 - [x] WCAG 2.2 Level AA audit conducted
 
 #### ❌ Blockers (Must Complete Before Launch)
+
 - [ ] **P0**: All WCAG 2.2 AA tests passing
   - **Current**: 12/20 tests passing
   - **Required**: 20/20 tests passing
@@ -82,6 +89,7 @@
   - **Verification**: `npm run test:accessibility` all green
 
 #### ⚠️ Recommended
+
 - [ ] **P1**: Screen reader testing with NVDA/JAWS
   - **Status**: One test failing (amount announcements)
   - **Task**: [Add screen reader labels for amounts](https://archon/tasks/ebe70b30-436e-46e6-9943-ef512bb1ff35)
@@ -104,6 +112,7 @@
 ### 5. User Acceptance Testing (0/2 Complete)
 
 #### ❌ Blockers (Must Complete Before Launch)
+
 - [ ] **P0**: Conduct UAT with 5+ seniors (60+ age group)
   - **Tasks**:
     - Add transaction
@@ -126,11 +135,13 @@
 ### 6. Security & Privacy (3/4 Complete)
 
 #### ✅ Completed
+
 - [x] No sensitive data in client-side code
 - [x] IndexedDB encryption for local storage
 - [x] Privacy policy documented (local-first, no cloud storage)
 
 #### ⚠️ Recommended
+
 - [ ] **P1**: Chatbot privacy controls implemented
   - **Task**: [Implement chatbot privacy controls](https://archon/tasks/9fdfc5cd-7e0d-4812-9c5a-130fea5584f4)
   - **Status**: Can launch without chatbot features
@@ -141,6 +152,7 @@
 ### 7. Deployment & Infrastructure (0/4 Complete)
 
 #### ❌ Blockers (Must Complete Before Launch)
+
 - [ ] **P0**: Production deployment configured
   - **Platform**: Vercel (recommended) or Netlify
   - **Requirements**:
@@ -162,6 +174,7 @@
   - **Owner**: devops-engineer
 
 #### ⚠️ Recommended
+
 - [ ] **P1**: Analytics tracking configured
   - **Service**: PostHog
   - **Metrics**: DAU, feature usage, performance metrics
@@ -177,6 +190,7 @@
 ### 8. PWA Verification (0/5 Complete)
 
 #### ❌ Blockers (Must Complete Before Launch)
+
 - [ ] **P0**: PWA installation tested on all platforms
   - **Platforms**:
     - iOS Safari (iPhone/iPad)
@@ -196,12 +210,14 @@
 ### 9. Content & Features (4/6 Complete)
 
 #### ✅ Completed
+
 - [x] All core features functional (transactions, budgets, loans, reports)
 - [x] Category system complete (10+ categories)
 - [x] Bank import templates available
 - [x] Help documentation accessible in-app
 
 #### ⚠️ Recommended (Not Launch Blocking)
+
 - [ ] **P2**: Chatbot fully integrated and tested
   - **Current Status**: API route exists, limited testing
   - **Tasks**:
@@ -223,6 +239,7 @@
 **Scenario**: Critical issue discovered during final testing
 
 **Actions**:
+
 1. **Halt deployment** immediately
 2. **Document issue** in Archon with P0 priority
 3. **Assign to appropriate specialist** (see Agent Assignment Matrix in `.claude/CLAUDE.md`)
@@ -237,9 +254,11 @@
 ### Post-Launch Rollback (After Production Deployment)
 
 #### Level 1: Minor Issues (Non-Critical)
+
 **Examples**: UI glitches, minor performance degradation, non-blocking bugs
 
 **Actions**:
+
 1. **Monitor error rates** via Sentry/PostHog
 2. **Create P1/P2 tasks** in Archon
 3. **Fix in next deployment** (within 48 hours)
@@ -250,9 +269,11 @@
 ---
 
 #### Level 2: Major Issues (Critical But Not Data-Threatening)
+
 **Examples**: Feature completely broken, severe performance issues, accessibility regression
 
 **Actions**:
+
 1. **Assess impact**: How many users affected? Which features?
 2. **Disable affected feature** via feature flag (if available)
 3. **Create hotfix branch** from main
@@ -268,9 +289,11 @@
 ---
 
 #### Level 3: Catastrophic Issues (Data Loss or Security)
+
 **Examples**: Data corruption, database errors, security vulnerability, app completely unusable
 
 **Actions**:
+
 1. **IMMEDIATE ROLLBACK** to previous version
 2. **Notify all users** via in-app banner (if possible)
 3. **Create incident report** documenting:
@@ -291,6 +314,7 @@
 ### Rollback Procedure (Technical)
 
 #### Option 1: Vercel Rollback (Recommended)
+
 ```bash
 # Via Vercel Dashboard
 1. Go to Deployments tab
@@ -309,6 +333,7 @@ vercel rollback <deployment-url>
 ---
 
 #### Option 2: Git Revert + Re-deploy
+
 ```bash
 # If Vercel rollback unavailable
 git log --oneline  # Find last stable commit
@@ -323,6 +348,7 @@ git push origin main
 ---
 
 #### Option 3: Emergency Maintenance Mode
+
 ```bash
 # Create emergency maintenance page
 # Update Vercel deployment to show "Under Maintenance" page
@@ -340,6 +366,7 @@ vercel --prod --force
 ### Rollback Verification Checklist
 
 After any rollback:
+
 - [ ] App loads successfully on all devices
 - [ ] Core features functional (add transaction, create budget)
 - [ ] No new errors in Sentry
@@ -354,60 +381,62 @@ After any rollback:
 
 ### User Engagement Metrics
 
-| Metric | Target | Measurement | Owner |
-|--------|--------|-------------|-------|
-| **Daily Active Users (DAU)** | 50+ users | PostHog Analytics | Product Owner |
-| **User Retention (Day 7)** | >40% | PostHog Cohort Analysis | Product Owner |
-| **Transactions Added** | 500+ total | Database query | Data Analyst |
-| **Budgets Created** | 100+ total | Database query | Data Analyst |
-| **CSV Imports Completed** | 50+ | PostHog Events | Data Analyst |
-| **PWA Installations** | 25+ | PostHog Events | Marketing |
+| Metric                       | Target     | Measurement             | Owner         |
+| ---------------------------- | ---------- | ----------------------- | ------------- |
+| **Daily Active Users (DAU)** | 50+ users  | PostHog Analytics       | Product Owner |
+| **User Retention (Day 7)**   | >40%       | PostHog Cohort Analysis | Product Owner |
+| **Transactions Added**       | 500+ total | Database query          | Data Analyst  |
+| **Budgets Created**          | 100+ total | Database query          | Data Analyst  |
+| **CSV Imports Completed**    | 50+        | PostHog Events          | Data Analyst  |
+| **PWA Installations**        | 25+        | PostHog Events          | Marketing     |
 
 ---
 
 ### Technical Health Metrics
 
-| Metric | Target | Measurement | Owner |
-|--------|--------|-------------|-------|
-| **Error Rate** | <1% of sessions | Sentry | DevOps |
-| **Page Load Time (P95)** | <6s | PostHog Performance | DevOps |
-| **Time to Interactive (P95)** | <6s | PostHog Performance | DevOps |
-| **API Response Time (P95)** | <200ms | Vercel Analytics | Backend |
-| **Uptime** | >99.5% | Vercel Status | DevOps |
-| **Lighthouse Score (Production)** | >65 | Weekly audit | QA |
+| Metric                            | Target          | Measurement         | Owner   |
+| --------------------------------- | --------------- | ------------------- | ------- |
+| **Error Rate**                    | <1% of sessions | Sentry              | DevOps  |
+| **Page Load Time (P95)**          | <6s             | PostHog Performance | DevOps  |
+| **Time to Interactive (P95)**     | <6s             | PostHog Performance | DevOps  |
+| **API Response Time (P95)**       | <200ms          | Vercel Analytics    | Backend |
+| **Uptime**                        | >99.5%          | Vercel Status       | DevOps  |
+| **Lighthouse Score (Production)** | >65             | Weekly audit        | QA      |
 
 ---
 
 ### Feature Usage Metrics
 
-| Feature | Target Usage | Measurement | Owner |
-|---------|-------------|-------------|-------|
-| **Transaction Modal** | 90% of users | PostHog Funnels | Product |
-| **Budget Creation** | 60% of users | PostHog Funnels | Product |
-| **CSV Import** | 30% of users | PostHog Events | Product |
-| **Loan Calculator** | 20% of users | PostHog Events | Product |
-| **Reports Page** | 50% of users | PostHog Page Views | Product |
-| **AI Chatbot** (if enabled) | 15% of users | PostHog Events | Product |
+| Feature                     | Target Usage | Measurement        | Owner   |
+| --------------------------- | ------------ | ------------------ | ------- |
+| **Transaction Modal**       | 90% of users | PostHog Funnels    | Product |
+| **Budget Creation**         | 60% of users | PostHog Funnels    | Product |
+| **CSV Import**              | 30% of users | PostHog Events     | Product |
+| **Loan Calculator**         | 20% of users | PostHog Events     | Product |
+| **Reports Page**            | 50% of users | PostHog Page Views | Product |
+| **AI Chatbot** (if enabled) | 15% of users | PostHog Events     | Product |
 
 ---
 
 ### User Satisfaction Metrics
 
-| Metric | Target | Measurement | Owner |
-|--------|--------|-------------|-------|
-| **Critical Bugs Reported** | <5 in Week 1 | GitHub Issues | QA |
-| **Feature Requests** | Track all | GitHub Discussions | Product |
-| **User Feedback Score** | >4/5 stars | In-app survey (opt-in) | Product |
-| **Accessibility Issues** | 0 critical | User reports + Sentry | Accessibility Lead |
+| Metric                     | Target       | Measurement            | Owner              |
+| -------------------------- | ------------ | ---------------------- | ------------------ |
+| **Critical Bugs Reported** | <5 in Week 1 | GitHub Issues          | QA                 |
+| **Feature Requests**       | Track all    | GitHub Discussions     | Product            |
+| **User Feedback Score**    | >4/5 stars   | In-app survey (opt-in) | Product            |
+| **Accessibility Issues**   | 0 critical   | User reports + Sentry  | Accessibility Lead |
 
 ---
 
 ## 🗓️ Post-Launch Review Schedule
 
 ### Day 1 (Launch Day)
+
 **Time**: End of day (6 PM)
 **Attendees**: DevOps, QA, Product Owner
 **Agenda**:
+
 - Review error rates and uptime
 - Check user sign-ups and early usage
 - Verify all monitoring tools working
@@ -419,9 +448,11 @@ After any rollback:
 ---
 
 ### Day 3 (Midweek Check-in)
+
 **Time**: 10 AM
 **Attendees**: Full team
 **Agenda**:
+
 - Review engagement metrics (DAU, features used)
 - Discuss user feedback and bug reports
 - Prioritize any necessary hotfixes
@@ -433,9 +464,11 @@ After any rollback:
 ---
 
 ### Day 7 (Week 1 Retrospective)
+
 **Time**: 2 PM
 **Attendees**: Full team + stakeholders
 **Agenda**:
+
 - Full metrics review (compare to targets)
 - User retention analysis
 - What went well / What needs improvement
@@ -446,6 +479,7 @@ After any rollback:
 **Duration**: 90 minutes
 **Format**: Video call with shared dashboard
 **Deliverables**:
+
 - Week 1 Report (metrics summary)
 - Week 2 Sprint Plan
 - Updated roadmap based on learnings
@@ -453,9 +487,11 @@ After any rollback:
 ---
 
 ### Month 1 (30-Day Review)
+
 **Time**: TBD
 **Attendees**: Full team + stakeholders + select users
 **Agenda**:
+
 - Comprehensive metrics review (all categories)
 - User testimonials and case studies
 - Accessibility audit re-run
@@ -467,6 +503,7 @@ After any rollback:
 **Duration**: 2 hours
 **Format**: Formal presentation with Q&A
 **Deliverables**:
+
 - Month 1 Report
 - Q1 Roadmap
 - Budget allocation for optimizations
@@ -478,6 +515,7 @@ After any rollback:
 Use this matrix to determine if you're ready to launch:
 
 ### All Criteria Met ✅ → **LAUNCH APPROVED**
+
 - All P0 items complete (accessibility, UAT, deployment)
 - All tests passing (20/20 accessibility, 10/10 keyboard)
 - Production environment verified
@@ -485,12 +523,14 @@ Use this matrix to determine if you're ready to launch:
 - Rollback plan understood by all team members
 
 ### Some P1 Items Incomplete ⚠️ → **SOFT LAUNCH**
+
 - All P0 complete, some P1 incomplete
 - Launch to limited audience (beta users)
 - Monitor closely for 1 week
 - Complete P1 items before full public launch
 
 ### Any P0 Incomplete ❌ → **DO NOT LAUNCH**
+
 - Fix all P0 blockers first
 - Re-run tests to verify fixes
 - Update this checklist and re-evaluate
@@ -553,8 +593,10 @@ vercel --prod
 ## 🎉 Launch Communication Plan
 
 ### Internal Team
+
 **Channel**: Slack #budget-app-launch
 **Message**:
+
 ```
 🚀 Budget App v1.0 is now LIVE!
 
@@ -574,8 +616,10 @@ Great work team! 🎊
 ---
 
 ### Public Announcement
+
 **Channels**: Website, social media, email list
 **Message Template**:
+
 ```
 📊 Introducing Budget App - Your Private Budget Companion
 
@@ -595,13 +639,13 @@ Questions? Check our FAQ: [docs link]
 
 ## 📞 Emergency Contacts
 
-| Role | Name | Contact | Responsibility |
-|------|------|---------|----------------|
-| **Product Owner** | TBD | Slack DM | Go/no-go decisions |
-| **DevOps Lead** | TBD | Slack + Phone | Rollback execution |
-| **QA Lead** | TBD | Slack | Test verification |
-| **Accessibility Lead** | TBD | Slack | WCAG compliance |
-| **On-Call Engineer** | TBD | Phone | After-hours issues |
+| Role                   | Name | Contact       | Responsibility     |
+| ---------------------- | ---- | ------------- | ------------------ |
+| **Product Owner**      | TBD  | Slack DM      | Go/no-go decisions |
+| **DevOps Lead**        | TBD  | Slack + Phone | Rollback execution |
+| **QA Lead**            | TBD  | Slack         | Test verification  |
+| **Accessibility Lead** | TBD  | Slack         | WCAG compliance    |
+| **On-Call Engineer**   | TBD  | Phone         | After-hours issues |
 
 ---
 
@@ -610,6 +654,7 @@ Questions? Check our FAQ: [docs link]
 **Use this quick checklist on launch day:**
 
 ### Pre-Launch (T-24 hours)
+
 - [ ] All P0 tasks complete in Archon
 - [ ] Run full test suite → all passing
 - [ ] UAT complete with no P0 feedback
@@ -619,6 +664,7 @@ Questions? Check our FAQ: [docs link]
 - [ ] Launch communication drafted
 
 ### Launch Day (T-0)
+
 - [ ] Run pre-launch verification script (see above)
 - [ ] All tests passing
 - [ ] Deploy to production
@@ -629,6 +675,7 @@ Questions? Check our FAQ: [docs link]
 - [ ] Send public announcement
 
 ### Post-Launch (T+1 hour)
+
 - [ ] Monitor Sentry for errors
 - [ ] Check PostHog for user activity
 - [ ] Verify first users can add transactions
@@ -637,6 +684,7 @@ Questions? Check our FAQ: [docs link]
 - [ ] Day 1 review scheduled
 
 ### End of Day 1
+
 - [ ] Conduct Day 1 review meeting
 - [ ] Document any issues found
 - [ ] Celebrate successful launch! 🎉
@@ -649,7 +697,7 @@ Questions? Check our FAQ: [docs link]
 
 ---
 
-*This document is a living checklist. Update it as tasks are completed and new requirements emerge.*
+_This document is a living checklist. Update it as tasks are completed and new requirements emerge._
 
 **Last Reviewed**: November 9, 2025
 **Next Review**: After P0 accessibility fixes complete

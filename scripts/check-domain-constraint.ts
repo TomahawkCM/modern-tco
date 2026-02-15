@@ -8,15 +8,13 @@ const supabase = createClient(
 
 async function checkConstraint() {
   // Try to get constraint info by querying with invalid domain
-  const { error } = await supabase
-    .from("questions")
-    .insert({
-      question: "Test",
-      options: [{ id: "a", text: "Test" }],
-      correct_answer: 0,
-      domain: "INVALID_TEST_DOMAIN",
-      explanation: "Test",
-    });
+  const { error } = await supabase.from("questions").insert({
+    question: "Test",
+    options: [{ id: "a", text: "Test" }],
+    correct_answer: 0,
+    domain: "INVALID_TEST_DOMAIN",
+    explanation: "Test",
+  });
 
   if (error) {
     console.log("Error message:", error.message);

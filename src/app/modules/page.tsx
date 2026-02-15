@@ -24,10 +24,10 @@ export default async function Modules() {
         frontmatter: {
           id: meta.id,
           title: meta.title,
-          description: '',
-          difficulty: meta.difficulty || 'Intermediate',
-          estimatedTime: meta.estimatedTime || '45 min',
-          domainEnum: (meta.domainSlug || slug).toUpperCase().replace(/-/g, '_'),
+          description: "",
+          difficulty: meta.difficulty || "Intermediate",
+          estimatedTime: meta.estimatedTime || "45 min",
+          domainEnum: (meta.domainSlug || slug).toUpperCase().replace(/-/g, "_"),
           learningObjectives: meta.objectives || [],
         },
       });
@@ -45,7 +45,7 @@ export default async function Modules() {
         <div className="mt-4">
           <a
             href="/study/review"
-            className="inline-flex items-center rounded-md border border-accent/40 bg-accent/20 px-3 py-1 text-sm text-accent-foreground hover:bg-accent/30 transition-colors"
+            className="inline-flex items-center rounded-md border border-accent/40 bg-accent/20 px-3 py-1 text-sm text-accent-foreground transition-colors hover:bg-accent/30"
           >
             Go to Review Center →
           </a>
@@ -57,8 +57,10 @@ export default async function Modules() {
         <span id="resume-banner" />
       </div>
       {(() => {
-        const idToSlug = Object.fromEntries((modules as any[]).map((m) => [m.frontmatter.id, m.slug]));
-        const mapping = JSON.stringify(idToSlug).replace(/</g, '\u003c');
+        const idToSlug = Object.fromEntries(
+          (modules as any[]).map((m) => [m.frontmatter.id, m.slug])
+        );
+        const mapping = JSON.stringify(idToSlug).replace(/</g, "\u003c");
         return (
           <script
             dangerouslySetInnerHTML={{

@@ -182,8 +182,8 @@ export default function TransactionsPageClient() {
     // Use fuzzy search if search term is provided (3+ chars)
     if (searchTerm && searchTerm.length >= 2) {
       const searchResults = searchTransactions(searchTerm, { limit: 1000 });
-      const matchedIds = new Set(searchResults.map(r => r.item.id));
-      baseTransactions = transactions.filter(tx => matchedIds.has(tx.id));
+      const matchedIds = new Set(searchResults.map((r) => r.item.id));
+      baseTransactions = transactions.filter((tx) => matchedIds.has(tx.id));
     }
 
     return baseTransactions

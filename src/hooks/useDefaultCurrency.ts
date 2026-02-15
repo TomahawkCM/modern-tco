@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useLocale } from 'next-intl';
-import { LOCALE_METADATA, type SupportedLocale } from '@/i18n/config';
+import { useLocale } from "next-intl";
+import { LOCALE_METADATA, type SupportedLocale } from "@/i18n/config";
 
 /**
  * Returns the default currency for the current locale.
@@ -9,6 +9,6 @@ import { LOCALE_METADATA, type SupportedLocale } from '@/i18n/config';
  */
 export function useDefaultCurrency(): string {
   const locale = useLocale() as SupportedLocale;
-  const meta = LOCALE_METADATA[locale] || LOCALE_METADATA['en-US'];
+  const meta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
   return meta.currency;
 }

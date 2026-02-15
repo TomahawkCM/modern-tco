@@ -5,7 +5,7 @@
  * usage tracking data. Helps identify underused subscriptions.
  */
 
-import type { Subscription, BillingCycle } from '@/types/budget';
+import type { Subscription, BillingCycle } from "@/types/budget";
 
 export interface CostPerUseResult {
   subscriptionId: string;
@@ -13,7 +13,7 @@ export interface CostPerUseResult {
   monthlyAmount: number;
   usageCount: number;
   costPerUse: number;
-  rating: 'great' | 'good' | 'fair' | 'poor';
+  rating: "great" | "good" | "fair" | "poor";
 }
 
 /**
@@ -21,15 +21,15 @@ export interface CostPerUseResult {
  */
 function toMonthlyAmount(amount: number, cycle: BillingCycle): number {
   switch (cycle) {
-    case 'weekly':
+    case "weekly":
       return amount * (52 / 12);
-    case 'bi-weekly':
+    case "bi-weekly":
       return amount * (26 / 12);
-    case 'monthly':
+    case "monthly":
       return amount;
-    case 'quarterly':
+    case "quarterly":
       return amount / 3;
-    case 'annual':
+    case "annual":
       return amount / 12;
     default:
       return amount;
@@ -39,15 +39,15 @@ function toMonthlyAmount(amount: number, cycle: BillingCycle): number {
 /**
  * Get expected monthly usage count based on usage frequency.
  */
-function getExpectedMonthlyUses(frequency: Subscription['usageFrequency']): number {
+function getExpectedMonthlyUses(frequency: Subscription["usageFrequency"]): number {
   switch (frequency) {
-    case 'daily':
+    case "daily":
       return 30;
-    case 'weekly':
+    case "weekly":
       return 4;
-    case 'monthly':
+    case "monthly":
       return 1;
-    case 'rarely':
+    case "rarely":
       return 0.5;
     default:
       return 1;
@@ -70,11 +70,11 @@ export function calculateCostPerUse(
 /**
  * Rate the value of a subscription based on cost per use.
  */
-function rateValue(costPerUse: number): CostPerUseResult['rating'] {
-  if (costPerUse <= 1) return 'great';
-  if (costPerUse <= 5) return 'good';
-  if (costPerUse <= 15) return 'fair';
-  return 'poor';
+function rateValue(costPerUse: number): CostPerUseResult["rating"] {
+  if (costPerUse <= 1) return "great";
+  if (costPerUse <= 5) return "good";
+  if (costPerUse <= 15) return "fair";
+  return "poor";
 }
 
 /**
@@ -82,8 +82,8 @@ function rateValue(costPerUse: number): CostPerUseResult['rating'] {
  */
 export function rankByCostPerUse(subscriptions: Subscription[]): CostPerUseResult[] {
   return subscriptions
-    .filter(sub => sub.status === 'active' && sub.usageCount !== undefined)
-    .map(sub => {
+    .filter((sub) => sub.status === "active" && sub.usageCount !== undefined)
+    .map((sub) => {
       const monthlyAmount = toMonthlyAmount(sub.amount, sub.billingCycle);
       const usageCount = sub.usageCount ?? 0;
       const costPerUse = usageCount > 0 ? monthlyAmount / usageCount : Infinity;
@@ -104,5 +104,5 @@ export function rankByCostPerUse(subscriptions: Subscription[]): CostPerUseResul
  * Get subscriptions that are poor value (candidates for cancellation).
  */
 export function getCancellationCandidates(subscriptions: Subscription[]): CostPerUseResult[] {
-  return rankByCostPerUse(subscriptions).filter(r => r.rating === 'poor');
+  return rankByCostPerUse(subscriptions).filter((r) => r.rating === "poor");
 }

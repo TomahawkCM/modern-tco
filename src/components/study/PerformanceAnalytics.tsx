@@ -169,9 +169,7 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
       {/* Retention Trend */}
       <Card className="border-accent/20 bg-accent/5">
         <CardHeader>
-          <CardTitle className="text-sm text-accent-foreground">
-            Recent Retention Trend
-          </CardTitle>
+          <CardTitle className="text-sm text-accent-foreground">Recent Retention Trend</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="mb-2 flex items-baseline gap-2">
@@ -180,16 +178,13 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
             </span>
             <span className="text-sm text-muted-foreground">(last 10 sessions)</span>
           </div>
-          <Progress
-            value={analytics.averageRetentionTrend}
-            className="h-3 bg-purple-900/30"
-          />
+          <Progress value={analytics.averageRetentionTrend} className="h-3 bg-purple-900/30" />
           <p className="mt-2 text-xs text-muted-foreground">
             {analytics.averageRetentionTrend >= 80
               ? "🎯 Excellent! Keep up the consistent review schedule"
               : analytics.averageRetentionTrend >= 70
-              ? "📚 Good progress - consider reviewing struggling concepts"
-              : "⚠️ Focus on completing overdue reviews and re-reading sections"}
+                ? "📚 Good progress - consider reviewing struggling concepts"
+                : "⚠️ Focus on completing overdue reviews and re-reading sections"}
           </p>
         </CardContent>
       </Card>
@@ -206,10 +201,7 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
           <CardContent>
             <ul className="space-y-3">
               {recommendations.map((rec, idx) => (
-                <li
-                  key={idx}
-                  className="flex items-start gap-2 text-sm text-muted-foreground"
-                >
+                <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
                   <span className="mt-0.5 text-[#f97316]">•</span>
                   <span>{rec}</span>
                 </li>
@@ -222,15 +214,11 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
       {/* How Adaptive Difficulty Works */}
       <Card className="border-gray-700">
         <CardHeader>
-          <CardTitle className="text-sm text-foreground">
-            How Adaptive Difficulty Works
-          </CardTitle>
+          <CardTitle className="text-sm text-foreground">How Adaptive Difficulty Works</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3 text-sm text-muted-foreground">
           <div className="rounded-lg border border-red-500/30 bg-red-500/5 p-3">
-            <p className="mb-1 font-semibold text-red-300">
-              Struggling (&lt; 70% retention)
-            </p>
+            <p className="mb-1 font-semibold text-red-300">Struggling (&lt; 70% retention)</p>
             <p className="text-xs text-muted-foreground">
               • Intervals are 30% shorter (e.g., Day 3 → Day 2)
               <br />
@@ -240,9 +228,7 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
           </div>
 
           <div className="rounded-lg border border-primary/30 bg-primary/5 p-3">
-            <p className="mb-1 font-semibold text-primary">
-              Normal (70-90% retention)
-            </p>
+            <p className="mb-1 font-semibold text-primary">Normal (70-90% retention)</p>
             <p className="text-xs text-muted-foreground">
               • Standard 2357 intervals (Day 1, 3, 7, 16, 35)
               <br />
@@ -252,9 +238,7 @@ export function PerformanceAnalytics({ moduleId }: PerformanceAnalyticsProps) {
           </div>
 
           <div className="rounded-lg border border-[#22c55e]/30 bg-[#22c55e]/5 p-3">
-            <p className="mb-1 font-semibold text-[#22c55e]">
-              Mastered (&gt; 90% retention)
-            </p>
+            <p className="mb-1 font-semibold text-[#22c55e]">Mastered (&gt; 90% retention)</p>
             <p className="text-xs text-muted-foreground">
               • Intervals are 30% longer (e.g., Day 7 → Day 9)
               <br />

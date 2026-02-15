@@ -7,11 +7,13 @@ Successfully updated global Claude Code config to fix MCP server schema validati
 ## Changes Made
 
 ### Phase 1 (Completed Earlier)
+
 - ✅ Removed duplicate `.mcp.json`
 - ✅ Kept `.vscode/mcp.json` with 11 correctly configured servers
 - ✅ Backed up to `config-backups/`
 
 ### Phase 2 (Just Completed)
+
 - ✅ Backed up global config: `/home/robne/.claude.json.backup-YYYYMMDD_HHMMSS`
 - ✅ Updated line 1636: Changed `"mcpServers": {` → `"servers": {`
 - ✅ Verified change successful
@@ -22,6 +24,7 @@ Successfully updated global Claude Code config to fix MCP server schema validati
 **File:** `/home/robne/.claude.json` (831KB)
 **Line:** 1636
 **Before:**
+
 ```json
 "/home/robne/projects/active/tanium-tco/modern-tco": {
   ...
@@ -33,6 +36,7 @@ Successfully updated global Claude Code config to fix MCP server schema validati
 ```
 
 **After:**
+
 ```json
 "/home/robne/projects/active/tanium-tco/modern-tco": {
   ...
@@ -48,6 +52,7 @@ Successfully updated global Claude Code config to fix MCP server schema validati
 After restarting Claude Code, all 11 servers should connect:
 
 ### From `.vscode/mcp.json` (11 servers):
+
 1. shadcn
 2. filesystem
 3. claude-flow
@@ -61,6 +66,7 @@ After restarting Claude Code, all 11 servers should connect:
 11. serena
 
 ### Additional from global config (HTTP servers):
+
 - context7 (https://mcp.context7.com/mcp)
 - pv-bhat-vibe-check-mcp-server (Smithery HTTP)
 
@@ -83,6 +89,7 @@ cp /home/robne/.claude.json.backup-YYYYMMDD_HHMMSS /home/robne/.claude.json
 ## Validation
 
 To confirm fix worked:
+
 1. Restart Claude Code
 2. Run: `Check MCP servers status`
 3. Verify no schema validation errors

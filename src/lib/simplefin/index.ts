@@ -16,7 +16,7 @@ export {
   simpleFINTimestampToDate,
   isCustomCurrency,
   formatSimpleFINAccount,
-} from './client';
+} from "./client";
 
 export type {
   SimpleFINConfig,
@@ -27,13 +27,10 @@ export type {
   SimpleFINAccountSet,
   SimpleFINServerInfo,
   FetchAccountsOptions,
-} from './client';
+} from "./client";
 
 // Types
-export {
-  DEFAULT_SIMPLEFIN_SETTINGS,
-  parseSimpleFINAccountForDisplay,
-} from './types';
+export { DEFAULT_SIMPLEFIN_SETTINGS, parseSimpleFINAccountForDisplay } from "./types";
 
 export type {
   ConnectionStatus,
@@ -46,7 +43,7 @@ export type {
   ImportPreview,
   SimpleFINSettings,
   ParsedSimpleFINAccount,
-} from './types';
+} from "./types";
 
 // Encryption
 export {
@@ -60,7 +57,7 @@ export {
   generateSalt,
   saltToBase64,
   base64ToSalt,
-} from './encryption';
+} from "./encryption";
 
 // Sync
 export {
@@ -70,7 +67,7 @@ export {
   mapSimpleFINTransaction,
   toBudgetTransaction,
   findDuplicates,
-} from './sync';
+} from "./sync";
 
 // Default export
-export { SimpleFINClient as default } from './client';
+export { SimpleFINClient as default } from "./client";

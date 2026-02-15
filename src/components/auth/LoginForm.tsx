@@ -33,13 +33,13 @@ export function LoginForm({ onSuccess, onSwitchToSignUp }: LoginFormProps) {
 
       if (error) {
         const errorMsg = ErrorMessages.loginFailed;
-        setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
+        setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`);
       } else {
         onSuccess?.();
       }
     } catch (error) {
       const errorMsg = humanizeError(error);
-      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`);
     } finally {
       setIsSubmitting(false);
     }

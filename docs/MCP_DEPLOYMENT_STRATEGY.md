@@ -16,6 +16,7 @@ This document outlines the strategic approach to containerizing Model Context Pr
 **Key Decision:** Implement Docker containerization incrementally, starting with database infrastructure (Phase 1), expanding to full containerization post-production launch (Phase 2).
 
 **Rationale:**
+
 - ✅ Minimal risk during production preparation phase
 - ✅ Database isolation where it matters most
 - ✅ Maintains recently achieved 61% context optimization
@@ -30,23 +31,25 @@ This document outlines the strategic approach to containerizing Model Context Pr
 
 **8 Active MCP Servers:**
 
-| Server | Purpose | Current Transport | Critical? |
-|--------|---------|-------------------|-----------|
-| sqlite-tanium | TCO database access | **Docker** (Phase 1) | ✅ Yes |
-| shadcn | UI component management | npx | No |
-| filesystem | Local file operations | npx | No |
-| claude-flow | Agent coordination | npx | Yes |
-| github | Repository integration | npx | No |
-| firecrawl | Web scraping/research | npx | No |
-| playwright | Browser automation | npx | No |
-| postgresql | Supabase production DB | Docker (Supabase CLI) | ✅ Yes |
+| Server        | Purpose                 | Current Transport     | Critical? |
+| ------------- | ----------------------- | --------------------- | --------- |
+| sqlite-tanium | TCO database access     | **Docker** (Phase 1)  | ✅ Yes    |
+| shadcn        | UI component management | npx                   | No        |
+| filesystem    | Local file operations   | npx                   | No        |
+| claude-flow   | Agent coordination      | npx                   | Yes       |
+| github        | Repository integration  | npx                   | No        |
+| firecrawl     | Web scraping/research   | npx                   | No        |
+| playwright    | Browser automation      | npx                   | No        |
+| postgresql    | Supabase production DB  | Docker (Supabase CLI) | ✅ Yes    |
 
 **Plus 1 Remote HTTP MCP:**
+
 - vibe-check-mcp-server (Smithery-hosted, no local install)
 
 ### Recent Optimization
 
 **Context Reduction Achievement:** 61% improvement
+
 - Previous: 18 MCP servers (~209K tokens)
 - Current: 8 MCP servers (~81K tokens)
 - Savings: ~128K tokens for improved performance
@@ -60,6 +63,7 @@ This document outlines the strategic approach to containerizing Model Context Pr
 ### Why NOT Full Containerization Immediately?
 
 **Research Findings:**
+
 1. **Docker MCP Security Analysis** (Anchore, Oct 2025)
    - 9,000 vulnerabilities across 161 top MCP containers
    - 263 critical CVEs (mostly outdated base images)
@@ -85,6 +89,7 @@ This document outlines the strategic approach to containerizing Model Context Pr
 ### Why YES to Phased Docker Migration?
 
 **Long-term Industry Alignment:**
+
 1. **Docker MCP Catalog** - Official distribution method (July 2025)
 2. **MCP Official Roadmap** - Registry development with Docker Hub integration (2026)
 3. **Enterprise LMS Standards** - Containerization expected for audit compliance
@@ -102,6 +107,7 @@ This document outlines the strategic approach to containerizing Model Context Pr
 **Status:** ✅ Complete (2025-10-08)
 
 **Scope:**
+
 - [x] Containerize sqlite-tanium MCP only
 - [x] Keep 7 other MCPs as npx
 - [x] Document hybrid architecture
@@ -109,6 +115,7 @@ This document outlines the strategic approach to containerizing Model Context Pr
 - [x] Update Vibe Check constitutional rules
 
 **Deliverables:**
+
 1. ✅ Dockerfile for sqlite-tanium (Alpine-based, hardened)
 2. ✅ docker-compose.yml with resource limits
 3. ✅ Health check script (database integrity validation)
@@ -127,6 +134,7 @@ This document outlines the strategic approach to containerizing Model Context Pr
 **Status:** 🔄 Planned
 
 **Scope:**
+
 - [ ] Containerize remaining 7 MCP servers
 - [ ] Unified docker-compose.yml for all MCPs
 - [ ] SBOM generation (Syft)
@@ -135,12 +143,14 @@ This document outlines the strategic approach to containerizing Model Context Pr
 - [ ] Kubernetes deployment option
 
 **Estimated Implementation:** 8-12 hours total
+
 - Dockerfile creation: 7 hours (1 per MCP)
 - docker-compose integration: 2 hours
 - Testing & validation: 2 hours
 - Security scanning setup: 1 hour
 
 **Expected Benefits:**
+
 - Security: Fine-grained resource limits, network isolation
 - Reliability: Health checks, auto-restart, graceful failure
 - Scalability: Kubernetes-ready, horizontal scaling capability
@@ -228,32 +238,39 @@ This design allows seamless integration with Claude Code while maintaining Docke
 ### When to Use Docker (Phase 1 Criteria)
 
 ✅ **Database/Storage MCPs**
+
 - Reason: Isolation, backup/restore, resource limits
 - Example: sqlite-tanium, postgresql
 
 ✅ **Custom MCPs** (if developed)
+
 - Reason: Distribution, versioning, security scanning
 - Example: Any internally-developed MCP servers
 
 ❌ **Well-Maintained Official MCPs**
+
 - Reason: Performance, simplicity, active maintenance
 - Example: shadcn, github, firecrawl, playwright
 
 ❌ **Performance-Critical MCPs**
+
 - Reason: Minimize latency overhead
 - Example: claude-flow (agent coordination)
 
 ### When to Use npx (Phase 1 Default)
 
 ✅ **Official MCP Servers**
-- @modelcontextprotocol/* packages
+
+- @modelcontextprotocol/\* packages
 - Well-documented, actively maintained
 
 ✅ **Development Tools**
+
 - shadcn (UI components)
 - filesystem (local file access)
 
 ✅ **Performance-Critical**
+
 - Agent coordination (claude-flow)
 - Frequent operations
 
@@ -264,6 +281,7 @@ This design allows seamless integration with Claude Code while maintaining Docke
 ### Docker Security Hardening
 
 **Implemented in Phase 1:**
+
 1. **Non-root User** - uid:1001, gid:1001 (no root access)
 2. **Read-only Root Filesystem** - Immutable except /data volume
 3. **No Network** - stdio transport only, zero network exposure
@@ -273,6 +291,7 @@ This design allows seamless integration with Claude Code while maintaining Docke
 7. **Health Checks** - Automated integrity validation
 
 **Planned for Phase 2:**
+
 1. **SBOM Generation** - Software Bill of Materials (Syft)
 2. **Vulnerability Scanning** - Automated CVE detection (Grype)
 3. **Image Signing** - Docker Content Trust signatures
@@ -281,10 +300,12 @@ This design allows seamless integration with Claude Code while maintaining Docke
 ### Vulnerability Management
 
 **Current Approach:**
+
 - Official npx MCPs: Trust upstream maintenance
 - Docker MCPs: Automated scanning with Grype
 
 **Phase 2 Automation:**
+
 ```bash
 # Automated security pipeline
 1. Build Docker image
@@ -320,6 +341,7 @@ cp .mcp.json.backup-pre-docker-YYYYMMDD .mcp.json
 ```
 
 **Backup Strategy:**
+
 ```bash
 # Before Docker migration
 cp .mcp.json .mcp.json.backup-pre-docker-$(date +%Y%m%d)
@@ -352,15 +374,15 @@ docker compose up -d
 
 ### Expected Latency Impact
 
-| MCP Server | npx Latency | Docker Latency | Overhead |
-|------------|-------------|----------------|----------|
-| sqlite-tanium | ~2ms | ~5ms | +3ms |
-| shadcn | ~10ms | ~15ms | +5ms |
-| filesystem | ~1ms | ~3ms | +2ms |
-| claude-flow | ~5ms | ~15ms | +10ms |
-| github | ~50ms | ~55ms | +5ms |
-| firecrawl | ~200ms | ~205ms | +5ms |
-| playwright | ~100ms | ~110ms | +10ms |
+| MCP Server    | npx Latency | Docker Latency | Overhead |
+| ------------- | ----------- | -------------- | -------- |
+| sqlite-tanium | ~2ms        | ~5ms           | +3ms     |
+| shadcn        | ~10ms       | ~15ms          | +5ms     |
+| filesystem    | ~1ms        | ~3ms           | +2ms     |
+| claude-flow   | ~5ms        | ~15ms          | +10ms    |
+| github        | ~50ms       | ~55ms          | +5ms     |
+| firecrawl     | ~200ms      | ~205ms         | +5ms     |
+| playwright    | ~100ms      | ~110ms         | +10ms    |
 
 **Phase 1 Impact:** <5ms average (sqlite-tanium only containerized)
 
@@ -371,16 +393,19 @@ docker compose up -d
 ### Resource Usage
 
 **Phase 1 (1 Docker MCP):**
+
 - CPU: +0.25-0.5 cores
 - Memory: +256-512MB
 - Disk: +500MB (image + volume)
 
 **Phase 2 (8 Docker MCPs):**
+
 - CPU: +2-4 cores
 - Memory: +2-4GB
 - Disk: +2-4GB (images + volumes)
 
 **Available Resources (WSL2):**
+
 - CPU: 12 cores (Intel Xeon E-2276M)
 - Memory: 32GB RAM
 - Disk: 500GB+ SSD
@@ -418,6 +443,7 @@ docker compose up -d
 ### Automated Testing
 
 **Phase 2 CI/CD Pipeline:**
+
 ```yaml
 # .github/workflows/mcp-docker-test.yml
 1. Build all Docker images
@@ -437,11 +463,13 @@ docker compose up -d
 ### How Future Sessions Will Understand This
 
 **1. Vibe Check Constitutional Rules**
+
 - Section: "MCP DEPLOYMENT STRATEGY (PHASED APPROACH)"
 - Clearly states Phase 1 vs Phase 2
 - Decision checkpoints for any MCP changes
 
 **2. .mcp.json Comments**
+
 ```json
 {
   "_comment": "Phase 1 Hybrid Architecture: sqlite-tanium containerized, others npx. See .claude/vibe-check-constitution.md"
@@ -449,17 +477,20 @@ docker compose up -d
 ```
 
 **3. Visual Clarity in Files**
+
 - Docker MCPs have `"_transport": "docker"` metadata
 - npx MCPs clearly use `"command": "npx"`
 - Obvious distinction in configuration
 
 **4. Comprehensive Documentation**
+
 - This guide (MCP_DEPLOYMENT_STRATEGY.md)
 - Docker README (docker/mcp-sqlite-tanium/README.md)
 - Vibe Check quick reference
 - Constitutional rules with examples
 
 **5. File Structure**
+
 ```
 modern-tco/
 ├── .mcp.json                    # Phase 1 hybrid config
@@ -476,6 +507,7 @@ modern-tco/
 ```
 
 **Session Comprehension Score:** 9/10
+
 - Clear phased approach documented
 - Obvious file naming and structure
 - Constitutional rules enforcement
@@ -551,6 +583,7 @@ modern-tco/
 ### Before Making Changes
 
 **ALWAYS use `vibe_check` before:**
+
 - Changing MCP transport methods (npx ↔ Docker)
 - Adding new MCP servers
 - Modifying docker-compose.yml
@@ -558,16 +591,22 @@ modern-tco/
 - Production MCP deployment
 
 **Example:**
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_check({
-  context: "Want to containerize firecrawl MCP before launch",
-  assumptions: [
-    "Docker improves security",
-    "Won't delay production",
-    "All MCPs should be Docker eventually"
-  ],
-  decision: "Create Dockerfile for firecrawl now"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__vibe_check({
+    context: "Want to containerize firecrawl MCP before launch",
+    assumptions: [
+      "Docker improves security",
+      "Won't delay production",
+      "All MCPs should be Docker eventually",
+    ],
+    decision: "Create Dockerfile for firecrawl now",
+  });
 
 // EXPECTED RESPONSE:
 // ⚠️ Challenge: This conflicts with Phase 1 strategy
@@ -578,30 +617,39 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_check({
 ### After Making Changes
 
 **ALWAYS use `vibe_learn` after:**
+
 - Solving MCP issues
 - Discovering patterns
 - Performance optimization
 - Security fixes
 
 **Example:**
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
-  error: "Docker MCP wrapper script failed to start container",
-  solution: "Added health check timeout and better error messages",
-  pattern: "Docker MCP wrappers need robust container lifecycle management",
-  category: "mcp-docker-deployment"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__vibe_learn({
+    error: "Docker MCP wrapper script failed to start container",
+    solution: "Added health check timeout and better error messages",
+    pattern: "Docker MCP wrappers need robust container lifecycle management",
+    category: "mcp-docker-deployment",
+  });
 ```
 
 ### Questions & Support
 
 **Documentation:**
+
 - This guide: `docs/MCP_DEPLOYMENT_STRATEGY.md`
 - Docker README: `docker/mcp-sqlite-tanium/README.md`
 - Vibe Check rules: `.claude/vibe-check-constitution.md`
 - Quick reference: `docs/VIBE_CHECK_QUICK_REFERENCE.md`
 
 **Research Resources:**
+
 - Docker MCP Best Practices: [https://www.docker.com/blog/mcp-server-best-practices/](https://www.docker.com/blog/mcp-server-best-practices/)
 - MCP Official Roadmap: [https://modelcontextprotocol.io/development/roadmap](https://modelcontextprotocol.io/development/roadmap)
 - Anchore Security Analysis: [https://anchore.com/blog/analyzing-the-top-mcp-docker-containers/](https://anchore.com/blog/analyzing-the-top-mcp-docker-containers/)
@@ -611,12 +659,14 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
 ## ✅ Decision Summary
 
 **Phase 1 (NOW): Hybrid Architecture**
+
 - ✅ Minimal risk during production prep
 - ✅ Database isolation where critical
 - ✅ Maintains performance optimization
 - ✅ Creates Docker infrastructure foundation
 
 **Phase 2 (POST-LAUNCH): Full Containerization**
+
 - ✅ Industry standard alignment
 - ✅ Enterprise security compliance
 - ✅ Scalability for growth

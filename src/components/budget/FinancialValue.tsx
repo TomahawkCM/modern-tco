@@ -55,18 +55,14 @@ export function FinancialValue({
   }, [isPrivacyMode, clearRevealTimer]);
 
   if (!isPrivacyMode) {
-    return (
-      <Component className={className}>
-        {children}
-      </Component>
-    );
+    return <Component className={className}>{children}</Component>;
   }
 
   return (
     <Component
       className={cn(
         "transition-[filter] duration-200",
-        isBlurred && "blur-md select-none",
+        isBlurred && "select-none blur-md",
         className
       )}
       aria-hidden={isBlurred ? "true" : undefined}

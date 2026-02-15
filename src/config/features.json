@@ -177,14 +177,30 @@
       "description": "Multi-format import wizard supporting 71+ bank configurations",
       "formats": ["CSV", "OFX", "QFX", "PDF (OCR)", "QIF", "MT940", "CAMT.053"],
       "bankCoverage": {
-        "Canada": { "banks": ["TD", "RBC", "Scotiabank", "CIBC", "Tangerine", "Simplii", "BMO"], "count": 7 },
-        "USA": { "banks": ["Chase", "Bank of America", "Wells Fargo", "Citibank", "Capital One", "US Bank"], "count": 6 },
+        "Canada": {
+          "banks": ["TD", "RBC", "Scotiabank", "CIBC", "Tangerine", "Simplii", "BMO"],
+          "count": 7
+        },
+        "USA": {
+          "banks": [
+            "Chase",
+            "Bank of America",
+            "Wells Fargo",
+            "Citibank",
+            "Capital One",
+            "US Bank"
+          ],
+          "count": 6
+        },
         "UK": { "banks": ["Barclays", "HSBC", "Lloyds", "NatWest"], "count": 7 },
         "Europe": { "banks": ["N26", "Revolut", "ING", "Deutsche Bank"], "count": 8 },
         "Australia": { "banks": ["CommBank", "ANZ", "Westpac", "NAB"], "count": 6 },
         "India": { "banks": ["HDFC", "ICICI", "Axis", "SBI"], "count": 7 },
         "Singapore": { "banks": ["DBS", "OCBC", "UOB"], "count": 6 },
-        "SE Asia": { "banks": ["Bangkok Bank", "Kasikorn", "Maybank", "CIMB", "GCash", "BDO"], "count": 7 },
+        "SE Asia": {
+          "banks": ["Bangkok Bank", "Kasikorn", "Maybank", "CIMB", "GCash", "BDO"],
+          "count": 7
+        },
         "Japan": { "banks": ["Rakuten", "Mizuho", "MUFG", "SMBC", "Japan Post"], "count": 6 },
         "Indonesia": { "banks": ["BCA", "Mandiri", "BNI", "BRI"], "count": 4 },
         "Vietnam": { "banks": ["Vietcombank", "Techcombank"], "count": 2 },
@@ -254,8 +270,8 @@
       "healthScore": {
         "range": [0, 100],
         "weights": {
-          "savingsRate": 0.20,
-          "budgetAdherence": 0.20,
+          "savingsRate": 0.2,
+          "budgetAdherence": 0.2,
           "expenseStability": 0.15,
           "debtRatio": 0.15,
           "emergencyFund": 0.15,
@@ -315,7 +331,10 @@
       "translationKeys": 1200,
       "rtlLanguages": ["Arabic", "Hebrew", "Farsi", "Urdu"],
       "languageGroups": {
-        "English": { "locales": ["US", "GB", "AU", "CA", "IN", "IE", "NZ", "SG", "ZA"], "count": 10 },
+        "English": {
+          "locales": ["US", "GB", "AU", "CA", "IN", "IE", "NZ", "SG", "ZA"],
+          "count": 10
+        },
         "Spanish": { "locales": ["ES", "MX", "AR", "+ 18 Latin American"], "count": 21 },
         "Chinese": { "locales": ["Simplified", "Traditional", "HK"], "count": 3 },
         "French": { "locales": ["FR", "CA", "CH", "BE"], "count": 4 },

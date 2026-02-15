@@ -10,8 +10,8 @@
  * - Respects user privacy settings
  */
 
-import OpenAI from 'openai';
-import type { ChatCompletionMessageParam, ChatCompletionTool } from 'openai/resources/chat';
+import OpenAI from "openai";
+import type { ChatCompletionMessageParam, ChatCompletionTool } from "openai/resources/chat";
 import {
   getSpendingSummary,
   getBudgetStatus,
@@ -25,9 +25,9 @@ import {
   createBudget,
   updateTransaction,
   updateBudget,
-} from './chatbot-data-access';
-import { getSystemPrompt } from './chatbot-prompts';
-import { getChatbotDataAccess } from './budget-privacy-settings';
+} from "./chatbot-data-access";
+import { getSystemPrompt } from "./chatbot-prompts";
+import { getChatbotDataAccess } from "./budget-privacy-settings";
 
 /**
  * Initialize OpenAI client
@@ -37,7 +37,7 @@ function getOpenAIClient(): OpenAI {
 
   if (!apiKey) {
     throw new Error(
-      'OpenAI API key not found. Add NEXT_PUBLIC_OPENAI_API_KEY to your environment variables.'
+      "OpenAI API key not found. Add NEXT_PUBLIC_OPENAI_API_KEY to your environment variables."
     );
   }
 
@@ -52,270 +52,270 @@ function getOpenAIClient(): OpenAI {
  */
 const availableFunctions: ChatCompletionTool[] = [
   {
-    type: 'function',
+    type: "function",
     function: {
-      name: 'getSpendingSummary',
-      description: 'Get spending summary for a date range, optionally filtered by category',
+      name: "getSpendingSummary",
+      description: "Get spending summary for a date range, optionally filtered by category",
       parameters: {
-        type: 'object',
+        type: "object",
         properties: {
           startDate: {
-            type: 'string',
-            description: 'Start date in ISO format (YYYY-MM-DD)',
+            type: "string",
+            description: "Start date in ISO format (YYYY-MM-DD)",
           },
           endDate: {
-            type: 'string',
-            description: 'End date in ISO format (YYYY-MM-DD)',
+            type: "string",
+            description: "End date in ISO format (YYYY-MM-DD)",
           },
           category: {
-            type: 'string',
+            type: "string",
             description: 'Optional category to filter by (e.g., "Groceries", "Dining")',
           },
         },
-        required: ['startDate', 'endDate'],
+        required: ["startDate", "endDate"],
       },
     },
   },
   {
-    type: 'function',
+    type: "function",
     function: {
-      name: 'getBudgetStatus',
-      description: 'Get budget status for all budgets or a specific category',
+      name: "getBudgetStatus",
+      description: "Get budget status for all budgets or a specific category",
       parameters: {
-        type: 'object',
+        type: "object",
         properties: {
           category: {
-            type: 'string',
-            description: 'Optional category to filter by',
+            type: "string",
+            description: "Optional category to filter by",
           },
           period: {
-            type: 'string',
-            enum: ['monthly', 'weekly', 'yearly'],
-            description: 'Optional budget period to filter by',
+            type: "string",
+            enum: ["monthly", "weekly", "yearly"],
+            description: "Optional budget period to filter by",
           },
         },
       },
     },
   },
   {
-    type: 'function',
+    type: "function",
     function: {
-      name: 'getAccountSummaries',
-      description: 'Get summaries of all accounts (balances, transaction counts)',
+      name: "getAccountSummaries",
+      description: "Get summaries of all accounts (balances, transaction counts)",
       parameters: {
-        type: 'object',
+        type: "object",
         properties: {},
       },
     },
   },
   {
-    type: 'function',
+    type: "function",
     function: {
-      name: 'getLoanSummaries',
-      description: 'Get summaries of all loans (balances, payment schedules)',
+      name: "getLoanSummaries",
+      description: "Get summaries of all loans (balances, payment schedules)",
       parameters: {
-        type: 'object',
+        type: "object",
         properties: {},
       },
     },
   },
   {
-    type: 'function',
+    type: "function",
     function: {
-      name: 'getCategories',
-      description: 'Get all available categories for transactions',
+      name: "getCategories",
+      description: "Get all available categories for transactions",
       parameters: {
-        type: 'object',
+        type: "object",
         properties: {},
       },
     },
   },
   {
-    type: 'function',
+    type: "function",
     function: {
-      name: 'searchTransactions',
-      description: 'Search transactions by description or category',
+      name: "searchTransactions",
+      description: "Search transactions by description or category",
       parameters: {
-        type: 'object',
+        type: "object",
         properties: {
           query: {
-            type: 'string',
-            description: 'Search query (matches description or category)',
+            type: "string",
+            description: "Search query (matches description or category)",
           },
           limit: {
-            type: 'number',
-            description: 'Maximum number of results (default: 50)',
+            type: "number",
+            description: "Maximum number of results (default: 50)",
           },
           startDate: {
-            type: 'string',
-            description: 'Optional start date filter (YYYY-MM-DD)',
+            type: "string",
+            description: "Optional start date filter (YYYY-MM-DD)",
           },
           endDate: {
-            type: 'string',
-            description: 'Optional end date filter (YYYY-MM-DD)',
+            type: "string",
+            description: "Optional end date filter (YYYY-MM-DD)",
           },
         },
-        required: ['query'],
+        required: ["query"],
       },
     },
   },
   {
-    type: 'function',
+    type: "function",
     function: {
-      name: 'getFinancialSummary',
-      description: 'Get a high-level financial summary (accounts, budgets, loans, recent activity)',
+      name: "getFinancialSummary",
+      description: "Get a high-level financial summary (accounts, budgets, loans, recent activity)",
       parameters: {
-        type: 'object',
+        type: "object",
         properties: {},
       },
     },
   },
   {
-    type: 'function',
+    type: "function",
     function: {
-      name: 'addTransaction',
-      description: 'Add a new transaction (requires full-access permission)',
+      name: "addTransaction",
+      description: "Add a new transaction (requires full-access permission)",
       parameters: {
-        type: 'object',
+        type: "object",
         properties: {
           accountId: {
-            type: 'string',
-            description: 'Account ID to add the transaction to',
+            type: "string",
+            description: "Account ID to add the transaction to",
           },
           date: {
-            type: 'string',
-            description: 'Transaction date in ISO format (YYYY-MM-DD)',
+            type: "string",
+            description: "Transaction date in ISO format (YYYY-MM-DD)",
           },
           description: {
-            type: 'string',
+            type: "string",
             description: 'Transaction description (e.g., "Coffee at Starbucks")',
           },
           amount: {
-            type: 'number',
-            description: 'Transaction amount (negative for expenses, positive for income)',
+            type: "number",
+            description: "Transaction amount (negative for expenses, positive for income)",
           },
           category: {
-            type: 'string',
+            type: "string",
             description: 'Category name (e.g., "Groceries", "Dining", "Income")',
           },
           subcategory: {
-            type: 'string',
-            description: 'Optional subcategory',
+            type: "string",
+            description: "Optional subcategory",
           },
           notes: {
-            type: 'string',
-            description: 'Optional notes',
+            type: "string",
+            description: "Optional notes",
           },
           merchant: {
-            type: 'string',
-            description: 'Optional merchant name',
+            type: "string",
+            description: "Optional merchant name",
           },
         },
-        required: ['accountId', 'date', 'description', 'amount', 'category'],
+        required: ["accountId", "date", "description", "amount", "category"],
       },
     },
   },
   {
-    type: 'function',
+    type: "function",
     function: {
-      name: 'createBudget',
-      description: 'Create a new budget for a category (requires full-access permission)',
+      name: "createBudget",
+      description: "Create a new budget for a category (requires full-access permission)",
       parameters: {
-        type: 'object',
+        type: "object",
         properties: {
           category: {
-            type: 'string',
+            type: "string",
             description: 'Category name to budget for (e.g., "Groceries", "Dining")',
           },
           amount: {
-            type: 'number',
-            description: 'Budget amount (must be positive)',
+            type: "number",
+            description: "Budget amount (must be positive)",
           },
           period: {
-            type: 'string',
-            enum: ['monthly', 'annual'],
-            description: 'Budget period (monthly or annual)',
+            type: "string",
+            enum: ["monthly", "annual"],
+            description: "Budget period (monthly or annual)",
           },
           startDate: {
-            type: 'string',
-            description: 'Budget start date in ISO format (YYYY-MM-DD)',
+            type: "string",
+            description: "Budget start date in ISO format (YYYY-MM-DD)",
           },
           rollover: {
-            type: 'boolean',
-            description: 'Whether to rollover unused budget to next period (default: false)',
+            type: "boolean",
+            description: "Whether to rollover unused budget to next period (default: false)",
           },
         },
-        required: ['category', 'amount', 'period', 'startDate'],
+        required: ["category", "amount", "period", "startDate"],
       },
     },
   },
   {
-    type: 'function',
+    type: "function",
     function: {
-      name: 'updateTransaction',
-      description: 'Update an existing transaction (requires full-access permission)',
+      name: "updateTransaction",
+      description: "Update an existing transaction (requires full-access permission)",
       parameters: {
-        type: 'object',
+        type: "object",
         properties: {
           transactionId: {
-            type: 'string',
-            description: 'ID of the transaction to update',
+            type: "string",
+            description: "ID of the transaction to update",
           },
           description: {
-            type: 'string',
-            description: 'New description (optional)',
+            type: "string",
+            description: "New description (optional)",
           },
           amount: {
-            type: 'number',
-            description: 'New amount (optional)',
+            type: "number",
+            description: "New amount (optional)",
           },
           category: {
-            type: 'string',
-            description: 'New category (optional)',
+            type: "string",
+            description: "New category (optional)",
           },
           subcategory: {
-            type: 'string',
-            description: 'New subcategory (optional)',
+            type: "string",
+            description: "New subcategory (optional)",
           },
           notes: {
-            type: 'string',
-            description: 'New notes (optional)',
+            type: "string",
+            description: "New notes (optional)",
           },
           date: {
-            type: 'string',
-            description: 'New date in ISO format (optional)',
+            type: "string",
+            description: "New date in ISO format (optional)",
           },
         },
-        required: ['transactionId'],
+        required: ["transactionId"],
       },
     },
   },
   {
-    type: 'function',
+    type: "function",
     function: {
-      name: 'updateBudget',
-      description: 'Update an existing budget (requires full-access permission)',
+      name: "updateBudget",
+      description: "Update an existing budget (requires full-access permission)",
       parameters: {
-        type: 'object',
+        type: "object",
         properties: {
           budgetId: {
-            type: 'string',
-            description: 'ID of the budget to update',
+            type: "string",
+            description: "ID of the budget to update",
           },
           amount: {
-            type: 'number',
-            description: 'New budget amount (optional)',
+            type: "number",
+            description: "New budget amount (optional)",
           },
           rollover: {
-            type: 'boolean',
-            description: 'New rollover setting (optional)',
+            type: "boolean",
+            description: "New rollover setting (optional)",
           },
           endDate: {
-            type: 'string',
-            description: 'New end date in ISO format or null to remove (optional)',
+            type: "string",
+            description: "New end date in ISO format or null to remove (optional)",
           },
         },
-        required: ['budgetId'],
+        required: ["budgetId"],
       },
     },
   },
@@ -324,34 +324,31 @@ const availableFunctions: ChatCompletionTool[] = [
 /**
  * Execute function call from OpenAI
  */
-async function executeFunctionCall(
-  functionName: string,
-  args: Record<string, any>
-): Promise<any> {
+async function executeFunctionCall(functionName: string, args: Record<string, any>): Promise<any> {
   switch (functionName) {
-    case 'getSpendingSummary':
+    case "getSpendingSummary":
       return await getSpendingSummary({
         startDate: new Date(args.startDate),
         endDate: new Date(args.endDate),
         category: args.category,
       });
 
-    case 'getBudgetStatus':
+    case "getBudgetStatus":
       return await getBudgetStatus({
         category: args.category,
         period: args.period,
       });
 
-    case 'getAccountSummaries':
+    case "getAccountSummaries":
       return await getAccountSummaries();
 
-    case 'getLoanSummaries':
+    case "getLoanSummaries":
       return await getLoanSummaries();
 
-    case 'getCategories':
+    case "getCategories":
       return await getCategories();
 
-    case 'searchTransactions':
+    case "searchTransactions":
       return await searchTransactions({
         query: args.query,
         limit: args.limit,
@@ -359,10 +356,10 @@ async function executeFunctionCall(
         endDate: args.endDate ? new Date(args.endDate) : undefined,
       });
 
-    case 'getFinancialSummary':
+    case "getFinancialSummary":
       return await getFinancialSummary();
 
-    case 'addTransaction':
+    case "addTransaction":
       return await addTransaction({
         accountId: args.accountId,
         date: new Date(args.date),
@@ -375,7 +372,7 @@ async function executeFunctionCall(
         tags: args.tags,
       });
 
-    case 'createBudget':
+    case "createBudget":
       return await createBudget({
         category: args.category,
         amount: args.amount,
@@ -384,7 +381,7 @@ async function executeFunctionCall(
         rollover: args.rollover,
       });
 
-    case 'updateTransaction':
+    case "updateTransaction":
       return await updateTransaction({
         transactionId: args.transactionId,
         description: args.description,
@@ -395,7 +392,7 @@ async function executeFunctionCall(
         date: args.date ? new Date(args.date) : undefined,
       });
 
-    case 'updateBudget':
+    case "updateBudget":
       return await updateBudget({
         budgetId: args.budgetId,
         amount: args.amount,
@@ -437,7 +434,7 @@ export async function chatWithAssistant(params: {
   // Build messages array with system prompt
   const fullMessages: ChatCompletionMessageParam[] = [
     {
-      role: 'system',
+      role: "system",
       content: systemPrompt || getSystemPrompt({ accessLevel, isFirstTime, hasError }),
     },
     ...messages,
@@ -445,10 +442,10 @@ export async function chatWithAssistant(params: {
 
   // Call OpenAI API with function calling
   const response = await openai.chat.completions.create({
-    model: 'gpt-4-turbo-preview',
+    model: "gpt-4-turbo-preview",
     messages: fullMessages,
     tools: availableFunctions,
-    tool_choice: 'auto',
+    tool_choice: "auto",
     temperature: 0.7,
     max_tokens: 1000,
   });
@@ -462,7 +459,7 @@ export async function chatWithAssistant(params: {
     // Execute all function calls
     for (const toolCall of assistantMessage.tool_calls) {
       // Skip custom tool calls (only process regular function calls)
-      if (!('function' in toolCall)) continue;
+      if (!("function" in toolCall)) continue;
 
       const functionName = toolCall.function.name;
       const args = JSON.parse(toolCall.function.arguments);
@@ -479,7 +476,7 @@ export async function chatWithAssistant(params: {
         // Add function result to messages
         fullMessages.push(assistantMessage);
         fullMessages.push({
-          role: 'tool',
+          role: "tool",
           tool_call_id: toolCall.id,
           content: JSON.stringify(result),
         });
@@ -487,7 +484,7 @@ export async function chatWithAssistant(params: {
         // Add error to messages
         fullMessages.push(assistantMessage);
         fullMessages.push({
-          role: 'tool',
+          role: "tool",
           tool_call_id: toolCall.id,
           content: JSON.stringify({ error: error.message }),
         });
@@ -496,20 +493,20 @@ export async function chatWithAssistant(params: {
 
     // Get final response after function calls
     const finalResponse = await openai.chat.completions.create({
-      model: 'gpt-4-turbo-preview',
+      model: "gpt-4-turbo-preview",
       messages: fullMessages,
       temperature: 0.7,
       max_tokens: 1000,
     });
 
     return {
-      response: finalResponse.choices[0].message.content || 'No response',
+      response: finalResponse.choices[0].message.content || "No response",
       functionCalls,
     };
   }
 
   // No function calls - return direct response
   return {
-    response: assistantMessage.content || 'No response',
+    response: assistantMessage.content || "No response",
   };
 }

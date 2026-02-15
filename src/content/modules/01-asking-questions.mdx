@@ -22,7 +22,7 @@ export const meta = {
   id: "tco-asking-questions",
   title: "Asking Questions",
   objectives: 4,
-  domainSlug: "asking-questions"
+  domainSlug: "asking-questions",
 };
 
 # Asking Questions: Foundation of Tanium Operations
@@ -30,21 +30,25 @@ export const meta = {
 {/* TODO: screenshot here (Console landing hero) */}
 
 ## Why Asking Questions Matters
+
 - Every action in Tanium begins with a question. Questions help you inventory assets, confirm security posture, and decide on remediation.
 - From a TCO standpoint, this domain contributes **22%** of the TAN-1000 blueprint; mastering it unlocks the later modules (Refining & Targeting, Taking Action, Reporting).
 - Real environments expect you to ask the right question quickly. Practicing here saves minutes during real incidents.
 
 <Callout type="note" title="Micro-screencast hook">
-  Plan to embed a 90-second walkthrough: "Ask your first question" (capture Interact navigation and result preview).
+  Plan to embed a 90-second walkthrough: "Ask your first question" (capture Interact navigation and
+  result preview).
 </Callout>
 
 ## Learning Objectives (By the end you can…)
+
 - Build and run a natural-language question from **Console → Interact** without guidance.
 - Choose a matching sensor for a real-world scenario (inventory, security, operations).
 - Use basic filters (contains, equals) and targeting (computer groups) to narrow scope safely.
 - Save, rerun, and export a question so teammates can review results.
 
 ## Vocabulary Quick Reference
+
 <Callout type="definition" title="Baseline Terms">
   - **Console**: The Tanium web interface. Sign in at `https://<your-tenant>.tanium.com`.<br/>
   - **Interact**: The module where you ask questions and view answers.<br/>
@@ -57,10 +61,12 @@ export const meta = {
 </Callout>
 
 <Callout type="info" title="Need a sandbox?">
-  Provide learners with a practice computer group or downloadable sample CSV if the live portal is unavailable.
+  Provide learners with a practice computer group or downloadable sample CSV if the live portal is
+  unavailable.
 </Callout>
 
 ## Step 1 – Get Oriented in Interact
+
 <Steps>
   <Step>Sign in to the Tanium Console.</Step>
   <Step>Select **Console → Interact** from the left navigation.</Step>
@@ -71,22 +77,27 @@ export const meta = {
 {/* TODO: screenshot here (Interact navigation callout) */}
 
 **Common Pitfalls**
+
 - Interact is disabled for some roles. If you see "Access denied," contact your Tanium role administrator.
 - Large question lists from prior users can feel overwhelming—focus on **Ask a Question** tab first.
 
 <Callout type="tip" title="Quick Check">
-  Test your understanding! These concepts are available as flashcards in your spaced repetition deck.
+  Test your understanding! These concepts are available as flashcards in your spaced repetition
+  deck.
 </Callout>
 
 ## Step 2 – Build Your First Question
+
 ### Concept
+
 Tanium's natural-language format is: **Get `[Sensor]` from `[Targets]` where `[Filter]`**. For beginners, keep it to one sensor and the default target `all machines`.
 
 ### Live Example (Inventory Baseline)
+
 <Callout type="try" title="Try it now – Inventory">
-  - In the Question Builder, type: `Get Computer Name from all machines`.
-  - Press **Ask Question**.
-  - Observe the results grid populate with endpoint names.<br/>
+  - In the Question Builder, type: `Get Computer Name from all machines`. - Press **Ask Question**.
+  - Observe the results grid populate with endpoint names.
+  <br />
   {/* TODO: screenshot here (Result grid highlighting column sorting) */}
 </Callout>
 
@@ -104,19 +115,25 @@ WORKSTATION-DEV42
 />
 
 **Real Tanium Portal Steps**
+
 <Steps>
   <Step>Console → Interact → Question Builder</Step>
-  <Step>Enter the question text exactly as above (the builder will auto-suggest the *Computer Name* sensor).</Step>
+  <Step>
+    Enter the question text exactly as above (the builder will auto-suggest the *Computer Name*
+    sensor).
+  </Step>
   <Step>Click **Ask Question**.</Step>
   <Step>Use the **Column Options** menu to sort alphabetically.</Step>
 </Steps>
 
 **Common Pitfalls**
+
 - Typing "computers" instead of "Computer Name" prevents sensor matching. Use the suggestion list to confirm.
 - If you receive `<no results>`, ensure endpoints are online and the default target is set to "all machines".
 
 <Callout type="tip" title="Quick Check">
-  Test your understanding! These concepts are available as flashcards in your spaced repetition deck.
+  Test your understanding! These concepts are available as flashcards in your spaced repetition
+  deck.
 </Callout>
 
 ### Adding Filters to Your Questions
@@ -136,16 +153,17 @@ Windows Server 2016 Standard
 />
 
 ## Step 3 – Choose the Right Sensor
+
 You do not need all 500+ sensors on day one. Start with the high-signal sensors below.
 
-| Scenario | Recommended Sensor | Why it helps |
-| --- | --- | --- |
-| Inventory hostname | Computer Name | Baseline device identity. |
-| OS rollup | Operating System | Quickly find Windows vs. macOS vs. Linux. |
-| Patch check | Installed Patches | Validate hotfix status. |
-| App presence | Installed Applications | Confirm software installs. |
-| Logged on user | Logged In User | Identify active sessions. |
-| Network reach | IP Address | Spot subnets or remote locations. |
+| Scenario           | Recommended Sensor     | Why it helps                              |
+| ------------------ | ---------------------- | ----------------------------------------- |
+| Inventory hostname | Computer Name          | Baseline device identity.                 |
+| OS rollup          | Operating System       | Quickly find Windows vs. macOS vs. Linux. |
+| Patch check        | Installed Patches      | Validate hotfix status.                   |
+| App presence       | Installed Applications | Confirm software installs.                |
+| Logged on user     | Logged In User         | Identify active sessions.                 |
+| Network reach      | IP Address             | Spot subnets or remote locations.         |
 
 ### Practice with Hardware Sensors
 
@@ -180,8 +198,11 @@ DESKTOP-FINANCE01
 ### Practice with Software Inventory
 
 <Callout type="try" title="Real world – Windows 11 readiness">
-  **Question**: `Get Computer Name, Operating System from all machines where Operating System contains "Windows 11"`<br/>
-  **Why run it?** Check migration progress.<br/>
+  **Question**: `Get Computer Name, Operating System from all machines where Operating System
+  contains "Windows 11"`
+  <br />
+  **Why run it?** Check migration progress.
+  <br />
   **Pro tip**: Use the **Group results** button to group by Operating System.
 </Callout>
 
@@ -199,22 +220,27 @@ SERVER-TERM01 - Microsoft Office 365 ProPlus
 />
 
 <Callout type="tip" title="Quick Check">
-  Test your understanding! These concepts are available as flashcards in your spaced repetition deck.
+  Test your understanding! These concepts are available as flashcards in your spaced repetition
+  deck.
 </Callout>
 
 ## Step 4 – Add Filters & Basic Targeting
+
 Filtering and targeting become deeper in Module 2, but you need a preview now.
 
 <Callout type="caution" title="Safety first">
-  Filters do not change endpoints—they only change the answer set. Actions and packages (covered later) do the remediation work.
+  Filters do not change endpoints—they only change the answer set. Actions and packages (covered
+  later) do the remediation work.
 </Callout>
 
 **Basic Filters**
+
 - `contains`: good for partial matches (`Computer Name contains LON-`).
 - `equals`: exact match; use with caution to avoid typos.
 - `and` / `or`: combine conditions, but keep it simple here.
 
 **Targeting Basics**
+
 - Keep default target `all machines` for visibility.
 - To limit scope, select **Saved Computer Group → Windows Clients** (example) from the targeting dropdown.<br/>
   {/* TODO: screenshot here (Targeting dropdown) */}
@@ -235,10 +261,14 @@ DESKTOP-DEV12 - CPU: 81%
 />
 
 <Callout type="try" title="Real world – Chrome running in finance">
-  1. Console → Interact → Question Builder.<br/>
-  2. Enter `Get Computer Name from all machines where Running Applications contains "chrome"`.<br/>
-  3. Open the **Targeting** dropdown → choose **Computer Group: Finance Department** (if available).<br/>
-  4. Ask the question and note how results shrink.<br/>
+  1. Console → Interact → Question Builder.
+  <br />
+  2. Enter `Get Computer Name from all machines where Running Applications contains "chrome"`.
+  <br />
+  3. Open the **Targeting** dropdown → choose **Computer Group: Finance Department** (if available).
+  <br />
+  4. Ask the question and note how results shrink.
+  <br />
 </Callout>
 
 <Callout type="info" title="Advanced Targeting - See Module 2">
@@ -249,14 +279,17 @@ DESKTOP-DEV12 - CPU: 81%
   - **Regex patterns** for precise text matching
   - **RBAC principles** and content set safety
 
-  For now, focus on simple `contains` filters and computer group selection—you'll master advanced targeting next!
+For now, focus on simple `contains` filters and computer group selection—you'll master advanced targeting next!
+
 </Callout>
 
 <Callout type="tip" title="Quick Check">
-  Test your understanding! These concepts are available as flashcards in your spaced repetition deck.
+  Test your understanding! These concepts are available as flashcards in your spaced repetition
+  deck.
 </Callout>
 
 ## Step 5 – Saved vs. Ad-hoc Questions
+
 **Ad-hoc** questions: typed into the builder and run once. **Saved** questions: stored with a schedule or manual replay.
 
 <Callout type="definition" title="Saved Question">
@@ -274,24 +307,33 @@ DESKTOP-DEV12 - CPU: 81%
 {/* TODO: screenshot here (Save Question dialog) */}
 
 <Callout type="try" title="Real world – Build your first saved question">
-  - Run the Windows 11 readiness question from Step 3.<br/>
-  - Save it and place it in a folder shared with your team.<br/>
-  - Confirm it appears under **Console → Content → Saved Questions**.<br/>
+  - Run the Windows 11 readiness question from Step 3.
+  <br />
+  - Save it and place it in a folder shared with your team.
+  <br />
+  - Confirm it appears under **Console → Content → Saved Questions**.
+  <br />
 </Callout>
 
 **Common Pitfalls**
+
 - Forgetting to document purpose; team cannot tell when to use it.
 - Saving without checking targets; question might run against an empty group.
 
 <Callout type="tip" title="Quick Check">
-  Test your understanding! These concepts are available as flashcards in your spaced repetition deck.
+  Test your understanding! These concepts are available as flashcards in your spaced repetition
+  deck.
 </Callout>
 
 ## Step 6 – Interpret & Export Results
+
 <Callout type="note" title="Result Grid Essentials">
-  - Sort columns to find outliers (click header → Sort Asc/Desc).<br/>
-  - Use **Group Results** to bucket answers (e.g., by Operating System).<br/>
-  - Use **Copy** (for clipboard) or **Export → CSV** to share data.<br/>
+  - Sort columns to find outliers (click header → Sort Asc/Desc).
+  <br />
+  - Use **Group Results** to bucket answers (e.g., by Operating System).
+  <br />
+  - Use **Copy** (for clipboard) or **Export → CSV** to share data.
+  <br />
 </Callout>
 
 <Steps>
@@ -304,28 +346,35 @@ DESKTOP-DEV12 - CPU: 81%
 {/* TODO: screenshot here (Export dialog) */}
 
 <Callout type="try" title="Real world – Patch compliance snapshot">
-  Question: `Get Computer Name, Installed Patches from all machines where Installed Patches contains "KB5030219"`<br/>
-  - Group results by **Installed Patches** to summarize coverage.<br/>
-  - Export to CSV and share with the patch management team.<br/>
+  Question: `Get Computer Name, Installed Patches from all machines where Installed Patches contains
+  "KB5030219"`
+  <br />
+  - Group results by **Installed Patches** to summarize coverage.
+  <br />
+  - Export to CSV and share with the patch management team.
+  <br />
 </Callout>
 
 **Troubleshooting**
+
 - Results still streaming? Wait for **Collection Progress** to reach ~90% before exporting.
 - Missing export button? Ensure the **Reporting** role is assigned to your user.
 
 <Callout type="tip" title="Quick Check">
-  Test your understanding! These concepts are available as flashcards in your spaced repetition deck.
+  Test your understanding! These concepts are available as flashcards in your spaced repetition
+  deck.
 </Callout>
 
 ## Guided Lab – Create and Reuse a Saved Question
+
 <Callout type="lab" title="Lab AQ-101 (Estimated 12 minutes)">
   Practice building and reusing a saved question in a live or sandbox portal.
 </Callout>
 
-1. **Setup (2 min)**  
+1. **Setup (2 min)**
    - Confirm Interact access and identify a test computer group (e.g., "IT Lab").
    - Download the sample CSV from the module resources for offline practice. {/* TODO: add resource link */}
-2. **Build (4 min)**  
+2. **Build (4 min)**
    - Question: `Get Computer Name, Disk Space from all machines where Disk Space < 15 GB`.<br/>
    - Target: limit to "IT Lab" group to avoid noisy results.<br/>
    - Ask the question and note any machines below the threshold.
@@ -343,31 +392,39 @@ WORKSTATION-DEV08 - C:\ 2.3GB free
   difficulty="intermediate"
 />
 
-3. **Save (3 min)**  
+3. **Save (3 min)**
    - Save as "Low Disk Space – IT Lab".<br/>
    - Add description: "Weekly capacity check for IT lab endpoints."<br/>
    - Share with the Desktop Engineering role.
-4. **Reuse & Export (3 min)**  
+4. **Reuse & Export (3 min)**
    - Reopen from **Content → Saved Questions**.<br/>
    - Run it again and export results to CSV.<br/>
    - Upload CSV to your ticketing system or attach to the lab worksheet.
 
 **Lab Debrief**
+
 - What decision did the results support?
 - Which filter might refine the query further (hint: drive letter or computer group)?
 
 ## Troubleshooting Fast Fixes
+
 - **No results**: Confirm sensor is spelled correctly and endpoints are online. Swap `contains` for a broader filter.
 - **Too many results**: Apply a computer group or add a second filter (preview in Module 2).
 - **Permission errors**: Check if your role includes Interact, Saved Questions, and Export privileges.
 - **Slow answers**: Start with one sensor; add others once you confirm the data set is manageable.
 
 ## Wrap Up & Next Steps
+
 <Callout type="summary" title="Key Takeaways">
-  - Natural-language questions always follow "Get → from → where".<br/>
-  - Core sensors (Computer Name, Operating System, Installed Applications, Installed Patches, Logged In User, Disk Space) cover 80% of beginner use cases.<br/>
-  - Saved questions capture your work and make collaboration simple.<br/>
-  - Exporting answers creates a hand-off artifact for patching, auditing, or service desk follow-up.<br/>
+  - Natural-language questions always follow "Get → from → where".
+  <br />
+  - Core sensors (Computer Name, Operating System, Installed Applications, Installed Patches, Logged
+  In User, Disk Space) cover 80% of beginner use cases.
+  <br />
+  - Saved questions capture your work and make collaboration simple.
+  <br />
+  - Exporting answers creates a hand-off artifact for patching, auditing, or service desk follow-up.
+  <br />
 </Callout>
 
 **Coming up in Module 2: Refining Questions & Targeting**
@@ -383,11 +440,15 @@ You've mastered the basics! Now you're ready for intermediate techniques:
 **Module 2** carries 23% of the TAN-1000 exam weight—it's the highest-weighted domain. The foundation you built here makes those advanced topics much easier to grasp.
 
 <Callout type="next" title="Optional Enrichment">
-  - Watch "Rerun and schedule a saved question" micro-screencast. {/* TODO: embed micro-screencast */}<br/>
-  - Read the Advanced Query Patterns appendix (link in resources) once you complete Module 2.<br/>
+  - Watch "Rerun and schedule a saved question" micro-screencast.{" "}
+  {/* TODO: embed micro-screencast */}
+  <br />
+  - Read the Advanced Query Patterns appendix (link in resources) once you complete Module 2.
+  <br />
 </Callout>
 
 **Self-Check**
+
 - Can you list the steps to build, save, and export a question?
 - Which sensor would you pick to identify machines missing your VPN software?
 

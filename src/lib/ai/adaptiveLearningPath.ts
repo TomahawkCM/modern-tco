@@ -12,8 +12,8 @@
  * - Prerequisite-aware sequencing
  */
 
-import { supabase } from '@/lib/supabase';
-import Anthropic from '@anthropic-ai/sdk';
+import { supabase } from "@/lib/supabase";
+import Anthropic from "@anthropic-ai/sdk";
 
 // ==================== TYPES ====================
 
@@ -23,9 +23,9 @@ export interface StudentGoal {
   targetExamDate?: Date;
   studyHoursPerWeek: number;
   preferredStudyTimes?: string[];
-  learningStyle?: 'visual' | 'auditory' | 'kinesthetic' | 'reading' | 'mixed';
+  learningStyle?: "visual" | "auditory" | "kinesthetic" | "reading" | "mixed";
   preferredContentTypes?: string[];
-  difficultyPreference?: 'gradual' | 'challenging' | 'adaptive';
+  difficultyPreference?: "gradual" | "challenging" | "adaptive";
   targetPassScore: number;
   priorityDomains?: string[];
   enableAdaptivePath: boolean;
@@ -38,12 +38,12 @@ export interface LearningPath {
   userId: string;
   goalId?: string;
   pathName: string;
-  pathType: 'beginner' | 'fast_track' | 'comprehensive' | 'remediation' | 'custom';
+  pathType: "beginner" | "fast_track" | "comprehensive" | "remediation" | "custom";
   estimatedCompletionHours: number;
   generatedBy: string;
   generationPrompt?: string;
   confidenceScore: number;
-  status: 'active' | 'paused' | 'completed' | 'abandoned';
+  status: "active" | "paused" | "completed" | "abandoned";
   startedAt?: Date;
   completedAt?: Date;
   totalSteps: number;
@@ -59,7 +59,7 @@ export interface LearningPathStep {
   id: string;
   pathId: string;
   stepIndex: number;
-  stepType: 'module' | 'practice' | 'video' | 'lab' | 'quiz' | 'review' | 'break';
+  stepType: "module" | "practice" | "video" | "lab" | "quiz" | "review" | "break";
   contentId?: string;
   contentDomain?: string;
   title: string;
@@ -67,7 +67,7 @@ export interface LearningPathStep {
   estimatedMinutes: number;
   actualMinutes?: number;
   prerequisiteStepIds?: string[];
-  status: 'locked' | 'available' | 'in_progress' | 'completed' | 'skipped';
+  status: "locked" | "available" | "in_progress" | "completed" | "skipped";
   startedAt?: Date;
   completedAt?: Date;
   score?: number;
@@ -91,11 +91,11 @@ export interface PerformanceData {
 // ==================== CONSTANTS ====================
 
 const TCO_DOMAINS = [
-  'asking_questions',
-  'refining_questions',
-  'taking_action',
-  'navigation_basic_functions',
-  'report_generation_export',
+  "asking_questions",
+  "refining_questions",
+  "taking_action",
+  "navigation_basic_functions",
+  "report_generation_export",
 ] as const;
 
 const DOMAIN_BLUEPRINT_WEIGHTS = {
@@ -107,12 +107,12 @@ const DOMAIN_BLUEPRINT_WEIGHTS = {
 } as const;
 
 const MODULE_ESTIMATED_HOURS = {
-  '00-tanium-platform-foundation': 3.0,
-  '01-asking-questions': 0.75,
-  '02-refining-questions-targeting': 1.5,
-  '03-taking-action-packages-actions': 2.0,
-  '04-navigation-basic-modules': 3.5,
-  '05-reporting-data-export': 3.0,
+  "00-tanium-platform-foundation": 3.0,
+  "01-asking-questions": 0.75,
+  "02-refining-questions-targeting": 1.5,
+  "03-taking-action-packages-actions": 2.0,
+  "04-navigation-basic-modules": 3.5,
+  "05-reporting-data-export": 3.0,
 } as const;
 
 // ==================== AI CLIENT SETUP ====================
@@ -123,7 +123,7 @@ function getAnthropicClient(): Anthropic {
   if (!anthropicClient) {
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
-      throw new Error('ANTHROPIC_API_KEY environment variable is not set');
+      throw new Error("ANTHROPIC_API_KEY environment variable is not set");
     }
     anthropicClient = new Anthropic({ apiKey });
   }
@@ -137,15 +137,15 @@ export async function createStudentGoal(
   goalData: Partial<StudentGoal>
 ): Promise<StudentGoal> {
   const { data, error } = await supabase
-    .from('student_goals')
+    .from("student_goals")
     .insert({
       user_id: userId,
       target_exam_date: goalData.targetExamDate,
       study_hours_per_week: goalData.studyHoursPerWeek || 10,
       preferred_study_times: goalData.preferredStudyTimes,
-      learning_style: goalData.learningStyle || 'mixed',
-      preferred_content_types: goalData.preferredContentTypes || ['text', 'video', 'practice'],
-      difficulty_preference: goalData.difficultyPreference || 'adaptive',
+      learning_style: goalData.learningStyle || "mixed",
+      preferred_content_types: goalData.preferredContentTypes || ["text", "video", "practice"],
+      difficulty_preference: goalData.difficultyPreference || "adaptive",
       target_pass_score: goalData.targetPassScore || 80,
       priority_domains: goalData.priorityDomains,
       enable_adaptive_path: goalData.enableAdaptivePath !== false,
@@ -161,14 +161,14 @@ export async function createStudentGoal(
 
 export async function getStudentGoal(userId: string): Promise<StudentGoal | null> {
   const { data, error } = await supabase
-    .from('student_goals')
-    .select('*')
-    .eq('user_id', userId)
-    .order('created_at', { ascending: false })
+    .from("student_goals")
+    .select("*")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false })
     .limit(1)
     .single();
 
-  if (error && error.code !== 'PGRST116') throw error; // PGRST116 = no rows
+  if (error && error.code !== "PGRST116") throw error; // PGRST116 = no rows
   return data ? (camelCaseKeys(data) as StudentGoal) : null;
 }
 
@@ -178,10 +178,10 @@ export async function updateStudentGoal(
   updates: Partial<StudentGoal>
 ): Promise<StudentGoal> {
   const { data, error } = await supabase
-    .from('student_goals')
+    .from("student_goals")
     .update(snakeCaseKeys(updates))
-    .eq('id', goalId)
-    .eq('user_id', userId)
+    .eq("id", goalId)
+    .eq("user_id", userId)
     .select()
     .single();
 
@@ -194,9 +194,9 @@ export async function updateStudentGoal(
 export async function gatherPerformanceData(userId: string): Promise<PerformanceData> {
   // Get domain-specific scores from practice sessions
   const { data: domainData } = await supabase
-    .from('user_progress')
-    .select('domain, score, time_spent')
-    .eq('user_id', userId);
+    .from("user_progress")
+    .select("domain, score, time_spent")
+    .eq("user_id", userId);
 
   // Aggregate by domain
   const domainScores: Record<string, number> = {};
@@ -239,34 +239,33 @@ export async function gatherPerformanceData(userId: string): Promise<Performance
 
   // Get mock exam scores
   const { data: examData } = await supabase
-    .from('exam_sessions')
-    .select('score')
-    .eq('user_id', userId)
-    .eq('status', 'completed')
-    .order('completed_at', { ascending: false });
+    .from("exam_sessions")
+    .select("score")
+    .eq("user_id", userId)
+    .eq("status", "completed")
+    .order("completed_at", { ascending: false });
 
   const mockExamScores = examData?.map((e: any) => e.score || 0) || [];
 
   // Get study hours
   const { data: progressData } = await supabase
-    .from('user_module_progress')
-    .select('time_spent_minutes')
-    .eq('user_id', userId);
+    .from("user_module_progress")
+    .select("time_spent_minutes")
+    .eq("user_id", userId);
 
   const studyHoursCompleted =
     (progressData?.reduce((sum: number, p: any) => sum + (p.time_spent_minutes || 0), 0) || 0) / 60;
 
   // Get modules completed
   const { count: modulesCompleted } = await supabase
-    .from('user_module_progress')
-    .select('*', { count: 'exact', head: true })
-    .eq('user_id', userId)
-    .eq('status', 'completed');
+    .from("user_module_progress")
+    .select("*", { count: "exact", head: true })
+    .eq("user_id", userId)
+    .eq("status", "completed");
 
   // Calculate learning velocity
-  const learningVelocity = modulesCompleted && modulesCompleted > 0
-    ? studyHoursCompleted / modulesCompleted
-    : 2.0; // Default 2 hours per module
+  const learningVelocity =
+    modulesCompleted && modulesCompleted > 0 ? studyHoursCompleted / modulesCompleted : 2.0; // Default 2 hours per module
 
   return {
     userId,
@@ -295,19 +294,19 @@ export async function generateAdaptiveLearningPath(
 
   // Call Claude API for path generation
   const message = await client.messages.create({
-    model: 'claude-3-5-sonnet-20241022',
+    model: "claude-3-5-sonnet-20241022",
     max_tokens: 4000,
     temperature: 0.7,
     messages: [
       {
-        role: 'user',
+        role: "user",
         content: prompt,
       },
     ],
   });
 
   // Parse AI response
-  const responseText = message.content[0].type === 'text' ? message.content[0].text : '';
+  const responseText = message.content[0].type === "text" ? message.content[0].text : "";
   const pathPlan = parsePathPlanResponse(responseText);
 
   // Create learning path in database
@@ -315,17 +314,17 @@ export async function generateAdaptiveLearningPath(
   const estimatedHours = calculateEstimatedHours(pathPlan.steps);
 
   const { data: pathData, error: pathError } = await supabase
-    .from('adaptive_learning_paths')
+    .from("adaptive_learning_paths")
     .insert({
       user_id: userId,
       goal_id: goal.id,
-      path_name: pathPlan.name || `${pathType.replace('_', ' ')} Path`,
+      path_name: pathPlan.name || `${pathType.replace("_", " ")} Path`,
       path_type: pathType,
       estimated_completion_hours: estimatedHours,
-      generated_by: 'claude-3.5-sonnet',
+      generated_by: "claude-3.5-sonnet",
       generation_prompt: prompt.substring(0, 1000), // Store abbreviated prompt
       confidence_score: pathPlan.confidence || 0.85,
-      status: 'active',
+      status: "active",
       total_steps: pathPlan.steps.length,
       completed_steps: 0,
       current_step_index: 0,
@@ -347,21 +346,21 @@ function buildPathGenerationPrompt(goal: StudentGoal, performance: PerformanceDa
   return `You are an expert learning path designer for the Tanium Certified Operator (TCO) certification exam.
 
 **Student Profile:**
-- Target Exam Date: ${goal.targetExamDate || 'Not set'}
+- Target Exam Date: ${goal.targetExamDate || "Not set"}
 - Available Study Time: ${goal.studyHoursPerWeek} hours/week
 - Learning Style: ${goal.learningStyle}
-- Preferred Content: ${goal.preferredContentTypes?.join(', ')}
+- Preferred Content: ${goal.preferredContentTypes?.join(", ")}
 - Difficulty Preference: ${goal.difficultyPreference}
 - Target Pass Score: ${goal.targetPassScore}%
-- Priority Domains: ${goal.priorityDomains?.join(', ') || 'None specified'}
+- Priority Domains: ${goal.priorityDomains?.join(", ") || "None specified"}
 
 **Current Performance:**
 - Overall Accuracy: ${performance.overallAccuracy.toFixed(1)}%
 - Study Hours Completed: ${performance.studyHoursCompleted.toFixed(1)}h
 - Modules Completed: ${performance.modulesCompleted}
-- Mock Exam Scores: ${performance.mockExamScores.join(', ') || 'None yet'}
-- Weak Domains: ${performance.weakDomains.join(', ') || 'None identified'}
-- Strong Domains: ${performance.strongDomains.join(', ') || 'None yet'}
+- Mock Exam Scores: ${performance.mockExamScores.join(", ") || "None yet"}
+- Weak Domains: ${performance.weakDomains.join(", ") || "None identified"}
+- Strong Domains: ${performance.strongDomains.join(", ") || "None yet"}
 
 **TCO Exam Blueprint:**
 1. Asking Questions (22% weight)
@@ -422,20 +421,20 @@ function parsePathPlanResponse(response: string): {
     // Extract JSON from response (may have markdown code blocks)
     const jsonMatch = response.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
-      throw new Error('No JSON found in AI response');
+      throw new Error("No JSON found in AI response");
     }
 
     const parsed = JSON.parse(jsonMatch[0]);
     return {
-      name: parsed.name || 'Adaptive Learning Path',
-      confidence: parsed.confidence || 0.80,
+      name: parsed.name || "Adaptive Learning Path",
+      confidence: parsed.confidence || 0.8,
       steps: parsed.steps || [],
     };
   } catch (error) {
-    console.error('Error parsing AI response:', error);
+    console.error("Error parsing AI response:", error);
     // Return fallback path
     return {
-      name: 'Standard TCO Path',
+      name: "Standard TCO Path",
       confidence: 0.75,
       steps: getFallbackSteps(),
     };
@@ -445,23 +444,23 @@ function parsePathPlanResponse(response: string): {
 function getFallbackSteps(): any[] {
   return [
     {
-      title: 'Foundation: Tanium Platform Basics',
-      type: 'module',
-      contentId: '00-tanium-platform-foundation',
-      domain: 'platform-foundation',
+      title: "Foundation: Tanium Platform Basics",
+      type: "module",
+      contentId: "00-tanium-platform-foundation",
+      domain: "platform-foundation",
       estimatedMinutes: 180,
-      description: 'Learn core Tanium concepts',
+      description: "Learn core Tanium concepts",
       prerequisites: [],
       difficulty: 1.0,
     },
     {
-      title: 'Master Asking Questions',
-      type: 'module',
-      contentId: '01-asking-questions',
-      domain: 'asking_questions',
+      title: "Master Asking Questions",
+      type: "module",
+      contentId: "01-asking-questions",
+      domain: "asking_questions",
       estimatedMinutes: 45,
-      description: 'Natural language queries',
-      prerequisites: ['00-tanium-platform-foundation'],
+      description: "Natural language queries",
+      prerequisites: ["00-tanium-platform-foundation"],
       difficulty: 1.0,
     },
     // Add more fallback steps...
@@ -479,12 +478,12 @@ async function createLearningPathSteps(pathId: string, steps: any[]): Promise<vo
     description: step.description,
     estimated_minutes: step.estimatedMinutes,
     prerequisite_step_ids: step.prerequisites || [],
-    status: index === 0 ? 'available' : 'locked',
+    status: index === 0 ? "available" : "locked",
     difficulty_adjustment: step.difficulty || 1.0,
     attempts: 0,
   }));
 
-  const { error } = await supabase.from('learning_path_steps').insert(stepsToInsert);
+  const { error } = await supabase.from("learning_path_steps").insert(stepsToInsert);
 
   if (error) throw error;
 }
@@ -492,12 +491,12 @@ async function createLearningPathSteps(pathId: string, steps: any[]): Promise<vo
 function determinePathType(
   goal: StudentGoal,
   performance: PerformanceData
-): 'beginner' | 'fast_track' | 'comprehensive' | 'remediation' | 'custom' {
-  if (performance.modulesCompleted === 0) return 'beginner';
-  if (performance.weakDomains.length > 2) return 'remediation';
-  if (goal.studyHoursPerWeek >= 15 && goal.targetExamDate) return 'fast_track';
-  if (goal.targetPassScore >= 90) return 'comprehensive';
-  return 'custom';
+): "beginner" | "fast_track" | "comprehensive" | "remediation" | "custom" {
+  if (performance.modulesCompleted === 0) return "beginner";
+  if (performance.weakDomains.length > 2) return "remediation";
+  if (goal.studyHoursPerWeek >= 15 && goal.targetExamDate) return "fast_track";
+  if (goal.targetPassScore >= 90) return "comprehensive";
+  return "custom";
 }
 
 function calculateEstimatedHours(steps: any[]): number {
@@ -523,30 +522,30 @@ function calculateCompletionDate(estimatedHours: number, hoursPerWeek: number): 
 
 export async function getActiveLearningPath(userId: string): Promise<LearningPath | null> {
   const { data, error } = await supabase
-    .rpc('get_active_learning_path', { p_user_id: userId })
+    .rpc("get_active_learning_path", { p_user_id: userId })
     .single();
 
-  if (error && error.code !== 'PGRST116') throw error;
-  return data ? (camelCaseKeys(data)) : null;
+  if (error && error.code !== "PGRST116") throw error;
+  return data ? camelCaseKeys(data) : null;
 }
 
 export async function getNextStep(pathId: string): Promise<LearningPathStep | null> {
   const { data: pathData } = await supabase
-    .from('adaptive_learning_paths')
-    .select('current_step_index')
-    .eq('id', pathId)
+    .from("adaptive_learning_paths")
+    .select("current_step_index")
+    .eq("id", pathId)
     .single();
 
   if (!pathData) return null;
 
   const { data, error } = await supabase
-    .from('learning_path_steps')
-    .select('*')
-    .eq('path_id', pathId)
-    .eq('step_index', pathData.current_step_index)
+    .from("learning_path_steps")
+    .select("*")
+    .eq("path_id", pathId)
+    .eq("step_index", pathData.current_step_index)
     .single();
 
-  if (error && error.code !== 'PGRST116') throw error;
+  if (error && error.code !== "PGRST116") throw error;
   return data ? (camelCaseKeys(data) as LearningPathStep) : null;
 }
 
@@ -558,20 +557,20 @@ export async function completeStep(
 ): Promise<void> {
   // Mark step as completed
   await supabase
-    .from('learning_path_steps')
+    .from("learning_path_steps")
     .update({
-      status: 'completed',
+      status: "completed",
       completed_at: new Date().toISOString(),
       score,
       actual_minutes: timeSpentMinutes,
     })
-    .eq('id', stepId);
+    .eq("id", stepId);
 
   // Update path progress
   const { data: pathData } = await supabase
-    .from('adaptive_learning_paths')
-    .select('completed_steps, current_step_index, total_steps')
-    .eq('id', pathId)
+    .from("adaptive_learning_paths")
+    .select("completed_steps, current_step_index, total_steps")
+    .eq("id", pathId)
     .single();
 
   if (!pathData) return;
@@ -580,22 +579,22 @@ export async function completeStep(
   const isComplete = newCompletedSteps >= pathData.total_steps;
 
   await supabase
-    .from('adaptive_learning_paths')
+    .from("adaptive_learning_paths")
     .update({
       completed_steps: newCompletedSteps,
       current_step_index: pathData.current_step_index + 1,
-      status: isComplete ? 'completed' : 'active',
+      status: isComplete ? "completed" : "active",
       completed_at: isComplete ? new Date().toISOString() : null,
     })
-    .eq('id', pathId);
+    .eq("id", pathId);
 
   // Unlock next step if exists
   if (!isComplete) {
     await supabase
-      .from('learning_path_steps')
-      .update({ status: 'available' })
-      .eq('path_id', pathId)
-      .eq('step_index', pathData.current_step_index + 1);
+      .from("learning_path_steps")
+      .update({ status: "available" })
+      .eq("path_id", pathId)
+      .eq("step_index", pathData.current_step_index + 1);
   }
 }
 

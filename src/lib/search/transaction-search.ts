@@ -4,9 +4,9 @@
  * Features: Multi-field search, typo tolerance, result scoring, instant results
  */
 
-import Fuse, { type IFuseOptions, type FuseResult } from 'fuse.js';
-import type { Transaction, Category } from '@/types/budget';
-import { parseSearchQuery, type ParsedQuery } from './query-parser';
+import Fuse, { type IFuseOptions, type FuseResult } from "fuse.js";
+import type { Transaction, Category } from "@/types/budget";
+import { parseSearchQuery, type ParsedQuery } from "./query-parser";
 
 // Search result with score and match info
 export interface SearchResult {
@@ -32,13 +32,13 @@ export interface SearchableTransaction extends Transaction {
 const FUSE_OPTIONS: IFuseOptions<SearchableTransaction> = {
   // Fields to search with weights (higher = more important)
   keys: [
-    { name: 'description', weight: 0.35 },
-    { name: 'merchant', weight: 0.25 },
-    { name: 'categoryName', weight: 0.15 },
-    { name: 'notes', weight: 0.10 },
-    { name: 'originalDescription', weight: 0.08 },
-    { name: 'accountName', weight: 0.05 },
-    { name: 'allText', weight: 0.02 },
+    { name: "description", weight: 0.35 },
+    { name: "merchant", weight: 0.25 },
+    { name: "categoryName", weight: 0.15 },
+    { name: "notes", weight: 0.1 },
+    { name: "originalDescription", weight: 0.08 },
+    { name: "accountName", weight: 0.05 },
+    { name: "allText", weight: 0.02 },
   ],
   // Fuzzy search settings
   threshold: 0.35, // 0 = exact match, 1 = match anything (0.35 = good typo tolerance)
@@ -69,14 +69,14 @@ function prepareForSearch(
   accountMap: Map<string, string>
 ): SearchableTransaction {
   const categoryName = transaction.category
-    ? (categoryMap.get(transaction.category) || transaction.category)
-    : 'Uncategorized';
-  const accountName = accountMap.get(transaction.accountId) || 'Unknown Account';
+    ? categoryMap.get(transaction.category) || transaction.category
+    : "Uncategorized";
+  const accountName = accountMap.get(transaction.accountId) || "Unknown Account";
   const amountFormatted = `$${Math.abs(transaction.amount).toFixed(2)}`;
-  const dateFormatted = new Date(transaction.date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
+  const dateFormatted = new Date(transaction.date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   });
 
   // Combine all searchable text for broad queries
@@ -87,8 +87,10 @@ function prepareForSearch(
     transaction.originalDescription,
     categoryName,
     accountName,
-    transaction.tags?.join(' '),
-  ].filter(Boolean).join(' ');
+    transaction.tags?.join(" "),
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return {
     ...transaction,
@@ -120,11 +122,11 @@ export function initializeSearchIndex(
   }
 
   // Build lookup maps
-  const categoryMap = new Map(categories.map(c => [c.name, c.name]));
-  const accountMap = new Map(accounts.map(a => [a.id, a.name]));
+  const categoryMap = new Map(categories.map((c) => [c.name, c.name]));
+  const accountMap = new Map(accounts.map((a) => [a.id, a.name]));
 
   // Prepare transactions for search
-  const searchableTransactions = transactions.map(tx =>
+  const searchableTransactions = transactions.map((tx) =>
     prepareForSearch(tx, categoryMap, accountMap)
   );
 
@@ -146,62 +148,60 @@ function applyStructuredFilters(
 
   // Amount filters
   if (query.filters.amountMin !== undefined) {
-    filtered = filtered.filter(tx => Math.abs(tx.amount) >= query.filters.amountMin!);
+    filtered = filtered.filter((tx) => Math.abs(tx.amount) >= query.filters.amountMin!);
   }
   if (query.filters.amountMax !== undefined) {
-    filtered = filtered.filter(tx => Math.abs(tx.amount) <= query.filters.amountMax!);
+    filtered = filtered.filter((tx) => Math.abs(tx.amount) <= query.filters.amountMax!);
   }
 
   // Category filter
   if (query.filters.category) {
     const categoryLower = query.filters.category.toLowerCase();
-    filtered = filtered.filter(tx =>
-      tx.categoryName.toLowerCase().includes(categoryLower) ||
-      tx.category?.toLowerCase().includes(categoryLower)
+    filtered = filtered.filter(
+      (tx) =>
+        tx.categoryName.toLowerCase().includes(categoryLower) ||
+        tx.category?.toLowerCase().includes(categoryLower)
     );
   }
 
   // Date filters
   if (query.filters.dateStart) {
     const startTime = query.filters.dateStart.getTime();
-    filtered = filtered.filter(tx => new Date(tx.date).getTime() >= startTime);
+    filtered = filtered.filter((tx) => new Date(tx.date).getTime() >= startTime);
   }
   if (query.filters.dateEnd) {
     const endTime = query.filters.dateEnd.getTime();
-    filtered = filtered.filter(tx => new Date(tx.date).getTime() <= endTime);
+    filtered = filtered.filter((tx) => new Date(tx.date).getTime() <= endTime);
   }
 
   // Account filter
   if (query.filters.account) {
     const accountLower = query.filters.account.toLowerCase();
-    filtered = filtered.filter(tx =>
-      tx.accountName.toLowerCase().includes(accountLower)
-    );
+    filtered = filtered.filter((tx) => tx.accountName.toLowerCase().includes(accountLower));
   }
 
   // Type filter (income/expense)
   if (query.filters.type) {
-    if (query.filters.type === 'income') {
-      filtered = filtered.filter(tx => tx.amount > 0);
-    } else if (query.filters.type === 'expense') {
-      filtered = filtered.filter(tx => tx.amount < 0);
+    if (query.filters.type === "income") {
+      filtered = filtered.filter((tx) => tx.amount > 0);
+    } else if (query.filters.type === "expense") {
+      filtered = filtered.filter((tx) => tx.amount < 0);
     }
   }
 
   // Tag filter
   if (query.filters.tag) {
     const tagLower = query.filters.tag.toLowerCase();
-    filtered = filtered.filter(tx =>
-      tx.tags?.some(t => t.toLowerCase().includes(tagLower))
-    );
+    filtered = filtered.filter((tx) => tx.tags?.some((t) => t.toLowerCase().includes(tagLower)));
   }
 
   // Merchant filter
   if (query.filters.merchant) {
     const merchantLower = query.filters.merchant.toLowerCase();
-    filtered = filtered.filter(tx =>
-      tx.merchant?.toLowerCase().includes(merchantLower) ||
-      tx.description.toLowerCase().includes(merchantLower)
+    filtered = filtered.filter(
+      (tx) =>
+        tx.merchant?.toLowerCase().includes(merchantLower) ||
+        tx.description.toLowerCase().includes(merchantLower)
     );
   }
 
@@ -216,20 +216,20 @@ export function searchTransactions(
   query: string,
   options: {
     limit?: number;
-    sortBy?: 'relevance' | 'date' | 'amount';
-    sortDirection?: 'asc' | 'desc';
+    sortBy?: "relevance" | "date" | "amount";
+    sortDirection?: "asc" | "desc";
   } = {}
 ): SearchResult[] {
-  const { limit = 50, sortBy = 'relevance', sortDirection = 'desc' } = options;
+  const { limit = 50, sortBy = "relevance", sortDirection = "desc" } = options;
 
   if (!cachedFuse) {
-    console.warn('[TransactionSearch] Index not initialized. Call initializeSearchIndex first.');
+    console.warn("[TransactionSearch] Index not initialized. Call initializeSearchIndex first.");
     return [];
   }
 
   // Empty query returns all transactions
   if (!query.trim()) {
-    const allResults: SearchResult[] = cachedTransactions.map(item => ({
+    const allResults: SearchResult[] = cachedTransactions.map((item) => ({
       item,
       score: 1,
     }));
@@ -241,10 +241,10 @@ export function searchTransactions(
 
   // If we have structured filters, apply them first
   if (parsedQuery.hasStructuredFilters) {
-    const categoryMap = new Map(cachedCategories.map(c => [c.name, c.name]));
-    const accountMap = new Map(cachedAccounts.map(a => [a.id, a.name]));
+    const categoryMap = new Map(cachedCategories.map((c) => [c.name, c.name]));
+    const accountMap = new Map(cachedAccounts.map((a) => [a.id, a.name]));
 
-    const searchableTransactions = cachedTransactions.map(tx =>
+    const searchableTransactions = cachedTransactions.map((tx) =>
       prepareForSearch(tx, categoryMap, accountMap)
     );
 
@@ -259,11 +259,11 @@ export function searchTransactions(
     }
 
     // No text query, return filtered results sorted by date
-    const results: SearchResult[] = filtered.map(item => ({
-      item: cachedTransactions.find(tx => tx.id === item.id)!,
+    const results: SearchResult[] = filtered.map((item) => ({
+      item: cachedTransactions.find((tx) => tx.id === item.id)!,
       score: 1,
     }));
-    return sortResults(results, 'date', 'desc').slice(0, limit);
+    return sortResults(results, "date", "desc").slice(0, limit);
   }
 
   // Pure fuzzy search
@@ -277,11 +277,11 @@ export function searchTransactions(
  */
 function transformFuseResult(result: FuseResult<SearchableTransaction>): SearchResult {
   return {
-    item: cachedTransactions.find(tx => tx.id === result.item.id) || result.item,
+    item: cachedTransactions.find((tx) => tx.id === result.item.id) || result.item,
     score: result.score || 0,
-    matches: result.matches?.map(m => ({
-      key: m.key || '',
-      value: m.value || '',
+    matches: result.matches?.map((m) => ({
+      key: m.key || "",
+      value: m.value || "",
       indices: m.indices as [number, number][],
     })),
   };
@@ -292,19 +292,19 @@ function transformFuseResult(result: FuseResult<SearchableTransaction>): SearchR
  */
 function sortResults(
   results: SearchResult[],
-  sortBy: 'relevance' | 'date' | 'amount',
-  direction: 'asc' | 'desc'
+  sortBy: "relevance" | "date" | "amount",
+  direction: "asc" | "desc"
 ): SearchResult[] {
-  const multiplier = direction === 'asc' ? 1 : -1;
+  const multiplier = direction === "asc" ? 1 : -1;
 
   return [...results].sort((a, b) => {
     switch (sortBy) {
-      case 'relevance':
+      case "relevance":
         // Lower score = better match
         return (a.score - b.score) * multiplier;
-      case 'date':
+      case "date":
         return (new Date(a.item.date).getTime() - new Date(b.item.date).getTime()) * multiplier;
-      case 'amount':
+      case "amount":
         return (Math.abs(a.item.amount) - Math.abs(b.item.amount)) * multiplier;
       default:
         return 0;
@@ -320,7 +320,7 @@ export function filterByAmountRange(
   minAmount: number | undefined,
   maxAmount: number | undefined
 ): Transaction[] {
-  return transactions.filter(tx => {
+  return transactions.filter((tx) => {
     const absAmount = Math.abs(tx.amount);
     if (minAmount !== undefined && absAmount < minAmount) return false;
     if (maxAmount !== undefined && absAmount > maxAmount) return false;
@@ -331,10 +331,7 @@ export function filterByAmountRange(
 /**
  * Get search suggestions based on partial query
  */
-export function getSearchSuggestions(
-  partialQuery: string,
-  limit: number = 5
-): string[] {
+export function getSearchSuggestions(partialQuery: string, limit: number = 5): string[] {
   if (!cachedFuse || !partialQuery.trim()) {
     return [];
   }
@@ -348,13 +345,13 @@ export function getSearchSuggestions(
       suggestions.add(result.item.merchant);
     }
     // Add category names
-    if (result.item.categoryName && result.item.categoryName !== 'Uncategorized') {
+    if (result.item.categoryName && result.item.categoryName !== "Uncategorized") {
       suggestions.add(result.item.categoryName);
     }
     // Add description excerpts
     if (result.item.description) {
       // Extract first meaningful word/phrase
-      const words = result.item.description.split(/\s+/).filter(w => w.length > 3);
+      const words = result.item.description.split(/\s+/).filter((w) => w.length > 3);
       if (words.length > 0) {
         suggestions.add(words[0]);
       }

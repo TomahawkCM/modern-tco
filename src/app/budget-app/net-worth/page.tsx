@@ -1,10 +1,10 @@
-import { Metadata } from 'next';
-import { ErrorBoundary } from '@/components/ErrorBoundary';
-import { ClientNetWorth } from './client';
+import type { Metadata } from "next";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { ClientNetWorth } from "./client";
 
 export const metadata: Metadata = {
-  title: 'Net Worth | Budget App',
-  description: 'Track your net worth over time',
+  title: "Net Worth | Budget App",
+  description: "Track your net worth over time",
 };
 
 export default function NetWorthPage() {

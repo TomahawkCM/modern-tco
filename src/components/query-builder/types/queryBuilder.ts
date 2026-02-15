@@ -9,14 +9,14 @@ import {
   type Sensor,
   type QueryResult,
   type FieldMapping,
-  type FilterOperator
-} from '@/lib/tanium-query-engine/types';
+  type FilterOperator,
+} from "@/lib/tanium-query-engine/types";
 
 // Re-export imported types
 export type { FilterOperator };
 
 // Question Builder Modes
-export type BuilderMode = 'guided' | 'advanced' | 'natural-language';
+export type BuilderMode = "guided" | "advanced" | "natural-language";
 
 // Query Building State
 export interface QueryBuilderState {
@@ -40,7 +40,7 @@ export interface PartialQuery {
 
   // WHERE clause
   filters: FilterSelection[];
-  filterLogic: 'AND' | 'OR';
+  filterLogic: "AND" | "OR";
 
   // GROUP BY
   groupBy: string[];
@@ -70,14 +70,14 @@ export interface SensorSelection {
 
 // Aggregate selection
 export interface AggregateSelection {
-  function: 'count' | 'min' | 'max' | 'avg' | 'sum';
+  function: "count" | "min" | "max" | "avg" | "sum";
   sensor?: string;
   alias?: string;
 }
 
 // Scope/targeting selection
 export interface ScopeSelection {
-  type: 'all' | 'group' | 'custom';
+  type: "all" | "group" | "custom";
   computerGroup?: string;
   customFilter?: FilterSelection[];
 }
@@ -88,16 +88,16 @@ export interface FilterSelection {
   sensor: string;
   operator: FilterOperator;
   value: string | number | boolean;
-  dataType: 'text' | 'number' | 'date' | 'boolean';
+  dataType: "text" | "number" | "date" | "boolean";
   isNested?: boolean;
   parentId?: string;
-  logic?: 'AND' | 'OR';
+  logic?: "AND" | "OR";
 }
 
 // Order by selection
 export interface OrderBySelection {
   sensor: string;
-  direction: 'asc' | 'desc';
+  direction: "asc" | "desc";
 }
 
 // Validation state
@@ -113,20 +113,20 @@ export interface ValidationError {
   field: string;
   message: string;
   position?: { line: number; column: number };
-  severity: 'error' | 'critical';
+  severity: "error" | "critical";
 }
 
 export interface ValidationWarning {
   field: string;
   message: string;
   suggestion?: string;
-  severity: 'warning' | 'info';
+  severity: "warning" | "info";
 }
 
 // Query suggestions
 export interface QuerySuggestion {
   id: string;
-  type: 'sensor' | 'filter' | 'template' | 'complete';
+  type: "sensor" | "filter" | "template" | "complete";
   text: string;
   displayText: string;
   description?: string;
@@ -168,7 +168,7 @@ export interface SensorCatalogEntry {
   category: string;
   description: string;
   examples?: string[];
-  runtime: 'fast' | 'medium' | 'slow';
+  runtime: "fast" | "medium" | "slow";
   runtimeMs?: number;
   popularity: number;
   parameters?: ParameterDefinition[];
@@ -177,7 +177,7 @@ export interface SensorCatalogEntry {
 
 export interface ParameterDefinition {
   name: string;
-  type: 'text' | 'number' | 'select' | 'date';
+  type: "text" | "number" | "select" | "date";
   required: boolean;
   default?: any;
   options?: Array<{ value: string; label: string }>;
@@ -195,7 +195,7 @@ export interface QuestionTemplate {
   name: string;
   description: string;
   category: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced' | 'expert';
+  difficulty: "beginner" | "intermediate" | "advanced" | "expert";
   query: PartialQuery;
   explanation?: string;
   tags: string[];
@@ -205,25 +205,25 @@ export interface QuestionTemplate {
 
 // Builder actions for state management
 export type QueryBuilderAction =
-  | { type: 'SET_MODE'; mode: BuilderMode }
-  | { type: 'ADD_SENSOR'; sensor: SensorSelection }
-  | { type: 'REMOVE_SENSOR'; index: number }
-  | { type: 'UPDATE_SENSOR'; index: number; sensor: SensorSelection }
-  | { type: 'ADD_FILTER'; filter: FilterSelection }
-  | { type: 'REMOVE_FILTER'; filterId: string }
-  | { type: 'UPDATE_FILTER'; filterId: string; filter: FilterSelection }
-  | { type: 'SET_SCOPE'; scope: ScopeSelection }
-  | { type: 'SET_GROUP_BY'; groupBy: string[] }
-  | { type: 'SET_ORDER_BY'; orderBy: OrderBySelection[] }
-  | { type: 'SET_LIMIT'; limit: number }
-  | { type: 'SET_RAW_QUERY'; query: string }
-  | { type: 'SET_VALIDATION'; validation: ValidationState }
-  | { type: 'SET_SUGGESTIONS'; suggestions: QuerySuggestion[] }
-  | { type: 'SET_RESULT'; result: QueryResult }
-  | { type: 'SET_EXECUTING'; isExecuting: boolean }
-  | { type: 'ADD_TO_HISTORY'; item: QueryHistoryItem }
-  | { type: 'LOAD_TEMPLATE'; template: QuestionTemplate }
-  | { type: 'RESET_QUERY' };
+  | { type: "SET_MODE"; mode: BuilderMode }
+  | { type: "ADD_SENSOR"; sensor: SensorSelection }
+  | { type: "REMOVE_SENSOR"; index: number }
+  | { type: "UPDATE_SENSOR"; index: number; sensor: SensorSelection }
+  | { type: "ADD_FILTER"; filter: FilterSelection }
+  | { type: "REMOVE_FILTER"; filterId: string }
+  | { type: "UPDATE_FILTER"; filterId: string; filter: FilterSelection }
+  | { type: "SET_SCOPE"; scope: ScopeSelection }
+  | { type: "SET_GROUP_BY"; groupBy: string[] }
+  | { type: "SET_ORDER_BY"; orderBy: OrderBySelection[] }
+  | { type: "SET_LIMIT"; limit: number }
+  | { type: "SET_RAW_QUERY"; query: string }
+  | { type: "SET_VALIDATION"; validation: ValidationState }
+  | { type: "SET_SUGGESTIONS"; suggestions: QuerySuggestion[] }
+  | { type: "SET_RESULT"; result: QueryResult }
+  | { type: "SET_EXECUTING"; isExecuting: boolean }
+  | { type: "ADD_TO_HISTORY"; item: QueryHistoryItem }
+  | { type: "LOAD_TEMPLATE"; template: QuestionTemplate }
+  | { type: "RESET_QUERY" };
 
 // Component props
 export interface QuestionBuilderProps {
@@ -264,8 +264,8 @@ export interface FilterBuilderProps {
   onRemove: (filterId: string) => void;
   onUpdate: (filterId: string, filter: FilterSelection) => void;
   availableSensors: string[];
-  filterLogic: 'AND' | 'OR';
-  onLogicChange: (logic: 'AND' | 'OR') => void;
+  filterLogic: "AND" | "OR";
+  onLogicChange: (logic: "AND" | "OR") => void;
   allowNested?: boolean;
   className?: string;
 }
@@ -281,8 +281,8 @@ export interface QueryPreviewProps {
 export interface ResultsViewerProps {
   result: QueryResult;
   isLoading?: boolean;
-  onExport?: (format: 'csv' | 'json') => void;
-  onSort?: (column: string, direction: 'asc' | 'desc') => void;
+  onExport?: (format: "csv" | "json") => void;
+  onSort?: (column: string, direction: "asc" | "desc") => void;
   pageSize?: number;
   className?: string;
 }

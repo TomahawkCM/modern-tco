@@ -38,7 +38,7 @@ export function PWAInstallPrompt() {
   };
 
   return (
-    <div className="fixed bottom-[4.5rem] inset-x-4 z-50 md:bottom-4 md:inset-x-auto md:end-4 md:max-w-sm animate-in slide-in-from-bottom-5">
+    <div className="fixed inset-x-4 bottom-[4.5rem] z-50 animate-in slide-in-from-bottom-5 md:inset-x-auto md:bottom-4 md:end-4 md:max-w-sm">
       <div className="relative rounded-xl border border-white/10 bg-slate-900/95 p-4 shadow-lg backdrop-blur-xl">
         <button
           onClick={handleDismiss}
@@ -53,13 +53,13 @@ export function PWAInstallPrompt() {
             <Download className="h-5 w-5 text-teal-400" />
           </div>
 
-          <div className="flex-1 min-w-0">
+          <div className="min-w-0 flex-1">
             <p className="text-sm font-medium text-white">{t("title")}</p>
-            <p className="text-xs text-slate-400 mt-0.5">{t("description")}</p>
+            <p className="mt-0.5 text-xs text-slate-400">{t("description")}</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 mt-3">
+        <div className="mt-3 flex items-center gap-2">
           <Button size="sm" onClick={handleInstall} className="flex-1">
             {t("buttons.install")}
           </Button>
@@ -74,7 +74,7 @@ export function PWAInstallPrompt() {
         </div>
 
         {/* Feature pills */}
-        <div className="flex flex-wrap gap-2 mt-3">
+        <div className="mt-3 flex flex-wrap gap-2">
           <span className="inline-flex items-center gap-1 rounded-full bg-white/5 px-2.5 py-0.5 text-[11px] text-slate-400">
             <span className="text-teal-400">✓</span> {t("features.offline")}
           </span>

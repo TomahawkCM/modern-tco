@@ -41,7 +41,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/05-l/report-brief"
-  onClick={() => emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-01", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-01", action: "practice_start" })
+  }
 >
   Practice: Write a Reporting Brief
 </PracticeButton>
@@ -72,7 +74,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/05-l/dashboard-outline"
-  onClick={() => emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-02", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-02", action: "practice_start" })
+  }
 >
   Practice: Outline a Dashboard Story
 </PracticeButton>
@@ -103,7 +107,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/05-l/export-playbook"
-  onClick={() => emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-03", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-03", action: "practice_start" })
+  }
 >
   Practice: Draft an Export Playbook
 </PracticeButton>
@@ -134,7 +140,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/05-l/data-quality-log"
-  onClick={() => emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-04", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-04", action: "practice_start" })
+  }
 >
   Practice: Create a Data Quality Log
 </PracticeButton>
@@ -165,7 +173,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/05-l/governance-check"
-  onClick={() => emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-05", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-05L", unitId: "unit-05L-05", action: "practice_start" })
+  }
 >
   Practice: Run a Governance Check
 </PracticeButton>
@@ -180,4 +190,3 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
   quizIdPrefix="module-05L-summary"
   questions={getReadOnlyQuestions({ domain: "reporting-export", limit: 6 })}
 />
-

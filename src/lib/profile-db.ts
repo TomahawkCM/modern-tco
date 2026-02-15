@@ -3,10 +3,10 @@
  * CRUD operations for user profiles and visibility filtering
  */
 
-import { db } from './budget-db';
-import type { Profile, ProfileCreateInput, ProfileUpdateInput } from '@/types/profile';
-import type { Budget } from '@/types/budget';
-import { getRandomAvatarColor } from '@/types/profile';
+import { db } from "./budget-db";
+import type { Profile, ProfileCreateInput, ProfileUpdateInput } from "@/types/profile";
+import type { Budget } from "@/types/budget";
+import { getRandomAvatarColor } from "@/types/profile";
 
 /**
  * Generate a unique profile ID
@@ -21,7 +21,7 @@ function generateProfileId(): string {
  * @returns The created profile ID
  */
 export async function createProfile(
-  input: Omit<ProfileCreateInput, 'pinHash' | 'pinSalt'> & {
+  input: Omit<ProfileCreateInput, "pinHash" | "pinSalt"> & {
     pinHash?: string | null;
     pinSalt?: string | null;
   }
@@ -44,11 +44,11 @@ export async function createProfile(
     };
 
     await db.profiles.add(profile);
-    console.log('[ProfileDB] Created profile:', profile.id, profile.name);
+    console.log("[ProfileDB] Created profile:", profile.id, profile.name);
 
     return profile.id;
   } catch (error) {
-    console.error('[ProfileDB] Error creating profile:', error);
+    console.error("[ProfileDB] Error creating profile:", error);
     throw error;
   }
 }
@@ -62,7 +62,7 @@ export async function getProfile(id: string): Promise<Profile | undefined> {
   try {
     return await db.profiles.get(id);
   } catch (error) {
-    console.error('[ProfileDB] Error getting profile:', error);
+    console.error("[ProfileDB] Error getting profile:", error);
     return undefined;
   }
 }
@@ -76,7 +76,7 @@ export async function getAllProfiles(): Promise<Profile[]> {
     const profiles = await db.profiles.toArray();
     return profiles.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   } catch (error) {
-    console.error('[ProfileDB] Error getting all profiles:', error);
+    console.error("[ProfileDB] Error getting all profiles:", error);
     return [];
   }
 }
@@ -87,9 +87,9 @@ export async function getAllProfiles(): Promise<Profile[]> {
  */
 export async function getDefaultProfile(): Promise<Profile | undefined> {
   try {
-    return await db.profiles.where('isDefault').equals(1).first();
+    return await db.profiles.where("isDefault").equals(1).first();
   } catch (error) {
-    console.error('[ProfileDB] Error getting default profile:', error);
+    console.error("[ProfileDB] Error getting default profile:", error);
     return undefined;
   }
 }
@@ -99,18 +99,15 @@ export async function getDefaultProfile(): Promise<Profile | undefined> {
  * @param id Profile ID
  * @param updates Partial profile updates
  */
-export async function updateProfile(
-  id: string,
-  updates: ProfileUpdateInput
-): Promise<void> {
+export async function updateProfile(id: string, updates: ProfileUpdateInput): Promise<void> {
   try {
     await db.profiles.update(id, {
       ...updates,
       updatedAt: new Date(),
     });
-    console.log('[ProfileDB] Updated profile:', id);
+    console.log("[ProfileDB] Updated profile:", id);
   } catch (error) {
-    console.error('[ProfileDB] Error updating profile:', error);
+    console.error("[ProfileDB] Error updating profile:", error);
     throw error;
   }
 }
@@ -125,20 +122,18 @@ export async function deleteProfile(id: string): Promise<boolean> {
   try {
     const profile = await db.profiles.get(id);
     if (!profile) {
-      throw new Error('Profile not found');
+      throw new Error("Profile not found");
     }
 
     // Check if this is the only profile
     const profileCount = await db.profiles.count();
     if (profileCount === 1) {
-      throw new Error('Cannot delete the only profile');
+      throw new Error("Cannot delete the only profile");
     }
 
     // If deleting default profile, assign default to another profile
     if (profile.isDefault) {
-      const otherProfile = await db.profiles
-        .filter((p) => p.id !== id)
-        .first();
+      const otherProfile = await db.profiles.filter((p) => p.id !== id).first();
       if (otherProfile) {
         await db.profiles.update(otherProfile.id, {
           isDefault: true,
@@ -151,22 +146,20 @@ export async function deleteProfile(id: string): Promise<boolean> {
     await db.profiles.delete(id);
 
     // Update budgets owned by this profile to shared
-    const ownedBudgets = await db.budgets
-      .filter((b) => b.ownerId === id)
-      .toArray();
+    const ownedBudgets = await db.budgets.filter((b) => b.ownerId === id).toArray();
 
     for (const budget of ownedBudgets) {
       await db.budgets.update(budget.id, {
         ownerId: null,
-        visibility: 'shared',
+        visibility: "shared",
         updatedAt: new Date(),
       });
     }
 
-    console.log('[ProfileDB] Deleted profile:', id);
+    console.log("[ProfileDB] Deleted profile:", id);
     return true;
   } catch (error) {
-    console.error('[ProfileDB] Error deleting profile:', error);
+    console.error("[ProfileDB] Error deleting profile:", error);
     throw error;
   }
 }
@@ -192,9 +185,9 @@ export async function setDefaultProfile(id: string): Promise<void> {
       updatedAt: new Date(),
     });
 
-    console.log('[ProfileDB] Set default profile:', id);
+    console.log("[ProfileDB] Set default profile:", id);
   } catch (error) {
-    console.error('[ProfileDB] Error setting default profile:', error);
+    console.error("[ProfileDB] Error setting default profile:", error);
     throw error;
   }
 }
@@ -221,7 +214,7 @@ export async function getProfileCount(): Promise<number> {
   try {
     return await db.profiles.count();
   } catch (error) {
-    console.error('[ProfileDB] Error getting profile count:', error);
+    console.error("[ProfileDB] Error getting profile count:", error);
     return 0;
   }
 }
@@ -245,7 +238,7 @@ export async function getVisibleBudgets(profileId: string): Promise<Budget[]> {
 
     return allBudgets.filter((budget) => {
       // Shared budgets are visible to all
-      if (budget.visibility === 'shared' || budget.visibility === undefined) {
+      if (budget.visibility === "shared" || budget.visibility === undefined) {
         return true;
       }
 
@@ -255,14 +248,14 @@ export async function getVisibleBudgets(profileId: string): Promise<Budget[]> {
       }
 
       // Private budgets only visible to owner
-      if (budget.visibility === 'private' && budget.ownerId === profileId) {
+      if (budget.visibility === "private" && budget.ownerId === profileId) {
         return true;
       }
 
       return false;
     });
   } catch (error) {
-    console.error('[ProfileDB] Error getting visible budgets:', error);
+    console.error("[ProfileDB] Error getting visible budgets:", error);
     return [];
   }
 }
@@ -275,13 +268,10 @@ export async function getVisibleBudgets(profileId: string): Promise<Budget[]> {
 export async function getPrivateBudgets(profileId: string): Promise<Budget[]> {
   try {
     return await db.budgets
-      .filter(
-        (budget) =>
-          budget.visibility === 'private' && budget.ownerId === profileId
-      )
+      .filter((budget) => budget.visibility === "private" && budget.ownerId === profileId)
       .toArray();
   } catch (error) {
-    console.error('[ProfileDB] Error getting private budgets:', error);
+    console.error("[ProfileDB] Error getting private budgets:", error);
     return [];
   }
 }
@@ -295,14 +285,14 @@ export async function getSharedBudgets(): Promise<Budget[]> {
     return await db.budgets
       .filter(
         (budget) =>
-          budget.visibility === 'shared' ||
+          budget.visibility === "shared" ||
           budget.visibility === undefined ||
           budget.ownerId === null ||
           budget.ownerId === undefined
       )
       .toArray();
   } catch (error) {
-    console.error('[ProfileDB] Error getting shared budgets:', error);
+    console.error("[ProfileDB] Error getting shared budgets:", error);
     return [];
   }
 }
@@ -316,7 +306,7 @@ export async function getSharedBudgets(): Promise<Budget[]> {
 export async function setBudgetOwnership(
   budgetId: string,
   ownerId: string | null,
-  visibility: 'shared' | 'private'
+  visibility: "shared" | "private"
 ): Promise<void> {
   try {
     await db.budgets.update(budgetId, {
@@ -324,12 +314,12 @@ export async function setBudgetOwnership(
       visibility,
       updatedAt: new Date(),
     });
-    console.log('[ProfileDB] Updated budget ownership:', budgetId, {
+    console.log("[ProfileDB] Updated budget ownership:", budgetId, {
       ownerId,
       visibility,
     });
   } catch (error) {
-    console.error('[ProfileDB] Error setting budget ownership:', error);
+    console.error("[ProfileDB] Error setting budget ownership:", error);
     throw error;
   }
 }
@@ -339,11 +329,8 @@ export async function setBudgetOwnership(
  * @param budgetId Budget ID
  * @param profileId Profile ID to own the budget
  */
-export async function makeBudgetPrivate(
-  budgetId: string,
-  profileId: string
-): Promise<void> {
-  await setBudgetOwnership(budgetId, profileId, 'private');
+export async function makeBudgetPrivate(budgetId: string, profileId: string): Promise<void> {
+  await setBudgetOwnership(budgetId, profileId, "private");
 }
 
 /**
@@ -351,7 +338,7 @@ export async function makeBudgetPrivate(
  * @param budgetId Budget ID
  */
 export async function makeBudgetShared(budgetId: string): Promise<void> {
-  await setBudgetOwnership(budgetId, null, 'shared');
+  await setBudgetOwnership(budgetId, null, "shared");
 }
 
 /**
@@ -360,16 +347,13 @@ export async function makeBudgetShared(budgetId: string): Promise<void> {
  * @param budgetId Budget ID
  * @returns True if profile can access the budget
  */
-export async function canAccessBudget(
-  profileId: string,
-  budgetId: string
-): Promise<boolean> {
+export async function canAccessBudget(profileId: string, budgetId: string): Promise<boolean> {
   try {
     const budget = await db.budgets.get(budgetId);
     if (!budget) return false;
 
     // Shared budgets are accessible to all
-    if (budget.visibility === 'shared' || !budget.visibility) return true;
+    if (budget.visibility === "shared" || !budget.visibility) return true;
     if (budget.ownerId === null || budget.ownerId === undefined) return true;
 
     // Private budgets only accessible to owner
@@ -393,15 +377,15 @@ export async function ensureProfileExists(): Promise<Profile> {
     const profiles = await getAllProfiles();
 
     if (profiles.length === 0) {
-      console.log('[ProfileDB] No profiles found, creating default profile...');
+      console.log("[ProfileDB] No profiles found, creating default profile...");
       const profileId = await createProfile({
-        name: 'Default',
-        avatarColor: '#10b981', // Emerald
+        name: "Default",
+        avatarColor: "#10b981", // Emerald
       });
 
       const profile = await getProfile(profileId);
       if (!profile) {
-        throw new Error('Failed to create default profile');
+        throw new Error("Failed to create default profile");
       }
 
       return profile;
@@ -411,7 +395,7 @@ export async function ensureProfileExists(): Promise<Profile> {
     const defaultProfile = profiles.find((p) => p.isDefault);
     return defaultProfile ?? profiles[0];
   } catch (error) {
-    console.error('[ProfileDB] Error ensuring profile exists:', error);
+    console.error("[ProfileDB] Error ensuring profile exists:", error);
     throw error;
   }
 }
@@ -430,11 +414,9 @@ export async function getProfileStats(profileId: string): Promise<{
   try {
     const visibleBudgets = await getVisibleBudgets(profileId);
     const privateBudgets = visibleBudgets.filter(
-      (b) => b.visibility === 'private' && b.ownerId === profileId
+      (b) => b.visibility === "private" && b.ownerId === profileId
     );
-    const sharedBudgets = visibleBudgets.filter(
-      (b) => b.visibility !== 'private' || !b.ownerId
-    );
+    const sharedBudgets = visibleBudgets.filter((b) => b.visibility !== "private" || !b.ownerId);
 
     // For transactions, we count all (transactions aren't profile-specific yet)
     const transactionCount = await db.transactions.count();
@@ -446,7 +428,7 @@ export async function getProfileStats(profileId: string): Promise<{
       sharedBudgetCount: sharedBudgets.length,
     };
   } catch (error) {
-    console.error('[ProfileDB] Error getting profile stats:', error);
+    console.error("[ProfileDB] Error getting profile stats:", error);
     return {
       transactionCount: 0,
       budgetCount: 0,

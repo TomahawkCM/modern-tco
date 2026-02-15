@@ -69,7 +69,7 @@ info      - Display enhanced CLI information
 ### Environment Compatibility
 
 - **Shell**: PowerShell Core (pwsh) ✅
-- **Python**: 3.12.10 ✅  
+- **Python**: 3.12.10 ✅
 - **Package Manager**: uv ✅
 - **Platform**: Windows with cross-platform support ✅
 

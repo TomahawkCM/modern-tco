@@ -5,6 +5,7 @@ A local, browser-based budget management application built for personal/family u
 ## Features Implemented (Phase 1)
 
 ### Core Infrastructure ✅
+
 - **TypeScript Types**: Complete type definitions for all data models
 - **Database Layer**: IndexedDB with temporary in-memory fallback (ready for Dexie.js)
 - **CSV Parser**: Support for BMO and Home Trust bank statement formats
@@ -12,6 +13,7 @@ A local, browser-based budget management application built for personal/family u
 - **Layout & Navigation**: Clean, modern UI with sidebar navigation
 
 ### Pages Created ✅
+
 1. **Dashboard** (`/budget-app`)
    - Net worth summary
    - Monthly income/expenses overview
@@ -44,6 +46,7 @@ npm install dexie dexie-react-hooks papaparse react-dropzone @types/papaparse
 ### Step 2: Update Database Layer
 
 After installing Dexie, uncomment the Dexie code in:
+
 - `src/lib/budget-db.ts` (lines 23-54)
 
 And remove the temporary `MemoryStore` implementation (lines 56-131).
@@ -127,6 +130,7 @@ src/
 ### Features to Add
 
 #### Transaction Management Enhancements
+
 - [ ] Add transaction modal/form
 - [ ] Edit transaction inline
 - [ ] Bulk categorization
@@ -135,6 +139,7 @@ src/
 - [ ] Tags support
 
 #### Smart Features
+
 - [ ] Recurring transaction detection
 - [ ] Bill reminders
 - [ ] Spending alerts
@@ -142,6 +147,7 @@ src/
 - [ ] Search by merchant
 
 #### Charts & Visualizations
+
 - [ ] Spending by category pie chart (Recharts)
 - [ ] Income vs. Expenses line chart
 - [ ] Monthly trends
@@ -149,6 +155,7 @@ src/
 - [ ] Net worth tracking
 
 #### Data Management
+
 - [ ] Account management (add/edit/delete)
 - [ ] Category customization
 - [ ] Budget templates
@@ -157,6 +164,7 @@ src/
 ## Bank CSV Formats Supported
 
 ### BMO (Bank of Montreal)
+
 ```csv
 Transaction Date,Description,Amount
 01/15/2025,SOBEYS #1234,-87.32
@@ -164,6 +172,7 @@ Transaction Date,Description,Amount
 ```
 
 ### Home Trust
+
 ```csv
 Date,Details,Debit/Credit
 2025-01-15,METRO GROCERY,-52.18
@@ -178,12 +187,12 @@ To add support for additional banks, edit `src/lib/parsers/csv-parser.ts`:
 export const BANK_CONFIGS: Record<string, BankConfig> = {
   // ... existing configs
   yourBank: {
-    name: 'Your Bank',
-    dateColumn: 'Date',           // Column name for date
-    descriptionColumn: 'Description',
-    amountColumn: 'Amount',
-    dateFormat: 'yyyy-MM-dd',     // Date format
-    amountMultiplier: -1,         // Use -1 if expenses are positive
+    name: "Your Bank",
+    dateColumn: "Date", // Column name for date
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "yyyy-MM-dd", // Date format
+    amountMultiplier: -1, // Use -1 if expenses are positive
     hasHeader: true,
   },
 };
@@ -194,12 +203,12 @@ export const BANK_CONFIGS: Record<string, BankConfig> = {
 The app includes 50+ rules for Canadian merchants. To add custom rules:
 
 ```typescript
-import { addCustomRule } from '@/lib/categorization/rules';
+import { addCustomRule } from "@/lib/categorization/rules";
 
 addCustomRule({
   pattern: /your merchant/i,
-  category: 'Shopping',
-  subcategory: 'Electronics',
+  category: "Shopping",
+  subcategory: "Electronics",
   confidence: 0.9,
 });
 ```
@@ -207,16 +216,19 @@ addCustomRule({
 ## Data Storage
 
 ### Current: In-Memory (Temporary)
+
 - Data lost on page refresh
 - Good for testing
 
 ### After Installing Dexie: IndexedDB
+
 - Persistent local storage
 - ~50-100MB+ storage capacity
 - Data survives browser restarts
 - No server required
 
 ### Future: Optional Supabase Sync
+
 - Multi-device sync
 - Cloud backup
 - User authentication
@@ -233,6 +245,7 @@ addCustomRule({
 ## Customization
 
 ### Colors
+
 Edit `src/lib/budget-db.ts` to change category colors:
 
 ```typescript
@@ -245,20 +258,25 @@ Edit `src/lib/budget-db.ts` to change category colors:
 ```
 
 ### Categories
+
 Add/remove categories in `DEFAULT_CATEGORIES` array in `src/lib/budget-db.ts`.
 
 ## Troubleshooting
 
 ### Issue: Data not persisting
+
 **Solution**: Install Dexie.js and uncomment the code in `budget-db.ts`
 
 ### Issue: CSV import fails
+
 **Solution**:
+
 1. Check your CSV has headers
 2. Verify bank format matches configuration
 3. Try manual bank selection instead of auto-detect
 
 ### Issue: Duplicate transactions imported
+
 **Solution**: The system auto-detects duplicates but may miss some. Check the preview before importing.
 
 ## Performance
@@ -271,6 +289,7 @@ Add/remove categories in `DEFAULT_CATEGORIES` array in `src/lib/budget-db.ts`.
 ## Roadmap
 
 ### Phase 1: MVP ✅ (Current)
+
 - [x] Database schema
 - [x] CSV import (BMO, Home Trust)
 - [x] Transaction management
@@ -278,6 +297,7 @@ Add/remove categories in `DEFAULT_CATEGORIES` array in `src/lib/budget-db.ts`.
 - [x] Dashboard
 
 ### Phase 2: Core Features (Next)
+
 - [ ] Budget tracking
 - [ ] Future purchase planner
 - [ ] Retirement calculator
@@ -285,6 +305,7 @@ Add/remove categories in `DEFAULT_CATEGORIES` array in `src/lib/budget-db.ts`.
 - [ ] Export/backup
 
 ### Phase 3: Enhanced Features
+
 - [ ] Recurring transaction detection
 - [ ] ML categorization (TensorFlow.js)
 - [ ] Split transactions
@@ -292,6 +313,7 @@ Add/remove categories in `DEFAULT_CATEGORIES` array in `src/lib/budget-db.ts`.
 - [ ] Advanced reports
 
 ### Phase 4: Polish
+
 - [ ] Mobile responsive design
 - [ ] Keyboard shortcuts
 - [ ] Accessibility improvements
@@ -301,6 +323,7 @@ Add/remove categories in `DEFAULT_CATEGORIES` array in `src/lib/budget-db.ts`.
 ## Contributing
 
 This is a personal project, but feel free to:
+
 - Report bugs
 - Suggest features
 - Customize for your own use
@@ -313,6 +336,7 @@ MIT - Use freely for personal or commercial projects
 ## Support
 
 For questions or issues:
+
 1. Check this README
 2. Review the code comments
 3. Test with sample CSV files
@@ -320,6 +344,7 @@ For questions or issues:
 ## Credits
 
 Built with:
+
 - **Next.js 16** - React framework
 - **React 19** - UI library
 - **TypeScript** - Type safety

@@ -29,6 +29,7 @@ src/components/onboarding/useOnboarding.tsx
 ```
 
 **Dependencies** (already in package.json):
+
 - `react` - Core React library
 - `next/navigation` - Next.js routing
 - `@/components/ui/*` - shadcn/ui components (Dialog, Button, Progress, Card, Calendar, Badge)
@@ -90,9 +91,7 @@ export default function Settings() {
   return (
     <div>
       <h2>Help</h2>
-      <Button onClick={resetOnboarding}>
-        Restart Platform Tour
-      </Button>
+      <Button onClick={resetOnboarding}>Restart Platform Tour</Button>
       <OnboardingFlow />
     </div>
   );
@@ -105,11 +104,11 @@ export default function Settings() {
 
 ### OnboardingFlow
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `open` | `boolean` | `undefined` | Controls whether dialog is open. If undefined, component manages state automatically |
-| `onComplete` | `() => void` | `undefined` | Callback fired when user completes onboarding |
-| `userName` | `string` | `"there"` | User's name for personalization |
+| Prop         | Type         | Default     | Description                                                                          |
+| ------------ | ------------ | ----------- | ------------------------------------------------------------------------------------ |
+| `open`       | `boolean`    | `undefined` | Controls whether dialog is open. If undefined, component manages state automatically |
+| `onComplete` | `() => void` | `undefined` | Callback fired when user completes onboarding                                        |
+| `userName`   | `string`     | `"there"`   | User's name for personalization                                                      |
 
 ---
 
@@ -434,11 +433,13 @@ The OnboardingFlow component follows WCAG 2.1 AA standards:
 ### Onboarding doesn't appear for new users
 
 **Check:**
+
 1. Is localStorage accessible? (some privacy modes block it)
 2. Is the component rendered in the correct location? (should be in layout or dashboard)
 3. Is `onboarding_completed` key present in localStorage? (clear it to test)
 
 **Solution:**
+
 ```typescript
 // Force onboarding to show (for testing)
 localStorage.removeItem("onboarding_completed");
@@ -448,10 +449,12 @@ window.location.reload();
 ### Exam date not saving
 
 **Check:**
+
 1. Is calendar component receiving `onSelect` events?
 2. Is `examDate` state being updated correctly?
 
 **Solution:**
+
 ```typescript
 // Debug exam date
 console.log("Exam date:", examDate);
@@ -461,10 +464,12 @@ console.log("Saved exam date:", localStorage.getItem("user_exam_date"));
 ### Dialog not closing after completion
 
 **Check:**
+
 1. Is `onComplete` callback being fired?
 2. Is there a conflicting `open` prop preventing closure?
 
 **Solution:**
+
 ```typescript
 // Ensure dialog closes
 const handleComplete = () => {
@@ -481,6 +486,7 @@ const handleComplete = () => {
 ## Changelog
 
 ### Version 1.0 (January 2025)
+
 - Initial release with 6-step onboarding flow
 - Integrated calendar picker for exam date
 - localStorage persistence for completion status
@@ -492,6 +498,7 @@ const handleComplete = () => {
 ## Support
 
 For questions or issues:
+
 - **Documentation**: See [USER_GUIDE.md](../../../docs/USER_GUIDE.md)
 - **Issues**: Report bugs via GitHub Issues
 - **Email**: support@your-domain.com

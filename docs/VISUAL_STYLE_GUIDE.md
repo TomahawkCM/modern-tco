@@ -26,6 +26,7 @@ This guide documents the visual design system used across the Modern Tanium TCO 
 ### Primary Colors
 
 #### Tanium Brand Colors
+
 ```
 Tanium Blue         #0066CC    (Primary brand color)
 Tanium Blue Dark    #004C99    (Hover states, dark mode)
@@ -33,6 +34,7 @@ Tanium Blue Light   #3385D6    (Accents, highlights)
 ```
 
 #### Accent Colors
+
 ```
 Accent Blue         #4A90E2    (Interactive elements)
 Success Green       #10B981    (Success states, positive feedback)
@@ -44,6 +46,7 @@ Info Cyan           #06B6D4    (Information, tips)
 ### Semantic Colors
 
 #### UI States
+
 ```
 Background Dark     #1E293B    (Dark mode background)
 Background Light    #F8FAFC    (Light mode background)
@@ -54,6 +57,7 @@ Text Inverse        #F1F5F9    (Text on dark backgrounds)
 ```
 
 #### Data Visualization
+
 ```
 Chart Blue          #3B82F6
 Chart Green         #22C55E
@@ -67,22 +71,25 @@ Chart Teal          #14B8A6
 ### Usage Guidelines
 
 **Primary Brand Color** (`#0066CC`): Use for:
+
 - Main CTAs and buttons
 - Primary navigation elements
 - Brand headers and logos
 - Critical UI elements requiring attention
 
 **Accent Colors**: Use for:
+
 - Secondary actions
 - Interactive hover states
 - Status indicators
 - Data visualization highlights
 
 **Semantic Colors**: Reserve for specific UI states:
+
 - ✅ Green: Success, completion, correct answers
-- ⚠️  Yellow: Warnings, cautions, review needed
+- ⚠️ Yellow: Warnings, cautions, review needed
 - ❌ Red: Errors, failures, incorrect answers
-- ℹ️  Cyan: Informational messages, tips, callouts
+- ℹ️ Cyan: Informational messages, tips, callouts
 
 ---
 
@@ -91,12 +98,14 @@ Chart Teal          #14B8A6
 ### Font Family
 
 **Primary**: Inter (Google Fonts)
+
 - Display text: Inter 700 (Bold)
 - Headings: Inter 600 (SemiBold)
 - Body: Inter 400 (Regular)
 - Captions: Inter 400 (Regular, smaller size)
 
 **Monospace**: JetBrains Mono (for code)
+
 - Code blocks: JetBrains Mono 400
 - Terminal output: JetBrains Mono 400
 
@@ -128,6 +137,7 @@ Small      12px / 0.75rem  Line height: 1.5    Weight: 400
 ### Core Icon Set (30+ icons)
 
 #### Navigation & Actions
+
 ```
 →  Arrow Right        (Forward navigation, next steps)
 ←  Arrow Left         (Back navigation, previous)
@@ -142,6 +152,7 @@ Small      12px / 0.75rem  Line height: 1.5    Weight: 400
 ```
 
 #### Status & Feedback
+
 ```
 ✅ Green Check        (Success, passed, correct answer)
 ❌ Red X              (Error, failed, incorrect answer)
@@ -156,6 +167,7 @@ Small      12px / 0.75rem  Line height: 1.5    Weight: 400
 ```
 
 #### Learning & Education
+
 ```
 📚 Books              (Modules, learning materials)
 ✏️  Pencil            (Practice, exercises, edit)
@@ -184,20 +196,24 @@ Small      12px / 0.75rem  Line height: 1.5    Weight: 400
 ### Diagram Types & Tools
 
 #### 1. Architecture Diagrams
+
 **Tool**: SVG programmatic generation
 **Style**: Clean, professional, minimal shadows
 **Colors**: Blue (#3B82F6) for architecture, Gray (#94A3B8) for traditional
 **Export**: SVG, 1200x600px
 
 **Use For**:
+
 - System architecture comparisons
 - Linear chain vs hub-and-spoke diagrams
 - Network topology diagrams
 
 #### 2. Process Flow Diagrams
+
 **Tool**: SVG with flowchart elements
 **Style**: Vertical or horizontal flow with decision points
 **Colors**:
+
 - Start/End: Green (#10B981)
 - Process: Blue (#3B82F6)
 - Decision: Yellow (#FACC15)
@@ -206,28 +222,33 @@ Small      12px / 0.75rem  Line height: 1.5    Weight: 400
 **Export**: SVG, 900x1200px (vertical) or 1400x400px (horizontal)
 
 **Use For**:
+
 - Client registration flows
 - Data processing pipelines
 - Deployment workflows
 
 #### 3. UI Mockups
+
 **Tool**: High-fidelity SVG layouts
 **Style**: Realistic console interfaces, dark theme
 **Colors**: Dark mode palette (#1E293B background, #F1F5F9 text)
 **Export**: SVG or PNG@2x, 1600x1000px
 
 **Use For**:
+
 - Console layout demonstrations
 - Module navigation interfaces
 - Query builder mockups
 
 #### 4. Infographics
+
 **Tool**: Mermaid diagram syntax (embedded in MDX)
 **Style**: Chart-based visualizations with emojis and visual metaphors
 **Colors**: Data visualization palette (see Color Palette section)
 **Export**: Inline Mermaid code blocks (auto-rendered)
 
 **Use For**:
+
 - Speed comparison charts
 - Scalability metrics
 - Performance statistics
@@ -258,13 +279,13 @@ Tall Diagram:       900x1200px (vertical flow)
 ### MDX Components
 
 #### Callout Boxes
+
 ```jsx
-<Callout type="note|definition|info|warning|tip|caution|lab|summary">
-  Content here
-</Callout>
+<Callout type="note|definition|info|warning|tip|caution|lab|summary">Content here</Callout>
 ```
 
 **Types & Colors**:
+
 - `note`: Blue (#3B82F6) - General information
 - `definition`: Purple (#A855F7) - Term definitions
 - `info`: Cyan (#06B6D4) - Informational tips
@@ -275,6 +296,7 @@ Tall Diagram:       900x1200px (vertical flow)
 - `summary`: Gray (#6B7280) - Section summaries
 
 #### InfoBox
+
 ```jsx
 <InfoBox icon="💡" title="Quick Tip">
   Content here
@@ -284,6 +306,7 @@ Tall Diagram:       900x1200px (vertical flow)
 **Style**: Dark theme with semi-transparent background
 
 #### MicroQuizMDX
+
 ```jsx
 <MicroQuizMDX
   question="Which sensor would you use to check disk space?"
@@ -294,6 +317,7 @@ Tall Diagram:       900x1200px (vertical flow)
 ```
 
 **Colors**:
+
 - Correct: Green (#10B981)
 - Incorrect: Red (#EF4444)
 - Neutral: Gray (#6B7280)
@@ -315,6 +339,7 @@ Ghost:     Transparent bg, inherit text, hover: bg-gray-100
 ### SVG Diagrams
 
 **Recommended Settings**:
+
 ```javascript
 {
   format: 'svg',
@@ -327,6 +352,7 @@ Ghost:     Transparent bg, inherit text, hover: bg-gray-100
 ```
 
 **Optimization**:
+
 - Minify SVG with SVGO
 - Remove unnecessary metadata
 - Inline critical styles
@@ -335,6 +361,7 @@ Ghost:     Transparent bg, inherit text, hover: bg-gray-100
 ### PNG Screenshots
 
 **Console Screenshots**:
+
 ```
 Format:     PNG
 Resolution: 2x (Retina)
@@ -344,6 +371,7 @@ DPI:        144 (2x) or 72 (1x)
 ```
 
 **Compression**:
+
 - Use pngquant or TinyPNG
 - Target: <500KB per image
 - Maintain visual quality (80%+ quality)
@@ -351,6 +379,7 @@ DPI:        144 (2x) or 72 (1x)
 ### Video Screencasts
 
 **Micro-screencasts** (90 seconds):
+
 ```
 Format:     MP4 (H.264)
 Resolution: 1920x1080 (1080p)
@@ -361,6 +390,7 @@ Captions:   SRT/VTT file (required)
 ```
 
 **Compression**:
+
 - Use HandBrake or ffmpeg
 - Target: <10MB per 90-second video
 - Optimize for web streaming
@@ -403,6 +433,7 @@ modern-tco/
 ### Naming Conventions
 
 **Files**: `kebab-case-descriptive-name.ext`
+
 ```
 ✅ architecture-comparison.svg
 ✅ console-layout-dark-theme.png
@@ -413,6 +444,7 @@ modern-tco/
 ```
 
 **IDs & Classes**: `kebab-case`
+
 ```html
 <!-- SVG IDs -->
 <svg id="diagram-architecture-comparison">
@@ -449,6 +481,7 @@ modern-tco/
 ### Responsive Design
 
 **Breakpoints**:
+
 ```
 Mobile:  < 640px   (sm)
 Tablet:  640-1024px (md, lg)
@@ -456,6 +489,7 @@ Desktop: > 1024px   (xl, 2xl)
 ```
 
 **Diagram Scaling**:
+
 - Mobile: Scale to fit container width, allow vertical scroll
 - Tablet: Full width or 2-column grid
 - Desktop: Full width or 3-column grid
@@ -474,24 +508,28 @@ Desktop: > 1024px   (xl, 2xl)
 ### Common Tasks
 
 **Add a new diagram**:
+
 1. Create SVG programmatically or manually
 2. Export to `public/assets/diagrams/`
 3. Reference in MDX: `![Alt text](/assets/diagrams/your-diagram.svg)`
 4. Add to diagram manifest
 
 **Add a console screenshot**:
+
 1. Capture at 1600px minimum width
 2. Compress with pngquant
 3. Save to `public/Screenshots/`
 4. Add descriptive alt text
 
 **Create an infographic**:
+
 1. Use Mermaid syntax in MDX
 2. Follow color palette guidelines
 3. Include title and caption
 4. Test rendering on dev server
 
 **Update color palette**:
+
 1. Update this guide
 2. Update Tailwind config if needed
 3. Test in dark/light modes
@@ -502,18 +540,21 @@ Desktop: > 1024px   (xl, 2xl)
 ## Resources & Tools
 
 ### Design Tools
+
 - **SVG Editor**: Inkscape, Figma, or programmatic JavaScript
 - **Image Compression**: pngquant, TinyPNG, Squoosh
 - **Color Picker**: Coolors.co, Adobe Color
 - **Contrast Checker**: WebAIM Contrast Checker
 
 ### Documentation
+
 - **MDX**: https://mdxjs.com/
 - **Mermaid**: https://mermaid.js.org/
 - **Tailwind CSS**: https://tailwindcss.com/
 - **WCAG Guidelines**: https://www.w3.org/WAI/WCAG21/quickref/
 
 ### Testing
+
 - **Accessibility**: axe DevTools, Lighthouse
 - **Responsive**: Chrome DevTools, BrowserStack
 - **Performance**: Lighthouse, WebPageTest
@@ -523,6 +564,7 @@ Desktop: > 1024px   (xl, 2xl)
 ## Change Log
 
 ### Version 1.0.0 (2025-10-15)
+
 - Initial visual style guide creation
 - Documented 21-color palette
 - Added 30+ icon library
@@ -535,6 +577,7 @@ Desktop: > 1024px   (xl, 2xl)
 ## Questions or Contributions?
 
 For questions, suggestions, or contributions to the design system:
+
 1. Open an issue in the GitHub repository
 2. Contact the design team
 3. Update this guide and submit a pull request

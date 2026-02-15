@@ -51,11 +51,13 @@ The CSV import system uses AI-powered bank detection with collective learning to
 ## Data Flow
 
 ### 1. File Upload
+
 ```typescript
 User uploads CSV → Format detection → AI bank detection request
 ```
 
 ### 2. Server-Side Detection (No CORS!)
+
 ```typescript
 // POST /api/bank/detect
 {
@@ -71,6 +73,7 @@ User uploads CSV → Format detection → AI bank detection request
 ```
 
 ### 3. AI Analysis
+
 ```typescript
 // Server-side OpenAI call
 const result = await detectBank(samples, headers, true);
@@ -86,24 +89,26 @@ const result = await detectBank(samples, headers, true);
 ```
 
 ### 4. Collective Learning
+
 ```typescript
 // Automatically save learned format
 if (result.confidence >= 0.7) {
   await saveBankFormat({
-    bankName: 'BMO',
-    bankSlug: 'bmo',
+    bankName: "BMO",
+    bankSlug: "bmo",
     columnMappings: {
-      date: 'Date Posted',
-      description: 'Description',
-      amount: 'Amount'
+      date: "Date Posted",
+      description: "Description",
+      amount: "Amount",
     },
     confidence: 0.95,
-    successfulImports: 1
+    successfulImports: 1,
   });
 }
 ```
 
 ### 5. User Feedback Loop
+
 ```typescript
 // When user corrects AI suggestion
 await recordBankFormatResult(bankSlug, success: boolean);
@@ -115,11 +120,13 @@ await recordBankFormatResult(bankSlug, success: boolean);
 ## Key Features
 
 ### Privacy-First
+
 - Only transaction **patterns** sent to AI, not raw PII
 - Merchant tokens are anonymized (removes account numbers, IDs)
 - No personal financial data stored in learning database
 
 ### Multi-Strategy Detection
+
 1. **Signature Patterns** (instant, free)
    - Looks for bank-specific prefixes in descriptions
    - Example: `[PR]`, `[OP]` → BMO
@@ -138,6 +145,7 @@ await recordBankFormatResult(bankSlug, success: boolean);
    - Allows import to proceed even when uncertain
 
 ### Collective Intelligence
+
 - **System learns from every import**
 - Confidence scores improve with user feedback
 - Community-driven format recognition
@@ -146,6 +154,7 @@ await recordBankFormatResult(bankSlug, success: boolean);
 ## API Endpoints
 
 ### Bank Detection
+
 ```
 POST /api/bank/detect
 
@@ -169,6 +178,7 @@ Response:
 ```
 
 ### Merchant Resolution
+
 ```
 GET /api/merchants/resolve?token=MERCHANT_TOKEN
 
@@ -186,6 +196,7 @@ Response:
 ## Database Schema
 
 ### bank_formats Table
+
 ```sql
 CREATE TABLE bank_formats (
   id UUID PRIMARY KEY,
@@ -204,6 +215,7 @@ CREATE TABLE bank_formats (
 ```
 
 ### merchants Table
+
 ```sql
 CREATE TABLE merchants (
   id UUID PRIMARY KEY,
@@ -226,12 +238,14 @@ CREATE TABLE merchants (
 ## Success Metrics
 
 ### Before Fix (Broken)
+
 - ❌ CORS errors in browser console
 - ❌ Import completely blocked
 - ❌ Zero transactions imported
 - ❌ No learning capability
 
 ### After Fix (Working)
+
 - ✅ Zero CORS errors (server-side API)
 - ✅ Import proceeds with fallback
 - ✅ AI detection: 95% confidence
@@ -242,11 +256,13 @@ CREATE TABLE merchants (
 ## Testing
 
 ### Browser Test
+
 ```bash
 npx tsx scripts/test-csv-import-browser.ts
 ```
 
 **Expected Results:**
+
 ```
 ✅ AI detection result: {success: true, bankKey: 'bmo', confidence: 0.95}
 ✅ [BankDetectAPI] Learned new bank format: bmo
@@ -254,6 +270,7 @@ npx tsx scripts/test-csv-import-browser.ts
 ```
 
 ### Server Logs
+
 ```
 [SmartBankDetection] AI detection successful
 reasoning: 'Detected [PR] and [OP] prefixes in transactions, unique to BMO'
@@ -270,14 +287,17 @@ reasoning: 'Detected [PR] and [OP] prefixes in transactions, unique to BMO'
 ## Common Issues
 
 ### Issue: AI detects wrong bank
+
 **Cause:** Transaction patterns match multiple banks
 **Solution:** System learns from user corrections, improves over time
 
 ### Issue: 0 transactions parsed
+
 **Cause:** Column mappings don't match detected bank config
 **Solution:** Flexible column matching (already implemented) or manual column mapper
 
 ### Issue: Low confidence detection
+
 **Cause:** Unfamiliar bank format
 **Solution:** Generic fallback allows import, system learns new format
 

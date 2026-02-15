@@ -13,9 +13,9 @@
  *   npm run browser:scrape -- --sitemap https://docs.example.com/sitemap.xml
  */
 
-const { execFileSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+const { execFileSync } = require("child_process");
+const fs = require("fs");
+const path = require("path");
 
 // Parse command line arguments
 const args = process.argv.slice(2);
@@ -24,27 +24,27 @@ const getArg = (flag) => {
   return idx !== -1 && args[idx + 1] ? args[idx + 1] : null;
 };
 
-const url = getArg('--url');
-const urlsFile = getArg('--urls');
-const sitemap = getArg('--sitemap');
-const outputPath = getArg('--output') || './scraped-content.json';
-const selector = getArg('--selector'); // Optional CSS selector to focus on
-const maxPages = parseInt(getArg('--max-pages') || '10', 10);
-const delay = parseInt(getArg('--delay') || '1000', 10);
+const url = getArg("--url");
+const urlsFile = getArg("--urls");
+const sitemap = getArg("--sitemap");
+const outputPath = getArg("--output") || "./scraped-content.json";
+const selector = getArg("--selector"); // Optional CSS selector to focus on
+const maxPages = parseInt(getArg("--max-pages") || "10", 10);
+const delay = parseInt(getArg("--delay") || "1000", 10);
 
 /**
  * Execute agent-browser command using execFileSync (safe from injection)
  */
 function execBrowser(commandArgs) {
   try {
-    const result = execFileSync('npx', ['agent-browser', ...commandArgs], {
-      encoding: 'utf-8',
-      stdio: ['pipe', 'pipe', 'pipe'],
+    const result = execFileSync("npx", ["agent-browser", ...commandArgs], {
+      encoding: "utf-8",
+      stdio: ["pipe", "pipe", "pipe"],
       timeout: 60000,
     });
     return result.trim();
   } catch (error) {
-    console.error(`Browser command failed: ${commandArgs.join(' ')}`);
+    console.error(`Browser command failed: ${commandArgs.join(" ")}`);
     console.error(error.message);
     return null;
   }
@@ -56,7 +56,7 @@ function execBrowser(commandArgs) {
 function parseSnapshot(snapshotOutput) {
   if (!snapshotOutput) return null;
 
-  const lines = snapshotOutput.split('\n');
+  const lines = snapshotOutput.split("\n");
   const elements = [];
 
   for (const line of lines) {
@@ -85,31 +85,31 @@ async function scrapeUrl(targetUrl) {
   console.log(`Scraping: ${targetUrl}`);
 
   // Open the URL
-  execBrowser(['open', targetUrl]);
+  execBrowser(["open", targetUrl]);
 
   // Wait for page to load
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   // Get page snapshot
-  const snapshot = execBrowser(['snapshot', '-i']);
+  const snapshot = execBrowser(["snapshot", "-i"]);
   const parsed = parseSnapshot(snapshot);
 
   // Get page title
-  const title = execBrowser(['get', 'title']);
+  const title = execBrowser(["get", "title"]);
 
   // Get page URL (may have redirected)
-  const currentUrl = execBrowser(['get', 'url']);
+  const currentUrl = execBrowser(["get", "url"]);
 
   // Extract main content if selector provided
   let mainContent = null;
   if (selector) {
-    mainContent = execBrowser(['get', 'text', selector]);
+    mainContent = execBrowser(["get", "text", selector]);
   }
 
   return {
     url: targetUrl,
-    currentUrl: currentUrl?.replace(/['"]/g, ''),
-    title: title?.replace(/['"]/g, ''),
+    currentUrl: currentUrl?.replace(/['"]/g, ""),
+    title: title?.replace(/['"]/g, ""),
     snapshot: parsed,
     mainContent,
     scrapedAt: new Date().toISOString(),
@@ -120,8 +120,8 @@ async function scrapeUrl(targetUrl) {
  * Main scraping workflow
  */
 async function main() {
-  console.log('Agent-Browser Content Scraper');
-  console.log('=============================\n');
+  console.log("Agent-Browser Content Scraper");
+  console.log("=============================\n");
 
   const results = [];
   const urls = [];
@@ -132,40 +132,39 @@ async function main() {
   }
 
   if (urlsFile && fs.existsSync(urlsFile)) {
-    const fileUrls = fs.readFileSync(urlsFile, 'utf-8')
-      .split('\n')
-      .map(u => u.trim())
-      .filter(u => u && !u.startsWith('#'));
+    const fileUrls = fs
+      .readFileSync(urlsFile, "utf-8")
+      .split("\n")
+      .map((u) => u.trim())
+      .filter((u) => u && !u.startsWith("#"));
     urls.push(...fileUrls);
   }
 
   if (sitemap) {
     console.log(`Fetching sitemap: ${sitemap}`);
-    execBrowser(['open', sitemap]);
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    const sitemapContent = execBrowser(['get', 'html', 'body']);
+    execBrowser(["open", sitemap]);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const sitemapContent = execBrowser(["get", "html", "body"]);
 
     // Extract URLs from sitemap XML
     const urlMatches = sitemapContent?.match(/<loc>([^<]+)<\/loc>/g) || [];
-    const sitemapUrls = urlMatches
-      .map(m => m.replace(/<\/?loc>/g, ''))
-      .slice(0, maxPages);
+    const sitemapUrls = urlMatches.map((m) => m.replace(/<\/?loc>/g, "")).slice(0, maxPages);
     urls.push(...sitemapUrls);
   }
 
   if (urls.length === 0) {
-    console.log('Usage:');
+    console.log("Usage:");
     console.log('  npm run browser:scrape -- --url "https://example.com"');
-    console.log('  npm run browser:scrape -- --urls urls.txt --output ./content/');
-    console.log('  npm run browser:scrape -- --sitemap https://example.com/sitemap.xml');
-    console.log('\nOptions:');
-    console.log('  --url <url>        Single URL to scrape');
-    console.log('  --urls <file>      File with URLs (one per line)');
-    console.log('  --sitemap <url>    XML sitemap URL');
-    console.log('  --output <path>    Output file or directory');
-    console.log('  --selector <css>   CSS selector for main content');
-    console.log('  --max-pages <n>    Max pages from sitemap (default: 10)');
-    console.log('  --delay <ms>       Delay between pages (default: 1000)');
+    console.log("  npm run browser:scrape -- --urls urls.txt --output ./content/");
+    console.log("  npm run browser:scrape -- --sitemap https://example.com/sitemap.xml");
+    console.log("\nOptions:");
+    console.log("  --url <url>        Single URL to scrape");
+    console.log("  --urls <file>      File with URLs (one per line)");
+    console.log("  --sitemap <url>    XML sitemap URL");
+    console.log("  --output <path>    Output file or directory");
+    console.log("  --selector <css>   CSS selector for main content");
+    console.log("  --max-pages <n>    Max pages from sitemap (default: 10)");
+    console.log("  --delay <ms>       Delay between pages (default: 1000)");
     process.exit(1);
   }
 
@@ -193,12 +192,12 @@ async function main() {
 
     // Delay between requests
     if (i < urlsToScrape.length - 1) {
-      await new Promise(resolve => setTimeout(resolve, delay));
+      await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
 
   // Close browser
-  execBrowser(['close']);
+  execBrowser(["close"]);
 
   // Save results
   const outputDir = path.dirname(outputPath);
@@ -209,8 +208,8 @@ async function main() {
   const output = {
     metadata: {
       totalUrls: urlsToScrape.length,
-      successCount: results.filter(r => !r.error).length,
-      failCount: results.filter(r => r.error).length,
+      successCount: results.filter((r) => !r.error).length,
+      failCount: results.filter((r) => r.error).length,
       scrapedAt: new Date().toISOString(),
     },
     results,

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Sticky Bulk Actions Bar
@@ -6,10 +6,10 @@
  * Follows user as they scroll - never loses access to bulk actions
  */
 
-import { useState, useEffect } from 'react';
-import { Check, X as XIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import type { Category } from '@/types/budget';
+import { useState, useEffect } from "react";
+import { Check, X as XIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import type { Category } from "@/types/budget";
 
 interface StickyBulkActionsBarProps {
   selectedCount: number;
@@ -24,9 +24,9 @@ export function StickyBulkActionsBar({
   onApplyCategory,
   onClearSelection,
 }: StickyBulkActionsBarProps) {
-  const t = useTranslations('bulkActions');
-  const [bulkCategory, setBulkCategory] = useState('');
-  const [bulkSubcategory, setBulkSubcategory] = useState('');
+  const t = useTranslations("bulkActions");
+  const [bulkCategory, setBulkCategory] = useState("");
+  const [bulkSubcategory, setBulkSubcategory] = useState("");
   const [isSticky, setIsSticky] = useState(false);
 
   // Detect if bar should be sticky (user scrolled past initial position)
@@ -35,8 +35,8 @@ export function StickyBulkActionsBar({
       setIsSticky(window.scrollY > 100);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   if (selectedCount === 0) return null;
@@ -44,34 +44,32 @@ export function StickyBulkActionsBar({
   return (
     <div
       className={`${
-        isSticky
-          ? 'fixed top-0 left-0 right-0 z-50 shadow-lg'
-          : 'relative'
-      } bg-gradient-to-r from-teal-50 to-teal-100 border-t border-b border-teal-200 transition-all duration-300`}
+        isSticky ? "fixed left-0 right-0 top-0 z-50 shadow-lg" : "relative"
+      } border-b border-t border-teal-200 bg-gradient-to-r from-teal-50 to-teal-100 transition-all duration-300`}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-3">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div className="mx-auto max-w-7xl px-4 py-3 md:px-8">
+        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
           {/* Selection Count */}
-          <div className="flex items-center gap-2 min-w-[180px]">
-            <div className="w-8 h-8 bg-teal-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+          <div className="flex min-w-[180px] items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-600 text-sm font-bold text-white">
               {selectedCount}
             </div>
             <span className="font-semibold text-teal-900">
-              {t('selected', { count: selectedCount })}
+              {t("selected", { count: selectedCount })}
             </span>
           </div>
 
           {/* Category Selection */}
-          <div className="flex flex-wrap items-center gap-2 flex-1">
+          <div className="flex flex-1 flex-wrap items-center gap-2">
             <select
               value={bulkCategory}
               onChange={(e) => {
                 setBulkCategory(e.target.value);
-                setBulkSubcategory('');
+                setBulkSubcategory("");
               }}
-              className="px-4 py-2 border-2 border-teal-300 rounded-lg bg-white focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none text-sm font-medium"
+              className="rounded-lg border-2 border-teal-300 bg-white px-4 py-2 text-sm font-medium focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             >
-              <option value="">{t('selectCategory')}</option>
+              <option value="">{t("selectCategory")}</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.name}>
                   {cat.name}
@@ -79,15 +77,15 @@ export function StickyBulkActionsBar({
               ))}
             </select>
 
-            {bulkCategory && categories.find(c => c.name === bulkCategory)?.subcategories && (
+            {bulkCategory && categories.find((c) => c.name === bulkCategory)?.subcategories && (
               <select
                 value={bulkSubcategory}
                 onChange={(e) => setBulkSubcategory(e.target.value)}
-                className="px-4 py-2 border-2 border-teal-300 rounded-lg bg-white focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none text-sm font-medium"
+                className="rounded-lg border-2 border-teal-300 bg-white px-4 py-2 text-sm font-medium focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
               >
-                <option value="">{t('noSubcategory')}</option>
+                <option value="">{t("noSubcategory")}</option>
                 {categories
-                  .find(c => c.name === bulkCategory)
+                  .find((c) => c.name === bulkCategory)
                   ?.subcategories.map((sub) => (
                     <option key={sub} value={sub}>
                       {sub}
@@ -100,26 +98,26 @@ export function StickyBulkActionsBar({
               onClick={() => {
                 if (bulkCategory) {
                   onApplyCategory(bulkCategory, bulkSubcategory);
-                  setBulkCategory('');
-                  setBulkSubcategory('');
+                  setBulkCategory("");
+                  setBulkSubcategory("");
                 }
               }}
               disabled={!bulkCategory}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-semibold shadow-md hover:shadow-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:outline-none"
+              className="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition-colors hover:bg-teal-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              <Check className="w-4 h-4" />
-              {t('applyTo', { count: selectedCount })}
+              <Check className="h-4 w-4" />
+              {t("applyTo", { count: selectedCount })}
             </button>
           </div>
 
           {/* Clear Button */}
           <button
             onClick={onClearSelection}
-            className="p-2 text-teal-700 hover:text-teal-900 hover:bg-teal-200 rounded-lg transition-colors"
-            title={t('clearSelection')}
-            aria-label={t('clearSelection')}
+            className="rounded-lg p-2 text-teal-700 transition-colors hover:bg-teal-200 hover:text-teal-900"
+            title={t("clearSelection")}
+            aria-label={t("clearSelection")}
           >
-            <XIcon className="w-5 h-5" />
+            <XIcon className="h-5 w-5" />
           </button>
         </div>
       </div>

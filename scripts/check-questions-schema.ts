@@ -10,10 +10,7 @@ async function checkSchema() {
   console.log("🔍 Checking questions table schema...\n");
 
   // Get one record to see the structure
-  const { data, error } = await supabase
-    .from("questions")
-    .select("*")
-    .limit(1);
+  const { data, error } = await supabase.from("questions").select("*").limit(1);
 
   if (error) {
     console.error("❌ Error:", error.message);

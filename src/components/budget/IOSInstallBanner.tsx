@@ -20,19 +20,13 @@ export function IOSInstallBanner() {
     if (typeof window === "undefined") return;
 
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const isStandalone = window.matchMedia(
-      "(display-mode: standalone)"
-    ).matches;
+    const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
     const dismissedAt = localStorage.getItem("ios-install-dismissed");
-    const sessions = parseInt(
-      localStorage.getItem("budget-app-visits") || "0",
-      10
-    );
+    const sessions = parseInt(localStorage.getItem("budget-app-visits") || "0", 10);
 
     // Show after 2+ sessions, not already installed, not dismissed within 30 days
     const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
-    const recentlyDismissed =
-      dismissedAt && Date.now() - parseInt(dismissedAt) < THIRTY_DAYS;
+    const recentlyDismissed = dismissedAt && Date.now() - parseInt(dismissedAt) < THIRTY_DAYS;
 
     if (isIOS && !isStandalone && sessions >= 2 && !recentlyDismissed) {
       setShow(true);
@@ -47,7 +41,7 @@ export function IOSInstallBanner() {
   };
 
   return (
-    <div className="fixed bottom-[4.5rem] inset-x-4 z-40 md:hidden animate-in slide-in-from-bottom-4">
+    <div className="fixed inset-x-4 bottom-[4.5rem] z-40 animate-in slide-in-from-bottom-4 md:hidden">
       <div className="relative rounded-xl border border-white/10 bg-slate-900/95 p-4 shadow-lg backdrop-blur-xl">
         <button
           onClick={dismiss}
@@ -56,15 +50,10 @@ export function IOSInstallBanner() {
         >
           <X size={16} />
         </button>
-        <p className="text-sm font-medium text-white mb-1">
-          {t("iosTitle")}
-        </p>
+        <p className="mb-1 text-sm font-medium text-white">{t("iosTitle")}</p>
         <p className="text-xs text-slate-400">
-          {t("iosTap")}{" "}
-          <Share size={14} className="inline mx-0.5 text-teal-400" />{" "}
-          {t("iosThen")}{" "}
-          <strong className="text-white">{t("iosAddToHome")}</strong>{" "}
-          {t("iosForFullExperience")}
+          {t("iosTap")} <Share size={14} className="mx-0.5 inline text-teal-400" /> {t("iosThen")}{" "}
+          <strong className="text-white">{t("iosAddToHome")}</strong> {t("iosForFullExperience")}
         </p>
       </div>
     </div>

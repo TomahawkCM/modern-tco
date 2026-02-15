@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Advanced Analytics Dashboard
@@ -11,7 +11,7 @@
  * Provides students with deep insights into their learning progress and actionable recommendations.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   TrendingUp,
   TrendingDown,
@@ -23,39 +23,39 @@ import {
   AlertCircle,
   RefreshCw,
   Calendar,
-} from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { toast } from '@/hooks/use-toast';
+} from "lucide-react";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { toast } from "@/hooks/use-toast";
 
 import {
   getComparativeAnalytics,
   getDomainComparisons,
   type ComparativeReport,
   type DomainComparison,
-} from '@/lib/ai/comparativeAnalytics';
+} from "@/lib/ai/comparativeAnalytics";
 import {
   getOrGenerateHeatmap,
   getHeatmapColor,
   type PerformanceHeatmap,
-} from '@/lib/ai/performanceHeatmaps';
+} from "@/lib/ai/performanceHeatmaps";
 import {
   predictAllDomains,
   generateMasteryPlan,
   type MasteryPrediction,
   type MasteryPlan,
-} from '@/lib/ai/masteryPredictions';
+} from "@/lib/ai/masteryPredictions";
 
 interface AdvancedAnalyticsDashboardProps {
   userId: string;
 }
 
 export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboardProps) {
-  const [activeTab, setActiveTab] = useState<'comparative' | 'heatmaps' | 'mastery'>('comparative');
+  const [activeTab, setActiveTab] = useState<"comparative" | "heatmaps" | "mastery">("comparative");
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -82,11 +82,11 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
     try {
       await Promise.all([loadComparativeAnalytics(), loadHeatmaps(), loadMasteryPredictions()]);
     } catch (error) {
-      console.error('Error loading analytics:', error);
+      console.error("Error loading analytics:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to load analytics data',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to load analytics data",
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -101,20 +101,20 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
       const comparisons = await getDomainComparisons(userId);
       setDomainComparisons(comparisons);
     } catch (error) {
-      console.error('Error loading comparative analytics:', error);
+      console.error("Error loading comparative analytics:", error);
     }
   };
 
   const loadHeatmaps = async () => {
     try {
       const [domainWeek, topicDifficulty] = await Promise.all([
-        getOrGenerateHeatmap(userId, 'domain_by_week'),
-        getOrGenerateHeatmap(userId, 'topic_by_difficulty'),
+        getOrGenerateHeatmap(userId, "domain_by_week"),
+        getOrGenerateHeatmap(userId, "topic_by_difficulty"),
       ]);
       setDomainWeekHeatmap(domainWeek);
       setTopicDifficultyHeatmap(topicDifficulty);
     } catch (error) {
-      console.error('Error loading heatmaps:', error);
+      console.error("Error loading heatmaps:", error);
     }
   };
 
@@ -123,29 +123,29 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
       const predictions = await predictAllDomains(userId);
       setMasteryPredictions(predictions);
     } catch (error) {
-      console.error('Error loading mastery predictions:', error);
+      console.error("Error loading mastery predictions:", error);
     }
   };
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
     try {
-      if (activeTab === 'comparative') {
+      if (activeTab === "comparative") {
         await loadComparativeAnalytics();
-      } else if (activeTab === 'heatmaps') {
+      } else if (activeTab === "heatmaps") {
         await loadHeatmaps();
-      } else if (activeTab === 'mastery') {
+      } else if (activeTab === "mastery") {
         await loadMasteryPredictions();
       }
       toast({
-        title: 'Refreshed',
-        description: 'Analytics data updated successfully',
+        title: "Refreshed",
+        description: "Analytics data updated successfully",
       });
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to refresh analytics',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to refresh analytics",
+        variant: "destructive",
       });
     } finally {
       setIsRefreshing(false);
@@ -158,9 +158,9 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
       setSelectedMasteryPlan(plan);
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to generate mastery plan',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to generate mastery plan",
+        variant: "destructive",
       });
     }
   };
@@ -188,13 +188,8 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
             <CardTitle>Advanced Analytics</CardTitle>
             <CardDescription>Deep insights into your learning progress</CardDescription>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleRefresh}
-            disabled={isRefreshing}
-          >
-            <RefreshCw className={`w-4 h-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
+          <Button variant="outline" size="sm" onClick={handleRefresh} disabled={isRefreshing}>
+            <RefreshCw className={`mr-2 h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`} />
             Refresh
           </Button>
         </div>
@@ -203,30 +198,30 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
         <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)}>
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="comparative">
-              <Users className="w-4 h-4 mr-2" />
+              <Users className="mr-2 h-4 w-4" />
               Comparative
             </TabsTrigger>
             <TabsTrigger value="heatmaps">
-              <BarChart3 className="w-4 h-4 mr-2" />
+              <BarChart3 className="mr-2 h-4 w-4" />
               Heatmaps
             </TabsTrigger>
             <TabsTrigger value="mastery">
-              <Target className="w-4 h-4 mr-2" />
+              <Target className="mr-2 h-4 w-4" />
               Mastery
             </TabsTrigger>
           </TabsList>
 
           {/* Comparative Analytics Tab */}
-          <TabsContent value="comparative" className="space-y-6 mt-6">
+          <TabsContent value="comparative" className="mt-6 space-y-6">
             {comparativeReport && (
               <>
                 {/* Overall Performance vs Cohort */}
-                <div className="bg-muted p-4 rounded-lg">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Award className="w-5 h-5 text-primary" />
+                <div className="rounded-lg bg-muted p-4">
+                  <div className="mb-3 flex items-center gap-2">
+                    <Award className="h-5 w-5 text-primary" />
                     <h3 className="font-semibold">Your Performance vs Cohort Average</h3>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-2">
+                  <p className="mb-2 text-sm text-muted-foreground">
                     {comparativeReport.motivationalMessage}
                   </p>
                   <div className="text-2xl font-bold">
@@ -238,24 +233,28 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
                 <div className="space-y-3">
                   <h4 className="font-semibold">Performance Metrics</h4>
                   {comparativeReport.comparisons.map((comp, idx) => (
-                    <div key={idx} className="border rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-2">
+                    <div key={idx} className="rounded-lg border p-4">
+                      <div className="mb-2 flex items-center justify-between">
                         <span className="font-medium">{comp.label}</span>
                         <Badge
                           variant={
-                            comp.status === 'above_average'
-                              ? 'default'
-                              : comp.status === 'below_average'
-                              ? 'destructive'
-                              : 'secondary'
+                            comp.status === "above_average"
+                              ? "default"
+                              : comp.status === "below_average"
+                                ? "destructive"
+                                : "secondary"
                           }
                         >
-                          {comp.status === 'above_average' && <TrendingUp className="w-3 h-3 mr-1" />}
-                          {comp.status === 'below_average' && <TrendingDown className="w-3 h-3 mr-1" />}
+                          {comp.status === "above_average" && (
+                            <TrendingUp className="mr-1 h-3 w-3" />
+                          )}
+                          {comp.status === "below_average" && (
+                            <TrendingDown className="mr-1 h-3 w-3" />
+                          )}
                           {comp.percentile ? `${comp.percentile}th` : comp.status}
                         </Badge>
                       </div>
-                      <div className="grid grid-cols-2 gap-4 mb-2">
+                      <div className="mb-2 grid grid-cols-2 gap-4">
                         <div>
                           <p className="text-sm text-muted-foreground">You</p>
                           <p className="text-xl font-bold">{comp.personalValue.toFixed(1)}%</p>
@@ -280,11 +279,14 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
                           <span>{domain.domainLabel}</span>
                           <span
                             className={`font-semibold ${
-                              domain.difference > 0 ? 'text-[#22c55e]' : domain.difference < 0 ? 'text-red-600' : ''
+                              domain.difference > 0
+                                ? "text-[#22c55e]"
+                                : domain.difference < 0
+                                  ? "text-red-600"
+                                  : ""
                             }`}
                           >
-                            {domain.personalScore.toFixed(1)}% (
-                            {domain.difference > 0 ? '+' : ''}
+                            {domain.personalScore.toFixed(1)}% ({domain.difference > 0 ? "+" : ""}
                             {domain.difference.toFixed(1)}%)
                           </span>
                         </div>
@@ -294,17 +296,17 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
                         </div>
                       </div>
                     ))}
-                    <p className="text-xs text-muted-foreground mt-2">
+                    <p className="mt-2 text-xs text-muted-foreground">
                       Left bar: Your score | Right bar (faded): Cohort average
                     </p>
                   </div>
                 )}
 
                 {/* Strengths & Improvements */}
-                <div className="grid md:grid-cols-2 gap-4">
+                <div className="grid gap-4 md:grid-cols-2">
                   {comparativeReport.strengths.length > 0 && (
-                    <div className="border border-green-200 bg-green-50 dark:bg-green-950 rounded-lg p-4">
-                      <h4 className="font-semibold text-green-700 dark:text-[#22c55e] mb-2">
+                    <div className="rounded-lg border border-green-200 bg-green-50 p-4 dark:bg-green-950">
+                      <h4 className="mb-2 font-semibold text-green-700 dark:text-[#22c55e]">
                         Your Strengths
                       </h4>
                       <ul className="space-y-1">
@@ -317,8 +319,8 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
                     </div>
                   )}
                   {comparativeReport.improvements.length > 0 && (
-                    <div className="border border-orange-200 bg-orange-50 dark:bg-orange-950 rounded-lg p-4">
-                      <h4 className="font-semibold text-orange-700 dark:text-orange-400 mb-2">
+                    <div className="rounded-lg border border-orange-200 bg-orange-50 p-4 dark:bg-orange-950">
+                      <h4 className="mb-2 font-semibold text-orange-700 dark:text-orange-400">
                         Areas for Improvement
                       </h4>
                       <ul className="space-y-1">
@@ -336,11 +338,11 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
           </TabsContent>
 
           {/* Heatmaps Tab */}
-          <TabsContent value="heatmaps" className="space-y-6 mt-6">
+          <TabsContent value="heatmaps" className="mt-6 space-y-6">
             {/* Domain × Week Heatmap */}
             {domainWeekHeatmap && (
               <div>
-                <h4 className="font-semibold mb-3">Performance Trends Over Time</h4>
+                <h4 className="mb-3 font-semibold">Performance Trends Over Time</h4>
                 <HeatmapVisualization heatmap={domainWeekHeatmap} />
               </div>
             )}
@@ -348,14 +350,14 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
             {/* Topic × Difficulty Heatmap */}
             {topicDifficultyHeatmap && (
               <div>
-                <h4 className="font-semibold mb-3">Performance by Difficulty Level</h4>
+                <h4 className="mb-3 font-semibold">Performance by Difficulty Level</h4>
                 <HeatmapVisualization heatmap={topicDifficultyHeatmap} />
               </div>
             )}
           </TabsContent>
 
           {/* Time-to-Mastery Tab */}
-          <TabsContent value="mastery" className="space-y-6 mt-6">
+          <TabsContent value="mastery" className="mt-6 space-y-6">
             {selectedMasteryPlan ? (
               <MasteryPlanView
                 plan={selectedMasteryPlan}
@@ -363,38 +365,38 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
               />
             ) : (
               <>
-                <div className="bg-muted p-4 rounded-lg">
+                <div className="rounded-lg bg-muted p-4">
                   <p className="text-sm">
-                    AI-powered predictions showing how long it will take to master each TCO domain at
-                    80% proficiency.
+                    AI-powered predictions showing how long it will take to master each TCO domain
+                    at 80% proficiency.
                   </p>
                 </div>
 
                 <div className="space-y-3">
                   {masteryPredictions.map((prediction, idx) => (
-                    <div key={idx} className="border rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-2">
+                    <div key={idx} className="rounded-lg border p-4">
+                      <div className="mb-2 flex items-center justify-between">
                         <h4 className="font-semibold capitalize">
-                          {prediction.domain.replace(/_/g, ' ')}
+                          {prediction.domain.replace(/_/g, " ")}
                         </h4>
                         <Badge
                           variant={
                             prediction.currentMasteryLevel >= 80
-                              ? 'default'
+                              ? "default"
                               : prediction.currentMasteryLevel >= 60
-                              ? 'secondary'
-                              : 'destructive'
+                                ? "secondary"
+                                : "destructive"
                           }
                         >
                           {prediction.currentMasteryLevel.toFixed(0)}% Current
                         </Badge>
                       </div>
 
-                      <div className="grid grid-cols-3 gap-4 mb-3">
+                      <div className="mb-3 grid grid-cols-3 gap-4">
                         <div>
                           <p className="text-sm text-muted-foreground">Est. Time</p>
                           <div className="flex items-center gap-1">
-                            <Clock className="w-4 h-4 text-primary" />
+                            <Clock className="h-4 w-4 text-primary" />
                             <p className="font-semibold">
                               {prediction.predictedDaysToMastery} days
                             </p>
@@ -414,10 +416,11 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
                         </div>
                       </div>
 
-                      <div className="bg-muted p-3 rounded text-sm mb-3">
-                        <p className="font-semibold mb-1">Recommended Schedule:</p>
+                      <div className="mb-3 rounded bg-muted p-3 text-sm">
+                        <p className="mb-1 font-semibold">Recommended Schedule:</p>
                         <p>
-                          {prediction.recommendedDailyMinutes} min/day, {prediction.recommendedWeeklySessions} days/week
+                          {prediction.recommendedDailyMinutes} min/day,{" "}
+                          {prediction.recommendedWeeklySessions} days/week
                         </p>
                       </div>
 
@@ -427,7 +430,7 @@ export function AdvancedAnalyticsDashboard({ userId }: AdvancedAnalyticsDashboar
                         onClick={() => handleViewMasteryPlan(prediction.domain)}
                         className="w-full"
                       >
-                        <Calendar className="w-4 h-4 mr-2" />
+                        <Calendar className="mr-2 h-4 w-4" />
                         View Weekly Plan
                       </Button>
                     </div>
@@ -460,7 +463,7 @@ function HeatmapVisualization({ heatmap }: HeatmapVisualizationProps) {
         <div className="flex">
           <div className="w-40" /> {/* Spacer for row labels */}
           {data.columns.map((col: string, idx: number) => (
-            <div key={idx} className="w-20 text-center text-xs font-medium p-2">
+            <div key={idx} className="w-20 p-2 text-center text-xs font-medium">
               {col}
             </div>
           ))}
@@ -470,7 +473,7 @@ function HeatmapVisualization({ heatmap }: HeatmapVisualizationProps) {
         {data.rows.map((row: string, rowIdx: number) => (
           <div key={rowIdx} className="flex items-center">
             {/* Row Label */}
-            <div className="w-40 text-sm font-medium p-2 truncate" title={row}>
+            <div className="w-40 truncate p-2 text-sm font-medium" title={row}>
               {row}
             </div>
 
@@ -480,14 +483,14 @@ function HeatmapVisualization({ heatmap }: HeatmapVisualizationProps) {
               return (
                 <div
                   key={colIdx}
-                  className="w-20 h-12 flex items-center justify-center text-xs font-semibold border"
+                  className="flex h-12 w-20 items-center justify-center border text-xs font-semibold"
                   style={{
                     backgroundColor: color,
-                    color: value > 60 ? '#fff' : '#000',
+                    color: value > 60 ? "#fff" : "#000",
                   }}
                   title={`${row} - ${data.columns[colIdx]}: ${value.toFixed(1)}%`}
                 >
-                  {value > 0 ? value.toFixed(0) : '-'}
+                  {value > 0 ? value.toFixed(0) : "-"}
                 </div>
               );
             })}
@@ -495,15 +498,15 @@ function HeatmapVisualization({ heatmap }: HeatmapVisualizationProps) {
         ))}
 
         {/* Legend */}
-        <div className="flex items-center gap-2 mt-4">
+        <div className="mt-4 flex items-center gap-2">
           <span className="text-xs text-muted-foreground">Scale:</span>
           <div className="flex items-center">
-            <div className="w-8 h-4" style={{ backgroundColor: '#ef4444' }} />
-            <span className="text-xs mx-2">Low (0-60%)</span>
-            <div className="w-8 h-4" style={{ backgroundColor: '#f59e0b' }} />
-            <span className="text-xs mx-2">Medium (60-80%)</span>
-            <div className="w-8 h-4" style={{ backgroundColor: '#10b981' }} />
-            <span className="text-xs ml-2">High (80%+)</span>
+            <div className="h-4 w-8" style={{ backgroundColor: "#ef4444" }} />
+            <span className="mx-2 text-xs">Low (0-60%)</span>
+            <div className="h-4 w-8" style={{ backgroundColor: "#f59e0b" }} />
+            <span className="mx-2 text-xs">Medium (60-80%)</span>
+            <div className="h-4 w-8" style={{ backgroundColor: "#10b981" }} />
+            <span className="ml-2 text-xs">High (80%+)</span>
           </div>
         </div>
       </div>
@@ -525,9 +528,9 @@ function MasteryPlanView({ plan, onBack }: MasteryPlanViewProps) {
         ← Back to All Domains
       </Button>
 
-      <div className="bg-muted p-4 rounded-lg">
-        <h3 className="font-semibold text-lg mb-2 capitalize">
-          {plan.domain.replace(/_/g, ' ')} Mastery Plan
+      <div className="rounded-lg bg-muted p-4">
+        <h3 className="mb-2 text-lg font-semibold capitalize">
+          {plan.domain.replace(/_/g, " ")} Mastery Plan
         </h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -545,14 +548,14 @@ function MasteryPlanView({ plan, onBack }: MasteryPlanViewProps) {
       <div className="space-y-3">
         <h4 className="font-semibold">Weekly Milestones</h4>
         {plan.weeklyPlan.map((week, idx) => (
-          <div key={idx} className="border rounded-lg p-4">
-            <div className="flex items-center justify-between mb-2">
+          <div key={idx} className="rounded-lg border p-4">
+            <div className="mb-2 flex items-center justify-between">
               <h5 className="font-semibold">Week {week.week}</h5>
               <Badge variant="outline">
                 {week.startDate} to {week.endDate}
               </Badge>
             </div>
-            <div className="grid grid-cols-3 gap-4 mb-3 text-sm">
+            <div className="mb-3 grid grid-cols-3 gap-4 text-sm">
               <div>
                 <p className="text-muted-foreground">Study Hours</p>
                 <p className="font-semibold">{week.recommendedHours}h</p>
@@ -579,8 +582,8 @@ function MasteryPlanView({ plan, onBack }: MasteryPlanViewProps) {
       </div>
 
       {/* Success Factors */}
-      <div className="border border-green-200 bg-green-50 dark:bg-green-950 rounded-lg p-4">
-        <h4 className="font-semibold text-green-700 dark:text-[#22c55e] mb-2">
+      <div className="rounded-lg border border-green-200 bg-green-50 p-4 dark:bg-green-950">
+        <h4 className="mb-2 font-semibold text-green-700 dark:text-[#22c55e]">
           Critical Success Factors
         </h4>
         <ul className="space-y-1">
@@ -594,9 +597,9 @@ function MasteryPlanView({ plan, onBack }: MasteryPlanViewProps) {
 
       {/* Risks */}
       {plan.potentialRisks.length > 0 && (
-        <div className="border border-orange-200 bg-orange-50 dark:bg-orange-950 rounded-lg p-4">
-          <h4 className="font-semibold text-orange-700 dark:text-orange-400 mb-2 flex items-center gap-2">
-            <AlertCircle className="w-4 h-4" />
+        <div className="rounded-lg border border-orange-200 bg-orange-50 p-4 dark:bg-orange-950">
+          <h4 className="mb-2 flex items-center gap-2 font-semibold text-orange-700 dark:text-orange-400">
+            <AlertCircle className="h-4 w-4" />
             Potential Risks
           </h4>
           <ul className="space-y-1">

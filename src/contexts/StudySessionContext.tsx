@@ -11,7 +11,7 @@ export interface StudySection {
   etaMin?: number;
 }
 
-export type SectionStatus = 'not_started' | 'in_progress' | 'completed' | 'needs_review';
+export type SectionStatus = "not_started" | "in_progress" | "completed" | "needs_review";
 
 interface StudySessionContextType {
   // Current module being studied
@@ -19,13 +19,13 @@ interface StudySessionContextType {
   sections: StudySection[];
   activeId: string | null;
   lastViewed: string | null;
-  activeTab: 'content' | 'review';
+  activeTab: "content" | "review";
 
   // Actions
   markSection: (id: string, status: SectionStatus) => Promise<void>;
   setLastViewed: (id: string) => void;
   setActiveId: (id: string) => void;
-  setActiveTab: (tab: 'content' | 'review') => void;
+  setActiveTab: (tab: "content" | "review") => void;
   markAllComplete: () => Promise<void>;
   clearAllReview: () => Promise<void>;
   resetProgress: () => Promise<void>;
@@ -39,11 +39,11 @@ interface StudySessionProviderProps {
   sections: StudySection[];
   activeId: string | null;
   lastViewed: string | null;
-  activeTab?: 'content' | 'review';
+  activeTab?: "content" | "review";
   onMarkSection: (id: string, status: SectionStatus) => Promise<void>;
   onSetLastViewed: (id: string) => void;
   onSetActiveId: (id: string) => void;
-  onSetActiveTab?: (tab: 'content' | 'review') => void;
+  onSetActiveTab?: (tab: "content" | "review") => void;
   onMarkAllComplete: () => Promise<void>;
   onClearAllReview: () => Promise<void>;
   onResetProgress: () => Promise<void>;
@@ -55,7 +55,7 @@ export function StudySessionProvider({
   sections,
   activeId,
   lastViewed,
-  activeTab = 'content',
+  activeTab = "content",
   onMarkSection,
   onSetLastViewed,
   onSetActiveId,
@@ -64,12 +64,15 @@ export function StudySessionProvider({
   onClearAllReview,
   onResetProgress,
 }: StudySessionProviderProps) {
-  const [currentTab, setCurrentTab] = useState<'content' | 'review'>(activeTab);
+  const [currentTab, setCurrentTab] = useState<"content" | "review">(activeTab);
 
-  const handleSetActiveTab = useCallback((tab: 'content' | 'review') => {
-    setCurrentTab(tab);
-    onSetActiveTab?.(tab);
-  }, [onSetActiveTab]);
+  const handleSetActiveTab = useCallback(
+    (tab: "content" | "review") => {
+      setCurrentTab(tab);
+      onSetActiveTab?.(tab);
+    },
+    [onSetActiveTab]
+  );
 
   const value: StudySessionContextType = {
     moduleId,
@@ -86,11 +89,7 @@ export function StudySessionProvider({
     resetProgress: onResetProgress,
   };
 
-  return (
-    <StudySessionContext.Provider value={value}>
-      {children}
-    </StudySessionContext.Provider>
-  );
+  return <StudySessionContext.Provider value={value}>{children}</StudySessionContext.Provider>;
 }
 
 export function useStudySession(): StudySessionContextType | null {

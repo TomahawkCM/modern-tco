@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { createRule } from '@/lib/merchant-rules';
-import { extractMerchantToken } from '@/lib/merchant-tokenizer';
-import { Check, X } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { cn } from '@/lib/utils';
+import { createRule } from "@/lib/merchant-rules";
+import { extractMerchantToken } from "@/lib/merchant-tokenizer";
+import { Check, X } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface MerchantRulePromptProps {
   merchantName: string;
@@ -21,7 +21,7 @@ export function MerchantRulePrompt({
   onDismiss,
   className,
 }: MerchantRulePromptProps) {
-  const t = useTranslations('budget.merchantRules');
+  const t = useTranslations("budget.merchantRules");
   const [visible, setVisible] = useState(true);
 
   // Auto-dismiss after 5 seconds
@@ -53,26 +53,26 @@ export function MerchantRulePrompt({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 10 }}
           className={cn(
-            'flex items-center gap-3 rounded-xl border border-blue-500/30 bg-slate-900/95 px-4 py-2.5 shadow-lg backdrop-blur-sm',
+            "flex items-center gap-3 rounded-xl border border-blue-500/30 bg-slate-900/95 px-4 py-2.5 shadow-lg backdrop-blur-sm",
             className
           )}
         >
           <p className="flex-1 text-xs text-slate-300">
-            {t('createRule', { merchant: merchantName, category })}
+            {t("createRule", { merchant: merchantName, category })}
           </p>
           <button
             onClick={handleAccept}
             className="flex items-center gap-1 rounded-lg bg-blue-600/20 px-3 py-1 text-xs font-medium text-blue-300 transition-colors hover:bg-blue-600/30"
           >
             <Check className="h-3 w-3" />
-            {t('yes')}
+            {t("yes")}
           </button>
           <button
             onClick={handleReject}
             className="flex items-center gap-1 rounded-lg px-3 py-1 text-xs text-slate-400 transition-colors hover:bg-white/5 hover:text-white"
           >
             <X className="h-3 w-3" />
-            {t('no')}
+            {t("no")}
           </button>
         </motion.div>
       )}

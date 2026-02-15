@@ -30,7 +30,7 @@ export function camelCaseKeys<T = any>(obj: any): T {
     return obj.map((item) => camelCaseKeys(item)) as T;
   }
 
-  if (typeof obj === 'object' && obj.constructor === Object) {
+  if (typeof obj === "object" && obj.constructor === Object) {
     return Object.keys(obj).reduce((acc, key) => {
       const camelKey = snakeToCamel(key);
       acc[camelKey] = camelCaseKeys(obj[key]);
@@ -53,7 +53,7 @@ export function snakeCaseKeys<T = any>(obj: any): T {
     return obj.map((item) => snakeCaseKeys(item)) as T;
   }
 
-  if (typeof obj === 'object' && obj.constructor === Object) {
+  if (typeof obj === "object" && obj.constructor === Object) {
     return Object.keys(obj).reduce((acc, key) => {
       const snakeKey = camelToSnake(key);
       acc[snakeKey] = snakeCaseKeys(obj[key]);

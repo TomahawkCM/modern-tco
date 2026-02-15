@@ -10,14 +10,11 @@
  * - On app init, checks Supabase for newer data and merges if needed
  */
 
-import { type SupportedLocale, getValidLocale, DEFAULT_LOCALE } from '../i18n/config';
-import type { CurrencyCode } from '../i18n/utils/formatCurrency';
-import {
-  syncLocaleToSupabase,
-  loadLocaleFromSupabase,
-} from './supabase/user-preferences';
+import { type SupportedLocale, getValidLocale, DEFAULT_LOCALE } from "../i18n/config";
+import type { CurrencyCode } from "../i18n/utils/formatCurrency";
+import { syncLocaleToSupabase, loadLocaleFromSupabase } from "./supabase/user-preferences";
 
-const STORAGE_KEY = 'budget_app_locale_prefs';
+const STORAGE_KEY = "budget_app_locale_prefs";
 
 export interface LocalePreferences {
   /** Selected language locale */
@@ -44,7 +41,7 @@ export interface LocalePreferences {
  * Returns default preferences if not set or invalid
  */
 export function getLocalePreferences(): LocalePreferences {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return {
       locale: DEFAULT_LOCALE,
     };
@@ -68,7 +65,7 @@ export function getLocalePreferences(): LocalePreferences {
       locale: validLocale,
     };
   } catch (error) {
-    console.error('Error reading locale preferences:', error);
+    console.error("Error reading locale preferences:", error);
     return {
       locale: DEFAULT_LOCALE,
     };
@@ -81,7 +78,7 @@ export function getLocalePreferences(): LocalePreferences {
  * Syncs to Supabase (debounced, 1 second)
  */
 export function setLocalePreferences(prefs: Partial<LocalePreferences>): void {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return;
   }
 
@@ -100,12 +97,12 @@ export function setLocalePreferences(prefs: Partial<LocalePreferences>): void {
 
     // Dispatch custom event for components to react to changes
     window.dispatchEvent(
-      new CustomEvent('localePreferencesChanged', {
+      new CustomEvent("localePreferencesChanged", {
         detail: updated,
       })
     );
   } catch (error) {
-    console.error('Error saving locale preferences:', error);
+    console.error("Error saving locale preferences:", error);
   }
 }
 
@@ -123,7 +120,7 @@ export function updateLocalePreference<K extends keyof LocalePreferences>(
  * Reset locale preferences to defaults
  */
 export function resetLocalePreferences(): void {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return;
   }
 
@@ -132,12 +129,12 @@ export function resetLocalePreferences(): void {
 
     // Dispatch reset event
     window.dispatchEvent(
-      new CustomEvent('localePreferencesChanged', {
+      new CustomEvent("localePreferencesChanged", {
         detail: { locale: DEFAULT_LOCALE },
       })
     );
   } catch (error) {
-    console.error('Error resetting locale preferences:', error);
+    console.error("Error resetting locale preferences:", error);
   }
 }
 
@@ -152,7 +149,7 @@ export function getCurrentLocale(): SupportedLocale {
  * Set current locale
  */
 export function setCurrentLocale(locale: SupportedLocale): void {
-  updateLocalePreference('locale', locale);
+  updateLocalePreference("locale", locale);
 }
 
 /**
@@ -166,7 +163,7 @@ export function getCurrentCurrency(): CurrencyCode | undefined {
  * Set current currency
  */
 export function setCurrentCurrency(currency: CurrencyCode): void {
-  updateLocalePreference('currency', currency);
+  updateLocalePreference("currency", currency);
 }
 
 /**
@@ -180,7 +177,7 @@ export function getWeekStart(): 0 | 1 {
  * Set week start preference
  */
 export function setWeekStart(weekStart: 0 | 1): void {
-  updateLocalePreference('weekStart', weekStart);
+  updateLocalePreference("weekStart", weekStart);
 }
 
 /**
@@ -202,7 +199,7 @@ export function wasRecentlyUpdated(prefs: LocalePreferences): boolean {
  * - Otherwise, use Supabase data if it's newer
  */
 export async function initializeLocalePreferences(): Promise<void> {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return;
   }
 
@@ -216,17 +213,17 @@ export async function initializeLocalePreferences(): Promise<void> {
 
       // Dispatch event to notify components
       window.dispatchEvent(
-        new CustomEvent('localePreferencesChanged', {
+        new CustomEvent("localePreferencesChanged", {
           detail: supabasePrefs,
         })
       );
 
-      console.log('Locale preferences initialized from Supabase');
+      console.log("Locale preferences initialized from Supabase");
     } else {
-      console.log('Locale preferences: using local data');
+      console.log("Locale preferences: using local data");
     }
   } catch (error) {
-    console.error('Error initializing locale preferences:', error);
+    console.error("Error initializing locale preferences:", error);
     // Continue with localStorage data on error
   }
 }

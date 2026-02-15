@@ -19,6 +19,7 @@ SUPABASE_DB_URL=postgresql://postgres:<password>@<host>:5432/postgres
 ```
 
 Security notes
+
 - Never commit `.env.local` or any keys to source control.
 - If a secret is exposed, rotate it immediately in the Supabase dashboard.
 

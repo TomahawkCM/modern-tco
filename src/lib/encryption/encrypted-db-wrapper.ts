@@ -4,20 +4,14 @@
  * Wraps Dexie operations to automatically encrypt sensitive fields
  */
 
-import type { Table } from 'dexie';
-import {
-  encryptTransaction,
-  decryptTransaction,
-  isEncryptionEnabled,
-} from './budget-encryption';
-import type { Transaction } from '@/types/budget';
+import type { Table } from "dexie";
+import { encryptTransaction, decryptTransaction, isEncryptionEnabled } from "./budget-encryption";
+import type { Transaction } from "@/types/budget";
 
 /**
  * Wrap a Dexie table to add encryption/decryption
  */
-export function createEncryptedTable<T extends Transaction>(
-  table: Table<T>
-): Table<T> {
+export function createEncryptedTable<T extends Transaction>(table: Table<T>): Table<T> {
   if (!isEncryptionEnabled()) {
     return table; // Return original table if encryption disabled
   }
@@ -28,13 +22,11 @@ export function createEncryptedTable<T extends Transaction>(
       const original = target[prop as keyof Table<T>];
 
       // Wrap methods that write data
-      if (prop === 'add' || prop === 'put' || prop === 'update') {
+      if (prop === "add" || prop === "put" || prop === "update") {
         return async function (item: T | T[], ...args: any[]) {
           if (Array.isArray(item)) {
             // Bulk operations
-            const encrypted = await Promise.all(
-              item.map((tx) => encryptTransaction(tx as any))
-            );
+            const encrypted = await Promise.all(item.map((tx) => encryptTransaction(tx as any)));
             return (original as any).call(target, encrypted, ...args);
           } else {
             // Single item
@@ -46,14 +38,14 @@ export function createEncryptedTable<T extends Transaction>(
 
       // Wrap methods that read data
       if (
-        prop === 'get' ||
-        prop === 'where' ||
-        prop === 'filter' ||
-        prop === 'toArray' ||
-        prop === 'first' ||
-        prop === 'last'
+        prop === "get" ||
+        prop === "where" ||
+        prop === "filter" ||
+        prop === "toArray" ||
+        prop === "first" ||
+        prop === "last"
       ) {
-        if (prop === 'where' || prop === 'filter') {
+        if (prop === "where" || prop === "filter") {
           // These return query builders - we'll handle decryption at the end
           return function (...args: any[]) {
             const query = (original as any).call(target, ...args);
@@ -81,20 +73,15 @@ function wrapQuery(query: any): any {
     get(target, prop) {
       const original = target[prop as keyof typeof query];
 
-      if (
-        prop === 'toArray' ||
-        prop === 'first' ||
-        prop === 'last' ||
-        prop === 'each'
-      ) {
+      if (prop === "toArray" || prop === "first" || prop === "last" || prop === "each") {
         return async function (...args: any[]) {
-          const result = await (original).call(target, ...args);
+          const result = await original.call(target, ...args);
           return decryptResult(result);
         };
       }
 
       // Chain methods (where, filter, etc.)
-      if (typeof original === 'function') {
+      if (typeof original === "function") {
         return function (...args: any[]) {
           const newQuery = original.apply(target, args);
           return wrapQuery(newQuery);
@@ -125,10 +112,5 @@ async function decryptResult(result: any): Promise<any> {
  * Check if a transaction needs encryption
  */
 function isTransaction(item: any): item is Transaction {
-  return (
-    item &&
-    typeof item === 'object' &&
-    ('description' in item || 'amount' in item)
-  );
+  return item && typeof item === "object" && ("description" in item || "amount" in item);
 }
-

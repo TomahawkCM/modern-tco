@@ -100,7 +100,7 @@ uvx specify-cli.py init --here
 #### SPARC + Spec Kit Methodology
 
 1. **Specification** (Spec Kit `/specify`) → Requirements analysis
-2. **Pseudocode** (Spec Kit `/plan`) → Technical planning  
+2. **Pseudocode** (Spec Kit `/plan`) → Technical planning
 3. **Architecture** (SPARC `architect`) → System design
 4. **Refinement** (Spec Kit `/tasks`) → Implementation breakdown
 5. **Completion** (SPARC `integration`) → Testing and deployment
@@ -194,7 +194,7 @@ uvx specify-cli.py init --here
 # 2. Generate technical plan
 > /plan
   - React component architecture
-  - State management strategy  
+  - State management strategy
   - API integration requirements
   - Testing approach
 
@@ -221,7 +221,7 @@ uvx specify-cli.py init --here
 # 2. Generate technical plan
 > /plan
   - React component architecture
-  - State management strategy  
+  - State management strategy
   - API integration requirements
   - Testing approach
 
@@ -281,7 +281,7 @@ uvx specify-cli.py init --here
 
 1. **Initialize TCO project**: Create specifications for current development
 2. **Migrate existing plans**: Convert current roadmaps to spec format
-3. **Team onboarding**: Train team members on spec-driven methodology  
+3. **Team onboarding**: Train team members on spec-driven methodology
 4. **Process integration**: Merge with existing SPARC/SuperClaude workflows
 5. **Continuous improvement**: Evolve specifications based on outcomes
 

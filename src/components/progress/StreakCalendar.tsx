@@ -78,17 +78,13 @@ export default function StreakCalendar({
           <div className="flex items-center gap-4">
             {currentStreak > 0 && (
               <div className="text-center">
-                <div className="text-2xl font-bold text-orange-500">
-                  {currentStreak}
-                </div>
+                <div className="text-2xl font-bold text-orange-500">{currentStreak}</div>
                 <p className="text-xs text-muted-foreground">Current</p>
               </div>
             )}
             {longestStreak > 0 && (
               <div className="text-center">
-                <div className="text-2xl font-bold text-primary">
-                  {longestStreak}
-                </div>
+                <div className="text-2xl font-bold text-primary">{longestStreak}</div>
                 <p className="text-xs text-muted-foreground">Best</p>
               </div>
             )}
@@ -100,12 +96,9 @@ export default function StreakCalendar({
         {/* Calendar Grid */}
         <div className="space-y-2">
           {/* Weekday headers */}
-          <div className="grid grid-cols-7 gap-2 mb-2">
+          <div className="mb-2 grid grid-cols-7 gap-2">
             {weekdays.map((day, idx) => (
-              <div
-                key={idx}
-                className="text-center text-xs font-medium text-muted-foreground"
-              >
+              <div key={idx} className="text-center text-xs font-medium text-muted-foreground">
                 {day}
               </div>
             ))}
@@ -122,37 +115,26 @@ export default function StreakCalendar({
                 return (
                   <div
                     key={dayIdx}
-                    className="relative group"
+                    className="group relative"
                     title={
                       isFuture
                         ? "Future date"
                         : reviewData
-                        ? `${format(date, "MMM d")}: ${
-                            reviewData.reviewCount
-                          } reviews`
-                        : `${format(date, "MMM d")}: No reviews`
+                          ? `${format(date, "MMM d")}: ${reviewData.reviewCount} reviews`
+                          : `${format(date, "MMM d")}: No reviews`
                     }
                   >
                     <div
-                      className={`
-                        aspect-square rounded-md flex items-center justify-center
-                        ${getDayColor(date)}
-                        ${isToday ? "ring-2 ring-primary ring-offset-2 ring-offset-background" : ""}
-                        ${isFuture ? "opacity-20" : ""}
-                        transition-all cursor-pointer hover:scale-110
-                      `}
+                      className={`flex aspect-square items-center justify-center rounded-md ${getDayColor(date)} ${isToday ? "ring-2 ring-primary ring-offset-2 ring-offset-background" : ""} ${isFuture ? "opacity-20" : ""} cursor-pointer transition-all hover:scale-110`}
                     >
-                      <span className="text-xs font-medium">
-                        {format(date, "d")}
-                      </span>
+                      <span className="text-xs font-medium">{format(date, "d")}</span>
                     </div>
 
                     {/* Tooltip on hover */}
                     {!isFuture && (
-                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-10">
-                        <div className="bg-popover text-popover-foreground px-2 py-1 rounded-md shadow-lg text-xs whitespace-nowrap">
-                          {format(date, "MMM d")}:{" "}
-                          {reviewData?.reviewCount || 0} reviews
+                      <div className="absolute bottom-full left-1/2 z-10 mb-2 hidden -translate-x-1/2 group-hover:block">
+                        <div className="whitespace-nowrap rounded-md bg-popover px-2 py-1 text-xs text-popover-foreground shadow-lg">
+                          {format(date, "MMM d")}: {reviewData?.reviewCount || 0} reviews
                           {reviewData?.goalMet && " ✓"}
                         </div>
                       </div>
@@ -165,25 +147,25 @@ export default function StreakCalendar({
         </div>
 
         {/* Legend */}
-        <div className="flex items-center justify-between pt-4 border-t">
+        <div className="flex items-center justify-between border-t pt-4">
           <div className="flex items-center gap-4 text-xs">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-card" />
+              <div className="h-3 w-3 rounded bg-card" />
               <span className="text-muted-foreground">No activity</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-yellow-500/50" />
+              <div className="h-3 w-3 rounded bg-yellow-500/50" />
               <span className="text-muted-foreground">Some reviews</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-[#22c55e]" />
+              <div className="h-3 w-3 rounded bg-[#22c55e]" />
               <span className="text-muted-foreground">Goal met ({dailyGoal}+)</span>
             </div>
           </div>
 
           {currentStreak >= 7 && (
-            <Badge variant="outline" className="text-orange-500 border-orange-500">
-              <Trophy className="h-3 w-3 mr-1" />
+            <Badge variant="outline" className="border-orange-500 text-orange-500">
+              <Trophy className="mr-1 h-3 w-3" />
               Week Streak!
             </Badge>
           )}
@@ -191,16 +173,16 @@ export default function StreakCalendar({
 
         {/* Motivational Message */}
         {currentStreak === 0 && (
-          <div className="p-3 bg-muted rounded-lg text-center">
+          <div className="rounded-lg bg-muted p-3 text-center">
             <p className="text-sm font-medium">Start your streak today!</p>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="mt-1 text-xs text-muted-foreground">
               Complete {dailyGoal} reviews to build momentum
             </p>
           </div>
         )}
 
         {currentStreak > 0 && currentStreak < longestStreak && (
-          <div className="p-3 bg-orange-500/10 border border-orange-500/20 rounded-lg text-center">
+          <div className="rounded-lg border border-orange-500/20 bg-orange-500/10 p-3 text-center">
             <p className="text-sm font-medium text-orange-500">
               Keep going! {longestStreak - currentStreak} days to match your record
             </p>
@@ -208,10 +190,8 @@ export default function StreakCalendar({
         )}
 
         {currentStreak === longestStreak && currentStreak >= 7 && (
-          <div className="p-3 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg text-center">
-            <p className="text-sm font-medium text-[#22c55e]">
-              🔥 Personal best! You're on fire!
-            </p>
+          <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/10 p-3 text-center">
+            <p className="text-sm font-medium text-[#22c55e]">🔥 Personal best! You're on fire!</p>
           </div>
         )}
       </CardContent>

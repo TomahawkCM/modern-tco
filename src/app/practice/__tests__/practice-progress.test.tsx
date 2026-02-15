@@ -1,30 +1,36 @@
-import React from 'react';
-import { render, waitFor } from '@testing-library/react';
+import React from "react";
+import { render, waitFor } from "@testing-library/react";
 
 // Track calls
 const updateSessionStatsMock = jest.fn();
 
-jest.mock('@/contexts/ProgressContext', () => ({
+jest.mock("@/contexts/ProgressContext", () => ({
   useProgress: () => ({
     updateSessionStats: updateSessionStatsMock,
     state: { progress: { recentSessions: [] } },
     getDomainStats: () => [],
     setWeeklyGoal: () => {},
-    getOverallStats: () => ({ totalQuestions: 0, averageScore: 0, studyStreak: 0, hoursStudied: 0, readinessLevel: 'Poor' }),
+    getOverallStats: () => ({
+      totalQuestions: 0,
+      averageScore: 0,
+      studyStreak: 0,
+      hoursStudied: 0,
+      readinessLevel: "Poor",
+    }),
     getWeeklyProgress: () => ({ current: 0, goal: 5, percentage: 0 }),
     resetProgress: () => {},
   }),
 }));
 
-jest.mock('@/contexts/ExamContext', () => ({
+jest.mock("@/contexts/ExamContext", () => ({
   useExam: () => ({
     state: {
       isLoading: false,
       currentSession: {
         completed: true,
         score: 80,
-        questions: [ { id: 'q1', correctAnswerId: 'a' } ],
-        answers: { q1: 'a' },
+        questions: [{ id: "q1", correctAnswerId: "a" }],
+        answers: { q1: "a" },
         startTime: new Date(Date.now() - 30_000),
         endTime: new Date(),
       },
@@ -42,16 +48,17 @@ jest.mock('@/contexts/ExamContext', () => ({
 }));
 
 // Silence analytics
-jest.mock('@/lib/analytics', () => ({ analytics: { capture: jest.fn(), pageview: jest.fn(), init: () => true } }));
+jest.mock("@/lib/analytics", () => ({
+  analytics: { capture: jest.fn(), pageview: jest.fn(), init: () => true },
+}));
 
-import PracticePage from '@/app/practice/page';
+import PracticePage from "@/app/practice/page";
 
-describe('PracticePage progress integration', () => {
-  it('calls updateSessionStats when a session completes', async () => {
+describe("PracticePage progress integration", () => {
+  it("calls updateSessionStats when a session completes", async () => {
     render(<PracticePage />);
     await waitFor(() => {
       expect(updateSessionStatsMock).toHaveBeenCalled();
     });
   });
 });
-

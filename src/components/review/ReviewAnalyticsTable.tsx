@@ -255,32 +255,32 @@ export function ReviewAnalyticsTable({
           <TableHeader className="z-9 glass sticky top-24">
             <TableRow className="border-white/10">
               <TableHead
-                className="cursor-pointer text-foreground hover:text-tanium-accent"
+                className="hover:text-tanium-accent cursor-pointer text-foreground"
                 onClick={() => handleSort("domain")}
               >
                 Domain <SortIcon field="domain" />
               </TableHead>
               <TableHead
-                className="cursor-pointer text-center text-foreground hover:text-tanium-accent"
+                className="hover:text-tanium-accent cursor-pointer text-center text-foreground"
                 onClick={() => handleSort("total")}
               >
                 Total <SortIcon field="total" />
               </TableHead>
               <TableHead
-                className="cursor-pointer text-center text-foreground hover:text-tanium-accent"
+                className="hover:text-tanium-accent cursor-pointer text-center text-foreground"
                 onClick={() => handleSort("reviewed")}
               >
                 Reviewed <SortIcon field="reviewed" />
               </TableHead>
               <TableHead
-                className="cursor-pointer text-center text-foreground hover:text-tanium-accent"
+                className="hover:text-tanium-accent cursor-pointer text-center text-foreground"
                 onClick={() => handleSort("pending")}
               >
                 Pending <SortIcon field="pending" />
               </TableHead>
               <TableHead className="text-center text-foreground">By Difficulty</TableHead>
               <TableHead
-                className="cursor-pointer text-center text-foreground hover:text-tanium-accent"
+                className="hover:text-tanium-accent cursor-pointer text-center text-foreground"
                 onClick={() => handleSort("percentage")}
               >
                 Progress <SortIcon field="percentage" />
@@ -346,7 +346,9 @@ export function ReviewAnalyticsTable({
                         className="h-2 flex-1"
                         aria-label={`${row.domain} review progress: ${row.percentageReviewed}% complete`}
                       />
-                      <span className="text-xs text-muted-foreground">{row.percentageReviewed}%</span>
+                      <span className="text-xs text-muted-foreground">
+                        {row.percentageReviewed}%
+                      </span>
                     </div>
                   </TableCell>
                   <TableCell className="text-center">

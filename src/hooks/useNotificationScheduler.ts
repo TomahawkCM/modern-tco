@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import { useNotificationsOptional } from '@/contexts/NotificationContext';
-import { checkNotificationSources } from '@/lib/notifications/notification-scheduler';
+import { useEffect, useRef } from "react";
+import { useNotificationsOptional } from "@/contexts/NotificationContext";
+import { checkNotificationSources } from "@/lib/notifications/notification-scheduler";
 
 const CHECK_INTERVAL_MS = 30 * 60 * 1000; // 30 minutes
 
@@ -25,7 +25,7 @@ export function useNotificationScheduler() {
         }
         lastCheckRef.current = Date.now();
       } catch (error) {
-        console.error('[NotificationScheduler] Check failed:', error);
+        console.error("[NotificationScheduler] Check failed:", error);
       }
     }
 

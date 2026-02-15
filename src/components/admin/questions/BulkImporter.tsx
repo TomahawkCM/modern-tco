@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import React, { useState, useRef } from "react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Upload,
   FileJson,
@@ -18,21 +18,21 @@ import {
   AlertTriangle,
   Download,
   Loader2,
-} from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
-import { questionBulkService, type ImportResult } from '@/lib/questionBulkService';
-import type { Question } from '@/types/exam';
-import { QuestionPreview } from './QuestionPreview';
+} from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import { questionBulkService, type ImportResult } from "@/lib/questionBulkService";
+import type { Question } from "@/types/exam";
+import { QuestionPreview } from "./QuestionPreview";
 
-type ImportStep = 'upload' | 'preview' | 'importing' | 'results';
+type ImportStep = "upload" | "preview" | "importing" | "results";
 
 export function BulkImporter() {
   // Step management
-  const [currentStep, setCurrentStep] = useState<ImportStep>('upload');
+  const [currentStep, setCurrentStep] = useState<ImportStep>("upload");
 
   // File upload
-  const [importType, setImportType] = useState<'csv' | 'json'>('csv');
-  const [fileContent, setFileContent] = useState('');
+  const [importType, setImportType] = useState<"csv" | "json">("csv");
+  const [fileContent, setFileContent] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Parsed questions
@@ -60,9 +60,9 @@ export function BulkImporter() {
   const handlePaste = () => {
     if (!fileContent.trim()) {
       toast({
-        title: 'No Content',
-        description: 'Please paste your CSV or JSON content',
-        variant: 'destructive',
+        title: "No Content",
+        description: "Please paste your CSV or JSON content",
+        variant: "destructive",
       });
       return;
     }
@@ -70,11 +70,11 @@ export function BulkImporter() {
     handleParse(fileContent, importType);
   };
 
-  const handleParse = async (content: string, type: 'csv' | 'json') => {
+  const handleParse = async (content: string, type: "csv" | "json") => {
     try {
       let result;
 
-      if (type === 'csv') {
+      if (type === "csv") {
         result = questionBulkService.parseCSV(content);
       } else {
         result = questionBulkService.parseJSON(content);
@@ -83,9 +83,9 @@ export function BulkImporter() {
       if (result.errors.length > 0) {
         setParseErrors(result.errors);
         toast({
-          title: 'Parse Errors',
+          title: "Parse Errors",
           description: `Found ${result.errors.length} parsing errors. Review and fix before importing.`,
-          variant: 'destructive',
+          variant: "destructive",
         });
         return;
       }
@@ -97,17 +97,17 @@ export function BulkImporter() {
       const duplicates = await questionBulkService.findDuplicates(result.questions);
       setDuplicateCount(duplicates.size);
 
-      setCurrentStep('preview');
+      setCurrentStep("preview");
 
       toast({
-        title: 'Success',
+        title: "Success",
         description: `Parsed ${result.questions.length} questions successfully`,
       });
     } catch (error) {
       toast({
-        title: 'Parse Failed',
-        description: error instanceof Error ? error.message : 'Failed to parse file',
-        variant: 'destructive',
+        title: "Parse Failed",
+        description: error instanceof Error ? error.message : "Failed to parse file",
+        variant: "destructive",
       });
     }
   };
@@ -115,59 +115,56 @@ export function BulkImporter() {
   const handleImport = async () => {
     if (parsedQuestions.length === 0) return;
 
-    setCurrentStep('importing');
+    setCurrentStep("importing");
     setImportProgress(0);
 
-    const result = await questionBulkService.importQuestions(
-      parsedQuestions,
-      (current, total) => {
-        setImportProgress((current / total) * 100);
-      }
-    );
+    const result = await questionBulkService.importQuestions(parsedQuestions, (current, total) => {
+      setImportProgress((current / total) * 100);
+    });
 
     setImportResult(result);
-    setCurrentStep('results');
+    setCurrentStep("results");
 
     if (result.success) {
       toast({
-        title: 'Import Complete',
+        title: "Import Complete",
         description: `Successfully imported ${result.imported} questions`,
       });
     } else {
       toast({
-        title: 'Import Completed with Errors',
+        title: "Import Completed with Errors",
         description: `Imported ${result.imported}, failed ${result.failed}`,
-        variant: 'destructive',
+        variant: "destructive",
       });
     }
   };
 
   const handleDownloadTemplate = () => {
     const template = questionBulkService.generateCSVTemplate();
-    const blob = new Blob([template], { type: 'text/csv' });
+    const blob = new Blob([template], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = 'question-import-template.csv';
+    link.download = "question-import-template.csv";
     link.click();
     URL.revokeObjectURL(url);
 
     toast({
-      title: 'Template Downloaded',
-      description: 'Use this template to format your questions for import',
+      title: "Template Downloaded",
+      description: "Use this template to format your questions for import",
     });
   };
 
   const handleReset = () => {
-    setCurrentStep('upload');
-    setFileContent('');
+    setCurrentStep("upload");
+    setFileContent("");
     setParsedQuestions([]);
     setParseErrors([]);
     setDuplicateCount(0);
     setImportProgress(0);
     setImportResult(null);
     if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+      fileInputRef.current.value = "";
     }
   };
 
@@ -175,22 +172,34 @@ export function BulkImporter() {
     <div className="space-y-6">
       {/* Step Indicator */}
       <div className="flex items-center justify-center gap-4">
-        <div className={`flex items-center gap-2 ${currentStep === 'upload' ? 'text-blue-500' : 'text-muted-foreground'}`}>
-          <div className={`rounded-full w-8 h-8 flex items-center justify-center ${currentStep === 'upload' ? 'bg-blue-500 text-white' : 'bg-muted'}`}>
+        <div
+          className={`flex items-center gap-2 ${currentStep === "upload" ? "text-blue-500" : "text-muted-foreground"}`}
+        >
+          <div
+            className={`flex h-8 w-8 items-center justify-center rounded-full ${currentStep === "upload" ? "bg-blue-500 text-white" : "bg-muted"}`}
+          >
             1
           </div>
           <span className="font-medium">Upload</span>
         </div>
-        <div className="w-12 h-0.5 bg-border" />
-        <div className={`flex items-center gap-2 ${currentStep === 'preview' ? 'text-blue-500' : 'text-muted-foreground'}`}>
-          <div className={`rounded-full w-8 h-8 flex items-center justify-center ${currentStep === 'preview' ? 'bg-blue-500 text-white' : 'bg-muted'}`}>
+        <div className="h-0.5 w-12 bg-border" />
+        <div
+          className={`flex items-center gap-2 ${currentStep === "preview" ? "text-blue-500" : "text-muted-foreground"}`}
+        >
+          <div
+            className={`flex h-8 w-8 items-center justify-center rounded-full ${currentStep === "preview" ? "bg-blue-500 text-white" : "bg-muted"}`}
+          >
             2
           </div>
           <span className="font-medium">Preview</span>
         </div>
-        <div className="w-12 h-0.5 bg-border" />
-        <div className={`flex items-center gap-2 ${currentStep === 'importing' || currentStep === 'results' ? 'text-blue-500' : 'text-muted-foreground'}`}>
-          <div className={`rounded-full w-8 h-8 flex items-center justify-center ${currentStep === 'importing' || currentStep === 'results' ? 'bg-blue-500 text-white' : 'bg-muted'}`}>
+        <div className="h-0.5 w-12 bg-border" />
+        <div
+          className={`flex items-center gap-2 ${currentStep === "importing" || currentStep === "results" ? "text-blue-500" : "text-muted-foreground"}`}
+        >
+          <div
+            className={`flex h-8 w-8 items-center justify-center rounded-full ${currentStep === "importing" || currentStep === "results" ? "bg-blue-500 text-white" : "bg-muted"}`}
+          >
             3
           </div>
           <span className="font-medium">Import</span>
@@ -198,23 +207,24 @@ export function BulkImporter() {
       </div>
 
       {/* Step 1: Upload */}
-      {currentStep === 'upload' && (
+      {currentStep === "upload" && (
         <Card>
           <CardHeader>
             <CardTitle>Import Questions</CardTitle>
-            <CardDescription>
-              Upload a CSV or JSON file, or paste content directly
-            </CardDescription>
+            <CardDescription>Upload a CSV or JSON file, or paste content directly</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <Tabs value={importType} onValueChange={(value) => setImportType(value as 'csv' | 'json')}>
+            <Tabs
+              value={importType}
+              onValueChange={(value) => setImportType(value as "csv" | "json")}
+            >
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="csv">
-                  <FileSpreadsheet className="h-4 w-4 mr-2" />
+                  <FileSpreadsheet className="mr-2 h-4 w-4" />
                   CSV Import
                 </TabsTrigger>
                 <TabsTrigger value="json">
-                  <FileJson className="h-4 w-4 mr-2" />
+                  <FileJson className="mr-2 h-4 w-4" />
                   JSON Import
                 </TabsTrigger>
               </TabsList>
@@ -222,9 +232,12 @@ export function BulkImporter() {
               <TabsContent value="csv" className="space-y-4">
                 <Alert>
                   <AlertDescription>
-                    <p className="font-semibold mb-2">CSV Format Requirements:</p>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
-                      <li>Required columns: question, choice_a, choice_b, choice_c, choice_d, correct_answer, explanation, domain, difficulty</li>
+                    <p className="mb-2 font-semibold">CSV Format Requirements:</p>
+                    <ul className="list-inside list-disc space-y-1 text-sm">
+                      <li>
+                        Required columns: question, choice_a, choice_b, choice_c, choice_d,
+                        correct_answer, explanation, domain, difficulty
+                      </li>
                       <li>Optional columns: category, tags, study_guide_ref, console_steps</li>
                       <li>Use pipe (|) to separate multiple tags or console steps</li>
                       <li>Download the template below for proper formatting</li>
@@ -233,7 +246,7 @@ export function BulkImporter() {
                 </Alert>
 
                 <Button variant="outline" onClick={handleDownloadTemplate} className="w-full">
-                  <Download className="h-4 w-4 mr-2" />
+                  <Download className="mr-2 h-4 w-4" />
                   Download CSV Template
                 </Button>
               </TabsContent>
@@ -241,10 +254,13 @@ export function BulkImporter() {
               <TabsContent value="json" className="space-y-4">
                 <Alert>
                   <AlertDescription>
-                    <p className="font-semibold mb-2">JSON Format Requirements:</p>
-                    <ul className="list-disc list-inside space-y-1 text-sm">
+                    <p className="mb-2 font-semibold">JSON Format Requirements:</p>
+                    <ul className="list-inside list-disc space-y-1 text-sm">
                       <li>Must be a valid JSON array of question objects</li>
-                      <li>Each question must include: question, choices (array), correctAnswerId, explanation, domain, difficulty</li>
+                      <li>
+                        Each question must include: question, choices (array), correctAnswerId,
+                        explanation, domain, difficulty
+                      </li>
                       <li>Choices must have id (a, b, c, d) and text properties</li>
                     </ul>
                   </AlertDescription>
@@ -260,7 +276,7 @@ export function BulkImporter() {
                     ref={fileInputRef}
                     id="file-upload"
                     type="file"
-                    accept={importType === 'csv' ? '.csv' : '.json'}
+                    accept={importType === "csv" ? ".csv" : ".json"}
                     onChange={handleFileUpload}
                     className="hidden"
                   />
@@ -269,7 +285,7 @@ export function BulkImporter() {
                     onClick={() => fileInputRef.current?.click()}
                     className="w-full"
                   >
-                    <Upload className="h-4 w-4 mr-2" />
+                    <Upload className="mr-2 h-4 w-4" />
                     Choose {importType.toUpperCase()} File
                   </Button>
                 </div>
@@ -289,7 +305,12 @@ export function BulkImporter() {
                 />
               </div>
 
-              <Button onClick={handlePaste} disabled={!fileContent.trim()} className="w-full" size="lg">
+              <Button
+                onClick={handlePaste}
+                disabled={!fileContent.trim()}
+                className="w-full"
+                size="lg"
+              >
                 Parse and Preview
               </Button>
             </div>
@@ -298,14 +319,12 @@ export function BulkImporter() {
               <Alert variant="destructive">
                 <AlertTriangle className="h-4 w-4" />
                 <AlertDescription>
-                  <p className="font-semibold mb-2">Parse Errors:</p>
-                  <ul className="list-disc list-inside space-y-1 text-sm">
+                  <p className="mb-2 font-semibold">Parse Errors:</p>
+                  <ul className="list-inside list-disc space-y-1 text-sm">
                     {parseErrors.slice(0, 5).map((error, index) => (
                       <li key={index}>{error}</li>
                     ))}
-                    {parseErrors.length > 5 && (
-                      <li>...and {parseErrors.length - 5} more errors</li>
-                    )}
+                    {parseErrors.length > 5 && <li>...and {parseErrors.length - 5} more errors</li>}
                   </ul>
                 </AlertDescription>
               </Alert>
@@ -315,7 +334,7 @@ export function BulkImporter() {
       )}
 
       {/* Step 2: Preview */}
-      {currentStep === 'preview' && (
+      {currentStep === "preview" && (
         <div className="space-y-4">
           <Card>
             <CardContent className="pt-6">
@@ -323,12 +342,16 @@ export function BulkImporter() {
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-500" />
-                    <span className="text-sm font-medium">{parsedQuestions.length} questions parsed</span>
+                    <span className="text-sm font-medium">
+                      {parsedQuestions.length} questions parsed
+                    </span>
                   </div>
                   {duplicateCount > 0 && (
                     <div className="flex items-center gap-2">
                       <AlertTriangle className="h-4 w-4 text-amber-500" />
-                      <span className="text-sm font-medium">{duplicateCount} duplicates (will be skipped)</span>
+                      <span className="text-sm font-medium">
+                        {duplicateCount} duplicates (will be skipped)
+                      </span>
                     </div>
                   )}
                 </div>
@@ -368,7 +391,8 @@ export function BulkImporter() {
             {parsedQuestions.length > 10 && (
               <Alert>
                 <AlertDescription>
-                  Showing first 10 of {parsedQuestions.length} questions. All questions will be imported.
+                  Showing first 10 of {parsedQuestions.length} questions. All questions will be
+                  imported.
                 </AlertDescription>
               </Alert>
             )}
@@ -377,14 +401,14 @@ export function BulkImporter() {
       )}
 
       {/* Step 3: Importing */}
-      {currentStep === 'importing' && (
+      {currentStep === "importing" && (
         <Card>
           <CardContent className="pt-6">
             <div className="space-y-4 text-center">
-              <Loader2 className="h-12 w-12 animate-spin mx-auto text-blue-500" />
+              <Loader2 className="mx-auto h-12 w-12 animate-spin text-blue-500" />
               <div>
                 <h3 className="text-lg font-semibold">Importing Questions...</h3>
-                <p className="text-sm text-muted-foreground mt-1">
+                <p className="mt-1 text-sm text-muted-foreground">
                   Please wait while we import your questions
                 </p>
               </div>
@@ -398,7 +422,7 @@ export function BulkImporter() {
       )}
 
       {/* Step 4: Results */}
-      {currentStep === 'results' && importResult && (
+      {currentStep === "results" && importResult && (
         <div className="space-y-4">
           <Card>
             <CardHeader>
@@ -418,17 +442,17 @@ export function BulkImporter() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-3 gap-4">
-                <div className="text-center p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+                <div className="rounded-lg border border-green-500/20 bg-green-500/10 p-4 text-center">
                   <div className="text-3xl font-bold text-green-500">{importResult.imported}</div>
-                  <div className="text-sm text-muted-foreground mt-1">Imported</div>
+                  <div className="mt-1 text-sm text-muted-foreground">Imported</div>
                 </div>
-                <div className="text-center p-4 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                <div className="rounded-lg border border-amber-500/20 bg-amber-500/10 p-4 text-center">
                   <div className="text-3xl font-bold text-amber-500">{importResult.duplicates}</div>
-                  <div className="text-sm text-muted-foreground mt-1">Duplicates Skipped</div>
+                  <div className="mt-1 text-sm text-muted-foreground">Duplicates Skipped</div>
                 </div>
-                <div className="text-center p-4 rounded-lg bg-red-500/10 border border-red-500/20">
+                <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-center">
                   <div className="text-3xl font-bold text-red-500">{importResult.failed}</div>
-                  <div className="text-sm text-muted-foreground mt-1">Failed</div>
+                  <div className="mt-1 text-sm text-muted-foreground">Failed</div>
                 </div>
               </div>
 
@@ -436,8 +460,8 @@ export function BulkImporter() {
                 <Alert variant="destructive">
                   <XCircle className="h-4 w-4" />
                   <AlertDescription>
-                    <p className="font-semibold mb-2">Import Errors:</p>
-                    <ul className="list-disc list-inside space-y-1 text-sm max-h-48 overflow-y-auto">
+                    <p className="mb-2 font-semibold">Import Errors:</p>
+                    <ul className="max-h-48 list-inside list-disc space-y-1 overflow-y-auto text-sm">
                       {importResult.errors.map((error, index) => (
                         <li key={index}>
                           Row {error.row}: {error.error}
@@ -452,7 +476,10 @@ export function BulkImporter() {
                 <Button variant="outline" onClick={handleReset} className="flex-1">
                   Import More Questions
                 </Button>
-                <Button onClick={() => window.location.href = '/admin/questions'} className="flex-1">
+                <Button
+                  onClick={() => (window.location.href = "/admin/questions")}
+                  className="flex-1"
+                >
                   View Question Bank
                 </Button>
               </div>

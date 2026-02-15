@@ -1,24 +1,18 @@
-'use client';
+"use client";
 
 /**
  * NotificationSettingsPanel Component
  * Manage notification preferences, permissions, quiet hours, and email settings
  */
 
-import React, { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
+import React, { useState } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import {
   Bell,
   BellOff,
@@ -34,27 +28,24 @@ import {
   Mail,
   MailCheck,
   Loader2,
-} from 'lucide-react';
-import { useNotificationsOptional } from '@/contexts/NotificationContext';
-import { useTranslations } from 'next-intl';
-import { cn } from '@/lib/utils';
-import {
-  isPushSupported,
-  getPushPermissionState,
-} from '@/lib/notifications/notification-settings';
+} from "lucide-react";
+import { useNotificationsOptional } from "@/contexts/NotificationContext";
+import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
+import { isPushSupported, getPushPermissionState } from "@/lib/notifications/notification-settings";
 
 // Generate a random unsubscribe token
 function generateUnsubscribeToken(): string {
   const array = new Uint8Array(24);
   crypto.getRandomValues(array);
-  return Array.from(array, (b) => b.toString(16).padStart(2, '0')).join('');
+  return Array.from(array, (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
 export function NotificationSettingsPanel() {
-  const t = useTranslations('notificationSettings');
+  const t = useTranslations("notificationSettings");
   const context = useNotificationsOptional();
   const [isSendingTestEmail, setIsSendingTestEmail] = useState(false);
-  const [testEmailStatus, setTestEmailStatus] = useState<'success' | 'error' | null>(null);
+  const [testEmailStatus, setTestEmailStatus] = useState<"success" | "error" | null>(null);
 
   // If context is not available, show a message
   if (!context) {
@@ -63,16 +54,15 @@ export function NotificationSettingsPanel() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Bell className="h-5 w-5" />
-            {t('title')}
+            {t("title")}
           </CardTitle>
-          <CardDescription>{t('notAvailable')}</CardDescription>
+          <CardDescription>{t("notAvailable")}</CardDescription>
         </CardHeader>
       </Card>
     );
   }
 
-  const { settings, updateSettings, requestPermission, sendTestNotification } =
-    context;
+  const { settings, updateSettings, requestPermission, sendTestNotification } = context;
 
   const pushSupported = isPushSupported();
   const permissionState = getPushPermissionState();
@@ -129,11 +119,11 @@ export function NotificationSettingsPanel() {
     setTestEmailStatus(null);
 
     try {
-      const response = await fetch('/api/email/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          type: 'test',
+          type: "test",
           props: {
             to: settings.emailAddress,
             unsubscribeToken: settings.emailUnsubscribeToken,
@@ -143,9 +133,9 @@ export function NotificationSettingsPanel() {
       });
 
       const data = await response.json();
-      setTestEmailStatus(data.success ? 'success' : 'error');
+      setTestEmailStatus(data.success ? "success" : "error");
     } catch {
-      setTestEmailStatus('error');
+      setTestEmailStatus("error");
     } finally {
       setIsSendingTestEmail(false);
       // Clear status after 5 seconds
@@ -166,14 +156,14 @@ export function NotificationSettingsPanel() {
                 <BellOff className="h-5 w-5 text-slate-400" />
               )}
               <div>
-                <CardTitle>{t('masterToggle.title')}</CardTitle>
-                <CardDescription>{t('masterToggle.description')}</CardDescription>
+                <CardTitle>{t("masterToggle.title")}</CardTitle>
+                <CardDescription>{t("masterToggle.description")}</CardDescription>
               </div>
             </div>
             <Switch
               checked={settings.masterEnabled}
               onCheckedChange={handleMasterToggle}
-              aria-label={t('masterToggle.title')}
+              aria-label={t("masterToggle.title")}
             />
           </div>
         </CardHeader>
@@ -183,46 +173,42 @@ export function NotificationSettingsPanel() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            {permissionState === 'granted' ? (
+            {permissionState === "granted" ? (
               <ShieldCheck className="h-5 w-5 text-green-400" />
-            ) : permissionState === 'denied' ? (
+            ) : permissionState === "denied" ? (
               <ShieldOff className="h-5 w-5 text-red-400" />
             ) : (
               <Shield className="h-5 w-5 text-slate-400" />
             )}
-            {t('pushPermission.title')}
+            {t("pushPermission.title")}
           </CardTitle>
-          <CardDescription>{t('pushPermission.description')}</CardDescription>
+          <CardDescription>{t("pushPermission.description")}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Badge
                 variant={
-                  permissionState === 'granted'
-                    ? 'default'
-                    : permissionState === 'denied'
-                    ? 'destructive'
-                    : 'secondary'
+                  permissionState === "granted"
+                    ? "default"
+                    : permissionState === "denied"
+                      ? "destructive"
+                      : "secondary"
                 }
               >
                 {t(`pushPermission.states.${permissionState}`)}
               </Badge>
               {!pushSupported && (
-                <span className="text-xs text-slate-500">
-                  {t('pushPermission.notSupported')}
-                </span>
+                <span className="text-xs text-slate-500">{t("pushPermission.notSupported")}</span>
               )}
             </div>
-            {pushSupported && permissionState === 'default' && (
+            {pushSupported && permissionState === "default" && (
               <Button onClick={requestPermission} size="sm">
-                {t('pushPermission.enable')}
+                {t("pushPermission.enable")}
               </Button>
             )}
-            {permissionState === 'denied' && (
-              <span className="text-xs text-slate-500">
-                {t('pushPermission.deniedHint')}
-              </span>
+            {permissionState === "denied" && (
+              <span className="text-xs text-slate-500">{t("pushPermission.deniedHint")}</span>
             )}
           </div>
         </CardContent>
@@ -239,14 +225,14 @@ export function NotificationSettingsPanel() {
                 <Mail className="h-5 w-5 text-slate-400" />
               )}
               <div>
-                <CardTitle>{t('emailNotifications.title')}</CardTitle>
-                <CardDescription>{t('emailNotifications.description')}</CardDescription>
+                <CardTitle>{t("emailNotifications.title")}</CardTitle>
+                <CardDescription>{t("emailNotifications.description")}</CardDescription>
               </div>
             </div>
             <Switch
               checked={settings.emailEnabled}
               onCheckedChange={handleEmailToggle}
-              aria-label={t('emailNotifications.title')}
+              aria-label={t("emailNotifications.title")}
             />
           </div>
         </CardHeader>
@@ -254,7 +240,7 @@ export function NotificationSettingsPanel() {
           <CardContent className="space-y-4">
             {/* Email Address */}
             <div className="space-y-2">
-              <Label htmlFor="emailAddress">{t('emailNotifications.emailAddress')}</Label>
+              <Label htmlFor="emailAddress">{t("emailNotifications.emailAddress")}</Label>
               <Input
                 id="emailAddress"
                 type="email"
@@ -262,13 +248,11 @@ export function NotificationSettingsPanel() {
                 onChange={(e) => handleEmailAddressChange(e.target.value)}
                 placeholder="your@email.com"
                 className={cn(
-                  settings.emailAddress &&
-                    !isValidEmail(settings.emailAddress) &&
-                    'border-red-500'
+                  settings.emailAddress && !isValidEmail(settings.emailAddress) && "border-red-500"
                 )}
               />
               {settings.emailAddress && !isValidEmail(settings.emailAddress) && (
-                <p className="text-xs text-red-500">{t('emailNotifications.invalidEmail')}</p>
+                <p className="text-xs text-red-500">{t("emailNotifications.invalidEmail")}</p>
               )}
             </div>
 
@@ -276,20 +260,20 @@ export function NotificationSettingsPanel() {
 
             {/* Email Notification Types */}
             <div className="space-y-3">
-              <Label className="text-slate-400 text-xs uppercase tracking-wide">
-                {t('emailNotifications.types')}
+              <Label className="text-xs uppercase tracking-wide text-slate-400">
+                {t("emailNotifications.types")}
               </Label>
 
               {/* Bill Reminders */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Calendar className="h-4 w-4 text-blue-400" />
-                  <span className="text-sm">{t('notificationTypes.billReminders.title')}</span>
+                  <span className="text-sm">{t("notificationTypes.billReminders.title")}</span>
                 </div>
                 <Switch
                   checked={settings.emailBillReminders}
                   onCheckedChange={(v) => updateSettings({ emailBillReminders: v })}
-                  aria-label={t('notificationTypes.billReminders.title')}
+                  aria-label={t("notificationTypes.billReminders.title")}
                 />
               </div>
 
@@ -297,12 +281,12 @@ export function NotificationSettingsPanel() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <AlertCircle className="h-4 w-4 text-orange-400" />
-                  <span className="text-sm">{t('notificationTypes.budgetAlerts.title')}</span>
+                  <span className="text-sm">{t("notificationTypes.budgetAlerts.title")}</span>
                 </div>
                 <Switch
                   checked={settings.emailBudgetAlerts}
                   onCheckedChange={(v) => updateSettings({ emailBudgetAlerts: v })}
-                  aria-label={t('notificationTypes.budgetAlerts.title')}
+                  aria-label={t("notificationTypes.budgetAlerts.title")}
                 />
               </div>
 
@@ -310,12 +294,12 @@ export function NotificationSettingsPanel() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Target className="h-4 w-4 text-green-400" />
-                  <span className="text-sm">{t('notificationTypes.goalMilestones.title')}</span>
+                  <span className="text-sm">{t("notificationTypes.goalMilestones.title")}</span>
                 </div>
                 <Switch
                   checked={settings.emailGoalMilestones}
                   onCheckedChange={(v) => updateSettings({ emailGoalMilestones: v })}
-                  aria-label={t('notificationTypes.goalMilestones.title')}
+                  aria-label={t("notificationTypes.goalMilestones.title")}
                 />
               </div>
             </div>
@@ -325,19 +309,19 @@ export function NotificationSettingsPanel() {
             {/* Test Email */}
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium">{t('emailNotifications.testEmail')}</p>
-                <p className="text-xs text-slate-500">{t('emailNotifications.testEmailDescription')}</p>
+                <p className="text-sm font-medium">{t("emailNotifications.testEmail")}</p>
+                <p className="text-xs text-slate-500">
+                  {t("emailNotifications.testEmailDescription")}
+                </p>
               </div>
               <div className="flex items-center gap-2">
-                {testEmailStatus === 'success' && (
+                {testEmailStatus === "success" && (
                   <Badge variant="default" className="bg-green-500/20 text-green-400">
-                    {t('emailNotifications.testEmailSent')}
+                    {t("emailNotifications.testEmailSent")}
                   </Badge>
                 )}
-                {testEmailStatus === 'error' && (
-                  <Badge variant="destructive">
-                    {t('emailNotifications.testEmailFailed')}
-                  </Badge>
+                {testEmailStatus === "error" && (
+                  <Badge variant="destructive">{t("emailNotifications.testEmailFailed")}</Badge>
                 )}
                 <Button
                   onClick={handleSendTestEmail}
@@ -354,7 +338,7 @@ export function NotificationSettingsPanel() {
                   ) : (
                     <Send className="h-4 w-4" />
                   )}
-                  <span className="ml-2">{t('emailNotifications.sendTest')}</span>
+                  <span className="ml-2">{t("emailNotifications.sendTest")}</span>
                 </Button>
               </div>
             </div>
@@ -363,10 +347,10 @@ export function NotificationSettingsPanel() {
       </Card>
 
       {/* Notification Types */}
-      <Card className={cn(!settings.masterEnabled && 'opacity-50')}>
+      <Card className={cn(!settings.masterEnabled && "opacity-50")}>
         <CardHeader>
-          <CardTitle>{t('notificationTypes.title')}</CardTitle>
-          <CardDescription>{t('notificationTypes.description')}</CardDescription>
+          <CardTitle>{t("notificationTypes.title")}</CardTitle>
+          <CardDescription>{t("notificationTypes.description")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Bill Reminders */}
@@ -374,9 +358,9 @@ export function NotificationSettingsPanel() {
             <div className="flex items-center gap-3">
               <Calendar className="h-5 w-5 text-blue-400" />
               <div>
-                <Label>{t('notificationTypes.billReminders.title')}</Label>
+                <Label>{t("notificationTypes.billReminders.title")}</Label>
                 <p className="text-xs text-slate-500">
-                  {t('notificationTypes.billReminders.description')}
+                  {t("notificationTypes.billReminders.description")}
                 </p>
               </div>
             </div>
@@ -384,7 +368,7 @@ export function NotificationSettingsPanel() {
               checked={settings.billReminders}
               onCheckedChange={(v) => updateSettings({ billReminders: v })}
               disabled={!settings.masterEnabled}
-              aria-label={t('notificationTypes.billReminders.title')}
+              aria-label={t("notificationTypes.billReminders.title")}
             />
           </div>
 
@@ -395,9 +379,9 @@ export function NotificationSettingsPanel() {
             <div className="flex items-center gap-3">
               <AlertCircle className="h-5 w-5 text-orange-400" />
               <div>
-                <Label>{t('notificationTypes.budgetAlerts.title')}</Label>
+                <Label>{t("notificationTypes.budgetAlerts.title")}</Label>
                 <p className="text-xs text-slate-500">
-                  {t('notificationTypes.budgetAlerts.description')}
+                  {t("notificationTypes.budgetAlerts.description")}
                 </p>
               </div>
             </div>
@@ -405,7 +389,7 @@ export function NotificationSettingsPanel() {
               checked={settings.budgetAlerts}
               onCheckedChange={(v) => updateSettings({ budgetAlerts: v })}
               disabled={!settings.masterEnabled}
-              aria-label={t('notificationTypes.budgetAlerts.title')}
+              aria-label={t("notificationTypes.budgetAlerts.title")}
             />
           </div>
 
@@ -416,9 +400,9 @@ export function NotificationSettingsPanel() {
             <div className="flex items-center gap-3">
               <Target className="h-5 w-5 text-green-400" />
               <div>
-                <Label>{t('notificationTypes.goalMilestones.title')}</Label>
+                <Label>{t("notificationTypes.goalMilestones.title")}</Label>
                 <p className="text-xs text-slate-500">
-                  {t('notificationTypes.goalMilestones.description')}
+                  {t("notificationTypes.goalMilestones.description")}
                 </p>
               </div>
             </div>
@@ -426,28 +410,28 @@ export function NotificationSettingsPanel() {
               checked={settings.goalMilestones}
               onCheckedChange={(v) => updateSettings({ goalMilestones: v })}
               disabled={!settings.masterEnabled}
-              aria-label={t('notificationTypes.goalMilestones.title')}
+              aria-label={t("notificationTypes.goalMilestones.title")}
             />
           </div>
         </CardContent>
       </Card>
 
       {/* Quiet Hours */}
-      <Card className={cn(!settings.masterEnabled && 'opacity-50')}>
+      <Card className={cn(!settings.masterEnabled && "opacity-50")}>
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Moon className="h-5 w-5 text-indigo-400" />
               <div>
-                <CardTitle>{t('quietHours.title')}</CardTitle>
-                <CardDescription>{t('quietHours.description')}</CardDescription>
+                <CardTitle>{t("quietHours.title")}</CardTitle>
+                <CardDescription>{t("quietHours.description")}</CardDescription>
               </div>
             </div>
             <Switch
               checked={settings.quietHoursEnabled}
               onCheckedChange={handleQuietHoursToggle}
               disabled={!settings.masterEnabled}
-              aria-label={t('quietHours.title')}
+              aria-label={t("quietHours.title")}
             />
           </div>
         </CardHeader>
@@ -456,7 +440,7 @@ export function NotificationSettingsPanel() {
             <div className="flex items-center gap-4">
               <div className="flex-1">
                 <Label htmlFor="quietStart" className="text-xs text-slate-400">
-                  {t('quietHours.start')}
+                  {t("quietHours.start")}
                 </Label>
                 <Input
                   id="quietStart"
@@ -467,10 +451,10 @@ export function NotificationSettingsPanel() {
                   className="mt-1"
                 />
               </div>
-              <span className="text-slate-500 pt-5">—</span>
+              <span className="pt-5 text-slate-500">—</span>
               <div className="flex-1">
                 <Label htmlFor="quietEnd" className="text-xs text-slate-400">
-                  {t('quietHours.end')}
+                  {t("quietHours.end")}
                 </Label>
                 <Input
                   id="quietEnd"
@@ -487,10 +471,10 @@ export function NotificationSettingsPanel() {
       </Card>
 
       {/* Default Reminder Days */}
-      <Card className={cn(!settings.masterEnabled && 'opacity-50')}>
+      <Card className={cn(!settings.masterEnabled && "opacity-50")}>
         <CardHeader>
-          <CardTitle>{t('reminderDays.title')}</CardTitle>
-          <CardDescription>{t('reminderDays.description')}</CardDescription>
+          <CardTitle>{t("reminderDays.title")}</CardTitle>
+          <CardDescription>{t("reminderDays.description")}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center gap-4">
@@ -503,21 +487,19 @@ export function NotificationSettingsPanel() {
               disabled={!settings.masterEnabled}
               className="w-24"
             />
-            <span className="text-sm text-slate-400">
-              {t('reminderDays.daysBeforeDue')}
-            </span>
+            <span className="text-sm text-slate-400">{t("reminderDays.daysBeforeDue")}</span>
           </div>
         </CardContent>
       </Card>
 
       {/* Test Notification */}
-      <Card className={cn(!settings.masterEnabled && 'opacity-50')}>
+      <Card className={cn(!settings.masterEnabled && "opacity-50")}>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Send className="h-5 w-5" />
-            {t('testNotification.title')}
+            {t("testNotification.title")}
           </CardTitle>
-          <CardDescription>{t('testNotification.description')}</CardDescription>
+          <CardDescription>{t("testNotification.description")}</CardDescription>
         </CardHeader>
         <CardContent>
           <Button
@@ -526,7 +508,7 @@ export function NotificationSettingsPanel() {
             variant="outline"
           >
             <Send className="mr-2 h-4 w-4" />
-            {t('testNotification.button')}
+            {t("testNotification.button")}
           </Button>
         </CardContent>
       </Card>
@@ -534,11 +516,11 @@ export function NotificationSettingsPanel() {
       {/* Info Box */}
       <div className="rounded-lg border border-white/10 bg-white/5 p-4">
         <div className="flex gap-3">
-          <Info className="h-5 w-5 text-blue-400 shrink-0 mt-0.5" />
+          <Info className="mt-0.5 h-5 w-5 shrink-0 text-blue-400" />
           <div className="space-y-1 text-sm text-slate-400">
-            <p>{t('infoBox.storedLocally')}</p>
-            <p>{t('infoBox.pushExplanation')}</p>
-            <p>{t('infoBox.emailExplanation')}</p>
+            <p>{t("infoBox.storedLocally")}</p>
+            <p>{t("infoBox.pushExplanation")}</p>
+            <p>{t("infoBox.emailExplanation")}</p>
           </div>
         </div>
       </div>

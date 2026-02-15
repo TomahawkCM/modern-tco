@@ -7,7 +7,7 @@
  * Uses decimal.js for precise arithmetic operations and always rounds to cents.
  */
 
-import Decimal from 'decimal.js';
+import Decimal from "decimal.js";
 
 // Configure Decimal.js for financial precision
 // - 20 digits of precision (more than enough for any currency)
@@ -115,17 +115,20 @@ export function amountsEqual(a: number, b: number): boolean {
  * formatAmount(1234.56) // Returns "1,234.56"
  * formatAmount(-50.00)  // Returns "-50.00"
  */
-export function formatAmount(amount: number, options?: {
-  locale?: string;
-  currency?: string;
-  showCurrency?: boolean;
-}): string {
-  const { locale = 'en-US', currency = 'USD', showCurrency = false } = options || {};
+export function formatAmount(
+  amount: number,
+  options?: {
+    locale?: string;
+    currency?: string;
+    showCurrency?: boolean;
+  }
+): string {
+  const { locale = "en-US", currency = "USD", showCurrency = false } = options || {};
   const rounded = roundToCents(amount);
 
   if (showCurrency) {
     return new Intl.NumberFormat(locale, {
-      style: 'currency',
+      style: "currency",
       currency,
     }).format(rounded);
   }

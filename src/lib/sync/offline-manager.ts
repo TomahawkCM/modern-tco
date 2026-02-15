@@ -6,17 +6,13 @@
  * for LAN sync functionality.
  */
 
-import type {
-  ChangeSet,
-  SyncEntity,
-  EntityType,
-} from './types';
+import type { ChangeSet, SyncEntity, EntityType } from "./types";
 
 // ============================================================================
 // Constants
 // ============================================================================
 
-const QUEUE_STORAGE_KEY = 'budget-app-sync-queue';
+const QUEUE_STORAGE_KEY = "budget-app-sync-queue";
 const RETRY_INTERVALS = [1000, 2000, 5000, 10000, 30000, 60000]; // Exponential backoff
 const MAX_QUEUE_SIZE = 1000; // Maximum pending changes before forced sync
 const QUEUE_PERSIST_INTERVAL = 5000; // Persist queue every 5 seconds
@@ -29,7 +25,7 @@ export interface QueuedChange {
   id: string;
   entityType: EntityType;
   entityId: string;
-  operation: 'create' | 'update' | 'delete';
+  operation: "create" | "update" | "delete";
   data: SyncEntity | null;
   timestamp: number;
   retryCount: number;
@@ -81,11 +77,11 @@ export class OfflineManager {
    * Set up listeners for network status changes
    */
   private setupNetworkListeners(): void {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     // Browser online/offline events
-    window.addEventListener('online', this.handleOnline.bind(this));
-    window.addEventListener('offline', this.handleOffline.bind(this));
+    window.addEventListener("online", this.handleOnline.bind(this));
+    window.addEventListener("offline", this.handleOffline.bind(this));
 
     // Initial status
     this.isOnline = navigator.onLine;
@@ -158,7 +154,7 @@ export class OfflineManager {
   /**
    * Queue a change for later sync
    */
-  queueChange(change: Omit<QueuedChange, 'id' | 'timestamp' | 'retryCount'>): void {
+  queueChange(change: Omit<QueuedChange, "id" | "timestamp" | "retryCount">): void {
     const queuedChange: QueuedChange = {
       ...change,
       id: crypto.randomUUID(),
@@ -175,13 +171,13 @@ export class OfflineManager {
       // Replace existing change with newer one
       // If delete + create, the delete wins; if update + update, latest wins
       const existing = this.queue[existingIndex];
-      
-      if (existing.operation === 'delete' && change.operation !== 'delete') {
+
+      if (existing.operation === "delete" && change.operation !== "delete") {
         // Keep the delete (entity was deleted, subsequent changes are moot)
         return;
       }
-      
-      if (change.operation === 'delete') {
+
+      if (change.operation === "delete") {
         // Delete supersedes all
         this.queue[existingIndex] = queuedChange;
       } else {
@@ -211,7 +207,7 @@ export class OfflineManager {
   /**
    * Queue multiple changes as a batch
    */
-  queueChanges(changes: Omit<QueuedChange, 'id' | 'timestamp' | 'retryCount'>[]): void {
+  queueChanges(changes: Omit<QueuedChange, "id" | "timestamp" | "retryCount">[]): void {
     changes.forEach((change) => this.queueChange(change));
   }
 
@@ -309,7 +305,7 @@ export class OfflineManager {
    * Load queue from storage
    */
   private loadQueue(): void {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     try {
       const stored = localStorage.getItem(QUEUE_STORAGE_KEY);
@@ -317,7 +313,7 @@ export class OfflineManager {
         this.queue = JSON.parse(stored);
       }
     } catch (error) {
-      console.error('Failed to load sync queue:', error);
+      console.error("Failed to load sync queue:", error);
       this.queue = [];
     }
   }
@@ -326,12 +322,12 @@ export class OfflineManager {
    * Persist queue to storage
    */
   private persistQueue(): void {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     try {
       localStorage.setItem(QUEUE_STORAGE_KEY, JSON.stringify(this.queue));
     } catch (error) {
-      console.error('Failed to persist sync queue:', error);
+      console.error("Failed to persist sync queue:", error);
     }
   }
 
@@ -339,7 +335,7 @@ export class OfflineManager {
    * Start periodic queue persistence
    */
   private startPersistTimer(): void {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     this.persistTimer = setInterval(() => {
       this.persistQueue();
@@ -357,9 +353,7 @@ export class OfflineManager {
     if (this.reconnectTimer) return;
     if (!this.isOnline) return;
 
-    const interval = RETRY_INTERVALS[
-      Math.min(this.reconnectAttempt, RETRY_INTERVALS.length - 1)
-    ];
+    const interval = RETRY_INTERVALS[Math.min(this.reconnectAttempt, RETRY_INTERVALS.length - 1)];
 
     this.reconnectTimer = setTimeout(() => {
       this.reconnectTimer = null;
@@ -374,10 +368,7 @@ export class OfflineManager {
     if (!this.isOnline) return;
 
     this.reconnectAttempt++;
-    this.config.onReconnectAttempt?.(
-      this.reconnectAttempt,
-      RETRY_INTERVALS.length
-    );
+    this.config.onReconnectAttempt?.(this.reconnectAttempt, RETRY_INTERVALS.length);
 
     // The actual reconnection is handled by the sync connection manager
     // This just triggers the callback
@@ -387,10 +378,13 @@ export class OfflineManager {
     // If we've exceeded max attempts, slow down significantly
     if (this.reconnectAttempt >= RETRY_INTERVALS.length) {
       // After max retries, wait 5 minutes between attempts
-      this.reconnectTimer = setTimeout(() => {
-        this.reconnectTimer = null;
-        this.attemptReconnect();
-      }, 5 * 60 * 1000);
+      this.reconnectTimer = setTimeout(
+        () => {
+          this.reconnectTimer = null;
+          this.attemptReconnect();
+        },
+        5 * 60 * 1000
+      );
     }
   }
 
@@ -426,7 +420,7 @@ export class OfflineManager {
     try {
       await this.config.onSyncRequired?.(this.queue);
     } catch (error) {
-      console.error('Failed to process sync queue:', error);
+      console.error("Failed to process sync queue:", error);
       // Will retry on next opportunity
     }
   }
@@ -446,9 +440,9 @@ export class OfflineManager {
    * Clean up resources
    */
   destroy(): void {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('online', this.handleOnline.bind(this));
-      window.removeEventListener('offline', this.handleOffline.bind(this));
+    if (typeof window !== "undefined") {
+      window.removeEventListener("online", this.handleOnline.bind(this));
+      window.removeEventListener("offline", this.handleOffline.bind(this));
     }
 
     this.stopReconnect();
@@ -503,7 +497,7 @@ export function createOfflineStateObserver(manager: OfflineManager): OfflineStat
 
   // Re-configure manager to notify listeners
   const originalConfig = (manager as unknown as { config: OfflineManagerConfig }).config;
-  
+
   const notifyAll = () => {
     const status = manager.getStatus();
     listeners.forEach((listener) => listener(status));

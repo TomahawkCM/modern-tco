@@ -24,6 +24,7 @@ When `useNeedsReviewWeighting: true` is set, the system:
 - Ensures minimum 1 question per selected domain
 
 **Algorithm:**
+
 ```typescript
 // Weight calculation
 const needsReview = (incorrectCount - reviewedCount) for each domain
@@ -32,6 +33,7 @@ const questionCount = Math.max(1, Math.round(totalQuestions * weight))
 ```
 
 **Benefits:**
+
 - Adaptive learning based on performance
 - Focuses on weak areas
 - Improves learning efficiency
@@ -40,6 +42,7 @@ const questionCount = Math.max(1, Math.round(totalQuestions * weight))
 ### 2. TCO Exam Weighting
 
 Standard distribution based on certification exam blueprint:
+
 - Domain 1 (Asking Questions): 22%
 - Domain 2 (Refining Questions & Targeting): 23%
 - Domain 3 (Taking Action): 15%
@@ -58,13 +61,10 @@ Distributes questions equally across selected domains.
 const { startWeightedMultiDomainPractice } = usePractice();
 
 // Start practice with needs-review weighting
-await startWeightedMultiDomainPractice(
-  ["Asking Questions", "Refining Questions & Targeting"],
-  {
-    questionCount: 30,
-    useNeedsReviewWeighting: true
-  }
-);
+await startWeightedMultiDomainPractice(["Asking Questions", "Refining Questions & Targeting"], {
+  questionCount: 30,
+  useNeedsReviewWeighting: true,
+});
 ```
 
 ### Fallback Behavior
@@ -73,13 +73,10 @@ If no needs-review data is available, the system automatically falls back to TCO
 
 ```typescript
 // This will use TCO weights if no incorrect answers exist
-await startWeightedMultiDomainPractice(
-  domains,
-  {
-    useNeedsReviewWeighting: true,
-    useWeightedDistribution: true // fallback option
-  }
-);
+await startWeightedMultiDomainPractice(domains, {
+  useNeedsReviewWeighting: true,
+  useWeightedDistribution: true, // fallback option
+});
 ```
 
 ### Mixed Domain Practice
@@ -91,18 +88,15 @@ const allDomains = [
   "Refining Questions & Targeting",
   "Taking Action",
   "Navigation and Basic Module Functions",
-  "Report Generation and Data Export"
+  "Report Generation and Data Export",
 ];
 
-await startWeightedMultiDomainPractice(
-  allDomains,
-  {
-    questionCount: 50,
-    useNeedsReviewWeighting: true,
-    passingScore: 75,
-    timeLimit: 3600 // 60 minutes
-  }
-);
+await startWeightedMultiDomainPractice(allDomains, {
+  questionCount: 50,
+  useNeedsReviewWeighting: true,
+  passingScore: 75,
+  timeLimit: 3600, // 60 minutes
+});
 ```
 
 ## Implementation Details
@@ -117,6 +111,7 @@ The enhancement integrates two contexts:
 ### Priority System
 
 Questions are prioritized in the following order:
+
 1. Previously incorrect, unreviewed questions
 2. Previously incorrect, reviewed questions
 3. New questions from the domain
@@ -157,6 +152,7 @@ const domainStats = getDomainStats();
 ### Analytics Dashboard
 
 Track improvement over time:
+
 - Questions moved from incorrect to correct
 - Reduction in needs-review counts
 - Domain mastery progression
@@ -164,12 +160,14 @@ Track improvement over time:
 ## Benefits
 
 ### For Learners
+
 - **Personalized Learning**: Focus on individual weak areas
 - **Efficient Study Time**: Prioritize questions that need work
 - **Measurable Progress**: See improvement in specific domains
 - **Adaptive Difficulty**: System adjusts to performance
 
 ### For Administrators
+
 - **Learning Analytics**: Identify common problem areas
 - **Content Insights**: See which questions are most challenging
 - **Progress Tracking**: Monitor user improvement patterns
@@ -178,6 +176,7 @@ Track improvement over time:
 ## Future Enhancements
 
 ### Planned Features
+
 - [ ] Spaced repetition algorithm
 - [ ] Difficulty-based weighting
 - [ ] Time-since-last-attempt weighting
@@ -186,6 +185,7 @@ Track improvement over time:
 - [ ] Group performance comparison
 
 ### API Extensions
+
 - [ ] Export needs-review data
 - [ ] Import historical performance
 - [ ] Batch analytics endpoints
@@ -203,7 +203,7 @@ Users can configure practice preferences:
 
 ```typescript
 interface PracticePreferences {
-  defaultWeightingMode: 'needs-review' | 'tco' | 'equal';
+  defaultWeightingMode: "needs-review" | "tco" | "equal";
   minQuestionsPerDomain: number;
   prioritizeIncorrect: boolean;
   includeReviewedQuestions: boolean;
@@ -215,6 +215,7 @@ interface PracticePreferences {
 ### Unit Tests
 
 Test coverage includes:
+
 - Weight calculation accuracy
 - Fallback behavior
 - Question prioritization
@@ -230,12 +231,14 @@ Test coverage includes:
 ## Performance Metrics
 
 ### Benchmarks
+
 - Weight calculation: <10ms for 1000 questions
 - Question sorting: <50ms for 500 questions
 - Context lookup: <5ms per domain
 - Total selection time: <100ms typical
 
 ### Optimization Tips
+
 - Pre-calculate domain stats
 - Cache frequently accessed data
 - Batch database queries
@@ -263,10 +266,10 @@ Test coverage includes:
 Enable debug logging:
 
 ```typescript
-if (process.env.NODE_ENV === 'development') {
-  console.log('Domain stats:', domainStats);
-  console.log('Weight distribution:', weights);
-  console.log('Selected questions:', questions);
+if (process.env.NODE_ENV === "development") {
+  console.log("Domain stats:", domainStats);
+  console.log("Weight distribution:", weights);
+  console.log("Selected questions:", questions);
 }
 ```
 

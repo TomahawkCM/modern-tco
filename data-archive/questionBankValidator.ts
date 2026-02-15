@@ -3,14 +3,14 @@
  * Validates question bank integrity, distribution, and quality
  */
 
-import { questionBank } from '@/data/sample-questions';
+import { questionBank } from "@/data/sample-questions";
 import {
   Difficulty,
   type Question,
   QuestionCategory,
   TCO_DOMAIN_WEIGHTS,
   TCODomain,
-} from '@/types/exam';
+} from "@/types/exam";
 
 export interface ValidationResult {
   isValid: boolean;
@@ -24,8 +24,8 @@ export interface ValidationResult {
 }
 
 export interface ValidationIssue {
-  severity: 'error' | 'warning' | 'info';
-  category: 'domain' | 'quality' | 'structure' | 'metadata';
+  severity: "error" | "warning" | "info";
+  category: "domain" | "quality" | "structure" | "metadata";
   message: string;
   affectedQuestions?: string[];
 }
@@ -80,8 +80,8 @@ export function validateQuestionBank(): ValidationResult {
   // 1. Total question count validation
   if (totalQuestions < 200) {
     issues.push({
-      severity: 'warning',
-      category: 'structure',
+      severity: "warning",
+      category: "structure",
       message: `Question bank has ${totalQuestions} questions. Target is 200 for comprehensive coverage.`,
     });
     recommendations.push(`Add ${200 - totalQuestions} more questions to reach target coverage`);
@@ -94,8 +94,8 @@ export function validateQuestionBank(): ValidationResult {
 
     if (difference > 5) {
       issues.push({
-        severity: difference > 10 ? 'error' : 'warning',
-        category: 'domain',
+        severity: difference > 10 ? "error" : "warning",
+        category: "domain",
         message: `Domain "${domain}" distribution is ${actualPercentage}%, target is ${targetWeight}% (difference: ${difference}%)`,
       });
     }
@@ -107,8 +107,8 @@ export function validateQuestionBank(): ValidationResult {
   );
   if (questionsWithoutExplanations.length > 0) {
     issues.push({
-      severity: 'warning',
-      category: 'quality',
+      severity: "warning",
+      category: "quality",
       message: `${questionsWithoutExplanations.length} questions lack explanations`,
       affectedQuestions: questionsWithoutExplanations.map((q) => q.id),
     });
@@ -117,8 +117,8 @@ export function validateQuestionBank(): ValidationResult {
   const questionsWithoutStudyRef = questionBank.filter((q) => !q.studyGuideRef);
   if (questionsWithoutStudyRef.length > 0) {
     issues.push({
-      severity: 'info',
-      category: 'quality',
+      severity: "info",
+      category: "quality",
       message: `${questionsWithoutStudyRef.length} questions lack study guide references`,
       affectedQuestions: questionsWithoutStudyRef.map((q) => q.id),
     });
@@ -130,12 +130,12 @@ export function validateQuestionBank(): ValidationResult {
   );
   if (linearChainQuestions.length < 3) {
     issues.push({
-      severity: 'error',
-      category: 'domain',
+      severity: "error",
+      category: "domain",
       message: `Only ${linearChainQuestions.length} Linear Chain Architecture questions found. This is critical TCO content.`,
     });
     recommendations.push(
-      'Add more Linear Chain Architecture questions - this is fundamental TCO knowledge'
+      "Add more Linear Chain Architecture questions - this is fundamental TCO knowledge"
     );
   }
 
@@ -145,11 +145,11 @@ export function validateQuestionBank(): ValidationResult {
   );
   if (consoleProcedureQuestions.length < 20) {
     issues.push({
-      severity: 'warning',
-      category: 'quality',
+      severity: "warning",
+      category: "quality",
       message: `Only ${consoleProcedureQuestions.length} console procedure questions. TCO emphasizes hands-on skills.`,
     });
-    recommendations.push('Add more console procedure questions with step-by-step validation');
+    recommendations.push("Add more console procedure questions with step-by-step validation");
   }
 
   // 6. Troubleshooting scenarios validation
@@ -158,11 +158,11 @@ export function validateQuestionBank(): ValidationResult {
   );
   if (troubleshootingQuestions.length < 15) {
     issues.push({
-      severity: 'warning',
-      category: 'quality',
+      severity: "warning",
+      category: "quality",
       message: `Only ${troubleshootingQuestions.length} troubleshooting questions. More diagnostic scenarios needed.`,
     });
-    recommendations.push('Add more troubleshooting scenarios with diagnostic procedures');
+    recommendations.push("Add more troubleshooting scenarios with diagnostic procedures");
   }
 
   // 7. Difficulty distribution validation
@@ -171,20 +171,20 @@ export function validateQuestionBank(): ValidationResult {
 
   if (beginnerPercentage > 50) {
     issues.push({
-      severity: 'warning',
-      category: 'quality',
+      severity: "warning",
+      category: "quality",
       message: `${beginnerPercentage.toFixed(1)}% beginner questions. TCO requires intermediate-advanced skills.`,
     });
-    recommendations.push('Balance difficulty distribution toward intermediate and advanced levels');
+    recommendations.push("Balance difficulty distribution toward intermediate and advanced levels");
   }
 
   if (advancedPercentage < 20) {
     issues.push({
-      severity: 'warning',
-      category: 'quality',
+      severity: "warning",
+      category: "quality",
       message: `Only ${advancedPercentage.toFixed(1)}% advanced questions. TCO tests professional competency.`,
     });
-    recommendations.push('Add more advanced scenario questions for operator-level skills');
+    recommendations.push("Add more advanced scenario questions for operator-level skills");
   }
 
   // 8. Question ID uniqueness validation
@@ -192,9 +192,9 @@ export function validateQuestionBank(): ValidationResult {
   const duplicateIds = questionIds.filter((id, index) => questionIds.indexOf(id) !== index);
   if (duplicateIds.length > 0) {
     issues.push({
-      severity: 'error',
-      category: 'structure',
-      message: `Duplicate question IDs found: ${duplicateIds.join(', ')}`,
+      severity: "error",
+      category: "structure",
+      message: `Duplicate question IDs found: ${duplicateIds.join(", ")}`,
     });
   }
 
@@ -202,8 +202,8 @@ export function validateQuestionBank(): ValidationResult {
   questionBank.forEach((question) => {
     if (question.choices.length !== 4) {
       issues.push({
-        severity: 'error',
-        category: 'structure',
+        severity: "error",
+        category: "structure",
         message: `Question ${question.id} has ${question.choices.length} choices, expected 4`,
         affectedQuestions: [question.id],
       });
@@ -212,8 +212,8 @@ export function validateQuestionBank(): ValidationResult {
     const correctChoice = question.choices.find((c) => c.id === question.correctAnswerId);
     if (!correctChoice) {
       issues.push({
-        severity: 'error',
-        category: 'structure',
+        severity: "error",
+        category: "structure",
         message: `Question ${question.id} has invalid correctAnswerId: ${question.correctAnswerId}`,
         affectedQuestions: [question.id],
       });
@@ -221,15 +221,15 @@ export function validateQuestionBank(): ValidationResult {
   });
 
   // Generate recommendations based on analysis
-  if (issues.filter((i) => i.severity === 'error').length === 0) {
-    recommendations.push('Question bank structure is valid and ready for testing');
+  if (issues.filter((i) => i.severity === "error").length === 0) {
+    recommendations.push("Question bank structure is valid and ready for testing");
   }
 
   if (totalQuestions >= 50) {
-    recommendations.push('Consider implementing adaptive difficulty based on user performance');
+    recommendations.push("Consider implementing adaptive difficulty based on user performance");
   }
 
-  const isValid = issues.filter((i) => i.severity === 'error').length === 0;
+  const isValid = issues.filter((i) => i.severity === "error").length === 0;
 
   return {
     isValid,
@@ -251,13 +251,13 @@ export function generateValidationReport(): string {
 
   let report = `# TCO Question Bank Validation Report\n\n`;
   report += `**Total Questions**: ${result.totalQuestions}\n`;
-  report += `**Validation Status**: ${result.isValid ? '✅ PASSED' : '❌ FAILED'}\n\n`;
+  report += `**Validation Status**: ${result.isValid ? "✅ PASSED" : "❌ FAILED"}\n\n`;
 
   report += `## Domain Distribution\n\n`;
   Object.entries(result.domainDistribution).forEach(([domain, count]) => {
     const percentage = result.domainPercentages[domain as TCODomain];
     const target = TCO_DOMAIN_WEIGHTS[domain as TCODomain];
-    const status = Math.abs(percentage - target) <= 5 ? '✅' : '⚠️';
+    const status = Math.abs(percentage - target) <= 5 ? "✅" : "⚠️";
     report += `- **${domain}**: ${count} questions (${percentage}%) ${status} Target: ${target}%\n`;
   });
 
@@ -276,7 +276,7 @@ export function generateValidationReport(): string {
   if (result.issues.length > 0) {
     report += `\n## Issues Found\n\n`;
     result.issues.forEach((issue) => {
-      const emoji = issue.severity === 'error' ? '❌' : issue.severity === 'warning' ? '⚠️' : 'ℹ️';
+      const emoji = issue.severity === "error" ? "❌" : issue.severity === "warning" ? "⚠️" : "ℹ️";
       report += `${emoji} **${issue.severity.toUpperCase()}** (${issue.category}): ${issue.message}\n`;
     });
   }

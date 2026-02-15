@@ -3,8 +3,8 @@
  * Uses TensorFlow.js for neural network classification
  */
 
-import * as tf from '@tensorflow/tfjs';
-import type { CategorizationResult } from '@/types/budget';
+import * as tf from "@tensorflow/tfjs";
+import type { CategorizationResult } from "@/types/budget";
 import {
   generateTrainingData,
   splitTrainTest,
@@ -12,7 +12,7 @@ import {
   categoryToOneHot,
   oneHotToCategory,
   type TrainingExample,
-} from './training-data-generator';
+} from "./training-data-generator";
 
 /**
  * Simple vocabulary-based text vectorizer
@@ -75,9 +75,9 @@ class TextVectorizer {
   private tokenize(text: string): string[] {
     return text
       .toLowerCase()
-      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/[^a-z0-9\s]/g, " ")
       .split(/\s+/)
-      .filter(word => word.length > 2);
+      .filter((word) => word.length > 2);
   }
 
   /**
@@ -105,7 +105,7 @@ export class MLCategorizer {
    * Train the model on generated training data
    */
   async train(): Promise<{ accuracy: number; loss: number }> {
-    console.log('Generating training data...');
+    console.log("Generating training data...");
     const allData = generateTrainingData();
     const { train, test } = splitTrainTest(allData, 0.2);
 
@@ -116,12 +116,12 @@ export class MLCategorizer {
     console.log(`Categories: ${this.categories.length}`);
 
     // Fit vectorizer on training data
-    this.vectorizer.fit(train.map(d => d.text));
+    this.vectorizer.fit(train.map((d) => d.text));
     console.log(`Vocabulary size: ${this.vectorizer.vocabularySize}`);
 
     // Convert training data to tensors
-    const trainX = train.map(d => this.vectorizer.transform(d.text));
-    const trainY = train.map(d => categoryToOneHot(d.category, this.categories));
+    const trainX = train.map((d) => this.vectorizer.transform(d.text));
+    const trainY = train.map((d) => categoryToOneHot(d.category, this.categories));
 
     const xTrain = tf.tensor2d(trainX);
     const yTrain = tf.tensor2d(trainY);
@@ -130,7 +130,7 @@ export class MLCategorizer {
     this.model = this.buildModel(this.vectorizer.vocabularySize, this.categories.length);
 
     // Train model
-    console.log('Training model...');
+    console.log("Training model...");
     await this.model.fit(xTrain, yTrain, {
       epochs: 50,
       batchSize: 32,
@@ -140,15 +140,17 @@ export class MLCategorizer {
       callbacks: {
         onEpochEnd: (epoch, logs) => {
           if (epoch % 10 === 0) {
-            console.log(`Epoch ${epoch}: loss = ${logs?.loss.toFixed(4)}, acc = ${logs?.acc.toFixed(4)}`);
+            console.log(
+              `Epoch ${epoch}: loss = ${logs?.loss.toFixed(4)}, acc = ${logs?.acc.toFixed(4)}`
+            );
           }
         },
       },
     });
 
     // Evaluate on test set
-    const testX = test.map(d => this.vectorizer.transform(d.text));
-    const testY = test.map(d => categoryToOneHot(d.category, this.categories));
+    const testX = test.map((d) => this.vectorizer.transform(d.text));
+    const testY = test.map((d) => categoryToOneHot(d.category, this.categories));
 
     const xTest = tf.tensor2d(testX);
     const yTest = tf.tensor2d(testY);
@@ -180,32 +182,38 @@ export class MLCategorizer {
     const model = tf.sequential();
 
     // Input layer + hidden layers
-    model.add(tf.layers.dense({
-      units: 64,
-      activation: 'relu',
-      inputShape: [inputSize],
-    }));
+    model.add(
+      tf.layers.dense({
+        units: 64,
+        activation: "relu",
+        inputShape: [inputSize],
+      })
+    );
 
     model.add(tf.layers.dropout({ rate: 0.3 }));
 
-    model.add(tf.layers.dense({
-      units: 32,
-      activation: 'relu',
-    }));
+    model.add(
+      tf.layers.dense({
+        units: 32,
+        activation: "relu",
+      })
+    );
 
     model.add(tf.layers.dropout({ rate: 0.2 }));
 
     // Output layer
-    model.add(tf.layers.dense({
-      units: outputSize,
-      activation: 'softmax',
-    }));
+    model.add(
+      tf.layers.dense({
+        units: outputSize,
+        activation: "softmax",
+      })
+    );
 
     // Compile model
     model.compile({
       optimizer: tf.train.adam(0.001),
-      loss: 'categoricalCrossentropy',
-      metrics: ['accuracy'],
+      loss: "categoricalCrossentropy",
+      metrics: ["accuracy"],
     });
 
     return model;
@@ -240,10 +248,10 @@ export class MLCategorizer {
         category,
         subcategory: undefined,
         confidence,
-        method: 'ml',
+        method: "ml",
       };
     } catch (error) {
-      console.error('ML prediction error:', error);
+      console.error("ML prediction error:", error);
       return null;
     }
   }
@@ -260,12 +268,15 @@ export class MLCategorizer {
    */
   async saveModel(): Promise<void> {
     if (!this.model) {
-      throw new Error('Model not trained yet');
+      throw new Error("Model not trained yet");
     }
 
-    await this.model.save('indexeddb://budget-categorizer');
-    localStorage.setItem('categorizer-vocabulary', JSON.stringify(Array.from(this.vectorizer['vocabulary'].entries())));
-    localStorage.setItem('categorizer-categories', JSON.stringify(this.categories));
+    await this.model.save("indexeddb://budget-categorizer");
+    localStorage.setItem(
+      "categorizer-vocabulary",
+      JSON.stringify(Array.from(this.vectorizer["vocabulary"].entries()))
+    );
+    localStorage.setItem("categorizer-categories", JSON.stringify(this.categories));
   }
 
   /**
@@ -273,15 +284,15 @@ export class MLCategorizer {
    */
   async loadModel(): Promise<boolean> {
     try {
-      this.model = await tf.loadLayersModel('indexeddb://budget-categorizer');
+      this.model = await tf.loadLayersModel("indexeddb://budget-categorizer");
 
       // Load vocabulary and categories
-      const vocabData = localStorage.getItem('categorizer-vocabulary');
-      const categoriesData = localStorage.getItem('categorizer-categories');
+      const vocabData = localStorage.getItem("categorizer-vocabulary");
+      const categoriesData = localStorage.getItem("categorizer-categories");
 
       if (vocabData && categoriesData) {
         const vocabEntries = JSON.parse(vocabData) as [string, number][];
-        this.vectorizer['vocabulary'] = new Map(vocabEntries);
+        this.vectorizer["vocabulary"] = new Map(vocabEntries);
         this.categories = JSON.parse(categoriesData);
         this.isReady = true;
         return true;
@@ -289,7 +300,7 @@ export class MLCategorizer {
 
       return false;
     } catch (error) {
-      console.error('Failed to load model:', error);
+      console.error("Failed to load model:", error);
       return false;
     }
   }

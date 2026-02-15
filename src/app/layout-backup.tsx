@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                           <ModuleProvider>
                             <ExamProvider>
                               <SkipLinks />
-                              <div className="min-h-screen bg-gradient-to-br from-tanium-dark via-tanium-secondary to-tanium-primary">
+                              <div className="from-tanium-dark via-tanium-secondary to-tanium-primary min-h-screen bg-gradient-to-br">
                                 {children}
                               </div>
                               <Toaster />

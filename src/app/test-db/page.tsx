@@ -332,110 +332,112 @@ export default function TestDatabasePage() {
   };
 
   return (
-    
-      <div className="container mx-auto max-w-6xl px-4 py-8">
-        <div className="mb-8">
-          <h1 className="mb-4 text-4xl font-bold text-foreground">Database Integration Test</h1>
-          <p className="text-foreground/70">Verify all database connections and context integrations</p>
-        </div>
+    <div className="container mx-auto max-w-6xl px-4 py-8">
+      <div className="mb-8">
+        <h1 className="mb-4 text-4xl font-bold text-foreground">Database Integration Test</h1>
+        <p className="text-foreground/70">
+          Verify all database connections and context integrations
+        </p>
+      </div>
 
-        {/* Authentication Status */}
-        <Card className="glass mb-6 border-white/10">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-foreground">
-              <User className="h-5 w-5" />
-              Authentication Status
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {user ? (
-              <div className="space-y-2">
-                <Alert className="border-[#22c55e]/30 bg-[#22c55e]/10">
-                  <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
-                  <AlertDescription className="text-foreground">
-                    Signed in as <strong>{user.email}</strong>
-                  </AlertDescription>
-                </Alert>
-                <Button
-                  onClick={signOut}
-                  variant="outline"
-                  className="border-white/20 text-foreground hover:bg-white/10"
-                >
-                  Sign Out
-                </Button>
-              </div>
-            ) : (
-              <div className="space-y-2">
-                <Alert className="border-[#f97316]/30 bg-[#f97316]/10">
-                  <AlertCircle className="h-4 w-4 text-[#f97316]" />
-                  <AlertDescription className="text-foreground">
-                    Not authenticated. Sign in to test database features.
-                  </AlertDescription>
-                </Alert>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Test Controls */}
-        <Card className="glass mb-6 border-white/10">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-foreground">
-              <Database className="h-5 w-5" />
-              Test Controls
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex gap-4">
+      {/* Authentication Status */}
+      <Card className="glass mb-6 border-white/10">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-foreground">
+            <User className="h-5 w-5" />
+            Authentication Status
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          {user ? (
+            <div className="space-y-2">
+              <Alert className="border-[#22c55e]/30 bg-[#22c55e]/10">
+                <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
+                <AlertDescription className="text-foreground">
+                  Signed in as <strong>{user.email}</strong>
+                </AlertDescription>
+              </Alert>
               <Button
-                onClick={runAllTests}
-                disabled={!user || isRunning}
-                className="bg-tanium-accent hover:bg-tanium-accent/80"
+                onClick={signOut}
+                variant="outline"
+                className="border-white/20 text-foreground hover:bg-white/10"
               >
-                {isRunning ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Running Tests...
-                  </>
-                ) : (
-                  <>
-                    <RefreshCw className="mr-2 h-4 w-4" />
-                    Run All Tests
-                  </>
-                )}
+                Sign Out
               </Button>
             </div>
-          </CardContent>
-        </Card>
-
-        {/* Test Results */}
-        <Card className="glass border-white/10">
-          <CardHeader>
-            <CardTitle className="text-foreground">Test Results</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {testResults.map((test) => (
-                <div key={test.name} className="flex items-start gap-3 rounded-lg bg-white/5 p-3">
-                  {getStatusIcon(test.status)}
-                  <div className="flex-1">
-                    <div className="flex items-center">
-                      <h3 className="font-medium text-foreground">{test.name}</h3>
-                      {getStatusBadge(test.status)}
-                    </div>
-                    {test.message && <p className="mt-1 text-sm text-foreground/70">{test.message}</p>}
-                    {test.details && (
-                      <pre className="mt-2 rounded bg-black/20 p-2 text-xs text-foreground/50">
-                        {JSON.stringify(test.details, null, 2)}
-                      </pre>
-                    )}
-                  </div>
-                </div>
-              ))}
+          ) : (
+            <div className="space-y-2">
+              <Alert className="border-[#f97316]/30 bg-[#f97316]/10">
+                <AlertCircle className="h-4 w-4 text-[#f97316]" />
+                <AlertDescription className="text-foreground">
+                  Not authenticated. Sign in to test database features.
+                </AlertDescription>
+              </Alert>
             </div>
-          </CardContent>
-        </Card>
-      </div>
-    
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Test Controls */}
+      <Card className="glass mb-6 border-white/10">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-foreground">
+            <Database className="h-5 w-5" />
+            Test Controls
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex gap-4">
+            <Button
+              onClick={runAllTests}
+              disabled={!user || isRunning}
+              className="bg-tanium-accent hover:bg-tanium-accent/80"
+            >
+              {isRunning ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Running Tests...
+                </>
+              ) : (
+                <>
+                  <RefreshCw className="mr-2 h-4 w-4" />
+                  Run All Tests
+                </>
+              )}
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Test Results */}
+      <Card className="glass border-white/10">
+        <CardHeader>
+          <CardTitle className="text-foreground">Test Results</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3">
+            {testResults.map((test) => (
+              <div key={test.name} className="flex items-start gap-3 rounded-lg bg-white/5 p-3">
+                {getStatusIcon(test.status)}
+                <div className="flex-1">
+                  <div className="flex items-center">
+                    <h3 className="font-medium text-foreground">{test.name}</h3>
+                    {getStatusBadge(test.status)}
+                  </div>
+                  {test.message && (
+                    <p className="mt-1 text-sm text-foreground/70">{test.message}</p>
+                  )}
+                  {test.details && (
+                    <pre className="mt-2 rounded bg-black/20 p-2 text-xs text-foreground/50">
+                      {JSON.stringify(test.details, null, 2)}
+                    </pre>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

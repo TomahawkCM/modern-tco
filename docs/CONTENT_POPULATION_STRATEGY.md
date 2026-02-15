@@ -11,6 +11,7 @@
 ### ✅ What We Have (Production-Ready)
 
 #### 1. Study Content (MDX Modules)
+
 - **6 comprehensive modules** (11.6 hours total, 16,849 lines)
 - **83 micro-sections** with embedded assessments
 - **140+ inline questions** integrated into content
@@ -18,18 +19,21 @@
 - **Quality Score:** 9.2/10
 
 #### 2. Question Bank
+
 - **200 questions** in `imported-questions-master.ts`
 - Distributed across all 6 TCO domains
 - TypeScript format with full metadata
 - **Quality:** High (detailed explanations, tags, references)
 
 #### 3. Videos
+
 - **9 videos defined** in `tco-videos.ts`
 - **Total watch time:** ~2.5 hours
 - **Issue:** Some have placeholder URLs (help.tanium.com)
 - **Need:** 15-20 additional curated videos
 
 #### 4. Infrastructure (100% Complete)
+
 - Video analytics system ✅
 - Interactive lab framework ✅
 - Assessment engine ✅
@@ -41,9 +45,11 @@
 ## 🎯 Content Population Goals
 
 ### Phase 1: Question Bank Expansion (Week 1-2)
+
 **Goal:** Expand from 200 → 800+ questions
 
 **Strategy:**
+
 1. **AI-Generated Questions** (400 questions)
    - Use Claude 3.5 Sonnet to generate domain-specific questions
    - Based on official Tanium documentation
@@ -70,6 +76,7 @@
    - Performance-based testing (PBT) style
 
 **Distribution by Domain (TCO Blueprint Alignment):**
+
 - Asking Questions (22%): ~176 questions
 - Refining & Targeting (23%): ~184 questions
 - Taking Action (15%): ~120 questions
@@ -77,6 +84,7 @@
 - Reporting (17%): ~136 questions
 
 **Tools Needed:**
+
 - [ ] AI question generation script (Claude API)
 - [ ] Legacy question import tool
 - [ ] Question validation & deduplication tool
@@ -85,12 +93,15 @@
 ---
 
 ### Phase 2: Video Curation & Integration (Week 2-3)
+
 **Goal:** Curate 25-30 high-quality videos covering all TCO domains
 
 **Strategy:**
 
 #### 2.1 Find Real Videos (Replace Placeholders)
+
 **Current placeholders to replace (7 videos):**
+
 1. `tco-navigation-basics` - Help.tanium.com placeholder
 2. `mastering-interact-part1` - Help.tanium.com placeholder
 3. `mastering-interact-part2` - Help.tanium.com placeholder
@@ -100,15 +111,18 @@
 7. `tco-practice-scenarios` - Help.tanium.com placeholder
 
 **Sources:**
+
 - Tanium YouTube Channel (official)
 - Tanium Tech Talks series
 - SecuritySenses TCO series
 - Community expert tutorials
 
 #### 2.2 Add New Videos (15-20 videos)
+
 **By Domain:**
 
 **Asking Questions (5 videos):**
+
 - "Sensor Library Deep Dive" (15 min)
 - "Advanced Question Syntax" (12 min)
 - "Saved Questions Best Practices" (10 min)
@@ -116,6 +130,7 @@
 - "Common Question Mistakes" (10 min)
 
 **Refining & Targeting (5 videos):**
+
 - "Computer Groups Masterclass" (20 min)
 - "Advanced Filtering Techniques" (15 min)
 - "RBAC and Scoping" (12 min)
@@ -123,12 +138,14 @@
 - "Filter Performance Tips" (8 min)
 
 **Taking Action (4 videos):**
+
 - "Package Development 101" (25 min)
 - "Action Deployment Workflows" (18 min)
 - "Monitoring Action Status" (10 min)
 - "Rollback and Recovery" (12 min)
 
 **Navigation & Modules (5 videos):**
+
 - "Console Navigation Tour" (15 min)
 - "Trends Module Deep Dive" (20 min)
 - "Connect Integration Basics" (18 min)
@@ -136,17 +153,20 @@
 - "Dashboard Customization" (10 min)
 
 **Reporting & Export (4 videos):**
+
 - "Report Builder Tutorial" (20 min)
 - "Data Export Methods" (15 min)
 - "Scheduled Reports" (10 min)
 - "Connect Destinations" (12 min)
 
 **Exam Strategy (3 videos):**
+
 - "TCO Exam Format & Tips" (15 min)
 - "Time Management Strategies" (10 min)
 - "Last-Minute Review" (12 min)
 
 **Tools Needed:**
+
 - [ ] YouTube video search & validation script
 - [ ] Video metadata extractor (duration, transcript)
 - [ ] Bulk video import tool
@@ -155,10 +175,12 @@
 ---
 
 ### Phase 3: Interactive Labs (Week 3-4)
+
 **Goal:** 10 hands-on labs covering practical TCO skills
 
 **Existing Labs to Import (5 labs):**
 According to context, we have "5 interactive labs (69 minutes) ready to import"
+
 - Need to locate these lab definitions
 - Import into lab framework
 - Test all validation logic
@@ -196,6 +218,7 @@ According to context, we have "5 interactive labs (69 minutes) ready to import"
    - Verify resolution
 
 **Lab Components:**
+
 - Step-by-step instructions with screenshots
 - Validation checkpoints (auto-grading)
 - Hint system (4 levels: subtle → explicit)
@@ -203,6 +226,7 @@ According to context, we have "5 interactive labs (69 minutes) ready to import"
 - Certificate of completion
 
 **Tools Needed:**
+
 - [ ] Lab definition schema
 - [ ] Lab import/export tool
 - [ ] Lab preview system
@@ -211,17 +235,20 @@ According to context, we have "5 interactive labs (69 minutes) ready to import"
 ---
 
 ### Phase 4: Flashcards & Study Aids (Week 4-5)
+
 **Goal:** 500+ flashcards for active recall practice
 
 **Flashcard Categories:**
 
 #### 4.1 Terminology Flashcards (150 cards)
+
 - Key Tanium concepts
 - Platform terminology
 - Module names and purposes
 - Technical definitions
 
 **Example:**
+
 ```
 Front: What is a "sensor" in Tanium?
 Back: A script or query that runs on endpoints to retrieve specific data. Tanium includes 500+ built-in sensors covering OS, hardware, applications, and security information.
@@ -229,24 +256,28 @@ Tags: [definitions, sensors, platform-fundamentals]
 ```
 
 #### 4.2 Syntax & Commands (100 cards)
+
 - Natural language query syntax
 - Common sensor usage patterns
 - Filter syntax examples
 - Package parameter formats
 
 #### 4.3 Best Practices (100 cards)
+
 - Question optimization tips
 - Security best practices
 - Performance recommendations
 - Troubleshooting techniques
 
 #### 4.4 Exam-Focused (150 cards)
+
 - High-frequency exam topics
 - Common exam traps
 - Quick reference formulas
 - Memorization aids
 
 **Tools Needed:**
+
 - [ ] Flashcard generation script (AI-powered)
 - [ ] Flashcard import tool
 - [ ] Flashcard database schema
@@ -255,9 +286,11 @@ Tags: [definitions, sensors, platform-fundamentals]
 ---
 
 ### Phase 5: Mock Exams (Week 5-6)
+
 **Goal:** 6 full-length mock exams + 12 domain-specific practice tests
 
 **Full Mock Exams (6 exams):**
+
 - **75 questions each** (matches real TAN-1000 format)
 - **105 minutes** timed format
 - **Domain distribution** matches TCO blueprint:
@@ -268,6 +301,7 @@ Tags: [definitions, sensors, platform-fundamentals]
   - Reporting: 17% (12-13 questions)
 
 **Mock Exam Difficulty Progression:**
+
 1. **Exam 1:** 60% Easy, 30% Medium, 10% Hard (Diagnostic)
 2. **Exam 2:** 50% Easy, 40% Medium, 10% Hard (Foundation)
 3. **Exam 3:** 40% Easy, 45% Medium, 15% Hard (Intermediate)
@@ -276,12 +310,14 @@ Tags: [definitions, sensors, platform-fundamentals]
 6. **Exam 6:** 20% Easy, 50% Medium, 30% Hard (Final Challenge)
 
 **Domain-Specific Practice Tests (12 tests):**
+
 - **2 tests per domain** (25 questions each, 35 minutes)
 - Focused deep-dive into single domain
 - Immediate feedback after each question
 - Targeted remediation recommendations
 
 **Mock Exam Features:**
+
 - Randomized question order
 - Timed countdown with warnings (10 min, 5 min, 1 min)
 - Flagging system (mark for review)
@@ -291,6 +327,7 @@ Tags: [definitions, sensors, platform-fundamentals]
 - Weak area identification with study recommendations
 
 **Tools Needed:**
+
 - [ ] Mock exam builder tool
 - [ ] Exam question randomizer
 - [ ] Exam timer component (already exists)
@@ -304,6 +341,7 @@ Tags: [definitions, sensors, platform-fundamentals]
 ### Database Schema Updates
 
 #### 1. Flashcards Table
+
 ```sql
 CREATE TABLE IF NOT EXISTS public.flashcards (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -318,6 +356,7 @@ CREATE TABLE IF NOT EXISTS public.flashcards (
 ```
 
 #### 2. Student Flashcard Progress
+
 ```sql
 CREATE TABLE IF NOT EXISTS public.student_flashcard_progress (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -333,6 +372,7 @@ CREATE TABLE IF NOT EXISTS public.student_flashcard_progress (
 ```
 
 #### 3. Mock Exams Table
+
 ```sql
 CREATE TABLE IF NOT EXISTS public.mock_exams (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -348,6 +388,7 @@ CREATE TABLE IF NOT EXISTS public.mock_exams (
 ```
 
 #### 4. Mock Exam Attempts
+
 ```sql
 CREATE TABLE IF NOT EXISTS public.mock_exam_attempts (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -435,6 +476,7 @@ Output format: JSON array
 ## 📈 Success Metrics
 
 ### Content Quantity Targets
+
 - [x] **Questions:** 200 → 800+ (4x increase)
 - [x] **Videos:** 9 → 30+ (3.3x increase)
 - [x] **Labs:** 0 → 10 (new capability)
@@ -442,6 +484,7 @@ Output format: JSON array
 - [x] **Mock Exams:** 0 → 6 full + 12 domain tests (new capability)
 
 ### Content Quality Targets
+
 - **Question Quality Score:** >8.5/10 (expert review)
 - **Video Engagement:** >70% completion rate
 - **Lab Completion:** >80% students complete at least 5 labs
@@ -449,6 +492,7 @@ Output format: JSON array
 - **Mock Exam Predictiveness:** Correlation >0.85 with real exam scores
 
 ### Student Impact Targets
+
 - **Pass Rate:** 70% → 90%+ (+29%)
 - **Study Time:** 35-50h → 20-25h (-50%)
 - **Confidence:** 65% → 85%+ (+31%)
@@ -459,6 +503,7 @@ Output format: JSON array
 ## 🚀 Implementation Timeline
 
 ### Week 1-2: Question Bank Expansion
+
 - **Day 1-2:** Build AI question generation tool
 - **Day 3-4:** Generate 400 AI questions, validate quality
 - **Day 5-6:** Import legacy questions from TypeScript files
@@ -470,6 +515,7 @@ Output format: JSON array
 ---
 
 ### Week 2-3: Video Curation & Integration
+
 - **Day 1-3:** YouTube video search and quality validation
 - **Day 4-5:** Replace 7 placeholder videos with real content
 - **Day 6-8:** Add 15-20 new curated videos
@@ -481,6 +527,7 @@ Output format: JSON array
 ---
 
 ### Week 3-4: Interactive Labs
+
 - **Day 1-2:** Locate and import 5 existing lab definitions
 - **Day 3-5:** Create 5 new lab scenarios with validation logic
 - **Day 6-7:** Build lab preview and testing system
@@ -493,6 +540,7 @@ Output format: JSON array
 ---
 
 ### Week 4-5: Flashcards & Study Aids
+
 - **Day 1-2:** Design flashcard database schema and API
 - **Day 3-5:** AI-generate 500+ flashcards across all categories
 - **Day 6-7:** Build flashcard review interface with spaced repetition
@@ -504,6 +552,7 @@ Output format: JSON array
 ---
 
 ### Week 5-6: Mock Exams
+
 - **Day 1-2:** Build mock exam creation tool
 - **Day 3-5:** Create 6 full mock exams with difficulty progression
 - **Day 6-7:** Create 12 domain-specific practice tests
@@ -517,29 +566,34 @@ Output format: JSON array
 ## 🛠️ Tools & Scripts to Build
 
 ### Priority 1 (Week 1)
+
 1. **AI Question Generator** (`scripts/generate-questions.ts`)
 2. **Legacy Question Importer** (`scripts/import-legacy-questions.ts`)
 3. **Question Validator** (`scripts/validate-questions.ts`)
 4. **Bulk Supabase Importer** (`scripts/bulk-import-questions.ts`)
 
 ### Priority 2 (Week 2-3)
+
 5. **YouTube Video Searcher** (`scripts/search-youtube-videos.ts`)
 6. **Video Metadata Extractor** (`scripts/extract-video-metadata.ts`)
 7. **Video Quality Checker** (`scripts/check-video-quality.ts`)
 8. **Bulk Video Importer** (`scripts/bulk-import-videos.ts`)
 
 ### Priority 3 (Week 3-4)
+
 9. **Lab Definition Parser** (`scripts/parse-lab-definitions.ts`)
 10. **Lab Import Tool** (`scripts/import-labs.ts`)
 11. **Lab Preview Builder** (`components/LabPreview.tsx`)
 12. **Lab Progress Tracker** (`lib/labProgress.ts`)
 
 ### Priority 4 (Week 4-5)
+
 13. **Flashcard Generator** (`scripts/generate-flashcards.ts`)
 14. **Flashcard Importer** (`scripts/import-flashcards.ts`)
 15. **Flashcard Review Interface** (`components/FlashcardReview.tsx`)
 
 ### Priority 5 (Week 5-6)
+
 16. **Mock Exam Builder** (`scripts/build-mock-exam.ts`)
 17. **Exam Question Randomizer** (`lib/examRandomizer.ts`)
 18. **Score Report Generator** (`components/ExamScoreReport.tsx`)

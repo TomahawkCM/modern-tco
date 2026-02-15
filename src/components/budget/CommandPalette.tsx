@@ -11,11 +11,11 @@
  * - Real-time autocomplete suggestions
  */
 
-'use client';
+"use client";
 
-import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
-import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   CommandDialog,
   CommandEmpty,
@@ -24,7 +24,7 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-} from '@/components/ui/command';
+} from "@/components/ui/command";
 import {
   Home,
   Receipt,
@@ -51,14 +51,14 @@ import {
   ArrowRight,
   Store,
   Filter,
-} from 'lucide-react';
-import { db } from '@/lib/budget-db';
-import type { Transaction, Category, Account } from '@/types/budget';
+} from "lucide-react";
+import { db } from "@/lib/budget-db";
+import type { Transaction, Category, Account } from "@/types/budget";
 import {
   initializeSearchIndex,
   searchTransactions,
   type SearchResult,
-} from '@/lib/search/transaction-search';
+} from "@/lib/search/transaction-search";
 import {
   initializeAutocompleteCache,
   getAutocompleteSuggestions,
@@ -66,8 +66,8 @@ import {
   getRecentSearches,
   getSavedFilters,
   type AutocompleteSuggestion,
-} from '@/lib/search/autocomplete';
-import { parseNaturalLanguage } from '@/lib/search/natural-language-parser';
+} from "@/lib/search/autocomplete";
+import { parseNaturalLanguage } from "@/lib/search/natural-language-parser";
 
 interface CommandPaletteProps {
   open?: boolean;
@@ -79,7 +79,7 @@ function isTransactionSearchQuery(query: string): boolean {
   if (!query || query.length < 2) return false;
 
   // Explicit search prefix
-  if (query.startsWith('/search ') || query.startsWith('/find ') || query.startsWith('/tx ')) {
+  if (query.startsWith("/search ") || query.startsWith("/find ") || query.startsWith("/tx ")) {
     return true;
   }
 
@@ -99,32 +99,32 @@ function isTransactionSearchQuery(query: string): boolean {
 // Format transaction amount
 function formatAmount(amount: number): string {
   const absAmount = Math.abs(amount);
-  const sign = amount >= 0 ? '+' : '-';
+  const sign = amount >= 0 ? "+" : "-";
   return `${sign}$${absAmount.toFixed(2)}`;
 }
 
 // Format date
 function formatDate(date: Date): string {
-  return new Date(date).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
+  return new Date(date).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
   });
 }
 
 // Icon for suggestion type
-function SuggestionIcon({ type }: { type: AutocompleteSuggestion['type'] }) {
+function SuggestionIcon({ type }: { type: AutocompleteSuggestion["type"] }) {
   switch (type) {
-    case 'merchant':
+    case "merchant":
       return <Store className="mr-2 h-4 w-4 text-muted-foreground" />;
-    case 'category':
+    case "category":
       return <Tags className="mr-2 h-4 w-4 text-muted-foreground" />;
-    case 'amount':
+    case "amount":
       return <DollarSign className="mr-2 h-4 w-4 text-muted-foreground" />;
-    case 'filter':
+    case "filter":
       return <Filter className="mr-2 h-4 w-4 text-muted-foreground" />;
-    case 'recent':
+    case "recent":
       return <History className="mr-2 h-4 w-4 text-muted-foreground" />;
-    case 'saved':
+    case "saved":
       return <Bookmark className="mr-2 h-4 w-4 text-muted-foreground" />;
     default:
       return <Search className="mr-2 h-4 w-4 text-muted-foreground" />;
@@ -133,10 +133,10 @@ function SuggestionIcon({ type }: { type: AutocompleteSuggestion['type'] }) {
 
 export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPaletteProps) {
   const router = useRouter();
-  const t = useTranslations('commandPalette');
-  const tSearch = useTranslations('transactionSearch');
+  const t = useTranslations("commandPalette");
+  const tSearch = useTranslations("transactionSearch");
   const [internalOpen, setInternalOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([]);
   const [isSearchMode, setIsSearchMode] = useState(false);
@@ -152,21 +152,24 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
   // Support both controlled and uncontrolled usage
   const isControlled = controlledOpen !== undefined;
   const open = isControlled ? controlledOpen : internalOpen;
-  const setOpen = useCallback((value: boolean | ((prev: boolean) => boolean)) => {
-    const newValue = typeof value === 'function' ? value(open) : value;
-    if (isControlled && onOpenChange) {
-      onOpenChange(newValue);
-    } else {
-      setInternalOpen(newValue);
-    }
-    // Reset state when closing
-    if (!newValue) {
-      setSearchQuery('');
-      setSearchResults([]);
-      setSuggestions([]);
-      setIsSearchMode(false);
-    }
-  }, [isControlled, onOpenChange, open]);
+  const setOpen = useCallback(
+    (value: boolean | ((prev: boolean) => boolean)) => {
+      const newValue = typeof value === "function" ? value(open) : value;
+      if (isControlled && onOpenChange) {
+        onOpenChange(newValue);
+      } else {
+        setInternalOpen(newValue);
+      }
+      // Reset state when closing
+      if (!newValue) {
+        setSearchQuery("");
+        setSearchResults([]);
+        setSuggestions([]);
+        setIsSearchMode(false);
+      }
+    },
+    [isControlled, onOpenChange, open]
+  );
 
   // Load data for search on first open
   useEffect(() => {
@@ -192,7 +195,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
         initializeAutocompleteCache(visibleTxs, cats);
         setSearchIndexed(true);
       } catch (error) {
-        console.error('[CommandPalette] Error loading data:', error);
+        console.error("[CommandPalette] Error loading data:", error);
       }
     }
 
@@ -202,14 +205,14 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
   // Cmd/Ctrl+K keyboard shortcut
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         setOpen((prev) => !prev);
       }
     };
 
-    document.addEventListener('keydown', down);
-    return () => document.removeEventListener('keydown', down);
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
   }, [setOpen]);
 
   // Handle search query changes
@@ -257,47 +260,59 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
   }, []);
 
   // Run command and close palette
-  const runCommand = useCallback((callback: () => void) => {
-    setOpen(false);
-    callback();
-  }, [setOpen]);
+  const runCommand = useCallback(
+    (callback: () => void) => {
+      setOpen(false);
+      callback();
+    },
+    [setOpen]
+  );
 
   // Navigate to transactions page with search
-  const goToTransactionsWithSearch = useCallback((query: string) => {
-    // Add to recent searches
-    if (query.trim().length >= 3) {
-      addRecentSearch(query.trim());
-    }
+  const goToTransactionsWithSearch = useCallback(
+    (query: string) => {
+      // Add to recent searches
+      if (query.trim().length >= 3) {
+        addRecentSearch(query.trim());
+      }
 
-    runCommand(() => {
-      // Encode search query in URL
-      const searchParams = new URLSearchParams();
-      searchParams.set('search', query);
-      router.push(`/budget-app/transactions?${searchParams.toString()}`);
-    });
-  }, [runCommand, router]);
+      runCommand(() => {
+        // Encode search query in URL
+        const searchParams = new URLSearchParams();
+        searchParams.set("search", query);
+        router.push(`/budget-app/transactions?${searchParams.toString()}`);
+      });
+    },
+    [runCommand, router]
+  );
 
   // Navigate to single transaction
-  const goToTransaction = useCallback((transaction: Transaction) => {
-    runCommand(() => {
-      // Navigate to transactions page with the transaction highlighted
-      const searchParams = new URLSearchParams();
-      searchParams.set('highlight', transaction.id);
-      router.push(`/budget-app/transactions?${searchParams.toString()}`);
-    });
-  }, [runCommand, router]);
+  const goToTransaction = useCallback(
+    (transaction: Transaction) => {
+      runCommand(() => {
+        // Navigate to transactions page with the transaction highlighted
+        const searchParams = new URLSearchParams();
+        searchParams.set("highlight", transaction.id);
+        router.push(`/budget-app/transactions?${searchParams.toString()}`);
+      });
+    },
+    [runCommand, router]
+  );
 
   // Select a suggestion
-  const selectSuggestion = useCallback((suggestion: AutocompleteSuggestion) => {
-    if (suggestion.type === 'saved' || suggestion.type === 'recent') {
-      goToTransactionsWithSearch(suggestion.value);
-    } else {
-      // Insert the suggestion into the search query
-      const newQuery = suggestion.value;
-      setSearchQuery(newQuery);
-      handleSearchChange(newQuery);
-    }
-  }, [goToTransactionsWithSearch, handleSearchChange]);
+  const selectSuggestion = useCallback(
+    (suggestion: AutocompleteSuggestion) => {
+      if (suggestion.type === "saved" || suggestion.type === "recent") {
+        goToTransactionsWithSearch(suggestion.value);
+      } else {
+        // Insert the suggestion into the search query
+        const newQuery = suggestion.value;
+        setSearchQuery(newQuery);
+        handleSearchChange(newQuery);
+      }
+    },
+    [goToTransactionsWithSearch, handleSearchChange]
+  );
 
   // Cleanup on unmount
   useEffect(() => {
@@ -330,7 +345,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
   return (
     <CommandDialog open={open} onOpenChange={setOpen}>
       <CommandInput
-        placeholder={t('placeholder')}
+        placeholder={t("placeholder")}
         value={searchQuery}
         onValueChange={handleSearchChange}
       />
@@ -338,7 +353,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
         {/* Search Results */}
         {showSearchResults && (
           <>
-            <CommandGroup heading={tSearch('resultCount', { count: searchResults.length })}>
+            <CommandGroup heading={tSearch("resultCount", { count: searchResults.length })}>
               {searchResults.slice(0, 8).map((result) => (
                 <CommandItem
                   key={result.item.id}
@@ -346,10 +361,10 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                   onSelect={() => goToTransaction(result.item)}
                   className="flex items-center justify-between"
                 >
-                  <div className="flex items-center min-w-0 flex-1">
+                  <div className="flex min-w-0 flex-1 items-center">
                     <Receipt className="mr-2 h-4 w-4 flex-shrink-0 text-muted-foreground" />
                     <div className="min-w-0 flex-1">
-                      <span className="font-medium truncate block">{result.item.description}</span>
+                      <span className="block truncate font-medium">{result.item.description}</span>
                       <span className="text-xs text-muted-foreground">
                         {formatDate(result.item.date)}
                         {result.item.category && ` • ${result.item.category}`}
@@ -357,8 +372,8 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                     </div>
                   </div>
                   <span
-                    className={`ml-2 font-semibold flex-shrink-0 ${
-                      result.item.amount >= 0 ? 'text-green-600' : 'text-red-600'
+                    className={`ml-2 flex-shrink-0 font-semibold ${
+                      result.item.amount >= 0 ? "text-green-600" : "text-red-600"
                     }`}
                   >
                     {formatAmount(result.item.amount)}
@@ -406,7 +421,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
         {/* Recent Searches */}
         {showRecentSearches && (
           <>
-            <CommandGroup heading={tSearch('recentSearches')}>
+            <CommandGroup heading={tSearch("recentSearches")}>
               {recentSearches.map((search, idx) => (
                 <CommandItem
                   key={`recent-${idx}`}
@@ -425,7 +440,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
         {/* Saved Filters */}
         {showSavedFilters && (
           <>
-            <CommandGroup heading={tSearch('savedFilters')}>
+            <CommandGroup heading={tSearch("savedFilters")}>
               {savedFilters.map((filter) => (
                 <CommandItem
                   key={filter.id}
@@ -445,12 +460,17 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
         {/* Search Help - show when typing but no results yet */}
         {searchQuery.length > 0 && searchQuery.length < 3 && (
           <CommandEmpty>
-            <div className="text-sm text-muted-foreground p-2">
-              <p className="font-medium mb-2">Search Tips:</p>
+            <div className="p-2 text-sm text-muted-foreground">
+              <p className="mb-2 font-medium">Search Tips:</p>
               <ul className="space-y-1 text-xs">
                 <li>• Type 3+ characters to search transactions</li>
-                <li>• Use <code className="bg-muted px-1 rounded">$50-100</code> for amount ranges</li>
-                <li>• Try <code className="bg-muted px-1 rounded">coffee last week</code> for natural language</li>
+                <li>
+                  • Use <code className="rounded bg-muted px-1">$50-100</code> for amount ranges
+                </li>
+                <li>
+                  • Try <code className="rounded bg-muted px-1">coffee last week</code> for natural
+                  language
+                </li>
               </ul>
             </div>
           </CommandEmpty>
@@ -459,10 +479,12 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
         {/* No results */}
         {isSearchMode && searchQuery.length >= 3 && searchResults.length === 0 && !isLoading && (
           <CommandEmpty>
-            <div className="text-center p-4">
-              <Search className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
-              <p className="font-medium">{tSearch('noResults')}</p>
-              <p className="text-xs text-muted-foreground mt-1">{tSearch('noResultsDescription')}</p>
+            <div className="p-4 text-center">
+              <Search className="mx-auto mb-2 h-8 w-8 text-muted-foreground" />
+              <p className="font-medium">{tSearch("noResults")}</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {tSearch("noResultsDescription")}
+              </p>
             </div>
           </CommandEmpty>
         )}
@@ -471,156 +493,152 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
         {showNavigation && (
           <>
             {/* Navigation - Core Tracking */}
-            <CommandGroup heading={t('groups.tracking')}>
-              <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app'))}
-              >
+            <CommandGroup heading={t("groups.tracking")}>
+              <CommandItem onSelect={() => runCommand(() => router.push("/budget-app"))}>
                 <Home className="mr-2 h-4 w-4" />
-                <span>{t('commands.dashboard')}</span>
+                <span>{t("commands.dashboard")}</span>
               </CommandItem>
               <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app/transactions'))}
+                onSelect={() => runCommand(() => router.push("/budget-app/transactions"))}
               >
                 <Receipt className="mr-2 h-4 w-4" />
-                <span>{t('commands.transactions')}</span>
+                <span>{t("commands.transactions")}</span>
               </CommandItem>
-              <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app/ocr'))}
-              >
+              <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/ocr"))}>
                 <Camera className="mr-2 h-4 w-4" />
-                <span>{t('commands.scanReceipt')}</span>
+                <span>{t("commands.scanReceipt")}</span>
               </CommandItem>
-              <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app/budgets'))}
-              >
+              <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/budgets"))}>
                 <PieChart className="mr-2 h-4 w-4" />
-                <span>{t('commands.budgets')}</span>
+                <span>{t("commands.budgets")}</span>
               </CommandItem>
-              <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app/reports'))}
-              >
+              <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/reports"))}>
                 <BarChart3 className="mr-2 h-4 w-4" />
-                <span>{t('commands.reports')}</span>
+                <span>{t("commands.reports")}</span>
               </CommandItem>
             </CommandGroup>
 
             <CommandSeparator />
 
             {/* Navigation - Wealth & Planning */}
-            <CommandGroup heading={t('groups.wealth')}>
-              <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app/loans'))}
-              >
+            <CommandGroup heading={t("groups.wealth")}>
+              <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/loans"))}>
                 <CreditCard className="mr-2 h-4 w-4" />
-                <span>{t('commands.loans')}</span>
+                <span>{t("commands.loans")}</span>
               </CommandItem>
               <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app/investments'))}
+                onSelect={() => runCommand(() => router.push("/budget-app/investments"))}
               >
                 <Wallet className="mr-2 h-4 w-4" />
-                <span>{t('commands.investments')}</span>
+                <span>{t("commands.investments")}</span>
               </CommandItem>
               <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app/planning/future'))}
+                onSelect={() => runCommand(() => router.push("/budget-app/planning/future"))}
               >
                 <Target className="mr-2 h-4 w-4" />
-                <span>{t('commands.futurePlans')}</span>
+                <span>{t("commands.futurePlans")}</span>
               </CommandItem>
               <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app/planning/retirement'))}
+                onSelect={() => runCommand(() => router.push("/budget-app/planning/retirement"))}
               >
                 <TrendingUp className="mr-2 h-4 w-4" />
-                <span>{t('commands.retirement')}</span>
+                <span>{t("commands.retirement")}</span>
               </CommandItem>
             </CommandGroup>
 
             <CommandSeparator />
 
             {/* Navigation - Tools & Settings */}
-            <CommandGroup heading={t('groups.tools')}>
-              <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app/categories'))}
-              >
+            <CommandGroup heading={t("groups.tools")}>
+              <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/categories"))}>
                 <Tags className="mr-2 h-4 w-4" />
-                <span>{t('commands.categories')}</span>
+                <span>{t("commands.categories")}</span>
               </CommandItem>
-              <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app/import'))}
-              >
+              <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/import"))}>
                 <Upload className="mr-2 h-4 w-4" />
-                <span>{t('commands.importCsv')}</span>
+                <span>{t("commands.importCsv")}</span>
               </CommandItem>
-              <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app/export'))}
-              >
+              <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/export"))}>
                 <Download className="mr-2 h-4 w-4" />
-                <span>{t('commands.exportData')}</span>
+                <span>{t("commands.exportData")}</span>
               </CommandItem>
-              <CommandItem
-                onSelect={() => runCommand(() => router.push('/budget-app/settings'))}
-              >
+              <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/settings"))}>
                 <Settings className="mr-2 h-4 w-4" />
-                <span>{t('commands.settings')}</span>
+                <span>{t("commands.settings")}</span>
               </CommandItem>
             </CommandGroup>
 
             <CommandSeparator />
 
             {/* Quick Actions */}
-            <CommandGroup heading={t('groups.quickActions')}>
+            <CommandGroup heading={t("groups.quickActions")}>
               <CommandItem
-                onSelect={() => runCommand(() => {
-                  router.push('/budget-app/transactions');
-                  setTimeout(() => {
-                    const addButton = document.querySelector('[aria-label="Add transaction"]') as HTMLButtonElement;
-                    addButton?.click();
-                  }, 100);
-                })}
+                onSelect={() =>
+                  runCommand(() => {
+                    router.push("/budget-app/transactions");
+                    setTimeout(() => {
+                      const addButton = document.querySelector(
+                        '[aria-label="Add transaction"]'
+                      ) as HTMLButtonElement;
+                      addButton?.click();
+                    }, 100);
+                  })
+                }
               >
                 <Plus className="mr-2 h-4 w-4" />
-                <span>{t('commands.addTransaction')}</span>
+                <span>{t("commands.addTransaction")}</span>
               </CommandItem>
               <CommandItem
-                onSelect={() => runCommand(() => {
-                  router.push('/budget-app/budgets');
-                  setTimeout(() => {
-                    const addButton = document.querySelector('[aria-label="Create budget"]') as HTMLButtonElement;
-                    addButton?.click();
-                  }, 100);
-                })}
+                onSelect={() =>
+                  runCommand(() => {
+                    router.push("/budget-app/budgets");
+                    setTimeout(() => {
+                      const addButton = document.querySelector(
+                        '[aria-label="Create budget"]'
+                      ) as HTMLButtonElement;
+                      addButton?.click();
+                    }, 100);
+                  })
+                }
               >
                 <Plus className="mr-2 h-4 w-4" />
-                <span>{t('commands.newBudget')}</span>
+                <span>{t("commands.newBudget")}</span>
               </CommandItem>
             </CommandGroup>
 
             <CommandSeparator />
 
             {/* Theme Switching */}
-            <CommandGroup heading={t('groups.appearance')}>
+            <CommandGroup heading={t("groups.appearance")}>
               <CommandItem
-                onSelect={() => runCommand(() => {
-                  console.log('Switch to Light theme');
-                })}
+                onSelect={() =>
+                  runCommand(() => {
+                    console.log("Switch to Light theme");
+                  })
+                }
               >
                 <Sun className="mr-2 h-4 w-4" />
-                <span>{t('commands.lightTheme')}</span>
+                <span>{t("commands.lightTheme")}</span>
               </CommandItem>
               <CommandItem
-                onSelect={() => runCommand(() => {
-                  console.log('Switch to Dark theme');
-                })}
+                onSelect={() =>
+                  runCommand(() => {
+                    console.log("Switch to Dark theme");
+                  })
+                }
               >
                 <Moon className="mr-2 h-4 w-4" />
-                <span>{t('commands.darkTheme')}</span>
+                <span>{t("commands.darkTheme")}</span>
               </CommandItem>
               <CommandItem
-                onSelect={() => runCommand(() => {
-                  console.log('Switch to High-Contrast theme');
-                })}
+                onSelect={() =>
+                  runCommand(() => {
+                    console.log("Switch to High-Contrast theme");
+                  })
+                }
               >
                 <MonitorSmartphone className="mr-2 h-4 w-4" />
-                <span>{t('commands.highContrastTheme')}</span>
+                <span>{t("commands.highContrastTheme")}</span>
               </CommandItem>
             </CommandGroup>
           </>

@@ -21,37 +21,43 @@
  * - SUPABASE_SERVICE_ROLE_KEY (server key)
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
-import matter from 'gray-matter';
-import { createClient } from '@supabase/supabase-js';
-import { parseArgs } from 'node:util';
-import crypto from 'node:crypto';
-import dotenv from 'dotenv';
+import fs from "node:fs";
+import path from "node:path";
+import matter from "gray-matter";
+import { createClient } from "@supabase/supabase-js";
+import { parseArgs } from "node:util";
+import crypto from "node:crypto";
+import dotenv from "dotenv";
 
 // Load env from .env.local if present
 try {
-  const envPath = path.join(process.cwd(), '.env.local');
+  const envPath = path.join(process.cwd(), ".env.local");
   dotenv.config({ path: envPath });
 } catch {}
 
 // Terminal colors for better output
 const colors = {
-  reset: '\x1b[0m',
-  bright: '\x1b[1m',
-  dim: '\x1b[2m',
-  red: '\x1b[31m',
-  green: '\x1b[32m',
-  yellow: '\x1b[33m',
-  blue: '\x1b[34m',
-  cyan: '\x1b[36m',
+  reset: "\x1b[0m",
+  bright: "\x1b[1m",
+  dim: "\x1b[2m",
+  red: "\x1b[31m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  blue: "\x1b[34m",
+  cyan: "\x1b[36m",
 };
 
 type Section = {
   title: string;
   content: string;
   order: number;
-  type: 'overview' | 'learning_objectives' | 'procedures' | 'troubleshooting' | 'exam_prep' | 'references';
+  type:
+    | "overview"
+    | "learning_objectives"
+    | "procedures"
+    | "troubleshooting"
+    | "exam_prep"
+    | "references";
   estimated?: number;
   keyPoints?: string[];
 };
@@ -66,17 +72,20 @@ type CLIOptions = {
 // Generate a deterministic UUID from a string ID
 function generateDeterministicUUID(id: string): string {
   // Create a namespace UUID (using a fixed namespace for TCO modules)
-  const namespace = '6ba7b810-9dad-11d1-80b4-00c04fd430c8'; // Standard namespace UUID
-  const hash = crypto.createHash('sha256').update(namespace + id).digest('hex');
+  const namespace = "6ba7b810-9dad-11d1-80b4-00c04fd430c8"; // Standard namespace UUID
+  const hash = crypto
+    .createHash("sha256")
+    .update(namespace + id)
+    .digest("hex");
 
   // Format as UUID v4
   return [
     hash.substring(0, 8),
     hash.substring(8, 12),
-    '4' + hash.substring(13, 16), // Version 4
+    "4" + hash.substring(13, 16), // Version 4
     ((parseInt(hash.substring(16, 18), 16) & 0x3f) | 0x80).toString(16) + hash.substring(18, 20), // Variant
-    hash.substring(20, 32)
-  ].join('-');
+    hash.substring(20, 32),
+  ].join("-");
 }
 
 function printHelp(): void {
@@ -116,19 +125,19 @@ ${colors.dim}Note: Domain names are case-sensitive${colors.reset}
 function parseCliArgs(): CLIOptions {
   const { values } = parseArgs({
     options: {
-      'dry-run': {
-        type: 'boolean',
+      "dry-run": {
+        type: "boolean",
         default: false,
       },
-      'replace-domain': {
-        type: 'string',
+      "replace-domain": {
+        type: "string",
       },
-      'verbose': {
-        type: 'boolean',
+      verbose: {
+        type: "boolean",
         default: false,
       },
-      'help': {
-        type: 'boolean',
+      help: {
+        type: "boolean",
         default: false,
       },
     },
@@ -137,10 +146,10 @@ function parseCliArgs(): CLIOptions {
   });
 
   return {
-    dryRun: values['dry-run'] || false,
-    replaceDomain: values['replace-domain'],
-    verbose: values['verbose'] || false,
-    help: values['help'] || false,
+    dryRun: values["dry-run"] || false,
+    replaceDomain: values["replace-domain"],
+    verbose: values["verbose"] || false,
+    help: values["help"] || false,
   };
 }
 
@@ -168,7 +177,7 @@ function parseSections(markdown: string): Section[] {
 
   const flush = () => {
     if (current) {
-      current.content = current.content.trim() + '\n';
+      current.content = current.content.trim() + "\n";
       sections.push(current);
       current = null;
     }
@@ -176,26 +185,26 @@ function parseSections(markdown: string): Section[] {
 
   for (const raw of lines) {
     const line = raw.trimEnd();
-    if (line.startsWith('## ') || line.startsWith('# ')) {
+    if (line.startsWith("## ") || line.startsWith("# ")) {
       flush();
-      let title = line.replace(/^#{1,2}\s+/, '').trim();
+      let title = line.replace(/^#{1,2}\s+/, "").trim();
       let estimated: number | undefined = undefined;
       // Extract estimated time in heading like "(45 minutes)" or "(3 hours)"
       const m = title.match(/\(([^)]+)\)\s*$/);
       if (m) {
         const mins = parseEstimatedMinutes(m[1]);
-        if (typeof mins === 'number' && mins > 0) estimated = mins;
+        if (typeof mins === "number" && mins > 0) estimated = mins;
         // Store title without the trailing estimate parentheses
-        title = title.replace(/\s*\([^)]*\)\s*$/, '').trim();
+        title = title.replace(/\s*\([^)]*\)\s*$/, "").trim();
       }
-      current = { title, content: '', order: sections.length + 1, type: 'overview', estimated };
+      current = { title, content: "", order: sections.length + 1, type: "overview", estimated };
       continue;
     }
     if (!current) {
       // Skip text before first section header
       continue;
     }
-    current.content += raw + '\n';
+    current.content += raw + "\n";
   }
   flush();
   return sections;
@@ -204,19 +213,19 @@ function parseSections(markdown: string): Section[] {
 function formatDomain(domain: string): string {
   // Map common domain variations to standard names
   const domainMap: Record<string, string> = {
-    'asking-questions': 'Asking Questions',
-    'asking_questions': 'Asking Questions',
-    'refining-questions': 'Refining Questions & Targeting',
-    'refining_questions': 'Refining Questions & Targeting',
-    'taking-action': 'Taking Action',
-    'taking_action': 'Taking Action',
-    'navigation': 'Navigation and Basic Module Functions',
-    'navigation-and-basic-module-functions': 'Navigation and Basic Module Functions',
-    'report-generation': 'Report Generation and Data Export',
-    'report_generation': 'Report Generation and Data Export',
+    "asking-questions": "Asking Questions",
+    asking_questions: "Asking Questions",
+    "refining-questions": "Refining Questions & Targeting",
+    refining_questions: "Refining Questions & Targeting",
+    "taking-action": "Taking Action",
+    taking_action: "Taking Action",
+    navigation: "Navigation and Basic Module Functions",
+    "navigation-and-basic-module-functions": "Navigation and Basic Module Functions",
+    "report-generation": "Report Generation and Data Export",
+    report_generation: "Report Generation and Data Export",
   };
 
-  const normalized = domain.toLowerCase().replace(/[_\s]+/g, '-');
+  const normalized = domain.toLowerCase().replace(/[_\s]+/g, "-");
   return domainMap[normalized] || domain;
 }
 
@@ -235,35 +244,39 @@ async function main() {
   }
 
   if (options.replaceDomain) {
-    console.log(`${colors.cyan}🎯 Targeting domain: ${colors.bright}${options.replaceDomain}${colors.reset}`);
+    console.log(
+      `${colors.cyan}🎯 Targeting domain: ${colors.bright}${options.replaceDomain}${colors.reset}`
+    );
   }
 
   if (options.verbose) {
     console.log(`${colors.dim}📝 Verbose mode enabled${colors.reset}`);
   }
 
-  const supabaseUrl = assertEnv('NEXT_PUBLIC_SUPABASE_URL');
-  const serviceKey = assertEnv('SUPABASE_SERVICE_ROLE_KEY');
+  const supabaseUrl = assertEnv("NEXT_PUBLIC_SUPABASE_URL");
+  const serviceKey = assertEnv("SUPABASE_SERVICE_ROLE_KEY");
   const supabase = createClient(supabaseUrl, serviceKey);
 
   // Detect optional columns
   let supportsMdxId = true;
   try {
-    const test = await supabase.from('study_modules').select('mdx_id').limit(1);
+    const test = await supabase.from("study_modules").select("mdx_id").limit(1);
     if (test.error) supportsMdxId = false;
   } catch {
     supportsMdxId = false;
   }
 
-  const dir = path.join(process.cwd(), 'src', 'content', 'modules');
-  const files = fs.readdirSync(dir).filter((f) => f.endsWith('.mdx'));
+  const dir = path.join(process.cwd(), "src", "content", "modules");
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".mdx"));
 
   if (files.length === 0) {
     console.log(`${colors.red}No MDX files found under src/content/modules${colors.reset}`);
     return;
   }
 
-  console.log(`\n${colors.green}✓${colors.reset} Found ${colors.bright}${files.length}${colors.reset} MDX files.\n`);
+  console.log(
+    `\n${colors.green}✓${colors.reset} Found ${colors.bright}${files.length}${colors.reset} MDX files.\n`
+  );
 
   let processedCount = 0;
   let skippedCount = 0;
@@ -271,33 +284,37 @@ async function main() {
 
   for (const f of files) {
     const full = path.join(dir, f);
-    const raw = fs.readFileSync(full, 'utf8');
+    const raw = fs.readFileSync(full, "utf8");
     const { data: fm, content } = matter(raw);
 
-    const mdxId: string = String(fm.id || '').trim();
-    const title: string = String(fm.title || path.basename(f, '.mdx'));
-    const rawDomain: string = String(fm.domainEnum || fm.domainSlug || fm.domain || 'unknown');
+    const mdxId: string = String(fm.id || "").trim();
+    const title: string = String(fm.title || path.basename(f, ".mdx"));
+    const rawDomain: string = String(fm.domainEnum || fm.domainSlug || fm.domain || "unknown");
     const domain = formatDomain(rawDomain);
 
     // Check if we should process this module
     if (options.replaceDomain && domain !== options.replaceDomain) {
       if (options.verbose) {
-        console.log(`${colors.dim}⏭️  Skipping ${f}: domain "${domain}" doesn't match filter${colors.reset}`);
+        console.log(
+          `${colors.dim}⏭️  Skipping ${f}: domain "${domain}" doesn't match filter${colors.reset}`
+        );
       }
       skippedCount++;
       continue;
     }
 
     const description: string | null = fm.description ? String(fm.description) : null;
-    const weightRaw = typeof fm.blueprintWeight === 'number' ? fm.blueprintWeight : undefined;
+    const weightRaw = typeof fm.blueprintWeight === "number" ? fm.blueprintWeight : undefined;
     let examWeight = weightRaw && weightRaw <= 1 ? Math.round(weightRaw * 100) : weightRaw || 0;
     // Ensure exam_weight is at least 1 for database constraint
     if (examWeight === 0) examWeight = 1;
     const est = parseEstimatedMinutes(fm.estimatedTime);
     const learningObjectives: string[] = Array.isArray(fm.learningObjectives)
       ? fm.learningObjectives
-      : (Array.isArray(fm.objectives) ? fm.objectives : []);
-    const version = String(fm.version || '1');
+      : Array.isArray(fm.objectives)
+        ? fm.objectives
+        : [];
+    const version = String(fm.version || "1");
 
     if (!mdxId) {
       console.warn(`${colors.yellow}⚠️  Skipping ${f}: missing id in frontmatter${colors.reset}`);
@@ -308,15 +325,21 @@ async function main() {
     // Generate UUID from the MDX ID for database
     const id = generateDeterministicUUID(mdxId);
 
-    console.log(`\n${colors.cyan}📦 Processing module:${colors.reset} ${colors.bright}${mdxId}${colors.reset} (${title})`);
+    console.log(
+      `\n${colors.cyan}📦 Processing module:${colors.reset} ${colors.bright}${mdxId}${colors.reset} (${title})`
+    );
     console.log(`   ${colors.dim}Domain: ${domain}${colors.reset}`);
     console.log(`   ${colors.dim}UUID: ${id}${colors.reset}`);
 
     if (options.verbose) {
-      console.log(`   ${colors.dim}Description: ${description || 'None'}${colors.reset}`);
+      console.log(`   ${colors.dim}Description: ${description || "None"}${colors.reset}`);
       console.log(`   ${colors.dim}Exam Weight: ${examWeight}%${colors.reset}`);
-      console.log(`   ${colors.dim}Estimated Time: ${est ? `${est} minutes` : 'Not specified'}${colors.reset}`);
-      console.log(`   ${colors.dim}Learning Objectives: ${learningObjectives.length}${colors.reset}`);
+      console.log(
+        `   ${colors.dim}Estimated Time: ${est ? `${est} minutes` : "Not specified"}${colors.reset}`
+      );
+      console.log(
+        `   ${colors.dim}Learning Objectives: ${learningObjectives.length}${colors.reset}`
+      );
     }
 
     if (options.dryRun) {
@@ -324,8 +347,12 @@ async function main() {
 
       const sections = parseSections(content);
       if (sections.length > 0) {
-        console.log(`   ${colors.yellow}[DRY RUN] Would delete existing sections for module ${id}${colors.reset}`);
-        console.log(`   ${colors.yellow}[DRY RUN] Would insert ${sections.length} sections${colors.reset}`);
+        console.log(
+          `   ${colors.yellow}[DRY RUN] Would delete existing sections for module ${id}${colors.reset}`
+        );
+        console.log(
+          `   ${colors.yellow}[DRY RUN] Would insert ${sections.length} sections${colors.reset}`
+        );
 
         if (options.verbose) {
           sections.forEach((s, i) => {
@@ -356,9 +383,9 @@ async function main() {
       };
 
       const { data: mod, error: modErr } = await supabase
-        .from('study_modules')
-        .upsert(upsertModule, { onConflict: 'id' })
-        .select('*')
+        .from("study_modules")
+        .upsert(upsertModule, { onConflict: "id" })
+        .select("*")
         .single();
 
       if (modErr) {
@@ -371,12 +398,14 @@ async function main() {
 
       // Clear existing sections for this module id to avoid duplication
       const { error: deleteErr } = await supabase
-        .from('study_sections')
+        .from("study_sections")
         .delete()
-        .eq('module_id', id);
+        .eq("module_id", id);
 
       if (deleteErr && options.verbose) {
-        console.warn(`   ${colors.yellow}⚠️  Warning deleting sections: ${deleteErr.message}${colors.reset}`);
+        console.warn(
+          `   ${colors.yellow}⚠️  Warning deleting sections: ${deleteErr.message}${colors.reset}`
+        );
       }
 
       const sections = parseSections(content);
@@ -402,18 +431,21 @@ async function main() {
       }));
 
       const { data: inserted, error: secErr } = await supabase
-        .from('study_sections')
+        .from("study_sections")
         .insert(rows)
-        .select('id');
+        .select("id");
 
       if (secErr) {
-        console.error(`   ${colors.red}❌ Sections insert failed: ${secErr.message}${colors.reset}`);
+        console.error(
+          `   ${colors.red}❌ Sections insert failed: ${secErr.message}${colors.reset}`
+        );
         errorCount++;
       } else {
-        console.log(`   ${colors.green}✅ Inserted ${inserted?.length || 0} sections${colors.reset}`);
+        console.log(
+          `   ${colors.green}✅ Inserted ${inserted?.length || 0} sections${colors.reset}`
+        );
         processedCount++;
       }
-
     } catch (error) {
       console.error(`   ${colors.red}❌ Unexpected error: ${error}${colors.reset}`);
       errorCount++;
@@ -433,7 +465,9 @@ async function main() {
   }
 
   if (options.dryRun) {
-    console.log(`\n${colors.yellow}ℹ️  This was a dry run. To apply changes, run without --dry-run flag${colors.reset}`);
+    console.log(
+      `\n${colors.yellow}ℹ️  This was a dry run. To apply changes, run without --dry-run flag${colors.reset}`
+    );
   }
 
   console.log(`\n${colors.green}✨ Done!${colors.reset}\n`);

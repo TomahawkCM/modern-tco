@@ -17,6 +17,7 @@ The **Tanium Knowledge Base (KB)** is a separate content system from the main TC
 - **Export capability**: JSON bundles for downstream integration
 
 **Key Difference from Main Study Content**:
+
 - **Main Study Content** (`/study`): 11.6 hours, 6 comprehensive MDX modules, exam-focused
 - **KB** (`/kb`): Modular micro-lessons, reference library, draft/experimental content
 
@@ -77,13 +78,13 @@ kb_exports (
 
 ### Domain Mapping
 
-| Code | Full Name |
-|------|-----------|
-| AQ | Asking Questions |
-| RQ | Refining Questions & Targeting |
-| TA | Taking Action |
-| NB | Navigation & Module Functions |
-| RD | Reporting & Data Export |
+| Code | Full Name                      |
+| ---- | ------------------------------ |
+| AQ   | Asking Questions               |
+| RQ   | Refining Questions & Targeting |
+| TA   | Taking Action                  |
+| NB   | Navigation & Module Functions  |
+| RD   | Reporting & Data Export        |
 
 **Mapping Function**: `mapKbDomain()` in `src/lib/kb-service.ts:17-31`
 
@@ -162,13 +163,13 @@ npm run check:tables              # Validate kb_* tables exist
 
 **Lessons Created**: 5 total (all DRAFT status)
 
-| Lesson | Domain | Duration | Status | Lines |
-|--------|--------|----------|--------|-------|
-| Asking Questions Fundamentals | AQ | 25 min | Draft | 36 |
-| Navigation & Console Mastery | NB | 20 min | Draft | 36 |
-| Refining Questions & Targeting | RQ | 30 min | Draft | 36 |
-| Reporting & Analytics Workbench | RD | 25 min | Draft | 36 |
-| Taking Action Readiness | TA | 20 min | Draft | 36 |
+| Lesson                          | Domain | Duration | Status | Lines |
+| ------------------------------- | ------ | -------- | ------ | ----- |
+| Asking Questions Fundamentals   | AQ     | 25 min   | Draft  | 36    |
+| Navigation & Console Mastery    | NB     | 20 min   | Draft  | 36    |
+| Refining Questions & Targeting  | RQ     | 30 min   | Draft  | 36    |
+| Reporting & Analytics Workbench | RD     | 25 min   | Draft  | 36    |
+| Taking Action Readiness         | TA     | 20 min   | Draft  | 36    |
 
 **Total Content**: 180 lines (placeholder/template content)
 
@@ -184,11 +185,13 @@ npm run check:tables              # Validate kb_* tables exist
 **Route**: `/kb` → `src/app/kb/page.tsx`
 **Service Layer**: ✅ `src/lib/kb-service.ts` (complete)
 **Functions Available**:
+
 - `getKbModules()`: Fetch all KB modules
 - `getKbSummary()`: Get counts and domain breakdown
 - `mapKbDomain(code)`: Convert domain codes to full names
 
 **Expected Behavior**:
+
 - Cards showing module counts by domain
 - `hasKbTables: true` when schema exists
 - Non-zero metrics when data imported
@@ -245,13 +248,16 @@ contributors: []
 ---
 
 ## Overview
+
 Lesson content in markdown...
 
 ## Learning Objectives
+
 - [ ] Objective 1
 - [ ] Objective 2
 
 ## Lesson Flow
+
 1. Step 1
 2. Step 2
 ```
@@ -352,12 +358,14 @@ npm run kb:export-lessons
 **Goal**: Replace placeholder content with production-ready Tanium lessons
 
 **Approach**:
+
 1. **Reuse Main Study Content**: Extract micro-lessons from existing MDX modules
 2. **TCO Domain Alignment**: Ensure KB lessons complement certification content
 3. **5-10 Min Chunks**: Each lesson should be digestible in one sitting
 4. **Progressive Disclosure**: Link to full modules for deeper study
 
 **Priority Lessons** (based on exam blueprint):
+
 - **AQ** (22% weight): Asking Questions fundamentals ⭐ HIGH
 - **RQ** (23% weight): Targeting and computer groups ⭐ HIGH
 - **NB** (23% weight): Console navigation ⭐ HIGH
@@ -367,6 +375,7 @@ npm run kb:export-lessons
 ### Phase 4: Integration with Main App
 
 **Decisions Needed**:
+
 1. Should KB lessons render in-app (MDX) or link externally?
 2. Do we integrate KB questions into `/practice` mode?
 3. Should `/study` modules link to related KB lessons?
@@ -379,11 +388,13 @@ npm run kb:export-lessons
 ### Row-Level Security (RLS)
 
 **Current Setup** (from `APP_INTEGRATION_PLAN.md`):
+
 - ✅ Anonymous users: `SELECT` (read-only)
 - ❌ Anonymous users: `INSERT`/`UPDATE`/`DELETE` blocked
 - ✅ Service account: Full CRUD via importer scripts
 
 **Verification**:
+
 ```sql
 -- Check RLS policies
 SELECT * FROM pg_policies WHERE tablename LIKE 'kb_%';
@@ -421,6 +432,7 @@ SELECT * FROM pg_policies WHERE tablename LIKE 'kb_%';
 **Scenario**: Student studying Module 2 (Refining Questions) needs quick reminder on computer groups
 
 **Flow**:
+
 - Visit `/kb`
 - Find "Refining Questions & Targeting" module
 - Read 5-min lesson on computer group syntax
@@ -431,6 +443,7 @@ SELECT * FROM pg_policies WHERE tablename LIKE 'kb_%';
 **Scenario**: Certified analyst needs to look up specific console feature
 
 **Flow**:
+
 - Search KB for "reporting workbench"
 - Find step-by-step tutorial
 - Export as JSON for team wiki
@@ -440,6 +453,7 @@ SELECT * FROM pg_policies WHERE tablename LIKE 'kb_%';
 **Scenario**: Subject matter expert reviews draft KB content
 
 **Flow**:
+
 - Edit `docs/KB/lessons/navigation-console-mastery.md`
 - Run `npm run kb:import-lessons -- --dry-run` to preview
 - Run `npm run kb:import-lessons` to publish
@@ -449,19 +463,20 @@ SELECT * FROM pg_policies WHERE tablename LIKE 'kb_%';
 
 ## 🎓 Comparison: KB vs Main Study Content
 
-| Feature | Main Study Content | Knowledge Base (KB) |
-|---------|-------------------|---------------------|
-| **Location** | `/study`, `src/content/modules/*.mdx` | `/kb`, `docs/KB/lessons/*.md` |
-| **Purpose** | Comprehensive TCO certification prep | Quick reference, micro-lessons |
-| **Content Volume** | 11.6 hours, 16,849 lines, 6 modules | 5 lessons, 180 lines (draft) |
-| **Database** | PostgreSQL (modules, progress) | PostgreSQL (kb_modules, kb_lessons) |
-| **Assessment** | 140+ integrated questions, 200 practice | Separate kb_questions table |
-| **Status** | ✅ Production-ready | ⚠️ Draft/placeholder |
-| **Blueprint Alignment** | 100% TAN-1000 certification | Supplementary material |
-| **Interactivity** | MDX components, InfoBoxes, QuickChecks | Markdown with frontmatter |
-| **Export** | Static MDX files | JSON bundles via automation |
+| Feature                 | Main Study Content                      | Knowledge Base (KB)                 |
+| ----------------------- | --------------------------------------- | ----------------------------------- |
+| **Location**            | `/study`, `src/content/modules/*.mdx`   | `/kb`, `docs/KB/lessons/*.md`       |
+| **Purpose**             | Comprehensive TCO certification prep    | Quick reference, micro-lessons      |
+| **Content Volume**      | 11.6 hours, 16,849 lines, 6 modules     | 5 lessons, 180 lines (draft)        |
+| **Database**            | PostgreSQL (modules, progress)          | PostgreSQL (kb_modules, kb_lessons) |
+| **Assessment**          | 140+ integrated questions, 200 practice | Separate kb_questions table         |
+| **Status**              | ✅ Production-ready                     | ⚠️ Draft/placeholder                |
+| **Blueprint Alignment** | 100% TAN-1000 certification             | Supplementary material              |
+| **Interactivity**       | MDX components, InfoBoxes, QuickChecks  | Markdown with frontmatter           |
+| **Export**              | Static MDX files                        | JSON bundles via automation         |
 
 **Strategic Relationship**:
+
 - KB provides "just-in-time" micro-lessons
 - Main study content provides comprehensive certification prep
 - KB questions could augment practice mode
@@ -472,12 +487,14 @@ SELECT * FROM pg_policies WHERE tablename LIKE 'kb_%';
 ## 📊 Metrics & Analytics
 
 **Current Metrics** (from `getKbSummary()`):
+
 - `hasKbTables`: Boolean - Are KB tables created?
 - `modulesCount`: Number - Total modules imported
 - `questionsCount`: Number - Total questions in kb_questions
 - `byDomain`: Object - Module count per domain (AQ, RQ, TA, NB, RD)
 
 **Potential Analytics**:
+
 - Most-viewed KB lessons
 - Average time spent on KB pages
 - KB → Main study content conversion rate
@@ -520,6 +537,7 @@ The **Tanium Knowledge Base** is a fully-architected, partially-implemented micr
 🎯 **Next action**: Populate with production content from main study modules
 
 **Strategic Value**:
+
 - Quick reference for post-certification analysts
 - Modular content easily updated as Tanium evolves
 - JSON export enables integration with external systems

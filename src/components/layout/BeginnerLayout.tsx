@@ -15,62 +15,65 @@ interface BeginnerLayoutProps {
 export function BeginnerLayout({ children }: BeginnerLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isBeginnerMode, setIsBeginnerMode] = useState(true);
-  const [currentConfidence, setCurrentConfidence] = useState<'building' | 'growing' | 'strong' | 'expert'>('building');
+  const [currentConfidence, setCurrentConfidence] = useState<
+    "building" | "growing" | "strong" | "expert"
+  >("building");
   const [studyProgress, setStudyProgress] = useState(0);
   const [showConfidenceBuilder, setShowConfidenceBuilder] = useState(false);
 
   // Initialize beginner mode and progress from localStorage
   useEffect(() => {
-    const beginnerModeStored = localStorage.getItem('tanium-beginner-mode');
-    const confidenceStored = localStorage.getItem('tanium-confidence-level');
-    const progressStored = localStorage.getItem('tanium-study-progress');
-    
+    const beginnerModeStored = localStorage.getItem("tanium-beginner-mode");
+    const confidenceStored = localStorage.getItem("tanium-confidence-level");
+    const progressStored = localStorage.getItem("tanium-study-progress");
+
     if (beginnerModeStored !== null) {
       setIsBeginnerMode(JSON.parse(beginnerModeStored));
     }
-    
+
     if (confidenceStored) {
-      setCurrentConfidence(confidenceStored as 'building' | 'growing' | 'strong' | 'expert');
+      setCurrentConfidence(confidenceStored as "building" | "growing" | "strong" | "expert");
     }
-    
+
     if (progressStored) {
       setStudyProgress(parseInt(progressStored, 10));
     }
 
     // Show confidence builder for new beginners
-    const isFirstVisit = localStorage.getItem('tanium-first-visit') === null;
+    const isFirstVisit = localStorage.getItem("tanium-first-visit") === null;
     if (isFirstVisit) {
       setShowConfidenceBuilder(true);
-      localStorage.setItem('tanium-first-visit', 'false');
+      localStorage.setItem("tanium-first-visit", "false");
     }
   }, []);
 
   // Handle beginner mode toggle
   const handleBeginnerModeChange = (enabled: boolean) => {
     setIsBeginnerMode(enabled);
-    localStorage.setItem('tanium-beginner-mode', JSON.stringify(enabled));
+    localStorage.setItem("tanium-beginner-mode", JSON.stringify(enabled));
   };
 
   // Handle confidence boost
   const handleBoostConfidence = () => {
-    const confidenceLevels: Array<'building' | 'growing' | 'strong' | 'expert'> = 
-      ['building', 'growing', 'strong', 'expert'];
+    const confidenceLevels: Array<"building" | "growing" | "strong" | "expert"> = [
+      "building",
+      "growing",
+      "strong",
+      "expert",
+    ];
     const currentIndex = confidenceLevels.indexOf(currentConfidence);
     if (currentIndex < confidenceLevels.length - 1) {
       const newLevel = confidenceLevels[currentIndex + 1];
       setCurrentConfidence(newLevel);
-      localStorage.setItem('tanium-confidence-level', newLevel);
+      localStorage.setItem("tanium-confidence-level", newLevel);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-tanium-dark via-tanium-secondary to-tanium-primary relative">
+    <div className="from-tanium-dark via-tanium-secondary to-tanium-primary relative min-h-screen bg-gradient-to-br">
       {/* Beginner Mode Toggle - Fixed Position */}
-      <div className="fixed top-20 right-4 z-40">
-        <BeginnerModeToggle 
-          defaultEnabled={isBeginnerMode}
-          onToggle={handleBeginnerModeChange}
-        />
+      <div className="fixed right-4 top-20 z-40">
+        <BeginnerModeToggle defaultEnabled={isBeginnerMode} onToggle={handleBeginnerModeChange} />
       </div>
 
       {/* Header */}
@@ -81,7 +84,7 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
 
       {/* Confidence Builder - Only show in beginner mode */}
       {isBeginnerMode && (
-        <div className="fixed top-32 right-4 z-30 max-w-sm">
+        <div className="fixed right-4 top-32 z-30 max-w-sm">
           <ConfidenceBuilder
             currentConfidence={currentConfidence}
             studyProgress={studyProgress}
@@ -92,15 +95,13 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
       )}
 
       {/* Navigation Helper - Only show in beginner mode */}
-      {isBeginnerMode && (
-        <NavigationHelper />
-      )}
+      {isBeginnerMode && <NavigationHelper />}
 
       {/* Main content */}
       <main
         id="main-content"
         className={`min-h-[calc(100vh-4rem)] transition-all duration-300 ${
-          isBeginnerMode ? 'md:ml-64 mr-4' : 'md:ml-64'
+          isBeginnerMode ? "mr-4 md:ml-64" : "md:ml-64"
         }`}
         tabIndex={-1}
         role="main"
@@ -108,31 +109,32 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
       >
         <div className="container mx-auto px-4 py-8">
           {/* Beginner-friendly breadcrumb with extra context */}
-          <BreadcrumbNav 
-            className={`mb-6 ${isBeginnerMode ? 'bg-white/5 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/10' : ''}`}
+          <BreadcrumbNav
+            className={`mb-6 ${isBeginnerMode ? "rounded-lg border border-white/10 bg-white/5 px-4 py-2 backdrop-blur-sm" : ""}`}
           />
-          
+
           {/* Beginner Welcome Message */}
           {isBeginnerMode && studyProgress < 10 && (
-            <div className="mb-6 rounded-lg bg-gradient-to-r from-blue-500/20 to-primary/20 border border-primary/30 p-6">
+            <div className="mb-6 rounded-lg border border-primary/30 bg-gradient-to-r from-blue-500/20 to-primary/20 p-6">
               <div className="flex items-start space-x-4">
                 <div className="text-2xl">👋</div>
                 <div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
+                  <h3 className="mb-2 text-lg font-semibold text-foreground">
                     Welcome to Your Tanium Journey!
                   </h3>
-                  <p className="text-blue-100 mb-4">
-                    You're about to master one of the most powerful endpoint management platforms in the world. 
-                    Don't worry if you're completely new to Tanium - we'll guide you every step of the way.
+                  <p className="mb-4 text-blue-100">
+                    You're about to master one of the most powerful endpoint management platforms in
+                    the world. Don't worry if you're completely new to Tanium - we'll guide you
+                    every step of the way.
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    <div className="px-3 py-1 bg-white/10 rounded-full text-xs text-foreground">
+                    <div className="rounded-full bg-white/10 px-3 py-1 text-xs text-foreground">
                       🎯 No prior experience required
                     </div>
-                    <div className="px-3 py-1 bg-white/10 rounded-full text-xs text-foreground">
+                    <div className="rounded-full bg-white/10 px-3 py-1 text-xs text-foreground">
                       📚 Step-by-step learning
                     </div>
-                    <div className="px-3 py-1 bg-white/10 rounded-full text-xs text-foreground">
+                    <div className="rounded-full bg-white/10 px-3 py-1 text-xs text-foreground">
                       🏆 Certification-focused
                     </div>
                   </div>
@@ -140,7 +142,7 @@ export function BeginnerLayout({ children }: BeginnerLayoutProps) {
               </div>
             </div>
           )}
-          
+
           {children}
         </div>
       </main>

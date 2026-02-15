@@ -1,20 +1,14 @@
-'use client';
+"use client";
 
 /**
  * Online Features Panel
  * Shows "Coming Soon" cards for features available in the online version
  */
 
-import React from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import React from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   Cloud,
   CloudUpload,
@@ -25,14 +19,14 @@ import {
   Sparkles,
   ArrowRight,
   Lock,
-} from 'lucide-react';
+} from "lucide-react";
 import {
   isOnlineMode,
   getDisabledFeatures,
   FEATURE_DESCRIPTIONS,
   type FeatureName,
-} from '@/config/features';
-import { cn } from '@/lib/utils';
+} from "@/config/features";
+import { cn } from "@/lib/utils";
 
 const FEATURE_ICONS: Record<string, React.ReactNode> = {
   cloudSync: <Cloud className="h-8 w-8" />,
@@ -43,24 +37,24 @@ const FEATURE_ICONS: Record<string, React.ReactNode> = {
 
 const FEATURE_BENEFITS: Record<string, string[]> = {
   cloudSync: [
-    'Access your data from any device',
-    'Automatic sync across phones, tablets, and computers',
-    'Never lose your data if you switch devices',
+    "Access your data from any device",
+    "Automatic sync across phones, tablets, and computers",
+    "Never lose your data if you switch devices",
   ],
   familyInvites: [
-    'Share budgets with family members',
-    'Invite via email or link',
-    'Manage permissions for each member',
+    "Share budgets with family members",
+    "Invite via email or link",
+    "Manage permissions for each member",
   ],
   cloudBackup: [
-    'Automatic daily backups',
-    'Restore from any point in time',
-    'Bank-level encryption for your data',
+    "Automatic daily backups",
+    "Restore from any point in time",
+    "Bank-level encryption for your data",
   ],
   realTimeCollab: [
-    'See changes from family members instantly',
-    'Collaborative budget planning',
-    'Live activity feed',
+    "See changes from family members instantly",
+    "Collaborative budget planning",
+    "Live activity feed",
   ],
 };
 
@@ -76,19 +70,14 @@ function FeatureCard({ feature, icon, benefits }: FeatureCardProps) {
   return (
     <Card className="relative overflow-hidden">
       {/* Coming Soon Badge */}
-      <Badge
-        className="absolute top-4 right-4"
-        variant="secondary"
-      >
-        <Sparkles className="h-3 w-3 mr-1" />
+      <Badge className="absolute right-4 top-4" variant="secondary">
+        <Sparkles className="mr-1 h-3 w-3" />
         Coming Soon
       </Badge>
 
       <CardHeader className="pb-2">
         <div className="flex items-start gap-4">
-          <div className="p-3 rounded-lg bg-primary/10 text-primary">
-            {icon}
-          </div>
+          <div className="rounded-lg bg-primary/10 p-3 text-primary">{icon}</div>
           <div>
             <CardTitle className="text-lg">{info.title}</CardTitle>
             <CardDescription>{info.description}</CardDescription>
@@ -100,7 +89,7 @@ function FeatureCard({ feature, icon, benefits }: FeatureCardProps) {
         <ul className="space-y-2">
           {benefits.map((benefit, index) => (
             <li key={index} className="flex items-start gap-2 text-sm">
-              <ArrowRight className="h-4 w-4 mt-0.5 text-primary flex-shrink-0" />
+              <ArrowRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
               <span className="text-muted-foreground">{benefit}</span>
             </li>
           ))}
@@ -116,10 +105,7 @@ export function OnlineFeaturesPanel() {
   // Filter to only show online-specific features
   const onlineFeatures = disabledFeatures.filter(
     (f) =>
-      f === 'cloudSync' ||
-      f === 'familyInvites' ||
-      f === 'cloudBackup' ||
-      f === 'realTimeCollab'
+      f === "cloudSync" || f === "familyInvites" || f === "cloudBackup" || f === "realTimeCollab"
   );
 
   if (isOnlineMode()) {
@@ -129,17 +115,15 @@ export function OnlineFeaturesPanel() {
   return (
     <div className="space-y-6">
       {/* Header Card */}
-      <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+      <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
         <CardHeader>
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary text-primary-foreground">
+            <div className="rounded-lg bg-primary p-2 text-primary-foreground">
               <Cloud className="h-6 w-6" />
             </div>
             <div>
               <CardTitle>Upgrade to Online</CardTitle>
-              <CardDescription>
-                Get powerful cloud features for your family budget
-              </CardDescription>
+              <CardDescription>Get powerful cloud features for your family budget</CardDescription>
             </div>
           </div>
         </CardHeader>
@@ -159,23 +143,21 @@ export function OnlineFeaturesPanel() {
             </div>
           </div>
 
-          <div className="mt-4 p-4 rounded-lg bg-background/50 border">
+          <div className="mt-4 rounded-lg border bg-background/50 p-4">
             <div className="flex items-start gap-3">
-              <Lock className="h-5 w-5 text-muted-foreground flex-shrink-0 mt-0.5" />
+              <Lock className="mt-0.5 h-5 w-5 flex-shrink-0 text-muted-foreground" />
               <div>
-                <p className="text-sm font-medium">
-                  Your data stays private in standalone mode
-                </p>
-                <p className="text-sm text-muted-foreground mt-1">
-                  All your budget data is stored locally on your device. No
-                  account required, no data leaves your device.
+                <p className="text-sm font-medium">Your data stays private in standalone mode</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  All your budget data is stored locally on your device. No account required, no
+                  data leaves your device.
                 </p>
               </div>
             </div>
           </div>
 
-          <Button className="w-full mt-4" disabled>
-            <Sparkles className="h-4 w-4 mr-2" />
+          <Button className="mt-4 w-full" disabled>
+            <Sparkles className="mr-2 h-4 w-4" />
             Coming Soon - Join Waitlist
           </Button>
         </CardContent>
@@ -202,8 +184,8 @@ export function OnlineFeaturesPanel() {
           <div className="grid grid-cols-3 gap-4 text-sm">
             {/* Header Row */}
             <div className="font-medium">Feature</div>
-            <div className="font-medium text-center">Standalone</div>
-            <div className="font-medium text-center">Online</div>
+            <div className="text-center font-medium">Standalone</div>
+            <div className="text-center font-medium">Online</div>
 
             {/* Data Storage */}
             <div className="text-muted-foreground">Data Storage</div>

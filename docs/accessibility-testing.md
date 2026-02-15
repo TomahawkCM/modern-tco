@@ -7,10 +7,12 @@ The budget app has automated accessibility testing configured to run on every pu
 ### What Gets Tested
 
 **Tools:**
+
 - **Lighthouse CI**: Tests accessibility score (threshold: ≥95%)
 - **Pa11y**: Tests for WCAG 2.1 AA violations (threshold: 0 errors)
 
 **Routes Tested:**
+
 - `/budget-app` (Dashboard)
 - `/budget-app/transactions`
 - `/budget-app/budgets`
@@ -20,6 +22,7 @@ The budget app has automated accessibility testing configured to run on every pu
 - `/budget-app/categories`
 
 **Standards:**
+
 - WCAG 2.1 Level AA compliance
 - Color contrast ratios (4.5:1 for text, 3:1 for UI components)
 - Keyboard navigation support
@@ -30,6 +33,7 @@ The budget app has automated accessibility testing configured to run on every pu
 ### CI Workflow
 
 The workflow runs automatically when you:
+
 1. Open a pull request
 2. Push changes to an open PR
 3. Modify budget app code paths
@@ -45,6 +49,7 @@ When the workflow completes:
 3. **Artifacts**: Download full HTML reports (retained for 30 days)
 
 **Downloading Reports:**
+
 1. Go to the failed workflow run
 2. Scroll to "Artifacts" section at bottom
 3. Download `accessibility-reports.zip`
@@ -99,6 +104,7 @@ npx pa11y http://localhost:3001/budget-app --runner axe --standard WCAG2AA
 Use browser dev tools:
 
 **Chrome DevTools:**
+
 1. Open budget app page
 2. F12 → Lighthouse tab
 3. Select "Accessibility" category
@@ -106,6 +112,7 @@ Use browser dev tools:
 5. Review issues
 
 **Firefox Accessibility Inspector:**
+
 1. Open budget app page
 2. F12 → Accessibility tab
 3. Enable "Check for issues"
@@ -118,12 +125,14 @@ Use browser dev tools:
 **Issue:** Text doesn't meet 4.5:1 contrast ratio
 
 **Check:**
+
 ```bash
 # Use Chrome DevTools color picker
 # Shows contrast ratio for selected color
 ```
 
 **Fix:**
+
 ```css
 /* Bad - low contrast */
 color: #999999;
@@ -139,15 +148,22 @@ background: #ffffff; /* 5.7:1 */
 **Issue:** Images without alt attributes
 
 **Fix:**
+
 ```tsx
-{/* Bad */}
-<img src="/icon.png" />
+{
+  /* Bad */
+}
+<img src="/icon.png" />;
 
-{/* Good */}
-<img src="/icon.png" alt="Budget category icon" />
+{
+  /* Good */
+}
+<img src="/icon.png" alt="Budget category icon" />;
 
-{/* Decorative images */}
-<img src="/decoration.png" alt="" role="presentation" />
+{
+  /* Decorative images */
+}
+<img src="/decoration.png" alt="" role="presentation" />;
 ```
 
 ### Form Labels
@@ -155,6 +171,7 @@ background: #ffffff; /* 5.7:1 */
 **Issue:** Form inputs without associated labels
 
 **Fix:**
+
 ```tsx
 {/* Bad */}
 <input type="text" placeholder="Enter amount" />
@@ -172,22 +189,29 @@ background: #ffffff; /* 5.7:1 */
 **Issue:** Interactive elements not keyboard accessible
 
 **Fix:**
+
 ```tsx
-{/* Bad - div with onClick */}
-<div onClick={handleClick}>Click me</div>
+{
+  /* Bad - div with onClick */
+}
+<div onClick={handleClick}>Click me</div>;
 
-{/* Good - button element */}
-<button onClick={handleClick}>Click me</button>
+{
+  /* Good - button element */
+}
+<button onClick={handleClick}>Click me</button>;
 
-{/* Or make div accessible */}
+{
+  /* Or make div accessible */
+}
 <div
   role="button"
   tabIndex={0}
   onClick={handleClick}
-  onKeyPress={(e) => e.key === 'Enter' && handleClick()}
+  onKeyPress={(e) => e.key === "Enter" && handleClick()}
 >
   Click me
-</div>
+</div>;
 ```
 
 ### Focus Indicators
@@ -195,6 +219,7 @@ background: #ffffff; /* 5.7:1 */
 **Issue:** No visible focus indicator
 
 **Fix:**
+
 ```css
 /* Bad - removes focus outline */
 button:focus {
@@ -213,6 +238,7 @@ button:focus-visible {
 **Issue:** Skipped heading levels (h1 → h3)
 
 **Fix:**
+
 ```tsx
 {/* Bad */}
 <h1>Dashboard</h1>
@@ -241,16 +267,19 @@ Before submitting a PR:
 ## Resources
 
 ### Official Documentation
+
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [Lighthouse Accessibility Scoring](https://developer.chrome.com/docs/lighthouse/accessibility/scoring)
 - [axe-core Rules](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md)
 
 ### Tools
+
 - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 - [WAVE Browser Extension](https://wave.webaim.org/extension/)
 - [axe DevTools](https://www.deque.com/axe/devtools/)
 
 ### Testing
+
 - [NVDA Screen Reader](https://www.nvaccess.org/download/) (Windows)
 - [VoiceOver](https://support.apple.com/guide/voiceover/welcome/mac) (macOS)
 - [Keyboard Testing Guide](https://webaim.org/articles/keyboard/)
@@ -260,6 +289,7 @@ Before submitting a PR:
 ### lighthouserc.json
 
 Located in project root. Configure:
+
 - `url`: Routes to test
 - `numberOfRuns`: Runs per route (default: 3)
 - `minScore`: Passing threshold (0.95 = 95%)
@@ -267,6 +297,7 @@ Located in project root. Configure:
 ### .pa11yci.json
 
 Located in project root. Configure:
+
 - `urls`: Routes to test
 - `standard`: WCAG standard (WCAG2AA)
 - `runners`: Testing engine (axe)
@@ -280,6 +311,7 @@ Located in project root. Configure:
 **Cause:** Different browser versions or environment
 
 **Fix:**
+
 ```bash
 # Use same Chrome version as CI
 npx @lhci/cli --chrome-flags="--headless"
@@ -290,14 +322,12 @@ npx @lhci/cli --chrome-flags="--headless"
 **Cause:** React hydration not complete
 
 **Fix:** Increase wait time in `.pa11yci.json`:
+
 ```json
 {
   "defaults": {
     "wait": 5000,
-    "actions": [
-      "wait for element body to be visible",
-      "wait for 5000ms"
-    ]
+    "actions": ["wait for element body to be visible", "wait for 5000ms"]
   }
 }
 ```
@@ -307,6 +337,7 @@ npx @lhci/cli --chrome-flags="--headless"
 **Cause:** Third-party code (PostHog, analytics)
 
 **Fix:** Hide elements in `.pa11yci.json`:
+
 ```json
 {
   "defaults": {
@@ -318,6 +349,7 @@ npx @lhci/cli --chrome-flags="--headless"
 ## Support
 
 If you have questions about accessibility testing:
+
 1. Check this documentation
 2. Review failed test artifacts
 3. Consult WCAG 2.1 guidelines

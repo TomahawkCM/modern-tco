@@ -1,37 +1,37 @@
-'use client';
+"use client";
 
 import { Section } from "@/components/budget/landing/Section";
 import { Sparkles, Keyboard, Smartphone, Download } from "lucide-react";
 import { LandingCard } from "@/components/budget/landing/LandingCard";
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
 export function SocialProofSection() {
-  const t = useTranslations('landing.socialProof');
+  const t = useTranslations("landing.socialProof");
 
   const features = [
     {
-      key: 'onboarding',
+      key: "onboarding",
       icon: Sparkles,
-      title: t('features.onboarding.title'),
-      description: t('features.onboarding.description'),
+      title: t("features.onboarding.title"),
+      description: t("features.onboarding.description"),
     },
     {
-      key: 'shortcuts',
+      key: "shortcuts",
       icon: Keyboard,
-      title: t('features.shortcuts.title'),
-      description: t('features.shortcuts.description'),
+      title: t("features.shortcuts.title"),
+      description: t("features.shortcuts.description"),
     },
     {
-      key: 'mobileUx',
+      key: "mobileUx",
       icon: Smartphone,
-      title: t('features.mobileUx.title'),
-      description: t('features.mobileUx.description'),
+      title: t("features.mobileUx.title"),
+      description: t("features.mobileUx.description"),
     },
     {
-      key: 'pwaInstall',
+      key: "pwaInstall",
       icon: Download,
-      title: t('features.pwaInstall.title'),
-      description: t('features.pwaInstall.description'),
+      title: t("features.pwaInstall.title"),
+      description: t("features.pwaInstall.description"),
     },
   ];
 
@@ -41,11 +41,9 @@ export function SocialProofSection() {
         <div className="grid gap-10 lg:grid-cols-3 lg:items-start">
           <div className="lg:col-span-1">
             <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              {t('title')}
+              {t("title")}
             </h2>
-            <p className="mt-3 text-base text-slate-400">
-              {t('description')}
-            </p>
+            <p className="mt-3 text-base text-slate-400">{t("description")}</p>
           </div>
 
           <div className="lg:col-span-2">
@@ -68,5 +66,3 @@ export function SocialProofSection() {
     </Section>
   );
 }
-
-

@@ -14,8 +14,8 @@
  * - bank_formats table: CSV column mapping learning
  */
 
-import { supabase, supabaseAdmin } from '@/lib/supabase';
-import type { ParsedTransaction } from '@/types/budget';
+import { supabase, supabaseAdmin } from "@/lib/supabase";
+import type { ParsedTransaction } from "@/types/budget";
 
 // ============================================================================
 // Types
@@ -29,14 +29,14 @@ export interface MerchantLearningData {
   businessType?: string;
   isSubscription?: boolean;
   confidence: number;
-  source: 'openai' | 'user' | 'rule' | 'mixed';
+  source: "openai" | "user" | "rule" | "mixed";
   explanation?: string;
 }
 
 export interface CategoryPattern {
   id?: string;
   descriptionPattern: string;
-  patternType: 'contains' | 'starts_with' | 'ends_with' | 'regex';
+  patternType: "contains" | "starts_with" | "ends_with" | "regex";
   category: string;
   subcategory?: string;
   confidence: number;
@@ -52,7 +52,7 @@ export interface BankFormat {
   columnMappings: Record<string, string>; // e.g., {"date": "Transaction Date", "amount": "Amount"}
   dateFormat?: string;
   hasHeaderRow: boolean;
-  amountFormat: 'single' | 'debit_credit' | 'signed';
+  amountFormat: "single" | "debit_credit" | "signed";
   confidence: number;
   successfulImports: number;
   failedImports: number;
@@ -76,14 +76,14 @@ export function generateMerchantToken(description: string): string {
   let cleaned = description.toUpperCase().trim();
 
   // Remove common transaction IDs and account numbers
-  cleaned = cleaned.replace(/\b\d{4,}\b/g, ''); // 4+ digit numbers
-  cleaned = cleaned.replace(/[#*]\s*\d+/g, ''); // # or * followed by numbers
-  cleaned = cleaned.replace(/\bacct?\s*\d+/gi, ''); // Account numbers
-  cleaned = cleaned.replace(/\bref\s*\d+/gi, ''); // Reference numbers
-  cleaned = cleaned.replace(/\bid\s*\d+/gi, ''); // ID numbers
+  cleaned = cleaned.replace(/\b\d{4,}\b/g, ""); // 4+ digit numbers
+  cleaned = cleaned.replace(/[#*]\s*\d+/g, ""); // # or * followed by numbers
+  cleaned = cleaned.replace(/\bacct?\s*\d+/gi, ""); // Account numbers
+  cleaned = cleaned.replace(/\bref\s*\d+/gi, ""); // Reference numbers
+  cleaned = cleaned.replace(/\bid\s*\d+/gi, ""); // ID numbers
 
   // Remove extra whitespace
-  cleaned = cleaned.replace(/\s+/g, ' ').trim();
+  cleaned = cleaned.replace(/\s+/g, " ").trim();
 
   // Take first 50 characters (prevent extremely long tokens)
   return cleaned.substring(0, 50);
@@ -104,17 +104,15 @@ export function hashUserId(userId: string): string {
 /**
  * Look up merchant classification from global database
  */
-export async function lookupMerchant(
-  description: string
-): Promise<MerchantLearningData | null> {
+export async function lookupMerchant(description: string): Promise<MerchantLearningData | null> {
   try {
     const merchantToken = generateMerchantToken(description);
 
     const { data, error } = await (supabase as any)
-      .from('merchants')
-      .select('*')
-      .eq('merchant_token', merchantToken)
-      .gte('confidence', 0.7) // Only use high-confidence merchants
+      .from("merchants")
+      .select("*")
+      .eq("merchant_token", merchantToken)
+      .gte("confidence", 0.7) // Only use high-confidence merchants
       .single();
 
     if (error || !data) {
@@ -133,7 +131,7 @@ export async function lookupMerchant(
       explanation: data.explanation,
     };
   } catch (error) {
-    console.error('[CollectiveLearning] Error looking up merchant:', error);
+    console.error("[CollectiveLearning] Error looking up merchant:", error);
     return null;
   }
 }
@@ -144,10 +142,10 @@ export async function lookupMerchant(
 export async function saveMerchant(data: MerchantLearningData): Promise<boolean> {
   try {
     if (!supabaseAdmin) {
-      console.warn('[CollectiveLearning] Service role not configured, skipping merchant save');
+      console.warn("[CollectiveLearning] Service role not configured, skipping merchant save");
       return false;
     }
-    const { error } = await (supabaseAdmin as any).from('merchants').upsert(
+    const { error } = await (supabaseAdmin as any).from("merchants").upsert(
       {
         merchant_token: data.merchantToken,
         canonical_name: data.canonicalName,
@@ -161,19 +159,19 @@ export async function saveMerchant(data: MerchantLearningData): Promise<boolean>
         last_seen_at: new Date().toISOString(),
       },
       {
-        onConflict: 'merchant_token',
+        onConflict: "merchant_token",
         ignoreDuplicates: false,
       }
     );
 
     if (error) {
-      console.error('[CollectiveLearning] Error saving merchant:', error);
+      console.error("[CollectiveLearning] Error saving merchant:", error);
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error('[CollectiveLearning] Error saving merchant:', error);
+    console.error("[CollectiveLearning] Error saving merchant:", error);
     return false;
   }
 }
@@ -192,13 +190,13 @@ export async function recordMerchantFeedback(
 ): Promise<boolean> {
   try {
     if (!supabaseAdmin) {
-      console.warn('[CollectiveLearning] Service role not configured, skipping feedback');
+      console.warn("[CollectiveLearning] Service role not configured, skipping feedback");
       return false;
     }
     const userKey = hashUserId(userId);
 
     // Insert feedback
-    const { error: feedbackError } = await (supabaseAdmin as any).from('merchant_feedback').insert({
+    const { error: feedbackError } = await (supabaseAdmin as any).from("merchant_feedback").insert({
       merchant_id: merchantId,
       user_or_tenant_key: userKey,
       chosen_category: chosenCategory,
@@ -209,25 +207,28 @@ export async function recordMerchantFeedback(
     });
 
     if (feedbackError) {
-      console.error('[CollectiveLearning] Error recording feedback:', feedbackError);
+      console.error("[CollectiveLearning] Error recording feedback:", feedbackError);
       return false;
     }
 
     // Update merchant counters
-    const { error: counterError } = await (supabaseAdmin as any).rpc('increment_merchant_counters', {
-      p_merchant_id: merchantId,
-      p_increment_classification: true,
-      p_increment_agreement: accepted,
-      p_increment_correction: !accepted,
-    });
+    const { error: counterError } = await (supabaseAdmin as any).rpc(
+      "increment_merchant_counters",
+      {
+        p_merchant_id: merchantId,
+        p_increment_classification: true,
+        p_increment_agreement: accepted,
+        p_increment_correction: !accepted,
+      }
+    );
 
     if (counterError) {
-      console.error('[CollectiveLearning] Error updating counters:', counterError);
+      console.error("[CollectiveLearning] Error updating counters:", counterError);
     }
 
     return true;
   } catch (error) {
-    console.error('[CollectiveLearning] Error recording merchant feedback:', error);
+    console.error("[CollectiveLearning] Error recording merchant feedback:", error);
     return false;
   }
 }
@@ -245,10 +246,10 @@ export async function lookupCategoryPattern(
   try {
     // Try exact pattern match first
     const { data, error } = await (supabase as any)
-      .from('category_patterns')
-      .select('*')
-      .gte('confidence', 0.7) // Only high-confidence patterns
-      .order('confidence', { ascending: false })
+      .from("category_patterns")
+      .select("*")
+      .gte("confidence", 0.7) // Only high-confidence patterns
+      .order("confidence", { ascending: false })
       .limit(10);
 
     if (error || !data || data.length === 0) {
@@ -270,7 +271,7 @@ export async function lookupCategoryPattern(
 
     return null;
   } catch (error) {
-    console.error('[CollectiveLearning] Error looking up category pattern:', error);
+    console.error("[CollectiveLearning] Error looking up category pattern:", error);
     return null;
   }
 }
@@ -278,23 +279,19 @@ export async function lookupCategoryPattern(
 /**
  * Match description against pattern
  */
-function matchPattern(
-  description: string,
-  pattern: string,
-  patternType: string
-): boolean {
+function matchPattern(description: string, pattern: string, patternType: string): boolean {
   const cleanPattern = pattern.toUpperCase().trim();
 
   switch (patternType) {
-    case 'starts_with':
-      return description.startsWith(cleanPattern.replace('%', ''));
-    case 'ends_with':
-      return description.endsWith(cleanPattern.replace('%', ''));
-    case 'contains':
-      return description.includes(cleanPattern.replace(/%/g, ''));
-    case 'regex':
+    case "starts_with":
+      return description.startsWith(cleanPattern.replace("%", ""));
+    case "ends_with":
+      return description.endsWith(cleanPattern.replace("%", ""));
+    case "contains":
+      return description.includes(cleanPattern.replace(/%/g, ""));
+    case "regex":
       try {
-        return new RegExp(pattern, 'i').test(description);
+        return new RegExp(pattern, "i").test(description);
       } catch {
         return false;
       }
@@ -309,10 +306,10 @@ function matchPattern(
 export async function saveCategoryPattern(pattern: CategoryPattern): Promise<boolean> {
   try {
     if (!supabaseAdmin) {
-      console.warn('[CollectiveLearning] Service role not configured, skipping pattern save');
+      console.warn("[CollectiveLearning] Service role not configured, skipping pattern save");
       return false;
     }
-    const { error } = await (supabaseAdmin as any).from('category_patterns').upsert(
+    const { error } = await (supabaseAdmin as any).from("category_patterns").upsert(
       {
         id: pattern.id,
         description_pattern: pattern.descriptionPattern,
@@ -326,18 +323,18 @@ export async function saveCategoryPattern(pattern: CategoryPattern): Promise<boo
         last_seen: new Date().toISOString(),
       },
       {
-        onConflict: pattern.id ? 'id' : undefined,
+        onConflict: pattern.id ? "id" : undefined,
       }
     );
 
     if (error) {
-      console.error('[CollectiveLearning] Error saving category pattern:', error);
+      console.error("[CollectiveLearning] Error saving category pattern:", error);
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error('[CollectiveLearning] Error saving category pattern:', error);
+    console.error("[CollectiveLearning] Error saving category pattern:", error);
     return false;
   }
 }
@@ -351,22 +348,22 @@ export async function recordCategoryFeedback(
 ): Promise<boolean> {
   try {
     if (!supabaseAdmin) {
-      console.warn('[CollectiveLearning] Service role not configured, skipping feedback');
+      console.warn("[CollectiveLearning] Service role not configured, skipping feedback");
       return false;
     }
-    const { error } = await (supabaseAdmin as any).rpc('update_category_pattern_feedback', {
+    const { error } = await (supabaseAdmin as any).rpc("update_category_pattern_feedback", {
       p_pattern_id: patternId,
       p_accepted: accepted,
     });
 
     if (error) {
-      console.error('[CollectiveLearning] Error recording category feedback:', error);
+      console.error("[CollectiveLearning] Error recording category feedback:", error);
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error('[CollectiveLearning] Error recording category feedback:', error);
+    console.error("[CollectiveLearning] Error recording category feedback:", error);
     return false;
   }
 }
@@ -378,18 +375,16 @@ export async function recordCategoryFeedback(
 /**
  * Look up bank format by name or slug
  */
-export async function lookupBankFormat(
-  bankNameOrSlug: string
-): Promise<BankFormat | null> {
+export async function lookupBankFormat(bankNameOrSlug: string): Promise<BankFormat | null> {
   try {
-    const slug = bankNameOrSlug.toLowerCase().replace(/\s+/g, '-');
+    const slug = bankNameOrSlug.toLowerCase().replace(/\s+/g, "-");
 
     const { data, error } = await (supabase as any)
-      .from('bank_formats')
-      .select('*')
+      .from("bank_formats")
+      .select("*")
       .or(`bank_slug.eq.${slug},bank_name.ilike.%${bankNameOrSlug}%`)
-      .gte('confidence', 0.7)
-      .order('confidence', { ascending: false })
+      .gte("confidence", 0.7)
+      .order("confidence", { ascending: false })
       .limit(1)
       .single();
 
@@ -410,7 +405,7 @@ export async function lookupBankFormat(
       failedImports: data.failed_imports,
     };
   } catch (error) {
-    console.error('[CollectiveLearning] Error looking up bank format:', error);
+    console.error("[CollectiveLearning] Error looking up bank format:", error);
     return null;
   }
 }
@@ -421,10 +416,10 @@ export async function lookupBankFormat(
 export async function saveBankFormat(format: BankFormat): Promise<boolean> {
   try {
     if (!supabaseAdmin) {
-      console.warn('[CollectiveLearning] Service role not configured, skipping format save');
+      console.warn("[CollectiveLearning] Service role not configured, skipping format save");
       return false;
     }
-    const { error } = await (supabaseAdmin as any).from('bank_formats').upsert(
+    const { error } = await (supabaseAdmin as any).from("bank_formats").upsert(
       {
         id: format.id,
         bank_name: format.bankName,
@@ -438,19 +433,19 @@ export async function saveBankFormat(format: BankFormat): Promise<boolean> {
         failed_imports: format.failedImports,
       },
       {
-        onConflict: 'bank_slug',
+        onConflict: "bank_slug",
         ignoreDuplicates: false,
       }
     );
 
     if (error) {
-      console.error('[CollectiveLearning] Error saving bank format:', error);
+      console.error("[CollectiveLearning] Error saving bank format:", error);
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error('[CollectiveLearning] Error saving bank format:', error);
+    console.error("[CollectiveLearning] Error saving bank format:", error);
     return false;
   }
 }
@@ -458,28 +453,25 @@ export async function saveBankFormat(format: BankFormat): Promise<boolean> {
 /**
  * Record import result for bank format
  */
-export async function recordBankFormatResult(
-  bankSlug: string,
-  success: boolean
-): Promise<boolean> {
+export async function recordBankFormatResult(bankSlug: string, success: boolean): Promise<boolean> {
   try {
     if (!supabaseAdmin) {
-      console.warn('[CollectiveLearning] Service role not configured, skipping result recording');
+      console.warn("[CollectiveLearning] Service role not configured, skipping result recording");
       return false;
     }
-    const { error } = await (supabaseAdmin as any).rpc('update_bank_format_result', {
+    const { error } = await (supabaseAdmin as any).rpc("update_bank_format_result", {
       p_bank_slug: bankSlug,
       p_success: success,
     });
 
     if (error) {
-      console.error('[CollectiveLearning] Error recording bank format result:', error);
+      console.error("[CollectiveLearning] Error recording bank format result:", error);
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error('[CollectiveLearning] Error recording bank format result:', error);
+    console.error("[CollectiveLearning] Error recording bank format result:", error);
     return false;
   }
 }
@@ -499,7 +491,7 @@ export async function learnFromImport(
   columnMappings?: Record<string, string>
 ): Promise<void> {
   try {
-    console.log('[CollectiveLearning] Learning from', transactions.length, 'transactions');
+    console.log("[CollectiveLearning] Learning from", transactions.length, "transactions");
 
     // Learn merchant patterns
     const merchantTokens = new Set<string>();
@@ -519,7 +511,7 @@ export async function learnFromImport(
             subcategory: (tx as any).suggestedSubcategory,
             isSubscription: (tx as any).isLikelyRecurring,
             confidence: (tx as any).categoryConfidence || 0.5,
-            source: 'openai',
+            source: "openai",
           });
         }
       }
@@ -538,7 +530,7 @@ export async function learnFromImport(
           bankSlug,
           columnMappings,
           hasHeaderRow: true,
-          amountFormat: 'single',
+          amountFormat: "single",
           confidence: 0.8,
           successfulImports: 1,
           failedImports: 0,
@@ -546,8 +538,8 @@ export async function learnFromImport(
       }
     }
 
-    console.log('[CollectiveLearning] Learning complete');
+    console.log("[CollectiveLearning] Learning complete");
   } catch (error) {
-    console.error('[CollectiveLearning] Error learning from import:', error);
+    console.error("[CollectiveLearning] Error learning from import:", error);
   }
 }

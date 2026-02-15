@@ -3,33 +3,33 @@
  * Verifies database tables, service layer, and learning functionality
  */
 
-import { createClient } from '@supabase/supabase-js';
-import * as dotenv from 'dotenv';
-import * as path from 'path';
+import { createClient } from "@supabase/supabase-js";
+import * as dotenv from "dotenv";
+import * as path from "path";
 
 // Load environment variables
-dotenv.config({ path: path.join(process.cwd(), '.env.local') });
+dotenv.config({ path: path.join(process.cwd(), ".env.local") });
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
-  console.error('❌ Missing Supabase credentials');
+  console.error("❌ Missing Supabase credentials");
   process.exit(1);
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function testDatabaseTables() {
-  console.log('\n🔍 Testing Database Tables...\n');
+  console.log("\n🔍 Testing Database Tables...\n");
 
-  const tables = ['category_patterns', 'bank_formats', 'merchants', 'merchant_feedback'];
+  const tables = ["category_patterns", "bank_formats", "merchants", "merchant_feedback"];
 
   for (const tableName of tables) {
     try {
       const { data, error, count } = await (supabase as any)
         .from(tableName)
-        .select('*', { count: 'exact', head: true });
+        .select("*", { count: "exact", head: true });
 
       if (error) {
         console.log(`❌ ${tableName}: ERROR - ${error.message}`);
@@ -43,24 +43,24 @@ async function testDatabaseTables() {
 }
 
 async function testCategoryPatterns() {
-  console.log('\n🧪 Testing Category Patterns...\n');
+  console.log("\n🧪 Testing Category Patterns...\n");
 
   try {
     // Insert test pattern
     const testPattern = {
-      description_pattern: 'STARBUCKS%',
-      pattern_type: 'starts_with',
-      category: 'Food & Dining',
-      subcategory: 'Coffee Shops',
+      description_pattern: "STARBUCKS%",
+      pattern_type: "starts_with",
+      category: "Food & Dining",
+      subcategory: "Coffee Shops",
       confidence: 0.95,
       usage_count: 10,
       success_count: 9,
       rejection_count: 1,
-      source: 'test',
+      source: "test",
     };
 
     const { data: insertData, error: insertError } = await (supabase as any)
-      .from('category_patterns')
+      .from("category_patterns")
       .insert(testPattern)
       .select();
 
@@ -73,10 +73,10 @@ async function testCategoryPatterns() {
 
     // Retrieve pattern
     const { data: retrieveData, error: retrieveError } = await (supabase as any)
-      .from('category_patterns')
-      .select('*')
-      .eq('description_pattern', 'STARBUCKS%')
-      .gte('confidence', 0.7)
+      .from("category_patterns")
+      .select("*")
+      .eq("description_pattern", "STARBUCKS%")
+      .gte("confidence", 0.7)
       .single();
 
     if (retrieveError) {
@@ -91,10 +91,7 @@ async function testCategoryPatterns() {
     });
 
     // Clean up
-    await (supabase as any)
-      .from('category_patterns')
-      .delete()
-      .eq('source', 'test');
+    await (supabase as any).from("category_patterns").delete().eq("source", "test");
 
     console.log(`✅ Cleaned up test data`);
   } catch (err) {
@@ -103,28 +100,28 @@ async function testCategoryPatterns() {
 }
 
 async function testBankFormats() {
-  console.log('\n🏦 Testing Bank Formats...\n');
+  console.log("\n🏦 Testing Bank Formats...\n");
 
   try {
     // Insert test format
     const testFormat = {
-      bank_name: 'Test Bank',
-      bank_slug: 'test-bank-' + Date.now(),
+      bank_name: "Test Bank",
+      bank_slug: "test-bank-" + Date.now(),
       column_mappings: {
-        date: 'Transaction Date',
-        description: 'Description',
-        amount: 'Amount',
+        date: "Transaction Date",
+        description: "Description",
+        amount: "Amount",
       },
-      date_format: 'MM/DD/YYYY',
+      date_format: "MM/DD/YYYY",
       has_header_row: true,
-      amount_format: 'single',
+      amount_format: "single",
       confidence: 0.85,
       successful_imports: 5,
       failed_imports: 0,
     };
 
     const { data: insertData, error: insertError } = await (supabase as any)
-      .from('bank_formats')
+      .from("bank_formats")
       .insert(testFormat)
       .select();
 
@@ -137,9 +134,9 @@ async function testBankFormats() {
 
     // Retrieve format
     const { data: retrieveData, error: retrieveError } = await (supabase as any)
-      .from('bank_formats')
-      .select('*')
-      .eq('bank_slug', testFormat.bank_slug)
+      .from("bank_formats")
+      .select("*")
+      .eq("bank_slug", testFormat.bank_slug)
       .single();
 
     if (retrieveError) {
@@ -154,10 +151,7 @@ async function testBankFormats() {
     });
 
     // Clean up
-    await (supabase as any)
-      .from('bank_formats')
-      .delete()
-      .eq('bank_slug', testFormat.bank_slug);
+    await (supabase as any).from("bank_formats").delete().eq("bank_slug", testFormat.bank_slug);
 
     console.log(`✅ Cleaned up test data`);
   } catch (err) {
@@ -166,22 +160,22 @@ async function testBankFormats() {
 }
 
 async function testHelperFunctions() {
-  console.log('\n⚙️  Testing Helper Functions...\n');
+  console.log("\n⚙️  Testing Helper Functions...\n");
 
   try {
     // Insert a test pattern
     const { data: patternData, error: patternError } = await (supabase as any)
-      .from('category_patterns')
+      .from("category_patterns")
       .insert({
-        description_pattern: 'NETFLIX%',
-        pattern_type: 'starts_with',
-        category: 'Entertainment',
-        subcategory: 'Streaming',
+        description_pattern: "NETFLIX%",
+        pattern_type: "starts_with",
+        category: "Entertainment",
+        subcategory: "Streaming",
         confidence: 0.5,
         usage_count: 0,
         success_count: 0,
         rejection_count: 0,
-        source: 'test',
+        source: "test",
       })
       .select()
       .single();
@@ -194,13 +188,10 @@ async function testHelperFunctions() {
     console.log(`✅ Created test pattern: ${patternData.id}`);
 
     // Test update_category_pattern_feedback function
-    const { error: rpcError } = await (supabase as any).rpc(
-      'update_category_pattern_feedback',
-      {
-        p_pattern_id: patternData.id,
-        p_accepted: true,
-      }
-    );
+    const { error: rpcError } = await (supabase as any).rpc("update_category_pattern_feedback", {
+      p_pattern_id: patternData.id,
+      p_accepted: true,
+    });
 
     if (rpcError) {
       console.log(`❌ RPC function: ${rpcError.message}`);
@@ -211,9 +202,9 @@ async function testHelperFunctions() {
 
     // Verify the update
     const { data: updatedData, error: verifyError } = await (supabase as any)
-      .from('category_patterns')
-      .select('*')
-      .eq('id', patternData.id)
+      .from("category_patterns")
+      .select("*")
+      .eq("id", patternData.id)
       .single();
 
     if (verifyError) {
@@ -228,10 +219,7 @@ async function testHelperFunctions() {
     });
 
     // Clean up
-    await (supabase as any)
-      .from('category_patterns')
-      .delete()
-      .eq('source', 'test');
+    await (supabase as any).from("category_patterns").delete().eq("source", "test");
 
     console.log(`✅ Cleaned up test data`);
   } catch (err) {
@@ -240,18 +228,18 @@ async function testHelperFunctions() {
 }
 
 async function runTests() {
-  console.log('═══════════════════════════════════════════════════════');
-  console.log('🧪 Collective Learning System - Integration Tests');
-  console.log('═══════════════════════════════════════════════════════');
+  console.log("═══════════════════════════════════════════════════════");
+  console.log("🧪 Collective Learning System - Integration Tests");
+  console.log("═══════════════════════════════════════════════════════");
 
   await testDatabaseTables();
   await testCategoryPatterns();
   await testBankFormats();
   await testHelperFunctions();
 
-  console.log('\n═══════════════════════════════════════════════════════');
-  console.log('✅ All Tests Complete!');
-  console.log('═══════════════════════════════════════════════════════\n');
+  console.log("\n═══════════════════════════════════════════════════════");
+  console.log("✅ All Tests Complete!");
+  console.log("═══════════════════════════════════════════════════════\n");
 }
 
 runTests().catch(console.error);

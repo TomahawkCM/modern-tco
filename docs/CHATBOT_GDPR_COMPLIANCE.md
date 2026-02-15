@@ -27,6 +27,7 @@ The Budget App chatbot is an AI-powered assistant that helps users manage their 
 ### Legal Basis for Processing
 
 **Consent (GDPR Article 6(1)(a))**:
+
 - Users must explicitly opt-in before chatbot activation
 - Consent is freely given, specific, informed, and unambiguous
 - Users can withdraw consent anytime via Settings → Privacy
@@ -41,12 +42,14 @@ The Budget App chatbot is an AI-powered assistant that helps users manage their 
 ### 1. Lawfulness, Fairness, and Transparency (Article 5(1)(a))
 
 **Implementation**:
+
 - ✅ **Explicit opt-in required**: Chatbot disabled by default, requires user consent
 - ✅ **Clear disclosure**: Opt-in dialog explains what data is sent to OpenAI
 - ✅ **Transparent privacy policy**: Users informed about data processing before consent
 - ✅ **Easy-to-understand language**: No legal jargon in user-facing text
 
 **Evidence**:
+
 - `ChatbotOptInDialog.tsx`: First-time opt-in dialog with clear explanations
 - `settings-privacy-panel.tsx`: Privacy controls section with detailed descriptions
 - `budget-privacy-settings.ts`: Default `enableChatbot: false` (opt-in required)
@@ -54,27 +57,31 @@ The Budget App chatbot is an AI-powered assistant that helps users manage their 
 ### 2. Purpose Limitation (Article 5(1)(b))
 
 **Implementation**:
+
 - ✅ **Specific purpose**: Data only used to answer user questions about their finances
 - ✅ **No secondary use**: Conversations not used for marketing, training, or other purposes
 - ✅ **OpenAI policy**: OpenAI does not use API data to train models (per their policy)
 
 **Purpose Statement**:
+
 > "AI-powered assistant that can answer questions about your transactions, budgets, and spending patterns."
 
 ### 3. Data Minimization (Article 5(1)(c))
 
 **Implementation**:
+
 - ✅ **Only necessary data sent**: Only relevant transactions/budgets sent to answer specific queries
 - ✅ **Context-aware queries**: Chatbot context limited to last N messages (not entire history)
 - ✅ **Configurable access**: Users choose between "read-only" (view only) vs "full-access" (actions)
 - ✅ **No excessive data**: Account numbers, bank names, addresses NOT sent to API
 
 **Data Minimization Strategy**:
+
 ```typescript
 // Example: Only send relevant transaction data for query
 const relevantData = transactions
-  .filter(tx => isRelevantToQuery(tx, userQuery))
-  .map(tx => ({
+  .filter((tx) => isRelevantToQuery(tx, userQuery))
+  .map((tx) => ({
     date: tx.date,
     category: tx.category,
     amount: tx.amount, // Necessary to answer spending questions
@@ -85,6 +92,7 @@ const relevantData = transactions
 ### 4. Accuracy (Article 5(1)(d))
 
 **Implementation**:
+
 - ✅ **Source data accuracy**: Chatbot reads directly from user's IndexedDB (accurate source)
 - ✅ **Real-time data**: Always uses latest transaction/budget data
 - ✅ **User corrections**: Users can correct AI responses via feedback
@@ -92,6 +100,7 @@ const relevantData = transactions
 ### 5. Storage Limitation (Article 5(1)(e))
 
 **Implementation**:
+
 - ✅ **Configurable retention**: Users choose conversation retention (7 days, 30 days, or forever)
 - ✅ **Default: 7 days**: Shortest retention period as default (privacy-first)
 - ✅ **Automatic deletion**: Conversations older than retention period auto-deleted
@@ -100,13 +109,14 @@ const relevantData = transactions
 **Retention Policy**:
 | Retention Option | GDPR Compliance | Default |
 |------------------|-----------------|---------|
-| 7 days           | ✅ Minimal       | ✅ Yes   |
-| 30 days          | ✅ Reasonable    | No      |
-| Forever          | ✅ User Choice   | No      |
+| 7 days | ✅ Minimal | ✅ Yes |
+| 30 days | ✅ Reasonable | No |
+| Forever | ✅ User Choice | No |
 
 ### 6. Integrity and Confidentiality (Article 5(1)(f))
 
 **Implementation**:
+
 - ✅ **HTTPS encryption**: All API requests to OpenAI encrypted in transit (TLS 1.3)
 - ✅ **Local encryption**: Conversations stored in IndexedDB with optional AES-GCM encryption
 - ✅ **API key security**: OpenAI API key stored in environment variables (not in client code)
@@ -115,6 +125,7 @@ const relevantData = transactions
 ### 7. Accountability (Article 5(2))
 
 **Implementation**:
+
 - ✅ **Privacy by design**: Chatbot disabled by default, opt-in required
 - ✅ **Privacy by default**: Most restrictive settings as default (read-only, 7 days)
 - ✅ **Audit trail**: Privacy settings changes logged with timestamps
@@ -127,12 +138,14 @@ const relevantData = transactions
 ### What Data is Processed?
 
 **Sent to OpenAI API**:
+
 1. **User query** (e.g., "How much did I spend on groceries this month?")
 2. **Relevant transactions** (date, category, amount, description)
 3. **Relevant budgets** (name, amount, period, category)
 4. **Conversation history** (last N messages for context)
 
 **NOT Sent to OpenAI API**:
+
 - ❌ Account numbers
 - ❌ Bank names
 - ❌ User's real name/email (unless user explicitly includes in query)
@@ -152,6 +165,7 @@ User ← Budget App (Client) ← Response + Store in IndexedDB (Local)
 ### Third-Party Processor: OpenAI
 
 **OpenAI Data Processing Agreement**:
+
 - OpenAI acts as a **data processor** (not controller)
 - Budget App is the **data controller**
 - OpenAI processes data per API Terms of Service
@@ -159,12 +173,14 @@ User ← Budget App (Client) ← Response + Store in IndexedDB (Local)
 - OpenAI may retain data for 30 days for abuse/misuse monitoring only
 
 **GDPR Article 28 Requirements**:
+
 - ✅ Written contract (OpenAI API Terms of Service)
 - ✅ Data security measures (OpenAI SOC 2 Type II certified)
 - ✅ Sub-processor disclosure (OpenAI's infrastructure providers)
 - ✅ Data subject rights support (OpenAI supports deletion requests)
 
 **OpenAI Privacy Resources**:
+
 - Privacy Policy: https://openai.com/privacy
 - API Data Usage: https://openai.com/policies/api-data-usage-policies
 - Security: https://openai.com/security
@@ -176,11 +192,13 @@ User ← Budget App (Client) ← Response + Store in IndexedDB (Local)
 ### 1. Right to Access (Article 15)
 
 **Implementation**:
+
 - ✅ Users can view all chatbot conversations in app
 - ✅ Conversations stored locally (IndexedDB) - accessible via browser DevTools
 - ✅ Export feature includes conversation history (Settings → Data Management → Export All Data)
 
 **How to Exercise**:
+
 1. Go to Settings → Privacy & AI Controls
 2. View chatbot settings and conversation retention
 3. Or: Settings → Data Management → Export All Data (includes conversations)
@@ -188,28 +206,33 @@ User ← Budget App (Client) ← Response + Store in IndexedDB (Local)
 ### 2. Right to Rectification (Article 16)
 
 **Implementation**:
+
 - ✅ Users can edit source data (transactions, budgets) directly in app
 - ✅ Chatbot always uses latest data (no stale caches)
 - ✅ Users can provide feedback to correct AI misunderstandings
 
 **How to Exercise**:
+
 1. Edit transaction/budget data directly in Budget App
 2. Chatbot will use corrected data in next query
 
 ### 3. Right to Erasure ("Right to be Forgotten") (Article 17)
 
 **Implementation**:
+
 - ✅ **Disable chatbot**: Stops all data processing immediately
 - ✅ **Delete conversations**: Conversations auto-deleted per retention policy
 - ✅ **Manual deletion**: Users can manually delete all data (Settings → Data Management)
 - ✅ **OpenAI deletion**: Contact support to request OpenAI deletion (30-day retention)
 
 **How to Exercise**:
+
 1. **Immediate stop**: Settings → Privacy → Disable "Enable Chatbot"
 2. **Delete local conversations**: Settings → Data Management → Delete All Data
 3. **Request OpenAI deletion**: Contact support@budgetapp.com with request
 
 **Deletion Timeline**:
+
 - Immediate: Chatbot disabled, no more data sent
 - 0-30 days: Local conversations deleted per retention policy
 - Within 30 days: OpenAI deletes data from abuse monitoring logs
@@ -217,26 +240,31 @@ User ← Budget App (Client) ← Response + Store in IndexedDB (Local)
 ### 4. Right to Restrict Processing (Article 18)
 
 **Implementation**:
+
 - ✅ Users can change data access level (read-only vs full-access)
 - ✅ Users can pause chatbot (disable without deleting conversations)
 - ✅ Users can limit conversation retention (7 days = minimal processing)
 
 **How to Exercise**:
+
 1. Settings → Privacy → Budget Chatbot → Enable Chatbot (toggle OFF)
 2. Or: Change "Data Access Permission" to "Read-Only"
 
 ### 5. Right to Data Portability (Article 20)
 
 **Implementation**:
+
 - ✅ **JSON export**: All conversations exportable as JSON
 - ✅ **Structured format**: Machine-readable format
 - ✅ **Includes metadata**: Timestamps, retention settings, access level
 
 **How to Exercise**:
+
 1. Settings → Data Management → Export All Data
 2. JSON file includes `chatbotConversations` array with all data
 
 **Export Format**:
+
 ```json
 {
   "version": "1.0",
@@ -261,17 +289,20 @@ User ← Budget App (Client) ← Response + Store in IndexedDB (Local)
 ### 6. Right to Object (Article 21)
 
 **Implementation**:
+
 - ✅ Users can disable chatbot anytime (immediate effect)
 - ✅ No penalties for disabling (app fully functional without chatbot)
 - ✅ Clear opt-out mechanism (single toggle in Settings)
 
 **How to Exercise**:
+
 1. Settings → Privacy → Budget Chatbot → Enable Chatbot (toggle OFF)
 2. Chatbot immediately disabled, no further data processing
 
 ### 7. Rights Related to Automated Decision-Making (Article 22)
 
 **Implementation**:
+
 - ✅ **No automated decisions**: Chatbot provides suggestions only, not binding decisions
 - ✅ **User control**: Users must manually approve any actions (if full-access enabled)
 - ✅ **Human oversight**: Users can review and reject AI suggestions
@@ -305,23 +336,26 @@ User ← Budget App (Client) ← Response + Store in IndexedDB (Local)
 **PrivacyControlsPanel Component** (`src/app/budget-app/settings/settings-privacy-panel.tsx`):
 
 **Chatbot Section Includes**:
+
 - Master switch: Enable/Disable Chatbot
 - Data Access Level: Read-Only / Full Access
 - Conversation Retention: 7 days / 30 days / Forever
 - Privacy notice: Explains OpenAI processing
 
 **Analytics & Monitoring Section** (NEW):
+
 - Enable Analytics (PostHog): Track feature usage
 - Enable Error Tracking (Sentry): Report crashes
 
 ### Privacy by Design Principles
 
 **Default Settings** (`src/lib/budget-privacy-settings.ts`):
+
 ```typescript
 const DEFAULT_SETTINGS: PrivacySettings = {
-  enableChatbot: false,              // ✅ Opt-in required
-  chatbotDataAccess: 'read-only',    // ✅ Most restrictive
-  chatbotConversationRetention: 7,   // ✅ Minimal retention
+  enableChatbot: false, // ✅ Opt-in required
+  chatbotDataAccess: "read-only", // ✅ Most restrictive
+  chatbotConversationRetention: 7, // ✅ Minimal retention
   // ...
 };
 ```
@@ -337,12 +371,13 @@ const DEFAULT_SETTINGS: PrivacySettings = {
 **Storage**: `localStorage` (key: `budget-app-privacy-settings`)
 
 **Interface**:
+
 ```typescript
 export interface PrivacySettings {
   // Chatbot Privacy Controls
   enableChatbot: boolean;
-  chatbotDataAccess: 'read-only' | 'full-access';
-  chatbotConversationRetention: 7 | 30 | 'forever';
+  chatbotDataAccess: "read-only" | "full-access";
+  chatbotConversationRetention: 7 | 30 | "forever";
 
   // Analytics & Monitoring
   enableAnalytics: boolean;
@@ -353,6 +388,7 @@ export interface PrivacySettings {
 ```
 
 **Helper Functions**:
+
 - `isChatbotEnabled()`: Check if chatbot is enabled (requires both enableChatbot AND enableAIFeatures)
 - `getChatbotDataAccess()`: Get current data access level
 - `getChatbotConversationRetention()`: Get retention period
@@ -362,6 +398,7 @@ export interface PrivacySettings {
 **Planned Storage**: IndexedDB table `chatbot_conversations`
 
 **Schema**:
+
 ```typescript
 interface ChatbotConversation {
   id: string;
@@ -369,7 +406,7 @@ interface ChatbotConversation {
   userQuery: string;
   aiResponse: string;
   context: {
-    dataAccessLevel: 'read-only' | 'full-access';
+    dataAccessLevel: "read-only" | "full-access";
     transactionIds?: string[]; // IDs of transactions referenced
   };
   expiresAt: Date; // Auto-calculated based on retention policy
@@ -377,20 +414,19 @@ interface ChatbotConversation {
 ```
 
 **Auto-Deletion Logic**:
+
 ```typescript
 // Run on app startup
 async function cleanupExpiredConversations() {
   const now = new Date();
-  await db.chatbot_conversations
-    .where('expiresAt')
-    .below(now)
-    .delete();
+  await db.chatbot_conversations.where("expiresAt").below(now).delete();
 }
 ```
 
 ### API Request Data Minimization
 
 **Planned Implementation**:
+
 ```typescript
 async function sendChatbotQuery(userQuery: string) {
   const dataAccess = getChatbotDataAccess();
@@ -399,7 +435,7 @@ async function sendChatbotQuery(userQuery: string) {
   const relevantTransactions = await findRelevantTransactions(userQuery);
 
   // Minimize data sent
-  const cleanedData = relevantTransactions.map(tx => ({
+  const cleanedData = relevantTransactions.map((tx) => ({
     date: tx.date,
     category: tx.category,
     amount: tx.amount,
@@ -408,10 +444,10 @@ async function sendChatbotQuery(userQuery: string) {
   }));
 
   const response = await openai.chat.completions.create({
-    model: 'gpt-4',
+    model: "gpt-4",
     messages: [
-      { role: 'system', content: getSystemPrompt(dataAccess) },
-      { role: 'user', content: userQuery },
+      { role: "system", content: getSystemPrompt(dataAccess) },
+      { role: "user", content: userQuery },
     ],
     temperature: 0.7,
   });
@@ -422,9 +458,9 @@ async function sendChatbotQuery(userQuery: string) {
 function sanitizeDescription(description: string): string {
   // Remove potential PII (credit card numbers, phone numbers, emails)
   return description
-    .replace(/\b\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}\b/g, '[CARD]') // Credit cards
-    .replace(/\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/g, '[PHONE]') // Phone numbers
-    .replace(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g, '[EMAIL]'); // Emails
+    .replace(/\b\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}\b/g, "[CARD]") // Credit cards
+    .replace(/\b\d{3}[-.]?\d{3}[-.]?\d{4}\b/g, "[PHONE]") // Phone numbers
+    .replace(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g, "[EMAIL]"); // Emails
 }
 ```
 
@@ -522,11 +558,13 @@ Before merging chatbot-related code:
 **Data Protection Officer** (if applicable): dpo@budgetapp.com
 
 **User Rights Requests**:
+
 - Email: privacy@budgetapp.com
 - Subject: "GDPR Request: [Access/Erasure/Portability/etc.]"
 - Response time: Within 30 days (GDPR Article 12(3))
 
 **OpenAI Contact**:
+
 - Privacy inquiries: https://openai.com/privacy
 - Data deletion: https://openai.com/policies/privacy-policy
 
@@ -534,9 +572,9 @@ Before merging chatbot-related code:
 
 ## Revision History
 
-| Date       | Version | Changes                                      |
-|------------|---------|----------------------------------------------|
-| 2025-11-09 | 1.0     | Initial GDPR compliance documentation        |
+| Date       | Version | Changes                               |
+| ---------- | ------- | ------------------------------------- |
+| 2025-11-09 | 1.0     | Initial GDPR compliance documentation |
 
 ---
 

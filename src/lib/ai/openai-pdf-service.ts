@@ -4,7 +4,7 @@
  * Handles any language, any format, with structured output.
  */
 
-import type { ParsedTransaction } from '@/types/budget';
+import type { ParsedTransaction } from "@/types/budget";
 
 export interface OpenAIPdfExtractionResult {
   transactions: ParsedTransaction[];
@@ -32,35 +32,35 @@ export async function extractPdfWithOpenAI(
   file: File,
   onProgress?: (message: string) => void
 ): Promise<OpenAIPdfExtractionResult> {
-  onProgress?.('Uploading PDF for AI extraction...');
+  onProgress?.("Uploading PDF for AI extraction...");
 
   const formData = new FormData();
-  formData.append('file', file);
+  formData.append("file", file);
 
-  const response = await fetch('/api/import/pdf-extract', {
-    method: 'POST',
+  const response = await fetch("/api/import/pdf-extract", {
+    method: "POST",
     body: formData,
   });
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ error: 'Unknown error' }));
+    const error = await response.json().catch(() => ({ error: "Unknown error" }));
     throw new Error(error.error || `API error: ${response.status}`);
   }
 
-  onProgress?.('Processing response...');
+  onProgress?.("Processing response...");
 
   const result = await response.json();
 
   // Convert ISO date strings back to Date objects
   const transactions: ParsedTransaction[] = (result.transactions || []).map((tx: any) => ({
     date: new Date(tx.date),
-    description: tx.description || 'Unknown Transaction',
-    amount: typeof tx.amount === 'number' ? tx.amount : parseFloat(tx.amount) || 0,
+    description: tx.description || "Unknown Transaction",
+    amount: typeof tx.amount === "number" ? tx.amount : parseFloat(tx.amount) || 0,
     isDuplicate: false,
     confidence: tx.confidence || 0.9,
     currency: tx.currency || result.currency || undefined,
     transactionType: tx.type || undefined,
-    sourceFormat: 'pdf' as const,
+    sourceFormat: "pdf" as const,
     balance: tx.balance != null ? parseFloat(tx.balance) : undefined,
     requiresReview: false,
   }));
@@ -80,8 +80,8 @@ export async function extractPdfWithOpenAI(
  */
 export async function isOpenAIPdfAvailable(): Promise<boolean> {
   try {
-    const response = await fetch('/api/import/pdf-extract', {
-      method: 'HEAD',
+    const response = await fetch("/api/import/pdf-extract", {
+      method: "HEAD",
     });
     return response.ok || response.status === 405; // HEAD not allowed but route exists
   } catch {

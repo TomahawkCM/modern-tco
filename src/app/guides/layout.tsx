@@ -10,10 +10,6 @@ import { LearningProviders } from "@/app/heavy-providers";
  *
  * This ensures guides have access to module and progress data.
  */
-export default function GuidesLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function GuidesLayout({ children }: { children: React.ReactNode }) {
   return <LearningProviders>{children}</LearningProviders>;
 }

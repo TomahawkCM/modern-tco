@@ -4,9 +4,9 @@
  * Normalizes dates, amounts, currencies, and descriptions.
  */
 
-import type { ParsedTransaction } from '@/types/budget';
-import { parseAmount, detectCurrencySymbol } from './intl-amount-parser';
-import { parseDate } from './intl-date-parser';
+import type { ParsedTransaction } from "@/types/budget";
+import { parseAmount, detectCurrencySymbol } from "./intl-amount-parser";
+import { parseDate } from "./intl-date-parser";
 
 export interface NormalizeOptions {
   locale?: string;
@@ -50,7 +50,7 @@ export function normalizeTransactions(
   const normalizeOpts = { ...options, defaultCurrency: detectedCurrency };
 
   return transactions
-    .map(tx => normalizeTransaction(tx, normalizeOpts))
+    .map((tx) => normalizeTransaction(tx, normalizeOpts))
     .sort((a, b) => a.date.getTime() - b.date.getTime());
 }
 
@@ -58,20 +58,20 @@ export function normalizeTransactions(
  * Normalize description text
  */
 function normalizeDescription(description: string): string {
-  if (!description) return 'Unknown Transaction';
+  if (!description) return "Unknown Transaction";
 
-  let cleaned = description
+  const cleaned = description
     // Remove control characters
-    .replace(/[\x00-\x1F\x7F]/g, ' ')
+    .replace(/[\x00-\x1F\x7F]/g, " ")
     // Collapse multiple whitespace
-    .replace(/\s+/g, ' ')
+    .replace(/\s+/g, " ")
     // Remove leading/trailing punctuation (common OCR artifacts)
-    .replace(/^[^\w\d]+/, '')
-    .replace(/[^\w\d]+$/, '')
+    .replace(/^[^\w\d]+/, "")
+    .replace(/[^\w\d]+$/, "")
     .trim();
 
   if (cleaned.length < 2) {
-    return 'Unknown Transaction';
+    return "Unknown Transaction";
   }
 
   return cleaned;
@@ -130,13 +130,16 @@ export function parseRawTransaction(
 
   if (!date && amount === null) return null;
 
-  return normalizeTransaction({
-    date: date || new Date(),
-    description,
-    amount: amount || 0,
-    isDuplicate: false,
-    confidence: (date ? 0.4 : 0) + (amount !== null ? 0.4 : 0) + 0.2,
-    currency: currency || undefined,
-    requiresReview: !date || amount === null,
-  }, options);
+  return normalizeTransaction(
+    {
+      date: date || new Date(),
+      description,
+      amount: amount || 0,
+      isDuplicate: false,
+      confidence: (date ? 0.4 : 0) + (amount !== null ? 0.4 : 0) + 0.2,
+      currency: currency || undefined,
+      requiresReview: !date || amount === null,
+    },
+    options
+  );
 }

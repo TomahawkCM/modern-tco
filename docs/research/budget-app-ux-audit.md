@@ -12,6 +12,7 @@
 The Budget App demonstrates solid foundational UX with hybrid mobile navigation, keyboard shortcuts, and accessible screen reader labels. However, **24 improvement opportunities** were identified across 6 categories, with **8 P0 blockers** that must be fixed before v1 launch.
 
 **Key Findings**:
+
 - ✅ **Strengths**: Clean design, no gradients, hybrid navigation already implemented, sr-only labels present
 - ⚠️ **Critical Gaps**: Inconsistent touch targets (44px vs 48px), no theme mode switcher, no high-contrast mode, no command palette, 5 bottom tabs (should be 4)
 - 🎯 **Opportunity**: First budget app with WCAG 2.2 AA + seniors optimization (18px+ typography, 48px+ targets, high-contrast mode)
@@ -23,72 +24,75 @@ The Budget App demonstrates solid foundational UX with hybrid mobile navigation,
 ### Current State Analysis
 
 **Desktop Sidebar** (`src/app/budget-app/layout.tsx:102-123`):
+
 - ✅ Clean, collapsible sidebar
 - ❌ **No grouping** - all 13 items in flat list
 - ❌ Missing section headers (Core, Planning, Wealth, Tools)
 - 📍 Reference: mobile-navigation-analysis.md recommended grouped sidebar
 
 **Mobile Bottom Tab Bar** (`layout.tsx:211-263`):
+
 - ✅ Hybrid pattern implemented (tab bar + sheet menu)
 - ❌ **5 items** (Home, Transactions, Loans, Budgets, More) - competitors use 4
 - ❌ Touch targets: `min-h-[44px]` (below WCAG 2.2 AA 48px recommendation)
 - 📍 Comparison: Copilot (4 tabs), YNAB (4 tabs), Monarch (4 tabs + More)
 
 **Navigation Consistency**:
+
 - ❌ **Inconsistent labels**: "Dashboard" in sidebar vs "Home" in mobile tab bar
 - ❌ No breadcrumbs on deep pages (e.g., Planning > Retirement)
 
 ### Improvement Opportunities
 
-| # | Issue | Severity | Reference | WCAG |
-|---|-------|----------|-----------|------|
-| **N1** | **Reduce mobile tab bar from 5 to 4 items** | **P0** | mobile-navigation-analysis.md | - |
-| **N2** | **Increase tab bar touch targets to min-h-[48px]** | **P0** | WCAG 2.2 Level AA | 2.5.8 |
-| **N3** | Add desktop sidebar grouping (Core, Planning, Wealth, Tools) | P1 | competitive-analysis.md (Simplifi) | - |
-| **N4** | Implement command palette (Cmd/Ctrl+K) | P1 | competitive-analysis.md (Copilot 4.8/5) | 2.1.1 |
-| **N5** | Add breadcrumbs to all pages | P2 | competitive-analysis.md (Monarch) | 2.4.8 |
-| **N6** | Standardize labels ("Dashboard" everywhere or "Home" everywhere) | P2 | - | - |
+| #      | Issue                                                            | Severity | Reference                               | WCAG  |
+| ------ | ---------------------------------------------------------------- | -------- | --------------------------------------- | ----- |
+| **N1** | **Reduce mobile tab bar from 5 to 4 items**                      | **P0**   | mobile-navigation-analysis.md           | -     |
+| **N2** | **Increase tab bar touch targets to min-h-[48px]**               | **P0**   | WCAG 2.2 Level AA                       | 2.5.8 |
+| **N3** | Add desktop sidebar grouping (Core, Planning, Wealth, Tools)     | P1       | competitive-analysis.md (Simplifi)      | -     |
+| **N4** | Implement command palette (Cmd/Ctrl+K)                           | P1       | competitive-analysis.md (Copilot 4.8/5) | 2.1.1 |
+| **N5** | Add breadcrumbs to all pages                                     | P2       | competitive-analysis.md (Monarch)       | 2.4.8 |
+| **N6** | Standardize labels ("Dashboard" everywhere or "Home" everywhere) | P2       | -                                       | -     |
 
 **Recommended Tab Bar** (N1):
+
 ```typescript
 // Current (5 items - too many)
-[Home] [Transactions] [Loans] [Budgets] [More]
-
 // Recommended (4 items)
-[Home] [Transactions] [Budgets] [More]
+[Home][Transactions][Loans][Budgets][More][Home][Transactions][Budgets][More];
 // Loans moves to "More" menu under "Wealth & Planning" section
 ```
 
 **Recommended Desktop Sidebar Grouping** (N3):
+
 ```typescript
 const sidebarSections = [
   {
     title: "TRACKING & ANALYSIS",
     items: [
-      { name: 'Dashboard', href: '/budget-app', icon: Home },
-      { name: 'Transactions', href: '/budget-app/transactions', icon: Receipt },
-      { name: 'Scan Receipt', href: '/budget-app/ocr', icon: Camera },
-      { name: 'Budgets', href: '/budget-app/budgets', icon: PieChart },
-      { name: 'Reports', href: '/budget-app/reports', icon: BarChart3 },
-    ]
+      { name: "Dashboard", href: "/budget-app", icon: Home },
+      { name: "Transactions", href: "/budget-app/transactions", icon: Receipt },
+      { name: "Scan Receipt", href: "/budget-app/ocr", icon: Camera },
+      { name: "Budgets", href: "/budget-app/budgets", icon: PieChart },
+      { name: "Reports", href: "/budget-app/reports", icon: BarChart3 },
+    ],
   },
   {
     title: "WEALTH & PLANNING",
     items: [
-      { name: 'Loans', href: '/budget-app/loans', icon: CreditCard },
-      { name: 'Investments', href: '/budget-app/investments', icon: Wallet },
-      { name: 'Future Plans', href: '/budget-app/planning/future', icon: Target },
-      { name: 'Retirement', href: '/budget-app/planning/retirement', icon: TrendingUp },
-    ]
+      { name: "Loans", href: "/budget-app/loans", icon: CreditCard },
+      { name: "Investments", href: "/budget-app/investments", icon: Wallet },
+      { name: "Future Plans", href: "/budget-app/planning/future", icon: Target },
+      { name: "Retirement", href: "/budget-app/planning/retirement", icon: TrendingUp },
+    ],
   },
   {
     title: "TOOLS & SETTINGS",
     items: [
-      { name: 'Categories', href: '/budget-app/categories', icon: Tags },
-      { name: 'Import CSV', href: '/budget-app/import', icon: Upload },
-      { name: 'Export Data', href: '/budget-app/export', icon: Download },
-      { name: 'Settings', href: '/budget-app/settings', icon: Settings },
-    ]
+      { name: "Categories", href: "/budget-app/categories", icon: Tags },
+      { name: "Import CSV", href: "/budget-app/import", icon: Upload },
+      { name: "Export Data", href: "/budget-app/export", icon: Download },
+      { name: "Settings", href: "/budget-app/settings", icon: Settings },
+    ],
   },
 ];
 ```
@@ -100,40 +104,45 @@ const sidebarSections = [
 ### Current State Analysis
 
 **Base Font Size**:
+
 - ❌ **Default 16px** (Tailwind `text-base`) - should be 18px for seniors
 - 📍 Reference: seniors-ui-pattern-library.md recommends 18px minimum, 20px for 70+
 - 📍 Competitive: NO budget apps use 18px+ base (untapped market)
 
 **Type Scale**:
+
 - ✅ Good hierarchy: h1 `text-4xl`, body `text-base`, small `text-sm`
 - ⚠️ Some elements use `text-xs` (12px) - too small for seniors
 
 **Line Height**:
+
 - ✅ Tailwind defaults to 1.5 (meets WCAG 1.4.12)
 
 **Font Family**:
+
 - ✅ System font stack (readable)
 
 ### Improvement Opportunities
 
-| # | Issue | Severity | Reference | WCAG |
-|---|-------|----------|-----------|------|
-| **T1** | **Increase base font size to 18px in tailwind.config.ts** | **P0** | seniors-ui-pattern-library.md | - |
-| **T2** | **Remove all text-xs usage (12px too small)** | **P0** | seniors-ui-pattern-library.md | - |
-| **T3** | Add font size controls in settings (16px/18px/20px) | P1 | seniors-ui-pattern-library.md | 1.4.4 |
-| T4 | Increase button text to text-base (currently text-sm in some places) | P2 | - | - |
+| #      | Issue                                                                | Severity | Reference                     | WCAG  |
+| ------ | -------------------------------------------------------------------- | -------- | ----------------------------- | ----- |
+| **T1** | **Increase base font size to 18px in tailwind.config.ts**            | **P0**   | seniors-ui-pattern-library.md | -     |
+| **T2** | **Remove all text-xs usage (12px too small)**                        | **P0**   | seniors-ui-pattern-library.md | -     |
+| **T3** | Add font size controls in settings (16px/18px/20px)                  | P1       | seniors-ui-pattern-library.md | 1.4.4 |
+| T4     | Increase button text to text-base (currently text-sm in some places) | P2       | -                             | -     |
 
 **Implementation** (T1):
+
 ```typescript
 // tailwind.config.ts
 module.exports = {
   theme: {
     fontSize: {
-      xs: ['0.875rem', { lineHeight: '1.5' }],  // 14px (minimum, avoid overuse)
-      sm: ['1rem', { lineHeight: '1.5' }],      // 16px (labels, secondary text)
-      base: ['1.125rem', { lineHeight: '1.6' }], // 18px (body text) ← CHANGED
-      lg: ['1.25rem', { lineHeight: '1.6' }],   // 20px (large body, for 70+)
-      xl: ['1.5rem', { lineHeight: '1.5' }],    // 24px (headings)
+      xs: ["0.875rem", { lineHeight: "1.5" }], // 14px (minimum, avoid overuse)
+      sm: ["1rem", { lineHeight: "1.5" }], // 16px (labels, secondary text)
+      base: ["1.125rem", { lineHeight: "1.6" }], // 18px (body text) ← CHANGED
+      lg: ["1.25rem", { lineHeight: "1.6" }], // 20px (large body, for 70+)
+      xl: ["1.5rem", { lineHeight: "1.5" }], // 24px (headings)
       // ... rest of scale
     },
   },
@@ -147,6 +156,7 @@ module.exports = {
 ### Current State Analysis
 
 **Touch Target Sizes**:
+
 - ⚠️ **Inconsistent**: Some buttons use `min-h-[44px]`, some use `min-h-[48px]`
 - ❌ Desktop sidebar links: `min-h-[44px]` (layout.tsx:117)
 - ❌ Mobile tab bar: `min-h-[44px]` (layout.tsx:219)
@@ -155,6 +165,7 @@ module.exports = {
 - 📍 WCAG 2.2 Level AA: 24px minimum, Apple HIG: 44px, **Our target: 48px for 60-69, 52-56px for 70+**
 
 **Mobile Interactions**:
+
 - ✅ Pull-to-refresh implemented (transactions.tsx:80-92)
 - ✅ Swipe-to-delete gesture (transactions.tsx:868-878)
 - ❌ No haptic feedback on interactions
@@ -162,15 +173,16 @@ module.exports = {
 
 ### Improvement Opportunities
 
-| # | Issue | Severity | Reference | WCAG |
-|---|-------|----------|-----------|------|
-| **M1** | **Standardize ALL touch targets to min-h-[48px] min-w-[48px]** | **P0** | WCAG 2.2 Level AA | 2.5.8 |
-| **M2** | **Audit all icon-only buttons for 48px size** | **P0** | seniors-ui-pattern-library.md | 2.5.8 |
-| M3 | Increase mobile list item touch targets to min-h-[64px] | P1 | seniors-ui-pattern-library.md | - |
-| M4 | Replace small dropdowns with mobile-friendly bottom sheets | P1 | - | - |
-| M5 | Add haptic feedback for swipe/pull gestures | P2 | - | - |
+| #      | Issue                                                          | Severity | Reference                     | WCAG  |
+| ------ | -------------------------------------------------------------- | -------- | ----------------------------- | ----- |
+| **M1** | **Standardize ALL touch targets to min-h-[48px] min-w-[48px]** | **P0**   | WCAG 2.2 Level AA             | 2.5.8 |
+| **M2** | **Audit all icon-only buttons for 48px size**                  | **P0**   | seniors-ui-pattern-library.md | 2.5.8 |
+| M3     | Increase mobile list item touch targets to min-h-[64px]        | P1       | seniors-ui-pattern-library.md | -     |
+| M4     | Replace small dropdowns with mobile-friendly bottom sheets     | P1       | -                             | -     |
+| M5     | Add haptic feedback for swipe/pull gestures                    | P2       | -                             | -     |
 
 **Find & Replace** (M1):
+
 ```bash
 # Global search/replace needed:
 min-h-[44px] → min-h-[48px]
@@ -185,6 +197,7 @@ p-2 → p-3 (8px → 12px for icon buttons)
 ```
 
 **Mobile List Item Recommendation** (M3):
+
 ```typescript
 // Current (transactions.tsx mobile cards)
 <div className="py-5"> // ~40px minimum
@@ -200,6 +213,7 @@ p-2 → p-3 (8px → 12px for icon buttons)
 ### Current State Analysis
 
 **What's Working**:
+
 - ✅ Screen reader labels: `<span className="sr-only">Income: </span>` (page.tsx:156, 164)
 - ✅ ARIA labels on icon-only buttons
 - ✅ Keyboard navigation with Tab
@@ -207,6 +221,7 @@ p-2 → p-3 (8px → 12px for icon buttons)
 - ✅ Keyboard shortcuts documented (Shift+A, Shift+I, Shift+R)
 
 **Critical Gaps**:
+
 - ❌ **No theme mode switcher** - only light mode exists
 - ❌ **No dark mode** implementation
 - ❌ **No high-contrast mode** (7:1 contrast) - would be first in industry
@@ -215,51 +230,54 @@ p-2 → p-3 (8px → 12px for icon buttons)
 - ❌ Chart/data visualizations lack alt text or data table toggles
 
 **Color Contrast** (Light Mode Only):
+
 - ⚠️ Some gray text may not meet 4.5:1 (needs contrast checker audit)
 - 📍 Target: 4.5:1 for WCAG AA, 7:1 for high-contrast mode
 
 ### Improvement Opportunities
 
-| # | Issue | Severity | Reference | WCAG |
-|---|-------|----------|-----------|------|
-| **A1** | **Implement 3-mode theme switcher (Light/Dark/High-Contrast)** | **P0** | competitive-analysis-summary.md | - |
-| **A2** | **Create high-contrast mode (7:1 contrast, white on black)** | **P0** | seniors-ui-pattern-library.md | 1.4.6 |
-| **A3** | **Implement reduced motion mode (prefers-reduced-motion)** | **P0** | WCAG 2.2 Level AA | 2.3.3 |
-| A4 | Add data table toggle for all charts (Recharts pie/area charts) | P1 | competitive-analysis.md (YNAB) | 1.1.1 |
-| A5 | Add keyboard navigation for chart data points | P1 | - | 2.1.1 |
-| A6 | Audit all color contrast ratios with tool (e.g., Stark plugin) | P1 | - | 1.4.3 |
-| A7 | Add descriptive alt text/captions for all charts | P2 | - | 1.1.1 |
-| A8 | Create accessibility settings panel (theme, motion, font size) | P1 | competitive-analysis.md | - |
+| #      | Issue                                                           | Severity | Reference                       | WCAG  |
+| ------ | --------------------------------------------------------------- | -------- | ------------------------------- | ----- |
+| **A1** | **Implement 3-mode theme switcher (Light/Dark/High-Contrast)**  | **P0**   | competitive-analysis-summary.md | -     |
+| **A2** | **Create high-contrast mode (7:1 contrast, white on black)**    | **P0**   | seniors-ui-pattern-library.md   | 1.4.6 |
+| **A3** | **Implement reduced motion mode (prefers-reduced-motion)**      | **P0**   | WCAG 2.2 Level AA               | 2.3.3 |
+| A4     | Add data table toggle for all charts (Recharts pie/area charts) | P1       | competitive-analysis.md (YNAB)  | 1.1.1 |
+| A5     | Add keyboard navigation for chart data points                   | P1       | -                               | 2.1.1 |
+| A6     | Audit all color contrast ratios with tool (e.g., Stark plugin)  | P1       | -                               | 1.4.3 |
+| A7     | Add descriptive alt text/captions for all charts                | P2       | -                               | 1.1.1 |
+| A8     | Create accessibility settings panel (theme, motion, font size)  | P1       | competitive-analysis.md         | -     |
 
 **Theme Modes Implementation** (A1 + A2):
+
 ```typescript
 // src/lib/theme-modes.ts
 export const themes = {
   light: {
-    background: 'hsl(0 0% 100%)',           // white
-    foreground: 'hsl(0 0% 10%)',           // near-black (18.5:1 contrast)
-    primary: 'hsl(166 76% 46%)',           // teal-500
-    secondary: 'hsl(215 20.2% 65.1%)',     // gray-400
-    muted: 'hsl(210 40% 96.1%)',           // gray-50
-    accent: 'hsl(166 76% 46%)',            // teal-500
+    background: "hsl(0 0% 100%)", // white
+    foreground: "hsl(0 0% 10%)", // near-black (18.5:1 contrast)
+    primary: "hsl(166 76% 46%)", // teal-500
+    secondary: "hsl(215 20.2% 65.1%)", // gray-400
+    muted: "hsl(210 40% 96.1%)", // gray-50
+    accent: "hsl(166 76% 46%)", // teal-500
     // ... rest of tokens
   },
   dark: {
-    background: 'hsl(222.2 84% 4.9%)',     // gray-900
-    foreground: 'hsl(210 40% 98%)',        // gray-100 (16.1:1 contrast)
-    primary: 'hsl(166 70% 60%)',           // teal-400
-    secondary: 'hsl(217.2 32.6% 17.5%)',   // gray-800
-    muted: 'hsl(217.2 32.6% 17.5%)',       // gray-800
-    accent: 'hsl(166 77% 72%)',            // teal-300
+    background: "hsl(222.2 84% 4.9%)", // gray-900
+    foreground: "hsl(210 40% 98%)", // gray-100 (16.1:1 contrast)
+    primary: "hsl(166 70% 60%)", // teal-400
+    secondary: "hsl(217.2 32.6% 17.5%)", // gray-800
+    muted: "hsl(217.2 32.6% 17.5%)", // gray-800
+    accent: "hsl(166 77% 72%)", // teal-300
     // ... rest of tokens
   },
-  'high-contrast': { // INDUSTRY FIRST 🎯
-    background: 'hsl(0 0% 0%)',            // pure black
-    foreground: 'hsl(0 0% 100%)',          // pure white (21:1 contrast)
-    primary: 'hsl(166 100% 80%)',          // teal-300 lighter (12.6:1)
-    secondary: 'hsl(0 0% 80%)',            // light gray
-    muted: 'hsl(0 0% 15%)',                // dark gray
-    accent: 'hsl(166 100% 80%)',           // teal-300
+  "high-contrast": {
+    // INDUSTRY FIRST 🎯
+    background: "hsl(0 0% 0%)", // pure black
+    foreground: "hsl(0 0% 100%)", // pure white (21:1 contrast)
+    primary: "hsl(166 100% 80%)", // teal-300 lighter (12.6:1)
+    secondary: "hsl(0 0% 80%)", // light gray
+    muted: "hsl(0 0% 15%)", // dark gray
+    accent: "hsl(166 100% 80%)", // teal-300
     // All text: white on black (21:1)
     // All interactive: 7:1+ minimum
     // All borders: 3:1+ minimum
@@ -268,6 +286,7 @@ export const themes = {
 ```
 
 **Reduced Motion Implementation** (A3):
+
 ```typescript
 // tailwind.config.ts
 module.exports = {
@@ -297,6 +316,7 @@ module.exports = {
 ```
 
 **Accessibility Settings Panel** (A8):
+
 ```typescript
 // src/app/budget-app/settings/page.tsx
 <div className="space-y-6">
@@ -350,6 +370,7 @@ module.exports = {
 ### Current State Analysis
 
 **Dashboard Structure** (`src/app/budget-app/page.tsx`):
+
 - ✅ Clean metric cards with solid colors (no gradients)
 - ✅ Teal accent color used consistently
 - ✅ Non-color indicators: arrows (↑↓) with colors (green/red)
@@ -359,11 +380,13 @@ module.exports = {
 - ❌ Charts lack accessibility features (no data table toggle)
 
 **Metric Cards** (page.tsx:92-139):
+
 - ✅ Good: Left border accent, gray icon background, clear hierarchy
 - ✅ CountUp animation (nice touch, but needs reduced-motion variant)
 - ⚠️ Icon containers: `w-6 h-6` icons in `p-4` containers = 38x38px (below 48px)
 
 **Charts**:
+
 - ❌ Pie chart (Spending by Category) - no keyboard navigation
 - ❌ Area chart (Income vs Expenses) - uses gradients (violates design guide)
 - ❌ No alt text or descriptive captions
@@ -371,33 +394,34 @@ module.exports = {
 
 ### Improvement Opportunities
 
-| # | Issue | Severity | Reference | WCAG |
-|---|-------|----------|-----------|------|
-| D1 | Add dashboard widget customization (show/hide, drag-and-drop) | P1 | competitive-analysis.md (Monarch) | - |
-| D2 | Reduce default dashboard to 4-5 widgets max (hide advanced by default) | P1 | seniors-ui-pattern-library.md | - |
-| D3 | Replace area chart gradients with solid fills + patterns | P2 | Design guide + color blindness | 1.4.1 |
-| D4 | Add data table toggle for all charts | P1 | WCAG 2.2 AA | 1.1.1 |
-| D5 | Add motion-reduce variant for CountUp animations | P1 | - | 2.3.3 |
-| D6 | Increase metric card icon touch targets to 48x48px | P2 | - | - |
-| D7 | Create mobile-optimized dashboard (single column, simpler charts) | P1 | competitive-analysis.md | - |
+| #   | Issue                                                                  | Severity | Reference                         | WCAG  |
+| --- | ---------------------------------------------------------------------- | -------- | --------------------------------- | ----- |
+| D1  | Add dashboard widget customization (show/hide, drag-and-drop)          | P1       | competitive-analysis.md (Monarch) | -     |
+| D2  | Reduce default dashboard to 4-5 widgets max (hide advanced by default) | P1       | seniors-ui-pattern-library.md     | -     |
+| D3  | Replace area chart gradients with solid fills + patterns               | P2       | Design guide + color blindness    | 1.4.1 |
+| D4  | Add data table toggle for all charts                                   | P1       | WCAG 2.2 AA                       | 1.1.1 |
+| D5  | Add motion-reduce variant for CountUp animations                       | P1       | -                                 | 2.3.3 |
+| D6  | Increase metric card icon touch targets to 48x48px                     | P2       | -                                 | -     |
+| D7  | Create mobile-optimized dashboard (single column, simpler charts)      | P1       | competitive-analysis.md           | -     |
 
 **Recommended Dashboard Layout** (D2):
+
 ```typescript
 // Default widgets (4-5 max for seniors)
 const defaultWidgets = [
-  'net-worth',           // Most important metric
-  'monthly-summary',     // Income/Expense cards combined
-  'budget-status',       // Top 3 budgets only
-  'recent-transactions', // Last 5 transactions
+  "net-worth", // Most important metric
+  "monthly-summary", // Income/Expense cards combined
+  "budget-status", // Top 3 budgets only
+  "recent-transactions", // Last 5 transactions
 ];
 
 // Advanced widgets (hidden by default, show/hide in settings)
 const advancedWidgets = [
-  'spending-by-category', // Pie chart
-  'income-vs-expenses',   // Area chart
-  'recurring-transactions',
-  'anomaly-alerts',
-  'debt-overview',
+  "spending-by-category", // Pie chart
+  "income-vs-expenses", // Area chart
+  "recurring-transactions",
+  "anomaly-alerts",
+  "debt-overview",
 ];
 ```
 
@@ -408,33 +432,37 @@ const advancedWidgets = [
 ### Current State Analysis
 
 **Transaction Modal** (`src/components/budget/TransactionModal.tsx`):
+
 - ✅ Clean, focused form
 - ✅ Smart defaults (today's date)
 - ⚠️ Amount field: type="number" (good) but lacks large touch target
 - ⚠️ Category combobox (CategoryCombobox.tsx) - complex for seniors
 
 **Budgets Modal** (`src/app/budget-app/budgets/page.tsx:429-548`):
+
 - ✅ Simple 3-field form
 - ✅ Escape key closes modal (good keyboard UX)
 - ❌ No clear visual feedback for validation errors
 - ❌ Submit button not disabled during save (could double-submit)
 
 **Category Combobox** (assumption - not read, but referenced):
+
 - ⚠️ Likely uses shadcn Command component (keyboard-heavy)
 - 📍 Seniors recommendation: Use native select or bottom sheet on mobile
 
 ### Improvement Opportunities
 
-| # | Issue | Severity | Reference | WCAG |
-|---|-------|----------|-----------|------|
-| F1 | Increase form input height to min-h-[52px] for 70+ users | P1 | seniors-ui-pattern-library.md | 2.5.8 |
-| F2 | Add clear validation error messages with icons | P1 | - | 3.3.1 |
-| F3 | Replace CategoryCombobox with native select on mobile | P2 | seniors-ui-pattern-library.md | - |
-| F4 | Add visual loading state (spinner) on submit buttons | P2 | - | - |
-| F5 | Disable submit button during form submission | P2 | - | - |
-| F6 | Add voice input option for transaction descriptions | P2 | seniors-ui-pattern-library.md | - |
+| #   | Issue                                                    | Severity | Reference                     | WCAG  |
+| --- | -------------------------------------------------------- | -------- | ----------------------------- | ----- |
+| F1  | Increase form input height to min-h-[52px] for 70+ users | P1       | seniors-ui-pattern-library.md | 2.5.8 |
+| F2  | Add clear validation error messages with icons           | P1       | -                             | 3.3.1 |
+| F3  | Replace CategoryCombobox with native select on mobile    | P2       | seniors-ui-pattern-library.md | -     |
+| F4  | Add visual loading state (spinner) on submit buttons     | P2       | -                             | -     |
+| F5  | Disable submit button during form submission             | P2       | -                             | -     |
+| F6  | Add voice input option for transaction descriptions      | P2       | seniors-ui-pattern-library.md | -     |
 
 **Form Input Sizing** (F1):
+
 ```typescript
 // Current
 <input className="px-4 py-3 text-base border rounded-lg" />
@@ -447,6 +475,7 @@ const advancedWidgets = [
 ```
 
 **Validation Errors** (F2):
+
 ```typescript
 // Current (assumption - no visual error state visible in budgets modal)
 {isNaN(amountNum) && <p className="text-red-600">Invalid amount</p>}
@@ -463,6 +492,7 @@ const advancedWidgets = [
 ```
 
 **Voice Input Pattern** (F6):
+
 ```typescript
 // Add to transaction description field
 <div className="relative">
@@ -489,29 +519,32 @@ const advancedWidgets = [
 ### Current State Analysis
 
 **Loading Indicators**:
+
 - ✅ Dashboard: Shimmer skeleton loader (DashboardSkeleton) - good practice
 - ⚠️ Transactions/Budgets: Spinner loader (less informative)
 - ❌ No progressive rendering of dashboard widgets
 - ❌ No offline state indicators
 
 **Animations**:
+
 - ⚠️ CountUp animation on metric cards (needs reduced-motion variant)
 - ⚠️ Chart animations (Recharts default) - likely not respecting `prefers-reduced-motion`
 - ✅ Page transitions seem minimal (good)
 
 **Bundle Size** (from other tasks):
+
 - ⚠️ **P1 priority**: Route-based code splitting needed (1.6MB → 0.8MB)
 - ⚠️ **P1 priority**: Lazy load TensorFlow/Recharts (TTI 5.8s → 3.8s)
 
 ### Improvement Opportunities
 
-| # | Issue | Severity | Reference | WCAG |
-|---|-------|----------|-----------|------|
-| P1 | Add skeleton loaders to all pages (Transactions, Budgets, Reports) | P2 | - | - |
-| P2 | Implement progressive dashboard rendering (metrics → charts → widgets) | P2 | - | - |
-| P3 | Add reduced-motion variants to all animations | P1 | WCAG 2.2 AA | 2.3.3 |
-| P4 | Show offline indicator when app is offline | P2 | PWA best practices | - |
-| P5 | Add "Loading..." text to spinners for screen readers | P2 | - | 4.1.3 |
+| #   | Issue                                                                  | Severity | Reference          | WCAG  |
+| --- | ---------------------------------------------------------------------- | -------- | ------------------ | ----- |
+| P1  | Add skeleton loaders to all pages (Transactions, Budgets, Reports)     | P2       | -                  | -     |
+| P2  | Implement progressive dashboard rendering (metrics → charts → widgets) | P2       | -                  | -     |
+| P3  | Add reduced-motion variants to all animations                          | P1       | WCAG 2.2 AA        | 2.3.3 |
+| P4  | Show offline indicator when app is offline                             | P2       | PWA best practices | -     |
+| P5  | Add "Loading..." text to spinners for screen readers                   | P2       | -                  | 4.1.3 |
 
 ---
 
@@ -573,40 +606,44 @@ const advancedWidgets = [
 
 Implementing the P0 + P1 improvements will make this **the most accessible budget app on the market**:
 
-| Feature | Budget App v1 (After Fixes) | Copilot (4.8★) | YNAB | Monarch | Others |
-|---------|---------------------------|---------------|------|---------|--------|
-| **18px+ Base Typography** | ✅ | ❌ | ❌ | ❌ | ❌ |
-| **48px+ Touch Targets** | ✅ | Unknown | ❌ | ❌ | ❌ |
-| **High-Contrast Mode** | ✅ | ❌ | ❌ | ❌ | ❌ |
-| **WCAG 2.2 AA Compliant** | ✅ (target) | Unknown | Partial | Unknown | Unknown |
-| **Command Palette** | ✅ | ✅ | ❌ | ❌ | ❌ |
-| **Widget Customization** | ✅ | ❌ | ❌ | ✅ | ❌ |
-| **Reduced Motion Mode** | ✅ | Unknown | ❌ | ❌ | ❌ |
-| **Voice Input** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Feature                   | Budget App v1 (After Fixes) | Copilot (4.8★) | YNAB    | Monarch | Others  |
+| ------------------------- | --------------------------- | -------------- | ------- | ------- | ------- |
+| **18px+ Base Typography** | ✅                          | ❌             | ❌      | ❌      | ❌      |
+| **48px+ Touch Targets**   | ✅                          | Unknown        | ❌      | ❌      | ❌      |
+| **High-Contrast Mode**    | ✅                          | ❌             | ❌      | ❌      | ❌      |
+| **WCAG 2.2 AA Compliant** | ✅ (target)                 | Unknown        | Partial | Unknown | Unknown |
+| **Command Palette**       | ✅                          | ✅             | ❌      | ❌      | ❌      |
+| **Widget Customization**  | ✅                          | ❌             | ❌      | ✅      | ❌      |
+| **Reduced Motion Mode**   | ✅                          | Unknown        | ❌      | ❌      | ❌      |
+| **Voice Input**           | ✅                          | ❌             | ❌      | ❌      | ❌      |
 
-**Marketing Angle**: *"The only budget app built for everyone: free, private, accessible, and seniors-friendly."*
+**Marketing Angle**: _"The only budget app built for everyone: free, private, accessible, and seniors-friendly."_
 
 ---
 
 ## Implementation Roadmap
 
 ### Week 1: P0 Blockers (Touch Targets + Typography)
+
 - Day 1-2: Update tailwind.config.ts (T1), global search/replace 44px→48px (N2, M1, M2)
 - Day 3: Remove text-xs, audit smallest readable sizes (T2)
 - Day 4-5: Theme system architecture (A1, A2, A3)
 
 ### Week 2: P1 High Priority (Navigation + Accessibility)
+
 - Day 6: Refactor mobile tab bar to 4 items (N1), move Loans to More menu
 - Day 7: Desktop sidebar grouping (N3)
 - Day 8-9: Command palette implementation (N4)
 - Day 10: Accessibility settings panel (A8, T3)
 
 ### Week 3: P1 Continued (Dashboard + Forms)
+
 - Day 11-12: Dashboard widget customization (D1, D2)
 - Day 13: Chart accessibility (A4, A5, A6)
 - Day 14-15: Form improvements (F1, F2)
 
 ### Week 4: Testing + P2 Polish
+
 - Day 16-17: WCAG 2.2 AA compliance testing (axe-core, Lighthouse)
 - Day 18-19: Screen reader testing (NVDA, VoiceOver, JAWS)
 - Day 20: P2 polish + documentation
@@ -658,18 +695,21 @@ Implementing the P0 + P1 improvements will make this **the most accessible budge
 ## Appendix: Code References
 
 **Files Audited**:
+
 1. `src/app/budget-app/layout.tsx` - Navigation, mobile tab bar, sidebar
 2. `src/app/budget-app/page.tsx` - Dashboard, metric cards, charts
 3. `src/app/budget-app/transactions/page.tsx` - Transactions list, filters, mobile cards
 4. `src/app/budget-app/budgets/page.tsx` - Budgets, progress bars, modal
 
 **Research References**:
+
 - `docs/research/competitive-analysis.md` - 5 budget apps analyzed
 - `docs/research/competitive-analysis-summary.md` - TL;DR + pattern library
 - `docs/research/mobile-navigation-analysis.md` - 4-5 tab pattern, 48px targets
 - `docs/research/seniors-ui-pattern-library.md` - 18px typography, 48px targets, 7:1 contrast
 
 **Standards Referenced**:
+
 - WCAG 2.2 Level AA (target compliance)
 - Apple Human Interface Guidelines (HIG)
 - Material Design 3
@@ -678,6 +718,7 @@ Implementing the P0 + P1 improvements will make this **the most accessible budge
 ---
 
 **Next Steps**:
+
 1. Review this audit with team
 2. Prioritize P0 blockers for immediate implementation
 3. Create Archon tasks for each improvement opportunity

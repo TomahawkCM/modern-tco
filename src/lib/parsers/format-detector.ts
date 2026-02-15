@@ -4,7 +4,7 @@
  * Used by import wizard to route files to appropriate parsers
  */
 
-export type FileFormat = 'csv' | 'ofx' | 'qfx' | 'qbo' | 'pdf' | 'unknown';
+export type FileFormat = "csv" | "ofx" | "qfx" | "qbo" | "pdf" | "unknown";
 
 export interface FormatDetectionResult {
   format: FileFormat;
@@ -47,64 +47,64 @@ export function detectFromContent(content: string): {
   // ========================================
   // PDF (starts with %PDF- signature)
   // ========================================
-  if (trimmed.startsWith('%PDF-')) {
+  if (trimmed.startsWith("%PDF-")) {
     return {
-      format: 'pdf',
+      format: "pdf",
       confidence: 0.99,
-      signature: 'PDF',
+      signature: "PDF",
     };
   }
 
   // ========================================
   // OFX 2.x (XML with <?xml declaration)
   // ========================================
-  if (trimmed.startsWith('<?xml') || trimmed.startsWith('<?XML')) {
+  if (trimmed.startsWith("<?xml") || trimmed.startsWith("<?XML")) {
     // Check if it contains <OFX> tag
-    if (upper.includes('<OFX>') || upper.includes('<OFX ')) {
+    if (upper.includes("<OFX>") || upper.includes("<OFX ")) {
       return {
-        format: 'ofx',
+        format: "ofx",
         confidence: 0.95,
-        signature: 'XML-OFX',
+        signature: "XML-OFX",
       };
     }
     // Might be some other XML format
     return {
-      format: 'unknown',
+      format: "unknown",
       confidence: 0.3,
-      signature: 'XML-UNKNOWN',
+      signature: "XML-UNKNOWN",
     };
   }
 
   // ========================================
   // OFX 1.x (SGML with OFXHEADER)
   // ========================================
-  if (upper.includes('OFXHEADER:') || upper.includes('<OFXHEADER>')) {
+  if (upper.includes("OFXHEADER:") || upper.includes("<OFXHEADER>")) {
     return {
-      format: 'ofx',
+      format: "ofx",
       confidence: 0.95,
-      signature: 'SGML-OFX',
+      signature: "SGML-OFX",
     };
   }
 
   // ========================================
   // QFX (Quicken format with QFXHEADER)
   // ========================================
-  if (upper.includes('QFXHEADER:') || upper.includes('<QFXHEADER>')) {
+  if (upper.includes("QFXHEADER:") || upper.includes("<QFXHEADER>")) {
     return {
-      format: 'qfx',
+      format: "qfx",
       confidence: 0.95,
-      signature: 'QFX',
+      signature: "QFX",
     };
   }
 
   // ========================================
   // QBO (QuickBooks format - starts with !Type)
   // ========================================
-  if (trimmed.startsWith('!Type:') || upper.includes('!TYPE:')) {
+  if (trimmed.startsWith("!Type:") || upper.includes("!TYPE:")) {
     return {
-      format: 'qbo',
+      format: "qbo",
       confidence: 0.9,
-      signature: 'QBO',
+      signature: "QBO",
     };
   }
 
@@ -114,9 +114,9 @@ export function detectFromContent(content: string): {
   const looksLikeCSV = analyzeCSVStructure(content);
   if (looksLikeCSV.isCSV) {
     return {
-      format: 'csv',
+      format: "csv",
       confidence: looksLikeCSV.confidence,
-      signature: 'CSV',
+      signature: "CSV",
     };
   }
 
@@ -124,7 +124,7 @@ export function detectFromContent(content: string): {
   // Unknown format
   // ========================================
   return {
-    format: 'unknown',
+    format: "unknown",
     confidence: 0,
   };
 }
@@ -136,14 +136,14 @@ function analyzeCSVStructure(content: string): {
   isCSV: boolean;
   confidence: number;
 } {
-  const lines = content.split('\n').filter((line) => line.trim().length > 0);
+  const lines = content.split("\n").filter((line) => line.trim().length > 0);
 
   if (lines.length < 2) {
     return { isCSV: false, confidence: 0 };
   }
 
   // Check if lines contain commas
-  const linesWithCommas = lines.filter((line) => line.includes(','));
+  const linesWithCommas = lines.filter((line) => line.includes(","));
   const commaRatio = linesWithCommas.length / lines.length;
 
   if (commaRatio < 0.5) {
@@ -153,7 +153,7 @@ function analyzeCSVStructure(content: string): {
   // Check if first line looks like headers (letters, spaces, capitals)
   const firstLine = lines[0];
   const hasLetters = /[a-zA-Z]/.test(firstLine);
-  const hasCommas = firstLine.includes(',');
+  const hasCommas = firstLine.includes(",");
 
   if (!hasLetters || !hasCommas) {
     return { isCSV: false, confidence: 0.2 };
@@ -161,7 +161,7 @@ function analyzeCSVStructure(content: string): {
 
   // Check column count consistency
   const columnCounts = lines.slice(0, 10).map((line) => {
-    return line.split(',').length;
+    return line.split(",").length;
   });
 
   const uniqueCounts = new Set(columnCounts);
@@ -231,14 +231,14 @@ function combineSignals(
   // Low confidence - fall back to extension
   // ========================================
   if (contentAnalysis.confidence < 0.5) {
-    if (extension && ['csv', 'ofx', 'qfx', 'qbo', 'pdf'].includes(extension)) {
+    if (extension && ["csv", "ofx", "qfx", "qbo", "pdf"].includes(extension)) {
       result.format = extension as FileFormat;
       result.confidence = 0.5; // Extension-based detection has medium confidence
       result.suggestions?.push(
         `Unable to detect format from content. Using file extension (.${extension}).`
       );
     } else {
-      result.format = 'unknown';
+      result.format = "unknown";
       result.confidence = 0;
       result.suggestions?.push(
         `Unable to detect file format. Please ensure the file is a valid CSV, OFX, QFX, or PDF bank statement.`
@@ -253,7 +253,7 @@ function combineSignals(
  * Get file extension from filename
  */
 function getFileExtension(filename: string): string | null {
-  const parts = filename.toLowerCase().split('.');
+  const parts = filename.toLowerCase().split(".");
   if (parts.length < 2) return null;
   const ext = parts[parts.length - 1];
   return ext;
@@ -269,11 +269,11 @@ async function readFilePreview(file: File, bytes: number): Promise<string> {
 
     reader.onload = (e) => {
       const text = e.target?.result as string;
-      resolve(text || '');
+      resolve(text || "");
     };
 
     reader.onerror = () => {
-      reject(new Error('Failed to read file preview'));
+      reject(new Error("Failed to read file preview"));
     };
 
     reader.readAsText(blob);
@@ -294,33 +294,33 @@ export function validateFormat(
   const errors: string[] = [];
 
   switch (detectedFormat) {
-    case 'ofx':
-    case 'qfx':
+    case "ofx":
+    case "qfx":
       // Check for required OFX elements
-      if (!content.includes('<OFX>')) {
-        errors.push('Missing <OFX> root element');
+      if (!content.includes("<OFX>")) {
+        errors.push("Missing <OFX> root element");
       }
       if (
-        !content.includes('STMTTRN') &&
-        !content.includes('CCSTMTTRN') &&
-        !content.includes('INVSTMTTRN')
+        !content.includes("STMTTRN") &&
+        !content.includes("CCSTMTTRN") &&
+        !content.includes("INVSTMTTRN")
       ) {
-        errors.push('No transaction data found');
+        errors.push("No transaction data found");
       }
       break;
 
-    case 'csv':
+    case "csv":
       // Check for at least 2 rows
-      const lines = content.split('\n').filter((l) => l.trim().length > 0);
+      const lines = content.split("\n").filter((l) => l.trim().length > 0);
       if (lines.length < 2) {
-        errors.push('CSV file must have at least 2 rows (header + data)');
+        errors.push("CSV file must have at least 2 rows (header + data)");
       }
       break;
 
-    case 'qbo':
+    case "qbo":
       // Check for QuickBooks format markers
-      if (!content.includes('!Type:')) {
-        errors.push('Missing !Type: declaration');
+      if (!content.includes("!Type:")) {
+        errors.push("Missing !Type: declaration");
       }
       break;
 
@@ -339,21 +339,21 @@ export function validateFormat(
  */
 export function getFormatDisplayName(format: FileFormat): string {
   const names: Record<FileFormat, string> = {
-    csv: 'CSV (Comma-Separated Values)',
-    ofx: 'OFX (Open Financial Exchange)',
-    qfx: 'QFX (Quicken)',
-    qbo: 'QBO (QuickBooks)',
-    pdf: 'PDF (Bank Statement)',
-    unknown: 'Unknown Format',
+    csv: "CSV (Comma-Separated Values)",
+    ofx: "OFX (Open Financial Exchange)",
+    qfx: "QFX (Quicken)",
+    qbo: "QBO (QuickBooks)",
+    pdf: "PDF (Bank Statement)",
+    unknown: "Unknown Format",
   };
-  return names[format] || 'Unknown Format';
+  return names[format] || "Unknown Format";
 }
 
 /**
  * Get supported formats list
  */
 export function getSupportedFormats(): FileFormat[] {
-  return ['csv', 'ofx', 'qfx', 'pdf'];
+  return ["csv", "ofx", "qfx", "pdf"];
   // Note: QBO support can be added in future
 }
 

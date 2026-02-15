@@ -13,15 +13,15 @@
  * - Educational dashboards increase student self-awareness by 35% (Verbert et al., 2014)
  */
 
-import { supabase } from '@/lib/supabase/client';
-import { camelCaseKeys, snakeCaseKeys } from '@/lib/utils/caseConversion';
+import { supabase } from "@/lib/supabase/client";
+import { camelCaseKeys, snakeCaseKeys } from "@/lib/utils/caseConversion";
 
 // ==================== TYPES ====================
 
 export interface PerformanceHeatmap {
   id: string;
   userId: string;
-  heatmapType: 'domain_by_week' | 'topic_by_difficulty' | 'time_of_day' | 'learning_objective';
+  heatmapType: "domain_by_week" | "topic_by_difficulty" | "time_of_day" | "learning_objective";
   data: HeatmapData;
   generatedAt: string;
   createdAt: string;
@@ -73,30 +73,30 @@ export async function generateDomainByWeekHeatmap(userId: string): Promise<Perfo
   try {
     // Get student's domain scores over time
     const { data: snapshots, error } = await supabase
-      .from('student_performance_snapshots')
-      .select('created_at, domain_scores')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: true });
+      .from("student_performance_snapshots")
+      .select("created_at, domain_scores")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: true });
 
     if (error) throw error;
 
     // Define TCO domains
     const domains = [
-      'asking_questions',
-      'refining_targeting',
-      'taking_action',
-      'navigation',
-      'reporting',
-      'troubleshooting',
+      "asking_questions",
+      "refining_targeting",
+      "taking_action",
+      "navigation",
+      "reporting",
+      "troubleshooting",
     ];
 
     const domainLabels: Record<string, string> = {
-      asking_questions: 'Asking Questions',
-      refining_targeting: 'Refining & Targeting',
-      taking_action: 'Taking Action',
-      navigation: 'Navigation',
-      reporting: 'Reporting',
-      troubleshooting: 'Troubleshooting',
+      asking_questions: "Asking Questions",
+      refining_targeting: "Refining & Targeting",
+      taking_action: "Taking Action",
+      navigation: "Navigation",
+      reporting: "Reporting",
+      troubleshooting: "Troubleshooting",
     };
 
     // Group snapshots by week
@@ -142,9 +142,9 @@ export async function generateDomainByWeekHeatmap(userId: string): Promise<Perfo
       avgValue: allValues.length > 0 ? allValues.reduce((a, b) => a + b, 0) / allValues.length : 0,
       totalCells: domains.length * weeks.length,
       colorScale: {
-        low: '#ef4444', // Red for low scores (<60%)
-        mid: '#f59e0b', // Yellow for medium scores (60-80%)
-        high: '#10b981', // Green for high scores (>80%)
+        low: "#ef4444", // Red for low scores (<60%)
+        mid: "#f59e0b", // Yellow for medium scores (60-80%)
+        high: "#10b981", // Green for high scores (>80%)
       },
     };
 
@@ -157,15 +157,15 @@ export async function generateDomainByWeekHeatmap(userId: string): Promise<Perfo
 
     // Save to database
     const { data: savedHeatmap, error: saveError } = await supabase
-      .from('performance_heatmaps')
+      .from("performance_heatmaps")
       .upsert(
         {
           user_id: userId,
-          heatmap_type: 'domain_by_week',
+          heatmap_type: "domain_by_week",
           data: snakeCaseKeys(heatmapData),
           generated_at: new Date().toISOString(),
         },
-        { onConflict: 'user_id,heatmap_type' }
+        { onConflict: "user_id,heatmap_type" }
       )
       .select()
       .single();
@@ -174,7 +174,7 @@ export async function generateDomainByWeekHeatmap(userId: string): Promise<Perfo
 
     return camelCaseKeys(savedHeatmap);
   } catch (error) {
-    console.error('Error generating domain by week heatmap:', error);
+    console.error("Error generating domain by week heatmap:", error);
     throw error;
   }
 }
@@ -189,22 +189,24 @@ export async function generateTopicByDifficultyHeatmap(
   try {
     // Get student's question attempts grouped by topic and difficulty
     const { data: attempts, error } = await supabase
-      .from('question_attempts')
-      .select('question:practice_questions(topic, difficulty), is_correct')
-      .eq('user_id', userId);
+      .from("question_attempts")
+      .select("question:practice_questions(topic, difficulty), is_correct")
+      .eq("user_id", userId);
 
     if (error) throw error;
 
     // Group by topic and difficulty
-    const topicDifficultyData: Record<string, Record<string, { correct: number; total: number }>> =
-      {};
+    const topicDifficultyData: Record<
+      string,
+      Record<string, { correct: number; total: number }>
+    > = {};
 
     for (const attempt of attempts || []) {
-      const {question} = (attempt as any);
+      const { question } = attempt as any;
       if (!question) continue;
 
-      const topic = question.topic || 'General';
-      const difficulty = question.difficulty || 'Medium';
+      const topic = question.topic || "General";
+      const difficulty = question.difficulty || "Medium";
 
       if (!topicDifficultyData[topic]) {
         topicDifficultyData[topic] = {
@@ -221,7 +223,7 @@ export async function generateTopicByDifficultyHeatmap(
     }
 
     const topics = Object.keys(topicDifficultyData).sort();
-    const difficulties = ['Easy', 'Medium', 'Hard'];
+    const difficulties = ["Easy", "Medium", "Hard"];
 
     // Calculate accuracy percentages
     const matrix: number[][] = [];
@@ -244,9 +246,9 @@ export async function generateTopicByDifficultyHeatmap(
       avgValue: allValues.length > 0 ? allValues.reduce((a, b) => a + b, 0) / allValues.length : 0,
       totalCells: topics.length * difficulties.length,
       colorScale: {
-        low: '#ef4444',
-        mid: '#f59e0b',
-        high: '#10b981',
+        low: "#ef4444",
+        mid: "#f59e0b",
+        high: "#10b981",
       },
     };
 
@@ -259,15 +261,15 @@ export async function generateTopicByDifficultyHeatmap(
 
     // Save to database
     const { data: savedHeatmap, error: saveError } = await supabase
-      .from('performance_heatmaps')
+      .from("performance_heatmaps")
       .upsert(
         {
           user_id: userId,
-          heatmap_type: 'topic_by_difficulty',
+          heatmap_type: "topic_by_difficulty",
           data: snakeCaseKeys(heatmapData),
           generated_at: new Date().toISOString(),
         },
-        { onConflict: 'user_id,heatmap_type' }
+        { onConflict: "user_id,heatmap_type" }
       )
       .select()
       .single();
@@ -276,7 +278,7 @@ export async function generateTopicByDifficultyHeatmap(
 
     return camelCaseKeys(savedHeatmap);
   } catch (error) {
-    console.error('Error generating topic by difficulty heatmap:', error);
+    console.error("Error generating topic by difficulty heatmap:", error);
     throw error;
   }
 }
@@ -293,34 +295,34 @@ export async function generateLearningObjectiveHeatmap(
     // For now, we'll use domains as proxies for objectives
 
     const { data: snapshots, error } = await supabase
-      .from('student_performance_snapshots')
-      .select('domain_scores, quiz_scores, practice_scores, mock_exam_scores')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false })
+      .from("student_performance_snapshots")
+      .select("domain_scores, quiz_scores, practice_scores, mock_exam_scores")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
       .limit(1)
       .single();
 
     if (error) throw error;
 
     const domains = [
-      'asking_questions',
-      'refining_targeting',
-      'taking_action',
-      'navigation',
-      'reporting',
-      'troubleshooting',
+      "asking_questions",
+      "refining_targeting",
+      "taking_action",
+      "navigation",
+      "reporting",
+      "troubleshooting",
     ];
 
     const domainLabels: Record<string, string> = {
-      asking_questions: 'Asking Questions',
-      refining_targeting: 'Refining & Targeting',
-      taking_action: 'Taking Action',
-      navigation: 'Navigation',
-      reporting: 'Reporting',
-      troubleshooting: 'Troubleshooting',
+      asking_questions: "Asking Questions",
+      refining_targeting: "Refining & Targeting",
+      taking_action: "Taking Action",
+      navigation: "Navigation",
+      reporting: "Reporting",
+      troubleshooting: "Troubleshooting",
     };
 
-    const assessmentTypes = ['Quiz', 'Practice', 'Mock Exam'];
+    const assessmentTypes = ["Quiz", "Practice", "Mock Exam"];
     const matrix: number[][] = [];
 
     const domainScores = (snapshots?.domain_scores || {}) as Record<string, number>;
@@ -344,9 +346,9 @@ export async function generateLearningObjectiveHeatmap(
       avgValue: allValues.length > 0 ? allValues.reduce((a, b) => a + b, 0) / allValues.length : 0,
       totalCells: domains.length * assessmentTypes.length,
       colorScale: {
-        low: '#ef4444',
-        mid: '#f59e0b',
-        high: '#10b981',
+        low: "#ef4444",
+        mid: "#f59e0b",
+        high: "#10b981",
       },
     };
 
@@ -358,15 +360,15 @@ export async function generateLearningObjectiveHeatmap(
     };
 
     const { data: savedHeatmap, error: saveError } = await supabase
-      .from('performance_heatmaps')
+      .from("performance_heatmaps")
       .upsert(
         {
           user_id: userId,
-          heatmap_type: 'learning_objective',
+          heatmap_type: "learning_objective",
           data: snakeCaseKeys(heatmapData),
           generated_at: new Date().toISOString(),
         },
-        { onConflict: 'user_id,heatmap_type' }
+        { onConflict: "user_id,heatmap_type" }
       )
       .select()
       .single();
@@ -375,7 +377,7 @@ export async function generateLearningObjectiveHeatmap(
 
     return camelCaseKeys(savedHeatmap);
   } catch (error) {
-    console.error('Error generating learning objective heatmap:', error);
+    console.error("Error generating learning objective heatmap:", error);
     throw error;
   }
 }
@@ -387,26 +389,26 @@ export async function generateLearningObjectiveHeatmap(
  */
 export async function getHeatmap(
   userId: string,
-  heatmapType: PerformanceHeatmap['heatmapType']
+  heatmapType: PerformanceHeatmap["heatmapType"]
 ): Promise<PerformanceHeatmap | null> {
   try {
     const { data, error } = await supabase
-      .from('performance_heatmaps')
-      .select('*')
-      .eq('user_id', userId)
-      .eq('heatmap_type', heatmapType)
-      .order('created_at', { ascending: false })
+      .from("performance_heatmaps")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("heatmap_type", heatmapType)
+      .order("created_at", { ascending: false })
       .limit(1)
       .single();
 
     if (error) {
-      if (error.code === 'PGRST116') return null;
+      if (error.code === "PGRST116") return null;
       throw error;
     }
 
     return camelCaseKeys(data);
   } catch (error) {
-    console.error('Error fetching heatmap:', error);
+    console.error("Error fetching heatmap:", error);
     throw error;
   }
 }
@@ -417,16 +419,16 @@ export async function getHeatmap(
 export async function getAllHeatmaps(userId: string): Promise<PerformanceHeatmap[]> {
   try {
     const { data, error } = await supabase
-      .from('performance_heatmaps')
-      .select('*')
-      .eq('user_id', userId)
-      .order('heatmap_type', { ascending: true });
+      .from("performance_heatmaps")
+      .select("*")
+      .eq("user_id", userId)
+      .order("heatmap_type", { ascending: true });
 
     if (error) throw error;
 
     return (data || []).map((item) => camelCaseKeys(item));
   } catch (error) {
-    console.error('Error fetching all heatmaps:', error);
+    console.error("Error fetching all heatmaps:", error);
     throw error;
   }
 }
@@ -437,7 +439,7 @@ export async function getAllHeatmaps(userId: string): Promise<PerformanceHeatmap
  */
 export async function getOrGenerateHeatmap(
   userId: string,
-  heatmapType: PerformanceHeatmap['heatmapType'],
+  heatmapType: PerformanceHeatmap["heatmapType"],
   forceRefresh: boolean = false
 ): Promise<PerformanceHeatmap> {
   if (!forceRefresh) {
@@ -454,11 +456,11 @@ export async function getOrGenerateHeatmap(
 
   // Generate new heatmap
   switch (heatmapType) {
-    case 'domain_by_week':
+    case "domain_by_week":
       return await generateDomainByWeekHeatmap(userId);
-    case 'topic_by_difficulty':
+    case "topic_by_difficulty":
       return await generateTopicByDifficultyHeatmap(userId);
-    case 'learning_objective':
+    case "learning_objective":
       return await generateLearningObjectiveHeatmap(userId);
     default:
       throw new Error(`Unknown heatmap type: ${heatmapType}`);
@@ -478,7 +480,7 @@ function getWeekIdentifier(date: Date): string {
   );
   const weekNumber = Math.ceil((daysSinceFirstDay + firstDayOfYear.getDay() + 1) / 7);
 
-  return `${year}-W${weekNumber.toString().padStart(2, '0')}`;
+  return `${year}-W${weekNumber.toString().padStart(2, "0")}`;
 }
 
 /**
@@ -491,11 +493,11 @@ export function getHeatmapColor(value: number, min: number = 0, max: number = 10
   if (normalized < 0.6) {
     // Red to Yellow (0-60%)
     const ratio = normalized / 0.6;
-    return interpolateColor('#ef4444', '#f59e0b', ratio);
+    return interpolateColor("#ef4444", "#f59e0b", ratio);
   } else {
     // Yellow to Green (60-100%)
     const ratio = (normalized - 0.6) / 0.4;
-    return interpolateColor('#f59e0b', '#10b981', ratio);
+    return interpolateColor("#f59e0b", "#10b981", ratio);
   }
 }
 
@@ -517,7 +519,7 @@ function interpolateColor(color1: string, color2: string, ratio: number): string
   const g = Math.round(c1.g + (c2.g - c1.g) * ratio);
   const b = Math.round(c1.b + (c2.b - c1.b) * ratio);
 
-  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+  return `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`;
 }
 
 export default {

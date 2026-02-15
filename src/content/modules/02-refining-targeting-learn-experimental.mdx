@@ -47,7 +47,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/02-l/advanced-filtering"
-  onClick={() => emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-01", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-01", action: "practice_start" })
+  }
 >
   Practice: Chain Advanced Filters
 </PracticeButton>
@@ -83,7 +85,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/02-l/rbac-alignment"
-  onClick={() => emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-02", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-02", action: "practice_start" })
+  }
 >
   Practice: Align Groups & Roles
 </PracticeButton>
@@ -119,7 +123,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/02-l/safe-targeting-plan"
-  onClick={() => emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-03", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-03", action: "practice_start" })
+  }
 >
   Practice: Draft a Safe Targeting Plan
 </PracticeButton>
@@ -155,7 +161,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/02-l/performance-diagnostics"
-  onClick={() => emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-04", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-04", action: "practice_start" })
+  }
 >
   Practice: Tune Question Performance
 </PracticeButton>
@@ -191,7 +199,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/02-l/operationalize-targeting"
-  onClick={() => emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-05", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-02L", unitId: "unit-02L-05", action: "practice_start" })
+  }
 >
   Practice: Publish a Targeting Upgrade
 </PracticeButton>
@@ -206,4 +216,3 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
   quizIdPrefix="module-02L-summary"
   questions={getReadOnlyQuestions({ domain: "refining-targeting", limit: 8 })}
 />
-

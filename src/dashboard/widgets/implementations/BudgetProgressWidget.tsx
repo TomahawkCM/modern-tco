@@ -40,24 +40,25 @@ export function BudgetProgressWidget({ config }: BudgetProgressWidgetProps) {
   const categories = useLiveQuery(() => db.categories.toArray()) || [];
 
   // Fetch current month transactions
-  const transactions = useLiveQuery(async () => {
-    try {
-      const startOfMonth = new Date();
-      startOfMonth.setDate(1);
-      startOfMonth.setHours(0, 0, 0, 0);
-      const startTime = startOfMonth.getTime();
+  const transactions =
+    useLiveQuery(async () => {
+      try {
+        const startOfMonth = new Date();
+        startOfMonth.setDate(1);
+        startOfMonth.setHours(0, 0, 0, 0);
+        const startTime = startOfMonth.getTime();
 
-      // Use filter instead of where for reliable Date comparison
-      const allTxs = await db.transactions.toArray();
-      return allTxs.filter((tx) => {
-        if (tx.isSplit || tx.amount >= 0) return false;
-        const txTime = new Date(tx.date).getTime();
-        return txTime >= startTime;
-      });
-    } catch {
-      return [];
-    }
-  }) || [];
+        // Use filter instead of where for reliable Date comparison
+        const allTxs = await db.transactions.toArray();
+        return allTxs.filter((tx) => {
+          if (tx.isSplit || tx.amount >= 0) return false;
+          const txTime = new Date(tx.date).getTime();
+          return txTime >= startTime;
+        });
+      } catch {
+        return [];
+      }
+    }) || [];
 
   // Calculate budget progress for each category
   const budgetProgress = useMemo<BudgetProgressItem[]>(() => {
@@ -67,10 +68,7 @@ export function BudgetProgressWidget({ config }: BudgetProgressWidgetProps) {
     const spendingByCategory = new Map<string, number>();
     transactions.forEach((tx) => {
       const catName = tx.category || "Uncategorized";
-      spendingByCategory.set(
-        catName,
-        (spendingByCategory.get(catName) || 0) + Math.abs(tx.amount)
-      );
+      spendingByCategory.set(catName, (spendingByCategory.get(catName) || 0) + Math.abs(tx.amount));
     });
 
     return budgets
@@ -78,8 +76,7 @@ export function BudgetProgressWidget({ config }: BudgetProgressWidgetProps) {
         const category = categories.find((c) => c.id === budget.categoryId);
         const categoryName = category?.name || "Unknown";
         const spent = spendingByCategory.get(categoryName) || 0;
-        const percentage =
-          budget.amount > 0 ? Math.min((spent / budget.amount) * 100, 150) : 0;
+        const percentage = budget.amount > 0 ? Math.min((spent / budget.amount) * 100, 150) : 0;
 
         return {
           categoryName,
@@ -169,13 +166,8 @@ function ProgressItem({ item, format, t }: ProgressItemProps) {
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div
-            className="h-3 w-3 rounded-full"
-            style={{ backgroundColor: item.color }}
-          />
-          <span className="text-sm font-medium text-slate-200">
-            {item.categoryName}
-          </span>
+          <div className="h-3 w-3 rounded-full" style={{ backgroundColor: item.color }} />
+          <span className="text-sm font-medium text-slate-200">{item.categoryName}</span>
         </div>
         <div className="text-right">
           <span className={`text-xs font-medium ${textColor}`}>

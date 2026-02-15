@@ -1,23 +1,23 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card } from '@/components/ui/card';
-import { Switch } from '@/components/ui/switch';
-import { Checkbox } from '@/components/ui/checkbox';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
+import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 
 export default function DesignSystemPlayground() {
-  const [theme, setTheme] = useState<'light' | 'dark' | 'high-contrast'>('light');
+  const [theme, setTheme] = useState<"light" | "dark" | "high-contrast">("light");
   const [reduceMotion, setReduceMotion] = useState(false);
   const [fontSize, setFontSize] = useState(18);
 
@@ -25,7 +25,7 @@ export default function DesignSystemPlayground() {
   const applyTheme = (newTheme: typeof theme) => {
     setTheme(newTheme);
     const root = document.documentElement;
-    root.classList.remove('light', 'dark', 'high-contrast');
+    root.classList.remove("light", "dark", "high-contrast");
     root.classList.add(newTheme);
   };
 
@@ -34,16 +34,16 @@ export default function DesignSystemPlayground() {
     setReduceMotion(enabled);
     const root = document.documentElement;
     if (enabled) {
-      root.classList.add('reduce-motion');
+      root.classList.add("reduce-motion");
     } else {
-      root.classList.remove('reduce-motion');
+      root.classList.remove("reduce-motion");
     }
   };
 
   // Apply font size
   const applyFontSize = (size: number) => {
     setFontSize(size);
-    document.documentElement.style.setProperty('--base-font-size', `${size}px`);
+    document.documentElement.style.setProperty("--base-font-size", `${size}px`);
   };
 
   return (
@@ -51,9 +51,7 @@ export default function DesignSystemPlayground() {
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <header className="mb-section">
-          <h1 className="mb-4 text-4xl font-bold text-foreground">
-            Design System Playground
-          </h1>
+          <h1 className="mb-4 text-4xl font-bold text-foreground">Design System Playground</h1>
           <p className="text-lg text-muted-foreground">
             Interactive showcase of all components, design tokens, and accessibility features
           </p>
@@ -113,12 +111,12 @@ export default function DesignSystemPlayground() {
             <h3 className="mb-4 text-xl font-semibold">Colors</h3>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
               {[
-                { name: 'Primary', var: '--primary' },
-                { name: 'Secondary', var: '--secondary' },
-                { name: 'Accent', var: '--accent' },
-                { name: 'Destructive', var: '--destructive' },
-                { name: 'Muted', var: '--muted' },
-                { name: 'Border', var: '--border' },
+                { name: "Primary", var: "--primary" },
+                { name: "Secondary", var: "--secondary" },
+                { name: "Accent", var: "--accent" },
+                { name: "Destructive", var: "--destructive" },
+                { name: "Muted", var: "--muted" },
+                { name: "Border", var: "--border" },
               ].map((color) => (
                 <div key={color.name} className="space-y-2">
                   <div
@@ -136,13 +134,13 @@ export default function DesignSystemPlayground() {
             <h3 className="mb-4 text-xl font-semibold">Spacing Tokens</h3>
             <div className="space-y-3">
               {[
-                { name: 'Touch Target (54px)', size: 'touch' },
-                { name: 'Section (54px)', size: 'section' },
-                { name: 'Subsection (36px)', size: 'subsection' },
-                { name: 'Card Padding (27px)', size: 'card' },
-                { name: 'Card Gap (18px)', size: 'card-gap' },
-                { name: 'Page X (18-36px)', size: 'page-x' },
-                { name: 'Page Y (27-45px)', size: 'page-y' },
+                { name: "Touch Target (54px)", size: "touch" },
+                { name: "Section (54px)", size: "section" },
+                { name: "Subsection (36px)", size: "subsection" },
+                { name: "Card Padding (27px)", size: "card" },
+                { name: "Card Gap (18px)", size: "card-gap" },
+                { name: "Page X (18-36px)", size: "page-x" },
+                { name: "Page Y (27-45px)", size: "page-y" },
               ].map((spacing) => (
                 <div key={spacing.name} className="flex items-center gap-4">
                   <div
@@ -159,7 +157,7 @@ export default function DesignSystemPlayground() {
           <Card className="mb-card-gap p-card">
             <h3 className="mb-4 text-xl font-semibold">Shadow Tokens</h3>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-              {['xs', 'sm', 'md', 'lg', 'xl', '2xl', 'focus'].map((shadow) => (
+              {["xs", "sm", "md", "lg", "xl", "2xl", "focus"].map((shadow) => (
                 <div
                   key={shadow}
                   className={`h-20 rounded-md bg-card shadow-${shadow} flex items-center justify-center`}
@@ -177,7 +175,7 @@ export default function DesignSystemPlayground() {
               <div>
                 <p className="mb-2 text-sm font-medium">Duration Scale</p>
                 <div className="flex gap-2">
-                  {['instant', 'fast', 'normal', 'slow', 'slower'].map((duration) => (
+                  {["instant", "fast", "normal", "slow", "slower"].map((duration) => (
                     <Button
                       key={duration}
                       variant="outline"
@@ -192,7 +190,7 @@ export default function DesignSystemPlayground() {
               <div>
                 <p className="mb-2 text-sm font-medium">Easing Curves</p>
                 <div className="flex gap-2">
-                  {['default', 'emphasized', 'decelerate', 'bounce'].map((easing) => (
+                  {["default", "emphasized", "decelerate", "bounce"].map((easing) => (
                     <div
                       key={easing}
                       className="h-12 w-12 rounded bg-primary transition-transform duration-normal hover:scale-110"
@@ -252,7 +250,7 @@ export default function DesignSystemPlayground() {
           {/* Inputs */}
           <Card className="mb-card-gap p-card">
             <h3 className="mb-4 text-xl font-semibold">Inputs</h3>
-            <div className="space-y-4 max-w-md">
+            <div className="max-w-md space-y-4">
               <div>
                 <Label>Default Input</Label>
                 <Input placeholder="Enter text..." />
@@ -341,21 +339,15 @@ export default function DesignSystemPlayground() {
             <div className="grid gap-4 md:grid-cols-3">
               <Card className="p-4">
                 <h4 className="mb-2 font-semibold">Default Card</h4>
-                <p className="text-sm text-muted-foreground">
-                  Basic card with default styles
-                </p>
+                <p className="text-sm text-muted-foreground">Basic card with default styles</p>
               </Card>
               <Card className="p-4 shadow-lg">
                 <h4 className="mb-2 font-semibold">Elevated Card</h4>
-                <p className="text-sm text-muted-foreground">
-                  Card with shadow-lg elevation
-                </p>
+                <p className="text-sm text-muted-foreground">Card with shadow-lg elevation</p>
               </Card>
-              <Card className="p-4 border-2 border-primary">
+              <Card className="border-2 border-primary p-4">
                 <h4 className="mb-2 font-semibold">Highlighted Card</h4>
-                <p className="text-sm text-muted-foreground">
-                  Card with primary border
-                </p>
+                <p className="text-sm text-muted-foreground">Card with primary border</p>
               </Card>
             </div>
           </Card>
@@ -403,17 +395,37 @@ export default function DesignSystemPlayground() {
 
         {/* Accessibility Info */}
         <section>
-          <Card className="p-card bg-muted">
+          <Card className="bg-muted p-card">
             <h2 className="mb-4 text-2xl font-bold">Accessibility Guidelines</h2>
             <ul className="space-y-2 text-sm">
-              <li>✅ <strong>WCAG 2.2 AA Compliant:</strong> Contrast ratios ≥4.5:1 for normal text, ≥3:1 for large text</li>
-              <li>✅ <strong>Touch Targets:</strong> Minimum 48×48px (54px with spacing) for all interactive elements</li>
-              <li>✅ <strong>Base Font Size:</strong> 18px for improved readability (seniors-friendly)</li>
-              <li>✅ <strong>Reduced Motion:</strong> Automatic detection + manual toggle for vestibular disorders</li>
-              <li>✅ <strong>Focus Indicators:</strong> 3px ring with 50% opacity on all interactive elements</li>
-              <li>✅ <strong>Semantic HTML:</strong> Proper heading hierarchy and landmark regions</li>
-              <li>✅ <strong>Keyboard Navigation:</strong> All functionality accessible via keyboard</li>
-              <li>✅ <strong>High Contrast Mode:</strong> Removes shadows, increases border thickness</li>
+              <li>
+                ✅ <strong>WCAG 2.2 AA Compliant:</strong> Contrast ratios ≥4.5:1 for normal text,
+                ≥3:1 for large text
+              </li>
+              <li>
+                ✅ <strong>Touch Targets:</strong> Minimum 48×48px (54px with spacing) for all
+                interactive elements
+              </li>
+              <li>
+                ✅ <strong>Base Font Size:</strong> 18px for improved readability (seniors-friendly)
+              </li>
+              <li>
+                ✅ <strong>Reduced Motion:</strong> Automatic detection + manual toggle for
+                vestibular disorders
+              </li>
+              <li>
+                ✅ <strong>Focus Indicators:</strong> 3px ring with 50% opacity on all interactive
+                elements
+              </li>
+              <li>
+                ✅ <strong>Semantic HTML:</strong> Proper heading hierarchy and landmark regions
+              </li>
+              <li>
+                ✅ <strong>Keyboard Navigation:</strong> All functionality accessible via keyboard
+              </li>
+              <li>
+                ✅ <strong>High Contrast Mode:</strong> Removes shadows, increases border thickness
+              </li>
             </ul>
           </Card>
         </section>

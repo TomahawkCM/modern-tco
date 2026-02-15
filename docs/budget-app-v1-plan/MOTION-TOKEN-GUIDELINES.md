@@ -3,7 +3,7 @@
 **Version**: 1.0  
 **Date**: November 10, 2025  
 **Archon Task**: 693a29c5-a6e4-4eca-a6ba-002faa303433  
-**Status**: Implementation Ready  
+**Status**: Implementation Ready
 
 ---
 
@@ -12,6 +12,7 @@
 This document defines the complete motion design token system for Budget App v1, with comprehensive **reduced motion support** for accessibility (WCAG 2.3.3 Level AAA).
 
 **Key Principles**:
+
 1. **Motion serves function** - Animations should provide feedback or guide attention, not just decoration
 2. **Respect user preferences** - Always honor `prefers-reduced-motion` and manual accessibility settings
 3. **Performance first** - Use GPU-accelerated properties (transform, opacity) over layout-triggering properties
@@ -26,12 +27,12 @@ This document defines the complete motion design token system for Budget App v1,
 ```css
 :root {
   /* Core Duration Scale */
-  --duration-instant: 0ms;       /* No animation (accessibility override) */
-  --duration-fast: 150ms;        /* Micro-interactions (hover, button press) */
-  --duration-normal: 300ms;      /* Standard transitions (modals, dropdowns) */
-  --duration-slow: 500ms;        /* Deliberate animations (page transitions) */
-  --duration-slower: 700ms;      /* Complex animations (charts, illustrations) */
-  
+  --duration-instant: 0ms; /* No animation (accessibility override) */
+  --duration-fast: 150ms; /* Micro-interactions (hover, button press) */
+  --duration-normal: 300ms; /* Standard transitions (modals, dropdowns) */
+  --duration-slow: 500ms; /* Deliberate animations (page transitions) */
+  --duration-slower: 700ms; /* Complex animations (charts, illustrations) */
+
   /* Alias Tokens (semantic naming) */
   --duration-hover: var(--duration-fast);
   --duration-transition: var(--duration-normal);
@@ -41,13 +42,13 @@ This document defines the complete motion design token system for Budget App v1,
 
 ### 1.2 Usage Guidelines
 
-| Duration | Use For | Examples |
-|----------|---------|----------|
-| **instant (0ms)** | Accessibility override, immediate feedback | Reduced motion mode, instant state changes |
-| **fast (150ms)** | Micro-interactions, hover states | Button hover, link underline, toggle switch, focus ring |
-| **normal (300ms)** | Standard UI transitions | Modal open/close, dropdown expand, tab switch, toast slide |
-| **slow (500ms)** | Emphasized animations | Page transitions, drawer slide, notification enter/exit |
-| **slower (700ms)** | Complex multi-stage animations | Chart render, skeleton → content, confetti effects |
+| Duration           | Use For                                    | Examples                                                   |
+| ------------------ | ------------------------------------------ | ---------------------------------------------------------- |
+| **instant (0ms)**  | Accessibility override, immediate feedback | Reduced motion mode, instant state changes                 |
+| **fast (150ms)**   | Micro-interactions, hover states           | Button hover, link underline, toggle switch, focus ring    |
+| **normal (300ms)** | Standard UI transitions                    | Modal open/close, dropdown expand, tab switch, toast slide |
+| **slow (500ms)**   | Emphasized animations                      | Page transitions, drawer slide, notification enter/exit    |
+| **slower (700ms)** | Complex multi-stage animations             | Chart render, skeleton → content, confetti effects         |
 
 **General Rule**: Shorter durations (150-300ms) for user-triggered interactions, longer durations (500-700ms) for system-initiated changes.
 
@@ -60,22 +61,22 @@ This document defines the complete motion design token system for Budget App v1,
 ```css
 :root {
   /* Standard CSS Easings */
-  --easing-linear: linear;                        /* Constant speed (rarely used) */
-  --easing-ease: ease;                            /* Browser default (gentle) */
-  --easing-ease-in: ease-in;                      /* Slow start, fast end */
-  --easing-ease-out: ease-out;                    /* Fast start, slow end */
-  --easing-ease-in-out: ease-in-out;              /* Slow start and end */
-  
+  --easing-linear: linear; /* Constant speed (rarely used) */
+  --easing-ease: ease; /* Browser default (gentle) */
+  --easing-ease-in: ease-in; /* Slow start, fast end */
+  --easing-ease-out: ease-out; /* Fast start, slow end */
+  --easing-ease-in-out: ease-in-out; /* Slow start and end */
+
   /* Custom Cubic Bezier Curves (Material Design inspired) */
-  --easing-default: cubic-bezier(0.4, 0.0, 0.2, 1);      /* Standard easing */
-  --easing-emphasized: cubic-bezier(0.2, 0.0, 0.0, 1);   /* Emphasized deceleration */
-  --easing-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);   /* Fast start, slow end */
-  --easing-accelerate: cubic-bezier(0.4, 0.0, 1, 1);     /* Slow start, fast end */
+  --easing-default: cubic-bezier(0.4, 0, 0.2, 1); /* Standard easing */
+  --easing-emphasized: cubic-bezier(0.2, 0, 0, 1); /* Emphasized deceleration */
+  --easing-decelerate: cubic-bezier(0, 0, 0.2, 1); /* Fast start, slow end */
+  --easing-accelerate: cubic-bezier(0.4, 0, 1, 1); /* Slow start, fast end */
   --easing-bounce: cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Playful bounce (use sparingly) */
-  
+
   /* Semantic Aliases */
-  --easing-enter: var(--easing-emphasized);    /* Elements entering screen */
-  --easing-exit: var(--easing-accelerate);     /* Elements exiting screen */
+  --easing-enter: var(--easing-emphasized); /* Elements entering screen */
+  --easing-exit: var(--easing-accelerate); /* Elements exiting screen */
   --easing-interactive: var(--easing-default); /* Interactive feedback */
 }
 ```
@@ -83,40 +84,45 @@ This document defines the complete motion design token system for Budget App v1,
 ### 2.2 Easing Curve Visualizations
 
 **Default (0.4, 0.0, 0.2, 1)**:
+
 - Gentle acceleration at start, strong deceleration at end
 - **Use for**: General transitions, hover states, focus changes
 
 **Emphasized (0.2, 0.0, 0.0, 1)**:
+
 - Strong deceleration, minimal acceleration
 - **Use for**: Elements entering the viewport (modals, dropdowns, toasts)
 
 **Decelerate (0.0, 0.0, 0.2, 1)**:
+
 - Instant start, gradual slow-down
 - **Use for**: Expanding elements, revealing content
 
 **Accelerate (0.4, 0.0, 1, 1)**:
+
 - Gradual start, instant stop
 - **Use for**: Collapsing elements, dismissing notifications
 
 **Bounce (0.68, -0.55, 0.27, 1.55)**:
+
 - Overshoots target, bounces back
 - **Use for**: Success states, playful interactions (sparingly, avoid in high-contrast mode)
 
 ### 2.3 Easing Selection Matrix
 
-| Animation Type | Recommended Easing | Reasoning |
-|----------------|-------------------|-----------|
-| **Hover/Focus** | default | Subtle, responsive feel |
-| **Modal open** | emphasized | Draws attention, feels deliberate |
-| **Modal close** | accelerate | Feels snappy, gets out of the way |
-| **Dropdown expand** | emphasized | Smooth reveal |
-| **Dropdown collapse** | accelerate | Quick dismissal |
-| **Toast enter** | emphasized | Attention-grabbing |
-| **Toast exit** | accelerate | Unobtrusive |
-| **Page transition** | default | Smooth, not jarring |
-| **Button press** | default | Responsive feedback |
-| **Drawer slide** | emphasized | Elegant reveal |
-| **Chart render** | ease-out | Smooth data visualization |
+| Animation Type        | Recommended Easing | Reasoning                         |
+| --------------------- | ------------------ | --------------------------------- |
+| **Hover/Focus**       | default            | Subtle, responsive feel           |
+| **Modal open**        | emphasized         | Draws attention, feels deliberate |
+| **Modal close**       | accelerate         | Feels snappy, gets out of the way |
+| **Dropdown expand**   | emphasized         | Smooth reveal                     |
+| **Dropdown collapse** | accelerate         | Quick dismissal                   |
+| **Toast enter**       | emphasized         | Attention-grabbing                |
+| **Toast exit**        | accelerate         | Unobtrusive                       |
+| **Page transition**   | default            | Smooth, not jarring               |
+| **Button press**      | default            | Responsive feedback               |
+| **Drawer slide**      | emphasized         | Elegant reveal                    |
+| **Chart render**      | ease-out           | Smooth data visualization         |
 
 ---
 
@@ -130,12 +136,12 @@ This document defines the complete motion design token system for Budget App v1,
   :root {
     /* Override all durations to near-instant */
     --duration-instant: 0ms;
-    --duration-fast: 0.01ms;      /* Not 0ms to preserve JS animation listeners */
+    --duration-fast: 0.01ms; /* Not 0ms to preserve JS animation listeners */
     --duration-normal: 0.01ms;
     --duration-slow: 0.01ms;
     --duration-slower: 0.01ms;
   }
-  
+
   /* Disable all animations and transitions globally */
   *,
   *::before,
@@ -145,7 +151,7 @@ This document defines the complete motion design token system for Budget App v1,
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  
+
   /* Exceptions: Allow essential opacity fades for focus indicators */
   *:focus-visible {
     transition: opacity var(--duration-fast) var(--easing-default);
@@ -154,6 +160,7 @@ This document defines the complete motion design token system for Budget App v1,
 ```
 
 **Why 0.01ms instead of 0ms?**
+
 - JavaScript animation libraries often check for `duration > 0` to determine if animation is enabled
 - 0.01ms is effectively instant for users but preserves compatibility with animation frameworks
 
@@ -181,14 +188,15 @@ This document defines the complete motion design token system for Budget App v1,
 ```
 
 **Implementation in AccessibilitySettingsPanel**:
+
 ```typescript
 function toggleReducedMotion(enabled: boolean) {
   if (enabled) {
-    document.documentElement.classList.add('reduce-motion');
-    localStorage.setItem('reduceMotion', 'true');
+    document.documentElement.classList.add("reduce-motion");
+    localStorage.setItem("reduceMotion", "true");
   } else {
-    document.documentElement.classList.remove('reduce-motion');
-    localStorage.setItem('reduceMotion', 'false');
+    document.documentElement.classList.remove("reduce-motion");
+    localStorage.setItem("reduceMotion", "false");
   }
 }
 ```
@@ -196,11 +204,13 @@ function toggleReducedMotion(enabled: boolean) {
 ### 3.3 Essential vs Decorative Animations
 
 **Essential Animations** (preserve in reduced motion):
+
 - Focus indicators (visual feedback for keyboard navigation)
 - Loading spinners (communicate ongoing process)
 - Progress bars (show task completion)
 
 **Decorative Animations** (disable in reduced motion):
+
 - Parallax effects
 - Background animations (particles, beams)
 - Bounce/overshoot effects
@@ -208,6 +218,7 @@ function toggleReducedMotion(enabled: boolean) {
 - Chart rendering animations
 
 **Implementation Pattern**:
+
 ```css
 /* Essential: Preserve focus indicator transition */
 .button:focus-visible {
@@ -236,7 +247,9 @@ function toggleReducedMotion(enabled: boolean) {
 ### 4.1 Hover States
 
 ```css
-.button, .link, .card {
+.button,
+.link,
+.card {
   transition: all var(--duration-fast) var(--easing-default);
 }
 
@@ -252,6 +265,7 @@ function toggleReducedMotion(enabled: boolean) {
 ```
 
 **Guidelines**:
+
 - Duration: **fast (150ms)**
 - Easing: **default**
 - Properties: `transform`, `box-shadow`, `color`, `background-color`, `border-color`
@@ -270,6 +284,7 @@ button:not(:disabled):active {
 ```
 
 **Guidelines**:
+
 - Duration: **fast (150ms)**
 - Easing: **default**
 - Effect: Subtle scale-down (0.95) for tactile feedback
@@ -294,6 +309,7 @@ button:not(:disabled):active {
 ```
 
 **Guidelines**:
+
 - Duration: **normal (300ms)**
 - Easing: **emphasized** (draws attention)
 - Animation: Fade + slight scale + vertical shift
@@ -318,6 +334,7 @@ button:not(:disabled):active {
 ```
 
 **Guidelines**:
+
 - Duration: **fast (150ms)** - shorter than open for snappier feel
 - Easing: **accelerate** (quick dismissal)
 
@@ -341,6 +358,7 @@ button:not(:disabled):active {
 ```
 
 **Guidelines**:
+
 - Duration: **fast (150ms)** - quick reveal
 - Easing: **emphasized**
 - Animation: Fade + vertical slide from origin
@@ -380,6 +398,7 @@ button:not(:disabled):active {
 ```
 
 **Guidelines**:
+
 - Duration: **normal (300ms)**
 - Easing: **emphasized** (enter), **accelerate** (exit)
 - Animation: Horizontal slide from edge
@@ -404,6 +423,7 @@ button:not(:disabled):active {
 ```
 
 **Guidelines**:
+
 - Duration: **slow (500ms)** - allows content to settle
 - Easing: **default** (smooth, not jarring)
 - Animation: Fade + vertical shift
@@ -428,6 +448,7 @@ button:not(:disabled):active {
 ```
 
 **Guidelines**:
+
 - Duration: **normal (300ms)**
 - Easing: **default**
 - Animation: Fade + horizontal shift (direction matches tab position)
@@ -456,6 +477,7 @@ button:not(:disabled):active {
 ```
 
 **Guidelines**:
+
 - Duration: **normal (300ms)**
 - Easing: **emphasized** (expand), **accelerate** (collapse)
 - Use `height: auto` with JS measurement for dynamic content
@@ -468,7 +490,8 @@ button:not(:disabled):active {
 }
 
 @keyframes skeleton-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
@@ -499,6 +522,7 @@ button:not(:disabled):active {
 ```
 
 **Guidelines**:
+
 - Skeleton: **slower (700ms)**, pulse between 0.5-1 opacity
 - Spinner: **linear easing** (constant rotation), **preserve in reduced motion** (essential feedback)
 
@@ -528,6 +552,7 @@ button:not(:disabled):active {
 ```
 
 **Guidelines**:
+
 - Duration: **slower (700ms)** - allows eye to follow data
 - Easing: **ease-out** (smooth deceleration)
 - **Disable in reduced motion** (decorative, not essential)
@@ -539,16 +564,19 @@ button:not(:disabled):active {
 ### 5.1 GPU-Accelerated Properties
 
 **Use these properties for smooth 60fps animations**:
+
 - `transform` (translate, scale, rotate, skew)
 - `opacity`
 
 **Avoid these properties (trigger layout/paint)**:
+
 - `top`, `left`, `bottom`, `right`
 - `width`, `height`
 - `padding`, `margin`
 - `background-position`
 
 **Example - Good**:
+
 ```css
 /* ✅ GPU-accelerated transform */
 .modal-enter {
@@ -558,6 +586,7 @@ button:not(:disabled):active {
 ```
 
 **Example - Bad**:
+
 ```css
 /* ❌ Triggers layout recalculation */
 .modal-enter {
@@ -586,6 +615,7 @@ button:not(:disabled):active {
 ```
 
 **Guidelines**:
+
 - Use `will-change` sparingly (creates new layer, costs memory)
 - Only for elements that animate frequently (hover states, draggable items)
 - Remove after animation completes to free resources
@@ -625,25 +655,26 @@ button:not(:disabled):active {
 
 ### 7.1 Quick Reference Table
 
-| Interaction Type | Duration | Easing | Animation Properties |
-|------------------|----------|--------|----------------------|
-| Hover | fast (150ms) | default | transform, box-shadow, color |
-| Button press | fast (150ms) | default | transform (scale 0.95) |
-| Focus change | fast (150ms) | default | outline-offset |
-| Modal open | normal (300ms) | emphasized | opacity, transform (translateY, scale) |
-| Modal close | fast (150ms) | accelerate | opacity, transform |
-| Dropdown | fast (150ms) | emphasized | opacity, transform (translateY) |
-| Toast | normal (300ms) | emphasized/accelerate | opacity, transform (translateX) |
-| Page transition | slow (500ms) | default | opacity, transform (translateY) |
-| Tab switch | normal (300ms) | default | opacity, transform (translateX) |
-| Accordion | normal (300ms) | emphasized/accelerate | height, opacity |
-| Skeleton pulse | slower (700ms) | ease-in-out | opacity (infinite) |
-| Loading spinner | slower (700ms) | linear | transform (rotate, infinite) |
-| Chart render | slower (700ms) | ease-out | transform (scaleY) |
+| Interaction Type | Duration       | Easing                | Animation Properties                   |
+| ---------------- | -------------- | --------------------- | -------------------------------------- |
+| Hover            | fast (150ms)   | default               | transform, box-shadow, color           |
+| Button press     | fast (150ms)   | default               | transform (scale 0.95)                 |
+| Focus change     | fast (150ms)   | default               | outline-offset                         |
+| Modal open       | normal (300ms) | emphasized            | opacity, transform (translateY, scale) |
+| Modal close      | fast (150ms)   | accelerate            | opacity, transform                     |
+| Dropdown         | fast (150ms)   | emphasized            | opacity, transform (translateY)        |
+| Toast            | normal (300ms) | emphasized/accelerate | opacity, transform (translateX)        |
+| Page transition  | slow (500ms)   | default               | opacity, transform (translateY)        |
+| Tab switch       | normal (300ms) | default               | opacity, transform (translateX)        |
+| Accordion        | normal (300ms) | emphasized/accelerate | height, opacity                        |
+| Skeleton pulse   | slower (700ms) | ease-in-out           | opacity (infinite)                     |
+| Loading spinner  | slower (700ms) | linear                | transform (rotate, infinite)           |
+| Chart render     | slower (700ms) | ease-out              | transform (scaleY)                     |
 
 ### 7.2 Do's and Don'ts
 
 **✅ DO**:
+
 - Use tokens for all durations and easing curves
 - Honor `prefers-reduced-motion` system preference
 - Provide manual reduced motion toggle in accessibility settings
@@ -652,6 +683,7 @@ button:not(:disabled):active {
 - Preserve essential animations (loading states) in reduced motion
 
 **❌ DON'T**:
+
 - Hard-code animation durations (use tokens)
 - Ignore reduced motion preferences
 - Animate layout-triggering properties (`width`, `height`, `top`, `left`)
@@ -668,6 +700,7 @@ button:not(:disabled):active {
 **Animation from Interactions**: Motion animation triggered by user interaction can be disabled, unless the animation is **essential** to the functionality or information being conveyed.
 
 **Our Implementation**:
+
 - ✅ System preference detection (`prefers-reduced-motion`)
 - ✅ Manual toggle in accessibility settings panel
 - ✅ Essential animations preserved (loading spinners, progress bars)
@@ -676,6 +709,7 @@ button:not(:disabled):active {
 ### 8.2 WCAG 2.2.2 (Level A)
 
 **Pause, Stop, Hide**: For any moving, blinking, or scrolling content that:
+
 - Starts automatically
 - Lasts more than 5 seconds
 - Is presented in parallel with other content
@@ -683,6 +717,7 @@ button:not(:disabled):active {
 Users must be able to **pause, stop, or hide** it.
 
 **Our Implementation**:
+
 - ✅ No auto-playing decorative animations in budget app
 - ✅ Charts render on-demand (user navigates to page)
 - ✅ Loading states have finite duration (<3 seconds typical)

@@ -11,7 +11,7 @@
  * @see https://zod.dev for Zod documentation
  */
 
-import { z, type ZodIssue } from 'zod';
+import { z, type ZodIssue } from "zod";
 
 // ==================== COMMON SCHEMAS ====================
 
@@ -42,11 +42,11 @@ export const ApiErrorSchema = z.object({
  * Generate AI flashcards from module content
  */
 export const FlashcardGenerateRequestSchema = z.object({
-  moduleId: z.string().min(1, 'Module ID is required'),
-  moduleTitle: z.string().optional().default('TCO Module'),
-  domain: z.string().optional().default('general'),
+  moduleId: z.string().min(1, "Module ID is required"),
+  moduleTitle: z.string().optional().default("TCO Module"),
+  domain: z.string().optional().default("general"),
   learningObjectives: z.array(z.string()).optional().default([]),
-  difficulty: z.enum(['easy', 'medium', 'hard']).optional().default('medium'),
+  difficulty: z.enum(["easy", "medium", "hard"]).optional().default("medium"),
   count: z.number().int().positive().max(50).optional().default(10),
 });
 
@@ -55,7 +55,7 @@ export const GeneratedFlashcardSchema = z.object({
   back: z.string().min(1),
   hint: z.string().optional(),
   explanation: z.string().optional(),
-  type: z.enum(['basic', 'concept', 'cloze', 'code', 'diagram']),
+  type: z.enum(["basic", "concept", "cloze", "code", "diagram"]),
   tags: z.array(z.string()).optional(),
 });
 
@@ -64,7 +64,7 @@ export const FlashcardGenerateResponseSchema = z.object({
   flashcards: z.array(GeneratedFlashcardSchema).optional(),
   count: z.number().optional(),
   error: z.string().optional(),
-  provider: z.enum(['anthropic', 'openai']).optional(),
+  provider: z.enum(["anthropic", "openai"]).optional(),
 });
 
 /**
@@ -85,8 +85,8 @@ export const FlashcardPublicQuerySchema = z.object({
  * Execute a saved Tanium query
  */
 export const SimRunRequestSchema = z.object({
-  name: z.string().min(1, 'Query name is required').max(100),
-  format: z.enum(['json', 'csv']).optional().default('json'),
+  name: z.string().min(1, "Query name is required").max(100),
+  format: z.enum(["json", "csv"]).optional().default("json"),
 });
 
 export const SimRunResponseSchema = z.object({
@@ -101,8 +101,8 @@ export const SimRunResponseSchema = z.object({
  * Evaluate a Tanium query in real-time
  */
 export const SimEvalRequestSchema = z.object({
-  question: z.string().min(1, 'Question is required').max(1000),
-  format: z.enum(['json', 'csv']).optional().default('json'),
+  question: z.string().min(1, "Question is required").max(1000),
+  format: z.enum(["json", "csv"]).optional().default("json"),
   outFile: z.string().optional(),
 });
 
@@ -113,8 +113,8 @@ export const SimEvalResponseSchema = SimRunResponseSchema;
  * Save a Tanium query for later execution
  */
 export const SimSaveRequestSchema = z.object({
-  name: z.string().min(1, 'Query name is required').max(100),
-  question: z.string().min(1, 'Question is required').max(1000),
+  name: z.string().min(1, "Query name is required").max(100),
+  question: z.string().min(1, "Question is required").max(1000),
 });
 
 export const SimSaveResponseSchema = z.object({
@@ -129,7 +129,7 @@ export const SimSaveResponseSchema = z.object({
  * List all saved queries
  */
 export const SimSavedQuerySchema = z.object({
-  format: z.enum(['json', 'list']).optional().default('json'),
+  format: z.enum(["json", "list"]).optional().default("json"),
 });
 
 export const SimSavedResponseSchema = z.object({
@@ -161,7 +161,7 @@ export const StudyContentQuerySchema = z.object({
 });
 
 export const StudyContentRequestSchema = z.object({
-  moduleId: z.string().min(1, 'Module ID is required'),
+  moduleId: z.string().min(1, "Module ID is required"),
   sectionId: z.string().optional(),
   includeMetadata: z.boolean().optional().default(false),
 });
@@ -182,7 +182,7 @@ export const StudyContentResponseSchema = z.object({
  * Note: When Stripe is fully integrated, use StripeCheckoutRequestSchema instead
  */
 export const StripeCheckoutMockRequestSchema = z.object({
-  plan: z.enum(['free', 'pro', 'team']).optional().default('pro'),
+  plan: z.enum(["free", "pro", "team"]).optional().default("pro"),
 });
 
 /**
@@ -190,7 +190,7 @@ export const StripeCheckoutMockRequestSchema = z.object({
  * Create a Stripe checkout session with full Stripe integration
  */
 export const StripeCheckoutRequestSchema = z.object({
-  priceId: z.string().min(1, 'Price ID is required'),
+  priceId: z.string().min(1, "Price ID is required"),
   userId: z.string().optional(),
   successUrl: z.string().url().optional(),
   cancelUrl: z.string().url().optional(),
@@ -211,14 +211,19 @@ export const StripeCheckoutResponseSchema = z.object({
  * System health check endpoint
  */
 export const HealthCheckResponseSchema = z.object({
-  status: z.enum(['healthy', 'degraded', 'unhealthy']),
+  status: z.enum(["healthy", "degraded", "unhealthy"]),
   timestamp: z.string(),
   uptime: z.number().optional(),
   version: z.string().optional(),
-  services: z.record(z.string(), z.object({
-    status: z.enum(['up', 'down']),
-    latency: z.number().optional(),
-  })).optional(),
+  services: z
+    .record(
+      z.string(),
+      z.object({
+        status: z.enum(["up", "down"]),
+        latency: z.number().optional(),
+      })
+    )
+    .optional(),
 });
 
 // ==================== TYPE INFERENCE ====================
@@ -270,9 +275,9 @@ export async function validateRequest<T extends z.ZodTypeAny>(
     const result = schema.safeParse(body);
 
     if (!result.success) {
-      const errors = result.error.issues.map((err: ZodIssue) =>
-        `${err.path.join('.')}: ${err.message}`
-      ).join(', ');
+      const errors = result.error.issues
+        .map((err: ZodIssue) => `${err.path.join(".")}: ${err.message}`)
+        .join(", ");
 
       throw new Error(`Validation failed: ${errors}`);
     }
@@ -280,7 +285,7 @@ export async function validateRequest<T extends z.ZodTypeAny>(
     return result.data;
   } catch (error) {
     if (error instanceof SyntaxError) {
-      throw new Error('Invalid JSON body');
+      throw new Error("Invalid JSON body");
     }
     throw error;
   }
@@ -295,19 +300,16 @@ export async function validateRequest<T extends z.ZodTypeAny>(
  * // query is now typed as FlashcardPublicQuery
  * ```
  */
-export function validateQuery<T extends z.ZodTypeAny>(
-  url: string,
-  schema: T
-): z.infer<T> {
-  const {searchParams} = new URL(url);
+export function validateQuery<T extends z.ZodTypeAny>(url: string, schema: T): z.infer<T> {
+  const { searchParams } = new URL(url);
   const params = Object.fromEntries(searchParams.entries());
 
   const result = schema.safeParse(params);
 
   if (!result.success) {
-    const errors = result.error.issues.map((err: ZodIssue) =>
-      `${err.path.join('.')}: ${err.message}`
-    ).join(', ');
+    const errors = result.error.issues
+      .map((err: ZodIssue) => `${err.path.join(".")}: ${err.message}`)
+      .join(", ");
 
     throw new Error(`Query validation failed: ${errors}`);
   }
@@ -334,13 +336,13 @@ export function createValidatedResponse<T extends z.ZodTypeAny>(
   const result = schema.safeParse(data);
 
   if (!result.success) {
-    console.error('[API] Response validation failed:', result.error);
+    console.error("[API] Response validation failed:", result.error);
     // In production, return validated data anyway to avoid breaking clients
     // Log the error for monitoring
   }
 
   return new Response(JSON.stringify(data), {
     status,
-    headers: { 'Content-Type': 'application/json' },
+    headers: { "Content-Type": "application/json" },
   });
 }

@@ -235,7 +235,9 @@ function RequirementCard({
         </Badge>
       </div>
 
-      <p className="mb-3 text-xs text-gray-600 dark:text-muted-foreground">{requirement.description}</p>
+      <p className="mb-3 text-xs text-gray-600 dark:text-muted-foreground">
+        {requirement.description}
+      </p>
 
       <div className="space-y-1">
         <Progress value={progress} className="h-2" />
@@ -263,7 +265,8 @@ function AssessmentGateCard({
 
   const unmetRequirements = gate.requirements.filter((req) => !req.met);
   const canAttempt =
-    gate.unlocked && (gate.maxAttempts === undefined || gate.currentAttempts < (gate.maxAttempts ?? Infinity));
+    gate.unlocked &&
+    (gate.maxAttempts === undefined || gate.currentAttempts < (gate.maxAttempts ?? Infinity));
 
   return (
     <Card

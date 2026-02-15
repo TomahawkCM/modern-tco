@@ -32,14 +32,20 @@ export default function PricingPage() {
 
   const onSelect = async (plan: Plan) => {
     setLoadingPlan(plan);
-    try { await startCheckout(plan); } finally { setLoadingPlan(null); }
+    try {
+      await startCheckout(plan);
+    } finally {
+      setLoadingPlan(null);
+    }
   };
 
   return (
     <div className="mx-auto max-w-6xl space-y-8 p-6">
       <div className="text-center">
         <h1 className="mb-3 text-4xl font-bold text-foreground">Choose Your Plan</h1>
-        <p className="text-muted-foreground">Upgrade to unlock full practice, analytics, and advanced modules.</p>
+        <p className="text-muted-foreground">
+          Upgrade to unlock full practice, analytics, and advanced modules.
+        </p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-3">
@@ -65,7 +71,9 @@ export default function PricingPage() {
             <CardTitle className="text-foreground">Pro</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 text-muted-foreground">
-            <div className="text-3xl font-bold text-foreground">$9<span className="text-base font-medium">/mo</span></div>
+            <div className="text-3xl font-bold text-foreground">
+              $9<span className="text-base font-medium">/mo</span>
+            </div>
             <ul className="list-disc space-y-1 pl-5 text-sm">
               <li>Unlimited practice + explanations</li>
               <li>Exam simulator</li>
@@ -73,7 +81,7 @@ export default function PricingPage() {
               <li>Cloud sync for notes</li>
             </ul>
             <Button
-              className="w-full bg-tanium-accent hover:bg-blue-600"
+              className="bg-tanium-accent w-full hover:bg-blue-600"
               onClick={() => onSelect("pro")}
               disabled={loadingPlan === "pro"}
             >
@@ -87,7 +95,9 @@ export default function PricingPage() {
             <CardTitle className="text-foreground">Team</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 text-muted-foreground">
-            <div className="text-3xl font-bold text-foreground">$29<span className="text-base font-medium">/mo</span></div>
+            <div className="text-3xl font-bold text-foreground">
+              $29<span className="text-base font-medium">/mo</span>
+            </div>
             <ul className="list-disc space-y-1 pl-5 text-sm">
               <li>All Pro features</li>
               <li>Team seats (basic)</li>

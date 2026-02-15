@@ -4,35 +4,35 @@
  * Supports both OFX 1.x (SGML) and OFX 2.x (XML) formats
  */
 
-import { XMLParser } from 'fast-xml-parser';
-import { parse, format } from 'date-fns';
+import { XMLParser } from "fast-xml-parser";
+import { parse, format } from "date-fns";
 import type {
   OFXData,
   OFXTransaction,
   OFXAccountInfo,
   OFXBalances,
   ParsedTransaction,
-} from '@/types/budget';
+} from "@/types/budget";
 
 /**
  * Detect OFX file variant (1.x SGML vs 2.x XML)
  */
-export function detectOFXVariant(content: string): 'ofx1' | 'ofx2' | 'qfx' | null {
+export function detectOFXVariant(content: string): "ofx1" | "ofx2" | "qfx" | null {
   const trimmed = content.trim();
 
   // OFX 2.x has XML declaration
-  if (trimmed.startsWith('<?xml')) {
-    return 'ofx2';
+  if (trimmed.startsWith("<?xml")) {
+    return "ofx2";
   }
 
   // OFX 1.x has OFXHEADER tag
-  if (trimmed.includes('OFXHEADER:') || trimmed.includes('<OFXHEADER>')) {
-    return 'ofx1';
+  if (trimmed.includes("OFXHEADER:") || trimmed.includes("<OFXHEADER>")) {
+    return "ofx1";
   }
 
   // QFX is typically OFX 1.x from Quicken
-  if (trimmed.includes('QFXHEADER:')) {
-    return 'qfx';
+  if (trimmed.includes("QFXHEADER:")) {
+    return "qfx";
   }
 
   return null;
@@ -45,23 +45,20 @@ export function detectOFXVariant(content: string): 'ofx1' | 'ofx2' | 'qfx' | nul
  */
 function convertOFX1ToXML(sgml: string): string {
   // Remove header section (everything before <OFX>)
-  const ofxStart = sgml.indexOf('<OFX>');
+  const ofxStart = sgml.indexOf("<OFX>");
   if (ofxStart === -1) {
-    throw new Error('Invalid OFX 1.x file: <OFX> tag not found');
+    throw new Error("Invalid OFX 1.x file: <OFX> tag not found");
   }
 
   let xml = sgml.substring(ofxStart);
 
   // Add XML declaration
-  xml = `<?xml version="1.0" encoding="UTF-8"?>\n${  xml}`;
+  xml = `<?xml version="1.0" encoding="UTF-8"?>\n${xml}`;
 
   // Convert SGML tags to proper XML by adding closing tags
   // Match patterns like <TAGNAME>VALUE where VALUE doesn't contain < or >
   // and the next character is either < or newline
-  xml = xml.replace(
-    /<([A-Z0-9]+)>([^<>\n]+)(?=\n|<)/g,
-    '<$1>$2</$1>'
-  );
+  xml = xml.replace(/<([A-Z0-9]+)>([^<>\n]+)(?=\n|<)/g, "<$1>$2</$1>");
 
   return xml;
 }
@@ -74,18 +71,18 @@ function convertOFX1ToXML(sgml: string): string {
  */
 export function parseOFXDate(dateStr: string): Date {
   if (!dateStr) {
-    throw new Error('OFX date string is empty');
+    throw new Error("OFX date string is empty");
   }
 
   // Remove timezone and fractional seconds if present
-  const cleanDate = dateStr.split('.')[0].split('+')[0].split('-')[0];
+  const cleanDate = dateStr.split(".")[0].split("+")[0].split("-")[0];
 
   // Pad to full datetime if only date provided
-  const paddedDate = cleanDate.padEnd(14, '0');
+  const paddedDate = cleanDate.padEnd(14, "0");
 
   // Parse YYYYMMDDHHmmss format
   try {
-    return parse(paddedDate, 'yyyyMMddHHmmss', new Date());
+    return parse(paddedDate, "yyyyMMddHHmmss", new Date());
   } catch (error) {
     throw new Error(`Failed to parse OFX date: ${dateStr}`);
   }
@@ -110,7 +107,7 @@ function extractTransactionsFromXML(xml: any): OFXTransaction[] {
     if (!txn?.FITID) continue; // Skip invalid transactions
 
     transactions.push({
-      TRNTYPE: txn.TRNTYPE || 'OTHER',
+      TRNTYPE: txn.TRNTYPE || "OTHER",
       DTPOSTED: txn.DTPOSTED,
       TRNAMT: txn.TRNAMT,
       FITID: txn.FITID,
@@ -128,21 +125,19 @@ function extractTransactionsFromXML(xml: any): OFXTransaction[] {
  */
 function extractAccountInfo(xml: any): OFXAccountInfo {
   // Try bank account first, then credit card
-  const bankacctfrom =
-    xml?.OFX?.BANKMSGSRSV1?.STMTTRNRS?.STMTRS?.BANKACCTFROM;
-  const ccacctfrom =
-    xml?.OFX?.CREDITCARDMSGSRSV1?.CCSTMTTRNRS?.CCSTMTRS?.CCACCTFROM;
+  const bankacctfrom = xml?.OFX?.BANKMSGSRSV1?.STMTTRNRS?.STMTRS?.BANKACCTFROM;
+  const ccacctfrom = xml?.OFX?.CREDITCARDMSGSRSV1?.CCSTMTTRNRS?.CCSTMTRS?.CCACCTFROM;
 
   const acctInfo = bankacctfrom || ccacctfrom;
 
   if (!acctInfo) {
-    throw new Error('Account information not found in OFX file');
+    throw new Error("Account information not found in OFX file");
   }
 
   return {
     BANKID: acctInfo.BANKID,
     ACCTID: acctInfo.ACCTID || acctInfo.CCACCTID,
-    ACCTTYPE: acctInfo.ACCTTYPE || 'CREDITCARD',
+    ACCTTYPE: acctInfo.ACCTTYPE || "CREDITCARD",
   };
 }
 
@@ -159,7 +154,7 @@ function extractBalances(xml: any): OFXBalances {
     xml?.OFX?.CREDITCARDMSGSRSV1?.CCSTMTTRNRS?.CCSTMTRS?.AVAILBAL;
 
   if (!ledgerbal) {
-    throw new Error('Balance information not found in OFX file');
+    throw new Error("Balance information not found in OFX file");
   }
 
   return {
@@ -177,12 +172,12 @@ export function parseOFXContent(content: string): OFXData {
   const variant = detectOFXVariant(content);
 
   if (!variant) {
-    throw new Error('Unable to detect OFX format. File may be corrupted.');
+    throw new Error("Unable to detect OFX format. File may be corrupted.");
   }
 
   // Convert OFX 1.x to XML if needed
   let xmlContent = content;
-  if (variant === 'ofx1' || variant === 'qfx') {
+  if (variant === "ofx1" || variant === "qfx") {
     xmlContent = convertOFX1ToXML(content);
   }
 
@@ -204,23 +199,19 @@ export function parseOFXContent(content: string): OFXData {
   const currency =
     parsed?.OFX?.BANKMSGSRSV1?.STMTTRNRS?.STMTRS?.CURDEF ||
     parsed?.OFX?.CREDITCARDMSGSRSV1?.CCSTMTTRNRS?.CCSTMTRS?.CURDEF ||
-    'USD';
+    "USD";
 
   // Extract date range
   const banktranlist =
     parsed?.OFX?.BANKMSGSRSV1?.STMTTRNRS?.STMTRS?.BANKTRANLIST ||
     parsed?.OFX?.CREDITCARDMSGSRSV1?.CCSTMTTRNRS?.CCSTMTRS?.BANKTRANLIST;
 
-  const dateStart = banktranlist?.DTSTART
-    ? parseOFXDate(banktranlist.DTSTART)
-    : undefined;
-  const dateEnd = banktranlist?.DTEND
-    ? parseOFXDate(banktranlist.DTEND)
-    : undefined;
+  const dateStart = banktranlist?.DTSTART ? parseOFXDate(banktranlist.DTSTART) : undefined;
+  const dateEnd = banktranlist?.DTEND ? parseOFXDate(banktranlist.DTEND) : undefined;
 
   // Build OFXData structure
   const ofxData: OFXData = {
-    version: variant === 'ofx2' ? '2.x' : '1.x',
+    version: variant === "ofx2" ? "2.x" : "1.x",
     currency,
     accountInfo: extractAccountInfo(parsed),
     transactions: extractTransactionsFromXML(parsed),
@@ -235,10 +226,7 @@ export function parseOFXContent(content: string): OFXData {
 /**
  * Map single OFX transaction to ParsedTransaction format
  */
-export function mapOFXTransaction(
-  stmttrn: OFXTransaction,
-  accountId: string
-): ParsedTransaction {
+export function mapOFXTransaction(stmttrn: OFXTransaction, accountId: string): ParsedTransaction {
   // Parse date
   const date = parseOFXDate(stmttrn.DTPOSTED);
 
@@ -246,7 +234,7 @@ export function mapOFXTransaction(
   const amount = parseFloat(stmttrn.TRNAMT);
 
   // Build description from NAME and MEMO
-  let description = '';
+  let description = "";
   if (stmttrn.NAME) {
     description = stmttrn.NAME;
   }
@@ -274,13 +262,8 @@ export function mapOFXTransaction(
 /**
  * Extract transactions from OFXData and convert to ParsedTransaction[]
  */
-export function extractTransactions(
-  ofxData: OFXData,
-  accountId: string
-): ParsedTransaction[] {
-  return ofxData.transactions.map((txn) =>
-    mapOFXTransaction(txn, accountId)
-  );
+export function extractTransactions(ofxData: OFXData, accountId: string): ParsedTransaction[] {
+  return ofxData.transactions.map((txn) => mapOFXTransaction(txn, accountId));
 }
 
 /**
@@ -328,24 +311,24 @@ export function validateOFXFile(content: string): {
 
   // Check if file is empty
   if (!content || content.trim().length === 0) {
-    errors.push('File is empty');
+    errors.push("File is empty");
     return { isValid: false, errors };
   }
 
   // Detect variant
   const variant = detectOFXVariant(content);
   if (!variant) {
-    errors.push('Unable to detect OFX format. Expected OFX 1.x, 2.x, or QFX.');
+    errors.push("Unable to detect OFX format. Expected OFX 1.x, 2.x, or QFX.");
   }
 
   // Check for <OFX> tag
-  if (!content.includes('<OFX>')) {
-    errors.push('Missing <OFX> root tag');
+  if (!content.includes("<OFX>")) {
+    errors.push("Missing <OFX> root tag");
   }
 
   // Check for transaction list
-  if (!content.includes('STMTTRN') && !content.includes('CCSTMTTRN')) {
-    errors.push('No transactions found in file');
+  if (!content.includes("STMTTRN") && !content.includes("CCSTMTTRN")) {
+    errors.push("No transactions found in file");
   }
 
   return {

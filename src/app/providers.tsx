@@ -54,9 +54,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <AuthProvider>
       <SettingsProvider>
         <IncorrectAnswersProvider>
-          <GlobalNavProvider value={true}>
-            {children}
-          </GlobalNavProvider>
+          <GlobalNavProvider value={true}>{children}</GlobalNavProvider>
         </IncorrectAnswersProvider>
       </SettingsProvider>
     </AuthProvider>

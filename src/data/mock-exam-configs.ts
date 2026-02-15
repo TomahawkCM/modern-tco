@@ -10,7 +10,7 @@
  * - No database tables needed - templates stored in code for flexibility
  */
 
-import { TCODomain } from '@/types/exam';
+import { TCODomain } from "@/types/exam";
 
 // =====================================================
 // TYPES
@@ -20,12 +20,12 @@ import { TCODomain } from '@/types/exam';
  * Mock exam difficulty levels
  */
 export type MockExamDifficulty =
-  | 'diagnostic'
-  | 'beginner'
-  | 'intermediate'
-  | 'advanced'
-  | 'pre_exam'
-  | 'final_challenge';
+  | "diagnostic"
+  | "beginner"
+  | "intermediate"
+  | "advanced"
+  | "pre_exam"
+  | "final_challenge";
 
 /**
  * Question difficulty distribution
@@ -111,16 +111,16 @@ export const TCO_EXAM_SPECS = {
  * Difficulty: 60% easy, 30% medium, 10% hard
  */
 export const MOCK_EXAM_1_DIAGNOSTIC: MockExamTemplate = {
-  id: 'mock-exam-1-diagnostic',
-  name: 'Mock Exam 1: Diagnostic Assessment',
+  id: "mock-exam-1-diagnostic",
+  name: "Mock Exam 1: Diagnostic Assessment",
   description:
-    'Diagnostic exam to establish baseline knowledge. Focuses on fundamentals with mostly easier questions. Take this first to identify your strengths and weaknesses.',
+    "Diagnostic exam to establish baseline knowledge. Focuses on fundamentals with mostly easier questions. Take this first to identify your strengths and weaknesses.",
 
   totalQuestions: TCO_EXAM_SPECS.TOTAL_QUESTIONS,
   timeLimitMinutes: TCO_EXAM_SPECS.TIME_LIMIT_MINUTES,
   passingScorePercentage: TCO_EXAM_SPECS.PASSING_SCORE,
 
-  difficultyLevel: 'diagnostic',
+  difficultyLevel: "diagnostic",
   difficultyDistribution: {
     easy: 60,
     medium: 30,
@@ -132,7 +132,7 @@ export const MOCK_EXAM_1_DIAGNOSTIC: MockExamTemplate = {
   orderIndex: 1,
   isActive: true,
 
-  recommendedWhen: 'Start of your study journey (Day 1-3)',
+  recommendedWhen: "Start of your study journey (Day 1-3)",
   prerequisites: [],
 };
 
@@ -142,16 +142,16 @@ export const MOCK_EXAM_1_DIAGNOSTIC: MockExamTemplate = {
  * Difficulty: 50% easy, 40% medium, 10% hard
  */
 export const MOCK_EXAM_2_FOUNDATION: MockExamTemplate = {
-  id: 'mock-exam-2-foundation',
-  name: 'Mock Exam 2: Foundation Builder',
+  id: "mock-exam-2-foundation",
+  name: "Mock Exam 2: Foundation Builder",
   description:
-    'Build foundational knowledge across all TCO domains. Balanced mix of easy and medium questions to reinforce core concepts.',
+    "Build foundational knowledge across all TCO domains. Balanced mix of easy and medium questions to reinforce core concepts.",
 
   totalQuestions: TCO_EXAM_SPECS.TOTAL_QUESTIONS,
   timeLimitMinutes: TCO_EXAM_SPECS.TIME_LIMIT_MINUTES,
   passingScorePercentage: TCO_EXAM_SPECS.PASSING_SCORE,
 
-  difficultyLevel: 'beginner',
+  difficultyLevel: "beginner",
   difficultyDistribution: {
     easy: 50,
     medium: 40,
@@ -163,8 +163,8 @@ export const MOCK_EXAM_2_FOUNDATION: MockExamTemplate = {
   orderIndex: 2,
   isActive: true,
 
-  recommendedWhen: 'After completing 30% of study material (Day 5-7)',
-  prerequisites: ['mock-exam-1-diagnostic'],
+  recommendedWhen: "After completing 30% of study material (Day 5-7)",
+  prerequisites: ["mock-exam-1-diagnostic"],
 };
 
 /**
@@ -173,16 +173,16 @@ export const MOCK_EXAM_2_FOUNDATION: MockExamTemplate = {
  * Difficulty: 40% easy, 45% medium, 15% hard
  */
 export const MOCK_EXAM_3_INTERMEDIATE: MockExamTemplate = {
-  id: 'mock-exam-3-intermediate',
-  name: 'Mock Exam 3: Intermediate Challenge',
+  id: "mock-exam-3-intermediate",
+  name: "Mock Exam 3: Intermediate Challenge",
   description:
-    'Test your growing knowledge with more complex scenarios. Increased difficulty to push your understanding beyond basics.',
+    "Test your growing knowledge with more complex scenarios. Increased difficulty to push your understanding beyond basics.",
 
   totalQuestions: TCO_EXAM_SPECS.TOTAL_QUESTIONS,
   timeLimitMinutes: TCO_EXAM_SPECS.TIME_LIMIT_MINUTES,
   passingScorePercentage: TCO_EXAM_SPECS.PASSING_SCORE,
 
-  difficultyLevel: 'intermediate',
+  difficultyLevel: "intermediate",
   difficultyDistribution: {
     easy: 40,
     medium: 45,
@@ -194,8 +194,8 @@ export const MOCK_EXAM_3_INTERMEDIATE: MockExamTemplate = {
   orderIndex: 3,
   isActive: true,
 
-  recommendedWhen: 'After completing 50% of study material (Day 10-12)',
-  prerequisites: ['mock-exam-2-foundation'],
+  recommendedWhen: "After completing 50% of study material (Day 10-12)",
+  prerequisites: ["mock-exam-2-foundation"],
 };
 
 /**
@@ -204,16 +204,16 @@ export const MOCK_EXAM_3_INTERMEDIATE: MockExamTemplate = {
  * Difficulty: 30% easy, 50% medium, 20% hard
  */
 export const MOCK_EXAM_4_ADVANCED: MockExamTemplate = {
-  id: 'mock-exam-4-advanced',
-  name: 'Mock Exam 4: Advanced Practice',
+  id: "mock-exam-4-advanced",
+  name: "Mock Exam 4: Advanced Practice",
   description:
-    'Advanced scenarios testing deep understanding and troubleshooting skills. Focuses on real-world application and edge cases.',
+    "Advanced scenarios testing deep understanding and troubleshooting skills. Focuses on real-world application and edge cases.",
 
   totalQuestions: TCO_EXAM_SPECS.TOTAL_QUESTIONS,
   timeLimitMinutes: TCO_EXAM_SPECS.TIME_LIMIT_MINUTES,
   passingScorePercentage: TCO_EXAM_SPECS.PASSING_SCORE,
 
-  difficultyLevel: 'advanced',
+  difficultyLevel: "advanced",
   difficultyDistribution: {
     easy: 30,
     medium: 50,
@@ -225,8 +225,8 @@ export const MOCK_EXAM_4_ADVANCED: MockExamTemplate = {
   orderIndex: 4,
   isActive: true,
 
-  recommendedWhen: 'After completing 75% of study material (Day 14-16)',
-  prerequisites: ['mock-exam-3-intermediate'],
+  recommendedWhen: "After completing 75% of study material (Day 14-16)",
+  prerequisites: ["mock-exam-3-intermediate"],
 };
 
 /**
@@ -235,16 +235,16 @@ export const MOCK_EXAM_4_ADVANCED: MockExamTemplate = {
  * Difficulty: 25% easy, 50% medium, 25% hard
  */
 export const MOCK_EXAM_5_PRE_EXAM: MockExamTemplate = {
-  id: 'mock-exam-5-pre-exam',
-  name: 'Mock Exam 5: Pre-Exam Simulation',
+  id: "mock-exam-5-pre-exam",
+  name: "Mock Exam 5: Pre-Exam Simulation",
   description:
-    'Realistic exam simulation 1-2 weeks before your actual TCO exam. Full difficulty range matching real exam distribution.',
+    "Realistic exam simulation 1-2 weeks before your actual TCO exam. Full difficulty range matching real exam distribution.",
 
   totalQuestions: TCO_EXAM_SPECS.TOTAL_QUESTIONS,
   timeLimitMinutes: TCO_EXAM_SPECS.TIME_LIMIT_MINUTES,
   passingScorePercentage: TCO_EXAM_SPECS.PASSING_SCORE,
 
-  difficultyLevel: 'pre_exam',
+  difficultyLevel: "pre_exam",
   difficultyDistribution: {
     easy: 25,
     medium: 50,
@@ -256,8 +256,8 @@ export const MOCK_EXAM_5_PRE_EXAM: MockExamTemplate = {
   orderIndex: 5,
   isActive: true,
 
-  recommendedWhen: '1-2 weeks before your scheduled TCO exam (Day 18-20)',
-  prerequisites: ['mock-exam-4-advanced'],
+  recommendedWhen: "1-2 weeks before your scheduled TCO exam (Day 18-20)",
+  prerequisites: ["mock-exam-4-advanced"],
 };
 
 /**
@@ -266,16 +266,16 @@ export const MOCK_EXAM_5_PRE_EXAM: MockExamTemplate = {
  * Difficulty: 20% easy, 50% medium, 30% hard
  */
 export const MOCK_EXAM_6_FINAL: MockExamTemplate = {
-  id: 'mock-exam-6-final',
-  name: 'Mock Exam 6: Final Challenge',
+  id: "mock-exam-6-final",
+  name: "Mock Exam 6: Final Challenge",
   description:
-    'Most challenging mock exam. Tests mastery with complex, scenario-based questions. Pass this and you\'re exam-ready!',
+    "Most challenging mock exam. Tests mastery with complex, scenario-based questions. Pass this and you're exam-ready!",
 
   totalQuestions: TCO_EXAM_SPECS.TOTAL_QUESTIONS,
   timeLimitMinutes: TCO_EXAM_SPECS.TIME_LIMIT_MINUTES,
   passingScorePercentage: TCO_EXAM_SPECS.PASSING_SCORE,
 
-  difficultyLevel: 'final_challenge',
+  difficultyLevel: "final_challenge",
   difficultyDistribution: {
     easy: 20,
     medium: 50,
@@ -287,8 +287,8 @@ export const MOCK_EXAM_6_FINAL: MockExamTemplate = {
   orderIndex: 6,
   isActive: true,
 
-  recommendedWhen: '2-3 days before your TCO exam (final confidence check)',
-  prerequisites: ['mock-exam-5-pre-exam'],
+  recommendedWhen: "2-3 days before your TCO exam (final confidence check)",
+  prerequisites: ["mock-exam-5-pre-exam"],
 };
 
 // =====================================================
@@ -317,9 +317,7 @@ export function getMockExamTemplate(id: string): MockExamTemplate | undefined {
 /**
  * Get next recommended mock exam based on completed exams
  */
-export function getNextRecommendedExam(
-  completedExamIds: string[]
-): MockExamTemplate | null {
+export function getNextRecommendedExam(completedExamIds: string[]): MockExamTemplate | null {
   // Find first exam that hasn't been completed
   for (const template of MOCK_EXAM_TEMPLATES) {
     if (!completedExamIds.includes(template.id)) {
@@ -339,18 +337,12 @@ export function getNextRecommendedExam(
  * Calculate question count per domain based on distribution
  * Returns database-compatible domain keys (snake_case)
  */
-export function calculateDomainQuestionCounts(
-  template: MockExamTemplate
-): Record<string, number> {
+export function calculateDomainQuestionCounts(template: MockExamTemplate): Record<string, number> {
   const { totalQuestions, domainDistribution } = template;
 
   return {
-    asking_questions: Math.round(
-      (domainDistribution.asking_questions / 100) * totalQuestions
-    ),
-    refining_targeting: Math.round(
-      (domainDistribution.refining_targeting / 100) * totalQuestions
-    ),
+    asking_questions: Math.round((domainDistribution.asking_questions / 100) * totalQuestions),
+    refining_targeting: Math.round((domainDistribution.refining_targeting / 100) * totalQuestions),
     taking_action: Math.round((domainDistribution.taking_action / 100) * totalQuestions),
     navigation: Math.round((domainDistribution.navigation / 100) * totalQuestions),
     reporting: Math.round((domainDistribution.reporting / 100) * totalQuestions),
@@ -362,7 +354,7 @@ export function calculateDomainQuestionCounts(
  */
 export function calculateDifficultyQuestionCounts(
   template: MockExamTemplate
-): Record<'easy' | 'medium' | 'hard', number> {
+): Record<"easy" | "medium" | "hard", number> {
   const { totalQuestions, difficultyDistribution } = template;
 
   return {
@@ -386,30 +378,30 @@ export function getReadinessRecommendation(
   const template = getMockExamTemplate(examId);
   if (!template) {
     return {
-      message: 'Unknown exam',
-      nextAction: 'Continue studying',
+      message: "Unknown exam",
+      nextAction: "Continue studying",
       isReady: false,
     };
   }
 
   // Final exam readiness check
-  if (template.difficultyLevel === 'final_challenge') {
+  if (template.difficultyLevel === "final_challenge") {
     if (scorePercentage >= 85) {
       return {
-        message: '🎉 Excellent! You\'re fully prepared for the TCO exam!',
-        nextAction: 'Schedule your certification exam with confidence',
+        message: "🎉 Excellent! You're fully prepared for the TCO exam!",
+        nextAction: "Schedule your certification exam with confidence",
         isReady: true,
       };
     } else if (scorePercentage >= 75) {
       return {
-        message: 'Good score! You\'re nearly ready for the TCO exam.',
-        nextAction: 'Review weak areas and retake this exam',
+        message: "Good score! You're nearly ready for the TCO exam.",
+        nextAction: "Review weak areas and retake this exam",
         isReady: true,
       };
     } else {
       return {
-        message: 'You need more preparation before the actual exam.',
-        nextAction: 'Review missed questions and retake Mock Exam 4-5',
+        message: "You need more preparation before the actual exam.",
+        nextAction: "Review missed questions and retake Mock Exam 4-5",
         isReady: false,
       };
     }
@@ -419,19 +411,19 @@ export function getReadinessRecommendation(
   if (scorePercentage >= 80) {
     return {
       message: `Great job on ${template.name}! You're ready to progress.`,
-      nextAction: 'Move to the next mock exam',
+      nextAction: "Move to the next mock exam",
       isReady: true,
     };
   } else if (scorePercentage >= 70) {
     return {
       message: `You passed ${template.name}, but there's room for improvement.`,
-      nextAction: 'Review weak areas, then proceed to next exam',
+      nextAction: "Review weak areas, then proceed to next exam",
       isReady: true,
     };
   } else {
     return {
       message: `You didn't pass ${template.name}. Don't worry - this is a learning opportunity!`,
-      nextAction: 'Review missed questions and retake this exam',
+      nextAction: "Review missed questions and retake this exam",
       isReady: false,
     };
   }

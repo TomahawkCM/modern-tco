@@ -22,26 +22,32 @@ This app supports **114 locales** and **160+ currencies**. Every feature, every 
 
 **Non-negotiable rules for every feature**:
 
-| Rule | Detail |
-|------|--------|
-| **All user-facing strings** | Must go through i18n translation system. Zero hardcoded English. |
-| **All currency values** | Must use `Intl.NumberFormat` with user's locale and selected currency. Never hardcode `$` or assume USD/CAD. |
-| **All date formatting** | Must use `Intl.DateTimeFormat` with user's locale. Never hardcode MM/DD/YYYY. |
-| **Number formatting** | Respect locale decimal separators (`,` vs `.`) and thousands separators. |
-| **Currency inputs** | Accept user's locale format. `1.234,56` (German) and `1,234.56` (US) must both work. |
-| **Multi-currency accounts** | Users may have accounts in different currencies. Aggregations (net worth, safe-to-spend) must convert to base currency using exchange rates. |
-| **RTL layout** | CSS logical properties only (`margin-inline-start` not `margin-left`). All layouts must mirror correctly for Arabic, Hebrew, etc. |
-| **Category defaults** | Pre-populated categories must be localized per locale, not English-only. |
-| **Mortgage/loan terms** | Payment frequencies vary by country (monthly, biweekly, fortnightly, weekly). Rate types vary (fixed, variable, tracker). Don't assume North American norms. |
-| **Real estate** | Properties can be in any country, any currency. Property tax schedules vary globally. |
-| **Expense splitting** | Settlement methods vary by country (Interac in Canada, Venmo in US, PayPal globally, bank transfer in EU). |
-| **Budget periods** | Some cultures budget weekly, not monthly. Support configurable budget periods. |
-| **Seniors mode** | Must work across all locales — larger text in any script (Latin, CJK, Arabic, Devanagari, etc.) |
+| Rule                        | Detail                                                                                                                                                       |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **All user-facing strings** | Must go through i18n translation system. Zero hardcoded English.                                                                                             |
+| **All currency values**     | Must use `Intl.NumberFormat` with user's locale and selected currency. Never hardcode `$` or assume USD/CAD.                                                 |
+| **All date formatting**     | Must use `Intl.DateTimeFormat` with user's locale. Never hardcode MM/DD/YYYY.                                                                                |
+| **Number formatting**       | Respect locale decimal separators (`,` vs `.`) and thousands separators.                                                                                     |
+| **Currency inputs**         | Accept user's locale format. `1.234,56` (German) and `1,234.56` (US) must both work.                                                                         |
+| **Multi-currency accounts** | Users may have accounts in different currencies. Aggregations (net worth, safe-to-spend) must convert to base currency using exchange rates.                 |
+| **RTL layout**              | CSS logical properties only (`margin-inline-start` not `margin-left`). All layouts must mirror correctly for Arabic, Hebrew, etc.                            |
+| **Category defaults**       | Pre-populated categories must be localized per locale, not English-only.                                                                                     |
+| **Mortgage/loan terms**     | Payment frequencies vary by country (monthly, biweekly, fortnightly, weekly). Rate types vary (fixed, variable, tracker). Don't assume North American norms. |
+| **Real estate**             | Properties can be in any country, any currency. Property tax schedules vary globally.                                                                        |
+| **Expense splitting**       | Settlement methods vary by country (Interac in Canada, Venmo in US, PayPal globally, bank transfer in EU).                                                   |
+| **Budget periods**          | Some cultures budget weekly, not monthly. Support configurable budget periods.                                                                               |
+| **Seniors mode**            | Must work across all locales — larger text in any script (Latin, CJK, Arabic, Devanagari, etc.)                                                              |
 
 **Currency conversion architecture**:
+
 ```typescript
 // Every aggregation that combines multiple currencies must use this pattern:
-function toBaseCurrency(amount: number, fromCurrency: string, baseCurrency: string, rates: ExchangeRates): number {
+function toBaseCurrency(
+  amount: number,
+  fromCurrency: string,
+  baseCurrency: string,
+  rates: ExchangeRates
+): number {
   if (fromCurrency === baseCurrency) return amount;
   const rate = rates[`${fromCurrency}_${baseCurrency}`];
   return amount * rate;
@@ -50,7 +56,7 @@ function toBaseCurrency(amount: number, fromCurrency: string, baseCurrency: stri
 // Display: always show in user's chosen display currency with locale formatting
 function formatCurrency(amount: number, locale: string, currency: string): string {
   return new Intl.NumberFormat(locale, {
-    style: 'currency',
+    style: "currency",
     currency: currency,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -64,28 +70,28 @@ function formatCurrency(amount: number, locale: string, currency: string): strin
 
 ## Current App Inventory (What Already Exists)
 
-| Module | Status | Notes |
-|--------|--------|-------|
-| Transaction entry (manual) | ✅ Built | Needs mobile touch optimization |
-| CSV import (71+ Canadian banks) | ✅ Built | 3,462 LOC parsers |
-| OCR receipt scanning (Tesseract.js) | ✅ Built | Camera UI needs mobile polish |
-| AI categorization (TF.js local) | ✅ Built | 902 LOC categorizer |
-| Reports & Analytics | ✅ Built | 2,445 LOC analytics engine |
-| Loans / Investments / Retirement | ✅ Built | Needs responsive layouts |
-| Financial calculators | ✅ Built | Needs touch-friendly inputs |
-| Subscription tracking | ✅ Built | 209 LOC recurring-detector |
-| Budget methodology (4 types) | ✅ Built | Missing rollover, needs UX polish |
-| Multi-currency (160+) | ✅ Built | Needs travel mode UX |
-| i18n (114 locales) | ✅ Built | RTL support needs CSS audit |
-| Seniors mode | ✅ Built | 8KB SeniorsModeContext, needs expansion |
-| Dark mode | ✅ Built | Needs systematic color token audit |
-| Sankey diagrams | ✅ Built | Spending flow visualization |
-| Health score | ✅ Built | 666 LOC, needs dashboard integration |
-| AI chatbot context | ✅ Built | ~13KB ChatbotContext |
-| Weekly insights | ✅ Built | 706 LOC, not surfaced in UI |
-| Overspending detector | ✅ Built | 159 LOC, not surfaced in UI |
-| LSTM predictive spending | ✅ Built | 478 LOC, needs UI layer |
-| Trend forecasting | ✅ Built | 227 LOC, needs chart UI |
+| Module                              | Status   | Notes                                   |
+| ----------------------------------- | -------- | --------------------------------------- |
+| Transaction entry (manual)          | ✅ Built | Needs mobile touch optimization         |
+| CSV import (71+ Canadian banks)     | ✅ Built | 3,462 LOC parsers                       |
+| OCR receipt scanning (Tesseract.js) | ✅ Built | Camera UI needs mobile polish           |
+| AI categorization (TF.js local)     | ✅ Built | 902 LOC categorizer                     |
+| Reports & Analytics                 | ✅ Built | 2,445 LOC analytics engine              |
+| Loans / Investments / Retirement    | ✅ Built | Needs responsive layouts                |
+| Financial calculators               | ✅ Built | Needs touch-friendly inputs             |
+| Subscription tracking               | ✅ Built | 209 LOC recurring-detector              |
+| Budget methodology (4 types)        | ✅ Built | Missing rollover, needs UX polish       |
+| Multi-currency (160+)               | ✅ Built | Needs travel mode UX                    |
+| i18n (114 locales)                  | ✅ Built | RTL support needs CSS audit             |
+| Seniors mode                        | ✅ Built | 8KB SeniorsModeContext, needs expansion |
+| Dark mode                           | ✅ Built | Needs systematic color token audit      |
+| Sankey diagrams                     | ✅ Built | Spending flow visualization             |
+| Health score                        | ✅ Built | 666 LOC, needs dashboard integration    |
+| AI chatbot context                  | ✅ Built | ~13KB ChatbotContext                    |
+| Weekly insights                     | ✅ Built | 706 LOC, not surfaced in UI             |
+| Overspending detector               | ✅ Built | 159 LOC, not surfaced in UI             |
+| LSTM predictive spending            | ✅ Built | 478 LOC, needs UI layer                 |
+| Trend forecasting                   | ✅ Built | 227 LOC, needs chart UI                 |
 
 **Key insight**: Many powerful features already exist in `src/lib/` but aren't properly surfaced in the UI. The upgrade is 60% UI/UX work, 40% new feature logic.
 
@@ -105,14 +111,14 @@ All spacing must use multiples of 8. Audit entire codebase and replace arbitrary
 
 ```css
 :root {
-  --space-1: 4px;    /* Half-unit (icon gaps only) */
-  --space-2: 8px;    /* Tight (within buttons, small gaps) */
-  --space-3: 12px;   /* Compact (badge padding) */
-  --space-4: 16px;   /* Standard (between elements) */
-  --space-6: 24px;   /* Comfortable (card padding) */
-  --space-8: 32px;   /* Section spacing */
-  --space-12: 48px;  /* Large section breaks */
-  --space-16: 64px;  /* Major layout divisions */
+  --space-1: 4px; /* Half-unit (icon gaps only) */
+  --space-2: 8px; /* Tight (within buttons, small gaps) */
+  --space-3: 12px; /* Compact (badge padding) */
+  --space-4: 16px; /* Standard (between elements) */
+  --space-6: 24px; /* Comfortable (card padding) */
+  --space-8: 32px; /* Section spacing */
+  --space-12: 48px; /* Large section breaks */
+  --space-16: 64px; /* Major layout divisions */
 }
 ```
 
@@ -120,15 +126,20 @@ All spacing must use multiples of 8. Audit entire codebase and replace arbitrary
 
 ```css
 :root {
-  --touch-min: 44px;           /* Minimum tappable area */
-  --touch-comfortable: 48px;   /* Recommended */
-  --touch-seniors: 56px;       /* Seniors mode */
-  --touch-fab: 56px;           /* Floating action button */
+  --touch-min: 44px; /* Minimum tappable area */
+  --touch-comfortable: 48px; /* Recommended */
+  --touch-seniors: 56px; /* Seniors mode */
+  --touch-fab: 56px; /* Floating action button */
 }
 
 /* Apply to all interactive elements */
-button, a, [role="button"], input[type="checkbox"], input[type="radio"],
-.clickable, [data-clickable] {
+button,
+a,
+[role="button"],
+input[type="checkbox"],
+input[type="radio"],
+.clickable,
+[data-clickable] {
   min-height: var(--touch-min);
   min-width: var(--touch-min);
 }
@@ -149,38 +160,38 @@ Audit current colors and replace with semantic tokens. Financial values MUST use
 ```css
 :root {
   /* Financial semantic colors */
-  --color-income: #0099E6;
-  --color-expense: #E6005E;
-  --color-savings: #00CC62;
-  --color-warning: #D97706;
-  --color-danger: #DC2626;
-  --color-accent: #0D9488;      /* Teal — primary action color */
+  --color-income: #0099e6;
+  --color-expense: #e6005e;
+  --color-savings: #00cc62;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-accent: #0d9488; /* Teal — primary action color */
 
   /* Surface colors — light mode */
-  --color-bg: #FAFAFA;
-  --color-surface: #FFFFFF;
-  --color-surface-hover: #F8F9FA;
-  --color-border: #DEE2E6;
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f8f9fa;
+  --color-border: #dee2e6;
   --color-text-primary: #212529;
-  --color-text-secondary: #868E96;
-  --color-text-disabled: #ADB5BD;
+  --color-text-secondary: #868e96;
+  --color-text-disabled: #adb5bd;
 }
 
 .dark {
-  --color-income: #1AB5FF;
-  --color-expense: #FF1A7A;
-  --color-savings: #1AFF88;
-  --color-warning: #F59E0B;
-  --color-danger: #EF4444;
-  --color-accent: #14B8A6;
+  --color-income: #1ab5ff;
+  --color-expense: #ff1a7a;
+  --color-savings: #1aff88;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-accent: #14b8a6;
 
-  --color-bg: #1A1B1E;
-  --color-surface: #25262B;
-  --color-surface-hover: #2C2E33;
-  --color-border: #373A40;
-  --color-text-primary: #C1C2C5;
+  --color-bg: #1a1b1e;
+  --color-surface: #25262b;
+  --color-surface-hover: #2c2e33;
+  --color-border: #373a40;
+  --color-text-primary: #c1c2c5;
   --color-text-secondary: #909296;
-  --color-text-disabled: #5C5F66;
+  --color-text-disabled: #5c5f66;
 }
 ```
 
@@ -188,21 +199,22 @@ Audit current colors and replace with semantic tokens. Financial values MUST use
 
 ```css
 :root {
-  --font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', 'Cascadia Code', monospace;
+  --font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Cascadia Code", monospace;
 
-  --text-xs: 0.75rem;    /* 12px — use sparingly */
-  --text-sm: 0.875rem;   /* 14px — secondary info */
-  --text-base: 1rem;     /* 16px — body text minimum */
-  --text-lg: 1.125rem;   /* 18px — emphasized body */
-  --text-xl: 1.25rem;    /* 20px — card titles */
-  --text-2xl: 1.5rem;    /* 24px — section headers */
-  --text-3xl: 2rem;      /* 32px — page titles */
-  --text-4xl: 2.5rem;    /* 40px — hero numbers (safe-to-spend) */
+  --text-xs: 0.75rem; /* 12px — use sparingly */
+  --text-sm: 0.875rem; /* 14px — secondary info */
+  --text-base: 1rem; /* 16px — body text minimum */
+  --text-lg: 1.125rem; /* 18px — emphasized body */
+  --text-xl: 1.25rem; /* 20px — card titles */
+  --text-2xl: 1.5rem; /* 24px — section headers */
+  --text-3xl: 2rem; /* 32px — page titles */
+  --text-4xl: 2.5rem; /* 40px — hero numbers (safe-to-spend) */
 }
 
 /* Financial values ALWAYS use monospace font */
-.financial-value, [data-financial] {
+.financial-value,
+[data-financial] {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
@@ -219,14 +231,16 @@ Audit current colors and replace with semantic tokens. Financial values MUST use
   --duration-emphasized: 300ms;
   --duration-dramatic: 500ms;
 
-  --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1.0);
-  --ease-in: cubic-bezier(0.4, 0.0, 1.0, 1.0);
-  --ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1.0);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Respect user preference */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -243,28 +257,28 @@ export default {
   theme: {
     extend: {
       screens: {
-        'xs': '320px',
-        'sm': '576px',
-        'md': '768px',
-        'lg': '992px',
-        'xl': '1200px',
-        '2xl': '1440px',
+        xs: "320px",
+        sm: "576px",
+        md: "768px",
+        lg: "992px",
+        xl: "1200px",
+        "2xl": "1440px",
       },
       spacing: {
         // Add any missing 8px-grid values
-        '18': '4.5rem',  // 72px (icon sidebar width)
+        "18": "4.5rem", // 72px (icon sidebar width)
       },
       minHeight: {
-        'touch': '44px',
-        'touch-comfortable': '48px',
-        'touch-seniors': '56px',
+        touch: "44px",
+        "touch-comfortable": "48px",
+        "touch-seniors": "56px",
       },
       minWidth: {
-        'touch': '44px',
+        touch: "44px",
       },
     },
   },
-}
+};
 ```
 
 ---
@@ -273,12 +287,12 @@ export default {
 
 ### Breakpoint Behavior
 
-| Breakpoint | Layout | Navigation | Content |
-|------------|--------|-----------|---------|
-| xs–sm (320–575px) | Single column | Bottom tab bar (5 tabs) | Full-width stacked cards |
-| md (768px+) | Two column | Collapsible icon sidebar | 2-column widget grid |
-| lg (992px+) | Two column | Full sidebar (icons + labels) | 2-column with wider content |
-| xl (1200px+) | Three column | Full sidebar + optional detail panel | 3-column widget grid |
+| Breakpoint        | Layout        | Navigation                           | Content                     |
+| ----------------- | ------------- | ------------------------------------ | --------------------------- |
+| xs–sm (320–575px) | Single column | Bottom tab bar (5 tabs)              | Full-width stacked cards    |
+| md (768px+)       | Two column    | Collapsible icon sidebar             | 2-column widget grid        |
+| lg (992px+)       | Two column    | Full sidebar (icons + labels)        | 2-column with wider content |
+| xl (1200px+)      | Three column  | Full sidebar + optional detail panel | 3-column widget grid        |
 
 ### Mobile Layout (xs–sm): Phone
 
@@ -308,6 +322,7 @@ export default {
 ```
 
 **Bottom Tab Bar** (5 visible, overflow in "More"):
+
 1. 🏠 Dashboard
 2. 📊 Budget
 3. 💰 Accounts
@@ -318,18 +333,18 @@ export default {
 
 ```tsx
 // components/layout/BottomTabBar.tsx
-'use client';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
-import { Home, PieChart, Wallet, List, MoreHorizontal } from 'lucide-react';
-import { cn } from '@/lib/utils';
+"use client";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { Home, PieChart, Wallet, List, MoreHorizontal } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const tabs = [
-  { href: '/budget-app', icon: Home, label: 'Home' },
-  { href: '/budget-app/budget', icon: PieChart, label: 'Budget' },
-  { href: '/budget-app/accounts', icon: Wallet, label: 'Accounts' },
-  { href: '/budget-app/transactions', icon: List, label: 'Activity' },
-  { href: '/budget-app/more', icon: MoreHorizontal, label: 'More' },
+  { href: "/budget-app", icon: Home, label: "Home" },
+  { href: "/budget-app/budget", icon: PieChart, label: "Budget" },
+  { href: "/budget-app/accounts", icon: Wallet, label: "Accounts" },
+  { href: "/budget-app/transactions", icon: List, label: "Activity" },
+  { href: "/budget-app/more", icon: MoreHorizontal, label: "More" },
 ];
 
 export function BottomTabBar() {
@@ -337,20 +352,20 @@ export function BottomTabBar() {
 
   return (
     <nav
-      className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t md:hidden"
-      style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
+      className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background md:hidden"
+      style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
     >
-      <div className="flex items-center justify-around h-14">
+      <div className="flex h-14 items-center justify-around">
         {tabs.map(({ href, icon: Icon, label }) => {
-          const isActive = pathname === href || pathname.startsWith(href + '/');
+          const isActive = pathname === href || pathname.startsWith(href + "/");
           return (
             <Link
               key={href}
               href={href}
               className={cn(
-                'flex flex-col items-center justify-center min-w-[64px] min-h-[44px] gap-0.5',
-                'text-xs transition-colors',
-                isActive ? 'text-primary' : 'text-muted-foreground'
+                "flex min-h-[44px] min-w-[64px] flex-col items-center justify-center gap-0.5",
+                "text-xs transition-colors",
+                isActive ? "text-primary" : "text-muted-foreground"
               )}
             >
               <Icon size={20} strokeWidth={isActive ? 2.5 : 1.5} />
@@ -365,6 +380,7 @@ export function BottomTabBar() {
 ```
 
 **Rules**:
+
 - Bottom tabs ONLY visible below `md` breakpoint (768px)
 - Main content area needs `pb-16` on mobile to clear the tab bar
 - Active tab: bold icon + accent color text
@@ -437,16 +453,14 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex h-screen overflow-hidden">
       {/* Sidebar — hidden on mobile, icon-only on md, full on lg */}
-      <aside className="hidden md:flex md:w-[72px] lg:w-60 flex-col border-r bg-background transition-all duration-200">
+      <aside className="hidden flex-col border-r bg-background transition-all duration-200 md:flex md:w-[72px] lg:w-60">
         <SidebarNav />
       </aside>
 
       {/* Main content */}
       <main className="flex-1 overflow-y-auto pb-16 md:pb-0">
         <TopBar />
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          {children}
-        </div>
+        <div className="mx-auto max-w-[1440px] px-4 py-6 sm:px-6 lg:px-8">{children}</div>
       </main>
 
       {/* Bottom tabs — mobile only */}
@@ -467,13 +481,16 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
 
 ```html
 <!-- app/layout.tsx or head -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Budget">
-<meta name="theme-color" content="#14B8A6" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#0D9488" media="(prefers-color-scheme: light)">
-<link rel="apple-touch-icon" href="/icons/apple-touch-icon-180.png">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Budget" />
+<meta name="theme-color" content="#14B8A6" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#0D9488" media="(prefers-color-scheme: light)" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon-180.png" />
 ```
 
 ### Safe Area CSS
@@ -529,11 +546,26 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
   "icons": [
     { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ],
   "screenshots": [
-    { "src": "/screenshots/dashboard-mobile.png", "sizes": "375x812", "type": "image/png", "form_factor": "narrow" },
-    { "src": "/screenshots/dashboard-desktop.png", "sizes": "1280x800", "type": "image/png", "form_factor": "wide" }
+    {
+      "src": "/screenshots/dashboard-mobile.png",
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshots/dashboard-desktop.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
   ]
 }
 ```
@@ -544,19 +576,19 @@ Since iOS has NO automatic install prompt, create a custom educational banner:
 
 ```tsx
 // components/shared/IOSInstallBanner.tsx
-'use client';
-import { useState, useEffect } from 'react';
-import { Share, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+"use client";
+import { useState, useEffect } from "react";
+import { Share, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function IOSInstallBanner() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-    const dismissed = localStorage.getItem('ios-install-dismissed');
-    const sessions = parseInt(localStorage.getItem('session-count') || '0', 10);
+    const isStandalone = window.matchMedia("(display-mode: standalone)").matches;
+    const dismissed = localStorage.getItem("ios-install-dismissed");
+    const sessions = parseInt(localStorage.getItem("session-count") || "0", 10);
 
     // Show after 2+ sessions, not already installed, not dismissed recently
     if (isIOS && !isStandalone && sessions >= 2 && !dismissed) {
@@ -564,21 +596,26 @@ export function IOSInstallBanner() {
     }
 
     // Increment session count
-    localStorage.setItem('session-count', String(sessions + 1));
+    localStorage.setItem("session-count", String(sessions + 1));
   }, []);
 
   if (!show) return null;
 
   return (
-    <div className="fixed bottom-16 left-4 right-4 z-40 bg-card border rounded-xl p-4 shadow-lg animate-in slide-in-from-bottom-4">
-      <button onClick={() => { setShow(false); localStorage.setItem('ios-install-dismissed', Date.now().toString()); }}
-        className="absolute top-2 right-2 p-1">
+    <div className="fixed bottom-16 left-4 right-4 z-40 rounded-xl border bg-card p-4 shadow-lg animate-in slide-in-from-bottom-4">
+      <button
+        onClick={() => {
+          setShow(false);
+          localStorage.setItem("ios-install-dismissed", Date.now().toString());
+        }}
+        className="absolute right-2 top-2 p-1"
+      >
         <X size={16} />
       </button>
-      <p className="text-sm font-medium mb-1">Install Budget App</p>
+      <p className="mb-1 text-sm font-medium">Install Budget App</p>
       <p className="text-xs text-muted-foreground">
-        Tap <Share size={14} className="inline mx-0.5" /> then <strong>"Add to Home Screen"</strong> for
-        the full app experience with faster loading.
+        Tap <Share size={14} className="mx-0.5 inline" /> then <strong>"Add to Home Screen"</strong>{" "}
+        for the full app experience with faster loading.
       </p>
     </div>
   );
@@ -589,10 +626,10 @@ export function IOSInstallBanner() {
 
 ```tsx
 // components/shared/AndroidInstallPrompt.tsx
-'use client';
-import { useState, useEffect } from 'react';
-import { Download } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+"use client";
+import { useState, useEffect } from "react";
+import { Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 let deferredPrompt: any = null;
 
@@ -604,11 +641,11 @@ export function AndroidInstallPrompt() {
       e.preventDefault();
       deferredPrompt = e;
       // Show AFTER user has created their first budget, not on first visit
-      const hasData = localStorage.getItem('budget-has-data');
+      const hasData = localStorage.getItem("budget-has-data");
       if (hasData) setShow(true);
     };
-    window.addEventListener('beforeinstallprompt', handler);
-    return () => window.removeEventListener('beforeinstallprompt', handler);
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
   const install = async () => {
@@ -622,14 +659,16 @@ export function AndroidInstallPrompt() {
   if (!show) return null;
 
   return (
-    <div className="fixed bottom-16 left-4 right-4 z-40 bg-card border rounded-xl p-4 shadow-lg md:hidden animate-in slide-in-from-bottom-4">
+    <div className="fixed bottom-16 left-4 right-4 z-40 rounded-xl border bg-card p-4 shadow-lg animate-in slide-in-from-bottom-4 md:hidden">
       <div className="flex items-center gap-3">
-        <Download size={20} className="text-primary shrink-0" />
+        <Download size={20} className="shrink-0 text-primary" />
         <div className="flex-1">
           <p className="text-sm font-medium">Add Budget App to home screen</p>
           <p className="text-xs text-muted-foreground">Quick access, works offline</p>
         </div>
-        <Button size="sm" onClick={install}>Install</Button>
+        <Button size="sm" onClick={install}>
+          Install
+        </Button>
       </div>
     </div>
   );
@@ -640,27 +679,23 @@ export function AndroidInstallPrompt() {
 
 ```typescript
 // public/sw.js
-const CACHE_NAME = 'budget-app-v1';
+const CACHE_NAME = "budget-app-v1";
 const SHELL_ASSETS = [
-  '/budget-app',
-  '/budget-app/budget',
-  '/budget-app/transactions',
-  '/budget-app/accounts',
+  "/budget-app",
+  "/budget-app/budget",
+  "/budget-app/transactions",
+  "/budget-app/accounts",
   // Add critical CSS, JS, font files
 ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(SHELL_ASSETS))
-  );
+self.addEventListener("install", (event) => {
+  event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(SHELL_ASSETS)));
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener("fetch", (event) => {
   // Cache-first for app shell, network-first for API/data
-  if (SHELL_ASSETS.some(url => event.request.url.includes(url))) {
-    event.respondWith(
-      caches.match(event.request).then(cached => cached || fetch(event.request))
-    );
+  if (SHELL_ASSETS.some((url) => event.request.url.includes(url))) {
+    event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
   }
 });
 ```
@@ -669,9 +704,9 @@ self.addEventListener('fetch', (event) => {
 
 ```tsx
 // hooks/useIOSStatePreservation.ts
-'use client';
-import { useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+"use client";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export function useIOSStatePreservation() {
   const pathname = usePathname();
@@ -679,28 +714,31 @@ export function useIOSStatePreservation() {
   useEffect(() => {
     // Save state when app goes to background
     const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') {
-        sessionStorage.setItem('app-state', JSON.stringify({
-          route: pathname,
-          scrollY: window.scrollY,
-          timestamp: Date.now(),
-        }));
+      if (document.visibilityState === "hidden") {
+        sessionStorage.setItem(
+          "app-state",
+          JSON.stringify({
+            route: pathname,
+            scrollY: window.scrollY,
+            timestamp: Date.now(),
+          })
+        );
       }
     };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
   }, [pathname]);
 
   // On mount, restore state if recent (within 1 hour)
   useEffect(() => {
-    const saved = sessionStorage.getItem('app-state');
+    const saved = sessionStorage.getItem("app-state");
     if (saved) {
       const state = JSON.parse(saved);
       if (Date.now() - state.timestamp < 3600000) {
         window.scrollTo(0, state.scrollY);
       }
-      sessionStorage.removeItem('app-state');
+      sessionStorage.removeItem("app-state");
     }
   }, []);
 }
@@ -716,28 +754,29 @@ export function useIOSStatePreservation() {
 // components/transactions/TransactionRow.tsx
 interface TransactionRowProps {
   txn: Transaction;
-  onSwipeRight?: () => void;  // Approve
-  onSwipeLeft?: () => void;   // Flag
-  onLongPress?: () => void;   // Context menu
+  onSwipeRight?: () => void; // Approve
+  onSwipeLeft?: () => void; // Flag
+  onLongPress?: () => void; // Context menu
 }
 
 export function TransactionRow({ txn, ...handlers }: TransactionRowProps) {
   return (
     <>
       {/* Mobile: Compact two-line row */}
-      <div className="flex items-center gap-3 px-4 py-3 min-h-[48px] md:hidden
-                      hover:bg-muted/50 active:bg-muted transition-colors">
-        <span className="text-xl">{txn.category?.emoji || '💳'}</span>
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium truncate">{txn.payee}</p>
+      <div className="flex min-h-[48px] items-center gap-3 px-4 py-3 transition-colors hover:bg-muted/50 active:bg-muted md:hidden">
+        <span className="text-xl">{txn.category?.emoji || "💳"}</span>
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-sm font-medium">{txn.payee}</p>
           <p className="text-xs text-muted-foreground">
             {txn.category?.name} · {formatRelativeDate(txn.date)}
           </p>
         </div>
-        <span className={cn(
-          'text-sm font-mono font-medium tabular-nums',
-          txn.amount >= 0 ? 'text-[var(--color-income)]' : 'text-[var(--color-expense)]'
-        )}>
+        <span
+          className={cn(
+            "font-mono text-sm font-medium tabular-nums",
+            txn.amount >= 0 ? "text-[var(--color-income)]" : "text-[var(--color-expense)]"
+          )}
+        >
           {formatCurrency(txn.amount)}
         </span>
       </div>
@@ -755,9 +794,9 @@ Replace full-page modals with bottom sheets on mobile:
 
 ```tsx
 // components/shared/BottomSheet.tsx
-'use client';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
+"use client";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 interface BottomSheetProps {
   open: boolean;
@@ -767,21 +806,18 @@ interface BottomSheetProps {
 }
 
 export function BottomSheet({ open, onClose, title, children }: BottomSheetProps) {
-  const isMobile = useMediaQuery('(max-width: 767px)');
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   return (
     <Sheet open={open} onOpenChange={onClose}>
       <SheetContent
-        side={isMobile ? 'bottom' : 'right'}
-        className={cn(
-          isMobile && 'rounded-t-2xl max-h-[85vh]',
-          !isMobile && 'w-[400px]'
-        )}
+        side={isMobile ? "bottom" : "right"}
+        className={cn(isMobile && "max-h-[85vh] rounded-t-2xl", !isMobile && "w-[400px]")}
       >
         {/* Drag handle for mobile */}
         {isMobile && (
-          <div className="flex justify-center pt-2 pb-4">
-            <div className="w-10 h-1 rounded-full bg-muted-foreground/30" />
+          <div className="flex justify-center pb-4 pt-2">
+            <div className="h-1 w-10 rounded-full bg-muted-foreground/30" />
           </div>
         )}
         <SheetHeader>
@@ -798,9 +834,9 @@ export function BottomSheet({ open, onClose, title, children }: BottomSheetProps
 
 ```tsx
 // components/shared/FloatingActionButton.tsx
-'use client';
-import { Plus } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+"use client";
+import { Plus } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function FloatingActionButton({ onClick }: { onClick: () => void }) {
   return (
@@ -808,15 +844,15 @@ export function FloatingActionButton({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       size="icon"
       className={cn(
-        'fixed z-40 rounded-full shadow-lg',
-        'w-14 h-14',                          // 56px
-        'md:hidden',                           // Mobile only
-        'bg-primary hover:bg-primary/90',
-        'active:scale-95 transition-transform',
+        "fixed z-40 rounded-full shadow-lg",
+        "h-14 w-14", // 56px
+        "md:hidden", // Mobile only
+        "bg-primary hover:bg-primary/90",
+        "transition-transform active:scale-95"
       )}
       style={{
-        bottom: 'calc(env(safe-area-inset-bottom, 0px) + 72px)',
-        right: '16px',
+        bottom: "calc(env(safe-area-inset-bottom, 0px) + 72px)",
+        right: "16px",
       }}
       aria-label="Add transaction"
     >
@@ -842,15 +878,19 @@ interface EmptyStateProps {
 
 export function EmptyState({ icon, title, description, action, secondaryAction }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[50vh] gap-4 px-8 text-center">
-      <div className="flex items-center justify-center w-20 h-20 rounded-2xl bg-primary/10 text-primary">
+    <div className="flex min-h-[50vh] flex-col items-center justify-center gap-4 px-8 text-center">
+      <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-primary/10 text-primary">
         {icon}
       </div>
       <h3 className="text-xl font-semibold">{title}</h3>
-      <p className="text-sm text-muted-foreground max-w-[320px]">{description}</p>
-      <div className="flex gap-3 mt-2">
+      <p className="max-w-[320px] text-sm text-muted-foreground">{description}</p>
+      <div className="mt-2 flex gap-3">
         {action && <Button onClick={action.onClick}>{action.label}</Button>}
-        {secondaryAction && <Button variant="outline" onClick={secondaryAction.onClick}>{secondaryAction.label}</Button>}
+        {secondaryAction && (
+          <Button variant="outline" onClick={secondaryAction.onClick}>
+            {secondaryAction.label}
+          </Button>
+        )}
       </div>
     </div>
   );
@@ -858,6 +898,7 @@ export function EmptyState({ icon, title, description, action, secondaryAction }
 ```
 
 **Required empty states** — create one for each:
+
 - Dashboard (no data) → "Set up your first budget to start tracking"
 - Transactions (none) → "Add your first transaction or import from CSV"
 - Budget (none set) → "Choose a budgeting method to get started"
@@ -893,7 +934,7 @@ export function DashboardSkeleton() {
       {/* Safe-to-spend card skeleton */}
       <Skeleton className="h-40 w-full rounded-xl" />
       {/* Widget grid skeleton */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Skeleton className="h-32 rounded-xl" />
         <Skeleton className="h-32 rounded-xl" />
         <Skeleton className="h-32 rounded-xl" />
@@ -911,11 +952,15 @@ export function DashboardSkeleton() {
 
 ```tsx
 // components/shared/PrivacyBlur.tsx
-'use client';
-import { usePrivacy } from '@/contexts/PrivacyContext';
-import { cn } from '@/lib/utils';
+"use client";
+import { usePrivacy } from "@/contexts/PrivacyContext";
+import { cn } from "@/lib/utils";
 
-export function FinancialValue({ amount, className, ...props }: {
+export function FinancialValue({
+  amount,
+  className,
+  ...props
+}: {
   amount: number;
   className?: string;
 }) {
@@ -924,10 +969,11 @@ export function FinancialValue({ amount, className, ...props }: {
   return (
     <span
       className={cn(
-        'font-mono tabular-nums',
-        amount >= 0 ? 'text-[var(--color-income)]' : 'text-[var(--color-expense)]',
-        privacyMode && 'blur-md hover:blur-none active:blur-none select-none transition-[filter] duration-200',
-        className,
+        "font-mono tabular-nums",
+        amount >= 0 ? "text-[var(--color-income)]" : "text-[var(--color-expense)]",
+        privacyMode &&
+          "select-none blur-md transition-[filter] duration-200 hover:blur-none active:blur-none",
+        className
       )}
       {...props}
     >
@@ -944,15 +990,27 @@ export function FinancialValue({ amount, className, ...props }: {
 ```typescript
 // hooks/useKeyboardShortcuts.ts
 const SHORTCUTS: Record<string, { keys: string; description: string; action: () => void }> = {
-  'search':     { keys: 'mod+k', description: 'Open search', action: openSpotlight },
-  'privacy':    { keys: 'mod+shift+p', description: 'Toggle privacy mode', action: togglePrivacy },
-  'newTxn':     { keys: 'mod+n', description: 'New transaction', action: openNewTxn },
-  'sidebar':    { keys: '[', description: 'Toggle sidebar', action: toggleSidebar },
-  'dashboard':  { keys: 'g d', description: 'Go to Dashboard', action: () => navigate('/budget-app') },
-  'budget':     { keys: 'g b', description: 'Go to Budget', action: () => navigate('/budget-app/budget') },
-  'txns':       { keys: 'g t', description: 'Go to Transactions', action: () => navigate('/budget-app/transactions') },
-  'settings':   { keys: 'g s', description: 'Go to Settings', action: () => navigate('/budget-app/settings') },
-  'help':       { keys: '?', description: 'Show shortcuts', action: showShortcutModal },
+  search: { keys: "mod+k", description: "Open search", action: openSpotlight },
+  privacy: { keys: "mod+shift+p", description: "Toggle privacy mode", action: togglePrivacy },
+  newTxn: { keys: "mod+n", description: "New transaction", action: openNewTxn },
+  sidebar: { keys: "[", description: "Toggle sidebar", action: toggleSidebar },
+  dashboard: { keys: "g d", description: "Go to Dashboard", action: () => navigate("/budget-app") },
+  budget: {
+    keys: "g b",
+    description: "Go to Budget",
+    action: () => navigate("/budget-app/budget"),
+  },
+  txns: {
+    keys: "g t",
+    description: "Go to Transactions",
+    action: () => navigate("/budget-app/transactions"),
+  },
+  settings: {
+    keys: "g s",
+    description: "Go to Settings",
+    action: () => navigate("/budget-app/settings"),
+  },
+  help: { keys: "?", description: "Show shortcuts", action: showShortcutModal },
 };
 ```
 
@@ -960,18 +1018,18 @@ const SHORTCUTS: Record<string, { keys: string; description: string; action: () 
 
 ## 1.6 Micro-Interactions
 
-| Interaction | CSS/JS | Duration | Notes |
-|-------------|--------|----------|-------|
-| Page enter | `animate-in fade-in slide-in-from-bottom-4` | 200ms | Tailwind animate plugin |
-| Button press | `active:scale-[0.97]` | 100ms | CSS transition |
-| Card hover | `hover:shadow-md hover:border-primary/20` | 200ms | Desktop only |
-| Toggle switch | Radix Switch + `transition-transform` | 200ms | Built into shadcn |
-| Number change | `tabular-nums` + `transition-all` | 300ms | For safe-to-spend counter |
-| Delete action | `animate-out slide-out-to-left` + height collapse | 200ms | With 5s undo toast |
-| Milestone | canvas-confetti burst | 2000ms | Goal reached, debt paid |
-| Skeleton pulse | `animate-pulse` | 1500ms loop | Built into shadcn Skeleton |
-| Error shake | `animate-shake` (custom) | 300ms | Form validation |
-| Privacy blur on/off | `blur-md` transition | 200ms | `transition-[filter]` |
+| Interaction         | CSS/JS                                            | Duration    | Notes                      |
+| ------------------- | ------------------------------------------------- | ----------- | -------------------------- |
+| Page enter          | `animate-in fade-in slide-in-from-bottom-4`       | 200ms       | Tailwind animate plugin    |
+| Button press        | `active:scale-[0.97]`                             | 100ms       | CSS transition             |
+| Card hover          | `hover:shadow-md hover:border-primary/20`         | 200ms       | Desktop only               |
+| Toggle switch       | Radix Switch + `transition-transform`             | 200ms       | Built into shadcn          |
+| Number change       | `tabular-nums` + `transition-all`                 | 300ms       | For safe-to-spend counter  |
+| Delete action       | `animate-out slide-out-to-left` + height collapse | 200ms       | With 5s undo toast         |
+| Milestone           | canvas-confetti burst                             | 2000ms      | Goal reached, debt paid    |
+| Skeleton pulse      | `animate-pulse`                                   | 1500ms loop | Built into shadcn Skeleton |
+| Error shake         | `animate-shake` (custom)                          | 300ms       | Form validation            |
+| Privacy blur on/off | `blur-md` transition                              | 200ms       | `transition-[filter]`      |
 
 Add custom Tailwind animation for shake:
 
@@ -1022,42 +1080,43 @@ Dark mode is the PRIMARY theme. Audit all components for:
 
 ## 1.8 Accessibility Checklist (Every Component)
 
-| Requirement | Implementation |
-|-------------|---------------|
-| Touch targets | 44px minimum all interactive elements |
-| Focus ring | `ring-2 ring-primary ring-offset-2` on focus-visible |
-| Skip to content | Hidden link at top of page, visible on focus |
-| Screen reader | `aria-label` on all icon-only buttons |
-| Live regions | `aria-live="polite"` on safe-to-spend value, budget remaining |
-| Color blind | Never use color alone — always pair with icon/label/pattern |
-| Form labels | Every input has visible `<label>` — no placeholder-only inputs |
-| Error messages | `aria-describedby` linking input to error text |
-| Chart alternatives | Every chart has a `<table>` fallback with `sr-only` class |
-| Currency values | `aria-label` with spoken amount ("negative 87 dollars 32 cents") |
-| Keyboard nav | All interactive elements reachable via Tab, Escape closes modals |
-| Reduced motion | `motion-reduce:` prefix on all animations |
-| RTL support | Use `start`/`end` instead of `left`/`right` in Tailwind (`ms-4` not `ml-4`) |
-| Zoom reflow | Layouts reflow at 200% zoom without horizontal scroll |
-| Font scaling | Respect browser font size settings — use `rem` not `px` for text |
+| Requirement        | Implementation                                                              |
+| ------------------ | --------------------------------------------------------------------------- |
+| Touch targets      | 44px minimum all interactive elements                                       |
+| Focus ring         | `ring-2 ring-primary ring-offset-2` on focus-visible                        |
+| Skip to content    | Hidden link at top of page, visible on focus                                |
+| Screen reader      | `aria-label` on all icon-only buttons                                       |
+| Live regions       | `aria-live="polite"` on safe-to-spend value, budget remaining               |
+| Color blind        | Never use color alone — always pair with icon/label/pattern                 |
+| Form labels        | Every input has visible `<label>` — no placeholder-only inputs              |
+| Error messages     | `aria-describedby` linking input to error text                              |
+| Chart alternatives | Every chart has a `<table>` fallback with `sr-only` class                   |
+| Currency values    | `aria-label` with spoken amount ("negative 87 dollars 32 cents")            |
+| Keyboard nav       | All interactive elements reachable via Tab, Escape closes modals            |
+| Reduced motion     | `motion-reduce:` prefix on all animations                                   |
+| RTL support        | Use `start`/`end` instead of `left`/`right` in Tailwind (`ms-4` not `ml-4`) |
+| Zoom reflow        | Layouts reflow at 200% zoom without horizontal scroll                       |
+| Font scaling       | Respect browser font size settings — use `rem` not `px` for text            |
 
 ---
 
 ## 1.9 Performance Targets
 
-| Metric | Target | How to Measure |
-|--------|--------|---------------|
-| First Contentful Paint | < 1.5s on 4G mobile | Lighthouse |
-| Largest Contentful Paint | < 2.5s on 4G mobile | Lighthouse |
-| Cumulative Layout Shift | < 0.1 | Lighthouse |
-| Time to Interactive | < 3.0s on 4G mobile | Lighthouse |
-| Lighthouse Performance | ≥ 90 (mobile) | Lighthouse mobile preset |
-| Lighthouse Accessibility | ≥ 95 | Lighthouse |
-| Lighthouse PWA | 100 | Lighthouse |
-| JS bundle (initial) | < 200KB gzipped | Next.js build output |
-| 100K transactions | Smooth 60fps scroll | Virtual scroll test |
-| Route transitions | < 100ms perceived | Chrome Performance panel |
+| Metric                   | Target              | How to Measure           |
+| ------------------------ | ------------------- | ------------------------ |
+| First Contentful Paint   | < 1.5s on 4G mobile | Lighthouse               |
+| Largest Contentful Paint | < 2.5s on 4G mobile | Lighthouse               |
+| Cumulative Layout Shift  | < 0.1               | Lighthouse               |
+| Time to Interactive      | < 3.0s on 4G mobile | Lighthouse               |
+| Lighthouse Performance   | ≥ 90 (mobile)       | Lighthouse mobile preset |
+| Lighthouse Accessibility | ≥ 95                | Lighthouse               |
+| Lighthouse PWA           | 100                 | Lighthouse               |
+| JS bundle (initial)      | < 200KB gzipped     | Next.js build output     |
+| 100K transactions        | Smooth 60fps scroll | Virtual scroll test      |
+| Route transitions        | < 100ms perceived   | Chrome Performance panel |
 
 **Code splitting**:
+
 - Dynamic import all heavy modules: `const ReceiptScanner = dynamic(() => import(...), { ssr: false })`
 - Tesseract.js, TF.js, chart libraries: load on demand only
 - Fonts: `font-display: swap` to prevent FOIT
@@ -1066,18 +1125,18 @@ Dark mode is the PRIMARY theme. Audit all components for:
 
 ## 1.10 Cross-Platform Testing Matrix
 
-| Device | Priority | Notes |
-|--------|----------|-------|
-| iPhone 15/16 (Safari PWA) | 🔴 Critical | Primary mobile target |
-| iPhone SE 3 (Safari PWA) | 🔴 Critical | Minimum 375px viewport |
-| iPad Air (Safari) | 🟡 High | Tablet layout + Split View |
-| Samsung Galaxy S24 (Chrome PWA) | 🔴 Critical | Primary Android |
-| Galaxy Tab S9 (Chrome) | 🟡 High | Android tablet |
-| Chrome (macOS) | 🔴 Critical | Primary desktop |
-| Safari (macOS) | 🟡 High | WebKit differences |
-| Chrome (Windows) | 🔴 Critical | Most common desktop |
-| Edge (Windows) | 🟡 High | Corporate users |
-| Firefox (any) | 🟢 Medium | Gecko rendering |
+| Device                          | Priority    | Notes                      |
+| ------------------------------- | ----------- | -------------------------- |
+| iPhone 15/16 (Safari PWA)       | 🔴 Critical | Primary mobile target      |
+| iPhone SE 3 (Safari PWA)        | 🔴 Critical | Minimum 375px viewport     |
+| iPad Air (Safari)               | 🟡 High     | Tablet layout + Split View |
+| Samsung Galaxy S24 (Chrome PWA) | 🔴 Critical | Primary Android            |
+| Galaxy Tab S9 (Chrome)          | 🟡 High     | Android tablet             |
+| Chrome (macOS)                  | 🔴 Critical | Primary desktop            |
+| Safari (macOS)                  | 🟡 High     | WebKit differences         |
+| Chrome (Windows)                | 🔴 Critical | Most common desktop        |
+| Edge (Windows)                  | 🟡 High     | Corporate users            |
+| Firefox (any)                   | 🟢 Medium   | Gecko rendering            |
 
 ---
 
@@ -1092,6 +1151,7 @@ These are the 25 features from competitive gap analysis that work in offline/loc
 **Gap**: YNAB's most-loved feature. Zero-based and envelope methods feel incomplete without it.
 
 **Implementation**:
+
 - Per-category toggle: rollover ON/OFF
 - Rollover modes: `same_category` | `savings_pool` | `expire`
 - Sinking fund mode: accumulate across months toward a target
@@ -1106,12 +1166,12 @@ interface BudgetCategory {
   budgeted: number;
   rollover: {
     enabled: boolean;
-    mode: 'same_category' | 'savings_pool' | 'expire';
-    accumulated: number;  // Running rollover balance
+    mode: "same_category" | "savings_pool" | "expire";
+    accumulated: number; // Running rollover balance
   };
   sinkingFund?: {
     targetAmount: number;
-    targetDate: string;  // ISO date
+    targetDate: string; // ISO date
   };
 }
 ```
@@ -1125,6 +1185,7 @@ interface BudgetCategory {
 **Gap**: No competitor handles "I'm planning a wedding / vacation / renovation" as a budgeted project.
 
 **Implementation**:
+
 - Separate from monthly budget — has its own start/end dates and total budget
 - Categories within the event (venue, food, travel, decorations)
 - Transactions can be tagged to an event
@@ -1152,6 +1213,7 @@ interface EventBudget {
 **Gap**: EveryDollar's January 2026 relaunch feature. Essential for paycheck-to-paycheck households and irregular income.
 
 **Implementation**:
+
 - Define pay schedule: weekly, bi-weekly, semi-monthly, monthly, irregular
 - Allocate budget categories to specific pay periods
 - Safe-to-spend adjusts based on which paycheck is "active"
@@ -1159,10 +1221,10 @@ interface EventBudget {
 
 ```typescript
 interface PaycheckPlan {
-  schedule: 'weekly' | 'biweekly' | 'semimonthly' | 'monthly' | 'irregular';
+  schedule: "weekly" | "biweekly" | "semimonthly" | "monthly" | "irregular";
   paychecks: {
     id: string;
-    label: string;           // "Paycheck 1", "Freelance invoice"
+    label: string; // "Paycheck 1", "Freelance invoice"
     expectedDate: string;
     expectedAmount: number;
     allocations: { categoryId: string; amount: number }[];
@@ -1177,6 +1239,7 @@ interface PaycheckPlan {
 **Gap**: Copilot Money's standout UX. Makes the app feel personal and improves scanning speed.
 
 **Implementation**:
+
 - Users can rename, recolor, and add emoji to any category
 - Pre-populated defaults but fully customizable
 - Emoji picker (lightweight, keyboard-accessible)
@@ -1192,6 +1255,7 @@ interface PaycheckPlan {
 **Gap**: Auto-generate pending transactions for known recurring bills/income.
 
 **Implementation**:
+
 - User defines: payee, amount, category, frequency (weekly/biweekly/monthly/quarterly/annual), next date
 - System auto-generates "pending" transactions when due date approaches (3 days ahead)
 - User confirms or adjusts actual amount when transaction occurs
@@ -1203,9 +1267,9 @@ interface RecurringTemplate {
   payee: string;
   amount: number;
   category: string;
-  frequency: 'weekly' | 'biweekly' | 'monthly' | 'quarterly' | 'annual';
+  frequency: "weekly" | "biweekly" | "monthly" | "quarterly" | "annual";
   nextDate: string;
-  autoConfirmIfWithin?: number;  // Auto-confirm if actual amount within X% of expected
+  autoConfirmIfWithin?: number; // Auto-confirm if actual amount within X% of expected
   enabled: boolean;
 }
 ```
@@ -1219,6 +1283,7 @@ interface RecurringTemplate {
 **Gap**: PocketGuard's "In My Pocket" + Fudget's "Partials". Global safe-to-spend exists but per-category visibility is missing.
 
 **Enhancement to existing safe-to-spend**:
+
 - Tap the safe-to-spend card → expands to show per-category remaining
 - Each variable category: spent / budgeted / remaining with progress bar
 - Color coding: green (< 50% spent), yellow (50–80%), red (> 80%)
@@ -1284,6 +1349,7 @@ Step 1/4                    Step 2/4
 **Gap**: Monarch's monthly review swipe-through. Makes transaction review feel like a game, not a chore.
 
 **Implementation**:
+
 - Tinder-style card stack for uncategorized or flagged transactions
 - Swipe right = Approve (category correct)
 - Swipe left = Flag for review
@@ -1319,6 +1385,7 @@ Step 1/4                    Step 2/4
 **Gap**: PocketGuard limits this to premium. Users importing 200 transactions need to fix miscategorized items in 2 minutes, not 30.
 
 **Implementation**:
+
 - Multi-select mode on transaction list (checkbox column)
 - Bulk actions: Change category, Add tag, Delete, Flag
 - "Select all matching [merchant]" shortcut
@@ -1333,6 +1400,7 @@ Step 1/4                    Step 2/4
 **Gap**: "Always categorize Starbucks as Coffee" — needed from the moment transactions exist. Full rules engine can wait, but merchant→category mapping is essential now.
 
 **Implementation**:
+
 - When user re-categorizes a transaction, offer: "Always categorize [merchant] as [category]?"
 - Store merchant→category mapping in IndexedDB
 - Apply automatically to new transactions from same merchant
@@ -1342,7 +1410,7 @@ Step 1/4                    Step 2/4
 ```typescript
 interface MerchantRule {
   id: string;
-  merchantPattern: string;    // Normalized merchant name or partial match
+  merchantPattern: string; // Normalized merchant name or partial match
   categoryId: string;
   autoApply: boolean;
   createdAt: string;
@@ -1356,6 +1424,7 @@ interface MerchantRule {
 **Gap**: Only Simplifi offers this. Without it, returns distort spending reports.
 
 **Implementation**:
+
 - "Mark as expecting refund" on any transaction
 - When a matching credit appears, link them
 - Spending reports show both gross and net views
@@ -1365,7 +1434,7 @@ interface MerchantRule {
 interface Transaction {
   // ... existing fields
   refund?: {
-    status: 'expecting' | 'received' | 'partial';
+    status: "expecting" | "received" | "partial";
     linkedTransactionId?: string;
     expectedAmount?: number;
   };
@@ -1379,6 +1448,7 @@ interface Transaction {
 **Gap**: Highest-engagement touchpoint in budget apps. The code exists (weekly-insights.ts, 706 LOC) but isn't surfaced.
 
 **Implementation**:
+
 - In-app summary card on dashboard (appears every Monday or configurable day)
 - Content: total spending vs. last week, top 3 categories, notable transactions (largest, unusual), safe-to-spend update, one actionable insight
 - Dismissible but reappears next week
@@ -1411,6 +1481,7 @@ interface Transaction {
 **Gap**: Alert when pace exceeds 1.5x trailing average. Prevents "where did the money go?" moments.
 
 **Implementation** (extend existing overspending-detector.ts):
+
 - Calculate daily run-rate per category: spending this month ÷ days elapsed
 - Compare to monthly budget: if projected exceeds 100%, alert
 - Compare to trailing 3-month average: if pace > 1.5x, alert
@@ -1429,6 +1500,7 @@ your $200 budget by Feb 18. Last 3 months averaged $18/day.
 **Gap**: No competitor offers proactive seasonal templates.
 
 **Implementation**:
+
 - 6 templates: Holiday (Nov), Tax Season (Mar), Summer Travel (Jun), Back-to-School (Aug), Spring Home (Apr), Halloween (Oct)
 - Each template: pre-built categories with emoji, suggested amounts based on last year's spending (if available) or national averages
 - Offered contextually as Event Budgets (reuse 2.2 infrastructure)
@@ -1441,6 +1513,7 @@ your $200 budget by Feb 18. Last 3 months averaged $18/day.
 **Gap**: Monarch Money's #1 UX praise point. Different users care about different widgets.
 
 **Implementation**:
+
 - Widget-based dashboard: user chooses 4–8 widgets from a catalog
 - Available widgets: Safe-to-Spend (ring), Budget Progress (bars), Recent Transactions, Spending by Category (pie/donut), Monthly Trend (line), Bills Due, Net Worth, Health Score, Savings Goals, Subscription Summary, Weekly Recap, Cash Flow Forecast
 - Drag-and-drop reorder on desktop, long-press reorder on mobile
@@ -1471,6 +1544,7 @@ your $200 budget by Feb 18. Last 3 months averaged $18/day.
 **Gap**: Even without couples features, users need a way to annotate transactions ("birthday dinner for Mom", "split with Dave").
 
 **Implementation**:
+
 - Optional text note on any transaction (max 500 chars)
 - Visible in transaction detail view
 - Searchable in transaction search
@@ -1483,6 +1557,7 @@ your $200 budget by Feb 18. Last 3 months averaged $18/day.
 **Gap**: Copilot's top differentiator. The AI chatbot context exists (~13KB) but doesn't support querying your own data in plain English.
 
 **Enhancement to existing AI Coach**:
+
 - Input: "How much did I spend on dining this quarter?"
 - Processing: Parse → map to IndexedDB query → execute locally → format response
 - Pre-built query templates: spending by category/time, budget vs actual, year-over-year, "what if" scenarios
@@ -1495,6 +1570,7 @@ your $200 budget by Feb 18. Last 3 months averaged $18/day.
 **Gap**: "Netflix costs me $4.50 per show watched" — reframes subscriptions as cost-per-use.
 
 **Enhancement to existing subscription detector**:
+
 - User logs usage (manual counter or frequency estimate)
 - Calculate: monthly cost ÷ estimated uses = cost per use
 - Highlight subscriptions with high cost-per-use as cancellation candidates
@@ -1507,6 +1583,7 @@ your $200 budget by Feb 18. Last 3 months averaged $18/day.
 **Gap**: PocketGuard and Honeydue both have this. Users cite it as a top reason they stick with an app.
 
 **Implementation**:
+
 - Configurable threshold per category (default 80%, adjustable 50%–95%)
 - Visual indicator on budget page: amber badge at threshold, red badge at 100%+
 - Dashboard alert banner: "⚠️ Dining is at 85% ($170 of $200)"
@@ -1516,10 +1593,10 @@ your $200 budget by Feb 18. Last 3 months averaged $18/day.
 ```typescript
 interface BudgetAlert {
   categoryId: string;
-  threshold: number;        // 0.8 default
+  threshold: number; // 0.8 default
   currentPercent: number;
   triggered: boolean;
-  snoozedUntil?: string;    // ISO date
+  snoozedUntil?: string; // ISO date
 }
 ```
 
@@ -1532,6 +1609,7 @@ interface BudgetAlert {
 **Gap**: No major budget app does this well. Duolingo-style streaks are the #1 proven retention mechanic. Budget apps have ~40% 90-day retention — this directly attacks that.
 
 ### Daily Streaks
+
 - Track consecutive days of financial engagement (log transaction, review pending, check safe-to-spend, categorize)
 - Visual streak counter on dashboard: "🔥 14 day streak"
 - Streak freeze: 2 per month — prevents frustration from one missed day
@@ -1539,6 +1617,7 @@ interface BudgetAlert {
 - Stored in IndexedDB
 
 ### Badges
+
 - **Budget Keeper**: Under budget for 1/3/6/12 consecutive months
 - **Saver**: Hit savings goal, emergency fund milestone
 - **Debt Crusher**: Paid off a loan, reduced debt by 10%/25%/50%
@@ -1548,6 +1627,7 @@ interface BudgetAlert {
 - **No-Spend Hero**: Completed a no-spend day/weekend/week challenge
 
 ### Monthly Challenges
+
 - "No-Spend Weekend" — log zero discretionary spending Sat-Sun
 - "Pack Lunch Week" — reduce dining category by 50%
 - "Subscription Audit" — review and cancel at least one subscription
@@ -1567,7 +1647,7 @@ interface UserGamification {
     name: string;
     emoji: string;
     earnedDate: string;
-    tier: 'bronze' | 'silver' | 'gold';
+    tier: "bronze" | "silver" | "gold";
   }[];
   challenges: {
     id: string;
@@ -1583,6 +1663,7 @@ interface UserGamification {
 ```
 
 **UI**:
+
 - Dashboard: streak counter with flame emoji, tap to see history
 - Profile/Settings: badge grid (earned = color, locked = gray with unlock criteria)
 - Challenges: card on dashboard with progress bar during active challenge
@@ -1595,6 +1676,7 @@ interface UserGamification {
 **Gap**: Splitwise has 30M+ users for this one feature. If the budget app handles splitting natively, users don't need a separate app.
 
 **Implementation** (works locally — tracks splits against named people):
+
 - On any transaction: "Split this expense" option
 - Split with: named person (partner, roommate, friend — stored locally)
 - Split modes: 50/50, custom ratio (70/30), by amount, by item
@@ -1618,7 +1700,7 @@ interface SplitPerson {
   id: string;
   name: string;
   emoji?: string;
-  runningBalance: number;    // Positive = they owe you
+  runningBalance: number; // Positive = they owe you
 }
 ```
 
@@ -1631,6 +1713,7 @@ interface SplitPerson {
 **Gap**: Essential for bill reminders, budget alerts, and weekly recap. PWA push works on iOS 16.4+ (home screen required) and all Android/desktop browsers.
 
 **Implementation**:
+
 - VAPID-based web push registration (or local Notification API for offline-only)
 - Permission request: triggered after user creates first recurring bill (NOT on first visit)
 - Notification types:
@@ -1650,20 +1733,21 @@ interface NotificationPreferences {
   weeklyRecap: boolean;
   streakReminders: boolean;
   goalMilestones: boolean;
-  quietHoursStart?: string;  // "22:00"
-  quietHoursEnd?: string;    // "08:00"
+  quietHoursStart?: string; // "22:00"
+  quietHoursEnd?: string; // "08:00"
 }
 ```
 
 **Service worker**:
+
 ```javascript
-self.addEventListener('push', (event) => {
+self.addEventListener("push", (event) => {
   const data = event.data.json();
   event.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,
-      icon: '/icons/icon-192.png',
-      badge: '/icons/badge-72.png',
+      icon: "/icons/icon-192.png",
+      badge: "/icons/badge-72.png",
       data: { url: data.url },
       tag: data.tag,
     })
@@ -1680,6 +1764,7 @@ self.addEventListener('push', (event) => {
 **Gap**: Monte Carlo code exists (trend-forecasting.ts, 227 LOC) but isn't combined with conversational AI.
 
 **Enhancement** (combines with 2.17 Natural Language Queries):
+
 - "What if I cancel Netflix and Spotify and put that toward my student loan?"
   → Calculate savings → adjust Monte Carlo → show new payoff date
 - "What if I get a $5K raise?"
@@ -1688,6 +1773,7 @@ self.addEventListener('push', (event) => {
   → Subtract from budget → show impact on savings, emergency fund, safe-to-spend
 
 **Implementation**:
+
 - Pre-built scenario types: cancel subscriptions, change income, add expense, adjust savings rate, pay off debt early
 - Visual: before/after comparison cards showing key metric changes
 - Local processing: all calculation against IndexedDB data
@@ -1715,6 +1801,7 @@ self.addEventListener('push', (event) => {
 **Gap**: Monarch, Empower, Copilot, PocketGuard all have this. The "big picture" view that keeps users opening the app even when not actively budgeting.
 
 **Implementation**:
+
 - Aggregated: all assets − all liabilities = net worth
 - Asset categories: bank accounts, investments, real estate, vehicles, other
 - Liability categories: mortgage, student loans, auto loans, credit cards, BNPL, other
@@ -1726,8 +1813,21 @@ self.addEventListener('push', (event) => {
 ```typescript
 interface NetWorthSnapshot {
   date: string;
-  assets: { bankAccounts: number; investments: number; realEstate: number; vehicles: number; other: number };
-  liabilities: { mortgage: number; studentLoans: number; autoLoans: number; creditCards: number; bnpl: number; other: number };
+  assets: {
+    bankAccounts: number;
+    investments: number;
+    realEstate: number;
+    vehicles: number;
+    other: number;
+  };
+  liabilities: {
+    mortgage: number;
+    studentLoans: number;
+    autoLoans: number;
+    creditCards: number;
+    bnpl: number;
+    other: number;
+  };
   total: number;
 }
 ```
@@ -1741,6 +1841,7 @@ interface NetWorthSnapshot {
 **Gap**: Monarch integrates Zillow (US only). No budget app supports property tracking globally. With 114 locales and 160+ currencies, this app should handle properties in any country.
 
 **Implementation**:
+
 - Manual property value entry in any supported currency (update quarterly or on market shifts)
 - Mortgage details: balance, rate, amortization, payment frequency — localized to country norms
   - Canada/UK/Australia: variable rate common, payment frequency options (monthly, biweekly, accelerated biweekly)
@@ -1757,34 +1858,35 @@ interface NetWorthSnapshot {
 ```typescript
 interface Property {
   id: string;
-  name: string;                    // "123 Main St, Toronto" or "Flat 4, London"
-  type: 'primary' | 'rental' | 'vacation' | 'investment';
-  country: string;                 // ISO 3166-1 alpha-2
-  currency: string;                // ISO 4217 — property's local currency
-  estimatedValue: number;          // In property's currency
+  name: string; // "123 Main St, Toronto" or "Flat 4, London"
+  type: "primary" | "rental" | "vacation" | "investment";
+  country: string; // ISO 3166-1 alpha-2
+  currency: string; // ISO 4217 — property's local currency
+  estimatedValue: number; // In property's currency
   lastValuedDate: string;
   purchasePrice?: number;
   purchaseDate?: string;
   mortgage?: {
     balance: number;
     rate: number;
-    rateType: 'fixed' | 'variable' | 'tracker';
+    rateType: "fixed" | "variable" | "tracker";
     amortizationYears: number;
-    paymentFrequency: 'monthly' | 'biweekly' | 'accelerated_biweekly' | 'weekly' | 'fortnightly';
+    paymentFrequency: "monthly" | "biweekly" | "accelerated_biweekly" | "weekly" | "fortnightly";
     paymentAmount: number;
     maturityDate?: string;
-    currency: string;              // Mortgage may be in different currency than property (expat scenario)
+    currency: string; // Mortgage may be in different currency than property (expat scenario)
   };
   propertyTax?: {
     annualAmount: number;
-    frequency: 'annual' | 'semi_annual' | 'quarterly' | 'monthly';
+    frequency: "annual" | "semi_annual" | "quarterly" | "monthly";
     nextDueDate: string;
   };
   rentalIncome?: {
     monthlyAmount: number;
     currency: string;
   };
-  expenses?: {                     // Strata/HOA, insurance, maintenance
+  expenses?: {
+    // Strata/HOA, insurance, maintenance
     monthlyAmount: number;
     currency: string;
   };
@@ -1792,6 +1894,7 @@ interface Property {
 ```
 
 **UI**: Settings → Properties → list of property cards with flag emoji for country, value in local currency, equity calculation. Dashboard widget (optional): total real estate equity in base currency. Tap property for amortization chart and cash flow breakdown.
+
 ```
 
 ---
@@ -1883,3 +1986,4 @@ Build in this order — each layer builds on the previous:
 8. Seniors mode must scale touch targets and font sizes per existing SeniorsModeContext
 9. i18n: No hardcoded English strings — all user-facing text through translation system
 10. Feature flags on all new features — progressive rollout capability
+```

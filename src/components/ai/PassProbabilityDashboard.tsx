@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Pass Probability Dashboard
@@ -6,7 +6,7 @@
  * Visual dashboard showing ML-predicted exam pass probability with actionable insights.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   TrendingUp,
   TrendingDown,
@@ -16,18 +16,18 @@ import {
   Target,
   BarChart3,
   Lightbulb,
-} from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
-import { toast } from '@/hooks/use-toast';
+} from "lucide-react";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "@/hooks/use-toast";
 import {
   predictPassProbability,
   getLatestPrediction,
   type PassProbability,
-} from '@/lib/ai/passProbabilityPredictor';
+} from "@/lib/ai/passProbabilityPredictor";
 
 interface PassProbabilityDashboardProps {
   userId: string;
@@ -52,11 +52,11 @@ export function PassProbabilityDashboard({
       const latest = await getLatestPrediction(userId);
       setPrediction(latest);
     } catch (error) {
-      console.error('Error loading prediction:', error);
+      console.error("Error loading prediction:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to load pass probability',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to load pass probability",
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -69,15 +69,15 @@ export function PassProbabilityDashboard({
       const newPrediction = await predictPassProbability(userId);
       setPrediction(newPrediction);
       toast({
-        title: 'Success',
-        description: 'Pass probability updated',
+        title: "Success",
+        description: "Pass probability updated",
       });
     } catch (error) {
-      console.error('Error generating prediction:', error);
+      console.error("Error generating prediction:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to generate prediction',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to generate prediction",
+        variant: "destructive",
       });
     } finally {
       setIsGenerating(false);
@@ -107,13 +107,13 @@ export function PassProbabilityDashboard({
           <CardDescription>Generate your personalized pass probability</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-8">
-            <BarChart3 className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-            <p className="text-sm text-muted-foreground mb-4">
+          <div className="py-8 text-center">
+            <BarChart3 className="mx-auto mb-4 h-16 w-16 text-muted-foreground" />
+            <p className="mb-4 text-sm text-muted-foreground">
               Get an AI-powered prediction of your exam success based on your current performance
             </p>
             <Button onClick={handleGenerate} disabled={isGenerating}>
-              {isGenerating ? 'Analyzing...' : 'Generate Prediction'}
+              {isGenerating ? "Analyzing..." : "Generate Prediction"}
             </Button>
           </div>
         </CardContent>
@@ -136,19 +136,14 @@ export function PassProbabilityDashboard({
                 ML-powered prediction based on your current performance
               </CardDescription>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleGenerate}
-              disabled={isGenerating}
-            >
-              {isGenerating ? 'Updating...' : 'Refresh'}
+            <Button variant="outline" size="sm" onClick={handleGenerate} disabled={isGenerating}>
+              {isGenerating ? "Updating..." : "Refresh"}
             </Button>
           </div>
         </CardHeader>
         <CardContent>
           {/* Probability Gauge */}
-          <div className="text-center mb-8">
+          <div className="mb-8 text-center">
             <div className="relative inline-block">
               <svg width="240" height="120" className="mx-auto">
                 {/* Background arc */}
@@ -173,26 +168,23 @@ export function PassProbabilityDashboard({
                   strokeLinecap="round"
                 />
               </svg>
-              <div className="absolute inset-0 flex flex-col items-center justify-center mt-4">
+              <div className="absolute inset-0 mt-4 flex flex-col items-center justify-center">
                 <span className="text-5xl font-bold" style={{ color: probabilityColor }}>
                   {prediction.predictedProbability.toFixed(1)}%
                 </span>
-                <span className="text-sm text-muted-foreground mt-1">
+                <span className="mt-1 text-sm text-muted-foreground">
                   ± {prediction.confidenceInterval.toFixed(1)}%
                 </span>
               </div>
             </div>
 
-            <Badge
-              variant={probabilityLabel.variant as any}
-              className="mt-4 text-base px-4 py-1"
-            >
+            <Badge variant={probabilityLabel.variant as any} className="mt-4 px-4 py-1 text-base">
               {probabilityLabel.text}
             </Badge>
 
             {prediction.daysUntilExam && (
-              <p className="text-sm text-muted-foreground mt-2">
-                <Clock className="w-4 h-4 inline mr-1" />
+              <p className="mt-2 text-sm text-muted-foreground">
+                <Clock className="mr-1 inline h-4 w-4" />
                 {prediction.daysUntilExam} days until exam
               </p>
             )}
@@ -200,14 +192,12 @@ export function PassProbabilityDashboard({
 
           {/* Study Hours Needed */}
           {prediction.estimatedStudyHoursNeeded > 0 && (
-            <div className="bg-muted p-4 rounded-lg mb-4">
-              <div className="flex items-center gap-2 mb-2">
-                <Target className="w-5 h-5 text-primary" />
+            <div className="mb-4 rounded-lg bg-muted p-4">
+              <div className="mb-2 flex items-center gap-2">
+                <Target className="h-5 w-5 text-primary" />
                 <span className="font-semibold">Recommended Study Time</span>
               </div>
-              <p className="text-2xl font-bold">
-                {prediction.estimatedStudyHoursNeeded} hours
-              </p>
+              <p className="text-2xl font-bold">{prediction.estimatedStudyHoursNeeded} hours</p>
               <p className="text-sm text-muted-foreground">
                 Additional study time to reach 80% pass probability
               </p>
@@ -216,21 +206,23 @@ export function PassProbabilityDashboard({
 
           {/* Domain Breakdown */}
           <div className="space-y-3">
-            <h4 className="font-semibold flex items-center gap-2">
-              <BarChart3 className="w-4 h-4" />
+            <h4 className="flex items-center gap-2 font-semibold">
+              <BarChart3 className="h-4 w-4" />
               Domain-Level Predictions
             </h4>
             {Object.entries(prediction.domainScores).map(([domain, score]) => (
               <div key={domain} className="space-y-1">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="capitalize">{domain.replace(/_/g, ' ')}</span>
+                  <span className="capitalize">{domain.replace(/_/g, " ")}</span>
                   <span className="font-semibold">{score.toFixed(1)}%</span>
                 </div>
                 <Progress
                   value={score}
                   className="h-2"
                   // @ts-ignore
-                  indicatorClassName={score >= 75 ? 'bg-[#22c55e]' : score >= 60 ? 'bg-yellow-500' : 'bg-red-500'}
+                  indicatorClassName={
+                    score >= 75 ? "bg-[#22c55e]" : score >= 60 ? "bg-yellow-500" : "bg-red-500"
+                  }
                 />
               </div>
             ))}
@@ -239,13 +231,13 @@ export function PassProbabilityDashboard({
       </Card>
 
       {/* Strengths & Weaknesses */}
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid gap-4 md:grid-cols-2">
         {/* Strengths */}
         {prediction.strengths.length > 0 && (
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-[#22c55e]">
-                <CheckCircle2 className="w-5 h-5" />
+                <CheckCircle2 className="h-5 w-5" />
                 Your Strengths
               </CardTitle>
             </CardHeader>
@@ -253,10 +245,10 @@ export function PassProbabilityDashboard({
               <ul className="space-y-2">
                 {prediction.strengths.map((strength, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#22c55e] mt-0.5 flex-shrink-0" />
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#22c55e]" />
                     <div className="text-sm">
                       <span className="font-semibold">{strength.domain}</span>
-                      <span className="text-muted-foreground ml-2">
+                      <span className="ml-2 text-muted-foreground">
                         ({strength.score.toFixed(1)}%)
                       </span>
                     </div>
@@ -272,7 +264,7 @@ export function PassProbabilityDashboard({
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-orange-600">
-                <AlertCircle className="w-5 h-5" />
+                <AlertCircle className="h-5 w-5" />
                 Areas for Improvement
               </CardTitle>
             </CardHeader>
@@ -280,10 +272,10 @@ export function PassProbabilityDashboard({
               <ul className="space-y-2">
                 {prediction.weaknesses.map((weakness, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <TrendingUp className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                    <TrendingUp className="mt-0.5 h-4 w-4 flex-shrink-0 text-orange-500" />
                     <div className="text-sm">
                       <span className="font-semibold">{weakness.domain}</span>
-                      <span className="text-muted-foreground ml-2">
+                      <span className="ml-2 text-muted-foreground">
                         ({weakness.score.toFixed(1)}%, +{weakness.gap.toFixed(1)}% needed)
                       </span>
                     </div>
@@ -300,7 +292,7 @@ export function PassProbabilityDashboard({
         <Card className="border-orange-200 bg-orange-50 dark:bg-orange-950">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-orange-700 dark:text-orange-400">
-              <AlertCircle className="w-5 h-5" />
+              <AlertCircle className="h-5 w-5" />
               Risk Factors
             </CardTitle>
           </CardHeader>
@@ -322,41 +314,39 @@ export function PassProbabilityDashboard({
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Lightbulb className="w-5 h-5 text-yellow-600" />
+              <Lightbulb className="h-5 w-5 text-yellow-600" />
               Recommended Actions
             </CardTitle>
-            <CardDescription>
-              Prioritized actions to improve your pass probability
-            </CardDescription>
+            <CardDescription>Prioritized actions to improve your pass probability</CardDescription>
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
               {prediction.recommendedActions.map((action, idx) => (
                 <li
                   key={idx}
-                  className={`p-3 rounded-lg border-2 ${
-                    action.priority === 'high'
-                      ? 'bg-red-50 border-red-200 dark:bg-red-950 dark:border-red-800'
-                      : action.priority === 'medium'
-                      ? 'bg-yellow-50 border-yellow-200 dark:bg-yellow-950 dark:border-yellow-800'
-                      : 'bg-blue-50 border-blue-200 dark:bg-blue-950 dark:border-blue-800'
+                  className={`rounded-lg border-2 p-3 ${
+                    action.priority === "high"
+                      ? "border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-950"
+                      : action.priority === "medium"
+                        ? "border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-950"
+                        : "border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950"
                   }`}
                 >
                   <div className="flex items-start gap-3">
                     <Badge
                       variant={
-                        action.priority === 'high'
-                          ? 'destructive'
-                          : action.priority === 'medium'
-                          ? 'default'
-                          : 'secondary'
+                        action.priority === "high"
+                          ? "destructive"
+                          : action.priority === "medium"
+                            ? "default"
+                            : "secondary"
                       }
                       className="mt-0.5"
                     >
                       {action.priority}
                     </Badge>
                     <div className="flex-1">
-                      <p className="font-semibold text-sm mb-1">{action.action}</p>
+                      <p className="mb-1 text-sm font-semibold">{action.action}</p>
                       <p className="text-xs text-muted-foreground">
                         Impact: {action.estimatedImpact}
                       </p>
@@ -370,9 +360,9 @@ export function PassProbabilityDashboard({
       )}
 
       {/* Metadata */}
-      <div className="text-xs text-muted-foreground text-center">
-        Last updated: {new Date(prediction.createdAt).toLocaleString()} •
-        Model: {prediction.modelVersion} ({prediction.predictionMethod})
+      <div className="text-center text-xs text-muted-foreground">
+        Last updated: {new Date(prediction.createdAt).toLocaleString()} • Model:{" "}
+        {prediction.modelVersion} ({prediction.predictionMethod})
       </div>
     </div>
   );
@@ -381,25 +371,22 @@ export function PassProbabilityDashboard({
 // ==================== HELPER FUNCTIONS ====================
 
 function getProbabilityColor(probability: number): string {
-  if (probability >= 80) return '#10b981'; // green
-  if (probability >= 70) return '#f59e0b'; // yellow
-  if (probability >= 60) return '#f97316'; // orange
-  return '#ef4444'; // red
+  if (probability >= 80) return "#10b981"; // green
+  if (probability >= 70) return "#f59e0b"; // yellow
+  if (probability >= 60) return "#f97316"; // orange
+  return "#ef4444"; // red
 }
 
 function getProbabilityLabel(probability: number): {
   text: string;
   variant: string;
 } {
-  if (probability >= 85)
-    return { text: 'Excellent - Exam Ready!', variant: 'default' };
-  if (probability >= 75)
-    return { text: 'Good - Nearly Ready', variant: 'default' };
-  if (probability >= 65)
-    return { text: 'Fair - More Prep Needed', variant: 'secondary' };
+  if (probability >= 85) return { text: "Excellent - Exam Ready!", variant: "default" };
+  if (probability >= 75) return { text: "Good - Nearly Ready", variant: "default" };
+  if (probability >= 65) return { text: "Fair - More Prep Needed", variant: "secondary" };
   if (probability >= 55)
-    return { text: 'At Risk - Significant Prep Required', variant: 'destructive' };
-  return { text: 'High Risk - Consider Delaying Exam', variant: 'destructive' };
+    return { text: "At Risk - Significant Prep Required", variant: "destructive" };
+  return { text: "High Risk - Consider Delaying Exam", variant: "destructive" };
 }
 
 function describeArc(
@@ -411,21 +398,9 @@ function describeArc(
 ): string {
   const start = polarToCartesian(x, y, radius, endAngle);
   const end = polarToCartesian(x, y, radius, startAngle);
-  const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
+  const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
 
-  return [
-    'M',
-    start.x,
-    start.y,
-    'A',
-    radius,
-    radius,
-    0,
-    largeArcFlag,
-    0,
-    end.x,
-    end.y,
-  ].join(' ');
+  return ["M", start.x, start.y, "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y].join(" ");
 }
 
 function polarToCartesian(

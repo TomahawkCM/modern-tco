@@ -21,6 +21,7 @@ sudo npx playwright install-deps chromium
 ```
 
 **What this does:**
+
 - Installs libatk, libgtk, libnss3, libx11, etc.
 - Required for Chrome to render in WSL2 environment
 - Fixes the 180-second timeout issue
@@ -47,6 +48,7 @@ If you can't use sudo, Playwright will work in headless mode with the config we'
 ```
 
 **What these do:**
+
 - `PLAYWRIGHT_BROWSERS_PATH=0` - Use default browser location
 - `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1` - Don't re-download (already installed)
 - `DISPLAY=:0` - X11 display for WSL2
@@ -55,21 +57,25 @@ If you can't use sudo, Playwright will work in headless mode with the config we'
 ## 🧪 Testing Commands
 
 ### Run Playwright E2E Tests
+
 ```bash
 npm run e2e
 ```
 
 ### Run Specific Test
+
 ```bash
 npx playwright test tests/e2e/home.spec.ts
 ```
 
 ### Run Accessibility Tests
+
 ```bash
 npx playwright test tests/accessibility.spec.ts
 ```
 
 ### Run Budget App Split Transaction Tests
+
 ```bash
 npx playwright test tests/split-transactions.spec.ts
 ```
@@ -77,10 +83,12 @@ npx playwright test tests/split-transactions.spec.ts
 ## 📊 Expected Performance
 
 **Before Fix:**
+
 - ❌ 180-second timeout launching browser
 - ❌ Tests fail immediately
 
 **After Fix:**
+
 - ✅ Browser launches in <10 seconds
 - ✅ Tests run successfully
 - ✅ 21 E2E test files ready to use
@@ -88,6 +96,7 @@ npx playwright test tests/split-transactions.spec.ts
 ## 🐛 Troubleshooting
 
 ### If browser still times out:
+
 ```bash
 # Check if browser binary works
 /home/robne/.cache/ms-playwright/chromium-1193/chrome-linux/chrome --version
@@ -97,6 +106,7 @@ npx playwright doctor
 ```
 
 ### If display issues:
+
 ```bash
 # Set DISPLAY variable
 export DISPLAY=:0

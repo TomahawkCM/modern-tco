@@ -57,19 +57,19 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
     // Validation
     if (!passwordValidation.isValid) {
       const errorMsg = ErrorMessages.passwordComplexityFailed;
-      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`);
       return;
     }
 
     if (password !== confirmPassword) {
       const errorMsg = ErrorMessages.passwordMismatch;
-      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`);
       return;
     }
 
     if (!firstName.trim() || !lastName.trim()) {
       const errorMsg = ErrorMessages.fieldRequired("First name and last name");
-      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`);
       return;
     }
 
@@ -83,14 +83,14 @@ export function SignUpForm({ onSuccess, onSwitchToLogin }: SignUpFormProps) {
 
       if (error) {
         const errorMsg = ErrorMessages.signupFailed(error.message);
-        setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
+        setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`);
       } else {
         setSuccess(true);
         // Don't call onSuccess immediately - user needs to verify email
       }
     } catch (error) {
       const errorMsg = humanizeError(error);
-      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`);
+      setError(`${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`);
     } finally {
       setIsSubmitting(false);
     }

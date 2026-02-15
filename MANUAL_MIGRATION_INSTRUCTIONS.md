@@ -16,16 +16,19 @@ The automated `npx supabase db push` command encountered connectivity issues wit
 Apply these three migration files in sequence:
 
 ### 1. Flashcards System (20251002000001)
+
 **File**: `supabase/migrations/20251002000001_add_flashcards_system.sql`
 **Size**: 11,350 bytes
 **Purpose**: Core flashcard spaced repetition system
 
 ### 2. Question Reviews (20251002000002)
+
 **File**: `supabase/migrations/20251002000002_add_question_reviews.sql`
 **Size**: 15,422 bytes
 **Purpose**: Question spaced repetition and review sessions
 
 ### 3. Performance Optimizations (20251003000001)
+
 **File**: `supabase/migrations/20251003000001_performance_optimizations.sql`
 **Size**: 9,811 bytes
 **Purpose**: Materialized views and database indexes
@@ -53,6 +56,7 @@ cat supabase/migrations/20251002000001_add_flashcards_system.sql
 4. Verify success (should see "Success. No rows returned")
 
 **Expected Tables Created**:
+
 - `public.flashcards`
 - `public.flashcard_reviews`
 
@@ -69,11 +73,13 @@ cat supabase/migrations/20251002000002_add_question_reviews.sql
 4. Verify success
 
 **Expected Tables Created**:
+
 - `public.question_reviews`
 - `public.review_sessions`
 - `public.question_review_attempts`
 
 **Expected Functions Created**:
+
 - `get_review_stats(user_id UUID)`
 - `calculate_review_streak(user_id UUID)`
 - `get_unified_review_queue(user_id UUID, limit_count INT)`
@@ -91,6 +97,7 @@ cat supabase/migrations/20251003000001_performance_optimizations.sql
 4. Verify success
 
 **Expected Objects Created**:
+
 - Materialized view: `mv_unified_review_queue`
 - Table: `mv_refresh_log`
 - Function: `refresh_review_queue()`
@@ -151,6 +158,7 @@ AND (
 ```
 
 **Expected Results**:
+
 - 5 tables found
 - 5+ functions found
 - 1 materialized view found
@@ -224,6 +232,7 @@ vercel --prod
 **Solution**: Some objects may already exist from previous attempts. This is safe - the migrations use `CREATE TABLE IF NOT EXISTS` and `DO $$ BEGIN ... END $$` blocks for idempotency.
 
 You can safely ignore these errors:
+
 - `relation "flashcards" already exists`
 - `relation "question_reviews" already exists`
 - `function "get_review_stats" already exists`
@@ -235,6 +244,7 @@ You can safely ignore these errors:
 ### Problem: Foreign Key Constraint Errors
 
 **Solution**: Ensure migrations are applied in order:
+
 1. Flashcards first (20251002000001)
 2. Question reviews second (20251002000002)
 3. Performance optimizations third (20251003000001)

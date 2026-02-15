@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * ConfirmDialog Component
@@ -40,9 +40,9 @@
  * ```
  */
 
-import { useState } from 'react';
-import { AlertTriangle, Loader2 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useState } from "react";
+import { AlertTriangle, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -52,9 +52,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { Input } from '@/components/ui/input';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+} from "@/components/ui/alert-dialog";
+import { Input } from "@/components/ui/input";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 export interface ConfirmDialogProps {
   /** Whether the dialog is open */
@@ -87,7 +87,7 @@ export interface ConfirmDialogProps {
   cancelLabel?: string;
 
   /** Visual style variant (default: "default") */
-  variant?: 'destructive' | 'default';
+  variant?: "destructive" | "default";
 
   /** Optional icon to display in header */
   icon?: React.ReactNode;
@@ -110,17 +110,17 @@ export function ConfirmDialog({
   impact,
   confirmLabel,
   cancelLabel,
-  variant = 'default',
+  variant = "default",
   icon,
   requireTypedConfirmation,
 }: ConfirmDialogProps) {
-  const t = useTranslations('dialog');
+  const t = useTranslations("dialog");
   const [isLoading, setIsLoading] = useState(false);
-  const [confirmText, setConfirmText] = useState('');
+  const [confirmText, setConfirmText] = useState("");
 
   // Use prop if provided, otherwise use translation
-  const effectiveConfirmLabel = confirmLabel || t('confirm');
-  const effectiveCancelLabel = cancelLabel || t('cancel');
+  const effectiveConfirmLabel = confirmLabel || t("confirm");
+  const effectiveCancelLabel = cancelLabel || t("cancel");
 
   // Filter out null/undefined impact items
   const validImpactItems = impact?.items.filter((item): item is string => Boolean(item)) ?? [];
@@ -138,10 +138,10 @@ export function ConfirmDialog({
       await onConfirm();
 
       // Reset state on success
-      setConfirmText('');
+      setConfirmText("");
       onOpenChange(false);
     } catch (error) {
-      console.error('Confirmation action failed:', error);
+      console.error("Confirmation action failed:", error);
       // Keep dialog open on error so user can see the error message
       // (Parent component should show toast error)
     } finally {
@@ -152,7 +152,7 @@ export function ConfirmDialog({
   // Reset state when dialog closes
   function handleOpenChange(newOpen: boolean) {
     if (!newOpen) {
-      setConfirmText('');
+      setConfirmText("");
       setIsLoading(false);
     }
     onOpenChange(newOpen);
@@ -164,25 +164,31 @@ export function ConfirmDialog({
         <AlertDialogHeader>
           <AlertDialogTitle className="flex items-center gap-2">
             {icon && (
-              <span className={variant === 'destructive' ? 'text-red-600' : 'text-teal-600'}>
+              <span className={variant === "destructive" ? "text-red-600" : "text-teal-600"}>
                 {icon}
               </span>
             )}
             {title}
           </AlertDialogTitle>
-          <AlertDialogDescription className="text-left">
-            {description}
-          </AlertDialogDescription>
+          <AlertDialogDescription className="text-left">{description}</AlertDialogDescription>
         </AlertDialogHeader>
 
         {/* Impact Details */}
         {impact && validImpactItems.length > 0 && (
           <div className="my-4">
-            <Alert className={variant === 'destructive' ? 'border-red-200 bg-red-50/10' : 'border-teal-200 bg-teal-50/10'}>
-              <AlertTriangle className={`h-4 w-4 ${variant === 'destructive' ? 'text-red-600' : 'text-teal-600'}`} />
+            <Alert
+              className={
+                variant === "destructive"
+                  ? "border-red-200 bg-red-50/10"
+                  : "border-teal-200 bg-teal-50/10"
+              }
+            >
+              <AlertTriangle
+                className={`h-4 w-4 ${variant === "destructive" ? "text-red-600" : "text-teal-600"}`}
+              />
               <AlertDescription className="ml-2">
-                <strong className="block mb-2">{impact.title}</strong>
-                <ul className="list-disc list-inside space-y-1 text-sm">
+                <strong className="mb-2 block">{impact.title}</strong>
+                <ul className="list-inside list-disc space-y-1 text-sm">
                   {validImpactItems.map((item, index) => (
                     <li key={index} className="text-gray-700">
                       {item}
@@ -200,9 +206,9 @@ export function ConfirmDialog({
             <Alert className="border-amber-200 bg-amber-50/10">
               <AlertTriangle className="h-4 w-4 text-amber-600" />
               <AlertDescription className="ml-2">
-                <strong className="block mb-2">{t('finalConfirmation')}</strong>
-                <p className="text-sm text-gray-700 mb-2">
-                  {t('typeToConfirm', { text: requireTypedConfirmation.text })}
+                <strong className="mb-2 block">{t("finalConfirmation")}</strong>
+                <p className="mb-2 text-sm text-gray-700">
+                  {t("typeToConfirm", { text: requireTypedConfirmation.text })}
                 </p>
                 <Input
                   value={confirmText}
@@ -212,7 +218,7 @@ export function ConfirmDialog({
                   disabled={isLoading}
                   autoComplete="off"
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter' && isConfirmEnabled) {
+                    if (e.key === "Enter" && isConfirmEnabled) {
                       handleConfirm();
                     }
                   }}
@@ -224,10 +230,7 @@ export function ConfirmDialog({
 
         <AlertDialogFooter className="gap-2 sm:gap-2">
           {/* Cancel Button - Prominent */}
-          <AlertDialogCancel
-            disabled={isLoading}
-            className="sm:order-1"
-          >
+          <AlertDialogCancel disabled={isLoading} className="sm:order-1">
             {effectiveCancelLabel}
           </AlertDialogCancel>
 
@@ -239,15 +242,15 @@ export function ConfirmDialog({
             }}
             disabled={!isConfirmEnabled}
             className={`sm:order-2 ${
-              variant === 'destructive'
-                ? 'bg-red-600 hover:bg-red-700 focus:ring-red-500'
-                : 'bg-teal-600 hover:bg-teal-700 focus:ring-teal-500'
+              variant === "destructive"
+                ? "bg-red-600 hover:bg-red-700 focus:ring-red-500"
+                : "bg-teal-600 hover:bg-teal-700 focus:ring-teal-500"
             }`}
           >
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                {t('processing')}
+                {t("processing")}
               </>
             ) : (
               effectiveConfirmLabel

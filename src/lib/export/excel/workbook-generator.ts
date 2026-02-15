@@ -3,8 +3,8 @@
  * Main orchestrator for creating the Financial Summary Workbook
  */
 
-import ExcelJS from 'exceljs';
-import { db } from '@/lib/budget-db';
+import ExcelJS from "exceljs";
+import { db } from "@/lib/budget-db";
 import type {
   ExcelExportOptions,
   ExportProgress,
@@ -12,19 +12,19 @@ import type {
   ExcelExportResult,
   SheetName,
   DEFAULT_EXCEL_OPTIONS,
-} from './types';
-import { generateDashboardSheet } from './sheets/dashboard-sheet';
-import { generateTransactionsSheet } from './sheets/transactions-sheet';
-import { generateMonthlySummarySheet } from './sheets/monthly-summary-sheet';
-import { generateCategoryAnalysisSheet } from './sheets/category-analysis-sheet';
-import { generateAccountsSheet } from './sheets/accounts-sheet';
-import { generateBudgetsSheet } from './sheets/budgets-sheet';
-import { generateSubscriptionsSheet } from './sheets/subscriptions-sheet';
-import { generateLoansSheet } from './sheets/loans-sheet';
-import { generateInvestmentsSheet } from './sheets/investments-sheet';
-import { generateNetWorthSheet } from './sheets/net-worth-sheet';
-import { generateGoalsSheet } from './sheets/goals-sheet';
-import { generateDataDictionarySheet } from './sheets/data-dictionary-sheet';
+} from "./types";
+import { generateDashboardSheet } from "./sheets/dashboard-sheet";
+import { generateTransactionsSheet } from "./sheets/transactions-sheet";
+import { generateMonthlySummarySheet } from "./sheets/monthly-summary-sheet";
+import { generateCategoryAnalysisSheet } from "./sheets/category-analysis-sheet";
+import { generateAccountsSheet } from "./sheets/accounts-sheet";
+import { generateBudgetsSheet } from "./sheets/budgets-sheet";
+import { generateSubscriptionsSheet } from "./sheets/subscriptions-sheet";
+import { generateLoansSheet } from "./sheets/loans-sheet";
+import { generateInvestmentsSheet } from "./sheets/investments-sheet";
+import { generateNetWorthSheet } from "./sheets/net-worth-sheet";
+import { generateGoalsSheet } from "./sheets/goals-sheet";
+import { generateDataDictionarySheet } from "./sheets/data-dictionary-sheet";
 
 /**
  * Get date range based on options
@@ -35,22 +35,22 @@ function getDateRange(options: ExcelExportOptions): { start: Date | null; end: D
   let start: Date | null = options.startDate || null;
 
   switch (options.dateRange) {
-    case 'ytd':
+    case "ytd":
       start = new Date(now.getFullYear(), 0, 1);
       break;
-    case 'last12months':
+    case "last12months":
       start = new Date(now.getFullYear(), now.getMonth() - 11, 1);
       break;
-    case 'last6months':
+    case "last6months":
       start = new Date(now.getFullYear(), now.getMonth() - 5, 1);
       break;
-    case 'last3months':
+    case "last3months":
       start = new Date(now.getFullYear(), now.getMonth() - 2, 1);
       break;
-    case 'all':
+    case "all":
       start = null;
       break;
-    case 'custom':
+    case "custom":
       // Use provided dates
       break;
   }
@@ -90,13 +90,13 @@ async function gatherExportData(options: ExcelExportOptions) {
   ]);
 
   // Filter transactions by date range and exclude split parents
-  let transactions = allTransactions.filter(tx => !tx.isSplit);
+  let transactions = allTransactions.filter((tx) => !tx.isSplit);
 
   if (dateRange.start) {
-    transactions = transactions.filter(tx => new Date(tx.date) >= dateRange.start!);
+    transactions = transactions.filter((tx) => new Date(tx.date) >= dateRange.start!);
   }
   if (dateRange.end) {
-    transactions = transactions.filter(tx => new Date(tx.date) <= dateRange.end!);
+    transactions = transactions.filter((tx) => new Date(tx.date) <= dateRange.end!);
   }
 
   // Sort transactions by date descending
@@ -122,7 +122,7 @@ async function gatherExportData(options: ExcelExportOptions) {
  */
 export async function generateFinancialWorkbook(
   options: ExcelExportOptions = {
-    dateRange: 'last12months',
+    dateRange: "last12months",
     includeTransactions: true,
     includeAccounts: true,
     includeBudgets: true,
@@ -143,23 +143,23 @@ export async function generateFinancialWorkbook(
   const workbook = new ExcelJS.Workbook();
 
   // Set workbook properties
-  workbook.creator = 'Budget App';
-  workbook.lastModifiedBy = 'Budget App';
+  workbook.creator = "Budget App";
+  workbook.lastModifiedBy = "Budget App";
   workbook.created = new Date();
   workbook.modified = new Date();
   workbook.properties.date1904 = false;
 
   // Set company
-  workbook.company = 'Budget App';
-  workbook.manager = '';
+  workbook.company = "Budget App";
+  workbook.manager = "";
 
   // Gather all data
   onProgress?.({
-    stage: 'preparing',
+    stage: "preparing",
     sheetsCompleted: 0,
     totalSheets: 12,
     percent: 5,
-    message: 'Gathering data...',
+    message: "Gathering data...",
   });
 
   const data = await gatherExportData(options);
@@ -185,7 +185,7 @@ export async function generateFinancialWorkbook(
   const updateProgress = (sheet: SheetName) => {
     sheetsCompleted++;
     onProgress?.({
-      stage: 'transactions',
+      stage: "transactions",
       currentSheet: sheet,
       sheetsCompleted,
       totalSheets,
@@ -197,82 +197,85 @@ export async function generateFinancialWorkbook(
   // Generate sheets in order (Dashboard first as it's the summary view)
   if (options.includeDashboard) {
     await generateDashboardSheet(workbook, data, options);
-    sheetsIncluded.push('Dashboard');
-    updateProgress('Dashboard');
+    sheetsIncluded.push("Dashboard");
+    updateProgress("Dashboard");
   }
 
   if (options.includeTransactions) {
     await generateTransactionsSheet(workbook, data, options);
-    sheetsIncluded.push('Transactions');
-    updateProgress('Transactions');
+    sheetsIncluded.push("Transactions");
+    updateProgress("Transactions");
   }
 
   if (options.includeMonthlySummary) {
     await generateMonthlySummarySheet(workbook, data, options);
-    sheetsIncluded.push('Monthly Summary');
-    updateProgress('Monthly Summary');
+    sheetsIncluded.push("Monthly Summary");
+    updateProgress("Monthly Summary");
   }
 
   if (options.includeCategoryAnalysis) {
     await generateCategoryAnalysisSheet(workbook, data, options);
-    sheetsIncluded.push('Category Analysis');
-    updateProgress('Category Analysis');
+    sheetsIncluded.push("Category Analysis");
+    updateProgress("Category Analysis");
   }
 
   if (options.includeAccounts) {
     await generateAccountsSheet(workbook, data, options);
-    sheetsIncluded.push('Accounts');
-    updateProgress('Accounts');
+    sheetsIncluded.push("Accounts");
+    updateProgress("Accounts");
   }
 
   if (options.includeBudgets) {
     await generateBudgetsSheet(workbook, data, options);
-    sheetsIncluded.push('Budgets');
-    updateProgress('Budgets');
+    sheetsIncluded.push("Budgets");
+    updateProgress("Budgets");
   }
 
   if (options.includeSubscriptions && data.subscriptions.length > 0) {
     await generateSubscriptionsSheet(workbook, data, options);
-    sheetsIncluded.push('Subscriptions');
-    updateProgress('Subscriptions');
+    sheetsIncluded.push("Subscriptions");
+    updateProgress("Subscriptions");
   }
 
   if (options.includeLoans && data.loans.length > 0) {
     await generateLoansSheet(workbook, data, options);
-    sheetsIncluded.push('Loans');
-    updateProgress('Loans');
+    sheetsIncluded.push("Loans");
+    updateProgress("Loans");
   }
 
-  if (options.includeInvestments && (data.investmentAccounts.length > 0 || data.holdings.length > 0)) {
+  if (
+    options.includeInvestments &&
+    (data.investmentAccounts.length > 0 || data.holdings.length > 0)
+  ) {
     await generateInvestmentsSheet(workbook, data, options);
-    sheetsIncluded.push('Investments');
-    updateProgress('Investments');
+    sheetsIncluded.push("Investments");
+    updateProgress("Investments");
   }
 
   if (options.includeNetWorth) {
     await generateNetWorthSheet(workbook, data, options);
-    sheetsIncluded.push('Net Worth');
-    updateProgress('Net Worth');
+    sheetsIncluded.push("Net Worth");
+    updateProgress("Net Worth");
   }
 
   if (options.includeGoals && data.goals.length > 0) {
     await generateGoalsSheet(workbook, data, options);
-    sheetsIncluded.push('Goals');
-    updateProgress('Goals');
+    sheetsIncluded.push("Goals");
+    updateProgress("Goals");
   }
 
   if (options.includeDataDictionary) {
     await generateDataDictionarySheet(workbook, sheetsIncluded);
-    sheetsIncluded.push('Data Dictionary');
-    updateProgress('Data Dictionary');
+    sheetsIncluded.push("Data Dictionary");
+    updateProgress("Data Dictionary");
   }
 
   onProgress?.({
-    stage: 'finalizing',
+    stage: "finalizing",
     sheetsCompleted: totalSheets,
     totalSheets,
     percent: 100,
-    message: 'Finalizing workbook...',
+    message: "Finalizing workbook...",
   });
 
   return workbook;
@@ -283,7 +286,7 @@ export async function generateFinancialWorkbook(
  */
 export async function downloadExcelExport(
   options: ExcelExportOptions = {
-    dateRange: 'last12months',
+    dateRange: "last12months",
     includeTransactions: true,
     includeAccounts: true,
     includeBudgets: true,
@@ -305,7 +308,7 @@ export async function downloadExcelExport(
     const workbook = await generateFinancialWorkbook(options, onProgress);
 
     // Generate filename
-    const dateStr = new Date().toISOString().split('T')[0];
+    const dateStr = new Date().toISOString().split("T")[0];
     const filename = options.filename || `Financial-Summary-${dateStr}.xlsx`;
 
     // Generate buffer
@@ -313,11 +316,11 @@ export async function downloadExcelExport(
 
     // Create blob and download
     const blob = new Blob([buffer], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     });
 
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
     link.download = filename;
     document.body.appendChild(link);
@@ -332,22 +335,22 @@ export async function downloadExcelExport(
       success: true,
       filename,
       fileSize: buffer.byteLength,
-      sheetsIncluded: workbook.worksheets.map(ws => ws.name as SheetName),
+      sheetsIncluded: workbook.worksheets.map((ws) => ws.name as SheetName),
       transactionCount: data.transactions.length,
       dateRange: data.dateRange,
       generatedAt: new Date(),
     };
   } catch (error) {
-    console.error('Excel export error:', error);
+    console.error("Excel export error:", error);
     return {
       success: false,
-      filename: '',
+      filename: "",
       fileSize: 0,
       sheetsIncluded: [],
       transactionCount: 0,
       dateRange: { start: null, end: null },
       generatedAt: new Date(),
-      error: error instanceof Error ? error.message : 'Unknown error',
+      error: error instanceof Error ? error.message : "Unknown error",
     };
   }
 }
@@ -399,4 +402,4 @@ export async function getExcelExportStats(options: ExcelExportOptions): Promise<
 }
 
 // Re-export types
-export * from './types';
+export * from "./types";

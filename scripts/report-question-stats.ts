@@ -1,15 +1,17 @@
 #!/usr/bin/env tsx
-import fs from 'fs';
-import path from 'path';
-import dotenv from 'dotenv';
+import fs from "fs";
+import path from "path";
+import dotenv from "dotenv";
 // Load env from .env.local if present, else .env
-const envLocal = path.resolve(process.cwd(), '.env.local');
-if (fs.existsSync(envLocal)) dotenv.config({ path: envLocal }); else dotenv.config();
+const envLocal = path.resolve(process.cwd(), ".env.local");
+if (fs.existsSync(envLocal)) dotenv.config({ path: envLocal });
+else dotenv.config();
 import { questionService } from "@/lib/questionService";
 
 async function main() {
   const stats = await questionService.getQuestionStats();
-  const { totalQuestions, domainDistribution, difficultyDistribution, categoryDistribution } = stats;
+  const { totalQuestions, domainDistribution, difficultyDistribution, categoryDistribution } =
+    stats;
 
   console.log("Question Bank Summary");
   console.log("======================");

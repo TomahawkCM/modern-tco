@@ -5,32 +5,22 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import FlashcardDashboard from "@/components/flashcards/FlashcardDashboard";
-import {
-  Brain,
-  BookOpen,
-  Sparkles,
-  ArrowLeft,
-  Info
-} from "lucide-react";
+import { Brain, BookOpen, Sparkles, ArrowLeft, Info } from "lucide-react";
 
 export default function FlashcardsPage() {
   const router = useRouter();
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="container mx-auto max-w-6xl px-4 py-8">
       {/* Header */}
       <div className="mb-8">
-        <Button
-          onClick={() => router.push("/dashboard")}
-          variant="outline"
-          className="mb-4"
-        >
+        <Button onClick={() => router.push("/dashboard")} variant="outline" className="mb-4">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Dashboard
         </Button>
 
-        <div className="flex items-center gap-3 mb-4">
-          <div className="p-3 bg-accent/20 rounded-lg">
+        <div className="mb-4 flex items-center gap-3">
+          <div className="rounded-lg bg-accent/20 p-3">
             <Brain className="h-8 w-8 text-accent-foreground" />
           </div>
           <div>
@@ -47,28 +37,23 @@ export default function FlashcardsPage() {
         <Info className="h-4 w-4 text-primary" />
         <AlertDescription className="text-foreground">
           <strong>How it works:</strong> Flashcards use the SM-2 spaced repetition algorithm to
-          schedule reviews at optimal intervals. Rate each card honestly (Again/Hard/Good/Easy)
-          and the system will adapt to your learning pace.
+          schedule reviews at optimal intervals. Rate each card honestly (Again/Hard/Good/Easy) and
+          the system will adapt to your learning pace.
         </AlertDescription>
       </Alert>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-2">
         <Card className="border-primary/20 bg-gradient-to-br from-primary/10 to-primary/5">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <BookOpen className="h-5 w-5 text-primary" />
               Create from Study Modules
             </CardTitle>
-            <CardDescription>
-              Auto-generate flashcards from learning objectives
-            </CardDescription>
+            <CardDescription>Auto-generate flashcards from learning objectives</CardDescription>
           </CardHeader>
           <CardContent>
-            <Button
-              onClick={() => router.push("/study")}
-              className="w-full"
-            >
+            <Button onClick={() => router.push("/study")} className="w-full">
               Browse Study Modules
             </Button>
           </CardContent>
@@ -80,16 +65,10 @@ export default function FlashcardsPage() {
               <Sparkles className="h-5 w-5 text-accent-foreground" />
               Convert Mistakes to Cards
             </CardTitle>
-            <CardDescription>
-              Turn quiz mistakes into flashcards automatically
-            </CardDescription>
+            <CardDescription>Turn quiz mistakes into flashcards automatically</CardDescription>
           </CardHeader>
           <CardContent>
-            <Button
-              onClick={() => router.push("/practice")}
-              variant="secondary"
-              className="w-full"
-            >
+            <Button onClick={() => router.push("/practice")} variant="secondary" className="w-full">
               Practice Questions
             </Button>
           </CardContent>
@@ -115,22 +94,22 @@ export default function FlashcardsPage() {
           <div className="flex gap-3">
             <div className="text-2xl">📅</div>
             <div>
-              <strong className="text-foreground">Daily Consistency:</strong> Review for 10-15 minutes
-              daily rather than long cramming sessions.
+              <strong className="text-foreground">Daily Consistency:</strong> Review for 10-15
+              minutes daily rather than long cramming sessions.
             </div>
           </div>
           <div className="flex gap-3">
             <div className="text-2xl">⭐</div>
             <div>
-              <strong className="text-foreground">Honest Ratings:</strong> Rate cards based on actual
-              recall difficulty - the algorithm adapts to your true performance.
+              <strong className="text-foreground">Honest Ratings:</strong> Rate cards based on
+              actual recall difficulty - the algorithm adapts to your true performance.
             </div>
           </div>
           <div className="flex gap-3">
             <div className="text-2xl">🎯</div>
             <div>
-              <strong className="text-foreground">Create from Mistakes:</strong> When you get a practice
-              question wrong, immediately create a flashcard to reinforce that concept.
+              <strong className="text-foreground">Create from Mistakes:</strong> When you get a
+              practice question wrong, immediately create a flashcard to reinforce that concept.
             </div>
           </div>
         </CardContent>

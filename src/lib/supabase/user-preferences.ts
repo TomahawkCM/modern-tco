@@ -9,9 +9,9 @@
  * - Otherwise Supabase wins
  */
 
-import { supabase } from '../supabase';
-import type { LocalePreferences } from '../locale-storage';
-import type { DashboardConfig } from '@/dashboard/widgets/types';
+import { supabase } from "../supabase";
+import type { LocalePreferences } from "../locale-storage";
+import type { DashboardConfig } from "@/dashboard/widgets/types";
 
 // Debounce timeout for sync operations (1 second)
 const SYNC_DEBOUNCE_MS = 1000;
@@ -44,7 +44,7 @@ async function getCurrentUserId(): Promise<string | null> {
     } = await supabase.auth.getUser();
     return user?.id || null;
   } catch (error) {
-    console.error('Error getting current user:', error);
+    console.error("Error getting current user:", error);
     return null;
   }
 }
@@ -58,28 +58,32 @@ export async function fetchUserPreferences(): Promise<UserPreferencesRow | null>
 
   try {
     const { data, error } = await supabase
-      .from('user_preferences' as any)
-      .select('*')
-      .eq('user_id', userId)
+      .from("user_preferences" as any)
+      .select("*")
+      .eq("user_id", userId)
       .single();
 
     if (error) {
       // Not found is ok - user hasn't synced yet
-      if (error.code === 'PGRST116') {
+      if (error.code === "PGRST116") {
         return null;
       }
       // Gracefully handle missing table (migration not yet applied)
-      if (error.code === 'PGRST204' || error.message?.includes('relation') || error.message?.includes('not found')) {
-        console.debug('[User Preferences] Table not yet created - run: supabase db push');
+      if (
+        error.code === "PGRST204" ||
+        error.message?.includes("relation") ||
+        error.message?.includes("not found")
+      ) {
+        console.debug("[User Preferences] Table not yet created - run: supabase db push");
         return null;
       }
-      console.error('Error fetching user preferences:', error);
+      console.error("Error fetching user preferences:", error);
       return null;
     }
 
     return data as unknown as UserPreferencesRow;
   } catch (error) {
-    console.error('Error fetching user preferences:', error);
+    console.error("Error fetching user preferences:", error);
     return null;
   }
 }
@@ -100,50 +104,58 @@ export function syncLocaleToSupabase(preferences: LocalePreferences): void {
 
     try {
       // Upsert (insert or update)
-      const { error } = await supabase
-        .from('user_preferences' as any)
-        .upsert(
-          {
-            user_id: userId,
-            locale_config: preferences,
-          },
-          {
-            onConflict: 'user_id',
-          }
-        );
+      const { error } = await supabase.from("user_preferences" as any).upsert(
+        {
+          user_id: userId,
+          locale_config: preferences,
+        },
+        {
+          onConflict: "user_id",
+        }
+      );
 
       if (error) {
         // Gracefully handle expected errors
-        const code = error.code || '';
-        const message = error.message || '';
+        const code = error.code || "";
+        const message = error.message || "";
 
         // Missing table (migration not yet applied)
-        if (code === 'PGRST204' || code === '42P01' || message.includes('relation') || message.includes('not found')) {
-          console.debug('[User Preferences] Table not yet created - run: supabase db push');
+        if (
+          code === "PGRST204" ||
+          code === "42P01" ||
+          message.includes("relation") ||
+          message.includes("not found")
+        ) {
+          console.debug("[User Preferences] Table not yet created - run: supabase db push");
           return;
         }
 
         // User not authenticated - silent fail (expected for anonymous users)
-        if (code === 'PGRST301' || code === '401' || message.includes('JWT') || message.includes('auth')) {
-          console.debug('[User Preferences] User not authenticated - sync skipped');
+        if (
+          code === "PGRST301" ||
+          code === "401" ||
+          message.includes("JWT") ||
+          message.includes("auth")
+        ) {
+          console.debug("[User Preferences] User not authenticated - sync skipped");
           return;
         }
 
         // RLS policy violation - user doesn't have permission
-        if (code === '42501' || message.includes('policy')) {
-          console.debug('[User Preferences] RLS policy - user cannot sync preferences');
+        if (code === "42501" || message.includes("policy")) {
+          console.debug("[User Preferences] RLS policy - user cannot sync preferences");
           return;
         }
 
         // Empty error object - likely network/offline issue
         if (!code && !message) {
-          console.debug('[User Preferences] Sync failed - likely offline or network issue');
+          console.debug("[User Preferences] Sync failed - likely offline or network issue");
           return;
         }
 
         // Log unexpected errors with details (only in development)
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('[User Preferences] Unexpected sync error:', {
+        if (process.env.NODE_ENV === "development") {
+          console.warn("[User Preferences] Unexpected sync error:", {
             code,
             message,
             details: error.details || null,
@@ -151,12 +163,12 @@ export function syncLocaleToSupabase(preferences: LocalePreferences): void {
           });
         }
       } else {
-        console.debug('[User Preferences] Locale synced to Supabase');
+        console.debug("[User Preferences] Locale synced to Supabase");
       }
     } catch (error) {
       // Network errors, offline mode, etc. - silent in production
-      if (process.env.NODE_ENV === 'development') {
-        console.debug('[User Preferences] Sync failed:', error);
+      if (process.env.NODE_ENV === "development") {
+        console.debug("[User Preferences] Sync failed:", error);
       }
     }
   }, SYNC_DEBOUNCE_MS);
@@ -178,44 +190,48 @@ export function syncWidgetConfigToSupabase(config: DashboardConfig): void {
 
     try {
       // Upsert (insert or update)
-      const { error } = await supabase
-        .from('user_preferences' as any)
-        .upsert(
-          {
-            user_id: userId,
-            widget_config: config,
-          },
-          {
-            onConflict: 'user_id',
-          }
-        );
+      const { error } = await supabase.from("user_preferences" as any).upsert(
+        {
+          user_id: userId,
+          widget_config: config,
+        },
+        {
+          onConflict: "user_id",
+        }
+      );
 
       if (error) {
         // Gracefully handle expected errors
-        const code = error.code || '';
-        const message = error.message || '';
+        const code = error.code || "";
+        const message = error.message || "";
 
         // Missing table, auth issues, or RLS - silent fail
         if (
-          code === 'PGRST204' || code === '42P01' || code === 'PGRST301' ||
-          code === '401' || code === '42501' ||
-          message.includes('relation') || message.includes('not found') ||
-          message.includes('JWT') || message.includes('auth') || message.includes('policy')
+          code === "PGRST204" ||
+          code === "42P01" ||
+          code === "PGRST301" ||
+          code === "401" ||
+          code === "42501" ||
+          message.includes("relation") ||
+          message.includes("not found") ||
+          message.includes("JWT") ||
+          message.includes("auth") ||
+          message.includes("policy")
         ) {
-          console.debug('[User Preferences] Widget sync skipped:', code || 'expected condition');
+          console.debug("[User Preferences] Widget sync skipped:", code || "expected condition");
           return;
         }
 
-        console.error('Error syncing widget config to Supabase:', {
+        console.error("Error syncing widget config to Supabase:", {
           code,
           message,
           details: error.details || null,
         });
       } else {
-        console.log('Widget config synced to Supabase');
+        console.log("Widget config synced to Supabase");
       }
     } catch (error) {
-      console.debug('[User Preferences] Widget sync failed:', error);
+      console.debug("[User Preferences] Widget sync failed:", error);
     }
   }, SYNC_DEBOUNCE_MS);
 }
@@ -241,15 +257,13 @@ export async function loadLocaleFromSupabase(
   const localIsRecent = Date.now() - localUpdatedAt < CONFLICT_WINDOW_MS;
 
   if (localIsRecent) {
-    console.log(
-      'Locale conflict resolution: localStorage wins (recently updated)'
-    );
+    console.log("Locale conflict resolution: localStorage wins (recently updated)");
     return null; // Keep localStorage
   }
 
   // Supabase is newer
   if (supabaseUpdatedAt > localUpdatedAt) {
-    console.log('Locale conflict resolution: Supabase wins (newer data)');
+    console.log("Locale conflict resolution: Supabase wins (newer data)");
     return supabaseLocale;
   }
 
@@ -273,7 +287,7 @@ export async function loadWidgetConfigFromSupabase(
 
   // No local config - use Supabase
   if (!localConfig) {
-    console.log('No local widget config - using Supabase');
+    console.log("No local widget config - using Supabase");
     return supabaseConfig;
   }
 
@@ -284,15 +298,13 @@ export async function loadWidgetConfigFromSupabase(
   const localIsRecent = Date.now() - localUpdatedAt < CONFLICT_WINDOW_MS;
 
   if (localIsRecent) {
-    console.log(
-      'Widget config conflict resolution: localStorage wins (recently updated)'
-    );
+    console.log("Widget config conflict resolution: localStorage wins (recently updated)");
     return null; // Keep localStorage
   }
 
   // Supabase is newer
   if (supabaseUpdatedAt > localUpdatedAt) {
-    console.log('Widget config conflict resolution: Supabase wins (newer data)');
+    console.log("Widget config conflict resolution: Supabase wins (newer data)");
     return supabaseConfig;
   }
 
@@ -309,16 +321,16 @@ export async function deleteUserPreferences(): Promise<void> {
 
   try {
     const { error } = await supabase
-      .from('user_preferences' as any)
+      .from("user_preferences" as any)
       .delete()
-      .eq('user_id', userId);
+      .eq("user_id", userId);
 
     if (error) {
-      console.error('Error deleting user preferences:', error);
+      console.error("Error deleting user preferences:", error);
     } else {
-      console.log('User preferences deleted from Supabase');
+      console.log("User preferences deleted from Supabase");
     }
   } catch (error) {
-    console.error('Error deleting user preferences:', error);
+    console.error("Error deleting user preferences:", error);
   }
 }

@@ -306,15 +306,15 @@ $$ LANGUAGE plpgsql;
 
 **Decision Matrix**:
 
-| Data Type | Query Pattern | Recommended Index |
-|-----------|---------------|-------------------|
-| JSONB | Containment (@>) | GIN (jsonb_ops) |
-| JSONB | Path queries | GIN (jsonb_path_ops) |
-| JSONB | Equality on keys | B-tree on extracted value |
-| Arrays | Containment (@>) | GIN |
-| Arrays | Specific elements | B-tree on element |
-| Text | Full-text search | GIN (tsvector) |
-| Text | Fuzzy matching | GIN (pg_trgm) |
+| Data Type | Query Pattern     | Recommended Index         |
+| --------- | ----------------- | ------------------------- |
+| JSONB     | Containment (@>)  | GIN (jsonb_ops)           |
+| JSONB     | Path queries      | GIN (jsonb_path_ops)      |
+| JSONB     | Equality on keys  | B-tree on extracted value |
+| Arrays    | Containment (@>)  | GIN                       |
+| Arrays    | Specific elements | B-tree on element         |
+| Text      | Full-text search  | GIN (tsvector)            |
+| Text      | Fuzzy matching    | GIN (pg_trgm)             |
 
 ### Query Optimization Patterns
 

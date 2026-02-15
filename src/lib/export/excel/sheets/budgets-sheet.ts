@@ -3,9 +3,9 @@
  * Budget vs Actual comparison with monthly breakdown
  */
 
-import type { Workbook, Worksheet } from 'exceljs';
-import type { ExcelExportOptions } from '../types';
-import type { Transaction, Category, Budget } from '@/types/budget';
+import type { Workbook, Worksheet } from "exceljs";
+import type { ExcelExportOptions } from "../types";
+import type { Transaction, Category, Budget } from "@/types/budget";
 import {
   FONTS,
   FILLS,
@@ -22,7 +22,7 @@ import {
   createSummaryRow,
   EXCEL_COLORS,
   getArgbColor,
-} from '../styles';
+} from "../styles";
 
 interface BudgetsSheetData {
   transactions: Transaction[];
@@ -35,16 +35,16 @@ interface BudgetsSheetData {
  * Get category name by ID
  */
 function getCategoryName(categoryId: string, categories: Category[]): string {
-  const cat = categories.find(c => c.id === categoryId);
-  return cat?.name || 'Unknown';
+  const cat = categories.find((c) => c.id === categoryId);
+  return cat?.name || "Unknown";
 }
 
 /**
  * Get category color by ID
  */
 function getCategoryColor(categoryId: string, categories: Category[]): string {
-  const cat = categories.find(c => c.id === categoryId);
-  return cat?.color || '#6B7280';
+  const cat = categories.find((c) => c.id === categoryId);
+  return cat?.color || "#6B7280";
 }
 
 /**
@@ -57,7 +57,7 @@ function getCategorySpending(
   month: number
 ): number {
   return transactions
-    .filter(tx => {
+    .filter((tx) => {
       if (tx.amount >= 0) return false; // Only expenses
       if (tx.category !== categoryName) return false;
       const txDate = new Date(tx.date);
@@ -72,7 +72,7 @@ function getCategorySpending(
 function createProgressBar(percent: number, width = 10): string {
   const filled = Math.min(Math.round(percent * width), width);
   const empty = width - filled;
-  return '█'.repeat(filled) + '░'.repeat(empty);
+  return "█".repeat(filled) + "░".repeat(empty);
 }
 
 /**
@@ -83,8 +83,8 @@ export async function generateBudgetsSheet(
   data: BudgetsSheetData,
   options: ExcelExportOptions
 ): Promise<Worksheet> {
-  const worksheet = workbook.addWorksheet('Budgets', {
-    properties: { tabColor: { argb: 'FFF59E0B' } }, // Amber tab
+  const worksheet = workbook.addWorksheet("Budgets", {
+    properties: { tabColor: { argb: "FFF59E0B" } }, // Amber tab
   });
 
   // Get the months we're covering (last 6 months for YTD view)
@@ -96,26 +96,26 @@ export async function generateBudgetsSheet(
     months.push({
       year: date.getFullYear(),
       month: date.getMonth(),
-      display: date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' }),
+      display: date.toLocaleDateString("en-US", { month: "short", year: "2-digit" }),
     });
   }
 
   // Build column definitions dynamically
   const staticColumns = [
-    { header: 'Category', key: 'category', width: 20 },
-    { header: 'Monthly Budget', key: 'budget', width: 14 },
+    { header: "Category", key: "category", width: 20 },
+    { header: "Monthly Budget", key: "budget", width: 14 },
   ];
 
-  const monthColumns = months.flatMap(m => [
+  const monthColumns = months.flatMap((m) => [
     { header: m.display, key: `actual_${m.year}_${m.month}`, width: 12 },
-    { header: 'Var', key: `var_${m.year}_${m.month}`, width: 10 },
+    { header: "Var", key: `var_${m.year}_${m.month}`, width: 10 },
   ]);
 
   const summaryColumns = [
-    { header: 'YTD Budget', key: 'ytdBudget', width: 12 },
-    { header: 'YTD Actual', key: 'ytdActual', width: 12 },
-    { header: 'YTD Var', key: 'ytdVar', width: 10 },
-    { header: 'Progress', key: 'progress', width: 12 },
+    { header: "YTD Budget", key: "ytdBudget", width: 12 },
+    { header: "YTD Actual", key: "ytdActual", width: 12 },
+    { header: "YTD Var", key: "ytdVar", width: 10 },
+    { header: "Progress", key: "progress", width: 12 },
   ];
 
   const columns = [...staticColumns, ...monthColumns, ...summaryColumns];
@@ -123,7 +123,7 @@ export async function generateBudgetsSheet(
   // Create title section
   let currentRow = createTitleSection(
     worksheet,
-    'Budget vs Actual',
+    "Budget vs Actual",
     `Monthly budget tracking (${months[0].display} - ${months[months.length - 1].display})`,
     new Date()
   );
@@ -133,35 +133,35 @@ export async function generateBudgetsSheet(
   const headerRow = worksheet.getRow(headerRowNum);
 
   // Static headers
-  headerRow.getCell(1).value = 'Category';
-  headerRow.getCell(2).value = 'Monthly Budget';
+  headerRow.getCell(1).value = "Category";
+  headerRow.getCell(2).value = "Monthly Budget";
 
   // Month headers (merged for Actual/Var pairs)
   let colIndex = 3;
-  months.forEach(m => {
+  months.forEach((m) => {
     headerRow.getCell(colIndex).value = m.display;
     worksheet.mergeCells(headerRowNum, colIndex, headerRowNum, colIndex + 1);
     colIndex += 2;
   });
 
   // Summary headers
-  headerRow.getCell(colIndex).value = 'YTD Budget';
-  headerRow.getCell(colIndex + 1).value = 'YTD Actual';
-  headerRow.getCell(colIndex + 2).value = 'YTD Var';
-  headerRow.getCell(colIndex + 3).value = 'Progress';
+  headerRow.getCell(colIndex).value = "YTD Budget";
+  headerRow.getCell(colIndex + 1).value = "YTD Actual";
+  headerRow.getCell(colIndex + 2).value = "YTD Var";
+  headerRow.getCell(colIndex + 3).value = "Progress";
 
   styleHeaderRow(headerRow, columns.length);
   currentRow++;
 
   // Sub-header row for Actual/Var
   const subHeaderRow = worksheet.getRow(currentRow);
-  subHeaderRow.getCell(1).value = '';
-  subHeaderRow.getCell(2).value = '';
+  subHeaderRow.getCell(1).value = "";
+  subHeaderRow.getCell(2).value = "";
 
   colIndex = 3;
   months.forEach(() => {
-    subHeaderRow.getCell(colIndex).value = 'Actual';
-    subHeaderRow.getCell(colIndex + 1).value = 'Var';
+    subHeaderRow.getCell(colIndex).value = "Actual";
+    subHeaderRow.getCell(colIndex + 1).value = "Var";
     colIndex += 2;
   });
 
@@ -169,9 +169,9 @@ export async function generateBudgetsSheet(
   for (let i = 1; i <= columns.length; i++) {
     subHeaderRow.getCell(i).font = FONTS.bodyMuted;
     subHeaderRow.getCell(i).fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FFF3F4F6' },
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "FFF3F4F6" },
     };
     subHeaderRow.getCell(i).border = BORDERS.all;
     subHeaderRow.getCell(i).alignment = ALIGNMENTS.center;
@@ -184,13 +184,13 @@ export async function generateBudgetsSheet(
 
   // Process each budget
   const budgetData = data.budgets
-    .map(budget => {
+    .map((budget) => {
       const categoryName = getCategoryName(budget.categoryId, data.categories);
       const categoryColor = getCategoryColor(budget.categoryId, data.categories);
-      const monthlyBudget = budget.period === 'annual' ? budget.amount / 12 : budget.amount;
+      const monthlyBudget = budget.period === "annual" ? budget.amount / 12 : budget.amount;
 
       // Calculate spending for each month
-      const monthlySpending = months.map(m => {
+      const monthlySpending = months.map((m) => {
         const actual = getCategorySpending(categoryName, data.transactions, m.year, m.month);
         const variance = monthlyBudget - actual;
         return { actual, variance };
@@ -213,7 +213,7 @@ export async function generateBudgetsSheet(
         progress,
       };
     })
-    .filter(b => b.monthlyBudget > 0)
+    .filter((b) => b.monthlyBudget > 0)
     .sort((a, b) => b.ytdActual - a.ytdActual);
 
   // Add data rows
@@ -225,7 +225,7 @@ export async function generateBudgetsSheet(
     row.getCell(1).font = { ...FONTS.body, bold: true };
     row.getCell(1).border = {
       ...BORDERS.all,
-      left: { style: 'thick', color: getArgbColor(budgetItem.categoryColor) },
+      left: { style: "thick", color: getArgbColor(budgetItem.categoryColor) },
     };
 
     // Monthly budget
@@ -235,7 +235,7 @@ export async function generateBudgetsSheet(
 
     // Monthly actual and variance
     colIndex = 3;
-    budgetItem.monthlySpending.forEach(m => {
+    budgetItem.monthlySpending.forEach((m) => {
       // Actual
       row.getCell(colIndex).value = m.actual;
       row.getCell(colIndex).numFmt = NUMBER_FORMATS.currency;
@@ -265,10 +265,15 @@ export async function generateBudgetsSheet(
     // Progress bar
     row.getCell(colIndex + 3).value = createProgressBar(budgetItem.progress);
     row.getCell(colIndex + 3).font = {
-      name: 'Consolas',
+      name: "Consolas",
       size: 10,
       color: {
-        argb: budgetItem.progress > 1 ? 'FFEF4444' : budgetItem.progress > 0.8 ? 'FFF59E0B' : 'FF10B981',
+        argb:
+          budgetItem.progress > 1
+            ? "FFEF4444"
+            : budgetItem.progress > 0.8
+              ? "FFF59E0B"
+              : "FF10B981",
       },
     };
     row.getCell(colIndex + 3).alignment = ALIGNMENTS.center;
@@ -280,9 +285,9 @@ export async function generateBudgetsSheet(
     if (budgetItem.progress > 1) {
       for (let i = 1; i <= columns.length; i++) {
         row.getCell(i).fill = {
-          type: 'pattern',
-          pattern: 'solid',
-          fgColor: { argb: 'FFFEE2E2' },
+          type: "pattern",
+          pattern: "solid",
+          fgColor: { argb: "FFFEE2E2" },
         };
       }
     }
@@ -300,7 +305,7 @@ export async function generateBudgetsSheet(
     };
 
     const totalRow = worksheet.getRow(currentRow);
-    totalRow.getCell(1).value = 'TOTAL';
+    totalRow.getCell(1).value = "TOTAL";
     totalRow.getCell(1).font = { ...FONTS.body, bold: true };
 
     totalRow.getCell(2).value = totals.monthlyBudget;
@@ -323,9 +328,9 @@ export async function generateBudgetsSheet(
     // Style total row
     for (let i = 1; i <= columns.length; i++) {
       totalRow.getCell(i).fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFE5E7EB' },
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "FFE5E7EB" },
       };
       totalRow.getCell(i).border = BORDERS.all;
     }

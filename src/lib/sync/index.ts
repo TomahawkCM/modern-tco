@@ -6,7 +6,7 @@
  */
 
 // Types
-export type * from './types';
+export type * from "./types";
 
 // Device Discovery
 export {
@@ -34,22 +34,14 @@ export {
   verifyPairingCode,
   endPairingSession,
   getActivePairingSession,
-} from './device-discovery';
+} from "./device-discovery";
 
-export type { ManualConnectionInfo } from './device-discovery';
+export type { ManualConnectionInfo } from "./device-discovery";
 
 // Sync Engine
-export {
-  SyncEngine,
-  createSyncEngine,
-  ALL_ENTITY_TYPES,
-} from './sync-engine';
+export { SyncEngine, createSyncEngine, ALL_ENTITY_TYPES } from "./sync-engine";
 
-export type {
-  SyncEngineConfig,
-  SyncResult,
-  SyncError,
-} from './sync-engine';
+export type { SyncEngineConfig, SyncResult, SyncError } from "./sync-engine";
 
 // Offline Manager
 export {
@@ -57,11 +49,11 @@ export {
   getOfflineManager,
   createOfflineManager,
   createOfflineStateObserver,
-} from './offline-manager';
+} from "./offline-manager";
 
 export type {
   QueuedChange,
   OfflineManagerConfig,
   OfflineStatus,
   OfflineStateObserver,
-} from './offline-manager';
+} from "./offline-manager";

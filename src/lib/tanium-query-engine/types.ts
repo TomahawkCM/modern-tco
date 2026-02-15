@@ -6,45 +6,45 @@
 // Token types for lexical analysis
 export enum TokenType {
   // Keywords
-  GET = 'GET',
-  FROM = 'FROM',
-  WHERE = 'WHERE',
-  WITH = 'WITH',
-  GROUP_BY = 'GROUP_BY',
-  ORDER_BY = 'ORDER_BY',
-  LIMIT = 'LIMIT',
-  AND = 'AND',
+  GET = "GET",
+  FROM = "FROM",
+  WHERE = "WHERE",
+  WITH = "WITH",
+  GROUP_BY = "GROUP_BY",
+  ORDER_BY = "ORDER_BY",
+  LIMIT = "LIMIT",
+  AND = "AND",
 
   // Operators
-  CONTAINS = 'CONTAINS',
-  DOES_NOT_CONTAIN = 'DOES_NOT_CONTAIN',
-  EQUALS = 'EQUALS',
-  IS_GREATER_THAN = 'IS_GREATER_THAN',
-  IS_LESS_THAN = 'IS_LESS_THAN',
-  STARTS_WITH = 'STARTS_WITH',
-  ENDS_WITH = 'ENDS_WITH',
+  CONTAINS = "CONTAINS",
+  DOES_NOT_CONTAIN = "DOES_NOT_CONTAIN",
+  EQUALS = "EQUALS",
+  IS_GREATER_THAN = "IS_GREATER_THAN",
+  IS_LESS_THAN = "IS_LESS_THAN",
+  STARTS_WITH = "STARTS_WITH",
+  ENDS_WITH = "ENDS_WITH",
 
   // Aggregates
-  COUNT = 'COUNT',
-  MIN = 'MIN',
-  MAX = 'MAX',
-  AVG = 'AVG',
-  SUM = 'SUM',
+  COUNT = "COUNT",
+  MIN = "MIN",
+  MAX = "MAX",
+  AVG = "AVG",
+  SUM = "SUM",
 
   // Literals
-  IDENTIFIER = 'IDENTIFIER',
-  STRING = 'STRING',
-  NUMBER = 'NUMBER',
+  IDENTIFIER = "IDENTIFIER",
+  STRING = "STRING",
+  NUMBER = "NUMBER",
 
   // Punctuation
-  COMMA = 'COMMA',
-  LPAREN = 'LPAREN',
-  RPAREN = 'RPAREN',
-  DOT = 'DOT',
+  COMMA = "COMMA",
+  LPAREN = "LPAREN",
+  RPAREN = "RPAREN",
+  DOT = "DOT",
 
   // Special
-  EOF = 'EOF',
-  UNKNOWN = 'UNKNOWN'
+  EOF = "EOF",
+  UNKNOWN = "UNKNOWN",
 }
 
 export interface Token {
@@ -77,7 +77,7 @@ export type ASTNode =
   | ScopeNode;
 
 export interface QueryNode {
-  type: 'Query';
+  type: "Query";
   select: SelectNode;
   from: FromNode;
   where?: WhereNode;
@@ -88,84 +88,84 @@ export interface QueryNode {
 }
 
 export interface SelectNode {
-  type: 'Select';
+  type: "Select";
   columns: ColumnNode[];
   aggregates: AggregateNode[];
   location?: SourceLocation;
 }
 
 export interface ColumnNode {
-  type: 'Column';
+  type: "Column";
   name: string;
   alias?: string;
   location?: SourceLocation;
 }
 
 export interface AggregateNode {
-  type: 'Aggregate';
-  function: 'count' | 'min' | 'max' | 'avg' | 'sum';
+  type: "Aggregate";
+  function: "count" | "min" | "max" | "avg" | "sum";
   column?: string;
   alias?: string;
   location?: SourceLocation;
 }
 
 export interface FromNode {
-  type: 'From';
+  type: "From";
   scope: ScopeNode;
   location?: SourceLocation;
 }
 
 export interface ScopeNode {
-  type: 'Scope';
-  scopeType: 'all' | 'group' | 'filter';
+  type: "Scope";
+  scopeType: "all" | "group" | "filter";
   value?: string;
   location?: SourceLocation;
 }
 
 export interface WhereNode {
-  type: 'Where';
+  type: "Where";
   filters: FilterNode[];
   location?: SourceLocation;
 }
 
 export interface FilterNode {
-  type: 'Filter';
+  type: "Filter";
   field: string;
   operator: FilterOperator;
   value: string | number;
-  dataType?: 'text' | 'number' | 'date';
+  dataType?: "text" | "number" | "date";
   location?: SourceLocation;
 }
 
 export type FilterOperator =
-  | 'contains'
-  | 'does_not_contain'
-  | 'equals'
-  | 'not_equals'
-  | 'greater_than'
-  | 'less_than'
-  | 'greater_or_equal'
-  | 'less_or_equal'
-  | 'starts_with'
-  | 'ends_with';
+  | "contains"
+  | "does_not_contain"
+  | "equals"
+  | "not_equals"
+  | "greater_than"
+  | "less_than"
+  | "greater_or_equal"
+  | "less_or_equal"
+  | "starts_with"
+  | "ends_with";
 
 export interface GroupByNode {
-  type: 'GroupBy';
+  type: "GroupBy";
   columns: string[];
   location?: SourceLocation;
 }
 
 export interface OrderByNode {
-  type: 'OrderBy';
+  type: "OrderBy";
   columns: Array<{
     column: string;
-    direction: 'asc' | 'desc';
+    direction: "asc" | "desc";
   }>;
   location?: SourceLocation;
 }
 
 export interface LimitNode {
-  type: 'Limit';
+  type: "Limit";
   value: number;
   location?: SourceLocation;
 }
@@ -173,7 +173,7 @@ export interface LimitNode {
 // Field mapping for Tanium sensors
 export interface FieldMapping {
   key: string;
-  type: 'text' | 'number' | 'date';
+  type: "text" | "number" | "date";
   dbColumn: string;
   description?: string;
   category?: string;
@@ -198,7 +198,7 @@ export interface QueryWarning {
   message: string;
   start?: number;
   end?: number;
-  severity: 'info' | 'warning' | 'error';
+  severity: "info" | "warning" | "error";
 }
 
 export interface ExecutionMetrics {
@@ -224,7 +224,7 @@ export interface QueryMetadata {
 
 // Query plan for optimization
 export interface QueryPlan {
-  type: 'scan' | 'index_scan' | 'filter' | 'aggregate' | 'sort' | 'limit';
+  type: "scan" | "index_scan" | "filter" | "aggregate" | "sort" | "limit";
   cost: number;
   rows: number;
   width: number;
@@ -256,7 +256,7 @@ export interface ExecutorOptions {
   useCache?: boolean;
   cacheTTL?: number;
   explainOnly?: boolean;
-  format?: 'json' | 'csv' | 'table';
+  format?: "json" | "csv" | "table";
 }
 
 // Error types
@@ -266,29 +266,27 @@ export class QueryError extends Error {
     public position?: number,
     public line?: number,
     public column?: number,
-    public severity: 'error' | 'warning' = 'error'
+    public severity: "error" | "warning" = "error"
   ) {
     super(message);
-    this.name = 'QueryError';
+    this.name = "QueryError";
   }
 }
 
 export class ParseError extends QueryError {
   constructor(message: string, token?: Token) {
-    super(
-      message,
-      token?.position,
-      token?.line,
-      token?.column
-    );
-    this.name = 'ParseError';
+    super(message, token?.position, token?.line, token?.column);
+    this.name = "ParseError";
   }
 }
 
 export class ExecutionError extends QueryError {
-  constructor(message: string, public code?: string) {
+  constructor(
+    message: string,
+    public code?: string
+  ) {
     super(message);
-    this.name = 'ExecutionError';
+    this.name = "ExecutionError";
   }
 }
 
@@ -317,7 +315,7 @@ export interface Sensor {
   name: string;
   key: string;
   category: string;
-  type: 'text' | 'number' | 'date' | 'boolean';
+  type: "text" | "number" | "date" | "boolean";
   description?: string;
   script?: string;
   parameters?: Record<string, any>;
@@ -346,7 +344,7 @@ export interface QueryTemplate {
   template: string;
   parameters: Array<{
     name: string;
-    type: 'text' | 'number' | 'date' | 'select';
+    type: "text" | "number" | "date" | "select";
     required: boolean;
     default?: any;
     options?: string[];

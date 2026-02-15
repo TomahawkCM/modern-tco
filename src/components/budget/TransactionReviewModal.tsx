@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 /**
  * Transaction Review Modal
  * Shows list of matching transactions with checkboxes for selective categorization
  */
 
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -13,12 +13,12 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Tag, CheckSquare, Square } from 'lucide-react';
-import { format } from 'date-fns';
-import type { Transaction } from '@/types/budget';
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Tag, CheckSquare, Square } from "lucide-react";
+import { format } from "date-fns";
+import type { Transaction } from "@/types/budget";
 
 interface TransactionReviewModalProps {
   open: boolean;
@@ -70,14 +70,14 @@ export function TransactionReviewModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-2xl max-h-[80vh] flex flex-col">
+      <DialogContent className="flex max-h-[80vh] flex-col sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Tag className="w-5 h-5 text-teal-600" />
+            <Tag className="h-5 w-5 text-teal-600" />
             Review Transactions
           </DialogTitle>
           <DialogDescription>
-            Select which transactions to categorize as{' '}
+            Select which transactions to categorize as{" "}
             <span className="font-semibold text-teal-700">
               {category}
               {subcategory && ` - ${subcategory}`}
@@ -87,25 +87,22 @@ export function TransactionReviewModal({
 
         <div className="flex-1 overflow-y-auto">
           {/* Select All */}
-          <div className="sticky top-0 bg-white border-b border-gray-200 p-3 flex items-center gap-3">
+          <div className="sticky top-0 flex items-center gap-3 border-b border-gray-200 bg-white p-3">
             <Checkbox
               id="select-all"
               checked={allSelected}
               onCheckedChange={toggleAll}
               className="mt-0.5"
             />
-            <label
-              htmlFor="select-all"
-              className="text-sm font-medium cursor-pointer select-none"
-            >
+            <label htmlFor="select-all" className="cursor-pointer select-none text-sm font-medium">
               {allSelected ? (
                 <>
-                  <CheckSquare className="w-4 h-4 inline mr-1.5" />
+                  <CheckSquare className="mr-1.5 inline h-4 w-4" />
                   Deselect All
                 </>
               ) : (
                 <>
-                  <Square className="w-4 h-4 inline mr-1.5" />
+                  <Square className="mr-1.5 inline h-4 w-4" />
                   Select All ({transactions.length})
                 </>
               )}
@@ -119,8 +116,8 @@ export function TransactionReviewModal({
               return (
                 <div
                   key={tx.id}
-                  className={`p-3 flex items-start gap-3 hover:bg-gray-50 transition-colors ${
-                    isSelected ? 'bg-teal-50/30' : ''
+                  className={`flex items-start gap-3 p-3 transition-colors hover:bg-gray-50 ${
+                    isSelected ? "bg-teal-50/30" : ""
                   }`}
                 >
                   <Checkbox
@@ -129,26 +126,22 @@ export function TransactionReviewModal({
                     onCheckedChange={() => toggleTransaction(tx.id)}
                     className="mt-1"
                   />
-                  <label
-                    htmlFor={`tx-${tx.id}`}
-                    className="flex-1 cursor-pointer select-none"
-                  >
+                  <label htmlFor={`tx-${tx.id}`} className="flex-1 cursor-pointer select-none">
                     <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium text-gray-900 truncate">
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate text-sm font-medium text-gray-900">
                           {tx.description}
                         </div>
-                        <div className="text-xs text-gray-500 mt-0.5">
-                          {format(new Date(tx.date), 'MMM d, yyyy')}
+                        <div className="mt-0.5 text-xs text-gray-500">
+                          {format(new Date(tx.date), "MMM d, yyyy")}
                         </div>
                       </div>
                       <div
-                        className={`text-sm font-semibold whitespace-nowrap ${
-                          tx.amount < 0 ? 'text-red-600' : 'text-green-600'
+                        className={`whitespace-nowrap text-sm font-semibold ${
+                          tx.amount < 0 ? "text-red-600" : "text-green-600"
                         }`}
                       >
-                        {tx.amount < 0 ? '-' : '+'}$
-                        {Math.abs(tx.amount).toFixed(2)}
+                        {tx.amount < 0 ? "-" : "+"}${Math.abs(tx.amount).toFixed(2)}
                       </div>
                     </div>
                   </label>
@@ -163,10 +156,7 @@ export function TransactionReviewModal({
             {selectedIds.size} of {transactions.length} selected
           </div>
           <div className="flex gap-2">
-            <Button
-              variant="ghost"
-              onClick={() => onOpenChange(false)}
-            >
+            <Button variant="ghost" onClick={() => onOpenChange(false)}>
               Cancel
             </Button>
             <Button
@@ -174,8 +164,8 @@ export function TransactionReviewModal({
               disabled={noneSelected}
               className="bg-teal-600 hover:bg-teal-700"
             >
-              <Tag className="w-4 h-4 mr-2" />
-              Apply to {selectedIds.size} Transaction{selectedIds.size !== 1 ? 's' : ''}
+              <Tag className="mr-2 h-4 w-4" />
+              Apply to {selectedIds.size} Transaction{selectedIds.size !== 1 ? "s" : ""}
             </Button>
           </div>
         </DialogFooter>

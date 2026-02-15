@@ -71,7 +71,9 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
 
   const handleCommand = (path: string) => {
     setCommandOpen(false);
-    try { router.push(path); } catch {}
+    try {
+      router.push(path);
+    } catch {}
   };
 
   // Global keyboard shortcuts:
@@ -80,7 +82,7 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
   // - Escape: Close open dialogs
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      const isCmdK = (e.key === 'k' || e.key === 'K') && (e.metaKey || e.ctrlKey);
+      const isCmdK = (e.key === "k" || e.key === "K") && (e.metaKey || e.ctrlKey);
       const isCmdShiftK = isCmdK && e.shiftKey;
 
       if (isCmdShiftK) {
@@ -93,13 +95,13 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
         setCommandOpen(true);
       }
 
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         setCommandOpen(false);
         setAiAssistantOpen(false);
       }
     };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
   return (
@@ -120,7 +122,7 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
           {/* Logo and title */}
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-tanium-accent">
+              <div className="bg-tanium-accent flex h-8 w-8 items-center justify-center rounded-lg">
                 <Target className="h-5 w-5 text-foreground" />
               </div>
               <div className="hidden sm:block">
@@ -134,7 +136,7 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
           <Button
             variant="ghost"
             size="sm"
-            className="glass ml-4 text-foreground hover:bg-white/10 border border-white/10"
+            className="glass ml-4 border border-white/10 text-foreground hover:bg-white/10"
             onClick={() => router.push("/budget-app")}
             aria-label="Budget App"
           >
@@ -160,7 +162,7 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
               <Button
                 variant="outline"
                 size="icon"
-                className="glass border-white/20 text-tanium-accent hover:bg-tanium-accent/10 hover:border-tanium-accent/50"
+                className="glass text-tanium-accent hover:bg-tanium-accent/10 hover:border-tanium-accent/50 border-white/20"
                 onClick={() => setAiAssistantOpen(true)}
                 aria-label="Open AI Study Assistant (Cmd+Shift+K)"
                 title="AI Study Assistant (Cmd+Shift+K)"
@@ -194,7 +196,7 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
             </div>
 
             {/* Accessibility toggles */}
-            <div className="relative z-50 flex items-center gap-2 pointer-events-auto">
+            <div className="pointer-events-auto relative z-50 flex items-center gap-2">
               <HighContrastToggle />
               <LargeTextToggle />
             </div>
@@ -273,10 +275,7 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
       </CommandDialog>
 
       {/* AI Study Assistant */}
-      <AIAssistant
-        isOpen={aiAssistantOpen}
-        onClose={() => setAiAssistantOpen(false)}
-      />
+      <AIAssistant isOpen={aiAssistantOpen} onClose={() => setAiAssistantOpen(false)} />
     </>
   );
 }

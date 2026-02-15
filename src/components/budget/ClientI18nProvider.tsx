@@ -51,7 +51,7 @@ export function ClientI18nProvider({ children }: { children: ReactNode }) {
     // Only show loading skeleton for non-initial locale switches
     // This prevents hydration mismatch while still showing feedback during locale changes
     if (state.locale !== DEFAULT_LOCALE) {
-      setState(prev => ({ ...prev, isReady: false }));
+      setState((prev) => ({ ...prev, isReady: false }));
     }
 
     // For all English locales, use the en.json messages (they share the same keys)
@@ -65,18 +65,17 @@ export function ClientI18nProvider({ children }: { children: ReactNode }) {
     } else {
       try {
         // Dynamic import for messages
-        const loadedMessages = (await import(`../../i18n/messages/${targetLocale}.json`))
-          .default;
+        const loadedMessages = (await import(`../../i18n/messages/${targetLocale}.json`)).default;
 
         // Verify the messages have the expected structure (basic check)
-        if (loadedMessages && typeof loadedMessages === 'object') {
+        if (loadedMessages && typeof loadedMessages === "object") {
           setState({
             locale: targetLocale,
             messages: loadedMessages,
             isReady: true,
           });
         } else {
-          throw new Error('Invalid messages format');
+          throw new Error("Invalid messages format");
         }
       } catch (error) {
         console.error(`Failed to load messages for ${targetLocale}, falling back to en`, error);
@@ -117,8 +116,8 @@ export function ClientI18nProvider({ children }: { children: ReactNode }) {
       timeZone="UTC"
       onError={(error) => {
         // Log missing messages as warnings in development only
-        if (process.env.NODE_ENV === 'development') {
-          console.warn('i18n:', error.message);
+        if (process.env.NODE_ENV === "development") {
+          console.warn("i18n:", error.message);
         }
       }}
     >

@@ -117,7 +117,9 @@ function main() {
     const payload = renderPayload(options);
     const filePath = writePayload(payload, options);
 
-    console.log(`?? Exported ${payload.metadata.moduleCount} module(s) and ${payload.metadata.lessonCount} lesson(s)`);
+    console.log(
+      `?? Exported ${payload.metadata.moduleCount} module(s) and ${payload.metadata.lessonCount} lesson(s)`
+    );
     console.log(`?? Output file: ${filePath}`);
   } catch (error) {
     console.error("?? KB lesson export failed:", (error as Error).message);

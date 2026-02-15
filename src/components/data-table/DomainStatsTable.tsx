@@ -2,11 +2,29 @@
 
 import * as React from "react";
 import type { DomainStatRow } from "./types";
-import { type ColumnDef, getCoreRowModel, getFilteredRowModel, getSortedRowModel, type SortingState, useReactTable, flexRender, type ColumnFiltersState, type VisibilityState, type FilterFn } from "@tanstack/react-table";
+import {
+  type ColumnDef,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  type SortingState,
+  useReactTable,
+  flexRender,
+  type ColumnFiltersState,
+  type VisibilityState,
+  type FilterFn,
+} from "@tanstack/react-table";
 import { domainColumns } from "./columns";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { ChevronDown } from "lucide-react";
 import { Toggle } from "@/components/ui/toggle";
 import { usePersistentState } from "@/lib/usePersistentState";
@@ -53,7 +71,7 @@ export function DomainStatsTable({ rows }: { rows: DomainStatRow[] }) {
     filterFns: {
       minNumber: (row, columnId, filterValue) => {
         const v = Number(row.getValue(columnId));
-        const min = Number((filterValue)?.min ?? 0);
+        const min = Number(filterValue?.min ?? 0);
         return v >= min;
       },
       domainIn,
@@ -61,15 +79,15 @@ export function DomainStatsTable({ rows }: { rows: DomainStatRow[] }) {
   });
 
   // Bind score min filter to a simple set of thresholds
-  const scoreColumn = table.getColumn('score');
+  const scoreColumn = table.getColumn("score");
   const currentMin = (scoreColumn?.getFilterValue() as any)?.min ?? 0;
 
   // Unique domain list for facet toggles
-  const uniqueDomains = React.useMemo(() => Array.from(new Set(rows.map(r => r.domain))), [rows]);
+  const uniqueDomains = React.useMemo(() => Array.from(new Set(rows.map((r) => r.domain))), [rows]);
 
   // Sync domain facet with table filter
   React.useEffect(() => {
-    const col = table.getColumn('domain');
+    const col = table.getColumn("domain");
     if (col) {
       // We can't set the filter fn dynamically on the column instance; we hint via id and rely on table.filterFns
       // by setting a marker value shape (array) and handling in our custom filter.
@@ -83,8 +101,8 @@ export function DomainStatsTable({ rows }: { rows: DomainStatRow[] }) {
       <div className="flex items-center gap-2">
         <Input
           placeholder="Filter domain..."
-          value={(table.getColumn('domain')?.getFilterValue() as string) ?? ''}
-          onChange={(e) => table.getColumn('domain')?.setFilterValue(e.target.value)}
+          value={(table.getColumn("domain")?.getFilterValue() as string) ?? ""}
+          onChange={(e) => table.getColumn("domain")?.setFilterValue(e.target.value)}
           className="h-8 w-[220px]"
         />
 
@@ -151,22 +169,25 @@ export function DomainStatsTable({ rows }: { rows: DomainStatRow[] }) {
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              {table.getAllLeafColumns().filter((c) => c.getCanHide()).map((column) => (
-                <DropdownMenuCheckboxItem
-                  key={column.id}
-                  checked={column.getIsVisible()}
-                  onCheckedChange={(v) => column.toggleVisibility(!!v)}
-                >
-                  {column.columnDef.header as any}
-                </DropdownMenuCheckboxItem>
-              ))}
+              {table
+                .getAllLeafColumns()
+                .filter((c) => c.getCanHide())
+                .map((column) => (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(v) => column.toggleVisibility(!!v)}
+                  >
+                    {column.columnDef.header as any}
+                  </DropdownMenuCheckboxItem>
+                ))}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </div>
 
       {/* Table with sticky header */}
-      <div className="rounded-md border border-white/10 max-h-[420px] overflow-auto">
+      <div className="max-h-[420px] overflow-auto rounded-md border border-white/10">
         <table className="w-full text-sm">
           <thead className="sticky top-0 z-10 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             {table.getHeaderGroups().map((hg) => (
@@ -174,11 +195,15 @@ export function DomainStatsTable({ rows }: { rows: DomainStatRow[] }) {
                 {hg.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="px-3 py-2 text-left font-medium text-muted-foreground select-none"
+                    className="select-none px-3 py-2 text-left font-medium text-muted-foreground"
                     onClick={header.column.getToggleSortingHandler()}
                   >
                     {flexRender(header.column.columnDef.header, header.getContext())}
-                    {header.column.getIsSorted() === "asc" ? " ↑" : header.column.getIsSorted() === "desc" ? " ↓" : ""}
+                    {header.column.getIsSorted() === "asc"
+                      ? " ↑"
+                      : header.column.getIsSorted() === "desc"
+                        ? " ↓"
+                        : ""}
                   </th>
                 ))}
               </tr>

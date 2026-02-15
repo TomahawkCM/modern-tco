@@ -14,14 +14,14 @@
  * - Client-side AI calls removed for security
  */
 
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
-import { X, Check, AlertCircle, Save, Sparkles } from 'lucide-react';
-import type { CSVRow } from '@/types/budget';
-import type { ColumnMapping, ColumnAnalysisResult } from '@/lib/ai/smart-column-mapper';
-import { saveCustomBankConfig } from '@/lib/ai/smart-column-mapper';
+import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
+import { X, Check, AlertCircle, Save, Sparkles } from "lucide-react";
+import type { CSVRow } from "@/types/budget";
+import type { ColumnMapping, ColumnAnalysisResult } from "@/lib/ai/smart-column-mapper";
+import { saveCustomBankConfig } from "@/lib/ai/smart-column-mapper";
 
 // ============================================================================
 // Types
@@ -36,14 +36,7 @@ export interface AIColumnMapperModalProps {
   fileName: string;
 }
 
-type ColumnType =
-  | 'date'
-  | 'description'
-  | 'amount'
-  | 'debit'
-  | 'credit'
-  | 'balance'
-  | 'ignore';
+type ColumnType = "date" | "description" | "amount" | "debit" | "credit" | "balance" | "ignore";
 
 // ============================================================================
 // Component
@@ -57,11 +50,11 @@ export default function AIColumnMapperModal({
   sampleRows,
   fileName,
 }: AIColumnMapperModalProps) {
-  const t = useTranslations('aiColumnMapper');
+  const t = useTranslations("aiColumnMapper");
   const [analysisResult, setAnalysisResult] = useState<ColumnAnalysisResult | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [customMapping, setCustomMapping] = useState<Record<string, ColumnType>>({});
-  const [customBankName, setCustomBankName] = useState('');
+  const [customBankName, setCustomBankName] = useState("");
   const [saveForFuture, setSaveForFuture] = useState(true);
 
   // Run AI analysis when modal opens
@@ -75,9 +68,9 @@ export default function AIColumnMapperModal({
     setIsAnalyzing(true);
     try {
       // Call server-side API route instead of client-side AI
-      const response = await fetch('/api/import/analyze-columns', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/import/analyze-columns", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           headers,
           sampleData: sampleRows,
@@ -87,7 +80,7 @@ export default function AIColumnMapperModal({
       const data = await response.json();
 
       if (!data.success || !data.mapping) {
-        throw new Error(data.error || 'Failed to analyze columns');
+        throw new Error(data.error || "Failed to analyze columns");
       }
 
       // Convert API response to ColumnAnalysisResult format
@@ -103,25 +96,24 @@ export default function AIColumnMapperModal({
       // Initialize custom mapping from AI suggestions
       const initial: Record<string, ColumnType> = {};
       headers.forEach((header) => {
-        if (header === result.mapping.dateColumn) initial[header] = 'date';
-        else if (header === result.mapping.descriptionColumn)
-          initial[header] = 'description';
-        else if (header === result.mapping.amountColumn) initial[header] = 'amount';
-        else if (header === result.mapping.debitColumn) initial[header] = 'debit';
-        else if (header === result.mapping.creditColumn) initial[header] = 'credit';
-        else if (header === result.mapping.balanceColumn) initial[header] = 'balance';
-        else initial[header] = 'ignore';
+        if (header === result.mapping.dateColumn) initial[header] = "date";
+        else if (header === result.mapping.descriptionColumn) initial[header] = "description";
+        else if (header === result.mapping.amountColumn) initial[header] = "amount";
+        else if (header === result.mapping.debitColumn) initial[header] = "debit";
+        else if (header === result.mapping.creditColumn) initial[header] = "credit";
+        else if (header === result.mapping.balanceColumn) initial[header] = "balance";
+        else initial[header] = "ignore";
       });
       setCustomMapping(initial);
 
       // Suggest bank name from file name
       const suggestedName = fileName
-        .replace(/\.csv$/i, '')
-        .replace(/[-_]/g, ' ')
+        .replace(/\.csv$/i, "")
+        .replace(/[-_]/g, " ")
         .trim();
       setCustomBankName(suggestedName);
     } catch (error) {
-      console.error('[AIColumnMapperModal] Analysis error:', error);
+      console.error("[AIColumnMapperModal] Analysis error:", error);
     } finally {
       setIsAnalyzing(false);
     }
@@ -147,24 +139,24 @@ export default function AIColumnMapperModal({
       balanceColumn: null,
       confidence: analysisResult.mapping.confidence,
       columnConfidences: analysisResult.mapping.columnConfidences,
-      detectionMethod: 'user-manual',
-      amountFormat: 'single',
+      detectionMethod: "user-manual",
+      amountFormat: "single",
       dateFormat: analysisResult.mapping.dateFormat,
     };
 
     headers.forEach((header) => {
       const type = customMapping[header];
-      if (type === 'date') finalMapping.dateColumn = header;
-      else if (type === 'description') finalMapping.descriptionColumn = header;
-      else if (type === 'amount') finalMapping.amountColumn = header;
-      else if (type === 'debit') finalMapping.debitColumn = header;
-      else if (type === 'credit') finalMapping.creditColumn = header;
-      else if (type === 'balance') finalMapping.balanceColumn = header;
+      if (type === "date") finalMapping.dateColumn = header;
+      else if (type === "description") finalMapping.descriptionColumn = header;
+      else if (type === "amount") finalMapping.amountColumn = header;
+      else if (type === "debit") finalMapping.debitColumn = header;
+      else if (type === "credit") finalMapping.creditColumn = header;
+      else if (type === "balance") finalMapping.balanceColumn = header;
     });
 
     // Determine amount format
     if (finalMapping.debitColumn && finalMapping.creditColumn) {
-      finalMapping.amountFormat = 'split';
+      finalMapping.amountFormat = "split";
     }
 
     // Save custom bank config if requested
@@ -172,55 +164,51 @@ export default function AIColumnMapperModal({
     if (saveForFuture && customBankName.trim()) {
       const config = saveCustomBankConfig(customBankName.trim(), finalMapping);
       savedBankName = config.name;
-      console.log('[AIColumnMapperModal] Saved custom bank config:', config.customKey);
+      console.log("[AIColumnMapperModal] Saved custom bank config:", config.customKey);
     }
 
     onApplyMapping(finalMapping, savedBankName);
   }
 
   function getConfidenceColor(confidence: number): string {
-    if (confidence >= 0.9) return 'text-green-600 bg-green-100';
-    if (confidence >= 0.7) return 'text-yellow-600 bg-yellow-100';
-    return 'text-orange-600 bg-orange-100';
+    if (confidence >= 0.9) return "text-green-600 bg-green-100";
+    if (confidence >= 0.7) return "text-yellow-600 bg-yellow-100";
+    return "text-orange-600 bg-orange-100";
   }
 
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+      <div className="flex max-h-[90vh] w-full max-w-5xl flex-col overflow-hidden rounded-lg bg-white shadow-xl">
         {/* Header */}
-        <div className="border-b border-gray-200 p-6 bg-gradient-to-r from-purple-50 to-blue-50">
+        <div className="border-b border-gray-200 bg-gradient-to-r from-purple-50 to-blue-50 p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Sparkles className="w-6 h-6 text-purple-600" />
+              <Sparkles className="h-6 w-6 text-purple-600" />
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">
-                  {t('title')}
-                </h2>
-                <p className="text-sm text-gray-600 mt-1">
-                  {t('subtitle')}
-                </p>
+                <h2 className="text-2xl font-bold text-gray-900">{t("title")}</h2>
+                <p className="mt-1 text-sm text-gray-600">{t("subtitle")}</p>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-white rounded-lg transition-colors"
-              aria-label={t('closeModal')}
+              className="rounded-lg p-2 transition-colors hover:bg-white"
+              aria-label={t("closeModal")}
             >
-              <X className="w-6 h-6 text-gray-600" />
+              <X className="h-6 w-6 text-gray-600" />
             </button>
           </div>
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 space-y-6 overflow-y-auto p-6">
           {/* AI Analysis Status */}
           {isAnalyzing && (
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <div className="rounded-lg border border-blue-200 bg-blue-50 p-4">
               <div className="flex items-center gap-3">
                 <svg
-                  className="animate-spin h-5 w-5 text-blue-600"
+                  className="h-5 w-5 animate-spin text-blue-600"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -239,9 +227,7 @@ export default function AIColumnMapperModal({
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                <span className="text-sm font-medium text-blue-800">
-                  {t('analyzing')}
-                </span>
+                <span className="text-sm font-medium text-blue-800">{t("analyzing")}</span>
               </div>
             </div>
           )}
@@ -250,18 +236,19 @@ export default function AIColumnMapperModal({
           {analysisResult && (
             <>
               {/* Overall Confidence */}
-              <div className="bg-white border border-gray-200 rounded-lg p-4">
+              <div className="rounded-lg border border-gray-200 bg-white p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      {t('confidence.title')}
-                    </h3>
-                    <p className="text-sm text-gray-600 mt-1">
-                      {t('confidence.analyzed', { columnCount: headers.length, rowCount: sampleRows.length })}
+                    <h3 className="text-lg font-semibold text-gray-900">{t("confidence.title")}</h3>
+                    <p className="mt-1 text-sm text-gray-600">
+                      {t("confidence.analyzed", {
+                        columnCount: headers.length,
+                        rowCount: sampleRows.length,
+                      })}
                     </p>
                   </div>
                   <div
-                    className={`px-4 py-2 rounded-lg font-bold ${getConfidenceColor(
+                    className={`rounded-lg px-4 py-2 font-bold ${getConfidenceColor(
                       analysisResult.mapping.confidence
                     )}`}
                   >
@@ -271,13 +258,12 @@ export default function AIColumnMapperModal({
               </div>
 
               {/* Suggestions & Warnings */}
-              {(analysisResult.suggestions.length > 0 ||
-                analysisResult.warnings.length > 0) && (
+              {(analysisResult.suggestions.length > 0 || analysisResult.warnings.length > 0) && (
                 <div className="space-y-2">
                   {analysisResult.suggestions.map((suggestion, i) => (
                     <div
                       key={`suggestion-${i}`}
-                      className="bg-blue-50 border-s-4 border-blue-400 p-3 text-sm text-blue-800"
+                      className="border-s-4 border-blue-400 bg-blue-50 p-3 text-sm text-blue-800"
                     >
                       💡 {suggestion}
                     </div>
@@ -285,9 +271,9 @@ export default function AIColumnMapperModal({
                   {analysisResult.warnings.map((warning, i) => (
                     <div
                       key={`warning-${i}`}
-                      className="bg-yellow-50 border-s-4 border-yellow-400 p-3 text-sm text-yellow-800 flex items-start gap-2"
+                      className="flex items-start gap-2 border-s-4 border-yellow-400 bg-yellow-50 p-3 text-sm text-yellow-800"
                     >
-                      <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                      <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" />
                       <span>{warning}</span>
                     </div>
                   ))}
@@ -296,25 +282,22 @@ export default function AIColumnMapperModal({
 
               {/* Column Mappings */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  {t('columnMappings')}
-                </h3>
+                <h3 className="mb-4 text-lg font-semibold text-gray-900">{t("columnMappings")}</h3>
                 <div className="space-y-2">
                   {headers.map((header) => {
-                    const confidence =
-                      analysisResult.mapping.columnConfidences[header] || 0;
-                    const selectedType = customMapping[header] || 'ignore';
+                    const confidence = analysisResult.mapping.columnConfidences[header] || 0;
+                    const selectedType = customMapping[header] || "ignore";
 
                     return (
                       <div
                         key={header}
-                        className="bg-gray-50 border border-gray-200 rounded-lg p-3 flex items-center justify-between"
+                        className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 p-3"
                       >
-                        <div className="flex-1 min-w-0">
+                        <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2">
                             <span className="font-medium text-gray-900">{header}</span>
                             <span
-                              className={`px-2 py-0.5 rounded text-xs font-semibold ${getConfidenceColor(
+                              className={`rounded px-2 py-0.5 text-xs font-semibold ${getConfidenceColor(
                                 confidence
                               )}`}
                             >
@@ -322,11 +305,12 @@ export default function AIColumnMapperModal({
                             </span>
                           </div>
                           {/* Show sample values */}
-                          <div className="text-xs text-gray-600 mt-1 truncate">
-                            {t('samples')} {sampleRows
+                          <div className="mt-1 truncate text-xs text-gray-600">
+                            {t("samples")}{" "}
+                            {sampleRows
                               .slice(0, 3)
-                              .map((row) => `"${row[header] || ''}"`)
-                              .join(', ')}
+                              .map((row) => `"${row[header] || ""}"`)
+                              .join(", ")}
                           </div>
                         </div>
 
@@ -336,15 +320,15 @@ export default function AIColumnMapperModal({
                           onChange={(e) =>
                             handleColumnTypeChange(header, e.target.value as ColumnType)
                           }
-                          className="ms-4 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                          className="ms-4 rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-purple-500"
                         >
-                          <option value="ignore">{t('columnTypes.ignore')}</option>
-                          <option value="date">{t('columnTypes.date')}</option>
-                          <option value="description">{t('columnTypes.description')}</option>
-                          <option value="amount">{t('columnTypes.amount')}</option>
-                          <option value="debit">{t('columnTypes.debit')}</option>
-                          <option value="credit">{t('columnTypes.credit')}</option>
-                          <option value="balance">{t('columnTypes.balance')}</option>
+                          <option value="ignore">{t("columnTypes.ignore")}</option>
+                          <option value="date">{t("columnTypes.date")}</option>
+                          <option value="description">{t("columnTypes.description")}</option>
+                          <option value="amount">{t("columnTypes.amount")}</option>
+                          <option value="debit">{t("columnTypes.debit")}</option>
+                          <option value="credit">{t("columnTypes.credit")}</option>
+                          <option value="balance">{t("columnTypes.balance")}</option>
                         </select>
                       </div>
                     );
@@ -355,40 +339,35 @@ export default function AIColumnMapperModal({
               {/* Transaction Preview */}
               {analysisResult.samplePreview.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                    {t('preview.title')}
-                  </h3>
-                  <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                  <h3 className="mb-4 text-lg font-semibold text-gray-900">{t("preview.title")}</h3>
+                  <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
                     <table className="w-full">
                       <thead className="bg-gray-100">
                         <tr>
                           <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900">
-                            {t('preview.date')}
+                            {t("preview.date")}
                           </th>
                           <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900">
-                            {t('preview.description')}
+                            {t("preview.description")}
                           </th>
                           <th className="px-4 py-2 text-right text-sm font-semibold text-gray-900">
-                            {t('preview.amount')}
+                            {t("preview.amount")}
                           </th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
                         {analysisResult.samplePreview.map((preview, i) => (
                           <tr key={i} className="hover:bg-gray-50">
-                            <td className="px-4 py-2 text-sm text-gray-900">
-                              {preview.date}
-                            </td>
+                            <td className="px-4 py-2 text-sm text-gray-900">{preview.date}</td>
                             <td className="px-4 py-2 text-sm text-gray-900">
                               {preview.description}
                             </td>
                             <td
-                              className={`px-4 py-2 text-sm text-right font-semibold ${
-                                preview.amount > 0 ? 'text-green-600' : 'text-gray-900'
+                              className={`px-4 py-2 text-right text-sm font-semibold ${
+                                preview.amount > 0 ? "text-green-600" : "text-gray-900"
                               }`}
                             >
-                              {preview.amount > 0 ? '+' : ''}$
-                              {Math.abs(preview.amount).toFixed(2)}
+                              {preview.amount > 0 ? "+" : ""}${Math.abs(preview.amount).toFixed(2)}
                             </td>
                           </tr>
                         ))}
@@ -399,35 +378,33 @@ export default function AIColumnMapperModal({
               )}
 
               {/* Save for Future */}
-              <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+              <div className="rounded-lg border border-purple-200 bg-purple-50 p-4">
                 <div className="flex items-start gap-3">
                   <input
                     type="checkbox"
                     id="save-for-future"
                     checked={saveForFuture}
                     onChange={(e) => setSaveForFuture(e.target.checked)}
-                    className="mt-1 h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                    className="mt-1 h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
                   />
                   <div className="flex-1">
                     <label
                       htmlFor="save-for-future"
-                      className="flex items-center gap-2 text-sm font-medium text-gray-900 cursor-pointer"
+                      className="flex cursor-pointer items-center gap-2 text-sm font-medium text-gray-900"
                     >
-                      <Save className="w-4 h-4 text-purple-600" />
-                      {t('saveConfig.label')}
+                      <Save className="h-4 w-4 text-purple-600" />
+                      {t("saveConfig.label")}
                     </label>
                     {saveForFuture && (
                       <input
                         type="text"
                         value={customBankName}
                         onChange={(e) => setCustomBankName(e.target.value)}
-                        placeholder={t('saveConfig.placeholder')}
-                        className="mt-2 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                        placeholder={t("saveConfig.placeholder")}
+                        className="mt-2 w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-purple-500"
                       />
                     )}
-                    <p className="text-xs text-gray-600 mt-1">
-                      {t('saveConfig.hint')}
-                    </p>
+                    <p className="mt-1 text-xs text-gray-600">{t("saveConfig.hint")}</p>
                   </div>
                 </div>
               </div>
@@ -436,20 +413,20 @@ export default function AIColumnMapperModal({
         </div>
 
         {/* Footer */}
-        <div className="border-t border-gray-200 p-6 bg-gray-50 flex justify-between">
+        <div className="flex justify-between border-t border-gray-200 bg-gray-50 p-6">
           <button
             onClick={onClose}
-            className="px-6 py-2 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+            className="rounded-lg border-2 border-gray-300 px-6 py-2 text-gray-700 transition-colors hover:bg-gray-100"
           >
-            {t('buttons.cancel')}
+            {t("buttons.cancel")}
           </button>
           <button
             onClick={handleApply}
             disabled={!analysisResult || isAnalyzing}
-            className="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+            className="flex items-center gap-2 rounded-lg bg-purple-600 px-6 py-2 text-white transition-colors hover:bg-purple-700 disabled:cursor-not-allowed disabled:bg-gray-400"
           >
-            <Check className="w-5 h-5" />
-            {t('buttons.apply')}
+            <Check className="h-5 w-5" />
+            {t("buttons.apply")}
           </button>
         </div>
       </div>

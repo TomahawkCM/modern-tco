@@ -13,10 +13,7 @@
  * This module handles the conversion and documents fidelity loss.
  */
 
-import type {
-  NormalizedMonthlyBudget,
-  NormalizedCategoryGroup,
-} from './ynab-parser';
+import type { NormalizedMonthlyBudget, NormalizedCategoryGroup } from "./ynab-parser";
 
 // ============================================================================
 // Types
@@ -99,21 +96,17 @@ export function convertEnvelopeBudgets(
 ): RolloverConversionResult {
   const warnings: string[] = [];
   const fidelityNotes: string[] = [
-    'YNAB uses envelope budgeting with automatic rollover. Our app uses fixed monthly limits.',
-    'Converted budgets represent average monthly allocation from your YNAB history.',
-    'Overspending/underspending patterns from YNAB are not preserved.',
-    'Goal-based budgeting (target balance, monthly funding goals) is not migrated.',
+    "YNAB uses envelope budgeting with automatic rollover. Our app uses fixed monthly limits.",
+    "Converted budgets represent average monthly allocation from your YNAB history.",
+    "Overspending/underspending patterns from YNAB are not preserved.",
+    "Goal-based budgeting (target balance, monthly funding goals) is not migrated.",
   ];
 
   // Build category map
   const categoryMap = buildCategoryMap(categoryGroups);
 
   // Build envelope timelines for each category
-  const timelines = buildEnvelopeTimelines(
-    monthlyBudgets,
-    categoryMap,
-    warnings
-  );
+  const timelines = buildEnvelopeTimelines(monthlyBudgets, categoryMap, warnings);
 
   // Convert to our simplified budget model
   const convertedBudgets = convertTimelines(timelines, warnings);
@@ -159,9 +152,7 @@ function buildEnvelopeTimelines(
   warnings: string[]
 ): CategoryEnvelopeTimeline[] {
   // Sort months chronologically
-  const sortedMonths = [...monthlyBudgets].sort((a, b) =>
-    a.month.localeCompare(b.month)
-  );
+  const sortedMonths = [...monthlyBudgets].sort((a, b) => a.month.localeCompare(b.month));
 
   // Group by category
   const categoryData = new Map<
@@ -193,10 +184,7 @@ function buildEnvelopeTimelines(
       const calculatedAvailable = carryover + cat.budgeted - Math.abs(cat.activity);
 
       // Check for discrepancy
-      if (
-        cat.balance !== 0 &&
-        Math.abs(calculatedAvailable - cat.balance) > 0.01
-      ) {
+      if (cat.balance !== 0 && Math.abs(calculatedAvailable - cat.balance) > 0.01) {
         // YNAB may have adjustments we can't see
         warnings.push(
           `${catInfo.name} (${monthBudget.month}): Balance mismatch - expected ${calculatedAvailable.toFixed(2)}, got ${cat.balance.toFixed(2)}`
@@ -235,7 +223,7 @@ function buildEnvelopeTimelines(
   const timelines: CategoryEnvelopeTimeline[] = [];
 
   for (const [categoryId, data] of categoryData) {
-    const {months} = data;
+    const { months } = data;
     const totalBudgeted = months.reduce((sum, m) => sum + m.budgeted, 0);
     const totalActivity = months.reduce((sum, m) => sum + m.activity, 0);
 
@@ -243,16 +231,12 @@ function buildEnvelopeTimelines(
     const monthsWithOverspending = months.filter(
       (m) => m.activity < 0 && Math.abs(m.activity) > m.budgeted + m.carryover
     ).length;
-    const monthsWithUnderspending = months.filter(
-      (m) => m.available > 0 && m.budgeted > 0
-    ).length;
+    const monthsWithUnderspending = months.filter((m) => m.available > 0 && m.budgeted > 0).length;
 
     // Net rollover effect: difference between first and last available
     const firstMonth = months[0];
     const lastMonth = months[months.length - 1];
-    const netRolloverEffect = lastMonth
-      ? lastMonth.available - (firstMonth?.carryover || 0)
-      : 0;
+    const netRolloverEffect = lastMonth ? lastMonth.available - (firstMonth?.carryover || 0) : 0;
 
     timelines.push({
       categoryId,
@@ -262,8 +246,7 @@ function buildEnvelopeTimelines(
       summary: {
         totalBudgeted,
         totalActivity,
-        averageMonthlyBudget:
-          months.length > 0 ? totalBudgeted / months.length : 0,
+        averageMonthlyBudget: months.length > 0 ? totalBudgeted / months.length : 0,
         monthsWithOverspending,
         monthsWithUnderspending,
         netRolloverEffect,
@@ -294,10 +277,7 @@ function convertTimelines(
     if (summary.monthsWithOverspending > months.length * 0.3) {
       const avgOverspend =
         months
-          .filter(
-            (m) =>
-              m.activity < 0 && Math.abs(m.activity) > m.budgeted + m.carryover
-          )
+          .filter((m) => m.activity < 0 && Math.abs(m.activity) > m.budgeted + m.carryover)
           .reduce((sum, m) => sum + (Math.abs(m.activity) - m.budgeted), 0) /
         summary.monthsWithOverspending;
 
@@ -321,8 +301,7 @@ function convertTimelines(
     if (months.length >= 3) {
       const budgetedAmounts = months.map((m) => m.budgeted).filter((b) => b > 0);
       if (budgetedAmounts.length > 0) {
-        const avg =
-          budgetedAmounts.reduce((a, b) => a + b, 0) / budgetedAmounts.length;
+        const avg = budgetedAmounts.reduce((a, b) => a + b, 0) / budgetedAmounts.length;
         const variance =
           budgetedAmounts.reduce((sum, b) => sum + Math.pow(b - avg, 2), 0) /
           budgetedAmounts.length;
@@ -349,7 +328,7 @@ function convertTimelines(
       groupName: timeline.groupName,
       monthlyLimit: Math.max(0, Math.round(monthlyLimit * 100) / 100),
       isRecurring,
-      notes: notes.join(' '),
+      notes: notes.join(" "),
     };
   });
 }
@@ -357,9 +336,7 @@ function convertTimelines(
 /**
  * Calculate overall stats
  */
-function calculateStats(
-  timelines: CategoryEnvelopeTimeline[]
-): RolloverConversionResult['stats'] {
+function calculateStats(timelines: CategoryEnvelopeTimeline[]): RolloverConversionResult["stats"] {
   const categoriesWithRollover = timelines.filter((t) =>
     t.months.some((m) => Math.abs(m.carryover) > 0.01)
   ).length;
@@ -372,13 +349,9 @@ function calculateStats(
     totalCategories: timelines.length,
     categoriesWithRollover,
     averageRolloverAmount:
-      allRollovers.length > 0
-        ? allRollovers.reduce((a, b) => a + b, 0) / allRollovers.length
-        : 0,
-    maxPositiveRollover:
-      positiveRollovers.length > 0 ? Math.max(...positiveRollovers) : 0,
-    maxNegativeRollover:
-      negativeRollovers.length > 0 ? Math.min(...negativeRollovers) : 0,
+      allRollovers.length > 0 ? allRollovers.reduce((a, b) => a + b, 0) / allRollovers.length : 0,
+    maxPositiveRollover: positiveRollovers.length > 0 ? Math.max(...positiveRollovers) : 0,
+    maxNegativeRollover: negativeRollovers.length > 0 ? Math.min(...negativeRollovers) : 0,
   };
 }
 
@@ -389,10 +362,8 @@ function calculateStats(
 /**
  * Analyze spending patterns for a category
  */
-export function analyzeSpendingPattern(
-  timeline: CategoryEnvelopeTimeline
-): {
-  pattern: 'steady' | 'variable' | 'seasonal' | 'irregular';
+export function analyzeSpendingPattern(timeline: CategoryEnvelopeTimeline): {
+  pattern: "steady" | "variable" | "seasonal" | "irregular";
   recommendation: string;
   suggestedLimit: number;
 } {
@@ -400,25 +371,22 @@ export function analyzeSpendingPattern(
 
   if (months.length < 3) {
     return {
-      pattern: 'irregular',
-      recommendation:
-        'Not enough history to determine pattern. Start with average and adjust.',
+      pattern: "irregular",
+      recommendation: "Not enough history to determine pattern. Start with average and adjust.",
       suggestedLimit: summary.averageMonthlyBudget,
     };
   }
 
   const activities = months.map((m) => Math.abs(m.activity));
   const avg = activities.reduce((a, b) => a + b, 0) / activities.length;
-  const variance =
-    activities.reduce((sum, a) => sum + Math.pow(a - avg, 2), 0) /
-    activities.length;
+  const variance = activities.reduce((sum, a) => sum + Math.pow(a - avg, 2), 0) / activities.length;
   const stdDev = Math.sqrt(variance);
   const cv = avg > 0 ? stdDev / avg : 0;
 
   // Check for seasonality (compare same months across years)
   const monthlyAvgs = new Map<number, number[]>();
   for (const m of months) {
-    const monthNum = parseInt(m.month.split('-')[1]);
+    const monthNum = parseInt(m.month.split("-")[1]);
     if (!monthlyAvgs.has(monthNum)) {
       monthlyAvgs.set(monthNum, []);
     }
@@ -428,44 +396,36 @@ export function analyzeSpendingPattern(
   let isSeasonal = false;
   if (months.length >= 12) {
     // Check if certain months consistently have higher spending
-    const monthVariances = Array.from(monthlyAvgs.entries()).map(
-      ([month, values]) => ({
-        month,
-        avg: values.reduce((a, b) => a + b, 0) / values.length,
-      })
-    );
-    const highMonths = monthVariances.filter(
-      (m) => m.avg > avg * 1.5
-    ).length;
+    const monthVariances = Array.from(monthlyAvgs.entries()).map(([month, values]) => ({
+      month,
+      avg: values.reduce((a, b) => a + b, 0) / values.length,
+    }));
+    const highMonths = monthVariances.filter((m) => m.avg > avg * 1.5).length;
     isSeasonal = highMonths >= 2;
   }
 
   if (cv < 0.2) {
     return {
-      pattern: 'steady',
-      recommendation:
-        'Spending is very consistent. Use average as monthly limit.',
+      pattern: "steady",
+      recommendation: "Spending is very consistent. Use average as monthly limit.",
       suggestedLimit: avg,
     };
   } else if (isSeasonal) {
     return {
-      pattern: 'seasonal',
-      recommendation:
-        'Spending varies by season. Consider setting aside extra in low months.',
+      pattern: "seasonal",
+      recommendation: "Spending varies by season. Consider setting aside extra in low months.",
       suggestedLimit: avg * 1.1, // 10% buffer for seasonal variation
     };
   } else if (cv < 0.5) {
     return {
-      pattern: 'variable',
-      recommendation:
-        'Some variation in spending. Use average plus small buffer.',
+      pattern: "variable",
+      recommendation: "Some variation in spending. Use average plus small buffer.",
       suggestedLimit: avg * 1.15, // 15% buffer
     };
   } else {
     return {
-      pattern: 'irregular',
-      recommendation:
-        'Spending is highly irregular. This may not suit fixed monthly budgeting.',
+      pattern: "irregular",
+      recommendation: "Spending is highly irregular. This may not suit fixed monthly budgeting.",
       suggestedLimit: avg * 1.25, // 25% buffer for irregular spending
     };
   }
@@ -474,21 +434,19 @@ export function analyzeSpendingPattern(
 /**
  * Generate migration report
  */
-export function generateMigrationReport(
-  result: RolloverConversionResult
-): string {
+export function generateMigrationReport(result: RolloverConversionResult): string {
   const lines: string[] = [
-    '# YNAB to Budget App Migration Report',
-    '',
-    '## Summary',
+    "# YNAB to Budget App Migration Report",
+    "",
+    "## Summary",
     `- Total categories migrated: ${result.stats.totalCategories}`,
     `- Categories with rollover history: ${result.stats.categoriesWithRollover}`,
     `- Average rollover amount: $${result.stats.averageRolloverAmount.toFixed(2)}`,
     `- Max positive rollover: $${result.stats.maxPositiveRollover.toFixed(2)}`,
     `- Max negative rollover: $${result.stats.maxNegativeRollover.toFixed(2)}`,
-    '',
-    '## Important Notes',
-    '',
+    "",
+    "## Important Notes",
+    "",
   ];
 
   for (const note of result.fidelityNotes) {
@@ -496,23 +454,23 @@ export function generateMigrationReport(
   }
 
   if (result.warnings.length > 0) {
-    lines.push('', '## Warnings', '');
+    lines.push("", "## Warnings", "");
     for (const warning of result.warnings) {
       lines.push(`- ${warning}`);
     }
   }
 
-  lines.push('', '## Converted Budgets', '');
+  lines.push("", "## Converted Budgets", "");
   lines.push(
-    '| Category | Group | Monthly Limit | Recurring | Notes |',
-    '|----------|-------|--------------|-----------|-------|'
+    "| Category | Group | Monthly Limit | Recurring | Notes |",
+    "|----------|-------|--------------|-----------|-------|"
   );
 
   for (const budget of result.convertedBudgets) {
     lines.push(
-      `| ${budget.categoryName} | ${budget.groupName} | $${budget.monthlyLimit.toFixed(2)} | ${budget.isRecurring ? 'Yes' : 'No'} | ${budget.notes || '-'} |`
+      `| ${budget.categoryName} | ${budget.groupName} | $${budget.monthlyLimit.toFixed(2)} | ${budget.isRecurring ? "Yes" : "No"} | ${budget.notes || "-"} |`
     );
   }
 
-  return lines.join('\n');
+  return lines.join("\n");
 }

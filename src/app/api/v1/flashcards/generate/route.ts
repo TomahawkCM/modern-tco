@@ -67,19 +67,16 @@ export async function POST(request: NextRequest) {
     }
 
     // RESPONSE: Validated response with Zod schema
-    return createValidatedResponse(
-      FlashcardGenerateResponseSchema,
-      {
-        success: true,
-        flashcards,
-        count: flashcards.length,
-        provider: anthropicKey ? "anthropic" : "openai",
-      }
-    );
+    return createValidatedResponse(FlashcardGenerateResponseSchema, {
+      success: true,
+      flashcards,
+      count: flashcards.length,
+      provider: anthropicKey ? "anthropic" : "openai",
+    });
   } catch (error) {
     // Security fix: Use sanitized error messages (no internal details in production)
-    const { sanitizeError } = await import('@/lib/error-handler');
-    const sanitizedMessage = sanitizeError(error, 'flashcard_generation');
+    const { sanitizeError } = await import("@/lib/error-handler");
+    const sanitizedMessage = sanitizeError(error, "flashcard_generation");
 
     // Return validated error response
     return createValidatedResponse(
@@ -119,8 +116,7 @@ async function generateWithAnthropic(
     ],
   });
 
-  const responseText =
-    message.content[0].type === "text" ? message.content[0].text : "";
+  const responseText = message.content[0].type === "text" ? message.content[0].text : "";
 
   return parseFlashcards(responseText);
 }
@@ -243,9 +239,7 @@ function parseFlashcards(responseText: string): GeneratedFlashcard[] {
         hint: card.hint ? String(card.hint).trim() : undefined,
         explanation: card.explanation ? String(card.explanation).trim() : undefined,
         type: normalizeType(card.type),
-        tags: Array.isArray(card.tags)
-          ? card.tags.map((t: any) => String(t).trim())
-          : [],
+        tags: Array.isArray(card.tags) ? card.tags.map((t: any) => String(t).trim()) : [],
       };
     });
 

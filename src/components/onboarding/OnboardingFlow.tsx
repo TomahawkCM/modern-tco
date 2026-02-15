@@ -12,13 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -152,9 +146,9 @@ export function OnboardingFlow({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogHeader>
-          <div className="flex items-center justify-between mb-2">
+          <div className="mb-2 flex items-center justify-between">
             <DialogTitle className="text-2xl">
               {completed ? "Welcome Aboard! 🎉" : currentStepData.title}
             </DialogTitle>
@@ -164,15 +158,13 @@ export function OnboardingFlow({
               </Badge>
             )}
           </div>
-          {!completed && (
-            <Progress value={progress} className="h-2" />
-          )}
+          {!completed && <Progress value={progress} className="h-2" />}
         </DialogHeader>
 
         <div className="py-6">
           {completed ? (
-            <div className="text-center space-y-4">
-              <div className="mx-auto w-16 h-16 bg-[#22c55e]/20 rounded-full flex items-center justify-center">
+            <div className="space-y-4 text-center">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#22c55e]/20">
                 <Check className="h-8 w-8 text-[#22c55e]" />
               </div>
               <p className="text-lg text-muted-foreground">
@@ -188,22 +180,14 @@ export function OnboardingFlow({
           <DialogFooter className="flex justify-between sm:justify-between">
             <div className="flex gap-2">
               {currentStep > 0 && (
-                <Button
-                  variant="outline"
-                  onClick={handleBack}
-                  className="gap-2"
-                >
+                <Button variant="outline" onClick={handleBack} className="gap-2">
                   <ChevronLeft className="h-4 w-4" />
                   Back
                 </Button>
               )}
             </div>
             <div className="flex gap-2">
-              <Button
-                variant="ghost"
-                onClick={handleSkip}
-                className="text-muted-foreground"
-              >
+              <Button variant="ghost" onClick={handleSkip} className="text-muted-foreground">
                 Skip for now
               </Button>
               <Button onClick={handleNext} className="gap-2">
@@ -232,36 +216,35 @@ export function OnboardingFlow({
 function WelcomeStep({ userName }: { userName: string }) {
   return (
     <div className="space-y-6 text-center">
-      <div className="mx-auto w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+      <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600">
         <GraduationCap className="h-10 w-10 text-foreground" />
       </div>
       <div className="space-y-2">
         <h2 className="text-2xl font-bold">Welcome, {userName}!</h2>
-        <p className="text-muted-foreground max-w-lg mx-auto">
-          You're about to experience an enterprise-grade learning platform
-          designed specifically for Tanium Core Operator certification. Let's
-          take a quick tour to get you started!
+        <p className="mx-auto max-w-lg text-muted-foreground">
+          You're about to experience an enterprise-grade learning platform designed specifically for
+          Tanium Core Operator certification. Let's take a quick tour to get you started!
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
-        <div className="text-left p-4 rounded-lg border border-primary/20 bg-primary/5">
+      <div className="mx-auto grid max-w-md grid-cols-2 gap-4">
+        <div className="rounded-lg border border-primary/20 bg-primary/5 p-4 text-left">
           <div className="text-3xl font-bold text-primary">42%</div>
           <div className="text-xs text-muted-foreground">Better retention</div>
         </div>
-        <div className="text-left p-4 rounded-lg border border-accent/20 bg-accent/5">
+        <div className="rounded-lg border border-accent/20 bg-accent/5 p-4 text-left">
           <div className="text-3xl font-bold text-accent-foreground">34%</div>
           <div className="text-xs text-muted-foreground">Higher learning</div>
         </div>
-        <div className="text-left p-4 rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5">
+        <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5 p-4 text-left">
           <div className="text-3xl font-bold text-[#22c55e]">48%</div>
           <div className="text-xs text-muted-foreground">More engagement</div>
         </div>
-        <div className="text-left p-4 rounded-lg border border-[#f97316]/20 bg-yellow-500/5">
+        <div className="rounded-lg border border-[#f97316]/20 bg-yellow-500/5 p-4 text-left">
           <div className="text-3xl font-bold text-[#f97316]">45%</div>
           <div className="text-xs text-muted-foreground">Study effectiveness</div>
         </div>
       </div>
-      <p className="text-sm text-muted-foreground italic">
+      <p className="text-sm italic text-muted-foreground">
         All metrics backed by peer-reviewed research
       </p>
     </div>
@@ -273,8 +256,7 @@ function LearningTechniquesStep() {
     {
       icon: Brain,
       title: "Spaced Repetition (2357 Method)",
-      description:
-        "Reviews scheduled at optimal intervals for 42% better retention",
+      description: "Reviews scheduled at optimal intervals for 42% better retention",
       color: "blue",
     },
     {
@@ -299,9 +281,9 @@ function LearningTechniquesStep() {
 
   return (
     <div className="space-y-4">
-      <p className="text-muted-foreground text-center mb-6">
-        This platform uses <strong>four research-backed techniques</strong> to
-        maximize your learning efficiency:
+      <p className="mb-6 text-center text-muted-foreground">
+        This platform uses <strong>four research-backed techniques</strong> to maximize your
+        learning efficiency:
       </p>
       <div className="grid grid-cols-1 gap-4">
         {techniques.map((technique) => {
@@ -351,13 +333,12 @@ function ExamDateStep({
 }) {
   return (
     <div className="space-y-6">
-      <div className="text-center space-y-2">
+      <div className="space-y-2 text-center">
         <CalendarIcon className="mx-auto h-12 w-12 text-primary" />
         <h3 className="text-xl font-semibold">When is your exam?</h3>
-        <p className="text-muted-foreground max-w-md mx-auto">
-          Setting your exam date helps the platform create a personalized study
-          schedule and pace your learning appropriately. You can change this
-          later in Settings.
+        <p className="mx-auto max-w-md text-muted-foreground">
+          Setting your exam date helps the platform create a personalized study schedule and pace
+          your learning appropriately. You can change this later in Settings.
         </p>
       </div>
       <div className="flex justify-center">
@@ -370,17 +351,13 @@ function ExamDateStep({
         />
       </div>
       {examDate && (
-        <div className="text-center p-4 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg">
+        <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/10 p-4 text-center">
           <p className="text-sm text-[#22c55e]">
-            Exam date set:{" "}
-            <strong>{examDate.toLocaleDateString()}</strong>
+            Exam date set: <strong>{examDate.toLocaleDateString()}</strong>
           </p>
-          <p className="text-xs text-muted-foreground mt-1">
-            {Math.ceil(
-              (examDate.getTime() - new Date().getTime()) /
-                (1000 * 60 * 60 * 24)
-            )}{" "}
-            days until your exam
+          <p className="mt-1 text-xs text-muted-foreground">
+            {Math.ceil((examDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))} days
+            until your exam
           </p>
         </div>
       )}
@@ -414,14 +391,13 @@ function DashboardStep() {
 
   return (
     <div className="space-y-6">
-      <div className="text-center space-y-2">
+      <div className="space-y-2 text-center">
         <h3 className="text-xl font-semibold">Your Learning Dashboard</h3>
         <p className="text-muted-foreground">
-          Your Dashboard is mission control for your certification journey. Here's
-          what you'll find:
+          Your Dashboard is mission control for your certification journey. Here's what you'll find:
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {features.map((feature) => {
           const Icon = feature.icon;
           return (
@@ -439,11 +415,10 @@ function DashboardStep() {
           );
         })}
       </div>
-      <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg">
+      <div className="rounded-lg border border-primary/20 bg-primary/10 p-4">
         <p className="text-sm text-primary">
-          💡 <strong>Pro tip:</strong> Check your Dashboard daily to stay on
-          track. The platform adapts to your performance and suggests what to
-          study next.
+          💡 <strong>Pro tip:</strong> Check your Dashboard daily to stay on track. The platform
+          adapts to your performance and suggests what to study next.
         </p>
       </div>
     </div>
@@ -455,24 +430,21 @@ function FirstStepsStep() {
     {
       number: 1,
       title: "Start with Platform Foundation",
-      description:
-        "Begin with the first module to build your foundational knowledge",
+      description: "Begin with the first module to build your foundational knowledge",
       action: "Go to Learn",
       icon: BookOpen,
     },
     {
       number: 2,
       title: "Watch videos & complete quizzes",
-      description:
-        "Interactive content adds concepts to your spaced repetition schedule",
+      description: "Interactive content adds concepts to your spaced repetition schedule",
       action: "Watch Videos",
       icon: Video,
     },
     {
       number: 3,
       title: "Do your daily reviews",
-      description:
-        "Complete scheduled reviews every day for maximum retention",
+      description: "Complete scheduled reviews every day for maximum retention",
       action: "Start Reviews",
       icon: Brain,
     },
@@ -480,7 +452,7 @@ function FirstStepsStep() {
 
   return (
     <div className="space-y-6">
-      <div className="text-center space-y-2">
+      <div className="space-y-2 text-center">
         <h3 className="text-xl font-semibold">Your Next Steps</h3>
         <p className="text-muted-foreground">
           Here's how to get started with your certification journey:
@@ -492,15 +464,15 @@ function FirstStepsStep() {
           return (
             <div
               key={step.number}
-              className="flex gap-4 p-4 rounded-lg border border-gray-700 bg-card/30 hover:bg-card/50 transition-colors"
+              className="flex gap-4 rounded-lg border border-gray-700 bg-card/30 p-4 transition-colors hover:bg-card/50"
             >
-              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-bold">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 font-bold">
                 {step.number}
               </div>
               <div className="flex-1 space-y-1">
                 <div className="flex items-center gap-2">
                   <Icon className="h-4 w-4 text-primary" />
-                  <h4 className="font-semibold text-sm">{step.title}</h4>
+                  <h4 className="text-sm font-semibold">{step.title}</h4>
                 </div>
                 <p className="text-xs text-muted-foreground">{step.description}</p>
               </div>
@@ -508,10 +480,10 @@ function FirstStepsStep() {
           );
         })}
       </div>
-      <div className="p-4 bg-[#f97316]/10 border border-[#f97316]/20 rounded-lg">
+      <div className="rounded-lg border border-[#f97316]/20 bg-[#f97316]/10 p-4">
         <p className="text-sm text-[#f97316]">
-          ⚡ <strong>Remember:</strong> Consistency beats intensity. Study 30
-          minutes daily rather than cramming 3.5 hours once a week.
+          ⚡ <strong>Remember:</strong> Consistency beats intensity. Study 30 minutes daily rather
+          than cramming 3.5 hours once a week.
         </p>
       </div>
     </div>
@@ -521,49 +493,36 @@ function FirstStepsStep() {
 function CompletionStep() {
   return (
     <div className="space-y-6 text-center">
-      <div className="mx-auto w-20 h-20 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+      <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-blue-600">
         <Check className="h-10 w-10 text-foreground" />
       </div>
       <div className="space-y-2">
         <h2 className="text-2xl font-bold">You're ready to begin!</h2>
-        <p className="text-muted-foreground max-w-lg mx-auto">
-          You now know how to use the platform effectively. Click "Complete" to
-          go to your Dashboard and start your first module.
+        <p className="mx-auto max-w-lg text-muted-foreground">
+          You now know how to use the platform effectively. Click "Complete" to go to your Dashboard
+          and start your first module.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
-        <div className="p-4 rounded-lg border border-primary/20 bg-primary/5">
-          <div className="text-2xl font-bold text-primary mb-1">
-            Study Daily
-          </div>
-          <div className="text-xs text-muted-foreground">
-            Build a consistent review habit
-          </div>
+      <div className="mx-auto grid max-w-2xl grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
+          <div className="mb-1 text-2xl font-bold text-primary">Study Daily</div>
+          <div className="text-xs text-muted-foreground">Build a consistent review habit</div>
         </div>
-        <div className="p-4 rounded-lg border border-accent/20 bg-accent/5">
-          <div className="text-2xl font-bold text-accent-foreground mb-1">
-            Trust the System
-          </div>
-          <div className="text-xs text-muted-foreground">
-            Let spaced repetition work its magic
-          </div>
+        <div className="rounded-lg border border-accent/20 bg-accent/5 p-4">
+          <div className="mb-1 text-2xl font-bold text-accent-foreground">Trust the System</div>
+          <div className="text-xs text-muted-foreground">Let spaced repetition work its magic</div>
         </div>
-        <div className="p-4 rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5">
-          <div className="text-2xl font-bold text-[#22c55e] mb-1">
-            Track Progress
-          </div>
-          <div className="text-xs text-muted-foreground">
-            Monitor your exam readiness
-          </div>
+        <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5 p-4">
+          <div className="mb-1 text-2xl font-bold text-[#22c55e]">Track Progress</div>
+          <div className="text-xs text-muted-foreground">Monitor your exam readiness</div>
         </div>
       </div>
-      <div className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-primary/20 rounded-lg">
-        <p className="text-lg font-semibold text-primary mb-2">
+      <div className="rounded-lg border border-primary/20 bg-gradient-to-br from-blue-500/10 to-purple-500/10 p-6">
+        <p className="mb-2 text-lg font-semibold text-primary">
           Good luck on your certification journey! 🚀
         </p>
         <p className="text-sm text-muted-foreground">
-          You can replay this onboarding anytime from Settings → Help →
-          Restart Tour
+          You can replay this onboarding anytime from Settings → Help → Restart Tour
         </p>
       </div>
     </div>

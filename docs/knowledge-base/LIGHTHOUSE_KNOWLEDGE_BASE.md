@@ -12,22 +12,25 @@ This document is a practical, “what you need to know and do” guide for using
 ## Running Lighthouse (this repository)
 
 Local dev (recommended)
+
 - Install Playwright Chromium once:
   - `npm run lighthouse:setup`
 - Start the dev server (Next.js will choose an available port if 3000 is busy):
   - `npm run dev`
 - Run Lighthouse against your dev port (example: 3003) using Playwright’s Chromium:
   - `npm run lighthouse:3003:pw`
- - View a quick summary of the latest run (scores only):
-   - `npm run lighthouse:summary`
+- View a quick summary of the latest run (scores only):
+  - `npm run lighthouse:summary`
 
 Notes
+
 - Our runner (`scripts/lighthouse.mjs`) passes Chrome flags suitable for local dev/containers:
   - `--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --allow-insecure-localhost --ignore-certificate-errors --no-first-run --no-default-browser-check`
 - Reports are saved under `reports/lighthouse/<timestamp>` as `desktop__*.report.html/json` and `mobile__*.report.html/json`.
- - If you hit Chrome’s security interstitial in headless mode, see the “Common local pitfalls and fixes” section below for reliable workarounds (127.0.0.1 base or running from DevTools).
+- If you hit Chrome’s security interstitial in headless mode, see the “Common local pitfalls and fixes” section below for reliable workarounds (127.0.0.1 base or running from DevTools).
 
 Production‑like measurements
+
 - For more accurate scores (bundle size, TTI), build and start a production server:
   - `npm run build && npm start`
   - Then run `node scripts/lighthouse.mjs http://localhost:3000 /welcome /practice /mock /review`
@@ -80,15 +83,15 @@ Production‑like measurements
 
 ## Recommended workflow
 
-1) Baseline
+1. Baseline
    - Run against `/welcome`, `/practice`, `/mock`, `/review` in production mode; archive reports.
-2) Identify top 2–3 wins
+2. Identify top 2–3 wins
    - Look for 100–500 KB+ JS savings, render‑blocking styles, or deferrable scripts.
-3) Implement safely
+3. Implement safely
    - Code‑split heavy UI; defer non‑critical JS; move expensive work out of initial render; reduce above‑the‑fold DOM.
-4) Re‑measure
+4. Re‑measure
    - Confirm the score moves; ensure no regressions in A11Y/Best Practices/SEO.
-5) Track over time
+5. Track over time
    - Save JSON metrics for trend graphs; alert if metrics regress.
 
 ## Budgets & CI

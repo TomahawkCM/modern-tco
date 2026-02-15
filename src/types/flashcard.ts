@@ -3,8 +3,8 @@
 
 import type { SRCardState, SRRating } from "@/lib/sr";
 
-export type FlashcardType = 'basic' | 'cloze' | 'concept' | 'diagram' | 'code';
-export type FlashcardSource = 'manual' | 'auto_generated' | 'quiz_failure' | 'video_concept';
+export type FlashcardType = "basic" | "cloze" | "concept" | "diagram" | "code";
+export type FlashcardSource = "manual" | "auto_generated" | "quiz_failure" | "video_concept";
 
 export interface Flashcard {
   id: string;

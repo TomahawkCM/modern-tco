@@ -43,20 +43,14 @@ export function SeniorsModeToggle({
   const isLarge = size === "large" || isSeniorsMode;
 
   return (
-    <div
-      className={cn(
-        "flex items-center gap-4",
-        isLarge && "gap-6",
-        className
-      )}
-    >
+    <div className={cn("flex items-center gap-4", isLarge && "gap-6", className)}>
       {showLabel && (
         <div className="flex-1">
           <label
             id={labelId}
             htmlFor={id}
             className={cn(
-              "font-medium cursor-pointer select-none",
+              "cursor-pointer select-none font-medium",
               isLarge ? "text-lg" : "text-base",
               isSeniorsMode && "text-xl font-semibold"
             )}
@@ -110,8 +104,8 @@ export function SeniorsModeToggle({
             "disabled:cursor-not-allowed disabled:opacity-50",
             // Size variants
             isLarge
-              ? "h-10 w-[76px] min-h-[52px] min-w-[76px]" // 52px touch target
-              : "h-7 w-14 min-h-[44px] min-w-[56px]", // 44px touch target
+              ? "h-10 min-h-[52px] w-[76px] min-w-[76px]" // 52px touch target
+              : "h-7 min-h-[44px] w-14 min-w-[56px]", // 44px touch target
             // Color states with high contrast
             isSeniorsMode
               ? "bg-teal-600 hover:bg-teal-700"
@@ -125,11 +119,7 @@ export function SeniorsModeToggle({
               // Size variants
               isLarge ? "h-8 w-8" : "h-5 w-5",
               // Position
-              isSeniorsMode
-                ? isLarge
-                  ? "translate-x-9"
-                  : "translate-x-7"
-                : "translate-x-1"
+              isSeniorsMode ? (isLarge ? "translate-x-9" : "translate-x-7") : "translate-x-1"
             )}
           />
         </SwitchPrimitives.Root>
@@ -148,12 +138,7 @@ export function SeniorsModeToggle({
       </div>
 
       {/* Live region for screen reader announcements */}
-      <div
-        role="status"
-        aria-live="polite"
-        aria-atomic="true"
-        className="sr-only"
-      >
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
         {isSeniorsMode
           ? "Seniors Mode is now enabled. Larger text and buttons are active."
           : "Seniors Mode is now disabled."}
@@ -165,29 +150,16 @@ export function SeniorsModeToggle({
 /**
  * Compact version for toolbar/header use
  */
-export function SeniorsModeToggleCompact({
-  className,
-}: {
-  className?: string;
-}) {
+export function SeniorsModeToggleCompact({ className }: { className?: string }) {
   return (
-    <SeniorsModeToggle
-      showLabel={false}
-      showIcons={false}
-      size="default"
-      className={className}
-    />
+    <SeniorsModeToggle showLabel={false} showIcons={false} size="default" className={className} />
   );
 }
 
 /**
  * Button version that opens settings
  */
-export function SeniorsModeButton({
-  className,
-}: {
-  className?: string;
-}) {
+export function SeniorsModeButton({ className }: { className?: string }) {
   const { isSeniorsMode, toggleSeniorsMode } = useSeniorsMode();
 
   return (
@@ -196,7 +168,7 @@ export function SeniorsModeButton({
       onClick={toggleSeniorsMode}
       aria-pressed={isSeniorsMode}
       className={cn(
-        "flex items-center gap-2 px-4 py-3 rounded-lg",
+        "flex items-center gap-2 rounded-lg px-4 py-3",
         "min-h-[52px] min-w-[52px]", // 52px touch target
         "font-medium transition-colors",
         "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-teal-500",

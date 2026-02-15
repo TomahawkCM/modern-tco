@@ -12,15 +12,15 @@
  * - Pages: Process 5-10 pages sequentially for memory efficiency
  */
 
-import Tesseract from 'tesseract.js';
-import { convertPdfToImages, isPdfFile } from './pdf-to-image';
-import type { ParsedTransaction } from '../types/budget';
+import Tesseract from "tesseract.js";
+import { convertPdfToImages, isPdfFile } from "./pdf-to-image";
+import type { ParsedTransaction } from "../types/budget";
 import {
   detectColumnPositions,
   parseAmountColumns,
   groupMultiLineTransactions,
-  type ColumnMapping
-} from './parsers/pdf-bank-parser';
+  type ColumnMapping,
+} from "./parsers/pdf-bank-parser";
 
 // ============================================================================
 // Types
@@ -85,14 +85,14 @@ export async function extractBankStatementData(
   try {
     // Validate file is a PDF
     if (!isPdfFile(file)) {
-      throw new Error('File must be a PDF');
+      throw new Error("File must be a PDF");
     }
 
     // Convert PDF pages to images (max 20 pages for bank statements)
     const pages = await convertPdfToImages(file, 20);
 
     if (pages.length === 0) {
-      throw new Error('PDF has no pages');
+      throw new Error("PDF has no pages");
     }
 
     const allTransactions: DetectedTransaction[] = [];
@@ -124,15 +124,17 @@ export async function extractBankStatementData(
 
       try {
         // Perform OCR on this page
-        const result = await Tesseract.recognize(page.canvas, 'eng');
+        const result = await Tesseract.recognize(page.canvas, "eng");
         const rawText = result.data.text;
         const ocrTextConfidence = result.data.confidence / 100;
 
         // Store raw text for debugging
-        allRawText.push(`--- Page ${page.pageNumber} (OCR: ${(ocrTextConfidence * 100).toFixed(1)}%) ---\n${rawText}`);
+        allRawText.push(
+          `--- Page ${page.pageNumber} (OCR: ${(ocrTextConfidence * 100).toFixed(1)}%) ---\n${rawText}`
+        );
 
         // Count lines before parsing
-        const linesBeforeParsing = rawText.split('\n').filter(line => line.trim()).length;
+        const linesBeforeParsing = rawText.split("\n").filter((line) => line.trim()).length;
         totalLinesProcessed += linesBeforeParsing;
 
         // Parse transactions from this page with enhanced diagnostics
@@ -149,9 +151,10 @@ export async function extractBankStatementData(
         allTransactions.push(...pageTransactions);
 
         // Track page breakdown
-        const pageConfidence = pageTransactions.length > 0
-          ? pageTransactions.reduce((sum, tx) => sum + tx.confidence, 0) / pageTransactions.length
-          : 0;
+        const pageConfidence =
+          pageTransactions.length > 0
+            ? pageTransactions.reduce((sum, tx) => sum + tx.confidence, 0) / pageTransactions.length
+            : 0;
 
         pageBreakdown.push({
           pageNumber: page.pageNumber,
@@ -166,7 +169,9 @@ export async function extractBankStatementData(
           totalConfidence += pageTransactions[0].confidence;
           confidenceCount++;
         } else {
-          warnings.push(`⚠️ Page ${page.pageNumber}: No transactions found (${linesBeforeParsing} lines extracted)`);
+          warnings.push(
+            `⚠️ Page ${page.pageNumber}: No transactions found (${linesBeforeParsing} lines extracted)`
+          );
         }
 
         // Log detailed breakdown
@@ -178,16 +183,15 @@ export async function extractBankStatementData(
           transactionsFailed: pageResult.transactionsFailed,
           ocrConfidence: `${(ocrTextConfidence * 100).toFixed(1)}%`,
         });
-
       } catch (error) {
-        const errorMsg = `Error processing page ${page.pageNumber}: ${error instanceof Error ? error.message : 'Unknown error'}`;
+        const errorMsg = `Error processing page ${page.pageNumber}: ${error instanceof Error ? error.message : "Unknown error"}`;
         console.error(errorMsg);
         errors.push(errorMsg);
       }
     }
 
     // Convert to ParsedTransaction format
-    const parsedTransactions: ParsedTransaction[] = allTransactions.map(tx => ({
+    const parsedTransactions: ParsedTransaction[] = allTransactions.map((tx) => ({
       date: tx.date || new Date(),
       description: tx.description,
       amount: tx.amount || 0,
@@ -201,17 +205,23 @@ export async function extractBankStatementData(
 
     // Add summary warnings
     if (totalTransactionsParsed === 0 && totalLinesProcessed > 0) {
-      warnings.push('🚨 No transactions were successfully parsed. Please check column mapping or try manual import.');
+      warnings.push(
+        "🚨 No transactions were successfully parsed. Please check column mapping or try manual import."
+      );
     } else if (totalTransactionsParsed < totalTransactionGroupsFormed * 0.5) {
-      warnings.push(`⚠️ Only ${totalTransactionsParsed} of ${totalTransactionGroupsFormed} transaction groups were successfully parsed (${Math.round((totalTransactionsParsed / totalTransactionGroupsFormed) * 100)}% success rate).`);
+      warnings.push(
+        `⚠️ Only ${totalTransactionsParsed} of ${totalTransactionGroupsFormed} transaction groups were successfully parsed (${Math.round((totalTransactionsParsed / totalTransactionGroupsFormed) * 100)}% success rate).`
+      );
     }
 
     if (totalLinesFilteredAsHeaders > totalLinesProcessed * 0.5) {
-      warnings.push(`⚠️ ${totalLinesFilteredAsHeaders} lines were filtered as headers (${Math.round((totalLinesFilteredAsHeaders / totalLinesProcessed) * 100)}% of total lines). This seems unusually high.`);
+      warnings.push(
+        `⚠️ ${totalLinesFilteredAsHeaders} lines were filtered as headers (${Math.round((totalLinesFilteredAsHeaders / totalLinesProcessed) * 100)}% of total lines). This seems unusually high.`
+      );
     }
 
     // Log final summary
-    console.log('[PDF OCR] Final Summary:', {
+    console.log("[PDF OCR] Final Summary:", {
       pagesProcessed: pages.length,
       totalLines: totalLinesProcessed,
       linesFiltered: totalLinesFilteredAsHeaders,
@@ -219,14 +229,15 @@ export async function extractBankStatementData(
       transactionsParsed: totalTransactionsParsed,
       transactionsFailed: totalTransactionsFailedToParse,
       averageConfidence: `${(averageConfidence * 100).toFixed(1)}%`,
-      successRate: totalTransactionGroupsFormed > 0
-        ? `${Math.round((totalTransactionsParsed / totalTransactionGroupsFormed) * 100)}%`
-        : '0%',
+      successRate:
+        totalTransactionGroupsFormed > 0
+          ? `${Math.round((totalTransactionsParsed / totalTransactionGroupsFormed) * 100)}%`
+          : "0%",
     });
 
     return {
       transactions: parsedTransactions,
-      rawText: allRawText.join('\n\n'),
+      rawText: allRawText.join("\n\n"),
       pagesProcessed: pages.length,
       averageConfidence,
       errors,
@@ -240,15 +251,14 @@ export async function extractBankStatementData(
         pageBreakdown,
       },
     };
-
   } catch (error) {
-    console.error('Bank statement OCR failed:', error);
+    console.error("Bank statement OCR failed:", error);
     return {
       transactions: [],
-      rawText: '',
+      rawText: "",
       pagesProcessed: 0,
       averageConfidence: 0,
-      errors: [error instanceof Error ? error.message : 'Unknown error'],
+      errors: [error instanceof Error ? error.message : "Unknown error"],
       warnings: [],
       diagnostics: {
         totalLinesProcessed: 0,
@@ -281,8 +291,14 @@ interface ParseTableRowsResult {
  * @param pageNumber - Page number for debugging
  * @returns Parse result with diagnostics
  */
-export function parseTableRowsWithDiagnostics(rawText: string, pageNumber: number = 1): ParseTableRowsResult {
-  const lines = rawText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+export function parseTableRowsWithDiagnostics(
+  rawText: string,
+  pageNumber: number = 1
+): ParseTableRowsResult {
+  const lines = rawText
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
 
   if (lines.length === 0) {
     return {
@@ -297,27 +313,36 @@ export function parseTableRowsWithDiagnostics(rawText: string, pageNumber: numbe
   // Step 1: Detect column positions from first 5 rows (header detection)
   const headerRows = lines.slice(0, Math.min(5, lines.length));
   const columnDetection = detectColumnPositions(headerRows);
-  const {mapping} = columnDetection;
+  const { mapping } = columnDetection;
 
-  console.log('[parseTableRows] Column detection:', {
+  console.log("[parseTableRows] Column detection:", {
     bankFormat: mapping.bankFormat,
     confidence: mapping.confidence,
     method: mapping.detectionMethod,
-    warnings: columnDetection.warnings
+    warnings: columnDetection.warnings,
   });
 
   // Step 2: Extract transaction rows (skip header row and filter headers/footers)
   const linesBeforeFiltering = lines.length - (columnDetection.headerRow + 1);
   const transactionRows = lines
     .slice(columnDetection.headerRow + 1)
-    .filter(line => !isHeaderOrFooter(line));
+    .filter((line) => !isHeaderOrFooter(line));
 
   const linesFiltered = linesBeforeFiltering - transactionRows.length;
 
-  console.log('[parseTableRows] Page', pageNumber, '- Lines:', lines.length, '| Transaction rows after filtering:', transactionRows.length, '| Filtered as headers:', linesFiltered);
+  console.log(
+    "[parseTableRows] Page",
+    pageNumber,
+    "- Lines:",
+    lines.length,
+    "| Transaction rows after filtering:",
+    transactionRows.length,
+    "| Filtered as headers:",
+    linesFiltered
+  );
 
   if (transactionRows.length === 0) {
-    console.warn('[parseTableRows] No transaction rows found on page', pageNumber);
+    console.warn("[parseTableRows] No transaction rows found on page", pageNumber);
     return {
       transactions: [],
       linesFilteredAsHeaders: linesFiltered,
@@ -329,7 +354,7 @@ export function parseTableRowsWithDiagnostics(rawText: string, pageNumber: numbe
 
   // Step 3: Group multi-line transactions
   const groupedRows = groupMultiLineTransactions(transactionRows);
-  console.log('[parseTableRows] Grouped into', groupedRows.length, 'transaction groups');
+  console.log("[parseTableRows] Grouped into", groupedRows.length, "transaction groups");
 
   // Step 4: Parse each transaction group
   const transactions: DetectedTransaction[] = [];
@@ -347,7 +372,7 @@ export function parseTableRowsWithDiagnostics(rawText: string, pageNumber: numbe
     if (transaction) {
       // Append continuation lines to description
       if (continuationRows.length > 0) {
-        const continuationText = continuationRows.join(' ').trim();
+        const continuationText = continuationRows.join(" ").trim();
         transaction.description = `${transaction.description} ${continuationText}`.trim();
       }
 
@@ -359,7 +384,12 @@ export function parseTableRowsWithDiagnostics(rawText: string, pageNumber: numbe
     }
   }
 
-  console.log('[parseTableRows] Successfully parsed:', parsedCount, '| Failed to parse:', failedCount);
+  console.log(
+    "[parseTableRows] Successfully parsed:",
+    parsedCount,
+    "| Failed to parse:",
+    failedCount
+  );
 
   return {
     transactions,
@@ -384,7 +414,10 @@ export function parseTableRowsWithDiagnostics(rawText: string, pageNumber: numbe
  * @returns Array of detected transactions
  */
 export function parseTableRows(rawText: string, pageNumber: number = 1): DetectedTransaction[] {
-  const lines = rawText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+  const lines = rawText
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
 
   if (lines.length === 0) {
     return [];
@@ -393,30 +426,37 @@ export function parseTableRows(rawText: string, pageNumber: number = 1): Detecte
   // Step 1: Detect column positions from first 5 rows (header detection)
   const headerRows = lines.slice(0, Math.min(5, lines.length));
   const columnDetection = detectColumnPositions(headerRows);
-  const {mapping} = columnDetection;
+  const { mapping } = columnDetection;
 
-  console.log('[parseTableRows] Column detection:', {
+  console.log("[parseTableRows] Column detection:", {
     bankFormat: mapping.bankFormat,
     confidence: mapping.confidence,
     method: mapping.detectionMethod,
-    warnings: columnDetection.warnings
+    warnings: columnDetection.warnings,
   });
 
   // Step 2: Extract transaction rows (skip header row and filter headers/footers)
   const transactionRows = lines
     .slice(columnDetection.headerRow + 1)
-    .filter(line => !isHeaderOrFooter(line));
+    .filter((line) => !isHeaderOrFooter(line));
 
-  console.log('[parseTableRows] Page', pageNumber, '- Lines:', lines.length, '| Transaction rows after filtering:', transactionRows.length);
+  console.log(
+    "[parseTableRows] Page",
+    pageNumber,
+    "- Lines:",
+    lines.length,
+    "| Transaction rows after filtering:",
+    transactionRows.length
+  );
 
   if (transactionRows.length === 0) {
-    console.warn('[parseTableRows] No transaction rows found on page', pageNumber);
+    console.warn("[parseTableRows] No transaction rows found on page", pageNumber);
     return [];
   }
 
   // Step 3: Group multi-line transactions
   const groupedRows = groupMultiLineTransactions(transactionRows);
-  console.log('[parseTableRows] Grouped into', groupedRows.length, 'transaction groups');
+  console.log("[parseTableRows] Grouped into", groupedRows.length, "transaction groups");
 
   // Step 4: Parse each transaction group
   const transactions: DetectedTransaction[] = [];
@@ -434,7 +474,7 @@ export function parseTableRows(rawText: string, pageNumber: number = 1): Detecte
     if (transaction) {
       // Append continuation lines to description
       if (continuationRows.length > 0) {
-        const continuationText = continuationRows.join(' ').trim();
+        const continuationText = continuationRows.join(" ").trim();
         transaction.description = `${transaction.description} ${continuationText}`.trim();
       }
 
@@ -445,7 +485,12 @@ export function parseTableRows(rawText: string, pageNumber: number = 1): Detecte
     }
   }
 
-  console.log('[parseTableRows] Successfully parsed:', parsedCount, '| Failed to parse:', failedCount);
+  console.log(
+    "[parseTableRows] Successfully parsed:",
+    parsedCount,
+    "| Failed to parse:",
+    failedCount
+  );
 
   return transactions;
 }
@@ -482,41 +527,41 @@ function isHeaderOrFooter(line: string): boolean {
       /^grand total/i,
     ];
 
-    return summaryPatterns.some(pattern => pattern.test(line));
+    return summaryPatterns.some((pattern) => pattern.test(line));
   }
 
   // Header patterns - match EXACT header keywords (not partial matches)
   const headerPatterns = [
-    /^date\s*$/i,                          // "Date" alone
-    /^transaction\s+date\s*$/i,            // "Transaction Date" alone
-    /^posting\s+date\s*$/i,                // "Posting Date" alone
-    /^description\s*$/i,                   // "Description" alone
-    /^amount\s*$/i,                        // "Amount" alone
-    /^debit\s*$/i,                         // "Debit" alone
-    /^credit\s*$/i,                        // "Credit" alone
-    /^balance\s*$/i,                       // "Balance" alone
-    /^date\s+description\s+/i,             // Multi-column header row
-    /^date\s+transaction\s+/i,             // Multi-column header row
-    /^\s*date\s+amount\s+balance\s*/i,     // Common header format
+    /^date\s*$/i, // "Date" alone
+    /^transaction\s+date\s*$/i, // "Transaction Date" alone
+    /^posting\s+date\s*$/i, // "Posting Date" alone
+    /^description\s*$/i, // "Description" alone
+    /^amount\s*$/i, // "Amount" alone
+    /^debit\s*$/i, // "Debit" alone
+    /^credit\s*$/i, // "Credit" alone
+    /^balance\s*$/i, // "Balance" alone
+    /^date\s+description\s+/i, // Multi-column header row
+    /^date\s+transaction\s+/i, // Multi-column header row
+    /^\s*date\s+amount\s+balance\s*/i, // Common header format
   ];
 
   // Footer patterns
   const footerPatterns = [
-    /^\d+\s+of\s+\d+$/i,                   // Page numbers like "1 of 5"
-    /^page\s+\d+/i,                        // "Page 1", "Page 2"
-    /^continued/i,                         // "Continued", "Continued on next page"
-    /^statement\s+period/i,                // "Statement Period"
-    /^account\s+number/i,                  // "Account Number"
-    /^for\s+period\s+ending/i,             // "For period ending"
+    /^\d+\s+of\s+\d+$/i, // Page numbers like "1 of 5"
+    /^page\s+\d+/i, // "Page 1", "Page 2"
+    /^continued/i, // "Continued", "Continued on next page"
+    /^statement\s+period/i, // "Statement Period"
+    /^account\s+number/i, // "Account Number"
+    /^for\s+period\s+ending/i, // "For period ending"
   ];
 
   // Check all patterns
   const skipPatterns = [...headerPatterns, ...footerPatterns];
-  const shouldSkip = skipPatterns.some(pattern => pattern.test(line));
+  const shouldSkip = skipPatterns.some((pattern) => pattern.test(line));
 
   // Debug logging for filtered lines
   if (shouldSkip) {
-    console.log('[isHeaderOrFooter] Filtering line:', line.substring(0, 80));
+    console.log("[isHeaderOrFooter] Filtering line:", line.substring(0, 80));
   }
 
   return shouldSkip;
@@ -558,13 +603,12 @@ function parseTransactionRowWithMapping(
 
     return {
       date,
-      description: description || 'Unknown',
+      description: description || "Unknown",
       amount,
       confidence,
       lineNumber,
       rawLine: line,
     };
-
   } catch (error) {
     console.warn(`Failed to parse line ${lineNumber}: ${line}`, error);
     return null;
@@ -608,13 +652,12 @@ export function parseTransactionRow(line: string, lineNumber: number): DetectedT
 
     return {
       date,
-      description: description || 'Unknown',
+      description: description || "Unknown",
       amount,
       confidence,
       lineNumber,
       rawLine: line,
     };
-
   } catch (error) {
     console.warn(`Failed to parse line ${lineNumber}: ${line}`, error);
     return null;
@@ -704,7 +747,7 @@ function extractAmountFromLine(line: string): number | null {
   const negativeMatches = Array.from(line.matchAll(/-\$?([\d,]+\.\d{2})/g));
   for (const match of negativeMatches) {
     if (match && match[1]) {
-      const amount = parseFloat(match[1].replace(/,/g, ''));
+      const amount = parseFloat(match[1].replace(/,/g, ""));
       if (!isNaN(amount) && amount !== 0) {
         amounts.push(-Math.abs(amount));
       }
@@ -715,7 +758,7 @@ function extractAmountFromLine(line: string): number | null {
   const parenthesesMatches = Array.from(line.matchAll(/\(\$?([\d,]+\.\d{2})\)/g));
   for (const match of parenthesesMatches) {
     if (match && match[1]) {
-      const amount = parseFloat(match[1].replace(/,/g, ''));
+      const amount = parseFloat(match[1].replace(/,/g, ""));
       if (!isNaN(amount) && amount !== 0) {
         amounts.push(-Math.abs(amount));
       }
@@ -728,7 +771,7 @@ function extractAmountFromLine(line: string): number | null {
     const positiveMatches = Array.from(line.matchAll(/\$?([\d,]+\.\d{2})/g));
     for (const match of positiveMatches) {
       if (match && match[1]) {
-        const amount = parseFloat(match[1].replace(/,/g, ''));
+        const amount = parseFloat(match[1].replace(/,/g, ""));
         if (!isNaN(amount) && amount !== 0) {
           amounts.push(amount);
         }
@@ -749,31 +792,41 @@ function extractAmountFromLine(line: string): number | null {
 /**
  * Extract description from line (everything between date and amount)
  */
-function extractDescriptionFromLine(line: string, date: Date | null, amount: number | null): string {
+function extractDescriptionFromLine(
+  line: string,
+  date: Date | null,
+  amount: number | null
+): string {
   let cleanLine = line;
 
   // Remove date from line if found
   if (date) {
     // Remove date patterns from line
-    cleanLine = cleanLine.replace(/\d{1,2}[\\/\-\.]\d{1,2}[\\/\-\.]\d{4}/g, '');
-    cleanLine = cleanLine.replace(/\d{4}[\\/\-]\d{1,2}[\\/\-]\d{1,2}/g, '');
-    cleanLine = cleanLine.replace(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}/gi, '');
-    cleanLine = cleanLine.replace(/\d{1,2}\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*/gi, '');
+    cleanLine = cleanLine.replace(/\d{1,2}[\\/\-\.]\d{1,2}[\\/\-\.]\d{4}/g, "");
+    cleanLine = cleanLine.replace(/\d{4}[\\/\-]\d{1,2}[\\/\-]\d{1,2}/g, "");
+    cleanLine = cleanLine.replace(
+      /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}/gi,
+      ""
+    );
+    cleanLine = cleanLine.replace(
+      /\d{1,2}\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*/gi,
+      ""
+    );
   }
 
   // Remove amount from line if found
   if (amount !== null) {
     // Remove all currency patterns
-    cleanLine = cleanLine.replace(/-?\$?[\d,]+\.\d{2}/g, '');
-    cleanLine = cleanLine.replace(/\(\$?[\d,]+\.\d{2}\)/g, '');
+    cleanLine = cleanLine.replace(/-?\$?[\d,]+\.\d{2}/g, "");
+    cleanLine = cleanLine.replace(/\(\$?[\d,]+\.\d{2}\)/g, "");
   }
 
   // Clean up whitespace
-  cleanLine = cleanLine.replace(/\s+/g, ' ').trim();
+  cleanLine = cleanLine.replace(/\s+/g, " ").trim();
 
   // If description is too short or empty, return placeholder
   if (cleanLine.length < 3) {
-    return 'Transaction';
+    return "Transaction";
   }
 
   return cleanLine;
@@ -784,10 +837,20 @@ function extractDescriptionFromLine(line: string, date: Date | null, amount: num
  */
 function getMonthNumber(monthName: string): number | null {
   const months = [
-    'jan', 'feb', 'mar', 'apr', 'may', 'jun',
-    'jul', 'aug', 'sep', 'oct', 'nov', 'dec'
+    "jan",
+    "feb",
+    "mar",
+    "apr",
+    "may",
+    "jun",
+    "jul",
+    "aug",
+    "sep",
+    "oct",
+    "nov",
+    "dec",
   ];
 
-  const index = months.findIndex(m => monthName.toLowerCase().startsWith(m));
+  const index = months.findIndex((m) => monthName.toLowerCase().startsWith(m));
   return index !== -1 ? index : null;
 }

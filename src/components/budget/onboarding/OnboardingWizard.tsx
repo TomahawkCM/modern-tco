@@ -231,12 +231,12 @@ export function OnboardingWizard({
 
   return (
     <div
-      className="fixed inset-0 z-[70] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4"
+      className="fixed inset-0 z-[70] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-labelledby="onboarding-title"
     >
-      <div className="relative w-full max-w-2xl rounded-2xl bg-slate-900 border border-white/10 shadow-2xl overflow-hidden">
+      <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl border border-white/10 bg-slate-900 shadow-2xl">
         {/* Progress Bar */}
         <div className="h-1 bg-slate-800">
           <div
@@ -246,7 +246,7 @@ export function OnboardingWizard({
         </div>
 
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+        <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
           {/* Step Indicators */}
           <div className="flex items-center gap-2">
             {STEPS.map((step, index) => (
@@ -260,21 +260,17 @@ export function OnboardingWizard({
                 }}
                 disabled={index > state.currentStep && !state.stepsCompleted[index]}
                 className={cn(
-                  "flex items-center justify-center h-8 w-8 rounded-full text-sm font-medium transition-all",
+                  "flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium transition-all",
                   index === state.currentStep
-                    ? "bg-teal-500 text-white scale-110"
+                    ? "scale-110 bg-teal-500 text-white"
                     : state.stepsCompleted[index]
-                    ? "bg-teal-500/20 text-teal-400 hover:bg-teal-500/30 cursor-pointer"
-                    : "bg-slate-800 text-slate-500 cursor-not-allowed"
+                      ? "cursor-pointer bg-teal-500/20 text-teal-400 hover:bg-teal-500/30"
+                      : "cursor-not-allowed bg-slate-800 text-slate-500"
                 )}
                 aria-label={`Step ${index + 1}: ${step.title}`}
                 aria-current={index === state.currentStep ? "step" : undefined}
               >
-                {state.stepsCompleted[index] ? (
-                  <Check className="h-4 w-4" />
-                ) : (
-                  index + 1
-                )}
+                {state.stepsCompleted[index] ? <Check className="h-4 w-4" /> : index + 1}
               </button>
             ))}
           </div>
@@ -283,7 +279,7 @@ export function OnboardingWizard({
           <button
             type="button"
             onClick={handleSkipWizard}
-            className="p-2 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+            className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
             aria-label="Close onboarding wizard"
           >
             <X className="h-5 w-5" />
@@ -292,7 +288,7 @@ export function OnboardingWizard({
 
         {/* Step Title */}
         <div className="px-6 pt-6">
-          <p className="text-sm text-slate-400 mb-1">
+          <p className="mb-1 text-sm text-slate-400">
             Step {state.currentStep + 1} of {STEPS.length}
           </p>
           <h2 id="onboarding-title" className="text-2xl font-bold text-white">
@@ -301,22 +297,18 @@ export function OnboardingWizard({
         </div>
 
         {/* Step Content */}
-        <div className="px-6 py-6 min-h-[300px]">
-          <StepComponent
-            onComplete={handleStepComplete}
-            onSkip={handleStepSkip}
-            isActive={true}
-          />
+        <div className="min-h-[300px] px-6 py-6">
+          <StepComponent onComplete={handleStepComplete} onSkip={handleStepSkip} isActive={true} />
         </div>
 
         {/* Footer Navigation */}
-        <div className="flex items-center justify-between px-6 py-4 border-t border-white/10 bg-slate-900/50">
+        <div className="flex items-center justify-between border-t border-white/10 bg-slate-900/50 px-6 py-4">
           <div>
             {!isFirstStep && (
               <button
                 type="button"
                 onClick={handlePrevious}
-                className="flex items-center gap-2 px-4 py-2 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                className="flex items-center gap-2 rounded-lg px-4 py-2 text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
               >
                 <ChevronLeft className="h-4 w-4" />
                 Back
@@ -328,7 +320,7 @@ export function OnboardingWizard({
             <button
               type="button"
               onClick={handleStepSkip}
-              className="px-4 py-2 text-slate-400 hover:text-white transition-colors"
+              className="px-4 py-2 text-slate-400 transition-colors hover:text-white"
             >
               {isLastStep ? "Skip & Finish" : "Skip"}
             </button>
@@ -337,7 +329,7 @@ export function OnboardingWizard({
               <button
                 type="button"
                 onClick={handleCompleteWizard}
-                className="flex items-center gap-2 px-6 py-2 bg-gradient-to-r from-teal-500 to-blue-500 text-white font-medium rounded-lg hover:opacity-90 transition-opacity"
+                className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-teal-500 to-blue-500 px-6 py-2 font-medium text-white transition-opacity hover:opacity-90"
               >
                 <Check className="h-4 w-4" />
                 Complete Setup

@@ -13,7 +13,7 @@ import type {
   FuturePurchase,
   Subscription,
   CategorySpending,
-} from '@/types/budget';
+} from "@/types/budget";
 
 // ===================================
 // Types
@@ -30,7 +30,7 @@ export interface WeeklySpendingSummary {
   vsLastWeek: {
     amount: number;
     percentage: number;
-    direction: 'up' | 'down' | 'stable';
+    direction: "up" | "down" | "stable";
   };
   topCategories: Array<{
     category: string;
@@ -47,23 +47,23 @@ export interface BudgetVariance {
   spentAmount: number;
   remainingAmount: number;
   percentUsed: number;
-  status: 'on-track' | 'warning' | 'over';
+  status: "on-track" | "warning" | "over";
   daysRemaining: number;
   projectedTotal: number;
-  projectedStatus: 'on-track' | 'warning' | 'over';
+  projectedStatus: "on-track" | "warning" | "over";
 }
 
 export interface WeeklyInsight {
   id: string;
   type:
-    | 'spending-change'
-    | 'budget-warning'
-    | 'budget-over'
-    | 'goal-progress'
-    | 'subscription-due'
-    | 'savings-win'
-    | 'streak';
-  priority: 'high' | 'medium' | 'low';
+    | "spending-change"
+    | "budget-warning"
+    | "budget-over"
+    | "goal-progress"
+    | "subscription-due"
+    | "savings-win"
+    | "streak";
+  priority: "high" | "medium" | "low";
   title: string;
   message: string;
   amount?: number;
@@ -83,7 +83,7 @@ export interface GoalProgressSummary {
   addedThisWeek: number;
   percentComplete: number;
   projectedDate: Date | null;
-  pace: 'ahead' | 'on-track' | 'behind';
+  pace: "ahead" | "on-track" | "behind";
   monthlyNeeded: number;
 }
 
@@ -104,7 +104,7 @@ export interface UpcomingBill {
   name: string;
   amount: number;
   dueDate: Date;
-  type: 'subscription' | 'bill' | 'recurring';
+  type: "subscription" | "bill" | "recurring";
   canCancel: boolean;
   lastUsed?: Date;
   icon: string;
@@ -146,7 +146,7 @@ function isInDateRange(date: Date, start: Date, end: Date): boolean {
 function countUniqueDays(transactions: Transaction[]): number {
   const days = new Set<string>();
   transactions.forEach((tx) => {
-    const dateStr = new Date(tx.date).toISOString().split('T')[0];
+    const dateStr = new Date(tx.date).toISOString().split("T")[0];
     days.add(dateStr);
   });
   return days.size;
@@ -168,9 +168,7 @@ export function getWeeklySpendingSummary(
   const { start: prevStart, end: prevEnd } = getPreviousWeekRange(weekDate);
 
   // Filter transactions for current week
-  const weekTxs = transactions.filter((tx) =>
-    isInDateRange(new Date(tx.date), start, end)
-  );
+  const weekTxs = transactions.filter((tx) => isInDateRange(new Date(tx.date), start, end));
 
   // Filter transactions for previous week
   const prevWeekTxs = transactions.filter((tx) =>
@@ -186,22 +184,19 @@ export function getWeeklySpendingSummary(
 
   // Previous week totals
   const prevExpenses = prevWeekTxs.filter((tx) => tx.amount < 0);
-  const prevTotalSpent = Math.abs(
-    prevExpenses.reduce((sum, tx) => sum + tx.amount, 0)
-  );
+  const prevTotalSpent = Math.abs(prevExpenses.reduce((sum, tx) => sum + tx.amount, 0));
 
   // Calculate variance
   const vsAmount = prevTotalSpent - totalSpent; // Positive = saved money
-  const vsPercentage =
-    prevTotalSpent > 0 ? ((vsAmount / prevTotalSpent) * 100) : 0;
-  const direction: 'up' | 'down' | 'stable' =
-    vsPercentage > 5 ? 'down' : vsPercentage < -5 ? 'up' : 'stable';
+  const vsPercentage = prevTotalSpent > 0 ? (vsAmount / prevTotalSpent) * 100 : 0;
+  const direction: "up" | "down" | "stable" =
+    vsPercentage > 5 ? "down" : vsPercentage < -5 ? "up" : "stable";
 
   // Group by category
   const categoryTotals = new Map<string, { amount: number; count: number }>();
 
   expenses.forEach((tx) => {
-    const cat = tx.category || 'Uncategorized';
+    const cat = tx.category || "Uncategorized";
     const current = categoryTotals.get(cat) || { amount: 0, count: 0 };
     categoryTotals.set(cat, {
       amount: current.amount + Math.abs(tx.amount),
@@ -261,7 +256,7 @@ export function getBudgetVariance(
   // Calculate spending by category
   const categorySpending = new Map<string, number>();
   monthTxs.forEach((tx) => {
-    const catId = tx.category || '';
+    const catId = tx.category || "";
     const current = categorySpending.get(catId) || 0;
     categorySpending.set(catId, current + Math.abs(tx.amount));
   });
@@ -272,11 +267,7 @@ export function getBudgetVariance(
       // Only include active monthly budgets
       const budgetStart = new Date(budget.startDate);
       const budgetEnd = budget.endDate ? new Date(budget.endDate) : null;
-      return (
-        budget.period === 'monthly' &&
-        budgetStart <= now &&
-        (!budgetEnd || budgetEnd >= now)
-      );
+      return budget.period === "monthly" && budgetStart <= now && (!budgetEnd || budgetEnd >= now);
     })
     .map((budget) => {
       const category = categories.find((c) => c.id === budget.categoryId);
@@ -285,11 +276,11 @@ export function getBudgetVariance(
       const percentUsed = (spent / budget.amount) * 100;
 
       // Determine current status
-      let status: 'on-track' | 'warning' | 'over' = 'on-track';
+      let status: "on-track" | "warning" | "over" = "on-track";
       if (percentUsed >= 100) {
-        status = 'over';
+        status = "over";
       } else if (percentUsed >= 85) {
-        status = 'warning';
+        status = "warning";
       }
 
       // Project end of month spending
@@ -297,16 +288,16 @@ export function getBudgetVariance(
       const projectedTotal = spent + dailyRate * daysRemaining;
       const projectedPercent = (projectedTotal / budget.amount) * 100;
 
-      let projectedStatus: 'on-track' | 'warning' | 'over' = 'on-track';
+      let projectedStatus: "on-track" | "warning" | "over" = "on-track";
       if (projectedPercent >= 100) {
-        projectedStatus = 'over';
+        projectedStatus = "over";
       } else if (projectedPercent >= 90) {
-        projectedStatus = 'warning';
+        projectedStatus = "warning";
       }
 
       return {
         categoryId: budget.categoryId,
-        categoryName: category?.name || 'Unknown',
+        categoryName: category?.name || "Unknown",
         budgetAmount: budget.amount,
         spentAmount: spent,
         remainingAmount: remaining,
@@ -332,62 +323,59 @@ export function getTopInsights(
   const insights: WeeklyInsight[] = [];
 
   // 1. Spending change insights
-  if (spending.vsLastWeek.direction === 'down' && spending.vsLastWeek.percentage > 10) {
+  if (spending.vsLastWeek.direction === "down" && spending.vsLastWeek.percentage > 10) {
     insights.push({
-      id: 'spending-saved',
-      type: 'savings-win',
-      priority: 'high',
-      title: 'Great savings!',
+      id: "spending-saved",
+      type: "savings-win",
+      priority: "high",
+      title: "Great savings!",
       message: `You spent ${spending.vsLastWeek.percentage.toFixed(0)}% less than last week.`,
       amount: spending.vsLastWeek.amount,
       percentChange: spending.vsLastWeek.percentage,
-      icon: '💰',
+      icon: "💰",
     });
-  } else if (
-    spending.vsLastWeek.direction === 'up' &&
-    spending.vsLastWeek.percentage > 20
-  ) {
+  } else if (spending.vsLastWeek.direction === "up" && spending.vsLastWeek.percentage > 20) {
     insights.push({
-      id: 'spending-increased',
-      type: 'spending-change',
-      priority: 'medium',
-      title: 'Spending increased',
+      id: "spending-increased",
+      type: "spending-change",
+      priority: "medium",
+      title: "Spending increased",
       message: `You spent ${spending.vsLastWeek.percentage.toFixed(0)}% more than last week.`,
       amount: Math.abs(spending.vsLastWeek.amount),
       percentChange: spending.vsLastWeek.percentage,
-      icon: '📊',
+      icon: "📊",
     });
   }
 
   // 2. Budget warnings/overages
-  const overBudgets = budgets.filter((b) => b.status === 'over');
-  const warningBudgets = budgets.filter((b) => b.status === 'warning');
+  const overBudgets = budgets.filter((b) => b.status === "over");
+  const warningBudgets = budgets.filter((b) => b.status === "warning");
 
   overBudgets.slice(0, 2).forEach((budget) => {
     insights.push({
       id: `budget-over-${budget.categoryId}`,
-      type: 'budget-over',
-      priority: 'high',
+      type: "budget-over",
+      priority: "high",
       title: `${budget.categoryName} over budget`,
       message: `$${Math.abs(budget.remainingAmount).toFixed(0)} over your $${budget.budgetAmount} budget.`,
       amount: Math.abs(budget.remainingAmount),
       category: budget.categoryName,
-      actionLabel: 'Adjust Budget',
-      actionHref: '/budget-app/budgets',
-      icon: '⚠️',
+      actionLabel: "Adjust Budget",
+      actionHref: "/budget-app/budgets",
+      icon: "⚠️",
     });
   });
 
   warningBudgets.slice(0, 1).forEach((budget) => {
     insights.push({
       id: `budget-warning-${budget.categoryId}`,
-      type: 'budget-warning',
-      priority: 'medium',
+      type: "budget-warning",
+      priority: "medium",
       title: `${budget.categoryName} almost at limit`,
       message: `${budget.percentUsed.toFixed(0)}% used with ${budget.daysRemaining} days left.`,
       percentChange: budget.percentUsed,
       category: budget.categoryName,
-      icon: '⚡',
+      icon: "⚡",
     });
   });
 
@@ -396,34 +384,40 @@ export function getTopInsights(
     // Check for milestone hits (25%, 50%, 75%)
     const milestones = [25, 50, 75];
     milestones.forEach((milestone) => {
-      const prevPercent =
-        ((goal.currentAmount - goal.addedThisWeek) / goal.targetAmount) * 100;
+      const prevPercent = ((goal.currentAmount - goal.addedThisWeek) / goal.targetAmount) * 100;
       if (prevPercent < milestone && goal.percentComplete >= milestone) {
         insights.push({
           id: `goal-milestone-${goal.id}-${milestone}`,
-          type: 'goal-progress',
-          priority: 'high',
+          type: "goal-progress",
+          priority: "high",
           title: `${milestone}% milestone reached!`,
           message: `You're ${milestone}% of the way to your ${goal.name} goal.`,
           percentChange: goal.percentComplete,
-          icon: goal.icon || '🎯',
+          icon: goal.icon || "🎯",
         });
       }
     });
 
     // Significant weekly progress
-    if (goal.addedThisWeek > 0 && !milestones.some((m) => goal.percentComplete >= m && goal.percentComplete - (goal.addedThisWeek / goal.targetAmount * 100) < m)) {
+    if (
+      goal.addedThisWeek > 0 &&
+      !milestones.some(
+        (m) =>
+          goal.percentComplete >= m &&
+          goal.percentComplete - (goal.addedThisWeek / goal.targetAmount) * 100 < m
+      )
+    ) {
       const weeklyPercent = (goal.addedThisWeek / goal.targetAmount) * 100;
       if (weeklyPercent >= 5) {
         insights.push({
           id: `goal-progress-${goal.id}`,
-          type: 'goal-progress',
-          priority: 'medium',
+          type: "goal-progress",
+          priority: "medium",
           title: `${goal.name} progress`,
           message: `+$${goal.addedThisWeek.toFixed(0)} this week (${goal.percentComplete.toFixed(0)}% complete)`,
           amount: goal.addedThisWeek,
           percentChange: goal.percentComplete,
-          icon: goal.icon || '📈',
+          icon: goal.icon || "📈",
         });
       }
     }
@@ -436,29 +430,27 @@ export function getTopInsights(
 
   const upcomingSubs = subscriptions.filter((sub) => {
     const nextBilling = new Date(sub.nextBillingDate);
-    return sub.status === 'active' && nextBilling >= now && nextBilling <= nextWeek;
+    return sub.status === "active" && nextBilling >= now && nextBilling <= nextWeek;
   });
 
   if (upcomingSubs.length > 0) {
     const total = upcomingSubs.reduce((sum, sub) => sum + sub.amount, 0);
     insights.push({
-      id: 'subscriptions-due',
-      type: 'subscription-due',
-      priority: 'medium',
-      title: 'Subscriptions renewing',
-      message: `${upcomingSubs.length} subscription${upcomingSubs.length > 1 ? 's' : ''} ($${total.toFixed(0)}) renewing next week.`,
+      id: "subscriptions-due",
+      type: "subscription-due",
+      priority: "medium",
+      title: "Subscriptions renewing",
+      message: `${upcomingSubs.length} subscription${upcomingSubs.length > 1 ? "s" : ""} ($${total.toFixed(0)}) renewing next week.`,
       amount: total,
-      actionLabel: 'Review',
-      actionHref: '/budget-app/subscriptions',
-      icon: '🔄',
+      actionLabel: "Review",
+      actionHref: "/budget-app/subscriptions",
+      icon: "🔄",
     });
   }
 
   // Sort by priority and return top 3
   const priorityOrder = { high: 0, medium: 1, low: 2 };
-  return insights
-    .sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority])
-    .slice(0, 3);
+  return insights.sort((a, b) => priorityOrder[a.priority] - priorityOrder[b.priority]).slice(0, 3);
 }
 
 /**
@@ -481,14 +473,11 @@ export function getGoalProgress(
           isInDateRange(txDate, weekStart, weekEnd) &&
           (tx.tags?.includes(goal.name) ||
             tx.notes?.toLowerCase().includes(goal.name.toLowerCase()) ||
-            tx.category === 'Savings')
+            tx.category === "Savings")
         );
       });
 
-      const addedThisWeek = goalTxs.reduce(
-        (sum, tx) => sum + Math.abs(tx.amount),
-        0
-      );
+      const addedThisWeek = goalTxs.reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
 
       // Calculate progress
       const percentComplete = (goal.currentSavings / goal.targetAmount) * 100;
@@ -510,31 +499,30 @@ export function getGoalProgress(
       const monthsRemaining =
         (targetDate.getFullYear() - now.getFullYear()) * 12 +
         (targetDate.getMonth() - now.getMonth());
-      const neededMonthly =
-        monthsRemaining > 0 ? remaining / monthsRemaining : remaining;
+      const neededMonthly = monthsRemaining > 0 ? remaining / monthsRemaining : remaining;
 
-      let pace: 'ahead' | 'on-track' | 'behind' = 'on-track';
+      let pace: "ahead" | "on-track" | "behind" = "on-track";
       if (monthlyRate >= neededMonthly * 1.1) {
-        pace = 'ahead';
+        pace = "ahead";
       } else if (monthlyRate < neededMonthly * 0.9) {
-        pace = 'behind';
+        pace = "behind";
       }
 
       // Assign icon based on goal name/category
-      let icon = '🎯';
+      let icon = "🎯";
       const lowerName = goal.name.toLowerCase();
-      if (lowerName.includes('vacation') || lowerName.includes('travel')) {
-        icon = '🏖️';
-      } else if (lowerName.includes('car') || lowerName.includes('vehicle')) {
-        icon = '🚗';
-      } else if (lowerName.includes('house') || lowerName.includes('home')) {
-        icon = '🏠';
-      } else if (lowerName.includes('wedding')) {
-        icon = '💒';
-      } else if (lowerName.includes('emergency')) {
-        icon = '🛡️';
-      } else if (lowerName.includes('education') || lowerName.includes('college')) {
-        icon = '🎓';
+      if (lowerName.includes("vacation") || lowerName.includes("travel")) {
+        icon = "🏖️";
+      } else if (lowerName.includes("car") || lowerName.includes("vehicle")) {
+        icon = "🚗";
+      } else if (lowerName.includes("house") || lowerName.includes("home")) {
+        icon = "🏠";
+      } else if (lowerName.includes("wedding")) {
+        icon = "💒";
+      } else if (lowerName.includes("emergency")) {
+        icon = "🛡️";
+      } else if (lowerName.includes("education") || lowerName.includes("college")) {
+        icon = "🎓";
       }
 
       return {
@@ -570,7 +558,7 @@ export function getUpcomingBills(
   subscriptions
     .filter((sub) => {
       const nextBilling = new Date(sub.nextBillingDate);
-      return sub.status === 'active' && nextBilling >= now && nextBilling <= nextWeek;
+      return sub.status === "active" && nextBilling >= now && nextBilling <= nextWeek;
     })
     .forEach((sub) => {
       bills.push({
@@ -578,7 +566,7 @@ export function getUpcomingBills(
         name: sub.name,
         amount: sub.amount,
         dueDate: new Date(sub.nextBillingDate),
-        type: 'subscription',
+        type: "subscription",
         canCancel: sub.autoRenew,
         icon: getSubscriptionIcon(sub.name),
       });
@@ -598,9 +586,9 @@ export function getUpcomingBills(
         name: tx.description,
         amount: Math.abs(tx.amount),
         dueDate: new Date(tx.date),
-        type: 'recurring',
+        type: "recurring",
         canCancel: false,
-        icon: '📅',
+        icon: "📅",
       });
     });
 
@@ -610,32 +598,32 @@ export function getUpcomingBills(
 function getSubscriptionIcon(name: string): string {
   const lowerName = name.toLowerCase();
 
-  if (lowerName.includes('netflix') || lowerName.includes('hulu') || lowerName.includes('disney')) {
-    return '📺';
+  if (lowerName.includes("netflix") || lowerName.includes("hulu") || lowerName.includes("disney")) {
+    return "📺";
   }
-  if (lowerName.includes('spotify') || lowerName.includes('apple music')) {
-    return '🎵';
+  if (lowerName.includes("spotify") || lowerName.includes("apple music")) {
+    return "🎵";
   }
-  if (lowerName.includes('gym') || lowerName.includes('fitness')) {
-    return '💪';
+  if (lowerName.includes("gym") || lowerName.includes("fitness")) {
+    return "💪";
   }
-  if (lowerName.includes('insurance')) {
-    return '🛡️';
+  if (lowerName.includes("insurance")) {
+    return "🛡️";
   }
-  if (lowerName.includes('phone') || lowerName.includes('mobile')) {
-    return '📱';
+  if (lowerName.includes("phone") || lowerName.includes("mobile")) {
+    return "📱";
   }
-  if (lowerName.includes('internet') || lowerName.includes('wifi')) {
-    return '🌐';
+  if (lowerName.includes("internet") || lowerName.includes("wifi")) {
+    return "🌐";
   }
-  if (lowerName.includes('electric') || lowerName.includes('utility')) {
-    return '⚡';
+  if (lowerName.includes("electric") || lowerName.includes("utility")) {
+    return "⚡";
   }
-  if (lowerName.includes('amazon')) {
-    return '📦';
+  if (lowerName.includes("amazon")) {
+    return "📦";
   }
 
-  return '🔄';
+  return "🔄";
 }
 
 /**
@@ -688,7 +676,10 @@ export function getWeeklyReviewData(
   const spending = getWeeklySpendingSummary(transactions, categories);
   const budgetVariance = getBudgetVariance(transactions, budgets, categories);
   const goalProgress = getGoalProgress(goals, transactions);
-  const upcomingBills = getUpcomingBills(subscriptions, transactions.filter(tx => tx.isRecurring));
+  const upcomingBills = getUpcomingBills(
+    subscriptions,
+    transactions.filter((tx) => tx.isRecurring)
+  );
   const insights = getTopInsights(spending, budgetVariance, goalProgress, subscriptions);
   const streak = calculateWeeklyStreak(completedReviews);
 

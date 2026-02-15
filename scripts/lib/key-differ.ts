@@ -7,11 +7,11 @@
  * - Removed keys (cleanup needed)
  */
 
-import { execFile } from 'child_process';
-import { promisify } from 'util';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as crypto from 'crypto';
+import { execFile } from "child_process";
+import { promisify } from "util";
+import * as fs from "fs";
+import * as path from "path";
+import * as crypto from "crypto";
 
 const execFileAsync = promisify(execFile);
 
@@ -26,23 +26,20 @@ export interface KeyChanges {
  * Get hash of a value for change detection
  */
 function hashValue(value: any): string {
-  return crypto
-    .createHash('md5')
-    .update(JSON.stringify(value))
-    .digest('hex');
+  return crypto.createHash("md5").update(JSON.stringify(value)).digest("hex");
 }
 
 /**
  * Flatten nested object into dot-notation keys
  * Example: { nav: { dashboard: "Dashboard" } } => { "nav.dashboard": "Dashboard" }
  */
-function flattenKeys(obj: any, prefix: string = ''): Record<string, any> {
+function flattenKeys(obj: any, prefix: string = ""): Record<string, any> {
   const result: Record<string, any> = {};
 
   for (const [key, value] of Object.entries(obj)) {
     const fullKey = prefix ? `${prefix}.${key}` : key;
 
-    if (value && typeof value === 'object' && !Array.isArray(value)) {
+    if (value && typeof value === "object" && !Array.isArray(value)) {
       // Recurse for nested objects
       Object.assign(result, flattenKeys(value, fullKey));
     } else {
@@ -57,9 +54,12 @@ function flattenKeys(obj: any, prefix: string = ''): Record<string, any> {
 /**
  * Get previous version of a file from git (safe - uses execFile)
  */
-async function getPreviousFileContent(filePath: string, commit: string = 'HEAD'): Promise<string | null> {
+async function getPreviousFileContent(
+  filePath: string,
+  commit: string = "HEAD"
+): Promise<string | null> {
   try {
-    const { stdout } = await execFileAsync('git', ['show', `${commit}:${filePath}`]);
+    const { stdout } = await execFileAsync("git", ["show", `${commit}:${filePath}`]);
     return stdout;
   } catch (error) {
     // File doesn't exist in previous commit (new file)
@@ -72,10 +72,10 @@ async function getPreviousFileContent(filePath: string, commit: string = 'HEAD')
  */
 export async function detectChangedKeys(
   currentFilePath: string,
-  previousCommit: string = 'HEAD'
+  previousCommit: string = "HEAD"
 ): Promise<KeyChanges> {
   // Read current file
-  const currentContent = fs.readFileSync(currentFilePath, 'utf-8');
+  const currentContent = fs.readFileSync(currentFilePath, "utf-8");
   const currentObj = JSON.parse(currentContent);
   const currentKeys = flattenKeys(currentObj);
 
@@ -128,12 +128,12 @@ export async function detectChangedKeys(
 export async function detectStagedChanges(filePath: string): Promise<KeyChanges> {
   try {
     // Get staged version (safe - uses execFile)
-    const { stdout: stagedContent } = await execFileAsync('git', ['show', `:${filePath}`]);
+    const { stdout: stagedContent } = await execFileAsync("git", ["show", `:${filePath}`]);
     const stagedObj = JSON.parse(stagedContent);
     const stagedKeys = flattenKeys(stagedObj);
 
     // Get HEAD version
-    const headContent = await getPreviousFileContent(filePath, 'HEAD');
+    const headContent = await getPreviousFileContent(filePath, "HEAD");
 
     if (!headContent) {
       // New file in staging
@@ -173,18 +173,15 @@ export async function detectStagedChanges(filePath: string): Promise<KeyChanges>
     return { added, modified, removed, unchanged };
   } catch (error) {
     // Fall back to comparing working directory with HEAD
-    return detectChangedKeys(filePath, 'HEAD');
+    return detectChangedKeys(filePath, "HEAD");
   }
 }
 
 /**
  * Get values for specific keys from a flattened object
  */
-export function extractKeyValues(
-  filePath: string,
-  keys: string[]
-): Record<string, any> {
-  const content = fs.readFileSync(filePath, 'utf-8');
+export function extractKeyValues(filePath: string, keys: string[]): Record<string, any> {
+  const content = fs.readFileSync(filePath, "utf-8");
   const obj = JSON.parse(content);
   const flatKeys = flattenKeys(obj);
 
@@ -206,7 +203,7 @@ export function unflattenKeys(flatObj: Record<string, any>): any {
   const result: any = {};
 
   for (const [fullKey, value] of Object.entries(flatObj)) {
-    const keys = fullKey.split('.');
+    const keys = fullKey.split(".");
     let current = result;
 
     for (let i = 0; i < keys.length - 1; i++) {

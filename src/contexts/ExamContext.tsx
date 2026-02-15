@@ -277,8 +277,8 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
                   addIncorrectAnswer({
                     questionId,
                     questionText: question.question,
-                    userAnswer: question.choices[parseInt(answerId)]?.text || '',
-                    correctAnswer: question.choices[parseInt(question.correctAnswerId)]?.text || '',
+                    userAnswer: question.choices[parseInt(answerId)]?.text || "",
+                    correctAnswer: question.choices[parseInt(question.correctAnswerId)]?.text || "",
                     domain: question.domain,
                     sessionId: currentDbSessionId,
                   });
@@ -303,8 +303,8 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
               addIncorrectAnswer({
                 questionId,
                 questionText: question.question,
-                userAnswer: question.choices[parseInt(answerId)]?.text || '',
-                correctAnswer: question.choices[parseInt(question.correctAnswerId)]?.text || '',
+                userAnswer: question.choices[parseInt(answerId)]?.text || "",
+                correctAnswer: question.choices[parseInt(question.correctAnswerId)]?.text || "",
                 domain: question.domain,
                 sessionId: state.currentSession.id,
               });
@@ -429,10 +429,10 @@ export function ExamProvider({ children }: { children: React.ReactNode }) {
             // Fallback to static weighted questions
             console.warn("Database weighted questions unavailable, using static fallback", e);
             // Check if it's a 404 error (RPC function not created)
-            if (e instanceof Error && e.message.includes('404')) {
+            if (e instanceof Error && e.message.includes("404")) {
               console.error(
-                'RPC function get_weighted_random_questions not found. ' +
-                'Run: npm run db:apply-sql:api -- --file supabase/sql/get_weighted_random_questions.sql'
+                "RPC function get_weighted_random_questions not found. " +
+                  "Run: npm run db:apply-sql:api -- --file supabase/sql/get_weighted_random_questions.sql"
               );
             }
             const { getWeightedRandomQuestions } = await import("@/lib/questionLoader");

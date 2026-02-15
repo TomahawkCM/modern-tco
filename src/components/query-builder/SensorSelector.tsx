@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useMemo, useCallback, memo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import React, { useState, useMemo, useCallback, memo } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Dialog,
   DialogContent,
@@ -14,14 +14,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 import {
   Plus,
   Search,
@@ -34,15 +34,15 @@ import {
   ChevronRight,
   Info,
   Zap,
-  AlertCircle
-} from 'lucide-react';
+  AlertCircle,
+} from "lucide-react";
 
 import {
   type SensorSelectorProps,
   type SensorSelection,
   type SensorCatalogEntry,
-  ParameterDefinition
-} from './types/queryBuilder';
+  ParameterDefinition,
+} from "./types/queryBuilder";
 
 function SensorSelectorComponent({
   selectedSensors,
@@ -51,16 +51,16 @@ function SensorSelectorComponent({
   onUpdate,
   catalog,
   maxSensors = 10,
-  className = ""
+  className = "",
 }: SensorSelectorProps) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [showBrowser, setShowBrowser] = useState(false);
   const [editingSensor, setEditingSensor] = useState<number | null>(null);
 
   // Get unique categories
   const categories = useMemo(() => {
-    const cats = ['all', ...new Set(catalog.map(item => item.category))];
+    const cats = ["all", ...new Set(catalog.map((item) => item.category))];
     return cats;
   }, [catalog]);
 
@@ -68,15 +68,15 @@ function SensorSelectorComponent({
   const filteredCatalog = useMemo(() => {
     let filtered = catalog;
 
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(item => item.category === selectedCategory);
+    if (selectedCategory !== "all") {
+      filtered = filtered.filter((item) => item.category === selectedCategory);
     }
 
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(
-        item =>
-          ('name' in item.sensor && item.sensor.name?.toLowerCase().includes(query)) ||
+        (item) =>
+          ("name" in item.sensor && item.sensor.name?.toLowerCase().includes(query)) ||
           item.description?.toLowerCase().includes(query) ||
           item.category.toLowerCase().includes(query)
       );
@@ -99,46 +99,48 @@ function SensorSelectorComponent({
   // Get popular sensors
   const popularSensors = useMemo(() => {
     return catalog
-      .filter(item => item.popularity > 0.7)
+      .filter((item) => item.popularity > 0.7)
       .sort((a, b) => b.popularity - a.popularity)
       .slice(0, 6);
   }, [catalog]);
 
   // Handle adding a sensor
-  const handleAddSensor = useCallback((entry: SensorCatalogEntry) => {
-    if (selectedSensors.length >= maxSensors) {
-      alert(`Maximum ${maxSensors} sensors allowed`);
-      return;
-    }
+  const handleAddSensor = useCallback(
+    (entry: SensorCatalogEntry) => {
+      if (selectedSensors.length >= maxSensors) {
+        alert(`Maximum ${maxSensors} sensors allowed`);
+        return;
+      }
 
-    const newSensor: SensorSelection = {
-      sensor: entry.sensor,
-      parameters: entry.parameters?.reduce((acc, param) => {
-        if (param.default !== undefined) {
-          acc[param.name] = param.default;
-        }
-        return acc;
-      }, {} as Record<string, any>),
-      isValid: true
-    };
+      const newSensor: SensorSelection = {
+        sensor: entry.sensor,
+        parameters: entry.parameters?.reduce(
+          (acc, param) => {
+            if (param.default !== undefined) {
+              acc[param.name] = param.default;
+            }
+            return acc;
+          },
+          {} as Record<string, any>
+        ),
+        isValid: true,
+      };
 
-    onAdd(newSensor);
-    setShowBrowser(false);
-  }, [selectedSensors.length, maxSensors, onAdd]);
+      onAdd(newSensor);
+      setShowBrowser(false);
+    },
+    [selectedSensors.length, maxSensors, onAdd]
+  );
 
   // Handle parameter change
-  const handleParameterChange = (
-    sensorIndex: number,
-    paramName: string,
-    value: any
-  ) => {
+  const handleParameterChange = (sensorIndex: number, paramName: string, value: any) => {
     const sensor = selectedSensors[sensorIndex];
     const updatedSensor = {
       ...sensor,
       parameters: {
         ...sensor.parameters,
-        [paramName]: value
-      }
+        [paramName]: value,
+      },
     };
     onUpdate(sensorIndex, updatedSensor);
   };
@@ -146,14 +148,14 @@ function SensorSelectorComponent({
   // Get runtime badge color
   const getRuntimeBadge = (runtime: string, runtimeMs?: number) => {
     const colors: Record<string, string> = {
-      fast: 'border-green-500 text-[#22c55e]',
-      medium: 'border-yellow-500 text-[#f97316]',
-      slow: 'border-red-500 text-red-400'
+      fast: "border-green-500 text-[#22c55e]",
+      medium: "border-yellow-500 text-[#f97316]",
+      slow: "border-red-500 text-red-400",
     };
 
     return (
       <Badge variant="outline" className={`text-xs ${colors[runtime] || colors.slow}`}>
-        <Clock className="h-3 w-3 mr-1" />
+        <Clock className="mr-1 h-3 w-3" />
         {runtimeMs ? `${runtimeMs}ms` : runtime}
       </Badge>
     );
@@ -181,7 +183,7 @@ function SensorSelectorComponent({
                 Add Sensor
               </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-3xl bg-gray-900 border-gray-700">
+            <DialogContent className="max-w-3xl border-gray-700 bg-gray-900">
               <DialogHeader>
                 <DialogTitle className="text-foreground">Browse Sensors</DialogTitle>
                 <DialogDescription className="text-muted-foreground">
@@ -193,45 +195,50 @@ function SensorSelectorComponent({
               <div className="space-y-4">
                 {/* Search bar */}
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
                   <Input
                     type="text"
                     placeholder="Search sensors..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 bg-card border-gray-600 text-foreground"
+                    className="border-gray-600 bg-card pl-10 text-foreground"
                   />
                 </div>
 
                 {/* Category tabs */}
                 <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
                   <TabsList className="bg-card">
-                    {categories.map(category => (
+                    {categories.map((category) => (
                       <TabsTrigger key={category} value={category}>
-                        {category === 'all' ? 'All' : category}
+                        {category === "all" ? "All" : category}
                       </TabsTrigger>
                     ))}
                   </TabsList>
 
                   <TabsContent value={selectedCategory} className="mt-4">
                     {/* Popular sensors */}
-                    {selectedCategory === 'all' && searchQuery === '' && (
+                    {selectedCategory === "all" && searchQuery === "" && (
                       <div className="mb-4">
-                        <h4 className="text-sm font-medium text-muted-foreground mb-2 flex items-center">
+                        <h4 className="mb-2 flex items-center text-sm font-medium text-muted-foreground">
                           <Star className="mr-1 h-4 w-4" />
                           Popular Sensors
                         </h4>
                         <div className="grid grid-cols-2 gap-2">
                           {popularSensors.map((entry) => (
                             <Button
-                              key={entry.sensor.key || ('name' in entry.sensor ? entry.sensor.name : '')}
+                              key={
+                                entry.sensor.key ||
+                                ("name" in entry.sensor ? entry.sensor.name : "")
+                              }
                               variant="outline"
                               size="sm"
                               onClick={() => handleAddSensor(entry)}
                               className="justify-start text-left"
                             >
-                              <div className="flex items-center justify-between w-full">
-                                <span className="text-foreground">{'name' in entry.sensor ? entry.sensor.name : ''}</span>
+                              <div className="flex w-full items-center justify-between">
+                                <span className="text-foreground">
+                                  {"name" in entry.sensor ? entry.sensor.name : ""}
+                                </span>
                                 {getRuntimeBadge(entry.runtime, entry.runtimeMs)}
                               </div>
                             </Button>
@@ -245,24 +252,26 @@ function SensorSelectorComponent({
                       <div className="space-y-2">
                         {filteredCatalog.map((entry) => (
                           <div
-                            key={entry.sensor.key || ('name' in entry.sensor ? entry.sensor.name : '')}
-                            className="p-3 border border-gray-700 rounded hover:border-gray-600 cursor-pointer"
+                            key={
+                              entry.sensor.key || ("name" in entry.sensor ? entry.sensor.name : "")
+                            }
+                            className="cursor-pointer rounded border border-gray-700 p-3 hover:border-gray-600"
                             onClick={() => handleAddSensor(entry)}
                           >
                             <div className="flex items-start justify-between">
                               <div className="flex-1">
                                 <div className="flex items-center space-x-2">
                                   <span className="font-medium text-foreground">
-                                    {'name' in entry.sensor ? entry.sensor.name : ''}
+                                    {"name" in entry.sensor ? entry.sensor.name : ""}
                                   </span>
                                   {entry.parameters && entry.parameters.length > 0 && (
                                     <Badge variant="outline" className="text-xs">
-                                      <Settings className="h-3 w-3 mr-1" />
+                                      <Settings className="mr-1 h-3 w-3" />
                                       Parameterized
                                     </Badge>
                                   )}
                                 </div>
-                                <p className="text-sm text-muted-foreground mt-1">
+                                <p className="mt-1 text-sm text-muted-foreground">
                                   {entry.description}
                                 </p>
                                 {entry.examples && entry.examples.length > 0 && (
@@ -271,7 +280,7 @@ function SensorSelectorComponent({
                                   </div>
                                 )}
                               </div>
-                              <div className="flex items-center space-x-2 ml-4">
+                              <div className="ml-4 flex items-center space-x-2">
                                 {getRuntimeBadge(entry.runtime, entry.runtimeMs)}
                                 <ChevronRight className="h-4 w-4 text-muted-foreground" />
                               </div>
@@ -290,32 +299,32 @@ function SensorSelectorComponent({
 
       <CardContent>
         {selectedSensors.length === 0 ? (
-          <div className="text-center py-8 text-muted-foreground">
-            <Database className="h-12 w-12 mx-auto mb-3 opacity-50" />
+          <div className="py-8 text-center text-muted-foreground">
+            <Database className="mx-auto mb-3 h-12 w-12 opacity-50" />
             <p>No sensors selected</p>
-            <p className="text-sm mt-1">Click "Add Sensor" to get started</p>
+            <p className="mt-1 text-sm">Click "Add Sensor" to get started</p>
           </div>
         ) : (
           <div className="space-y-2">
             {selectedSensors.map((sensor, index) => (
               <div
                 key={index}
-                className="flex items-start space-x-3 p-3 bg-card rounded border border-gray-700"
+                className="flex items-start space-x-3 rounded border border-gray-700 bg-card p-3"
               >
                 <div className="flex-1">
                   <div className="flex items-center space-x-2">
                     <span className="font-medium text-foreground">
-                      {'name' in sensor.sensor ? sensor.sensor.name : ''}
+                      {"name" in sensor.sensor ? sensor.sensor.name : ""}
                     </span>
                     {sensor.filter && (
                       <Badge variant="outline" className="text-xs">
-                        <Filter className="h-3 w-3 mr-1" />
+                        <Filter className="mr-1 h-3 w-3" />
                         Filtered
                       </Badge>
                     )}
                     {!sensor.isValid && (
                       <Badge variant="destructive" className="text-xs">
-                        <AlertCircle className="h-3 w-3 mr-1" />
+                        <AlertCircle className="mr-1 h-3 w-3" />
                         Invalid
                       </Badge>
                     )}
@@ -326,14 +335,12 @@ function SensorSelectorComponent({
                     <div className="mt-2 space-y-2">
                       {Object.entries(sensor.parameters).map(([key, value]) => (
                         <div key={key} className="flex items-center space-x-2">
-                          <label className="text-sm text-muted-foreground w-24">
-                            {key}:
-                          </label>
+                          <label className="w-24 text-sm text-muted-foreground">{key}:</label>
                           <Input
                             type="text"
                             value={value}
                             onChange={(e) => handleParameterChange(index, key, e.target.value)}
-                            className="flex-1 h-8 bg-gray-700 border-gray-600 text-foreground"
+                            className="h-8 flex-1 border-gray-600 bg-gray-700 text-foreground"
                           />
                         </div>
                       ))}

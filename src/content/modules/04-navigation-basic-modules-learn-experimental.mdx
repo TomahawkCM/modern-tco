@@ -41,7 +41,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/04-l/console-tour"
-  onClick={() => emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-01", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-01", action: "practice_start" })
+  }
 >
   Practice: Run a Five-Minute Console Tour
 </PracticeButton>
@@ -72,7 +74,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/04-l/module-map"
-  onClick={() => emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-02", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-02", action: "practice_start" })
+  }
 >
   Practice: Map Module Relationships
 </PracticeButton>
@@ -103,7 +107,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/04-l/saved-question-refresh"
-  onClick={() => emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-03", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-03", action: "practice_start" })
+  }
 >
   Practice: Refresh Saved Questions
 </PracticeButton>
@@ -134,7 +140,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/04-l/module-hygiene"
-  onClick={() => emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-04", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-04", action: "practice_start" })
+  }
 >
   Practice: Run a Module Hygiene Sweep
 </PracticeButton>
@@ -165,7 +173,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/04-l/enablement-storyboard"
-  onClick={() => emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-05", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-04L", unitId: "unit-04L-05", action: "practice_start" })
+  }
 >
   Practice: Create an Enablement Storyboard
 </PracticeButton>
@@ -180,4 +190,3 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
   quizIdPrefix="module-04L-summary"
   questions={getReadOnlyQuestions({ domain: "navigation-basic-modules", limit: 6 })}
 />
-

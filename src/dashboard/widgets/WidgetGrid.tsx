@@ -58,5 +58,9 @@ export function WidgetGrid({ widgets, gridConfig }: WidgetGridProps) {
     }
   };
 
-  return <div id="dashboard-widgets" className={gridClass}>{sortedWidgets.map((widget) => renderWidget(widget))}</div>;
+  return (
+    <div id="dashboard-widgets" className={gridClass}>
+      {sortedWidgets.map((widget) => renderWidget(widget))}
+    </div>
+  );
 }

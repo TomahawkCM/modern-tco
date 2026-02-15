@@ -13,10 +13,10 @@ objectives:
 ---
 
 export const meta = {
-  id: 'example-module-microlearning',
-  title: 'Microlearning Example Module',
+  id: "example-module-microlearning",
+  title: "Microlearning Example Module",
   objectives: 3,
-  domainSlug: 'example-microlearning'
+  domainSlug: "example-microlearning",
 };
 
 # Microlearning Example: Asking Questions Module
@@ -81,7 +81,9 @@ This example demonstrates how to structure a 45-minute module into 5 micro-secti
         concept="Real-Time Architecture"
       />
     </>
-  }
+
+}
+
 >
 
 ## Natural Language Query Construction
@@ -95,6 +97,7 @@ Tanium's revolutionary approach uses **natural language processing** to convert 
 ### Basic Query Examples
 
 **Simple Queries** (no filters):
+
 ```
 Get Computer Name from all machines
 Get Operating System from all machines
@@ -102,6 +105,7 @@ Get IP Address from all machines
 ```
 
 **Filtered Queries** (with conditions):
+
 ```
 Get Running Services from all machines where IP Address contains "192.168"
 Get Installed Applications from all machines where Computer Name contains "SERVER"
@@ -131,6 +135,7 @@ Get Disk Space from all machines where Free Space is less than 10GB
 ### Why This Matters
 
 Traditional IT tools require SQL knowledge or complex scripting. Tanium's natural language approach:
+
 - **Reduces learning curve** by 70%
 - **Enables non-technical users** to query systems
 - **Decreases query construction time** from minutes to seconds
@@ -183,7 +188,9 @@ Traditional IT tools require SQL knowledge or complex scripting. Tanium's natura
         concept="Custom Sensors"
       />
     </>
-  }
+
+}
+
 >
 
 ## The 500+ Sensor Library
@@ -193,7 +200,9 @@ Tanium provides an extensive library of **built-in sensors** organized into four
 ### Sensor Categories
 
 #### 1. System Sensors
+
 Core system information available on all endpoints:
+
 - **Computer Name**: Hostname of the endpoint
 - **Operating System**: OS version and build
 - **IP Address**: Network addressing information
@@ -202,7 +211,9 @@ Core system information available on all endpoints:
 - **Domain**: Active Directory domain membership
 
 #### 2. Security Sensors
+
 Security-focused data collection:
+
 - **Running Processes**: Active executables and services
 - **Open Ports**: Network listening services
 - **User Rights**: Account permissions and privileges
@@ -211,7 +222,9 @@ Security-focused data collection:
 - **Installed Patches**: Update compliance status
 
 #### 3. Application Sensors
+
 Software inventory and status:
+
 - **Installed Applications**: Complete software inventory
 - **Running Applications**: Active user applications
 - **Browser Extensions**: Chrome, Firefox, Edge extensions
@@ -220,7 +233,9 @@ Software inventory and status:
 - **Registry Keys**: Windows registry values
 
 #### 4. Hardware Sensors
+
 Physical and resource information:
+
 - **CPU Usage**: Processor utilization percentage
 - **Memory Usage**: RAM consumption
 - **Disk Space**: Storage capacity and free space
@@ -231,12 +246,14 @@ Physical and resource information:
 ### Using the Sensor Library
 
 **Access in Console**:
+
 1. Click "Ask Question" in Tanium Console
 2. Browse "Sensor Library" in left panel
 3. Search for sensors by name or category
 4. View sensor documentation and examples
 
 **Sensor Documentation Includes**:
+
 - Description and purpose
 - Return data format
 - Platform compatibility (Windows/Linux/Mac)
@@ -286,24 +303,26 @@ Filters transform broad queries into precise investigations by reducing result s
 
 ### Common Filter Operators
 
-| Operator | Use Case | Example |
-|----------|----------|---------|
-| **contains** | Partial match anywhere in string | `where Computer Name contains "SERVER"` |
-| **equals** | Exact match | `where Operating System equals "Windows 10"` |
-| **starts with** | Match beginning of string | `where Computer Name starts with "PROD-"` |
-| **ends with** | Match end of string | `where Computer Name ends with "-DB"` |
-| **is greater than** | Numeric comparison | `where CPU Usage is greater than 80` |
-| **is less than** | Numeric comparison | `where Disk Free Space is less than 10GB` |
+| Operator            | Use Case                         | Example                                      |
+| ------------------- | -------------------------------- | -------------------------------------------- |
+| **contains**        | Partial match anywhere in string | `where Computer Name contains "SERVER"`      |
+| **equals**          | Exact match                      | `where Operating System equals "Windows 10"` |
+| **starts with**     | Match beginning of string        | `where Computer Name starts with "PROD-"`    |
+| **ends with**       | Match end of string              | `where Computer Name ends with "-DB"`        |
+| **is greater than** | Numeric comparison               | `where CPU Usage is greater than 80`         |
+| **is less than**    | Numeric comparison               | `where Disk Free Space is less than 10GB`    |
 
 ### Filtering Best Practices
 
 **DO**:
+
 - Use `starts with` for predictable naming patterns
 - Use `contains` for flexible matching
 - Use numeric operators for performance/capacity monitoring
 - Combine filters to narrow results precisely
 
 **DON'T**:
+
 - Over-filter and miss important results
 - Use `contains` when `equals` would be more accurate
 - Forget about case sensitivity (most operators are case-insensitive)
@@ -330,4 +349,3 @@ where CPU Usage is greater than 85
 ---
 
 {/* Continue with sections 4 and 5... */}
-

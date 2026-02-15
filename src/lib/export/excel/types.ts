@@ -3,31 +3,31 @@
  * TypeScript interfaces for world-class Excel export functionality
  */
 
-import type { Worksheet, Style, Fill, Border, Font, Alignment } from 'exceljs';
+import type { Worksheet, Style, Fill, Border, Font, Alignment } from "exceljs";
 
 /**
  * Sheet names for the workbook
  */
 export type SheetName =
-  | 'Dashboard'
-  | 'Transactions'
-  | 'Monthly Summary'
-  | 'Category Analysis'
-  | 'Accounts'
-  | 'Budgets'
-  | 'Subscriptions'
-  | 'Loans'
-  | 'Investments'
-  | 'Net Worth'
-  | 'Goals'
-  | 'Data Dictionary';
+  | "Dashboard"
+  | "Transactions"
+  | "Monthly Summary"
+  | "Category Analysis"
+  | "Accounts"
+  | "Budgets"
+  | "Subscriptions"
+  | "Loans"
+  | "Investments"
+  | "Net Worth"
+  | "Goals"
+  | "Data Dictionary";
 
 /**
  * Excel export options
  */
 export interface ExcelExportOptions {
   // Date filtering
-  dateRange: 'all' | 'ytd' | 'last12months' | 'last6months' | 'last3months' | 'custom';
+  dateRange: "all" | "ytd" | "last12months" | "last6months" | "last3months" | "custom";
   startDate?: Date;
   endDate?: Date;
 
@@ -57,7 +57,7 @@ export interface ExcelExportOptions {
  * Default export options
  */
 export const DEFAULT_EXCEL_OPTIONS: ExcelExportOptions = {
-  dateRange: 'last12months',
+  dateRange: "last12months",
   includeTransactions: true,
   includeAccounts: true,
   includeBudgets: true,
@@ -80,33 +80,33 @@ export const DEFAULT_EXCEL_OPTIONS: ExcelExportOptions = {
  */
 export const EXCEL_COLORS = {
   // Brand colors
-  primary: '14B8A6', // Teal-500 (brand color)
-  primaryLight: 'CCFBF1', // Teal-100
-  primaryDark: '0D9488', // Teal-600
+  primary: "14B8A6", // Teal-500 (brand color)
+  primaryLight: "CCFBF1", // Teal-100
+  primaryDark: "0D9488", // Teal-600
 
   // Semantic colors
-  income: '10B981', // Emerald-500 (green for income)
-  incomeLight: 'D1FAE5', // Emerald-100
-  expense: 'EF4444', // Red-500
-  expenseLight: 'FEE2E2', // Red-100
-  warning: 'F59E0B', // Amber-500
-  warningLight: 'FEF3C7', // Amber-100
+  income: "10B981", // Emerald-500 (green for income)
+  incomeLight: "D1FAE5", // Emerald-100
+  expense: "EF4444", // Red-500
+  expenseLight: "FEE2E2", // Red-100
+  warning: "F59E0B", // Amber-500
+  warningLight: "FEF3C7", // Amber-100
 
   // Status colors
-  onTrack: '10B981', // Green
-  overBudget: 'EF4444', // Red
-  underBudget: '3B82F6', // Blue
+  onTrack: "10B981", // Green
+  overBudget: "EF4444", // Red
+  underBudget: "3B82F6", // Blue
 
   // Neutral colors
-  headerBg: '14B8A6', // Teal header
-  headerText: 'FFFFFF', // White text
-  subheaderBg: 'F3F4F6', // Gray-100
-  subheaderText: '374151', // Gray-700
-  rowEven: 'F9FAFB', // Gray-50
-  rowOdd: 'FFFFFF', // White
-  border: 'E5E7EB', // Gray-200
-  text: '111827', // Gray-900
-  textMuted: '6B7280', // Gray-500
+  headerBg: "14B8A6", // Teal header
+  headerText: "FFFFFF", // White text
+  subheaderBg: "F3F4F6", // Gray-100
+  subheaderText: "374151", // Gray-700
+  rowEven: "F9FAFB", // Gray-50
+  rowOdd: "FFFFFF", // White
+  border: "E5E7EB", // Gray-200
+  text: "111827", // Gray-900
+  textMuted: "6B7280", // Gray-500
 } as const;
 
 /**
@@ -116,15 +116,15 @@ export const NUMBER_FORMATS = {
   currency: '"$"#,##0.00',
   currencyAccounting: '"$"#,##0.00_);[Red]("$"#,##0.00)',
   currencyPositiveGreen: '[Green]"$"#,##0.00;[Red]-"$"#,##0.00',
-  percent: '0.0%',
-  percentWhole: '0%',
-  number: '#,##0',
-  numberDecimal: '#,##0.00',
-  date: 'YYYY-MM-DD',
-  dateShort: 'MMM D',
-  dateLong: 'MMMM D, YYYY',
-  month: 'YYYY-MM',
-  monthName: 'MMMM YYYY',
+  percent: "0.0%",
+  percentWhole: "0%",
+  number: "#,##0",
+  numberDecimal: "#,##0.00",
+  date: "YYYY-MM-DD",
+  dateShort: "MMM D",
+  dateLong: "MMMM D, YYYY",
+  month: "YYYY-MM",
+  monthName: "MMMM YYYY",
 } as const;
 
 /**
@@ -142,7 +142,7 @@ export interface CellStylePreset {
  * Chart configuration
  */
 export interface ChartConfig {
-  type: 'pie' | 'bar' | 'line' | 'column' | 'doughnut';
+  type: "pie" | "bar" | "line" | "column" | "doughnut";
   title: string;
   position: {
     topLeftCell: string;
@@ -162,7 +162,7 @@ export interface DashboardMetric {
   label: string;
   value: number | string;
   format?: string;
-  trend?: 'up' | 'down' | 'stable';
+  trend?: "up" | "down" | "stable";
   trendValue?: number | string;
   color?: string;
 }
@@ -311,7 +311,7 @@ export interface DataDictionaryEntry {
  * Export progress callback
  */
 export interface ExportProgress {
-  stage: 'preparing' | 'transactions' | 'summaries' | 'charts' | 'finalizing';
+  stage: "preparing" | "transactions" | "summaries" | "charts" | "finalizing";
   currentSheet?: string;
   sheetsCompleted: number;
   totalSheets: number;

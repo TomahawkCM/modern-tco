@@ -11,12 +11,7 @@
 // ---------------------------------------------------------------------------
 
 /** Supported paycheck frequency schedules */
-export type PaycheckSchedule =
-  | 'weekly'
-  | 'biweekly'
-  | 'semimonthly'
-  | 'monthly'
-  | 'irregular';
+export type PaycheckSchedule = "weekly" | "biweekly" | "semimonthly" | "monthly" | "irregular";
 
 /** A single allocation of funds from a paycheck to a budget category */
 export interface PaycheckAllocation {
@@ -54,8 +49,8 @@ export interface PaycheckPlan {
  */
 function toISODateString(date: Date): string {
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
 
@@ -79,7 +74,7 @@ function addMonths(date: Date, months: number): Date {
 
   // If the day overflowed (e.g. Jan 31 + 1 month -> Mar 3), clamp to
   // the last day of the intended target month.
-  const expectedMonth = ((date.getMonth() + months) % 12 + 12) % 12;
+  const expectedMonth = (((date.getMonth() + months) % 12) + 12) % 12;
   if (result.getMonth() !== expectedMonth) {
     result.setDate(0); // sets to last day of the previous month
   }
@@ -114,19 +109,19 @@ export function generatePaycheckDates(
   if (count <= 0) return [];
 
   switch (schedule) {
-    case 'weekly':
+    case "weekly":
       return generateFixedInterval(startDate, 7, count);
 
-    case 'biweekly':
+    case "biweekly":
       return generateFixedInterval(startDate, 14, count);
 
-    case 'semimonthly':
+    case "semimonthly":
       return generateSemimonthly(startDate, count);
 
-    case 'monthly':
+    case "monthly":
       return generateMonthly(startDate, count);
 
-    case 'irregular':
+    case "irregular":
       return [];
   }
 }
@@ -142,15 +137,12 @@ export function generatePaycheckDates(
  * @param date Reference date; defaults to the current date
  * @returns The matching Paycheck, or null
  */
-export function getActivePaycheck(
-  plan: PaycheckPlan,
-  date?: Date
-): Paycheck | null {
+export function getActivePaycheck(plan: PaycheckPlan, date?: Date): Paycheck | null {
   const refDate = date ?? new Date();
   const refString = toISODateString(refDate);
 
   let best: Paycheck | null = null;
-  let bestDate = '';
+  let bestDate = "";
 
   for (const paycheck of plan.paychecks) {
     if (paycheck.expectedDate <= refString) {
@@ -171,10 +163,7 @@ export function getActivePaycheck(
  * @returns The sum of all allocation amounts
  */
 export function getAllocatedTotal(paycheck: Paycheck): number {
-  return paycheck.allocations.reduce(
-    (sum, allocation) => sum + allocation.amount,
-    0
-  );
+  return paycheck.allocations.reduce((sum, allocation) => sum + allocation.amount, 0);
 }
 
 /**
@@ -207,11 +196,7 @@ export function getPaycheckSafeToSpend(paycheck: Paycheck): number {
 /**
  * Generate dates at a fixed day interval (used for weekly and biweekly).
  */
-function generateFixedInterval(
-  startDate: Date,
-  intervalDays: number,
-  count: number
-): string[] {
+function generateFixedInterval(startDate: Date, intervalDays: number, count: number): string[] {
   const dates: string[] = [];
   let current = new Date(startDate);
 

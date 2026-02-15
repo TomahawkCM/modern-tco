@@ -5,7 +5,10 @@ export type AnalyticsProps = Record<string, any>;
 
 const KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY || "";
 const DEBUG = (process.env.NEXT_PUBLIC_ANALYTICS_DEBUG || "").toLowerCase() === "true";
-const HOST = (process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com").replace(/\/$/, "");
+const HOST = (process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com").replace(
+  /\/$/,
+  ""
+);
 const STORAGE_ID = "ph_distinct_id";
 
 let cachedId: string | null = null;
@@ -33,12 +36,20 @@ function getDistinctId(): string {
 }
 
 function nowIso(): string {
-  try { return new Date().toISOString(); } catch { return ""; }
+  try {
+    return new Date().toISOString();
+  } catch {
+    return "";
+  }
 }
 
 function currentUrl(): string | undefined {
   if (typeof window === "undefined") return undefined;
-  try { return window.location.href; } catch { return undefined; }
+  try {
+    return window.location.href;
+  } catch {
+    return undefined;
+  }
 }
 
 async function sendEvent(name: string, props?: AnalyticsProps) {
@@ -57,7 +68,7 @@ async function sendEvent(name: string, props?: AnalyticsProps) {
   const url = `${HOST}/e/`;
   try {
     if (DEBUG) {
-      // eslint-disable-next-line no-console
+       
       console.debug("[analytics]", name, { ...payload.properties, timestamp: payload.timestamp });
     }
     if (navigator?.sendBeacon) {

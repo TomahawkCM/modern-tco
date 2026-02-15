@@ -7,6 +7,7 @@
 ### Agenda (40 minutes)
 
 **1. Competitive Analysis Findings (10 min)** - Researcher
+
 - Present comparison matrix of 5+ budget apps
 - Highlight best-in-class patterns:
   - Navigation: How do Mint, YNAB handle 9+ sections on mobile?
@@ -16,6 +17,7 @@
 - **Key Takeaway**: "We learned X pattern works best for Y reason"
 
 **2. Seniors UI Pattern Library (8 min)** - Accessibility Engineer
+
 - Present dos/don'ts for seniors UX
 - Show examples from AARP, GoodRx apps
 - Highlight critical patterns:
@@ -25,17 +27,19 @@
 - **Demo**: Side-by-side current budget app vs recommended changes
 
 **3. Design System Audit (10 min)** - Design System Architect
+
 - Present token inventory (colors, typography, spacing)
 - Identify inconsistencies found
 - Propose theme architecture (light/dark/high-contrast)
 - Show token structure:
   ```css
-  --color-background: #ffffff (light) | #0a0a0a (dark)
-  --color-text: #1a1a1a (light) | #f5f5f5 (dark)
+  --color-background: #ffffff (light) | #0a0a0a (dark) --color-text: #1a1a1a (light) | #f5f5f5
+    (dark);
   ```
 - **Deliverable**: Token specification document
 
 **4. IA & Navigation Recommendation (10 min)** - UX Specialist
+
 - Present new information architecture for 9 sections
 - Show mobile navigation concept (tab bar + hamburger hybrid)
 - Walk through user flows:
@@ -44,6 +48,7 @@
 - **Demo**: Figma mockup or wireframe
 
 **5. Q&A & Week 2 Preview (2 min)**
+
 - Open floor for questions
 - Preview Week 2 focus: Implementing navigation + accessibility modes
 
@@ -56,6 +61,7 @@
 ### Agenda (40 minutes)
 
 **1. New Navigation Live Demo (12 min)** - React Specialist + Frontend Specialist
+
 - **Desktop**: Show redesigned sidebar
   - Grouped sections (Core, Planning, Wealth, Tools)
   - Collapsible advanced features
@@ -68,6 +74,7 @@
 - **Key Metrics**: 3-tap maximum to any feature ✓
 
 **2. Theme Modes Demonstration (10 min)** - Design System Architect + Frontend Architect
+
 - **Light Mode**: Default, current design with improvements
 - **Dark Mode**: Show color palette, contrast ratios (4.5:1+ verified)
 - **High-Contrast Mode**: Black/white base, 7:1+ contrast
@@ -75,6 +82,7 @@
 - **Charts**: Show Recharts color palettes optimized for each mode
 
 **3. Accessibility Features (10 min)** - Accessibility Engineer + React Specialist
+
 - **Reduced Motion**: Demo prefers-reduced-motion detection
   - Show animations vs instant transitions
   - Manual toggle in settings
@@ -86,6 +94,7 @@
 - **Touch Targets**: Show measurement tool (all ≥48px)
 
 **4. Keyboard Navigation & Screen Reader (6 min)** - Accessibility Tester
+
 - **Keyboard-Only Navigation**: Tab through entire budget app
   - Focus indicators visible
   - Skip links present
@@ -96,6 +105,7 @@
   - Chart text alternatives present
 
 **5. Q&A & Week 3 Preview (2 min)**
+
 - Preview Week 3: Dashboard polish + feature UI updates + chatbot
 
 ---
@@ -107,6 +117,7 @@
 ### Agenda (45 minutes)
 
 **1. Dashboard Modernization (8 min)** - React Specialist
+
 - **Metric Cards**: Show redesigned cards with visual hierarchy
   - Larger numbers, clearer labels
   - Trend indicators (↑↓ arrows)
@@ -118,6 +129,7 @@
 - **Customization**: Demo widget visibility and drag-and-drop reordering
 
 **2. Feature UI Improvements (12 min)** - Multiple specialists
+
 - **Transactions** (3 min):
   - Redesigned list (18px typography, visual separators)
   - Enhanced filters (date range, categories, amount)
@@ -136,6 +148,7 @@
   - Improved error messages
 
 **3. AI Chatbot Integration (15 min)** - API Specialist + React Specialist
+
 - **UI Demo**: Show chatbot widget
   - Floating button (bottom-right)
   - Expandable panel
@@ -151,6 +164,7 @@
 - **Context Management**: Demonstrate conversation history persistence
 
 **4. Mobile Experience Walkthrough (8 min)** - QA Engineer
+
 - **Device Demo**: Live testing on iPhone/Android
   - Bottom navigation smooth
   - Forms use native inputs
@@ -160,6 +174,7 @@
 - **Performance**: Lighthouse mobile score (target 90+)
 
 **5. Q&A & Week 4 Preview (2 min)**
+
 - Preview Week 4: Final QA, user testing, documentation, launch prep
 
 ---
@@ -171,6 +186,7 @@
 ### Agenda (50 minutes)
 
 **1. End-to-End User Flow Demo (10 min)** - Product Designer
+
 - **Scenario**: New user (Margaret, 68-year-old retiree)
   - Opens app, dismisses welcome screen
   - Adds first account ("Checking")
@@ -181,6 +197,7 @@
   - Completes in <90 seconds ✓
 
 **2. Testing Results (12 min)** - QA Team
+
 - **Playwright E2E Tests** (3 min):
   - Show test suite running
   - Coverage: Navigation, transactions, budgets, imports, themes, chatbot
@@ -199,6 +216,7 @@
   - All platforms working ✓
 
 **3. User Acceptance Testing Findings (10 min)** - Product Designer
+
 - **Participants**: 5 seniors (ages 62-74)
 - **Tasks Tested**:
   1. Add transaction
@@ -214,6 +232,7 @@
 - **Issues Found**: 2 minor UI tweaks (already fixed)
 
 **4. Documentation & Deployment (8 min)** - Documentation Specialist + DevOps
+
 - **User Documentation** (3 min):
   - Getting Started guide
   - Feature walkthroughs
@@ -231,6 +250,7 @@
   - Analytics configured (PostHog)
 
 **5. Launch Plan & Rollback Strategy (8 min)** - Project Manager
+
 - **Pre-Launch Checklist**:
   - [ ] All tests passing
   - [ ] Accessibility audit complete (95+ scores)
@@ -250,6 +270,7 @@
   - Lighthouse scores maintain 95+
 
 **6. Retrospective & Next Steps (2 min)**
+
 - **Wins**: What went well?
 - **Challenges**: What was difficult?
 - **v1.1 Preview**: What features to prioritize next?
@@ -259,6 +280,7 @@
 ## Demo Best Practices
 
 ### Preparation
+
 - [ ] Record demo walkthrough video (backup if live demo fails)
 - [ ] Test on clean browser profile (no extensions, cache cleared)
 - [ ] Have sample data loaded (transactions, budgets, loans)
@@ -266,6 +288,7 @@
 - [ ] Test all theme modes work
 
 ### Presentation
+
 - **Show, don't tell**: Live demos > screenshots
 - **Focus on user value**: "This means Margaret can now..." not "We implemented..."
 - **Acknowledge issues**: "We found X bug, already fixed"
@@ -273,6 +296,7 @@
 - **Record for absent team members**
 
 ### Follow-Up
+
 - Publish demo recording within 24 hours
 - Share slides/notes in project channel
 - Update Archon task statuses based on feedback

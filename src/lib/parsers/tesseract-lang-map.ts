@@ -6,318 +6,318 @@
 
 const LOCALE_TO_TESSERACT: Record<string, string> = {
   // Arabic
-  'ar': 'ara',
-  'ar-SA': 'ara',
-  'ar-EG': 'ara',
-  'ar-AE': 'ara',
-  'ar-MA': 'ara',
+  ar: "ara",
+  "ar-SA": "ara",
+  "ar-EG": "ara",
+  "ar-AE": "ara",
+  "ar-MA": "ara",
 
   // Bengali
-  'bn': 'ben',
-  'bn-BD': 'ben',
-  'bn-IN': 'ben',
+  bn: "ben",
+  "bn-BD": "ben",
+  "bn-IN": "ben",
 
   // Bulgarian
-  'bg': 'bul',
-  'bg-BG': 'bul',
+  bg: "bul",
+  "bg-BG": "bul",
 
   // Catalan
-  'ca': 'cat',
-  'ca-ES': 'cat',
+  ca: "cat",
+  "ca-ES": "cat",
 
   // Chinese
-  'zh': 'chi_sim',
-  'zh-CN': 'chi_sim',
-  'zh-Hans': 'chi_sim',
-  'zh-TW': 'chi_tra',
-  'zh-Hant': 'chi_tra',
-  'zh-HK': 'chi_tra',
+  zh: "chi_sim",
+  "zh-CN": "chi_sim",
+  "zh-Hans": "chi_sim",
+  "zh-TW": "chi_tra",
+  "zh-Hant": "chi_tra",
+  "zh-HK": "chi_tra",
 
   // Croatian
-  'hr': 'hrv',
-  'hr-HR': 'hrv',
+  hr: "hrv",
+  "hr-HR": "hrv",
 
   // Czech
-  'cs': 'ces',
-  'cs-CZ': 'ces',
+  cs: "ces",
+  "cs-CZ": "ces",
 
   // Danish
-  'da': 'dan',
-  'da-DK': 'dan',
+  da: "dan",
+  "da-DK": "dan",
 
   // Dutch
-  'nl': 'nld',
-  'nl-NL': 'nld',
-  'nl-BE': 'nld',
+  nl: "nld",
+  "nl-NL": "nld",
+  "nl-BE": "nld",
 
   // English
-  'en': 'eng',
-  'en-US': 'eng',
-  'en-GB': 'eng',
-  'en-CA': 'eng',
-  'en-AU': 'eng',
-  'en-NZ': 'eng',
-  'en-IE': 'eng',
-  'en-ZA': 'eng',
-  'en-IN': 'eng',
-  'en-SG': 'eng',
+  en: "eng",
+  "en-US": "eng",
+  "en-GB": "eng",
+  "en-CA": "eng",
+  "en-AU": "eng",
+  "en-NZ": "eng",
+  "en-IE": "eng",
+  "en-ZA": "eng",
+  "en-IN": "eng",
+  "en-SG": "eng",
 
   // Estonian
-  'et': 'est',
-  'et-EE': 'est',
+  et: "est",
+  "et-EE": "est",
 
   // Filipino / Tagalog
-  'fil': 'tgl',
-  'tl': 'tgl',
+  fil: "tgl",
+  tl: "tgl",
 
   // Finnish
-  'fi': 'fin',
-  'fi-FI': 'fin',
+  fi: "fin",
+  "fi-FI": "fin",
 
   // French
-  'fr': 'fra',
-  'fr-FR': 'fra',
-  'fr-CA': 'fra',
-  'fr-BE': 'fra',
-  'fr-CH': 'fra',
+  fr: "fra",
+  "fr-FR": "fra",
+  "fr-CA": "fra",
+  "fr-BE": "fra",
+  "fr-CH": "fra",
 
   // German
-  'de': 'deu',
-  'de-DE': 'deu',
-  'de-AT': 'deu',
-  'de-CH': 'deu',
+  de: "deu",
+  "de-DE": "deu",
+  "de-AT": "deu",
+  "de-CH": "deu",
 
   // Greek
-  'el': 'ell',
-  'el-GR': 'ell',
+  el: "ell",
+  "el-GR": "ell",
 
   // Gujarati
-  'gu': 'guj',
-  'gu-IN': 'guj',
+  gu: "guj",
+  "gu-IN": "guj",
 
   // Hebrew
-  'he': 'heb',
-  'he-IL': 'heb',
+  he: "heb",
+  "he-IL": "heb",
 
   // Hindi
-  'hi': 'hin',
-  'hi-IN': 'hin',
+  hi: "hin",
+  "hi-IN": "hin",
 
   // Hungarian
-  'hu': 'hun',
-  'hu-HU': 'hun',
+  hu: "hun",
+  "hu-HU": "hun",
 
   // Icelandic
-  'is': 'isl',
-  'is-IS': 'isl',
+  is: "isl",
+  "is-IS": "isl",
 
   // Indonesian
-  'id': 'ind',
-  'id-ID': 'ind',
+  id: "ind",
+  "id-ID": "ind",
 
   // Italian
-  'it': 'ita',
-  'it-IT': 'ita',
-  'it-CH': 'ita',
+  it: "ita",
+  "it-IT": "ita",
+  "it-CH": "ita",
 
   // Japanese
-  'ja': 'jpn',
-  'ja-JP': 'jpn',
+  ja: "jpn",
+  "ja-JP": "jpn",
 
   // Kannada
-  'kn': 'kan',
-  'kn-IN': 'kan',
+  kn: "kan",
+  "kn-IN": "kan",
 
   // Kazakh
-  'kk': 'kaz',
-  'kk-KZ': 'kaz',
+  kk: "kaz",
+  "kk-KZ": "kaz",
 
   // Korean
-  'ko': 'kor',
-  'ko-KR': 'kor',
+  ko: "kor",
+  "ko-KR": "kor",
 
   // Latvian
-  'lv': 'lav',
-  'lv-LV': 'lav',
+  lv: "lav",
+  "lv-LV": "lav",
 
   // Lithuanian
-  'lt': 'lit',
-  'lt-LT': 'lit',
+  lt: "lit",
+  "lt-LT": "lit",
 
   // Malay
-  'ms': 'msa',
-  'ms-MY': 'msa',
+  ms: "msa",
+  "ms-MY": "msa",
 
   // Malayalam
-  'ml': 'mal',
-  'ml-IN': 'mal',
+  ml: "mal",
+  "ml-IN": "mal",
 
   // Marathi
-  'mr': 'mar',
-  'mr-IN': 'mar',
+  mr: "mar",
+  "mr-IN": "mar",
 
   // Norwegian
-  'nb': 'nor',
-  'nb-NO': 'nor',
-  'nn': 'nor',
-  'nn-NO': 'nor',
-  'no': 'nor',
+  nb: "nor",
+  "nb-NO": "nor",
+  nn: "nor",
+  "nn-NO": "nor",
+  no: "nor",
 
   // Persian / Farsi
-  'fa': 'fas',
-  'fa-IR': 'fas',
+  fa: "fas",
+  "fa-IR": "fas",
 
   // Polish
-  'pl': 'pol',
-  'pl-PL': 'pol',
+  pl: "pol",
+  "pl-PL": "pol",
 
   // Portuguese
-  'pt': 'por',
-  'pt-BR': 'por',
-  'pt-PT': 'por',
+  pt: "por",
+  "pt-BR": "por",
+  "pt-PT": "por",
 
   // Punjabi
-  'pa': 'pan',
-  'pa-IN': 'pan',
+  pa: "pan",
+  "pa-IN": "pan",
 
   // Romanian
-  'ro': 'ron',
-  'ro-RO': 'ron',
+  ro: "ron",
+  "ro-RO": "ron",
 
   // Russian
-  'ru': 'rus',
-  'ru-RU': 'rus',
+  ru: "rus",
+  "ru-RU": "rus",
 
   // Serbian
-  'sr': 'srp',
-  'sr-RS': 'srp',
-  'sr-Latn': 'srp',
-  'sr-Cyrl': 'srp',
+  sr: "srp",
+  "sr-RS": "srp",
+  "sr-Latn": "srp",
+  "sr-Cyrl": "srp",
 
   // Slovak
-  'sk': 'slk',
-  'sk-SK': 'slk',
+  sk: "slk",
+  "sk-SK": "slk",
 
   // Slovenian
-  'sl': 'slv',
-  'sl-SI': 'slv',
+  sl: "slv",
+  "sl-SI": "slv",
 
   // Spanish
-  'es': 'spa',
-  'es-ES': 'spa',
-  'es-MX': 'spa',
-  'es-AR': 'spa',
-  'es-CO': 'spa',
-  'es-CL': 'spa',
-  'es-PE': 'spa',
+  es: "spa",
+  "es-ES": "spa",
+  "es-MX": "spa",
+  "es-AR": "spa",
+  "es-CO": "spa",
+  "es-CL": "spa",
+  "es-PE": "spa",
 
   // Swahili
-  'sw': 'swa',
-  'sw-KE': 'swa',
+  sw: "swa",
+  "sw-KE": "swa",
 
   // Swedish
-  'sv': 'swe',
-  'sv-SE': 'swe',
+  sv: "swe",
+  "sv-SE": "swe",
 
   // Tamil
-  'ta': 'tam',
-  'ta-IN': 'tam',
+  ta: "tam",
+  "ta-IN": "tam",
 
   // Telugu
-  'te': 'tel',
-  'te-IN': 'tel',
+  te: "tel",
+  "te-IN": "tel",
 
   // Thai
-  'th': 'tha',
-  'th-TH': 'tha',
+  th: "tha",
+  "th-TH": "tha",
 
   // Turkish
-  'tr': 'tur',
-  'tr-TR': 'tur',
+  tr: "tur",
+  "tr-TR": "tur",
 
   // Ukrainian
-  'uk': 'ukr',
-  'uk-UA': 'ukr',
+  uk: "ukr",
+  "uk-UA": "ukr",
 
   // Urdu
-  'ur': 'urd',
-  'ur-PK': 'urd',
+  ur: "urd",
+  "ur-PK": "urd",
 
   // Uzbek
-  'uz': 'uzb',
-  'uz-UZ': 'uzb',
+  uz: "uzb",
+  "uz-UZ": "uzb",
 
   // Vietnamese
-  'vi': 'vie',
-  'vi-VN': 'vie',
+  vi: "vie",
+  "vi-VN": "vie",
 
   // Welsh
-  'cy': 'cym',
-  'cy-GB': 'cym',
+  cy: "cym",
+  "cy-GB": "cym",
 
   // Afrikaans
-  'af': 'afr',
-  'af-ZA': 'afr',
+  af: "afr",
+  "af-ZA": "afr",
 
   // Albanian
-  'sq': 'sqi',
-  'sq-AL': 'sqi',
+  sq: "sqi",
+  "sq-AL": "sqi",
 
   // Amharic
-  'am': 'amh',
-  'am-ET': 'amh',
+  am: "amh",
+  "am-ET": "amh",
 
   // Armenian
-  'hy': 'hye',
-  'hy-AM': 'hye',
+  hy: "hye",
+  "hy-AM": "hye",
 
   // Azerbaijani
-  'az': 'aze',
-  'az-AZ': 'aze',
+  az: "aze",
+  "az-AZ": "aze",
 
   // Basque
-  'eu': 'eus',
-  'eu-ES': 'eus',
+  eu: "eus",
+  "eu-ES": "eus",
 
   // Bosnian
-  'bs': 'bos',
-  'bs-BA': 'bos',
+  bs: "bos",
+  "bs-BA": "bos",
 
   // Georgian
-  'ka': 'kat',
-  'ka-GE': 'kat',
+  ka: "kat",
+  "ka-GE": "kat",
 
   // Khmer
-  'km': 'khm',
-  'km-KH': 'khm',
+  km: "khm",
+  "km-KH": "khm",
 
   // Lao
-  'lo': 'lao',
-  'lo-LA': 'lao',
+  lo: "lao",
+  "lo-LA": "lao",
 
   // Macedonian
-  'mk': 'mkd',
-  'mk-MK': 'mkd',
+  mk: "mkd",
+  "mk-MK": "mkd",
 
   // Mongolian
-  'mn': 'mon',
-  'mn-MN': 'mon',
+  mn: "mon",
+  "mn-MN": "mon",
 
   // Myanmar (Burmese)
-  'my': 'mya',
-  'my-MM': 'mya',
+  my: "mya",
+  "my-MM": "mya",
 
   // Nepali
-  'ne': 'nep',
-  'ne-NP': 'nep',
+  ne: "nep",
+  "ne-NP": "nep",
 
   // Sinhala
-  'si': 'sin',
-  'si-LK': 'sin',
+  si: "sin",
+  "si-LK": "sin",
 
   // Galician
-  'gl': 'glg',
-  'gl-ES': 'glg',
+  gl: "glg",
+  "gl-ES": "glg",
 };
 
 /**
@@ -334,13 +334,13 @@ export function getOCRLanguage(appLocale: string): string {
   }
 
   // Try base language (e.g., 'de' from 'de-DE')
-  const baseLang = appLocale.split('-')[0];
+  const baseLang = appLocale.split("-")[0];
   if (LOCALE_TO_TESSERACT[baseLang]) {
     return LOCALE_TO_TESSERACT[baseLang];
   }
 
   // Default to English
-  return 'eng';
+  return "eng";
 }
 
 /**
@@ -349,77 +349,77 @@ export function getOCRLanguage(appLocale: string): string {
  */
 export function getSupportedOCRLanguages(): Array<{ code: string; name: string }> {
   const LANGUAGE_NAMES: Record<string, string> = {
-    afr: 'Afrikaans',
-    amh: 'Amharic',
-    ara: 'Arabic',
-    aze: 'Azerbaijani',
-    ben: 'Bengali',
-    bos: 'Bosnian',
-    bul: 'Bulgarian',
-    cat: 'Catalan',
-    ces: 'Czech',
-    chi_sim: 'Chinese (Simplified)',
-    chi_tra: 'Chinese (Traditional)',
-    cym: 'Welsh',
-    dan: 'Danish',
-    deu: 'German',
-    ell: 'Greek',
-    eng: 'English',
-    est: 'Estonian',
-    eus: 'Basque',
-    fas: 'Persian',
-    fin: 'Finnish',
-    fra: 'French',
-    glg: 'Galician',
-    guj: 'Gujarati',
-    heb: 'Hebrew',
-    hin: 'Hindi',
-    hrv: 'Croatian',
-    hun: 'Hungarian',
-    hye: 'Armenian',
-    ind: 'Indonesian',
-    isl: 'Icelandic',
-    ita: 'Italian',
-    jpn: 'Japanese',
-    kan: 'Kannada',
-    kat: 'Georgian',
-    kaz: 'Kazakh',
-    khm: 'Khmer',
-    kor: 'Korean',
-    lao: 'Lao',
-    lav: 'Latvian',
-    lit: 'Lithuanian',
-    mal: 'Malayalam',
-    mar: 'Marathi',
-    mkd: 'Macedonian',
-    mon: 'Mongolian',
-    msa: 'Malay',
-    mya: 'Myanmar',
-    nep: 'Nepali',
-    nld: 'Dutch',
-    nor: 'Norwegian',
-    pan: 'Punjabi',
-    pol: 'Polish',
-    por: 'Portuguese',
-    ron: 'Romanian',
-    rus: 'Russian',
-    sin: 'Sinhala',
-    slk: 'Slovak',
-    slv: 'Slovenian',
-    spa: 'Spanish',
-    sqi: 'Albanian',
-    srp: 'Serbian',
-    swa: 'Swahili',
-    swe: 'Swedish',
-    tam: 'Tamil',
-    tel: 'Telugu',
-    tgl: 'Filipino',
-    tha: 'Thai',
-    tur: 'Turkish',
-    ukr: 'Ukrainian',
-    urd: 'Urdu',
-    uzb: 'Uzbek',
-    vie: 'Vietnamese',
+    afr: "Afrikaans",
+    amh: "Amharic",
+    ara: "Arabic",
+    aze: "Azerbaijani",
+    ben: "Bengali",
+    bos: "Bosnian",
+    bul: "Bulgarian",
+    cat: "Catalan",
+    ces: "Czech",
+    chi_sim: "Chinese (Simplified)",
+    chi_tra: "Chinese (Traditional)",
+    cym: "Welsh",
+    dan: "Danish",
+    deu: "German",
+    ell: "Greek",
+    eng: "English",
+    est: "Estonian",
+    eus: "Basque",
+    fas: "Persian",
+    fin: "Finnish",
+    fra: "French",
+    glg: "Galician",
+    guj: "Gujarati",
+    heb: "Hebrew",
+    hin: "Hindi",
+    hrv: "Croatian",
+    hun: "Hungarian",
+    hye: "Armenian",
+    ind: "Indonesian",
+    isl: "Icelandic",
+    ita: "Italian",
+    jpn: "Japanese",
+    kan: "Kannada",
+    kat: "Georgian",
+    kaz: "Kazakh",
+    khm: "Khmer",
+    kor: "Korean",
+    lao: "Lao",
+    lav: "Latvian",
+    lit: "Lithuanian",
+    mal: "Malayalam",
+    mar: "Marathi",
+    mkd: "Macedonian",
+    mon: "Mongolian",
+    msa: "Malay",
+    mya: "Myanmar",
+    nep: "Nepali",
+    nld: "Dutch",
+    nor: "Norwegian",
+    pan: "Punjabi",
+    pol: "Polish",
+    por: "Portuguese",
+    ron: "Romanian",
+    rus: "Russian",
+    sin: "Sinhala",
+    slk: "Slovak",
+    slv: "Slovenian",
+    spa: "Spanish",
+    sqi: "Albanian",
+    srp: "Serbian",
+    swa: "Swahili",
+    swe: "Swedish",
+    tam: "Tamil",
+    tel: "Telugu",
+    tgl: "Filipino",
+    tha: "Thai",
+    tur: "Turkish",
+    ukr: "Ukrainian",
+    urd: "Urdu",
+    uzb: "Uzbek",
+    vie: "Vietnamese",
   };
 
   return Object.entries(LANGUAGE_NAMES)

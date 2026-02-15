@@ -86,10 +86,7 @@ async function bundleAllMDX() {
     cachedFile: `${file}.json`,
   }));
 
-  await fs.writeFile(
-    path.join(outputDir, "_index.json"),
-    JSON.stringify(index, null, 2)
-  );
+  await fs.writeFile(path.join(outputDir, "_index.json"), JSON.stringify(index, null, 2));
 
   console.log(`✅ Created cache index at ${outputDir}/_index.json\n`);
 

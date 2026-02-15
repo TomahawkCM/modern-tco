@@ -1,19 +1,15 @@
 /**
  * Migration Utility: Encrypt Existing Data
  * Migrates unencrypted transactions to encrypted format
- * 
+ *
  * WARNING: This is a one-way operation. Once data is encrypted,
  * it cannot be decrypted without the encryption key.
  */
 
-import { db } from '@/lib/budget-db';
-import type { Transaction } from '@/types/budget';
-import {
-  encryptTransaction,
-  isEncryptionEnabled,
-  enableEncryption,
-} from './budget-encryption';
-import { savePrivacySettings } from '@/lib/budget-privacy-settings';
+import { db } from "@/lib/budget-db";
+import type { Transaction } from "@/types/budget";
+import { encryptTransaction, isEncryptionEnabled, enableEncryption } from "./budget-encryption";
+import { savePrivacySettings } from "@/lib/budget-privacy-settings";
 
 export interface MigrationResult {
   success: boolean;
@@ -38,17 +34,15 @@ export async function migrateTransactionsToEncryption(): Promise<MigrationResult
     if (!isEncryptionEnabled()) {
       // Enable encryption first
       await enableEncryption();
-      const settings = JSON.parse(
-        localStorage.getItem('budget-app-privacy-settings') || '{}'
-      );
+      const settings = JSON.parse(localStorage.getItem("budget-app-privacy-settings") || "{}");
       savePrivacySettings({ ...settings, enableEncryption: true });
     }
 
     // Get all transactions
     const transactions = await db.transactions.toArray();
-    
+
     if (transactions.length === 0) {
-      result.warnings.push('No transactions to encrypt');
+      result.warnings.push("No transactions to encrypt");
       result.success = true;
       return result;
     }
@@ -59,7 +53,7 @@ export async function migrateTransactionsToEncryption(): Promise<MigrationResult
     );
 
     if (unencrypted.length === 0) {
-      result.warnings.push('All transactions are already encrypted');
+      result.warnings.push("All transactions are already encrypted");
       result.success = true;
       return result;
     }
@@ -72,7 +66,7 @@ export async function migrateTransactionsToEncryption(): Promise<MigrationResult
         encrypted.push(encryptedTx as Transaction);
       } catch (error) {
         result.errors.push(
-          `Failed to encrypt transaction ${tx.id}: ${error instanceof Error ? error.message : 'Unknown error'}`
+          `Failed to encrypt transaction ${tx.id}: ${error instanceof Error ? error.message : "Unknown error"}`
         );
       }
     }
@@ -100,7 +94,7 @@ export async function migrateTransactionsToEncryption(): Promise<MigrationResult
     result.success = result.errors.length === 0;
   } catch (error) {
     result.errors.push(
-      `Migration failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+      `Migration failed: ${error instanceof Error ? error.message : "Unknown error"}`
     );
   }
 
@@ -117,7 +111,7 @@ export async function needsEncryptionMigration(): Promise<boolean> {
 
   const transactions = await db.transactions.toArray();
   return transactions.some(
-    (tx) => !tx.encryptedDescription && !tx.encryptedAmount && (tx.description || tx.amount !== undefined)
+    (tx) =>
+      !tx.encryptedDescription && !tx.encryptedAmount && (tx.description || tx.amount !== undefined)
   );
 }
-

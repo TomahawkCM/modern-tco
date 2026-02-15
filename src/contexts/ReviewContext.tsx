@@ -70,42 +70,45 @@ export function ReviewProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [currentSessionType, setCurrentSessionType] = useState<ReviewSessionType>('mixed');
+  const [currentSessionType, setCurrentSessionType] = useState<ReviewSessionType>("mixed");
 
   // ==================== QUEUE MANAGEMENT ====================
 
-  const loadQueue = useCallback(async (type: ReviewSessionType, limit: number = 40) => {
-    if (!user) return;
+  const loadQueue = useCallback(
+    async (type: ReviewSessionType, limit: number = 40) => {
+      if (!user) return;
 
-    setIsLoading(true);
-    setError(null);
+      setIsLoading(true);
+      setError(null);
 
-    try {
-      let queueItems: ReviewQueueItem[];
+      try {
+        let queueItems: ReviewQueueItem[];
 
-      switch (type) {
-        case 'flashcards':
-          queueItems = await reviewService.getFlashcardQueue(user.id, limit);
-          break;
-        case 'questions':
-          queueItems = await reviewService.getQuestionQueue(user.id, limit);
-          break;
-        case 'mixed':
-          queueItems = await reviewService.getMixedQueue(user.id, limit);
-          break;
-        default:
-          queueItems = await reviewService.getUnifiedReviewQueue(user.id, limit);
+        switch (type) {
+          case "flashcards":
+            queueItems = await reviewService.getFlashcardQueue(user.id, limit);
+            break;
+          case "questions":
+            queueItems = await reviewService.getQuestionQueue(user.id, limit);
+            break;
+          case "mixed":
+            queueItems = await reviewService.getMixedQueue(user.id, limit);
+            break;
+          default:
+            queueItems = await reviewService.getUnifiedReviewQueue(user.id, limit);
+        }
+
+        setQueue(queueItems);
+        setCurrentSessionType(type);
+      } catch (err) {
+        console.error("Error loading review queue:", err);
+        setError("Failed to load review queue");
+      } finally {
+        setIsLoading(false);
       }
-
-      setQueue(queueItems);
-      setCurrentSessionType(type);
-    } catch (err) {
-      console.error("Error loading review queue:", err);
-      setError("Failed to load review queue");
-    } finally {
-      setIsLoading(false);
-    }
-  }, [user]);
+    },
+    [user]
+  );
 
   const refreshQueue = useCallback(async () => {
     await loadQueue(currentSessionType);
@@ -117,61 +120,61 @@ export function ReviewProvider({ children }: { children: React.ReactNode }) {
 
   // ==================== SESSION MANAGEMENT ====================
 
-  const startSession = useCallback(async (
-    type: ReviewSessionType,
-    targetMinutes?: number
-  ): Promise<ReviewSession | null> => {
-    if (!user) return null;
+  const startSession = useCallback(
+    async (type: ReviewSessionType, targetMinutes?: number): Promise<ReviewSession | null> => {
+      if (!user) return null;
 
-    setIsLoading(true);
-    setError(null);
+      setIsLoading(true);
+      setError(null);
 
-    try {
-      // Start session in database
-      const session = await reviewService.startSession(user.id, type, targetMinutes);
-      if (!session) throw new Error("Failed to create session");
+      try {
+        // Start session in database
+        const session = await reviewService.startSession(user.id, type, targetMinutes);
+        if (!session) throw new Error("Failed to create session");
 
-      // Load queue
-      await loadQueue(type);
+        // Load queue
+        await loadQueue(type);
 
-      // Initialize session state
-      setActiveSession({
-        session,
-        queue: [],
-        currentIndex: 0,
-        startTime: new Date(),
-        elapsedSeconds: 0,
-        isActive: true,
-        isPaused: false,
-        reviewed: 0,
-        correct: 0,
-        flashcardsReviewed: 0,
-        questionsReviewed: 0,
-      });
+        // Initialize session state
+        setActiveSession({
+          session,
+          queue: [],
+          currentIndex: 0,
+          startTime: new Date(),
+          elapsedSeconds: 0,
+          isActive: true,
+          isPaused: false,
+          reviewed: 0,
+          correct: 0,
+          flashcardsReviewed: 0,
+          questionsReviewed: 0,
+        });
 
-      // Track analytics
-      trackReviewEvent('review_session_started', {
-        sessionType: type,
-        targetDuration: targetMinutes,
-        queueSize: queue.length,
-      });
+        // Track analytics
+        trackReviewEvent("review_session_started", {
+          sessionType: type,
+          targetDuration: targetMinutes,
+          queueSize: queue.length,
+        });
 
-      return session;
-    } catch (err) {
-      console.error("Error starting session:", err);
-      setError("Failed to start review session");
-      return null;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [user, queue.length, loadQueue]);
+        return session;
+      } catch (err) {
+        console.error("Error starting session:", err);
+        setError("Failed to start review session");
+        return null;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [user, queue.length, loadQueue]
+  );
 
   const completeSession = useCallback(async () => {
     if (!activeSession?.session) return;
 
     try {
       const duration = Math.floor(
-        ((new Date().getTime() - (activeSession.startTime?.getTime() || 0)) / 1000)
+        (new Date().getTime() - (activeSession.startTime?.getTime() || 0)) / 1000
       );
 
       await reviewService.completeSession(activeSession.session.id, {
@@ -183,22 +186,19 @@ export function ReviewProvider({ children }: { children: React.ReactNode }) {
       });
 
       // Track analytics
-      trackReviewEvent('review_session_completed', {
+      trackReviewEvent("review_session_completed", {
         sessionId: activeSession.session.id,
         sessionType: activeSession.session.session_type,
         duration,
         itemsReviewed: activeSession.reviewed,
-        accuracy: activeSession.reviewed > 0 ? (activeSession.correct / activeSession.reviewed) * 100 : 0,
+        accuracy:
+          activeSession.reviewed > 0 ? (activeSession.correct / activeSession.reviewed) * 100 : 0,
         flashcardsReviewed: activeSession.flashcardsReviewed,
         questionsReviewed: activeSession.questionsReviewed,
       });
 
       // Refresh stats and streak
-      await Promise.all([
-        refreshStats(),
-        refreshStreak(),
-        refreshDueCounts(),
-      ]);
+      await Promise.all([refreshStats(), refreshStreak(), refreshDueCounts()]);
 
       // Clear session
       setActiveSession(null);
@@ -229,83 +229,81 @@ export function ReviewProvider({ children }: { children: React.ReactNode }) {
 
   // ==================== REVIEW ACTIONS ====================
 
-  const reviewFlashcard = useCallback(async (
-    flashcardId: string,
-    rating: SRRating,
-    timeSpent: number
-  ) => {
-    if (!user) return;
+  const reviewFlashcard = useCallback(
+    async (flashcardId: string, rating: SRRating, timeSpent: number) => {
+      if (!user) return;
 
-    try {
-      const result = await flashcardService.reviewFlashcard(
-        flashcardId,
-        user.id,
-        rating,
-        timeSpent
-      );
-
-      if (result && activeSession) {
-        const isCorrect = rating === 'good' || rating === 'easy';
-        setActiveSession({
-          ...activeSession,
-          reviewed: activeSession.reviewed + 1,
-          correct: activeSession.correct + (isCorrect ? 1 : 0),
-          flashcardsReviewed: activeSession.flashcardsReviewed + 1,
-          currentIndex: activeSession.currentIndex + 1,
-        });
-
-        // Track analytics
-        trackReviewEvent('flashcard_reviewed', {
+      try {
+        const result = await flashcardService.reviewFlashcard(
           flashcardId,
+          user.id,
           rating,
-          timeSpent,
-          newInterval: result.flashcard.srs_interval,
-        });
+          timeSpent
+        );
+
+        if (result && activeSession) {
+          const isCorrect = rating === "good" || rating === "easy";
+          setActiveSession({
+            ...activeSession,
+            reviewed: activeSession.reviewed + 1,
+            correct: activeSession.correct + (isCorrect ? 1 : 0),
+            flashcardsReviewed: activeSession.flashcardsReviewed + 1,
+            currentIndex: activeSession.currentIndex + 1,
+          });
+
+          // Track analytics
+          trackReviewEvent("flashcard_reviewed", {
+            flashcardId,
+            rating,
+            timeSpent,
+            newInterval: result.flashcard.srs_interval,
+          });
+        }
+      } catch (err) {
+        console.error("Error reviewing flashcard:", err);
+        setError("Failed to review flashcard");
       }
-    } catch (err) {
-      console.error("Error reviewing flashcard:", err);
-      setError("Failed to review flashcard");
-    }
-  }, [user, activeSession]);
+    },
+    [user, activeSession]
+  );
 
-  const reviewQuestion = useCallback(async (
-    questionId: string,
-    isCorrect: boolean,
-    timeSpent: number
-  ) => {
-    if (!user) return;
+  const reviewQuestion = useCallback(
+    async (questionId: string, isCorrect: boolean, timeSpent: number) => {
+      if (!user) return;
 
-    try {
-      const result = await questionReviewService.reviewQuestion(
-        questionId,
-        user.id,
-        isCorrect,
-        timeSpent
-      );
-
-      if (result && activeSession) {
-        setActiveSession({
-          ...activeSession,
-          reviewed: activeSession.reviewed + 1,
-          correct: activeSession.correct + (isCorrect ? 1 : 0),
-          questionsReviewed: activeSession.questionsReviewed + 1,
-          currentIndex: activeSession.currentIndex + 1,
-        });
-
-        // Track analytics
-        trackReviewEvent('question_reviewed', {
+      try {
+        const result = await questionReviewService.reviewQuestion(
           questionId,
+          user.id,
           isCorrect,
-          timeSpent,
-          masteryLevel: result.review.mastery_level,
-          newInterval: result.review.srs_interval,
-        });
+          timeSpent
+        );
+
+        if (result && activeSession) {
+          setActiveSession({
+            ...activeSession,
+            reviewed: activeSession.reviewed + 1,
+            correct: activeSession.correct + (isCorrect ? 1 : 0),
+            questionsReviewed: activeSession.questionsReviewed + 1,
+            currentIndex: activeSession.currentIndex + 1,
+          });
+
+          // Track analytics
+          trackReviewEvent("question_reviewed", {
+            questionId,
+            isCorrect,
+            timeSpent,
+            masteryLevel: result.review.mastery_level,
+            newInterval: result.review.srs_interval,
+          });
+        }
+      } catch (err) {
+        console.error("Error reviewing question:", err);
+        setError("Failed to review question");
       }
-    } catch (err) {
-      console.error("Error reviewing question:", err);
-      setError("Failed to review question");
-    }
-  }, [user, activeSession]);
+    },
+    [user, activeSession]
+  );
 
   const nextItem = useCallback(() => {
     if (!activeSession) return;
@@ -347,10 +345,11 @@ export function ReviewProvider({ children }: { children: React.ReactNode }) {
 
       // Calculate high priority count (top 20% of queue)
       const queue = await reviewService.getUnifiedReviewQueue(user.id, 50);
-      const highPriorityThreshold = queue.length > 0
-        ? queue[Math.floor(queue.length * 0.2)]?.priorityScore || 0
-        : 0;
-      const highPriorityCount = queue.filter(item => item.priorityScore >= highPriorityThreshold).length;
+      const highPriorityThreshold =
+        queue.length > 0 ? queue[Math.floor(queue.length * 0.2)]?.priorityScore || 0 : 0;
+      const highPriorityCount = queue.filter(
+        (item) => item.priorityScore >= highPriorityThreshold
+      ).length;
 
       setDueCounts({
         totalDue: counts.total,

@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { getAdminUsers } from "./actions";
 
 // Admin dashboard is not available in offline mode
-const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === 'true';
+const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === "true";
 
 interface AdminUser {
   id: string;
@@ -50,8 +50,8 @@ function SessionRefreshHelper() {
       // Sign out to clear session
       await signOut();
       // Clear any remaining localStorage auth data
-      Object.keys(localStorage).forEach(key => {
-        if (key.startsWith('sb-') || key.includes('supabase')) {
+      Object.keys(localStorage).forEach((key) => {
+        if (key.startsWith("sb-") || key.includes("supabase")) {
           localStorage.removeItem(key);
         }
       });
@@ -66,7 +66,8 @@ function SessionRefreshHelper() {
   return (
     <div className="mt-3 space-y-2">
       <p className="text-sm text-slate-400">
-        Your session needs to be refreshed. Please sign out and sign back in to establish a new session.
+        Your session needs to be refreshed. Please sign out and sign back in to establish a new
+        session.
       </p>
       <Button
         variant="outline"
@@ -198,9 +199,7 @@ function AdminDashboardContent() {
                 Check your .env.local file to ensure the service role key is set.
               </p>
             )}
-            {error.includes("Unauthorized") && (
-              <SessionRefreshHelper />
-            )}
+            {error.includes("Unauthorized") && <SessionRefreshHelper />}
           </div>
         )}
 

@@ -75,6 +75,7 @@ content_import_logs
 **File**: `src/lib/flashcard-library-service.ts` (515 lines)
 
 **Key Functions**:
+
 - `getLibraryFlashcards()` - Fetch cards with filters (domain, difficulty, category, tags, search)
 - `getLibraryFlashcard()` - Get single card by ID
 - `createLibraryFlashcard()` - Create new library card (admin only)
@@ -93,6 +94,7 @@ content_import_logs
 **File**: `src/components/flashcards/FlashcardLibrary.tsx` (432 lines)
 
 **Features**:
+
 - **Browse Mode**: Filter by domain (6 options) and difficulty (3 levels)
 - **Search**: Full-text search across questions and answers
 - **Statistics Dashboard**: Domain performance, difficulty stats, overall accuracy
@@ -101,6 +103,7 @@ content_import_logs
 - **Responsive Design**: Mobile-optimized grid layout
 
 **Integration**: Added as new "Library (AI)" tab in `FlashcardDashboard.tsx`:
+
 ```typescript
 <TabsList className="grid w-full grid-cols-3">
   <TabsTrigger value="review">
@@ -129,6 +132,7 @@ content_import_logs
 **Technology**: OpenAI GPT-4 Turbo (`gpt-4-turbo-preview`)
 
 **Features**:
+
 - Domain-specific generation (6 TCO domains)
 - Difficulty-level targeting (easy, medium, hard)
 - Quality validation (front/back length, required fields)
@@ -136,6 +140,7 @@ content_import_logs
 - TypeScript file output for version control
 
 **Usage**:
+
 ```bash
 npm run content:generate-flashcards -- \
   --domain asking_questions \
@@ -148,12 +153,14 @@ npm run content:generate-flashcards -- \
 **File**: `scripts/bulk-import-flashcards.ts`
 
 **Features**:
+
 - Batch import from generated TypeScript files
 - Domain validation against database constraints
 - Error handling with detailed logging
 - Import audit trail in `content_import_logs`
 
 **Usage**:
+
 ```bash
 npm run content:import-flashcards
 ```
@@ -164,14 +171,14 @@ npm run content:import-flashcards
 
 ### Generated Flashcards (157 total)
 
-| Domain | Easy | Medium | Hard | Total |
-|--------|------|--------|------|-------|
-| **asking_questions** | 14 | 39 | 8 | **61** |
-| **navigation** | 0 | 26 | 2 | **28** |
-| **refining_targeting** | 1 | 21 | 1 | **23** |
-| **reporting** | 1 | 14 | 6 | **21** |
-| **taking_action** | 0 | 24 | 0 | **24** |
-| **TOTAL** | **16** | **124** | **17** | **157** |
+| Domain                 | Easy   | Medium  | Hard   | Total   |
+| ---------------------- | ------ | ------- | ------ | ------- |
+| **asking_questions**   | 14     | 39      | 8      | **61**  |
+| **navigation**         | 0      | 26      | 2      | **28**  |
+| **refining_targeting** | 1      | 21      | 1      | **23**  |
+| **reporting**          | 1      | 14      | 6      | **21**  |
+| **taking_action**      | 0      | 24      | 0      | **24**  |
+| **TOTAL**              | **16** | **124** | **17** | **157** |
 
 ### Category Distribution
 
@@ -197,12 +204,14 @@ All generated flashcards are stored in TypeScript format for version control:
 ### Issue 1: Domain Name Mismatches ✅
 
 **Problem**: OpenAI generated incorrect domain names:
+
 - `refining_questions__targeting` ❌ → `refining_targeting` ✅
 - `taking_action_packages__actions` ❌ → `taking_action` ✅
 - `navigation__basic_module_functions` ❌ → `navigation` ✅
 - `reporting__data_export` ❌ → `reporting` ✅
 
 **Solution**: Applied sed replacements to fix all 4 files:
+
 ```bash
 sed -i 's/"refining_questions__targeting"/"refining_targeting"/g' src/data/generated/*.ts
 sed -i 's/"taking_action_packages__actions"/"taking_action"/g' src/data/generated/*.ts
@@ -213,10 +222,12 @@ sed -i 's/"reporting__data_export"/"reporting"/g' src/data/generated/*.ts
 ### Issue 2: Supabase Auth Helpers Deprecation ✅
 
 **Problem**: Files using deprecated `@supabase/auth-helpers-nextjs`:
+
 - `src/lib/flashcard-library-service.ts`
 - `src/lib/mock-exam-builder.ts`
 
 **Error**:
+
 ```
 Module not found: Can't resolve '@supabase/auth-helpers-nextjs'
 ```
@@ -224,14 +235,16 @@ Module not found: Can't resolve '@supabase/auth-helpers-nextjs'
 **Solution**: Updated both files to use centralized Supabase client:
 
 **Before**:
+
 ```typescript
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 const supabase = createClientComponentClient();
 ```
 
 **After**:
+
 ```typescript
-import { supabase } from './supabase';
+import { supabase } from "./supabase";
 // Use imported supabase client directly
 ```
 
@@ -275,6 +288,7 @@ OPENAI_API_KEY=sk-proj-LZuQYJu2sSDrWUR3M3UlgWXHsC-4dLcCXKd4nf2DJBgGf8ychpEX0Qkpb
 **Verification Script**: `scripts/verify-flashcard-import.ts`
 
 **Output**:
+
 ```
 🔍 Verifying Flashcard Import Status
 
@@ -341,12 +355,14 @@ OPENAI_API_KEY=sk-proj-LZuQYJu2sSDrWUR3M3UlgWXHsC-4dLcCXKd4nf2DJBgGf8ychpEX0Qkpb
 **Remaining**: 343 cards needed
 
 **Recommended Generation Strategy**:
+
 1. Generate **easy** cards for all domains (currently only 16)
 2. Generate **hard** cards for all domains (currently only 17)
 3. Balance **medium** cards across domains (currently 124)
 4. Add **troubleshooting** domain flashcards (currently 0)
 
 **Commands**:
+
 ```bash
 # Generate easy cards for all domains
 npm run content:generate-flashcards -- --domain asking_questions --difficulty easy --count 30
@@ -391,33 +407,39 @@ npm run content:import-flashcards
 To add this AI flashcard library addon to another project:
 
 1. **Copy Database Schema**:
+
    ```bash
    cp supabase/migrations/20251010000003_add_content_population_tables.sql \
       your-project/supabase/migrations/
    ```
 
 2. **Run Migration**:
+
    ```bash
    supabase db reset
    ```
 
 3. **Copy Service Layer**:
+
    ```bash
    cp src/lib/flashcard-library-service.ts your-project/src/lib/
    ```
 
 4. **Copy UI Component**:
+
    ```bash
    cp src/components/flashcards/FlashcardLibrary.tsx your-project/src/components/
    ```
 
 5. **Copy Generation Scripts**:
+
    ```bash
    cp scripts/generate-flashcards.ts your-project/scripts/
    cp scripts/bulk-import-flashcards.ts your-project/scripts/
    ```
 
 6. **Add OpenAI API Key**:
+
    ```bash
    echo "OPENAI_API_KEY=your-key-here" >> your-project/.env.local
    ```
@@ -439,6 +461,7 @@ To add this AI flashcard library addon to another project:
 **Cause**: Using anon key instead of service role key for query.
 
 **Solution**: Use service role key in verification script:
+
 ```typescript
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
@@ -451,6 +474,7 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey);
 **Cause**: OpenAI generated incorrect domain names.
 
 **Solution**: Validate domains before import or apply sed replacements:
+
 ```bash
 sed -i 's/"incorrect_domain"/"correct_domain"/g' src/data/generated/*.ts
 ```
@@ -460,8 +484,9 @@ sed -i 's/"incorrect_domain"/"correct_domain"/g' src/data/generated/*.ts
 **Cause**: Deprecated Supabase package.
 
 **Solution**: Replace with centralized client import:
+
 ```typescript
-import { supabase } from './supabase';
+import { supabase } from "./supabase";
 ```
 
 ---
@@ -471,16 +496,19 @@ import { supabase } from './supabase';
 ### Regular Tasks
 
 **Weekly**:
+
 - Review global flashcard statistics
 - Identify low-performing cards (< 50% accuracy)
 - Generate new content to fill gaps
 
 **Monthly**:
+
 - Analyze domain coverage balance
 - Update cards based on Tanium product changes
 - Archive outdated content
 
 **Quarterly**:
+
 - Full content audit
 - User feedback review
 - Feature prioritization
@@ -492,6 +520,7 @@ import { supabase } from './supabase';
 ✅ **AI Flashcard Library Addon is PRODUCTION READY**
 
 **Key Achievements**:
+
 - 157 AI-generated flashcards successfully imported
 - Hybrid dual-source model (library + user cards)
 - Unified review queue with SuperMemo2 scheduling
@@ -501,6 +530,7 @@ import { supabase } from './supabase';
 - Mobile-responsive design
 
 **Next Steps**:
+
 1. Generate additional content to reach 500+ card goal
 2. User testing and feedback collection
 3. Performance monitoring and optimization

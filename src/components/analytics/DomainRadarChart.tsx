@@ -32,15 +32,17 @@ interface DomainData {
 }
 
 interface DomainRadarChartProps {
-  domainScores: Partial<Record<
-    TCODomain,
-    {
-      score: number;
-      questionsAnswered: number;
-      correctAnswers: number;
-      timeSpent: number;
-    }
-  >>;
+  domainScores: Partial<
+    Record<
+      TCODomain,
+      {
+        score: number;
+        questionsAnswered: number;
+        correctAnswers: number;
+        timeSpent: number;
+      }
+    >
+  >;
 }
 
 export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
@@ -74,7 +76,7 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
 
   const data: DomainData[] = Object.entries(domainScores).map(([domain, stats]) => ({
     domain: domainLabels[domain as TCODomain],
-    score: (stats?.score) || 0,
+    score: stats?.score || 0,
     fullMark: 100,
     weight: TCO_DOMAIN_WEIGHTS[domain as TCODomain] || 0,
   }));
@@ -94,7 +96,7 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
     <Card className="glass border-white/10">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-foreground">
-          <Shield className="h-5 w-5 text-tanium-accent" />
+          <Shield className="text-tanium-accent h-5 w-5" />
           Domain Performance Overview
         </CardTitle>
       </CardHeader>
@@ -126,7 +128,7 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
 
             {/* Overall Stats */}
             <div className="text-center">
-              <div className="mb-1 text-2xl font-bold text-tanium-accent">{averageScore}%</div>
+              <div className="text-tanium-accent mb-1 text-2xl font-bold">{averageScore}%</div>
               <div className="text-sm text-muted-foreground">Overall Average</div>
             </div>
           </div>
@@ -145,7 +147,7 @@ export function DomainRadarChart({ domainScores }: DomainRadarChartProps) {
                     className="glass flex items-center justify-between rounded-lg border border-white/5 p-3"
                   >
                     <div className="flex items-center gap-3">
-                      <Icon className="h-4 w-4 text-tanium-accent" />
+                      <Icon className="text-tanium-accent h-4 w-4" />
                       <div>
                         <div className="text-sm font-medium text-foreground">{label}</div>
                         <div className="text-xs text-muted-foreground">

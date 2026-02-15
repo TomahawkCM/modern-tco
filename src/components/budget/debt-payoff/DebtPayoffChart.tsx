@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useMemo } from 'react';
+import { useMemo } from "react";
 import {
   AreaChart,
   Area,
@@ -12,12 +12,12 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-} from 'recharts';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useThemeMode } from '@/hooks/useThemeMode';
-import { getChartPalette } from '@/lib/budget-chart-colors';
-import type { StrategyResult, DebtAccount } from '@/lib/calculators/types';
-import { useTranslations } from 'next-intl';
+} from "recharts";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useThemeMode } from "@/hooks/useThemeMode";
+import { getChartPalette } from "@/lib/budget-chart-colors";
+import type { StrategyResult, DebtAccount } from "@/lib/calculators/types";
+import { useTranslations } from "next-intl";
 
 const MAX_DATA_POINTS = 120;
 
@@ -43,7 +43,7 @@ function BalanceChart({ result, debts, formatCurrency }: BalanceChartProps) {
   const palette = getChartPalette(theme);
 
   const data = useMemo(() => {
-    const raw = result.schedule.map(month => {
+    const raw = result.schedule.map((month) => {
       const point: Record<string, number | string> = {
         month: month.month,
         label: `M${month.month}`,
@@ -91,25 +91,25 @@ function BalanceChart({ result, debts, formatCurrency }: BalanceChartProps) {
         />
         <Tooltip
           contentStyle={{
-            backgroundColor: 'rgb(15 23 42)',
-            border: '1px solid rgb(51 65 85)',
-            borderRadius: '8px',
-            fontSize: '12px',
+            backgroundColor: "rgb(15 23 42)",
+            border: "1px solid rgb(51 65 85)",
+            borderRadius: "8px",
+            fontSize: "12px",
           }}
-          labelStyle={{ color: 'rgb(148 163 184)' }}
+          labelStyle={{ color: "rgb(148 163 184)" }}
           formatter={(value: number, name: string) => {
-            const debt = debts.find(d => d.id === name);
+            const debt = debts.find((d) => d.id === name);
             return [formatCurrency(value), debt?.name ?? name];
           }}
         />
         <Legend
           formatter={(value: string) => {
-            const debt = debts.find(d => d.id === value);
+            const debt = debts.find((d) => d.id === value);
             return debt?.name ?? value;
           }}
-          wrapperStyle={{ fontSize: '12px' }}
+          wrapperStyle={{ fontSize: "12px" }}
         />
-        {debts.map(debt => (
+        {debts.map((debt) => (
           <Area
             key={debt.id}
             type="monotone"
@@ -128,7 +128,7 @@ function BalanceChart({ result, debts, formatCurrency }: BalanceChartProps) {
 interface ComparisonChartProps {
   scenarios: Array<{
     name: string;
-    schedule: StrategyResult['schedule'];
+    schedule: StrategyResult["schedule"];
   }>;
   formatCurrency: (amount: number) => string;
 }
@@ -138,7 +138,7 @@ function ComparisonChart({ scenarios, formatCurrency }: ComparisonChartProps) {
   const palette = getChartPalette(theme);
 
   const data = useMemo(() => {
-    const maxMonths = Math.max(...scenarios.map(s => s.schedule.length));
+    const maxMonths = Math.max(...scenarios.map((s) => s.schedule.length));
     const raw: Record<string, number | string>[] = [];
 
     for (let m = 0; m < maxMonths; m++) {
@@ -172,15 +172,15 @@ function ComparisonChart({ scenarios, formatCurrency }: ComparisonChartProps) {
         />
         <Tooltip
           contentStyle={{
-            backgroundColor: 'rgb(15 23 42)',
-            border: '1px solid rgb(51 65 85)',
-            borderRadius: '8px',
-            fontSize: '12px',
+            backgroundColor: "rgb(15 23 42)",
+            border: "1px solid rgb(51 65 85)",
+            borderRadius: "8px",
+            fontSize: "12px",
           }}
-          labelStyle={{ color: 'rgb(148 163 184)' }}
+          labelStyle={{ color: "rgb(148 163 184)" }}
           formatter={(value: number) => [formatCurrency(value)]}
         />
-        <Legend wrapperStyle={{ fontSize: '12px' }} />
+        <Legend wrapperStyle={{ fontSize: "12px" }} />
         {scenarios.map((scenario, i) => (
           <Line
             key={scenario.name}
@@ -201,7 +201,7 @@ interface DebtPayoffChartProps {
   debts: DebtAccount[];
   comparisonScenarios?: Array<{
     name: string;
-    schedule: StrategyResult['schedule'];
+    schedule: StrategyResult["schedule"];
   }>;
   formatCurrency: (amount: number) => string;
 }
@@ -212,12 +212,12 @@ export function DebtPayoffChart({
   comparisonScenarios,
   formatCurrency,
 }: DebtPayoffChartProps) {
-  const t = useTranslations('debtPayoff');
+  const t = useTranslations("debtPayoff");
 
   if (!result || result.schedule.length === 0) {
     return (
       <div className="flex h-[350px] items-center justify-center rounded-lg border border-dashed border-slate-700 text-sm text-slate-500">
-        {t('noChartData')}
+        {t("noChartData")}
       </div>
     );
   }
@@ -228,11 +228,11 @@ export function DebtPayoffChart({
     <Tabs defaultValue="balance">
       <TabsList className="bg-slate-800/50">
         <TabsTrigger value="balance" className="text-xs data-[state=active]:bg-slate-700">
-          {t('chart.balanceDecline')}
+          {t("chart.balanceDecline")}
         </TabsTrigger>
         {hasComparison && (
           <TabsTrigger value="comparison" className="text-xs data-[state=active]:bg-slate-700">
-            {t('chart.scenarioComparison')}
+            {t("chart.scenarioComparison")}
           </TabsTrigger>
         )}
       </TabsList>

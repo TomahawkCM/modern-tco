@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Savings Goal Calculator Page
@@ -7,27 +7,27 @@
  * Two modes: "when will I reach my goal" or "how much should I save"
  */
 
-import { useState, useMemo } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
-import Link from 'next/link';
-import { ArrowLeft, Target, Calendar, DollarSign, TrendingUp, Sparkles } from 'lucide-react';
-import { CurrencyInput, PercentInput, ResultsPanel } from '@/components/budget/calculators';
-import { calculateSavingsGoal } from '@/lib/calculators/savings-goal';
-import { formatCurrency } from '@/i18n/utils/formatCurrency';
-import { formatPercent, formatNumber } from '@/i18n/utils/formatNumber';
-import type { SupportedLocale } from '@/i18n/config';
-import type { SavingsGoalMode } from '@/lib/calculators/types';
-import { LOCALE_METADATA } from '@/i18n/config';
-import { cn } from '@/lib/utils';
+import { useState, useMemo } from "react";
+import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
+import { ArrowLeft, Target, Calendar, DollarSign, TrendingUp, Sparkles } from "lucide-react";
+import { CurrencyInput, PercentInput, ResultsPanel } from "@/components/budget/calculators";
+import { calculateSavingsGoal } from "@/lib/calculators/savings-goal";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { formatPercent, formatNumber } from "@/i18n/utils/formatNumber";
+import type { SupportedLocale } from "@/i18n/config";
+import type { SavingsGoalMode } from "@/lib/calculators/types";
+import { LOCALE_METADATA } from "@/i18n/config";
+import { cn } from "@/lib/utils";
 
 export default function SavingsGoalCalculatorPage() {
-  const t = useTranslations('calculators');
+  const t = useTranslations("calculators");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA['en-US'];
+  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
   const currency = localeMeta.currency as string;
 
   // Mode state
-  const [mode, setMode] = useState<SavingsGoalMode>('when');
+  const [mode, setMode] = useState<SavingsGoalMode>("when");
 
   // Form state
   const [goalAmount, setGoalAmount] = useState(10000);
@@ -36,7 +36,7 @@ export default function SavingsGoalCalculatorPage() {
   const [targetDate, setTargetDate] = useState(() => {
     const date = new Date();
     date.setFullYear(date.getFullYear() + 2);
-    return date.toISOString().split('T')[0];
+    return date.toISOString().split("T")[0];
   });
   const [expectedReturn, setExpectedReturn] = useState(5);
 
@@ -46,8 +46,8 @@ export default function SavingsGoalCalculatorPage() {
       mode,
       goalAmount,
       currentSavings,
-      monthlyContribution: mode === 'when' ? monthlyContribution : undefined,
-      targetDate: mode === 'howMuch' ? new Date(targetDate) : undefined,
+      monthlyContribution: mode === "when" ? monthlyContribution : undefined,
+      targetDate: mode === "howMuch" ? new Date(targetDate) : undefined,
       expectedAnnualReturn: expectedReturn,
     });
   }, [mode, goalAmount, currentSavings, monthlyContribution, targetDate, expectedReturn]);
@@ -58,61 +58,59 @@ export default function SavingsGoalCalculatorPage() {
       <div className="flex items-start gap-4">
         <Link
           href="/budget-app/calculators"
-          className="mt-1 p-2 rounded-lg hover:bg-slate-800 transition-colors"
-          aria-label={t('common.back')}
+          className="mt-1 rounded-lg p-2 transition-colors hover:bg-slate-800"
+          aria-label={t("common.back")}
         >
-          <ArrowLeft className="w-5 h-5 text-slate-400" />
+          <ArrowLeft className="h-5 w-5 text-slate-400" />
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-            <Target className="w-8 h-8 text-blue-400" />
-            {t('savingsGoal.title')}
+          <h1 className="flex items-center gap-3 text-3xl font-bold text-white">
+            <Target className="h-8 w-8 text-blue-400" />
+            {t("savingsGoal.title")}
           </h1>
-          <p className="text-slate-400 mt-2">{t('savingsGoal.subtitle')}</p>
+          <p className="mt-2 text-slate-400">{t("savingsGoal.subtitle")}</p>
         </div>
       </div>
 
       {/* Mode Toggle */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-4">
+      <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-4">
         <div className="flex gap-4">
           <button
-            onClick={() => setMode('when')}
+            onClick={() => setMode("when")}
             className={cn(
-              'flex-1 py-3 px-4 rounded-lg font-medium transition-all',
-              mode === 'when'
-                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50'
-                : 'bg-slate-700/50 text-slate-400 border border-transparent hover:bg-slate-700'
+              "flex-1 rounded-lg px-4 py-3 font-medium transition-all",
+              mode === "when"
+                ? "border border-blue-500/50 bg-blue-500/20 text-blue-400"
+                : "border border-transparent bg-slate-700/50 text-slate-400 hover:bg-slate-700"
             )}
           >
-            <Calendar className="w-5 h-5 mx-auto mb-2" />
-            {t('savingsGoal.modeWhen')}
+            <Calendar className="mx-auto mb-2 h-5 w-5" />
+            {t("savingsGoal.modeWhen")}
           </button>
           <button
-            onClick={() => setMode('howMuch')}
+            onClick={() => setMode("howMuch")}
             className={cn(
-              'flex-1 py-3 px-4 rounded-lg font-medium transition-all',
-              mode === 'howMuch'
-                ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50'
-                : 'bg-slate-700/50 text-slate-400 border border-transparent hover:bg-slate-700'
+              "flex-1 rounded-lg px-4 py-3 font-medium transition-all",
+              mode === "howMuch"
+                ? "border border-blue-500/50 bg-blue-500/20 text-blue-400"
+                : "border border-transparent bg-slate-700/50 text-slate-400 hover:bg-slate-700"
             )}
           >
-            <DollarSign className="w-5 h-5 mx-auto mb-2" />
-            {t('savingsGoal.modeHowMuch')}
+            <DollarSign className="mx-auto mb-2 h-5 w-5" />
+            {t("savingsGoal.modeHowMuch")}
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         {/* Input Form */}
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6 space-y-6">
-          <h2 className="text-lg font-semibold text-white">
-            {t('savingsGoal.inputTitle')}
-          </h2>
+        <div className="space-y-6 rounded-xl border border-slate-700 bg-slate-800/50 p-6">
+          <h2 className="text-lg font-semibold text-white">{t("savingsGoal.inputTitle")}</h2>
 
           <div className="space-y-5">
             {/* Goal Amount */}
             <CurrencyInput
-              label={t('savingsGoal.goalAmount')}
+              label={t("savingsGoal.goalAmount")}
               value={goalAmount}
               onChange={setGoalAmount}
               currency={currency}
@@ -122,7 +120,7 @@ export default function SavingsGoalCalculatorPage() {
 
             {/* Current Savings */}
             <CurrencyInput
-              label={t('savingsGoal.currentSavings')}
+              label={t("savingsGoal.currentSavings")}
               value={currentSavings}
               onChange={setCurrentSavings}
               currency={currency}
@@ -131,9 +129,9 @@ export default function SavingsGoalCalculatorPage() {
             />
 
             {/* Monthly Contribution (when mode) */}
-            {mode === 'when' && (
+            {mode === "when" && (
               <CurrencyInput
-                label={t('savingsGoal.monthlyContribution')}
+                label={t("savingsGoal.monthlyContribution")}
                 value={monthlyContribution}
                 onChange={setMonthlyContribution}
                 currency={currency}
@@ -143,30 +141,30 @@ export default function SavingsGoalCalculatorPage() {
             )}
 
             {/* Target Date (howMuch mode) */}
-            {mode === 'howMuch' && (
+            {mode === "howMuch" && (
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-slate-300">
-                  {t('savingsGoal.targetDate')}
+                  {t("savingsGoal.targetDate")}
                 </label>
                 <input
                   type="date"
                   value={targetDate}
                   onChange={(e) => setTargetDate(e.target.value)}
-                  min={new Date().toISOString().split('T')[0]}
-                  className="w-full py-2 px-4 bg-slate-800/50 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  min={new Date().toISOString().split("T")[0]}
+                  className="w-full rounded-lg border border-slate-600 bg-slate-800/50 px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
             )}
 
             {/* Expected Return */}
             <PercentInput
-              label={t('savingsGoal.expectedReturn')}
+              label={t("savingsGoal.expectedReturn")}
               value={expectedReturn}
               onChange={setExpectedReturn}
               locale={locale}
               min={0}
               max={20}
-              helperText={t('savingsGoal.expectedReturnHelp')}
+              helperText={t("savingsGoal.expectedReturnHelp")}
             />
           </div>
         </div>
@@ -174,42 +172,42 @@ export default function SavingsGoalCalculatorPage() {
         {/* Results */}
         <div className="space-y-6">
           {/* Main Result Card */}
-          <div className="bg-blue-500/10 rounded-xl border border-blue-500/30 p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <Sparkles className="w-6 h-6 text-blue-400" />
+          <div className="rounded-xl border border-blue-500/30 bg-blue-500/10 p-6">
+            <div className="mb-4 flex items-center gap-3">
+              <Sparkles className="h-6 w-6 text-blue-400" />
               <h3 className="text-lg font-semibold text-white">
-                {mode === 'when'
-                  ? t('savingsGoal.resultWhenTitle')
-                  : t('savingsGoal.resultHowMuchTitle')}
+                {mode === "when"
+                  ? t("savingsGoal.resultWhenTitle")
+                  : t("savingsGoal.resultHowMuchTitle")}
               </h3>
             </div>
 
-            {mode === 'when' && result.completionDate && result.monthsToGoal !== undefined && (
-              <div className="text-center py-4">
-                <p className="text-3xl font-bold text-white mb-2">
+            {mode === "when" && result.completionDate && result.monthsToGoal !== undefined && (
+              <div className="py-4 text-center">
+                <p className="mb-2 text-3xl font-bold text-white">
                   {new Intl.DateTimeFormat(locale, {
-                    year: 'numeric',
-                    month: 'long',
+                    year: "numeric",
+                    month: "long",
                   }).format(result.completionDate)}
                 </p>
                 <p className="text-slate-400">
-                  {t('savingsGoal.inMonths', { months: result.monthsToGoal })}
+                  {t("savingsGoal.inMonths", { months: result.monthsToGoal })}
                 </p>
               </div>
             )}
 
-            {mode === 'howMuch' && result.requiredMonthlyContribution !== undefined && (
-              <div className="text-center py-4">
-                <p className="text-3xl font-bold text-white mb-2">
+            {mode === "howMuch" && result.requiredMonthlyContribution !== undefined && (
+              <div className="py-4 text-center">
+                <p className="mb-2 text-3xl font-bold text-white">
                   {formatCurrency(result.requiredMonthlyContribution, currency, locale)}
                 </p>
-                <p className="text-slate-400">{t('savingsGoal.perMonth')}</p>
+                <p className="text-slate-400">{t("savingsGoal.perMonth")}</p>
               </div>
             )}
 
             {/* Progress */}
             <div className="mt-4">
-              <div className="flex justify-between text-sm mb-2">
+              <div className="mb-2 flex justify-between text-sm">
                 <span className="text-slate-400">
                   {formatCurrency(currentSavings, currency, locale)}
                 </span>
@@ -217,9 +215,9 @@ export default function SavingsGoalCalculatorPage() {
                   {formatCurrency(goalAmount, currency, locale)}
                 </span>
               </div>
-              <div className="h-2 bg-slate-700 rounded-full overflow-hidden">
+              <div className="h-2 overflow-hidden rounded-full bg-slate-700">
                 <div
-                  className="h-full bg-blue-500 rounded-full transition-all duration-500"
+                  className="h-full rounded-full bg-blue-500 transition-all duration-500"
                   style={{ width: `${Math.min(100, result.progressPercent)}%` }}
                 />
               </div>
@@ -228,52 +226,52 @@ export default function SavingsGoalCalculatorPage() {
 
           {/* Detailed Results */}
           <ResultsPanel
-            title={t('savingsGoal.projectionTitle')}
+            title={t("savingsGoal.projectionTitle")}
             currency={currency}
             locale={locale}
             columns={2}
             results={[
               {
-                label: t('savingsGoal.projectedAmount'),
+                label: t("savingsGoal.projectedAmount"),
                 value: result.projectedAmount,
-                type: 'currency',
+                type: "currency",
                 highlight: true,
               },
               {
-                label: t('savingsGoal.totalContributions'),
+                label: t("savingsGoal.totalContributions"),
                 value: result.totalContributions,
-                type: 'currency',
+                type: "currency",
               },
               {
-                label: t('savingsGoal.interestEarned'),
+                label: t("savingsGoal.interestEarned"),
                 value: result.totalInterestEarned,
-                type: 'currency',
-                variant: result.totalInterestEarned > 0 ? 'success' : 'default',
+                type: "currency",
+                variant: result.totalInterestEarned > 0 ? "success" : "default",
               },
               {
-                label: t('savingsGoal.progress'),
+                label: t("savingsGoal.progress"),
                 value: result.progressPercent,
-                type: 'percent',
+                type: "percent",
               },
             ]}
           />
 
           {/* Projection Timeline */}
           {result.projections.length > 1 && (
-            <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6">
-              <h3 className="text-sm font-semibold text-blue-400 mb-4">
-                {t('savingsGoal.timelineTitle')}
+            <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
+              <h3 className="mb-4 text-sm font-semibold text-blue-400">
+                {t("savingsGoal.timelineTitle")}
               </h3>
-              <div className="space-y-2 max-h-64 overflow-y-auto">
+              <div className="max-h-64 space-y-2 overflow-y-auto">
                 {result.projections.slice(1).map((proj, idx) => (
                   <div
                     key={idx}
-                    className="flex items-center justify-between text-sm py-2 border-b border-slate-700 last:border-0"
+                    className="flex items-center justify-between border-b border-slate-700 py-2 text-sm last:border-0"
                   >
                     <span className="text-slate-400">
                       {new Intl.DateTimeFormat(locale, {
-                        year: 'numeric',
-                        month: 'short',
+                        year: "numeric",
+                        month: "short",
                       }).format(proj.date)}
                     </span>
                     <span className="font-medium text-white">

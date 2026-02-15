@@ -54,9 +54,9 @@ function Start-StudyModulePipeline {
         [switch]$TestMDX,
         [switch]$GenerateReports
     )
-    
+
     Write-Host "`n🚀 Study Module Development Pipeline" -ForegroundColor Magenta
-    
+
     # Pipeline steps
     $pipeline = @(
         @{ Step = "Module Validation"; Action = { Test-StudyModules } },
@@ -64,7 +64,7 @@ function Start-StudyModulePipeline {
         @{ Step = "Content Quality"; Action = { Test-ModuleContent } },
         @{ Step = "Domain Alignment"; Action = { Test-DomainAlignment } }
     )
-    
+
     foreach ($step in $pipeline) {
         Write-Host "`n📋 $($step.Step)..." -ForegroundColor Blue
         try {
@@ -74,7 +74,7 @@ function Start-StudyModulePipeline {
             Write-Host "❌ $($step.Step) failed: $($_.Exception.Message)" -ForegroundColor Red
         }
     }
-    
+
     if ($GenerateReports) {
         Export-StudyModuleReport
     }
@@ -83,20 +83,20 @@ function Start-StudyModulePipeline {
 # Study module validation functions
 function Test-StudyModules {
     Write-Host "🔍 Validating study module structure..." -ForegroundColor Cyan
-    
+
     $moduleDir = "src/content/modules"
     if (-not (Test-Path $moduleDir)) {
         Write-Host "❌ Module directory not found: $moduleDir" -ForegroundColor Red
         return
     }
-    
+
     $modules = Get-ChildItem $moduleDir -Filter "*.mdx" -File
-    
+
     if ($modules.Count -eq 0) {
         Write-Host "⚠️ No MDX modules found" -ForegroundColor Yellow
         return
     }
-    
+
     Write-Host "📊 Found $($modules.Count) study modules:" -ForegroundColor Green
     foreach ($module in $modules) {
         Write-Host "  ✅ $($module.Name)" -ForegroundColor Green
@@ -105,20 +105,20 @@ function Test-StudyModules {
 
 function Test-MDXStructure {
     Write-Host "🏗️ Testing MDX structure and frontmatter..." -ForegroundColor Cyan
-    
+
     $modules = Get-ChildItem "src/content/modules" -Filter "*.mdx" -File -ErrorAction SilentlyContinue
-    
+
     foreach ($module in $modules) {
         $content = Get-Content $module.FullName -Raw
-        
+
         # Check frontmatter
         if ($content -match "^---\s*\n(.*?)\n---" -and $matches[1]) {
             Write-Host "  ✅ $($module.Name): Valid frontmatter" -ForegroundColor Green
-            
+
             # Check required frontmatter fields
             $frontmatter = $matches[1]
             $requiredFields = @("title", "domain", "estimatedTime", "difficulty")
-            
+
             foreach ($field in $requiredFields) {
                 if ($frontmatter -match "$field\s*:") {
                     Write-Host "    ✅ $field found" -ForegroundColor Green
@@ -129,7 +129,7 @@ function Test-MDXStructure {
         } else {
             Write-Host "  ❌ $($module.Name): Invalid or missing frontmatter" -ForegroundColor Red
         }
-        
+
         # Check Learn/Practice/Assess sections
         $sections = @("## Learn", "## Practice", "## Assess")
         foreach ($section in $sections) {
@@ -144,18 +144,18 @@ function Test-MDXStructure {
 
 function Test-ModuleContent {
     Write-Host "✨ Testing module content quality..." -ForegroundColor Cyan
-    
+
     $modules = Get-ChildItem "src/content/modules" -Filter "*.mdx" -File -ErrorAction SilentlyContinue
-    
+
     foreach ($module in $modules) {
         $content = Get-Content $module.FullName -Raw
         $wordCount = ($content -split '\s+').Count
         $lineCount = ($content -split "`n").Count
-        
+
         Write-Host "  📄 $($module.Name):" -ForegroundColor Cyan
         Write-Host "    📝 Word count: $wordCount" -ForegroundColor Gray
         Write-Host "    📏 Line count: $lineCount" -ForegroundColor Gray
-        
+
         # Content quality checks
         if ($wordCount -lt 500) {
             Write-Host "    ⚠️ Content may be too short" -ForegroundColor Yellow
@@ -169,7 +169,7 @@ function Test-ModuleContent {
 
 function Test-DomainAlignment {
     Write-Host "🎯 Testing TCO domain alignment..." -ForegroundColor Cyan
-    
+
     # Expected domains and weights
     $domains = @{
         1 = @{ Name = "Asking Questions"; Weight = 22 }
@@ -178,12 +178,12 @@ function Test-DomainAlignment {
         4 = @{ Name = "Navigation"; Weight = 23 }
         5 = @{ Name = "Reporting"; Weight = 17 }
     }
-    
+
     $modules = Get-ChildItem "src/content/modules" -Filter "*.mdx" -File -ErrorAction SilentlyContinue
-    
+
     foreach ($domain in $domains.GetEnumerator()) {
         $domainModules = $modules | Where-Object { $_.Name -match "0$($domain.Key)-" }
-        
+
         if ($domainModules) {
             Write-Host "  ✅ Domain $($domain.Key) ($($domain.Value.Name)): Module found" -ForegroundColor Green
         } else {
@@ -194,10 +194,10 @@ function Test-DomainAlignment {
 
 function Export-StudyModuleReport {
     $reportPath = "docs/study-modules-report.json"
-    
+
     $modules = Get-ChildItem "src/content/modules" -Filter "*.mdx" -File -ErrorAction SilentlyContinue
     $moduleData = @()
-    
+
     foreach ($module in $modules) {
         $content = Get-Content $module.FullName -Raw -ErrorAction SilentlyContinue
         $moduleData += @{
@@ -208,14 +208,14 @@ function Export-StudyModuleReport {
             LastModified = $module.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss")
         }
     }
-    
+
     $report = @{
         Timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
         TotalModules = $modules.Count
         Modules = $moduleData
         Status = "Generated via PowerShell pipeline"
     }
-    
+
     $report | ConvertTo-Json -Depth 3 | Out-File $reportPath -Encoding UTF8
     Write-Host "📊 Study module report exported: $reportPath" -ForegroundColor Green
 }
@@ -233,9 +233,9 @@ function Start-ModuleDevelopment {
         [string]$ModuleName,
         [int]$Domain = 1
     )
-    
+
     Write-Host "`n🛠️ Starting Module Development Workflow" -ForegroundColor Blue
-    
+
     # Development steps
     Write-Host "📋 Development Checklist:" -ForegroundColor Cyan
     Write-Host "  1. 📝 Create/Edit MDX content" -ForegroundColor Gray
@@ -244,7 +244,7 @@ function Start-ModuleDevelopment {
     Write-Host "  4. ✨ Test content quality" -ForegroundColor Gray
     Write-Host "  5. 🚀 Run development server" -ForegroundColor Gray
     Write-Host "  6. 🌐 Test in browser" -ForegroundColor Gray
-    
+
     # Quick validation
     if ($ModuleName) {
         $modulePath = "src/content/modules/$ModuleName"
@@ -255,7 +255,7 @@ function Start-ModuleDevelopment {
             Write-Host "`n❌ Module not found: $ModuleName" -ForegroundColor Red
         }
     }
-    
+
     # Start dev server
     Write-Host "`n🚀 Starting development server..." -ForegroundColor Green
     Write-Host "💡 Run 'npm run dev' to start the development server" -ForegroundColor Cyan

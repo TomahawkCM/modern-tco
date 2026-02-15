@@ -56,10 +56,9 @@ export function initClientMonitoring() {
     trackEvent({
       type: "unhandled_rejection",
       data: {
-        reason: (e?.reason)?.message || String(e?.reason),
-        stack: (e?.reason)?.stack,
+        reason: e?.reason?.message || String(e?.reason),
+        stack: e?.reason?.stack,
       },
     });
   });
 }
-

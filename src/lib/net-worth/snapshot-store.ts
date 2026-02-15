@@ -5,9 +5,9 @@
  * for historical tracking and trend charts.
  */
 
-import { db } from '@/lib/budget-db';
-import type { StoredNetWorthSnapshot } from '@/types/budget';
-import { calculateCurrentNetWorth } from './calculator';
+import { db } from "@/lib/budget-db";
+import type { StoredNetWorthSnapshot } from "@/types/budget";
+import { calculateCurrentNetWorth } from "./calculator";
 
 /**
  * Take a snapshot of current net worth and store it.
@@ -15,13 +15,13 @@ import { calculateCurrentNetWorth } from './calculator';
  */
 export async function takeMonthlySnapshot(): Promise<StoredNetWorthSnapshot | null> {
   const now = new Date();
-  const monthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  const monthKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
 
   // Check if we already have a snapshot for this month
   const existing = await db.netWorthSnapshots
     .filter((s) => {
       const d = new Date(s.date);
-      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
       return key === monthKey;
     })
     .first();
@@ -49,14 +49,14 @@ export async function takeMonthlySnapshot(): Promise<StoredNetWorthSnapshot | nu
  * Get all historical snapshots, sorted by date ascending.
  */
 export async function getHistoricalSnapshots(): Promise<StoredNetWorthSnapshot[]> {
-  return db.netWorthSnapshots.orderBy('date').toArray();
+  return db.netWorthSnapshots.orderBy("date").toArray();
 }
 
 /**
  * Get the most recent snapshot.
  */
 export async function getLatestSnapshot(): Promise<StoredNetWorthSnapshot | undefined> {
-  return db.netWorthSnapshots.orderBy('date').reverse().first();
+  return db.netWorthSnapshots.orderBy("date").reverse().first();
 }
 
 /**
@@ -74,9 +74,7 @@ export async function getYearOverYearComparison(): Promise<{
   const now = new Date();
   const thisYear = now.getFullYear();
 
-  const currentYearSnapshots = snapshots.filter(
-    (s) => new Date(s.date).getFullYear() === thisYear
-  );
+  const currentYearSnapshots = snapshots.filter((s) => new Date(s.date).getFullYear() === thisYear);
   const previousYearSnapshots = snapshots.filter(
     (s) => new Date(s.date).getFullYear() === thisYear - 1
   );
@@ -89,8 +87,7 @@ export async function getYearOverYearComparison(): Promise<{
   const latestPrevious = previousYearSnapshots[previousYearSnapshots.length - 1].netWorth;
 
   const change = latestCurrent - latestPrevious;
-  const changePercent =
-    latestPrevious !== 0 ? (change / Math.abs(latestPrevious)) * 100 : 0;
+  const changePercent = latestPrevious !== 0 ? (change / Math.abs(latestPrevious)) * 100 : 0;
 
   return {
     currentYear: Math.round(latestCurrent * 100) / 100,

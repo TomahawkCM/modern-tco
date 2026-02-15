@@ -117,7 +117,10 @@ export function LearningFlowProgress({
                     <CheckCircle className="h-4 w-4" />
                   ) : (
                     <Icon
-                      className={cn("h-4 w-4", isPending ? "text-muted-foreground" : "text-foreground")}
+                      className={cn(
+                        "h-4 w-4",
+                        isPending ? "text-muted-foreground" : "text-foreground"
+                      )}
                     />
                   )}
                 </div>

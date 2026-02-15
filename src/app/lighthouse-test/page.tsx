@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function LighthouseTestPage() {
   return (
@@ -27,7 +27,7 @@ export default function LighthouseTestPage() {
                 <p className="text-muted-foreground">
                   This page includes all production optimizations:
                 </p>
-                <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
+                <ul className="list-inside list-disc space-y-2 text-sm text-muted-foreground">
                   <li>✅ Optimized package imports (20+ packages)</li>
                   <li>✅ Advanced webpack bundle splitting</li>
                   <li>✅ Self-hosted fonts with preloading</li>
@@ -41,7 +41,7 @@ export default function LighthouseTestPage() {
             </CardContent>
           </Card>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             {[1, 2, 3].map((i) => (
               <Card key={i}>
                 <CardHeader>
@@ -50,8 +50,8 @@ export default function LighthouseTestPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    This is a sample card demonstrating the optimized UI components
-                    with minimal JavaScript overhead.
+                    This is a sample card demonstrating the optimized UI components with minimal
+                    JavaScript overhead.
                   </p>
                   <Button className="mt-4" variant="outline">
                     Action {i}
@@ -61,12 +61,12 @@ export default function LighthouseTestPage() {
             ))}
           </div>
 
-          <Card className="bg-[#22c55e]/10 border-[#22c55e]/20">
+          <Card className="border-[#22c55e]/20 bg-[#22c55e]/10">
             <CardHeader>
               <CardTitle className="text-[#22c55e]">Performance Metrics Target</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                 <div>
                   <p className="text-sm text-muted-foreground">Performance</p>
                   <p className="text-2xl font-bold text-[#22c55e]">≥90%</p>
@@ -93,5 +93,5 @@ export default function LighthouseTestPage() {
         </motion.div>
       </div>
     </div>
-  )
+  );
 }

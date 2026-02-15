@@ -11,6 +11,7 @@
 ## 📋 Pre-Deployment Checklist
 
 ### ✅ Code Quality
+
 - [x] All features implemented (4-week plan 100% complete)
 - [x] Build passes successfully (`npm run build`)
 - [x] No TypeScript errors
@@ -19,6 +20,7 @@
 - [x] Documentation complete (User Guide, Admin Guide, FAQ, Video Scripts)
 
 ### ✅ Environment Variables (Production)
+
 - [ ] `NEXT_PUBLIC_SUPABASE_URL` - Production Supabase URL
 - [ ] `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Production anon key
 - [ ] `SUPABASE_SERVICE_ROLE_KEY` - Production service role key (server-side only)
@@ -30,6 +32,7 @@
 - [ ] `NEXT_PUBLIC_VIDEOS_*` - YouTube video IDs for each module
 
 ### ✅ Database (Supabase Production)
+
 - [ ] Production database created
 - [ ] RLS policies deployed and tested
 - [ ] Database migrations applied
@@ -39,6 +42,7 @@
 - [ ] Performance indexes created
 
 ### ✅ Domain & SSL
+
 - [ ] Domain purchased/configured (e.g., tco.example.com)
 - [ ] DNS records pointing to Vercel
 - [ ] SSL certificate provisioned (automatic via Vercel)
@@ -46,6 +50,7 @@
 - [ ] WWW redirect configured (optional)
 
 ### ✅ Analytics & Monitoring
+
 - [ ] PostHog project created
 - [ ] PostHog API key added to environment variables
 - [ ] Sentry project created
@@ -55,6 +60,7 @@
 - [ ] Uptime monitoring configured (e.g., UptimeRobot, Better Uptime)
 
 ### ✅ Security
+
 - [ ] All secrets stored in Vercel environment variables (not in code)
 - [ ] RLS policies tested and validated
 - [ ] CORS configuration verified
@@ -63,6 +69,7 @@
 - [ ] Dependency vulnerabilities resolved (`npm audit`)
 
 ### ✅ Content
+
 - [ ] All modules reviewed and finalized
 - [ ] All videos uploaded and accessible
 - [ ] Question bank reviewed and validated
@@ -70,6 +77,7 @@
 - [ ] Certification blueprint alignment verified
 
 ### ✅ Legal & Compliance
+
 - [ ] Privacy Policy published
 - [ ] Terms of Service published
 - [ ] Cookie Policy published (if using cookies)
@@ -197,6 +205,7 @@ vercel env add NEXT_PUBLIC_VIDEOS_TAKING_ACTION production
 ```
 
 **Alternative: Via Vercel Dashboard**
+
 1. Go to https://vercel.com/robert-neveus-projects/modern-tco
 2. Click "Settings" → "Environment Variables"
 3. Add each variable:
@@ -221,6 +230,7 @@ vercel domains add tco.example.com
 ```
 
 **DNS Configuration Example:**
+
 ```
 Type: A
 Name: tco (or @)
@@ -327,6 +337,7 @@ vercel inspect [DEPLOYMENT_URL]
 ```
 
 **Via Vercel Dashboard:**
+
 1. Go to https://vercel.com/robert-neveus-projects/modern-tco
 2. Click "Deployments" tab
 3. Watch latest deployment in real-time
@@ -351,6 +362,7 @@ vercel rollback
 #### 5.1 Smoke Tests
 
 **Homepage Test:**
+
 ```bash
 # Test homepage loads
 curl -I https://tco.example.com
@@ -361,12 +373,14 @@ curl -I https://tco.example.com
 ```
 
 **Dashboard Test:**
+
 ```bash
 # Navigate to dashboard (requires login)
 # Manual test: Open browser, sign in, check dashboard loads
 ```
 
 **API Health Check:**
+
 ```bash
 # Test API health endpoint
 curl https://tco.example.com/api/health
@@ -376,12 +390,14 @@ curl https://tco.example.com/api/health
 ```
 
 **Database Connection:**
+
 ```bash
 # Check if app can connect to production database
 # Manual test: Sign in, load dashboard (should show user data)
 ```
 
 **Video Playback:**
+
 ```bash
 # Manual test: Navigate to any module, verify video embeds load
 # Open browser → Go to /learn/asking-questions → Check video plays
@@ -390,6 +406,7 @@ curl https://tco.example.com/api/health
 #### 5.2 Performance Tests
 
 **Lighthouse Audit:**
+
 ```bash
 # Run Lighthouse on production
 npx lighthouse https://tco.example.com --view
@@ -402,6 +419,7 @@ npx lighthouse https://tco.example.com --view
 ```
 
 **Load Time:**
+
 ```bash
 # Check page load times
 curl -w "@curl-format.txt" -o /dev/null -s https://tco.example.com
@@ -422,6 +440,7 @@ curl -w "@curl-format.txt" -o /dev/null -s https://tco.example.com
 #### 5.3 Analytics Verification
 
 **PostHog Events:**
+
 ```bash
 # Manual test:
 # 1. Navigate to https://tco.example.com
@@ -436,6 +455,7 @@ curl -w "@curl-format.txt" -o /dev/null -s https://tco.example.com
 ```
 
 **Sentry Errors:**
+
 ```bash
 # Trigger test error (if test endpoint exists)
 curl https://tco.example.com/api/sentry-test
@@ -448,6 +468,7 @@ curl https://tco.example.com/api/sentry-test
 #### 5.4 Security Validation
 
 **SSL Certificate:**
+
 ```bash
 # Check SSL is properly configured
 curl -vI https://tco.example.com 2>&1 | grep -i "ssl\|tls"
@@ -458,6 +479,7 @@ curl -vI https://tco.example.com 2>&1 | grep -i "ssl\|tls"
 ```
 
 **Security Headers:**
+
 ```bash
 # Check security headers
 curl -I https://tco.example.com | grep -i "x-frame-options\|x-content-type-options\|strict-transport-security"
@@ -469,6 +491,7 @@ curl -I https://tco.example.com | grep -i "x-frame-options\|x-content-type-optio
 ```
 
 **RLS Protection:**
+
 ```bash
 # Manual test:
 # 1. Sign in as User A
@@ -489,6 +512,7 @@ curl -H "Authorization: Bearer [USER_A_TOKEN]" \
 #### 6.1 Configure Uptime Monitoring
 
 **UptimeRobot (Free tier available):**
+
 ```bash
 # 1. Go to https://uptimerobot.com
 # 2. Add New Monitor
@@ -502,6 +526,7 @@ curl -H "Authorization: Bearer [USER_A_TOKEN]" \
 ```
 
 **Better Uptime (Alternative):**
+
 ```bash
 # 1. Go to https://betteruptime.com
 # 2. Create monitor for https://tco.example.com
@@ -544,6 +569,7 @@ curl -H "Authorization: Bearer [USER_A_TOKEN]" \
 ### Week 1: Intensive Monitoring
 
 **Daily Checks:**
+
 - [ ] Check Vercel deployments for errors
 - [ ] Review Sentry for new errors (target: < 5 per day)
 - [ ] Review PostHog for user activity
@@ -552,6 +578,7 @@ curl -H "Authorization: Bearer [USER_A_TOKEN]" \
 - [ ] Monitor Core Web Vitals (LCP < 2.5s, FID < 100ms, CLS < 0.1)
 
 **Metrics to Watch:**
+
 - **User Signups**: Track daily new users
 - **Active Users**: Daily active users (DAU)
 - **Error Rate**: Errors per 1000 requests (target: < 0.1%)
@@ -562,6 +589,7 @@ curl -H "Authorization: Bearer [USER_A_TOKEN]" \
 ### Month 1: Optimization Phase
 
 **Weekly Reviews:**
+
 - [ ] Analyze PostHog user funnels (identify drop-offs)
 - [ ] Review Sentry performance issues
 - [ ] Check Vercel Analytics (page views, popular pages)
@@ -570,6 +598,7 @@ curl -H "Authorization: Bearer [USER_A_TOKEN]" \
 - [ ] Update documentation based on support tickets
 
 **Optimization Opportunities:**
+
 - Identify most-accessed pages → optimize further
 - Identify least-accessed features → improve discoverability
 - Analyze user paths → improve onboarding
@@ -582,12 +611,14 @@ curl -H "Authorization: Bearer [USER_A_TOKEN]" \
 ### When to Rollback
 
 **Immediate rollback if:**
+
 - Site is completely down (500 errors on all pages)
 - Critical security vulnerability discovered
 - Database corruption or data loss
 - Authentication completely broken (no users can log in)
 
 **Consider rollback if:**
+
 - Error rate > 1% of requests
 - Performance degradation > 50% (page load time doubles)
 - Critical feature broken (e.g., assessments don't save scores)
@@ -648,11 +679,13 @@ git push origin main
 ## 📞 Emergency Contacts
 
 **Production Issues:**
+
 - **On-Call Engineer**: emergency@your-domain.com / +1-800-XXX-XXXX
 - **DevOps Lead**: devops@your-domain.com / +1-800-XXX-XXXX
 - **Technical Lead**: tech-lead@your-domain.com / +1-800-XXX-XXXX
 
 **Vendor Support:**
+
 - **Vercel Support**: support@vercel.com / https://vercel.com/support
 - **Supabase Support**: support@supabase.io / https://supabase.com/support
 - **PostHog Support**: hey@posthog.com / https://posthog.com/docs
@@ -662,11 +695,12 @@ git push origin main
 
 ## ✅ Deployment Sign-Off
 
-**Deployment Completed By**: __________________
-**Date**: __________________
-**Time**: __________________
+**Deployment Completed By**: ********\_\_********
+**Date**: ********\_\_********
+**Time**: ********\_\_********
 
 **Verification Checklist:**
+
 - [ ] All pre-deployment checks completed
 - [ ] Production environment configured
 - [ ] Database migrated and tested
@@ -680,12 +714,15 @@ git push origin main
 - [ ] Documentation updated with production URLs
 
 **Notes:**
-________________________________________________________________
-________________________________________________________________
-________________________________________________________________
 
-**Approved By**: __________________
-**Date**: __________________
+---
+
+---
+
+---
+
+**Approved By**: ********\_\_********
+**Date**: ********\_\_********
 
 ---
 

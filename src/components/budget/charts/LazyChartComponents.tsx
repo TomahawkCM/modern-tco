@@ -12,23 +12,27 @@
  * Target improvement: 30s+ → <5s page load times
  */
 
-'use client';
+"use client";
 
-import { lazy, Suspense } from 'react';
-import type { Transaction, Holding, InvestmentAccount } from '@/types/budget';
-import type { Loan } from '@/types/budget';
+import { lazy, Suspense } from "react";
+import type { Transaction, Holding, InvestmentAccount } from "@/types/budget";
+import type { Loan } from "@/types/budget";
 
 // Lazy-load all chart components
 const InvestmentCharts = lazy(() =>
-  import('@/components/budget/InvestmentCharts').then(mod => ({ default: mod.InvestmentCharts }))
+  import("@/components/budget/InvestmentCharts").then((mod) => ({ default: mod.InvestmentCharts }))
 );
 
 const SpendingTrendChart = lazy(() =>
-  import('@/components/budget/SpendingTrendChart').then(mod => ({ default: mod.SpendingTrendChart }))
+  import("@/components/budget/SpendingTrendChart").then((mod) => ({
+    default: mod.SpendingTrendChart,
+  }))
 );
 
 const AmortizationChart = lazy(() =>
-  import('@/components/budget/loans/AmortizationChart').then(mod => ({ default: mod.AmortizationChart }))
+  import("@/components/budget/loans/AmortizationChart").then((mod) => ({
+    default: mod.AmortizationChart,
+  }))
 );
 
 /**
@@ -38,14 +42,14 @@ const AmortizationChart = lazy(() =>
 function ChartLoadingSkeleton({ height = 400 }: { height?: number }) {
   return (
     <div
-      className="w-full rounded-lg bg-gray-100 dark:bg-gray-800 animate-pulse flex items-center justify-center"
+      className="flex w-full animate-pulse items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800"
       style={{ height: `${height}px` }}
       role="status"
       aria-label="Loading chart..."
     >
       <div className="flex flex-col items-center gap-2 text-gray-400 dark:text-gray-500">
         <svg
-          className="w-12 h-12 animate-spin"
+          className="h-12 w-12 animate-spin"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -138,7 +142,7 @@ interface LazyDashboardPieChartProps {
 }
 
 const DashboardPieChartComponent = lazy(() =>
-  import('recharts').then(mod => {
+  import("recharts").then((mod) => {
     const DashboardPieChart = ({ data, CustomTooltip }: LazyDashboardPieChartProps) => {
       const { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } = mod;
       return (
@@ -192,9 +196,10 @@ interface LazyDashboardAreaChartProps {
 }
 
 const DashboardAreaChartComponent = lazy(() =>
-  import('recharts').then(mod => {
+  import("recharts").then((mod) => {
     const DashboardAreaChart = ({ data, CustomTooltip }: LazyDashboardAreaChartProps) => {
-      const { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } = mod;
+      const { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
+        mod;
       return (
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={data}>
@@ -271,7 +276,7 @@ interface LazyReportsPieChartProps {
 }
 
 const ReportsPieChartComponent = lazy(() =>
-  import('recharts').then(mod => {
+  import("recharts").then((mod) => {
     const ReportsPieChart = ({ data, palette }: LazyReportsPieChartProps) => {
       const { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } = mod;
       return (
@@ -290,9 +295,9 @@ const ReportsPieChartComponent = lazy(() =>
               {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
-                  fill={
-                    String(entry.color || palette.data[index % palette.data.length]?.hex || '#94a3b8')
-                  }
+                  fill={String(
+                    entry.color || palette.data[index % palette.data.length]?.hex || "#94a3b8"
+                  )}
                 />
               ))}
             </Pie>
@@ -324,7 +329,7 @@ interface LazyReportsBarChartProps {
 }
 
 const ReportsBarChartComponent = lazy(() =>
-  import('recharts').then(mod => {
+  import("recharts").then((mod) => {
     const ReportsBarChart = ({ data, palette, xKey, yKey }: LazyReportsBarChartProps) => {
       const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } = mod;
       return (
@@ -362,9 +367,10 @@ interface LazyReportsLineChartProps {
 }
 
 const ReportsLineChartComponent = lazy(() =>
-  import('recharts').then(mod => {
+  import("recharts").then((mod) => {
     const ReportsLineChart = ({ data, palette, xKey, lines }: LazyReportsLineChartProps) => {
-      const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } = mod;
+      const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
+        mod;
       return (
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={data}>

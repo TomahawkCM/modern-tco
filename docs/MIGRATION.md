@@ -106,28 +106,28 @@ Settings > Data > Import Preview
 
 ### What Transfers
 
-| Standalone | Online | Notes |
-|------------|--------|-------|
-| Profiles | User accounts | One profile → one account |
-| Transactions | Transactions | Full history preserved |
-| Budgets | Budgets | Visibility settings kept |
-| Categories | Categories | Including custom categories |
-| Goals | Goals | Progress preserved |
-| Loans | Loans | Payment history included |
-| Subscriptions | Subscriptions | All details preserved |
-| Activity Log | Activity Log | Historical records |
-| Settings | Settings | Per-profile settings |
-| Receipts | Receipts | Images transferred |
+| Standalone    | Online        | Notes                       |
+| ------------- | ------------- | --------------------------- |
+| Profiles      | User accounts | One profile → one account   |
+| Transactions  | Transactions  | Full history preserved      |
+| Budgets       | Budgets       | Visibility settings kept    |
+| Categories    | Categories    | Including custom categories |
+| Goals         | Goals         | Progress preserved          |
+| Loans         | Loans         | Payment history included    |
+| Subscriptions | Subscriptions | All details preserved       |
+| Activity Log  | Activity Log  | Historical records          |
+| Settings      | Settings      | Per-profile settings        |
+| Receipts      | Receipts      | Images transferred          |
 
 ### What Changes
 
-| Aspect | Standalone | Online |
-|--------|-----------|--------|
-| Authentication | PIN (4-6 digits) | Password + 2FA |
-| Storage | Local IndexedDB | Cloud + Local cache |
-| Sync | Manual export | Automatic |
-| Sharing | Same device | Cross-device |
-| Backup | Manual | Automatic |
+| Aspect         | Standalone       | Online              |
+| -------------- | ---------------- | ------------------- |
+| Authentication | PIN (4-6 digits) | Password + 2FA      |
+| Storage        | Local IndexedDB  | Cloud + Local cache |
+| Sync           | Manual export    | Automatic           |
+| Sharing        | Same device      | Cross-device        |
+| Backup         | Manual           | Automatic           |
 
 ### What Doesn't Transfer
 
@@ -161,11 +161,13 @@ Online
 ### Migration Options
 
 **Option A: One Account, Multiple Sub-profiles**
+
 - Create one online account
 - Maintain profiles within that account
 - Suitable for family device
 
 **Option B: Multiple Accounts, Family Sharing**
+
 - Each profile becomes separate account
 - Use family sharing to connect
 - Suitable for individual devices
@@ -177,8 +179,8 @@ Online
 ### Standalone Visibility
 
 ```typescript
-budget.visibility = 'shared' | 'private'
-budget.ownerId = profileId | null
+budget.visibility = "shared" | "private";
+budget.ownerId = profileId | null;
 ```
 
 ### Online Visibility
@@ -191,12 +193,12 @@ budget.sharedWith = [accountId, ...]
 
 ### Mapping Rules
 
-| Standalone | Online |
-|------------|--------|
-| `visibility: 'shared'` | `visibility: 'family'` |
-| `visibility: 'private'` | `visibility: 'personal'` |
-| `ownerId: null` | `ownerId: familyOwner` |
-| `ownerId: profileId` | `ownerId: mappedAccountId` |
+| Standalone              | Online                     |
+| ----------------------- | -------------------------- |
+| `visibility: 'shared'`  | `visibility: 'family'`     |
+| `visibility: 'private'` | `visibility: 'personal'`   |
+| `ownerId: null`         | `ownerId: familyOwner`     |
+| `ownerId: profileId`    | `ownerId: mappedAccountId` |
 
 ---
 
@@ -262,13 +264,13 @@ Online Account > Settings > Danger Zone
 
 ### Current Status
 
-| Feature | Status |
-|---------|--------|
-| Standalone Mode | ✅ Available |
-| Export/Import | ✅ Available |
-| Online Mode | 🔜 Coming Soon |
-| Cloud Sync | 🔜 Coming Soon |
-| Family Sharing | 🔜 Coming Soon |
+| Feature         | Status         |
+| --------------- | -------------- |
+| Standalone Mode | ✅ Available   |
+| Export/Import   | ✅ Available   |
+| Online Mode     | 🔜 Coming Soon |
+| Cloud Sync      | 🔜 Coming Soon |
+| Family Sharing  | 🔜 Coming Soon |
 
 ### Planned Milestones
 
@@ -310,6 +312,7 @@ Pricing details will be announced when online mode launches. Basic features are 
 ## Support
 
 For migration assistance:
+
 - Review this documentation
 - Check FAQ section
 - Contact support (when available)

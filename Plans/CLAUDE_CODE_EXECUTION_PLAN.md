@@ -7,9 +7,9 @@
 
 ## Companion Documents
 
-| Document | Purpose |
-|----------|---------|
-| **This file** | Feature specs, data models, acceptance criteria — WHAT to build |
+| Document                               | Purpose                                                                            |
+| -------------------------------------- | ---------------------------------------------------------------------------------- |
+| **This file**                          | Feature specs, data models, acceptance criteria — WHAT to build                    |
 | **`UI_UX_CROSS_PLATFORM_ADDENDUM.md`** | Layouts, animations, mobile patterns, platform rules — HOW it should look and feel |
 
 ⚠️ **CRITICAL**: Read `UI_UX_CROSS_PLATFORM_ADDENDUM.md` before building ANY component. It contains mobile-first layouts, touch targets, animation tokens, iOS/Android PWA requirements, empty states, loading skeletons, and accessibility rules that apply to every single screen. Without it, the app will feel like a desktop web app crammed onto a phone.
@@ -19,6 +19,7 @@
 ## How to Use This File
 
 This document is designed for **Claude Code CLI** execution. Each phase is self-contained with:
+
 - **Context**: Why this feature matters competitively
 - **Files to create/modify**: Exact paths and module names
 - **Implementation spec**: What to build, data structures, logic
@@ -31,25 +32,25 @@ This document is designed for **Claude Code CLI** execution. Each phase is self-
 
 ## Tech Stack Reference
 
-| Layer | Technology | Notes |
-|-------|-----------|-------|
-| Frontend | React 19 + Vite 7.x + TypeScript 5.9 | SPA, offline-first |
-| UI Framework | Mantine v7 | Replaces shadcn/ui + Tailwind |
-| Routing | React Router v7 or TanStack Router | Replaces Next.js App Router |
-| State | Zustand or Jotai | Lightweight, TypeScript-first |
-| Local DB | IndexedDB via Dexie.js | All financial data lives here |
-| Cloud DB | Supabase (PostgreSQL) | Only encrypted blobs + metadata |
-| API | Hono.js on Cloudflare Workers | Replaces Next.js API routes |
-| Auth | Supabase Auth + SimpleWebAuthn | Passkey-first |
-| Payments | Stripe | Subscription billing |
-| Bank Sync | Plaid (primary) + SimpleFIN (budget) | E2E encrypted credentials |
-| AI | Anthropic Claude API + TensorFlow.js (local) | Privacy-first AI |
-| Hosting | Cloudflare Pages (SPA) + Workers (API) | Global CDN, free tier |
-| Monitoring | PostHog (analytics) + Sentry (errors) | Privacy-safe config |
-| Email | Resend | Transactional + weekly recaps |
-| Charts | Recharts | Framework-agnostic, carries forward |
-| Animations | Framer Motion | Micro-interactions, page transitions |
-| i18n | react-intl or custom | Port 114 locale files + 16 glossaries |
+| Layer        | Technology                                   | Notes                                 |
+| ------------ | -------------------------------------------- | ------------------------------------- |
+| Frontend     | React 19 + Vite 7.x + TypeScript 5.9         | SPA, offline-first                    |
+| UI Framework | Mantine v7                                   | Replaces shadcn/ui + Tailwind         |
+| Routing      | React Router v7 or TanStack Router           | Replaces Next.js App Router           |
+| State        | Zustand or Jotai                             | Lightweight, TypeScript-first         |
+| Local DB     | IndexedDB via Dexie.js                       | All financial data lives here         |
+| Cloud DB     | Supabase (PostgreSQL)                        | Only encrypted blobs + metadata       |
+| API          | Hono.js on Cloudflare Workers                | Replaces Next.js API routes           |
+| Auth         | Supabase Auth + SimpleWebAuthn               | Passkey-first                         |
+| Payments     | Stripe                                       | Subscription billing                  |
+| Bank Sync    | Plaid (primary) + SimpleFIN (budget)         | E2E encrypted credentials             |
+| AI           | Anthropic Claude API + TensorFlow.js (local) | Privacy-first AI                      |
+| Hosting      | Cloudflare Pages (SPA) + Workers (API)       | Global CDN, free tier                 |
+| Monitoring   | PostHog (analytics) + Sentry (errors)        | Privacy-safe config                   |
+| Email        | Resend                                       | Transactional + weekly recaps         |
+| Charts       | Recharts                                     | Framework-agnostic, carries forward   |
+| Animations   | Framer Motion                                | Micro-interactions, page transitions  |
+| i18n         | react-intl or custom                         | Port 114 locale files + 16 glossaries |
 
 ---
 
@@ -88,11 +89,13 @@ src/contexts/ChatbotContext.tsx           (~13KB)    → contexts/ (needs React 
 ## Pre-Phase 0: Project Scaffolding & Migration
 
 ### Context
+
 New React + Vite + Mantine application. The existing Next.js 16 app (286K LOC) stays as the offline version. This is a clean build carrying forward ~27K LOC of business logic.
 
 ### 0.1 Project Initialization
 
 **Create**:
+
 ```
 budget-app-online/
 ├── public/
@@ -191,32 +194,56 @@ budget-app-online/
 > ⚠️ See `UI_UX_CROSS_PLATFORM_ADDENDUM.md` Section 7 for full dark/light color mapping and Section 6 for animation token definitions. Both must be embedded in the theme.
 
 ```typescript
-import { createTheme, MantineColorsTuple } from '@mantine/core';
+import { createTheme, MantineColorsTuple } from "@mantine/core";
 
 const income: MantineColorsTuple = [
-  '#E3F8FF','#B5ECFF','#7DDBFF','#45C8FF','#1AB5FF',
-  '#0099E6','#007ACC','#005C99','#003D66','#001F33'
+  "#E3F8FF",
+  "#B5ECFF",
+  "#7DDBFF",
+  "#45C8FF",
+  "#1AB5FF",
+  "#0099E6",
+  "#007ACC",
+  "#005C99",
+  "#003D66",
+  "#001F33",
 ];
 const expense: MantineColorsTuple = [
-  '#FFE3F0','#FFB5D4','#FF7DB5','#FF4596','#FF1A7A',
-  '#E6005E','#CC0052','#990040','#66002B','#330015'
+  "#FFE3F0",
+  "#FFB5D4",
+  "#FF7DB5",
+  "#FF4596",
+  "#FF1A7A",
+  "#E6005E",
+  "#CC0052",
+  "#990040",
+  "#66002B",
+  "#330015",
 ];
 const savings: MantineColorsTuple = [
-  '#E3FFF0','#B5FFD9','#7DFFBE','#45FFA3','#1AFF88',
-  '#00E66E','#00CC62','#009949','#006631','#003318'
+  "#E3FFF0",
+  "#B5FFD9",
+  "#7DFFBE",
+  "#45FFA3",
+  "#1AFF88",
+  "#00E66E",
+  "#00CC62",
+  "#009949",
+  "#006631",
+  "#003318",
 ];
 
 export const budgetTheme = createTheme({
-  primaryColor: 'teal',
+  primaryColor: "teal",
   colors: { income, expense, savings },
-  fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
-  fontFamilyMonospace: 'JetBrains Mono, Fira Code, monospace',
-  defaultRadius: 'md',
-  cursorType: 'pointer',
+  fontFamily: "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+  fontFamilyMonospace: "JetBrains Mono, Fira Code, monospace",
+  defaultRadius: "md",
+  cursorType: "pointer",
   respectReducedMotion: true,
   other: {
-    seniorsFontMultiplier: 1.0,      // 1.25 in Seniors Mode
-    seniorsMinTouchTarget: '52px',
+    seniorsFontMultiplier: 1.0, // 1.25 in Seniors Mode
+    seniorsMinTouchTarget: "52px",
   },
 });
 ```
@@ -273,6 +300,7 @@ Define these routes (mapped from existing 36 Next.js page routes):
 **Action**: Copy the 27K LOC of portable modules from the existing codebase into `src/lib/`, `src/types/`, and `src/i18n/`. Verify each module compiles standalone (no Next.js, no shadcn, no Tailwind imports). Fix any framework-specific imports.
 
 **Acceptance criteria**:
+
 - [ ] `npm run type-check` passes with all ported modules
 - [ ] All 114 locale files load correctly
 - [ ] Dexie.js IndexedDB schema initializes in browser
@@ -286,6 +314,7 @@ Define these routes (mapped from existing 36 Next.js page routes):
 This provides: font size multiplier (1.0 default, 1.25 seniors), enlarged touch targets, simplified navigation, high contrast mode. Available from Phase 1 as a setting toggle.
 
 **Acceptance criteria**:
+
 - [ ] Toggle in settings changes font sizes globally
 - [ ] Touch targets meet 52px minimum in seniors mode
 - [ ] All interactive elements remain accessible
@@ -301,11 +330,13 @@ This provides: font size multiplier (1.0 default, 1.25 seniors), enlarged touch 
 **Port & extend**: `src/lib/encryption/budget-encryption.ts` (514 LOC)
 
 **Create**:
+
 - `lib/auth/key-derivation.ts` — PBKDF2: password → master key → device keys
 - `lib/auth/recovery-key.ts` — BIP39-style 24-word mnemonic generation
 - `lib/encryption/cloud-encryption.ts` — Encrypt before cloud upload, decrypt after download
 
 **Key derivation flow**:
+
 ```
 User Password ──PBKDF2 (600K iterations, SHA-256)──▶ Master Key (never leaves device)
                                                           │
@@ -318,6 +349,7 @@ User Password ──PBKDF2 (600K iterations, SHA-256)──▶ Master Key (never
 **Recovery**: 24-word mnemonic phrase (BIP39 wordlist). Stored by user offline. Separate from passkey recovery codes (passkey recovery = app access, mnemonic = data decryption).
 
 **Security requirements**:
+
 - AES-256-GCM for all financial data encryption
 - Master key never transmitted — only encrypted data leaves device
 - Server stores opaque blobs — zero-knowledge architecture
@@ -325,6 +357,7 @@ User Password ──PBKDF2 (600K iterations, SHA-256)──▶ Master Key (never
 - Publish threat model before launch
 
 **Acceptance criteria**:
+
 - [ ] Encrypt a transaction object → encrypted blob is indistinguishable from random data
 - [ ] Decrypt with correct key → original transaction restored exactly
 - [ ] Decrypt with wrong key → fails with clear error
@@ -505,6 +538,7 @@ CREATE INDEX idx_bank_connections_user ON bank_connections(user_id);
 ```
 
 **Acceptance criteria**:
+
 - [ ] `supabase db reset` runs cleanly
 - [ ] RLS policies prevent cross-user data access
 - [ ] Encrypted payload column stores binary, not readable text
@@ -517,6 +551,7 @@ CREATE INDEX idx_bank_connections_user ON bank_connections(user_id);
 **Port**: `src/lib/sync/offline-manager.ts` (540 LOC) — offline queue
 
 **Create**:
+
 - `lib/sync/cloud-sync-engine.ts` — Orchestration (encrypt → queue → push → receive → decrypt → merge)
 - `lib/sync/cloud-transport.ts` — Supabase Realtime transport layer
 - `lib/sync/encrypted-payload.ts` — Encrypt entity before cloud, decrypt after
@@ -524,6 +559,7 @@ CREATE INDEX idx_bank_connections_user ON bank_connections(user_id);
 - `contexts/SyncContext.tsx` — React context exposing sync status, last sync time, manual sync trigger
 
 **Sync flow**:
+
 1. Local change in IndexedDB → encrypt entity → add to outbound queue
 2. When online → push encrypted blobs to Supabase `encrypted_budget_data` table
 3. Supabase Realtime channel → notify other devices of new data
@@ -533,6 +569,7 @@ CREATE INDEX idx_bank_connections_user ON bank_connections(user_id);
 **Sync health logging**: Every sync attempt logged with status, duration, entities synced, errors. Exposed in Settings > Sync Status.
 
 **Acceptance criteria**:
+
 - [ ] Create transaction on Device A → appears on Device B within 5 seconds
 - [ ] Create transaction offline → comes online → syncs automatically
 - [ ] Concurrent edits on two devices → conflict detected → user can choose winner
@@ -546,6 +583,7 @@ CREATE INDEX idx_bank_connections_user ON bank_connections(user_id);
 **Library**: `@simplewebauthn/server` + `@simplewebauthn/browser`
 
 **Create**:
+
 - `lib/auth/passkey-auth.ts` — WebAuthn registration & authentication flows
 - `lib/auth/passkey-recovery.ts` — Recovery code generation (8 codes, each single-use)
 - `api/src/routes/auth.ts` — Server endpoints: `/register-options`, `/register-verify`, `/login-options`, `/login-verify`
@@ -556,6 +594,7 @@ CREATE INDEX idx_bank_connections_user ON bank_connections(user_id);
 **Important**: Passkey recovery codes (for app access) are SEPARATE from the 24-word mnemonic (for E2E data decryption). Users must save both.
 
 **Acceptance criteria**:
+
 - [ ] Register passkey on Chrome, Firefox, Safari
 - [ ] Login with Face ID / Touch ID / Windows Hello
 - [ ] Hardware security key (YubiKey) works as backup
@@ -567,26 +606,28 @@ CREATE INDEX idx_bank_connections_user ON bank_connections(user_id);
 ### 1.5 Subscription & Billing (Stripe) [PARALLEL]
 
 **Create**:
+
 - `lib/stripe/subscription-manager.ts` — Create/update/cancel subscriptions
 - `api/src/routes/stripe.ts` — Webhook handler for subscription events
 - `components/settings/BillingSettings.tsx` — Plan selection, payment method, invoice history
 
 **Pricing tiers**:
 
-| Feature | Free | Premium $5.99/mo | Family $11.99/mo | Self-Hosted $49/yr |
-|---------|------|-------------------|-------------------|--------------------|
-| Accounts | 3 | Unlimited | Unlimited | Unlimited |
-| Bank Connections | 1 | 5 | 10 | N/A |
-| Devices | 1 | 5 | 10 | Unlimited |
-| Family Members | 1 | 1 | 6 | Unlimited |
-| Currencies | 3 | 160+ | 160+ | 160+ |
-| Languages | All 114 | All 114 | All 114 | All 114 |
-| AI Money Coach | Basic | Full | Full | Full (BYOK) |
-| Cash Flow Projection | 3 months | 12 months | 12 months | 12 months |
-| Document Vault | No | 1GB | 5GB | Unlimited |
-| Rules Engine | 3 rules | Unlimited | Unlimited | Unlimited |
+| Feature              | Free     | Premium $5.99/mo | Family $11.99/mo | Self-Hosted $49/yr |
+| -------------------- | -------- | ---------------- | ---------------- | ------------------ |
+| Accounts             | 3        | Unlimited        | Unlimited        | Unlimited          |
+| Bank Connections     | 1        | 5                | 10               | N/A                |
+| Devices              | 1        | 5                | 10               | Unlimited          |
+| Family Members       | 1        | 1                | 6                | Unlimited          |
+| Currencies           | 3        | 160+             | 160+             | 160+               |
+| Languages            | All 114  | All 114          | All 114          | All 114            |
+| AI Money Coach       | Basic    | Full             | Full             | Full (BYOK)        |
+| Cash Flow Projection | 3 months | 12 months        | 12 months        | 12 months          |
+| Document Vault       | No       | 1GB              | 5GB              | Unlimited          |
+| Rules Engine         | 3 rules  | Unlimited        | Unlimited        | Unlimited          |
 
 **Acceptance criteria**:
+
 - [ ] Stripe Checkout opens for plan upgrade
 - [ ] Webhook correctly updates `subscriptions` table on payment
 - [ ] Downgrade to free tier enforces limits (max 3 accounts)
@@ -597,10 +638,12 @@ CREATE INDEX idx_bank_connections_user ON bank_connections(user_id);
 ### 1.6 Safe-to-Spend Engine
 
 **Create**:
+
 - `lib/budget/safe-to-spend.ts` — Core calculation engine
 - `components/dashboard/SafeToSpendWidget.tsx` — Mantine RingProgress with drill-down
 
 **Core calculation**:
+
 ```
 Safe to Spend = (Available Balance)
               - (Upcoming Bills in look-ahead period)
@@ -609,6 +652,7 @@ Safe to Spend = (Available Balance)
 ```
 
 **Features**:
+
 - Real-time recalculation on every transaction or budget change
 - Configurable look-ahead period: 7 / 14 / 30 days
 - Color-coded: Green (≥30% of income remaining), Yellow (10-30%), Red (<10%)
@@ -617,6 +661,7 @@ Safe to Spend = (Available Balance)
 - **Per-category "remaining" view** (the "Partials" / "In My Pocket" concept): Each variable budget category shows a mini progress bar with spent/remaining. This appears below the ring chart as a scrollable list.
 
 **Widget spec** (Mantine RingProgress):
+
 ```typescript
 interface SafeToSpendProps {
   available: number;
@@ -638,6 +683,7 @@ interface SafeToSpendProps {
 ```
 
 **Acceptance criteria**:
+
 - [ ] Widget shows correct safe-to-spend amount
 - [ ] Changing look-ahead period recalculates immediately
 - [ ] Adding a transaction updates the widget in real-time
@@ -650,6 +696,7 @@ interface SafeToSpendProps {
 ### 1.7 Budget Methodology Engine with Rollover
 
 **Create**:
+
 - `lib/budget/methodology-engine.ts` — Core methodology logic
 - `lib/budget/rollover-engine.ts` — Budget carry-over logic
 - `lib/budget/event-budget.ts` — Event/project budget engine
@@ -660,19 +707,20 @@ interface SafeToSpendProps {
 
 **Methodologies**:
 
-| Method | How It Works | Rollover Default |
-|--------|-------------|-----------------|
-| **Zero-based** | Every dollar gets a job. Assign income to categories. | Yes (unspent rolls forward) |
-| **Envelope** | Virtual envelopes. When empty, stop spending. | No (envelope resets) |
-| **50/30/20** | Auto-split: 50% needs, 30% wants, 20% savings. | No (percentage-based) |
-| **Pay-yourself-first** | Set savings target first, spend remainder freely. | N/A (only savings tracked) |
+| Method                 | How It Works                                          | Rollover Default            |
+| ---------------------- | ----------------------------------------------------- | --------------------------- |
+| **Zero-based**         | Every dollar gets a job. Assign income to categories. | Yes (unspent rolls forward) |
+| **Envelope**           | Virtual envelopes. When empty, stop spending.         | No (envelope resets)        |
+| **50/30/20**           | Auto-split: 50% needs, 30% wants, 20% savings.        | No (percentage-based)       |
+| **Pay-yourself-first** | Set savings target first, spend remainder freely.     | N/A (only savings tracked)  |
 
 **Rollover logic** (`rollover-engine.ts`):
+
 ```typescript
 interface RolloverConfig {
   enabled: boolean;
-  mode: 'same_category' | 'savings_pool' | 'expire';
-  maxRollover?: number;  // Cap rollover amount (optional)
+  mode: "same_category" | "savings_pool" | "expire";
+  maxRollover?: number; // Cap rollover amount (optional)
   sinkingFund?: boolean; // Intentional multi-month saving
 }
 
@@ -692,16 +740,17 @@ function calculateRollover(
 ```
 
 **Budget types**:
+
 ```typescript
-type BudgetType = 'monthly' | 'event' | 'project';
+type BudgetType = "monthly" | "event" | "project";
 
 interface EventBudget {
   id: string;
   name: string;
-  type: 'event' | 'project';
+  type: "event" | "project";
   totalBudget: number;
   startDate: Date;
-  endDate?: Date;           // Optional for projects
+  endDate?: Date; // Optional for projects
   categories: BudgetCategory[];
   spent: number;
   remaining: number;
@@ -711,22 +760,24 @@ interface EventBudget {
 ```
 
 **Custom categories with emoji**:
+
 ```typescript
 interface BudgetCategory {
   id: string;
   name: string;
-  emoji: string;           // User-selected emoji
-  color: string;           // Mantine color key
+  emoji: string; // User-selected emoji
+  color: string; // Mantine color key
   budgeted: number;
   spent: number;
   rolloverConfig: RolloverConfig;
-  type: 'fixed' | 'variable'; // Variable categories show progress bars
-  parentId?: string;       // For sub-categories
+  type: "fixed" | "variable"; // Variable categories show progress bars
+  parentId?: string; // For sub-categories
   sortOrder: number;
 }
 ```
 
 **Acceptance criteria**:
+
 - [ ] Methodology quiz recommends a method in 3 questions
 - [ ] All 4 methods produce correct budget views
 - [ ] Rollover correctly carries unspent amounts into next month
@@ -741,12 +792,14 @@ interface BudgetCategory {
 ### 1.8 Multi-Currency Engine [PARALLEL]
 
 **Create**:
+
 - `lib/currency/exchange-rate-service.ts` — Rate fetching, caching (60-second refresh)
 - `lib/currency/multi-currency-engine.ts` — Conversion, storage, gain/loss tracking
 - `lib/currency/travel-mode.ts` — Temporary base currency override
 - `components/settings/CurrencySettings.tsx` — Base/display currency config
 
 **Features**:
+
 - 160+ currencies including crypto stablecoins (USDC, USDT)
 - Base currency for calculations, display currency user-selectable
 - Store both transaction-date and settlement-date exchange rates
@@ -758,6 +811,7 @@ interface BudgetCategory {
 **Rate sources**: Exchange Rates API (primary, 100 free req/month) → Fixer.io (fallback) → ExchangeRate-API (budget fallback)
 
 **Acceptance criteria**:
+
 - [ ] Convert CAD → USD → EUR correctly using live rates
 - [ ] Rates cache for 60 seconds, refresh automatically
 - [ ] Transaction stores rate at time of entry
@@ -769,6 +823,7 @@ interface BudgetCategory {
 ### 1.9 Onboarding Flow (MOVED from Phase 8 — Critical for retention)
 
 **Create**:
+
 - `components/onboarding/OnboardingWizard.tsx` — 4-step guided setup
 - `components/onboarding/IncomeSetup.tsx` — Monthly income input
 - `components/onboarding/CategoryPicker.tsx` — Pick top 5-8 categories (pre-populated chips with emoji)
@@ -783,12 +838,14 @@ interface BudgetCategory {
 4. **Set a goal** (optional) → "What are you saving for?" with amount and target date
 
 **Paycheck planning** (optional, within step 2):
+
 ```typescript
 interface PaySchedule {
-  frequency: 'weekly' | 'biweekly' | 'semimonthly' | 'monthly' | 'irregular';
+  frequency: "weekly" | "biweekly" | "semimonthly" | "monthly" | "irregular";
   nextPayDate: Date;
-  amount: number;           // Net pay per paycheck
-  allocations: Array<{      // Which categories get funded from this paycheck
+  amount: number; // Net pay per paycheck
+  allocations: Array<{
+    // Which categories get funded from this paycheck
     categoryId: string;
     amount: number;
   }>;
@@ -799,6 +856,7 @@ interface PaySchedule {
 **Progressive disclosure**: Advanced features (investment tracking, document vault, AI coach) appear as locked/teaser cards that unlock based on usage or plan upgrade.
 
 **Acceptance criteria**:
+
 - [ ] New user completes onboarding in under 2 minutes
 - [ ] Dashboard shows meaningful data immediately after onboarding
 - [ ] Safe-to-spend widget populated from onboarding inputs
@@ -810,6 +868,7 @@ interface PaySchedule {
 ### 1.10 PWA Foundation [PARALLEL]
 
 **Create**:
+
 - `public/manifest.json` — Web app manifest with icons, theme color, display: standalone
 - `public/sw.js` — Service worker: cache app shell, handle offline, background sync queue
 - `public/splash/` — iOS splash screens for all device sizes (iPhone SE through 16 Pro Max)
@@ -822,6 +881,7 @@ interface PaySchedule {
 > ⚠️ See `UI_UX_CROSS_PLATFORM_ADDENDUM.md` Section 12 for full iOS meta tags, splash screen media queries, and state preservation implementation.
 
 **PWA manifest**:
+
 ```json
 {
   "name": "Budget App",
@@ -835,22 +895,32 @@ interface PaySchedule {
   "icons": [
     { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
 ```
 
 **Required HTML meta tags** (for iOS PWA):
+
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Budget">
-<meta name="theme-color" content="#14B8A6">
-<link rel="apple-touch-icon" href="/icons/apple-touch-icon-180.png">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Budget" />
+<meta name="theme-color" content="#14B8A6" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon-180.png" />
 ```
 
 **Service worker capabilities**:
+
 - Cache-first for app shell (HTML, JS, CSS, fonts) — instant cold launch even offline
 - Network-first for API calls with offline fallback to cached responses
 - Background sync: queue transactions added offline, push when back online
@@ -858,23 +928,27 @@ interface PaySchedule {
 - Precache critical routes on install for offline-first experience
 
 **iOS-specific handling**:
+
 - State preservation: Save route + scroll position + form state to IndexedDB on `visibilitychange` → restore on relaunch
 - Custom install banner: Show after 2+ sessions, educate user to tap Share → "Add to Home Screen"
 - Push notifications require home screen install (iOS 16.4+) — show instructional prompt
 - Handle iOS back gesture (swipe from left edge) — don't conflict with app gestures
 
 **Android-specific handling**:
+
 - Intercept `beforeinstallprompt` event → show custom install banner at moment of engagement (after first budget created, not on first visit)
 - Badge API: Show unread notification count on home screen icon
 - Chrome mini-infobar: Suppress default, use custom timing
 
 **Offline experience**:
+
 - Subtle dot indicator in header: 🟢 Connected/synced, 🟡 Syncing, 🔴 Offline, ⚪ Never connected
 - NEVER show a full-screen "you're offline" banner — the app works offline, don't make it feel broken
 - All data operations work against local IndexedDB — sync is background enhancement
 - AI Coach degrades gracefully: show pre-computed insights, disable Claude API queries with message "AI features available when online"
 
 **Acceptance criteria**:
+
 - [ ] "Add to Home Screen" prompt appears on mobile browsers
 - [ ] App opens in standalone mode (no browser chrome)
 - [ ] App works fully offline (can add transactions, view budget)
@@ -886,40 +960,43 @@ interface PaySchedule {
 ### 1.11 Near-Budget Limit Alerts [PARALLEL]
 
 **Create**:
+
 - `lib/budget/alert-engine.ts` — Threshold monitoring per category
 - `components/shared/BudgetAlertBanner.tsx` — In-app alert banner
 
 **Logic**:
+
 ```typescript
 interface BudgetAlert {
   categoryId: string;
   categoryName: string;
   emoji: string;
-  threshold: number;      // Default 80%, configurable per category
+  threshold: number; // Default 80%, configurable per category
   currentPercent: number;
   remaining: number;
-  alertType: 'warning' | 'exceeded';
+  alertType: "warning" | "exceeded";
 }
 
 function checkBudgetAlerts(categories: BudgetCategory[]): BudgetAlert[] {
   return categories
-    .filter(c => c.budgeted > 0)
-    .map(c => ({
+    .filter((c) => c.budgeted > 0)
+    .map((c) => ({
       categoryId: c.id,
       categoryName: c.name,
       emoji: c.emoji,
       threshold: c.alertThreshold || 0.8,
       currentPercent: c.spent / c.budgeted,
       remaining: c.budgeted - c.spent,
-      alertType: c.spent >= c.budgeted ? 'exceeded' : 'warning'
+      alertType: c.spent >= c.budgeted ? "exceeded" : "warning",
     }))
-    .filter(a => a.currentPercent >= a.threshold);
+    .filter((a) => a.currentPercent >= a.threshold);
 }
 ```
 
 **Delivery**: In-app banner on dashboard + optional push notification (if PWA installed).
 
 **Acceptance criteria**:
+
 - [ ] Alert appears when spending hits 80% of category budget
 - [ ] Alert upgrades to "exceeded" when 100% reached
 - [ ] Threshold configurable per category in settings
@@ -931,11 +1008,13 @@ function checkBudgetAlerts(categories: BudgetCategory[]): BudgetAlert[] {
 ### 1.12 Recurring Transaction Templates [PARALLEL]
 
 **Create**:
+
 - `lib/budget/recurring-templates.ts` — Template engine
 - `components/transactions/RecurringTemplateManager.tsx` — Create/edit/list templates
 - `components/transactions/PendingRecurringList.tsx` — Confirm or skip pending recurring items
 
 **Data model**:
+
 ```typescript
 interface RecurringTemplate {
   id: string;
@@ -943,9 +1022,9 @@ interface RecurringTemplate {
   amount: number;
   currency: string;
   categoryId: string;
-  frequency: 'weekly' | 'biweekly' | 'monthly' | 'quarterly' | 'semiannual' | 'annual';
+  frequency: "weekly" | "biweekly" | "monthly" | "quarterly" | "semiannual" | "annual";
   nextDueDate: Date;
-  autoConfirm: boolean;    // Auto-create or require manual confirmation
+  autoConfirm: boolean; // Auto-create or require manual confirmation
   reminderDaysBefore: number; // Notify N days before due
   isActive: boolean;
   notes?: string;
@@ -955,6 +1034,7 @@ interface RecurringTemplate {
 **Behavior**: Templates auto-generate transactions as "pending" on their due date. User confirms or adjusts the amount. Feeds into Safe-to-Spend as "upcoming obligations."
 
 **Acceptance criteria**:
+
 - [ ] Create a monthly rent template → generates pending transaction on the 1st
 - [ ] Pending transaction appears in Safe-to-Spend upcoming bills
 - [ ] User can confirm (exact amount) or adjust before finalizing
@@ -971,6 +1051,7 @@ interface RecurringTemplate {
 ### 2.1 Plaid Integration (Premium)
 
 **Create**:
+
 - `lib/plaid/client.ts` — Plaid API client
 - `lib/plaid/link-handler.ts` — Plaid Link token creation and exchange
 - `api/src/routes/plaid.ts` — Server endpoints: `/link-token`, `/exchange-token`, `/webhook`
@@ -979,6 +1060,7 @@ interface RecurringTemplate {
 **Security**: Access tokens stored E2E encrypted in `bank_connections` table. Server never sees decrypted tokens.
 
 **Acceptance criteria**:
+
 - [ ] Plaid Link opens in sandbox mode
 - [ ] Access token stored encrypted in Supabase
 - [ ] Transactions imported and appear in transaction list
@@ -993,11 +1075,13 @@ interface RecurringTemplate {
 ### 2.3 Sync Health Dashboard
 
 **Create**:
+
 - `components/settings/SyncHealthDashboard.tsx` — Per-institution status, retry controls, error log
 
 ### 2.4 Reconciliation Autopilot
 
 **Create**:
+
 - `lib/budget/reconciliation.ts` — Guided fixes for mismatched balances
 - `components/transactions/ReconciliationWizard.tsx`
 
@@ -1008,6 +1092,7 @@ interface RecurringTemplate {
 **Port**: `src/lib/analytics/recurring-detector.ts` (209 LOC)
 
 **Create**:
+
 - `lib/subscriptions/subscription-detector.ts` — Scan for recurring charges
 - `lib/subscriptions/overlap-detector.ts` — "You pay for Spotify AND Apple Music"
 - `lib/subscriptions/cost-per-use.ts` — "Netflix costs $4.50/show this month"
@@ -1029,10 +1114,12 @@ interface RecurringTemplate {
 ### 2.8 Swipe-to-Review Transaction Inbox (MOVED from Phase 8)
 
 **Create**:
+
 - `components/transactions/SwipeReview.tsx` — Tinder-style transaction review
 - `lib/budget/review-engine.ts` — Track reviewed/unreviewed status
 
 **Mobile (gesture-based)**:
+
 - Swipe right (>100px) → Approve (green flash + haptic)
 - Swipe left (>100px) → Flag for review (amber flash)
 - Swipe up (>80px) → Split transaction (modal opens)
@@ -1045,10 +1132,12 @@ interface RecurringTemplate {
 ### 2.9 Bulk Re-Categorization (MOVED from Phase 6)
 
 **Create**:
+
 - `components/transactions/BulkCategorizer.tsx` — Multi-select → apply category
 - `lib/budget/merchant-rules.ts` — "Always categorize [merchant] as [category]"
 
 **Features**:
+
 - Select multiple transactions → change category for all at once
 - "Always categorize Starbucks as ☕ Coffee" → creates a quick rule
 - Quick rules evaluate immediately on new transactions — no need to wait for full Rules Engine (Phase 6)
@@ -1057,11 +1146,13 @@ interface RecurringTemplate {
 ### 2.10 Weekly Spending Recap (MOVED from Phase 4)
 
 **Create**:
+
 - `lib/notifications/weekly-recap.ts` — Generate recap data
 - `components/dashboard/WeeklyRecap.tsx` — In-app recap card
 - `api/src/routes/email.ts` — Send recap email via Resend
 
 **Recap contents**:
+
 1. Total spending this week vs. same week last month
 2. Top 3 spending categories with amounts
 3. Notable transactions (largest, unusual, new merchants)
@@ -1074,6 +1165,7 @@ interface RecurringTemplate {
 ### 2.11 Refund Tracking
 
 **Create**:
+
 - `lib/budget/refund-tracker.ts` — Link refunds to original transactions
 
 **Features**: Mark transaction as "expecting refund" → auto-match when refund arrives → net out in reports (show both gross and net views).
@@ -1081,6 +1173,7 @@ interface RecurringTemplate {
 ### 2.12 Push Notifications Infrastructure (MOVED from Phase 8)
 
 Expand the PWA push foundation from Phase 1.10:
+
 - Bill reminder notifications (N days before due)
 - Budget alert notifications (80% threshold)
 - Weekly recap notification
@@ -1122,9 +1215,10 @@ Composite score (0-100): Emergency fund, debt-to-income, savings rate, budget ad
 **Challenge types**: No-spend weekend, 52-week challenge, round-up savings, custom household challenges.
 
 **Streak system** (the Duolingo mechanic):
+
 ```typescript
 interface StreakConfig {
-  type: 'daily_log' | 'daily_review' | 'daily_check_safe_to_spend';
+  type: "daily_log" | "daily_review" | "daily_check_safe_to_spend";
   currentStreak: number;
   longestStreak: number;
   lastActivityDate: Date;
@@ -1142,6 +1236,7 @@ interface StreakConfig {
 ### 3.5 Seasonal Budget Templates
 
 Pre-built event budget templates offered contextually:
+
 - 🎄 Holiday Budget (November) — gifts, decorations, travel, food, parties
 - 🏫 Back to School (August) — supplies, clothes, activities
 - ☀️ Summer Travel (May) — flights, hotels, activities, dining
@@ -1164,6 +1259,7 @@ Templates are Event Budgets (from 1.7) with pre-configured categories and sugges
 **Privacy-first architecture**: Local data analysis runs in browser. Only anonymized, summarized context sent to Claude API. Never raw transactions, account names, or merchant data.
 
 **Natural language queries** (the Copilot differentiator):
+
 - "How much did I spend on dining this quarter?"
 - "Am I on track for my savings goal?"
 - "What if I cancel these 3 subscriptions?"
@@ -1202,20 +1298,24 @@ Epsilon ≤ 8.0 per round, gradient clipping, secure aggregation. Minimum 100 pa
 **Dependencies**: Phase 2 Plaid + Phase 1 multi-currency
 
 ### 5.1 Investment Portfolio Tracking
+
 TWR/IRR calculations, asset allocation visualization, rebalancing suggestions, dividend tracking.
 
 ### 5.2 Net Worth Dashboard
+
 Aggregate all assets minus liabilities. Monthly trend chart. Milestone celebrations. Year-over-year comparison.
 
 **Dashboard customization** (new — implement here or Phase 1):
 Widget-based drag-and-drop dashboard. Users pick 4-8 widgets from: Safe-to-Spend, Bills Due, Budget Status, Recent Transactions, Net Worth, Spending by Category, Cash Flow Projection, Goals Progress, Subscription Total, Financial Wellness Score, Weekly Recap. Layout saved per device.
 
 ### 5.3 Cash Flow Monte Carlo Projection
+
 **Port**: `src/lib/analytics/trend-forecasting.ts` (227 LOC)
 
 12-month projection with confidence bands. What-if scenarios. Combine with AI coach for conversational what-if: "What happens if I pay an extra $200/month on my student loan?"
 
 ### 5.4 Crypto & Real Estate
+
 Crypto exchange APIs + wallet monitoring + cost basis. Real estate: Zillow/Redfin (US) + manual entry (all markets).
 
 ---
@@ -1223,21 +1323,27 @@ Crypto exchange APIs + wallet monitoring + cost basis. Real estate: Zillow/Redfi
 ## Phase 6: Open Platform
 
 ### 6.1 Public API (REST v2)
+
 Bearer token auth with scopes. Endpoints for all resources.
 
 ### 6.2 Webhooks
+
 Events: transaction.created, budget.exceeded, bank_sync.completed, etc.
 
 ### 6.3 Data Portability ("Leave-Any-Time Promise")
+
 Export: JSON, CSV, YNAB format, PDF reports. Import: YNAB, Mint, Quicken QIF, generic CSV.
 
 ### 6.4 E2E Encrypted Document Vault
+
 Store receipts, tax docs, warranties. Same encryption as financial data. Link to transactions.
 
 ### 6.5 Smart Rules Engine & Automation
+
 Full if-then rules (expands quick merchant rules from Phase 2.9): Auto-categorization, threshold alerts, auto-transfer, conditional notifications. Cross-device family rules evaluate locally after sync.
 
 ### 6.6 Open Banking Compliance
+
 Section 1033 (US): On hold. PSD3 (EU): Expected mid-2026. Canadian Consumer-Driven Banking: Architecture-ready.
 
 ---
@@ -1245,18 +1351,23 @@ Section 1033 (US): On hold. PSD3 (EU): Expected mid-2026. Canadian Consumer-Driv
 ## Phase 7: Tax & Financial Tools
 
 ### 7.1 Tax Optimization
+
 Tax category tagging, quarterly estimated tax tracker, year-end summary, deduction finder, TurboTax export.
 
 ### 7.2 Canadian Tax Integration
+
 RRSP/TFSA/RESP/FHSA tracking with contribution room. HST/GST per-province tagging. Receipt vault integration for CRA expenses.
 
 ### 7.3 HSA/FSA Tracking (US)
+
 Contribution limits, eligible expense auto-categorization, FSA use-it-or-lose-it reminders.
 
 ### 7.4 BNPL Tracking
+
 Auto-detect installments, track as liability in net worth, payment schedule visualization.
 
 ### 7.5 Bill Negotiation Service
+
 Detect negotiable bills, track savings. Revenue: percentage of savings.
 
 ---
@@ -1264,15 +1375,19 @@ Detect negotiable bills, track savings. Revenue: percentage of savings.
 ## Phase 8: Polish & Launch
 
 ### 8.1 Mobile Optimization
+
 React Native wrapper for App Store. Biometric auth. Home screen widget (safe-to-spend glance).
 
 ### 8.2 Advanced Accessibility
+
 Voice entry ("Add $45 groceries") via Web Speech API. Guided monthly close wizard. Screen reader audit. (Note: Basic seniors mode already shipped in Phase 1.)
 
 ### 8.3 Emotional ROI Tags (Enhancement to Swipe-to-Review)
+
 Add Mantine Badge chips to transactions: Joy (green), Regret (red), Essential (blue), Routine (gray). Users tag during review. Reports show spending by emotional category.
 
 ### 8.4 Wearable Widgets
+
 Apple Watch / Wear OS: Safe-to-spend glance, recent transactions.
 
 ---
@@ -1280,65 +1395,71 @@ Apple Watch / Wear OS: Safe-to-spend glance, recent transactions.
 ## Phase 9: Growth & Community
 
 ### 9.1 Social Benchmarking (Opt-In)
+
 Anonymous comparison to similar households. Differential privacy, k-anonymity ≥ 50.
 
 ### 9.2 Contextual Micro-Lessons
+
 Behavior-triggered financial education. NOT a full LMS — the existing LMS stays separate.
 
 ### 9.3 Voice Commands
+
 Web Speech API, hands-free transaction entry.
 
 ### 9.4 Self-Hosted Docker Deployment
+
 Docker Compose, bring-your-own Supabase or SQLite. $49/yr.
 
 ### 9.5 Carbon Footprint Tracking (Monitor)
+
 Emerging trend. MCC-based emission estimates per transaction. Don't build now — add architecture hook for future.
 
 ---
 
 ## Don't Do List
 
-| Item | Reason |
-|------|--------|
-| Kids/teen financial literacy module | Scope creep — essentially building Greenlight. Defer to separate product. |
-| HouseSigma API integration | No documented public API. Use manual entry for Canadian property. |
-| Full education hub | Existing LMS (59 routes, 200+ questions) already exists. Use micro-lessons only. |
-| "Built for Canada" branding | Undermines 114-locale global advantage. Position as global-first. |
-| Carbon footprint v1 | Too early. Monitor and add architecture hook only. |
+| Item                                | Reason                                                                           |
+| ----------------------------------- | -------------------------------------------------------------------------------- |
+| Kids/teen financial literacy module | Scope creep — essentially building Greenlight. Defer to separate product.        |
+| HouseSigma API integration          | No documented public API. Use manual entry for Canadian property.                |
+| Full education hub                  | Existing LMS (59 routes, 200+ questions) already exists. Use micro-lessons only. |
+| "Built for Canada" branding         | Undermines 114-locale global advantage. Position as global-first.                |
+| Carbon footprint v1                 | Too early. Monitor and add architecture hook only.                               |
 
 ---
 
 ## Success Metrics
 
-| Metric | Target |
-|--------|--------|
-| Onboarding completion | 80%+ of new signups |
-| Time to first budget | < 2 minutes |
-| Safe-to-spend daily views | 80% of active users |
-| 90-day retention rate | 65%+ (industry avg ~40%) |
-| Premium conversion | 5% of free users |
-| Family plan adoption | 20% of premium |
-| Weekly recap open rate | 50%+ |
-| AI coach conversations/week | 3+ per active user |
-| Sync conflict rate | < 0.1% |
-| API uptime | 99.9% |
-| Lighthouse PWA score | 100 |
-| Lighthouse Performance (mobile) | ≥ 90 |
-| Lighthouse Accessibility | ≥ 95 |
-| Bundle size (gzipped JS) | < 200KB initial |
-| First Contentful Paint (4G mobile) | < 1.5s |
-| Largest Contentful Paint (4G mobile) | < 2.5s |
-| Vite dev cold start | < 500ms |
-| iOS PWA install rate | Track via custom banner |
-| Android PWA install rate | Track via beforeinstallprompt |
-| Cross-device sync success | > 99.9% |
-| Offline transaction queue drain | 100% on reconnect |
+| Metric                               | Target                        |
+| ------------------------------------ | ----------------------------- |
+| Onboarding completion                | 80%+ of new signups           |
+| Time to first budget                 | < 2 minutes                   |
+| Safe-to-spend daily views            | 80% of active users           |
+| 90-day retention rate                | 65%+ (industry avg ~40%)      |
+| Premium conversion                   | 5% of free users              |
+| Family plan adoption                 | 20% of premium                |
+| Weekly recap open rate               | 50%+                          |
+| AI coach conversations/week          | 3+ per active user            |
+| Sync conflict rate                   | < 0.1%                        |
+| API uptime                           | 99.9%                         |
+| Lighthouse PWA score                 | 100                           |
+| Lighthouse Performance (mobile)      | ≥ 90                          |
+| Lighthouse Accessibility             | ≥ 95                          |
+| Bundle size (gzipped JS)             | < 200KB initial               |
+| First Contentful Paint (4G mobile)   | < 1.5s                        |
+| Largest Contentful Paint (4G mobile) | < 2.5s                        |
+| Vite dev cold start                  | < 500ms                       |
+| iOS PWA install rate                 | Track via custom banner       |
+| Android PWA install rate             | Track via beforeinstallprompt |
+| Cross-device sync success            | > 99.9%                       |
+| Offline transaction queue drain      | 100% on reconnect             |
 
 ---
 
 ## Execution Notes for Claude Code CLI
 
 ### Build Order for Every Component
+
 1. **Read the UI/UX Addendum** (`UI_UX_CROSS_PLATFORM_ADDENDUM.md`) for the component's layout at each breakpoint
 2. **Build mobile (375px) first** — then expand to tablet and desktop
 3. **Define TypeScript interfaces** before any implementation
@@ -1346,6 +1467,7 @@ Emerging trend. MCC-based emission estimates per transaction. Don't build now �
 5. **Test on iPhone SE (375px)** as the minimum supported viewport
 
 ### Cross-Platform Rules (Non-Negotiable)
+
 1. **Touch targets**: 44px minimum on all tappable elements, 48px recommended, 52px in seniors mode
 2. **Safe areas**: Use `env(safe-area-inset-*)` for iOS notch/Dynamic Island/home indicator
 3. **Bottom navigation**: 5-tab bar on mobile with "More" overflow — persistent, fixed position
@@ -1358,6 +1480,7 @@ Emerging trend. MCC-based emission estimates per transaction. Don't build now �
 10. **Optimistic updates**: Every write shows in UI instantly before sync confirms
 
 ### Design Quality Rules
+
 1. **Skeleton screens** for every data-dependent view — NEVER a spinner
 2. **Empty states** designed for every screen — icon + message + CTA, never a blank page
 3. **Animations**: Use tokens from addendum Section 6 — never hardcode duration/easing values
@@ -1368,6 +1491,7 @@ Emerging trend. MCC-based emission estimates per transaction. Don't build now �
 8. **8px spacing grid**: All spacing uses multiples of 8 (8, 16, 24, 32, 48, 64)
 
 ### Architecture Rules
+
 1. **Privacy by default**: Every new feature must work with E2E encryption. If it requires server to read data, redesign.
 2. **Offline-first**: Every feature must work without network. Sync is an enhancement, not a requirement.
 3. **i18n from day one**: All user-facing strings go through i18n. No hardcoded English.

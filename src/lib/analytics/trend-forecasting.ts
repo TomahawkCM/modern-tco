@@ -1,7 +1,7 @@
 /**
  * Trend Forecasting (Phase 4)
  * Task 4.3.1: Add trend lines with projections
- * 
+ *
  * Linear regression for spending forecasts (30 days forward)
  */
 
@@ -59,7 +59,7 @@ export function calculateLinearRegression(points: DataPoint[]): TrendLine | null
     ssResidual += Math.pow(point.y - yPredicted, 2);
   }
 
-  const r2 = ssTotal > 0 ? 1 - (ssResidual / ssTotal) : 0;
+  const r2 = ssTotal > 0 ? 1 - ssResidual / ssTotal : 0;
 
   return { slope, intercept, r2 };
 }
@@ -75,7 +75,7 @@ export function generateForecast(
   if (!trend) return [];
 
   const forecast: ForecastPoint[] = [];
-  
+
   // Add historical data with trend line values
   for (const point of historicalData) {
     forecast.push({
@@ -122,7 +122,7 @@ export function prepareMonthlyTrendData(
     const txDate = new Date(tx.date);
     if (txDate < startDate || tx.amount >= 0) continue; // Only expenses
 
-    const monthKey = `${txDate.getFullYear()}-${String(txDate.getMonth() + 1).padStart(2, '0')}`;
+    const monthKey = `${txDate.getFullYear()}-${String(txDate.getMonth() + 1).padStart(2, "0")}`;
     const current = monthlyTotals.get(monthKey) || 0;
     monthlyTotals.set(monthKey, current + Math.abs(tx.amount));
   }
@@ -132,7 +132,7 @@ export function prepareMonthlyTrendData(
   const sortedMonths = Array.from(monthlyTotals.keys()).sort();
 
   sortedMonths.forEach((monthKey, index) => {
-    const [year, month] = monthKey.split('-').map(Number);
+    const [year, month] = monthKey.split("-").map(Number);
     const date = new Date(year, month - 1, 15); // Middle of month
     const amount = monthlyTotals.get(monthKey) || 0;
 
@@ -164,7 +164,7 @@ export function prepareDailyTrendData(
     const txDate = new Date(tx.date);
     if (txDate < startDate || tx.amount >= 0) continue; // Only expenses
 
-    const dateKey = txDate.toISOString().split('T')[0];
+    const dateKey = txDate.toISOString().split("T")[0];
     const current = dailyTotals.get(dateKey) || 0;
     dailyTotals.set(dateKey, current + Math.abs(tx.amount));
   }
@@ -174,7 +174,7 @@ export function prepareDailyTrendData(
   const currentDate = new Date(startDate);
 
   for (let i = 0; i <= daysBack; i++) {
-    const dateKey = currentDate.toISOString().split('T')[0];
+    const dateKey = currentDate.toISOString().split("T")[0];
     const amount = dailyTotals.get(dateKey) || 0;
 
     dataPoints.push({
@@ -193,35 +193,30 @@ export function prepareDailyTrendData(
  * Get trend description for UI display
  */
 export function getTrendDescription(trend: TrendLine): {
-  direction: 'increasing' | 'decreasing' | 'stable';
-  strength: 'strong' | 'moderate' | 'weak';
+  direction: "increasing" | "decreasing" | "stable";
+  strength: "strong" | "moderate" | "weak";
   description: string;
 } {
   const absSlope = Math.abs(trend.slope);
-  const direction = trend.slope > 0.5 ? 'increasing' 
-    : trend.slope < -0.5 ? 'decreasing' 
-    : 'stable';
+  const direction = trend.slope > 0.5 ? "increasing" : trend.slope < -0.5 ? "decreasing" : "stable";
 
-  const strength = trend.r2 > 0.7 ? 'strong'
-    : trend.r2 > 0.4 ? 'moderate'
-    : 'weak';
+  const strength = trend.r2 > 0.7 ? "strong" : trend.r2 > 0.4 ? "moderate" : "weak";
 
-  let description = '';
-  
-  if (direction === 'increasing') {
+  let description = "";
+
+  if (direction === "increasing") {
     description = `Spending is ${strength}ly trending upward`;
-    if (strength === 'strong') {
+    if (strength === "strong") {
       description += ` (${Math.abs(trend.slope).toFixed(0)} per month)`;
     }
-  } else if (direction === 'decreasing') {
+  } else if (direction === "decreasing") {
     description = `Spending is ${strength}ly trending downward`;
-    if (strength === 'strong') {
+    if (strength === "strong") {
       description += ` (${Math.abs(trend.slope).toFixed(0)} per month)`;
     }
   } else {
-    description = 'Spending is relatively stable';
+    description = "Spending is relatively stable";
   }
 
   return { direction, strength, description };
 }
-

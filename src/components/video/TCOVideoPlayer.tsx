@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import React, { useState, useRef, useEffect } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize, CheckCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Slider } from '@/components/ui/slider';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { analytics } from '@/lib/analytics';
+import React, { useState, useRef, useEffect } from "react";
+import { Play, Pause, Volume2, VolumeX, Maximize, CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Slider } from "@/components/ui/slider";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { analytics } from "@/lib/analytics";
 
 export interface TCOVideo {
   id: string;
@@ -17,7 +17,7 @@ export interface TCOVideo {
   duration: number; // in seconds
   moduleId: string;
   domain: string;
-  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
   tags: string[];
   thumbnail?: string;
   transcriptUrl?: string;
@@ -55,8 +55,8 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
 
     const handleTimeUpdate = () => {
       setCurrentTime(video.currentTime);
-      setWatchTime(prev => prev + 0.1); // Approximate watch time tracking
-      
+      setWatchTime((prev) => prev + 0.1); // Approximate watch time tracking
+
       if (onProgress) {
         const progress = (video.currentTime / video.duration) * 100;
         onProgress(progress);
@@ -70,7 +70,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
     const handleEnded = () => {
       setIsCompleted(true);
       setIsPlaying(false);
-      analytics.capture('video_complete', {
+      analytics.capture("video_complete", {
         id: videoObj.id,
         title: videoObj.title,
         moduleId: videoObj.moduleId,
@@ -84,7 +84,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
 
     const handlePlay = () => {
       setIsPlaying(true);
-      analytics.capture('video_play', {
+      analytics.capture("video_play", {
         id: videoObj.id,
         title: videoObj.title,
         moduleId: videoObj.moduleId,
@@ -94,7 +94,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
     const handlePause = () => {
       setIsPlaying(false);
       const dur = video.duration || 0;
-      analytics.capture('video_pause', {
+      analytics.capture("video_pause", {
         id: videoObj.id,
         title: videoObj.title,
         moduleId: videoObj.moduleId,
@@ -104,18 +104,18 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
       });
     };
 
-    video.addEventListener('timeupdate', handleTimeUpdate);
-    video.addEventListener('durationchange', handleDurationChange);
-    video.addEventListener('ended', handleEnded);
-    video.addEventListener('play', handlePlay);
-    video.addEventListener('pause', handlePause);
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    video.addEventListener("durationchange", handleDurationChange);
+    video.addEventListener("ended", handleEnded);
+    video.addEventListener("play", handlePlay);
+    video.addEventListener("pause", handlePause);
 
     return () => {
-      video.removeEventListener('timeupdate', handleTimeUpdate);
-      video.removeEventListener('durationchange', handleDurationChange);
-      video.removeEventListener('ended', handleEnded);
-      video.removeEventListener('play', handlePlay);
-      video.removeEventListener('pause', handlePause);
+      video.removeEventListener("timeupdate", handleTimeUpdate);
+      video.removeEventListener("durationchange", handleDurationChange);
+      video.removeEventListener("ended", handleEnded);
+      video.removeEventListener("play", handlePlay);
+      video.removeEventListener("pause", handlePause);
     };
   }, [onProgress, onComplete]);
 
@@ -172,13 +172,13 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
   const progressPercentage = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   // Progress milestones 25/50/75/100
-  const milestonesRef = useRef<{[k:string]: boolean}>({});
+  const milestonesRef = useRef<{ [k: string]: boolean }>({});
   useEffect(() => {
     if (!duration) return;
     const p = progressPercentage;
@@ -186,38 +186,47 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
       const key = String(m);
       if (!milestonesRef.current[key] && p >= m) {
         milestonesRef.current[key] = true;
-        void analytics.capture('video_progress', { id: videoObj.id, title: videoObj.title, moduleId: videoObj.moduleId, domain: videoObj.domain, milestone: m });
+        void analytics.capture("video_progress", {
+          id: videoObj.id,
+          title: videoObj.title,
+          moduleId: videoObj.moduleId,
+          domain: videoObj.domain,
+          milestone: m,
+        });
       }
     };
-    mark(25); mark(50); mark(75); mark(100);
+    mark(25);
+    mark(50);
+    mark(75);
+    mark(100);
   }, [progressPercentage, duration, videoObj.id, videoObj.title]);
 
   return (
-    <Card className="w-full max-w-4xl mx-auto">
+    <Card className="mx-auto w-full max-w-4xl">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">
             {video.title}
-            {isCompleted && <CheckCircle className="w-5 h-5 text-[#22c55e]" />}
+            {isCompleted && <CheckCircle className="h-5 w-5 text-[#22c55e]" />}
           </CardTitle>
           <Badge variant="secondary">{video.domain}</Badge>
         </div>
         <p className="text-sm text-muted-foreground">{video.description}</p>
         <div className="flex gap-2">
-          {video.tags.map(tag => (
+          {video.tags.map((tag) => (
             <Badge key={tag} variant="outline" className="text-xs">
               {tag}
             </Badge>
           ))}
         </div>
       </CardHeader>
-      
+
       <CardContent className="space-y-4">
         {/* Video Player */}
-        <div className="relative bg-black rounded-lg overflow-hidden">
+        <div className="relative overflow-hidden rounded-lg bg-black">
           <video
             ref={videoRef}
-            className="w-full aspect-video"
+            className="aspect-video w-full"
             autoPlay={autoPlay}
             preload="metadata"
             onClick={togglePlay}
@@ -236,12 +245,12 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
             <div className="space-y-2">
               {/* Progress Bar */}
-              <Progress 
-                value={progressPercentage} 
-                className="h-1" 
+              <Progress
+                value={progressPercentage}
+                className="h-1"
                 aria-label={`Video playback progress: ${Math.round(progressPercentage)}% (${formatTime(currentTime)} of ${formatTime(duration)})`}
               />
-              
+
               {/* Controls */}
               <div className="flex items-center justify-between text-foreground">
                 <div className="flex items-center gap-2">
@@ -251,9 +260,9 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
                     onClick={togglePlay}
                     className="text-foreground hover:bg-white/20"
                   >
-                    {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                    {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
                   </Button>
-                  
+
                   <div className="flex items-center gap-2">
                     <Button
                       variant="ghost"
@@ -261,7 +270,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
                       onClick={toggleMute}
                       className="text-foreground hover:bg-white/20"
                     >
-                      {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                      {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
                     </Button>
                     <div className="w-24">
                       <Slider
@@ -286,7 +295,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
                   onClick={toggleFullscreen}
                   className="text-foreground hover:bg-white/20"
                 >
-                  <Maximize className="w-4 h-4" />
+                  <Maximize className="h-4 w-4" />
                 </Button>
               </div>
             </div>
@@ -309,7 +318,7 @@ export const TCOVideoPlayer: React.FC<TCOVideoPlayerProps> = ({
               const video = videoRef.current;
               if (video) {
                 const track = video.textTracks[0];
-                track.mode = track.mode === 'showing' ? 'hidden' : 'showing';
+                track.mode = track.mode === "showing" ? "hidden" : "showing";
               }
             }}
           >

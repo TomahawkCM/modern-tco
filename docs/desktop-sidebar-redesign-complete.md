@@ -20,27 +20,22 @@ Replaced flat 13-item navigation list with organized collapsible groups:
 ```typescript
 const navigationSections: NavSection[] = [
   {
-    title: 'TRACKING & ANALYSIS',
-    items: [
-      'Dashboard', 'Transactions', 'Scan Receipt', 'Budgets', 'Reports'
-    ]
+    title: "TRACKING & ANALYSIS",
+    items: ["Dashboard", "Transactions", "Scan Receipt", "Budgets", "Reports"],
   },
   {
-    title: 'WEALTH & PLANNING',
-    items: [
-      'Loans', 'Investments', 'Future Plans', 'Retirement'
-    ]
+    title: "WEALTH & PLANNING",
+    items: ["Loans", "Investments", "Future Plans", "Retirement"],
   },
   {
-    title: 'TOOLS & SETTINGS',
-    items: [
-      'Categories', 'Import CSV', 'Export Data', 'Settings'
-    ]
+    title: "TOOLS & SETTINGS",
+    items: ["Categories", "Import CSV", "Export Data", "Settings"],
   },
 ];
 ```
 
 **Benefits**:
+
 - Reduces cognitive load (3 groups vs 13 flat items)
 - Logical grouping by workflow/data type
 - Follows competitive analysis recommendations (Copilot, Monarch Money patterns)
@@ -48,6 +43,7 @@ const navigationSections: NavSection[] = [
 #### 2. Collapsible Section Headers
 
 **Features**:
+
 - All sections **open by default** (seniors-friendly, UX Principle #1)
 - Chevron icons indicate expand/collapse state (→ collapsed, ↓ expanded)
 - 48px minimum touch targets (WCAG 2.2 Level AA)
@@ -68,6 +64,7 @@ const navigationSections: NavSection[] = [
 #### 3. Enhanced Touch Targets (WCAG 2.2 AA)
 
 **Before** → **After**:
+
 - Section headers: N/A → **48px** ✅
 - Navigation links: `min-h-[44px]` → **`min-h-[48px]`** ✅
 - Keyboard shortcuts button: `min-h-[44px]` → **`min-h-[48px]`** ✅
@@ -77,10 +74,11 @@ All interactive elements now meet WCAG 2.2 Level AA (2.5.8) requirement for 48px
 #### 4. Active State Indicators
 
 **Visual feedback** for current page:
+
 ```tsx
 isActive
-  ? 'bg-teal-50 text-teal-700 font-semibold border-l-4 border-teal-500'
-  : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+  ? "bg-teal-50 text-teal-700 font-semibold border-l-4 border-teal-500"
+  : "text-gray-700 hover:bg-gray-100 hover:text-gray-900";
 ```
 
 - **Background**: Teal-50 (subtle highlight)
@@ -91,6 +89,7 @@ isActive
 #### 5. Keyboard Navigation Improvements
 
 **Enhanced accessibility**:
+
 - 2px teal focus rings on all interactive elements
 - Logical tab order (section headers → items → next section)
 - Proper ARIA attributes (`aria-expanded`, `aria-controls`, `aria-current`)
@@ -101,22 +100,26 @@ isActive
 ## UX Principles Applied
 
 ### ✅ Principle #1: Accessible to All Ages (60+ Optimized)
+
 - **18px+ typography**: Section headers use uppercase tracking, items use font-medium
 - **48px touch targets**: All buttons/links meet WCAG 2.2 AA standard
 - **Sections open by default**: Reduces clicks for seniors
 
 ### ✅ Principle #3: 3-Tap Maximum to Any Feature
+
 - Dashboard: 0 taps (always visible)
 - Core features: 1 tap (Transactions, Budgets, Reports)
 - Advanced features: 1-2 taps (even if section collapsed)
 
 ### ✅ Principle #4: WCAG 2.2 AA Compliant
+
 - **2.5.8 Target Size (Enhanced)**: All targets ≥48px
 - **2.1.1 Keyboard**: Full keyboard navigation support
 - **2.4.7 Focus Visible**: 2px focus rings on all interactive elements
 - **1.3.1 Info and Relationships**: Proper ARIA landmarks and labels
 
 ### ✅ Principle #7: Delight Through Performance
+
 - Smooth transitions on hover/active states
 - Instant section expand/collapse (no animation delay)
 - Responsive feedback for all interactions
@@ -126,29 +129,33 @@ isActive
 ## Technical Implementation
 
 ### File Modified
+
 - `src/app/budget-app/layout.tsx` (~217 lines)
 
 ### New Imports
+
 ```typescript
-import { usePathname } from 'next/navigation';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { usePathname } from "next/navigation";
+import { ChevronDown, ChevronRight } from "lucide-react";
 ```
 
 ### State Management
+
 ```typescript
 const pathname = usePathname(); // Detect active route
 const [collapsedSections, setCollapsedSections] = useState<Record<string, boolean>>({
-  'TRACKING & ANALYSIS': false,
-  'WEALTH & PLANNING': false,
-  'TOOLS & SETTINGS': false,
+  "TRACKING & ANALYSIS": false,
+  "WEALTH & PLANNING": false,
+  "TOOLS & SETTINGS": false,
 });
 
 const toggleSection = (title: string) => {
-  setCollapsedSections(prev => ({ ...prev, [title]: !prev[title] }));
+  setCollapsedSections((prev) => ({ ...prev, [title]: !prev[title] }));
 };
 ```
 
 ### TypeScript Interfaces
+
 ```typescript
 interface NavItem {
   name: string;
@@ -167,10 +174,12 @@ interface NavSection {
 ## Testing & Validation
 
 ### ✅ TypeScript Compilation
+
 - No errors in layout.tsx (type-safe implementation)
 - Pre-existing errors in other files (chatbot, investments) unrelated to this change
 
 ### ✅ Accessibility Checklist
+
 - [x] 48px minimum touch targets on all interactive elements
 - [x] Keyboard navigation works (Tab, Enter, Escape)
 - [x] ARIA attributes properly implemented
@@ -179,6 +188,7 @@ interface NavSection {
 - [x] Screen reader friendly (section headers, current page)
 
 ### 🔲 Manual Testing Required
+
 - [ ] Test on real desktop browser (Chrome, Firefox, Safari, Edge)
 - [ ] Verify section collapse/expand works
 - [ ] Test keyboard-only navigation flow
@@ -198,6 +208,7 @@ interface NavSection {
 ## Competitive Analysis Compliance
 
 ### ✅ Patterns Adopted
+
 - **Desktop sidebar with collapsible groups**: ✅ (Monarch Money, Simplifi pattern)
 - **Section headers**: ✅ (Visual hierarchy improvement)
 - **Active state indicators**: ✅ (Copilot, YNAB pattern)
@@ -205,13 +216,13 @@ interface NavSection {
 
 ### 📊 Comparison to Competitors
 
-| Feature | Budget App v1 | Copilot | YNAB | Monarch | Others |
-|---------|---------------|---------|------|---------|--------|
-| Grouped sidebar | ✅ | ✅ | ❌ | ✅ | Partial |
-| 48px touch targets | ✅ | Unknown | ❌ | ❌ | ❌ |
-| Collapsible sections | ✅ | ❌ | ❌ | ✅ | Partial |
-| Active state indicator | ✅ | ✅ | ✅ | ✅ | ✅ |
-| ARIA navigation | ✅ | Unknown | Partial | Unknown | Unknown |
+| Feature                | Budget App v1 | Copilot | YNAB    | Monarch | Others  |
+| ---------------------- | ------------- | ------- | ------- | ------- | ------- |
+| Grouped sidebar        | ✅            | ✅      | ❌      | ✅      | Partial |
+| 48px touch targets     | ✅            | Unknown | ❌      | ❌      | ❌      |
+| Collapsible sections   | ✅            | ❌      | ❌      | ✅      | Partial |
+| Active state indicator | ✅            | ✅      | ✅      | ✅      | ✅      |
+| ARIA navigation        | ✅            | Unknown | Partial | Unknown | Unknown |
 
 ---
 

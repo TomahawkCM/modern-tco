@@ -3,7 +3,7 @@
 **Date**: November 10, 2025  
 **Auditor**: Claude (User session)  
 **Archon Task**: 68ffc607-4c54-418b-af0b-48b391c31c87  
-**Project**: Budget App v1 Modernization  
+**Project**: Budget App v1 Modernization
 
 ---
 
@@ -12,6 +12,7 @@
 The budget app has a **mature design system** with strong accessibility foundations, but requires several updates to meet the v1 modernization goals, particularly for seniors-friendliness and WCAG 2.2 AA compliance.
 
 **Key Findings**:
+
 - ✅ **Strong foundation**: 3 theme modes, semantic tokens, reduced motion support
 - ✅ **Rich component library**: 63 shadcn/ui components + 50 custom budget components
 - ⚠️ **Base typography**: 16px (needs increase to 18px for seniors)
@@ -25,37 +26,42 @@ The budget app has a **mature design system** with strong accessibility foundati
 ### Current Palette
 
 **Light Mode** (globals.css:6-30):
+
 ```css
---background: 0 0% 100%;        /* #ffffff */
---foreground: 222.2 84% 4.9%;   /* #0a1628 */
---primary: 210 79% 46%;         /* #1d72b8 (blue) */
---border: 214.3 31.8% 91.4%;    /* #e5e9f0 */
+--background: 0 0% 100%; /* #ffffff */
+--foreground: 222.2 84% 4.9%; /* #0a1628 */
+--primary: 210 79% 46%; /* #1d72b8 (blue) */
+--border: 214.3 31.8% 91.4%; /* #e5e9f0 */
 ```
 
 **Dark Mode** (globals.css:38-82):
+
 ```css
---background: 0 0% 4%;          /* #0a0a0a */
---foreground: 0 0% 98%;         /* #fafafa */
---primary: 217 91% 60%;         /* #3b82f6 (blue-500) */
---card: 220 20% 15%;            /* #1a1f2e (blue-gray) */
+--background: 0 0% 4%; /* #0a0a0a */
+--foreground: 0 0% 98%; /* #fafafa */
+--primary: 217 91% 60%; /* #3b82f6 (blue-500) */
+--card: 220 20% 15%; /* #1a1f2e (blue-gray) */
 ```
 
 **High-Contrast Mode** (globals.css:84-133):
+
 ```css
---background: 0 0% 0%;          /* #000000 pure black */
---foreground: 0 0% 100%;        /* #ffffff pure white */
---primary: 180 100% 50%;        /* #00ffff bright cyan */
---accent: 60 100% 50%;          /* #ffff00 bright yellow */
+--background: 0 0% 0%; /* #000000 pure black */
+--foreground: 0 0% 100%; /* #ffffff pure white */
+--primary: 180 100% 50%; /* #00ffff bright cyan */
+--accent: 60 100% 50%; /* #ffff00 bright yellow */
 ```
 
 ### Extended Palette (tailwind.config.ts:20-106)
 
 **Archon Cyberpunk Theme** (Blue Palette):
+
 - Primary Blues: `#3b82f6` (blue-500), `#60a5fa` (lighter), `#2563eb` (darker)
 - Purple Accents: `#8b5cf6` (violet), `#a78bfa` (lighter)
 - Status Colors: `#22c55e` (green), `#f97316` (orange)
 
 **Tanium Legacy Colors**:
+
 - Primary: `#1a365d`
 - Accent: `#3182ce`
 - Success: `#38a169`
@@ -63,6 +69,7 @@ The budget app has a **mature design system** with strong accessibility foundati
 - Error: `#e53e3e`
 
 ### Semantic Tokens (Mapped to HSL Variables)
+
 - `background`, `foreground`, `card`, `popover`, `primary`, `secondary`, `muted`, `accent`, `destructive`, `success`, `warning`
 
 ---
@@ -75,6 +82,7 @@ The budget app has a **mature design system** with strong accessibility foundati
 ⚠️ **Issue**: Does NOT meet v1 requirement of 18px base for seniors-friendliness
 
 **Type Scale** (Tailwind defaults, not customized):
+
 - `text-xs`: 12px (0.75rem)
 - `text-sm`: 14px (0.875rem)
 - `text-base`: 16px (1rem) ⚠️ Should be 18px
@@ -84,9 +92,15 @@ The budget app has a **mature design system** with strong accessibility foundati
 - `text-3xl`: 30px (1.875rem)
 
 **Font Stack** (globals.css:32-35):
+
 ```css
-font-family: system-ui, -apple-system, BlinkMacSystemFont, 
-             "Segoe UI", Roboto, sans-serif;
+font-family:
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Roboto,
+  sans-serif;
 ```
 
 ### Typography Issues Identified
@@ -131,24 +145,31 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 ### shadcn/ui Components (63 total)
 
 **Core UI** (15):
+
 - button, input, textarea, select, checkbox, radio-group, switch, slider, label, separator, badge, avatar, skeleton, progress, toast
 
 **Layout** (8):
+
 - card, sheet, dialog, drawer, popover, dropdown-menu, tooltip, hover-card
 
 **Navigation** (5):
+
 - breadcrumb, navigation-menu, command, menubar, tabs
 
 **Data Display** (6):
+
 - table, chart, accordion, collapsible, scroll-area, carousel
 
 **Forms** (4):
+
 - form, calendar, toggle, toggle-group
 
 **Feedback** (3):
+
 - alert, alert-dialog, loading-spinner, loading-states
 
 **Specialized** (22):
+
 - theme-provider, exam-dialog, help-tooltip, helpful-error
 - **Magic UI Components**: 3d-card, animated-testimonials, background-beams, bento-grid, floating-navbar, hero-parallax, infinite-moving-cards, meteors, sparkles, text-generate-effect
 - **Cyberpunk folder**: (need to investigate)
@@ -156,30 +177,39 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 ### Custom Budget Components (50+)
 
 **Modals & Dialogs** (6):
+
 - TransactionModal, SplitTransactionModal, HoldingModal, InvestmentAccountModal, ShortcutsModal, ConfirmDialog, ChatbotOptInDialog
 
 **Charts & Visualizations** (7):
+
 - AmortizationChart, InvestmentCharts, SpendingTrendChart, SpendingHeatMap, PredictiveSpendingChart, DebtOverview, DebtAnalysis, AccessibleChart
 
 **Forms & Inputs** (5):
+
 - CategoryCombobox, LoanForm, ReceiptUpload, BankSelectionStep, ImportWizardStepper
 
 **Lists & Tables** (4):
+
 - RecurringTransactions, PaymentHistory, AnomalyAlerts, OverspendingAlerts
 
 **UI Polish** (8):
+
 - LoadingSkeleton, Toast, SuccessCheckmark, ConfidenceMeter, ReceiptThumbnail, PWAInstallPrompt, EmptyState, HelpTooltip
 
 **Chatbot** (8):
+
 - Chatbot, ChatbotHelp, ChatbotButton, ChatbotPanel, ChatbotWidget, ChatbotHeader, ChatbotFooter, ChatbotInput, ChatbotMessages, MessageBubble, TypingIndicator
 
 **Dashboard** (4):
+
 - DashboardCustomizer, DraggableWidget, SpendingInsights, CommandPalette
 
 **Loans** (3):
+
 - ExtraPaymentCalculator, AmortizationChart, PaymentHistory
 
 **Accessibility** (3):
+
 - AccessibilitySettingsPanel, AccessibleChart, OnboardingTour
 
 ---
@@ -189,21 +219,25 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 ### Current Tokens (globals.css:222-318)
 
 **Duration Scale** (implicit, not tokenized):
+
 - Fast: 150ms (button press)
 - Normal: 300ms (transitions)
 - Slow: 500ms (fadeIn animations)
 
 **Easing Curves** (not documented):
+
 - Default: ease-out (button:354)
 - Emphasized: cubic-bezier(0.4, 0, 0.2, 1) (glass-button:344)
 
 **Keyframe Animations** (13 total):
+
 - `cyber-pulse`, `neon-glow`, `particle-float`, `cyber-border`, `hologram-shimmer`, `progress-glow`
 - `shimmer`, `fadeIn`, `accordion-down`, `accordion-up`, `typing-bounce`
 
 ### Reduced Motion Support
 
 **System Preference** (globals.css:403-421):
+
 ```css
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -214,6 +248,7 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 ```
 
 **Manual Toggle** (globals.css:424-431):
+
 ```css
 .reduce-motion * {
   animation-duration: 0.01ms !important;
@@ -236,11 +271,13 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 ### Current Implementation
 
 **Theme Modes** (3):
+
 - ✅ Light mode (default)
 - ✅ Dark mode (`.dark` class)
 - ✅ High-contrast mode (`.high-contrast` class)
 
 **High-Contrast Enhancements** (globals.css:434-535):
+
 - ✅ 2px borders on buttons, inputs, cards
 - ✅ 4px focus outlines
 - ✅ Underlined links with bright cyan
@@ -249,14 +286,17 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 - ✅ Bright yellow selection highlight
 
 **Reduced Motion**:
+
 - ✅ System preference detection
 - ✅ Manual toggle via `.reduce-motion` class
 - ✅ Instant transitions (0.01ms)
 
 **Touch Targets**:
+
 - ⚠️ **Needs verification**: Are all interactive elements ≥48px × 48px?
 
 **Focus Indicators**:
+
 - ✅ Visible focus rings (2px teal in light/dark, 4px yellow in high-contrast)
 
 ### Accessibility Issues Identified
@@ -273,11 +313,13 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 ### Current Structure
 
 **CSS Custom Properties** (globals.css):
+
 - ✅ Semantic tokens (background, foreground, primary, etc.)
 - ✅ HSL color format for flexibility
 - ✅ Theme mode overrides via `.dark` and `.high-contrast`
 
 **Tailwind Extensions** (tailwind.config.ts):
+
 - ✅ Extended color palette (archon, tanium)
 - ✅ Border radius tokens (`--radius`)
 - ✅ Keyframe animations
@@ -333,7 +375,7 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 /* Font Size Scale */
 --font-size-xs: 14px;
 --font-size-sm: 16px;
---font-size-base: 18px;  /* NEW: seniors-friendly */
+--font-size-base: 18px; /* NEW: seniors-friendly */
 --font-size-lg: 20px;
 --font-size-xl: 24px;
 --font-size-2xl: 30px;
@@ -355,11 +397,11 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 
 ```css
 /* Semantic Spacing */
---spacing-section: 64px;    /* Between major sections */
---spacing-card: 24px;       /* Card padding */
---spacing-input: 12px;      /* Input padding */
---spacing-button: 16px;     /* Button padding */
---spacing-icon: 40px;       /* Icon button size */
+--spacing-section: 64px; /* Between major sections */
+--spacing-card: 24px; /* Card padding */
+--spacing-input: 12px; /* Input padding */
+--spacing-button: 16px; /* Button padding */
+--spacing-icon: 40px; /* Icon button size */
 --spacing-touch-target: 48px; /* Minimum touch target */
 ```
 
@@ -373,10 +415,10 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 --duration-slow: 500ms;
 
 /* Easing Curves */
---easing-default: cubic-bezier(0.4, 0.0, 0.2, 1);
---easing-emphasized: cubic-bezier(0.2, 0.0, 0.0, 1);
---easing-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
---easing-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
+--easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+--easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+--easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+--easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
 ```
 
 ---
@@ -386,11 +428,13 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 ### Verified Components (63)
 
 **Buttons & Actions**:
+
 - button.tsx ✅
 - toggle.tsx ✅
 - toggle-group.tsx ✅
 
 **Form Inputs**:
+
 - input.tsx ✅
 - textarea.tsx ✅
 - select.tsx ✅
@@ -401,12 +445,14 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 - calendar.tsx ✅
 
 **Layout**:
+
 - card.tsx ✅
 - separator.tsx ✅
 - scroll-area.tsx ✅
 - resizable.tsx ✅
 
 **Overlays**:
+
 - dialog.tsx ✅
 - sheet.tsx ✅
 - drawer.tsx ✅
@@ -417,6 +463,7 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 - alert-dialog.tsx ✅
 
 **Navigation**:
+
 - breadcrumb.tsx ✅
 - navigation-menu.tsx ✅
 - menubar.tsx ✅
@@ -424,12 +471,14 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 - command.tsx ✅
 
 **Data Display**:
+
 - table.tsx ✅
 - chart.tsx ✅
 - badge.tsx ✅
 - avatar.tsx ✅
 
 **Feedback**:
+
 - alert.tsx ✅
 - toast.tsx + toaster.tsx ✅
 - progress.tsx ✅
@@ -438,16 +487,19 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 - loading-states.tsx ✅
 
 **Form Components**:
+
 - form.tsx ✅
 - label.tsx ✅
 
 **Advanced/Effects**:
+
 - accordion.tsx ✅
 - collapsible.tsx ✅
 - carousel.tsx ✅
 - pagination.tsx ✅
 
 **Magic UI (Decorative)**:
+
 - 3d-card.tsx
 - animated-testimonials.tsx
 - background-beams.tsx
@@ -460,6 +512,7 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont,
 - text-generate-effect.tsx
 
 **Custom/Specialized**:
+
 - theme-provider.tsx ✅
 - exam-dialog.tsx (TCO-specific)
 - help-tooltip.tsx ✅

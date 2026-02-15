@@ -6,7 +6,7 @@
 import {
   Module3Section,
   MODULE_3_SECTIONS,
-  getSectionCoverage
+  getSectionCoverage,
 } from "@/lib/module3-section-definitions";
 import type { Question, TCODomain } from "@/types/exam";
 
@@ -69,24 +69,24 @@ export class Module3AssessmentEngine {
     [Module3Section.PACKAGE_VALIDATION]: 0.12,
     [Module3Section.DEPLOYMENT_STRATEGIES]: 0.18,
     [Module3Section.ERROR_HANDLING]: 0.15,
-    [Module3Section.ROLLBACK_PROCEDURES]: 0.10,
+    [Module3Section.ROLLBACK_PROCEDURES]: 0.1,
     [Module3Section.PERFORMANCE_MONITORING]: 0.15,
     [Module3Section.SECURITY_CONSIDERATIONS]: 0.12,
     [Module3Section.BATCH_OPERATIONS]: 0.08,
     [Module3Section.SCHEDULING_AUTOMATION]: 0.08,
-    [Module3Section.DEPENDENCY_MANAGEMENT]: 0.02
+    [Module3Section.DEPENDENCY_MANAGEMENT]: 0.02,
   };
 
   private static readonly PASSING_THRESHOLDS: Record<Module3Section, number> = {
     [Module3Section.PACKAGE_VALIDATION]: 0.75,
-    [Module3Section.DEPLOYMENT_STRATEGIES]: 0.80,
+    [Module3Section.DEPLOYMENT_STRATEGIES]: 0.8,
     [Module3Section.ERROR_HANDLING]: 0.85,
-    [Module3Section.ROLLBACK_PROCEDURES]: 0.80,
+    [Module3Section.ROLLBACK_PROCEDURES]: 0.8,
     [Module3Section.PERFORMANCE_MONITORING]: 0.75,
     [Module3Section.SECURITY_CONSIDERATIONS]: 0.85,
-    [Module3Section.BATCH_OPERATIONS]: 0.70,
+    [Module3Section.BATCH_OPERATIONS]: 0.7,
     [Module3Section.SCHEDULING_AUTOMATION]: 0.75,
-    [Module3Section.DEPENDENCY_MANAGEMENT]: 0.75
+    [Module3Section.DEPENDENCY_MANAGEMENT]: 0.75,
   };
 
   /**
@@ -110,7 +110,7 @@ export class Module3AssessmentEngine {
       passingThreshold = 0.75,
       requireAllSections = false,
       adaptiveScoring = true,
-      penalizeGaps = true
+      penalizeGaps = true,
     } = config;
 
     // Group responses by section
@@ -134,8 +134,8 @@ export class Module3AssessmentEngine {
     // Handle sections with no responses (gaps)
     const attemptedSections = new Set(Object.keys(responsesBySection) as Module3Section[]);
     const gapsIdentified = Object.keys(MODULE_3_SECTIONS)
-      .filter(sectionId => !attemptedSections.has(sectionId as Module3Section))
-      .map(sectionId => sectionId as Module3Section);
+      .filter((sectionId) => !attemptedSections.has(sectionId as Module3Section))
+      .map((sectionId) => sectionId as Module3Section);
 
     // Apply gap penalty if enabled
     if (penalizeGaps && gapsIdentified.length > 0) {
@@ -146,7 +146,7 @@ export class Module3AssessmentEngine {
     // Calculate overall metrics
     const overallScore = totalWeight > 0 ? totalWeightedScore / totalWeight : 0;
     const totalQuestions = sessionData.responses.length;
-    const correctAnswers = sessionData.responses.filter(r => r.correct).length;
+    const correctAnswers = sessionData.responses.filter((r) => r.correct).length;
     const overallAccuracy = totalQuestions > 0 ? correctAnswers / totalQuestions : 0;
 
     // Determine pass/fail
@@ -185,7 +185,7 @@ export class Module3AssessmentEngine {
       weaknesses,
       gapsIdentified,
       recommendations,
-      certificationReadiness
+      certificationReadiness,
     };
   }
 
@@ -204,7 +204,7 @@ export class Module3AssessmentEngine {
   ): SectionAssessmentResult {
     const section = MODULE_3_SECTIONS[sectionId];
     const questionsAttempted = responses.length;
-    const questionsCorrect = responses.filter(r => r.correct).length;
+    const questionsCorrect = responses.filter((r) => r.correct).length;
     const accuracy = questionsAttempted > 0 ? questionsCorrect / questionsAttempted : 0;
     const timeSpent = responses.reduce((sum, r) => sum + r.timeSpent, 0);
 
@@ -219,15 +219,13 @@ export class Module3AssessmentEngine {
     const passed = score >= threshold;
 
     // Analyze learning objectives
-    const allObjectiveIds = responses.flatMap(r => r.objectiveIds);
-    const correctObjectiveIds = responses
-      .filter(r => r.correct)
-      .flatMap(r => r.objectiveIds);
+    const allObjectiveIds = responses.flatMap((r) => r.objectiveIds);
+    const correctObjectiveIds = responses.filter((r) => r.correct).flatMap((r) => r.objectiveIds);
 
     const objectivesMet = [...new Set(correctObjectiveIds)];
     const objectivesMissed = section.learningObjectives
-      .map(obj => obj.split(":")[0])
-      .filter(objId => !objectivesMet.includes(objId));
+      .map((obj) => obj.split(":")[0])
+      .filter((objId) => !objectivesMet.includes(objId));
 
     // Generate section-specific recommendations
     const recommendations = this.generateSectionRecommendations(
@@ -248,7 +246,7 @@ export class Module3AssessmentEngine {
       passed,
       objectivesMet,
       objectivesMissed,
-      recommendations
+      recommendations,
     };
   }
 
@@ -303,15 +301,18 @@ export class Module3AssessmentEngine {
       timeSpent: number;
       objectiveIds: string[];
     }>
-  ): Record<string, Array<{
-    questionId: string;
-    correct: boolean;
-    timeSpent: number;
-    objectiveIds: string[];
-  }>> {
+  ): Record<
+    string,
+    Array<{
+      questionId: string;
+      correct: boolean;
+      timeSpent: number;
+      objectiveIds: string[];
+    }>
+  > {
     const grouped: Record<string, any[]> = {};
 
-    responses.forEach(response => {
+    responses.forEach((response) => {
       const { sectionId, ...responseData } = response;
       if (!grouped[sectionId]) {
         grouped[sectionId] = [];
@@ -336,12 +337,12 @@ export class Module3AssessmentEngine {
     }
 
     if (requireAllSections) {
-      return Object.values(sectionResults).every(result => result.passed);
+      return Object.values(sectionResults).every((result) => result.passed);
     }
 
     // At least 70% of attempted sections must pass
     const attemptedSections = Object.values(sectionResults);
-    const passedSections = attemptedSections.filter(result => result.passed);
+    const passedSections = attemptedSections.filter((result) => result.passed);
     return passedSections.length >= attemptedSections.length * 0.7;
   }
 
@@ -387,7 +388,7 @@ export class Module3AssessmentEngine {
 
     // Calculate suggested study time
     let suggestedStudyTime = 0;
-    priorityAreas.forEach(sectionId => {
+    priorityAreas.forEach((sectionId) => {
       const section = MODULE_3_SECTIONS[sectionId];
       suggestedStudyTime += section.estimatedTime * 2; // Double the base time for review
     });
@@ -408,7 +409,7 @@ export class Module3AssessmentEngine {
     return {
       priorityAreas: priorityAreas.slice(0, 3), // Top 3 priorities
       suggestedStudyTime,
-      nextSteps
+      nextSteps,
     };
   }
 
@@ -433,7 +434,8 @@ export class Module3AssessmentEngine {
       recommendations.push("Practice with similar question types");
     }
 
-    if (timeSpent / questionCount > 120) { // More than 2 minutes per question
+    if (timeSpent / questionCount > 120) {
+      // More than 2 minutes per question
       recommendations.push("Work on improving response time");
       recommendations.push("Practice time management strategies");
     }
@@ -452,13 +454,15 @@ export class Module3AssessmentEngine {
     sectionResults: Record<Module3Section, SectionAssessmentResult>,
     overallScore: number
   ): Module3AssessmentResult["certificationReadiness"] {
-    const areas: Record<Module3Section, "strong" | "adequate" | "needs_improvement"> =
-      {} as Record<Module3Section, "strong" | "adequate" | "needs_improvement">;
+    const areas: Record<Module3Section, "strong" | "adequate" | "needs_improvement"> = {} as Record<
+      Module3Section,
+      "strong" | "adequate" | "needs_improvement"
+    >;
 
     Object.entries(sectionResults).forEach(([sectionId, result]) => {
       if (result.score >= 0.85) {
         areas[sectionId as Module3Section] = "strong";
-      } else if (result.score >= 0.70) {
+      } else if (result.score >= 0.7) {
         areas[sectionId as Module3Section] = "adequate";
       } else {
         areas[sectionId as Module3Section] = "needs_improvement";
@@ -477,7 +481,7 @@ export class Module3AssessmentEngine {
     return {
       score: Math.round(overallScore * 100),
       areas,
-      overallReadiness
+      overallReadiness,
     };
   }
 }

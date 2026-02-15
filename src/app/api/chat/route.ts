@@ -12,9 +12,9 @@
  * - Budget app context awareness
  */
 
-import { type NextRequest, NextResponse } from 'next/server';
-import OpenAI from 'openai';
-import { isOnlineMode } from '@/config/features';
+import { type NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
+import { isOnlineMode } from "@/config/features";
 
 // Lazy initialization of OpenAI client
 let openai: OpenAI | null = null;
@@ -23,7 +23,7 @@ function getOpenAIClient(): OpenAI {
   if (!openai) {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
-      throw new Error('OPENAI_API_KEY not configured. Add OPENAI_API_KEY to your .env.local file.');
+      throw new Error("OPENAI_API_KEY not configured. Add OPENAI_API_KEY to your .env.local file.");
     }
     openai = new OpenAI({ apiKey });
   }
@@ -83,19 +83,20 @@ export async function POST(request: NextRequest) {
   // Check if we're in online mode (standalone mode has no AI)
   if (!isOnlineMode()) {
     return NextResponse.json(
-      { error: 'Chatbot not available in standalone mode' },
+      { error: "Chatbot not available in standalone mode" },
       { status: 503 }
     );
   }
 
   try {
     // Get client IP for rate limiting
-    const ip = request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown';
+    const ip =
+      request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "unknown";
 
     // Check rate limit
     if (!checkRateLimit(ip)) {
       return NextResponse.json(
-        { error: 'Rate limit exceeded. Please try again in a minute.' },
+        { error: "Rate limit exceeded. Please try again in a minute." },
         { status: 429 }
       );
     }
@@ -107,7 +108,7 @@ export async function POST(request: NextRequest) {
     // Validate messages
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       return NextResponse.json(
-        { error: 'Messages array is required and must not be empty' },
+        { error: "Messages array is required and must not be empty" },
         { status: 400 }
       );
     }
@@ -120,18 +121,17 @@ export async function POST(request: NextRequest) {
     if (userContext) {
       const { totalTransactions, totalBudgets, recentSpending } = userContext;
       systemMessage += `\n\n**User Context**:`;
-      if (totalTransactions !== undefined) systemMessage += `\n- Total transactions: ${totalTransactions}`;
+      if (totalTransactions !== undefined)
+        systemMessage += `\n- Total transactions: ${totalTransactions}`;
       if (totalBudgets !== undefined) systemMessage += `\n- Active budgets: ${totalBudgets}`;
-      if (recentSpending !== undefined) systemMessage += `\n- Recent spending (30d): $${recentSpending.toFixed(2)}`;
+      if (recentSpending !== undefined)
+        systemMessage += `\n- Recent spending (30d): $${recentSpending.toFixed(2)}`;
     }
 
     // Call OpenAI API with streaming
     const completion = await getOpenAIClient().chat.completions.create({
-      model: 'gpt-4o-mini', // Fast and cost-effective
-      messages: [
-        { role: 'system', content: systemMessage },
-        ...limitedMessages,
-      ],
+      model: "gpt-4o-mini", // Fast and cost-effective
+      messages: [{ role: "system", content: systemMessage }, ...limitedMessages],
       stream: true,
       max_tokens: 500,
       temperature: 0.7,
@@ -143,15 +143,15 @@ export async function POST(request: NextRequest) {
       async start(controller) {
         try {
           for await (const chunk of completion) {
-            const content = chunk.choices[0]?.delta?.content || '';
+            const content = chunk.choices[0]?.delta?.content || "";
             if (content) {
               controller.enqueue(encoder.encode(`data: ${JSON.stringify({ content })}\n\n`));
             }
           }
-          controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+          controller.enqueue(encoder.encode("data: [DONE]\n\n"));
           controller.close();
         } catch (error) {
-          console.error('Streaming error:', error);
+          console.error("Streaming error:", error);
           controller.error(error);
         }
       },
@@ -159,40 +159,39 @@ export async function POST(request: NextRequest) {
 
     return new Response(stream, {
       headers: {
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
       },
     });
-
   } catch (error: any) {
-    console.error('Chat API error:', error);
+    console.error("Chat API error:", error);
 
     // Handle specific OpenAI errors
     if (error?.status === 401) {
       return NextResponse.json(
-        { error: 'Invalid API key. Please check your OpenAI configuration.' },
+        { error: "Invalid API key. Please check your OpenAI configuration." },
         { status: 500 }
       );
     }
 
     if (error?.status === 429) {
       return NextResponse.json(
-        { error: 'OpenAI rate limit exceeded. Please try again later.' },
+        { error: "OpenAI rate limit exceeded. Please try again later." },
         { status: 429 }
       );
     }
 
-    if (error?.code === 'insufficient_quota') {
+    if (error?.code === "insufficient_quota") {
       return NextResponse.json(
-        { error: 'OpenAI quota exceeded. Please check your account.' },
+        { error: "OpenAI quota exceeded. Please check your account." },
         { status: 500 }
       );
     }
 
     // Generic error
     return NextResponse.json(
-      { error: 'Failed to process chat request. Please try again.' },
+      { error: "Failed to process chat request. Please try again." },
       { status: 500 }
     );
   }
@@ -203,9 +202,9 @@ export async function OPTIONS() {
   return new NextResponse(null, {
     status: 200,
     headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
     },
   });
 }

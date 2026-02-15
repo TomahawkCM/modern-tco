@@ -12,14 +12,22 @@
  * - Cancel/retry support
  */
 
-import type { ParsedTransaction } from '@/types/budget';
+import type { ParsedTransaction } from "@/types/budget";
 
 // ============================================================================
 // Types
 // ============================================================================
 
 export interface OCRProgress {
-  stage: 'loading' | 'rendering' | 'preprocessing' | 'ocr' | 'parsing' | 'complete' | 'error' | 'cancelled';
+  stage:
+    | "loading"
+    | "rendering"
+    | "preprocessing"
+    | "ocr"
+    | "parsing"
+    | "complete"
+    | "error"
+    | "cancelled";
   currentPage: number;
   totalPages: number;
   progress: number; // 0-100
@@ -58,11 +66,11 @@ export interface OCROptions {
  * Dynamically import PDF.js (client-side only)
  */
 async function loadPdfJs() {
-  if (typeof window === 'undefined') {
-    throw new Error('PDF.js can only be used in browser environment');
+  if (typeof window === "undefined") {
+    throw new Error("PDF.js can only be used in browser environment");
   }
 
-  const pdfjs = await import('pdfjs-dist');
+  const pdfjs = await import("pdfjs-dist");
 
   // Set worker path for Next.js
   // The worker needs to be served from public directory or use CDN
@@ -86,11 +94,11 @@ async function renderPdfPageToCanvas(
   const viewport = page.getViewport({ scale });
 
   // Create canvas
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
 
   if (!context) {
-    throw new Error('Failed to get canvas context');
+    throw new Error("Failed to get canvas context");
   }
 
   canvas.width = viewport.width;
@@ -116,11 +124,11 @@ async function renderPdfPageToCanvas(
  * - Increase contrast
  */
 function preprocessImage(canvas: HTMLCanvasElement): HTMLCanvasElement {
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext("2d");
   if (!ctx) return canvas;
 
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  const {data} = imageData;
+  const { data } = imageData;
 
   // Convert to grayscale and apply adaptive threshold
   for (let i = 0; i < data.length; i += 4) {
@@ -133,7 +141,7 @@ function preprocessImage(canvas: HTMLCanvasElement): HTMLCanvasElement {
     // Apply threshold (binarization) - helps with OCR
     const threshold = enhanced > 140 ? 255 : 0;
 
-    data[i] = threshold;     // R
+    data[i] = threshold; // R
     data[i + 1] = threshold; // G
     data[i + 2] = threshold; // B
     // Alpha (data[i + 3]) stays unchanged
@@ -148,13 +156,13 @@ function preprocessImage(canvas: HTMLCanvasElement): HTMLCanvasElement {
  * Better for documents with uneven lighting
  */
 function preprocessImageAdaptive(canvas: HTMLCanvasElement): HTMLCanvasElement {
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext("2d");
   if (!ctx) return canvas;
 
   const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  const {data} = imageData;
-  const {width} = canvas;
-  const {height} = canvas;
+  const { data } = imageData;
+  const { width } = canvas;
+  const { height } = canvas;
 
   // First pass: convert to grayscale
   const gray: number[] = [];
@@ -215,7 +223,7 @@ interface TesseractWord {
  * Dynamically import Tesseract.js
  */
 async function loadTesseract() {
-  const Tesseract = await import('tesseract.js');
+  const Tesseract = await import("tesseract.js");
   return Tesseract;
 }
 
@@ -224,7 +232,7 @@ async function loadTesseract() {
  */
 async function performOCR(
   canvas: HTMLCanvasElement,
-  language: string = 'eng',
+  language: string = "eng",
   onProgress?: (progress: number) => void
 ): Promise<{ text: string; confidence: number; words: TesseractWord[] }> {
   const Tesseract = await loadTesseract();
@@ -232,7 +240,7 @@ async function performOCR(
   // Create worker
   const worker = await Tesseract.createWorker(language, 1, {
     logger: (m: any) => {
-      if (m.status === 'recognizing text' && onProgress) {
+      if (m.status === "recognizing text" && onProgress) {
         onProgress(m.progress * 100);
       }
     },
@@ -241,8 +249,9 @@ async function performOCR(
   try {
     // Configure for best accuracy with bank statements
     await worker.setParameters({
-      tessedit_char_whitelist: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,/-$() ',
-      preserve_interword_spaces: '1',
+      tessedit_char_whitelist:
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,/-$() ",
+      preserve_interword_spaces: "1",
     });
 
     // Perform OCR
@@ -272,20 +281,23 @@ async function performOCR(
  */
 function parseTransactionRows(text: string): ParsedTransaction[] {
   const transactions: ParsedTransaction[] = [];
-  const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  const lines = text
+    .split("\n")
+    .map((l) => l.trim())
+    .filter((l) => l.length > 0);
 
   // Date patterns
   const datePatterns = [
-    /(\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4})/,     // MM/DD/YYYY or DD/MM/YYYY
-    /(\d{4}[\/\-]\d{1,2}[\/\-]\d{1,2})/,           // YYYY-MM-DD
+    /(\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4})/, // MM/DD/YYYY or DD/MM/YYYY
+    /(\d{4}[\/\-]\d{1,2}[\/\-]\d{1,2})/, // YYYY-MM-DD
     /((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}(?:,?\s*\d{4})?)/i, // Month DD, YYYY
   ];
 
   // Amount patterns
   const amountPatterns = [
-    /\$?([\d,]+\.\d{2})/,                          // $1,234.56 or 1234.56
-    /\(([\d,]+\.\d{2})\)/,                         // (1,234.56) - negative
-    /-\$?([\d,]+\.\d{2})/,                         // -$1,234.56 - negative
+    /\$?([\d,]+\.\d{2})/, // $1,234.56 or 1234.56
+    /\(([\d,]+\.\d{2})\)/, // (1,234.56) - negative
+    /-\$?([\d,]+\.\d{2})/, // -$1,234.56 - negative
   ];
 
   for (const line of lines) {
@@ -310,7 +322,7 @@ function parseTransactionRows(text: string): ParsedTransaction[] {
     // Check for parentheses (negative)
     const parenMatch = line.match(/\(([\d,]+\.\d{2})\)/);
     if (parenMatch) {
-      amount = parseFloat(parenMatch[1].replace(/,/g, ''));
+      amount = parseFloat(parenMatch[1].replace(/,/g, ""));
       isNegative = true;
     }
 
@@ -318,7 +330,7 @@ function parseTransactionRows(text: string): ParsedTransaction[] {
     if (!amount) {
       const negMatch = line.match(/-\$?([\d,]+\.\d{2})/);
       if (negMatch) {
-        amount = parseFloat(negMatch[1].replace(/,/g, ''));
+        amount = parseFloat(negMatch[1].replace(/,/g, ""));
         isNegative = true;
       }
     }
@@ -327,7 +339,7 @@ function parseTransactionRows(text: string): ParsedTransaction[] {
     if (!amount) {
       const amtMatch = line.match(/\$?([\d,]+\.\d{2})/);
       if (amtMatch) {
-        amount = parseFloat(amtMatch[1].replace(/,/g, ''));
+        amount = parseFloat(amtMatch[1].replace(/,/g, ""));
       }
     }
 
@@ -342,24 +354,24 @@ function parseTransactionRows(text: string): ParsedTransaction[] {
 
     // Remove date from description
     if (dateMatch) {
-      description = description.replace(dateMatch[0], '').trim();
+      description = description.replace(dateMatch[0], "").trim();
     }
 
     // Remove amount patterns from description
     description = description
-      .replace(/\$?[\d,]+\.\d{2}/g, '')
-      .replace(/\([\d,]+\.\d{2}\)/g, '')
-      .replace(/-\$?[\d,]+\.\d{2}/g, '')
+      .replace(/\$?[\d,]+\.\d{2}/g, "")
+      .replace(/\([\d,]+\.\d{2}\)/g, "")
+      .replace(/-\$?[\d,]+\.\d{2}/g, "")
       .trim();
 
     // Clean up description
     description = description
-      .replace(/\s+/g, ' ')
-      .replace(/^\s*[-|]\s*/, '')
+      .replace(/\s+/g, " ")
+      .replace(/^\s*[-|]\s*/, "")
       .trim();
 
     if (description.length < 2) {
-      description = 'Unknown Transaction';
+      description = "Unknown Transaction";
     }
 
     // Parse date
@@ -395,8 +407,18 @@ function parseDateString(dateStr: string): Date | null {
   ];
 
   const months: Record<string, number> = {
-    jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
-    jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11,
+    jan: 0,
+    feb: 1,
+    mar: 2,
+    apr: 3,
+    may: 4,
+    jun: 5,
+    jul: 6,
+    aug: 7,
+    sep: 8,
+    oct: 9,
+    nov: 10,
+    dec: 11,
   };
 
   for (const format of formats) {
@@ -444,7 +466,7 @@ export async function performPDFOCR(
   options: OCROptions = {}
 ): Promise<OCRResult> {
   const {
-    language = 'eng',
+    language = "eng",
     dpi = 300,
     preprocessImage: shouldPreprocess = true,
     onProgress,
@@ -461,7 +483,7 @@ export async function performPDFOCR(
   // Helper to check abort
   const checkAbort = () => {
     if (abortSignal?.aborted) {
-      throw new Error('OCR cancelled');
+      throw new Error("OCR cancelled");
     }
   };
 
@@ -469,11 +491,11 @@ export async function performPDFOCR(
   const reportProgress = (progress: Partial<OCRProgress>) => {
     if (onProgress) {
       onProgress({
-        stage: 'loading',
+        stage: "loading",
         currentPage: 0,
         totalPages: 0,
         progress: 0,
-        message: 'Loading...',
+        message: "Loading...",
         ...progress,
       });
     }
@@ -482,9 +504,9 @@ export async function performPDFOCR(
   try {
     // Stage 1: Load PDF
     reportProgress({
-      stage: 'loading',
+      stage: "loading",
       progress: 5,
-      message: 'Loading PDF...',
+      message: "Loading PDF...",
     });
 
     checkAbort();
@@ -494,7 +516,7 @@ export async function performPDFOCR(
     const totalPages = pdfDocument.numPages;
 
     reportProgress({
-      stage: 'loading',
+      stage: "loading",
       totalPages,
       progress: 10,
       message: `Loaded PDF with ${totalPages} pages`,
@@ -508,7 +530,7 @@ export async function performPDFOCR(
 
       // Render page to canvas
       reportProgress({
-        stage: 'rendering',
+        stage: "rendering",
         currentPage: pageNum,
         totalPages,
         progress: pageProgress,
@@ -521,7 +543,7 @@ export async function performPDFOCR(
       // Preprocess image
       if (shouldPreprocess) {
         reportProgress({
-          stage: 'preprocessing',
+          stage: "preprocessing",
           currentPage: pageNum,
           totalPages,
           progress: pageProgress + 5,
@@ -533,7 +555,7 @@ export async function performPDFOCR(
 
       // Perform OCR
       reportProgress({
-        stage: 'ocr',
+        stage: "ocr",
         currentPage: pageNum,
         totalPages,
         progress: pageProgress + 10,
@@ -542,10 +564,10 @@ export async function performPDFOCR(
 
       const ocrResult = await performOCR(canvas, language, (p) => {
         reportProgress({
-          stage: 'ocr',
+          stage: "ocr",
           currentPage: pageNum,
           totalPages,
-          progress: pageProgress + 10 + (p * 0.6),
+          progress: pageProgress + 10 + p * 0.6,
           message: `OCR page ${pageNum}/${totalPages}: ${Math.round(p)}%`,
         });
       });
@@ -567,14 +589,14 @@ export async function performPDFOCR(
 
     // Stage 5: Parse transactions
     reportProgress({
-      stage: 'parsing',
+      stage: "parsing",
       currentPage: totalPages,
       totalPages,
       progress: 90,
-      message: 'Parsing transactions...',
+      message: "Parsing transactions...",
     });
 
-    const rawText = pageTexts.join('\n\n--- Page Break ---\n\n');
+    const rawText = pageTexts.join("\n\n--- Page Break ---\n\n");
     const transactions = parseTransactionRows(rawText);
 
     // Calculate confidence warnings
@@ -590,7 +612,7 @@ export async function performPDFOCR(
     }
 
     if (transactions.length === 0) {
-      warnings.push('No transactions detected. PDF may not be a bank statement.');
+      warnings.push("No transactions detected. PDF may not be a bank statement.");
     }
 
     // Apply confidence to transactions based on OCR quality
@@ -599,7 +621,7 @@ export async function performPDFOCR(
     }
 
     reportProgress({
-      stage: 'complete',
+      stage: "complete",
       currentPage: totalPages,
       totalPages,
       progress: 100,
@@ -620,26 +642,25 @@ export async function performPDFOCR(
         averageConfidence: avgConfidence,
       },
     };
-
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
 
-    if (errorMessage === 'OCR cancelled') {
+    if (errorMessage === "OCR cancelled") {
       reportProgress({
-        stage: 'cancelled',
+        stage: "cancelled",
         currentPage: 0,
         totalPages: 0,
         progress: 0,
-        message: 'OCR cancelled by user',
+        message: "OCR cancelled by user",
       });
 
       return {
         success: false,
         transactions: [],
-        rawText: '',
+        rawText: "",
         pageTexts,
         confidence: 0,
-        warnings: ['OCR cancelled by user'],
+        warnings: ["OCR cancelled by user"],
         processingTime: Date.now() - startTime,
         ocrStats: {
           totalWords,
@@ -650,7 +671,7 @@ export async function performPDFOCR(
     }
 
     reportProgress({
-      stage: 'error',
+      stage: "error",
       currentPage: 0,
       totalPages: 0,
       progress: 0,
@@ -660,7 +681,7 @@ export async function performPDFOCR(
     return {
       success: false,
       transactions: [],
-      rawText: '',
+      rawText: "",
       pageTexts,
       confidence: 0,
       warnings: [`OCR failed: ${errorMessage}`],
@@ -688,10 +709,9 @@ export async function pdfNeedsOCR(pdfData: ArrayBuffer | Uint8Array): Promise<bo
 
     // If very little text, likely a scanned document
     const textLength = textContent.items
-      .map((item: any) => item.str || '')
-      .join('')
-      .trim()
-      .length;
+      .map((item: any) => item.str || "")
+      .join("")
+      .trim().length;
 
     return textLength < 100; // Less than 100 chars suggests scanned PDF
   } catch {

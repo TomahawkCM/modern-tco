@@ -119,9 +119,7 @@ export function WelcomeBanner({ forceShow = false }: WelcomeBannerProps) {
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <div className="min-w-0 flex-1">
-              <h2 className="text-lg font-semibold text-white">
-                Welcome to Budget App!
-              </h2>
+              <h2 className="text-lg font-semibold text-white">Welcome to Budget App!</h2>
               <p className="text-sm text-slate-400">
                 Your finances, your device. No cloud, no compromise.
               </p>

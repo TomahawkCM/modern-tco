@@ -5,9 +5,9 @@
  * for the global real estate tracking system.
  */
 
-import { db } from '@/lib/budget-db';
-import { roundToCents } from '@/lib/money';
-import type { Property, Loan } from '@/types/budget';
+import { db } from "@/lib/budget-db";
+import { roundToCents } from "@/lib/money";
+import type { Property, Loan } from "@/types/budget";
 
 /**
  * Calculate equity for a property.
@@ -29,9 +29,7 @@ export function calculateEquity(property: Property, loan?: Loan): number {
  * Calculate appreciation since purchase.
  * Returns annual and total appreciation percentages.
  */
-export function calculateAppreciation(
-  property: Property
-): { annual: number; total: number } {
+export function calculateAppreciation(property: Property): { annual: number; total: number } {
   if (property.purchasePrice <= 0) {
     return { annual: 0, total: 0 };
   }
@@ -41,8 +39,7 @@ export function calculateAppreciation(
 
   const purchaseDate = new Date(property.purchaseDate);
   const now = new Date();
-  const yearsHeld =
-    (now.getTime() - purchaseDate.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
+  const yearsHeld = (now.getTime() - purchaseDate.getTime()) / (1000 * 60 * 60 * 24 * 365.25);
 
   const annualAppreciation =
     yearsHeld > 0
@@ -59,9 +56,7 @@ export function calculateAppreciation(
  * Calculate rental ROI for an investment property.
  * Takes into account rental income, vacancy rate, and annual expenses.
  */
-export function calculateRentalROI(
-  property: Property
-): { monthly: number; annual: number } {
+export function calculateRentalROI(property: Property): { monthly: number; annual: number } {
   if (!property.monthlyRentalIncome || property.currentValue <= 0) {
     return { monthly: 0, annual: 0 };
   }

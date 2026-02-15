@@ -70,11 +70,7 @@ function buildBreadcrumbs(slugParts: string[]) {
   return crumbs;
 }
 
-export default async function LabPage({
-  params,
-}: {
-  params: Promise<{ slug?: string[] }>;
-}) {
+export default async function LabPage({ params }: { params: Promise<{ slug?: string[] }> }) {
   const { slug: slugParam } = await params;
   const slugParts = slugParam ?? [];
   if (slugParts.length === 0) {
@@ -98,13 +94,18 @@ export default async function LabPage({
 
   return (
     <div className="mx-auto max-w-4xl space-y-6 px-4 py-10">
-      <nav className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground" aria-label="Breadcrumb">
+      <nav
+        className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground"
+        aria-label="Breadcrumb"
+      >
         {breadcrumbs.map((crumb, index) => (
           <span key={crumb.href} className="flex items-center gap-2">
             <Link href={crumb.href} className="hover:text-primary">
               {crumb.label}
             </Link>
-            {index < breadcrumbs.length - 1 ? <span className="text-muted-foreground/60">/</span> : null}
+            {index < breadcrumbs.length - 1 ? (
+              <span className="text-muted-foreground/60">/</span>
+            ) : null}
           </span>
         ))}
       </nav>

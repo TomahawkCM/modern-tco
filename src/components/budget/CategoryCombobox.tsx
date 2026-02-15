@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * CategoryCombobox Component
@@ -7,12 +7,12 @@
  * Mobile: Full-screen drawer with search
  */
 
-import { useState } from 'react';
-import { Check, ChevronsUpDown } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { cn } from '@/lib/utils';
-import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -20,17 +20,9 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-} from '@/components/ui/drawer';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+} from "@/components/ui/command";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 interface CategoryOption {
   value: string;
@@ -54,10 +46,10 @@ export function CategoryCombobox({
   disabled = false,
   className,
 }: CategoryComboboxProps) {
-  const t = useTranslations('combobox');
+  const t = useTranslations("combobox");
   const [open, setOpen] = useState(false);
-  const isDesktop = useMediaQuery('(min-width: 768px)');
-  const effectivePlaceholder = placeholder || t('select');
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const effectivePlaceholder = placeholder || t("select");
 
   const selectedOption = options.find((option) => option.value === value);
 
@@ -70,7 +62,7 @@ export function CategoryCombobox({
             role="combobox"
             aria-expanded={open}
             disabled={disabled}
-            className={cn('w-full justify-between', className)}
+            className={cn("w-full justify-between", className)}
           >
             {selectedOption ? selectedOption.label : effectivePlaceholder}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -82,8 +74,8 @@ export function CategoryCombobox({
             value={value}
             onChange={onChange}
             setOpen={setOpen}
-            searchPlaceholder={t('search')}
-            noResults={t('noResults')}
+            searchPlaceholder={t("search")}
+            noResults={t("noResults")}
           />
         </PopoverContent>
       </Popover>
@@ -98,7 +90,7 @@ export function CategoryCombobox({
           role="combobox"
           aria-expanded={open}
           disabled={disabled}
-          className={cn('w-full justify-between', className)}
+          className={cn("w-full justify-between", className)}
         >
           {selectedOption ? selectedOption.label : effectivePlaceholder}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -111,8 +103,8 @@ export function CategoryCombobox({
             value={value}
             onChange={onChange}
             setOpen={setOpen}
-            searchPlaceholder={t('search')}
-            noResults={t('noResults')}
+            searchPlaceholder={t("search")}
+            noResults={t("noResults")}
           />
         </div>
       </DrawerContent>
@@ -129,7 +121,14 @@ interface OptionsListProps {
   noResults: string;
 }
 
-function OptionsList({ options, value, onChange, setOpen, searchPlaceholder, noResults }: OptionsListProps) {
+function OptionsList({
+  options,
+  value,
+  onChange,
+  setOpen,
+  searchPlaceholder,
+  noResults,
+}: OptionsListProps) {
   return (
     <Command>
       <CommandInput placeholder={searchPlaceholder} className="h-9" />
@@ -141,15 +140,15 @@ function OptionsList({ options, value, onChange, setOpen, searchPlaceholder, noR
               key={option.value}
               value={option.value}
               onSelect={(currentValue) => {
-                onChange(currentValue === value ? '' : currentValue);
+                onChange(currentValue === value ? "" : currentValue);
                 setOpen(false);
               }}
             >
               {option.label}
               <Check
                 className={cn(
-                  'ml-auto h-4 w-4',
-                  value === option.value ? 'opacity-100' : 'opacity-0'
+                  "ml-auto h-4 w-4",
+                  value === option.value ? "opacity-100" : "opacity-0"
                 )}
               />
             </CommandItem>

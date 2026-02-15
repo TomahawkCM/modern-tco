@@ -1,5 +1,5 @@
-import { AdminGuard } from '@/components/auth/AdminGuard';
-import { QuestionEditor } from '@/components/admin/questions/QuestionEditor';
+import { AdminGuard } from "@/components/auth/AdminGuard";
+import { QuestionEditor } from "@/components/admin/questions/QuestionEditor";
 
 interface EditQuestionPageProps {
   params: Promise<{

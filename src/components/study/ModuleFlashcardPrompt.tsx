@@ -18,7 +18,7 @@ interface ModuleFlashcardPromptProps {
 export default function ModuleFlashcardPrompt({
   moduleId,
   sectionId,
-  sectionTitle
+  sectionTitle,
 }: ModuleFlashcardPromptProps) {
   const { user } = useAuth();
   const [dueCount, setDueCount] = useState<number>(0);
@@ -38,7 +38,7 @@ export default function ModuleFlashcardPrompt({
     try {
       // Get all flashcards for this module
       const moduleCards = await flashcardService.getFlashcardsByModule(user.id, moduleId);
-      const dueCards = moduleCards.filter(c => new Date(c.srs_due) <= new Date());
+      const dueCards = moduleCards.filter((c) => new Date(c.srs_due) <= new Date());
 
       setTotalCards(moduleCards.length);
       setDueCount(dueCards.length);
@@ -71,17 +71,10 @@ export default function ModuleFlashcardPrompt({
   if (showReview) {
     return (
       <div className="my-8">
-        <Button
-          variant="ghost"
-          onClick={() => setShowReview(false)}
-          className="mb-4"
-        >
+        <Button variant="ghost" onClick={() => setShowReview(false)} className="mb-4">
           ← Back to Module
         </Button>
-        <FlashcardReview
-          moduleId={moduleId}
-          onComplete={handleReviewComplete}
-        />
+        <FlashcardReview moduleId={moduleId} onComplete={handleReviewComplete} />
       </div>
     );
   }
@@ -90,7 +83,7 @@ export default function ModuleFlashcardPrompt({
     return (
       <Card className="my-8 bg-gradient-to-br from-primary/5 to-primary/10">
         <CardContent className="flex items-center justify-center p-6">
-          <Loader2 className="h-5 w-5 animate-spin mr-2" />
+          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
           <span>Loading flashcards...</span>
         </CardContent>
       </Card>
@@ -98,7 +91,7 @@ export default function ModuleFlashcardPrompt({
   }
 
   return (
-    <Card className="my-8 bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+    <Card className="my-8 border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
       <CardHeader>
         <div className="flex items-start justify-between">
           <div className="flex-1">
@@ -124,7 +117,8 @@ export default function ModuleFlashcardPrompt({
           // No flashcards exist - prompt to generate
           <div className="space-y-3">
             <p className="text-sm text-muted-foreground">
-              No flashcards created yet for this module. Auto-generate flashcards from the learning objectives to start practicing.
+              No flashcards created yet for this module. Auto-generate flashcards from the learning
+              objectives to start practicing.
             </p>
             <Button
               onClick={handleAutoGenerate}
@@ -148,41 +142,33 @@ export default function ModuleFlashcardPrompt({
         ) : dueCount > 0 ? (
           // Cards are due - prompt to review
           <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 bg-background rounded-lg">
+            <div className="flex items-center justify-between rounded-lg bg-background p-3">
               <div>
                 <p className="font-medium">Ready to review</p>
                 <p className="text-sm text-muted-foreground">
-                  {dueCount} card{dueCount !== 1 ? 's' : ''} due now • {totalCards} total
+                  {dueCount} card{dueCount !== 1 ? "s" : ""} due now • {totalCards} total
                 </p>
               </div>
-              <Button
-                onClick={() => setShowReview(true)}
-                size="lg"
-              >
+              <Button onClick={() => setShowReview(true)} size="lg">
                 Start Review
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
-            <p className="text-xs text-muted-foreground text-center">
+            <p className="text-center text-xs text-muted-foreground">
               💡 Regular review sessions improve long-term retention by 50%+
             </p>
           </div>
         ) : (
           // All caught up
           <div className="space-y-3">
-            <div className="p-4 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg text-center">
-              <p className="font-medium text-[#22c55e] dark:text-[#22c55e]">
-                ✅ All caught up!
-              </p>
-              <p className="text-sm text-muted-foreground mt-1">
-                {totalCards} card{totalCards !== 1 ? 's' : ''} in this module • Next review coming soon
+            <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/10 p-4 text-center">
+              <p className="font-medium text-[#22c55e] dark:text-[#22c55e]">✅ All caught up!</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {totalCards} card{totalCards !== 1 ? "s" : ""} in this module • Next review coming
+                soon
               </p>
             </div>
-            <Button
-              variant="outline"
-              onClick={() => setShowReview(true)}
-              className="w-full"
-            >
+            <Button variant="outline" onClick={() => setShowReview(true)} className="w-full">
               <Brain className="mr-2 h-4 w-4" />
               Practice Anyway
             </Button>
@@ -191,7 +177,7 @@ export default function ModuleFlashcardPrompt({
 
         {/* Quick tip for first-time users */}
         {totalCards > 0 && totalCards < 5 && (
-          <div className="text-xs text-muted-foreground p-3 bg-muted/50 rounded-md">
+          <div className="rounded-md bg-muted/50 p-3 text-xs text-muted-foreground">
             <strong>Pro tip:</strong> Create custom flashcards for concepts you find challenging.
             Manual cards often stick better than auto-generated ones!
           </div>

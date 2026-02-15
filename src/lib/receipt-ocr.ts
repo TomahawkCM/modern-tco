@@ -4,8 +4,8 @@
  * Parses merchant, date, and amount from receipt text
  */
 
-import Tesseract from 'tesseract.js';
-import { convertPdfToImages, isPdfFile } from './pdf-to-image';
+import Tesseract from "tesseract.js";
+import { convertPdfToImages, isPdfFile } from "./pdf-to-image";
 
 export interface ExtractedReceiptData {
   merchant: string | null;
@@ -36,12 +36,12 @@ export async function extractReceiptData(
       return await extractFromImage(file);
     }
   } catch (error) {
-    console.error('OCR extraction failed:', error);
+    console.error("OCR extraction failed:", error);
     return {
       merchant: null,
       amount: null,
       date: null,
-      rawText: '',
+      rawText: "",
       confidence: 0,
     };
   }
@@ -51,7 +51,7 @@ export async function extractReceiptData(
  * Extract data from an image file
  */
 async function extractFromImage(file: File): Promise<ExtractedReceiptData> {
-  const result = await Tesseract.recognize(file, 'eng');
+  const result = await Tesseract.recognize(file, "eng");
 
   const rawText = result.data.text;
   const confidence = result.data.confidence / 100; // Convert to 0-1 scale
@@ -81,7 +81,7 @@ async function extractFromPdf(
   const pages = await convertPdfToImages(file, 10); // Max 10 pages
 
   if (pages.length === 0) {
-    throw new Error('PDF has no pages');
+    throw new Error("PDF has no pages");
   }
 
   // Process each page with OCR
@@ -96,7 +96,7 @@ async function extractFromPdf(
     }
 
     // Perform OCR on the page canvas
-    const result = await Tesseract.recognize(page.canvas, 'eng');
+    const result = await Tesseract.recognize(page.canvas, "eng");
 
     const rawText = result.data.text;
     const confidence = result.data.confidence / 100;
@@ -129,7 +129,7 @@ async function extractFromPdf(
   }
 
   // Combine raw text from all pages (for reference)
-  const combinedRawText = results.map((r, i) => `--- Page ${i + 1} ---\n${r.rawText}`).join('\n\n');
+  const combinedRawText = results.map((r, i) => `--- Page ${i + 1} ---\n${r.rawText}`).join("\n\n");
 
   return {
     merchant: bestResult.merchant,
@@ -167,7 +167,7 @@ function calculateResultScore(result: ExtractedReceiptData & { pageNum: number }
  */
 function extractMerchant(text: string): string | null {
   // Split by lines and look at the first 5 lines
-  const lines = text.split('\n').filter(line => line.trim().length > 0);
+  const lines = text.split("\n").filter((line) => line.trim().length > 0);
 
   for (let i = 0; i < Math.min(5, lines.length); i++) {
     const line = lines[i].trim();
@@ -176,8 +176,8 @@ function extractMerchant(text: string): string | null {
     // Must be at least 3 characters and mostly letters
     if (line.length >= 3 && /^[A-Z\s&'-]+$/.test(line)) {
       // Filter out common receipt keywords
-      const keywords = ['RECEIPT', 'INVOICE', 'BILL', 'TOTAL', 'SUBTOTAL', 'TAX', 'DATE', 'TIME'];
-      const isKeyword = keywords.some(kw => line.includes(kw));
+      const keywords = ["RECEIPT", "INVOICE", "BILL", "TOTAL", "SUBTOTAL", "TAX", "DATE", "TIME"];
+      const isKeyword = keywords.some((kw) => line.includes(kw));
 
       if (!isKeyword) {
         return line;
@@ -213,7 +213,7 @@ function extractAmount(text: string): number | null {
   for (const pattern of totalPatterns) {
     const match = text.match(pattern);
     if (match && match[1]) {
-      const amount = parseFloat(match[1].replace(/,/g, ''));
+      const amount = parseFloat(match[1].replace(/,/g, ""));
       if (!isNaN(amount) && amount > 0) {
         return amount;
       }
@@ -226,8 +226,8 @@ function extractAmount(text: string): number | null {
 
   if (matches.length > 0) {
     const amounts = matches
-      .map(m => parseFloat(m[1].replace(/,/g, '')))
-      .filter(n => !isNaN(n) && n > 0);
+      .map((m) => parseFloat(m[1].replace(/,/g, "")))
+      .filter((n) => !isNaN(n) && n > 0);
 
     if (amounts.length > 0) {
       // Return the largest amount (likely to be the total)
@@ -311,10 +311,20 @@ function extractDate(text: string): Date | null {
  */
 function getMonthNumber(monthName: string): number | null {
   const months = [
-    'jan', 'feb', 'mar', 'apr', 'may', 'jun',
-    'jul', 'aug', 'sep', 'oct', 'nov', 'dec'
+    "jan",
+    "feb",
+    "mar",
+    "apr",
+    "may",
+    "jun",
+    "jul",
+    "aug",
+    "sep",
+    "oct",
+    "nov",
+    "dec",
   ];
 
-  const index = months.findIndex(m => monthName.toLowerCase().startsWith(m));
+  const index = months.findIndex((m) => monthName.toLowerCase().startsWith(m));
   return index !== -1 ? index : null;
 }

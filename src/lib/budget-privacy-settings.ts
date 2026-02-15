@@ -4,9 +4,9 @@
  * Uses localStorage for client-side persistence
  */
 
-import { isOnlineMode } from '@/config/features';
+import { isOnlineMode } from "@/config/features";
 
-const STORAGE_KEY = 'budget-app-privacy-settings';
+const STORAGE_KEY = "budget-app-privacy-settings";
 
 export interface PrivacySettings {
   // AI Features
@@ -21,8 +21,8 @@ export interface PrivacySettings {
 
   // Chatbot Privacy Controls
   enableChatbot: boolean; // Master switch for chatbot feature
-  chatbotDataAccess: 'read-only' | 'full-access'; // Permission level for chatbot
-  chatbotConversationRetention: 7 | 30 | 'forever'; // Conversation retention period (days)
+  chatbotDataAccess: "read-only" | "full-access"; // Permission level for chatbot
+  chatbotConversationRetention: 7 | 30 | "forever"; // Conversation retention period (days)
 
   // Analytics & Error Tracking
   enableAnalytics: boolean; // Master switch for PostHog analytics
@@ -48,7 +48,7 @@ const DEFAULT_SETTINGS: PrivacySettings = {
   enableAIFeatures: true, // Master switch - AI features enabled by default
   enableOCR: true, // OCR is client-side only, safe by default
   enableChatbot: false, // Chatbot opt-in required (GDPR compliance, requires API)
-  chatbotDataAccess: 'read-only', // Safe default - chatbot can only read data
+  chatbotDataAccess: "read-only", // Safe default - chatbot can only read data
   chatbotConversationRetention: 7, // 7 days default (minimum retention)
   enableAnalytics: false, // OFFLINE DEFAULT: No tracking - user must opt-in
   enableErrorTracking: false, // OFFLINE DEFAULT: No error reporting - user must opt-in
@@ -62,7 +62,7 @@ const DEFAULT_SETTINGS: PrivacySettings = {
  * Get privacy settings from localStorage
  */
 export function getPrivacySettings(): PrivacySettings {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return DEFAULT_SETTINGS;
   }
 
@@ -74,7 +74,7 @@ export function getPrivacySettings(): PrivacySettings {
       return { ...DEFAULT_SETTINGS, ...parsed };
     }
   } catch (error) {
-    console.warn('[PrivacySettings] Failed to load settings:', error);
+    console.warn("[PrivacySettings] Failed to load settings:", error);
   }
 
   return DEFAULT_SETTINGS;
@@ -84,7 +84,7 @@ export function getPrivacySettings(): PrivacySettings {
  * Save privacy settings to localStorage
  */
 export function savePrivacySettings(settings: Partial<PrivacySettings>): void {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return;
   }
 
@@ -98,9 +98,9 @@ export function savePrivacySettings(settings: Partial<PrivacySettings>): void {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
 
     // Dispatch custom event to notify components of settings change
-    window.dispatchEvent(new Event('chatbot-settings-changed'));
+    window.dispatchEvent(new Event("chatbot-settings-changed"));
   } catch (error) {
-    console.error('[PrivacySettings] Failed to save settings:', error);
+    console.error("[PrivacySettings] Failed to save settings:", error);
   }
 }
 
@@ -161,14 +161,14 @@ export function isErrorTrackingEnabled(): boolean {
  * Reset privacy settings to defaults
  */
 export function resetPrivacySettings(): void {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return;
   }
 
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_SETTINGS));
   } catch (error) {
-    console.error('[PrivacySettings] Failed to reset settings:', error);
+    console.error("[PrivacySettings] Failed to reset settings:", error);
   }
 }
 
@@ -188,7 +188,7 @@ export function isChatbotEnabled(): boolean {
 /**
  * Get chatbot data access level
  */
-export function getChatbotDataAccess(): 'read-only' | 'full-access' {
+export function getChatbotDataAccess(): "read-only" | "full-access" {
   const settings = getPrivacySettings();
   return settings.chatbotDataAccess;
 }
@@ -196,8 +196,7 @@ export function getChatbotDataAccess(): 'read-only' | 'full-access' {
 /**
  * Get chatbot conversation retention period
  */
-export function getChatbotConversationRetention(): 7 | 30 | 'forever' {
+export function getChatbotConversationRetention(): 7 | 30 | "forever" {
   const settings = getPrivacySettings();
   return settings.chatbotConversationRetention;
 }
-

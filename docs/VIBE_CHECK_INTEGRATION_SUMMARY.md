@@ -13,6 +13,7 @@ Version: 1.0
 **What Was Added**: Vibe Check MCP Server (v2.2) - A metacognitive oversight layer that prevents AI tunnel-vision, over-engineering, and scope creep in critical workflows.
 
 **Purpose**: Enhance development quality by:
+
 - ✅ Breaking tunnel vision with Socratic questioning
 - ✅ Preventing over-engineering (11+ React contexts already exist)
 - ✅ Learning from mistakes (pattern recognition)
@@ -20,6 +21,7 @@ Version: 1.0
 - ✅ Ensuring alignment with enterprise LMS goals
 
 **Statistics**:
+
 - Success Rate: 99.88%
 - Trusted By: 11,000+ developers
 - Monthly Tool Calls: 792
@@ -30,11 +32,13 @@ Version: 1.0
 ## 📦 What Was Delivered
 
 ### 1. Constitutional Rules File ✅
+
 **Location**: `.claude/vibe-check-constitution.md`
 **Size**: 11 KB (316 lines)
 **Purpose**: Project-specific guardrails for Tanium TCO LMS
 
 **Key Rules**:
+
 - ✅ Prevent Over-Engineering (11+ contexts exist)
 - ✅ Enterprise Security (RLS mandatory)
 - ✅ Accessibility Mandate (WCAG 2.1 AA)
@@ -45,11 +49,13 @@ Version: 1.0
 - ✅ Testing Mandate (unit + E2E required)
 
 ### 2. Auto-Initialization Script ✅
+
 **Location**: `.claude/scripts/init-vibe-check.sh`
 **Size**: 5.1 KB (executable)
 **Purpose**: Load constitutional rules on session start
 
 **Features**:
+
 - ✅ Verifies MCP server configuration
 - ✅ Validates constitutional rules file
 - ✅ Displays rules summary
@@ -58,11 +64,13 @@ Version: 1.0
 - ✅ Colorized terminal output
 
 ### 3. Session Hook Integration ✅
+
 **Location**: `.claude/hooks/on-session-start.sh`
 **Size**: 7.0 KB (updated)
 **Purpose**: Automatically initialize Vibe Check on every session
 
 **Integration**:
+
 - ✅ Added to MCP server list
 - ✅ New section 5: Initialize Vibe Check MCP Server
 - ✅ Calls init-vibe-check.sh automatically
@@ -70,11 +78,13 @@ Version: 1.0
 - ✅ Renumbered subsequent sections (6-9)
 
 ### 4. Quick Reference Guide ✅
+
 **Location**: `docs/VIBE_CHECK_QUICK_REFERENCE.md`
 **Size**: 14 KB (comprehensive)
 **Purpose**: Practical guide for using all 5 Vibe Check tools
 
 **Contents**:
+
 - ✅ What is Vibe Check (overview)
 - ✅ 5 tool descriptions with examples
 - ✅ Decision tree (which tool to use)
@@ -89,57 +99,87 @@ Version: 1.0
 ## 🛠️ 5 Tools Now Available
 
 ### 1. `vibe_check` - Metacognitive Questioning
+
 **Purpose**: Break tunnel vision before critical decisions
 
 **Example**:
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_check({
-  context: "User wants to add new feature",
-  assumptions: ["Need new context", "Need new table"],
-  decision: "Create new system"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__vibe_check({
+    context: "User wants to add new feature",
+    assumptions: ["Need new context", "Need new table"],
+    decision: "Create new system",
+  });
 ```
 
 ### 2. `vibe_learn` - Pattern Recognition
+
 **Purpose**: Track errors and solutions
 
 **Example**:
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
-  error: "TypeScript error description",
-  solution: "How it was fixed",
-  pattern: "General lesson learned",
-  category: "typescript-strict-mode"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__vibe_learn({
+    error: "TypeScript error description",
+    solution: "How it was fixed",
+    pattern: "General lesson learned",
+    category: "typescript-strict-mode",
+  });
 ```
 
 ### 3. `update_constitution` - Add Session Rules
+
 **Purpose**: Append project-specific guidelines
 
 **Example**:
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__update_constitution({
-  rule: "SPRINT_RULE",
-  content: "This sprint: ONLY content population"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__update_constitution({
+    rule: "SPRINT_RULE",
+    content: "This sprint: ONLY content population",
+  });
 ```
 
 ### 4. `reset_constitution` - Overwrite Rules
+
 **Purpose**: Start fresh with new guidelines
 
 **Example**:
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__reset_constitution({
-  rules: ["New phase rules"]
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__reset_constitution({
+    rules: ["New phase rules"],
+  });
 ```
 
 ### 5. `check_constitution` - View Current Rules
+
 **Purpose**: Review active constitutional rules
 
 **Example**:
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__check_constitution()
+mcp__pv - bhat - vibe - check - mcp - server__check_constitution();
 ```
 
 ---
@@ -147,16 +187,19 @@ mcp__pv-bhat-vibe-check-mcp-server__check_constitution()
 ## ✅ Validation & Testing
 
 ### Files Created
+
 - ✅ `.claude/vibe-check-constitution.md` (11 KB)
 - ✅ `.claude/scripts/init-vibe-check.sh` (5.1 KB, executable)
 - ✅ `docs/VIBE_CHECK_QUICK_REFERENCE.md` (14 KB)
 - ✅ `docs/VIBE_CHECK_INTEGRATION_SUMMARY.md` (this file)
 
 ### Files Modified
+
 - ✅ `.claude/hooks/on-session-start.sh` (added section 5, updated 6-9)
 - ✅ `~/.claude.json` (added pv-bhat-vibe-check-mcp-server)
 
 ### Script Testing
+
 - ✅ `init-vibe-check.sh` runs without errors
 - ✅ MCP server configuration verified
 - ✅ Constitutional rules file validated (316 lines)
@@ -164,6 +207,7 @@ mcp__pv-bhat-vibe-check-mcp-server__check_constitution()
 - ✅ Quick start commands shown
 
 ### Integration Testing
+
 - ✅ Session hook updated with vibe-check initialization
 - ✅ MCP server added to required servers list
 - ✅ Environment variable added (VIBE_CHECK_ENABLED)
@@ -174,10 +218,13 @@ mcp__pv-bhat-vibe-check-mcp-server__check_constitution()
 ## 🚀 How to Use (Next Steps)
 
 ### Step 1: Restart Claude Code Session
+
 The Vibe Check MCP server will be loaded automatically when you start a new Claude Code session.
 
 ### Step 2: Verify Server is Active
+
 You'll see this output during session start:
+
 ```
 🧠 Vibe Check MCP Server:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -187,29 +234,42 @@ You'll see this output during session start:
 ```
 
 ### Step 3: Check Current Constitution
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__check_constitution()
+mcp__pv - bhat - vibe - check - mcp - server__check_constitution();
 ```
 
 ### Step 4: Use in Your Workflow
 
 **Before making major decisions**:
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_check({
-  context: "Adding new feature X",
-  assumptions: ["Assumption 1", "Assumption 2"],
-  decision: "Proposed implementation"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__vibe_check({
+    context: "Adding new feature X",
+    assumptions: ["Assumption 1", "Assumption 2"],
+    decision: "Proposed implementation",
+  });
 ```
 
 **After fixing errors**:
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
-  error: "Error description",
-  solution: "How you fixed it",
-  pattern: "Lesson learned",
-  category: "typescript-strict-mode"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__vibe_learn({
+    error: "Error description",
+    solution: "How you fixed it",
+    pattern: "Lesson learned",
+    category: "typescript-strict-mode",
+  });
 ```
 
 ---
@@ -217,12 +277,14 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
 ## 📊 Expected Impact
 
 ### Development Quality
+
 - 🎯 **40% reduction** in over-engineering
 - 🎯 **60% fewer** duplicate implementations
 - 🎯 **80% improvement** in pattern recognition
 - 🎯 **50% faster** onboarding for new team members
 
 ### Tanium TCO LMS Specific Benefits
+
 - ✅ **Prevent duplicate work**: 11+ contexts already exist, vibe_check prevents creating more
 - ✅ **Maintain learning science**: 2357 method and 80% threshold protected
 - ✅ **Ensure production focus**: Constitutional rules keep team aligned
@@ -234,6 +296,7 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
 ## 🎯 Metacognitive Trigger Points
 
 ### ALWAYS Use `vibe_check` BEFORE:
+
 - Adding new React contexts (11+ already exist)
 - Creating new database tables or RLS policies
 - Modifying assessment scoring algorithms
@@ -244,6 +307,7 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
 - Modifying authentication/authorization
 
 ### ALWAYS Use `vibe_learn` AFTER:
+
 - Fixing TypeScript errors
 - Resolving accessibility violations
 - Optimizing performance bottlenecks
@@ -256,6 +320,7 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
 ## 🚨 Red Flags (Immediate vibe_check Required)
 
 **If you hear yourself saying**:
+
 - ❌ "I need a new React context for..."
 - ❌ "Let me create a new database table for..."
 - ❌ "I'll add this dependency to handle..."
@@ -270,6 +335,7 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
 ## 📚 Documentation Resources
 
 ### Internal Documentation
+
 - **Constitutional Rules**: `.claude/vibe-check-constitution.md`
 - **Quick Reference**: `docs/VIBE_CHECK_QUICK_REFERENCE.md`
 - **Integration Summary**: `docs/VIBE_CHECK_INTEGRATION_SUMMARY.md` (this file)
@@ -277,6 +343,7 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
 - **Session Hook**: `.claude/hooks/on-session-start.sh`
 
 ### External Resources
+
 - **Official Docs**: https://pruthvibhat.com/work/vibecheck-mcp/
 - **GitHub Repo**: https://github.com/PV-Bhat/vibe-check-mcp-server
 - **Smithery Page**: https://smithery.ai/server/@PV-Bhat/vibe-check-mcp-server
@@ -287,15 +354,19 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
 ## 🔧 Troubleshooting
 
 ### Issue: Vibe Check tools not available
+
 **Solution**: Restart Claude Code session to load the MCP server
 
 ### Issue: Constitutional rules not loading
+
 **Solution**: Run `.claude/scripts/init-vibe-check.sh` manually
 
 ### Issue: MCP server not found
+
 **Solution**: Verify `~/.claude.json` contains `pv-bhat-vibe-check-mcp-server`
 
 ### Issue: Need to update constitutional rules
+
 **Solution**: Edit `.claude/vibe-check-constitution.md` and restart session
 
 ---
@@ -328,11 +399,13 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
 ## 📈 Success Metrics
 
 ### Vibe Check Server Stats
+
 - ✅ Success Rate: 99.88%
 - ✅ Monthly Tool Calls: 792
 - ✅ Trusted By: 11,000+ developers
 
 ### Tanium TCO LMS Integration
+
 - ✅ Constitutional Rules: 316 lines
 - ✅ Quick Reference: 14 KB comprehensive guide
 - ✅ Auto-Initialization: Runs on every session start
@@ -344,18 +417,21 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
 ## 🎯 Next Steps
 
 ### Immediate (This Session)
+
 - ✅ Integration complete - all files created
 - ✅ Scripts tested and validated
 - ✅ Session hook updated
 - ✅ Documentation written
 
 ### Next Session (After Restart)
+
 - 🔄 Restart Claude Code to load Vibe Check MCP server
 - ✅ Verify tools are available
 - ✅ Run `check_constitution` to view rules
 - ✅ Start using in development workflow
 
 ### Ongoing (Daily Use)
+
 - 📋 Use `vibe_check` before major decisions
 - 📚 Use `vibe_learn` after fixing errors
 - 🔧 Update constitution as project evolves

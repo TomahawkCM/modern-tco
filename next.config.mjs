@@ -1,6 +1,6 @@
 import createMDX from "@next/mdx";
 // import withPWA from "next-pwa";
-import analyzer from '@next/bundle-analyzer';
+import analyzer from "@next/bundle-analyzer";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -17,7 +17,7 @@ const __dirname = dirname(__filename);
 // - Admin dashboard
 // - Analytics (PostHog)
 // - AI Chatbot (shown as "Premium Feature")
-const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === 'true';
+const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === "true";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -26,7 +26,7 @@ const nextConfig = {
 
   // Environment variables exposed to the browser
   env: {
-    NEXT_PUBLIC_OFFLINE_MODE: process.env.NEXT_PUBLIC_OFFLINE_MODE || 'false',
+    NEXT_PUBLIC_OFFLINE_MODE: process.env.NEXT_PUBLIC_OFFLINE_MODE || "false",
   },
 
   // Set output file tracing root to project directory to silence workspace warning
@@ -34,7 +34,7 @@ const nextConfig = {
 
   // Disable static optimization for error pages to avoid build issues
   generateBuildId: async () => {
-    return 'build-' + Date.now()
+    return "build-" + Date.now();
   },
 
   // Performance optimizations
@@ -52,9 +52,9 @@ const nextConfig = {
     // Define constants for tree-shaking cloud features in offline builds
     config.plugins.push(
       new webpack.DefinePlugin({
-        'process.env.ENABLE_CLOUD_AUTH': JSON.stringify(!isOfflineMode),
-        'process.env.ENABLE_ADMIN': JSON.stringify(!isOfflineMode),
-        'process.env.ENABLE_CLOUD_ANALYTICS': JSON.stringify(!isOfflineMode),
+        "process.env.ENABLE_CLOUD_AUTH": JSON.stringify(!isOfflineMode),
+        "process.env.ENABLE_ADMIN": JSON.stringify(!isOfflineMode),
+        "process.env.ENABLE_CLOUD_ANALYTICS": JSON.stringify(!isOfflineMode),
       })
     );
 
@@ -66,7 +66,7 @@ const nextConfig = {
         alias: {
           ...(config.resolve?.alias || {}),
           // Ensure pdfjs-dist resolves to the legacy CJS build for webpack compat
-          'pdfjs-dist': resolve(__dirname, 'node_modules/pdfjs-dist/legacy/build/pdf.mjs'),
+          "pdfjs-dist": resolve(__dirname, "node_modules/pdfjs-dist/legacy/build/pdf.mjs"),
         },
       };
 
@@ -80,22 +80,22 @@ const nextConfig = {
             // PDF.js - async chunk for PDF import pages only
             pdfjs: {
               test: /[\\/]node_modules[\\/]pdfjs-dist[\\/]/,
-              name: 'pdfjs',
-              chunks: 'async',
+              name: "pdfjs",
+              chunks: "async",
               priority: 10,
             },
             // Recharts (2.6MB) - Only load on chart pages
             recharts: {
               test: /[\\/]node_modules[\\/]recharts[\\/]/,
-              name: 'recharts',
-              chunks: 'async',
+              name: "recharts",
+              chunks: "async",
               priority: 10,
             },
             // TensorFlow.js (37MB) - Lazy loaded on demand
             tensorflow: {
               test: /[\\/]node_modules[\\/]@tensorflow[\\/]/,
-              name: 'tensorflow',
-              chunks: 'async',
+              name: "tensorflow",
+              chunks: "async",
               priority: 10,
             },
           },
@@ -156,7 +156,7 @@ const nextConfig = {
               "base-uri 'self'",
               "form-action 'self'",
               "frame-ancestors 'none'",
-              "upgrade-insecure-requests"
+              "upgrade-insecure-requests",
             ].join("; "),
           },
         ],
@@ -227,7 +227,7 @@ const withMDX = createMDX({
 
 // Bundle analyzer configuration (enable with ANALYZE=true)
 const withBundleAnalyzer = analyzer({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: process.env.ANALYZE === "true",
 });
 
 // Disable PWA temporarily to avoid build issues

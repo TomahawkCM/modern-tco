@@ -10,24 +10,24 @@
  * - medium: 2 column spans (phone: full width, tablet/desktop: medium)
  * - large: 3+ column spans (phone: full width, tablet/desktop: wide)
  */
-export type GridSize = 'small' | 'medium' | 'large';
+export type GridSize = "small" | "medium" | "large";
 
 /**
  * Widget types supported by the dashboard
  */
 export type WidgetType =
-  | 'spending-by-category'
-  | 'recent-transactions'
-  | 'budget-progress'
-  | 'account-balances'
-  | 'income-vs-expenses'
-  | 'monthly-trends'
-  | 'upcoming-bills'
-  | 'safe-to-spend'
-  | 'streaks'
-  | 'weekly-recap'
-  | 'net-worth-mini'
-  | 'event-budget';
+  | "spending-by-category"
+  | "recent-transactions"
+  | "budget-progress"
+  | "account-balances"
+  | "income-vs-expenses"
+  | "monthly-trends"
+  | "upcoming-bills"
+  | "safe-to-spend"
+  | "streaks"
+  | "weekly-recap"
+  | "net-worth-mini"
+  | "event-budget";
 
 /**
  * Widget configuration instance
@@ -105,11 +105,11 @@ export interface DashboardConfig {
  * Preset configuration name
  */
 export type PresetName =
-  | 'phone-default'
-  | 'tablet-default'
-  | 'desktop-default'
-  | 'seniors-simplified'
-  | 'power-user';
+  | "phone-default"
+  | "tablet-default"
+  | "desktop-default"
+  | "seniors-simplified"
+  | "power-user";
 
 /**
  * Device-specific grid configuration

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 /**
  * Profile Create Dialog
  * Dialog for creating a new profile with optional PIN
  */
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -13,18 +13,18 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Loader2, Lock, User } from 'lucide-react';
-import { useProfile } from '@/contexts/ProfileContext';
-import { DEFAULT_AVATAR_COLORS, getProfileInitials } from '@/types/profile';
-import { isPINValid } from '@/lib/pin-auth';
-import { isFeatureEnabled } from '@/config/features';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Loader2, Lock, User } from "lucide-react";
+import { useProfile } from "@/contexts/ProfileContext";
+import { DEFAULT_AVATAR_COLORS, getProfileInitials } from "@/types/profile";
+import { isPINValid } from "@/lib/pin-auth";
+import { isFeatureEnabled } from "@/config/features";
+import { cn } from "@/lib/utils";
 
 interface ProfileCreateDialogProps {
   open: boolean;
@@ -32,27 +32,25 @@ interface ProfileCreateDialogProps {
   onSuccess?: (profileId: string) => void;
 }
 
-export function ProfileCreateDialog({
-  open,
-  onOpenChange,
-  onSuccess,
-}: ProfileCreateDialogProps) {
+export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCreateDialogProps) {
   const { createProfile } = useProfile();
 
-  const [name, setName] = useState('');
-  const [avatarColor, setAvatarColor] = useState<(typeof DEFAULT_AVATAR_COLORS)[number]>(DEFAULT_AVATAR_COLORS[0]);
+  const [name, setName] = useState("");
+  const [avatarColor, setAvatarColor] = useState<(typeof DEFAULT_AVATAR_COLORS)[number]>(
+    DEFAULT_AVATAR_COLORS[0]
+  );
   const [usePIN, setUsePIN] = useState(false);
-  const [pin, setPIN] = useState('');
-  const [confirmPIN, setConfirmPIN] = useState('');
+  const [pin, setPIN] = useState("");
+  const [confirmPIN, setConfirmPIN] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const resetForm = () => {
-    setName('');
+    setName("");
     setAvatarColor(DEFAULT_AVATAR_COLORS[0]);
     setUsePIN(false);
-    setPIN('');
-    setConfirmPIN('');
+    setPIN("");
+    setConfirmPIN("");
     setError(null);
   };
 
@@ -63,21 +61,21 @@ export function ProfileCreateDialog({
 
   const validateForm = (): string | null => {
     if (!name.trim()) {
-      return 'Please enter a name for the profile';
+      return "Please enter a name for the profile";
     }
 
     if (name.trim().length > 30) {
-      return 'Name must be 30 characters or less';
+      return "Name must be 30 characters or less";
     }
 
     if (usePIN) {
       const pinValidation = isPINValid(pin);
       if (!pinValidation.valid) {
-        return pinValidation.error || 'Invalid PIN';
+        return pinValidation.error || "Invalid PIN";
       }
 
       if (pin !== confirmPIN) {
-        return 'PINs do not match';
+        return "PINs do not match";
       }
     }
 
@@ -97,16 +95,12 @@ export function ProfileCreateDialog({
     setError(null);
 
     try {
-      const profile = await createProfile(
-        name.trim(),
-        usePIN ? pin : undefined,
-        avatarColor
-      );
+      const profile = await createProfile(name.trim(), usePIN ? pin : undefined, avatarColor);
 
       handleClose();
       onSuccess?.(profile.id);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create profile');
+      setError(err instanceof Error ? err.message : "Failed to create profile");
     } finally {
       setIsLoading(false);
     }
@@ -122,8 +116,7 @@ export function ProfileCreateDialog({
               Create Profile
             </DialogTitle>
             <DialogDescription>
-              Add a new profile for a family member. Each profile can have its
-              own private budgets.
+              Add a new profile for a family member. Each profile can have its own private budgets.
             </DialogDescription>
           </DialogHeader>
 
@@ -133,9 +126,9 @@ export function ProfileCreateDialog({
               <Avatar className="h-20 w-20">
                 <AvatarFallback
                   style={{ backgroundColor: avatarColor }}
-                  className="text-white text-2xl font-medium"
+                  className="text-2xl font-medium text-white"
                 >
-                  {name ? getProfileInitials(name) : '?'}
+                  {name ? getProfileInitials(name) : "?"}
                 </AvatarFallback>
               </Avatar>
 
@@ -146,10 +139,10 @@ export function ProfileCreateDialog({
                     type="button"
                     onClick={() => setAvatarColor(color)}
                     className={cn(
-                      'w-6 h-6 rounded-full transition-all',
+                      "h-6 w-6 rounded-full transition-all",
                       avatarColor === color
-                        ? 'ring-2 ring-offset-2 ring-primary'
-                        : 'hover:scale-110'
+                        ? "ring-2 ring-primary ring-offset-2"
+                        : "hover:scale-110"
                     )}
                     style={{ backgroundColor: color }}
                     aria-label={`Select color ${color}`}
@@ -172,23 +165,19 @@ export function ProfileCreateDialog({
             </div>
 
             {/* PIN Toggle */}
-            {isFeatureEnabled('pinAuthentication') && (
+            {isFeatureEnabled("pinAuthentication") && (
               <>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Lock className="h-4 w-4 text-muted-foreground" />
                     <Label htmlFor="use-pin">Protect with PIN</Label>
                   </div>
-                  <Switch
-                    id="use-pin"
-                    checked={usePIN}
-                    onCheckedChange={setUsePIN}
-                  />
+                  <Switch id="use-pin" checked={usePIN} onCheckedChange={setUsePIN} />
                 </div>
 
                 {/* PIN Inputs */}
                 {usePIN && (
-                  <div className="grid gap-3 p-3 border rounded-lg bg-muted/50">
+                  <div className="grid gap-3 rounded-lg border bg-muted/50 p-3">
                     <div className="grid gap-2">
                       <Label htmlFor="pin">PIN (4-6 digits)</Label>
                       <Input
@@ -198,9 +187,7 @@ export function ProfileCreateDialog({
                         pattern="[0-9]*"
                         maxLength={6}
                         value={pin}
-                        onChange={(e) =>
-                          setPIN(e.target.value.replace(/\D/g, ''))
-                        }
+                        onChange={(e) => setPIN(e.target.value.replace(/\D/g, ""))}
                         placeholder="Enter PIN"
                       />
                     </div>
@@ -213,15 +200,13 @@ export function ProfileCreateDialog({
                         pattern="[0-9]*"
                         maxLength={6}
                         value={confirmPIN}
-                        onChange={(e) =>
-                          setConfirmPIN(e.target.value.replace(/\D/g, ''))
-                        }
+                        onChange={(e) => setConfirmPIN(e.target.value.replace(/\D/g, ""))}
                         placeholder="Confirm PIN"
                       />
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      PIN protects access to this profile. Choose something
-                      memorable but not too simple.
+                      PIN protects access to this profile. Choose something memorable but not too
+                      simple.
                     </p>
                   </div>
                 )}
@@ -229,18 +214,11 @@ export function ProfileCreateDialog({
             )}
 
             {/* Error Display */}
-            {error && (
-              <p className="text-sm text-destructive">{error}</p>
-            )}
+            {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
 
           <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleClose}
-              disabled={isLoading}
-            >
+            <Button type="button" variant="outline" onClick={handleClose} disabled={isLoading}>
               Cancel
             </Button>
             <Button type="submit" disabled={isLoading}>

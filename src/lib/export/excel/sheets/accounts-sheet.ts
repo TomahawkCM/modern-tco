@@ -3,9 +3,9 @@
  * All accounts with current balances and summary
  */
 
-import type { Workbook, Worksheet } from 'exceljs';
-import type { ExcelExportOptions } from '../types';
-import type { Account } from '@/types/budget';
+import type { Workbook, Worksheet } from "exceljs";
+import type { ExcelExportOptions } from "../types";
+import type { Account } from "@/types/budget";
 import {
   FONTS,
   FILLS,
@@ -20,7 +20,7 @@ import {
   createTitleSection,
   createSummaryRow,
   EXCEL_COLORS,
-} from '../styles';
+} from "../styles";
 
 interface AccountsSheetData {
   accounts: Account[];
@@ -31,10 +31,14 @@ interface AccountsSheetData {
  */
 function getAccountTypeDisplay(type: string): string {
   switch (type) {
-    case 'checking': return 'Checking';
-    case 'savings': return 'Savings';
-    case 'credit': return 'Credit Card';
-    default: return type;
+    case "checking":
+      return "Checking";
+    case "savings":
+      return "Savings";
+    case "credit":
+      return "Credit Card";
+    default:
+      return type;
   }
 }
 
@@ -46,35 +50,35 @@ export async function generateAccountsSheet(
   data: AccountsSheetData,
   options: ExcelExportOptions
 ): Promise<Worksheet> {
-  const worksheet = workbook.addWorksheet('Accounts', {
-    properties: { tabColor: { argb: 'FF10B981' } }, // Green tab
+  const worksheet = workbook.addWorksheet("Accounts", {
+    properties: { tabColor: { argb: "FF10B981" } }, // Green tab
   });
 
   // Column definitions
   const columns = [
-    { header: 'Account Name', key: 'name', width: 25 },
-    { header: 'Type', key: 'type', width: 14 },
-    { header: 'Institution', key: 'institution', width: 18 },
-    { header: 'Balance', key: 'balance', width: 16 },
-    { header: 'Currency', key: 'currency', width: 10 },
-    { header: 'Last Reconciled', key: 'lastReconciled', width: 14 },
+    { header: "Account Name", key: "name", width: 25 },
+    { header: "Type", key: "type", width: 14 },
+    { header: "Institution", key: "institution", width: 18 },
+    { header: "Balance", key: "balance", width: 16 },
+    { header: "Currency", key: "currency", width: 10 },
+    { header: "Last Reconciled", key: "lastReconciled", width: 14 },
   ];
 
   // Create title section
   let currentRow = createTitleSection(
     worksheet,
-    'Account Summary',
+    "Account Summary",
     `${data.accounts.length} accounts`,
     new Date()
   );
 
   // Calculate summary
   const totalAssets = data.accounts
-    .filter(a => a.type === 'checking' || a.type === 'savings')
+    .filter((a) => a.type === "checking" || a.type === "savings")
     .reduce((sum, a) => sum + a.balance, 0);
 
   const totalLiabilities = data.accounts
-    .filter(a => a.type === 'credit')
+    .filter((a) => a.type === "credit")
     .reduce((sum, a) => sum + Math.abs(a.balance), 0);
 
   const netLiquid = totalAssets - totalLiabilities;
@@ -83,12 +87,12 @@ export async function generateAccountsSheet(
   const summaryStartRow = currentRow;
   worksheet.mergeCells(`A${currentRow}:F${currentRow}`);
   const summaryHeaderRow = worksheet.getRow(currentRow);
-  summaryHeaderRow.getCell(1).value = 'ACCOUNT SUMMARY';
+  summaryHeaderRow.getCell(1).value = "ACCOUNT SUMMARY";
   summaryHeaderRow.getCell(1).font = { ...FONTS.subheader, size: 12 };
   summaryHeaderRow.getCell(1).fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'FFF3F4F6' },
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFF3F4F6" },
   };
   summaryHeaderRow.getCell(1).border = BORDERS.all;
   summaryHeaderRow.height = 24;
@@ -96,37 +100,41 @@ export async function generateAccountsSheet(
 
   // Total Assets
   const assetsRow = worksheet.getRow(currentRow);
-  assetsRow.getCell(1).value = 'Total Assets (Checking + Savings):';
+  assetsRow.getCell(1).value = "Total Assets (Checking + Savings):";
   assetsRow.getCell(1).font = FONTS.body;
   assetsRow.getCell(4).value = totalAssets;
   assetsRow.getCell(4).numFmt = NUMBER_FORMATS.currency;
-  assetsRow.getCell(4).font = { ...FONTS.body, color: { argb: 'FF10B981' } };
+  assetsRow.getCell(4).font = { ...FONTS.body, color: { argb: "FF10B981" } };
   assetsRow.getCell(4).alignment = ALIGNMENTS.right;
   currentRow++;
 
   // Total Liabilities
   const liabRow = worksheet.getRow(currentRow);
-  liabRow.getCell(1).value = 'Total Liabilities (Credit Cards):';
+  liabRow.getCell(1).value = "Total Liabilities (Credit Cards):";
   liabRow.getCell(1).font = FONTS.body;
   liabRow.getCell(4).value = -totalLiabilities;
   liabRow.getCell(4).numFmt = NUMBER_FORMATS.currency;
-  liabRow.getCell(4).font = { ...FONTS.body, color: { argb: 'FFEF4444' } };
+  liabRow.getCell(4).font = { ...FONTS.body, color: { argb: "FFEF4444" } };
   liabRow.getCell(4).alignment = ALIGNMENTS.right;
   currentRow++;
 
   // Divider
   const dividerRow = worksheet.getRow(currentRow);
   worksheet.mergeCells(`A${currentRow}:F${currentRow}`);
-  dividerRow.getCell(1).border = { bottom: { style: 'medium', color: { argb: 'FF14B8A6' } } };
+  dividerRow.getCell(1).border = { bottom: { style: "medium", color: { argb: "FF14B8A6" } } };
   currentRow++;
 
   // Net Liquid Assets
   const netRow = worksheet.getRow(currentRow);
-  netRow.getCell(1).value = 'Net Liquid Assets:';
+  netRow.getCell(1).value = "Net Liquid Assets:";
   netRow.getCell(1).font = { ...FONTS.body, bold: true };
   netRow.getCell(4).value = netLiquid;
   netRow.getCell(4).numFmt = NUMBER_FORMATS.currency;
-  netRow.getCell(4).font = { ...FONTS.body, bold: true, color: { argb: netLiquid >= 0 ? 'FF10B981' : 'FFEF4444' } };
+  netRow.getCell(4).font = {
+    ...FONTS.body,
+    bold: true,
+    color: { argb: netLiquid >= 0 ? "FF10B981" : "FFEF4444" },
+  };
   netRow.getCell(4).alignment = ALIGNMENTS.right;
   currentRow += 2;
 
@@ -140,7 +148,10 @@ export async function generateAccountsSheet(
   currentRow++;
 
   // Set column widths
-  setColumnWidths(worksheet, columns.map(c => c.width));
+  setColumnWidths(
+    worksheet,
+    columns.map((c) => c.width)
+  );
 
   // Sort accounts: Checking first, then Savings, then Credit
   const sortOrder = { checking: 1, savings: 2, credit: 3 };
@@ -149,11 +160,11 @@ export async function generateAccountsSheet(
   });
 
   // Add data rows
-  let currentType = '';
+  let currentType = "";
   sortedAccounts.forEach((account, index) => {
     // Add type separator
     if (account.type !== currentType) {
-      if (currentType !== '') {
+      if (currentType !== "") {
         currentRow++; // Add spacing between types
       }
       currentType = account.type;
@@ -164,9 +175,9 @@ export async function generateAccountsSheet(
       typeRow.getCell(1).value = getAccountTypeDisplay(account.type).toUpperCase();
       typeRow.getCell(1).font = { ...FONTS.bodyMuted, bold: true };
       typeRow.getCell(1).fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFF9FAFB' },
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "FFF9FAFB" },
       };
       currentRow++;
     }
@@ -181,14 +192,17 @@ export async function generateAccountsSheet(
     row.getCell(2).value = getAccountTypeDisplay(account.type);
 
     // Institution
-    row.getCell(3).value = account.institution || '';
+    row.getCell(3).value = account.institution || "";
 
     // Balance
     row.getCell(4).value = account.balance;
-    styleCurrencyCell(row.getCell(4), account.type === 'credit' ? -Math.abs(account.balance) : account.balance);
+    styleCurrencyCell(
+      row.getCell(4),
+      account.type === "credit" ? -Math.abs(account.balance) : account.balance
+    );
 
     // Currency
-    row.getCell(5).value = account.currency || 'CAD';
+    row.getCell(5).value = account.currency || "CAD";
     row.getCell(5).alignment = ALIGNMENTS.center;
 
     // Last Reconciled

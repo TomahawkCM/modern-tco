@@ -102,142 +102,143 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
       <SeniorsModeProvider>
         <PrivacyProvider>
-        <ProfileProvider>
-          <ChatbotProvider>
-            <NotificationProvider>
-              <ClientI18nProvider>
-                <BudgetAccessibilityInitializer />
+          <ProfileProvider>
+            <ChatbotProvider>
+              <NotificationProvider>
+                <ClientI18nProvider>
+                  <BudgetAccessibilityInitializer />
 
-              {/* Skip Link - WCAG 2.4.1 Bypass Blocks */}
-              <a
-                href="#main-content"
-                className="sr-only transition-all focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-6 focus:py-3 focus:font-semibold focus:text-teal-700 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-              >
-                Skip to main content
-              </a>
-
-              {/* Global Background - Dark Mesh Gradient */}
-              <div className="fixed inset-0 -z-20 bg-slate-950" />
-              <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black" />
-              <div className="fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-20 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
-
-              {/* Ambient Glows */}
-              <div className="pointer-events-none fixed left-0 top-0 -z-10 h-full w-full overflow-hidden">
-                <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-teal-500/10 blur-[120px]" />
-                <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-blue-600/10 blur-[120px]" />
-              </div>
-
-              {/* Trial Status Banner - shows for trial users */}
-              <TrialStatusBanner showOnlyWhenUrgent={false} />
-
-              {/* Premium Welcome Wizard (Glassmorphism) */}
-              <OnboardingTour />
-
-              <div className="flex min-h-screen text-slate-200">
-                {/* Desktop/Tablet Sidebar — hidden on mobile, icon-only on md, full on lg */}
-                <Sidebar
-                  onSearch={() => setCommandPaletteOpen(true)}
-                  onShowShortcuts={() => setShowShortcutsModal(true)}
-                />
-
-                {/* Mobile Sidebar Sheet */}
-                <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-                  <SheetContent
-                    side="left"
-                    className="w-72 border-r-0 bg-transparent p-0 shadow-2xl"
+                  {/* Skip Link - WCAG 2.4.1 Bypass Blocks */}
+                  <a
+                    href="#main-content"
+                    className="sr-only transition-all focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-6 focus:py-3 focus:font-semibold focus:text-teal-700 focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                   >
-                    <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                    <SheetDescription className="sr-only">
-                      Main navigation menu for the Budget App
-                    </SheetDescription>
+                    Skip to main content
+                  </a>
+
+                  {/* Global Background - Dark Mesh Gradient */}
+                  <div className="fixed inset-0 -z-20 bg-slate-950" />
+                  <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black" />
+                  <div className="fixed inset-0 -z-10 bg-[url('/grid.svg')] bg-center opacity-20 [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+
+                  {/* Ambient Glows */}
+                  <div className="pointer-events-none fixed left-0 top-0 -z-10 h-full w-full overflow-hidden">
+                    <div className="absolute left-[-10%] top-[-10%] h-[40%] w-[40%] rounded-full bg-teal-500/10 blur-[120px]" />
+                    <div className="absolute bottom-[-10%] right-[-10%] h-[40%] w-[40%] rounded-full bg-blue-600/10 blur-[120px]" />
+                  </div>
+
+                  {/* Trial Status Banner - shows for trial users */}
+                  <TrialStatusBanner showOnlyWhenUrgent={false} />
+
+                  {/* Premium Welcome Wizard (Glassmorphism) */}
+                  <OnboardingTour />
+
+                  <div className="flex min-h-screen text-slate-200">
+                    {/* Desktop/Tablet Sidebar — hidden on mobile, icon-only on md, full on lg */}
                     <Sidebar
-                      isMobile
-                      onClose={() => setMobileMenuOpen(false)}
                       onSearch={() => setCommandPaletteOpen(true)}
                       onShowShortcuts={() => setShowShortcutsModal(true)}
                     />
-                  </SheetContent>
-                </Sheet>
 
-                {/* Main Content Area */}
-                <div className="flex min-w-0 flex-1 flex-col">
-                  {/* Mobile Header */}
-                  <header className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-slate-950/80 px-4 py-3 backdrop-blur-md md:hidden"
-                    style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 8px)" }}
-                  >
-                    <Link
-                      href="/budget-app/landing"
-                      className="flex items-center gap-3 transition-opacity hover:opacity-80"
-                    >
-                      <div className="rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 p-1.5">
-                        <Sparkles className="h-5 w-5 text-white" />
-                      </div>
-                      <h1 className="text-lg font-bold text-white">Budget App</h1>
-                    </Link>
-                    <div className="flex items-center gap-2">
-                      {/* Accessibility Quick Toggle - Prominent placement per plan */}
-                      <AccessibilityQuickToggle compact />
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => setMobileMenuOpen(true)}
-                        className="text-slate-400 hover:bg-white/10 hover:text-white"
+                    {/* Mobile Sidebar Sheet */}
+                    <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+                      <SheetContent
+                        side="left"
+                        className="w-72 border-r-0 bg-transparent p-0 shadow-2xl"
                       >
-                        <Menu className="h-6 w-6" />
-                      </Button>
+                        <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                        <SheetDescription className="sr-only">
+                          Main navigation menu for the Budget App
+                        </SheetDescription>
+                        <Sidebar
+                          isMobile
+                          onClose={() => setMobileMenuOpen(false)}
+                          onSearch={() => setCommandPaletteOpen(true)}
+                          onShowShortcuts={() => setShowShortcutsModal(true)}
+                        />
+                      </SheetContent>
+                    </Sheet>
+
+                    {/* Main Content Area */}
+                    <div className="flex min-w-0 flex-1 flex-col">
+                      {/* Mobile Header */}
+                      <header
+                        className="sticky top-0 z-30 flex items-center justify-between border-b border-white/10 bg-slate-950/80 px-4 py-3 backdrop-blur-md md:hidden"
+                        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 8px)" }}
+                      >
+                        <Link
+                          href="/budget-app/landing"
+                          className="flex items-center gap-3 transition-opacity hover:opacity-80"
+                        >
+                          <div className="rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 p-1.5">
+                            <Sparkles className="h-5 w-5 text-white" />
+                          </div>
+                          <h1 className="text-lg font-bold text-white">Budget App</h1>
+                        </Link>
+                        <div className="flex items-center gap-2">
+                          {/* Accessibility Quick Toggle - Prominent placement per plan */}
+                          <AccessibilityQuickToggle compact />
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => setMobileMenuOpen(true)}
+                            className="text-slate-400 hover:bg-white/10 hover:text-white"
+                          >
+                            <Menu className="h-6 w-6" />
+                          </Button>
+                        </div>
+                      </header>
+
+                      {/* Main Content */}
+                      <main
+                        id="main-content"
+                        className="flex-1 overflow-x-hidden pb-16 md:pb-0"
+                        tabIndex={0}
+                        aria-label="Main content"
+                        role="main"
+                      >
+                        {/* Non-blocking Welcome Banner - at top of content */}
+                        <WelcomeBanner />
+
+                        <div className="mx-auto max-w-[1440px] px-4 py-6 sm:px-6 lg:px-8">
+                          <ToastProvider>{children}</ToastProvider>
+                        </div>
+                      </main>
+
+                      {/* Mobile Bottom Tab Bar — fixed at bottom, visible below md */}
+                      <MobileNav />
+
+                      {/* FAB — mobile only, for quick transaction entry */}
+                      <FloatingActionButton
+                        onClick={() => {
+                          void router.push("/budget-app/transactions");
+                          setShowNewTransactionModal(true);
+                        }}
+                      />
                     </div>
-                  </header>
 
-                  {/* Main Content */}
-                  <main
-                    id="main-content"
-                    className="flex-1 overflow-x-hidden pb-16 md:pb-0"
-                    tabIndex={0}
-                    aria-label="Main content"
-                    role="main"
-                  >
-                    {/* Non-blocking Welcome Banner - at top of content */}
-                    <WelcomeBanner />
+                    {/* Shortcuts Help Modal */}
+                    {showShortcutsModal && (
+                      <ShortcutsModal onClose={() => setShowShortcutsModal(false)} />
+                    )}
 
-                    <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8 py-6">
-                      <ToastProvider>{children}</ToastProvider>
-                    </div>
-                  </main>
+                    {/* PWA Install Prompts — Android/Desktop + iOS */}
+                    <PWAInstallPrompt />
+                    <IOSInstallBanner />
 
-                  {/* Mobile Bottom Tab Bar — fixed at bottom, visible below md */}
-                  <MobileNav />
+                    {/* AI Chatbot Widget */}
+                    <ChatbotWidget />
 
-                  {/* FAB — mobile only, for quick transaction entry */}
-                  <FloatingActionButton
-                    onClick={() => {
-                      void router.push("/budget-app/transactions");
-                      setShowNewTransactionModal(true);
-                    }}
-                  />
-                </div>
-
-                {/* Shortcuts Help Modal */}
-                {showShortcutsModal && (
-                  <ShortcutsModal onClose={() => setShowShortcutsModal(false)} />
-                )}
-
-                {/* PWA Install Prompts — Android/Desktop + iOS */}
-                <PWAInstallPrompt />
-                <IOSInstallBanner />
-
-                {/* AI Chatbot Widget */}
-                <ChatbotWidget />
-
-                {/* Command Palette */}
-                <CommandPalette
-                  open={commandPaletteOpen}
-                  onOpenChange={setCommandPaletteOpen}
-                />
-              </div>
-              </ClientI18nProvider>
-            </NotificationProvider>
-          </ChatbotProvider>
-        </ProfileProvider>
+                    {/* Command Palette */}
+                    <CommandPalette
+                      open={commandPaletteOpen}
+                      onOpenChange={setCommandPaletteOpen}
+                    />
+                  </div>
+                </ClientI18nProvider>
+              </NotificationProvider>
+            </ChatbotProvider>
+          </ProfileProvider>
         </PrivacyProvider>
       </SeniorsModeProvider>
     </ThemeProvider>

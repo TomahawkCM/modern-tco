@@ -20,25 +20,25 @@
  * - Keeping only high-confidence rule-based checks
  */
 
-import { chatCompletionJSON } from './openai-service';
-import type { ParsedTransaction } from '@/types/budget';
+import { chatCompletionJSON } from "./openai-service";
+import type { ParsedTransaction } from "@/types/budget";
 
 // ============================================================================
 // Types
 // ============================================================================
 
-export type ValidationSeverity = 'critical' | 'warning' | 'info';
+export type ValidationSeverity = "critical" | "warning" | "info";
 
 export type ValidationIssueType =
-  | 'same_day_duplicate'
-  | 'future_date'
-  | 'amount_spike'
-  | 'zero_amount'
-  | 'negative_amount'
-  | 'missing_description'
-  | 'missing_date'
-  | 'unusual_pattern'
-  | 'round_number_cluster';
+  | "same_day_duplicate"
+  | "future_date"
+  | "amount_spike"
+  | "zero_amount"
+  | "negative_amount"
+  | "missing_description"
+  | "missing_date"
+  | "unusual_pattern"
+  | "round_number_cluster";
 
 export interface ValidationIssue {
   transactionIndex: number; // Index in the import batch
@@ -129,7 +129,7 @@ function findSameDayDuplicates(transactions: ParsedTransaction[]): ValidationIss
 
   transactions.forEach((tx, index) => {
     // Create key: date + amount + description
-    const dateStr = tx.date.toISOString().split('T')[0];
+    const dateStr = tx.date.toISOString().split("T")[0];
     const key = `${dateStr}-${tx.amount.toFixed(2)}-${tx.description.trim().toLowerCase()}`;
 
     if (seen.has(key)) {
@@ -137,11 +137,11 @@ function findSameDayDuplicates(transactions: ParsedTransaction[]): ValidationIss
       issues.push({
         transactionIndex: index,
         transaction: tx,
-        type: 'same_day_duplicate',
-        severity: 'critical',
-        title: 'Exact Duplicate Transaction',
+        type: "same_day_duplicate",
+        severity: "critical",
+        title: "Exact Duplicate Transaction",
         message: `This transaction is identical to transaction #${originalIndex + 1} (same date, amount, and description). This is likely a duplicate import.`,
-        suggestion: 'Review and remove one of the duplicate transactions.',
+        suggestion: "Review and remove one of the duplicate transactions.",
         confidence: 0.95,
         autoFixable: false,
       });
@@ -164,18 +164,16 @@ function findFutureDates(transactions: ParsedTransaction[]): ValidationIssue[] {
 
   transactions.forEach((tx, index) => {
     if (tx.date > futureThreshold) {
-      const daysInFuture = Math.floor(
-        (tx.date.getTime() - now.getTime()) / (24 * 60 * 60 * 1000)
-      );
+      const daysInFuture = Math.floor((tx.date.getTime() - now.getTime()) / (24 * 60 * 60 * 1000));
 
       issues.push({
         transactionIndex: index,
         transaction: tx,
-        type: 'future_date',
-        severity: 'critical',
-        title: 'Future Date Detected',
+        type: "future_date",
+        severity: "critical",
+        title: "Future Date Detected",
         message: `This transaction is dated ${daysInFuture} days in the future (${tx.date.toLocaleDateString()}). This may indicate a date parsing error.`,
-        suggestion: 'Verify the date format in your CSV file matches the expected format.',
+        suggestion: "Verify the date format in your CSV file matches the expected format.",
         confidence: 0.9,
         autoFixable: false,
       });
@@ -216,11 +214,11 @@ function findAmountSpikes(transactions: ParsedTransaction[]): ValidationIssue[] 
       issues.push({
         transactionIndex: index,
         transaction: tx,
-        type: 'amount_spike',
-        severity: 'warning',
-        title: 'Unusually Large Amount',
+        type: "amount_spike",
+        severity: "warning",
+        title: "Unusually Large Amount",
         message: `This transaction amount ($${absAmount.toFixed(2)}) is ${multiplier}x larger than the median transaction in this import ($${median.toFixed(2)}).`,
-        suggestion: 'Verify this is correct and not a decimal point error.',
+        suggestion: "Verify this is correct and not a decimal point error.",
         confidence: 0.7,
         autoFixable: false,
       });
@@ -243,11 +241,11 @@ function findZeroAmounts(transactions: ParsedTransaction[]): ValidationIssue[] {
       issues.push({
         transactionIndex: index,
         transaction: tx,
-        type: 'zero_amount',
-        severity: 'warning',
-        title: 'Zero Amount Transaction',
-        message: 'This transaction has a $0.00 amount. This may indicate a parsing error.',
-        suggestion: 'Review the original CSV to verify this transaction should be $0.00.',
+        type: "zero_amount",
+        severity: "warning",
+        title: "Zero Amount Transaction",
+        message: "This transaction has a $0.00 amount. This may indicate a parsing error.",
+        suggestion: "Review the original CSV to verify this transaction should be $0.00.",
         confidence: 0.6,
         autoFixable: false,
       });
@@ -269,11 +267,11 @@ function findMissingData(transactions: ParsedTransaction[]): ValidationIssue[] {
       issues.push({
         transactionIndex: index,
         transaction: tx,
-        type: 'missing_description',
-        severity: 'critical',
-        title: 'Missing Description',
-        message: 'This transaction has no description. This may indicate incomplete data.',
-        suggestion: 'Check if the description column was mapped correctly.',
+        type: "missing_description",
+        severity: "critical",
+        title: "Missing Description",
+        message: "This transaction has no description. This may indicate incomplete data.",
+        suggestion: "Check if the description column was mapped correctly.",
         confidence: 0.95,
         autoFixable: false,
       });
@@ -283,11 +281,12 @@ function findMissingData(transactions: ParsedTransaction[]): ValidationIssue[] {
       issues.push({
         transactionIndex: index,
         transaction: tx,
-        type: 'missing_date',
-        severity: 'critical',
-        title: 'Invalid Date',
-        message: 'This transaction has an invalid or missing date.',
-        suggestion: 'Verify the date column was mapped correctly and dates are in the expected format.',
+        type: "missing_date",
+        severity: "critical",
+        title: "Invalid Date",
+        message: "This transaction has an invalid or missing date.",
+        suggestion:
+          "Verify the date column was mapped correctly and dates are in the expected format.",
         confidence: 0.95,
         autoFixable: false,
       });
@@ -318,11 +317,11 @@ function findRoundNumberClusters(transactions: ParsedTransaction[]): ValidationI
       issues.push({
         transactionIndex: firstIndex,
         transaction: roundNumbers[0],
-        type: 'round_number_cluster',
-        severity: 'info',
-        title: 'Many Round Number Transactions',
+        type: "round_number_cluster",
+        severity: "info",
+        title: "Many Round Number Transactions",
         message: `${roundNumbers.length} out of ${transactions.length} transactions are round numbers (e.g., $50.00, $100.00). This is unusual but may be normal for your spending.`,
-        suggestion: 'No action needed if this is expected for your transactions.',
+        suggestion: "No action needed if this is expected for your transactions.",
         confidence: 0.5,
         autoFixable: false,
       });
@@ -348,13 +347,13 @@ export async function validateTransactionsWithAI(
   existingIssues: ValidationIssue[]
 ): Promise<ValidationResult> {
   // If we already have critical issues, skip AI analysis (save API costs)
-  const hasCritical = existingIssues.some((issue) => issue.severity === 'critical');
+  const hasCritical = existingIssues.some((issue) => issue.severity === "critical");
   if (hasCritical || transactions.length === 0) {
     return {
       hasIssues: existingIssues.length > 0,
-      criticalCount: existingIssues.filter((i) => i.severity === 'critical').length,
-      warningCount: existingIssues.filter((i) => i.severity === 'warning').length,
-      infoCount: existingIssues.filter((i) => i.severity === 'info').length,
+      criticalCount: existingIssues.filter((i) => i.severity === "critical").length,
+      warningCount: existingIssues.filter((i) => i.severity === "warning").length,
+      infoCount: existingIssues.filter((i) => i.severity === "info").length,
       issues: existingIssues,
     };
   }
@@ -364,16 +363,16 @@ export async function validateTransactionsWithAI(
 
   try {
     const response = await chatCompletionJSON<AIValidationResponse>(prompt, {
-      model: 'gpt-3.5-turbo',
+      model: "gpt-3.5-turbo",
       temperature: 0.3,
       maxTokens: 500,
       cacheKey: `tx-validation-${transactions.length}-${transactions[0]?.description.slice(0, 20)}`,
       systemPrompt:
-        'You are an expert financial transaction analyst. Analyze transactions for anomalies and suspicious patterns. Respond with valid JSON only.',
+        "You are an expert financial transaction analyst. Analyze transactions for anomalies and suspicious patterns. Respond with valid JSON only.",
     });
 
     if (!response.success || !response.data) {
-      console.error('[TransactionValidator] AI analysis failed:', response.error);
+      console.error("[TransactionValidator] AI analysis failed:", response.error);
       // Return rule-based issues
       return buildValidationResult(existingIssues);
     }
@@ -400,7 +399,7 @@ export async function validateTransactionsWithAI(
       aiAnalysis: aiResult.overall_analysis,
     };
   } catch (error) {
-    console.error('[TransactionValidator] AI validation error:', error);
+    console.error("[TransactionValidator] AI validation error:", error);
     return buildValidationResult(existingIssues);
   }
 }
@@ -415,7 +414,7 @@ function buildValidationPrompt(
   // Send only essential data (first 20 transactions max)
   const sample = transactions.slice(0, 20).map((tx, i) => ({
     index: i,
-    date: tx.date.toISOString().split('T')[0],
+    date: tx.date.toISOString().split("T")[0],
     description: tx.description.substring(0, 50),
     amount: tx.amount.toFixed(2),
   }));
@@ -423,10 +422,10 @@ function buildValidationPrompt(
   return `Analyze these transactions for subtle anomalies or unusual patterns.
 
 **Transactions** (${transactions.length} total, showing first ${sample.length}):
-${sample.map((tx) => `${tx.index}. ${tx.date} | $${tx.amount} | ${tx.description}`).join('\n')}
+${sample.map((tx) => `${tx.index}. ${tx.date} | $${tx.amount} | ${tx.description}`).join("\n")}
 
 **Already Detected Issues**:
-${existingIssues.map((i) => `- Transaction ${i.transactionIndex}: ${i.title}`).join('\n') || 'None'}
+${existingIssues.map((i) => `- Transaction ${i.transactionIndex}: ${i.title}`).join("\n") || "None"}
 
 **Task**: Find additional subtle issues that simple rules might miss:
 - Unusual merchant name patterns (typos, duplicates with slight variations)
@@ -471,9 +470,9 @@ IMPORTANT: Only return issues with confidence >= 0.6. Minimize false positives.`
 function buildValidationResult(issues: ValidationIssue[]): ValidationResult {
   return {
     hasIssues: issues.length > 0,
-    criticalCount: issues.filter((i) => i.severity === 'critical').length,
-    warningCount: issues.filter((i) => i.severity === 'warning').length,
-    infoCount: issues.filter((i) => i.severity === 'info').length,
+    criticalCount: issues.filter((i) => i.severity === "critical").length,
+    warningCount: issues.filter((i) => i.severity === "warning").length,
+    infoCount: issues.filter((i) => i.severity === "info").length,
     issues: issues.sort((a, b) => {
       // Sort by severity (critical > warning > info), then confidence
       const severityOrder = { critical: 0, warning: 1, info: 2 };
@@ -500,11 +499,17 @@ export async function validateTransactions(
   transactions: ParsedTransaction[],
   useAI: boolean = false // Disabled by default - AI was causing false positives
 ): Promise<ValidationResult> {
-  console.log('[TransactionValidator] Validating', transactions.length, 'transactions (AI:', useAI ? 'enabled' : 'disabled', ')');
+  console.log(
+    "[TransactionValidator] Validating",
+    transactions.length,
+    "transactions (AI:",
+    useAI ? "enabled" : "disabled",
+    ")"
+  );
 
   // Step 1: Rule-based validation (fast, 0 API calls)
   const ruleBasedIssues = validateTransactionsWithRules(transactions);
-  console.log('[TransactionValidator] Rule-based found', ruleBasedIssues.length, 'issues');
+  console.log("[TransactionValidator] Rule-based found", ruleBasedIssues.length, "issues");
 
   // Step 2: AI validation (DISABLED by default - was causing false positives)
   // Users can opt-in via settings if they want AI analysis

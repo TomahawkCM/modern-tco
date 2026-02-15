@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useCallback } from 'react';
+import { useCallback } from "react";
 import {
   DndContext,
   closestCenter,
@@ -9,19 +9,19 @@ import {
   useSensor,
   useSensors,
   type DragEndEvent,
-} from '@dnd-kit/core';
+} from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
   useSortable,
   verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { GripVertical } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import type { DebtAccount } from '@/lib/calculators/types';
-import { useTranslations } from 'next-intl';
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { GripVertical } from "lucide-react";
+import { cn } from "@/lib/utils";
+import type { DebtAccount } from "@/lib/calculators/types";
+import { useTranslations } from "next-intl";
 
 interface SortableDebtItemProps {
   debt: DebtAccount;
@@ -30,14 +30,9 @@ interface SortableDebtItemProps {
 }
 
 function SortableDebtItem({ debt, index, formatCurrency }: SortableDebtItemProps) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id: debt.id });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: debt.id,
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -49,8 +44,8 @@ function SortableDebtItem({ debt, index, formatCurrency }: SortableDebtItemProps
       ref={setNodeRef}
       style={style}
       className={cn(
-        'flex items-center gap-3 rounded-lg border border-slate-700 bg-slate-800/50 px-3 py-2.5 transition-colors',
-        isDragging && 'z-50 border-teal-500/50 bg-slate-800 shadow-lg shadow-teal-500/10',
+        "flex items-center gap-3 rounded-lg border border-slate-700 bg-slate-800/50 px-3 py-2.5 transition-colors",
+        isDragging && "z-50 border-teal-500/50 bg-slate-800 shadow-lg shadow-teal-500/10"
       )}
     >
       <button
@@ -81,17 +76,22 @@ interface CustomOrderListProps {
   formatCurrency: (amount: number) => string;
 }
 
-export function CustomOrderList({ debts, order, onOrderChange, formatCurrency }: CustomOrderListProps) {
-  const t = useTranslations('debtPayoff');
+export function CustomOrderList({
+  debts,
+  order,
+  onOrderChange,
+  formatCurrency,
+}: CustomOrderListProps) {
+  const t = useTranslations("debtPayoff");
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    }),
+    })
   );
 
   const sortedDebts = order
-    .map(id => debts.find(d => d.id === id))
+    .map((id) => debts.find((d) => d.id === id))
     .filter((d): d is DebtAccount => d != null);
 
   const handleDragEnd = useCallback(
@@ -103,12 +103,12 @@ export function CustomOrderList({ debts, order, onOrderChange, formatCurrency }:
         onOrderChange(arrayMove(order, oldIndex, newIndex));
       }
     },
-    [order, onOrderChange],
+    [order, onOrderChange]
   );
 
   return (
     <div className="space-y-2">
-      <p className="text-xs text-slate-400">{t('customOrderHint')}</p>
+      <p className="text-xs text-slate-400">{t("customOrderHint")}</p>
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={order} strategy={verticalListSortingStrategy}>
           <div className="space-y-1.5">

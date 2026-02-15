@@ -23,8 +23,8 @@
  * - AI can be enabled via settings for power users
  */
 
-import { chatCompletionJSON, hasOpenAIKey } from './openai-service';
-import type { ParsedTransaction, Transaction } from '@/types/budget';
+import { chatCompletionJSON, hasOpenAIKey } from "./openai-service";
+import type { ParsedTransaction, Transaction } from "@/types/budget";
 
 // ============================================================================
 // Types
@@ -35,7 +35,7 @@ export interface DuplicateMatch {
   existingTransaction: Transaction;
   confidence: number; // 0-1 scale
   reason: string; // Explanation of why they match
-  matchType: 'exact' | 'fuzzy' | 'semantic' | 'merchant' | 'fitid';
+  matchType: "exact" | "fuzzy" | "semantic" | "merchant" | "fitid";
 }
 
 export interface SmartDuplicateDetectionOptions {
@@ -47,7 +47,7 @@ export interface SmartDuplicateDetectionOptions {
   amountToleranceFixed?: number; // Fixed dollar tolerance (default: 0.50)
 }
 
-export type ConfidenceTier = 'high' | 'medium' | 'low';
+export type ConfidenceTier = "high" | "medium" | "low";
 
 interface AIMatchResponse {
   matches: Array<{
@@ -56,7 +56,7 @@ interface AIMatchResponse {
     is_duplicate: boolean;
     confidence: number;
     reason: string;
-    match_type: 'exact' | 'fuzzy' | 'semantic' | 'merchant';
+    match_type: "exact" | "fuzzy" | "semantic" | "merchant";
   }>;
   analysis: string;
 }
@@ -73,22 +73,22 @@ function cleanDescription(description: string): string {
   let cleaned = description.trim();
 
   // Remove account numbers (patterns like XXXX-1234, 1234567890)
-  cleaned = cleaned.replace(/\b\d{4}[- ]?\d{4,}\b/g, '');
-  cleaned = cleaned.replace(/\bXXXX[- ]?\d{4,}\b/gi, '');
+  cleaned = cleaned.replace(/\b\d{4}[- ]?\d{4,}\b/g, "");
+  cleaned = cleaned.replace(/\bXXXX[- ]?\d{4,}\b/gi, "");
 
   // Remove transaction IDs (long numeric strings)
-  cleaned = cleaned.replace(/\b\d{10,}\b/g, '');
+  cleaned = cleaned.replace(/\b\d{10,}\b/g, "");
 
   // Remove common prefixes that don't help with matching
-  cleaned = cleaned.replace(/^\[[A-Z]{2}\]\s*/i, ''); // [PR], [OP] etc
-  cleaned = cleaned.replace(/^(PURCHASE|DEBIT|CREDIT|PAYMENT|AUTH)\s+/i, '');
+  cleaned = cleaned.replace(/^\[[A-Z]{2}\]\s*/i, ""); // [PR], [OP] etc
+  cleaned = cleaned.replace(/^(PURCHASE|DEBIT|CREDIT|PAYMENT|AUTH)\s+/i, "");
 
   // Remove dates in various formats
-  cleaned = cleaned.replace(/\d{1,2}\/\d{1,2}\/\d{2,4}/g, '');
-  cleaned = cleaned.replace(/\d{4}-\d{2}-\d{2}/g, '');
+  cleaned = cleaned.replace(/\d{1,2}\/\d{1,2}\/\d{2,4}/g, "");
+  cleaned = cleaned.replace(/\d{4}-\d{2}-\d{2}/g, "");
 
   // Clean up extra whitespace
-  cleaned = cleaned.replace(/\s+/g, ' ').trim();
+  cleaned = cleaned.replace(/\s+/g, " ").trim();
 
   return cleaned;
 }
@@ -143,9 +143,9 @@ function fuzzyMatchScore(str1: string, str2: string): number {
  * Get confidence tier based on confidence score
  */
 export function getConfidenceTier(confidence: number): ConfidenceTier {
-  if (confidence >= 0.9) return 'high';
-  if (confidence >= 0.7) return 'medium';
-  return 'low';
+  if (confidence >= 0.9) return "high";
+  if (confidence >= 0.7) return "medium";
+  return "low";
 }
 
 /**
@@ -204,8 +204,8 @@ function detectExactMatches(
           newTransaction: newTx,
           existingTransaction: exactMatch,
           confidence: 1.0,
-          reason: 'Exact FITID match (OFX transaction ID)',
-          matchType: 'fitid',
+          reason: "Exact FITID match (OFX transaction ID)",
+          matchType: "fitid",
         });
         continue;
       }
@@ -213,9 +213,12 @@ function detectExactMatches(
 
     // Exact match: same date, amount, and description
     const exactMatch = existingTransactions.find((existing) => {
-      const sameDate = newTx.date.toISOString().split('T')[0] === existing.date.toISOString().split('T')[0];
+      const sameDate =
+        newTx.date.toISOString().split("T")[0] === existing.date.toISOString().split("T")[0];
       const sameAmount = Math.abs(newTx.amount - existing.amount) < 0.01;
-      const sameDescription = cleanDescription(newTx.description).toLowerCase() === cleanDescription(existing.description).toLowerCase();
+      const sameDescription =
+        cleanDescription(newTx.description).toLowerCase() ===
+        cleanDescription(existing.description).toLowerCase();
 
       return sameDate && sameAmount && sameDescription;
     });
@@ -225,8 +228,8 @@ function detectExactMatches(
         newTransaction: newTx,
         existingTransaction: exactMatch,
         confidence: 1.0,
-        reason: 'Exact match (same date, amount, and description)',
-        matchType: 'exact',
+        reason: "Exact match (same date, amount, and description)",
+        matchType: "exact",
       });
     }
   }
@@ -284,7 +287,7 @@ function detectFuzzyMatches(
           existingTransaction: existingTx,
           confidence,
           reason: `Similar description (${(descriptionScore * 100).toFixed(0)}% match), within ${daysDiff.toFixed(0)} days and $${amountDiff.toFixed(2)}`,
-          matchType: 'fuzzy',
+          matchType: "fuzzy",
         });
       }
     }
@@ -302,13 +305,17 @@ function detectMerchantMatches(
   options: SmartDuplicateDetectionOptions
 ): DuplicateMatch[] {
   const matches: DuplicateMatch[] = [];
-  const { dateToleranceDays = 3, amountTolerancePercent = 0.01, amountToleranceFixed = 0.5 } = options;
+  const {
+    dateToleranceDays = 3,
+    amountTolerancePercent = 0.01,
+    amountToleranceFixed = 0.5,
+  } = options;
 
   for (const newTx of newTransactions) {
     // Skip if already marked as duplicate or no normalized merchant
     if (newTx.isDuplicate || !(newTx as any).normalizedMerchant) continue;
 
-    const {normalizedMerchant} = (newTx as any);
+    const { normalizedMerchant } = newTx as any;
 
     for (const existingTx of existingTransactions) {
       // Skip if existing transaction has no category (can't infer merchant)
@@ -342,7 +349,7 @@ function detectMerchantMatches(
           existingTransaction: existingTx,
           confidence,
           reason: `Same merchant (${normalizedMerchant}), within ${daysDiff.toFixed(0)} days and $${amountDiff.toFixed(2)}`,
-          matchType: 'merchant',
+          matchType: "merchant",
         });
       }
     }
@@ -370,12 +377,15 @@ async function detectSemanticMatches(
   // Early return if AI is not available (no API key configured)
   // This is expected in client-side code - AI features require server-side API routes
   if (!hasOpenAIKey()) {
-    console.log('[SmartDuplicate] AI not available, skipping semantic matching (using rule-based detection only)');
+    console.log(
+      "[SmartDuplicate] AI not available, skipping semantic matching (using rule-based detection only)"
+    );
     return matches;
   }
 
   // Filter candidates: within date range
-  const candidates: Array<{ newTx: ParsedTransaction; existingTx: Transaction; index: number }> = [];
+  const candidates: Array<{ newTx: ParsedTransaction; existingTx: Transaction; index: number }> =
+    [];
 
   newTransactions.forEach((newTx, index) => {
     // Skip if already marked as duplicate
@@ -403,17 +413,21 @@ async function detectSemanticMatches(
     try {
       const prompt = buildSemanticMatchPrompt(batch);
       const response = await chatCompletionJSON<AIMatchResponse>(prompt, {
-        model: 'gpt-3.5-turbo',
+        model: "gpt-3.5-turbo",
         temperature: 0.1,
         maxTokens: 800,
         cacheKey: `dup-detect-${batch[0]?.newTx.description.slice(0, 20)}-${batch.length}`,
         systemPrompt:
-          'You are a financial transaction duplicate detection system. Be conservative - only mark as duplicates if highly confident they represent the same transaction. Consider merchant variations, pending vs posted transactions, and partial refunds.',
+          "You are a financial transaction duplicate detection system. Be conservative - only mark as duplicates if highly confident they represent the same transaction. Consider merchant variations, pending vs posted transactions, and partial refunds.",
       });
 
       if (!response.success || !response.data) {
         // Log as warning since this is expected when AI isn't configured
-        console.warn('[SmartDuplicate] AI detection skipped for batch', i / batchSize, '- falling back to rule-based detection');
+        console.warn(
+          "[SmartDuplicate] AI detection skipped for batch",
+          i / batchSize,
+          "- falling back to rule-based detection"
+        );
         continue;
       }
 
@@ -429,7 +443,7 @@ async function detectSemanticMatches(
               existingTransaction: candidate.existingTx,
               confidence: match.confidence,
               reason: match.reason,
-              matchType: 'semantic',
+              matchType: "semantic",
             });
           }
         }
@@ -437,7 +451,7 @@ async function detectSemanticMatches(
     } catch (error) {
       // AI not available - this is expected on client-side
       // The caller will fall back to rule-based detection
-      console.log('[SmartDuplicate] AI not available, skipping semantic matching');
+      console.log("[SmartDuplicate] AI not available, skipping semantic matching");
       break; // No point trying other batches if AI isn't available
     }
   }
@@ -453,11 +467,11 @@ function buildSemanticMatchPrompt(
 ): string {
   const pairs = candidates.map((c, i) => ({
     index: i,
-    new_date: c.newTx.date.toISOString().split('T')[0],
+    new_date: c.newTx.date.toISOString().split("T")[0],
     new_desc: cleanDescription(c.newTx.description).substring(0, 100),
     new_amount: c.newTx.amount.toFixed(2),
     existing_id: c.existingTx.id,
-    existing_date: c.existingTx.date.toISOString().split('T')[0],
+    existing_date: c.existingTx.date.toISOString().split("T")[0],
     existing_desc: cleanDescription(c.existingTx.description).substring(0, 100),
     existing_amount: c.existingTx.amount.toFixed(2),
   }));
@@ -477,7 +491,7 @@ function buildSemanticMatchPrompt(
 - Partial payments vs full amount
 
 **Transaction Pairs** (${pairs.length} total):
-${pairs.map((p) => `${p.index}. NEW: ${p.new_date} | $${p.new_amount} | ${p.new_desc}\n   EXISTING: ${p.existing_date} | $${p.existing_amount} | ${p.existing_desc}`).join('\n\n')}
+${pairs.map((p) => `${p.index}. NEW: ${p.new_date} | $${p.new_amount} | ${p.new_desc}\n   EXISTING: ${p.existing_date} | $${p.existing_amount} | ${p.existing_desc}`).join("\n\n")}
 
 **Response Format** (JSON only):
 {
@@ -514,7 +528,13 @@ export async function detectDuplicatesEnhanced(
   existingTransactions: Transaction[],
   useAI: boolean = false // Disabled by default - AI semantic matching is optional
 ): Promise<void> {
-  console.log('[SmartDuplicate] Detecting duplicates for', newTransactions.length, 'transactions (AI:', useAI ? 'enabled' : 'disabled', ')...');
+  console.log(
+    "[SmartDuplicate] Detecting duplicates for",
+    newTransactions.length,
+    "transactions (AI:",
+    useAI ? "enabled" : "disabled",
+    ")..."
+  );
 
   const options: SmartDuplicateDetectionOptions = {
     enabled: useAI,
@@ -527,7 +547,7 @@ export async function detectDuplicatesEnhanced(
 
   // Step 1: Exact matches (FITID, exact criteria)
   const exactMatches = detectExactMatches(newTransactions, existingTransactions);
-  console.log('[SmartDuplicate] Found', exactMatches.length, 'exact matches');
+  console.log("[SmartDuplicate] Found", exactMatches.length, "exact matches");
 
   // Apply exact matches
   exactMatches.forEach((match) => {
@@ -539,7 +559,7 @@ export async function detectDuplicatesEnhanced(
 
   // Step 2: Fuzzy matches (flexible tolerances)
   const fuzzyMatches = detectFuzzyMatches(newTransactions, existingTransactions, options);
-  console.log('[SmartDuplicate] Found', fuzzyMatches.length, 'fuzzy matches');
+  console.log("[SmartDuplicate] Found", fuzzyMatches.length, "fuzzy matches");
 
   // Apply fuzzy matches (only if confidence >= 0.9 for auto-flagging)
   fuzzyMatches.forEach((match) => {
@@ -559,7 +579,7 @@ export async function detectDuplicatesEnhanced(
 
   // Step 3: Merchant matches (using normalized merchants from enrichment)
   const merchantMatches = detectMerchantMatches(newTransactions, existingTransactions, options);
-  console.log('[SmartDuplicate] Found', merchantMatches.length, 'merchant matches');
+  console.log("[SmartDuplicate] Found", merchantMatches.length, "merchant matches");
 
   // Apply merchant matches
   merchantMatches.forEach((match) => {
@@ -579,8 +599,12 @@ export async function detectDuplicatesEnhanced(
   // Step 4: AI semantic matches (if enabled)
   if (useAI) {
     try {
-      const semanticMatches = await detectSemanticMatches(newTransactions, existingTransactions, options);
-      console.log('[SmartDuplicate] Found', semanticMatches.length, 'semantic matches');
+      const semanticMatches = await detectSemanticMatches(
+        newTransactions,
+        existingTransactions,
+        options
+      );
+      console.log("[SmartDuplicate] Found", semanticMatches.length, "semantic matches");
 
       // Apply semantic matches
       semanticMatches.forEach((match) => {
@@ -599,7 +623,9 @@ export async function detectDuplicatesEnhanced(
     } catch (error) {
       // AI not available on client-side - this is expected
       // Gracefully degrade to rule-based detection (exact + fuzzy + merchant)
-      console.log('[SmartDuplicate] Using rule-based duplicate detection (AI requires server-side)');
+      console.log(
+        "[SmartDuplicate] Using rule-based duplicate detection (AI requires server-side)"
+      );
     }
   }
 
@@ -607,11 +633,11 @@ export async function detectDuplicatesEnhanced(
   const reviewCount = newTransactions.filter((tx) => tx.requiresReview).length;
 
   console.log(
-    '[SmartDuplicate] Detection complete:',
+    "[SmartDuplicate] Detection complete:",
     duplicateCount,
-    'duplicates,',
+    "duplicates,",
     reviewCount,
-    'for review'
+    "for review"
   );
 }
 
@@ -633,7 +659,11 @@ export async function detectSmartDuplicates(
   allMatches.push(...exactMatches, ...fuzzyMatches, ...merchantMatches);
 
   if (options.enabled) {
-    const semanticMatches = await detectSemanticMatches(newTransactions, existingTransactions, options);
+    const semanticMatches = await detectSemanticMatches(
+      newTransactions,
+      existingTransactions,
+      options
+    );
     allMatches.push(...semanticMatches);
   }
 

@@ -30,7 +30,9 @@ export function computeCoverage(questions: Question[]): CoverageSummary {
     // Collect objectives if present
     const ids: string[] = Array.isArray((q as any).objectiveIds)
       ? ((q as any).objectiveIds as string[])
-      : ((q as any).objectiveId ? [String((q as any).objectiveId)] : []);
+      : (q as any).objectiveId
+        ? [String((q as any).objectiveId)]
+        : [];
     for (const id of ids) {
       const k = String(id);
       objCounts[k] = (objCounts[k] || 0) + 1;
@@ -56,7 +58,9 @@ export function computeCoverage(questions: Question[]): CoverageSummary {
   });
 
   // Sort by blueprint order (descending weight) for stable UI
-  domains.sort((a, b) => (TCO_DOMAIN_WEIGHTS as any)[b.domain] - (TCO_DOMAIN_WEIGHTS as any)[a.domain]);
+  domains.sort(
+    (a, b) => (TCO_DOMAIN_WEIGHTS as any)[b.domain] - (TCO_DOMAIN_WEIGHTS as any)[a.domain]
+  );
 
   let objectives: ObjectiveCoverage[] | undefined;
   const objTotal = Object.values(objCounts).reduce((s, n) => s + n, 0);

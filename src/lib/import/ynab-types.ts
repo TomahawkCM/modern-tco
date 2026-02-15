@@ -18,36 +18,29 @@ export type Milliunits = number;
  * YNAB account types
  */
 export type YNABAccountType =
-  | 'checking'
-  | 'savings'
-  | 'creditCard'
-  | 'cash'
-  | 'lineOfCredit'
-  | 'otherAsset'
-  | 'otherLiability'
-  | 'mortgage'
-  | 'autoLoan'
-  | 'studentLoan'
-  | 'personalLoan'
-  | 'medicalDebt'
-  | 'otherDebt';
+  | "checking"
+  | "savings"
+  | "creditCard"
+  | "cash"
+  | "lineOfCredit"
+  | "otherAsset"
+  | "otherLiability"
+  | "mortgage"
+  | "autoLoan"
+  | "studentLoan"
+  | "personalLoan"
+  | "medicalDebt"
+  | "otherDebt";
 
 /**
  * YNAB transaction cleared status
  */
-export type YNABClearedStatus = 'cleared' | 'uncleared' | 'reconciled';
+export type YNABClearedStatus = "cleared" | "uncleared" | "reconciled";
 
 /**
  * YNAB flag colors
  */
-export type YNABFlagColor =
-  | 'red'
-  | 'orange'
-  | 'yellow'
-  | 'green'
-  | 'blue'
-  | 'purple'
-  | null;
+export type YNABFlagColor = "red" | "orange" | "yellow" | "green" | "blue" | "purple" | null;
 
 /**
  * YNAB goal types
@@ -57,20 +50,20 @@ export type YNABFlagColor =
  * - NEED: Needed for Spending
  * - DEBT: Debt Payment
  */
-export type YNABGoalType = 'TB' | 'TBD' | 'MF' | 'NEED' | 'DEBT' | null;
+export type YNABGoalType = "TB" | "TBD" | "MF" | "NEED" | "DEBT" | null;
 
 /**
  * YNAB debt transaction types
  */
 export type YNABDebtTransactionType =
-  | 'payment'
-  | 'refund'
-  | 'fee'
-  | 'interest'
-  | 'escrow'
-  | 'balanceAdjustment'
-  | 'credit'
-  | 'charge'
+  | "payment"
+  | "refund"
+  | "fee"
+  | "interest"
+  | "escrow"
+  | "balanceAdjustment"
+  | "credit"
+  | "charge"
   | null;
 
 /**
@@ -268,19 +261,19 @@ export interface YNABScheduledTransaction {
   date_first: string;
   date_next: string;
   frequency:
-    | 'never'
-    | 'daily'
-    | 'weekly'
-    | 'everyOtherWeek'
-    | 'twiceAMonth'
-    | 'every4Weeks'
-    | 'monthly'
-    | 'everyOtherMonth'
-    | 'every3Months'
-    | 'every4Months'
-    | 'twiceAYear'
-    | 'yearly'
-    | 'everyOtherYear';
+    | "never"
+    | "daily"
+    | "weekly"
+    | "everyOtherWeek"
+    | "twiceAMonth"
+    | "every4Weeks"
+    | "monthly"
+    | "everyOtherMonth"
+    | "every3Months"
+    | "every4Months"
+    | "twiceAYear"
+    | "yearly"
+    | "everyOtherYear";
   amount: Milliunits;
   memo: string | null;
   flag_color: YNABFlagColor;
@@ -320,26 +313,26 @@ export interface YNABScheduledSubTransaction {
  * YNAB4 Account Types
  */
 export type YNAB4AccountType =
-  | 'Checking'
-  | 'Savings'
-  | 'CreditCard'
-  | 'Cash'
-  | 'LineOfCredit'
-  | 'Merchant'
-  | 'InvestmentAccount'
-  | 'Mortgage'
-  | 'OtherAsset'
-  | 'OtherLiability';
+  | "Checking"
+  | "Savings"
+  | "CreditCard"
+  | "Cash"
+  | "LineOfCredit"
+  | "Merchant"
+  | "InvestmentAccount"
+  | "Mortgage"
+  | "OtherAsset"
+  | "OtherLiability";
 
 /**
  * YNAB4 Cleared Status
  */
-export type YNAB4ClearedStatus = 'Cleared' | 'Uncleared' | 'Reconciled';
+export type YNAB4ClearedStatus = "Cleared" | "Uncleared" | "Reconciled";
 
 /**
  * YNAB4 Category Type
  */
-export type YNAB4CategoryType = 'OUTFLOW' | 'INFLOW';
+export type YNAB4CategoryType = "OUTFLOW" | "INFLOW";
 
 /**
  * YNAB4 Budget Metadata
@@ -511,7 +504,7 @@ export interface YNAB4MonthlySubCategoryBudget {
   entityVersion?: string;
   categoryId: string;
   budgeted: number;
-  overspendingHandling?: 'AffectsBuffer' | 'Confined';
+  overspendingHandling?: "AffectsBuffer" | "Confined";
   note?: string;
 }
 
@@ -527,7 +520,7 @@ export interface YNABCSVTransaction {
   Flag: string;
   Date: string;
   Payee: string;
-  'Category Group/Category': string;
+  "Category Group/Category": string;
   Memo: string;
   Outflow: string;
   Inflow: string;
@@ -539,7 +532,7 @@ export interface YNABCSVTransaction {
  */
 export interface YNABCSVBudget {
   Month: string;
-  'Category Group': string;
+  "Category Group": string;
   Category: string;
   Budgeted: string;
   Activity: string;
@@ -568,7 +561,7 @@ export function toMilliunits(amount: number): Milliunits {
  * Parse YNAB date string (YYYY-MM-DD) to Date object
  */
 export function parseYNABDate(dateStr: string): Date {
-  const [year, month, day] = dateStr.split('-').map(Number);
+  const [year, month, day] = dateStr.split("-").map(Number);
   return new Date(year, month - 1, day);
 }
 
@@ -577,8 +570,8 @@ export function parseYNABDate(dateStr: string): Date {
  */
 export function formatYNABDate(date: Date): string {
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
 
@@ -586,20 +579,18 @@ export function formatYNABDate(date: Date): string {
  * Detect if a YNAB transaction is a transfer
  */
 export function isTransfer(transaction: YNABTransaction | YNAB4Transaction): boolean {
-  if ('transfer_account_id' in transaction) {
+  if ("transfer_account_id" in transaction) {
     return transaction.transfer_account_id !== null;
   }
-  return 'targetAccountId' in transaction && transaction.targetAccountId !== undefined;
+  return "targetAccountId" in transaction && transaction.targetAccountId !== undefined;
 }
 
 /**
  * Detect if a YNAB transaction is a split transaction
  */
-export function isSplitTransaction(
-  transaction: YNABTransaction | YNAB4Transaction
-): boolean {
+export function isSplitTransaction(transaction: YNABTransaction | YNAB4Transaction): boolean {
   // nYNAB uses 'subtransactions', YNAB4 uses 'subTransactions'
-  if ('subtransactions' in transaction) {
+  if ("subtransactions" in transaction) {
     return transaction.subtransactions.length > 0;
   }
   return transaction.subTransactions.length > 0;
@@ -608,12 +599,9 @@ export function isSplitTransaction(
 /**
  * Get transaction type (income/expense) from amount
  */
-export function getTransactionType(
-  amount: number,
-  isMilliunits = true
-): 'income' | 'expense' {
+export function getTransactionType(amount: number, isMilliunits = true): "income" | "expense" {
   const value = isMilliunits ? fromMilliunits(amount) : amount;
-  return value >= 0 ? 'income' : 'expense';
+  return value >= 0 ? "income" : "expense";
 }
 
 // ============================================================================
@@ -625,11 +613,11 @@ export function getTransactionType(
  */
 export function isNYNABBudget(budget: unknown): budget is YNABBudget {
   return (
-    typeof budget === 'object' &&
+    typeof budget === "object" &&
     budget !== null &&
-    'id' in budget &&
-    'accounts' in budget &&
-    'category_groups' in budget
+    "id" in budget &&
+    "accounts" in budget &&
+    "category_groups" in budget
   );
 }
 
@@ -638,26 +626,24 @@ export function isNYNABBudget(budget: unknown): budget is YNABBudget {
  */
 export function isYNAB4Budget(budget: unknown): budget is YNAB4Budget {
   return (
-    typeof budget === 'object' &&
+    typeof budget === "object" &&
     budget !== null &&
-    'budgetMetaData' in budget &&
-    'masterCategories' in budget
+    "budgetMetaData" in budget &&
+    "masterCategories" in budget
   );
 }
 
 /**
  * Detect YNAB version from file/data structure
  */
-export function detectYNABVersion(
-  data: unknown
-): 'nynab' | 'ynab4' | 'csv' | 'unknown' {
-  if (isNYNABBudget(data)) return 'nynab';
-  if (isYNAB4Budget(data)) return 'ynab4';
+export function detectYNABVersion(data: unknown): "nynab" | "ynab4" | "csv" | "unknown" {
+  if (isNYNABBudget(data)) return "nynab";
+  if (isYNAB4Budget(data)) return "ynab4";
   if (Array.isArray(data) && data.length > 0) {
     const first = data[0];
-    if ('Account' in first && 'Outflow' in first && 'Inflow' in first) {
-      return 'csv';
+    if ("Account" in first && "Outflow" in first && "Inflow" in first) {
+      return "csv";
     }
   }
-  return 'unknown';
+  return "unknown";
 }

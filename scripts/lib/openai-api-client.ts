@@ -8,14 +8,14 @@
  * 4. Error handling for translation failures
  */
 
-import OpenAI from 'openai';
-import type { SupportedLocale } from '../../src/i18n/config';
-import { buildBaseTranslationPrompt, buildAdaptationPrompt } from './prompt-builder';
+import OpenAI from "openai";
+import type { SupportedLocale } from "../../src/i18n/config";
+import { buildBaseTranslationPrompt, buildAdaptationPrompt } from "./prompt-builder";
 
-const OPENAI_MODEL = 'gpt-4o-mini';
+const OPENAI_MODEL = "gpt-4o-mini";
 const MAX_RETRIES = 3;
 const RETRY_DELAYS = [2000, 4000, 8000]; // Exponential backoff in ms
-const RETRYABLE_ERROR_CODES = ['rate_limit_exceeded', 'server_error', 'timeout'];
+const RETRYABLE_ERROR_CODES = ["rate_limit_exceeded", "server_error", "timeout"];
 
 /**
  * Rate Limiter for concurrent API calls
@@ -36,7 +36,7 @@ class RateLimiter {
 
     // Execute and track promise
     const promise = fn().finally(() => {
-      this.queue = this.queue.filter(p => p !== promise);
+      this.queue = this.queue.filter((p) => p !== promise);
     });
 
     this.queue.push(promise);
@@ -63,8 +63,8 @@ export class OpenAIAPIClient {
 
     if (!apiKey) {
       throw new Error(
-        'OPENAI_API_KEY environment variable is not set. ' +
-        'Please add it to your .env.local file.'
+        "OPENAI_API_KEY environment variable is not set. " +
+          "Please add it to your .env.local file."
       );
     }
 
@@ -75,12 +75,9 @@ export class OpenAIAPIClient {
   /**
    * Translate using base translation prompt
    */
-  async translateBase(
-    locale: SupportedLocale,
-    source: object
-  ): Promise<object> {
+  async translateBase(locale: SupportedLocale, source: object): Promise<object> {
     const prompt = buildBaseTranslationPrompt(locale, source);
-    return this.callAPI(locale, prompt, 'base');
+    return this.callAPI(locale, prompt, "base");
   }
 
   /**
@@ -92,7 +89,7 @@ export class OpenAIAPIClient {
     baseTranslation: object
   ): Promise<object> {
     const prompt = buildAdaptationPrompt(locale, baseLocale, baseTranslation);
-    return this.callAPI(locale, prompt, 'adapted');
+    return this.callAPI(locale, prompt, "adapted");
   }
 
   /**
@@ -101,7 +98,7 @@ export class OpenAIAPIClient {
   private async callAPI(
     locale: SupportedLocale,
     prompt: string,
-    type: 'base' | 'adapted',
+    type: "base" | "adapted",
     attempt: number = 1
   ): Promise<object> {
     return this.rateLimiter.throttle(async () => {
@@ -110,14 +107,15 @@ export class OpenAIAPIClient {
           model: OPENAI_MODEL,
           max_tokens: 16000, // Increased to handle large translation batches
           temperature: 0.3, // Lower temperature for more consistent translations
-          response_format: { type: 'json_object' },
+          response_format: { type: "json_object" },
           messages: [
             {
-              role: 'system',
-              content: 'You are a professional translator. Always respond with valid JSON only, no explanations.',
+              role: "system",
+              content:
+                "You are a professional translator. Always respond with valid JSON only, no explanations.",
             },
             {
-              role: 'user',
+              role: "user",
               content: prompt,
             },
           ],
@@ -132,7 +130,7 @@ export class OpenAIAPIClient {
         // Extract JSON from response
         const content = response.choices[0]?.message?.content;
         if (!content) {
-          throw new Error('No content in OpenAI response');
+          throw new Error("No content in OpenAI response");
         }
 
         const translationText = content.trim();
@@ -189,7 +187,7 @@ export class OpenAIAPIClient {
     }
 
     // Rate limit errors
-    if (error.status === 429 || error.message?.includes('rate limit')) {
+    if (error.status === 429 || error.message?.includes("rate limit")) {
       return true;
     }
 
@@ -199,7 +197,7 @@ export class OpenAIAPIClient {
     }
 
     // Network errors
-    if (error.code === 'ECONNRESET' || error.code === 'ETIMEDOUT') {
+    if (error.code === "ECONNRESET" || error.code === "ETIMEDOUT") {
       return true;
     }
 
@@ -210,10 +208,8 @@ export class OpenAIAPIClient {
    * Enhance error with context
    */
   private enhanceError(error: any, locale: SupportedLocale, type: string): Error {
-    const message = error.message || error.type || 'Unknown error';
-    const enhanced = new Error(
-      `Translation failed for ${locale} (${type}): ${message}`
-    );
+    const message = error.message || error.type || "Unknown error";
+    const enhanced = new Error(`Translation failed for ${locale} (${type}): ${message}`);
     enhanced.stack = error.stack;
     return enhanced;
   }
@@ -222,7 +218,7 @@ export class OpenAIAPIClient {
    * Sleep utility
    */
   private sleep(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   /**
@@ -237,7 +233,7 @@ export class OpenAIAPIClient {
   } {
     // GPT-4o-mini pricing (as of Dec 2024)
     const INPUT_COST_PER_1M = 0.15; // $0.15 per 1M input tokens
-    const OUTPUT_COST_PER_1M = 0.60; // $0.60 per 1M output tokens
+    const OUTPUT_COST_PER_1M = 0.6; // $0.60 per 1M output tokens
 
     const inputCost = (this.totalInputTokens / 1_000_000) * INPUT_COST_PER_1M;
     const outputCost = (this.totalOutputTokens / 1_000_000) * OUTPUT_COST_PER_1M;
@@ -283,7 +279,7 @@ export function estimateCost(
 
   // GPT-4o-mini pricing
   const INPUT_COST_PER_1M = 0.15;
-  const OUTPUT_COST_PER_1M = 0.60;
+  const OUTPUT_COST_PER_1M = 0.6;
 
   // Base translations (more tokens in prompt)
   const baseInputTokens = numBaseTranslations * AVG_PROMPT_TOKENS;
@@ -306,7 +302,7 @@ export function estimateCost(
     `Regional adaptations (${numAdaptations}): $${(inputCost * (adaptInputTokens / totalInputTokens) + outputCost * (adaptOutputTokens / totalOutputTokens)).toFixed(3)}`,
     `Input tokens: ${totalInputTokens.toLocaleString()} ($${inputCost.toFixed(3)})`,
     `Output tokens: ${totalOutputTokens.toLocaleString()} ($${outputCost.toFixed(3)})`,
-  ].join('\n   ');
+  ].join("\n   ");
 
   return {
     estimatedCost: totalCost,

@@ -56,22 +56,23 @@
 
 ### Our Strengths vs Competitors
 
-| Feature | Budget App v1 | Copilot (Best) | YNAB | Others |
-|---------|---------------|----------------|------|--------|
-| **Free** | ✅ | ❌ ($95/yr) | ❌ ($100/yr) | ❌ |
-| **Local-First** | ✅ | ❌ | ❌ | ❌ |
-| **Offline PWA** | ✅ | ❌ | ❌ | ❌ |
-| **18px Typography** | ✅ | Unknown | ❌ | ❌ |
-| **48px Touch Targets** | ✅ | Unknown | ❌ | ❌ |
-| **High-Contrast Mode** | ✅ | ❌ | ❌ | ❌ |
-| **WCAG 2.2 AA** | ✅ (target) | Unknown | Partial | Unknown |
-| **AI Chatbot** | ✅ (OpenAI) | ✅ (categorization only) | ❌ | ❌ |
+| Feature                | Budget App v1 | Copilot (Best)           | YNAB         | Others  |
+| ---------------------- | ------------- | ------------------------ | ------------ | ------- |
+| **Free**               | ✅            | ❌ ($95/yr)              | ❌ ($100/yr) | ❌      |
+| **Local-First**        | ✅            | ❌                       | ❌           | ❌      |
+| **Offline PWA**        | ✅            | ❌                       | ❌           | ❌      |
+| **18px Typography**    | ✅            | Unknown                  | ❌           | ❌      |
+| **48px Touch Targets** | ✅            | Unknown                  | ❌           | ❌      |
+| **High-Contrast Mode** | ✅            | ❌                       | ❌           | ❌      |
+| **WCAG 2.2 AA**        | ✅ (target)   | Unknown                  | Partial      | Unknown |
+| **AI Chatbot**         | ✅ (OpenAI)   | ✅ (categorization only) | ❌           | ❌      |
 
 ### Positioning Statement
 
 **"The only budget app built for everyone: free, private, accessible, and seniors-friendly."**
 
 **Target users:**
+
 - Seniors (60+) seeking simple budgeting
 - Privacy-conscious (local-first data)
 - Accessibility-focused (screen readers, high-contrast, reduced motion)
@@ -83,6 +84,7 @@
 ## What Competitors Do Well
 
 ### Copilot (4.8/5 rating - Highest)
+
 - **Native apps** (Mac/iPhone/iPad) = best performance
 - **Light + Dark mode** support
 - **Widgets** for quick checks
@@ -91,17 +93,20 @@
 - **AI categorization** with custom rules
 
 ### YNAB
+
 - **Accessibility commitment** (only app with documented screen reader support)
 - **Active VoiceOver improvements**
 - **iOS widgets**
 
 ### Monarch Money
+
 - **Clean, modern design** with visual appeal
 - **New mobile nav** (2024): Transactions center, menu for all
 - **Dashboard customization**
 - **Visual progress bars**
 
 ### Simplifi
+
 - **Straightforward navigation** ("never stuck or confused")
 - **Dashboard tiles with swipe**
 - **Menu-based access** to all features
@@ -123,11 +128,13 @@
 **From the full analysis, these are blocking for v1 launch:**
 
 ### Navigation & IA
+
 1. Bottom tab bar (4-5 items) + "More" menu for mobile
 2. Desktop left sidebar with collapsible groups
 3. Command palette (Cmd/Ctrl+K) for power users
 
 ### Accessibility (Non-Negotiable)
+
 4. 3 theme modes: Light, Dark, **High-Contrast**
 5. 18px base typography (seniors-friendly)
 6. 48px minimum touch targets (WCAG 2.2 Level AA)
@@ -135,6 +142,7 @@
 8. Screen reader support (ARIA labels, keyboard nav, tested)
 
 ### Dashboard & UX
+
 9. Widget customization (drag-and-drop, show/hide)
 10. Visual progress bars (not color-only)
 11. Smart transaction forms (auto-categorization, smart defaults)

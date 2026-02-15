@@ -1,10 +1,10 @@
 const wsUrl = process.argv[2];
 if (!wsUrl) {
-  console.error('Usage: node tmp/devtools-cdp.js <webSocketDebuggerUrl> [targetUrl]');
+  console.error("Usage: node tmp/devtools-cdp.js <webSocketDebuggerUrl> [targetUrl]");
   process.exit(1);
 }
 
-const targetUrl = process.argv[3] || 'http://127.0.0.1:3001/';
+const targetUrl = process.argv[3] || "http://127.0.0.1:3001/";
 const results = {
   console: {
     error: [],
@@ -41,11 +41,12 @@ function recordConsole(type, text, stackTrace) {
   if (bucket.length >= 10) return;
   bucket.push({
     text,
-    frames: stackTrace?.callFrames?.slice(0, 3)?.map((frame) => ({
-      functionName: frame.functionName,
-      url: frame.url,
-      lineNumber: frame.lineNumber,
-    })) || null,
+    frames:
+      stackTrace?.callFrames?.slice(0, 3)?.map((frame) => ({
+        functionName: frame.functionName,
+        url: frame.url,
+        lineNumber: frame.lineNumber,
+      })) || null,
   });
 }
 
@@ -53,12 +54,12 @@ const ws = new WebSocket(wsUrl);
 let loadEventSeen = false;
 
 ws.onopen = () => {
-  send(ws, 'Page.enable');
-  send(ws, 'Runtime.enable');
-  send(ws, 'Log.enable');
-  send(ws, 'Network.enable');
-  send(ws, 'Performance.enable');
-  send(ws, 'Page.navigate', { url: targetUrl });
+  send(ws, "Page.enable");
+  send(ws, "Runtime.enable");
+  send(ws, "Log.enable");
+  send(ws, "Network.enable");
+  send(ws, "Performance.enable");
+  send(ws, "Page.navigate", { url: targetUrl });
 };
 
 ws.onmessage = (event) => {
@@ -75,7 +76,7 @@ ws.onmessage = (event) => {
   }
 
   switch (message.method) {
-    case 'Network.requestWillBeSent': {
+    case "Network.requestWillBeSent": {
       const { requestId, request } = message.params;
       requestMap.set(requestId, {
         url: request.url,
@@ -85,7 +86,7 @@ ws.onmessage = (event) => {
       });
       break;
     }
-    case 'Network.responseReceived': {
+    case "Network.responseReceived": {
       const { requestId, response, type } = message.params;
       if (results.networkResponses.length < 20) {
         results.networkResponses.push({
@@ -97,15 +98,15 @@ ws.onmessage = (event) => {
       }
       break;
     }
-    case 'Runtime.consoleAPICalled': {
+    case "Runtime.consoleAPICalled": {
       const { type, args, stackTrace } = message.params;
       const text = args
-        .map((arg) => ('value' in arg ? JSON.stringify(arg.value) : arg.description || arg.type))
-        .join(' ');
+        .map((arg) => ("value" in arg ? JSON.stringify(arg.value) : arg.description || arg.type))
+        .join(" ");
       recordConsole(type, text, stackTrace);
       break;
     }
-    case 'Runtime.exceptionThrown': {
+    case "Runtime.exceptionThrown": {
       const { exceptionDetails } = message.params;
       if (results.exceptions.length < 10) {
         results.exceptions.push({
@@ -117,14 +118,14 @@ ws.onmessage = (event) => {
       }
       break;
     }
-    case 'Log.entryAdded': {
+    case "Log.entryAdded": {
       const { entry } = message.params;
       if (results.logs.length < 10) {
         results.logs.push({ source: entry.source, level: entry.level, text: entry.text });
       }
       break;
     }
-    case 'Network.loadingFailed': {
+    case "Network.loadingFailed": {
       const { requestId, errorText, type, canceled, blockedReason, timestamp } = message.params;
       const requestInfo = requestMap.get(requestId);
       results.networkFailures.push({
@@ -139,12 +140,14 @@ ws.onmessage = (event) => {
       });
       break;
     }
-    case 'Page.loadEventFired': {
+    case "Page.loadEventFired": {
       if (!loadEventSeen) {
         loadEventSeen = true;
-        sendWithPromise(ws, 'Performance.getMetrics')
+        sendWithPromise(ws, "Performance.getMetrics")
           .then((metrics) => {
-            const map = Object.fromEntries(metrics.metrics.map((entry) => [entry.name, entry.value]));
+            const map = Object.fromEntries(
+              metrics.metrics.map((entry) => [entry.name, entry.value])
+            );
             results.performance = {
               FirstContentfulPaint: map.FirstContentfulPaint,
               DOMContentLoaded: map.DomContentLoaded,
@@ -167,10 +170,10 @@ ws.onmessage = (event) => {
 };
 
 ws.onerror = (err) => {
-  console.error('WebSocket error', err.message || err);
+  console.error("WebSocket error", err.message || err);
 };
 
-setTimeout(() => ws.close(1000, 'Done'), 8000);
+setTimeout(() => ws.close(1000, "Done"), 8000);
 
 ws.onclose = () => {
   console.log(JSON.stringify(results, null, 2));

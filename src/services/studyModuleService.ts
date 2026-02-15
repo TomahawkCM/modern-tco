@@ -3,8 +3,8 @@
  * Handles all database operations for study modules and sections
  */
 
-import { supabase } from '@/lib/supabase';
-import type { TCODomain } from '@/types/exam';
+import { supabase } from "@/lib/supabase";
+import type { TCODomain } from "@/types/exam";
 
 export interface StudyModule {
   id: string;
@@ -27,7 +27,13 @@ export interface StudySection {
   module_id: string;
   title: string;
   content: string;
-  section_type: 'overview' | 'learning_objectives' | 'procedures' | 'troubleshooting' | 'exam_prep' | 'references';
+  section_type:
+    | "overview"
+    | "learning_objectives"
+    | "procedures"
+    | "troubleshooting"
+    | "exam_prep"
+    | "references";
   order_index: number;
   estimated_time_minutes: number;
   key_points: string[];
@@ -56,18 +62,18 @@ class StudyModuleService {
   async getAllModules(): Promise<StudyModule[]> {
     try {
       const { data, error } = await supabase
-        .from('study_modules')
-        .select('*')
-        .order('order_index', { ascending: true });
+        .from("study_modules")
+        .select("*")
+        .order("order_index", { ascending: true });
 
       if (error) {
-        console.error('Error fetching study modules:', error);
+        console.error("Error fetching study modules:", error);
         return [];
       }
 
       return (data as StudyModule[]) || [];
     } catch (err) {
-      console.error('Unexpected error fetching modules:', err);
+      console.error("Unexpected error fetching modules:", err);
       return [];
     }
   }
@@ -78,19 +84,19 @@ class StudyModuleService {
   async getModuleById(id: string): Promise<StudyModule | null> {
     try {
       const { data, error } = await supabase
-        .from('study_modules')
-        .select('*')
-        .eq('id', id)
+        .from("study_modules")
+        .select("*")
+        .eq("id", id)
         .single();
 
       if (error) {
-        console.error('Error fetching module:', error);
+        console.error("Error fetching module:", error);
         return null;
       }
 
       return data as StudyModule;
     } catch (err) {
-      console.error('Unexpected error fetching module:', err);
+      console.error("Unexpected error fetching module:", err);
       return null;
     }
   }
@@ -103,27 +109,33 @@ class StudyModuleService {
       // Try different domain formats
       const domainVariants = [
         domain,
-        domain.replace(/-/g, '_').toUpperCase(),
-        domain.split('-').map((word, idx) =>
-          idx === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word.charAt(0).toUpperCase() + word.slice(1)
-        ).join(' ')
+        domain.replace(/-/g, "_").toUpperCase(),
+        domain
+          .split("-")
+          .map((word, idx) =>
+            idx === 0
+              ? word.charAt(0).toUpperCase() + word.slice(1)
+              : word.charAt(0).toUpperCase() + word.slice(1)
+          )
+          .join(" "),
       ];
 
       const { data, error } = await supabase
-        .from('study_modules')
-        .select('*')
-        .in('domain', domainVariants)
+        .from("study_modules")
+        .select("*")
+        .in("domain", domainVariants)
         .limit(1)
         .single();
 
-      if (error && error.code !== 'PGRST116') { // PGRST116 is "no rows returned"
-        console.error('Error fetching module by domain:', error);
+      if (error && error.code !== "PGRST116") {
+        // PGRST116 is "no rows returned"
+        console.error("Error fetching module by domain:", error);
         return null;
       }
 
       return data as StudyModule;
     } catch (err) {
-      console.error('Unexpected error fetching module by domain:', err);
+      console.error("Unexpected error fetching module by domain:", err);
       return null;
     }
   }
@@ -134,19 +146,19 @@ class StudyModuleService {
   async getModuleSections(moduleId: string): Promise<StudySection[]> {
     try {
       const { data, error } = await supabase
-        .from('study_sections')
-        .select('*')
-        .eq('module_id', moduleId)
-        .order('order_index', { ascending: true });
+        .from("study_sections")
+        .select("*")
+        .eq("module_id", moduleId)
+        .order("order_index", { ascending: true });
 
       if (error) {
-        console.error('Error fetching sections:', error);
+        console.error("Error fetching sections:", error);
         return [];
       }
 
       return (data as StudySection[]) || [];
     } catch (err) {
-      console.error('Unexpected error fetching sections:', err);
+      console.error("Unexpected error fetching sections:", err);
       return [];
     }
   }
@@ -154,29 +166,30 @@ class StudyModuleService {
   /**
    * Get user progress for a module or domain
    */
-  async getUserProgress(userId: string, domain?: string, moduleId?: string): Promise<StudyProgress | null> {
+  async getUserProgress(
+    userId: string,
+    domain?: string,
+    moduleId?: string
+  ): Promise<StudyProgress | null> {
     try {
-      let query = supabase
-        .from('user_study_progress')
-        .select('*')
-        .eq('user_id', userId);
+      let query = supabase.from("user_study_progress").select("*").eq("user_id", userId);
 
       if (moduleId) {
-        query = query.eq('module_id', moduleId);
+        query = query.eq("module_id", moduleId);
       } else if (domain) {
-        query = query.eq('domain', domain);
+        query = query.eq("domain", domain);
       }
 
       const { data, error } = await query.single();
 
-      if (error && error.code !== 'PGRST116') {
-        console.error('Error fetching user progress:', error);
+      if (error && error.code !== "PGRST116") {
+        console.error("Error fetching user progress:", error);
         return null;
       }
 
       return data as any;
     } catch (err) {
-      console.error('Unexpected error fetching progress:', err);
+      console.error("Unexpected error fetching progress:", err);
       return null;
     }
   }
@@ -186,21 +199,19 @@ class StudyModuleService {
    */
   async updateUserProgress(progress: Partial<StudyProgress>): Promise<boolean> {
     try {
-      const { error } = await supabase
-        .from('user_study_progress')
-        .upsert(progress as any, {
-          onConflict: 'user_id,domain',
-          ignoreDuplicates: false
-        });
+      const { error } = await supabase.from("user_study_progress").upsert(progress as any, {
+        onConflict: "user_id,domain",
+        ignoreDuplicates: false,
+      });
 
       if (error) {
-        console.error('Error updating progress:', error);
+        console.error("Error updating progress:", error);
         return false;
       }
 
       return true;
     } catch (err) {
-      console.error('Unexpected error updating progress:', err);
+      console.error("Unexpected error updating progress:", err);
       return false;
     }
   }
@@ -208,7 +219,9 @@ class StudyModuleService {
   /**
    * Get modules with progress for a user
    */
-  async getModulesWithProgress(userId?: string): Promise<(StudyModule & { progress?: number; completedSections?: number })[]> {
+  async getModulesWithProgress(
+    userId?: string
+  ): Promise<(StudyModule & { progress?: number; completedSections?: number })[]> {
     try {
       const modules = await this.getAllModules();
 
@@ -218,26 +231,26 @@ class StudyModuleService {
 
       // Get all progress records for this user
       const { data: progressData } = await supabase
-        .from('user_study_progress')
-        .select('*')
-        .eq('user_id', userId);
+        .from("user_study_progress")
+        .select("*")
+        .eq("user_id", userId);
 
       // Map progress to modules
-      const modulesWithProgress = modules.map(module => {
-        const progress = (progressData as any)?.find((p: any) =>
-          p.module_id === module.id || p.domain === module.domain
+      const modulesWithProgress = modules.map((module) => {
+        const progress = (progressData as any)?.find(
+          (p: any) => p.module_id === module.id || p.domain === module.domain
         );
 
         return {
           ...module,
           progress: progress?.completion_percentage || 0,
-          completedSections: progress?.completed_sections?.length || 0
+          completedSections: progress?.completed_sections?.length || 0,
         };
       });
 
       return modulesWithProgress;
     } catch (err) {
-      console.error('Error fetching modules with progress:', err);
+      console.error("Error fetching modules with progress:", err);
       return [];
     }
   }
@@ -271,10 +284,10 @@ class StudyModuleService {
         completed_sections: completedSections,
         total_sections: sections.length,
         completion_percentage: completionPercentage,
-        last_accessed_at: new Date().toISOString()
+        last_accessed_at: new Date().toISOString(),
       });
     } catch (err) {
-      console.error('Error marking section complete:', err);
+      console.error("Error marking section complete:", err);
       return false;
     }
   }

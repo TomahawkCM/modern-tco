@@ -24,7 +24,7 @@
 export interface SimpleFINOrganization {
   domain?: string;
   name?: string;
-  'sfin-url': string;
+  "sfin-url": string;
   url?: string;
   id?: string;
 }
@@ -51,8 +51,8 @@ export interface SimpleFINAccount {
   name: string;
   currency: string; // ISO 4217 or custom currency URL
   balance: string; // Numeric string
-  'available-balance'?: string;
-  'balance-date': number; // UNIX timestamp
+  "available-balance"?: string;
+  "balance-date": number; // UNIX timestamp
   transactions?: SimpleFINTransaction[];
   extra?: Record<string, unknown>;
 }
@@ -97,13 +97,13 @@ export interface SimpleFINConfig {
  * Error types for SimpleFIN operations
  */
 export type SimpleFINErrorType =
-  | 'CLAIM_FAILED'
-  | 'AUTH_FAILED'
-  | 'PAYMENT_REQUIRED'
-  | 'RATE_LIMITED'
-  | 'NETWORK_ERROR'
-  | 'INVALID_TOKEN'
-  | 'UNKNOWN';
+  | "CLAIM_FAILED"
+  | "AUTH_FAILED"
+  | "PAYMENT_REQUIRED"
+  | "RATE_LIMITED"
+  | "NETWORK_ERROR"
+  | "INVALID_TOKEN"
+  | "UNKNOWN";
 
 /**
  * Custom error class for SimpleFIN operations
@@ -114,7 +114,7 @@ export class SimpleFINError extends Error {
 
   constructor(message: string, type: SimpleFINErrorType, statusCode?: number) {
     super(message);
-    this.name = 'SimpleFINError';
+    this.name = "SimpleFINError";
     this.type = type;
     this.statusCode = statusCode;
   }
@@ -130,16 +130,13 @@ export class SimpleFINError extends Error {
 export function decodeSetupToken(setupToken: string): string {
   try {
     // Handle both browser and Node.js environments
-    if (typeof atob !== 'undefined') {
+    if (typeof atob !== "undefined") {
       return atob(setupToken);
     } else {
-      return Buffer.from(setupToken, 'base64').toString('utf-8');
+      return Buffer.from(setupToken, "base64").toString("utf-8");
     }
   } catch {
-    throw new SimpleFINError(
-      'Invalid setup token: failed to decode Base64',
-      'INVALID_TOKEN'
-    );
+    throw new SimpleFINError("Invalid setup token: failed to decode Base64", "INVALID_TOKEN");
   }
 }
 
@@ -153,20 +150,17 @@ export function parseAccessUrl(accessUrl: string): {
 } {
   try {
     const url = new URL(accessUrl);
-    const {username} = url;
-    const {password} = url;
+    const { username } = url;
+    const { password } = url;
 
     // Remove credentials from URL
-    url.username = '';
-    url.password = '';
-    const baseUrl = url.toString().replace(/\/$/, '');
+    url.username = "";
+    url.password = "";
+    const baseUrl = url.toString().replace(/\/$/, "");
 
     return { username, password, baseUrl };
   } catch {
-    throw new SimpleFINError(
-      'Invalid access URL format',
-      'INVALID_TOKEN'
-    );
+    throw new SimpleFINError("Invalid access URL format", "INVALID_TOKEN");
   }
 }
 
@@ -177,27 +171,27 @@ function buildAccountsQuery(options: FetchAccountsOptions): string {
   const params = new URLSearchParams();
 
   if (options.startDate) {
-    params.set('start-date', Math.floor(options.startDate.getTime() / 1000).toString());
+    params.set("start-date", Math.floor(options.startDate.getTime() / 1000).toString());
   }
 
   if (options.endDate) {
-    params.set('end-date', Math.floor(options.endDate.getTime() / 1000).toString());
+    params.set("end-date", Math.floor(options.endDate.getTime() / 1000).toString());
   }
 
   if (options.includePending) {
-    params.set('pending', '1');
+    params.set("pending", "1");
   }
 
   if (options.balancesOnly) {
-    params.set('balances-only', '1');
+    params.set("balances-only", "1");
   }
 
   if (options.accountIds?.length) {
-    options.accountIds.forEach(id => params.append('account', id));
+    options.accountIds.forEach((id) => params.append("account", id));
   }
 
   const query = params.toString();
-  return query ? `?${query}` : '';
+  return query ? `?${query}` : "";
 }
 
 // =============================================================================
@@ -248,26 +242,23 @@ export class SimpleFINClient {
     const claimUrl = decodeSetupToken(setupToken);
 
     // Validate URL
-    if (!claimUrl.startsWith('https://')) {
-      throw new SimpleFINError(
-        'Setup token must decode to an HTTPS URL',
-        'INVALID_TOKEN'
-      );
+    if (!claimUrl.startsWith("https://")) {
+      throw new SimpleFINError("Setup token must decode to an HTTPS URL", "INVALID_TOKEN");
     }
 
     try {
       const response = await fetch(claimUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Length': '0',
+          "Content-Length": "0",
         },
       });
 
       if (response.status === 403) {
         throw new SimpleFINError(
-          'Setup token has already been claimed or is invalid. ' +
-          'The token may have been compromised - please disable it in SimpleFIN Bridge.',
-          'CLAIM_FAILED',
+          "Setup token has already been claimed or is invalid. " +
+            "The token may have been compromised - please disable it in SimpleFIN Bridge.",
+          "CLAIM_FAILED",
           403
         );
       }
@@ -275,7 +266,7 @@ export class SimpleFINClient {
       if (!response.ok) {
         throw new SimpleFINError(
           `Failed to claim token: ${response.status} ${response.statusText}`,
-          'CLAIM_FAILED',
+          "CLAIM_FAILED",
           response.status
         );
       }
@@ -283,11 +274,8 @@ export class SimpleFINClient {
       const accessUrl = await response.text();
 
       // Validate access URL format
-      if (!accessUrl.includes('@')) {
-        throw new SimpleFINError(
-          'Invalid access URL returned from claim',
-          'CLAIM_FAILED'
-        );
+      if (!accessUrl.includes("@")) {
+        throw new SimpleFINError("Invalid access URL returned from claim", "CLAIM_FAILED");
       }
 
       return accessUrl.trim();
@@ -296,8 +284,8 @@ export class SimpleFINClient {
         throw error;
       }
       throw new SimpleFINError(
-        `Network error claiming token: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        'NETWORK_ERROR'
+        `Network error claiming token: ${error instanceof Error ? error.message : "Unknown error"}`,
+        "NETWORK_ERROR"
       );
     }
   }
@@ -306,7 +294,7 @@ export class SimpleFINClient {
    * Get server info (supported protocol versions)
    */
   async getServerInfo(): Promise<SimpleFINServerInfo> {
-    return this.request<SimpleFINServerInfo>('/info');
+    return this.request<SimpleFINServerInfo>("/info");
   }
 
   /**
@@ -328,7 +316,7 @@ export class SimpleFINClient {
       if (daysDiff > 60) {
         throw new SimpleFINError(
           `Date range cannot exceed 60 days (requested ${daysDiff} days)`,
-          'RATE_LIMITED'
+          "RATE_LIMITED"
         );
       }
     }
@@ -350,13 +338,13 @@ export class SimpleFINClient {
    */
   async getAccountTransactions(
     accountId: string,
-    options: Omit<FetchAccountsOptions, 'accountIds' | 'balancesOnly'> = {}
+    options: Omit<FetchAccountsOptions, "accountIds" | "balancesOnly"> = {}
   ): Promise<SimpleFINAccount | null> {
     const result = await this.getAccounts({
       ...options,
       accountIds: [accountId],
     });
-    return result.accounts.find(a => a.id === accountId) || null;
+    return result.accounts.find((a) => a.id === accountId) || null;
   }
 
   /**
@@ -371,10 +359,10 @@ export class SimpleFINClient {
       const timeoutId = setTimeout(() => controller.abort(), this.config.timeout);
 
       const response = await fetch(url, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Authorization': `Basic ${btoa(`${username}:${password}`)}`,
-          'Accept': 'application/json',
+          Authorization: `Basic ${btoa(`${username}:${password}`)}`,
+          Accept: "application/json",
         },
         signal: controller.signal,
       });
@@ -383,24 +371,24 @@ export class SimpleFINClient {
 
       if (response.status === 403) {
         throw new SimpleFINError(
-          'Authentication failed. Access may have been revoked.',
-          'AUTH_FAILED',
+          "Authentication failed. Access may have been revoked.",
+          "AUTH_FAILED",
           403
         );
       }
 
       if (response.status === 402) {
         throw new SimpleFINError(
-          'Payment required. Please renew your SimpleFIN Bridge subscription.',
-          'PAYMENT_REQUIRED',
+          "Payment required. Please renew your SimpleFIN Bridge subscription.",
+          "PAYMENT_REQUIRED",
           402
         );
       }
 
       if (response.status === 429) {
         throw new SimpleFINError(
-          'Rate limit exceeded. SimpleFIN allows 24 requests per day.',
-          'RATE_LIMITED',
+          "Rate limit exceeded. SimpleFIN allows 24 requests per day.",
+          "RATE_LIMITED",
           429
         );
       }
@@ -408,7 +396,7 @@ export class SimpleFINClient {
       if (!response.ok) {
         throw new SimpleFINError(
           `Request failed: ${response.status} ${response.statusText}`,
-          'UNKNOWN',
+          "UNKNOWN",
           response.status
         );
       }
@@ -419,16 +407,16 @@ export class SimpleFINClient {
         throw error;
       }
 
-      if (error instanceof Error && error.name === 'AbortError') {
+      if (error instanceof Error && error.name === "AbortError") {
         throw new SimpleFINError(
           `Request timed out after ${this.config.timeout}ms`,
-          'NETWORK_ERROR'
+          "NETWORK_ERROR"
         );
       }
 
       throw new SimpleFINError(
-        `Network error: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        'NETWORK_ERROR'
+        `Network error: ${error instanceof Error ? error.message : "Unknown error"}`,
+        "NETWORK_ERROR"
       );
     }
   }
@@ -459,7 +447,7 @@ export class SimpleFINClient {
       return {
         valid: false,
         accounts: 0,
-        errors: ['Unknown error validating connection'],
+        errors: ["Unknown error validating connection"],
       };
     }
   }
@@ -488,14 +476,14 @@ export function simpleFINTimestampToDate(timestamp: number): Date {
  * Check if currency is a custom currency URL
  */
 export function isCustomCurrency(currency: string): boolean {
-  return currency.startsWith('http://') || currency.startsWith('https://');
+  return currency.startsWith("http://") || currency.startsWith("https://");
 }
 
 /**
  * Format SimpleFIN account for display
  */
 export function formatSimpleFINAccount(account: SimpleFINAccount): string {
-  const org = account.org.name || account.org.domain || 'Unknown';
+  const org = account.org.name || account.org.domain || "Unknown";
   return `${org} - ${account.name}`;
 }
 

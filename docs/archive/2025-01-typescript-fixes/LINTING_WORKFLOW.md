@@ -36,7 +36,7 @@ npm run fix-all
 # Type checking only
 npm run check-types
 
-# Format code only  
+# Format code only
 npm run format
 ```
 
@@ -79,10 +79,7 @@ Add to `package.json`:
 ```json
 {
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
+    "*.{js,jsx,ts,tsx}": ["eslint --fix", "prettier --write"]
   }
 }
 ```
@@ -102,7 +99,7 @@ Add to `package.json`:
 - `@next/next/no-before-interactive-script-outside-document` - Performance
 - `@next/next/no-sync-scripts` - Loading optimization
 
-### React Rules  
+### React Rules
 
 - `react-hooks/rules-of-hooks` - Hook usage validation
 - `react-hooks/exhaustive-deps` - Dependency tracking
@@ -324,7 +321,7 @@ npm run lint:quick
 npm run lint -- --no-type-check
 ```
 
-### CI/CD Optimization  
+### CI/CD Optimization
 
 ```powershell
 # Quiet mode with exit codes

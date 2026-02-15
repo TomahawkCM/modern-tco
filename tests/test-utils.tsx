@@ -8,23 +8,23 @@
  * - mockSession: Default test session object
  */
 
-import { AuthContext } from '@/contexts/AuthContext';
-import { render, type RenderOptions } from '@testing-library/react';
-import React, { type ReactElement } from 'react';
-import { vi } from 'vitest';
+import { AuthContext } from "@/contexts/AuthContext";
+import { render, type RenderOptions } from "@testing-library/react";
+import React, { type ReactElement } from "react";
+import { vi } from "vitest";
 
 /**
  * Mock User object for testing
  */
 export const mockUser = {
-  id: 'test-user-id-123',
-  email: 'test@example.com',
+  id: "test-user-id-123",
+  email: "test@example.com",
   user_metadata: {
-    first_name: 'Test',
-    last_name: 'User',
+    first_name: "Test",
+    last_name: "User",
   },
   app_metadata: {},
-  aud: 'authenticated',
+  aud: "authenticated",
   created_at: new Date().toISOString(),
 } as any;
 
@@ -32,11 +32,11 @@ export const mockUser = {
  * Mock Session object for testing
  */
 export const mockSession = {
-  access_token: 'mock-access-token',
-  refresh_token: 'mock-refresh-token',
+  access_token: "mock-access-token",
+  refresh_token: "mock-refresh-token",
   expires_in: 3600,
   expires_at: Date.now() + 3600000,
-  token_type: 'bearer',
+  token_type: "bearer",
   user: mockUser,
 } as any;
 
@@ -113,7 +113,7 @@ export function MockAdminAuthProvider({ children }: { children: React.ReactNode 
     isAdmin: true,
     user: {
       ...mockUser,
-      email: 'admin@example.com',
+      email: "admin@example.com",
     },
   };
   return <AuthContext.Provider value={adminContext}>{children}</AuthContext.Provider>;
@@ -151,7 +151,7 @@ export function AllProvidersWrapper({
  */
 export function renderWithAuth(
   ui: ReactElement,
-  options?: Omit<RenderOptions, 'wrapper'> & { authValue?: typeof mockAuthContext }
+  options?: Omit<RenderOptions, "wrapper"> & { authValue?: typeof mockAuthContext }
 ) {
   const { authValue, ...renderOptions } = options || {};
 
@@ -166,4 +166,4 @@ export function renderWithAuth(
 /**
  * Export all testing library utilities for convenience
  */
-export { render, screen, fireEvent, waitFor, within } from '@testing-library/react';
+export { render, screen, fireEvent, waitFor, within } from "@testing-library/react";

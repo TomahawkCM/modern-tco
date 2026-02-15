@@ -3,21 +3,16 @@
  * Handles error logging with PII masking and optional PostHog integration
  */
 
-import { headers } from 'next/headers';
-import { PostHog } from 'posthog-node';
-import {
-  createSafeError,
-  maskHeaders,
-  maskObject,
-  maskUrl
-} from './pii-masker';
+import { headers } from "next/headers";
+import { PostHog } from "posthog-node";
+import { createSafeError, maskHeaders, maskObject, maskUrl } from "./pii-masker";
 
 export enum ErrorSeverity {
-  DEBUG = 'debug',
-  INFO = 'info',
-  WARNING = 'warning',
-  ERROR = 'error',
-  CRITICAL = 'critical'
+  DEBUG = "debug",
+  INFO = "info",
+  WARNING = "warning",
+  ERROR = "error",
+  CRITICAL = "critical",
 }
 
 export interface ErrorContext {
@@ -47,22 +42,23 @@ class ErrorTracker {
   private isProduction: boolean;
 
   private constructor() {
-    this.isDevelopment = process.env.NODE_ENV === 'development';
-    this.isProduction = process.env.NODE_ENV === 'production';
+    this.isDevelopment = process.env.NODE_ENV === "development";
+    this.isProduction = process.env.NODE_ENV === "production";
 
     // Initialize PostHog for production error tracking
-    if (this.isProduction && process.env.NEXT_PUBLIC_POSTHOG_KEY && process.env.NEXT_PUBLIC_POSTHOG_HOST) {
+    if (
+      this.isProduction &&
+      process.env.NEXT_PUBLIC_POSTHOG_KEY &&
+      process.env.NEXT_PUBLIC_POSTHOG_HOST
+    ) {
       try {
-        this.posthog = new PostHog(
-          process.env.NEXT_PUBLIC_POSTHOG_KEY,
-          {
-            host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-            flushAt: 1, // Send events immediately in serverless environment
-            flushInterval: 0 // Disable time-based flushing
-          }
-        );
+        this.posthog = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+          host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+          flushAt: 1, // Send events immediately in serverless environment
+          flushInterval: 0, // Disable time-based flushing
+        });
       } catch (error) {
-        console.error('Failed to initialize PostHog for error tracking:', error);
+        console.error("Failed to initialize PostHog for error tracking:", error);
       }
     }
   }
@@ -93,9 +89,9 @@ class ErrorTracker {
         const maskedHeaders = maskHeaders(headersObj);
 
         // Extract useful non-PII headers for debugging
-        context.userAgent = maskedHeaders['user-agent'] as string;
-        context.referer = maskedHeaders['referer'] as string;
-        context.contentType = maskedHeaders['content-type'] as string;
+        context.userAgent = maskedHeaders["user-agent"] as string;
+        context.referer = maskedHeaders["referer"] as string;
+        context.contentType = maskedHeaders["content-type"] as string;
       } else {
         // Try to get headers from Next.js context
         const headersList = await headers();
@@ -105,16 +101,15 @@ class ErrorTracker {
         });
         const maskedHeaders = maskHeaders(headersObj);
 
-        context.userAgent = maskedHeaders['user-agent'] as string;
-        context.referer = maskedHeaders['referer'] as string;
+        context.userAgent = maskedHeaders["user-agent"] as string;
+        context.referer = maskedHeaders["referer"] as string;
       }
 
       // Add request ID if available
       context.requestId = Math.random().toString(36).substring(7);
-
     } catch (error) {
       // Fail silently - context extraction should not break error logging
-      console.error('Failed to extract request context:', error);
+      console.error("Failed to extract request context:", error);
     }
 
     return context;
@@ -136,7 +131,7 @@ class ErrorTracker {
       // Merge contexts with PII masking
       const fullContext = maskObject({
         ...requestContext,
-        ...context
+        ...context,
       } as any) as ErrorContext;
 
       // Create safe error object
@@ -150,15 +145,15 @@ class ErrorTracker {
         error: safeError,
         context: fullContext,
         stack: safeError.stack,
-        environment: this.isProduction ? 'production' : 'development'
+        environment: this.isProduction ? "production" : "development",
       };
 
       // Console logging (structured for log aggregation)
       if (this.isDevelopment) {
         // Pretty print in development
-        console.error('\n🔴 ERROR TRACKED:', {
+        console.error("\n🔴 ERROR TRACKED:", {
           ...logEntry,
-          formattedTime: new Date(logEntry.timestamp).toLocaleString()
+          formattedTime: new Date(logEntry.timestamp).toLocaleString(),
         });
       } else {
         // JSON format for production log aggregation
@@ -169,8 +164,8 @@ class ErrorTracker {
       if (this.posthog && this.isProduction) {
         try {
           this.posthog.capture({
-            distinctId: fullContext.userId || 'anonymous',
-            event: 'api_error',
+            distinctId: fullContext.userId || "anonymous",
+            event: "api_error",
             properties: {
               severity,
               endpoint: fullContext.endpoint,
@@ -180,14 +175,14 @@ class ErrorTracker {
               errorName: safeError.name,
               requestId: fullContext.requestId,
               environment: logEntry.environment,
-              timestamp: logEntry.timestamp
-            }
+              timestamp: logEntry.timestamp,
+            },
           });
 
           // Ensure events are sent in serverless environment
           await this.posthog.flush();
         } catch (posthogError) {
-          console.error('Failed to send error to PostHog:', posthogError);
+          console.error("Failed to send error to PostHog:", posthogError);
         }
       }
 
@@ -195,11 +190,10 @@ class ErrorTracker {
       if (this.isDevelopment && process.env.ERROR_LOG_FILE) {
         await this.writeToFile(logEntry);
       }
-
     } catch (loggingError) {
       // Last resort - log the logging error
-      console.error('Critical: Failed to log error:', loggingError);
-      console.error('Original error:', error);
+      console.error("Critical: Failed to log error:", loggingError);
+      console.error("Original error:", error);
     }
   }
 
@@ -213,14 +207,22 @@ class ErrorTracker {
   /**
    * Logs warning messages
    */
-  public async logWarning(message: string, context?: ErrorContext, request?: Request): Promise<void> {
+  public async logWarning(
+    message: string,
+    context?: ErrorContext,
+    request?: Request
+  ): Promise<void> {
     await this.logError(new Error(message), ErrorSeverity.WARNING, context, request);
   }
 
   /**
    * Logs critical errors that require immediate attention
    */
-  public async logCritical(error: unknown, context?: ErrorContext, request?: Request): Promise<void> {
+  public async logCritical(
+    error: unknown,
+    context?: ErrorContext,
+    request?: Request
+  ): Promise<void> {
     await this.logError(error, ErrorSeverity.CRITICAL, context, request);
   }
 
@@ -229,23 +231,19 @@ class ErrorTracker {
    */
   private async writeToFile(logEntry: ErrorLog): Promise<void> {
     try {
-      const fs = await import('fs/promises');
-      const path = await import('path');
+      const fs = await import("fs/promises");
+      const path = await import("path");
 
-      const logDir = path.join(process.cwd(), 'logs');
-      const logFile = path.join(logDir, `errors-${new Date().toISOString().split('T')[0]}.log`);
+      const logDir = path.join(process.cwd(), "logs");
+      const logFile = path.join(logDir, `errors-${new Date().toISOString().split("T")[0]}.log`);
 
       // Ensure log directory exists
       await fs.mkdir(logDir, { recursive: true });
 
       // Append to log file
-      await fs.appendFile(
-        logFile,
-        `${JSON.stringify(logEntry)  }\n`,
-        'utf-8'
-      );
+      await fs.appendFile(logFile, `${JSON.stringify(logEntry)}\n`, "utf-8");
     } catch (fileError) {
-      console.error('Failed to write error to file:', fileError);
+      console.error("Failed to write error to file:", fileError);
     }
   }
 

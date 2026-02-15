@@ -33,4 +33,3 @@ High-level outline for orienting new operators to the console layout, navigation
 ## Author Notes
 
 Ensure future drafts include accessibility callouts and align with the UI polish planned for the Cyberpunk theme.
-

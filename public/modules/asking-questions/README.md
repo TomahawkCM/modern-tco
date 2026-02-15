@@ -51,6 +51,7 @@ asking-questions/
    - Alt text: "Export to CSV dialog with delimiter selection (comma, semicolon, tab) and export confirmation button"
 
 **Technical Requirements**:
+
 - Format: PNG (lossless)
 - Resolution: 1920x1080 minimum (retina-ready)
 - File size: < 500KB each (use compression if needed)
@@ -80,6 +81,7 @@ asking-questions/
    - Format: MP4 (H.264 codec)
 
 **Technical Requirements**:
+
 - File size: < 15MB each
 - Captions: WebVTT format (.vtt file)
 - Hosting: Upload to Supabase Storage bucket `module-videos/asking-questions/`
@@ -103,6 +105,7 @@ asking-questions/
    - Exportable as SVG for crisp rendering
 
 **Technical Requirements**:
+
 - Layout: PNG @ 2x resolution (2880x7200 for retina)
 - Diagrams: SVG (preferred) or PNG @ 2x
 - Design system: Match shadcn/ui color palette
@@ -116,30 +119,33 @@ asking-questions/
 
 The module file (`src/content/modules/01-asking-questions.mdx`) contains **8 TODO placeholders**:
 
-| Line | Placeholder | Asset | Status |
-|------|-------------|-------|--------|
-| 30   | `{/* TODO: screenshot here (Console landing hero) */}` | screenshots/console-landing.png | ⏳ Pending |
-| 71   | `{/* TODO: screenshot here (Interact navigation callout) */}` | screenshots/interact-builder.png | ⏳ Pending |
-| 90   | `{/* TODO: screenshot here (Result grid highlighting column sorting) */}` | screenshots/results-grid.png | ⏳ Pending |
-| 220  | `{/* TODO: screenshot here (Targeting dropdown) */}` | screenshots/targeting-dropdown.png | ⏳ Pending |
-| 274  | `{/* TODO: screenshot here (Save Question dialog) */}` | screenshots/save-dialog.png | ⏳ Pending |
-| 304  | `{/* TODO: screenshot here (Export dialog) */}` | screenshots/export-dialog.png | ⏳ Pending |
-| 38   | Micro-screencast embed | videos/01-ask-first-question-90s.mp4 | ⏳ Pending |
-| 386  | Micro-screencast embed | videos/02-rerun-saved-question-90s.mp4 | ⏳ Pending |
+| Line | Placeholder                                                               | Asset                                  | Status     |
+| ---- | ------------------------------------------------------------------------- | -------------------------------------- | ---------- |
+| 30   | `{/* TODO: screenshot here (Console landing hero) */}`                    | screenshots/console-landing.png        | ⏳ Pending |
+| 71   | `{/* TODO: screenshot here (Interact navigation callout) */}`             | screenshots/interact-builder.png       | ⏳ Pending |
+| 90   | `{/* TODO: screenshot here (Result grid highlighting column sorting) */}` | screenshots/results-grid.png           | ⏳ Pending |
+| 220  | `{/* TODO: screenshot here (Targeting dropdown) */}`                      | screenshots/targeting-dropdown.png     | ⏳ Pending |
+| 274  | `{/* TODO: screenshot here (Save Question dialog) */}`                    | screenshots/save-dialog.png            | ⏳ Pending |
+| 304  | `{/* TODO: screenshot here (Export dialog) */}`                           | screenshots/export-dialog.png          | ⏳ Pending |
+| 38   | Micro-screencast embed                                                    | videos/01-ask-first-question-90s.mp4   | ⏳ Pending |
+| 386  | Micro-screencast embed                                                    | videos/02-rerun-saved-question-90s.mp4 | ⏳ Pending |
 
 **Update Pattern** (after asset creation):
+
 ```jsx
 // Before
-{/* TODO: screenshot here (Console landing hero) */}
+{
+  /* TODO: screenshot here (Console landing hero) */
+}
 
 // After
-<Image 
-  src="/modules/asking-questions/screenshots/console-landing.png" 
+<Image
+  src="/modules/asking-questions/screenshots/console-landing.png"
   alt="Tanium Console landing page showing left navigation panel with Interact module highlighted"
   width={1920}
   height={1080}
   priority
-/>
+/>;
 ```
 
 ---

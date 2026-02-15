@@ -8,9 +8,9 @@
  * - Matches assistant message bubble styling
  */
 
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 export const TypingIndicator: React.FC = () => {
   return (
@@ -23,16 +23,16 @@ export const TypingIndicator: React.FC = () => {
       <span className="sr-only">Assistant is typing...</span>
       <div className="flex gap-1">
         <div
-          className="h-2 w-2 animate-typing-bounce rounded-full bg-gray-500"
-          style={{ animationDelay: '0s' }}
+          className="animate-typing-bounce h-2 w-2 rounded-full bg-gray-500"
+          style={{ animationDelay: "0s" }}
         />
         <div
-          className="h-2 w-2 animate-typing-bounce rounded-full bg-gray-500"
-          style={{ animationDelay: '0.2s' }}
+          className="animate-typing-bounce h-2 w-2 rounded-full bg-gray-500"
+          style={{ animationDelay: "0.2s" }}
         />
         <div
-          className="h-2 w-2 animate-typing-bounce rounded-full bg-gray-500"
-          style={{ animationDelay: '0.4s' }}
+          className="animate-typing-bounce h-2 w-2 rounded-full bg-gray-500"
+          style={{ animationDelay: "0.4s" }}
         />
       </div>
     </div>

@@ -53,7 +53,7 @@ export interface QuestionReviewAttempt {
 
 // ==================== REVIEW SESSIONS ====================
 
-export type ReviewSessionType = 'flashcards' | 'questions' | 'mixed';
+export type ReviewSessionType = "flashcards" | "questions" | "mixed";
 
 export interface ReviewSession {
   id: string;
@@ -81,7 +81,7 @@ export interface ReviewSession {
 
 // ==================== UNIFIED QUEUE ====================
 
-export type ReviewItemType = 'flashcard' | 'question';
+export type ReviewItemType = "flashcard" | "question";
 
 export interface ReviewQueueItem {
   // Item identification
@@ -141,11 +141,14 @@ export interface QuestionReviewStats {
   masteredQuestions: number; // srs_reps >= 2 && mastery >= 0.8
   avgMasteryLevel: number; // 0-100
 
-  questionsByDomain: Record<string, {
-    total: number;
-    due: number;
-    avgMastery: number; // 0-100
-  }>;
+  questionsByDomain: Record<
+    string,
+    {
+      total: number;
+      due: number;
+      avgMastery: number; // 0-100
+    }
+  >;
 }
 
 // ==================== UI STATE ====================
@@ -221,12 +224,12 @@ export interface StreakMilestoneEvent {
 
 export interface ReviewNotification {
   id: string;
-  type: 'daily_reminder' | 'streak_risk' | 'milestone' | 'due_items';
+  type: "daily_reminder" | "streak_risk" | "milestone" | "due_items";
   title: string;
   message: string;
   actionText?: string;
   actionUrl?: string;
-  priority: 'low' | 'medium' | 'high';
+  priority: "low" | "medium" | "high";
   createdAt: Date;
   expiresAt?: Date;
   isDismissed: boolean;
@@ -268,52 +271,53 @@ export interface ReviewSettings {
 /**
  * Type guard for ReviewQueueItem
  */
-export function isFlashcardItem(item: ReviewQueueItem): item is ReviewQueueItem & { flashcard: Flashcard } {
-  return item.itemType === 'flashcard' && item.flashcard !== undefined;
+export function isFlashcardItem(
+  item: ReviewQueueItem
+): item is ReviewQueueItem & { flashcard: Flashcard } {
+  return item.itemType === "flashcard" && item.flashcard !== undefined;
 }
 
-export function isQuestionItem(item: ReviewQueueItem): item is ReviewQueueItem & { question: Question } {
-  return item.itemType === 'question' && item.question !== undefined;
+export function isQuestionItem(
+  item: ReviewQueueItem
+): item is ReviewQueueItem & { question: Question } {
+  return item.itemType === "question" && item.question !== undefined;
 }
 
 /**
  * Get mastery level label
  */
 export function getMasteryLabel(mastery: number): string {
-  if (mastery >= 0.9) return 'Mastered';
-  if (mastery >= 0.7) return 'Proficient';
-  if (mastery >= 0.5) return 'Learning';
-  if (mastery >= 0.3) return 'Struggling';
-  return 'New';
+  if (mastery >= 0.9) return "Mastered";
+  if (mastery >= 0.7) return "Proficient";
+  if (mastery >= 0.5) return "Learning";
+  if (mastery >= 0.3) return "Struggling";
+  return "New";
 }
 
 /**
  * Get mastery level color
  */
 export function getMasteryColor(mastery: number): string {
-  if (mastery >= 0.9) return 'text-[#22c55e]';
-  if (mastery >= 0.7) return 'text-blue-600';
-  if (mastery >= 0.5) return 'text-yellow-600';
-  if (mastery >= 0.3) return 'text-orange-600';
-  return 'text-muted-foreground';
+  if (mastery >= 0.9) return "text-[#22c55e]";
+  if (mastery >= 0.7) return "text-blue-600";
+  if (mastery >= 0.5) return "text-yellow-600";
+  if (mastery >= 0.3) return "text-orange-600";
+  return "text-muted-foreground";
 }
 
 /**
  * Format streak display
  */
 export function formatStreak(streak: number): string {
-  if (streak === 0) return 'No streak';
-  if (streak === 1) return '1 day';
+  if (streak === 0) return "No streak";
+  if (streak === 1) return "1 day";
   return `${streak} days`;
 }
 
 /**
  * Calculate session progress percentage
  */
-export function calculateSessionProgress(
-  currentIndex: number,
-  totalItems: number
-): number {
+export function calculateSessionProgress(currentIndex: number, totalItems: number): number {
   if (totalItems === 0) return 0;
   return Math.round((currentIndex / totalItems) * 100);
 }
@@ -325,15 +329,15 @@ export function formatTimeRemaining(seconds: number): string {
   if (seconds < 60) return `${seconds}s`;
   const minutes = Math.floor(seconds / 60);
   const secs = seconds % 60;
-  return `${minutes}:${secs.toString().padStart(2, '0')}`;
+  return `${minutes}:${secs.toString().padStart(2, "0")}`;
 }
 
 /**
  * Get next review interval label
  */
 export function getIntervalLabel(days: number): string {
-  if (days === 0) return 'Now';
-  if (days === 1) return 'Tomorrow';
+  if (days === 0) return "Now";
+  if (days === 1) return "Tomorrow";
   if (days < 7) return `${days} days`;
   if (days < 30) return `${Math.floor(days / 7)} weeks`;
   if (days < 365) return `${Math.floor(days / 30)} months`;

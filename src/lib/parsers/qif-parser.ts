@@ -14,9 +14,9 @@
  *   !Type:xxx = Account type header
  */
 
-import type { ParsedTransaction } from '@/types/budget';
-import { parseDate } from './intl-date-parser';
-import { parseAmount } from './intl-amount-parser';
+import type { ParsedTransaction } from "@/types/budget";
+import { parseDate } from "./intl-date-parser";
+import { parseAmount } from "./intl-amount-parser";
 
 export interface QIFParseOptions {
   locale?: string;
@@ -49,47 +49,46 @@ export function parseQIFFile(content: string, options: QIFParseOptions = {}): Pa
     const value = trimmed.substring(1).trim();
 
     switch (prefix) {
-      case '!':
+      case "!":
         // Type header — skip
         break;
 
-      case 'D':
+      case "D":
         currentDate = value;
         break;
 
-      case 'T':
+      case "T":
         currentAmount = value;
         break;
 
-      case 'P':
+      case "P":
         currentPayee = value;
         break;
 
-      case 'M':
+      case "M":
         currentMemo = value;
         break;
 
-      case 'C':
-        currentCleared = value === '*' || value === 'X' || value.toLowerCase() === 'x';
+      case "C":
+        currentCleared = value === "*" || value === "X" || value.toLowerCase() === "x";
         break;
 
-      case 'N':
+      case "N":
         currentCheckNum = value;
         break;
 
-      case 'L':
+      case "L":
         // Category — skip for now
         break;
 
-      case '^':
+      case "^":
         // End of record — create transaction
         if (currentDate || currentAmount) {
           const date = currentDate ? parseDate(currentDate, locale) : null;
           const amount = currentAmount ? parseAmount(currentAmount, locale) : null;
 
-          const description = [currentPayee, currentMemo]
-            .filter(Boolean)
-            .join(' - ') || 'Unknown Transaction';
+          const description =
+            [currentPayee, currentMemo].filter(Boolean).join(" - ") || "Unknown Transaction";
 
           transactions.push({
             date: date || new Date(),
@@ -98,7 +97,7 @@ export function parseQIFFile(content: string, options: QIFParseOptions = {}): Pa
             isDuplicate: false,
             confidence: date && amount !== null ? 0.9 : 0.5,
             checkNum: currentCheckNum || undefined,
-            sourceFormat: 'qif',
+            sourceFormat: "qif",
             requiresReview: !date || amount === null,
           });
         }
@@ -123,9 +122,8 @@ export function parseQIFFile(content: string, options: QIFParseOptions = {}): Pa
     const date = currentDate ? parseDate(currentDate, locale) : null;
     const amount = currentAmount ? parseAmount(currentAmount, locale) : null;
 
-    const description = [currentPayee, currentMemo]
-      .filter(Boolean)
-      .join(' - ') || 'Unknown Transaction';
+    const description =
+      [currentPayee, currentMemo].filter(Boolean).join(" - ") || "Unknown Transaction";
 
     transactions.push({
       date: date || new Date(),
@@ -134,7 +132,7 @@ export function parseQIFFile(content: string, options: QIFParseOptions = {}): Pa
       isDuplicate: false,
       confidence: date && amount !== null ? 0.9 : 0.5,
       checkNum: currentCheckNum || undefined,
-      sourceFormat: 'qif',
+      sourceFormat: "qif",
       requiresReview: !date || amount === null,
     });
   }
@@ -148,7 +146,7 @@ export function parseQIFFile(content: string, options: QIFParseOptions = {}): Pa
  */
 export function isQIFContent(content: string): boolean {
   const trimmed = content.trim();
-  return trimmed.startsWith('!Type:') || trimmed.startsWith('!type:');
+  return trimmed.startsWith("!Type:") || trimmed.startsWith("!type:");
 }
 
 /**

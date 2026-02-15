@@ -54,11 +54,13 @@ After enough feedback (≥5 corrections with 80% agreement), the system updates 
 ### Visual Indicators
 
 **AI Loading Badge:**
+
 ```
 Category [🧠 AI categorizing...]
 ```
 
 **Confidence Meter:**
+
 ```
 ✓ Auto-categorized as "Food & Dining"
 Confidence: ████████░░ 85%
@@ -67,6 +69,7 @@ Source: OpenAI
 ```
 
 **Learning Confirmation:**
+
 ```
 ✓ Learned!
 After 3 similar corrections, future transactions from
@@ -107,6 +110,7 @@ Merchants marked as subscriptions (e.g., Netflix, Spotify) can be tracked in the
 **Transaction**: `[OP] ONLINE PURCHASE 4NOV2025NETFLIX`
 
 **AI Response**:
+
 - Category: "Entertainment"
 - Subcategory: "Streaming Services"
 - Confidence: 98%
@@ -117,6 +121,7 @@ Merchants marked as subscriptions (e.g., Netflix, Spotify) can be tracked in the
 **Transaction**: `[PR] PEMBRIDGE INS #123 AB`
 
 **AI Response**:
+
 - Category: "Insurance"
 - Subcategory: "Auto Insurance"
 - Confidence: 72%
@@ -136,11 +141,13 @@ Merchants marked as subscriptions (e.g., Netflix, Spotify) can be tracked in the
 ### API Endpoints
 
 **Merchant Resolution:**
+
 ```
 GET /api/merchants/resolve?token=NETFLIX&country=CA
 ```
 
 **Feedback Submission:**
+
 ```
 POST /api/merchants/feedback
 {
@@ -199,6 +206,7 @@ POST /api/merchants/feedback
 ## Support
 
 For issues or questions:
+
 - Check console logs (F12 → Console tab)
 - Review `merchant_feedback` table for feedback history
 - See `MERCHANT_FEEDBACK_AGGREGATION.md` for background job details

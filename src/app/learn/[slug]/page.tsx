@@ -20,7 +20,11 @@ export default async function LearnModulePage({ params }: { params: Promise<{ sl
   if (!module) return notFound();
 
   const skeleton = (moduleSkeletons as any).modules.find((m: any) => m.slug === slug) as
-    | { objectives?: string[]; topics?: string[]; labs?: Array<{ title: string; description?: string }> }
+    | {
+        objectives?: string[];
+        topics?: string[];
+        labs?: Array<{ title: string; description?: string }>;
+      }
     | undefined;
 
   return (
@@ -38,7 +42,9 @@ export default async function LearnModulePage({ params }: { params: Promise<{ sl
       </section>
 
       <section aria-labelledby="objectives-title" className="space-y-2">
-        <h2 id="objectives-title" className="text-lg font-semibold">Learning Objectives</h2>
+        <h2 id="objectives-title" className="text-lg font-semibold">
+          Learning Objectives
+        </h2>
         {skeleton?.objectives?.length ? (
           <ul className="list-disc pl-5 text-sm">
             {skeleton.objectives.map((o, i) => (
@@ -46,12 +52,16 @@ export default async function LearnModulePage({ params }: { params: Promise<{ sl
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-slate-600 dark:text-muted-foreground">Objectives will be added soon.</p>
+          <p className="text-sm text-slate-600 dark:text-muted-foreground">
+            Objectives will be added soon.
+          </p>
         )}
       </section>
 
       <section aria-labelledby="topics-title" className="space-y-2">
-        <h2 id="topics-title" className="text-lg font-semibold">Key Topics</h2>
+        <h2 id="topics-title" className="text-lg font-semibold">
+          Key Topics
+        </h2>
         {skeleton?.topics?.length ? (
           <ul className="list-disc pl-5 text-sm">
             {(skeleton as any).topics.map((t: string, i: number) => (
@@ -59,19 +69,25 @@ export default async function LearnModulePage({ params }: { params: Promise<{ sl
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-slate-600 dark:text-muted-foreground">Topics will be added soon.</p>
+          <p className="text-sm text-slate-600 dark:text-muted-foreground">
+            Topics will be added soon.
+          </p>
         )}
       </section>
       <ModuleVideos slug={module.slug} />
       <section aria-labelledby="labs-title" className="space-y-3">
-        <h2 id="labs-title" className="text-lg font-semibold">Labs</h2>
+        <h2 id="labs-title" className="text-lg font-semibold">
+          Labs
+        </h2>
         {skeleton?.labs?.length ? (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {skeleton.labs.map((lab, i) => (
               <div key={i} className="rounded border p-3">
                 <div className="font-medium">{lab.title}</div>
                 {lab.description ? (
-                  <p className="text-sm text-slate-600 dark:text-muted-foreground">{lab.description}</p>
+                  <p className="text-sm text-slate-600 dark:text-muted-foreground">
+                    {lab.description}
+                  </p>
                 ) : null}
                 <div className="mt-2">
                   <button className="text-sm text-blue-600 hover:underline" disabled>
@@ -82,7 +98,9 @@ export default async function LearnModulePage({ params }: { params: Promise<{ sl
             ))}
           </div>
         ) : (
-          <p className="text-sm text-slate-600 dark:text-muted-foreground">Labs will be added soon.</p>
+          <p className="text-sm text-slate-600 dark:text-muted-foreground">
+            Labs will be added soon.
+          </p>
         )}
       </section>
     </div>

@@ -5,20 +5,20 @@
  * Used by host device to allow other devices to connect.
  */
 
-'use client';
+"use client";
 
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import { QRCodeSVG } from 'qrcode.react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { RefreshCw, Copy, Check, Wifi, Clock } from 'lucide-react';
-import type { PairingQRData } from '@/lib/lan-sync';
+import React, { useEffect, useState, useCallback, useMemo } from "react";
+import { QRCodeSVG } from "qrcode.react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { RefreshCw, Copy, Check, Wifi, Clock } from "lucide-react";
+import type { PairingQRData } from "@/lib/lan-sync";
 import {
   PROTOCOL_VERSION,
   DEFAULT_SYNC_PORT,
   generatePairingCode,
   encodePairingQR,
-} from '@/lib/lan-sync';
+} from "@/lib/lan-sync";
 
 // ============================================================================
 // Types
@@ -61,10 +61,10 @@ export function QRCodeDisplay({
   expiryMinutes = 10,
   size = 200,
   seniorsMode = false,
-  className = '',
+  className = "",
 }: QRCodeDisplayProps) {
   // State
-  const [pairingCode, setPairingCode] = useState<string>('');
+  const [pairingCode, setPairingCode] = useState<string>("");
   const [timestamp, setTimestamp] = useState<number>(Date.now());
   const [timeRemaining, setTimeRemaining] = useState<number>(expiryMinutes * 60);
   const [copied, setCopied] = useState<boolean>(false);
@@ -124,7 +124,7 @@ export function QRCodeDisplay({
   const formatTimeRemaining = useCallback((seconds: number): string => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
   }, []);
 
   // Copy pairing code to clipboard
@@ -134,7 +134,7 @@ export function QRCodeDisplay({
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy:', err);
+      console.error("Failed to copy:", err);
     }
   }, [pairingCode]);
 
@@ -143,22 +143,31 @@ export function QRCodeDisplay({
     return (
       <Card className={`${className} border-yellow-500/50`}>
         <CardHeader>
-          <CardTitle className={seniorsMode ? 'text-2xl' : 'text-lg'}>
-            <Wifi className="inline-block mr-2" />
+          <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>
+            <Wifi className="mr-2 inline-block" />
             Network Setup Required
           </CardTitle>
-          <CardDescription className={seniorsMode ? 'text-lg' : ''}>
+          <CardDescription className={seniorsMode ? "text-lg" : ""}>
             Please enter your local IP address to enable device pairing.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <p className={`text-muted-foreground ${seniorsMode ? 'text-lg' : 'text-sm'}`}>
+          <p className={`text-muted-foreground ${seniorsMode ? "text-lg" : "text-sm"}`}>
             To find your IP address:
           </p>
-          <ul className={`list-disc list-inside mt-2 text-muted-foreground ${seniorsMode ? 'text-lg space-y-2' : 'text-sm space-y-1'}`}>
-            <li><strong>Windows:</strong> Open CMD and type <code>ipconfig</code></li>
-            <li><strong>Mac/Linux:</strong> Open Terminal and type <code>ifconfig</code> or <code>ip addr</code></li>
-            <li><strong>Mobile:</strong> Check WiFi settings</li>
+          <ul
+            className={`mt-2 list-inside list-disc text-muted-foreground ${seniorsMode ? "space-y-2 text-lg" : "space-y-1 text-sm"}`}
+          >
+            <li>
+              <strong>Windows:</strong> Open CMD and type <code>ipconfig</code>
+            </li>
+            <li>
+              <strong>Mac/Linux:</strong> Open Terminal and type <code>ifconfig</code> or{" "}
+              <code>ip addr</code>
+            </li>
+            <li>
+              <strong>Mobile:</strong> Check WiFi settings
+            </li>
           </ul>
         </CardContent>
       </Card>
@@ -168,11 +177,11 @@ export function QRCodeDisplay({
   return (
     <Card className={className}>
       <CardHeader className="text-center">
-        <CardTitle className={seniorsMode ? 'text-2xl' : 'text-lg'}>
-          <Wifi className="inline-block mr-2" />
+        <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>
+          <Wifi className="mr-2 inline-block" />
           Scan to Connect
         </CardTitle>
-        <CardDescription className={seniorsMode ? 'text-lg' : ''}>
+        <CardDescription className={seniorsMode ? "text-lg" : ""}>
           Scan this QR code with another device to pair
         </CardDescription>
       </CardHeader>
@@ -180,7 +189,7 @@ export function QRCodeDisplay({
       <CardContent className="flex flex-col items-center space-y-4">
         {/* QR Code */}
         <div
-          className="bg-white p-4 rounded-lg shadow-inner"
+          className="rounded-lg bg-white p-4 shadow-inner"
           role="img"
           aria-label={`QR code for pairing. Pairing code: ${pairingCode}`}
         >
@@ -197,40 +206,41 @@ export function QRCodeDisplay({
         </div>
 
         {/* Pairing Code Display */}
-        <div className="text-center space-y-2">
-          <p className={`text-muted-foreground ${seniorsMode ? 'text-lg' : 'text-sm'}`}>
+        <div className="space-y-2 text-center">
+          <p className={`text-muted-foreground ${seniorsMode ? "text-lg" : "text-sm"}`}>
             Or enter this code manually:
           </p>
           <div className="flex items-center justify-center gap-2">
             <code
-              className={`font-mono font-bold tracking-widest bg-muted px-4 py-2 rounded-lg ${
-                seniorsMode ? 'text-3xl' : 'text-2xl'
+              className={`rounded-lg bg-muted px-4 py-2 font-mono font-bold tracking-widest ${
+                seniorsMode ? "text-3xl" : "text-2xl"
               }`}
-              aria-label={`Pairing code: ${pairingCode.split('').join(' ')}`}
+              aria-label={`Pairing code: ${pairingCode.split("").join(" ")}`}
             >
               {pairingCode}
             </code>
             <Button
               variant="outline"
-              size={seniorsMode ? 'lg' : 'icon'}
+              size={seniorsMode ? "lg" : "icon"}
               onClick={copyPairingCode}
-              aria-label={copied ? 'Copied' : 'Copy pairing code'}
+              aria-label={copied ? "Copied" : "Copy pairing code"}
             >
               {copied ? (
-                <Check className={seniorsMode ? 'h-6 w-6' : 'h-4 w-4'} />
+                <Check className={seniorsMode ? "h-6 w-6" : "h-4 w-4"} />
               ) : (
-                <Copy className={seniorsMode ? 'h-6 w-6' : 'h-4 w-4'} />
+                <Copy className={seniorsMode ? "h-6 w-6" : "h-4 w-4"} />
               )}
             </Button>
           </div>
         </div>
 
         {/* Connection Info */}
-        <div
-          className={`text-center text-muted-foreground ${seniorsMode ? 'text-lg' : 'text-sm'}`}
-        >
+        <div className={`text-center text-muted-foreground ${seniorsMode ? "text-lg" : "text-sm"}`}>
           <p>
-            Connect to: <code className="bg-muted px-2 py-1 rounded">{ipAddress}:{port}</code>
+            Connect to:{" "}
+            <code className="rounded bg-muted px-2 py-1">
+              {ipAddress}:{port}
+            </code>
           </p>
           <p>Device: {deviceName}</p>
         </div>
@@ -238,21 +248,21 @@ export function QRCodeDisplay({
         {/* Expiry Timer */}
         <div
           className={`flex items-center gap-2 ${
-            timeRemaining < 60 ? 'text-red-500' : 'text-muted-foreground'
-          } ${seniorsMode ? 'text-lg' : 'text-sm'}`}
+            timeRemaining < 60 ? "text-red-500" : "text-muted-foreground"
+          } ${seniorsMode ? "text-lg" : "text-sm"}`}
         >
-          <Clock className={seniorsMode ? 'h-5 w-5' : 'h-4 w-4'} />
+          <Clock className={seniorsMode ? "h-5 w-5" : "h-4 w-4"} />
           <span>Expires in {formatTimeRemaining(timeRemaining)}</span>
         </div>
 
         {/* Refresh Button */}
         <Button
           variant="outline"
-          size={seniorsMode ? 'lg' : 'default'}
+          size={seniorsMode ? "lg" : "default"}
           onClick={regenerateCode}
-          className={seniorsMode ? 'text-lg' : ''}
+          className={seniorsMode ? "text-lg" : ""}
         >
-          <RefreshCw className={`mr-2 ${seniorsMode ? 'h-5 w-5' : 'h-4 w-4'}`} />
+          <RefreshCw className={`mr-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
           Generate New Code
         </Button>
       </CardContent>

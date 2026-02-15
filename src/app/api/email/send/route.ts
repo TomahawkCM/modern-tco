@@ -5,18 +5,14 @@
  * Sends emails using Resend with React Email templates
  */
 
-import { type NextRequest, NextResponse } from 'next/server';
-import {
-  sendEmailWithHeaders,
-  getEmailSubject,
-  isEmailEnabled,
-} from '@/lib/email/resend-client';
+import { type NextRequest, NextResponse } from "next/server";
+import { sendEmailWithHeaders, getEmailSubject, isEmailEnabled } from "@/lib/email/resend-client";
 import {
   BillReminderEmail,
   BudgetAlertEmail,
   GoalMilestoneEmail,
   TestEmail,
-} from '@/components/emails';
+} from "@/components/emails";
 import type {
   SendEmailRequest,
   SendEmailResponse,
@@ -24,7 +20,7 @@ import type {
   BudgetAlertEmailProps,
   GoalMilestoneEmailProps,
   TestEmailProps,
-} from '@/types/email';
+} from "@/types/email";
 
 export async function POST(request: NextRequest): Promise<NextResponse<SendEmailResponse>> {
   // Check if email is enabled
@@ -32,7 +28,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<SendEmail
     return NextResponse.json(
       {
         success: false,
-        error: 'Email notifications are not configured',
+        error: "Email notifications are not configured",
       },
       { status: 503 }
     );
@@ -47,22 +43,22 @@ export async function POST(request: NextRequest): Promise<NextResponse<SendEmail
       return NextResponse.json(
         {
           success: false,
-          error: 'Missing required fields: type and props',
+          error: "Missing required fields: type and props",
         },
         { status: 400 }
       );
     }
 
     // Get email properties
-    const {to} = (props as { to: string });
-    const {unsubscribeToken} = (props as { unsubscribeToken: string });
-    const {baseUrl} = (props as { baseUrl: string });
+    const { to } = props as { to: string };
+    const { unsubscribeToken } = props as { unsubscribeToken: string };
+    const { baseUrl } = props as { baseUrl: string };
 
     if (!to || !unsubscribeToken || !baseUrl) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Missing required fields: to, unsubscribeToken, or baseUrl',
+          error: "Missing required fields: to, unsubscribeToken, or baseUrl",
         },
         { status: 400 }
       );
@@ -75,16 +71,16 @@ export async function POST(request: NextRequest): Promise<NextResponse<SendEmail
     let emailComponent: React.ReactElement;
 
     switch (type) {
-      case 'bill_reminder':
+      case "bill_reminder":
         emailComponent = BillReminderEmail(props as BillReminderEmailProps);
         break;
-      case 'budget_alert':
+      case "budget_alert":
         emailComponent = BudgetAlertEmail(props as BudgetAlertEmailProps);
         break;
-      case 'goal_milestone':
+      case "goal_milestone":
         emailComponent = GoalMilestoneEmail(props as GoalMilestoneEmailProps);
         break;
-      case 'test':
+      case "test":
         emailComponent = TestEmail(props as TestEmailProps);
         break;
       default:
@@ -113,11 +109,11 @@ export async function POST(request: NextRequest): Promise<NextResponse<SendEmail
 
     return NextResponse.json(result);
   } catch (error) {
-    console.error('Email send error:', error);
+    console.error("Email send error:", error);
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred',
+        error: error instanceof Error ? error.message : "Unknown error occurred",
       },
       { status: 500 }
     );
@@ -128,6 +124,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<SendEmail
 export async function GET(): Promise<NextResponse> {
   return NextResponse.json({
     enabled: isEmailEnabled(),
-    status: isEmailEnabled() ? 'ready' : 'not_configured',
+    status: isEmailEnabled() ? "ready" : "not_configured",
   });
 }

@@ -32,7 +32,11 @@ export function computeWeightedCounts(total: number, domains: string[]): Record<
     domain: w.domain,
     raw: (total * w.weight) / weightSum,
   }));
-  const base = raws.map((r) => ({ domain: r.domain, count: Math.floor(r.raw), frac: r.raw - Math.floor(r.raw) }));
+  const base = raws.map((r) => ({
+    domain: r.domain,
+    count: Math.floor(r.raw),
+    frac: r.raw - Math.floor(r.raw),
+  }));
   let remaining = total - base.reduce((s, b) => s + b.count, 0);
   // Sort by largest fractional part, tie-break by weight desc
   const order = [...base].sort((a, b) => {
@@ -86,4 +90,3 @@ function normalizeQuestion(q: Question): Question {
     options: (q as any).options ?? q.choices,
   };
 }
-

@@ -5,23 +5,17 @@
  * is not available or fails.
  */
 
-'use client';
+"use client";
 
-import React, { useState, useCallback } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import {
-  Keyboard,
-  AlertCircle,
-  Loader2,
-  CheckCircle2,
-  HelpCircle,
-} from 'lucide-react';
-import type { PairingQRData } from '@/lib/lan-sync';
-import { PROTOCOL_VERSION, DEFAULT_SYNC_PORT } from '@/lib/lan-sync';
+import React, { useState, useCallback } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Keyboard, AlertCircle, Loader2, CheckCircle2, HelpCircle } from "lucide-react";
+import type { PairingQRData } from "@/lib/lan-sync";
+import { PROTOCOL_VERSION, DEFAULT_SYNC_PORT } from "@/lib/lan-sync";
 
 // ============================================================================
 // Types
@@ -50,15 +44,16 @@ interface FormErrors {
 // Validation
 // ============================================================================
 
-const IP_REGEX = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+const IP_REGEX =
+  /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 const CODE_REGEX = /^[A-Z0-9]{6}$/;
 
 function validateIP(ip: string): string | undefined {
   if (!ip.trim()) {
-    return 'IP address is required';
+    return "IP address is required";
   }
   if (!IP_REGEX.test(ip.trim())) {
-    return 'Invalid IP address format (e.g., 192.168.1.100)';
+    return "Invalid IP address format (e.g., 192.168.1.100)";
   }
   return undefined;
 }
@@ -69,18 +64,18 @@ function validatePort(port: string): string | undefined {
   }
   const portNum = parseInt(port, 10);
   if (isNaN(portNum) || portNum < 1 || portNum > 65535) {
-    return 'Port must be between 1 and 65535';
+    return "Port must be between 1 and 65535";
   }
   return undefined;
 }
 
 function validateCode(code: string): string | undefined {
   if (!code.trim()) {
-    return 'Pairing code is required';
+    return "Pairing code is required";
   }
-  const normalized = code.trim().toUpperCase().replace(/\s/g, '');
+  const normalized = code.trim().toUpperCase().replace(/\s/g, "");
   if (!CODE_REGEX.test(normalized)) {
-    return 'Pairing code must be 6 alphanumeric characters';
+    return "Pairing code must be 6 alphanumeric characters";
   }
   return undefined;
 }
@@ -94,12 +89,12 @@ export function ManualPairingEntry({
   onError,
   isSubmitting = false,
   seniorsMode = false,
-  className = '',
+  className = "",
 }: ManualPairingEntryProps) {
   // Form state
-  const [ip, setIp] = useState('');
-  const [port, setPort] = useState('');
-  const [code, setCode] = useState('');
+  const [ip, setIp] = useState("");
+  const [port, setPort] = useState("");
+  const [code, setCode] = useState("");
   const [errors, setErrors] = useState<FormErrors>({});
   const [showHelp, setShowHelp] = useState(false);
 
@@ -121,8 +116,8 @@ export function ManualPairingEntry({
       e.preventDefault();
 
       if (!validateForm()) {
-        const errorMessages = Object.values(errors).filter(Boolean).join(', ');
-        onError?.(errorMessages || 'Please fix the form errors');
+        const errorMessages = Object.values(errors).filter(Boolean).join(", ");
+        onError?.(errorMessages || "Please fix the form errors");
         return;
       }
 
@@ -130,9 +125,9 @@ export function ManualPairingEntry({
         version: PROTOCOL_VERSION,
         ip: ip.trim(),
         port: port.trim() ? parseInt(port, 10) : DEFAULT_SYNC_PORT,
-        code: code.trim().toUpperCase().replace(/\s/g, ''),
-        pubKey: '', // Will be fetched from server during handshake
-        deviceName: 'Unknown Device', // Will be received during handshake
+        code: code.trim().toUpperCase().replace(/\s/g, ""),
+        pubKey: "", // Will be fetched from server during handshake
+        deviceName: "Unknown Device", // Will be received during handshake
         timestamp: Date.now(),
       };
 
@@ -142,42 +137,52 @@ export function ManualPairingEntry({
   );
 
   // Handle code input with auto-uppercase
-  const handleCodeChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
-    setCode(value);
-    if (errors.code) {
-      setErrors((prev) => ({ ...prev, code: undefined }));
-    }
-  }, [errors.code]);
+  const handleCodeChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, "")
+        .slice(0, 6);
+      setCode(value);
+      if (errors.code) {
+        setErrors((prev) => ({ ...prev, code: undefined }));
+      }
+    },
+    [errors.code]
+  );
 
   // Handle IP input
-  const handleIpChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setIp(e.target.value);
-    if (errors.ip) {
-      setErrors((prev) => ({ ...prev, ip: undefined }));
-    }
-  }, [errors.ip]);
+  const handleIpChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setIp(e.target.value);
+      if (errors.ip) {
+        setErrors((prev) => ({ ...prev, ip: undefined }));
+      }
+    },
+    [errors.ip]
+  );
 
   // Handle port input
-  const handlePortChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/[^0-9]/g, '').slice(0, 5);
-    setPort(value);
-    if (errors.port) {
-      setErrors((prev) => ({ ...prev, port: undefined }));
-    }
-  }, [errors.port]);
+  const handlePortChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value.replace(/[^0-9]/g, "").slice(0, 5);
+      setPort(value);
+      if (errors.port) {
+        setErrors((prev) => ({ ...prev, port: undefined }));
+      }
+    },
+    [errors.port]
+  );
 
-  const inputSize = seniorsMode ? 'text-lg py-3' : '';
-  const labelSize = seniorsMode ? 'text-lg' : '';
+  const inputSize = seniorsMode ? "text-lg py-3" : "";
+  const labelSize = seniorsMode ? "text-lg" : "";
 
   return (
     <Card className={className}>
       <CardHeader className="text-center">
-        <Keyboard className="h-12 w-12 mx-auto text-muted-foreground mb-2" />
-        <CardTitle className={seniorsMode ? 'text-2xl' : 'text-lg'}>
-          Manual Entry
-        </CardTitle>
-        <CardDescription className={seniorsMode ? 'text-lg' : ''}>
+        <Keyboard className="mx-auto mb-2 h-12 w-12 text-muted-foreground" />
+        <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>Manual Entry</CardTitle>
+        <CardDescription className={seniorsMode ? "text-lg" : ""}>
           Enter the connection details shown on the host device
         </CardDescription>
       </CardHeader>
@@ -196,8 +201,8 @@ export function ManualPairingEntry({
               value={ip}
               onChange={handleIpChange}
               disabled={isSubmitting}
-              className={`${inputSize} ${errors.ip ? 'border-red-500' : ''}`}
-              aria-describedby={errors.ip ? 'ip-error' : undefined}
+              className={`${inputSize} ${errors.ip ? "border-red-500" : ""}`}
+              aria-describedby={errors.ip ? "ip-error" : undefined}
               aria-invalid={!!errors.ip}
             />
             {errors.ip && (
@@ -210,8 +215,8 @@ export function ManualPairingEntry({
           {/* Port */}
           <div className="space-y-2">
             <Label htmlFor="port" className={labelSize}>
-              Port{' '}
-              <span className="text-muted-foreground font-normal">
+              Port{" "}
+              <span className="font-normal text-muted-foreground">
                 (optional, default: {DEFAULT_SYNC_PORT})
               </span>
             </Label>
@@ -223,8 +228,8 @@ export function ManualPairingEntry({
               value={port}
               onChange={handlePortChange}
               disabled={isSubmitting}
-              className={`${inputSize} ${errors.port ? 'border-red-500' : ''}`}
-              aria-describedby={errors.port ? 'port-error' : undefined}
+              className={`${inputSize} ${errors.port ? "border-red-500" : ""}`}
+              aria-describedby={errors.port ? "port-error" : undefined}
               aria-invalid={!!errors.port}
             />
             {errors.port && (
@@ -247,9 +252,9 @@ export function ManualPairingEntry({
               onChange={handleCodeChange}
               disabled={isSubmitting}
               className={`${inputSize} font-mono tracking-widest ${
-                errors.code ? 'border-red-500' : ''
+                errors.code ? "border-red-500" : ""
               }`}
-              aria-describedby={errors.code ? 'code-error' : 'code-hint'}
+              aria-describedby={errors.code ? "code-error" : "code-hint"}
               aria-invalid={!!errors.code}
               maxLength={6}
             />
@@ -272,8 +277,8 @@ export function ManualPairingEntry({
             onClick={() => setShowHelp(!showHelp)}
             className="w-full"
           >
-            <HelpCircle className="h-4 w-4 mr-2" />
-            {showHelp ? 'Hide Help' : 'Where do I find these?'}
+            <HelpCircle className="mr-2 h-4 w-4" />
+            {showHelp ? "Hide Help" : "Where do I find these?"}
           </Button>
 
           {/* Help Content */}
@@ -281,14 +286,13 @@ export function ManualPairingEntry({
             <Alert>
               <HelpCircle className="h-4 w-4" />
               <AlertTitle>Finding Connection Details</AlertTitle>
-              <AlertDescription className={seniorsMode ? 'text-base' : 'text-sm'}>
-                <ol className="list-decimal list-inside space-y-1 mt-2">
+              <AlertDescription className={seniorsMode ? "text-base" : "text-sm"}>
+                <ol className="mt-2 list-inside list-decimal space-y-1">
                   <li>Open Budget App on the device you want to sync with</li>
                   <li>Go to Settings → LAN Sync</li>
                   <li>Tap &quot;Allow Connections&quot;</li>
                   <li>
-                    The IP address, port, and pairing code will be displayed
-                    below the QR code
+                    The IP address, port, and pairing code will be displayed below the QR code
                   </li>
                 </ol>
               </AlertDescription>
@@ -298,18 +302,18 @@ export function ManualPairingEntry({
           {/* Submit Button */}
           <Button
             type="submit"
-            size={seniorsMode ? 'lg' : 'default'}
-            className={`w-full ${seniorsMode ? 'text-lg py-6' : ''}`}
+            size={seniorsMode ? "lg" : "default"}
+            className={`w-full ${seniorsMode ? "py-6 text-lg" : ""}`}
             disabled={isSubmitting}
           >
             {isSubmitting ? (
               <>
-                <Loader2 className={`mr-2 animate-spin ${seniorsMode ? 'h-6 w-6' : 'h-4 w-4'}`} />
+                <Loader2 className={`mr-2 animate-spin ${seniorsMode ? "h-6 w-6" : "h-4 w-4"}`} />
                 Connecting...
               </>
             ) : (
               <>
-                <CheckCircle2 className={`mr-2 ${seniorsMode ? 'h-6 w-6' : 'h-4 w-4'}`} />
+                <CheckCircle2 className={`mr-2 ${seniorsMode ? "h-6 w-6" : "h-4 w-4"}`} />
                 Connect
               </>
             )}

@@ -14,10 +14,10 @@
  *   <HelpfulError error={humanizeError(unknownError)} />
  */
 
-import React from 'react';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { AlertCircle, Info, AlertTriangle } from 'lucide-react';
-import type { HelpfulErrorMessage } from '@/lib/error-messages';
+import React from "react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle, Info, AlertTriangle } from "lucide-react";
+import type { HelpfulErrorMessage } from "@/lib/error-messages";
 
 interface HelpfulErrorProps {
   error: HelpfulErrorMessage;
@@ -25,28 +25,28 @@ interface HelpfulErrorProps {
   showIcon?: boolean;
 }
 
-export function HelpfulError({ error, className = '', showIcon = true }: HelpfulErrorProps) {
+export function HelpfulError({ error, className = "", showIcon = true }: HelpfulErrorProps) {
   // Determine icon and styles based on variant
   const getVariantStyles = () => {
     switch (error.variant) {
-      case 'destructive':
+      case "destructive":
         return {
           icon: AlertCircle,
-          iconColor: 'text-red-600',
-          alertVariant: 'destructive' as const,
+          iconColor: "text-red-600",
+          alertVariant: "destructive" as const,
         };
-      case 'warning':
+      case "warning":
         return {
           icon: AlertTriangle,
-          iconColor: 'text-orange-500',
-          alertVariant: 'default' as const,
+          iconColor: "text-orange-500",
+          alertVariant: "default" as const,
         };
-      case 'default':
+      case "default":
       default:
         return {
           icon: Info,
-          iconColor: 'text-teal-500',
-          alertVariant: 'default' as const,
+          iconColor: "text-teal-500",
+          alertVariant: "default" as const,
         };
     }
   };
@@ -60,8 +60,8 @@ export function HelpfulError({ error, className = '', showIcon = true }: Helpful
       <AlertDescription className="mt-2">
         <p className="mb-1">{error.message}</p>
         {error.action && (
-          <p className="text-sm font-medium mt-2">
-            <span className="inline-block mr-1">→</span>
+          <p className="mt-2 text-sm font-medium">
+            <span className="mr-1 inline-block">→</span>
             {error.action}
           </p>
         )}
@@ -73,17 +73,21 @@ export function HelpfulError({ error, className = '', showIcon = true }: Helpful
 /**
  * Inline variant for compact displays (e.g., form validation)
  */
-export function HelpfulErrorInline({ error, className = '' }: HelpfulErrorProps) {
-  const iconColor = error.variant === 'destructive' ? 'text-red-600' :
-                    error.variant === 'warning' ? 'text-orange-500' : 'text-teal-500';
+export function HelpfulErrorInline({ error, className = "" }: HelpfulErrorProps) {
+  const iconColor =
+    error.variant === "destructive"
+      ? "text-red-600"
+      : error.variant === "warning"
+        ? "text-orange-500"
+        : "text-teal-500";
 
   return (
     <div className={`text-sm ${iconColor} ${className}`}>
       <p className="font-medium">{error.title}</p>
       <p className="mt-1">{error.message}</p>
       {error.action && (
-        <p className="text-xs mt-1 opacity-90">
-          <span className="inline-block mr-1">→</span>
+        <p className="mt-1 text-xs opacity-90">
+          <span className="mr-1 inline-block">→</span>
           {error.action}
         </p>
       )}
@@ -97,11 +101,11 @@ export function HelpfulErrorInline({ error, className = '' }: HelpfulErrorProps)
 export function formatErrorForToast(error: HelpfulErrorMessage): {
   title: string;
   description: string;
-  variant: 'default' | 'destructive';
+  variant: "default" | "destructive";
 } {
   return {
     title: error.title,
-    description: `${error.message}${error.action ? ` ${error.action}` : ''}`,
-    variant: error.variant === 'destructive' ? 'destructive' : 'default',
+    description: `${error.message}${error.action ? ` ${error.action}` : ""}`,
+    variant: error.variant === "destructive" ? "destructive" : "default",
   };
 }

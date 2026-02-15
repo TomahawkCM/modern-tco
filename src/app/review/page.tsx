@@ -41,7 +41,10 @@ export default function ReviewPage() {
 
   // Get real incorrect answers from context and convert to Question format
   // Memoize to prevent infinite re-renders from context function calls
-  const incorrectAnswersRaw = useMemo(() => getRecentIncorrectAnswers(100), [getRecentIncorrectAnswers]);
+  const incorrectAnswersRaw = useMemo(
+    () => getRecentIncorrectAnswers(100),
+    [getRecentIncorrectAnswers]
+  );
 
   // Convert IncorrectAnswer to Question format for compatibility with QuestionCard
   // Use useMemo to prevent infinite re-renders
@@ -68,12 +71,19 @@ export default function ReviewPage() {
   );
 
   // Removed filteredQuestions state - using computed value directly to prevent infinite loops
-  const [currentQuestionIndex, setCurrentQuestionIndex] = usePersistentState<number>(`tco:review:currentIndex${scope}`, 0);
-  const [selectedFilters, setSelectedFilters] = usePersistentState<{ domain: string; difficulty: string; recent: string }>(
-    `tco:review:filters${scope}`,
-    { domain: "all", difficulty: "all", recent: "all" }
+  const [currentQuestionIndex, setCurrentQuestionIndex] = usePersistentState<number>(
+    `tco:review:currentIndex${scope}`,
+    0
   );
-  const [activeTab, setActiveTab] = usePersistentState<string>(`tco:review:activeTab${scope}`, "questions");
+  const [selectedFilters, setSelectedFilters] = usePersistentState<{
+    domain: string;
+    difficulty: string;
+    recent: string;
+  }>(`tco:review:filters${scope}`, { domain: "all", difficulty: "all", recent: "all" });
+  const [activeTab, setActiveTab] = usePersistentState<string>(
+    `tco:review:activeTab${scope}`,
+    "questions"
+  );
 
   // Apply filters - use useMemo instead of useEffect to prevent infinite re-renders
   const filteredQuestionsComputed = useMemo(() => {
@@ -160,381 +170,380 @@ export default function ReviewPage() {
   };
 
   if (incorrectAnswersRaw.length === 0) {
-  return (
-        <div className="mx-auto max-w-4xl space-y-8">
-          <div className="text-center">
-            <h1 className="mb-4 text-4xl font-bold text-foreground">Review</h1>
-            <p className="mb-8 text-xl text-muted-foreground">
-              Review your incorrect answers and learn from mistakes
-            </p>
-          </div>
-
-          <Card className="glass border-white/10">
-            <CardContent className="py-12 text-center">
-              <CheckCircle className="mx-auto mb-4 h-16 w-16 text-[#22c55e]" />
-              <h2 className="mb-2 text-2xl font-bold text-foreground">Great job!</h2>
-              <p className="mb-6 text-muted-foreground">
-                You don&rsquo;t have any incorrect answers to review yet. Take some practice tests
-                to see questions here.
-              </p>
-              <div className="space-x-4">
-                <Button
-                  onClick={() => router.push("/practice")}
-                  className="bg-tanium-accent hover:bg-blue-600"
-                >
-                  <Target className="mr-2 h-4 w-4" />
-                  Start Practice
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => router.push("/mock")}
-                  className="border-white/20 text-foreground hover:bg-white/10"
-                >
-                  <BookOpen className="mr-2 h-4 w-4" />
-                  Take Mock Exam
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      
-  );
-  }
-
-  return (
-    
-      <div className="mx-auto max-w-6xl space-y-6">
-        {/* Header */}
+    return (
+      <div className="mx-auto max-w-4xl space-y-8">
         <div className="text-center">
-          <h1 className="mb-4 text-4xl font-bold text-foreground">Review Center</h1>
-          <p className="mb-6 text-xl text-muted-foreground">
-            Learn from your mistakes and improve your performance
+          <h1 className="mb-4 text-4xl font-bold text-foreground">Review</h1>
+          <p className="mb-8 text-xl text-muted-foreground">
+            Review your incorrect answers and learn from mistakes
           </p>
         </div>
 
-        <div className="space-y-6">
-          {/* Custom Tabs Header */}
-          <div className="glass grid w-full grid-cols-2 rounded-lg border border-white/10 p-1">
-            <button
-              onClick={() => setActiveTab("questions")}
-              className={cn(
-                "flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all",
-                "text-foreground hover:bg-white/10",
-                activeTab === "questions" ? "bg-tanium-accent" : "bg-transparent"
-              )}
-            >
-              <Eye className="h-4 w-4" />
-              Review Questions
-            </button>
-            <button
-              onClick={() => setActiveTab("analytics")}
-              className={cn(
-                "flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all",
-                "text-foreground hover:bg-white/10",
-                activeTab === "analytics" ? "bg-tanium-accent" : "bg-transparent"
-              )}
-            >
-              <TrendingUp className="h-4 w-4" />
-              Performance Analytics
-            </button>
-          </div>
+        <Card className="glass border-white/10">
+          <CardContent className="py-12 text-center">
+            <CheckCircle className="mx-auto mb-4 h-16 w-16 text-[#22c55e]" />
+            <h2 className="mb-2 text-2xl font-bold text-foreground">Great job!</h2>
+            <p className="mb-6 text-muted-foreground">
+              You don&rsquo;t have any incorrect answers to review yet. Take some practice tests to
+              see questions here.
+            </p>
+            <div className="space-x-4">
+              <Button
+                onClick={() => router.push("/practice")}
+                className="bg-tanium-accent hover:bg-blue-600"
+              >
+                <Target className="mr-2 h-4 w-4" />
+                Start Practice
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => router.push("/mock")}
+                className="border-white/20 text-foreground hover:bg-white/10"
+              >
+                <BookOpen className="mr-2 h-4 w-4" />
+                Take Mock Exam
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
-          {/* Questions Tab Content */}
-          {activeTab === "questions" && (
-            <div className="space-y-6">
-              {/* Filters */}
+  return (
+    <div className="mx-auto max-w-6xl space-y-6">
+      {/* Header */}
+      <div className="text-center">
+        <h1 className="mb-4 text-4xl font-bold text-foreground">Review Center</h1>
+        <p className="mb-6 text-xl text-muted-foreground">
+          Learn from your mistakes and improve your performance
+        </p>
+      </div>
+
+      <div className="space-y-6">
+        {/* Custom Tabs Header */}
+        <div className="glass grid w-full grid-cols-2 rounded-lg border border-white/10 p-1">
+          <button
+            onClick={() => setActiveTab("questions")}
+            className={cn(
+              "flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all",
+              "text-foreground hover:bg-white/10",
+              activeTab === "questions" ? "bg-tanium-accent" : "bg-transparent"
+            )}
+          >
+            <Eye className="h-4 w-4" />
+            Review Questions
+          </button>
+          <button
+            onClick={() => setActiveTab("analytics")}
+            className={cn(
+              "flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all",
+              "text-foreground hover:bg-white/10",
+              activeTab === "analytics" ? "bg-tanium-accent" : "bg-transparent"
+            )}
+          >
+            <TrendingUp className="h-4 w-4" />
+            Performance Analytics
+          </button>
+        </div>
+
+        {/* Questions Tab Content */}
+        {activeTab === "questions" && (
+          <div className="space-y-6">
+            {/* Filters */}
+            <Card className="glass border-white/10">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-foreground">
+                  <Filter className="h-5 w-5" />
+                  Filter Questions
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-4 md:grid-cols-3">
+                  <div>
+                    <label className="mb-2 block text-sm text-muted-foreground">Domain</label>
+                    <select
+                      value={selectedFilters.domain}
+                      onChange={(e) =>
+                        setSelectedFilters((prev) => ({ ...prev, domain: e.target.value }))
+                      }
+                      className="h-10 w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="all">All Domains</option>
+                      <option value={TCODomain.ASKING_QUESTIONS}>Asking Questions</option>
+                      <option value={TCODomain.REFINING_TARGETING}>Refining Questions</option>
+                      <option value={TCODomain.TAKING_ACTION}>Taking Action</option>
+                      <option value={TCODomain.NAVIGATION_MODULES}>
+                        Navigation and Basic Module Functions
+                      </option>
+                      <option value={TCODomain.REPORTING_EXPORT}>
+                        Report Generation and Data Export
+                      </option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="mb-2 block text-sm text-muted-foreground">Difficulty</label>
+                    <select
+                      value={selectedFilters.difficulty}
+                      onChange={(e) =>
+                        setSelectedFilters((prev) => ({ ...prev, difficulty: e.target.value }))
+                      }
+                      className="h-10 w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="all">All Levels</option>
+                      <option value={Difficulty.BEGINNER}>Beginner</option>
+                      <option value={Difficulty.INTERMEDIATE}>Intermediate</option>
+                      <option value={Difficulty.ADVANCED}>Advanced</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="mb-2 block text-sm text-muted-foreground">Time Period</label>
+                    <select
+                      value={selectedFilters.recent}
+                      onChange={(e) =>
+                        setSelectedFilters((prev) => ({ ...prev, recent: e.target.value }))
+                      }
+                      className="h-10 w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="all">All Time</option>
+                      <option value="1">Last 24 hours</option>
+                      <option value="7">Last 7 days</option>
+                      <option value="30">Last 30 days</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex items-center justify-between">
+                  <div className="text-sm text-muted-foreground">
+                    Showing {filteredQuestionsComputed.length} of {incorrectAnswersRaw.length}{" "}
+                    incorrect answers
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      setSelectedFilters({ domain: "all", difficulty: "all", recent: "all" })
+                    }
+                    className="border-white/20 text-foreground hover:bg-white/10"
+                  >
+                    <RotateCcw className="mr-2 h-4 w-4" />
+                    Reset Filters
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {filteredQuestionsComputed.length > 0 ? (
+              <>
+                {/* Current question display */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-xl font-bold text-foreground">
+                      Question {currentQuestionIndex + 1} of {filteredQuestionsComputed.length}
+                    </h2>
+                    <p className="text-muted-foreground">
+                      Review and understand the correct answer
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Badge
+                      variant="destructive"
+                      className="border-red-400 bg-red-900/20 text-red-400"
+                    >
+                      <XCircle className="mr-1 h-3 w-3" />
+                      Incorrect
+                    </Badge>
+                    <Badge variant="outline" className="border-white/20 text-foreground">
+                      {currentQuestion?.domain}
+                    </Badge>
+                  </div>
+                </div>
+
+                {/* Question card with explanation */}
+                {currentQuestion && (
+                  <div className="space-y-4">
+                    <QuestionCard
+                      question={currentQuestion}
+                      questionNumber={currentQuestionIndex + 1}
+                      totalQuestions={filteredQuestionsComputed.length}
+                      selectedAnswer={currentQuestion.userAnswer}
+                      showCorrectAnswer={true}
+                      showExplanation={true}
+                      mode="review"
+                      disabled={true}
+                      onAnswerSelect={() => {}} // No-op handler for review mode
+                    />
+
+                    {/* Additional info */}
+                    <Alert className="border-blue-200 bg-blue-50/10 dark:border-blue-800 dark:bg-blue-900/20">
+                      <AlertTriangle className="h-4 w-4 text-primary" />
+                      <AlertDescription className="text-muted-foreground">
+                        <strong>Study Tip:</strong> Re-read the question carefully and note the key
+                        concepts mentioned in the explanation above.
+                      </AlertDescription>
+                    </Alert>
+                  </div>
+                )}
+
+                {/* Navigation */}
+                <div className="flex items-center justify-between">
+                  <Button
+                    variant="outline"
+                    onClick={handlePrevious}
+                    disabled={currentQuestionIndex === 0}
+                    className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
+                  >
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Previous
+                  </Button>
+
+                  <Button
+                    onClick={() => router.push("/practice")}
+                    className="bg-tanium-accent hover:bg-blue-600"
+                  >
+                    <Target className="mr-2 h-4 w-4" />
+                    Practice More
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    onClick={handleNext}
+                    disabled={currentQuestionIndex === filteredQuestionsComputed.length - 1}
+                    className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
+                  >
+                    Next
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <Card className="glass border-white/10">
+                <CardContent className="py-12 text-center">
+                  <Filter className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+                  <h3 className="mb-2 text-xl font-bold text-foreground">
+                    No questions match your filters
+                  </h3>
+                  <p className="mb-4 text-muted-foreground">
+                    Try adjusting your filter criteria to see more questions.
+                  </p>
+                  <Button
+                    variant="outline"
+                    onClick={() =>
+                      setSelectedFilters({ domain: "all", difficulty: "all", recent: "all" })
+                    }
+                    className="border-white/20 text-foreground hover:bg-white/10"
+                  >
+                    Clear Filters
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        )}
+
+        {/* Analytics Tab Content */}
+        {activeTab === "analytics" && (
+          <div className="space-y-6">
+            {/* New Analytics Table */}
+            <ReviewAnalyticsTable
+              incorrectAnswers={incorrectAnswersRaw.map((answer) => ({
+                questionId: answer.questionId,
+                domain: answer.domain,
+                difficulty: Difficulty.INTERMEDIATE, // Default since IncorrectAnswer doesn't have difficulty
+                reviewed: answer.reviewed,
+                timestamp: answer.timestamp,
+              }))}
+              onDomainFilter={(domain) => {
+                if (domain !== "all") {
+                  setSelectedFilters((prev) => ({ ...prev, domain }));
+                  setActiveTab("questions");
+                }
+              }}
+            />
+
+            <div className="grid gap-6 md:grid-cols-2">
+              {/* Domain breakdown */}
               <Card className="glass border-white/10">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-foreground">
-                    <Filter className="h-5 w-5" />
-                    Filter Questions
-                  </CardTitle>
+                  <CardTitle className="text-foreground">Incorrect by Domain</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="grid gap-4 md:grid-cols-3">
-                    <div>
-                      <label className="mb-2 block text-sm text-muted-foreground">Domain</label>
-                      <select
-                        value={selectedFilters.domain}
-                        onChange={(e) =>
-                          setSelectedFilters((prev) => ({ ...prev, domain: e.target.value }))
-                        }
-                        className="h-10 w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      >
-                        <option value="all">All Domains</option>
-                        <option value={TCODomain.ASKING_QUESTIONS}>Asking Questions</option>
-                        <option value={TCODomain.REFINING_TARGETING}>Refining Questions</option>
-                        <option value={TCODomain.TAKING_ACTION}>Taking Action</option>
-                        <option value={TCODomain.NAVIGATION_MODULES}>
-                          Navigation and Basic Module Functions
-                        </option>
-                        <option value={TCODomain.REPORTING_EXPORT}>
-                          Report Generation and Data Export
-                        </option>
-                      </select>
+                <CardContent className="space-y-4">
+                  {localDomainStats.map(({ domain, count, percentage }) => (
+                    <div key={domain} className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">{domain}</span>
+                        <span className="text-foreground">
+                          {count} ({percentage}%)
+                        </span>
+                      </div>
+                      <div className="h-2 w-full rounded-full bg-gray-700">
+                        <div
+                          className="h-2 rounded-full bg-red-500"
+                          style={{ width: `${percentage}%` }}
+                        />
+                      </div>
                     </div>
-
-                    <div>
-                      <label className="mb-2 block text-sm text-muted-foreground">Difficulty</label>
-                      <select
-                        value={selectedFilters.difficulty}
-                        onChange={(e) =>
-                          setSelectedFilters((prev) => ({ ...prev, difficulty: e.target.value }))
-                        }
-                        className="h-10 w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      >
-                        <option value="all">All Levels</option>
-                        <option value={Difficulty.BEGINNER}>Beginner</option>
-                        <option value={Difficulty.INTERMEDIATE}>Intermediate</option>
-                        <option value={Difficulty.ADVANCED}>Advanced</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="mb-2 block text-sm text-muted-foreground">Time Period</label>
-                      <select
-                        value={selectedFilters.recent}
-                        onChange={(e) =>
-                          setSelectedFilters((prev) => ({ ...prev, recent: e.target.value }))
-                        }
-                        className="h-10 w-full rounded-md border border-white/20 bg-black/40 px-3 py-2 text-sm text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      >
-                        <option value="all">All Time</option>
-                        <option value="1">Last 24 hours</option>
-                        <option value="7">Last 7 days</option>
-                        <option value="30">Last 30 days</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="text-sm text-muted-foreground">
-                      Showing {filteredQuestionsComputed.length} of {incorrectAnswersRaw.length} incorrect
-                      answers
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() =>
-                        setSelectedFilters({ domain: "all", difficulty: "all", recent: "all" })
-                      }
-                      className="border-white/20 text-foreground hover:bg-white/10"
-                    >
-                      <RotateCcw className="mr-2 h-4 w-4" />
-                      Reset Filters
-                    </Button>
-                  </div>
+                  ))}
                 </CardContent>
               </Card>
 
-              {filteredQuestionsComputed.length > 0 ? (
-                <>
-                  {/* Current question display */}
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h2 className="text-xl font-bold text-foreground">
-                        Question {currentQuestionIndex + 1} of {filteredQuestionsComputed.length}
-                      </h2>
-                      <p className="text-muted-foreground">Review and understand the correct answer</p>
+              {/* Difficulty breakdown */}
+              <Card className="glass border-white/10">
+                <CardHeader>
+                  <CardTitle className="text-foreground">Incorrect by Difficulty</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {difficultyStats.map(({ difficulty, count, percentage }) => (
+                    <div key={difficulty} className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">{difficulty}</span>
+                        <span className="text-foreground">
+                          {count} ({percentage}%)
+                        </span>
+                      </div>
+                      <div className="h-2 w-full rounded-full bg-gray-700">
+                        <div
+                          className="h-2 rounded-full bg-yellow-500"
+                          style={{ width: `${percentage}%` }}
+                        />
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Badge
-                        variant="destructive"
-                        className="border-red-400 bg-red-900/20 text-red-400"
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Recommendations */}
+            <Card className="glass border-white/10">
+              <CardHeader>
+                <CardTitle className="text-foreground">Study Recommendations</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {localDomainStats
+                    .sort((a, b) => b.count - a.count)
+                    .slice(0, 3)
+                    .map(({ domain, count }) => (
+                      <Alert
+                        key={domain}
+                        className="border-yellow-200 bg-yellow-50/10 dark:bg-yellow-900/20"
                       >
-                        <XCircle className="mr-1 h-3 w-3" />
-                        Incorrect
-                      </Badge>
-                      <Badge variant="outline" className="border-white/20 text-foreground">
-                        {currentQuestion?.domain}
-                      </Badge>
-                    </div>
-                  </div>
-
-                  {/* Question card with explanation */}
-                  {currentQuestion && (
-                    <div className="space-y-4">
-                      <QuestionCard
-                        question={currentQuestion}
-                        questionNumber={currentQuestionIndex + 1}
-                        totalQuestions={filteredQuestionsComputed.length}
-                        selectedAnswer={currentQuestion.userAnswer}
-                        showCorrectAnswer={true}
-                        showExplanation={true}
-                        mode="review"
-                        disabled={true}
-                        onAnswerSelect={() => {}} // No-op handler for review mode
-                      />
-
-                      {/* Additional info */}
-                      <Alert className="border-blue-200 bg-blue-50/10 dark:border-blue-800 dark:bg-blue-900/20">
-                        <AlertTriangle className="h-4 w-4 text-primary" />
-                        <AlertDescription className="text-muted-foreground">
-                          <strong>Study Tip:</strong> Re-read the question carefully and note the
-                          key concepts mentioned in the explanation above.
+                        <BookOpen className="h-4 w-4 text-[#f97316]" />
+                        <AlertDescription className="text-[#f97316]">
+                          <strong>Focus on {domain}</strong>
+                          <br />
+                          You missed {count} questions in this domain. Consider additional study.
                         </AlertDescription>
                       </Alert>
-                    </div>
-                  )}
-
-                  {/* Navigation */}
-                  <div className="flex items-center justify-between">
-                    <Button
-                      variant="outline"
-                      onClick={handlePrevious}
-                      disabled={currentQuestionIndex === 0}
-                      className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
-                    >
-                      <ArrowLeft className="mr-2 h-4 w-4" />
-                      Previous
-                    </Button>
-
-                    <Button
-                      onClick={() => router.push("/practice")}
-                      className="bg-tanium-accent hover:bg-blue-600"
-                    >
-                      <Target className="mr-2 h-4 w-4" />
-                      Practice More
-                    </Button>
-
-                    <Button
-                      variant="outline"
-                      onClick={handleNext}
-                      disabled={currentQuestionIndex === filteredQuestionsComputed.length - 1}
-                      className="border-white/20 text-foreground hover:bg-white/10 disabled:opacity-50"
-                    >
-                      Next
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                </>
-              ) : (
-                <Card className="glass border-white/10">
-                  <CardContent className="py-12 text-center">
-                    <Filter className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-                    <h3 className="mb-2 text-xl font-bold text-foreground">
-                      No questions match your filters
-                    </h3>
-                    <p className="mb-4 text-muted-foreground">
-                      Try adjusting your filter criteria to see more questions.
-                    </p>
-                    <Button
-                      variant="outline"
-                      onClick={() =>
-                        setSelectedFilters({ domain: "all", difficulty: "all", recent: "all" })
-                      }
-                      className="border-white/20 text-foreground hover:bg-white/10"
-                    >
-                      Clear Filters
-                    </Button>
-                  </CardContent>
-                </Card>
-              )}
-            </div>
-          )}
-
-          {/* Analytics Tab Content */}
-          {activeTab === "analytics" && (
-            <div className="space-y-6">
-              {/* New Analytics Table */}
-              <ReviewAnalyticsTable
-                incorrectAnswers={incorrectAnswersRaw.map((answer) => ({
-                  questionId: answer.questionId,
-                  domain: answer.domain,
-                  difficulty: Difficulty.INTERMEDIATE, // Default since IncorrectAnswer doesn't have difficulty
-                  reviewed: answer.reviewed,
-                  timestamp: answer.timestamp,
-                }))}
-                onDomainFilter={(domain) => {
-                  if (domain !== "all") {
-                    setSelectedFilters((prev) => ({ ...prev, domain }));
-                    setActiveTab("questions");
-                  }
-                }}
-              />
-
-              <div className="grid gap-6 md:grid-cols-2">
-                {/* Domain breakdown */}
-                <Card className="glass border-white/10">
-                  <CardHeader>
-                    <CardTitle className="text-foreground">Incorrect by Domain</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {localDomainStats.map(({ domain, count, percentage }) => (
-                      <div key={domain} className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span className="text-muted-foreground">{domain}</span>
-                          <span className="text-foreground">
-                            {count} ({percentage}%)
-                          </span>
-                        </div>
-                        <div className="h-2 w-full rounded-full bg-gray-700">
-                          <div
-                            className="h-2 rounded-full bg-red-500"
-                            style={{ width: `${percentage}%` }}
-                          />
-                        </div>
-                      </div>
                     ))}
-                  </CardContent>
-                </Card>
-
-                {/* Difficulty breakdown */}
-                <Card className="glass border-white/10">
-                  <CardHeader>
-                    <CardTitle className="text-foreground">Incorrect by Difficulty</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    {difficultyStats.map(({ difficulty, count, percentage }) => (
-                      <div key={difficulty} className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span className="text-muted-foreground">{difficulty}</span>
-                          <span className="text-foreground">
-                            {count} ({percentage}%)
-                          </span>
-                        </div>
-                        <div className="h-2 w-full rounded-full bg-gray-700">
-                          <div
-                            className="h-2 rounded-full bg-yellow-500"
-                            style={{ width: `${percentage}%` }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Recommendations */}
-              <Card className="glass border-white/10">
-                <CardHeader>
-                  <CardTitle className="text-foreground">Study Recommendations</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                    {localDomainStats
-                      .sort((a, b) => b.count - a.count)
-                      .slice(0, 3)
-                      .map(({ domain, count }) => (
-                        <Alert
-                          key={domain}
-                          className="border-yellow-200 bg-yellow-50/10 dark:bg-yellow-900/20"
-                        >
-                          <BookOpen className="h-4 w-4 text-[#f97316]" />
-                          <AlertDescription className="text-[#f97316]">
-                            <strong>Focus on {domain}</strong>
-                            <br />
-                            You missed {count} questions in this domain. Consider additional study.
-                          </AlertDescription>
-                        </Alert>
-                      ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          )}
-        </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
-    
+    </div>
   );
 }

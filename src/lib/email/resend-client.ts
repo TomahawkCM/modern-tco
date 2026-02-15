@@ -5,7 +5,7 @@
  * Server-side only - never expose to client
  */
 
-import { Resend } from 'resend';
+import { Resend } from "resend";
 import type {
   EmailType,
   SendEmailResponse,
@@ -13,17 +13,17 @@ import type {
   BudgetAlertEmailProps,
   GoalMilestoneEmailProps,
   TestEmailProps,
-} from '@/types/email';
+} from "@/types/email";
 
 // Server-side only check
-if (typeof window !== 'undefined') {
-  throw new Error('resend-client.ts should only be imported on the server');
+if (typeof window !== "undefined") {
+  throw new Error("resend-client.ts should only be imported on the server");
 }
 
 // Environment validation
-const {RESEND_API_KEY} = process.env;
-const EMAIL_FROM = process.env.EMAIL_FROM || 'Budget App <onboarding@resend.dev>';
-const EMAIL_ENABLED = process.env.NEXT_PUBLIC_EMAIL_NOTIFICATIONS_ENABLED === 'true';
+const { RESEND_API_KEY } = process.env;
+const EMAIL_FROM = process.env.EMAIL_FROM || "Budget App <onboarding@resend.dev>";
+const EMAIL_ENABLED = process.env.NEXT_PUBLIC_EMAIL_NOTIFICATIONS_ENABLED === "true";
 
 // Lazy initialization to avoid issues during build
 let resendClient: Resend | null = null;
@@ -31,7 +31,7 @@ let resendClient: Resend | null = null;
 function getResendClient(): Resend {
   if (!resendClient) {
     if (!RESEND_API_KEY) {
-      throw new Error('RESEND_API_KEY environment variable is not set');
+      throw new Error("RESEND_API_KEY environment variable is not set");
     }
     resendClient = new Resend(RESEND_API_KEY);
   }
@@ -68,7 +68,7 @@ export async function sendEmail(
   if (!isEmailEnabled()) {
     return {
       success: false,
-      error: 'Email notifications are not enabled',
+      error: "Email notifications are not enabled",
     };
   }
 
@@ -83,7 +83,7 @@ export async function sendEmail(
     });
 
     if (error) {
-      console.error('Resend error:', error);
+      console.error("Resend error:", error);
       return {
         success: false,
         error: error.message,
@@ -95,10 +95,10 @@ export async function sendEmail(
       messageId: data?.id,
     };
   } catch (err) {
-    console.error('Failed to send email:', err);
+    console.error("Failed to send email:", err);
     return {
       success: false,
-      error: err instanceof Error ? err.message : 'Unknown error occurred',
+      error: err instanceof Error ? err.message : "Unknown error occurred",
     };
   }
 }
@@ -111,7 +111,7 @@ export function getEmailSubject(
   props: BillReminderEmailProps | BudgetAlertEmailProps | GoalMilestoneEmailProps | TestEmailProps
 ): string {
   switch (type) {
-    case 'bill_reminder': {
+    case "bill_reminder": {
       const p = props as BillReminderEmailProps;
       if (p.daysUntilDue === 0) {
         return `${p.billName} is due today!`;
@@ -121,15 +121,15 @@ export function getEmailSubject(
         return `${p.billName} is due in ${p.daysUntilDue} days`;
       }
     }
-    case 'budget_alert': {
+    case "budget_alert": {
       const p = props as BudgetAlertEmailProps;
-      if (p.alertType === 'exceeded') {
+      if (p.alertType === "exceeded") {
         return `Budget exceeded for ${p.categoryName}`;
       } else {
         return `Budget warning: ${p.categoryName} at ${p.percentUsed}%`;
       }
     }
-    case 'goal_milestone': {
+    case "goal_milestone": {
       const p = props as GoalMilestoneEmailProps;
       if (p.milestone === 100) {
         return `Congratulations! You've reached your ${p.goalName} goal!`;
@@ -137,10 +137,10 @@ export function getEmailSubject(
         return `Milestone reached: ${p.milestone}% of ${p.goalName}`;
       }
     }
-    case 'test':
-      return 'Test notification from Budget App';
+    case "test":
+      return "Test notification from Budget App";
     default:
-      return 'Notification from Budget App';
+      return "Notification from Budget App";
   }
 }
 
@@ -148,10 +148,10 @@ export function getEmailSubject(
  * Generate unsubscribe URL for one-click unsubscribe (RFC 8058)
  */
 export function getUnsubscribeUrl(baseUrl: string, token: string, type?: EmailType): string {
-  const url = new URL('/api/email/unsubscribe', baseUrl);
-  url.searchParams.set('token', token);
+  const url = new URL("/api/email/unsubscribe", baseUrl);
+  url.searchParams.set("token", token);
   if (type) {
-    url.searchParams.set('type', type);
+    url.searchParams.set("type", type);
   }
   return url.toString();
 }
@@ -159,11 +159,7 @@ export function getUnsubscribeUrl(baseUrl: string, token: string, type?: EmailTy
 /**
  * Generate List-Unsubscribe header for email (RFC 8058)
  */
-export function getListUnsubscribeHeader(
-  baseUrl: string,
-  token: string,
-  type?: EmailType
-): string {
+export function getListUnsubscribeHeader(baseUrl: string, token: string, type?: EmailType): string {
   const unsubscribeUrl = getUnsubscribeUrl(baseUrl, token, type);
   return `<${unsubscribeUrl}>`;
 }
@@ -182,7 +178,7 @@ export async function sendEmailWithHeaders(
   if (!isEmailEnabled()) {
     return {
       success: false,
-      error: 'Email notifications are not enabled',
+      error: "Email notifications are not enabled",
     };
   }
 
@@ -196,13 +192,13 @@ export async function sendEmailWithHeaders(
       subject,
       react,
       headers: {
-        'List-Unsubscribe': `<${unsubscribeUrl}>`,
-        'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+        "List-Unsubscribe": `<${unsubscribeUrl}>`,
+        "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
       },
     });
 
     if (error) {
-      console.error('Resend error:', error);
+      console.error("Resend error:", error);
       return {
         success: false,
         error: error.message,
@@ -214,10 +210,10 @@ export async function sendEmailWithHeaders(
       messageId: data?.id,
     };
   } catch (err) {
-    console.error('Failed to send email:', err);
+    console.error("Failed to send email:", err);
     return {
       success: false,
-      error: err instanceof Error ? err.message : 'Unknown error occurred',
+      error: err instanceof Error ? err.message : "Unknown error occurred",
     };
   }
 }

@@ -6,14 +6,14 @@ The translation cache system has been upgraded from **V1 (file-level caching)** 
 
 ### Why Upgrade?
 
-| Feature | V1 (Legacy) | V2 (New) |
-|---------|-------------|----------|
-| **Granularity** | Entire locale file | Individual translation keys |
-| **Cache Efficiency** | ~70% hit rate | 90%+ hit rate |
-| **Incremental Updates** | Re-translate entire file | Re-translate only changed keys |
-| **Rollback Support** | ❌ No | ✅ Yes (last 5 versions per key) |
-| **Change Tracking** | File-level timestamp | Key-level timestamp |
-| **Storage Size** | ~500KB per locale | ~100KB per locale (compressed) |
+| Feature                 | V1 (Legacy)              | V2 (New)                         |
+| ----------------------- | ------------------------ | -------------------------------- |
+| **Granularity**         | Entire locale file       | Individual translation keys      |
+| **Cache Efficiency**    | ~70% hit rate            | 90%+ hit rate                    |
+| **Incremental Updates** | Re-translate entire file | Re-translate only changed keys   |
+| **Rollback Support**    | ❌ No                    | ✅ Yes (last 5 versions per key) |
+| **Change Tracking**     | File-level timestamp     | Key-level timestamp              |
+| **Storage Size**        | ~500KB per locale        | ~100KB per locale (compressed)   |
 
 ## Migration Process
 
@@ -22,12 +22,13 @@ The translation cache system has been upgraded from **V1 (file-level caching)** 
 The cache automatically migrates from V1 to V2 on first load:
 
 ```typescript
-import { CacheManagerV2 } from './lib/cache-manager-v2';
+import { CacheManagerV2 } from "./lib/cache-manager-v2";
 
 const cache = new CacheManagerV2(); // Automatically migrates if v1 cache exists
 ```
 
 **Migration output:**
+
 ```
 📦 Migrating cache from v1.0 to v2.0...
 ✅ Migrated 113 locales to v2.0 format
@@ -92,42 +93,46 @@ const cache = new CacheManagerV2(); // Automatically migrates if v1 cache exists
 ### V1 API (Deprecated)
 
 ```typescript
-import { CacheManager } from './lib/cache-manager';
+import { CacheManager } from "./lib/cache-manager";
 
 const cache = new CacheManager();
 
 // Get entire locale (all or nothing)
-const cached = cache.getCachedTranslation('es-MX', sourceHash);
+const cached = cache.getCachedTranslation("es-MX", sourceHash);
 
 // Save entire locale
-cache.saveTranslation('es-MX', content, sourceHash);
+cache.saveTranslation("es-MX", content, sourceHash);
 ```
 
 ### V2 API (Recommended)
 
 ```typescript
-import { CacheManagerV2 } from './lib/cache-manager-v2';
+import { CacheManagerV2 } from "./lib/cache-manager-v2";
 
 const cache = new CacheManagerV2();
 
 // Get individual key
-const value = cache.getCachedKey('es-MX', 'nav.dashboard', sourceValue);
+const value = cache.getCachedKey("es-MX", "nav.dashboard", sourceValue);
 
 // Save individual key
-cache.saveKey('es-MX', 'nav.dashboard', 'Panel de control', sourceValue);
+cache.saveKey("es-MX", "nav.dashboard", "Panel de control", sourceValue);
 
 // Save multiple keys (batch)
-cache.saveKeys('es-MX', {
-  'nav.dashboard': 'Panel de control',
-  'nav.transactions': 'Transacciones'
-}, sourceContent);
+cache.saveKeys(
+  "es-MX",
+  {
+    "nav.dashboard": "Panel de control",
+    "nav.transactions": "Transacciones",
+  },
+  sourceContent
+);
 
 // Get keys that need translation
-const keysToTranslate = cache.getKeysToTranslate('es-MX', sourceContent);
+const keysToTranslate = cache.getKeysToTranslate("es-MX", sourceContent);
 // Returns: ['nav.budgets', 'nav.reports'] (only keys that changed)
 
 // Rollback a key to previous version
-cache.rollbackKey('es-MX', 'nav.dashboard', 0); // Rollback to most recent history
+cache.rollbackKey("es-MX", "nav.dashboard", 0); // Rollback to most recent history
 ```
 
 ## New Features in V2
@@ -138,7 +143,7 @@ Only re-translate keys that have changed:
 
 ```typescript
 const cache = new CacheManagerV2();
-const keysToTranslate = cache.getKeysToTranslate('es-MX', sourceContent);
+const keysToTranslate = cache.getKeysToTranslate("es-MX", sourceContent);
 
 console.log(`Only ${keysToTranslate.length} keys need translation (out of 65 total)`);
 // Output: Only 3 keys need translation (out of 65 total)
@@ -146,11 +151,12 @@ console.log(`Only ${keysToTranslate.length} keys need translation (out of 65 tot
 // Translate only those keys
 for (const key of keysToTranslate) {
   const translated = await translateKey(key, sourceContent[key]);
-  cache.saveKey('es-MX', key, translated, sourceContent[key]);
+  cache.saveKey("es-MX", key, translated, sourceContent[key]);
 }
 ```
 
 **Performance improvement:**
+
 - V1: Translates all 65 keys (~30 seconds, $0.05)
 - V2: Translates only 3 changed keys (~2 seconds, $0.002)
 
@@ -162,18 +168,18 @@ Restore previous translations if new ones are incorrect:
 const cache = new CacheManagerV2();
 
 // Rollback to previous translation
-const success = cache.rollbackKey('es-MX', 'nav.dashboard', 0);
+const success = cache.rollbackKey("es-MX", "nav.dashboard", 0);
 
 if (success) {
-  console.log('✅ Rolled back nav.dashboard to previous translation');
+  console.log("✅ Rolled back nav.dashboard to previous translation");
 }
 
 // View history
-const localeEntry = cache.getLocaleTranslation('es-MX');
-const keyEntry = cache.cache.locales['es-MX'].keys['nav.dashboard'];
+const localeEntry = cache.getLocaleTranslation("es-MX");
+const keyEntry = cache.cache.locales["es-MX"].keys["nav.dashboard"];
 
-console.log('Current:', keyEntry.value);
-console.log('History:', keyEntry.history);
+console.log("Current:", keyEntry.value);
+console.log("History:", keyEntry.history);
 ```
 
 ### 3. Key-Level Change Tracking
@@ -182,7 +188,7 @@ See when each key was last translated:
 
 ```typescript
 const cache = new CacheManagerV2();
-const localeEntry = cache.cache.locales['es-MX'];
+const localeEntry = cache.cache.locales["es-MX"];
 
 for (const [key, entry] of Object.entries(localeEntry.keys)) {
   console.log(`${key}: last translated ${entry.translatedAt}`);
@@ -214,13 +220,13 @@ console.log(stats);
 
 Tested with 65 keys, 113 locales:
 
-| Operation | V1 Time | V2 Time | Improvement |
-|-----------|---------|---------|-------------|
-| Full translation (cold cache) | 5.2 min | 5.1 min | 2% faster |
-| Incremental (3 keys changed) | 5.2 min | 12 sec | **96% faster** |
-| Cache load time | 850ms | 120ms | 86% faster |
-| Cache save time | 420ms | 95ms | 77% faster |
-| Memory usage | 45MB | 18MB | 60% reduction |
+| Operation                     | V1 Time | V2 Time | Improvement    |
+| ----------------------------- | ------- | ------- | -------------- |
+| Full translation (cold cache) | 5.2 min | 5.1 min | 2% faster      |
+| Incremental (3 keys changed)  | 5.2 min | 12 sec  | **96% faster** |
+| Cache load time               | 850ms   | 120ms   | 86% faster     |
+| Cache save time               | 420ms   | 95ms    | 77% faster     |
+| Memory usage                  | 45MB    | 18MB    | 60% reduction  |
 
 ## Migration Checklist
 
@@ -239,18 +245,20 @@ Tested with 65 keys, 113 locales:
 If you need to rollback to V1:
 
 1. **Backup your cache:**
+
    ```bash
    cp scripts/.translation-cache.json scripts/.translation-cache-v2-backup.json
    ```
 
 2. **Change imports:**
+
    ```typescript
    // Old: V2
-   import { CacheManagerV2 } from './lib/cache-manager-v2';
+   import { CacheManagerV2 } from "./lib/cache-manager-v2";
    const cache = new CacheManagerV2();
 
    // New: V1
-   import { CacheManager } from './lib/cache-manager';
+   import { CacheManager } from "./lib/cache-manager";
    const cache = new CacheManager();
    ```
 
@@ -270,9 +278,11 @@ A: No. The cache file format changed. Pick one version and stick with it.
 
 **Q: How do I verify the migration worked?**
 A: Check the cache file:
+
 ```bash
 head -5 scripts/.translation-cache.json
 ```
+
 Should show `"version": "2.0"` and `"locales": {...}` (not `"translations"`).
 
 **Q: What happens to my translation history from V1?**

@@ -1,4 +1,5 @@
 # Lazy Loading Optimization Attempt - Failure Report
+
 **Date**: November 10, 2025
 **Engineer**: Claude (Sonnet 4.5)
 **Project**: Budget App v1 Performance Optimization
@@ -18,6 +19,7 @@
 | Main Thread Work | 2.5s | 4.2s | +68% | ❌ WORSE |
 
 **After Reversion**:
+
 - Performance Score: 70% (baseline restored ✅)
 - TTI: 6.4s (baseline restored ✅)
 - Bundle Size: 840 KB (baseline restored ✅)
@@ -27,6 +29,7 @@
 ## What We Attempted
 
 ### Goal
+
 Implement lazy loading for Recharts (2.6MB library) and heavy components to reduce initial bundle size and improve Time to Interactive (TTI target: <3.8s).
 
 ### Implementation
@@ -49,7 +52,7 @@ Implement lazy loading for Recharts (2.6MB library) and heavy components to redu
 3. **Updated Pages**
    - `/src/app/budget-app/page.tsx` (Dashboard)
    - `/src/app/budget-app/reports/page.tsx` (Reports)
-   - Both pages converted to use Lazy* imports
+   - Both pages converted to use Lazy\* imports
 
 ---
 
@@ -126,17 +129,20 @@ Implement lazy loading for Recharts (2.6MB library) and heavy components to redu
 ## Alternative Approaches to Consider
 
 ### 1. Server Components Strategy (Recommended)
+
 - Convert static chart sections to Server Components
 - Load data server-side, render charts server-side
 - Only hydrate interactive parts on client
 - Expected impact: ~60% bundle reduction
 
 ### 2. Route-Level Code Splitting
+
 - Split by page, not by component
 - `/budget-app/reports` loads Recharts only when visited
 - Use route-based dynamic imports in `next.config.js`
 
 ### 3. Webpack Manual Chunking
+
 ```js
 // next.config.js
 webpack: (config) => {
@@ -144,22 +150,24 @@ webpack: (config) => {
     cacheGroups: {
       recharts: {
         test: /[\\/]node_modules[\\/]recharts[\\/]/,
-        name: 'recharts',
-        chunks: 'all',
+        name: "recharts",
+        chunks: "all",
         priority: 10,
       },
     },
   };
   return config;
-}
+};
 ```
 
 ### 4. Alternative Chart Libraries
+
 - Consider lighter alternatives (Chart.js: 200KB, Victory: 150KB)
 - Recharts (2.6MB) is heavy for the features we use
 - Trade-off: Less features but faster loads
 
 ### 5. Turbopack Migration
+
 - Next.js 16 recommends Turbopack over Webpack
 - Better code splitting out-of-the-box
 - Currently blocked by `content-parser.ts` refactoring
@@ -191,6 +199,7 @@ webpack: (config) => {
 ## Conclusion
 
 While the intent was correct (reduce 2.6MB Recharts from initial bundle), the execution failed due to:
+
 1. Improper Next.js dynamic import configuration
 2. Mixing optimization with feature additions
 3. Unreliable localhost testing environment

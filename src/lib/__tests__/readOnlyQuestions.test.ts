@@ -53,7 +53,11 @@ describe("getReadOnlyQuestions", () => {
     mockFrom.mockReturnValue(builder);
 
     const { getReadOnlyQuestions } = await import("@/lib/quiz/readOnlyQuestions");
-    const result = await getReadOnlyQuestions({ domain: "asking-questions", tags: ["sensors"], limit: 1 });
+    const result = await getReadOnlyQuestions({
+      domain: "asking-questions",
+      tags: ["sensors"],
+      limit: 1,
+    });
 
     expect(mockFrom).toHaveBeenCalledWith("questions");
     expect(builder.select).toHaveBeenCalled();
@@ -115,10 +119,7 @@ describe("getReadOnlyQuestions", () => {
       concept: "Mastery",
       question: "Pick the best fallback when no options exist",
       type: "multiple-choice",
-      options: [
-        "Flag the module as needing curation",
-        '{"value":"Show a placeholder"}',
-      ],
+      options: ["Flag the module as needing curation", '{"value":"Show a placeholder"}'],
       correctAnswer: "",
       explanation: "",
       difficulty: "easy",
@@ -136,9 +137,12 @@ describe("getReadOnlyQuestions", () => {
     const { getReadOnlyQuestions } = await import("@/lib/quiz/readOnlyQuestions");
     const result = await getReadOnlyQuestions({ domain: "asking-questions" });
 
-    expect(warnSpy).toHaveBeenCalledWith("Failed to load read-only questions", expect.objectContaining({
-      error: expect.any(Error),
-    }));
+    expect(warnSpy).toHaveBeenCalledWith(
+      "Failed to load read-only questions",
+      expect.objectContaining({
+        error: expect.any(Error),
+      })
+    );
     expect(result).toEqual([]);
 
     warnSpy.mockRestore();

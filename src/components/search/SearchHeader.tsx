@@ -57,7 +57,7 @@ export function SearchHeader() {
               onChange={(e) => handleInputChange(e.target.value)}
               onFocus={() => setShowSuggestions(inputValue.length > 0)}
               onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-              className="border-white/20 bg-white/5 pl-10 pr-10 text-foreground placeholder:text-muted-foreground focus:border-tanium-accent"
+              className="focus:border-tanium-accent border-white/20 bg-white/5 pl-10 pr-10 text-foreground placeholder:text-muted-foreground"
             />
             {inputValue && (
               <Button
@@ -137,14 +137,15 @@ export function SearchHeader() {
         <div className="flex items-center gap-4">
           {state.isSearching && (
             <div className="flex items-center gap-2 text-muted-foreground">
-              <div className="h-4 w-4 animate-spin rounded-full border-b-2 border-tanium-accent"></div>
+              <div className="border-tanium-accent h-4 w-4 animate-spin rounded-full border-b-2"></div>
               <span className="text-sm">Searching...</span>
             </div>
           )}
 
           {!state.isSearching && state.totalResults > 0 && (
             <div className="text-sm text-muted-foreground">
-              Found <span className="font-medium text-foreground">{state.totalResults}</span> question
+              Found <span className="font-medium text-foreground">{state.totalResults}</span>{" "}
+              question
               {state.totalResults !== 1 ? "s" : ""}
               {state.query && (
                 <span>

@@ -9,6 +9,7 @@
 ## 🎯 Overview
 
 This guide walks you through deploying the hybrid model content population system, which includes:
+
 - **Flashcard Library System** (500+ curated flashcards)
 - **Mock Exam System** (6 progressive exams)
 - **AI Content Generation Tools** (questions + flashcards)
@@ -85,6 +86,7 @@ WHERE routine_schema = 'public'
 ```
 
 **Expected Output:**
+
 ```
 ✅ flashcard_library
 ✅ flashcard_library_progress
@@ -131,6 +133,7 @@ ls -la src/data/generated/
 ```
 
 **Expected Output:**
+
 ```
 ✅ Generated 50 questions successfully!
 📁 Output file: src/data/generated/generated-questions-asking_questions-beginner-2025-10-10.ts
@@ -150,6 +153,7 @@ ls -la src/data/generated/
 ```
 
 **Expected Output:**
+
 ```
 ✅ Generated 30 flashcards successfully!
 📁 Output file: src/data/generated/generated-flashcards-asking_questions-medium-2025-10-10.ts
@@ -164,18 +168,16 @@ ls -la src/data/generated/
 Create import script `scripts/import-questions.ts`:
 
 ```typescript
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import generatedQuestions from '../src/data/generated/generated-questions-asking_questions-beginner-2025-10-10';
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import generatedQuestions from "../src/data/generated/generated-questions-asking_questions-beginner-2025-10-10";
 
 async function importQuestions() {
   const supabase = createClientComponentClient();
 
-  const { data, error } = await supabase
-    .from('questions')
-    .insert(generatedQuestions);
+  const { data, error } = await supabase.from("questions").insert(generatedQuestions);
 
   if (error) {
-    console.error('Import failed:', error);
+    console.error("Import failed:", error);
   } else {
     console.log(`✅ Imported ${generatedQuestions.length} questions`);
   }
@@ -185,6 +187,7 @@ importQuestions();
 ```
 
 Run:
+
 ```bash
 npx tsx scripts/import-questions.ts
 ```
@@ -192,14 +195,14 @@ npx tsx scripts/import-questions.ts
 #### 4.2 Import Flashcards to Database
 
 ```typescript
-import { bulkImportFlashcards } from '@/lib/flashcard-library-service';
-import generatedFlashcards from '../src/data/generated/generated-flashcards-asking_questions-medium-2025-10-10';
+import { bulkImportFlashcards } from "@/lib/flashcard-library-service";
+import generatedFlashcards from "../src/data/generated/generated-flashcards-asking_questions-medium-2025-10-10";
 
 async function importFlashcards() {
   const result = await bulkImportFlashcards({
     cards: generatedFlashcards,
-    source: 'ai_generated',
-    sourceDescription: 'First batch - Asking Questions domain, medium difficulty'
+    source: "ai_generated",
+    sourceDescription: "First batch - Asking Questions domain, medium difficulty",
   });
 
   console.log(`✅ Imported ${result.successfulItems}/${result.totalItems} flashcards`);
@@ -218,17 +221,14 @@ importFlashcards();
 #### 5.1 Test Mock Exam Builder
 
 ```typescript
-import { createMockExamSession } from '@/lib/mock-exam-builder';
+import { createMockExamSession } from "@/lib/mock-exam-builder";
 
 async function testMockExam() {
   // Create diagnostic exam for test user
-  const session = await createMockExamSession(
-    'mock-exam-1-diagnostic',
-    'test-user-id'
-  );
+  const session = await createMockExamSession("mock-exam-1-diagnostic", "test-user-id");
 
   if (session) {
-    console.log('✅ Mock exam created successfully');
+    console.log("✅ Mock exam created successfully");
     console.log(`   Questions: ${session.questions.length}`);
     console.log(`   Time limit: ${session.timeLimitMinutes} minutes`);
   }
@@ -240,22 +240,19 @@ testMockExam();
 #### 5.2 Test Flashcard Library
 
 ```typescript
-import {
-  getLibraryFlashcards,
-  getLibraryFlashcardStats
-} from '@/lib/flashcard-library-service';
+import { getLibraryFlashcards, getLibraryFlashcardStats } from "@/lib/flashcard-library-service";
 
 async function testFlashcardLibrary() {
   // Get library cards
   const { cards, total } = await getLibraryFlashcards({
-    domains: ['asking_questions'],
-    limit: 10
+    domains: ["asking_questions"],
+    limit: 10,
   });
 
   console.log(`✅ Retrieved ${cards.length} flashcards (total: ${total})`);
 
   // Get stats
-  const stats = await getLibraryFlashcardStats('test-user-id');
+  const stats = await getLibraryFlashcardStats("test-user-id");
   console.log(`   Total library cards: ${stats?.totalLibraryCards}`);
   console.log(`   Due today: ${stats?.cardsDueToday}`);
 }
@@ -266,15 +263,15 @@ testFlashcardLibrary();
 #### 5.3 Test Unified Review Queue
 
 ```typescript
-import { getUnifiedReviewQueue } from '@/lib/flashcard-library-service';
+import { getUnifiedReviewQueue } from "@/lib/flashcard-library-service";
 
 async function testUnifiedQueue() {
-  const queue = await getUnifiedReviewQueue('test-user-id', 20);
+  const queue = await getUnifiedReviewQueue("test-user-id", 20);
 
-  const libraryCards = queue.filter(c => c.source === 'library').length;
-  const userCards = queue.filter(c => c.source === 'user_created').length;
+  const libraryCards = queue.filter((c) => c.source === "library").length;
+  const userCards = queue.filter((c) => c.source === "user_created").length;
 
-  console.log('✅ Unified review queue:');
+  console.log("✅ Unified review queue:");
   console.log(`   Library cards: ${libraryCards}`);
   console.log(`   User cards: ${userCards}`);
   console.log(`   Total: ${queue.length}`);
@@ -339,6 +336,7 @@ testUnifiedQueue();
 **Error:** `ANTHROPIC_API_KEY environment variable not set`
 
 **Solution:**
+
 ```bash
 export ANTHROPIC_API_KEY=sk-ant-your-key-here
 ```
@@ -431,24 +429,28 @@ npx tsx scripts/bulk-import-flashcards.ts
 **Deployment is successful when:**
 
 ✅ **Database:**
+
 - All 3 new tables created
 - All 2 new functions working
 - All existing tables preserved
 - RLS policies active
 
 ✅ **Content:**
+
 - 50+ questions generated (initial)
 - 30+ flashcards generated (initial)
 - Content imported successfully
 - No validation errors
 
 ✅ **Integration:**
+
 - Mock exam builder works
 - Flashcard library works
 - Unified review queue works
 - UI components functional
 
 ✅ **Zero Breaking Changes:**
+
 - Existing flashcard system works
 - Existing exam system works
 - No data loss
@@ -459,19 +461,23 @@ npx tsx scripts/bulk-import-flashcards.ts
 ## 📞 Support
 
 **Documentation:**
+
 - Implementation Summary: `docs/CONTENT_POPULATION_IMPLEMENTATION_SUMMARY.md`
 - Content Strategy: `docs/CONTENT_POPULATION_STRATEGY.md`
 - This Guide: `docs/HYBRID_MODEL_DEPLOYMENT_GUIDE.md`
 
 **Scripts:**
+
 - Question Generator: `scripts/generate-questions.ts`
 - Flashcard Generator: `scripts/generate-flashcards.ts`
 - Deployment: `scripts/deploy-hybrid-model.sh`
 
 **Database:**
+
 - Migration: `supabase/migrations/20251010000003_add_content_population_tables.sql`
 
 **Code:**
+
 - Types: `src/types/flashcard-library.ts`
 - Mock Exam Configs: `src/data/mock-exam-configs.ts`
 - Mock Exam Builder: `src/lib/mock-exam-builder.ts`

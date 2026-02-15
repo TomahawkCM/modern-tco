@@ -5,8 +5,8 @@
  * Handles one-click unsubscribe (RFC 8058) and manual unsubscribe requests
  */
 
-import { type NextRequest, NextResponse } from 'next/server';
-import type { EmailType, UnsubscribeResponse } from '@/types/email';
+import { type NextRequest, NextResponse } from "next/server";
+import type { EmailType, UnsubscribeResponse } from "@/types/email";
 
 // In a production app, this would interact with a database
 // For now, we'll use localStorage on the client side to manage preferences
@@ -17,23 +17,23 @@ import type { EmailType, UnsubscribeResponse } from '@/types/email';
  */
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
-  const token = searchParams.get('token');
-  const type = searchParams.get('type') as EmailType | null;
+  const token = searchParams.get("token");
+  const type = searchParams.get("type") as EmailType | null;
 
   if (!token) {
-    return new NextResponse(getUnsubscribePage('error', 'Invalid unsubscribe link'), {
+    return new NextResponse(getUnsubscribePage("error", "Invalid unsubscribe link"), {
       status: 400,
-      headers: { 'Content-Type': 'text/html' },
+      headers: { "Content-Type": "text/html" },
     });
   }
 
   // In production, validate the token against the database
   // For now, we'll accept any non-empty token
-  const typeLabel = type ? getTypeLabel(type) : 'all email notifications';
+  const typeLabel = type ? getTypeLabel(type) : "all email notifications";
 
-  return new NextResponse(getUnsubscribePage('confirm', typeLabel), {
+  return new NextResponse(getUnsubscribePage("confirm", typeLabel), {
     status: 200,
-    headers: { 'Content-Type': 'text/html' },
+    headers: { "Content-Type": "text/html" },
   });
 }
 
@@ -43,26 +43,26 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 export async function POST(request: NextRequest): Promise<NextResponse<UnsubscribeResponse>> {
   try {
     // Check for RFC 8058 List-Unsubscribe-Post header
-    const listUnsubscribe = request.headers.get('List-Unsubscribe');
+    const listUnsubscribe = request.headers.get("List-Unsubscribe");
 
     // Parse token from URL or body
     let token: string | null = null;
     let type: EmailType | null = null;
 
-    const contentType = request.headers.get('content-type');
+    const contentType = request.headers.get("content-type");
 
-    if (contentType?.includes('application/x-www-form-urlencoded')) {
+    if (contentType?.includes("application/x-www-form-urlencoded")) {
       // RFC 8058 one-click unsubscribe
       const formData = await request.formData();
-      const listUnsubscribeValue = formData.get('List-Unsubscribe');
+      const listUnsubscribeValue = formData.get("List-Unsubscribe");
 
-      if (listUnsubscribeValue === 'One-Click') {
+      if (listUnsubscribeValue === "One-Click") {
         // Extract token from URL
         const { searchParams } = new URL(request.url);
-        token = searchParams.get('token');
-        type = searchParams.get('type') as EmailType | null;
+        token = searchParams.get("token");
+        type = searchParams.get("type") as EmailType | null;
       }
-    } else if (contentType?.includes('application/json')) {
+    } else if (contentType?.includes("application/json")) {
       // Manual unsubscribe from app
       const body = await request.json();
       token = body.token;
@@ -73,7 +73,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<Unsubscri
       return NextResponse.json(
         {
           success: false,
-          message: 'Invalid unsubscribe request',
+          message: "Invalid unsubscribe request",
         },
         { status: 400 }
       );
@@ -82,18 +82,18 @@ export async function POST(request: NextRequest): Promise<NextResponse<Unsubscri
     // In production, update the database to mark the user as unsubscribed
     // For now, we'll return success and let the client handle the preference update
 
-    const typeLabel = type ? getTypeLabel(type) : 'all email notifications';
+    const typeLabel = type ? getTypeLabel(type) : "all email notifications";
 
     return NextResponse.json({
       success: true,
       message: `Successfully unsubscribed from ${typeLabel}`,
     });
   } catch (error) {
-    console.error('Unsubscribe error:', error);
+    console.error("Unsubscribe error:", error);
     return NextResponse.json(
       {
         success: false,
-        message: 'Failed to process unsubscribe request',
+        message: "Failed to process unsubscribe request",
       },
       { status: 500 }
     );
@@ -102,31 +102,27 @@ export async function POST(request: NextRequest): Promise<NextResponse<Unsubscri
 
 function getTypeLabel(type: EmailType): string {
   switch (type) {
-    case 'bill_reminder':
-      return 'bill reminders';
-    case 'budget_alert':
-      return 'budget alerts';
-    case 'goal_milestone':
-      return 'goal milestone notifications';
-    case 'test':
-      return 'test notifications';
+    case "bill_reminder":
+      return "bill reminders";
+    case "budget_alert":
+      return "budget alerts";
+    case "goal_milestone":
+      return "goal milestone notifications";
+    case "test":
+      return "test notifications";
     default:
-      return 'email notifications';
+      return "email notifications";
   }
 }
 
-function getUnsubscribePage(status: 'confirm' | 'success' | 'error', message: string): string {
+function getUnsubscribePage(status: "confirm" | "success" | "error", message: string): string {
   const title =
-    status === 'confirm'
-      ? 'Confirm Unsubscribe'
-      : status === 'success'
-      ? 'Unsubscribed'
-      : 'Error';
+    status === "confirm" ? "Confirm Unsubscribe" : status === "success" ? "Unsubscribed" : "Error";
 
-  const icon = status === 'success' ? '✅' : status === 'error' ? '❌' : '📧';
+  const icon = status === "success" ? "✅" : status === "error" ? "❌" : "📧";
 
   const content =
-    status === 'confirm'
+    status === "confirm"
       ? `<p>You are about to unsubscribe from <strong>${message}</strong>.</p>
          <p>Click the button below to confirm.</p>
          <form method="POST">
@@ -134,11 +130,11 @@ function getUnsubscribePage(status: 'confirm' | 'success' | 'error', message: st
            <button type="submit" class="btn">Unsubscribe</button>
          </form>
          <p class="note">You can re-enable notifications anytime in the Budget App settings.</p>`
-      : status === 'success'
-      ? `<p>You have been unsubscribed from <strong>${message}</strong>.</p>
+      : status === "success"
+        ? `<p>You have been unsubscribed from <strong>${message}</strong>.</p>
          <p>You can re-enable notifications anytime in the Budget App settings.</p>
          <a href="/budget-app/settings" class="btn-secondary">Go to Settings</a>`
-      : `<p>${message}</p>
+        : `<p>${message}</p>
          <a href="/budget-app/settings" class="btn-secondary">Go to Settings</a>`;
 
   return `

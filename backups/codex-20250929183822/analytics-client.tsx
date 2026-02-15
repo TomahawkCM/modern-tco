@@ -14,14 +14,16 @@ export function AnalyticsClient() {
   useEffect(() => {
     const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
     const start = () => analytics.init();
-    if (idle) idle(start); else setTimeout(start, 300);
+    if (idle) idle(start);
+    else setTimeout(start, 300);
   }, []);
 
   useEffect(() => {
     if (!user?.id) return;
     const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
     const start = () => analytics.identify(user.id, { email: user.email ?? undefined });
-    if (idle) idle(start); else setTimeout(start, 300);
+    if (idle) idle(start);
+    else setTimeout(start, 300);
   }, [user?.id]);
 
   // Capture pageviews on route changes
@@ -29,7 +31,8 @@ export function AnalyticsClient() {
     const path = pathname + (search?.toString() ? `?${search.toString()}` : "");
     const idle = (window as any).requestIdleCallback as undefined | ((cb: any) => void);
     const send = () => analytics.pageview(path);
-    if (idle) idle(send); else setTimeout(send, 300);
+    if (idle) idle(send);
+    else setTimeout(send, 300);
   }, [pathname, search]);
 
   return null;

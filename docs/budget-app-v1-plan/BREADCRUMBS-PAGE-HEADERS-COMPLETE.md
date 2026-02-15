@@ -12,6 +12,7 @@
 ### **1. Breadcrumb Component** (`src/components/budget/Breadcrumb.tsx`)
 
 **Features**:
+
 - ✅ Auto-generates breadcrumbs from URL pathname
 - ✅ Manual breadcrumb items via props
 - ✅ Home icon link to `/budget-app`
@@ -22,6 +23,7 @@
 - ✅ SEO-friendly with JSON-LD structured data
 
 **Usage**:
+
 ```tsx
 import { Breadcrumb } from '@/components/budget/Breadcrumb';
 
@@ -38,6 +40,7 @@ import { Breadcrumb } from '@/components/budget/Breadcrumb';
 ```
 
 **Accessibility**:
+
 - `<nav aria-label="Breadcrumb">` landmark
 - `<ol>` ordered list for semantic structure
 - Home icon has `<span className="sr-only">Home</span>`
@@ -50,6 +53,7 @@ import { Breadcrumb } from '@/components/budget/Breadcrumb';
 ### **2. PageHeader Component** (`src/components/budget/PageHeader.tsx`)
 
 **Features**:
+
 - ✅ Consistent header structure: breadcrumbs → title → description → actions
 - ✅ Quick action buttons (right-aligned on desktop)
 - ✅ Optional children slot for tabs/filters
@@ -58,31 +62,30 @@ import { Breadcrumb } from '@/components/budget/Breadcrumb';
 - ✅ Minimum 48×48px touch targets on all buttons
 
 **Usage**:
+
 ```tsx
-import { PageHeader } from '@/components/budget/PageHeader';
-import { Plus, Download } from 'lucide-react';
+import { PageHeader } from "@/components/budget/PageHeader";
+import { Plus, Download } from "lucide-react";
 
 <PageHeader
   title="Transactions"
   description="View and manage all your financial transactions"
-  breadcrumbs={[
-    { label: 'Transactions', href: '/budget-app/transactions' },
-  ]}
+  breadcrumbs={[{ label: "Transactions", href: "/budget-app/transactions" }]}
   actions={[
     {
-      label: 'Add Transaction',
+      label: "Add Transaction",
       icon: <Plus className="h-4 w-4" />,
       onClick: () => setShowModal(true),
-      variant: 'default',
+      variant: "default",
     },
     {
-      label: 'Export CSV',
+      label: "Export CSV",
       icon: <Download className="h-4 w-4" />,
       onClick: handleExport,
-      variant: 'outline',
+      variant: "outline",
     },
   ]}
-/>
+/>;
 ```
 
 **Props API**:
@@ -96,11 +99,12 @@ import { Plus, Download } from 'lucide-react';
 | `children` | `ReactNode` | No | Optional content (tabs, filters) |
 
 **PageHeaderAction Interface**:
+
 ```typescript
 interface PageHeaderAction {
   label: string;
   onClick: () => void;
-  variant?: 'default' | 'secondary' | 'outline' | 'ghost';
+  variant?: "default" | "secondary" | "outline" | "ghost";
   icon?: ReactNode;
   ariaLabel?: string;
 }
@@ -115,6 +119,7 @@ interface PageHeaderAction {
 **Route**: `/budget-app/transactions`
 
 **Before**:
+
 ```tsx
 export default function TransactionsPage() {
   return (
@@ -127,9 +132,10 @@ export default function TransactionsPage() {
 ```
 
 **After**:
+
 ```tsx
-import { PageHeader } from '@/components/budget/PageHeader';
-import { Plus, Download, Upload } from 'lucide-react';
+import { PageHeader } from "@/components/budget/PageHeader";
+import { Plus, Download, Upload } from "lucide-react";
 
 export default function TransactionsPage() {
   const [showModal, setShowModal] = useState(false);
@@ -141,23 +147,23 @@ export default function TransactionsPage() {
         description="View and manage all your financial transactions"
         actions={[
           {
-            label: 'Add Transaction',
+            label: "Add Transaction",
             icon: <Plus className="h-4 w-4" />,
             onClick: () => setShowModal(true),
-            variant: 'default',
-            ariaLabel: 'Add new transaction',
+            variant: "default",
+            ariaLabel: "Add new transaction",
           },
           {
-            label: 'Import CSV',
+            label: "Import CSV",
             icon: <Upload className="h-4 w-4" />,
-            onClick: () => router.push('/budget-app/import'),
-            variant: 'outline',
+            onClick: () => router.push("/budget-app/import"),
+            variant: "outline",
           },
           {
-            label: 'Export',
+            label: "Export",
             icon: <Download className="h-4 w-4" />,
             onClick: handleExport,
-            variant: 'ghost',
+            variant: "ghost",
           },
         ]}
       />
@@ -168,6 +174,7 @@ export default function TransactionsPage() {
 ```
 
 **Breadcrumb Output**:
+
 ```
 Home > Transactions
 ```
@@ -179,8 +186,8 @@ Home > Transactions
 **Route**: `/budget-app/loans/123`
 
 ```tsx
-import { PageHeader } from '@/components/budget/PageHeader';
-import { Edit, Trash2, Calculator } from 'lucide-react';
+import { PageHeader } from "@/components/budget/PageHeader";
+import { Edit, Trash2, Calculator } from "lucide-react";
 
 export default function LoanDetailsPage({ params }: { params: { id: string } }) {
   const loan = useLoan(params.id);
@@ -188,30 +195,30 @@ export default function LoanDetailsPage({ params }: { params: { id: string } }) 
   return (
     <div>
       <PageHeader
-        title={loan?.name || 'Loan Details'}
+        title={loan?.name || "Loan Details"}
         description={`${loan?.type} • ${formatCurrency(loan?.balance)} remaining`}
         breadcrumbs={[
-          { label: 'Loans', href: '/budget-app/loans' },
-          { label: loan?.name || 'Details', href: `/budget-app/loans/${params.id}` },
+          { label: "Loans", href: "/budget-app/loans" },
+          { label: loan?.name || "Details", href: `/budget-app/loans/${params.id}` },
         ]}
         actions={[
           {
-            label: 'Calculate Payoff',
+            label: "Calculate Payoff",
             icon: <Calculator className="h-4 w-4" />,
             onClick: () => setShowCalculator(true),
-            variant: 'default',
+            variant: "default",
           },
           {
-            label: 'Edit',
+            label: "Edit",
             icon: <Edit className="h-4 w-4" />,
             onClick: () => setShowEditModal(true),
-            variant: 'outline',
+            variant: "outline",
           },
           {
-            label: 'Delete',
+            label: "Delete",
             icon: <Trash2 className="h-4 w-4" />,
             onClick: () => setShowDeleteDialog(true),
-            variant: 'ghost',
+            variant: "ghost",
           },
         ]}
       />
@@ -222,6 +229,7 @@ export default function LoanDetailsPage({ params }: { params: { id: string } }) 
 ```
 
 **Breadcrumb Output**:
+
 ```
 Home > Loans > Mortgage Details
 ```
@@ -233,9 +241,9 @@ Home > Loans > Mortgage Details
 **Route**: `/budget-app/reports`
 
 ```tsx
-import { PageHeader } from '@/components/budget/PageHeader';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Download, Share2 } from 'lucide-react';
+import { PageHeader } from "@/components/budget/PageHeader";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Download, Share2 } from "lucide-react";
 
 export default function ReportsPage() {
   return (
@@ -245,16 +253,16 @@ export default function ReportsPage() {
         description="Analyze your spending patterns and financial health"
         actions={[
           {
-            label: 'Share Report',
+            label: "Share Report",
             icon: <Share2 className="h-4 w-4" />,
             onClick: handleShare,
-            variant: 'outline',
+            variant: "outline",
           },
           {
-            label: 'Download PDF',
+            label: "Download PDF",
             icon: <Download className="h-4 w-4" />,
             onClick: handleDownloadPDF,
-            variant: 'default',
+            variant: "default",
           },
         ]}
       >
@@ -274,6 +282,7 @@ export default function ReportsPage() {
 ```
 
 **Breadcrumb Output**:
+
 ```
 Home > Reports
 ```
@@ -284,17 +293,18 @@ Home > Reports
 
 The `Breadcrumb` component automatically generates breadcrumbs from the URL pathname:
 
-| URL Path | Generated Breadcrumbs |
-|----------|----------------------|
-| `/budget-app` | (empty - home page) |
-| `/budget-app/transactions` | Home > Transactions |
-| `/budget-app/loans` | Home > Loans |
-| `/budget-app/loans/123` | Home > Loans > Details |
-| `/budget-app/planning/future` | Home > Planning > Future Plans |
+| URL Path                          | Generated Breadcrumbs                 |
+| --------------------------------- | ------------------------------------- |
+| `/budget-app`                     | (empty - home page)                   |
+| `/budget-app/transactions`        | Home > Transactions                   |
+| `/budget-app/loans`               | Home > Loans                          |
+| `/budget-app/loans/123`           | Home > Loans > Details                |
+| `/budget-app/planning/future`     | Home > Planning > Future Plans        |
 | `/budget-app/planning/retirement` | Home > Planning > Retirement Planning |
-| `/budget-app/ocr` | Home > OCR |
+| `/budget-app/ocr`                 | Home > OCR                            |
 
 **Special Label Mapping**:
+
 - `ocr` → "OCR" (uppercase)
 - `future` → "Future Plans"
 - `retirement` → "Retirement Planning"
@@ -302,11 +312,12 @@ The `Breadcrumb` component automatically generates breadcrumbs from the URL path
 
 **Customization**:
 To add more special labels, update `labelMap` in `Breadcrumb.tsx`:
+
 ```typescript
 const labelMap: Record<string, string> = {
-  ocr: 'OCR',
-  future: 'Future Plans',
-  retirement: 'Retirement Planning',
+  ocr: "OCR",
+  future: "Future Plans",
+  retirement: "Retirement Planning",
   // Add more mappings here
 };
 ```
@@ -316,6 +327,7 @@ const labelMap: Record<string, string> = {
 ## 🎯 Accessibility Features
 
 ### **Breadcrumb Accessibility**:
+
 - ✅ `<nav aria-label="Breadcrumb">` landmark
 - ✅ `<ol>` for semantic list structure
 - ✅ Home icon with screen reader text
@@ -326,6 +338,7 @@ const labelMap: Record<string, string> = {
 - ✅ JSON-LD structured data for SEO
 
 ### **PageHeader Accessibility**:
+
 - ✅ `<h1>` for page title (proper heading hierarchy)
 - ✅ Action buttons with `aria-label`
 - ✅ Icon-only buttons have descriptive text
@@ -340,12 +353,14 @@ const labelMap: Record<string, string> = {
 To add breadcrumbs and page headers to all budget app pages:
 
 ### **1. Import Components**:
+
 ```tsx
-import { PageHeader } from '@/components/budget/PageHeader';
-import { Plus, Edit, Download } from 'lucide-react'; // Icons
+import { PageHeader } from "@/components/budget/PageHeader";
+import { Plus, Edit, Download } from "lucide-react"; // Icons
 ```
 
 ### **2. Replace Existing Headers**:
+
 ```tsx
 // Old
 <div className="mb-8">
@@ -361,32 +376,35 @@ import { Plus, Edit, Download } from 'lucide-react'; // Icons
 ```
 
 ### **3. Add Actions (Optional)**:
+
 ```tsx
 <PageHeader
   title="Page Title"
   actions={[
     {
-      label: 'Primary Action',
+      label: "Primary Action",
       icon: <Plus className="h-4 w-4" />,
       onClick: handleAction,
-      variant: 'default',
+      variant: "default",
     },
   ]}
 />
 ```
 
 ### **4. Add Breadcrumbs (Detail Pages)**:
+
 ```tsx
 <PageHeader
   title="Item Details"
   breadcrumbs={[
-    { label: 'Items', href: '/budget-app/items' },
-    { label: 'Details', href: `/budget-app/items/${id}` },
+    { label: "Items", href: "/budget-app/items" },
+    { label: "Details", href: `/budget-app/items/${id}` },
   ]}
 />
 ```
 
 ### **5. Test Accessibility**:
+
 - [ ] Tab through all links/buttons
 - [ ] Verify focus indicators visible
 - [ ] Test with screen reader (NVDA/VoiceOver)
@@ -398,12 +416,14 @@ import { Plus, Edit, Download } from 'lucide-react'; // Icons
 ## 📍 Pages to Update
 
 ### **Priority 1 - Core Pages** (user visits most):
+
 - [x] `/budget-app` (Dashboard) - No breadcrumbs needed (home)
 - [ ] `/budget-app/transactions` - Add PageHeader with Add/Import/Export actions
 - [ ] `/budget-app/budgets` - Add PageHeader with Create Budget action
 - [ ] `/budget-app/reports` - Add PageHeader with tabs slot
 
 ### **Priority 2 - Secondary Pages**:
+
 - [ ] `/budget-app/loans` - Add PageHeader with Add Loan action
 - [ ] `/budget-app/loans/[id]` - Add breadcrumbs: Loans > Details
 - [ ] `/budget-app/investments` - Add PageHeader with Add Account action
@@ -411,6 +431,7 @@ import { Plus, Edit, Download } from 'lucide-react'; // Icons
 - [ ] `/budget-app/planning/retirement` - Add breadcrumbs: Planning > Retirement
 
 ### **Priority 3 - Utility Pages**:
+
 - [ ] `/budget-app/settings` - Add PageHeader
 - [ ] `/budget-app/import` - Add breadcrumbs: Import
 - [ ] `/budget-app/ocr` - Add breadcrumbs: OCR
@@ -421,26 +442,31 @@ import { Plus, Edit, Download } from 'lucide-react'; // Icons
 ## 🎨 Design System Compliance
 
 ### **Spacing**:
+
 - Header margin: `mb-section` (54px)
 - Title/description gap: `mt-2` (9px)
 - Action button gap: `gap-2` (9px)
 - Breadcrumb margin: `mb-4` (18px)
 
 ### **Typography**:
+
 - Title: `text-3xl sm:text-4xl font-bold` (36-48px)
 - Description: `text-base sm:text-lg` (18-20px)
 - Breadcrumb: `text-sm` (16px)
 
 ### **Colors**:
+
 - Title: `text-foreground` (primary text)
 - Description: `text-muted-foreground` (secondary text)
 - Breadcrumb links: `text-muted-foreground` (hover: `text-foreground`)
 
 ### **Motion**:
+
 - Link hover: `transition-colors` (300ms default easing)
 - Button hover: Inherited from Button component
 
 ### **Focus**:
+
 - Focus ring: `focus:ring-2 focus:ring-ring focus:ring-offset-2`
 - Rounded corners: `rounded-sm` (4px)
 
@@ -454,19 +480,20 @@ The `getBreadcrumbJsonLd()` function in `Breadcrumb.tsx` generates JSON-LD struc
 // Note: Only use with server-generated content
 export function getBreadcrumbJsonLd(items: BreadcrumbItem[]): object {
   return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
     itemListElement: items.map((item, index) => ({
-      '@type': 'ListItem',
+      "@type": "ListItem",
       position: index + 1,
       name: item.label,
-      item: `${process.env.NEXT_PUBLIC_SITE_URL || ''}${item.href}`,
+      item: `${process.env.NEXT_PUBLIC_SITE_URL || ""}${item.href}`,
     })),
   };
 }
 ```
 
 **Usage in Next.js Metadata** (recommended approach):
+
 ```tsx
 // app/budget-app/loans/[id]/page.tsx
 export async function generateMetadata({ params }: { params: { id: string } }) {
@@ -475,12 +502,17 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   return {
     title: loan.name,
     other: {
-      'breadcrumb': JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
+      breadcrumb: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Loans', item: '/budget-app/loans' },
-          { '@type': 'ListItem', position: 2, name: loan.name, item: `/budget-app/loans/${params.id}` },
+          { "@type": "ListItem", position: 1, name: "Loans", item: "/budget-app/loans" },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: loan.name,
+            item: `/budget-app/loans/${params.id}`,
+          },
         ],
       }),
     },
@@ -493,6 +525,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 ## 🧪 Testing
 
 ### **Manual Testing**:
+
 1. **Keyboard Navigation**:
    - Tab through breadcrumb links
    - Tab through action buttons
@@ -512,10 +545,11 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
    - Test horizontal scroll if needed
 
 ### **Automated Testing**:
+
 ```tsx
 // Example test with Playwright
-test('breadcrumb navigation works', async ({ page }) => {
-  await page.goto('/budget-app/loans/123');
+test("breadcrumb navigation works", async ({ page }) => {
+  await page.goto("/budget-app/loans/123");
 
   // Check breadcrumb exists
   const nav = page.locator('nav[aria-label="Breadcrumb"]');
@@ -527,11 +561,11 @@ test('breadcrumb navigation works', async ({ page }) => {
 
   // Check current page
   const currentPage = nav.locator('[aria-current="page"]');
-  await expect(currentPage).toHaveText('Details');
+  await expect(currentPage).toHaveText("Details");
 
   // Test navigation
   await nav.locator('a[href="/budget-app/loans"]').click();
-  await expect(page).toHaveURL('/budget-app/loans');
+  await expect(page).toHaveURL("/budget-app/loans");
 });
 ```
 
@@ -540,24 +574,28 @@ test('breadcrumb navigation works', async ({ page }) => {
 ## 📊 Impact
 
 ### **User Experience**:
+
 - ✅ Consistent navigation across all pages
 - ✅ Clear context ("where am I?")
 - ✅ Quick actions always accessible
 - ✅ Reduced clicks to common tasks
 
 ### **Accessibility**:
+
 - ✅ Screen reader navigation improved
 - ✅ Keyboard users can skip to content
 - ✅ ARIA landmarks for navigation
 - ✅ WCAG 2.2 AA compliant
 
 ### **Developer Experience**:
+
 - ✅ Reusable components (DRY principle)
 - ✅ Auto-generated breadcrumbs (less code)
 - ✅ Consistent API across pages
 - ✅ TypeScript types for safety
 
 ### **SEO**:
+
 - ✅ Structured data support available
 - ✅ Proper heading hierarchy
 - ✅ Semantic HTML
@@ -567,12 +605,14 @@ test('breadcrumb navigation works', async ({ page }) => {
 ## 🚀 Next Steps
 
 ### **Immediate**:
+
 1. Update all budget app pages with PageHeader
 2. Add breadcrumbs to detail pages (loans, investments)
 3. Test with screen readers
 4. Update design system playground to show examples
 
 ### **Future Enhancements** (optional):
+
 1. **Responsive Breadcrumbs**: Collapse middle items on mobile
 2. **Breadcrumb Dropdown**: Show truncated breadcrumbs in dropdown
 3. **Back Button**: Add browser back button to header
@@ -592,6 +632,7 @@ test('breadcrumb navigation works', async ({ page }) => {
 ## ✨ Summary
 
 **Implemented a complete breadcrumb and page header system** that:
+
 - Auto-generates breadcrumbs from URL paths
 - Provides consistent page headers with actions
 - Includes WCAG 2.2 AA accessibility (ARIA landmarks, keyboard nav, focus rings)

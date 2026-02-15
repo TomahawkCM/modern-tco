@@ -7,16 +7,19 @@ Apps included: YNAB, Monarch Money, Rocket Money, Copilot Money, Simplifi, Pocke
 ---
 
 ## Executive summary
+
 This report compares leading personal finance and budgeting applications across product capabilities, pricing and positioning. It summarizes common features, gaps across the market (especially for offline-first apps), and recommends a best-in-class feature set for both offline and online/cloud versions. It also outlines differentiation strategies and UX recommendations targeting seniors and beginners.
 
 ---
 
 ## Methodology
+
 This analysis synthesizes public product descriptions, help docs, and industry knowledge (product positioning, historical feature sets). It focuses on feature categories important to consumers and teams: core budgeting, premium capabilities, collaboration, automation, AI, offline behavior, platform support, pricing models, and unique differentiators.
 
 ---
 
 ## Per-app feature summary
+
 (Short, high-level snapshot used to build the matrix)
 
 - YNAB (You Need A Budget)
@@ -154,28 +157,30 @@ This analysis synthesizes public product descriptions, help docs, and industry k
 ---
 
 ## 1) Feature matrix
+
 (High-level — presence/strength: ✓ = core/strong, ~ = partial, - = absent)
 
-| App / Feature Category | Budgeting & envelopes | Account aggregation (bank linking) | Transaction import rules | Goals & forecasting | Investment tracking | Bill & subscription management | Shared/Collaboration | Automated negotiation/refunds | AI / Conversational features | Offline capability | Platforms | Pricing model |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
-| YNAB | ✓ | ~ | ~ | ✓ | - | - | ✓ | - | - | ✓ (local-first + sync) | Web,iOS,Android,Desktop | Subscription |
-| Monarch | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | - | ~ | - | Web,iOS,Android | Subscription |
-| Rocket Money | ~ | ✓ | ✓ | ~ | - | ✓ | ~ | ✓ | ~ | - | Web,iOS,Android | Freemium + subscription + success fees |
-| Copilot Money | ✓ | ✓ | ✓ | ✓ | ~ | ~ | ~ | - | ✓ | - | Web,iOS,Android | Subscription |
-| Simplifi | ✓ | ✓ | ✓ | ✓ | ~ | ✓ | - | - | - | - | Web,iOS,Android | Subscription |
-| PocketGuard | ✓ | ✓ | ✓ | ~ | - | ✓ | - | - | - | - | Web,iOS,Android | Freemium + subscription |
-| Honeydue | ✓ | ✓ | ✓ | ~ | - | ✓ | ✓ | - | - | - | iOS,Android,Web | Freemium + subscription |
-| Goodbudget | ✓ (envelope) | ~ | ~ | ~ | - | - | ✓ | - | - | ✓ (offline-first + sync) | Web,iOS,Android | Freemium + subscription |
-| Empower | ~ | ✓ | ✓ | ✓ | ✓ | ~ | ~ | - | - | - | Web,iOS,Android | Freemium + advisory fees |
-| Wallet | ✓ | ✓ | ✓ | ✓ | ~ | ✓ | ✓ | - | - | ~ | Web,iOS,Android | Freemium + subscription |
-| MoneyWiz | ✓ | ✓ | ✓ | ✓ | ~ | ✓ | ~ | - | - | ✓ (desktop local + optional cloud) | Win,Mac,iOS,Android | Mixed (one-time + subscription) |
-| HomeBank | ✓ | - | ✓ (import) | ~ | - | - | - | - | - | ✓ (fully offline) | Win,Mac,Linux | Free (OSS) |
+| App / Feature Category | Budgeting & envelopes | Account aggregation (bank linking) | Transaction import rules | Goals & forecasting | Investment tracking | Bill & subscription management | Shared/Collaboration | Automated negotiation/refunds | AI / Conversational features |                 Offline capability | Platforms               | Pricing model                          |
+| ---------------------- | --------------------: | ---------------------------------: | -----------------------: | ------------------: | ------------------: | -----------------------------: | -------------------: | ----------------------------: | ---------------------------: | ---------------------------------: | ----------------------- | -------------------------------------- |
+| YNAB                   |                     ✓ |                                  ~ |                        ~ |                   ✓ |                   - |                              - |                    ✓ |                             - |                            - |             ✓ (local-first + sync) | Web,iOS,Android,Desktop | Subscription                           |
+| Monarch                |                     ✓ |                                  ✓ |                        ✓ |                   ✓ |                   ✓ |                              ✓ |                    ✓ |                             - |                            ~ |                                  - | Web,iOS,Android         | Subscription                           |
+| Rocket Money           |                     ~ |                                  ✓ |                        ✓ |                   ~ |                   - |                              ✓ |                    ~ |                             ✓ |                            ~ |                                  - | Web,iOS,Android         | Freemium + subscription + success fees |
+| Copilot Money          |                     ✓ |                                  ✓ |                        ✓ |                   ✓ |                   ~ |                              ~ |                    ~ |                             - |                            ✓ |                                  - | Web,iOS,Android         | Subscription                           |
+| Simplifi               |                     ✓ |                                  ✓ |                        ✓ |                   ✓ |                   ~ |                              ✓ |                    - |                             - |                            - |                                  - | Web,iOS,Android         | Subscription                           |
+| PocketGuard            |                     ✓ |                                  ✓ |                        ✓ |                   ~ |                   - |                              ✓ |                    - |                             - |                            - |                                  - | Web,iOS,Android         | Freemium + subscription                |
+| Honeydue               |                     ✓ |                                  ✓ |                        ✓ |                   ~ |                   - |                              ✓ |                    ✓ |                             - |                            - |                                  - | iOS,Android,Web         | Freemium + subscription                |
+| Goodbudget             |          ✓ (envelope) |                                  ~ |                        ~ |                   ~ |                   - |                              - |                    ✓ |                             - |                            - |           ✓ (offline-first + sync) | Web,iOS,Android         | Freemium + subscription                |
+| Empower                |                     ~ |                                  ✓ |                        ✓ |                   ✓ |                   ✓ |                              ~ |                    ~ |                             - |                            - |                                  - | Web,iOS,Android         | Freemium + advisory fees               |
+| Wallet                 |                     ✓ |                                  ✓ |                        ✓ |                   ✓ |                   ~ |                              ✓ |                    ✓ |                             - |                            - |                                  ~ | Web,iOS,Android         | Freemium + subscription                |
+| MoneyWiz               |                     ✓ |                                  ✓ |                        ✓ |                   ✓ |                   ~ |                              ✓ |                    ~ |                             - |                            - | ✓ (desktop local + optional cloud) | Win,Mac,iOS,Android     | Mixed (one-time + subscription)        |
+| HomeBank               |                     ✓ |                                  - |               ✓ (import) |                   ~ |                   - |                              - |                    - |                             - |                            - |                  ✓ (fully offline) | Win,Mac,Linux           | Free (OSS)                             |
 
 Notes: The matrix above condenses complex product details. "~" indicates partial or limited support (e.g., import-only rather than live bank link).
 
 ---
 
 ## 2) Common features across apps
+
 - Account aggregation / bank linking (most online-first apps use Plaid or similar)
 - Automatic transaction import & categorization
 - Budget creation (categories/envelopes) and tracking
@@ -188,6 +193,7 @@ Notes: The matrix above condenses complex product details. "~" indicates partial
 ---
 
 ## 3) Missing or rare features across the market
+
 - True offline-first solutions with robust conflict-resolution and peer-to-peer sync (only a few like Goodbudget, HomeBank, MoneyWiz desktop come close)
 - End-to-end encrypted cloud storage with zero-knowledge by default (most rely on standard TLS + server-side encryption)
 - First-class support for multiple currencies with offline exchange rate handling (MoneyWiz supports multi-currency; many others limited)
@@ -198,7 +204,9 @@ Notes: The matrix above condenses complex product details. "~" indicates partial
 ---
 
 ## 4) Gaps specifically in offline-first budgeting apps
+
 Offline-first apps (Goodbudget, HomeBank, MoneyWiz desktop) tend to share weaknesses:
+
 - Bank linking is limited or absent; users must import OFX/QIF/CSV manually or rely on third-party sync tools
 - Collaboration is harder: sync requires a central server or manual file-sharing; conflict resolution can be clumsy
 - Real-time data (balances, pending transactions) unavailable, reducing accuracy for short-term decisions
@@ -209,9 +217,11 @@ Offline-first apps (Goodbudget, HomeBank, MoneyWiz desktop) tend to share weakne
 ---
 
 ## 5) Best-in-class feature set recommendations
+
 These are split into Offline (desktop/mobile-first without mandatory cloud) and Online/cloud versions.
 
 A) Offline (offline-first) best-in-class feature set
+
 - Local-first data storage with optional end-to-end encrypted cloud backup
 - Robust multi-device sync that supports peer-to-peer (LAN/Bluetooth) and conflict resolution with clear UI
 - Manual import of OFX/QFX/CSV plus scripted importers for popular banks
@@ -225,6 +235,7 @@ A) Offline (offline-first) best-in-class feature set
 - Lightweight AI helpers that run locally (on-device heuristics for categorization) or optional privacy-preserving models
 
 B) Online/cloud best-in-class feature set
+
 - Real-time bank linking (Plaid/TrueLayer/other) with per-account refresh frequency control
 - Automated transaction import, ML-driven categorization, and user-editable rules
 - Bill & subscription management with automated negotiation (where legal/allowed) and refunds discovery
@@ -240,6 +251,7 @@ B) Online/cloud best-in-class feature set
 ---
 
 ## 6) Differentiation strategy (product + GTM)
+
 Focus areas to stand out in a crowded market:
 
 - Privacy-first positioning: Offer an opt-in zero-knowledge mode and on-device AI. Market to privacy-conscious users and professionals.
@@ -254,7 +266,9 @@ Go-to-market: Partner with credit unions and regional banks to offer the offline
 ---
 
 ## 7) UX advantages for seniors and beginners
+
 Design principles:
+
 - Reduce cognitive load: Default to a single clear balance and one top-level monthly budget view. Use progressive disclosure for advanced features.
 - Large typography & high-contrast themes; support adjustable text size and voice narration for summaries.
 - Goal-driven onboarding: Start with 3 simple questions (income cadence, top 3 monthly expenses, savings goal) and auto-generate a runnable budget.
@@ -267,6 +281,7 @@ Design principles:
 ---
 
 ## 8) Market gaps & opportunities (summary)
+
 - Offline-first, privacy-preserving budgeting apps are underserved. Users who value privacy or travel frequently have limited choices beyond open-source desktop apps.
 - True end-to-end automation (autonomous negotiation agents, tax prep pipelines) are rare and often limited behind premium services.
 - Senior-focused UX remains an opportunity: few mainstream apps intentionally design for reduced cognitive load and accessibility-first workflows.
@@ -275,6 +290,7 @@ Design principles:
 ---
 
 ## Final recommendations
+
 1. If building an offline-capable product: prioritize local-first storage, optional encrypted sync, manual imports, and an accessible, simplified UX. Charge modestly (one-time or low monthly) for the base offline experience and add cloud/A.I. features as paid upgrades.
 2. If building an online/cloud product: invest in safe, powerful automation and a privacy-respecting AI assistant. Differentiate with a marketplace of vetted third-party automations and partner channels (credit unions, senior-care providers).
 3. For user acquisition: target privacy-conscious users, seniors, and households who value shared budgets but want better control than generic bank apps provide.
@@ -282,8 +298,8 @@ Design principles:
 ---
 
 ## Appendix: Sources & notes
-This analysis draws on public product docs, help centers, and product marketing information available as of 2024–2026. Representative sources used for awareness: product pages and support docs for YNAB, Monarch Money, Rocket Money (Truebill), Copilot Money materials, Simplifi (Quicken), PocketGuard, Honeydue, Goodbudget, Empower, Wallet (BudgetBakers), MoneyWiz, and HomeBank (project pages).  
 
+This analysis draws on public product docs, help centers, and product marketing information available as of 2024–2026. Representative sources used for awareness: product pages and support docs for YNAB, Monarch Money, Rocket Money (Truebill), Copilot Money materials, Simplifi (Quicken), PocketGuard, Honeydue, Goodbudget, Empower, Wallet (BudgetBakers), MoneyWiz, and HomeBank (project pages).
 
 ---
 

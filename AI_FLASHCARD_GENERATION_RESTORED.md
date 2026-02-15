@@ -9,13 +9,16 @@
 ## What Was Fixed
 
 ### Problem
+
 The **"Auto-Generate from Module"** button in the FlashcardGenerator UI was **not using AI**. It only created placeholder flashcards with generic text like:
+
 - Front: "Explain: [learning objective]"
 - Back: "Review the module for details..."
 
 This was NOT the intelligent AI generation the system was designed for.
 
 ### Solution
+
 ✅ Created real-time AI generation API endpoint
 ✅ Integrated with both Anthropic Claude and OpenAI GPT-4
 ✅ Updated flashcardService to call AI API
@@ -28,6 +31,7 @@ This was NOT the intelligent AI generation the system was designed for.
 ### 1. `/src/app/api/flashcards/generate/route.ts` (275 lines)
 
 **Features**:
+
 - ✅ **Dual AI Provider Support**: Anthropic Claude (preferred) + OpenAI GPT-4 (fallback)
 - ✅ **Intelligent Prompting**: Uses module title, domain, learning objectives, difficulty
 - ✅ **Quality Validation**: Parses and validates AI-generated flashcards
@@ -35,6 +39,7 @@ This was NOT the intelligent AI generation the system was designed for.
 - ✅ **Rich Metadata**: hints, explanations, tags
 
 **API Contract**:
+
 ```typescript
 // Request
 POST /api/flashcards/generate
@@ -66,6 +71,7 @@ POST /api/flashcards/generate
 ```
 
 **AI Models**:
+
 - **Primary**: `claude-3-5-sonnet-20241022` (Anthropic)
 - **Fallback**: `gpt-4-turbo-preview` (OpenAI)
 
@@ -78,6 +84,7 @@ POST /api/flashcards/generate
 **Changes**: Replaced `autoGenerateFromModule()` method
 
 **Before** (Dummy generation):
+
 ```typescript
 async autoGenerateFromModule(userId: string, moduleId: string) {
   // Just created basic cards from learning objectives
@@ -92,6 +99,7 @@ async autoGenerateFromModule(userId: string, moduleId: string) {
 ```
 
 **After** (Real AI generation):
+
 ```typescript
 async autoGenerateFromModule(userId: string, moduleId: string) {
   // Call AI generation API
@@ -127,6 +135,7 @@ async autoGenerateFromModule(userId: string, moduleId: string) {
 ```
 
 **Safety Features**:
+
 - ✅ **Fallback to basic generation** if AI API fails
 - ✅ **Detailed error logging** for debugging
 - ✅ **Validates module exists** before generation
@@ -177,12 +186,14 @@ Toast notification + UI update
 ## Environment Variables Required
 
 ### Option 1: Anthropic Claude (Recommended)
+
 ```bash
 # .env.local
 ANTHROPIC_API_KEY=sk-ant-api03-...
 ```
 
 ### Option 2: OpenAI GPT-4 (Fallback)
+
 ```bash
 # .env.local
 OPENAI_API_KEY=sk-proj-...
@@ -209,7 +220,7 @@ The API uses a sophisticated prompt that:
 3. **Supports multiple card types**:
    - **basic**: Simple Q&A
    - **concept**: Explain a concept
-   - **cloze**: Fill in the blank (e.g., "The ___ sensor returns computer names")
+   - **cloze**: Fill in the blank (e.g., "The \_\_\_ sensor returns computer names")
    - **code**: Code/command examples
    - **diagram**: Visual concept descriptions
 
@@ -225,6 +236,7 @@ The API uses a sophisticated prompt that:
 ### Module: "Asking Questions" (domain: `asking_questions`)
 
 **Card 1** (Concept):
+
 - **Front**: "What is the Tanium Sensor library and why is it important?"
 - **Back**: "The Sensor library contains 500+ pre-built sensors that collect real-time data from endpoints. It's the foundation of Tanium's question-based architecture."
 - **Hint**: "Think about data collection components"
@@ -232,13 +244,15 @@ The API uses a sophisticated prompt that:
 - **Tags**: ["asking_questions", "sensors", "ai-generated"]
 
 **Card 2** (Basic):
+
 - **Front**: "Name 3 commonly used Tanium sensors."
 - **Back**: "Computer Name, IP Address, Operating System"
 - **Type**: basic
 - **Tags**: ["asking_questions", "sensors", "ai-generated"]
 
 **Card 3** (Cloze):
-- **Front**: "The ___ sensor returns the operating system of an endpoint."
+
+- **Front**: "The \_\_\_ sensor returns the operating system of an endpoint."
 - **Back**: "Operating System"
 - **Type**: cloze
 - **Tags**: ["asking_questions", "sensors", "ai-generated"]
@@ -248,17 +262,20 @@ The API uses a sophisticated prompt that:
 ## Performance
 
 ### Generation Speed
+
 - **Average**: 5-10 seconds for 10-15 flashcards
 - **Anthropic Claude**: ~7 seconds (preferred)
 - **OpenAI GPT-4**: ~8 seconds
 
 ### Token Usage
+
 - **Input**: ~300-500 tokens (prompt + learning objectives)
 - **Output**: ~1000-2000 tokens (10-15 flashcards with metadata)
 - **Cost per generation** (Anthropic): ~$0.015
 - **Cost per generation** (OpenAI): ~$0.025
 
 ### Rate Limits
+
 - **Anthropic**: 50 requests/min (Tier 1)
 - **OpenAI**: 500 requests/min (Tier 1)
 - **Recommendation**: Implement rate limiting for production
@@ -294,6 +311,7 @@ The API uses a sophisticated prompt that:
 ### Manual Testing Steps
 
 1. **Start dev server**:
+
    ```bash
    npm run dev
    ```
@@ -337,6 +355,7 @@ curl -X POST http://localhost:3000/api/flashcards/generate \
 ```
 
 **Expected Response**:
+
 ```json
 {
   "success": true,
@@ -359,6 +378,7 @@ curl -X POST http://localhost:3000/api/flashcards/generate \
 ❌ **Time Saved**: None
 
 **Example Card**:
+
 - Front: "Explain: Understand the Sensor library"
 - Back: "Review the Asking Questions module for details on this learning objective."
 - **Usefulness**: 1/10 😞
@@ -372,6 +392,7 @@ curl -X POST http://localhost:3000/api/flashcards/generate \
 ✅ **Time Saved**: 90% (10 cards in 10 seconds vs 30 minutes manual)
 
 **Example Card**:
+
 - Front: "What are the 3 types of Computer Groups in Tanium and when should you use each?"
 - Back: "1) Manual Groups: Static lists you manage manually. 2) Computer Group Filters: Dynamic groups based on criteria. 3) Action Groups: Temporary groups for package deployment."
 - Hint: "Think about static vs dynamic..."
@@ -432,11 +453,13 @@ curl -X POST http://localhost:3000/api/flashcards/generate \
 **Symptom**: Toast shows "Failed to generate flashcards"
 
 **Causes**:
+
 1. No API key in `.env.local`
 2. Invalid API key
 3. Rate limit exceeded
 
 **Solution**:
+
 ```bash
 # Check .env.local
 cat .env.local | grep API_KEY
@@ -453,19 +476,22 @@ npm run dev
 **Symptom**: Request takes >30 seconds and times out
 
 **Causes**:
+
 1. Requesting too many flashcards (>20)
 2. Learning objectives are too long (>1000 words)
 3. AI model is slow
 
 **Solution**:
+
 - Reduce `count` parameter to ≤15
 - Summarize learning objectives
 - Add timeout to fetch call:
+
   ```typescript
   const controller = new AbortController();
   setTimeout(() => controller.abort(), 30000);
 
-  fetch('/api/flashcards/generate', {
+  fetch("/api/flashcards/generate", {
     signal: controller.signal,
     // ...
   });
@@ -476,11 +502,13 @@ npm run dev
 **Symptom**: Generated flashcards are too generic or off-topic
 
 **Causes**:
+
 1. Vague learning objectives
 2. Missing module context
 3. Wrong difficulty level
 
 **Solution**:
+
 - Improve learning objectives in `study_modules` table
 - Add more specific domain keywords
 - Adjust difficulty (easy → medium → hard)
@@ -521,18 +549,21 @@ npm run dev
 ✅ **AI Flashcard Generation is NOW WORKING**
 
 **What Changed**:
+
 - Created `/api/flashcards/generate` endpoint (275 lines)
 - Integrated Anthropic Claude 3.5 Sonnet + OpenAI GPT-4
 - Updated `flashcardService.autoGenerateFromModule()` to use AI
 - Added graceful fallback for errors
 
 **User Impact**:
+
 - ⚡ **10-15 intelligent flashcards** in 5-10 seconds
 - 🎯 **Study-ready quality** (no editing needed)
 - 🧠 **AI understands Tanium concepts** (not just generic Q&A)
 - ⏱️ **90% time savings** vs manual creation
 
 **Next Steps**:
+
 1. Test with real users
 2. Gather feedback on card quality
 3. Monitor AI costs

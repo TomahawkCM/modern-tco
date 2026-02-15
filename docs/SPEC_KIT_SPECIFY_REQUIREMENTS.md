@@ -2,7 +2,7 @@
 
 **Spec Kit Phase 1**: Project Intent Definition (Evidence-Based)  
 **Created**: 2025-01-10  
-**Purpose**: Define what the TCO certification platform actually needs without assumptions  
+**Purpose**: Define what the TCO certification platform actually needs without assumptions
 
 ## 🎯 TAN-1000 Certification Standards (Research Required)
 

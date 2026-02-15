@@ -5,10 +5,6 @@ import { ExamOnlyProviders } from "@/app/heavy-providers";
  *
  * Wraps assessment pages with ExamOnlyProviders.
  */
-export default function AssessmentsLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AssessmentsLayout({ children }: { children: React.ReactNode }) {
   return <ExamOnlyProviders>{children}</ExamOnlyProviders>;
 }

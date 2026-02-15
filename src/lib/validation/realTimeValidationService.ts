@@ -147,7 +147,7 @@ class RealTimeValidationService {
           level: "beginner",
           tone: "corrective",
           content: {
-            immediate: (feedback.failure?.content) || "Validation system error",
+            immediate: feedback.failure?.content || "Validation system error",
             detailed: "Please check your connection or contact support.",
             nextSteps: [],
           },
@@ -348,8 +348,11 @@ class RealTimeValidationService {
 
     switch (criterion.condition) {
       case "performed":
-        const actionFound = activityLog.some((entry: ActionHistory) =>
-          entry.action === criterion.target || (typeof entry.details === 'string' && entry.details.includes(criterion.target as string))
+        const actionFound = activityLog.some(
+          (entry: ActionHistory) =>
+            entry.action === criterion.target ||
+            (typeof entry.details === "string" &&
+              entry.details.includes(criterion.target as string))
         );
 
         return {
@@ -479,9 +482,9 @@ class RealTimeValidationService {
     const baseContent = result.feedback;
 
     let immediate =
-      this.feedbackMessageContent(baseContent, 'success') ||
-      this.feedbackMessageContent(baseContent, 'failure') ||
-      this.feedbackMessageContent(baseContent, 'partial');
+      this.feedbackMessageContent(baseContent, "success") ||
+      this.feedbackMessageContent(baseContent, "failure") ||
+      this.feedbackMessageContent(baseContent, "partial");
     let detailed = "";
     let nextSteps: string[] = [];
     let resources: string[] = [];
@@ -656,33 +659,43 @@ class RealTimeValidationService {
     );
   }
 
-  private feedbackToObject(feedback: any): { success?: any; failure?: any; partial?: any; hints?: any[] } {
+  private feedbackToObject(feedback: any): {
+    success?: any;
+    failure?: any;
+    partial?: any;
+    hints?: any[];
+  } {
     if (!feedback) return {};
     const t = typeof feedback;
-    if (t === 'string' || t === 'number' || t === 'boolean') {
-      return { failure: { title: '', content: String(feedback), type: 'error' } };
+    if (t === "string" || t === "number" || t === "boolean") {
+      return { failure: { title: "", content: String(feedback), type: "error" } };
     }
 
-    if (typeof feedback === 'object') {
+    if (typeof feedback === "object") {
       // If it already looks like a feedback object, return as-is
-      if ('success' in feedback || 'failure' in feedback || 'partial' in feedback || 'hints' in feedback) {
+      if (
+        "success" in feedback ||
+        "failure" in feedback ||
+        "partial" in feedback ||
+        "hints" in feedback
+      ) {
         return feedback;
       }
 
       // Unknown object shape - serialize into failure message
       try {
-        return { failure: { title: '', content: JSON.stringify(feedback), type: 'error' } };
+        return { failure: { title: "", content: JSON.stringify(feedback), type: "error" } };
       } catch (e) {
-        return { failure: { title: '', content: String(feedback), type: 'error' } };
+        return { failure: { title: "", content: String(feedback), type: "error" } };
       }
     }
 
-    return { failure: { title: '', content: String(feedback), type: 'error' } };
+    return { failure: { title: "", content: String(feedback), type: "error" } };
   }
 
-  private feedbackMessageContent(feedback: any, key: 'success' | 'failure' | 'partial'): string {
+  private feedbackMessageContent(feedback: any, key: "success" | "failure" | "partial"): string {
     const obj = this.feedbackToObject(feedback);
-    return (obj?.[key]?.content) || '';
+    return obj?.[key]?.content || "";
   }
 
   private selectFeedback(

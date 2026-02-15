@@ -9,14 +9,14 @@
  * - Background index rebuilding
  */
 
-import Dexie, { type Table } from 'dexie';
-import type { Transaction } from '@/types/budget';
+import Dexie, { type Table } from "dexie";
+import type { Transaction } from "@/types/budget";
 
 // Search index entry
 export interface SearchIndexEntry {
   id: string;
   transactionId: string;
-  field: 'description' | 'merchant' | 'category' | 'notes' | 'tags';
+  field: "description" | "merchant" | "category" | "notes" | "tags";
   value: string;
   tokens: string[]; // Tokenized words for fast lookup
   updatedAt: Date;
@@ -37,11 +37,11 @@ class SearchIndexDB extends Dexie {
   metadata!: Table<SearchIndexMeta>;
 
   constructor() {
-    super('BudgetSearchIndex');
+    super("BudgetSearchIndex");
 
     this.version(1).stores({
-      searchIndex: 'id, transactionId, field, *tokens',
-      metadata: 'id',
+      searchIndex: "id, transactionId, field, *tokens",
+      metadata: "id",
     });
   }
 }
@@ -68,9 +68,9 @@ function tokenize(text: string): string[] {
 
   return text
     .toLowerCase()
-    .replace(/[^\w\s]/g, ' ') // Replace punctuation with space
+    .replace(/[^\w\s]/g, " ") // Replace punctuation with space
     .split(/\s+/)
-    .filter(token => token.length >= 2) // Remove very short tokens
+    .filter((token) => token.length >= 2) // Remove very short tokens
     .filter((token, index, arr) => arr.indexOf(token) === index); // Deduplicate
 }
 
@@ -86,7 +86,7 @@ function createIndexEntries(transaction: Transaction): SearchIndexEntry[] {
     entries.push({
       id: `${transaction.id}-description`,
       transactionId: transaction.id,
-      field: 'description',
+      field: "description",
       value: transaction.description,
       tokens: tokenize(transaction.description),
       updatedAt: now,
@@ -98,7 +98,7 @@ function createIndexEntries(transaction: Transaction): SearchIndexEntry[] {
     entries.push({
       id: `${transaction.id}-merchant`,
       transactionId: transaction.id,
-      field: 'merchant',
+      field: "merchant",
       value: transaction.merchant,
       tokens: tokenize(transaction.merchant),
       updatedAt: now,
@@ -110,7 +110,7 @@ function createIndexEntries(transaction: Transaction): SearchIndexEntry[] {
     entries.push({
       id: `${transaction.id}-category`,
       transactionId: transaction.id,
-      field: 'category',
+      field: "category",
       value: transaction.category,
       tokens: tokenize(transaction.category),
       updatedAt: now,
@@ -122,7 +122,7 @@ function createIndexEntries(transaction: Transaction): SearchIndexEntry[] {
     entries.push({
       id: `${transaction.id}-notes`,
       transactionId: transaction.id,
-      field: 'notes',
+      field: "notes",
       value: transaction.notes,
       tokens: tokenize(transaction.notes),
       updatedAt: now,
@@ -134,9 +134,9 @@ function createIndexEntries(transaction: Transaction): SearchIndexEntry[] {
     entries.push({
       id: `${transaction.id}-tags`,
       transactionId: transaction.id,
-      field: 'tags',
-      value: transaction.tags.join(' '),
-      tokens: transaction.tags.map(t => t.toLowerCase()),
+      field: "tags",
+      value: transaction.tags.join(" "),
+      tokens: transaction.tags.map((t) => t.toLowerCase()),
       updatedAt: now,
     });
   }
@@ -160,7 +160,8 @@ export async function rebuildSearchIndex(transactions: Transaction[]): Promise<v
     // Create all entries
     const entries: SearchIndexEntry[] = [];
     for (const tx of transactions) {
-      if (!tx.isSplit) { // Skip split parent transactions
+      if (!tx.isSplit) {
+        // Skip split parent transactions
         entries.push(...createIndexEntries(tx));
       }
     }
@@ -170,7 +171,7 @@ export async function rebuildSearchIndex(transactions: Transaction[]): Promise<v
 
     // Update metadata
     await db.metadata.put({
-      id: 'main',
+      id: "main",
       lastRebuildAt: new Date(),
       transactionCount: transactions.length,
       entryCount: entries.length,
@@ -180,7 +181,7 @@ export async function rebuildSearchIndex(transactions: Transaction[]): Promise<v
     const duration = performance.now() - startTime;
     console.log(`[SearchIndex] Index built: ${entries.length} entries in ${duration.toFixed(2)}ms`);
   } catch (error) {
-    console.error('[SearchIndex] Error rebuilding index:', error);
+    console.error("[SearchIndex] Error rebuilding index:", error);
     throw error;
   }
 }
@@ -192,10 +193,7 @@ export async function updateTransactionIndex(transaction: Transaction): Promise<
   const db = getSearchDb();
 
   // Remove existing entries for this transaction
-  await db.searchIndex
-    .where('transactionId')
-    .equals(transaction.id)
-    .delete();
+  await db.searchIndex.where("transactionId").equals(transaction.id).delete();
 
   // Add new entries
   const entries = createIndexEntries(transaction);
@@ -210,10 +208,7 @@ export async function updateTransactionIndex(transaction: Transaction): Promise<
 export async function removeTransactionIndex(transactionId: string): Promise<void> {
   const db = getSearchDb();
 
-  await db.searchIndex
-    .where('transactionId')
-    .equals(transactionId)
-    .delete();
+  await db.searchIndex.where("transactionId").equals(transactionId).delete();
 }
 
 /**
@@ -222,13 +217,10 @@ export async function removeTransactionIndex(transactionId: string): Promise<voi
 export async function bulkUpdateIndex(transactions: Transaction[]): Promise<void> {
   const db = getSearchDb();
 
-  const transactionIds = transactions.map(tx => tx.id);
+  const transactionIds = transactions.map((tx) => tx.id);
 
   // Remove existing entries
-  await db.searchIndex
-    .where('transactionId')
-    .anyOf(transactionIds)
-    .delete();
+  await db.searchIndex.where("transactionId").anyOf(transactionIds).delete();
 
   // Add new entries
   const entries: SearchIndexEntry[] = [];
@@ -256,17 +248,14 @@ export async function searchIndex(query: string): Promise<string[]> {
   }
 
   // Find entries matching any token
-  const matchingEntries = await db.searchIndex
-    .where('tokens')
-    .anyOf(tokens)
-    .toArray();
+  const matchingEntries = await db.searchIndex.where("tokens").anyOf(tokens).toArray();
 
   // Group by transaction ID and count matches
   const scoreMap = new Map<string, number>();
 
   for (const entry of matchingEntries) {
-    const matchCount = tokens.filter(t =>
-      entry.tokens.includes(t) || entry.value.toLowerCase().includes(t)
+    const matchCount = tokens.filter(
+      (t) => entry.tokens.includes(t) || entry.value.toLowerCase().includes(t)
     ).length;
 
     const currentScore = scoreMap.get(entry.transactionId) || 0;
@@ -286,7 +275,7 @@ export async function indexNeedsRebuild(transactionCount: number): Promise<boole
   const db = getSearchDb();
 
   try {
-    const meta = await db.metadata.get('main');
+    const meta = await db.metadata.get("main");
 
     if (!meta) return true;
     if (meta.version !== INDEX_VERSION) return true;
@@ -317,7 +306,7 @@ export async function getIndexStats(): Promise<{
   const db = getSearchDb();
 
   try {
-    const meta = await db.metadata.get('main');
+    const meta = await db.metadata.get("main");
     const entryCount = await db.searchIndex.count();
 
     return {

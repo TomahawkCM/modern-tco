@@ -50,5 +50,5 @@ To test restoration without affecting production:
 - **Backup Location:** backups/pre-deploy-20251010_005626
 - **Backup Size:** 292K
 
-**Verified By:** ******\_\_\_\_******
-**Date:** ******\_\_\_\_******
+**Verified By:** **\*\***\_\_\_\_**\*\***
+**Date:** **\*\***\_\_\_\_**\*\***

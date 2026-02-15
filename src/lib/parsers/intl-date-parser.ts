@@ -4,7 +4,7 @@
  * Uses a fallback chain: locale-specific → chrono-node → numeric patterns → Date constructor
  */
 
-import * as chrono from 'chrono-node';
+import * as chrono from "chrono-node";
 
 /**
  * Parse a date string that may be in any language or format.
@@ -26,7 +26,7 @@ import * as chrono from 'chrono-node';
  * @returns Parsed Date or null
  */
 export function parseDate(str: string, locale?: string): Date | null {
-  if (!str || typeof str !== 'string') return null;
+  if (!str || typeof str !== "string") return null;
 
   const cleaned = str.trim();
   if (cleaned.length === 0) return null;
@@ -67,104 +67,469 @@ export function parseDate(str: string, locale?: string): Date | null {
 // Month names in major languages
 const MONTH_NAMES: Record<string, string[]> = {
   // English
-  en: ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'],
-  en_abbr: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
+  en: [
+    "january",
+    "february",
+    "march",
+    "april",
+    "may",
+    "june",
+    "july",
+    "august",
+    "september",
+    "october",
+    "november",
+    "december",
+  ],
+  en_abbr: ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"],
 
   // Spanish
-  es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
-  es_abbr: ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'],
+  es: [
+    "enero",
+    "febrero",
+    "marzo",
+    "abril",
+    "mayo",
+    "junio",
+    "julio",
+    "agosto",
+    "septiembre",
+    "octubre",
+    "noviembre",
+    "diciembre",
+  ],
+  es_abbr: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
 
   // French
-  fr: ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
-  fr_abbr: ['janv', 'févr', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc'],
+  fr: [
+    "janvier",
+    "février",
+    "mars",
+    "avril",
+    "mai",
+    "juin",
+    "juillet",
+    "août",
+    "septembre",
+    "octobre",
+    "novembre",
+    "décembre",
+  ],
+  fr_abbr: [
+    "janv",
+    "févr",
+    "mars",
+    "avr",
+    "mai",
+    "juin",
+    "juil",
+    "août",
+    "sept",
+    "oct",
+    "nov",
+    "déc",
+  ],
 
   // German
-  de: ['januar', 'februar', 'märz', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'dezember'],
-  de_abbr: ['jan', 'feb', 'mär', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dez'],
+  de: [
+    "januar",
+    "februar",
+    "märz",
+    "april",
+    "mai",
+    "juni",
+    "juli",
+    "august",
+    "september",
+    "oktober",
+    "november",
+    "dezember",
+  ],
+  de_abbr: ["jan", "feb", "mär", "apr", "mai", "jun", "jul", "aug", "sep", "okt", "nov", "dez"],
 
   // Portuguese
-  pt: ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'],
-  pt_abbr: ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
+  pt: [
+    "janeiro",
+    "fevereiro",
+    "março",
+    "abril",
+    "maio",
+    "junho",
+    "julho",
+    "agosto",
+    "setembro",
+    "outubro",
+    "novembro",
+    "dezembro",
+  ],
+  pt_abbr: ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"],
 
   // Italian
-  it: ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'],
-  it_abbr: ['gen', 'feb', 'mar', 'apr', 'mag', 'giu', 'lug', 'ago', 'set', 'ott', 'nov', 'dic'],
+  it: [
+    "gennaio",
+    "febbraio",
+    "marzo",
+    "aprile",
+    "maggio",
+    "giugno",
+    "luglio",
+    "agosto",
+    "settembre",
+    "ottobre",
+    "novembre",
+    "dicembre",
+  ],
+  it_abbr: ["gen", "feb", "mar", "apr", "mag", "giu", "lug", "ago", "set", "ott", "nov", "dic"],
 
   // Dutch
-  nl: ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'],
-  nl_abbr: ['jan', 'feb', 'mrt', 'apr', 'mei', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
+  nl: [
+    "januari",
+    "februari",
+    "maart",
+    "april",
+    "mei",
+    "juni",
+    "juli",
+    "augustus",
+    "september",
+    "oktober",
+    "november",
+    "december",
+  ],
+  nl_abbr: ["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"],
 
   // Russian
-  ru: ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'],
-  ru_gen: ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'],
+  ru: [
+    "январь",
+    "февраль",
+    "март",
+    "апрель",
+    "май",
+    "июнь",
+    "июль",
+    "август",
+    "сентябрь",
+    "октябрь",
+    "ноябрь",
+    "декабрь",
+  ],
+  ru_gen: [
+    "января",
+    "февраля",
+    "марта",
+    "апреля",
+    "мая",
+    "июня",
+    "июля",
+    "августа",
+    "сентября",
+    "октября",
+    "ноября",
+    "декабря",
+  ],
 
   // Turkish
-  tr: ['ocak', 'şubat', 'mart', 'nisan', 'mayıs', 'haziran', 'temmuz', 'ağustos', 'eylül', 'ekim', 'kasım', 'aralık'],
-  tr_abbr: ['oca', 'şub', 'mar', 'nis', 'may', 'haz', 'tem', 'ağu', 'eyl', 'eki', 'kas', 'ara'],
+  tr: [
+    "ocak",
+    "şubat",
+    "mart",
+    "nisan",
+    "mayıs",
+    "haziran",
+    "temmuz",
+    "ağustos",
+    "eylül",
+    "ekim",
+    "kasım",
+    "aralık",
+  ],
+  tr_abbr: ["oca", "şub", "mar", "nis", "may", "haz", "tem", "ağu", "eyl", "eki", "kas", "ara"],
 
   // Polish
-  pl: ['styczeń', 'luty', 'marzec', 'kwiecień', 'maj', 'czerwiec', 'lipiec', 'sierpień', 'wrzesień', 'październik', 'listopad', 'grudzień'],
-  pl_gen: ['stycznia', 'lutego', 'marca', 'kwietnia', 'maja', 'czerwca', 'lipca', 'sierpnia', 'września', 'października', 'listopada', 'grudnia'],
+  pl: [
+    "styczeń",
+    "luty",
+    "marzec",
+    "kwiecień",
+    "maj",
+    "czerwiec",
+    "lipiec",
+    "sierpień",
+    "wrzesień",
+    "październik",
+    "listopad",
+    "grudzień",
+  ],
+  pl_gen: [
+    "stycznia",
+    "lutego",
+    "marca",
+    "kwietnia",
+    "maja",
+    "czerwca",
+    "lipca",
+    "sierpnia",
+    "września",
+    "października",
+    "listopada",
+    "grudnia",
+  ],
 
   // Czech
-  cs: ['leden', 'únor', 'březen', 'duben', 'květen', 'červen', 'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec'],
+  cs: [
+    "leden",
+    "únor",
+    "březen",
+    "duben",
+    "květen",
+    "červen",
+    "červenec",
+    "srpen",
+    "září",
+    "říjen",
+    "listopad",
+    "prosinec",
+  ],
 
   // Hungarian
-  hu: ['január', 'február', 'március', 'április', 'május', 'június', 'július', 'augusztus', 'szeptember', 'október', 'november', 'december'],
+  hu: [
+    "január",
+    "február",
+    "március",
+    "április",
+    "május",
+    "június",
+    "július",
+    "augusztus",
+    "szeptember",
+    "október",
+    "november",
+    "december",
+  ],
 
   // Romanian
-  ro: ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'],
+  ro: [
+    "ianuarie",
+    "februarie",
+    "martie",
+    "aprilie",
+    "mai",
+    "iunie",
+    "iulie",
+    "august",
+    "septembrie",
+    "octombrie",
+    "noiembrie",
+    "decembrie",
+  ],
 
   // Swedish
-  sv: ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december'],
+  sv: [
+    "januari",
+    "februari",
+    "mars",
+    "april",
+    "maj",
+    "juni",
+    "juli",
+    "augusti",
+    "september",
+    "oktober",
+    "november",
+    "december",
+  ],
 
   // Norwegian
-  no: ['januar', 'februar', 'mars', 'april', 'mai', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'desember'],
+  no: [
+    "januar",
+    "februar",
+    "mars",
+    "april",
+    "mai",
+    "juni",
+    "juli",
+    "august",
+    "september",
+    "oktober",
+    "november",
+    "desember",
+  ],
 
   // Danish
-  da: ['januar', 'februar', 'marts', 'april', 'maj', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'december'],
+  da: [
+    "januar",
+    "februar",
+    "marts",
+    "april",
+    "maj",
+    "juni",
+    "juli",
+    "august",
+    "september",
+    "oktober",
+    "november",
+    "december",
+  ],
 
   // Finnish
-  fi: ['tammikuu', 'helmikuu', 'maaliskuu', 'huhtikuu', 'toukokuu', 'kesäkuu', 'heinäkuu', 'elokuu', 'syyskuu', 'lokakuu', 'marraskuu', 'joulukuu'],
+  fi: [
+    "tammikuu",
+    "helmikuu",
+    "maaliskuu",
+    "huhtikuu",
+    "toukokuu",
+    "kesäkuu",
+    "heinäkuu",
+    "elokuu",
+    "syyskuu",
+    "lokakuu",
+    "marraskuu",
+    "joulukuu",
+  ],
 
   // Indonesian
-  id: ['januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember'],
+  id: [
+    "januari",
+    "februari",
+    "maret",
+    "april",
+    "mei",
+    "juni",
+    "juli",
+    "agustus",
+    "september",
+    "oktober",
+    "november",
+    "desember",
+  ],
 
   // Malay
-  ms: ['januari', 'februari', 'mac', 'april', 'mei', 'jun', 'julai', 'ogos', 'september', 'oktober', 'november', 'disember'],
+  ms: [
+    "januari",
+    "februari",
+    "mac",
+    "april",
+    "mei",
+    "jun",
+    "julai",
+    "ogos",
+    "september",
+    "oktober",
+    "november",
+    "disember",
+  ],
 
   // Vietnamese
-  vi_month: ['tháng 1', 'tháng 2', 'tháng 3', 'tháng 4', 'tháng 5', 'tháng 6', 'tháng 7', 'tháng 8', 'tháng 9', 'tháng 10', 'tháng 11', 'tháng 12'],
+  vi_month: [
+    "tháng 1",
+    "tháng 2",
+    "tháng 3",
+    "tháng 4",
+    "tháng 5",
+    "tháng 6",
+    "tháng 7",
+    "tháng 8",
+    "tháng 9",
+    "tháng 10",
+    "tháng 11",
+    "tháng 12",
+  ],
 
   // Thai
-  th: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
-  th_abbr: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'],
+  th: [
+    "มกราคม",
+    "กุมภาพันธ์",
+    "มีนาคม",
+    "เมษายน",
+    "พฤษภาคม",
+    "มิถุนายน",
+    "กรกฎาคม",
+    "สิงหาคม",
+    "กันยายน",
+    "ตุลาคม",
+    "พฤศจิกายน",
+    "ธันวาคม",
+  ],
+  th_abbr: [
+    "ม.ค.",
+    "ก.พ.",
+    "มี.ค.",
+    "เม.ย.",
+    "พ.ค.",
+    "มิ.ย.",
+    "ก.ค.",
+    "ส.ค.",
+    "ก.ย.",
+    "ต.ค.",
+    "พ.ย.",
+    "ธ.ค.",
+  ],
 
   // Hindi
-  hi: ['जनवरी', 'फ़रवरी', 'मार्च', 'अप्रैल', 'मई', 'जून', 'जुलाई', 'अगस्त', 'सितंबर', 'अक्तूबर', 'नवंबर', 'दिसंबर'],
+  hi: [
+    "जनवरी",
+    "फ़रवरी",
+    "मार्च",
+    "अप्रैल",
+    "मई",
+    "जून",
+    "जुलाई",
+    "अगस्त",
+    "सितंबर",
+    "अक्तूबर",
+    "नवंबर",
+    "दिसंबर",
+  ],
 
   // Arabic
-  ar: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+  ar: [
+    "يناير",
+    "فبراير",
+    "مارس",
+    "أبريل",
+    "مايو",
+    "يونيو",
+    "يوليو",
+    "أغسطس",
+    "سبتمبر",
+    "أكتوبر",
+    "نوفمبر",
+    "ديسمبر",
+  ],
 
   // Hebrew
-  he: ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'],
+  he: [
+    "ינואר",
+    "פברואר",
+    "מרץ",
+    "אפריל",
+    "מאי",
+    "יוני",
+    "יולי",
+    "אוגוסט",
+    "ספטמבר",
+    "אוקטובר",
+    "נובמבר",
+    "דצמבר",
+  ],
 
   // Korean
-  ko: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+  ko: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
 };
 
 /**
  * Try parsing date using locale-specific month names
  */
 function tryLocaleMonthParsing(str: string, locale?: string): Date | null {
-  const lower = str.toLowerCase()
-    .replace(/\./g, '')    // Remove dots (German: "15. Jan.")
-    .replace(/,/g, '')     // Remove commas
-    .replace(/\bde\b/g, '') // Remove Spanish/Portuguese "de"
-    .replace(/\bof\b/g, '') // Remove English "of"
-    .replace(/\bel\b/g, '') // Remove Spanish "el"
+  const lower = str
+    .toLowerCase()
+    .replace(/\./g, "") // Remove dots (German: "15. Jan.")
+    .replace(/,/g, "") // Remove commas
+    .replace(/\bde\b/g, "") // Remove Spanish/Portuguese "de"
+    .replace(/\bof\b/g, "") // Remove English "of"
+    .replace(/\bel\b/g, "") // Remove Spanish "el"
     .trim()
-    .replace(/\s+/g, ' ');
+    .replace(/\s+/g, " ");
 
   // Try all language month lists
   for (const [, months] of Object.entries(MONTH_NAMES)) {
@@ -173,7 +538,7 @@ function tryLocaleMonthParsing(str: string, locale?: string): Date | null {
       if (!lower.includes(monthName)) continue;
 
       // Extract day and year from around the month name
-      const parts = lower.split(monthName).map(p => p.trim());
+      const parts = lower.split(monthName).map((p) => p.trim());
 
       let day: number | null = null;
       let year: number | null = null;
@@ -212,8 +577,8 @@ function tryLocaleMonthParsing(str: string, locale?: string): Date | null {
  */
 function tryCJKDateParsing(str: string): Date | null {
   // Japanese/Chinese: 2025年1月15日 or ２０２５年１月１５日
-  const normalized = str.replace(/[０-９]/g, ch =>
-    String.fromCharCode(ch.charCodeAt(0) - 0xFF10 + 0x30)
+  const normalized = str.replace(/[０-９]/g, (ch) =>
+    String.fromCharCode(ch.charCodeAt(0) - 0xff10 + 0x30)
   );
 
   const cjkMatch = normalized.match(/(\d{2,4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/);
@@ -251,7 +616,7 @@ function tryArabicDigitParsing(str: string): Date | null {
   // Check if string contains Arabic-Indic digits (٠-٩)
   if (!/[٠-٩]/.test(str)) return null;
 
-  const converted = str.replace(/[٠-٩]/g, d =>
+  const converted = str.replace(/[٠-٩]/g, (d) =>
     String.fromCharCode(d.charCodeAt(0) - 0x0660 + 0x30)
   );
 
@@ -300,7 +665,7 @@ function tryNumericParsing(str: string, locale?: string): Date | null {
         const year = parseInt(m[3]);
 
         // If locale suggests US format (month first)
-        const isUSFormat = locale && (locale.startsWith('en-US') || locale === 'en');
+        const isUSFormat = locale && (locale.startsWith("en-US") || locale === "en");
 
         if (isUSFormat) {
           // MM/DD/YYYY
@@ -332,7 +697,7 @@ function tryNumericParsing(str: string, locale?: string): Date | null {
         let year = parseInt(m[3]);
         year = year < 50 ? 2000 + year : 1900 + year;
 
-        const isUSFormat = locale && (locale.startsWith('en-US') || locale === 'en');
+        const isUSFormat = locale && (locale.startsWith("en-US") || locale === "en");
 
         if (isUSFormat && a >= 1 && a <= 12 && b >= 1 && b <= 31) {
           const date = new Date(year, a - 1, b);

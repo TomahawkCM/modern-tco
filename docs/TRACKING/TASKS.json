@@ -20,11 +20,7 @@
         "modern-tco/package.json"
       ],
       "dependencies": [],
-      "validate": [
-        "npm ci",
-        "npm run build",
-        "npm test -i"
-      ]
+      "validate": ["npm ci", "npm run build", "npm test -i"]
     },
     {
       "id": "TASK-0002",
@@ -41,13 +37,8 @@
         "modern-tco/src/lib/progress.*",
         "modern-tco/src/types/**"
       ],
-      "dependencies": [
-        "TASK-0001"
-      ],
-      "validate": [
-        "npm run build",
-        "npm test -i"
-      ]
+      "dependencies": ["TASK-0001"],
+      "validate": ["npm run build", "npm test -i"]
     },
     {
       "id": "TASK-0003",
@@ -64,13 +55,8 @@
         "modern-tco/src/types/**",
         "modern-tco/package.json"
       ],
-      "dependencies": [
-        "TASK-0001"
-      ],
-      "validate": [
-        "npm run build",
-        "npm test -i"
-      ]
+      "dependencies": ["TASK-0001"],
+      "validate": ["npm run build", "npm test -i"]
     },
     {
       "id": "TASK-0004",
@@ -87,13 +73,8 @@
         "modern-tco/src/lib/drills.*",
         "modern-tco/src/types/**"
       ],
-      "dependencies": [
-        "TASK-0003"
-      ],
-      "validate": [
-        "npm run build",
-        "npm test -i"
-      ]
+      "dependencies": ["TASK-0003"],
+      "validate": ["npm run build", "npm test -i"]
     },
     {
       "id": "TASK-0005",
@@ -110,13 +91,8 @@
         "modern-tco/src/lib/exam.*",
         "modern-tco/src/types/**"
       ],
-      "dependencies": [
-        "TASK-0003"
-      ],
-      "validate": [
-        "npm run build",
-        "npm test -i"
-      ]
+      "dependencies": ["TASK-0003"],
+      "validate": ["npm run build", "npm test -i"]
     },
     {
       "id": "TASK-0006",
@@ -134,9 +110,7 @@
         "modern-tco/src/types/**"
       ],
       "dependencies": [],
-      "validate": [
-        "npm run build"
-      ]
+      "validate": ["npm run build"]
     },
     {
       "id": "TASK-0007",
@@ -148,16 +122,9 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0007.md",
       "task_md": "docs/TASKS/TASK-0007.md",
-      "allowed_files": [
-        "modern-tco/src/content/videos/**",
-        "modern-tco/src/app/learn/**"
-      ],
-      "dependencies": [
-        "TASK-0001"
-      ],
-      "validate": [
-        "npm run build"
-      ]
+      "allowed_files": ["modern-tco/src/content/videos/**", "modern-tco/src/app/learn/**"],
+      "dependencies": ["TASK-0001"],
+      "validate": ["npm run build"]
     },
     {
       "id": "TASK-0008",
@@ -169,16 +136,9 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0008.md",
       "task_md": "docs/TASKS/TASK-0008.md",
-      "allowed_files": [
-        "modern-tco/src/app/learn/**",
-        "modern-tco/src/content/modules/**"
-      ],
-      "dependencies": [
-        "TASK-0001"
-      ],
-      "validate": [
-        "npm run build"
-      ]
+      "allowed_files": ["modern-tco/src/app/learn/**", "modern-tco/src/content/modules/**"],
+      "dependencies": ["TASK-0001"],
+      "validate": ["npm run build"]
     },
     {
       "id": "TASK-0009",
@@ -194,13 +154,8 @@
         "modern-tco/src/components/BlueprintMeter.*",
         "modern-tco/src/lib/blueprint.*"
       ],
-      "dependencies": [
-        "TASK-0003"
-      ],
-      "validate": [
-        "npm run build",
-        "npm test -i"
-      ]
+      "dependencies": ["TASK-0003"],
+      "validate": ["npm run build", "npm test -i"]
     },
     {
       "id": "TASK-0010",
@@ -212,17 +167,9 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0010.md",
       "task_md": "docs/TASKS/TASK-0010.md",
-      "allowed_files": [
-        "modern-tco/src/app/progress/**",
-        "modern-tco/src/lib/progress.*"
-      ],
-      "dependencies": [
-        "TASK-0005"
-      ],
-      "validate": [
-        "npm run build",
-        "npm test -i"
-      ]
+      "allowed_files": ["modern-tco/src/app/progress/**", "modern-tco/src/lib/progress.*"],
+      "dependencies": ["TASK-0005"],
+      "validate": ["npm run build", "npm test -i"]
     },
     {
       "id": "TASK-0011",
@@ -234,16 +181,9 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0011.md",
       "task_md": "docs/TASKS/TASK-0011.md",
-      "allowed_files": [
-        "modern-tco/src/app/notes/**",
-        "modern-tco/src/lib/sr.*"
-      ],
-      "dependencies": [
-        "TASK-0003"
-      ],
-      "validate": [
-        "npm run build"
-      ]
+      "allowed_files": ["modern-tco/src/app/notes/**", "modern-tco/src/lib/sr.*"],
+      "dependencies": ["TASK-0003"],
+      "validate": ["npm run build"]
     },
     {
       "id": "TASK-0012",
@@ -255,16 +195,9 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0012.md",
       "task_md": "docs/TASKS/TASK-0012.md",
-      "allowed_files": [
-        "modern-tco/src/app/pricing/**",
-        "modern-tco/src/app/api/stripe/**"
-      ],
-      "dependencies": [
-        "TASK-0006"
-      ],
-      "validate": [
-        "npm run build"
-      ]
+      "allowed_files": ["modern-tco/src/app/pricing/**", "modern-tco/src/app/api/stripe/**"],
+      "dependencies": ["TASK-0006"],
+      "validate": ["npm run build"]
     },
     {
       "id": "TASK-0013",
@@ -276,14 +209,9 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0013.md",
       "task_md": "docs/TASKS/TASK-0013.md",
-      "allowed_files": [
-        "modern-tco/src/components/**",
-        "modern-tco/src/app/layout.*"
-      ],
+      "allowed_files": ["modern-tco/src/components/**", "modern-tco/src/app/layout.*"],
       "dependencies": [],
-      "validate": [
-        "npm run build"
-      ]
+      "validate": ["npm run build"]
     },
     {
       "id": "TASK-0014",
@@ -295,14 +223,9 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0014.md",
       "task_md": "docs/TASKS/TASK-0014.md",
-      "allowed_files": [
-        "modern-tco/src/lib/analytics.*",
-        "modern-tco/src/app/**"
-      ],
+      "allowed_files": ["modern-tco/src/lib/analytics.*", "modern-tco/src/app/**"],
       "dependencies": [],
-      "validate": [
-        "npm run build"
-      ]
+      "validate": ["npm run build"]
     },
     {
       "id": "TASK-0015",
@@ -314,13 +237,9 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0015.md",
       "task_md": "docs/TASKS/TASK-0015.md",
-      "allowed_files": [
-        "modern-tco/next.config.*"
-      ],
+      "allowed_files": ["modern-tco/next.config.*"],
       "dependencies": [],
-      "validate": [
-        "npm run build"
-      ]
+      "validate": ["npm run build"]
     },
     {
       "id": "TASK-0016",
@@ -332,16 +251,9 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0016.md",
       "task_md": "docs/TASKS/TASK-0016.md",
-      "allowed_files": [
-        "modern-tco/src/app/team/**",
-        "modern-tco/src/lib/team.*"
-      ],
-      "dependencies": [
-        "TASK-0006"
-      ],
-      "validate": [
-        "npm run build"
-      ]
+      "allowed_files": ["modern-tco/src/app/team/**", "modern-tco/src/lib/team.*"],
+      "dependencies": ["TASK-0006"],
+      "validate": ["npm run build"]
     },
     {
       "id": "TASK-0017",
@@ -353,16 +265,9 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0017.md",
       "task_md": "docs/TASKS/TASK-0017.md",
-      "allowed_files": [
-        "modern-tco/src/app/admin/**",
-        "modern-tco/src/lib/content.*"
-      ],
-      "dependencies": [
-        "TASK-0003"
-      ],
-      "validate": [
-        "npm run build"
-      ]
+      "allowed_files": ["modern-tco/src/app/admin/**", "modern-tco/src/lib/content.*"],
+      "dependencies": ["TASK-0003"],
+      "validate": ["npm run build"]
     },
     {
       "id": "TASK-0018",
@@ -374,14 +279,9 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0018.md",
       "task_md": "docs/TASKS/TASK-0018.md",
-      "allowed_files": [
-        "modern-tco/tests/e2e/**",
-        "modern-tco/package.json"
-      ],
+      "allowed_files": ["modern-tco/tests/e2e/**", "modern-tco/package.json"],
       "dependencies": [],
-      "validate": [
-        "npm run build"
-      ]
+      "validate": ["npm run build"]
     },
     {
       "id": "TASK-0019",
@@ -393,10 +293,7 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-0019.md",
       "task_md": "docs/TASKS/TASK-0019.md",
-      "allowed_files": [
-        "docs/OPS/**",
-        "docs/TRACKING/CHANGELOG.md"
-      ],
+      "allowed_files": ["docs/OPS/**", "docs/TRACKING/CHANGELOG.md"],
       "dependencies": [],
       "validate": []
     },
@@ -410,13 +307,9 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-OPS-0001.md",
       "task_md": "docs/TASKS/TASK-OPS-0001.md",
-      "allowed_files": [
-        "modern-tco/next.config.*"
-      ],
+      "allowed_files": ["modern-tco/next.config.*"],
       "dependencies": [],
-      "validate": [
-        "npm run build"
-      ]
+      "validate": ["npm run build"]
     },
     {
       "id": "TASK-OPS-0002",
@@ -428,9 +321,7 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-OPS-0002.md",
       "task_md": "docs/TASKS/TASK-OPS-0002.md",
-      "allowed_files": [
-        "vercel.json"
-      ],
+      "allowed_files": ["vercel.json"],
       "dependencies": [],
       "validate": []
     },
@@ -444,10 +335,7 @@
       "prompt_template": "CODEX/TASK_GENERIC.md",
       "prompt_path": "docs/PROMPTS/CODEX/run-TASK-OPS-0003.md",
       "task_md": "docs/TASKS/TASK-OPS-0003.md",
-      "allowed_files": [
-        "docs/SESSIONS/**",
-        "docs/TRACKING/CHANGELOG.md"
-      ],
+      "allowed_files": ["docs/SESSIONS/**", "docs/TRACKING/CHANGELOG.md"],
       "dependencies": [],
       "validate": []
     }

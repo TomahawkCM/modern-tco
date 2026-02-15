@@ -7,17 +7,7 @@
 
 import { useSeniorsMode } from "@/contexts/SeniorsModeContext";
 import { cn } from "@/lib/utils";
-import {
-  ArrowRight,
-  Check,
-  Eye,
-  Hand,
-  Moon,
-  Sparkles,
-  Type,
-  Volume2,
-  Zap,
-} from "lucide-react";
+import { ArrowRight, Check, Eye, Hand, Moon, Sparkles, Type, Volume2, Zap } from "lucide-react";
 import { useCallback, useState } from "react";
 import type { StepProps } from "./OnboardingWizard";
 
@@ -113,13 +103,16 @@ export function AccessibilityStep({ onComplete, onSkip }: StepProps) {
     setCustomSettings(preset.settings);
   }, []);
 
-  const handleCustomToggle = useCallback((setting: "highContrast" | "reduceMotion" | "simplifiedMode" | "increasedSpacing") => {
-    setCustomSettings((prev) => ({
-      ...prev,
-      [setting]: !prev[setting],
-    }));
-    setSelectedPreset("custom");
-  }, []);
+  const handleCustomToggle = useCallback(
+    (setting: "highContrast" | "reduceMotion" | "simplifiedMode" | "increasedSpacing") => {
+      setCustomSettings((prev) => ({
+        ...prev,
+        [setting]: !prev[setting],
+      }));
+      setSelectedPreset("custom");
+    },
+    []
+  );
 
   const handleFontSizeChange = useCallback((value: 1.0 | 1.25 | 1.5) => {
     setCustomSettings((prev) => ({
@@ -163,15 +156,13 @@ export function AccessibilityStep({ onComplete, onSkip }: StepProps) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-violet-500/10 to-purple-500/10 rounded-xl border border-violet-500/20">
-        <div className="p-2 bg-violet-500/20 rounded-lg">
+      <div className="flex items-center gap-3 rounded-xl border border-violet-500/20 bg-gradient-to-r from-violet-500/10 to-purple-500/10 p-4">
+        <div className="rounded-lg bg-violet-500/20 p-2">
           <Hand className="h-6 w-6 text-violet-400" />
         </div>
         <div>
-          <p className="text-white font-medium">Designed for Everyone</p>
-          <p className="text-sm text-slate-400">
-            Choose your preferred viewing experience
-          </p>
+          <p className="font-medium text-white">Designed for Everyone</p>
+          <p className="text-sm text-slate-400">Choose your preferred viewing experience</p>
         </div>
       </div>
 
@@ -187,35 +178,32 @@ export function AccessibilityStep({ onComplete, onSkip }: StepProps) {
               type="button"
               onClick={() => handlePresetSelect(preset)}
               className={cn(
-                "flex flex-col items-start gap-2 p-4 rounded-xl border transition-all text-left",
+                "flex flex-col items-start gap-2 rounded-xl border p-4 text-left transition-all",
                 isSelected
-                  ? "bg-violet-500/10 border-violet-500/50"
-                  : "bg-slate-800/50 border-white/10 hover:border-white/20"
+                  ? "border-violet-500/50 bg-violet-500/10"
+                  : "border-white/10 bg-slate-800/50 hover:border-white/20"
               )}
             >
-              <div className="flex items-center justify-between w-full">
+              <div className="flex w-full items-center justify-between">
                 <div
                   className={cn(
-                    "p-2 rounded-lg",
+                    "rounded-lg p-2",
                     isSelected ? "bg-violet-500/20" : "bg-slate-700/50"
                   )}
                 >
                   <Icon
-                    className={cn(
-                      "h-5 w-5",
-                      isSelected ? "text-violet-400" : "text-slate-400"
-                    )}
+                    className={cn("h-5 w-5", isSelected ? "text-violet-400" : "text-slate-400")}
                   />
                 </div>
                 {isSelected && (
-                  <div className="p-1 bg-violet-500 rounded-full">
+                  <div className="rounded-full bg-violet-500 p-1">
                     <Check className="h-3 w-3 text-white" />
                   </div>
                 )}
               </div>
               <div>
-                <p className="text-white font-medium">{preset.name}</p>
-                <p className="text-xs text-slate-400 mt-0.5">{preset.description}</p>
+                <p className="font-medium text-white">{preset.name}</p>
+                <p className="mt-0.5 text-xs text-slate-400">{preset.description}</p>
               </div>
             </button>
           );
@@ -227,9 +215,9 @@ export function AccessibilityStep({ onComplete, onSkip }: StepProps) {
         type="button"
         onClick={() => setCustomizing(!customizing)}
         className={cn(
-          "w-full flex items-center justify-between p-3 rounded-lg",
-          "bg-slate-800/30 border border-white/10",
-          "text-sm text-slate-400 hover:text-white hover:border-white/20",
+          "flex w-full items-center justify-between rounded-lg p-3",
+          "border border-white/10 bg-slate-800/30",
+          "text-sm text-slate-400 hover:border-white/20 hover:text-white",
           "transition-colors"
         )}
       >
@@ -242,7 +230,7 @@ export function AccessibilityStep({ onComplete, onSkip }: StepProps) {
 
       {/* Custom Settings */}
       {customizing && (
-        <div className="space-y-3 p-4 bg-slate-800/30 rounded-xl border border-white/10">
+        <div className="space-y-3 rounded-xl border border-white/10 bg-slate-800/30 p-4">
           {/* High Contrast Toggle */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -329,14 +317,17 @@ export function AccessibilityStep({ onComplete, onSkip }: StepProps) {
 
           {/* Font Size Selector */}
           <div className="pt-2">
-            <div className="flex items-center justify-between mb-2">
+            <div className="mb-2 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <Type className="h-4 w-4 text-slate-400" />
                 <p className="text-sm text-white">Text Size</p>
               </div>
-              <span className="text-sm text-violet-400 font-medium">
-                {customSettings.fontSizeMultiplier === 1.0 ? "Normal" :
-                 customSettings.fontSizeMultiplier === 1.25 ? "Large" : "Extra Large"}
+              <span className="text-sm font-medium text-violet-400">
+                {customSettings.fontSizeMultiplier === 1.0
+                  ? "Normal"
+                  : customSettings.fontSizeMultiplier === 1.25
+                    ? "Large"
+                    : "Extra Large"}
               </span>
             </div>
             <div className="flex gap-2">
@@ -346,7 +337,7 @@ export function AccessibilityStep({ onComplete, onSkip }: StepProps) {
                   type="button"
                   onClick={() => handleFontSizeChange(size)}
                   className={cn(
-                    "flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors",
+                    "flex-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                     customSettings.fontSizeMultiplier === size
                       ? "bg-violet-500 text-white"
                       : "bg-slate-700 text-slate-300 hover:bg-slate-600"
@@ -361,13 +352,13 @@ export function AccessibilityStep({ onComplete, onSkip }: StepProps) {
       )}
 
       {/* Preview */}
-      <div className="p-4 bg-slate-800/30 rounded-xl border border-white/10">
-        <p className="text-xs text-slate-400 mb-2">Preview</p>
+      <div className="rounded-xl border border-white/10 bg-slate-800/30 p-4">
+        <p className="mb-2 text-xs text-slate-400">Preview</p>
         <div
           className={cn(
-            "p-3 rounded-lg transition-all",
+            "rounded-lg p-3 transition-all",
             customSettings.highContrast
-              ? "bg-black text-white border border-white"
+              ? "border border-white bg-black text-white"
               : "bg-slate-900 text-slate-200"
           )}
           style={{ fontSize: `${customSettings.fontSizeMultiplier * 14}px` }}
@@ -376,10 +367,7 @@ export function AccessibilityStep({ onComplete, onSkip }: StepProps) {
             Your monthly budget: $2,450.00
           </p>
           <p
-            className={cn(
-              "mt-1",
-              customSettings.highContrast ? "text-white" : "text-slate-400"
-            )}
+            className={cn("mt-1", customSettings.highContrast ? "text-white" : "text-slate-400")}
             style={{ fontSize: `${customSettings.fontSizeMultiplier * 12}px` }}
           >
             Remaining this month: $850.00
@@ -409,9 +397,9 @@ export function AccessibilityStep({ onComplete, onSkip }: StepProps) {
           type="button"
           onClick={handleComplete}
           className={cn(
-            "flex items-center gap-2 px-6 py-2 rounded-lg font-medium",
+            "flex items-center gap-2 rounded-lg px-6 py-2 font-medium",
             "bg-gradient-to-r from-violet-500 to-purple-500 text-white",
-            "hover:opacity-90 transition-opacity"
+            "transition-opacity hover:opacity-90"
           )}
         >
           Save Preferences

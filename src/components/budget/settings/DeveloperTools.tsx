@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Developer Tools Panel (Dev Mode Only)
@@ -8,16 +8,16 @@
  * - Only visible in development mode
  */
 
-import { useState, useEffect } from 'react';
-import { DEFAULT_LOCALE, type SupportedLocale } from '@/i18n/config';
+import { useState, useEffect } from "react";
+import { DEFAULT_LOCALE, type SupportedLocale } from "@/i18n/config";
 import {
   getLocalePreferences,
   setLocalePreferences,
   type LocalePreferences,
-} from '@/lib/locale-storage';
+} from "@/lib/locale-storage";
 
 // Pseudo-locale for testing (not in SupportedLocale type)
-const PSEUDO_LOCALE = 'en-XA' as SupportedLocale;
+const PSEUDO_LOCALE = "en-XA" as SupportedLocale;
 
 export function DeveloperTools() {
   const [preferences, setPreferences] = useState<LocalePreferences>(getLocalePreferences());
@@ -31,10 +31,10 @@ export function DeveloperTools() {
       setIsPseudoLocale(newPrefs.locale === PSEUDO_LOCALE);
     };
 
-    window.addEventListener('localePreferencesChanged', handlePreferencesChanged as EventListener);
+    window.addEventListener("localePreferencesChanged", handlePreferencesChanged as EventListener);
     return () => {
       window.removeEventListener(
-        'localePreferencesChanged',
+        "localePreferencesChanged",
         handlePreferencesChanged as EventListener
       );
     };
@@ -55,14 +55,14 @@ export function DeveloperTools() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h2 className="text-lg font-semibold mb-2">Developer Tools</h2>
+        <h2 className="mb-2 text-lg font-semibold">Developer Tools</h2>
         <p className="text-sm text-muted-foreground">
           QA tools for testing internationalization (dev mode only)
         </p>
       </div>
 
       {/* Pseudo-Locale Toggle */}
-      <div className="border rounded-lg p-4 bg-yellow-50 dark:bg-yellow-900/20">
+      <div className="rounded-lg border bg-yellow-50 p-4 dark:bg-yellow-900/20">
         <div className="flex items-start gap-4">
           <input
             type="checkbox"
@@ -72,14 +72,14 @@ export function DeveloperTools() {
             className="mt-1 h-5 w-5 rounded border-gray-300 text-teal-600 focus:ring-teal-500"
           />
           <div className="flex-1">
-            <label htmlFor="pseudo-locale" className="block text-sm font-medium cursor-pointer">
+            <label htmlFor="pseudo-locale" className="block cursor-pointer text-sm font-medium">
               Enable Pseudo-Locale (en-XA)
             </label>
             <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
               Replaces all translated text with accented characters. Any remaining plain English
               text is <strong>hardcoded</strong> and needs to be converted to translation keys.
             </p>
-            <div className="mt-3 p-3 bg-white dark:bg-gray-800 rounded border text-xs">
+            <div className="mt-3 rounded border bg-white p-3 text-xs dark:bg-gray-800">
               <strong>Example:</strong> "Dashboard" → "[Ðášhƀóářð~~~]"
               <br />
               If you see "Dashboard" instead of "[Ðášhƀóářð~~~]", it's hardcoded!
@@ -89,7 +89,7 @@ export function DeveloperTools() {
       </div>
 
       {/* Info */}
-      <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
+      <div className="space-y-1 text-xs text-gray-500 dark:text-gray-400">
         <p>• Pseudo-locale helps identify untranslated strings during development</p>
         <p>• Production builds automatically exclude en-XA locale</p>
         <p>• Switch back to a real locale to continue normal development</p>

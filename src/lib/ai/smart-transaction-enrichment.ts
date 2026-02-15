@@ -22,9 +22,9 @@
  * - AI can be enabled via settings for power users
  */
 
-import { chatCompletionJSON } from './openai-service';
-import type { ParsedTransaction } from '@/types/budget';
-import { lookupMerchant, lookupCategoryPattern } from '@/lib/collective-learning-service';
+import { chatCompletionJSON } from "./openai-service";
+import type { ParsedTransaction } from "@/types/budget";
+import { lookupMerchant, lookupCategoryPattern } from "@/lib/collective-learning-service";
 
 // ============================================================================
 // Types
@@ -42,12 +42,12 @@ export interface EnrichedTransaction extends ParsedTransaction {
 
   // Recurring detection
   isLikelyRecurring?: boolean;
-  recurringFrequency?: 'weekly' | 'biweekly' | 'monthly' | 'quarterly' | 'yearly';
+  recurringFrequency?: "weekly" | "biweekly" | "monthly" | "quarterly" | "yearly";
   recurringConfidence?: number; // 0-1 confidence in recurring pattern
 
   // Metadata
   enrichmentTimestamp?: Date;
-  enrichmentSource?: 'ai' | 'cache' | 'rules' | 'database';
+  enrichmentSource?: "ai" | "cache" | "rules" | "database";
 }
 
 export interface EnrichmentResult {
@@ -75,7 +75,7 @@ interface AIEnrichmentResponse {
     suggested_subcategory: string;
     category_confidence: number;
     is_likely_recurring: boolean;
-    recurring_frequency?: 'weekly' | 'biweekly' | 'monthly' | 'quarterly' | 'yearly';
+    recurring_frequency?: "weekly" | "biweekly" | "monthly" | "quarterly" | "yearly";
     recurring_confidence: number;
   }>;
   patterns_detected: string;
@@ -174,35 +174,35 @@ function applyRuleBasedNormalization(description: string): {
   // Common merchant patterns with high confidence
   const patterns: Array<{ regex: RegExp; name: string; confidence: number }> = [
     // Amazon
-    { regex: /AMZ\*?N|AMAZON\.COM|AMZN\s*MKTP/i, name: 'Amazon', confidence: 0.95 },
+    { regex: /AMZ\*?N|AMAZON\.COM|AMZN\s*MKTP/i, name: "Amazon", confidence: 0.95 },
 
     // Payment processors
-    { regex: /PAYPAL\s*\*?/i, name: 'PayPal', confidence: 0.95 },
-    { regex: /SQ\s*\*|SQUARE\s*\*/i, name: 'Square', confidence: 0.9 },
-    { regex: /STRIPE\s*\*/i, name: 'Stripe', confidence: 0.9 },
+    { regex: /PAYPAL\s*\*?/i, name: "PayPal", confidence: 0.95 },
+    { regex: /SQ\s*\*|SQUARE\s*\*/i, name: "Square", confidence: 0.9 },
+    { regex: /STRIPE\s*\*/i, name: "Stripe", confidence: 0.9 },
 
     // Coffee shops
-    { regex: /STARBUCKS/i, name: 'Starbucks', confidence: 0.95 },
-    { regex: /TIM\s*HORTONS?/i, name: 'Tim Hortons', confidence: 0.95 },
+    { regex: /STARBUCKS/i, name: "Starbucks", confidence: 0.95 },
+    { regex: /TIM\s*HORTONS?/i, name: "Tim Hortons", confidence: 0.95 },
 
     // Grocery
-    { regex: /WALMART|WAL-MART/i, name: 'Walmart', confidence: 0.95 },
-    { regex: /COSTCO/i, name: 'Costco', confidence: 0.95 },
-    { regex: /WHOLE\s*FOODS/i, name: 'Whole Foods', confidence: 0.95 },
+    { regex: /WALMART|WAL-MART/i, name: "Walmart", confidence: 0.95 },
+    { regex: /COSTCO/i, name: "Costco", confidence: 0.95 },
+    { regex: /WHOLE\s*FOODS/i, name: "Whole Foods", confidence: 0.95 },
 
     // Gas stations
-    { regex: /SHELL\s*(OIL|GAS)?/i, name: 'Shell', confidence: 0.9 },
-    { regex: /ESSO/i, name: 'Esso', confidence: 0.9 },
-    { regex: /PETRO-?CANADA/i, name: 'Petro-Canada', confidence: 0.9 },
+    { regex: /SHELL\s*(OIL|GAS)?/i, name: "Shell", confidence: 0.9 },
+    { regex: /ESSO/i, name: "Esso", confidence: 0.9 },
+    { regex: /PETRO-?CANADA/i, name: "Petro-Canada", confidence: 0.9 },
 
     // Fast food
     { regex: /MCDONALD'?S/i, name: "McDonald's", confidence: 0.95 },
-    { regex: /SUBWAY/i, name: 'Subway', confidence: 0.9 },
+    { regex: /SUBWAY/i, name: "Subway", confidence: 0.9 },
 
     // Utilities (keep generic)
-    { regex: /HYDRO\s*ONE/i, name: 'Hydro One', confidence: 0.95 },
-    { regex: /ROGERS\s*(COMM|WIRELESS)?/i, name: 'Rogers', confidence: 0.9 },
-    { regex: /BELL\s*CANADA/i, name: 'Bell Canada', confidence: 0.9 },
+    { regex: /HYDRO\s*ONE/i, name: "Hydro One", confidence: 0.95 },
+    { regex: /ROGERS\s*(COMM|WIRELESS)?/i, name: "Rogers", confidence: 0.9 },
+    { regex: /BELL\s*CANADA/i, name: "Bell Canada", confidence: 0.9 },
   ];
 
   for (const pattern of patterns) {
@@ -225,7 +225,7 @@ function detectRecurringPattern(
   allTransactions: ParsedTransaction[]
 ): {
   isLikelyRecurring: boolean;
-  frequency?: 'weekly' | 'biweekly' | 'monthly' | 'quarterly' | 'yearly';
+  frequency?: "weekly" | "biweekly" | "monthly" | "quarterly" | "yearly";
   confidence: number;
 } {
   // Look for similar transactions (same merchant/amount)
@@ -235,7 +235,8 @@ function detectRecurringPattern(
       tx.description.toLowerCase().trim() === transaction.description.toLowerCase().trim();
 
     // Same amount (within 1%)
-    const amountMatch = Math.abs(tx.amount - transaction.amount) < Math.abs(transaction.amount) * 0.01;
+    const amountMatch =
+      Math.abs(tx.amount - transaction.amount) < Math.abs(transaction.amount) * 0.01;
 
     return descMatch && amountMatch && tx !== transaction;
   });
@@ -257,19 +258,20 @@ function detectRecurringPattern(
   }
 
   const avgInterval = intervals.reduce((sum, val) => sum + val, 0) / intervals.length;
-  const variance = intervals.reduce((sum, val) => sum + Math.pow(val - avgInterval, 2), 0) / intervals.length;
+  const variance =
+    intervals.reduce((sum, val) => sum + Math.pow(val - avgInterval, 2), 0) / intervals.length;
   const stdDev = Math.sqrt(variance);
 
   // Low variance = more likely recurring
   const consistencyScore = 1 / (1 + stdDev / avgInterval);
 
   // Classify frequency
-  let frequency: 'weekly' | 'biweekly' | 'monthly' | 'quarterly' | 'yearly' | undefined;
-  if (avgInterval >= 6 && avgInterval <= 8) frequency = 'weekly';
-  else if (avgInterval >= 13 && avgInterval <= 15) frequency = 'biweekly';
-  else if (avgInterval >= 28 && avgInterval <= 32) frequency = 'monthly';
-  else if (avgInterval >= 88 && avgInterval <= 95) frequency = 'quarterly';
-  else if (avgInterval >= 360 && avgInterval <= 370) frequency = 'yearly';
+  let frequency: "weekly" | "biweekly" | "monthly" | "quarterly" | "yearly" | undefined;
+  if (avgInterval >= 6 && avgInterval <= 8) frequency = "weekly";
+  else if (avgInterval >= 13 && avgInterval <= 15) frequency = "biweekly";
+  else if (avgInterval >= 28 && avgInterval <= 32) frequency = "monthly";
+  else if (avgInterval >= 88 && avgInterval <= 95) frequency = "quarterly";
+  else if (avgInterval >= 360 && avgInterval <= 370) frequency = "yearly";
 
   const isLikelyRecurring = frequency !== undefined && consistencyScore > 0.7;
 
@@ -300,7 +302,7 @@ async function enrichWithAI(
     batches.push(transactions.slice(i, i + batchSize));
   }
 
-  console.log('[TransactionEnrichment] Processing', batches.length, 'batches of', batchSize);
+  console.log("[TransactionEnrichment] Processing", batches.length, "batches of", batchSize);
 
   for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
     const batch = batches[batchIndex];
@@ -308,16 +310,20 @@ async function enrichWithAI(
 
     try {
       const response = await chatCompletionJSON<AIEnrichmentResponse>(prompt, {
-        model: 'gpt-3.5-turbo',
+        model: "gpt-3.5-turbo",
         temperature: 0.3,
         maxTokens: 1000,
         cacheKey: `tx-enrich-${batch[0]?.description.slice(0, 20)}-${batch.length}`,
         systemPrompt:
-          'You are an expert financial transaction analyzer. Normalize merchant names, suggest categories, and detect recurring patterns. Respond with valid JSON only.',
+          "You are an expert financial transaction analyzer. Normalize merchant names, suggest categories, and detect recurring patterns. Respond with valid JSON only.",
       });
 
       if (!response.success || !response.data) {
-        console.error('[TransactionEnrichment] AI enrichment failed for batch', batchIndex, response.error);
+        console.error(
+          "[TransactionEnrichment] AI enrichment failed for batch",
+          batchIndex,
+          response.error
+        );
         continue;
       }
 
@@ -340,7 +346,7 @@ async function enrichWithAI(
             recurringFrequency: enrichment.recurring_frequency,
             recurringConfidence: enrichment.recurring_confidence,
             enrichmentTimestamp: new Date(),
-            enrichmentSource: 'ai',
+            enrichmentSource: "ai",
           });
 
           // Cache merchant normalization
@@ -354,7 +360,7 @@ async function enrichWithAI(
         }
       });
     } catch (error) {
-      console.error('[TransactionEnrichment] Error enriching batch', batchIndex, error);
+      console.error("[TransactionEnrichment] Error enriching batch", batchIndex, error);
     }
   }
 
@@ -369,13 +375,13 @@ function buildEnrichmentPrompt(transactions: ParsedTransaction[]): string {
     index: i,
     description: tx.description.substring(0, 100),
     amount: tx.amount.toFixed(2),
-    date: tx.date.toISOString().split('T')[0],
+    date: tx.date.toISOString().split("T")[0],
   }));
 
   return `Analyze these bank transactions and enrich them with normalized merchant names, category suggestions, and recurring patterns.
 
 **Transactions** (${transactions.length} total):
-${txSamples.map((tx) => `${tx.index}. ${tx.date} | $${tx.amount} | ${tx.description}`).join('\n')}
+${txSamples.map((tx) => `${tx.index}. ${tx.date} | $${tx.amount} | ${tx.description}`).join("\n")}
 
 **Task**: For each transaction, provide:
 1. **Normalized Merchant**: Clean, user-friendly merchant name (e.g., "AMZN MKTP*" → "Amazon")
@@ -432,7 +438,13 @@ export async function enrichTransactions(
   transactions: ParsedTransaction[],
   useAI: boolean = false // Disabled by default - AI enrichment is optional enhancement
 ): Promise<{ enriched: EnrichedTransaction[]; result: EnrichmentResult }> {
-  console.log('[TransactionEnrichment] Enriching', transactions.length, 'transactions (AI:', useAI ? 'enabled' : 'disabled', ')...');
+  console.log(
+    "[TransactionEnrichment] Enriching",
+    transactions.length,
+    "transactions (AI:",
+    useAI ? "enabled" : "disabled",
+    ")..."
+  );
 
   const enriched: EnrichedTransaction[] = [];
   const errors: string[] = [];
@@ -454,7 +466,7 @@ export async function enrichTransactions(
         enrichedTx.suggestedSubcategory = dbMerchant.subcategory;
         enrichedTx.categoryConfidence = dbMerchant.confidence;
         enrichedTx.isLikelyRecurring = dbMerchant.isSubscription;
-        enrichedTx.enrichmentSource = 'database';
+        enrichedTx.enrichmentSource = "database";
         enrichedCount++;
 
         // Also check for category pattern
@@ -469,7 +481,7 @@ export async function enrichTransactions(
         continue; // Skip to next transaction
       }
     } catch (error) {
-      console.warn('[TransactionEnrichment] Database lookup failed:', error);
+      console.warn("[TransactionEnrichment] Database lookup failed:", error);
       // Continue with fallback methods
     }
 
@@ -478,7 +490,7 @@ export async function enrichTransactions(
     if (cached) {
       enrichedTx.normalizedMerchant = cached.normalized;
       enrichedTx.merchantConfidence = cached.confidence;
-      enrichedTx.enrichmentSource = 'cache';
+      enrichedTx.enrichmentSource = "cache";
       cacheHits++;
       enrichedCount++;
     } else {
@@ -487,7 +499,7 @@ export async function enrichTransactions(
       if (ruleResult) {
         enrichedTx.normalizedMerchant = ruleResult.normalized;
         enrichedTx.merchantConfidence = ruleResult.confidence;
-        enrichedTx.enrichmentSource = 'rules';
+        enrichedTx.enrichmentSource = "rules";
         enrichedCount++;
 
         // Cache rule-based results
@@ -507,11 +519,11 @@ export async function enrichTransactions(
   }
 
   console.log(
-    '[TransactionEnrichment] Rule-based enrichment:',
+    "[TransactionEnrichment] Rule-based enrichment:",
     enrichedCount,
-    'enriched,',
+    "enriched,",
     cacheHits,
-    'cache hits'
+    "cache hits"
   );
 
   // Step 2: AI enrichment for remaining transactions (if enabled)
@@ -528,7 +540,11 @@ export async function enrichTransactions(
     });
 
     if (unenrichedTransactions.length > 0) {
-      console.log('[TransactionEnrichment] AI enriching', unenrichedTransactions.length, 'transactions...');
+      console.log(
+        "[TransactionEnrichment] AI enriching",
+        unenrichedTransactions.length,
+        "transactions..."
+      );
 
       try {
         const aiEnriched = await enrichWithAI(unenrichedTransactions);
@@ -540,10 +556,10 @@ export async function enrichTransactions(
           enrichedCount++;
         });
 
-        console.log('[TransactionEnrichment] AI enrichment complete:', aiEnriched.size, 'enriched');
+        console.log("[TransactionEnrichment] AI enrichment complete:", aiEnriched.size, "enriched");
       } catch (error) {
-        console.error('[TransactionEnrichment] AI enrichment error:', error);
-        errors.push(error instanceof Error ? error.message : 'AI enrichment failed');
+        console.error("[TransactionEnrichment] AI enrichment error:", error);
+        errors.push(error instanceof Error ? error.message : "AI enrichment failed");
       }
     }
   }

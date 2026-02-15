@@ -1,28 +1,21 @@
-import type { NextRequest } from 'next/server';
+import type { NextRequest } from "next/server";
 // TEMPORARILY DISABLED: Simulator uses content-parser.ts which imports Node.js 'fs' module
 // This causes build issues with Turbopack due to mixed server/client imports
 // TODO: Refactor content-parser.ts to separate server/client concerns
 // See Archon task: "Refactor content-parser.ts for Turbopack compatibility"
 // import { runSimulator } from '@/lib/simulator-runner';
-import {
-  withErrorTracking,
-  ApiError,
-  apiSuccess
-} from '@/lib/error-tracking';
-import { rateLimit, createRateLimitResponse } from '@/lib/rate-limit';
-import {
-  SimRunRequestSchema,
-  validateRequest
-} from '@/lib/api/schemas';
+import { withErrorTracking, ApiError, apiSuccess } from "@/lib/error-tracking";
+import { rateLimit, createRateLimitResponse } from "@/lib/rate-limit";
+import { SimRunRequestSchema, validateRequest } from "@/lib/api/schemas";
 
 export const POST = withErrorTracking(
   async (request: NextRequest) => {
     // TEMPORARILY DISABLED: Simulator functionality disabled during Next.js 16 migration
     // Will be re-enabled after content-parser.ts refactoring
     throw new ApiError(
-      'Simulator temporarily disabled during Next.js 16 migration. Will be restored soon.',
+      "Simulator temporarily disabled during Next.js 16 migration. Will be restored soon.",
       503,
-      'SIMULATOR_TEMPORARILY_DISABLED'
+      "SIMULATOR_TEMPORARILY_DISABLED"
     );
 
     // SECURITY: Rate limiting - 10 requests per 15 minutes
@@ -71,5 +64,5 @@ export const POST = withErrorTracking(
     //   );
     // }
   },
-  { endpoint: '/api/sim-run' }
+  { endpoint: "/api/sim-run" }
 );

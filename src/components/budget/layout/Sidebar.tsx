@@ -32,7 +32,7 @@ import {
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 import { PrivacyToggle } from "@/components/budget/PrivacyToggle";
 import { ProfileSelector } from "@/components/budget/profile/ProfileSelector";
 import { NotificationCenter } from "@/components/budget/notifications";
@@ -67,7 +67,7 @@ const navigation: NavItem[] = [
 ];
 
 // Simplified navigation for Seniors Mode - only essential items
-const simplifiedNavigation = navigation.filter(item => item.essential);
+const simplifiedNavigation = navigation.filter((item) => item.essential);
 
 interface SidebarProps {
   onSearch?: () => void;
@@ -78,7 +78,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClose }: SidebarProps) {
-  const t = useTranslations('sidebar');
+  const t = useTranslations("sidebar");
   const pathname = usePathname();
   const router = useRouter();
   const [isManuallyCollapsed, setIsManuallyCollapsed] = useState(false);
@@ -111,22 +111,22 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
       {!isMobile && (
         <button
           onClick={() => setIsManuallyCollapsed(!isManuallyCollapsed)}
-          className="absolute -end-3 top-8 z-50 hidden lg:flex h-6 w-6 items-center justify-center rounded-full border border-white/10 bg-slate-900 text-slate-400 shadow-lg transition-colors hover:text-white"
-          aria-label={isCollapsed ? t('actions.expandSidebar') : t('actions.collapseSidebar')}
+          className="absolute -end-3 top-8 z-50 hidden h-6 w-6 items-center justify-center rounded-full border border-white/10 bg-slate-900 text-slate-400 shadow-lg transition-colors hover:text-white lg:flex"
+          aria-label={isCollapsed ? t("actions.expandSidebar") : t("actions.collapseSidebar")}
         >
           {isCollapsed ? <ChevronRight className="h-3 w-3" /> : <ChevronLeft className="h-3 w-3" />}
         </button>
       )}
 
       {/* Logo/Header */}
-      <div className="flex h-20 items-center border-b border-white/5 px-6 lg:px-6 md:px-3 md:justify-center lg:justify-start">
+      <div className="flex h-20 items-center border-b border-white/5 px-6 md:justify-center md:px-3 lg:justify-start lg:px-6">
         <Link
           href="/budget-app/landing"
           className={cn(
             "flex items-center gap-3 rounded-lg transition-opacity hover:opacity-80",
-            !isMobile && isCollapsed && "lg:gap-0",
+            !isMobile && isCollapsed && "lg:gap-0"
           )}
-          title={t('actions.backToHome')}
+          title={t("actions.backToHome")}
         >
           <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-teal-400 to-blue-500 shadow-lg shadow-teal-500/20">
             <Sparkles className="h-5 w-5 text-white" />
@@ -135,58 +135,56 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
           <div
             className={cn(
               "overflow-hidden whitespace-nowrap transition-all duration-200",
-              isMobile
-                ? "opacity-100 w-auto"
-                : "hidden lg:block",
-              !isMobile && isCollapsed && "lg:hidden",
+              isMobile ? "w-auto opacity-100" : "hidden lg:block",
+              !isMobile && isCollapsed && "lg:hidden"
             )}
           >
             <h1 className="bg-gradient-to-r from-white to-slate-400 bg-clip-text text-lg font-bold text-transparent">
-              {t('appTitle')}
+              {t("appTitle")}
             </h1>
-            <p className="text-[10px] text-slate-500">{t('appSubtitle')}</p>
+            <p className="text-[10px] text-slate-500">{t("appSubtitle")}</p>
           </div>
         </Link>
       </div>
 
       {/* Profile Selector & Notifications */}
-      <div className={cn(
-        "border-b border-white/5 px-3 py-3",
-        !isMobile && "md:flex md:flex-col md:items-center md:gap-2 lg:block",
-        !isMobile && isCollapsed && "lg:flex lg:flex-col lg:items-center lg:gap-2",
-      )}>
-        <div className={cn(
-          "flex items-center gap-2 w-full",
-          !isMobile && "md:justify-center lg:justify-start",
-          !isMobile && isCollapsed && "lg:justify-center",
-        )}>
+      <div
+        className={cn(
+          "border-b border-white/5 px-3 py-3",
+          !isMobile && "md:flex md:flex-col md:items-center md:gap-2 lg:block",
+          !isMobile && isCollapsed && "lg:flex lg:flex-col lg:items-center lg:gap-2"
+        )}
+      >
+        <div
+          className={cn(
+            "flex w-full items-center gap-2",
+            !isMobile && "md:justify-center lg:justify-start",
+            !isMobile && isCollapsed && "lg:justify-center"
+          )}
+        >
           <ProfileSelector
             className={cn(
-              "flex-1 justify-start bg-white/5 hover:bg-white/10 text-slate-300",
-              !isMobile && "md:w-auto md:px-2 md:flex-none lg:flex-1 lg:px-3",
-              !isMobile && isCollapsed && "lg:w-auto lg:px-2 lg:flex-none",
+              "flex-1 justify-start bg-white/5 text-slate-300 hover:bg-white/10",
+              !isMobile && "md:w-auto md:flex-none md:px-2 lg:flex-1 lg:px-3",
+              !isMobile && isCollapsed && "lg:w-auto lg:flex-none lg:px-2"
             )}
             compact={!isMobile && !isSeniorsMode}
             showSettings
             onSettingsClick={() => {
-              router.push('/budget-app/settings?tab=profile');
+              router.push("/budget-app/settings?tab=profile");
               if (isMobile && onClose) onClose();
             }}
           />
           {/* Show notification center: on mobile always, on lg+ when not collapsed */}
-          <div className={cn(
-            !isMobile && "hidden lg:block",
-            !isMobile && isCollapsed && "lg:hidden",
-          )}>
+          <div
+            className={cn(!isMobile && "hidden lg:block", !isMobile && isCollapsed && "lg:hidden")}
+          >
             <NotificationCenter compact />
           </div>
         </div>
         {/* When icon-only (md or collapsed lg), show notification below profile */}
         {!isMobile && (
-          <div className={cn(
-            "md:block lg:hidden",
-            isCollapsed && "lg:block",
-          )}>
+          <div className={cn("md:block lg:hidden", isCollapsed && "lg:block")}>
             <NotificationCenter compact />
           </div>
         )}
@@ -199,30 +197,38 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
           className={cn(
             "flex w-full items-center gap-3 rounded-xl border border-white/5 bg-white/5 p-3 text-sm text-slate-400 transition-all hover:border-white/10 hover:bg-white/10 hover:text-white",
             !isMobile && "md:justify-center md:px-2 lg:justify-start lg:px-4",
-            !isMobile && isCollapsed && "lg:justify-center lg:px-2",
+            !isMobile && isCollapsed && "lg:justify-center lg:px-2"
           )}
         >
           <Search className="h-4 w-4 shrink-0" />
           {/* Label: shown on mobile, hidden on md, shown on lg unless collapsed */}
-          <span className={cn(
-            "flex-1 text-start",
-            !isMobile && "hidden lg:inline",
-            !isMobile && isCollapsed && "lg:hidden",
-          )}>
-            {t('search')}
+          <span
+            className={cn(
+              "flex-1 text-start",
+              !isMobile && "hidden lg:inline",
+              !isMobile && isCollapsed && "lg:hidden"
+            )}
+          >
+            {t("search")}
           </span>
-          <kbd className={cn(
-            "rounded border border-white/10 bg-black/20 px-1.5 py-0.5 font-mono text-[10px] text-slate-500",
-            !isMobile && "hidden lg:inline",
-            !isMobile && isCollapsed && "lg:hidden",
-          )}>
+          <kbd
+            className={cn(
+              "rounded border border-white/10 bg-black/20 px-1.5 py-0.5 font-mono text-[10px] text-slate-500",
+              !isMobile && "hidden lg:inline",
+              !isMobile && isCollapsed && "lg:hidden"
+            )}
+          >
             ⌘K
           </kbd>
         </button>
       </div>
 
       {/* Navigation */}
-      <nav id="sidebar-nav" aria-label="Primary navigation" className="custom-scrollbar flex-1 space-y-1 overflow-y-auto px-3 py-2 md:px-2 lg:px-3">
+      <nav
+        id="sidebar-nav"
+        aria-label="Primary navigation"
+        className="custom-scrollbar flex-1 space-y-1 overflow-y-auto px-3 py-2 md:px-2 lg:px-3"
+      >
         {activeNavigation.map((item) => {
           const isActive = pathname === item.href;
           return (
@@ -235,13 +241,13 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
               className={cn(
                 "group relative flex items-center gap-3 overflow-hidden rounded-xl transition-all duration-200",
                 // Larger touch targets in Seniors Mode (52px min)
-                isSeniorsMode ? "px-4 py-3.5 min-h-[52px]" : "px-3 py-2.5",
+                isSeniorsMode ? "min-h-[52px] px-4 py-3.5" : "px-3 py-2.5",
                 isActive
                   ? "bg-gradient-to-r from-teal-500/10 to-blue-500/10 text-teal-300"
                   : "text-slate-400 hover:bg-white/5 hover:text-white",
                 // Icon-only centering on md, or when manually collapsed on lg
                 !isMobile && "md:justify-center lg:justify-start",
-                !isMobile && isCollapsed && "lg:justify-center",
+                !isMobile && isCollapsed && "lg:justify-center"
               )}
             >
               {isActive && (
@@ -266,7 +272,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
                   "relative z-10 truncate font-medium",
                   isSeniorsMode ? "text-base" : "text-sm",
                   !isMobile && "hidden lg:inline",
-                  !isMobile && isCollapsed && "lg:hidden",
+                  !isMobile && isCollapsed && "lg:hidden"
                 )}
               >
                 {t(`navigation.${item.name}`)}
@@ -281,16 +287,14 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
             onClick={() => setShowAllItems(!showAllItems)}
             className={cn(
               "mx-1 mt-2 flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-sm text-slate-400 transition-colors hover:bg-white/5 hover:text-white",
-              !isMobile && "md:justify-center lg:justify-start",
+              !isMobile && "md:justify-center lg:justify-start"
             )}
             aria-expanded={showAllItems}
             aria-label={showAllItems ? "Show simplified menu" : "Show all menu items"}
           >
             <MoreHorizontal className="h-4 w-4 shrink-0" />
-            <span className={cn(
-              !isMobile && "hidden lg:inline",
-            )}>
-              {showAllItems ? t('actions.showLess') : t('actions.showAllItems')}
+            <span className={cn(!isMobile && "hidden lg:inline")}>
+              {showAllItems ? t("actions.showLess") : t("actions.showAllItems")}
             </span>
           </button>
         )}
@@ -304,16 +308,18 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
             className={cn(
               "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition-colors hover:bg-white/5 hover:text-white",
               !isMobile && "md:justify-center lg:justify-start",
-              !isMobile && isCollapsed && "lg:justify-center",
+              !isMobile && isCollapsed && "lg:justify-center"
             )}
-            title={t('actions.importCsv')}
+            title={t("actions.importCsv")}
           >
             <Upload className="h-5 w-5 shrink-0" />
-            <span className={cn(
-              !isMobile && "hidden lg:inline",
-              !isMobile && isCollapsed && "lg:hidden",
-            )}>
-              {t('actions.importCsv')}
+            <span
+              className={cn(
+                !isMobile && "hidden lg:inline",
+                !isMobile && isCollapsed && "lg:hidden"
+              )}
+            >
+              {t("actions.importCsv")}
             </span>
           </Link>
           {/* Privacy Mode Toggle */}
@@ -322,16 +328,10 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
           ) : (
             <>
               {/* Icon-only on md, full on lg (unless collapsed) */}
-              <div className={cn(
-                "md:flex md:justify-center lg:hidden",
-                isCollapsed && "lg:flex",
-              )}>
+              <div className={cn("md:flex md:justify-center lg:hidden", isCollapsed && "lg:flex")}>
                 <PrivacyToggle compact />
               </div>
-              <div className={cn(
-                "hidden lg:block",
-                isCollapsed && "lg:hidden",
-              )}>
+              <div className={cn("hidden lg:block", isCollapsed && "lg:hidden")}>
                 <PrivacyToggle compact={false} />
               </div>
             </>
@@ -342,16 +342,18 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
             className={cn(
               "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-400 transition-colors hover:bg-white/5 hover:text-white",
               !isMobile && "md:justify-center lg:justify-start",
-              !isMobile && isCollapsed && "lg:justify-center",
+              !isMobile && isCollapsed && "lg:justify-center"
             )}
-            title={t('actions.settings')}
+            title={t("actions.settings")}
           >
             <Settings className="h-5 w-5 shrink-0" />
-            <span className={cn(
-              !isMobile && "hidden lg:inline",
-              !isMobile && isCollapsed && "lg:hidden",
-            )}>
-              {t('actions.settings')}
+            <span
+              className={cn(
+                !isMobile && "hidden lg:inline",
+                !isMobile && isCollapsed && "lg:hidden"
+              )}
+            >
+              {t("actions.settings")}
             </span>
           </Link>
           <button
@@ -359,18 +361,20 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
             className={cn(
               "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-start text-sm font-medium text-slate-400 transition-colors hover:bg-white/5 hover:text-white",
               !isMobile && "md:justify-center lg:justify-start",
-              !isMobile && isCollapsed && "lg:justify-center",
+              !isMobile && isCollapsed && "lg:justify-center"
             )}
-            title={t('shortcuts')}
+            title={t("shortcuts")}
           >
             <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded border border-slate-600 font-mono text-xs">
               ?
             </div>
-            <span className={cn(
-              !isMobile && "hidden lg:inline",
-              !isMobile && isCollapsed && "lg:hidden",
-            )}>
-              {t('shortcuts')}
+            <span
+              className={cn(
+                !isMobile && "hidden lg:inline",
+                !isMobile && isCollapsed && "lg:hidden"
+              )}
+            >
+              {t("shortcuts")}
             </span>
           </button>
         </div>

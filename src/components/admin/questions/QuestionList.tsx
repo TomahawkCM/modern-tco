@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import {
   Table,
   TableBody,
@@ -9,18 +9,18 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
+} from "@/components/ui/table";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,13 +28,17 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Edit, Trash2, Copy, MoreHorizontal, Search, Filter, Download } from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
-import { questionService } from '@/lib/questionService';
-import type { Question, TCODomain, Difficulty, QuestionCategory } from '@/types/exam';
-import { TCODomain as TCODomainEnum, Difficulty as DifficultyEnum, QuestionCategory as QuestionCategoryEnum } from '@/types/exam';
+} from "@/components/ui/dropdown-menu";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Edit, Trash2, Copy, MoreHorizontal, Search, Filter, Download } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import { questionService } from "@/lib/questionService";
+import type { Question, TCODomain, Difficulty, QuestionCategory } from "@/types/exam";
+import {
+  TCODomain as TCODomainEnum,
+  Difficulty as DifficultyEnum,
+  QuestionCategory as QuestionCategoryEnum,
+} from "@/types/exam";
 
 export function QuestionList() {
   const router = useRouter();
@@ -43,18 +47,20 @@ export function QuestionList() {
   const [selectedQuestions, setSelectedQuestions] = useState<Set<string>>(new Set());
 
   // Filters
-  const [searchQuery, setSearchQuery] = useState('');
-  const [domainFilter, setDomainFilter] = useState<string>('all');
-  const [difficultyFilter, setDifficultyFilter] = useState<string>('all');
-  const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [domainFilter, setDomainFilter] = useState<string>("all");
+  const [difficultyFilter, setDifficultyFilter] = useState<string>("all");
+  const [categoryFilter, setCategoryFilter] = useState<string>("all");
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(20);
 
   // Sorting
-  const [sortField, setSortField] = useState<'question' | 'domain' | 'difficulty' | 'createdAt'>('createdAt');
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  const [sortField, setSortField] = useState<"question" | "domain" | "difficulty" | "createdAt">(
+    "createdAt"
+  );
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
 
   useEffect(() => {
     loadQuestions();
@@ -67,9 +73,9 @@ export function QuestionList() {
       setQuestions(allQuestions);
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to load questions',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to load questions",
+        variant: "destructive",
       });
     } finally {
       setLoading(false);
@@ -92,17 +98,17 @@ export function QuestionList() {
     }
 
     // Domain filter
-    if (domainFilter !== 'all') {
+    if (domainFilter !== "all") {
       filtered = filtered.filter((q) => q.domain === domainFilter);
     }
 
     // Difficulty filter
-    if (difficultyFilter !== 'all') {
+    if (difficultyFilter !== "all") {
       filtered = filtered.filter((q) => q.difficulty === difficultyFilter);
     }
 
     // Category filter
-    if (categoryFilter !== 'all') {
+    if (categoryFilter !== "all") {
       filtered = filtered.filter((q) => q.category === categoryFilter);
     }
 
@@ -112,19 +118,19 @@ export function QuestionList() {
       let bValue: any;
 
       switch (sortField) {
-        case 'question':
+        case "question":
           aValue = a.question;
           bValue = b.question;
           break;
-        case 'domain':
+        case "domain":
           aValue = a.domain;
           bValue = b.domain;
           break;
-        case 'difficulty':
+        case "difficulty":
           aValue = a.difficulty;
           bValue = b.difficulty;
           break;
-        case 'createdAt':
+        case "createdAt":
           aValue = a.createdAt ? new Date(a.createdAt).getTime() : 0;
           bValue = b.createdAt ? new Date(b.createdAt).getTime() : 0;
           break;
@@ -132,13 +138,21 @@ export function QuestionList() {
           return 0;
       }
 
-      if (aValue < bValue) return sortDirection === 'asc' ? -1 : 1;
-      if (aValue > bValue) return sortDirection === 'asc' ? 1 : -1;
+      if (aValue < bValue) return sortDirection === "asc" ? -1 : 1;
+      if (aValue > bValue) return sortDirection === "asc" ? 1 : -1;
       return 0;
     });
 
     return filtered;
-  }, [questions, searchQuery, domainFilter, difficultyFilter, categoryFilter, sortField, sortDirection]);
+  }, [
+    questions,
+    searchQuery,
+    domainFilter,
+    difficultyFilter,
+    categoryFilter,
+    sortField,
+    sortDirection,
+  ]);
 
   // Pagination
   const totalPages = Math.ceil(filteredQuestions.length / itemsPerPage);
@@ -149,10 +163,10 @@ export function QuestionList() {
 
   const handleSort = (field: typeof sortField) => {
     if (sortField === field) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
       setSortField(field);
-      setSortDirection('asc');
+      setSortDirection("asc");
     }
   };
 
@@ -179,41 +193,41 @@ export function QuestionList() {
   };
 
   const handleDelete = async (questionId: string) => {
-    if (!confirm('Are you sure you want to delete this question?')) return;
+    if (!confirm("Are you sure you want to delete this question?")) return;
 
     try {
       await questionService.deleteQuestion(questionId);
       toast({
-        title: 'Success',
-        description: 'Question deleted successfully',
+        title: "Success",
+        description: "Question deleted successfully",
       });
       loadQuestions();
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to delete question',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to delete question",
+        variant: "destructive",
       });
     }
   };
 
   const handleDuplicate = async (question: Question) => {
     try {
-      const duplicated: Omit<Question, 'id'> = {
+      const duplicated: Omit<Question, "id"> = {
         ...question,
         question: `${question.question} (Copy)`,
       };
       await questionService.addQuestion(duplicated);
       toast({
-        title: 'Success',
-        description: 'Question duplicated successfully',
+        title: "Success",
+        description: "Question duplicated successfully",
       });
       loadQuestions();
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to duplicate question',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to duplicate question",
+        variant: "destructive",
       });
     }
   };
@@ -227,32 +241,32 @@ export function QuestionList() {
         Array.from(selectedQuestions).map((id) => questionService.deleteQuestion(id))
       );
       toast({
-        title: 'Success',
+        title: "Success",
         description: `${selectedQuestions.size} questions deleted`,
       });
       setSelectedQuestions(new Set());
       loadQuestions();
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to delete some questions',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to delete some questions",
+        variant: "destructive",
       });
     }
   };
 
   const handleExport = () => {
     const dataStr = JSON.stringify(filteredQuestions, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const dataBlob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(dataBlob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = `questions-export-${new Date().toISOString().split('T')[0]}.json`;
+    link.download = `questions-export-${new Date().toISOString().split("T")[0]}.json`;
     link.click();
     URL.revokeObjectURL(url);
 
     toast({
-      title: 'Success',
+      title: "Success",
       description: `Exported ${filteredQuestions.length} questions`,
     });
   };
@@ -261,7 +275,7 @@ export function QuestionList() {
     return (
       <Card>
         <CardContent className="flex items-center justify-center p-12">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
+          <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-blue-500" />
         </CardContent>
       </Card>
     );
@@ -279,7 +293,7 @@ export function QuestionList() {
                 {selectedQuestions.size} selected
               </span>
               <Button variant="destructive" size="sm" onClick={handleBulkDelete}>
-                <Trash2 className="h-4 w-4 mr-2" />
+                <Trash2 className="mr-2 h-4 w-4" />
                 Delete Selected
               </Button>
             </div>
@@ -289,10 +303,10 @@ export function QuestionList() {
 
       <CardContent className="space-y-4">
         {/* Filters */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-5">
           <div className="md:col-span-2">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
               <Input
                 placeholder="Search questions..."
                 value={searchQuery}
@@ -331,13 +345,13 @@ export function QuestionList() {
           </Select>
 
           <Button variant="outline" onClick={handleExport}>
-            <Download className="h-4 w-4 mr-2" />
+            <Download className="mr-2 h-4 w-4" />
             Export
           </Button>
         </div>
 
         {/* Table */}
-        <div className="border rounded-lg">
+        <div className="rounded-lg border">
           <Table>
             <TableHeader>
               <TableRow>
@@ -352,26 +366,26 @@ export function QuestionList() {
                 </TableHead>
                 <TableHead
                   className="cursor-pointer hover:bg-muted/50"
-                  onClick={() => handleSort('question')}
+                  onClick={() => handleSort("question")}
                 >
                   Question
                 </TableHead>
                 <TableHead
                   className="cursor-pointer hover:bg-muted/50"
-                  onClick={() => handleSort('domain')}
+                  onClick={() => handleSort("domain")}
                 >
                   Domain
                 </TableHead>
                 <TableHead
                   className="cursor-pointer hover:bg-muted/50"
-                  onClick={() => handleSort('difficulty')}
+                  onClick={() => handleSort("difficulty")}
                 >
                   Difficulty
                 </TableHead>
                 <TableHead>Tags</TableHead>
                 <TableHead
                   className="cursor-pointer hover:bg-muted/50"
-                  onClick={() => handleSort('createdAt')}
+                  onClick={() => handleSort("createdAt")}
                 >
                   Created
                 </TableHead>
@@ -389,7 +403,7 @@ export function QuestionList() {
                       }
                     />
                   </TableCell>
-                  <TableCell className="font-medium max-w-md truncate">
+                  <TableCell className="max-w-md truncate font-medium">
                     {question.question}
                   </TableCell>
                   <TableCell>
@@ -398,18 +412,18 @@ export function QuestionList() {
                   <TableCell>
                     <Badge
                       variant={
-                        question.difficulty === 'Beginner'
-                          ? 'default'
-                          : question.difficulty === 'Intermediate'
-                          ? 'secondary'
-                          : 'destructive'
+                        question.difficulty === "Beginner"
+                          ? "default"
+                          : question.difficulty === "Intermediate"
+                            ? "secondary"
+                            : "destructive"
                       }
                     >
                       {question.difficulty}
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex gap-1 flex-wrap max-w-xs">
+                    <div className="flex max-w-xs flex-wrap gap-1">
                       {question.tags?.slice(0, 2).map((tag) => (
                         <Badge key={tag} variant="outline" className="text-xs">
                           {tag}
@@ -423,9 +437,7 @@ export function QuestionList() {
                     </div>
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground">
-                    {question.createdAt
-                      ? new Date(question.createdAt).toLocaleDateString()
-                      : 'N/A'}
+                    {question.createdAt ? new Date(question.createdAt).toLocaleDateString() : "N/A"}
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>
@@ -438,11 +450,11 @@ export function QuestionList() {
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => handleEdit(question.id)}>
-                          <Edit className="h-4 w-4 mr-2" />
+                          <Edit className="mr-2 h-4 w-4" />
                           Edit
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handleDuplicate(question)}>
-                          <Copy className="h-4 w-4 mr-2" />
+                          <Copy className="mr-2 h-4 w-4" />
                           Duplicate
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
@@ -450,7 +462,7 @@ export function QuestionList() {
                           onClick={() => handleDelete(question.id)}
                           className="text-red-600"
                         >
-                          <Trash2 className="h-4 w-4 mr-2" />
+                          <Trash2 className="mr-2 h-4 w-4" />
                           Delete
                         </DropdownMenuItem>
                       </DropdownMenuContent>
@@ -461,7 +473,7 @@ export function QuestionList() {
 
               {paginatedQuestions.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={7} className="text-center text-muted-foreground py-12">
+                  <TableCell colSpan={7} className="py-12 text-center text-muted-foreground">
                     No questions found. Try adjusting your filters or create a new question.
                   </TableCell>
                 </TableRow>
@@ -474,8 +486,8 @@ export function QuestionList() {
         {totalPages > 1 && (
           <div className="flex items-center justify-between">
             <div className="text-sm text-muted-foreground">
-              Showing {(currentPage - 1) * itemsPerPage + 1} to{' '}
-              {Math.min(currentPage * itemsPerPage, filteredQuestions.length)} of{' '}
+              Showing {(currentPage - 1) * itemsPerPage + 1} to{" "}
+              {Math.min(currentPage * itemsPerPage, filteredQuestions.length)} of{" "}
               {filteredQuestions.length} questions
             </div>
 

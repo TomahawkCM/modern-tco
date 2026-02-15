@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server';
-import { analytics } from './analytics';
+import { NextResponse } from "next/server";
+import { analytics } from "./analytics";
 
 interface ApiError {
   message: string;
@@ -21,17 +21,17 @@ interface ErrorContext {
 function maskPII(data: any): any {
   if (!data) return data;
 
-  if (typeof data === 'string') {
+  if (typeof data === "string") {
     // Mask email addresses
-    data = data.replace(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi, '***@***.***');
+    data = data.replace(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/gi, "***@***.***");
     // Mask phone numbers
-    data = data.replace(/(\+?[1-9]\d{1,14})/g, '***-***-****');
+    data = data.replace(/(\+?[1-9]\d{1,14})/g, "***-***-****");
     // Mask credit card numbers
-    data = data.replace(/\b(?:\d{4}[-\s]?){3}\d{4}\b/g, '****-****-****-****');
+    data = data.replace(/\b(?:\d{4}[-\s]?){3}\d{4}\b/g, "****-****-****-****");
     // Mask SSN
-    data = data.replace(/\b\d{3}-\d{2}-\d{4}\b/g, '***-**-****');
+    data = data.replace(/\b\d{3}-\d{2}-\d{4}\b/g, "***-**-****");
     // Mask API keys (common patterns)
-    data = data.replace(/\b[A-Za-z0-9]{32,}\b/g, '***API_KEY***');
+    data = data.replace(/\b[A-Za-z0-9]{32,}\b/g, "***API_KEY***");
     return data;
   }
 
@@ -39,14 +39,26 @@ function maskPII(data: any): any {
     return data.map(maskPII);
   }
 
-  if (typeof data === 'object') {
+  if (typeof data === "object") {
     const masked: any = {};
-    const sensitiveKeys = ['password', 'token', 'secret', 'key', 'authorization', 'cookie', 'session', 'credit', 'ssn', 'phone', 'email'];
+    const sensitiveKeys = [
+      "password",
+      "token",
+      "secret",
+      "key",
+      "authorization",
+      "cookie",
+      "session",
+      "credit",
+      "ssn",
+      "phone",
+      "email",
+    ];
 
     for (const [key, value] of Object.entries(data)) {
       const lowerKey = key.toLowerCase();
-      if (sensitiveKeys.some(sensitive => lowerKey.includes(sensitive))) {
-        masked[key] = '***REDACTED***';
+      if (sensitiveKeys.some((sensitive) => lowerKey.includes(sensitive))) {
+        masked[key] = "***REDACTED***";
       } else {
         masked[key] = maskPII(value);
       }
@@ -64,34 +76,34 @@ async function logError(error: Error | ApiError, context: ErrorContext) {
   const maskedError = {
     message: maskPII(error.message),
     stack: error instanceof Error ? maskPII(error.stack) : undefined,
-    details: 'details' in error ? maskPII(error.details) : undefined,
+    details: "details" in error ? maskPII(error.details) : undefined,
     context: maskPII(context),
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV,
   };
 
   // Log to console in development
-  if (process.env.NODE_ENV === 'development') {
-    console.error('[API Error]', maskedError);
+  if (process.env.NODE_ENV === "development") {
+    console.error("[API Error]", maskedError);
   }
 
   // Track error in analytics
   if (analytics?.capture) {
     try {
-      await analytics.capture('api_error', {
+      await analytics.capture("api_error", {
         endpoint: context.endpoint,
         method: context.method,
-        status: 'status' in error ? error.status : 500,
+        status: "status" in error ? error.status : 500,
         error_message: maskedError.message,
         ...context.metadata,
       });
     } catch (trackingError) {
-      console.error('[Analytics Error]', trackingError);
+      console.error("[Analytics Error]", trackingError);
     }
   }
 
   // If Sentry is configured, send error
-  if (typeof window === 'undefined' && global.Sentry) {
+  if (typeof window === "undefined" && global.Sentry) {
     try {
       global.Sentry.captureException(error, {
         contexts: {
@@ -104,7 +116,7 @@ async function logError(error: Error | ApiError, context: ErrorContext) {
         extra: maskedError.details,
       });
     } catch (sentryError) {
-      console.error('[Sentry Error]', sentryError);
+      console.error("[Sentry Error]", sentryError);
     }
   }
 
@@ -127,11 +139,11 @@ export async function handleApiError(
       status: 500,
       details: error.stack,
     };
-  } else if (typeof error === 'object' && error && 'status' in error) {
+  } else if (typeof error === "object" && error && "status" in error) {
     apiError = error as ApiError;
   } else {
     apiError = {
-      message: 'An unexpected error occurred',
+      message: "An unexpected error occurred",
       status: 500,
       details: error,
     };
@@ -146,7 +158,7 @@ export async function handleApiError(
     error: maskPII(apiError.message),
     code: apiError.code,
     // Only include details in development
-    ...(process.env.NODE_ENV === 'development' && { details: maskPII(apiError.details) }),
+    ...(process.env.NODE_ENV === "development" && { details: maskPII(apiError.details) }),
   };
 
   return NextResponse.json(responseBody, { status: apiError.status });
@@ -161,7 +173,7 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<NextResp
 ): T {
   return (async (...args: Parameters<T>) => {
     const request = args[0] as Request;
-    const {method} = request;
+    const { method } = request;
 
     try {
       return await handler(...args);
@@ -169,10 +181,10 @@ export function withErrorHandling<T extends (...args: any[]) => Promise<NextResp
       // Extract user ID from request if available
       let userId: string | undefined;
       try {
-        const authHeader = request.headers.get('authorization');
+        const authHeader = request.headers.get("authorization");
         // Parse JWT or session token to get user ID
         // This is a placeholder - implement based on your auth system
-        userId = authHeader ? 'user_from_token' : undefined;
+        userId = authHeader ? "user_from_token" : undefined;
       } catch {}
 
       return handleApiError(error, {

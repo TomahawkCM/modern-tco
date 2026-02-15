@@ -10,7 +10,18 @@ import { useAuth } from "@/contexts/AuthContext";
 import { flashcardService } from "@/services/flashcardService";
 import type { Flashcard } from "@/types/flashcard";
 import type { SRRating } from "@/lib/sr";
-import { Brain, Check, X, AlertCircle, Clock, TrendingUp, BookOpen, Target, Filter, Hash } from "lucide-react";
+import {
+  Brain,
+  Check,
+  X,
+  AlertCircle,
+  Clock,
+  TrendingUp,
+  BookOpen,
+  Target,
+  Filter,
+  Hash,
+} from "lucide-react";
 import { ErrorMessages } from "@/lib/error-messages";
 import { useToast } from "@/hooks/use-toast";
 
@@ -28,7 +39,12 @@ interface ReviewStats {
   newCardsLearned: number;
 }
 
-export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onComplete }: FlashcardReviewProps) {
+export default function FlashcardReview({
+  moduleId,
+  deckId,
+  totalCards = 0,
+  onComplete,
+}: FlashcardReviewProps) {
   const { user } = useAuth();
   const { toast } = useToast();
   const isStaticMode = !user;
@@ -51,14 +67,13 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
   useEffect(() => {
     loadCards();
-     
   }, [user?.id, moduleId, deckId, sessionLimit, selectedDomain]);
 
   const loadCards = async () => {
     const userId = user?.id;
 
-    console.log('[FlashcardReview] Loading cards:', {
-      userId: userId || 'static-shared',
+    console.log("[FlashcardReview] Loading cards:", {
+      userId: userId || "static-shared",
       sessionLimit,
       selectedDomain,
     });
@@ -72,43 +87,62 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
       if (moduleId) {
         // Get all cards for module and filter by due date
         const moduleCards = await flashcardService.getFlashcardsByModule(userId, moduleId);
-        dueCards = moduleCards.filter(c => new Date(c.srs_due) <= new Date());
-        console.log('[FlashcardReview] Module cards loaded:', moduleCards.length, 'due:', dueCards.length);
+        dueCards = moduleCards.filter((c) => new Date(c.srs_due) <= new Date());
+        console.log(
+          "[FlashcardReview] Module cards loaded:",
+          moduleCards.length,
+          "due:",
+          dueCards.length
+        );
       } else if (deckId) {
         // Get deck cards and filter by due date
         const deckCards = await flashcardService.getDeckCards(deckId, userId);
-        dueCards = deckCards.filter(c => new Date(c.srs_due) <= new Date());
-        console.log('[FlashcardReview] Deck cards loaded:', deckCards.length, 'due:', dueCards.length);
+        dueCards = deckCards.filter((c) => new Date(c.srs_due) <= new Date());
+        console.log(
+          "[FlashcardReview] Deck cards loaded:",
+          deckCards.length,
+          "due:",
+          dueCards.length
+        );
       } else if (selectedDomain) {
         // Get cards filtered by domain (stored in tags array)
         const domainCards = await flashcardService.getFlashcardsByDomain(userId, selectedDomain);
-        dueCards = domainCards.filter(c => new Date(c.srs_due) <= new Date()).slice(0, effectiveLimit);
-        console.log('[FlashcardReview] Domain cards loaded:', domainCards.length, 'due:', dueCards.length);
+        dueCards = domainCards
+          .filter((c) => new Date(c.srs_due) <= new Date())
+          .slice(0, effectiveLimit);
+        console.log(
+          "[FlashcardReview] Domain cards loaded:",
+          domainCards.length,
+          "due:",
+          dueCards.length
+        );
       } else {
         // Get all due cards with custom limit
         dueCards = await flashcardService.getDueFlashcards(userId, effectiveLimit);
-        console.log('[FlashcardReview] Due cards loaded:', dueCards.length);
+        console.log("[FlashcardReview] Due cards loaded:", dueCards.length);
       }
 
       // Mix in some new cards (20% of queue, respecting session limit)
       const remainingSlots = effectiveLimit - dueCards.length;
       const newCardsCount = Math.max(0, Math.min(remainingSlots, Math.floor(effectiveLimit * 0.2)));
-      console.log('[FlashcardReview] Requesting', newCardsCount, 'new cards');
+      console.log("[FlashcardReview] Requesting", newCardsCount, "new cards");
 
       let newCards: Flashcard[] = [];
       if (newCardsCount > 0) {
         if (selectedDomain) {
           // Get new cards from specific domain (filter by tags containing domain)
           const allNewCards = await flashcardService.getNewFlashcards(userId, 1000);
-          newCards = allNewCards.filter(c => c.tags && c.tags.includes(selectedDomain)).slice(0, newCardsCount);
+          newCards = allNewCards
+            .filter((c) => c.tags && c.tags.includes(selectedDomain))
+            .slice(0, newCardsCount);
         } else {
           newCards = await flashcardService.getNewFlashcards(userId, newCardsCount);
         }
-        console.log('[FlashcardReview] New cards loaded:', newCards.length);
+        console.log("[FlashcardReview] New cards loaded:", newCards.length);
       }
 
       const allCards = [...dueCards, ...newCards].slice(0, effectiveLimit);
-      console.log('[FlashcardReview] Total cards after limit:', allCards.length);
+      console.log("[FlashcardReview] Total cards after limit:", allCards.length);
 
       setCards(allCards);
 
@@ -117,7 +151,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
         const errorMsg = ErrorMessages.noFlashcardsDue;
         toast({
           title: errorMsg.title,
-          description: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`,
+          description: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`,
           variant: errorMsg.variant as "default" | "destructive",
         });
       }
@@ -126,7 +160,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
       const errorMsg = ErrorMessages.flashcardsLoadFailed;
       toast({
         title: errorMsg.title,
-        description: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`,
+        description: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`,
         variant: errorMsg.variant as "default" | "destructive",
       });
     } finally {
@@ -138,7 +172,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
     if (!currentCard) return;
 
     const timeSpent = Math.floor((Date.now() - reviewStartTime) / 1000);
-    const isCorrect = rating === 'good' || rating === 'easy';
+    const isCorrect = rating === "good" || rating === "easy";
 
     try {
       // Update card with SRS algorithm
@@ -148,7 +182,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
       const errorMsg = ErrorMessages.flashcardReviewFailed;
       toast({
         title: errorMsg.title,
-        description: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ''}`,
+        description: `${errorMsg.message}${errorMsg.action ? ` ${errorMsg.action}` : ""}`,
         variant: errorMsg.variant as "default" | "destructive",
       });
       // Don't return - continue with local state update
@@ -159,7 +193,10 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
       ...sessionStats,
       totalReviewed: sessionStats.totalReviewed + 1,
       correct: sessionStats.correct + (isCorrect ? 1 : 0),
-      avgTimePerCard: Math.floor((sessionStats.avgTimePerCard * sessionStats.totalReviewed + timeSpent) / (sessionStats.totalReviewed + 1)),
+      avgTimePerCard: Math.floor(
+        (sessionStats.avgTimePerCard * sessionStats.totalReviewed + timeSpent) /
+          (sessionStats.totalReviewed + 1)
+      ),
       newCardsLearned: sessionStats.newCardsLearned + (currentCard.srs_reps === 0 ? 1 : 0),
     };
     setSessionStats(newStats);
@@ -180,9 +217,9 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
   if (isLoading) {
     return (
-      <Card className="w-full max-w-2xl mx-auto">
+      <Card className="mx-auto w-full max-w-2xl">
         <CardContent className="flex items-center justify-center p-12">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+          <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
           <span className="ml-3">Loading flashcards...</span>
         </CardContent>
       </Card>
@@ -196,32 +233,34 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
     if (isFirstTime) {
       // New user - no flashcards created yet
       return (
-      <Card className="w-full max-w-2xl mx-auto">
-        <CardContent className="flex flex-col items-center justify-center p-12 text-center">
-          <Brain className="h-16 w-16 text-primary mb-4" />
-          <h3 className="text-2xl font-bold mb-2">No Flashcards Yet</h3>
-          <p className="text-muted-foreground mb-6">
+        <Card className="mx-auto w-full max-w-2xl">
+          <CardContent className="flex flex-col items-center justify-center p-12 text-center">
+            <Brain className="mb-4 h-16 w-16 text-primary" />
+            <h3 className="mb-2 text-2xl font-bold">No Flashcards Yet</h3>
+            <p className="mb-6 text-muted-foreground">
               Create your first flashcard to start using spaced repetition for better retention!
-          </p>
+            </p>
 
             {/* Onboarding CTAs */}
-            <div className="space-y-3 w-full max-w-md">
-              <p className="text-sm font-medium text-left">Get started by:</p>
+            <div className="w-full max-w-md space-y-3">
+              <p className="text-left text-sm font-medium">Get started by:</p>
               <div className="grid gap-3">
                 <a href="/study" className="block">
                   <Button variant="outline" className="w-full justify-start">
-                    <BookOpen className="h-4 w-4 mr-2" />
+                    <BookOpen className="mr-2 h-4 w-4" />
                     Browse Study Modules → Auto-generate cards
                   </Button>
                 </a>
                 <a href="/practice" className="block">
                   <Button variant="outline" className="w-full justify-start">
-                    <Target className="h-4 w-4 mr-2" />
+                    <Target className="mr-2 h-4 w-4" />
                     Practice Questions → Convert mistakes
                   </Button>
                 </a>
-                <div className="pt-2 border-t">
-                  <p className="text-xs text-muted-foreground mb-2">Or create one manually using the "Create Cards" tab above</p>
+                <div className="border-t pt-2">
+                  <p className="mb-2 text-xs text-muted-foreground">
+                    Or create one manually using the "Create Cards" tab above
+                  </p>
                 </div>
               </div>
             </div>
@@ -232,24 +271,25 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
     // Experienced user - all caught up
     return (
-      <Card className="w-full max-w-2xl mx-auto">
+      <Card className="mx-auto w-full max-w-2xl">
         <CardContent className="flex flex-col items-center justify-center p-12 text-center">
-          <Check className="h-16 w-16 text-[#22c55e] mb-4" />
-          <h3 className="text-2xl font-bold mb-2">All Caught Up!</h3>
-          <p className="text-muted-foreground mb-6">
+          <Check className="mb-4 h-16 w-16 text-[#22c55e]" />
+          <h3 className="mb-2 text-2xl font-bold">All Caught Up!</h3>
+          <p className="mb-6 text-muted-foreground">
             No flashcards are due for review right now. Great work staying on top of your studies!
           </p>
-          <div className="grid grid-cols-2 gap-4 w-full max-w-md">
-            <div className="p-4 bg-muted rounded-lg">
+          <div className="grid w-full max-w-md grid-cols-2 gap-4">
+            <div className="rounded-lg bg-muted p-4">
               <p className="text-sm text-muted-foreground">Cards Reviewed Today</p>
               <p className="text-2xl font-bold text-foreground">{sessionStats.totalReviewed}</p>
             </div>
-            <div className="p-4 bg-muted rounded-lg">
+            <div className="rounded-lg bg-muted p-4">
               <p className="text-sm text-muted-foreground">Accuracy</p>
               <p className="text-2xl font-bold text-foreground">
                 {sessionStats.totalReviewed > 0
                   ? Math.round((sessionStats.correct / sessionStats.totalReviewed) * 100)
-                  : 0}%
+                  : 0}
+                %
               </p>
             </div>
           </div>
@@ -261,13 +301,14 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
   if (!currentCard) return null;
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-4">
+    <div className="mx-auto w-full max-w-2xl space-y-4">
       {/* Development Mode Banner */}
       {isStaticMode && (
         <Card className="border-[#f97316] bg-[#f97316]/10">
           <CardContent className="py-3">
             <p className="text-sm text-[#f97316]">
-              ⚠️ <strong>Shared Flashcard Library</strong> - Reviewing static TCO cards without signing in.
+              ⚠️ <strong>Shared Flashcard Library</strong> - Reviewing static TCO cards without
+              signing in.
             </p>
           </CardContent>
         </Card>
@@ -275,10 +316,10 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
       {/* Session Customization Controls */}
       <Card>
-        <CardContent className="py-4 space-y-4">
+        <CardContent className="space-y-4 py-4">
           {/* Session Size Selector - Button Group */}
           <div className="space-y-2">
-            <label className="text-sm font-medium flex items-center gap-2">
+            <label className="flex items-center gap-2 text-sm font-medium">
               <Hash className="h-4 w-4" />
               Cards per session
             </label>
@@ -288,7 +329,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
                 { value: 25, label: "25" },
                 { value: 50, label: "50" },
                 { value: 100, label: "100" },
-                { value: 9999, label: "All" }
+                { value: 9999, label: "All" },
               ].map((option) => (
                 <Button
                   key={option.value}
@@ -305,7 +346,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
           {/* Domain Filter - Button Group */}
           <div className="space-y-2">
-            <label className="text-sm font-medium flex items-center gap-2">
+            <label className="flex items-center gap-2 text-sm font-medium">
               <Filter className="h-4 w-4" />
               Study module
             </label>
@@ -316,7 +357,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
                 { value: "refining-questions-targeting", label: "Refining & Targeting" },
                 { value: "taking-action-packages-actions", label: "Taking Action" },
                 { value: "navigation-basic-modules", label: "Navigation" },
-                { value: "reporting-data-export", label: "Reporting" }
+                { value: "reporting-data-export", label: "Reporting" },
               ].map((option) => (
                 <Button
                   key={option.value || "random"}
@@ -335,39 +376,40 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
       {/* Progress Bar */}
       <div className="flex items-center gap-3">
-        <Progress 
-          value={progress} 
-          className="flex-1" 
+        <Progress
+          value={progress}
+          className="flex-1"
           aria-label={`Flashcard review progress: ${currentIndex + 1} of ${cards.length} cards (${Math.round(progress)}%)`}
         />
-        <span className="text-sm font-medium whitespace-nowrap">
+        <span className="whitespace-nowrap text-sm font-medium">
           {currentIndex + 1} / {cards.length}
         </span>
       </div>
 
       {/* Session Stats */}
       <div className="grid grid-cols-4 gap-2">
-        <div className="p-3 bg-muted rounded-md text-center">
-          <Brain className="h-4 w-4 mx-auto mb-1 text-primary" />
+        <div className="rounded-md bg-muted p-3 text-center">
+          <Brain className="mx-auto mb-1 h-4 w-4 text-primary" />
           <p className="text-xs text-muted-foreground">Reviewed</p>
           <p className="text-sm font-bold text-foreground">{sessionStats.totalReviewed}</p>
         </div>
-        <div className="p-3 bg-muted rounded-md text-center">
-          <Check className="h-4 w-4 mx-auto mb-1 text-[#22c55e]" />
+        <div className="rounded-md bg-muted p-3 text-center">
+          <Check className="mx-auto mb-1 h-4 w-4 text-[#22c55e]" />
           <p className="text-xs text-muted-foreground">Correct</p>
           <p className="text-sm font-bold text-foreground">{sessionStats.correct}</p>
         </div>
-        <div className="p-3 bg-muted rounded-md text-center">
-          <TrendingUp className="h-4 w-4 mx-auto mb-1 text-primary" />
+        <div className="rounded-md bg-muted p-3 text-center">
+          <TrendingUp className="mx-auto mb-1 h-4 w-4 text-primary" />
           <p className="text-xs text-muted-foreground">Accuracy</p>
           <p className="text-sm font-bold text-foreground">
             {sessionStats.totalReviewed > 0
               ? Math.round((sessionStats.correct / sessionStats.totalReviewed) * 100)
-              : 0}%
+              : 0}
+            %
           </p>
         </div>
-        <div className="p-3 bg-muted rounded-md text-center">
-          <Clock className="h-4 w-4 mx-auto mb-1 text-orange-500" />
+        <div className="rounded-md bg-muted p-3 text-center">
+          <Clock className="mx-auto mb-1 h-4 w-4 text-orange-500" />
           <p className="text-xs text-muted-foreground">Avg Time</p>
           <p className="text-sm font-bold text-foreground">{sessionStats.avgTimePerCard}s</p>
         </div>
@@ -384,12 +426,8 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
               <Badge variant="outline">{currentCard.card_type}</Badge>
             </div>
             {currentCard.hint && !showAnswer && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => alert(currentCard.hint)}
-              >
-                <AlertCircle className="h-4 w-4 mr-1" />
+              <Button variant="ghost" size="sm" onClick={() => alert(currentCard.hint)}>
+                <AlertCircle className="mr-1 h-4 w-4" />
                 Hint
               </Button>
             )}
@@ -401,25 +439,25 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
             <div className="pr-4">
               {/* Front of card */}
               <div className="mb-6">
-                <p className="text-sm text-muted-foreground mb-2">Question:</p>
+                <p className="mb-2 text-sm text-muted-foreground">Question:</p>
                 <h2 className="text-2xl font-bold text-foreground">{currentCard.front_text}</h2>
                 {currentCard.image_url && (
                   <img
                     src={currentCard.image_url}
                     alt="Flashcard visual"
-                    className="mt-4 rounded-lg max-h-48 object-contain"
+                    className="mt-4 max-h-48 rounded-lg object-contain"
                   />
                 )}
               </div>
 
               {/* Back of card (revealed) */}
               {showAnswer && (
-                <div className="border-t pt-6 animate-in fade-in-50 duration-300">
-                  <p className="text-sm text-muted-foreground mb-2">Answer:</p>
+                <div className="border-t pt-6 duration-300 animate-in fade-in-50">
+                  <p className="mb-2 text-sm text-muted-foreground">Answer:</p>
                   <p className="text-lg text-foreground">{currentCard.back_text}</p>
                   {currentCard.explanation && (
-                    <div className="mt-4 p-3 bg-muted rounded-md">
-                      <p className="text-sm font-medium text-foreground mb-1">Explanation:</p>
+                    <div className="mt-4 rounded-md bg-muted p-3">
+                      <p className="mb-1 text-sm font-medium text-foreground">Explanation:</p>
                       <p className="text-sm text-muted-foreground">{currentCard.explanation}</p>
                     </div>
                   )}
@@ -430,16 +468,12 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
           {/* Show Answer Button */}
           {!showAnswer && (
-            <div className="space-y-2 mt-4">
-              <Button
-                onClick={() => setShowAnswer(true)}
-                size="lg"
-                className="w-full"
-              >
+            <div className="mt-4 space-y-2">
+              <Button onClick={() => setShowAnswer(true)} size="lg" className="w-full">
                 Show Answer
               </Button>
               <Button
-                onClick={() => handleRating('good')}
+                onClick={() => handleRating("good")}
                 variant="outline"
                 size="sm"
                 className="w-full"
@@ -451,47 +485,59 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
           {/* Rating Buttons (SM-2 Algorithm) */}
           {showAnswer && (
-            <div className="space-y-3 mt-6">
-              <p className="text-xs text-center text-muted-foreground">Rate your recall (optional):</p>
+            <div className="mt-6 space-y-3">
+              <p className="text-center text-xs text-muted-foreground">
+                Rate your recall (optional):
+              </p>
               <div className="grid grid-cols-4 gap-2">
                 <Button
                   variant="destructive"
-                  onClick={() => handleRating('again')}
-                  className="flex flex-col h-auto py-3"
+                  onClick={() => handleRating("again")}
+                  className="flex h-auto flex-col py-3"
                 >
-                  <X className="h-5 w-5 mb-1" />
+                  <X className="mb-1 h-5 w-5" />
                   <span className="text-xs">Again</span>
                   <span className="text-xs opacity-70">&lt;1d</span>
                 </Button>
                 <Button
                   variant="outline"
-                  onClick={() => handleRating('hard')}
-                  className="flex flex-col h-auto py-3"
+                  onClick={() => handleRating("hard")}
+                  className="flex h-auto flex-col py-3"
                 >
-                  <AlertCircle className="h-5 w-5 mb-1" />
+                  <AlertCircle className="mb-1 h-5 w-5" />
                   <span className="text-xs">Hard</span>
                   <span className="text-xs opacity-70">~3d</span>
                 </Button>
                 <Button
                   variant="secondary"
-                  onClick={() => handleRating('good')}
-                  className="flex flex-col h-auto py-3"
+                  onClick={() => handleRating("good")}
+                  className="flex h-auto flex-col py-3"
                 >
-                  <Check className="h-5 w-5 mb-1" />
+                  <Check className="mb-1 h-5 w-5" />
                   <span className="text-xs">Good</span>
                   <span className="text-xs opacity-70">
-                    ~{currentCard.srs_reps === 0 ? 1 : currentCard.srs_reps === 1 ? 6 : Math.round(currentCard.srs_interval * currentCard.srs_ease)}d
+                    ~
+                    {currentCard.srs_reps === 0
+                      ? 1
+                      : currentCard.srs_reps === 1
+                        ? 6
+                        : Math.round(currentCard.srs_interval * currentCard.srs_ease)}
+                    d
                   </span>
                 </Button>
                 <Button
                   variant="default"
-                  onClick={() => handleRating('easy')}
-                  className="flex flex-col h-auto py-3"
+                  onClick={() => handleRating("easy")}
+                  className="flex h-auto flex-col py-3"
                 >
-                  <TrendingUp className="h-5 w-5 mb-1" />
+                  <TrendingUp className="mb-1 h-5 w-5" />
                   <span className="text-xs">Easy</span>
                   <span className="text-xs opacity-70">
-                    ~{currentCard.srs_reps === 0 ? 3 : Math.round(currentCard.srs_interval * currentCard.srs_ease * 1.3)}d
+                    ~
+                    {currentCard.srs_reps === 0
+                      ? 3
+                      : Math.round(currentCard.srs_interval * currentCard.srs_ease * 1.3)}
+                    d
                   </span>
                 </Button>
               </div>
@@ -531,7 +577,7 @@ export default function FlashcardReview({ moduleId, deckId, totalCards = 0, onCo
 
       {/* Card Tags - with better visibility */}
       {currentCard.tags && currentCard.tags.length > 0 && (
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex flex-wrap gap-2">
           {currentCard.tags.map((tag) => (
             <Badge key={tag} variant="secondary" className="text-xs">
               {tag}

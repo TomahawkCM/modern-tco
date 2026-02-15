@@ -11,8 +11,8 @@
  * - Mastery Learning: 80% proficiency threshold ensures long-term retention (Bloom, 1968)
  */
 
-import { supabase } from '@/lib/supabase/client';
-import { camelCaseKeys, snakeCaseKeys } from '@/lib/utils/caseConversion';
+import { supabase } from "@/lib/supabase/client";
+import { camelCaseKeys, snakeCaseKeys } from "@/lib/utils/caseConversion";
 
 // ==================== TYPES ====================
 
@@ -45,7 +45,7 @@ export interface MasteryPrediction {
 export interface LearningVelocityData {
   domain: string;
   historicalScores: { date: string; score: number }[];
-  recentTrend: 'improving' | 'stable' | 'declining';
+  recentTrend: "improving" | "stable" | "declining";
   velocityPerHour: number; // Mastery points gained per hour of study
   velocityPerQuestion: number; // Mastery points gained per practice question
   consistency: number; // 0-1 score indicating how consistent the improvement is
@@ -82,10 +82,10 @@ export async function calculateLearningVelocity(
   try {
     // Get historical domain scores
     const { data: snapshots, error } = await supabase
-      .from('student_performance_snapshots')
-      .select('created_at, domain_scores, total_study_hours')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: true });
+      .from("student_performance_snapshots")
+      .select("created_at, domain_scores, total_study_hours")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: true });
 
     if (error) throw error;
 
@@ -107,7 +107,7 @@ export async function calculateLearningVelocity(
       return {
         domain,
         historicalScores: historicalScores.map((h) => ({ date: h.date, score: h.score })),
-        recentTrend: 'stable',
+        recentTrend: "stable",
         velocityPerHour: 2.0, // Default: 2% mastery per hour
         velocityPerQuestion: 0.5, // Default: 0.5% mastery per question
         consistency: 0.5,
@@ -122,20 +122,14 @@ export async function calculateLearningVelocity(
     const velocityPerHour = hoursDelta > 0 ? scoreDelta / hoursDelta : 2.0;
 
     // Calculate recent trend (last 3 data points vs previous)
-    let recentTrend: 'improving' | 'stable' | 'declining' = 'stable';
+    let recentTrend: "improving" | "stable" | "declining" = "stable";
     if (historicalScores.length >= 4) {
-      const recentAvg =
-        historicalScores
-          .slice(-3)
-          .reduce((sum, h) => sum + h.score, 0) / 3;
-      const previousAvg =
-        historicalScores
-          .slice(-6, -3)
-          .reduce((sum, h) => sum + h.score, 0) / 3;
+      const recentAvg = historicalScores.slice(-3).reduce((sum, h) => sum + h.score, 0) / 3;
+      const previousAvg = historicalScores.slice(-6, -3).reduce((sum, h) => sum + h.score, 0) / 3;
       if (recentAvg > previousAvg + 3) {
-        recentTrend = 'improving';
+        recentTrend = "improving";
       } else if (recentAvg < previousAvg - 3) {
-        recentTrend = 'declining';
+        recentTrend = "declining";
       }
     }
 
@@ -154,7 +148,7 @@ export async function calculateLearningVelocity(
       consistency,
     };
   } catch (error) {
-    console.error('Error calculating learning velocity:', error);
+    console.error("Error calculating learning velocity:", error);
     throw error;
   }
 }
@@ -207,10 +201,10 @@ export async function predictTimeToMastery(
   try {
     // Get current mastery level
     const { data: snapshot, error: snapshotError } = await supabase
-      .from('student_performance_snapshots')
-      .select('domain_scores')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false })
+      .from("student_performance_snapshots")
+      .select("domain_scores")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
       .limit(1)
       .single();
 
@@ -235,8 +229,8 @@ export async function predictTimeToMastery(
         currentLearningVelocity: 0,
         recommendedDailyMinutes: 0,
         recommendedWeeklySessions: 0,
-        modelVersion: 'v1.0',
-        predictionMethod: 'already_achieved',
+        modelVersion: "v1.0",
+        predictionMethod: "already_achieved",
         featuresUsed: { current_level: currentMasteryLevel, target_level: targetMasteryLevel },
       };
 
@@ -296,8 +290,8 @@ export async function predictTimeToMastery(
       currentLearningVelocity: Math.round(velocity.velocityPerHour * 10) / 10,
       recommendedDailyMinutes,
       recommendedWeeklySessions,
-      modelVersion: 'v1.0',
-      predictionMethod: 'linear_projection',
+      modelVersion: "v1.0",
+      predictionMethod: "linear_projection",
       featuresUsed: {
         current_level: currentMasteryLevel,
         target_level: targetMasteryLevel,
@@ -312,7 +306,7 @@ export async function predictTimeToMastery(
 
     return savePrediction(prediction as MasteryPrediction);
   } catch (error) {
-    console.error('Error predicting time to mastery:', error);
+    console.error("Error predicting time to mastery:", error);
     throw error;
   }
 }
@@ -322,7 +316,7 @@ export async function predictTimeToMastery(
  */
 async function savePrediction(prediction: MasteryPrediction): Promise<MasteryPrediction> {
   const { data, error } = await supabase
-    .from('mastery_predictions')
+    .from("mastery_predictions")
     .insert(snakeCaseKeys(prediction))
     .select()
     .single();
@@ -338,17 +332,17 @@ async function savePrediction(prediction: MasteryPrediction): Promise<MasteryPre
 export async function getActivePredictions(userId: string): Promise<MasteryPrediction[]> {
   try {
     const { data, error } = await supabase
-      .from('mastery_predictions')
-      .select('*')
-      .eq('user_id', userId)
-      .is('achieved_at', null)
-      .order('created_at', { ascending: false });
+      .from("mastery_predictions")
+      .select("*")
+      .eq("user_id", userId)
+      .is("achieved_at", null)
+      .order("created_at", { ascending: false });
 
     if (error) throw error;
 
     return (data || []).map((item) => camelCaseKeys(item));
   } catch (error) {
-    console.error('Error fetching active predictions:', error);
+    console.error("Error fetching active predictions:", error);
     throw error;
   }
 }
@@ -362,23 +356,23 @@ export async function getDomainPrediction(
 ): Promise<MasteryPrediction | null> {
   try {
     const { data, error } = await supabase
-      .from('mastery_predictions')
-      .select('*')
-      .eq('user_id', userId)
-      .eq('domain', domain)
-      .is('achieved_at', null)
-      .order('created_at', { ascending: false })
+      .from("mastery_predictions")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("domain", domain)
+      .is("achieved_at", null)
+      .order("created_at", { ascending: false })
       .limit(1)
       .single();
 
     if (error) {
-      if (error.code === 'PGRST116') return null;
+      if (error.code === "PGRST116") return null;
       throw error;
     }
 
     return camelCaseKeys(data);
   } catch (error) {
-    console.error('Error fetching domain prediction:', error);
+    console.error("Error fetching domain prediction:", error);
     throw error;
   }
 }
@@ -394,31 +388,31 @@ export async function markPredictionAchieved(
   try {
     // Get the original prediction
     const { data: prediction, error: fetchError } = await supabase
-      .from('mastery_predictions')
-      .select('*')
-      .eq('id', predictionId)
+      .from("mastery_predictions")
+      .select("*")
+      .eq("id", predictionId)
       .single();
 
     if (fetchError) throw fetchError;
 
     // Calculate prediction error (actual - predicted)
-    const daysPrediction = (camelCaseKeys(prediction)).predictedDaysToMastery;
+    const daysPrediction = camelCaseKeys(prediction).predictedDaysToMastery;
     const predictionError = actualDaysToMastery - daysPrediction;
 
     // Update prediction with actual values
     const { error: updateError } = await supabase
-      .from('mastery_predictions')
+      .from("mastery_predictions")
       .update({
         actual_days_to_mastery: actualDaysToMastery,
         actual_study_hours_spent: actualStudyHoursSpent,
         prediction_error: predictionError,
         achieved_at: new Date().toISOString(),
       })
-      .eq('id', predictionId);
+      .eq("id", predictionId);
 
     if (updateError) throw updateError;
   } catch (error) {
-    console.error('Error marking prediction as achieved:', error);
+    console.error("Error marking prediction as achieved:", error);
     throw error;
   }
 }
@@ -446,8 +440,9 @@ export async function generateMasteryPlan(
     const totalWeeks = Math.ceil(prediction.predictedDaysToMastery / 7);
 
     // Generate weekly plan
-    const weeklyPlan: MasteryPlan['weeklyPlan'] = [];
-    const hoursPerWeek = (prediction.recommendedDailyMinutes / 60) * prediction.recommendedWeeklySessions;
+    const weeklyPlan: MasteryPlan["weeklyPlan"] = [];
+    const hoursPerWeek =
+      (prediction.recommendedDailyMinutes / 60) * prediction.recommendedWeeklySessions;
     const questionsPerWeek = Math.ceil(prediction.predictedPracticeQuestionsNeeded / totalWeeks);
     const masteryGainPerWeek = (targetLevel - currentLevel) / totalWeeks;
 
@@ -461,12 +456,12 @@ export async function generateMasteryPlan(
 
       const milestones: string[] = [];
       if (week === 1) {
-        milestones.push('Complete diagnostic assessment');
-        milestones.push('Review weak areas identified');
+        milestones.push("Complete diagnostic assessment");
+        milestones.push("Review weak areas identified");
       } else if (week === totalWeeks) {
-        milestones.push('Complete final practice exam');
-        milestones.push('Review all missed questions');
-        milestones.push('Achieve mastery target');
+        milestones.push("Complete final practice exam");
+        milestones.push("Review all missed questions");
+        milestones.push("Achieve mastery target");
       } else {
         milestones.push(`Reach ${Math.round(expectedMasteryLevel)}% mastery`);
         milestones.push(`Complete ${questionsPerWeek} practice questions`);
@@ -474,8 +469,8 @@ export async function generateMasteryPlan(
 
       weeklyPlan.push({
         week,
-        startDate: startDate.toISOString().split('T')[0],
-        endDate: endDate.toISOString().split('T')[0],
+        startDate: startDate.toISOString().split("T")[0],
+        endDate: endDate.toISOString().split("T")[0],
         recommendedHours: Math.round(hoursPerWeek * 10) / 10,
         recommendedQuestions: questionsPerWeek,
         expectedMasteryLevel: Math.round(expectedMasteryLevel),
@@ -487,24 +482,24 @@ export async function generateMasteryPlan(
     const criticalSuccessFactors: string[] = [
       `Study ${prediction.recommendedDailyMinutes} minutes/day, ${prediction.recommendedWeeklySessions} days/week`,
       `Complete ${prediction.predictedPracticeQuestionsNeeded} practice questions total`,
-      'Maintain consistent study schedule (avoid cramming)',
-      'Review incorrect answers immediately',
+      "Maintain consistent study schedule (avoid cramming)",
+      "Review incorrect answers immediately",
     ];
 
     if (prediction.currentLearningVelocity < 2.0) {
-      criticalSuccessFactors.push('Increase study intensity to improve learning velocity');
+      criticalSuccessFactors.push("Increase study intensity to improve learning velocity");
     }
 
     // Potential risks
     const potentialRisks: string[] = [];
     if (prediction.predictionConfidence < 0.7) {
-      potentialRisks.push('Low prediction confidence - actual time may vary significantly');
+      potentialRisks.push("Low prediction confidence - actual time may vary significantly");
     }
     if (prediction.predictedDaysToMastery > 60) {
-      potentialRisks.push('Long timeline - risk of losing motivation over time');
+      potentialRisks.push("Long timeline - risk of losing motivation over time");
     }
     if (prediction.currentLearningVelocity < 1.5) {
-      potentialRisks.push('Low learning velocity - may need tutoring or different study methods');
+      potentialRisks.push("Low learning velocity - may need tutoring or different study methods");
     }
 
     return {
@@ -517,7 +512,7 @@ export async function generateMasteryPlan(
       potentialRisks,
     };
   } catch (error) {
-    console.error('Error generating mastery plan:', error);
+    console.error("Error generating mastery plan:", error);
     throw error;
   }
 }
@@ -527,12 +522,12 @@ export async function generateMasteryPlan(
  */
 export async function predictAllDomains(userId: string): Promise<MasteryPrediction[]> {
   const domains = [
-    'asking_questions',
-    'refining_targeting',
-    'taking_action',
-    'navigation',
-    'reporting',
-    'troubleshooting',
+    "asking_questions",
+    "refining_targeting",
+    "taking_action",
+    "navigation",
+    "reporting",
+    "troubleshooting",
   ];
 
   const predictions: MasteryPrediction[] = [];

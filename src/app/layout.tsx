@@ -49,9 +49,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   // Get locale preferences for dynamic lang and dir attributes
-  const locale = getLocalePreferences().locale || 'en-US';
-  const dir = LOCALE_METADATA[locale]?.dir || 'ltr';
-  const langCode = locale.split('-')[0]; // Extract language code (e.g., 'en' from 'en-US')
+  const locale = getLocalePreferences().locale || "en-US";
+  const dir = LOCALE_METADATA[locale]?.dir || "ltr";
+  const langCode = locale.split("-")[0]; // Extract language code (e.g., 'en' from 'en-US')
 
   return (
     <html
@@ -83,7 +83,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* PDF.js from CDN for OCR functionality - bypasses webpack bundling issues */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
       </head>
-      <body className="bg-background text-foreground antialiased layout-safe" suppressHydrationWarning>
+      <body
+        className="layout-safe bg-background text-foreground antialiased"
+        suppressHydrationWarning
+      >
         {/* Load PDF.js from CDN - bypasses webpack bundling issues */}
         <Script
           src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"
@@ -117,7 +120,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           html[data-high-contrast="1"] :focus-visible { outline: 2px solid #14b8a6; outline-offset: 2px; }
         `}</style>
         {/* Register service worker on client side */}
-        <Script id="register-sw" strategy="afterInteractive">{`if('serviceWorker' in navigator){navigator.serviceWorker.register('/service-worker.js').catch(()=>{});}`}</Script>
+        <Script
+          id="register-sw"
+          strategy="afterInteractive"
+        >{`if('serviceWorker' in navigator){navigator.serviceWorker.register('/service-worker.js').catch(()=>{});}`}</Script>
       </body>
     </html>
   );

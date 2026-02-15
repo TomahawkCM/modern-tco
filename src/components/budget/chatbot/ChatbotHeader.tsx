@@ -9,10 +9,10 @@
  * - WCAG 2.2 AA compliant
  */
 
-'use client';
+"use client";
 
-import React from 'react';
-import { X } from 'lucide-react';
+import React from "react";
+import { X } from "lucide-react";
 
 interface ChatbotHeaderProps {
   onClose: () => void;
@@ -21,7 +21,7 @@ interface ChatbotHeaderProps {
 
 export const ChatbotHeader: React.FC<ChatbotHeaderProps> = ({
   onClose,
-  title = 'Budget Assistant',
+  title = "Budget Assistant",
 }) => {
   return (
     <header className="flex h-16 shrink-0 items-center justify-between border-b border-gray-200 bg-white px-4 sm:h-14 sm:px-4">

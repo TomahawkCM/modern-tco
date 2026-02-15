@@ -29,7 +29,7 @@ export interface ExpenseSplit {
   createdAt: Date;
 }
 
-export type SplitMode = 'equal' | 'custom' | 'percentage';
+export type SplitMode = "equal" | "custom" | "percentage";
 
 export interface SplitPreview {
   personId: string;
@@ -67,12 +67,9 @@ function roundToCents(value: number): number {
  * calculateEqualSplit(10, 3); // [3.33, 3.33, 3.34]
  * ```
  */
-export function calculateEqualSplit(
-  totalAmount: number,
-  personCount: number,
-): number[] {
+export function calculateEqualSplit(totalAmount: number, personCount: number): number[] {
   if (personCount < 1) {
-    throw new Error('personCount must be at least 1');
+    throw new Error("personCount must be at least 1");
   }
 
   const baseShare = roundToCents(totalAmount / personCount);
@@ -103,27 +100,20 @@ export function calculateEqualSplit(
  * calculatePercentageSplit(100, [50, 30, 20]); // [50, 30, 20]
  * ```
  */
-export function calculatePercentageSplit(
-  totalAmount: number,
-  percentages: number[],
-): number[] {
+export function calculatePercentageSplit(totalAmount: number, percentages: number[]): number[] {
   if (percentages.length === 0) {
-    throw new Error('percentages array must not be empty');
+    throw new Error("percentages array must not be empty");
   }
 
   const sum = roundToCents(percentages.reduce((a, b) => a + b, 0));
   if (Math.abs(sum - 100) > 0.01) {
-    throw new Error(
-      `Percentages must sum to 100, but got ${sum}`,
-    );
+    throw new Error(`Percentages must sum to 100, but got ${sum}`);
   }
 
   const shares = percentages.map((pct) => roundToCents((totalAmount * pct) / 100));
 
   // Adjust the last share to absorb any rounding residual.
-  const sumWithoutLast = shares
-    .slice(0, -1)
-    .reduce((a, b) => roundToCents(a + b), 0);
+  const sumWithoutLast = shares.slice(0, -1).reduce((a, b) => roundToCents(a + b), 0);
   shares[shares.length - 1] = roundToCents(totalAmount - sumWithoutLast);
 
   return shares;
@@ -160,33 +150,29 @@ export function previewSplit(
   people: SplitPerson[],
   mode: SplitMode,
   customAmounts?: number[],
-  percentages?: number[],
+  percentages?: number[]
 ): SplitPreview[] {
   if (people.length === 0) {
-    throw new Error('people array must not be empty');
+    throw new Error("people array must not be empty");
   }
 
   let amounts: number[];
 
   switch (mode) {
-    case 'equal':
+    case "equal":
       amounts = calculateEqualSplit(totalAmount, people.length);
       break;
 
-    case 'custom':
+    case "custom":
       if (!customAmounts || customAmounts.length !== people.length) {
-        throw new Error(
-          'customAmounts must be provided and match the number of people',
-        );
+        throw new Error("customAmounts must be provided and match the number of people");
       }
       amounts = customAmounts.map(roundToCents);
       break;
 
-    case 'percentage':
+    case "percentage":
       if (!percentages || percentages.length !== people.length) {
-        throw new Error(
-          'percentages must be provided and match the number of people',
-        );
+        throw new Error("percentages must be provided and match the number of people");
       }
       amounts = calculatePercentageSplit(totalAmount, percentages);
       break;
@@ -216,14 +202,11 @@ export function previewSplit(
  * @param personId - The person whose balance to compute.
  * @returns The net unsettled balance for the given person.
  */
-export function calculateRunningBalance(
-  splits: ExpenseSplit[],
-  personId: string,
-): number {
+export function calculateRunningBalance(splits: ExpenseSplit[], personId: string): number {
   return roundToCents(
     splits
       .filter((s) => s.personId === personId && !s.settled)
-      .reduce((sum, s) => sum + s.amount, 0),
+      .reduce((sum, s) => sum + s.amount, 0)
   );
 }
 
@@ -242,20 +225,16 @@ export function calculateRunningBalance(
  */
 export function getBalanceSummary(
   splits: ExpenseSplit[],
-  people: SplitPerson[],
+  people: SplitPerson[]
 ): { personId: string; personName: string; balance: number; splitCount: number }[] {
   return people
     .map((person) => {
-      const personSplits = splits.filter(
-        (s) => s.personId === person.id && !s.settled,
-      );
+      const personSplits = splits.filter((s) => s.personId === person.id && !s.settled);
 
       return {
         personId: person.id,
         personName: person.name,
-        balance: roundToCents(
-          personSplits.reduce((sum, s) => sum + s.amount, 0),
-        ),
+        balance: roundToCents(personSplits.reduce((sum, s) => sum + s.amount, 0)),
         splitCount: personSplits.length,
       };
     })

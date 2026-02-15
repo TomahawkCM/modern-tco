@@ -20,13 +20,9 @@ export interface EmailConfig {
 // Email Types
 // ========================
 
-export type EmailType =
-  | 'bill_reminder'
-  | 'budget_alert'
-  | 'goal_milestone'
-  | 'test';
+export type EmailType = "bill_reminder" | "budget_alert" | "goal_milestone" | "test";
 
-export type EmailStatus = 'pending' | 'sent' | 'failed' | 'bounced';
+export type EmailStatus = "pending" | "sent" | "failed" | "bounced";
 
 // ========================
 // Email Preferences
@@ -53,12 +49,12 @@ export interface EmailPreferences {
 
 export const DEFAULT_EMAIL_PREFERENCES: EmailPreferences = {
   emailEnabled: false,
-  emailAddress: '',
+  emailAddress: "",
   billReminders: true,
   budgetAlerts: true,
   goalMilestones: true,
   reminderDaysBefore: 3,
-  unsubscribeToken: '',
+  unsubscribeToken: "",
   updatedAt: new Date(),
 };
 
@@ -103,7 +99,7 @@ export interface BudgetAlertEmailProps {
   /** Currency code */
   currency: string;
   /** Alert type: warning (80%) or exceeded (100%) */
-  alertType: 'warning' | 'exceeded';
+  alertType: "warning" | "exceeded";
   /** Direct link to budget details */
   budgetUrl?: string;
   /** Unsubscribe token */

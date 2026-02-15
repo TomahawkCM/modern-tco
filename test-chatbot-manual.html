@@ -1,36 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manual Chatbot Test</title>
-</head>
-<body>
-  <h1>Manual Chatbot Test</h1>
-  <p>This page will set localStorage and redirect to the budget app.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manual Chatbot Test</title>
+  </head>
+  <body>
+    <h1>Manual Chatbot Test</h1>
+    <p>This page will set localStorage and redirect to the budget app.</p>
 
-  <script>
-    // Set localStorage BEFORE navigation
-    localStorage.setItem('budget-app-privacy-settings', JSON.stringify({
-      enableChatbot: true,
-      enableAIFeatures: true,
-      chatbotDataAccess: 'read-only',
-      chatbotConversationRetention: 7,
-      enableAnalytics: true,
-      enableErrorTracking: true,
-      updatedAt: Date.now()
-    }));
+    <script>
+      // Set localStorage BEFORE navigation
+      localStorage.setItem(
+        "budget-app-privacy-settings",
+        JSON.stringify({
+          enableChatbot: true,
+          enableAIFeatures: true,
+          chatbotDataAccess: "read-only",
+          chatbotConversationRetention: 7,
+          enableAnalytics: true,
+          enableErrorTracking: true,
+          updatedAt: Date.now(),
+        })
+      );
 
-    console.log('✅ localStorage set:', localStorage.getItem('budget-app-privacy-settings'));
+      console.log("✅ localStorage set:", localStorage.getItem("budget-app-privacy-settings"));
 
-    // Auto-redirect after 2 seconds
-    setTimeout(() => {
-      console.log('Redirecting to /budget-app...');
-      window.location.href = '/budget-app';
-    }, 2000);
-  </script>
+      // Auto-redirect after 2 seconds
+      setTimeout(() => {
+        console.log("Redirecting to /budget-app...");
+        window.location.href = "/budget-app";
+      }, 2000);
+    </script>
 
-  <p>Redirecting in 2 seconds... Check the console for debug logs.</p>
-  <p><a href="/budget-app">Or click here to go manually</a></p>
-</body>
+    <p>Redirecting in 2 seconds... Check the console for debug logs.</p>
+    <p><a href="/budget-app">Or click here to go manually</a></p>
+  </body>
 </html>

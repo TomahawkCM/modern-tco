@@ -9,28 +9,28 @@
  * - Prevents cross-bank confusion when multiple banks have same last-4-digits
  */
 
-import { db } from './budget-db';
-import type { Account } from '@/types/budget';
-import { BANK_CONFIGS } from './parsers/csv-parser';
+import { db } from "./budget-db";
+import type { Account } from "@/types/budget";
+import { BANK_CONFIGS } from "./parsers/csv-parser";
 
 // Map of institution names to bank slugs
 const INSTITUTION_TO_SLUG: Record<string, string[]> = {
-  'bmo': ['bmo', 'bank of montreal'],
-  'homeTrust': ['home trust', 'hometrust', 'home-trust'],
-  'homeTrustVisa': ['home trust visa', 'hometrust visa'],
-  'td': ['td', 'td canada trust', 'td bank', 'toronto dominion', 'toronto-dominion'],
-  'chase': ['chase', 'jpmorgan chase', 'jp morgan'],
-  'bofa': ['bank of america', 'bofa', 'boa'],
-  'wells': ['wells fargo', 'wellsfargo'],
-  'citi': ['citi', 'citibank', 'citicorp'],
-  'rbc': ['rbc', 'royal bank', 'royal bank of canada'],
-  'scotiabank': ['scotiabank', 'scotia', 'bank of nova scotia'],
-  'cibc': ['cibc', 'canadian imperial'],
-  'national': ['national bank', 'banque nationale'],
-  'desjardins': ['desjardins', 'caisse populaire'],
-  'tangerine': ['tangerine', 'ing direct'],
-  'simplii': ['simplii', 'pc financial'],
-  'eq': ['eq bank', 'equitable bank'],
+  bmo: ["bmo", "bank of montreal"],
+  homeTrust: ["home trust", "hometrust", "home-trust"],
+  homeTrustVisa: ["home trust visa", "hometrust visa"],
+  td: ["td", "td canada trust", "td bank", "toronto dominion", "toronto-dominion"],
+  chase: ["chase", "jpmorgan chase", "jp morgan"],
+  bofa: ["bank of america", "bofa", "boa"],
+  wells: ["wells fargo", "wellsfargo"],
+  citi: ["citi", "citibank", "citicorp"],
+  rbc: ["rbc", "royal bank", "royal bank of canada"],
+  scotiabank: ["scotiabank", "scotia", "bank of nova scotia"],
+  cibc: ["cibc", "canadian imperial"],
+  national: ["national bank", "banque nationale"],
+  desjardins: ["desjardins", "caisse populaire"],
+  tangerine: ["tangerine", "ing direct"],
+  simplii: ["simplii", "pc financial"],
+  eq: ["eq bank", "equitable bank"],
 };
 
 // Reverse map: slug to institution names
@@ -114,12 +114,12 @@ export async function findMatchingAccount(
   bankName: string | null,
   accountNumber: string | null = null,
   fileName: string | null = null,
-  accountType: 'checking' | 'savings' | 'credit' | null = null,
+  accountType: "checking" | "savings" | "credit" | null = null,
   bankId: string | null = null
 ): Promise<MatchResult> {
   const accounts = await db.accounts.toArray();
 
-  console.log('[SmartAccountMatcher] Finding match:', {
+  console.log("[SmartAccountMatcher] Finding match:", {
     bankSlug,
     bankName,
     accountNumber: accountNumber ? `***${accountNumber.slice(-4)}` : null,
@@ -133,7 +133,7 @@ export async function findMatchingAccount(
     return {
       account: null,
       confidence: 0,
-      matchReason: 'No accounts exist',
+      matchReason: "No accounts exist",
     };
   }
 
@@ -142,7 +142,7 @@ export async function findMatchingAccount(
     return {
       account: accounts[0],
       confidence: 0.9,
-      matchReason: 'Only one account exists',
+      matchReason: "Only one account exists",
     };
   }
 
@@ -152,11 +152,11 @@ export async function findMatchingAccount(
   // ========================================
   if (bankId && accountNumber) {
     const last4 = accountNumber.slice(-4);
-    console.log('[SmartAccountMatcher] Trying composite key match:', { bankId, last4 });
+    console.log("[SmartAccountMatcher] Trying composite key match:", { bankId, last4 });
 
     for (const account of accounts) {
       if (account.bankId === bankId && account.lastFourDigits === last4) {
-        console.log('[SmartAccountMatcher] Composite key match found:', account.name);
+        console.log("[SmartAccountMatcher] Composite key match found:", account.name);
         return {
           account,
           confidence: 1.0, // 100% confidence - exact match
@@ -172,7 +172,7 @@ export async function findMatchingAccount(
   // ========================================
   if (accountNumber) {
     const last4 = accountNumber.slice(-4);
-    console.log('[SmartAccountMatcher] Trying bank-verified account match:', { last4 });
+    console.log("[SmartAccountMatcher] Trying bank-verified account match:", { last4 });
 
     for (const account of accounts) {
       if (account.lastFourDigits === last4) {
@@ -180,7 +180,7 @@ export async function findMatchingAccount(
         const bankMatches = bankMatchesAccount(account, bankSlug, bankId, bankName);
 
         if (bankMatches) {
-          console.log('[SmartAccountMatcher] Bank-verified account match found:', account.name);
+          console.log("[SmartAccountMatcher] Bank-verified account match found:", account.name);
           return {
             account,
             confidence: 0.95,
@@ -189,7 +189,7 @@ export async function findMatchingAccount(
         } else {
           // Account number matches but bank doesn't - this is a DIFFERENT account!
           // Log but do NOT match based on account number alone
-          console.log('[SmartAccountMatcher] Account number matches but bank does NOT match:', {
+          console.log("[SmartAccountMatcher] Account number matches but bank does NOT match:", {
             accountName: account.name,
             accountInstitution: account.institution,
             accountBankSlug: account.bankSlug,
@@ -206,7 +206,7 @@ export async function findMatchingAccount(
   // ========================================
   let bestMatch: Account | null = null;
   let bestScore = 0;
-  let bestReason = '';
+  let bestReason = "";
 
   for (const account of accounts) {
     let score = 0;
@@ -232,42 +232,56 @@ export async function findMatchingAccount(
       const accountNameLower = account.name.toLowerCase();
       const institutionLower = account.institution.toLowerCase();
 
-      if (fileNameLower.includes(accountNameLower.replace(/\s+/g, '')) ||
-          fileNameLower.includes(accountNameLower.split(' ')[0])) {
+      if (
+        fileNameLower.includes(accountNameLower.replace(/\s+/g, "")) ||
+        fileNameLower.includes(accountNameLower.split(" ")[0])
+      ) {
         score += 20;
-        reasons.push('filename contains account name');
+        reasons.push("filename contains account name");
       }
 
-      if (fileNameLower.includes(institutionLower.replace(/\s+/g, '')) ||
-          fileNameLower.includes(institutionLower.split(' ')[0].toLowerCase())) {
+      if (
+        fileNameLower.includes(institutionLower.replace(/\s+/g, "")) ||
+        fileNameLower.includes(institutionLower.split(" ")[0].toLowerCase())
+      ) {
         score += 15;
-        reasons.push('filename contains institution');
+        reasons.push("filename contains institution");
       }
 
       // Check for account type in filename
-      if ((fileNameLower.includes('visa') || fileNameLower.includes('credit') ||
-           fileNameLower.includes('mastercard') || fileNameLower.includes('amex')) &&
-          account.type === 'credit') {
+      if (
+        (fileNameLower.includes("visa") ||
+          fileNameLower.includes("credit") ||
+          fileNameLower.includes("mastercard") ||
+          fileNameLower.includes("amex")) &&
+        account.type === "credit"
+      ) {
         score += 10;
-        reasons.push('filename suggests credit card');
+        reasons.push("filename suggests credit card");
       }
 
-      if ((fileNameLower.includes('chequing') || fileNameLower.includes('checking') ||
-           fileNameLower.includes('chq')) && account.type === 'checking') {
+      if (
+        (fileNameLower.includes("chequing") ||
+          fileNameLower.includes("checking") ||
+          fileNameLower.includes("chq")) &&
+        account.type === "checking"
+      ) {
         score += 10;
-        reasons.push('filename suggests checking account');
+        reasons.push("filename suggests checking account");
       }
 
-      if ((fileNameLower.includes('savings') || fileNameLower.includes('save')) &&
-          account.type === 'savings') {
+      if (
+        (fileNameLower.includes("savings") || fileNameLower.includes("save")) &&
+        account.type === "savings"
+      ) {
         score += 10;
-        reasons.push('filename suggests savings account');
+        reasons.push("filename suggests savings account");
       }
     }
 
     // Custom import patterns
     if (account.importPatterns && account.importPatterns.length > 0) {
-      const searchText = [bankSlug, bankName, fileName].filter(Boolean).join(' ').toLowerCase();
+      const searchText = [bankSlug, bankName, fileName].filter(Boolean).join(" ").toLowerCase();
       for (const pattern of account.importPatterns) {
         if (searchText.includes(pattern.toLowerCase())) {
           score += 40;
@@ -280,7 +294,7 @@ export async function findMatchingAccount(
     if (score > bestScore) {
       bestScore = score;
       bestMatch = account;
-      bestReason = reasons.join(', ');
+      bestReason = reasons.join(", ");
     }
   }
 
@@ -288,7 +302,7 @@ export async function findMatchingAccount(
   // Score of 75+ is considered a confident match (bank + type)
   const confidence = Math.min(bestScore / 75, 1);
 
-  console.log('[SmartAccountMatcher] Best match result:', {
+  console.log("[SmartAccountMatcher] Best match result:", {
     account: bestMatch?.name,
     score: bestScore,
     confidence,
@@ -304,7 +318,7 @@ export async function findMatchingAccount(
   return {
     account: bestMatch,
     confidence,
-    matchReason: bestReason || 'No strong match found',
+    matchReason: bestReason || "No strong match found",
     suggestions: confidence < 0.7 ? suggestions : undefined,
   };
 }
@@ -312,20 +326,26 @@ export async function findMatchingAccount(
 /**
  * Detect account type from bank format
  */
-export function detectAccountTypeFromBank(bankSlug: string): 'checking' | 'savings' | 'credit' | null {
-  const creditSlugs = ['homeTrustVisa', 'genericCreditCard', 'chase', 'citi'];
-  const checkingSlugs = ['bmo', 'td', 'rbc', 'scotiabank', 'cibc'];
+export function detectAccountTypeFromBank(
+  bankSlug: string
+): "checking" | "savings" | "credit" | null {
+  const creditSlugs = ["homeTrustVisa", "genericCreditCard", "chase", "citi"];
+  const checkingSlugs = ["bmo", "td", "rbc", "scotiabank", "cibc"];
 
-  if (creditSlugs.includes(bankSlug)) return 'credit';
-  if (checkingSlugs.includes(bankSlug)) return 'checking';
+  if (creditSlugs.includes(bankSlug)) return "credit";
+  if (checkingSlugs.includes(bankSlug)) return "checking";
 
   // Check bank config name for hints
   const config = BANK_CONFIGS[bankSlug];
   if (config) {
     const nameLower = config.name.toLowerCase();
-    if (nameLower.includes('visa') || nameLower.includes('credit') ||
-        nameLower.includes('mastercard') || nameLower.includes('amex')) {
-      return 'credit';
+    if (
+      nameLower.includes("visa") ||
+      nameLower.includes("credit") ||
+      nameLower.includes("mastercard") ||
+      nameLower.includes("amex")
+    ) {
+      return "credit";
     }
   }
 
@@ -366,7 +386,7 @@ export async function learnAccountAssociation(
   }
 
   await db.accounts.update(accountId, updates);
-  console.log('[SmartAccountMatcher] Learned association:', {
+  console.log("[SmartAccountMatcher] Learned association:", {
     accountId,
     bankSlug,
     lastFour: accountNumber?.slice(-4),
@@ -380,11 +400,11 @@ export async function learnAccountAssociation(
 export async function autoCreateAccount(
   bankSlug: string,
   bankName: string,
-  accountType: 'checking' | 'savings' | 'credit' = 'checking',
+  accountType: "checking" | "savings" | "credit" = "checking",
   accountNumber: string | null = null,
   bankId: string | null = null
 ): Promise<Account> {
-  const { v4: uuidv4 } = await import('uuid');
+  const { v4: uuidv4 } = await import("uuid");
 
   const newAccount: Account = {
     id: uuidv4(),
@@ -392,7 +412,7 @@ export async function autoCreateAccount(
     type: accountType,
     institution: bankName,
     balance: 0,
-    currency: 'CAD',
+    currency: "CAD",
     bankSlug,
     lastFourDigits: accountNumber?.slice(-4),
     bankId: bankId || undefined,
@@ -401,7 +421,7 @@ export async function autoCreateAccount(
   };
 
   await db.accounts.add(newAccount);
-  console.log('[SmartAccountMatcher] Auto-created account:', newAccount.name, { bankId });
+  console.log("[SmartAccountMatcher] Auto-created account:", newAccount.name, { bankId });
 
   return newAccount;
 }
@@ -416,11 +436,11 @@ export async function autoCreateAccount(
 export async function assignUnassignedTransactionsTo(targetAccountId: string): Promise<number> {
   const allTransactions = await db.transactions.toArray();
   const unassigned = allTransactions.filter(
-    tx => !tx.accountId || tx.accountId === '' || tx.accountId === 'default-account'
+    (tx) => !tx.accountId || tx.accountId === "" || tx.accountId === "default-account"
   );
 
   if (unassigned.length === 0) {
-    console.log('[SmartAccountMatcher] No unassigned transactions to assign');
+    console.log("[SmartAccountMatcher] No unassigned transactions to assign");
     return 0;
   }
 
@@ -428,7 +448,12 @@ export async function assignUnassignedTransactionsTo(targetAccountId: string): P
     await db.transactions.update(tx.id, { accountId: targetAccountId });
   }
 
-  console.log('[SmartAccountMatcher] Assigned', unassigned.length, 'transactions to account', targetAccountId);
+  console.log(
+    "[SmartAccountMatcher] Assigned",
+    unassigned.length,
+    "transactions to account",
+    targetAccountId
+  );
   return unassigned.length;
 }
 
@@ -441,14 +466,18 @@ export async function migrateDefaultTransactions(): Promise<{
   // Empty accountId can occur when imports happened before accounts were set up
   const allTransactions = await db.transactions.toArray();
   const transactions = allTransactions.filter(
-    tx => !tx.accountId || tx.accountId === '' || tx.accountId === 'default-account'
+    (tx) => !tx.accountId || tx.accountId === "" || tx.accountId === "default-account"
   );
 
   if (transactions.length === 0) {
     return { migrated: 0, unmigrated: 0, created: [] };
   }
 
-  console.log('[SmartAccountMatcher] Found', transactions.length, 'unassigned transactions to migrate');
+  console.log(
+    "[SmartAccountMatcher] Found",
+    transactions.length,
+    "unassigned transactions to migrate"
+  );
 
   const accounts = await db.accounts.toArray();
   const migrated = 0;
@@ -465,7 +494,12 @@ export async function migrateDefaultTransactions(): Promise<{
   // If only one account exists, migrate all to it
   if (accounts.length === 1) {
     await migrateAllTo(accounts[0].id);
-    console.log('[SmartAccountMatcher] Migrated all', transactions.length, 'transactions to', accounts[0].name);
+    console.log(
+      "[SmartAccountMatcher] Migrated all",
+      transactions.length,
+      "transactions to",
+      accounts[0].name
+    );
 
     return {
       migrated: transactions.length,
@@ -476,15 +510,15 @@ export async function migrateDefaultTransactions(): Promise<{
 
   // If no accounts exist, create a default one
   if (accounts.length === 0) {
-    const defaultAccount = await autoCreateAccount(
-      'unknown',
-      'Primary',
-      'checking'
-    );
+    const defaultAccount = await autoCreateAccount("unknown", "Primary", "checking");
     createdAccounts.push(defaultAccount.name);
 
     await migrateAllTo(defaultAccount.id);
-    console.log('[SmartAccountMatcher] Created account and migrated all', transactions.length, 'transactions');
+    console.log(
+      "[SmartAccountMatcher] Created account and migrated all",
+      transactions.length,
+      "transactions"
+    );
 
     return {
       migrated: transactions.length,
@@ -495,7 +529,7 @@ export async function migrateDefaultTransactions(): Promise<{
 
   // Multiple accounts exist - DO NOT auto-assign!
   // Return unmigrated count so the UI can prompt user for account selection
-  console.log('[SmartAccountMatcher] Multiple accounts exist - user selection required');
+  console.log("[SmartAccountMatcher] Multiple accounts exist - user selection required");
 
   return {
     migrated: 0,

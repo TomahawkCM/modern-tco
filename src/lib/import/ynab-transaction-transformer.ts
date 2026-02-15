@@ -9,14 +9,14 @@
  * - Split transactions: Create linked child transactions
  */
 
-import type { Transaction, Category, Account } from '@/types/budget';
+import type { Transaction, Category, Account } from "@/types/budget";
 import type {
   NormalizedTransaction,
   NormalizedSplitTransaction,
   NormalizedAccount,
   NormalizedCategoryGroup,
   ParsedYNABData,
-} from './ynab-parser';
+} from "./ynab-parser";
 
 // ============================================================================
 // Configuration
@@ -72,66 +72,66 @@ export interface TransformStats {
  */
 const CATEGORY_COLORS: Record<string, string> = {
   // Housing
-  rent: '#3B82F6',
-  mortgage: '#3B82F6',
-  housing: '#3B82F6',
+  rent: "#3B82F6",
+  mortgage: "#3B82F6",
+  housing: "#3B82F6",
   // Food
-  groceries: '#10B981',
-  'dining out': '#059669',
-  restaurant: '#059669',
+  groceries: "#10B981",
+  "dining out": "#059669",
+  restaurant: "#059669",
   // Transportation
-  gas: '#8B5CF6',
-  transportation: '#8B5CF6',
-  auto: '#8B5CF6',
+  gas: "#8B5CF6",
+  transportation: "#8B5CF6",
+  auto: "#8B5CF6",
   // Utilities
-  utilities: '#F59E0B',
-  electric: '#F59E0B',
-  water: '#F59E0B',
+  utilities: "#F59E0B",
+  electric: "#F59E0B",
+  water: "#F59E0B",
   // Entertainment
-  entertainment: '#EC4899',
-  streaming: '#EC4899',
+  entertainment: "#EC4899",
+  streaming: "#EC4899",
   // Shopping
-  shopping: '#6366F1',
-  clothing: '#6366F1',
+  shopping: "#6366F1",
+  clothing: "#6366F1",
   // Health
-  health: '#EF4444',
-  medical: '#EF4444',
+  health: "#EF4444",
+  medical: "#EF4444",
   // Income
-  income: '#22C55E',
-  salary: '#22C55E',
+  income: "#22C55E",
+  salary: "#22C55E",
   // Savings
-  savings: '#14B8A6',
-  emergency: '#14B8A6',
+  savings: "#14B8A6",
+  emergency: "#14B8A6",
   // Default
-  default: '#6B7280',
+  default: "#6B7280",
 };
 
 /**
  * Default category icons based on common names
  */
 const CATEGORY_ICONS: Record<string, string> = {
-  rent: 'Home',
-  mortgage: 'Home',
-  housing: 'Home',
-  groceries: 'ShoppingCart',
-  'dining out': 'UtensilsCrossed',
-  restaurant: 'UtensilsCrossed',
-  gas: 'Fuel',
-  transportation: 'Car',
-  auto: 'Car',
-  utilities: 'Lightbulb',
-  electric: 'Zap',
-  entertainment: 'Tv',
-  streaming: 'Play',
-  shopping: 'ShoppingBag',
-  clothing: 'Shirt',
-  health: 'Heart',
-  medical: 'Stethoscope',
-  income: 'DollarSign',
-  salary: 'Wallet',
-  savings: 'PiggyBank',
-  emergency: 'Shield',
-  default: 'Folder',
+  rent: "Home",
+  mortgage: "Home",
+  housing: "Home",
+  groceries: "ShoppingCart",
+  "dining out": "UtensilsCrossed",
+  restaurant: "UtensilsCrossed",
+  gas: "Fuel",
+  transportation: "Car",
+  auto: "Car",
+  utilities: "Lightbulb",
+  electric: "Zap",
+  entertainment: "Tv",
+  streaming: "Play",
+  shopping: "ShoppingBag",
+  clothing: "Shirt",
+  health: "Heart",
+  medical: "Stethoscope",
+  income: "DollarSign",
+  salary: "Wallet",
+  savings: "PiggyBank",
+  emergency: "Shield",
+  default: "Folder",
 };
 
 function getCategoryColor(name: string): string {
@@ -141,7 +141,7 @@ function getCategoryColor(name: string): string {
       return color;
     }
   }
-  return CATEGORY_COLORS['default'];
+  return CATEGORY_COLORS["default"];
 }
 
 function getCategoryIcon(name: string): string {
@@ -151,7 +151,7 @@ function getCategoryIcon(name: string): string {
       return icon;
     }
   }
-  return CATEGORY_ICONS['default'];
+  return CATEGORY_ICONS["default"];
 }
 
 // ============================================================================
@@ -206,9 +206,7 @@ export function transformYNABData(
     // Resolve account
     const account = accountMap.get(ynabTxn.accountId);
     if (!account && !options.defaultAccountId) {
-      warnings.push(
-        `Skipping transaction "${ynabTxn.description}": no matching account`
-      );
+      warnings.push(`Skipping transaction "${ynabTxn.description}": no matching account`);
       stats.skippedTransactions++;
       continue;
     }
@@ -229,13 +227,7 @@ export function transformYNABData(
     }
 
     // Create main transaction
-    const mainTxn = createTransaction(
-      ynabTxn,
-      accountId,
-      category,
-      subcategory,
-      options
-    );
+    const mainTxn = createTransaction(ynabTxn, accountId, category, subcategory, options);
     transactions.push(mainTxn);
     stats.successfulTransforms++;
 
@@ -263,11 +255,7 @@ export function transformYNABData(
   const accounts = transformAccounts(data.accounts);
 
   // Create Category objects for new categories
-  const newCategories = transformNewCategories(
-    newCategoryMap,
-    data.categoryGroups,
-    options
-  );
+  const newCategories = transformNewCategories(newCategoryMap, data.categoryGroups, options);
 
   return {
     transactions,
@@ -308,9 +296,7 @@ function buildCategoryMap(
   return map;
 }
 
-function buildAccountMap(
-  accounts: NormalizedAccount[]
-): Map<string, NormalizedAccount> {
+function buildAccountMap(accounts: NormalizedAccount[]): Map<string, NormalizedAccount> {
   return new Map(accounts.map((a) => [a.id, a]));
 }
 
@@ -342,9 +328,7 @@ function resolveCategory(
 
   // Try to match group + category
   if (ynabGroup) {
-    const groupMatch = existingMap.get(
-      `${ynabGroup.toLowerCase()}: ${ynabCategory.toLowerCase()}`
-    );
+    const groupMatch = existingMap.get(`${ynabGroup.toLowerCase()}: ${ynabCategory.toLowerCase()}`);
     if (groupMatch) {
       return {
         category: groupMatch.category,
@@ -378,7 +362,7 @@ function resolveCategory(
     newCategoryMap.set(categoryName, {
       id: crypto.randomUUID(),
       name: categoryName,
-      type: 'expense', // Will be determined by transaction amounts later
+      type: "expense", // Will be determined by transaction amounts later
       subcategories: [],
       color: getCategoryColor(categoryName),
       icon: getCategoryIcon(categoryName),
@@ -412,7 +396,7 @@ function createTransaction(
   const now = new Date();
 
   // Build notes
-  let notes = ynabTxn.memo || '';
+  let notes = ynabTxn.memo || "";
   if (options.preserveOriginalIds) {
     notes = notes
       ? `${notes} [YNAB ID: ${ynabTxn.originalId}]`
@@ -422,7 +406,7 @@ function createTransaction(
   // Build tags from flag color
   const tags: string[] = [];
   if (ynabTxn.flagColor) {
-    const prefix = options.flagTagPrefix || 'ynab-flag';
+    const prefix = options.flagTagPrefix || "ynab-flag";
     tags.push(`${prefix}-${ynabTxn.flagColor}`);
   }
 
@@ -472,7 +456,7 @@ function createSplitTransactions(
       amount: split.amount,
       category,
       subcategory,
-      notes: split.memo || '',
+      notes: split.memo || "",
       isRecurring: false,
       tags: [],
       splitFromId: parentId, // Link to parent
@@ -487,9 +471,9 @@ function extractMerchant(description: string): string | undefined {
 
   // Clean up common prefixes
   let merchant = description
-    .replace(/^(POS|ACH|CHK|ATM|WIRE|XFER)\s+/i, '')
-    .replace(/^(DEBIT|CREDIT|PURCHASE)\s+/i, '')
-    .replace(/^#\d+\s+/, '')
+    .replace(/^(POS|ACH|CHK|ATM|WIRE|XFER)\s+/i, "")
+    .replace(/^(DEBIT|CREDIT|PURCHASE)\s+/i, "")
+    .replace(/^#\d+\s+/, "")
     .trim();
 
   // Limit length
@@ -509,30 +493,28 @@ function transformAccounts(accounts: NormalizedAccount[]): Account[] {
     type: mapAccountType(acc.type),
     institution: extractInstitution(acc.name),
     balance: acc.balance,
-    currency: 'USD', // Will be set from budget data
+    currency: "USD", // Will be set from budget data
     createdAt: now,
     updatedAt: now,
   }));
 }
 
-function mapAccountType(
-  type: NormalizedAccount['type']
-): Account['type'] {
+function mapAccountType(type: NormalizedAccount["type"]): Account["type"] {
   switch (type) {
-    case 'checking':
-      return 'checking';
-    case 'savings':
-      return 'savings';
-    case 'credit':
-      return 'credit';
-    case 'cash':
-      return 'checking'; // No 'cash' in our schema
-    case 'loan':
-      return 'credit'; // Map loans to credit for now
-    case 'investment':
-      return 'savings'; // Map investments to savings for now
+    case "checking":
+      return "checking";
+    case "savings":
+      return "savings";
+    case "credit":
+      return "credit";
+    case "cash":
+      return "checking"; // No 'cash' in our schema
+    case "loan":
+      return "credit"; // Map loans to credit for now
+    case "investment":
+      return "savings"; // Map investments to savings for now
     default:
-      return 'checking';
+      return "checking";
   }
 }
 
@@ -552,7 +534,7 @@ function extractInstitution(accountName: string): string {
     }
   }
 
-  return 'Unknown';
+  return "Unknown";
 }
 
 function transformNewCategories(
@@ -563,13 +545,11 @@ function transformNewCategories(
   const categories = Array.from(newCategoryMap.values());
 
   // Determine expense vs income based on YNAB group names
-  const incomeKeywords = ['income', 'inflow', 'salary', 'wages', 'revenue'];
+  const incomeKeywords = ["income", "inflow", "salary", "wages", "revenue"];
 
   for (const cat of categories) {
-    const isIncome = incomeKeywords.some((kw) =>
-      cat.name.toLowerCase().includes(kw)
-    );
-    cat.type = isIncome ? 'income' : 'expense';
+    const isIncome = incomeKeywords.some((kw) => cat.name.toLowerCase().includes(kw));
+    cat.type = isIncome ? "income" : "expense";
   }
 
   // Check if hidden categories should be archived
@@ -596,13 +576,11 @@ function transformNewCategories(
 /**
  * Quick transform for simple imports (no existing categories)
  */
-export function quickTransformYNAB(
-  data: ParsedYNABData
-): TransformResult {
+export function quickTransformYNAB(data: ParsedYNABData): TransformResult {
   return transformYNABData(data, {
     preserveOriginalIds: true,
     includeHiddenCategories: false,
-    flagTagPrefix: 'flag',
+    flagTagPrefix: "flag",
   });
 }
 

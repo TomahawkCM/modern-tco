@@ -321,7 +321,7 @@ export function InteractiveLabSystem({ labId, onComplete }: InteractiveLabSystem
                   </div>
                 </div>
                 <Button
-                  className="w-full bg-tanium-accent hover:bg-blue-600"
+                  className="bg-tanium-accent w-full hover:bg-blue-600"
                   onClick={() => handleLabSelect(lab)}
                 >
                   <Play className="mr-2 h-4 w-4" />

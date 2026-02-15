@@ -19,7 +19,8 @@ const STUDY_MODULES = [
   {
     slug: "platform-foundation",
     title: "Tanium Platform Foundation",
-    description: "Complete foundation for zero-knowledge students - understand architecture, terminology, and console basics",
+    description:
+      "Complete foundation for zero-knowledge students - understand architecture, terminology, and console basics",
     icon: "🏗️",
     difficulty: "Beginner",
     estimatedTime: "180 min",
@@ -34,7 +35,8 @@ const STUDY_MODULES = [
   {
     slug: "asking-questions",
     title: "Asking Questions",
-    description: "Master the art of querying in Tanium - construct effective queries and interpret results",
+    description:
+      "Master the art of querying in Tanium - construct effective queries and interpret results",
     icon: "❓",
     difficulty: "Beginner",
     estimatedTime: "45 min",
@@ -180,8 +182,9 @@ export default function StudyPage() {
         </CardHeader>
         <CardContent className="text-muted-foreground">
           <p className="mb-3">
-            <strong className="text-primary">New to Tanium?</strong> Start with the Platform Foundation module for a
-            complete introduction. Then progress through each module in order.
+            <strong className="text-primary">New to Tanium?</strong> Start with the Platform
+            Foundation module for a complete introduction. Then progress through each module in
+            order.
           </p>
           <p className="text-sm text-muted-foreground">
             Each module includes interactive examples, practice questions, and active recall

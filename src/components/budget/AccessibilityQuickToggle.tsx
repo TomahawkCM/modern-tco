@@ -102,9 +102,7 @@ export function AccessibilityQuickToggle({
         className={cn(
           "relative flex items-center justify-center rounded-lg transition-all",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2",
-          compact
-            ? "h-10 w-10 p-2"
-            : "h-10 gap-1.5 px-3 py-2",
+          compact ? "h-10 w-10 p-2" : "h-10 gap-1.5 px-3 py-2",
           hasActiveFeatures
             ? "bg-teal-500/20 text-teal-400 hover:bg-teal-500/30"
             : "text-slate-400 hover:bg-white/10 hover:text-white"
@@ -115,10 +113,7 @@ export function AccessibilityQuickToggle({
           <>
             <span className="text-sm font-medium">A11y</span>
             <ChevronDown
-              className={cn(
-                "h-3 w-3 transition-transform",
-                isOpen && "rotate-180"
-              )}
+              className={cn("h-3 w-3 transition-transform", isOpen && "rotate-180")}
               aria-hidden="true"
             />
           </>
@@ -126,7 +121,7 @@ export function AccessibilityQuickToggle({
         {/* Active indicator dot */}
         {hasActiveFeatures && (
           <span
-            className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-teal-400"
+            className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-teal-400"
             aria-hidden="true"
           />
         )}
@@ -146,12 +141,12 @@ export function AccessibilityQuickToggle({
           )}
         >
           {/* Header */}
-          <div className="flex items-center justify-between mb-4">
+          <div className="mb-4 flex items-center justify-between">
             <h3 className="text-sm font-semibold text-white">Accessibility</h3>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="p-1 text-slate-400 hover:text-white rounded transition-colors"
+              className="rounded p-1 text-slate-400 transition-colors hover:text-white"
               aria-label="Close accessibility menu"
             >
               <X className="h-4 w-4" />
@@ -165,13 +160,11 @@ export function AccessibilityQuickToggle({
               <div>
                 <label
                   htmlFor="seniors-mode-toggle"
-                  className="block text-sm font-medium text-white cursor-pointer"
+                  className="block cursor-pointer text-sm font-medium text-white"
                 >
                   Large Text Mode
                 </label>
-                <p className="text-xs text-slate-400">
-                  Bigger text & touch targets
-                </p>
+                <p className="text-xs text-slate-400">Bigger text & touch targets</p>
               </div>
               <button
                 id="seniors-mode-toggle"
@@ -199,13 +192,11 @@ export function AccessibilityQuickToggle({
               <div>
                 <label
                   htmlFor="high-contrast-toggle"
-                  className="block text-sm font-medium text-white cursor-pointer"
+                  className="block cursor-pointer text-sm font-medium text-white"
                 >
                   High Contrast
                 </label>
-                <p className="text-xs text-slate-400">
-                  Enhanced color contrast
-                </p>
+                <p className="text-xs text-slate-400">Enhanced color contrast</p>
               </div>
               <button
                 id="high-contrast-toggle"
@@ -233,13 +224,11 @@ export function AccessibilityQuickToggle({
               <div>
                 <label
                   htmlFor="reduce-motion-toggle"
-                  className="block text-sm font-medium text-white cursor-pointer"
+                  className="block cursor-pointer text-sm font-medium text-white"
                 >
                   Reduce Motion
                 </label>
-                <p className="text-xs text-slate-400">
-                  Minimize animations
-                </p>
+                <p className="text-xs text-slate-400">Minimize animations</p>
               </div>
               <button
                 id="reduce-motion-toggle"
@@ -263,7 +252,7 @@ export function AccessibilityQuickToggle({
             </div>
 
             {/* Text Size Controls */}
-            <div className="pt-2 border-t border-white/10">
+            <div className="border-t border-white/10 pt-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-white">Text Size</span>
                 <div className="flex items-center gap-2">
@@ -273,10 +262,10 @@ export function AccessibilityQuickToggle({
                     disabled={settings.fontSizeMultiplier === 1.0}
                     aria-label="Decrease text size"
                     className={cn(
-                      "h-8 w-8 rounded-lg flex items-center justify-center transition-colors",
+                      "flex h-8 w-8 items-center justify-center rounded-lg transition-colors",
                       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500",
                       settings.fontSizeMultiplier === 1.0
-                        ? "text-slate-600 cursor-not-allowed"
+                        ? "cursor-not-allowed text-slate-600"
                         : "text-slate-300 hover:bg-white/10"
                     )}
                   >
@@ -287,8 +276,8 @@ export function AccessibilityQuickToggle({
                     {settings.fontSizeMultiplier === 1.0
                       ? "Normal"
                       : settings.fontSizeMultiplier === 1.25
-                      ? "Large"
-                      : "X-Large"}
+                        ? "Large"
+                        : "X-Large"}
                   </span>
 
                   <button
@@ -297,10 +286,10 @@ export function AccessibilityQuickToggle({
                     disabled={settings.fontSizeMultiplier === 1.5}
                     aria-label="Increase text size"
                     className={cn(
-                      "h-8 w-8 rounded-lg flex items-center justify-center transition-colors",
+                      "flex h-8 w-8 items-center justify-center rounded-lg transition-colors",
                       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500",
                       settings.fontSizeMultiplier === 1.5
-                        ? "text-slate-600 cursor-not-allowed"
+                        ? "cursor-not-allowed text-slate-600"
                         : "text-slate-300 hover:bg-white/10"
                     )}
                   >
@@ -310,7 +299,7 @@ export function AccessibilityQuickToggle({
               </div>
 
               {/* Size indicators */}
-              <div className="flex justify-center gap-2 mt-2">
+              <div className="mt-2 flex justify-center gap-2">
                 {[1.0, 1.25, 1.5].map((size) => (
                   <button
                     key={size}
@@ -332,7 +321,7 @@ export function AccessibilityQuickToggle({
 
           {/* Active features summary */}
           {hasActiveFeatures && (
-            <div className="mt-4 pt-3 border-t border-white/10">
+            <div className="mt-4 border-t border-white/10 pt-3">
               <div className="flex items-center gap-2 text-xs text-teal-400">
                 <Check className="h-3 w-3" />
                 <span>Accessibility features active</span>

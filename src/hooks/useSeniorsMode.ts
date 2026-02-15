@@ -90,8 +90,7 @@ export function useSeniorsModeStyles() {
  * Hook that provides Tailwind classes based on Seniors Mode settings
  */
 export function useSeniorsModeClasses() {
-  const { settings, isSeniorsMode, fontSizeClass, touchTargetClass } =
-    useSeniorsModeWithDefaults();
+  const { settings, isSeniorsMode, fontSizeClass, touchTargetClass } = useSeniorsModeWithDefaults();
 
   const classes = useMemo(() => {
     const baseClasses: string[] = [];
@@ -120,15 +119,9 @@ export function useSeniorsModeClasses() {
       container: baseClasses.join(" "),
       text: fontSizeClass,
       touchTarget: touchTargetClass,
-      button: isSeniorsMode
-        ? `${touchTargetClass} ${fontSizeClass} font-medium`
-        : "",
-      input: isSeniorsMode
-        ? `${touchTargetClass} ${fontSizeClass}`
-        : "",
-      link: isSeniorsMode
-        ? `${fontSizeClass} underline-offset-4`
-        : "",
+      button: isSeniorsMode ? `${touchTargetClass} ${fontSizeClass} font-medium` : "",
+      input: isSeniorsMode ? `${touchTargetClass} ${fontSizeClass}` : "",
+      link: isSeniorsMode ? `${fontSizeClass} underline-offset-4` : "",
     };
   }, [settings, isSeniorsMode, fontSizeClass, touchTargetClass]);
 
@@ -169,14 +162,11 @@ export function useShouldHighContrast(): boolean {
  * Hook for getting accessible button props
  */
 export function useSeniorsModeButtonProps(label?: string) {
-  const { isSeniorsMode, touchTargetClass, fontSizeClass } =
-    useSeniorsModeWithDefaults();
+  const { isSeniorsMode, touchTargetClass, fontSizeClass } = useSeniorsModeWithDefaults();
 
   const props = useMemo(
     () => ({
-      className: isSeniorsMode
-        ? `${touchTargetClass} ${fontSizeClass} px-4 py-2`
-        : "",
+      className: isSeniorsMode ? `${touchTargetClass} ${fontSizeClass} px-4 py-2` : "",
       "aria-label": label,
       // Enhanced focus for seniors
       style: isSeniorsMode
@@ -195,14 +185,11 @@ export function useSeniorsModeButtonProps(label?: string) {
  * Hook for getting accessible input props
  */
 export function useSeniorsModeInputProps(label?: string) {
-  const { isSeniorsMode, touchTargetClass, fontSizeClass } =
-    useSeniorsModeWithDefaults();
+  const { isSeniorsMode, touchTargetClass, fontSizeClass } = useSeniorsModeWithDefaults();
 
   const props = useMemo(
     () => ({
-      className: isSeniorsMode
-        ? `${touchTargetClass} ${fontSizeClass} px-3 py-2`
-        : "",
+      className: isSeniorsMode ? `${touchTargetClass} ${fontSizeClass} px-3 py-2` : "",
       "aria-label": label,
       style: isSeniorsMode
         ? {

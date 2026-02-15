@@ -11,6 +11,7 @@
 The flashcard browse mode UI is fully implemented and working, but **one database security policy needs to be updated** to allow anonymous users to read the flashcard library.
 
 **Current Status**:
+
 - ✅ Browse mode UI complete (FlashcardDashboard + FlashcardLibrary)
 - ✅ 157 AI-curated flashcards in database
 - ✅ Migration file created
@@ -46,6 +47,7 @@ CREATE POLICY IF NOT EXISTS "Flashcard library is publicly readable"
 ```
 
 **Why This is Safe**:
+
 1. ✅ **Read-only**: Only grants SELECT (no INSERT/UPDATE/DELETE)
 2. ✅ **Library content only**: Progress tracking remains authenticated-only
 3. ✅ **PERMISSIVE policy**: Works alongside existing authenticated policy
@@ -58,11 +60,13 @@ CREATE POLICY IF NOT EXISTS "Flashcard library is publicly readable"
 ### Option 1: Supabase Dashboard (Recommended) ⭐
 
 1. **Open Supabase SQL Editor**:
+
    ```
    https://qnwcwoutgarhqxlgsjzs.supabase.co/project/qnwcwoutgarhqxlgsjzs/sql
    ```
 
 2. **Paste this SQL**:
+
    ```sql
    CREATE POLICY IF NOT EXISTS "Flashcard library is publicly readable"
      ON public.flashcard_library FOR SELECT
@@ -109,6 +113,7 @@ After applying the migration:
 ## 📊 Expected Behavior
 
 ### Anonymous Users (Browse Mode)
+
 - ✅ Browse all 157 AI-curated flashcards
 - ✅ Filter by domain (asking_questions, refining_targeting, etc.)
 - ✅ Filter by difficulty (easy, medium, hard)
@@ -119,6 +124,7 @@ After applying the migration:
 - ❌ Review sessions (requires authentication)
 
 ### Authenticated Users (Future)
+
 - ✅ All browse features PLUS
 - ✅ SuperMemo2 spaced repetition tracking
 - ✅ Statistics dashboard
@@ -131,13 +137,16 @@ After applying the migration:
 ## 📁 Files Created/Modified
 
 ### Migration Files
+
 - ✅ **Created**: `supabase/migrations/20251010000006_enable_anonymous_flashcard_library_access.sql`
 
 ### Helper Scripts
+
 - ✅ **Created**: `scripts/apply-rls-migration.ts` (displays instructions)
 - ✅ **Created**: `scripts/apply-migration-direct.ts` (checks policy status)
 
 ### UI Components (Previously Implemented)
+
 - ✅ **Modified**: `src/components/flashcards/FlashcardDashboard.tsx` (removed auth gate)
 - ✅ **Modified**: `src/components/flashcards/FlashcardLibrary.tsx` (browse mode support)
 
@@ -148,36 +157,41 @@ After applying the migration:
 ### RLS Policy Mechanics
 
 **Before Migration** (1 policy):
+
 ```
 authenticated users → CAN read flashcard_library ✅
 anonymous users    → CANNOT read flashcard_library ❌
 ```
 
 **After Migration** (2 policies):
+
 ```
 authenticated users → CAN read flashcard_library ✅ (policy #1)
 anonymous users    → CAN read flashcard_library ✅ (policy #2)
 ```
 
 **Why 2 Policies?**
+
 - Supabase RLS policies are PERMISSIVE by default
 - Multiple policies = OR logic (if ANY policy grants access, access is allowed)
 - Safer than modifying existing policy (no risk to authenticated users)
 
 ### Security Boundaries
 
-| Table | Anonymous Access | Authenticated Access |
-|-------|-----------------|---------------------|
-| `flashcard_library` | ✅ SELECT (read-only) | ✅ SELECT (read-only) |
-| `flashcard_library_progress` | ❌ No access | ✅ Full access (own data) |
-| `content_import_logs` | ❌ No access | ❌ No access (admin only) |
+| Table                        | Anonymous Access      | Authenticated Access      |
+| ---------------------------- | --------------------- | ------------------------- |
+| `flashcard_library`          | ✅ SELECT (read-only) | ✅ SELECT (read-only)     |
+| `flashcard_library_progress` | ❌ No access          | ✅ Full access (own data) |
+| `content_import_logs`        | ❌ No access          | ❌ No access (admin only) |
 
 ---
 
 ## 🐛 Troubleshooting
 
 ### "Policy already exists" Error
+
 This is actually good! It means the policy was created. Verify by:
+
 ```sql
 SELECT * FROM pg_policies
 WHERE tablename = 'flashcard_library'
@@ -185,12 +199,14 @@ AND policyname = 'Flashcard library is publicly readable';
 ```
 
 ### Still Seeing "No flashcards found"
+
 1. Check policy was applied: Run verification query above
 2. Clear Next.js cache: `rm -rf .next && npm run dev`
 3. Hard refresh browser: Ctrl+Shift+R (Windows/Linux) or Cmd+Shift+R (Mac)
 4. Check browser console for errors
 
 ### Policy Not Showing in Supabase Dashboard
+
 - Wait 10-30 seconds for cache refresh
 - Refresh the Supabase Dashboard page
 - Check Authentication → Policies section
@@ -219,17 +235,20 @@ Once the migration is applied:
 ## 🎯 Quick Commands
 
 **Check if migration was applied**:
+
 ```bash
 npx tsx scripts/apply-migration-direct.ts
 ```
 
 **Generate more flashcards** (after migration):
+
 ```bash
 npm run content:generate-flashcards -- --domain troubleshooting --difficulty easy --count 30
 npm run content:import-flashcards
 ```
 
 **Verify flashcard count**:
+
 ```bash
 npx tsx scripts/verify-flashcard-import.ts
 ```

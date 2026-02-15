@@ -21,7 +21,7 @@
 ```json
 {
   "lint:pwsh": "cross-env NODE_ENV=development eslint . --max-warnings 0 --cache",
-  "lint:fix:pwsh": "cross-env NODE_ENV=development eslint . --fix --cache", 
+  "lint:fix:pwsh": "cross-env NODE_ENV=development eslint . --fix --cache",
   "lint:check:pwsh": "cross-env NODE_ENV=development eslint . --max-warnings 0 --cache --quiet",
   "quality:pwsh": "npm run typecheck && npm run lint:pwsh && npm run format:check:pwsh",
   "fix:pwsh": "npm run format:pwsh && npm run lint:fix:pwsh"
@@ -57,7 +57,7 @@
 **Top Violators:**
 
 - `src/services/enhanced-anthropic-service.ts`: 19 violations
-- `src/services/questionsService.ts`: 20 violations  
+- `src/services/questionsService.ts`: 20 violations
 - `src/services/QuestionGeneratorService.ts`: 7 violations
 - `src/services/anthropic-service.ts`: 7 violations
 
@@ -92,7 +92,7 @@ import { ComponentType } from "react";
 import { TCODomain, Question } from "./exam";
 
 // ✅ Should be
-import { type ComponentType } from "react"; 
+import { type ComponentType } from "react";
 import { type TCODomain, type Question } from "./exam";
 ```
 
@@ -203,7 +203,7 @@ import { type TCODomain, type Question } from "./exam";
 
 ```bash
 npm run quality:pwsh  # Full quality check
-npm run typecheck     # Verify TypeScript compilation  
+npm run typecheck     # Verify TypeScript compilation
 npm run test          # Ensure functionality preserved
 ```
 
@@ -214,7 +214,7 @@ npm run test          # Ensure functionality preserved
 ### Pre-Fix Baseline
 
 - **Console Violations**: 53 across services
-- **Type Safety Issues**: 94 'any' usages  
+- **Type Safety Issues**: 94 'any' usages
 - **Import Consistency**: ~30-40 violations estimated
 - **Total Estimated Violations**: ~180-200 lint errors
 
@@ -228,7 +228,7 @@ npm run test          # Ensure functionality preserved
 ### Performance Benefits
 
 - **Development Experience**: Improved IntelliSense, better error catching
-- **Build Performance**: Optimized imports, reduced bundle overhead  
+- **Build Performance**: Optimized imports, reduced bundle overhead
 - **Runtime Reliability**: Stronger type safety, fewer runtime errors
 - **Maintainability**: Clear contracts, easier refactoring
 
@@ -252,7 +252,7 @@ npm run test          # Ensure functionality preserved
 2. **High-priority manual fixes**: Service console cleanup
 3. **Type system strengthening**: Core interfaces in types/index.ts
 
-### Sprint Planning (Next 2 Weeks)  
+### Sprint Planning (Next 2 Weeks)
 
 1. **Component type improvements**: Systematic 'any' removal
 2. **Import consistency update**: Project-wide consistent-type-imports
@@ -261,7 +261,7 @@ npm run test          # Ensure functionality preserved
 ### Long-term Quality Goals
 
 1. **Establish lint gates**: Pre-commit hooks for quality enforcement
-2. **Developer education**: Team training on 2025 TypeScript best practices  
+2. **Developer education**: Team training on 2025 TypeScript best practices
 3. **Monitoring integration**: Quality metrics dashboard
 
 ---

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
-import { Card } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import React, { useRef, useEffect, useState, useCallback, useMemo } from "react";
+import { Card } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Table,
   TableBody,
@@ -10,11 +10,11 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { ChevronUp, ChevronDown, Database, AlertCircle } from 'lucide-react';
-import { getVisibleItems } from '../utils/performance';
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { ChevronUp, ChevronDown, Database, AlertCircle } from "lucide-react";
+import { getVisibleItems } from "../utils/performance";
 
 interface VirtualScrollTableProps {
   data: Record<string, any>[];
@@ -45,14 +45,14 @@ export function VirtualScrollTable({
   emptyMessage = "No results found",
   loading = false,
   striped = true,
-  highlightOnHover = true
+  highlightOnHover = true,
 }: VirtualScrollTableProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [scrollTop, setScrollTop] = useState(0);
   const [sortConfig, setSortConfig] = useState<{
     key: string | null;
-    direction: 'asc' | 'desc';
-  }>({ key: null, direction: 'asc' });
+    direction: "asc" | "desc";
+  }>({ key: null, direction: "asc" });
 
   // Handle scroll events
   const handleScroll = useCallback(() => {
@@ -65,8 +65,8 @@ export function VirtualScrollTable({
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (container) {
-      container.addEventListener('scroll', handleScroll, { passive: true });
-      return () => container.removeEventListener('scroll', handleScroll);
+      container.addEventListener("scroll", handleScroll, { passive: true });
+      return () => container.removeEventListener("scroll", handleScroll);
     }
   }, [handleScroll]);
 
@@ -81,54 +81,47 @@ export function VirtualScrollTable({
       if (aValue === null || aValue === undefined) return 1;
       if (bValue === null || bValue === undefined) return -1;
 
-      if (typeof aValue === 'string') {
+      if (typeof aValue === "string") {
         const comparison = aValue.localeCompare(bValue);
-        return sortConfig.direction === 'asc' ? comparison : -comparison;
+        return sortConfig.direction === "asc" ? comparison : -comparison;
       }
 
-      if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
-      if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+      if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
+      if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
       return 0;
     });
   }, [data, sortConfig]);
 
   // Get visible items using virtual scrolling
-  const {
-    visibleItems,
-    startIndex,
-    offsetY,
-    totalHeight
-  } = useMemo(() => {
-    return getVisibleItems(
-      sortedData,
-      containerHeight,
-      rowHeight,
-      scrollTop
-    );
+  const { visibleItems, startIndex, offsetY, totalHeight } = useMemo(() => {
+    return getVisibleItems(sortedData, containerHeight, rowHeight, scrollTop);
   }, [sortedData, containerHeight, rowHeight, scrollTop]);
 
   // Handle sorting
   const handleSort = (key: string) => {
-    setSortConfig(prev => ({
+    setSortConfig((prev) => ({
       key,
-      direction: prev.key === key && prev.direction === 'asc' ? 'desc' : 'asc'
+      direction: prev.key === key && prev.direction === "asc" ? "desc" : "asc",
     }));
   };
 
   // Handle keyboard navigation
-  const handleKeyDown = useCallback((e: React.KeyboardEvent, row: any, index: number) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      onRowClick?.(row, index);
-    }
-  }, [onRowClick]);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent, row: any, index: number) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        onRowClick?.(row, index);
+      }
+    },
+    [onRowClick]
+  );
 
   if (loading) {
     return (
       <Card className={`glass border-white/10 ${className}`}>
-        <div className="flex items-center justify-center h-96">
+        <div className="flex h-96 items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-tanium-accent mx-auto"></div>
+            <div className="border-tanium-accent mx-auto h-12 w-12 animate-spin rounded-full border-b-2"></div>
             <p className="mt-4 text-muted-foreground">Loading results...</p>
           </div>
         </div>
@@ -139,9 +132,9 @@ export function VirtualScrollTable({
   if (data.length === 0) {
     return (
       <Card className={`glass border-white/10 ${className}`}>
-        <div className="flex items-center justify-center h-96">
+        <div className="flex h-96 items-center justify-center">
           <div className="text-center text-muted-foreground">
-            <Database className="h-12 w-12 mx-auto mb-3 opacity-50" />
+            <Database className="mx-auto mb-3 h-12 w-12 opacity-50" />
             <p>{emptyMessage}</p>
           </div>
         </div>
@@ -150,10 +143,10 @@ export function VirtualScrollTable({
   }
 
   return (
-    <Card className={`glass border-white/10 overflow-hidden ${className}`}>
-      <div className="flex items-center justify-between p-4 border-b border-gray-700">
+    <Card className={`glass overflow-hidden border-white/10 ${className}`}>
+      <div className="flex items-center justify-between border-b border-gray-700 p-4">
         <div className="flex items-center gap-2">
-          <Database className="h-5 w-5 text-tanium-accent" />
+          <Database className="text-tanium-accent h-5 w-5" />
           <span className="font-medium text-foreground">Query Results</span>
           <Badge variant="secondary">{data.length.toLocaleString()} rows</Badge>
         </div>
@@ -166,7 +159,7 @@ export function VirtualScrollTable({
 
       <div className="relative">
         {/* Fixed header */}
-        <div className="sticky top-0 z-10 bg-card border-b border-gray-700">
+        <div className="sticky top-0 z-10 border-b border-gray-700 bg-card">
           <Table>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
@@ -186,7 +179,7 @@ export function VirtualScrollTable({
                         {column.label}
                         {sortConfig.key === column.key && (
                           <span className="ml-2">
-                            {sortConfig.direction === 'asc' ? (
+                            {sortConfig.direction === "asc" ? (
                               <ChevronUp className="h-3 w-3" />
                             ) : (
                               <ChevronDown className="h-3 w-3" />
@@ -212,11 +205,11 @@ export function VirtualScrollTable({
           role="region"
           aria-label="Query results table"
         >
-          <div style={{ height: totalHeight, position: 'relative' }}>
+          <div style={{ height: totalHeight, position: "relative" }}>
             <div
               style={{
                 transform: `translateY(${offsetY}px)`,
-                position: 'absolute',
+                position: "absolute",
                 top: 0,
                 left: 0,
                 right: 0,
@@ -229,12 +222,7 @@ export function VirtualScrollTable({
                     return (
                       <TableRow
                         key={actualIndex}
-                        className={`
-                          ${striped && actualIndex % 2 === 0 ? 'bg-card/50' : ''}
-                          ${highlightOnHover ? 'hover:bg-gray-700/50' : ''}
-                          ${onRowClick ? 'cursor-pointer' : ''}
-                          transition-colors
-                        `}
+                        className={` ${striped && actualIndex % 2 === 0 ? "bg-card/50" : ""} ${highlightOnHover ? "hover:bg-gray-700/50" : ""} ${onRowClick ? "cursor-pointer" : ""} transition-colors`}
                         style={{ height: rowHeight }}
                         onClick={() => onRowClick?.(row, actualIndex)}
                         onKeyDown={(e) => handleKeyDown(e, row, actualIndex)}
@@ -250,7 +238,7 @@ export function VirtualScrollTable({
                           >
                             {column.render
                               ? column.render(row[column.key], row)
-                              : row[column.key]?.toString() || '-'}
+                              : row[column.key]?.toString() || "-"}
                           </TableCell>
                         ))}
                       </TableRow>
@@ -265,10 +253,13 @@ export function VirtualScrollTable({
 
       {/* Performance indicator */}
       {data.length > 1000 && (
-        <div className="p-2 border-t border-gray-700 bg-card/50">
+        <div className="border-t border-gray-700 bg-card/50 p-2">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <AlertCircle className="h-3 w-3" />
-            <span>Virtual scrolling enabled for optimal performance with {data.length.toLocaleString()} rows</span>
+            <span>
+              Virtual scrolling enabled for optimal performance with {data.length.toLocaleString()}{" "}
+              rows
+            </span>
           </div>
         </div>
       )}

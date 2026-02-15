@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Debt Payoff Calculator Page
@@ -6,40 +6,38 @@
  * Compare snowball vs avalanche debt repayment strategies
  */
 
-import { useState, useMemo } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
-import Link from 'next/link';
-import { ArrowLeft, TrendingDown, Plus, Trash2, Award, Calendar } from 'lucide-react';
-import { CurrencyInput, PercentInput, ResultsPanel } from '@/components/budget/calculators';
-import { calculateDebtPayoff, generateDebtId } from '@/lib/calculators/debt-payoff';
-import { formatCurrency } from '@/i18n/utils/formatCurrency';
-import type { SupportedLocale } from '@/i18n/config';
-import type { DebtAccount, DebtStrategy } from '@/lib/calculators/types';
-import { LOCALE_METADATA } from '@/i18n/config';
-import { cn } from '@/lib/utils';
+import { useState, useMemo } from "react";
+import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
+import { ArrowLeft, TrendingDown, Plus, Trash2, Award, Calendar } from "lucide-react";
+import { CurrencyInput, PercentInput, ResultsPanel } from "@/components/budget/calculators";
+import { calculateDebtPayoff, generateDebtId } from "@/lib/calculators/debt-payoff";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import type { SupportedLocale } from "@/i18n/config";
+import type { DebtAccount, DebtStrategy } from "@/lib/calculators/types";
+import { LOCALE_METADATA } from "@/i18n/config";
+import { cn } from "@/lib/utils";
 
 export default function DebtPayoffCalculatorPage() {
-  const t = useTranslations('calculators');
+  const t = useTranslations("calculators");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA['en-US'];
+  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
   const currency = localeMeta.currency as string;
 
   // Debts state
   const [debts, setDebts] = useState<DebtAccount[]>([
-    { id: generateDebtId(), name: '', balance: 0, apr: 0, minimumPayment: 0 },
+    { id: generateDebtId(), name: "", balance: 0, apr: 0, minimumPayment: 0 },
   ]);
 
   // Extra payment state
   const [extraMonthlyPayment, setExtraMonthlyPayment] = useState(100);
 
   // Selected strategy for details view
-  const [selectedStrategy, setSelectedStrategy] = useState<DebtStrategy>('avalanche');
+  const [selectedStrategy, setSelectedStrategy] = useState<DebtStrategy>("avalanche");
 
   // Calculate results
   const result = useMemo(() => {
-    const validDebts = debts.filter(
-      (d) => d.balance > 0 && d.minimumPayment > 0
-    );
+    const validDebts = debts.filter((d) => d.balance > 0 && d.minimumPayment > 0);
     return calculateDebtPayoff({
       debts: validDebts,
       extraMonthlyPayment,
@@ -48,10 +46,7 @@ export default function DebtPayoffCalculatorPage() {
 
   // Add a new debt
   const addDebt = () => {
-    setDebts([
-      ...debts,
-      { id: generateDebtId(), name: '', balance: 0, apr: 0, minimumPayment: 0 },
-    ]);
+    setDebts([...debts, { id: generateDebtId(), name: "", balance: 0, apr: 0, minimumPayment: 0 }]);
   };
 
   // Remove a debt
@@ -63,11 +58,7 @@ export default function DebtPayoffCalculatorPage() {
 
   // Update a debt field
   const updateDebt = (id: string, field: keyof DebtAccount, value: string | number) => {
-    setDebts(
-      debts.map((d) =>
-        d.id === id ? { ...d, [field]: value } : d
-      )
-    );
+    setDebts(debts.map((d) => (d.id === id ? { ...d, [field]: value } : d)));
   };
 
   const hasDebts = debts.some((d) => d.balance > 0 && d.minimumPayment > 0);
@@ -78,32 +69,30 @@ export default function DebtPayoffCalculatorPage() {
       <div className="flex items-start gap-4">
         <Link
           href="/budget-app/calculators"
-          className="mt-1 p-2 rounded-lg hover:bg-slate-800 transition-colors"
-          aria-label={t('common.back')}
+          className="mt-1 rounded-lg p-2 transition-colors hover:bg-slate-800"
+          aria-label={t("common.back")}
         >
-          <ArrowLeft className="w-5 h-5 text-slate-400" />
+          <ArrowLeft className="h-5 w-5 text-slate-400" />
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-            <TrendingDown className="w-8 h-8 text-orange-400" />
-            {t('debtPayoff.title')}
+          <h1 className="flex items-center gap-3 text-3xl font-bold text-white">
+            <TrendingDown className="h-8 w-8 text-orange-400" />
+            {t("debtPayoff.title")}
           </h1>
-          <p className="text-slate-400 mt-2">{t('debtPayoff.subtitle')}</p>
+          <p className="mt-2 text-slate-400">{t("debtPayoff.subtitle")}</p>
         </div>
       </div>
 
       {/* Debt List */}
-      <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-semibold text-white">
-            {t('debtPayoff.yourDebts')}
-          </h2>
+      <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-white">{t("debtPayoff.yourDebts")}</h2>
           <button
             onClick={addDebt}
-            className="flex items-center gap-2 px-4 py-2 bg-orange-500/20 text-orange-400 rounded-lg hover:bg-orange-500/30 transition-colors"
+            className="flex items-center gap-2 rounded-lg bg-orange-500/20 px-4 py-2 text-orange-400 transition-colors hover:bg-orange-500/30"
           >
-            <Plus className="w-4 h-4" />
-            {t('debtPayoff.addDebt')}
+            <Plus className="h-4 w-4" />
+            {t("debtPayoff.addDebt")}
           </button>
         </div>
 
@@ -111,28 +100,28 @@ export default function DebtPayoffCalculatorPage() {
           {debts.map((debt, index) => (
             <div
               key={debt.id}
-              className="grid grid-cols-1 md:grid-cols-5 gap-4 p-4 bg-slate-700/30 rounded-lg"
+              className="grid grid-cols-1 gap-4 rounded-lg bg-slate-700/30 p-4 md:grid-cols-5"
             >
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1">
-                  {t('debtPayoff.debtName')}
+                <label className="mb-1 block text-xs font-medium text-slate-400">
+                  {t("debtPayoff.debtName")}
                 </label>
                 <input
                   type="text"
                   value={debt.name}
-                  onChange={(e) => updateDebt(debt.id, 'name', e.target.value)}
-                  placeholder={t('debtPayoff.debtNamePlaceholder', { number: index + 1 })}
-                  className="w-full py-2 px-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  onChange={(e) => updateDebt(debt.id, "name", e.target.value)}
+                  placeholder={t("debtPayoff.debtNamePlaceholder", { number: index + 1 })}
+                  className="w-full rounded-lg border border-slate-600 bg-slate-800/50 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1">
-                  {t('debtPayoff.balance')}
+                <label className="mb-1 block text-xs font-medium text-slate-400">
+                  {t("debtPayoff.balance")}
                 </label>
                 <CurrencyInput
                   value={debt.balance}
-                  onChange={(value) => updateDebt(debt.id, 'balance', value)}
+                  onChange={(value) => updateDebt(debt.id, "balance", value)}
                   currency={currency}
                   locale={locale}
                   min={0}
@@ -141,12 +130,12 @@ export default function DebtPayoffCalculatorPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1">
-                  {t('debtPayoff.apr')}
+                <label className="mb-1 block text-xs font-medium text-slate-400">
+                  {t("debtPayoff.apr")}
                 </label>
                 <PercentInput
                   value={debt.apr}
-                  onChange={(value) => updateDebt(debt.id, 'apr', value)}
+                  onChange={(value) => updateDebt(debt.id, "apr", value)}
                   locale={locale}
                   min={0}
                   max={100}
@@ -155,12 +144,12 @@ export default function DebtPayoffCalculatorPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1">
-                  {t('debtPayoff.minimumPayment')}
+                <label className="mb-1 block text-xs font-medium text-slate-400">
+                  {t("debtPayoff.minimumPayment")}
                 </label>
                 <CurrencyInput
                   value={debt.minimumPayment}
-                  onChange={(value) => updateDebt(debt.id, 'minimumPayment', value)}
+                  onChange={(value) => updateDebt(debt.id, "minimumPayment", value)}
                   currency={currency}
                   locale={locale}
                   min={0}
@@ -172,10 +161,10 @@ export default function DebtPayoffCalculatorPage() {
                 <button
                   onClick={() => removeDebt(debt.id)}
                   disabled={debts.length === 1}
-                  className="p-2 text-red-400 hover:bg-red-500/20 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  aria-label={t('debtPayoff.removeDebt')}
+                  className="rounded-lg p-2 text-red-400 transition-colors hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+                  aria-label={t("debtPayoff.removeDebt")}
                 >
-                  <Trash2 className="w-5 h-5" />
+                  <Trash2 className="h-5 w-5" />
                 </button>
               </div>
             </div>
@@ -183,15 +172,15 @@ export default function DebtPayoffCalculatorPage() {
         </div>
 
         {/* Extra Payment */}
-        <div className="mt-6 pt-6 border-t border-slate-700">
+        <div className="mt-6 border-t border-slate-700 pt-6">
           <CurrencyInput
-            label={t('debtPayoff.extraMonthlyPayment')}
+            label={t("debtPayoff.extraMonthlyPayment")}
             value={extraMonthlyPayment}
             onChange={setExtraMonthlyPayment}
             currency={currency}
             locale={locale}
             min={0}
-            helperText={t('debtPayoff.extraMonthlyPaymentHelp')}
+            helperText={t("debtPayoff.extraMonthlyPaymentHelp")}
             className="max-w-sm"
           />
         </div>
@@ -199,41 +188,37 @@ export default function DebtPayoffCalculatorPage() {
 
       {/* Strategy Comparison */}
       {hasDebts && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {/* Snowball */}
           <div
             className={cn(
-              'rounded-xl border p-6 cursor-pointer transition-all',
-              selectedStrategy === 'snowball'
-                ? 'bg-blue-500/10 border-blue-500/50'
-                : 'bg-slate-800/50 border-slate-700 hover:border-slate-600'
+              "cursor-pointer rounded-xl border p-6 transition-all",
+              selectedStrategy === "snowball"
+                ? "border-blue-500/50 bg-blue-500/10"
+                : "border-slate-700 bg-slate-800/50 hover:border-slate-600"
             )}
-            onClick={() => setSelectedStrategy('snowball')}
+            onClick={() => setSelectedStrategy("snowball")}
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-white">
-                {t('debtPayoff.snowball')}
-              </h3>
-              {result.recommendedStrategy !== 'snowball' && (
-                <span className="text-xs px-2 py-1 bg-slate-700 text-slate-400 rounded">
-                  {t('debtPayoff.morePsychological')}
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="text-lg font-semibold text-white">{t("debtPayoff.snowball")}</h3>
+              {result.recommendedStrategy !== "snowball" && (
+                <span className="rounded bg-slate-700 px-2 py-1 text-xs text-slate-400">
+                  {t("debtPayoff.morePsychological")}
                 </span>
               )}
             </div>
-            <p className="text-sm text-slate-400 mb-4">
-              {t('debtPayoff.snowballDescription')}
-            </p>
+            <p className="mb-4 text-sm text-slate-400">{t("debtPayoff.snowballDescription")}</p>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-xs text-slate-500">{t('debtPayoff.totalInterest')}</p>
+                <p className="text-xs text-slate-500">{t("debtPayoff.totalInterest")}</p>
                 <p className="text-xl font-bold text-white">
                   {formatCurrency(result.snowball.totalInterest, currency, locale)}
                 </p>
               </div>
               <div>
-                <p className="text-xs text-slate-500">{t('debtPayoff.payoffDate')}</p>
+                <p className="text-xs text-slate-500">{t("debtPayoff.payoffDate")}</p>
                 <p className="text-xl font-bold text-white">
-                  {result.snowball.totalMonths} {t('common.months')}
+                  {result.snowball.totalMonths} {t("common.months")}
                 </p>
               </div>
             </div>
@@ -242,38 +227,34 @@ export default function DebtPayoffCalculatorPage() {
           {/* Avalanche */}
           <div
             className={cn(
-              'rounded-xl border p-6 cursor-pointer transition-all',
-              selectedStrategy === 'avalanche'
-                ? 'bg-green-500/10 border-green-500/50'
-                : 'bg-slate-800/50 border-slate-700 hover:border-slate-600'
+              "cursor-pointer rounded-xl border p-6 transition-all",
+              selectedStrategy === "avalanche"
+                ? "border-green-500/50 bg-green-500/10"
+                : "border-slate-700 bg-slate-800/50 hover:border-slate-600"
             )}
-            onClick={() => setSelectedStrategy('avalanche')}
+            onClick={() => setSelectedStrategy("avalanche")}
           >
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-white">
-                {t('debtPayoff.avalanche')}
-              </h3>
-              {result.recommendedStrategy === 'avalanche' && (
-                <span className="text-xs px-2 py-1 bg-green-500/20 text-green-400 rounded flex items-center gap-1">
-                  <Award className="w-3 h-3" />
-                  {t('debtPayoff.recommended')}
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="text-lg font-semibold text-white">{t("debtPayoff.avalanche")}</h3>
+              {result.recommendedStrategy === "avalanche" && (
+                <span className="flex items-center gap-1 rounded bg-green-500/20 px-2 py-1 text-xs text-green-400">
+                  <Award className="h-3 w-3" />
+                  {t("debtPayoff.recommended")}
                 </span>
               )}
             </div>
-            <p className="text-sm text-slate-400 mb-4">
-              {t('debtPayoff.avalancheDescription')}
-            </p>
+            <p className="mb-4 text-sm text-slate-400">{t("debtPayoff.avalancheDescription")}</p>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-xs text-slate-500">{t('debtPayoff.totalInterest')}</p>
+                <p className="text-xs text-slate-500">{t("debtPayoff.totalInterest")}</p>
                 <p className="text-xl font-bold text-white">
                   {formatCurrency(result.avalanche.totalInterest, currency, locale)}
                 </p>
               </div>
               <div>
-                <p className="text-xs text-slate-500">{t('debtPayoff.payoffDate')}</p>
+                <p className="text-xs text-slate-500">{t("debtPayoff.payoffDate")}</p>
                 <p className="text-xl font-bold text-white">
-                  {result.avalanche.totalMonths} {t('common.months')}
+                  {result.avalanche.totalMonths} {t("common.months")}
                 </p>
               </div>
             </div>
@@ -283,15 +264,13 @@ export default function DebtPayoffCalculatorPage() {
 
       {/* Savings Comparison */}
       {hasDebts && result.interestSaved > 0 && (
-        <div className="bg-green-500/10 rounded-xl border border-green-500/30 p-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Award className="w-6 h-6 text-green-400" />
-            <h3 className="text-lg font-semibold text-white">
-              {t('debtPayoff.savingsTitle')}
-            </h3>
+        <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-6">
+          <div className="mb-2 flex items-center gap-3">
+            <Award className="h-6 w-6 text-green-400" />
+            <h3 className="text-lg font-semibold text-white">{t("debtPayoff.savingsTitle")}</h3>
           </div>
           <p className="text-slate-300">
-            {t('debtPayoff.savingsDescription', {
+            {t("debtPayoff.savingsDescription", {
               amount: formatCurrency(result.interestSaved, currency, locale),
               months: Math.abs(result.monthsSaved),
             })}
@@ -301,47 +280,46 @@ export default function DebtPayoffCalculatorPage() {
 
       {/* Payment Schedule */}
       {hasDebts && (
-        <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6">
-          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-slate-400" />
-            {t('debtPayoff.paymentSchedule')} ({selectedStrategy === 'snowball' ? t('debtPayoff.snowball') : t('debtPayoff.avalanche')})
+        <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
+          <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
+            <Calendar className="h-5 w-5 text-slate-400" />
+            {t("debtPayoff.paymentSchedule")} (
+            {selectedStrategy === "snowball" ? t("debtPayoff.snowball") : t("debtPayoff.avalanche")}
+            )
           </h3>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-slate-700">
-                  <th className="text-left py-3 px-2 text-slate-400 font-medium">
-                    {t('debtPayoff.month')}
+                  <th className="px-2 py-3 text-left font-medium text-slate-400">
+                    {t("debtPayoff.month")}
                   </th>
-                  <th className="text-right py-3 px-2 text-slate-400 font-medium">
-                    {t('debtPayoff.payment')}
+                  <th className="px-2 py-3 text-right font-medium text-slate-400">
+                    {t("debtPayoff.payment")}
                   </th>
-                  <th className="text-right py-3 px-2 text-slate-400 font-medium">
-                    {t('debtPayoff.remaining')}
+                  <th className="px-2 py-3 text-right font-medium text-slate-400">
+                    {t("debtPayoff.remaining")}
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {(selectedStrategy === 'snowball'
+                {(selectedStrategy === "snowball"
                   ? result.snowball.schedule
                   : result.avalanche.schedule
                 )
                   .filter((_, i, arr) => i < 12 || i === arr.length - 1)
                   .map((month, idx) => (
-                    <tr
-                      key={idx}
-                      className="border-b border-slate-700/50 last:border-0"
-                    >
-                      <td className="py-3 px-2 text-slate-300">
+                    <tr key={idx} className="border-b border-slate-700/50 last:border-0">
+                      <td className="px-2 py-3 text-slate-300">
                         {new Intl.DateTimeFormat(locale, {
-                          year: 'numeric',
-                          month: 'short',
+                          year: "numeric",
+                          month: "short",
                         }).format(month.date)}
                       </td>
-                      <td className="py-3 px-2 text-right text-white">
+                      <td className="px-2 py-3 text-right text-white">
                         {formatCurrency(month.totalPayment, currency, locale)}
                       </td>
-                      <td className="py-3 px-2 text-right text-slate-300">
+                      <td className="px-2 py-3 text-right text-slate-300">
                         {formatCurrency(month.totalRemaining, currency, locale)}
                       </td>
                     </tr>

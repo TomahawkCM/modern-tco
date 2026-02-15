@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
 /**
  * PIN Entry Dialog
  * Dialog for entering PIN to unlock a profile
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Lock, AlertCircle, X } from 'lucide-react';
-import { useProfile } from '@/contexts/ProfileContext';
-import { getProfileInitials } from '@/types/profile';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Lock, AlertCircle, X } from "lucide-react";
+import { useProfile } from "@/contexts/ProfileContext";
+import { getProfileInitials } from "@/types/profile";
+import { cn } from "@/lib/utils";
 
 interface PINEntryDialogProps {
   open: boolean;
@@ -44,7 +44,7 @@ export function PINEntryDialog({
     getLockoutRemaining,
   } = useProfile();
 
-  const [pin, setPIN] = useState('');
+  const [pin, setPIN] = useState("");
   const [isShaking, setIsShaking] = useState(false);
   const [lockoutSeconds, setLockoutSeconds] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -52,7 +52,7 @@ export function PINEntryDialog({
   // Focus input when dialog opens
   useEffect(() => {
     if (open) {
-      setPIN('');
+      setPIN("");
       setTimeout(() => {
         inputRef.current?.focus();
       }, 100);
@@ -79,7 +79,7 @@ export function PINEntryDialog({
 
   const handlePINChange = (value: string) => {
     // Only allow digits
-    const cleanValue = value.replace(/\D/g, '').slice(0, 6);
+    const cleanValue = value.replace(/\D/g, "").slice(0, 6);
     setPIN(cleanValue);
   };
 
@@ -91,29 +91,29 @@ export function PINEntryDialog({
     const success = await unlockProfile(pin);
 
     if (success) {
-      setPIN('');
+      setPIN("");
       onSuccess();
     } else {
       // Shake animation on failure
       setIsShaking(true);
-      setPIN('');
+      setPIN("");
       setTimeout(() => setIsShaking(false), 500);
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && pin.length >= 4) {
+    if (e.key === "Enter" && pin.length >= 4) {
       handleSubmit();
     }
   };
 
   const handleCancel = () => {
-    setPIN('');
+    setPIN("");
     onCancel?.();
   };
 
-  const displayName = profileName || currentProfile?.name || 'Profile';
-  const avatarColor = currentProfile?.avatarColor || '#10b981';
+  const displayName = profileName || currentProfile?.name || "Profile";
+  const avatarColor = currentProfile?.avatarColor || "#10b981";
 
   return (
     <Dialog
@@ -125,16 +125,13 @@ export function PINEntryDialog({
         onOpenChange(isOpen);
       }}
     >
-      <DialogContent
-        className="sm:max-w-[350px]"
-        onInteractOutside={(e) => e.preventDefault()}
-      >
+      <DialogContent className="sm:max-w-[350px]" onInteractOutside={(e) => e.preventDefault()}>
         <DialogHeader className="text-center">
-          <div className="flex justify-center mb-4">
+          <div className="mb-4 flex justify-center">
             <Avatar className="h-20 w-20">
               <AvatarFallback
                 style={{ backgroundColor: avatarColor }}
-                className="text-white text-2xl font-medium"
+                className="text-2xl font-medium text-white"
               >
                 {getProfileInitials(displayName)}
               </AvatarFallback>
@@ -144,19 +141,12 @@ export function PINEntryDialog({
             <Lock className="h-4 w-4" />
             Unlock {displayName}
           </DialogTitle>
-          <DialogDescription>
-            Enter your PIN to access this profile
-          </DialogDescription>
+          <DialogDescription>Enter your PIN to access this profile</DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* PIN Input */}
-          <div
-            className={cn(
-              'relative transition-transform',
-              isShaking && 'animate-shake'
-            )}
-          >
+          <div className={cn("relative transition-transform", isShaking && "animate-shake")}>
             <Input
               ref={inputRef}
               type="password"
@@ -168,7 +158,7 @@ export function PINEntryDialog({
               onKeyDown={handleKeyDown}
               placeholder="Enter PIN"
               disabled={lockoutSeconds > 0}
-              className="text-center text-2xl tracking-widest h-14"
+              className="h-14 text-center text-2xl tracking-widest"
               autoComplete="off"
             />
             {pin.length > 0 && (
@@ -176,8 +166,8 @@ export function PINEntryDialog({
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8"
-                onClick={() => setPIN('')}
+                className="absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2"
+                onClick={() => setPIN("")}
               >
                 <X className="h-4 w-4" />
               </Button>
@@ -190,10 +180,8 @@ export function PINEntryDialog({
               <div
                 key={i}
                 className={cn(
-                  'w-3 h-3 rounded-full transition-colors',
-                  i < pin.length
-                    ? 'bg-primary'
-                    : 'bg-muted border border-border'
+                  "h-3 w-3 rounded-full transition-colors",
+                  i < pin.length ? "bg-primary" : "border border-border bg-muted"
                 )}
               />
             ))}
@@ -201,33 +189,22 @@ export function PINEntryDialog({
 
           {/* Error/Lockout Message */}
           {(contextError || lockoutSeconds > 0) && (
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-destructive/10 text-destructive">
+            <div className="flex items-center gap-2 rounded-lg bg-destructive/10 p-3 text-destructive">
               <AlertCircle className="h-4 w-4 flex-shrink-0" />
               <p className="text-sm">
-                {lockoutSeconds > 0
-                  ? `Try again in ${lockoutSeconds} seconds`
-                  : contextError}
+                {lockoutSeconds > 0 ? `Try again in ${lockoutSeconds} seconds` : contextError}
               </p>
             </div>
           )}
 
           {/* Submit Button */}
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={pin.length < 4 || lockoutSeconds > 0}
-          >
+          <Button type="submit" className="w-full" disabled={pin.length < 4 || lockoutSeconds > 0}>
             Unlock
           </Button>
 
           {/* Cancel Link */}
           {onCancel && (
-            <Button
-              type="button"
-              variant="ghost"
-              className="w-full"
-              onClick={handleCancel}
-            >
+            <Button type="button" variant="ghost" className="w-full" onClick={handleCancel}>
               Use Different Profile
             </Button>
           )}

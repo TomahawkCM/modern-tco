@@ -190,7 +190,9 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
           <div className="flex items-center gap-3">
             <CheckCircle2 className="h-8 w-8 text-[#22c55e]" />
             <div>
-              <div className="text-2xl font-bold text-foreground">{overallStats.completedModules}</div>
+              <div className="text-2xl font-bold text-foreground">
+                {overallStats.completedModules}
+              </div>
               <div className="text-sm text-green-200">Completed</div>
             </div>
           </div>
@@ -205,7 +207,9 @@ function ModuleList({ onModuleSelect, className = "" }: ModuleListProps) {
           <div className="flex items-center gap-3">
             <Play className="h-8 w-8 text-[#f97316]" />
             <div>
-              <div className="text-2xl font-bold text-foreground">{overallStats.inProgressModules}</div>
+              <div className="text-2xl font-bold text-foreground">
+                {overallStats.inProgressModules}
+              </div>
               <div className="text-sm text-[#f97316]">In Progress</div>
             </div>
           </div>

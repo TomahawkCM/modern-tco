@@ -1,7 +1,14 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
@@ -11,20 +18,20 @@ import { AlertCircle, CheckCircle2, Info, XCircle } from "lucide-react";
 
 export default function ColorTestPage() {
   return (
-    <div className="container mx-auto px-4 py-12 space-y-16">
+    <div className="container mx-auto space-y-16 px-4 py-12">
       {/* Header */}
-      <div className="text-center space-y-4">
+      <div className="space-y-4 text-center">
         <h1 className="text-4xl font-bold text-foreground">Color System Test Page</h1>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
-          Comprehensive visualization of the unified color system with WCAG AA compliant contrast ratios.
-          All components use semantic tokens for consistency and maintainability.
+        <p className="mx-auto max-w-2xl text-muted-foreground">
+          Comprehensive visualization of the unified color system with WCAG AA compliant contrast
+          ratios. All components use semantic tokens for consistency and maintainability.
         </p>
       </div>
 
       {/* Semantic Color Tokens */}
       <section className="space-y-6">
         <h2 className="text-2xl font-bold text-foreground">Semantic Color Tokens</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {/* Background & Foreground */}
           <Card>
             <CardHeader>
@@ -33,8 +40,8 @@ export default function ColorTestPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <div className="h-20 bg-background border border-border rounded flex items-center justify-center">
-                  <span className="text-foreground font-medium">bg-background</span>
+                <div className="flex h-20 items-center justify-center rounded border border-border bg-background">
+                  <span className="font-medium text-foreground">bg-background</span>
                 </div>
                 <p className="text-sm text-muted-foreground">text-foreground (18:1 ratio)</p>
               </div>
@@ -49,8 +56,8 @@ export default function ColorTestPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <div className="h-20 bg-card border border-border rounded flex items-center justify-center">
-                  <span className="text-card-foreground font-medium">bg-card</span>
+                <div className="flex h-20 items-center justify-center rounded border border-border bg-card">
+                  <span className="font-medium text-card-foreground">bg-card</span>
                 </div>
                 <p className="text-sm text-muted-foreground">text-card-foreground (16:1 ratio)</p>
               </div>
@@ -65,10 +72,12 @@ export default function ColorTestPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <div className="h-20 bg-primary rounded flex items-center justify-center">
-                  <span className="text-primary-foreground font-medium">bg-primary</span>
+                <div className="flex h-20 items-center justify-center rounded bg-primary">
+                  <span className="font-medium text-primary-foreground">bg-primary</span>
                 </div>
-                <p className="text-sm text-muted-foreground">text-primary-foreground (10:1 ratio)</p>
+                <p className="text-sm text-muted-foreground">
+                  text-primary-foreground (10:1 ratio)
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -81,10 +90,12 @@ export default function ColorTestPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <div className="h-20 bg-secondary rounded flex items-center justify-center">
-                  <span className="text-secondary-foreground font-medium">bg-secondary</span>
+                <div className="flex h-20 items-center justify-center rounded bg-secondary">
+                  <span className="font-medium text-secondary-foreground">bg-secondary</span>
                 </div>
-                <p className="text-sm text-muted-foreground">text-secondary-foreground (9:1 ratio)</p>
+                <p className="text-sm text-muted-foreground">
+                  text-secondary-foreground (9:1 ratio)
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -97,10 +108,12 @@ export default function ColorTestPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <div className="h-20 bg-muted rounded flex items-center justify-center">
-                  <span className="text-muted-foreground font-medium">bg-muted</span>
+                <div className="flex h-20 items-center justify-center rounded bg-muted">
+                  <span className="font-medium text-muted-foreground">bg-muted</span>
                 </div>
-                <p className="text-sm text-muted-foreground">text-muted-foreground (7:1 ratio - AAA)</p>
+                <p className="text-sm text-muted-foreground">
+                  text-muted-foreground (7:1 ratio - AAA)
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -113,8 +126,8 @@ export default function ColorTestPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <div className="h-20 bg-accent rounded flex items-center justify-center">
-                  <span className="text-accent-foreground font-medium">bg-accent</span>
+                <div className="flex h-20 items-center justify-center rounded bg-accent">
+                  <span className="font-medium text-accent-foreground">bg-accent</span>
                 </div>
                 <p className="text-sm text-muted-foreground">text-accent-foreground (8:1 ratio)</p>
               </div>
@@ -137,9 +150,15 @@ export default function ColorTestPage() {
               <Button variant="link">Link Button</Button>
             </div>
             <div className="mt-6 flex flex-wrap gap-4">
-              <Button variant="default" size="sm">Small</Button>
-              <Button variant="default" size="default">Default</Button>
-              <Button variant="default" size="lg">Large</Button>
+              <Button variant="default" size="sm">
+                Small
+              </Button>
+              <Button variant="default" size="default">
+                Default
+              </Button>
+              <Button variant="default" size="lg">
+                Large
+              </Button>
               <Button variant="default" size="icon" aria-label="Icon button example">
                 <CheckCircle2 className="h-4 w-4" />
               </Button>
@@ -171,7 +190,8 @@ export default function ColorTestPage() {
             <Info className="h-4 w-4" />
             <AlertTitle>Information</AlertTitle>
             <AlertDescription>
-              This is a default alert with informational content. All text maintains proper contrast ratios.
+              This is a default alert with informational content. All text maintains proper contrast
+              ratios.
             </AlertDescription>
           </Alert>
 
@@ -188,7 +208,7 @@ export default function ColorTestPage() {
       {/* Card Variants */}
       <section className="space-y-6">
         <h2 className="text-2xl font-bold text-foreground">Card Variants</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <Card>
             <CardHeader>
               <CardTitle>Default Card</CardTitle>
@@ -204,7 +224,7 @@ export default function ColorTestPage() {
             </CardFooter>
           </Card>
 
-          <Card className="backdrop-blur-sm bg-card/80 border-primary/20">
+          <Card className="border-primary/20 bg-card/80 backdrop-blur-sm">
             <CardHeader>
               <CardTitle>Glass Effect Card</CardTitle>
               <CardDescription>Enhanced card with glass morphism</CardDescription>
@@ -225,7 +245,7 @@ export default function ColorTestPage() {
       <section className="space-y-6">
         <h2 className="text-2xl font-bold text-foreground">Form Elements</h2>
         <Card>
-          <CardContent className="pt-6 space-y-4">
+          <CardContent className="space-y-4 pt-6">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input id="email" type="email" placeholder="Enter your email" />
@@ -243,7 +263,7 @@ export default function ColorTestPage() {
       <section className="space-y-6">
         <h2 className="text-2xl font-bold text-foreground">Skeleton Loaders</h2>
         <Card>
-          <CardContent className="pt-6 space-y-4">
+          <CardContent className="space-y-4 pt-6">
             <div className="space-y-2">
               <Skeleton className="h-4 w-full" />
               <Skeleton className="h-4 w-3/4" />
@@ -264,13 +284,17 @@ export default function ColorTestPage() {
       <section className="space-y-6">
         <h2 className="text-2xl font-bold text-foreground">Text Hierarchy</h2>
         <Card>
-          <CardContent className="pt-6 space-y-4">
+          <CardContent className="space-y-4 pt-6">
             <h1 className="text-4xl font-bold text-foreground">Heading 1 - Foreground</h1>
             <h2 className="text-3xl font-bold text-foreground">Heading 2 - Foreground</h2>
             <h3 className="text-2xl font-bold text-foreground">Heading 3 - Foreground</h3>
             <p className="text-foreground">Body text using text-foreground (18:1 ratio)</p>
-            <p className="text-muted-foreground">Muted text using text-muted-foreground (7:1 ratio - WCAG AAA)</p>
-            <p className="text-sm text-muted-foreground">Small muted text for captions and metadata</p>
+            <p className="text-muted-foreground">
+              Muted text using text-muted-foreground (7:1 ratio - WCAG AAA)
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Small muted text for captions and metadata
+            </p>
           </CardContent>
         </Card>
       </section>
@@ -278,9 +302,9 @@ export default function ColorTestPage() {
       {/* Status Indicators */}
       <section className="space-y-6">
         <h2 className="text-2xl font-bold text-foreground">Status Indicators</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
-            <CardContent className="pt-6 flex items-center gap-3">
+            <CardContent className="flex items-center gap-3 pt-6">
               <CheckCircle2 className="h-8 w-8 text-[#22c55e]" />
               <div>
                 <p className="font-medium text-foreground">Success</p>
@@ -290,7 +314,7 @@ export default function ColorTestPage() {
           </Card>
 
           <Card>
-            <CardContent className="pt-6 flex items-center gap-3">
+            <CardContent className="flex items-center gap-3 pt-6">
               <Info className="h-8 w-8 text-primary" />
               <div>
                 <p className="font-medium text-foreground">Info</p>
@@ -300,7 +324,7 @@ export default function ColorTestPage() {
           </Card>
 
           <Card>
-            <CardContent className="pt-6 flex items-center gap-3">
+            <CardContent className="flex items-center gap-3 pt-6">
               <AlertCircle className="h-8 w-8 text-[#f97316]" />
               <div>
                 <p className="font-medium text-foreground">Warning</p>
@@ -310,7 +334,7 @@ export default function ColorTestPage() {
           </Card>
 
           <Card>
-            <CardContent className="pt-6 flex items-center gap-3">
+            <CardContent className="flex items-center gap-3 pt-6">
               <XCircle className="h-8 w-8 text-destructive" />
               <div>
                 <p className="font-medium text-foreground">Error</p>
@@ -333,9 +357,9 @@ export default function ColorTestPage() {
             <CardDescription>Contrast ratios verified for accessibility</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div className="grid grid-cols-1 gap-4 text-sm md:grid-cols-2">
               <div>
-                <p className="font-medium text-foreground mb-2">Normal Text (4.5:1 minimum)</p>
+                <p className="mb-2 font-medium text-foreground">Normal Text (4.5:1 minimum)</p>
                 <ul className="space-y-1 text-muted-foreground">
                   <li>✓ foreground on background: 18:1</li>
                   <li>✓ card-foreground on card: 16:1</li>
@@ -344,7 +368,7 @@ export default function ColorTestPage() {
                 </ul>
               </div>
               <div>
-                <p className="font-medium text-foreground mb-2">UI Components (3:1 minimum)</p>
+                <p className="mb-2 font-medium text-foreground">UI Components (3:1 minimum)</p>
                 <ul className="space-y-1 text-muted-foreground">
                   <li>✓ border on background: 3.2:1</li>
                   <li>✓ accent-foreground on accent: 8:1</li>

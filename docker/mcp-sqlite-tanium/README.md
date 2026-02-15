@@ -13,6 +13,7 @@
 This Docker container provides the SQLite MCP (Model Context Protocol) server for the Tanium TCO Learning Management System. It's part of a phased approach to containerize MCP servers, starting with database infrastructure for maximum isolation and security.
 
 **Why Docker for SQLite MCP?**
+
 - ✅ **Database Isolation** - Separate process space and file system
 - ✅ **Backup Automation** - Docker volumes for easy backup/restore
 - ✅ **Resource Limits** - CPU and memory constraints prevent runaway processes
@@ -24,6 +25,7 @@ This Docker container provides the SQLite MCP (Model Context Protocol) server fo
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Docker v20.10 or later
 - Docker Compose v1.29 or later
 - Tanium TCO database file (created automatically if not exists)
@@ -70,14 +72,14 @@ docker compose exec mcp-sqlite-tanium sqlite3 /data/db/tanium_tco.db "PRAGMA int
 
 ### Container Specifications
 
-| Aspect | Configuration |
-|--------|---------------|
-| **Base Image** | node:22-alpine3.20 |
-| **User** | Non-root (uid:1001, gid:1001) |
+| Aspect         | Configuration                       |
+| -------------- | ----------------------------------- |
+| **Base Image** | node:22-alpine3.20                  |
+| **User**       | Non-root (uid:1001, gid:1001)       |
 | **Filesystem** | Read-only root, writable /data only |
-| **Network** | None (stdio transport) |
-| **Resources** | 0.25-0.5 CPU, 256-512MB RAM |
-| **Security** | no-new-privileges, minimal packages |
+| **Network**    | None (stdio transport)              |
+| **Resources**  | 0.25-0.5 CPU, 256-512MB RAM         |
+| **Security**   | no-new-privileges, minimal packages |
 
 ### Volume Mounts
 
@@ -88,6 +90,7 @@ tanium-tco-db:/data/db    # Persistent database storage
 ### Health Checks
 
 Automated health checks every 30 seconds:
+
 1. Database file exists
 2. Database is readable
 3. SQLite can open database
@@ -100,11 +103,11 @@ Automated health checks every 30 seconds:
 
 ### Environment Variables
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `SQLITE_DATABASE_PATH` | `/data/db/tanium_tco.db` | Database file path |
-| `NODE_ENV` | `production` | Node environment |
-| `NODE_OPTIONS` | `--max-old-space-size=512` | Node memory limit |
+| Variable               | Default                    | Description        |
+| ---------------------- | -------------------------- | ------------------ |
+| `SQLITE_DATABASE_PATH` | `/data/db/tanium_tco.db`   | Database file path |
+| `NODE_ENV`             | `production`               | Node environment   |
+| `NODE_OPTIONS`         | `--max-old-space-size=512` | Node memory limit  |
 
 ### Resource Limits
 
@@ -112,11 +115,11 @@ Default limits (can be adjusted in docker-compose.yml):
 
 ```yaml
 limits:
-  cpus: '0.5'        # Maximum 50% of one CPU core
-  memory: 512M       # Maximum 512MB RAM
+  cpus: "0.5" # Maximum 50% of one CPU core
+  memory: 512M # Maximum 512MB RAM
 reservations:
-  cpus: '0.25'       # Guaranteed 25% CPU
-  memory: 256M       # Guaranteed 256MB RAM
+  cpus: "0.25" # Guaranteed 25% CPU
+  memory: 256M # Guaranteed 256MB RAM
 ```
 
 ---
@@ -200,6 +203,7 @@ docker compose restart
 **Problem:** Container exits immediately
 
 **Solutions:**
+
 ```bash
 # Check logs for errors
 docker compose logs
@@ -221,6 +225,7 @@ docker compose up -d
 **Problem:** Health check status shows "unhealthy"
 
 **Solutions:**
+
 ```bash
 # Run health check manually
 docker compose exec mcp-sqlite-tanium /usr/local/bin/healthcheck.sh
@@ -241,6 +246,7 @@ docker inspect mcp-sqlite-tanium | jq '.[0].State.Health'
 **Problem:** "database is locked" errors
 
 **Solutions:**
+
 ```bash
 # Check for stale lock files
 docker compose exec mcp-sqlite-tanium ls -la /data/db/*.db-*
@@ -258,6 +264,7 @@ docker compose up -d
 **Problem:** Slow database queries
 
 **Solutions:**
+
 ```bash
 # Check resource usage
 docker stats mcp-sqlite-tanium
@@ -392,9 +399,9 @@ Before deploying to production:
 
 ## 📝 Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 1.0.0 | 2025-10-08 | Initial Docker containerization (Phase 1) |
+| Version | Date       | Changes                                   |
+| ------- | ---------- | ----------------------------------------- |
+| 1.0.0   | 2025-10-08 | Initial Docker containerization (Phase 1) |
 
 ---
 

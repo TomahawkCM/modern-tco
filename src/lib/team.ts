@@ -33,7 +33,9 @@ function lsGet(): TeamSeat[] {
 }
 
 function lsSet(seats: TeamSeat[]) {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(seats)); } catch {}
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(seats));
+  } catch {}
 }
 
 export const teamService = {
@@ -78,16 +80,17 @@ export const teamService = {
     if (typeof window !== "undefined") lsSet(updated);
     if (user?.id) {
       try {
-        await (supabase as any)
-          .from("team_seats")
-          .upsert({
+        await (supabase as any).from("team_seats").upsert(
+          {
             id: newSeat.id,
             owner_id: user.id,
             email: newSeat.email,
             status: newSeat.status,
             invited_at: newSeat.invitedAt,
             accepted_at: newSeat.acceptedAt,
-          }, { onConflict: "id" });
+          },
+          { onConflict: "id" }
+        );
       } catch {}
     }
     return newSeat;
@@ -95,7 +98,9 @@ export const teamService = {
 
   async revoke(id: string, user?: User | null): Promise<void> {
     const cur = typeof window !== "undefined" ? lsGet() : [];
-    const updated = cur.map((s) => (s.id === id ? { ...s, status: "revoked" as TeamSeatStatus } : s));
+    const updated = cur.map((s) =>
+      s.id === id ? { ...s, status: "revoked" as TeamSeatStatus } : s
+    );
     if (typeof window !== "undefined") lsSet(updated);
     if (user?.id) {
       try {
@@ -111,7 +116,9 @@ export const teamService = {
   async activate(id: string, user?: User | null): Promise<void> {
     const cur = typeof window !== "undefined" ? lsGet() : [];
     const now = new Date().toISOString();
-    const updated = cur.map((s) => (s.id === id ? { ...s, status: "active" as TeamSeatStatus, acceptedAt: now } : s));
+    const updated = cur.map((s) =>
+      s.id === id ? { ...s, status: "active" as TeamSeatStatus, acceptedAt: now } : s
+    );
     if (typeof window !== "undefined") lsSet(updated);
     if (user?.id) {
       try {
@@ -124,4 +131,3 @@ export const teamService = {
     }
   },
 };
-

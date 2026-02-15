@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Smart Recommendations Panel
@@ -7,7 +7,7 @@
  * Shows priority-sorted recommendations with action buttons.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   AlertTriangle,
   TrendingUp,
@@ -18,12 +18,12 @@ import {
   X,
   CheckCircle,
   ChevronRight,
-} from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Skeleton } from '@/components/ui/skeleton';
-import { toast } from '@/hooks/use-toast';
+} from "lucide-react";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "@/hooks/use-toast";
 import {
   getActiveRecommendations,
   dismissRecommendation,
@@ -31,7 +31,7 @@ import {
   generateRecommendations,
   gatherRecommendationContext,
   type Recommendation,
-} from '@/lib/ai/smartRecommendations';
+} from "@/lib/ai/smartRecommendations";
 
 interface SmartRecommendationsPanelProps {
   userId: string;
@@ -73,11 +73,11 @@ export function SmartRecommendationsPanel({
       const recs = await getActiveRecommendations(userId);
       setRecommendations(recs.slice(0, maxRecommendations));
     } catch (error) {
-      console.error('Error loading recommendations:', error);
+      console.error("Error loading recommendations:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to load recommendations',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to load recommendations",
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -91,17 +91,17 @@ export function SmartRecommendationsPanel({
       const newRecs = await generateRecommendations(context);
 
       toast({
-        title: 'Success',
+        title: "Success",
         description: `Generated ${newRecs.length} new recommendations`,
       });
 
       await loadRecommendations();
     } catch (error) {
-      console.error('Error generating recommendations:', error);
+      console.error("Error generating recommendations:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to generate recommendations',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to generate recommendations",
+        variant: "destructive",
       });
     } finally {
       setIsGenerating(false);
@@ -113,15 +113,15 @@ export function SmartRecommendationsPanel({
       await dismissRecommendation(recId, userId);
       setRecommendations(recommendations.filter((r) => r.id !== recId));
       toast({
-        title: 'Dismissed',
-        description: 'Recommendation dismissed',
+        title: "Dismissed",
+        description: "Recommendation dismissed",
       });
     } catch (error) {
-      console.error('Error dismissing recommendation:', error);
+      console.error("Error dismissing recommendation:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to dismiss recommendation',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to dismiss recommendation",
+        variant: "destructive",
       });
     }
   };
@@ -131,15 +131,15 @@ export function SmartRecommendationsPanel({
       await completeRecommendation(recId, userId);
       setRecommendations(recommendations.filter((r) => r.id !== recId));
       toast({
-        title: 'Completed!',
-        description: 'Great job following through on the recommendation',
+        title: "Completed!",
+        description: "Great job following through on the recommendation",
       });
     } catch (error) {
-      console.error('Error completing recommendation:', error);
+      console.error("Error completing recommendation:", error);
       toast({
-        title: 'Error',
-        description: 'Failed to mark recommendation as complete',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to mark recommendation as complete",
+        variant: "destructive",
       });
     }
   };
@@ -168,13 +168,13 @@ export function SmartRecommendationsPanel({
           <CardDescription>No active recommendations at the moment</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="text-center py-8">
-            <Lightbulb className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-            <p className="text-sm text-muted-foreground mb-4">
+          <div className="py-8 text-center">
+            <Lightbulb className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+            <p className="mb-4 text-sm text-muted-foreground">
               We analyze your progress to provide personalized study recommendations
             </p>
             <Button onClick={handleGenerateNew} disabled={isGenerating}>
-              {isGenerating ? 'Generating...' : 'Generate Recommendations'}
+              {isGenerating ? "Generating..." : "Generate Recommendations"}
             </Button>
           </div>
         </CardContent>
@@ -188,17 +188,10 @@ export function SmartRecommendationsPanel({
         <div className="flex items-center justify-between">
           <div>
             <CardTitle>Smart Recommendations</CardTitle>
-            <CardDescription>
-              AI-powered suggestions based on your progress
-            </CardDescription>
+            <CardDescription>AI-powered suggestions based on your progress</CardDescription>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleGenerateNew}
-            disabled={isGenerating}
-          >
-            {isGenerating ? 'Generating...' : 'Refresh'}
+          <Button variant="outline" size="sm" onClick={handleGenerateNew} disabled={isGenerating}>
+            {isGenerating ? "Generating..." : "Refresh"}
           </Button>
         </div>
       </CardHeader>
@@ -236,63 +229,63 @@ function RecommendationCard({
 
   const getIcon = () => {
     switch (recommendation.recommendationType) {
-      case 'intervention':
-        return <AlertTriangle className="w-5 h-5" />;
-      case 'next_action':
-        return <TrendingUp className="w-5 h-5" />;
-      case 'study_schedule':
-        return <Calendar className="w-5 h-5" />;
-      case 'weak_domain':
-        return <BookOpen className="w-5 h-5" />;
-      case 'resource':
-        return <BookOpen className="w-5 h-5" />;
-      case 'strategy':
-        return <Lightbulb className="w-5 h-5" />;
+      case "intervention":
+        return <AlertTriangle className="h-5 w-5" />;
+      case "next_action":
+        return <TrendingUp className="h-5 w-5" />;
+      case "study_schedule":
+        return <Calendar className="h-5 w-5" />;
+      case "weak_domain":
+        return <BookOpen className="h-5 w-5" />;
+      case "resource":
+        return <BookOpen className="h-5 w-5" />;
+      case "strategy":
+        return <Lightbulb className="h-5 w-5" />;
       default:
-        return <Bell className="w-5 h-5" />;
+        return <Bell className="h-5 w-5" />;
     }
   };
 
   const getPriorityColor = () => {
     switch (recommendation.priority) {
-      case 'critical':
-        return 'destructive';
-      case 'high':
-        return 'default';
-      case 'medium':
-        return 'secondary';
-      case 'low':
-        return 'outline';
+      case "critical":
+        return "destructive";
+      case "high":
+        return "default";
+      case "medium":
+        return "secondary";
+      case "low":
+        return "outline";
       default:
-        return 'secondary';
+        return "secondary";
     }
   };
 
   const getPriorityBgColor = () => {
     switch (recommendation.priority) {
-      case 'critical':
-        return 'bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800';
-      case 'high':
-        return 'bg-orange-50 dark:bg-orange-950 border-orange-200 dark:border-orange-800';
-      case 'medium':
-        return 'bg-yellow-50 dark:bg-yellow-950 border-yellow-200 dark:border-yellow-800';
-      case 'low':
-        return 'bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800';
+      case "critical":
+        return "bg-red-50 dark:bg-red-950 border-red-200 dark:border-red-800";
+      case "high":
+        return "bg-orange-50 dark:bg-orange-950 border-orange-200 dark:border-orange-800";
+      case "medium":
+        return "bg-yellow-50 dark:bg-yellow-950 border-yellow-200 dark:border-yellow-800";
+      case "low":
+        return "bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800";
       default:
-        return 'bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800';
+        return "bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800";
     }
   };
 
   return (
-    <div className={`p-4 rounded-lg border-2 ${getPriorityBgColor()}`}>
+    <div className={`rounded-lg border-2 p-4 ${getPriorityBgColor()}`}>
       <div className="flex items-start justify-between gap-3">
-        <div className="flex items-start gap-3 flex-1">
+        <div className="flex flex-1 items-start gap-3">
           <div className="mt-0.5">{getIcon()}</div>
 
           <div className="flex-1 space-y-2">
             {/* Header */}
             <div className="flex items-center gap-2">
-              <h4 className="font-semibold text-sm">{recommendation.title}</h4>
+              <h4 className="text-sm font-semibold">{recommendation.title}</h4>
               <Badge variant={getPriorityColor() as any} className="text-xs">
                 {recommendation.priority}
               </Badge>
@@ -309,11 +302,11 @@ function RecommendationCard({
                   Array.isArray(recommendation.suggestedActions) &&
                   recommendation.suggestedActions.length > 0 && (
                     <div className="mt-3">
-                      <p className="text-xs font-semibold mb-2">Suggested Actions:</p>
+                      <p className="mb-2 text-xs font-semibold">Suggested Actions:</p>
                       <ul className="space-y-1">
                         {recommendation.suggestedActions.map((action: string, idx: number) => (
                           <li key={idx} className="flex items-start gap-2 text-xs">
-                            <ChevronRight className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                            <ChevronRight className="mt-0.5 h-3 w-3 flex-shrink-0" />
                             <span>{action}</span>
                           </li>
                         ))}
@@ -323,15 +316,15 @@ function RecommendationCard({
 
                 {/* Estimated Impact */}
                 {recommendation.estimatedImpact && (
-                  <div className="mt-2 p-2 bg-background/50 rounded text-xs">
-                    <span className="font-semibold">Expected Impact:</span>{' '}
+                  <div className="mt-2 rounded bg-background/50 p-2 text-xs">
+                    <span className="font-semibold">Expected Impact:</span>{" "}
                     {recommendation.estimatedImpact}
                   </div>
                 )}
 
                 {/* Reasoning */}
                 {recommendation.reasoning && (
-                  <div className="mt-2 text-xs text-muted-foreground italic">
+                  <div className="mt-2 text-xs italic text-muted-foreground">
                     {recommendation.reasoning}
                   </div>
                 )}
@@ -339,7 +332,7 @@ function RecommendationCard({
             )}
 
             {/* Action Buttons */}
-            <div className="flex items-center gap-2 mt-3">
+            <div className="mt-3 flex items-center gap-2">
               {compact && (
                 <Button
                   variant="ghost"
@@ -347,7 +340,7 @@ function RecommendationCard({
                   onClick={() => setIsExpanded(!isExpanded)}
                   className="text-xs"
                 >
-                  {isExpanded ? 'Show Less' : 'Show More'}
+                  {isExpanded ? "Show Less" : "Show More"}
                 </Button>
               )}
               <Button
@@ -356,7 +349,7 @@ function RecommendationCard({
                 onClick={() => onComplete(recommendation.id)}
                 className="text-xs"
               >
-                <CheckCircle className="w-3 h-3 mr-1" />
+                <CheckCircle className="mr-1 h-3 w-3" />
                 Mark Complete
               </Button>
               <Button
@@ -365,7 +358,7 @@ function RecommendationCard({
                 onClick={() => onDismiss(recommendation.id)}
                 className="text-xs"
               >
-                <X className="w-3 h-3 mr-1" />
+                <X className="mr-1 h-3 w-3" />
                 Dismiss
               </Button>
             </div>

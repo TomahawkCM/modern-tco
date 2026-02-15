@@ -1,31 +1,31 @@
-'use client';
+"use client";
 
 /**
  * CalendarExportButton Component
  * Dropdown button for exporting subscriptions to calendar
  */
 
-import { useState } from 'react';
+import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
-import { Calendar, Download, ExternalLink, FileText } from 'lucide-react';
-import type { Subscription } from '@/types/budget';
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { Calendar, Download, ExternalLink, FileText } from "lucide-react";
+import type { Subscription } from "@/types/budget";
 import {
   downloadSubscriptionICS,
   downloadMultipleSubscriptionsICS,
-} from '@/lib/calendar/ics-generator';
+} from "@/lib/calendar/ics-generator";
 import {
   openSubscriptionGoogleCalendar,
   openSubscriptionOutlookCalendar,
-} from '@/lib/calendar/google-calendar-url';
-import { CalendarExportDialog } from './CalendarExportDialog';
-import { useTranslations } from 'next-intl';
+} from "@/lib/calendar/google-calendar-url";
+import { CalendarExportDialog } from "./CalendarExportDialog";
+import { useTranslations } from "next-intl";
 
 interface CalendarExportButtonProps {
   /** Single subscription to export */
@@ -33,9 +33,9 @@ interface CalendarExportButtonProps {
   /** Multiple subscriptions to export */
   subscriptions?: Subscription[];
   /** Button variant */
-  variant?: 'default' | 'outline' | 'ghost' | 'secondary';
+  variant?: "default" | "outline" | "ghost" | "secondary";
   /** Button size */
-  size?: 'default' | 'sm' | 'lg' | 'icon';
+  size?: "default" | "sm" | "lg" | "icon";
   /** Show text label */
   showLabel?: boolean;
   className?: string;
@@ -44,12 +44,12 @@ interface CalendarExportButtonProps {
 export function CalendarExportButton({
   subscription,
   subscriptions,
-  variant = 'outline',
-  size = 'sm',
+  variant = "outline",
+  size = "sm",
   showLabel = true,
   className,
 }: CalendarExportButtonProps) {
-  const t = useTranslations('calendarExport');
+  const t = useTranslations("calendarExport");
   const [showDialog, setShowDialog] = useState(false);
 
   // If we have a single subscription, show quick actions
@@ -59,7 +59,7 @@ export function CalendarExportButton({
         <DropdownMenuTrigger asChild>
           <Button variant={variant} size={size} className={className}>
             <Calendar className="h-4 w-4" />
-            {showLabel && <span className="ml-2">{t('addToCalendar')}</span>}
+            {showLabel && <span className="ml-2">{t("addToCalendar")}</span>}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56">
@@ -68,7 +68,7 @@ export function CalendarExportButton({
             className="cursor-pointer"
           >
             <Download className="mr-2 h-4 w-4" />
-            {t('downloadICS')}
+            {t("downloadICS")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
@@ -76,14 +76,14 @@ export function CalendarExportButton({
             className="cursor-pointer"
           >
             <ExternalLink className="mr-2 h-4 w-4" />
-            {t('googleCalendar')}
+            {t("googleCalendar")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => openSubscriptionOutlookCalendar(subscription)}
             className="cursor-pointer"
           >
             <ExternalLink className="mr-2 h-4 w-4" />
-            {t('outlookCalendar')}
+            {t("outlookCalendar")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -98,7 +98,7 @@ export function CalendarExportButton({
           <DropdownMenuTrigger asChild>
             <Button variant={variant} size={size} className={className}>
               <Calendar className="h-4 w-4" />
-              {showLabel && <span className="ml-2">{t('exportToCalendar')}</span>}
+              {showLabel && <span className="ml-2">{t("exportToCalendar")}</span>}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
@@ -107,15 +107,12 @@ export function CalendarExportButton({
               className="cursor-pointer"
             >
               <Download className="mr-2 h-4 w-4" />
-              {t('downloadAllICS')}
+              {t("downloadAllICS")}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem
-              onClick={() => setShowDialog(true)}
-              className="cursor-pointer"
-            >
+            <DropdownMenuItem onClick={() => setShowDialog(true)} className="cursor-pointer">
               <FileText className="mr-2 h-4 w-4" />
-              {t('selectSubscriptions')}
+              {t("selectSubscriptions")}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

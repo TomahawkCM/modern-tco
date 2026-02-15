@@ -3,17 +3,14 @@
  * Creates direct add-event URLs for Google Calendar
  */
 
-import type {
-  CalendarEventOptions,
-  CalendarRecurrence,
-} from '@/types/notifications';
-import type { Subscription, BillingCycle } from '@/types/budget';
+import type { CalendarEventOptions, CalendarRecurrence } from "@/types/notifications";
+import type { Subscription, BillingCycle } from "@/types/budget";
 
 // ========================
 // Constants
 // ========================
 
-const GOOGLE_CALENDAR_BASE_URL = 'https://calendar.google.com/calendar/render';
+const GOOGLE_CALENDAR_BASE_URL = "https://calendar.google.com/calendar/render";
 
 // ========================
 // Helpers
@@ -24,9 +21,12 @@ const GOOGLE_CALENDAR_BASE_URL = 'https://calendar.google.com/calendar/render';
  */
 function formatGoogleDate(date: Date, allDay = false): string {
   if (allDay) {
-    return date.toISOString().slice(0, 10).replace(/-/g, '');
+    return date.toISOString().slice(0, 10).replace(/-/g, "");
   }
-  return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  return date
+    .toISOString()
+    .replace(/[-:]/g, "")
+    .replace(/\.\d{3}/, "");
 }
 
 /**
@@ -34,18 +34,18 @@ function formatGoogleDate(date: Date, allDay = false): string {
  */
 function billingCycleToGoogleRRULE(cycle: BillingCycle): string {
   switch (cycle) {
-    case 'weekly':
-      return 'RRULE:FREQ=WEEKLY';
-    case 'bi-weekly':
-      return 'RRULE:FREQ=WEEKLY;INTERVAL=2';
-    case 'monthly':
-      return 'RRULE:FREQ=MONTHLY';
-    case 'quarterly':
-      return 'RRULE:FREQ=MONTHLY;INTERVAL=3';
-    case 'annual':
-      return 'RRULE:FREQ=YEARLY';
+    case "weekly":
+      return "RRULE:FREQ=WEEKLY";
+    case "bi-weekly":
+      return "RRULE:FREQ=WEEKLY;INTERVAL=2";
+    case "monthly":
+      return "RRULE:FREQ=MONTHLY";
+    case "quarterly":
+      return "RRULE:FREQ=MONTHLY;INTERVAL=3";
+    case "annual":
+      return "RRULE:FREQ=YEARLY";
     default:
-      return 'RRULE:FREQ=MONTHLY';
+      return "RRULE:FREQ=MONTHLY";
   }
 }
 
@@ -68,14 +68,14 @@ function buildGoogleRRULE(recurrence: CalendarRecurrence): string {
   }
 
   if (recurrence.byDay && recurrence.byDay.length > 0) {
-    parts.push(`BYDAY=${recurrence.byDay.join(',')}`);
+    parts.push(`BYDAY=${recurrence.byDay.join(",")}`);
   }
 
   if (recurrence.byMonthDay) {
     parts.push(`BYMONTHDAY=${recurrence.byMonthDay}`);
   }
 
-  return `RRULE:${parts.join(';')}`;
+  return `RRULE:${parts.join(";")}`;
 }
 
 // ========================
@@ -90,13 +90,13 @@ export function buildGoogleCalendarURL(options: CalendarEventOptions): string {
   const params = url.searchParams;
 
   // Required: action
-  params.set('action', 'TEMPLATE');
+  params.set("action", "TEMPLATE");
 
   // Title
-  params.set('text', options.title);
+  params.set("text", options.title);
 
   // Dates
-  const {startDate} = options;
+  const { startDate } = options;
   const endDate = options.endDate || new Date(startDate.getTime() + 60 * 60 * 1000);
 
   if (options.allDay) {
@@ -106,31 +106,31 @@ export function buildGoogleCalendarURL(options: CalendarEventOptions): string {
     const nextDay = new Date(endDate);
     nextDay.setDate(nextDay.getDate() + 1);
     const end = formatGoogleDate(nextDay, true);
-    params.set('dates', `${start}/${end}`);
+    params.set("dates", `${start}/${end}`);
   } else {
     const start = formatGoogleDate(startDate);
     const end = formatGoogleDate(endDate);
-    params.set('dates', `${start}/${end}`);
+    params.set("dates", `${start}/${end}`);
   }
 
   // Description
   if (options.description) {
-    params.set('details', options.description);
+    params.set("details", options.description);
   }
 
   // Location
   if (options.location) {
-    params.set('location', options.location);
+    params.set("location", options.location);
   }
 
   // Recurrence
   if (options.recurrence) {
-    params.set('recur', buildGoogleRRULE(options.recurrence));
+    params.set("recur", buildGoogleRRULE(options.recurrence));
   }
 
   // Calendar ID (optional)
   if (options.calendarId) {
-    params.set('ctz', options.calendarId);
+    params.set("ctz", options.calendarId);
   }
 
   return url.toString();
@@ -145,7 +145,7 @@ export function buildSubscriptionGoogleCalendarURL(
 ): string {
   const options: CalendarEventOptions = {
     title: `Bill Due: ${subscription.name}`,
-    description: `${subscription.name} - ${subscription.currency || '$'}${subscription.amount.toFixed(2)} ${subscription.billingCycle}\n\nManage your subscriptions at: /budget-app/subscriptions`,
+    description: `${subscription.name} - ${subscription.currency || "$"}${subscription.amount.toFixed(2)} ${subscription.billingCycle}\n\nManage your subscriptions at: /budget-app/subscriptions`,
     startDate: new Date(subscription.nextBillingDate),
     allDay: true,
   };
@@ -163,18 +163,18 @@ export function buildSubscriptionGoogleCalendarURL(
 /**
  * Convert billing cycle to frequency
  */
-function billingCycleToFrequency(cycle: BillingCycle): CalendarRecurrence['frequency'] {
+function billingCycleToFrequency(cycle: BillingCycle): CalendarRecurrence["frequency"] {
   switch (cycle) {
-    case 'weekly':
-    case 'bi-weekly':
-      return 'WEEKLY';
-    case 'monthly':
-    case 'quarterly':
-      return 'MONTHLY';
-    case 'annual':
-      return 'YEARLY';
+    case "weekly":
+    case "bi-weekly":
+      return "WEEKLY";
+    case "monthly":
+    case "quarterly":
+      return "MONTHLY";
+    case "annual":
+      return "YEARLY";
     default:
-      return 'MONTHLY';
+      return "MONTHLY";
   }
 }
 
@@ -183,9 +183,9 @@ function billingCycleToFrequency(cycle: BillingCycle): CalendarRecurrence['frequ
  */
 function billingCycleToInterval(cycle: BillingCycle): number | undefined {
   switch (cycle) {
-    case 'bi-weekly':
+    case "bi-weekly":
       return 2;
-    case 'quarterly':
+    case "quarterly":
       return 3;
     default:
       return undefined;
@@ -197,7 +197,7 @@ function billingCycleToInterval(cycle: BillingCycle): number | undefined {
  */
 export function openGoogleCalendar(options: CalendarEventOptions): void {
   const url = buildGoogleCalendarURL(options);
-  window.open(url, '_blank', 'noopener,noreferrer');
+  window.open(url, "_blank", "noopener,noreferrer");
 }
 
 /**
@@ -208,14 +208,14 @@ export function openSubscriptionGoogleCalendar(
   includeRecurrence = true
 ): void {
   const url = buildSubscriptionGoogleCalendarURL(subscription, includeRecurrence);
-  window.open(url, '_blank', 'noopener,noreferrer');
+  window.open(url, "_blank", "noopener,noreferrer");
 }
 
 // ========================
 // Outlook/Office 365 Support
 // ========================
 
-const OUTLOOK_CALENDAR_BASE_URL = 'https://outlook.live.com/calendar/0/deeplink/compose';
+const OUTLOOK_CALENDAR_BASE_URL = "https://outlook.live.com/calendar/0/deeplink/compose";
 
 /**
  * Build an Outlook Calendar URL
@@ -224,31 +224,31 @@ export function buildOutlookCalendarURL(options: CalendarEventOptions): string {
   const url = new URL(OUTLOOK_CALENDAR_BASE_URL);
   const params = url.searchParams;
 
-  params.set('path', '/calendar/action/compose');
-  params.set('rru', 'addevent');
+  params.set("path", "/calendar/action/compose");
+  params.set("rru", "addevent");
 
   // Title
-  params.set('subject', options.title);
+  params.set("subject", options.title);
 
   // Dates
-  const {startDate} = options;
+  const { startDate } = options;
   const endDate = options.endDate || new Date(startDate.getTime() + 60 * 60 * 1000);
 
-  params.set('startdt', startDate.toISOString());
-  params.set('enddt', endDate.toISOString());
+  params.set("startdt", startDate.toISOString());
+  params.set("enddt", endDate.toISOString());
 
   if (options.allDay) {
-    params.set('allday', 'true');
+    params.set("allday", "true");
   }
 
   // Description
   if (options.description) {
-    params.set('body', options.description);
+    params.set("body", options.description);
   }
 
   // Location
   if (options.location) {
-    params.set('location', options.location);
+    params.set("location", options.location);
   }
 
   return url.toString();
@@ -259,7 +259,7 @@ export function buildOutlookCalendarURL(options: CalendarEventOptions): string {
  */
 export function openOutlookCalendar(options: CalendarEventOptions): void {
   const url = buildOutlookCalendarURL(options);
-  window.open(url, '_blank', 'noopener,noreferrer');
+  window.open(url, "_blank", "noopener,noreferrer");
 }
 
 /**
@@ -268,7 +268,7 @@ export function openOutlookCalendar(options: CalendarEventOptions): void {
 export function openSubscriptionOutlookCalendar(subscription: Subscription): void {
   const options: CalendarEventOptions = {
     title: `Bill Due: ${subscription.name}`,
-    description: `${subscription.name} - ${subscription.currency || '$'}${subscription.amount.toFixed(2)} ${subscription.billingCycle}`,
+    description: `${subscription.name} - ${subscription.currency || "$"}${subscription.amount.toFixed(2)} ${subscription.billingCycle}`,
     startDate: new Date(subscription.nextBillingDate),
     allDay: true,
   };

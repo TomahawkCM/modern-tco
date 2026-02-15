@@ -15,6 +15,7 @@ All review events follow the naming convention: `review_*` or `*_reviewed`
 **Trigger**: User initiates a review session
 
 **Properties**:
+
 ```typescript
 {
   sessionType: 'flashcards' | 'questions' | 'mixed',
@@ -25,6 +26,7 @@ All review events follow the naming convention: `review_*` or `*_reviewed`
 ```
 
 **Example**:
+
 ```json
 {
   "sessionType": "mixed",
@@ -41,6 +43,7 @@ All review events follow the naming convention: `review_*` or `*_reviewed`
 **Trigger**: User completes or submits a review session
 
 **Properties**:
+
 ```typescript
 {
   sessionId: string,
@@ -55,6 +58,7 @@ All review events follow the naming convention: `review_*` or `*_reviewed`
 ```
 
 **Example**:
+
 ```json
 {
   "sessionId": "550e8400-e29b-41d4-a716-446655440000",
@@ -75,6 +79,7 @@ All review events follow the naming convention: `review_*` or `*_reviewed`
 **Trigger**: User clicks "Complete Session" button from session summary screen
 
 **Properties**:
+
 ```typescript
 {
   itemsReviewed: number,
@@ -84,6 +89,7 @@ All review events follow the naming convention: `review_*` or `*_reviewed`
 ```
 
 **Example**:
+
 ```json
 {
   "itemsReviewed": 25,
@@ -101,6 +107,7 @@ All review events follow the naming convention: `review_*` or `*_reviewed`
 **Trigger**: User rates a flashcard (again/hard/good/easy)
 
 **Properties**:
+
 ```typescript
 {
   flashcardId: string,
@@ -112,6 +119,7 @@ All review events follow the naming convention: `review_*` or `*_reviewed`
 ```
 
 **Example**:
+
 ```json
 {
   "flashcardId": "fc_123abc",
@@ -131,6 +139,7 @@ All review events follow the naming convention: `review_*` or `*_reviewed`
 **Trigger**: User submits an answer to a practice question
 
 **Properties**:
+
 ```typescript
 {
   questionId: string,
@@ -143,6 +152,7 @@ All review events follow the naming convention: `review_*` or `*_reviewed`
 ```
 
 **Example**:
+
 ```json
 {
   "questionId": "q_456def",
@@ -179,19 +189,21 @@ Uses the lightweight PostHog-compatible analytics wrapper at `/src/lib/analytics
 import { analytics } from "@/lib/analytics";
 
 // Capture custom event
-analytics.capture('review_session_started', {
-  sessionType: 'mixed',
+analytics.capture("review_session_started", {
+  sessionType: "mixed",
   targetDuration: 15,
-  queueSize: 25
+  queueSize: 25,
 });
 ```
 
 ### Environment Variables
 
 **Required**:
+
 - `NEXT_PUBLIC_POSTHOG_KEY` - PostHog project API key
 
 **Optional**:
+
 - `NEXT_PUBLIC_POSTHOG_HOST` - PostHog host (defaults to `https://us.i.posthog.com`)
 - `NEXT_PUBLIC_ANALYTICS_DEBUG` - Enable console.debug for analytics events (set to `"true"`)
 
@@ -204,6 +216,7 @@ NEXT_PUBLIC_ANALYTICS_DEBUG=true npm run dev
 ```
 
 Example console output:
+
 ```
 [analytics] review_session_started {
   sessionType: 'mixed',
@@ -287,6 +300,7 @@ ORDER BY accuracy DESC;
 ### Automatically Tracked
 
 PostHog automatically tracks:
+
 - `distinct_id` - Unique user identifier (localStorage-based)
 - `$user_id` - Authenticated user ID (from Supabase auth)
 - `$current_url` - Page URL when event occurred
@@ -298,7 +312,7 @@ Set via `analytics.identify()` in `AnalyticsClient`:
 
 ```typescript
 analytics.identify(user.id, {
-  email: user.email || undefined
+  email: user.email || undefined,
 });
 ```
 
@@ -364,6 +378,7 @@ analytics.identify(user.id, {
 ### Backwards Compatibility
 
 All future event changes will maintain backwards compatibility:
+
 - New properties added as **optional**
 - Property renames handled via dual tracking
 - Deprecated events marked in documentation with 6-month sunset period
@@ -386,17 +401,17 @@ Event tracking is validated in integration tests:
 
 ```typescript
 // Example test (to be implemented in Phase 2)
-test('tracks flashcard review event', async () => {
-  const mockAnalytics = jest.spyOn(analytics, 'capture');
+test("tracks flashcard review event", async () => {
+  const mockAnalytics = jest.spyOn(analytics, "capture");
 
-  await reviewFlashcard('fc_123', 'good', 15);
+  await reviewFlashcard("fc_123", "good", 15);
 
-  expect(mockAnalytics).toHaveBeenCalledWith('flashcard_reviewed', {
-    flashcardId: 'fc_123',
-    rating: 'good',
+  expect(mockAnalytics).toHaveBeenCalledWith("flashcard_reviewed", {
+    flashcardId: "fc_123",
+    rating: "good",
     timeSpent: 15,
     newInterval: expect.any(Number),
-    timestamp: expect.any(String)
+    timestamp: expect.any(String),
   });
 });
 ```

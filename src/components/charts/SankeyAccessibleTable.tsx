@@ -1,27 +1,27 @@
-'use client';
+"use client";
 
 /**
  * Sankey Accessible Table Component (S-030)
  * Data table alternative to Sankey diagram for screen readers.
  */
 
-import { useMemo } from 'react';
-import { cn } from '@/lib/utils';
-import { useSeniorsMode } from '@/hooks/useSeniorsMode';
+import { useMemo } from "react";
+import { cn } from "@/lib/utils";
+import { useSeniorsMode } from "@/hooks/useSeniorsMode";
 import {
   type SankeyData,
   type SankeyNode,
   type SankeyLink,
   formatCurrency,
   calculatePercentage,
-} from '@/lib/charts/sankey-utils';
+} from "@/lib/charts/sankey-utils";
 
 interface SankeyAccessibleTableProps {
   data: SankeyData;
   className?: string;
 }
 
-type NodeType = 'income' | 'category' | 'subcategory' | 'savings';
+type NodeType = "income" | "category" | "subcategory" | "savings";
 
 interface FlowRow {
   source: string;
@@ -42,10 +42,10 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
     return data.links
       .map((link) => {
         const sourceNode = nodeMap.get(
-          typeof link.source === 'string' ? link.source : (link.source as SankeyNode).id
+          typeof link.source === "string" ? link.source : (link.source as SankeyNode).id
         );
         const targetNode = nodeMap.get(
-          typeof link.target === 'string' ? link.target : (link.target as SankeyNode).id
+          typeof link.target === "string" ? link.target : (link.target as SankeyNode).id
         );
 
         if (!sourceNode || !targetNode) return null;
@@ -88,69 +88,52 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
 
   const getTypeLabel = (type: string): string => {
     switch (type) {
-      case 'income':
-        return 'Income Source';
-      case 'category':
-        return 'Expense Category';
-      case 'subcategory':
-        return 'Subcategory';
-      case 'savings':
-        return 'Savings';
+      case "income":
+        return "Income Source";
+      case "category":
+        return "Expense Category";
+      case "subcategory":
+        return "Subcategory";
+      case "savings":
+        return "Savings";
       default:
         return type;
     }
   };
 
   return (
-    <div
-      className={cn('space-y-6', className)}
-      role="region"
-      aria-label="Money flow data tables"
-    >
+    <div className={cn("space-y-6", className)} role="region" aria-label="Money flow data tables">
       {/* Summary Section */}
-      <div className="rounded-lg bg-slate-800/50 p-4 border border-white/10">
+      <div className="rounded-lg border border-white/10 bg-slate-800/50 p-4">
         <h3
-          className={cn(
-            'font-semibold text-white mb-3',
-            isSeniorsMode ? 'text-xl' : 'text-lg'
-          )}
+          className={cn("mb-3 font-semibold text-white", isSeniorsMode ? "text-xl" : "text-lg")}
           id="flow-summary-heading"
         >
           Financial Summary
         </h3>
         <dl
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+          className="grid grid-cols-1 gap-4 sm:grid-cols-3"
           aria-labelledby="flow-summary-heading"
         >
-          <div className="text-center p-3 rounded-lg bg-green-500/10">
+          <div className="rounded-lg bg-green-500/10 p-3 text-center">
             <dt className="text-sm text-slate-400">Total Income</dt>
-            <dd
-              className={cn(
-                'font-bold text-green-400',
-                isSeniorsMode ? 'text-2xl' : 'text-xl'
-              )}
-            >
+            <dd className={cn("font-bold text-green-400", isSeniorsMode ? "text-2xl" : "text-xl")}>
               {formatCurrency(data.totalIncome)}
             </dd>
           </div>
-          <div className="text-center p-3 rounded-lg bg-red-500/10">
+          <div className="rounded-lg bg-red-500/10 p-3 text-center">
             <dt className="text-sm text-slate-400">Total Expenses</dt>
-            <dd
-              className={cn(
-                'font-bold text-red-400',
-                isSeniorsMode ? 'text-2xl' : 'text-xl'
-              )}
-            >
+            <dd className={cn("font-bold text-red-400", isSeniorsMode ? "text-2xl" : "text-xl")}>
               {formatCurrency(data.totalExpenses)}
             </dd>
           </div>
-          <div className="text-center p-3 rounded-lg bg-teal-500/10">
+          <div className="rounded-lg bg-teal-500/10 p-3 text-center">
             <dt className="text-sm text-slate-400">Net Savings</dt>
             <dd
               className={cn(
-                'font-bold',
-                data.netSavings >= 0 ? 'text-teal-400' : 'text-red-400',
-                isSeniorsMode ? 'text-2xl' : 'text-xl'
+                "font-bold",
+                data.netSavings >= 0 ? "text-teal-400" : "text-red-400",
+                isSeniorsMode ? "text-2xl" : "text-xl"
               )}
             >
               {formatCurrency(data.netSavings)}
@@ -161,28 +144,25 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
 
       {/* Income Sources Table */}
       {nodesByType.income.length > 0 && (
-        <div className="rounded-lg bg-slate-800/50 border border-white/10 overflow-hidden">
+        <div className="overflow-hidden rounded-lg border border-white/10 bg-slate-800/50">
           <h3
             className={cn(
-              'font-semibold text-white p-4 border-b border-white/10 bg-green-500/10',
-              isSeniorsMode ? 'text-lg' : 'text-base'
+              "border-b border-white/10 bg-green-500/10 p-4 font-semibold text-white",
+              isSeniorsMode ? "text-lg" : "text-base"
             )}
             id="income-sources-heading"
           >
             Income Sources
           </h3>
           <div className="overflow-x-auto">
-            <table
-              className="w-full"
-              aria-labelledby="income-sources-heading"
-            >
+            <table className="w-full" aria-labelledby="income-sources-heading">
               <thead>
                 <tr className="border-b border-white/10">
                   <th
                     scope="col"
                     className={cn(
-                      'text-left px-4 py-3 text-slate-400 font-medium',
-                      isSeniorsMode ? 'text-base' : 'text-sm'
+                      "px-4 py-3 text-left font-medium text-slate-400",
+                      isSeniorsMode ? "text-base" : "text-sm"
                     )}
                   >
                     Source
@@ -190,8 +170,8 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
                   <th
                     scope="col"
                     className={cn(
-                      'text-right px-4 py-3 text-slate-400 font-medium',
-                      isSeniorsMode ? 'text-base' : 'text-sm'
+                      "px-4 py-3 text-right font-medium text-slate-400",
+                      isSeniorsMode ? "text-base" : "text-sm"
                     )}
                   >
                     Amount
@@ -199,8 +179,8 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
                   <th
                     scope="col"
                     className={cn(
-                      'text-right px-4 py-3 text-slate-400 font-medium',
-                      isSeniorsMode ? 'text-base' : 'text-sm'
+                      "px-4 py-3 text-right font-medium text-slate-400",
+                      isSeniorsMode ? "text-base" : "text-sm"
                     )}
                   >
                     % of Total
@@ -209,19 +189,16 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
               </thead>
               <tbody>
                 {nodesByType.income.map((node) => (
-                  <tr
-                    key={node.id}
-                    className="border-b border-white/5 hover:bg-white/5"
-                  >
+                  <tr key={node.id} className="border-b border-white/5 hover:bg-white/5">
                     <td
                       className={cn(
-                        'px-4 py-3 text-white',
-                        isSeniorsMode ? 'text-lg' : 'text-base'
+                        "px-4 py-3 text-white",
+                        isSeniorsMode ? "text-lg" : "text-base"
                       )}
                     >
                       <div className="flex items-center gap-2">
                         <div
-                          className="w-3 h-3 rounded-full"
+                          className="h-3 w-3 rounded-full"
                           style={{ backgroundColor: node.color }}
                           aria-hidden="true"
                         />
@@ -230,16 +207,16 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
                     </td>
                     <td
                       className={cn(
-                        'px-4 py-3 text-right text-green-400 font-medium',
-                        isSeniorsMode ? 'text-lg' : 'text-base'
+                        "px-4 py-3 text-right font-medium text-green-400",
+                        isSeniorsMode ? "text-lg" : "text-base"
                       )}
                     >
                       {formatCurrency(node.value || 0)}
                     </td>
                     <td
                       className={cn(
-                        'px-4 py-3 text-right text-slate-400',
-                        isSeniorsMode ? 'text-lg' : 'text-base'
+                        "px-4 py-3 text-right text-slate-400",
+                        isSeniorsMode ? "text-lg" : "text-base"
                       )}
                     >
                       {calculatePercentage(node.value || 0, data.totalIncome).toFixed(1)}%
@@ -254,28 +231,25 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
 
       {/* Expense Categories Table */}
       {nodesByType.category.length > 0 && (
-        <div className="rounded-lg bg-slate-800/50 border border-white/10 overflow-hidden">
+        <div className="overflow-hidden rounded-lg border border-white/10 bg-slate-800/50">
           <h3
             className={cn(
-              'font-semibold text-white p-4 border-b border-white/10 bg-red-500/10',
-              isSeniorsMode ? 'text-lg' : 'text-base'
+              "border-b border-white/10 bg-red-500/10 p-4 font-semibold text-white",
+              isSeniorsMode ? "text-lg" : "text-base"
             )}
             id="expense-categories-heading"
           >
             Expense Categories
           </h3>
           <div className="overflow-x-auto">
-            <table
-              className="w-full"
-              aria-labelledby="expense-categories-heading"
-            >
+            <table className="w-full" aria-labelledby="expense-categories-heading">
               <thead>
                 <tr className="border-b border-white/10">
                   <th
                     scope="col"
                     className={cn(
-                      'text-left px-4 py-3 text-slate-400 font-medium',
-                      isSeniorsMode ? 'text-base' : 'text-sm'
+                      "px-4 py-3 text-left font-medium text-slate-400",
+                      isSeniorsMode ? "text-base" : "text-sm"
                     )}
                   >
                     Category
@@ -283,8 +257,8 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
                   <th
                     scope="col"
                     className={cn(
-                      'text-right px-4 py-3 text-slate-400 font-medium',
-                      isSeniorsMode ? 'text-base' : 'text-sm'
+                      "px-4 py-3 text-right font-medium text-slate-400",
+                      isSeniorsMode ? "text-base" : "text-sm"
                     )}
                   >
                     Amount
@@ -292,8 +266,8 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
                   <th
                     scope="col"
                     className={cn(
-                      'text-right px-4 py-3 text-slate-400 font-medium',
-                      isSeniorsMode ? 'text-base' : 'text-sm'
+                      "px-4 py-3 text-right font-medium text-slate-400",
+                      isSeniorsMode ? "text-base" : "text-sm"
                     )}
                   >
                     % of Expenses
@@ -301,8 +275,8 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
                   <th
                     scope="col"
                     className={cn(
-                      'text-right px-4 py-3 text-slate-400 font-medium',
-                      isSeniorsMode ? 'text-base' : 'text-sm'
+                      "px-4 py-3 text-right font-medium text-slate-400",
+                      isSeniorsMode ? "text-base" : "text-sm"
                     )}
                   >
                     % of Income
@@ -311,19 +285,16 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
               </thead>
               <tbody>
                 {nodesByType.category.map((node) => (
-                  <tr
-                    key={node.id}
-                    className="border-b border-white/5 hover:bg-white/5"
-                  >
+                  <tr key={node.id} className="border-b border-white/5 hover:bg-white/5">
                     <td
                       className={cn(
-                        'px-4 py-3 text-white',
-                        isSeniorsMode ? 'text-lg' : 'text-base'
+                        "px-4 py-3 text-white",
+                        isSeniorsMode ? "text-lg" : "text-base"
                       )}
                     >
                       <div className="flex items-center gap-2">
                         <div
-                          className="w-3 h-3 rounded-full"
+                          className="h-3 w-3 rounded-full"
                           style={{ backgroundColor: node.color }}
                           aria-hidden="true"
                         />
@@ -332,24 +303,24 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
                     </td>
                     <td
                       className={cn(
-                        'px-4 py-3 text-right text-red-400 font-medium',
-                        isSeniorsMode ? 'text-lg' : 'text-base'
+                        "px-4 py-3 text-right font-medium text-red-400",
+                        isSeniorsMode ? "text-lg" : "text-base"
                       )}
                     >
                       {formatCurrency(node.value || 0)}
                     </td>
                     <td
                       className={cn(
-                        'px-4 py-3 text-right text-slate-400',
-                        isSeniorsMode ? 'text-lg' : 'text-base'
+                        "px-4 py-3 text-right text-slate-400",
+                        isSeniorsMode ? "text-lg" : "text-base"
                       )}
                     >
                       {calculatePercentage(node.value || 0, data.totalExpenses).toFixed(1)}%
                     </td>
                     <td
                       className={cn(
-                        'px-4 py-3 text-right text-slate-400',
-                        isSeniorsMode ? 'text-lg' : 'text-base'
+                        "px-4 py-3 text-right text-slate-400",
+                        isSeniorsMode ? "text-lg" : "text-base"
                       )}
                     >
                       {calculatePercentage(node.value || 0, data.totalIncome).toFixed(1)}%
@@ -364,28 +335,25 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
 
       {/* Money Flow Details Table */}
       {flowRows.length > 0 && (
-        <div className="rounded-lg bg-slate-800/50 border border-white/10 overflow-hidden">
+        <div className="overflow-hidden rounded-lg border border-white/10 bg-slate-800/50">
           <h3
             className={cn(
-              'font-semibold text-white p-4 border-b border-white/10 bg-teal-500/10',
-              isSeniorsMode ? 'text-lg' : 'text-base'
+              "border-b border-white/10 bg-teal-500/10 p-4 font-semibold text-white",
+              isSeniorsMode ? "text-lg" : "text-base"
             )}
             id="money-flow-heading"
           >
             Money Flow Details
           </h3>
           <div className="overflow-x-auto">
-            <table
-              className="w-full"
-              aria-labelledby="money-flow-heading"
-            >
+            <table className="w-full" aria-labelledby="money-flow-heading">
               <thead>
                 <tr className="border-b border-white/10">
                   <th
                     scope="col"
                     className={cn(
-                      'text-left px-4 py-3 text-slate-400 font-medium',
-                      isSeniorsMode ? 'text-base' : 'text-sm'
+                      "px-4 py-3 text-left font-medium text-slate-400",
+                      isSeniorsMode ? "text-base" : "text-sm"
                     )}
                   >
                     From
@@ -393,8 +361,8 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
                   <th
                     scope="col"
                     className={cn(
-                      'text-left px-4 py-3 text-slate-400 font-medium',
-                      isSeniorsMode ? 'text-base' : 'text-sm'
+                      "px-4 py-3 text-left font-medium text-slate-400",
+                      isSeniorsMode ? "text-base" : "text-sm"
                     )}
                   >
                     To
@@ -402,8 +370,8 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
                   <th
                     scope="col"
                     className={cn(
-                      'text-right px-4 py-3 text-slate-400 font-medium',
-                      isSeniorsMode ? 'text-base' : 'text-sm'
+                      "px-4 py-3 text-right font-medium text-slate-400",
+                      isSeniorsMode ? "text-base" : "text-sm"
                     )}
                   >
                     Amount
@@ -411,8 +379,8 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
                   <th
                     scope="col"
                     className={cn(
-                      'text-right px-4 py-3 text-slate-400 font-medium',
-                      isSeniorsMode ? 'text-base' : 'text-sm'
+                      "px-4 py-3 text-right font-medium text-slate-400",
+                      isSeniorsMode ? "text-base" : "text-sm"
                     )}
                   >
                     % of Income
@@ -421,44 +389,41 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
               </thead>
               <tbody>
                 {flowRows.slice(0, 20).map((row, index) => (
-                  <tr
-                    key={index}
-                    className="border-b border-white/5 hover:bg-white/5"
-                  >
+                  <tr key={index} className="border-b border-white/5 hover:bg-white/5">
                     <td
                       className={cn(
-                        'px-4 py-3 text-white',
-                        isSeniorsMode ? 'text-lg' : 'text-base'
+                        "px-4 py-3 text-white",
+                        isSeniorsMode ? "text-lg" : "text-base"
                       )}
                     >
-                      <span className="text-slate-500 text-sm mr-1">
+                      <span className="mr-1 text-sm text-slate-500">
                         ({getTypeLabel(row.sourceType)})
                       </span>
                       {row.source}
                     </td>
                     <td
                       className={cn(
-                        'px-4 py-3 text-white',
-                        isSeniorsMode ? 'text-lg' : 'text-base'
+                        "px-4 py-3 text-white",
+                        isSeniorsMode ? "text-lg" : "text-base"
                       )}
                     >
-                      <span className="text-slate-500 text-sm mr-1">
+                      <span className="mr-1 text-sm text-slate-500">
                         ({getTypeLabel(row.targetType)})
                       </span>
                       {row.target}
                     </td>
                     <td
                       className={cn(
-                        'px-4 py-3 text-right text-teal-400 font-medium',
-                        isSeniorsMode ? 'text-lg' : 'text-base'
+                        "px-4 py-3 text-right font-medium text-teal-400",
+                        isSeniorsMode ? "text-lg" : "text-base"
                       )}
                     >
                       {formatCurrency(row.amount)}
                     </td>
                     <td
                       className={cn(
-                        'px-4 py-3 text-right text-slate-400',
-                        isSeniorsMode ? 'text-lg' : 'text-base'
+                        "px-4 py-3 text-right text-slate-400",
+                        isSeniorsMode ? "text-lg" : "text-base"
                       )}
                     >
                       {row.percentage.toFixed(1)}%
@@ -469,7 +434,7 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
             </table>
           </div>
           {flowRows.length > 20 && (
-            <p className="p-4 text-sm text-slate-500 text-center border-t border-white/10">
+            <p className="border-t border-white/10 p-4 text-center text-sm text-slate-500">
               Showing top 20 of {flowRows.length} money flows
             </p>
           )}
@@ -478,10 +443,9 @@ export function SankeyAccessibleTable({ data, className }: SankeyAccessibleTable
 
       {/* Screen reader summary */}
       <div className="sr-only" aria-live="polite">
-        This money flow visualization shows {formatCurrency(data.totalIncome)} in income
-        flowing to {nodesByType.category.length} expense categories totaling{' '}
-        {formatCurrency(data.totalExpenses)}, with {formatCurrency(data.netSavings)} in net
-        savings.
+        This money flow visualization shows {formatCurrency(data.totalIncome)} in income flowing to{" "}
+        {nodesByType.category.length} expense categories totaling{" "}
+        {formatCurrency(data.totalExpenses)}, with {formatCurrency(data.netSavings)} in net savings.
       </div>
     </div>
   );

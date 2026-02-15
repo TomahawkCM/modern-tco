@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
 export function LogoMarquee() {
-  const t = useTranslations('landing.marquee');
-  const logos = t.raw('logos') as string[];
+  const t = useTranslations("landing.marquee");
+  const logos = t.raw("logos") as string[];
   const row = [...logos, ...logos];
 
   return (
@@ -32,5 +32,3 @@ export function LogoMarquee() {
     </div>
   );
 }
-
-

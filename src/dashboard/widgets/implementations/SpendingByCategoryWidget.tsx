@@ -47,24 +47,25 @@ export function SpendingByCategoryWidget({ config }: SpendingByCategoryWidgetPro
   const categories = useLiveQuery(() => db.categories.toArray()) || [];
 
   // Fetch current month transactions (expenses only)
-  const transactions = useLiveQuery(async () => {
-    try {
-      const startOfMonth = new Date();
-      startOfMonth.setDate(1);
-      startOfMonth.setHours(0, 0, 0, 0);
-      const startTime = startOfMonth.getTime();
+  const transactions =
+    useLiveQuery(async () => {
+      try {
+        const startOfMonth = new Date();
+        startOfMonth.setDate(1);
+        startOfMonth.setHours(0, 0, 0, 0);
+        const startTime = startOfMonth.getTime();
 
-      // Use filter instead of where for reliable Date comparison
-      const allTxs = await db.transactions.toArray();
-      return allTxs.filter((tx) => {
-        if (tx.isSplit || tx.amount >= 0) return false;
-        const txTime = new Date(tx.date).getTime();
-        return txTime >= startTime;
-      });
-    } catch {
-      return [];
-    }
-  }) || [];
+        // Use filter instead of where for reliable Date comparison
+        const allTxs = await db.transactions.toArray();
+        return allTxs.filter((tx) => {
+          if (tx.isSplit || tx.amount >= 0) return false;
+          const txTime = new Date(tx.date).getTime();
+          return txTime >= startTime;
+        });
+      } catch {
+        return [];
+      }
+    }) || [];
 
   // Aggregate spending by category
   const { categoryData, totalSpending } = useMemo(() => {
@@ -156,8 +157,8 @@ export function SpendingByCategoryWidget({ config }: SpendingByCategoryWidgetPro
                           <div className="rounded-lg border border-slate-700 bg-slate-800 p-2 shadow-lg">
                             <p className="text-sm font-medium text-white">{data.name}</p>
                             <p className="text-xs text-slate-400">
-                              {format.number(data.value, { style: "currency", currency: "USD" })}
-                              {" "}({data.percentage.toFixed(1)}%)
+                              {format.number(data.value, { style: "currency", currency: "USD" })} (
+                              {data.percentage.toFixed(1)}%)
                             </p>
                           </div>
                         );
@@ -188,9 +189,7 @@ export function SpendingByCategoryWidget({ config }: SpendingByCategoryWidgetPro
                     <span className="truncate text-sm text-slate-300">{cat.name}</span>
                   </div>
                   <div className="flex items-center gap-2 text-right">
-                    <span className="text-xs text-slate-400">
-                      {cat.percentage.toFixed(1)}%
-                    </span>
+                    <span className="text-xs text-slate-400">{cat.percentage.toFixed(1)}%</span>
                     <span className="whitespace-nowrap text-sm font-medium text-white">
                       {format.number(cat.value, { style: "currency", currency: "USD" })}
                     </span>

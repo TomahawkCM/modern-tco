@@ -4,46 +4,46 @@
  * and finds matching transactions for bulk categorization
  */
 
-import type { Transaction } from '@/types/budget';
+import type { Transaction } from "@/types/budget";
 
 /**
  * Extract normalized vendor name from transaction description
  * Removes common noise: transaction IDs, dates, locations, prefixes
  */
 export function extractVendorName(description: string): string {
-  if (!description) return '';
+  if (!description) return "";
 
   let vendor = description.toUpperCase().trim();
 
   // Remove bank statement prefixes / bracketed tags
-  vendor = vendor.replace(/^\[[A-Z]+\]\s*/i, ''); // e.g. [PR], [DS]
-  vendor = vendor.replace(/^\[ONLINE PURCHASE\]\s*/i, '');
+  vendor = vendor.replace(/^\[[A-Z]+\]\s*/i, ""); // e.g. [PR], [DS]
+  vendor = vendor.replace(/^\[ONLINE PURCHASE\]\s*/i, "");
   // Legacy specific prefixes (kept for backward compatibility)
-  vendor = vendor.replace(/^\[PR\]/i, '');
-  vendor = vendor.replace(/^PURCHASE\s+/i, '');
-  vendor = vendor.replace(/^PAYMENT\s+/i, '');
-  vendor = vendor.replace(/^DEBIT\s+/i, '');
-  vendor = vendor.replace(/^POS\s+/i, '');
+  vendor = vendor.replace(/^\[PR\]/i, "");
+  vendor = vendor.replace(/^PURCHASE\s+/i, "");
+  vendor = vendor.replace(/^PAYMENT\s+/i, "");
+  vendor = vendor.replace(/^DEBIT\s+/i, "");
+  vendor = vendor.replace(/^POS\s+/i, "");
 
   // Remove transaction IDs (e.g., #260, #123)
-  vendor = vendor.replace(/#\d+/g, '');
+  vendor = vendor.replace(/#\d+/g, "");
 
   // Remove dates in various formats
-  vendor = vendor.replace(/\d{1,2}[A-Z]{3}\d{2,4}/gi, ''); // 4NOV20, 11NOV2025
-  vendor = vendor.replace(/\d{1,2}\/\d{1,2}\/\d{2,4}/g, ''); // 11/7/2025
-  vendor = vendor.replace(/\d{4}-\d{2}-\d{2}/g, ''); // 2025-11-07
+  vendor = vendor.replace(/\d{1,2}[A-Z]{3}\d{2,4}/gi, ""); // 4NOV20, 11NOV2025
+  vendor = vendor.replace(/\d{1,2}\/\d{1,2}\/\d{2,4}/g, ""); // 11/7/2025
+  vendor = vendor.replace(/\d{4}-\d{2}-\d{2}/g, ""); // 2025-11-07
 
   // Remove common location indicators
-  vendor = vendor.replace(/\s+(AB|BC|ON|QC|SK|MB|NB|NS|PE|NL|YT|NT|NU)\s*$/i, ''); // Canadian provinces
-  vendor = vendor.replace(/\s+CANADA\s*$/i, '');
-  vendor = vendor.replace(/\s+CA\s*$/i, '');
-  vendor = vendor.replace(/\s+(EDMONTON|CALGARY|TORONTO|VANCOUVER|MONTREAL|OTTAWA)\s*$/i, ''); // Cities
+  vendor = vendor.replace(/\s+(AB|BC|ON|QC|SK|MB|NB|NS|PE|NL|YT|NT|NU)\s*$/i, ""); // Canadian provinces
+  vendor = vendor.replace(/\s+CANADA\s*$/i, "");
+  vendor = vendor.replace(/\s+CA\s*$/i, "");
+  vendor = vendor.replace(/\s+(EDMONTON|CALGARY|TORONTO|VANCOUVER|MONTREAL|OTTAWA)\s*$/i, ""); // Cities
 
   // Remove trailing reference numbers/codes
-  vendor = vendor.replace(/\s+[A-Z0-9]{6,}\s*$/, ''); // Long alphanumeric codes
+  vendor = vendor.replace(/\s+[A-Z0-9]{6,}\s*$/, ""); // Long alphanumeric codes
 
   // Clean up extra whitespace
-  vendor = vendor.replace(/\s+/g, ' ').trim();
+  vendor = vendor.replace(/\s+/g, " ").trim();
 
   return vendor;
 }
@@ -105,13 +105,13 @@ export function vendorsMatch(vendor1: string, vendor2: string, threshold = 85): 
 
   // Fast path 3: Word-based matching (MUCH faster than Levenshtein)
   // Split into words and check for common words
-  const words1 = v1.split(/\s+/).filter(w => w.length > 0);
-  const words2 = v2.split(/\s+/).filter(w => w.length > 0);
+  const words1 = v1.split(/\s+/).filter((w) => w.length > 0);
+  const words2 = v2.split(/\s+/).filter((w) => w.length > 0);
 
   if (words1.length > 0 && words2.length > 0) {
     // Count how many words match (even partially)
-    const commonWords = words1.filter(w1 =>
-      words2.some(w2 => w2.includes(w1) || w1.includes(w2) || w2 === w1)
+    const commonWords = words1.filter((w1) =>
+      words2.some((w2) => w2.includes(w1) || w1.includes(w2) || w2 === w1)
     );
 
     // If 75%+ words match, it's the same vendor
@@ -143,7 +143,7 @@ export function findMatchingVendorTransactions(
   allTransactions: Transaction[],
   threshold = 85,
   vendorCache?: Map<string, string>,
-  maxTransactions = 500  // Limit search to recent 500 transactions for performance
+  maxTransactions = 500 // Limit search to recent 500 transactions for performance
 ): Transaction[] {
   // Use cache if provided, otherwise extract on-demand
   const currentVendor = vendorCache
@@ -156,7 +156,7 @@ export function findMatchingVendorTransactions(
   // Most users care about recent transactions (last 6-12 months)
   // Searching 500 recent instead of 5000 total = 10x faster
   const transactionsToSearch = allTransactions
-    .filter(tx => tx.id !== currentTransaction.id)
+    .filter((tx) => tx.id !== currentTransaction.id)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, maxTransactions);
 
@@ -191,16 +191,13 @@ export function getVendorStats(
   });
 
   const uncategorized = vendorTransactions.filter(
-    (tx) => !tx.category || tx.category === 'Uncategorized'
+    (tx) => !tx.category || tx.category === "Uncategorized"
   );
   const categorized = vendorTransactions.filter(
-    (tx) => tx.category && tx.category !== 'Uncategorized'
+    (tx) => tx.category && tx.category !== "Uncategorized"
   );
 
-  const totalAmount = vendorTransactions.reduce(
-    (sum, tx) => sum + Math.abs(tx.amount),
-    0
-  );
+  const totalAmount = vendorTransactions.reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
 
   return {
     totalTransactions: vendorTransactions.length,

@@ -29,8 +29,8 @@ description: "Basic package deployment and action monitoring for TCO operators"
 - Simple rollback procedures for failed deployments
 
 <InfoBox title="Exam Relevance">
-  This domain represents 15% of the TCO exam weight and focuses on basic package
-  deployment and monitoring skills needed for entry-level operators.
+  This domain represents 15% of the TCO exam weight and focuses on basic package deployment and
+  monitoring skills needed for entry-level operators.
 </InfoBox>
 
 ## Package Basics (25 minutes)
@@ -40,6 +40,7 @@ description: "Basic package deployment and action monitoring for TCO operators"
 Packages are pre-built software components that can be deployed to endpoint computers through Tanium. They contain the files and instructions needed to install, update, or configure software on target systems.
 
 **Key Package Components:**
+
 - **Executable files**: The main program or script to run
 - **Parameters**: Settings that control how the package behaves
 - **Dependencies**: Other software that must be present
@@ -50,11 +51,13 @@ Packages are pre-built software components that can be deployed to endpoint comp
 Parameters allow you to customize how a package works without changing the package itself:
 
 **Common Parameter Types:**
+
 - **Text parameters**: File paths, usernames, configuration values
 - **Number parameters**: Timeout values, port numbers, sizes
 - **Yes/No parameters**: Enable/disable features, confirmation flags
 
 **Example - Software Installation Package:**
+
 ```
 Package: Install Chrome Browser
 Parameters:
@@ -99,6 +102,7 @@ WORKSTATION-067 - Windows 10 - 8GB free
 Before deploying to many systems, always test first:
 
 **Testing Checklist:**
+
 - [ ] Package downloads successfully to test systems
 - [ ] Package installs without errors
 - [ ] Software functions as expected after installation
@@ -129,6 +133,7 @@ Actions are how packages get deployed to endpoint computers. The basic deploymen
 ### Target Selection and Validation
 
 **Computer Group Selection:**
+
 - **All Computers**: Deploys to every managed system (use carefully!)
 - **Custom Groups**: Predefined groups like "Windows 10 Workstations"
 - **Manual Selection**: Choose specific computers by name
@@ -147,6 +152,7 @@ SERVER-067 - Uptime: 8 days - CPU: 67% - Service: Running
 />
 
 **Validation Steps:**
+
 1. Check group membership count before deploying
 2. Verify group includes the right types of systems
 3. Ensure no critical systems in test deployments
@@ -164,6 +170,7 @@ The Action Status grid shows real-time deployment progress:
 - **Not Applicable**: System doesn't meet deployment criteria
 
 **Basic Monitoring Tasks:**
+
 - Check overall completion percentage
 - Identify failed systems for troubleshooting
 - Monitor network impact during large deployments
@@ -184,12 +191,14 @@ LAPTOP-234 - Office Update - Exit Code: 1001 - Network error
 />
 
 **Success Indicators:**
+
 - High percentage of "Completed" status
 - Exit code 0 from most systems
 - Expected changes visible on target systems
 - No significant performance impact
 
 **Warning Signs:**
+
 - Many systems showing "Failed" status
 - High number of timeout errors
 - Unexpected exit codes
@@ -202,6 +211,7 @@ LAPTOP-234 - Office Update - Exit Code: 1001 - Network error
 Exit codes tell you what happened when a package ran. Think of them as simple status messages:
 
 **Standard Exit Codes:**
+
 - **0**: Success - Everything worked correctly
 - **1**: General Error - Something went wrong (check logs)
 - **2**: File Not Found - Package couldn't find required files
@@ -210,6 +220,7 @@ Exit codes tell you what happened when a package ran. Think of them as simple st
 - **127**: Command Not Found - Required software missing
 
 **Tanium-Specific Exit Codes:**
+
 - **1001**: Network Error - Couldn't download package
 - **1002**: No Disk Space - Not enough room to install
 - **1003**: Missing Requirements - Need other software first
@@ -230,16 +241,19 @@ LAPTOP-089 - Office Patch - Exit Code: 3 - Cannot write to Program Files
 />
 
 **Scenario 1: "Permission Denied" (Exit Code 3)**
+
 - **Cause**: User account doesn't have admin rights
 - **Solution**: Run deployment with administrator account
 - **Prevention**: Verify account permissions before deployment
 
 **Scenario 2: "Network Error" (Exit Code 1001)**
+
 - **Cause**: Endpoint can't reach Tanium server
 - **Solution**: Check network connectivity and firewall rules
 - **Prevention**: Test connectivity before large deployments
 
 **Scenario 3: "Not Enough Disk Space" (Exit Code 1002)**
+
 - **Cause**: Target system lacks storage space
 - **Solution**: Free up disk space or choose smaller package
 - **Prevention**: Check disk space with sensors first
@@ -276,6 +290,7 @@ LAPTOP-089 - Office Patch - Exit Code: 3 - Cannot write to Program Files
 Scheduled actions let you run deployments automatically at specific times:
 
 **Common Scheduling Scenarios:**
+
 - **Patch Deployments**: Monthly security updates
 - **Software Updates**: Quarterly application updates
 - **Maintenance Tasks**: Weekly cleanup operations
@@ -313,6 +328,7 @@ Chrome Update - Saturday 1:00 AM - Production Workstations
    - Usually scheduled for weekends
 
 **Example Schedule Configuration:**
+
 ```
 Schedule: Weekly Patch Deployment
 Frequency: Every Tuesday
@@ -324,12 +340,14 @@ Retry failed systems: Yes, after 24 hours
 ### Monitoring Scheduled Tasks
 
 **Regular Monitoring Tasks:**
+
 - Check scheduled actions completed successfully
 - Review any systems that failed deployment
 - Verify scheduled time worked for organization
 - Adjust timing if conflicts occur
 
 **Basic Health Checks:**
+
 - Weekly review of all scheduled actions
 - Monthly analysis of success rates
 - Quarterly review of schedule effectiveness
@@ -342,12 +360,14 @@ Retry failed systems: Yes, after 24 hours
 Rollback means removing or undoing a failed deployment. Consider rollback when:
 
 **Clear Rollback Triggers:**
+
 - More than 20% of deployments failed
 - Critical system functionality is broken
 - Security issues were introduced
 - Business operations are impacted
 
 **Simple Decision Process:**
+
 1. Stop ongoing deployment immediately
 2. Assess scope of problem (how many systems affected?)
 3. Determine if issue is fixable quickly
@@ -391,6 +411,7 @@ DESKTOP-567 - CPU: 88% - Memory: 96% - Office 365 Deploy
 ### Verification Steps
 
 **Post-Rollback Validation:**
+
 - [ ] Target systems are functioning normally
 - [ ] Business applications work as expected
 - [ ] No remaining files from failed deployment
@@ -398,6 +419,7 @@ DESKTOP-567 - CPU: 88% - Memory: 96% - Office 365 Deploy
 - [ ] Users can perform their regular tasks
 
 **Basic Recovery Testing:**
+
 - Test key applications on rolled-back systems
 - Verify network connectivity is working
 - Check that security software is functioning
@@ -461,14 +483,7 @@ Use these short clips to learn basic concepts:
 <PracticeButton
   moduleId="module-taking-action"
   domainEnum="TAKING_ACTION"
-  targetTags={[
-    "Packages",
-    "Actions",
-    "Deploy",
-    "Monitoring",
-    "ExitCodes",
-    "Rollback",
-  ]}
+  targetTags={["Packages", "Actions", "Deploy", "Monitoring", "ExitCodes", "Rollback"]}
   objectiveIds={["obj-taking-parameters", "obj-taking-monitoring", "obj-taking-rollback"]}
   difficulty="intermediate"
 >
@@ -497,129 +512,129 @@ Use these short clips to learn basic concepts:
   rollback paths for each package before broad deployment.
 </InfoBox>
 
-1) Install Google Chrome
+1. Install Google Chrome
    - Parameters: InstallPath, Silent, DesktopShortcut
    - Validation: process present, version matches, default browser optional
    - Use cases: new hire laptops; browser baseline
 
-2) Update Zoom Client
+2. Update Zoom Client
    - Parameters: Channel (stable/beta), AutoUpdate (Yes/No)
    - Validation: version sensor, meeting launch test
    - Use cases: security updates; feature parity
 
-3) Uninstall Legacy Java
+3. Uninstall Legacy Java
    - Parameters: TargetVersion, Force
    - Validation: no Java in Installed Applications; app health checks
    - Use cases: reduce attack surface; compliance
 
-4) Tanium Client Upgrade
+4. Tanium Client Upgrade
    - Parameters: Version, RebootAllowed, FallbackMirror
    - Validation: Tanium Client Version, service status
    - Use cases: fleet hygiene; feature enablement
 
-5) Antivirus Definition Update
+5. Antivirus Definition Update
    - Parameters: Vendor, UpdateSource, RetryCount
    - Validation: AV defs date, AV Status = enabled
    - Use cases: outbreak response; routine hygiene
 
-6) Enable Windows Firewall
+6. Enable Windows Firewall
    - Parameters: Profiles (Domain/Private/Public)
    - Validation: Firewall State = On; connectivity tests
    - Use cases: hardening; compliance remediation
 
-7) Disable SMBv1
+7. Disable SMBv1
    - Parameters: RebootIfRequired (Yes/No)
    - Validation: SMBv1 state sensor, service disabled
    - Use cases: legacy deprecation; security baseline
 
-8) Reset Local Admin Password
+8. Reset Local Admin Password
    - Parameters: Username, NewPassword, RotateSchedule
    - Validation: login test to one pilot; credential vault update
    - Use cases: incident containment; hygiene
 
-9) Clear Temp Files
+9. Clear Temp Files
    - Parameters: Paths, MaxAgeDays, DryRun
    - Validation: disk space before/after; no app breakage
    - Use cases: free disk; prep for patching
 
-10) Collect Support Logs
+10. Collect Support Logs
     - Parameters: Paths, Compress, UploadEndpoint
     - Validation: archive exists; uploaded checksum
     - Use cases: incident triage; vendor support
 
-11) Configure NTP Server
+11. Configure NTP Server
     - Parameters: Servers, Enforcement (Yes/No)
     - Validation: time drift sensor < threshold
     - Use cases: audit accuracy; auth systems stability
 
-12) Deploy Root Certificate
+12. Deploy Root Certificate
     - Parameters: CertFile, Store, VerifyHashes
     - Validation: certificate present, thumbprint matches
     - Use cases: MITM prevention; TLS inspection trust
 
-13) Proxy Configuration
+13. Proxy Configuration
     - Parameters: ProxyURL, BypassList
     - Validation: connectivity via proxy; exception list works
     - Use cases: egress control; compliance zones
 
-14) OS Cumulative Patch
+14. OS Cumulative Patch
     - Parameters: KBID/Bundle, Deadline, RebootPolicy
     - Validation: Installed Patches, OS Build Number, reboot outcome
     - Use cases: Patch Tuesday cadence; emergency remediation
 
-15) Reboot with Notification
+15. Reboot with Notification
     - Parameters: DelayMinutes, Message, SnoozeCount
     - Validation: Last Reboot timestamp; user confirmation logs
     - Use cases: enforce reboot; memory leak relief
 
-16) Stop and Disable Service
+16. Stop and Disable Service
     - Parameters: ServiceName, StartupType
     - Validation: service state stopped/disabled; dependent services unaffected
     - Use cases: decommission legacy agents; incident response
 
-17) Kill Process by Name
+17. Kill Process by Name
     - Parameters: ProcessName, OnlyIfHashMismatch
     - Validation: process absent; hash baseline verified
     - Use cases: terminate unwanted binaries; recovery step
 
-18) Remove Scheduled Task
+18. Remove Scheduled Task
     - Parameters: TaskName, Scope (User/System)
     - Validation: task removed; autoruns clean
     - Use cases: persistence cleanup; hygiene
 
-19) Enable Disk Encryption
+19. Enable Disk Encryption
     - Parameters: Algorithm, TPMOnlyOrPIN, RecoveryKeyPath
     - Validation: Disk Encryption Status = Enabled; key escrowed
     - Use cases: laptop fleet protection; compliance
 
-20) Install .NET Runtime
+20. Install .NET Runtime
     - Parameters: Version, Architecture, RebootPolicy
     - Validation: Installed Applications entry; dependent app starts
     - Use cases: app prerequisites; remediation
 
-21) Update OpenSSL/OpenSSH
+21. Update OpenSSL/OpenSSH
     - Parameters: PackageName, Version, RestartServices (Yes/No)
     - Validation: version sensor; service restart success
     - Use cases: critical vulnerability response (e.g., CVEs)
 
-22) Deploy EDR Agent
+22. Deploy EDR Agent
     - Parameters: TenantID, PolicyGroup, Proxy
     - Validation: agent check‑in; policy applied
     - Use cases: security rollout; M&A integration
 
-23) Remove Unauthorized Software
+23. Remove Unauthorized Software
     - Parameters: AppNamePattern, SafeList
     - Validation: entries removed; business‑approved list untouched
     - Use cases: license control; security hygiene
 
-24) Set Registry/Plist Key
+24. Set Registry/Plist Key
     - Parameters: Path, Name, Type, Value
     - Validation: key/value present; application behavior verified
     - Use cases: feature toggles; workaround deployment
 
 <InfoBox title="Parameter patterns">
-  Standardize parameter names and defaults across packages (e.g., `DryRun=false`, `RebootPolicy=Never`).
-  Document each parameter, owner, and safe defaults.
+  Standardize parameter names and defaults across packages (e.g., `DryRun=false`,
+  `RebootPolicy=Never`). Document each parameter, owner, and safe defaults.
 </InfoBox>
 
 ---
@@ -634,6 +649,7 @@ Use these short clips to learn basic concepts:
 - Ring 3: Remaining endpoints — staged by site/time zone
 
 Success gates per ring:
+
 - Minimum success rate (e.g., &gt;95%) and failure cause understood
 - No P1/P2 incidents; helpdesk tickets within baseline
 - Performance KPIs stable (CPU/mem/network)
@@ -653,6 +669,7 @@ Success gates per ring:
 ### Communication Templates
 
 Email (pre‑deploy):
+
 ```
 Subject: Planned Deployment — <Package> to <Scope> on <Date/Time>
 Impact: Minimal; reboot policy = <Policy>
@@ -661,12 +678,14 @@ Rollback: <Package/Ring>
 ```
 
 Slack/Teams (in‑flight):
+
 ```
 Deploying <Package> to Ring <N>. Current success: <xx%>. Failures under investigation: <n>.
 Rollback triggers: &gt;10% failure in 15 min.
 ```
 
 Post‑deploy summary:
+
 ```
 Outcome: <Success%>, Failures: <n> (top causes), Mean duration: <t>
 Remediation: <Actions>
@@ -674,7 +693,8 @@ Next wave: <Date/Scope> or Completed
 ```
 
 <InfoBox title="Gate criteria">
-  Do not advance rings without documented success metrics, known failure modes, and an intact rollback path.
+  Do not advance rings without documented success metrics, known failure modes, and an intact
+  rollback path.
 </InfoBox>
 
 ---
@@ -750,7 +770,8 @@ Next wave: <Date/Scope> or Completed
   - Resolution: increase timeout; split work; throttle
 
 <InfoBox title="Tip">
-  Group failures by code and root cause. Fix by class, then retry a sampled subset before retriggering fleet‑wide.
+  Group failures by code and root cause. Fix by class, then retry a sampled subset before
+  retriggering fleet‑wide.
 </InfoBox>
 
 ---
@@ -782,7 +803,8 @@ Next wave: <Date/Scope> or Completed
 - Build dashboard: failures by cause, time‑to‑recover, success rate per BU
 
 <InfoBox title="KPIs">
-  Success rate, median duration, failure rate by code, percentage requiring rollback, and MTTR for failed endpoints.
+  Success rate, median duration, failure rate by code, percentage requiring rollback, and MTTR for
+  failed endpoints.
 </InfoBox>
 
 ---
@@ -791,12 +813,12 @@ Next wave: <Date/Scope> or Completed
 
 ### Step‑by‑Step Rollback
 
-1) Halt current wave; freeze advancement criteria
-2) Identify impacted endpoints via action results and sensors
-3) Prepare rollback package (uninstall/restore/config revert)
-4) Target impacted cohort only; validate on 5–10 devices first
-5) Monitor rollback; confirm post‑checks pass
-6) Document incident; feed findings into package/strategy improvements
+1. Halt current wave; freeze advancement criteria
+2. Identify impacted endpoints via action results and sensors
+3. Prepare rollback package (uninstall/restore/config revert)
+4. Target impacted cohort only; validate on 5–10 devices first
+5. Monitor rollback; confirm post‑checks pass
+6. Document incident; feed findings into package/strategy improvements
 
 ### Recovery Scenarios
 
@@ -812,7 +834,8 @@ Next wave: <Date/Scope> or Completed
 - Preserve user data; only revert binaries/config
 
 <InfoBox title="Rollback readiness">
-  Maintain a tested uninstall/restore package for every high‑impact deployment. Keep static rollback cohorts fresh and validated.
+  Maintain a tested uninstall/restore package for every high‑impact deployment. Keep static rollback
+  cohorts fresh and validated.
 </InfoBox>
 
 ---
@@ -848,24 +871,24 @@ flowchart LR
 
 ### Exit Codes: Severity and Action
 
-| Code | Severity | Typical Cause | Recommended Action |
-|---|---|---|---|
-| 0 | Info | Success | Proceed to next phase |
-| 1603 | High | MSI fatal error | Review logs, clear pending reboot, retry pilot |
-| 1618 | Medium | Install already in progress | Serialize installs, retry later |
-| 3010 | Info | Reboot required | Schedule/perform reboot, validate |
-| 1001 | High | Network error | Verify connectivity, proxies, mirrors |
-| 1002 | Medium | No disk space | Cleanup task, pre-checks, smaller package |
-| 1005 | Medium | Timeout | Increase timeout, split work, throttle |
+| Code | Severity | Typical Cause               | Recommended Action                             |
+| ---- | -------- | --------------------------- | ---------------------------------------------- |
+| 0    | Info     | Success                     | Proceed to next phase                          |
+| 1603 | High     | MSI fatal error             | Review logs, clear pending reboot, retry pilot |
+| 1618 | Medium   | Install already in progress | Serialize installs, retry later                |
+| 3010 | Info     | Reboot required             | Schedule/perform reboot, validate              |
+| 1001 | High     | Network error               | Verify connectivity, proxies, mirrors          |
+| 1002 | Medium   | No disk space               | Cleanup task, pre-checks, smaller package      |
+| 1005 | Medium   | Timeout                     | Increase timeout, split work, throttle         |
 
 ### Ring Gate Criteria (example)
 
-| Ring | Scope | Gate | Owner |
-|---|---|---|---|
-| 0 | IT/Lab (1–2%) | &gt;95% success, no P1/P2 | Engineering |
-| 1 | Canary per region (5%) | KPIs stable, failure causes understood | Regional Ops |
-| 2 | Low-risk BUs (20–30%) | Support tickets within baseline | Ops Lead |
-| 3 | Remaining endpoints | Completion &gt; 98%, no critical issues | Program Owner |
+| Ring | Scope                  | Gate                                    | Owner         |
+| ---- | ---------------------- | --------------------------------------- | ------------- |
+| 0    | IT/Lab (1–2%)          | &gt;95% success, no P1/P2               | Engineering   |
+| 1    | Canary per region (5%) | KPIs stable, failure causes understood  | Regional Ops  |
+| 2    | Low-risk BUs (20–30%)  | Support tickets within baseline         | Ops Lead      |
+| 3    | Remaining endpoints    | Completion &gt; 98%, no critical issues | Program Owner |
 
 ---
 
@@ -873,19 +896,19 @@ flowchart LR
 
 ### Labs
 
-1) PKG‑101 Package Parameters
+1. PKG‑101 Package Parameters
    - Configure and deploy Chrome to Ring 0; validate version and default settings
 
-2) DEP‑201 Phased Rollout
+2. DEP‑201 Phased Rollout
    - Design ring criteria and success gates; deploy Zoom update through Ring 2
 
-3) MON‑301 Monitoring and KPIs
+3. MON‑301 Monitoring and KPIs
    - Create a dashboard showing completion %, duration percentiles, failure codes by site
 
-4) EXIT‑202 Exit Codes
+4. EXIT‑202 Exit Codes
    - Triages failures grouped by 1603/1618/3010; document fixes; re‑run pilot
 
-5) RLB‑401 Rollback Drill
+5. RLB‑401 Rollback Drill
    - Simulate regression; execute rollback package; validate recovery and document lessons
 
 ### Practice
@@ -921,7 +944,8 @@ flowchart LR
 </PracticeButton>
 
 <InfoBox title="Operator checklist">
-  Parameters validated; pilot results archived; ring gates met; rollback ready; KPIs tracked; communications sent.
+  Parameters validated; pilot results archived; ring gates met; rollback ready; KPIs tracked;
+  communications sent.
 </InfoBox>
 
 ---
@@ -933,6 +957,7 @@ flowchart LR
 **Understanding Package Infrastructure:**
 
 Tanium packages aren't just simple installers - they're sophisticated deployment frameworks that handle:
+
 - **Multi-Platform Support**: Windows, Linux, macOS, Solaris, AIX
 - **Dynamic Content**: Parameterized scripts with runtime substitution
 - **Conditional Logic**: Platform-specific execution paths
@@ -942,6 +967,7 @@ Tanium packages aren't just simple installers - they're sophisticated deployment
 ### Advanced Package Components
 
 **1. Command Line Scripts**
+
 ```powershell
 # Windows PowerShell Package Example
 param(
@@ -999,6 +1025,7 @@ try {
 ```
 
 **2. Linux/Bash Package Structure**
+
 ```bash
 #!/bin/bash
 # Advanced Linux package with error handling and logging
@@ -1222,51 +1249,51 @@ Deployment Workflow:
 
   Action Chain:
     1. Stop Application Services:
-        Package: "Service Controller"
-        Parameters:
-          Services: ["AppService", "WebService", "DBService"]
-          Action: "Stop"
-          Timeout: 300
+      Package: "Service Controller"
+      Parameters:
+        Services: ["AppService", "WebService", "DBService"]
+        Action: "Stop"
+        Timeout: 300
 
     2. Backup Current Installation:
-        Package: "File Backup"
-        Parameters:
-          Source: "C:\\Program Files\\Application"
-          Destination: "\\\\backup\\server\\%COMPUTERNAME%"
-          Compression: true
-        DependsOn: [1]
+      Package: "File Backup"
+      Parameters:
+        Source: "C:\\Program Files\\Application"
+        Destination: "\\\\backup\\server\\%COMPUTERNAME%"
+        Compression: true
+      DependsOn: [1]
 
     3. Deploy New Version:
-        Package: "Application Installer"
-        Parameters:
-          Version: "5.2.1"
-          InstallPath: "C:\\Program Files\\Application"
-          ConfigFile: "\\\\config\\server\\app.config"
-        DependsOn: [1, 2]
+      Package: "Application Installer"
+      Parameters:
+        Version: "5.2.1"
+        InstallPath: "C:\\Program Files\\Application"
+        ConfigFile: "\\\\config\\server\\app.config"
+      DependsOn: [1, 2]
 
     4. Database Migration:
-        Package: "Database Updater"
-        Parameters:
-          ConnectionString: "Server=db.company.com;Database=AppDB"
-          MigrationScript: "v5.2.1_migration.sql"
-          Rollback: true
-        DependsOn: [3]
+      Package: "Database Updater"
+      Parameters:
+        ConnectionString: "Server=db.company.com;Database=AppDB"
+        MigrationScript: "v5.2.1_migration.sql"
+        Rollback: true
+      DependsOn: [3]
 
     5. Start Services:
-        Package: "Service Controller"
-        Parameters:
-          Services: ["DBService", "AppService", "WebService"]
-          Action: "Start"
-          StartupType: "Automatic"
-        DependsOn: [4]
+      Package: "Service Controller"
+      Parameters:
+        Services: ["DBService", "AppService", "WebService"]
+        Action: "Start"
+        StartupType: "Automatic"
+      DependsOn: [4]
 
     6. Validation:
-        Package: "Health Check"
-        Parameters:
-          Endpoints: ["https://app.company.com/health"]
-          ExpectedResponse: 200
-          Timeout: 60
-        DependsOn: [5]
+      Package: "Health Check"
+      Parameters:
+        Endpoints: ["https://app.company.com/health"]
+        ExpectedResponse: 200
+        Timeout: 60
+      DependsOn: [5]
 ```
 
 ---
@@ -1401,21 +1428,21 @@ class DeploymentPerformanceAnalyzer:
 
 ### Enterprise Exit Code Matrix
 
-| Exit Code | Category | Severity | Auto-Retry | Escalation | Resolution Playbook |
-|-----------|----------|----------|------------|------------|-------------------|
-| 0 | Success | Info | No | None | Log success, proceed |
-| 1-125 | Application | Variable | Yes (2x) | After 3 fails | Check app logs |
-| 126 | Permission | High | No | Immediate | Fix permissions |
-| 127 | Not Found | High | No | Immediate | Validate package |
-| 128-254 | Signal | Critical | No | Immediate | System investigation |
-| 1001 | Network | Medium | Yes (5x) | After 30m | Check connectivity |
-| 1002 | Storage | Medium | No | After 15m | Free space |
-| 1003 | Dependency | High | Yes (1x) | Immediate | Install prereqs |
-| 1005 | Timeout | Low | Yes (3x) | After 1h | Extend timeout |
-| 1603 | MSI Fatal | Critical | No | Immediate | MSI logs review |
-| 1618 | Install Busy | Low | Yes (10x) | After 2h | Queue management |
-| 3010 | Reboot Req | Info | No | Scheduled | Plan reboot |
-| 4000+ | Custom | Variable | Depends | Depends | Check documentation |
+| Exit Code | Category     | Severity | Auto-Retry | Escalation    | Resolution Playbook  |
+| --------- | ------------ | -------- | ---------- | ------------- | -------------------- |
+| 0         | Success      | Info     | No         | None          | Log success, proceed |
+| 1-125     | Application  | Variable | Yes (2x)   | After 3 fails | Check app logs       |
+| 126       | Permission   | High     | No         | Immediate     | Fix permissions      |
+| 127       | Not Found    | High     | No         | Immediate     | Validate package     |
+| 128-254   | Signal       | Critical | No         | Immediate     | System investigation |
+| 1001      | Network      | Medium   | Yes (5x)   | After 30m     | Check connectivity   |
+| 1002      | Storage      | Medium   | No         | After 15m     | Free space           |
+| 1003      | Dependency   | High     | Yes (1x)   | Immediate     | Install prereqs      |
+| 1005      | Timeout      | Low      | Yes (3x)   | After 1h      | Extend timeout       |
+| 1603      | MSI Fatal    | Critical | No         | Immediate     | MSI logs review      |
+| 1618      | Install Busy | Low      | Yes (10x)  | After 2h      | Queue management     |
+| 3010      | Reboot Req   | Info     | No         | Scheduled     | Plan reboot          |
+| 4000+     | Custom       | Variable | Depends    | Depends       | Check documentation  |
 
 ---
 
@@ -1426,12 +1453,14 @@ class DeploymentPerformanceAnalyzer:
 **Situation**: Critical zero-day vulnerability (CVE-2025-XXXX) affecting all Windows systems
 
 **Requirements**:
+
 - Deploy patch to 50,000 endpoints globally
 - Complete within 48-hour deadline
 - Minimize business disruption
 - Maintain 99.5% success rate
 
 **Solution Architecture**:
+
 ```yaml
 Emergency Response Plan:
   Phase 1 - Assessment (Hour 0-4):
@@ -1473,12 +1502,14 @@ Emergency Response Plan:
 **Situation**: Migrate 10,000 endpoints from legacy app v3.x to modern app v5.x
 
 **Challenges**:
+
 - Complex dependencies
 - Data migration required
 - User training needed
 - No downtime allowed
 
 **Implementation Strategy**:
+
 ```powershell
 # Phased migration with validation
 $MigrationPhases = @{
@@ -1522,63 +1553,65 @@ $MigrationPhases = @{
 **Situation**: Audit finding - 30% of systems non-compliant with security baseline
 
 **Requirements**:
+
 - Identify non-compliant systems
 - Remediate configuration drift
 - Document evidence for auditors
 - Prevent future drift
 
 **Remediation Workflow**:
+
 ```javascript
 // Compliance orchestration engine
 class ComplianceRemediation {
-    constructor(baseline, targetSystems) {
-        this.baseline = baseline;
-        this.systems = targetSystems;
-        this.results = [];
-    }
+  constructor(baseline, targetSystems) {
+    this.baseline = baseline;
+    this.systems = targetSystems;
+    this.results = [];
+  }
 
-    async assessCompliance() {
-        const assessments = this.systems.map(async (system) => {
-            const currentState = await this.getSystemState(system);
-            const violations = this.compareToBaseline(currentState);
+  async assessCompliance() {
+    const assessments = this.systems.map(async (system) => {
+      const currentState = await this.getSystemState(system);
+      const violations = this.compareToBaseline(currentState);
 
-            return {
-                system: system,
-                compliant: violations.length === 0,
-                violations: violations,
-                riskScore: this.calculateRiskScore(violations)
-            };
-        });
+      return {
+        system: system,
+        compliant: violations.length === 0,
+        violations: violations,
+        riskScore: this.calculateRiskScore(violations),
+      };
+    });
 
-        return Promise.all(assessments);
-    }
+    return Promise.all(assessments);
+  }
 
-    async remediateViolations(assessment) {
-        const remediationPlan = this.createRemediationPlan(assessment.violations);
+  async remediateViolations(assessment) {
+    const remediationPlan = this.createRemediationPlan(assessment.violations);
 
-        for (const action of remediationPlan) {
-            try {
-                await this.deployRemediationPackage(action);
-                this.logSuccess(assessment.system, action);
-            } catch (error) {
-                this.logFailure(assessment.system, action, error);
-                if (action.critical) {
-                    throw new Error(`Critical remediation failed: ${error}`);
-                }
-            }
+    for (const action of remediationPlan) {
+      try {
+        await this.deployRemediationPackage(action);
+        this.logSuccess(assessment.system, action);
+      } catch (error) {
+        this.logFailure(assessment.system, action, error);
+        if (action.critical) {
+          throw new Error(`Critical remediation failed: ${error}`);
         }
+      }
     }
+  }
 
-    generateComplianceReport() {
-        return {
-            timestamp: new Date().toISOString(),
-            totalSystems: this.systems.length,
-            compliantSystems: this.results.filter(r => r.compliant).length,
-            remediatedSystems: this.results.filter(r => r.remediated).length,
-            failedRemediations: this.results.filter(r => r.failed).length,
-            evidencePackage: this.createAuditEvidence()
-        };
-    }
+  generateComplianceReport() {
+    return {
+      timestamp: new Date().toISOString(),
+      totalSystems: this.systems.length,
+      compliantSystems: this.results.filter((r) => r.compliant).length,
+      remediatedSystems: this.results.filter((r) => r.remediated).length,
+      failedRemediations: this.results.filter((r) => r.failed).length,
+      evidencePackage: this.createAuditEvidence(),
+    };
+  }
 }
 ```
 
@@ -1589,6 +1622,7 @@ class ComplianceRemediation {
 ### Package Security Framework
 
 **1. Code Signing and Verification**
+
 ```powershell
 # Verify package signature before deployment
 function Verify-PackageSignature {
@@ -1615,6 +1649,7 @@ function Verify-PackageSignature {
 ```
 
 **2. Secure Parameter Handling**
+
 ```python
 # Secure parameter encryption for sensitive data
 import base64
@@ -1650,6 +1685,7 @@ class SecureParameterHandler:
 ```
 
 **3. Audit Trail and Compliance Logging**
+
 ```sql
 -- Comprehensive action audit schema
 CREATE TABLE action_audit_log (
@@ -1695,6 +1731,7 @@ CREATE TABLE action_audit_log (
 **Objective**: Build a production-ready package with full error handling
 
 **Tasks**:
+
 1. Create multi-platform package (Windows/Linux)
 2. Implement parameter validation
 3. Add comprehensive logging
@@ -1702,6 +1739,7 @@ CREATE TABLE action_audit_log (
 5. Test in simulated environment
 
 **Validation Criteria**:
+
 - Package works on 3 OS versions
 - Handles all error conditions gracefully
 - Produces actionable logs
@@ -1713,12 +1751,14 @@ CREATE TABLE action_audit_log (
 **Objective**: Execute large-scale deployment with ring strategy
 
 **Environment Setup**:
+
 - 1000 virtual endpoints
 - 5 geographic regions
 - Variable network conditions
 - Simulated business hours
 
 **Success Metrics**:
+
 - 99% deployment success
 - &lt;2% concurrent load
 - No business disruption
@@ -1729,6 +1769,7 @@ CREATE TABLE action_audit_log (
 **Scenario**: Ransomware detection requiring immediate action
 
 **Response Tasks**:
+
 1. Deploy isolation package
 2. Collect forensic data
 3. Deploy remediation tools
@@ -1744,6 +1785,7 @@ CREATE TABLE action_audit_log (
 ### Large-Scale Deployment Optimization
 
 **Bandwidth Management**:
+
 ```yaml
 Optimization Strategies:
   Content Distribution:
@@ -1766,13 +1808,13 @@ Optimization Strategies:
 
 **Resource Optimization Matrix**:
 
-| Deployment Size | Concurrent Targets | Bandwidth Limit | Timeout | Retry Policy |
-|----------------|-------------------|-----------------|---------|--------------|
-| &lt;100 | 100% | Unlimited | 30 min | 2x immediate |
-| 100-1000 | 50 | 50 Mbps total | 45 min | 3x with backoff |
-| 1000-5000 | 100 | 100 Mbps total | 60 min | 3x with jitter |
-| 5000-10000 | 200 | 200 Mbps total | 90 min | 2x after analysis |
-| &gt;10000 | 500 | 500 Mbps total | 120 min | 1x after approval |
+| Deployment Size | Concurrent Targets | Bandwidth Limit | Timeout | Retry Policy      |
+| --------------- | ------------------ | --------------- | ------- | ----------------- |
+| &lt;100         | 100%               | Unlimited       | 30 min  | 2x immediate      |
+| 100-1000        | 50                 | 50 Mbps total   | 45 min  | 3x with backoff   |
+| 1000-5000       | 100                | 100 Mbps total  | 60 min  | 3x with jitter    |
+| 5000-10000      | 200                | 200 Mbps total  | 90 min  | 2x after analysis |
+| &gt;10000       | 500                | 500 Mbps total  | 120 min | 1x after approval |
 
 ---
 
@@ -1781,6 +1823,7 @@ Optimization Strategies:
 ### Critical Success Factors
 
 **Package Deployment Excellence**:
+
 - Always validate packages in isolated environments
 - Use progressive rings for risk mitigation
 - Monitor resource impact continuously
@@ -1788,6 +1831,7 @@ Optimization Strategies:
 - Document everything for compliance
 
 **Action Orchestration Mastery**:
+
 - Design with failure scenarios in mind
 - Implement comprehensive error handling
 - Use dependency management effectively
@@ -1795,6 +1839,7 @@ Optimization Strategies:
 - Automate recovery procedures
 
 **Enterprise Readiness Checklist**:
+
 - [ ] Package signed and verified
 - [ ] Parameters encrypted for sensitive data
 - [ ] Audit logging configured
@@ -1809,6 +1854,7 @@ Optimization Strategies:
 ### Exam Preparation Focus Areas
 
 **High-Value Topics (40% of Domain 3 questions)**:
+
 - Exit code interpretation and troubleshooting
 - Ring-based deployment strategies
 - Package parameter configuration
@@ -1816,6 +1862,7 @@ Optimization Strategies:
 - Rollback procedures and recovery
 
 **Medium-Value Topics (35% of Domain 3 questions)**:
+
 - Scheduled actions and automation
 - Dependency management
 - Performance optimization
@@ -1823,6 +1870,7 @@ Optimization Strategies:
 - Compliance requirements
 
 **Specialized Topics (25% of Domain 3 questions)**:
+
 - Advanced scripting in packages
 - Cross-platform deployment
 - Large-scale orchestration
@@ -1830,8 +1878,8 @@ Optimization Strategies:
 - Custom exit code implementation
 
 <InfoBox title="TCO Exam Success Tip">
-  Focus on understanding the "why" behind each deployment decision. The exam tests your
-  ability to choose the right strategy for different scenarios, not just memorization of procedures.
-  Practice with the scenario-based questions that require analyzing trade-offs between speed,
-  safety, and business impact.
+  Focus on understanding the "why" behind each deployment decision. The exam tests your ability to
+  choose the right strategy for different scenarios, not just memorization of procedures. Practice
+  with the scenario-based questions that require analyzing trade-offs between speed, safety, and
+  business impact.
 </InfoBox>

@@ -10,96 +10,94 @@
  * - Background sync for transactions (future)
  */
 
-const CACHE_NAME = 'budget-app-v5-prod';
-const RUNTIME_CACHE = 'budget-app-runtime-v5-prod';
+const CACHE_NAME = "budget-app-v5-prod";
+const RUNTIME_CACHE = "budget-app-runtime-v5-prod";
 
 // App shell files to cache on install
 const APP_SHELL = [
-  '/budget-app',
-  '/budget-app/transactions',
-  '/budget-app/budgets',
-  '/budget-app/categories',
-  '/budget-app/investments',
-  '/budget-app/reports',
-  '/budget-app/import',
-  '/budget-app/offline',  // Offline fallback page
+  "/budget-app",
+  "/budget-app/transactions",
+  "/budget-app/budgets",
+  "/budget-app/categories",
+  "/budget-app/investments",
+  "/budget-app/reports",
+  "/budget-app/import",
+  "/budget-app/offline", // Offline fallback page
 ];
 
 // Static assets to cache
-const STATIC_ASSETS = [
-  '/manifest.json',
-  '/icons/budget-app-192.png',
-  '/icons/budget-app-512.png',
-];
+const STATIC_ASSETS = ["/manifest.json", "/icons/budget-app-192.png", "/icons/budget-app-512.png"];
 
 // Install event - cache app shell and static assets
-self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing...');
-  
+self.addEventListener("install", (event) => {
+  console.log("[Service Worker] Installing...");
+
   event.waitUntil(
-    caches.open(CACHE_NAME)
+    caches
+      .open(CACHE_NAME)
       .then((cache) => {
-        console.log('[Service Worker] Caching app shell and static assets');
+        console.log("[Service Worker] Caching app shell and static assets");
         return cache.addAll([...APP_SHELL, ...STATIC_ASSETS]);
       })
       .then(() => {
-        console.log('[Service Worker] Installed successfully');
+        console.log("[Service Worker] Installed successfully");
         return self.skipWaiting(); // Activate immediately
       })
       .catch((error) => {
-        console.error('[Service Worker] Install failed:', error);
+        console.error("[Service Worker] Install failed:", error);
       })
   );
 });
 
 // Activate event - clean up old caches
-self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activating...');
-  
+self.addEventListener("activate", (event) => {
+  console.log("[Service Worker] Activating...");
+
   event.waitUntil(
-    caches.keys()
+    caches
+      .keys()
       .then((cacheNames) => {
         return Promise.all(
           cacheNames.map((cacheName) => {
             if (cacheName !== CACHE_NAME && cacheName !== RUNTIME_CACHE) {
-              console.log('[Service Worker] Deleting old cache:', cacheName);
+              console.log("[Service Worker] Deleting old cache:", cacheName);
               return caches.delete(cacheName);
             }
           })
         );
       })
       .then(() => {
-        console.log('[Service Worker] Activated successfully');
+        console.log("[Service Worker] Activated successfully");
         return self.clients.claim(); // Take control immediately
       })
   );
 });
 
 // Fetch event - serve from cache, fall back to network
-self.addEventListener('fetch', (event) => {
+self.addEventListener("fetch", (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
   // Skip non-GET requests
-  if (request.method !== 'GET') {
+  if (request.method !== "GET") {
     return;
   }
 
   // Skip chrome extensions and non-http(s) requests
-  if (!url.protocol.startsWith('http')) {
+  if (!url.protocol.startsWith("http")) {
     return;
   }
 
   // 🔥 DEVELOPMENT MODE: Completely bypass SW for localhost
   // This prevents FetchEvent errors with Next.js hot reload
-  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
+  if (url.hostname === "localhost" || url.hostname === "127.0.0.1") {
     // Don't call event.respondWith() - let browser handle it natively
     return;
   }
 
   // 🔥 Skip Vercel Live completely - these are dev tools that shouldn't be cached
   // Let the browser handle these natively to avoid CSP issues
-  if (url.hostname.includes('vercel.live') || url.hostname.includes('pusher.com')) {
+  if (url.hostname.includes("vercel.live") || url.hostname.includes("pusher.com")) {
     return;
   }
 
@@ -118,21 +116,21 @@ self.addEventListener('fetch', (event) => {
  */
 function shouldCacheFirst(url) {
   // 🔥 DEVELOPMENT MODE: Skip caching for localhost to allow hot reload
-  if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
-    console.log('[Service Worker] DEV MODE: Bypassing cache for:', url.pathname);
+  if (url.hostname === "localhost" || url.hostname === "127.0.0.1") {
+    console.log("[Service Worker] DEV MODE: Bypassing cache for:", url.pathname);
     return false;
   }
 
   // External CDNs - use network-first (don't intercept with SW)
   // This avoids CSP issues where the browser's CSP is applied before SW fetch
   const trustedCDNs = [
-    'cdnjs.cloudflare.com',
-    'cdn.jsdelivr.net',
-    'fonts.googleapis.com',
-    'fonts.gstatic.com',
+    "cdnjs.cloudflare.com",
+    "cdn.jsdelivr.net",
+    "fonts.googleapis.com",
+    "fonts.gstatic.com",
   ];
-  if (trustedCDNs.some(cdn => url.hostname.includes(cdn))) {
-    console.log('[Service Worker] CDN request, using network-first:', url.hostname);
+  if (trustedCDNs.some((cdn) => url.hostname.includes(cdn))) {
+    console.log("[Service Worker] CDN request, using network-first:", url.hostname);
     return false;
   }
 
@@ -141,16 +139,18 @@ function shouldCacheFirst(url) {
   // - Static assets (icons, images)
   // - Scripts and styles
   // - Locale files (i18n JSON)
-  return url.pathname.startsWith('/budget-app') ||
-         url.pathname.startsWith('/icons/') ||
-         url.pathname.startsWith('/_next/static/') ||
-         url.pathname.includes('/chunks/src_i18n_messages_') || // Locale chunks
-         url.pathname.endsWith('.js') ||
-         url.pathname.endsWith('.css') ||
-         url.pathname.endsWith('.json') || // Include all JSON files
-         url.pathname.endsWith('.png') ||
-         url.pathname.endsWith('.jpg') ||
-         url.pathname.endsWith('.svg');
+  return (
+    url.pathname.startsWith("/budget-app") ||
+    url.pathname.startsWith("/icons/") ||
+    url.pathname.startsWith("/_next/static/") ||
+    url.pathname.includes("/chunks/src_i18n_messages_") || // Locale chunks
+    url.pathname.endsWith(".js") ||
+    url.pathname.endsWith(".css") ||
+    url.pathname.endsWith(".json") || // Include all JSON files
+    url.pathname.endsWith(".png") ||
+    url.pathname.endsWith(".jpg") ||
+    url.pathname.endsWith(".svg")
+  );
 }
 
 /**
@@ -162,7 +162,7 @@ function shouldCacheFirst(url) {
 async function cacheFirstStrategy(request) {
   try {
     const url = new URL(request.url);
-    const isStaticAsset = url.pathname.endsWith('.js') || url.pathname.endsWith('.css');
+    const isStaticAsset = url.pathname.endsWith(".js") || url.pathname.endsWith(".css");
 
     // Try cache first
     const cachedResponse = await caches.match(request);
@@ -171,15 +171,17 @@ async function cacheFirstStrategy(request) {
       // For JS/CSS, use stale-while-revalidate: return cache but update in background
       if (isStaticAsset) {
         // Clone request for background fetch
-        const fetchPromise = fetch(request).then(async (networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            const cache = await caches.open(RUNTIME_CACHE);
-            await cache.put(request, networkResponse.clone());
-          }
-          return networkResponse;
-        }).catch((err) => {
-          console.log('[Service Worker] Background revalidation failed:', err);
-        });
+        const fetchPromise = fetch(request)
+          .then(async (networkResponse) => {
+            if (networkResponse && networkResponse.status === 200) {
+              const cache = await caches.open(RUNTIME_CACHE);
+              await cache.put(request, networkResponse.clone());
+            }
+            return networkResponse;
+          })
+          .catch((err) => {
+            console.log("[Service Worker] Background revalidation failed:", err);
+          });
 
         // Don't await - let it update in background
         // This ensures next page load gets fresh assets
@@ -199,11 +201,11 @@ async function cacheFirstStrategy(request) {
 
     return networkResponse;
   } catch (error) {
-    console.error('[Service Worker] Fetch failed:', error);
+    console.error("[Service Worker] Fetch failed:", error);
 
     // Return offline fallback for navigation requests
-    if (request.mode === 'navigate') {
-      const offlinePage = await caches.match('/budget-app/offline');
+    if (request.mode === "navigate") {
+      const offlinePage = await caches.match("/budget-app/offline");
       if (offlinePage) {
         return offlinePage;
       }
@@ -223,41 +225,41 @@ async function networkFirstStrategy(request) {
   try {
     // Try network first
     const networkResponse = await fetch(request);
-    
+
     // Cache successful responses
     if (networkResponse && networkResponse.status === 200) {
       const cache = await caches.open(RUNTIME_CACHE);
       cache.put(request, networkResponse.clone());
     }
-    
+
     return networkResponse;
   } catch (error) {
-    console.error('[Service Worker] Network failed, trying cache:', error);
-    
+    console.error("[Service Worker] Network failed, trying cache:", error);
+
     // Fall back to cache
     const cachedResponse = await caches.match(request);
     if (cachedResponse) {
-      console.log('[Service Worker] Serving from cache:', request.url);
+      console.log("[Service Worker] Serving from cache:", request.url);
       return cachedResponse;
     }
-    
+
     // Return offline fallback for navigation requests
-    if (request.mode === 'navigate') {
-      const offlinePage = await caches.match('/budget-app/offline');
+    if (request.mode === "navigate") {
+      const offlinePage = await caches.match("/budget-app/offline");
       if (offlinePage) {
         return offlinePage;
       }
     }
-    
+
     throw error;
   }
 }
 
 // Background sync for queued transactions (future enhancement)
-self.addEventListener('sync', (event) => {
-  console.log('[Service Worker] Background sync:', event.tag);
-  
-  if (event.tag === 'sync-transactions') {
+self.addEventListener("sync", (event) => {
+  console.log("[Service Worker] Background sync:", event.tag);
+
+  if (event.tag === "sync-transactions") {
     event.waitUntil(syncTransactions());
   }
 });
@@ -269,7 +271,7 @@ self.addEventListener('sync', (event) => {
 async function syncTransactions() {
   // TODO: Implement background sync for transactions
   // This would sync any transactions created while offline
-  console.log('[Service Worker] Syncing transactions...');
+  console.log("[Service Worker] Syncing transactions...");
 }
 
 // ==========================================
@@ -279,8 +281,8 @@ async function syncTransactions() {
 /**
  * IndexedDB helper for storing notifications received in SW
  */
-const NOTIFICATION_DB_NAME = 'BudgetAppNotifications';
-const NOTIFICATION_STORE = 'pushNotifications';
+const NOTIFICATION_DB_NAME = "BudgetAppNotifications";
+const NOTIFICATION_STORE = "pushNotifications";
 const NOTIFICATION_DB_VERSION = 1;
 
 /**
@@ -297,9 +299,9 @@ function openNotificationDB() {
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
       if (!db.objectStoreNames.contains(NOTIFICATION_STORE)) {
-        const store = db.createObjectStore(NOTIFICATION_STORE, { keyPath: 'id' });
-        store.createIndex('status', 'status', { unique: false });
-        store.createIndex('createdAt', 'createdAt', { unique: false });
+        const store = db.createObjectStore(NOTIFICATION_STORE, { keyPath: "id" });
+        store.createIndex("status", "status", { unique: false });
+        store.createIndex("createdAt", "createdAt", { unique: false });
       }
     };
   });
@@ -312,21 +314,21 @@ function openNotificationDB() {
 async function storeNotificationInDB(notification) {
   try {
     const db = await openNotificationDB();
-    const tx = db.transaction(NOTIFICATION_STORE, 'readwrite');
+    const tx = db.transaction(NOTIFICATION_STORE, "readwrite");
     const store = tx.objectStore(NOTIFICATION_STORE);
 
     const record = {
       id: `push_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-      type: notification.type || 'bill_reminder',
+      type: notification.type || "bill_reminder",
       title: notification.title,
       body: notification.body,
-      status: 'unread',
-      priority: notification.priority || 'medium',
+      status: "unread",
+      priority: notification.priority || "medium",
       sourceType: notification.sourceType,
       sourceId: notification.sourceId,
-      actionUrl: notification.actionUrl || '/budget-app/subscriptions',
+      actionUrl: notification.actionUrl || "/budget-app/subscriptions",
       createdAt: new Date(),
-      receivedVia: 'push',
+      receivedVia: "push",
     };
 
     store.add(record);
@@ -342,7 +344,7 @@ async function storeNotificationInDB(notification) {
       };
     });
   } catch (error) {
-    console.error('[Service Worker] Failed to store notification:', error);
+    console.error("[Service Worker] Failed to store notification:", error);
   }
 }
 
@@ -351,17 +353,17 @@ async function storeNotificationInDB(notification) {
  */
 async function notifyClientsToRefresh() {
   const allClients = await clients.matchAll({ includeUncontrolled: true });
-  allClients.forEach(client => {
+  allClients.forEach((client) => {
     client.postMessage({
-      type: 'NOTIFICATION_RECEIVED',
+      type: "NOTIFICATION_RECEIVED",
       timestamp: Date.now(),
     });
   });
 }
 
 // Push notification handler
-self.addEventListener('push', (event) => {
-  console.log('[Service Worker] Push received:', event);
+self.addEventListener("push", (event) => {
+  console.log("[Service Worker] Push received:", event);
 
   let data = {};
 
@@ -370,41 +372,41 @@ self.addEventListener('push', (event) => {
   } catch (e) {
     // If not JSON, try as text
     data = {
-      title: 'Budget App',
-      body: event.data ? event.data.text() : 'You have a new notification',
+      title: "Budget App",
+      body: event.data ? event.data.text() : "You have a new notification",
     };
   }
 
-  const title = data.title || 'Budget App';
+  const title = data.title || "Budget App";
   const options = {
-    body: data.body || 'You have a new notification',
-    icon: '/icons/budget-app-192.png',
-    badge: '/icons/budget-app-192.png',
+    body: data.body || "You have a new notification",
+    icon: "/icons/budget-app-192.png",
+    badge: "/icons/budget-app-192.png",
     vibrate: [200, 100, 200],
     tag: data.tag || `budget-notification-${Date.now()}`,
     requireInteraction: data.requireInteraction || false,
     data: {
-      url: data.actionUrl || '/budget-app/subscriptions',
-      type: data.type || 'bill_reminder',
+      url: data.actionUrl || "/budget-app/subscriptions",
+      type: data.type || "bill_reminder",
       sourceType: data.sourceType,
       sourceId: data.sourceId,
       notificationId: data.notificationId,
     },
     actions: [
       {
-        action: 'view',
-        title: 'View',
+        action: "view",
+        title: "View",
       },
       {
-        action: 'dismiss',
-        title: 'Dismiss',
+        action: "dismiss",
+        title: "Dismiss",
       },
     ],
   };
 
   // Add amount if present (for bill reminders)
   if (data.amount) {
-    options.body = `${options.body}\nAmount: ${data.currency || '$'}${data.amount}`;
+    options.body = `${options.body}\nAmount: ${data.currency || "$"}${data.amount}`;
   }
 
   event.waitUntil(
@@ -417,8 +419,8 @@ self.addEventListener('push', (event) => {
 });
 
 // Notification click handler with action support
-self.addEventListener('notificationclick', (event) => {
-  console.log('[Service Worker] Notification clicked:', event.action);
+self.addEventListener("notificationclick", (event) => {
+  console.log("[Service Worker] Notification clicked:", event.action);
 
   const notification = event.notification;
   const data = notification.data || {};
@@ -426,7 +428,7 @@ self.addEventListener('notificationclick', (event) => {
   notification.close();
 
   // Handle different actions
-  if (event.action === 'dismiss') {
+  if (event.action === "dismiss") {
     // Just close the notification, mark as dismissed in DB if we have an ID
     if (data.notificationId) {
       event.waitUntil(markNotificationAsDismissed(data.notificationId));
@@ -435,26 +437,25 @@ self.addEventListener('notificationclick', (event) => {
   }
 
   // Default action or 'view' action - open the app
-  const urlToOpen = data.url || '/budget-app';
+  const urlToOpen = data.url || "/budget-app";
 
   event.waitUntil(
-    clients.matchAll({ type: 'window', includeUncontrolled: true })
-      .then((windowClients) => {
-        // Check if there's already a window/tab open
-        for (const client of windowClients) {
-          if (client.url.includes('/budget-app') && 'focus' in client) {
-            // Navigate existing window to the target URL
-            client.postMessage({
-              type: 'NAVIGATE_TO',
-              url: urlToOpen,
-            });
-            return client.focus();
-          }
+    clients.matchAll({ type: "window", includeUncontrolled: true }).then((windowClients) => {
+      // Check if there's already a window/tab open
+      for (const client of windowClients) {
+        if (client.url.includes("/budget-app") && "focus" in client) {
+          // Navigate existing window to the target URL
+          client.postMessage({
+            type: "NAVIGATE_TO",
+            url: urlToOpen,
+          });
+          return client.focus();
         }
+      }
 
-        // No existing window, open a new one
-        return clients.openWindow(urlToOpen);
-      })
+      // No existing window, open a new one
+      return clients.openWindow(urlToOpen);
+    })
   );
 });
 
@@ -465,7 +466,7 @@ self.addEventListener('notificationclick', (event) => {
 async function markNotificationAsDismissed(notificationId) {
   try {
     const db = await openNotificationDB();
-    const tx = db.transaction(NOTIFICATION_STORE, 'readwrite');
+    const tx = db.transaction(NOTIFICATION_STORE, "readwrite");
     const store = tx.objectStore(NOTIFICATION_STORE);
 
     const record = await new Promise((resolve, reject) => {
@@ -475,7 +476,7 @@ async function markNotificationAsDismissed(notificationId) {
     });
 
     if (record) {
-      record.status = 'dismissed';
+      record.status = "dismissed";
       store.put(record);
     }
 
@@ -490,13 +491,13 @@ async function markNotificationAsDismissed(notificationId) {
       };
     });
   } catch (error) {
-    console.error('[Service Worker] Failed to mark notification as dismissed:', error);
+    console.error("[Service Worker] Failed to mark notification as dismissed:", error);
   }
 }
 
 // Notification close handler (when user dismisses without clicking)
-self.addEventListener('notificationclose', (event) => {
-  console.log('[Service Worker] Notification closed:', event);
+self.addEventListener("notificationclose", (event) => {
+  console.log("[Service Worker] Notification closed:", event);
 
   const data = event.notification.data || {};
 
@@ -513,7 +514,7 @@ self.addEventListener('notificationclose', (event) => {
 async function markNotificationAsRead(notificationId) {
   try {
     const db = await openNotificationDB();
-    const tx = db.transaction(NOTIFICATION_STORE, 'readwrite');
+    const tx = db.transaction(NOTIFICATION_STORE, "readwrite");
     const store = tx.objectStore(NOTIFICATION_STORE);
 
     const record = await new Promise((resolve, reject) => {
@@ -522,8 +523,8 @@ async function markNotificationAsRead(notificationId) {
       request.onerror = () => reject(request.error);
     });
 
-    if (record && record.status === 'unread') {
-      record.status = 'read';
+    if (record && record.status === "unread") {
+      record.status = "read";
       record.readAt = new Date();
       store.put(record);
     }
@@ -539,32 +540,37 @@ async function markNotificationAsRead(notificationId) {
       };
     });
   } catch (error) {
-    console.error('[Service Worker] Failed to mark notification as read:', error);
+    console.error("[Service Worker] Failed to mark notification as read:", error);
   }
 }
 
 // Message handler for manual cache control
-self.addEventListener('message', (event) => {
-  if (event.data?.type === 'SKIP_WAITING') {
-    console.log('[Service Worker] Skip waiting requested');
+self.addEventListener("message", (event) => {
+  if (event.data?.type === "SKIP_WAITING") {
+    console.log("[Service Worker] Skip waiting requested");
     self.skipWaiting();
   }
 
-  if (event.data?.type === 'CLEAR_CACHES') {
-    console.log('[Service Worker] Clear caches requested');
-    caches.keys().then((names) => {
-      return Promise.all(names.map((name) => {
-        console.log('[Service Worker] Deleting cache:', name);
-        return caches.delete(name);
-      }));
-    }).then(() => {
-      console.log('[Service Worker] All caches cleared');
-      // Notify the client that caches are cleared
-      if (event.source) {
-        event.source.postMessage({ type: 'CACHES_CLEARED' });
-      }
-    });
+  if (event.data?.type === "CLEAR_CACHES") {
+    console.log("[Service Worker] Clear caches requested");
+    caches
+      .keys()
+      .then((names) => {
+        return Promise.all(
+          names.map((name) => {
+            console.log("[Service Worker] Deleting cache:", name);
+            return caches.delete(name);
+          })
+        );
+      })
+      .then(() => {
+        console.log("[Service Worker] All caches cleared");
+        // Notify the client that caches are cleared
+        if (event.source) {
+          event.source.postMessage({ type: "CACHES_CLEARED" });
+        }
+      });
   }
 });
 
-console.log('[Service Worker] Loaded successfully');
+console.log("[Service Worker] Loaded successfully");

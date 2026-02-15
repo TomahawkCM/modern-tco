@@ -13,15 +13,15 @@
  * - Studies show comparative feedback increases motivation by 20-30% (Burguillo, 2010)
  */
 
-import { supabase } from '@/lib/supabase/client';
-import { camelCaseKeys, snakeCaseKeys } from '@/lib/utils/caseConversion';
+import { supabase } from "@/lib/supabase/client";
+import { camelCaseKeys, snakeCaseKeys } from "@/lib/utils/caseConversion";
 
 // ==================== TYPES ====================
 
 export interface CohortBenchmark {
   id: string;
   cohortName: string;
-  cohortType: 'temporal' | 'goal_based' | 'performance_level' | 'global';
+  cohortType: "temporal" | "goal_based" | "performance_level" | "global";
   totalStudents: number;
   avgCompletionPercentage: number;
   avgOverallAccuracy: number;
@@ -70,7 +70,7 @@ export interface ComparativeReport {
     cohortAverage: number;
     difference: number;
     percentile?: number;
-    status: 'above_average' | 'average' | 'below_average';
+    status: "above_average" | "average" | "below_average";
     interpretation: string;
   }[];
   strengths: string[];
@@ -98,19 +98,19 @@ export interface DomainComparison {
  */
 export async function calculateGlobalCohortBenchmarks(): Promise<CohortBenchmark> {
   try {
-    const { data, error } = await supabase.rpc('calculate_global_cohort_benchmarks');
+    const { data, error } = await supabase.rpc("calculate_global_cohort_benchmarks");
 
     if (error) {
-      console.error('Error calculating global cohort benchmarks:', error);
+      console.error("Error calculating global cohort benchmarks:", error);
       throw error;
     }
 
     // Fetch the newly created global benchmark
     const { data: benchmark, error: fetchError } = await supabase
-      .from('cohort_benchmarks')
-      .select('*')
-      .eq('cohort_type', 'global')
-      .order('created_at', { ascending: false })
+      .from("cohort_benchmarks")
+      .select("*")
+      .eq("cohort_type", "global")
+      .order("created_at", { ascending: false })
       .limit(1)
       .single();
 
@@ -118,7 +118,7 @@ export async function calculateGlobalCohortBenchmarks(): Promise<CohortBenchmark
 
     return camelCaseKeys(benchmark);
   } catch (error) {
-    console.error('Error in calculateGlobalCohortBenchmarks:', error);
+    console.error("Error in calculateGlobalCohortBenchmarks:", error);
     throw error;
   }
 }
@@ -129,21 +129,21 @@ export async function calculateGlobalCohortBenchmarks(): Promise<CohortBenchmark
 export async function getGlobalCohortBenchmark(): Promise<CohortBenchmark | null> {
   try {
     const { data, error } = await supabase
-      .from('cohort_benchmarks')
-      .select('*')
-      .eq('cohort_type', 'global')
-      .order('created_at', { ascending: false })
+      .from("cohort_benchmarks")
+      .select("*")
+      .eq("cohort_type", "global")
+      .order("created_at", { ascending: false })
       .limit(1)
       .single();
 
     if (error) {
-      if (error.code === 'PGRST116') return null; // No rows found
+      if (error.code === "PGRST116") return null; // No rows found
       throw error;
     }
 
     return camelCaseKeys(data);
   } catch (error) {
-    console.error('Error fetching global cohort benchmark:', error);
+    console.error("Error fetching global cohort benchmark:", error);
     throw error;
   }
 }
@@ -153,7 +153,7 @@ export async function getGlobalCohortBenchmark(): Promise<CohortBenchmark | null
  */
 export async function assignStudentToCohorts(userId: string): Promise<void> {
   try {
-    const { error } = await supabase.rpc('assign_student_to_cohorts', {
+    const { error } = await supabase.rpc("assign_student_to_cohorts", {
       p_user_id: userId,
     });
 
@@ -162,7 +162,7 @@ export async function assignStudentToCohorts(userId: string): Promise<void> {
     // Calculate percentiles
     await calculateStudentPercentiles(userId);
   } catch (error) {
-    console.error('Error assigning student to cohorts:', error);
+    console.error("Error assigning student to cohorts:", error);
     throw error;
   }
 }
@@ -172,13 +172,13 @@ export async function assignStudentToCohorts(userId: string): Promise<void> {
  */
 export async function calculateStudentPercentiles(userId: string): Promise<void> {
   try {
-    const { error } = await supabase.rpc('calculate_student_percentiles', {
+    const { error } = await supabase.rpc("calculate_student_percentiles", {
       p_user_id: userId,
     });
 
     if (error) throw error;
   } catch (error) {
-    console.error('Error calculating student percentiles:', error);
+    console.error("Error calculating student percentiles:", error);
     throw error;
   }
 }
@@ -191,16 +191,16 @@ export async function getStudentCohortAssignments(
 ): Promise<StudentCohortAssignment[]> {
   try {
     const { data, error } = await supabase
-      .from('student_cohort_assignments')
-      .select('*')
-      .eq('user_id', userId)
-      .order('last_updated_at', { ascending: false });
+      .from("student_cohort_assignments")
+      .select("*")
+      .eq("user_id", userId)
+      .order("last_updated_at", { ascending: false });
 
     if (error) throw error;
 
     return (data || []).map((item) => camelCaseKeys(item));
   } catch (error) {
-    console.error('Error fetching student cohort assignments:', error);
+    console.error("Error fetching student cohort assignments:", error);
     throw error;
   }
 }
@@ -229,24 +229,24 @@ export async function generateComparativeReport(userId: string): Promise<Compara
     const assignment = assignments.find((a) => a.cohortBenchmarkId === cohort.id);
 
     if (!assignment) {
-      throw new Error('Student not assigned to cohort. Please try again.');
+      throw new Error("Student not assigned to cohort. Please try again.");
     }
 
     // Build comparison metrics
-    const comparisons: ComparativeReport['comparisons'] = [];
+    const comparisons: ComparativeReport["comparisons"] = [];
 
     // 1. Completion Percentage
     const completionDiff = assignment.personalCompletionPercentage - cohort.avgCompletionPercentage;
     comparisons.push({
-      metric: 'completion',
-      label: 'Course Completion',
+      metric: "completion",
+      label: "Course Completion",
       personalValue: assignment.personalCompletionPercentage,
       cohortAverage: cohort.avgCompletionPercentage,
       difference: completionDiff,
       percentile: assignment.completionPercentile,
       status: getComparisonStatus(completionDiff),
       interpretation: generateInterpretation(
-        'completion',
+        "completion",
         completionDiff,
         assignment.completionPercentile
       ),
@@ -255,28 +255,32 @@ export async function generateComparativeReport(userId: string): Promise<Compara
     // 2. Overall Accuracy
     const accuracyDiff = assignment.personalOverallAccuracy - cohort.avgOverallAccuracy;
     comparisons.push({
-      metric: 'accuracy',
-      label: 'Overall Accuracy',
+      metric: "accuracy",
+      label: "Overall Accuracy",
       personalValue: assignment.personalOverallAccuracy,
       cohortAverage: cohort.avgOverallAccuracy,
       difference: accuracyDiff,
       percentile: assignment.accuracyPercentile,
       status: getComparisonStatus(accuracyDiff),
-      interpretation: generateInterpretation('accuracy', accuracyDiff, assignment.accuracyPercentile),
+      interpretation: generateInterpretation(
+        "accuracy",
+        accuracyDiff,
+        assignment.accuracyPercentile
+      ),
     });
 
     // 3. Study Hours
     const studyHoursDiff = assignment.personalStudyHours - cohort.avgStudyHours;
     comparisons.push({
-      metric: 'study_hours',
-      label: 'Study Hours',
+      metric: "study_hours",
+      label: "Study Hours",
       personalValue: assignment.personalStudyHours,
       cohortAverage: cohort.avgStudyHours,
       difference: studyHoursDiff,
       percentile: assignment.studyHoursPercentile,
       status: getComparisonStatus(studyHoursDiff),
       interpretation: generateInterpretation(
-        'study_hours',
+        "study_hours",
         studyHoursDiff,
         assignment.studyHoursPercentile
       ),
@@ -285,13 +289,13 @@ export async function generateComparativeReport(userId: string): Promise<Compara
     // 4. Mock Exam Score
     const mockExamDiff = assignment.personalMockExamBest - cohort.avgMockExamScore;
     comparisons.push({
-      metric: 'mock_exam',
-      label: 'Best Mock Exam Score',
+      metric: "mock_exam",
+      label: "Best Mock Exam Score",
       personalValue: assignment.personalMockExamBest,
       cohortAverage: cohort.avgMockExamScore,
       difference: mockExamDiff,
       status: getComparisonStatus(mockExamDiff),
-      interpretation: generateInterpretation('mock_exam', mockExamDiff),
+      interpretation: generateInterpretation("mock_exam", mockExamDiff),
     });
 
     // Identify strengths and improvements
@@ -324,7 +328,7 @@ export async function generateComparativeReport(userId: string): Promise<Compara
       generatedAt: new Date().toISOString(),
     };
   } catch (error) {
-    console.error('Error generating comparative report:', error);
+    console.error("Error generating comparative report:", error);
     throw error;
   }
 }
@@ -342,10 +346,10 @@ export async function getDomainComparisons(userId: string): Promise<DomainCompar
 
     // Get student's domain scores
     const { data: studentData, error: studentError } = await supabase
-      .from('student_performance_snapshots')
-      .select('domain_scores')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false })
+      .from("student_performance_snapshots")
+      .select("domain_scores")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false })
       .limit(1)
       .single();
 
@@ -355,12 +359,12 @@ export async function getDomainComparisons(userId: string): Promise<DomainCompar
     const comparisons: DomainComparison[] = [];
 
     const domainLabels: Record<string, string> = {
-      asking_questions: 'Asking Questions',
-      refining_targeting: 'Refining & Targeting',
-      taking_action: 'Taking Action',
-      navigation: 'Navigation',
-      reporting: 'Reporting',
-      troubleshooting: 'Troubleshooting',
+      asking_questions: "Asking Questions",
+      refining_targeting: "Refining & Targeting",
+      taking_action: "Taking Action",
+      navigation: "Navigation",
+      reporting: "Reporting",
+      troubleshooting: "Troubleshooting",
     };
 
     for (const [domain, cohortAvg] of Object.entries(cohort.domainAverages)) {
@@ -381,29 +385,23 @@ export async function getDomainComparisons(userId: string): Promise<DomainCompar
 
     return comparisons;
   } catch (error) {
-    console.error('Error getting domain comparisons:', error);
+    console.error("Error getting domain comparisons:", error);
     throw error;
   }
 }
 
 // ==================== HELPER FUNCTIONS ====================
 
-function getComparisonStatus(
-  difference: number
-): 'above_average' | 'average' | 'below_average' {
-  if (difference > 5) return 'above_average';
-  if (difference < -5) return 'below_average';
-  return 'average';
+function getComparisonStatus(difference: number): "above_average" | "average" | "below_average" {
+  if (difference > 5) return "above_average";
+  if (difference < -5) return "below_average";
+  return "average";
 }
 
-function generateInterpretation(
-  metric: string,
-  difference: number,
-  percentile?: number
-): string {
+function generateInterpretation(metric: string, difference: number, percentile?: number): string {
   const absDiff = Math.abs(difference);
 
-  if (metric === 'completion') {
+  if (metric === "completion") {
     if (difference > 10) {
       return `You're ahead of the curve! ${absDiff.toFixed(1)}% more completed than average.`;
     } else if (difference < -10) {
@@ -411,7 +409,7 @@ function generateInterpretation(
     } else {
       return `You're progressing at a similar pace to most students.`;
     }
-  } else if (metric === 'accuracy') {
+  } else if (metric === "accuracy") {
     if (difference > 5) {
       return `Excellent! Your accuracy is ${absDiff.toFixed(1)}% higher than average.`;
     } else if (difference < -5) {
@@ -419,7 +417,7 @@ function generateInterpretation(
     } else {
       return `Your accuracy is on par with the cohort average.`;
     }
-  } else if (metric === 'study_hours') {
+  } else if (metric === "study_hours") {
     if (difference > 5) {
       return `You've invested ${absDiff.toFixed(1)} more hours than average - great dedication!`;
     } else if (difference < -3) {
@@ -427,7 +425,7 @@ function generateInterpretation(
     } else {
       return `Your study time is similar to most students.`;
     }
-  } else if (metric === 'mock_exam') {
+  } else if (metric === "mock_exam") {
     if (difference > 5) {
       return `Outstanding! You scored ${absDiff.toFixed(1)}% higher than average on mock exams.`;
     } else if (difference < -5) {
@@ -437,7 +435,7 @@ function generateInterpretation(
     }
   }
 
-  return `Your ${metric} is ${difference > 0 ? 'above' : 'below'} average.`;
+  return `Your ${metric} is ${difference > 0 ? "above" : "below"} average.`;
 }
 
 function generateMotivationalMessage(percentile: number): string {
@@ -463,29 +461,29 @@ export async function getCachedComparativeAnalytics(
 ): Promise<ComparativeReport | null> {
   try {
     const { data, error } = await supabase
-      .from('learning_analytics_cache')
-      .select('*')
-      .eq('user_id', userId)
-      .eq('cache_key', 'comparative_analytics')
-      .gt('expires_at', new Date().toISOString())
-      .order('created_at', { ascending: false })
+      .from("learning_analytics_cache")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("cache_key", "comparative_analytics")
+      .gt("expires_at", new Date().toISOString())
+      .order("created_at", { ascending: false })
       .limit(1)
       .single();
 
     if (error) {
-      if (error.code === 'PGRST116') return null; // No cache found
+      if (error.code === "PGRST116") return null; // No cache found
       throw error;
     }
 
     // Increment hit count
     await supabase
-      .from('learning_analytics_cache')
+      .from("learning_analytics_cache")
       .update({ hit_count: (data.hit_count || 0) + 1 })
-      .eq('id', data.id);
+      .eq("id", data.id);
 
     return camelCaseKeys(data.data);
   } catch (error) {
-    console.error('Error fetching cached comparative analytics:', error);
+    console.error("Error fetching cached comparative analytics:", error);
     return null;
   }
 }
@@ -501,21 +499,19 @@ export async function cacheComparativeAnalytics(
     const ttlSeconds = 3600; // 1 hour
     const expiresAt = new Date(Date.now() + ttlSeconds * 1000).toISOString();
 
-    await supabase
-      .from('learning_analytics_cache')
-      .upsert(
-        {
-          user_id: userId,
-          cache_key: 'comparative_analytics',
-          data: snakeCaseKeys(report),
-          ttl_seconds: ttlSeconds,
-          expires_at: expiresAt,
-          hit_count: 0,
-        },
-        { onConflict: 'user_id,cache_key' }
-      );
+    await supabase.from("learning_analytics_cache").upsert(
+      {
+        user_id: userId,
+        cache_key: "comparative_analytics",
+        data: snakeCaseKeys(report),
+        ttl_seconds: ttlSeconds,
+        expires_at: expiresAt,
+        hit_count: 0,
+      },
+      { onConflict: "user_id,cache_key" }
+    );
   } catch (error) {
-    console.error('Error caching comparative analytics:', error);
+    console.error("Error caching comparative analytics:", error);
     // Don't throw - caching is optional
   }
 }

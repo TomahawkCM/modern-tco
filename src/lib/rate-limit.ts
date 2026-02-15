@@ -62,18 +62,18 @@ setInterval(cleanupExpiredEntries, 5 * 60 * 1000);
  * Supports: x-forwarded-for, x-real-ip, and direct connection IP
  */
 function getClientIP(request: Request): string {
-  const forwarded = request.headers.get('x-forwarded-for');
+  const forwarded = request.headers.get("x-forwarded-for");
   if (forwarded) {
-    return forwarded.split(',')[0].trim();
+    return forwarded.split(",")[0].trim();
   }
 
-  const realIP = request.headers.get('x-real-ip');
+  const realIP = request.headers.get("x-real-ip");
   if (realIP) {
     return realIP;
   }
 
   // Fallback to a default (for development)
-  return 'unknown-ip';
+  return "unknown-ip";
 }
 
 /**
@@ -115,14 +115,14 @@ export async function rateLimit(
   const retryAfter = Math.ceil(resetMs / 1000); // Seconds until reset
 
   const headers: Record<string, string> = {
-    'X-RateLimit-Limit': config.uniqueTokenPerInterval.toString(),
-    'X-RateLimit-Remaining': remaining.toString(),
-    'X-RateLimit-Reset': reset.toString(),
+    "X-RateLimit-Limit": config.uniqueTokenPerInterval.toString(),
+    "X-RateLimit-Remaining": remaining.toString(),
+    "X-RateLimit-Reset": reset.toString(),
   };
 
   // Check if rate limit exceeded
   if (tokenData.count > config.uniqueTokenPerInterval) {
-    headers['Retry-After'] = retryAfter.toString();
+    headers["Retry-After"] = retryAfter.toString();
 
     return {
       success: false,
@@ -170,8 +170,8 @@ export async function rateLimitStrict(request: Request): Promise<RateLimitResult
 export function createRateLimitResponse(rateLimitResult: RateLimitResult): Response {
   return new Response(
     JSON.stringify({
-      error: 'Too Many Requests',
-      message: `Rate limit exceeded. Try again in ${rateLimitResult.headers['Retry-After']} seconds.`,
+      error: "Too Many Requests",
+      message: `Rate limit exceeded. Try again in ${rateLimitResult.headers["Retry-After"]} seconds.`,
       limit: rateLimitResult.limit,
       remaining: 0,
       reset: rateLimitResult.reset,
@@ -179,7 +179,7 @@ export function createRateLimitResponse(rateLimitResult: RateLimitResult): Respo
     {
       status: 429,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         ...rateLimitResult.headers,
       },
     }

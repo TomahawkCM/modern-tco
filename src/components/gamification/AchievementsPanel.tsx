@@ -62,10 +62,10 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
     const reviewStats = getReviewStats(moduleId);
     const allItems = getAllReviewItems();
     const filteredItems = moduleId
-      ? allItems.filter(item => item.moduleId === moduleId)
+      ? allItems.filter((item) => item.moduleId === moduleId)
       : allItems;
 
-    const itemsMastered = filteredItems.filter(item => item.retention > 90).length;
+    const itemsMastered = filteredItems.filter((item) => item.retention > 90).length;
     const userAchievements = getUserAchievements();
 
     // TODO: Implement streak tracking in Week 3
@@ -74,7 +74,7 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
     // Count reviews from points history
     const userPoints = getUserPoints();
     const totalReviews = userPoints.pointsHistory.filter(
-      entry => entry.reason === "review_correct"
+      (entry) => entry.reason === "review_correct"
     ).length;
 
     return {
@@ -124,7 +124,12 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
   };
 
   return (
-    <Card className={cn("border-accent/20 bg-gradient-to-br from-purple-500/5 to-blue-500/5", className)}>
+    <Card
+      className={cn(
+        "border-accent/20 bg-gradient-to-br from-purple-500/5 to-blue-500/5",
+        className
+      )}
+    >
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Award className="h-5 w-5 text-purple-500" />
@@ -137,20 +142,18 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
       <CardContent>
         <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "unlocked" | "locked")}>
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="unlocked">
-              Unlocked ({unlocked.length})
-            </TabsTrigger>
+            <TabsTrigger value="unlocked">Unlocked ({unlocked.length})</TabsTrigger>
             <TabsTrigger value="locked">
               Locked ({ACHIEVEMENTS.length - unlocked.length})
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="unlocked" className="space-y-3 mt-4">
+          <TabsContent value="unlocked" className="mt-4 space-y-3">
             {unlocked.length === 0 ? (
               <div className="py-8 text-center text-muted-foreground">
                 <Lock className="mx-auto mb-2 h-12 w-12 opacity-50" />
                 <p className="text-sm">No achievements unlocked yet</p>
-                <p className="text-xs mt-1">Complete reviews to earn achievements!</p>
+                <p className="mt-1 text-xs">Complete reviews to earn achievements!</p>
               </div>
             ) : (
               unlocked
@@ -159,7 +162,7 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
                   return b.unlockedAt.getTime() - a.unlockedAt.getTime();
                 })
                 .map((achievement) => {
-                  const achievementDef = ACHIEVEMENTS.find(a => a.id === achievement.id);
+                  const achievementDef = ACHIEVEMENTS.find((a) => a.id === achievement.id);
                   if (!achievementDef) return null;
 
                   return (
@@ -172,16 +175,14 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
                     >
                       <div className="flex items-start gap-3">
                         <span className="text-3xl">{achievementDef.icon}</span>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-1">
-                            <h4 className="font-semibold text-foreground">
-                              {achievementDef.name}
-                            </h4>
+                        <div className="min-w-0 flex-1">
+                          <div className="mb-1 flex items-center gap-2">
+                            <h4 className="font-semibold text-foreground">{achievementDef.name}</h4>
                             <Badge variant="outline" className="text-xs">
                               {achievementDef.rarity}
                             </Badge>
                           </div>
-                          <p className="text-sm text-muted-foreground mb-2">
+                          <p className="mb-2 text-sm text-muted-foreground">
                             {achievementDef.description}
                           </p>
                           <div className="flex items-center justify-between text-xs">
@@ -191,8 +192,7 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
                                 : ""}
                             </span>
                             <Badge variant="secondary" className="gap-1">
-                              <TrendingUp className="h-3 w-3" />
-                              +{achievementDef.points} pts
+                              <TrendingUp className="h-3 w-3" />+{achievementDef.points} pts
                             </Badge>
                           </div>
                         </div>
@@ -203,7 +203,7 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
             )}
           </TabsContent>
 
-          <TabsContent value="locked" className="space-y-3 mt-4">
+          <TabsContent value="locked" className="mt-4 space-y-3">
             {progress.length === 0 ? (
               <div className="py-8 text-center text-muted-foreground">
                 <Award className="mx-auto mb-2 h-12 w-12 opacity-50" />
@@ -211,7 +211,7 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
               </div>
             ) : (
               progress.map((prog) => {
-                const achievement = ACHIEVEMENTS.find(a => a.id === prog.achievementId);
+                const achievement = ACHIEVEMENTS.find((a) => a.id === prog.achievementId);
                 if (!achievement) return null;
 
                 return (
@@ -222,10 +222,10 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
                     <div className="flex items-start gap-3">
                       <div className="relative">
                         <span className="text-3xl opacity-50">{achievement.icon}</span>
-                        <Lock className="absolute -right-1 -bottom-1 h-4 w-4 text-muted-foreground" />
+                        <Lock className="absolute -bottom-1 -right-1 h-4 w-4 text-muted-foreground" />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
+                      <div className="min-w-0 flex-1">
+                        <div className="mb-1 flex items-center gap-2">
                           <h4 className="font-semibold text-muted-foreground">
                             {achievement.name}
                           </h4>
@@ -233,7 +233,7 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
                             {achievement.rarity}
                           </Badge>
                         </div>
-                        <p className="text-sm text-muted-foreground mb-2">
+                        <p className="mb-2 text-sm text-muted-foreground">
                           {achievement.description}
                         </p>
 
@@ -248,13 +248,12 @@ export function AchievementsPanel({ moduleId, className }: AchievementsPanelProp
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-between mt-2">
+                        <div className="mt-2 flex items-center justify-between">
                           <span className="text-xs text-muted-foreground">
                             {getCategoryIcon(achievement.category)} {achievement.category}
                           </span>
                           <Badge variant="secondary" className="gap-1 text-xs opacity-70">
-                            <TrendingUp className="h-3 w-3" />
-                            +{achievement.points} pts
+                            <TrendingUp className="h-3 w-3" />+{achievement.points} pts
                           </Badge>
                         </div>
                       </div>

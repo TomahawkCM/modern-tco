@@ -3,17 +3,17 @@
  * Form for editing an existing loan
  */
 
-'use client';
+"use client";
 
-import { useState, useEffect, use } from 'react';
-import { useRouter } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { LoanForm } from '@/components/budget/loans/LoanForm';
-import type { Loan } from '@/types/budget';
-import { getLoan } from '@/lib/loans/loan-db';
+import { useState, useEffect, use } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { LoanForm } from "@/components/budget/loans/LoanForm";
+import type { Loan } from "@/types/budget";
+import { getLoan } from "@/lib/loans/loan-db";
 
 export default function EditLoanPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -31,7 +31,7 @@ export default function EditLoanPage({ params }: { params: Promise<{ id: string 
       const loanData = await getLoan(id);
       setLoan(loanData || null);
     } catch (error) {
-      console.error('Error loading loan:', error);
+      console.error("Error loading loan:", error);
     } finally {
       setLoading(false);
     }
@@ -39,9 +39,9 @@ export default function EditLoanPage({ params }: { params: Promise<{ id: string 
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+      <div className="flex min-h-[400px] items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500 mx-auto mb-4"></div>
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-teal-500"></div>
           <p className="text-gray-500">Loading loan...</p>
         </div>
       </div>
@@ -50,9 +50,9 @@ export default function EditLoanPage({ params }: { params: Promise<{ id: string 
 
   if (!loan) {
     return (
-      <div className="text-center py-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">Loan not found</h2>
-        <p className="text-gray-500 mb-6">The loan you're trying to edit doesn't exist.</p>
+      <div className="py-12 text-center">
+        <h2 className="mb-2 text-2xl font-bold text-gray-900">Loan not found</h2>
+        <p className="mb-6 text-gray-500">The loan you're trying to edit doesn't exist.</p>
         <Link href="/budget-app/loans">
           <Button>Back to Loans</Button>
         </Link>
@@ -61,17 +61,17 @@ export default function EditLoanPage({ params }: { params: Promise<{ id: string 
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="mx-auto max-w-4xl space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
         <Link href={`/budget-app/loans/${loan.id}`}>
           <Button variant="outline" size="icon">
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="h-4 w-4" />
           </Button>
         </Link>
         <div>
           <h1 className="text-3xl font-bold text-white">Edit Loan</h1>
-          <p className="text-slate-400 mt-1">{loan.name}</p>
+          <p className="mt-1 text-slate-400">{loan.name}</p>
         </div>
       </div>
 

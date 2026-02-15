@@ -8,10 +8,7 @@ const supabase = createClient(
 
 async function getValidDomains() {
   // Get all unique domains currently in database
-  const { data, error } = await supabase
-    .from("questions")
-    .select("domain")
-    .limit(1000);
+  const { data, error } = await supabase.from("questions").select("domain").limit(1000);
 
   if (error) {
     console.error("Error:", error.message);
@@ -20,7 +17,7 @@ async function getValidDomains() {
 
   const uniqueDomains = [...new Set(data?.map((q: any) => q.domain))].sort();
   console.log("✅ Valid domains currently in database:");
-  uniqueDomains.forEach(d => console.log(`   - ${d}`));
+  uniqueDomains.forEach((d) => console.log(`   - ${d}`));
 }
 
 getValidDomains();

@@ -40,8 +40,8 @@ export function HighContrastToggle() {
       aria-pressed={enabled}
       aria-label={enabled ? "Disable high contrast" : "Enable high contrast"}
       className={cn(
-        "relative z-50 text-foreground hover:bg-white/10 transition-all duration-200",
-        "active:scale-95 pointer-events-auto",
+        "relative z-50 text-foreground transition-all duration-200 hover:bg-white/10",
+        "pointer-events-auto active:scale-95",
         enabled && "bg-primary/20 ring-2 ring-primary/50"
       )}
       onClick={() => setEnabled((v) => !v)}
@@ -50,4 +50,3 @@ export function HighContrastToggle() {
     </Button>
   );
 }
-

@@ -47,6 +47,7 @@ Row-Level Security (RLS) is a PostgreSQL feature that restricts which rows users
 ### Policy Types in Tanium TCO LMS
 
 #### 2.1 Public Read Policies
+
 **Tables**: `study_modules`, `study_sections`, `questions`
 **Pattern**: All authenticated users can read, no one can write
 
@@ -60,6 +61,7 @@ CREATE POLICY "modules_select_auth" ON public.study_modules
 ---
 
 #### 2.2 User-Owned Data Policies
+
 **Tables**: All user-specific tables (progress, bookmarks, notes, etc.)
 **Pattern**: Users can only access rows where `user_id = auth.uid()`
 
@@ -73,6 +75,7 @@ CREATE POLICY "progress_select_own" ON public.user_study_progress
 ---
 
 #### 2.3 Nested Ownership Policies
+
 **Tables**: `lab_steps` (linked to `lab_progress`)
 **Pattern**: Access controlled via foreign key relationship
 
@@ -91,6 +94,7 @@ CREATE POLICY "lab_steps_select_own" ON public.lab_steps
 ---
 
 #### 2.4 Open Insert Policies
+
 **Tables**: `analytics_events`
 **Pattern**: Anyone can insert, but read access is restricted
 
@@ -108,12 +112,13 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ### 3.1 Study Content Tables
 
 #### `study_modules`
+
 **RLS Enabled**: ✅
 **Migration**: `005_fixed_study_content_tables.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `modules_select_auth` | SELECT | authenticated | `true` (all users) |
+| Policy Name           | Operation | Role          | Condition          |
+| --------------------- | --------- | ------------- | ------------------ |
+| `modules_select_auth` | SELECT    | authenticated | `true` (all users) |
 
 **Purpose**: All authenticated users can view study modules (learning content)
 **Security Level**: Public read, no write access
@@ -122,12 +127,13 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `study_sections`
+
 **RLS Enabled**: ✅
 **Migration**: `005_fixed_study_content_tables.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `sections_select_auth` | SELECT | authenticated | `true` (all users) |
+| Policy Name            | Operation | Role          | Condition          |
+| ---------------------- | --------- | ------------- | ------------------ |
+| `sections_select_auth` | SELECT    | authenticated | `true` (all users) |
 
 **Purpose**: All authenticated users can view study sections within modules
 **Security Level**: Public read, no write access
@@ -136,15 +142,16 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `user_study_progress`
+
 **RLS Enabled**: ✅
 **Migration**: `005_fixed_study_content_tables.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `progress_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `progress_insert_own` | INSERT | authenticated | `auth.uid() = user_id` |
-| `progress_update_own` | UPDATE | authenticated | `auth.uid() = user_id` |
-| `progress_delete_own` | DELETE | authenticated | `auth.uid() = user_id` |
+| Policy Name           | Operation | Role          | Condition              |
+| --------------------- | --------- | ------------- | ---------------------- |
+| `progress_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `progress_insert_own` | INSERT    | authenticated | `auth.uid() = user_id` |
+| `progress_update_own` | UPDATE    | authenticated | `auth.uid() = user_id` |
+| `progress_delete_own` | DELETE    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: Users track their own progress through study materials
 **Security Level**: Strict user isolation, full CRUD for own data
@@ -153,15 +160,16 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `user_study_bookmarks`
+
 **RLS Enabled**: ✅
 **Migration**: `005_fixed_study_content_tables.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `bookmarks_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `bookmarks_insert_own` | INSERT | authenticated | `auth.uid() = user_id` |
-| `bookmarks_update_own` | UPDATE | authenticated | `auth.uid() = user_id` |
-| `bookmarks_delete_own` | DELETE | authenticated | `auth.uid() = user_id` |
+| Policy Name            | Operation | Role          | Condition              |
+| ---------------------- | --------- | ------------- | ---------------------- |
+| `bookmarks_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `bookmarks_insert_own` | INSERT    | authenticated | `auth.uid() = user_id` |
+| `bookmarks_update_own` | UPDATE    | authenticated | `auth.uid() = user_id` |
+| `bookmarks_delete_own` | DELETE    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: Users manage personal bookmarks in study content
 **Security Level**: Strict user isolation, full CRUD for own data
@@ -172,20 +180,22 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ### 3.2 Domain Progress & Assessment Tables
 
 #### `user_domain_competency`
+
 **RLS Enabled**: ✅
 **Migration**: `20250110000001_domain_progress.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `domain_competency_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `domain_competency_insert_own` | INSERT | authenticated | `auth.uid() = user_id` |
-| `domain_competency_update_own` | UPDATE | authenticated | `auth.uid() = user_id` |
+| Policy Name                    | Operation | Role          | Condition              |
+| ------------------------------ | --------- | ------------- | ---------------------- |
+| `domain_competency_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `domain_competency_insert_own` | INSERT    | authenticated | `auth.uid() = user_id` |
+| `domain_competency_update_own` | UPDATE    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: Track user competency across 5 TCO domains
 **Security Level**: User-specific competency metrics, no public access
 **Grant**: `GRANT ALL ON public.user_domain_competency TO authenticated`
 
 **Key Features**:
+
 - Generated columns: `accuracy_percentage`, `objective_progress`
 - Certification readiness tracking
 - Domain-specific scores and recommendations
@@ -193,20 +203,22 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `lab_sessions`
+
 **RLS Enabled**: ✅
 **Migration**: `20250110000001_domain_progress.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `lab_sessions_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `lab_sessions_insert_own` | INSERT | authenticated | `auth.uid() = user_id` |
-| `lab_sessions_update_own` | UPDATE | authenticated | `auth.uid() = user_id` |
+| Policy Name               | Operation | Role          | Condition              |
+| ------------------------- | --------- | ------------- | ---------------------- |
+| `lab_sessions_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `lab_sessions_insert_own` | INSERT    | authenticated | `auth.uid() = user_id` |
+| `lab_sessions_update_own` | UPDATE    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: Hands-on lab exercise sessions with console simulation
 **Security Level**: User-specific lab performance data
 **Grant**: `GRANT ALL ON public.lab_sessions TO authenticated`
 
 **Key Features**:
+
 - Checkpoint success rate tracking (generated column)
 - Console command execution metrics
 - Skills demonstration tracking
@@ -214,20 +226,22 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `exam_sessions_enhanced`
+
 **RLS Enabled**: ✅
 **Migration**: `20250110000001_domain_progress.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `exam_sessions_enhanced_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `exam_sessions_enhanced_insert_own` | INSERT | authenticated | `auth.uid() = user_id` |
-| `exam_sessions_enhanced_update_own` | UPDATE | authenticated | `auth.uid() = user_id` |
+| Policy Name                         | Operation | Role          | Condition              |
+| ----------------------------------- | --------- | ------------- | ---------------------- |
+| `exam_sessions_enhanced_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `exam_sessions_enhanced_insert_own` | INSERT    | authenticated | `auth.uid() = user_id` |
+| `exam_sessions_enhanced_update_own` | UPDATE    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: Enhanced exam sessions for 105-minute TAN-1000 certification format
 **Security Level**: Comprehensive exam tracking with strict user isolation
 **Grant**: `GRANT ALL ON public.exam_sessions_enhanced TO authenticated`
 
 **Official Exam Format**:
+
 - 200 questions, 105 minutes
 - Domain distribution: 22%, 23%, 15%, 23%, 17%
 - Passing score: 70%
@@ -236,19 +250,21 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `user_achievements`
+
 **RLS Enabled**: ✅
 **Migration**: `20250110000001_domain_progress.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `achievements_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `achievements_insert_own` | INSERT | authenticated | `auth.uid() = user_id` |
+| Policy Name               | Operation | Role          | Condition              |
+| ------------------------- | --------- | ------------- | ---------------------- |
+| `achievements_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `achievements_insert_own` | INSERT    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: Gamification system for user milestones
 **Security Level**: User-specific achievements, read-only after creation
 **Grant**: `GRANT ALL ON public.user_achievements TO authenticated`
 
 **Achievement Types**:
+
 - domain_mastery, lab_completion, streak_milestone, exam_score
 - Badge icons and display properties
 - Points system integration
@@ -258,19 +274,21 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ### 3.3 Analytics & Lab Progress Tables
 
 #### `analytics_events`
+
 **RLS Enabled**: ✅
 **Migration**: `20250920090000_add_analytics_and_lab_tables.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `analytics_events_insert_any` | INSERT | - | `true` (anyone) |
-| `analytics_events_read_own` | SELECT | authenticated | `user_id IS NULL OR user_id = auth.uid()` |
+| Policy Name                   | Operation | Role          | Condition                                 |
+| ----------------------------- | --------- | ------------- | ----------------------------------------- |
+| `analytics_events_insert_any` | INSERT    | -             | `true` (anyone)                           |
+| `analytics_events_read_own`   | SELECT    | authenticated | `user_id IS NULL OR user_id = auth.uid()` |
 
 **Purpose**: Client and server-side analytics event tracking
 **Security Level**: Open insert for analytics, privacy-protected reads
 **Special**: Allows anonymous events (`user_id IS NULL`)
 
 **Use Cases**:
+
 - PostHog event tracking
 - User behavior analytics
 - Anonymous usage metrics
@@ -278,19 +296,21 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `lab_progress`
+
 **RLS Enabled**: ✅
 **Migration**: `20250920090000_add_analytics_and_lab_tables.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `lab_progress_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `lab_progress_modify_own` | INSERT | authenticated | `auth.uid() = user_id` |
-| `lab_progress_update_own` | UPDATE | authenticated | `auth.uid() = user_id` |
+| Policy Name               | Operation | Role          | Condition              |
+| ------------------------- | --------- | ------------- | ---------------------- |
+| `lab_progress_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `lab_progress_modify_own` | INSERT    | authenticated | `auth.uid() = user_id` |
+| `lab_progress_update_own` | UPDATE    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: Lab progress tracking for labProgressService
 **Security Level**: User-specific lab progress data
 
 **Features**:
+
 - Step-by-step progress tracking
 - Validation attempts and hints usage
 - Completion time and score metrics
@@ -298,14 +318,15 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `lab_steps`
+
 **RLS Enabled**: ✅
 **Migration**: `20250920090000_add_analytics_and_lab_tables.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `lab_steps_select_own` | SELECT | authenticated | `EXISTS (SELECT 1 FROM lab_progress WHERE id = lab_progress_id AND user_id = auth.uid())` |
-| `lab_steps_insert_own` | INSERT | authenticated | Same as above |
-| `lab_steps_update_own` | UPDATE | authenticated | Same as above |
+| Policy Name            | Operation | Role          | Condition                                                                                 |
+| ---------------------- | --------- | ------------- | ----------------------------------------------------------------------------------------- |
+| `lab_steps_select_own` | SELECT    | authenticated | `EXISTS (SELECT 1 FROM lab_progress WHERE id = lab_progress_id AND user_id = auth.uid())` |
+| `lab_steps_insert_own` | INSERT    | authenticated | Same as above                                                                             |
+| `lab_steps_update_own` | UPDATE    | authenticated | Same as above                                                                             |
 
 **Purpose**: Individual step tracking within lab sessions
 **Security Level**: Nested ownership via `lab_progress` foreign key
@@ -314,13 +335,14 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `lab_achievements`
+
 **RLS Enabled**: ✅
 **Migration**: `20250920090000_add_analytics_and_lab_tables.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `lab_achievements_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `lab_achievements_insert_own` | INSERT | authenticated | `auth.uid() = user_id` |
+| Policy Name                   | Operation | Role          | Condition              |
+| ----------------------------- | --------- | ------------- | ---------------------- |
+| `lab_achievements_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `lab_achievements_insert_own` | INSERT    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: Lab-specific achievement tracking
 **Security Level**: User-specific lab achievement data
@@ -330,12 +352,13 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ### 3.4 Exam & Questions Tables
 
 #### `questions`
+
 **RLS Enabled**: ✅
 **Migration**: `20250920095000_add_exam_and_questions.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `questions_read` | SELECT | - | `true` (all users) |
+| Policy Name      | Operation | Role | Condition          |
+| ---------------- | --------- | ---- | ------------------ |
+| `questions_read` | SELECT    | -    | `true` (all users) |
 
 **Purpose**: Practice question bank for exams
 **Security Level**: Public read for all users, no write access
@@ -344,19 +367,21 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `exam_sessions`
+
 **RLS Enabled**: ✅
 **Migration**: `20250920095000_add_exam_and_questions.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `exam_sessions_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `exam_sessions_insert_own` | INSERT | authenticated | `auth.uid() = user_id` |
-| `exam_sessions_update_own` | UPDATE | authenticated | `auth.uid() = user_id` |
+| Policy Name                | Operation | Role          | Condition              |
+| -------------------------- | --------- | ------------- | ---------------------- |
+| `exam_sessions_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `exam_sessions_insert_own` | INSERT    | authenticated | `auth.uid() = user_id` |
+| `exam_sessions_update_own` | UPDATE    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: User exam session tracking
 **Security Level**: Strict user isolation for exam attempts
 
 **Features**:
+
 - Session status (active, completed, abandoned)
 - Score and question tracking
 - Last activity timestamp for session management
@@ -364,19 +389,21 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `user_progress`
+
 **RLS Enabled**: ✅
 **Migration**: `20250920095000_add_exam_and_questions.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `user_progress_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `user_progress_insert_own` | INSERT | authenticated | `auth.uid() = user_id` |
-| `user_progress_update_own` | UPDATE | authenticated | `auth.uid() = user_id` |
+| Policy Name                | Operation | Role          | Condition              |
+| -------------------------- | --------- | ------------- | ---------------------- |
+| `user_progress_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `user_progress_insert_own` | INSERT    | authenticated | `auth.uid() = user_id` |
+| `user_progress_update_own` | UPDATE    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: Question-level progress tracking per user
 **Security Level**: User-specific answer history
 
 **Features**:
+
 - Selected answer and correctness
 - Time spent per question
 - Metadata for additional tracking
@@ -384,19 +411,21 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `user_statistics`
+
 **RLS Enabled**: ✅
 **Migration**: `20250920095000_add_exam_and_questions.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `user_statistics_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `user_statistics_upsert_own` | INSERT | authenticated | `auth.uid() = user_id` |
-| `user_statistics_update_own` | UPDATE | authenticated | `auth.uid() = user_id` |
+| Policy Name                  | Operation | Role          | Condition              |
+| ---------------------------- | --------- | ------------- | ---------------------- |
+| `user_statistics_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `user_statistics_upsert_own` | INSERT    | authenticated | `auth.uid() = user_id` |
+| `user_statistics_update_own` | UPDATE    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: Aggregated user statistics per category/domain
 **Security Level**: User-specific performance metrics
 
 **Metrics**:
+
 - Total questions, correct answers
 - Accuracy rate, average time
 - Category-specific breakdown
@@ -404,19 +433,21 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `user_module_progress`
+
 **RLS Enabled**: ✅
 **Migration**: `20250920095000_add_exam_and_questions.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `user_module_progress_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `user_module_progress_upsert_own` | INSERT | authenticated | `auth.uid() = user_id` |
-| `user_module_progress_update_own` | UPDATE | authenticated | `auth.uid() = user_id` |
+| Policy Name                       | Operation | Role          | Condition              |
+| --------------------------------- | --------- | ------------- | ---------------------- |
+| `user_module_progress_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `user_module_progress_upsert_own` | INSERT    | authenticated | `auth.uid() = user_id` |
+| `user_module_progress_update_own` | UPDATE    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: Module-level progress tracking
 **Security Level**: User-specific module completion data
 
 **Features**:
+
 - Completed sections count
 - Module status tracking
 - Last updated timestamp
@@ -426,20 +457,22 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ### 3.5 Notes & Team Tables
 
 #### `notes`
+
 **RLS Enabled**: ✅
 **Migration**: `20250921120000_add_notes_table.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `notes_select_own` | SELECT | authenticated | `auth.uid() = user_id` |
-| `notes_insert_own` | INSERT | authenticated | `auth.uid() = user_id` |
-| `notes_update_own` | UPDATE | authenticated | `auth.uid() = user_id` |
-| `notes_delete_own` | DELETE | authenticated | `auth.uid() = user_id` |
+| Policy Name        | Operation | Role          | Condition              |
+| ------------------ | --------- | ------------- | ---------------------- |
+| `notes_select_own` | SELECT    | authenticated | `auth.uid() = user_id` |
+| `notes_insert_own` | INSERT    | authenticated | `auth.uid() = user_id` |
+| `notes_update_own` | UPDATE    | authenticated | `auth.uid() = user_id` |
+| `notes_delete_own` | DELETE    | authenticated | `auth.uid() = user_id` |
 
 **Purpose**: Personal study notes with spaced repetition
 **Security Level**: Full CRUD for own notes, strict isolation
 
 **Features**:
+
 - Text notes with tags
 - Spaced repetition state (SRS) in JSONB
 - User-specific note management
@@ -447,20 +480,22 @@ CREATE POLICY "analytics_events_insert_any" ON public.analytics_events
 ---
 
 #### `team_seats`
+
 **RLS Enabled**: ✅
 **Migration**: `20250922122000_add_team_seats.sql`
 
-| Policy Name | Operation | Role | Condition |
-|------------|-----------|------|-----------|
-| `team_seats_select_own` | SELECT | authenticated | `auth.uid() = owner_id` |
-| `team_seats_insert_own` | INSERT | authenticated | `auth.uid() = owner_id` |
-| `team_seats_update_own` | UPDATE | authenticated | `auth.uid() = owner_id` |
-| `team_seats_delete_own` | DELETE | authenticated | `auth.uid() = owner_id` |
+| Policy Name             | Operation | Role          | Condition               |
+| ----------------------- | --------- | ------------- | ----------------------- |
+| `team_seats_select_own` | SELECT    | authenticated | `auth.uid() = owner_id` |
+| `team_seats_insert_own` | INSERT    | authenticated | `auth.uid() = owner_id` |
+| `team_seats_update_own` | UPDATE    | authenticated | `auth.uid() = owner_id` |
+| `team_seats_delete_own` | DELETE    | authenticated | `auth.uid() = owner_id` |
 
 **Purpose**: Team plan seat management
 **Security Level**: Owners manage their own team invitations
 
 **Features**:
+
 - Seat status: invited, active, revoked
 - Email-based invitations
 - Owner-controlled team management
@@ -482,6 +517,7 @@ CREATE POLICY "table_operation_own" ON public.table_name
 ```
 
 **When to use**:
+
 - User-owned data (progress, notes, achievements)
 - Privacy-sensitive information
 - Personal preferences and settings
@@ -502,6 +538,7 @@ CREATE POLICY "table_select_auth" ON public.table_name
 ```
 
 **When to use**:
+
 - Shared content (study materials)
 - Question banks
 - Learning resources
@@ -528,6 +565,7 @@ CREATE POLICY "lab_steps_select_own" ON public.lab_steps
 ```
 
 **When to use**:
+
 - Child records that depend on parent ownership
 - Normalized data structures
 - Related entities with shared access control
@@ -550,6 +588,7 @@ CREATE POLICY "analytics_events_read_own" ON public.analytics_events
 ```
 
 **When to use**:
+
 - Analytics and tracking
 - Anonymous usage metrics
 - Event logging
@@ -568,6 +607,7 @@ GRANT ALL ON public.table_name TO service_role;
 ```
 
 **When to use**:
+
 - Server-side operations
 - Admin functions
 - Data migrations
@@ -628,7 +668,7 @@ WHERE lab_progress_id = 'lab-progress-uuid'; -- Should return 0 rows
 ### 5.2 Automated RLS Testing with Supabase Client
 
 ```javascript
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 
 // Test user isolation
 async function testUserIsolation() {
@@ -636,30 +676,30 @@ async function testUserIsolation() {
 
   // Sign in as user 1
   await supabase.auth.signInWithPassword({
-    email: 'user1@example.com',
-    password: 'password'
+    email: "user1@example.com",
+    password: "password",
   });
 
   // Insert user 1's progress
   const { data, error } = await supabase
-    .from('user_study_progress')
-    .insert({ user_id: user1Id, module_id: 'test', status: 'in_progress' });
+    .from("user_study_progress")
+    .insert({ user_id: user1Id, module_id: "test", status: "in_progress" });
 
-  console.assert(!error, 'User 1 should be able to insert own progress');
+  console.assert(!error, "User 1 should be able to insert own progress");
 
   // Sign in as user 2
   await supabase.auth.signInWithPassword({
-    email: 'user2@example.com',
-    password: 'password'
+    email: "user2@example.com",
+    password: "password",
   });
 
   // Attempt to read user 1's progress
   const { data: user2Data, error: user2Error } = await supabase
-    .from('user_study_progress')
+    .from("user_study_progress")
     .select()
-    .eq('user_id', user1Id);
+    .eq("user_id", user1Id);
 
-  console.assert(user2Data.length === 0, 'User 2 should NOT see user 1 data');
+  console.assert(user2Data.length === 0, "User 2 should NOT see user 1 data");
 }
 ```
 
@@ -711,6 +751,7 @@ ORDER BY tablename;
 **Security Engineer**: Review before production deployment
 
 - [ ] **RLS Enabled on All Tables**
+
   ```sql
   SELECT tablename FROM pg_tables
   WHERE schemaname = 'public' AND rowsecurity = false;
@@ -812,6 +853,7 @@ ORDER BY tablename;
    - Document policy logic
 
 2. **Implementation**
+
    ```sql
    -- Create migration file: YYYYMMDD_add_new_table_rls.sql
 
@@ -854,6 +896,7 @@ ORDER BY tablename;
    - Plan rollback strategy
 
 2. **Migration Strategy**
+
    ```sql
    -- Drop old policy
    DROP POLICY IF EXISTS "old_policy_name" ON public.table_name;
@@ -881,6 +924,7 @@ ORDER BY tablename;
 **Standard naming pattern**: `table_operation_scope`
 
 **Examples**:
+
 - `progress_select_own` - User selects own progress
 - `modules_select_auth` - Authenticated users select modules
 - `lab_steps_insert_own` - User inserts own lab steps
@@ -900,6 +944,7 @@ ORDER BY tablename;
 **Symptom**: User cannot access table despite proper authentication
 
 **Diagnosis**:
+
 ```sql
 -- Check if RLS is enabled
 SELECT tablename, rowsecurity
@@ -913,6 +958,7 @@ WHERE schemaname = 'public' AND tablename = 'your_table';
 ```
 
 **Solutions**:
+
 1. Verify RLS is enabled: `ALTER TABLE table_name ENABLE ROW LEVEL SECURITY;`
 2. Check grants: `GRANT SELECT ON table_name TO authenticated;`
 3. Verify user is authenticated: `SELECT auth.uid();`
@@ -924,6 +970,7 @@ WHERE schemaname = 'public' AND tablename = 'your_table';
 **Symptom**: User isolation policy not working
 
 **Diagnosis**:
+
 ```sql
 -- Check policy condition
 SELECT qual, with_check
@@ -935,6 +982,7 @@ SELECT auth.uid(), user_id FROM your_table LIMIT 5;
 ```
 
 **Solutions**:
+
 1. Verify policy uses `auth.uid() = user_id`
 2. Check if service role is being used (bypasses RLS)
 3. Ensure WITH CHECK clause for INSERT/UPDATE
@@ -946,6 +994,7 @@ SELECT auth.uid(), user_id FROM your_table LIMIT 5;
 **Symptom**: lab_steps policy fails to check parent ownership
 
 **Diagnosis**:
+
 ```sql
 -- Check if parent record exists and is owned by user
 SELECT p.id, p.user_id, auth.uid()
@@ -960,6 +1009,7 @@ SELECT EXISTS (
 ```
 
 **Solutions**:
+
 1. Verify foreign key relationship exists
 2. Check parent table has proper RLS policies
 3. Ensure EXISTS subquery uses correct join condition
@@ -971,6 +1021,7 @@ SELECT EXISTS (
 **Symptom**: Cannot insert anonymous events
 
 **Diagnosis**:
+
 ```sql
 -- Check insert policy
 SELECT with_check
@@ -983,6 +1034,7 @@ VALUES ('test', NULL);
 ```
 
 **Solutions**:
+
 1. Verify insert policy has `WITH CHECK (true)`
 2. Allow NULL user_id in table schema
 3. Check if column has NOT NULL constraint
@@ -996,6 +1048,7 @@ VALUES ('test', NULL);
 **Symptom**: Queries are slow when RLS is enabled
 
 **Diagnosis**:
+
 ```sql
 -- Check query plan
 EXPLAIN ANALYZE
@@ -1006,6 +1059,7 @@ WHERE user_id = auth.uid();
 ```
 
 **Solutions**:
+
 1. Add index on `user_id`: `CREATE INDEX idx_table_user_id ON table(user_id);`
 2. Use USING for SELECT, WITH CHECK for INSERT/UPDATE separately
 3. Avoid complex JOIN conditions in RLS policies
@@ -1017,6 +1071,7 @@ WHERE user_id = auth.uid();
 **Symptom**: Significant performance degradation with RLS
 
 **Optimization Strategies**:
+
 1. **Simplify Policy Conditions**
    - Use simple equality checks: `user_id = auth.uid()`
    - Avoid subqueries when possible
@@ -1085,6 +1140,7 @@ RESET request.jwt.claims.sub;
 ### RLS Policy Coverage
 
 **19 Tables Protected** with 62 Total Policies:
+
 - ✅ Study content (4 tables, 10 policies)
 - ✅ Domain progress (4 tables, 11 policies)
 - ✅ Analytics & labs (4 tables, 14 policies)
@@ -1110,23 +1166,27 @@ RESET request.jwt.claims.sub;
 ### Quick Reference
 
 **Enable RLS**:
+
 ```sql
 ALTER TABLE public.table_name ENABLE ROW LEVEL SECURITY;
 ```
 
 **User Isolation Policy**:
+
 ```sql
 CREATE POLICY "table_select_own" ON public.table_name
     FOR SELECT TO authenticated USING (auth.uid() = user_id);
 ```
 
 **Public Read Policy**:
+
 ```sql
 CREATE POLICY "table_select_auth" ON public.table_name
     FOR SELECT TO authenticated USING (true);
 ```
 
 **Grants**:
+
 ```sql
 GRANT ALL ON public.table_name TO authenticated;
 GRANT ALL ON public.table_name TO service_role;
@@ -1137,6 +1197,7 @@ GRANT ALL ON public.table_name TO service_role;
 ## 10. References
 
 **Migration Files**:
+
 - `001_initial_schema.sql` - Initial schema (no RLS)
 - `005_fixed_study_content_tables.sql` - Study content RLS policies
 - `20250110000001_domain_progress.sql` - Domain competency RLS policies
@@ -1146,11 +1207,13 @@ GRANT ALL ON public.table_name TO service_role;
 - `20250922122000_add_team_seats.sql` - Team seats RLS policies
 
 **Related Documentation**:
+
 - `docs/SUPABASE_SECURITY_IMPROVEMENTS_REPORT.md` - Security audit report
 - `docs/POSTGRESQL_SCHEMA_SETUP.md` - Database schema documentation
 - `docs/supabase/supabase-auth-patterns.md` - Authentication patterns
 
 **External Resources**:
+
 - [PostgreSQL RLS Documentation](https://www.postgresql.org/docs/current/ddl-rowsecurity.html)
 - [Supabase RLS Guide](https://supabase.com/docs/guides/auth/row-level-security)
 - [Supabase Auth Helpers](https://supabase.com/docs/guides/auth/auth-helpers)

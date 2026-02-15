@@ -41,7 +41,7 @@ export async function compileMDXContent(
  */
 export function ServerMDXContent({
   content,
-  components
+  components,
 }: {
   content: React.ReactElement;
   components?: Record<string, React.ComponentType>;

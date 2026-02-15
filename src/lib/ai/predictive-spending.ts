@@ -11,14 +11,14 @@
  * Privacy: Only sends aggregated statistics per category
  */
 
-import OpenAI from 'openai';
-import type { Transaction } from '@/types/budget';
+import OpenAI from "openai";
+import type { Transaction } from "@/types/budget";
 
 export interface SpendingPrediction {
   category: string;
   predictedAmount: number;
   confidence: number; // 0-1 scale
-  trend: 'increasing' | 'decreasing' | 'stable';
+  trend: "increasing" | "decreasing" | "stable";
   reasoning: string; // AI-generated explanation
   historicalAverage: number;
   confidenceInterval: {
@@ -55,7 +55,7 @@ function calculateMonthlySpending(
     // Group by category
     const monthCategories = new Map<string, number>();
     for (const tx of monthTransactions) {
-      const category = tx.category || 'Uncategorized';
+      const category = tx.category || "Uncategorized";
       const current = monthCategories.get(category) || 0;
       monthCategories.set(category, current + Math.abs(tx.amount));
     }
@@ -77,7 +77,7 @@ function calculateMonthlySpending(
  * Calculate trend and statistics
  */
 function calculateTrendStats(monthlyAmounts: number[]): {
-  trend: 'increasing' | 'decreasing' | 'stable';
+  trend: "increasing" | "decreasing" | "stable";
   average: number;
   stdDev: number;
   predicted: number;
@@ -87,7 +87,7 @@ function calculateTrendStats(monthlyAmounts: number[]): {
   const n = monthlyAmounts.length;
   if (n === 0) {
     return {
-      trend: 'stable',
+      trend: "stable",
       average: 0,
       stdDev: 0,
       predicted: 0,
@@ -100,8 +100,7 @@ function calculateTrendStats(monthlyAmounts: number[]): {
   const average = monthlyAmounts.reduce((sum, amt) => sum + amt, 0) / n;
 
   // Calculate standard deviation
-  const variance =
-    monthlyAmounts.reduce((sum, amt) => sum + Math.pow(amt - average, 2), 0) / n;
+  const variance = monthlyAmounts.reduce((sum, amt) => sum + Math.pow(amt - average, 2), 0) / n;
   const stdDev = Math.sqrt(variance);
 
   // Simple linear regression for trend
@@ -121,13 +120,13 @@ function calculateTrendStats(monthlyAmounts: number[]): {
 
   // Determine trend
   const trendThreshold = stdDev * 0.1; // 10% of std dev
-  let trend: 'increasing' | 'decreasing' | 'stable';
+  let trend: "increasing" | "decreasing" | "stable";
   if (slope > trendThreshold) {
-    trend = 'increasing';
+    trend = "increasing";
   } else if (slope < -trendThreshold) {
-    trend = 'decreasing';
+    trend = "decreasing";
   } else {
-    trend = 'stable';
+    trend = "stable";
   }
 
   // Confidence interval (95% = ±2 std dev)
@@ -159,7 +158,7 @@ async function generateReasoningWithAI(
     const prompt = `You are a financial analysis assistant. Explain the spending trend for this category.
 
 Category: ${category}
-Monthly history (last 6 months): ${monthlyHistory.map((m) => `$${m.toFixed(2)}`).join(', ')}
+Monthly history (last 6 months): ${monthlyHistory.map((m) => `$${m.toFixed(2)}`).join(", ")}
 Trend: ${stats.trend}
 Average: $${stats.average.toFixed(2)}
 Predicted next month: $${stats.predicted.toFixed(2)}
@@ -167,26 +166,26 @@ Predicted next month: $${stats.predicted.toFixed(2)}
 Provide a brief (1-2 sentence) explanation of this trend that helps the user understand their spending pattern in this category.`;
 
     const response = await client.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: "gpt-4o-mini",
       messages: [
         {
-          role: 'system',
+          role: "system",
           content:
-            'You are a helpful financial assistant. Provide brief, clear explanations for spending trends.'
+            "You are a helpful financial assistant. Provide brief, clear explanations for spending trends.",
         },
         {
-          role: 'user',
-          content: prompt
-        }
+          role: "user",
+          content: prompt,
+        },
       ],
       temperature: 0.3,
       max_tokens: 100,
     });
 
-    return response.choices[0]?.message?.content || 'Spending pattern analysis';
+    return response.choices[0]?.message?.content || "Spending pattern analysis";
   } catch (error) {
-    console.error('[PredictiveSpending] AI reasoning error:', error);
-    return `${stats.trend === 'stable' ? 'Stable' : stats.trend === 'increasing' ? 'Increasing' : 'Decreasing'} spending trend`;
+    console.error("[PredictiveSpending] AI reasoning error:", error);
+    return `${stats.trend === "stable" ? "Stable" : stats.trend === "increasing" ? "Increasing" : "Decreasing"} spending trend`;
   }
 }
 
@@ -221,13 +220,10 @@ export async function predictSpending(
     // Calculate confidence based on data consistency
     const coefficientOfVariation = stats.stdDev / stats.average;
     const baseConfidence = 0.7;
-    const confidence = Math.max(
-      0.4,
-      Math.min(0.95, baseConfidence - coefficientOfVariation * 0.1)
-    );
+    const confidence = Math.max(0.4, Math.min(0.95, baseConfidence - coefficientOfVariation * 0.1));
 
     // Generate reasoning
-    let reasoning = `${stats.trend === 'stable' ? 'Stable' : stats.trend === 'increasing' ? 'Increasing' : 'Decreasing'} spending trend`;
+    let reasoning = `${stats.trend === "stable" ? "Stable" : stats.trend === "increasing" ? "Increasing" : "Decreasing"} spending trend`;
 
     // Enrich with AI if available (limit to top 5 categories by average spending)
     if (apiKey && predictions.length < 5) {

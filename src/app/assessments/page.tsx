@@ -179,105 +179,101 @@ function AssessmentsPageContent() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-          {mode === "gating" && (
-            <AssessmentGating
-              userId={userId}
-              moduleId={moduleId}
-              onAssessmentStart={(config) => {
-                // Navigate to assessment session
-                const params = new URLSearchParams();
-                params.set("mode", "session");
-                if (config.userId) params.set("userId", config.userId);
-                if (config.moduleId) params.set("moduleId", config.moduleId);
-                if (config.assessmentId) params.set("assessmentId", config.assessmentId);
-                // Respect basePath when navigating from client components
-                const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-                window.location.href = `${base}/assessments?${params.toString()}`;
-              }}
-              onRequirementClick={(requirement) => {
-                // Navigate to specific content based on requirement
-                console.log("Requirement clicked:", requirement);
-                // Could navigate to specific module, practice area, etc.
-              }}
-            />
-          )}
+      {mode === "gating" && (
+        <AssessmentGating
+          userId={userId}
+          moduleId={moduleId}
+          onAssessmentStart={(config) => {
+            // Navigate to assessment session
+            const params = new URLSearchParams();
+            params.set("mode", "session");
+            if (config.userId) params.set("userId", config.userId);
+            if (config.moduleId) params.set("moduleId", config.moduleId);
+            if (config.assessmentId) params.set("assessmentId", config.assessmentId);
+            // Respect basePath when navigating from client components
+            const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+            window.location.href = `${base}/assessments?${params.toString()}`;
+          }}
+          onRequirementClick={(requirement) => {
+            // Navigate to specific content based on requirement
+            console.log("Requirement clicked:", requirement);
+            // Could navigate to specific module, practice area, etc.
+          }}
+        />
+      )}
 
-          {mode === "session" && assessmentId && (
-            <AssessmentSession
-              assessmentType="practice" // Could be derived from assessmentId
-              moduleId={moduleId}
-              domainFilter={undefined} // Could be derived from assessment config
-              onComplete={(result) => {
-                // Navigate to review mode
-                const params = new URLSearchParams({
-                  mode: "review",
-                  userId,
-                  moduleId: moduleId ?? "",
-                  sessionId: result.sessionId,
-                });
-                const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-                window.location.href = `${base}/assessments?${params.toString()}`;
-              }}
-              onExit={() => {
-                // Navigate back to gating
-                const params = new URLSearchParams({
-                  mode: "gating",
-                  userId,
-                  moduleId: moduleId ?? "",
-                });
-                const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-                window.location.href = `${base}/assessments?${params.toString()}`;
-              }}
-            />
-          )}
+      {mode === "session" && assessmentId && (
+        <AssessmentSession
+          assessmentType="practice" // Could be derived from assessmentId
+          moduleId={moduleId}
+          domainFilter={undefined} // Could be derived from assessment config
+          onComplete={(result) => {
+            // Navigate to review mode
+            const params = new URLSearchParams({
+              mode: "review",
+              userId,
+              moduleId: moduleId ?? "",
+              sessionId: result.sessionId,
+            });
+            const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+            window.location.href = `${base}/assessments?${params.toString()}`;
+          }}
+          onExit={() => {
+            // Navigate back to gating
+            const params = new URLSearchParams({
+              mode: "gating",
+              userId,
+              moduleId: moduleId ?? "",
+            });
+            const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+            window.location.href = `${base}/assessments?${params.toString()}`;
+          }}
+        />
+      )}
 
-          {mode === "review" && sessionId && (
-            <ReviewMode
-              result={null as any} // TODO: Load from session
-              session={null as any} // TODO: Load from sessionId
-              onRetakeAssessment={() => {
-                // Navigate back to assessment session
-                const params = new URLSearchParams();
-                params.set("mode", "session");
-                if (userId) params.set("userId", userId);
-                if (moduleId) params.set("moduleId", moduleId);
-                if (assessmentId) params.set("assessmentId", assessmentId);
-                const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-                window.location.href = `${base}/assessments?${params.toString()}`;
-              }}
-              onStartRemediation={(plan) => {
-                console.log("Starting remediation:", plan);
-                // Could navigate to specific study content
-              }}
-              onExitReview={() => {
-                // Navigate back to gating
-                const params = new URLSearchParams({
-                  mode: "gating",
-                  userId,
-                  moduleId: moduleId ?? "",
-                });
-                const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-                window.location.href = `${base}/assessments?${params.toString()}`;
-              }}
-            />
-          )}
+      {mode === "review" && sessionId && (
+        <ReviewMode
+          result={null as any} // TODO: Load from session
+          session={null as any} // TODO: Load from sessionId
+          onRetakeAssessment={() => {
+            // Navigate back to assessment session
+            const params = new URLSearchParams();
+            params.set("mode", "session");
+            if (userId) params.set("userId", userId);
+            if (moduleId) params.set("moduleId", moduleId);
+            if (assessmentId) params.set("assessmentId", assessmentId);
+            const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+            window.location.href = `${base}/assessments?${params.toString()}`;
+          }}
+          onStartRemediation={(plan) => {
+            console.log("Starting remediation:", plan);
+            // Could navigate to specific study content
+          }}
+          onExitReview={() => {
+            // Navigate back to gating
+            const params = new URLSearchParams({
+              mode: "gating",
+              userId,
+              moduleId: moduleId ?? "",
+            });
+            const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+            window.location.href = `${base}/assessments?${params.toString()}`;
+          }}
+        />
+      )}
 
-          {mode === "dashboard" && (
-            <AssessmentDashboard
-              userId={userId}
-              timeRange="30d"
-              onTimeRangeChange={(range) => {
-                // Update URL with new time range
-                const params = new URLSearchParams(window.location.search);
-                params.set("timeRange", range);
-                window.history.replaceState(
-                  {},
-                  "",
-                  `${window.location.pathname}?${params.toString()}`
-                );
-              }}
-            />
-          )}
+      {mode === "dashboard" && (
+        <AssessmentDashboard
+          userId={userId}
+          timeRange="30d"
+          onTimeRangeChange={(range) => {
+            // Update URL with new time range
+            const params = new URLSearchParams(window.location.search);
+            params.set("timeRange", range);
+            window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+          }}
+        />
+      )}
     </div>
   );
 }

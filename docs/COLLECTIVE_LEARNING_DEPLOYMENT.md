@@ -72,6 +72,7 @@ ORDER BY table_name;
 ```
 
 Expected output:
+
 ```
 table_name          | policy_count
 --------------------+-------------
@@ -170,6 +171,7 @@ VALUES ('TEST', 'Test Merchant', 'Test');
 After deployment, monitor:
 
 1. **Learning Effectiveness**
+
    ```sql
    -- Track confidence growth over time
    SELECT
@@ -183,6 +185,7 @@ After deployment, monitor:
    ```
 
 2. **Usage Statistics**
+
    ```sql
    -- Most commonly learned merchants
    SELECT
@@ -235,6 +238,7 @@ WHERE routine_schema = 'public'
 After deployment and initial data accumulation:
 
 1. **Analyze Tables**
+
    ```sql
    ANALYZE public.category_patterns;
    ANALYZE public.bank_formats;

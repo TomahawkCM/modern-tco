@@ -226,8 +226,8 @@ export function LearnExperimentalQuizGroup({
       <Alert className="border-dashed border-primary/40 bg-slate-950/40">
         <AlertTitle className="text-sm font-semibold">No questions available</AlertTitle>
         <AlertDescription className="text-sm text-muted-foreground">
-          We couldn&apos;t load quick-check questions for this unit right now. Review the key concepts and
-          return later.
+          We couldn&apos;t load quick-check questions for this unit right now. Review the key
+          concepts and return later.
         </AlertDescription>
       </Alert>
     );

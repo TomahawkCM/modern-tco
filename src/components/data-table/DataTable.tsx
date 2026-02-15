@@ -31,11 +31,15 @@ export function DataTable<T>({ columns, data }: { columns: ColumnDef<T, any>[]; 
               {hg.headers.map((header) => (
                 <th
                   key={header.id}
-                  className="px-3 py-2 text-left font-medium text-muted-foreground select-none"
+                  className="select-none px-3 py-2 text-left font-medium text-muted-foreground"
                   onClick={header.column.getToggleSortingHandler()}
                 >
                   {flexRender(header.column.columnDef.header, header.getContext())}
-                  {header.column.getIsSorted() === "asc" ? " ↑" : header.column.getIsSorted() === "desc" ? " ↓" : ""}
+                  {header.column.getIsSorted() === "asc"
+                    ? " ↑"
+                    : header.column.getIsSorted() === "desc"
+                      ? " ↓"
+                      : ""}
                 </th>
               ))}
             </tr>
@@ -56,4 +60,3 @@ export function DataTable<T>({ columns, data }: { columns: ColumnDef<T, any>[]; 
     </div>
   );
 }
-

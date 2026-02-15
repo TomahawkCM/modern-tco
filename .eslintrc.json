@@ -62,7 +62,6 @@
     ],
     "@typescript-eslint/no-import-type-side-effects": "error",
 
-    
     "prefer-const": "error",
     "no-var": "error",
     "object-shorthand": "error",
@@ -85,7 +84,6 @@
       }
     ],
 
-
     "@next/next/no-img-element": "off",
     "@next/next/no-html-link-for-pages": "warn",
     "@next/next/no-sync-scripts": "error",
@@ -96,11 +94,9 @@
     "@next/next/no-duplicate-head": "error",
     "@next/next/no-assign-module-variable": "warn",
 
-    
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "off",
 
-    
     "@typescript-eslint/no-require-imports": "off"
   },
   "overrides": [
@@ -108,7 +104,10 @@
       "files": ["src/**/*.{ts,tsx}"],
       "rules": {
         "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/ban-ts-comment": ["warn", { "ts-expect-error": "allow-with-description" }]
+        "@typescript-eslint/ban-ts-comment": [
+          "warn",
+          { "ts-expect-error": "allow-with-description" }
+        ]
       }
     },
     {

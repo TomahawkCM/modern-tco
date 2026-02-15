@@ -41,7 +41,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/03-l/action-safety-check"
-  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-01", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-01", action: "practice_start" })
+  }
 >
   Practice: Build an Action Safety Checklist
 </PracticeButton>
@@ -72,7 +74,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/03-l/package-anatomy"
-  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-02", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-02", action: "practice_start" })
+  }
 >
   Practice: Deconstruct a Package
 </PracticeButton>
@@ -103,7 +107,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/03-l/deployment-plan"
-  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-03", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-03", action: "practice_start" })
+  }
 >
   Practice: Draft a Deployment Blueprint
 </PracticeButton>
@@ -134,7 +140,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/03-l/verification-runbook"
-  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-04", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-04", action: "practice_start" })
+  }
 >
   Practice: Build a Verification Runbook
 </PracticeButton>
@@ -165,7 +173,9 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
 
 <PracticeButton
   href="/study/labs/03-l/action-retrospective"
-  onClick={() => emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-05", action: "practice_start" })}
+  onClick={() =>
+    emitLearnExp({ moduleId: "module-03L", unitId: "unit-03L-05", action: "practice_start" })
+  }
 >
   Practice: Draft an Action Retrospective
 </PracticeButton>
@@ -180,4 +190,3 @@ import { emitLearnExp } from "@/lib/telemetry/learnExperimental";
   quizIdPrefix="module-03L-summary"
   questions={getReadOnlyQuestions({ domain: "taking-action", limit: 7 })}
 />
-

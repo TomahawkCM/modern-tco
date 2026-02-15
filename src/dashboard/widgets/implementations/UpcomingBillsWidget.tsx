@@ -25,16 +25,14 @@ export function UpcomingBillsWidget({ config }: UpcomingBillsWidgetProps) {
   const format = useFormatter();
 
   // Fetch active/trial subscriptions
-  const subscriptions = useLiveQuery(async () => {
-    try {
-      return await db.subscriptions
-        .where("status")
-        .anyOf(["active", "trial"])
-        .toArray();
-    } catch {
-      return [];
-    }
-  }) || [];
+  const subscriptions =
+    useLiveQuery(async () => {
+      try {
+        return await db.subscriptions.where("status").anyOf(["active", "trial"]).toArray();
+      } catch {
+        return [];
+      }
+    }) || [];
 
   // Filter to next 14 days and sort by date
   const upcomingBills = useMemo(() => {
@@ -51,9 +49,7 @@ export function UpcomingBillsWidget({ config }: UpcomingBillsWidgetProps) {
         return nextBilling >= now && nextBilling <= twoWeeksOut;
       })
       .sort(
-        (a, b) =>
-          new Date(a.nextBillingDate).getTime() -
-          new Date(b.nextBillingDate).getTime()
+        (a, b) => new Date(a.nextBillingDate).getTime() - new Date(b.nextBillingDate).getTime()
       );
   }, [subscriptions]);
 
@@ -140,11 +136,7 @@ interface BillItemProps {
 
 function BillItem({ bill, dueLabel, daysUntil, format }: BillItemProps) {
   const urgencyClass =
-    daysUntil === 0
-      ? "text-red-400"
-      : daysUntil <= 3
-        ? "text-amber-400"
-        : "text-slate-400";
+    daysUntil === 0 ? "text-red-400" : daysUntil <= 3 ? "text-amber-400" : "text-slate-400";
 
   return (
     <div className="group flex items-center justify-between rounded-lg p-3 transition-colors hover:bg-white/5">

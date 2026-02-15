@@ -21,9 +21,9 @@
  * ```
  */
 
-import { useState, useEffect } from 'react';
-import { extractMerchantToken } from '@/lib/merchant-tokenizer';
-import { categorizeTransaction } from '@/lib/categorization/rules';
+import { useState, useEffect } from "react";
+import { extractMerchantToken } from "@/lib/merchant-tokenizer";
+import { categorizeTransaction } from "@/lib/categorization/rules";
 
 export interface MerchantCategorization {
   merchant_token: string;
@@ -33,7 +33,7 @@ export interface MerchantCategorization {
   business_type: string;
   is_subscription: boolean;
   confidence: number;
-  source: 'openai' | 'user' | 'rule' | 'mixed';
+  source: "openai" | "user" | "rule" | "mixed";
   explanation: string;
 }
 
@@ -49,7 +49,7 @@ interface FeedbackParams {
 
 export function useMerchantCategorization(
   description: string,
-  bankType: 'bmo' | 'generic' = 'bmo',
+  bankType: "bmo" | "generic" = "bmo",
   enabled: boolean = true
 ) {
   const [categorization, setCategorization] = useState<MerchantCategorization | null>(null);
@@ -77,15 +77,15 @@ export function useMerchantCategorization(
           const ruleResult = categorizeTransaction(description);
           if (ruleResult && !cancelled) {
             setCategorization({
-              merchant_token: '',
+              merchant_token: "",
               canonical_name: description,
               category: ruleResult.category,
               subcategory: ruleResult.subcategory || null,
-              business_type: 'other',
+              business_type: "other",
               is_subscription: false,
               confidence: ruleResult.confidence,
-              source: 'rule',
-              explanation: 'Rule-based categorization (no merchant token found)',
+              source: "rule",
+              explanation: "Rule-based categorization (no merchant token found)",
             });
           }
           setIsLoading(false);
@@ -96,9 +96,9 @@ export function useMerchantCategorization(
         const response = await fetch(
           `/api/merchants/resolve?token=${encodeURIComponent(merchantToken)}`,
           {
-            method: 'GET',
+            method: "GET",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
           }
         );
@@ -123,24 +123,24 @@ export function useMerchantCategorization(
           });
         }
       } catch (err) {
-        console.error('Merchant categorization error:', err);
+        console.error("Merchant categorization error:", err);
 
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : 'Categorization failed');
+          setError(err instanceof Error ? err.message : "Categorization failed");
 
           // Fallback to rule-based categorization on error
           const ruleResult = categorizeTransaction(description);
           if (ruleResult) {
             setCategorization({
-              merchant_token: '',
+              merchant_token: "",
               canonical_name: description,
               category: ruleResult.category,
               subcategory: ruleResult.subcategory || null,
-              business_type: 'other',
+              business_type: "other",
               is_subscription: false,
               confidence: ruleResult.confidence,
-              source: 'rule',
-              explanation: 'Rule-based categorization (API unavailable)',
+              source: "rule",
+              explanation: "Rule-based categorization (API unavailable)",
             });
           }
         }
@@ -167,10 +167,10 @@ export function useMerchantCategorization(
    */
   async function submitFeedback(params: FeedbackParams): Promise<boolean> {
     try {
-      const response = await fetch('/api/merchants/feedback', {
-        method: 'POST',
+      const response = await fetch("/api/merchants/feedback", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           merchant_token: params.merchant_token,
@@ -184,14 +184,14 @@ export function useMerchantCategorization(
       });
 
       if (!response.ok) {
-        console.error('Feedback submission failed:', response.status);
+        console.error("Feedback submission failed:", response.status);
         return false;
       }
 
       const data = await response.json();
       return data.success === true;
     } catch (err) {
-      console.error('Feedback submission error:', err);
+      console.error("Feedback submission error:", err);
       return false;
     }
   }

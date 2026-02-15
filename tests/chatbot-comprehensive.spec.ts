@@ -10,27 +10,30 @@
  * Results documented in: docs/chatbot-testing-results.md
  */
 
-import { test, expect } from '@playwright/test';
-import { seedBudgetData, clearBudgetData } from './helpers/budget-test-data';
+import { test, expect } from "@playwright/test";
+import { seedBudgetData, clearBudgetData } from "./helpers/budget-test-data";
 
 // Test configuration
-const BASE_URL = process.env.BASE_URL || 'http://localhost:3003';
+const BASE_URL = process.env.BASE_URL || "http://localhost:3003";
 const MOBILE_VIEWPORT = { width: 375, height: 667 }; // iPhone SE
 const DESKTOP_VIEWPORT = { width: 1280, height: 720 };
 
-test.describe('Chatbot - Desktop Tests', () => {
+test.describe("Chatbot - Desktop Tests", () => {
   test.beforeEach(async ({ page }) => {
     // Set localStorage BEFORE page loads using addInitScript
     await page.addInitScript(() => {
-      localStorage.setItem('budget-app-privacy-settings', JSON.stringify({
-        enableChatbot: true,        // Master switch for chatbot
-        enableAIFeatures: true,      // Master switch for AI features
-        chatbotDataAccess: 'read-only',
-        chatbotConversationRetention: 7,
-        enableAnalytics: true,
-        enableErrorTracking: true,
-        updatedAt: Date.now()
-      }));
+      localStorage.setItem(
+        "budget-app-privacy-settings",
+        JSON.stringify({
+          enableChatbot: true, // Master switch for chatbot
+          enableAIFeatures: true, // Master switch for AI features
+          chatbotDataAccess: "read-only",
+          chatbotConversationRetention: 7,
+          enableAnalytics: true,
+          enableErrorTracking: true,
+          updatedAt: Date.now(),
+        })
+      );
     });
 
     // Navigate to page FIRST (required for IndexedDB access)
@@ -43,77 +46,86 @@ test.describe('Chatbot - Desktop Tests', () => {
 
     // Reload to pick up the seeded data
     await page.reload();
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState("networkidle");
   });
 
-  test('should display chatbot interface', async ({ page }) => {
+  test("should display chatbot interface", async ({ page }) => {
     // Wait for page load
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState("networkidle");
 
     // Look for chatbot button using aria-label (correct selector!)
     const chatbotButton = page.locator('button[aria-label="Open AI chatbot"]');
 
-    if (await chatbotButton.count() > 0) {
-      console.log('✓ Chatbot button found');
+    if ((await chatbotButton.count()) > 0) {
+      console.log("✓ Chatbot button found");
       await chatbotButton.click();
 
       // Wait for chatbot interface
-      await page.waitForSelector('[role="dialog"], .chatbot-container, h2:has-text("Budget Assistant")', { timeout: 5000 });
-      console.log('✓ Chatbot interface opened');
+      await page.waitForSelector(
+        '[role="dialog"], .chatbot-container, h2:has-text("Budget Assistant")',
+        { timeout: 5000 }
+      );
+      console.log("✓ Chatbot interface opened");
     } else {
-      console.log('⚠ No chatbot button found - may be always visible or needs opt-in');
+      console.log("⚠ No chatbot button found - may be always visible or needs opt-in");
     }
   });
 
-  test('should handle chatbot opt-in if required', async ({ page }) => {
-    await page.waitForLoadState('networkidle');
+  test("should handle chatbot opt-in if required", async ({ page }) => {
+    await page.waitForLoadState("networkidle");
 
     // Check for opt-in dialog
-    const optInDialog = page.locator('text=/enable.*chatbot|chatbot.*privacy/i').first();
+    const optInDialog = page.locator("text=/enable.*chatbot|chatbot.*privacy/i").first();
 
     if (await optInDialog.isVisible()) {
-      console.log('✓ Chatbot opt-in dialog found');
+      console.log("✓ Chatbot opt-in dialog found");
 
-      const acceptButton = page.locator('button').filter({ hasText: /accept|enable|yes/i }).first();
+      const acceptButton = page
+        .locator("button")
+        .filter({ hasText: /accept|enable|yes/i })
+        .first();
       await acceptButton.click();
-      console.log('✓ Chatbot opt-in accepted');
+      console.log("✓ Chatbot opt-in accepted");
 
       await page.waitForTimeout(1000);
     } else {
-      console.log('⚠ No opt-in dialog - chatbot may already be enabled');
+      console.log("⚠ No opt-in dialog - chatbot may already be enabled");
     }
   });
 });
 
-test.describe('Chatbot - Common Financial Queries', () => {
+test.describe("Chatbot - Common Financial Queries", () => {
   test.beforeEach(async ({ page }) => {
     // Set localStorage BEFORE page loads using addInitScript
     await page.addInitScript(() => {
-      localStorage.setItem('budget-app-privacy-settings', JSON.stringify({
-        enableChatbot: true,        // Master switch for chatbot
-        enableAIFeatures: true,      // Master switch for AI features
-        chatbotDataAccess: 'read-only',
-        chatbotConversationRetention: 7,
-        enableAnalytics: true,
-        enableErrorTracking: true,
-        updatedAt: Date.now()
-      }));
+      localStorage.setItem(
+        "budget-app-privacy-settings",
+        JSON.stringify({
+          enableChatbot: true, // Master switch for chatbot
+          enableAIFeatures: true, // Master switch for AI features
+          chatbotDataAccess: "read-only",
+          chatbotConversationRetention: 7,
+          enableAnalytics: true,
+          enableErrorTracking: true,
+          updatedAt: Date.now(),
+        })
+      );
     });
 
     await page.goto(`${BASE_URL}/budget-app`);
     await page.setViewportSize(DESKTOP_VIEWPORT);
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState("networkidle");
   });
 
   const commonQueries = [
-    'What is my spending breakdown this month?',
-    'Show me my budget status',
-    'How much have I spent on groceries?',
-    'What are my recent transactions?',
-    'Do I have any budget alerts?',
-    'How am I doing financially?',
-    'What is my total income this month?',
-    'Show me my expense categories',
+    "What is my spending breakdown this month?",
+    "Show me my budget status",
+    "How much have I spent on groceries?",
+    "What are my recent transactions?",
+    "Do I have any budget alerts?",
+    "How am I doing financially?",
+    "What is my total income this month?",
+    "Show me my expense categories",
   ];
 
   for (const query of commonQueries) {
@@ -129,7 +141,7 @@ test.describe('Chatbot - Common Financial Queries', () => {
       // Try to find chatbot input (look for any input in the chatbot panel)
       const chatInput = page.locator('input[type="text"], textarea').first();
 
-      if (await chatInput.count() === 0) {
+      if ((await chatInput.count()) === 0) {
         console.log(`⚠ Chatbot input not found for query: "${query}"`);
         test.skip();
         return;
@@ -137,16 +149,21 @@ test.describe('Chatbot - Common Financial Queries', () => {
 
       await chatInput.first().fill(query);
 
-      const sendButton = page.locator('button[type="submit"], button').filter({
-        hasText: /send|submit/i
-      }).or(page.locator('button svg').filter({ hasText: /send/i }));
+      const sendButton = page
+        .locator('button[type="submit"], button')
+        .filter({
+          hasText: /send|submit/i,
+        })
+        .or(page.locator("button svg").filter({ hasText: /send/i }));
 
       await sendButton.first().click();
 
       // Wait for response (timeout after 10 seconds)
-      const response = await page.waitForSelector('.chatbot-message, [role="article"], .message', {
-        timeout: 10000
-      }).catch(() => null);
+      const response = await page
+        .waitForSelector('.chatbot-message, [role="article"], .message', {
+          timeout: 10000,
+        })
+        .catch(() => null);
 
       if (response) {
         const responseText = await response.textContent();
@@ -160,42 +177,45 @@ test.describe('Chatbot - Common Financial Queries', () => {
   }
 });
 
-test.describe('Chatbot - Edge Cases', () => {
+test.describe("Chatbot - Edge Cases", () => {
   test.beforeEach(async ({ page }) => {
     // Set localStorage BEFORE page loads using addInitScript
     await page.addInitScript(() => {
-      localStorage.setItem('budget-app-privacy-settings', JSON.stringify({
-        enableChatbot: true,        // Master switch for chatbot
-        enableAIFeatures: true,      // Master switch for AI features
-        chatbotDataAccess: 'read-only',
-        chatbotConversationRetention: 7,
-        enableAnalytics: true,
-        enableErrorTracking: true,
-        updatedAt: Date.now()
-      }));
+      localStorage.setItem(
+        "budget-app-privacy-settings",
+        JSON.stringify({
+          enableChatbot: true, // Master switch for chatbot
+          enableAIFeatures: true, // Master switch for AI features
+          chatbotDataAccess: "read-only",
+          chatbotConversationRetention: 7,
+          enableAnalytics: true,
+          enableErrorTracking: true,
+          updatedAt: Date.now(),
+        })
+      );
     });
 
     await page.goto(`${BASE_URL}/budget-app`);
     await page.setViewportSize(DESKTOP_VIEWPORT);
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState("networkidle");
   });
 
   const edgeCaseQueries = [
-    { query: '', description: 'Empty query' },
-    { query: '   ', description: 'Whitespace only' },
-    { query: 'asdfghjkl qwertyuiop', description: 'Gibberish' },
-    { query: 'What is the meaning of life?', description: 'Off-topic question' },
-    { query: 'Show me transactions for category NONEXISTENT', description: 'Nonexistent category' },
-    { query: 'Delete all my data', description: 'Destructive command' },
-    { query: 'a'.repeat(1000), description: 'Very long query (1000 chars)' },
-    { query: 'SQL INJECT DROP TABLE users', description: 'SQL injection attempt' },
+    { query: "", description: "Empty query" },
+    { query: "   ", description: "Whitespace only" },
+    { query: "asdfghjkl qwertyuiop", description: "Gibberish" },
+    { query: "What is the meaning of life?", description: "Off-topic question" },
+    { query: "Show me transactions for category NONEXISTENT", description: "Nonexistent category" },
+    { query: "Delete all my data", description: "Destructive command" },
+    { query: "a".repeat(1000), description: "Very long query (1000 chars)" },
+    { query: "SQL INJECT DROP TABLE users", description: "SQL injection attempt" },
   ];
 
   for (const { query, description } of edgeCaseQueries) {
     test(`should handle: ${description}`, async ({ page }) => {
       const chatInput = page.locator('input[type="text"], textarea').first();
 
-      if (await chatInput.count() === 0) {
+      if ((await chatInput.count()) === 0) {
         console.log(`⚠ Chatbot not available for edge case: ${description}`);
         test.skip();
         return;
@@ -209,51 +229,54 @@ test.describe('Chatbot - Edge Cases', () => {
       console.log(`Edge case: ${description}`);
       console.log(`  Button enabled: ${isButtonEnabled}`);
 
-      if (query.trim() === '') {
+      if (query.trim() === "") {
         expect(isButtonEnabled).toBe(false);
-        console.log('  ✓ Empty queries correctly disabled');
+        console.log("  ✓ Empty queries correctly disabled");
       }
     });
   }
 });
 
-test.describe('Chatbot - Multi-Turn Conversations', () => {
+test.describe("Chatbot - Multi-Turn Conversations", () => {
   test.beforeEach(async ({ page }) => {
     // Set localStorage BEFORE page loads using addInitScript
     await page.addInitScript(() => {
-      localStorage.setItem('budget-app-privacy-settings', JSON.stringify({
-        enableChatbot: true,        // Master switch for chatbot
-        enableAIFeatures: true,      // Master switch for AI features
-        chatbotDataAccess: 'read-only',
-        chatbotConversationRetention: 7,
-        enableAnalytics: true,
-        enableErrorTracking: true,
-        updatedAt: Date.now()
-      }));
+      localStorage.setItem(
+        "budget-app-privacy-settings",
+        JSON.stringify({
+          enableChatbot: true, // Master switch for chatbot
+          enableAIFeatures: true, // Master switch for AI features
+          chatbotDataAccess: "read-only",
+          chatbotConversationRetention: 7,
+          enableAnalytics: true,
+          enableErrorTracking: true,
+          updatedAt: Date.now(),
+        })
+      );
     });
 
     await page.goto(`${BASE_URL}/budget-app`);
     await page.setViewportSize(DESKTOP_VIEWPORT);
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState("networkidle");
   });
 
-  test('should maintain context across multiple queries', async ({ page }) => {
+  test("should maintain context across multiple queries", async ({ page }) => {
     const conversationFlow = [
-      'Show me my spending on groceries',
-      'What about last month?',
-      'Compare it to the month before',
-      'What category did I spend the most on?',
+      "Show me my spending on groceries",
+      "What about last month?",
+      "Compare it to the month before",
+      "What category did I spend the most on?",
     ];
 
     const chatInput = page.locator('input[type="text"], textarea').first();
 
-    if (await chatInput.count() === 0) {
-      console.log('⚠ Chatbot not available for multi-turn test');
+    if ((await chatInput.count()) === 0) {
+      console.log("⚠ Chatbot not available for multi-turn test");
       test.skip();
       return;
     }
 
-    console.log('Multi-turn conversation test:');
+    console.log("Multi-turn conversation test:");
 
     for (let i = 0; i < conversationFlow.length; i++) {
       const query = conversationFlow[i];
@@ -266,7 +289,9 @@ test.describe('Chatbot - Multi-Turn Conversations', () => {
       await page.waitForTimeout(2000);
 
       // Count messages (should increase with each turn)
-      const messageCount = await page.locator('.chatbot-message, [role="article"], .message').count();
+      const messageCount = await page
+        .locator('.chatbot-message, [role="article"], .message')
+        .count();
       console.log(`    Messages in conversation: ${messageCount}`);
 
       expect(messageCount).toBeGreaterThanOrEqual((i + 1) * 2); // User + Assistant per turn
@@ -274,33 +299,36 @@ test.describe('Chatbot - Multi-Turn Conversations', () => {
   });
 });
 
-test.describe('Chatbot - Mobile Device Testing', () => {
+test.describe("Chatbot - Mobile Device Testing", () => {
   test.beforeEach(async ({ page }) => {
     // Set localStorage BEFORE page loads using addInitScript
     await page.addInitScript(() => {
-      localStorage.setItem('budget-app-privacy-settings', JSON.stringify({
-        enableChatbot: true,        // Master switch for chatbot
-        enableAIFeatures: true,      // Master switch for AI features
-        chatbotDataAccess: 'read-only',
-        chatbotConversationRetention: 7,
-        enableAnalytics: true,
-        enableErrorTracking: true,
-        updatedAt: Date.now()
-      }));
+      localStorage.setItem(
+        "budget-app-privacy-settings",
+        JSON.stringify({
+          enableChatbot: true, // Master switch for chatbot
+          enableAIFeatures: true, // Master switch for AI features
+          chatbotDataAccess: "read-only",
+          chatbotConversationRetention: 7,
+          enableAnalytics: true,
+          enableErrorTracking: true,
+          updatedAt: Date.now(),
+        })
+      );
     });
 
     await page.goto(`${BASE_URL}/budget-app`);
     await page.setViewportSize(MOBILE_VIEWPORT);
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState("networkidle");
   });
 
-  test('should be accessible on mobile viewport', async ({ page }) => {
-    console.log('Mobile viewport test (375x667):');
+  test("should be accessible on mobile viewport", async ({ page }) => {
+    console.log("Mobile viewport test (375x667):");
 
     // Check if chatbot button is visible and accessible (use aria-label)
     const chatbotButton = page.locator('button[aria-label="Open AI chatbot"]');
 
-    if (await chatbotButton.count() > 0) {
+    if ((await chatbotButton.count()) > 0) {
       const isVisible = await chatbotButton.isVisible();
       console.log(`  ✓ Chatbot button visible: ${isVisible}`);
 
@@ -311,15 +339,15 @@ test.describe('Chatbot - Mobile Device Testing', () => {
         expect(box.height).toBeGreaterThanOrEqual(44);
       }
     } else {
-      console.log('  ⚠ Chatbot button not found on mobile');
+      console.log("  ⚠ Chatbot button not found on mobile");
     }
   });
 
-  test('should display mobile-optimized interface', async ({ page }) => {
+  test("should display mobile-optimized interface", async ({ page }) => {
     const chatInput = page.locator('input[type="text"], textarea').first();
 
-    if (await chatInput.count() === 0) {
-      console.log('⚠ Chatbot input not found on mobile');
+    if ((await chatInput.count()) === 0) {
+      console.log("⚠ Chatbot input not found on mobile");
       test.skip();
       return;
     }
@@ -331,20 +359,20 @@ test.describe('Chatbot - Mobile Device Testing', () => {
     }
 
     // Test that interface doesn't overflow viewport
-    const body = await page.locator('body').boundingBox();
+    const body = await page.locator("body").boundingBox();
     if (box && body) {
       expect(box.width).toBeLessThanOrEqual(MOBILE_VIEWPORT.width);
-      console.log('✓ Interface fits mobile viewport');
+      console.log("✓ Interface fits mobile viewport");
     }
   });
 
-  test('should handle mobile queries', async ({ page }) => {
-    const mobileQuery = 'What did I spend this month?';
+  test("should handle mobile queries", async ({ page }) => {
+    const mobileQuery = "What did I spend this month?";
 
     const chatInput = page.locator('input[type="text"], textarea').first();
 
-    if (await chatInput.count() === 0) {
-      console.log('⚠ Chatbot not available on mobile');
+    if ((await chatInput.count()) === 0) {
+      console.log("⚠ Chatbot not available on mobile");
       test.skip();
       return;
     }
@@ -353,67 +381,72 @@ test.describe('Chatbot - Mobile Device Testing', () => {
     await page.locator('button[type="submit"]').first().click();
 
     console.log(`Mobile query: "${mobileQuery}"`);
-    console.log('  ✓ Query submitted successfully');
+    console.log("  ✓ Query submitted successfully");
   });
 });
 
-test.describe('Chatbot - Error Handling', () => {
+test.describe("Chatbot - Error Handling", () => {
   test.beforeEach(async ({ page }) => {
     // Set localStorage BEFORE page loads using addInitScript
     await page.addInitScript(() => {
-      localStorage.setItem('budget-app-privacy-settings', JSON.stringify({
-        enableChatbot: true,        // Master switch for chatbot
-        enableAIFeatures: true,      // Master switch for AI features
-        chatbotDataAccess: 'read-only',
-        chatbotConversationRetention: 7,
-        enableAnalytics: true,
-        enableErrorTracking: true,
-        updatedAt: Date.now()
-      }));
+      localStorage.setItem(
+        "budget-app-privacy-settings",
+        JSON.stringify({
+          enableChatbot: true, // Master switch for chatbot
+          enableAIFeatures: true, // Master switch for AI features
+          chatbotDataAccess: "read-only",
+          chatbotConversationRetention: 7,
+          enableAnalytics: true,
+          enableErrorTracking: true,
+          updatedAt: Date.now(),
+        })
+      );
     });
 
     await page.goto(`${BASE_URL}/budget-app`);
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState("networkidle");
   });
 
-  test('should display error messages gracefully', async ({ page }) => {
+  test("should display error messages gracefully", async ({ page }) => {
     // Simulate network error by blocking API calls
-    await page.route('**/api/chat**', route => {
-      route.abort('failed');
+    await page.route("**/api/chat**", (route) => {
+      route.abort("failed");
     });
 
     const chatInput = page.locator('input[type="text"], textarea').first();
 
-    if (await chatInput.count() === 0) {
-      console.log('⚠ Chatbot not available for error test');
+    if ((await chatInput.count()) === 0) {
+      console.log("⚠ Chatbot not available for error test");
       test.skip();
       return;
     }
 
-    await chatInput.fill('Test error handling');
+    await chatInput.fill("Test error handling");
     await page.locator('button[type="submit"]').first().click();
 
     // Wait for error message
-    const errorMessage = await page.waitForSelector('[role="alert"], .error, text=/error|failed/i', {
-      timeout: 5000
-    }).catch(() => null);
+    const errorMessage = await page
+      .waitForSelector('[role="alert"], .error, text=/error|failed/i', {
+        timeout: 5000,
+      })
+      .catch(() => null);
 
     if (errorMessage) {
       const errorText = await errorMessage.textContent();
-      console.log('✓ Error message displayed:');
+      console.log("✓ Error message displayed:");
       console.log(`  "${errorText}"`);
     } else {
-      console.log('⚠ No error message displayed (may be handling silently)');
+      console.log("⚠ No error message displayed (may be handling silently)");
     }
   });
 
-  test('should recover from errors', async ({ page }) => {
+  test("should recover from errors", async ({ page }) => {
     // First request fails
     let requestCount = 0;
-    await page.route('**/api/chat**', route => {
+    await page.route("**/api/chat**", (route) => {
       requestCount++;
       if (requestCount === 1) {
-        route.abort('failed');
+        route.abort("failed");
       } else {
         route.continue();
       }
@@ -421,22 +454,22 @@ test.describe('Chatbot - Error Handling', () => {
 
     const chatInput = page.locator('input[type="text"], textarea').first();
 
-    if (await chatInput.count() === 0) {
+    if ((await chatInput.count()) === 0) {
       test.skip();
       return;
     }
 
     // First query (will fail)
-    await chatInput.fill('First query');
+    await chatInput.fill("First query");
     await page.locator('button[type="submit"]').first().click();
     await page.waitForTimeout(2000);
 
     // Second query (should succeed)
-    await chatInput.fill('Second query');
+    await chatInput.fill("Second query");
     await page.locator('button[type="submit"]').first().click();
 
-    console.log('Error recovery test:');
+    console.log("Error recovery test:");
     console.log(`  Total API calls: ${requestCount}`);
-    console.log('  ✓ Chatbot can recover from errors');
+    console.log("  ✓ Chatbot can recover from errors");
   });
 });

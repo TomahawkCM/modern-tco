@@ -20,15 +20,15 @@ Every component is designed for a 375px-wide phone screen FIRST, then expanded t
 
 ### Touch Target Minimums
 
-| Element | Minimum Size | Seniors Mode |
-|---------|-------------|-------------|
-| Buttons (primary) | 48 × 48px | 56 × 56px |
-| Buttons (secondary) | 44 × 44px | 52 × 52px |
-| List items / rows | 48px height | 56px height |
-| Icons (tappable) | 44 × 44px hit area | 52 × 52px hit area |
-| Checkbox / Radio | 24px visual + 44px hit area | 28px visual + 52px hit area |
-| Close / dismiss buttons | 44 × 44px | 52 × 52px |
-| Swipe gesture activation | 100px horizontal drag | 80px (easier in seniors mode) |
+| Element                  | Minimum Size                | Seniors Mode                  |
+| ------------------------ | --------------------------- | ----------------------------- |
+| Buttons (primary)        | 48 × 48px                   | 56 × 56px                     |
+| Buttons (secondary)      | 44 × 44px                   | 52 × 52px                     |
+| List items / rows        | 48px height                 | 56px height                   |
+| Icons (tappable)         | 44 × 44px hit area          | 52 × 52px hit area            |
+| Checkbox / Radio         | 24px visual + 44px hit area | 28px visual + 52px hit area   |
+| Close / dismiss buttons  | 44 × 44px                   | 52 × 52px                     |
+| Swipe gesture activation | 100px horizontal drag       | 80px (easier in seniors mode) |
 
 ### Safe Area Handling
 
@@ -78,6 +78,7 @@ On phones, the bottom 40% of the screen is the natural thumb zone. Critical acti
 ```
 
 **Rules**:
+
 - Primary action button (Add Transaction, Quick Add) → Floating Action Button (FAB) bottom-right, 56px diameter
 - Navigation → Bottom tab bar (5 items max)
 - Destructive actions (delete, cancel) → NEVER in thumb zone. Always require confirmation.
@@ -118,6 +119,7 @@ On phones, the bottom 40% of the screen is the natural thumb zone. Critical acti
 ```
 
 **Bottom Tab Bar items** (max 5 visible, overflow in "More" drawer):
+
 1. 🏠 Dashboard (home)
 2. 📊 Budget
 3. 💰 Accounts
@@ -125,12 +127,14 @@ On phones, the bottom 40% of the screen is the natural thumb zone. Critical acti
 5. ⋯ More (Settings, Reports, Goals, Import, AI Coach, Subscriptions, Investments)
 
 **Navigation patterns**:
+
 - Stack navigation (push/pop) within each tab — maintain scroll position when switching tabs
 - Bottom sheet (Mantine Drawer position="bottom") for quick actions, transaction details, category picker
 - Full-screen modal for complex flows (import wizard, onboarding, receipt scanner)
 - Swipe-back gesture to navigate back (React Router + gesture handler)
 
 **Keyboard handling**:
+
 - Currency inputs → `inputMode="decimal"` (shows numeric keyboard with decimal on both iOS and Android)
 - Date inputs → Mantine DatePickerInput (native-feeling calendar, NOT browser date picker)
 - Search → `inputMode="search"` with instant filtering
@@ -138,6 +142,7 @@ On phones, the bottom 40% of the screen is the natural thumb zone. Critical acti
 - Scroll input into view when keyboard opens (prevent content being hidden behind keyboard)
 
 **iOS-specific PWA requirements**:
+
 - `apple-mobile-web-app-capable: yes` meta tag
 - `apple-mobile-web-app-status-bar-style: black-translucent` for full-bleed header
 - `apple-touch-icon` for home screen icon (180×180px)
@@ -147,6 +152,7 @@ On phones, the bottom 40% of the screen is the natural thumb zone. Critical acti
 - Push notifications require home screen install (iOS 16.4+) — show educational prompt
 
 **Android-specific PWA enhancements**:
+
 - `beforeinstallprompt` event → custom install banner at moment of engagement (after first budget created)
 - Splash screen via manifest `background_color` + `theme_color` + icon
 - Chrome's "Add to Home Screen" mini-infobar → intercept and customize timing
@@ -181,6 +187,7 @@ On phones, the bottom 40% of the screen is the natural thumb zone. Critical acti
 ```
 
 **Tablet rules**:
+
 - Sidebar collapsed to icons only (expandable on tap/hover) — saves horizontal space
 - Two-column widget layout on dashboard
 - Transaction list uses wider rows with more visible data (date, payee, category, amount all inline)
@@ -219,6 +226,7 @@ On phones, the bottom 40% of the screen is the natural thumb zone. Critical acti
 ```
 
 **Desktop rules**:
+
 - Full sidebar with icons AND labels (collapsible to icons-only via toggle)
 - Three-column dashboard widget layout (xl breakpoint 1200px+)
 - Transaction table with sortable columns, inline editing, right-click context menu
@@ -244,13 +252,13 @@ breakpoints: {
 }
 ```
 
-| Breakpoint | Layout | Navigation | Widgets |
-|------------|--------|-----------|---------|
-| xs (320px+) | Single column | Bottom tabs (5) | Stacked, full-width |
-| sm (576px+) | Single column | Bottom tabs (5) | Stacked, full-width |
-| md (768px+) | Two-column | Icon sidebar + bottom tabs removed | 2-column grid |
-| lg (992px+) | Two-column | Full sidebar (icons + labels) | 2-column grid |
-| xl (1200px+) | Three-column | Full sidebar + optional aside panel | 3-column grid |
+| Breakpoint   | Layout        | Navigation                          | Widgets             |
+| ------------ | ------------- | ----------------------------------- | ------------------- |
+| xs (320px+)  | Single column | Bottom tabs (5)                     | Stacked, full-width |
+| sm (576px+)  | Single column | Bottom tabs (5)                     | Stacked, full-width |
+| md (768px+)  | Two-column    | Icon sidebar + bottom tabs removed  | 2-column grid       |
+| lg (992px+)  | Two-column    | Full sidebar (icons + labels)       | 2-column grid       |
+| xl (1200px+) | Three-column  | Full sidebar + optional aside panel | 3-column grid       |
 
 **Critical rule**: Content never stretches beyond 1440px. Center with auto margins on ultra-wide screens. Background extends full width, content constrained.
 
@@ -298,6 +306,7 @@ Every component follows the "Cyber-Soft" aesthetic and works across all device s
 ```
 
 **Privacy blur**:
+
 ```css
 .privacy-active .financial-value {
   filter: blur(8px);
@@ -330,6 +339,7 @@ Every component follows the "Cyber-Soft" aesthetic and works across all device s
 ### 4.4 Transaction Row
 
 **Phone layout** (single row, 48px min height):
+
 ```
 ┌────────────────────────────────────────┐
 │ 🛒  Metro Grocery          -$87.32    │
@@ -338,12 +348,14 @@ Every component follows the "Cyber-Soft" aesthetic and works across all device s
 ```
 
 **Desktop layout** (table row with columns):
+
 ```
 │ Date       │ Payee          │ Category    │ Account  │    Amount │
 │ Feb 9, 2026│ Metro Grocery  │ 🛒 Grocery │ Checking │   -$87.32 │
 ```
 
 **Interaction states**:
+
 - Default: clean white/dark background
 - Hover (desktop): subtle background tint + row shadow
 - Selected: accent color left border (4px) + light tint background
@@ -374,6 +386,7 @@ Used for: Transaction details, category picker, quick add, filters, account sele
 ```
 
 **Behavior**:
+
 - Drag handle at top (40×4px pill) for grab-and-drag
 - Snap points: 40% height (peek), 80% height (expanded), dismiss on drag below 20%
 - Background dimming with blur
@@ -401,6 +414,7 @@ Every screen needs a designed empty state — not a blank page.
 ```
 
 **Required empty states**:
+
 - Dashboard (no data) → onboarding CTA
 - Transactions (none) → "Add your first" or "Connect bank"
 - Budget (none set) → methodology quiz CTA
@@ -430,6 +444,7 @@ Every screen needs a designed empty state — not a blank page.
 ```
 
 **Rules**:
+
 - NEVER use a full-screen spinner. Use skeleton screens that match the final layout.
 - Skeleton pulse animation: subtle opacity animation (0.3 → 0.7 → 0.3, 1.5s ease-in-out loop)
 - Progressive loading: show cached data immediately, overlay with fresh data when available
@@ -463,6 +478,7 @@ Every screen needs a designed empty state — not a blank page.
 ```
 
 **Error principles**:
+
 - Always reassure users their data is safe (it's local)
 - Provide a clear action (Retry, Go Back, Contact Support)
 - Never show raw error messages or stack traces
@@ -505,6 +521,7 @@ Every screen needs a designed empty state — not a blank page.
 **"More" drawer**: Full-screen overlay listing all remaining sections with icons. Groups: Tools (Reports, Goals, Calculators), Import (CSV, Scan Receipt), AI Coach, Settings.
 
 **Page transitions** (framer-motion):
+
 ```typescript
 // Horizontal slide for tab switches
 <AnimatePresence mode="wait">
@@ -523,6 +540,7 @@ Every screen needs a designed empty state — not a blank page.
 ### 5.2 Desktop Navigation
 
 **Sidebar** (Mantine AppShell.Navbar):
+
 - Width: 240px expanded, 72px collapsed (icons only)
 - Toggle: Click hamburger icon or press `[` to collapse/expand
 - Sections separated by subtle dividers
@@ -535,33 +553,33 @@ Every screen needs a designed empty state — not a blank page.
 ```typescript
 const SHORTCUTS = {
   // Global
-  'mod+k':     'Open spotlight search',
-  'mod+shift+p': 'Toggle privacy mode',
-  'mod+n':     'New transaction',
-  'mod+shift+n': 'New budget category',
-  '[':         'Toggle sidebar',
+  "mod+k": "Open spotlight search",
+  "mod+shift+p": "Toggle privacy mode",
+  "mod+n": "New transaction",
+  "mod+shift+n": "New budget category",
+  "[": "Toggle sidebar",
 
   // Navigation
-  'g then d':  'Go to Dashboard',
-  'g then b':  'Go to Budget',
-  'g then t':  'Go to Transactions',
-  'g then a':  'Go to Accounts',
-  'g then r':  'Go to Reports',
-  'g then s':  'Go to Settings',
+  "g then d": "Go to Dashboard",
+  "g then b": "Go to Budget",
+  "g then t": "Go to Transactions",
+  "g then a": "Go to Accounts",
+  "g then r": "Go to Reports",
+  "g then s": "Go to Settings",
 
   // Transaction review
-  'ArrowRight': 'Approve transaction',
-  'ArrowLeft':  'Flag transaction',
-  'ArrowUp':    'Split transaction',
-  'Enter':      'Open detail view',
-  'Space':      'Next transaction',
-  'Escape':     'Exit review mode',
+  ArrowRight: "Approve transaction",
+  ArrowLeft: "Flag transaction",
+  ArrowUp: "Split transaction",
+  Enter: "Open detail view",
+  Space: "Next transaction",
+  Escape: "Exit review mode",
 
   // Table navigation
-  'j':          'Next row',
-  'k':          'Previous row',
-  'e':          'Edit selected',
-  'Delete':     'Delete selected (with confirmation)',
+  j: "Next row",
+  k: "Previous row",
+  e: "Edit selected",
+  Delete: "Delete selected (with confirmation)",
 };
 ```
 
@@ -578,47 +596,47 @@ Every interaction should feel responsive and alive. All animations respect `pref
 ```typescript
 const MOTION = {
   // Timing
-  instant: 0,          // State changes (checkbox, toggle)
-  fast: 100,           // Hover states, tooltips
-  normal: 200,         // Drawer open, tab switch
-  emphasized: 300,     // Card enter, page transition
-  dramatic: 500,       // Number count-up, celebration
+  instant: 0, // State changes (checkbox, toggle)
+  fast: 100, // Hover states, tooltips
+  normal: 200, // Drawer open, tab switch
+  emphasized: 300, // Card enter, page transition
+  dramatic: 500, // Number count-up, celebration
 
   // Springs
-  snappy:  { tension: 300, friction: 20 },  // Buttons, toggles
-  smooth:  { tension: 200, friction: 20 },  // Drawers, sheets
-  bouncy:  { tension: 200, friction: 12 },  // Celebrations, FAB
-  gentle:  { tension: 120, friction: 14 },  // Page transitions
+  snappy: { tension: 300, friction: 20 }, // Buttons, toggles
+  smooth: { tension: 200, friction: 20 }, // Drawers, sheets
+  bouncy: { tension: 200, friction: 12 }, // Celebrations, FAB
+  gentle: { tension: 120, friction: 14 }, // Page transitions
 
   // Easing
-  easeOut: [0.0, 0.0, 0.2, 1.0],    // Enter animations
-  easeIn:  [0.4, 0.0, 1.0, 1.0],    // Exit animations
-  standard:[0.4, 0.0, 0.2, 1.0],    // Move/resize
+  easeOut: [0.0, 0.0, 0.2, 1.0], // Enter animations
+  easeIn: [0.4, 0.0, 1.0, 1.0], // Exit animations
+  standard: [0.4, 0.0, 0.2, 1.0], // Move/resize
 };
 ```
 
 ### Interaction Catalog
 
-| Interaction | Animation | Duration | Notes |
-|-------------|-----------|----------|-------|
-| Page enter | Fade up (translateY 16px → 0, opacity 0 → 1) | 200ms | Stagger children by 50ms |
-| Tab switch | Horizontal slide (direction-aware) | 150ms | Based on tab index direction |
-| Card appear | Fade up with slight scale (0.98 → 1) | 300ms spring | Stagger in lists |
-| Button press | Scale down (0.97) | 100ms | Spring back on release |
-| Toggle switch | Thumb slide + color fill | 200ms | Smooth bezier |
-| Bottom sheet open | Slide up from bottom + overlay fade | 250ms | Spring physics |
-| Pull to refresh | Custom spinner + rubber-band overscroll | Gesture-driven | Show sync status |
-| Number change | Count-up/down animation | 500ms | JetBrains Mono digits roll |
-| Budget threshold | Progress bar color shift (green → yellow → red) | 300ms | Smooth gradient transition |
-| Swipe-to-review | Card slides with rubber-band resistance | Gesture-driven | Green/amber overlay reveals |
-| Transaction added | List item slides in from top + flash | 300ms | Optimistic — appears instantly |
-| Transaction deleted | Slide out left + collapse height | 200ms | With undo toast (5 seconds) |
-| Milestone reached | canvas-confetti burst | 2000ms | Goal reached, streak milestone, debt paid off |
-| Safe-to-spend load | Ring progress fills with count-up | 500ms spring | Center number counts up in sync |
-| Skeleton pulse | Opacity 0.3 → 0.7 → 0.3 | 1500ms loop | Subtle, not distracting |
-| Privacy blur on | All `.financial-value` blur(8px) | 200ms ease | Smooth, staggered |
-| Error shake | Horizontal shake (±4px, 3 cycles) | 300ms | Form validation errors |
-| Success checkmark | SVG path draw animation | 400ms | After successful save/sync |
+| Interaction         | Animation                                       | Duration       | Notes                                         |
+| ------------------- | ----------------------------------------------- | -------------- | --------------------------------------------- |
+| Page enter          | Fade up (translateY 16px → 0, opacity 0 → 1)    | 200ms          | Stagger children by 50ms                      |
+| Tab switch          | Horizontal slide (direction-aware)              | 150ms          | Based on tab index direction                  |
+| Card appear         | Fade up with slight scale (0.98 → 1)            | 300ms spring   | Stagger in lists                              |
+| Button press        | Scale down (0.97)                               | 100ms          | Spring back on release                        |
+| Toggle switch       | Thumb slide + color fill                        | 200ms          | Smooth bezier                                 |
+| Bottom sheet open   | Slide up from bottom + overlay fade             | 250ms          | Spring physics                                |
+| Pull to refresh     | Custom spinner + rubber-band overscroll         | Gesture-driven | Show sync status                              |
+| Number change       | Count-up/down animation                         | 500ms          | JetBrains Mono digits roll                    |
+| Budget threshold    | Progress bar color shift (green → yellow → red) | 300ms          | Smooth gradient transition                    |
+| Swipe-to-review     | Card slides with rubber-band resistance         | Gesture-driven | Green/amber overlay reveals                   |
+| Transaction added   | List item slides in from top + flash            | 300ms          | Optimistic — appears instantly                |
+| Transaction deleted | Slide out left + collapse height                | 200ms          | With undo toast (5 seconds)                   |
+| Milestone reached   | canvas-confetti burst                           | 2000ms         | Goal reached, streak milestone, debt paid off |
+| Safe-to-spend load  | Ring progress fills with count-up               | 500ms spring   | Center number counts up in sync               |
+| Skeleton pulse      | Opacity 0.3 → 0.7 → 0.3                         | 1500ms loop    | Subtle, not distracting                       |
+| Privacy blur on     | All `.financial-value` blur(8px)                | 200ms ease     | Smooth, staggered                             |
+| Error shake         | Horizontal shake (±4px, 3 cycles)               | 300ms          | Form validation errors                        |
+| Success checkmark   | SVG path draw animation                         | 400ms          | After successful save/sync                    |
 
 ### Reduced Motion
 
@@ -650,22 +668,22 @@ Dark mode is the PRIMARY theme. Light mode is the alternative.
 
 ### Color Mapping
 
-| Element | Light Mode | Dark Mode |
-|---------|-----------|-----------|
-| Background | `#FAFAFA` | `#1A1B1E` |
-| Surface (cards) | `#FFFFFF` | `#25262B` |
-| Surface hover | `#F8F9FA` | `#2C2E33` |
+| Element          | Light Mode         | Dark Mode        |
+| ---------------- | ------------------ | ---------------- |
+| Background       | `#FAFAFA`          | `#1A1B1E`        |
+| Surface (cards)  | `#FFFFFF`          | `#25262B`        |
+| Surface hover    | `#F8F9FA`          | `#2C2E33`        |
 | Surface elevated | `#FFFFFF` + shadow | `#2C2E33` + glow |
-| Border | `#DEE2E6` | `#373A40` |
-| Text primary | `#212529` | `#C1C2C5` |
-| Text secondary | `#868E96` | `#909296` |
-| Text disabled | `#ADB5BD` | `#5C5F66` |
-| Income values | `#0099E6` | `#1AB5FF` |
-| Expense values | `#E6005E` | `#FF1A7A` |
-| Savings values | `#00CC62` | `#1AFF88` |
-| Accent (teal) | `#0D9488` | `#14B8A6` |
-| Danger | `#DC2626` | `#EF4444` |
-| Warning | `#D97706` | `#F59E0B` |
+| Border           | `#DEE2E6`          | `#373A40`        |
+| Text primary     | `#212529`          | `#C1C2C5`        |
+| Text secondary   | `#868E96`          | `#909296`        |
+| Text disabled    | `#ADB5BD`          | `#5C5F66`        |
+| Income values    | `#0099E6`          | `#1AB5FF`        |
+| Expense values   | `#E6005E`          | `#FF1A7A`        |
+| Savings values   | `#00CC62`          | `#1AFF88`        |
+| Accent (teal)    | `#0D9488`          | `#14B8A6`        |
+| Danger           | `#DC2626`          | `#EF4444`        |
+| Warning          | `#D97706`          | `#F59E0B`        |
 
 ### Dark Mode Special Effects
 
@@ -697,6 +715,7 @@ The app must feel fully functional offline — not degraded.
 ### Offline Indicator
 
 **Subtle, not alarming**: Small dot indicator in header or footer that changes color.
+
 - 🟢 Green dot: Connected, synced
 - 🟡 Yellow dot: Connected, syncing in progress
 - 🔴 Red dot: Offline (with tooltip: "Offline — changes will sync when you reconnect")
@@ -706,18 +725,18 @@ The app must feel fully functional offline — not degraded.
 
 ### Offline-Capable Screens
 
-| Screen | Offline Behavior |
-|--------|-----------------|
-| Dashboard | Full functionality, cached data |
-| Add Transaction | Full functionality, queued for sync |
-| View Transactions | Full list from IndexedDB |
-| Budget View | Full functionality |
-| Reports/Charts | Generated from local data |
-| Receipt Scanner | Full OCR (Tesseract.js is local) |
-| Settings | Full access |
-| AI Coach | Degraded — show pre-computed insights, disable Claude API queries |
-| Bank Sync | Disabled — show last sync time, "Will sync when online" |
-| Plaid Link | Disabled — requires network |
+| Screen            | Offline Behavior                                                  |
+| ----------------- | ----------------------------------------------------------------- |
+| Dashboard         | Full functionality, cached data                                   |
+| Add Transaction   | Full functionality, queued for sync                               |
+| View Transactions | Full list from IndexedDB                                          |
+| Budget View       | Full functionality                                                |
+| Reports/Charts    | Generated from local data                                         |
+| Receipt Scanner   | Full OCR (Tesseract.js is local)                                  |
+| Settings          | Full access                                                       |
+| AI Coach          | Degraded — show pre-computed insights, disable Claude API queries |
+| Bank Sync         | Disabled — show last sync time, "Will sync when online"           |
+| Plaid Link        | Disabled — requires network                                       |
 
 ### Optimistic Updates
 
@@ -730,12 +749,12 @@ async function addTransaction(txn: Transaction) {
   await db.transactions.add(txn);
 
   // 2. Update UI immediately (React state)
-  dispatch({ type: 'TRANSACTION_ADDED', payload: txn });
+  dispatch({ type: "TRANSACTION_ADDED", payload: txn });
 
   // 3. Queue for cloud sync (background)
   syncQueue.enqueue({
-    type: 'create',
-    entity: 'transaction',
+    type: "create",
+    entity: "transaction",
     data: txn,
     timestamp: Date.now(),
   });
@@ -753,34 +772,34 @@ async function addTransaction(txn: Transaction) {
 
 Not optional. Not Phase 8. Built into every component from Phase 1.
 
-| Requirement | Implementation |
-|-------------|---------------|
-| Touch targets | 44px default, 48px recommended, 52px seniors mode |
-| Focus indicators | 3px ring, 2px offset, high contrast color |
-| Reduced motion | All animations in `useReducedMotion()` guard |
-| Screen reader | `aria-label` on all icons; `aria-live` for dynamic values (safe-to-spend updates) |
-| Keyboard navigation | Full tab traversal, skip-to-content link, `Escape` to close modals |
-| Color blind | Icon + label ALWAYS paired with color (never color alone for meaning) |
-| RTL layout | Mantine `dir="rtl"` + CSS logical properties (`margin-inline-start` not `margin-left`) |
-| Contrast | 4.5:1 body text, 3:1 large text, verified with axe-core |
-| Zoom/reflow | All layouts reflow at 200% zoom without horizontal scroll |
-| Form labels | Every input has a visible label (NOT placeholder-only) |
-| Error messages | Announced via `aria-live="assertive"`, linked to input via `aria-describedby` |
-| Chart alternatives | Every chart has a table fallback for screen readers |
-| Currency values | `aria-label` includes both amount and currency name ("negative eighty-seven dollars and thirty-two cents Canadian") |
+| Requirement         | Implementation                                                                                                      |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Touch targets       | 44px default, 48px recommended, 52px seniors mode                                                                   |
+| Focus indicators    | 3px ring, 2px offset, high contrast color                                                                           |
+| Reduced motion      | All animations in `useReducedMotion()` guard                                                                        |
+| Screen reader       | `aria-label` on all icons; `aria-live` for dynamic values (safe-to-spend updates)                                   |
+| Keyboard navigation | Full tab traversal, skip-to-content link, `Escape` to close modals                                                  |
+| Color blind         | Icon + label ALWAYS paired with color (never color alone for meaning)                                               |
+| RTL layout          | Mantine `dir="rtl"` + CSS logical properties (`margin-inline-start` not `margin-left`)                              |
+| Contrast            | 4.5:1 body text, 3:1 large text, verified with axe-core                                                             |
+| Zoom/reflow         | All layouts reflow at 200% zoom without horizontal scroll                                                           |
+| Form labels         | Every input has a visible label (NOT placeholder-only)                                                              |
+| Error messages      | Announced via `aria-live="assertive"`, linked to input via `aria-describedby`                                       |
+| Chart alternatives  | Every chart has a table fallback for screen readers                                                                 |
+| Currency values     | `aria-label` includes both amount and currency name ("negative eighty-seven dollars and thirty-two cents Canadian") |
 
 ### Seniors Mode (Phase 1)
 
 ```typescript
 // SeniorsModeContext.tsx
 const SENIORS_OVERRIDES = {
-  fontMultiplier: 1.25,           // All text 25% larger
-  minTouchTarget: '52px',        // Larger touch targets
-  animationSpeed: 0.5,           // Slower animations (or none)
-  simplifiedNavigation: true,    // Fewer items in tab bar
-  highContrast: true,            // Enhanced contrast ratios
-  confirmDestructive: true,      // Extra confirmation on delete/edit
-  showLabelsAlways: true,        // Text labels on all icon buttons
+  fontMultiplier: 1.25, // All text 25% larger
+  minTouchTarget: "52px", // Larger touch targets
+  animationSpeed: 0.5, // Slower animations (or none)
+  simplifiedNavigation: true, // Fewer items in tab bar
+  highContrast: true, // Enhanced contrast ratios
+  confirmDestructive: true, // Extra confirmation on delete/edit
+  showLabelsAlways: true, // Text labels on all icon buttons
 };
 ```
 
@@ -788,39 +807,40 @@ const SENIORS_OVERRIDES = {
 
 ## 10. Performance Budgets
 
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| Initial bundle (JS) | < 200KB gzipped | Vite build output |
-| Total initial load | < 500KB (JS + CSS + fonts) | Lighthouse |
-| First Contentful Paint | < 1.5s on 4G | Lighthouse mobile |
-| Largest Contentful Paint | < 2.5s on 4G | Lighthouse mobile |
-| Time to Interactive | < 3.0s on 4G | Lighthouse mobile |
-| Cumulative Layout Shift | < 0.1 | Lighthouse |
-| First Input Delay | < 100ms | Web Vitals |
-| Lighthouse Performance | ≥ 90 | Lighthouse mobile |
-| Lighthouse PWA | 100 | Lighthouse |
-| Lighthouse Accessibility | ≥ 95 | Lighthouse |
-| 100K transactions render | Smooth scrolling (60fps) | Virtual scroll test |
-| Offline cold launch | < 2s to interactive | Service worker cache |
+| Metric                   | Target                     | Measurement          |
+| ------------------------ | -------------------------- | -------------------- |
+| Initial bundle (JS)      | < 200KB gzipped            | Vite build output    |
+| Total initial load       | < 500KB (JS + CSS + fonts) | Lighthouse           |
+| First Contentful Paint   | < 1.5s on 4G               | Lighthouse mobile    |
+| Largest Contentful Paint | < 2.5s on 4G               | Lighthouse mobile    |
+| Time to Interactive      | < 3.0s on 4G               | Lighthouse mobile    |
+| Cumulative Layout Shift  | < 0.1                      | Lighthouse           |
+| First Input Delay        | < 100ms                    | Web Vitals           |
+| Lighthouse Performance   | ≥ 90                       | Lighthouse mobile    |
+| Lighthouse PWA           | 100                        | Lighthouse           |
+| Lighthouse Accessibility | ≥ 95                       | Lighthouse           |
+| 100K transactions render | Smooth scrolling (60fps)   | Virtual scroll test  |
+| Offline cold launch      | < 2s to interactive        | Service worker cache |
 
 ### Code Splitting Strategy
 
 ```typescript
 // Route-level code splitting (React.lazy)
-const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Transactions = lazy(() => import('./pages/Transactions'));
-const Reports = lazy(() => import('./pages/Reports'));
-const AICoach = lazy(() => import('./pages/AICoach'));
-const ImportWizard = lazy(() => import('./pages/ImportWizard'));
-const Settings = lazy(() => import('./pages/Settings'));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Transactions = lazy(() => import("./pages/Transactions"));
+const Reports = lazy(() => import("./pages/Reports"));
+const AICoach = lazy(() => import("./pages/AICoach"));
+const ImportWizard = lazy(() => import("./pages/ImportWizard"));
+const Settings = lazy(() => import("./pages/Settings"));
 
 // Heavy library lazy loading
-const ReceiptScanner = lazy(() => import('./features/ReceiptScanner')); // Tesseract.js
-const MonteCarloEngine = lazy(() => import('./features/MonteCarlo'));   // TensorFlow.js
-const ChartModule = lazy(() => import('./features/Charts'));            // Recharts
+const ReceiptScanner = lazy(() => import("./features/ReceiptScanner")); // Tesseract.js
+const MonteCarloEngine = lazy(() => import("./features/MonteCarlo")); // TensorFlow.js
+const ChartModule = lazy(() => import("./features/Charts")); // Recharts
 ```
 
 **Rules**:
+
 - Every route is a lazy-loaded chunk
 - Heavy libraries (Tesseract.js, TF.js, Recharts) loaded on demand
 - Core shell (layout, navigation, auth) in main bundle
@@ -833,21 +853,21 @@ const ChartModule = lazy(() => import('./features/Charts'));            // Recha
 
 ### Required Device Testing
 
-| Device | OS | Browser | Priority | Notes |
-|--------|----|---------|----------|-------|
-| iPhone 15/16 | iOS 17-18 | Safari PWA | 🔴 Critical | Primary mobile target |
-| iPhone SE 3 | iOS 17+ | Safari PWA | 🔴 Critical | Smallest supported screen (375px) |
-| iPhone 14 Pro | iOS 17+ | Safari PWA | 🟡 High | Dynamic Island handling |
-| iPad Air/Pro | iPadOS 17+ | Safari PWA | 🟡 High | Tablet layout, Split View |
-| Samsung Galaxy S24 | Android 14 | Chrome PWA | 🔴 Critical | Primary Android target |
-| Google Pixel 8 | Android 14 | Chrome PWA | 🟡 High | Stock Android experience |
-| Samsung Galaxy Tab S9 | Android 14 | Chrome PWA | 🟡 High | Android tablet |
-| MacBook (Chrome) | macOS | Chrome | 🔴 Critical | Primary desktop browser |
-| MacBook (Safari) | macOS | Safari | 🟡 High | WebKit differences |
-| Windows (Chrome) | Windows 11 | Chrome | 🔴 Critical | Most common desktop |
-| Windows (Edge) | Windows 11 | Edge | 🟡 High | Chromium-based |
-| Windows (Firefox) | Windows 11 | Firefox | 🟢 Medium | Gecko rendering |
-| Linux (Chrome) | Ubuntu | Chrome | 🟢 Medium | Developer audience |
+| Device                | OS         | Browser    | Priority    | Notes                             |
+| --------------------- | ---------- | ---------- | ----------- | --------------------------------- |
+| iPhone 15/16          | iOS 17-18  | Safari PWA | 🔴 Critical | Primary mobile target             |
+| iPhone SE 3           | iOS 17+    | Safari PWA | 🔴 Critical | Smallest supported screen (375px) |
+| iPhone 14 Pro         | iOS 17+    | Safari PWA | 🟡 High     | Dynamic Island handling           |
+| iPad Air/Pro          | iPadOS 17+ | Safari PWA | 🟡 High     | Tablet layout, Split View         |
+| Samsung Galaxy S24    | Android 14 | Chrome PWA | 🔴 Critical | Primary Android target            |
+| Google Pixel 8        | Android 14 | Chrome PWA | 🟡 High     | Stock Android experience          |
+| Samsung Galaxy Tab S9 | Android 14 | Chrome PWA | 🟡 High     | Android tablet                    |
+| MacBook (Chrome)      | macOS      | Chrome     | 🔴 Critical | Primary desktop browser           |
+| MacBook (Safari)      | macOS      | Safari     | 🟡 High     | WebKit differences                |
+| Windows (Chrome)      | Windows 11 | Chrome     | 🔴 Critical | Most common desktop               |
+| Windows (Edge)        | Windows 11 | Edge       | 🟡 High     | Chromium-based                    |
+| Windows (Firefox)     | Windows 11 | Firefox    | 🟢 Medium   | Gecko rendering                   |
+| Linux (Chrome)        | Ubuntu     | Chrome     | 🟢 Medium   | Developer audience                |
 
 ### Automated Testing
 
@@ -856,15 +876,15 @@ const ChartModule = lazy(() => import('./features/Charts'));            // Recha
 export default defineConfig({
   projects: [
     // Mobile
-    { name: 'iPhone 15', use: { ...devices['iPhone 15'] } },
-    { name: 'iPhone SE', use: { ...devices['iPhone SE'] } },
-    { name: 'Pixel 7', use: { ...devices['Pixel 7'] } },
+    { name: "iPhone 15", use: { ...devices["iPhone 15"] } },
+    { name: "iPhone SE", use: { ...devices["iPhone SE"] } },
+    { name: "Pixel 7", use: { ...devices["Pixel 7"] } },
     // Tablet
-    { name: 'iPad Pro 11', use: { ...devices['iPad Pro 11'] } },
+    { name: "iPad Pro 11", use: { ...devices["iPad Pro 11"] } },
     // Desktop
-    { name: 'Desktop Chrome', use: { ...devices['Desktop Chrome'] } },
-    { name: 'Desktop Safari', use: { ...devices['Desktop Safari'] } },
-    { name: 'Desktop Firefox', use: { ...devices['Desktop Firefox'] } },
+    { name: "Desktop Chrome", use: { ...devices["Desktop Chrome"] } },
+    { name: "Desktop Safari", use: { ...devices["Desktop Safari"] } },
+    { name: "Desktop Firefox", use: { ...devices["Desktop Firefox"] } },
   ],
 });
 ```
@@ -880,12 +900,15 @@ iOS PWAs have unique requirements. These are non-negotiable for a native-feeling
 ### Meta Tags (index.html)
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Budget">
-<link rel="apple-touch-icon" href="/icons/apple-touch-icon-180.png">
-<link rel="apple-touch-startup-image" href="/splash/launch.png">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Budget" />
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon-180.png" />
+<link rel="apple-touch-startup-image" href="/splash/launch.png" />
 ```
 
 ### iOS Splash Screens
@@ -894,13 +917,17 @@ Generate splash screens for all iOS device sizes. Use the `apple-touch-startup-i
 
 ```html
 <!-- iPhone 15 Pro Max (430 x 932) -->
-<link rel="apple-touch-startup-image"
+<link
+  rel="apple-touch-startup-image"
   media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3)"
-  href="/splash/iphone-15-pro-max.png">
+  href="/splash/iphone-15-pro-max.png"
+/>
 <!-- iPhone SE (375 x 667) -->
-<link rel="apple-touch-startup-image"
+<link
+  rel="apple-touch-startup-image"
   media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
-  href="/splash/iphone-se.png">
+  href="/splash/iphone-se.png"
+/>
 <!-- ... repeat for all device sizes -->
 ```
 
@@ -908,8 +935,8 @@ Generate splash screens for all iOS device sizes. Use the `apple-touch-startup-i
 
 ```typescript
 // Save app state before iOS suspends the PWA
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'hidden') {
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") {
     // Save current route, scroll positions, form state to IndexedDB
     saveAppState({
       route: window.location.pathname,
@@ -921,9 +948,10 @@ document.addEventListener('visibilitychange', () => {
 });
 
 // Restore state on relaunch
-window.addEventListener('load', async () => {
+window.addEventListener("load", async () => {
   const savedState = await loadAppState();
-  if (savedState && Date.now() - savedState.timestamp < 3600000) { // Within 1 hour
+  if (savedState && Date.now() - savedState.timestamp < 3600000) {
+    // Within 1 hour
     navigate(savedState.route);
     restoreScrollPositions(savedState.scrollPositions);
   }
@@ -965,18 +993,18 @@ function IOSInstallBanner() {
 
 This addendum applies to EVERY phase in the execution plan. Specifically:
 
-| Phase | UI/UX Requirements from This Document |
-|-------|---------------------------------------|
-| Pre-Phase 0 | Project structure, theme, breakpoints, animation tokens, font loading |
-| Phase 1 | Mobile-first dashboard, bottom tabs, safe-to-spend widget, onboarding flow, empty states, loading skeletons, FAB, iOS/Android PWA meta tags, install prompts, seniors mode |
-| Phase 2 | Swipe-to-review gestures, bottom sheets for transaction details, bulk selection UI, receipt scanner camera UI, weekly recap card, push notification permission flow |
-| Phase 3 | Family member avatars, shared/personal toggle, comment threads on transactions, expense splitting UI, streak visualization, confetti celebrations |
-| Phase 4 | AI coach chat interface (right drawer on desktop, full-screen on mobile), natural language input, insight cards, decision mode overlay |
-| Phase 5 | Net worth chart with touch-scrub, investment allocation donut, Monte Carlo confidence bands, dashboard widget drag-and-drop |
-| Phase 6 | Document vault file browser, rules engine visual builder, API key management UI |
-| Phase 7 | Tax progress bars (RRSP/TFSA room), HST breakdown tables |
-| Phase 8 | Emotional ROI badge picker, wearable widget previews |
-| Phase 9 | Benchmarking comparison cards, voice input waveform UI |
+| Phase       | UI/UX Requirements from This Document                                                                                                                                      |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pre-Phase 0 | Project structure, theme, breakpoints, animation tokens, font loading                                                                                                      |
+| Phase 1     | Mobile-first dashboard, bottom tabs, safe-to-spend widget, onboarding flow, empty states, loading skeletons, FAB, iOS/Android PWA meta tags, install prompts, seniors mode |
+| Phase 2     | Swipe-to-review gestures, bottom sheets for transaction details, bulk selection UI, receipt scanner camera UI, weekly recap card, push notification permission flow        |
+| Phase 3     | Family member avatars, shared/personal toggle, comment threads on transactions, expense splitting UI, streak visualization, confetti celebrations                          |
+| Phase 4     | AI coach chat interface (right drawer on desktop, full-screen on mobile), natural language input, insight cards, decision mode overlay                                     |
+| Phase 5     | Net worth chart with touch-scrub, investment allocation donut, Monte Carlo confidence bands, dashboard widget drag-and-drop                                                |
+| Phase 6     | Document vault file browser, rules engine visual builder, API key management UI                                                                                            |
+| Phase 7     | Tax progress bars (RRSP/TFSA room), HST breakdown tables                                                                                                                   |
+| Phase 8     | Emotional ROI badge picker, wearable widget previews                                                                                                                       |
+| Phase 9     | Benchmarking comparison cards, voice input waveform UI                                                                                                                     |
 
 ### Claude Code CLI Instruction
 

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { useLandingContent } from "@/components/budget/landing/content";
 import Link from "next/link";
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
 export function LandingNav() {
   const content = useLandingContent();
-  const t = useTranslations('landing.nav');
+  const t = useTranslations("landing.nav");
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#070A12]/60 backdrop-blur-xl">
@@ -19,7 +19,7 @@ export function LandingNav() {
           </div>
           <div className="leading-tight">
             <div className="text-sm font-semibold text-white">{content.brand.name}</div>
-            <div className="text-[11px] text-slate-400">{t('tagline')}</div>
+            <div className="text-[11px] text-slate-400">{t("tagline")}</div>
           </div>
         </Link>
 
@@ -40,5 +40,3 @@ export function LandingNav() {
     </header>
   );
 }
-
-

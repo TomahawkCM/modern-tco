@@ -1,22 +1,16 @@
-'use client';
+"use client";
 
 /**
  * Profile Settings Panel
  * Manage profiles, PINs, and profile-related settings
  */
 
-import React, { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
+import React, { useState } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import {
   Users,
   Plus,
@@ -27,18 +21,18 @@ import {
   ShieldCheck,
   ShieldOff,
   Crown,
-} from 'lucide-react';
-import { useProfile } from '@/contexts/ProfileContext';
-import { getProfileInitials } from '@/types/profile';
-import { isFeatureEnabled } from '@/config/features';
+} from "lucide-react";
+import { useProfile } from "@/contexts/ProfileContext";
+import { getProfileInitials } from "@/types/profile";
+import { isFeatureEnabled } from "@/config/features";
 import {
   ProfileCreateDialog,
   ProfileEditDialog,
   ProfileDeleteDialog,
   PINSetupDialog,
-} from '@/components/budget/profile';
-import type { Profile } from '@/types/profile';
-import { cn } from '@/lib/utils';
+} from "@/components/budget/profile";
+import type { Profile } from "@/types/profile";
+import { cn } from "@/lib/utils";
 
 export function ProfileSettingsPanel() {
   const { profiles, currentProfile, hasPIN } = useProfile();
@@ -47,9 +41,9 @@ export function ProfileSettingsPanel() {
   const [editingProfile, setEditingProfile] = useState<Profile | null>(null);
   const [deletingProfile, setDeletingProfile] = useState<Profile | null>(null);
   const [pinSetupProfile, setPinSetupProfile] = useState<Profile | null>(null);
-  const [pinSetupMode, setPinSetupMode] = useState<'set' | 'change' | 'remove'>('set');
+  const [pinSetupMode, setPinSetupMode] = useState<"set" | "change" | "remove">("set");
 
-  if (!isFeatureEnabled('multiProfiles')) {
+  if (!isFeatureEnabled("multiProfiles")) {
     return (
       <Card>
         <CardHeader>
@@ -57,15 +51,13 @@ export function ProfileSettingsPanel() {
             <Users className="h-5 w-5" />
             Profile Settings
           </CardTitle>
-          <CardDescription>
-            Multi-profile support is not enabled.
-          </CardDescription>
+          <CardDescription>Multi-profile support is not enabled.</CardDescription>
         </CardHeader>
       </Card>
     );
   }
 
-  const handlePINAction = (profile: Profile, mode: 'set' | 'change' | 'remove') => {
+  const handlePINAction = (profile: Profile, mode: "set" | "change" | "remove") => {
     setPinSetupProfile(profile);
     setPinSetupMode(mode);
   };
@@ -80,12 +72,10 @@ export function ProfileSettingsPanel() {
                 <Users className="h-5 w-5" />
                 Profile Settings
               </CardTitle>
-              <CardDescription>
-                Manage family member profiles and PIN protection
-              </CardDescription>
+              <CardDescription>Manage family member profiles and PIN protection</CardDescription>
             </div>
             <Button onClick={() => setShowCreateDialog(true)}>
-              <Plus className="h-4 w-4 mr-2" />
+              <Plus className="mr-2 h-4 w-4" />
               Add Profile
             </Button>
           </div>
@@ -99,16 +89,16 @@ export function ProfileSettingsPanel() {
               <div
                 key={profile.id}
                 className={cn(
-                  'flex items-center justify-between p-4 rounded-lg border',
-                  isCurrentProfile && 'bg-muted/50 border-primary/50'
+                  "flex items-center justify-between rounded-lg border p-4",
+                  isCurrentProfile && "border-primary/50 bg-muted/50"
                 )}
               >
                 {/* Profile Info */}
                 <div className="flex items-center gap-3">
                   <Avatar className="h-12 w-12">
                     <AvatarFallback
-                      style={{ backgroundColor: profile.avatarColor || '#10b981' }}
-                      className="text-white text-lg"
+                      style={{ backgroundColor: profile.avatarColor || "#10b981" }}
+                      className="text-lg text-white"
                     >
                       {getProfileInitials(profile.name)}
                     </AvatarFallback>
@@ -118,7 +108,7 @@ export function ProfileSettingsPanel() {
                       <span className="font-medium">{profile.name}</span>
                       {profile.isDefault && (
                         <Badge variant="secondary" className="text-xs">
-                          <Crown className="h-3 w-3 mr-1" />
+                          <Crown className="mr-1 h-3 w-3" />
                           Default
                         </Badge>
                       )}
@@ -147,24 +137,24 @@ export function ProfileSettingsPanel() {
                 {/* Actions */}
                 <div className="flex items-center gap-2">
                   {/* PIN Actions */}
-                  {isFeatureEnabled('pinAuthentication') && (
+                  {isFeatureEnabled("pinAuthentication") && (
                     <>
                       {profileHasPIN ? (
                         <>
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => handlePINAction(profile, 'change')}
+                            onClick={() => handlePINAction(profile, "change")}
                           >
-                            <Lock className="h-4 w-4 mr-1" />
+                            <Lock className="mr-1 h-4 w-4" />
                             Change PIN
                           </Button>
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => handlePINAction(profile, 'remove')}
+                            onClick={() => handlePINAction(profile, "remove")}
                           >
-                            <ShieldOff className="h-4 w-4 mr-1" />
+                            <ShieldOff className="mr-1 h-4 w-4" />
                             Remove PIN
                           </Button>
                         </>
@@ -172,9 +162,9 @@ export function ProfileSettingsPanel() {
                         <Button
                           variant="outline"
                           size="sm"
-                          onClick={() => handlePINAction(profile, 'set')}
+                          onClick={() => handlePINAction(profile, "set")}
                         >
-                          <ShieldCheck className="h-4 w-4 mr-1" />
+                          <ShieldCheck className="mr-1 h-4 w-4" />
                           Set PIN
                         </Button>
                       )}
@@ -184,11 +174,7 @@ export function ProfileSettingsPanel() {
                   <Separator orientation="vertical" className="h-6" />
 
                   {/* Edit/Delete */}
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setEditingProfile(profile)}
-                  >
+                  <Button variant="ghost" size="icon" onClick={() => setEditingProfile(profile)}>
                     <Edit className="h-4 w-4" />
                   </Button>
                   <Button
@@ -206,9 +192,9 @@ export function ProfileSettingsPanel() {
           })}
 
           {/* Info about profiles */}
-          <div className="p-4 rounded-lg bg-muted/50 border">
-            <h4 className="font-medium mb-2">About Profiles</h4>
-            <ul className="text-sm text-muted-foreground space-y-1">
+          <div className="rounded-lg border bg-muted/50 p-4">
+            <h4 className="mb-2 font-medium">About Profiles</h4>
+            <ul className="space-y-1 text-sm text-muted-foreground">
               <li>• Each profile can have its own private budgets</li>
               <li>• Shared budgets are visible to all profiles</li>
               <li>• PIN protection keeps profile data secure</li>
@@ -219,10 +205,7 @@ export function ProfileSettingsPanel() {
       </Card>
 
       {/* Dialogs */}
-      <ProfileCreateDialog
-        open={showCreateDialog}
-        onOpenChange={setShowCreateDialog}
-      />
+      <ProfileCreateDialog open={showCreateDialog} onOpenChange={setShowCreateDialog} />
 
       <ProfileEditDialog
         open={!!editingProfile}

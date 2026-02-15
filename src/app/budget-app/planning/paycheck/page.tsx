@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Paycheck Planning Page
@@ -8,7 +8,7 @@
  * Generates the next 6 paychecks and lets users allocate amounts per category.
  */
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo } from "react";
 import {
   CalendarDays,
   CheckCircle2,
@@ -20,8 +20,8 @@ import {
   Settings,
   Trash2,
   Wallet,
-} from 'lucide-react';
-import { db } from '@/lib/budget-db';
+} from "lucide-react";
+import { db } from "@/lib/budget-db";
 import type {
   PaycheckPlan,
   Paycheck,
@@ -29,15 +29,15 @@ import type {
   PaycheckSchedule,
   Category,
   Budget,
-} from '@/types/budget';
+} from "@/types/budget";
 import {
   generatePaycheckDates,
   getActivePaycheck,
   getAllocatedTotal,
   getUnallocatedAmount,
-} from '@/lib/budget/paycheck-planner';
-import { HelpTooltip } from '@/components/budget/HelpTooltip';
-import { ConfirmDialog } from '@/components/budget/ConfirmDialog';
+} from "@/lib/budget/paycheck-planner";
+import { HelpTooltip } from "@/components/budget/HelpTooltip";
+import { ConfirmDialog } from "@/components/budget/ConfirmDialog";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -46,40 +46,40 @@ import { ConfirmDialog } from '@/components/budget/ConfirmDialog';
 const PAYCHECK_COUNT = 6;
 
 const SCHEDULE_OPTIONS: { value: PaycheckSchedule; label: string; description: string }[] = [
-  { value: 'weekly', label: 'Weekly', description: 'Every week' },
-  { value: 'biweekly', label: 'Biweekly', description: 'Every two weeks' },
-  { value: 'semimonthly', label: 'Semi-monthly', description: '1st and 15th' },
-  { value: 'monthly', label: 'Monthly', description: 'Once a month' },
-  { value: 'irregular', label: 'Irregular', description: 'Custom dates' },
+  { value: "weekly", label: "Weekly", description: "Every week" },
+  { value: "biweekly", label: "Biweekly", description: "Every two weeks" },
+  { value: "semimonthly", label: "Semi-monthly", description: "1st and 15th" },
+  { value: "monthly", label: "Monthly", description: "Once a month" },
+  { value: "irregular", label: "Irregular", description: "Custom dates" },
 ];
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
-function formatCurrency(amount: number, currency: string = 'CAD'): string {
-  return new Intl.NumberFormat('en-CA', {
-    style: 'currency',
+function formatCurrency(amount: number, currency: string = "CAD"): string {
+  return new Intl.NumberFormat("en-CA", {
+    style: "currency",
     currency,
     minimumFractionDigits: 2,
   }).format(amount);
 }
 
 function formatDate(dateStr: string): string {
-  const [year, month, day] = dateStr.split('-').map(Number);
+  const [year, month, day] = dateStr.split("-").map(Number);
   const date = new Date(year, month - 1, day);
-  return date.toLocaleDateString('en-CA', {
-    weekday: 'short',
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
+  return date.toLocaleDateString("en-CA", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
   });
 }
 
 function toISODateString(date: Date): string {
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
 
@@ -110,7 +110,7 @@ export default function PaycheckPlanningPage() {
     try {
       const [plans, cats, buds] = await Promise.all([
         db.paycheckPlans.toArray(),
-        db.categories.where('type').equals('expense').toArray(),
+        db.categories.where("type").equals("expense").toArray(),
         db.budgets.toArray(),
       ]);
 
@@ -123,7 +123,7 @@ export default function PaycheckPlanningPage() {
         setShowSetup(true);
       }
     } catch (error) {
-      console.error('Error loading paycheck plan:', error);
+      console.error("Error loading paycheck plan:", error);
     } finally {
       setIsLoading(false);
     }
@@ -162,7 +162,7 @@ export default function PaycheckPlanningPage() {
     schedule: PaycheckSchedule,
     firstDate: Date,
     amount: number,
-    currency: string,
+    currency: string
   ) {
     const dates = generatePaycheckDates(schedule, firstDate, PAYCHECK_COUNT);
 
@@ -176,10 +176,10 @@ export default function PaycheckPlanningPage() {
     }));
 
     // For irregular schedule, create a single empty paycheck at the given date
-    if (schedule === 'irregular' && paychecks.length === 0) {
+    if (schedule === "irregular" && paychecks.length === 0) {
       paychecks.push({
         id: `paycheck_${Date.now()}_0`,
-        label: 'Paycheck 1',
+        label: "Paycheck 1",
         expectedDate: toISODateString(firstDate),
         expectedAmount: amount,
         currency,
@@ -212,7 +212,7 @@ export default function PaycheckPlanningPage() {
     if (!plan) return;
 
     const updatedPaychecks = plan.paychecks.map((pc) =>
-      pc.id === paycheckId ? { ...pc, allocations } : pc,
+      pc.id === paycheckId ? { ...pc, allocations } : pc
     );
 
     const updatedPlan: PaycheckPlan = {
@@ -232,9 +232,9 @@ export default function PaycheckPlanningPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64">
+      <div className="flex h-64 items-center justify-center">
         <div className="text-center">
-          <div className="w-16 h-16 border-4 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto" />
+          <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-teal-600 border-t-transparent" />
           <p className="mt-4 text-gray-600">Loading paycheck plan...</p>
         </div>
       </div>
@@ -254,7 +254,7 @@ export default function PaycheckPlanningPage() {
               iconSize="h-5 w-5"
             />
           </div>
-          <p className="text-lg text-slate-400 mt-2 font-medium">
+          <p className="mt-2 text-lg font-medium text-slate-400">
             Plan where every dollar goes before you get paid
           </p>
         </div>
@@ -262,18 +262,18 @@ export default function PaycheckPlanningPage() {
           {plan && (
             <button
               onClick={() => setShowSetup(true)}
-              className="inline-flex items-center gap-2 px-4 py-3 min-h-[48px] text-base font-semibold border border-white/10 bg-white/5 text-slate-300 rounded-lg hover:bg-white/10 hover:text-white transition-colors"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-base font-semibold text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
             >
-              <Settings className="w-5 h-5" />
+              <Settings className="h-5 w-5" />
               <span className="hidden sm:inline">Edit Schedule</span>
             </button>
           )}
           {!plan && !showSetup && (
             <button
               onClick={() => setShowSetup(true)}
-              className="inline-flex items-center gap-2 px-6 py-3 min-h-[48px] text-base font-semibold bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors shadow-md hover:shadow-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:outline-none"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-teal-500 px-6 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             >
-              <Plus className="w-5 h-5" />
+              <Plus className="h-5 w-5" />
               Set Up Plan
             </button>
           )}
@@ -282,47 +282,47 @@ export default function PaycheckPlanningPage() {
 
       {/* Summary Bar */}
       {plan && plan.paychecks.length > 0 && (
-        <div className="bg-white rounded-lg shadow-md p-8 border-l-4 border-teal-500">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="rounded-lg border-l-4 border-teal-500 bg-white p-8 shadow-md">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <DollarSign className="w-5 h-5 text-teal-600" aria-hidden="true" />
+              <div className="mb-2 flex items-center gap-2">
+                <DollarSign className="h-5 w-5 text-teal-600" aria-hidden="true" />
                 <p className="text-base font-medium text-gray-700">Total Income</p>
               </div>
               <p className="text-3xl font-bold text-gray-900">
                 {formatCurrency(summaryStats.totalIncome, plan.paychecks[0]?.currency)}
               </p>
-              <p className="text-sm text-gray-500 mt-1">
-                {plan.paychecks.length} paycheck{plan.paychecks.length !== 1 ? 's' : ''} planned
+              <p className="mt-1 text-sm text-gray-500">
+                {plan.paychecks.length} paycheck{plan.paychecks.length !== 1 ? "s" : ""} planned
               </p>
             </div>
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <CheckCircle2 className="w-5 h-5 text-blue-600" aria-hidden="true" />
+              <div className="mb-2 flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-blue-600" aria-hidden="true" />
                 <p className="text-base font-medium text-gray-700">Total Allocated</p>
               </div>
               <p className="text-3xl font-bold text-blue-600">
                 {formatCurrency(summaryStats.totalAllocated, plan.paychecks[0]?.currency)}
               </p>
-              <p className="text-sm text-gray-500 mt-1">
+              <p className="mt-1 text-sm text-gray-500">
                 {summaryStats.totalIncome > 0
                   ? `${Math.round((summaryStats.totalAllocated / summaryStats.totalIncome) * 100)}% of income`
-                  : '0% of income'}
+                  : "0% of income"}
               </p>
             </div>
             <div>
-              <div className="flex items-center gap-2 mb-2">
-                <PiggyBank className="w-5 h-5 text-green-600" aria-hidden="true" />
+              <div className="mb-2 flex items-center gap-2">
+                <PiggyBank className="h-5 w-5 text-green-600" aria-hidden="true" />
                 <p className="text-base font-medium text-gray-700">Safe to Spend</p>
               </div>
               <p
                 className={`text-3xl font-bold ${
-                  summaryStats.safeToSpend >= 0 ? 'text-green-600' : 'text-red-600'
+                  summaryStats.safeToSpend >= 0 ? "text-green-600" : "text-red-600"
                 }`}
               >
                 {formatCurrency(summaryStats.safeToSpend, plan.paychecks[0]?.currency)}
               </p>
-              <p className="text-sm text-gray-500 mt-1">Unallocated funds</p>
+              <p className="mt-1 text-sm text-gray-500">Unallocated funds</p>
             </div>
           </div>
         </div>
@@ -355,33 +355,31 @@ export default function PaycheckPlanningPage() {
               return (
                 <div
                   key={paycheck.id}
-                  className={`bg-white rounded-lg shadow p-6 transition-all ${
-                    isActive ? 'border-teal-500 border-2 shadow-lg' : 'border border-gray-200'
+                  className={`rounded-lg bg-white p-6 shadow transition-all ${
+                    isActive ? "border-2 border-teal-500 shadow-lg" : "border border-gray-200"
                   }`}
                 >
                   {/* Paycheck card header */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
                       <div
-                        className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                          isActive
-                            ? 'bg-teal-100 text-teal-600'
-                            : 'bg-gray-100 text-gray-500'
+                        className={`flex h-12 w-12 items-center justify-center rounded-full ${
+                          isActive ? "bg-teal-100 text-teal-600" : "bg-gray-100 text-gray-500"
                         }`}
                       >
-                        <Wallet className="w-6 h-6" />
+                        <Wallet className="h-6 w-6" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
                           <h3 className="text-lg font-bold text-gray-900">{paycheck.label}</h3>
                           {isActive && (
-                            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-teal-100 text-teal-700">
+                            <span className="rounded-full bg-teal-100 px-2 py-0.5 text-xs font-semibold text-teal-700">
                               Active
                             </span>
                           )}
                         </div>
                         <div className="flex items-center gap-1.5 text-sm text-gray-600">
-                          <CalendarDays className="w-4 h-4" aria-hidden="true" />
+                          <CalendarDays className="h-4 w-4" aria-hidden="true" />
                           <span>{formatDate(paycheck.expectedDate)}</span>
                         </div>
                       </div>
@@ -393,27 +391,31 @@ export default function PaycheckPlanningPage() {
                         </p>
                         <p
                           className={`text-sm font-medium ${
-                            unallocated > 0 ? 'text-amber-600' : unallocated === 0 ? 'text-green-600' : 'text-red-600'
+                            unallocated > 0
+                              ? "text-amber-600"
+                              : unallocated === 0
+                                ? "text-green-600"
+                                : "text-red-600"
                           }`}
                         >
                           {unallocated > 0
                             ? `${formatCurrency(unallocated, paycheck.currency)} unallocated`
                             : unallocated === 0
-                              ? 'Fully allocated'
+                              ? "Fully allocated"
                               : `${formatCurrency(Math.abs(unallocated), paycheck.currency)} over-allocated`}
                         </p>
                       </div>
                       <button
-                        onClick={() =>
-                          setExpandedPaycheckId(isExpanded ? null : paycheck.id)
+                        onClick={() => setExpandedPaycheckId(isExpanded ? null : paycheck.id)}
+                        className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg p-3 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
+                        aria-label={
+                          isExpanded ? "Collapse paycheck details" : "Expand paycheck details"
                         }
-                        className="p-3 min-h-[48px] min-w-[48px] flex items-center justify-center text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-                        aria-label={isExpanded ? 'Collapse paycheck details' : 'Expand paycheck details'}
                       >
                         {isExpanded ? (
-                          <ChevronUp className="w-5 h-5" />
+                          <ChevronUp className="h-5 w-5" />
                         ) : (
-                          <ChevronDown className="w-5 h-5" />
+                          <ChevronDown className="h-5 w-5" />
                         )}
                       </button>
                     </div>
@@ -422,34 +424,30 @@ export default function PaycheckPlanningPage() {
                   {/* Allocation progress bar */}
                   {paycheck.expectedAmount > 0 && (
                     <div className="mt-4">
-                      <div className="bg-gray-200 rounded-full h-2 overflow-hidden">
+                      <div className="h-2 overflow-hidden rounded-full bg-gray-200">
                         <div
                           className={`h-full transition-all ${
                             allocated / paycheck.expectedAmount >= 1
-                              ? 'bg-green-500'
+                              ? "bg-green-500"
                               : allocated / paycheck.expectedAmount >= 0.5
-                                ? 'bg-teal-500'
-                                : 'bg-gray-400'
+                                ? "bg-teal-500"
+                                : "bg-gray-400"
                           }`}
                           style={{
                             width: `${Math.min((allocated / paycheck.expectedAmount) * 100, 100)}%`,
                           }}
                         />
                       </div>
-                      <div className="flex justify-between mt-1 text-xs text-gray-500">
-                        <span>
-                          {formatCurrency(allocated, paycheck.currency)} allocated
-                        </span>
-                        <span>
-                          {Math.round((allocated / paycheck.expectedAmount) * 100)}%
-                        </span>
+                      <div className="mt-1 flex justify-between text-xs text-gray-500">
+                        <span>{formatCurrency(allocated, paycheck.currency)} allocated</span>
+                        <span>{Math.round((allocated / paycheck.expectedAmount) * 100)}%</span>
                       </div>
                     </div>
                   )}
 
                   {/* Expanded allocation summary */}
                   {isExpanded && !isAllocating && (
-                    <div className="mt-4 pt-4 border-t border-gray-200">
+                    <div className="mt-4 border-t border-gray-200 pt-4">
                       {paycheck.allocations.length > 0 ? (
                         <div className="space-y-2">
                           {paycheck.allocations.map((alloc) => {
@@ -457,17 +455,17 @@ export default function PaycheckPlanningPage() {
                             return (
                               <div
                                 key={alloc.categoryId}
-                                className="flex items-center justify-between py-2 px-3 bg-gray-50 rounded-lg"
+                                className="flex items-center justify-between rounded-lg bg-gray-50 px-3 py-2"
                               >
                                 <div className="flex items-center gap-2">
                                   <div
-                                    className="w-3 h-3 rounded-full"
+                                    className="h-3 w-3 rounded-full"
                                     style={{
-                                      backgroundColor: category?.color ?? '#9ca3af',
+                                      backgroundColor: category?.color ?? "#9ca3af",
                                     }}
                                   />
                                   <span className="text-sm font-medium text-gray-700">
-                                    {category?.name ?? 'Unknown Category'}
+                                    {category?.name ?? "Unknown Category"}
                                   </span>
                                 </div>
                                 <span className="text-sm font-semibold text-gray-900">
@@ -478,16 +476,17 @@ export default function PaycheckPlanningPage() {
                           })}
                         </div>
                       ) : (
-                        <p className="text-sm text-gray-500 italic">
-                          No allocations yet. Tap &quot;Allocate&quot; to assign funds to categories.
+                        <p className="text-sm italic text-gray-500">
+                          No allocations yet. Tap &quot;Allocate&quot; to assign funds to
+                          categories.
                         </p>
                       )}
                       <button
                         onClick={() => setAllocatingPaycheckId(paycheck.id)}
-                        className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 min-h-[48px] text-sm font-semibold bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors w-full justify-center"
+                        className="mt-4 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-lg bg-teal-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-600"
                       >
-                        <DollarSign className="w-4 h-4" />
-                        {paycheck.allocations.length > 0 ? 'Edit Allocations' : 'Allocate'}
+                        <DollarSign className="h-4 w-4" />
+                        {paycheck.allocations.length > 0 ? "Edit Allocations" : "Allocate"}
                       </button>
                     </div>
                   )}
@@ -498,9 +497,7 @@ export default function PaycheckPlanningPage() {
                       paycheck={paycheck}
                       categories={categories}
                       budgets={budgets}
-                      onSave={(allocations) =>
-                        handleSaveAllocations(paycheck.id, allocations)
-                      }
+                      onSave={(allocations) => handleSaveAllocations(paycheck.id, allocations)}
                       onCancel={() => setAllocatingPaycheckId(null)}
                     />
                   )}
@@ -513,17 +510,17 @@ export default function PaycheckPlanningPage() {
 
       {/* Empty state when plan has no paychecks (e.g. irregular with none added) */}
       {plan && !showSetup && plan.paychecks.length === 0 && (
-        <div className="bg-white rounded-lg shadow p-8 text-center">
-          <Wallet className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No paychecks scheduled</h3>
-          <p className="text-gray-600 mb-4">
+        <div className="rounded-lg bg-white p-8 text-center shadow">
+          <Wallet className="mx-auto mb-4 h-12 w-12 text-gray-400" />
+          <h3 className="mb-2 text-lg font-semibold text-gray-900">No paychecks scheduled</h3>
+          <p className="mb-4 text-gray-600">
             Your plan uses an irregular schedule. Update your setup to add paychecks.
           </p>
           <button
             onClick={() => setShowSetup(true)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[48px] text-sm font-semibold bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors"
+            className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-teal-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-600"
           >
-            <Settings className="w-4 h-4" />
+            <Settings className="h-4 w-4" />
             Edit Schedule
           </button>
         </div>
@@ -539,9 +536,9 @@ export default function PaycheckPlanningPage() {
         impact={
           plan
             ? {
-                title: 'You will lose:',
+                title: "You will lose:",
                 items: [
-                  `${plan.paychecks.length} scheduled paycheck${plan.paychecks.length !== 1 ? 's' : ''}`,
+                  `${plan.paychecks.length} scheduled paycheck${plan.paychecks.length !== 1 ? "s" : ""}`,
                   `All category allocations across paychecks`,
                   `Schedule: ${SCHEDULE_OPTIONS.find((o) => o.value === plan.schedule)?.label ?? plan.schedule}`,
                 ],
@@ -550,7 +547,7 @@ export default function PaycheckPlanningPage() {
         }
         confirmLabel="Delete Plan"
         variant="destructive"
-        icon={<Trash2 className="w-5 h-5" />}
+        icon={<Trash2 className="h-5 w-5" />}
       />
     </div>
   );
@@ -567,13 +564,16 @@ function SetupForm({
   onDelete,
 }: {
   existingPlan: PaycheckPlan | null;
-  onSubmit: (schedule: PaycheckSchedule, firstDate: Date, amount: number, currency: string) => Promise<void>;
+  onSubmit: (
+    schedule: PaycheckSchedule,
+    firstDate: Date,
+    amount: number,
+    currency: string
+  ) => Promise<void>;
   onCancel: () => void;
   onDelete?: () => void;
 }) {
-  const [schedule, setSchedule] = useState<PaycheckSchedule>(
-    existingPlan?.schedule ?? 'biweekly',
-  );
+  const [schedule, setSchedule] = useState<PaycheckSchedule>(existingPlan?.schedule ?? "biweekly");
   const [firstDate, setFirstDate] = useState<string>(() => {
     if (existingPlan?.paychecks.length) {
       return existingPlan.paychecks[0].expectedDate;
@@ -584,13 +584,13 @@ function SetupForm({
     if (existingPlan?.paychecks.length) {
       return existingPlan.paychecks[0].expectedAmount.toString();
     }
-    return '';
+    return "";
   });
   const [currency, setCurrency] = useState<string>(() => {
     if (existingPlan?.paychecks.length) {
       return existingPlan.paychecks[0].currency;
     }
-    return 'CAD';
+    return "CAD";
   });
   const [isSaving, setIsSaving] = useState(false);
 
@@ -601,7 +601,7 @@ function SetupForm({
 
     setIsSaving(true);
     try {
-      const [year, month, day] = firstDate.split('-').map(Number);
+      const [year, month, day] = firstDate.split("-").map(Number);
       await onSubmit(schedule, new Date(year, month - 1, day), amountNum, currency);
     } finally {
       setIsSaving(false);
@@ -611,27 +611,27 @@ function SetupForm({
   // Handle Escape key to close setup
   useEffect(() => {
     function handleEscapeKey(event: KeyboardEvent) {
-      if (event.key === 'Escape' && existingPlan) {
+      if (event.key === "Escape" && existingPlan) {
         onCancel();
       }
     }
-    document.addEventListener('keydown', handleEscapeKey);
-    return () => document.removeEventListener('keydown', handleEscapeKey);
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => document.removeEventListener("keydown", handleEscapeKey);
   }, [existingPlan, onCancel]);
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="rounded-lg bg-white p-6 shadow-md">
+      <div className="mb-6 flex items-center justify-between">
         <h2 className="text-xl font-semibold text-gray-900">
-          {existingPlan ? 'Edit Paycheck Schedule' : 'Set Up Paycheck Plan'}
+          {existingPlan ? "Edit Paycheck Schedule" : "Set Up Paycheck Plan"}
         </h2>
         {onDelete && (
           <button
             type="button"
             onClick={onDelete}
-            className="inline-flex items-center gap-2 px-3 py-2 min-h-[48px] text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors"
+            className="inline-flex min-h-[48px] items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
           >
-            <Trash2 className="w-4 h-4" />
+            <Trash2 className="h-4 w-4" />
             Delete Plan
           </button>
         )}
@@ -640,23 +640,21 @@ function SetupForm({
       <form onSubmit={(e) => void handleSubmit(e)} className="space-y-6">
         {/* Schedule Selector */}
         <div>
-          <div className="flex items-center gap-2 mb-3">
-            <label className="block text-sm font-medium text-gray-700">
-              Pay Frequency
-            </label>
+          <div className="mb-3 flex items-center gap-2">
+            <label className="block text-sm font-medium text-gray-700">Pay Frequency</label>
             <HelpTooltip
               content="How often do you get paid? This determines when your paychecks are generated."
               ariaLabel="More information about pay frequency"
             />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {SCHEDULE_OPTIONS.map((option) => (
               <label
                 key={option.value}
-                className={`flex items-center gap-3 p-4 min-h-[48px] rounded-lg border-2 cursor-pointer transition-all ${
+                className={`flex min-h-[48px] cursor-pointer items-center gap-3 rounded-lg border-2 p-4 transition-all ${
                   schedule === option.value
-                    ? 'border-teal-500 bg-teal-50'
-                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                    ? "border-teal-500 bg-teal-50"
+                    : "border-gray-200 hover:border-gray-300 hover:bg-gray-50"
                 }`}
               >
                 <input
@@ -665,7 +663,7 @@ function SetupForm({
                   value={option.value}
                   checked={schedule === option.value}
                   onChange={(e) => setSchedule(e.target.value as PaycheckSchedule)}
-                  className="w-4 h-4 text-teal-600 border-gray-300 focus:ring-teal-500"
+                  className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-500"
                 />
                 <div>
                   <p className="text-sm font-semibold text-gray-900">{option.label}</p>
@@ -678,10 +676,7 @@ function SetupForm({
 
         {/* First Paycheck Date */}
         <div>
-          <label
-            htmlFor="firstDate"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
+          <label htmlFor="firstDate" className="mb-2 block text-sm font-medium text-gray-700">
             First Paycheck Date
           </label>
           <input
@@ -689,17 +684,14 @@ function SetupForm({
             type="date"
             value={firstDate}
             onChange={(e) => setFirstDate(e.target.value)}
-            className="w-full max-w-xs px-4 py-2 min-h-[48px] border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+            className="min-h-[48px] w-full max-w-xs rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             required
           />
         </div>
 
         {/* Expected Amount */}
         <div>
-          <label
-            htmlFor="expectedAmount"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
+          <label htmlFor="expectedAmount" className="mb-2 block text-sm font-medium text-gray-700">
             Expected Amount (Net Pay)
           </label>
           <div className="relative w-full max-w-xs">
@@ -712,7 +704,7 @@ function SetupForm({
               placeholder="0.00"
               step="0.01"
               min="0"
-              className="w-full pl-8 pr-4 py-2 min-h-[48px] border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+              className="min-h-[48px] w-full rounded-lg border border-gray-300 py-2 pl-8 pr-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
               required
             />
           </div>
@@ -720,17 +712,14 @@ function SetupForm({
 
         {/* Currency */}
         <div>
-          <label
-            htmlFor="currency"
-            className="block text-sm font-medium text-gray-700 mb-2"
-          >
+          <label htmlFor="currency" className="mb-2 block text-sm font-medium text-gray-700">
             Currency
           </label>
           <select
             id="currency"
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}
-            className="w-full max-w-xs px-4 py-2 min-h-[48px] border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:border-transparent focus:outline-none"
+            className="min-h-[48px] w-full max-w-xs rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
           >
             <option value="CAD">CAD - Canadian Dollar</option>
             <option value="USD">USD - US Dollar</option>
@@ -746,7 +735,7 @@ function SetupForm({
             <button
               type="button"
               onClick={onCancel}
-              className="px-6 py-2.5 min-h-[48px] border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+              className="min-h-[48px] rounded-lg border border-gray-300 px-6 py-2.5 font-medium text-gray-700 transition-colors hover:bg-gray-50"
             >
               Cancel
             </button>
@@ -754,17 +743,17 @@ function SetupForm({
           <button
             type="submit"
             disabled={isSaving || !amount || parseFloat(amount) <= 0}
-            className="inline-flex items-center gap-2 px-6 py-2.5 min-h-[48px] text-base font-semibold bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+            className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-teal-500 px-6 py-2.5 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-600 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSaving ? (
               <>
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
                 Generating...
               </>
             ) : (
               <>
-                <CalendarDays className="w-5 h-5" />
-                {existingPlan ? 'Regenerate Paychecks' : 'Generate Paychecks'}
+                <CalendarDays className="h-5 w-5" />
+                {existingPlan ? "Regenerate Paychecks" : "Generate Paychecks"}
               </>
             )}
           </button>
@@ -845,19 +834,16 @@ function AllocationEditor({
 
   function renderCategoryRow(category: Category) {
     const budget = getBudgetForCategory(category.id);
-    const currentValue = allocationMap[category.id] || '';
+    const currentValue = allocationMap[category.id] || "";
 
     return (
-      <div
-        key={category.id}
-        className="flex items-center gap-3 py-3 px-3 bg-gray-50 rounded-lg"
-      >
+      <div key={category.id} className="flex items-center gap-3 rounded-lg bg-gray-50 px-3 py-3">
         <div
-          className="w-3 h-3 rounded-full flex-shrink-0"
-          style={{ backgroundColor: category.color || '#9ca3af' }}
+          className="h-3 w-3 flex-shrink-0 rounded-full"
+          style={{ backgroundColor: category.color || "#9ca3af" }}
         />
-        <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-gray-900 truncate">{category.name}</p>
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-sm font-medium text-gray-900">{category.name}</p>
           {budget && (
             <p className="text-xs text-gray-500">
               Budget: {formatCurrency(budget.amount, paycheck.currency)}/{budget.period}
@@ -865,9 +851,7 @@ function AllocationEditor({
           )}
         </div>
         <div className="relative w-32 flex-shrink-0">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
-            $
-          </span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">$</span>
           <input
             type="number"
             value={currentValue}
@@ -875,7 +859,7 @@ function AllocationEditor({
             placeholder="0.00"
             step="0.01"
             min="0"
-            className="w-full pl-7 pr-2 py-2 min-h-[48px] text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent focus:outline-none text-right"
+            className="min-h-[48px] w-full rounded-lg border border-gray-300 py-2 pl-7 pr-2 text-right text-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
             aria-label={`Allocation for ${category.name}`}
           />
         </div>
@@ -884,39 +868,31 @@ function AllocationEditor({
   }
 
   return (
-    <div className="mt-4 pt-4 border-t border-gray-200">
+    <div className="mt-4 border-t border-gray-200 pt-4">
       {/* Remaining indicator */}
       <div
-        className={`flex items-center justify-between p-3 rounded-lg mb-4 ${
+        className={`mb-4 flex items-center justify-between rounded-lg p-3 ${
           remaining > 0
-            ? 'bg-amber-50 border border-amber-200'
+            ? "border border-amber-200 bg-amber-50"
             : remaining === 0
-              ? 'bg-green-50 border border-green-200'
-              : 'bg-red-50 border border-red-200'
+              ? "border border-green-200 bg-green-50"
+              : "border border-red-200 bg-red-50"
         }`}
       >
         <span
           className={`text-sm font-medium ${
-            remaining > 0
-              ? 'text-amber-700'
-              : remaining === 0
-                ? 'text-green-700'
-                : 'text-red-700'
+            remaining > 0 ? "text-amber-700" : remaining === 0 ? "text-green-700" : "text-red-700"
           }`}
         >
           {remaining > 0
-            ? 'Remaining to allocate'
+            ? "Remaining to allocate"
             : remaining === 0
-              ? 'Fully allocated!'
-              : 'Over-allocated by'}
+              ? "Fully allocated!"
+              : "Over-allocated by"}
         </span>
         <span
           className={`text-lg font-bold ${
-            remaining > 0
-              ? 'text-amber-700'
-              : remaining === 0
-                ? 'text-green-700'
-                : 'text-red-700'
+            remaining > 0 ? "text-amber-700" : remaining === 0 ? "text-green-700" : "text-red-700"
           }`}
         >
           {formatCurrency(Math.abs(remaining), paycheck.currency)}
@@ -926,21 +902,15 @@ function AllocationEditor({
       {/* Categories with budgets */}
       {categoriesWithBudget.withBudget.length > 0 && (
         <div className="mb-4">
-          <h4 className="text-sm font-semibold text-gray-700 mb-2">
-            Budgeted Categories
-          </h4>
-          <div className="space-y-2">
-            {categoriesWithBudget.withBudget.map(renderCategoryRow)}
-          </div>
+          <h4 className="mb-2 text-sm font-semibold text-gray-700">Budgeted Categories</h4>
+          <div className="space-y-2">{categoriesWithBudget.withBudget.map(renderCategoryRow)}</div>
         </div>
       )}
 
       {/* Categories without budgets */}
       {categoriesWithBudget.withoutBudget.length > 0 && (
         <div className="mb-4">
-          <h4 className="text-sm font-semibold text-gray-700 mb-2">
-            Other Categories
-          </h4>
+          <h4 className="mb-2 text-sm font-semibold text-gray-700">Other Categories</h4>
           <div className="space-y-2">
             {categoriesWithBudget.withoutBudget.map(renderCategoryRow)}
           </div>
@@ -948,11 +918,11 @@ function AllocationEditor({
       )}
 
       {/* Save / Cancel */}
-      <div className="flex gap-3 mt-4">
+      <div className="mt-4 flex gap-3">
         <button
           type="button"
           onClick={onCancel}
-          className="flex-1 px-4 py-2.5 min-h-[48px] border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+          className="min-h-[48px] flex-1 rounded-lg border border-gray-300 px-4 py-2.5 font-medium text-gray-700 transition-colors hover:bg-gray-50"
         >
           Cancel
         </button>
@@ -960,16 +930,16 @@ function AllocationEditor({
           type="button"
           onClick={() => void handleSave()}
           disabled={isSaving}
-          className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 min-h-[48px] bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+          className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-lg bg-teal-500 px-4 py-2.5 font-semibold text-white transition-colors hover:bg-teal-600 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isSaving ? (
             <>
-              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
               Saving...
             </>
           ) : (
             <>
-              <CheckCircle2 className="w-4 h-4" />
+              <CheckCircle2 className="h-4 w-4" />
               Save Allocations
             </>
           )}

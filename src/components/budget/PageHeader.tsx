@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import type { ReactNode } from 'react';
-import { Breadcrumb, type BreadcrumbItem } from './Breadcrumb';
-import { Button } from '@/components/ui/button';
+import type { ReactNode } from "react";
+import { Breadcrumb, type BreadcrumbItem } from "./Breadcrumb";
+import { Button } from "@/components/ui/button";
 
 export interface PageHeaderAction {
   label: string;
   onClick: () => void;
-  variant?: 'default' | 'secondary' | 'outline' | 'ghost';
+  variant?: "default" | "secondary" | "outline" | "ghost";
   icon?: ReactNode;
   ariaLabel?: string;
 }
@@ -26,27 +26,21 @@ export function PageHeader({
   description,
   breadcrumbs,
   actions,
-  className = '',
+  className = "",
   children,
 }: PageHeaderProps) {
   return (
     <header className={`mb-section ${className}`}>
       {/* Breadcrumbs */}
-      {breadcrumbs && breadcrumbs.length > 0 && (
-        <Breadcrumb items={breadcrumbs} />
-      )}
+      {breadcrumbs && breadcrumbs.length > 0 && <Breadcrumb items={breadcrumbs} />}
 
       {/* Title & Actions Row */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         {/* Title & Description */}
         <div className="flex-1">
-          <h1 className="text-3xl font-bold text-foreground sm:text-4xl">
-            {title}
-          </h1>
+          <h1 className="text-3xl font-bold text-foreground sm:text-4xl">{title}</h1>
           {description && (
-            <p className="mt-2 text-base text-muted-foreground sm:text-lg">
-              {description}
-            </p>
+            <p className="mt-2 text-base text-muted-foreground sm:text-lg">{description}</p>
           )}
         </div>
 
@@ -56,7 +50,7 @@ export function PageHeader({
             {actions.map((action, index) => (
               <Button
                 key={index}
-                variant={action.variant || 'default'}
+                variant={action.variant || "default"}
                 onClick={action.onClick}
                 className="min-h-touch"
                 aria-label={action.ariaLabel || action.label}
@@ -86,8 +80,6 @@ export function SimplePageHeader({
   title,
   description,
   breadcrumbs,
-}: Pick<PageHeaderProps, 'title' | 'description' | 'breadcrumbs'>) {
-  return (
-    <PageHeader title={title} description={description} breadcrumbs={breadcrumbs} />
-  );
+}: Pick<PageHeaderProps, "title" | "description" | "breadcrumbs">) {
+  return <PageHeader title={title} description={description} breadcrumbs={breadcrumbs} />;
 }

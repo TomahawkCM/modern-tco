@@ -3,9 +3,9 @@
  * Month-over-month trends with income, expenses, net savings, and trends
  */
 
-import type { Workbook, Worksheet } from 'exceljs';
-import type { ExcelExportOptions, MonthlySummaryRow } from '../types';
-import type { Transaction } from '@/types/budget';
+import type { Workbook, Worksheet } from "exceljs";
+import type { ExcelExportOptions, MonthlySummaryRow } from "../types";
+import type { Transaction } from "@/types/budget";
 import {
   FONTS,
   FILLS,
@@ -22,7 +22,7 @@ import {
   createSummaryRow,
   getTrendArrow,
   EXCEL_COLORS,
-} from '../styles';
+} from "../styles";
 
 interface MonthlySummarySheetData {
   transactions: Transaction[];
@@ -33,9 +33,9 @@ interface MonthlySummarySheetData {
  * Get month display name
  */
 function getMonthDisplay(monthKey: string): string {
-  const [year, month] = monthKey.split('-');
+  const [year, month] = monthKey.split("-");
   const date = new Date(parseInt(year), parseInt(month) - 1);
-  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
 
 /**
@@ -44,9 +44,9 @@ function getMonthDisplay(monthKey: string): string {
 function aggregateByMonth(transactions: Transaction[]): Map<string, MonthlySummaryRow> {
   const monthMap = new Map<string, MonthlySummaryRow>();
 
-  transactions.forEach(tx => {
+  transactions.forEach((tx) => {
     const date = new Date(tx.date);
-    const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+    const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
 
     if (!monthMap.has(monthKey)) {
       monthMap.set(monthKey, {
@@ -72,14 +72,13 @@ function aggregateByMonth(transactions: Transaction[]): Map<string, MonthlySumma
   });
 
   // Calculate derived values
-  monthMap.forEach(monthData => {
+  monthMap.forEach((monthData) => {
     monthData.net = monthData.income - monthData.expenses;
     monthData.savingsRate = monthData.income > 0 ? monthData.net / monthData.income : 0;
   });
 
   // Sort by month (newest first) and calculate vs prev month
-  const sortedEntries = Array.from(monthMap.entries())
-    .sort((a, b) => b[0].localeCompare(a[0]));
+  const sortedEntries = Array.from(monthMap.entries()).sort((a, b) => b[0].localeCompare(a[0]));
 
   for (let i = 0; i < sortedEntries.length - 1; i++) {
     const [, current] = sortedEntries[i];
@@ -98,8 +97,8 @@ export async function generateMonthlySummarySheet(
   data: MonthlySummarySheetData,
   options: ExcelExportOptions
 ): Promise<Worksheet> {
-  const worksheet = workbook.addWorksheet('Monthly Summary', {
-    properties: { tabColor: { argb: 'FF3B82F6' } }, // Blue tab
+  const worksheet = workbook.addWorksheet("Monthly Summary", {
+    properties: { tabColor: { argb: "FF3B82F6" } }, // Blue tab
   });
 
   // Aggregate data
@@ -108,20 +107,20 @@ export async function generateMonthlySummarySheet(
 
   // Column definitions
   const columns = [
-    { header: 'Month', key: 'month', width: 14 },
-    { header: 'Income', key: 'income', width: 14 },
-    { header: 'Expenses', key: 'expenses', width: 14 },
-    { header: 'Net', key: 'net', width: 14 },
-    { header: 'Savings Rate', key: 'savingsRate', width: 13 },
-    { header: 'vs Prev Month', key: 'vsPrevMonth', width: 14 },
-    { header: 'Transactions', key: 'transactionCount', width: 13 },
-    { header: 'Trend', key: 'trend', width: 8 },
+    { header: "Month", key: "month", width: 14 },
+    { header: "Income", key: "income", width: 14 },
+    { header: "Expenses", key: "expenses", width: 14 },
+    { header: "Net", key: "net", width: 14 },
+    { header: "Savings Rate", key: "savingsRate", width: 13 },
+    { header: "vs Prev Month", key: "vsPrevMonth", width: 14 },
+    { header: "Transactions", key: "transactionCount", width: 13 },
+    { header: "Trend", key: "trend", width: 8 },
   ];
 
   // Create title section
   let currentRow = createTitleSection(
     worksheet,
-    'Monthly Summary',
+    "Monthly Summary",
     `${monthRows.length} months of financial data`,
     new Date()
   );
@@ -130,21 +129,26 @@ export async function generateMonthlySummarySheet(
   const avgIncome = monthRows.reduce((sum, r) => sum + r.income, 0) / monthRows.length || 0;
   const avgExpenses = monthRows.reduce((sum, r) => sum + r.expenses, 0) / monthRows.length || 0;
   const avgNet = monthRows.reduce((sum, r) => sum + r.net, 0) / monthRows.length || 0;
-  const avgSavingsRate = monthRows.reduce((sum, r) => sum + r.savingsRate, 0) / monthRows.length || 0;
+  const avgSavingsRate =
+    monthRows.reduce((sum, r) => sum + r.savingsRate, 0) / monthRows.length || 0;
 
   // Summary stats row
   const statsRow = worksheet.getRow(currentRow);
-  statsRow.getCell(1).value = 'Monthly Averages:';
+  statsRow.getCell(1).value = "Monthly Averages:";
   statsRow.getCell(1).font = { ...FONTS.body, bold: true };
   statsRow.getCell(2).value = avgIncome;
   statsRow.getCell(2).numFmt = NUMBER_FORMATS.currency;
-  statsRow.getCell(2).font = { ...FONTS.body, color: { argb: 'FF10B981' } };
+  statsRow.getCell(2).font = { ...FONTS.body, color: { argb: "FF10B981" } };
   statsRow.getCell(3).value = avgExpenses;
   statsRow.getCell(3).numFmt = NUMBER_FORMATS.currency;
-  statsRow.getCell(3).font = { ...FONTS.body, color: { argb: 'FFEF4444' } };
+  statsRow.getCell(3).font = { ...FONTS.body, color: { argb: "FFEF4444" } };
   statsRow.getCell(4).value = avgNet;
   statsRow.getCell(4).numFmt = NUMBER_FORMATS.currency;
-  statsRow.getCell(4).font = { ...FONTS.body, bold: true, color: { argb: avgNet >= 0 ? 'FF10B981' : 'FFEF4444' } };
+  statsRow.getCell(4).font = {
+    ...FONTS.body,
+    bold: true,
+    color: { argb: avgNet >= 0 ? "FF10B981" : "FFEF4444" },
+  };
   statsRow.getCell(5).value = avgSavingsRate;
   statsRow.getCell(5).numFmt = NUMBER_FORMATS.percent;
   currentRow += 2;
@@ -159,7 +163,10 @@ export async function generateMonthlySummarySheet(
   currentRow++;
 
   // Set column widths
-  setColumnWidths(worksheet, columns.map(c => c.width));
+  setColumnWidths(
+    worksheet,
+    columns.map((c) => c.width)
+  );
 
   // Add data rows
   monthRows.forEach((monthData, index) => {
@@ -172,12 +179,12 @@ export async function generateMonthlySummarySheet(
     // Income
     row.getCell(2).value = monthData.income;
     row.getCell(2).numFmt = NUMBER_FORMATS.currency;
-    row.getCell(2).font = { ...FONTS.body, color: { argb: 'FF10B981' } };
+    row.getCell(2).font = { ...FONTS.body, color: { argb: "FF10B981" } };
 
     // Expenses
     row.getCell(3).value = monthData.expenses;
     row.getCell(3).numFmt = NUMBER_FORMATS.currency;
-    row.getCell(3).font = { ...FONTS.body, color: { argb: 'FFEF4444' } };
+    row.getCell(3).font = { ...FONTS.body, color: { argb: "FFEF4444" } };
 
     // Net
     row.getCell(4).value = monthData.net;
@@ -197,12 +204,19 @@ export async function generateMonthlySummarySheet(
     row.getCell(7).alignment = ALIGNMENTS.center;
 
     // Trend arrow
-    const trend = monthData.vsPrevMonth > 0 ? '▲' : monthData.vsPrevMonth < 0 ? '▼' : '─';
+    const trend = monthData.vsPrevMonth > 0 ? "▲" : monthData.vsPrevMonth < 0 ? "▼" : "─";
     row.getCell(8).value = trend;
     row.getCell(8).alignment = ALIGNMENTS.center;
     row.getCell(8).font = {
       ...FONTS.body,
-      color: { argb: monthData.vsPrevMonth > 0 ? 'FF10B981' : monthData.vsPrevMonth < 0 ? 'FFEF4444' : 'FF6B7280' },
+      color: {
+        argb:
+          monthData.vsPrevMonth > 0
+            ? "FF10B981"
+            : monthData.vsPrevMonth < 0
+              ? "FFEF4444"
+              : "FF6B7280",
+      },
     };
 
     // Style the row
@@ -212,9 +226,9 @@ export async function generateMonthlySummarySheet(
     if (monthData.net < 0) {
       for (let i = 1; i <= columns.length; i++) {
         row.getCell(i).fill = {
-          type: 'pattern',
-          pattern: 'solid',
-          fgColor: { argb: 'FFFEE2E2' }, // Light red
+          type: "pattern",
+          pattern: "solid",
+          fgColor: { argb: "FFFEE2E2" }, // Light red
         };
       }
     }
@@ -234,7 +248,7 @@ export async function generateMonthlySummarySheet(
   createSummaryRow(
     worksheet,
     currentRow,
-    'TOTAL',
+    "TOTAL",
     [
       totals.income,
       totals.expenses,
@@ -242,7 +256,7 @@ export async function generateMonthlySummarySheet(
       totals.net / totals.income,
       null,
       totals.transactions,
-      '',
+      "",
     ],
     columns.length
   );
@@ -257,17 +271,17 @@ export async function generateMonthlySummarySheet(
 
     // Create a simple data table for the chart
     const chartRow = worksheet.getRow(currentRow);
-    chartRow.getCell(1).value = 'Income vs Expenses Chart Data';
+    chartRow.getCell(1).value = "Income vs Expenses Chart Data";
     chartRow.getCell(1).font = FONTS.subheader;
     currentRow++;
 
     // Note: ExcelJS chart support is limited. For full chart support,
     // we add the data in a format that's easy to chart manually in Excel
     const chartHeaderRow = worksheet.getRow(currentRow);
-    chartHeaderRow.getCell(1).value = 'Month';
-    chartHeaderRow.getCell(2).value = 'Income';
-    chartHeaderRow.getCell(3).value = 'Expenses';
-    chartHeaderRow.getCell(4).value = 'Net';
+    chartHeaderRow.getCell(1).value = "Month";
+    chartHeaderRow.getCell(2).value = "Income";
+    chartHeaderRow.getCell(3).value = "Expenses";
+    chartHeaderRow.getCell(4).value = "Net";
     styleHeaderRow(chartHeaderRow, 4);
     currentRow++;
 

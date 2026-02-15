@@ -1,24 +1,24 @@
 # Competitive Analysis: Top 10 Budget & Personal Finance Apps
 
-*Research conducted: February 13, 2026*
-*Sources: 50+ cited across official app websites, NerdWallet, FinanceBuzz, CNBC, CBS News, Reddit, GitHub, market research firms*
+_Research conducted: February 13, 2026_
+_Sources: 50+ cited across official app websites, NerdWallet, FinanceBuzz, CNBC, CBS News, Reddit, GitHub, market research firms_
 
 ---
 
 ## Summary Table
 
-| # | App | Price/Year | Est. Users | Architecture | Key Differentiator |
-|---|-----|-----------|---------|-------------|-------------------|
-| 1 | **YNAB** | $109 | ~500K+ | Cloud (Heroku/AWS) | Four Rules methodology; behavioral change |
-| 2 | **Mint/Credit Karma** | Free | 100M+ (CK) | Cloud | Defunct as budget app; cautionary tale |
-| 3 | **Monarch Money** | $99.99 | 1M+ | Cloud (Cloudflare) | Triple bank sync; AI Assistant; ex-Mint team |
-| 4 | **Copilot Money** | $95 | 100K+ | Native Apple | Per-user private AI model; best design |
-| 5 | **Goodbudget** | $80 (free tier) | ~hundreds of K | Cloud | True digital envelopes; useful free tier |
-| 6 | **EveryDollar** | $79.99 (free tier) | 12M+ downloads | Cloud | Ramsey ecosystem; Margin Finder; coaching |
-| 7 | **PocketGuard** | $74.99 | 1M+ | Cloud | "In My Pocket" metric; bill negotiation |
-| 8 | **Simplifi** | $71.88 | ~hundreds of K | Cloud (100%) | Lowest premium price; daily safe-to-spend |
-| 9 | **Rocket Money** | $72-144 | 2.7M+ | Cloud (AWS) | Bill negotiation; subscription cancellation |
-| 10 | **Actual Budget** | Free | 24.8K GitHub stars | Local-first (SQLite) | Open source; local-first; E2E encryption |
+| #   | App                   | Price/Year         | Est. Users         | Architecture         | Key Differentiator                           |
+| --- | --------------------- | ------------------ | ------------------ | -------------------- | -------------------------------------------- |
+| 1   | **YNAB**              | $109               | ~500K+             | Cloud (Heroku/AWS)   | Four Rules methodology; behavioral change    |
+| 2   | **Mint/Credit Karma** | Free               | 100M+ (CK)         | Cloud                | Defunct as budget app; cautionary tale       |
+| 3   | **Monarch Money**     | $99.99             | 1M+                | Cloud (Cloudflare)   | Triple bank sync; AI Assistant; ex-Mint team |
+| 4   | **Copilot Money**     | $95                | 100K+              | Native Apple         | Per-user private AI model; best design       |
+| 5   | **Goodbudget**        | $80 (free tier)    | ~hundreds of K     | Cloud                | True digital envelopes; useful free tier     |
+| 6   | **EveryDollar**       | $79.99 (free tier) | 12M+ downloads     | Cloud                | Ramsey ecosystem; Margin Finder; coaching    |
+| 7   | **PocketGuard**       | $74.99             | 1M+                | Cloud                | "In My Pocket" metric; bill negotiation      |
+| 8   | **Simplifi**          | $71.88             | ~hundreds of K     | Cloud (100%)         | Lowest premium price; daily safe-to-spend    |
+| 9   | **Rocket Money**      | $72-144            | 2.7M+              | Cloud (AWS)          | Bill negotiation; subscription cancellation  |
+| 10  | **Actual Budget**     | Free               | 24.8K GitHub stars | Local-first (SQLite) | Open source; local-first; E2E encryption     |
 
 ---
 
@@ -49,25 +49,25 @@
 
 ### Pricing
 
-| Tier | Price | Notes |
-|------|-------|-------|
-| Free Trial | 34 days | Full access, no credit card required |
-| Monthly | $14.99/month | |
-| Annual | $109/year ($9.08/mo) | |
-| Students | Free for 1 year | College students with .edu email |
-| YNAB Together | Included | Up to 6 people per account at no extra cost |
+| Tier          | Price                | Notes                                       |
+| ------------- | -------------------- | ------------------------------------------- |
+| Free Trial    | 34 days              | Full access, no credit card required        |
+| Monthly       | $14.99/month         |                                             |
+| Annual        | $109/year ($9.08/mo) |                                             |
+| Students      | Free for 1 year      | College students with .edu email            |
+| YNAB Together | Included             | Up to 6 people per account at no extra cost |
 
 No free tier. No ads. No data selling. Revenue is 100% subscription-based.
 
 ### Platform Availability
 
-| Platform | Available | Notes |
-|----------|-----------|-------|
-| Web | Yes | Full-featured web app |
-| iOS | Yes | 4.8 stars, App Store |
-| Android | Yes | 4.7 stars, Google Play |
-| Desktop | No | Web-only (no native desktop app) |
-| Apple Watch | No | |
+| Platform    | Available | Notes                            |
+| ----------- | --------- | -------------------------------- |
+| Web         | Yes       | Full-featured web app            |
+| iOS         | Yes       | 4.8 stars, App Store             |
+| Android     | Yes       | 4.7 stars, Google Play           |
+| Desktop     | No        | Web-only (no native desktop app) |
+| Apple Watch | No        |                                  |
 
 ### Complete Feature List
 
@@ -170,23 +170,24 @@ Mint was shut down on March 23, 2024 because it was not financially viable for I
 
 ### Pricing
 
-| Tier | Price | Notes |
-|------|-------|-------|
-| Credit Karma | Free | Ad-supported, financial product recommendations |
+| Tier         | Price | Notes                                           |
+| ------------ | ----- | ----------------------------------------------- |
+| Credit Karma | Free  | Ad-supported, financial product recommendations |
 
 Credit Karma is free but monetizes through financial product recommendations (credit cards, loans, insurance).
 
 ### Platform Availability
 
-| Platform | Available | Notes |
-|----------|-----------|-------|
-| Web | Yes | creditkarma.com |
-| iOS | Yes | |
-| Android | Yes | |
+| Platform | Available | Notes           |
+| -------- | --------- | --------------- |
+| Web      | Yes       | creditkarma.com |
+| iOS      | Yes       |                 |
+| Android  | Yes       |                 |
 
 ### What Credit Karma Offers vs. What Mint Had
 
 **Credit Karma HAS:**
+
 - Free credit score monitoring
 - Account syncing and net worth tracking
 - Spending breakdown by category
@@ -194,6 +195,7 @@ Credit Karma is free but monetizes through financial product recommendations (cr
 - Financial product marketplace
 
 **Credit Karma LACKS (that Mint had):**
+
 - Actual budget creation and management
 - Savings goals
 - Subscription management
@@ -218,6 +220,7 @@ Credit Karma is free but monetizes through financial product recommendations (cr
 ### Market Impact
 
 Mint's shutdown in March 2024 was a watershed moment for the budget app industry:
+
 - **Monarch Money** saw 2,000% user growth
 - **Copilot Money** had their "biggest day ever"
 - **Simplifi** saw their largest increase in subscriptions since launch
@@ -249,24 +252,24 @@ Mint's shutdown in March 2024 was a watershed moment for the budget app industry
 
 ### Pricing
 
-| Tier | Price | Notes |
-|------|-------|-------|
-| Free Trial | 7 days | Full access |
-| Monthly | $14.99/month | |
-| Annual | $99.99/year ($8.33/mo) | |
-| Promotional | 50% off first year | Periodic promotions |
-| Household | Included | Partner access at no extra cost |
+| Tier        | Price                  | Notes                           |
+| ----------- | ---------------------- | ------------------------------- |
+| Free Trial  | 7 days                 | Full access                     |
+| Monthly     | $14.99/month           |                                 |
+| Annual      | $99.99/year ($8.33/mo) |                                 |
+| Promotional | 50% off first year     | Periodic promotions             |
+| Household   | Included               | Partner access at no extra cost |
 
 No free tier. No ads. No data selling. Single tier with all features.
 
 ### Platform Availability
 
-| Platform | Available | Notes |
-|----------|-----------|-------|
-| Web | Yes | Full-featured web app |
-| iOS | Yes | |
-| Android | Yes | |
-| Desktop | No | Web-based |
+| Platform | Available | Notes                 |
+| -------- | --------- | --------------------- |
+| Web      | Yes       | Full-featured web app |
+| iOS      | Yes       |                       |
+| Android  | Yes       |                       |
+| Desktop  | No        | Web-based             |
 
 ### Complete Feature List
 
@@ -365,23 +368,23 @@ No free tier. No ads. No data selling. Single tier with all features.
 
 ### Pricing
 
-| Tier | Price | Notes |
-|------|-------|-------|
-| Free Trial | 30 days | No credit card required |
-| Monthly | $13/month | |
-| Annual | $95/year (~$7.92/mo) | |
+| Tier       | Price                | Notes                   |
+| ---------- | -------------------- | ----------------------- |
+| Free Trial | 30 days              | No credit card required |
+| Monthly    | $13/month            |                         |
+| Annual     | $95/year (~$7.92/mo) |                         |
 
 No free tier. No ads. No data selling. Single tier with all features.
 
 ### Platform Availability
 
-| Platform | Available | Notes |
-|----------|-----------|-------|
-| Web | Yes | Launched January 2026 |
-| iOS | Yes | Apple Editor's Choice; Design Award Finalist 2024 |
-| macOS | Yes | Native Mac app |
-| Android | No | Promised "coming soon" by CEO |
-| Apple Watch | Unknown | |
+| Platform    | Available | Notes                                             |
+| ----------- | --------- | ------------------------------------------------- |
+| Web         | Yes       | Launched January 2026                             |
+| iOS         | Yes       | Apple Editor's Choice; Design Award Finalist 2024 |
+| macOS       | Yes       | Native Mac app                                    |
+| Android     | No        | Promised "coming soon" by CEO                     |
+| Apple Watch | Unknown   |                                                   |
 
 **Major limitation:** Apple ecosystem only (iOS, macOS, web). No Android.
 
@@ -475,22 +478,22 @@ No free tier. No ads. No data selling. Single tier with all features.
 
 ### Pricing
 
-| Tier | Price | Notes |
-|------|-------|-------|
-| Free | $0 | 20 envelopes, 1 account, 2 devices, manual entry only |
-| Premium Monthly | $10/month | |
-| Premium Annual | $80/year ($6.67/mo) | Unlimited envelopes, bank sync, 5 devices, 7 years history |
+| Tier            | Price               | Notes                                                      |
+| --------------- | ------------------- | ---------------------------------------------------------- |
+| Free            | $0                  | 20 envelopes, 1 account, 2 devices, manual entry only      |
+| Premium Monthly | $10/month           |                                                            |
+| Premium Annual  | $80/year ($6.67/mo) | Unlimited envelopes, bank sync, 5 devices, 7 years history |
 
 Has a genuinely useful free tier that never expires.
 
 ### Platform Availability
 
-| Platform | Available | Notes |
-|----------|-----------|-------|
-| Web | Yes | Full web app, mobile-optimized |
-| iOS | Yes | 4.7 stars (13K reviews) |
-| Android | Yes | 3.4 stars (19.3K reviews) |
-| Desktop | No | Web-based |
+| Platform | Available | Notes                          |
+| -------- | --------- | ------------------------------ |
+| Web      | Yes       | Full web app, mobile-optimized |
+| iOS      | Yes       | 4.7 stars (13K reviews)        |
+| Android  | Yes       | 3.4 stars (19.3K reviews)      |
+| Desktop  | No        | Web-based                      |
 
 ### Complete Feature List
 
@@ -580,24 +583,24 @@ Has a genuinely useful free tier that never expires.
 
 ### Pricing
 
-| Tier | Price | Notes |
-|------|-------|-------|
-| Free | $0 | Basic budgeting, manual entry only |
-| Premium Monthly | $17.99/month | Bank Connect, Reports, Paycheck Planning |
-| Premium Annual | $79.99/year ($6.67/mo) | |
-| Ramsey+ 3 months | $59.99 | EveryDollar Premium + Financial Peace University + coaching |
-| Ramsey+ 6 months | $99.99 | |
-| Ramsey+ Annual | $129.99/year | Best value bundle |
-| Premium Trial | 14 days | New users only |
+| Tier             | Price                  | Notes                                                       |
+| ---------------- | ---------------------- | ----------------------------------------------------------- |
+| Free             | $0                     | Basic budgeting, manual entry only                          |
+| Premium Monthly  | $17.99/month           | Bank Connect, Reports, Paycheck Planning                    |
+| Premium Annual   | $79.99/year ($6.67/mo) |                                                             |
+| Ramsey+ 3 months | $59.99                 | EveryDollar Premium + Financial Peace University + coaching |
+| Ramsey+ 6 months | $99.99                 |                                                             |
+| Ramsey+ Annual   | $129.99/year           | Best value bundle                                           |
+| Premium Trial    | 14 days                | New users only                                              |
 
 ### Platform Availability
 
-| Platform | Available | Notes |
-|----------|-----------|-------|
-| Web | Yes | everydollar.com (desktop browsers only) |
-| iOS | Yes | 4.7 stars |
-| Android | Yes | 3.0 stars, 10M+ downloads |
-| Mobile Browser | No | Must use native app on mobile |
+| Platform       | Available | Notes                                   |
+| -------------- | --------- | --------------------------------------- |
+| Web            | Yes       | everydollar.com (desktop browsers only) |
+| iOS            | Yes       | 4.7 stars                               |
+| Android        | Yes       | 3.0 stars, 10M+ downloads               |
+| Mobile Browser | No        | Must use native app on mobile           |
 
 **Note:** US-only. International users cannot download mobile apps or purchase Premium.
 
@@ -694,25 +697,25 @@ Has a genuinely useful free tier that never expires.
 
 ### Pricing
 
-| Tier | Price | Notes |
-|------|-------|-------|
-| Free | $0 | 2 bank connections, 2 spending categories only |
-| Plus Monthly | $12.99/month | |
-| Plus Annual | $74.99/year ($6.25/mo) | |
-| Lifetime | $149.99 (one-time) | Available in iOS app only; not listed on website |
-| Free Trial | 7 days | |
+| Tier         | Price                  | Notes                                            |
+| ------------ | ---------------------- | ------------------------------------------------ |
+| Free         | $0                     | 2 bank connections, 2 spending categories only   |
+| Plus Monthly | $12.99/month           |                                                  |
+| Plus Annual  | $74.99/year ($6.25/mo) |                                                  |
+| Lifetime     | $149.99 (one-time)     | Available in iOS app only; not listed on website |
+| Free Trial   | 7 days                 |                                                  |
 
 **Note:** Prices have increased significantly. Was $34.99/year in 2023, $7.99/month. Free tier is heavily restricted.
 
 ### Platform Availability
 
-| Platform | Available | Notes |
-|----------|-----------|-------|
-| Web | Yes | |
-| iOS | Yes | |
-| Android | Yes | |
-| Apple Watch | Yes | |
-| Desktop | No | Web-based |
+| Platform    | Available | Notes     |
+| ----------- | --------- | --------- |
+| Web         | Yes       |           |
+| iOS         | Yes       |           |
+| Android     | Yes       |           |
+| Apple Watch | Yes       |           |
+| Desktop     | No        | Web-based |
 
 ### Complete Feature List
 
@@ -800,22 +803,22 @@ Has a genuinely useful free tier that never expires.
 
 ### Pricing
 
-| Tier | Price | Notes |
-|------|-------|-------|
-| Annual | $71.88/year ($5.99/mo) | No monthly billing option |
+| Tier        | Price                             | Notes                       |
+| ----------- | --------------------------------- | --------------------------- |
+| Annual      | $71.88/year ($5.99/mo)            | No monthly billing option   |
 | Promotional | $35.88/year first year ($2.99/mo) | 50% off periodic promotions |
-| Trial | 30-day money-back guarantee | |
+| Trial       | 30-day money-back guarantee       |                             |
 
 No free tier. No monthly option. Must commit to annual subscription. Among the most affordable paid options.
 
 ### Platform Availability
 
-| Platform | Available | Notes |
-|----------|-----------|-------|
-| Web | Yes | Primary platform, full-featured |
-| iOS | Yes | |
-| Android | Yes | |
-| Desktop | No | 100% cloud-based (unlike Quicken Classic) |
+| Platform | Available | Notes                                     |
+| -------- | --------- | ----------------------------------------- |
+| Web      | Yes       | Primary platform, full-featured           |
+| iOS      | Yes       |                                           |
+| Android  | Yes       |                                           |
+| Desktop  | No        | 100% cloud-based (unlike Quicken Classic) |
 
 ### Complete Feature List
 
@@ -911,23 +914,23 @@ No free tier. No monthly option. Must commit to annual subscription. Among the m
 
 ### Pricing
 
-| Tier | Price | Notes |
-|------|-------|-------|
-| Free | $0 | Basic spending tracking, limited features |
-| Premium | $6-$12/month | "Name your price" sliding scale |
-| Bill Negotiation | % of savings | Takes a percentage of money saved on negotiations |
-| Subscription Cancellation | Fee-based | Charges for cancellation service |
+| Tier                      | Price        | Notes                                             |
+| ------------------------- | ------------ | ------------------------------------------------- |
+| Free                      | $0           | Basic spending tracking, limited features         |
+| Premium                   | $6-$12/month | "Name your price" sliding scale                   |
+| Bill Negotiation          | % of savings | Takes a percentage of money saved on negotiations |
+| Subscription Cancellation | Fee-based    | Charges for cancellation service                  |
 
 Unique "choose your own price" model for premium tier.
 
 ### Platform Availability
 
-| Platform | Available | Notes |
-|----------|-----------|-------|
-| Web | Yes | Premium only |
-| iOS | Yes | Free download |
-| Android | Yes | Free download |
-| Desktop | No | Web-based |
+| Platform | Available | Notes         |
+| -------- | --------- | ------------- |
+| Web      | Yes       | Premium only  |
+| iOS      | Yes       | Free download |
+| Android  | Yes       | Free download |
+| Desktop  | No        | Web-based     |
 
 ### Complete Feature List
 
@@ -1026,22 +1029,22 @@ Unique "choose your own price" model for premium tier.
 
 ### Pricing
 
-| Tier | Price | Notes |
-|------|-------|-------|
-| Self-hosted | Free | Host your own server, full control |
+| Tier          | Price  | Notes                                                   |
+| ------------- | ------ | ------------------------------------------------------- |
+| Self-hosted   | Free   | Host your own server, full control                      |
 | Cloud hosting | Varies | Third-party hosting options (e.g., RepoCloud, PikaPods) |
 
 100% free and open source. No subscriptions, no ads, no data collection. You own everything.
 
 ### Platform Availability
 
-| Platform | Available | Notes |
-|----------|-----------|-------|
-| Web | Yes | Primary interface (runs in browser) |
-| iOS | Yes | Community-built SwiftUI client (216 GitHub stars) |
-| Android | No | Community projects in development |
-| Desktop | Yes | Runs as web app; Electron wrapper possible |
-| Self-hosted | Yes | Docker, Node.js deployment |
+| Platform    | Available | Notes                                             |
+| ----------- | --------- | ------------------------------------------------- |
+| Web         | Yes       | Primary interface (runs in browser)               |
+| iOS         | Yes       | Community-built SwiftUI client (216 GitHub stars) |
+| Android     | No        | Community projects in development                 |
+| Desktop     | Yes       | Runs as web app; Electron wrapper possible        |
+| Self-hosted | Yes       | Docker, Node.js deployment                        |
 
 ### Complete Feature List
 
@@ -1147,24 +1150,24 @@ Unique "choose your own price" model for premium tier.
 
 ### Feature Comparison Matrix
 
-| Feature | YNAB | Monarch | Copilot | Good-budget | Every-Dollar | Pocket-Guard | Simplifi | Rocket Money | Actual |
-|---------|------|---------|---------|-------------|--------------|--------------|----------|--------------|--------|
-| Bank sync | Yes | Yes | Yes | Paid | Paid | Yes | Yes | Yes | Yes* |
-| Manual entry | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| Budget creation | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Basic | Yes |
-| Goal setting | Yes | Yes | Yes | Limited | Paid | Paid | Yes | Paid | Yes |
-| Net worth | Yes | Yes | Yes | No | Paid | Yes | Yes | Yes | Yes |
-| Reports | Yes | Yes | Yes | Basic | Paid | Yes | Yes | Yes | Yes |
-| Multi-platform | Yes | Yes | No** | Yes | Yes | Yes | Yes | Yes | Partial |
-| Sharing/household | Yes | Yes | No | Yes | No | No | No | Paid | Yes |
-| Subscription detection | No | Yes | Yes | No | No | Yes | Yes | Yes | No |
-| Investment tracking | No | Yes | Yes | No | No | No | Basic | No | No |
-| Credit score | No | Yes | No | No | No | No | No | Yes | No |
-| AI features | No | Yes | Yes | No | 2026 | No | No | No | No |
-| Offline mode | No | No | No | Partial | No | No | No | No | Yes |
-| Free tier | No | No | No | Yes | Yes | Yes*** | No | Yes | Yes |
+| Feature                | YNAB | Monarch | Copilot | Good-budget | Every-Dollar | Pocket-Guard | Simplifi | Rocket Money | Actual  |
+| ---------------------- | ---- | ------- | ------- | ----------- | ------------ | ------------ | -------- | ------------ | ------- |
+| Bank sync              | Yes  | Yes     | Yes     | Paid        | Paid         | Yes          | Yes      | Yes          | Yes\*   |
+| Manual entry           | Yes  | Yes     | Yes     | Yes         | Yes          | Yes          | Yes      | Yes          | Yes     |
+| Budget creation        | Yes  | Yes     | Yes     | Yes         | Yes          | Yes          | Yes      | Basic        | Yes     |
+| Goal setting           | Yes  | Yes     | Yes     | Limited     | Paid         | Paid         | Yes      | Paid         | Yes     |
+| Net worth              | Yes  | Yes     | Yes     | No          | Paid         | Yes          | Yes      | Yes          | Yes     |
+| Reports                | Yes  | Yes     | Yes     | Basic       | Paid         | Yes          | Yes      | Yes          | Yes     |
+| Multi-platform         | Yes  | Yes     | No\*\*  | Yes         | Yes          | Yes          | Yes      | Yes          | Partial |
+| Sharing/household      | Yes  | Yes     | No      | Yes         | No           | No           | No       | Paid         | Yes     |
+| Subscription detection | No   | Yes     | Yes     | No          | No           | Yes          | Yes      | Yes          | No      |
+| Investment tracking    | No   | Yes     | Yes     | No          | No           | No           | Basic    | No           | No      |
+| Credit score           | No   | Yes     | No      | No          | No           | No           | No       | Yes          | No      |
+| AI features            | No   | Yes     | Yes     | No          | 2026         | No           | No       | No           | No      |
+| Offline mode           | No   | No      | No      | Partial     | No           | No           | No       | No           | Yes     |
+| Free tier              | No   | No      | No      | Yes         | Yes          | Yes\*\*\*    | No       | Yes          | Yes     |
 
-*Actual: via SimpleFIN/GoCardless. **Copilot: Apple only. ***PocketGuard free: severely limited (2 connections, 2 categories).
+\*Actual: via SimpleFIN/GoCardless. **Copilot: Apple only. \***PocketGuard free: severely limited (2 connections, 2 categories).
 
 ### Universal Features (Found in 8+ of 10 Apps)
 
@@ -1255,19 +1258,19 @@ Based on Reddit discussions (r/ynab, r/personalfinance, r/budgetingapps), app st
 
 ### Offline-First vs. Online-First Comparison
 
-| Factor | Offline-First (e.g., Actual Budget) | Online-First (e.g., Monarch, YNAB) |
-|--------|--------------------------------------|--------------------------------------|
-| **Perceived speed** | Excellent - instant response, no loading | Variable - depends on network quality |
-| **Reliability** | Works anywhere, no connectivity needed | Fails without internet |
-| **Data privacy** | Maximum - data never leaves device | Dependent on cloud provider security |
-| **Data ownership** | Full - SQLite file you own | Vendor-controlled; risk of shutdown |
-| **Bank sync** | Manual trigger or scheduled | Real-time or near-real-time |
-| **Multi-device sync** | Requires self-hosted server setup | Seamless, automatic |
-| **Setup complexity** | Higher (Docker, server config) | Lower (sign up and go) |
-| **Collaboration** | More complex | Built-in sharing features |
-| **Feature richness** | Generally fewer features | More features, AI, integrations |
-| **User satisfaction** | Higher among power users and privacy advocates | Higher among mainstream users |
-| **App deletion rate** | Lower (committed users) | Higher (84% give up after 2 failures) |
+| Factor                | Offline-First (e.g., Actual Budget)            | Online-First (e.g., Monarch, YNAB)    |
+| --------------------- | ---------------------------------------------- | ------------------------------------- |
+| **Perceived speed**   | Excellent - instant response, no loading       | Variable - depends on network quality |
+| **Reliability**       | Works anywhere, no connectivity needed         | Fails without internet                |
+| **Data privacy**      | Maximum - data never leaves device             | Dependent on cloud provider security  |
+| **Data ownership**    | Full - SQLite file you own                     | Vendor-controlled; risk of shutdown   |
+| **Bank sync**         | Manual trigger or scheduled                    | Real-time or near-real-time           |
+| **Multi-device sync** | Requires self-hosted server setup              | Seamless, automatic                   |
+| **Setup complexity**  | Higher (Docker, server config)                 | Lower (sign up and go)                |
+| **Collaboration**     | More complex                                   | Built-in sharing features             |
+| **Feature richness**  | Generally fewer features                       | More features, AI, integrations       |
+| **User satisfaction** | Higher among power users and privacy advocates | Higher among mainstream users         |
+| **App deletion rate** | Lower (committed users)                        | Higher (84% give up after 2 failures) |
 
 **Key finding:** Over 70% of mobile app users stop using an app if it responds too slowly, and 84% give up if it fails just twice. Offline-first apps have an inherent advantage in perceived responsiveness and reliability. However, the setup barrier means offline-first apps self-select for more technical, committed users.
 
@@ -1275,24 +1278,25 @@ Based on Reddit discussions (r/ynab, r/personalfinance, r/budgetingapps), app st
 
 ### Pricing Comparison Summary
 
-| App | Free Tier | Monthly | Annual | Per-Year Cost |
-|-----|-----------|---------|--------|---------------|
-| Credit Karma | Full (ad-supported) | - | - | $0 |
-| Actual Budget | Full (self-hosted) | - | - | $0 |
-| Goodbudget | Limited | $10 | $80 | $80 |
-| Simplifi | No | $5.99 (annual only) | $71.88 | $71.88 |
-| PocketGuard | Very limited | $12.99 | $74.99 | $74.99 |
-| EveryDollar | Limited | $17.99 | $79.99 | $79.99 |
-| Copilot Money | No | $13 | $95 | $95 |
-| Monarch Money | No | $14.99 | $99.99 | $99.99 |
-| YNAB | No | $14.99 | $109 | $109 |
-| Rocket Money | Limited | $6-12 | - | $72-144 |
+| App           | Free Tier           | Monthly             | Annual | Per-Year Cost |
+| ------------- | ------------------- | ------------------- | ------ | ------------- |
+| Credit Karma  | Full (ad-supported) | -                   | -      | $0            |
+| Actual Budget | Full (self-hosted)  | -                   | -      | $0            |
+| Goodbudget    | Limited             | $10                 | $80    | $80           |
+| Simplifi      | No                  | $5.99 (annual only) | $71.88 | $71.88        |
+| PocketGuard   | Very limited        | $12.99              | $74.99 | $74.99        |
+| EveryDollar   | Limited             | $17.99              | $79.99 | $79.99        |
+| Copilot Money | No                  | $13                 | $95    | $95           |
+| Monarch Money | No                  | $14.99              | $99.99 | $99.99        |
+| YNAB          | No                  | $14.99              | $109   | $109          |
+| Rocket Money  | Limited             | $6-12               | -      | $72-144       |
 
 ---
 
 ## Sources
 
 ### YNAB
+
 - [YNAB Pricing](https://www.ynab.com/pricing)
 - [YNAB Review 2025 - NerdWallet](https://www.nerdwallet.com/finance/learn/ynab-app-review)
 - [YNAB Review 2026 - FinanceBuzz](https://financebuzz.com/ynab-review)
@@ -1301,12 +1305,14 @@ Based on Reddit discussions (r/ynab, r/personalfinance, r/budgetingapps), app st
 - [YNAB Statistics & Revenue](https://appicsoftwares.com/blog/you-need-a-budget-ynab-statistics-usage-revenue-etc/)
 
 ### Mint / Credit Karma
+
 - [What Happened to Mint - WalletHub](https://wallethub.com/edu/b/what-happened-to-mint/151868)
 - [Mint is Gone - CNBC](https://www.cnbc.com/select/mint-budgeting-app-is-going-away-here-are-some-alternatives/)
 - [Intuit Mint and Credit Karma - Support](https://support.creditkarma.com/s/article/Intuit-Mint-and-Credit-Karma)
 - [Does Credit Karma Have a Budget App - Asper](https://asper.app/does-credit-karma-have-a-budget-app-2025-explanation-asper/)
 
 ### Monarch Money
+
 - [Monarch Money Pricing](https://www.monarch.com/pricing)
 - [Monarch Money Review - NerdWallet](https://www.nerdwallet.com/finance/learn/monarch-money-app-review)
 - [Monarch Money Review 2026 - FinanceBuzz](https://financebuzz.com/monarch-money-review)
@@ -1315,6 +1321,7 @@ Based on Reddit discussions (r/ynab, r/personalfinance, r/budgetingapps), app st
 - [Monarch Security](https://www.monarch.com/security)
 
 ### Copilot Money
+
 - [Copilot Money Pricing](https://copilot.money/pricing/)
 - [Copilot Money Review 2026 - Money with Katie](https://moneywithkatie.com/copilot-review-a-budgeting-app-that-finally-gets-it-right/)
 - [Copilot Money Review 2026 - The College Investor](https://thecollegeinvestor.com/41976/copilot-review/)
@@ -1323,6 +1330,7 @@ Based on Reddit discussions (r/ynab, r/personalfinance, r/budgetingapps), app st
 - [Copilot - Apple Developer Spotlight](https://developer.apple.com/news/?id=m1mmw99d)
 
 ### Goodbudget
+
 - [Goodbudget Official Site](https://goodbudget.com/)
 - [Goodbudget Review - NerdWallet](https://www.nerdwallet.com/finance/learn/goodbudget-app-review)
 - [2025 Goodbudget Features Recap](https://goodbudget.com/blog/2025/11/2025-goodbudget-features-recap/)
@@ -1330,6 +1338,7 @@ Based on Reddit discussions (r/ynab, r/personalfinance, r/budgetingapps), app st
 - [Dayspring Technologies - Crunchbase](https://www.crunchbase.com/organization/dayspring-technologies-06df)
 
 ### EveryDollar
+
 - [EveryDollar - NerdWallet](https://www.nerdwallet.com/finance/learn/everydollar-app-review)
 - [EveryDollar Review 2026 - FinanceBuzz](https://financebuzz.com/everydollar-app-review)
 - [EveryDollar Relaunch 2026 - GlobeNewswire](https://www.globenewswire.com/news-release/2026/01/08/3215300/0/en/RAMSEY-SOLUTIONS-RELAUNCHES-EVERYDOLLAR-TO-HELP-USERS-ACHIEVE-20-BILLION-IN-FINANCIAL-TRANSFORMATION-PER-YEAR-BY-2030.html)
@@ -1337,6 +1346,7 @@ Based on Reddit discussions (r/ynab, r/personalfinance, r/budgetingapps), app st
 - [About Ramsey Solutions](https://www.ramseysolutions.com/about)
 
 ### PocketGuard
+
 - [PocketGuard Pricing](https://pocketguard.com/pricing/)
 - [PocketGuard Review - NerdWallet](https://www.nerdwallet.com/finance/learn/pocketguard-app-review)
 - [PocketGuard Review 2026 - FinanceBuzz](https://financebuzz.com/pocketguard-review)
@@ -1344,6 +1354,7 @@ Based on Reddit discussions (r/ynab, r/personalfinance, r/budgetingapps), app st
 - [PocketGuard - Tracxn](https://tracxn.com/d/companies/pocketguard/__bVty1Td60sEL-Ra-xRjeRrnQ4jjB0r_2x8Xi2aq2EI0)
 
 ### Simplifi by Quicken
+
 - [Simplifi Review 2026 - FinanceBuzz](https://financebuzz.com/simplifi-review)
 - [Simplifi Review - CBS News](https://www.cbsnews.com/news/quicken-simplifi-product-review/)
 - [Simplifi Review - CNBC](https://www.cnbc.com/select/quicken-simplifi-review/)
@@ -1351,6 +1362,7 @@ Based on Reddit discussions (r/ynab, r/personalfinance, r/budgetingapps), app st
 - [Quicken Welcomes New Users](https://www.quicken.com/press/quicken-welcomes-new-users)
 
 ### Rocket Money
+
 - [Rocket Money Review - The Penny Hoarder](https://www.thepennyhoarder.com/budgeting/rocket-money-review/)
 - [Rocket Money Review 2025 - FinanceBuzz](https://financebuzz.com/truebill-review)
 - [Rocket Money Security](https://www.rocketmoney.com/security)
@@ -1358,6 +1370,7 @@ Based on Reddit discussions (r/ynab, r/personalfinance, r/budgetingapps), app st
 - [Is Rocket Money Safe - Consumer Affairs](https://www.consumeraffairs.com/finance/truebill.html)
 
 ### Actual Budget
+
 - [Actual Budget Official Site](https://actualbudget.org/)
 - [Actual Budget GitHub](https://github.com/actualbudget/actual)
 - [Actual Budget Release Notes](https://actualbudget.org/docs/releases/)
@@ -1365,6 +1378,7 @@ Based on Reddit discussions (r/ynab, r/personalfinance, r/budgetingapps), app st
 - [Actual Budget Bank Sync](https://actualbudget.org/docs/advanced/bank-sync/)
 
 ### General / Cross-App
+
 - [AI Personal Finance Market - SR Analytics](https://sranalytics.io/blog/ai-personal-finance/)
 - [Personal Finance Apps Market Size 2035 - Research Nester](https://www.researchnester.com/reports/personal-finance-apps-market/8243)
 - [Personal Finance Apps: What Users Expect in 2025 - WildnetEdge](https://www.wildnetedge.com/blogs/personal-finance-apps-what-users-expect-in-2025)

@@ -11,12 +11,14 @@ This document provides a comprehensive guide for implementing the IncorrectAnswe
 **Purpose**: Centralized state management for tracking and persisting user incorrect answers across exam sessions.
 
 **Key Features**:
+
 - Real-time mistake tracking during exam sessions
 - Dual persistence (Supabase database + localStorage fallback)
 - Dynamic count calculation for UI badges
 - User authentication-aware data management
 
 **Core Interface**:
+
 ```typescript
 interface IncorrectAnswer {
   questionId: string;
@@ -42,11 +44,13 @@ interface IncorrectAnswersContextType {
 ### 2. ExamContext Integration (`src/contexts/ExamContext.tsx`)
 
 **Integration Points**:
+
 - Import and use `useIncorrectAnswers()` hook
 - Trigger mistake tracking during exam completion
 - Automatic capture of incorrect answers with full context
 
 **Implementation Pattern**:
+
 ```typescript
 // 1. Import the hook
 import { useIncorrectAnswers } from "@/contexts/IncorrectAnswersContext";
@@ -59,8 +63,8 @@ if (!isCorrect) {
   addIncorrectAnswer({
     questionId: questionId,
     questionText: question.question,
-    userAnswer: question.choices[parseInt(answerId)]?.text || '',
-    correctAnswer: question.choices[parseInt(question.correctAnswerId)]?.text || '',
+    userAnswer: question.choices[parseInt(answerId)]?.text || "",
+    correctAnswer: question.choices[parseInt(question.correctAnswerId)]?.text || "",
     domain: question.domain,
     sessionId: currentDbSessionId || state.currentSession.id,
   });
@@ -70,10 +74,12 @@ if (!isCorrect) {
 ### 3. Provider Hierarchy Setup (`src/app/providers.tsx`)
 
 **Critical Requirements**:
+
 - IncorrectAnswersProvider MUST be placed before ExamProvider in the component tree
 - Ensures IncorrectAnswersContext is available when ExamContext initializes
 
 **Correct Provider Order**:
+
 ```typescript
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -107,6 +113,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 ### 4. UI Integration - Dynamic Sidebar Badges (`src/components/layout/sidebar.tsx`)
 
 **Implementation Pattern**:
+
 ```typescript
 // 1. Import the hook
 import { useIncorrectAnswers } from "@/contexts/IncorrectAnswersContext";
@@ -235,24 +242,28 @@ UI Updates (sidebar badges, review page)
 ## Best Practices
 
 ### 1. Context Design
+
 - Keep contexts focused on single responsibility
 - Provide both state and actions in context value
 - Use proper TypeScript interfaces for all data structures
 - Include loading states for async operations
 
 ### 2. Provider Hierarchy
+
 - Place context providers in logical dependency order
 - Document provider dependencies clearly
 - Test provider hierarchy changes thoroughly
 - Use meaningful provider names and organize logically
 
 ### 3. Data Persistence
+
 - Always provide fallback persistence mechanisms
 - Handle authentication state changes gracefully
 - Debounce frequent write operations
 - Validate data integrity on load
 
 ### 4. UI Integration
+
 - Use conditional rendering for dynamic elements
 - Provide loading states during data operations
 - Handle empty states gracefully
@@ -261,18 +272,21 @@ UI Updates (sidebar badges, review page)
 ## Future Enhancements
 
 ### 1. Advanced Analytics
+
 - Track question difficulty patterns
 - Implement spaced repetition algorithms
 - Add learning curve analysis
 - Generate personalized study recommendations
 
 ### 2. Social Features
+
 - Share mistake patterns with study groups
 - Compare performance with peer groups
 - Collaborative review sessions
 - Community-driven explanations
 
 ### 3. Offline Capabilities
+
 - Full offline review functionality
 - Sync data when connection restored
 - Progressive Web App features

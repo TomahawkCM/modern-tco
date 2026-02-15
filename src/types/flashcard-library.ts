@@ -18,36 +18,32 @@
  * TCO exam domains aligned with certification blueprint
  */
 export type FlashcardLibraryDomain =
-  | 'asking_questions'
-  | 'refining_targeting'
-  | 'taking_action'
-  | 'navigation'
-  | 'reporting'
-  | 'troubleshooting';
+  | "asking_questions"
+  | "refining_targeting"
+  | "taking_action"
+  | "navigation"
+  | "reporting"
+  | "troubleshooting";
 
 /**
  * Flashcard content categories
  */
 export type FlashcardLibraryCategory =
-  | 'terminology'
-  | 'syntax'
-  | 'best_practices'
-  | 'troubleshooting'
-  | 'exam_focused';
+  | "terminology"
+  | "syntax"
+  | "best_practices"
+  | "troubleshooting"
+  | "exam_focused";
 
 /**
  * Difficulty levels for flashcards
  */
-export type FlashcardLibraryDifficulty = 'easy' | 'medium' | 'hard';
+export type FlashcardLibraryDifficulty = "easy" | "medium" | "hard";
 
 /**
  * Source of flashcard content
  */
-export type FlashcardLibrarySource =
-  | 'ai_generated'
-  | 'manual'
-  | 'imported'
-  | 'expert_curated';
+export type FlashcardLibrarySource = "ai_generated" | "manual" | "imported" | "expert_curated";
 
 /**
  * SuperMemo2 quality rating scale (0-5)
@@ -163,7 +159,7 @@ export interface LibraryReviewSessionConfig {
   maxNewCards?: number; // Default: 5
 
   // Sort order
-  sortBy?: 'due_date' | 'difficulty' | 'random';
+  sortBy?: "due_date" | "difficulty" | "random";
 }
 
 /**
@@ -314,8 +310,8 @@ export interface LibraryFlashcardFilters {
   showOnlyMastered?: boolean; // Interval >= 21 days
 
   // Sorting
-  sortBy?: 'created_at' | 'difficulty' | 'domain' | 'total_reviews';
-  sortOrder?: 'asc' | 'desc';
+  sortBy?: "created_at" | "difficulty" | "domain" | "total_reviews";
+  sortOrder?: "asc" | "desc";
 
   // Pagination
   limit?: number;
@@ -341,7 +337,10 @@ export interface PaginatedLibraryCards {
  * Bulk flashcard import data
  */
 export interface BulkFlashcardImport {
-  cards: Omit<FlashcardLibraryCard, 'id' | 'created_at' | 'updated_at' | 'total_reviews' | 'total_correct' | 'average_ease_factor'>[];
+  cards: Omit<
+    FlashcardLibraryCard,
+    "id" | "created_at" | "updated_at" | "total_reviews" | "total_correct" | "average_ease_factor"
+  >[];
   source: FlashcardLibrarySource;
   sourceDescription?: string;
 }
@@ -370,7 +369,7 @@ export interface FlashcardImportResult {
  */
 export type CreateFlashcardLibraryCard = Omit<
   FlashcardLibraryCard,
-  'id' | 'created_at' | 'updated_at' | 'total_reviews' | 'total_correct' | 'average_ease_factor'
+  "id" | "created_at" | "updated_at" | "total_reviews" | "total_correct" | "average_ease_factor"
 >;
 
 /**

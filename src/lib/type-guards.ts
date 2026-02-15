@@ -174,14 +174,17 @@ export const isExamSession = (value: unknown): value is ExamSessionLike => {
   }
 
   const record = value;
-  const { id, mode, questions, currentIndex, answers, startTime, completed } = record as unknown as ExamSessionLike;
+  const { id, mode, questions, currentIndex, answers, startTime, completed } =
+    record as unknown as ExamSessionLike;
   return (
     isString(id) &&
     isString(mode) &&
     Array.isArray(questions) &&
     isNumber(currentIndex) &&
     isObject(answers) &&
-    ((startTime instanceof Date && !Number.isNaN(startTime.getTime())) || isString(startTime) || isNumber(startTime)) &&
+    ((startTime instanceof Date && !Number.isNaN(startTime.getTime())) ||
+      isString(startTime) ||
+      isNumber(startTime)) &&
     isBoolean(completed)
   );
 };

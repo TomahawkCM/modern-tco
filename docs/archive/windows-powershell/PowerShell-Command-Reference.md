@@ -354,7 +354,7 @@ npm run labs:test
 ```powershell
 # Seed study content
 npm run db:seed:domains
-npm run db:seed:questions  
+npm run db:seed:questions
 npm run db:seed:labs
 
 # Content migration
@@ -481,21 +481,21 @@ function git-fresh {
 
 ## 🚀 Quick Reference Card
 
-| Task | PowerShell Command |
-|------|-------------------|
-| Start Dev Server | `npm run dev` |
-| Install Dependencies | `npm install` |
-| Run Tests | `npm run test` |
-| Build Project | `npm run build` |
-| Type Check | `npm run typecheck` |
-| Lint Code | `npm run lint` |
-| Clean Install | `npm ci` |
-| View File | `Get-Content file.txt` |
-| Copy File | `Copy-Item src dest` |
-| Find Files | `Get-ChildItem -Recurse -Filter "*.ts"` |
-| Search Text | `Select-String -Pattern "text" -Recurse` |
-| Kill Process | `Stop-Process -Name node -Force` |
-| Set Env Var | `$env:NODE_ENV = "development"` |
+| Task                 | PowerShell Command                       |
+| -------------------- | ---------------------------------------- |
+| Start Dev Server     | `npm run dev`                            |
+| Install Dependencies | `npm install`                            |
+| Run Tests            | `npm run test`                           |
+| Build Project        | `npm run build`                          |
+| Type Check           | `npm run typecheck`                      |
+| Lint Code            | `npm run lint`                           |
+| Clean Install        | `npm ci`                                 |
+| View File            | `Get-Content file.txt`                   |
+| Copy File            | `Copy-Item src dest`                     |
+| Find Files           | `Get-ChildItem -Recurse -Filter "*.ts"`  |
+| Search Text          | `Select-String -Pattern "text" -Recurse` |
+| Kill Process         | `Stop-Process -Name node -Force`         |
+| Set Env Var          | `$env:NODE_ENV = "development"`          |
 
 ---
 

@@ -5,14 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  CheckCircle2,
-  XCircle,
-  AlertCircle,
-  Trophy,
-  RotateCcw,
-  ArrowRight,
-} from "lucide-react";
+import { CheckCircle2, XCircle, AlertCircle, Trophy, RotateCcw, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface QuizQuestion {
@@ -188,9 +181,7 @@ export function QuickCheckQuiz({
       <Card
         className={cn(
           "border-2",
-          isPassed
-            ? "border-[#22c55e]/30 bg-[#22c55e]/5"
-            : "border-orange-500/30 bg-orange-500/5"
+          isPassed ? "border-[#22c55e]/30 bg-[#22c55e]/5" : "border-orange-500/30 bg-orange-500/5"
         )}
       >
         <CardHeader>
@@ -210,7 +201,12 @@ export function QuickCheckQuiz({
           {/* Score Display */}
           <div className="text-center" role="status" aria-live="polite" aria-atomic="true">
             <div className="mb-4">
-              <div className="mb-2 text-5xl font-bold text-foreground" aria-label={`Quiz score: ${score} percent`}>{score}%</div>
+              <div
+                className="mb-2 text-5xl font-bold text-foreground"
+                aria-label={`Quiz score: ${score} percent`}
+              >
+                {score}%
+              </div>
               <p className="text-sm text-muted-foreground">
                 {questions.filter((q) => isAnswerCorrect(q.id, selectedAnswers[q.id])).length} of{" "}
                 {totalQuestions} correct
@@ -225,22 +221,28 @@ export function QuickCheckQuiz({
             <div className="mt-4" role="alert" aria-live="assertive" aria-atomic="true">
               {isPassed ? (
                 <div className="rounded-lg border border-[#22c55e]/30 bg-[#22c55e]/10 p-4">
-                  <CheckCircle2 className="mx-auto mb-2 h-8 w-8 text-[#22c55e]" aria-hidden="true" />
+                  <CheckCircle2
+                    className="mx-auto mb-2 h-8 w-8 text-[#22c55e]"
+                    aria-hidden="true"
+                  />
                   <p className="font-bold text-[#22c55e]">Excellent Work! 🎉</p>
-                  <p className="text-sm text-[#22c55e] mt-1">
+                  <p className="mt-1 text-sm text-[#22c55e]">
                     You've demonstrated strong understanding of this section. You can now mark it
                     complete and continue to the next section.
                   </p>
                 </div>
               ) : (
                 <div className="rounded-lg border border-orange-500/30 bg-orange-500/10 p-4">
-                  <AlertCircle className="mx-auto mb-2 h-8 w-8 text-orange-500" aria-hidden="true" />
+                  <AlertCircle
+                    className="mx-auto mb-2 h-8 w-8 text-orange-500"
+                    aria-hidden="true"
+                  />
                   <p className="font-bold text-orange-300">
                     Score below {passThreshold}% - Review and Retry
                   </p>
-                  <p className="text-sm text-orange-400 mt-1">
-                    Don't worry! Review the explanations below, re-read the section content, and
-                    try again. Learning takes practice.
+                  <p className="mt-1 text-sm text-orange-400">
+                    Don't worry! Review the explanations below, re-read the section content, and try
+                    again. Learning takes practice.
                   </p>
                 </div>
               )}
@@ -259,18 +261,20 @@ export function QuickCheckQuiz({
                   key={question.id}
                   className={cn(
                     "border",
-                    correct ? "border-[#22c55e]/30 bg-[#22c55e]/5" : "border-red-500/30 bg-red-500/5"
+                    correct
+                      ? "border-[#22c55e]/30 bg-[#22c55e]/5"
+                      : "border-red-500/30 bg-red-500/5"
                   )}
                 >
                   <CardHeader>
                     <div className="flex items-start gap-3">
                       {correct ? (
-                        <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-[#22c55e] mt-0.5" />
+                        <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-[#22c55e]" />
                       ) : (
-                        <XCircle className="h-5 w-5 flex-shrink-0 text-red-500 mt-0.5" />
+                        <XCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-500" />
                       )}
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-foreground mb-2">
+                        <p className="mb-2 text-sm font-medium text-foreground">
                           Question {idx + 1}: {question.question}
                         </p>
                         <div className="space-y-1 text-sm">
@@ -291,10 +295,13 @@ export function QuickCheckQuiz({
                     </div>
                   </CardHeader>
                   <CardContent>
-                    <div className="rounded-lg bg-primary/10 border border-primary/20 p-3">
-                      <p className="text-xs font-medium text-primary mb-1">Explanation:</p>
+                    <div className="rounded-lg border border-primary/20 bg-primary/10 p-3">
+                      <p className="mb-1 text-xs font-medium text-primary">Explanation:</p>
                       <p className="text-sm text-muted-foreground">{question.explanation}</p>
-                      <Badge variant="outline" className="mt-2 text-xs border-primary/30 text-primary">
+                      <Badge
+                        variant="outline"
+                        className="mt-2 border-primary/30 text-xs text-primary"
+                      >
                         Concept: {question.concept}
                       </Badge>
                     </div>
@@ -329,16 +336,13 @@ export function QuickCheckQuiz({
   return (
     <Card className="border-accent/20 bg-accent/5">
       <CardHeader>
-        <div className="flex items-center justify-between mb-2">
+        <div className="mb-2 flex items-center justify-between">
           <CardTitle className="text-sm text-accent-foreground">Quick Check Quiz</CardTitle>
           <Badge variant="outline" className="border-accent/30 text-accent-foreground">
             {currentQuestionIndex + 1} of {totalQuestions}
           </Badge>
         </div>
-        <Progress
-          value={((currentQuestionIndex + 1) / totalQuestions) * 100}
-          className="h-2"
-        />
+        <Progress value={((currentQuestionIndex + 1) / totalQuestions) * 100} className="h-2" />
       </CardHeader>
 
       <CardContent className="space-y-4">

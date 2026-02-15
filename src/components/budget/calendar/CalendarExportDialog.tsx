@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 /**
  * CalendarExportDialog Component
  * Dialog for selecting subscriptions to export to calendar
  */
 
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -13,26 +13,21 @@ import {
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import {
-  Calendar,
-  Download,
-  ExternalLink,
-  CalendarDays,
-} from 'lucide-react';
-import type { Subscription } from '@/types/budget';
-import type { CalendarProvider } from '@/types/notifications';
-import { downloadMultipleSubscriptionsICS } from '@/lib/calendar/ics-generator';
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Calendar, Download, ExternalLink, CalendarDays } from "lucide-react";
+import type { Subscription } from "@/types/budget";
+import type { CalendarProvider } from "@/types/notifications";
+import { downloadMultipleSubscriptionsICS } from "@/lib/calendar/ics-generator";
 import {
   openSubscriptionGoogleCalendar,
   openSubscriptionOutlookCalendar,
-} from '@/lib/calendar/google-calendar-url';
-import { useTranslations } from 'next-intl';
-import { cn } from '@/lib/utils';
+} from "@/lib/calendar/google-calendar-url";
+import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 
 interface CalendarExportDialogProps {
   subscriptions: Subscription[];
@@ -40,18 +35,18 @@ interface CalendarExportDialogProps {
   onClose: () => void;
 }
 
-type ExportMethod = 'ics' | 'google' | 'outlook';
+type ExportMethod = "ics" | "google" | "outlook";
 
 export function CalendarExportDialog({
   subscriptions,
   isOpen,
   onClose,
 }: CalendarExportDialogProps) {
-  const t = useTranslations('calendarExport');
+  const t = useTranslations("calendarExport");
   const [selectedIds, setSelectedIds] = useState<Set<string>>(
     new Set(subscriptions.map((s) => s.id))
   );
-  const [exportMethod, setExportMethod] = useState<ExportMethod>('ics');
+  const [exportMethod, setExportMethod] = useState<ExportMethod>("ics");
   const [isExporting, setIsExporting] = useState(false);
 
   const handleSelectAll = () => {
@@ -73,9 +68,7 @@ export function CalendarExportDialog({
   };
 
   const handleExport = async () => {
-    const selectedSubscriptions = subscriptions.filter((s) =>
-      selectedIds.has(s.id)
-    );
+    const selectedSubscriptions = subscriptions.filter((s) => selectedIds.has(s.id));
 
     if (selectedSubscriptions.length === 0) {
       return;
@@ -84,10 +77,10 @@ export function CalendarExportDialog({
     setIsExporting(true);
 
     try {
-      if (exportMethod === 'ics') {
+      if (exportMethod === "ics") {
         downloadMultipleSubscriptionsICS(selectedSubscriptions);
         onClose();
-      } else if (exportMethod === 'google') {
+      } else if (exportMethod === "google") {
         // Open each subscription in Google Calendar
         // Note: Opening multiple tabs might be blocked by popup blockers
         for (const sub of selectedSubscriptions) {
@@ -96,7 +89,7 @@ export function CalendarExportDialog({
           await new Promise((resolve) => setTimeout(resolve, 500));
         }
         onClose();
-      } else if (exportMethod === 'outlook') {
+      } else if (exportMethod === "outlook") {
         for (const sub of selectedSubscriptions) {
           openSubscriptionOutlookCalendar(sub);
           await new Promise((resolve) => setTimeout(resolve, 500));
@@ -117,17 +110,15 @@ export function CalendarExportDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Calendar className="h-5 w-5" />
-            {t('dialog.title')}
+            {t("dialog.title")}
           </DialogTitle>
-          <DialogDescription>{t('dialog.description')}</DialogDescription>
+          <DialogDescription>{t("dialog.description")}</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 py-4">
           {/* Export Method */}
           <div className="space-y-2">
-            <Label className="text-sm font-medium">
-              {t('dialog.exportMethod')}
-            </Label>
+            <Label className="text-sm font-medium">{t("dialog.exportMethod")}</Label>
             <RadioGroup
               value={exportMethod}
               onValueChange={(v) => setExportMethod(v as ExportMethod)}
@@ -135,12 +126,12 @@ export function CalendarExportDialog({
             >
               <div
                 className={cn(
-                  'flex items-center justify-center gap-2 rounded-lg border p-3 cursor-pointer transition-colors',
-                  exportMethod === 'ics'
-                    ? 'border-teal-500 bg-teal-500/10'
-                    : 'border-white/10 hover:border-white/20'
+                  "flex cursor-pointer items-center justify-center gap-2 rounded-lg border p-3 transition-colors",
+                  exportMethod === "ics"
+                    ? "border-teal-500 bg-teal-500/10"
+                    : "border-white/10 hover:border-white/20"
                 )}
-                onClick={() => setExportMethod('ics')}
+                onClick={() => setExportMethod("ics")}
               >
                 <RadioGroupItem value="ics" id="ics" className="sr-only" />
                 <Download className="h-4 w-4" />
@@ -150,18 +141,14 @@ export function CalendarExportDialog({
               </div>
               <div
                 className={cn(
-                  'flex items-center justify-center gap-2 rounded-lg border p-3 cursor-pointer transition-colors',
-                  exportMethod === 'google'
-                    ? 'border-teal-500 bg-teal-500/10'
-                    : 'border-white/10 hover:border-white/20'
+                  "flex cursor-pointer items-center justify-center gap-2 rounded-lg border p-3 transition-colors",
+                  exportMethod === "google"
+                    ? "border-teal-500 bg-teal-500/10"
+                    : "border-white/10 hover:border-white/20"
                 )}
-                onClick={() => setExportMethod('google')}
+                onClick={() => setExportMethod("google")}
               >
-                <RadioGroupItem
-                  value="google"
-                  id="google"
-                  className="sr-only"
-                />
+                <RadioGroupItem value="google" id="google" className="sr-only" />
                 <ExternalLink className="h-4 w-4" />
                 <Label htmlFor="google" className="cursor-pointer text-xs">
                   Google
@@ -169,18 +156,14 @@ export function CalendarExportDialog({
               </div>
               <div
                 className={cn(
-                  'flex items-center justify-center gap-2 rounded-lg border p-3 cursor-pointer transition-colors',
-                  exportMethod === 'outlook'
-                    ? 'border-teal-500 bg-teal-500/10'
-                    : 'border-white/10 hover:border-white/20'
+                  "flex cursor-pointer items-center justify-center gap-2 rounded-lg border p-3 transition-colors",
+                  exportMethod === "outlook"
+                    ? "border-teal-500 bg-teal-500/10"
+                    : "border-white/10 hover:border-white/20"
                 )}
-                onClick={() => setExportMethod('outlook')}
+                onClick={() => setExportMethod("outlook")}
               >
-                <RadioGroupItem
-                  value="outlook"
-                  id="outlook"
-                  className="sr-only"
-                />
+                <RadioGroupItem value="outlook" id="outlook" className="sr-only" />
                 <ExternalLink className="h-4 w-4" />
                 <Label htmlFor="outlook" className="cursor-pointer text-xs">
                   Outlook
@@ -192,28 +175,19 @@ export function CalendarExportDialog({
           {/* Subscription Selection */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label className="text-sm font-medium">
-                {t('dialog.selectSubscriptions')}
-              </Label>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleSelectAll}
-                className="h-7 text-xs"
-              >
-                {isAllSelected ? t('dialog.deselectAll') : t('dialog.selectAll')}
+              <Label className="text-sm font-medium">{t("dialog.selectSubscriptions")}</Label>
+              <Button variant="ghost" size="sm" onClick={handleSelectAll} className="h-7 text-xs">
+                {isAllSelected ? t("dialog.deselectAll") : t("dialog.selectAll")}
               </Button>
             </div>
 
-            <div className="max-h-60 overflow-y-auto rounded-lg border border-white/10 divide-y divide-white/5">
+            <div className="max-h-60 divide-y divide-white/5 overflow-y-auto rounded-lg border border-white/10">
               {subscriptions.map((subscription) => (
                 <div
                   key={subscription.id}
                   className={cn(
-                    'flex items-center gap-3 p-3 cursor-pointer transition-colors',
-                    selectedIds.has(subscription.id)
-                      ? 'bg-white/5'
-                      : 'hover:bg-white/5'
+                    "flex cursor-pointer items-center gap-3 p-3 transition-colors",
+                    selectedIds.has(subscription.id) ? "bg-white/5" : "hover:bg-white/5"
                   )}
                   onClick={() => handleToggle(subscription.id)}
                 >
@@ -222,12 +196,10 @@ export function CalendarExportDialog({
                     onCheckedChange={() => handleToggle(subscription.id)}
                     aria-label={`Select ${subscription.name}`}
                   />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">
-                      {subscription.name}
-                    </p>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-medium">{subscription.name}</p>
                     <p className="text-xs text-slate-400">
-                      {subscription.currency || '$'}
+                      {subscription.currency || "$"}
                       {subscription.amount.toFixed(2)} / {subscription.billingCycle}
                     </p>
                   </div>
@@ -241,9 +213,9 @@ export function CalendarExportDialog({
           </div>
         </div>
 
-        <DialogFooter className="flex-col sm:flex-row gap-2">
+        <DialogFooter className="flex-col gap-2 sm:flex-row">
           <Button variant="outline" onClick={onClose} className="flex-1">
-            {t('dialog.cancel')}
+            {t("dialog.cancel")}
           </Button>
           <Button
             onClick={handleExport}
@@ -251,15 +223,15 @@ export function CalendarExportDialog({
             className="flex-1"
           >
             {isExporting ? (
-              t('dialog.exporting')
+              t("dialog.exporting")
             ) : (
               <>
-                {exportMethod === 'ics' ? (
+                {exportMethod === "ics" ? (
                   <Download className="mr-2 h-4 w-4" />
                 ) : (
                   <ExternalLink className="mr-2 h-4 w-4" />
                 )}
-                {t('dialog.export', { count: selectedCount })}
+                {t("dialog.export", { count: selectedCount })}
               </>
             )}
           </Button>

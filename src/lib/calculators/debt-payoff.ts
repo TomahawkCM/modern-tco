@@ -4,8 +4,8 @@
  * Compare snowball vs avalanche debt repayment strategies
  */
 
-import Decimal from 'decimal.js';
-import { roundToCents } from '@/lib/money';
+import Decimal from "decimal.js";
+import { roundToCents } from "@/lib/money";
 import type {
   DebtAccount,
   DebtPayoffInput,
@@ -13,7 +13,7 @@ import type {
   StrategyResult,
   DebtPaymentMonth,
   DebtStrategy,
-} from './types';
+} from "./types";
 
 // Configure Decimal.js for financial precision
 Decimal.set({ precision: 20, rounding: Decimal.ROUND_HALF_UP });
@@ -31,8 +31,8 @@ export function calculateDebtPayoff(input: DebtPayoffInput): DebtPayoffResult {
     return createEmptyResult();
   }
 
-  const snowball = calculateStrategy(debts, extraMonthlyPayment, 'snowball');
-  const avalanche = calculateStrategy(debts, extraMonthlyPayment, 'avalanche');
+  const snowball = calculateStrategy(debts, extraMonthlyPayment, "snowball");
+  const avalanche = calculateStrategy(debts, extraMonthlyPayment, "avalanche");
 
   const interestSaved = roundToCents(snowball.totalInterest - avalanche.totalInterest);
   const monthsSaved = snowball.totalMonths - avalanche.totalMonths;
@@ -42,7 +42,8 @@ export function calculateDebtPayoff(input: DebtPayoffInput): DebtPayoffResult {
     avalanche,
     interestSaved,
     monthsSaved,
-    recommendedStrategy: avalanche.totalInterest <= snowball.totalInterest ? 'avalanche' : 'snowball',
+    recommendedStrategy:
+      avalanche.totalInterest <= snowball.totalInterest ? "avalanche" : "snowball",
   };
 }
 
@@ -56,7 +57,7 @@ function calculateStrategy(
 ): StrategyResult {
   // Clone debts and sort according to strategy
   const sortedDebts = [...debts].sort((a, b) => {
-    if (strategy === 'snowball') {
+    if (strategy === "snowball") {
       // Smallest balance first
       return a.balance - b.balance;
     } else {
@@ -78,10 +79,7 @@ function calculateStrategy(
   const maxMonths = 600; // 50 years cap
 
   // Calculate total minimum payments
-  const totalMinimumPayments = sortedDebts.reduce(
-    (sum, debt) => sum + debt.minimumPayment,
-    0
-  );
+  const totalMinimumPayments = sortedDebts.reduce((sum, debt) => sum + debt.minimumPayment, 0);
 
   // Total available payment each month
   const totalMonthlyPayment = totalMinimumPayments + extraMonthlyPayment;
@@ -91,7 +89,7 @@ function calculateStrategy(
     const monthDate = new Date();
     monthDate.setMonth(monthDate.getMonth() + month);
 
-    const payments: DebtPaymentMonth['payments'] = [];
+    const payments: DebtPaymentMonth["payments"] = [];
     let availableExtra = new Decimal(extraMonthlyPayment);
 
     // First pass: Apply minimum payments and calculate interest
@@ -193,7 +191,7 @@ function hasRemainingDebt(balances: Map<string, Decimal>): boolean {
  */
 function createEmptyResult(): DebtPayoffResult {
   const emptyStrategy: StrategyResult = {
-    strategy: 'snowball',
+    strategy: "snowball",
     totalMonths: 0,
     totalInterest: 0,
     payoffDate: new Date(),
@@ -202,11 +200,11 @@ function createEmptyResult(): DebtPayoffResult {
   };
 
   return {
-    snowball: { ...emptyStrategy, strategy: 'snowball' },
-    avalanche: { ...emptyStrategy, strategy: 'avalanche' },
+    snowball: { ...emptyStrategy, strategy: "snowball" },
+    avalanche: { ...emptyStrategy, strategy: "avalanche" },
     interestSaved: 0,
     monthsSaved: 0,
-    recommendedStrategy: 'avalanche',
+    recommendedStrategy: "avalanche",
   };
 }
 

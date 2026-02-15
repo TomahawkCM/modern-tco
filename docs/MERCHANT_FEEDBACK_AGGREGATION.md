@@ -26,6 +26,7 @@ When feedback is submitted via `/api/merchants/feedback`:
 3. **User Response**: Return success immediately
 
 **Why Real-Time?**
+
 - Feedback events are relatively rare (not thousands per minute)
 - Counter updates are simple atomic operations
 - Users get immediate confirmation their feedback was recorded
@@ -83,6 +84,7 @@ GROUP BY merchant_id;
 ```
 
 **Confidence Thresholds:**
+
 - **High Confidence** (≥80% agreement): Auto-update category
 - **Medium Confidence** (60-79% agreement): Keep current, flag for review
 - **Low Confidence** (<60% agreement): Flag for manual review
@@ -111,6 +113,7 @@ LIMIT 1;
 ```
 
 **Majority Voting Rules:**
+
 - If winner has ≥60% of votes → Update to winner category
 - If winner has <60% of votes → Flag for manual review (no auto-update)
 
@@ -141,10 +144,7 @@ WHERE id = $merchant_id
 **Confidence Calculation:**
 
 ```typescript
-function calculateConfidence(
-  agreementCount: number,
-  correctionCount: number
-): number {
+function calculateConfidence(agreementCount: number, correctionCount: number): number {
   const total = agreementCount + correctionCount;
   if (total === 0) return 0.5; // Default for new merchants
 
@@ -164,8 +164,8 @@ function calculateConfidence(
 Create `/scripts/aggregate-merchant-feedback.ts`:
 
 ```typescript
-import { createClient } from '@supabase/supabase-js';
-import cron from 'node-cron';
+import { createClient } from "@supabase/supabase-js";
+import cron from "node-cron";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -173,17 +173,19 @@ const supabase = createClient(
 );
 
 async function aggregateMerchantFeedback() {
-  console.log('[Aggregation] Starting merchant feedback aggregation...');
+  console.log("[Aggregation] Starting merchant feedback aggregation...");
 
   // Step 1: Find merchants needing review
   const { data: merchants, error } = await supabase
-    .from('merchants')
-    .select('id, merchant_token, default_category, classification_count, user_agreement_count, user_correction_count')
-    .gte('classification_count', 5)
-    .lt('updated_at', new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
+    .from("merchants")
+    .select(
+      "id, merchant_token, default_category, classification_count, user_agreement_count, user_correction_count"
+    )
+    .gte("classification_count", 5)
+    .lt("updated_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString());
 
   if (error) {
-    console.error('[Aggregation] Error fetching merchants:', error);
+    console.error("[Aggregation] Error fetching merchants:", error);
     return;
   }
 
@@ -194,15 +196,15 @@ async function aggregateMerchantFeedback() {
     await processMerchantFeedback(merchant);
   }
 
-  console.log('[Aggregation] Completed!');
+  console.log("[Aggregation] Completed!");
 }
 
 async function processMerchantFeedback(merchant: any) {
   // Get feedback for this merchant
   const { data: feedback, error } = await supabase
-    .from('merchant_feedback')
-    .select('chosen_category, chosen_subcategory, accepted_suggestion')
-    .eq('merchant_id', merchant.id);
+    .from("merchant_feedback")
+    .select("chosen_category, chosen_subcategory, accepted_suggestion")
+    .eq("merchant_id", merchant.id);
 
   if (error || !feedback || feedback.length === 0) {
     return;
@@ -210,48 +212,56 @@ async function processMerchantFeedback(merchant: any) {
 
   // Calculate agreement rate
   const total = feedback.length;
-  const agreements = feedback.filter(f => f.accepted_suggestion).length;
+  const agreements = feedback.filter((f) => f.accepted_suggestion).length;
   const agreementRate = agreements / total;
 
   // Auto-update if high confidence
   if (agreementRate >= 0.8) {
-    console.log(`[Aggregation] High confidence (${(agreementRate * 100).toFixed(1)}%) for ${merchant.merchant_token} - keeping current category`);
+    console.log(
+      `[Aggregation] High confidence (${(agreementRate * 100).toFixed(1)}%) for ${merchant.merchant_token} - keeping current category`
+    );
     return; // Current category is good
   }
 
   // Find majority category
   const categoryCounts: { [key: string]: number } = {};
-  feedback.forEach(f => {
-    const key = `${f.chosen_category}|${f.chosen_subcategory || ''}`;
+  feedback.forEach((f) => {
+    const key = `${f.chosen_category}|${f.chosen_subcategory || ""}`;
     categoryCounts[key] = (categoryCounts[key] || 0) + 1;
   });
 
-  const sortedCategories = Object.entries(categoryCounts)
-    .sort(([, a], [, b]) => b - a);
+  const sortedCategories = Object.entries(categoryCounts).sort(([, a], [, b]) => b - a);
 
   const [winnerKey, winnerCount] = sortedCategories[0];
-  const [winnerCategory, winnerSubcategory] = winnerKey.split('|');
+  const [winnerCategory, winnerSubcategory] = winnerKey.split("|");
   const winnerPercentage = winnerCount / total;
 
   // Update if majority (≥60%)
   if (winnerPercentage >= 0.6) {
-    const newConfidence = calculateConfidence(merchant.user_agreement_count, merchant.user_correction_count);
+    const newConfidence = calculateConfidence(
+      merchant.user_agreement_count,
+      merchant.user_correction_count
+    );
 
     await supabase
-      .from('merchants')
+      .from("merchants")
       .update({
         default_category: winnerCategory,
         default_subcategory: winnerSubcategory || null,
         confidence: newConfidence,
-        source: 'mixed',
+        source: "mixed",
         explanation: `Updated via user feedback aggregation (${(winnerPercentage * 100).toFixed(1)}% consensus)`,
         updated_at: new Date().toISOString(),
       })
-      .eq('id', merchant.id);
+      .eq("id", merchant.id);
 
-    console.log(`[Aggregation] Updated ${merchant.merchant_token}: ${merchant.default_category} → ${winnerCategory} (${(winnerPercentage * 100).toFixed(1)}% consensus)`);
+    console.log(
+      `[Aggregation] Updated ${merchant.merchant_token}: ${merchant.default_category} → ${winnerCategory} (${(winnerPercentage * 100).toFixed(1)}% consensus)`
+    );
   } else {
-    console.log(`[Aggregation] Low consensus for ${merchant.merchant_token} (${(winnerPercentage * 100).toFixed(1)}%) - flagging for manual review`);
+    console.log(
+      `[Aggregation] Low consensus for ${merchant.merchant_token} (${(winnerPercentage * 100).toFixed(1)}%) - flagging for manual review`
+    );
   }
 }
 
@@ -266,18 +276,20 @@ function calculateConfidence(agreementCount: number, correctionCount: number): n
 }
 
 // Schedule: Daily at 2:00 AM UTC
-cron.schedule('0 2 * * *', aggregateMerchantFeedback);
+cron.schedule("0 2 * * *", aggregateMerchantFeedback);
 
-console.log('[Aggregation] Cron job scheduled: Daily at 2:00 AM UTC');
+console.log("[Aggregation] Cron job scheduled: Daily at 2:00 AM UTC");
 ```
 
 **Package Installation:**
+
 ```bash
 npm install node-cron
 npm install --save-dev @types/node-cron
 ```
 
 **Run Script:**
+
 ```bash
 # Development
 npm run aggregate-feedback
@@ -295,19 +307,19 @@ For serverless deployment on Vercel:
 **Create `/app/api/cron/aggregate-feedback/route.ts`:**
 
 ```typescript
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   // Verify cron secret (security)
-  const authHeader = request.headers.get('authorization');
+  const authHeader = request.headers.get("authorization");
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   // Run aggregation logic (same as above)
   await aggregateMerchantFeedback();
 
-  return NextResponse.json({ success: true, message: 'Aggregation completed' });
+  return NextResponse.json({ success: true, message: "Aggregation completed" });
 }
 ```
 
@@ -374,12 +386,12 @@ serve(async (req) => {
 
 ```typescript
 // Log aggregation runs
-await supabase.from('aggregation_logs').insert({
+await supabase.from("aggregation_logs").insert({
   started_at: new Date(),
   merchants_reviewed: merchants.length,
   merchants_updated: updatedCount,
   merchants_flagged: flaggedCount,
-  status: 'completed',
+  status: "completed",
   duration_ms: Date.now() - startTime,
 });
 ```

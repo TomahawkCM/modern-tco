@@ -86,29 +86,65 @@ function normalizeDomain(domain: string, module?: string): string {
     return "Asking Questions";
   }
 
-  if (domainLower.includes("refin") || domainLower.includes("target") || domainLower.includes("filter") || domainLower.includes("group")) {
+  if (
+    domainLower.includes("refin") ||
+    domainLower.includes("target") ||
+    domainLower.includes("filter") ||
+    domainLower.includes("group")
+  ) {
     return "Refining Questions & Targeting";
   }
 
-  if (domainLower.includes("action") || domainLower.includes("package") || domainLower.includes("deploy")) {
+  if (
+    domainLower.includes("action") ||
+    domainLower.includes("package") ||
+    domainLower.includes("deploy")
+  ) {
     return "Taking Action";
   }
 
-  if (domainLower.includes("navigat") || domainLower.includes("module") || domainLower.includes("console") || domainLower.includes("interact") || domainLower.includes("trends")) {
+  if (
+    domainLower.includes("navigat") ||
+    domainLower.includes("module") ||
+    domainLower.includes("console") ||
+    domainLower.includes("interact") ||
+    domainLower.includes("trends")
+  ) {
     return "Navigation and Basic Module Functions";
   }
 
-  if (domainLower.includes("report") || domainLower.includes("export") || domainLower.includes("data") || domainLower.includes("generation")) {
+  if (
+    domainLower.includes("report") ||
+    domainLower.includes("export") ||
+    domainLower.includes("data") ||
+    domainLower.includes("generation")
+  ) {
     return "Report Generation and Data Export";
   }
 
   // Foundation/Architecture/Platform topics
-  if (domainLower.includes("foundation") || domainLower.includes("architecture") || domainLower.includes("platform") || domainLower.includes("terminology") || domainLower.includes("communication") || domainLower.includes("fundamental")) {
+  if (
+    domainLower.includes("foundation") ||
+    domainLower.includes("architecture") ||
+    domainLower.includes("platform") ||
+    domainLower.includes("terminology") ||
+    domainLower.includes("communication") ||
+    domainLower.includes("fundamental")
+  ) {
     return "Fundamentals";
   }
 
   // Business/efficiency/performance -> Fundamentals
-  if (domainLower.includes("business") || domainLower.includes("efficienc") || domainLower.includes("performance") || domainLower.includes("competitive") || domainLower.includes("impact") || domainLower.includes("network") || domainLower.includes("fault") || domainLower.includes("infrastructure")) {
+  if (
+    domainLower.includes("business") ||
+    domainLower.includes("efficienc") ||
+    domainLower.includes("performance") ||
+    domainLower.includes("competitive") ||
+    domainLower.includes("impact") ||
+    domainLower.includes("network") ||
+    domainLower.includes("fault") ||
+    domainLower.includes("infrastructure")
+  ) {
     return "Fundamentals";
   }
 
@@ -201,10 +237,7 @@ async function importQuestions() {
     });
 
     // Batch insert (not upsert since we don't have IDs)
-    const { data, error } = await supabase
-      .from("questions")
-      .insert(dbQuestions)
-      .select();
+    const { data, error } = await supabase.from("questions").insert(dbQuestions).select();
 
     if (error) {
       console.error(`   ❌ Error importing: ${error.message}`);

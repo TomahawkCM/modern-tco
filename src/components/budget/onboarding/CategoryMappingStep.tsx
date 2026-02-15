@@ -6,14 +6,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import {
-  ArrowRight,
-  Check,
-  ChevronDown,
-  Lightbulb,
-  RefreshCw,
-  Sparkles,
-} from "lucide-react";
+import { ArrowRight, Check, ChevronDown, Lightbulb, RefreshCw, Sparkles } from "lucide-react";
 import { useCallback, useState } from "react";
 import type { StepProps } from "./OnboardingWizard";
 
@@ -33,13 +26,49 @@ const CATEGORIES = [
 // Simulated uncategorized transactions for demo
 const DEMO_TRANSACTIONS = [
   { id: "1", vendor: "WALMART", amount: -125.43, suggestedCategory: "shopping", confidence: 0.95 },
-  { id: "2", vendor: "SHELL GAS STATION", amount: -45.00, suggestedCategory: "transport", confidence: 0.92 },
-  { id: "3", vendor: "NETFLIX.COM", amount: -15.99, suggestedCategory: "entertainment", confidence: 0.98 },
+  {
+    id: "2",
+    vendor: "SHELL GAS STATION",
+    amount: -45.0,
+    suggestedCategory: "transport",
+    confidence: 0.92,
+  },
+  {
+    id: "3",
+    vendor: "NETFLIX.COM",
+    amount: -15.99,
+    suggestedCategory: "entertainment",
+    confidence: 0.98,
+  },
   { id: "4", vendor: "TRADER JOE'S", amount: -87.23, suggestedCategory: "food", confidence: 0.96 },
-  { id: "5", vendor: "ELECTRIC COMPANY", amount: -142.50, suggestedCategory: "bills", confidence: 0.94 },
-  { id: "6", vendor: "AMAZON.COM", amount: -34.99, suggestedCategory: "shopping", confidence: 0.88 },
-  { id: "7", vendor: "PAYCHECK - ACME CORP", amount: 3500.00, suggestedCategory: "income", confidence: 0.99 },
-  { id: "8", vendor: "PLANET FITNESS", amount: -29.99, suggestedCategory: "health", confidence: 0.91 },
+  {
+    id: "5",
+    vendor: "ELECTRIC COMPANY",
+    amount: -142.5,
+    suggestedCategory: "bills",
+    confidence: 0.94,
+  },
+  {
+    id: "6",
+    vendor: "AMAZON.COM",
+    amount: -34.99,
+    suggestedCategory: "shopping",
+    confidence: 0.88,
+  },
+  {
+    id: "7",
+    vendor: "PAYCHECK - ACME CORP",
+    amount: 3500.0,
+    suggestedCategory: "income",
+    confidence: 0.99,
+  },
+  {
+    id: "8",
+    vendor: "PLANET FITNESS",
+    amount: -29.99,
+    suggestedCategory: "health",
+    confidence: 0.91,
+  },
 ];
 
 interface CategorizedTransaction {
@@ -83,9 +112,7 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
   const handleCategoryChange = useCallback((transactionId: string, categoryId: string) => {
     setTransactions((prev) =>
       prev.map((t) =>
-        t.id === transactionId
-          ? { ...t, category: categoryId, autoSuggested: false }
-          : t
+        t.id === transactionId ? { ...t, category: categoryId, autoSuggested: false } : t
       )
     );
     setShowCategoryDropdown(null);
@@ -115,10 +142,10 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
             type="button"
             onClick={handleApplySuggestions}
             className={cn(
-              "flex items-center gap-2 px-4 py-2 rounded-lg",
+              "flex items-center gap-2 rounded-lg px-4 py-2",
               "bg-gradient-to-r from-teal-500 to-blue-500",
-              "text-white text-sm font-medium",
-              "hover:opacity-90 transition-opacity"
+              "text-sm font-medium text-white",
+              "transition-opacity hover:opacity-90"
             )}
           >
             <Sparkles className="h-4 w-4" />
@@ -128,7 +155,7 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
       </div>
 
       {/* Transaction List */}
-      <div className="space-y-2 max-h-[280px] overflow-y-auto pr-2">
+      <div className="max-h-[280px] space-y-2 overflow-y-auto pr-2">
         {transactions.map((transaction) => {
           const category = transaction.category ? getCategoryById(transaction.category) : null;
           const suggestion = DEMO_TRANSACTIONS.find((d) => d.id === transaction.id);
@@ -137,15 +164,15 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
             <div
               key={transaction.id}
               className={cn(
-                "flex items-center gap-4 p-3 rounded-xl",
-                "bg-slate-800/50 border border-white/5",
+                "flex items-center gap-4 rounded-xl p-3",
+                "border border-white/5 bg-slate-800/50",
                 transaction.category && "border-teal-500/30"
               )}
             >
               {/* Category indicator */}
               <div
                 className={cn(
-                  "shrink-0 w-10 h-10 rounded-lg flex items-center justify-center text-lg",
+                  "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-lg",
                   category ? "bg-opacity-20" : "bg-slate-700"
                 )}
                 style={category ? { backgroundColor: `${category.color}20` } : undefined}
@@ -154,16 +181,15 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
               </div>
 
               {/* Transaction details */}
-              <div className="flex-1 min-w-0">
-                <p className="text-white font-medium text-sm truncate">
-                  {transaction.vendor}
-                </p>
-                <p className={cn(
-                  "text-sm",
-                  transaction.amount > 0 ? "text-green-400" : "text-slate-400"
-                )}>
-                  {transaction.amount > 0 ? "+" : ""}
-                  ${Math.abs(transaction.amount).toFixed(2)}
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-medium text-white">{transaction.vendor}</p>
+                <p
+                  className={cn(
+                    "text-sm",
+                    transaction.amount > 0 ? "text-green-400" : "text-slate-400"
+                  )}
+                >
+                  {transaction.amount > 0 ? "+" : ""}${Math.abs(transaction.amount).toFixed(2)}
                 </p>
               </div>
 
@@ -171,11 +197,13 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
               <div className="relative">
                 <button
                   type="button"
-                  onClick={() => setShowCategoryDropdown(
-                    showCategoryDropdown === transaction.id ? null : transaction.id
-                  )}
+                  onClick={() =>
+                    setShowCategoryDropdown(
+                      showCategoryDropdown === transaction.id ? null : transaction.id
+                    )
+                  }
                   className={cn(
-                    "flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm",
+                    "flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm",
                     "transition-colors",
                     category
                       ? "bg-slate-700/50 text-white hover:bg-slate-700"
@@ -205,22 +233,22 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
 
                 {/* Category Dropdown */}
                 {showCategoryDropdown === transaction.id && (
-                  <div className="absolute right-0 top-full mt-1 z-10 w-48 py-1 rounded-lg bg-slate-800 border border-white/10 shadow-xl">
+                  <div className="absolute right-0 top-full z-10 mt-1 w-48 rounded-lg border border-white/10 bg-slate-800 py-1 shadow-xl">
                     {CATEGORIES.map((cat) => (
                       <button
                         key={cat.id}
                         type="button"
                         onClick={() => handleCategoryChange(transaction.id, cat.id)}
                         className={cn(
-                          "w-full flex items-center gap-2 px-3 py-2 text-left text-sm",
-                          "hover:bg-white/5 transition-colors",
+                          "flex w-full items-center gap-2 px-3 py-2 text-left text-sm",
+                          "transition-colors hover:bg-white/5",
                           transaction.category === cat.id && "bg-teal-500/10"
                         )}
                       >
                         <span>{cat.icon}</span>
                         <span className="text-white">{cat.name}</span>
                         {transaction.category === cat.id && (
-                          <Check className="h-3 w-3 text-teal-400 ml-auto" />
+                          <Check className="ml-auto h-3 w-3 text-teal-400" />
                         )}
                       </button>
                     ))}
@@ -233,7 +261,7 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
       </div>
 
       {/* Remember choices toggle */}
-      <div className="flex items-center gap-3 p-3 bg-slate-800/30 rounded-lg">
+      <div className="flex items-center gap-3 rounded-lg bg-slate-800/30 p-3">
         <button
           type="button"
           role="switch"
@@ -266,19 +294,15 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
             <Check className="h-4 w-4 text-teal-400" />
             <span>{categorizedCount} categorized</span>
           </div>
-          {uncategorizedCount > 0 && (
-            <span className="text-slate-600">•</span>
-          )}
-          {uncategorizedCount > 0 && (
-            <span>{uncategorizedCount} remaining</span>
-          )}
+          {uncategorizedCount > 0 && <span className="text-slate-600">•</span>}
+          {uncategorizedCount > 0 && <span>{uncategorizedCount} remaining</span>}
         </div>
 
         <button
           type="button"
           onClick={handleComplete}
           className={cn(
-            "flex items-center gap-2 px-6 py-2 rounded-lg font-medium",
+            "flex items-center gap-2 rounded-lg px-6 py-2 font-medium",
             "transition-all",
             categorizedCount === transactions.length
               ? "bg-gradient-to-r from-teal-500 to-blue-500 text-white"

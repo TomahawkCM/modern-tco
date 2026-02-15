@@ -141,24 +141,23 @@ interface ResponsiveModalContentProps extends React.HTMLAttributes<HTMLDivElemen
   hideCloseButton?: boolean;
 }
 
-const ResponsiveModalContent = React.forwardRef<
-  HTMLDivElement,
-  ResponsiveModalContentProps
->(({ className, hideCloseButton, ...props }, ref) => {
-  const { isDrawer } = useResponsiveModalContext();
+const ResponsiveModalContent = React.forwardRef<HTMLDivElement, ResponsiveModalContentProps>(
+  ({ className, hideCloseButton, ...props }, ref) => {
+    const { isDrawer } = useResponsiveModalContext();
 
-  if (isDrawer) {
-    return <DrawerContent ref={ref} className={cn(className)} {...props} />;
+    if (isDrawer) {
+      return <DrawerContent ref={ref} className={cn(className)} {...props} />;
+    }
+    return (
+      <DialogContent
+        ref={ref}
+        className={cn(className)}
+        hideCloseButton={hideCloseButton}
+        {...props}
+      />
+    );
   }
-  return (
-    <DialogContent
-      ref={ref}
-      className={cn(className)}
-      hideCloseButton={hideCloseButton}
-      {...props}
-    />
-  );
-});
+);
 ResponsiveModalContent.displayName = "ResponsiveModalContent";
 
 // ---------------------------------------------------------------------------

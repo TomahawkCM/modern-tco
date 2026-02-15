@@ -18,10 +18,10 @@
  * - Rollback on failure
  */
 
-import { createClient } from '@supabase/supabase-js';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as glob from 'glob';
+import { createClient } from "@supabase/supabase-js";
+import * as fs from "fs";
+import * as path from "path";
+import * as glob from "glob";
 
 // ==================== TYPES ====================
 
@@ -57,7 +57,7 @@ function getSupabaseClient() {
 
   if (!supabaseUrl || !supabaseServiceKey) {
     throw new Error(
-      'Missing environment variables: NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY required'
+      "Missing environment variables: NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY required"
     );
   }
 
@@ -77,7 +77,7 @@ async function loadQuestionsFromFile(filePath: string): Promise<Question[]> {
   const questions = module.generatedQuestions || module.default;
 
   if (!Array.isArray(questions)) {
-    throw new Error('File does not export a valid questions array');
+    throw new Error("File does not export a valid questions array");
   }
 
   console.log(`   Found ${questions.length} questions`);
@@ -87,16 +87,13 @@ async function loadQuestionsFromFile(filePath: string): Promise<Question[]> {
 /**
  * Check for duplicate question IDs in database
  */
-async function checkDuplicates(
-  supabase: any,
-  questions: Question[]
-): Promise<string[]> {
+async function checkDuplicates(supabase: any, questions: Question[]): Promise<string[]> {
   const questionIds = questions.map((q) => q.id);
 
   const { data: existingQuestions } = await supabase
-    .from('questions')
-    .select('id')
-    .in('id', questionIds);
+    .from("questions")
+    .select("id")
+    .in("id", questionIds);
 
   const duplicateIds = existingQuestions?.map((q: any) => q.id) || [];
 
@@ -111,7 +108,7 @@ async function checkDuplicates(
  * Convert letter ID (a,b,c,d) to integer index (0,1,2,3)
  */
 function letterToIndex(letter: string): number {
-  const map: Record<string, number> = { 'a': 0, 'b': 1, 'c': 2, 'd': 3 };
+  const map: Record<string, number> = { a: 0, b: 1, c: 2, d: 3 };
   return map[letter.toLowerCase()] ?? 0;
 }
 
@@ -120,9 +117,10 @@ function letterToIndex(letter: string): number {
  */
 function transformQuestionForDB(question: Question) {
   // Convert letter ID to integer if needed
-  const correctAnswer = typeof question.correctAnswerId === 'string'
-    ? letterToIndex(question.correctAnswerId)
-    : question.correctAnswerId;
+  const correctAnswer =
+    typeof question.correctAnswerId === "string"
+      ? letterToIndex(question.correctAnswerId)
+      : question.correctAnswerId;
 
   return {
     // Let database generate UUID - don't include id field
@@ -183,7 +181,7 @@ async function importQuestions(
 
     console.log(`   Batch ${batchNumber}/${totalBatches} (${batch.length} questions)...`);
 
-    const { data, error } = await supabase.from('questions').insert(batch).select('id');
+    const { data, error } = await supabase.from("questions").insert(batch).select("id");
 
     if (error) {
       console.error(`   ❌ Batch ${batchNumber} failed:`, error.message);
@@ -209,14 +207,10 @@ async function importQuestions(
 /**
  * Log import to content_import_logs table
  */
-async function logImport(
-  supabase: any,
-  result: ImportResult,
-  sourceFile: string
-): Promise<void> {
-  await supabase.from('content_import_logs').insert({
-    content_type: 'questions',
-    import_method: 'bulk_api',
+async function logImport(supabase: any, result: ImportResult, sourceFile: string): Promise<void> {
+  await supabase.from("content_import_logs").insert({
+    content_type: "questions",
+    import_method: "bulk_api",
     source_file: sourceFile,
     source_description: `Bulk import from ${path.basename(sourceFile)}`,
     total_items: result.totalItems,
@@ -226,28 +220,30 @@ async function logImport(
     error_log: result.errors.length > 0 ? { errors: result.errors } : null,
   });
 
-  console.log('📋 Import logged to content_import_logs');
+  console.log("📋 Import logged to content_import_logs");
 }
 
 /**
  * Print import summary
  */
 function printSummary(result: ImportResult): void {
-  console.log('\n' + '='.repeat(60));
-  console.log('📊 Import Summary');
-  console.log('='.repeat(60));
+  console.log("\n" + "=".repeat(60));
+  console.log("📊 Import Summary");
+  console.log("=".repeat(60));
   console.log(`Total questions:     ${result.totalItems}`);
   console.log(`Successful imports:  ${result.successfulItems} ✅`);
   console.log(`Failed imports:      ${result.failedItems} ❌`);
   console.log(`Duplicates skipped:  ${result.duplicates.length} ⚠️`);
-  console.log(`Success rate:        ${((result.successfulItems / result.totalItems) * 100).toFixed(1)}%`);
-  console.log('='.repeat(60));
+  console.log(
+    `Success rate:        ${((result.successfulItems / result.totalItems) * 100).toFixed(1)}%`
+  );
+  console.log("=".repeat(60));
 
   if (result.success) {
-    console.log('\n✅ Import completed successfully!');
+    console.log("\n✅ Import completed successfully!");
   } else {
-    console.log('\n❌ Import completed with errors');
-    console.log('\nErrors:');
+    console.log("\n❌ Import completed with errors");
+    console.log("\nErrors:");
     result.errors.forEach((err, idx) => {
       console.log(`  ${idx + 1}. ${err.error}`);
     });
@@ -260,13 +256,15 @@ async function main() {
   const args = process.argv.slice(2);
 
   if (args.length === 0) {
-    console.error('❌ Error: No file path provided');
-    console.error('\nUsage:');
-    console.error('  npx tsx scripts/bulk-import-questions.ts <file-path>');
-    console.error('  npx tsx scripts/bulk-import-questions.ts --all');
-    console.error('\nExamples:');
-    console.error('  npx tsx scripts/bulk-import-questions.ts src/data/generated/generated-questions-asking_questions-beginner-2025-10-10.ts');
-    console.error('  npx tsx scripts/bulk-import-questions.ts --all');
+    console.error("❌ Error: No file path provided");
+    console.error("\nUsage:");
+    console.error("  npx tsx scripts/bulk-import-questions.ts <file-path>");
+    console.error("  npx tsx scripts/bulk-import-questions.ts --all");
+    console.error("\nExamples:");
+    console.error(
+      "  npx tsx scripts/bulk-import-questions.ts src/data/generated/generated-questions-asking_questions-beginner-2025-10-10.ts"
+    );
+    console.error("  npx tsx scripts/bulk-import-questions.ts --all");
     process.exit(1);
   }
 
@@ -277,14 +275,14 @@ async function main() {
     let filePaths: string[] = [];
 
     // Handle --all flag
-    if (args[0] === '--all') {
-      console.log('🔍 Finding all generated question files...');
-      const generatedDir = path.join(__dirname, '..', 'src', 'data', 'generated');
-      const pattern = path.join(generatedDir, 'generated-questions-*.ts');
+    if (args[0] === "--all") {
+      console.log("🔍 Finding all generated question files...");
+      const generatedDir = path.join(__dirname, "..", "src", "data", "generated");
+      const pattern = path.join(generatedDir, "generated-questions-*.ts");
       filePaths = glob.sync(pattern);
 
       if (filePaths.length === 0) {
-        console.error('❌ No generated question files found');
+        console.error("❌ No generated question files found");
         console.error(`   Looking in: ${generatedDir}`);
         process.exit(1);
       }
@@ -301,9 +299,9 @@ async function main() {
     let totalDuplicates = 0;
 
     for (const filePath of filePaths) {
-      console.log('\n' + '='.repeat(60));
+      console.log("\n" + "=".repeat(60));
       console.log(`Processing: ${path.basename(filePath)}`);
-      console.log('='.repeat(60));
+      console.log("=".repeat(60));
 
       // Load questions
       const questions = await loadQuestionsFromFile(filePath);
@@ -325,19 +323,19 @@ async function main() {
 
     // Overall summary for multiple files
     if (filePaths.length > 1) {
-      console.log('\n' + '='.repeat(60));
-      console.log('📊 Overall Summary');
-      console.log('='.repeat(60));
+      console.log("\n" + "=".repeat(60));
+      console.log("📊 Overall Summary");
+      console.log("=".repeat(60));
       console.log(`Files processed:     ${filePaths.length}`);
       console.log(`Total imported:      ${totalSuccess} ✅`);
       console.log(`Total failed:        ${totalFailed} ❌`);
       console.log(`Total duplicates:    ${totalDuplicates} ⚠️`);
-      console.log('='.repeat(60));
+      console.log("=".repeat(60));
     }
 
-    console.log('\n🎉 All imports completed!');
+    console.log("\n🎉 All imports completed!");
   } catch (error) {
-    console.error('\n❌ Fatal error:', error);
+    console.error("\n❌ Fatal error:", error);
     process.exit(1);
   }
 }

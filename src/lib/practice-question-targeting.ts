@@ -12,7 +12,7 @@ import {
   type QuestionFilter,
   type QuestionPool,
 } from "@/types/exam";
-import { defaultDifficultyRecord } from './difficulty';
+import { defaultDifficultyRecord } from "./difficulty";
 
 /**
  * Core question targeting and filtering utilities
@@ -237,8 +237,7 @@ export class PracticeQuestionTargeting {
       {} as Record<TCODomain, number>
     );
 
-    const difficultyDistribution: Record<Difficulty, number> =
-      defaultDifficultyRecord(() => 0);
+    const difficultyDistribution: Record<Difficulty, number> = defaultDifficultyRecord(() => 0);
 
     questions.forEach((question) => {
       domainDistribution[question.domain]++;
@@ -343,10 +342,13 @@ export class PracticeQuestionTargeting {
     }
 
     const domainValues = Object.values(TCODomain) as TCODomain[];
-    const domainGroups: Record<TCODomain, Question[]> = domainValues.reduce((acc, d) => {
-      acc[d] = [];
-      return acc;
-    }, {} as Record<TCODomain, Question[]>);
+    const domainGroups: Record<TCODomain, Question[]> = domainValues.reduce(
+      (acc, d) => {
+        acc[d] = [];
+        return acc;
+      },
+      {} as Record<TCODomain, Question[]>
+    );
 
     // Group questions by domain
     questions.forEach((q) => {
@@ -425,7 +427,6 @@ export function createPracticeTargeting(
 }
 
 // Bind static method to preserve `this` context when imported as a standalone function
-export const getTargetedQuestions = PracticeQuestionTargeting.getTargetedQuestions.bind(
-  PracticeQuestionTargeting
-);
+export const getTargetedQuestions =
+  PracticeQuestionTargeting.getTargetedQuestions.bind(PracticeQuestionTargeting);
 export default PracticeQuestionTargeting;

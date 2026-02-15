@@ -36,7 +36,7 @@ export interface DebtAccount {
   minimumPayment: number;
 }
 
-export type DebtStrategy = 'snowball' | 'avalanche';
+export type DebtStrategy = "snowball" | "avalanche";
 
 export interface DebtPayoffInput {
   debts: DebtAccount[];
@@ -79,7 +79,7 @@ export interface DebtPayoffResult {
 // Savings Goal Calculator
 // ==========================================
 
-export type SavingsGoalMode = 'when' | 'howMuch';
+export type SavingsGoalMode = "when" | "howMuch";
 
 export interface SavingsGoalInput {
   mode: SavingsGoalMode;
@@ -117,7 +117,7 @@ export interface SavingsGoalResult {
 // Subscription Cost Calculator
 // ==========================================
 
-export type SubscriptionFrequency = 'weekly' | 'biweekly' | 'monthly' | 'quarterly' | 'annual';
+export type SubscriptionFrequency = "weekly" | "biweekly" | "monthly" | "quarterly" | "annual";
 
 export interface SubscriptionEntry {
   id: string;
@@ -158,7 +158,7 @@ export interface SubscriptionCostResult {
 // 50/30/20 Budget Analyzer
 // ==========================================
 
-export type BudgetBucket = 'needs' | 'wants' | 'savings';
+export type BudgetBucket = "needs" | "wants" | "savings";
 
 export interface CategoryMapping {
   categoryId: string;
@@ -218,41 +218,41 @@ export interface CalculatorState<I, R> {
 // Default category to bucket mappings
 export const DEFAULT_BUCKET_MAPPINGS: Record<string, BudgetBucket> = {
   // Needs (50%)
-  'rent': 'needs',
-  'mortgage': 'needs',
-  'utilities': 'needs',
-  'groceries': 'needs',
-  'insurance': 'needs',
-  'healthcare': 'needs',
-  'health': 'needs',
-  'medical': 'needs',
-  'transportation': 'needs',
-  'gas': 'needs',
-  'childcare': 'needs',
-  'minimum debt payments': 'needs',
+  rent: "needs",
+  mortgage: "needs",
+  utilities: "needs",
+  groceries: "needs",
+  insurance: "needs",
+  healthcare: "needs",
+  health: "needs",
+  medical: "needs",
+  transportation: "needs",
+  gas: "needs",
+  childcare: "needs",
+  "minimum debt payments": "needs",
 
   // Wants (30%)
-  'dining': 'wants',
-  'dining out': 'wants',
-  'restaurants': 'wants',
-  'entertainment': 'wants',
-  'shopping': 'wants',
-  'subscriptions': 'wants',
-  'streaming': 'wants',
-  'hobbies': 'wants',
-  'travel': 'wants',
-  'vacation': 'wants',
-  'clothing': 'wants',
-  'personal care': 'wants',
-  'gifts': 'wants',
+  dining: "wants",
+  "dining out": "wants",
+  restaurants: "wants",
+  entertainment: "wants",
+  shopping: "wants",
+  subscriptions: "wants",
+  streaming: "wants",
+  hobbies: "wants",
+  travel: "wants",
+  vacation: "wants",
+  clothing: "wants",
+  "personal care": "wants",
+  gifts: "wants",
 
   // Savings (20%)
-  'savings': 'savings',
-  'investments': 'savings',
-  'emergency fund': 'savings',
-  'retirement': 'savings',
-  '401k': 'savings',
-  'rrsp': 'savings',
-  'tfsa': 'savings',
-  'debt repayment': 'savings', // Extra debt payments beyond minimum
+  savings: "savings",
+  investments: "savings",
+  "emergency fund": "savings",
+  retirement: "savings",
+  "401k": "savings",
+  rrsp: "savings",
+  tfsa: "savings",
+  "debt repayment": "savings", // Extra debt payments beyond minimum
 };

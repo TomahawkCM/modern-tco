@@ -1,19 +1,12 @@
-'use client';
+"use client";
 
 /**
  * Profile Context
  * Manages multi-profile state and authentication throughout the app
  */
 
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-} from 'react';
-import type { Profile } from '@/types/profile';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
+import type { Profile } from "@/types/profile";
 import {
   createProfile as dbCreateProfile,
   getProfile,
@@ -21,7 +14,7 @@ import {
   updateProfile as dbUpdateProfile,
   deleteProfile as dbDeleteProfile,
   ensureProfileExists,
-} from '@/lib/profile-db';
+} from "@/lib/profile-db";
 import {
   setupPIN,
   verifyPIN,
@@ -31,14 +24,14 @@ import {
   shouldAutoLock,
   MAX_FAILED_ATTEMPTS,
   AUTO_LOCK_TIMEOUT_MS,
-} from '@/lib/pin-auth';
+} from "@/lib/pin-auth";
 import {
   logProfileLogin,
   logProfileLogout,
   logProfileSwitch,
   logPINChange,
-} from '@/lib/activity-logger';
-import { isFeatureEnabled } from '@/config/features';
+} from "@/lib/activity-logger";
+import { isFeatureEnabled } from "@/config/features";
 
 // ========================
 // Types
@@ -127,7 +120,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
     async function initialize() {
       // 2s timeout - don't block app if database is slow
       const timeoutId = setTimeout(() => {
-        console.warn('[ProfileContext] Initialization timeout - continuing without profiles');
+        console.warn("[ProfileContext] Initialization timeout - continuing without profiles");
         setIsLoading(false);
       }, 2000);
 
@@ -153,15 +146,15 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
         }
         clearTimeout(timeoutId);
       } catch (err) {
-        console.error('[ProfileContext] Initialization error:', err);
-        setError('Failed to load profiles');
+        console.error("[ProfileContext] Initialization error:", err);
+        setError("Failed to load profiles");
         clearTimeout(timeoutId);
       } finally {
         setIsLoading(false);
       }
     }
 
-    if (isFeatureEnabled('multiProfiles')) {
+    if (isFeatureEnabled("multiProfiles")) {
       initialize();
     } else {
       setIsLoading(false);
@@ -177,18 +170,14 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
   }, []);
 
   useEffect(() => {
-    if (!isFeatureEnabled('pinAuthentication') || !currentProfile?.pinHash) {
+    if (!isFeatureEnabled("pinAuthentication") || !currentProfile?.pinHash) {
       return;
     }
 
     // Check for auto-lock every minute
     autoLockTimerRef.current = setInterval(() => {
-      if (
-        currentProfile?.pinHash &&
-        !isLocked &&
-        shouldAutoLock(lastActivityRef.current)
-      ) {
-        console.log('[ProfileContext] Auto-locking due to inactivity');
+      if (currentProfile?.pinHash && !isLocked && shouldAutoLock(lastActivityRef.current)) {
+        console.log("[ProfileContext] Auto-locking due to inactivity");
         setIsLocked(true);
         logProfileLogout(currentProfile.id, currentProfile.name);
       }
@@ -203,7 +192,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
 
   // Reset activity on user interactions
   useEffect(() => {
-    const events = ['mousedown', 'keydown', 'touchstart', 'scroll'];
+    const events = ["mousedown", "keydown", "touchstart", "scroll"];
 
     const handleActivity = () => {
       resetActivityTimer();
@@ -230,7 +219,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
         let pinHash: string | null = null;
         let pinSalt: string | null = null;
 
-        if (pin && isFeatureEnabled('pinAuthentication')) {
+        if (pin && isFeatureEnabled("pinAuthentication")) {
           const result = await setupPIN(pin);
           if (!result.success) {
             throw new Error(result.error);
@@ -248,7 +237,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
 
         const newProfile = await getProfile(profileId);
         if (!newProfile) {
-          throw new Error('Failed to create profile');
+          throw new Error("Failed to create profile");
         }
 
         // Update profiles list
@@ -257,7 +246,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
 
         return newProfile;
       } catch (err) {
-        const message = err instanceof Error ? err.message : 'Failed to create profile';
+        const message = err instanceof Error ? err.message : "Failed to create profile";
         setError(message);
         throw err;
       }
@@ -282,7 +271,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
           }
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : 'Failed to update profile';
+        const message = err instanceof Error ? err.message : "Failed to update profile";
         setError(message);
         throw err;
       }
@@ -306,7 +295,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
           setIsLocked(!!defaultProfile.pinHash);
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : 'Failed to delete profile';
+        const message = err instanceof Error ? err.message : "Failed to delete profile";
         setError(message);
         throw err;
       }
@@ -319,22 +308,17 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
       try {
         const profile = await getProfile(profileId);
         if (!profile) {
-          setError('Profile not found');
+          setError("Profile not found");
           return false;
         }
 
         // Log the switch if we have a current profile
         if (currentProfile) {
-          logProfileSwitch(
-            currentProfile.id,
-            currentProfile.name,
-            profile.id,
-            profile.name
-          );
+          logProfileSwitch(currentProfile.id, currentProfile.name, profile.id, profile.name);
         }
 
         // If profile has PIN, require unlock
-        if (profile.pinHash && isFeatureEnabled('pinAuthentication')) {
+        if (profile.pinHash && isFeatureEnabled("pinAuthentication")) {
           pendingProfileRef.current = profileId;
           setIsLocked(true);
           setCurrentProfile(profile);
@@ -353,7 +337,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
 
         return true;
       } catch (err) {
-        const message = err instanceof Error ? err.message : 'Failed to switch profile';
+        const message = err instanceof Error ? err.message : "Failed to switch profile";
         setError(message);
         return false;
       }
@@ -412,8 +396,8 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
           return false;
         }
       } catch (err) {
-        console.error('[ProfileContext] PIN verification error:', err);
-        setError('Failed to verify PIN');
+        console.error("[ProfileContext] PIN verification error:", err);
+        setError("Failed to verify PIN");
         return false;
       }
     },
@@ -460,7 +444,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
 
         return true;
       } catch (err) {
-        const message = err instanceof Error ? err.message : 'Failed to set PIN';
+        const message = err instanceof Error ? err.message : "Failed to set PIN";
         setError(message);
         return false;
       }
@@ -494,7 +478,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
           logPINChange(profile.id, profile.name, false);
         }
       } catch (err) {
-        const message = err instanceof Error ? err.message : 'Failed to remove PIN';
+        const message = err instanceof Error ? err.message : "Failed to remove PIN";
         setError(message);
         throw err;
       }
@@ -514,7 +498,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
         }
       }
     } catch (err) {
-      console.error('[ProfileContext] Error refreshing profiles:', err);
+      console.error("[ProfileContext] Error refreshing profiles:", err);
     }
   }, [currentProfile]);
 
@@ -556,9 +540,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
     resetActivityTimer,
   };
 
-  return (
-    <ProfileContext.Provider value={value}>{children}</ProfileContext.Provider>
-  );
+  return <ProfileContext.Provider value={value}>{children}</ProfileContext.Provider>;
 }
 
 // ========================
@@ -568,7 +550,7 @@ export function ProfileProvider({ children }: ProfileProviderProps) {
 export function useProfile(): ProfileContextType {
   const context = useContext(ProfileContext);
   if (context === undefined) {
-    throw new Error('useProfile must be used within a ProfileProvider');
+    throw new Error("useProfile must be used within a ProfileProvider");
   }
   return context;
 }

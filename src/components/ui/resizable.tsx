@@ -24,4 +24,3 @@ export function ResizableHandle({ className }: { className?: string }) {
     </PanelResizeHandle>
   );
 }
-

@@ -1,4 +1,5 @@
 # Budget App Spacing & Typography System
+
 **Last Updated**: 2025-01-05
 **Status**: ✅ Fully Implemented
 
@@ -23,15 +24,15 @@ This document defines the spacing and typography standards for the Budget App, e
 
 **Approved spacing values (Tailwind utilities)**:
 
-| Tailwind Class | Pixels | REM | Usage |
-|----------------|--------|-----|-------|
-| `spacing-0` | 0px | 0rem | No spacing |
-| `spacing-2` | 8px | 0.5rem | Tight spacing (badges, compact elements) |
-| `spacing-4` | 16px | 1rem | Standard spacing (buttons, cards) |
-| `spacing-6` | 24px | 1.5rem | Comfortable spacing (sections) |
-| `spacing-8` | 32px | 2rem | Generous spacing (page margins) |
-| `spacing-12` | 48px | 3rem | Large spacing (hero sections) |
-| `spacing-16` | 64px | 4rem | Extra-large spacing (page sections) |
+| Tailwind Class | Pixels | REM    | Usage                                    |
+| -------------- | ------ | ------ | ---------------------------------------- |
+| `spacing-0`    | 0px    | 0rem   | No spacing                               |
+| `spacing-2`    | 8px    | 0.5rem | Tight spacing (badges, compact elements) |
+| `spacing-4`    | 16px   | 1rem   | Standard spacing (buttons, cards)        |
+| `spacing-6`    | 24px   | 1.5rem | Comfortable spacing (sections)           |
+| `spacing-8`    | 32px   | 2rem   | Generous spacing (page margins)          |
+| `spacing-12`   | 48px   | 3rem   | Large spacing (hero sections)            |
+| `spacing-16`   | 64px   | 4rem   | Extra-large spacing (page sections)      |
 
 **Applied to**: padding (p-), margin (m-), gap (gap-), space (space-x/y-)
 
@@ -60,6 +61,7 @@ This document defines the spacing and typography standards for the Budget App, e
 ```
 
 **Button Group Spacing**:
+
 ```tsx
 // ✅ Standard gap
 <div className="flex gap-4">
@@ -182,16 +184,16 @@ This document defines the spacing and typography standards for the Budget App, e
 
 ### Typography Scale
 
-| Class | Size | Line Height | Usage |
-|-------|------|-------------|-------|
-| `text-xs` | 12px (0.75rem) | 16px (1rem) | Badges, labels, captions, metadata, timestamps |
-| `text-sm` | 14px (0.875rem) | 20px (1.25rem) | Body text, form labels, table cells, descriptions |
-| `text-base` | 16px (1rem) | 24px (1.5rem) | Primary body text, form inputs |
-| `text-lg` | 18px (1.125rem) | 28px (1.75rem) | Section headings, card titles |
-| `text-xl` | 20px (1.25rem) | 28px (1.75rem) | Modal headings, emphasized text |
-| `text-2xl` | 24px (1.5rem) | 32px (2rem) | Page headings, dashboard metrics |
-| `text-3xl` | 30px (1.875rem) | 36px (2.25rem) | Hero text, major headings |
-| `text-4xl` | 36px (2.25rem) | 40px (2.5rem) | Landing page headlines |
+| Class       | Size            | Line Height    | Usage                                             |
+| ----------- | --------------- | -------------- | ------------------------------------------------- |
+| `text-xs`   | 12px (0.75rem)  | 16px (1rem)    | Badges, labels, captions, metadata, timestamps    |
+| `text-sm`   | 14px (0.875rem) | 20px (1.25rem) | Body text, form labels, table cells, descriptions |
+| `text-base` | 16px (1rem)     | 24px (1.5rem)  | Primary body text, form inputs                    |
+| `text-lg`   | 18px (1.125rem) | 28px (1.75rem) | Section headings, card titles                     |
+| `text-xl`   | 20px (1.25rem)  | 28px (1.75rem) | Modal headings, emphasized text                   |
+| `text-2xl`  | 24px (1.5rem)   | 32px (2rem)    | Page headings, dashboard metrics                  |
+| `text-3xl`  | 30px (1.875rem) | 36px (2.25rem) | Hero text, major headings                         |
+| `text-4xl`  | 36px (2.25rem)  | 40px (2.5rem)  | Landing page headlines                            |
 
 ### Hierarchy Examples
 
@@ -275,19 +277,19 @@ See `COLOR_SYSTEM.md` for complete color palette.
 
 ```tsx
 // Primary text
-text-gray-900  // Primary body text (#171717)
-text-gray-700  // Primary UI text (#404040)
-text-gray-600  // Secondary text (#525252)
-text-gray-500  // Muted text (#737373)
+text - gray - 900; // Primary body text (#171717)
+text - gray - 700; // Primary UI text (#404040)
+text - gray - 600; // Secondary text (#525252)
+text - gray - 500; // Muted text (#737373)
 
 // Accent text
-text-teal-600  // Links, CTAs (#0d9488)
-text-teal-700  // Hover states (#0f766e)
+text - teal - 600; // Links, CTAs (#0d9488)
+text - teal - 700; // Hover states (#0f766e)
 
 // Semantic text
-text-green-600 // Income, positive (#16a34a)
-text-red-600   // Expenses, negative (#dc2626)
-text-amber-600 // Warnings (#d97706)
+text - green - 600; // Income, positive (#16a34a)
+text - red - 600; // Expenses, negative (#dc2626)
+text - amber - 600; // Warnings (#d97706)
 ```
 
 ---
@@ -297,27 +299,23 @@ text-amber-600 // Warnings (#d97706)
 ### Dashboard Metric Card
 
 ```tsx
-<div className="bg-white rounded-lg border border-gray-200 p-6">
-  <div className="flex items-center justify-between mb-4">
+<div className="rounded-lg border border-gray-200 bg-white p-6">
+  <div className="mb-4 flex items-center justify-between">
     <h3 className="text-sm font-medium text-gray-600">Total Spent</h3>
-    <TrendingDown className="w-5 h-5 text-gray-400" />
+    <TrendingDown className="h-5 w-5 text-gray-400" />
   </div>
-  <p className="text-2xl font-bold text-gray-900 mb-2">
-    $4,256.80
-  </p>
-  <p className="text-xs text-gray-500">
-    +12.5% from last month
-  </p>
+  <p className="mb-2 text-2xl font-bold text-gray-900">$4,256.80</p>
+  <p className="text-xs text-gray-500">+12.5% from last month</p>
 </div>
 ```
 
 ### Transaction List Item
 
 ```tsx
-<div className="flex items-center justify-between py-4 px-4 hover:bg-gray-50 rounded-lg">
+<div className="flex items-center justify-between rounded-lg px-4 py-4 hover:bg-gray-50">
   <div className="flex items-center gap-4">
-    <div className="p-2 bg-teal-100 rounded-lg">
-      <ShoppingCart className="w-5 h-5 text-teal-600" />
+    <div className="rounded-lg bg-teal-100 p-2">
+      <ShoppingCart className="h-5 w-5 text-teal-600" />
     </div>
     <div>
       <p className="text-sm font-medium text-gray-900">Amazon</p>
@@ -333,24 +331,20 @@ text-amber-600 // Warnings (#d97706)
 ```tsx
 <form className="space-y-6">
   <div>
-    <label className="block text-sm font-medium text-gray-700 mb-2">
-      Amount
-    </label>
+    <label className="mb-2 block text-sm font-medium text-gray-700">Amount</label>
     <input
       type="number"
-      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+      className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
       placeholder="0.00"
     />
-    <p className="text-xs text-gray-500 mt-2">
-      Enter the transaction amount
-    </p>
+    <p className="mt-2 text-xs text-gray-500">Enter the transaction amount</p>
   </div>
 
   <div className="flex gap-4">
-    <button className="flex-1 px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+    <button className="flex-1 rounded-lg border border-gray-300 px-6 py-2 text-gray-700 hover:bg-gray-50">
       Cancel
     </button>
-    <button className="flex-1 px-6 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700">
+    <button className="flex-1 rounded-lg bg-teal-600 px-6 py-2 text-white hover:bg-teal-700">
       Save
     </button>
   </div>
@@ -434,6 +428,7 @@ grep -roh "text-[a-z0-9]*" src/app/budget-app/ --include="*.tsx" | sort -u
 ## Support
 
 For questions about spacing or typography:
+
 1. Check this document for standard patterns
 2. Verify against 8px grid (spacing-2, 4, 6, 8, 12, 16)
 3. Use standard Tailwind typography scale (xs, sm, base, lg, xl, 2xl)

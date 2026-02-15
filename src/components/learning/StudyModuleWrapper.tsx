@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronLeft,
   ChevronRight,
@@ -13,10 +13,10 @@ import {
   Play,
   Pause,
   RotateCcw,
-  Award
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { useLearningProgress } from './LearningProgressProvider';
+  Award,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useLearningProgress } from "./LearningProgressProvider";
 
 interface StudyModuleWrapperProps {
   children: React.ReactNode;
@@ -39,7 +39,7 @@ export function StudyModuleWrapper({
   estimatedTime = 15,
   objectives = [],
   prerequisites = [],
-  className
+  className,
 }: StudyModuleWrapperProps) {
   const router = useRouter();
   const {
@@ -49,7 +49,7 @@ export function StudyModuleWrapper({
     navigateToNextModule,
     domains,
     currentDomain,
-    currentModule
+    currentModule,
   } = useLearningProgress();
 
   const [timeSpent, setTimeSpent] = useState(0);
@@ -57,10 +57,13 @@ export function StudyModuleWrapper({
   const [moduleStartTime, setModuleStartTime] = useState<Date | null>(null);
 
   // Get current module and navigation info - with safety checks
-  const domain = domains?.find(d => d.id === domainId);
-  const currentModuleIndex = domain?.modules?.findIndex(m => m.id === moduleId) ?? -1;
+  const domain = domains?.find((d) => d.id === domainId);
+  const currentModuleIndex = domain?.modules?.findIndex((m) => m.id === moduleId) ?? -1;
   const previousModule = currentModuleIndex > 0 ? domain?.modules?.[currentModuleIndex - 1] : null;
-  const nextModule = currentModuleIndex < (domain?.modules?.length ?? 0) - 1 ? domain?.modules?.[currentModuleIndex + 1] : null;
+  const nextModule =
+    currentModuleIndex < (domain?.modules?.length ?? 0) - 1
+      ? domain?.modules?.[currentModuleIndex + 1]
+      : null;
 
   const moduleProgress = getModuleProgress(domainId, moduleId);
 
@@ -91,7 +94,7 @@ export function StudyModuleWrapper({
       if (timeSpent > 0) {
         updateModuleProgress(domainId, moduleId, {
           timeSpent: Math.max(timeSpent, moduleProgress.timeSpent ?? 0),
-          lastAccessed: new Date().toISOString()
+          lastAccessed: new Date().toISOString(),
         });
       }
     };
@@ -101,18 +104,18 @@ export function StudyModuleWrapper({
     setModuleStartTime(new Date());
     setIsActive(true);
     updateModuleProgress(domainId, moduleId, {
-      status: 'in_progress',
-      startedAt: new Date().toISOString()
+      status: "in_progress",
+      startedAt: new Date().toISOString(),
     });
   };
 
   const handleCompleteModule = () => {
     setIsActive(false);
     updateModuleProgress(domainId, moduleId, {
-      status: 'completed',
+      status: "completed",
       completedAt: new Date().toISOString(),
       timeSpent,
-      score: 100 // Default completion score
+      score: 100, // Default completion score
     });
   };
 
@@ -121,11 +124,11 @@ export function StudyModuleWrapper({
     setModuleStartTime(new Date());
     setIsActive(true);
     updateModuleProgress(domainId, moduleId, {
-      status: 'not_started',
+      status: "not_started",
       timeSpent: 0,
       startedAt: undefined,
       completedAt: undefined,
-      score: undefined
+      score: undefined,
     });
   };
 
@@ -146,8 +149,12 @@ export function StudyModuleWrapper({
     }
   };
 
-  const progressPercentage = moduleProgress.status === 'completed' ? 100 :
-    moduleProgress.status === 'in_progress' ? Math.min((timeSpent / estimatedTime) * 100, 95) : 0;
+  const progressPercentage =
+    moduleProgress.status === "completed"
+      ? 100
+      : moduleProgress.status === "in_progress"
+        ? Math.min((timeSpent / estimatedTime) * 100, 95)
+        : 0;
 
   return (
     <div className={cn("space-y-6", className)}>
@@ -155,24 +162,24 @@ export function StudyModuleWrapper({
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-card border-archon-border-bright/30 rounded-xl p-6 cyber-border"
+        className="glass-card border-archon-border-bright/30 cyber-border rounded-xl p-6"
       >
-        <div className="flex items-start justify-between mb-4">
+        <div className="mb-4 flex items-start justify-between">
           <div className="flex-1">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="p-2 bg-primary/20 rounded-lg shadow-[0_0_15px_hsl(var(--primary)/0.3)]">
+            <div className="mb-2 flex items-center gap-3">
+              <div className="rounded-lg bg-primary/20 p-2 shadow-[0_0_15px_hsl(var(--primary)/0.3)]">
                 <BookOpen className="h-5 w-5 text-primary" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-archon-text-primary archon-text-glow">{title}</h1>
-                <div className="text-sm text-archon-text-muted">
+                <h1 className="text-archon-text-primary archon-text-glow text-2xl font-bold">
+                  {title}
+                </h1>
+                <div className="text-archon-text-muted text-sm">
                   Module {currentModuleIndex + 1} of {domain?.modules.length}
                 </div>
               </div>
             </div>
-            {description && (
-              <p className="text-archon-text-secondary mb-4">{description}</p>
-            )}
+            {description && <p className="text-archon-text-secondary mb-4">{description}</p>}
           </div>
 
           {/* Module Status */}
@@ -180,18 +187,24 @@ export function StudyModuleWrapper({
             <div className="text-right">
               <div className="flex items-center gap-2 text-sm">
                 <Clock className="h-4 w-4 text-primary" />
-                <span className="text-foreground font-medium">
+                <span className="font-medium text-foreground">
                   {timeSpent}min / {estimatedTime}min
                 </span>
               </div>
-              <div className="text-xs text-muted-foreground mt-1">
-                Status: <span className={cn(
-                  moduleProgress.status === 'completed' && 'text-[#22c55e] font-bold',
-                  moduleProgress.status === 'in_progress' && 'text-primary font-bold',
-                  moduleProgress.status === 'not_started' && 'text-muted-foreground'
-                )}>
-                  {moduleProgress.status === 'completed' ? 'Completed' :
-                   moduleProgress.status === 'in_progress' ? 'In Progress' : 'Not Started'}
+              <div className="mt-1 text-xs text-muted-foreground">
+                Status:{" "}
+                <span
+                  className={cn(
+                    moduleProgress.status === "completed" && "font-bold text-[#22c55e]",
+                    moduleProgress.status === "in_progress" && "font-bold text-primary",
+                    moduleProgress.status === "not_started" && "text-muted-foreground"
+                  )}
+                >
+                  {moduleProgress.status === "completed"
+                    ? "Completed"
+                    : moduleProgress.status === "in_progress"
+                      ? "In Progress"
+                      : "Not Started"}
                 </span>
               </div>
             </div>
@@ -199,9 +212,9 @@ export function StudyModuleWrapper({
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-primary/20 rounded-full h-2 mb-4 border border-primary/30">
+        <div className="mb-4 h-2 w-full rounded-full border border-primary/30 bg-primary/20">
           <motion.div
-            className="bg-gradient-to-r from-primary to-accent h-2 rounded-full progress-glow"
+            className="progress-glow h-2 rounded-full bg-gradient-to-r from-primary to-accent"
             initial={{ width: 0 }}
             animate={{ width: `${progressPercentage}%` }}
             transition={{ duration: 0.5 }}
@@ -210,16 +223,16 @@ export function StudyModuleWrapper({
 
         {/* Learning Objectives */}
         {objectives.length > 0 && (
-          <div className="grid md:grid-cols-2 gap-4 mb-4">
+          <div className="mb-4 grid gap-4 md:grid-cols-2">
             <div>
-              <h3 className="text-sm font-medium text-foreground mb-2 flex items-center gap-2">
+              <h3 className="mb-2 flex items-center gap-2 text-sm font-medium text-foreground">
                 <Target className="h-4 w-4 text-primary" />
                 Learning Objectives
               </h3>
               <ul className="space-y-1">
                 {objectives.map((objective, index) => (
-                  <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
-                    <CheckCircle className="h-3 w-3 text-[#22c55e] mt-0.5 flex-shrink-0" />
+                  <li key={index} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <CheckCircle className="mt-0.5 h-3 w-3 flex-shrink-0 text-[#22c55e]" />
                     {objective}
                   </li>
                 ))}
@@ -229,7 +242,7 @@ export function StudyModuleWrapper({
             {/* Prerequisites */}
             {prerequisites.length > 0 && (
               <div>
-                <h3 className="text-sm font-medium text-foreground mb-2">Prerequisites</h3>
+                <h3 className="mb-2 text-sm font-medium text-foreground">Prerequisites</h3>
                 <ul className="space-y-1">
                   {prerequisites.map((prereq, index) => (
                     <li key={index} className="text-sm text-muted-foreground">
@@ -245,28 +258,28 @@ export function StudyModuleWrapper({
         {/* Module Controls */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            {moduleProgress.status === 'not_started' && (
+            {moduleProgress.status === "not_started" && (
               <button
                 onClick={handleStartModule}
-                className="glass-button inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary to-primary/80 text-foreground rounded-lg"
+                className="glass-button inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-primary to-primary/80 px-4 py-2 text-foreground"
               >
                 <Play className="h-4 w-4" />
                 Start Module
               </button>
             )}
 
-            {moduleProgress.status === 'in_progress' && (
+            {moduleProgress.status === "in_progress" && (
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setIsActive(!isActive)}
-                  className="inline-flex items-center gap-2 px-3 py-2 bg-primary hover:bg-blue-600 text-foreground rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-3 py-2 text-foreground transition-colors hover:bg-blue-600"
                 >
                   {isActive ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-                  {isActive ? 'Pause' : 'Resume'}
+                  {isActive ? "Pause" : "Resume"}
                 </button>
                 <button
                   onClick={handleCompleteModule}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-[#22c55e] hover:bg-[#22c55e] text-foreground rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg bg-[#22c55e] px-4 py-2 text-foreground transition-colors hover:bg-[#22c55e]"
                 >
                   <CheckCircle className="h-4 w-4" />
                   Complete Module
@@ -274,15 +287,15 @@ export function StudyModuleWrapper({
               </div>
             )}
 
-            {moduleProgress.status === 'completed' && (
+            {moduleProgress.status === "completed" && (
               <div className="flex items-center gap-2">
-                <div className="inline-flex items-center gap-2 px-3 py-2 bg-[#22c55e]/20 text-[#22c55e] rounded-lg">
+                <div className="inline-flex items-center gap-2 rounded-lg bg-[#22c55e]/20 px-3 py-2 text-[#22c55e]">
                   <Award className="h-4 w-4" />
                   Completed
                 </div>
                 <button
                   onClick={handleResetProgress}
-                  className="inline-flex items-center gap-2 px-3 py-2 bg-muted hover:bg-gray-700 text-foreground rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg bg-muted px-3 py-2 text-foreground transition-colors hover:bg-gray-700"
                 >
                   <RotateCcw className="h-4 w-4" />
                   Reset
@@ -297,10 +310,10 @@ export function StudyModuleWrapper({
               onClick={handlePreviousModule}
               disabled={!previousModule}
               className={cn(
-                "inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-colors",
+                "inline-flex items-center gap-2 rounded-lg px-3 py-2 transition-colors",
                 previousModule
-                  ? "bg-muted hover:bg-gray-700 text-foreground"
-                  : "bg-card text-muted-foreground cursor-not-allowed"
+                  ? "bg-muted text-foreground hover:bg-gray-700"
+                  : "cursor-not-allowed bg-card text-muted-foreground"
               )}
             >
               <ChevronLeft className="h-4 w-4" />
@@ -309,15 +322,15 @@ export function StudyModuleWrapper({
 
             <button
               onClick={handleNextModule}
-              disabled={!nextModule && moduleProgress.status !== 'completed'}
+              disabled={!nextModule && moduleProgress.status !== "completed"}
               className={cn(
-                "inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-colors",
-                (nextModule ?? moduleProgress.status === 'completed')
-                  ? "bg-cyan-500 hover:bg-primary text-foreground"
-                  : "bg-card text-muted-foreground cursor-not-allowed"
+                "inline-flex items-center gap-2 rounded-lg px-3 py-2 transition-colors",
+                (nextModule ?? moduleProgress.status === "completed")
+                  ? "bg-cyan-500 text-foreground hover:bg-primary"
+                  : "cursor-not-allowed bg-card text-muted-foreground"
               )}
             >
-              {nextModule ? 'Next' : 'Finish'}
+              {nextModule ? "Next" : "Finish"}
               <ChevronRight className="h-4 w-4" />
             </button>
           </div>

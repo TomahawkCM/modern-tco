@@ -7,6 +7,7 @@ Welcome to your personal budget companion! This guide will help you get started 
 ## What is Budget App?
 
 Budget App is a free, private tool that helps you:
+
 - **Track your spending** - See where your money goes
 - **Create budgets** - Plan your spending for each category
 - **Manage loans** - Track mortgages, car loans, and credit cards
@@ -34,6 +35,7 @@ That's it! Your first transaction is now tracked.
 ### Step 2: See Your Spending
 
 Go to the **Dashboard** (home icon at the bottom) to see:
+
 - **How much you've spent** this month
 - **Your top spending categories** (colorful pie chart)
 - **Recent transactions** (last 10)
@@ -57,13 +59,13 @@ Now you'll see a progress bar showing how much of your budget you've used.
 
 The app has 5 main sections:
 
-| Icon | Section | What It Does |
-|------|---------|--------------|
-| 🏠 Home | **Dashboard** | Overview of your finances |
-| 💰 Money | **Transactions** | All your spending and income |
-| 📊 Budget | **Budgets** | Track your spending limits |
-| 🏦 Loan | **Loans** | Mortgage, car loans, credit cards |
-| ⋯ More | **More Menu** | Reports, settings, imports |
+| Icon      | Section          | What It Does                      |
+| --------- | ---------------- | --------------------------------- |
+| 🏠 Home   | **Dashboard**    | Overview of your finances         |
+| 💰 Money  | **Transactions** | All your spending and income      |
+| 📊 Budget | **Budgets**      | Track your spending limits        |
+| 🏦 Loan   | **Loans**        | Mortgage, car loans, credit cards |
+| ⋯ More    | **More Menu**    | Reports, settings, imports        |
 
 **Tap any icon** to jump to that section.
 
@@ -74,13 +76,16 @@ The app has 5 main sections:
 When you open the app, you'll see:
 
 ### 1. Summary Cards (Top Row)
+
 - **Net Worth**: Total assets minus debts
 - **Income This Month**: Money you've earned
 - **Expenses This Month**: Money you've spent
 - **Net Savings**: Income minus expenses (should be positive!)
 
 ### 2. Category Spending Chart
+
 A colorful pie chart showing:
+
 - Your **top 5 spending categories**
 - **Percentage** of total spending
 - **Dollar amounts**
@@ -88,7 +93,9 @@ A colorful pie chart showing:
 **Tap a slice** to see all transactions in that category.
 
 ### 3. Recent Transactions
+
 Your **last 10 transactions** with:
+
 - Description, amount, and category
 - **Green** for income, **Red** for expenses
 
@@ -132,6 +139,7 @@ Your **last 10 transactions** with:
 ## Categories Explained
 
 Budget App groups your spending into categories like:
+
 - **Groceries** - Food and household items
 - **Dining Out** - Restaurants and takeout
 - **Transportation** - Gas, parking, public transit
@@ -139,6 +147,7 @@ Budget App groups your spending into categories like:
 - **Entertainment** - Movies, streaming, hobbies
 
 **Why categories matter**:
+
 - See spending patterns at a glance
 - Create budgets for each category
 - Identify areas to cut back
@@ -146,6 +155,7 @@ Budget App groups your spending into categories like:
 ### Auto-Categorization
 
 The app tries to **guess the category** based on your description:
+
 - Type "Starbucks" → Suggests "Dining Out"
 - Type "Shell gas" → Suggests "Transportation"
 - Type "Netflix" → Suggests "Entertainment"
@@ -159,6 +169,7 @@ You can always change the category if the guess is wrong.
 ### What is a Budget?
 
 A budget is a **spending limit** for a category. For example:
+
 - "I want to spend no more than $300/month on groceries"
 - "I'll limit dining out to $150/month"
 
@@ -176,6 +187,7 @@ A budget is a **spending limit** for a category. For example:
 ### Tracking Your Budget
 
 Your budget shows:
+
 - **Progress bar**: Green (under budget), Yellow (close), Red (over)
 - **Amount spent / Total budget** (e.g., "$245 / $300")
 - **Remaining amount** (e.g., "$55 left")
@@ -218,6 +230,7 @@ Save time by importing your bank statements!
 ### Duplicate Detection
 
 The app **automatically finds duplicates** by matching:
+
 - Same date (±1 day)
 - Same amount
 - Similar description
@@ -247,6 +260,7 @@ Track mortgages, car loans, and credit cards to see your **debt payoff progress*
 ### Loan Dashboard
 
 For each loan, you'll see:
+
 - **Remaining balance**
 - **Monthly payment** amount
 - **Total interest paid** so far
@@ -283,25 +297,30 @@ Ask questions about your finances in plain English!
 ### Example Questions
 
 **Spending Analysis**:
+
 - "How much have I spent this month?"
 - "What are my top 3 spending categories?"
 - "Show me all dining out transactions"
 
 **Budget Status**:
+
 - "Am I under budget for groceries?"
 - "How much budget do I have left?"
 
 **Trends**:
+
 - "Am I spending more this month than last month?"
 - "What's my average grocery spending?"
 
 **Income**:
+
 - "How much income have I earned this month?"
 - "Show my income trends"
 
 ### Chatbot Actions (Coming Soon)
 
 Soon, the chatbot will be able to:
+
 - Add transactions ("Add $50 coffee expense")
 - Create budgets ("Set a $200 dining budget")
 - Search transactions ("Find transactions from last week")
@@ -313,11 +332,13 @@ Soon, the chatbot will be able to:
 ### Making Text Bigger
 
 **Desktop**:
+
 1. Hold **Ctrl** (Windows) or **Cmd** (Mac)
 2. Press **+** to make text bigger
 3. Press **-** to make text smaller
 
 **Mobile**:
+
 - Go to phone **Settings** → **Display** → **Font Size**
 - Use your device's built-in zoom feature
 
@@ -416,6 +437,7 @@ A: Not yet, but this feature is coming soon.
 ### App Won't Load
 
 **Try these steps**:
+
 1. **Refresh the page** (F5 or Ctrl+R)
 2. **Clear browser cache**: Settings → Privacy → Clear Cache
 3. **Try a different browser** (Chrome, Firefox, Safari, Edge)
@@ -424,6 +446,7 @@ A: Not yet, but this feature is coming soon.
 ### Transactions Not Showing
 
 **Check**:
+
 1. **Date filters** - Make sure you're viewing the right time period
 2. **Category filters** - Clear any active filters
 3. **Scroll down** - Older transactions are at the bottom
@@ -431,6 +454,7 @@ A: Not yet, but this feature is coming soon.
 ### Import Failed
 
 **Common issues**:
+
 1. **Wrong file format** - Use CSV or OFX, not PDF
 2. **Missing required columns** - File must have Date, Amount, Description
 3. **Large file size** - Files over 5MB are rejected. Split into smaller files.
@@ -438,6 +462,7 @@ A: Not yet, but this feature is coming soon.
 ### Chatbot Not Responding
 
 **Check**:
+
 1. **Internet connection** - Chatbot requires internet
 2. **Ad blockers** - Disable for this site
 3. **Privacy mode** - Some browsers block AI features in private mode
@@ -445,6 +470,7 @@ A: Not yet, but this feature is coming soon.
 ### Data Disappeared
 
 **Your data is safe!** Try:
+
 1. **Refresh the page** - Data is cached locally
 2. **Check browser storage** - Settings → Privacy → Site Data
 3. **Look for backups** - More → Settings → Export Data
@@ -462,6 +488,7 @@ A: Not yet, but this feature is coming soon.
 ### Video Tutorials
 
 Coming soon! We're creating video walkthroughs for:
+
 - Adding your first transaction
 - Creating budgets
 - Importing bank statements
@@ -470,6 +497,7 @@ Coming soon! We're creating video walkthroughs for:
 ### Report a Problem
 
 If something isn't working:
+
 1. **Take a screenshot** of the error
 2. **Click "Report Issue"** in Settings
 3. **Describe what happened**
@@ -482,21 +510,25 @@ If something isn't working:
 Now that you're set up, here's what to do:
 
 ### Week 1: Get Comfortable
+
 - [ ] Add transactions daily (5 minutes)
 - [ ] Review your dashboard each morning
 - [ ] Create 1-2 budgets for biggest expenses
 
 ### Week 2: Build the Habit
+
 - [ ] Import last month's bank statement
 - [ ] Check budget progress mid-week
 - [ ] Try the AI chatbot
 
 ### Month 1: See Patterns
+
 - [ ] Review Monthly Report
 - [ ] Identify spending surprises
 - [ ] Adjust budgets based on reality
 
 ### Month 3: Take Control
+
 - [ ] Compare spending month-to-month
 - [ ] Celebrate wins (under budget!)
 - [ ] Make one spending change
@@ -510,10 +542,12 @@ Now that you're set up, here's what to do:
 ### What Data Do We Collect?
 
 **On Your Device**:
+
 - All your transactions, budgets, and loans
 - Your preferences (theme, settings)
 
 **On Our Servers**:
+
 - Nothing! All data stays on your device.
 
 ### How We Protect Your Data
@@ -525,11 +559,13 @@ Now that you're set up, here's what to do:
 ### Optional Analytics
 
 We may collect **anonymous usage data** (with your permission):
+
 - Which features you use
 - How often you use the app
 - Performance metrics
 
 **We NEVER collect**:
+
 - Transaction amounts or descriptions
 - Budget details
 - Any personally identifiable information
@@ -548,5 +584,5 @@ We may collect **anonymous usage data** (with your permission):
 
 ---
 
-*Last updated: November 9, 2025*
-*Version: 1.0*
+_Last updated: November 9, 2025_
+_Version: 1.0_

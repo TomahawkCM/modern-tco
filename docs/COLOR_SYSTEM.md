@@ -3,6 +3,7 @@
 ## Overview
 
 The Modern Tanium TCO Learning Management System uses a **dual color system** that combines:
+
 1. **shadcn/ui Semantic Colors** (CSS variables)
 2. **Archon Cyberpunk Theme** (Tailwind utility classes)
 
@@ -17,28 +18,26 @@ This document outlines the current state, inconsistencies, and best practices fo
 Defined in `src/app/globals.css`, these CSS variables provide theme-aware colors that automatically adapt to light/dark mode:
 
 #### Dark Mode (Primary Theme)
+
 ```css
---background: 240 100% 3%        /* Very dark blue/black */
---foreground: 0 0% 100%          /* Pure white text */
---card: 240 23% 9%               /* Dark card background */
---card-foreground: 0 0% 100%     /* White text on cards */
---muted: 240 23% 9%              /* Muted background (dark) */
---muted-foreground: 0 0% 60%     /* Gray text for secondary content */
---primary: 195 100% 50%          /* Electric cyan (#00d4ff) */
---primary-foreground: 240 100% 3%/* Dark text on cyan */
---secondary: 195 100% 50%        /* Cyan accent */
---secondary-foreground: 0 0% 100%/* White text on cyan */
+--background: 240 100% 3% /* Very dark blue/black */ --foreground: 0 0% 100% /* Pure white text */
+  --card: 240 23% 9% /* Dark card background */ --card-foreground: 0 0% 100%
+  /* White text on cards */ --muted: 240 23% 9% /* Muted background (dark) */ --muted-foreground: 0
+  0% 60% /* Gray text for secondary content */ --primary: 195 100% 50% /* Electric cyan (#00d4ff) */
+  --primary-foreground: 240 100% 3% /* Dark text on cyan */ --secondary: 195 100% 50%
+  /* Cyan accent */ --secondary-foreground: 0 0% 100% /* White text on cyan */;
 ```
 
 #### Light Mode (Fallback)
+
 ```css
---background: 0 0% 100%          /* Pure white */
---foreground: 222.2 84% 4.9%     /* Very dark text */
---secondary: 210 40% 96%         /* Light blue/gray */
---secondary-foreground: 222.2 84% 4.9% /* Dark text */
+--background: 0 0% 100% /* Pure white */ --foreground: 222.2 84% 4.9% /* Very dark text */
+  --secondary: 210 40% 96% /* Light blue/gray */ --secondary-foreground: 222.2 84% 4.9%
+  /* Dark text */;
 ```
 
 **Usage Pattern:**
+
 ```tsx
 <div className="bg-background text-foreground">
   <p className="text-muted-foreground">Secondary text</p>
@@ -62,6 +61,7 @@ archon: {
 ```
 
 **Usage Pattern:**
+
 ```tsx
 <div className="bg-archon-bg-start">
   <h1 className="text-archon-cyan-bright">Cyberpunk Heading</h1>
@@ -75,15 +75,19 @@ archon: {
 ### 1. Button vs Badge Components
 
 **Badge Component** (`src/components/ui/badge.tsx`):
+
 - ✅ Uses semantic CSS variables correctly
 - ✅ Adapts to light/dark mode automatically
+
 ```tsx
-secondary: "bg-secondary text-secondary-foreground"
+secondary: "bg-secondary text-secondary-foreground";
 ```
 
 **Button Component** (`src/components/ui/button.tsx`):
+
 - ❌ Uses hard-coded Tailwind colors
 - ❌ Does NOT use semantic variables
+
 ```tsx
 default: "bg-cyan-600 text-white"
 secondary: "bg-slate-600 text-slate-100"
@@ -92,6 +96,7 @@ secondary: "bg-slate-600 text-slate-100"
 **Impact:** Buttons don't respect the semantic color system, making theme changes difficult.
 
 **Recommendation:** Refactor Button component to use semantic variables:
+
 ```tsx
 default: "bg-primary text-primary-foreground"
 secondary: "bg-secondary text-secondary-foreground"
@@ -100,6 +105,7 @@ secondary: "bg-secondary text-secondary-foreground"
 ### 2. Hard-coded Color Overrides
 
 **Anti-Pattern (FIXED in FlashcardReview.tsx):**
+
 ```tsx
 // ❌ BAD - Overrides semantic colors
 <Badge variant="secondary" className="text-white">
@@ -115,6 +121,7 @@ secondary: "bg-secondary text-secondary-foreground"
 **Problem:** Some text elements don't specify colors and rely on inheritance, which may fail in complex DOM structures.
 
 **Anti-Pattern:**
+
 ```tsx
 <div className="bg-muted">
   <p className="text-2xl font-bold">{stats.total}</p> {/* No color! */}
@@ -122,6 +129,7 @@ secondary: "bg-secondary text-secondary-foreground"
 ```
 
 **Solution (FIXED):**
+
 ```tsx
 <div className="bg-muted">
   <p className="text-2xl font-bold text-foreground">{stats.total}</p>
@@ -135,6 +143,7 @@ secondary: "bg-secondary text-secondary-foreground"
 ### 1. Always Use Semantic Colors for UI Components
 
 **Text Colors:**
+
 ```tsx
 // Primary content
 <h1 className="text-foreground">Main Heading</h1>
@@ -147,6 +156,7 @@ secondary: "bg-secondary text-secondary-foreground"
 ```
 
 **Background Colors:**
+
 ```tsx
 // Page background
 <div className="bg-background">
@@ -161,12 +171,14 @@ secondary: "bg-secondary text-secondary-foreground"
 ### 2. Avoid Hard-coded Color Overrides
 
 **❌ Don't:**
+
 ```tsx
 <Badge variant="secondary" className="text-white">
 <Button className="bg-cyan-500">
 ```
 
 **✅ Do:**
+
 ```tsx
 <Badge variant="secondary">
 <Button variant="default">
@@ -175,12 +187,14 @@ secondary: "bg-secondary text-secondary-foreground"
 ### 3. Use Archon Colors for Decorative Elements Only
 
 **Good use cases:**
+
 - Gradient backgrounds
 - Glow effects
 - Accent borders
 - Hero sections
 
 **Example:**
+
 ```tsx
 <div className="bg-archon-bg archon-text-glow">
   <span className="text-archon-cyan-bright">TCO Certification</span>
@@ -205,12 +219,14 @@ When nesting elements with different backgrounds, always specify text colors:
 ## 🔧 Recommended Refactoring
 
 ### High Priority
+
 1. **Button Component Refactor**
    - Replace hard-coded colors with semantic variables
    - Ensure consistent behavior with Badge, Card, etc.
    - Estimated effort: 2 hours
 
 ### Medium Priority
+
 2. **Audit All Components**
    - Search for `className="text-white"` instances
    - Search for `bg-cyan-`, `bg-slate-`, etc.
@@ -229,15 +245,15 @@ When nesting elements with different backgrounds, always specify text colors:
 
 ### Common Color Patterns
 
-| Use Case | Class Pattern | Example |
-|----------|---------------|---------|
-| Primary text | `text-foreground` | Headings, main content |
-| Secondary text | `text-muted-foreground` | Labels, helper text |
-| Card backgrounds | `bg-card` | Cards, panels |
-| Muted backgrounds | `bg-muted` | Stats boxes, subtle sections |
-| Primary buttons | `bg-primary text-primary-foreground` | CTA buttons |
-| Secondary buttons | `bg-secondary text-secondary-foreground` | Alternative actions |
-| Error states | `bg-destructive text-destructive-foreground` | Warnings, errors |
+| Use Case          | Class Pattern                                | Example                      |
+| ----------------- | -------------------------------------------- | ---------------------------- |
+| Primary text      | `text-foreground`                            | Headings, main content       |
+| Secondary text    | `text-muted-foreground`                      | Labels, helper text          |
+| Card backgrounds  | `bg-card`                                    | Cards, panels                |
+| Muted backgrounds | `bg-muted`                                   | Stats boxes, subtle sections |
+| Primary buttons   | `bg-primary text-primary-foreground`         | CTA buttons                  |
+| Secondary buttons | `bg-secondary text-secondary-foreground`     | Alternative actions          |
+| Error states      | `bg-destructive text-destructive-foreground` | Warnings, errors             |
 
 ### Color Hierarchy
 
@@ -258,14 +274,17 @@ Text Layer (Lightest)
 ## 🐛 Troubleshooting
 
 ### "Black text on black background"
+
 **Cause:** Missing explicit text color on nested elements
 **Fix:** Add `text-foreground` to bold/heading elements
 
 ### "Badge text invisible"
+
 **Cause:** Hard-coded `text-white` override
 **Fix:** Remove color overrides, use semantic variants
 
 ### "Colors don't match design system"
+
 **Cause:** Component using hard-coded Tailwind colors
 **Fix:** Refactor to use semantic CSS variables
 
@@ -274,6 +293,7 @@ Text Layer (Lightest)
 ## 📝 Change Log
 
 ### 2025-10-08: Flashcard Module Color Fixes
+
 - **Fixed:** Removed `text-white` overrides from Badge components (FlashcardReview.tsx:346, 496)
 - **Fixed:** Added explicit `text-foreground` to stat numbers (FlashcardReview.tsx, FlashcardDashboard.tsx)
 - **Fixed:** Added `text-foreground` to question/answer headings

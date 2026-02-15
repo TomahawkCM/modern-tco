@@ -95,7 +95,7 @@ export const notesRemote = {
       id: row.id,
       userId: row.user_id,
       text: row.text,
-      tags: Array.isArray(row.tags) ? row.tags : (row.tags || []),
+      tags: Array.isArray(row.tags) ? row.tags : row.tags || [],
       srs: row.srs || createInitialState(row.id),
       createdAt: row.created_at,
       updatedAt: row.updated_at,
@@ -118,9 +118,7 @@ export const notesRemote = {
       module_id: n.moduleId ?? null,
       section_id: n.sectionId ?? null,
     }));
-    const { error } = await (supabase as any)
-      .from("notes")
-      .upsert(payload, { onConflict: "id" });
+    const { error } = await (supabase as any).from("notes").upsert(payload, { onConflict: "id" });
     if (error) throw error;
   },
   async remove(userId: string, id: string): Promise<void> {
@@ -158,9 +156,17 @@ export async function syncNotes(user: User | null): Promise<Note[]> {
 
 export async function saveQuickNote(
   text: string,
-  opts?: { tags?: string[]; user?: User | null; moduleId?: string | null; sectionId?: string | null }
+  opts?: {
+    tags?: string[];
+    user?: User | null;
+    moduleId?: string | null;
+    sectionId?: string | null;
+  }
 ) {
-  const note = buildNote(text, opts?.tags || [], { moduleId: opts?.moduleId, sectionId: opts?.sectionId });
+  const note = buildNote(text, opts?.tags || [], {
+    moduleId: opts?.moduleId,
+    sectionId: opts?.sectionId,
+  });
   notesStorage.add(note);
   if (opts?.user?.id) {
     try {
@@ -187,7 +193,9 @@ export async function updateNote(note: Note, user?: User | null): Promise<Note> 
   const updated = { ...note, updatedAt: new Date().toISOString() };
   notesStorage.upsert(updated);
   if (user?.id) {
-    try { await notesRemote.upsert(user.id, updated); } catch {}
+    try {
+      await notesRemote.upsert(user.id, updated);
+    } catch {}
   }
   return updated;
 }
@@ -195,7 +203,9 @@ export async function updateNote(note: Note, user?: User | null): Promise<Note> 
 export async function deleteNote(id: string, user?: User | null): Promise<void> {
   notesStorage.remove(id);
   if (user?.id) {
-    try { await notesRemote.remove(user.id, id); } catch {}
+    try {
+      await notesRemote.remove(user.id, id);
+    } catch {}
   }
 }
 

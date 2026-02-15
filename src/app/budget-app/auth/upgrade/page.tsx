@@ -46,24 +46,20 @@ export default function UpgradePage() {
           {isExpired
             ? "Upgrade now to regain full access to your budget data"
             : isTrial
-            ? `${daysRemaining} days left in your free trial`
-            : "Get lifetime access to all features"}
+              ? `${daysRemaining} days left in your free trial`
+              : "Get lifetime access to all features"}
         </p>
       </div>
 
       {/* Pricing Card */}
       <div className="rounded-xl border border-teal-500/20 bg-teal-500/5 p-6">
         <div className="text-center">
-          <div className="mb-2 text-sm font-medium text-teal-400">
-            LIFETIME ACCESS
-          </div>
+          <div className="mb-2 text-sm font-medium text-teal-400">LIFETIME ACCESS</div>
           <div className="flex items-baseline justify-center gap-1">
             <span className="text-4xl font-bold text-white">${APP_PRICE}</span>
             <span className="text-slate-400">one-time</span>
           </div>
-          <p className="mt-2 text-sm text-slate-400">
-            Pay once, use forever. No subscriptions.
-          </p>
+          <p className="mt-2 text-sm text-slate-400">Pay once, use forever. No subscriptions.</p>
         </div>
 
         <div className="my-6 border-t border-white/10" />
@@ -76,12 +72,8 @@ export default function UpgradePage() {
                 <Check className="h-4 w-4 text-teal-400" />
               </div>
               <div>
-                <div className="text-sm font-medium text-white">
-                  {feature.title}
-                </div>
-                <div className="text-xs text-slate-400">
-                  {feature.description}
-                </div>
+                <div className="text-sm font-medium text-white">{feature.title}</div>
+                <div className="text-xs text-slate-400">{feature.description}</div>
               </div>
             </li>
           ))}
@@ -106,7 +98,7 @@ export default function UpgradePage() {
         <div className="text-center">
           <Link
             href="/budget-app"
-            className="text-sm text-slate-400 hover:text-white transition-colors"
+            className="text-sm text-slate-400 transition-colors hover:text-white"
           >
             Continue with free trial ({daysRemaining} days left)
           </Link>
@@ -117,8 +109,8 @@ export default function UpgradePage() {
       {isExpired && (
         <div className="rounded-lg border border-rose-500/20 bg-rose-500/5 p-4 text-center">
           <p className="text-sm text-rose-300">
-            Your {TRIAL_DURATION_DAYS}-day trial has ended. Upgrade to regain
-            access to adding transactions, imports, and other features.
+            Your {TRIAL_DURATION_DAYS}-day trial has ended. Upgrade to regain access to adding
+            transactions, imports, and other features.
           </p>
         </div>
       )}

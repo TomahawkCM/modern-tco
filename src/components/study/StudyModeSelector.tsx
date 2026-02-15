@@ -174,12 +174,14 @@ export function StudyModeSelector({ className }: StudyModeSelectorProps) {
                     <span className="text-sm text-muted-foreground">Progress</span>
                     <span className={cn("text-sm font-medium", mode.color)}>{mode.progress}%</span>
                   </div>
-                  <Progress 
-                    value={mode.progress} 
-                    className="h-2" 
+                  <Progress
+                    value={mode.progress}
+                    className="h-2"
                     aria-label={`${mode.title} study mode progress: ${mode.progress}%`}
                   />
-                  <p className="text-xs text-muted-foreground">{getProgressMessage(mode.progress)}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {getProgressMessage(mode.progress)}
+                  </p>
                 </div>
 
                 {/* Action Button */}

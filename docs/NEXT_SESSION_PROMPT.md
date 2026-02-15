@@ -36,6 +36,7 @@
 ## 🎯 Your Mission
 
 **Build a comprehensive CSV import system for Budget App that:**
+
 - Supports all 5 major Canadian banks
 - Auto-categorizes transactions using OpenAI merchant intelligence
 - Prevents duplicate imports with smart deduplication
@@ -61,15 +62,15 @@ Run mcp__pv-bhat-vibe-check-mcp-server__vibe_check with:
 ```typescript
 // Get all tasks for the project
 mcp__archon__find_tasks({
-  project_id: "50ef9223-c79b-46e2-a5b1-770398cdfda8"
-})
+  project_id: "50ef9223-c79b-46e2-a5b1-770398cdfda8",
+});
 
 // Or get specific high-priority tasks
 mcp__archon__find_tasks({
   project_id: "50ef9223-c79b-46e2-a5b1-770398cdfda8",
   filter_by: "status",
-  filter_value: "todo"
-})
+  filter_value: "todo",
+});
 ```
 
 ### Step 3: Start with Task #1 (Highest Priority)
@@ -80,18 +81,20 @@ mcp__archon__find_tasks({
 **Task ID**: `ad1e26d4-fc4f-4648-b11a-fc9254d8bedf`
 
 **Mark as "doing"**:
+
 ```typescript
 mcp__archon__manage_task({
   action: "update",
   task_id: "ad1e26d4-fc4f-4648-b11a-fc9254d8bedf",
   status: "doing",
-  assignee: "react-specialist"
-})
+  assignee: "react-specialist",
+});
 ```
 
 ### Step 4: Implement Task #1
 
 **Requirements**:
+
 - Create `/src/app/budget-app/import/page.tsx`
 - Drag-and-drop zone for CSV files
 - Click-to-browse fallback
@@ -99,6 +102,7 @@ mcp__archon__manage_task({
 - Preview first 10 rows before import
 
 **Components to Create**:
+
 ```
 /src/app/budget-app/import/page.tsx
 /src/components/budget/FileUploadZone.tsx
@@ -106,6 +110,7 @@ mcp__archon__manage_task({
 ```
 
 **Reference**:
+
 - Task description in Archon (contains full requirements)
 - `/docs/BANK_EXPORT_FORMATS_RESEARCH.md` (context)
 - shadcn/ui components (Button, Card, Alert)
@@ -116,8 +121,8 @@ mcp__archon__manage_task({
 mcp__archon__manage_task({
   action: "update",
   task_id: "ad1e26d4-fc4f-4648-b11a-fc9254d8bedf",
-  status: "review"
-})
+  status: "review",
+});
 ```
 
 ### Step 6: After Validation, Mark as Done
@@ -126,8 +131,8 @@ mcp__archon__manage_task({
 mcp__archon__manage_task({
   action: "update",
   task_id: "ad1e26d4-fc4f-4648-b11a-fc9254d8bedf",
-  status: "done"
-})
+  status: "done",
+});
 ```
 
 ---
@@ -176,13 +181,13 @@ mcp__archon__manage_task({
 
 ### Agent Assignment Matrix
 
-| Task Type | Best Agent(s) |
-|-----------|--------------|
-| React/UI | react-specialist, typescript-pro, shadcn-specialist |
-| CSV Parsing | backend-architect, typescript-pro |
-| Testing | test-automator, playwright-specialist |
-| Performance | performance-engineer, bundle-analyzer |
-| Full-stack | full-stack-specialist |
+| Task Type   | Best Agent(s)                                       |
+| ----------- | --------------------------------------------------- |
+| React/UI    | react-specialist, typescript-pro, shadcn-specialist |
+| CSV Parsing | backend-architect, typescript-pro                   |
+| Testing     | test-automator, playwright-specialist               |
+| Performance | performance-engineer, bundle-analyzer               |
+| Full-stack  | full-stack-specialist                               |
 
 ### Workflow Requirements (EVERY Task)
 
@@ -202,6 +207,7 @@ mcp__archon__manage_task({
 ## ❌ Common Mistakes to Avoid
 
 ### DO NOT:
+
 - ❌ Create a new project (it already exists: `50ef9223-c79b-46e2-a5b1-770398cdfda8`)
 - ❌ Research banks again (already done, see `/docs/BANK_EXPORT_FORMATS_RESEARCH.md`)
 - ❌ Start from scratch (pick up from Task #1)
@@ -211,6 +217,7 @@ mcp__archon__manage_task({
 - ❌ Upload CSV files to server (client-side processing only!)
 
 ### DO:
+
 - ✅ Run vibe_check before starting work
 - ✅ Get tasks from Archon with project_id
 - ✅ Update task status in Archon (doing/review/done)
@@ -242,6 +249,7 @@ mcp__archon__manage_task({
 ### Code References
 
 1. **Existing BMO Adapter** (`/src/lib/categorization/rules.ts`)
+
    ```typescript
    function cleanBMODescription(description: string): string {
      // Handles [PR] physical and [OP] online purchases
@@ -260,6 +268,7 @@ mcp__archon__manage_task({
 ### Database
 
 **Merchant Catalog** (Supabase):
+
 - Migration: `/supabase/migrations/20251115000001_create_merchants_table.sql`
 - Tables: `merchants`, `merchant_feedback`
 - RPC: `increment_merchant_counters()`
@@ -269,19 +278,21 @@ mcp__archon__manage_task({
 ## 🎯 Success Criteria
 
 ### Task #1 Complete When:
+
 ✅ `/src/app/budget-app/import/page.tsx` created  
 ✅ Drag-and-drop works for CSV files  
 ✅ Shows first 10 rows in preview  
 ✅ Validates file type and size  
 ✅ Accessible (keyboard navigation, screen reader support)  
-✅ Task marked as "review" in Archon  
+✅ Task marked as "review" in Archon
 
 ### Phase 1 Complete When:
+
 ✅ Can import CSV from all 5 Canadian banks  
 ✅ Auto-categorization works with merchant intelligence  
 ✅ Smart deduplication prevents duplicates  
 ✅ <5 seconds to import 1,000 transactions  
-✅ Generic adapter handles 95%+ of unknown formats  
+✅ Generic adapter handles 95%+ of unknown formats
 
 ---
 
@@ -290,16 +301,18 @@ mcp__archon__manage_task({
 ### Problem: Can't find tasks in Archon
 
 **Solution**:
+
 ```typescript
 // Get all project tasks
 mcp__archon__find_tasks({
-  project_id: "50ef9223-c79b-46e2-a5b1-770398cdfda8"
-})
+  project_id: "50ef9223-c79b-46e2-a5b1-770398cdfda8",
+});
 ```
 
 ### Problem: Don't know which task to start
 
 **Solution**: Start with highest priority (task_order = 100):
+
 - Task #1: File upload UI
 - Task ID: `ad1e26d4-fc4f-4648-b11a-fc9254d8bedf`
 - Agent: `react-specialist`
@@ -307,6 +320,7 @@ mcp__archon__find_tasks({
 ### Problem: Unsure about implementation approach
 
 **Solution**:
+
 1. Run vibe_check to identify assumptions
 2. Read task description in Archon (has full requirements)
 3. Reference `/docs/BANK_EXPORT_FORMATS_RESEARCH.md`
@@ -315,6 +329,7 @@ mcp__archon__find_tasks({
 ### Problem: Task seems too big
 
 **Solution**:
+
 - Each task is scoped for 1-4 hours of work
 - If overwhelmed, break into subtasks in local TodoWrite
 - Follow the "Files to Create" section in task description
@@ -325,10 +340,10 @@ mcp__archon__find_tasks({
 
 ```
 1. Run vibe_check (identify assumptions about file upload)
-   
+
 2. Get tasks from Archon:
    mcp__archon__find_tasks({ project_id: "50ef9223-c79b-46e2-a5b1-770398cdfda8" })
-   
+
 3. Start Task #1 (File upload UI):
    mcp__archon__manage_task({
      action: "update",
@@ -336,37 +351,37 @@ mcp__archon__find_tasks({
      status: "doing",
      assignee: "react-specialist"
    })
-   
+
 4. Create files:
    - /src/app/budget-app/import/page.tsx
    - /src/components/budget/FileUploadZone.tsx
    - /src/components/budget/CSVPreviewTable.tsx
-   
+
 5. Implement drag-and-drop:
    - Use shadcn/ui components
    - File validation (CSV only, max 5MB)
    - Preview first 10 rows
-   
+
 6. Test manually:
    - Upload a CSV file
    - Verify drag-and-drop works
    - Check file validation
    - Confirm preview shows
-   
+
 7. Mark as review:
    mcp__archon__manage_task({
      action: "update",
      task_id: "ad1e26d4-fc4f-4648-b11a-fc9254d8bedf",
      status: "review"
    })
-   
+
 8. After validation, mark done:
    mcp__archon__manage_task({
      action: "update",
      task_id: "ad1e26d4-fc4f-4648-b11a-fc9254d8bedf",
      status: "done"
    })
-   
+
 9. Move to Task #2 (CSV parser core)
 ```
 
@@ -378,29 +393,34 @@ mcp__archon__find_tasks({
 
 ```typescript
 // Get tasks
-mcp__archon__find_tasks({ project_id: "50ef9223-c79b-46e2-a5b1-770398cdfda8" })
+mcp__archon__find_tasks({ project_id: "50ef9223-c79b-46e2-a5b1-770398cdfda8" });
 
 // Update task status
 mcp__archon__manage_task({
   action: "update",
   task_id: "<task-id>",
   status: "doing" | "review" | "done",
-  assignee: "<agent-name>"
-})
+  assignee: "<agent-name>",
+});
 
 // Get project details
-mcp__archon__find_projects({ project_id: "50ef9223-c79b-46e2-a5b1-770398cdfda8" })
+mcp__archon__find_projects({ project_id: "50ef9223-c79b-46e2-a5b1-770398cdfda8" });
 ```
 
 ### Vibe Check Template
 
 ```typescript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_check({
-  goal: "Implement [feature name]",
-  plan: "1) [step 1] 2) [step 2] 3) [step 3]",
-  uncertainties: ["[uncertainty 1]", "[uncertainty 2]"],
-  userPrompt: "[original user request]"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__vibe_check({
+    goal: "Implement [feature name]",
+    plan: "1) [step 1] 2) [step 2] 3) [step 3]",
+    uncertainties: ["[uncertainty 1]", "[uncertainty 2]"],
+    userPrompt: "[original user request]",
+  });
 ```
 
 ### Task Priorities
@@ -415,6 +435,7 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_check({
 ## 🎉 You're Ready!
 
 **Start with**:
+
 1. ✅ Run vibe_check
 2. ✅ Get tasks from Archon (`project_id: "50ef9223-c79b-46e2-a5b1-770398cdfda8"`)
 3. ✅ Implement Task #1: File upload UI (`task_id: "ad1e26d4-fc4f-4648-b11a-fc9254d8bedf"`)

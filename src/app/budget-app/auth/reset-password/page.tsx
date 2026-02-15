@@ -23,7 +23,9 @@ function ResetPasswordForm() {
   useEffect(() => {
     // Check if we have a valid recovery session
     const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       // A valid password reset flow will have a session with aal1 (from the email link)
       setIsValidSession(!!session);
     };
@@ -87,9 +89,7 @@ function ResetPasswordForm() {
 
         <div className="text-center">
           <Link href="/budget-app/auth/forgot-password">
-            <Button className="bg-teal-500 text-white hover:bg-teal-400">
-              Request New Link
-            </Button>
+            <Button className="bg-teal-500 text-white hover:bg-teal-400">Request New Link</Button>
           </Link>
         </div>
       </div>
@@ -116,9 +116,7 @@ function ResetPasswordForm() {
     <div className="space-y-6">
       <div className="text-center">
         <h2 className="text-2xl font-bold text-white">Set New Password</h2>
-        <p className="mt-2 text-sm text-slate-400">
-          Enter your new password below
-        </p>
+        <p className="mt-2 text-sm text-slate-400">Enter your new password below</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">

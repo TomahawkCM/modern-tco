@@ -31,20 +31,20 @@ Your Device
 
 ### What We Store Locally
 
-| Data Type | Stored | Sensitive |
-|-----------|:------:|:---------:|
-| Transactions | ✅ | Medium |
-| Accounts | ✅ | Medium |
-| Categories | ✅ | Low |
-| Budgets | ✅ | Low |
-| Goals | ✅ | Low |
-| Loans | ✅ | High |
-| Subscriptions | ✅ | Medium |
-| Profiles | ✅ | Low |
-| PIN hashes | ✅ | High |
-| Activity log | ✅ | Low |
-| Settings | ✅ | Low |
-| Receipts | ✅ | Medium |
+| Data Type     | Stored | Sensitive |
+| ------------- | :----: | :-------: |
+| Transactions  |   ✅   |  Medium   |
+| Accounts      |   ✅   |  Medium   |
+| Categories    |   ✅   |    Low    |
+| Budgets       |   ✅   |    Low    |
+| Goals         |   ✅   |    Low    |
+| Loans         |   ✅   |   High    |
+| Subscriptions |   ✅   |  Medium   |
+| Profiles      |   ✅   |    Low    |
+| PIN hashes    |   ✅   |   High    |
+| Activity log  |   ✅   |    Low    |
+| Settings      |   ✅   |    Low    |
+| Receipts      |   ✅   |  Medium   |
 
 ### What We Never Store
 
@@ -91,6 +91,7 @@ Key length: 256 bits
 ### PIN Verification
 
 When verifying a PIN:
+
 1. Retrieve stored salt for profile
 2. Hash entered PIN with stored salt
 3. Compare hash to stored hash
@@ -208,17 +209,17 @@ const isValid = timingSafeEqual(inputHash, storedHash);
 
 ### What's Logged
 
-| Action | Entity | Details |
-|--------|--------|---------|
-| create | transaction, budget, etc. | Name, amount |
-| update | transaction, budget, etc. | Changed fields |
-| delete | transaction, budget, etc. | Deleted item name |
-| login | profile | Profile name |
-| logout | profile | Profile name |
-| export | system | Export type |
-| import | system | Import source |
-| pin_change | profile | Action type |
-| profile_switch | profile | Target profile |
+| Action         | Entity                    | Details           |
+| -------------- | ------------------------- | ----------------- |
+| create         | transaction, budget, etc. | Name, amount      |
+| update         | transaction, budget, etc. | Changed fields    |
+| delete         | transaction, budget, etc. | Deleted item name |
+| login          | profile                   | Profile name      |
+| logout         | profile                   | Profile name      |
+| export         | system                    | Export type       |
+| import         | system                    | Import source     |
+| pin_change     | profile                   | Action type       |
+| profile_switch | profile                   | Target profile    |
 
 ### Log Retention
 
@@ -247,10 +248,12 @@ const isValid = timingSafeEqual(inputHash, storedHash);
 ### Browser Permissions
 
 The app requires only:
+
 - **IndexedDB access** - For local data storage
 - **Web Crypto API** - For PIN hashing and encryption
 
 The app does NOT require:
+
 - Network access
 - Location access
 - Camera/microphone
@@ -282,6 +285,7 @@ The app does NOT require:
 ### Deleting a Profile
 
 When you delete a profile:
+
 - Profile record removed from database
 - PIN hash and salt deleted
 - Activity log entries remain (attribution preserved)
@@ -290,6 +294,7 @@ When you delete a profile:
 ### Clearing All Data
 
 To completely remove all data:
+
 1. Go to browser settings
 2. Clear site data for this domain
 3. Or use browser's "Clear browsing data" feature
@@ -317,6 +322,7 @@ crypto.getRandomValues() (CSPRNG)
 ### Security Headers (Production)
 
 When deployed, recommended security headers:
+
 ```
 Content-Security-Policy: default-src 'self'
 X-Content-Type-Options: nosniff

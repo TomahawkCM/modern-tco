@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Success Checkmark Animation Component (Phase 4.1.2)
@@ -8,20 +8,20 @@
  * <SuccessCheckmark show={isSuccess} onComplete={() => setIsSuccess(false)} />
  */
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { motion, AnimatePresence } from "framer-motion";
+import { Check } from "lucide-react";
 
 interface SuccessCheckmarkProps {
   show: boolean;
   onComplete?: () => void;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   message?: string;
 }
 
 const sizes = {
-  sm: 'w-12 h-12',
-  md: 'w-16 h-16',
-  lg: 'w-24 h-24',
+  sm: "w-12 h-12",
+  md: "w-16 h-16",
+  lg: "w-24 h-24",
 };
 
 const iconSizes = {
@@ -33,8 +33,8 @@ const iconSizes = {
 export function SuccessCheckmark({
   show,
   onComplete,
-  size = 'md',
-  message
+  size = "md",
+  message,
 }: SuccessCheckmarkProps) {
   return (
     <AnimatePresence>
@@ -44,7 +44,7 @@ export function SuccessCheckmark({
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0 }}
           transition={{
-            type: 'spring',
+            type: "spring",
             stiffness: 260,
             damping: 20,
           }}
@@ -57,16 +57,16 @@ export function SuccessCheckmark({
           onClick={onComplete}
         >
           <motion.div
-            className="flex flex-col items-center gap-4 p-8 bg-white rounded-2xl shadow-2xl"
+            className="flex flex-col items-center gap-4 rounded-2xl bg-white p-8 shadow-2xl"
             initial={{ y: -50 }}
             animate={{ y: 0 }}
           >
             {/* Animated checkmark circle */}
             <motion.div
-              className={`${sizes[size]} rounded-full bg-green-500 flex items-center justify-center relative overflow-hidden`}
+              className={`${sizes[size]} relative flex items-center justify-center overflow-hidden rounded-full bg-green-500`}
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              transition={{ delay: 0.1, type: 'spring', stiffness: 200 }}
+              transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
             >
               {/* Ripple effect */}
               <motion.div
@@ -80,13 +80,9 @@ export function SuccessCheckmark({
               <motion.div
                 initial={{ scale: 0, rotate: -90 }}
                 animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+                transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
               >
-                <Check
-                  className="text-white"
-                  size={iconSizes[size]}
-                  strokeWidth={3}
-                />
+                <Check className="text-white" size={iconSizes[size]} strokeWidth={3} />
               </motion.div>
             </motion.div>
 
@@ -96,7 +92,7 @@ export function SuccessCheckmark({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-gray-900 font-semibold text-lg"
+                className="text-lg font-semibold text-gray-900"
               >
                 {message}
               </motion.p>
@@ -119,8 +115,8 @@ export function InlineSuccessCheckmark({ show }: { show: boolean }) {
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           exit={{ scale: 0, rotate: 180 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-          className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500"
+          transition={{ type: "spring", stiffness: 260, damping: 20 }}
+          className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-green-500"
         >
           <Check className="text-white" size={16} strokeWidth={3} />
         </motion.div>

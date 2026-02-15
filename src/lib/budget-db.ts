@@ -3,7 +3,7 @@
  * Uses Dexie.js for IndexedDB management
  */
 
-import Dexie, { type Table } from 'dexie';
+import Dexie, { type Table } from "dexie";
 
 import type {
   Account,
@@ -30,16 +30,16 @@ import type {
   Property,
   EventBudget,
   EventBudgetCategory,
-} from '@/types/budget';
-import type { InAppNotification } from '@/types/notifications';
-import type { Profile, ActivityLogEntry } from '@/types/profile';
+} from "@/types/budget";
+import type { InAppNotification } from "@/types/notifications";
+import type { Profile, ActivityLogEntry } from "@/types/profile";
 import {
   encryptTransaction,
   decryptTransaction,
   encryptAccount,
   decryptAccount,
   isEncryptionAvailable,
-} from './encryption';
+} from "./encryption";
 
 // Re-export types for convenience
 export type {
@@ -53,7 +53,7 @@ export type {
   Property,
   EventBudget,
   EventBudgetCategory,
-} from '@/types/budget';
+} from "@/types/budget";
 
 /**
  * Budget Database Schema
@@ -68,26 +68,28 @@ export interface PriceCache {
   change?: number;
   changePercent?: number;
   fetchedAt: Date;
-  source: 'yahoo' | 'fallback';
+  source: "yahoo" | "fallback";
 }
 
 // Import sync types
-import type { PairedDevice } from './sync/types';
+import type { PairedDevice } from "./sync/types";
 
 /**
  * Check if we're in a development environment.
  * Used to determine database isolation and show dev indicators.
  */
 export function isDevEnvironment(): boolean {
-  if (typeof window === 'undefined') return false;
+  if (typeof window === "undefined") return false;
 
-  const {hostname} = window.location;
-  return hostname === 'localhost' ||
-         hostname === '127.0.0.1' ||
-         hostname.includes('.local') ||
-         hostname.includes('dev.') ||
-         hostname.includes('-dev.') ||
-         hostname.includes('.vercel.app'); // Preview deployments
+  const { hostname } = window.location;
+  return (
+    hostname === "localhost" ||
+    hostname === "127.0.0.1" ||
+    hostname.includes(".local") ||
+    hostname.includes("dev.") ||
+    hostname.includes("-dev.") ||
+    hostname.includes(".vercel.app")
+  ); // Preview deployments
 }
 
 /**
@@ -95,7 +97,7 @@ export function isDevEnvironment(): boolean {
  * Development uses a separate database to prevent test data from appearing in production.
  */
 export function getDatabaseName(): string {
-  const baseName = 'HouseholdBudgetApp';
+  const baseName = "HouseholdBudgetApp";
   return isDevEnvironment() ? `${baseName}_dev` : baseName;
 }
 
@@ -137,479 +139,501 @@ export class BudgetDatabase extends Dexie {
     super(getDatabaseName());
 
     this.version(1).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
     });
 
     // Version 2: Add receipts table
     this.version(2).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
     });
 
     // Version 3: Add investment tracking tables (Phase 8)
     this.version(3).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
     });
 
     // Version 4: Add price cache for market data (Phase 8)
     this.version(4).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
     });
 
     // Version 5: Add split transaction support (Phase 6)
     this.version(5).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
     });
 
     // Version 6: Add anomaly feedback (Phase 3: AI Features)
     this.version(6).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
     });
 
     // Version 7: Add prediction accuracy tracking (Phase 3: AI Features)
     this.version(7).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+      predictionAccuracy: "id, category, month, recordedAt",
     });
 
     // Version 8: Add loan tracking tables
     this.version(8).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt',
-      loans: 'id, type, status, lender, nextPaymentDate, accountId',
-      loanPayments: 'id, loanId, date, transactionId, isScheduled'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+      predictionAccuracy: "id, category, month, recordedAt",
+      loans: "id, type, status, lender, nextPaymentDate, accountId",
+      loanPayments: "id, loanId, date, transactionId, isScheduled",
     });
 
     // Version 9: Add payment frequency to loans
     this.version(9).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt',
-      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
-      loanPayments: 'id, loanId, date, transactionId, isScheduled'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+      predictionAccuracy: "id, category, month, recordedAt",
+      loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+      loanPayments: "id, loanId, date, transactionId, isScheduled",
     });
 
     // Version 10: Add import history tracking
     this.version(10).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      importHistory: 'id, importDate, fileFormat, bank, fileName',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt',
-      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
-      loanPayments: 'id, loanId, date, transactionId, isScheduled'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      importHistory: "id, importDate, fileFormat, bank, fileName",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+      predictionAccuracy: "id, category, month, recordedAt",
+      loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+      loanPayments: "id, loanId, date, transactionId, isScheduled",
     });
 
     // Version 11: Add subscription management
     this.version(11).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      importHistory: 'id, importDate, fileFormat, bank, fileName',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt',
-      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
-      loanPayments: 'id, loanId, date, transactionId, isScheduled',
-      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      importHistory: "id, importDate, fileFormat, bank, fileName",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+      predictionAccuracy: "id, category, month, recordedAt",
+      loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+      loanPayments: "id, loanId, date, transactionId, isScheduled",
+      subscriptions:
+        "id, name, status, category, nextBillingDate, billingCycle, merchantToken, source",
     });
 
     // Version 12: Add excluded subscriptions (dismiss false positives)
     this.version(12).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      importHistory: 'id, importDate, fileFormat, bank, fileName',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt',
-      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
-      loanPayments: 'id, loanId, date, transactionId, isScheduled',
-      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
-      excludedSubscriptions: 'id, merchantToken, excludedAt'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      importHistory: "id, importDate, fileFormat, bank, fileName",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+      predictionAccuracy: "id, category, month, recordedAt",
+      loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+      loanPayments: "id, loanId, date, transactionId, isScheduled",
+      subscriptions:
+        "id, name, status, category, nextBillingDate, billingCycle, merchantToken, source",
+      excludedSubscriptions: "id, merchantToken, excludedAt",
     });
 
     // Version 13: Add LAN Sync paired devices (Phase 7)
     this.version(13).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      importHistory: 'id, importDate, fileFormat, bank, fileName',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt',
-      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
-      loanPayments: 'id, loanId, date, transactionId, isScheduled',
-      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
-      excludedSubscriptions: 'id, merchantToken, excludedAt',
-      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt'
+      accounts: "id, name, institution, type",
+      transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      importHistory: "id, importDate, fileFormat, bank, fileName",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+      predictionAccuracy: "id, category, month, recordedAt",
+      loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+      loanPayments: "id, loanId, date, transactionId, isScheduled",
+      subscriptions:
+        "id, name, status, category, nextBillingDate, billingCycle, merchantToken, source",
+      excludedSubscriptions: "id, merchantToken, excludedAt",
+      pairedDevices: "id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt",
     });
 
     // Version 14: Round all transaction amounts to 2 decimal places
     // Fixes floating-point precision errors in existing data
-    this.version(14).stores({
-      accounts: 'id, name, institution, type',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      importHistory: 'id, importDate, fileFormat, bank, fileName',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt',
-      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
-      loanPayments: 'id, loanId, date, transactionId, isScheduled',
-      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
-      excludedSubscriptions: 'id, merchantToken, excludedAt',
-      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt'
-    }).upgrade(async tx => {
-      // Round all transaction amounts to exactly 2 decimal places
-      const transactions = await tx.table('transactions').toArray();
-      for (const trans of transactions) {
-        const rounded = Math.round(trans.amount * 100) / 100;
-        if (trans.amount !== rounded) {
-          await tx.table('transactions').update(trans.id, { amount: rounded });
-        }
-      }
-
-      // Also round account balances
-      const accounts = await tx.table('accounts').toArray();
-      for (const acc of accounts) {
-        if (acc.balance !== undefined) {
-          const rounded = Math.round(acc.balance * 100) / 100;
-          if (acc.balance !== rounded) {
-            await tx.table('accounts').update(acc.id, { balance: rounded });
+    this.version(14)
+      .stores({
+        accounts: "id, name, institution, type",
+        transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+        categories: "id, name, type, order",
+        budgets: "id, categoryId, period, startDate",
+        futurePurchases: "id, targetDate, priority, isCompleted",
+        retirementPlans: "id, name, createdAt",
+        importMappings: "id, institution, accountId",
+        importHistory: "id, importDate, fileFormat, bank, fileName",
+        receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+        investmentAccounts: "id, type, name, createdAt",
+        holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+        priceCache: "id, symbol, fetchedAt, source",
+        anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+        predictionAccuracy: "id, category, month, recordedAt",
+        loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+        loanPayments: "id, loanId, date, transactionId, isScheduled",
+        subscriptions:
+          "id, name, status, category, nextBillingDate, billingCycle, merchantToken, source",
+        excludedSubscriptions: "id, merchantToken, excludedAt",
+        pairedDevices: "id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt",
+      })
+      .upgrade(async (tx) => {
+        // Round all transaction amounts to exactly 2 decimal places
+        const transactions = await tx.table("transactions").toArray();
+        for (const trans of transactions) {
+          const rounded = Math.round(trans.amount * 100) / 100;
+          if (trans.amount !== rounded) {
+            await tx.table("transactions").update(trans.id, { amount: rounded });
           }
         }
-      }
 
-      // Round budget amounts
-      const budgets = await tx.table('budgets').toArray();
-      for (const budget of budgets) {
-        const rounded = Math.round(budget.amount * 100) / 100;
-        if (budget.amount !== rounded) {
-          await tx.table('budgets').update(budget.id, { amount: rounded });
+        // Also round account balances
+        const accounts = await tx.table("accounts").toArray();
+        for (const acc of accounts) {
+          if (acc.balance !== undefined) {
+            const rounded = Math.round(acc.balance * 100) / 100;
+            if (acc.balance !== rounded) {
+              await tx.table("accounts").update(acc.id, { balance: rounded });
+            }
+          }
         }
-      }
-    });
+
+        // Round budget amounts
+        const budgets = await tx.table("budgets").toArray();
+        for (const budget of budgets) {
+          const rounded = Math.round(budget.amount * 100) / 100;
+          if (budget.amount !== rounded) {
+            await tx.table("budgets").update(budget.id, { amount: rounded });
+          }
+        }
+      });
 
     // Version 15: Add bankId field to accounts for OFX BANKID (routing number) matching
     // This enables composite key matching (BANKID + last4) per OFX specification
     // to prevent cross-bank account confusion when multiple banks have same last-4-digits
     this.version(15).stores({
-      accounts: 'id, name, institution, type, bankId',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      importHistory: 'id, importDate, fileFormat, bank, fileName',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt',
-      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
-      loanPayments: 'id, loanId, date, transactionId, isScheduled',
-      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
-      excludedSubscriptions: 'id, merchantToken, excludedAt',
-      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt'
+      accounts: "id, name, institution, type, bankId",
+      transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      importHistory: "id, importDate, fileFormat, bank, fileName",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+      predictionAccuracy: "id, category, month, recordedAt",
+      loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+      loanPayments: "id, loanId, date, transactionId, isScheduled",
+      subscriptions:
+        "id, name, status, category, nextBillingDate, billingCycle, merchantToken, source",
+      excludedSubscriptions: "id, merchantToken, excludedAt",
+      pairedDevices: "id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt",
     });
 
     // Version 16: Add multi-profile support with profiles and activity log tables
     // Enables multiple family members to have separate profiles with PIN protection
-    this.version(16).stores({
-      accounts: 'id, name, institution, type, bankId',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate, ownerId, visibility',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      importHistory: 'id, importDate, fileFormat, bank, fileName',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt',
-      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
-      loanPayments: 'id, loanId, date, transactionId, isScheduled',
-      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
-      excludedSubscriptions: 'id, merchantToken, excludedAt',
-      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt',
-      // New tables for multi-profile support
-      profiles: 'id, name, isDefault, createdAt',
-      activityLog: 'id, profileId, action, entityType, timestamp, [profileId+timestamp]'
-    }).upgrade(async tx => {
-      // Create default profile for existing users (migration)
-      const profilesTable = tx.table('profiles');
-      const existingProfiles = await profilesTable.count();
+    this.version(16)
+      .stores({
+        accounts: "id, name, institution, type, bankId",
+        transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+        categories: "id, name, type, order",
+        budgets: "id, categoryId, period, startDate, ownerId, visibility",
+        futurePurchases: "id, targetDate, priority, isCompleted",
+        retirementPlans: "id, name, createdAt",
+        importMappings: "id, institution, accountId",
+        importHistory: "id, importDate, fileFormat, bank, fileName",
+        receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+        investmentAccounts: "id, type, name, createdAt",
+        holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+        priceCache: "id, symbol, fetchedAt, source",
+        anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+        predictionAccuracy: "id, category, month, recordedAt",
+        loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+        loanPayments: "id, loanId, date, transactionId, isScheduled",
+        subscriptions:
+          "id, name, status, category, nextBillingDate, billingCycle, merchantToken, source",
+        excludedSubscriptions: "id, merchantToken, excludedAt",
+        pairedDevices: "id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt",
+        // New tables for multi-profile support
+        profiles: "id, name, isDefault, createdAt",
+        activityLog: "id, profileId, action, entityType, timestamp, [profileId+timestamp]",
+      })
+      .upgrade(async (tx) => {
+        // Create default profile for existing users (migration)
+        const profilesTable = tx.table("profiles");
+        const existingProfiles = await profilesTable.count();
 
-      if (existingProfiles === 0) {
-        console.warn('[DB Migration v16] Creating default profile for existing user...');
-        await profilesTable.add({
-          id: 'default-profile',
-          name: 'Default',
-          pinHash: null,
-          pinSalt: null,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          isDefault: true,
-          avatarColor: '#10b981', // Emerald green
-          order: 0,
-        });
-        console.warn('[DB Migration v16] Default profile created successfully');
-      }
-
-      // Set existing budgets to shared visibility (null ownerId = shared)
-      const budgetsTable = tx.table('budgets');
-      const budgets = await budgetsTable.toArray();
-      for (const budget of budgets) {
-        if (budget.visibility === undefined) {
-          await budgetsTable.update(budget.id, {
-            visibility: 'shared',
-            ownerId: null,
+        if (existingProfiles === 0) {
+          console.warn("[DB Migration v16] Creating default profile for existing user...");
+          await profilesTable.add({
+            id: "default-profile",
+            name: "Default",
+            pinHash: null,
+            pinSalt: null,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            isDefault: true,
+            avatarColor: "#10b981", // Emerald green
+            order: 0,
           });
+          console.warn("[DB Migration v16] Default profile created successfully");
         }
-      }
-      console.warn('[DB Migration v16] Updated', budgets.length, 'budgets to shared visibility');
-    });
+
+        // Set existing budgets to shared visibility (null ownerId = shared)
+        const budgetsTable = tx.table("budgets");
+        const budgets = await budgetsTable.toArray();
+        for (const budget of budgets) {
+          if (budget.visibility === undefined) {
+            await budgetsTable.update(budget.id, {
+              visibility: "shared",
+              ownerId: null,
+            });
+          }
+        }
+        console.warn("[DB Migration v16] Updated", budgets.length, "budgets to shared visibility");
+      });
 
     // Version 17: Add balance reconciliation tracking fields to accounts
     // Tracks when accounts were last reconciled and what balance was confirmed
-    this.version(17).stores({
-      accounts: 'id, name, institution, type, bankId',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate, ownerId, visibility',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      importHistory: 'id, importDate, fileFormat, bank, fileName',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt',
-      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
-      loanPayments: 'id, loanId, date, transactionId, isScheduled',
-      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
-      excludedSubscriptions: 'id, merchantToken, excludedAt',
-      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt',
-      profiles: 'id, name, isDefault, createdAt',
-      activityLog: 'id, profileId, action, entityType, timestamp, [profileId+timestamp]'
-    }).upgrade(async tx => {
-      // Migrate existing accounts: set default reconciliation values
-      // Accounts with balance > 0 are marked as reconciled at creation time
-      const accountsTable = tx.table('accounts');
-      const accounts = await accountsTable.toArray();
+    this.version(17)
+      .stores({
+        accounts: "id, name, institution, type, bankId",
+        transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+        categories: "id, name, type, order",
+        budgets: "id, categoryId, period, startDate, ownerId, visibility",
+        futurePurchases: "id, targetDate, priority, isCompleted",
+        retirementPlans: "id, name, createdAt",
+        importMappings: "id, institution, accountId",
+        importHistory: "id, importDate, fileFormat, bank, fileName",
+        receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+        investmentAccounts: "id, type, name, createdAt",
+        holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+        priceCache: "id, symbol, fetchedAt, source",
+        anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+        predictionAccuracy: "id, category, month, recordedAt",
+        loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+        loanPayments: "id, loanId, date, transactionId, isScheduled",
+        subscriptions:
+          "id, name, status, category, nextBillingDate, billingCycle, merchantToken, source",
+        excludedSubscriptions: "id, merchantToken, excludedAt",
+        pairedDevices: "id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt",
+        profiles: "id, name, isDefault, createdAt",
+        activityLog: "id, profileId, action, entityType, timestamp, [profileId+timestamp]",
+      })
+      .upgrade(async (tx) => {
+        // Migrate existing accounts: set default reconciliation values
+        // Accounts with balance > 0 are marked as reconciled at creation time
+        const accountsTable = tx.table("accounts");
+        const accounts = await accountsTable.toArray();
 
-      for (const account of accounts) {
-        // Only update if these fields are not already set
-        if (account.lastReconciledAt === undefined) {
-          const updates: Record<string, unknown> = {};
+        for (const account of accounts) {
+          // Only update if these fields are not already set
+          if (account.lastReconciledAt === undefined) {
+            const updates: Record<string, unknown> = {};
 
-          // If account has a non-zero balance, assume it was reconciled at creation
-          if (account.balance && account.balance !== 0) {
-            updates.lastReconciledAt = account.createdAt || new Date();
-            updates.lastReconciledBalance = account.balance;
-            updates.openingBalanceDate = account.createdAt || new Date();
-          }
+            // If account has a non-zero balance, assume it was reconciled at creation
+            if (account.balance && account.balance !== 0) {
+              updates.lastReconciledAt = account.createdAt || new Date();
+              updates.lastReconciledBalance = account.balance;
+              updates.openingBalanceDate = account.createdAt || new Date();
+            }
 
-          if (Object.keys(updates).length > 0) {
-            await accountsTable.update(account.id, updates);
+            if (Object.keys(updates).length > 0) {
+              await accountsTable.update(account.id, updates);
+            }
           }
         }
-      }
 
-      console.warn('[DB Migration v17] Updated', accounts.length, 'accounts with reconciliation tracking');
-    });
+        console.warn(
+          "[DB Migration v17] Updated",
+          accounts.length,
+          "accounts with reconciliation tracking"
+        );
+      });
 
     // Version 18: Add in-app notifications table for notification center
     // Supports bill reminders, budget alerts, goal milestones, and system notifications
     this.version(18).stores({
-      accounts: 'id, name, institution, type, bankId',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate, ownerId, visibility',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      importHistory: 'id, importDate, fileFormat, bank, fileName',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt',
-      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
-      loanPayments: 'id, loanId, date, transactionId, isScheduled',
-      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
-      excludedSubscriptions: 'id, merchantToken, excludedAt',
-      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt',
-      profiles: 'id, name, isDefault, createdAt',
-      activityLog: 'id, profileId, action, entityType, timestamp, [profileId+timestamp]',
+      accounts: "id, name, institution, type, bankId",
+      transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate, ownerId, visibility",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      importHistory: "id, importDate, fileFormat, bank, fileName",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+      predictionAccuracy: "id, category, month, recordedAt",
+      loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+      loanPayments: "id, loanId, date, transactionId, isScheduled",
+      subscriptions:
+        "id, name, status, category, nextBillingDate, billingCycle, merchantToken, source",
+      excludedSubscriptions: "id, merchantToken, excludedAt",
+      pairedDevices: "id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt",
+      profiles: "id, name, isDefault, createdAt",
+      activityLog: "id, profileId, action, entityType, timestamp, [profileId+timestamp]",
       // New: In-app notifications for notification center
-      inAppNotifications: 'id, type, status, priority, createdAt, snoozedUntil, sourceType, sourceId'
+      inAppNotifications:
+        "id, type, status, priority, createdAt, snoozedUntil, sourceType, sourceId",
     });
 
     // Version 19: Add 7 new tables for remaining budget features
     // Budget rollovers, gamification, merchant rules, net worth snapshots,
     // properties, event budgets, and event budget categories
     this.version(19).stores({
-      accounts: 'id, name, institution, type, bankId',
-      transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit, refundStatus, eventBudgetId',
-      categories: 'id, name, type, order',
-      budgets: 'id, categoryId, period, startDate, ownerId, visibility',
-      futurePurchases: 'id, targetDate, priority, isCompleted',
-      retirementPlans: 'id, name, createdAt',
-      importMappings: 'id, institution, accountId',
-      importHistory: 'id, importDate, fileFormat, bank, fileName',
-      receipts: 'id, transactionId, uploadedAt, mimeType, fileSize',
-      investmentAccounts: 'id, type, name, createdAt',
-      holdings: 'id, accountId, symbol, purchaseDate, [accountId+symbol]',
-      priceCache: 'id, symbol, fetchedAt, source',
-      anomalyFeedback: 'id, transactionId, merchant, category, createdAt',
-      predictionAccuracy: 'id, category, month, recordedAt',
-      loans: 'id, type, status, lender, nextPaymentDate, accountId, paymentFrequency',
-      loanPayments: 'id, loanId, date, transactionId, isScheduled',
-      subscriptions: 'id, name, status, category, nextBillingDate, billingCycle, merchantToken, source',
-      excludedSubscriptions: 'id, merchantToken, excludedAt',
-      pairedDevices: 'id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt',
-      profiles: 'id, name, isDefault, createdAt',
-      activityLog: 'id, profileId, action, entityType, timestamp, [profileId+timestamp]',
-      inAppNotifications: 'id, type, status, priority, createdAt, snoozedUntil, sourceType, sourceId',
+      accounts: "id, name, institution, type, bankId",
+      transactions:
+        "id, accountId, date, category, amount, description, splitFromId, isSplit, refundStatus, eventBudgetId",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate, ownerId, visibility",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      importHistory: "id, importDate, fileFormat, bank, fileName",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+      predictionAccuracy: "id, category, month, recordedAt",
+      loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+      loanPayments: "id, loanId, date, transactionId, isScheduled",
+      subscriptions:
+        "id, name, status, category, nextBillingDate, billingCycle, merchantToken, source",
+      excludedSubscriptions: "id, merchantToken, excludedAt",
+      pairedDevices: "id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt",
+      profiles: "id, name, isDefault, createdAt",
+      activityLog: "id, profileId, action, entityType, timestamp, [profileId+timestamp]",
+      inAppNotifications:
+        "id, type, status, priority, createdAt, snoozedUntil, sourceType, sourceId",
       // New tables
-      budgetRollovers: 'id, budgetId, month, [budgetId+month]',
-      gamificationState: 'id, eventType, timestamp',
-      merchantRules: 'id, merchantToken, category, createdAt',
-      netWorthSnapshots: 'id, date, netWorth',
-      properties: 'id, name, currency, type, createdAt',
-      eventBudgets: 'id, name, status, startDate, endDate',
-      eventBudgetCategories: 'id, eventBudgetId, [eventBudgetId+categoryName]',
+      budgetRollovers: "id, budgetId, month, [budgetId+month]",
+      gamificationState: "id, eventType, timestamp",
+      merchantRules: "id, merchantToken, category, createdAt",
+      netWorthSnapshots: "id, date, netWorth",
+      properties: "id, name, currency, type, createdAt",
+      eventBudgets: "id, name, status, startDate, endDate",
+      eventBudgetCategories: "id, eventBudgetId, [eventBudgetId+categoryName]",
     });
   }
 }
@@ -619,9 +643,11 @@ export class BudgetDatabase extends Dexie {
 let _db: BudgetDatabase | null = null;
 
 function getDatabase(): BudgetDatabase {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     // Server-side: return a mock that throws helpful errors
-    throw new Error('IndexedDB is only available in the browser. This code should only run client-side.');
+    throw new Error(
+      "IndexedDB is only available in the browser. This code should only run client-side."
+    );
   }
 
   if (!_db) {
@@ -638,130 +664,130 @@ export const db = new Proxy({} as BudgetDatabase, {
     const value = database[prop as keyof BudgetDatabase];
 
     // Bind methods to the database instance
-    if (typeof value === 'function') {
+    if (typeof value === "function") {
       return value.bind(database);
     }
 
     return value;
-  }
+  },
 });
 
 // Default categories to seed on first use
-export const DEFAULT_CATEGORIES: Omit<Category, 'id' | 'createdAt'>[] = [
+export const DEFAULT_CATEGORIES: Omit<Category, "id" | "createdAt">[] = [
   {
-    name: 'Food & Dining',
-    type: 'expense',
-    subcategories: ['Groceries', 'Restaurants', 'Coffee', 'Fast Food', 'Delivery'],
-    color: '#10b981',
-    icon: 'utensils',
+    name: "Food & Dining",
+    type: "expense",
+    subcategories: ["Groceries", "Restaurants", "Coffee", "Fast Food", "Delivery"],
+    color: "#10b981",
+    icon: "utensils",
     isDefault: true,
     order: 1,
   },
   {
-    name: 'Transportation',
-    type: 'expense',
-    subcategories: ['Gas', 'Public Transit', 'Parking', 'Maintenance', 'Car Payment'],
-    color: '#3b82f6',
-    icon: 'car',
+    name: "Transportation",
+    type: "expense",
+    subcategories: ["Gas", "Public Transit", "Parking", "Maintenance", "Car Payment"],
+    color: "#3b82f6",
+    icon: "car",
     isDefault: true,
     order: 2,
   },
   {
-    name: 'Bills & Utilities',
-    type: 'expense',
-    subcategories: ['Electricity', 'Water', 'Internet', 'Phone', 'Insurance', 'Gas/Heating'],
-    color: '#ef4444',
-    icon: 'file-text',
+    name: "Bills & Utilities",
+    type: "expense",
+    subcategories: ["Electricity", "Water", "Internet", "Phone", "Insurance", "Gas/Heating"],
+    color: "#ef4444",
+    icon: "file-text",
     isDefault: true,
     order: 3,
   },
   {
-    name: 'Shopping',
-    type: 'expense',
-    subcategories: ['Clothing', 'Electronics', 'Home Goods', 'Personal Care', 'Gifts'],
-    color: '#8b5cf6',
-    icon: 'shopping-bag',
+    name: "Shopping",
+    type: "expense",
+    subcategories: ["Clothing", "Electronics", "Home Goods", "Personal Care", "Gifts"],
+    color: "#8b5cf6",
+    icon: "shopping-bag",
     isDefault: true,
     order: 4,
   },
   {
-    name: 'Entertainment',
-    type: 'expense',
-    subcategories: ['Streaming', 'Movies', 'Games', 'Hobbies', 'Events'],
-    color: '#ec4899',
-    icon: 'tv',
+    name: "Entertainment",
+    type: "expense",
+    subcategories: ["Streaming", "Movies", "Games", "Hobbies", "Events"],
+    color: "#ec4899",
+    icon: "tv",
     isDefault: true,
     order: 5,
   },
   {
-    name: 'Health & Fitness',
-    type: 'expense',
-    subcategories: ['Gym', 'Medical', 'Pharmacy', 'Supplements', 'Therapy'],
-    color: '#06b6d4',
-    icon: 'heart',
+    name: "Health & Fitness",
+    type: "expense",
+    subcategories: ["Gym", "Medical", "Pharmacy", "Supplements", "Therapy"],
+    color: "#06b6d4",
+    icon: "heart",
     isDefault: true,
     order: 6,
   },
   {
-    name: 'Housing',
-    type: 'expense',
-    subcategories: ['Rent/Mortgage', 'Property Tax', 'Maintenance', 'HOA', 'Home Improvement'],
-    color: '#f59e0b',
-    icon: 'home',
+    name: "Housing",
+    type: "expense",
+    subcategories: ["Rent/Mortgage", "Property Tax", "Maintenance", "HOA", "Home Improvement"],
+    color: "#f59e0b",
+    icon: "home",
     isDefault: true,
     order: 7,
   },
   {
-    name: 'Income',
-    type: 'income',
-    subcategories: ['Salary', 'Freelance', 'Investment', 'Bonus', 'Other'],
-    color: '#22c55e',
-    icon: 'dollar-sign',
+    name: "Income",
+    type: "income",
+    subcategories: ["Salary", "Freelance", "Investment", "Bonus", "Other"],
+    color: "#22c55e",
+    icon: "dollar-sign",
     isDefault: true,
     order: 8,
   },
   {
-    name: 'Savings & Investments',
-    type: 'expense',
-    subcategories: ['Emergency Fund', 'Retirement', 'Stocks', 'TFSA', 'RRSP'],
-    color: '#14b8a6',
-    icon: 'trending-up',
+    name: "Savings & Investments",
+    type: "expense",
+    subcategories: ["Emergency Fund", "Retirement", "Stocks", "TFSA", "RRSP"],
+    color: "#14b8a6",
+    icon: "trending-up",
     isDefault: true,
     order: 9,
   },
   {
-    name: 'Education',
-    type: 'expense',
-    subcategories: ['Tuition', 'Books', 'Courses', 'Supplies', 'Student Loans'],
-    color: '#6366f1',
-    icon: 'book',
+    name: "Education",
+    type: "expense",
+    subcategories: ["Tuition", "Books", "Courses", "Supplies", "Student Loans"],
+    color: "#6366f1",
+    icon: "book",
     isDefault: true,
     order: 10,
   },
   {
-    name: 'Pets',
-    type: 'expense',
-    subcategories: ['Food', 'Vet', 'Grooming', 'Supplies', 'Pet Insurance'],
-    color: '#f97316',
-    icon: 'paw',
+    name: "Pets",
+    type: "expense",
+    subcategories: ["Food", "Vet", "Grooming", "Supplies", "Pet Insurance"],
+    color: "#f97316",
+    icon: "paw",
     isDefault: true,
     order: 11,
   },
   {
-    name: 'Travel',
-    type: 'expense',
-    subcategories: ['Flights', 'Hotels', 'Food', 'Activities', 'Transportation'],
-    color: '#0ea5e9',
-    icon: 'plane',
+    name: "Travel",
+    type: "expense",
+    subcategories: ["Flights", "Hotels", "Food", "Activities", "Transportation"],
+    color: "#0ea5e9",
+    icon: "plane",
     isDefault: true,
     order: 12,
   },
   {
-    name: 'Miscellaneous',
-    type: 'expense',
-    subcategories: ['Gifts', 'Donations', 'Fees', 'Other'],
-    color: '#64748b',
-    icon: 'more-horizontal',
+    name: "Miscellaneous",
+    type: "expense",
+    subcategories: ["Gifts", "Donations", "Fees", "Other"],
+    color: "#64748b",
+    icon: "more-horizontal",
     isDefault: true,
     order: 13,
   },
@@ -770,32 +796,38 @@ export const DEFAULT_CATEGORIES: Omit<Category, 'id' | 'createdAt'>[] = [
 // Helper function to initialize default categories
 export async function initializeDefaultCategories(): Promise<void> {
   try {
-    console.warn('[DB] initializeDefaultCategories: Starting...');
-    console.warn('[DB] initializeDefaultCategories: Fetching existing categories...');
+    console.warn("[DB] initializeDefaultCategories: Starting...");
+    console.warn("[DB] initializeDefaultCategories: Fetching existing categories...");
     const existing = await db.categories.toArray();
-    console.warn('[DB] initializeDefaultCategories: Found', existing.length, 'existing categories');
+    console.warn("[DB] initializeDefaultCategories: Found", existing.length, "existing categories");
 
     if (existing.length === 0) {
-      console.warn('[DB] initializeDefaultCategories: No categories found, adding defaults...');
+      console.warn("[DB] initializeDefaultCategories: No categories found, adding defaults...");
       const categories = DEFAULT_CATEGORIES.map((cat, index) => ({
         ...cat,
         id: `cat_${index + 1}`,
         createdAt: new Date(),
       }));
       await db.categories.bulkAdd(categories);
-      console.warn('[DB] initializeDefaultCategories: Added', categories.length, 'default categories');
+      console.warn(
+        "[DB] initializeDefaultCategories: Added",
+        categories.length,
+        "default categories"
+      );
     } else {
-      console.warn('[DB] initializeDefaultCategories: Categories already exist, skipping initialization');
+      console.warn(
+        "[DB] initializeDefaultCategories: Categories already exist, skipping initialization"
+      );
     }
-    console.warn('[DB] initializeDefaultCategories: Complete');
+    console.warn("[DB] initializeDefaultCategories: Complete");
   } catch (error) {
     // If categories already exist (ConstraintError), silently ignore
     // This can happen if multiple components try to initialize simultaneously
-    console.warn('[DB] initializeDefaultCategories: Caught error:', error);
-    if (error instanceof Error && error.name !== 'ConstraintError') {
-      console.error('[DB] initializeDefaultCategories: Non-constraint error:', error);
+    console.warn("[DB] initializeDefaultCategories: Caught error:", error);
+    if (error instanceof Error && error.name !== "ConstraintError") {
+      console.error("[DB] initializeDefaultCategories: Non-constraint error:", error);
     } else {
-      console.warn('[DB] initializeDefaultCategories: ConstraintError (expected), ignoring');
+      console.warn("[DB] initializeDefaultCategories: ConstraintError (expected), ignoring");
     }
   }
 }
@@ -815,7 +847,7 @@ export async function generateThumbnail(
   maxHeight: number = 200
 ): Promise<Blob | null> {
   // Only generate thumbnails for images
-  if (!file.type.startsWith('image/')) {
+  if (!file.type.startsWith("image/")) {
     return null;
   }
 
@@ -824,16 +856,16 @@ export async function generateThumbnail(
     reader.onload = (e) => {
       const img = new Image();
       img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
         if (!ctx) {
           resolve(null);
           return;
         }
 
         // Calculate new dimensions while maintaining aspect ratio
-        let {width} = img;
-        let {height} = img;
+        let { width } = img;
+        let { height } = img;
 
         if (width > height) {
           if (width > maxWidth) {
@@ -855,7 +887,7 @@ export async function generateThumbnail(
 
         canvas.toBlob(
           (blob) => resolve(blob),
-          'image/jpeg',
+          "image/jpeg",
           0.7 // 70% quality for thumbnails
         );
       };
@@ -871,10 +903,7 @@ export async function generateThumbnail(
  * @param file The receipt file to store
  * @returns Promise<string> The receipt ID
  */
-export async function storeReceipt(
-  transactionId: string,
-  file: File
-): Promise<string> {
+export async function storeReceipt(transactionId: string, file: File): Promise<string> {
   try {
     const receiptId = `receipt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
@@ -893,7 +922,7 @@ export async function storeReceipt(
       uploadedAt: new Date(),
       metadata: {
         // Will be populated later for images after loading
-      }
+      },
     };
 
     // Store in database
@@ -909,7 +938,7 @@ export async function storeReceipt(
 
     return receiptId;
   } catch (error) {
-    console.error('Error storing receipt:', error);
+    console.error("Error storing receipt:", error);
     throw error;
   }
 }
@@ -919,13 +948,11 @@ export async function storeReceipt(
  * @param transactionId The transaction ID
  * @returns Promise<Receipt[]> Array of receipts
  */
-export async function getTransactionReceipts(
-  transactionId: string
-): Promise<Receipt[]> {
+export async function getTransactionReceipts(transactionId: string): Promise<Receipt[]> {
   try {
-    return await db.receipts.where('transactionId').equals(transactionId).toArray();
+    return await db.receipts.where("transactionId").equals(transactionId).toArray();
   } catch (error) {
-    console.error('Error fetching receipts:', error);
+    console.error("Error fetching receipts:", error);
     return [];
   }
 }
@@ -935,10 +962,7 @@ export async function getTransactionReceipts(
  * @param receiptId The receipt ID to delete
  * @param transactionId The associated transaction ID
  */
-export async function deleteReceipt(
-  receiptId: string,
-  transactionId: string
-): Promise<void> {
+export async function deleteReceipt(receiptId: string, transactionId: string): Promise<void> {
   try {
     // Delete from receipts table
     await db.receipts.delete(receiptId);
@@ -946,11 +970,11 @@ export async function deleteReceipt(
     // Update transaction to remove receipt ID
     const transaction = await db.transactions.get(transactionId);
     if (transaction?.receiptIds) {
-      const updatedReceiptIds = transaction.receiptIds.filter(id => id !== receiptId);
+      const updatedReceiptIds = transaction.receiptIds.filter((id) => id !== receiptId);
       await db.transactions.update(transactionId, { receiptIds: updatedReceiptIds });
     }
   } catch (error) {
-    console.error('Error deleting receipt:', error);
+    console.error("Error deleting receipt:", error);
     throw error;
   }
 }
@@ -982,7 +1006,7 @@ export function getThumbnailBlobUrl(receipt: Receipt): string | null {
  * @returns Promise<string> The account ID
  */
 export async function createInvestmentAccount(
-  account: Omit<InvestmentAccount, 'id' | 'createdAt' | 'updatedAt'>
+  account: Omit<InvestmentAccount, "id" | "createdAt" | "updatedAt">
 ): Promise<string> {
   try {
     const accountId = `inv_acc_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -998,7 +1022,7 @@ export async function createInvestmentAccount(
     await db.investmentAccounts.add(newAccount);
     return accountId;
   } catch (error) {
-    console.error('Error creating investment account:', error);
+    console.error("Error creating investment account:", error);
     throw error;
   }
 }
@@ -1011,7 +1035,7 @@ export async function getInvestmentAccounts(): Promise<InvestmentAccount[]> {
   try {
     return await db.investmentAccounts.toArray();
   } catch (error) {
-    console.error('Error fetching investment accounts:', error);
+    console.error("Error fetching investment accounts:", error);
     return [];
   }
 }
@@ -1027,7 +1051,7 @@ export async function getInvestmentAccount(
   try {
     return await db.investmentAccounts.get(accountId);
   } catch (error) {
-    console.error('Error fetching investment account:', error);
+    console.error("Error fetching investment account:", error);
     return undefined;
   }
 }
@@ -1039,7 +1063,7 @@ export async function getInvestmentAccount(
  */
 export async function updateInvestmentAccount(
   accountId: string,
-  updates: Partial<Omit<InvestmentAccount, 'id' | 'createdAt'>>
+  updates: Partial<Omit<InvestmentAccount, "id" | "createdAt">>
 ): Promise<void> {
   try {
     await db.investmentAccounts.update(accountId, {
@@ -1047,7 +1071,7 @@ export async function updateInvestmentAccount(
       updatedAt: new Date(),
     });
   } catch (error) {
-    console.error('Error updating investment account:', error);
+    console.error("Error updating investment account:", error);
     throw error;
   }
 }
@@ -1059,11 +1083,11 @@ export async function updateInvestmentAccount(
 export async function deleteInvestmentAccount(accountId: string): Promise<void> {
   try {
     // Delete all holdings for this account
-    await db.holdings.where('accountId').equals(accountId).delete();
+    await db.holdings.where("accountId").equals(accountId).delete();
     // Delete the account
     await db.investmentAccounts.delete(accountId);
   } catch (error) {
-    console.error('Error deleting investment account:', error);
+    console.error("Error deleting investment account:", error);
     throw error;
   }
 }
@@ -1076,7 +1100,7 @@ export async function deleteInvestmentAccount(accountId: string): Promise<void> 
  * @returns Promise<string> The holding ID
  */
 export async function addHolding(
-  holding: Omit<Holding, 'id' | 'createdAt' | 'updatedAt'>
+  holding: Omit<Holding, "id" | "createdAt" | "updatedAt">
 ): Promise<string> {
   try {
     const holdingId = `holding_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -1092,7 +1116,7 @@ export async function addHolding(
     await db.holdings.add(newHolding);
     return holdingId;
   } catch (error) {
-    console.error('Error adding holding:', error);
+    console.error("Error adding holding:", error);
     throw error;
   }
 }
@@ -1104,9 +1128,9 @@ export async function addHolding(
  */
 export async function getAccountHoldings(accountId: string): Promise<Holding[]> {
   try {
-    return await db.holdings.where('accountId').equals(accountId).toArray();
+    return await db.holdings.where("accountId").equals(accountId).toArray();
   } catch (error) {
-    console.error('Error fetching holdings:', error);
+    console.error("Error fetching holdings:", error);
     return [];
   }
 }
@@ -1119,7 +1143,7 @@ export async function getAllHoldings(): Promise<Holding[]> {
   try {
     return await db.holdings.toArray();
   } catch (error) {
-    console.error('Error fetching all holdings:', error);
+    console.error("Error fetching all holdings:", error);
     return [];
   }
 }
@@ -1133,7 +1157,7 @@ export async function getHolding(holdingId: string): Promise<Holding | undefined
   try {
     return await db.holdings.get(holdingId);
   } catch (error) {
-    console.error('Error fetching holding:', error);
+    console.error("Error fetching holding:", error);
     return undefined;
   }
 }
@@ -1145,7 +1169,7 @@ export async function getHolding(holdingId: string): Promise<Holding | undefined
  */
 export async function updateHolding(
   holdingId: string,
-  updates: Partial<Omit<Holding, 'id' | 'accountId' | 'createdAt'>>
+  updates: Partial<Omit<Holding, "id" | "accountId" | "createdAt">>
 ): Promise<void> {
   try {
     await db.holdings.update(holdingId, {
@@ -1153,7 +1177,7 @@ export async function updateHolding(
       updatedAt: new Date(),
     });
   } catch (error) {
-    console.error('Error updating holding:', error);
+    console.error("Error updating holding:", error);
     throw error;
   }
 }
@@ -1166,7 +1190,7 @@ export async function deleteHolding(holdingId: string): Promise<void> {
   try {
     await db.holdings.delete(holdingId);
   } catch (error) {
-    console.error('Error deleting holding:', error);
+    console.error("Error deleting holding:", error);
     throw error;
   }
 }
@@ -1185,10 +1209,10 @@ export async function calculateAccountValue(
     const holdings = await getAccountHoldings(accountId);
     return holdings.reduce((total, holding) => {
       const currentPrice = currentPrices[holding.symbol] || holding.purchasePrice;
-      return total + (holding.quantity * currentPrice);
+      return total + holding.quantity * currentPrice;
     }, 0);
   } catch (error) {
-    console.error('Error calculating account value:', error);
+    console.error("Error calculating account value:", error);
     return 0;
   }
 }
@@ -1205,25 +1229,25 @@ export async function calculateAccountGainLoss(
 ): Promise<{ gainLoss: number; percentage: number }> {
   try {
     const holdings = await getAccountHoldings(accountId);
-    
+
     let totalCost = 0;
     let totalValue = 0;
-    
+
     holdings.forEach((holding) => {
       const cost = holding.quantity * holding.purchasePrice;
       const currentPrice = currentPrices[holding.symbol] || holding.purchasePrice;
       const value = holding.quantity * currentPrice;
-      
+
       totalCost += cost;
       totalValue += value;
     });
-    
+
     const gainLoss = totalValue - totalCost;
     const percentage = totalCost > 0 ? (gainLoss / totalCost) * 100 : 0;
-    
+
     return { gainLoss, percentage };
   } catch (error) {
-    console.error('Error calculating gain/loss:', error);
+    console.error("Error calculating gain/loss:", error);
     return { gainLoss: 0, percentage: 0 };
   }
 }
@@ -1267,7 +1291,7 @@ export async function splitTransaction(
       await db.transactions.add(childTransaction);
     }
   } catch (error) {
-    console.error('Error splitting transaction:', error);
+    console.error("Error splitting transaction:", error);
     throw error;
   }
 }
@@ -1280,17 +1304,17 @@ export async function unsplitTransaction(originalTransactionId: string): Promise
   try {
     // 1. Find all child transactions
     const children = await db.transactions
-      .where('splitFromId')
+      .where("splitFromId")
       .equals(originalTransactionId)
       .toArray();
 
     // 2. Delete all children
-    await db.transactions.bulkDelete(children.map(child => child.id));
+    await db.transactions.bulkDelete(children.map((child) => child.id));
 
     // 3. Restore original transaction
     await db.transactions.update(originalTransactionId, { isSplit: false });
   } catch (error) {
-    console.error('Error unsplitting transaction:', error);
+    console.error("Error unsplitting transaction:", error);
     throw error;
   }
 }
@@ -1302,12 +1326,9 @@ export async function unsplitTransaction(originalTransactionId: string): Promise
  */
 export async function getSplitChildren(parentTransactionId: string): Promise<Transaction[]> {
   try {
-    return await db.transactions
-      .where('splitFromId')
-      .equals(parentTransactionId)
-      .toArray();
+    return await db.transactions.where("splitFromId").equals(parentTransactionId).toArray();
   } catch (error) {
-    console.error('Error fetching split children:', error);
+    console.error("Error fetching split children:", error);
     return [];
   }
 }
@@ -1322,7 +1343,7 @@ export async function isTransactionSplit(transactionId: string): Promise<boolean
     const transaction = await db.transactions.get(transactionId);
     return transaction?.isSplit || false;
   } catch (error) {
-    console.error('Error checking split status:', error);
+    console.error("Error checking split status:", error);
     return false;
   }
 }
@@ -1346,7 +1367,7 @@ export async function storeAnomalyFeedback(
 ): Promise<string> {
   try {
     const feedbackId = `anomaly_feedback_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    
+
     const feedback: AnomalyFeedback = {
       id: feedbackId,
       transactionId,
@@ -1360,7 +1381,7 @@ export async function storeAnomalyFeedback(
     await db.anomalyFeedback.add(feedback);
     return feedbackId;
   } catch (error) {
-    console.error('Error storing anomaly feedback:', error);
+    console.error("Error storing anomaly feedback:", error);
     throw error;
   }
 }
@@ -1370,14 +1391,13 @@ export async function storeAnomalyFeedback(
  * @param transactionId The transaction ID
  * @returns Promise<AnomalyFeedback | undefined> The feedback or undefined
  */
-export async function getAnomalyFeedback(transactionId: string): Promise<AnomalyFeedback | undefined> {
+export async function getAnomalyFeedback(
+  transactionId: string
+): Promise<AnomalyFeedback | undefined> {
   try {
-    return await db.anomalyFeedback
-      .where('transactionId')
-      .equals(transactionId)
-      .first();
+    return await db.anomalyFeedback.where("transactionId").equals(transactionId).first();
   } catch (error) {
-    console.error('Error fetching anomaly feedback:', error);
+    console.error("Error fetching anomaly feedback:", error);
     return undefined;
   }
 }
@@ -1394,17 +1414,17 @@ export async function getAnomalyFeedbackForContext(
 ): Promise<AnomalyFeedback[]> {
   try {
     let query = db.anomalyFeedback.toCollection();
-    
+
     if (merchant) {
-      query = query.filter(f => f.merchant === merchant);
+      query = query.filter((f) => f.merchant === merchant);
     }
     if (category) {
-      query = query.filter(f => f.category === category);
+      query = query.filter((f) => f.category === category);
     }
-    
+
     return await query.toArray();
   } catch (error) {
-    console.error('Error fetching anomaly feedback:', error);
+    console.error("Error fetching anomaly feedback:", error);
     return [];
   }
 }
@@ -1416,11 +1436,11 @@ export async function getAnomalyFeedbackForContext(
  * @param accuracy The accuracy data to store
  */
 export async function storePredictionAccuracy(
-  accuracy: Omit<PredictionAccuracy, 'id'>
+  accuracy: Omit<PredictionAccuracy, "id">
 ): Promise<string> {
   try {
     const accuracyId = `prediction_accuracy_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    
+
     const record: PredictionAccuracy = {
       id: accuracyId,
       ...accuracy,
@@ -1429,7 +1449,7 @@ export async function storePredictionAccuracy(
     await db.predictionAccuracy.add(record);
     return accuracyId;
   } catch (error) {
-    console.error('Error storing prediction accuracy:', error);
+    console.error("Error storing prediction accuracy:", error);
     throw error;
   }
 }
@@ -1446,14 +1466,14 @@ export async function getPredictionAccuracy(
   try {
     const cutoffDate = new Date();
     cutoffDate.setMonth(cutoffDate.getMonth() - monthsBack);
-    
+
     return await db.predictionAccuracy
-      .where('category')
+      .where("category")
       .equals(category)
-      .filter(acc => acc.month >= cutoffDate)
-      .sortBy('month');
+      .filter((acc) => acc.month >= cutoffDate)
+      .sortBy("month");
   } catch (error) {
-    console.error('Error fetching prediction accuracy:', error);
+    console.error("Error fetching prediction accuracy:", error);
     return [];
   }
 }
@@ -1468,21 +1488,22 @@ export async function getOverallPredictionAccuracy(): Promise<{
 }> {
   try {
     const allRecords = await db.predictionAccuracy.toArray();
-    
+
     if (allRecords.length === 0) {
       return { averageError: 0, averageErrorPercent: 0, totalRecords: 0 };
     }
-    
+
     const avgError = allRecords.reduce((sum, r) => sum + r.error, 0) / allRecords.length;
-    const avgErrorPercent = allRecords.reduce((sum, r) => sum + r.errorPercent, 0) / allRecords.length;
-    
+    const avgErrorPercent =
+      allRecords.reduce((sum, r) => sum + r.errorPercent, 0) / allRecords.length;
+
     return {
       averageError: avgError,
       averageErrorPercent: avgErrorPercent,
       totalRecords: allRecords.length,
     };
   } catch (error) {
-    console.error('Error calculating overall accuracy:', error);
+    console.error("Error calculating overall accuracy:", error);
     return { averageError: 0, averageErrorPercent: 0, totalRecords: 0 };
   }
 }
@@ -1506,12 +1527,12 @@ export async function addEncryptedTransaction(transaction: Transaction): Promise
       await db.transactions.add(transaction);
       return transaction.id;
     }
-    
+
     const encrypted = await encryptTransaction(transaction);
     await db.transactions.add(encrypted as Transaction);
     return transaction.id;
   } catch (error) {
-    console.error('Error adding encrypted transaction:', error);
+    console.error("Error adding encrypted transaction:", error);
     throw error;
   }
 }
@@ -1529,24 +1550,27 @@ export async function updateEncryptedTransaction(
       await db.transactions.update(id, updates);
       return;
     }
-    
+
     // Encrypt only the fields that are being updated
     const encryptedUpdates: any = {};
     for (const [key, value] of Object.entries(updates)) {
-      if (key === 'amount' && typeof value === 'number') {
-        const { encryptNumber } = await import('./encryption');
+      if (key === "amount" && typeof value === "number") {
+        const { encryptNumber } = await import("./encryption");
         encryptedUpdates[key] = await encryptNumber(value);
-      } else if ((key === 'description' || key === 'notes' || key === 'merchant') && typeof value === 'string') {
-        const { encryptValue } = await import('./encryption');
+      } else if (
+        (key === "description" || key === "notes" || key === "merchant") &&
+        typeof value === "string"
+      ) {
+        const { encryptValue } = await import("./encryption");
         encryptedUpdates[key] = await encryptValue(value);
       } else {
         encryptedUpdates[key] = value;
       }
     }
-    
+
     await db.transactions.update(id, encryptedUpdates);
   } catch (error) {
-    console.error('Error updating encrypted transaction:', error);
+    console.error("Error updating encrypted transaction:", error);
     throw error;
   }
 }
@@ -1558,14 +1582,14 @@ export async function getEncryptedTransaction(id: string): Promise<Transaction |
   try {
     const transaction = await db.transactions.get(id);
     if (!transaction) return undefined;
-    
+
     if (!isEncryptionAvailable()) {
       return transaction;
     }
-    
-    return await decryptTransaction(transaction) as Transaction;
+
+    return (await decryptTransaction(transaction)) as Transaction;
   } catch (error) {
-    console.error('Error getting encrypted transaction:', error);
+    console.error("Error getting encrypted transaction:", error);
     return undefined;
   }
 }
@@ -1576,19 +1600,17 @@ export async function getEncryptedTransaction(id: string): Promise<Transaction |
 export async function getAllEncryptedTransactions(): Promise<Transaction[]> {
   try {
     const transactions = await db.transactions.toArray();
-    
+
     if (!isEncryptionAvailable()) {
       return transactions;
     }
-    
+
     // Decrypt all transactions in parallel
-    const decrypted = await Promise.all(
-      transactions.map(tx => decryptTransaction(tx))
-    );
-    
+    const decrypted = await Promise.all(transactions.map((tx) => decryptTransaction(tx)));
+
     return decrypted as Transaction[];
   } catch (error) {
-    console.error('Error getting encrypted transactions:', error);
+    console.error("Error getting encrypted transactions:", error);
     return [];
   }
 }
@@ -1602,15 +1624,13 @@ export async function bulkAddEncryptedTransactions(transactions: Transaction[]):
       await db.transactions.bulkAdd(transactions);
       return;
     }
-    
+
     // Encrypt all transactions in parallel
-    const encrypted = await Promise.all(
-      transactions.map(tx => encryptTransaction(tx))
-    );
-    
+    const encrypted = await Promise.all(transactions.map((tx) => encryptTransaction(tx)));
+
     await db.transactions.bulkAdd(encrypted as Transaction[]);
   } catch (error) {
-    console.error('Error bulk adding encrypted transactions:', error);
+    console.error("Error bulk adding encrypted transactions:", error);
     throw error;
   }
 }
@@ -1628,12 +1648,12 @@ export async function addEncryptedAccount(account: Account): Promise<string> {
       await db.accounts.add(account);
       return account.id;
     }
-    
+
     const encrypted = await encryptAccount(account);
     await db.accounts.add(encrypted as Account);
     return account.id;
   } catch (error) {
-    console.error('Error adding encrypted account:', error);
+    console.error("Error adding encrypted account:", error);
     throw error;
   }
 }
@@ -1641,30 +1661,30 @@ export async function addEncryptedAccount(account: Account): Promise<string> {
 /**
  * Update an account with encryption
  */
-export async function updateEncryptedAccount(
-  id: string,
-  updates: Partial<Account>
-): Promise<void> {
+export async function updateEncryptedAccount(id: string, updates: Partial<Account>): Promise<void> {
   try {
     if (!isEncryptionAvailable()) {
       await db.accounts.update(id, updates);
       return;
     }
-    
+
     // Encrypt only the fields that are being updated
     const encryptedUpdates: any = {};
     for (const [key, value] of Object.entries(updates)) {
-      if ((key === 'name' || key === 'accountNumber' || key === 'institution') && typeof value === 'string') {
-        const { encryptValue } = await import('./encryption');
+      if (
+        (key === "name" || key === "accountNumber" || key === "institution") &&
+        typeof value === "string"
+      ) {
+        const { encryptValue } = await import("./encryption");
         encryptedUpdates[key] = await encryptValue(value);
       } else {
         encryptedUpdates[key] = value;
       }
     }
-    
+
     await db.accounts.update(id, encryptedUpdates);
   } catch (error) {
-    console.error('Error updating encrypted account:', error);
+    console.error("Error updating encrypted account:", error);
     throw error;
   }
 }
@@ -1676,14 +1696,14 @@ export async function getEncryptedAccount(id: string): Promise<Account | undefin
   try {
     const account = await db.accounts.get(id);
     if (!account) return undefined;
-    
+
     if (!isEncryptionAvailable()) {
       return account;
     }
-    
-    return await decryptAccount(account) as Account;
+
+    return (await decryptAccount(account)) as Account;
   } catch (error) {
-    console.error('Error getting encrypted account:', error);
+    console.error("Error getting encrypted account:", error);
     return undefined;
   }
 }
@@ -1700,13 +1720,11 @@ export async function getAllEncryptedAccounts(): Promise<Account[]> {
     }
 
     // Decrypt all accounts in parallel
-    const decrypted = await Promise.all(
-      accounts.map(acc => decryptAccount(acc))
-    );
+    const decrypted = await Promise.all(accounts.map((acc) => decryptAccount(acc)));
 
     return decrypted as Account[];
   } catch (error) {
-    console.error('Error getting encrypted accounts:', error);
+    console.error("Error getting encrypted accounts:", error);
     return [];
   }
 }
@@ -1720,9 +1738,7 @@ export async function getAllEncryptedAccounts(): Promise<Account[]> {
  * @param metadata The import metadata to save
  * @returns Promise<string> The import ID
  */
-export async function saveImportMetadata(
-  metadata: Omit<ImportMetadata, 'id'>
-): Promise<string> {
+export async function saveImportMetadata(metadata: Omit<ImportMetadata, "id">): Promise<string> {
   try {
     const importId = `import_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
@@ -1734,7 +1750,7 @@ export async function saveImportMetadata(
     await db.importHistory.add(record);
     return importId;
   } catch (error) {
-    console.error('Error saving import metadata:', error);
+    console.error("Error saving import metadata:", error);
     throw error;
   }
 }
@@ -1746,13 +1762,9 @@ export async function saveImportMetadata(
  */
 export async function getImportHistory(limit: number = 10): Promise<ImportMetadata[]> {
   try {
-    return await db.importHistory
-      .orderBy('importDate')
-      .reverse()
-      .limit(limit)
-      .toArray();
+    return await db.importHistory.orderBy("importDate").reverse().limit(limit).toArray();
   } catch (error) {
-    console.error('Error fetching import history:', error);
+    console.error("Error fetching import history:", error);
     return [];
   }
 }
@@ -1766,7 +1778,7 @@ export async function getImportMetadata(importId: string): Promise<ImportMetadat
   try {
     return await db.importHistory.get(importId);
   } catch (error) {
-    console.error('Error fetching import metadata:', error);
+    console.error("Error fetching import metadata:", error);
     return undefined;
   }
 }
@@ -1785,7 +1797,7 @@ export async function addSubscription(subscription: Subscription): Promise<strin
     await db.subscriptions.add(subscription);
     return subscription.id;
   } catch (error) {
-    console.error('Error adding subscription:', error);
+    console.error("Error adding subscription:", error);
     throw error;
   }
 }
@@ -1805,7 +1817,7 @@ export async function updateSubscription(
       updatedAt: new Date(),
     });
   } catch (error) {
-    console.error('Error updating subscription:', error);
+    console.error("Error updating subscription:", error);
     throw error;
   }
 }
@@ -1818,7 +1830,7 @@ export async function deleteSubscription(id: string): Promise<void> {
   try {
     await db.subscriptions.delete(id);
   } catch (error) {
-    console.error('Error deleting subscription:', error);
+    console.error("Error deleting subscription:", error);
     throw error;
   }
 }
@@ -1832,7 +1844,7 @@ export async function getSubscription(id: string): Promise<Subscription | undefi
   try {
     return await db.subscriptions.get(id);
   } catch (error) {
-    console.error('Error fetching subscription:', error);
+    console.error("Error fetching subscription:", error);
     return undefined;
   }
 }
@@ -1845,7 +1857,7 @@ export async function getAllSubscriptions(): Promise<Subscription[]> {
   try {
     return await db.subscriptions.toArray();
   } catch (error) {
-    console.error('Error fetching subscriptions:', error);
+    console.error("Error fetching subscriptions:", error);
     return [];
   }
 }
@@ -1856,12 +1868,12 @@ export async function getAllSubscriptions(): Promise<Subscription[]> {
  * @returns Promise<Subscription[]>
  */
 export async function getSubscriptionsByStatus(
-  status: Subscription['status']
+  status: Subscription["status"]
 ): Promise<Subscription[]> {
   try {
-    return await db.subscriptions.where('status').equals(status).toArray();
+    return await db.subscriptions.where("status").equals(status).toArray();
   } catch (error) {
-    console.error('Error fetching subscriptions by status:', error);
+    console.error("Error fetching subscriptions by status:", error);
     return [];
   }
 }
@@ -1877,17 +1889,14 @@ export async function getUpcomingSubscriptions(daysAhead: number = 7): Promise<S
     const futureDate = new Date();
     futureDate.setDate(futureDate.getDate() + daysAhead);
 
-    const all = await db.subscriptions
-      .where('status')
-      .anyOf(['active', 'trial'])
-      .toArray();
+    const all = await db.subscriptions.where("status").anyOf(["active", "trial"]).toArray();
 
-    return all.filter(sub => {
+    return all.filter((sub) => {
       const nextBilling = new Date(sub.nextBillingDate);
       return nextBilling >= now && nextBilling <= futureDate;
     });
   } catch (error) {
-    console.error('Error fetching upcoming subscriptions:', error);
+    console.error("Error fetching upcoming subscriptions:", error);
     return [];
   }
 }
@@ -1901,12 +1910,9 @@ export async function getSubscriptionByMerchantToken(
   merchantToken: string
 ): Promise<Subscription | undefined> {
   try {
-    return await db.subscriptions
-      .where('merchantToken')
-      .equals(merchantToken)
-      .first();
+    return await db.subscriptions.where("merchantToken").equals(merchantToken).first();
   } catch (error) {
-    console.error('Error fetching subscription by merchant token:', error);
+    console.error("Error fetching subscription by merchant token:", error);
     return undefined;
   }
 }
@@ -1918,12 +1924,12 @@ export async function getSubscriptionByMerchantToken(
 export async function cancelSubscription(id: string): Promise<void> {
   try {
     await db.subscriptions.update(id, {
-      status: 'cancelled',
+      status: "cancelled",
       cancelledDate: new Date(),
       updatedAt: new Date(),
     });
   } catch (error) {
-    console.error('Error cancelling subscription:', error);
+    console.error("Error cancelling subscription:", error);
     throw error;
   }
 }
@@ -1935,11 +1941,11 @@ export async function cancelSubscription(id: string): Promise<void> {
 export async function pauseSubscription(id: string): Promise<void> {
   try {
     await db.subscriptions.update(id, {
-      status: 'paused',
+      status: "paused",
       updatedAt: new Date(),
     });
   } catch (error) {
-    console.error('Error pausing subscription:', error);
+    console.error("Error pausing subscription:", error);
     throw error;
   }
 }
@@ -1951,11 +1957,11 @@ export async function pauseSubscription(id: string): Promise<void> {
 export async function resumeSubscription(id: string): Promise<void> {
   try {
     await db.subscriptions.update(id, {
-      status: 'active',
+      status: "active",
       updatedAt: new Date(),
     });
   } catch (error) {
-    console.error('Error resuming subscription:', error);
+    console.error("Error resuming subscription:", error);
     throw error;
   }
 }
@@ -1966,29 +1972,26 @@ export async function resumeSubscription(id: string): Promise<void> {
  */
 export async function calculateTotalMonthlySubscriptionCost(): Promise<number> {
   try {
-    const active = await db.subscriptions
-      .where('status')
-      .anyOf(['active', 'trial'])
-      .toArray();
+    const active = await db.subscriptions.where("status").anyOf(["active", "trial"]).toArray();
 
     return active.reduce((total, sub) => {
       switch (sub.billingCycle) {
-        case 'weekly':
+        case "weekly":
           return total + sub.amount * 4.33; // avg weeks per month
-        case 'bi-weekly':
+        case "bi-weekly":
           return total + sub.amount * 2.17; // avg bi-weekly periods per month (26/12)
-        case 'monthly':
+        case "monthly":
           return total + sub.amount;
-        case 'quarterly':
+        case "quarterly":
           return total + sub.amount / 3;
-        case 'annual':
+        case "annual":
           return total + sub.amount / 12;
         default:
           return total + sub.amount;
       }
     }, 0);
   } catch (error) {
-    console.error('Error calculating subscription cost:', error);
+    console.error("Error calculating subscription cost:", error);
     return 0;
   }
 }
@@ -2007,14 +2010,14 @@ export async function linkTransactionsToSubscription(
     if (!subscription) return;
 
     const existingIds = new Set(subscription.linkedTransactionIds);
-    transactionIds.forEach(id => existingIds.add(id));
+    transactionIds.forEach((id) => existingIds.add(id));
 
     await db.subscriptions.update(subscriptionId, {
       linkedTransactionIds: Array.from(existingIds),
       updatedAt: new Date(),
     });
   } catch (error) {
-    console.error('Error linking transactions to subscription:', error);
+    console.error("Error linking transactions to subscription:", error);
     throw error;
   }
 }
@@ -2044,7 +2047,7 @@ export async function excludeSubscription(
     };
     await db.excludedSubscriptions.add(excluded);
   } catch (error) {
-    console.error('Error excluding subscription:', error);
+    console.error("Error excluding subscription:", error);
     throw error;
   }
 }
@@ -2056,11 +2059,11 @@ export async function excludeSubscription(
 export async function unexcludeSubscription(merchantToken: string): Promise<void> {
   try {
     await db.excludedSubscriptions
-      .where('merchantToken')
+      .where("merchantToken")
       .equals(merchantToken.toLowerCase())
       .delete();
   } catch (error) {
-    console.error('Error removing subscription exclusion:', error);
+    console.error("Error removing subscription exclusion:", error);
     throw error;
   }
 }
@@ -2072,9 +2075,9 @@ export async function unexcludeSubscription(merchantToken: string): Promise<void
 export async function getExcludedMerchantTokens(): Promise<Set<string>> {
   try {
     const excluded = await db.excludedSubscriptions.toArray();
-    return new Set(excluded.map(e => e.merchantToken.toLowerCase()));
+    return new Set(excluded.map((e) => e.merchantToken.toLowerCase()));
   } catch (error) {
-    console.error('Error fetching excluded subscriptions:', error);
+    console.error("Error fetching excluded subscriptions:", error);
     return new Set();
   }
 }
@@ -2085,9 +2088,9 @@ export async function getExcludedMerchantTokens(): Promise<Set<string>> {
  */
 export async function getAllExcludedSubscriptions(): Promise<ExcludedSubscription[]> {
   try {
-    return await db.excludedSubscriptions.orderBy('excludedAt').reverse().toArray();
+    return await db.excludedSubscriptions.orderBy("excludedAt").reverse().toArray();
   } catch (error) {
-    console.error('Error fetching excluded subscriptions:', error);
+    console.error("Error fetching excluded subscriptions:", error);
     return [];
   }
 }
@@ -2099,12 +2102,12 @@ export async function getAllExcludedSubscriptions(): Promise<ExcludedSubscriptio
 export async function isSubscriptionExcluded(merchantToken: string): Promise<boolean> {
   try {
     const excluded = await db.excludedSubscriptions
-      .where('merchantToken')
+      .where("merchantToken")
       .equals(merchantToken.toLowerCase())
       .first();
     return !!excluded;
   } catch (error) {
-    console.error('Error checking subscription exclusion:', error);
+    console.error("Error checking subscription exclusion:", error);
     return false;
   }
 }
@@ -2119,7 +2122,7 @@ export async function isSubscriptionExcluded(merchantToken: string): Promise<boo
  * @returns Promise<string> The notification ID
  */
 export async function addNotification(
-  notification: Omit<InAppNotification, 'id' | 'createdAt'>
+  notification: Omit<InAppNotification, "id" | "createdAt">
 ): Promise<string> {
   try {
     const notificationId = `notif_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -2133,7 +2136,7 @@ export async function addNotification(
     await db.inAppNotifications.add(newNotification);
     return notificationId;
   } catch (error) {
-    console.error('Error adding notification:', error);
+    console.error("Error adding notification:", error);
     throw error;
   }
 }
@@ -2144,19 +2147,19 @@ export async function addNotification(
  * @returns Promise<InAppNotification[]>
  */
 export async function getNotifications(
-  status?: InAppNotification['status']
+  status?: InAppNotification["status"]
 ): Promise<InAppNotification[]> {
   try {
-    const query = db.inAppNotifications.orderBy('createdAt').reverse();
+    const query = db.inAppNotifications.orderBy("createdAt").reverse();
 
     if (status) {
       const all = await query.toArray();
-      return all.filter(n => n.status === status);
+      return all.filter((n) => n.status === status);
     }
 
     return await query.toArray();
   } catch (error) {
-    console.error('Error fetching notifications:', error);
+    console.error("Error fetching notifications:", error);
     return [];
   }
 }
@@ -2167,12 +2170,9 @@ export async function getNotifications(
  */
 export async function getUnreadNotificationCount(): Promise<number> {
   try {
-    return await db.inAppNotifications
-      .where('status')
-      .equals('unread')
-      .count();
+    return await db.inAppNotifications.where("status").equals("unread").count();
   } catch (error) {
-    console.error('Error counting unread notifications:', error);
+    console.error("Error counting unread notifications:", error);
     return 0;
   }
 }
@@ -2184,14 +2184,11 @@ export async function getUnreadNotificationCount(): Promise<number> {
 export async function getDueNotifications(): Promise<InAppNotification[]> {
   try {
     const now = new Date();
-    const snoozed = await db.inAppNotifications
-      .where('status')
-      .equals('snoozed')
-      .toArray();
+    const snoozed = await db.inAppNotifications.where("status").equals("snoozed").toArray();
 
-    return snoozed.filter(n => n.snoozedUntil && n.snoozedUntil <= now);
+    return snoozed.filter((n) => n.snoozedUntil && n.snoozedUntil <= now);
   } catch (error) {
-    console.error('Error fetching due notifications:', error);
+    console.error("Error fetching due notifications:", error);
     return [];
   }
 }
@@ -2203,12 +2200,12 @@ export async function getDueNotifications(): Promise<InAppNotification[]> {
  */
 export async function updateNotification(
   id: string,
-  updates: Partial<Omit<InAppNotification, 'id' | 'createdAt'>>
+  updates: Partial<Omit<InAppNotification, "id" | "createdAt">>
 ): Promise<void> {
   try {
     await db.inAppNotifications.update(id, updates);
   } catch (error) {
-    console.error('Error updating notification:', error);
+    console.error("Error updating notification:", error);
     throw error;
   }
 }
@@ -2220,11 +2217,11 @@ export async function updateNotification(
 export async function markNotificationAsRead(id: string): Promise<void> {
   try {
     await db.inAppNotifications.update(id, {
-      status: 'read',
+      status: "read",
       readAt: new Date(),
     });
   } catch (error) {
-    console.error('Error marking notification as read:', error);
+    console.error("Error marking notification as read:", error);
     throw error;
   }
 }
@@ -2234,22 +2231,19 @@ export async function markNotificationAsRead(id: string): Promise<void> {
  */
 export async function markAllNotificationsAsRead(): Promise<void> {
   try {
-    const unread = await db.inAppNotifications
-      .where('status')
-      .equals('unread')
-      .toArray();
+    const unread = await db.inAppNotifications.where("status").equals("unread").toArray();
 
     const now = new Date();
     await Promise.all(
-      unread.map(n =>
+      unread.map((n) =>
         db.inAppNotifications.update(n.id, {
-          status: 'read',
+          status: "read",
           readAt: now,
         })
       )
     );
   } catch (error) {
-    console.error('Error marking all notifications as read:', error);
+    console.error("Error marking all notifications as read:", error);
     throw error;
   }
 }
@@ -2259,17 +2253,14 @@ export async function markAllNotificationsAsRead(): Promise<void> {
  * @param id The notification ID
  * @param snoozedUntil When to show the notification again
  */
-export async function snoozeNotification(
-  id: string,
-  snoozedUntil: Date
-): Promise<void> {
+export async function snoozeNotification(id: string, snoozedUntil: Date): Promise<void> {
   try {
     await db.inAppNotifications.update(id, {
-      status: 'snoozed',
+      status: "snoozed",
       snoozedUntil,
     });
   } catch (error) {
-    console.error('Error snoozing notification:', error);
+    console.error("Error snoozing notification:", error);
     throw error;
   }
 }
@@ -2281,10 +2272,10 @@ export async function snoozeNotification(
 export async function dismissNotification(id: string): Promise<void> {
   try {
     await db.inAppNotifications.update(id, {
-      status: 'dismissed',
+      status: "dismissed",
     });
   } catch (error) {
-    console.error('Error dismissing notification:', error);
+    console.error("Error dismissing notification:", error);
     throw error;
   }
 }
@@ -2297,7 +2288,7 @@ export async function deleteNotification(id: string): Promise<void> {
   try {
     await db.inAppNotifications.delete(id);
   } catch (error) {
-    console.error('Error deleting notification:', error);
+    console.error("Error deleting notification:", error);
     throw error;
   }
 }
@@ -2307,12 +2298,9 @@ export async function deleteNotification(id: string): Promise<void> {
  */
 export async function clearDismissedNotifications(): Promise<void> {
   try {
-    await db.inAppNotifications
-      .where('status')
-      .equals('dismissed')
-      .delete();
+    await db.inAppNotifications.where("status").equals("dismissed").delete();
   } catch (error) {
-    console.error('Error clearing dismissed notifications:', error);
+    console.error("Error clearing dismissed notifications:", error);
     throw error;
   }
 }
@@ -2324,7 +2312,7 @@ export async function clearAllNotifications(): Promise<void> {
   try {
     await db.inAppNotifications.clear();
   } catch (error) {
-    console.error('Error clearing all notifications:', error);
+    console.error("Error clearing all notifications:", error);
     throw error;
   }
 }
@@ -2339,9 +2327,9 @@ export async function wakeUpSnoozedNotifications(): Promise<number> {
     const due = await getDueNotifications();
 
     await Promise.all(
-      due.map(n =>
+      due.map((n) =>
         db.inAppNotifications.update(n.id, {
-          status: 'unread',
+          status: "unread",
           snoozedUntil: undefined,
         })
       )
@@ -2349,7 +2337,7 @@ export async function wakeUpSnoozedNotifications(): Promise<number> {
 
     return due.length;
   } catch (error) {
-    console.error('Error waking up snoozed notifications:', error);
+    console.error("Error waking up snoozed notifications:", error);
     return 0;
   }
 }

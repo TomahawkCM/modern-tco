@@ -69,7 +69,7 @@ This document provides a complete design specification for the Budget App AI Cha
 
 ```css
 /* Font Families */
---chatbot-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+--chatbot-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
 /* Font Sizes */
 --chatbot-text-xs: 0.75rem; /* 12px - timestamps */
@@ -177,11 +177,13 @@ This document provides a complete design specification for the Budget App AI Cha
 ```
 
 **Icon**: Chat bubble or message icon (lucide-react `MessageCircle`)
+
 - Icon size: 28px
 - Icon color: White
 - Accessible label: "Open AI Chatbot"
 
 **Badge**: Unread message count (if applicable)
+
 - Size: 20px circle
 - Position: Top-right corner of button
 - Background: Red-500
@@ -303,12 +305,14 @@ This document provides a complete design specification for the Budget App AI Cha
 ```
 
 **Elements**:
+
 - **Title**: "Budget Assistant" (18px, semibold)
 - **Minimize button**: `-` icon (mobile only, hides panel)
 - **Close button**: `×` icon (closes panel)
 - **Settings button** (optional): Gear icon
 
 **Accessibility**:
+
 - All buttons must have aria-label
 - Focus visible indicators required
 - Keyboard shortcuts: Escape to close
@@ -356,6 +360,7 @@ This document provides a complete design specification for the Budget App AI Cha
 ```
 
 **Behavior**:
+
 - Auto-scroll to bottom when new message arrives
 - Maintain scroll position when user scrolls up
 - Show "New messages" indicator when scrolled up
@@ -441,12 +446,20 @@ This document provides a complete design specification for the Budget App AI Cha
   animation: typing-bounce 1.4s infinite ease-in-out;
 }
 
-.typing-dot:nth-child(1) { animation-delay: 0s; }
-.typing-dot:nth-child(2) { animation-delay: 0.2s; }
-.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+.typing-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
 
 @keyframes typing-bounce {
-  0%, 60%, 100% {
+  0%,
+  60%,
+  100% {
     transform: translateY(0);
     opacity: 0.7;
   }
@@ -536,10 +549,12 @@ This document provides a complete design specification for the Budget App AI Cha
 ```
 
 **Elements**:
+
 - **Textarea**: Auto-expanding (1-4 lines), placeholder "Ask about your finances..."
 - **Send button**: Paper plane icon (lucide-react `Send`), disabled when empty
 
 **Keyboard shortcuts**:
+
 - Enter: Send message (desktop)
 - Shift+Enter: New line
 - Escape: Close panel
@@ -579,6 +594,7 @@ This document provides a complete design specification for the Budget App AI Cha
 ### Keyboard Navigation
 
 **Tab Order**:
+
 1. Floating button
 2. Close button (when panel open)
 3. Message history (scrollable region)
@@ -586,6 +602,7 @@ This document provides a complete design specification for the Budget App AI Cha
 5. Send button
 
 **Keyboard Shortcuts**:
+
 - `Tab`: Navigate through interactive elements
 - `Shift+Tab`: Navigate backwards
 - `Enter`: Send message (when input focused)
@@ -594,9 +611,10 @@ This document provides a complete design specification for the Budget App AI Cha
 - `↑/↓`: Scroll message history (when focused)
 
 **Implementation**:
+
 ```tsx
 // Focus trap when panel is open
-import { useFocusTrap } from '@/hooks/useFocusTrap';
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 function ChatbotPanel({ isOpen }: { isOpen: boolean }) {
   const panelRef = useFocusTrap(isOpen);
@@ -614,6 +632,7 @@ function ChatbotPanel({ isOpen }: { isOpen: boolean }) {
 ### Screen Reader Support
 
 **ARIA Labels**:
+
 ```tsx
 <button aria-label="Open AI chatbot" />
 <button aria-label="Close chatbot" />
@@ -623,6 +642,7 @@ function ChatbotPanel({ isOpen }: { isOpen: boolean }) {
 ```
 
 **Live Regions**:
+
 ```tsx
 // New messages announced to screen readers
 <div
@@ -646,6 +666,7 @@ function ChatbotPanel({ isOpen }: { isOpen: boolean }) {
 ```
 
 **Screen Reader Only Text** (`.sr-only`):
+
 ```css
 .sr-only {
   position: absolute;
@@ -665,16 +686,19 @@ function ChatbotPanel({ isOpen }: { isOpen: boolean }) {
 ### Focus Management
 
 **Focus Trap**:
+
 - When panel opens, focus moves to close button or input
 - Tab cycles through interactive elements within panel
 - Shift+Tab wraps to last element
 
 **Focus Indicators**:
+
 - All interactive elements must show visible focus ring
 - Focus ring: 2px solid teal-500, 2px offset
 - Never use `outline: none` without replacement
 
 **Implementation**:
+
 ```tsx
 // Auto-focus input when panel opens
 useEffect(() => {
@@ -695,11 +719,13 @@ const handleClose = () => {
 ### Color Contrast
 
 **Required Ratios** (WCAG 2.2 AA):
+
 - Normal text (14px+): 4.5:1
 - Large text (18px+ or 14px bold): 3:1
 - UI components: 3:1
 
 **Verified Combinations**:
+
 - ✅ Teal-500 (#14b8a6) on White (#ffffff): 4.53:1
 - ✅ Gray-900 (#111827) on Gray-100 (#f3f4f6): 15.89:1
 - ✅ White (#ffffff) on Teal-500 (#14b8a6): 4.53:1
@@ -750,7 +776,7 @@ interface ChatbotState {
 
 interface Message {
   id: string; // UUID
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
   timestamp: Date;
   isError?: boolean;
@@ -779,16 +805,12 @@ export const ChatbotProvider: React.FC<{ children: React.ReactNode }> = ({ child
     messages: [],
     isTyping: false,
     error: null,
-    inputValue: '',
+    inputValue: "",
   });
 
   // Implementation...
 
-  return (
-    <ChatbotContext.Provider value={value}>
-      {children}
-    </ChatbotContext.Provider>
-  );
+  return <ChatbotContext.Provider value={value}>{children}</ChatbotContext.Provider>;
 };
 ```
 
@@ -801,19 +823,21 @@ export const ChatbotProvider: React.FC<{ children: React.ReactNode }> = ({ child
 **Endpoint**: `POST /api/chat`
 
 **Request**:
+
 ```json
 {
-  "messages": [
-    { "role": "user", "content": "How much did I spend this month?" }
-  ],
+  "messages": [{ "role": "user", "content": "How much did I spend this month?" }],
   "context": {
     "userId": "uuid",
-    "financialData": { /* Transaction summaries */ }
+    "financialData": {
+      /* Transaction summaries */
+    }
   }
 }
 ```
 
 **Response**:
+
 ```json
 {
   "message": {
@@ -825,6 +849,7 @@ export const ChatbotProvider: React.FC<{ children: React.ReactNode }> = ({ child
 ```
 
 **Error Handling**:
+
 ```json
 {
   "error": {
@@ -841,32 +866,33 @@ export const ChatbotProvider: React.FC<{ children: React.ReactNode }> = ({ child
 const sendMessage = async (content: string) => {
   try {
     // Show typing indicator
-    setState(prev => ({ ...prev, isTyping: true, error: null }));
+    setState((prev) => ({ ...prev, isTyping: true, error: null }));
 
     // API call
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: [...messages, { role: 'user', content }] }),
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: [...messages, { role: "user", content }] }),
     });
 
     if (!response.ok) {
-      throw new Error('Failed to send message');
+      throw new Error("Failed to send message");
     }
 
     const data = await response.json();
 
     // Add messages to state
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
-      messages: [...prev.messages,
-        { id: uuid(), role: 'user', content, timestamp: new Date() },
-        { id: uuid(), role: 'assistant', content: data.message.content, timestamp: new Date() }
+      messages: [
+        ...prev.messages,
+        { id: uuid(), role: "user", content, timestamp: new Date() },
+        { id: uuid(), role: "assistant", content: data.message.content, timestamp: new Date() },
       ],
       isTyping: false,
     }));
   } catch (error) {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       isTyping: false,
       error: error.message,
@@ -883,7 +909,7 @@ const sendMessage = async (content: string) => {
 
 ```tsx
 // Using Framer Motion
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
 
 <AnimatePresence>
   {isOpen && (
@@ -892,12 +918,12 @@ import { AnimatePresence, motion } from 'framer-motion';
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 20, scale: 0.95 }}
-      transition={{ duration: 0.2, ease: 'easeOut' }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
     >
       {/* Panel content */}
     </motion.div>
   )}
-</AnimatePresence>
+</AnimatePresence>;
 ```
 
 ### Message Fade In
@@ -922,31 +948,31 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 ```tsx
 // __tests__/ChatbotWidget.test.tsx
-describe('ChatbotWidget', () => {
-  it('opens panel when button clicked', () => {
+describe("ChatbotWidget", () => {
+  it("opens panel when button clicked", () => {
     render(<ChatbotWidget />);
-    const button = screen.getByLabelText('Open AI chatbot');
+    const button = screen.getByLabelText("Open AI chatbot");
     fireEvent.click(button);
-    expect(screen.getByRole('dialog')).toBeInTheDocument();
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
 
-  it('closes panel when Escape pressed', () => {
+  it("closes panel when Escape pressed", () => {
     render(<ChatbotWidget />);
     // Open panel
-    fireEvent.click(screen.getByLabelText('Open AI chatbot'));
+    fireEvent.click(screen.getByLabelText("Open AI chatbot"));
     // Press Escape
-    fireEvent.keyDown(document, { key: 'Escape' });
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   });
 
-  it('sends message when Enter pressed', async () => {
+  it("sends message when Enter pressed", async () => {
     render(<ChatbotWidget />);
     // Open panel and type message
-    const input = screen.getByLabelText('Type your question');
-    fireEvent.change(input, { target: { value: 'Test message' } });
-    fireEvent.keyDown(input, { key: 'Enter' });
+    const input = screen.getByLabelText("Type your question");
+    fireEvent.change(input, { target: { value: "Test message" } });
+    fireEvent.keyDown(input, { key: "Enter" });
     // Verify message sent
-    expect(await screen.findByText('Test message')).toBeInTheDocument();
+    expect(await screen.findByText("Test message")).toBeInTheDocument();
   });
 });
 ```
@@ -954,10 +980,10 @@ describe('ChatbotWidget', () => {
 ### Accessibility Tests
 
 ```tsx
-import { axe, toHaveNoViolations } from 'jest-axe';
+import { axe, toHaveNoViolations } from "jest-axe";
 expect.extend(toHaveNoViolations);
 
-it('should not have accessibility violations', async () => {
+it("should not have accessibility violations", async () => {
   const { container } = render(<ChatbotWidget />);
   const results = await axe(container);
   expect(results).toHaveNoViolations();
@@ -968,16 +994,16 @@ it('should not have accessibility violations', async () => {
 
 ```tsx
 // Playwright visual tests
-test('chatbot button appears correctly', async ({ page }) => {
-  await page.goto('/budget-app');
-  await expect(page.locator('.chatbot-button')).toHaveScreenshot('chatbot-button.png');
+test("chatbot button appears correctly", async ({ page }) => {
+  await page.goto("/budget-app");
+  await expect(page.locator(".chatbot-button")).toHaveScreenshot("chatbot-button.png");
 });
 
-test('chatbot panel layout on mobile', async ({ page }) => {
+test("chatbot panel layout on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 667 }); // iPhone SE
-  await page.goto('/budget-app');
-  await page.click('.chatbot-button');
-  await expect(page.locator('.chatbot-panel')).toHaveScreenshot('chatbot-panel-mobile.png');
+  await page.goto("/budget-app");
+  await page.click(".chatbot-button");
+  await expect(page.locator(".chatbot-panel")).toHaveScreenshot("chatbot-panel-mobile.png");
 });
 ```
 
@@ -986,6 +1012,7 @@ test('chatbot panel layout on mobile', async ({ page }) => {
 ## 📦 Implementation Checklist
 
 ### Phase 1: Basic Structure (4 hours)
+
 - [ ] Create ChatbotContext provider
 - [ ] Build floating button component
 - [ ] Implement panel container with animations
@@ -993,6 +1020,7 @@ test('chatbot panel layout on mobile', async ({ page }) => {
 - [ ] Set up message container with scrolling
 
 ### Phase 2: Message System (3 hours)
+
 - [ ] Create MessageBubble component (user/assistant)
 - [ ] Implement TypingIndicator component
 - [ ] Add timestamp formatting
@@ -1000,12 +1028,14 @@ test('chatbot panel layout on mobile', async ({ page }) => {
 - [ ] Add error message displays
 
 ### Phase 3: Input & Sending (2 hours)
+
 - [ ] Build auto-expanding textarea
 - [ ] Implement send button
 - [ ] Add keyboard shortcuts (Enter, Shift+Enter, Escape)
 - [ ] Connect to API route
 
 ### Phase 4: Accessibility (3 hours)
+
 - [ ] Implement focus trap
 - [ ] Add all ARIA labels
 - [ ] Set up screen reader announcements
@@ -1014,6 +1044,7 @@ test('chatbot panel layout on mobile', async ({ page }) => {
 - [ ] Run axe-core accessibility tests
 
 ### Phase 5: Responsive Design (2 hours)
+
 - [ ] Mobile full-screen layout
 - [ ] Tablet sizing
 - [ ] Desktop hover states
@@ -1021,6 +1052,7 @@ test('chatbot panel layout on mobile', async ({ page }) => {
 - [ ] Cross-browser testing
 
 ### Phase 6: Polish & Testing (3 hours)
+
 - [ ] Add loading states
 - [ ] Implement error handling with retry
 - [ ] Write unit tests (>80% coverage)
@@ -1035,6 +1067,7 @@ test('chatbot panel layout on mobile', async ({ page }) => {
 ## 🎯 Success Criteria
 
 ### Functional
+
 - [x] Chatbot button visible on all pages
 - [x] Panel opens/closes smoothly
 - [x] Messages send and display correctly
@@ -1042,6 +1075,7 @@ test('chatbot panel layout on mobile', async ({ page }) => {
 - [x] Error messages display with retry option
 
 ### Accessibility
+
 - [x] WCAG 2.2 AA compliant (axe-core 0 violations)
 - [x] Full keyboard navigation support
 - [x] Screen reader compatible
@@ -1049,12 +1083,14 @@ test('chatbot panel layout on mobile', async ({ page }) => {
 - [x] Color contrast ≥4.5:1
 
 ### Performance
+
 - [x] Panel opens in <200ms
 - [x] Message rendering <100ms
 - [x] No layout shift (CLS = 0)
 - [x] Bundle size <50KB gzipped
 
 ### UX
+
 - [x] Intuitive and easy to discover
 - [x] Works on mobile, tablet, desktop
 - [x] Animations smooth (60fps)
@@ -1065,20 +1101,24 @@ test('chatbot panel layout on mobile', async ({ page }) => {
 ## 📚 References
 
 ### Design System
+
 - [Budget App Color System](/src/app/budget-app/COLOR_SYSTEM.md)
 - [Budget App Design Guide](/src/app/budget-app/DESIGN_GUIDE.md)
 
 ### Code Examples
+
 - **shadcn/ui Chat Component**: https://ui.shadcn.com/examples/chat
 - **React Chat Hook**: https://github.com/nearform/react-chat-hook
 - **Framer Motion Docs**: https://www.framer.com/motion/
 
 ### Accessibility
+
 - [WCAG 2.2 AA Guidelines](https://www.w3.org/WAI/WCAG22/quickref/)
 - [ARIA Authoring Practices - Dialog](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
 - [Focus Trap React](https://github.com/focus-trap/focus-trap-react)
 
 ### Testing
+
 - [Jest Axe Documentation](https://github.com/nickcolley/jest-axe)
 - [Playwright Visual Testing](https://playwright.dev/docs/test-snapshots)
 
@@ -1090,6 +1130,6 @@ test('chatbot panel layout on mobile', async ({ page }) => {
 
 ---
 
-*Last Updated: November 9, 2025*
-*Version: 1.0*
-*Status: Ready for Implementation*
+_Last Updated: November 9, 2025_
+_Version: 1.0_
+_Status: Ready for Implementation_

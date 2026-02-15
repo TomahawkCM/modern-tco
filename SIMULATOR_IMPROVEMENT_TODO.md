@@ -6,6 +6,7 @@
 ## 📊 Current State Analysis
 
 ### Architecture Overview
+
 - **Backend**: Python subprocess (`sim/tanium_simulator_v2.py`) - 800+ lines
 - **Runner**: Node.js wrapper (`src/lib/simulator-runner.ts`) - Process spawning
 - **Frontend**: Next.js page (`src/app/simulator/page.tsx`) - Monaco editor UI
@@ -13,6 +14,7 @@
 - **Data Storage**: Local SQLite (`sim/inventory.sqlite`) + JSON files
 
 ### Critical Issues Identified
+
 1. **Performance**: 8-second timeout, subprocess overhead, no caching
 2. **Dependencies**: Requires Python 3.x installed, platform-specific issues
 3. **Scalability**: Single-threaded, no concurrent query support
@@ -23,9 +25,11 @@
 ## 🚀 Implementation Roadmap
 
 ### Phase 1: Critical Foundation (Weeks 1-2)
+
 **Goal**: Eliminate Python dependency, improve performance by 10x
 
 #### Week 1: Core Migration
+
 - [ ] **Task 1.1**: Create TypeScript Query Engine
   - File: Create `src/lib/tanium-query-engine/index.ts`
   - Port parsing logic from `tanium_simulator_v2.py`
@@ -54,6 +58,7 @@
   - **Success**: Execute queries <100ms
 
 #### Week 2: Database Integration
+
 - [ ] **Task 1.4**: Migrate to Supabase
   - File: Create `supabase/migrations/003_simulator_tables.sql`
   - Design schema for `simulator_machines` table
@@ -91,9 +96,11 @@
   - **Success**: All API endpoints functional
 
 ### Phase 2: Performance & Scalability (Weeks 3-4)
+
 **Goal**: Achieve <50ms query execution, add real-time features
 
 #### Week 3: Advanced Optimization
+
 - [ ] **Task 2.1**: WebAssembly Query Parser
   - File: Create `src/lib/tanium-query-engine/wasm/`
   - Set up AssemblyScript/Rust toolchain
@@ -113,6 +120,7 @@
   - **Success**: Complex queries optimized automatically
 
 #### Week 4: Real-time Features
+
 - [ ] **Task 2.3**: Real-time Subscriptions
   - File: Create `src/lib/tanium-query-engine/realtime.ts`
   - Implement Supabase real-time listeners
@@ -141,9 +149,11 @@
   - **Success**: Non-technical users can build queries
 
 ### Phase 3: Enterprise Features (Weeks 5-6)
+
 **Goal**: Production-ready with full testing and analytics
 
 #### Week 5: Enhanced UX & Analytics
+
 - [ ] **Task 3.1**: Advanced Autocomplete
   - File: Update Monaco editor configuration
   - Add context-aware suggestions
@@ -172,6 +182,7 @@
   - **Success**: Full query analytics available
 
 #### Week 6: Testing & Documentation
+
 - [ ] **Task 3.4**: Comprehensive Testing
   - Files: Create `tests/simulator/` directory
   - Write unit tests for parser (>95% coverage)
@@ -202,6 +213,7 @@
 ## 📋 Technical Specifications
 
 ### Database Schema
+
 ```sql
 CREATE TABLE simulator_machines (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -228,6 +240,7 @@ CREATE INDEX idx_simulator_machines_os ON simulator_machines(os_platform);
 ```
 
 ### API Endpoints
+
 ```typescript
 // POST /api/simulator/query
 {
@@ -243,6 +256,7 @@ CREATE INDEX idx_simulator_machines_os ON simulator_machines(os_platform);
 ```
 
 ### Key Dependencies to Add
+
 ```json
 {
   "better-sqlite3": "^9.0.0",
@@ -254,18 +268,19 @@ CREATE INDEX idx_simulator_machines_os ON simulator_machines(os_platform);
 
 ## 🎯 Success Metrics
 
-| Metric | Current | Target | Measurement |
-|--------|---------|--------|-------------|
-| Query Execution Time | 8000ms | <100ms | Performance monitor |
-| Python Dependency | Required | None | Dependency check |
-| Test Coverage | ~10% | >90% | Vitest coverage |
-| Concurrent Users | 1 | 1000+ | Load testing |
-| Error Rate | ~30% | <5% | Error tracking |
-| Cache Hit Rate | 0% | >90% | Cache metrics |
+| Metric               | Current  | Target | Measurement         |
+| -------------------- | -------- | ------ | ------------------- |
+| Query Execution Time | 8000ms   | <100ms | Performance monitor |
+| Python Dependency    | Required | None   | Dependency check    |
+| Test Coverage        | ~10%     | >90%   | Vitest coverage     |
+| Concurrent Users     | 1        | 1000+  | Load testing        |
+| Error Rate           | ~30%     | <5%    | Error tracking      |
+| Cache Hit Rate       | 0%       | >90%   | Cache metrics       |
 
 ## 🔄 Session Continuity
 
 ### For Next Session
+
 1. Check completed tasks in this document
 2. Review any in-progress work in git
 3. Run tests to verify current state
@@ -273,12 +288,14 @@ CREATE INDEX idx_simulator_machines_os ON simulator_machines(os_platform);
 5. Update this document with progress
 
 ### Key Files to Review
+
 - `/sim/tanium_simulator_v2.py` - Original Python implementation
 - `/src/lib/simulator-runner.ts` - Current Node wrapper
 - `/src/app/simulator/page.tsx` - UI implementation
 - `/src/app/api/sim-*/route.ts` - API endpoints
 
 ### Environment Variables
+
 ```env
 # Add to .env.local
 ENABLE_SIMULATOR=true
@@ -297,12 +314,14 @@ SIMULATOR_MAX_RESULTS=1000
 ## 🚧 Current Blockers & Decisions
 
 ### Open Questions
+
 1. Should we support full TQL syntax or simplified version?
 2. Keep backward compatibility with Python version?
 3. Multi-tenant data isolation strategy?
 4. Real-time collaboration limits?
 
 ### Technical Decisions Made
+
 - ✅ Migrate to TypeScript (no Python dependency)
 - ✅ Use Supabase for data storage
 - ✅ Implement caching for performance

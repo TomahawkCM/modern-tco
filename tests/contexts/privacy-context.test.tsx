@@ -7,9 +7,7 @@ function TestConsumer() {
   const { isPrivacyMode, togglePrivacyMode } = usePrivacy();
   return (
     <div>
-      <span data-testid="privacy-status">
-        {isPrivacyMode ? "on" : "off"}
-      </span>
+      <span data-testid="privacy-status">{isPrivacyMode ? "on" : "off"}</span>
       <button data-testid="toggle-btn" onClick={togglePrivacyMode}>
         Toggle
       </button>

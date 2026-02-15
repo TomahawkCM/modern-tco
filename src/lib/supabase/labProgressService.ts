@@ -351,7 +351,9 @@ class LabProgressService {
         earned_at: new Date().toISOString(),
       }));
 
-  const { error } = await (supabase as any).from("lab_achievements").insert(achievementsWithTimestamp as any);
+      const { error } = await (supabase as any)
+        .from("lab_achievements")
+        .insert(achievementsWithTimestamp as any);
 
       if (error) {
         console.error("Error awarding achievements:", error);

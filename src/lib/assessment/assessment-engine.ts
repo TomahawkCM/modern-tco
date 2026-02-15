@@ -285,18 +285,33 @@ class AssessmentEngineClass {
 
     const performance = {
       totalTime: endTime ? Math.floor((endTime.getTime() - startTime.getTime()) / 1000) : 0,
-      averageTimePerQuestion: questionResults.length > 0 ? questionResults.reduce((s, q) => s + q.timeSpent, 0) / questionResults.length : 0,
-      fastestQuestion: questionResults.length > 0 ? Math.min(...questionResults.map((q) => q.timeSpent)) : 0,
-      slowestQuestion: questionResults.length > 0 ? Math.max(...questionResults.map((q) => q.timeSpent)) : 0,
+      averageTimePerQuestion:
+        questionResults.length > 0
+          ? questionResults.reduce((s, q) => s + q.timeSpent, 0) / questionResults.length
+          : 0,
+      fastestQuestion:
+        questionResults.length > 0 ? Math.min(...questionResults.map((q) => q.timeSpent)) : 0,
+      slowestQuestion:
+        questionResults.length > 0 ? Math.max(...questionResults.map((q) => q.timeSpent)) : 0,
       confidenceAlignment: 0,
-      difficultyProgression: { beginnerAccuracy: 0, intermediateAccuracy: 0, advancedAccuracy: 0, suggestedLevel: ("Beginner" as any) },
+      difficultyProgression: {
+        beginnerAccuracy: 0,
+        intermediateAccuracy: 0,
+        advancedAccuracy: 0,
+        suggestedLevel: "Beginner" as any,
+      },
     };
 
     const remediation: RemediationPlan = {
       overallRecommendation: passed ? "Passed - continue practicing" : "Review fundamentals",
       objectiveRemediation: [],
       studyPlan: [],
-      retakeEligibility: { eligible: !passed, waitPeriod: passed ? 0 : 24, maxAttempts: 3, currentAttempt: 1 },
+      retakeEligibility: {
+        eligible: !passed,
+        waitPeriod: passed ? 0 : 24,
+        maxAttempts: 3,
+        currentAttempt: 1,
+      },
     };
 
     return {
@@ -420,7 +435,7 @@ class AssessmentEngineClass {
       .filter(([_, breakdown]) => (breakdown?.score ?? 0) < 0.7)
       .map(([domain]) => domain);
 
-  const studyPlan: RemediationPlan["studyPlan"] = [];
+    const studyPlan: RemediationPlan["studyPlan"] = [];
 
     for (const domain of analytics.strugglingTopics) {
       const domainPerf = domainBreakdownObj[domain];
@@ -449,10 +464,18 @@ class AssessmentEngineClass {
       return bPriority - aPriority;
     });
 
-    const estimatedStudyTime = studyPlan.reduce((total, item) => total + (item.estimatedTime || 0), 0);
+    const estimatedStudyTime = studyPlan.reduce(
+      (total, item) => total + (item.estimatedTime || 0),
+      0
+    );
 
     const objectiveRemediation: any[] = [];
-    const retakeEligibility = { eligible: !result.passed, waitPeriod: result.passed ? 0 : 24, maxAttempts: 3, currentAttempt: 1 };
+    const retakeEligibility = {
+      eligible: !result.passed,
+      waitPeriod: result.passed ? 0 : 24,
+      maxAttempts: 3,
+      currentAttempt: 1,
+    };
 
     const ret: RemediationPlan = {
       overallRecommendation: result.passed
@@ -607,9 +630,9 @@ export const AssessmentEngine: any = new AssessmentEngineClass();
 export default AssessmentEngine;
 
 // Static forwarding for existing call-sites that import the class/instance directly
-;(AssessmentEngine).initializeSession = AssessmentEngine.initializeSession.bind(AssessmentEngine);
-;(AssessmentEngine).recordResponse = AssessmentEngine.recordResponse?.bind(AssessmentEngine);
-;(AssessmentEngine).navigateToNext = AssessmentEngine.navigateToNext?.bind(AssessmentEngine);
-;(AssessmentEngine).completeAssessment = AssessmentEngine.completeAssessment.bind(AssessmentEngine);
-;(AssessmentEngine).calculateResults = AssessmentEngine.calculateResults.bind(AssessmentEngine);
-;(AssessmentEngine).updateSession = AssessmentEngine.updateSession.bind(AssessmentEngine);
+AssessmentEngine.initializeSession = AssessmentEngine.initializeSession.bind(AssessmentEngine);
+AssessmentEngine.recordResponse = AssessmentEngine.recordResponse?.bind(AssessmentEngine);
+AssessmentEngine.navigateToNext = AssessmentEngine.navigateToNext?.bind(AssessmentEngine);
+AssessmentEngine.completeAssessment = AssessmentEngine.completeAssessment.bind(AssessmentEngine);
+AssessmentEngine.calculateResults = AssessmentEngine.calculateResults.bind(AssessmentEngine);
+AssessmentEngine.updateSession = AssessmentEngine.updateSession.bind(AssessmentEngine);

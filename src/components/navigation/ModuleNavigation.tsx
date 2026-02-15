@@ -1,30 +1,30 @@
 "use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
-import { 
-  BookOpen, 
-  Target, 
-  Package, 
-  Navigation, 
+import React from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  BookOpen,
+  Target,
+  Package,
+  Navigation,
   FileSpreadsheet,
   ChevronLeft,
   ChevronRight,
   Home,
   Brain,
-  Sparkles
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
+  Sparkles,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ModuleInfo {
   slug: string;
   title: string;
   icon: React.ElementType;
-  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
   estimatedTime: string;
   weight: number;
   description: string;
@@ -32,62 +32,62 @@ interface ModuleInfo {
 
 const modules: ModuleInfo[] = [
   {
-    slug: 'asking-questions',
-    title: 'Asking Questions',
+    slug: "asking-questions",
+    title: "Asking Questions",
     icon: BookOpen,
-    difficulty: 'Beginner',
-    estimatedTime: '45 min',
+    difficulty: "Beginner",
+    estimatedTime: "45 min",
     weight: 22,
-    description: 'Master natural language queries and sensor management'
+    description: "Master natural language queries and sensor management",
   },
   {
-    slug: 'refining-questions',
-    title: 'Refining Questions & Targeting',
+    slug: "refining-questions",
+    title: "Refining Questions & Targeting",
     icon: Target,
-    difficulty: 'Intermediate',
-    estimatedTime: '50 min',
+    difficulty: "Intermediate",
+    estimatedTime: "50 min",
     weight: 23,
-    description: 'Advanced targeting with computer groups and filters'
+    description: "Advanced targeting with computer groups and filters",
   },
   {
-    slug: 'taking-action',
-    title: 'Taking Action',
+    slug: "taking-action",
+    title: "Taking Action",
     icon: Package,
-    difficulty: 'Intermediate',
-    estimatedTime: '55 min',
+    difficulty: "Intermediate",
+    estimatedTime: "55 min",
     weight: 15,
-    description: 'Safe package deployment and action execution'
+    description: "Safe package deployment and action execution",
   },
   {
-    slug: 'navigation-modules',
-    title: 'Navigation & Modules',
+    slug: "navigation-modules",
+    title: "Navigation & Modules",
     icon: Navigation,
-    difficulty: 'Beginner',
-    estimatedTime: '40 min',
+    difficulty: "Beginner",
+    estimatedTime: "40 min",
     weight: 23,
-    description: 'Platform navigation and core module operations'
+    description: "Platform navigation and core module operations",
   },
   {
-    slug: 'reporting-export',
-    title: 'Reporting & Data Export',
+    slug: "reporting-export",
+    title: "Reporting & Data Export",
     icon: FileSpreadsheet,
-    difficulty: 'Intermediate',
-    estimatedTime: '35 min',
+    difficulty: "Intermediate",
+    estimatedTime: "35 min",
     weight: 17,
-    description: 'Report creation and data export systems'
-  }
+    description: "Report creation and data export systems",
+  },
 ];
 
 const getDifficultyColor = (difficulty: string) => {
   switch (difficulty) {
-    case 'Beginner':
-      return 'bg-green-100 text-green-700 border-green-300 dark:bg-green-900/50 dark:text-green-200 dark:border-green-500/50';
-    case 'Intermediate':
-      return 'bg-orange-100 text-orange-700 border-orange-300 dark:bg-orange-900/50 dark:text-orange-200 dark:border-orange-500/50';
-    case 'Advanced':
-      return 'bg-red-100 text-red-700 border-red-300 dark:bg-red-900/50 dark:text-red-200 dark:border-red-500/50';
+    case "Beginner":
+      return "bg-green-100 text-green-700 border-green-300 dark:bg-green-900/50 dark:text-green-200 dark:border-green-500/50";
+    case "Intermediate":
+      return "bg-orange-100 text-orange-700 border-orange-300 dark:bg-orange-900/50 dark:text-orange-200 dark:border-orange-500/50";
+    case "Advanced":
+      return "bg-red-100 text-red-700 border-red-300 dark:bg-red-900/50 dark:text-red-200 dark:border-red-500/50";
     default:
-      return 'bg-slate-100 text-slate-700 border-slate-300 dark:bg-card/50 dark:text-muted-foreground dark:border-slate-500/50';
+      return "bg-slate-100 text-slate-700 border-slate-300 dark:bg-card/50 dark:text-muted-foreground dark:border-slate-500/50";
   }
 };
 
@@ -96,11 +96,15 @@ interface ModuleNavigationProps {
   showAllModules?: boolean;
 }
 
-export default function ModuleNavigation({ currentSlug, showAllModules = false }: ModuleNavigationProps) {
-  const pathname = usePathname() || '';
-  const currentModuleIndex = modules.findIndex(m => m.slug === currentSlug);
+export default function ModuleNavigation({
+  currentSlug,
+  showAllModules = false,
+}: ModuleNavigationProps) {
+  const pathname = usePathname() || "";
+  const currentModuleIndex = modules.findIndex((m) => m.slug === currentSlug);
   const previousModule = currentModuleIndex > 0 ? modules[currentModuleIndex - 1] : null;
-  const nextModule = currentModuleIndex < modules.length - 1 ? modules[currentModuleIndex + 1] : null;
+  const nextModule =
+    currentModuleIndex < modules.length - 1 ? modules[currentModuleIndex + 1] : null;
 
   if (showAllModules) {
     return (
@@ -120,72 +124,86 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
           {modules.map((module) => {
             const Icon = module.icon;
             const isActive = pathname.includes(module.slug);
-            
+
             // Determine card color based on difficulty
             const getCardColor = (difficulty: string) => {
               switch (difficulty) {
-                case 'Beginner':
-                  return 'border-green-200 bg-gradient-to-br from-green-50 to-green-100 dark:border-green-800 dark:from-green-900/20 dark:to-green-800/20';
-                case 'Intermediate':
-                  return 'border-orange-200 bg-gradient-to-br from-orange-50 to-orange-100 dark:border-orange-800 dark:from-orange-900/20 dark:to-orange-800/20';
-                case 'Advanced':
-                  return 'border-red-200 bg-gradient-to-br from-red-50 to-red-100 dark:border-red-800 dark:from-red-900/20 dark:to-red-800/20';
+                case "Beginner":
+                  return "border-green-200 bg-gradient-to-br from-green-50 to-green-100 dark:border-green-800 dark:from-green-900/20 dark:to-green-800/20";
+                case "Intermediate":
+                  return "border-orange-200 bg-gradient-to-br from-orange-50 to-orange-100 dark:border-orange-800 dark:from-orange-900/20 dark:to-orange-800/20";
+                case "Advanced":
+                  return "border-red-200 bg-gradient-to-br from-red-50 to-red-100 dark:border-red-800 dark:from-red-900/20 dark:to-red-800/20";
                 default:
-                  return 'border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100 dark:border-blue-800 dark:from-blue-900/20 dark:to-blue-800/20';
+                  return "border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100 dark:border-blue-800 dark:from-blue-900/20 dark:to-blue-800/20";
               }
             };
 
             const getIconColor = (difficulty: string) => {
               switch (difficulty) {
-                case 'Beginner':
-                  return 'text-[#22c55e] dark:text-[#22c55e]';
-                case 'Intermediate':
-                  return 'text-orange-600 dark:text-orange-400';
-                case 'Advanced':
-                  return 'text-red-600 dark:text-red-400';
+                case "Beginner":
+                  return "text-[#22c55e] dark:text-[#22c55e]";
+                case "Intermediate":
+                  return "text-orange-600 dark:text-orange-400";
+                case "Advanced":
+                  return "text-red-600 dark:text-red-400";
                 default:
-                  return 'text-blue-600 dark:text-primary';
+                  return "text-blue-600 dark:text-primary";
               }
             };
 
             return (
               <Link key={module.slug} href={`/modules/${module.slug}`}>
-                <Card className={cn(
-                  "group transition-all duration-200 hover:scale-105 cursor-pointer hover:shadow-md",
-                  getCardColor(module.difficulty),
-                  isActive && "ring-2 ring-blue-500"
-                )}>
+                <Card
+                  className={cn(
+                    "group cursor-pointer transition-all duration-200 hover:scale-105 hover:shadow-md",
+                    getCardColor(module.difficulty),
+                    isActive && "ring-2 ring-blue-500"
+                  )}
+                >
                   <CardContent className="p-6">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className={cn("p-2 rounded-lg", 
-                        module.difficulty === 'Beginner' ? 'bg-[#22c55e]/20' :
-                        module.difficulty === 'Intermediate' ? 'bg-orange-500/20' :
-                        module.difficulty === 'Advanced' ? 'bg-red-500/20' : 'bg-primary/20'
-                      )}>
+                    <div className="mb-3 flex items-center gap-3">
+                      <div
+                        className={cn(
+                          "rounded-lg p-2",
+                          module.difficulty === "Beginner"
+                            ? "bg-[#22c55e]/20"
+                            : module.difficulty === "Intermediate"
+                              ? "bg-orange-500/20"
+                              : module.difficulty === "Advanced"
+                                ? "bg-red-500/20"
+                                : "bg-primary/20"
+                        )}
+                      >
                         <Icon className={cn("h-6 w-6", getIconColor(module.difficulty))} />
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-primary transition-colors">
+                        <h3 className="font-semibold text-slate-900 transition-colors group-hover:text-blue-600 dark:text-slate-100 dark:group-hover:text-primary">
                           {module.title}
                         </h3>
-                        <div className="flex items-center gap-2 mt-1">
-                          <Badge variant="outline" className={getDifficultyColor(module.difficulty)}>
+                        <div className="mt-1 flex items-center gap-2">
+                          <Badge
+                            variant="outline"
+                            className={getDifficultyColor(module.difficulty)}
+                          >
                             {module.difficulty}
                           </Badge>
-                          <span className="text-sm text-slate-600 dark:text-muted-foreground">{module.estimatedTime}</span>
+                          <span className="text-sm text-slate-600 dark:text-muted-foreground">
+                            {module.estimatedTime}
+                          </span>
                         </div>
                       </div>
                     </div>
-                    
-                    <p className="text-sm text-slate-700 dark:text-muted-foreground mb-3">
+
+                    <p className="mb-3 text-sm text-slate-700 dark:text-muted-foreground">
                       {module.description}
                     </p>
-                    
+
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-slate-600 dark:text-muted-foreground">
                         Exam Weight: {module.weight}%
                       </span>
-                      <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                      <ChevronRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
                     </div>
                   </CardContent>
                 </Card>
@@ -197,12 +215,12 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
         {/* AI Assistant Card */}
         <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 to-cyan-100 dark:border-cyan-800 dark:from-cyan-900/20 dark:to-cyan-800/20">
           <CardContent className="p-6">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="p-2 rounded-lg bg-primary/20">
+            <div className="mb-3 flex items-center gap-3">
+              <div className="rounded-lg bg-primary/20 p-2">
                 <Brain className="h-6 w-6 text-cyan-600 dark:text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-cyan-700 dark:text-primary flex items-center gap-2">
+                <h3 className="flex items-center gap-2 font-semibold text-cyan-700 dark:text-primary">
                   AI Study Assistant
                   <Sparkles className="h-4 w-4 text-[#f97316]" />
                 </h3>
@@ -211,7 +229,7 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
                 </p>
               </div>
             </div>
-            <Button className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-foreground">
+            <Button className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 text-foreground hover:from-cyan-700 hover:to-blue-700">
               Launch AI Assistant
             </Button>
           </CardContent>
@@ -225,18 +243,18 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
     <div className="space-y-4">
       {/* Breadcrumb */}
       <nav className="flex items-center space-x-2 text-sm text-muted-foreground">
-        <Link href="/" className="hover:text-primary transition-colors">
+        <Link href="/" className="transition-colors hover:text-primary">
           <Home className="h-4 w-4" />
         </Link>
         <ChevronRight className="h-4 w-4" />
-        <Link href="/modules" className="hover:text-primary transition-colors">
+        <Link href="/modules" className="transition-colors hover:text-primary">
           Study Modules
         </Link>
         {currentSlug && (
           <>
             <ChevronRight className="h-4 w-4" />
-            <span className="text-primary font-medium">
-              {modules.find(m => m.slug === currentSlug)?.title}
+            <span className="font-medium text-primary">
+              {modules.find((m) => m.slug === currentSlug)?.title}
             </span>
           </>
         )}
@@ -244,7 +262,7 @@ export default function ModuleNavigation({ currentSlug, showAllModules = false }
 
       {/* Previous/Next Navigation */}
       {currentSlug && (
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           {previousModule ? (
             <Link href={`/modules/${previousModule.slug}`}>
               <Button variant="outline" className="flex items-center gap-2">

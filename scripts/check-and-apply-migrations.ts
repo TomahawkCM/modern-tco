@@ -95,18 +95,20 @@ async function main() {
     tables.flashcard_deck_cards;
 
   const questionReviewTablesExist =
-    tables.question_reviews &&
-    tables.question_review_attempts &&
-    tables.review_sessions;
+    tables.question_reviews && tables.question_review_attempts && tables.review_sessions;
 
   console.log("\n📊 Summary:");
   console.log(`   Flashcard System: ${flashcardTablesExist ? "✅ READY" : "❌ NEEDS MIGRATION"}`);
-  console.log(`   Question Reviews: ${questionReviewTablesExist ? "✅ READY" : "❌ NEEDS MIGRATION"}`);
+  console.log(
+    `   Question Reviews: ${questionReviewTablesExist ? "✅ READY" : "❌ NEEDS MIGRATION"}`
+  );
 
   if (!flashcardTablesExist || !questionReviewTablesExist) {
     console.log("\n⚠️  MIGRATIONS NEEDED!");
     console.log("\nTo apply migrations:");
-    console.log("1. Open Supabase SQL Editor: https://qnwcwoutgarhqxlgsjzs.supabase.co/project/_/sql");
+    console.log(
+      "1. Open Supabase SQL Editor: https://qnwcwoutgarhqxlgsjzs.supabase.co/project/_/sql"
+    );
     console.log("2. Apply these migrations in order:");
 
     if (!flashcardTablesExist) {

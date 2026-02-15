@@ -7,6 +7,7 @@ Playwright MCP was causing system hangs during browser installation on WSL2, req
 ## 🔍 Root Cause Analysis
 
 ### Primary Issues Identified:
+
 1. **WSL2 Browser Dependencies**: Missing system libraries causing installation hangs
 2. **Display Environment Conflicts**: X11/DISPLAY issues when browsers try to initialize
 3. **Memory Management**: Default browser garbage collection conflicts with WSL2
@@ -14,6 +15,7 @@ Playwright MCP was causing system hangs during browser installation on WSL2, req
 5. **Outdated Browser Flags**: Legacy Chrome arguments not optimized for modern WSL2
 
 ### Key Research Findings:
+
 - Ubuntu 24.04.2 LTS has newer library versions (t64) that resolve many legacy issues
 - Modern Playwright supports `--headless=new` flag for better WSL2 compatibility
 - Browser installation hangs are resolved with proper environment variables
@@ -22,6 +24,7 @@ Playwright MCP was causing system hangs during browser installation on WSL2, req
 ## 🛠️ Complete Solution Implemented
 
 ### Phase 1: Complete Uninstallation
+
 ```bash
 # Stop MCP processes
 kill -TERM $(ps aux | grep playwright | awk '{print $2}')
@@ -37,6 +40,7 @@ npx clear-npx-cache
 ```
 
 ### Phase 2: WSL2 Environment Optimization
+
 ```bash
 # Create optimized environment configuration
 cat > .playwright-env.sh << 'EOF'
@@ -70,6 +74,7 @@ source .playwright-env.sh
 ```
 
 ### Phase 3: Optimized MCP Configuration
+
 ```json
 {
   "mcpServers": {
@@ -92,6 +97,7 @@ source .playwright-env.sh
 ## ✅ Validation Results
 
 ### Tests Performed:
+
 - ✅ **MCP Initialization**: Completes in <5 seconds (was hanging indefinitely)
 - ✅ **Process Management**: Clean startup/shutdown cycles
 - ✅ **Memory Usage**: Stable within 4GB Node.js heap limits
@@ -99,6 +105,7 @@ source .playwright-env.sh
 - ✅ **Environment Variables**: All WSL2 optimizations loaded correctly
 
 ### Performance Improvements:
+
 - **Installation Time**: 3 seconds vs. infinite hang
 - **Memory Usage**: Capped at 4GB vs. uncontrolled growth
 - **Error Handling**: Clean error messages vs. system freeze
@@ -109,8 +116,10 @@ source .playwright-env.sh
 ### Common Issues & Solutions:
 
 #### 1. "Host system is missing dependencies" Error
+
 **Symptoms**: Browser installation fails with dependency errors
 **Solution**:
+
 ```bash
 # For systems with sudo access:
 sudo apt update
@@ -121,8 +130,10 @@ sudo apt install -y xvfb fonts-liberation unzip libasound2t64 libatspi2.0-0t64
 ```
 
 #### 2. Browser Installation Still Hangs
+
 **Symptoms**: Process doesn't complete within 2 minutes
 **Solution**:
+
 ```bash
 # Add to .playwright-env.sh:
 export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
@@ -133,8 +144,10 @@ export PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/google-chrome
 ```
 
 #### 3. Memory Issues
+
 **Symptoms**: Node.js heap out of memory errors
 **Solution**:
+
 ```bash
 # Increase Node.js memory (already in solution):
 export NODE_OPTIONS="--max-old-space-size=8192"  # 8GB instead of 4GB
@@ -144,8 +157,10 @@ export PLAYWRIGHT_MAX_WORKERS=1
 ```
 
 #### 4. Network/Display Issues
+
 **Symptoms**: Browser can't connect or display errors
 **Solution**:
+
 ```bash
 # Enhanced display configuration:
 export DISPLAY=:99
@@ -158,12 +173,14 @@ export PLAYWRIGHT_LAUNCH_OPTIONS_ARGS='["--headless=new", "--no-sandbox", "--dis
 ### Advanced Debugging:
 
 #### Enable Verbose Logging:
+
 ```bash
 export DEBUG=pw:*  # All Playwright debug output
 export DEBUG=pw:api,pw:browser  # API and browser debug only
 ```
 
 #### Check System Resources:
+
 ```bash
 # Memory and limits check
 free -h
@@ -176,11 +193,13 @@ watch "ps aux | grep -E '(playwright|chrome|browser)'"
 ## 📁 File Locations
 
 ### Configuration Files:
+
 - **MCP Config**: `/home/robne/projects/active/tanium-tco/modern-tco/.mcp.json`
 - **Environment**: `/home/robne/projects/active/tanium-tco/modern-tco/.playwright-env.sh`
 - **Backup Config**: `/home/robne/projects/active/tanium-tco/modern-tco/.mcp.json.backup.*`
 
 ### Cache & Data:
+
 - **Browser Cache**: `/home/robne/.cache/ms-playwright-new/`
 - **Traces**: Auto-cleaned (was in `.playwright-mcp/traces/`)
 - **Logs**: System logs at `/var/log/` (if accessible)
@@ -188,6 +207,7 @@ watch "ps aux | grep -E '(playwright|chrome|browser)'"
 ## 🔄 Quick Recovery Commands
 
 ### If MCP Hangs Again:
+
 ```bash
 # Emergency stop
 killall -9 node npm npx
@@ -198,6 +218,7 @@ systemctl --user restart claude-code  # If using systemd
 ```
 
 ### Reset to Working Configuration:
+
 ```bash
 # Restore from backup
 cp .mcp.json.backup.$(ls .mcp.json.backup.* | tail -1) .mcp.json
@@ -208,6 +229,7 @@ cp .mcp.json.backup.$(ls .mcp.json.backup.* | tail -1) .mcp.json
 ## 🎯 Best Practices
 
 ### For WSL2 + Playwright:
+
 1. **Always use headless mode** - GUI browsers are problematic in WSL2
 2. **Set memory limits** - Prevent system resource exhaustion
 3. **Use virtual display** - Eliminates X11 dependency issues
@@ -215,6 +237,7 @@ cp .mcp.json.backup.$(ls .mcp.json.backup.* | tail -1) .mcp.json
 5. **Monitor process memory** - Kill runaway browser processes
 
 ### For Claude Code Integration:
+
 1. **Load environment before starting** - `source .playwright-env.sh`
 2. **Test MCP independently** - Validate before Claude Code usage
 3. **Keep backups of working configs** - Fast recovery from changes
@@ -223,12 +246,14 @@ cp .mcp.json.backup.$(ls .mcp.json.backup.* | tail -1) .mcp.json
 ## 📊 System Requirements Validated
 
 ### Minimum Requirements (Met):
+
 - **Memory**: 4GB+ available (System has 31GB ✅)
 - **Disk Space**: 2GB+ for browsers (Sufficient ✅)
 - **File Descriptors**: 1000+ (System: 1M+ ✅)
 - **Process Limits**: 100+ (System: 128K+ ✅)
 
 ### Recommended Setup:
+
 - **WSL2**: Ubuntu 20.04+ (System: 24.04.2 LTS ✅)
 - **Node.js**: v16+ (Check with `node --version`)
 - **NPM**: v7+ (Check with `npm --version`)
@@ -236,6 +261,7 @@ cp .mcp.json.backup.$(ls .mcp.json.backup.* | tail -1) .mcp.json
 ## 🚀 Success Criteria
 
 ### Installation Successful When:
+
 - [ ] MCP server starts within 5 seconds
 - [ ] No hanging during browser operations
 - [ ] Clean error messages (not system freezes)
@@ -253,4 +279,4 @@ cp .mcp.json.backup.$(ls .mcp.json.backup.* | tail -1) .mcp.json
 
 ---
 
-*This guide resolves the three-time system hang issue and provides a stable, production-ready Playwright MCP configuration for WSL2 environments.*
+_This guide resolves the three-time system hang issue and provides a stable, production-ready Playwright MCP configuration for WSL2 environments._

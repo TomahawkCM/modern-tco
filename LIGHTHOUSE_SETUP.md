@@ -23,16 +23,19 @@ npm run lighthouse:all
 ## 📁 Files Created
 
 ### Configuration Files
+
 - `.lighthouserc.json` - Lighthouse CI configuration
 - `.env.lighthouse` - Environment variables for Chrome path
 
 ### Scripts
+
 - `scripts/lighthouse-port3001.mjs` - Port 3001 specific runner
 - `scripts/lighthouse-all-routes.mjs` - Comprehensive route auditing
 - `scripts/setup-lighthouse-env.sh` - Environment setup script
 - `run-lighthouse.sh` - Quick run convenience script
 
 ### NPM Scripts Added
+
 ```json
 "lighthouse": "Run Lighthouse with Chrome path",
 "lighthouse:3001": "Run on port 3001 routes",
@@ -45,6 +48,7 @@ npm run lighthouse:all
 ## 🎯 Current Performance Baseline
 
 Latest audit results (Port 3001):
+
 - **Performance**: 30% 🔴
 - **Accessibility**: 88% 🟡
 - **Best Practices**: 100% 🟢
@@ -53,11 +57,13 @@ Latest audit results (Port 3001):
 ## 🔧 Chrome Configuration
 
 Using Playwright's Chromium at:
+
 ```
 /home/robne/.cache/ms-playwright/chromium-1193/chrome-linux/chrome
 ```
 
 ### WSL2-Optimized Chrome Flags
+
 ```
 --headless
 --no-sandbox
@@ -71,17 +77,20 @@ Using Playwright's Chromium at:
 ## 📊 Reports Location
 
 All reports are saved to:
+
 ```
 reports/lighthouse/[timestamp]/
 ```
 
 Format options:
+
 - HTML reports for visual review
 - JSON reports for programmatic analysis
 
 ## 🐛 Troubleshooting
 
 ### Port 3001 not responding
+
 ```bash
 # Ensure dev server is running
 npm run dev:3001
@@ -91,6 +100,7 @@ lsof -i :3001
 ```
 
 ### Chrome not found
+
 ```bash
 # Install Chromium via Playwright
 npx playwright install chromium
@@ -100,6 +110,7 @@ bash scripts/setup-lighthouse-env.sh
 ```
 
 ### Permission errors
+
 ```bash
 # Make scripts executable
 chmod +x scripts/*.mjs scripts/*.sh
@@ -116,6 +127,7 @@ chmod +x run-lighthouse.sh
 ## 🔄 Environment Variables
 
 The Chrome path is now persistent in:
+
 1. `.env.lighthouse` (project-specific)
 2. `~/.bashrc` (user-wide)
 3. NPM scripts (hardcoded fallback)

@@ -38,7 +38,7 @@ export default function VideosAdminPage() {
   const getFor = (slug: string) => (map[slug] || []).join("\n");
 
   return (
-    <div className="container mx-auto px-4 py-8 space-y-6">
+    <div className="container mx-auto space-y-6 px-4 py-8">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-foreground">Videos Admin (local override)</h1>
         <button
@@ -50,8 +50,9 @@ export default function VideosAdminPage() {
       </div>
       {status && <div className="text-[#22c55e]">{status}</div>}
       <p className="text-muted-foreground">
-        Paste YouTube links or IDs per module (one per line). This stores locally in your browser and overrides the
-        default manifest. For production-wide changes, set NEXT_PUBLIC_VIDEOS_&lt;SLUG&gt; env vars in Vercel.
+        Paste YouTube links or IDs per module (one per line). This stores locally in your browser
+        and overrides the default manifest. For production-wide changes, set
+        NEXT_PUBLIC_VIDEOS_&lt;SLUG&gt; env vars in Vercel.
       </p>
       <div className="grid gap-6 md:grid-cols-2">
         {data.modules.map((m) => (
@@ -69,4 +70,3 @@ export default function VideosAdminPage() {
     </div>
   );
 }
-

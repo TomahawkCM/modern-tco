@@ -13,6 +13,7 @@ Add PDF bank statement import functionality to Budget App using existing OCR inf
 **Why**: Home Trust Bank only provides PDF downloads, not CSV exports.
 
 **Technical Approach**:
+
 - Reuse existing Tesseract.js + receipt-ocr.ts infrastructure
 - Parse tabular data (multiple transactions per page) instead of single receipts
 - Integrate into existing CSV/OFX import workflow
@@ -24,6 +25,7 @@ Add PDF bank statement import functionality to Budget App using existing OCR inf
 ### ✅ Workflow for Each Task
 
 **CRITICAL WORKFLOW** (MUST FOLLOW):
+
 1. **Before starting**: Run `vibe_check` (identify assumptions, prevent errors)
 2. **Mark as doing**: `manage_task("update", task_id="...", status="doing", assignee="...")`
 3. **Execute**: Complete the task implementation
@@ -31,29 +33,32 @@ Add PDF bank statement import functionality to Budget App using existing OCR inf
 
 ### Task List
 
-| # | Task ID | Title | Assignee | Status | Dependency |
-|---|---------|-------|----------|--------|------------|
-| 1 | `fb0aacb9-ee3b-4f82-b0a5-7d115e587e28` | Create bank-statement-ocr.ts | backend-developer | todo | None |
-| 2 | `6b0b90cb-7ba9-483f-a6f4-7c8240a193b2` | Add table structure detection | data-scientist | todo | Task 1 |
-| 3 | `44e7224c-bccf-4984-ad1b-8e37aae2261d` | Integrate PDF into import page | react-specialist | todo | Tasks 1 & 2 |
-| 4 | `96d5c2c4-c0f3-4e64-9ac1-e63ee434550f` | Add UI enhancements | frontend-developer | todo | Task 3 |
-| 5 | `442d1e39-217f-4486-b22c-78bec4b5f59d` | Test with Home Trust PDFs | test-automator | todo | Tasks 1-4 |
-| 6 | `fff0f5ce-c58c-4f9d-8004-39b709ca2001` | Manual column mapping fallback | react-specialist | todo | Tasks 1-5 |
+| #   | Task ID                                | Title                          | Assignee           | Status | Dependency  |
+| --- | -------------------------------------- | ------------------------------ | ------------------ | ------ | ----------- |
+| 1   | `fb0aacb9-ee3b-4f82-b0a5-7d115e587e28` | Create bank-statement-ocr.ts   | backend-developer  | todo   | None        |
+| 2   | `6b0b90cb-7ba9-483f-a6f4-7c8240a193b2` | Add table structure detection  | data-scientist     | todo   | Task 1      |
+| 3   | `44e7224c-bccf-4984-ad1b-8e37aae2261d` | Integrate PDF into import page | react-specialist   | todo   | Tasks 1 & 2 |
+| 4   | `96d5c2c4-c0f3-4e64-9ac1-e63ee434550f` | Add UI enhancements            | frontend-developer | todo   | Task 3      |
+| 5   | `442d1e39-217f-4486-b22c-78bec4b5f59d` | Test with Home Trust PDFs      | test-automator     | todo   | Tasks 1-4   |
+| 6   | `fff0f5ce-c58c-4f9d-8004-39b709ca2001` | Manual column mapping fallback | react-specialist   | todo   | Tasks 1-5   |
 
 ---
 
 ## 🔑 Key Files Reference
 
 ### Existing Infrastructure (DO NOT MODIFY)
+
 - `/src/lib/receipt-ocr.ts` - OCR for **single receipts** (reference only)
 - `/src/lib/pdf-to-image.ts` - PDF → Canvas conversion (REUSE THIS)
 - `/src/types/budget.ts` - TypeScript interfaces (Transaction, ParsedTransaction)
 
 ### Files to Create
+
 - `/src/lib/bank-statement-ocr.ts` - **NEW**: Multi-transaction OCR parser
 - `/src/lib/parsers/pdf-bank-parser.ts` - **NEW**: Table structure detection
 
 ### Files to Modify
+
 - `/src/app/budget-app/import/page.tsx` (line 739: add `.pdf`, line 308: add PDF branch)
 - `/src/lib/parsers/format-detector.ts` (detect PDF bank statements vs receipts)
 
@@ -62,33 +67,36 @@ Add PDF bank statement import functionality to Budget App using existing OCR inf
 ## 🛠️ Technical Architecture
 
 ### Current Receipt OCR Flow (Single Transaction)
+
 ```
 PDF Receipt → convertPdfToImages() → Tesseract.js → extractMerchant/Amount/Date → Single Receipt
 ```
 
 ### New Bank Statement Flow (Multiple Transactions)
+
 ```
 PDF Statement → convertPdfToImages() → Tesseract.js → parseTableRows() → ParsedTransaction[]
 ```
 
 ### Key Differences
-| Aspect | Receipt OCR | Bank Statement OCR |
-|--------|-------------|-------------------|
-| **Output** | Single receipt | Array of transactions |
-| **Structure** | Unstructured text | Tabular data (rows/columns) |
-| **Parsing** | Extract merchant/amount/date | Detect columns, parse rows |
-| **Pages** | Usually 1 page | Often 5-10 pages |
+
+| Aspect        | Receipt OCR                  | Bank Statement OCR          |
+| ------------- | ---------------------------- | --------------------------- |
+| **Output**    | Single receipt               | Array of transactions       |
+| **Structure** | Unstructured text            | Tabular data (rows/columns) |
+| **Parsing**   | Extract merchant/amount/date | Detect columns, parse rows  |
+| **Pages**     | Usually 1 page               | Often 5-10 pages            |
 
 ---
 
 ## 📊 Expected OCR Accuracy
 
-| PDF Type | Expected Accuracy | Notes |
-|----------|------------------|-------|
-| Text-based PDF | 95-98% | Native digital text |
-| High-quality scan | 85-90% | Clear image, good contrast |
-| Low-quality scan | 70-80% | Blurry, low resolution |
-| Handwritten | <50% | Not supported |
+| PDF Type          | Expected Accuracy | Notes                      |
+| ----------------- | ----------------- | -------------------------- |
+| Text-based PDF    | 95-98%            | Native digital text        |
+| High-quality scan | 85-90%            | Clear image, good contrast |
+| Low-quality scan  | 70-80%            | Blurry, low resolution     |
+| Handwritten       | <50%              | Not supported              |
 
 **Target**: 90%+ extraction accuracy for Home Trust Bank PDFs
 
@@ -97,6 +105,7 @@ PDF Statement → convertPdfToImages() → Tesseract.js → parseTableRows() →
 ## 🧪 Testing Checklist
 
 ### Test Scenarios (Task 5)
+
 - [ ] Single-page statement (1-5 transactions)
 - [ ] Multi-page statement (5-10 pages, 50+ transactions)
 - [ ] Text-based PDF (95%+ accuracy expected)
@@ -104,6 +113,7 @@ PDF Statement → convertPdfToImages() → Tesseract.js → parseTableRows() →
 - [ ] Mixed debit/credit columns (Home Trust format)
 
 ### Performance Targets
+
 - [ ] 5-page PDF processes in <30 seconds
 - [ ] 10-page PDF processes in <60 seconds
 - [ ] Browser memory usage <500MB
@@ -114,12 +124,14 @@ PDF Statement → convertPdfToImages() → Tesseract.js → parseTableRows() →
 ## 🔄 Session Checkpoints
 
 ### Session 1 (2025-11-15 21:34 UTC)
+
 - ✅ Created Archon project (ID: `0beabf9e-5839-4f38-a02c-a7ac26a5401f`)
 - ✅ Created 6 tasks with agent assignments
 - ✅ Created this documentation file
 - ⏳ Next: Start Task 1 (vibe check → mark doing → implement)
 
 ### Session 2 (2025-11-15 21:48 UTC)
+
 - ✅ **Task 1 COMPLETED**: bank-statement-ocr.ts
   - Created `/src/lib/bank-statement-ocr.ts` (430 lines)
   - Implemented `extractBankStatementData()`, `parseTableRows()`, `parseTransactionRow()`
@@ -150,6 +162,7 @@ PDF Statement → convertPdfToImages() → Tesseract.js → parseTableRows() →
 - ⏳ Next: Task 3 (UI integration into import page)
 
 ### Session 3 (2025-11-15 22:10 UTC)
+
 - ✅ **Task 3 COMPLETED**: UI integration into import page
   - Updated `/src/lib/parsers/format-detector.ts`:
     - Added 'pdf' to FileFormat type
@@ -179,6 +192,7 @@ PDF Statement → convertPdfToImages() → Tesseract.js → parseTableRows() →
 - ⏳ Next: Task 4 (UI enhancements)
 
 ### Session 4 (2025-11-15 22:34 UTC)
+
 - ✅ **Task 4 COMPLETED**: UI enhancements for PDF import
   - Added PDF-specific state variables:
     - `pdfPageCount` - stores total pages processed
@@ -212,6 +226,7 @@ PDF Statement → convertPdfToImages() → Tesseract.js → parseTableRows() →
 - ⏳ Next: Task 5 (Testing with Home Trust PDFs)
 
 ### Session 5 (2025-11-15 23:34 UTC)
+
 - ✅ **Task 5 COMPLETED**: Testing with Home Trust PDFs
   - Ran all existing PDF tests: 23 tests passed (11 bank-statement-ocr + 12 pdf-bank-parser)
   - Verified TypeScript compilation and Next.js build successful
@@ -226,6 +241,7 @@ PDF Statement → convertPdfToImages() → Tesseract.js → parseTableRows() →
 - ⏳ Next: Task 6 (Manual column mapping fallback UI)
 
 ### Session 6 (2025-11-15 23:53 UTC)
+
 - ✅ **Task 6 COMPLETED**: Manual column mapping fallback UI
   - Created `/src/components/budget/ColumnMapperModal.tsx` (new component, 577 lines)
     - Modal component with PDF data preview (first 5 rows)
@@ -280,6 +296,7 @@ PDF Statement → convertPdfToImages() → Tesseract.js → parseTableRows() →
 - 🎉 **PROJECT COMPLETE**: All 6 tasks finished!
 
 ### Project Completion Summary
+
 - ✅ **Task 1**: bank-statement-ocr.ts - Multi-page PDF OCR extraction
 - ✅ **Task 2**: pdf-bank-parser.ts - Intelligent column detection with fuzzy matching
 - ✅ **Task 3**: UI integration - PDF support in import page
@@ -297,6 +314,7 @@ PDF Statement → convertPdfToImages() → Tesseract.js → parseTableRows() →
 ## 📚 Archon Commands Reference
 
 ### View Tasks
+
 ```bash
 # Get all tasks for this project
 mcp__archon__find_tasks(project_id="0beabf9e-5839-4f38-a02c-a7ac26a5401f")
@@ -309,6 +327,7 @@ mcp__archon__find_tasks(project_id="...", query="OCR")
 ```
 
 ### Update Task Status
+
 ```bash
 # Mark task as doing
 mcp__archon__manage_task(
@@ -327,6 +346,7 @@ mcp__archon__manage_task(
 ```
 
 ### Create Document (Optional)
+
 ```bash
 # Create technical spec document
 mcp__archon__manage_document(
@@ -354,6 +374,7 @@ mcp__archon__manage_document(
 ## 🎯 Success Criteria
 
 **Project Complete When**:
+
 - ✅ All 6 tasks marked as "done" in Archon
 - ✅ PDF files upload successfully on import page
 - ✅ 90%+ extraction accuracy for Home Trust Bank PDFs

@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase';
-import * as fs from 'fs';
-import * as path from 'path';
+import { NextResponse } from "next/server";
+import { supabaseAdmin } from "@/lib/supabase";
+import * as fs from "fs";
+import * as path from "path";
 
 interface FlashcardLibraryItem {
   front_text: string;
@@ -21,32 +21,32 @@ export async function POST(request: Request) {
     const userId = body.user_id;
 
     if (!userId) {
-      return NextResponse.json({ error: 'user_id is required' }, { status: 400 });
+      return NextResponse.json({ error: "user_id is required" }, { status: 400 });
     }
 
     if (!supabaseAdmin) {
-      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+      return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
     }
 
     // Check if flashcards already exist for this user (idempotent)
     // Only skip if we have the full set of 331 flashcards
     const { count: existingCount, error: checkError } = await supabaseAdmin
-      .from('flashcards')
-      .select('*', { count: 'exact', head: true })
-      .eq('user_id', userId);
+      .from("flashcards")
+      .select("*", { count: "exact", head: true })
+      .eq("user_id", userId);
 
     console.log(`[SEED] Checking flashcards for user ${userId}:`, { existingCount, checkError });
 
     if (checkError) {
-      console.error('Error checking existing flashcards:', checkError);
-      return NextResponse.json({ error: 'Database error' }, { status: 500 });
+      console.error("Error checking existing flashcards:", checkError);
+      return NextResponse.json({ error: "Database error" }, { status: 500 });
     }
 
     if (existingCount && existingCount >= 331) {
       return NextResponse.json({
-        message: 'Flashcards already seeded for this user',
+        message: "Flashcards already seeded for this user",
         count: existingCount,
-        alreadySeeded: true
+        alreadySeeded: true,
       });
     }
 
@@ -54,27 +54,27 @@ export async function POST(request: Request) {
     if (existingCount && existingCount > 0) {
       console.log(`[SEED] Found ${existingCount} partial flashcards, deleting for clean seed...`);
       const { error: deleteError } = await supabaseAdmin
-        .from('flashcards')
+        .from("flashcards")
         .delete()
-        .eq('user_id', userId);
+        .eq("user_id", userId);
 
       if (deleteError) {
-        console.error('Error deleting partial flashcards:', deleteError);
+        console.error("Error deleting partial flashcards:", deleteError);
       } else {
-        console.log('[SEED] Partial flashcards deleted successfully');
+        console.log("[SEED] Partial flashcards deleted successfully");
       }
     }
 
-    console.log('[SEED] No existing flashcards found, proceeding with seed...');
+    console.log("[SEED] No existing flashcards found, proceeding with seed...");
 
     // Load flashcard library from file system
-    const libraryPath = path.join(process.cwd(), 'flashcards-library.json');
+    const libraryPath = path.join(process.cwd(), "flashcards-library.json");
 
     if (!fs.existsSync(libraryPath)) {
-      return NextResponse.json({ error: 'Flashcard library not found' }, { status: 404 });
+      return NextResponse.json({ error: "Flashcard library not found" }, { status: 404 });
     }
 
-    const fileContent = fs.readFileSync(libraryPath, 'utf-8');
+    const fileContent = fs.readFileSync(libraryPath, "utf-8");
     const flashcards: FlashcardLibraryItem[] = JSON.parse(fileContent);
 
     // Prepare flashcards for insertion with proper type casting
@@ -83,25 +83,33 @@ export async function POST(request: Request) {
       const enhancedTags = [
         ...(card.tags || []),
         ...(card.domain ? [card.domain] : []),
-        ...(card.difficulty ? [`difficulty:${card.difficulty}`] : [])
+        ...(card.difficulty ? [`difficulty:${card.difficulty}`] : []),
       ];
 
       // Map source values to valid enum
-      const sourceMapping: Record<string, 'manual' | 'auto_generated' | 'quiz_failure' | 'video_concept'> = {
-        'manual': 'manual',
-        'auto_generated': 'auto_generated',
-        'generated': 'auto_generated', // Map "generated" to "auto_generated"
-        'quiz_failure': 'quiz_failure',
-        'mcq': 'quiz_failure', // Map "mcq" to "quiz_failure"
-        'video_concept': 'video_concept'
+      const sourceMapping: Record<
+        string,
+        "manual" | "auto_generated" | "quiz_failure" | "video_concept"
+      > = {
+        manual: "manual",
+        auto_generated: "auto_generated",
+        generated: "auto_generated", // Map "generated" to "auto_generated"
+        quiz_failure: "quiz_failure",
+        mcq: "quiz_failure", // Map "mcq" to "quiz_failure"
+        video_concept: "video_concept",
       };
 
       return {
         user_id: userId,
         front_text: card.front_text,
         back_text: card.back_text,
-        card_type: (card.card_type || 'concept') as 'basic' | 'cloze' | 'concept' | 'diagram' | 'code',
-        source: sourceMapping[card.source || 'auto_generated'] || 'auto_generated',
+        card_type: (card.card_type || "concept") as
+          | "basic"
+          | "cloze"
+          | "concept"
+          | "diagram"
+          | "code",
+        source: sourceMapping[card.source || "auto_generated"] || "auto_generated",
         hint: card.hint || null,
         explanation: card.explanation || null,
         tags: enhancedTags,
@@ -129,10 +137,7 @@ export async function POST(request: Request) {
     for (let i = 0; i < flashcardsToInsert.length; i += batchSize) {
       const batch = flashcardsToInsert.slice(i, i + batchSize);
 
-      const { data, error } = await supabaseAdmin
-        .from('flashcards')
-        .insert(batch)
-        .select();
+      const { data, error } = await supabaseAdmin.from("flashcards").insert(batch).select();
 
       if (error) {
         console.error(`Error inserting batch ${i / batchSize + 1}:`, error);
@@ -144,11 +149,11 @@ export async function POST(request: Request) {
 
     // Calculate domain distribution for response
     const distribution = {
-      'asking-questions': flashcards.filter(c => c.domain === 'asking-questions').length,
-      'refining-targeting': flashcards.filter(c => c.domain === 'refining-targeting').length,
-      'taking-action': flashcards.filter(c => c.domain === 'taking-action').length,
-      'navigation': flashcards.filter(c => c.domain === 'navigation').length,
-      'reporting': flashcards.filter(c => c.domain === 'reporting').length,
+      "asking-questions": flashcards.filter((c) => c.domain === "asking-questions").length,
+      "refining-targeting": flashcards.filter((c) => c.domain === "refining-targeting").length,
+      "taking-action": flashcards.filter((c) => c.domain === "taking-action").length,
+      navigation: flashcards.filter((c) => c.domain === "navigation").length,
+      reporting: flashcards.filter((c) => c.domain === "reporting").length,
     };
 
     return NextResponse.json({
@@ -157,51 +162,55 @@ export async function POST(request: Request) {
       distribution,
       errors: errors.length > 0 ? errors : undefined,
     });
-
   } catch (error) {
-    console.error('Error seeding flashcards:', error);
-    return NextResponse.json({
-      error: 'Internal server error',
-      details: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+    console.error("Error seeding flashcards:", error);
+    return NextResponse.json(
+      {
+        error: "Internal server error",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
   }
 }
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const userId = searchParams.get('user_id');
+    const userId = searchParams.get("user_id");
 
     if (!userId) {
-      return NextResponse.json({ error: 'user_id is required' }, { status: 400 });
+      return NextResponse.json({ error: "user_id is required" }, { status: 400 });
     }
 
     if (!supabaseAdmin) {
-      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 });
+      return NextResponse.json({ error: "Server configuration error" }, { status: 500 });
     }
 
     // Check if user has any flashcards
     const { data, error } = await supabaseAdmin
-      .from('flashcards')
-      .select('id')
-      .eq('user_id', userId)
+      .from("flashcards")
+      .select("id")
+      .eq("user_id", userId)
       .limit(1);
 
     if (error) {
-      console.error('Error checking flashcard status:', error);
-      return NextResponse.json({ error: 'Database error' }, { status: 500 });
+      console.error("Error checking flashcard status:", error);
+      return NextResponse.json({ error: "Database error" }, { status: 500 });
     }
 
     return NextResponse.json({
       seeded: data && data.length > 0,
-      count: data?.length || 0
+      count: data?.length || 0,
     });
-
   } catch (error) {
-    console.error('Error checking seed status:', error);
-    return NextResponse.json({
-      error: 'Internal server error',
-      details: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 });
+    console.error("Error checking seed status:", error);
+    return NextResponse.json(
+      {
+        error: "Internal server error",
+        details: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
   }
 }

@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 
 /**
  * Seniors Mode Configuration
@@ -110,12 +103,12 @@ export function SeniorsModeProvider({ children }: { children: ReactNode }) {
 
       // Check for system preference for reduced motion
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        setSettings(prev => ({ ...prev, reduceMotion: true }));
+        setSettings((prev) => ({ ...prev, reduceMotion: true }));
       }
 
       // Check for system preference for high contrast
       if (window.matchMedia("(prefers-contrast: more)").matches) {
-        setSettings(prev => ({ ...prev, highContrast: true }));
+        setSettings((prev) => ({ ...prev, highContrast: true }));
       }
     } catch (error) {
       console.error("Failed to load Seniors Mode settings:", error);
@@ -160,19 +153,13 @@ export function SeniorsModeProvider({ children }: { children: ReactNode }) {
     const root = document.documentElement;
 
     // Font size
-    root.style.setProperty(
-      "--seniors-font-multiplier",
-      String(settings.fontSizeMultiplier)
-    );
+    root.style.setProperty("--seniors-font-multiplier", String(settings.fontSizeMultiplier));
 
     // Touch target size
-    root.style.setProperty(
-      "--seniors-touch-target",
-      `${settings.touchTargetSize}px`
-    );
+    root.style.setProperty("--seniors-touch-target", `${settings.touchTargetSize}px`);
 
     // CSS classes on body
-    const {body} = document;
+    const { body } = document;
     body.classList.toggle("seniors-mode", settings.enabled);
     body.classList.toggle("seniors-simplified", settings.simplifiedMode);
     body.classList.toggle("seniors-high-contrast", settings.highContrast);
@@ -182,15 +169,10 @@ export function SeniorsModeProvider({ children }: { children: ReactNode }) {
     // Data attribute for CSS targeting
     body.dataset.seniorsMode = settings.enabled ? "true" : "false";
     body.dataset.fontScale = String(settings.fontSizeMultiplier);
-
   }, [settings, isHydrated]);
 
   const toggleSeniorsMode = useCallback(() => {
-    setSettings(prev =>
-      prev.enabled
-        ? { ...defaultSettings }
-        : { ...seniorsEnabledSettings }
-    );
+    setSettings((prev) => (prev.enabled ? { ...defaultSettings } : { ...seniorsEnabledSettings }));
   }, []);
 
   const enableSeniorsMode = useCallback((customSettings?: Partial<SeniorsModeSettings>) => {
@@ -205,15 +187,15 @@ export function SeniorsModeProvider({ children }: { children: ReactNode }) {
     setSettings(defaultSettings);
   }, []);
 
-  const updateSetting = useCallback(<K extends keyof SeniorsModeSettings>(
-    key: K,
-    value: SeniorsModeSettings[K]
-  ) => {
-    setSettings(prev => ({ ...prev, [key]: value }));
-  }, []);
+  const updateSetting = useCallback(
+    <K extends keyof SeniorsModeSettings>(key: K, value: SeniorsModeSettings[K]) => {
+      setSettings((prev) => ({ ...prev, [key]: value }));
+    },
+    []
+  );
 
   const updateSettings = useCallback((newSettings: Partial<SeniorsModeSettings>) => {
-    setSettings(prev => ({ ...prev, ...newSettings }));
+    setSettings((prev) => ({ ...prev, ...newSettings }));
   }, []);
 
   const resetToDefaults = useCallback(() => {
@@ -226,15 +208,15 @@ export function SeniorsModeProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Computed CSS classes
-  const fontSizeClass = settings.fontSizeMultiplier === 1.5
-    ? "text-xl"
-    : settings.fontSizeMultiplier === 1.25
-      ? "text-lg"
-      : "text-base";
+  const fontSizeClass =
+    settings.fontSizeMultiplier === 1.5
+      ? "text-xl"
+      : settings.fontSizeMultiplier === 1.25
+        ? "text-lg"
+        : "text-base";
 
-  const touchTargetClass = settings.touchTargetSize === 52
-    ? "min-h-[52px] min-w-[52px]"
-    : "min-h-[44px] min-w-[44px]";
+  const touchTargetClass =
+    settings.touchTargetSize === 52 ? "min-h-[52px] min-w-[52px]" : "min-h-[44px] min-w-[44px]";
 
   const value: SeniorsModeContextType = {
     settings,
@@ -249,11 +231,7 @@ export function SeniorsModeProvider({ children }: { children: ReactNode }) {
     touchTargetClass,
   };
 
-  return (
-    <SeniorsModeContext.Provider value={value}>
-      {children}
-    </SeniorsModeContext.Provider>
-  );
+  return <SeniorsModeContext.Provider value={value}>{children}</SeniorsModeContext.Provider>;
 }
 
 /**

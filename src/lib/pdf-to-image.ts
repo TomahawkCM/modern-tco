@@ -18,24 +18,24 @@ declare global {
 
 async function loadPdfJs(): Promise<any> {
   // Client-side only check
-  if (typeof window === 'undefined') {
-    throw new Error('PDF processing is only available in the browser');
+  if (typeof window === "undefined") {
+    throw new Error("PDF processing is only available in the browser");
   }
 
   // Wait for PDF.js to load from CDN
   let attempts = 0;
   while (!window.pdfjsLib && attempts < 50) {
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
     attempts++;
   }
 
   if (!window.pdfjsLib) {
-    throw new Error('PDF.js library not loaded. Make sure the CDN script is included.');
+    throw new Error("PDF.js library not loaded. Make sure the CDN script is included.");
   }
 
   // Configure worker from CDN (same version as main library)
   window.pdfjsLib.GlobalWorkerOptions.workerSrc =
-    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
   return window.pdfjsLib;
 }
@@ -70,11 +70,11 @@ export async function convertPdfToImages(
       const viewport = page.getViewport({ scale: 2.0 });
 
       // Create canvas
-      const canvas = document.createElement('canvas');
-      const context = canvas.getContext('2d');
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
 
       if (!context) {
-        throw new Error('Failed to get canvas context');
+        throw new Error("Failed to get canvas context");
       }
 
       canvas.height = viewport.height;
@@ -99,8 +99,10 @@ export async function convertPdfToImages(
 
     return pages;
   } catch (error) {
-    console.error('[PDF Conversion] Error converting PDF to images:', error);
-    throw new Error(`Failed to convert PDF: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    console.error("[PDF Conversion] Error converting PDF to images:", error);
+    throw new Error(
+      `Failed to convert PDF: ${error instanceof Error ? error.message : "Unknown error"}`
+    );
   }
 }
 
@@ -126,11 +128,11 @@ export async function convertPdfPageToCanvas(
   const page = await pdf.getPage(pageNumber);
   const viewport = page.getViewport({ scale: 2.0 });
 
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
+  const canvas = document.createElement("canvas");
+  const context = canvas.getContext("2d");
 
   if (!context) {
-    throw new Error('Failed to get canvas context');
+    throw new Error("Failed to get canvas context");
   }
 
   canvas.height = viewport.height;
@@ -171,5 +173,5 @@ export async function getPdfMetadata(file: File): Promise<{
  * @returns True if file is a PDF
  */
 export function isPdfFile(file: File): boolean {
-  return file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+  return file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
 }

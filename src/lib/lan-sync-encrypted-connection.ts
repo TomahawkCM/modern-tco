@@ -5,8 +5,8 @@
  * All sync messages are encrypted before transmission.
  */
 
-import type { SyncMessage, SyncEventListener, VectorClock } from './lan-sync';
-import { SyncConnection, ConnectionPool } from './lan-sync-connection';
+import type { SyncMessage, SyncEventListener, VectorClock } from "./lan-sync";
+import { SyncConnection, ConnectionPool } from "./lan-sync-connection";
 import {
   generateKeyPair,
   importPublicKey,
@@ -22,12 +22,8 @@ import {
   type KeyPair,
   type SessionKeys,
   type EncryptedMessage,
-} from './lan-sync-encryption';
-import {
-  serializeMessage,
-  deserializeMessage,
-  SyncError,
-} from './lan-sync';
+} from "./lan-sync-encryption";
+import { serializeMessage, deserializeMessage, SyncError } from "./lan-sync";
 
 // ============================================================================
 // Types
@@ -65,11 +61,7 @@ export class EncryptedSyncConnection {
 
   constructor(config: EncryptedConnectionConfig) {
     this.config = config;
-    this.connection = new SyncConnection(
-      config.deviceId,
-      config.deviceName,
-      config.vectorClock
-    );
+    this.connection = new SyncConnection(config.deviceId, config.deviceName, config.vectorClock);
 
     // Forward events from underlying connection
     this.connection.addEventListener((event) => {
@@ -114,7 +106,7 @@ export class EncryptedSyncConnection {
     sessionId?: string
   ): Promise<SessionKeys> {
     if (!this.keyPair) {
-      throw new SyncError('Keys not initialized', 'ENCRYPTION_ERROR');
+      throw new SyncError("Keys not initialized", "ENCRYPTION_ERROR");
     }
 
     const sid = sessionId || generateSessionId();
@@ -123,25 +115,14 @@ export class EncryptedSyncConnection {
     const remotePublicKey = await importPublicKey(remotePublicKeyBase64);
 
     // Derive shared secret using ECDH
-    const sharedSecret = await deriveSharedSecret(
-      this.keyPair.privateKey,
-      remotePublicKey
-    );
+    const sharedSecret = await deriveSharedSecret(this.keyPair.privateKey, remotePublicKey);
 
     // Generate salt for key derivation
     const salt = crypto.getRandomValues(new Uint8Array(16));
 
     // Derive separate keys for encryption and decryption
-    const encryptKey = await deriveAESKey(
-      sharedSecret,
-      salt,
-      `session-${sid}-encrypt`
-    );
-    const decryptKey = await deriveAESKey(
-      sharedSecret,
-      salt,
-      `session-${sid}-decrypt`
-    );
+    const encryptKey = await deriveAESKey(sharedSecret, salt, `session-${sid}-encrypt`);
+    const decryptKey = await deriveAESKey(sharedSecret, salt, `session-${sid}-decrypt`);
 
     this.sessionKeys = {
       sessionId: sid,
@@ -188,8 +169,8 @@ export class EncryptedSyncConnection {
     // Return success but keys will need to be established separately
     return {
       success: true,
-      sessionId: '',
-      remotePublicKey: '',
+      sessionId: "",
+      remotePublicKey: "",
     };
   }
 
@@ -204,7 +185,7 @@ export class EncryptedSyncConnection {
   /**
    * Disconnect and clear session keys
    */
-  async disconnect(reason: 'user_request' | 'timeout' | 'error' = 'user_request'): Promise<void> {
+  async disconnect(reason: "user_request" | "timeout" | "error" = "user_request"): Promise<void> {
     // Clear session keys from cache
     if (this.sessionKeys) {
       clearSessionKeys(this.config.deviceId);
@@ -237,7 +218,7 @@ export class EncryptedSyncConnection {
    */
   async sendEncryptedMessage<T>(message: SyncMessage<T>): Promise<void> {
     if (!this.sessionKeys) {
-      throw new SyncError('Session keys not established', 'ENCRYPTION_ERROR');
+      throw new SyncError("Session keys not established", "ENCRYPTION_ERROR");
     }
 
     // Serialize the message
@@ -265,13 +246,13 @@ export class EncryptedSyncConnection {
    */
   sendEncryptedMessageNoWait<T>(message: SyncMessage<T>): void {
     if (!this.sessionKeys) {
-      throw new SyncError('Session keys not established', 'ENCRYPTION_ERROR');
+      throw new SyncError("Session keys not established", "ENCRYPTION_ERROR");
     }
 
     // For fire-and-forget, we need to encrypt synchronously
     // Since Web Crypto is async, we queue the encryption
     this.encryptAndSend(message).catch((error) => {
-      console.error('Failed to send encrypted message:', error);
+      console.error("Failed to send encrypted message:", error);
     });
   }
 
@@ -299,14 +280,11 @@ export class EncryptedSyncConnection {
    */
   async decryptMessage<T>(encryptedPayload: EncryptedMessage): Promise<SyncMessage<T>> {
     if (!this.sessionKeys) {
-      throw new SyncError('Session keys not established', 'ENCRYPTION_ERROR');
+      throw new SyncError("Session keys not established", "ENCRYPTION_ERROR");
     }
 
     // Decrypt the payload
-    const decrypted = await decryptToString(
-      this.sessionKeys.decryptKey,
-      encryptedPayload
-    );
+    const decrypted = await decryptToString(this.sessionKeys.decryptKey, encryptedPayload);
 
     // Parse the decrypted message
     return deserializeMessage(decrypted) as SyncMessage<T>;
@@ -315,7 +293,9 @@ export class EncryptedSyncConnection {
   /**
    * Check if a message is encrypted and decrypt if needed
    */
-  async processIncomingMessage<T>(message: SyncMessage<T | EncryptedMessage>): Promise<SyncMessage<T>> {
+  async processIncomingMessage<T>(
+    message: SyncMessage<T | EncryptedMessage>
+  ): Promise<SyncMessage<T>> {
     if (message.encrypted && this.sessionKeys) {
       // Message is encrypted, decrypt it
       return this.decryptMessage<T>(message.payload as EncryptedMessage);
@@ -485,9 +465,7 @@ export class EncryptedConnectionPool {
    * Disconnect from all devices
    */
   async disconnectAll(): Promise<void> {
-    const promises = Array.from(this.connections.keys()).map((id) =>
-      this.disconnect(id)
-    );
+    const promises = Array.from(this.connections.keys()).map((id) => this.disconnect(id));
     await Promise.all(promises);
   }
 
@@ -498,7 +476,7 @@ export class EncryptedConnectionPool {
     const results = new Map<string, Error | null>();
 
     const promises = this.getActiveConnections().map(async (connection) => {
-      const deviceId = connection.getSessionInfo().sessionId || 'unknown';
+      const deviceId = connection.getSessionInfo().sessionId || "unknown";
       try {
         await connection.sendEncryptedMessage(message);
         results.set(deviceId, null);

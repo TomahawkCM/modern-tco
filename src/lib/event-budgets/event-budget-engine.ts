@@ -6,15 +6,15 @@
  * transaction tagging via eventBudgetId.
  */
 
-import { db } from '@/lib/budget-db';
-import { roundToCents, sumAmounts } from '@/lib/money';
-import type { EventBudget, EventBudgetCategory } from '@/types/budget';
+import { db } from "@/lib/budget-db";
+import { roundToCents, sumAmounts } from "@/lib/money";
+import type { EventBudget, EventBudgetCategory } from "@/types/budget";
 
 /**
  * Create a new event budget with categories.
  */
 export async function createEventBudget(
-  data: Omit<EventBudget, 'id' | 'createdAt' | 'updatedAt'>,
+  data: Omit<EventBudget, "id" | "createdAt" | "updatedAt">,
   categories?: Array<{ categoryName: string; budgeted: number }>
 ): Promise<EventBudget> {
   const now = new Date();
@@ -46,9 +46,7 @@ export async function createEventBudget(
  * Calculate progress for an event budget.
  * Sums spent amounts from tagged transactions per category.
  */
-export async function calculateProgress(
-  eventBudgetId: string
-): Promise<{
+export async function calculateProgress(eventBudgetId: string): Promise<{
   total: number;
   spent: number;
   remaining: number;
@@ -60,25 +58,20 @@ export async function calculateProgress(
   }
 
   // Get all tagged transactions
-  const taggedTxs = await db.transactions
-    .where('eventBudgetId')
-    .equals(eventBudgetId)
-    .toArray();
+  const taggedTxs = await db.transactions.where("eventBudgetId").equals(eventBudgetId).toArray();
 
   const nonSplitTxs = taggedTxs.filter((tx) => !tx.isSplit);
 
   // Get categories for this event
   const categories = await db.eventBudgetCategories
-    .where('eventBudgetId')
+    .where("eventBudgetId")
     .equals(eventBudgetId)
     .toArray();
 
   // Calculate spent per category
   const updatedCategories = categories.map((cat) => {
-    const catTxs = nonSplitTxs.filter(
-      (tx) => tx.category === cat.categoryName && tx.amount < 0
-    );
-    const spent = sumAmounts(catTxs.map(tx => Math.abs(tx.amount)));
+    const catTxs = nonSplitTxs.filter((tx) => tx.category === cat.categoryName && tx.amount < 0);
+    const spent = sumAmounts(catTxs.map((tx) => Math.abs(tx.amount)));
     return { ...cat, spent: roundToCents(spent) };
   });
 
@@ -89,7 +82,7 @@ export async function calculateProgress(
 
   const totalBudgeted = eventBudget.totalBudget;
   const totalSpent = sumAmounts(
-    nonSplitTxs.filter((tx) => tx.amount < 0).map(tx => Math.abs(tx.amount))
+    nonSplitTxs.filter((tx) => tx.amount < 0).map((tx) => Math.abs(tx.amount))
   );
 
   return {
@@ -104,10 +97,7 @@ export async function calculateProgress(
  * Get all active event budgets (status = 'active' or 'planning', within date range).
  */
 export async function getActiveEvents(): Promise<EventBudget[]> {
-  const all = await db.eventBudgets
-    .where('status')
-    .anyOf(['active', 'planning'])
-    .toArray();
+  const all = await db.eventBudgets.where("status").anyOf(["active", "planning"]).toArray();
 
   return all;
 }
@@ -115,10 +105,7 @@ export async function getActiveEvents(): Promise<EventBudget[]> {
 /**
  * Tag a transaction with an event budget.
  */
-export async function tagTransaction(
-  transactionId: string,
-  eventBudgetId: string
-): Promise<void> {
+export async function tagTransaction(transactionId: string, eventBudgetId: string): Promise<void> {
   await db.transactions.update(transactionId, {
     eventBudgetId,
     updatedAt: new Date(),
@@ -140,7 +127,7 @@ export async function untagTransaction(transactionId: string): Promise<void> {
  */
 export async function updateEventBudget(
   id: string,
-  updates: Partial<Omit<EventBudget, 'id' | 'createdAt'>>
+  updates: Partial<Omit<EventBudget, "id" | "createdAt">>
 ): Promise<void> {
   await db.eventBudgets.update(id, {
     ...updates,
@@ -154,10 +141,7 @@ export async function updateEventBudget(
  */
 export async function deleteEventBudget(id: string): Promise<void> {
   // Untag all transactions
-  const tagged = await db.transactions
-    .where('eventBudgetId')
-    .equals(id)
-    .toArray();
+  const tagged = await db.transactions.where("eventBudgetId").equals(id).toArray();
 
   for (const tx of tagged) {
     await db.transactions.update(tx.id, {
@@ -167,10 +151,7 @@ export async function deleteEventBudget(id: string): Promise<void> {
   }
 
   // Delete categories
-  await db.eventBudgetCategories
-    .where('eventBudgetId')
-    .equals(id)
-    .delete();
+  await db.eventBudgetCategories.where("eventBudgetId").equals(id).delete();
 
   // Delete event budget
   await db.eventBudgets.delete(id);

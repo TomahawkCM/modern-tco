@@ -75,10 +75,7 @@ export function useDatabase(user?: User | null) {
   const getUserStatistics = useCallback(async () => {
     if (!user) throw new Error("User not authenticated");
 
-    const res: any = await supabase
-      .from("user_statistics")
-      .select("*")
-      .eq("user_id", user.id);
+    const res: any = await supabase.from("user_statistics").select("*").eq("user_id", user.id);
 
     const { data, error } = res;
     if (error) throw error;
@@ -112,7 +109,7 @@ export function useDatabase(user?: User | null) {
       tags?: string[];
       limit?: number;
     }) => {
-  let query: any = supabase.from("questions").select("*");
+      let query: any = supabase.from("questions").select("*");
 
       if (filters?.category) {
         query = query.eq("category", filters.category);
@@ -130,10 +127,10 @@ export function useDatabase(user?: User | null) {
         query = query.limit(filters.limit);
       }
 
-  const res: any = await query;
-  const { data, error } = res;
-  if (error) throw error;
-  return data ?? [];
+      const res: any = await query;
+      const { data, error } = res;
+      if (error) throw error;
+      return data ?? [];
     },
     []
   );
@@ -179,10 +176,10 @@ export function useDatabase(user?: User | null) {
         query = query.eq("exam_session_id", examSessionId);
       }
 
-  const res: any = await query;
-  const { data, error } = res;
-  if (error) throw error;
-  return data ?? [];
+      const res: any = await query;
+      const { data, error } = res;
+      if (error) throw error;
+      return data ?? [];
     },
     [userId, user]
   );
@@ -198,10 +195,7 @@ export function useDatabase(user?: User | null) {
     getUserProgress,
     getModuleProgress: async (moduleIds: string[] = []) => {
       if (!user) throw new Error("User not authenticated");
-      let query: any = supabase
-        .from("user_module_progress")
-        .select("*")
-        .eq("user_id", user.id);
+      let query: any = supabase.from("user_module_progress").select("*").eq("user_id", user.id);
 
       if (moduleIds.length > 0) {
         query = query.in("module_id", moduleIds);
@@ -277,7 +271,7 @@ export function useDatabase(user?: User | null) {
         status: p.status,
         time_spent_minutes: p.time_spent_minutes ?? 0,
         notes: p.notes ?? null,
-        completed_at: p.status === 'completed' ? new Date().toISOString() : null,
+        completed_at: p.status === "completed" ? new Date().toISOString() : null,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       };
@@ -286,14 +280,12 @@ export function useDatabase(user?: User | null) {
       if (error) throw error;
       return data ?? null;
     },
-    upsertModuleProgress: async (
-      progress: {
-        module_id: string;
-        completed_sections?: number;
-        total_sections?: number;
-        status?: "not_started" | "in_progress" | "completed" | "bookmarked";
-      }
-    ) => {
+    upsertModuleProgress: async (progress: {
+      module_id: string;
+      completed_sections?: number;
+      total_sections?: number;
+      status?: "not_started" | "in_progress" | "completed" | "bookmarked";
+    }) => {
       if (!user) throw new Error("User not authenticated");
 
       const res: any = await supabase
@@ -347,7 +339,7 @@ export function useRealtimeSubscription<T = any>(
         if (fetchError) {
           setError(fetchError.message);
         } else {
-          setData(((initialData ?? []) as unknown) as T[]);
+          setData((initialData ?? []) as unknown as T[]);
         }
 
         // Set up real-time subscription
@@ -370,11 +362,11 @@ export function useRealtimeSubscription<T = any>(
               setData((current) => {
                 switch (payload.eventType) {
                   case "INSERT":
-                    return [...current, (payload.new as unknown) as T];
+                    return [...current, payload.new as unknown as T];
                   case "UPDATE":
                     return current.map((item) =>
                       (item as any).id === (payload.new as any).id
-                        ? ((payload.new as unknown) as T)
+                        ? (payload.new as unknown as T)
                         : item
                     );
                   case "DELETE":

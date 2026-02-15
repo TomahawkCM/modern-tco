@@ -9,6 +9,7 @@ The **Spaced Repetition System** implements the research-backed **2357 method** 
 **Principle**: Review material at increasing intervals to reset the forgetting curve before retention drops below 80%.
 
 **Review Schedule**:
+
 - **Day 0**: Initial learning (complete micro-section + pass quiz)
 - **Day 1**: First review (+1 day)
 - **Day 3**: Second review (+2 days from first review)
@@ -17,6 +18,7 @@ The **Spaced Repetition System** implements the research-backed **2357 method** 
 - **Day 35**: Fifth review (+19 days from fourth review)
 
 **Adaptive Behavior**:
+
 - ✅ **Correct answer**: Move to next interval (longer gap)
 - ❌ **Incorrect answer**: Stay at current interval (practice more)
 
@@ -35,15 +37,15 @@ interface ReviewItem {
   type: "micro-section" | "weak-concept";
 
   // Scheduling
-  createdAt: string;       // When added to system
-  lastReviewed: string;    // Last review date
-  nextReview: string;      // Next review due date
-  intervalIndex: number;   // Position in [1,2,4,9,19] sequence (0-4)
+  createdAt: string; // When added to system
+  lastReviewed: string; // Last review date
+  nextReview: string; // Next review due date
+  intervalIndex: number; // Position in [1,2,4,9,19] sequence (0-4)
 
   // Performance
-  totalReviews: number;    // Total review sessions
-  correctReviews: number;  // Successful reviews
-  retention: number;       // Success rate percentage (0-100)
+  totalReviews: number; // Total review sessions
+  correctReviews: number; // Successful reviews
+  retention: number; // Success rate percentage (0-100)
 
   // Metadata
   title: string;
@@ -87,6 +89,7 @@ getReviewStats(moduleId?: string): Stats
 **Purpose**: Dashboard showing what needs review today
 
 **Features**:
+
 - ✅ Statistics cards (due today, total items, avg retention, upcoming)
 - ✅ Overdue items highlighted in red
 - ✅ Items due today in orange
@@ -94,6 +97,7 @@ getReviewStats(moduleId?: string): Stats
 - ✅ "Start Review Session" launches ReviewSession
 
 **Props**:
+
 ```typescript
 interface DailyReviewProps {
   moduleId?: string; // Filter by module
@@ -106,6 +110,7 @@ interface DailyReviewProps {
 **Purpose**: Conducts active recall review sessions
 
 **Flow**:
+
 1. Shows one item at a time
 2. Student clicks "Remembered" or "Need Review"
 3. Immediate feedback with encouragement
@@ -113,6 +118,7 @@ interface DailyReviewProps {
 5. Final results with statistics
 
 **Props**:
+
 ```typescript
 interface ReviewSessionProps {
   items: ReviewItem[];
@@ -126,12 +132,13 @@ interface ReviewSessionProps {
 **Auto-Registration**: When student completes a micro-section (passes quiz), it's automatically added to spaced repetition.
 
 **Code** (lines 84-115):
+
 ```typescript
 const addToSpacedRepetition = () => {
   const existingItems = getAllReviewItems(moduleId);
 
   const alreadyTracked = existingItems.some(
-    item => item.sectionId === id && item.moduleId === moduleId
+    (item) => item.sectionId === id && item.moduleId === moduleId
   );
 
   if (!alreadyTracked) {
@@ -156,6 +163,7 @@ const addToSpacedRepetition = () => {
 **Key**: `spaced-repetition-${moduleId}`
 
 **Value**:
+
 ```json
 [
   {
@@ -181,6 +189,7 @@ const addToSpacedRepetition = () => {
 **Key**: `review-sessions`
 
 **Value**:
+
 ```json
 [
   {
@@ -199,6 +208,7 @@ const addToSpacedRepetition = () => {
 **Key**: `weak-areas-${moduleId}`
 
 **Value**:
+
 ```json
 {
   "Linear Chain Architecture": 2,
@@ -208,6 +218,7 @@ const addToSpacedRepetition = () => {
 ```
 
 **Integration**: `importWeakConcepts()` converts these into ReviewItems with appropriate difficulty:
+
 - 1 failure → "easy"
 - 2 failures → "medium"
 - 3+ failures → "hard"
@@ -215,12 +226,14 @@ const addToSpacedRepetition = () => {
 ## 🎯 User Flow
 
 ### 1. Complete Micro-Section
+
 ```
 Student reads section → Passes quiz (80%+) → Marks complete
 → AUTO: Section added to spaced repetition with Day 1 review
 ```
 
 ### 2. Daily Review Routine
+
 ```
 Student visits /daily-review
 → Sees "5 items due today" dashboard
@@ -231,6 +244,7 @@ Student visits /daily-review
 ```
 
 ### 3. Import Weak Concepts
+
 ```
 Student on module review page
 → Clicks "Import Weak Concepts"
@@ -298,12 +312,14 @@ getReviewStats(moduleId) returns {
 ## 🎯 Expected Results (Based on Research)
 
 **Compared to no spaced repetition**:
+
 - **+42% retention** at 30 days
 - **+70% retention** at 90 days
 - **Students score 70% vs 64%** on final exams
 - **80%+ daily engagement** with review system
 
 **Time Investment**:
+
 - Initial learning: 11.6h (83 micro-sections)
 - Daily reviews: 5-10 min/day
 - Total study time: ~20h effective vs 35-50h traditional
@@ -345,7 +361,7 @@ const items = getItemsDueToday("asking-questions");
   onExit={() => {
     console.log("User exited review session");
   }}
-/>
+/>;
 ```
 
 ### Programmatic Management
@@ -355,7 +371,7 @@ import {
   getAllReviewItems,
   getItemsDueToday,
   importWeakConcepts,
-  getReviewStats
+  getReviewStats,
 } from "@/lib/spacedRepetition";
 
 // Get all items for a module
@@ -382,6 +398,7 @@ console.log(`${stats.dueToday} items due today, ${stats.averageRetention}% avg r
 ---
 
 **Research Citations**:
+
 - Frontiers in Psychology 2025 - Spaced Repetition Effect
 - PMC 2025 - Cognitive Load & Adaptive Learning
 - Stanford Teaching Commons - Active Recall Methods

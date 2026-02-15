@@ -26,7 +26,6 @@ export function usePersistentState<T>(key: string, initial: T) {
       if (raw != null) setState(JSON.parse(raw) as T);
       else setState(initial);
     } catch {}
-     
   }, [key]);
 
   return [state, setState] as const;

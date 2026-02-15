@@ -11,79 +11,79 @@
  * - User can opt-out via Settings → Privacy
  */
 
-import { analytics } from './analytics';
-import { trackEvent } from './monitoring';
-import { isAnalyticsEnabled as checkAnalyticsEnabled } from './budget-privacy-settings';
+import { analytics } from "./analytics";
+import { trackEvent } from "./monitoring";
+import { isAnalyticsEnabled as checkAnalyticsEnabled } from "./budget-privacy-settings";
 
 /**
  * Budget App Event Types
  */
 export type BudgetAnalyticsEvent =
   // Transaction Events (no amounts/descriptions)
-  | 'transaction_added'
-  | 'transaction_edited'
-  | 'transaction_deleted'
-  | 'transaction_search'
-  | 'split_transaction_created'
+  | "transaction_added"
+  | "transaction_edited"
+  | "transaction_deleted"
+  | "transaction_search"
+  | "split_transaction_created"
 
   // Budget Events
-  | 'budget_created'
-  | 'budget_edited'
-  | 'budget_deleted'
-  | 'budget_exceeded'
-  | 'budget_progress_viewed'
+  | "budget_created"
+  | "budget_edited"
+  | "budget_deleted"
+  | "budget_exceeded"
+  | "budget_progress_viewed"
 
   // Import Events
-  | 'csv_import_started'
-  | 'csv_import_completed'
-  | 'csv_import_failed'
-  | 'pdf_import_started'
-  | 'ofx_import_completed'
+  | "csv_import_started"
+  | "csv_import_completed"
+  | "csv_import_failed"
+  | "pdf_import_started"
+  | "ofx_import_completed"
 
   // Loan Events
-  | 'loan_created'
-  | 'loan_payment_added'
-  | 'extra_payment_calculated'
-  | 'amortization_viewed'
+  | "loan_created"
+  | "loan_payment_added"
+  | "extra_payment_calculated"
+  | "amortization_viewed"
 
   // Investment Events
-  | 'investment_account_added'
-  | 'holding_added'
-  | 'portfolio_viewed'
+  | "investment_account_added"
+  | "holding_added"
+  | "portfolio_viewed"
 
   // OCR Events
-  | 'receipt_scanned'
-  | 'ocr_success'
-  | 'ocr_failed'
+  | "receipt_scanned"
+  | "ocr_success"
+  | "ocr_failed"
 
   // AI Events
-  | 'ai_duplicate_detection'
-  | 'ai_anomaly_detected'
-  | 'ai_spending_prediction'
-  | 'chatbot_query'
-  | 'chatbot_action'
+  | "ai_duplicate_detection"
+  | "ai_anomaly_detected"
+  | "ai_spending_prediction"
+  | "chatbot_query"
+  | "chatbot_action"
 
   // Navigation Events
-  | 'page_view'
-  | 'section_changed'
-  | 'report_generated'
+  | "page_view"
+  | "section_changed"
+  | "report_generated"
 
   // Feature Discovery
-  | 'onboarding_started'
-  | 'onboarding_completed'
-  | 'feature_tour_viewed'
-  | 'shortcuts_modal_opened'
+  | "onboarding_started"
+  | "onboarding_completed"
+  | "feature_tour_viewed"
+  | "shortcuts_modal_opened"
 
   // PWA Events
-  | 'pwa_installed'
-  | 'pwa_prompt_shown'
-  | 'offline_mode_entered'
+  | "pwa_installed"
+  | "pwa_prompt_shown"
+  | "offline_mode_entered"
 
   // Settings Events
-  | 'theme_changed'
-  | 'privacy_settings_changed'
-  | 'data_exported'
-  | 'encryption_enabled';
+  | "theme_changed"
+  | "privacy_settings_changed"
+  | "data_exported"
+  | "encryption_enabled";
 
 /**
  * Event Properties (all privacy-safe)
@@ -91,7 +91,15 @@ export type BudgetAnalyticsEvent =
 export interface BudgetEventProperties {
   // Feature metadata (no PII)
   feature?: string;
-  section?: 'transactions' | 'budgets' | 'loans' | 'investments' | 'reports' | 'import' | 'settings' | 'chatbot';
+  section?:
+    | "transactions"
+    | "budgets"
+    | "loans"
+    | "investments"
+    | "reports"
+    | "import"
+    | "settings"
+    | "chatbot";
 
   // Action context
   action?: string;
@@ -111,7 +119,7 @@ export interface BudgetEventProperties {
   loadTime?: number;
 
   // Import metadata
-  importFormat?: 'csv' | 'ofx' | 'pdf';
+  importFormat?: "csv" | "ofx" | "pdf";
   rowCount?: number;
   duplicatesFound?: number;
 
@@ -120,8 +128,8 @@ export interface BudgetEventProperties {
   aiModel?: string;
 
   // Theme/settings
-  theme?: 'light' | 'dark' | 'high-contrast';
-  privacyMode?: 'public' | 'private';
+  theme?: "light" | "dark" | "high-contrast";
+  privacyMode?: "public" | "private";
 
   // Custom properties
   [key: string]: string | number | boolean | undefined;
@@ -158,7 +166,7 @@ export async function trackBudgetEvent(
 
     // Send to PostHog
     await analytics.capture(event, {
-      app: 'budget',
+      app: "budget",
       ...cleanProps,
       timestamp: new Date().toISOString(),
     });
@@ -166,7 +174,7 @@ export async function trackBudgetEvent(
     // For errors, also send to monitoring
     if (!cleanProps.success && cleanProps.errorType) {
       await trackEvent({
-        type: 'custom',
+        type: "custom",
         data: {
           event,
           ...cleanProps,
@@ -175,7 +183,7 @@ export async function trackBudgetEvent(
     }
   } catch (error) {
     // Silent fail - don't break app for analytics
-    console.warn('[BudgetAnalytics] Failed to track event:', error);
+    console.warn("[BudgetAnalytics] Failed to track event:", error);
   }
 }
 
@@ -189,24 +197,24 @@ function sanitizeProperties(props?: BudgetEventProperties): BudgetEventPropertie
 
   // Allowlist safe properties
   const safeKeys: Array<keyof BudgetEventProperties> = [
-    'feature',
-    'section',
-    'action',
-    'method',
-    'count',
-    'itemCount',
-    'success',
-    'errorType',
-    'errorCode',
-    'duration',
-    'loadTime',
-    'importFormat',
-    'rowCount',
-    'duplicatesFound',
-    'aiEnabled',
-    'aiModel',
-    'theme',
-    'privacyMode',
+    "feature",
+    "section",
+    "action",
+    "method",
+    "count",
+    "itemCount",
+    "success",
+    "errorType",
+    "errorCode",
+    "duration",
+    "loadTime",
+    "importFormat",
+    "rowCount",
+    "duplicatesFound",
+    "aiEnabled",
+    "aiModel",
+    "theme",
+    "privacyMode",
   ];
 
   for (const key of safeKeys) {
@@ -223,7 +231,7 @@ function sanitizeProperties(props?: BudgetEventProperties): BudgetEventPropertie
  */
 export async function trackBudgetPageView(path: string, properties?: BudgetEventProperties) {
   const section = extractSection(path);
-  return trackBudgetEvent('page_view', {
+  return trackBudgetEvent("page_view", {
     section,
     ...properties,
   });
@@ -232,14 +240,14 @@ export async function trackBudgetPageView(path: string, properties?: BudgetEvent
 /**
  * Extract section from path
  */
-function extractSection(path: string): BudgetEventProperties['section'] {
-  if (path.includes('/transactions')) return 'transactions';
-  if (path.includes('/budgets')) return 'budgets';
-  if (path.includes('/loans')) return 'loans';
-  if (path.includes('/investments')) return 'investments';
-  if (path.includes('/reports')) return 'reports';
-  if (path.includes('/import')) return 'import';
-  if (path.includes('/settings')) return 'settings';
+function extractSection(path: string): BudgetEventProperties["section"] {
+  if (path.includes("/transactions")) return "transactions";
+  if (path.includes("/budgets")) return "budgets";
+  if (path.includes("/loans")) return "loans";
+  if (path.includes("/investments")) return "investments";
+  if (path.includes("/reports")) return "reports";
+  if (path.includes("/import")) return "import";
+  if (path.includes("/settings")) return "settings";
   return undefined;
 }
 
@@ -251,25 +259,25 @@ export async function trackBudgetError(
   context?: {
     feature?: string;
     action?: string;
-    section?: BudgetEventProperties['section'];
+    section?: BudgetEventProperties["section"];
   }
 ) {
   if (!isAnalyticsEnabled()) return;
 
   try {
     await trackEvent({
-      type: 'client_error',
+      type: "client_error",
       data: {
-        app: 'budget',
+        app: "budget",
         message: error.message,
-        stack: error.stack?.split('\n').slice(0, 3).join('\n'), // First 3 lines only
+        stack: error.stack?.split("\n").slice(0, 3).join("\n"), // First 3 lines only
         ...context,
       },
     });
 
     // Also send to PostHog for aggregate analysis
-    await analytics.capture('budget_error', {
-      app: 'budget',
+    await analytics.capture("budget_error", {
+      app: "budget",
       errorType: error.name,
       errorMessage: error.message.substring(0, 100), // Truncate to avoid PII
       ...context,
@@ -291,9 +299,9 @@ export async function trackBudgetPerformance(
 
   try {
     await trackEvent({
-      type: 'performance',
+      type: "performance",
       data: {
-        app: 'budget',
+        app: "budget",
         metric,
         value,
         ...properties,
@@ -309,39 +317,39 @@ export async function trackBudgetPerformance(
  */
 export const BUDGET_METRICS = {
   // User Engagement
-  DAU: 'daily_active_users',
-  WAU: 'weekly_active_users',
-  MAU: 'monthly_active_users',
-  sessionDuration: 'session_duration',
+  DAU: "daily_active_users",
+  WAU: "weekly_active_users",
+  MAU: "monthly_active_users",
+  sessionDuration: "session_duration",
 
   // Feature Usage
-  transactionCount: 'transaction_count',
-  budgetCount: 'budget_count',
-  loanCount: 'loan_count',
-  importCount: 'import_count',
-  ocrUsage: 'ocr_usage',
-  aiFeatureUsage: 'ai_feature_usage',
-  chatbotQueries: 'chatbot_queries',
+  transactionCount: "transaction_count",
+  budgetCount: "budget_count",
+  loanCount: "loan_count",
+  importCount: "import_count",
+  ocrUsage: "ocr_usage",
+  aiFeatureUsage: "ai_feature_usage",
+  chatbotQueries: "chatbot_queries",
 
   // Performance
-  pageLoadTime: 'page_load_time',
-  transactionListLoadTime: 'transaction_list_load_time',
-  databaseQueryTime: 'database_query_time',
-  importProcessingTime: 'import_processing_time',
+  pageLoadTime: "page_load_time",
+  transactionListLoadTime: "transaction_list_load_time",
+  databaseQueryTime: "database_query_time",
+  importProcessingTime: "import_processing_time",
 
   // Errors
-  errorRate: 'error_rate',
-  importFailureRate: 'import_failure_rate',
-  ocrFailureRate: 'ocr_failure_rate',
+  errorRate: "error_rate",
+  importFailureRate: "import_failure_rate",
+  ocrFailureRate: "ocr_failure_rate",
 
   // PWA
-  pwaInstallRate: 'pwa_install_rate',
-  offlineUsage: 'offline_usage',
+  pwaInstallRate: "pwa_install_rate",
+  offlineUsage: "offline_usage",
 
   // Business Metrics
-  avgTransactionsPerUser: 'avg_transactions_per_user',
-  avgBudgetsPerUser: 'avg_budgets_per_user',
-  retentionRate: 'retention_rate',
+  avgTransactionsPerUser: "avg_transactions_per_user",
+  avgBudgetsPerUser: "avg_budgets_per_user",
+  retentionRate: "retention_rate",
 } as const;
 
 /**

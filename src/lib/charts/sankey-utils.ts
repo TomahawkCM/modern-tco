@@ -3,7 +3,7 @@
  * Data transformation and aggregation for Sankey visualizations.
  */
 
-import type { Transaction, Category } from '@/types/budget';
+import type { Transaction, Category } from "@/types/budget";
 
 /**
  * Sankey node type
@@ -11,7 +11,7 @@ import type { Transaction, Category } from '@/types/budget';
 export interface SankeyNode {
   id: string;
   name: string;
-  type: 'income' | 'category' | 'subcategory' | 'savings';
+  type: "income" | "category" | "subcategory" | "savings";
   color?: string;
   value?: number;
 }
@@ -47,10 +47,7 @@ export interface DateRange {
 /**
  * Filter transactions by date range
  */
-export function filterByDateRange(
-  transactions: Transaction[],
-  range: DateRange
-): Transaction[] {
+export function filterByDateRange(transactions: Transaction[], range: DateRange): Transaction[] {
   return transactions.filter((tx) => {
     const txDate = new Date(tx.date);
     return txDate >= range.start && txDate <= range.end;
@@ -64,16 +61,13 @@ export function aggregateByCategory(
   transactions: Transaction[],
   categories: Category[]
 ): Map<string, { amount: number; subcategories: Map<string, number> }> {
-  const categoryMap = new Map<
-    string,
-    { amount: number; subcategories: Map<string, number> }
-  >();
+  const categoryMap = new Map<string, { amount: number; subcategories: Map<string, number> }>();
 
   for (const tx of transactions) {
     if (!tx.category || tx.amount >= 0) continue; // Skip income and uncategorized
 
     const categoryName = tx.category;
-    const subcategoryName = tx.subcategory || 'Other';
+    const subcategoryName = tx.subcategory || "Other";
     const amount = Math.abs(tx.amount);
 
     if (!categoryMap.has(categoryName)) {
@@ -93,15 +87,13 @@ export function aggregateByCategory(
 /**
  * Get income sources from transactions
  */
-export function aggregateIncome(
-  transactions: Transaction[]
-): Map<string, number> {
+export function aggregateIncome(transactions: Transaction[]): Map<string, number> {
   const incomeMap = new Map<string, number>();
 
   for (const tx of transactions) {
     if (tx.amount <= 0) continue; // Skip expenses
 
-    const source = tx.category || 'Other Income';
+    const source = tx.category || "Other Income";
     const currentAmount = incomeMap.get(source) || 0;
     incomeMap.set(source, currentAmount + tx.amount);
   }
@@ -118,9 +110,7 @@ export function transformToSankeyData(
   dateRange?: DateRange
 ): SankeyData {
   // Filter by date range if provided
-  const filteredTx = dateRange
-    ? filterByDateRange(transactions, dateRange)
-    : transactions;
+  const filteredTx = dateRange ? filterByDateRange(transactions, dateRange) : transactions;
 
   // Build category lookup for colors
   const categoryLookup = new Map(categories.map((c) => [c.name, c]));
@@ -149,8 +139,8 @@ export function transformToSankeyData(
       nodes.push({
         id,
         name: source,
-        type: 'income',
-        color: '#22c55e', // green
+        type: "income",
+        color: "#22c55e", // green
         value: amount,
       });
       nodeIdSet.add(id);
@@ -165,8 +155,8 @@ export function transformToSankeyData(
       nodes.push({
         id,
         name: categoryName,
-        type: 'category',
-        color: categoryData?.color || '#64748b',
+        type: "category",
+        color: categoryData?.color || "#64748b",
         value: cat.amount,
       });
       nodeIdSet.add(id);
@@ -179,8 +169,8 @@ export function transformToSankeyData(
         nodes.push({
           id: subId,
           name: subName,
-          type: 'subcategory',
-          color: categoryData?.color || '#64748b',
+          type: "subcategory",
+          color: categoryData?.color || "#64748b",
           value: amount,
         });
         nodeIdSet.add(subId);
@@ -191,13 +181,13 @@ export function transformToSankeyData(
   // Add savings node if positive
   if (netSavings > 0) {
     nodes.push({
-      id: 'savings',
-      name: 'Savings',
-      type: 'savings',
-      color: '#14b8a6', // teal
+      id: "savings",
+      name: "Savings",
+      type: "savings",
+      color: "#14b8a6", // teal
       value: netSavings,
     });
-    nodeIdSet.add('savings');
+    nodeIdSet.add("savings");
   }
 
   // Build links
@@ -210,10 +200,7 @@ export function transformToSankeyData(
 
       // Distribute to expense categories proportionally
       expensesByCategory.forEach((cat, categoryName) => {
-        const flowAmount = Math.min(
-          incomeAmount * (cat.amount / totalExpenses),
-          cat.amount
-        );
+        const flowAmount = Math.min(incomeAmount * (cat.amount / totalExpenses), cat.amount);
 
         if (flowAmount > 0) {
           links.push({
@@ -230,7 +217,7 @@ export function transformToSankeyData(
         if (savingsFlow > 0) {
           links.push({
             source: `income-${source}`,
-            target: 'savings',
+            target: "savings",
             value: savingsFlow,
           });
         }
@@ -326,22 +313,14 @@ export function findNodeById(nodes: SankeyNode[], id: string): SankeyNode | unde
 /**
  * Get all links connected to a node
  */
-export function getConnectedLinks(
-  links: SankeyLink[],
-  nodeId: string
-): SankeyLink[] {
-  return links.filter(
-    (link) => link.source === nodeId || link.target === nodeId
-  );
+export function getConnectedLinks(links: SankeyLink[], nodeId: string): SankeyLink[] {
+  return links.filter((link) => link.source === nodeId || link.target === nodeId);
 }
 
 /**
  * Get all nodes connected to a node (direct connections)
  */
-export function getConnectedNodes(
-  links: SankeyLink[],
-  nodeId: string
-): Set<string> {
+export function getConnectedNodes(links: SankeyLink[], nodeId: string): Set<string> {
   const connected = new Set<string>();
 
   links.forEach((link) => {

@@ -7,7 +7,7 @@
 // Notification Settings
 // ========================
 
-export type NotificationPermissionState = 'granted' | 'denied' | 'default' | 'unsupported';
+export type NotificationPermissionState = "granted" | "denied" | "default" | "unsupported";
 
 export interface NotificationSettings {
   /** Master toggle for all notifications */
@@ -48,17 +48,13 @@ export interface NotificationSettings {
 // In-App Notifications
 // ========================
 
-export type NotificationType =
-  | 'bill_reminder'
-  | 'budget_alert'
-  | 'goal_milestone'
-  | 'system';
+export type NotificationType = "bill_reminder" | "budget_alert" | "goal_milestone" | "system";
 
-export type NotificationStatus = 'unread' | 'read' | 'snoozed' | 'dismissed';
+export type NotificationStatus = "unread" | "read" | "snoozed" | "dismissed";
 
-export type NotificationPriority = 'low' | 'medium' | 'high' | 'urgent';
+export type NotificationPriority = "low" | "medium" | "high" | "urgent";
 
-export type NotificationSourceType = 'subscription' | 'budget' | 'goal' | 'loan';
+export type NotificationSourceType = "subscription" | "budget" | "goal" | "loan";
 
 export interface InAppNotification {
   /** Unique notification ID */
@@ -129,7 +125,7 @@ export interface PushSubscriptionRecord {
 // Reminder Queue
 // ========================
 
-export type ReminderStatus = 'pending' | 'sent' | 'failed' | 'cancelled';
+export type ReminderStatus = "pending" | "sent" | "failed" | "cancelled";
 
 export interface SubscriptionReminderQueue {
   /** Unique queue entry ID */
@@ -156,7 +152,7 @@ export interface SubscriptionReminderQueue {
 // Calendar Export Types
 // ========================
 
-export type CalendarProvider = 'ics' | 'google' | 'outlook' | 'apple';
+export type CalendarProvider = "ics" | "google" | "outlook" | "apple";
 
 export interface CalendarEventOptions {
   /** Event title */
@@ -181,7 +177,7 @@ export interface CalendarEventOptions {
 
 export interface CalendarRecurrence {
   /** Frequency: DAILY, WEEKLY, MONTHLY, YEARLY */
-  frequency: 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY';
+  frequency: "DAILY" | "WEEKLY" | "MONTHLY" | "YEARLY";
   /** Interval (e.g., every 2 weeks) */
   interval?: number;
   /** Number of occurrences */
@@ -198,19 +194,14 @@ export interface CalendarRecurrence {
 // Snooze Options
 // ========================
 
-export type SnoozeDuration =
-  | '1_hour'
-  | '3_hours'
-  | '1_day'
-  | '3_days'
-  | '1_week';
+export type SnoozeDuration = "1_hour" | "3_hours" | "1_day" | "3_days" | "1_week";
 
 export const SNOOZE_DURATIONS: Record<SnoozeDuration, { label: string; ms: number }> = {
-  '1_hour': { label: '1 hour', ms: 60 * 60 * 1000 },
-  '3_hours': { label: '3 hours', ms: 3 * 60 * 60 * 1000 },
-  '1_day': { label: '1 day', ms: 24 * 60 * 60 * 1000 },
-  '3_days': { label: '3 days', ms: 3 * 24 * 60 * 60 * 1000 },
-  '1_week': { label: '1 week', ms: 7 * 24 * 60 * 60 * 1000 },
+  "1_hour": { label: "1 hour", ms: 60 * 60 * 1000 },
+  "3_hours": { label: "3 hours", ms: 3 * 60 * 60 * 1000 },
+  "1_day": { label: "1 day", ms: 24 * 60 * 60 * 1000 },
+  "3_days": { label: "3 days", ms: 3 * 24 * 60 * 60 * 1000 },
+  "1_week": { label: "1 week", ms: 7 * 24 * 60 * 60 * 1000 },
 };
 
 // ========================
@@ -219,19 +210,19 @@ export const SNOOZE_DURATIONS: Record<SnoozeDuration, { label: string; ms: numbe
 
 export const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
   masterEnabled: true,
-  pushPermissionState: 'default',
+  pushPermissionState: "default",
   billReminders: true,
   budgetAlerts: true,
   goalMilestones: true,
   quietHoursEnabled: false,
-  quietHoursStart: '22:00',
-  quietHoursEnd: '08:00',
+  quietHoursStart: "22:00",
+  quietHoursEnd: "08:00",
   defaultReminderDays: 3,
   // Email settings (disabled by default until user enables)
   emailEnabled: false,
-  emailAddress: '',
+  emailAddress: "",
   emailBillReminders: true,
   emailBudgetAlerts: true,
   emailGoalMilestones: true,
-  emailUnsubscribeToken: '',
+  emailUnsubscribeToken: "",
 };

@@ -5,9 +5,9 @@
  * Provides React integration for offline sync management
  */
 
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from "react";
 import {
   type OfflineManager,
   getOfflineManager,
@@ -15,8 +15,8 @@ import {
   type OfflineStatus,
   type QueuedChange,
   type OfflineManagerConfig,
-} from '@/lib/sync/offline-manager';
-import type { EntityType, SyncEntity } from '@/lib/sync/types';
+} from "@/lib/sync/offline-manager";
+import type { EntityType, SyncEntity } from "@/lib/sync/types";
 
 // ============================================================================
 // Types
@@ -40,7 +40,7 @@ export interface UseOfflineSyncResult {
   queueChange: (
     entityType: EntityType,
     entityId: string,
-    operation: 'create' | 'update' | 'delete',
+    operation: "create" | "update" | "delete",
     data?: SyncEntity | null
   ) => void;
   /** Get all queued changes */
@@ -70,16 +70,11 @@ export interface UseOfflineSyncResult {
 // ============================================================================
 
 export function useOfflineSync(options: UseOfflineSyncOptions = {}): UseOfflineSyncResult {
-  const {
-    autoInit = true,
-    onSyncRequired,
-    onOnlineChange,
-    onReconnectAttempt,
-  } = options;
+  const { autoInit = true, onSyncRequired, onOnlineChange, onReconnectAttempt } = options;
 
   const managerRef = useRef<OfflineManager | null>(null);
   const [status, setStatus] = useState<OfflineStatus>({
-    isOnline: typeof navigator !== 'undefined' ? navigator.onLine : true,
+    isOnline: typeof navigator !== "undefined" ? navigator.onLine : true,
     isLANAvailable: false,
     queuedChanges: 0,
     lastOnlineAt: null,
@@ -137,7 +132,7 @@ export function useOfflineSync(options: UseOfflineSyncOptions = {}): UseOfflineS
     (
       entityType: EntityType,
       entityId: string,
-      operation: 'create' | 'update' | 'delete',
+      operation: "create" | "update" | "delete",
       data?: SyncEntity | null
     ) => {
       managerRef.current?.queueChange({
@@ -218,19 +213,19 @@ export function useOfflineSync(options: UseOfflineSyncOptions = {}): UseOfflineS
  */
 export function useOnlineStatus(): boolean {
   const [isOnline, setIsOnline] = useState(
-    typeof navigator !== 'undefined' ? navigator.onLine : true
+    typeof navigator !== "undefined" ? navigator.onLine : true
   );
 
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
 
     return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
     };
   }, []);
 

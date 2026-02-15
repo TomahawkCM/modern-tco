@@ -6,7 +6,8 @@ import { getQuestionStats } from "@/lib/questionLoader";
 describe("Question stats", () => {
   it("computes totals and distributions consistently", () => {
     const stats = getQuestionStats();
-    const { totalQuestions, domainDistribution, difficultyDistribution, categoryDistribution } = stats;
+    const { totalQuestions, domainDistribution, difficultyDistribution, categoryDistribution } =
+      stats;
 
     expect(totalQuestions).toBeGreaterThan(0);
 
@@ -19,4 +20,3 @@ describe("Question stats", () => {
     expect(catSum).toBe(totalQuestions);
   });
 });
-

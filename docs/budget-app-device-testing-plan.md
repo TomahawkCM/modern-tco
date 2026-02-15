@@ -1,4 +1,5 @@
 # Budget App - Real Device Testing Plan
+
 **Task ID**: `9e3e301d-3001-4e08-9f59-21bbfd855a96`
 **Assignee**: qa-engineer
 **Status**: In Progress
@@ -9,7 +10,9 @@
 ## 📊 Executive Summary
 
 ### Existing E2E Test Coverage
+
 **Current Playwright Tests** (Desktop Chromium only):
+
 - ✅ Critical flows: Transaction CRUD, Budget creation, CSV import, Theme switching
 - ✅ Keyboard navigation: All workflows accessible, focus traps working
 - ✅ Page load verification: All 6 major pages (Dashboard, Transactions, Budgets, Reports, Import, Settings)
@@ -23,15 +26,15 @@
 
 ### Platform Coverage
 
-| Platform | Browser | Screen Size | Test Priority | PWA Install | Offline |
-|----------|---------|-------------|---------------|-------------|---------|
-| **iOS** | Safari 17+ | iPhone 13/14/15 (390x844) | **P0 Critical** | ✅ Required | ✅ Required |
-| **Android** | Chrome 120+ | Pixel 5/6 (393x851) | **P0 Critical** | ✅ Required | ✅ Required |
-| **Desktop** | Chrome 120+ | 1920x1080 | P0 (baseline) | Optional | ✅ Required |
-| **Desktop** | Firefox 120+ | 1920x1080 | **P1 Important** | N/A | ✅ Required |
-| **Desktop** | Edge 120+ | 1920x1080 | P1 | Optional | ✅ Required |
-| **Desktop** | Safari 17+ (macOS) | 1920x1080 | **P1 Important** | ✅ Required | ✅ Required |
-| **Tablet** | iPad Safari | 1024x768 | P2 (nice to have) | ✅ Optional | Optional |
+| Platform    | Browser            | Screen Size               | Test Priority     | PWA Install | Offline     |
+| ----------- | ------------------ | ------------------------- | ----------------- | ----------- | ----------- |
+| **iOS**     | Safari 17+         | iPhone 13/14/15 (390x844) | **P0 Critical**   | ✅ Required | ✅ Required |
+| **Android** | Chrome 120+        | Pixel 5/6 (393x851)       | **P0 Critical**   | ✅ Required | ✅ Required |
+| **Desktop** | Chrome 120+        | 1920x1080                 | P0 (baseline)     | Optional    | ✅ Required |
+| **Desktop** | Firefox 120+       | 1920x1080                 | **P1 Important**  | N/A         | ✅ Required |
+| **Desktop** | Edge 120+          | 1920x1080                 | P1                | Optional    | ✅ Required |
+| **Desktop** | Safari 17+ (macOS) | 1920x1080                 | **P1 Important**  | ✅ Required | ✅ Required |
+| **Tablet**  | iPad Safari        | 1024x768                  | P2 (nice to have) | ✅ Optional | Optional    |
 
 ---
 
@@ -40,6 +43,7 @@
 ### Critical User Flows (All Platforms)
 
 #### 1. **Navigation & IA**
+
 - [ ] Bottom tab bar visible and functional (mobile)
 - [ ] Desktop sidebar navigation works
 - [ ] "More" menu expands correctly
@@ -47,6 +51,7 @@
 - [ ] Navigation smooth (no flickering/janking)
 
 #### 2. **Transaction Management**
+
 - [ ] "Add Transaction" button visible and tappable (≥48px)
 - [ ] Modal opens smoothly
 - [ ] Amount input: Native numeric keyboard (mobile)
@@ -58,12 +63,14 @@
 - [ ] Delete transaction: Confirmation dialog works
 
 #### 3. **Budget Creation**
+
 - [ ] "Add Budget" button accessible
 - [ ] Form fields keyboard-appropriate (mobile)
 - [ ] Budget progress bar renders correctly
 - [ ] Budget cards responsive layout
 
 #### 4. **CSV Import**
+
 - [ ] File picker opens (native file selector)
 - [ ] Drag-drop zone works (desktop)
 - [ ] File preview renders
@@ -71,6 +78,7 @@
 - [ ] Import confirms successfully
 
 #### 5. **Theme Switching**
+
 - [ ] Theme toggle accessible
 - [ ] Light mode: Contrast ≥4.5:1
 - [ ] Dark mode: Contrast ≥4.5:1
@@ -79,6 +87,7 @@
 - [ ] No FOUC (Flash of Unstyled Content)
 
 #### 6. **PWA Installation** (iOS/Android/Safari/Chrome)
+
 - [ ] Install prompt appears
 - [ ] Install completes successfully
 - [ ] App icon appears on home screen
@@ -87,6 +96,7 @@
 - [ ] Theme color correct
 
 #### 7. **Offline Functionality**
+
 - [ ] Service worker registers
 - [ ] App loads offline (after first visit)
 - [ ] Cached pages accessible
@@ -98,6 +108,7 @@
 ## 🔍 Platform-Specific Checks
 
 ### iOS Safari Specifics
+
 - [ ] **Touch interactions**: Tap delay ≤300ms (Fast Click)
 - [ ] **Input behavior**: Virtual keyboard doesn't obscure form fields
 - [ ] **Safe areas**: Content not hidden by notch/home indicator
@@ -107,6 +118,7 @@
 - [ ] **PWA icons**: 180x180 apple-touch-icon displays
 
 ### Android Chrome Specifics
+
 - [ ] **Material Design**: Back button behavior
 - [ ] **Input behavior**: Autocomplete suggestions work
 - [ ] **Notifications**: Permission prompts (if implemented)
@@ -115,6 +127,7 @@
 - [ ] **Theme color**: Matches manifest.json
 
 ### Desktop Firefox Specifics
+
 - [ ] **Flexbox/Grid**: Layout identical to Chrome
 - [ ] **CSS variables**: Theme tokens apply correctly
 - [ ] **Service worker**: Offline works same as Chrome
@@ -122,6 +135,7 @@
 - [ ] **Focus indicators**: Visible on all interactive elements
 
 ### Desktop Safari (macOS) Specifics
+
 - [ ] **Webkit rendering**: No layout shifts
 - [ ] **Date inputs**: Native date picker or polyfill
 - [ ] **IndexedDB**: Quota limits respected
@@ -129,6 +143,7 @@
 - [ ] **PWA**: Dock icon, standalone window
 
 ### Desktop Edge Specifics
+
 - [ ] **Chromium parity**: Identical to Chrome
 - [ ] **PWA**: Install from address bar works
 - [ ] **Touch support**: Works on Surface devices
@@ -140,6 +155,7 @@
 Use this checklist for EACH platform:
 
 ### Pre-Test Setup
+
 - [ ] Clear browser cache/data
 - [ ] Disable browser extensions
 - [ ] Set viewport to target resolution
@@ -147,6 +163,7 @@ Use this checklist for EACH platform:
 - [ ] Connect to test server (http://localhost:3001 or production URL)
 
 ### Test Execution
+
 - [ ] Navigate to /budget-app
 - [ ] Verify page loads without errors (check console)
 - [ ] Test navigation (all 6 pages)
@@ -165,6 +182,7 @@ Use this checklist for EACH platform:
   - PWA home screen icon
 
 ### Post-Test Documentation
+
 - [ ] Log any visual bugs (screenshots)
 - [ ] Log any functional bugs (steps to reproduce)
 - [ ] Note performance issues (lag, jank)
@@ -175,6 +193,7 @@ Use this checklist for EACH platform:
 ## 🐛 Issue Severity Classification
 
 ### P0 - Blocker (Fix before launch)
+
 - App crashes or throws errors
 - Critical workflow broken (can't add transaction)
 - PWA doesn't install on iOS/Android
@@ -182,6 +201,7 @@ Use this checklist for EACH platform:
 - Contrast ratio <4.5:1 (text)
 
 ### P1 - High (Fix in Week 4)
+
 - Visual bugs (layout broken, text overlapping)
 - Touch targets <48px
 - Theme mode not working
@@ -189,11 +209,13 @@ Use this checklist for EACH platform:
 - Offline mode broken
 
 ### P2 - Medium (Fix in v1.1)
+
 - Minor visual inconsistencies
 - Non-critical UI polish
 - Optional features not working
 
 ### P3 - Low (Backlog)
+
 - Nice-to-have enhancements
 - Edge case bugs
 
@@ -202,6 +224,7 @@ Use this checklist for EACH platform:
 ## 🛠️ Testing Tools & Environment
 
 ### Local Testing
+
 ```bash
 # Start dev server
 npm run dev
@@ -211,7 +234,9 @@ npm run dev
 ```
 
 ### Mobile Device Testing (Same Network)
+
 1. Find your computer's local IP:
+
    ```bash
    # macOS/Linux
    ipconfig getifaddr en0
@@ -219,31 +244,40 @@ npm run dev
    # Windows
    ipconfig
    ```
+
 2. On mobile device, navigate to: `http://<YOUR-IP>:3001/budget-app`
 
 ### Browser DevTools Testing
+
 **Chrome DevTools**:
+
 - Device emulation: Toggle device toolbar (Cmd+Shift+M)
 - Lighthouse audit: Run accessibility/performance tests
 - Network throttling: Simulate 3G/offline
 
 **Firefox DevTools**:
+
 - Responsive Design Mode (Cmd+Option+M)
 - Accessibility Inspector
 
 **Safari Web Inspector**:
+
 - Develop → Enter Responsive Design Mode
 
 ### PWA Testing
+
 **Chrome (Desktop/Android)**:
+
 - Install: Address bar → Install icon
 - Verify: chrome://apps
 
 **Safari (iOS)**:
+
 - Share → Add to Home Screen
 - Verify: Home screen icon
 
 **Edge**:
+
 - Settings → Apps → Install
 
 ---
@@ -251,6 +285,7 @@ npm run dev
 ## 📊 Test Results Template
 
 ### Platform: [iOS Safari / Android Chrome / etc.]
+
 **Browser Version**: [e.g., Safari 17.2]
 **Device**: [e.g., iPhone 14, Pixel 6]
 **Screen Size**: [e.g., 390x844]
@@ -258,21 +293,25 @@ npm run dev
 **Tester**: [Your name]
 
 #### Test Results Summary
+
 - ✅ **Pass**: [Count] tests passed
-- ⚠️  **Warn**: [Count] minor issues
+- ⚠️ **Warn**: [Count] minor issues
 - ❌ **Fail**: [Count] critical failures
 
 #### Critical Bugs Found
-| Issue | Severity | Steps to Reproduce | Screenshot |
-|-------|----------|-------------------|------------|
-| Example: Transaction modal doesn't open | P0 | 1. Tap "Add Transaction" 2. Nothing happens | [link] |
+
+| Issue                                   | Severity | Steps to Reproduce                          | Screenshot |
+| --------------------------------------- | -------- | ------------------------------------------- | ---------- |
+| Example: Transaction modal doesn't open | P0       | 1. Tap "Add Transaction" 2. Nothing happens | [link]     |
 
 #### Screenshots
+
 - Dashboard: [link]
 - Dark Mode: [link]
 - PWA Install: [link]
 
 #### Performance Metrics
+
 - Page Load Time: [e.g., 2.1s]
 - Time to Interactive: [e.g., 2.8s]
 - Lighthouse Performance: [e.g., 94/100]
@@ -283,11 +322,13 @@ npm run dev
 ## 🚀 Execution Plan
 
 ### Phase 1: Baseline Desktop Testing (1-2 hours)
+
 1. **Chrome** (current Playwright coverage - verify manually)
 2. **Firefox** (critical path flows)
 3. **Edge** (smoke test major pages)
 
 ### Phase 2: Mobile Device Testing (2-3 hours)
+
 4. **iOS Safari** (iPhone 13+)
    - Critical flows
    - PWA installation
@@ -298,12 +339,14 @@ npm run dev
    - Offline mode
 
 ### Phase 3: Safari macOS Testing (1 hour)
+
 6. **Safari macOS** (if available)
    - Critical flows
    - PWA installation
    - Webkit-specific rendering
 
 ### Phase 4: Documentation & Remediation (2 hours)
+
 7. Compile all findings into this document
 8. Create GitHub issues for P0/P1 bugs
 9. Update Archon task with results
@@ -324,6 +367,7 @@ npm run dev
 ---
 
 ## 🔗 Related Documentation
+
 - [Budget App v1 Plan](./budget-app-v1-plan/README.md)
 - [Accessibility Checklist](./budget-app-v1-plan/00-IMPLEMENTATION-GUIDE.md#6-accessibility-checklist-wcag-22-aa)
 - [PRD](./budget-app-v1-plan/02-PRD-Budget-App-v1.md)

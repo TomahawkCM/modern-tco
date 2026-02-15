@@ -1,4 +1,4 @@
-import type { NextPageContext } from 'next';
+import type { NextPageContext } from "next";
 
 interface ErrorProps {
   statusCode?: number;
@@ -6,8 +6,8 @@ interface ErrorProps {
 
 function Error({ statusCode }: ErrorProps) {
   return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h1>{statusCode ? `Error ${statusCode}` : 'Application error'}</h1>
+    <div style={{ padding: "2rem", textAlign: "center" }}>
+      <h1>{statusCode ? `Error ${statusCode}` : "Application error"}</h1>
       <p>Something went wrong</p>
       <a href="/">Go home</a>
     </div>

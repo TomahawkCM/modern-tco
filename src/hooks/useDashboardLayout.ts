@@ -11,7 +11,7 @@
  * - Sensible defaults for first-time users
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export interface DashboardWidget {
   id: string;
@@ -24,79 +24,79 @@ export interface DashboardWidget {
 
 const DEFAULT_WIDGETS: DashboardWidget[] = [
   {
-    id: 'metric-cards',
-    name: 'Metric Cards',
-    description: 'Net Worth, Income, Expenses, and Savings overview',
+    id: "metric-cards",
+    name: "Metric Cards",
+    description: "Net Worth, Income, Expenses, and Savings overview",
     visible: true,
     order: 0,
     isAlwaysVisible: true,
   },
   {
-    id: 'spending-category',
-    name: 'Spending by Category',
-    description: 'Pie chart showing spending breakdown by category',
+    id: "spending-category",
+    name: "Spending by Category",
+    description: "Pie chart showing spending breakdown by category",
     visible: true,
     order: 1,
   },
   {
-    id: 'income-expense-trend',
-    name: 'Income vs Expenses',
-    description: '6-month trend chart comparing income and expenses',
+    id: "income-expense-trend",
+    name: "Income vs Expenses",
+    description: "6-month trend chart comparing income and expenses",
     visible: true,
     order: 2,
   },
   {
-    id: 'recent-activity',
-    name: 'Recent Activity',
-    description: 'Latest transactions across all accounts',
+    id: "recent-activity",
+    name: "Recent Activity",
+    description: "Latest transactions across all accounts",
     visible: true,
     order: 3,
   },
   {
-    id: 'budget-status',
-    name: 'Budget Status',
-    description: 'Progress bars showing budget consumption',
+    id: "budget-status",
+    name: "Budget Status",
+    description: "Progress bars showing budget consumption",
     visible: true,
     order: 4,
   },
   {
-    id: 'spending-insights',
-    name: 'Spending Insights',
-    description: 'AI-powered insights about spending patterns',
+    id: "spending-insights",
+    name: "Spending Insights",
+    description: "AI-powered insights about spending patterns",
     visible: true,
     order: 5,
   },
   {
-    id: 'recurring-transactions',
-    name: 'Recurring Transactions',
-    description: 'Detected recurring payment patterns',
+    id: "recurring-transactions",
+    name: "Recurring Transactions",
+    description: "Detected recurring payment patterns",
     visible: true,
     order: 6,
   },
   {
-    id: 'anomaly-alerts',
-    name: 'Unusual Spending',
-    description: 'Alerts for transactions that appear unusual',
+    id: "anomaly-alerts",
+    name: "Unusual Spending",
+    description: "Alerts for transactions that appear unusual",
     visible: true,
     order: 7,
   },
   {
-    id: 'debt-overview',
-    name: 'Debt Overview',
-    description: 'Summary of all loans and debts',
+    id: "debt-overview",
+    name: "Debt Overview",
+    description: "Summary of all loans and debts",
     visible: true,
     order: 8,
   },
   {
-    id: 'quick-actions',
-    name: 'Quick Actions',
-    description: 'Shortcuts to common tasks',
+    id: "quick-actions",
+    name: "Quick Actions",
+    description: "Shortcuts to common tasks",
     visible: true,
     order: 9,
   },
 ];
 
-const STORAGE_KEY = 'budget-app-dashboard-layout';
+const STORAGE_KEY = "budget-app-dashboard-layout";
 
 export function useDashboardLayout() {
   const [widgets, setWidgets] = useState<DashboardWidget[]>(DEFAULT_WIDGETS);
@@ -120,7 +120,7 @@ export function useDashboardLayout() {
         setWidgets(mergedWidgets);
       }
     } catch (error) {
-      console.error('Error loading dashboard layout:', error);
+      console.error("Error loading dashboard layout:", error);
       // Fall back to defaults
       setWidgets(DEFAULT_WIDGETS);
     } finally {
@@ -134,7 +134,7 @@ export function useDashboardLayout() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(widgets));
       } catch (error) {
-        console.error('Error saving dashboard layout:', error);
+        console.error("Error saving dashboard layout:", error);
       }
     }
   }, [widgets, isLoading]);
@@ -166,9 +166,7 @@ export function useDashboardLayout() {
   };
 
   // Get visible widgets in order
-  const visibleWidgets = widgets
-    .filter((w) => w.visible)
-    .sort((a, b) => a.order - b.order);
+  const visibleWidgets = widgets.filter((w) => w.visible).sort((a, b) => a.order - b.order);
 
   return {
     widgets,

@@ -1,105 +1,128 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>i18n Translation Test</title>
     <style>
-        body { font-family: system-ui; padding: 40px; background: #0f172a; color: #e2e8f0; }
-        h1 { color: #14b8a6; }
-        .test { background: #1e293b; padding: 20px; margin: 20px 0; border-radius: 8px; border: 1px solid #334155; }
-        .pass { color: #10b981; }
-        .fail { color: #ef4444; }
-        .pending { color: #f59e0b; }
-        code { background: #334155; padding: 2px 6px; border-radius: 4px; }
+      body {
+        font-family: system-ui;
+        padding: 40px;
+        background: #0f172a;
+        color: #e2e8f0;
+      }
+      h1 {
+        color: #14b8a6;
+      }
+      .test {
+        background: #1e293b;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+        border: 1px solid #334155;
+      }
+      .pass {
+        color: #10b981;
+      }
+      .fail {
+        color: #ef4444;
+      }
+      .pending {
+        color: #f59e0b;
+      }
+      code {
+        background: #334155;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>🌍 i18n Translation System Test</h1>
 
     <div class="test">
-        <h2>Test 1: Locale Files Exist</h2>
-        <p class="pass">✅ PASS: 114 locale files found in /src/i18n/messages/</p>
+      <h2>Test 1: Locale Files Exist</h2>
+      <p class="pass">✅ PASS: 114 locale files found in /src/i18n/messages/</p>
     </div>
 
     <div class="test">
-        <h2>Test 2: English Translations (en-US.json)</h2>
-        <p class="pass">✅ PASS: All 5 namespaces present</p>
-        <ul>
-            <li>✅ tooltip (2 keys)</li>
-            <li>✅ footer (6 keys)</li>
-            <li>✅ dialog (5 keys)</li>
-            <li>✅ sidebar (19 keys)</li>
-            <li>✅ onboarding (19 keys)</li>
-        </ul>
+      <h2>Test 2: English Translations (en-US.json)</h2>
+      <p class="pass">✅ PASS: All 5 namespaces present</p>
+      <ul>
+        <li>✅ tooltip (2 keys)</li>
+        <li>✅ footer (6 keys)</li>
+        <li>✅ dialog (5 keys)</li>
+        <li>✅ sidebar (19 keys)</li>
+        <li>✅ onboarding (19 keys)</li>
+      </ul>
     </div>
 
     <div class="test">
-        <h2>Test 3: Components Using Translations</h2>
-        <p class="pass">✅ PASS: All 5 components migrated</p>
-        <ul>
-            <li>✅ HelpTooltip.tsx - Line 45</li>
-            <li>✅ Footer.tsx - Line 8</li>
-            <li>✅ ConfirmDialog.tsx - Line 117</li>
-            <li>✅ Sidebar.tsx - Line 65</li>
-            <li>✅ OnboardingTour.tsx - Line 48</li>
-        </ul>
+      <h2>Test 3: Components Using Translations</h2>
+      <p class="pass">✅ PASS: All 5 components migrated</p>
+      <ul>
+        <li>✅ HelpTooltip.tsx - Line 45</li>
+        <li>✅ Footer.tsx - Line 8</li>
+        <li>✅ ConfirmDialog.tsx - Line 117</li>
+        <li>✅ Sidebar.tsx - Line 65</li>
+        <li>✅ OnboardingTour.tsx - Line 48</li>
+      </ul>
     </div>
 
     <div class="test">
-        <h2>Test 4: Translation Infrastructure</h2>
-        <p class="pass">✅ PASS: System configured correctly</p>
-        <ul>
-            <li>✅ ClientI18nProvider - Dynamic locale loading</li>
-            <li>✅ LanguageSelector - 114 language dropdown</li>
-            <li>✅ locale-storage.ts - localStorage + Supabase sync</li>
-            <li>✅ localePreferencesChanged event - Auto-refresh on change</li>
-        </ul>
+      <h2>Test 4: Translation Infrastructure</h2>
+      <p class="pass">✅ PASS: System configured correctly</p>
+      <ul>
+        <li>✅ ClientI18nProvider - Dynamic locale loading</li>
+        <li>✅ LanguageSelector - 114 language dropdown</li>
+        <li>✅ locale-storage.ts - localStorage + Supabase sync</li>
+        <li>✅ localePreferencesChanged event - Auto-refresh on change</li>
+      </ul>
     </div>
 
     <div class="test">
-        <h2>Test 5: Manual Browser Verification Required</h2>
-        <p class="pending">⚠️ PENDING: Requires manual testing</p>
-        <ol>
-            <li>Open <code>http://localhost:3000/budget-app/landing</code></li>
-            <li>Find globe icon (🌐) - LanguageSelector component</li>
-            <li>Click and select "Español (España)" from dropdown</li>
-            <li>Verify Footer updates to Spanish instantly</li>
-            <li>Check browser console for errors (F12)</li>
-        </ol>
-        <p><strong>Expected Result:</strong></p>
-        <ul>
-            <li>Footer links change: "Log in" → "Iniciar sesión"</li>
-            <li>Tagline changes to Spanish</li>
-            <li>No console errors about missing translations</li>
-            <li>If Spanish locale file is missing keys, fallback to English (graceful degradation)</li>
-        </ul>
+      <h2>Test 5: Manual Browser Verification Required</h2>
+      <p class="pending">⚠️ PENDING: Requires manual testing</p>
+      <ol>
+        <li>Open <code>http://localhost:3000/budget-app/landing</code></li>
+        <li>Find globe icon (🌐) - LanguageSelector component</li>
+        <li>Click and select "Español (España)" from dropdown</li>
+        <li>Verify Footer updates to Spanish instantly</li>
+        <li>Check browser console for errors (F12)</li>
+      </ol>
+      <p><strong>Expected Result:</strong></p>
+      <ul>
+        <li>Footer links change: "Log in" → "Iniciar sesión"</li>
+        <li>Tagline changes to Spanish</li>
+        <li>No console errors about missing translations</li>
+        <li>If Spanish locale file is missing keys, fallback to English (graceful degradation)</li>
+      </ul>
     </div>
 
     <div class="test">
-        <h2>Test 6: Translation Generation (Git Hook)</h2>
-        <p class="pending">⚠️ INFO: Auto-translation workflow</p>
-        <p>When you commit changes to <code>en-US.json</code>:</p>
-        <ol>
-            <li>Git pre-commit hook detects changes</li>
-            <li>Runs <code>npm run translate:incremental</code></li>
-            <li>OpenAI API translates new keys to all 113 other languages</li>
-            <li>Updates locale files automatically</li>
-            <li>Includes translations in the commit</li>
-        </ol>
-        <p><strong>Status:</strong> Translations will be generated on next commit to en-US.json</p>
+      <h2>Test 6: Translation Generation (Git Hook)</h2>
+      <p class="pending">⚠️ INFO: Auto-translation workflow</p>
+      <p>When you commit changes to <code>en-US.json</code>:</p>
+      <ol>
+        <li>Git pre-commit hook detects changes</li>
+        <li>Runs <code>npm run translate:incremental</code></li>
+        <li>OpenAI API translates new keys to all 113 other languages</li>
+        <li>Updates locale files automatically</li>
+        <li>Includes translations in the commit</li>
+      </ol>
+      <p><strong>Status:</strong> Translations will be generated on next commit to en-US.json</p>
     </div>
 
     <h2>Summary</h2>
     <div class="test">
-        <p><strong>System Status:</strong> <span class="pass">✅ READY FOR TESTING</span></p>
-        <p><strong>Components Migrated:</strong> 5/5 (100%)</p>
-        <p><strong>Translation Keys:</strong> 51 keys across 5 namespaces</p>
-        <p><strong>Locale Files:</strong> 114 languages supported</p>
-        <p><strong>Next Step:</strong> Open browser and test language switching manually</p>
+      <p><strong>System Status:</strong> <span class="pass">✅ READY FOR TESTING</span></p>
+      <p><strong>Components Migrated:</strong> 5/5 (100%)</p>
+      <p><strong>Translation Keys:</strong> 51 keys across 5 namespaces</p>
+      <p><strong>Locale Files:</strong> 114 languages supported</p>
+      <p><strong>Next Step:</strong> Open browser and test language switching manually</p>
     </div>
 
     <h2>Quick Test Command</h2>
     <div class="test">
-        <pre style="background: #0f172a; padding: 10px; border-radius: 4px;">
+      <pre style="background: #0f172a; padding: 10px; border-radius: 4px">
 # 1. Ensure dev server is running
 npm run dev
 
@@ -109,7 +132,8 @@ http://localhost:3000/budget-app/landing
 # 3. Look for globe icon (🌐) in top right
 # 4. Select different languages
 # 5. Watch Footer text change instantly
-        </pre>
+        </pre
+      >
     </div>
-</body>
+  </body>
 </html>

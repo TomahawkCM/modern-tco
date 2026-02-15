@@ -28,6 +28,7 @@ Set these in Vercel Project → Settings → Environment Variables.
 - Optional safeguard: `ENABLE_SIMULATOR` ("true" to enable) — simulator endpoints are disabled by default in production
 
 Notes:
+
 - Do not commit sensitive keys in the repo; prefer Vercel env.
 - Local dev uses `.env.local`. Production uses Vercel env and `.env.production` defaults are not read by Vercel.
 
@@ -87,4 +88,3 @@ Configure under Project → Settings → Git → Ignored Build Step.
 - Cleared basePath; added `/tanium/*` → `/*` redirects in `next.config.js`
 - Disabled simulator APIs by default in production
 - Made study content loading bundle‑safe for serverless
-

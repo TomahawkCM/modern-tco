@@ -13,9 +13,14 @@ import {
   type ExecutionMetrics,
   type QueryWarning,
   type FilterNode,
-  type AggregateNode
-} from './types';
-import { getFieldMapping, getDbColumn, validateFieldOperator, resolveGroupAlias } from './field-mappings';
+  type AggregateNode,
+} from "./types";
+import {
+  getFieldMapping,
+  getDbColumn,
+  validateFieldOperator,
+  resolveGroupAlias,
+} from "./field-mappings";
 
 export class QueryExecutor {
   private data: MachineData[] = [];
@@ -31,8 +36,8 @@ export class QueryExecutor {
       useCache: true,
       cacheTTL: 60000,
       explainOnly: false,
-      format: 'json',
-      ...options
+      format: "json",
+      ...options,
     };
     this.metrics = this.initMetrics();
   }
@@ -49,7 +54,7 @@ export class QueryExecutor {
       scoped: 0,
       filtered: 0,
       rowsExamined: 0,
-      cacheHit: false
+      cacheHit: false,
     };
   }
 
@@ -96,21 +101,21 @@ export class QueryExecutor {
    */
   private generateQueryPlan(query: QueryNode): QueryPlan {
     const plan: QueryPlan = {
-      type: 'scan',
+      type: "scan",
       cost: this.data.length,
       rows: this.data.length,
       width: 100,
-      children: []
+      children: [],
     };
 
     // Add scope filtering
-    if (query.from.scope.scopeType === 'group' && query.from.scope.value) {
+    if (query.from.scope.scopeType === "group" && query.from.scope.value) {
       plan.children?.push({
-        type: 'filter',
+        type: "filter",
         cost: plan.rows * 0.1,
         rows: Math.floor(plan.rows * 0.3), // Estimate 30% match
         width: plan.width,
-        details: { scope: query.from.scope.value }
+        details: { scope: query.from.scope.value },
       });
     }
 
@@ -118,22 +123,22 @@ export class QueryExecutor {
     if (query.where && query.where.filters.length > 0) {
       const selectivity = 0.5 ** query.where.filters.length; // Each filter reduces by half
       plan.children?.push({
-        type: 'filter',
+        type: "filter",
         cost: plan.rows * 0.2,
         rows: Math.floor(plan.rows * selectivity),
         width: plan.width,
-        details: { filters: query.where.filters.length }
+        details: { filters: query.where.filters.length },
       });
     }
 
     // Add GROUP BY
     if (query.groupBy && query.groupBy.columns.length > 0) {
       plan.children?.push({
-        type: 'aggregate',
+        type: "aggregate",
         cost: plan.rows * 0.5,
         rows: Math.floor(plan.rows * 0.1), // Estimate 10% unique groups
         width: 50,
-        details: { groupBy: query.groupBy.columns }
+        details: { groupBy: query.groupBy.columns },
       });
     }
 
@@ -141,22 +146,22 @@ export class QueryExecutor {
     if (query.orderBy && query.orderBy.columns.length > 0) {
       const sortCost = plan.rows * Math.log2(plan.rows);
       plan.children?.push({
-        type: 'sort',
+        type: "sort",
         cost: sortCost,
         rows: plan.rows,
         width: plan.width,
-        details: { orderBy: query.orderBy.columns }
+        details: { orderBy: query.orderBy.columns },
       });
     }
 
     // Add LIMIT
     if (query.limit) {
       plan.children?.push({
-        type: 'limit',
+        type: "limit",
         cost: 1,
         rows: Math.min(query.limit.value, plan.rows),
         width: plan.width,
-        details: { limit: query.limit.value }
+        details: { limit: query.limit.value },
       });
     }
 
@@ -214,11 +219,11 @@ export class QueryExecutor {
       headers,
       rows,
       rowCount: rows.length,
-      metadata: this.buildMetadata(query)
+      metadata: this.buildMetadata(query),
     };
 
     // Add CSV format if requested
-    if (this.options.format === 'csv') {
+    if (this.options.format === "csv") {
       result.csv = this.formatAsCSV(headers, rows);
     }
 
@@ -229,15 +234,15 @@ export class QueryExecutor {
    * Apply scope filtering
    */
   private applyScope(data: MachineData[], query: QueryNode): MachineData[] {
-    const {scope} = query.from;
+    const { scope } = query.from;
 
-    if (scope.scopeType === 'all') {
+    if (scope.scopeType === "all") {
       return data;
     }
 
-    if (scope.scopeType === 'group' && scope.value) {
+    if (scope.scopeType === "group" && scope.value) {
       const resolvedGroup = resolveGroupAlias(scope.value);
-      return data.filter(row => row.group_name === resolvedGroup);
+      return data.filter((row) => row.group_name === resolvedGroup);
     }
 
     return data;
@@ -254,7 +259,7 @@ export class QueryExecutor {
       if (!dbColumn) {
         this.warnings.push({
           message: `Unknown field: ${filter.field}`,
-          severity: 'warning'
+          severity: "warning",
         });
         continue;
       }
@@ -263,11 +268,11 @@ export class QueryExecutor {
       if (!validateFieldOperator(filter.field, filter.operator)) {
         this.warnings.push({
           message: `Operator '${filter.operator}' may not be compatible with field '${filter.field}'`,
-          severity: 'warning'
+          severity: "warning",
         });
       }
 
-      filtered = filtered.filter(row => this.evaluateFilter(row, filter, dbColumn));
+      filtered = filtered.filter((row) => this.evaluateFilter(row, filter, dbColumn));
     }
 
     return filtered;
@@ -284,25 +289,25 @@ export class QueryExecutor {
     const filterValue = String(filter.value).toLowerCase();
 
     switch (filter.operator) {
-      case 'contains':
+      case "contains":
         return textValue.includes(filterValue);
-      case 'does_not_contain':
+      case "does_not_contain":
         return !textValue.includes(filterValue);
-      case 'equals':
+      case "equals":
         return textValue === filterValue;
-      case 'not_equals':
+      case "not_equals":
         return textValue !== filterValue;
-      case 'starts_with':
+      case "starts_with":
         return textValue.startsWith(filterValue);
-      case 'ends_with':
+      case "ends_with":
         return textValue.endsWith(filterValue);
-      case 'greater_than':
+      case "greater_than":
         return Number(value) > Number(filter.value);
-      case 'less_than':
+      case "less_than":
         return Number(value) < Number(filter.value);
-      case 'greater_or_equal':
+      case "greater_or_equal":
         return Number(value) >= Number(filter.value);
-      case 'less_or_equal':
+      case "less_or_equal":
         return Number(value) <= Number(filter.value);
       default:
         return false;
@@ -312,17 +317,18 @@ export class QueryExecutor {
   /**
    * Execute SELECT columns
    */
-  private executeSelect(data: MachineData[], query: QueryNode): {
+  private executeSelect(
+    data: MachineData[],
+    query: QueryNode
+  ): {
     headers: string[];
     rows: Array<Array<string | number | null>>;
   } {
-    const {columns} = query.select;
-    const headers = columns.length > 0
-      ? columns.map(col => col.name)
-      : ['Computer Name']; // Default column
+    const { columns } = query.select;
+    const headers = columns.length > 0 ? columns.map((col) => col.name) : ["Computer Name"]; // Default column
 
-    const rows = data.map(row => {
-      return headers.map(header => {
+    const rows = data.map((row) => {
+      return headers.map((header) => {
         const dbColumn = getDbColumn(header);
         if (!dbColumn) return null;
         const value = (row as any)[dbColumn];
@@ -336,12 +342,15 @@ export class QueryExecutor {
   /**
    * Execute aggregate functions
    */
-  private executeAggregates(data: MachineData[], query: QueryNode): {
+  private executeAggregates(
+    data: MachineData[],
+    query: QueryNode
+  ): {
     headers: string[];
     rows: Array<Array<string | number | null>>;
   } {
     const headers: string[] = [];
-    const {aggregates} = query.select;
+    const { aggregates } = query.select;
     const groupBy = query.groupBy?.columns[0]; // Support single group by for now
 
     // Add group by column to headers
@@ -351,11 +360,11 @@ export class QueryExecutor {
 
     // Add aggregate columns to headers
     if (aggregates.length > 0) {
-      aggregates.forEach(agg => {
-        headers.push(`${agg.function}(${agg.column || ''})`);
+      aggregates.forEach((agg) => {
+        headers.push(`${agg.function}(${agg.column || ""})`);
       });
     } else {
-      headers.push('count()');
+      headers.push("count()");
     }
 
     // Calculate aggregates
@@ -368,7 +377,7 @@ export class QueryExecutor {
         const row: Array<string | number | null> = [groupValue];
 
         if (aggregates.length > 0) {
-          aggregates.forEach(agg => {
+          aggregates.forEach((agg) => {
             row.push(this.calculateAggregate(groupData, agg));
           });
         } else {
@@ -384,7 +393,7 @@ export class QueryExecutor {
       const row: Array<string | number | null> = [];
 
       if (aggregates.length > 0) {
-        aggregates.forEach(agg => {
+        aggregates.forEach((agg) => {
           row.push(this.calculateAggregate(data, agg));
         });
       } else {
@@ -405,13 +414,13 @@ export class QueryExecutor {
     if (!dbColumn) {
       this.warnings.push({
         message: `Unknown group by column: ${column}`,
-        severity: 'error'
+        severity: "error",
       });
       return groups;
     }
 
     for (const row of data) {
-      const key = String((row as any)[dbColumn] || 'null');
+      const key = String((row as any)[dbColumn] || "null");
       if (!groups.has(key)) {
         groups.set(key, []);
       }
@@ -424,14 +433,17 @@ export class QueryExecutor {
   /**
    * Calculate aggregate function
    */
-  private calculateAggregate(data: MachineData[], aggregate: AggregateNode): string | number | null {
-    if (aggregate.function === 'count') {
+  private calculateAggregate(
+    data: MachineData[],
+    aggregate: AggregateNode
+  ): string | number | null {
+    if (aggregate.function === "count") {
       if (!aggregate.column) {
         return data.length;
       }
       const dbColumn = getDbColumn(aggregate.column);
       if (!dbColumn) return 0;
-      return data.filter(row => (row as any)[dbColumn] != null).length;
+      return data.filter((row) => (row as any)[dbColumn] != null).length;
     }
 
     if (!aggregate.column) return null;
@@ -439,20 +451,20 @@ export class QueryExecutor {
     if (!dbColumn) return null;
 
     const values = data
-      .map(row => (row as any)[dbColumn])
-      .filter(v => v != null && !isNaN(Number(v)))
+      .map((row) => (row as any)[dbColumn])
+      .filter((v) => v != null && !isNaN(Number(v)))
       .map(Number);
 
     if (values.length === 0) return null;
 
     switch (aggregate.function) {
-      case 'min':
+      case "min":
         return Math.min(...values);
-      case 'max':
+      case "max":
         return Math.max(...values);
-      case 'avg':
+      case "avg":
         return Math.round((values.reduce((a, b) => a + b, 0) / values.length) * 100) / 100;
-      case 'sum':
+      case "sum":
         return Math.round(values.reduce((a, b) => a + b, 0) * 100) / 100;
       default:
         return null;
@@ -465,7 +477,7 @@ export class QueryExecutor {
   private applyOrderBy(
     rows: Array<Array<string | number | null>>,
     headers: string[],
-    orderBy: QueryNode['orderBy']
+    orderBy: QueryNode["orderBy"]
   ): Array<Array<string | number | null>> {
     if (!orderBy) return rows;
 
@@ -481,18 +493,18 @@ export class QueryExecutor {
         const bVal = b[index];
 
         if (aVal === null && bVal === null) continue;
-        if (aVal === null) return sortCol.direction === 'asc' ? -1 : 1;
-        if (bVal === null) return sortCol.direction === 'asc' ? 1 : -1;
+        if (aVal === null) return sortCol.direction === "asc" ? -1 : 1;
+        if (bVal === null) return sortCol.direction === "asc" ? 1 : -1;
 
         let comparison = 0;
-        if (typeof aVal === 'number' && typeof bVal === 'number') {
+        if (typeof aVal === "number" && typeof bVal === "number") {
           comparison = aVal - bVal;
         } else {
           comparison = String(aVal).localeCompare(String(bVal));
         }
 
         if (comparison !== 0) {
-          return sortCol.direction === 'asc' ? comparison : -comparison;
+          return sortCol.direction === "asc" ? comparison : -comparison;
         }
       }
       return 0;
@@ -506,7 +518,7 @@ export class QueryExecutor {
    */
   private formatValue(value: any): string | number | null {
     if (value === null || value === undefined) return null;
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       return Math.round(value * 1000) / 1000; // Round to 3 decimal places
     }
     if (value instanceof Date) {
@@ -522,23 +534,23 @@ export class QueryExecutor {
     const lines: string[] = [];
 
     // Add headers
-    lines.push(headers.map(h => this.escapeCSV(h)).join(','));
+    lines.push(headers.map((h) => this.escapeCSV(h)).join(","));
 
     // Add rows
     for (const row of rows) {
-      lines.push(row.map(cell => this.escapeCSV(cell)).join(','));
+      lines.push(row.map((cell) => this.escapeCSV(cell)).join(","));
     }
 
-    return lines.join('\n');
+    return lines.join("\n");
   }
 
   /**
    * Escape CSV value
    */
   private escapeCSV(value: any): string {
-    if (value === null || value === undefined) return '';
+    if (value === null || value === undefined) return "";
     const str = String(value);
-    if (str.includes(',') || str.includes('"') || str.includes('\n')) {
+    if (str.includes(",") || str.includes('"') || str.includes("\n")) {
       return `"${str.replace(/"/g, '""')}"`;
     }
     return str;
@@ -547,15 +559,15 @@ export class QueryExecutor {
   /**
    * Build query metadata
    */
-  private buildMetadata(query: QueryNode): QueryResult['metadata'] {
+  private buildMetadata(query: QueryNode): QueryResult["metadata"] {
     return {
-      aggregations: query.select.aggregates.map(a => a.function),
+      aggregations: query.select.aggregates.map((a) => a.function),
       groupBy: query.groupBy?.columns[0] || null,
       orderBy: query.orderBy?.columns[0]?.column || null,
-      orderDir: query.orderBy?.columns[0]?.direction || 'asc',
+      orderDir: query.orderBy?.columns[0]?.direction || "asc",
       limit: query.limit?.value || null,
       scope: query.from.scope.value || query.from.scope.scopeType,
-      filters: query.where?.filters.length || 0
+      filters: query.where?.filters.length || 0,
     };
   }
 
@@ -565,18 +577,18 @@ export class QueryExecutor {
   private createExplainResult(plan: QueryPlan): QueryResult {
     return {
       ok: true,
-      headers: ['Operation', 'Cost', 'Rows', 'Details'],
+      headers: ["Operation", "Cost", "Rows", "Details"],
       rows: this.planToRows(plan),
       rowCount: 1,
       metadata: {
         aggregations: [],
         groupBy: null,
         orderBy: null,
-        orderDir: 'asc',
+        orderDir: "asc",
         limit: null,
-        scope: 'all',
-        filters: 0
-      }
+        scope: "all",
+        filters: 0,
+      },
     };
   }
 
@@ -585,13 +597,13 @@ export class QueryExecutor {
    */
   private planToRows(plan: QueryPlan, depth: number = 0): Array<Array<string | number | null>> {
     const rows: Array<Array<string | number | null>> = [];
-    const indent = '  '.repeat(depth);
+    const indent = "  ".repeat(depth);
 
     rows.push([
       `${indent}${plan.type}`,
       plan.cost,
       plan.rows,
-      plan.details ? JSON.stringify(plan.details) : null
+      plan.details ? JSON.stringify(plan.details) : null,
     ]);
 
     if (plan.children) {

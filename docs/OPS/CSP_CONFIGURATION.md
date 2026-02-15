@@ -7,27 +7,32 @@ The CSP is configured in `next.config.js` and is **enabled only in production** 
 ### Configured Directives
 
 #### Default Sources
+
 - `default-src 'self'` - Only allow resources from the same origin by default
 - `base-uri 'self'` - Restrict base element to same origin
 - `frame-ancestors 'self'` - Prevent clickjacking, only allow same-origin embedding
 
 #### Script Sources
+
 - `script-src 'self' https://browser.sentry-cdn.com`
   - Self: Application scripts
   - Sentry: Error tracking SDK
 
 #### Style Sources
+
 - `style-src 'self' 'unsafe-inline'`
   - Self: Application stylesheets
   - Unsafe-inline: Required for styled-components and inline styles
 
 #### Image Sources
+
 - `img-src 'self' data: blob: https://i.ytimg.com https://img.youtube.com`
   - Self: Application images
   - Data/Blob: Base64 images and dynamic images
   - YouTube: Video thumbnails
 
 #### Connect Sources (API/WebSocket)
+
 - `connect-src`:
   - `'self'` - Application APIs
   - `https://${supabaseHost}` - Supabase database (dynamic based on env)
@@ -39,11 +44,13 @@ The CSP is configured in `next.config.js` and is **enabled only in production** 
   - `https://*.sentry.io` - Sentry services
 
 #### Frame Sources (iframes)
+
 - `frame-src https://www.youtube.com https://www.youtube-nocookie.com`
   - YouTube: Embedded videos
   - YouTube-nocookie: Privacy-enhanced embedded videos
 
 #### Other Sources
+
 - `font-src 'self' data:` - Fonts from self and data URIs
 - `worker-src 'self' blob:` - Web Workers and Service Workers
 - `object-src 'none'` - No plugins (Flash, Java, etc.)
@@ -52,6 +59,7 @@ The CSP is configured in `next.config.js` and is **enabled only in production** 
 ## Security Headers
 
 Additional security headers configured:
+
 - `X-Frame-Options: DENY` - Prevent clickjacking
 - `X-Content-Type-Options: nosniff` - Prevent MIME sniffing
 - `Referrer-Policy: no-referrer` - Don't leak referrer information
@@ -60,10 +68,12 @@ Additional security headers configured:
 ## Environment-Specific Configuration
 
 ### Development
+
 - CSP is **disabled** in development for better DX
 - All security headers except CSP are still applied
 
 ### Production
+
 - Full CSP is enforced
 - Supabase host is dynamically included based on environment variable
 - All third-party services are explicitly allowed
@@ -78,6 +88,7 @@ Additional security headers configured:
 ## Adding New Services
 
 When adding new services, update the appropriate directive:
+
 1. API endpoints → Add to `connect-src`
 2. CDN scripts → Add to `script-src`
 3. External images → Add to `img-src`
@@ -86,6 +97,7 @@ When adding new services, update the appropriate directive:
 ## CSP Violations Monitoring
 
 CSP violations can be monitored through:
+
 1. Browser console errors during development
 2. Sentry error reporting in production (if configured)
 3. Consider adding a `report-uri` directive for dedicated CSP violation reporting

@@ -14,7 +14,21 @@ objectives:
   - "Execute complex module-specific procedures and workflows"
   - "Optimize navigation efficiency using power user techniques"
   - "Troubleshoot common navigation and module performance issues"
-tags: ["TCO", "Domain4", "Navigation", "Interact", "Trends", "Reporting", "Connect", "Console", "Workflows", "Shortcuts", "Performance", "Troubleshooting"]
+tags:
+  [
+    "TCO",
+    "Domain4",
+    "Navigation",
+    "Interact",
+    "Trends",
+    "Reporting",
+    "Connect",
+    "Console",
+    "Workflows",
+    "Shortcuts",
+    "Performance",
+    "Troubleshooting",
+  ]
 blueprintWeight: 0.23
 version: 2
 status: "published"
@@ -29,10 +43,10 @@ description: "Comprehensive platform navigation and core module operations for e
 This comprehensive module covers navigation and the four core modules that form the foundation of daily Tanium operations. With 23% exam weight, mastering these concepts is critical for certification success.
 
 <InfoBox title="Exam Relevance - Critical Success Factor">
-  This domain represents 23% of the TCO certification exam - the highest weighted domain.
-  You'll face 18-20 questions covering console navigation, module selection decisions,
-  workflow optimization, and troubleshooting. Expect scenario-based questions requiring
-  you to choose the correct module and navigation path for specific business requirements.
+  This domain represents 23% of the TCO certification exam - the highest weighted domain. You'll
+  face 18-20 questions covering console navigation, module selection decisions, workflow
+  optimization, and troubleshooting. Expect scenario-based questions requiring you to choose the
+  correct module and navigation path for specific business requirements.
 </InfoBox>
 
 ## Section 1: Console Layout Deep Dive (45 minutes)
@@ -44,26 +58,29 @@ The Tanium console follows a hierarchical navigation structure designed for rapi
 #### Primary Navigation Components
 
 **Top Navigation Bar**
+
 - **Global Search**: Universal search across all data types (sensors, saved questions, groups, users)
 - **Notifications Center**: Real-time alerts for system events, scheduled actions, and user mentions
 - **User Profile Menu**: Account settings, role information, and session management
 - **Help System**: Context-sensitive documentation and support resources
 
 **Left Side Navigation**
+
 - **Module Icons**: Direct access to primary modules (Interact, Trends, Reporting, Connect, etc.)
 - **Favorites**: User-customized shortcuts to frequently accessed items
 - **Recently Used**: Dynamic list of last 10 accessed screens/objects
 - **Administration**: System configuration and management tools (role-dependent visibility)
 
 <InfoBox title="Navigation Best Practice">
-  The left navigation auto-collapses to save screen space. Use Ctrl+Shift+N to toggle
-  the navigation panel quickly. This keyboard shortcut works in all modules and saves
-  significant time during intensive work sessions.
+  The left navigation auto-collapses to save screen space. Use Ctrl+Shift+N to toggle the navigation
+  panel quickly. This keyboard shortcut works in all modules and saves significant time during
+  intensive work sessions.
 </InfoBox>
 
 #### Panel Management System
 
 **Panel Types and Usage**
+
 - **Question Panels**: Display real-time sensor data with live refresh capabilities
 - **Saved Question Panels**: Historical question results with comparison features
 - **Chart Panels**: Graphical representations with multiple visualization options
@@ -71,6 +88,7 @@ The Tanium console follows a hierarchical navigation structure designed for rapi
 - **Summary Panels**: Aggregated metrics with drill-down capabilities
 
 **Panel Customization Options**
+
 1. **Size and Layout**: Resize panels by dragging borders; snap to grid for alignment
 2. **Refresh Intervals**: Set automatic refresh from 5 seconds to 24 hours
 3. **Data Limits**: Configure row limits (100, 500, 1000, 5000, or unlimited)
@@ -79,12 +97,14 @@ The Tanium console follows a hierarchical navigation structure designed for rapi
 
 **Workspace Organization Strategies**
 
-*Personal Workspaces*
+_Personal Workspaces_
+
 - Create topic-specific workspaces (Security, Compliance, Performance)
 - Use naming conventions: [Department]-[Purpose]-[Date] (e.g., "SecOps-IncidentResponse-Q4")
 - Archive completed investigation workspaces monthly
 
-*Shared Workspaces*
+_Shared Workspaces_
+
 - Establish team templates for common investigation types
 - Document workspace purpose and update procedures
 - Implement review cycles for shared content relevance
@@ -92,13 +112,15 @@ The Tanium console follows a hierarchical navigation structure designed for rapi
 #### Advanced Search Functionality
 
 **Global Search Capabilities**
+
 - **Fuzzy Matching**: Handles typos and partial matches
 - **Scoped Search**: Prefix searches (sensor:, group:, user:, question:)
 - **Boolean Logic**: AND, OR, NOT operators for complex queries
-- **Wildcard Support**: * and ? characters for pattern matching
+- **Wildcard Support**: \* and ? characters for pattern matching
 - **Historical Search**: Access to previously executed searches
 
 **Search Performance Optimization**
+
 - Use specific prefixes to narrow search scope
 - Leverage saved searches for repeated queries
 - Clear search history monthly to maintain performance
@@ -155,22 +177,24 @@ flowchart LR
 
 ### Module Feature Quick Map
 
-| Module | Primary Purpose | Live vs Historic | Typical Outputs | Notes |
-|---|---|---|---|---|
-| Interact | Live inquiry | Live | Tables | Great for exploration |
-| Trends | Time-series | Historic | Panels/Alerts | Baselines and alerts |
-| Reporting | Communication | Both | Dashboards/Exports | Audience-focused |
-| Connect | Integration | N/A | Pipelines | Data movement/governance |
+| Module    | Primary Purpose | Live vs Historic | Typical Outputs    | Notes                    |
+| --------- | --------------- | ---------------- | ------------------ | ------------------------ |
+| Interact  | Live inquiry    | Live             | Tables             | Great for exploration    |
+| Trends    | Time-series     | Historic         | Panels/Alerts      | Baselines and alerts     |
+| Reporting | Communication   | Both             | Dashboards/Exports | Audience-focused         |
+| Connect   | Integration     | N/A              | Pipelines          | Data movement/governance |
 
 #### Widget Configuration and Dashboard Layouts
 
 **Dashboard Design Principles**
+
 1. **Visual Hierarchy**: Most critical information in upper-left quadrant
 2. **Color Consistency**: Establish color meanings (red=critical, yellow=warning, green=healthy)
 3. **White Space**: Avoid cramming; use spacing for visual separation
 4. **Responsive Design**: Ensure readability across different screen sizes
 
 **Widget Types and Applications**
+
 - **KPI Widgets**: Single-value displays for key metrics
 - **Trend Widgets**: Time-series data with multiple data sources
 - **Table Widgets**: Detailed data with sorting and filtering
@@ -186,44 +210,50 @@ Understanding when to use each module is crucial for efficient operations and ex
 #### Interact Module: Real-Time Investigation
 
 **Primary Use Cases**
+
 - **Incident Response**: Immediate threat hunting and forensic analysis
 - **Ad-Hoc Investigations**: One-time data collection for specific questions
 - **System Validation**: Verify configurations and policy compliance
 - **Live Troubleshooting**: Real-time performance and connectivity issues
 
 **Decision Criteria for Interact**
+
 - Need current/live data (not historical)
 - Investigation is exploratory or one-time
 - Results needed immediately (within seconds/minutes)
 - Data requirements may evolve during investigation
 
 **Interact Workflow Patterns**
+
 1. **Initial Assessment**: Start with broad questions, narrow based on results
 2. **Drill-Down Analysis**: Use results to build more specific follow-up questions
 3. **Validation Checks**: Confirm findings with alternative data sources
 4. **Documentation**: Save significant findings as saved questions
 
 <InfoBox title="Interact Performance Tip">
-  Interact questions run against live endpoints. Large-scale questions (&gt;10,000 endpoints)
-  should use question scheduling or be broken into smaller batches to avoid performance
-  impact. Use computer groups to scope questions appropriately.
+  Interact questions run against live endpoints. Large-scale questions (&gt;10,000 endpoints) should
+  use question scheduling or be broken into smaller batches to avoid performance impact. Use
+  computer groups to scope questions appropriately.
 </InfoBox>
 
 #### Trends Module: Historical Analysis and Monitoring
 
 **Primary Use Cases**
+
 - **Performance Monitoring**: Track system metrics over time
 - **Trend Analysis**: Identify patterns and anomalies in historical data
 - **Capacity Planning**: Forecast resource requirements based on usage trends
 - **Compliance Reporting**: Generate historical compliance posture reports
 
 **Decision Criteria for Trends**
+
 - Need historical data comparison
 - Creating ongoing monitoring solutions
 - Building visualizations for stakeholder consumption
 - Establishing baseline measurements
 
 **Trends Panel Creation Strategy**
+
 1. **Data Source Selection**: Choose sensors with consistent historical collection
 2. **Time Range Definition**: Align with business reporting cycles
 3. **Aggregation Methods**: Select appropriate grouping (hourly, daily, weekly)
@@ -232,18 +262,21 @@ Understanding when to use each module is crucial for efficient operations and ex
 #### Reporting Module: Formatted Output and Distribution
 
 **Primary Use Cases**
+
 - **Executive Dashboards**: High-level KPIs and status indicators
 - **Compliance Reports**: Formatted reports for auditors and regulators
 - **Operational Summaries**: Regular team and stakeholder communications
 - **Data Export**: Structured data delivery to external systems
 
 **Decision Criteria for Reporting**
+
 - Need formatted, presentation-ready output
 - Regular/scheduled distribution required
 - Multiple data sources must be combined
 - Audience includes non-technical stakeholders
 
 **Report Design Best Practices**
+
 1. **Audience-Centric Design**: Tailor content and complexity to viewer expertise
 2. **Executive Summary**: Start with key findings and recommendations
 3. **Supporting Details**: Provide drill-down data for technical teams
@@ -253,26 +286,29 @@ Understanding when to use each module is crucial for efficient operations and ex
 #### Connect Module: External Integration and Data Pipelines
 
 **Primary Use Cases**
+
 - **SIEM Integration**: Stream security events to security platforms
 - **ITSM Integration**: Create tickets and update status in service management tools
 - **Data Warehousing**: Export structured data for business intelligence systems
 - **API Integration**: Push/pull data with third-party applications
 
 **Decision Criteria for Connect**
+
 - External systems require Tanium data
 - Real-time or scheduled data delivery needed
 - Data transformation/filtering required before export
 - Integration with business workflows and processes
 
 <InfoBox title="Connect Security Warning">
-  Connect pipelines can expose sensitive data to external systems. Always implement
-  proper access controls, data filtering, and encryption. Coordinate with security
-  teams before establishing new Connect integrations.
+  Connect pipelines can expose sensitive data to external systems. Always implement proper access
+  controls, data filtering, and encryption. Coordinate with security teams before establishing new
+  Connect integrations.
 </InfoBox>
 
 ### Module Integration Workflows
 
 #### Workflow 1: Interact → Trends → Reporting
+
 **Scenario**: Security team discovers suspicious process execution and needs ongoing monitoring
 
 1. **Interact Phase**: Investigate suspicious processes with real-time questions
@@ -291,6 +327,7 @@ Understanding when to use each module is crucial for efficient operations and ex
    - Export detailed forensic data for security tools
 
 #### Workflow 2: Trends → Connect → Reporting
+
 **Scenario**: IT operations needs automated server health monitoring with ITSM integration
 
 1. **Trends Phase**: Establish baseline monitoring
@@ -305,7 +342,7 @@ Understanding when to use each module is crucial for efficient operations and ex
   initialQuery="Which module would you use to investigate a security incident that happened 3 days ago?"
   expectedAnswers={[
     "Trends Module - For historical analysis of security events that occurred in the past",
-    "Look for time-series data showing the incident timeline and impact scope"
+    "Look for time-series data showing the incident timeline and impact scope",
   ]}
   difficulty="intermediate"
   category="Module Selection"
@@ -324,24 +361,28 @@ Understanding when to use each module is crucial for efficient operations and ex
 ### Performance Considerations by Module
 
 #### Interact Performance Optimization
+
 - **Question Scoping**: Use computer groups to limit endpoint targets
 - **Sensor Selection**: Choose efficient sensors that minimize endpoint resource usage
 - **Result Limits**: Set appropriate row limits to prevent browser performance issues
 - **Concurrent Questions**: Limit simultaneous questions to prevent endpoint overload
 
 #### Trends Performance Optimization
+
 - **Data Retention**: Configure appropriate retention periods for different data types
 - **Panel Refresh**: Set refresh intervals based on data volatility requirements
 - **Source Aggregation**: Combine related data sources to reduce query overhead
 - **Index Optimization**: Ensure proper database indexing for frequently queried fields
 
 #### Reporting Performance Optimization
+
 - **Schedule Optimization**: Distribute report generation across time periods
 - **Data Caching**: Leverage cached results for frequently requested reports
 - **Format Selection**: Choose appropriate output formats for data size and complexity
 - **Distribution Lists**: Optimize recipient lists to prevent unnecessary processing
 
 #### Connect Performance Optimization
+
 - **Batch Processing**: Group multiple records into single transmission batches
 - **Error Handling**: Implement robust retry logic for temporary connection failures
 - **Data Filtering**: Apply filters at source to minimize network transmission
@@ -372,12 +413,14 @@ from all machines where Last Logged In User contains "admin"
 ```
 
 **Question Building Best Practices**
+
 1. **Start Simple**: Begin with basic questions and add complexity iteratively
 2. **Test Incrementally**: Verify each sensor addition before adding more complexity
 3. **Use Filters Strategically**: Apply filters to reduce data volume early in the question
 4. **Document Logic**: Add comments to explain complex question logic
 
 **Advanced Filtering Techniques**
+
 - **Regex Patterns**: Use `matches` operator with regular expressions
 - **Date Filtering**: Leverage `older than` and `newer than` with time specifications
 - **Numeric Comparisons**: Use `greater than`, `less than` for threshold-based filtering
@@ -386,12 +429,14 @@ from all machines where Last Logged In User contains "admin"
 #### Saved Questions Management
 
 **Organizational Strategies**
+
 - **Naming Convention**: [Category]-[Purpose]-[Date] (e.g., "Security-ProcessAnalysis-2024Q4")
 - **Folder Structure**: Organize by functional area, not by creator
 - **Version Control**: Include version numbers for evolving questions
 - **Documentation**: Add descriptions explaining question purpose and expected results
 
 **Saved Question Optimization**
+
 1. **Performance Testing**: Validate question performance across different endpoint counts
 2. **Result Validation**: Verify accuracy across different operating systems and configurations
 3. **Maintenance Scheduling**: Review and update saved questions quarterly
@@ -400,12 +445,14 @@ from all machines where Last Logged In User contains "admin"
 #### Drill-Down Investigation Techniques
 
 **Progressive Investigation Methods**
+
 1. **Broad Discovery**: Start with high-level questions to identify scope
 2. **Targeted Analysis**: Focus on specific endpoints or time periods
 3. **Root Cause Analysis**: Drill into specific configurations or behaviors
 4. **Impact Assessment**: Evaluate broader implications of findings
 
 **Question Chaining Strategies**
+
 - Use results from initial questions to build follow-up investigations
 - Leverage computer name filtering for endpoint-specific analysis
 - Apply time-based filtering to correlate events across questions
@@ -416,6 +463,7 @@ from all machines where Last Logged In User contains "admin"
 #### Advanced Panel Configuration
 
 **Data Source Management**
+
 - **Sensor Selection**: Choose sensors with consistent data types and collection intervals
 - **Time Alignment**: Ensure all data sources use compatible time stamps
 - **Data Quality**: Implement validation rules for data consistency
@@ -423,19 +471,22 @@ from all machines where Last Logged In User contains "admin"
 
 **Visualization Types and Applications**
 
-*Line Charts*
+_Line Charts_
+
 - **Best For**: Time-series data, trend analysis, performance monitoring
 - **Configuration**: Set appropriate time ranges and axis scaling
 - **Multiple Series**: Compare up to 10 different metrics simultaneously
 - **Annotations**: Add event markers for correlation analysis
 
-*Bar Charts*
+_Bar Charts_
+
 - **Best For**: Categorical comparisons, ranking data, distribution analysis
 - **Horizontal vs Vertical**: Choose orientation based on label length and data count
 - **Stacking Options**: Use stacked bars for component analysis
 - **Color Coding**: Apply consistent colors across related charts
 
-*Heat Maps*
+_Heat Maps_
+
 - **Best For**: Two-dimensional correlations, geographic data, time-based patterns
 - **Color Scales**: Select scales that highlight important variations
 - **Grid Configuration**: Optimize cell sizes for data density
@@ -444,21 +495,23 @@ from all machines where Last Logged In User contains "admin"
 #### Threshold and Alert Configuration
 
 **Alert Strategy Development**
+
 1. **Baseline Establishment**: Collect 30+ days of data before setting thresholds
 2. **Statistical Analysis**: Use standard deviation and percentile analysis
 3. **Business Context**: Align thresholds with business impact levels
 4. **False Positive Minimization**: Test thresholds against historical anomalies
 
 **Alert Delivery Methods**
+
 - **Email Notifications**: Configure appropriate recipient lists and escalation procedures
 - **Dashboard Alerts**: Visual indicators for real-time monitoring
 - **Integration Alerts**: Push notifications to external systems via Connect
 - **Mobile Alerts**: Configure mobile-friendly notifications for critical issues
 
 <InfoBox title="Trends Alert Tuning">
-  Over-alerting reduces response effectiveness. Start with conservative thresholds
-  and tighten based on actual incident patterns. Review alert effectiveness monthly
-  and adjust based on true positive rates and response outcomes.
+  Over-alerting reduces response effectiveness. Start with conservative thresholds and tighten based
+  on actual incident patterns. Review alert effectiveness monthly and adjust based on true positive
+  rates and response outcomes.
 </InfoBox>
 
 ### Reporting: Dashboard Development and Distribution
@@ -466,12 +519,14 @@ from all machines where Last Logged In User contains "admin"
 #### Dashboard Architecture and Design
 
 **Information Architecture Principles**
+
 1. **Pyramid Structure**: Executive summary → Department details → Technical specifics
 2. **Progressive Disclosure**: Surface most important information first
 3. **Consistent Navigation**: Standard menu structures across related reports
 4. **Mobile Compatibility**: Ensure readability on various device sizes
 
 **Layout Best Practices**
+
 - **Grid System**: Use consistent spacing and alignment
 - **Visual Weight**: Balance information density across dashboard sections
 - **Color Psychology**: Leverage colors to guide attention and convey meaning
@@ -480,12 +535,14 @@ from all machines where Last Logged In User contains "admin"
 #### Advanced Report Creation
 
 **Multi-Source Report Development**
+
 1. **Data Integration Planning**: Map data relationships and join criteria
 2. **Refresh Coordination**: Synchronize data collection times across sources
 3. **Error Handling**: Implement fallback displays for missing data sources
 4. **Performance Testing**: Validate report generation times with full data sets
 
 **Dynamic Content Generation**
+
 - **Parameter-Driven Reports**: Create reports that adapt based on input parameters
 - **Conditional Sections**: Show/hide content based on data availability or user roles
 - **Interactive Elements**: Enable drill-down and filtering capabilities
@@ -494,12 +551,14 @@ from all machines where Last Logged In User contains "admin"
 #### Scheduling and Distribution Management
 
 **Schedule Optimization Strategies**
+
 - **Load Balancing**: Distribute report generation across non-peak hours
 - **Dependency Management**: Sequence reports that depend on common data sources
 - **Failure Recovery**: Implement retry logic and error notification procedures
 - **Resource Monitoring**: Track system resource usage during report generation
 
 **Distribution List Management**
+
 - **Role-Based Distribution**: Align report recipients with data access permissions
 - **Delivery Preferences**: Accommodate recipient preferences for format and frequency
 - **Subscription Management**: Provide self-service subscription capabilities
@@ -510,12 +569,14 @@ from all machines where Last Logged In User contains "admin"
 #### Pipeline Architecture Fundamentals
 
 **Data Flow Design Patterns**
+
 1. **Extract-Transform-Load (ETL)**: Traditional batch processing for large data volumes
 2. **Change Data Capture (CDC)**: Real-time streaming for immediate data availability
 3. **Event-Driven Processing**: Trigger-based data transmission for specific conditions
 4. **Scheduled Synchronization**: Regular bulk transfers for data consistency
 
 **Data Transformation Capabilities**
+
 - **Field Mapping**: Transform source field names to destination requirements
 - **Data Type Conversion**: Convert between different data formats and types
 - **Value Translation**: Map categorical values between different system vocabularies
@@ -524,12 +585,14 @@ from all machines where Last Logged In User contains "admin"
 #### Security and Access Control
 
 **Data Protection Strategies**
+
 1. **Encryption in Transit**: Use HTTPS/TLS for all data transmission
 2. **Encryption at Rest**: Ensure destination systems protect stored data
 3. **Data Minimization**: Transmit only necessary fields for intended purpose
 4. **Access Logging**: Maintain comprehensive audit trails for data access
 
 **Authentication and Authorization**
+
 - **Service Accounts**: Use dedicated accounts with minimal necessary permissions
 - **Token Management**: Implement secure token storage and rotation procedures
 - **Network Segmentation**: Restrict Connect communications to necessary network paths
@@ -538,12 +601,14 @@ from all machines where Last Logged In User contains "admin"
 #### Pipeline Monitoring and Troubleshooting
 
 **Performance Monitoring**
+
 - **Throughput Metrics**: Track records processed per hour/day
 - **Latency Measurements**: Monitor end-to-end data delivery times
 - **Error Rates**: Track and analyze transmission failures and retries
 - **Resource Utilization**: Monitor CPU, memory, and network usage
 
 **Common Troubleshooting Scenarios**
+
 1. **Connection Failures**: Network connectivity and authentication issues
 2. **Data Format Errors**: Schema mismatches and data type conflicts
 3. **Performance Degradation**: Bandwidth limitations and processing bottlenecks
@@ -564,6 +629,7 @@ from all machines where Last Logged In User contains "admin"
 ### Comprehensive Keyboard Shortcuts Reference
 
 #### Global Navigation Shortcuts
+
 - **Ctrl+Shift+N**: Toggle left navigation panel
 - **Ctrl+Shift+S**: Open global search (focus search box)
 - **Ctrl+Shift+H**: Return to home dashboard
@@ -575,6 +641,7 @@ from all machines where Last Logged In User contains "admin"
 #### Module-Specific Shortcuts
 
 **Interact Module**
+
 - **Ctrl+N**: New question
 - **Ctrl+S**: Save current question
 - **Ctrl+R**: Execute/refresh current question
@@ -584,6 +651,7 @@ from all machines where Last Logged In User contains "admin"
 - **Ctrl+F**: Find in results
 
 **Trends Module**
+
 - **Ctrl+P**: New panel
 - **Ctrl+Alt+C**: Copy panel configuration
 - **Ctrl+Alt+V**: Paste panel configuration
@@ -592,6 +660,7 @@ from all machines where Last Logged In User contains "admin"
 - **Ctrl+L**: Adjust panel layout
 
 **Reporting Module**
+
 - **Ctrl+B**: New dashboard
 - **Ctrl+W**: New widget
 - **Ctrl+Alt+S**: Schedule current report
@@ -600,6 +669,7 @@ from all machines where Last Logged In User contains "admin"
 - **Ctrl+Alt+D**: Duplicate dashboard
 
 **Connect Module**
+
 - **Ctrl+I**: New integration
 - **Ctrl+T**: Test connection
 - **Ctrl+M**: Monitor pipeline status
@@ -609,6 +679,7 @@ from all machines where Last Logged In User contains "admin"
 #### Advanced Navigation Techniques
 
 **Tab Management**
+
 - **Ctrl+T**: Open new tab within current module
 - **Ctrl+W**: Close current tab
 - **Ctrl+Tab**: Cycle through open tabs
@@ -616,6 +687,7 @@ from all machines where Last Logged In User contains "admin"
 - **Ctrl+1-9**: Jump to specific tab number
 
 **Context Menu Efficiency**
+
 - **Right-click + C**: Copy item (context-dependent)
 - **Right-click + E**: Edit item
 - **Right-click + D**: Delete item
@@ -627,12 +699,14 @@ from all machines where Last Logged In User contains "admin"
 #### Saved View Strategies
 
 **Personal Organization System**
+
 1. **Current Projects**: Active investigations and ongoing work
 2. **Templates**: Reusable configurations for common tasks
 3. **References**: Frequently consulted information and procedures
 4. **Archive**: Completed projects maintained for reference
 
 **Shared View Management**
+
 - **Team Standards**: Establish naming conventions and organization principles
 - **Access Control**: Apply appropriate sharing permissions based on data sensitivity
 - **Version Control**: Maintain version history for evolving saved views
@@ -641,12 +715,14 @@ from all machines where Last Logged In User contains "admin"
 #### Bookmark Optimization
 
 **Bookmark Categories**
+
 - **Daily Tasks**: Most frequently accessed screens and functions
 - **Weekly Tasks**: Regular but less frequent operational activities
 - **Monthly Tasks**: Reporting and maintenance activities
 - **Ad-Hoc Tasks**: Investigation and troubleshooting resources
 
 **Bookmark Management Best Practices**
+
 - **Regular Cleanup**: Remove outdated bookmarks monthly
 - **Descriptive Names**: Use clear, searchable bookmark titles
 - **Logical Grouping**: Organize bookmarks by workflow or functional area
@@ -657,12 +733,14 @@ from all machines where Last Logged In User contains "admin"
 #### Time-Saving Techniques
 
 **Pre-Planning Strategies**
+
 1. **Task Batching**: Group similar activities to minimize context switching
 2. **Template Creation**: Develop reusable configurations for common tasks
 3. **Automation Identification**: Identify repetitive tasks suitable for automation
 4. **Tool Integration**: Leverage external tools for enhanced efficiency
 
 **Execution Optimization**
+
 - **Parallel Processing**: Use multiple tabs for concurrent activities
 - **Progressive Enhancement**: Start with basic configurations and enhance iteratively
 - **Quality Checkpoints**: Implement validation steps to prevent rework
@@ -671,27 +749,30 @@ from all machines where Last Logged In User contains "admin"
 #### Power User Tips and Advanced Techniques
 
 **Custom Navigation Paths**
+
 - Create bookmark folders that mirror common workflow sequences
 - Use browser favorites to maintain cross-session navigation shortcuts
 - Implement desktop shortcuts for frequently used deep-linked functions
 - Leverage browser session restoration for complex multi-tab workflows
 
 **Data Management Efficiency**
+
 - **Copy/Paste Optimization**: Use clipboard managers for complex data entry
 - **Template Libraries**: Maintain libraries of question templates, panel configurations, and report layouts
 - **Bulk Operations**: Identify opportunities for bulk configuration changes
 - **Cross-Module References**: Maintain references between related objects across modules
 
 **Collaboration Enhancement**
+
 - **Screen Sharing Optimization**: Prepare standard views for team meetings
 - **Documentation Integration**: Link Tanium objects to external documentation systems
 - **Knowledge Transfer**: Create guided workflows for training new team members
 - **Change Management**: Document workflow modifications for team awareness
 
 <InfoBox title="Power User Productivity Metrics">
-  Advanced users typically achieve 40-60% time savings through optimized navigation
-  and workflow techniques. Track your efficiency improvements by measuring task
-  completion times before and after implementing these strategies.
+  Advanced users typically achieve 40-60% time savings through optimized navigation and workflow
+  techniques. Track your efficiency improvements by measuring task completion times before and after
+  implementing these strategies.
 </InfoBox>
 
 <PracticeButton
@@ -711,36 +792,41 @@ from all machines where Last Logged In User contains "admin"
 #### Browser Compatibility and Configuration
 
 **Supported Browser Requirements**
+
 - **Minimum Versions**: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
 - **JavaScript Requirements**: Modern ES6+ support with enabled JavaScript
 - **Cookie Settings**: Third-party cookies enabled for SSO integration
 - **Local Storage**: Minimum 10MB available for offline caching
 
 **Browser-Specific Issues**
+
 1. **Chrome**: Excessive memory usage with multiple tabs
-   - *Solution*: Enable tab discarding in chrome://flags, use tab management extensions
+   - _Solution_: Enable tab discarding in chrome://flags, use tab management extensions
 2. **Firefox**: Slower panel rendering performance
-   - *Solution*: Disable unnecessary add-ons, adjust privacy settings for Tanium domains
+   - _Solution_: Disable unnecessary add-ons, adjust privacy settings for Tanium domains
 3. **Safari**: Limited keyboard shortcut support
-   - *Solution*: Enable full keyboard access in System Preferences
+   - _Solution_: Enable full keyboard access in System Preferences
 4. **Edge**: Compatibility mode activation
-   - *Solution*: Add Tanium domains to trusted sites, disable compatibility mode
+   - _Solution_: Add Tanium domains to trusted sites, disable compatibility mode
 
 #### Performance Optimization for Large Datasets
 
 **Panel Load Optimization**
+
 - **Data Limits**: Set appropriate row limits (500-1000 for interactive panels)
 - **Refresh Intervals**: Use longer intervals (5+ minutes) for large datasets
 - **Index Utilization**: Ensure database indexes support common query patterns
 - **Caching Strategy**: Leverage browser caching for frequently accessed data
 
 **Question Performance Tuning**
+
 - **Endpoint Scoping**: Use computer groups to limit question targets
 - **Sensor Efficiency**: Choose sensors with minimal endpoint resource impact
 - **Result Filtering**: Apply filters to reduce network transmission volume
 - **Concurrent Limits**: Restrict simultaneous questions per user/group
 
 **Memory Management**
+
 - **Tab Management**: Close unused tabs to free memory resources
 - **Cache Clearing**: Clear browser cache weekly for optimal performance
 - **Session Management**: Log out of inactive sessions to free server resources
@@ -749,21 +835,23 @@ from all machines where Last Logged In User contains "admin"
 #### Console Timeout and Session Management
 
 **Session Configuration**
+
 - **Timeout Settings**: Understand organizational session timeout policies
 - **Activity Detection**: Maintain minimal activity to prevent automatic logout
 - **Multi-Session Management**: Coordinate activities across multiple browser sessions
 - **Session Recovery**: Understand data retention during session interruptions
 
 **Timeout Troubleshooting**
+
 1. **Premature Timeouts**: Check browser power management settings
 2. **Lost Work Recovery**: Leverage browser session restoration capabilities
 3. **Authentication Loops**: Clear authentication cookies and restart browser
 4. **Network Connectivity**: Verify stable network connection for session maintenance
 
 <InfoBox title="Session Management Best Practice">
-  Save work frequently, especially for complex questions and panel configurations.
-  Browser crashes or network interruptions can result in lost work. Use drafts
-  and temporary saves whenever available.
+  Save work frequently, especially for complex questions and panel configurations. Browser crashes
+  or network interruptions can result in lost work. Use drafts and temporary saves whenever
+  available.
 </InfoBox>
 
 ### Error Messages and Resolution Procedures
@@ -771,6 +859,7 @@ from all machines where Last Logged In User contains "admin"
 #### Common Error Categories
 
 **Authentication Errors**
+
 - **Symptoms**: Login failures, permission denied messages, session expired notifications
 - **Causes**: Expired credentials, role changes, network authentication issues
 - **Resolution Steps**:
@@ -781,6 +870,7 @@ from all machines where Last Logged In User contains "admin"
   5. Contact IT support for account unlock/reset
 
 **Data Access Errors**
+
 - **Symptoms**: "No data available", "Permission denied", "Query timeout"
 - **Causes**: Insufficient permissions, data availability issues, performance problems
 - **Resolution Steps**:
@@ -791,6 +881,7 @@ from all machines where Last Logged In User contains "admin"
   5. Schedule query during off-peak hours
 
 **Performance Errors**
+
 - **Symptoms**: Slow loading, browser freezing, partial data display
 - **Causes**: Large datasets, network latency, browser resource limitations
 - **Resolution Steps**:
@@ -803,18 +894,21 @@ from all machines where Last Logged In User contains "admin"
 #### Systematic Troubleshooting Approach
 
 **Problem Identification Process**
+
 1. **Symptom Documentation**: Record exact error messages and reproduction steps
 2. **Environment Assessment**: Note browser, operating system, and network conditions
 3. **Impact Analysis**: Determine scope of affected users and functions
 4. **Timeline Analysis**: Identify when problems began and any related changes
 
 **Resolution Strategy Development**
+
 1. **Quick Fixes First**: Apply common solutions before complex troubleshooting
 2. **Isolation Testing**: Test individual components to identify specific causes
 3. **Progressive Solutions**: Implement solutions in order of increasing complexity
 4. **Verification Testing**: Confirm problem resolution and prevent recurrence
 
 **Escalation Procedures**
+
 - **Level 1**: Self-service using documented procedures and knowledge base
 - **Level 2**: Team lead or designated super-user for advanced troubleshooting
 - **Level 3**: System administrator for platform-level issues
@@ -825,12 +919,14 @@ from all machines where Last Logged In User contains "admin"
 #### User Performance Metrics
 
 **Navigation Efficiency Measurements**
+
 - **Task Completion Time**: Track time for common navigation workflows
 - **Error Rate**: Monitor frequency of navigation errors and mistakes
 - **Shortcut Utilization**: Measure adoption of keyboard shortcuts and saved views
 - **Help Usage**: Track frequency of help system and documentation access
 
 **Performance Benchmarks**
+
 - **Module Access Time**: Less than 3 seconds for module switching
 - **Question Execution Time**: Less than 30 seconds for standard questions
 - **Panel Load Time**: Less than 10 seconds for typical panel displays
@@ -839,12 +935,14 @@ from all machines where Last Logged In User contains "admin"
 #### Continuous Improvement Process
 
 **Regular Assessment Activities**
+
 1. **Monthly Usage Review**: Analyze navigation patterns and identify optimization opportunities
 2. **Quarterly Training Assessment**: Evaluate user proficiency and identify training needs
 3. **Annual Workflow Audit**: Review and update standard procedures and best practices
 4. **User Feedback Collection**: Gather input on navigation challenges and improvement suggestions
 
 **Optimization Implementation**
+
 - **Incremental Changes**: Implement improvements gradually to allow adaptation
 - **Training Integration**: Include optimization techniques in user training programs
 - **Documentation Updates**: Maintain current procedures reflecting best practices
@@ -882,14 +980,14 @@ This expanded module includes multiple specialized practice components aligned w
     "Troubleshooting",
     "Layout",
     "Search",
-    "Efficiency"
+    "Efficiency",
   ]}
   objectiveIds={[
     "obj-console-mastery",
     "obj-module-selection",
     "obj-module-procedures",
     "obj-navigation-efficiency",
-    "obj-troubleshooting-navigation"
+    "obj-troubleshooting-navigation",
   ]}
   difficulty="comprehensive"
 >
@@ -899,30 +997,35 @@ This expanded module includes multiple specialized practice components aligned w
 ### Practice Components by Section
 
 #### Section 1: Console Layout Mastery (45 minutes)
+
 - **Console Navigation Drills**: Navigate between modules using keyboard shortcuts exclusively
 - **Panel Management**: Create, resize, and organize panels in different workspace configurations
 - **Search Optimization**: Practice scoped searches with boolean logic and wildcards
 - **Workspace Organization**: Set up personal and shared workspaces following best practices
 
 #### Section 2: Module Decision Making (60 minutes)
+
 - **Scenario-Based Module Selection**: Given business requirements, select appropriate modules
 - **Workflow Integration**: Practice multi-module workflows (Interact → Trends → Reporting)
 - **Performance Considerations**: Optimize module usage for different data volumes and user loads
 - **Decision Tree Application**: Use decision criteria to choose modules for complex scenarios
 
 #### Section 3: Advanced Procedures (75 minutes)
+
 - **Complex Question Building**: Construct multi-sensor questions with advanced filtering
 - **Panel Configuration**: Create sophisticated visualizations with thresholds and alerts
 - **Dashboard Development**: Build executive-level dashboards with proper information architecture
 - **Pipeline Management**: Configure and monitor Connect integrations with error handling
 
 #### Section 4: Efficiency Mastery (30 minutes)
+
 - **Keyboard Shortcut Mastery**: Demonstrate proficiency with all module-specific shortcuts
 - **Bookmark Optimization**: Organize bookmarks for maximum workflow efficiency
 - **Template Management**: Create and maintain reusable configurations
 - **Time-Saving Techniques**: Implement power user strategies for common tasks
 
 #### Section 5: Troubleshooting Skills (20 minutes)
+
 - **Error Resolution**: Diagnose and resolve common navigation and performance issues
 - **Performance Tuning**: Optimize browser settings and console configuration for best performance
 - **Systematic Troubleshooting**: Apply structured approach to complex technical problems
@@ -930,6 +1033,7 @@ This expanded module includes multiple specialized practice components aligned w
 ### Scenario-Based Knowledge Checks
 
 #### Beginner Level (Console Navigation)
+
 1. **Navigation Efficiency**: You need to quickly switch between Interact, Trends, and Reporting while maintaining context. What keyboard shortcuts and navigation strategies would you use?
 
 2. **Panel Organization**: Design a workspace layout for a security analyst who needs to monitor real-time threats, historical trends, and generate executive reports.
@@ -937,6 +1041,7 @@ This expanded module includes multiple specialized practice components aligned w
 3. **Search Optimization**: Find all saved questions related to "compliance" created by users in the "Security" group within the last 30 days using advanced search techniques.
 
 #### Intermediate Level (Module Selection)
+
 1. **Module Decision**: A security incident requires immediate investigation of suspicious processes, followed by ongoing monitoring and weekly executive reporting. Map out the complete workflow across modules.
 
 2. **Performance Optimization**: Your Interact questions are running slowly against 15,000 endpoints. Describe five specific techniques to improve performance without losing data fidelity.
@@ -944,6 +1049,7 @@ This expanded module includes multiple specialized practice components aligned w
 3. **Integration Workflow**: Design a workflow where Trends data triggers Connect pipeline execution, which then updates a Reporting dashboard. Include error handling and performance considerations.
 
 #### Advanced Level (Expert Implementation)
+
 1. **Complex Investigation**: A multi-stage APT investigation requires correlating process execution, network connections, and file modifications across 6 months of historical data, with real-time monitoring and automated SIEM integration. Design the complete solution architecture.
 
 2. **Dashboard Architecture**: Create a three-tier dashboard system (executive, operational, technical) that presents the same underlying security data with appropriate detail levels and navigation paths for each audience.
@@ -953,7 +1059,9 @@ This expanded module includes multiple specialized practice components aligned w
 ### Practical Application Exercises
 
 #### Exercise 1: Console Mastery Challenge (30 minutes)
+
 Complete a series of navigation tasks using only keyboard shortcuts:
+
 - Create new workspace with 4 panels
 - Configure each panel with different visualization types
 - Set up automated refresh and alerting
@@ -961,7 +1069,9 @@ Complete a series of navigation tasks using only keyboard shortcuts:
 - Document all shortcuts used
 
 #### Exercise 2: Module Workflow Integration (45 minutes)
+
 Implement end-to-end workflow:
+
 - Investigate security alert in Interact
 - Create monitoring panel in Trends
 - Build stakeholder dashboard in Reporting
@@ -969,7 +1079,9 @@ Implement end-to-end workflow:
 - Test complete workflow and document procedures
 
 #### Exercise 3: Performance Optimization Project (30 minutes)
+
 Optimize a slow-performing console environment:
+
 - Identify performance bottlenecks
 - Implement browser optimizations
 - Configure efficient panel refresh strategies
@@ -977,7 +1089,9 @@ Optimize a slow-performing console environment:
 - Measure and document improvements
 
 #### Exercise 4: Advanced Troubleshooting Lab (30 minutes)
+
 Diagnose and resolve simulated issues:
+
 - Authentication and session problems
 - Panel loading and rendering issues
 - Search performance and accuracy problems
@@ -985,7 +1099,9 @@ Diagnose and resolve simulated issues:
 - Document resolution procedures
 
 #### Exercise 5: Power User Efficiency Assessment (20 minutes)
+
 Demonstrate advanced techniques:
+
 - Complete complex navigation tasks in minimum time
 - Use advanced keyboard shortcuts and automation
 - Organize workspace for maximum efficiency
@@ -995,30 +1111,35 @@ Demonstrate advanced techniques:
 ### Competency Validation Criteria
 
 #### Console Navigation Mastery
+
 - [ ] Navigate entire console using only keyboard shortcuts
 - [ ] Create and organize workspaces efficiently
 - [ ] Execute advanced searches with complex criteria
 - [ ] Configure panels with optimal performance settings
 
 #### Module Expertise
+
 - [ ] Select appropriate modules for given scenarios with 95% accuracy
 - [ ] Execute complex multi-module workflows flawlessly
 - [ ] Optimize module performance for different user loads
 - [ ] Integrate modules for comprehensive business solutions
 
 #### Advanced Procedures
+
 - [ ] Build complex questions with multiple sensors and filters
 - [ ] Create sophisticated visualizations with proper thresholds
 - [ ] Develop executive dashboards following design principles
 - [ ] Configure and monitor Connect pipelines with error handling
 
 #### Efficiency Optimization
+
 - [ ] Demonstrate 40%+ improvement in task completion times
 - [ ] Use all relevant keyboard shortcuts without reference
 - [ ] Maintain organized bookmark and template libraries
 - [ ] Apply power user techniques consistently
 
 #### Troubleshooting Proficiency
+
 - [ ] Diagnose navigation issues using systematic approach
 - [ ] Resolve performance problems with specific techniques
 - [ ] Apply escalation procedures appropriately
@@ -1031,6 +1152,7 @@ Demonstrate advanced techniques:
 The assessment for this expanded module reflects its critical importance (23% exam weight) and comprehensive scope.
 
 ### Assessment Structure
+
 - **Total Questions**: 25-30 items (increased from 10-12 due to expanded scope)
 - **Passing Threshold**: 85% (increased from 80% due to critical importance)
 - **Question Distribution**:
@@ -1042,21 +1164,27 @@ The assessment for this expanded module reflects its critical importance (23% ex
 ### Question Types and Complexity
 
 #### Scenario-Based Questions (60% of assessment)
+
 Complex business scenarios requiring multi-step solutions:
+
 - Module selection decisions with justification
 - Multi-module workflow design and optimization
 - Performance troubleshooting and resolution
 - Integration planning and implementation
 
 #### Technical Proficiency Questions (25% of assessment)
+
 Hands-on technical competency verification:
+
 - Keyboard shortcut identification and usage
 - Panel configuration and optimization
 - Error diagnosis and resolution procedures
 - Performance tuning techniques
 
 #### Strategic Application Questions (15% of assessment)
+
 Higher-order thinking and business alignment:
+
 - Dashboard design for different audiences
 - Workflow optimization strategies
 - Change management for navigation improvements
@@ -1065,49 +1193,61 @@ Higher-order thinking and business alignment:
 ### Assessment Domains and Learning Objectives
 
 #### Domain 1: Console Architecture Mastery
+
 **Learning Objectives:**
+
 - Navigate console efficiently using all navigation methods
 - Master panel management and workspace organization
 - Optimize search functionality and bookmark management
 - Configure dashboard layouts following design principles
 
 **Sample Assessment Items:**
+
 1. When configuring a shared workspace for incident response, which organizational strategy would be MOST effective for maintaining team efficiency during high-stress situations?
 
 2. A user reports that global search returns inconsistent results. What systematic approach would you use to diagnose and resolve this issue?
 
 #### Domain 2: Module Selection Expertise
+
 **Learning Objectives:**
+
 - Apply decision criteria for module selection in complex scenarios
 - Design integrated workflows across multiple modules
 - Optimize module performance for different use cases
 - Understand data flow and dependencies between modules
 
 **Sample Assessment Items:**
+
 1. A compliance audit requires historical analysis of configuration changes, real-time validation of current state, automated reporting to auditors, and integration with the ticketing system. Design the optimal workflow using appropriate modules and justify your module selection decisions.
 
 2. Compare and contrast the performance implications of executing a large-scale data collection task in Interact versus Trends, including specific optimization techniques for each approach.
 
 #### Domain 3: Advanced Procedure Implementation
+
 **Learning Objectives:**
+
 - Execute complex module-specific procedures flawlessly
 - Build sophisticated questions, panels, reports, and pipelines
 - Implement proper error handling and performance optimization
 - Apply security best practices in all configurations
 
 **Sample Assessment Items:**
+
 1. Design a Connect pipeline that streams security events to a SIEM while implementing proper data filtering, error handling, and performance monitoring. Include specific security controls and monitoring procedures.
 
 2. Create a Trends panel configuration that monitors server performance across multiple metrics, implements appropriate alerting thresholds, and provides drill-down capabilities for root cause analysis.
 
 #### Domain 4: Efficiency and Troubleshooting
+
 **Learning Objectives:**
+
 - Demonstrate expert-level navigation efficiency
 - Apply systematic troubleshooting methodologies
 - Implement performance optimization strategies
 - Transfer knowledge effectively to other users
 
 **Sample Assessment Items:**
+
 1. A team of 20 analysts reports decreased productivity due to navigation inefficiencies. Develop a comprehensive optimization strategy including specific techniques, training requirements, and success metrics.
 
 2. Users experience intermittent console performance issues during peak hours. Design a systematic troubleshooting approach that includes specific diagnostic steps, resolution procedures, and preventive measures.
@@ -1115,18 +1255,21 @@ Higher-order thinking and business alignment:
 ### Performance Standards and Certification Criteria
 
 #### Minimum Competency Requirements (85% threshold)
+
 - Demonstrate proficient console navigation using multiple methods
 - Select appropriate modules for standard business scenarios
 - Execute common procedures in each module correctly
 - Apply basic troubleshooting techniques effectively
 
 #### Advanced Proficiency Indicators (95%+ performance)
+
 - Expert-level efficiency with all navigation techniques
 - Design complex multi-module solutions independently
 - Implement advanced optimization and troubleshooting
 - Mentor others and create training materials
 
 #### Continuous Assessment Integration
+
 - Performance tracking across multiple practice sessions
 - Progressive difficulty adjustment based on competency demonstration
 - Integration with hands-on lab performance
@@ -1135,12 +1278,14 @@ Higher-order thinking and business alignment:
 ### Assessment Validation and Quality Assurance
 
 #### Content Validation Process
+
 - Alignment with official Tanium TCO exam blueprint (23% weighting)
 - Review by certified Tanium professionals
 - Validation against real-world use cases and scenarios
 - Regular updates based on platform evolution
 
 #### Statistical Analysis and Improvement
+
 - Item analysis for difficulty and discrimination
 - Performance correlation with real-world competency
 - Regular review and updating of assessment items
@@ -1151,6 +1296,7 @@ Higher-order thinking and business alignment:
 ## Comprehensive Reference Library
 
 ### Official Tanium Documentation
+
 - **Console User Guide** (47 pages) - Complete navigation procedures and best practices
 - **Interact Module Documentation** - Advanced question building and optimization techniques
 - **Trends Module Guide** - Panel creation, visualization, and alerting procedures
@@ -1159,18 +1305,21 @@ Higher-order thinking and business alignment:
 - **Performance Optimization Manual** - System tuning and efficiency guidelines
 
 ### Additional Learning Resources
+
 - **Tanium University Courses**: Advanced navigation and module mastery programs
 - **Community Forums**: User-contributed tips and troubleshooting solutions
 - **Video Tutorials**: Step-by-step demonstration of complex procedures
 - **Knowledge Base Articles**: Detailed solutions for common issues and configurations
 
 ### Industry Standards and Best Practices
+
 - **Dashboard Design Principles**: Information architecture and visual hierarchy guidelines
 - **Data Visualization Standards**: Color theory and accessibility compliance requirements
 - **Security Integration Practices**: Data protection and access control frameworks
 - **Performance Monitoring Guidelines**: Metrics collection and optimization strategies
 
 ### Tools and Extensions
+
 - **Browser Extensions**: Console optimization and productivity enhancement tools
 - **Documentation Templates**: Standardized formats for procedure documentation
 - **Monitoring Scripts**: Automated performance tracking and alerting solutions
@@ -1182,17 +1331,30 @@ Higher-order thinking and business alignment:
   nextModuleId="reporting-data-export"
   nextModuleTitle="Reporting & Data Export"
   requiredSkills={[
-    { id: "nav-console", name: "Console Navigation", description: "Master console layout and navigation", tested: false, passed: false },
-    { id: "nav-modules", name: "Module Selection", description: "Choose the right module for each task", tested: false, passed: false }
+    {
+      id: "nav-console",
+      name: "Console Navigation",
+      description: "Master console layout and navigation",
+      tested: false,
+      passed: false,
+    },
+    {
+      id: "nav-modules",
+      name: "Module Selection",
+      description: "Choose the right module for each task",
+      tested: false,
+      passed: false,
+    },
   ]}
   challenges={[
     {
       question: "Which module would you use to create a custom scheduled report?",
       options: ["Interact", "Trends", "Reporting", "Connect"],
       correctAnswer: 2,
-      explanation: "The Reporting module is designed specifically for creating, scheduling, and managing custom reports.",
-      skillId: "nav-modules"
-    }
+      explanation:
+        "The Reporting module is designed specifically for creating, scheduling, and managing custom reports.",
+      skillId: "nav-modules",
+    },
   ]}
   minimumScore={0.75}
 />
@@ -1206,15 +1368,18 @@ Higher-order thinking and business alignment:
 The expanded lab sequence provides hands-on experience with all aspects of console navigation and module mastery.
 
 ### Lab 1: Console Architecture Mastery (90 minutes)
+
 **NM-101 Foundation Navigation Skills**
 
 **Objectives:**
+
 - Master all console navigation methods and shortcuts
 - Configure optimal workspace layouts for different roles
 - Implement advanced search techniques and bookmark organization
 - Demonstrate efficiency improvements through optimization
 
 **Activities:**
+
 1. **Navigation Fundamentals** (30 minutes)
    - Explore global navigation and module switching
    - Practice keyboard shortcuts for all common actions
@@ -1234,21 +1399,25 @@ The expanded lab sequence provides hands-on experience with all aspects of conso
    - Measure search performance and optimization opportunities
 
 **Deliverables:**
+
 - Optimized workspace configurations for three different roles
 - Documentation of navigation efficiency improvements
 - Personal keyboard shortcut reference guide
 - Search template library for common use cases
 
 ### Lab 2: Module Integration Workflows (120 minutes)
+
 **NM-201 Advanced Module Orchestration**
 
 **Objectives:**
+
 - Design and implement complex multi-module workflows
 - Optimize module performance for different scenarios
 - Create integrated solutions that span all four core modules
 - Document workflow procedures and best practices
 
 **Activities:**
+
 1. **Security Investigation Workflow** (45 minutes)
    - **Interact Phase**: Investigate suspicious process execution
      - Build complex questions with multiple sensors
@@ -1279,21 +1448,25 @@ The expanded lab sequence provides hands-on experience with all aspects of conso
      - Test integration performance and reliability
 
 **Deliverables:**
+
 - Complete workflow documentation for three integration scenarios
 - Performance benchmarks for each workflow component
 - Troubleshooting procedures for common integration issues
 - Training materials for workflow handoff to other team members
 
 ### Lab 3: Advanced Procedures and Optimization (90 minutes)
+
 **NM-301 Expert-Level Implementation**
 
 **Objectives:**
+
 - Implement sophisticated configurations in each module
 - Optimize performance for enterprise-scale deployments
 - Create reusable templates and automation procedures
 - Develop advanced troubleshooting and monitoring capabilities
 
 **Activities:**
+
 1. **Complex Question Engineering** (30 minutes)
    - Build multi-sensor questions with advanced correlation logic
    - Implement performance optimization techniques for large-scale queries
@@ -1313,21 +1486,25 @@ The expanded lab sequence provides hands-on experience with all aspects of conso
    - Design disaster recovery and failover procedures
 
 **Deliverables:**
+
 - Advanced configuration templates for each module
 - Performance optimization documentation and procedures
 - Enterprise-grade monitoring and alerting configurations
 - Disaster recovery and business continuity procedures
 
 ### Lab 4: Efficiency and Troubleshooting Mastery (60 minutes)
+
 **NM-401 Power User Techniques**
 
 **Objectives:**
+
 - Demonstrate expert-level navigation efficiency
 - Apply systematic troubleshooting methodologies
 - Create optimization strategies for different user roles
 - Develop training and knowledge transfer materials
 
 **Activities:**
+
 1. **Efficiency Optimization Challenge** (30 minutes)
    - Complete complex navigation tasks in minimum time
    - Demonstrate keyboard shortcut mastery
@@ -1341,6 +1518,7 @@ The expanded lab sequence provides hands-on experience with all aspects of conso
    - Create escalation procedures for complex issues
 
 **Deliverables:**
+
 - Personal efficiency optimization strategy
 - Troubleshooting procedures and resolution documentation
 - Training materials for knowledge transfer
@@ -1349,18 +1527,21 @@ The expanded lab sequence provides hands-on experience with all aspects of conso
 ### Lab Assessment and Certification
 
 **Performance Standards:**
+
 - Complete all lab activities within specified time limits
 - Achieve minimum 90% accuracy on practical assessments
 - Demonstrate proficiency with all keyboard shortcuts and navigation methods
 - Create professional-quality documentation and procedures
 
 **Certification Criteria:**
+
 - Pass comprehensive practical examination
 - Submit portfolio of completed lab deliverables
 - Demonstrate ability to train and mentor other users
 - Maintain performance standards across multiple assessment sessions
 
 **Continuous Improvement Process:**
+
 - Regular review and updating of lab procedures
 - Integration of new features and capabilities
 - User feedback collection and implementation
@@ -1371,18 +1552,18 @@ The expanded lab sequence provides hands-on experience with all aspects of conso
 ## Section 6: Administrative Workflows (40 minutes)
 
 <InfoBox title="Scope">
-  Administrative workflows ensure the platform remains secure, performant, and audit-ready. These tasks
-  often require elevated roles and strict change control.
+  Administrative workflows ensure the platform remains secure, performant, and audit-ready. These
+  tasks often require elevated roles and strict change control.
 </InfoBox>
 
 ### User Management Procedures
 
 - User onboarding checklist
-  1) Verify business need and content set scope
-  2) Create user or federate via SSO
-  3) Assign role(s) based on least privilege
-  4) Add to appropriate content sets (Interact/Trends/Reporting/Connect)
-  5) Provide training resources and owner contact
+  1. Verify business need and content set scope
+  2. Create user or federate via SSO
+  3. Assign role(s) based on least privilege
+  4. Add to appropriate content sets (Interact/Trends/Reporting/Connect)
+  5. Provide training resources and owner contact
 
 - Role lifecycle management
   - Quarterly role review and attestation
@@ -1437,16 +1618,16 @@ The expanded lab sequence provides hands-on experience with all aspects of conso
   difficulty="advanced"
 >
   Practice Administrative Workflows
-  </PracticeButton>
+</PracticeButton>
 
 ---
 
 ## Section 7: Integration Strategies (30 minutes)
 
 <InfoBox title="Module interconnections">
-  Interact produces live datasets; Trends persists historical aggregates; Reporting packages insights
-  for stakeholders; Connect moves data across system boundaries. Design flows that respect each
-  module's strengths.
+  Interact produces live datasets; Trends persists historical aggregates; Reporting packages
+  insights for stakeholders; Connect moves data across system boundaries. Design flows that respect
+  each module's strengths.
 </InfoBox>
 
 ### Interconnection Patterns
@@ -1477,16 +1658,16 @@ The expanded lab sequence provides hands-on experience with all aspects of conso
 
 ### Organizational Best Practices
 
-1) Least privilege with clear ownership and review cadence
-2) Standard naming conventions across questions, panels, and reports
-3) Template libraries for repeatable workflows and visuals
-4) Ring-based deployment for changes to data collection/exports
-5) Documentation embedded close to the object (descriptions, links)
-6) Health dashboards for platform and pipeline monitoring
-7) Scheduled hygiene: archive, rotate, reindex, and validate
-8) Cross-team change windows and comms playbooks
-9) Post-incident reviews feeding into configuration improvements
-10) Regular training on shortcuts, efficiency, and safety
+1. Least privilege with clear ownership and review cadence
+2. Standard naming conventions across questions, panels, and reports
+3. Template libraries for repeatable workflows and visuals
+4. Ring-based deployment for changes to data collection/exports
+5. Documentation embedded close to the object (descriptions, links)
+6. Health dashboards for platform and pipeline monitoring
+7. Scheduled hygiene: archive, rotate, reindex, and validate
+8. Cross-team change windows and comms playbooks
+9. Post-incident reviews feeding into configuration improvements
+10. Regular training on shortcuts, efficiency, and safety
 
 ### Common Pitfalls (and Fixes)
 
@@ -1510,15 +1691,15 @@ The expanded lab sequence provides hands-on experience with all aspects of conso
 
 ### Navigation Exercises
 
-1) Switch between Interact and Trends using keyboard only; open, run, and save a question in 90 seconds
-2) Create a two-panel workspace and bind a filter across both panels
-3) Bookmark five deep-linked views and organize them into a workflow folder
+1. Switch between Interact and Trends using keyboard only; open, run, and save a question in 90 seconds
+2. Create a two-panel workspace and bind a filter across both panels
+3. Bookmark five deep-linked views and organize them into a workflow folder
 
 ### Module Exploration Labs
 
-1) Build a Trends panel from a saved question; add an alert and document the runbook
-2) Create a lightweight Connect pipeline exporting a curated dataset; validate schema and filters
-3) Publish a reporting dashboard for a BU with an executive summary and drill-downs
+1. Build a Trends panel from a saved question; add an alert and document the runbook
+2. Create a lightweight Connect pipeline exporting a curated dataset; validate schema and filters
+3. Publish a reporting dashboard for a BU with an executive summary and drill-downs
 
 <PracticeButton
   moduleId="module-navigation-basic-modules"
@@ -1539,32 +1720,36 @@ The expanded lab sequence provides hands-on experience with all aspects of conso
 #### Multi-Tenant Considerations
 
 **Tenant Isolation Architecture**
+
 - **Data Segregation**: Complete separation of tenant data at database level
 - **Role Boundaries**: Tenant-specific role hierarchies preventing cross-access
 - **Resource Quotas**: CPU, memory, and storage limits per tenant
 - **Network Segmentation**: Isolated network paths for tenant communications
 
 **Cross-Tenant Management**
+
 1. **Global Administrator View**: Unified dashboard showing all tenant health metrics
 2. **Tenant Switching**: Rapid context switching with preserved session state
 3. **Bulk Operations**: Apply configurations across multiple tenants simultaneously
 4. **Compliance Reporting**: Aggregate compliance posture across all tenants
 
 <InfoBox title="Multi-Tenant Security">
-  Always verify tenant context before executing administrative actions. Implement
-  additional confirmation dialogs for operations that affect multiple tenants.
-  Use audit logging to track all cross-tenant activities for compliance purposes.
+  Always verify tenant context before executing administrative actions. Implement additional
+  confirmation dialogs for operations that affect multiple tenants. Use audit logging to track all
+  cross-tenant activities for compliance purposes.
 </InfoBox>
 
 #### Console Performance at Scale
 
 **Large Enterprise Optimization (10,000+ Endpoints)**
+
 - **Question Sharding**: Automatic distribution across multiple platform servers
 - **Result Aggregation**: Hierarchical collection through zone servers
 - **Cache Strategies**: Multi-tier caching for frequently accessed data
 - **Load Balancing**: Round-robin and weighted distribution algorithms
 
 **Performance Monitoring Dashboard**
+
 ```
 Key Metrics to Track:
 - Average question response time (target: &lt;30 seconds)
@@ -1578,12 +1763,14 @@ Key Metrics to Track:
 #### High Availability Configuration
 
 **Console Redundancy Architecture**
+
 1. **Active-Active Setup**: Multiple console servers with shared state
 2. **Session Persistence**: Sticky sessions with failover capability
 3. **Database Clustering**: Multi-master replication for zero downtime
 4. **Load Balancer Configuration**: Health checks and automatic failover
 
 **Disaster Recovery Procedures**
+
 - **RPO Target**: 15 minutes maximum data loss
 - **RTO Target**: 2 hours maximum recovery time
 - **Backup Strategy**: Hourly snapshots with offsite replication
@@ -1594,12 +1781,14 @@ Key Metrics to Track:
 #### Authentication and Authorization Enhancement
 
 **Multi-Factor Authentication (MFA)**
+
 - **TOTP Integration**: Time-based one-time passwords via authenticator apps
 - **Hardware Tokens**: YubiKey and smartcard support
 - **Biometric Options**: Fingerprint and facial recognition for mobile access
 - **Adaptive Authentication**: Risk-based challenges for suspicious activities
 
 **Role-Based Access Control (RBAC) Advanced Configuration**
+
 ```powershell
 # Advanced RBAC Configuration Script
 $advancedRole = @{
@@ -1626,12 +1815,14 @@ New-TaniumRole @advancedRole
 #### Audit and Compliance Features
 
 **Comprehensive Audit Logging**
+
 - **User Actions**: Every click, query, and configuration change
 - **System Events**: Logins, logouts, permission changes, errors
 - **Data Access**: Record of all data viewed or exported
 - **Integration Events**: External system connections and data transfers
 
 **Compliance Reporting Templates**
+
 1. **GDPR Compliance**: Data access logs with purpose documentation
 2. **HIPAA Compliance**: PHI access tracking with encryption verification
 3. **PCI-DSS Compliance**: Cardholder data environment monitoring
@@ -1642,40 +1833,42 @@ New-TaniumRole @advancedRole
 #### Custom Dashboard Development
 
 **Widget Development Framework**
+
 ```javascript
 // Custom Widget Template
 class CustomMetricWidget extends TaniumWidget {
-    constructor(config) {
-        super(config);
-        this.dataSource = config.dataSource;
-        this.refreshInterval = config.refreshInterval || 60000;
-        this.thresholds = config.thresholds;
-    }
+  constructor(config) {
+    super(config);
+    this.dataSource = config.dataSource;
+    this.refreshInterval = config.refreshInterval || 60000;
+    this.thresholds = config.thresholds;
+  }
 
-    async fetchData() {
-        const data = await this.dataSource.query({
-            sensors: this.config.sensors,
-            filters: this.config.filters,
-            aggregation: this.config.aggregation
-        });
-        return this.processData(data);
-    }
+  async fetchData() {
+    const data = await this.dataSource.query({
+      sensors: this.config.sensors,
+      filters: this.config.filters,
+      aggregation: this.config.aggregation,
+    });
+    return this.processData(data);
+  }
 
-    render() {
-        return `
+  render() {
+    return `
             <div class="custom-widget">
                 <h3>${this.config.title}</h3>
                 <div class="metric-value">${this.currentValue}</div>
                 <div class="trend-indicator">${this.trendArrow}</div>
             </div>
         `;
-    }
+  }
 }
 ```
 
 #### Branding and White-Labeling
 
 **Enterprise Branding Configuration**
+
 - **Logo Replacement**: Custom logos for login and navigation
 - **Color Scheme**: Corporate colors applied consistently
 - **Custom CSS**: Override default styles with corporate guidelines
@@ -1690,12 +1883,14 @@ class CustomMetricWidget extends TaniumWidget {
 #### Hub-and-Spoke Pattern
 
 **Central Hub Configuration**
+
 - **Tanium as Master**: All data flows through Tanium first
 - **Data Enrichment**: Add context before distribution
 - **Policy Enforcement**: Apply security and compliance rules centrally
 - **Routing Logic**: Intelligent routing based on data classification
 
 **Spoke Systems Integration**
+
 ```mermaid
 graph TD
     T[Tanium Platform] --> SIEM[SIEM Platform]
@@ -1713,12 +1908,14 @@ graph TD
 #### Event-Driven Architecture
 
 **Real-Time Event Streaming**
+
 1. **Event Generation**: Sensors detect state changes
 2. **Event Processing**: Filter and enrich event data
 3. **Event Distribution**: Route to appropriate consumers
 4. **Event Storage**: Persist for audit and replay capability
 
 **Kafka Integration Pattern**
+
 ```python
 # Tanium to Kafka Producer
 from kafka import KafkaProducer
@@ -1754,50 +1951,53 @@ class TaniumKafkaProducer:
 #### Data Transformation Pipelines
 
 **Complex ETL Operations**
+
 ```javascript
 // Advanced Transform Function
 function transformTaniumData(record) {
-    // Data validation
-    if (!validateSchema(record)) {
-        throw new ValidationError('Schema validation failed');
-    }
+  // Data validation
+  if (!validateSchema(record)) {
+    throw new ValidationError("Schema validation failed");
+  }
 
-    // Field mapping
-    const transformed = {
-        id: generateUUID(),
-        timestamp: parseTimestamp(record.timestamp),
-        hostname: normalizeHostname(record.computer_name),
-        ip_address: extractPrimaryIP(record.ip_addresses),
+  // Field mapping
+  const transformed = {
+    id: generateUUID(),
+    timestamp: parseTimestamp(record.timestamp),
+    hostname: normalizeHostname(record.computer_name),
+    ip_address: extractPrimaryIP(record.ip_addresses),
 
-        // Complex transformations
-        risk_score: calculateRiskScore({
-            vulnerabilities: record.cve_count,
-            patch_age: record.days_since_patch,
-            exposure: record.internet_facing
-        }),
+    // Complex transformations
+    risk_score: calculateRiskScore({
+      vulnerabilities: record.cve_count,
+      patch_age: record.days_since_patch,
+      exposure: record.internet_facing,
+    }),
 
-        // Enrichment
-        geo_location: lookupGeoIP(record.ip_address),
-        business_unit: mapToBusinessUnit(record.ou_path),
-        criticality: determineAssetCriticality(record)
-    };
+    // Enrichment
+    geo_location: lookupGeoIP(record.ip_address),
+    business_unit: mapToBusinessUnit(record.ou_path),
+    criticality: determineAssetCriticality(record),
+  };
 
-    // Data quality checks
-    validateTransformedData(transformed);
+  // Data quality checks
+  validateTransformedData(transformed);
 
-    return transformed;
+  return transformed;
 }
 ```
 
 #### Multi-Destination Routing
 
 **Intelligent Data Distribution**
+
 - **Content-Based Routing**: Route based on data characteristics
 - **Priority Queuing**: High-priority events bypass normal queues
 - **Failure Handling**: Dead letter queues for failed transmissions
 - **Rate Limiting**: Prevent overwhelming destination systems
 
 **Router Configuration Example**
+
 ```yaml
 pipeline:
   name: multi_destination_router
@@ -1848,12 +2048,14 @@ pipeline:
 #### Query Optimization Techniques
 
 **Sensor Query Optimization**
+
 1. **Sensor Selection**: Choose lightweight sensors first
 2. **Filter Early**: Apply filters at sensor level, not in post-processing
 3. **Limit Scope**: Use computer groups to reduce target count
 4. **Cache Results**: Leverage parameterized sensors with caching
 
 **Database Query Tuning**
+
 ```sql
 -- Optimized query with proper indexing
 CREATE INDEX idx_computer_last_seen
@@ -1875,12 +2077,14 @@ ORDER BY c.computer_name;
 #### Memory Management Best Practices
 
 **Browser Memory Optimization**
+
 - **Pagination**: Load data in chunks, not all at once
 - **Virtual Scrolling**: Render only visible rows in tables
 - **Lazy Loading**: Defer loading of non-critical components
 - **Memory Profiling**: Regular profiling to identify leaks
 
 **Server Memory Configuration**
+
 ```bash
 # JVM tuning for Tanium Server
 JAVA_OPTS="-Xmx8g -Xms8g \
@@ -1902,12 +2106,14 @@ JAVA_OPTS="-Xmx8g -Xms8g \
 **Challenge**: Manage 250,000 endpoints across 50 countries with strict compliance requirements
 
 **Solution Architecture**:
+
 1. **Regional Zone Servers**: Deployed in each major region for local processing
 2. **Hierarchical Console Structure**: Regional consoles reporting to global dashboard
 3. **Automated Compliance Reporting**: Daily compliance scorecards per region
 4. **Follow-the-Sun Support**: Console handoff procedures between regions
 
 **Implementation Details**:
+
 ```yaml
 Global Architecture:
   Regions:
@@ -1937,6 +2143,7 @@ Global Architecture:
 ```
 
 **Results**:
+
 - 60% reduction in incident response time
 - 99.9% visibility across global fleet
 - 40% improvement in patch compliance
@@ -1947,56 +2154,58 @@ Global Architecture:
 **Challenge**: HIPAA compliance with 500+ locations and mixed device types
 
 **Navigation Workflow Optimization**:
+
 1. **Role-Based Dashboards**: Separate views for clinical vs IT staff
 2. **PHI Data Protection**: Automatic masking in console displays
 3. **Audit Trail Integration**: Every query logged with purpose code
 4. **Emergency Override**: Break-glass procedures for critical care
 
 **Custom Module Configuration**:
+
 ```javascript
 // HIPAA-Compliant Query Wrapper
 class HIPAACompliantQuery {
-    constructor(query, user, purpose) {
-        this.query = query;
-        this.user = user;
-        this.purpose = purpose;
-        this.timestamp = new Date();
-        this.auditLog = new AuditLogger();
-    }
+  constructor(query, user, purpose) {
+    this.query = query;
+    this.user = user;
+    this.purpose = purpose;
+    this.timestamp = new Date();
+    this.auditLog = new AuditLogger();
+  }
 
-    async execute() {
-        // Log query attempt
-        await this.auditLog.logQueryAttempt({
-            user: this.user,
-            query: this.sanitizeQuery(this.query),
-            purpose: this.purpose,
-            timestamp: this.timestamp
-        });
+  async execute() {
+    // Log query attempt
+    await this.auditLog.logQueryAttempt({
+      user: this.user,
+      query: this.sanitizeQuery(this.query),
+      purpose: this.purpose,
+      timestamp: this.timestamp,
+    });
 
-        // Execute with PHI protection
-        const results = await tanium.executeQuery(this.query);
-        const maskedResults = this.maskPHI(results);
+    // Execute with PHI protection
+    const results = await tanium.executeQuery(this.query);
+    const maskedResults = this.maskPHI(results);
 
-        // Log data access
-        await this.auditLog.logDataAccess({
-            user: this.user,
-            recordCount: results.length,
-            purpose: this.purpose,
-            timestamp: new Date()
-        });
+    // Log data access
+    await this.auditLog.logDataAccess({
+      user: this.user,
+      recordCount: results.length,
+      purpose: this.purpose,
+      timestamp: new Date(),
+    });
 
-        return maskedResults;
-    }
+    return maskedResults;
+  }
 
-    maskPHI(data) {
-        // Mask sensitive fields
-        return data.map(record => ({
-            ...record,
-            patient_name: '***MASKED***',
-            ssn: '***-**-' + record.ssn.slice(-4),
-            medical_record: '***MASKED***'
-        }));
-    }
+  maskPHI(data) {
+    // Mask sensitive fields
+    return data.map((record) => ({
+      ...record,
+      patient_name: "***MASKED***",
+      ssn: "***-**-" + record.ssn.slice(-4),
+      medical_record: "***MASKED***",
+    }));
+  }
 }
 ```
 
@@ -2005,12 +2214,14 @@ class HIPAACompliantQuery {
 **Challenge**: OT/IT convergence with 100+ factories and critical infrastructure
 
 **Module Integration Strategy**:
+
 1. **Interact**: Real-time monitoring of production systems
 2. **Trends**: Historical analysis of production metrics
 3. **Reporting**: Executive dashboards for factory performance
 4. **Connect**: Integration with MES and SCADA systems
 
 **Production Line Monitoring**:
+
 ```python
 # OT Device Monitoring Integration
 class OTDeviceMonitor:
@@ -2049,6 +2260,7 @@ class OTDeviceMonitor:
 ```
 
 **Results**:
+
 - 75% reduction in production downtime
 - Real-time visibility into OT environments
 - Automated incident response for critical systems
@@ -2059,56 +2271,58 @@ class OTDeviceMonitor:
 **Challenge**: Zero Trust implementation with classified networks
 
 **Console Security Configuration**:
+
 1. **Air-Gapped Deployment**: Separate consoles for classified/unclassified
 2. **Cross-Domain Guards**: Controlled data flow between security levels
 3. **Attribute-Based Access**: Dynamic permissions based on clearance
 4. **Continuous Verification**: Re-authentication for sensitive operations
 
 **Zero Trust Navigation Model**:
+
 ```javascript
 // Zero Trust Navigation Controller
 class ZeroTrustNavigator {
-    constructor() {
-        this.sessionManager = new SecureSessionManager();
-        this.policyEngine = new PolicyEngine();
-        this.riskCalculator = new RiskCalculator();
+  constructor() {
+    this.sessionManager = new SecureSessionManager();
+    this.policyEngine = new PolicyEngine();
+    this.riskCalculator = new RiskCalculator();
+  }
+
+  async navigateToModule(user, module, context) {
+    // Continuous verification
+    const verificationResult = await this.verifyUser(user);
+    if (!verificationResult.verified) {
+      throw new SecurityException("User verification failed");
     }
 
-    async navigateToModule(user, module, context) {
-        // Continuous verification
-        const verificationResult = await this.verifyUser(user);
-        if (!verificationResult.verified) {
-            throw new SecurityException('User verification failed');
-        }
+    // Calculate risk score
+    const riskScore = await this.riskCalculator.calculate({
+      user: user,
+      module: module,
+      location: context.location,
+      device: context.device,
+      time: new Date(),
+      behavior: await this.getUserBehavior(user),
+    });
 
-        // Calculate risk score
-        const riskScore = await this.riskCalculator.calculate({
-            user: user,
-            module: module,
-            location: context.location,
-            device: context.device,
-            time: new Date(),
-            behavior: await this.getUserBehavior(user)
-        });
+    // Policy decision
+    const decision = await this.policyEngine.evaluate({
+      user: user,
+      resource: module,
+      action: "access",
+      risk: riskScore,
+      context: context,
+    });
 
-        // Policy decision
-        const decision = await this.policyEngine.evaluate({
-            user: user,
-            resource: module,
-            action: 'access',
-            risk: riskScore,
-            context: context
-        });
-
-        if (decision.allow) {
-            // Grant access with conditions
-            return this.grantAccess(module, decision.conditions);
-        } else {
-            // Deny with audit
-            await this.auditDenial(user, module, decision.reason);
-            throw new AccessDeniedException(decision.reason);
-        }
+    if (decision.allow) {
+      // Grant access with conditions
+      return this.grantAccess(module, decision.conditions);
+    } else {
+      // Deny with audit
+      await this.auditDenial(user, module, decision.reason);
+      throw new AccessDeniedException(decision.reason);
     }
+  }
 }
 ```
 
@@ -2121,11 +2335,13 @@ class ZeroTrustNavigator {
 #### Scenario 1: Intermittent Console Freezing
 
 **Symptoms**:
+
 - Console becomes unresponsive for 30-60 seconds
 - Occurs randomly throughout the day
 - Affects multiple users simultaneously
 
 **Diagnostic Approach**:
+
 ```bash
 # Performance diagnostics script
 #!/bin/bash
@@ -2164,12 +2380,14 @@ echo "4. Export trace after freeze"
 ```
 
 **Root Cause Analysis**:
+
 1. **Database Lock Contention**: Long-running queries blocking console queries
 2. **Memory Pressure**: Server swapping due to insufficient RAM
 3. **Network Saturation**: Bandwidth exhaustion during peak hours
 4. **Browser Memory Leak**: Accumulated memory usage over time
 
 **Resolution Steps**:
+
 ```sql
 -- Fix database lock contention
 -- Identify blocking queries
@@ -2196,11 +2414,13 @@ WHERE result_timestamp > NOW() - INTERVAL '7 days';
 #### Scenario 2: Question Results Inconsistency
 
 **Symptoms**:
+
 - Same question returns different results
 - Missing endpoints in results
 - Data appears stale or outdated
 
 **Systematic Troubleshooting**:
+
 ```powershell
 # PowerShell diagnostic script
 function Test-QuestionConsistency {
@@ -2248,81 +2468,75 @@ function Test-QuestionConsistency {
 #### Connect Pipeline Failures
 
 **Common Failure Patterns**:
+
 1. **Authentication Expiry**: Token/certificate expiration
 2. **Schema Mismatch**: Destination expects different format
 3. **Rate Limiting**: Destination throttling requests
 4. **Network Issues**: Firewall changes or routing problems
 
 **Diagnostic Workflow**:
+
 ```javascript
 // Pipeline Health Check
 class PipelineHealthCheck {
-    async diagnose(pipelineId) {
-        const diagnostics = {
-            timestamp: new Date(),
-            pipeline: pipelineId,
-            checks: []
-        };
+  async diagnose(pipelineId) {
+    const diagnostics = {
+      timestamp: new Date(),
+      pipeline: pipelineId,
+      checks: [],
+    };
 
-        // Test authentication
-        diagnostics.checks.push(
-            await this.testAuthentication(pipelineId)
-        );
+    // Test authentication
+    diagnostics.checks.push(await this.testAuthentication(pipelineId));
 
-        // Validate schema
-        diagnostics.checks.push(
-            await this.validateSchema(pipelineId)
-        );
+    // Validate schema
+    diagnostics.checks.push(await this.validateSchema(pipelineId));
 
-        // Check network connectivity
-        diagnostics.checks.push(
-            await this.testConnectivity(pipelineId)
-        );
+    // Check network connectivity
+    diagnostics.checks.push(await this.testConnectivity(pipelineId));
 
-        // Verify data flow
-        diagnostics.checks.push(
-            await this.verifyDataFlow(pipelineId)
-        );
+    // Verify data flow
+    diagnostics.checks.push(await this.verifyDataFlow(pipelineId));
 
-        // Generate remediation plan
-        const plan = this.generateRemediationPlan(diagnostics);
+    // Generate remediation plan
+    const plan = this.generateRemediationPlan(diagnostics);
 
+    return {
+      diagnostics,
+      plan,
+      severity: this.calculateSeverity(diagnostics),
+    };
+  }
+
+  async testAuthentication(pipelineId) {
+    const pipeline = await this.getPipeline(pipelineId);
+    const auth = pipeline.authentication;
+
+    try {
+      if (auth.type === "token") {
+        const response = await this.validateToken(auth.token);
         return {
-            diagnostics,
-            plan,
-            severity: this.calculateSeverity(diagnostics)
+          check: "authentication",
+          status: "pass",
+          details: `Token valid until ${response.expiry}`,
         };
+      } else if (auth.type === "certificate") {
+        const cert = await this.validateCertificate(auth.certificate);
+        return {
+          check: "authentication",
+          status: cert.valid ? "pass" : "fail",
+          details: cert.message,
+        };
+      }
+    } catch (error) {
+      return {
+        check: "authentication",
+        status: "fail",
+        error: error.message,
+        remediation: this.getAuthRemediationSteps(auth.type),
+      };
     }
-
-    async testAuthentication(pipelineId) {
-        const pipeline = await this.getPipeline(pipelineId);
-        const auth = pipeline.authentication;
-
-        try {
-            if (auth.type === 'token') {
-                const response = await this.validateToken(auth.token);
-                return {
-                    check: 'authentication',
-                    status: 'pass',
-                    details: `Token valid until ${response.expiry}`
-                };
-            } else if (auth.type === 'certificate') {
-                const cert = await this.validateCertificate(auth.certificate);
-                return {
-                    check: 'authentication',
-                    status: cert.valid ? 'pass' : 'fail',
-                    details: cert.message
-                };
-            }
-        } catch (error) {
-            return {
-                check: 'authentication',
-                status: 'fail',
-                error: error.message,
-                remediation: this.getAuthRemediationSteps(auth.type)
-            };
-        }
-    }
+  }
 }
 ```
 
@@ -2333,6 +2547,7 @@ class PipelineHealthCheck {
 ### Critical Navigation Concepts for Certification
 
 **Must-Know Topics (High Frequency on Exam)**:
+
 1. **Module Selection Criteria**: When to use each module based on requirements
 2. **Performance Optimization**: Techniques for large-scale deployments
 3. **Integration Patterns**: Common workflows across modules
@@ -2340,6 +2555,7 @@ class PipelineHealthCheck {
 5. **Security Best Practices**: RBAC, audit logging, compliance features
 
 **Common Exam Scenarios**:
+
 - Design multi-module workflow for incident response
 - Optimize console performance for 50,000+ endpoints
 - Troubleshoot integration failures with external systems
@@ -2347,11 +2563,13 @@ class PipelineHealthCheck {
 - Configure high availability console architecture
 
 **Time Management Strategy**:
+
 - Navigation questions: 2-3 minutes each (factual)
 - Scenario questions: 4-5 minutes each (analytical)
 - Troubleshooting questions: 3-4 minutes each (procedural)
 
 **Key Metrics to Remember**:
+
 - Question timeout: 5 minutes default, 30 minutes maximum
 - Panel refresh: 30 seconds minimum, 24 hours maximum
 - Result limits: 100, 500, 1000, 5000, unlimited
