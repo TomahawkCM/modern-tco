@@ -7,10 +7,11 @@
  * Mobile: Full-screen drawer with search
  */
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { Button } from '@/components/ui/button';
 import {
   Command,
@@ -43,26 +44,6 @@ interface CategoryComboboxProps {
   placeholder?: string;
   disabled?: boolean;
   className?: string;
-}
-
-function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(() => {
-    // Initialize with correct value immediately (SSR-safe)
-    if (typeof window === 'undefined') return false;
-    return window.matchMedia(query).matches;
-  });
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia(query);
-    setMatches(mediaQuery.matches);
-
-    const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
-    mediaQuery.addEventListener('change', handler);
-
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, [query]);
-
-  return matches;
 }
 
 export function CategoryCombobox({
