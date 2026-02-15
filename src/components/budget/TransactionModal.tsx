@@ -13,6 +13,7 @@ import { db, storeReceipt, getTransactionReceipts, getThumbnailBlobUrl, deleteRe
 import { CategoryCombobox } from './CategoryCombobox';
 import { ReceiptUpload } from './ReceiptUpload';
 import { ConfidenceMeter } from './ConfidenceMeter';
+import { CurrencyInput } from '@/components/ui/currency-input';
 import { Paperclip, FileImage, Trash2, Brain, Loader2 } from 'lucide-react';
 import type { Receipt, Loan } from '@/types/budget';
 import type { ExtractedReceiptData } from '@/lib/receipt-ocr';
@@ -62,7 +63,7 @@ export function TransactionModal({
     transaction?.date ? format(new Date(transaction.date), 'yyyy-MM-dd') : format(new Date(), 'yyyy-MM-dd')
   );
   const [description, setDescription] = useState(transaction?.description || '');
-  const [amount, setAmount] = useState(transaction?.amount ? Math.abs(transaction.amount).toString() : '');
+  const [amount, setAmount] = useState(transaction?.amount ? Math.abs(transaction.amount) : 0);
   const [type, setType] = useState<'income' | 'expense'>(transaction?.amount && transaction.amount > 0 ? 'income' : 'expense');
   const [category, setCategory] = useState(transaction?.category || lastUsed.category);
   const [subcategory, setSubcategory] = useState(transaction?.subcategory || lastUsed.subcategory);
@@ -192,8 +193,7 @@ export function TransactionModal({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    const amountNum = parseFloat(amount);
-    if (isNaN(amountNum) || amountNum <= 0) {
+    if (amount <= 0) {
       alert(t('amount.validationError'));
       return;
     }
@@ -203,7 +203,7 @@ export function TransactionModal({
       accountId,
       date: new Date(date),
       description,
-      amount: type === 'income' ? amountNum : -amountNum,
+      amount: type === 'income' ? amount : -amount,
       category: category || null,
       subcategory: subcategory || null,
       notes,
@@ -328,8 +328,8 @@ export function TransactionModal({
       setDescription(data.merchant);
     }
 
-    if (data.amount && !amount) {
-      setAmount(data.amount.toString());
+    if (data.amount && amount === 0) {
+      setAmount(data.amount);
       // Assume expenses by default (receipts are usually for purchases)
       setType('expense');
     }
@@ -487,27 +487,16 @@ export function TransactionModal({
 
           {/* Amount and Date - Enhanced */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="transaction-amount" className="block text-base font-semibold text-foreground mb-3">
-                {t('amount.label')} *
-              </label>
-              <div className="relative">
-                <span className="absolute start-4 top-1/2 -translate-y-1/2 text-lg text-muted-foreground">$</span>
-                <input
-                  id="transaction-amount"
-                  type="number"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  placeholder={t('amount.placeholder')}
-                  step="0.01"
-                  min="0"
-                  inputMode="decimal"
-                  className="w-full min-h-[48px] ps-8 pe-4 text-base border border-input rounded-lg bg-background text-foreground focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  aria-required="true"
-                  required
-                />
-              </div>
-            </div>
+            <CurrencyInput
+              id="transaction-amount"
+              value={amount}
+              onChange={setAmount}
+              label={`${t('amount.label')} *`}
+              placeholder={t('amount.placeholder')}
+              min={0}
+              required
+              inputClassName="min-h-[48px]"
+            />
 
             <div>
               <label htmlFor="transaction-date" className="block text-base font-semibold text-foreground mb-3">
@@ -730,7 +719,7 @@ export function TransactionModal({
                 loans={activeLoans}
                 selectedLoanId={selectedLoanId}
                 onLoanSelect={setSelectedLoanId}
-                amount={parseFloat(amount) || 0}
+                amount={amount}
                 date={new Date(date)}
               />
             </div>
