@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02">
+  <BkToCstmrStmt>
+    <Stmt>
+      <Id>STMT-2025-01-001</Id>
+      <Acct>
+        <Id><IBAN>DE89370400440532013000</IBAN></Id>
+        <Ccy>EUR</Ccy>
+      </Acct>
+      <Bal>
+        <Tp><CdOrPrvs><Cd>OPBD</Cd></CdOrPrvs></Tp>
+        <Amt Ccy="EUR">5000.00</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <Dt><Dt>2025-01-14</Dt></Dt>
+      </Bal>
+      <Ntry>
+        <Amt Ccy="EUR">125.50</Amt>
+        <CdtDbtInd>DBIT</CdtDbtInd>
+        <BookgDt><Dt>2025-01-15</Dt></BookgDt>
+        <ValDt><Dt>2025-01-15</Dt></ValDt>
+        <NtryDtls>
+          <TxDtls>
+            <Refs><EndToEndId>E2E-001</EndToEndId></Refs>
+            <RltdPties>
+              <Cdtr><Nm>REWE Supermarkt GmbH</Nm></Cdtr>
+            </RltdPties>
+            <RmtInf><Ustrd>Einkauf Filiale 4521</Ustrd></RmtInf>
+          </TxDtls>
+        </NtryDtls>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">2800.00</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <BookgDt><Dt>2025-01-16</Dt></BookgDt>
+        <ValDt><Dt>2025-01-16</Dt></ValDt>
+        <NtryDtls>
+          <TxDtls>
+            <Refs><EndToEndId>E2E-002</EndToEndId></Refs>
+            <RltdPties>
+              <Dbtr><Nm>Siemens AG</Nm></Dbtr>
+            </RltdPties>
+            <RmtInf><Ustrd>Gehaltszahlung Januar 2025</Ustrd></RmtInf>
+          </TxDtls>
+        </NtryDtls>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">49.99</Amt>
+        <CdtDbtInd>DBIT</CdtDbtInd>
+        <BookgDt><Dt>2025-01-17</Dt></BookgDt>
+        <ValDt><Dt>2025-01-17</Dt></ValDt>
+        <NtryDtls>
+          <TxDtls>
+            <Refs><EndToEndId>E2E-003</EndToEndId></Refs>
+            <RltdPties>
+              <Cdtr><Nm>Netflix International B.V.</Nm></Cdtr>
+            </RltdPties>
+            <RmtInf><Ustrd>Monatliches Abonnement</Ustrd></RmtInf>
+          </TxDtls>
+        </NtryDtls>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">750.00</Amt>
+        <CdtDbtInd>DBIT</CdtDbtInd>
+        <BookgDt><Dt>2025-01-18</Dt></BookgDt>
+        <ValDt><Dt>2025-01-18</Dt></ValDt>
+        <NtryDtls>
+          <TxDtls>
+            <Refs><EndToEndId>E2E-004</EndToEndId></Refs>
+            <RltdPties>
+              <Cdtr><Nm>Stadtwerke Muenchen</Nm></Cdtr>
+            </RltdPties>
+            <RmtInf><Ustrd>Miete Wohnung Schillerstr 12</Ustrd></RmtInf>
+          </TxDtls>
+        </NtryDtls>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">35.00</Amt>
+        <CdtDbtInd>DBIT</CdtDbtInd>
+        <BookgDt><Dt>2025-01-20</Dt></BookgDt>
+        <ValDt><Dt>2025-01-20</Dt></ValDt>
+        <NtryDtls>
+          <TxDtls>
+            <Refs><EndToEndId>E2E-005</EndToEndId></Refs>
+            <RltdPties>
+              <Cdtr><Nm>Deutsche Telekom AG</Nm></Cdtr>
+            </RltdPties>
+            <RmtInf><Ustrd>Rechnung Mobilfunk Januar 2025</Ustrd></RmtInf>
+          </TxDtls>
+        </NtryDtls>
+      </Ntry>
+      <Bal>
+        <Tp><CdOrPrvs><Cd>CLBD</Cd></CdOrPrvs></Tp>
+        <Amt Ccy="EUR">6039.51</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <Dt><Dt>2025-01-20</Dt></Dt>
+      </Bal>
+    </Stmt>
+  </BkToCstmrStmt>
+</Document>

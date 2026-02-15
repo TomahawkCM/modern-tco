@@ -1,0 +1,450 @@
+{
+  "appModes": {
+    "standalone": {
+      "description": "All data stays on device, no cloud connectivity required"
+    },
+    "online": {
+      "description": "Cloud sync enabled, requires internet connectivity"
+    }
+  },
+  "currentMode": "standalone",
+  "featureFlags": {
+    "multiProfiles": {
+      "title": "Multi-Profile Support",
+      "description": "Create separate profiles for different family members",
+      "icon": "users",
+      "mode": "standalone",
+      "enabled": true
+    },
+    "pinAuthentication": {
+      "title": "PIN Protection",
+      "description": "Secure profiles with a 4-6 digit PIN code",
+      "icon": "lock",
+      "mode": "standalone",
+      "enabled": true
+    },
+    "privatePublicBudgets": {
+      "title": "Private & Shared Budgets",
+      "description": "Control which budgets are visible to each profile",
+      "icon": "eye",
+      "mode": "standalone",
+      "enabled": true
+    },
+    "activityLogging": {
+      "title": "Activity Log",
+      "description": "Track who made changes and when",
+      "icon": "history",
+      "mode": "standalone",
+      "enabled": true
+    },
+    "localExport": {
+      "title": "Local Export",
+      "description": "Export your data for backup or transfer",
+      "icon": "download",
+      "mode": "standalone",
+      "enabled": true
+    },
+    "aiFeatures": {
+      "title": "AI Features",
+      "description": "AI-powered analysis for smart import and insights",
+      "icon": "sparkles",
+      "mode": "online",
+      "enabled": false
+    },
+    "chatbot": {
+      "title": "AI Chatbot",
+      "description": "Personal budget assistant powered by AI",
+      "icon": "message-circle",
+      "mode": "online",
+      "enabled": false
+    },
+    "cloudSync": {
+      "title": "Cloud Sync",
+      "description": "Sync your data across all your devices automatically",
+      "icon": "cloud",
+      "mode": "online",
+      "enabled": false
+    },
+    "familyInvites": {
+      "title": "Family Invites",
+      "description": "Invite family members to collaborate on shared budgets",
+      "icon": "user-plus",
+      "mode": "online",
+      "enabled": false
+    },
+    "cloudBackup": {
+      "title": "Cloud Backup",
+      "description": "Automatic backups to keep your data safe",
+      "icon": "cloud-upload",
+      "mode": "online",
+      "enabled": false
+    },
+    "realTimeCollab": {
+      "title": "Real-Time Collaboration",
+      "description": "See changes from family members instantly",
+      "icon": "refresh-cw",
+      "mode": "online",
+      "enabled": false
+    }
+  },
+  "features": {
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Customizable widget grid with drag-and-drop layout editor",
+      "widgets": [
+        {
+          "name": "AccountBalancesWidget",
+          "description": "Net worth & account list",
+          "sizes": ["S", "M", "L"]
+        },
+        {
+          "name": "RecentTransactionsWidget",
+          "description": "Latest 5-10 transactions",
+          "sizes": ["S", "M", "L"]
+        },
+        {
+          "name": "BudgetProgressWidget",
+          "description": "Envelope budget bars",
+          "sizes": ["M", "L"]
+        },
+        {
+          "name": "IncomeVsExpensesWidget",
+          "description": "Bar chart comparison",
+          "sizes": ["M", "L"]
+        },
+        {
+          "name": "SpendingByCategoryWidget",
+          "description": "Pie/donut chart",
+          "sizes": ["M", "L"]
+        },
+        {
+          "name": "MonthlyTrendsWidget",
+          "description": "Line chart trends",
+          "sizes": ["L", "XL"]
+        },
+        {
+          "name": "UpcomingBillsWidget",
+          "description": "Scheduled payments",
+          "sizes": ["S", "M"]
+        }
+      ],
+      "presets": ["Minimal", "Standard", "Detailed", "Analytics"]
+    },
+    "transactionManagement": {
+      "title": "Transaction Management",
+      "description": "Full-featured transaction list with virtual scrolling for 100K+ items",
+      "capabilities": [
+        "Virtual scrolling for 100K+ transactions",
+        "Bulk actions (multi-select categorize, delete, tag)",
+        "Split transactions across categories",
+        "Recurring transaction auto-detection",
+        "Quick keyboard-driven categorization"
+      ]
+    },
+    "budgeting": {
+      "title": "Budgeting",
+      "description": "YNAB-style zero-based envelope budgeting",
+      "capabilities": [
+        "Envelope budgeting (zero-based)",
+        "Hierarchical category groups",
+        "Unused budget rollover to next month",
+        "Savings goals with progress tracking",
+        "Real-time overspending alerts"
+      ]
+    },
+    "search": {
+      "title": "Search System",
+      "description": "World-class transaction search with multiple modes",
+      "location": "src/lib/search/",
+      "capabilities": [
+        "Fuzzy search via Fuse.js (typo-tolerant)",
+        "Structured queries (amount:>100, category:food, date:last-week)",
+        "Natural language parsing (e.g. 'coffee purchases last month over $20')",
+        "Autocomplete with recent searches and saved filters",
+        "Offline IndexedDB-based search index"
+      ],
+      "modules": [
+        { "name": "transaction-search.ts", "purpose": "Core Fuse.js fuzzy search service" },
+        { "name": "query-parser.ts", "purpose": "Structured query syntax parser" },
+        { "name": "natural-language-parser.ts", "purpose": "NL query interpretation" },
+        { "name": "autocomplete.ts", "purpose": "Suggestion engine with recent searches" },
+        { "name": "offline-search-index.ts", "purpose": "IndexedDB search indexing" }
+      ],
+      "keyboardShortcut": "Cmd/Ctrl + K"
+    },
+    "bankImport": {
+      "title": "Bank Import System",
+      "description": "Multi-format import wizard supporting 71+ bank configurations",
+      "formats": ["CSV", "OFX", "QFX", "PDF (OCR)", "QIF", "MT940", "CAMT.053"],
+      "bankCoverage": {
+        "Canada": { "banks": ["TD", "RBC", "Scotiabank", "CIBC", "Tangerine", "Simplii", "BMO"], "count": 7 },
+        "USA": { "banks": ["Chase", "Bank of America", "Wells Fargo", "Citibank", "Capital One", "US Bank"], "count": 6 },
+        "UK": { "banks": ["Barclays", "HSBC", "Lloyds", "NatWest"], "count": 7 },
+        "Europe": { "banks": ["N26", "Revolut", "ING", "Deutsche Bank"], "count": 8 },
+        "Australia": { "banks": ["CommBank", "ANZ", "Westpac", "NAB"], "count": 6 },
+        "India": { "banks": ["HDFC", "ICICI", "Axis", "SBI"], "count": 7 },
+        "Singapore": { "banks": ["DBS", "OCBC", "UOB"], "count": 6 },
+        "SE Asia": { "banks": ["Bangkok Bank", "Kasikorn", "Maybank", "CIMB", "GCash", "BDO"], "count": 7 },
+        "Japan": { "banks": ["Rakuten", "Mizuho", "MUFG", "SMBC", "Japan Post"], "count": 6 },
+        "Indonesia": { "banks": ["BCA", "Mandiri", "BNI", "BRI"], "count": 4 },
+        "Vietnam": { "banks": ["Vietcombank", "Techcombank"], "count": 2 },
+        "Neobanks": { "banks": ["Wise", "GrabPay", "Aspire", "YouTrip"], "count": 5 }
+      },
+      "totalBankFormats": 71,
+      "parserModules": [
+        { "name": "csv-parser.ts", "purpose": "Multi-format CSV parsing" },
+        { "name": "ofx-parser.ts", "purpose": "OFX/QFX file parsing" },
+        { "name": "pdf-ocr-parser.ts", "purpose": "PDF statement OCR" },
+        { "name": "pdf-bank-parser.ts", "purpose": "Structured PDF extraction" },
+        { "name": "bank-configs.ts", "purpose": "71 bank configurations" },
+        { "name": "format-detector.ts", "purpose": "Auto-detect file format" },
+        { "name": "qif-parser.ts", "purpose": "QIF file parsing" },
+        { "name": "mt940-parser.ts", "purpose": "MT940/SWIFT format parsing" },
+        { "name": "camt053-parser.ts", "purpose": "CAMT.053 XML parsing" }
+      ],
+      "ynabMigration": true
+    },
+    "ai": {
+      "title": "AI-Powered Features",
+      "description": "OpenAI GPT-4 powered smart import, categorization, and analytics",
+      "location": "src/lib/ai/",
+      "smartImport": [
+        { "name": "smart-bank-detection.ts", "purpose": "Auto-detect bank from CSV structure" },
+        { "name": "smart-column-mapper.ts", "purpose": "AI column name mapping" },
+        { "name": "smart-duplicate-detection.ts", "purpose": "Fuzzy duplicate matching" },
+        { "name": "smart-transaction-enrichment.ts", "purpose": "Merchant name cleanup" },
+        { "name": "smart-transaction-validator.ts", "purpose": "Data quality validation" },
+        { "name": "smart-error-recovery.ts", "purpose": "Import error suggestions" }
+      ],
+      "smartCategorization": [
+        { "name": "vendor-matcher.ts", "purpose": "Rule-based merchant matching" },
+        { "name": "ai-vendor-matcher.ts", "purpose": "AI-powered categorization" },
+        { "name": "merchant-tokenizer.ts", "purpose": "Merchant name parsing" },
+        { "name": "vendor-learning.ts", "purpose": "Learn from user corrections" }
+      ],
+      "predictiveAnalytics": [
+        { "name": "predictive-spending.ts", "purpose": "Forecast future spending" },
+        { "name": "anomaly-detection.ts", "purpose": "Unusual transaction detection" },
+        { "name": "natural-language-import.ts", "purpose": "Import via natural language" }
+      ],
+      "chatbot": {
+        "description": "Full conversational interface for financial queries",
+        "modules": [
+          "ChatbotContext.tsx",
+          "chatbot-openai-service.ts",
+          "chatbot-data-access.ts",
+          "chatbot-prompts.ts"
+        ]
+      }
+    },
+    "analytics": {
+      "title": "Analytics & Insights",
+      "description": "Financial health scoring, trend analysis, and predictive spending",
+      "location": "src/lib/analytics/",
+      "modules": [
+        { "name": "health-score.ts", "purpose": "Financial health score (0-100)" },
+        { "name": "weekly-insights.ts", "purpose": "Friday review summaries" },
+        { "name": "spending-insights.ts", "purpose": "Spending pattern analysis" },
+        { "name": "recurring-detector.ts", "purpose": "Find recurring transactions" },
+        { "name": "overspending-detector.ts", "purpose": "Budget violation alerts" },
+        { "name": "anomaly-detector.ts", "purpose": "Unusual spending detection" },
+        { "name": "trend-forecasting.ts", "purpose": "Trend extrapolation" },
+        { "name": "lstm-predictive-spending.ts", "purpose": "ML-based predictions" }
+      ],
+      "healthScore": {
+        "range": [0, 100],
+        "weights": {
+          "savingsRate": 0.20,
+          "budgetAdherence": 0.20,
+          "expenseStability": 0.15,
+          "debtRatio": 0.15,
+          "emergencyFund": 0.15,
+          "trendDirection": 0.15
+        }
+      },
+      "reports": [
+        "Spending Trends (monthly/yearly)",
+        "Category Breakdown",
+        "Income vs Expenses",
+        "Sankey Diagrams (money flow)",
+        "Spending Heatmap (calendar view)",
+        "Health Score gauge and history"
+      ]
+    },
+    "calculators": {
+      "title": "Financial Calculators",
+      "description": "5 financial planning calculators with locale-aware formatting",
+      "location": "src/app/budget-app/calculators/",
+      "items": [
+        {
+          "name": "emergencyFund",
+          "title": "Emergency Fund Calculator",
+          "description": "Plan emergency savings with target months, progress tracking, and completion date"
+        },
+        {
+          "name": "savingsGoal",
+          "title": "Savings Goal Calculator",
+          "description": "Project savings with compound interest, dual mode (target date or target amount)"
+        },
+        {
+          "name": "debtPayoff",
+          "title": "Debt Payoff Calculator",
+          "description": "Compare snowball vs avalanche repayment strategies with payment schedules"
+        },
+        {
+          "name": "subscriptionCost",
+          "title": "Subscription Cost Calculator",
+          "description": "Analyze recurring expenses with frequency normalization, essential vs non-essential"
+        },
+        {
+          "name": "budgetAnalyzer",
+          "title": "50/30/20 Budget Analyzer",
+          "description": "Evaluate spending against the 50/30/20 rule with variance analysis"
+        }
+      ],
+      "currencySupport": {
+        "totalCurrencies": 72,
+        "zeroDecimal": ["JPY", "KRW", "VND", "IDR", "CLP", "HUF", "ISK", "TWD"],
+        "rtlSupport": ["Arabic", "Hebrew", "Farsi", "Urdu"]
+      }
+    },
+    "internationalization": {
+      "title": "Internationalization",
+      "description": "Full multi-language support with 114 locales and RTL",
+      "totalLocales": 114,
+      "translationKeys": 1200,
+      "rtlLanguages": ["Arabic", "Hebrew", "Farsi", "Urdu"],
+      "languageGroups": {
+        "English": { "locales": ["US", "GB", "AU", "CA", "IN", "IE", "NZ", "SG", "ZA"], "count": 10 },
+        "Spanish": { "locales": ["ES", "MX", "AR", "+ 18 Latin American"], "count": 21 },
+        "Chinese": { "locales": ["Simplified", "Traditional", "HK"], "count": 3 },
+        "French": { "locales": ["FR", "CA", "CH", "BE"], "count": 4 },
+        "German": { "locales": ["DE", "AT", "CH"], "count": 3 },
+        "Indian": { "locales": ["Hindi", "Bengali", "Tamil", "Telugu", "+ 5 more"], "count": 9 },
+        "SE Asian": { "locales": ["Thai", "Vietnamese", "Indonesian", "+ 4 more"], "count": 7 },
+        "European": { "count": 20 }
+      }
+    },
+    "security": {
+      "title": "Security & Privacy",
+      "description": "Client-side AES-256 encryption with zero-knowledge option",
+      "location": "src/lib/encryption/",
+      "modules": [
+        { "name": "encryption.ts", "purpose": "Core AES-256 encryption" },
+        { "name": "budget-encryption.ts", "purpose": "Encrypt budget data" },
+        { "name": "encrypted-db-wrapper.ts", "purpose": "IndexedDB encryption layer" },
+        { "name": "encrypted-transactions.ts", "purpose": "Transaction encryption" },
+        { "name": "migrate-to-encryption.ts", "purpose": "Upgrade unencrypted data" }
+      ],
+      "capabilities": [
+        "Zero-knowledge option (all data encrypted client-side)",
+        "No tracking mode (disable all analytics)",
+        "Full data export and portability",
+        "Complete account and data deletion",
+        "Granular privacy settings panel"
+      ],
+      "authentication": [
+        "Supabase Auth with Row Level Security",
+        "Email/password authentication",
+        "OAuth providers (Google, GitHub)",
+        "Password reset flow",
+        "Session management"
+      ]
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "description": "WCAG 2.1 AA compliant with keyboard navigation and screen reader support",
+      "standard": "WCAG 2.1 AA",
+      "capabilities": [
+        "Full keyboard navigation",
+        "Screen reader optimized",
+        "Focus management",
+        "Skip links",
+        "High contrast support",
+        "Seniors mode (large text)"
+      ],
+      "keyboardShortcuts": {
+        "Cmd/Ctrl + K": "Command palette",
+        "Cmd/Ctrl + N": "New transaction",
+        "Cmd/Ctrl + I": "Import data",
+        "Cmd/Ctrl + E": "Export data",
+        "Cmd/Ctrl + /": "Show shortcuts",
+        "Cmd/Ctrl + ,": "Settings"
+      }
+    },
+    "offlineSync": {
+      "title": "Offline & Sync",
+      "description": "Offline-first architecture with LAN sync and SimpleFIN integration",
+      "capabilities": [
+        "IndexedDB for local storage",
+        "Service Worker caching",
+        "Sync queue for pending changes",
+        "Conflict resolution"
+      ],
+      "lanSync": {
+        "location": "src/lib/lan-sync*.ts",
+        "modules": [
+          { "name": "lan-sync.ts", "purpose": "Core sync logic" },
+          { "name": "lan-sync-connection.ts", "purpose": "WebSocket connections" },
+          { "name": "lan-sync-devices.ts", "purpose": "Device discovery" },
+          { "name": "lan-sync-encryption.ts", "purpose": "E2E encryption" },
+          { "name": "lan-sync-encrypted-connection.ts", "purpose": "Secure transport" }
+        ],
+        "features": ["QR code pairing", "Device discovery", "Real-time sync status"]
+      },
+      "simplefin": {
+        "location": "src/lib/simplefin/",
+        "description": "Direct bank connection via SimpleFIN Bridge",
+        "capabilities": ["Automatic transaction sync", "Real-time balance updates"]
+      }
+    }
+  },
+  "techStack": {
+    "framework": "Next.js 16.0.0 (App Router)",
+    "ui": "React 19.2.0",
+    "language": "TypeScript 5.9.3 (strict mode)",
+    "database": "Supabase PostgreSQL + IndexedDB",
+    "components": "shadcn/ui + Radix UI",
+    "styling": "Tailwind CSS 4.x",
+    "charts": "Recharts + D3.js",
+    "ai": "OpenAI GPT-4",
+    "ocr": "Tesseract.js + PDF.js",
+    "i18n": "next-intl (114 locales)",
+    "state": "React Context (18 contexts)",
+    "auth": "Supabase Auth",
+    "analytics": "PostHog"
+  },
+  "routes": [
+    { "path": "/budget-app", "description": "Dashboard with customizable widgets" },
+    { "path": "/budget-app/transactions", "description": "Transaction list & management" },
+    { "path": "/budget-app/budgets", "description": "Budget allocation & tracking" },
+    { "path": "/budget-app/categories", "description": "Category management" },
+    { "path": "/budget-app/reports", "description": "Financial reports & charts" },
+    { "path": "/budget-app/import", "description": "Multi-format import wizard" },
+    { "path": "/budget-app/export", "description": "Data export (CSV, JSON, PDF)" },
+    { "path": "/budget-app/investments", "description": "Portfolio tracking" },
+    { "path": "/budget-app/loans", "description": "Loan management & amortization" },
+    { "path": "/budget-app/subscriptions", "description": "Subscription tracking" },
+    { "path": "/budget-app/ocr", "description": "Receipt & statement OCR" },
+    { "path": "/budget-app/planning/future", "description": "Future transaction planning" },
+    { "path": "/budget-app/planning/retirement", "description": "Retirement calculator" },
+    { "path": "/budget-app/calculators", "description": "Financial calculators hub" },
+    { "path": "/budget-app/friday-review", "description": "Weekly financial review" },
+    { "path": "/budget-app/settings", "description": "User preferences" },
+    { "path": "/budget-app/admin", "description": "Admin dashboard" },
+    { "path": "/budget-app/landing", "description": "Marketing landing page" }
+  ],
+  "stateManagement": {
+    "totalContexts": 18,
+    "contexts": [
+      { "name": "AuthContext", "purpose": "Authentication state" },
+      { "name": "SettingsContext", "purpose": "User preferences" },
+      { "name": "ChatbotContext", "purpose": "AI chatbot state" },
+      { "name": "LANSyncContext", "purpose": "Sync status" },
+      { "name": "SeniorsModeContext", "purpose": "Accessibility mode" },
+      { "name": "DatabaseContext", "purpose": "IndexedDB connection" },
+      { "name": "SearchContext", "purpose": "Global search" },
+      { "name": "GlobalNavContext", "purpose": "Navigation state" }
+    ]
+  }
+}
