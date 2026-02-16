@@ -19,14 +19,19 @@ import { useEffect, useState } from "react";
 import {
   getAdminUsers,
   getAuditLog,
+  createFamilyGroup,
+  deleteFamilyGroup,
+  extendUserTrial,
+  forceLogoutUser,
+  getAuditLog,
   getFamilyGroups,
   getFamilyMembers,
   reactivateUser,
   removeFamilyMember,
+  renameFamilyGroup,
   suspendUser,
   updateFamilyMemberRole,
   updateUserRole,
-  extendUserTrial,
 } from "./actions";
 
 // Admin dashboard is not available in offline mode
@@ -145,9 +150,12 @@ function AdminDashboardContent() {
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<AdminUser[]>([]);
   const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>([]);
+  const [auditQuery, setAuditQuery] = useState("");
   const [familyGroups, setFamilyGroups] = useState<FamilyGroup[]>([]);
   const [selectedFamilyId, setSelectedFamilyId] = useState<string>("");
   const [familyMembers, setFamilyMembers] = useState<FamilyMember[]>([]);
+  const [newGroupName, setNewGroupName] = useState("");
+  const [newGroupOwnerId, setNewGroupOwnerId] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -158,7 +166,7 @@ function AdminDashboardContent() {
     try {
       const [usersData, auditData, groupData] = await Promise.all([
         getAdminUsers(),
-        getAuditLog(50),
+        getAuditLog(50, ""),
         getFamilyGroups(),
       ]);
       setUsers(usersData as any);
@@ -374,6 +382,16 @@ function AdminDashboardContent() {
                         >
                           +7d Trial
                         </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="border-white/10 text-slate-300 hover:bg-white/10"
+                          onClick={async () => {
+                            await forceLogoutUser(user.id);
+                          }}
+                        >
+                          Force Logout
+                        </Button>
                         {user.is_suspended ? (
                           <Button
                             variant="outline"
@@ -422,6 +440,34 @@ function AdminDashboardContent() {
             <div className="text-sm text-slate-400">{familyGroups.length} groups</div>
           </div>
 
+          <div className="mb-4 grid grid-cols-1 gap-3 md:grid-cols-3">
+            <Input
+              placeholder="New group name"
+              value={newGroupName}
+              onChange={(e) => setNewGroupName(e.target.value)}
+              className="border-white/10 bg-white/5 text-white placeholder:text-slate-500"
+            />
+            <Input
+              placeholder="Owner user id"
+              value={newGroupOwnerId}
+              onChange={(e) => setNewGroupOwnerId(e.target.value)}
+              className="border-white/10 bg-white/5 text-white placeholder:text-slate-500"
+            />
+            <Button
+              onClick={async () => {
+                if (!newGroupName || !newGroupOwnerId) return;
+                await createFamilyGroup(newGroupName, newGroupOwnerId);
+                setNewGroupName("");
+                setNewGroupOwnerId("");
+                const refreshed = await getFamilyGroups();
+                setFamilyGroups(refreshed as any);
+              }}
+              className="bg-teal-600 text-white hover:bg-teal-700"
+            >
+              Create Group
+            </Button>
+          </div>
+
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <div className="rounded-lg border border-white/10 bg-white/5 p-4">
               <Table>
@@ -430,12 +476,13 @@ function AdminDashboardContent() {
                     <TableHead className="text-slate-300">Group</TableHead>
                     <TableHead className="text-slate-300">Owner</TableHead>
                     <TableHead className="text-slate-300">Members</TableHead>
+                    <TableHead className="text-slate-300">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {familyGroups.length === 0 ? (
                     <TableRow>
-                      <TableCell colSpan={3} className="h-20 text-center text-slate-500">
+                      <TableCell colSpan={4} className="h-20 text-center text-slate-500">
                         No family groups found.
                       </TableCell>
                     </TableRow>
@@ -454,6 +501,42 @@ function AdminDashboardContent() {
                           {group.owner_id.slice(0, 8)}…
                         </TableCell>
                         <TableCell className="text-slate-300">{group.memberCount}</TableCell>
+                        <TableCell>
+                          <div className="flex gap-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="border-white/10 text-slate-300 hover:bg-white/10"
+                              onClick={async () => {
+                                const nextName = prompt("Rename group", group.name);
+                                if (!nextName) return;
+                                await renameFamilyGroup(group.id, nextName);
+                                const refreshed = await getFamilyGroups();
+                                setFamilyGroups(refreshed as any);
+                              }}
+                            >
+                              Rename
+                            </Button>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
+                              onClick={async () => {
+                                const ok = confirm("Delete this group?");
+                                if (!ok) return;
+                                await deleteFamilyGroup(group.id);
+                                if (selectedFamilyId === group.id) {
+                                  setSelectedFamilyId("");
+                                  setFamilyMembers([]);
+                                }
+                                const refreshed = await getFamilyGroups();
+                                setFamilyGroups(refreshed as any);
+                              }}
+                            >
+                              Delete
+                            </Button>
+                          </div>
+                        </TableCell>
                       </TableRow>
                     ))
                   )}
@@ -539,6 +622,24 @@ function AdminDashboardContent() {
               <p className="text-sm text-slate-400">Recent admin actions</p>
             </div>
             <div className="text-sm text-slate-400">{auditLogs.length} entries</div>
+          </div>
+          <div className="mb-4 flex gap-3">
+            <Input
+              placeholder="Filter by action or metadata"
+              value={auditQuery}
+              onChange={(e) => setAuditQuery(e.target.value)}
+              className="border-white/10 bg-white/5 text-white placeholder:text-slate-500"
+            />
+            <Button
+              variant="outline"
+              className="border-white/10 text-white hover:bg-white/5"
+              onClick={async () => {
+                const logs = await getAuditLog(50, auditQuery);
+                setAuditLogs(logs as any);
+              }}
+            >
+              Filter
+            </Button>
           </div>
           <Table>
             <TableHeader className="bg-white/5">
