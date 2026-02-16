@@ -208,7 +208,7 @@ export default function ImportPage() {
   }, [expandedReviewIndex, parsedTransactions, matchedTransactions]);
 
   // Detect file format using content analysis
-  async function detectFormat(file: File): Promise<FormatDetectionResult | null> {
+  async function detectFormat(file: File): Promise<void> {
     try {
       console.log("[ImportPage] Detecting format for:", file.name);
       const detection = await detectFileFormat(file);
@@ -221,13 +221,10 @@ export default function ImportPage() {
       } else if (detection.confidence < 0.5) {
         setError(`Low confidence format detection. ${detection.suggestions?.join(" ")}`);
       }
-
-      return detection;
     } catch (error) {
       console.error("[ImportPage] Format detection error:", error);
       setError("Unable to detect file format. Please try a different file.");
       setFormatDetection(null);
-      return null;
     }
   }
 
@@ -329,19 +326,7 @@ export default function ImportPage() {
   }
 
   async function processFile() {
-    if (!file) return;
-
-    let activeDetection = formatDetection;
-    if (!activeDetection) {
-      activeDetection = await detectFormat(file);
-    }
-
-    if (!activeDetection) {
-      setError("Unable to detect file format. Please try a different file.");
-      return;
-    }
-
-    const formatDetection = activeDetection;
+    if (!file || !formatDetection) return;
 
     console.log("[ImportPage] Processing file:", file.name, "Format:", formatDetection.format);
     setIsProcessing(true);
