@@ -21,8 +21,12 @@ import {
   getAuditLog,
   getFamilyGroups,
   getFamilyMembers,
+  reactivateUser,
   removeFamilyMember,
+  suspendUser,
   updateFamilyMemberRole,
+  updateUserRole,
+  extendUserTrial,
 } from "./actions";
 
 // Admin dashboard is not available in offline mode
@@ -34,6 +38,8 @@ interface AdminUser {
   name: string | null;
   created_at: string | null;
   last_login: string | null;
+  role?: string | null;
+  is_suspended?: boolean | null;
   status: {
     isActive: boolean;
     isTrial: boolean;
@@ -272,12 +278,13 @@ function AdminDashboardContent() {
                 <TableHead className="text-slate-300">Status</TableHead>
                 <TableHead className="text-slate-300">Trial Status</TableHead>
                 <TableHead className="text-slate-300">Last Login</TableHead>
+                <TableHead className="text-slate-300">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredUsers.length === 0 && !isLoading ? (
                 <TableRow>
-                  <TableCell colSpan={5} className="h-24 text-center text-slate-500">
+                  <TableCell colSpan={6} className="h-24 text-center text-slate-500">
                     No users found.
                   </TableCell>
                 </TableRow>
@@ -307,6 +314,11 @@ function AdminDashboardContent() {
                           Trial
                         </span>
                       )}
+                      {user.is_suspended && (
+                        <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-rose-500/20 px-2.5 py-0.5 text-xs font-medium text-rose-400">
+                          Suspended
+                        </span>
+                      )}
                     </TableCell>
                     <TableCell>
                       {user.status.isTrial && (
@@ -330,6 +342,68 @@ function AdminDashboardContent() {
                     </TableCell>
                     <TableCell className="text-slate-300">
                       {user.last_login ? new Date(user.last_login).toLocaleDateString() : "Never"}
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex flex-wrap gap-2">
+                        <select
+                          value={user.role ?? "member"}
+                          onChange={async (e) => {
+                            await updateUserRole(user.id, e.target.value);
+                            const refreshed = await getAdminUsers();
+                            setUsers(refreshed as any);
+                            setFilteredUsers(refreshed as any);
+                          }}
+                          className="rounded border border-white/10 bg-slate-900 px-2 py-1 text-xs text-white"
+                        >
+                          <option value="owner">owner</option>
+                          <option value="admin">admin</option>
+                          <option value="member">member</option>
+                          <option value="viewer">viewer</option>
+                          <option value="child">child</option>
+                        </select>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="border-amber-500/30 text-amber-400 hover:bg-amber-500/10"
+                          onClick={async () => {
+                            await extendUserTrial(user.id, 7);
+                            const refreshed = await getAdminUsers();
+                            setUsers(refreshed as any);
+                            setFilteredUsers(refreshed as any);
+                          }}
+                        >
+                          +7d Trial
+                        </Button>
+                        {user.is_suspended ? (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-teal-500/30 text-teal-400 hover:bg-teal-500/10"
+                            onClick={async () => {
+                              await reactivateUser(user.id);
+                              const refreshed = await getAdminUsers();
+                              setUsers(refreshed as any);
+                              setFilteredUsers(refreshed as any);
+                            }}
+                          >
+                            Reactivate
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
+                            onClick={async () => {
+                              await suspendUser(user.id);
+                              const refreshed = await getAdminUsers();
+                              setUsers(refreshed as any);
+                              setFilteredUsers(refreshed as any);
+                            }}
+                          >
+                            Suspend
+                          </Button>
+                        )}
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))
