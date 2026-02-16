@@ -17,8 +17,6 @@ import { Clock, LogOut, RefreshCw, Search, ShieldAlert } from "lucide-react";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
-  getAdminUsers,
-  getAuditLog,
   bulkExtendTrial,
   bulkForceLogout,
   bulkReactivateUsers,
@@ -29,7 +27,8 @@ import {
   exportAuditLog,
   extendUserTrial,
   forceLogoutUser,
-  getAuditLog,
+  getAuditLogPage,
+  getAdminUsersPage,
   getFamilyGroups,
   getFamilyMembers,
   reactivateUser,
@@ -103,15 +102,12 @@ function SessionRefreshHelper() {
   const handleClearAndSignIn = async () => {
     setIsSigningOut(true);
     try {
-      // Sign out to clear session
       await signOut();
-      // Clear any remaining localStorage auth data
       Object.keys(localStorage).forEach((key) => {
         if (key.startsWith("sb-") || key.includes("supabase")) {
           localStorage.removeItem(key);
         }
       });
-      // Redirect to login
       window.location.href = "/budget-app/auth/login";
     } catch (err) {
       console.error("Sign out failed:", err);
@@ -140,7 +136,6 @@ function SessionRefreshHelper() {
 }
 
 export default function AdminDashboardPage() {
-  // Admin dashboard is cloud-only, not available in offline mode
   if (isOfflineMode) {
     notFound();
   }
@@ -170,19 +165,29 @@ function AdminDashboardContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [userPage, setUserPage] = useState(1);
+  const [userTotal, setUserTotal] = useState(0);
+  const [userSortField, setUserSortField] = useState<"created_at" | "email" | "last_login">(
+    "created_at"
+  );
+  const [userSortDir, setUserSortDir] = useState<"asc" | "desc">("desc");
+  const [auditPage, setAuditPage] = useState(1);
+  const [auditTotal, setAuditTotal] = useState(0);
 
   const loadData = async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const [usersData, auditData, groupData] = await Promise.all([
-        getAdminUsers(),
-        getAuditLog(50, ""),
+      const [usersResp, auditResp, groupData] = await Promise.all([
+        getAdminUsersPage(userPage, 25, userSortField, userSortDir, searchQuery),
+        getAuditLogPage(auditPage, 50, auditQuery, auditStartDate, auditEndDate),
         getFamilyGroups(),
       ]);
-      setUsers(usersData as any);
-      setFilteredUsers(usersData as any);
-      setAuditLogs(auditData as any);
+      setUsers(usersResp.users as any);
+      setFilteredUsers(usersResp.users as any);
+      setUserTotal(usersResp.total);
+      setAuditLogs(auditResp.logs as any);
+      setAuditTotal(auditResp.total);
       setFamilyGroups(groupData as any);
     } catch (err: any) {
       setError(err.message || "Failed to load admin data");
@@ -193,18 +198,16 @@ function AdminDashboardContent() {
 
   useEffect(() => {
     loadData();
-  }, []);
-
-  useEffect(() => {
-    const lower = searchQuery.toLowerCase();
-    const filtered = users.filter(
-      (u) =>
-        u.email?.toLowerCase().includes(lower) ||
-        u.name?.toLowerCase().includes(lower) ||
-        u.id.toLowerCase().includes(lower)
-    );
-    setFilteredUsers(filtered);
-  }, [searchQuery, users]);
+  }, [
+    userPage,
+    userSortField,
+    userSortDir,
+    searchQuery,
+    auditPage,
+    auditQuery,
+    auditStartDate,
+    auditEndDate,
+  ]);
 
   useEffect(() => {
     if (!selectedFamilyId) {
@@ -216,11 +219,13 @@ function AdminDashboardContent() {
       .catch((err) => setError(err.message || "Failed to load family members"));
   }, [selectedFamilyId]);
 
-  // Stats
-  const totalUsers = users.length;
+  const totalUsers = userTotal;
   const activeTrials = users.filter((u) => u.status.isTrial && !u.status.isExpired).length;
   const paidUsers = users.filter((u) => u.status.status === "active").length;
   const expiredUsers = users.filter((u) => u.status.isExpired).length;
+
+  const totalUserPages = Math.max(1, Math.ceil(userTotal / 25));
+  const totalAuditPages = Math.max(1, Math.ceil(auditTotal / 50));
 
   return (
     <div className="min-h-screen bg-[#0f172a] p-8 text-white">
@@ -267,7 +272,10 @@ function AdminDashboardContent() {
             <Input
               placeholder="Search users..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setUserPage(1);
+              }}
               className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-slate-500 focus:border-teal-500"
             />
           </div>
@@ -296,9 +304,15 @@ function AdminDashboardContent() {
               className="border-white/10 text-slate-300 hover:bg-white/10"
               onClick={async () => {
                 await bulkUpdateUserRole(Array.from(selectedUserIds), bulkRole);
-                const refreshed = await getAdminUsers();
-                setUsers(refreshed as any);
-                setFilteredUsers(refreshed as any);
+                const refreshed = await getAdminUsersPage(
+                  userPage,
+                  25,
+                  userSortField,
+                  userSortDir,
+                  searchQuery
+                );
+                setUsers(refreshed.users as any);
+                setFilteredUsers(refreshed.users as any);
               }}
               disabled={selectedUserIds.size === 0}
             >
@@ -316,9 +330,15 @@ function AdminDashboardContent() {
               className="border-amber-500/30 text-amber-400 hover:bg-amber-500/10"
               onClick={async () => {
                 await bulkExtendTrial(Array.from(selectedUserIds), bulkTrialDays);
-                const refreshed = await getAdminUsers();
-                setUsers(refreshed as any);
-                setFilteredUsers(refreshed as any);
+                const refreshed = await getAdminUsersPage(
+                  userPage,
+                  25,
+                  userSortField,
+                  userSortDir,
+                  searchQuery
+                );
+                setUsers(refreshed.users as any);
+                setFilteredUsers(refreshed.users as any);
               }}
               disabled={selectedUserIds.size === 0}
             >
@@ -330,9 +350,15 @@ function AdminDashboardContent() {
               className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
               onClick={async () => {
                 await bulkSuspendUsers(Array.from(selectedUserIds));
-                const refreshed = await getAdminUsers();
-                setUsers(refreshed as any);
-                setFilteredUsers(refreshed as any);
+                const refreshed = await getAdminUsersPage(
+                  userPage,
+                  25,
+                  userSortField,
+                  userSortDir,
+                  searchQuery
+                );
+                setUsers(refreshed.users as any);
+                setFilteredUsers(refreshed.users as any);
               }}
               disabled={selectedUserIds.size === 0}
             >
@@ -344,9 +370,15 @@ function AdminDashboardContent() {
               className="border-teal-500/30 text-teal-400 hover:bg-teal-500/10"
               onClick={async () => {
                 await bulkReactivateUsers(Array.from(selectedUserIds));
-                const refreshed = await getAdminUsers();
-                setUsers(refreshed as any);
-                setFilteredUsers(refreshed as any);
+                const refreshed = await getAdminUsersPage(
+                  userPage,
+                  25,
+                  userSortField,
+                  userSortDir,
+                  searchQuery
+                );
+                setUsers(refreshed.users as any);
+                setFilteredUsers(refreshed.users as any);
               }}
               disabled={selectedUserIds.size === 0}
             >
@@ -404,18 +436,48 @@ function AdminDashboardContent() {
                     }}
                   />
                 </TableHead>
-                <TableHead className="text-slate-300">User</TableHead>
-                <TableHead className="text-slate-300">Joined</TableHead>
+                <TableHead className="text-slate-300">
+                  <button
+                    className="underline"
+                    onClick={() => {
+                      setUserSortField("email");
+                      setUserSortDir(userSortDir === "asc" ? "desc" : "asc");
+                    }}
+                  >
+                    User
+                  </button>
+                </TableHead>
+                <TableHead className="text-slate-300">
+                  <button
+                    className="underline"
+                    onClick={() => {
+                      setUserSortField("created_at");
+                      setUserSortDir(userSortDir === "asc" ? "desc" : "asc");
+                    }}
+                  >
+                    Joined
+                  </button>
+                </TableHead>
                 <TableHead className="text-slate-300">Status</TableHead>
                 <TableHead className="text-slate-300">Trial Status</TableHead>
-                <TableHead className="text-slate-300">Last Login</TableHead>
+                <TableHead className="text-slate-300">
+                  <button
+                    className="underline"
+                    onClick={() => {
+                      setUserSortField("last_login");
+                      setUserSortDir(userSortDir === "asc" ? "desc" : "asc");
+                    }}
+                  >
+                    Last Login
+                  </button>
+                </TableHead>
                 <TableHead className="text-slate-300">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredUsers.length === 0 && !isLoading ? (
                 <TableRow>
-                  <TableCell colSpan={6} className="h-24 text-center text-slate-500">
+                  <TableCell colSpan={7} className="h-24 text-center text-slate-500">
                     No users found.
                   </TableCell>
                 </TableRow>
@@ -496,9 +558,15 @@ function AdminDashboardContent() {
                           value={user.role ?? "member"}
                           onChange={async (e) => {
                             await updateUserRole(user.id, e.target.value);
-                            const refreshed = await getAdminUsers();
-                            setUsers(refreshed as any);
-                            setFilteredUsers(refreshed as any);
+                            const refreshed = await getAdminUsersPage(
+                              userPage,
+                              25,
+                              userSortField,
+                              userSortDir,
+                              searchQuery
+                            );
+                            setUsers(refreshed.users as any);
+                            setFilteredUsers(refreshed.users as any);
                           }}
                           className="rounded border border-white/10 bg-slate-900 px-2 py-1 text-xs text-white"
                         >
@@ -514,9 +582,15 @@ function AdminDashboardContent() {
                           className="border-amber-500/30 text-amber-400 hover:bg-amber-500/10"
                           onClick={async () => {
                             await extendUserTrial(user.id, 7);
-                            const refreshed = await getAdminUsers();
-                            setUsers(refreshed as any);
-                            setFilteredUsers(refreshed as any);
+                            const refreshed = await getAdminUsersPage(
+                              userPage,
+                              25,
+                              userSortField,
+                              userSortDir,
+                              searchQuery
+                            );
+                            setUsers(refreshed.users as any);
+                            setFilteredUsers(refreshed.users as any);
                           }}
                         >
                           +7d Trial
@@ -538,9 +612,15 @@ function AdminDashboardContent() {
                             className="border-teal-500/30 text-teal-400 hover:bg-teal-500/10"
                             onClick={async () => {
                               await reactivateUser(user.id);
-                              const refreshed = await getAdminUsers();
-                              setUsers(refreshed as any);
-                              setFilteredUsers(refreshed as any);
+                              const refreshed = await getAdminUsersPage(
+                                userPage,
+                                25,
+                                userSortField,
+                                userSortDir,
+                                searchQuery
+                              );
+                              setUsers(refreshed.users as any);
+                              setFilteredUsers(refreshed.users as any);
                             }}
                           >
                             Reactivate
@@ -552,9 +632,15 @@ function AdminDashboardContent() {
                             className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
                             onClick={async () => {
                               await suspendUser(user.id);
-                              const refreshed = await getAdminUsers();
-                              setUsers(refreshed as any);
-                              setFilteredUsers(refreshed as any);
+                              const refreshed = await getAdminUsersPage(
+                                userPage,
+                                25,
+                                userSortField,
+                                userSortDir,
+                                searchQuery
+                              );
+                              setUsers(refreshed.users as any);
+                              setFilteredUsers(refreshed.users as any);
                             }}
                           >
                             Suspend
@@ -567,6 +653,32 @@ function AdminDashboardContent() {
               )}
             </TableBody>
           </Table>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="text-sm text-slate-400">
+            Page {userPage} of {totalUserPages}
+          </div>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-white/10 text-white hover:bg-white/5"
+              onClick={() => setUserPage((p) => Math.max(1, p - 1))}
+              disabled={userPage <= 1}
+            >
+              Prev
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-white/10 text-white hover:bg-white/5"
+              onClick={() => setUserPage((p) => Math.min(totalUserPages, p + 1))}
+              disabled={userPage >= totalUserPages}
+            >
+              Next
+            </Button>
+          </div>
         </div>
 
         {/* Family Groups */}
@@ -784,7 +896,12 @@ function AdminDashboardContent() {
                 size="sm"
                 className="border-white/10 text-white hover:bg-white/5"
                 onClick={async () => {
-                  const json = await exportAuditLog(auditQuery, auditStartDate, auditEndDate, "json");
+                  const json = await exportAuditLog(
+                    auditQuery,
+                    auditStartDate,
+                    auditEndDate,
+                    "json"
+                  );
                   const blob = new Blob([json], { type: "application/json" });
                   const url = URL.createObjectURL(blob);
                   const link = document.createElement("a");
@@ -802,27 +919,38 @@ function AdminDashboardContent() {
             <Input
               placeholder="Filter by action or metadata"
               value={auditQuery}
-              onChange={(e) => setAuditQuery(e.target.value)}
+              onChange={(e) => {
+                setAuditQuery(e.target.value);
+                setAuditPage(1);
+              }}
               className="border-white/10 bg-white/5 text-white placeholder:text-slate-500"
             />
             <Input
               type="date"
               value={auditStartDate}
-              onChange={(e) => setAuditStartDate(e.target.value)}
+              onChange={(e) => {
+                setAuditStartDate(e.target.value);
+                setAuditPage(1);
+              }}
               className="w-44 border-white/10 bg-white/5 text-white placeholder:text-slate-500"
             />
             <Input
               type="date"
               value={auditEndDate}
-              onChange={(e) => setAuditEndDate(e.target.value)}
+              onChange={(e) => {
+                setAuditEndDate(e.target.value);
+                setAuditPage(1);
+              }}
               className="w-44 border-white/10 bg-white/5 text-white placeholder:text-slate-500"
             />
             <Button
               variant="outline"
               className="border-white/10 text-white hover:bg-white/5"
               onClick={async () => {
-                const logs = await getAuditLog(50, auditQuery, auditStartDate, auditEndDate);
-                setAuditLogs(logs as any);
+                const logs = await getAuditLogPage(1, 50, auditQuery, auditStartDate, auditEndDate);
+                setAuditLogs(logs.logs as any);
+                setAuditPage(1);
+                setAuditTotal(logs.total);
               }}
             >
               Filter
@@ -862,6 +990,31 @@ function AdminDashboardContent() {
               )}
             </TableBody>
           </Table>
+          <div className="mt-4 flex items-center justify-between">
+            <div className="text-sm text-slate-400">
+              Page {auditPage} of {totalAuditPages}
+            </div>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-white/10 text-white hover:bg-white/5"
+                onClick={() => setAuditPage((p) => Math.max(1, p - 1))}
+                disabled={auditPage <= 1}
+              >
+                Prev
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-white/10 text-white hover:bg-white/5"
+                onClick={() => setAuditPage((p) => Math.min(totalAuditPages, p + 1))}
+                disabled={auditPage >= totalAuditPages}
+              >
+                Next
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
