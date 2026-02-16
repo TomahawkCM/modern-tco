@@ -26,6 +26,7 @@ import {
   bulkUpdateUserRole,
   createFamilyGroup,
   deleteFamilyGroup,
+  exportAuditLog,
   extendUserTrial,
   forceLogoutUser,
   getAuditLog,
@@ -157,6 +158,8 @@ function AdminDashboardContent() {
   const [selectedUserIds, setSelectedUserIds] = useState<Set<string>>(new Set());
   const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>([]);
   const [auditQuery, setAuditQuery] = useState("");
+  const [auditStartDate, setAuditStartDate] = useState("");
+  const [auditEndDate, setAuditEndDate] = useState("");
   const [familyGroups, setFamilyGroups] = useState<FamilyGroup[]>([]);
   const [selectedFamilyId, setSelectedFamilyId] = useState<string>("");
   const [familyMembers, setFamilyMembers] = useState<FamilyMember[]>([]);
@@ -764,7 +767,7 @@ function AdminDashboardContent() {
                 size="sm"
                 className="border-white/10 text-white hover:bg-white/5"
                 onClick={async () => {
-                  const csv = await exportAuditLog(auditQuery);
+                  const csv = await exportAuditLog(auditQuery, auditStartDate, auditEndDate, "csv");
                   const blob = new Blob([csv], { type: "text/csv" });
                   const url = URL.createObjectURL(blob);
                   const link = document.createElement("a");
@@ -776,20 +779,49 @@ function AdminDashboardContent() {
               >
                 Export CSV
               </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-white/10 text-white hover:bg-white/5"
+                onClick={async () => {
+                  const json = await exportAuditLog(auditQuery, auditStartDate, auditEndDate, "json");
+                  const blob = new Blob([json], { type: "application/json" });
+                  const url = URL.createObjectURL(blob);
+                  const link = document.createElement("a");
+                  link.href = url;
+                  link.download = `audit-log-${new Date().toISOString().slice(0, 10)}.json`;
+                  link.click();
+                  URL.revokeObjectURL(url);
+                }}
+              >
+                Export JSON
+              </Button>
             </div>
           </div>
-          <div className="mb-4 flex gap-3">
+          <div className="mb-4 flex flex-wrap gap-3">
             <Input
               placeholder="Filter by action or metadata"
               value={auditQuery}
               onChange={(e) => setAuditQuery(e.target.value)}
               className="border-white/10 bg-white/5 text-white placeholder:text-slate-500"
             />
+            <Input
+              type="date"
+              value={auditStartDate}
+              onChange={(e) => setAuditStartDate(e.target.value)}
+              className="w-44 border-white/10 bg-white/5 text-white placeholder:text-slate-500"
+            />
+            <Input
+              type="date"
+              value={auditEndDate}
+              onChange={(e) => setAuditEndDate(e.target.value)}
+              className="w-44 border-white/10 bg-white/5 text-white placeholder:text-slate-500"
+            />
             <Button
               variant="outline"
               className="border-white/10 text-white hover:bg-white/5"
               onClick={async () => {
-                const logs = await getAuditLog(50, auditQuery);
+                const logs = await getAuditLog(50, auditQuery, auditStartDate, auditEndDate);
                 setAuditLogs(logs as any);
               }}
             >
