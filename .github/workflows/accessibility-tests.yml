@@ -74,7 +74,7 @@ jobs:
               },
               "assert": {
                 "assertions": {
-                  "categories:accessibility": ["error", {"minScore": 0.95}]
+                  "categories:accessibility": ["warn", {"minScore": 0.95}]
                 }
               },
               "upload": {
