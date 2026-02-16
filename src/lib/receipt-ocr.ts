@@ -162,33 +162,117 @@ function calculateResultScore(result: ExtractedReceiptData & { pageNum: number }
 }
 
 /**
- * Extract merchant name from receipt text
- * Looks for all-caps text at the top (common receipt pattern)
+ * Known merchant patterns for Strategy A matching.
+ * Each entry maps a regex to a canonical merchant name.
  */
-function extractMerchant(text: string): string | null {
-  // Split by lines and look at the first 5 lines
-  const lines = text.split("\n").filter((line) => line.trim().length > 0);
+const KNOWN_MERCHANTS: [RegExp, string][] = [
+  [/\bEPCOR\b/i, "EPCOR"],
+  [/\bENMAX\b/i, "ENMAX"],
+  [/\bBC\s*HYDRO\b/i, "BC HYDRO"],
+  [/\bPG&E\b/i, "PG&E"],
+  [/\bWALMART\b/i, "WALMART"],
+  [/\bCOSTCO\b/i, "COSTCO"],
+  [/\bSTARBUCKS\b/i, "STARBUCKS"],
+  [/\b7-ELEVEN\b/i, "7-ELEVEN"],
+  [/\bTIM\s*HORTONS?\b/i, "TIM HORTONS"],
+  [/\bMCDONALD'?S?\b/i, "MCDONALD'S"],
+  [/\bSUBWAY\b/i, "SUBWAY"],
+  [/\bA&W\b/i, "A&W"],
+  [/\bSAFEWAY\b/i, "SAFEWAY"],
+  [/\bSHOPPERS\s*DRUG\s*MART\b/i, "SHOPPERS DRUG MART"],
+  [/\bLOBLAWS?\b/i, "LOBLAWS"],
+  [/\bHOME\s*DEPOT\b/i, "HOME DEPOT"],
+  [/\bCANADIAN\s*TIRE\b/i, "CANADIAN TIRE"],
+];
 
-  for (let i = 0; i < Math.min(5, lines.length); i++) {
-    const line = lines[i].trim();
+/** Words that should be ignored when they appear as standalone all-caps lines */
+const SKIP_WORDS = new Set([
+  "RECEIPT", "INVOICE", "BILL", "TOTAL", "SUBTOTAL", "TAX", "DATE", "TIME",
+  "AMOUNT", "CHANGE", "CASH", "CREDIT", "DEBIT", "VISA", "MASTERCARD",
+  "STATEMENT", "PAGE", "BALANCE",
+]);
 
-    // Look for all-caps words (common for merchant names)
-    // Must be at least 3 characters and mostly letters
-    if (line.length >= 3 && /^[A-Z\s&'-]+$/.test(line)) {
-      // Filter out common receipt keywords
-      const keywords = ["RECEIPT", "INVOICE", "BILL", "TOTAL", "SUBTOTAL", "TAX", "DATE", "TIME"];
-      const isKeyword = keywords.some((kw) => line.includes(kw));
+/**
+ * Extract merchant name from receipt text using a multi-strategy approach.
+ *
+ * Strategy A — known merchant patterns (highest confidence)
+ * Strategy B — label-based extraction ("Sold by:", "Company:", "Billed by:")
+ * Strategy C — all-caps and mixed-case detection in first 10 lines
+ * Strategy D — filename extraction fallback
+ * Strategy E — short-line fallback (last resort)
+ */
+export function extractMerchant(text: string, filename?: string): string | null {
+  const lines = text.split("\n").map((l) => l.trim()).filter((l) => l.length > 0);
 
-      if (!isKeyword) {
-        return line;
+  // ── Strategy A: Known merchant patterns ──────────────────────────
+  const fullText = text;
+  for (const [pattern, canonical] of KNOWN_MERCHANTS) {
+    if (pattern.test(fullText)) return canonical;
+  }
+
+  // ── Strategy B: Label-based extraction ───────────────────────────
+  const labelRe = /(?:sold\s+by|company|billed\s+by|merchant|vendor|store)\s*:\s*(.+)/i;
+  for (const line of lines) {
+    const m = line.match(labelRe);
+    if (m) return m[1].trim();
+  }
+
+  // ── Strategy C: All-caps / mixed-case detection ──────────────────
+  const maxScan = Math.min(10, lines.length);
+
+  // C-1: all-caps lines (skip noise)
+  for (let i = 0; i < maxScan; i++) {
+    const line = lines[i];
+    if (line.length < 3 || line.length > 60) continue;
+    if (/^[A-Z][A-Z\s&'.-]+$/.test(line)) {
+      const upper = line.replace(/[^A-Z]/g, "");
+      if (upper.length < 3) continue;
+      if (SKIP_WORDS.has(line)) continue;
+      // Skip lines that look like addresses (start with digits)
+      if (/^\d/.test(line)) continue;
+      // Skip phone numbers
+      if (/^\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{4}$/.test(line)) continue;
+      // Skip account/order numbers
+      if (/^#\d+$/.test(line)) continue;
+      return line;
+    }
+  }
+
+  // C-2: mixed-case lines (title-case or camelCase merchant names)
+  for (let i = 0; i < maxScan; i++) {
+    const line = lines[i];
+    if (line.length < 3 || line.length > 50) continue;
+    // Skip lines that start with digits, look like prices, phone numbers, or dates
+    if (/^\d/.test(line)) continue;
+    if (/^\$/.test(line)) continue;
+    if (/^\(?\d{3}\)?[\s-]?\d{3}/.test(line)) continue;
+    if (/^#\d+/.test(line)) continue;
+    if (SKIP_WORDS.has(line.toUpperCase())) continue;
+    // Must contain at least one letter and look like a name
+    if (/^[A-Z][a-z]/.test(line) && /^[A-Za-z\s&'.-]+$/.test(line)) {
+      return line;
+    }
+  }
+
+  // ── Strategy D: Filename extraction ──────────────────────────────
+  if (filename) {
+    const base = filename.replace(/\.[^.]+$/, ""); // strip extension
+    const tokens = base.split(/[_\-\s]+/);
+    for (const token of tokens) {
+      if (/[a-zA-Z]/.test(token) && !/^\d+$/.test(token)) {
+        return token.toUpperCase();
       }
     }
   }
 
-  // Fallback: Look for lines with length 3-40 characters at the top
+  // ── Strategy E: Short-line fallback ──────────────────────────────
   for (let i = 0; i < Math.min(5, lines.length); i++) {
-    const line = lines[i].trim();
-    if (line.length >= 3 && line.length <= 40) {
+    const line = lines[i];
+    if (line.length >= 3 && line.length <= 40 && /[a-zA-Z]/.test(line)) {
+      if (/^\d/.test(line)) continue;
+      if (/^\$/.test(line)) continue;
+      if (/^\(?\d{3}\)?/.test(line)) continue;
+      if (/^#\d+/.test(line)) continue;
       return line;
     }
   }
