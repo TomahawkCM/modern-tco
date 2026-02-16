@@ -757,7 +757,26 @@ function AdminDashboardContent() {
               <h2 className="text-xl font-semibold">Audit Log</h2>
               <p className="text-sm text-slate-400">Recent admin actions</p>
             </div>
-            <div className="text-sm text-slate-400">{auditLogs.length} entries</div>
+            <div className="flex items-center gap-3 text-sm text-slate-400">
+              <span>{auditLogs.length} entries</span>
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-white/10 text-white hover:bg-white/5"
+                onClick={async () => {
+                  const csv = await exportAuditLog(auditQuery);
+                  const blob = new Blob([csv], { type: "text/csv" });
+                  const url = URL.createObjectURL(blob);
+                  const link = document.createElement("a");
+                  link.href = url;
+                  link.download = `audit-log-${new Date().toISOString().slice(0, 10)}.csv`;
+                  link.click();
+                  URL.revokeObjectURL(url);
+                }}
+              >
+                Export CSV
+              </Button>
+            </div>
           </div>
           <div className="mb-4 flex gap-3">
             <Input
