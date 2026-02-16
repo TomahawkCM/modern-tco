@@ -16,7 +16,14 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Clock, LogOut, RefreshCw, Search, ShieldAlert } from "lucide-react";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getAdminUsers } from "./actions";
+import {
+  getAdminUsers,
+  getAuditLog,
+  getFamilyGroups,
+  getFamilyMembers,
+  removeFamilyMember,
+  updateFamilyMemberRole,
+} from "./actions";
 
 // Admin dashboard is not available in offline mode
 const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === "true";
@@ -34,6 +41,38 @@ interface AdminUser {
     isExpired: boolean;
     status: string | null;
   };
+}
+
+interface AuditLogEntry {
+  id: string;
+  actor_id: string | null;
+  target_user_id: string | null;
+  action: string;
+  metadata: Record<string, any> | null;
+  created_at: string;
+  actor?: { id: string; email: string; name: string | null } | null;
+  target?: { id: string; email: string; name: string | null } | null;
+}
+
+interface FamilyGroup {
+  id: string;
+  name: string;
+  owner_id: string;
+  invite_code: string | null;
+  created_at: string;
+  memberCount: number;
+}
+
+interface FamilyMember {
+  id: string;
+  family_id: string;
+  user_id: string;
+  role: string;
+  permissions: any[];
+  can_see_all_accounts: boolean;
+  spending_limit: number | null;
+  created_at: string;
+  user?: { id: string; email: string; name: string | null } | null;
 }
 
 /**
@@ -99,6 +138,10 @@ export default function AdminDashboardPage() {
 function AdminDashboardContent() {
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<AdminUser[]>([]);
+  const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>([]);
+  const [familyGroups, setFamilyGroups] = useState<FamilyGroup[]>([]);
+  const [selectedFamilyId, setSelectedFamilyId] = useState<string>("");
+  const [familyMembers, setFamilyMembers] = useState<FamilyMember[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -107,11 +150,17 @@ function AdminDashboardContent() {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await getAdminUsers();
-      setUsers(data as any); // Type assertion for simplicity
-      setFilteredUsers(data as any);
+      const [usersData, auditData, groupData] = await Promise.all([
+        getAdminUsers(),
+        getAuditLog(50),
+        getFamilyGroups(),
+      ]);
+      setUsers(usersData as any);
+      setFilteredUsers(usersData as any);
+      setAuditLogs(auditData as any);
+      setFamilyGroups(groupData as any);
     } catch (err: any) {
-      setError(err.message || "Failed to load users");
+      setError(err.message || "Failed to load admin data");
     } finally {
       setIsLoading(false);
     }
@@ -131,6 +180,16 @@ function AdminDashboardContent() {
     );
     setFilteredUsers(filtered);
   }, [searchQuery, users]);
+
+  useEffect(() => {
+    if (!selectedFamilyId) {
+      setFamilyMembers([]);
+      return;
+    }
+    getFamilyMembers(selectedFamilyId)
+      .then((members) => setFamilyMembers(members as any))
+      .catch((err) => setError(err.message || "Failed to load family members"));
+  }, [selectedFamilyId]);
 
   // Stats
   const totalUsers = users.length;
@@ -271,6 +330,170 @@ function AdminDashboardContent() {
                     </TableCell>
                     <TableCell className="text-slate-300">
                       {user.last_login ? new Date(user.last_login).toLocaleDateString() : "Never"}
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </div>
+
+        {/* Family Groups */}
+        <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-semibold">Family Groups</h2>
+              <p className="text-sm text-slate-400">Manage group membership and roles</p>
+            </div>
+            <div className="text-sm text-slate-400">{familyGroups.length} groups</div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+              <Table>
+                <TableHeader className="bg-white/5">
+                  <TableRow className="border-white/5 hover:bg-white/5">
+                    <TableHead className="text-slate-300">Group</TableHead>
+                    <TableHead className="text-slate-300">Owner</TableHead>
+                    <TableHead className="text-slate-300">Members</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {familyGroups.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={3} className="h-20 text-center text-slate-500">
+                        No family groups found.
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    familyGroups.map((group) => (
+                      <TableRow
+                        key={group.id}
+                        className="border-white/5 hover:bg-white/5"
+                        onClick={() => setSelectedFamilyId(group.id)}
+                      >
+                        <TableCell className="text-white">
+                          <div className="font-medium">{group.name}</div>
+                          <div className="text-xs text-slate-500">{group.invite_code || ""}</div>
+                        </TableCell>
+                        <TableCell className="text-slate-300">
+                          {group.owner_id.slice(0, 8)}…
+                        </TableCell>
+                        <TableCell className="text-slate-300">{group.memberCount}</TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+
+            <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+              <div className="mb-3 text-sm text-slate-400">
+                {selectedFamilyId
+                  ? `Members for ${selectedFamilyId.slice(0, 8)}…`
+                  : "Select a group to view members"}
+              </div>
+              <Table>
+                <TableHeader className="bg-white/5">
+                  <TableRow className="border-white/5 hover:bg-white/5">
+                    <TableHead className="text-slate-300">Member</TableHead>
+                    <TableHead className="text-slate-300">Role</TableHead>
+                    <TableHead className="text-slate-300">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {familyMembers.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={3} className="h-20 text-center text-slate-500">
+                        {selectedFamilyId ? "No members found." : "No group selected."}
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    familyMembers.map((member) => (
+                      <TableRow key={member.id} className="border-white/5 hover:bg-white/5">
+                        <TableCell>
+                          <div className="text-white">
+                            {member.user?.name || member.user?.email || member.user_id}
+                          </div>
+                          <div className="text-xs text-slate-500">{member.user?.email}</div>
+                        </TableCell>
+                        <TableCell className="text-slate-300">
+                          <select
+                            value={member.role}
+                            onChange={async (e) => {
+                              await updateFamilyMemberRole(member.id, e.target.value);
+                              const updated = await getFamilyMembers(member.family_id);
+                              setFamilyMembers(updated as any);
+                            }}
+                            className="rounded border border-white/10 bg-slate-900 px-2 py-1 text-sm text-white"
+                          >
+                            <option value="owner">owner</option>
+                            <option value="admin">admin</option>
+                            <option value="member">member</option>
+                            <option value="viewer">viewer</option>
+                            <option value="child">child</option>
+                          </select>
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
+                            onClick={async () => {
+                              await removeFamilyMember(member.id);
+                              const updated = await getFamilyMembers(member.family_id);
+                              setFamilyMembers(updated as any);
+                            }}
+                          >
+                            Remove
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        </div>
+
+        {/* Audit Log */}
+        <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <div className="mb-4 flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-semibold">Audit Log</h2>
+              <p className="text-sm text-slate-400">Recent admin actions</p>
+            </div>
+            <div className="text-sm text-slate-400">{auditLogs.length} entries</div>
+          </div>
+          <Table>
+            <TableHeader className="bg-white/5">
+              <TableRow className="border-white/5 hover:bg-white/5">
+                <TableHead className="text-slate-300">When</TableHead>
+                <TableHead className="text-slate-300">Actor</TableHead>
+                <TableHead className="text-slate-300">Action</TableHead>
+                <TableHead className="text-slate-300">Target</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {auditLogs.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={4} className="h-20 text-center text-slate-500">
+                    No audit entries yet.
+                  </TableCell>
+                </TableRow>
+              ) : (
+                auditLogs.map((log) => (
+                  <TableRow key={log.id} className="border-white/5 hover:bg-white/5">
+                    <TableCell className="text-slate-300">
+                      {new Date(log.created_at).toLocaleString()}
+                    </TableCell>
+                    <TableCell className="text-slate-300">
+                      {log.actor?.email || log.actor_id || "-"}
+                    </TableCell>
+                    <TableCell className="text-white">{log.action}</TableCell>
+                    <TableCell className="text-slate-300">
+                      {log.target?.email || log.target_user_id || "-"}
                     </TableCell>
                   </TableRow>
                 ))
