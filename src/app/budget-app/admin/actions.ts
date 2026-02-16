@@ -186,7 +186,6 @@ export async function createFamilyGroup(name: string, ownerId: string) {
 
   if (error) throw new Error(`Database error: ${error.message}`);
 
-  // Ensure owner is a family member with owner role
   await supabaseAdmin
     .from("family_members")
     .insert({ family_id: group.id, user_id: ownerId, role: "owner", can_see_all_accounts: true });
@@ -341,12 +340,98 @@ export async function forceLogoutUser(userId: string) {
   const { user } = await requireAdmin();
   if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  // Supabase admin API sign out (invalidate sessions)
   // @ts-ignore - admin API typing may vary by supabase-js version
   const { error } = await supabaseAdmin.auth.admin.signOut(userId);
   if (error) throw new Error(`Auth error: ${error.message}`);
 
   await logAdminAction("admin.user.force_logout", userId, { actorId: user.id });
+
+  return { ok: true };
+}
+
+export async function bulkUpdateUserRole(userIds: string[], role: string) {
+  const { user } = await requireAdmin();
+  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+
+  if (userIds.length === 0) return { ok: true };
+
+  const { error } = await supabaseAdmin.from("users").update({ role }).in("id", userIds);
+  if (error) throw new Error(`Database error: ${error.message}`);
+
+  await logAdminAction("admin.user.role.bulk", undefined, { actorId: user.id, role, count: userIds.length });
+
+  return { ok: true };
+}
+
+export async function bulkSuspendUsers(userIds: string[]) {
+  const { user } = await requireAdmin();
+  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+
+  if (userIds.length === 0) return { ok: true };
+
+  const { error } = await supabaseAdmin.from("users").update({ is_suspended: true }).in("id", userIds);
+  if (error) throw new Error(`Database error: ${error.message}`);
+
+  await logAdminAction("admin.user.suspend.bulk", undefined, { actorId: user.id, count: userIds.length });
+
+  return { ok: true };
+}
+
+export async function bulkReactivateUsers(userIds: string[]) {
+  const { user } = await requireAdmin();
+  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+
+  if (userIds.length === 0) return { ok: true };
+
+  const { error } = await supabaseAdmin.from("users").update({ is_suspended: false }).in("id", userIds);
+  if (error) throw new Error(`Database error: ${error.message}`);
+
+  await logAdminAction("admin.user.reactivate.bulk", undefined, { actorId: user.id, count: userIds.length });
+
+  return { ok: true };
+}
+
+export async function bulkExtendTrial(userIds: string[], days: number) {
+  const { user } = await requireAdmin();
+  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+
+  if (userIds.length === 0) return { ok: true };
+
+  // Pull current trial starts for each user
+  const { data: rows, error: fetchErr } = await supabaseAdmin
+    .from("users")
+    .select("id, trial_start")
+    .in("id", userIds);
+
+  if (fetchErr) throw new Error(`Database error: ${fetchErr.message}`);
+
+  const updates = (rows ?? []).map((row: any) => {
+    const trialStart = row.trial_start ? new Date(row.trial_start) : new Date();
+    const newTrialStart = new Date(trialStart.getTime() - days * 24 * 60 * 60 * 1000);
+    return { id: row.id, trial_start: newTrialStart.toISOString() };
+  });
+
+  if (updates.length > 0) {
+    const { error } = await supabaseAdmin.from("users").upsert(updates, { onConflict: "id" });
+    if (error) throw new Error(`Database error: ${error.message}`);
+  }
+
+  await logAdminAction("admin.user.trial.bulk", undefined, { actorId: user.id, days, count: userIds.length });
+
+  return { ok: true };
+}
+
+export async function bulkForceLogout(userIds: string[]) {
+  const { user } = await requireAdmin();
+  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+
+  for (const id of userIds) {
+    // @ts-ignore
+    const { error } = await supabaseAdmin.auth.admin.signOut(id);
+    if (error) throw new Error(`Auth error: ${error.message}`);
+  }
+
+  await logAdminAction("admin.user.force_logout.bulk", undefined, { actorId: user.id, count: userIds.length });
 
   return { ok: true };
 }

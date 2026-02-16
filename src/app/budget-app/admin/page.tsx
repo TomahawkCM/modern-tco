@@ -19,6 +19,11 @@ import { useEffect, useState } from "react";
 import {
   getAdminUsers,
   getAuditLog,
+  bulkExtendTrial,
+  bulkForceLogout,
+  bulkReactivateUsers,
+  bulkSuspendUsers,
+  bulkUpdateUserRole,
   createFamilyGroup,
   deleteFamilyGroup,
   extendUserTrial,
@@ -149,6 +154,7 @@ export default function AdminDashboardPage() {
 function AdminDashboardContent() {
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<AdminUser[]>([]);
+  const [selectedUserIds, setSelectedUserIds] = useState<Set<string>>(new Set());
   const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>([]);
   const [auditQuery, setAuditQuery] = useState("");
   const [familyGroups, setFamilyGroups] = useState<FamilyGroup[]>([]);
@@ -156,6 +162,8 @@ function AdminDashboardContent() {
   const [familyMembers, setFamilyMembers] = useState<FamilyMember[]>([]);
   const [newGroupName, setNewGroupName] = useState("");
   const [newGroupOwnerId, setNewGroupOwnerId] = useState("");
+  const [bulkRole, setBulkRole] = useState("member");
+  const [bulkTrialDays, setBulkTrialDays] = useState(7);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -262,6 +270,99 @@ function AdminDashboardContent() {
           </div>
         </div>
 
+        {/* Bulk Actions */}
+        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+          <div className="mb-2 text-sm text-slate-400">
+            Bulk actions for {selectedUserIds.size} selected users
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <select
+              value={bulkRole}
+              onChange={(e) => setBulkRole(e.target.value)}
+              className="rounded border border-white/10 bg-slate-900 px-2 py-1 text-sm text-white"
+            >
+              <option value="owner">owner</option>
+              <option value="admin">admin</option>
+              <option value="member">member</option>
+              <option value="viewer">viewer</option>
+              <option value="child">child</option>
+            </select>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-white/10 text-slate-300 hover:bg-white/10"
+              onClick={async () => {
+                await bulkUpdateUserRole(Array.from(selectedUserIds), bulkRole);
+                const refreshed = await getAdminUsers();
+                setUsers(refreshed as any);
+                setFilteredUsers(refreshed as any);
+              }}
+              disabled={selectedUserIds.size === 0}
+            >
+              Apply Role
+            </Button>
+            <Input
+              type="number"
+              value={bulkTrialDays}
+              onChange={(e) => setBulkTrialDays(Number(e.target.value))}
+              className="w-28 border-white/10 bg-white/5 text-white placeholder:text-slate-500"
+            />
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-amber-500/30 text-amber-400 hover:bg-amber-500/10"
+              onClick={async () => {
+                await bulkExtendTrial(Array.from(selectedUserIds), bulkTrialDays);
+                const refreshed = await getAdminUsers();
+                setUsers(refreshed as any);
+                setFilteredUsers(refreshed as any);
+              }}
+              disabled={selectedUserIds.size === 0}
+            >
+              Extend Trial
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
+              onClick={async () => {
+                await bulkSuspendUsers(Array.from(selectedUserIds));
+                const refreshed = await getAdminUsers();
+                setUsers(refreshed as any);
+                setFilteredUsers(refreshed as any);
+              }}
+              disabled={selectedUserIds.size === 0}
+            >
+              Suspend
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-teal-500/30 text-teal-400 hover:bg-teal-500/10"
+              onClick={async () => {
+                await bulkReactivateUsers(Array.from(selectedUserIds));
+                const refreshed = await getAdminUsers();
+                setUsers(refreshed as any);
+                setFilteredUsers(refreshed as any);
+              }}
+              disabled={selectedUserIds.size === 0}
+            >
+              Reactivate
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-white/10 text-slate-300 hover:bg-white/10"
+              onClick={async () => {
+                await bulkForceLogout(Array.from(selectedUserIds));
+              }}
+              disabled={selectedUserIds.size === 0}
+            >
+              Force Logout
+            </Button>
+          </div>
+        </div>
+
         {/* Error State */}
         {error && (
           <div className="rounded-lg border border-rose-500/20 bg-rose-500/10 p-4 text-rose-400">
@@ -281,6 +382,25 @@ function AdminDashboardContent() {
           <Table>
             <TableHeader className="bg-white/5">
               <TableRow className="border-white/5 hover:bg-white/5">
+                <TableHead className="text-slate-300">
+                  <input
+                    type="checkbox"
+                    aria-label="Select all users"
+                    checked={
+                      filteredUsers.length > 0 &&
+                      filteredUsers.every((u) => selectedUserIds.has(u.id))
+                    }
+                    onChange={(e) => {
+                      const next = new Set(selectedUserIds);
+                      if (e.target.checked) {
+                        filteredUsers.forEach((u) => next.add(u.id));
+                      } else {
+                        filteredUsers.forEach((u) => next.delete(u.id));
+                      }
+                      setSelectedUserIds(next);
+                    }}
+                  />
+                </TableHead>
                 <TableHead className="text-slate-300">User</TableHead>
                 <TableHead className="text-slate-300">Joined</TableHead>
                 <TableHead className="text-slate-300">Status</TableHead>
@@ -299,6 +419,22 @@ function AdminDashboardContent() {
               ) : (
                 filteredUsers.map((user) => (
                   <TableRow key={user.id} className="border-white/5 hover:bg-white/5">
+                    <TableCell>
+                      <input
+                        type="checkbox"
+                        aria-label={`Select ${user.email}`}
+                        checked={selectedUserIds.has(user.id)}
+                        onChange={(e) => {
+                          const next = new Set(selectedUserIds);
+                          if (e.target.checked) {
+                            next.add(user.id);
+                          } else {
+                            next.delete(user.id);
+                          }
+                          setSelectedUserIds(next);
+                        }}
+                      />
+                    </TableCell>
                     <TableCell>
                       <div>
                         <div className="font-medium text-white">{user.name || "Unknown"}</div>
