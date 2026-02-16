@@ -14,7 +14,7 @@ export default function SyncClientWrapper() {
   const lan = useContext(LANSyncContext);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [onboardingOpen, setOnboardingOpen] = useState(false);
-  const [conflict, setConflict] = useState<any>(null);
+  const [conflict, setConflict] = useState<{ id: string } | null>(null);
 
   useEffect(() => {
     // Show onboarding if first run
@@ -35,36 +35,38 @@ export default function SyncClientWrapper() {
   }, [onboardingOpen]);
 
   // Map lan state to banner props
-  const status = lan?.state?.connected
+  const health = lan?.state?.health;
+  const status = health === "healthy"
     ? "synced"
-    : lan?.state?.pending
+    : lan?.state?.isSyncing
       ? "syncing"
       : lan?.state?.error
         ? "error"
         : "warning";
-  const lastSync = lan?.state?.lastSuccessfulAt
-    ? new Date(lan.state.lastSuccessfulAt).toLocaleString()
+  const lastSync = lan?.state?.lastGlobalSyncAt
+    ? new Date(lan.state.lastGlobalSyncAt).toLocaleString()
     : undefined;
 
-  // Example conflict hook
+  // Surface first alert as a conflict
   useEffect(() => {
-    if (lan?.state?.conflicts?.length) {
-      setConflict(lan.state.conflicts[0]);
+    if (lan?.state?.alerts?.length) {
+      const alert = lan.state.alerts[0];
+      setConflict({ id: alert.id });
     }
-  }, [lan?.state?.conflicts]);
+  }, [lan?.state?.alerts]);
 
   return (
     <>
       <SyncBanner
         status={status as any}
         lastSync={lastSync}
-        onRetry={() => lan?.retry?.()}
+        onRetry={() => lan?.syncAll?.()}
         onDetails={() => setDetailsOpen(true)}
       />
       {detailsOpen && (
         <SyncDetailsPanel
           onClose={() => setDetailsOpen(false)}
-          history={lan?.getStats?.()?.history}
+          history={[]}
         />
       )}
       {conflict && (
@@ -72,15 +74,15 @@ export default function SyncClientWrapper() {
           conflict={conflict}
           onClose={() => setConflict(null)}
           onResolveLocal={() => {
-            lan?.resolveConflict?.(conflict.id, "local");
+            lan?.dismissAlert?.(conflict.id);
             setConflict(null);
           }}
           onResolveRemote={() => {
-            lan?.resolveConflict?.(conflict.id, "remote");
+            lan?.dismissAlert?.(conflict.id);
             setConflict(null);
           }}
-          onMerge={(m) => {
-            lan?.resolveConflict?.(conflict.id, "merge", m);
+          onMerge={() => {
+            lan?.dismissAlert?.(conflict.id);
             setConflict(null);
           }}
         />

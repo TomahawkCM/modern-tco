@@ -215,7 +215,7 @@ export function StudyInsightsDashboard({ daysBack = 30, className }: StudyInsigh
                 .slice(-14) // Last 14 days
                 .map(([date, count]) => {
                   const maxSessions = Math.max(
-                    ...(Object.values(analytics.sessionsByDay))
+                    ...(Object.values(analytics.sessionsByDay) as number[])
                   );
                   const height = maxSessions > 0 ? ((count as number) / maxSessions) * 100 : 0;
                   const dateObj = new Date(date);

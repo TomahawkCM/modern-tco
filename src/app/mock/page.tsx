@@ -457,7 +457,7 @@ function MockExamContent() {
 
     return {
       questionId: `q-${idx}`,
-      status: (isMarked ? "marked" : isAnswered ? "answered" : "unanswered"),
+      status: (isMarked ? "marked" : isAnswered ? "answered" : "unanswered") as "answered" | "unanswered" | "marked",
     };
   });
 

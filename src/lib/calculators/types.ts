@@ -36,11 +36,14 @@ export interface DebtAccount {
   minimumPayment: number;
 }
 
-export type DebtStrategy = "snowball" | "avalanche";
+export type DebtStrategy = "snowball" | "avalanche" | "custom" | "minimum_only";
 
 export interface DebtPayoffInput {
   debts: DebtAccount[];
   extraMonthlyPayment: number;
+  strategy?: DebtStrategy;
+  customOrder?: string[];
+  oneTimePayments?: OneTimePayment[];
 }
 
 export interface DebtPaymentMonth {
@@ -70,9 +73,18 @@ export interface StrategyResult {
 export interface DebtPayoffResult {
   snowball: StrategyResult;
   avalanche: StrategyResult;
+  custom?: StrategyResult;
+  minimumOnly?: StrategyResult;
   interestSaved: number; // Avalanche saves this much
   monthsSaved: number; // Difference in payoff time
   recommendedStrategy: DebtStrategy;
+}
+
+export interface OneTimePayment {
+  targetDebtId: string;
+  amount: number;
+  month: number; // Which month to apply the payment
+  label?: string; // Optional descriptive label
 }
 
 // ==========================================

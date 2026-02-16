@@ -30,6 +30,10 @@ import type {
   Property,
   EventBudget,
   EventBudgetCategory,
+  SplitPerson,
+  ExpenseSplit,
+  PaycheckPlan,
+  DebtScenario,
 } from "@/types/budget";
 import type { InAppNotification } from "@/types/notifications";
 import type { Profile, ActivityLogEntry } from "@/types/profile";
@@ -134,6 +138,11 @@ export class BudgetDatabase extends Dexie {
   properties!: Table<Property>;
   eventBudgets!: Table<EventBudget>;
   eventBudgetCategories!: Table<EventBudgetCategory>;
+  // Phase 20: Splits, Paycheck Planning, Debt Scenarios
+  splitPeople!: Table<SplitPerson>;
+  expenseSplits!: Table<ExpenseSplit>;
+  paycheckPlans!: Table<PaycheckPlan>;
+  debtScenarios!: Table<DebtScenario>;
 
   constructor() {
     super(getDatabaseName());
@@ -634,6 +643,47 @@ export class BudgetDatabase extends Dexie {
       properties: "id, name, currency, type, createdAt",
       eventBudgets: "id, name, status, startDate, endDate",
       eventBudgetCategories: "id, eventBudgetId, [eventBudgetId+categoryName]",
+    });
+
+    // Version 20: Add splits, paycheck planning, and debt scenarios tables
+    this.version(20).stores({
+      accounts: "id, name, institution, type, bankId",
+      transactions:
+        "id, accountId, date, category, amount, description, splitFromId, isSplit, refundStatus, eventBudgetId",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate, ownerId, visibility",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      importHistory: "id, importDate, fileFormat, bank, fileName",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+      predictionAccuracy: "id, category, month, recordedAt",
+      loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+      loanPayments: "id, loanId, date, transactionId, isScheduled",
+      subscriptions:
+        "id, name, status, category, nextBillingDate, billingCycle, merchantToken, source",
+      excludedSubscriptions: "id, merchantToken, excludedAt",
+      pairedDevices: "id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt",
+      profiles: "id, name, isDefault, createdAt",
+      activityLog: "id, profileId, action, entityType, timestamp, [profileId+timestamp]",
+      inAppNotifications:
+        "id, type, status, priority, createdAt, snoozedUntil, sourceType, sourceId",
+      budgetRollovers: "id, budgetId, month, [budgetId+month]",
+      gamificationState: "id, eventType, timestamp",
+      merchantRules: "id, merchantToken, category, createdAt",
+      netWorthSnapshots: "id, date, netWorth",
+      properties: "id, name, currency, type, createdAt",
+      eventBudgets: "id, name, status, startDate, endDate",
+      eventBudgetCategories: "id, eventBudgetId, [eventBudgetId+categoryName]",
+      // New tables
+      splitPeople: "id, name, createdAt",
+      expenseSplits: "id, transactionId, personId, settled, createdAt",
+      paycheckPlans: "id, schedule, createdAt",
+      debtScenarios: "++id, name, strategy, createdAt",
     });
   }
 }

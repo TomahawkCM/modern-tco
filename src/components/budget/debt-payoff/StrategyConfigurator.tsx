@@ -52,7 +52,7 @@ export function StrategyConfigurator({
   );
 
   const addOneTimePayment = useCallback(() => {
-    onOneTimePaymentsChange([...oneTimePayments, { month: 1, amount: 0, label: "" }]);
+    onOneTimePaymentsChange([...oneTimePayments, { targetDebtId: "", month: 1, amount: 0, label: "" }]);
   }, [oneTimePayments, onOneTimePaymentsChange]);
 
   const updateOneTimePayment = useCallback(

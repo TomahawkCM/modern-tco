@@ -17,6 +17,7 @@ export interface OverspendingAlert {
   daysElapsed: number;
   daysRemaining: number;
   severity: "warning" | "danger";
+  threshold: number;
 }
 
 /**
@@ -73,6 +74,9 @@ export function detectOverspending(
       // Determine severity
       const severity: "warning" | "danger" = percentOver >= 20 ? "danger" : "warning";
 
+      // Threshold = ratio of budget at which to warn (warning: 80%, danger: 100%)
+      const threshold = severity === "danger" ? 1.0 : 0.8;
+
       alerts.push({
         categoryId: budget.categoryId,
         categoryName: category.name,
@@ -83,6 +87,7 @@ export function detectOverspending(
         daysElapsed,
         daysRemaining,
         severity,
+        threshold,
       });
     }
   }
@@ -146,6 +151,7 @@ export function detectCurrentOverspending(
         daysElapsed,
         daysRemaining,
         severity: "danger",
+        threshold: 1.0,
       });
     }
   }

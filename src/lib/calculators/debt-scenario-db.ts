@@ -51,7 +51,7 @@ export async function recomputeScenarios(loans: Loan[]): Promise<DebtScenario[]>
     const result = calculateSingleStrategy(
       debts,
       scenario.extraMonthlyPayment,
-      scenario.strategy,
+      scenario.strategy as import("./types").DebtStrategy,
       scenario.customOrder,
       scenario.oneTimePayments
     );

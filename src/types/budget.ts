@@ -662,6 +662,10 @@ export interface Subscription {
 
   // Source tracking
   source: SubscriptionSource;
+
+  // Usage tracking (cost-per-use analysis)
+  usageFrequency?: "daily" | "weekly" | "monthly" | "rarely";
+  usageCount?: number;
 }
 
 // Excluded/Dismissed auto-detected subscriptions
@@ -805,4 +809,64 @@ export interface EventBudgetCategory {
   categoryName: string;
   budgeted: number;
   spent: number;
+}
+
+// Expense Splitting Types
+export interface SplitPerson {
+  id: string;
+  name: string;
+  emoji: string;
+  createdAt: Date;
+}
+
+export interface ExpenseSplit {
+  id: string;
+  transactionId: string;
+  personId: string;
+  amount: number;
+  settled: boolean;
+  createdAt: Date;
+  settledDate?: Date;
+  settledMethod?: string;
+}
+
+// Paycheck Planning Types
+export type PaycheckSchedule = "weekly" | "biweekly" | "semimonthly" | "monthly" | "irregular";
+
+export interface PaycheckAllocation {
+  categoryId: string;
+  amount: number;
+}
+
+export interface Paycheck {
+  id: string;
+  label: string;
+  expectedDate: string;
+  expectedAmount: number;
+  currency: string;
+  allocations: PaycheckAllocation[];
+}
+
+export interface PaycheckPlan {
+  id: string;
+  schedule: PaycheckSchedule;
+  paychecks: Paycheck[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Debt Scenario Types (saved what-if comparisons)
+export interface DebtScenario {
+  id: number;
+  name: string;
+  strategy: string;
+  extraMonthlyPayment: number;
+  customOrder?: string[];
+  oneTimePayments: Array<{ targetDebtId: string; amount: number; month: number }>;
+  totalMonths: number;
+  totalInterest: number;
+  totalPaid: number;
+  debtFreeDate: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

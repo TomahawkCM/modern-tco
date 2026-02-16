@@ -67,7 +67,7 @@ export function ScenarioManager({
     <div className="space-y-2">
       <p className="text-xs text-slate-400">{t("compareHint")}</p>
       {scenarios.map((scenario) => {
-        const Icon = strategyIcons[scenario.strategy];
+        const Icon = strategyIcons[scenario.strategy as DebtStrategy];
         const isSelected = selectedIds.has(scenario.id);
         const debtFreeDate = new Date(scenario.debtFreeDate);
 
@@ -84,7 +84,7 @@ export function ScenarioManager({
               onCheckedChange={() => onToggleSelect(scenario.id)}
               className="border-slate-600 data-[state=checked]:border-teal-600 data-[state=checked]:bg-teal-600"
             />
-            <Icon className={cn("h-4 w-4 shrink-0", strategyColors[scenario.strategy])} />
+            <Icon className={cn("h-4 w-4 shrink-0", strategyColors[scenario.strategy as DebtStrategy])} />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-white">{scenario.name}</p>
               <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-slate-400">

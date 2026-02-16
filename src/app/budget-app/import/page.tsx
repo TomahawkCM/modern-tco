@@ -341,9 +341,9 @@ export default function ImportPage() {
       return;
     }
 
-    const formatDetection = activeDetection;
+    const resolvedDetection = activeDetection;
 
-    console.log("[ImportPage] Processing file:", file.name, "Format:", formatDetection.format);
+    console.log("[ImportPage] Processing file:", file.name, "Format:", resolvedDetection.format);
     setIsProcessing(true);
     setError(null);
     setProcessingStage("Validating file format...");
@@ -357,8 +357,8 @@ export default function ImportPage() {
 
     try {
       // Check if format is supported
-      if (!isFormatSupported(formatDetection.format)) {
-        const errorMsg = `Unsupported format: ${getFormatDisplayName(formatDetection.format)}`;
+      if (!isFormatSupported(resolvedDetection.format)) {
+        const errorMsg = `Unsupported format: ${getFormatDisplayName(resolvedDetection.format)}`;
         setError(errorMsg);
         return;
       }
@@ -375,7 +375,7 @@ export default function ImportPage() {
       // ========================================
       // OFX/QFX Processing
       // ========================================
-      if (formatDetection.format === "ofx" || formatDetection.format === "qfx") {
+      if (resolvedDetection.format === "ofx" || resolvedDetection.format === "qfx") {
         console.log("[ImportPage] Processing OFX/QFX file...");
         setProcessingStage("Parsing OFX/QFX file...");
 
@@ -423,7 +423,7 @@ export default function ImportPage() {
       // ========================================
       // CSV Processing
       // ========================================
-      else if (formatDetection.format === "csv") {
+      else if (resolvedDetection.format === "csv") {
         console.log("[ImportPage] Processing CSV file...");
         setProcessingStage("Parsing CSV file...");
 
@@ -609,7 +609,7 @@ export default function ImportPage() {
       // ========================================
       // PDF Bank Statement Processing
       // ========================================
-      else if (formatDetection.format === "pdf") {
+      else if (resolvedDetection.format === "pdf") {
         console.log("[ImportPage] Processing PDF bank statement...");
         setProcessingStage("Extracting transactions from PDF (OCR)...");
 
@@ -738,7 +738,7 @@ export default function ImportPage() {
         );
       } else {
         setError(
-          `Unsupported file format: ${formatDetection.format}. Please use CSV, OFX, QFX, or PDF files.`
+          `Unsupported file format: ${resolvedDetection.format}. Please use CSV, OFX, QFX, or PDF files.`
         );
         return;
       }

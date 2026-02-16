@@ -181,7 +181,7 @@ export default function DebtPayoffPage() {
       const stratResult = calculateSingleStrategy(
         allDebts,
         s.extraMonthlyPayment,
-        s.strategy,
+        s.strategy as DebtStrategy,
         s.customOrder,
         s.oneTimePayments
       );
