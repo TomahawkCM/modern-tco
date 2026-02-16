@@ -25,6 +25,7 @@ import {
   createFamilyGroup,
   deleteFamilyGroup,
   exportAuditLog,
+  exportUsersCSV,
   extendUserTrial,
   forceLogoutUser,
   getAuditLogPage,
@@ -266,7 +267,7 @@ function AdminDashboardContent() {
         </div>
 
         {/* Search */}
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-4">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <Input
@@ -279,6 +280,22 @@ function AdminDashboardContent() {
               className="border-white/10 bg-white/5 pl-10 text-white placeholder:text-slate-500 focus:border-teal-500"
             />
           </div>
+          <Button
+            variant="outline"
+            className="border-white/10 text-white hover:bg-white/5"
+            onClick={async () => {
+              const csv = await exportUsersCSV(searchQuery, userSortField, userSortDir);
+              const blob = new Blob([csv], { type: "text/csv" });
+              const url = URL.createObjectURL(blob);
+              const link = document.createElement("a");
+              link.href = url;
+              link.download = `users-export-${new Date().toISOString().slice(0, 10)}.csv`;
+              link.click();
+              URL.revokeObjectURL(url);
+            }}
+          >
+            Export Users CSV
+          </Button>
         </div>
 
         {/* Bulk Actions */}

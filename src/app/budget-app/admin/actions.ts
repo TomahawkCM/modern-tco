@@ -155,6 +155,59 @@ export async function getAdminUsers() {
   return users;
 }
 
+export async function exportUsersCSV(
+  query = "",
+  sortField: "created_at" | "email" | "last_login" = "created_at",
+  sortDir: "asc" | "desc" = "desc"
+) {
+  const { user } = await requireAdmin();
+  if (!supabaseAdmin) {
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  }
+
+  let request = supabaseAdmin
+    .from("users")
+    .select(
+      "id, email, name, created_at, last_login, trial_start, subscription_status, is_suspended, role"
+    )
+    .order(sortField, { ascending: sortDir === "asc" });
+
+  if (query) {
+    request = request.or(`email.ilike.%${query}%,name.ilike.%${query}%`);
+  }
+
+  const { data: users, error } = await request;
+  if (error) throw new Error(`Database error: ${error.message}`);
+
+  await logAdminAction("admin.users.export", undefined, {
+    actorId: user.id,
+    query,
+    sortField,
+    sortDir,
+    count: users?.length ?? 0,
+  });
+
+  const header =
+    "id,email,name,created_at,last_login,trial_start,subscription_status,is_suspended,role\n";
+  const rows = (users ?? []).map((u: any) =>
+    [
+      u.id,
+      u.email,
+      (u.name ?? "").replace(/"/g, '""'),
+      u.created_at ?? "",
+      u.last_login ?? "",
+      u.trial_start ?? "",
+      u.subscription_status ?? "",
+      u.is_suspended ?? "",
+      u.role ?? "",
+    ]
+      .map((value) => `"${String(value).replace(/"/g, '""')}"`)
+      .join(",")
+  );
+
+  return header + rows.join("\n");
+}
+
 export async function getAuditLog(limit = 50, query = "", startDate?: string, endDate?: string) {
   const { logs } = await getAuditLogPage(1, limit, query, startDate, endDate);
   return logs;
