@@ -332,6 +332,8 @@ function AdminDashboardContent() {
               size="sm"
               className="border-white/10 text-slate-300 hover:bg-white/10"
               onClick={async () => {
+                const ok = confirm(`Apply role "${bulkRole}" to ${selectedUserIds.size} users?`);
+                if (!ok) return;
                 await bulkUpdateUserRole(Array.from(selectedUserIds), bulkRole);
                 const refreshed = await getAdminUsersPage(
                   userPage,
@@ -359,6 +361,10 @@ function AdminDashboardContent() {
               size="sm"
               className="border-amber-500/30 text-amber-400 hover:bg-amber-500/10"
               onClick={async () => {
+                const ok = confirm(
+                  `Extend trial by ${bulkTrialDays} days for ${selectedUserIds.size} users?`
+                );
+                if (!ok) return;
                 await bulkExtendTrial(Array.from(selectedUserIds), bulkTrialDays);
                 const refreshed = await getAdminUsersPage(
                   userPage,
@@ -379,6 +385,8 @@ function AdminDashboardContent() {
               size="sm"
               className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
               onClick={async () => {
+                const ok = confirm(`Suspend ${selectedUserIds.size} users?`);
+                if (!ok) return;
                 await bulkSuspendUsers(Array.from(selectedUserIds));
                 const refreshed = await getAdminUsersPage(
                   userPage,
@@ -399,6 +407,8 @@ function AdminDashboardContent() {
               size="sm"
               className="border-teal-500/30 text-teal-400 hover:bg-teal-500/10"
               onClick={async () => {
+                const ok = confirm(`Reactivate ${selectedUserIds.size} users?`);
+                if (!ok) return;
                 await bulkReactivateUsers(Array.from(selectedUserIds));
                 const refreshed = await getAdminUsersPage(
                   userPage,
@@ -419,6 +429,8 @@ function AdminDashboardContent() {
               size="sm"
               className="border-white/10 text-slate-300 hover:bg-white/10"
               onClick={async () => {
+                const ok = confirm(`Force logout ${selectedUserIds.size} users?`);
+                if (!ok) return;
                 await bulkForceLogout(Array.from(selectedUserIds));
               }}
               disabled={selectedUserIds.size === 0 || adminRole !== "owner"}
@@ -587,7 +599,10 @@ function AdminDashboardContent() {
                         <select
                           value={user.role ?? "member"}
                           onChange={async (e) => {
-                            await updateUserRole(user.id, e.target.value);
+                            const nextRole = e.target.value;
+                            const ok = confirm(`Change role for ${user.email} to "${nextRole}"?`);
+                            if (!ok) return;
+                            await updateUserRole(user.id, nextRole);
                             const refreshed = await getAdminUsersPage(
                               userPage,
                               25,
@@ -612,6 +627,8 @@ function AdminDashboardContent() {
                           size="sm"
                           className="border-amber-500/30 text-amber-400 hover:bg-amber-500/10"
                           onClick={async () => {
+                            const ok = confirm(`Extend trial by 7 days for ${user.email}?`);
+                            if (!ok) return;
                             await extendUserTrial(user.id, 7);
                             const refreshed = await getAdminUsersPage(
                               userPage,
@@ -632,6 +649,8 @@ function AdminDashboardContent() {
                           size="sm"
                           className="border-white/10 text-slate-300 hover:bg-white/10"
                           onClick={async () => {
+                            const ok = confirm(`Force logout ${user.email}?`);
+                            if (!ok) return;
                             await forceLogoutUser(user.id);
                           }}
                           disabled={adminRole !== "owner"}
@@ -644,6 +663,8 @@ function AdminDashboardContent() {
                             size="sm"
                             className="border-teal-500/30 text-teal-400 hover:bg-teal-500/10"
                             onClick={async () => {
+                              const ok = confirm(`Reactivate ${user.email}?`);
+                              if (!ok) return;
                               await reactivateUser(user.id);
                               const refreshed = await getAdminUsersPage(
                                 userPage,
@@ -665,6 +686,8 @@ function AdminDashboardContent() {
                             size="sm"
                             className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
                             onClick={async () => {
+                              const ok = confirm(`Suspend ${user.email}?`);
+                              if (!ok) return;
                               await suspendUser(user.id);
                               const refreshed = await getAdminUsersPage(
                                 userPage,
@@ -817,7 +840,7 @@ function AdminDashboardContent() {
                               size="sm"
                               className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
                               onClick={async () => {
-                                const ok = confirm("Delete this group?");
+                                const ok = confirm(`Delete group "${group.name}" and all members?`);
                                 if (!ok) return;
                                 await deleteFamilyGroup(group.id);
                                 if (selectedFamilyId === group.id) {
@@ -874,7 +897,12 @@ function AdminDashboardContent() {
                           <select
                             value={member.role}
                             onChange={async (e) => {
-                              await updateFamilyMemberRole(member.id, e.target.value);
+                              const nextRole = e.target.value;
+                              const ok = confirm(
+                                `Change role for ${member.user?.email ?? member.user_id} to "${nextRole}"?`
+                              );
+                              if (!ok) return;
+                              await updateFamilyMemberRole(member.id, nextRole);
                               const updated = await getFamilyMembers(member.family_id);
                               setFamilyMembers(updated as any);
                             }}
@@ -894,6 +922,10 @@ function AdminDashboardContent() {
                             size="sm"
                             className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
                             onClick={async () => {
+                              const ok = confirm(
+                                `Remove ${member.user?.email ?? member.user_id} from group?`
+                              );
+                              if (!ok) return;
                               await removeFamilyMember(member.id);
                               const updated = await getFamilyMembers(member.family_id);
                               setFamilyMembers(updated as any);
