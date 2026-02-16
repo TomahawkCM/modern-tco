@@ -30,6 +30,7 @@ import {
   forceLogoutUser,
   getAuditLogPage,
   getAdminUsersPage,
+  getCurrentAdminRole,
   getFamilyGroups,
   getFamilyMembers,
   reactivateUser,
@@ -174,15 +175,19 @@ function AdminDashboardContent() {
   const [userSortDir, setUserSortDir] = useState<"asc" | "desc">("desc");
   const [auditPage, setAuditPage] = useState(1);
   const [auditTotal, setAuditTotal] = useState(0);
+  const [adminRole, setAdminRole] = useState<"owner" | "admin" | "member" | "viewer" | "child">(
+    "admin"
+  );
 
   const loadData = async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const [usersResp, auditResp, groupData] = await Promise.all([
+      const [usersResp, auditResp, groupData, role] = await Promise.all([
         getAdminUsersPage(userPage, 25, userSortField, userSortDir, searchQuery),
         getAuditLogPage(auditPage, 50, auditQuery, auditStartDate, auditEndDate),
         getFamilyGroups(),
+        getCurrentAdminRole(),
       ]);
       setUsers(usersResp.users as any);
       setFilteredUsers(usersResp.users as any);
@@ -190,6 +195,7 @@ function AdminDashboardContent() {
       setAuditLogs(auditResp.logs as any);
       setAuditTotal(auditResp.total);
       setFamilyGroups(groupData as any);
+      setAdminRole(role as any);
     } catch (err: any) {
       setError(err.message || "Failed to load admin data");
     } finally {
@@ -302,12 +308,18 @@ function AdminDashboardContent() {
         <div className="rounded-lg border border-white/10 bg-white/5 p-4">
           <div className="mb-2 text-sm text-slate-400">
             Bulk actions for {selectedUserIds.size} selected users
+            {adminRole !== "owner" && (
+              <span className="ml-2 text-xs text-amber-300">
+                Owner role required for bulk changes
+              </span>
+            )}
           </div>
           <div className="flex flex-wrap gap-3">
             <select
               value={bulkRole}
               onChange={(e) => setBulkRole(e.target.value)}
               className="rounded border border-white/10 bg-slate-900 px-2 py-1 text-sm text-white"
+              disabled={adminRole !== "owner"}
             >
               <option value="owner">owner</option>
               <option value="admin">admin</option>
@@ -331,7 +343,7 @@ function AdminDashboardContent() {
                 setUsers(refreshed.users as any);
                 setFilteredUsers(refreshed.users as any);
               }}
-              disabled={selectedUserIds.size === 0}
+              disabled={selectedUserIds.size === 0 || adminRole !== "owner"}
             >
               Apply Role
             </Button>
@@ -340,6 +352,7 @@ function AdminDashboardContent() {
               value={bulkTrialDays}
               onChange={(e) => setBulkTrialDays(Number(e.target.value))}
               className="w-28 border-white/10 bg-white/5 text-white placeholder:text-slate-500"
+              disabled={adminRole !== "owner"}
             />
             <Button
               variant="outline"
@@ -357,7 +370,7 @@ function AdminDashboardContent() {
                 setUsers(refreshed.users as any);
                 setFilteredUsers(refreshed.users as any);
               }}
-              disabled={selectedUserIds.size === 0}
+              disabled={selectedUserIds.size === 0 || adminRole !== "owner"}
             >
               Extend Trial
             </Button>
@@ -377,7 +390,7 @@ function AdminDashboardContent() {
                 setUsers(refreshed.users as any);
                 setFilteredUsers(refreshed.users as any);
               }}
-              disabled={selectedUserIds.size === 0}
+              disabled={selectedUserIds.size === 0 || adminRole !== "owner"}
             >
               Suspend
             </Button>
@@ -397,7 +410,7 @@ function AdminDashboardContent() {
                 setUsers(refreshed.users as any);
                 setFilteredUsers(refreshed.users as any);
               }}
-              disabled={selectedUserIds.size === 0}
+              disabled={selectedUserIds.size === 0 || adminRole !== "owner"}
             >
               Reactivate
             </Button>
@@ -408,7 +421,7 @@ function AdminDashboardContent() {
               onClick={async () => {
                 await bulkForceLogout(Array.from(selectedUserIds));
               }}
-              disabled={selectedUserIds.size === 0}
+              disabled={selectedUserIds.size === 0 || adminRole !== "owner"}
             >
               Force Logout
             </Button>
@@ -586,6 +599,7 @@ function AdminDashboardContent() {
                             setFilteredUsers(refreshed.users as any);
                           }}
                           className="rounded border border-white/10 bg-slate-900 px-2 py-1 text-xs text-white"
+                          disabled={adminRole !== "owner"}
                         >
                           <option value="owner">owner</option>
                           <option value="admin">admin</option>
@@ -609,6 +623,7 @@ function AdminDashboardContent() {
                             setUsers(refreshed.users as any);
                             setFilteredUsers(refreshed.users as any);
                           }}
+                          disabled={adminRole !== "owner"}
                         >
                           +7d Trial
                         </Button>
@@ -619,6 +634,7 @@ function AdminDashboardContent() {
                           onClick={async () => {
                             await forceLogoutUser(user.id);
                           }}
+                          disabled={adminRole !== "owner"}
                         >
                           Force Logout
                         </Button>
@@ -639,6 +655,7 @@ function AdminDashboardContent() {
                               setUsers(refreshed.users as any);
                               setFilteredUsers(refreshed.users as any);
                             }}
+                            disabled={adminRole !== "owner"}
                           >
                             Reactivate
                           </Button>
@@ -659,6 +676,7 @@ function AdminDashboardContent() {
                               setUsers(refreshed.users as any);
                               setFilteredUsers(refreshed.users as any);
                             }}
+                            disabled={adminRole !== "owner"}
                           >
                             Suspend
                           </Button>
@@ -705,7 +723,12 @@ function AdminDashboardContent() {
               <h2 className="text-xl font-semibold">Family Groups</h2>
               <p className="text-sm text-slate-400">Manage group membership and roles</p>
             </div>
-            <div className="text-sm text-slate-400">{familyGroups.length} groups</div>
+            <div className="text-sm text-slate-400">
+              {familyGroups.length} groups
+              {adminRole !== "owner" && (
+                <span className="ml-2 text-xs text-amber-300">Owner role required to edit</span>
+              )}
+            </div>
           </div>
 
           <div className="mb-4 grid grid-cols-1 gap-3 md:grid-cols-3">
@@ -714,12 +737,14 @@ function AdminDashboardContent() {
               value={newGroupName}
               onChange={(e) => setNewGroupName(e.target.value)}
               className="border-white/10 bg-white/5 text-white placeholder:text-slate-500"
+              disabled={adminRole !== "owner"}
             />
             <Input
               placeholder="Owner user id"
               value={newGroupOwnerId}
               onChange={(e) => setNewGroupOwnerId(e.target.value)}
               className="border-white/10 bg-white/5 text-white placeholder:text-slate-500"
+              disabled={adminRole !== "owner"}
             />
             <Button
               onClick={async () => {
@@ -731,6 +756,7 @@ function AdminDashboardContent() {
                 setFamilyGroups(refreshed as any);
               }}
               className="bg-teal-600 text-white hover:bg-teal-700"
+              disabled={adminRole !== "owner"}
             >
               Create Group
             </Button>
@@ -782,6 +808,7 @@ function AdminDashboardContent() {
                                 const refreshed = await getFamilyGroups();
                                 setFamilyGroups(refreshed as any);
                               }}
+                              disabled={adminRole !== "owner"}
                             >
                               Rename
                             </Button>
@@ -800,6 +827,7 @@ function AdminDashboardContent() {
                                 const refreshed = await getFamilyGroups();
                                 setFamilyGroups(refreshed as any);
                               }}
+                              disabled={adminRole !== "owner"}
                             >
                               Delete
                             </Button>
@@ -851,6 +879,7 @@ function AdminDashboardContent() {
                               setFamilyMembers(updated as any);
                             }}
                             className="rounded border border-white/10 bg-slate-900 px-2 py-1 text-sm text-white"
+                            disabled={adminRole !== "owner"}
                           >
                             <option value="owner">owner</option>
                             <option value="admin">admin</option>
@@ -869,6 +898,7 @@ function AdminDashboardContent() {
                               const updated = await getFamilyMembers(member.family_id);
                               setFamilyMembers(updated as any);
                             }}
+                            disabled={adminRole !== "owner"}
                           >
                             Remove
                           </Button>

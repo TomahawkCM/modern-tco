@@ -155,6 +155,23 @@ export async function getAdminUsers() {
   return users;
 }
 
+export async function getCurrentAdminRole() {
+  const { user } = await requireAdmin();
+  if (!supabaseAdmin) {
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  }
+
+  const { data, error } = await supabaseAdmin
+    .from("users")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  if (error) throw new Error(`Database error: ${error.message}`);
+
+  return data?.role ?? "admin";
+}
+
 export async function exportUsersCSV(
   query = "",
   sortField: "created_at" | "email" | "last_login" = "created_at",
