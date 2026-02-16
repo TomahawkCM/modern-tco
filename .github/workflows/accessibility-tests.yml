@@ -10,6 +10,10 @@ on:
       - "package.json"
       - ".github/workflows/accessibility-tests.yml"
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   accessibility-audit:
     name: Lighthouse CI & Pa11y Accessibility Audit
