@@ -17,6 +17,7 @@
 | 9 | **context7** | `@upstash/context7-mcp` | 2 | Library docs |
 | 10 | **docker** | `docker-mcp` (uvx) | 4 | Container management |
 | 11 | **archon** | HTTP localhost:8051 | 16 | Project/task management |
+| 12 | **openclaw** | `openclaw-mcp` (npx) | 8 | Agent Q&A, messaging, tasks |
 
 ## CLI Browser Automation (agent-browser)
 
@@ -46,6 +47,8 @@ npm run browser:visual-test # Visual regression testing
 | **Project Mgmt** | archon | Tasks, docs, RAG search |
 | **Container Mgmt** | docker | Deploy containers, compose stacks |
 | **E2E Testing** | playwright | Browser automation, visual tests |
+| **Agent Q&A** | openclaw (`openclaw_agent_ask`) | Ask OpenClaw questions, deliver answers to Telegram |
+| **Messaging** | openclaw (`openclaw_message_send`) | Send direct messages to Telegram/WhatsApp/etc. |
 
 ## Tool Overlap Resolution
 
@@ -67,3 +70,34 @@ Two-step workflow for library documentation:
 ```
 
 Auto-trigger when user mentions: "docs for [library]", "how to use [package]", library names (React, Next.js, TypeScript, Tailwind, Supabase, Zod).
+
+## OpenClaw Usage
+
+Two key tools for interacting with OpenClaw:
+
+### `openclaw_agent_ask` — Ask the agent a question
+```json
+{
+  "message": "What are you working on for the budget app?",
+  "deliver": true,
+  "thinking": "medium"
+}
+```
+- `message` (required): The question for the agent
+- `session_id` (optional): Session UUID (default: `c671aea3-bb66-4420-96cf-86077d2a7726`)
+- `deliver` (optional): Send response to Telegram (default: false)
+- `thinking` (optional): off | minimal | low | medium | high
+
+### `openclaw_message_send` — Send a direct message
+```json
+{
+  "channel": "telegram",
+  "target": "8546681904",
+  "message": "Build completed successfully!"
+}
+```
+
+### CLI fallback
+```bash
+openclaw agent --session-id c671aea3-bb66-4420-96cf-86077d2a7726 --message "test" --deliver --channel telegram --reply-to 8546681904 --json
+```

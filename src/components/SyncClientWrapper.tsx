@@ -1,15 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SyncBanner from "./sync/SyncBanner";
 import SyncDetailsPanel from "./sync/SyncDetailsPanel";
 import ConflictModal from "./sync/ConflictModal";
 import CommandPalette from "./CommandPalette";
 import OnboardingModal from "./onboarding/OnboardingModal";
-import { useLANSync } from "@/contexts/LANSyncContext";
+import LANSyncContext from "@/contexts/LANSyncContext";
 import { onboardingStarted, onboardingCompleted } from "@/lib/analytics/events";
 
 export default function SyncClientWrapper() {
-  const lan = useLANSync();
+  // Use context directly instead of useLANSync() to avoid throwing when
+  // LANSyncProvider is not in the tree (e.g. non-budget-app pages).
+  const lan = useContext(LANSyncContext);
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [onboardingOpen, setOnboardingOpen] = useState(false);
   const [conflict, setConflict] = useState<any>(null);

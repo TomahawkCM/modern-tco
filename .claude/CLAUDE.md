@@ -83,6 +83,7 @@ Dual-app monorepo:
 | docker | Container management |
 | archon | Project/task management (ID: `9c56f01c-759a-42b1-bad4-06b71f2c4db9`) |
 | vercel | Vercel deployments & config — use `vercel` CLI via Bash |
+| openclaw | OpenClaw agent & messaging — `openclaw_agent_ask` (ask questions, optionally deliver to Telegram), `openclaw_message_send` (direct channel messages) |
 
 ## Detailed Docs
 

@@ -8,11 +8,12 @@
 
 import { test, expect, Page } from "@playwright/test";
 
-// Skip all tests in this file until they're updated
-test.describe.configure({ mode: "skip" });
+// Skip all tests in this file until they're updated for the current UI
+test.skip();
 
 // Test configuration
-const BASE_URL = process.env.PLAYWRIGHT_TEST_URL || "http://localhost:3000";
+// Use Playwright's baseURL from config (relative URLs resolve automatically)
+const BASE_URL = "";
 
 // Helper functions
 async function login(page: Page, email: string, password: string) {
