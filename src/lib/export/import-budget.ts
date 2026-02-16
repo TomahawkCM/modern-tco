@@ -52,12 +52,12 @@ async function deriveKey(password: string, salt: Uint8Array): Promise<CryptoKey>
     "deriveKey",
   ]);
 
-  // Derive AES-GCM key — use slice to get an owned ArrayBuffer (avoids
-  // shared-buffer issues in Node.js test environments)
+  // Derive AES-GCM key — Uint8Array.from() creates a new Uint8Array<ArrayBuffer>
+  // which satisfies both TypeScript's BufferSource type and Node.js Web Crypto API
   return crypto.subtle.deriveKey(
     {
       name: "PBKDF2",
-      salt: new Uint8Array(salt).buffer as ArrayBuffer,
+      salt: Uint8Array.from(salt),
       iterations: PBKDF2_ITERATIONS,
       hash: "SHA-256",
     },
