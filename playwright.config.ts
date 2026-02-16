@@ -16,7 +16,7 @@ export default defineConfig({
     baseURL: process.env.BASE_URL || "http://localhost:3000",
     trace: "on-first-retry",
     screenshot: "only-on-failure",
-    navigationTimeout: 30000, // 30 second navigation timeout
+    navigationTimeout: 60000, // 60 second navigation timeout
     actionTimeout: 15000, // 15 second action timeout
   },
 

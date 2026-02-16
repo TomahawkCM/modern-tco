@@ -101,8 +101,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
       aria-label="Main sidebar"
       className={cn(
         "relative flex h-full flex-col border-e border-white/10 bg-slate-950/80 backdrop-blur-xl transition-all duration-200",
-        !isMobile && "hidden md:flex md:w-18 lg:w-60",
-        !isMobile && isManuallyCollapsed && !isSeniorsMode && "lg:w-18",
+        !isMobile && `hidden md:flex md:w-18 ${isCollapsed ? "lg:w-18" : "lg:w-60"}`,
         isMobile && "w-full",
         className
       )}
