@@ -28,7 +28,7 @@ interface PerformanceTestResult {
  * Run comprehensive performance tests on question bank system
  */
 export function runPerformanceTests(): PerformanceTestResult {
-  console.log("🚀 Running TCO Question Bank Performance Tests...");
+  console.warn("🚀 Running TCO Question Bank Performance Tests...");
 
   // Test current question bank performance
   const currentMetrics = testCurrentPerformance();
