@@ -24,7 +24,9 @@ async function requireAdmin() {
         },
         setAll(cookiesToSet) {
           try {
-            cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            );
           } catch {
             // Server Component context - ignore
           }
@@ -51,7 +53,11 @@ async function requireAdmin() {
   return { user, supabase };
 }
 
-async function logAdminAction(action: string, targetUserId?: string, metadata: Record<string, any> = {}) {
+async function logAdminAction(
+  action: string,
+  targetUserId?: string,
+  metadata: Record<string, any> = {}
+) {
   if (!supabaseAdmin) return;
   try {
     await supabaseAdmin.from("audit_log").insert({
@@ -81,25 +87,41 @@ function applyAuditFilters(request: any, query?: string, startDate?: string, end
   return filtered;
 }
 
-export async function getAdminUsers() {
-  console.log("[getAdminUsers] Starting request");
+export async function getAdminUsersPage(
+  page = 1,
+  pageSize = 25,
+  sortField: "created_at" | "email" | "last_login" = "created_at",
+  sortDir: "asc" | "desc" = "desc",
+  query = ""
+) {
+  console.log("[getAdminUsersPage] Starting request");
   try {
     const { user } = await requireAdmin();
 
     if (!supabaseAdmin) {
-      console.error("[getAdminUsers] Service Role Key missing");
+      console.error("[getAdminUsersPage] Service Role Key missing");
       throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
     }
 
-    const { data: users, error: dbError } = await supabaseAdmin
+    let request = supabaseAdmin
       .from("users")
       .select(
-        "id, email, name, created_at, last_login, trial_start, subscription_status, is_suspended, role"
+        "id, email, name, created_at, last_login, trial_start, subscription_status, is_suspended, role",
+        { count: "exact" }
       )
-      .order("created_at", { ascending: false });
+      .order(sortField, { ascending: sortDir === "asc" });
+
+    if (query) {
+      request = request.or(`email.ilike.%${query}%,name.ilike.%${query}%`);
+    }
+
+    const from = (page - 1) * pageSize;
+    const to = from + pageSize - 1;
+
+    const { data: users, error: dbError, count } = await request.range(from, to);
 
     if (dbError) {
-      console.error("[getAdminUsers] DB Error:", dbError);
+      console.error("[getAdminUsersPage] DB Error:", dbError);
       throw new Error(`Database error: ${dbError.message}`);
     }
 
@@ -112,33 +134,54 @@ export async function getAdminUsers() {
       };
     });
 
-    await logAdminAction("admin.users.view", undefined, { actorId: user.id });
+    await logAdminAction("admin.users.view", undefined, {
+      actorId: user.id,
+      page,
+      pageSize,
+      sortField,
+      sortDir,
+      query,
+    });
 
-    return processedUsers;
+    return { users: processedUsers, total: count ?? 0 };
   } catch (err: any) {
-    console.error("[getAdminUsers] Fail:", err);
-    throw err; // Re-throw to be handled by the UI
+    console.error("[getAdminUsersPage] Fail:", err);
+    throw err;
   }
 }
 
-export async function getAuditLog(
-  limit = 50,
+export async function getAdminUsers() {
+  const { users } = await getAdminUsersPage(1, 100, "created_at", "desc", "");
+  return users;
+}
+
+export async function getAuditLog(limit = 50, query = "", startDate?: string, endDate?: string) {
+  const { logs } = await getAuditLogPage(1, limit, query, startDate, endDate);
+  return logs;
+}
+
+export async function getAuditLogPage(
+  page = 1,
+  pageSize = 50,
   query = "",
   startDate?: string,
   endDate?: string
 ) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   let request = supabaseAdmin
     .from("audit_log")
-    .select("id, actor_id, action, target_user_id, metadata, created_at")
-    .order("created_at", { ascending: false })
-    .limit(limit);
+    .select("id, actor_id, action, target_user_id, metadata, created_at", { count: "exact" })
+    .order("created_at", { ascending: false });
 
   request = applyAuditFilters(request, query, startDate, endDate);
 
-  const { data: logs, error } = await request;
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  const { data: logs, error, count } = await request.range(from, to);
 
   if (error) {
     throw new Error(`Database error: ${error.message}`);
@@ -146,7 +189,8 @@ export async function getAuditLog(
 
   await logAdminAction("admin.audit.view", undefined, {
     actorId: user.id,
-    limit,
+    page,
+    pageSize,
     query,
     startDate,
     endDate,
@@ -156,7 +200,7 @@ export async function getAuditLog(
     new Set([...(logs ?? []).map((l) => l.actor_id), ...(logs ?? []).map((l) => l.target_user_id)])
   ).filter(Boolean) as string[];
 
-  if (userIds.length === 0) return logs ?? [];
+  if (userIds.length === 0) return { logs: logs ?? [], total: count ?? 0 };
 
   const { data: userRows } = await supabaseAdmin
     .from("users")
@@ -165,11 +209,14 @@ export async function getAuditLog(
 
   const userMap = new Map((userRows ?? []).map((u) => [u.id, u]));
 
-  return (logs ?? []).map((log) => ({
-    ...log,
-    actor: log.actor_id ? userMap.get(log.actor_id) : null,
-    target: log.target_user_id ? userMap.get(log.target_user_id) : null,
-  }));
+  return {
+    logs: (logs ?? []).map((log) => ({
+      ...log,
+      actor: log.actor_id ? userMap.get(log.actor_id) : null,
+      target: log.target_user_id ? userMap.get(log.target_user_id) : null,
+    })),
+    total: count ?? 0,
+  };
 }
 
 export async function exportAuditLog(
@@ -179,7 +226,8 @@ export async function exportAuditLog(
   format: "csv" | "json" = "csv"
 ) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   let request = supabaseAdmin
     .from("audit_log")
@@ -215,7 +263,8 @@ export async function exportAuditLog(
 
 export async function getFamilyGroups() {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   const { data: groups, error } = await supabaseAdmin
     .from("family_groups")
@@ -242,7 +291,8 @@ export async function getFamilyGroups() {
 
 export async function createFamilyGroup(name: string, ownerId: string) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   const { data: group, error } = await supabaseAdmin
     .from("family_groups")
@@ -256,14 +306,19 @@ export async function createFamilyGroup(name: string, ownerId: string) {
     .from("family_members")
     .insert({ family_id: group.id, user_id: ownerId, role: "owner", can_see_all_accounts: true });
 
-  await logAdminAction("admin.family.create", ownerId, { actorId: user.id, familyId: group.id, name });
+  await logAdminAction("admin.family.create", ownerId, {
+    actorId: user.id,
+    familyId: group.id,
+    name,
+  });
 
   return group;
 }
 
 export async function renameFamilyGroup(familyId: string, name: string) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   const { error } = await supabaseAdmin.from("family_groups").update({ name }).eq("id", familyId);
   if (error) throw new Error(`Database error: ${error.message}`);
@@ -275,7 +330,8 @@ export async function renameFamilyGroup(familyId: string, name: string) {
 
 export async function deleteFamilyGroup(familyId: string) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   const { error } = await supabaseAdmin.from("family_groups").delete().eq("id", familyId);
   if (error) throw new Error(`Database error: ${error.message}`);
@@ -287,16 +343,21 @@ export async function deleteFamilyGroup(familyId: string) {
 
 export async function getFamilyMembers(familyId: string) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   const { data: members, error } = await supabaseAdmin
     .from("family_members")
-    .select("id, family_id, user_id, role, permissions, can_see_all_accounts, spending_limit, created_at")
+    .select(
+      "id, family_id, user_id, role, permissions, can_see_all_accounts, spending_limit, created_at"
+    )
     .eq("family_id", familyId);
 
   if (error) throw new Error(`Database error: ${error.message}`);
 
-  const userIds = Array.from(new Set((members ?? []).map((m) => m.user_id))).filter(Boolean) as string[];
+  const userIds = Array.from(new Set((members ?? []).map((m) => m.user_id))).filter(
+    Boolean
+  ) as string[];
   const { data: userRows } = userIds.length
     ? await supabaseAdmin.from("users").select("id, email, name").in("id", userIds)
     : { data: [] };
@@ -313,23 +374,26 @@ export async function getFamilyMembers(familyId: string) {
 
 export async function updateFamilyMemberRole(memberId: string, role: string) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { error } = await supabaseAdmin
-    .from("family_members")
-    .update({ role })
-    .eq("id", memberId);
+  const { error } = await supabaseAdmin.from("family_members").update({ role }).eq("id", memberId);
 
   if (error) throw new Error(`Database error: ${error.message}`);
 
-  await logAdminAction("admin.family.member.role.update", undefined, { actorId: user.id, memberId, role });
+  await logAdminAction("admin.family.member.role.update", undefined, {
+    actorId: user.id,
+    memberId,
+    role,
+  });
 
   return { ok: true };
 }
 
 export async function removeFamilyMember(memberId: string) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   const { error } = await supabaseAdmin.from("family_members").delete().eq("id", memberId);
   if (error) throw new Error(`Database error: ${error.message}`);
@@ -341,7 +405,8 @@ export async function removeFamilyMember(memberId: string) {
 
 export async function updateUserRole(userId: string, role: string) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   const { error } = await supabaseAdmin.from("users").update({ role }).eq("id", userId);
   if (error) throw new Error(`Database error: ${error.message}`);
@@ -353,9 +418,13 @@ export async function updateUserRole(userId: string, role: string) {
 
 export async function suspendUser(userId: string) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { error } = await supabaseAdmin.from("users").update({ is_suspended: true }).eq("id", userId);
+  const { error } = await supabaseAdmin
+    .from("users")
+    .update({ is_suspended: true })
+    .eq("id", userId);
   if (error) throw new Error(`Database error: ${error.message}`);
 
   await logAdminAction("admin.user.suspend", userId, { actorId: user.id });
@@ -365,9 +434,13 @@ export async function suspendUser(userId: string) {
 
 export async function reactivateUser(userId: string) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { error } = await supabaseAdmin.from("users").update({ is_suspended: false }).eq("id", userId);
+  const { error } = await supabaseAdmin
+    .from("users")
+    .update({ is_suspended: false })
+    .eq("id", userId);
   if (error) throw new Error(`Database error: ${error.message}`);
 
   await logAdminAction("admin.user.reactivate", userId, { actorId: user.id });
@@ -377,7 +450,8 @@ export async function reactivateUser(userId: string) {
 
 export async function extendUserTrial(userId: string, days: number) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   const { data: current, error: currentErr } = await supabaseAdmin
     .from("users")
@@ -404,7 +478,8 @@ export async function extendUserTrial(userId: string, days: number) {
 
 export async function forceLogoutUser(userId: string) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   // @ts-ignore - admin API typing may vary by supabase-js version
   const { error } = await supabaseAdmin.auth.admin.signOut(userId);
@@ -417,49 +492,69 @@ export async function forceLogoutUser(userId: string) {
 
 export async function bulkUpdateUserRole(userIds: string[], role: string) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   if (userIds.length === 0) return { ok: true };
 
   const { error } = await supabaseAdmin.from("users").update({ role }).in("id", userIds);
   if (error) throw new Error(`Database error: ${error.message}`);
 
-  await logAdminAction("admin.user.role.bulk", undefined, { actorId: user.id, role, count: userIds.length });
+  await logAdminAction("admin.user.role.bulk", undefined, {
+    actorId: user.id,
+    role,
+    count: userIds.length,
+  });
 
   return { ok: true };
 }
 
 export async function bulkSuspendUsers(userIds: string[]) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   if (userIds.length === 0) return { ok: true };
 
-  const { error } = await supabaseAdmin.from("users").update({ is_suspended: true }).in("id", userIds);
+  const { error } = await supabaseAdmin
+    .from("users")
+    .update({ is_suspended: true })
+    .in("id", userIds);
   if (error) throw new Error(`Database error: ${error.message}`);
 
-  await logAdminAction("admin.user.suspend.bulk", undefined, { actorId: user.id, count: userIds.length });
+  await logAdminAction("admin.user.suspend.bulk", undefined, {
+    actorId: user.id,
+    count: userIds.length,
+  });
 
   return { ok: true };
 }
 
 export async function bulkReactivateUsers(userIds: string[]) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   if (userIds.length === 0) return { ok: true };
 
-  const { error } = await supabaseAdmin.from("users").update({ is_suspended: false }).in("id", userIds);
+  const { error } = await supabaseAdmin
+    .from("users")
+    .update({ is_suspended: false })
+    .in("id", userIds);
   if (error) throw new Error(`Database error: ${error.message}`);
 
-  await logAdminAction("admin.user.reactivate.bulk", undefined, { actorId: user.id, count: userIds.length });
+  await logAdminAction("admin.user.reactivate.bulk", undefined, {
+    actorId: user.id,
+    count: userIds.length,
+  });
 
   return { ok: true };
 }
 
 export async function bulkExtendTrial(userIds: string[], days: number) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   if (userIds.length === 0) return { ok: true };
 
@@ -481,14 +576,19 @@ export async function bulkExtendTrial(userIds: string[], days: number) {
     if (error) throw new Error(`Database error: ${error.message}`);
   }
 
-  await logAdminAction("admin.user.trial.bulk", undefined, { actorId: user.id, days, count: userIds.length });
+  await logAdminAction("admin.user.trial.bulk", undefined, {
+    actorId: user.id,
+    days,
+    count: userIds.length,
+  });
 
   return { ok: true };
 }
 
 export async function bulkForceLogout(userIds: string[]) {
   const { user } = await requireAdmin();
-  if (!supabaseAdmin) throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
+  if (!supabaseAdmin)
+    throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
   for (const id of userIds) {
     // @ts-ignore
@@ -496,7 +596,10 @@ export async function bulkForceLogout(userIds: string[]) {
     if (error) throw new Error(`Auth error: ${error.message}`);
   }
 
-  await logAdminAction("admin.user.force_logout.bulk", undefined, { actorId: user.id, count: userIds.length });
+  await logAdminAction("admin.user.force_logout.bulk", undefined, {
+    actorId: user.id,
+    count: userIds.length,
+  });
 
   return { ok: true };
 }
