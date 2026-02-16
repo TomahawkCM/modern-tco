@@ -84,7 +84,11 @@ jobs:
           }
           EOF
 
-          lhci autorun
+          # Use explicit collect+assert instead of autorun to avoid
+          # staticDistDir auto-detection (server is already running)
+          lhci collect
+          lhci assert
+          lhci upload || true
 
       - name: Run Pa11y accessibility tests
         run: |
