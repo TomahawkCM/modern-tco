@@ -86,9 +86,9 @@ jobs:
 
           # Use explicit collect+assert instead of autorun to avoid
           # staticDistDir auto-detection (server is already running)
-          lhci collect
-          lhci assert
-          lhci upload || true
+          lhci collect --config=./lighthouserc.json
+          lhci assert --config=./lighthouserc.json
+          lhci upload --config=./lighthouserc.json || true
 
       - name: Run Pa11y accessibility tests
         run: |
