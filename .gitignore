@@ -84,3 +84,7 @@ firebase-debug.log
 
 # Translation cache
 scripts/.translation-cache.json
+
+# Playwright test artifacts
+playwright-report/
+test-results/

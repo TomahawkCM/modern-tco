@@ -150,7 +150,7 @@ const nextConfig = {
               "img-src 'self' data: blob: https://i.ytimg.com https://img.youtube.com https://*.supabase.co",
               "font-src 'self' data: https://fonts.gstatic.com",
               "connect-src 'self' data: blob: https://*.supabase.co https://app.posthog.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com wss://*.supabase.co https://vercel.live https://*.vercel.live wss://ws-us3.pusher.com",
-              "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
+              "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://vercel.live https://*.vercel.live",
               "media-src 'self' https://www.youtube.com",
               "object-src 'none'",
               "base-uri 'self'",
