@@ -59,43 +59,70 @@ let cachedFuse: Fuse<SearchableTransaction> | null = null;
 let cachedTransactions: Transaction[] = [];
 let cachedCategories: Category[] = [];
 let cachedAccounts: { id: string; name: string }[] = [];
+let cachedLocale: string = "en-US";
 
 /**
- * Prepare transaction for search by flattening related data
+ * Normalize text by stripping diacritics / accent marks.
+ * This allows searching "cafe" to match "café", "nino" to match "niño", etc.
+ */
+export function normalizeText(text: string): string {
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+/**
+ * Prepare transaction for search by flattening related data.
+ * All text fields are normalized (diacritics stripped) so that Fuse.js indexes
+ * the normalized form, allowing accent-insensitive matching.
  */
 function prepareForSearch(
   transaction: Transaction,
   categoryMap: Map<string, string>,
-  accountMap: Map<string, string>
+  accountMap: Map<string, string>,
+  locale: string = "en-US"
 ): SearchableTransaction {
   const categoryName = transaction.category
     ? categoryMap.get(transaction.category) || transaction.category
     : "Uncategorized";
   const accountName = accountMap.get(transaction.accountId) || "Unknown Account";
-  const amountFormatted = `$${Math.abs(transaction.amount).toFixed(2)}`;
-  const dateFormatted = new Date(transaction.date).toLocaleDateString("en-US", {
+
+  // Locale-aware currency formatting instead of hardcoded "$"
+  const amountFormatted = new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: getCurrencyForLocale(locale),
+  }).format(Math.abs(transaction.amount));
+
+  const dateFormatted = new Date(transaction.date).toLocaleDateString(locale, {
     year: "numeric",
     month: "short",
     day: "numeric",
   });
 
-  // Combine all searchable text for broad queries
-  const allText = [
-    transaction.description,
-    transaction.merchant,
-    transaction.notes,
-    transaction.originalDescription,
-    categoryName,
-    accountName,
-    transaction.tags?.join(" "),
-  ]
-    .filter(Boolean)
-    .join(" ");
+  // Combine all searchable text for broad queries, normalized for diacritics
+  const allText = normalizeText(
+    [
+      transaction.description,
+      transaction.merchant,
+      transaction.notes,
+      transaction.originalDescription,
+      categoryName,
+      accountName,
+      transaction.tags?.join(" "),
+    ]
+      .filter(Boolean)
+      .join(" ")
+  );
 
   return {
     ...transaction,
-    categoryName,
-    accountName,
+    // Normalize text fields for accent-insensitive search
+    description: normalizeText(transaction.description),
+    merchant: transaction.merchant ? normalizeText(transaction.merchant) : transaction.merchant,
+    notes: transaction.notes ? normalizeText(transaction.notes) : transaction.notes,
+    originalDescription: transaction.originalDescription
+      ? normalizeText(transaction.originalDescription)
+      : transaction.originalDescription,
+    categoryName: normalizeText(categoryName),
+    accountName: normalizeText(accountName),
     amountFormatted,
     dateFormatted,
     allText,
@@ -103,31 +130,94 @@ function prepareForSearch(
 }
 
 /**
+ * Map a locale to its most common currency code.
+ * Falls back to "USD" for unknown locales.
+ */
+function getCurrencyForLocale(locale: string): string {
+  const currencyMap: Record<string, string> = {
+    "en-US": "USD",
+    "en-GB": "GBP",
+    "en-CA": "CAD",
+    "en-AU": "AUD",
+    "de-DE": "EUR",
+    "fr-FR": "EUR",
+    "es-ES": "EUR",
+    "it-IT": "EUR",
+    "nl-NL": "EUR",
+    "pt-BR": "BRL",
+    "ja-JP": "JPY",
+    "zh-CN": "CNY",
+    "ko-KR": "KRW",
+    "sv-SE": "SEK",
+    "nb-NO": "NOK",
+    "da-DK": "DKK",
+    "pl-PL": "PLN",
+    "cs-CZ": "CZK",
+    "hu-HU": "HUF",
+    "ro-RO": "RON",
+    "bg-BG": "BGN",
+    "hr-HR": "EUR",
+    "tr-TR": "TRY",
+    "ru-RU": "RUB",
+    "uk-UA": "UAH",
+    "th-TH": "THB",
+    "vi-VN": "VND",
+    "id-ID": "IDR",
+    "ms-MY": "MYR",
+    "hi-IN": "INR",
+    "ar-SA": "SAR",
+    "he-IL": "ILS",
+    "zh-TW": "TWD",
+    "en-NZ": "NZD",
+    "en-IE": "EUR",
+    "fi-FI": "EUR",
+    "el-GR": "EUR",
+    "sk-SK": "EUR",
+    "sl-SI": "EUR",
+    "et-EE": "EUR",
+    "lv-LV": "EUR",
+    "lt-LT": "EUR",
+  };
+
+  // Try exact match first, then language prefix
+  return currencyMap[locale] || currencyMap[locale.split("-")[0]] || "USD";
+}
+
+/**
  * Initialize or update the search index
  * Call this when transactions, categories, or accounts change
+ *
+ * @param locale - BCP 47 locale tag (e.g. "en-US", "de-DE") used for
+ *   date and currency formatting in searchable text. Defaults to "en-US".
  */
 export function initializeSearchIndex(
   transactions: Transaction[],
   categories: Category[] = [],
-  accounts: { id: string; name: string }[] = []
+  accounts: { id: string; name: string }[] = [],
+  locale: string = "en-US"
 ): void {
   // Skip if data hasn't changed
   if (
     transactions === cachedTransactions &&
     categories === cachedCategories &&
     accounts === cachedAccounts &&
+    locale === cachedLocale &&
     cachedFuse
   ) {
     return;
   }
 
-  // Build lookup maps
-  const categoryMap = new Map(categories.map((c) => [c.name, c.name]));
+  // Build lookup maps (support both id→name and name→name lookups)
+  const categoryMap = new Map<string, string>();
+  for (const c of categories) {
+    categoryMap.set(c.id, c.name);
+    categoryMap.set(c.name, c.name);
+  }
   const accountMap = new Map(accounts.map((a) => [a.id, a.name]));
 
-  // Prepare transactions for search
+  // Prepare transactions for search (text fields normalized for diacritics)
   const searchableTransactions = transactions.map((tx) =>
-    prepareForSearch(tx, categoryMap, accountMap)
+    prepareForSearch(tx, categoryMap, accountMap, locale)
   );
 
   // Create new Fuse instance
@@ -135,6 +225,7 @@ export function initializeSearchIndex(
   cachedTransactions = transactions;
   cachedCategories = categories;
   cachedAccounts = accounts;
+  cachedLocale = locale;
 }
 
 /**
@@ -205,7 +296,118 @@ function applyStructuredFilters(
     );
   }
 
+  // Recurring filter (is:recurring)
+  if (query.filters.isRecurring !== undefined) {
+    filtered = filtered.filter((tx) => tx.isRecurring === query.filters.isRecurring);
+  }
+
+  // Split filter (is:split)
+  if (query.filters.isSplit !== undefined) {
+    filtered = filtered.filter((tx) => tx.isSplit === query.filters.isSplit);
+  }
+
+  // Negated filters (exclude matching results)
+  if (query.filters.negated) {
+    const neg = query.filters.negated;
+    if (neg.category) {
+      const catLower = neg.category.toLowerCase();
+      filtered = filtered.filter(
+        (tx) =>
+          !tx.categoryName.toLowerCase().includes(catLower) &&
+          !tx.category?.toLowerCase().includes(catLower)
+      );
+    }
+    if (neg.merchant) {
+      const merchLower = neg.merchant.toLowerCase();
+      filtered = filtered.filter(
+        (tx) =>
+          !tx.merchant?.toLowerCase().includes(merchLower) &&
+          !tx.description.toLowerCase().includes(merchLower)
+      );
+    }
+    if (neg.tag) {
+      const tagLower = neg.tag.toLowerCase();
+      filtered = filtered.filter(
+        (tx) => !tx.tags?.some((t) => t.toLowerCase().includes(tagLower))
+      );
+    }
+    if (neg.type) {
+      if (neg.type === "income") {
+        filtered = filtered.filter((tx) => tx.amount <= 0);
+      } else if (neg.type === "expense") {
+        filtered = filtered.filter((tx) => tx.amount >= 0);
+      }
+    }
+    if (neg.account) {
+      const acctLower = neg.account.toLowerCase();
+      filtered = filtered.filter((tx) => !tx.accountName.toLowerCase().includes(acctLower));
+    }
+  }
+
   return filtered;
+}
+
+/**
+ * Search using pre-parsed filters (from NL parser or external query)
+ * Applies structured filters, then fuzzy-searches any remaining text
+ */
+export function searchTransactionsWithFilters(
+  parsedQuery: ParsedQuery,
+  options: {
+    limit?: number;
+    sortBy?: "relevance" | "date" | "amount";
+    sortDirection?: "asc" | "desc";
+  } = {}
+): SearchResult[] {
+  const { limit = 50, sortBy = "relevance", sortDirection = "desc" } = options;
+
+  if (!cachedFuse) {
+    console.warn("[TransactionSearch] Index not initialized. Call initializeSearchIndex first.");
+    return [];
+  }
+
+  if (parsedQuery.hasStructuredFilters) {
+    const categoryMap = new Map<string, string>();
+    for (const c of cachedCategories) {
+      categoryMap.set(c.id, c.name);
+      categoryMap.set(c.name, c.name);
+    }
+    const accountMap = new Map(cachedAccounts.map((a) => [a.id, a.name]));
+
+    const searchableTransactions = cachedTransactions.map((tx) =>
+      prepareForSearch(tx, categoryMap, accountMap, cachedLocale)
+    );
+
+    const filtered = applyStructuredFilters(searchableTransactions, parsedQuery);
+
+    if (parsedQuery.textQuery.trim()) {
+      const tempFuse = new Fuse(filtered, FUSE_OPTIONS);
+      // Normalize query to match diacritics-stripped indexed text
+      const fuseResults = tempFuse.search(normalizeText(parsedQuery.textQuery));
+      const results = fuseResults.map(transformFuseResult);
+      return sortResults(results, sortBy, sortDirection).slice(0, limit);
+    }
+
+    const results: SearchResult[] = filtered.map((item) => ({
+      item: cachedTransactions.find((tx) => tx.id === item.id)!,
+      score: 1,
+    }));
+    return sortResults(results, "date", "desc").slice(0, limit);
+  }
+
+  // No structured filters — fall back to pure fuzzy search
+  if (!parsedQuery.textQuery.trim()) {
+    const allResults: SearchResult[] = cachedTransactions.map((item) => ({
+      item,
+      score: 1,
+    }));
+    return sortResults(allResults, sortBy, sortDirection).slice(0, limit);
+  }
+
+  // Normalize query to match diacritics-stripped indexed text
+  const fuseResults = cachedFuse.search(normalizeText(parsedQuery.textQuery));
+  const results = fuseResults.map(transformFuseResult);
+  return sortResults(results, sortBy, sortDirection).slice(0, limit);
 }
 
 /**
@@ -241,11 +443,15 @@ export function searchTransactions(
 
   // If we have structured filters, apply them first
   if (parsedQuery.hasStructuredFilters) {
-    const categoryMap = new Map(cachedCategories.map((c) => [c.name, c.name]));
+    const categoryMap = new Map<string, string>();
+    for (const c of cachedCategories) {
+      categoryMap.set(c.id, c.name);
+      categoryMap.set(c.name, c.name);
+    }
     const accountMap = new Map(cachedAccounts.map((a) => [a.id, a.name]));
 
     const searchableTransactions = cachedTransactions.map((tx) =>
-      prepareForSearch(tx, categoryMap, accountMap)
+      prepareForSearch(tx, categoryMap, accountMap, cachedLocale)
     );
 
     const filtered = applyStructuredFilters(searchableTransactions, parsedQuery);
@@ -253,7 +459,8 @@ export function searchTransactions(
     // If there's remaining text, do fuzzy search on filtered results
     if (parsedQuery.textQuery.trim()) {
       const tempFuse = new Fuse(filtered, FUSE_OPTIONS);
-      const fuseResults = tempFuse.search(parsedQuery.textQuery);
+      // Normalize query to match diacritics-stripped indexed text
+      const fuseResults = tempFuse.search(normalizeText(parsedQuery.textQuery));
       const results = fuseResults.map(transformFuseResult);
       return sortResults(results, sortBy, sortDirection).slice(0, limit);
     }
@@ -266,8 +473,8 @@ export function searchTransactions(
     return sortResults(results, "date", "desc").slice(0, limit);
   }
 
-  // Pure fuzzy search
-  const fuseResults = cachedFuse.search(query);
+  // Pure fuzzy search — normalize query to match diacritics-stripped indexed text
+  const fuseResults = cachedFuse.search(normalizeText(query));
   const results = fuseResults.map(transformFuseResult);
   return sortResults(results, sortBy, sortDirection).slice(0, limit);
 }
@@ -336,7 +543,7 @@ export function getSearchSuggestions(partialQuery: string, limit: number = 5): s
     return [];
   }
 
-  const results = cachedFuse.search(partialQuery, { limit: limit * 2 });
+  const results = cachedFuse.search(normalizeText(partialQuery), { limit: limit * 2 });
   const suggestions = new Set<string>();
 
   for (const result of results) {

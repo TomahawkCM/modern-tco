@@ -150,6 +150,16 @@ export function TransactionSearchBar({
           e.preventDefault();
           setSelectedIndex((prev) => Math.max(prev - 1, -1));
           break;
+        case "Tab":
+          // Tab-to-complete: accept the selected or first suggestion
+          if (showDropdown && suggestions.length > 0) {
+            e.preventDefault();
+            const idx = selectedIndex >= 0 ? selectedIndex : 0;
+            if (idx < suggestions.length) {
+              selectSuggestion(suggestions[idx]);
+            }
+          }
+          break;
         case "Enter":
           e.preventDefault();
           if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
@@ -233,6 +243,11 @@ export function TransactionSearchBar({
   const showRecent = !value && recentSearches.length > 0;
   const showSaved = !value && savedFilters.length > 0;
   const showAnything = showSuggestions || showRecent || showSaved;
+  const isDropdownVisible = showDropdown && showAnything;
+
+  // Generate active descendant ID for ARIA
+  const activeDescendantId =
+    selectedIndex >= 0 ? `search-suggestion-${selectedIndex}` : undefined;
 
   return (
     <div className={cn("relative", className)}>
@@ -242,6 +257,12 @@ export function TransactionSearchBar({
         <input
           ref={inputRef}
           type="text"
+          role="combobox"
+          aria-expanded={isDropdownVisible}
+          aria-haspopup="listbox"
+          aria-controls="search-suggestions-listbox"
+          aria-activedescendant={activeDescendantId}
+          aria-autocomplete="list"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => {
@@ -293,21 +314,36 @@ export function TransactionSearchBar({
         </div>
       </div>
 
+      {/* Live region for screen reader announcements */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {resultCount !== undefined && value
+          ? `${resultCount} results found`
+          : isDropdownVisible && suggestions.length > 0
+            ? `${suggestions.length} suggestions available`
+            : ""}
+      </div>
+
       {/* Dropdown */}
-      {showDropdown && showAnything && (
+      {isDropdownVisible && (
         <div
           ref={dropdownRef}
+          id="search-suggestions-listbox"
+          role="listbox"
+          aria-label="Search suggestions"
           className="absolute z-50 mt-1 w-full overflow-hidden rounded-lg border border-border bg-popover shadow-lg"
         >
           {/* Suggestions */}
           {showSuggestions && (
             <div className="p-1">
               <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
-                Suggestions
+                {t("suggestionsHeading")}
               </div>
               {suggestions.map((suggestion, idx) => (
                 <button
                   key={`${suggestion.type}-${suggestion.value}-${idx}`}
+                  id={`search-suggestion-${idx}`}
+                  role="option"
+                  aria-selected={selectedIndex === idx}
                   onClick={() => selectSuggestion(suggestion)}
                   className={cn(
                     "flex w-full items-center gap-3 rounded-md px-3 py-2 text-left transition-colors",
@@ -395,7 +431,7 @@ export function TransactionSearchBar({
                     disabled={!saveFilterName.trim()}
                     className="rounded bg-teal-600 px-3 py-1 text-sm font-medium text-white hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    Save
+                    {t("save")}
                   </button>
                 </div>
               ) : (

@@ -14,9 +14,11 @@
 export {
   initializeSearchIndex,
   searchTransactions,
+  searchTransactionsWithFilters,
   filterByAmountRange,
   getSearchSuggestions,
   clearSearchIndex,
+  normalizeText,
   type SearchResult,
   type SearchableTransaction,
 } from "./transaction-search";

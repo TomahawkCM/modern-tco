@@ -9,6 +9,8 @@
  * Date shortcuts: today, yesterday, last7, last30, thismonth, lastmonth, thisyear
  */
 
+import { normalizeText } from "./transaction-search";
+
 export interface ParsedFilters {
   amountMin?: number;
   amountMax?: number;
@@ -19,6 +21,16 @@ export interface ParsedFilters {
   type?: "income" | "expense";
   tag?: string;
   merchant?: string;
+  isRecurring?: boolean;
+  isSplit?: boolean;
+  /** Negated filters — these exclude matching results */
+  negated?: {
+    category?: string;
+    account?: string;
+    tag?: string;
+    merchant?: string;
+    type?: "income" | "expense";
+  };
 }
 
 export interface ParsedQuery {
@@ -26,6 +38,20 @@ export interface ParsedQuery {
   filters: ParsedFilters;
   hasStructuredFilters: boolean;
 }
+
+/**
+ * Design Decision: English-only search syntax
+ *
+ * Date shortcuts (today, yesterday, last7, thismonth, etc.) and structured
+ * filter prefixes (amount:, category:, date:, account:, type:, tag:,
+ * merchant:, is:) are intentionally kept in English as a universal search
+ * syntax. This follows the convention used by GitHub, Gmail, and other
+ * major search implementations where the query DSL is locale-independent.
+ *
+ * The fuzzy text portion of queries (not the structured filters) does
+ * support locale-aware matching via diacritics normalization — searching
+ * "cafe" will match "café", "nino" will match "niño", etc.
+ */
 
 // Date shortcuts mapping
 const DATE_SHORTCUTS: Record<string, () => { start: Date; end: Date }> = {
@@ -126,20 +152,29 @@ const FILTER_PATTERNS = {
   // $50-100, $>50, $<100, over $50, under $100
   dollarAmount:
     /(?:\$([<>]=?)?(\d+(?:\.\d+)?)?(?:\.\.|-)?(\d+(?:\.\d+)?)?|(?:over|above|more\s+than)\s+\$?(\d+(?:\.\d+)?)|(?:under|below|less\s+than)\s+\$?(\d+(?:\.\d+)?))/gi,
-  // category:groceries, cat:food
-  category: /(?:category|cat):(\w+)/gi,
+  // category:groceries, cat:food, category:"Food & Dining"
+  category: /(?:category|cat):(?:"([^"]+)"|(\w+))/gi,
   // date:last30, date:thismonth
   date: /date:(\w+)/gi,
-  // account:checking, acc:savings
-  account: /(?:account|acc):(\w+)/gi,
+  // account:checking, acc:savings, account:"My Savings"
+  account: /(?:account|acc):(?:"([^"]+)"|(\w+))/gi,
   // type:income, type:expense
   type: /type:(income|expense)/gi,
-  // tag:vacation, tag:business
-  tag: /tag:(\w+)/gi,
-  // merchant:amazon, from:starbucks
-  merchant: /(?:merchant|from):(\w+)/gi,
+  // tag:vacation, tag:business, tag:"road trip"
+  tag: /tag:(?:"([^"]+)"|(\w+))/gi,
+  // merchant:amazon, from:starbucks, merchant:"Whole Foods"
+  merchant: /(?:merchant|from):(?:"([^"]+)"|(\w+))/gi,
   // is:recurring, is:split
   is: /is:(recurring|split|income|expense)/gi,
+};
+
+// Negated filter patterns: -category:food, -tag:vacation, -merchant:amazon, -type:income, -account:checking
+const NEGATION_PATTERNS = {
+  category: /-(?:category|cat):(?:"([^"]+)"|(\w+))/gi,
+  tag: /-tag:(?:"([^"]+)"|(\w+))/gi,
+  merchant: /-(?:merchant|from):(?:"([^"]+)"|(\w+))/gi,
+  type: /-type:(income|expense)/gi,
+  account: /-(?:account|acc):(?:"([^"]+)"|(\w+))/gi,
 };
 
 /**
@@ -228,12 +263,12 @@ export function parseSearchQuery(query: string): ParsedQuery {
     }
   }
 
-  // Parse category filter
+  // Parse category filter (supports quoted: category:"Food & Dining")
   const categoryMatch = FILTER_PATTERNS.category.exec(query);
   if (categoryMatch) {
     hasStructuredFilters = true;
     remainingQuery = remainingQuery.replace(categoryMatch[0], "");
-    filters.category = categoryMatch[1];
+    filters.category = categoryMatch[1] || categoryMatch[2]; // group 1 = quoted, group 2 = unquoted
   }
   FILTER_PATTERNS.category.lastIndex = 0;
 
@@ -268,12 +303,12 @@ export function parseSearchQuery(query: string): ParsedQuery {
     }
   }
 
-  // Parse account filter
+  // Parse account filter (supports quoted: account:"My Savings")
   const accountMatch = FILTER_PATTERNS.account.exec(query);
   if (accountMatch) {
     hasStructuredFilters = true;
     remainingQuery = remainingQuery.replace(accountMatch[0], "");
-    filters.account = accountMatch[1];
+    filters.account = accountMatch[1] || accountMatch[2];
   }
   FILTER_PATTERNS.account.lastIndex = 0;
 
@@ -286,37 +321,94 @@ export function parseSearchQuery(query: string): ParsedQuery {
   }
   FILTER_PATTERNS.type.lastIndex = 0;
 
-  // Parse is: filters (is:income, is:expense)
+  // Parse is: filters (is:income, is:expense, is:recurring, is:split)
   const isMatch = FILTER_PATTERNS.is.exec(query);
   if (isMatch) {
     hasStructuredFilters = true;
     remainingQuery = remainingQuery.replace(isMatch[0], "");
     if (isMatch[1] === "income" || isMatch[1] === "expense") {
       filters.type = isMatch[1];
+    } else if (isMatch[1] === "recurring") {
+      filters.isRecurring = true;
+    } else if (isMatch[1] === "split") {
+      filters.isSplit = true;
     }
   }
   FILTER_PATTERNS.is.lastIndex = 0;
 
-  // Parse tag filter
+  // Parse tag filter (supports quoted: tag:"road trip")
   const tagMatch = FILTER_PATTERNS.tag.exec(query);
   if (tagMatch) {
     hasStructuredFilters = true;
     remainingQuery = remainingQuery.replace(tagMatch[0], "");
-    filters.tag = tagMatch[1];
+    filters.tag = tagMatch[1] || tagMatch[2];
   }
   FILTER_PATTERNS.tag.lastIndex = 0;
 
-  // Parse merchant filter
+  // Parse merchant filter (supports quoted: merchant:"Whole Foods")
   const merchantMatch = FILTER_PATTERNS.merchant.exec(query);
   if (merchantMatch) {
     hasStructuredFilters = true;
     remainingQuery = remainingQuery.replace(merchantMatch[0], "");
-    filters.merchant = merchantMatch[1];
+    filters.merchant = merchantMatch[1] || merchantMatch[2];
   }
   FILTER_PATTERNS.merchant.lastIndex = 0;
 
+  // Parse negated filters: -category:food, -merchant:amazon, etc.
+  const negated: NonNullable<ParsedFilters["negated"]> = {};
+  let hasNegation = false;
+
+  const negCategoryMatch = NEGATION_PATTERNS.category.exec(remainingQuery);
+  if (negCategoryMatch) {
+    hasNegation = true;
+    remainingQuery = remainingQuery.replace(negCategoryMatch[0], "");
+    negated.category = negCategoryMatch[1] || negCategoryMatch[2];
+  }
+  NEGATION_PATTERNS.category.lastIndex = 0;
+
+  const negTagMatch = NEGATION_PATTERNS.tag.exec(remainingQuery);
+  if (negTagMatch) {
+    hasNegation = true;
+    remainingQuery = remainingQuery.replace(negTagMatch[0], "");
+    negated.tag = negTagMatch[1] || negTagMatch[2];
+  }
+  NEGATION_PATTERNS.tag.lastIndex = 0;
+
+  const negMerchantMatch = NEGATION_PATTERNS.merchant.exec(remainingQuery);
+  if (negMerchantMatch) {
+    hasNegation = true;
+    remainingQuery = remainingQuery.replace(negMerchantMatch[0], "");
+    negated.merchant = negMerchantMatch[1] || negMerchantMatch[2];
+  }
+  NEGATION_PATTERNS.merchant.lastIndex = 0;
+
+  const negTypeMatch = NEGATION_PATTERNS.type.exec(remainingQuery);
+  if (negTypeMatch) {
+    hasNegation = true;
+    remainingQuery = remainingQuery.replace(negTypeMatch[0], "");
+    negated.type = negTypeMatch[1] as "income" | "expense";
+  }
+  NEGATION_PATTERNS.type.lastIndex = 0;
+
+  const negAccountMatch = NEGATION_PATTERNS.account.exec(remainingQuery);
+  if (negAccountMatch) {
+    hasNegation = true;
+    remainingQuery = remainingQuery.replace(negAccountMatch[0], "");
+    negated.account = negAccountMatch[1] || negAccountMatch[2];
+  }
+  NEGATION_PATTERNS.account.lastIndex = 0;
+
+  if (hasNegation) {
+    hasStructuredFilters = true;
+    filters.negated = negated;
+  }
+
+  // Normalize the text query (strip diacritics) so that accent-insensitive
+  // matching works with the normalized Fuse.js index
+  const cleanedTextQuery = remainingQuery.trim().replace(/\s+/g, " ");
+
   return {
-    textQuery: remainingQuery.trim().replace(/\s+/g, " "),
+    textQuery: normalizeText(cleanedTextQuery),
     filters,
     hasStructuredFilters,
   };

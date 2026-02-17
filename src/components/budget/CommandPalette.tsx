@@ -15,7 +15,8 @@
 
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { useTheme } from "next-themes";
 import {
   CommandDialog,
   CommandEmpty,
@@ -57,6 +58,7 @@ import type { Transaction, Category, Account } from "@/types/budget";
 import {
   initializeSearchIndex,
   searchTransactions,
+  searchTransactionsWithFilters,
   type SearchResult,
 } from "@/lib/search/transaction-search";
 import {
@@ -68,6 +70,10 @@ import {
   type AutocompleteSuggestion,
 } from "@/lib/search/autocomplete";
 import { parseNaturalLanguage } from "@/lib/search/natural-language-parser";
+import {
+  highlightMatches,
+  getMatchIndicesForField,
+} from "@/lib/search/highlight-matches";
 
 interface CommandPaletteProps {
   open?: boolean;
@@ -96,16 +102,21 @@ function isTransactionSearchQuery(query: string): boolean {
   return false;
 }
 
-// Format transaction amount
-function formatAmount(amount: number): string {
+// Format transaction amount using locale-aware formatting
+function formatAmount(amount: number, locale: string): string {
   const absAmount = Math.abs(amount);
   const sign = amount >= 0 ? "+" : "-";
-  return `${sign}$${absAmount.toFixed(2)}`;
+  const formatted = new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: "USD", // TODO: make configurable per user
+    minimumFractionDigits: 2,
+  }).format(absAmount);
+  return `${sign}${formatted}`;
 }
 
-// Format date
-function formatDate(date: Date): string {
-  return new Date(date).toLocaleDateString("en-US", {
+// Format date using locale-aware formatting
+function formatDate(date: Date, locale: string): string {
+  return new Date(date).toLocaleDateString(locale, {
     month: "short",
     day: "numeric",
   });
@@ -131,8 +142,19 @@ function SuggestionIcon({ type }: { type: AutocompleteSuggestion["type"] }) {
   }
 }
 
+// Keyboard shortcut hint badge
+function ShortcutHint({ shortcut }: { shortcut: string }) {
+  return (
+    <kbd className="ml-auto inline-flex h-5 items-center rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+      {shortcut}
+    </kbd>
+  );
+}
+
 export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPaletteProps) {
   const router = useRouter();
+  const { setTheme } = useTheme();
+  const locale = useLocale();
   const t = useTranslations("commandPalette");
   const tSearch = useTranslations("transactionSearch");
   const [internalOpen, setInternalOpen] = useState(false);
@@ -244,9 +266,11 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
       if (isSearch || value.length >= 3) {
         setIsLoading(true);
 
-        // Parse natural language and search
+        // Parse natural language and use its structured filters for search
         const parsed = parseNaturalLanguage(value);
-        const results = searchTransactions(value, { limit: 10 });
+        const results = parsed.query.hasStructuredFilters
+          ? searchTransactionsWithFilters(parsed.query, { limit: 10 })
+          : searchTransactions(value, { limit: 10 });
 
         setSearchResults(results);
         setIsLoading(false);
@@ -364,9 +388,14 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                   <div className="flex min-w-0 flex-1 items-center">
                     <Receipt className="mr-2 h-4 w-4 flex-shrink-0 text-muted-foreground" />
                     <div className="min-w-0 flex-1">
-                      <span className="block truncate font-medium">{result.item.description}</span>
+                      <span className="block truncate font-medium">
+                        {highlightMatches(
+                          result.item.description,
+                          getMatchIndicesForField(result.matches, "description")
+                        )}
+                      </span>
                       <span className="text-xs text-muted-foreground">
-                        {formatDate(result.item.date)}
+                        {formatDate(result.item.date, locale)}
                         {result.item.category && ` • ${result.item.category}`}
                       </span>
                     </div>
@@ -376,7 +405,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                       result.item.amount >= 0 ? "text-green-600" : "text-red-600"
                     }`}
                   >
-                    {formatAmount(result.item.amount)}
+                    {formatAmount(result.item.amount, locale)}
                   </span>
                 </CommandItem>
               ))}
@@ -388,7 +417,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                   onSelect={() => goToTransactionsWithSearch(searchQuery)}
                 >
                   <ArrowRight className="mr-2 h-4 w-4" />
-                  <span>View all {searchResults.length} results</span>
+                  <span>{tSearch("viewAllResults", { count: searchResults.length })}</span>
                 </CommandItem>
               )}
             </CommandGroup>
@@ -399,7 +428,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
         {/* Autocomplete Suggestions */}
         {showSuggestions && (
           <>
-            <CommandGroup heading="Suggestions">
+            <CommandGroup heading={tSearch("suggestionsHeading")}>
               {suggestions.map((suggestion, idx) => (
                 <CommandItem
                   key={`${suggestion.type}-${suggestion.value}-${idx}`}
@@ -461,15 +490,18 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
         {searchQuery.length > 0 && searchQuery.length < 3 && (
           <CommandEmpty>
             <div className="p-2 text-sm text-muted-foreground">
-              <p className="mb-2 font-medium">Search Tips:</p>
+              <p className="mb-2 font-medium">{tSearch("searchTipsIntro")}</p>
               <ul className="space-y-1 text-xs">
-                <li>• Type 3+ characters to search transactions</li>
+                <li>• {tSearch("searchTipChars")}</li>
                 <li>
-                  • Use <code className="rounded bg-muted px-1">$50-100</code> for amount ranges
+                  • {tSearch.rich("searchTipAmount", {
+                    code: (chunks) => <code className="rounded bg-muted px-1">{chunks}</code>,
+                  })}
                 </li>
                 <li>
-                  • Try <code className="rounded bg-muted px-1">coffee last week</code> for natural
-                  language
+                  • {tSearch.rich("searchTipNL", {
+                    code: (chunks) => <code className="rounded bg-muted px-1">{chunks}</code>,
+                  })}
                 </li>
               </ul>
             </div>
@@ -496,13 +528,15 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
             <CommandGroup heading={t("groups.tracking")}>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app"))}>
                 <Home className="mr-2 h-4 w-4" />
-                <span>{t("commands.dashboard")}</span>
+                <span className="flex-1">{t("commands.dashboard")}</span>
+                <ShortcutHint shortcut="D" />
               </CommandItem>
               <CommandItem
                 onSelect={() => runCommand(() => router.push("/budget-app/transactions"))}
               >
                 <Receipt className="mr-2 h-4 w-4" />
-                <span>{t("commands.transactions")}</span>
+                <span className="flex-1">{t("commands.transactions")}</span>
+                <ShortcutHint shortcut="T" />
               </CommandItem>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/ocr"))}>
                 <Camera className="mr-2 h-4 w-4" />
@@ -510,11 +544,13 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
               </CommandItem>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/budgets"))}>
                 <PieChart className="mr-2 h-4 w-4" />
-                <span>{t("commands.budgets")}</span>
+                <span className="flex-1">{t("commands.budgets")}</span>
+                <ShortcutHint shortcut="B" />
               </CommandItem>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/reports"))}>
                 <BarChart3 className="mr-2 h-4 w-4" />
-                <span>{t("commands.reports")}</span>
+                <span className="flex-1">{t("commands.reports")}</span>
+                <ShortcutHint shortcut="R" />
               </CommandItem>
             </CommandGroup>
 
@@ -530,7 +566,8 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                 onSelect={() => runCommand(() => router.push("/budget-app/investments"))}
               >
                 <Wallet className="mr-2 h-4 w-4" />
-                <span>{t("commands.investments")}</span>
+                <span className="flex-1">{t("commands.investments")}</span>
+                <ShortcutHint shortcut="I" />
               </CommandItem>
               <CommandItem
                 onSelect={() => runCommand(() => router.push("/budget-app/planning/future"))}
@@ -613,7 +650,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
               <CommandItem
                 onSelect={() =>
                   runCommand(() => {
-                    console.log("Switch to Light theme");
+                    setTheme("light");
                   })
                 }
               >
@@ -623,7 +660,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
               <CommandItem
                 onSelect={() =>
                   runCommand(() => {
-                    console.log("Switch to Dark theme");
+                    setTheme("dark");
                   })
                 }
               >
@@ -633,7 +670,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
               <CommandItem
                 onSelect={() =>
                   runCommand(() => {
-                    console.log("Switch to High-Contrast theme");
+                    setTheme("system");
                   })
                 }
               >
