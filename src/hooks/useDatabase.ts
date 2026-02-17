@@ -324,6 +324,7 @@ export function useRealtimeSubscription<T = any>(
     const setupSubscription = async () => {
       try {
         // Initial data fetch
+        // @ts-expect-error - union of all table names causes excessively deep type instantiation
         let query = supabase.from(table).select("*");
 
         if (filter) {

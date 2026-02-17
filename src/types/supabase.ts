@@ -27,6 +27,10 @@ export type UserStudyBookmarkInsert = TablesInsert<"user_study_bookmarks">;
 export type QuestionInsert = TablesInsert<"questions">;
 export type QuestionUpdate = TablesUpdate<"questions">;
 
+export type AuditLog = Tables<"audit_log">;
+export type FamilyGroup = Tables<"family_groups">;
+export type FamilyMember = Tables<"family_members">;
+
 export const Constants = {
   public: {
     Enums: {},

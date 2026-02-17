@@ -4,14 +4,9 @@
 import type { UserProfile } from "@/lib/profileService";
 import { calculateSubscriptionStatus } from "@/lib/subscriptionService";
 import { supabaseAdmin } from "@/lib/supabase";
+import type { Json } from "@/types/supabase";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-
-// Admin queries use tables/columns (audit_log, family_groups, family_members,
-// users.role, users.is_suspended, users.trial_start) that exist in the DB
-// but are not in the generated Supabase types. Use untyped alias for queries.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const adminDb = supabaseAdmin as any;
 
 const ADMIN_EMAILS = (process.env.NEXT_PUBLIC_ADMIN_EMAILS ?? "")
   .split(",")
@@ -62,21 +57,22 @@ async function requireAdmin() {
 async function logAdminAction(
   action: string,
   targetUserId?: string,
-  metadata: Record<string, any> = {}
+  metadata: Record<string, unknown> = {}
 ) {
   if (!supabaseAdmin) return;
   try {
-    await adminDb.from("audit_log").insert({
-      actor_id: metadata.actorId ?? null,
+    await supabaseAdmin!.from("audit_log").insert({
+      actor_id: (metadata.actorId as string) ?? null,
       action,
       target_user_id: targetUserId ?? null,
-      metadata,
+      metadata: metadata as unknown as Json,
     });
   } catch (err) {
     console.warn("[admin] Failed to log audit action", err);
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Supabase's chained PostgrestFilterBuilder generics are impractical to spell out
 function applyAuditFilters(request: any, query?: string, startDate?: string, endDate?: string) {
   let filtered = request;
   if (query) {
@@ -109,7 +105,7 @@ export async function getAdminUsersPage(
       throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
     }
 
-    let request = adminDb
+    let request = supabaseAdmin!
       .from("users")
       .select(
         "id, email, name, created_at, last_login, trial_start, subscription_status, is_suspended, role",
@@ -150,7 +146,7 @@ export async function getAdminUsersPage(
     });
 
     return { users: processedUsers, total: count ?? 0 };
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("[getAdminUsersPage] Fail:", err);
     throw err;
   }
@@ -167,7 +163,7 @@ export async function getCurrentAdminRole() {
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
   }
 
-  const { data, error } = await adminDb
+  const { data, error } = await supabaseAdmin!
     .from("users")
     .select("role")
     .eq("id", user.id)
@@ -188,7 +184,7 @@ export async function exportUsersCSV(
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
   }
 
-  let request = adminDb
+  let request = supabaseAdmin!
     .from("users")
     .select(
       "id, email, name, created_at, last_login, trial_start, subscription_status, is_suspended, role"
@@ -212,7 +208,7 @@ export async function exportUsersCSV(
 
   const header =
     "id,email,name,created_at,last_login,trial_start,subscription_status,is_suspended,role\n";
-  const rows = (users ?? []).map((u: any) =>
+  const rows = (users ?? []).map((u) =>
     [
       u.id,
       u.email,
@@ -247,7 +243,7 @@ export async function getAuditLogPage(
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  let request = adminDb
+  let request = supabaseAdmin!
     .from("audit_log")
     .select("id, actor_id, action, target_user_id, metadata, created_at", { count: "exact" })
     .order("created_at", { ascending: false });
@@ -273,20 +269,20 @@ export async function getAuditLogPage(
   });
 
   const userIds = Array.from(
-    new Set([...(logs ?? []).map((l: any) => l.actor_id), ...(logs ?? []).map((l: any) => l.target_user_id)])
+    new Set([...(logs ?? []).map((l) => l.actor_id), ...(logs ?? []).map((l) => l.target_user_id)])
   ).filter(Boolean) as string[];
 
   if (userIds.length === 0) return { logs: logs ?? [], total: count ?? 0 };
 
-  const { data: userRows } = await adminDb
+  const { data: userRows } = await supabaseAdmin!
     .from("users")
     .select("id, email, name")
     .in("id", userIds);
 
-  const userMap = new Map((userRows ?? []).map((u: any) => [u.id, u]));
+  const userMap = new Map((userRows ?? []).map((u) => [u.id, u]));
 
   return {
-    logs: (logs ?? []).map((log: any) => ({
+    logs: (logs ?? []).map((log) => ({
       ...log,
       actor: log.actor_id ? userMap.get(log.actor_id) : null,
       target: log.target_user_id ? userMap.get(log.target_user_id) : null,
@@ -305,7 +301,7 @@ export async function exportAuditLog(
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  let request = adminDb
+  let request = supabaseAdmin!
     .from("audit_log")
     .select("id, actor_id, action, target_user_id, metadata, created_at")
     .order("created_at", { ascending: false });
@@ -329,7 +325,7 @@ export async function exportAuditLog(
   }
 
   const csvHeader = "id,created_at,action,actor_id,target_user_id,metadata\n";
-  const rows = (logs ?? []).map((log: any) => {
+  const rows = (logs ?? []).map((log) => {
     const meta = JSON.stringify(log.metadata ?? {}).replace(/"/g, '""');
     return `${log.id},${log.created_at},${log.action},${log.actor_id ?? ""},${log.target_user_id ?? ""},"${meta}"`;
   });
@@ -342,24 +338,24 @@ export async function getFamilyGroups() {
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { data: groups, error } = await adminDb
+  const { data: groups, error } = await supabaseAdmin!
     .from("family_groups")
     .select("id, name, owner_id, invite_code, created_at");
 
   if (error) throw new Error(`Database error: ${error.message}`);
 
-  const { data: memberCounts } = await adminDb
+  const { data: memberCounts } = await supabaseAdmin!
     .from("family_members")
     .select("family_id", { count: "exact", head: false });
 
   const counts = new Map<string, number>();
-  (memberCounts ?? []).forEach((row: any) => {
+  (memberCounts ?? []).forEach((row) => {
     counts.set(row.family_id, (counts.get(row.family_id) ?? 0) + 1);
   });
 
   await logAdminAction("admin.family.view", undefined, { actorId: user.id });
 
-  return (groups ?? []).map((g: any) => ({
+  return (groups ?? []).map((g) => ({
     ...g,
     memberCount: counts.get(g.id) ?? 0,
   }));
@@ -370,7 +366,7 @@ export async function createFamilyGroup(name: string, ownerId: string) {
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { data: group, error } = await adminDb
+  const { data: group, error } = await supabaseAdmin!
     .from("family_groups")
     .insert({ name, owner_id: ownerId })
     .select("id, name, owner_id, invite_code, created_at")
@@ -378,7 +374,7 @@ export async function createFamilyGroup(name: string, ownerId: string) {
 
   if (error) throw new Error(`Database error: ${error.message}`);
 
-  await adminDb
+  await supabaseAdmin!
     .from("family_members")
     .insert({ family_id: group.id, user_id: ownerId, role: "owner", can_see_all_accounts: true });
 
@@ -396,7 +392,7 @@ export async function renameFamilyGroup(familyId: string, name: string) {
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { error } = await adminDb.from("family_groups").update({ name }).eq("id", familyId);
+  const { error } = await supabaseAdmin!.from("family_groups").update({ name }).eq("id", familyId);
   if (error) throw new Error(`Database error: ${error.message}`);
 
   await logAdminAction("admin.family.rename", undefined, { actorId: user.id, familyId, name });
@@ -409,7 +405,7 @@ export async function deleteFamilyGroup(familyId: string) {
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { error } = await adminDb.from("family_groups").delete().eq("id", familyId);
+  const { error } = await supabaseAdmin!.from("family_groups").delete().eq("id", familyId);
   if (error) throw new Error(`Database error: ${error.message}`);
 
   await logAdminAction("admin.family.delete", undefined, { actorId: user.id, familyId });
@@ -422,7 +418,7 @@ export async function getFamilyMembers(familyId: string) {
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { data: members, error } = await adminDb
+  const { data: members, error } = await supabaseAdmin!
     .from("family_members")
     .select(
       "id, family_id, user_id, role, permissions, can_see_all_accounts, spending_limit, created_at"
@@ -431,18 +427,18 @@ export async function getFamilyMembers(familyId: string) {
 
   if (error) throw new Error(`Database error: ${error.message}`);
 
-  const userIds = Array.from(new Set((members ?? []).map((m: any) => m.user_id))).filter(
+  const userIds = Array.from(new Set((members ?? []).map((m) => m.user_id))).filter(
     Boolean
   ) as string[];
   const { data: userRows } = userIds.length
-    ? await adminDb.from("users").select("id, email, name").in("id", userIds)
+    ? await supabaseAdmin!.from("users").select("id, email, name").in("id", userIds)
     : { data: [] };
 
-  const userMap = new Map((userRows ?? []).map((u: any) => [u.id, u]));
+  const userMap = new Map((userRows ?? []).map((u) => [u.id, u]));
 
   await logAdminAction("admin.family.members.view", undefined, { actorId: user.id, familyId });
 
-  return (members ?? []).map((m: any) => ({
+  return (members ?? []).map((m) => ({
     ...m,
     user: userMap.get(m.user_id) ?? null,
   }));
@@ -453,7 +449,7 @@ export async function updateFamilyMemberRole(memberId: string, role: string) {
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { error } = await adminDb.from("family_members").update({ role }).eq("id", memberId);
+  const { error } = await supabaseAdmin!.from("family_members").update({ role }).eq("id", memberId);
 
   if (error) throw new Error(`Database error: ${error.message}`);
 
@@ -471,7 +467,7 @@ export async function removeFamilyMember(memberId: string) {
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { error } = await adminDb.from("family_members").delete().eq("id", memberId);
+  const { error } = await supabaseAdmin!.from("family_members").delete().eq("id", memberId);
   if (error) throw new Error(`Database error: ${error.message}`);
 
   await logAdminAction("admin.family.member.remove", undefined, { actorId: user.id, memberId });
@@ -484,7 +480,7 @@ export async function updateUserRole(userId: string, role: string) {
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { error } = await adminDb.from("users").update({ role }).eq("id", userId);
+  const { error } = await supabaseAdmin!.from("users").update({ role }).eq("id", userId);
   if (error) throw new Error(`Database error: ${error.message}`);
 
   await logAdminAction("admin.user.role.update", userId, { actorId: user.id, role });
@@ -497,7 +493,7 @@ export async function suspendUser(userId: string) {
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { error } = await adminDb
+  const { error } = await supabaseAdmin!
     .from("users")
     .update({ is_suspended: true })
     .eq("id", userId);
@@ -513,7 +509,7 @@ export async function reactivateUser(userId: string) {
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { error } = await adminDb
+  const { error } = await supabaseAdmin!
     .from("users")
     .update({ is_suspended: false })
     .eq("id", userId);
@@ -529,7 +525,7 @@ export async function extendUserTrial(userId: string, days: number) {
   if (!supabaseAdmin)
     throw new Error("Server configuration error: SUPABASE_SERVICE_ROLE_KEY missing");
 
-  const { data: current, error: currentErr } = await adminDb
+  const { data: current, error: currentErr } = await supabaseAdmin!
     .from("users")
     .select("trial_start")
     .eq("id", userId)
@@ -540,7 +536,7 @@ export async function extendUserTrial(userId: string, days: number) {
   const trialStart = current?.trial_start ? new Date(current.trial_start) : new Date();
   const newTrialStart = new Date(trialStart.getTime() - days * 24 * 60 * 60 * 1000);
 
-  const { error } = await adminDb
+  const { error } = await supabaseAdmin!
     .from("users")
     .update({ trial_start: newTrialStart.toISOString() })
     .eq("id", userId);
@@ -573,7 +569,7 @@ export async function bulkUpdateUserRole(userIds: string[], role: string) {
 
   if (userIds.length === 0) return { ok: true };
 
-  const { error } = await adminDb.from("users").update({ role }).in("id", userIds);
+  const { error } = await supabaseAdmin!.from("users").update({ role }).in("id", userIds);
   if (error) throw new Error(`Database error: ${error.message}`);
 
   await logAdminAction("admin.user.role.bulk", undefined, {
@@ -592,7 +588,7 @@ export async function bulkSuspendUsers(userIds: string[]) {
 
   if (userIds.length === 0) return { ok: true };
 
-  const { error } = await adminDb
+  const { error } = await supabaseAdmin!
     .from("users")
     .update({ is_suspended: true })
     .in("id", userIds);
@@ -613,7 +609,7 @@ export async function bulkReactivateUsers(userIds: string[]) {
 
   if (userIds.length === 0) return { ok: true };
 
-  const { error } = await adminDb
+  const { error } = await supabaseAdmin!
     .from("users")
     .update({ is_suspended: false })
     .in("id", userIds);
@@ -634,21 +630,20 @@ export async function bulkExtendTrial(userIds: string[], days: number) {
 
   if (userIds.length === 0) return { ok: true };
 
-  const { data: rows, error: fetchErr } = await adminDb
+  const { data: rows, error: fetchErr } = await supabaseAdmin!
     .from("users")
     .select("id, trial_start")
     .in("id", userIds);
 
   if (fetchErr) throw new Error(`Database error: ${fetchErr.message}`);
 
-  const updates = (rows ?? []).map((row: any) => {
+  for (const row of rows ?? []) {
     const trialStart = row.trial_start ? new Date(row.trial_start) : new Date();
     const newTrialStart = new Date(trialStart.getTime() - days * 24 * 60 * 60 * 1000);
-    return { id: row.id, trial_start: newTrialStart.toISOString() };
-  });
-
-  if (updates.length > 0) {
-    const { error } = await adminDb.from("users").upsert(updates, { onConflict: "id" });
+    const { error } = await supabaseAdmin!
+      .from("users")
+      .update({ trial_start: newTrialStart.toISOString() })
+      .eq("id", row.id);
     if (error) throw new Error(`Database error: ${error.message}`);
   }
 
