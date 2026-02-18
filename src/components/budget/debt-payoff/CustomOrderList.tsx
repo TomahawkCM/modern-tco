@@ -30,6 +30,7 @@ interface SortableDebtItemProps {
 }
 
 function SortableDebtItem({ debt, index, formatCurrency }: SortableDebtItemProps) {
+  const tAria = useTranslations("aria");
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: debt.id,
   });
@@ -52,7 +53,7 @@ function SortableDebtItem({ debt, index, formatCurrency }: SortableDebtItemProps
         className="cursor-grab touch-none text-slate-500 hover:text-slate-300 active:cursor-grabbing"
         {...attributes}
         {...listeners}
-        aria-label={`Reorder ${debt.name}`}
+        aria-label={tAria("reorderDebt", { name: debt.name })}
       >
         <GripVertical className="h-4 w-4" />
       </button>

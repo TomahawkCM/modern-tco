@@ -8,6 +8,7 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 import { Wifi, WifiOff, RefreshCw, AlertCircle, CheckCircle2, Clock, Loader2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
@@ -114,6 +115,7 @@ export function SyncStatusIndicator({
   seniorsMode = false,
   onClick,
 }: SyncStatusIndicatorProps) {
+  const tAria = useTranslations("aria");
   const { state } = useLANSync();
   const health = useSyncHealth();
   const stats = useSyncStats();
@@ -131,7 +133,7 @@ export function SyncStatusIndicator({
             <button
               onClick={onClick}
               className={cn("relative rounded-lg p-2 transition-colors hover:bg-accent", className)}
-              aria-label={`Sync status: ${getHealthLabel(health)}`}
+              aria-label={tAria("syncStatus", { status: getHealthLabel(health) })}
             >
               {isSyncing ? (
                 <RefreshCw className={cn(iconSize, "animate-spin text-primary")} />
@@ -145,7 +147,7 @@ export function SyncStatusIndicator({
               {state.isEnabled && !isSyncing && (
                 <span
                   className={cn(
-                    "absolute right-1 top-1 h-2 w-2 rounded-full",
+                    "absolute end-1 top-1 h-2 w-2 rounded-full",
                     health === "healthy" && "bg-green-500",
                     health === "warning" && "bg-yellow-500",
                     health === "error" && "bg-red-500",
@@ -156,7 +158,7 @@ export function SyncStatusIndicator({
 
               {/* Pending changes badge */}
               {showPending && stats.pendingChanges > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-xs text-primary-foreground">
+                <span className="absolute -end-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-xs text-primary-foreground">
                   {stats.pendingChanges > 99 ? "99+" : stats.pendingChanges}
                 </span>
               )}
@@ -203,7 +205,7 @@ export function SyncStatusIndicator({
         )}
         <span>{getHealthLabel(health)}</span>
         {showPending && stats.pendingChanges > 0 && (
-          <span className="ml-1 text-xs opacity-75">({stats.pendingChanges})</span>
+          <span className="ms-1 text-xs opacity-75">({stats.pendingChanges})</span>
         )}
       </Badge>
     );

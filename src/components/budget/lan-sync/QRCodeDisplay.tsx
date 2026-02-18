@@ -8,6 +8,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { QRCodeSVG } from "qrcode.react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -63,6 +64,8 @@ export function QRCodeDisplay({
   seniorsMode = false,
   className = "",
 }: QRCodeDisplayProps) {
+  const tAria = useTranslations("aria");
+
   // State
   const [pairingCode, setPairingCode] = useState<string>("");
   const [timestamp, setTimestamp] = useState<number>(Date.now());
@@ -144,7 +147,7 @@ export function QRCodeDisplay({
       <Card className={`${className} border-yellow-500/50`}>
         <CardHeader>
           <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>
-            <Wifi className="mr-2 inline-block" />
+            <Wifi className="me-2 inline-block" />
             Network Setup Required
           </CardTitle>
           <CardDescription className={seniorsMode ? "text-lg" : ""}>
@@ -178,7 +181,7 @@ export function QRCodeDisplay({
     <Card className={className}>
       <CardHeader className="text-center">
         <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>
-          <Wifi className="mr-2 inline-block" />
+          <Wifi className="me-2 inline-block" />
           Scan to Connect
         </CardTitle>
         <CardDescription className={seniorsMode ? "text-lg" : ""}>
@@ -191,7 +194,7 @@ export function QRCodeDisplay({
         <div
           className="rounded-lg bg-white p-4 shadow-inner"
           role="img"
-          aria-label={`QR code for pairing. Pairing code: ${pairingCode}`}
+          aria-label={tAria("qrCodePairing", { code: pairingCode })}
         >
           {qrString && (
             <QRCodeSVG
@@ -215,7 +218,7 @@ export function QRCodeDisplay({
               className={`rounded-lg bg-muted px-4 py-2 font-mono font-bold tracking-widest ${
                 seniorsMode ? "text-3xl" : "text-2xl"
               }`}
-              aria-label={`Pairing code: ${pairingCode.split("").join(" ")}`}
+              aria-label={tAria("pairingCode", { code: pairingCode.split("").join(" ") })}
             >
               {pairingCode}
             </code>
@@ -223,7 +226,7 @@ export function QRCodeDisplay({
               variant="outline"
               size={seniorsMode ? "lg" : "icon"}
               onClick={copyPairingCode}
-              aria-label={copied ? "Copied" : "Copy pairing code"}
+              aria-label={copied ? tAria("copied") : tAria("copyPairingCode")}
             >
               {copied ? (
                 <Check className={seniorsMode ? "h-6 w-6" : "h-4 w-4"} />
@@ -262,7 +265,7 @@ export function QRCodeDisplay({
           onClick={regenerateCode}
           className={seniorsMode ? "text-lg" : ""}
         >
-          <RefreshCw className={`mr-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
+          <RefreshCw className={`me-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
           Generate New Code
         </Button>
       </CardContent>

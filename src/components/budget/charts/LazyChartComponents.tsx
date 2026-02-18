@@ -15,6 +15,7 @@
 "use client";
 
 import { lazy, Suspense } from "react";
+import { useTranslations } from "next-intl";
 import type { Transaction, Holding, InvestmentAccount } from "@/types/budget";
 import type { Loan } from "@/types/budget";
 
@@ -40,12 +41,13 @@ const AmortizationChart = lazy(() =>
  * Displays while chart component is being loaded
  */
 function ChartLoadingSkeleton({ height = 400 }: { height?: number }) {
+  const tAria = useTranslations("aria");
   return (
     <div
       className="flex w-full animate-pulse items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800"
       style={{ height: `${height}px` }}
       role="status"
-      aria-label="Loading chart..."
+      aria-label={tAria("loadingChart")}
     >
       <div className="flex flex-col items-center gap-2 text-gray-400 dark:text-gray-500">
         <svg

@@ -79,6 +79,7 @@ interface SidebarProps {
 
 export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClose }: SidebarProps) {
   const t = useTranslations("sidebar");
+  const tAria = useTranslations("aria");
   const pathname = usePathname();
   const router = useRouter();
   const [isManuallyCollapsed, setIsManuallyCollapsed] = useState(false);
@@ -98,7 +99,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
 
   return (
     <aside
-      aria-label="Main sidebar"
+      aria-label={tAria("mainSidebar")}
       className={cn(
         "relative flex h-full flex-col border-e border-white/10 bg-slate-950/80 backdrop-blur-xl transition-all duration-200",
         !isMobile && `hidden md:flex md:w-18 ${isCollapsed ? "lg:w-18" : "lg:w-60"}`,
@@ -225,7 +226,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
       {/* Navigation */}
       <nav
         id="sidebar-nav"
-        aria-label="Primary navigation"
+        aria-label={tAria("primaryNavigation")}
         className="custom-scrollbar flex-1 space-y-1 overflow-y-auto px-3 py-2 md:px-2 lg:px-3"
       >
         {activeNavigation.map((item) => {
@@ -289,7 +290,7 @@ export function Sidebar({ onSearch, onShowShortcuts, className, isMobile, onClos
               !isMobile && "md:justify-center lg:justify-start"
             )}
             aria-expanded={showAllItems}
-            aria-label={showAllItems ? "Show simplified menu" : "Show all menu items"}
+            aria-label={showAllItems ? tAria("showSimplifiedMenu") : tAria("showAllMenuItems")}
           >
             <MoreHorizontal className="h-4 w-4 shrink-0" />
             <span className={cn(!isMobile && "hidden lg:inline")}>

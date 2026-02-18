@@ -36,6 +36,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { Breadcrumb } from "@/components/budget/Breadcrumb";
 import { ClientI18nProvider } from "@/components/budget/ClientI18nProvider";
 
 export default function BudgetAppLayout({ children }: { children: React.ReactNode }) {
@@ -201,6 +202,11 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
                         <WelcomeBanner />
 
                         <div className="mx-auto max-w-[1440px] px-4 py-6 sm:px-6 lg:px-8">
+                          {/* Breadcrumbs for deep pages (depth > 2 past /budget-app/) */}
+                          {pathname &&
+                            pathname.split("/").filter(Boolean).length > 2 && (
+                              <Breadcrumb className="mb-2" />
+                            )}
                           <ToastProvider>{children}</ToastProvider>
                         </div>
                       </main>

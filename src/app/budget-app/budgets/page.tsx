@@ -15,6 +15,7 @@ import { OverspendingAlerts } from "@/components/budget/OverspendingAlerts";
 import { ConfirmDialog } from "@/components/budget/ConfirmDialog";
 import { useToast } from "@/components/budget/Toast";
 import { HelpTooltip } from "@/components/budget/HelpTooltip";
+import { PullToRefresh } from "@/components/budget/layout/PullToRefresh";
 
 interface CategoryBudgetData {
   category: Category;
@@ -182,6 +183,7 @@ export default function BudgetsPage() {
   const overallPercentage = totalBudgeted > 0 ? (totalSpent / totalBudgeted) * 100 : 0;
 
   return (
+    <PullToRefresh onRefresh={loadData}>
     <div className="space-y-6">
       {/* Header - Enhanced */}
       <div className="flex items-center justify-between">
@@ -486,6 +488,7 @@ export default function BudgetsPage() {
         icon={<Trash2 className="h-5 w-5" />}
       />
     </div>
+    </PullToRefresh>
   );
 }
 

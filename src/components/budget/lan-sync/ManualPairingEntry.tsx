@@ -277,7 +277,7 @@ export function ManualPairingEntry({
             onClick={() => setShowHelp(!showHelp)}
             className="w-full"
           >
-            <HelpCircle className="mr-2 h-4 w-4" />
+            <HelpCircle className="me-2 h-4 w-4" />
             {showHelp ? "Hide Help" : "Where do I find these?"}
           </Button>
 
@@ -308,12 +308,12 @@ export function ManualPairingEntry({
           >
             {isSubmitting ? (
               <>
-                <Loader2 className={`mr-2 animate-spin ${seniorsMode ? "h-6 w-6" : "h-4 w-4"}`} />
+                <Loader2 className={`me-2 animate-spin ${seniorsMode ? "h-6 w-6" : "h-4 w-4"}`} />
                 Connecting...
               </>
             ) : (
               <>
-                <CheckCircle2 className={`mr-2 ${seniorsMode ? "h-6 w-6" : "h-4 w-4"}`} />
+                <CheckCircle2 className={`me-2 ${seniorsMode ? "h-6 w-6" : "h-4 w-4"}`} />
                 Connect
               </>
             )}

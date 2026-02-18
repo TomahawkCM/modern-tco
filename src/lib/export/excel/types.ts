@@ -49,6 +49,9 @@ export interface ExcelExportOptions {
   includeNetWorth: boolean;
   includeDataDictionary: boolean;
 
+  // Locale for date/number formatting
+  locale?: string;
+
   // Output
   filename?: string;
 }
@@ -72,6 +75,7 @@ export const DEFAULT_EXCEL_OPTIONS: ExcelExportOptions = {
   includeCategoryAnalysis: true,
   includeNetWorth: true,
   includeDataDictionary: true,
+  locale: "en-US",
 };
 
 /**

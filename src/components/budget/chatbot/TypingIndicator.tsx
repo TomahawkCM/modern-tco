@@ -11,14 +11,16 @@
 "use client";
 
 import React from "react";
+import { useTranslations } from "next-intl";
 
 export const TypingIndicator: React.FC = () => {
+  const tAria = useTranslations("aria");
   return (
     <div
       className="flex items-center gap-1 self-start rounded-2xl rounded-bl-sm bg-gray-100 px-4 py-3"
       role="status"
       aria-live="polite"
-      aria-label="Assistant is typing"
+      aria-label={tAria("assistantTyping")}
     >
       <span className="sr-only">Assistant is typing...</span>
       <div className="flex gap-1">

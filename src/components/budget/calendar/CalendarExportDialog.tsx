@@ -43,6 +43,7 @@ export function CalendarExportDialog({
   onClose,
 }: CalendarExportDialogProps) {
   const t = useTranslations("calendarExport");
+  const tAria = useTranslations("aria");
   const [selectedIds, setSelectedIds] = useState<Set<string>>(
     new Set(subscriptions.map((s) => s.id))
   );
@@ -194,7 +195,7 @@ export function CalendarExportDialog({
                   <Checkbox
                     checked={selectedIds.has(subscription.id)}
                     onCheckedChange={() => handleToggle(subscription.id)}
-                    aria-label={`Select ${subscription.name}`}
+                    aria-label={tAria("selectSubscription", { name: subscription.name })}
                   />
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-medium">{subscription.name}</p>
@@ -227,9 +228,9 @@ export function CalendarExportDialog({
             ) : (
               <>
                 {exportMethod === "ics" ? (
-                  <Download className="mr-2 h-4 w-4" />
+                  <Download className="me-2 h-4 w-4" />
                 ) : (
-                  <ExternalLink className="mr-2 h-4 w-4" />
+                  <ExternalLink className="me-2 h-4 w-4" />
                 )}
                 {t("dialog.export", { count: selectedCount })}
               </>

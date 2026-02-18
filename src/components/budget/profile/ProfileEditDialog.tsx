@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -37,6 +38,7 @@ export function ProfileEditDialog({
   profile,
   onSuccess,
 }: ProfileEditDialogProps) {
+  const tAria = useTranslations("aria");
   const { updateProfile } = useProfile();
 
   const [name, setName] = useState("");
@@ -139,7 +141,7 @@ export function ProfileEditDialog({
                         : "hover:scale-110"
                     )}
                     style={{ backgroundColor: color }}
-                    aria-label={`Select color ${color}`}
+                    aria-label={tAria("selectColor", { color })}
                   />
                 ))}
               </div>
@@ -174,7 +176,7 @@ export function ProfileEditDialog({
               Cancel
             </Button>
             <Button type="submit" disabled={isLoading}>
-              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isLoading && <Loader2 className="me-2 h-4 w-4 animate-spin" />}
               Save Changes
             </Button>
           </DialogFooter>

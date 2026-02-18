@@ -100,6 +100,7 @@ export function TransactionSearchBar({
   autoFocus = false,
 }: TransactionSearchBarProps) {
   const t = useTranslations("transactionSearch");
+  const tAria = useTranslations("aria");
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -253,7 +254,7 @@ export function TransactionSearchBar({
     <div className={cn("relative", className)}>
       {/* Search Input */}
       <div className="relative">
-        <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+        <Search className="absolute start-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
         <input
           ref={inputRef}
           type="text"
@@ -274,7 +275,7 @@ export function TransactionSearchBar({
           placeholder={placeholder || t("placeholderExtended")}
           autoFocus={autoFocus}
           className={cn(
-            "w-full rounded-lg border border-input bg-background py-3 pl-10 pr-20 text-base text-foreground",
+            "w-full rounded-lg border border-input bg-background py-3 ps-10 pe-20 text-base text-foreground",
             "focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20",
             "placeholder:text-muted-foreground",
             isLoading && "animate-pulse"
@@ -282,7 +283,7 @@ export function TransactionSearchBar({
         />
 
         {/* Right side buttons */}
-        <div className="absolute right-2 top-1/2 flex -translate-y-1/2 items-center gap-1">
+        <div className="absolute end-2 top-1/2 flex -translate-y-1/2 items-center gap-1">
           {/* Result count badge */}
           {resultCount !== undefined && value && (
             <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
@@ -295,7 +296,7 @@ export function TransactionSearchBar({
             <button
               onClick={handleClear}
               className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              aria-label="Clear search"
+              aria-label={tAria("clearSearch")}
             >
               <XIcon className="h-4 w-4" />
             </button>
@@ -306,7 +307,7 @@ export function TransactionSearchBar({
             <button
               onClick={() => setShowTipsModal(!showTipsModal)}
               className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              aria-label="Search tips"
+              aria-label={tAria("searchTips")}
             >
               <HelpCircle className="h-4 w-4" />
             </button>
@@ -329,7 +330,7 @@ export function TransactionSearchBar({
           ref={dropdownRef}
           id="search-suggestions-listbox"
           role="listbox"
-          aria-label="Search suggestions"
+          aria-label={tAria("searchSuggestions")}
           className="absolute z-50 mt-1 w-full overflow-hidden rounded-lg border border-border bg-popover shadow-lg"
         >
           {/* Suggestions */}
@@ -346,7 +347,7 @@ export function TransactionSearchBar({
                   aria-selected={selectedIndex === idx}
                   onClick={() => selectSuggestion(suggestion)}
                   className={cn(
-                    "flex w-full items-center gap-3 rounded-md px-3 py-2 text-left transition-colors",
+                    "flex w-full items-center gap-3 rounded-md px-3 py-2 text-start transition-colors",
                     selectedIndex === idx ? "bg-accent text-accent-foreground" : "hover:bg-muted"
                   )}
                 >
@@ -374,7 +375,7 @@ export function TransactionSearchBar({
                     onSubmit?.(search);
                     setShowDropdown(false);
                   }}
-                  className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-left transition-colors hover:bg-muted"
+                  className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-start transition-colors hover:bg-muted"
                 >
                   <History className="h-4 w-4 text-muted-foreground" />
                   <span className="flex-1 truncate">{search}</span>
@@ -397,7 +398,7 @@ export function TransactionSearchBar({
                     onSubmit?.(filter.query);
                     setShowDropdown(false);
                   }}
-                  className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-left transition-colors hover:bg-muted"
+                  className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-start transition-colors hover:bg-muted"
                 >
                   <Bookmark className="h-4 w-4 text-muted-foreground" />
                   <span className="flex-1 truncate">{filter.name}</span>
@@ -450,7 +451,7 @@ export function TransactionSearchBar({
 
       {/* Tips Modal */}
       {showTipsModal && (
-        <div className="absolute right-0 z-50 mt-1 w-80 rounded-lg border border-border bg-popover p-4 shadow-lg">
+        <div className="absolute end-0 z-50 mt-1 w-80 rounded-lg border border-border bg-popover p-4 shadow-lg">
           <div className="mb-3 flex items-center justify-between">
             <h3 className="flex items-center gap-2 font-medium">
               <Sparkles className="h-4 w-4 text-teal-500" />
@@ -480,10 +481,10 @@ export function TransactionSearchBar({
                     setShowTipsModal(false);
                     inputRef.current?.focus();
                   }}
-                  className="w-full rounded px-2 py-1 text-left text-xs transition-colors hover:bg-muted"
+                  className="w-full rounded px-2 py-1 text-start text-xs transition-colors hover:bg-muted"
                 >
                   <code className="text-teal-600">{example.query}</code>
-                  <span className="ml-2 text-muted-foreground">— {example.description}</span>
+                  <span className="ms-2 text-muted-foreground">— {example.description}</span>
                 </button>
               ))}
             </div>

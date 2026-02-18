@@ -342,7 +342,7 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
                     size="sm"
                     className="bg-teal-600 hover:bg-teal-700"
                   >
-                    <LinkIcon className="mr-2 h-4 w-4" />
+                    <LinkIcon className="me-2 h-4 w-4" />
                     Link Payment
                   </Button>
                 </div>
@@ -364,7 +364,7 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
               onClick={() => setShowAddPayment(!showAddPayment)}
               className="bg-teal-500 hover:bg-teal-600"
             >
-              <Plus className="mr-2 h-4 w-4" />
+              <Plus className="me-2 h-4 w-4" />
               Add Payment
             </Button>
           </div>
@@ -387,13 +387,13 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
               <div>
                 <Label htmlFor="paymentAmount">Payment Amount</Label>
                 <div className="relative mt-1">
-                  <DollarSign className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                  <DollarSign className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                   <Input
                     id="paymentAmount"
                     type="number"
                     value={paymentAmount}
                     onChange={(e) => setPaymentAmount(parseFloat(e.target.value) || 0)}
-                    className="pl-10"
+                    className="ps-10"
                     step="0.01"
                   />
                 </div>
@@ -402,13 +402,13 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
               <div>
                 <Label htmlFor="extraPrincipal">Extra Principal (Optional)</Label>
                 <div className="relative mt-1">
-                  <DollarSign className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                  <DollarSign className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                   <Input
                     id="extraPrincipal"
                     type="number"
                     value={extraPrincipal}
                     onChange={(e) => setExtraPrincipal(parseFloat(e.target.value) || 0)}
-                    className="pl-10"
+                    className="ps-10"
                     step="0.01"
                   />
                 </div>
@@ -451,12 +451,12 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 bg-gray-50">
-                    <th className="px-4 py-3 text-left font-medium text-gray-700">Date</th>
-                    <th className="px-4 py-3 text-right font-medium text-gray-700">Amount</th>
-                    <th className="px-4 py-3 text-right font-medium text-gray-700">Principal</th>
-                    <th className="px-4 py-3 text-right font-medium text-gray-700">Interest</th>
-                    <th className="px-4 py-3 text-right font-medium text-gray-700">Extra</th>
-                    <th className="px-4 py-3 text-right font-medium text-gray-700">
+                    <th className="px-4 py-3 text-start font-medium text-gray-700">Date</th>
+                    <th className="px-4 py-3 text-end font-medium text-gray-700">Amount</th>
+                    <th className="px-4 py-3 text-end font-medium text-gray-700">Principal</th>
+                    <th className="px-4 py-3 text-end font-medium text-gray-700">Interest</th>
+                    <th className="px-4 py-3 text-end font-medium text-gray-700">Extra</th>
+                    <th className="px-4 py-3 text-end font-medium text-gray-700">
                       Balance After
                     </th>
                     <th className="px-4 py-3 text-center font-medium text-gray-700">Status</th>
@@ -474,21 +474,21 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
                         <td className="px-4 py-3 font-medium text-gray-900">
                           {format(new Date(payment.date), "MMM d, yyyy")}
                         </td>
-                        <td className="px-4 py-3 text-right text-gray-900">
+                        <td className="px-4 py-3 text-end text-gray-900">
                           ${payment.amount.toLocaleString()}
                         </td>
-                        <td className="px-4 py-3 text-right text-teal-600">
+                        <td className="px-4 py-3 text-end text-teal-600">
                           ${payment.principalAmount.toLocaleString()}
                         </td>
-                        <td className="px-4 py-3 text-right text-red-600">
+                        <td className="px-4 py-3 text-end text-red-600">
                           ${payment.interestAmount.toLocaleString()}
                         </td>
-                        <td className="px-4 py-3 text-right text-green-600">
+                        <td className="px-4 py-3 text-end text-green-600">
                           {payment.extraPrincipal > 0
                             ? `$${payment.extraPrincipal.toLocaleString()}`
                             : "-"}
                         </td>
-                        <td className="px-4 py-3 text-right font-medium text-gray-900">
+                        <td className="px-4 py-3 text-end font-medium text-gray-900">
                           ${payment.balanceAfter.toLocaleString()}
                         </td>
                         <td className="px-4 py-3 text-center">

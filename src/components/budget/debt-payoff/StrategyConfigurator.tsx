@@ -79,21 +79,21 @@ export function StrategyConfigurator({
             value="avalanche"
             className="data-[state=active]:bg-teal-600/20 data-[state=active]:text-teal-300"
           >
-            <TrendingDown className="mr-1.5 h-3.5 w-3.5" />
+            <TrendingDown className="me-1.5 h-3.5 w-3.5" />
             {t("strategies.avalanche")}
           </TabsTrigger>
           <TabsTrigger
             value="snowball"
             className="data-[state=active]:bg-blue-600/20 data-[state=active]:text-blue-300"
           >
-            <Snowflake className="mr-1.5 h-3.5 w-3.5" />
+            <Snowflake className="me-1.5 h-3.5 w-3.5" />
             {t("strategies.snowball")}
           </TabsTrigger>
           <TabsTrigger
             value="custom"
             className="data-[state=active]:bg-purple-600/20 data-[state=active]:text-purple-300"
           >
-            <GripVertical className="mr-1.5 h-3.5 w-3.5" />
+            <GripVertical className="me-1.5 h-3.5 w-3.5" />
             {t("strategies.custom")}
           </TabsTrigger>
         </TabsList>
@@ -213,7 +213,7 @@ export function StrategyConfigurator({
         disabled={Boolean(isSaving) || debts.length === 0}
         className="w-full bg-teal-600 text-white hover:bg-teal-700"
       >
-        <Save className="mr-2 h-4 w-4" />
+        <Save className="me-2 h-4 w-4" />
         {t("saveScenario")}
       </Button>
     </div>

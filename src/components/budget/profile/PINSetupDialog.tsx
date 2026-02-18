@@ -253,7 +253,7 @@ export function PINSetupDialog({
               disabled={isLoading}
               variant={mode === "remove" ? "destructive" : "default"}
             >
-              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isLoading && <Loader2 className="me-2 h-4 w-4 animate-spin" />}
               {step === "current" && requiresCurrentPIN
                 ? mode === "remove"
                   ? "Verify & Remove"

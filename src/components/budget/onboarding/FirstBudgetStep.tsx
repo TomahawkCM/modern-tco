@@ -108,7 +108,7 @@ export function FirstBudgetStep({ onComplete, onSkip }: StepProps) {
               value={monthlyIncome}
               onChange={(e) => setMonthlyIncome(Math.max(0, parseInt(e.target.value) || 0))}
               className={cn(
-                "w-28 px-3 py-2 text-right text-lg font-semibold",
+                "w-28 px-3 py-2 text-end text-lg font-semibold",
                 "rounded-lg border border-white/10 bg-slate-800/50",
                 "text-white focus:outline-none focus:ring-2 focus:ring-green-500"
               )}
@@ -118,7 +118,7 @@ export function FirstBudgetStep({ onComplete, onSkip }: StepProps) {
       </div>
 
       {/* Budget Categories */}
-      <div className="max-h-[220px] space-y-2 overflow-y-auto pr-2">
+      <div className="max-h-[220px] space-y-2 overflow-y-auto pe-2">
         {budgets.map((budget) => {
           const isOverAverage = budget.amount > budget.average;
           const isUnderAverage = budget.amount < budget.average * 0.8;
@@ -161,12 +161,12 @@ export function FirstBudgetStep({ onComplete, onSkip }: StepProps) {
                 <p className="text-xs text-slate-500">
                   Avg: ${budget.average}/mo
                   {isOverAverage && (
-                    <span className="ml-2 text-amber-400">
+                    <span className="ms-2 text-amber-400">
                       <TrendingUp className="inline h-3 w-3" /> Above avg
                     </span>
                   )}
                   {isUnderAverage && (
-                    <span className="ml-2 text-green-400">
+                    <span className="ms-2 text-green-400">
                       <TrendingDown className="inline h-3 w-3" /> Saving!
                     </span>
                   )}

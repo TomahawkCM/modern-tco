@@ -14,7 +14,7 @@ export function AuroraBackground({ className }: { className?: string }) {
       {/* Aurora / light fields */}
       <motion.div
         aria-hidden="true"
-        className="absolute -left-1/4 top-[-25%] h-[520px] w-[520px] rounded-full blur-[120px]"
+        className="absolute -start-1/4 top-[-25%] h-[520px] w-[520px] rounded-full blur-[120px]"
         style={{
           background: "radial-gradient(closest-side, rgba(20,184,166,0.55), rgba(20,184,166,0))",
         }}
@@ -26,7 +26,7 @@ export function AuroraBackground({ className }: { className?: string }) {
       />
       <motion.div
         aria-hidden="true"
-        className="absolute -right-1/4 bottom-[-30%] h-[620px] w-[620px] rounded-full blur-[140px]"
+        className="absolute -end-1/4 bottom-[-30%] h-[620px] w-[620px] rounded-full blur-[140px]"
         style={{
           background: "radial-gradient(closest-side, rgba(99,102,241,0.35), rgba(99,102,241,0))",
         }}
@@ -38,7 +38,7 @@ export function AuroraBackground({ className }: { className?: string }) {
       />
       <motion.div
         aria-hidden="true"
-        className="absolute left-[20%] top-[35%] h-[420px] w-[420px] rounded-full blur-[130px]"
+        className="absolute start-[20%] top-[35%] h-[420px] w-[420px] rounded-full blur-[130px]"
         style={{
           background: "radial-gradient(closest-side, rgba(236,72,153,0.18), rgba(236,72,153,0))",
         }}

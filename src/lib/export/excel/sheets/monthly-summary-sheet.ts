@@ -32,16 +32,16 @@ interface MonthlySummarySheetData {
 /**
  * Get month display name
  */
-function getMonthDisplay(monthKey: string): string {
+function getMonthDisplay(monthKey: string, locale = "en-US"): string {
   const [year, month] = monthKey.split("-");
   const date = new Date(parseInt(year), parseInt(month) - 1);
-  return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+  return date.toLocaleDateString(locale, { month: "short", year: "numeric" });
 }
 
 /**
  * Aggregate transactions by month
  */
-function aggregateByMonth(transactions: Transaction[]): Map<string, MonthlySummaryRow> {
+function aggregateByMonth(transactions: Transaction[], locale = "en-US"): Map<string, MonthlySummaryRow> {
   const monthMap = new Map<string, MonthlySummaryRow>();
 
   transactions.forEach((tx) => {
@@ -51,7 +51,7 @@ function aggregateByMonth(transactions: Transaction[]): Map<string, MonthlySumma
     if (!monthMap.has(monthKey)) {
       monthMap.set(monthKey, {
         month: monthKey,
-        monthDisplay: getMonthDisplay(monthKey),
+        monthDisplay: getMonthDisplay(monthKey, locale),
         income: 0,
         expenses: 0,
         net: 0,
@@ -102,7 +102,8 @@ export async function generateMonthlySummarySheet(
   });
 
   // Aggregate data
-  const monthlyData = aggregateByMonth(data.transactions);
+  const locale = options.locale ?? "en-US";
+  const monthlyData = aggregateByMonth(data.transactions, locale);
   const monthRows = Array.from(monthlyData.values());
 
   // Column definitions

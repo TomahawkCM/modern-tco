@@ -277,15 +277,15 @@ export function PairingDialog({
           <Tabs value={mode} onValueChange={(v) => setMode(v as PairingMode)}>
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="scan" className={seniorsMode ? "py-3 text-lg" : ""}>
-                <QrCode className={`mr-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
+                <QrCode className={`me-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
                 Scan
               </TabsTrigger>
               <TabsTrigger value="manual" className={seniorsMode ? "py-3 text-lg" : ""}>
-                <Keyboard className={`mr-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
+                <Keyboard className={`me-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
                 Manual
               </TabsTrigger>
               <TabsTrigger value="host" className={seniorsMode ? "py-3 text-lg" : ""}>
-                <Monitor className={`mr-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
+                <Monitor className={`me-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
                 Host
               </TabsTrigger>
             </TabsList>

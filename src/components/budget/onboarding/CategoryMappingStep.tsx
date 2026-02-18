@@ -155,7 +155,7 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
       </div>
 
       {/* Transaction List */}
-      <div className="max-h-[280px] space-y-2 overflow-y-auto pr-2">
+      <div className="max-h-[280px] space-y-2 overflow-y-auto pe-2">
         {transactions.map((transaction) => {
           const category = transaction.category ? getCategoryById(transaction.category) : null;
           const suggestion = DEMO_TRANSACTIONS.find((d) => d.id === transaction.id);
@@ -233,14 +233,14 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
 
                 {/* Category Dropdown */}
                 {showCategoryDropdown === transaction.id && (
-                  <div className="absolute right-0 top-full z-10 mt-1 w-48 rounded-lg border border-white/10 bg-slate-800 py-1 shadow-xl">
+                  <div className="absolute end-0 top-full z-10 mt-1 w-48 rounded-lg border border-white/10 bg-slate-800 py-1 shadow-xl">
                     {CATEGORIES.map((cat) => (
                       <button
                         key={cat.id}
                         type="button"
                         onClick={() => handleCategoryChange(transaction.id, cat.id)}
                         className={cn(
-                          "flex w-full items-center gap-2 px-3 py-2 text-left text-sm",
+                          "flex w-full items-center gap-2 px-3 py-2 text-start text-sm",
                           "transition-colors hover:bg-white/5",
                           transaction.category === cat.id && "bg-teal-500/10"
                         )}
@@ -248,7 +248,7 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
                         <span>{cat.icon}</span>
                         <span className="text-white">{cat.name}</span>
                         {transaction.category === cat.id && (
-                          <Check className="ml-auto h-3 w-3 text-teal-400" />
+                          <Check className="ms-auto h-3 w-3 text-teal-400" />
                         )}
                       </button>
                     ))}

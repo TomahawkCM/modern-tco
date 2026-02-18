@@ -116,8 +116,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Accessibility global styles - CSS-based to avoid hydration errors */}
         <style>{`
           html[data-large-text="1"] { font-size: 18px; }
-          html[data-high-contrast="1"] body { filter: contrast(1.15) saturate(1.1); }
-          html[data-high-contrast="1"] :focus-visible { outline: 2px solid #14b8a6; outline-offset: 2px; }
+          html[data-high-contrast="1"] :focus-visible { outline: 3px solid #5eead4; outline-offset: 2px; }
         `}</style>
         {/* Register service worker on client side */}
         <Script

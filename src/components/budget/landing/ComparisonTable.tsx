@@ -50,7 +50,7 @@ export function ComparisonTable() {
     <div className="overflow-x-auto">
       <div className="min-w-[700px]">
         <div className="grid grid-cols-4 gap-4 border-b border-white/10 pb-4 text-center text-sm font-bold text-white">
-          <div className="pl-4 text-left">{t("headers.feature")}</div>
+          <div className="ps-4 text-start">{t("headers.feature")}</div>
           <div className="text-teal-300">{t("headers.local")}</div>
           <div className="text-indigo-300">{t("headers.sync")}</div>
           <div className="text-slate-500">{t("headers.cloud")}</div>
@@ -61,7 +61,7 @@ export function ComparisonTable() {
               key={row.feature}
               className="grid grid-cols-4 items-center gap-4 p-4 text-center"
             >
-              <div className="text-left text-sm font-medium text-slate-200">{row.feature}</div>
+              <div className="text-start text-sm font-medium text-slate-200">{row.feature}</div>
               <div className="text-slate-200">{renderValue(row.local)}</div>
               <div className="text-slate-200">{renderValue(row.sync)}</div>
               <div className="text-slate-400">{renderValue(row.cloud)}</div>

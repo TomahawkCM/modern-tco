@@ -164,7 +164,7 @@ export async function generateNetWorthSheet(
   let currentRow = createTitleSection(
     worksheet,
     "Net Worth Statement",
-    new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
+    new Date().toLocaleDateString(options.locale ?? "en-US", { month: "long", day: "numeric", year: "numeric" }),
     new Date()
   );
 

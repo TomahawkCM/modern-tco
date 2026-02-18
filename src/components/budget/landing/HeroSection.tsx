@@ -131,7 +131,7 @@ function ProductPreview() {
                     <div className="truncate text-sm font-medium text-slate-200">{s.name}</div>
                     <div className="text-xs text-slate-500">{s.meta}</div>
                   </div>
-                  <div className="ml-4 text-sm font-semibold text-white">{s.amt}</div>
+                  <div className="ms-4 text-sm font-semibold text-white">{s.amt}</div>
                 </div>
               ))}
             </div>
@@ -176,7 +176,7 @@ function ProductPreview() {
                   <div className="truncate text-sm font-medium text-slate-200">{t.name}</div>
                   <div className="text-xs text-slate-500">{t.meta}</div>
                 </div>
-                <div className={`ml-4 text-sm font-semibold ${t.amtClass}`}>{t.amt}</div>
+                <div className={`ms-4 text-sm font-semibold ${t.amtClass}`}>{t.amt}</div>
               </div>
             ))}
           </div>
@@ -207,7 +207,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <div className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.06] px-3 py-1 text-xs font-medium text-slate-100">
-            <span className="mr-2 inline-flex h-2 w-2 rounded-full bg-gradient-to-r from-teal-300 to-cyan-300" />
+            <span className="me-2 inline-flex h-2 w-2 rounded-full bg-gradient-to-r from-teal-300 to-cyan-300" />
             {content.hero.badge}
           </div>
 

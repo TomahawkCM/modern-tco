@@ -83,7 +83,7 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
           type="button"
           onClick={() => setMode("automatic")}
           className={cn(
-            "flex w-full items-start gap-4 rounded-xl border p-4 text-left transition-all",
+            "flex w-full items-start gap-4 rounded-xl border p-4 text-start transition-all",
             mode === "automatic"
               ? "border-teal-500/50 bg-teal-500/10"
               : "border-white/10 bg-slate-800/50 hover:border-white/20"
@@ -117,7 +117,7 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
           type="button"
           onClick={() => setMode("password")}
           className={cn(
-            "flex w-full items-start gap-4 rounded-xl border p-4 text-left transition-all",
+            "flex w-full items-start gap-4 rounded-xl border p-4 text-start transition-all",
             mode === "password"
               ? "border-teal-500/50 bg-teal-500/10"
               : "border-white/10 bg-slate-800/50 hover:border-white/20"
@@ -156,7 +156,7 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter a strong password"
                 className={cn(
-                  "w-full px-4 py-3 pr-12 text-sm",
+                  "w-full px-4 py-3 pe-12 text-sm",
                   "rounded-lg border bg-slate-900",
                   "text-white placeholder-slate-500",
                   "focus:outline-none focus:ring-2 focus:ring-teal-500",
@@ -166,7 +166,7 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-white"
+                className="absolute end-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-white"
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>

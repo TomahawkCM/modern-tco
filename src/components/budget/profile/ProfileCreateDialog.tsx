@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -33,6 +34,7 @@ interface ProfileCreateDialogProps {
 }
 
 export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCreateDialogProps) {
+  const tAria = useTranslations("aria");
   const { createProfile } = useProfile();
 
   const [name, setName] = useState("");
@@ -145,7 +147,7 @@ export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCr
                         : "hover:scale-110"
                     )}
                     style={{ backgroundColor: color }}
-                    aria-label={`Select color ${color}`}
+                    aria-label={tAria("selectColor", { color })}
                   />
                 ))}
               </div>
@@ -222,7 +224,7 @@ export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCr
               Cancel
             </Button>
             <Button type="submit" disabled={isLoading}>
-              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isLoading && <Loader2 className="me-2 h-4 w-4 animate-spin" />}
               Create Profile
             </Button>
           </DialogFooter>

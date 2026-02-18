@@ -96,7 +96,7 @@ export async function generateBudgetsSheet(
     months.push({
       year: date.getFullYear(),
       month: date.getMonth(),
-      display: date.toLocaleDateString("en-US", { month: "short", year: "2-digit" }),
+      display: date.toLocaleDateString(options.locale ?? "en-US", { month: "short", year: "2-digit" }),
     });
   }
 

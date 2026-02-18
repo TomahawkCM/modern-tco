@@ -199,15 +199,16 @@ export async function generateCategoryAnalysisSheet(
   const overallPercent = totalBudget > 0 ? (totalActual / totalBudget) * 100 : 0;
 
   // Summary stats
+  const locale = options.locale ?? "en-US";
   const summaryRow = worksheet.getRow(currentRow);
   summaryRow.getCell(1).value =
-    `Total Budget: $${totalBudget.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+    `Total Budget: ${totalBudget.toLocaleString(locale, { style: "currency", currency: "USD" })}`;
   summaryRow.getCell(1).font = FONTS.body;
   summaryRow.getCell(3).value =
-    `Total Spent: $${totalActual.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+    `Total Spent: ${totalActual.toLocaleString(locale, { style: "currency", currency: "USD" })}`;
   summaryRow.getCell(3).font = { ...FONTS.body, color: { argb: "FFEF4444" } };
   summaryRow.getCell(5).value =
-    `Remaining: $${totalRemaining.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+    `Remaining: ${totalRemaining.toLocaleString(locale, { style: "currency", currency: "USD" })}`;
   summaryRow.getCell(5).font = {
     ...FONTS.body,
     color: { argb: totalRemaining >= 0 ? "FF10B981" : "FFEF4444" },

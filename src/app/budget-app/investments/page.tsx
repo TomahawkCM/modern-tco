@@ -38,6 +38,7 @@ import { ConfirmDialog } from "@/components/budget/ConfirmDialog";
 import { useToast } from "@/components/budget/Toast";
 import { CountUp } from "@/hooks/useCountUp";
 import { EmptyStates } from "@/components/budget/EmptyState";
+import { PullToRefresh } from "@/components/budget/layout/PullToRefresh";
 
 export default function InvestmentsPage() {
   const toast = useToast();
@@ -322,6 +323,7 @@ export default function InvestmentsPage() {
   }
 
   return (
+    <PullToRefresh onRefresh={loadData}>
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -780,5 +782,6 @@ export default function InvestmentsPage() {
         icon={<Trash2 className="h-5 w-5" />}
       />
     </div>
+    </PullToRefresh>
   );
 }

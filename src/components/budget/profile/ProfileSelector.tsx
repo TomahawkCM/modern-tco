@@ -106,7 +106,7 @@ export function ProfileSelector({
               </>
             )}
             {compact && isLocked && (
-              <Lock className="absolute -bottom-1 -right-1 h-3 w-3 text-muted-foreground" />
+              <Lock className="absolute -bottom-1 -end-1 h-3 w-3 text-muted-foreground" />
             )}
           </Button>
         </DropdownMenuTrigger>
@@ -145,13 +145,13 @@ export function ProfileSelector({
           <DropdownMenuSeparator />
 
           <DropdownMenuItem onClick={() => setShowCreateDialog(true)} className="cursor-pointer">
-            <Plus className="mr-2 h-4 w-4" />
+            <Plus className="me-2 h-4 w-4" />
             Add Profile
           </DropdownMenuItem>
 
           {currentProfile?.pinHash && !isLocked && (
             <DropdownMenuItem onClick={handleLockClick} className="cursor-pointer">
-              <Lock className="mr-2 h-4 w-4" />
+              <Lock className="me-2 h-4 w-4" />
               Lock Profile
             </DropdownMenuItem>
           )}
@@ -160,7 +160,7 @@ export function ProfileSelector({
             <>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={onSettingsClick} className="cursor-pointer">
-                <Settings className="mr-2 h-4 w-4" />
+                <Settings className="me-2 h-4 w-4" />
                 Profile Settings
               </DropdownMenuItem>
             </>

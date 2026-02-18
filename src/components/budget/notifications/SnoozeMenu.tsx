@@ -44,7 +44,7 @@ export function SnoozeMenu({ onSnooze, className, iconOnly = false }: SnoozeMenu
           aria-label={t("snooze")}
         >
           <Clock className="h-4 w-4" />
-          {!iconOnly && <span className="ml-2">{t("snooze")}</span>}
+          {!iconOnly && <span className="ms-2">{t("snooze")}</span>}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-40">

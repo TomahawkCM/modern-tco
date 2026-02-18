@@ -89,7 +89,7 @@ export const ChatbotPanel: React.FC<ChatbotPanelProps> = ({ isOpen, onClose }) =
         role="dialog"
         aria-modal="true"
         aria-labelledby="chatbot-title"
-        className="fixed bottom-6 right-6 z-[999] flex h-[calc(100vh-80px)] max-h-[600px] w-full flex-col rounded-lg border border-gray-200 bg-white shadow-2xl sm:w-[400px]"
+        className="fixed bottom-6 end-6 z-[999] flex h-[calc(100vh-80px)] max-h-[600px] w-full flex-col rounded-lg border border-gray-200 bg-white shadow-2xl sm:w-[400px]"
         style={{
           animation: "chatbot-panel-enter 200ms ease-out",
         }}

@@ -212,8 +212,9 @@ export async function generateDashboardSheet(
   // Export date
   const dateRow = worksheet.getRow(currentRow);
   worksheet.mergeCells(`B${currentRow}:I${currentRow}`);
+  const locale = options.locale ?? "en-US";
   dateRow.getCell(2).value =
-    `Export Date: ${new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}`;
+    `Export Date: ${new Date().toLocaleDateString(locale, { weekday: "long", year: "numeric", month: "long", day: "numeric" })}`;
   dateRow.getCell(2).font = FONTS.bodyMuted;
   currentRow += 2;
 
@@ -290,8 +291,8 @@ export async function generateDashboardSheet(
   const trendRow1 = worksheet.getRow(currentRow);
   trendRow1.getCell(2).value =
     metrics.netWorthChange >= 0
-      ? `▲ +$${metrics.netWorthChange.toLocaleString()}`
-      : `▼ -$${Math.abs(metrics.netWorthChange).toLocaleString()}`;
+      ? `▲ +${metrics.netWorthChange.toLocaleString(locale, { style: "currency", currency: "USD" })}`
+      : `▼ -${Math.abs(metrics.netWorthChange).toLocaleString(locale, { style: "currency", currency: "USD" })}`;
   trendRow1.getCell(2).font = {
     ...FONTS.bodyMuted,
     color: { argb: metrics.netWorthChange >= 0 ? "FF10B981" : "FFEF4444" },

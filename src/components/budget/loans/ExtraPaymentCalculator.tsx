@@ -234,50 +234,50 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
                 <table className="w-full text-base">
                   <thead>
                     <tr className="border-b-2 border-gray-300 bg-gray-100">
-                      <th className="px-3 py-4 text-left font-bold text-gray-900">Metric</th>
-                      <th className="px-3 py-4 text-right font-bold text-gray-900">
+                      <th className="px-3 py-4 text-start font-bold text-gray-900">Metric</th>
+                      <th className="px-3 py-4 text-end font-bold text-gray-900">
                         Original Plan
                       </th>
-                      <th className="px-3 py-4 text-right font-bold text-green-700">
+                      <th className="px-3 py-4 text-end font-bold text-green-700">
                         With Extra Payments
                       </th>
-                      <th className="px-3 py-4 text-right font-bold text-gray-900">Difference</th>
+                      <th className="px-3 py-4 text-end font-bold text-gray-900">Difference</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr className="border-b border-gray-200 hover:bg-gray-50">
                       <td className="px-3 py-4 font-semibold text-gray-900">Total Interest</td>
-                      <td className="px-3 py-4 text-right font-semibold text-gray-900">
+                      <td className="px-3 py-4 text-end font-semibold text-gray-900">
                         ${scenario.originalTotalInterest.toLocaleString()}
                       </td>
-                      <td className="px-3 py-4 text-right font-semibold text-gray-900">
+                      <td className="px-3 py-4 text-end font-semibold text-gray-900">
                         ${scenario.newTotalInterest.toLocaleString()}
                       </td>
-                      <td className="px-3 py-4 text-right text-lg font-bold text-green-600">
+                      <td className="px-3 py-4 text-end text-lg font-bold text-green-600">
                         -${scenario.totalInterestSaved.toLocaleString()} ✓
                       </td>
                     </tr>
                     <tr className="border-b border-gray-200 hover:bg-gray-50">
                       <td className="px-3 py-4 font-semibold text-gray-900">Loan Term</td>
-                      <td className="px-3 py-4 text-right font-semibold text-gray-900">
+                      <td className="px-3 py-4 text-end font-semibold text-gray-900">
                         {loan.termMonths} months
                       </td>
-                      <td className="px-3 py-4 text-right font-semibold text-gray-900">
+                      <td className="px-3 py-4 text-end font-semibold text-gray-900">
                         {scenario.schedule.length} months
                       </td>
-                      <td className="px-3 py-4 text-right text-lg font-bold text-green-600">
+                      <td className="px-3 py-4 text-end text-lg font-bold text-green-600">
                         -{monthsSaved} months ✓
                       </td>
                     </tr>
                     <tr className="hover:bg-gray-50">
                       <td className="px-3 py-4 font-semibold text-gray-900">Monthly Payment</td>
-                      <td className="px-3 py-4 text-right font-semibold text-gray-900">
+                      <td className="px-3 py-4 text-end font-semibold text-gray-900">
                         ${loan.monthlyPayment.toLocaleString()}
                       </td>
-                      <td className="px-3 py-4 text-right font-semibold text-gray-900">
+                      <td className="px-3 py-4 text-end font-semibold text-gray-900">
                         ${(loan.monthlyPayment + extraMonthly).toLocaleString()}
                       </td>
-                      <td className="px-3 py-4 text-right font-semibold text-gray-600">
+                      <td className="px-3 py-4 text-end font-semibold text-gray-600">
                         +${extraMonthly.toLocaleString()}
                       </td>
                     </tr>

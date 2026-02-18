@@ -17,6 +17,7 @@
 import { cn } from "@/lib/utils";
 import { Check, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { AccessibilityStep } from "./AccessibilityStep";
 import { BillRemindersStep } from "./BillRemindersStep";
 import { CategoryMappingStep } from "./CategoryMappingStep";
@@ -79,6 +80,7 @@ export function OnboardingWizard({
   onComplete,
   onDismiss,
 }: OnboardingWizardProps) {
+  const tAria = useTranslations("aria");
   const [state, setState] = useState<OnboardingState>(defaultState);
   const [isVisible, setIsVisible] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
@@ -280,7 +282,7 @@ export function OnboardingWizard({
             type="button"
             onClick={handleSkipWizard}
             className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
-            aria-label="Close onboarding wizard"
+            aria-label={tAria("closeOnboarding")}
           >
             <X className="h-5 w-5" />
           </button>

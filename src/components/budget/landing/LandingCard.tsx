@@ -17,7 +17,7 @@ export function LandingCard({
     >
       {/* subtle shine */}
       <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <div className="absolute -left-24 -top-24 h-64 w-64 rounded-full bg-gradient-to-br from-teal-400/25 via-cyan-400/10 to-indigo-400/20 blur-2xl" />
+        <div className="absolute -start-24 -top-24 h-64 w-64 rounded-full bg-gradient-to-br from-teal-400/25 via-cyan-400/10 to-indigo-400/20 blur-2xl" />
       </div>
       <div className="relative">{children}</div>
     </div>

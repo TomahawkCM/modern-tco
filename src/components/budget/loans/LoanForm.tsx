@@ -252,7 +252,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                           <p className="text-sm text-gray-600">{type.description}</p>
                         </div>
                         {isSelected && (
-                          <div className="pointer-events-none absolute right-3 top-3">
+                          <div className="pointer-events-none absolute end-3 top-3">
                             <CheckCircle2 className="h-6 w-6 fill-teal-100 text-teal-600" />
                           </div>
                         )}
@@ -652,14 +652,14 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
           }}
           disabled={loading}
         >
-          <ChevronLeft className="mr-2 h-4 w-4" />
+          <ChevronLeft className="me-2 h-4 w-4" />
           {step === 1 ? "Cancel" : "Back"}
         </Button>
 
         {step < totalSteps ? (
           <Button onClick={() => setStep(step + 1)} disabled={!canGoNext || loading}>
             Next
-            <ChevronRight className="ml-2 h-4 w-4" />
+            <ChevronRight className="ms-2 h-4 w-4" />
           </Button>
         ) : (
           <Button

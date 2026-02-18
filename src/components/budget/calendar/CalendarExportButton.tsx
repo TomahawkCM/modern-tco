@@ -59,7 +59,7 @@ export function CalendarExportButton({
         <DropdownMenuTrigger asChild>
           <Button variant={variant} size={size} className={className}>
             <Calendar className="h-4 w-4" />
-            {showLabel && <span className="ml-2">{t("addToCalendar")}</span>}
+            {showLabel && <span className="ms-2">{t("addToCalendar")}</span>}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56">
@@ -67,7 +67,7 @@ export function CalendarExportButton({
             onClick={() => downloadSubscriptionICS(subscription)}
             className="cursor-pointer"
           >
-            <Download className="mr-2 h-4 w-4" />
+            <Download className="me-2 h-4 w-4" />
             {t("downloadICS")}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
@@ -75,14 +75,14 @@ export function CalendarExportButton({
             onClick={() => openSubscriptionGoogleCalendar(subscription)}
             className="cursor-pointer"
           >
-            <ExternalLink className="mr-2 h-4 w-4" />
+            <ExternalLink className="me-2 h-4 w-4" />
             {t("googleCalendar")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => openSubscriptionOutlookCalendar(subscription)}
             className="cursor-pointer"
           >
-            <ExternalLink className="mr-2 h-4 w-4" />
+            <ExternalLink className="me-2 h-4 w-4" />
             {t("outlookCalendar")}
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -98,7 +98,7 @@ export function CalendarExportButton({
           <DropdownMenuTrigger asChild>
             <Button variant={variant} size={size} className={className}>
               <Calendar className="h-4 w-4" />
-              {showLabel && <span className="ml-2">{t("exportToCalendar")}</span>}
+              {showLabel && <span className="ms-2">{t("exportToCalendar")}</span>}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-56">
@@ -106,12 +106,12 @@ export function CalendarExportButton({
               onClick={() => downloadMultipleSubscriptionsICS(subscriptions)}
               className="cursor-pointer"
             >
-              <Download className="mr-2 h-4 w-4" />
+              <Download className="me-2 h-4 w-4" />
               {t("downloadAllICS")}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => setShowDialog(true)} className="cursor-pointer">
-              <FileText className="mr-2 h-4 w-4" />
+              <FileText className="me-2 h-4 w-4" />
               {t("selectSubscriptions")}
             </DropdownMenuItem>
           </DropdownMenuContent>

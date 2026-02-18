@@ -263,7 +263,7 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
             type="button"
             onClick={() => handleMethodSelect(option.id)}
             className={cn(
-              "flex w-full items-start gap-4 rounded-xl p-4 text-left",
+              "flex w-full items-start gap-4 rounded-xl p-4 text-start",
               "border border-white/5 bg-slate-800/50",
               "hover:border-teal-500/50 hover:bg-slate-800",
               "transition-all duration-200",

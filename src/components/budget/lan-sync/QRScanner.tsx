@@ -8,6 +8,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -50,6 +51,8 @@ export function QRScanner({
   seniorsMode = false,
   className = "",
 }: QRScannerProps) {
+  const tAria = useTranslations("aria");
+
   // Refs
   const scannerRef = useRef<HTMLDivElement>(null);
   const html5QrCodeRef = useRef<any>(null);
@@ -280,7 +283,7 @@ export function QRScanner({
 
           <div className="flex justify-center gap-2">
             <Button variant="outline" size={seniorsMode ? "lg" : "default"} onClick={retryScanning}>
-              <RefreshCw className={`mr-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
+              <RefreshCw className={`me-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
               Try Again
             </Button>
           </div>
@@ -306,7 +309,7 @@ export function QRScanner({
             onClick={startScanner}
             className={seniorsMode ? "px-8 py-6 text-lg" : ""}
           >
-            <Camera className={`mr-2 ${seniorsMode ? "h-6 w-6" : "h-4 w-4"}`} />
+            <Camera className={`me-2 ${seniorsMode ? "h-6 w-6" : "h-4 w-4"}`} />
             Start Camera
           </Button>
         </CardContent>
@@ -334,7 +337,7 @@ export function QRScanner({
           id="qr-reader"
           className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-lg bg-black"
           role="region"
-          aria-label="QR code scanner viewport"
+          aria-label={tAria("qrScannerViewport")}
         >
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/80">

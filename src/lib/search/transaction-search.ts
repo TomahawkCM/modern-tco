@@ -7,6 +7,7 @@
 import Fuse, { type IFuseOptions, type FuseResult } from "fuse.js";
 import type { Transaction, Category } from "@/types/budget";
 import { parseSearchQuery, type ParsedQuery } from "./query-parser";
+import { normalizeText } from "./text-utils";
 
 // Search result with score and match info
 export interface SearchResult {
@@ -61,13 +62,8 @@ let cachedCategories: Category[] = [];
 let cachedAccounts: { id: string; name: string }[] = [];
 let cachedLocale: string = "en-US";
 
-/**
- * Normalize text by stripping diacritics / accent marks.
- * This allows searching "cafe" to match "café", "nino" to match "niño", etc.
- */
-export function normalizeText(text: string): string {
-  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
+// Re-export normalizeText so existing consumers importing from this file still work
+export { normalizeText } from "./text-utils";
 
 /**
  * Prepare transaction for search by flattening related data.

@@ -29,10 +29,10 @@ const typeIcons = {
 };
 
 const priorityColors = {
-  low: "border-l-slate-400",
-  medium: "border-l-blue-500",
-  high: "border-l-orange-500",
-  urgent: "border-l-red-500",
+  low: "border-s-slate-400",
+  medium: "border-s-blue-500",
+  high: "border-s-orange-500",
+  urgent: "border-s-red-500",
 };
 
 export function NotificationItem({
@@ -42,6 +42,7 @@ export function NotificationItem({
   onDismiss,
 }: NotificationItemProps) {
   const t = useTranslations("notifications");
+  const tAria = useTranslations("aria");
   const Icon = typeIcons[notification.type] || Bell;
   const isUnread = notification.status === "unread";
   const isSnoozed = notification.status === "snoozed";
@@ -64,7 +65,7 @@ export function NotificationItem({
   const content = (
     <div
       className={cn(
-        "group relative flex items-start gap-3 rounded-lg border-l-4 p-4 transition-colors",
+        "group relative flex items-start gap-3 rounded-lg border-s-4 p-4 transition-colors",
         priorityColors[notification.priority],
         isUnread ? "bg-white/10 hover:bg-white/15" : "bg-white/5 hover:bg-white/10",
         isSnoozed && "opacity-60"
@@ -77,7 +78,7 @@ export function NotificationItem({
           handleClick();
         }
       }}
-      aria-label={`${notification.title}. ${notification.body}`}
+      aria-label={tAria("notificationDescription", { title: notification.title, body: notification.body })}
     >
       {/* Icon */}
       <div
@@ -102,7 +103,7 @@ export function NotificationItem({
               )}
             >
               {notification.title}
-              {isUnread && <span className="ml-2 inline-block h-2 w-2 rounded-full bg-teal-400" />}
+              {isUnread && <span className="ms-2 inline-block h-2 w-2 rounded-full bg-teal-400" />}
             </p>
             <p className="mt-0.5 line-clamp-2 text-sm text-slate-400">{notification.body}</p>
           </div>
@@ -148,7 +149,7 @@ export function NotificationItem({
           )}
 
           {/* Actions */}
-          <div className="ml-auto flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+          <div className="ms-auto flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
             {!isSnoozed && <SnoozeMenu onSnooze={handleSnooze} iconOnly />}
             {notification.actionUrl && (
               <Button variant="ghost" size="icon" className="h-6 w-6" asChild>

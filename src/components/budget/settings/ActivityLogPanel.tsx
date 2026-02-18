@@ -183,7 +183,7 @@ export function ActivityLogPanel() {
             </CardDescription>
           </div>
           <Button variant="outline" size="sm" onClick={handleRefresh} disabled={isRefreshing}>
-            <RefreshCw className={cn("mr-2 h-4 w-4", isRefreshing && "animate-spin")} />
+            <RefreshCw className={cn("me-2 h-4 w-4", isRefreshing && "animate-spin")} />
             Refresh
           </Button>
         </div>
@@ -242,12 +242,12 @@ export function ActivityLogPanel() {
           </Select>
 
           <div className="relative min-w-[200px] flex-1">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <Search className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search activities..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9"
+              className="ps-9"
             />
           </div>
         </div>
@@ -309,7 +309,7 @@ export function ActivityLogPanel() {
                       <div className="mt-1 flex items-center gap-2">
                         <Badge variant="outline" className="text-xs">
                           {ENTITY_ICONS[entry.entityType]}
-                          <span className="ml-1">{entry.entityType}</span>
+                          <span className="ms-1">{entry.entityType}</span>
                         </Badge>
                         <span className="text-xs text-muted-foreground">
                           {formatRelativeTime(entry.timestamp)}

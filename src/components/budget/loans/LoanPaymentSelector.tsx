@@ -63,7 +63,7 @@ export function LoanPaymentSelector({
         <span>Link to Loan Payment</span>
         <ChevronDown className={`h-4 w-4 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
         {selectedLoan && (
-          <span className="ml-2 rounded-full bg-teal-100 px-2 py-0.5 text-xs font-medium text-teal-800">
+          <span className="ms-2 rounded-full bg-teal-100 px-2 py-0.5 text-xs font-medium text-teal-800">
             {selectedLoan.name}
           </span>
         )}

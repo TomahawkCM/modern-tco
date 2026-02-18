@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { motion, type PanInfo } from "framer-motion";
 import {
   Sheet,
@@ -38,6 +39,7 @@ export function BottomSheet({
   showDragHandle = true,
 }: BottomSheetProps) {
   const deviceClass = useDeviceClass();
+  const tAria = useTranslations("aria");
   const isMobile = deviceClass === "phone";
 
   const handleDragEnd = useCallback(
@@ -66,7 +68,7 @@ export function BottomSheet({
             {showDragHandle && (
               <div
                 className="flex justify-center pb-2 pt-1"
-                aria-label="Drag down to close"
+                aria-label={tAria("dragToClose")}
                 data-testid="drag-handle"
               >
                 <div className="h-1.5 w-10 rounded-full bg-muted-foreground/30" />

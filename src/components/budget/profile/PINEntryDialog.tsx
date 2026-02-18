@@ -166,7 +166,7 @@ export function PINEntryDialog({
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2"
+                className="absolute end-2 top-1/2 h-8 w-8 -translate-y-1/2"
                 onClick={() => setPIN("")}
               >
                 <X className="h-4 w-4" />

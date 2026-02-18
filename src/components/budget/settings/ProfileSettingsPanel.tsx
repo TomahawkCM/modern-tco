@@ -75,7 +75,7 @@ export function ProfileSettingsPanel() {
               <CardDescription>Manage family member profiles and PIN protection</CardDescription>
             </div>
             <Button onClick={() => setShowCreateDialog(true)}>
-              <Plus className="mr-2 h-4 w-4" />
+              <Plus className="me-2 h-4 w-4" />
               Add Profile
             </Button>
           </div>
@@ -108,7 +108,7 @@ export function ProfileSettingsPanel() {
                       <span className="font-medium">{profile.name}</span>
                       {profile.isDefault && (
                         <Badge variant="secondary" className="text-xs">
-                          <Crown className="mr-1 h-3 w-3" />
+                          <Crown className="me-1 h-3 w-3" />
                           Default
                         </Badge>
                       )}
@@ -146,7 +146,7 @@ export function ProfileSettingsPanel() {
                             size="sm"
                             onClick={() => handlePINAction(profile, "change")}
                           >
-                            <Lock className="mr-1 h-4 w-4" />
+                            <Lock className="me-1 h-4 w-4" />
                             Change PIN
                           </Button>
                           <Button
@@ -154,7 +154,7 @@ export function ProfileSettingsPanel() {
                             size="sm"
                             onClick={() => handlePINAction(profile, "remove")}
                           >
-                            <ShieldOff className="mr-1 h-4 w-4" />
+                            <ShieldOff className="me-1 h-4 w-4" />
                             Remove PIN
                           </Button>
                         </>
@@ -164,7 +164,7 @@ export function ProfileSettingsPanel() {
                           size="sm"
                           onClick={() => handlePINAction(profile, "set")}
                         >
-                          <ShieldCheck className="mr-1 h-4 w-4" />
+                          <ShieldCheck className="me-1 h-4 w-4" />
                           Set PIN
                         </Button>
                       )}

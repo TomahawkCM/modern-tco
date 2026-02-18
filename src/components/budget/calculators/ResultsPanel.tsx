@@ -6,7 +6,7 @@
  * Display formatted calculation results with locale-aware formatting
  */
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { formatCurrency } from "@/i18n/utils/formatCurrency";
 import { formatNumber, formatPercent } from "@/i18n/utils/formatNumber";
@@ -42,6 +42,7 @@ export function ResultsPanel({
   columns = 2,
 }: ResultsPanelProps) {
   const siteLocale = useLocale() as SupportedLocale;
+  const tDuration = useTranslations("duration");
   const locale = propLocale || siteLocale;
   const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
   const currency = propCurrency || localeMeta.currency;
@@ -73,14 +74,14 @@ export function ResultsPanel({
       case "months":
         const months = value as number;
         if (months < 12) {
-          return `${months} ${months === 1 ? "month" : "months"}`;
+          return tDuration("months", { count: months });
         }
         const years = Math.floor(months / 12);
         const remainingMonths = months % 12;
         if (remainingMonths === 0) {
-          return `${years} ${years === 1 ? "year" : "years"}`;
+          return tDuration("years", { count: years });
         }
-        return `${years}y ${remainingMonths}m`;
+        return tDuration("yearsAndMonths", { years, months: remainingMonths });
 
       case "text":
       default:

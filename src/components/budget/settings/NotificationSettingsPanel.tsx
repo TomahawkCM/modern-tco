@@ -338,7 +338,7 @@ export function NotificationSettingsPanel() {
                   ) : (
                     <Send className="h-4 w-4" />
                   )}
-                  <span className="ml-2">{t("emailNotifications.sendTest")}</span>
+                  <span className="ms-2">{t("emailNotifications.sendTest")}</span>
                 </Button>
               </div>
             </div>
@@ -507,7 +507,7 @@ export function NotificationSettingsPanel() {
             disabled={!settings.masterEnabled}
             variant="outline"
           >
-            <Send className="mr-2 h-4 w-4" />
+            <Send className="me-2 h-4 w-4" />
             {t("testNotification.button")}
           </Button>
         </CardContent>

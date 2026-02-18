@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -10,6 +11,7 @@ interface FloatingActionButtonProps {
 }
 
 export function FloatingActionButton({ onClick, className }: FloatingActionButtonProps) {
+  const tAria = useTranslations("aria");
   return (
     <Button
       onClick={onClick}
@@ -26,7 +28,7 @@ export function FloatingActionButton({ onClick, className }: FloatingActionButto
         bottom: "calc(env(safe-area-inset-bottom, 0px) + 72px)",
         insetInlineEnd: "16px",
       }}
-      aria-label="Add transaction"
+      aria-label={tAria("addTransaction")}
     >
       <Plus size={24} />
     </Button>

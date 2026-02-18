@@ -56,6 +56,7 @@ import {
   BarChart2,
 } from "lucide-react";
 import { format, differenceInDays } from "date-fns";
+import { PullToRefresh } from "@/components/budget/layout/PullToRefresh";
 
 type ViewMode = "all" | "manual" | "auto-detected" | "active" | "inactive" | "analysis";
 type SortOption = "name" | "amount" | "nextBilling" | "createdAt";
@@ -480,6 +481,7 @@ export default function SubscriptionsPage() {
   }
 
   return (
+    <PullToRefresh onRefresh={loadData}>
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b border-border bg-card">
@@ -869,5 +871,6 @@ export default function SubscriptionsPage() {
         }
       />
     </div>
+    </PullToRefresh>
   );
 }

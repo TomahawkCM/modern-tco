@@ -12,6 +12,7 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { MessageBubble } from "./MessageBubble";
 import { TypingIndicator } from "./TypingIndicator";
 import type { ChatMessage } from "@/contexts/ChatbotContext";
@@ -22,6 +23,7 @@ interface ChatbotMessagesProps {
 }
 
 export const ChatbotMessages: React.FC<ChatbotMessagesProps> = ({ messages, isTyping }) => {
+  const tAria = useTranslations("aria");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -38,7 +40,7 @@ export const ChatbotMessages: React.FC<ChatbotMessagesProps> = ({ messages, isTy
       aria-live="polite"
       aria-atomic="false"
       aria-relevant="additions"
-      aria-label="Chat messages"
+      aria-label={tAria("chatMessages")}
       style={{
         scrollbarWidth: "thin",
         scrollbarColor: "#e5e7eb transparent",

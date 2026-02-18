@@ -2465,6 +2465,26 @@
     "years": "{count, plural, =1 {1 year} other {# years}}",
     "yearsAndMonths": "{years}y {months}m"
   },
+  "apiErrors": {
+    "noApiKey": "AI API key not configured. AI extraction requires an active subscription.",
+    "noFileProvided": "No file provided",
+    "fileMustBePdf": "File must be a PDF",
+    "fileTooLarge": "File too large. Maximum {maxSize}.",
+    "noAiResponse": "No response from AI model",
+    "failedToParseResponse": "Failed to parse AI response",
+    "responseValidationIssues": "Response structure validation had issues",
+    "rateLimitExceeded": "Rate limit exceeded. Please try again later.",
+    "aiApiError": "AI API error: {message}",
+    "unknownError": "An unknown error occurred",
+    "missingHeaders": "Missing or invalid headers",
+    "missingSampleData": "Missing or invalid sample data",
+    "aiAnalysisUnavailable": "AI analysis unavailable, using pattern matching",
+    "lowConfidence": "Low confidence - please verify mappings",
+    "autoDetectionUnavailable": "Auto-detection unavailable - using column order guess",
+    "verifyMappings": "Please verify all mappings before importing",
+    "emptyAiResponse": "Empty response from AI",
+    "internalServerError": "Internal server error"
+  },
   "aria": {
     "accessibilitySettings": "Accessibility settings",
     "closeAccessibilityMenu": "Close accessibility menu",
@@ -2507,6 +2527,21 @@
     "welcomeBudgetApp": "Welcome to Budget App",
     "dismissWelcome": "Dismiss welcome banner",
     "closeChatbot": "Close chatbot",
-    "createBudget": "Create budget"
+    "createBudget": "Create budget",
+    "toggleSeniorsMode": "Toggle Seniors Mode",
+    "showSimplifiedMenu": "Show simplified menu",
+    "showAllMenuItems": "Show all menu items",
+    "dataTable": "{title} data table",
+    "selectIcon": "Select {name} icon",
+    "selectColor": "Select color {color}",
+    "syncStatus": "Sync status: {status}",
+    "qrCodePairing": "QR code for pairing. Pairing code: {code}",
+    "pairingCode": "Pairing code: {code}",
+    "copied": "Copied",
+    "copyPairingCode": "Copy pairing code",
+    "reorderDebt": "Reorder {name}",
+    "selectSubscription": "Select {name}",
+    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "notificationDescription": "{title}. {body}"
   }
 }

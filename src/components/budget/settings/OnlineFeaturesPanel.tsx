@@ -70,8 +70,8 @@ function FeatureCard({ feature, icon, benefits }: FeatureCardProps) {
   return (
     <Card className="relative overflow-hidden">
       {/* Coming Soon Badge */}
-      <Badge className="absolute right-4 top-4" variant="secondary">
-        <Sparkles className="mr-1 h-3 w-3" />
+      <Badge className="absolute end-4 top-4" variant="secondary">
+        <Sparkles className="me-1 h-3 w-3" />
         Coming Soon
       </Badge>
 
@@ -157,7 +157,7 @@ export function OnlineFeaturesPanel() {
           </div>
 
           <Button className="mt-4 w-full" disabled>
-            <Sparkles className="mr-2 h-4 w-4" />
+            <Sparkles className="me-2 h-4 w-4" />
             Coming Soon - Join Waitlist
           </Button>
         </CardContent>

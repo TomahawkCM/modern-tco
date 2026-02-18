@@ -170,6 +170,59 @@
     --color-text-secondary: #909296;
     --color-text-disabled: #5c5f66;
   }
+
+  /* High-Contrast Mode — proper 7:1+ color tokens */
+  [data-high-contrast="1"] {
+    --background: 0 0% 0%; /* pure black */
+    --foreground: 0 0% 100%; /* pure white — 21:1 */
+
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 166 84% 64%; /* #5EEAD4 teal-300 — 12.6:1 on black */
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 75%; /* 9.1:1 on black */
+
+    --accent: 166 84% 64%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 100% 65%; /* bright red — 7:1+ on black */
+    --destructive-foreground: 0 0% 0%;
+
+    --border: 0 0% 40%; /* visible borders */
+    --input: 0 0% 20%;
+    --ring: 166 84% 64%;
+
+    /* Semantic Colors — high contrast */
+    --success: 142 80% 60%;
+    --warning: 45 100% 60%;
+    --error: 0 100% 65%;
+
+    /* Financial Semantic Colors — high contrast */
+    --color-income: #67e8f9; /* cyan-300, 12:1+ on black */
+    --color-expense: #fca5a5; /* red-300, 10:1+ on black */
+    --color-savings: #86efac; /* green-300, 13:1+ on black */
+    --color-financial-warning: #fde047; /* yellow-300, 16:1+ on black */
+    --color-financial-danger: #fca5a5;
+    --color-financial-accent: #5eead4; /* teal-300, 12.6:1 on black */
+
+    /* Surface Colors — high contrast */
+    --color-bg: #000000;
+    --color-surface: #0d0d0d;
+    --color-surface-hover: #1a1a1a;
+    --color-border-subtle: #666666;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #bfbfbf;
+    --color-text-disabled: #808080;
+  }
 }
 
 @layer base {

@@ -119,7 +119,7 @@ export function LinkToLoanPopover({ transaction, onLinked, onClose }: LinkToLoan
   return (
     <div
       ref={popoverRef}
-      className="absolute right-0 top-full z-50 mt-2 w-80 rounded-lg border border-border bg-card shadow-lg"
+      className="absolute end-0 top-full z-50 mt-2 w-80 rounded-lg border border-border bg-card shadow-lg"
     >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
@@ -161,7 +161,7 @@ export function LinkToLoanPopover({ transaction, onLinked, onClose }: LinkToLoan
                     key={loan.id}
                     type="button"
                     onClick={() => setSelectedLoanId(loan.id)}
-                    className={`w-full rounded-lg border-2 p-3 text-left transition-colors ${
+                    className={`w-full rounded-lg border-2 p-3 text-start transition-colors ${
                       isSelected
                         ? "border-teal-500 bg-teal-50"
                         : "border-border hover:border-teal-300 hover:bg-muted/50"
@@ -204,17 +204,17 @@ export function LinkToLoanPopover({ transaction, onLinked, onClose }: LinkToLoan
                 </h4>
                 <div className="grid grid-cols-2 gap-2 text-sm">
                   <span className="text-muted-foreground">Principal:</span>
-                  <span className="text-right font-medium text-teal-600">
+                  <span className="text-end font-medium text-teal-600">
                     ${paymentSplit.principal.toFixed(2)}
                   </span>
                   <span className="text-muted-foreground">Interest:</span>
-                  <span className="text-right font-medium text-red-600">
+                  <span className="text-end font-medium text-red-600">
                     ${paymentSplit.interest.toFixed(2)}
                   </span>
                   {paymentSplit.extra > 0 && (
                     <>
                       <span className="text-muted-foreground">Extra:</span>
-                      <span className="text-right font-medium text-green-600">
+                      <span className="text-end font-medium text-green-600">
                         ${paymentSplit.extra.toFixed(2)}
                       </span>
                     </>

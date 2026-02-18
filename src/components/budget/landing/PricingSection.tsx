@@ -28,9 +28,9 @@ export function PricingSection() {
         <p className="mx-auto mt-4 max-w-2xl text-base text-slate-400">{p.description}</p>
       </div>
 
-      <div className="mx-auto mt-12 max-w-4xl text-left">
+      <div className="mx-auto mt-12 max-w-4xl text-start">
         <LandingCard className="relative overflow-hidden p-8 sm:p-10">
-          <div className="absolute right-0 top-0 h-32 w-32 translate-x-12 translate-y-[-10px] rounded-full bg-teal-500/10 blur-3xl" />
+          <div className="absolute end-0 top-0 h-32 w-32 translate-x-12 translate-y-[-10px] rounded-full bg-teal-500/10 blur-3xl" />
 
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div>

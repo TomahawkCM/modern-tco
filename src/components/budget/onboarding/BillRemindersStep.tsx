@@ -163,7 +163,7 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
       </div>
 
       {/* Bills List */}
-      <div className="max-h-[200px] space-y-2 overflow-y-auto pr-2">
+      <div className="max-h-[200px] space-y-2 overflow-y-auto pe-2">
         {bills.map((bill) => {
           const detected = DETECTED_BILLS.find((d) => d.id === bill.id);
 
@@ -213,7 +213,7 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
               </div>
 
               {/* Amount */}
-              <div className="text-right">
+              <div className="text-end">
                 <p className="font-medium text-white">${bill.amount.toFixed(2)}</p>
                 <p className="text-xs text-slate-500">/month</p>
               </div>
@@ -330,7 +330,7 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
           <p className="text-2xl font-bold text-white">${totalMonthly.toFixed(2)}</p>
         </div>
 
-        <div className="text-right">
+        <div className="text-end">
           <p className="text-sm text-slate-400">Reminders enabled</p>
           <div className="flex items-center justify-end gap-2">
             <CheckCircle className="h-5 w-5 text-teal-400" />

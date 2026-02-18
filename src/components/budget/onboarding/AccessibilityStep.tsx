@@ -178,7 +178,7 @@ export function AccessibilityStep({ onComplete, onSkip }: StepProps) {
               type="button"
               onClick={() => handlePresetSelect(preset)}
               className={cn(
-                "flex flex-col items-start gap-2 rounded-xl border p-4 text-left transition-all",
+                "flex flex-col items-start gap-2 rounded-xl border p-4 text-start transition-all",
                 isSelected
                   ? "border-violet-500/50 bg-violet-500/10"
                   : "border-white/10 bg-slate-800/50 hover:border-white/20"

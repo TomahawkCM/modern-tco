@@ -12,8 +12,9 @@ export function useThemeMode(): ThemeMode {
   const [theme, setTheme] = useState<ThemeMode>("light");
 
   useEffect(() => {
-    // Check for high-contrast mode first (Windows high contrast, forced colors)
+    // Check for high-contrast mode first (app toggle, Windows high contrast, forced colors)
     const isHighContrast =
+      document.documentElement.getAttribute("data-high-contrast") === "1" ||
       window.matchMedia("(prefers-contrast: more)").matches ||
       window.matchMedia("(forced-colors: active)").matches;
 
@@ -34,7 +35,9 @@ export function useThemeMode(): ThemeMode {
     const highContrastQuery = window.matchMedia("(prefers-contrast: more)");
 
     const handleChange = () => {
-      const isHighContrast = highContrastQuery.matches;
+      const isHighContrast =
+        document.documentElement.getAttribute("data-high-contrast") === "1" ||
+        highContrastQuery.matches;
       const isDark = document.documentElement.classList.contains("dark") || darkModeQuery.matches;
 
       if (isHighContrast) {
@@ -53,7 +56,7 @@ export function useThemeMode(): ThemeMode {
     const observer = new MutationObserver(handleChange);
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ["class"],
+      attributeFilter: ["class", "data-high-contrast"],
     });
 
     return () => {

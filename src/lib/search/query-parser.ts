@@ -9,7 +9,7 @@
  * Date shortcuts: today, yesterday, last7, last30, thismonth, lastmonth, thisyear
  */
 
-import { normalizeText } from "./transaction-search";
+import { normalizeText } from "./text-utils";
 
 export interface ParsedFilters {
   amountMin?: number;

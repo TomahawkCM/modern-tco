@@ -132,7 +132,7 @@ export function NotificationCenter({ className, compact = false }: NotificationC
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.15 }}
             className={cn(
-              "absolute right-0 top-full z-50 mt-2",
+              "absolute end-0 top-full z-50 mt-2",
               "max-h-[500px] w-[380px] overflow-hidden",
               "rounded-xl border border-white/10 bg-slate-900/95 shadow-2xl backdrop-blur-xl",
               "flex flex-col"
@@ -151,7 +151,7 @@ export function NotificationCenter({ className, compact = false }: NotificationC
                     className="h-7 text-xs"
                     onClick={handleMarkAllAsRead}
                   >
-                    <Check className="mr-1 h-3 w-3" />
+                    <Check className="me-1 h-3 w-3" />
                     {t("markAllRead")}
                   </Button>
                 )}
@@ -162,7 +162,7 @@ export function NotificationCenter({ className, compact = false }: NotificationC
                     className="h-7 text-xs text-slate-400 hover:text-red-400"
                     onClick={handleClearAll}
                   >
-                    <Trash2 className="mr-1 h-3 w-3" />
+                    <Trash2 className="me-1 h-3 w-3" />
                     {t("clearAll")}
                   </Button>
                 )}
@@ -179,7 +179,7 @@ export function NotificationCenter({ className, compact = false }: NotificationC
                   <TabsTrigger value="unread" className="text-xs">
                     {t("tabs.unread")}
                     {unreadCount > 0 && (
-                      <span className="ml-1 text-[10px] text-teal-400">({unreadCount})</span>
+                      <span className="ms-1 text-[10px] text-teal-400">({unreadCount})</span>
                     )}
                   </TabsTrigger>
                   <TabsTrigger value="snoozed" className="text-xs">

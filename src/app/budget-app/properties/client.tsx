@@ -9,10 +9,11 @@ import {
 } from "@/lib/property/property-calculator";
 import { db } from "@/lib/budget-db";
 import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import { PullToRefresh } from "@/components/budget/layout/PullToRefresh";
 import { CardSkeleton } from "@/components/budget/LoadingSkeleton";
 import { Building2, Plus, TrendingUp } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Property, Loan } from "@/types/budget";
 
 export function ClientProperties() {
@@ -24,19 +25,20 @@ export function ClientProperties() {
   const [totalValue, setTotalValue] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function load() {
-      try {
-        const [props, allLoans] = await Promise.all([getAllProperties(), db.loans.toArray()]);
-        setProperties(props);
-        setLoans(allLoans);
-        setTotalValue(await getTotalPropertyValue());
-      } finally {
-        setLoading(false);
-      }
+  const loadData = useCallback(async () => {
+    try {
+      const [props, allLoans] = await Promise.all([getAllProperties(), db.loans.toArray()]);
+      setProperties(props);
+      setLoans(allLoans);
+      setTotalValue(await getTotalPropertyValue());
+    } finally {
+      setLoading(false);
     }
-    load();
   }, []);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
   const fmtCurrency = (v: number) => format.number(v, { style: "currency", currency });
 
@@ -53,6 +55,7 @@ export function ClientProperties() {
   }
 
   return (
+    <PullToRefresh onRefresh={loadData}>
     <div className="space-y-6 p-4 md:p-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -133,5 +136,6 @@ export function ClientProperties() {
         </div>
       )}
     </div>
+    </PullToRefresh>
   );
 }

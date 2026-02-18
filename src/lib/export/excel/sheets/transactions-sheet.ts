@@ -112,14 +112,15 @@ export async function generateTransactionsSheet(
   const summaryRow = worksheet.getRow(currentRow);
   summaryRow.getCell(1).value = `Total Transactions: ${data.transactions.length}`;
   summaryRow.getCell(1).font = FONTS.bodyMuted;
+  const locale = options.locale ?? "en-US";
   summaryRow.getCell(3).value =
-    `Income: $${totalIncome.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+    `Income: ${totalIncome.toLocaleString(locale, { style: "currency", currency: "USD" })}`;
   summaryRow.getCell(3).font = { ...FONTS.body, color: { argb: "FF10B981" } };
   summaryRow.getCell(5).value =
-    `Expenses: $${totalExpenses.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+    `Expenses: ${totalExpenses.toLocaleString(locale, { style: "currency", currency: "USD" })}`;
   summaryRow.getCell(5).font = { ...FONTS.body, color: { argb: "FFEF4444" } };
   summaryRow.getCell(7).value =
-    `Net: $${netAmount.toLocaleString("en-US", { minimumFractionDigits: 2 })}`;
+    `Net: ${netAmount.toLocaleString(locale, { style: "currency", currency: "USD" })}`;
   summaryRow.getCell(7).font = {
     ...FONTS.body,
     color: { argb: netAmount >= 0 ? "FF10B981" : "FFEF4444" },

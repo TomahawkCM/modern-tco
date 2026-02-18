@@ -240,7 +240,7 @@ export function AmountRangeFilter({
         <div className="flex-1">
           <label className="sr-only">{t("minLabel")}</label>
           <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+            <span className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground">
               $
             </span>
             <input
@@ -253,7 +253,7 @@ export function AmountRangeFilter({
               min={min}
               max={max}
               step={step}
-              className="w-full rounded-lg border border-input bg-background py-2 pl-7 pr-3 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full rounded-lg border border-input bg-background py-2 ps-7 pe-3 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             />
           </div>
         </div>
@@ -261,7 +261,7 @@ export function AmountRangeFilter({
         <div className="flex-1">
           <label className="sr-only">{t("maxLabel")}</label>
           <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+            <span className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground">
               $
             </span>
             <input
@@ -274,7 +274,7 @@ export function AmountRangeFilter({
               min={min}
               max={max}
               step={step}
-              className="w-full rounded-lg border border-input bg-background py-2 pl-7 pr-3 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full rounded-lg border border-input bg-background py-2 ps-7 pe-3 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             />
           </div>
         </div>

@@ -24,7 +24,6 @@ import {
   Split,
   Check,
   X as XIcon,
-  RefreshCw,
   ArrowUp,
   ArrowDown,
   TrendingUp,
@@ -71,6 +70,7 @@ import {
 } from "@/lib/search";
 import { LinkToLoanButton } from "@/components/budget/loans/LinkToLoanPopover";
 import { LinkedLoanBadgeInline } from "@/components/budget/loans/LinkedLoanBadge";
+import { PullToRefresh } from "@/components/budget/layout/PullToRefresh";
 import { getPaymentByTransactionId, getAllLoans } from "@/lib/loans/loan-db";
 import type { LoanPayment, Loan } from "@/types/budget";
 
@@ -117,10 +117,6 @@ export default function TransactionsPageClient() {
   const [bulkSubcategory, setBulkSubcategory] = useState<string>("");
   const [showBulkActions, setShowBulkActions] = useState(false);
 
-  // Phase 3: Mobile Enhancement State
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [pullDistance, setPullDistance] = useState(0);
-
   // Confirmation dialog state
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [deletingTransaction, setDeletingTransaction] = useState<Transaction | null>(null);
@@ -152,7 +148,6 @@ export default function TransactionsPageClient() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const mobileListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     loadData();
@@ -280,20 +275,6 @@ export default function TransactionsPageClient() {
 
     return calculateRunningBalancesMap(openingBalance, sortedByDate);
   }, [filteredTransactions, startingBalance, selectedAccount, accounts]);
-
-  // Phase 3.3.3: Pull-to-refresh handler
-  async function handlePullToRefresh() {
-    if (isRefreshing) return;
-
-    setIsRefreshing(true);
-    await loadData();
-
-    // Add small delay for better UX feedback
-    setTimeout(() => {
-      setIsRefreshing(false);
-      setPullDistance(0);
-    }, 500);
-  }
 
   async function loadData() {
     try {
@@ -1345,67 +1326,9 @@ export default function TransactionsPageClient() {
               </table>
             </div>
 
-            {/* Mobile Card View (<768px) - Phase 3.3.3: Pull-to-refresh + Phase 3.3.1: Swipe-to-delete */}
-            <div
-              ref={mobileListRef}
-              className="relative md:hidden"
-              onTouchStart={(e) => {
-                const list = mobileListRef.current;
-                if (list && list.scrollTop === 0) {
-                  const startY = e.touches[0].clientY;
-                  setPullDistance(0);
-
-                  const handleTouchMove = (moveEvent: TouchEvent) => {
-                    const currentY = moveEvent.touches[0].clientY;
-                    const distance = Math.max(0, currentY - startY);
-                    if (distance > 0 && distance < 120) {
-                      moveEvent.preventDefault();
-                      setPullDistance(distance);
-                    }
-                  };
-
-                  const handleTouchEnd = () => {
-                    if (pullDistance > 80) {
-                      handlePullToRefresh();
-                    } else {
-                      setPullDistance(0);
-                    }
-                    document.removeEventListener("touchmove", handleTouchMove);
-                    document.removeEventListener("touchend", handleTouchEnd);
-                  };
-
-                  document.addEventListener("touchmove", handleTouchMove, { passive: false });
-                  document.addEventListener("touchend", handleTouchEnd);
-                }
-              }}
-            >
-              {/* Pull-to-refresh indicator */}
-              {(pullDistance > 0 || isRefreshing) && (
-                <div
-                  className="absolute left-0 right-0 top-0 z-10 flex items-center justify-center py-4 transition-opacity"
-                  style={{
-                    transform: `translateY(-${isRefreshing ? 0 : Math.max(0, 50 - pullDistance)}px)`,
-                    opacity: Math.min(1, pullDistance / 80),
-                  }}
-                >
-                  <RefreshCw
-                    className={`h-6 w-6 text-teal-600 ${isRefreshing ? "animate-spin" : ""}`}
-                  />
-                  {!isRefreshing && pullDistance > 80 && (
-                    <span className="ml-2 text-sm font-medium text-teal-600">
-                      Release to refresh
-                    </span>
-                  )}
-                  {!isRefreshing && pullDistance > 0 && pullDistance <= 80 && (
-                    <span className="ml-2 text-sm text-gray-600">Pull to refresh</span>
-                  )}
-                </div>
-              )}
-
-              <div
-                className="space-y-6 p-4"
-                style={{ marginTop: pullDistance > 0 ? `${Math.min(pullDistance, 100)}px` : 0 }}
-              >
+            {/* Mobile Card View (<768px) - Pull-to-refresh + Swipe-to-delete */}
+            <PullToRefresh onRefresh={loadData}>
+              <div className="space-y-6 p-4">
                 {filteredTransactions.map((tx) => (
                   <motion.div
                     key={tx.id}
@@ -1627,7 +1550,7 @@ export default function TransactionsPageClient() {
                   </motion.div>
                 ))}
               </div>
-            </div>
+            </PullToRefresh>
           </>
         ) : (
           <EmptyState

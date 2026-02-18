@@ -53,7 +53,9 @@ interface ColumnAnalysisResponse {
   success: boolean;
   mapping?: ColumnMapping;
   suggestions?: string[];
+  suggestionKeys?: string[];
   warnings?: string[];
+  warningKeys?: string[];
   samplePreview?: Array<{
     date: string;
     description: string;
@@ -61,6 +63,8 @@ interface ColumnAnalysisResponse {
     original: Record<string, string>;
   }>;
   error?: string;
+  messageKey?: string;
+  details?: Record<string, string>;
 }
 
 // ============================================================================
@@ -259,14 +263,14 @@ export async function POST(request: NextRequest): Promise<NextResponse<ColumnAna
     // Validation
     if (!body.headers || !Array.isArray(body.headers) || body.headers.length === 0) {
       return NextResponse.json(
-        { success: false, error: "Missing or invalid headers array" },
+        { success: false, error: "MISSING_HEADERS", messageKey: "apiErrors.missingHeaders" },
         { status: 400 }
       );
     }
 
     if (!body.sampleData || !Array.isArray(body.sampleData) || body.sampleData.length === 0) {
       return NextResponse.json(
-        { success: false, error: "Missing or invalid sampleData array" },
+        { success: false, error: "MISSING_SAMPLE_DATA", messageKey: "apiErrors.missingSampleData" },
         { status: 400 }
       );
     }
@@ -299,7 +303,9 @@ export async function POST(request: NextRequest): Promise<NextResponse<ColumnAna
           success: true,
           mapping: patternMatch,
           suggestions: ["AI analysis unavailable, using pattern matching"],
+          suggestionKeys: ["apiErrors.aiAnalysisUnavailable"],
           warnings: ["Low confidence - please verify mappings"],
+          warningKeys: ["apiErrors.lowConfidence"],
           samplePreview: generatePreview(body.sampleData, patternMatch),
         });
       }
@@ -308,7 +314,9 @@ export async function POST(request: NextRequest): Promise<NextResponse<ColumnAna
         success: true,
         mapping: createFallbackMapping(body.headers),
         suggestions: ["Auto-detection unavailable - using column order guess"],
+        suggestionKeys: ["apiErrors.autoDetectionUnavailable"],
         warnings: ["Please verify all mappings before importing"],
+        warningKeys: ["apiErrors.verifyMappings"],
         samplePreview: [],
       });
     }
@@ -376,7 +384,7 @@ ${cleanedSamples
 
     const content = response.choices[0]?.message?.content;
     if (!content) {
-      throw new Error("Empty response from OpenAI");
+      throw new Error("EMPTY_AI_RESPONSE");
     }
 
     const aiResult = JSON.parse(content);
@@ -405,10 +413,13 @@ ${cleanedSamples
   } catch (error) {
     console.error("[AnalyzeColumns] Error:", error);
 
+    const isEmptyAiResponse = error instanceof Error && error.message === "EMPTY_AI_RESPONSE";
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : "Internal server error",
+        error: isEmptyAiResponse ? "EMPTY_AI_RESPONSE" : "INTERNAL_SERVER_ERROR",
+        messageKey: isEmptyAiResponse ? "apiErrors.emptyAiResponse" : "apiErrors.internalServerError",
+        details: error instanceof Error && !isEmptyAiResponse ? { message: error.message } : undefined,
       },
       { status: 500 }
     );

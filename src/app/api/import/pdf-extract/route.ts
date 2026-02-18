@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
-        { error: "OpenAI API key not configured. AI extraction requires an active subscription." },
+        { error: "NO_API_KEY", messageKey: "apiErrors.noApiKey" },
         { status: 503 }
       );
     }
@@ -67,17 +67,26 @@ export async function POST(request: NextRequest) {
     const file = formData.get("file") as File | null;
 
     if (!file) {
-      return NextResponse.json({ error: "No file provided" }, { status: 400 });
+      return NextResponse.json(
+        { error: "NO_FILE_PROVIDED", messageKey: "apiErrors.noFileProvided" },
+        { status: 400 }
+      );
     }
 
     // Validate file type
     if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
-      return NextResponse.json({ error: "File must be a PDF" }, { status: 400 });
+      return NextResponse.json(
+        { error: "FILE_MUST_BE_PDF", messageKey: "apiErrors.fileMustBePdf" },
+        { status: 400 }
+      );
     }
 
     // Validate file size (max 20MB)
     if (file.size > 20 * 1024 * 1024) {
-      return NextResponse.json({ error: "File too large. Maximum 20MB." }, { status: 400 });
+      return NextResponse.json(
+        { error: "FILE_TOO_LARGE", messageKey: "apiErrors.fileTooLarge", details: { maxSize: "20MB" } },
+        { status: 400 }
+      );
     }
 
     // Convert PDF to base64 for the file content type
@@ -112,7 +121,10 @@ export async function POST(request: NextRequest) {
 
     const content = response.choices[0]?.message?.content;
     if (!content) {
-      return NextResponse.json({ error: "No response from AI model" }, { status: 500 });
+      return NextResponse.json(
+        { error: "NO_AI_RESPONSE", messageKey: "apiErrors.noAiResponse" },
+        { status: 500 }
+      );
     }
 
     // Parse and validate JSON response
@@ -127,7 +139,7 @@ export async function POST(request: NextRequest) {
     } catch (parseError) {
       console.error("[PDF Extract] Failed to parse AI response:", content);
       return NextResponse.json(
-        { error: "Failed to parse AI response as JSON", rawResponse: content },
+        { error: "FAILED_TO_PARSE_RESPONSE", messageKey: "apiErrors.failedToParseResponse", rawResponse: content },
         { status: 500 }
       );
     }
@@ -139,7 +151,8 @@ export async function POST(request: NextRequest) {
       // Return the raw parsed data anyway, with a warning
       return NextResponse.json({
         ...parsed,
-        warning: "Response structure validation had issues",
+        warning: "RESPONSE_VALIDATION_ISSUES",
+        warningMessageKey: "apiErrors.responseValidationIssues",
         confidence: 0.7,
         tokensUsed: response.usage?.total_tokens,
       });
@@ -156,18 +169,22 @@ export async function POST(request: NextRequest) {
     if (error instanceof OpenAI.APIError) {
       if (error.status === 429) {
         return NextResponse.json(
-          { error: "Rate limit exceeded. Please try again later." },
+          { error: "RATE_LIMIT_EXCEEDED", messageKey: "apiErrors.rateLimitExceeded" },
           { status: 429 }
         );
       }
       return NextResponse.json(
-        { error: `OpenAI API error: ${error.message}` },
+        { error: "AI_API_ERROR", messageKey: "apiErrors.aiApiError", details: { message: error.message } },
         { status: error.status || 500 }
       );
     }
 
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Unknown error" },
+      {
+        error: "UNKNOWN_ERROR",
+        messageKey: "apiErrors.unknownError",
+        details: error instanceof Error ? { message: error.message } : undefined,
+      },
       { status: 500 }
     );
   }
