@@ -6,6 +6,7 @@
  * Uses @tanstack/react-virtual for windowed rendering
  */
 
+import { useTranslations } from "next-intl";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useRef, useMemo } from "react";
 import { Edit, Trash2, Tag, Split, ArrowUp, ArrowDown } from "lucide-react";
@@ -49,6 +50,7 @@ export function VirtualTransactionTable({
   onCategorySelect,
   onReceiptDeleted,
 }: VirtualTransactionTableProps) {
+  const tAria = useTranslations("aria");
   const parentRef = useRef<HTMLDivElement>(null);
 
   // Memoize row virtualizer for performance
@@ -94,10 +96,10 @@ export function VirtualTransactionTable({
           <div className="hidden text-xs font-semibold uppercase tracking-wider text-gray-700 lg:block">
             Receipt
           </div>
-          <div className="text-right text-xs font-semibold uppercase tracking-wider text-gray-700">
+          <div className="text-end text-xs font-semibold uppercase tracking-wider text-gray-700">
             Amount
           </div>
-          <div className="text-right text-xs font-semibold uppercase tracking-wider text-gray-700">
+          <div className="text-end text-xs font-semibold uppercase tracking-wider text-gray-700">
             Actions
           </div>
         </div>
@@ -187,7 +189,7 @@ export function VirtualTransactionTable({
                   </div>
 
                   {/* Amount */}
-                  <div className="text-right">
+                  <div className="text-end">
                     <div className="flex items-center justify-end gap-1.5">
                       {tx.amount > 0 ? (
                         <>
@@ -210,7 +212,7 @@ export function VirtualTransactionTable({
                   </div>
 
                   {/* Actions */}
-                  <div className="text-right">
+                  <div className="text-end">
                     <div className="flex items-center justify-end gap-1">
                       {/* Quick Categorize */}
                       {!tx.category && (
@@ -291,7 +293,7 @@ export function VirtualTransactionTable({
                         onClick={() => onEdit(tx)}
                         className="rounded-md p-1.5 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
                         title="Edit"
-                        aria-label="Edit transaction"
+                        aria-label={tAria("editTransaction")}
                       >
                         <Edit className="h-4 w-4" />
                       </button>
@@ -301,7 +303,7 @@ export function VirtualTransactionTable({
                         onClick={() => onDelete(tx)}
                         className="rounded-md p-1.5 text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
                         title="Delete"
-                        aria-label="Delete transaction"
+                        aria-label={tAria("deleteTransaction")}
                       >
                         <Trash2 className="h-4 w-4" />
                       </button>

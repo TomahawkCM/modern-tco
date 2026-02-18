@@ -9,6 +9,7 @@
  */
 
 import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import { CheckCircle, XCircle, AlertCircle, Info, X } from "lucide-react";
 import { SuccessCheckmark } from "./SuccessCheckmark";
 
@@ -42,6 +43,7 @@ export function useToast() {
 }
 
 export function ToastProvider({ children }: { children: ReactNode }) {
+  const tAria = useTranslations("aria");
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [confirmDialog, setConfirmDialog] = useState<{
     message: string;
@@ -135,7 +137,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       <div
         className="pointer-events-none fixed end-4 top-4 z-50 space-y-2"
         role="region"
-        aria-label="Notifications"
+        aria-label={tAria("notifications")}
       >
         {toasts.map((t) => (
           <ToastItem key={t.id} toast={t} onRemove={() => removeToast(t.id)} />
@@ -177,6 +179,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 }
 
 function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: () => void }) {
+  const tAria = useTranslations("aria");
   const icons = {
     success: CheckCircle,
     error: XCircle,
@@ -216,7 +219,7 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: () => void }) 
         <button
           onClick={onRemove}
           className="flex-shrink-0 text-gray-400 transition-colors hover:text-gray-600"
-          aria-label="Close notification"
+          aria-label={tAria("closeNotification")}
         >
           <X className="h-4 w-4" />
         </button>

@@ -8,6 +8,7 @@
  */
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { FileImage, X, Trash2, ZoomIn } from "lucide-react";
 import {
   getTransactionReceipts,
@@ -23,6 +24,7 @@ interface ReceiptThumbnailProps {
 }
 
 export function ReceiptThumbnail({ transactionId, onReceiptDeleted }: ReceiptThumbnailProps) {
+  const tAria = useTranslations("aria");
   const [receipts, setReceipts] = useState<Receipt[]>([]);
   const [thumbnailUrls, setThumbnailUrls] = useState<Record<string, string>>({});
   const [fullImageUrls, setFullImageUrls] = useState<Record<string, string>>({});
@@ -176,7 +178,7 @@ export function ReceiptThumbnail({ transactionId, onReceiptDeleted }: ReceiptThu
                   onClick={closeFullSize}
                   className="rounded-lg p-2 text-gray-600 transition-colors hover:bg-gray-100"
                   title="Close"
-                  aria-label="Close receipt viewer"
+                  aria-label={tAria("closeReceiptViewer")}
                 >
                   <X className="h-5 w-5" />
                 </button>

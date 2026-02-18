@@ -67,16 +67,16 @@ export function BulkCategorizeConfirmation({
         <DialogFooter className="mt-4 flex-col gap-3 sm:gap-2">
           <div className="flex w-full flex-col gap-2 sm:flex-row">
             <Button variant="outline" onClick={onReview} className="w-full sm:flex-1">
-              <List className="mr-2 h-4 w-4" />
+              <List className="me-2 h-4 w-4" />
               Review First
             </Button>
             <Button onClick={onApplyAll} className="w-full bg-teal-600 hover:bg-teal-700 sm:flex-1">
-              <Zap className="mr-2 h-4 w-4" />
+              <Zap className="me-2 h-4 w-4" />
               Apply to All {matchCount}
             </Button>
           </div>
           <Button variant="ghost" onClick={() => onOpenChange(false)} className="w-full">
-            <X className="mr-2 h-4 w-4" />
+            <X className="me-2 h-4 w-4" />
             Skip
           </Button>
         </DialogFooter>

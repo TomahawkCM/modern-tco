@@ -238,7 +238,7 @@ export function AccessibilitySettingsPanel() {
             aria-pressed={preferences.themeMode === "light"}
           >
             <Sun className="h-6 w-6 text-yellow-500" aria-hidden="true" />
-            <div className="text-left">
+            <div className="text-start">
               <div className="font-semibold text-foreground">{t("themeMode.light")}</div>
               <div className="text-xs text-muted-foreground">{t("themeMode.lightDesc")}</div>
             </div>
@@ -254,7 +254,7 @@ export function AccessibilitySettingsPanel() {
             aria-pressed={preferences.themeMode === "dark"}
           >
             <Moon className="h-6 w-6 text-indigo-500" aria-hidden="true" />
-            <div className="text-left">
+            <div className="text-start">
               <div className="font-semibold text-foreground">{t("themeMode.dark")}</div>
               <div className="text-xs text-muted-foreground">{t("themeMode.darkDesc")}</div>
             </div>
@@ -270,7 +270,7 @@ export function AccessibilitySettingsPanel() {
             aria-pressed={preferences.themeMode === "high-contrast"}
           >
             <Contrast className="h-6 w-6 text-gray-900" aria-hidden="true" />
-            <div className="text-left">
+            <div className="text-start">
               <div className="font-semibold text-foreground">{t("themeMode.highContrast")}</div>
               <div className="text-xs text-muted-foreground">{t("themeMode.highContrastDesc")}</div>
             </div>
@@ -286,7 +286,7 @@ export function AccessibilitySettingsPanel() {
             aria-pressed={preferences.themeMode === "auto"}
           >
             <MonitorSmartphone className="h-6 w-6 text-teal-500" aria-hidden="true" />
-            <div className="text-left">
+            <div className="text-start">
               <div className="font-semibold text-foreground">{t("themeMode.auto")}</div>
               <div className="text-xs text-muted-foreground">{t("themeMode.autoDesc")}</div>
             </div>

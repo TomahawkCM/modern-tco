@@ -58,7 +58,7 @@ export function PrivacyToggle({ compact, className }: PrivacyToggleProps) {
     >
       <Icon className="h-5 w-5 shrink-0" />
       <span>{t("toggle")}</span>
-      <kbd className="ml-auto rounded border border-white/10 bg-black/20 px-1.5 py-0.5 font-mono text-[10px] text-slate-500">
+      <kbd className="ms-auto rounded border border-white/10 bg-black/20 px-1.5 py-0.5 font-mono text-[10px] text-slate-500">
         {t("shortcut")}
       </kbd>
     </button>

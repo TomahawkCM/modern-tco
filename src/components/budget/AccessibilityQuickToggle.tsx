@@ -14,6 +14,7 @@
 import { useSeniorsMode } from "@/contexts/SeniorsModeContext";
 import { cn } from "@/lib/utils";
 import { Accessibility, Check, ChevronDown, Minus, Plus, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface AccessibilityQuickToggleProps {
@@ -32,6 +33,7 @@ export function AccessibilityQuickToggle({
   compact = false,
 }: AccessibilityQuickToggleProps) {
   const { settings, isSeniorsMode, toggleSeniorsMode, updateSetting } = useSeniorsMode();
+  const tAria = useTranslations("aria");
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -121,7 +123,7 @@ export function AccessibilityQuickToggle({
         {/* Active indicator dot */}
         {hasActiveFeatures && (
           <span
-            className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-teal-400"
+            className="absolute -end-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-teal-400"
             aria-hidden="true"
           />
         )}
@@ -131,9 +133,9 @@ export function AccessibilityQuickToggle({
       {isOpen && (
         <div
           role="menu"
-          aria-label="Accessibility settings"
+          aria-label={tAria("accessibilitySettings")}
           className={cn(
-            "absolute right-0 top-full z-50 mt-2 w-72 rounded-xl",
+            "absolute end-0 top-full z-50 mt-2 w-72 rounded-xl",
             "border border-white/10 bg-slate-900/95 backdrop-blur-lg",
             "shadow-xl shadow-black/20",
             "animate-in fade-in-0 zoom-in-95 slide-in-from-top-2",
@@ -147,7 +149,7 @@ export function AccessibilityQuickToggle({
               type="button"
               onClick={() => setIsOpen(false)}
               className="rounded p-1 text-slate-400 transition-colors hover:text-white"
-              aria-label="Close accessibility menu"
+              aria-label={tAria("closeAccessibilityMenu")}
             >
               <X className="h-4 w-4" />
             </button>
@@ -260,7 +262,7 @@ export function AccessibilityQuickToggle({
                     type="button"
                     onClick={() => handleFontSizeChange("decrease")}
                     disabled={settings.fontSizeMultiplier === 1.0}
-                    aria-label="Decrease text size"
+                    aria-label={tAria("decreaseTextSize")}
                     className={cn(
                       "flex h-8 w-8 items-center justify-center rounded-lg transition-colors",
                       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500",
@@ -284,7 +286,7 @@ export function AccessibilityQuickToggle({
                     type="button"
                     onClick={() => handleFontSizeChange("increase")}
                     disabled={settings.fontSizeMultiplier === 1.5}
-                    aria-label="Increase text size"
+                    aria-label={tAria("increaseTextSize")}
                     className={cn(
                       "flex h-8 w-8 items-center justify-center rounded-lg transition-colors",
                       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500",

@@ -233,21 +233,21 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
                         {t("password.label")}
                       </label>
                       <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+                        <Lock className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
                         <input
                           type={showPassword ? "text" : "password"}
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           placeholder={t("password.placeholder")}
                           className={cn(
-                            "w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-12 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500",
+                            "w-full rounded-lg border border-white/10 bg-white/5 py-3 ps-10 pe-12 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500",
                             isSeniorsMode && "py-4 text-lg"
                           )}
                         />
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
+                          className="absolute end-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
                         >
                           {showPassword ? (
                             <EyeOff className="h-4 w-4" />
@@ -264,14 +264,14 @@ export function ExportDialog({ isOpen, onClose }: ExportDialogProps) {
                         {t("password.confirm")}
                       </label>
                       <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+                        <Lock className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
                         <input
                           type={showPassword ? "text" : "password"}
                           value={confirmPassword}
                           onChange={(e) => setConfirmPassword(e.target.value)}
                           placeholder={t("password.confirmPlaceholder")}
                           className={cn(
-                            "w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-4 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500",
+                            "w-full rounded-lg border border-white/10 bg-white/5 py-3 ps-10 pe-4 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500",
                             isSeniorsMode && "py-4 text-lg"
                           )}
                         />

@@ -50,7 +50,7 @@ export function RecurringTransactions({ patterns }: RecurringTransactionsProps) 
           <h3 className="text-lg font-bold text-gray-900">{t("title")}</h3>
           <p className="mt-2 text-sm text-gray-600">{t("subtitle")}</p>
         </div>
-        <div className="text-right">
+        <div className="text-end">
           <div className="text-xs text-gray-600">{t("estimatedMonthly")}</div>
           <div className="text-xl font-bold text-teal-600">${totalMonthly.toFixed(2)}</div>
         </div>
@@ -112,7 +112,7 @@ export function RecurringTransactions({ patterns }: RecurringTransactionsProps) 
                   </div>
                 </div>
 
-                <div className="text-right">
+                <div className="text-end">
                   <div className="text-sm font-semibold text-gray-900">
                     ${pattern.averageAmount.toFixed(2)}
                   </div>

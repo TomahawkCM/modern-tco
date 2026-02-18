@@ -347,7 +347,7 @@ export function SubscriptionCostChart({
                     <span className="text-sm font-medium text-foreground">{cat.name}</span>
                     <span className="text-xs text-muted-foreground">({cat.count})</span>
                   </div>
-                  <div className="text-right">
+                  <div className="text-end">
                     <p className="text-sm font-semibold text-foreground">
                       ${cat.monthly.toFixed(2)}/mo
                     </p>
@@ -397,7 +397,7 @@ export function SubscriptionCostChart({
                     <p className="mt-1 text-sm text-muted-foreground">{suggestion.description}</p>
                   </div>
                   {suggestion.potentialSavings > 0 && (
-                    <div className="text-right">
+                    <div className="text-end">
                       <p className="text-lg font-bold text-green-600">
                         ${suggestion.potentialSavings.toFixed(2)}
                       </p>

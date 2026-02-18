@@ -94,7 +94,7 @@ export function DashboardCustomizer({
                       >
                         {widget.name}
                         {widget.isAlwaysVisible && (
-                          <span className="ml-2 text-xs text-gray-500">({t("alwaysVisible")})</span>
+                          <span className="ms-2 text-xs text-gray-500">({t("alwaysVisible")})</span>
                         )}
                       </Label>
 

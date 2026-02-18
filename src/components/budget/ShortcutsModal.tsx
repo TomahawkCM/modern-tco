@@ -59,7 +59,7 @@ export function ShortcutsModal({ onClose }: ShortcutsModalProps) {
                       <div className="font-medium text-gray-900">{shortcut.description}</div>
                       <div className="mt-0.5 text-sm text-gray-600">{shortcut.action}</div>
                     </div>
-                    <kbd className="ml-4 rounded-lg border border-gray-300 bg-white px-4 py-2 font-mono text-sm font-semibold text-gray-700 shadow-sm">
+                    <kbd className="ms-4 rounded-lg border border-gray-300 bg-white px-4 py-2 font-mono text-sm font-semibold text-gray-700 shadow-sm">
                       {shortcut.key}
                     </kbd>
                   </div>

@@ -126,26 +126,26 @@ function formatDate(date: Date, locale: string): string {
 function SuggestionIcon({ type }: { type: AutocompleteSuggestion["type"] }) {
   switch (type) {
     case "merchant":
-      return <Store className="mr-2 h-4 w-4 text-muted-foreground" />;
+      return <Store className="me-2 h-4 w-4 text-muted-foreground" />;
     case "category":
-      return <Tags className="mr-2 h-4 w-4 text-muted-foreground" />;
+      return <Tags className="me-2 h-4 w-4 text-muted-foreground" />;
     case "amount":
-      return <DollarSign className="mr-2 h-4 w-4 text-muted-foreground" />;
+      return <DollarSign className="me-2 h-4 w-4 text-muted-foreground" />;
     case "filter":
-      return <Filter className="mr-2 h-4 w-4 text-muted-foreground" />;
+      return <Filter className="me-2 h-4 w-4 text-muted-foreground" />;
     case "recent":
-      return <History className="mr-2 h-4 w-4 text-muted-foreground" />;
+      return <History className="me-2 h-4 w-4 text-muted-foreground" />;
     case "saved":
-      return <Bookmark className="mr-2 h-4 w-4 text-muted-foreground" />;
+      return <Bookmark className="me-2 h-4 w-4 text-muted-foreground" />;
     default:
-      return <Search className="mr-2 h-4 w-4 text-muted-foreground" />;
+      return <Search className="me-2 h-4 w-4 text-muted-foreground" />;
   }
 }
 
 // Keyboard shortcut hint badge
 function ShortcutHint({ shortcut }: { shortcut: string }) {
   return (
-    <kbd className="ml-auto inline-flex h-5 items-center rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+    <kbd className="ms-auto inline-flex h-5 items-center rounded border border-border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
       {shortcut}
     </kbd>
   );
@@ -386,7 +386,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                   className="flex items-center justify-between"
                 >
                   <div className="flex min-w-0 flex-1 items-center">
-                    <Receipt className="mr-2 h-4 w-4 flex-shrink-0 text-muted-foreground" />
+                    <Receipt className="me-2 h-4 w-4 flex-shrink-0 text-muted-foreground" />
                     <div className="min-w-0 flex-1">
                       <span className="block truncate font-medium">
                         {highlightMatches(
@@ -401,7 +401,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                     </div>
                   </div>
                   <span
-                    className={`ml-2 flex-shrink-0 font-semibold ${
+                    className={`ms-2 flex-shrink-0 font-semibold ${
                       result.item.amount >= 0 ? "text-green-600" : "text-red-600"
                     }`}
                   >
@@ -416,7 +416,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                   value="view-all-results"
                   onSelect={() => goToTransactionsWithSearch(searchQuery)}
                 >
-                  <ArrowRight className="mr-2 h-4 w-4" />
+                  <ArrowRight className="me-2 h-4 w-4" />
                   <span>{tSearch("viewAllResults", { count: searchResults.length })}</span>
                 </CommandItem>
               )}
@@ -457,7 +457,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                   value={`recent-${search}`}
                   onSelect={() => goToTransactionsWithSearch(search)}
                 >
-                  <History className="mr-2 h-4 w-4 text-muted-foreground" />
+                  <History className="me-2 h-4 w-4 text-muted-foreground" />
                   <span>{search}</span>
                 </CommandItem>
               ))}
@@ -476,7 +476,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                   value={`saved-${filter.id}`}
                   onSelect={() => goToTransactionsWithSearch(filter.query)}
                 >
-                  <Bookmark className="mr-2 h-4 w-4 text-muted-foreground" />
+                  <Bookmark className="me-2 h-4 w-4 text-muted-foreground" />
                   <span className="flex-1">{filter.name}</span>
                   <span className="text-xs text-muted-foreground">{filter.query}</span>
                 </CommandItem>
@@ -527,28 +527,28 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
             {/* Navigation - Core Tracking */}
             <CommandGroup heading={t("groups.tracking")}>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app"))}>
-                <Home className="mr-2 h-4 w-4" />
+                <Home className="me-2 h-4 w-4" />
                 <span className="flex-1">{t("commands.dashboard")}</span>
                 <ShortcutHint shortcut="D" />
               </CommandItem>
               <CommandItem
                 onSelect={() => runCommand(() => router.push("/budget-app/transactions"))}
               >
-                <Receipt className="mr-2 h-4 w-4" />
+                <Receipt className="me-2 h-4 w-4" />
                 <span className="flex-1">{t("commands.transactions")}</span>
                 <ShortcutHint shortcut="T" />
               </CommandItem>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/ocr"))}>
-                <Camera className="mr-2 h-4 w-4" />
+                <Camera className="me-2 h-4 w-4" />
                 <span>{t("commands.scanReceipt")}</span>
               </CommandItem>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/budgets"))}>
-                <PieChart className="mr-2 h-4 w-4" />
+                <PieChart className="me-2 h-4 w-4" />
                 <span className="flex-1">{t("commands.budgets")}</span>
                 <ShortcutHint shortcut="B" />
               </CommandItem>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/reports"))}>
-                <BarChart3 className="mr-2 h-4 w-4" />
+                <BarChart3 className="me-2 h-4 w-4" />
                 <span className="flex-1">{t("commands.reports")}</span>
                 <ShortcutHint shortcut="R" />
               </CommandItem>
@@ -559,26 +559,26 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
             {/* Navigation - Wealth & Planning */}
             <CommandGroup heading={t("groups.wealth")}>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/loans"))}>
-                <CreditCard className="mr-2 h-4 w-4" />
+                <CreditCard className="me-2 h-4 w-4" />
                 <span>{t("commands.loans")}</span>
               </CommandItem>
               <CommandItem
                 onSelect={() => runCommand(() => router.push("/budget-app/investments"))}
               >
-                <Wallet className="mr-2 h-4 w-4" />
+                <Wallet className="me-2 h-4 w-4" />
                 <span className="flex-1">{t("commands.investments")}</span>
                 <ShortcutHint shortcut="I" />
               </CommandItem>
               <CommandItem
                 onSelect={() => runCommand(() => router.push("/budget-app/planning/future"))}
               >
-                <Target className="mr-2 h-4 w-4" />
+                <Target className="me-2 h-4 w-4" />
                 <span>{t("commands.futurePlans")}</span>
               </CommandItem>
               <CommandItem
                 onSelect={() => runCommand(() => router.push("/budget-app/planning/retirement"))}
               >
-                <TrendingUp className="mr-2 h-4 w-4" />
+                <TrendingUp className="me-2 h-4 w-4" />
                 <span>{t("commands.retirement")}</span>
               </CommandItem>
             </CommandGroup>
@@ -588,19 +588,19 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
             {/* Navigation - Tools & Settings */}
             <CommandGroup heading={t("groups.tools")}>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/categories"))}>
-                <Tags className="mr-2 h-4 w-4" />
+                <Tags className="me-2 h-4 w-4" />
                 <span>{t("commands.categories")}</span>
               </CommandItem>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/import"))}>
-                <Upload className="mr-2 h-4 w-4" />
+                <Upload className="me-2 h-4 w-4" />
                 <span>{t("commands.importCsv")}</span>
               </CommandItem>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/export"))}>
-                <Download className="mr-2 h-4 w-4" />
+                <Download className="me-2 h-4 w-4" />
                 <span>{t("commands.exportData")}</span>
               </CommandItem>
               <CommandItem onSelect={() => runCommand(() => router.push("/budget-app/settings"))}>
-                <Settings className="mr-2 h-4 w-4" />
+                <Settings className="me-2 h-4 w-4" />
                 <span>{t("commands.settings")}</span>
               </CommandItem>
             </CommandGroup>
@@ -622,7 +622,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                   })
                 }
               >
-                <Plus className="mr-2 h-4 w-4" />
+                <Plus className="me-2 h-4 w-4" />
                 <span>{t("commands.addTransaction")}</span>
               </CommandItem>
               <CommandItem
@@ -638,7 +638,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                   })
                 }
               >
-                <Plus className="mr-2 h-4 w-4" />
+                <Plus className="me-2 h-4 w-4" />
                 <span>{t("commands.newBudget")}</span>
               </CommandItem>
             </CommandGroup>
@@ -654,7 +654,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                   })
                 }
               >
-                <Sun className="mr-2 h-4 w-4" />
+                <Sun className="me-2 h-4 w-4" />
                 <span>{t("commands.lightTheme")}</span>
               </CommandItem>
               <CommandItem
@@ -664,7 +664,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                   })
                 }
               >
-                <Moon className="mr-2 h-4 w-4" />
+                <Moon className="me-2 h-4 w-4" />
                 <span>{t("commands.darkTheme")}</span>
               </CommandItem>
               <CommandItem
@@ -674,7 +674,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                   })
                 }
               >
-                <MonitorSmartphone className="mr-2 h-4 w-4" />
+                <MonitorSmartphone className="me-2 h-4 w-4" />
                 <span>{t("commands.highContrastTheme")}</span>
               </CommandItem>
             </CommandGroup>

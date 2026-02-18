@@ -557,7 +557,7 @@ export function TransactionModal({
                     </span>
                   )}
                   {isAILoading && (
-                    <span className="ml-2 inline-flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-2.5 py-1 text-xs font-medium text-teal-700">
+                    <span className="ms-2 inline-flex items-center gap-1.5 rounded-full border border-teal-200 bg-teal-50 px-2.5 py-1 text-xs font-medium text-teal-700">
                       <Brain className="h-3.5 w-3.5 animate-pulse" />
                       {t("category.aiCategorizing")}
                     </span>

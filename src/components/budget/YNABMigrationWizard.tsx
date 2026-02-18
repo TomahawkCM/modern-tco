@@ -949,7 +949,7 @@ function CategoryMappingStep({
         </div>
       </div>
 
-      <div className="max-h-[350px] space-y-4 overflow-y-auto pr-2">
+      <div className="max-h-[350px] space-y-4 overflow-y-auto pe-2">
         {groupedMappings.map(([groupName, items]) => (
           <div key={groupName} className="rounded-xl border border-white/10 bg-white/5 p-4">
             <h4
@@ -960,7 +960,7 @@ function CategoryMappingStep({
             >
               <FolderTree className="h-4 w-4 text-teal-400" />
               {groupName}
-              <span className="ml-auto text-xs font-normal text-slate-500">
+              <span className="ms-auto text-xs font-normal text-slate-500">
                 {t("categoryStep.category", { count: items.length })}
               </span>
             </h4>
@@ -1003,7 +1003,7 @@ function CategoryMappingStep({
 
                   {/* Show category selector when "map" is selected */}
                   {mapping.action === "map" && existingCategories.length > 0 && (
-                    <div className="flex items-center gap-2 pl-4">
+                    <div className="flex items-center gap-2 ps-4">
                       <ArrowRight className="h-4 w-4 text-slate-500" />
                       <select
                         value={mapping.mappedCategoryId || ""}
@@ -1028,7 +1028,7 @@ function CategoryMappingStep({
 
                   {/* Show preview for "create" action */}
                   {mapping.action === "create" && (
-                    <div className="flex items-center gap-2 pl-4 text-xs text-teal-400">
+                    <div className="flex items-center gap-2 ps-4 text-xs text-teal-400">
                       <Sparkles className="h-3 w-3" />
                       <span>
                         {t("categoryStep.willCreate")} <strong>{mapping.ynabGroupName}</strong> →{" "}

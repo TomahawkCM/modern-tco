@@ -359,7 +359,7 @@ export function ChatbotHelp({
             className="text-gray-600 hover:text-gray-900"
             onClick={() => onQuestionClick("/help")}
           >
-            <HelpCircle className="mr-2 h-4 w-4" />
+            <HelpCircle className="me-2 h-4 w-4" />
             View all example questions
           </Button>
         </div>
@@ -430,7 +430,7 @@ function SuggestionButton({
     return (
       <Button
         variant="outline"
-        className="h-auto w-full justify-start px-4 py-3 text-left"
+        className="h-auto w-full justify-start px-4 py-3 text-start"
         onClick={onClick}
       >
         <div className="flex w-full items-center gap-3">
@@ -439,7 +439,7 @@ function SuggestionButton({
             <p className="truncate text-sm font-medium text-gray-900">{suggestion.question}</p>
           </div>
           {suggestion.badge && (
-            <Badge variant="secondary" className="ml-2 flex-shrink-0">
+            <Badge variant="secondary" className="ms-2 flex-shrink-0">
               {suggestion.badge}
             </Badge>
           )}
@@ -451,7 +451,7 @@ function SuggestionButton({
   return (
     <Button
       variant="outline"
-      className="h-auto w-full justify-start px-4 py-4 text-left hover:bg-gray-50"
+      className="h-auto w-full justify-start px-4 py-4 text-start hover:bg-gray-50"
       onClick={onClick}
     >
       <div className="flex w-full items-start gap-3">

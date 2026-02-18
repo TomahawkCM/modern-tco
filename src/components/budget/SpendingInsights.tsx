@@ -125,7 +125,7 @@ export function SpendingInsights({
                   )}
                 </div>
 
-                <div className="text-right">
+                <div className="text-end">
                   <div className="text-xs text-gray-600">This Month</div>
                   <div className="text-lg font-bold text-gray-900">
                     ${insight.currentMonth.toFixed(0)}

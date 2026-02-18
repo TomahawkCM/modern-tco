@@ -4,6 +4,7 @@ import { useSeniorsMode } from "@/hooks/useSeniorsMode";
 import { cn } from "@/lib/utils";
 import * as SwitchPrimitives from "@radix-ui/react-switch";
 import { Eye, EyeOff } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useCallback, useId } from "react";
 
 interface SeniorsModeToggleProps {
@@ -32,6 +33,7 @@ export function SeniorsModeToggle({
   showIcons = true,
 }: SeniorsModeToggleProps) {
   const { isSeniorsMode, toggleSeniorsMode, settings } = useSeniorsMode();
+  const tAria = useTranslations("aria");
   const id = useId();
   const labelId = `${id}-label`;
   const descriptionId = `${id}-description`;
@@ -91,7 +93,7 @@ export function SeniorsModeToggle({
           onCheckedChange={handleChange}
           aria-labelledby={showLabel ? labelId : undefined}
           aria-describedby={showLabel ? descriptionId : undefined}
-          aria-label={!showLabel ? "Toggle Seniors Mode" : undefined}
+          aria-label={!showLabel ? tAria("toggleSeniorsMode") : undefined}
           className={cn(
             // Base styles
             "peer relative inline-flex shrink-0 cursor-pointer items-center rounded-full",

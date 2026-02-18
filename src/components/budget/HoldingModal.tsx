@@ -6,6 +6,7 @@
  */
 
 import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { X, Search } from "lucide-react";
 import type { Holding, InvestmentAccount } from "@/types/budget";
 
@@ -45,6 +46,8 @@ const COMMON_SYMBOLS = [
 ];
 
 export function HoldingModal({ holding, account, onSave, onClose }: HoldingModalProps) {
+  const locale = useLocale();
+  const tAria = useTranslations("aria");
   const [symbol, setSymbol] = useState(holding?.symbol || "");
   const [quantity, setQuantity] = useState(holding?.quantity.toString() || "");
   const [purchasePrice, setPurchasePrice] = useState(holding?.purchasePrice.toString() || "");
@@ -126,7 +129,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
           <button
             onClick={onClose}
             className="text-gray-400 transition-colors hover:text-gray-600"
-            aria-label="Close modal"
+            aria-label={tAria("closeHoldingModal")}
           >
             <X className="h-5 w-5" />
           </button>
@@ -151,10 +154,10 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
                 onFocus={() => setShowSuggestions(true)}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
                 placeholder="e.g., AAPL, VGRO.TO, TD.TO"
-                className="h-12 w-full rounded-lg border border-gray-300 px-4 pr-10 uppercase focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="h-12 w-full rounded-lg border border-gray-300 px-4 pe-10 uppercase focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
                 required
               />
-              <Search className="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+              <Search className="absolute end-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
             </div>
 
             {/* Autocomplete Suggestions */}
@@ -165,7 +168,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
                     key={suggestion.symbol}
                     type="button"
                     onClick={() => selectSymbol(suggestion.symbol)}
-                    className="w-full px-4 py-2 text-left transition-colors hover:bg-gray-50"
+                    className="w-full px-4 py-2 text-start transition-colors hover:bg-gray-50"
                   >
                     <div className="font-medium text-gray-900">{suggestion.symbol}</div>
                     <div className="text-sm text-gray-600">{suggestion.name}</div>
@@ -207,7 +210,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
               Purchase Price per Share <span className="text-red-600">*</span>
             </label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+              <span className="absolute start-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
               <input
                 id="purchase-price"
                 type="number"
@@ -217,7 +220,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
                 onChange={(e) => setPurchasePrice(e.target.value)}
                 placeholder="50.00"
                 inputMode="decimal"
-                className="h-12 w-full rounded-lg border border-gray-300 pl-8 pr-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="h-12 w-full rounded-lg border border-gray-300 ps-8 pe-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
                 required
               />
             </div>
@@ -262,7 +265,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
                 <div className="mb-2 text-sm text-gray-600">Total Investment</div>
                 <div className="text-2xl font-bold text-gray-900">
                   $
-                  {(parseFloat(quantity) * parseFloat(purchasePrice)).toLocaleString("en-US", {
+                  {(parseFloat(quantity) * parseFloat(purchasePrice)).toLocaleString(locale, {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}

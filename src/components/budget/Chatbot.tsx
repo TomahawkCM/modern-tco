@@ -127,7 +127,7 @@ export function Chatbot() {
                 <button
                   key={key}
                   onClick={() => setInput(t(`emptyState.examples.${key}`))}
-                  className="w-full rounded-lg border border-gray-200 bg-white p-3 text-left text-sm text-gray-700 transition-colors hover:border-teal-500 hover:bg-teal-50"
+                  className="w-full rounded-lg border border-gray-200 bg-white p-3 text-start text-sm text-gray-700 transition-colors hover:border-teal-500 hover:bg-teal-50"
                 >
                   {t(`emptyState.examples.${key}`)}
                 </button>

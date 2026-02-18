@@ -280,7 +280,7 @@ export function SimpleFINConnect({
                   href="https://bridge.simplefin.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-1 inline-flex items-center gap-1 text-primary hover:underline"
+                  className="ms-1 inline-flex items-center gap-1 text-primary hover:underline"
                 >
                   Learn more <ExternalLink className="h-3 w-3" />
                 </a>
@@ -289,7 +289,7 @@ export function SimpleFINConnect({
 
             <Button onClick={() => setStep("get-token")} className="w-full">
               Get Started
-              <ArrowRight className="ml-2 h-4 w-4" />
+              <ArrowRight className="ms-2 h-4 w-4" />
             </Button>
           </div>
         );
@@ -315,7 +315,7 @@ export function SimpleFINConnect({
 
               <Button onClick={openSimpleFINBridge} className="w-full">
                 Open SimpleFIN Bridge
-                <ExternalLink className="ml-2 h-4 w-4" />
+                <ExternalLink className="ms-2 h-4 w-4" />
               </Button>
             </div>
 
@@ -350,13 +350,13 @@ export function SimpleFINConnect({
                     placeholder="aHR0cHM6Ly9icmlkZ2Uuc2..."
                     value={setupToken}
                     onChange={(e) => setSetupToken(e.target.value)}
-                    className="pr-10 font-mono text-sm"
+                    className="pe-10 font-mono text-sm"
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="absolute right-1 top-1/2 h-7 w-7 -translate-y-1/2"
+                    className="absolute end-1 top-1/2 h-7 w-7 -translate-y-1/2"
                     onClick={async () => {
                       try {
                         const text = await navigator.clipboard.readText();
@@ -388,13 +388,13 @@ export function SimpleFINConnect({
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="me-2 h-4 w-4 animate-spin" />
                     Connecting...
                   </>
                 ) : (
                   <>
                     Connect
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    <ArrowRight className="ms-2 h-4 w-4" />
                   </>
                 )}
               </Button>
@@ -442,7 +442,7 @@ export function SimpleFINConnect({
                         <p className="font-medium">{account.name}</p>
                         <p className="text-sm text-muted-foreground">{account.institution}</p>
                       </div>
-                      <div className="text-right">
+                      <div className="text-end">
                         <p className="font-medium">
                           {account.currency}{" "}
                           {account.balance.toLocaleString(undefined, {
@@ -506,13 +506,13 @@ export function SimpleFINConnect({
             <Button onClick={completeConnection} disabled={isLoading} className="w-full">
               {isLoading ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <Loader2 className="me-2 h-4 w-4 animate-spin" />
                   Saving...
                 </>
               ) : (
                 <>
                   Complete Setup
-                  <CheckCircle className="ml-2 h-4 w-4" />
+                  <CheckCircle className="ms-2 h-4 w-4" />
                 </>
               )}
             </Button>

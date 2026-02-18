@@ -17,6 +17,7 @@ import {
   FileText,
   AlertTriangle,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 interface BalanceReconciliationModalProps {
@@ -36,8 +37,8 @@ interface BalanceReconciliationModalProps {
 /**
  * Format a number as currency
  */
-function formatCurrency(amount: number): string {
-  const formatter = new Intl.NumberFormat("en-US", {
+function formatCurrency(amount: number, locale: string): string {
+  const formatter = new Intl.NumberFormat(locale, {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 2,
@@ -59,6 +60,8 @@ export function BalanceReconciliationModal({
   onComplete,
   onSkip,
 }: BalanceReconciliationModalProps) {
+  const locale = useLocale();
+  const tAria = useTranslations("aria");
   const [currentBalance, setCurrentBalance] = useState<string>("");
   const [calculatedStartingBalance, setCalculatedStartingBalance] = useState<number | null>(null);
   const modalRef = useFocusTrap(open);
@@ -149,7 +152,7 @@ export function BalanceReconciliationModal({
               type="button"
               onClick={() => onOpenChange(false)}
               className="rounded-lg p-2.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              aria-label="Close modal"
+              aria-label={tAria("closeModal")}
             >
               <X className="h-5 w-5" />
             </button>
@@ -189,7 +192,7 @@ export function BalanceReconciliationModal({
                   className={`text-2xl font-bold ${transactionNetChange >= 0 ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
                 >
                   {transactionNetChange >= 0 ? "+" : ""}
-                  {formatCurrency(transactionNetChange)}
+                  {formatCurrency(transactionNetChange, locale)}
                 </p>
               </div>
             </div>
@@ -207,7 +210,7 @@ export function BalanceReconciliationModal({
                   : "What is your current bank balance?"}
               </label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-lg text-muted-foreground">
+                <span className="absolute start-4 top-1/2 -translate-y-1/2 text-lg text-muted-foreground">
                   $
                 </span>
                 <input
@@ -219,7 +222,7 @@ export function BalanceReconciliationModal({
                   step="0.01"
                   inputMode="decimal"
                   autoFocus
-                  className="min-h-[56px] w-full rounded-lg border-2 border-input bg-background pl-8 pr-4 text-xl font-medium text-foreground transition-colors focus:border-teal-500 focus:ring-2 focus:ring-teal-500"
+                  className="min-h-[56px] w-full rounded-lg border-2 border-input bg-background ps-8 pe-4 text-xl font-medium text-foreground transition-colors focus:border-teal-500 focus:ring-2 focus:ring-teal-500"
                   aria-describedby="balance-helper"
                 />
               </div>
@@ -248,7 +251,7 @@ export function BalanceReconciliationModal({
                       {isCreditCard ? "Your starting amount owed:" : "Your starting balance:"}
                     </p>
                     <p className="text-xl font-bold text-green-700 dark:text-green-300">
-                      {formatCurrency(Math.abs(calculatedStartingBalance))}
+                      {formatCurrency(Math.abs(calculatedStartingBalance), locale)}
                     </p>
                     <p className="mt-1 text-xs text-green-600 dark:text-green-400">
                       This will make your account balance match your bank.

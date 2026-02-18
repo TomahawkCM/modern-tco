@@ -16,6 +16,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import type { ParsedTransaction } from "@/types/budget";
 import { parseAmountColumns, type ColumnMapping } from "@/lib/parsers/pdf-bank-parser";
 
@@ -98,6 +99,8 @@ export default function ColumnMapperModal({
   rawRows,
   bankName = "Unknown Bank",
 }: ColumnMapperModalProps) {
+  const tAria = useTranslations("aria");
+
   // Parse raw rows into columns (split by whitespace/tabs)
   const parsedRows = useMemo(() => {
     return rawRows.map((row) => row.split(/\s{2,}|\t/).filter((col) => col.trim().length > 0));
@@ -278,7 +281,7 @@ export default function ColumnMapperModal({
           <button
             onClick={onClose}
             className="text-2xl font-bold text-gray-500 hover:text-gray-700"
-            aria-label="Close"
+            aria-label={tAria("close")}
           >
             ×
           </button>
@@ -486,9 +489,9 @@ export default function ColumnMapperModal({
                 <table className="min-w-full text-sm">
                   <thead className="bg-gray-100">
                     <tr>
-                      <th className="px-3 py-2 text-left">Date</th>
-                      <th className="px-3 py-2 text-left">Description</th>
-                      <th className="px-3 py-2 text-right">Amount</th>
+                      <th className="px-3 py-2 text-start">Date</th>
+                      <th className="px-3 py-2 text-start">Description</th>
+                      <th className="px-3 py-2 text-end">Amount</th>
                       <th className="px-3 py-2 text-center">Status</th>
                     </tr>
                   </thead>
@@ -501,7 +504,7 @@ export default function ColumnMapperModal({
                           </span>
                         </td>
                         <td className="border px-3 py-2">{tx.description}</td>
-                        <td className="border px-3 py-2 text-right">
+                        <td className="border px-3 py-2 text-end">
                           ${Math.abs(tx.amount).toFixed(2)}
                         </td>
                         <td className="border px-3 py-2 text-center">

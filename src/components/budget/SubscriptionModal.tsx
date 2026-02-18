@@ -6,6 +6,7 @@
  */
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import type { Subscription, Category, BillingCycle, SubscriptionStatus } from "@/types/budget";
 import { format, addDays, addWeeks, addMonths, addYears } from "date-fns";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
@@ -52,6 +53,7 @@ export function SubscriptionModal({
   onClose,
   isSaving = false,
 }: SubscriptionModalProps) {
+  const tAria = useTranslations("aria");
   // Form state
   const [name, setName] = useState(subscription?.name || "");
   const [description, setDescription] = useState(subscription?.description || "");
@@ -205,7 +207,7 @@ export function SubscriptionModal({
               type="button"
               onClick={onClose}
               className="rounded-lg p-2.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              aria-label="Close modal"
+              aria-label={tAria("closeModal")}
             >
               <X className="h-6 w-6" />
             </button>

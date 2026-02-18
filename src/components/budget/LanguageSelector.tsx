@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { SUPPORTED_LOCALES, LOCALE_METADATA, type SupportedLocale } from "@/i18n/config";
 import {
   getLocalePreferences,
@@ -21,6 +22,7 @@ interface LanguageSelectorProps {
 }
 
 export function LanguageSelector({ variant = "minimal", className = "" }: LanguageSelectorProps) {
+  const tAria = useTranslations("aria");
   const [preferences, setPreferences] = useState<LocalePreferences | null>(null);
 
   useEffect(() => {
@@ -59,7 +61,7 @@ export function LanguageSelector({ variant = "minimal", className = "" }: Langua
               ? "border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-300 hover:bg-white/10 hover:text-white"
               : "p-2 text-slate-400 hover:bg-white/5 hover:text-white"
           } ${className}`}
-          aria-label="Select language"
+          aria-label={tAria("selectLanguage")}
         >
           <Globe className="h-4 w-4" />
           {variant === "full" && (
@@ -84,7 +86,7 @@ export function LanguageSelector({ variant = "minimal", className = "" }: Langua
           >
             <span className="flex-1">{LOCALE_METADATA[locale].label}</span>
             {currentLocale === locale && (
-              <span className="ml-2 h-1.5 w-1.5 rounded-full bg-teal-400" />
+              <span className="ms-2 h-1.5 w-1.5 rounded-full bg-teal-400" />
             )}
           </DropdownMenuItem>
         ))}

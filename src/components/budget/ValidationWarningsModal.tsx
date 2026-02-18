@@ -13,6 +13,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { X, AlertTriangle, AlertCircle, Info, CheckCircle, Trash2 } from "lucide-react";
 import type { ValidationResult, ValidationIssue } from "@/lib/ai/smart-transaction-validator";
 import type { ParsedTransaction } from "@/types/budget";
@@ -40,6 +41,7 @@ export default function ValidationWarningsModal({
   onProceed,
   onCancel,
 }: ValidationWarningsModalProps) {
+  const t = useTranslations("validationWarnings");
   const [transactionsToRemove, setTransactionsToRemove] = useState<Set<number>>(new Set());
   const [expandedIssue, setExpandedIssue] = useState<number | null>(null);
 
@@ -109,17 +111,16 @@ export default function ValidationWarningsModal({
             <div className="flex items-center gap-3">
               <AlertTriangle className="h-8 w-8 text-yellow-600" />
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">Transaction Validation Results</h2>
+                <h2 className="text-2xl font-bold text-gray-900">{t("title")}</h2>
                 <p className="mt-1 text-sm text-gray-600">
-                  We found {issues.length} {issues.length === 1 ? "issue" : "issues"} that need your
-                  attention
+                  {t("issuesFound", { count: issues.length })}
                 </p>
               </div>
             </div>
             <button
               onClick={onClose}
               className="rounded-lg p-2 transition-colors hover:bg-white"
-              aria-label="Close modal"
+              aria-label={t("closeModal")}
             >
               <X className="h-6 w-6 text-gray-600" />
             </button>
@@ -133,19 +134,19 @@ export default function ValidationWarningsModal({
             {criticalCount > 0 && (
               <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-center">
                 <div className="text-3xl font-bold text-red-600">{criticalCount}</div>
-                <div className="mt-1 text-sm text-red-700">Critical Issues</div>
+                <div className="mt-1 text-sm text-red-700">{t("criticalIssues")}</div>
               </div>
             )}
             {warningCount > 0 && (
               <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 text-center">
                 <div className="text-3xl font-bold text-yellow-600">{warningCount}</div>
-                <div className="mt-1 text-sm text-yellow-700">Warnings</div>
+                <div className="mt-1 text-sm text-yellow-700">{t("warnings")}</div>
               </div>
             )}
             {infoCount > 0 && (
               <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 text-center">
                 <div className="text-3xl font-bold text-blue-600">{infoCount}</div>
-                <div className="mt-1 text-sm text-blue-700">Informational</div>
+                <div className="mt-1 text-sm text-blue-700">{t("informational")}</div>
               </div>
             )}
           </div>
@@ -153,13 +154,13 @@ export default function ValidationWarningsModal({
           {/* AI Analysis */}
           {aiAnalysis && (
             <div className="border-s-4 border-purple-400 bg-purple-50 p-4 text-sm text-purple-800">
-              <strong>AI Analysis:</strong> {aiAnalysis}
+              <strong>{t("aiAnalysis")}</strong> {aiAnalysis}
             </div>
           )}
 
           {/* Issues List */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-gray-900">Issues Detected</h3>
+            <h3 className="mb-4 text-lg font-semibold text-gray-900">{t("issuesDetected")}</h3>
             <div className="space-y-3">
               {issues.map((issue, index) => {
                 const isExpanded = expandedIssue === index;
@@ -189,18 +190,18 @@ export default function ValidationWarningsModal({
                                 {issue.severity.toUpperCase()}
                               </span>
                               <span className="text-xs text-gray-600">
-                                Transaction #{issue.transactionIndex + 1}
+                                {t("transactionNumber", { number: issue.transactionIndex + 1 })}
                               </span>
                               {issue.confidence && (
                                 <span className="text-xs text-gray-600">
-                                  {(issue.confidence * 100).toFixed(0)}% confidence
+                                  {t("confidence", { percent: (issue.confidence * 100).toFixed(0) })}
                                 </span>
                               )}
                             </div>
                             <p className="text-sm text-gray-700">{issue.message}</p>
                             {issue.suggestion && (
                               <p className="mt-2 text-sm text-gray-600">
-                                <strong>Suggestion:</strong> {issue.suggestion}
+                                <strong>{t("suggestion")}</strong> {issue.suggestion}
                               </p>
                             )}
 
@@ -209,21 +210,21 @@ export default function ValidationWarningsModal({
                               onClick={() => setExpandedIssue(isExpanded ? null : index)}
                               className="mt-2 text-xs text-teal-600 hover:text-teal-700"
                             >
-                              {isExpanded ? "Hide" : "View"} Transaction Details
+                              {isExpanded ? t("hideDetails") : t("viewDetails")}
                             </button>
 
                             {isExpanded && issue.transaction && (
                               <div className="mt-3 rounded border border-gray-200 bg-white p-3 text-sm">
                                 <div className="grid grid-cols-2 gap-2">
                                   <div>
-                                    <strong>Date:</strong>{" "}
+                                    <strong>{t("date")}</strong>{" "}
                                     {issue.transaction.date.toLocaleDateString()}
                                   </div>
                                   <div>
-                                    <strong>Amount:</strong> ${issue.transaction.amount.toFixed(2)}
+                                    <strong>{t("amount")}</strong> {issue.transaction.amount.toFixed(2)}
                                   </div>
                                   <div className="col-span-2">
-                                    <strong>Description:</strong> {issue.transaction.description}
+                                    <strong>{t("description")}</strong> {issue.transaction.description}
                                   </div>
                                 </div>
                               </div>
@@ -243,12 +244,12 @@ export default function ValidationWarningsModal({
                           {isMarkedForRemoval ? (
                             <>
                               <CheckCircle className="h-4 w-4" />
-                              Marked
+                              {t("marked")}
                             </>
                           ) : (
                             <>
                               <Trash2 className="h-4 w-4" />
-                              Remove
+                              {t("remove")}
                             </>
                           )}
                         </button>
@@ -263,9 +264,7 @@ export default function ValidationWarningsModal({
           {/* Removal Summary */}
           {transactionsToRemove.size > 0 && (
             <div className="border-s-4 border-orange-400 bg-orange-50 p-4 text-sm text-orange-800">
-              <strong>Note:</strong> {transactionsToRemove.size}{" "}
-              {transactionsToRemove.size === 1 ? "transaction" : "transactions"} will be removed
-              from the import if you proceed.
+              <strong>Note:</strong> {t("removalNote", { count: transactionsToRemove.size })}
             </div>
           )}
         </div>
@@ -276,7 +275,7 @@ export default function ValidationWarningsModal({
             onClick={handleCancel}
             className="rounded-lg border-2 border-gray-300 px-6 py-2 text-gray-700 transition-colors hover:bg-gray-100"
           >
-            Cancel Import
+            {t("cancelImport")}
           </button>
           <div className="flex gap-3">
             <button
@@ -286,15 +285,15 @@ export default function ValidationWarningsModal({
               }}
               className="rounded-lg border-2 border-teal-600 px-6 py-2 text-teal-600 transition-colors hover:bg-teal-50"
             >
-              Ignore All & Continue
+              {t("ignoreAllContinue")}
             </button>
             <button
               onClick={handleProceed}
               className="rounded-lg bg-teal-600 px-6 py-2 text-white transition-colors hover:bg-teal-700"
             >
               {transactionsToRemove.size > 0
-                ? `Remove ${transactionsToRemove.size} & Continue`
-                : "Continue with All"}
+                ? t("removeAndContinue", { count: transactionsToRemove.size })
+                : t("continueWithAll")}
             </button>
           </div>
         </div>

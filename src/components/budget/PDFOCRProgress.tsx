@@ -135,7 +135,7 @@ export function PDFOCRProgress({
               onClick={onCancel}
               className="text-muted-foreground hover:text-destructive"
             >
-              <X className="mr-1 h-4 w-4" />
+              <X className="me-1 h-4 w-4" />
               Cancel
             </Button>
           )}
@@ -153,7 +153,7 @@ export function PDFOCRProgress({
         <div className="relative">
           <Progress value={progress.progress} className="h-3" />
           <div
-            className={`absolute left-0 top-0 h-full rounded-full transition-all ${stageColors[progress.stage]}`}
+            className={`absolute start-0 top-0 h-full rounded-full transition-all ${stageColors[progress.stage]}`}
             style={{ width: `${progress.progress}%`, opacity: 0.3 }}
           />
         </div>
@@ -232,7 +232,7 @@ export function PDFOCRProgress({
                 : "OCR was cancelled. Would you like to restart?"}
             </p>
             <Button onClick={onRetry} variant="outline" size="sm">
-              <RefreshCw className="mr-2 h-4 w-4" />
+              <RefreshCw className="me-2 h-4 w-4" />
               Retry OCR
             </Button>
           </div>
@@ -270,7 +270,7 @@ export function PDFOCRProgressInline({
       <div className="min-w-0 flex-1">
         <div className="mb-1 flex items-center justify-between">
           <span className="truncate font-medium">{progress.message}</span>
-          <span className="ml-2 text-muted-foreground">{Math.round(progress.progress)}%</span>
+          <span className="ms-2 text-muted-foreground">{Math.round(progress.progress)}%</span>
         </div>
         <Progress value={progress.progress} className="h-1.5" />
       </div>

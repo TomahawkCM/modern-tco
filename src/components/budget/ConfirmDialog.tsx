@@ -170,7 +170,7 @@ export function ConfirmDialog({
             )}
             {title}
           </AlertDialogTitle>
-          <AlertDialogDescription className="text-left">{description}</AlertDialogDescription>
+          <AlertDialogDescription className="text-start">{description}</AlertDialogDescription>
         </AlertDialogHeader>
 
         {/* Impact Details */}
@@ -186,7 +186,7 @@ export function ConfirmDialog({
               <AlertTriangle
                 className={`h-4 w-4 ${variant === "destructive" ? "text-red-600" : "text-teal-600"}`}
               />
-              <AlertDescription className="ml-2">
+              <AlertDescription className="ms-2">
                 <strong className="mb-2 block">{impact.title}</strong>
                 <ul className="list-inside list-disc space-y-1 text-sm">
                   {validImpactItems.map((item, index) => (
@@ -205,7 +205,7 @@ export function ConfirmDialog({
           <div className="my-4">
             <Alert className="border-amber-200 bg-amber-50/10">
               <AlertTriangle className="h-4 w-4 text-amber-600" />
-              <AlertDescription className="ml-2">
+              <AlertDescription className="ms-2">
                 <strong className="mb-2 block">{t("finalConfirmation")}</strong>
                 <p className="mb-2 text-sm text-gray-700">
                   {t("typeToConfirm", { text: requireTypedConfirmation.text })}
@@ -249,7 +249,7 @@ export function ConfirmDialog({
           >
             {isLoading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="me-2 h-4 w-4 animate-spin" />
                 {t("processing")}
               </>
             ) : (

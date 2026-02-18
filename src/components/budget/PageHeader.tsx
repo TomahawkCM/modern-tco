@@ -56,7 +56,7 @@ export function PageHeader({
                 aria-label={action.ariaLabel || action.label}
               >
                 {action.icon && (
-                  <span className="mr-2" aria-hidden="true">
+                  <span className="me-2" aria-hidden="true">
                     {action.icon}
                   </span>
                 )}

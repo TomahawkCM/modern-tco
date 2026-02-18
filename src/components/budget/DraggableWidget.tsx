@@ -38,7 +38,7 @@ export function DraggableWidget({ id, children, isDragDisabled = false }: Dragga
         <button
           {...attributes}
           {...listeners}
-          className="absolute -right-2 -top-2 z-10 cursor-grab rounded-lg bg-teal-500 p-2 text-white opacity-0 shadow-md transition-opacity hover:bg-teal-600 focus:opacity-100 focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 active:cursor-grabbing group-hover:opacity-100"
+          className="absolute -end-2 -top-2 z-10 cursor-grab rounded-lg bg-teal-500 p-2 text-white opacity-0 shadow-md transition-opacity hover:bg-teal-600 focus:opacity-100 focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 active:cursor-grabbing group-hover:opacity-100"
           aria-label={t("dragToReorder")}
           tabIndex={0}
         >

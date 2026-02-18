@@ -9,6 +9,7 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
 import type { HistoricalScore } from "@/lib/analytics/health-score";
 import { useSeniorsMode } from "@/hooks/useSeniorsMode";
@@ -145,6 +146,7 @@ interface HealthScoreHistoryProps {
 }
 
 export function HealthScoreHistory({ historicalScores, className }: HealthScoreHistoryProps) {
+  const locale = useLocale();
   const { isSeniorsMode } = useSeniorsMode();
 
   // Transform historical data for the chart
@@ -156,14 +158,14 @@ export function HealthScoreHistory({ historicalScores, className }: HealthScoreH
     );
 
     return sorted.map((entry, index) => ({
-      month: new Date(entry.date).toLocaleDateString("en-US", {
+      month: new Date(entry.date).toLocaleDateString(locale, {
         month: "short",
         year: "2-digit",
       }),
       score: entry.score,
       previousScore: index > 0 ? sorted[index - 1].score : undefined,
     }));
-  }, [historicalScores]);
+  }, [historicalScores, locale]);
 
   // Calculate trend
   const trend = useMemo(() => {

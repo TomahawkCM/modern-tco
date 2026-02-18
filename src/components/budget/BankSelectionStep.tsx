@@ -224,7 +224,7 @@ export function BankSelectionStep({
                         onSelectBank(bankKey);
                         setShowAllBanks(false);
                       }}
-                      className={`w-full rounded-lg border-2 px-4 py-3 text-left transition-all ${
+                      className={`w-full rounded-lg border-2 px-4 py-3 text-start transition-all ${
                         selectedBank === bankKey
                           ? "border-teal-600 bg-teal-50"
                           : "border-gray-200 bg-white hover:border-gray-300"
@@ -266,7 +266,7 @@ export function BankSelectionStep({
                         onSelectBank(bankKey);
                         setShowAllBanks(false);
                       }}
-                      className={`w-full rounded-lg border-2 px-4 py-3 text-left transition-all ${
+                      className={`w-full rounded-lg border-2 px-4 py-3 text-start transition-all ${
                         selectedBank === bankKey
                           ? "border-teal-600 bg-teal-50"
                           : "border-gray-200 bg-white hover:border-gray-300"

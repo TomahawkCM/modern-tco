@@ -87,7 +87,7 @@ export function QuickFiltersRow({
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
-              <DollarSign className="mr-1 inline h-3 w-3" />
+              <DollarSign className="me-1 inline h-3 w-3" />
               {t("all")}
             </button>
             {categories.slice(0, 8).map((cat) => (

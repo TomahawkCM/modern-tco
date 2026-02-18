@@ -19,7 +19,7 @@ import {
   AreaChart,
 } from "recharts";
 import { TrendingUp, TrendingDown, AlertCircle, Loader2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
   predictSpending,
   isPredictiveSpendingEnabled,
@@ -43,6 +43,7 @@ export function PredictiveSpendingChart({
   showHistorical = true,
 }: PredictiveSpendingChartProps) {
   const t = useTranslations("predictiveSpendingChart");
+  const locale = useLocale();
   // Get theme-aware chart colors
   const theme = useThemeMode();
   const palette = getChartPalette(theme);
@@ -108,7 +109,7 @@ export function PredictiveSpendingChart({
           .reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
 
         data.push({
-          month: month.toLocaleDateString("en-US", { month: "short", year: "numeric" }),
+          month: month.toLocaleDateString(locale, { month: "short", year: "numeric" }),
           actual: actual > 0 ? actual : undefined,
           isPrediction: false,
         });
@@ -118,7 +119,7 @@ export function PredictiveSpendingChart({
     // Add predictions
     predictions.forEach((pred) => {
       data.push({
-        month: pred.month.toLocaleDateString("en-US", { month: "short", year: "numeric" }),
+        month: pred.month.toLocaleDateString(locale, { month: "short", year: "numeric" }),
         predicted: pred.predictedAmount,
         lower: pred.confidenceInterval.lower,
         upper: pred.confidenceInterval.upper,
@@ -127,7 +128,7 @@ export function PredictiveSpendingChart({
     });
 
     return data;
-  }, [transactions, category, predictions, showHistorical]);
+  }, [transactions, category, predictions, showHistorical, locale]);
 
   if (error) {
     return (
@@ -288,16 +289,16 @@ export function PredictiveSpendingChart({
             <table className="w-full">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-700">
+                  <th className="px-4 py-3 text-start text-xs font-medium text-gray-700">
                     {t("table.month")}
                   </th>
-                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-700">
+                  <th className="px-4 py-3 text-end text-xs font-medium text-gray-700">
                     {t("table.predicted")}
                   </th>
-                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-700">
+                  <th className="px-4 py-3 text-end text-xs font-medium text-gray-700">
                     {t("table.range")}
                   </th>
-                  <th className="px-4 py-3 text-right text-xs font-medium text-gray-700">
+                  <th className="px-4 py-3 text-end text-xs font-medium text-gray-700">
                     {t("table.confidence")}
                   </th>
                 </tr>
@@ -306,16 +307,16 @@ export function PredictiveSpendingChart({
                 {predictions.map((pred, index) => (
                   <tr key={index} className="hover:bg-gray-50">
                     <td className="px-4 py-3 text-sm text-gray-900">
-                      {pred.month.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+                      {pred.month.toLocaleDateString(locale, { month: "long", year: "numeric" })}
                     </td>
-                    <td className="px-4 py-3 text-right text-sm font-medium text-gray-900">
+                    <td className="px-4 py-3 text-end text-sm font-medium text-gray-900">
                       ${pred.predictedAmount.toFixed(2)}
                     </td>
-                    <td className="px-4 py-3 text-right text-sm text-gray-600">
+                    <td className="px-4 py-3 text-end text-sm text-gray-600">
                       ${pred.confidenceInterval.lower.toFixed(0)} - $
                       {pred.confidenceInterval.upper.toFixed(0)}
                     </td>
-                    <td className="px-4 py-3 text-right text-sm">
+                    <td className="px-4 py-3 text-end text-sm">
                       <span
                         className={`inline-flex items-center rounded-full px-2 py-1 text-xs font-medium ${
                           pred.confidence > 0.7

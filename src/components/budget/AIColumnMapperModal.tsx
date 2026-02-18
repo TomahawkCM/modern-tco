@@ -344,13 +344,13 @@ export default function AIColumnMapperModal({
                     <table className="w-full">
                       <thead className="bg-gray-100">
                         <tr>
-                          <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900">
+                          <th className="px-4 py-2 text-start text-sm font-semibold text-gray-900">
                             {t("preview.date")}
                           </th>
-                          <th className="px-4 py-2 text-left text-sm font-semibold text-gray-900">
+                          <th className="px-4 py-2 text-start text-sm font-semibold text-gray-900">
                             {t("preview.description")}
                           </th>
-                          <th className="px-4 py-2 text-right text-sm font-semibold text-gray-900">
+                          <th className="px-4 py-2 text-end text-sm font-semibold text-gray-900">
                             {t("preview.amount")}
                           </th>
                         </tr>
@@ -363,7 +363,7 @@ export default function AIColumnMapperModal({
                               {preview.description}
                             </td>
                             <td
-                              className={`px-4 py-2 text-right text-sm font-semibold ${
+                              className={`px-4 py-2 text-end text-sm font-semibold ${
                                 preview.amount > 0 ? "text-green-600" : "text-gray-900"
                               }`}
                             >

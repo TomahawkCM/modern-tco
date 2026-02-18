@@ -126,7 +126,7 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
                     alert.severity === "danger" ? "text-red-700" : "text-amber-700"
                   }`}
                 >
-                  <TrendingUp className="mr-2 inline h-3 w-3" />
+                  <TrendingUp className="me-2 inline h-3 w-3" />
                   <span className="font-medium">{t("tip.label")}</span>{" "}
                   {t("tip.reduceSpending", {
                     amount: `$${(

@@ -64,6 +64,7 @@ export function AccessibleChart({
   footer,
 }: AccessibleChartProps) {
   const t = useTranslations("accessibleChart");
+  const tAria = useTranslations("aria");
   const [showTable, setShowTable] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const tableRef = useRef<HTMLDivElement>(null);
@@ -175,24 +176,24 @@ export function AccessibleChart({
 
       {showTable ? (
         /* Accessible Data Table */
-        <div ref={tableRef} role="region" aria-label={`${title} data table`} tabIndex={0}>
+        <div ref={tableRef} role="region" aria-label={tAria("dataTable", { title })} tabIndex={0}>
           <table className="w-full overflow-hidden rounded-lg border border-gray-300">
             <caption className="sr-only">{description}</caption>
             <thead className="bg-gray-100">
               <tr>
-                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
+                <th scope="col" className="px-4 py-3 text-start text-sm font-semibold text-gray-900">
                   {chartType === "pie" ? t("tableHeaders.category") : t("tableHeaders.period")}
                 </th>
                 <th
                   scope="col"
-                  className="px-4 py-3 text-right text-sm font-semibold text-gray-900"
+                  className="px-4 py-3 text-end text-sm font-semibold text-gray-900"
                 >
                   {t("tableHeaders.value")}
                 </th>
                 {data.some((d) => d.additionalInfo) && (
                   <th
                     scope="col"
-                    className="px-4 py-3 text-left text-sm font-semibold text-gray-900"
+                    className="px-4 py-3 text-start text-sm font-semibold text-gray-900"
                   >
                     {t("tableHeaders.additionalInfo")}
                   </th>
@@ -223,7 +224,7 @@ export function AccessibleChart({
                       {point.label}
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-right text-sm font-medium text-gray-900">
+                  <td className="px-4 py-3 text-end text-sm font-medium text-gray-900">
                     ${point.value.toFixed(2)}
                   </td>
                   {point.additionalInfo && (

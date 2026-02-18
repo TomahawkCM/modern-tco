@@ -20,7 +20,7 @@ import {
   ReferenceLine,
 } from "recharts";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
   prepareMonthlyTrendData,
   generateForecast,
@@ -42,6 +42,7 @@ export function SpendingTrendChart({
   forecastDays = 30,
 }: SpendingTrendChartProps) {
   const t = useTranslations("spendingTrendChart");
+  const locale = useLocale();
   // Get theme-aware chart colors
   const theme = useThemeMode();
   const palette = getChartPalette(theme);
@@ -67,7 +68,7 @@ export function SpendingTrendChart({
 
     // Prepare chart data
     const data = forecast.map((point) => ({
-      date: point.date.toLocaleDateString("en-US", { month: "short", year: "2-digit" }),
+      date: point.date.toLocaleDateString(locale, { month: "short", year: "2-digit" }),
       actual: point.isProjection ? null : point.projected,
       projected: point.isProjection ? point.projected : null,
       fullDate: point.date,
@@ -96,7 +97,7 @@ export function SpendingTrendChart({
         changePercent: avgSpending > 0 ? ((projectedNext - avgSpending) / avgSpending) * 100 : 0,
       },
     };
-  }, [transactions, monthsBack, forecastDays]);
+  }, [transactions, monthsBack, forecastDays, locale]);
 
   if (!chartData || chartData.length === 0) {
     return (
@@ -155,7 +156,7 @@ export function SpendingTrendChart({
               }`}
             >
               ${stats.projectedNext.toFixed(0)}
-              <span className="ml-2 text-xs">
+              <span className="ms-2 text-xs">
                 ({stats.changePercent >= 0 ? "+" : ""}
                 {stats.changePercent.toFixed(1)}%)
               </span>

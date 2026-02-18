@@ -5,6 +5,7 @@
 
 import { AlertTriangle, X, CheckCircle, XCircle } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { storeAnomalyFeedback, getAnomalyFeedback } from "@/lib/budget-db";
 import type { AnomalyAlert } from "@/lib/analytics/anomaly-detector";
 
@@ -21,6 +22,8 @@ export function AnomalyAlerts({
   onFeedback,
   maxDisplay = 5,
 }: AnomalyAlertsProps) {
+  const locale = useLocale();
+  const tAria = useTranslations("aria");
   const [feedbackMap, setFeedbackMap] = useState<Map<string, boolean>>(new Map());
 
   // Load existing feedback - use stable reference for alerts
@@ -106,7 +109,7 @@ export function AnomalyAlerts({
       {displayedAlerts.map((alert) => {
         const styles = getSeverityStyles(alert.severity);
         const date = new Date(alert.transaction.date);
-        const formattedDate = date.toLocaleDateString("en-US", {
+        const formattedDate = date.toLocaleDateString(locale, {
           month: "short",
           day: "numeric",
         });
@@ -116,8 +119,8 @@ export function AnomalyAlerts({
             {onDismiss && (
               <button
                 onClick={() => onDismiss(alert.transaction.id)}
-                className="absolute right-3 top-3 text-gray-400 transition-colors hover:text-gray-600"
-                aria-label="Dismiss alert"
+                className="absolute end-3 top-3 text-gray-400 transition-colors hover:text-gray-600"
+                aria-label={tAria("dismissAlert")}
               >
                 <X className="h-4 w-4" />
               </button>

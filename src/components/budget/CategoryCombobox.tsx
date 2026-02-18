@@ -65,7 +65,7 @@ export function CategoryCombobox({
             className={cn("w-full justify-between", className)}
           >
             {selectedOption ? selectedOption.label : effectivePlaceholder}
-            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            <ChevronsUpDown className="ms-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0" align="start">
@@ -93,7 +93,7 @@ export function CategoryCombobox({
           className={cn("w-full justify-between", className)}
         >
           {selectedOption ? selectedOption.label : effectivePlaceholder}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <ChevronsUpDown className="ms-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </DrawerTrigger>
       <DrawerContent>
@@ -147,7 +147,7 @@ function OptionsList({
               {option.label}
               <Check
                 className={cn(
-                  "ml-auto h-4 w-4",
+                  "ms-auto h-4 w-4",
                   value === option.value ? "opacity-100" : "opacity-0"
                 )}
               />

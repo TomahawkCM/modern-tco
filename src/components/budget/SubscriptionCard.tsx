@@ -181,14 +181,14 @@ export function SubscriptionCard({
           {showMenu && (
             <>
               <div className="fixed inset-0 z-10" onClick={() => setShowMenu(false)} />
-              <div className="absolute right-0 top-full z-20 mt-1 w-48 rounded-lg border border-border bg-card py-1 shadow-lg">
+              <div className="absolute end-0 top-full z-20 mt-1 w-48 rounded-lg border border-border bg-card py-1 shadow-lg">
                 {onViewTransactions && (
                   <button
                     onClick={() => {
                       setShowMenu(false);
                       onViewTransactions();
                     }}
-                    className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm hover:bg-muted"
+                    className="flex w-full items-center gap-2 px-4 py-2 text-start text-sm hover:bg-muted"
                   >
                     <ExternalLink className="h-4 w-4" />
                     {t("menu.viewTransactions")}
@@ -200,7 +200,7 @@ export function SubscriptionCard({
                       setShowMenu(false);
                       onEdit();
                     }}
-                    className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm hover:bg-muted"
+                    className="flex w-full items-center gap-2 px-4 py-2 text-start text-sm hover:bg-muted"
                   >
                     <Edit className="h-4 w-4" />
                     {t("menu.edit")}
@@ -212,7 +212,7 @@ export function SubscriptionCard({
                       setShowMenu(false);
                       onPauseResume();
                     }}
-                    className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm hover:bg-muted"
+                    className="flex w-full items-center gap-2 px-4 py-2 text-start text-sm hover:bg-muted"
                   >
                     {isPaused ? (
                       <>
@@ -233,7 +233,7 @@ export function SubscriptionCard({
                       setShowMenu(false);
                       onCancel();
                     }}
-                    className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-red-600 hover:bg-muted"
+                    className="flex w-full items-center gap-2 px-4 py-2 text-start text-sm text-red-600 hover:bg-muted"
                   >
                     <XCircle className="h-4 w-4" />
                     {t("menu.cancelSubscription")}
@@ -245,7 +245,7 @@ export function SubscriptionCard({
                       setShowMenu(false);
                       onClaim();
                     }}
-                    className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-teal-600 hover:bg-muted"
+                    className="flex w-full items-center gap-2 px-4 py-2 text-start text-sm text-teal-600 hover:bg-muted"
                   >
                     <CheckCircle className="h-4 w-4" />
                     {t("menu.claimManage")}
@@ -257,7 +257,7 @@ export function SubscriptionCard({
                       setShowMenu(false);
                       onDismiss();
                     }}
-                    className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950"
+                    className="flex w-full items-center gap-2 px-4 py-2 text-start text-sm text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950"
                   >
                     <XOctagon className="h-4 w-4" />
                     {t("menu.notSubscription")}
@@ -271,7 +271,7 @@ export function SubscriptionCard({
                         setShowMenu(false);
                         onDelete();
                       }}
-                      className="flex w-full items-center gap-2 px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950"
+                      className="flex w-full items-center gap-2 px-4 py-2 text-start text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-950"
                     >
                       <Trash2 className="h-4 w-4" />
                       {t("menu.delete")}

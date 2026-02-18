@@ -200,12 +200,12 @@ function DeviceCard({
               onClick={onSync}
               disabled={isSyncing}
             >
-              <RefreshCw className={cn("mr-2 h-4 w-4", isSyncing && "animate-spin")} />
+              <RefreshCw className={cn("me-2 h-4 w-4", isSyncing && "animate-spin")} />
               {isSyncing ? t("device.syncing") : t("device.sync")}
             </Button>
           ) : (
             <Button variant="outline" size={seniorsMode ? "default" : "sm"} onClick={onConnect}>
-              <Link2 className="mr-2 h-4 w-4" />
+              <Link2 className="me-2 h-4 w-4" />
               {t("device.connect")}
             </Button>
           )}
@@ -219,7 +219,7 @@ function DeviceCard({
             <DropdownMenuContent align="end">
               {isConnected && (
                 <DropdownMenuItem onClick={onDisconnect}>
-                  <Unplug className="mr-2 h-4 w-4" />
+                  <Unplug className="me-2 h-4 w-4" />
                   {t("device.disconnect")}
                 </DropdownMenuItem>
               )}
@@ -227,7 +227,7 @@ function DeviceCard({
                 onClick={() => setShowRemoveDialog(true)}
                 className="text-red-500 focus:text-red-500"
               >
-                <Trash2 className="mr-2 h-4 w-4" />
+                <Trash2 className="me-2 h-4 w-4" />
                 {t("device.removeDevice")}
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -337,7 +337,7 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
                 onClick={handleSyncAll}
                 disabled={stats.connectedDevices === 0 || state.isSyncing}
               >
-                <RefreshCw className={cn("mr-2 h-4 w-4", state.isSyncing && "animate-spin")} />
+                <RefreshCw className={cn("me-2 h-4 w-4", state.isSyncing && "animate-spin")} />
                 {t("syncAll")}
               </Button>
             </div>
@@ -361,7 +361,7 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
                 </CardDescription>
               </div>
               <Button onClick={() => setShowPairingDialog(true)}>
-                <Plus className="mr-2 h-4 w-4" />
+                <Plus className="me-2 h-4 w-4" />
                 {t("pairedDevices.addDevice")}
               </Button>
             </div>
@@ -377,7 +377,7 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
                   {t("pairedDevices.emptyDescription")}
                 </p>
                 <Button onClick={() => setShowPairingDialog(true)}>
-                  <Plus className="mr-2 h-4 w-4" />
+                  <Plus className="me-2 h-4 w-4" />
                   {t("pairedDevices.addFirstDevice")}
                 </Button>
               </div>

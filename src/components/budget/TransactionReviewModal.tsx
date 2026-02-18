@@ -97,12 +97,12 @@ export function TransactionReviewModal({
             <label htmlFor="select-all" className="cursor-pointer select-none text-sm font-medium">
               {allSelected ? (
                 <>
-                  <CheckSquare className="mr-1.5 inline h-4 w-4" />
+                  <CheckSquare className="me-1.5 inline h-4 w-4" />
                   Deselect All
                 </>
               ) : (
                 <>
-                  <Square className="mr-1.5 inline h-4 w-4" />
+                  <Square className="me-1.5 inline h-4 w-4" />
                   Select All ({transactions.length})
                 </>
               )}
@@ -164,7 +164,7 @@ export function TransactionReviewModal({
               disabled={noneSelected}
               className="bg-teal-600 hover:bg-teal-700"
             >
-              <Tag className="mr-2 h-4 w-4" />
+              <Tag className="me-2 h-4 w-4" />
               Apply to {selectedIds.size} Transaction{selectedIds.size !== 1 ? "s" : ""}
             </Button>
           </div>

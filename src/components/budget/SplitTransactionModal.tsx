@@ -194,13 +194,13 @@ export function SplitTransactionModal({
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
                 <span className="text-gray-600">{t("originalAmount")}</span>
-                <span className="ml-2 font-semibold text-gray-900">
+                <span className="ms-2 font-semibold text-gray-900">
                   ${originalAmount.toFixed(2)}
                 </span>
               </div>
               <div>
                 <span className="text-gray-600">{t("date")}</span>
-                <span className="ml-2 font-semibold text-gray-900">
+                <span className="ms-2 font-semibold text-gray-900">
                   {new Date(transaction.date).toLocaleDateString()}
                 </span>
               </div>
@@ -269,7 +269,7 @@ export function SplitTransactionModal({
                             {t("amount")} <span className="text-red-600">*</span>
                           </label>
                           <div className="relative">
-                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-gray-500">
+                            <span className="absolute start-4 top-1/2 -translate-y-1/2 text-sm text-gray-500">
                               $
                             </span>
                             <input
@@ -283,7 +283,7 @@ export function SplitTransactionModal({
                                 updateSplit(split.id, "amount", parseFloat(e.target.value) || 0)
                               }
                               inputMode="decimal"
-                              className="h-12 w-full rounded-lg border border-gray-300 pl-8 pr-4 text-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
+                              className="h-12 w-full rounded-lg border border-gray-300 ps-8 pe-4 text-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
                               aria-required="true"
                               required
                             />

@@ -284,7 +284,7 @@ export function DebtAnalysis() {
                     style={{ backgroundColor: COLORS[item.type as keyof typeof COLORS] }}
                   />
                   <span className="text-sm capitalize text-gray-600">{item.type}</span>
-                  <span className="ml-auto text-sm font-semibold text-gray-900">
+                  <span className="ms-auto text-sm font-semibold text-gray-900">
                     ${item.totalBalance.toLocaleString()}
                   </span>
                 </div>
@@ -343,19 +343,19 @@ export function DebtAnalysis() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-200 bg-gray-50">
-                  <th className="px-4 py-3 text-left font-medium text-gray-700">
+                  <th className="px-4 py-3 text-start font-medium text-gray-700">
                     {t("comparison.headers.loan")}
                   </th>
-                  <th className="px-4 py-3 text-right font-medium text-gray-700">
+                  <th className="px-4 py-3 text-end font-medium text-gray-700">
                     {t("comparison.headers.balance")}
                   </th>
-                  <th className="px-4 py-3 text-right font-medium text-gray-700">
+                  <th className="px-4 py-3 text-end font-medium text-gray-700">
                     {t("comparison.headers.monthlyPayment")}
                   </th>
-                  <th className="px-4 py-3 text-right font-medium text-gray-700">
+                  <th className="px-4 py-3 text-end font-medium text-gray-700">
                     {t("comparison.headers.interestRate")}
                   </th>
-                  <th className="px-4 py-3 text-right font-medium text-gray-700">
+                  <th className="px-4 py-3 text-end font-medium text-gray-700">
                     {t("comparison.headers.percentOfTotal")}
                   </th>
                 </tr>
@@ -364,28 +364,28 @@ export function DebtAnalysis() {
                 {loanComparison.map((loan, index) => (
                   <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
                     <td className="px-4 py-3 font-medium text-gray-900">{loan.name}</td>
-                    <td className="px-4 py-3 text-right text-gray-900">
+                    <td className="px-4 py-3 text-end text-gray-900">
                       ${loan.balance.toLocaleString()}
                     </td>
-                    <td className="px-4 py-3 text-right text-gray-900">
+                    <td className="px-4 py-3 text-end text-gray-900">
                       ${loan.payment.toLocaleString()}
                     </td>
-                    <td className="px-4 py-3 text-right text-gray-900">{loan.rate.toFixed(2)}%</td>
-                    <td className="px-4 py-3 text-right font-semibold text-teal-600">
+                    <td className="px-4 py-3 text-end text-gray-900">{loan.rate.toFixed(2)}%</td>
+                    <td className="px-4 py-3 text-end font-semibold text-teal-600">
                       {((loan.balance / totalDebt) * 100).toFixed(1)}%
                     </td>
                   </tr>
                 ))}
                 <tr className="bg-gray-50 font-semibold">
                   <td className="px-4 py-3 text-gray-900">{t("comparison.total")}</td>
-                  <td className="px-4 py-3 text-right text-gray-900">
+                  <td className="px-4 py-3 text-end text-gray-900">
                     ${totalDebt.toLocaleString()}
                   </td>
-                  <td className="px-4 py-3 text-right text-gray-900">
+                  <td className="px-4 py-3 text-end text-gray-900">
                     ${monthlyPayment.toLocaleString()}
                   </td>
-                  <td className="px-4 py-3 text-right text-gray-900">{avgRate.toFixed(2)}%</td>
-                  <td className="px-4 py-3 text-right text-gray-900">100%</td>
+                  <td className="px-4 py-3 text-end text-gray-900">{avgRate.toFixed(2)}%</td>
+                  <td className="px-4 py-3 text-end text-gray-900">100%</td>
                 </tr>
               </tbody>
             </table>

@@ -1,8 +1,11 @@
+"use client";
+
 /**
  * Import Wizard Step Indicator
  * Visual progress indicator for multi-step import process
  */
 
+import { useTranslations } from "next-intl";
 import { Check } from "lucide-react";
 
 export interface WizardStep {
@@ -18,17 +21,18 @@ interface ImportWizardStepperProps {
 }
 
 export function ImportWizardStepper({ steps, currentStep }: ImportWizardStepperProps) {
+  const tAria = useTranslations("aria");
   return (
-    <nav aria-label="Progress">
+    <nav aria-label={tAria("progress")}>
       <ol role="list" className="flex items-center justify-between">
         {steps.map((step, stepIdx) => (
           <li
             key={step.id}
-            className={`relative ${stepIdx !== steps.length - 1 ? "flex-1 pr-8 sm:pr-20" : ""}`}
+            className={`relative ${stepIdx !== steps.length - 1 ? "flex-1 pe-8 sm:pe-20" : ""}`}
           >
             {/* Connector Line */}
             {stepIdx !== steps.length - 1 && (
-              <div className="absolute left-4 top-4 h-0.5 w-full" aria-hidden="true">
+              <div className="absolute start-4 top-4 h-0.5 w-full" aria-hidden="true">
                 <div
                   className={`h-full transition-all duration-500 ${
                     stepIdx < currentStep ? "bg-teal-600" : "bg-gray-200"
@@ -56,7 +60,7 @@ export function ImportWizardStepper({ steps, currentStep }: ImportWizardStepperP
               </span>
 
               {/* Step Labels */}
-              <span className="ml-4 flex min-w-0 flex-col">
+              <span className="ms-4 flex min-w-0 flex-col">
                 <span
                   className={`text-sm font-medium ${
                     step.status === "complete"

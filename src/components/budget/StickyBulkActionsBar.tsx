@@ -44,7 +44,7 @@ export function StickyBulkActionsBar({
   return (
     <div
       className={`${
-        isSticky ? "fixed left-0 right-0 top-0 z-50 shadow-lg" : "relative"
+        isSticky ? "fixed start-0 end-0 top-0 z-50 shadow-lg" : "relative"
       } border-b border-t border-teal-200 bg-gradient-to-r from-teal-50 to-teal-100 transition-all duration-300`}
     >
       <div className="mx-auto max-w-7xl px-4 py-3 md:px-8">
@@ -124,7 +124,7 @@ export function StickyBulkActionsBar({
 
       {/* Sticky Indicator */}
       {isSticky && (
-        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-teal-500 to-teal-600"></div>
+        <div className="absolute bottom-0 start-0 end-0 h-1 bg-gradient-to-r from-teal-500 to-teal-600"></div>
       )}
     </div>
   );

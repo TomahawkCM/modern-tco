@@ -7,6 +7,7 @@
  */
 
 import { useState, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import {
   Search,
   DollarSign,
@@ -95,6 +96,7 @@ interface IconPickerProps {
 }
 
 export function IconPicker({ value, onChange, onClose }: IconPickerProps) {
+  const tAria = useTranslations("aria");
   const [searchQuery, setSearchQuery] = useState("");
 
   // Filter icons based on search query
@@ -126,7 +128,7 @@ export function IconPicker({ value, onChange, onClose }: IconPickerProps) {
             <button
               onClick={onClose}
               className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg p-2 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
-              aria-label="Close icon picker"
+              aria-label={tAria("closeIconPicker")}
             >
               <X className="h-6 w-6" />
             </button>
@@ -147,13 +149,13 @@ export function IconPicker({ value, onChange, onClose }: IconPickerProps) {
         {/* Search */}
         <div className="border-b border-gray-200 p-6">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+            <Search className="absolute start-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
             <Input
               type="text"
               placeholder="Search icons by name or category..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="min-h-[48px] border-2 border-gray-300 py-3 pl-12 pr-4 text-base focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+              className="min-h-[48px] border-2 border-gray-300 py-3 ps-12 pe-4 text-base focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
             />
           </div>
           {searchQuery && (
@@ -180,7 +182,7 @@ export function IconPicker({ value, onChange, onClose }: IconPickerProps) {
                       : "border-2 border-gray-200 bg-white hover:border-gray-300"
                   }`}
                   title={name}
-                  aria-label={`Select ${name} icon`}
+                  aria-label={tAria("selectIcon", { name })}
                 >
                   <Icon
                     className={`h-8 w-8 ${value === name ? "text-teal-600" : "text-gray-600"}`}

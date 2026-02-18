@@ -22,7 +22,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import type { Holding, InvestmentAccount } from "@/types/budget";
 import { useThemeMode } from "@/hooks/useThemeMode";
 import { getChartPalette } from "@/lib/budget-chart-colors";
@@ -35,6 +35,7 @@ interface InvestmentChartsProps {
 
 export function InvestmentCharts({ holdings, accounts, currentPrices }: InvestmentChartsProps) {
   const t = useTranslations("investmentCharts");
+  const locale = useLocale();
   // Get theme-aware chart colors
   const theme = useThemeMode();
   const palette = getChartPalette(theme);
@@ -113,7 +114,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
           <p className="font-semibold text-gray-900">{data.name}</p>
           <p className="text-sm text-gray-600">
             $
-            {data.value.toLocaleString("en-US", {
+            {data.value.toLocaleString(locale, {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
@@ -137,21 +138,21 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
           <div className="space-y-2 text-sm">
             <p className="text-gray-600">
               {t("tooltip.costBasis")}: $
-              {data.costBasis.toLocaleString("en-US", {
+              {data.costBasis.toLocaleString(locale, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
             </p>
             <p className="text-gray-600">
               {t("tooltip.currentValue")}: $
-              {data.currentValue.toLocaleString("en-US", {
+              {data.currentValue.toLocaleString(locale, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
             </p>
             <p className={`font-medium ${data.gainLoss >= 0 ? "text-green-600" : "text-red-600"}`}>
               {data.gainLoss >= 0 ? "+" : ""}$
-              {data.gainLoss.toLocaleString("en-US", {
+              {data.gainLoss.toLocaleString(locale, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}{" "}
@@ -175,7 +176,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
           <p className="text-sm text-gray-600">{data.name}</p>
           <p className="mt-2 text-sm text-gray-600">
             $
-            {data.value.toLocaleString("en-US", {
+            {data.value.toLocaleString(locale, {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             })}
@@ -332,22 +333,22 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
           <table className="w-full">
             <thead className="border-b border-gray-200 bg-gray-50">
               <tr>
-                <th className="px-4 py-2 text-left text-xs font-medium uppercase text-gray-700">
+                <th className="px-4 py-2 text-start text-xs font-medium uppercase text-gray-700">
                   {t("tableHeaders.symbol")}
                 </th>
-                <th className="px-4 py-2 text-right text-xs font-medium uppercase text-gray-700">
+                <th className="px-4 py-2 text-end text-xs font-medium uppercase text-gray-700">
                   {t("tableHeaders.costBasis")}
                 </th>
-                <th className="px-4 py-2 text-right text-xs font-medium uppercase text-gray-700">
+                <th className="px-4 py-2 text-end text-xs font-medium uppercase text-gray-700">
                   {t("tableHeaders.currentValue")}
                 </th>
-                <th className="px-4 py-2 text-right text-xs font-medium uppercase text-gray-700">
+                <th className="px-4 py-2 text-end text-xs font-medium uppercase text-gray-700">
                   {t("tableHeaders.gainLoss")}
                 </th>
-                <th className="px-4 py-2 text-right text-xs font-medium uppercase text-gray-700">
+                <th className="px-4 py-2 text-end text-xs font-medium uppercase text-gray-700">
                   {t("tableHeaders.percentReturn")}
                 </th>
-                <th className="px-4 py-2 text-right text-xs font-medium uppercase text-gray-700">
+                <th className="px-4 py-2 text-end text-xs font-medium uppercase text-gray-700">
                   {t("tableHeaders.allocation")}
                 </th>
               </tr>
@@ -358,36 +359,36 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
                 return (
                   <tr key={index} className="hover:bg-gray-50">
                     <td className="px-4 py-2 font-medium text-gray-900">{item.symbol}</td>
-                    <td className="px-4 py-2 text-right text-gray-900">
+                    <td className="px-4 py-2 text-end text-gray-900">
                       $
-                      {item.costBasis.toLocaleString("en-US", {
+                      {item.costBasis.toLocaleString(locale, {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       })}
                     </td>
-                    <td className="px-4 py-2 text-right text-gray-900">
+                    <td className="px-4 py-2 text-end text-gray-900">
                       $
-                      {item.currentValue.toLocaleString("en-US", {
+                      {item.currentValue.toLocaleString(locale, {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       })}
                     </td>
                     <td
-                      className={`px-4 py-2 text-right font-medium ${item.gainLoss >= 0 ? "text-green-600" : "text-red-600"}`}
+                      className={`px-4 py-2 text-end font-medium ${item.gainLoss >= 0 ? "text-green-600" : "text-red-600"}`}
                     >
                       {item.gainLoss >= 0 ? "+" : ""}$
-                      {item.gainLoss.toLocaleString("en-US", {
+                      {item.gainLoss.toLocaleString(locale, {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       })}
                     </td>
                     <td
-                      className={`px-4 py-2 text-right font-medium ${item.gainLossPercent >= 0 ? "text-green-600" : "text-red-600"}`}
+                      className={`px-4 py-2 text-end font-medium ${item.gainLossPercent >= 0 ? "text-green-600" : "text-red-600"}`}
                     >
                       {item.gainLossPercent >= 0 ? "+" : ""}
                       {item.gainLossPercent.toFixed(2)}%
                     </td>
-                    <td className="px-4 py-2 text-right text-gray-600">
+                    <td className="px-4 py-2 text-end text-gray-600">
                       {allocation?.percentage.toFixed(1)}%
                     </td>
                   </tr>
@@ -397,26 +398,26 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
             <tfoot className="border-t-2 border-gray-300 bg-gray-50">
               <tr>
                 <td className="px-4 py-2 font-bold text-gray-900">{t("tableHeaders.total")}</td>
-                <td className="px-4 py-2 text-right font-bold text-gray-900">
+                <td className="px-4 py-2 text-end font-bold text-gray-900">
                   $
                   {performanceData
                     .reduce((sum, item) => sum + item.costBasis, 0)
-                    .toLocaleString("en-US", {
+                    .toLocaleString(locale, {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}
                 </td>
-                <td className="px-4 py-2 text-right font-bold text-gray-900">
+                <td className="px-4 py-2 text-end font-bold text-gray-900">
                   $
                   {performanceData
                     .reduce((sum, item) => sum + item.currentValue, 0)
-                    .toLocaleString("en-US", {
+                    .toLocaleString(locale, {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}
                 </td>
                 <td
-                  className={`px-4 py-2 text-right font-bold ${
+                  className={`px-4 py-2 text-end font-bold ${
                     performanceData.reduce((sum, item) => sum + item.gainLoss, 0) >= 0
                       ? "text-green-600"
                       : "text-red-600"
@@ -425,13 +426,13 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
                   {performanceData.reduce((sum, item) => sum + item.gainLoss, 0) >= 0 ? "+" : ""}$
                   {performanceData
                     .reduce((sum, item) => sum + item.gainLoss, 0)
-                    .toLocaleString("en-US", {
+                    .toLocaleString(locale, {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}
                 </td>
                 <td
-                  className={`px-4 py-2 text-right font-bold ${
+                  className={`px-4 py-2 text-end font-bold ${
                     performanceData.reduce((sum, item) => sum + item.gainLoss, 0) >= 0
                       ? "text-green-600"
                       : "text-red-600"
@@ -450,7 +451,7 @@ export function InvestmentCharts({ holdings, accounts, currentPrices }: Investme
                     return `${totalReturn >= 0 ? "+" : ""}${totalReturn.toFixed(2)}%`;
                   })()}
                 </td>
-                <td className="px-4 py-2 text-right font-bold text-gray-900">100.0%</td>
+                <td className="px-4 py-2 text-end font-bold text-gray-900">100.0%</td>
               </tr>
             </tfoot>
           </table>

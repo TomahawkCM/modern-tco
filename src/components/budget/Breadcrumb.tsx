@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 
 export interface BreadcrumbItem {
@@ -16,19 +17,20 @@ interface BreadcrumbProps {
 
 export function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
   const pathname = usePathname();
+  const tAria = useTranslations("aria");
 
   // Auto-generate breadcrumbs from pathname if not provided
   const breadcrumbItems = items || generateBreadcrumbs(pathname || "/budget-app");
 
   return (
-    <nav aria-label="Breadcrumb" className={`mb-4 flex items-center text-sm ${className}`}>
+    <nav aria-label={tAria("breadcrumb")} className={`mb-4 flex items-center text-sm ${className}`}>
       <ol className="flex items-center space-x-2">
         {/* Home crumb */}
         <li>
           <Link
             href="/budget-app"
             className="flex items-center rounded-sm px-1 text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-            aria-label="Home"
+            aria-label={tAria("home")}
           >
             <Home className="h-4 w-4" aria-hidden="true" />
             <span className="sr-only">Home</span>
@@ -43,13 +45,13 @@ export function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
             <li key={item.href} className="flex items-center">
               <ChevronRight className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
               {isLast ? (
-                <span className="ml-2 font-medium text-foreground" aria-current="page">
+                <span className="ms-2 font-medium text-foreground" aria-current="page">
                   {item.label}
                 </span>
               ) : (
                 <Link
                   href={item.href}
-                  className="ml-2 rounded-sm px-1 text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                  className="ms-2 rounded-sm px-1 text-muted-foreground transition-colors hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                 >
                   {item.label}
                 </Link>
@@ -104,6 +106,16 @@ function generateBreadcrumbs(pathname: string): BreadcrumbItem[] {
       ocr: "OCR",
       future: "Future Plans",
       retirement: "Retirement Planning",
+      "debt-payoff": "Debt Payoff Calculator",
+      "emergency-fund": "Emergency Fund",
+      "budget-analyzer": "Budget Analyzer",
+      "savings-goal": "Savings Goal",
+      "subscription-cost": "Subscription Cost",
+      "merchant-rules": "Merchant Rules",
+      "net-worth": "Net Worth",
+      new: "New",
+      edit: "Edit",
+      more: "More",
     };
 
     breadcrumbs.push({

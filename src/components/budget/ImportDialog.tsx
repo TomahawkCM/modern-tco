@@ -291,14 +291,14 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                         {t("encryption.password")}
                       </label>
                       <div className="relative">
-                        <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+                        <Lock className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
                         <input
                           type={showPassword ? "text" : "password"}
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           placeholder={t("encryption.enterPassword")}
                           className={cn(
-                            "w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-12 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500",
+                            "w-full rounded-lg border border-white/10 bg-white/5 py-3 ps-10 pe-12 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500",
                             isSeniorsMode && "py-4 text-lg"
                           )}
                           onKeyDown={(e) => e.key === "Enter" && handlePasswordSubmit()}
@@ -306,7 +306,7 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
+                          className="absolute end-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
                         >
                           {showPassword ? (
                             <EyeOff className="h-4 w-4" />

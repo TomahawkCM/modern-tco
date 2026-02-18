@@ -114,7 +114,7 @@ export function QuickCategorizeDialog({
                 <Tag className="h-4 w-4 text-teal-600" />
               )}
               <span className="font-medium">{cat.name}</span>
-              <span className="ml-auto text-xs text-gray-500">{t("general")}</span>
+              <span className="ms-auto text-xs text-gray-500">{t("general")}</span>
             </CommandItem>
 
             {/* Subcategories */}
@@ -122,7 +122,7 @@ export function QuickCategorizeDialog({
               <CommandItem
                 key={`${cat.id}-${sub}`}
                 onSelect={() => handleSelect(cat.name, sub)}
-                className={`flex items-center gap-2 pl-6 ${
+                className={`flex items-center gap-2 ps-6 ${
                   isSelected(cat.name, sub) ? "bg-teal-50 text-teal-900" : ""
                 }`}
               >
@@ -170,12 +170,12 @@ export function QuickCategorizeDialog({
             >
               {isSaving ? (
                 <>
-                  <Loader2 className="mr-1.5 h-3 w-3 animate-spin" />
+                  <Loader2 className="me-1.5 h-3 w-3 animate-spin" />
                   {t("saving")}
                 </>
               ) : (
                 <>
-                  <Check className="mr-1.5 h-3 w-3" />
+                  <Check className="me-1.5 h-3 w-3" />
                   {t("buttons.save")}
                 </>
               )}

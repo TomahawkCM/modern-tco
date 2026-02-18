@@ -8,6 +8,7 @@
  */
 
 import { useState } from "react";
+import { useLocale } from "next-intl";
 import type { Transaction } from "@/types/budget";
 
 interface SpendingHeatMapProps {
@@ -22,6 +23,7 @@ interface DayData {
 }
 
 export function SpendingHeatMap({ transactions, month = new Date() }: SpendingHeatMapProps) {
+  const locale = useLocale();
   const [hoveredDay, setHoveredDay] = useState<DayData | null>(null);
 
   // Get first day of month and total days
@@ -109,7 +111,7 @@ export function SpendingHeatMap({ transactions, month = new Date() }: SpendingHe
         <div className="mb-4 flex items-center justify-between">
           <h3 className="text-lg font-bold text-gray-900">Spending Heat Map</h3>
           <div className="text-sm text-gray-600">
-            {month.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+            {month.toLocaleDateString(locale, { month: "long", year: "numeric" })}
           </div>
         </div>
 
@@ -144,16 +146,16 @@ export function SpendingHeatMap({ transactions, month = new Date() }: SpendingHe
 
                     {/* Tooltip */}
                     {hoveredDay === day && (
-                      <div className="absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-gray-900 px-4 py-2 text-xs text-white shadow-lg">
+                      <div className="absolute bottom-full start-1/2 z-10 mb-2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-gray-900 px-4 py-2 text-xs text-white shadow-lg">
                         <div className="font-semibold">
-                          {day.date.toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                          {day.date.toLocaleDateString(locale, { month: "short", day: "numeric" })}
                         </div>
                         <div className="mt-2">${day.amount.toFixed(2)} spent</div>
                         <div className="text-gray-300">
                           {day.transactionCount} transaction{day.transactionCount !== 1 ? "s" : ""}
                         </div>
                         {/* Arrow */}
-                        <div className="absolute left-1/2 top-full -mt-px -translate-x-1/2">
+                        <div className="absolute start-1/2 top-full -mt-px -translate-x-1/2">
                           <div className="border-4 border-transparent border-t-gray-900" />
                         </div>
                       </div>

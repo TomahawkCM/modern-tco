@@ -174,15 +174,15 @@ export function OnboardingTour() {
             className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-white/20 bg-gray-900/90 shadow-2xl ring-1 ring-white/10 backdrop-blur-xl dark:bg-gray-950/90"
           >
             {/* Background decorative gradients */}
-            <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-teal-500/20 blur-3xl" />
-            <div className="absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-blue-500/20 blur-3xl" />
+            <div className="absolute -start-20 -top-20 h-64 w-64 rounded-full bg-teal-500/20 blur-3xl" />
+            <div className="absolute -bottom-20 -end-20 h-64 w-64 rounded-full bg-blue-500/20 blur-3xl" />
 
             {/* Content Container */}
             <div className="relative flex flex-col items-center p-8 text-center sm:p-10">
               {/* Close Button */}
               <button
                 onClick={dismissWizard}
-                className="absolute right-4 top-4 rounded-full p-2 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
+                className="absolute end-4 top-4 rounded-full p-2 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
                 aria-label={t("skipTour")}
               >
                 <X className="h-5 w-5" />
