@@ -31,7 +31,7 @@ export default function ResumeBanner({ idToSlugMap }: ResumeBannerProps) {
           if (slug) {
             setResumeLink({
               href: `/modules/${slug}#${encodeURIComponent(data.lastViewed)}`,
-              moduleId
+              moduleId,
             });
             break;
           }
@@ -49,10 +49,7 @@ export default function ResumeBanner({ idToSlugMap }: ResumeBannerProps) {
 
   return (
     <div className="mb-6 text-center text-sm text-muted-foreground">
-      <Link
-        href={resumeLink.href}
-        className="text-primary hover:underline"
-      >
+      <Link href={resumeLink.href} className="text-primary hover:underline">
         Continue where you left off →
       </Link>
     </div>

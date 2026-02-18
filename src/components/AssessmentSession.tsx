@@ -310,39 +310,43 @@ export function AssessmentSession({
               </CardHeader>
 
               <CardContent className="space-y-3">
-                {(currentQuestion.options ?? currentQuestion.choices ?? []).map((option: any, index: number) => {
-                  const optionLetter = String.fromCharCode(65 + index); // A, B, C, D
-                  const currentResponse = session.responses.find((r: any) => r.questionId === currentQuestion.id);
-                  const isSelected = currentResponse?.selectedAnswer === option.id;
+                {(currentQuestion.options ?? currentQuestion.choices ?? []).map(
+                  (option: any, index: number) => {
+                    const optionLetter = String.fromCharCode(65 + index); // A, B, C, D
+                    const currentResponse = session.responses.find(
+                      (r: any) => r.questionId === currentQuestion.id
+                    );
+                    const isSelected = currentResponse?.selectedAnswer === option.id;
 
-                  return (
-                    <motion.button
-                      key={option.id}
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.99 }}
-                      onClick={() => handleAnswerSelect(currentQuestion.id, option.id)}
-                      aria-label={`Option ${optionLetter}: ${option.text}`}
-                      className={`assessment-option-button ${
-                        isSelected
-                          ? "assessment-option-button--selected"
-                          : "assessment-option-button--unselected"
-                      }`}
-                    >
-                      <div className="flex items-start space-x-3">
-                        <div
-                          className={`option-indicator ${
-                            isSelected
-                              ? "option-indicator--selected"
-                              : "option-indicator--unselected"
-                          }`}
-                        >
-                          {optionLetter}
+                    return (
+                      <motion.button
+                        key={option.id}
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.99 }}
+                        onClick={() => handleAnswerSelect(currentQuestion.id, option.id)}
+                        aria-label={`Option ${optionLetter}: ${option.text}`}
+                        className={`assessment-option-button ${
+                          isSelected
+                            ? "assessment-option-button--selected"
+                            : "assessment-option-button--unselected"
+                        }`}
+                      >
+                        <div className="flex items-start space-x-3">
+                          <div
+                            className={`option-indicator ${
+                              isSelected
+                                ? "option-indicator--selected"
+                                : "option-indicator--unselected"
+                            }`}
+                          >
+                            {optionLetter}
+                          </div>
+                          <span className="flex-1">{option.text}</span>
                         </div>
-                        <span className="flex-1">{option.text}</span>
-                      </div>
-                    </motion.button>
-                  );
-                })}
+                      </motion.button>
+                    );
+                  }
+                )}
               </CardContent>
             </Card>
           </motion.div>
@@ -363,12 +367,14 @@ export function AssessmentSession({
               <button
                 key={index}
                 onClick={() => setCurrentQuestionIndex(index)}
-                aria-label={`Go to question ${index + 1}${session.responses.find((r: any) => r.questionId === session.questions[index].id) ? ' (answered)' : ''}`}
-                title={`Question ${index + 1}${session.responses.find((r: any) => r.questionId === session.questions[index].id) ? ' - Answered' : ' - Not answered'}`}
+                aria-label={`Go to question ${index + 1}${session.responses.find((r: any) => r.questionId === session.questions[index].id) ? " (answered)" : ""}`}
+                title={`Question ${index + 1}${session.responses.find((r: any) => r.questionId === session.questions[index].id) ? " - Answered" : " - Not answered"}`}
                 className={`question-nav-button ${
                   index === currentQuestionIndex
                     ? "question-nav-button--active"
-                    : session.responses.find((r: any) => r.questionId === session.questions[index].id)
+                    : session.responses.find(
+                          (r: any) => r.questionId === session.questions[index].id
+                        )
                       ? "question-nav-button--answered"
                       : "question-nav-button--unanswered"
                 }`}

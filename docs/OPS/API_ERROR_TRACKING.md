@@ -37,7 +37,7 @@ Created `/src/lib/api-error-handler.ts` with:
 ### Method 1: Using the Wrapper Function
 
 ```typescript
-import { withErrorHandling } from '@/lib/api-error-handler';
+import { withErrorHandling } from "@/lib/api-error-handler";
 
 async function handler(request: Request) {
   // Your API logic here
@@ -46,13 +46,13 @@ async function handler(request: Request) {
 }
 
 // Wrap with error handling
-export const GET = withErrorHandling(handler, '/api/your-endpoint');
+export const GET = withErrorHandling(handler, "/api/your-endpoint");
 ```
 
 ### Method 2: Manual Error Handling
 
 ```typescript
-import { handleApiError } from '@/lib/api-error-handler';
+import { handleApiError } from "@/lib/api-error-handler";
 
 export async function POST(request: Request) {
   try {
@@ -62,9 +62,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, result });
   } catch (error) {
     return handleApiError(error, {
-      endpoint: '/api/your-endpoint',
-      method: 'POST',
-      metadata: { /* additional context */ }
+      endpoint: "/api/your-endpoint",
+      method: "POST",
+      metadata: {
+        /* additional context */
+      },
     });
   }
 }
@@ -78,16 +80,16 @@ export async function GET(request: Request) {
     const user = await getUser();
     if (!user) {
       throw {
-        message: 'User not found',
+        message: "User not found",
         status: 404,
-        code: 'USER_NOT_FOUND'
+        code: "USER_NOT_FOUND",
       };
     }
     return NextResponse.json({ ok: true, user });
   } catch (error) {
     return handleApiError(error, {
-      endpoint: '/api/user',
-      method: 'GET'
+      endpoint: "/api/user",
+      method: "GET",
     });
   }
 }
@@ -98,18 +100,18 @@ export async function GET(request: Request) {
 Here's a complete example for a protected API route:
 
 ```typescript
-import { NextRequest, NextResponse } from 'next/server';
-import { withErrorHandling } from '@/lib/api-error-handler';
-import { supabase } from '@/lib/supabase';
+import { NextRequest, NextResponse } from "next/server";
+import { withErrorHandling } from "@/lib/api-error-handler";
+import { supabase } from "@/lib/supabase";
 
 async function updateProgressHandler(request: NextRequest) {
   // Validate auth
-  const authHeader = request.headers.get('authorization');
+  const authHeader = request.headers.get("authorization");
   if (!authHeader) {
     throw {
-      message: 'Authentication required',
+      message: "Authentication required",
       status: 401,
-      code: 'AUTH_REQUIRED'
+      code: "AUTH_REQUIRED",
     };
   }
 
@@ -120,41 +122,40 @@ async function updateProgressHandler(request: NextRequest) {
   // Validate input
   if (!moduleId || !sectionId) {
     throw {
-      message: 'Missing required fields',
+      message: "Missing required fields",
       status: 400,
-      code: 'VALIDATION_ERROR',
-      details: { moduleId, sectionId }
+      code: "VALIDATION_ERROR",
+      details: { moduleId, sectionId },
     };
   }
 
   // Update database
-  const { data, error } = await supabase
-    .from('user_progress')
-    .upsert({
-      module_id: moduleId,
-      section_id: sectionId,
-      completed,
-      updated_at: new Date().toISOString()
-    });
+  const { data, error } = await supabase.from("user_progress").upsert({
+    module_id: moduleId,
+    section_id: sectionId,
+    completed,
+    updated_at: new Date().toISOString(),
+  });
 
   if (error) {
     throw {
-      message: 'Database update failed',
+      message: "Database update failed",
       status: 500,
-      code: 'DB_ERROR',
-      details: error
+      code: "DB_ERROR",
+      details: error,
     };
   }
 
   return NextResponse.json({ ok: true, data });
 }
 
-export const POST = withErrorHandling(updateProgressHandler, '/api/study/progress');
+export const POST = withErrorHandling(updateProgressHandler, "/api/study/progress");
 ```
 
 ## Testing Error Handling
 
 1. **Simulate Errors**:
+
    ```bash
    # Missing auth
    curl -X POST http://localhost:3002/api/study/progress
@@ -180,6 +181,7 @@ export const POST = withErrorHandling(updateProgressHandler, '/api/study/progres
 ## PII Masking Examples
 
 Before masking:
+
 ```json
 {
   "email": "user@example.com",
@@ -191,6 +193,7 @@ Before masking:
 ```
 
 After masking:
+
 ```json
 {
   "email": "***@***.***",
@@ -206,6 +209,7 @@ After masking:
 ### PostHog Analytics
 
 Errors are automatically tracked as `api_error` events with:
+
 - Endpoint name
 - HTTP method
 - Status code
@@ -217,13 +221,15 @@ Errors are automatically tracked as `api_error` events with:
 To enable Sentry:
 
 1. Install Sentry SDK:
+
    ```bash
    npm install @sentry/nextjs
    ```
 
 2. Initialize in `instrumentation.ts`:
+
    ```typescript
-   import * as Sentry from '@sentry/nextjs';
+   import * as Sentry from "@sentry/nextjs";
 
    Sentry.init({
      dsn: process.env.SENTRY_DSN,
@@ -251,13 +257,15 @@ To enable Sentry:
 To add error handling to existing API routes:
 
 1. Import the error handler:
+
    ```typescript
-   import { withErrorHandling } from '@/lib/api-error-handler';
+   import { withErrorHandling } from "@/lib/api-error-handler";
    ```
 
 2. Wrap your handler:
+
    ```typescript
-   export const GET = withErrorHandling(yourHandler, '/api/endpoint-name');
+   export const GET = withErrorHandling(yourHandler, "/api/endpoint-name");
    ```
 
 3. Or add try-catch with manual handling:
@@ -272,6 +280,7 @@ To add error handling to existing API routes:
 ## Performance Impact
 
 The error handling adds minimal overhead:
+
 - PII masking: <1ms for typical payloads
 - Analytics tracking: Async, non-blocking
 - Sentry reporting: Async, non-blocking

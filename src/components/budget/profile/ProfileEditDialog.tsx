@@ -1,11 +1,12 @@
-'use client';
+"use client";
 
 /**
  * Profile Edit Dialog
  * Dialog for editing profile name and avatar color
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -13,16 +14,16 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Loader2, Edit } from 'lucide-react';
-import { useProfile } from '@/contexts/ProfileContext';
-import type { Profile } from '@/types/profile';
-import { DEFAULT_AVATAR_COLORS, getProfileInitials } from '@/types/profile';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Loader2, Edit } from "lucide-react";
+import { useProfile } from "@/contexts/ProfileContext";
+import type { Profile } from "@/types/profile";
+import { DEFAULT_AVATAR_COLORS, getProfileInitials } from "@/types/profile";
+import { cn } from "@/lib/utils";
 
 interface ProfileEditDialogProps {
   open: boolean;
@@ -37,10 +38,13 @@ export function ProfileEditDialog({
   profile,
   onSuccess,
 }: ProfileEditDialogProps) {
+  const tAria = useTranslations("aria");
   const { updateProfile } = useProfile();
 
-  const [name, setName] = useState('');
-  const [avatarColor, setAvatarColor] = useState<(typeof DEFAULT_AVATAR_COLORS)[number] | string>(DEFAULT_AVATAR_COLORS[0]);
+  const [name, setName] = useState("");
+  const [avatarColor, setAvatarColor] = useState<(typeof DEFAULT_AVATAR_COLORS)[number] | string>(
+    DEFAULT_AVATAR_COLORS[0]
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -59,11 +63,11 @@ export function ProfileEditDialog({
 
   const validateForm = (): string | null => {
     if (!name.trim()) {
-      return 'Please enter a name for the profile';
+      return "Please enter a name for the profile";
     }
 
     if (name.trim().length > 30) {
-      return 'Name must be 30 characters or less';
+      return "Name must be 30 characters or less";
     }
 
     return null;
@@ -92,7 +96,7 @@ export function ProfileEditDialog({
       handleClose();
       onSuccess?.();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update profile');
+      setError(err instanceof Error ? err.message : "Failed to update profile");
     } finally {
       setIsLoading(false);
     }
@@ -109,9 +113,7 @@ export function ProfileEditDialog({
               <Edit className="h-5 w-5" />
               Edit Profile
             </DialogTitle>
-            <DialogDescription>
-              Update the profile name and avatar color.
-            </DialogDescription>
+            <DialogDescription>Update the profile name and avatar color.</DialogDescription>
           </DialogHeader>
 
           <div className="grid gap-4 py-4">
@@ -120,9 +122,9 @@ export function ProfileEditDialog({
               <Avatar className="h-20 w-20">
                 <AvatarFallback
                   style={{ backgroundColor: avatarColor }}
-                  className="text-white text-2xl font-medium"
+                  className="text-2xl font-medium text-white"
                 >
-                  {name ? getProfileInitials(name) : '?'}
+                  {name ? getProfileInitials(name) : "?"}
                 </AvatarFallback>
               </Avatar>
 
@@ -133,13 +135,13 @@ export function ProfileEditDialog({
                     type="button"
                     onClick={() => setAvatarColor(color)}
                     className={cn(
-                      'w-6 h-6 rounded-full transition-all',
+                      "h-6 w-6 rounded-full transition-all",
                       avatarColor === color
-                        ? 'ring-2 ring-offset-2 ring-primary'
-                        : 'hover:scale-110'
+                        ? "ring-2 ring-primary ring-offset-2"
+                        : "hover:scale-110"
                     )}
                     style={{ backgroundColor: color }}
-                    aria-label={`Select color ${color}`}
+                    aria-label={tAria("selectColor", { color })}
                   />
                 ))}
               </div>
@@ -166,22 +168,15 @@ export function ProfileEditDialog({
             )}
 
             {/* Error Display */}
-            {error && (
-              <p className="text-sm text-destructive">{error}</p>
-            )}
+            {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
 
           <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              onClick={handleClose}
-              disabled={isLoading}
-            >
+            <Button type="button" variant="outline" onClick={handleClose} disabled={isLoading}>
               Cancel
             </Button>
             <Button type="submit" disabled={isLoading}>
-              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isLoading && <Loader2 className="me-2 h-4 w-4 animate-spin" />}
               Save Changes
             </Button>
           </DialogFooter>

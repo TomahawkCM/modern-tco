@@ -69,7 +69,9 @@ export function MicroSection({
   const handleMarkComplete = () => {
     // Enforce quiz requirement if applicable
     if (quickCheck && requireQuizPass && !quizPassed) {
-      alert("Please complete and pass the Quick Check quiz (80%+) before marking this section complete.");
+      alert(
+        "Please complete and pass the Quick Check quiz (80%+) before marking this section complete."
+      );
       setShowQuickCheck(true);
       return;
     }
@@ -91,7 +93,7 @@ export function MicroSection({
 
     // Check if this section is already being tracked
     const alreadyTracked = existingItems.some(
-      item => item.sectionId === id && item.moduleId === moduleId
+      (item) => item.sectionId === id && item.moduleId === moduleId
     );
 
     if (!alreadyTracked) {
@@ -140,31 +142,29 @@ export function MicroSection({
     <Card
       className={cn(
         "mb-6 border-2 transition-all",
-        isCompleted
-          ? "border-[#22c55e]/30 bg-[#22c55e]/5"
-          : "border-primary/20 bg-card/80"
+        isCompleted ? "border-[#22c55e]/30 bg-[#22c55e]/5" : "border-primary/20 bg-card/80"
       )}
     >
       <CardHeader className="cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
         <div className="flex items-start justify-between">
-          <div className="flex items-start gap-3 flex-1">
+          <div className="flex flex-1 items-start gap-3">
             {isCompleted ? (
-              <CheckCircle2 className="h-6 w-6 flex-shrink-0 text-[#22c55e] mt-1" />
+              <CheckCircle2 className="mt-1 h-6 w-6 flex-shrink-0 text-[#22c55e]" />
             ) : (
-              <Circle className="h-6 w-6 flex-shrink-0 text-primary mt-1" />
+              <Circle className="mt-1 h-6 w-6 flex-shrink-0 text-primary" />
             )}
 
             <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
+              <div className="mb-1 flex items-center gap-2">
                 <Badge variant="outline" className="text-xs">
                   Section {sectionNumber}/{totalSections}
                 </Badge>
-                <Badge variant="outline" className="text-xs flex items-center gap-1">
+                <Badge variant="outline" className="flex items-center gap-1 text-xs">
                   <Clock className="h-3 w-3" />
                   {estimatedMinutes} min
                 </Badge>
               </div>
-              <CardTitle className="text-xl text-foreground mb-1">{title}</CardTitle>
+              <CardTitle className="mb-1 text-xl text-foreground">{title}</CardTitle>
               <Progress
                 value={(sectionNumber / totalSections) * 100}
                 className="h-1 w-32"
@@ -174,11 +174,7 @@ export function MicroSection({
           </div>
 
           <Button variant="ghost" size="sm" className="text-muted-foreground">
-            {isExpanded ? (
-              <ChevronUp className="h-5 w-5" />
-            ) : (
-              <ChevronDown className="h-5 w-5" />
-            )}
+            {isExpanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
           </Button>
         </div>
       </CardHeader>
@@ -186,15 +182,13 @@ export function MicroSection({
       {isExpanded && (
         <CardContent className="space-y-6">
           {/* Learning Content */}
-          <div className="prose prose-invert max-w-none">
-            {children}
-          </div>
+          <div className="prose prose-invert max-w-none">{children}</div>
 
           {/* Key Takeaways */}
           {keyTakeaways && keyTakeaways.length > 0 && (
             <Card className="border-primary/20 bg-primary/5">
               <CardHeader>
-                <CardTitle className="text-sm flex items-center gap-2 text-primary">
+                <CardTitle className="flex items-center gap-2 text-sm text-primary">
                   <BookOpen className="h-4 w-4" />
                   Key Takeaways
                 </CardTitle>
@@ -203,7 +197,7 @@ export function MicroSection({
                 <ul className="space-y-2">
                   {keyTakeaways.map((takeaway, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                      <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-[#22c55e] mt-0.5" />
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#22c55e]" />
                       <span>{takeaway}</span>
                     </li>
                   ))}
@@ -230,7 +224,7 @@ export function MicroSection({
                     {quizPassed ? "Review Quick Check ✓" : "Take Quick Check (2 min)"}
                   </Button>
                   {requireQuizPass && !quizPassed && (
-                    <p className="mt-2 text-xs text-[#f97316] flex items-center gap-1">
+                    <p className="mt-2 flex items-center gap-1 text-xs text-[#f97316]">
                       <Lock className="h-3 w-3" />
                       Must pass Quick Check (80%+) to mark section complete
                     </p>
@@ -239,7 +233,7 @@ export function MicroSection({
               ) : (
                 <Card className="border-accent/20 bg-accent/5">
                   <CardHeader>
-                    <CardTitle className="text-sm text-accent-foreground flex items-center justify-between">
+                    <CardTitle className="flex items-center justify-between text-sm text-accent-foreground">
                       <span>Quick Check: Test Your Understanding</span>
                       {quizPassed && (
                         <Badge className="bg-[#22c55e] text-foreground">Passed ✓</Badge>
@@ -261,7 +255,7 @@ export function MicroSection({
                 className={cn(
                   "w-full",
                   quickCheck && requireQuizPass && !quizPassed
-                    ? "bg-muted cursor-not-allowed"
+                    ? "cursor-not-allowed bg-muted"
                     : "bg-[#22c55e] hover:bg-[#22c55e]/90"
                 )}
               >
@@ -289,7 +283,7 @@ export function MicroSection({
             <div className="rounded-lg border border-[#22c55e]/30 bg-[#22c55e]/10 p-4 text-center">
               <CheckCircle2 className="mx-auto mb-2 h-6 w-6 text-[#22c55e]" />
               <p className="text-sm font-medium text-[#22c55e]">Section Completed!</p>
-              <p className="text-xs text-[#22c55e]/80 mt-1">
+              <p className="mt-1 text-xs text-[#22c55e]/80">
                 Progress saved. Continue to the next section.
               </p>
             </div>

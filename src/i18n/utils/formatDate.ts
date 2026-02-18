@@ -4,7 +4,7 @@
  * Timezone-aware date formatting with locale support
  */
 
-import type { SupportedLocale } from '../config';
+import type { SupportedLocale } from "../config";
 
 /**
  * Format date with locale-specific formatting
@@ -21,21 +21,21 @@ import type { SupportedLocale } from '../config';
  */
 export function formatDate(
   date: Date | number | string,
-  locale: SupportedLocale = 'en-US',
+  locale: SupportedLocale = "en-US",
   options?: Intl.DateTimeFormatOptions
 ): string {
   try {
-    const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
+    const dateObj = typeof date === "string" || typeof date === "number" ? new Date(date) : date;
 
     if (isNaN(dateObj.getTime())) {
-      console.error('Invalid date:', date);
-      return 'Invalid date';
+      console.error("Invalid date:", date);
+      return "Invalid date";
     }
 
     return new Intl.DateTimeFormat(locale, options).format(dateObj);
   } catch (error) {
-    console.error('Date formatting error:', error);
-    return 'Invalid date';
+    console.error("Date formatting error:", error);
+    return "Invalid date";
   }
 }
 
@@ -53,12 +53,12 @@ export function formatDate(
  */
 export function formatDateTime(
   date: Date | number | string,
-  locale: SupportedLocale = 'en-US',
+  locale: SupportedLocale = "en-US",
   includeSeconds: boolean = false
 ): string {
   return formatDate(date, locale, {
-    dateStyle: 'short',
-    timeStyle: includeSeconds ? 'medium' : 'short',
+    dateStyle: "short",
+    timeStyle: includeSeconds ? "medium" : "short",
   });
 }
 
@@ -76,11 +76,11 @@ export function formatDateTime(
  */
 export function formatTime(
   date: Date | number | string,
-  locale: SupportedLocale = 'en-US',
+  locale: SupportedLocale = "en-US",
   includeSeconds: boolean = false
 ): string {
   return formatDate(date, locale, {
-    timeStyle: includeSeconds ? 'medium' : 'short',
+    timeStyle: includeSeconds ? "medium" : "short",
   });
 }
 
@@ -95,9 +95,12 @@ export function formatTime(
  * formatLongDate(new Date(), 'en-US')  // "December 29, 2025"
  * formatLongDate(new Date(), 'ko-KR')  // "2025년 12월 29일"
  */
-export function formatLongDate(date: Date | number | string, locale: SupportedLocale = 'en-US'): string {
+export function formatLongDate(
+  date: Date | number | string,
+  locale: SupportedLocale = "en-US"
+): string {
   return formatDate(date, locale, {
-    dateStyle: 'long',
+    dateStyle: "long",
   });
 }
 
@@ -113,9 +116,12 @@ export function formatLongDate(date: Date | number | string, locale: SupportedLo
  * formatRelativeTime(yesterday, 'en-US')  // "1 day ago"
  * formatRelativeTime(tomorrow, 'ko-KR')   // "1일 후"
  */
-export function formatRelativeTime(date: Date | number | string, locale: SupportedLocale = 'en-US'): string {
+export function formatRelativeTime(
+  date: Date | number | string,
+  locale: SupportedLocale = "en-US"
+): string {
   try {
-    const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
+    const dateObj = typeof date === "string" || typeof date === "number" ? new Date(date) : date;
     const now = new Date();
     const diffMs = dateObj.getTime() - now.getTime();
     const diffSeconds = Math.round(diffMs / 1000);
@@ -126,26 +132,26 @@ export function formatRelativeTime(date: Date | number | string, locale: Support
     const diffMonths = Math.round(diffDays / 30);
     const diffYears = Math.round(diffDays / 365);
 
-    const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
+    const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
 
     if (Math.abs(diffYears) >= 1) {
-      return rtf.format(diffYears, 'year');
+      return rtf.format(diffYears, "year");
     } else if (Math.abs(diffMonths) >= 1) {
-      return rtf.format(diffMonths, 'month');
+      return rtf.format(diffMonths, "month");
     } else if (Math.abs(diffWeeks) >= 1) {
-      return rtf.format(diffWeeks, 'week');
+      return rtf.format(diffWeeks, "week");
     } else if (Math.abs(diffDays) >= 1) {
-      return rtf.format(diffDays, 'day');
+      return rtf.format(diffDays, "day");
     } else if (Math.abs(diffHours) >= 1) {
-      return rtf.format(diffHours, 'hour');
+      return rtf.format(diffHours, "hour");
     } else if (Math.abs(diffMinutes) >= 1) {
-      return rtf.format(diffMinutes, 'minute');
+      return rtf.format(diffMinutes, "minute");
     } else {
-      return rtf.format(diffSeconds, 'second');
+      return rtf.format(diffSeconds, "second");
     }
   } catch (error) {
-    console.error('Relative time formatting error:', error);
-    return 'Invalid date';
+    console.error("Relative time formatting error:", error);
+    return "Invalid date";
   }
 }
 
@@ -164,7 +170,7 @@ export function formatRelativeTime(date: Date | number | string, locale: Support
  */
 export function formatDateWithTimezone(
   date: Date | number | string,
-  locale: SupportedLocale = 'en-US',
+  locale: SupportedLocale = "en-US",
   timezone: string,
   options?: Intl.DateTimeFormatOptions
 ): string {
@@ -188,13 +194,13 @@ export function getUserTimezone(): string {
  * @returns ISO date string (YYYY-MM-DD)
  */
 export function formatDateForInput(date: Date | number | string): string {
-  const dateObj = typeof date === 'string' || typeof date === 'number' ? new Date(date) : date;
+  const dateObj = typeof date === "string" || typeof date === "number" ? new Date(date) : date;
 
   if (isNaN(dateObj.getTime())) {
-    return '';
+    return "";
   }
 
-  return dateObj.toISOString().split('T')[0];
+  return dateObj.toISOString().split("T")[0];
 }
 
 /**
@@ -206,6 +212,6 @@ export function formatDateForInput(date: Date | number | string): string {
 export function parseDateFromInput(dateString: string): Date | null {
   if (!dateString) return null;
 
-  const date = new Date(`${dateString  }T00:00:00`);
+  const date = new Date(`${dateString}T00:00:00`);
   return isNaN(date.getTime()) ? null : date;
 }

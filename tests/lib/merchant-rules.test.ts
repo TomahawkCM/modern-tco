@@ -1,14 +1,8 @@
-import 'fake-indexeddb/auto';
-import { describe, it, expect, beforeEach } from 'vitest';
-import { db } from '@/lib/budget-db';
-import {
-  createRule,
-  findRule,
-  applyRules,
-  deleteRule,
-  getAllRules,
-} from '@/lib/merchant-rules';
-import type { Transaction } from '@/types/budget';
+import "fake-indexeddb/auto";
+import { describe, it, expect, beforeEach } from "vitest";
+import { db } from "@/lib/budget-db";
+import { createRule, findRule, applyRules, deleteRule, getAllRules } from "@/lib/merchant-rules";
+import type { Transaction } from "@/types/budget";
 
 beforeEach(async () => {
   await db.merchantRules.clear();
@@ -21,12 +15,12 @@ async function seedTransaction(
 ): Promise<Transaction> {
   const now = new Date();
   const tx: Transaction = {
-    accountId: 'acc-1',
+    accountId: "acc-1",
     date: now,
-    description: '',
+    description: "",
     category: null,
     subcategory: null,
-    notes: '',
+    notes: "",
     isRecurring: false,
     tags: [],
     createdAt: now,
@@ -37,21 +31,21 @@ async function seedTransaction(
   return tx;
 }
 
-describe('merchant-rules', () => {
+describe("merchant-rules", () => {
   // ----------------------------------------------------------------
   // createRule
   // ----------------------------------------------------------------
-  describe('createRule', () => {
-    it('stores a new rule in IndexedDB and returns correct shape', async () => {
-      const rule = await createRule('AMAZON', 'Amazon.com', 'Shopping', 'Online');
+  describe("createRule", () => {
+    it("stores a new rule in IndexedDB and returns correct shape", async () => {
+      const rule = await createRule("AMAZON", "Amazon.com", "Shopping", "Online");
 
       expect(rule.id).toMatch(/^mrule_/);
-      expect(rule.merchantToken).toBe('AMAZON');
-      expect(rule.merchantDisplayName).toBe('Amazon.com');
-      expect(rule.category).toBe('Shopping');
-      expect(rule.subcategory).toBe('Online');
+      expect(rule.merchantToken).toBe("AMAZON");
+      expect(rule.merchantDisplayName).toBe("Amazon.com");
+      expect(rule.category).toBe("Shopping");
+      expect(rule.subcategory).toBe("Online");
       expect(rule.confidence).toBe(1.0);
-      expect(rule.source).toBe('user');
+      expect(rule.source).toBe("user");
       expect(rule.applyCount).toBe(0);
       expect(rule.createdAt).toBeInstanceOf(Date);
       expect(rule.updatedAt).toBeInstanceOf(Date);
@@ -59,45 +53,45 @@ describe('merchant-rules', () => {
       // Verify persisted
       const stored = await db.merchantRules.get(rule.id);
       expect(stored).toBeDefined();
-      expect(stored!.merchantToken).toBe('AMAZON');
+      expect(stored!.merchantToken).toBe("AMAZON");
     });
 
-    it('updates an existing rule for the same merchant token instead of duplicating', async () => {
-      const first = await createRule('STARBUCKS', 'Starbucks', 'Food & Dining', 'Coffee');
-      const second = await createRule('STARBUCKS', 'Starbucks Coffee', 'Entertainment');
+    it("updates an existing rule for the same merchant token instead of duplicating", async () => {
+      const first = await createRule("STARBUCKS", "Starbucks", "Food & Dining", "Coffee");
+      const second = await createRule("STARBUCKS", "Starbucks Coffee", "Entertainment");
 
       // The second call should update, not create
       const allRules = await db.merchantRules.toArray();
       expect(allRules).toHaveLength(1);
 
       // Returned rule reflects updated values
-      expect(second.category).toBe('Entertainment');
-      expect(second.merchantDisplayName).toBe('Starbucks Coffee');
+      expect(second.category).toBe("Entertainment");
+      expect(second.merchantDisplayName).toBe("Starbucks Coffee");
 
       // Verify the stored record is updated
       const stored = await db.merchantRules.get(first.id);
-      expect(stored!.category).toBe('Entertainment');
-      expect(stored!.merchantDisplayName).toBe('Starbucks Coffee');
+      expect(stored!.category).toBe("Entertainment");
+      expect(stored!.merchantDisplayName).toBe("Starbucks Coffee");
     });
   });
 
   // ----------------------------------------------------------------
   // findRule
   // ----------------------------------------------------------------
-  describe('findRule', () => {
-    it('returns a matching rule by merchant token', async () => {
-      await createRule('NETFLIX', 'Netflix', 'Entertainment', 'Streaming');
+  describe("findRule", () => {
+    it("returns a matching rule by merchant token", async () => {
+      await createRule("NETFLIX", "Netflix", "Entertainment", "Streaming");
 
-      const found = await findRule('NETFLIX');
+      const found = await findRule("NETFLIX");
       expect(found).toBeDefined();
-      expect(found!.merchantToken).toBe('NETFLIX');
-      expect(found!.category).toBe('Entertainment');
+      expect(found!.merchantToken).toBe("NETFLIX");
+      expect(found!.category).toBe("Entertainment");
     });
 
-    it('returns undefined for a non-existent token', async () => {
-      await createRule('SPOTIFY', 'Spotify', 'Entertainment');
+    it("returns undefined for a non-existent token", async () => {
+      await createRule("SPOTIFY", "Spotify", "Entertainment");
 
-      const found = await findRule('NONEXISTENT');
+      const found = await findRule("NONEXISTENT");
       expect(found).toBeUndefined();
     });
   });
@@ -105,24 +99,24 @@ describe('merchant-rules', () => {
   // ----------------------------------------------------------------
   // applyRules
   // ----------------------------------------------------------------
-  describe('applyRules', () => {
-    it('applies matching rules to uncategorized transactions', async () => {
+  describe("applyRules", () => {
+    it("applies matching rules to uncategorized transactions", async () => {
       // Create rules
-      await createRule('AMAZON', 'Amazon', 'Shopping');
-      await createRule('STARBUCKS', 'Starbucks', 'Food & Dining', 'Coffee');
+      await createRule("AMAZON", "Amazon", "Shopping");
+      await createRule("STARBUCKS", "Starbucks", "Food & Dining", "Coffee");
 
       // Create uncategorized transactions with single-word descriptions
       // so the tokenizer extracts the exact token matching the rule
       const tx1 = await seedTransaction({
-        id: 'tx-a1',
+        id: "tx-a1",
         amount: -49.99,
-        description: 'AMAZON',
+        description: "AMAZON",
         category: null,
       });
       const tx2 = await seedTransaction({
-        id: 'tx-a2',
-        amount: -5.50,
-        description: 'STARBUCKS',
+        id: "tx-a2",
+        amount: -5.5,
+        description: "STARBUCKS",
         category: null,
       });
 
@@ -132,21 +126,21 @@ describe('merchant-rules', () => {
       expect(result.rules).toHaveLength(2);
 
       // Verify DB was updated
-      const updatedTx1 = await db.transactions.get('tx-a1');
-      expect(updatedTx1!.category).toBe('Shopping');
+      const updatedTx1 = await db.transactions.get("tx-a1");
+      expect(updatedTx1!.category).toBe("Shopping");
 
-      const updatedTx2 = await db.transactions.get('tx-a2');
-      expect(updatedTx2!.category).toBe('Food & Dining');
+      const updatedTx2 = await db.transactions.get("tx-a2");
+      expect(updatedTx2!.category).toBe("Food & Dining");
     });
 
-    it('does NOT override already-categorized transactions', async () => {
-      await createRule('AMAZON', 'Amazon', 'Shopping');
+    it("does NOT override already-categorized transactions", async () => {
+      await createRule("AMAZON", "Amazon", "Shopping");
 
       const tx = await seedTransaction({
-        id: 'tx-cat',
+        id: "tx-cat",
         amount: -29.99,
-        description: 'AMAZON',
-        category: 'Gifts',
+        description: "AMAZON",
+        category: "Gifts",
       });
 
       const result = await applyRules([tx]);
@@ -154,23 +148,23 @@ describe('merchant-rules', () => {
       expect(result.applied).toBe(0);
 
       // Category should remain 'Gifts'
-      const stored = await db.transactions.get('tx-cat');
-      expect(stored!.category).toBe('Gifts');
+      const stored = await db.transactions.get("tx-cat");
+      expect(stored!.category).toBe("Gifts");
     });
 
-    it('increments the apply count on the matched rule', async () => {
-      const rule = await createRule('WALMART', 'Walmart', 'Shopping');
+    it("increments the apply count on the matched rule", async () => {
+      const rule = await createRule("WALMART", "Walmart", "Shopping");
 
       const tx1 = await seedTransaction({
-        id: 'tx-w1',
-        amount: -75.00,
-        description: 'WALMART',
+        id: "tx-w1",
+        amount: -75.0,
+        description: "WALMART",
         category: null,
       });
       const tx2 = await seedTransaction({
-        id: 'tx-w2',
-        amount: -42.30,
-        description: 'WALMART',
+        id: "tx-w2",
+        amount: -42.3,
+        description: "WALMART",
         category: null,
       });
 
@@ -184,11 +178,11 @@ describe('merchant-rules', () => {
       expect(updated!.applyCount).toBe(1);
     });
 
-    it('returns empty result when there are no rules', async () => {
+    it("returns empty result when there are no rules", async () => {
       const tx = await seedTransaction({
-        id: 'tx-no-rule',
+        id: "tx-no-rule",
         amount: -10,
-        description: 'RANDOMSTORE',
+        description: "RANDOMSTORE",
         category: null,
       });
 
@@ -202,9 +196,9 @@ describe('merchant-rules', () => {
   // ----------------------------------------------------------------
   // deleteRule
   // ----------------------------------------------------------------
-  describe('deleteRule', () => {
-    it('removes a rule from IndexedDB', async () => {
-      const rule = await createRule('TARGET', 'Target', 'Shopping');
+  describe("deleteRule", () => {
+    it("removes a rule from IndexedDB", async () => {
+      const rule = await createRule("TARGET", "Target", "Shopping");
 
       // Confirm it exists
       const before = await db.merchantRules.get(rule.id);
@@ -220,26 +214,26 @@ describe('merchant-rules', () => {
   // ----------------------------------------------------------------
   // getAllRules
   // ----------------------------------------------------------------
-  describe('getAllRules', () => {
-    it('returns rules sorted by createdAt descending', async () => {
+  describe("getAllRules", () => {
+    it("returns rules sorted by createdAt descending", async () => {
       // Create rules with slight time gaps to ensure ordering
-      const r1 = await createRule('FIRST', 'First', 'Shopping');
+      const r1 = await createRule("FIRST", "First", "Shopping");
       // Small delay to differentiate createdAt (Date.now() based IDs)
       await new Promise((r) => setTimeout(r, 10));
-      const r2 = await createRule('SECOND', 'Second', 'Food & Dining');
+      const r2 = await createRule("SECOND", "Second", "Food & Dining");
       await new Promise((r) => setTimeout(r, 10));
-      const r3 = await createRule('THIRD', 'Third', 'Entertainment');
+      const r3 = await createRule("THIRD", "Third", "Entertainment");
 
       const all = await getAllRules();
 
       expect(all).toHaveLength(3);
       // Descending order: most recent first
-      expect(all[0].merchantToken).toBe('THIRD');
-      expect(all[1].merchantToken).toBe('SECOND');
-      expect(all[2].merchantToken).toBe('FIRST');
+      expect(all[0].merchantToken).toBe("THIRD");
+      expect(all[1].merchantToken).toBe("SECOND");
+      expect(all[2].merchantToken).toBe("FIRST");
     });
 
-    it('returns empty array when no rules exist', async () => {
+    it("returns empty array when no rules exist", async () => {
       const all = await getAllRules();
       expect(all).toHaveLength(0);
     });

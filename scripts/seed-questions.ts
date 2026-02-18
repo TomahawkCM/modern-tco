@@ -1,31 +1,77 @@
 #!/usr/bin/env tsx
-import fs from 'fs';
-import path from 'path';
-import dotenv from 'dotenv';
+import fs from "fs";
+import path from "path";
+import dotenv from "dotenv";
 // Load env from .env.local if present, else .env
-const envLocal = path.resolve(process.cwd(), '.env.local');
-if (fs.existsSync(envLocal)) dotenv.config({ path: envLocal }); else dotenv.config();
+const envLocal = path.resolve(process.cwd(), ".env.local");
+if (fs.existsSync(envLocal)) dotenv.config({ path: envLocal });
+else dotenv.config();
 import { Difficulty, QuestionCategory, TCODomain, type Question } from "@/types/exam";
 import { supabaseAdmin } from "@/lib/supabase";
 
 type DomainPlan = { domain: TCODomain; count: number; topics: string[] };
 
 const PLAN: DomainPlan[] = [
-  { domain: TCODomain.ASKING_QUESTIONS, count: 48, topics: [
-    "Sensors", "Natural Language Questions", "Question Builder", "Parameterized Questions", "Result Interpretation", "Performance"
-  ] },
-  { domain: TCODomain.REFINING_TARGETING, count: 51, topics: [
-    "Dynamic Computer Groups", "Filters AND/OR/NOT", "RBAC Targeting", "Drill-down", "Complex Criteria", "Optimization"
-  ] },
-  { domain: TCODomain.TAKING_ACTION, count: 33, topics: [
-    "Packages", "Approvals", "Maintenance Windows", "Pilot Groups", "Rollback", "Monitoring"
-  ] },
-  { domain: TCODomain.NAVIGATION_MODULES, count: 51, topics: [
-    "Console Navigation", "Module Workflows", "Dashboards", "Roles & Permissions", "Troubleshooting", "Integration"
-  ] },
-  { domain: TCODomain.REPORTING_EXPORT, count: 37, topics: [
-    "Report Formats", "Scheduling", "Data Integrity", "Distribution", "Performance", "Compliance"
-  ] },
+  {
+    domain: TCODomain.ASKING_QUESTIONS,
+    count: 48,
+    topics: [
+      "Sensors",
+      "Natural Language Questions",
+      "Question Builder",
+      "Parameterized Questions",
+      "Result Interpretation",
+      "Performance",
+    ],
+  },
+  {
+    domain: TCODomain.REFINING_TARGETING,
+    count: 51,
+    topics: [
+      "Dynamic Computer Groups",
+      "Filters AND/OR/NOT",
+      "RBAC Targeting",
+      "Drill-down",
+      "Complex Criteria",
+      "Optimization",
+    ],
+  },
+  {
+    domain: TCODomain.TAKING_ACTION,
+    count: 33,
+    topics: [
+      "Packages",
+      "Approvals",
+      "Maintenance Windows",
+      "Pilot Groups",
+      "Rollback",
+      "Monitoring",
+    ],
+  },
+  {
+    domain: TCODomain.NAVIGATION_MODULES,
+    count: 51,
+    topics: [
+      "Console Navigation",
+      "Module Workflows",
+      "Dashboards",
+      "Roles & Permissions",
+      "Troubleshooting",
+      "Integration",
+    ],
+  },
+  {
+    domain: TCODomain.REPORTING_EXPORT,
+    count: 37,
+    topics: [
+      "Report Formats",
+      "Scheduling",
+      "Data Integrity",
+      "Distribution",
+      "Performance",
+      "Compliance",
+    ],
+  },
 ];
 
 const DIFFS: Difficulty[] = [Difficulty.BEGINNER, Difficulty.INTERMEDIATE, Difficulty.ADVANCED];
@@ -42,7 +88,10 @@ function buildQuestion(idx: number, domain: TCODomain, topic: string): Omit<Ques
   const stem = `In Tanium (${topic}), which choice best follows official TCO guidance for ${domain.toLowerCase()}?`;
   const choices = [
     { id: "a", text: `Apply ${topic} without validation across all endpoints` },
-    { id: "b", text: `Use ${topic} with scoped targeting, validation, and monitoring per best practices` },
+    {
+      id: "b",
+      text: `Use ${topic} with scoped targeting, validation, and monitoring per best practices`,
+    },
     { id: "c", text: `Ignore ${topic} in production environments` },
     { id: "d", text: `Rely on ad hoc manual steps instead of ${topic}` },
   ];
@@ -55,13 +104,15 @@ function buildQuestion(idx: number, domain: TCODomain, topic: string): Omit<Ques
     difficulty,
     category,
     explanation,
-    tags: ["TCO", topic.toLowerCase().replace(/\s+/g, '-')],
+    tags: ["TCO", topic.toLowerCase().replace(/\s+/g, "-")],
   };
 }
 
 async function seed() {
   if (!supabaseAdmin) {
-    console.error("❌ SUPABASE_SERVICE_ROLE_KEY not set. Seeding requires service role to bypass RLS.");
+    console.error(
+      "❌ SUPABASE_SERVICE_ROLE_KEY not set. Seeding requires service role to bypass RLS."
+    );
     process.exit(1);
   }
   let created = 0;
@@ -89,7 +140,7 @@ async function seed() {
         const payload: any = {
           question: q.question,
           options: q.choices,
-          correct_answer: choiceMap[(q.correctAnswerId || 'a').toLowerCase()] ?? 0,
+          correct_answer: choiceMap[(q.correctAnswerId || "a").toLowerCase()] ?? 0,
           // Use UI string values for domain to satisfy domain check constraint
           domain: q.domain,
           difficulty: diffMap[q.difficulty] ?? "intermediate",
@@ -98,9 +149,7 @@ async function seed() {
           tags: q.tags || [],
         };
 
-        const { error } = await (supabaseAdmin as any)
-          .from("questions")
-          .insert(payload);
+        const { error } = await (supabaseAdmin as any).from("questions").insert(payload);
         if (error) throw new Error(error.message);
         created++;
         if (created % 25 === 0) console.log(`Inserted ${created} questions...`);
@@ -109,7 +158,9 @@ async function seed() {
       }
     }
   }
-  console.log(`✅ Seed complete. Insert attempts: ${PLAN.reduce((a,b)=>a+b.count,0)}, created: ${created}`);
+  console.log(
+    `✅ Seed complete. Insert attempts: ${PLAN.reduce((a, b) => a + b.count, 0)}, created: ${created}`
+  );
 }
 
 seed().catch((e) => {

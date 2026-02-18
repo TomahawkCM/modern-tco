@@ -26,12 +26,12 @@ The Budget App uses a **single accent color system** with teal as the primary ac
 Use **only** for call-to-action buttons and key interactive elements that require user attention.
 
 ```css
---accent:       #14b8a6    /* Teal-500 - Primary CTAs */
---accent-hover: #0f766e    /* Teal-700 - Hover state */
---accent-light: #99f6e4    /* Teal-200 - Light backgrounds */
+--accent: #14b8a6 /* Teal-500 - Primary CTAs */ --accent-hover: #0f766e /* Teal-700 - Hover state */
+  --accent-light: #99f6e4 /* Teal-200 - Light backgrounds */;
 ```
 
 **Tailwind Classes:**
+
 - `bg-teal-500` - Primary buttons
 - `bg-teal-700` - Hover states
 - `bg-teal-200` - Light backgrounds
@@ -39,6 +39,7 @@ Use **only** for call-to-action buttons and key interactive elements that requir
 - `border-teal-500` - Accent borders
 
 **Usage Examples:**
+
 - ✅ Save button
 - ✅ Add transaction button
 - ✅ Import CSV button
@@ -53,16 +54,13 @@ Use **only** for call-to-action buttons and key interactive elements that requir
 Use for **all** structural elements, text, borders, and non-accent UI components.
 
 ```css
---gray-50:  #fafafa    /* Page background */
---gray-100: #f5f5f5    /* Card background */
---gray-200: #e5e5e5    /* Borders */
---gray-300: #d4d4d4    /* Disabled elements */
---gray-500: #737373    /* Secondary text */
---gray-700: #404040    /* Body text */
---gray-900: #171717    /* Headings */
+--gray-50: #fafafa /* Page background */ --gray-100: #f5f5f5 /* Card background */
+  --gray-200: #e5e5e5 /* Borders */ --gray-300: #d4d4d4 /* Disabled elements */ --gray-500: #737373
+  /* Secondary text */ --gray-700: #404040 /* Body text */ --gray-900: #171717 /* Headings */;
 ```
 
 **Tailwind Classes:**
+
 - `bg-gray-50` - Page background
 - `bg-gray-100` - Card/panel background
 - `border-gray-200` - Subtle borders
@@ -72,6 +70,7 @@ Use for **all** structural elements, text, borders, and non-accent UI components
 - `text-gray-900` - Headings, emphasis
 
 **Usage Examples:**
+
 - ✅ Card backgrounds (`bg-gray-100`)
 - ✅ Page background (`bg-gray-50`)
 - ✅ Border colors (`border-gray-200`)
@@ -85,13 +84,15 @@ Use for **all** structural elements, text, borders, and non-accent UI components
 Use **exclusively** for their specific semantic meaning. Never for decoration.
 
 #### Success / Income / Positive
+
 ```css
---success: #10b981    /* Green-500 */
+--success: #10b981 /* Green-500 */;
 ```
 
 **Tailwind:** `bg-green-500`, `text-green-600`
 
 **Use For:**
+
 - ✅ Income amounts
 - ✅ Positive balances
 - ✅ Success messages/toasts
@@ -100,13 +101,15 @@ Use **exclusively** for their specific semantic meaning. Never for decoration.
 - ❌ General UI accents
 
 #### Error / Expense / Negative
+
 ```css
---error: #ef4444    /* Red-500 */
+--error: #ef4444 /* Red-500 */;
 ```
 
 **Tailwind:** `bg-red-500`, `text-red-600`
 
 **Use For:**
+
 - ✅ Expense amounts (when negative)
 - ✅ Error messages/alerts
 - ✅ Over-budget indicators
@@ -115,13 +118,15 @@ Use **exclusively** for their specific semantic meaning. Never for decoration.
 - ❌ Decorative elements
 
 #### Warning / Alert
+
 ```css
---warning: #f59e0b    /* Yellow-500 */
+--warning: #f59e0b /* Yellow-500 */;
 ```
 
 **Tailwind:** `bg-yellow-500`, `text-yellow-600`
 
 **Use For:**
+
 - ✅ Warning messages
 - ✅ Near-budget-limit indicators
 - ✅ Important notices
@@ -136,6 +141,7 @@ Use **exclusively** for their specific semantic meaning. Never for decoration.
 These colors are **strictly prohibited** throughout the Budget App:
 
 ### Never Use
+
 - ❌ **Purple** - Any shade (`purple-*`)
 - ❌ **Orange** - Any shade (except semantic warning)
 - ❌ **Cyan** - Any shade (`cyan-*`)
@@ -144,6 +150,7 @@ These colors are **strictly prohibited** throughout the Budget App:
 - ❌ **Pink, Indigo, Violet** - All other accent colors
 
 ### Why Forbidden
+
 - Creates visual noise and inconsistency
 - Reduces accessibility (confusing for colorblind users)
 - Violates single-accent color principle
@@ -154,6 +161,7 @@ These colors are **strictly prohibited** throughout the Budget App:
 ## Usage Rules & Guidelines
 
 ### Rule 1: Accent Color Hierarchy
+
 **Use teal sparingly** - it should guide the user's eye to the most important actions.
 
 ```tsx
@@ -172,6 +180,7 @@ These colors are **strictly prohibited** throughout the Budget App:
 ```
 
 ### Rule 2: Semantic Colors Only for Meaning
+
 Never use semantic colors for decoration or general UI elements.
 
 ```tsx
@@ -187,17 +196,19 @@ Never use semantic colors for decoration or general UI elements.
 ```
 
 ### Rule 3: Grayscale for Structure
+
 All non-interactive, non-semantic elements should use grayscale.
 
 ```tsx
 // ✅ CORRECT: Gray for cards, borders, text
-<div className="bg-gray-100 border border-gray-200 rounded-lg p-4">
-  <h3 className="text-gray-900 font-bold">Recent Transactions</h3>
-  <p className="text-gray-500 text-sm">Last 30 days</p>
+<div className="rounded-lg border border-gray-200 bg-gray-100 p-4">
+  <h3 className="font-bold text-gray-900">Recent Transactions</h3>
+  <p className="text-sm text-gray-500">Last 30 days</p>
 </div>
 ```
 
 ### Rule 4: No Gradients Ever
+
 Replace all gradients with solid colors or borders.
 
 ```tsx
@@ -222,6 +233,7 @@ All color combinations **must** meet these minimum contrast ratios:
 #### Pre-Approved Combinations
 
 ✅ **Passing Combinations:**
+
 - `text-gray-700` on `bg-white` (contrast: 10.46:1)
 - `text-gray-900` on `bg-gray-50` (contrast: 16.8:1)
 - `text-white` on `bg-teal-500` (contrast: 4.6:1)
@@ -229,11 +241,13 @@ All color combinations **must** meet these minimum contrast ratios:
 - `text-white` on `bg-red-600` (contrast: 5.7:1)
 
 ❌ **Failing Combinations (Never Use):**
+
 - `text-gray-500` on `bg-white` (contrast: 4.3:1 - FAILS)
 - `text-teal-500` on `bg-white` (contrast: 3.2:1 - FAILS for body text)
 - `text-gray-300` on `bg-gray-50` (contrast: 1.6:1 - FAILS)
 
 ### Testing Tools
+
 - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/)
 - Chrome DevTools Accessibility Panel
 - Lighthouse Accessibility Audit
@@ -269,10 +283,10 @@ All color combinations **must** meet these minimum contrast ratios:
 ### Cards & Panels
 
 ```tsx
-<div className="bg-gray-100 border border-gray-200 rounded-lg p-6">
-  <h3 className="text-gray-900 font-bold text-lg mb-2">Card Title</h3>
+<div className="rounded-lg border border-gray-200 bg-gray-100 p-6">
+  <h3 className="mb-2 text-lg font-bold text-gray-900">Card Title</h3>
   <p className="text-gray-700">Body text content</p>
-  <p className="text-gray-500 text-sm mt-2">Metadata or timestamps</p>
+  <p className="mt-2 text-sm text-gray-500">Metadata or timestamps</p>
 </div>
 ```
 
@@ -315,13 +329,13 @@ All color combinations **must** meet these minimum contrast ratios:
 
 ```tsx
 // Active
-<a className="flex items-center gap-3 px-4 py-3 bg-teal-50 border-l-4 
+<a className="flex items-center gap-3 px-4 py-3 bg-teal-50 border-l-4
               border-teal-500 text-teal-700 font-medium">
   Dashboard
 </a>
 
 // Inactive
-<a className="flex items-center gap-3 px-4 py-3 text-gray-600 
+<a className="flex items-center gap-3 px-4 py-3 text-gray-600
               hover:bg-gray-50">
   Transactions
 </a>
@@ -332,6 +346,7 @@ All color combinations **must** meet these minimum contrast ratios:
 ## Quick Reference
 
 ### Do's ✅
+
 - Use teal (`#14b8a6`) for primary CTAs only
 - Use grayscale for all structural elements
 - Use semantic colors only for their meaning (green=income, red=expense, yellow=warning)
@@ -340,6 +355,7 @@ All color combinations **must** meet these minimum contrast ratios:
 - Maintain consistent color usage across all components
 
 ### Don'ts ❌
+
 - Never use purple, orange, cyan, or blue as accents
 - Never use gradients anywhere
 - Never use semantic colors decoratively
@@ -365,11 +381,13 @@ Before merging any UI changes, verify:
 ## Enforcement
 
 ### Automated Checks
+
 - ESLint plugin for forbidden color classes (future enhancement)
 - Visual regression testing with Percy/Chromatic
 - Lighthouse accessibility audits (CI/CD)
 
 ### Manual Review
+
 - Design review before PR merge
 - Accessibility audit with WCAG validator
 - Cross-reference with this document
@@ -388,4 +406,3 @@ Before merging any UI changes, verify:
 **Last Updated:** November 6, 2025  
 **Maintained By:** Budget App Design Team  
 **Version:** 1.0
-

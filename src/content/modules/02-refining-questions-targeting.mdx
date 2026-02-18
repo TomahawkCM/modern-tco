@@ -27,8 +27,8 @@ lastUpdated: "2025-10-04"
 - Advanced filters: AND/OR/NOT; nested conditions
 
 <InfoBox title="Exam Relevance">
-  This domain carries the highest weight on the blueprint (≈23%). Mastery of
-  targeting logic and safety practices is essential to pass the real exam.
+  This domain carries the highest weight on the blueprint (≈23%). Mastery of targeting logic and
+  safety practices is essential to pass the real exam.
 </InfoBox>
 
 ## Advanced Filtering Deep‑Dive
@@ -76,8 +76,8 @@ PROD-CENTOS03 - CentOS 7.9 - Internal
   - NOT filters to exclude test/staging cohorts
 - Performance tactics:
   - Prefer indexed sensor data when available; avoid overly broad string contains on huge datasets
- - Constrain with pre‑filters first (e.g., platform or ownership) then add specifics
- - Validate result set with sampled cohorts before scaling
+- Constrain with pre‑filters first (e.g., platform or ownership) then add specifics
+- Validate result set with sampled cohorts before scaling
 
 ### Operator Precedence, Truth Tables, and Parentheses
 
@@ -97,55 +97,56 @@ PROD-CENTOS03 - CentOS 7.9 - Internal
 
 #### Parentheses Patterns (15+ examples)
 
-1) Windows servers missing patch OR outdated build
+1. Windows servers missing patch OR outdated build
    - Get Computer Name from all machines where Operating System contains "Windows" AND (Installed Patches contains "KB50" OR OS Build Number < "22621")
 
-2) Include workstations in BU1 or BU2, exclude labs
+2. Include workstations in BU1 or BU2, exclude labs
    - Get Computer Name from all machines where (Domain contains "BU1" OR Domain contains "BU2") AND NOT Computer Name contains "-LAB-"
 
-3) Patch OR AV issue, Windows only
+3. Patch OR AV issue, Windows only
    - Get Computer Name from all machines where OS Platform = "Windows" AND (Antivirus Status contains "disabled" OR Patch Status = "Missing")
 
-4) Network zone + server role
+4. Network zone + server role
    - Get Computer Name from all machines where (IP Address contains "10.50." AND Computer Name contains "SRV-")
 
-5) Exclude test and staging explicitly
+5. Exclude test and staging explicitly
    - Get Computer Name from all machines where NOT (Computer Name contains "-TST-" OR Computer Name contains "-STG-")
 
-6) Mixed condition with version regex
+6. Mixed condition with version regex
    - Get Computer Name from all machines where Application Versions matches "^10\\.(2[2-9]|[3-9][0-9])" AND (Domain = "CORP" OR Domain = "HQ")
 
-7) Multiple port exposure conditions
+7. Multiple port exposure conditions
    - Get Listening Ports from all machines where (Listening Ports contains ":22" OR Listening Ports contains ":3389") AND NOT OS Platform = "macOS"
 
-8) Production servers only (tag‑based)
+8. Production servers only (tag‑based)
    - Get Computer Name from all machines where (Tags contains "prod" AND NOT Tags contains "canary")
 
-9) High resource usage cohort
+9. High resource usage cohort
    - Get Computer Name from all machines where (CPU Utilization > 85 OR Memory Utilization > 90) AND Uptime > 7 days
 
-10) Risk posture by encryption or secure boot
+10. Risk posture by encryption or secure boot
     - Get Computer Name from all machines where (Disk Encryption Status != "Enabled" OR Secure Boot State != "On")
 
-11) Browser extension blocklist
+11. Browser extension blocklist
     - Get Browser Extensions from all machines where Browser Extensions contains "password" AND NOT Browser Extensions contains "manager"
 
-12) Regional group with OS inclusion
+12. Regional group with OS inclusion
     - Get Computer Name from all machines where (Time Zone contains "UTC" OR Time Zone contains "EST") AND Operating System contains "Windows"
 
-13) App presence but missing dependency
+13. App presence but missing dependency
     - Get Computer Name from all machines where Installed Applications contains "AcmeApp" AND NOT Installed Applications contains "AcmeDependency"
 
-14) Service state drift
+14. Service state drift
     - Get Services from all machines where Services contains "AgentX" AND NOT Services contains "Running"
 
-15) Hybrid ownership filter
+15. Hybrid ownership filter
     - Get Computer Name from all machines where (Owner contains "secops" OR Owner contains "itops") AND NOT Owner contains "contractor"
 
 ### Regular Expressions: Practical Patterns
 
 <InfoBox title="Regex tips">
-  Anchor with ^ and $ for exact matches; escape dots and parentheses; test patterns on a small cohort first.
+  Anchor with ^ and $ for exact matches; escape dots and parentheses; test patterns on a small
+  cohort first.
 </InfoBox>
 
 <QueryPlayground
@@ -282,9 +283,9 @@ PROD-WEB03 - Last Backup: 48 hours ago - 12GB free
 ## Troubleshooting Playbook
 
 - Over‑scoped group? Add exclusion rules with explicit NOT filters and confirm with sample devices
- - Under‑scoped? Verify sensor freshness and rule logic; check operator precedence
- - Slow queries? Reduce wildcards and `contains` scans; limit to platform or subnet first
- - Inconsistent membership? Confirm sensor availability across OS variants; verify permissions
+- Under‑scoped? Verify sensor freshness and rule logic; check operator precedence
+- Slow queries? Reduce wildcards and `contains` scans; limit to platform or subnet first
+- Inconsistent membership? Confirm sensor availability across OS variants; verify permissions
 
 ---
 
@@ -296,17 +297,17 @@ PROD-WEB03 - Last Backup: 48 hours ago - 12GB free
 
 ### Dynamic Groups: Step‑by‑Step
 
-1) Define Purpose and Owner
+1. Define Purpose and Owner
    - Document why the group exists and who maintains it
-2) Choose Base Constraints
+2. Choose Base Constraints
    - OS Platform, Domain/BU, Region to narrow scope early
-3) Add Specific Criteria
+3. Add Specific Criteria
    - Patch Status, Application Version, Build Number, etc.
-4) Validate Membership
+4. Validate Membership
    - Run a dry‑run question to list Computer Name for sampling (10–25 endpoints)
-5) Apply Labels and Risk Tier
+5. Apply Labels and Risk Tier
    - Tag groups with risk and business criticality
-6) Save to Correct Content Set
+6. Save to Correct Content Set
    - Align with RBAC boundaries (e.g., Patch, Asset)
 
 ### Static Groups: Management Patterns
@@ -334,23 +335,24 @@ PROD-WEB03 - Last Backup: 48 hours ago - 12GB free
 
 ### Group Rule Examples (10)
 
-1) Windows servers missing critical patch: OS contains "Windows" AND (Computer Name contains "SRV-" AND Patch Status = "Missing")
-2) Workstations in Region EU: (OS Platform = "Windows" OR OS Platform = "macOS") AND Time Zone contains "CET"
-3) High‑risk exposure cohort: (Listening Ports contains ":3389" OR Antivirus Status contains "disabled")
-4) Legacy OS decommission list: Operating System contains "Windows 7" OR Operating System contains "2008 R2"
-5) GPU‑capable design pool: Display Adapter contains "NVIDIA" AND Physical Memory >= 16 GB
-6) Secure baseline exception: Disk Encryption Status != "Enabled" OR Secure Boot State != "On"
-7) Canary cohort: Tags contains "canary" AND NOT Computer Name contains "PROD"
-8) Remote workforce laptops: Chassis Type = "Laptop" AND NOT Docking State = "Docked"
-9) Finance BU endpoints: Domain contains "FIN" OR Owner contains "finance"
-10) Pilot wave for patch: Model contains "Precision" AND OS Build Number < "22621"
+1. Windows servers missing critical patch: OS contains "Windows" AND (Computer Name contains "SRV-" AND Patch Status = "Missing")
+2. Workstations in Region EU: (OS Platform = "Windows" OR OS Platform = "macOS") AND Time Zone contains "CET"
+3. High‑risk exposure cohort: (Listening Ports contains ":3389" OR Antivirus Status contains "disabled")
+4. Legacy OS decommission list: Operating System contains "Windows 7" OR Operating System contains "2008 R2"
+5. GPU‑capable design pool: Display Adapter contains "NVIDIA" AND Physical Memory >= 16 GB
+6. Secure baseline exception: Disk Encryption Status != "Enabled" OR Secure Boot State != "On"
+7. Canary cohort: Tags contains "canary" AND NOT Computer Name contains "PROD"
+8. Remote workforce laptops: Chassis Type = "Laptop" AND NOT Docking State = "Docked"
+9. Finance BU endpoints: Domain contains "FIN" OR Owner contains "finance"
+10. Pilot wave for patch: Model contains "Precision" AND OS Build Number < "22621"
 
 ---
 
 ## RBAC Deep Dive
 
 <InfoBox title="Separation of duties">
-  Distinguish who defines groups, who deploys actions, and who reviews outcomes. Enforce via roles and content sets.
+  Distinguish who defines groups, who deploys actions, and who reviews outcomes. Enforce via roles
+  and content sets.
 </InfoBox>
 
 ### Role Hierarchies
@@ -366,17 +368,17 @@ PROD-WEB03 - Last Backup: 48 hours ago - 12GB free
 
 ### Permission Scenarios (10+)
 
-1) Operator can create dynamic groups in “Patch” set but cannot deploy actions
-2) Publisher can deploy within Patch set to pre‑approved groups only
-3) Admin can approve cross‑domain actions with additional logging enabled
-4) Auditor role can read groups and actions but not modify
-5) Interact‑only role can run read‑only questions but not save groups
-6) Group Owner can edit rules within a content set but cannot deploy actions to the group
-7) Incident Responder can target only the “IR” content set groups with time‑boxed approval
-8) Change Manager can approve deployments but cannot author packages or groups
-9) Regional Operator can deploy within BU/Region content sets but cannot cross regions
-10) Automation Service Account can run scheduled read‑only questions; no action permissions
-11) Patch Engineer can create packages in Patch content set; deployment requires Publisher approval
+1. Operator can create dynamic groups in “Patch” set but cannot deploy actions
+2. Publisher can deploy within Patch set to pre‑approved groups only
+3. Admin can approve cross‑domain actions with additional logging enabled
+4. Auditor role can read groups and actions but not modify
+5. Interact‑only role can run read‑only questions but not save groups
+6. Group Owner can edit rules within a content set but cannot deploy actions to the group
+7. Incident Responder can target only the “IR” content set groups with time‑boxed approval
+8. Change Manager can approve deployments but cannot author packages or groups
+9. Regional Operator can deploy within BU/Region content sets but cannot cross regions
+10. Automation Service Account can run scheduled read‑only questions; no action permissions
+11. Patch Engineer can create packages in Patch content set; deployment requires Publisher approval
 
 ### Audit and Compliance
 
@@ -418,11 +420,11 @@ PROD-WEB03 - Last Backup: 48 hours ago - 12GB free
 
 ### Safety Runbook (template)
 
-1) Scope verification: dry‑run question output archived with timestamp
-2) Stakeholder comms: notify BU owners with scope and timing
-3) Rollback ready: uninstall package and static cohort pre‑created and tested
-4) Guardrails: deployment window, concurrency caps, network QoS considered
-5) Post‑checks: success criteria, telemetry review, and issue triage channel
+1. Scope verification: dry‑run question output archived with timestamp
+2. Stakeholder comms: notify BU owners with scope and timing
+3. Rollback ready: uninstall package and static cohort pre‑created and tested
+4. Guardrails: deployment window, concurrency caps, network QoS considered
+5. Post‑checks: success criteria, telemetry review, and issue triage channel
 
 ---
 
@@ -463,19 +465,19 @@ PROD-WEB03 - Last Backup: 48 hours ago - 12GB free
 
 ### Labs
 
-1) Filt‑201 Boolean Mastery with Parentheses
+1. Filt‑201 Boolean Mastery with Parentheses
    - Build three queries mixing AND/OR/NOT; record evaluated scope vs intended scope
 
-2) CG‑301 Dynamic Group Lifecycle
+2. CG‑301 Dynamic Group Lifecycle
    - Create, validate, label, and publish a dynamic group; add owner metadata and review date
 
-3) RBAC‑401 Scenario Permissions
+3. RBAC‑401 Scenario Permissions
    - Map roles to capabilities for 4 scenarios; propose content set adjustments for least‑privilege
 
-4) SAF‑101 Dry‑Run and Rollback
+4. SAF‑101 Dry‑Run and Rollback
    - Execute a no‑op action on a pilot cohort; define rollback triggers and validate cohorts
 
-5) PER‑202 Performance Profiling
+5. PER‑202 Performance Profiling
    - Measure runtime and output size across variants; document before/after improvements
 
 ### Practice
@@ -485,16 +487,17 @@ PROD-WEB03 - Last Backup: 48 hours ago - 12GB free
 </PracticeButton>
 
 <InfoBox title="Quick checklist">
-  1) Parentheses correct? 2) Scope constrained? 3) Owner recorded? 4) Rollback prepared? 5) Audit trail enabled?
+  1) Parentheses correct? 2) Scope constrained? 3) Owner recorded? 4) Rollback prepared? 5) Audit
+  trail enabled?
 </InfoBox>
 
 ### Real‑World Scenarios
 
-1) An over‑scoped dynamic group includes lab machines. Identify the rule error and correct it.
-2) A regional operator needs to deploy only within EU. Propose RBAC and content set boundaries.
-3) Regex filter slows queries during business hours. Optimize with constraints and scheduling.
-4) A dry‑run shows unexpected macOS devices in a Windows‑only cohort. Diagnose sensor/platform mismatch.
-5) A rollback cohort lacks some impacted endpoints. Improve identification and validation steps.
+1. An over‑scoped dynamic group includes lab machines. Identify the rule error and correct it.
+2. A regional operator needs to deploy only within EU. Propose RBAC and content set boundaries.
+3. Regex filter slows queries during business hours. Optimize with constraints and scheduling.
+4. A dry‑run shows unexpected macOS devices in a Windows‑only cohort. Diagnose sensor/platform mismatch.
+5. A rollback cohort lacks some impacted endpoints. Improve identification and validation steps.
 
 ### More Practice
 
@@ -541,28 +544,28 @@ flowchart TD
 
 ### Group Types Comparison
 
-| Type   | Membership | Best For | Risks | Notes |
-|---|---|---|---|---|
-| Dynamic | Rule-based | Posture, segmentation | Drift if rules broad | Requires owner + review |
-| Static  | Manual     | Change windows, rollback | Stale membership | Keep small and time-boxed |
-| Hybrid  | Static + dynamic gate | Safety with control | Complexity | Seed static, gate with platform |
+| Type    | Membership            | Best For                 | Risks                | Notes                           |
+| ------- | --------------------- | ------------------------ | -------------------- | ------------------------------- |
+| Dynamic | Rule-based            | Posture, segmentation    | Drift if rules broad | Requires owner + review         |
+| Static  | Manual                | Change windows, rollback | Stale membership     | Keep small and time-boxed       |
+| Hybrid  | Static + dynamic gate | Safety with control      | Complexity           | Seed static, gate with platform |
 
 ### Operator Precedence Quick Reference
 
-| Operator | Precedence | Notes |
-|---|---|---|
-| NOT | Highest | Apply first |
-| AND | Middle  | Binds tighter than OR |
-| OR  | Lowest  | Use parentheses to control |
+| Operator | Precedence | Notes                      |
+| -------- | ---------- | -------------------------- |
+| NOT      | Highest    | Apply first                |
+| AND      | Middle     | Binds tighter than OR      |
+| OR       | Lowest     | Use parentheses to control |
 
 ### RBAC Capabilities Mapping (example)
 
-| Role | Create Groups | Deploy Actions | Approve | Audit |
-|---|---|---|---|---|
-| Viewer | No | No | No | Yes |
-| Operator | Yes (within set) | No | No | Yes |
-| Publisher | Yes | Yes (within set) | No | Yes |
-| Admin | Yes | Yes | Yes | Yes |
+| Role      | Create Groups    | Deploy Actions   | Approve | Audit |
+| --------- | ---------------- | ---------------- | ------- | ----- |
+| Viewer    | No               | No               | No      | Yes   |
+| Operator  | Yes (within set) | No               | No      | Yes   |
+| Publisher | Yes              | Yes (within set) | No      | Yes   |
+| Admin     | Yes              | Yes              | Yes     | Yes   |
 
 ## Videos
 
@@ -574,9 +577,7 @@ Use these short clips to solidify concepts (also visible on the domain page):
 
 # Practice
 
-<PracticeButton domain="refining-questions-targeting">
-  Start Module Practice
-</PracticeButton>
+<PracticeButton domain="refining-questions-targeting">Start Module Practice</PracticeButton>
 
 - Drills on complex filters and nested conditions; map items to `REFINING_QUESTIONS` and `RBAC`, `Groups` tags.
 - Include troubleshooting items for over/under-scoped groups.
@@ -603,15 +604,15 @@ Use these short clips to solidify concepts (also visible on the domain page):
 
 # Labs
 
-1) RT‑101 Dynamic Groups: Windows servers missing critical patch
+1. RT‑101 Dynamic Groups: Windows servers missing critical patch
    - Build dynamic rule; verify with dry‑run question
    - Add owner metadata; publish in correct content set
 
-2) RT‑201 Advanced Filtering: Regex and nested logic
+2. RT‑201 Advanced Filtering: Regex and nested logic
    - Create filtered cohort by version pattern and last‑seen recency
    - Validate sample devices and performance
 
-3) RT‑301 Scope Validation and Rollback
+3. RT‑301 Scope Validation and Rollback
    - Establish static rollback cohort
    - Run safe no‑op action across dynamic group; confirm telemetry
 
@@ -624,12 +625,14 @@ Use these short clips to solidify concepts (also visible on the domain page):
 #### Understanding Operator Precedence
 
 **Precedence Order** (Highest to Lowest):
+
 1. Parentheses `()`
 2. NOT operators
 3. AND operators
 4. OR operators
 
 **Example: Complex Security Filter**
+
 ```tanium
 Get Computer Name from all machines where
 (
@@ -641,6 +644,7 @@ Get Computer Name from all machines where
 ```
 
 **Breakdown**:
+
 - First: Evaluate OS version (Server 2019 OR 2022)
 - Second: Exclude test/dev systems (NOT)
 - Third: Check for activity (user OR RDP)
@@ -650,6 +654,7 @@ Get Computer Name from all machines where
 #### Advanced Filter Patterns
 
 **Pattern 1: Nested Security Validation**
+
 ```tanium
 Get Computer Name and Security Status from all machines where
 (
@@ -669,6 +674,7 @@ Get Computer Name and Security Status from all machines where
 ```
 
 **Pattern 2: Compliance Cascade**
+
 ```tanium
 Get Computer Name from all machines where
 (
@@ -684,6 +690,7 @@ Get Computer Name from all machines where
 ```
 
 **Pattern 3: Performance-Optimized Filtering**
+
 ```tanium
 // Inefficient - processes heavy sensor first
 Get Computer Name from all machines where
@@ -701,6 +708,7 @@ Installed Applications containing "Adobe"
 #### Regex Syntax in Tanium
 
 **Basic Patterns**:
+
 ```tanium
 // IP Address validation
 Get Computer Name from all machines where
@@ -716,6 +724,7 @@ Installed Applications matches "Chrome.*([0-9]{2,3}\\.[0-9]\\.[0-9]{4})"
 ```
 
 **Advanced Patterns**:
+
 ```tanium
 // Detect suspicious processes
 Get Running Processes from all machines where
@@ -732,17 +741,18 @@ Certificate Subject matches "CN=.*\\.internal\\.company\\.com"
 
 #### Regex Performance Optimization
 
-| Pattern Type | Performance Impact | Use Case |
-|-------------|-------------------|----------|
-| Anchored (^$) | Low | When exact position matters |
-| Wildcards (.*) | High | Avoid in large datasets |
-| Character classes [A-Z] | Medium | Good for validation |
-| Quantifiers `{n,m}` | Medium | Precise matching |
-| Lookahead/Lookbehind | Very High | Use sparingly |
+| Pattern Type            | Performance Impact | Use Case                    |
+| ----------------------- | ------------------ | --------------------------- |
+| Anchored (^$)           | Low                | When exact position matters |
+| Wildcards (.\*)         | High               | Avoid in large datasets     |
+| Character classes [A-Z] | Medium             | Good for validation         |
+| Quantifiers `{n,m}`     | Medium             | Precise matching            |
+| Lookahead/Lookbehind    | Very High          | Use sparingly               |
 
 ### Complex Filtering Scenarios
 
 #### Scenario 1: Multi-Tier Application Discovery
+
 ```tanium
 // Find all components of multi-tier application
 Get Computer Name and Installed Applications and Services from all machines where
@@ -763,6 +773,7 @@ Get Computer Name and Installed Applications and Services from all machines wher
 ```
 
 #### Scenario 2: Security Exception Handling
+
 ```tanium
 // Find systems that need security exceptions
 Get Computer Name and Justification from all machines where
@@ -791,6 +802,7 @@ Get Computer Name and Justification from all machines where
 #### Creating Intelligent Dynamic Groups
 
 **Basic Dynamic Group**:
+
 ```tanium
 Name: "Windows Servers - Production"
 Definition: Operating System containing "Server"
@@ -801,6 +813,7 @@ Use: Production patch deployment
 ```
 
 **Advanced Dynamic Group with Multiple Conditions**:
+
 ```tanium
 Name: "High-Risk Endpoints"
 Definition: (
@@ -822,18 +835,19 @@ Use: Priority remediation and monitoring
 
 #### Performance Considerations for Dynamic Groups
 
-| Group Size | Update Frequency | Performance Impact | Recommendation |
-|-----------|-----------------|-------------------|----------------|
-| `<1,000` | 1 minute | Minimal | Safe for critical groups |
-| 1,000-10,000 | 5 minutes | Low | Standard configuration |
-| 10,000-50,000 | 15 minutes | Medium | Use for broad categorization |
-| `>50,000` | 30 minutes | High | Consider static or hybrid |
+| Group Size    | Update Frequency | Performance Impact | Recommendation               |
+| ------------- | ---------------- | ------------------ | ---------------------------- |
+| `<1,000`      | 1 minute         | Minimal            | Safe for critical groups     |
+| 1,000-10,000  | 5 minutes        | Low                | Standard configuration       |
+| 10,000-50,000 | 15 minutes       | Medium             | Use for broad categorization |
+| `>50,000`     | 30 minutes       | High               | Consider static or hybrid    |
 
 ### Static Groups Management
 
 #### When to Use Static Groups
 
 **Ideal Use Cases**:
+
 1. **Pilot Programs**: Fixed set of test machines
 2. **Compliance Exceptions**: Systems with permanent waivers
 3. **Project-Based**: Temporary groupings for migrations
@@ -841,6 +855,7 @@ Use: Priority remediation and monitoring
 5. **Manual Override**: Admin-controlled membership
 
 **Static Group Creation via API**:
+
 ```python
 # Static group creation via Tanium API
 import tanium
@@ -878,6 +893,7 @@ group_id = create_static_group("Patch Pilot Group - January", pilot_machines)
 #### Combining Static and Dynamic Approaches
 
 **Hybrid Model 1: Base + Exceptions**
+
 ```tanium
 // Dynamic base group
 Base Group: "All Windows Servers"
@@ -893,6 +909,7 @@ Definition: In "All Windows Servers" and not in "Legacy Servers - Do Not Patch"
 ```
 
 **Hybrid Model 2: Progressive Rollout**
+
 ```tanium
 // Wave 1 - Static pilot
 Group: "Deployment Wave 1"
@@ -913,6 +930,7 @@ Definition: Not in "Deployment Wave 1" and not in "Deployment Wave 2"
 #### Group Membership Validation
 
 **Validation Query**:
+
 ```tanium
 // Verify group membership
 Get Computer Name and Computer Groups from all machines
@@ -955,6 +973,7 @@ Administrator
 #### Custom Role Creation
 
 **Security Analyst Role**:
+
 ```yaml
 Role Name: Security Analyst
 Description: Can investigate threats but not remediate
@@ -992,6 +1011,7 @@ Advanced Permissions:
 ```
 
 **Patch Operator Role**:
+
 ```yaml
 Role Name: Patch Operator
 Description: Can deploy patches to test environments
@@ -1020,6 +1040,7 @@ Permissions:
 #### Content Set Best Practices
 
 **1. Segregation by Function**:
+
 ```yaml
 Security Content Set:
   - Sensors: Security-related only
@@ -1041,6 +1062,7 @@ Compliance Content Set:
 ```
 
 **2. Geographic/Regional Sets**:
+
 ```yaml
 APAC Content Set:
   - Computer Groups: APAC-* groups only
@@ -1058,6 +1080,7 @@ EMEA Content Set:
 #### Permission Scenarios
 
 **Scenario 1: Multi-Team Environment**
+
 ```tanium
 Team: Security Operations
 - Role: SecOps Analyst
@@ -1079,6 +1102,7 @@ Team: Desktop Support
 ```
 
 **Scenario 2: Contractor Access**
+
 ```tanium
 Contractor Role Configuration:
 - Base Role: Read-Only Operator
@@ -1119,18 +1143,21 @@ Role Count > 3 or Content Set Count > 5
 #### Compliance Frameworks
 
 **SOX Compliance**:
+
 - Separation of duties enforced
 - Quarterly access reviews
 - Privileged access monitoring
 - Change approval workflow
 
 **HIPAA Requirements**:
+
 - PHI access restrictions
 - Minimum necessary principle
 - Access audit trails
 - Encryption verification
 
 **Zero Trust Implementation**:
+
 - Just-in-time access
 - Least privilege default
 - Continuous verification
@@ -1165,6 +1192,7 @@ flowchart TD
 #### Safety Checklist
 
 **Pre-Deployment Validation**:
+
 - [ ] Target group membership verified
 - [ ] Exclusion list applied
 - [ ] Business hours check
@@ -1177,6 +1205,7 @@ flowchart TD
 #### Dry-Run Techniques
 
 **Method 1: No-Op Package**
+
 ```tanium
 // Create test package that logs but doesn't change
 Package: "Dry Run - Windows Update"
@@ -1196,6 +1225,7 @@ exit 0
 ```
 
 **Method 2: Validation Query**
+
 ```tanium
 // Verify targets before deployment
 Get Computer Name and Validation Status from all machines where
@@ -1242,6 +1272,7 @@ Ring 3 - Production (89%):
 #### Rollback Procedures
 
 **Automated Rollback Triggers**:
+
 ```tanium
 // Monitor for failure conditions
 Get Computer Name and Error Count from all machines
@@ -1251,6 +1282,7 @@ and (Error Count > 5 or Status = "Failed")
 ```
 
 **Manual Rollback Process**:
+
 1. Stop current deployment
 2. Identify affected systems
 3. Deploy rollback package
@@ -1261,16 +1293,17 @@ and (Error Count > 5 or Status = "Failed")
 
 #### Deployment Risk Calculator
 
-| Factor | Low Risk (1) | Medium Risk (3) | High Risk (5) |
-|--------|-------------|-----------------|---------------|
-| Target Count | `<100` | 100-1000 | `>1000` |
-| System Criticality | Dev/Test | Standard Prod | Business Critical |
-| Change Type | Config | Software Update | OS Upgrade |
-| Time of Day | Business Hours | After Hours | Emergency |
-| Rollback Complexity | Simple | Moderate | Complex |
-| Testing Coverage | `>90%` | 50-90% | `<50%` |
+| Factor              | Low Risk (1)   | Medium Risk (3) | High Risk (5)     |
+| ------------------- | -------------- | --------------- | ----------------- |
+| Target Count        | `<100`         | 100-1000        | `>1000`           |
+| System Criticality  | Dev/Test       | Standard Prod   | Business Critical |
+| Change Type         | Config         | Software Update | OS Upgrade        |
+| Time of Day         | Business Hours | After Hours     | Emergency         |
+| Rollback Complexity | Simple         | Moderate        | Complex           |
+| Testing Coverage    | `>90%`         | 50-90%          | `<50%`            |
 
 **Risk Score Interpretation**:
+
 - 6-10: Standard approval
 - 11-20: Manager approval + extended testing
 - 21-30: Executive approval + staged deployment
@@ -1284,6 +1317,7 @@ and (Error Count > 5 or Status = "Failed")
 #### Efficient Filter Design
 
 **Optimization Principles**:
+
 1. **Filter Early**: Reduce dataset size immediately
 2. **Use Indexes**: Leverage indexed sensors first
 3. **Avoid Wildcards**: Especially leading wildcards
@@ -1291,6 +1325,7 @@ and (Error Count > 5 or Status = "Failed")
 5. **Cache Results**: For repeat queries
 
 **Example: Optimizing Complex Query**
+
 ```tanium
 // Inefficient - 45 seconds on 50K endpoints
 Get Computer Name from all machines where
@@ -1373,6 +1408,7 @@ Time Zone containing "Pacific"
 | Action Status | No cache | Always need current state |
 
 **Cache-Aware Queries**:
+
 ```tanium
 // Use cache for static data
 Get Computer Name and Operating System from all machines
@@ -1398,11 +1434,13 @@ where Computer Name in "Compromised Systems"
 #### Task 1: Multi-Condition Security Filter
 
 **Requirement**: Find all Windows servers that are:
+
 - Missing critical patches OR running obsolete OS
 - AND have administrative exposure
 - BUT exclude development environment
 
 **Solution**:
+
 ```tanium
 Get Computer Name and Security Score from all machines where
 (
@@ -1416,6 +1454,7 @@ and Operating System containing "Server"
 ```
 
 **Validation Questions**:
+
 1. How many systems match?
 2. What's the average security score?
 3. Which condition eliminates the most systems?
@@ -1423,11 +1462,13 @@ and Operating System containing "Server"
 #### Task 2: Regex Pattern Matching
 
 **Requirement**: Identify systems not following naming convention:
+
 - Production: PRD-[LOCATION]-[TYPE][NUMBER]
 - Test: TST-[LOCATION]-[TYPE][NUMBER]
 - Development: DEV-[LOCATION]-[TYPE][NUMBER]
 
 **Solution**:
+
 ```tanium
 Get Computer Name from all machines where
 Computer Name not matches "^(PRD|TST|DEV)-[A-Z]{2,3}-(SRV|WKS|NET)[0-9]{3,4}$"
@@ -1445,6 +1486,7 @@ and Domain Name != "legacy.local"  // Exclude legacy systems
 **Business Requirement**: Support global patch deployment with regional control
 
 **Implementation**:
+
 ```yaml
 Level 1 - Global Groups:
   - All-Windows-Systems (Dynamic)
@@ -1491,6 +1533,7 @@ Computer Groups not containing "Patch-Exceptions"
 #### Scenario: Three Business Units
 
 **Requirements**:
+
 - BU1: Full control of their systems
 - BU2: Read-only access to all, modify own
 - BU3: Compliance reporting only
@@ -1498,6 +1541,7 @@ Computer Groups not containing "Patch-Exceptions"
 **Implementation Steps**:
 
 1. **Create Content Sets**:
+
 ```yaml
 BU1_Content:
   Sensors: All
@@ -1516,6 +1560,7 @@ BU3_Content:
 ```
 
 2. **Define Roles**:
+
 ```yaml
 BU1_Admin:
   Base: Administrator
@@ -1534,6 +1579,7 @@ BU3_Auditor:
 ```
 
 3. **Test Access**:
+
 ```tanium
 // As BU1_Admin - Should work
 Deploy Package "Windows Updates" to BU1-Servers
@@ -1551,17 +1597,17 @@ Deploy Package "Any" to Any Group  // Access Denied
 
 ### Targeting Performance Benchmarks
 
-| Operation | Target Count | Expected Time | Warning Threshold |
-|-----------|-------------|---------------|------------------|
-| Simple Filter | 1,000 | `<1 sec` | `>3 sec` |
-| Simple Filter | 10,000 | `<2 sec` | `>5 sec` |
-| Simple Filter | 50,000 | `<5 sec` | `>10 sec` |
-| Complex Filter | 1,000 | `<3 sec` | `>8 sec` |
-| Complex Filter | 10,000 | `<8 sec` | `>20 sec` |
-| Complex Filter | 50,000 | `<20 sec` | `>60 sec` |
-| Group Update | Any size | `<30 sec` | `>2 min` |
-| Action Deploy | 1,000 | `<10 sec` | `>30 sec` |
-| Action Deploy | 10,000 | `<30 sec` | `>2 min` |
+| Operation      | Target Count | Expected Time | Warning Threshold |
+| -------------- | ------------ | ------------- | ----------------- |
+| Simple Filter  | 1,000        | `<1 sec`      | `>3 sec`          |
+| Simple Filter  | 10,000       | `<2 sec`      | `>5 sec`          |
+| Simple Filter  | 50,000       | `<5 sec`      | `>10 sec`         |
+| Complex Filter | 1,000        | `<3 sec`      | `>8 sec`          |
+| Complex Filter | 10,000       | `<8 sec`      | `>20 sec`         |
+| Complex Filter | 50,000       | `<20 sec`     | `>60 sec`         |
+| Group Update   | Any size     | `<30 sec`     | `>2 min`          |
+| Action Deploy  | 1,000        | `<10 sec`     | `>30 sec`         |
+| Action Deploy  | 10,000       | `<30 sec`     | `>2 min`          |
 
 ### Monitoring Dashboard Queries
 
@@ -1591,6 +1637,7 @@ order by Execution Time desc
 ### Key Topics for TCO Certification
 
 **23% of Exam - Critical Focus Areas**:
+
 1. Boolean operator precedence
 2. Regular expression syntax
 3. Dynamic vs static groups
@@ -1636,6 +1683,7 @@ D) Target test environment only
 ## 🚀 Next Steps
 
 After completing Module 2, you should be able to:
+
 - ✅ Build complex multi-condition filters
 - ✅ Use regex for advanced pattern matching
 - ✅ Design efficient computer group hierarchies
@@ -1646,7 +1694,8 @@ After completing Module 2, you should be able to:
 **Continue to Module 3**: Taking Action - Packages & Actions
 
 <InfoBox>
-**Module 2 Complete!** You've mastered advanced targeting and filtering - the foundation of precise endpoint management. Ready for Module 3: Taking Action!
+  **Module 2 Complete!** You've mastered advanced targeting and filtering - the foundation of
+  precise endpoint management. Ready for Module 3: Taking Action!
 </InfoBox>
 
 <PracticeButton domain="refining-questions-targeting" />
@@ -1660,6 +1709,7 @@ After completing Module 2, you should be able to:
 #### Multi-Region Deployment Strategy
 
 **Infrastructure Requirements**:
+
 ```yaml
 Primary Region (US-EAST):
   - Tanium Platform Servers: 3 (HA cluster)
@@ -1683,6 +1733,7 @@ Tertiary Region (APAC):
 ```
 
 **Query Distribution Logic**:
+
 ```python
 def optimize_query_distribution(query, endpoint_count, regions):
     """
@@ -1721,6 +1772,7 @@ def optimize_query_distribution(query, endpoint_count, regions):
 ### Advanced Targeting Patterns
 
 #### Pattern 1: Zero-Day Response Targeting
+
 ```tanium
 // Immediate threat isolation
 Phase 1 - Identify (0-2 minutes):
@@ -1743,6 +1795,7 @@ Computer Name in [affected_systems]
 ```
 
 #### Pattern 2: Compliance Validation Cascade
+
 ```tanium
 // Progressive compliance checking
 Level 1 - Basic Security:
@@ -1774,17 +1827,18 @@ and tag as "Advanced_NonCompliant"
 
 #### Query Performance Optimization Guide
 
-| Scenario | Optimization Technique | Performance Gain | Implementation |
-|----------|----------------------|------------------|----------------|
-| Large Dataset (>50K) | Indexed filtering + Sharding | 70-80% | Use Computer ID ranges |
-| Complex Logic | Staged queries with caching | 60-70% | Break into sub-queries |
-| Real-time Data | Sensor pre-computation | 50-60% | Deploy collection sensors |
-| Historical Analysis | Trend data aggregation | 80-90% | Use Trends module |
-| Cross-platform | Platform-specific queries | 40-50% | Separate Windows/Linux |
-| Network Limited | Result compression | 30-40% | Enable compression |
-| High Frequency | Smart caching + deltas | 85-95% | Cache static, stream dynamic |
+| Scenario             | Optimization Technique       | Performance Gain | Implementation               |
+| -------------------- | ---------------------------- | ---------------- | ---------------------------- |
+| Large Dataset (>50K) | Indexed filtering + Sharding | 70-80%           | Use Computer ID ranges       |
+| Complex Logic        | Staged queries with caching  | 60-70%           | Break into sub-queries       |
+| Real-time Data       | Sensor pre-computation       | 50-60%           | Deploy collection sensors    |
+| Historical Analysis  | Trend data aggregation       | 80-90%           | Use Trends module            |
+| Cross-platform       | Platform-specific queries    | 40-50%           | Separate Windows/Linux       |
+| Network Limited      | Result compression           | 30-40%           | Enable compression           |
+| High Frequency       | Smart caching + deltas       | 85-95%           | Cache static, stream dynamic |
 
 **Implementation Example - Sharded Query**:
+
 ```python
 def execute_sharded_query(query_template, total_endpoints=75000, shard_size=5000):
     results = []
@@ -1831,24 +1885,28 @@ def execute_sharded_query(query_template, total_endpoints=75000, shard_size=5000
 #### Critical Knowledge Areas
 
 **1. Filter Logic Mastery (35% of domain)**
+
 - Boolean operator precedence
 - Complex parenthetical logic
 - Negation patterns
 - Performance implications
 
 **2. Computer Groups (30% of domain)**
+
 - Dynamic group creation
 - Static group use cases
 - Hybrid approaches
 - Performance tuning
 
 **3. RBAC Implementation (20% of domain)**
+
 - Role hierarchy design
 - Content set segregation
 - Permission inheritance
 - Audit requirements
 
 **4. Safety Procedures (15% of domain)**
+
 - Validation techniques
 - Rollback strategies
 - Risk assessment
@@ -1859,6 +1917,7 @@ def execute_sharded_query(query_template, total_endpoints=75000, shard_size=5000
 **Question Set A: Filter Logic**
 
 1. **Which query correctly identifies Windows servers missing critical patches but excludes test systems?**
+
 ```tanium
 A) Get Computer Name from all machines where
    Missing Critical Patches > 0 and
@@ -1879,18 +1938,22 @@ D) Get Computer Name from all machines where
    (Operating System containing "Server" and Missing Critical Patches > 0)
    and not Computer Name containing "TEST"
 ```
+
 **Answer: B** - Proper use of parentheses and complete exclusion logic
 
 2. **What is the performance impact order of these filter types?**
+
 ```
 I. Regex matching
 II. Indexed sensor equality
 II. String containing
 IV. Numeric comparison
 ```
+
 **Answer**: II < IV < III < I (Fastest to slowest)
 
 3. **How do you optimize this inefficient query?**
+
 ```tanium
 // Original (slow)
 Get Computer Name from all machines where
@@ -1898,7 +1961,9 @@ Installed Applications containing "Adobe" and
 Installed Applications containing "Version 2023" and
 Operating System containing "Windows 10"
 ```
+
 **Answer**:
+
 ```tanium
 // Optimized
 Get Computer Name from all machines where
@@ -1910,14 +1975,15 @@ Installed Applications matches "Adobe.*2023"  // Single regex
 
 4. **When should you use static vs dynamic groups?**
 
-| Scenario | Group Type | Reason |
-|----------|------------|--------|
-| Pilot program testing | Static | Fixed membership |
-| Department-based targeting | Dynamic | Membership changes |
-| Compliance exceptions | Static | Permanent exemptions |
-| OS-based categorization | Dynamic | Automatic updates |
+| Scenario                   | Group Type | Reason               |
+| -------------------------- | ---------- | -------------------- |
+| Pilot program testing      | Static     | Fixed membership     |
+| Department-based targeting | Dynamic    | Membership changes   |
+| Compliance exceptions      | Static     | Permanent exemptions |
+| OS-based categorization    | Dynamic    | Automatic updates    |
 
 5. **What's the maximum recommended update frequency for a 50,000 member dynamic group?**
+
 - A) 1 minute
 - B) 5 minutes
 - C) 15 minutes
@@ -1926,11 +1992,13 @@ Installed Applications matches "Adobe.*2023"  // Single regex
 **Question Set C: RBAC Scenarios**
 
 6. **Design an RBAC model for these requirements:**
+
 - Team A: Full control of Windows servers
 - Team B: Read-only on all, deploy to Linux
 - Team C: Compliance reporting only
 
 **Answer Structure**:
+
 ```yaml
 Team A:
   Role: Windows Administrator
@@ -1954,9 +2022,11 @@ Team C:
 ### Hands-On Lab Challenges
 
 #### Challenge 1: Emergency Patch Deployment
+
 **Scenario**: Critical zero-day patch must be deployed to 10,000 production servers across 3 time zones within 4 hours.
 
 **Your Task**:
+
 1. Design the targeting strategy
 2. Create the computer groups
 3. Implement safety checks
@@ -1964,6 +2034,7 @@ Team C:
 5. Prepare rollback procedures
 
 **Solution Framework**:
+
 ```tanium
 Step 1: Create targeting groups
 - Emergency_Patch_Critical (Domain controllers, Exchange)
@@ -1984,15 +2055,18 @@ Phase 4 (120-240 min): Emergency_Patch_Critical
 ```
 
 #### Challenge 2: Multi-Tenant RBAC
+
 **Scenario**: MSP managing 5 different customers on shared Tanium infrastructure.
 
 **Requirements**:
+
 - Complete isolation between customers
 - Shared security team with read-only access to all
 - Customer-specific operators
 - Centralized compliance reporting
 
 **Implementation Guide**:
+
 ```python
 def create_multitenant_rbac(customers):
     for customer in customers:
@@ -2031,6 +2105,7 @@ def create_multitenant_rbac(customers):
 ### Pre-Production Checklist
 
 #### Technical Validation
+
 - [ ] All target groups tested in dev environment
 - [ ] Filter logic validated with subset data
 - [ ] RBAC model approved by security team
@@ -2040,6 +2115,7 @@ def create_multitenant_rbac(customers):
 - [ ] Communication plan activated
 
 #### Operational Readiness
+
 - [ ] Operators trained on new procedures
 - [ ] Escalation paths defined
 - [ ] Monitoring dashboards configured
@@ -2077,6 +2153,7 @@ gantt
 ### Post-Deployment Monitoring
 
 **Key Metrics to Track**:
+
 ```tanium
 // Query performance
 Get Average Query Time and Query Count and Error Rate
@@ -2100,16 +2177,19 @@ group by User Role
 ### Success Criteria
 
 ✅ **Performance Targets Met**:
+
 - 95% of queries complete in `<5 seconds`
 - 99% of group updates complete in `<30 seconds`
 - Zero permission escalation incidents
 
 ✅ **Operational Excellence**:
+
 - 100% of operators successfully authenticated
 - All computer groups populated correctly
 - No unplanned system downtime
 
 ✅ **Security Compliance**:
+
 - RBAC model enforces least privilege
 - All actions properly audited
 - No unauthorized access attempts succeeded
@@ -2138,18 +2218,20 @@ group by User Role
 
 **Common Issues and Solutions**:
 
-| Symptom | Likely Cause | Solution |
-|---------|--------------|----------|
-| Slow queries | Missing indexes | Add indexed sensors to filter |
-| Empty groups | Filter too restrictive | Broaden criteria incrementally |
-| Permission denied | Content set mismatch | Verify role assignments |
-| Inconsistent results | Cache stale | Force cache refresh |
-| High CPU on endpoints | Complex sensors | Use sensor throttling |
+| Symptom               | Likely Cause           | Solution                       |
+| --------------------- | ---------------------- | ------------------------------ |
+| Slow queries          | Missing indexes        | Add indexed sensors to filter  |
+| Empty groups          | Filter too restrictive | Broaden criteria incrementally |
+| Permission denied     | Content set mismatch   | Verify role assignments        |
+| Inconsistent results  | Cache stale            | Force cache refresh            |
+| High CPU on endpoints | Complex sensors        | Use sensor throttling          |
 
 ---
 
 <InfoBox>
-**Module 2 Complete!** You've mastered advanced targeting and filtering techniques essential for enterprise Tanium deployments. These skills are critical for the TCO exam and real-world operations.
+  **Module 2 Complete!** You've mastered advanced targeting and filtering techniques essential for
+  enterprise Tanium deployments. These skills are critical for the TCO exam and real-world
+  operations.
 </InfoBox>
 
 <PracticeButton domain="refining-questions-targeting" />

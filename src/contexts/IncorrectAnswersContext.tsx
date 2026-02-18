@@ -169,7 +169,7 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
         dispatch({ type: "LOAD_ANSWERS", payload: [] });
       }
     } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === "development") {
         console.error("Failed to load incorrect answers from localStorage:", error);
       }
       dispatch({ type: "LOAD_ANSWERS", payload: [] });
@@ -210,12 +210,12 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
           // const { error } = await db.supabase.from("incorrect_answers").insert({...});
           const error = null; // Placeholder
 
-          if (error && process.env.NODE_ENV === 'development') {
+          if (error && process.env.NODE_ENV === "development") {
             console.error("Failed to save incorrect answer to database:", error);
             // Still keep in local state even if database save fails
           }
         } catch (error) {
-          if (process.env.NODE_ENV === 'development') {
+          if (process.env.NODE_ENV === "development") {
             console.error("Error saving incorrect answer:", error);
           }
         }
@@ -238,11 +238,11 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
           // const { error } = await db.supabase.from("incorrect_answers").update({...});
           const error = null; // Placeholder
 
-          if (error && process.env.NODE_ENV === 'development') {
+          if (error && process.env.NODE_ENV === "development") {
             console.error("Failed to update review status in database:", error);
           }
         } catch (error) {
-          if (process.env.NODE_ENV === 'development') {
+          if (process.env.NODE_ENV === "development") {
             console.error("Error updating review status:", error);
           }
         }
@@ -277,11 +277,11 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
         // const { error } = await db.supabase.from("incorrect_answers").delete().eq("user_id", user.id);
         const error = null; // Placeholder
 
-        if (error && process.env.NODE_ENV === 'development') {
+        if (error && process.env.NODE_ENV === "development") {
           console.error("Failed to clear incorrect answers from database:", error);
         }
       } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV === "development") {
           console.error("Error clearing incorrect answers:", error);
         }
       }
@@ -300,11 +300,11 @@ export function IncorrectAnswersProvider({ children }: { children: ReactNode }) 
           // const { error } = await db.supabase.from("incorrect_answers").delete().eq("id", answerId).eq("user_id", user.id);
           const error = null; // Placeholder
 
-          if (error && process.env.NODE_ENV === 'development') {
+          if (error && process.env.NODE_ENV === "development") {
             console.error("Failed to remove incorrect answer from database:", error);
           }
         } catch (error) {
-          if (process.env.NODE_ENV === 'development') {
+          if (process.env.NODE_ENV === "development") {
             console.error("Error removing incorrect answer:", error);
           }
         }

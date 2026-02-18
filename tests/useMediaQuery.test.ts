@@ -26,9 +26,11 @@ describe("useMediaQuery", () => {
           addEventListener: vi.fn((_event: string, handler: (e: MediaQueryListEvent) => void) => {
             listeners.set(query, handler);
           }),
-          removeEventListener: vi.fn((_event: string, _handler: (e: MediaQueryListEvent) => void) => {
-            listeners.delete(query);
-          }),
+          removeEventListener: vi.fn(
+            (_event: string, _handler: (e: MediaQueryListEvent) => void) => {
+              listeners.delete(query);
+            }
+          ),
           dispatchEvent: vi.fn(),
         };
         mediaQueryInstances.set(query, instance as unknown as MediaQueryList);
@@ -66,17 +68,13 @@ describe("useMediaQuery", () => {
     unmount();
 
     const matchMediaMock = window.matchMedia("(min-width: 768px)");
-    expect(matchMediaMock.removeEventListener).toHaveBeenCalledWith(
-      "change",
-      expect.any(Function)
-    );
+    expect(matchMediaMock.removeEventListener).toHaveBeenCalledWith("change", expect.any(Function));
   });
 
   it("re-subscribes when query changes", () => {
-    const { rerender } = renderHook(
-      ({ query }: { query: string }) => useMediaQuery(query),
-      { initialProps: { query: "(min-width: 768px)" } }
-    );
+    const { rerender } = renderHook(({ query }: { query: string }) => useMediaQuery(query), {
+      initialProps: { query: "(min-width: 768px)" },
+    });
 
     rerender({ query: "(min-width: 1024px)" });
 

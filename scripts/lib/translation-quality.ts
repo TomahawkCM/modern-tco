@@ -13,9 +13,9 @@
  * Returns quality score 0-100 per locale
  */
 
-import * as fs from 'fs';
-import * as path from 'path';
-import type { SupportedLocale } from '../../src/i18n/config';
+import * as fs from "fs";
+import * as path from "path";
+import type { SupportedLocale } from "../../src/i18n/config";
 
 export interface QualityCheck {
   name: string;
@@ -43,13 +43,13 @@ interface FlatTranslations {
 /**
  * Flatten nested translation object to dot notation
  */
-function flattenTranslations(obj: any, prefix: string = ''): FlatTranslations {
+function flattenTranslations(obj: any, prefix: string = ""): FlatTranslations {
   const result: FlatTranslations = {};
 
   for (const [key, value] of Object.entries(obj)) {
     const fullKey = prefix ? `${prefix}.${key}` : key;
 
-    if (value && typeof value === 'object' && !Array.isArray(value)) {
+    if (value && typeof value === "object" && !Array.isArray(value)) {
       Object.assign(result, flattenTranslations(value, fullKey));
     } else {
       result[fullKey] = value;
@@ -76,11 +76,11 @@ function checkVariablePlaceholders(
   const variableRegex = /\{[^}]+\}/g;
 
   for (const [key, sourceValue] of Object.entries(sourceFlat)) {
-    if (typeof sourceValue !== 'string') continue;
+    if (typeof sourceValue !== "string") continue;
     if (!(key in translationFlat)) continue;
 
     const translationValue = translationFlat[key];
-    if (typeof translationValue !== 'string') continue;
+    if (typeof translationValue !== "string") continue;
 
     const sourceVars = sourceValue.match(variableRegex) || [];
     const translationVars = translationValue.match(variableRegex) || [];
@@ -88,13 +88,13 @@ function checkVariablePlaceholders(
     totalChecked++;
 
     // Check if all source variables exist in translation
-    const missingVars = sourceVars.filter(v => !translationVars.includes(v));
-    const extraVars = translationVars.filter(v => !sourceVars.includes(v));
+    const missingVars = sourceVars.filter((v) => !translationVars.includes(v));
+    const extraVars = translationVars.filter((v) => !sourceVars.includes(v));
 
     if (missingVars.length > 0) {
-      issues.push(`${key}: Missing variables: ${missingVars.join(', ')}`);
+      issues.push(`${key}: Missing variables: ${missingVars.join(", ")}`);
     } else if (extraVars.length > 0) {
-      warnings.push(`${key}: Extra variables: ${extraVars.join(', ')}`);
+      warnings.push(`${key}: Extra variables: ${extraVars.join(", ")}`);
       passedCount++; // Warning, not critical
     } else {
       passedCount++;
@@ -104,7 +104,7 @@ function checkVariablePlaceholders(
   const score = totalChecked > 0 ? Math.round((passedCount / totalChecked) * 100) : 100;
 
   return {
-    name: 'Variable Placeholders',
+    name: "Variable Placeholders",
     passed: issues.length === 0,
     score,
     issues,
@@ -126,11 +126,11 @@ function checkPunctuation(
   let totalChecked = 0;
 
   for (const [key, sourceValue] of Object.entries(sourceFlat)) {
-    if (typeof sourceValue !== 'string') continue;
+    if (typeof sourceValue !== "string") continue;
     if (!(key in translationFlat)) continue;
 
     const translationValue = translationFlat[key];
-    if (typeof translationValue !== 'string') continue;
+    if (typeof translationValue !== "string") continue;
 
     // Skip very short strings
     if (sourceValue.length < 3) continue;
@@ -141,7 +141,7 @@ function checkPunctuation(
     const translationPunc = translationValue.slice(-1);
 
     // Check if source ends with punctuation
-    const punctuationMarks = ['.', '!', '?', ':', ';', ','];
+    const punctuationMarks = [".", "!", "?", ":", ";", ","];
     const sourceHasPunc = punctuationMarks.includes(sourcePunc);
     const translationHasPunc = punctuationMarks.includes(translationPunc);
 
@@ -158,7 +158,7 @@ function checkPunctuation(
   const score = totalChecked > 0 ? Math.round((passedCount / totalChecked) * 100) : 100;
 
   return {
-    name: 'Punctuation',
+    name: "Punctuation",
     passed: true, // Warnings only
     score,
     issues,
@@ -183,12 +183,12 @@ function checkCapitalization(
   const titleCaseKeys = /\b(actions?|nav|buttons?|labels?|headings?|tabs?)\b/i;
 
   for (const [key, sourceValue] of Object.entries(sourceFlat)) {
-    if (typeof sourceValue !== 'string') continue;
+    if (typeof sourceValue !== "string") continue;
     if (!titleCaseKeys.test(key)) continue;
     if (!(key in translationFlat)) continue;
 
     const translationValue = translationFlat[key];
-    if (typeof translationValue !== 'string') continue;
+    if (typeof translationValue !== "string") continue;
 
     totalChecked++;
 
@@ -211,7 +211,7 @@ function checkCapitalization(
   const score = totalChecked > 0 ? Math.round((passedCount / totalChecked) * 100) : 100;
 
   return {
-    name: 'Capitalization',
+    name: "Capitalization",
     passed: true, // Warnings only
     score,
     issues,
@@ -235,11 +235,11 @@ function checkHTMLTags(
   const htmlTagRegex = /<\/?[a-z][^>]*>/gi;
 
   for (const [key, sourceValue] of Object.entries(sourceFlat)) {
-    if (typeof sourceValue !== 'string') continue;
+    if (typeof sourceValue !== "string") continue;
     if (!(key in translationFlat)) continue;
 
     const translationValue = translationFlat[key];
-    if (typeof translationValue !== 'string') continue;
+    if (typeof translationValue !== "string") continue;
 
     const sourceTags = (sourceValue.match(htmlTagRegex) || []).sort();
     const translationTags = (translationValue.match(htmlTagRegex) || []).sort();
@@ -251,7 +251,7 @@ function checkHTMLTags(
     // Check if tags match exactly
     if (JSON.stringify(sourceTags) !== JSON.stringify(translationTags)) {
       issues.push(
-        `${key}: HTML tags mismatch. Source: [${sourceTags.join(', ')}], Translation: [${translationTags.join(', ')}]`
+        `${key}: HTML tags mismatch. Source: [${sourceTags.join(", ")}], Translation: [${translationTags.join(", ")}]`
       );
     } else {
       passedCount++;
@@ -261,7 +261,7 @@ function checkHTMLTags(
   const score = totalChecked > 0 ? Math.round((passedCount / totalChecked) * 100) : 100;
 
   return {
-    name: 'HTML Tags',
+    name: "HTML Tags",
     passed: issues.length === 0,
     score,
     issues,
@@ -281,13 +281,13 @@ function checkNumberDateFormat(translationFlat: FlatTranslations, locale: string
 
   // Patterns that indicate hardcoded formats
   const hardcodedPatterns = [
-    { pattern: /\$\d+/, name: 'USD dollar sign' },
-    { pattern: /\d{1,2}\/\d{1,2}\/\d{2,4}/, name: 'MM/DD/YYYY date format' },
-    { pattern: /USD/, name: 'USD currency code' },
+    { pattern: /\$\d+/, name: "USD dollar sign" },
+    { pattern: /\d{1,2}\/\d{1,2}\/\d{2,4}/, name: "MM/DD/YYYY date format" },
+    { pattern: /USD/, name: "USD currency code" },
   ];
 
   for (const [key, value] of Object.entries(translationFlat)) {
-    if (typeof value !== 'string') continue;
+    if (typeof value !== "string") continue;
 
     for (const { pattern, name } of hardcodedPatterns) {
       if (pattern.test(value)) {
@@ -302,7 +302,7 @@ function checkNumberDateFormat(translationFlat: FlatTranslations, locale: string
   const score = 100; // Format warnings don't affect score heavily
 
   return {
-    name: 'Number/Date Format',
+    name: "Number/Date Format",
     passed: true,
     score,
     issues,
@@ -337,7 +337,7 @@ function checkTerminology(
 
   if (glossaryPath && fs.existsSync(glossaryPath)) {
     try {
-      glossary = JSON.parse(fs.readFileSync(glossaryPath, 'utf-8'));
+      glossary = JSON.parse(fs.readFileSync(glossaryPath, "utf-8"));
     } catch (error) {
       warnings.push(`Failed to load glossary: ${glossaryPath}`);
     }
@@ -346,17 +346,17 @@ function checkTerminology(
   if (Object.keys(glossary).length === 0) {
     // No glossary available, skip check
     return {
-      name: 'Terminology',
+      name: "Terminology",
       passed: true,
       score: 100,
       issues,
-      warnings: ['No glossary available for validation'],
+      warnings: ["No glossary available for validation"],
     };
   }
 
   // Check if terminology matches glossary
   for (const [key, value] of Object.entries(translationFlat)) {
-    if (typeof value !== 'string') continue;
+    if (typeof value !== "string") continue;
 
     const lowerValue = value.toLowerCase();
 
@@ -364,7 +364,7 @@ function checkTerminology(
       if (key.toLowerCase().includes(term.toLowerCase())) {
         totalChecked++;
 
-        const hasAcceptedTranslation = acceptedTranslations.some(translation =>
+        const hasAcceptedTranslation = acceptedTranslations.some((translation) =>
           lowerValue.includes(translation.toLowerCase())
         );
 
@@ -372,7 +372,7 @@ function checkTerminology(
           passedCount++;
         } else {
           warnings.push(
-            `${key}: Term '${term}' should use one of: ${acceptedTranslations.join(', ')}`
+            `${key}: Term '${term}' should use one of: ${acceptedTranslations.join(", ")}`
           );
         }
       }
@@ -382,7 +382,7 @@ function checkTerminology(
   const score = totalChecked > 0 ? Math.round((passedCount / totalChecked) * 100) : 100;
 
   return {
-    name: 'Terminology',
+    name: "Terminology",
     passed: true, // Warnings only
     score,
     issues,
@@ -402,16 +402,16 @@ function checkCulturalAppropriateness(translationFlat: FlatTranslations): Qualit
 
   // US-specific references to flag
   const usSpecificPatterns = [
-    { pattern: /\bSSN\b/i, name: 'Social Security Number (US-specific)' },
-    { pattern: /\b401[kK]\b/, name: '401k retirement plan (US-specific)' },
-    { pattern: /\bIRS\b/, name: 'IRS (US tax authority)' },
-    { pattern: /\bzipcode\b/i, name: 'Zipcode (US-specific, use postal code)' },
-    { pattern: /\bThanksgiving\b/i, name: 'Thanksgiving (US holiday)' },
-    { pattern: /\bSuper Bowl\b/i, name: 'Super Bowl (US-specific)' },
+    { pattern: /\bSSN\b/i, name: "Social Security Number (US-specific)" },
+    { pattern: /\b401[kK]\b/, name: "401k retirement plan (US-specific)" },
+    { pattern: /\bIRS\b/, name: "IRS (US tax authority)" },
+    { pattern: /\bzipcode\b/i, name: "Zipcode (US-specific, use postal code)" },
+    { pattern: /\bThanksgiving\b/i, name: "Thanksgiving (US holiday)" },
+    { pattern: /\bSuper Bowl\b/i, name: "Super Bowl (US-specific)" },
   ];
 
   for (const [key, value] of Object.entries(translationFlat)) {
-    if (typeof value !== 'string') continue;
+    if (typeof value !== "string") continue;
 
     for (const { pattern, name } of usSpecificPatterns) {
       if (pattern.test(value)) {
@@ -425,7 +425,7 @@ function checkCulturalAppropriateness(translationFlat: FlatTranslations): Qualit
   const score = 100;
 
   return {
-    name: 'Cultural Appropriateness',
+    name: "Cultural Appropriateness",
     passed: true,
     score,
     issues,
@@ -460,13 +460,13 @@ export function validateQuality(
 
   // Calculate overall score (weighted average)
   const weights = {
-    'Variable Placeholders': 0.25, // Critical
-    'HTML Tags': 0.20, // Critical
-    'Punctuation': 0.10,
-    'Capitalization': 0.10,
-    'Number/Date Format': 0.15,
-    'Terminology': 0.15,
-    'Cultural Appropriateness': 0.05,
+    "Variable Placeholders": 0.25, // Critical
+    "HTML Tags": 0.2, // Critical
+    Punctuation: 0.1,
+    Capitalization: 0.1,
+    "Number/Date Format": 0.15,
+    Terminology: 0.15,
+    "Cultural Appropriateness": 0.05,
   };
 
   let weightedScore = 0;
@@ -481,7 +481,7 @@ export function validateQuality(
   const totalIssues = checks.reduce((sum, check) => sum + check.issues.length, 0);
   const totalWarnings = checks.reduce((sum, check) => sum + check.warnings.length, 0);
   const criticalIssues = checks
-    .filter(c => ['Variable Placeholders', 'HTML Tags'].includes(c.name))
+    .filter((c) => ["Variable Placeholders", "HTML Tags"].includes(c.name))
     .reduce((sum, check) => sum + check.issues.length, 0);
 
   return {
@@ -502,13 +502,13 @@ export function validateQuality(
 export function formatQualityReport(report: QualityReport, verbose: boolean = false): string {
   const lines: string[] = [];
 
-  lines.push(`\n${'='.repeat(60)}`);
+  lines.push(`\n${"=".repeat(60)}`);
   lines.push(`Quality Report: ${report.locale}`);
   lines.push(`Overall Score: ${report.overallScore}/100`);
-  lines.push(`${'='.repeat(60)}\n`);
+  lines.push(`${"=".repeat(60)}\n`);
 
   for (const check of report.checks) {
-    const icon = check.passed ? '✅' : '❌';
+    const icon = check.passed ? "✅" : "❌";
     lines.push(`${icon} ${check.name}: ${check.score}/100`);
 
     if (verbose || check.issues.length > 0) {
@@ -532,5 +532,5 @@ export function formatQualityReport(report: QualityReport, verbose: boolean = fa
   lines.push(`   Total Warnings: ${report.summary.totalWarnings}`);
   lines.push(`   Critical Issues: ${report.summary.criticalIssues}`);
 
-  return lines.join('\n');
+  return lines.join("\n");
 }

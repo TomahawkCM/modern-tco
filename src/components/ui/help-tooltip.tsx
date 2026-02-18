@@ -9,14 +9,19 @@ interface HelpTooltipProps {
   children?: React.ReactNode;
 }
 
-export const HelpTooltip = React.memo(function HelpTooltip({ content, children }: HelpTooltipProps) {
+export const HelpTooltip = React.memo(function HelpTooltip({
+  content,
+  children,
+}: HelpTooltipProps) {
   return (
     <div className="group relative inline-flex items-center">
-      {children || <HelpCircle className="h-4 w-4 text-muted-foreground hover:text-muted-foreground cursor-help" />}
-      <div className="invisible group-hover:visible absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 z-50">
-        <div className="bg-card text-foreground text-sm rounded-lg py-2 px-3 max-w-xs whitespace-normal shadow-lg border border-gray-700">
+      {children || (
+        <HelpCircle className="h-4 w-4 cursor-help text-muted-foreground hover:text-muted-foreground" />
+      )}
+      <div className="invisible absolute bottom-full left-1/2 z-50 mb-2 -translate-x-1/2 transform group-hover:visible">
+        <div className="max-w-xs whitespace-normal rounded-lg border border-gray-700 bg-card px-3 py-2 text-sm text-foreground shadow-lg">
           {content}
-          <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-800"></div>
+          <div className="absolute left-1/2 top-full -translate-x-1/2 transform border-4 border-transparent border-t-gray-800"></div>
         </div>
       </div>
     </div>
@@ -48,9 +53,7 @@ export function ExamTooltip({ type, context, side = "top", children }: ExamToolt
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
-          <div className="inline-flex items-center">
-            {children ?? getIcon()}
-          </div>
+          <div className="inline-flex items-center">{children ?? getIcon()}</div>
         </TooltipTrigger>
         <TooltipContent side={side}>
           <p className="max-w-sm">{context}</p>

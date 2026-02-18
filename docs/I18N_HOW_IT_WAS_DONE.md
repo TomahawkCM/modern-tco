@@ -12,6 +12,7 @@
 ## 1) Executive Summary
 
 **What Problem It Solves:**
+
 - ✅ **Global UI Accessibility** - App usable in 114 countries with native language support
 - ✅ **Offline-First** - All translations work without internet after initial load
 - ✅ **Developer Productivity** - Automated translation pipeline (10-20x faster than manual)
@@ -19,6 +20,7 @@
 - ✅ **Zero Runtime Overhead** - Pre-generated JSON files, no ML inference on device
 
 **What "Offline Translation" Means Here:**
+
 - **NOT**: On-device ML translation (e.g., Google Translate offline mode)
 - **ACTUALLY**: Pre-generated locale JSON files bundled with app
   - Translations created at build-time via OpenAI GPT-4o-mini API
@@ -27,6 +29,7 @@
   - Works 100% offline once locale file is loaded
 
 **Key Metrics:**
+
 - **114 Locales Supported** (72 base languages + 31 regional variants + 11 English variants)
 - **2.3MB Total Bundle Size** (all locales combined, lazy-loaded)
 - **~$0.375 Cost** for full translation regeneration (all 114 locales)
@@ -180,20 +183,26 @@ scripts/                          │
 ```typescript
 // 960 lines - Complete locale registry
 export const SUPPORTED_LOCALES: SupportedLocale[] = [
-  'af-ZA', 'am-ET', 'ar-AE', 'ar-SA', // ... 114 total
+  "af-ZA",
+  "am-ET",
+  "ar-AE",
+  "ar-SA", // ... 114 total
 ];
 
-export const LOCALE_METADATA: Record<SupportedLocale, {
-  label: string;         // Display name: "Spanish (Mexico)"
-  dir: 'ltr' | 'rtl';   // Text direction
-  currency: string;      // ISO code: "MXN"
-  numberingSystem: string; // "latn" or "arab"
-}> = {
-  'es-MX': {
-    label: 'Spanish (Mexico)',
-    dir: 'ltr',
-    currency: 'MXN',
-    numberingSystem: 'latn',
+export const LOCALE_METADATA: Record<
+  SupportedLocale,
+  {
+    label: string; // Display name: "Spanish (Mexico)"
+    dir: "ltr" | "rtl"; // Text direction
+    currency: string; // ISO code: "MXN"
+    numberingSystem: string; // "latn" or "arab"
+  }
+> = {
+  "es-MX": {
+    label: "Spanish (Mexico)",
+    dir: "ltr",
+    currency: "MXN",
+    numberingSystem: "latn",
   },
   // ... 113 more
 };
@@ -216,12 +225,14 @@ export function getBrowserLocale(): SupportedLocale {
 ```
 
 **WHY These Choices**:
+
 - **114 Locales**: Covers 95% of global internet users (top 72 languages + regional variants)
 - **`dir` Attribute**: Enables RTL support for 5 locales (ar-AE, ar-SA, fa-IR, he-IL, ur-PK)
 - **Currency Metadata**: Pre-maps locale → currency for formatCurrency() utility
 - **TypeScript Union Type**: Compile-time safety prevents typos in locale strings
 
 **Conventions**:
+
 - Locale codes: BCP 47 format (`language-REGION`, e.g., `es-MX`)
 - Regional variants inherit base language (e.g., `es-MX` adapts from `es-ES`)
 - English variants are direct copies (en-GB, en-AU, etc. = en-US translations)
@@ -233,6 +244,7 @@ export function getBrowserLocale(): SupportedLocale {
 **Purpose**: Pre-generated translation files (114 files, 2.3MB total)
 
 **WHY This Structure**:
+
 - **Nested JSON**: Mirrors component hierarchy for semantic organization
 - **~17KB Per File**: Sweet spot for lazy loading (not too big, not too granular)
 - **Structure Preservation**: Keys stay in English → enables type-safe t() calls
@@ -268,6 +280,7 @@ export function getBrowserLocale(): SupportedLocale {
 ```
 
 **Size Management**:
+
 ```bash
 # Measured sizes
 $ du -sh src/i18n/messages/
@@ -278,11 +291,13 @@ $ ls -lh src/i18n/messages/es-ES.json
 ```
 
 **WHY 114 Separate Files**:
+
 - **Lazy Loading**: Only load user's locale (17KB) not all locales (2.3MB)
 - **Code Splitting**: Next.js creates 114 separate chunks (better caching)
 - **Offline**: Each locale cached independently by service worker
 
 **Trade-offs**:
+
 - ✅ PRO: Minimal initial bundle size
 - ✅ PRO: Fast locale switching (pre-cached locales)
 - ❌ CON: 114 HTTP requests if pre-caching all locales
@@ -326,15 +341,18 @@ async function main() {
 **WHY These Choices**:
 
 **1. Pre-Flight Cost Estimation**
+
 ```typescript
 const costEst = estimateCost(numBaseTranslations, numAdaptations);
 // Uses: $0.15 per 1M input tokens, $0.60 per 1M output tokens
 ```
+
 - Prevents surprise bills (shows cost before executing)
 - User can abort with Ctrl+C if too expensive
 - Estimates within 10-15% accuracy
 
 **2. Locale Categorization**
+
 ```typescript
 // Base translations (72 locales): Full context, more expensive
 // es-ES, fr-FR, de-DE, ja-JP, ko-KR, etc.
@@ -345,21 +363,25 @@ const costEst = estimateCost(numBaseTranslations, numAdaptations);
 // English variants (11 locales): Copy en-US.json, instant
 // en-GB, en-AU, en-CA, etc.
 ```
+
 - **WHY**: Regional variants differ minimally (10-20% vocabulary)
 - **COST SAVINGS**: 40% cheaper for adapted locales vs base
 - **QUALITY**: Adaptation prompts preserve base accuracy + add regional flavor
 
 **3. Concurrency Control**
+
 ```typescript
 class RateLimiter {
-  constructor(maxConcurrent: number = 5) // Default: 5 parallel
+  constructor(maxConcurrent: number = 5); // Default: 5 parallel
 }
 ```
+
 - **WHY 5**: OpenAI TPM limits (tokens per minute) for GPT-4o-mini tier
 - **Configurable**: `--concurrency 10` for premium accounts
 - **Rate Limit Handling**: Automatic retry with exponential backoff
 
 **4. Caching Layer**
+
 ```typescript
 // scripts/.translation-cache.json
 {
@@ -369,11 +391,13 @@ class RateLimiter {
   }
 }
 ```
+
 - **WHY**: Avoid re-translating unchanged content (saves $$$)
 - **Invalidation**: sourceHash mismatch → cache miss
 - **Size**: ~100KB for 114 locales (compressed JSON)
 
 **CLI Options**:
+
 ```bash
 npm run translate:messages                    # Full run (resume from cache)
 npm run translate:messages -- --dry-run        # Preview without executing
@@ -384,6 +408,7 @@ npm run translate:messages -- --concurrency 10 # Higher parallelism
 ```
 
 **Output Example**:
+
 ```
 🌍 Translation Automation Script
 
@@ -425,7 +450,7 @@ npm run translate:messages -- --concurrency 10 # Higher parallelism
 
 ```typescript
 // Detect changed keys via git diff
-const changes = await detectChangedKeys(SOURCE_FILE, 'HEAD');
+const changes = await detectChangedKeys(SOURCE_FILE, "HEAD");
 // Returns: { added: [], modified: [], removed: [], unchanged: [] }
 
 // OR for pre-commit hooks:
@@ -434,6 +459,7 @@ const changes = await detectStagedChanges(SOURCE_FILE);
 ```
 
 **WHY Git Integration**:
+
 - **Precision**: Only translate what actually changed
 - **Safety**: Detects added, modified, AND removed keys
 - **CI/CD Ready**: Works in GitHub Actions (staged changes mode)
@@ -447,7 +473,7 @@ async function detectChangedKeys(filePath: string, commit: string) {
   const currentKeys = flattenKeys(currentObj); // { "nav.dashboard": "..." }
 
   // 2. Get previous version from git
-  const { stdout } = await execFile('git', ['show', `${commit}:${filePath}`]);
+  const { stdout } = await execFile("git", ["show", `${commit}:${filePath}`]);
   const previousObj = JSON.parse(stdout);
   const previousKeys = flattenKeys(previousObj);
 
@@ -475,6 +501,7 @@ async function detectChangedKeys(filePath: string, commit: string) {
 ```
 
 **WHY MD5 Hashing**:
+
 - Fast comparison (O(1) hash lookup vs deep object comparison)
 - Detects ANY change (even whitespace, punctuation)
 - Prevents false negatives (semantic equivalent but different string)
@@ -501,11 +528,13 @@ fs.writeFileSync(`messages/${locale}.json`, JSON.stringify(merged, null, 2));
 ```
 
 **WHY Deep Merge**:
+
 - Preserves human edits to translations (doesn't overwrite entire file)
 - Only updates changed keys (safer, less merge conflicts in git)
 - Maintains formatting (2-space indentation, key order)
 
 **Performance**:
+
 ```
 Full Translation:
   - 240 keys × 114 locales = 27,360 API calls
@@ -520,6 +549,7 @@ Incremental (5 changed keys):
 ```
 
 **CLI Options**:
+
 ```bash
 npm run translate:incremental                   # Changed keys since last commit
 npm run translate:incremental -- --staged       # Staged changes (for git hooks)
@@ -528,6 +558,7 @@ npm run translate:incremental -- --dry-run      # Preview without executing
 ```
 
 **Output Example**:
+
 ```
 ⚡ Incremental Translation Script
 
@@ -570,7 +601,7 @@ export class OpenAIAPIClient {
   constructor(concurrency: number = 5) {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) {
-      throw new Error('OPENAI_API_KEY environment variable is not set.');
+      throw new Error("OPENAI_API_KEY environment variable is not set.");
     }
     this.client = new OpenAI({ apiKey });
     this.rateLimiter = new RateLimiter(concurrency);
@@ -581,6 +612,7 @@ export class OpenAIAPIClient {
 **Key Features**:
 
 **1. Rate Limiting**
+
 ```typescript
 class RateLimiter {
   private queue: Promise<any>[] = [];
@@ -594,37 +626,38 @@ class RateLimiter {
 
     // Execute and track
     const promise = fn().finally(() => {
-      this.queue = this.queue.filter(p => p !== promise);
+      this.queue = this.queue.filter((p) => p !== promise);
     });
     this.queue.push(promise);
     return promise;
   }
 }
 ```
+
 - **WHY**: Prevents 429 rate limit errors from OpenAI
 - **Algorithm**: Promise.race() waits for ANY promise to complete
 - **Fairness**: FIFO queue (oldest promise completes first)
 
 **2. Retry Logic**
+
 ```typescript
 async function callAPI(locale, prompt, attempt = 1): Promise<object> {
   try {
     const response = await this.client.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: "gpt-4o-mini",
       max_tokens: 16000,
       temperature: 0.3, // Low temp for consistency
-      response_format: { type: 'json_object' },
+      response_format: { type: "json_object" },
       messages: [
-        { role: 'system', content: 'You are a professional translator...' },
-        { role: 'user', content: prompt }
+        { role: "system", content: "You are a professional translator..." },
+        { role: "user", content: prompt },
       ],
     });
     return JSON.parse(response.choices[0].message.content);
-
   } catch (error) {
     if (this.isRetryable(error) && attempt < MAX_RETRIES) {
       const delay = RETRY_DELAYS[attempt - 1]; // [2s, 4s, 8s]
-      console.warn(`⚠️  Retrying in ${delay/1000}s (attempt ${attempt+1}/3)`);
+      console.warn(`⚠️  Retrying in ${delay / 1000}s (attempt ${attempt + 1}/3)`);
       await this.sleep(delay);
       return this.callAPI(locale, prompt, attempt + 1);
     }
@@ -632,11 +665,13 @@ async function callAPI(locale, prompt, attempt = 1): Promise<object> {
   }
 }
 ```
+
 - **WHY Exponential Backoff**: Gives OpenAI time to recover from rate limits
 - **WHY 3 Retries**: Balances reliability vs execution time
 - **Retryable Errors**: 429 (rate limit), 5xx (server error), network timeouts
 
 **3. Cost Tracking**
+
 ```typescript
 getCostEstimate() {
   const INPUT_COST_PER_1M = 0.15;  // GPT-4o-mini pricing
@@ -652,12 +687,14 @@ getCostEstimate() {
   };
 }
 ```
+
 - **WHY Track Tokens**: Real-time cost monitoring (prevents budget overruns)
 - **Pricing**: GPT-4o-mini ($0.15 input, $0.60 output per 1M tokens)
 - **Display**: Shows cost estimate BEFORE execution, actual cost AFTER
 
 **4. JSON Extraction**
-```typescript
+
+````typescript
 private extractJSON(text: string): string {
   // Handle markdown code blocks
   const codeBlockMatch = text.match(/```(?:json)?\s*([\s\S]*?)```/);
@@ -669,8 +706,9 @@ private extractJSON(text: string): string {
   const jsonMatch = text.match(/\{[\s\S]*\}/);
   return jsonMatch ? jsonMatch[0] : text.trim();
 }
-```
-- **WHY**: GPT-4o sometimes returns `````json {...}````` despite `response_format: json_object`
+````
+
+- **WHY**: GPT-4o sometimes returns `json {...}` despite `response_format: json_object`
 - **Robustness**: Handles both formats (code block + bare JSON)
 - **Fallback**: Returns original text if no match (will fail JSON.parse)
 
@@ -705,7 +743,7 @@ Translation Requirements:
 3. Keep translations concise and suitable for UI display (short labels/buttons)
 4. Use standard financial terminology for your locale
 5. Maintain consistent terminology throughout
-${metadata.dir === 'rtl' ? '6. For RTL languages: Only translate text values, keep JSON structure LTR' : ''}
+${metadata.dir === "rtl" ? "6. For RTL languages: Only translate text values, keep JSON structure LTR" : ""}
 
 Source JSON (English):
 ${JSON.stringify(sourceJson, null, 2)}
@@ -723,41 +761,51 @@ Translated JSON:`;
 **WHY These Prompt Elements**:
 
 **1. Context-Rich System Prompt**
+
 ```
 "You are a professional translator specializing in software UI localization for financial applications."
 ```
+
 - Sets expertise domain → better terminology choices
 - "UI localization" → prefers short, concise translations
 - "financial applications" → activates finance vocabulary
 
 **2. Explicit Tone Guidance**
+
 ```
 "Tone: Professional but friendly and approachable"
 ```
+
 - Prevents overly formal translations (e.g., Spanish "usted" vs "tú")
 - Balances authority with accessibility
 - Consistent across all 114 locales
 
 **3. JSON Structure Preservation**
+
 ```
 "Preserve the EXACT JSON structure - all keys must remain in English"
 ```
+
 - **WHY**: TypeScript type safety requires stable keys
 - **Example**: `t('nav.dashboard')` → compile error if key changes
 - **Enforcement**: Validation script checks key equality post-translation
 
 **4. Currency Context**
+
 ```
 "Currency Standard: ${metadata.currency}"
 ```
+
 - Helps with currency-specific terms (e.g., "cent" vs "centavo" vs "paise")
 - Influences number formatting examples
 - Locale-aware financial vocabulary
 
 **5. RTL Special Instructions**
+
 ```
 "For RTL languages: Only translate text values, keep JSON structure LTR"
 ```
+
 - **WHY**: JSON is always LTR (structural characters: `{}[]`)
 - Prevents RTL text direction from corrupting JSON syntax
 - Critical for ar-SA, he-IL, fa-IR, ur-PK
@@ -795,6 +843,7 @@ Adapted JSON:`;
 ```
 
 **WHY Lighter Prompt for Adaptations**:
+
 - **Cost**: 40% fewer tokens vs base translation prompt
 - **Quality**: Base translation provides context → less instruction needed
 - **Speed**: Simpler prompt → faster API response
@@ -803,7 +852,7 @@ Adapted JSON:`;
 
 ```typescript
 // Spanish variants
-if (locale === 'es-MX' && baseLocale === 'es-ES') {
+if (locale === "es-MX" && baseLocale === "es-ES") {
   return `
 Spanish (Mexico) vs Spanish (Spain) Differences:
 - Vocabulary: "computadora" (MX) vs "ordenador" (ES)
@@ -814,7 +863,7 @@ Spanish (Mexico) vs Spanish (Spain) Differences:
 }
 
 // Portuguese variants
-if (locale === 'pt-BR' && baseLocale === 'pt-PT') {
+if (locale === "pt-BR" && baseLocale === "pt-PT") {
   return `
 Portuguese (Brazil) vs Portuguese (Portugal) Differences:
 - Spelling: "trem" (BR) vs "comboio" (PT)
@@ -858,12 +907,12 @@ export function validate(
   }
 
   // 2. RTL validation (for ar-SA, he-IL, fa-IR, ur-PK)
-  if (LOCALE_METADATA[locale].dir === 'rtl') {
+  if (LOCALE_METADATA[locale].dir === "rtl") {
     const hasRTLChars = /[\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC]/.test(
       JSON.stringify(translation)
     );
     if (!hasRTLChars) {
-      warnings.push('No RTL characters detected in RTL locale');
+      warnings.push("No RTL characters detected in RTL locale");
     }
   }
 
@@ -880,7 +929,7 @@ export function validate(
   // 4. Content quality (no untranslated English)
   const englishPattern = /\b(the|and|or|of|to|in|for|with|on|at)\b/i;
   for (const [key, value] of Object.entries(translationKeys)) {
-    if (englishPattern.test(value) && locale !== 'en-US') {
+    if (englishPattern.test(value) && locale !== "en-US") {
       warnings.push(`Possible untranslated English in key "${key}": "${value}"`);
     }
   }
@@ -896,26 +945,31 @@ export function validate(
 **WHY These Validations**:
 
 **1. Structure Check**
+
 - **Prevents**: Missing keys → runtime errors (`t('nav.dashboard')` returns undefined)
 - **Catches**: Typos in GPT-4o output (rare but happens)
 - **Enforcement**: Script exits with error if keys don't match
 
 **2. RTL Character Check**
+
 - **Prevents**: English text in Arabic/Hebrew locales
 - **Catches**: GPT-4o returning English when it should return RTL script
 - **WHY Warning (not error)**: Some UI text legitimately stays LTR (URLs, codes)
 
 **3. Length Validation**
+
 - **Prevents**: Truncated/doubled translations
 - **Threshold**: 3x longer or 0.2x shorter than source → suspicious
 - **Examples**: "Save" → "Sauvegarder et continuer" (too long, likely hallucination)
 
 **4. English Pattern Matching**
+
 - **Prevents**: Partial translations ("Save the document" → "Guardar the document")
 - **Limitation**: False positives for loanwords (e.g., "marketing" in Spanish)
 - **WHY Regex**: Common English articles/prepositions rarely appear in non-English
 
 **Validation Report Example**:
+
 ```
 ❌ Validation failed for es-MX:
    Errors:
@@ -939,7 +993,7 @@ export function validate(
 on:
   pull_request:
     paths:
-      - 'src/i18n/messages/en-US.json'
+      - "src/i18n/messages/en-US.json"
     types:
       - opened
       - synchronize
@@ -985,16 +1039,19 @@ concurrency:
 **WHY This Design**:
 
 **1. Graceful Degradation**
+
 - If `OPENAI_API_KEY` not set → workflow skips (doesn't fail)
 - Leaves PR comment explaining how to set API key
 - **WHY**: Allows open-source contributors without OpenAI account
 
 **2. Commit Back to PR**
+
 - Bot commits translations directly to PR branch
 - **WHY**: Developer sees final state (English + all translations)
 - **Benefit**: Catches translation errors before merge
 
 **3. PR Comment**
+
 ```yaml
 - name: Comment on PR
   uses: actions/github-script@v7
@@ -1019,11 +1076,13 @@ concurrency:
 - **Transparency**: Links to workflow run for debugging
 
 **Security Considerations**:
+
 ```yaml
 permissions:
-  contents: write  # Allows git push
-  pull-requests: write  # Allows PR comments
+  contents: write # Allows git push
+  pull-requests: write # Allows PR comments
 ```
+
 - **WHY Minimal Permissions**: Principle of least privilege
 - **NO `repo` scope**: Can't modify repo settings or other branches
 - **Audit Trail**: All commits signed by `github-actions[bot]`
@@ -1038,27 +1097,24 @@ permissions:
 **Cache Strategy**:
 
 ```javascript
-const CACHE_NAME = 'budget-app-v3-dev';
-const RUNTIME_CACHE = 'budget-app-runtime-v3-dev';
+const CACHE_NAME = "budget-app-v3-dev";
+const RUNTIME_CACHE = "budget-app-runtime-v3-dev";
 
 const APP_SHELL = [
-  '/budget-app',
-  '/budget-app/transactions',
-  '/budget-app/budgets',
+  "/budget-app",
+  "/budget-app/transactions",
+  "/budget-app/budgets",
   // ... all routes
 ];
 
-const STATIC_ASSETS = [
-  '/manifest.json',
-  '/icons/budget-app-192.png',
-  '/icons/budget-app-512.png',
-];
+const STATIC_ASSETS = ["/manifest.json", "/icons/budget-app-192.png", "/icons/budget-app-512.png"];
 
 // Install: Cache app shell immediately
-self.addEventListener('install', (event) => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll([...APP_SHELL, ...STATIC_ASSETS]))
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => cache.addAll([...APP_SHELL, ...STATIC_ASSETS]))
       .then(() => self.skipWaiting())
   );
 });
@@ -1067,17 +1123,21 @@ self.addEventListener('install', (event) => {
 **WHY This Design**:
 
 **1. App Shell Pattern**
+
 - Pre-cache all routes (instant navigation)
 - **Size**: ~50KB (HTML templates only, no data)
 - **Update**: New service worker invalidates old cache
 
 **2. Runtime Caching for Locales**
+
 ```javascript
 function shouldCacheFirst(url) {
-  return url.pathname.startsWith('/budget-app') ||
-         url.pathname.startsWith('/_next/static/') ||
-         url.pathname.includes('/chunks/src_i18n_messages_') ||  // Locale chunks
-         url.pathname.endsWith('.json');  // All JSON files
+  return (
+    url.pathname.startsWith("/budget-app") ||
+    url.pathname.startsWith("/_next/static/") ||
+    url.pathname.includes("/chunks/src_i18n_messages_") || // Locale chunks
+    url.pathname.endsWith(".json")
+  ); // All JSON files
 }
 
 async function cacheFirstStrategy(request) {
@@ -1098,6 +1158,7 @@ async function cacheFirstStrategy(request) {
 - **Size**: 17KB per locale (first locale = 17KB download, subsequent = instant)
 
 **3. Offline Fallback**
+
 ```javascript
 catch (error) {
   if (request.mode === 'navigate') {
@@ -1109,10 +1170,12 @@ catch (error) {
   throw error;
 }
 ```
+
 - **WHY**: Graceful degradation when offline and resource not cached
 - **UX**: Shows friendly "You're offline" page instead of browser error
 
 **Cache Lifecycle**:
+
 ```
 1. First Visit (online):
    - Service worker installs
@@ -1132,6 +1195,7 @@ catch (error) {
 ```
 
 **WHY Not Pre-Cache All Locales**:
+
 - ❌ Size: 114 × 17KB = 1.9MB (too large for install step)
 - ❌ Network: 114 HTTP requests (slow on mobile)
 - ✅ Better: Lazy load + cache on demand
@@ -1190,35 +1254,43 @@ export default function ClientI18nProvider({ children }) {
 **WHY These Choices**:
 
 **1. Dynamic Import**
+
 ```typescript
 const loadedMessages = (await import(`../../i18n/messages/${userLocale}.json`)).default;
 ```
+
 - **WHY**: Webpack creates separate chunk per locale (code splitting)
 - **Benefit**: Only 17KB downloaded (not 2.3MB for all locales)
 - **Build Output**: `_next/static/chunks/src_i18n_messages_es-ES_abc123.js`
 
 **2. Initial State = English**
+
 ```typescript
 const [messages, setMessages] = useState(enMessages);
 ```
+
 - **WHY**: Prevents blank screen during async load
 - **UX**: Shows English immediately → swaps to user locale (~100ms)
 - **SSR Hydration**: Matches server render (always English on server)
 
 **3. Event Listener for Changes**
+
 ```typescript
-window.addEventListener('localePreferencesChanged', loadMessages);
+window.addEventListener("localePreferencesChanged", loadMessages);
 ```
+
 - **WHY**: Decouples LanguageSelector from ClientI18nProvider
 - **Pattern**: CustomEvent pub/sub (no prop drilling)
 - **Benefit**: Any component can trigger locale reload
 
 **4. Fallback to English**
+
 ```typescript
 catch (error) {
   setMessages(enMessages);
 }
 ```
+
 - **WHY**: If locale file missing/corrupt → app still works
 - **Graceful Degradation**: English better than crash
 - **Logging**: Error logged to console for debugging
@@ -1235,11 +1307,11 @@ catch (error) {
 ```typescript
 export interface LocalePreferences {
   locale: SupportedLocale;
-  region?: string;          // Optional: User's region (for analytics)
-  currency?: CurrencyCode;  // Optional: Preferred currency
-  weekStart?: 0 | 1;        // Optional: 0 = Sunday, 1 = Monday
-  timezone?: string;        // Optional: IANA timezone
-  updatedAt?: number;       // Timestamp for conflict resolution
+  region?: string; // Optional: User's region (for analytics)
+  currency?: CurrencyCode; // Optional: Preferred currency
+  weekStart?: 0 | 1; // Optional: 0 = Sunday, 1 = Monday
+  timezone?: string; // Optional: IANA timezone
+  updatedAt?: number; // Timestamp for conflict resolution
 }
 ```
 
@@ -1248,7 +1320,7 @@ export interface LocalePreferences {
 ```typescript
 export function getLocalePreferences(): LocalePreferences {
   // 1. Try localStorage first (instant)
-  const stored = localStorage.getItem('budget-locale-preferences');
+  const stored = localStorage.getItem("budget-locale-preferences");
   if (stored) {
     return JSON.parse(stored);
   }
@@ -1263,10 +1335,10 @@ export function setLocalePreferences(prefs: Partial<LocalePreferences>): void {
   const updated = { ...current, ...prefs, updatedAt: Date.now() };
 
   // 1. Save to localStorage (immediate)
-  localStorage.setItem('budget-locale-preferences', JSON.stringify(updated));
+  localStorage.setItem("budget-locale-preferences", JSON.stringify(updated));
 
   // 2. Dispatch event (notify app of change)
-  window.dispatchEvent(new CustomEvent('localePreferencesChanged'));
+  window.dispatchEvent(new CustomEvent("localePreferencesChanged"));
 
   // 3. Debounced Supabase sync (after 1 second)
   debouncedSupabaseSync(updated);
@@ -1274,6 +1346,7 @@ export function setLocalePreferences(prefs: Partial<LocalePreferences>): void {
 ```
 
 **WHY Dual Storage**:
+
 - **localStorage**: Instant read/write (0ms latency)
 - **Supabase**: Cross-device sync (user changes locale on phone → desktop updates)
 - **Offline-First**: Works without Supabase (graceful degradation)
@@ -1297,8 +1370,8 @@ export async function initializeLocalePreferences(): Promise<void> {
 
   if (supabaseTime > localTime + 5000) {
     // Supabase is newer (by >5 seconds) → use it
-    localStorage.setItem('budget-locale-preferences', JSON.stringify(supabasePrefs));
-    window.dispatchEvent(new CustomEvent('localePreferencesChanged'));
+    localStorage.setItem("budget-locale-preferences", JSON.stringify(supabasePrefs));
+    window.dispatchEvent(new CustomEvent("localePreferencesChanged"));
   } else {
     // Local is newer → sync to Supabase
     await syncToSupabase(localPrefs);
@@ -1307,6 +1380,7 @@ export async function initializeLocalePreferences(): Promise<void> {
 ```
 
 **WHY 5-Second Window**:
+
 - Prevents race condition (two devices updating simultaneously)
 - **Scenario**: User changes locale on desktop → switches to phone within 5s → phone uses desktop value
 - **Trade-off**: May occasionally use stale preference (acceptable for UX)
@@ -1389,6 +1463,7 @@ cp .github/workflows/i18n-translation.yml → your-repo/.github/workflows/
 ### Step 4: Customize for Your App (1-2 hours)
 
 **1. Edit `src/i18n/messages/en-US.json`**
+
 ```json
 {
   "nav": {
@@ -1404,14 +1479,23 @@ cp .github/workflows/i18n-translation.yml → your-repo/.github/workflows/
 ```
 
 **2. Reduce Locale Count (Optional)**
+
 ```typescript
 // src/i18n/config.ts
 export const SUPPORTED_LOCALES = [
-  'en-US', 'es-MX', 'fr-FR', 'de-DE', 'ja-JP', 'ko-KR', 'zh-CN', 'pt-BR'
+  "en-US",
+  "es-MX",
+  "fr-FR",
+  "de-DE",
+  "ja-JP",
+  "ko-KR",
+  "zh-CN",
+  "pt-BR",
 ]; // Start with top 8 languages
 ```
 
 **3. Update Glossaries (If Needed)**
+
 ```bash
 cp src/i18n/glossaries/es-MX.json → your-repo/src/i18n/glossaries/
 # Edit glossary terms to match your domain
@@ -1525,6 +1609,7 @@ npm start
 ### Step 8: Set Up CI/CD (30 minutes)
 
 **1. Add GitHub Secret**:
+
 ```bash
 # Go to: https://github.com/YOUR-ORG/YOUR-REPO/settings/secrets/actions
 # Click "New repository secret"
@@ -1533,6 +1618,7 @@ npm start
 ```
 
 **2. Test Workflow**:
+
 ```bash
 # 1. Create a branch
 git checkout -b test-i18n
@@ -1557,6 +1643,7 @@ git push origin test-i18n
 ### Module Architecture
 
 **NPM Package Structure**:
+
 ```
 @your-org/i18n-automation/
 ├── package.json
@@ -1623,21 +1710,21 @@ export {
 
 ```typescript
 // User's app configuration
-import { createI18nConfig } from '@your-org/i18n-automation';
+import { createI18nConfig } from "@your-org/i18n-automation";
 
 const i18nConfig = createI18nConfig({
   // API Configuration
-  apiProvider: 'openai',  // or 'anthropic', 'google'
+  apiProvider: "openai", // or 'anthropic', 'google'
   apiKey: process.env.OPENAI_API_KEY,
-  model: 'gpt-4o-mini',
+  model: "gpt-4o-mini",
 
   // Locale Configuration
-  supportedLocales: ['en-US', 'es-MX', 'fr-FR'], // Default: all 114
-  defaultLocale: 'en-US',
+  supportedLocales: ["en-US", "es-MX", "fr-FR"], // Default: all 114
+  defaultLocale: "en-US",
 
   // File Paths
-  sourceFile: './src/i18n/messages/en.json',
-  outputDir: './src/i18n/messages',
+  sourceFile: "./src/i18n/messages/en.json",
+  outputDir: "./src/i18n/messages",
 
   // Customization
   promptTemplate: (locale, source) => {
@@ -1645,14 +1732,10 @@ const i18nConfig = createI18nConfig({
   },
 
   // Quality Checks
-  validators: [
-    structureValidator,
-    rtlValidator,
-    customValidator,
-  ],
+  validators: [structureValidator, rtlValidator, customValidator],
 
   // Caching
-  cacheStrategy: 'aggressive', // or 'conservative', 'none'
+  cacheStrategy: "aggressive", // or 'conservative', 'none'
 });
 ```
 
@@ -1681,12 +1764,14 @@ i18n validate --locale es-MX
 **Pricing Tiers**:
 
 **1. Open Source (Free)**
+
 - Core translation scripts
 - Basic React components
 - 8 locales (en-US, es-MX, fr-FR, de-DE, ja-JP, ko-KR, zh-CN, pt-BR)
 - Community support
 
 **2. Pro ($49/month)**
+
 - Full 114 locales
 - Advanced caching
 - Multi-provider support (OpenAI, Anthropic, Google)
@@ -1694,6 +1779,7 @@ i18n validate --locale es-MX
 - Priority support
 
 **3. Enterprise ($299/month)**
+
 - Unlimited locales
 - Dedicated infrastructure
 - Custom integration
@@ -1701,6 +1787,7 @@ i18n validate --locale es-MX
 - White-label option
 
 **Value Proposition**:
+
 - **Time Savings**: 10-20x faster than manual translation
 - **Cost Savings**: $0.003-0.01 per update vs $0.10-0.50 (human translator)
 - **Quality**: Consistent terminology via glossaries
@@ -1715,12 +1802,14 @@ i18n validate --locale es-MX
 **Chosen**: OpenAI GPT-4o-mini
 
 **WHY**:
+
 - ✅ **Cost**: $0.15 input / $0.60 output per 1M tokens (40% cheaper than Claude Haiku)
 - ✅ **Speed**: ~500ms avg latency (2x faster than Claude)
 - ✅ **JSON Mode**: Native `response_format: { type: 'json_object' }` (more reliable)
 - ✅ **Throughput**: Higher TPM limits for tier 1+ accounts
 
 **Trade-offs**:
+
 - ❌ Claude may have better translation quality for nuanced languages
 - ❌ OpenAI more likely to refuse certain content (over-cautious filters)
 
@@ -1733,15 +1822,18 @@ i18n validate --locale es-MX
 **Chosen**: Git Diff Detection (`git show HEAD:file`)
 
 **WHY**:
+
 - ✅ **Precision**: Detects exact keys changed (not just "file modified")
 - ✅ **Flexibility**: Works with staged changes (`git diff --cached`)
 - ✅ **CI/CD**: Natural fit for GitHub Actions (commit-based)
 
 **Trade-offs**:
+
 - ❌ Requires git repository (won't work in ZIP download)
 - ❌ Complexity: Need to parse git output
 
 **Alternative Considered**: Full file hash comparison
+
 - ✅ Simpler (just MD5 whole file)
 - ❌ Can't tell WHICH keys changed → translate everything
 
@@ -1752,15 +1844,18 @@ i18n validate --locale es-MX
 **Chosen**: Nested JSON
 
 **WHY**:
+
 - ✅ **Semantic Organization**: `nav.dashboard` vs `NavDashboard`
 - ✅ **Component Locality**: Co-locate related translations
 - ✅ **IDE Support**: Better autocomplete in editors
 
 **Trade-offs**:
+
 - ❌ Larger file size (nested objects have structure overhead)
 - ❌ Harder to diff in git (nested changes look bigger)
 
 **Quantified**:
+
 ```json
 // Flat (12 bytes per key)
 { "navDashboard": "Dashboard" }
@@ -1779,11 +1874,13 @@ i18n validate --locale es-MX
 **Chosen**: 114 Locales
 
 **WHY**:
+
 - ✅ **Market Coverage**: 95% of internet users (vs 80% for top 20)
 - ✅ **Future-Proof**: Adding locales later is breaking change
 - ✅ **Cost**: Only $0.375 for full translation (one-time)
 
 **Trade-offs**:
+
 - ❌ Bundle Size: 2.3MB vs 340KB (top 20)
 - ❌ Maintenance: More glossaries to maintain
 - ❌ Testing: Can't manually verify all 114
@@ -1797,15 +1894,18 @@ i18n validate --locale es-MX
 **Chosen**: Service Worker Runtime Caching
 
 **WHY**:
+
 - ✅ **Flexibility**: User controls which locales to cache
 - ✅ **Offline**: Works without CDN (self-hosted)
 - ✅ **Progressive**: First locale loads slowly, subsequent instant
 
 **Trade-offs**:
+
 - ❌ First Load: 17KB network request (not instant)
 - ❌ Locale Switching Offline: Fails if never loaded
 
 **Alternative**: CDN with HTTP/2 Server Push
+
 - ✅ All locales pre-cached (instant switching)
 - ❌ Wastes bandwidth (downloads 2.3MB even if user only uses 1 locale)
 
@@ -1814,6 +1914,7 @@ i18n validate --locale es-MX
 ## 7) Performance Metrics
 
 **Build-Time Performance**:
+
 ```
 Full Translation (114 locales, 240 keys):
   Time: 157 minutes
@@ -1827,6 +1928,7 @@ Incremental Translation (5 changed keys):
 ```
 
 **Runtime Performance**:
+
 ```
 Initial Page Load (en-US):
   HTML: 50KB (gzip)
@@ -1844,6 +1946,7 @@ Offline Page Load:
 ```
 
 **Cost Metrics**:
+
 ```
 One-Time Setup:
   Initial translation (114 locales): $0.375
@@ -1866,6 +1969,7 @@ Annual Cost (estimated):
 **Symptom**: `429 Too Many Requests` errors during translation
 
 **Solution**:
+
 ```bash
 # Reduce concurrency
 npm run translate:messages -- --concurrency 3
@@ -1882,6 +1986,7 @@ npm run translate:messages -- --concurrency 3
 **Symptom**: CI/CD keeps translating on every commit
 
 **Solution**:
+
 ```yaml
 # .github/workflows/i18n-translation.yml
 if: ${{ !startsWith(github.head_ref, 'i18n/auto-translate-') }}
@@ -1896,6 +2001,7 @@ if: ${{ !startsWith(github.head_ref, 'i18n/auto-translate-') }}
 **Symptom**: JSON.parse() fails on locale file
 
 **Solution**:
+
 ```typescript
 // Always validate before saving
 const validation = validate(translation, source, locale);
@@ -1906,6 +2012,7 @@ if (!validation.valid) {
 ```
 
 **Recovery**:
+
 ```bash
 # Restore from cache
 cp scripts/.translation-cache.json → recover cache
@@ -1919,13 +2026,15 @@ npm run translate:messages -- --locales es-MX --force
 **Symptom**: Arabic/Hebrew UI has misaligned icons
 
 **Solution**:
+
 ```typescript
 // Use logical properties instead of left/right
-className="ps-4 pe-2"  // padding-inline-start/end (auto-flips)
+className = "ps-4 pe-2"; // padding-inline-start/end (auto-flips)
 // NOT: className="pl-4 pr-2"  // padding-left/right (stays same)
 ```
 
 **OR Install Tailwind RTL Plugin**:
+
 ```bash
 npm install tailwindcss-rtl
 ```
@@ -1935,18 +2044,21 @@ npm install tailwindcss-rtl
 ## 9) Future Enhancements
 
 **Short-Term (1-2 months)**:
+
 1. ✅ ICU MessageFormat support (plurals, interpolation)
 2. ✅ Tailwind RTL plugin integration
 3. ✅ Currency conversion service (exchange rate API)
 4. ⏳ Generate missing 100 glossaries (AI-generated)
 
 **Medium-Term (3-6 months)**:
+
 1. ⏳ Multi-provider support (Anthropic Claude, Google Translate)
 2. ⏳ Translation memory (reuse across projects)
 3. ⏳ A/B testing (compare GPT-4o vs Claude translations)
 4. ⏳ Human-in-the-loop review workflow
 
 **Long-Term (6-12 months)**:
+
 1. ⏳ Visual context for translations (screenshots + annotations)
 2. ⏳ Automatic glossary extraction from codebase
 3. ⏳ ML-based quality scoring (detect bad translations)
@@ -1957,6 +2069,7 @@ npm install tailwindcss-rtl
 ## 10) Conclusion
 
 **What We Built**:
+
 - ✅ Automated translation pipeline (10-20x faster than manual)
 - ✅ 114 locale support (95% global internet coverage)
 - ✅ Offline-first PWA (works without internet)
@@ -1964,12 +2077,14 @@ npm install tailwindcss-rtl
 - ✅ Production-ready (CI/CD integrated)
 
 **Reusability**:
+
 - 🎯 NPM package-ready architecture
 - 🎯 Framework-agnostic core (works with React, Vue, Angular)
 - 🎯 Configurable (API provider, locales, prompts)
 - 🎯 Monetizable (freemium SaaS model)
 
 **Next Steps**:
+
 1. Package as NPM module (`@your-org/i18n-automation`)
 2. Create demo app (showcase all features)
 3. Write comprehensive documentation
@@ -1984,4 +2099,3 @@ npm install tailwindcss-rtl
 
 **Contact**: [Your sales/support email]
 **License**: MIT (open-source core) + Commercial (pro features)
-

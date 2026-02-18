@@ -14,7 +14,7 @@
 // ============================================================================
 
 export const PROTOCOL_VERSION = 1;
-export const APP_VERSION = '1.0.0';
+export const APP_VERSION = "1.0.0";
 export const DEFAULT_SYNC_PORT = 8765;
 
 // Timing constants (milliseconds)
@@ -42,65 +42,65 @@ export const TOMBSTONE_RETENTION_MS = 30 * 24 * 60 * 60 * 1000;
  * All syncable entity types in the Budget App
  */
 export type EntityType =
-  | 'accounts'
-  | 'transactions'
-  | 'categories'
-  | 'budgets'
-  | 'receipts'
-  | 'subscriptions'
-  | 'loans'
-  | 'loanPayments'
-  | 'futurePurchases'
-  | 'retirementPlans'
-  | 'investments'
-  | 'portfolios'
-  | 'investmentHoldings'
-  | 'investmentTransactions'
-  | 'importMappings'
-  | 'importMetadata';
+  | "accounts"
+  | "transactions"
+  | "categories"
+  | "budgets"
+  | "receipts"
+  | "subscriptions"
+  | "loans"
+  | "loanPayments"
+  | "futurePurchases"
+  | "retirementPlans"
+  | "investments"
+  | "portfolios"
+  | "investmentHoldings"
+  | "investmentTransactions"
+  | "importMappings"
+  | "importMetadata";
 
 /**
  * Entity priority for sync ordering
  */
-export const ENTITY_PRIORITY: Record<EntityType, 'high' | 'medium' | 'low'> = {
-  accounts: 'high',
-  transactions: 'high',
-  categories: 'high',
-  budgets: 'high',
-  subscriptions: 'high',
-  receipts: 'medium',
-  loans: 'medium',
-  loanPayments: 'medium',
-  futurePurchases: 'medium',
-  investments: 'medium',
-  portfolios: 'medium',
-  investmentHoldings: 'medium',
-  investmentTransactions: 'medium',
-  retirementPlans: 'low',
-  importMappings: 'low',
-  importMetadata: 'low',
+export const ENTITY_PRIORITY: Record<EntityType, "high" | "medium" | "low"> = {
+  accounts: "high",
+  transactions: "high",
+  categories: "high",
+  budgets: "high",
+  subscriptions: "high",
+  receipts: "medium",
+  loans: "medium",
+  loanPayments: "medium",
+  futurePurchases: "medium",
+  investments: "medium",
+  portfolios: "medium",
+  investmentHoldings: "medium",
+  investmentTransactions: "medium",
+  retirementPlans: "low",
+  importMappings: "low",
+  importMetadata: "low",
 };
 
 /**
  * All entity types in sync order
  */
 export const ALL_ENTITY_TYPES: EntityType[] = [
-  'accounts',
-  'categories',
-  'budgets',
-  'transactions',
-  'subscriptions',
-  'receipts',
-  'loans',
-  'loanPayments',
-  'futurePurchases',
-  'investments',
-  'portfolios',
-  'investmentHoldings',
-  'investmentTransactions',
-  'retirementPlans',
-  'importMappings',
-  'importMetadata',
+  "accounts",
+  "categories",
+  "budgets",
+  "transactions",
+  "subscriptions",
+  "receipts",
+  "loans",
+  "loanPayments",
+  "futurePurchases",
+  "investments",
+  "portfolios",
+  "investmentHoldings",
+  "investmentTransactions",
+  "retirementPlans",
+  "importMappings",
+  "importMetadata",
 ];
 
 // ============================================================================
@@ -111,16 +111,16 @@ export const ALL_ENTITY_TYPES: EntityType[] = [
  * All sync protocol message types
  */
 export type SyncMessageType =
-  | 'HELLO'
-  | 'HELLO_ACK'
-  | 'SYNC_REQUEST'
-  | 'SYNC_RESPONSE'
-  | 'PUSH_CHANGES'
-  | 'PUSH_ACK'
-  | 'CONFLICT'
-  | 'CONFLICT_RESOLUTION'
-  | 'HEARTBEAT'
-  | 'GOODBYE';
+  | "HELLO"
+  | "HELLO_ACK"
+  | "SYNC_REQUEST"
+  | "SYNC_RESPONSE"
+  | "PUSH_CHANGES"
+  | "PUSH_ACK"
+  | "CONFLICT"
+  | "CONFLICT_RESOLUTION"
+  | "HEARTBEAT"
+  | "GOODBYE";
 
 /**
  * Base message envelope for all protocol messages
@@ -171,7 +171,7 @@ export interface HelloAckPayload {
  * SYNC_REQUEST payload
  */
 export interface SyncRequestPayload {
-  mode: 'full' | 'delta';
+  mode: "full" | "delta";
   entities: EntityType[];
   since?: number; // Timestamp for delta sync
   vectorClock?: VectorClock;
@@ -181,7 +181,7 @@ export interface SyncRequestPayload {
  * SYNC_RESPONSE payload
  */
 export interface SyncResponsePayload {
-  mode: 'full' | 'delta';
+  mode: "full" | "delta";
   entities: Partial<Record<EntityType, SyncEntity[]>>;
   vectorClock: VectorClock;
   hasMore: boolean;
@@ -224,7 +224,7 @@ export interface ChangeSet {
  * Single data operation
  */
 export interface Operation {
-  type: 'create' | 'update' | 'delete';
+  type: "create" | "update" | "delete";
   id: string;
   data?: Record<string, unknown>;
   version: number;
@@ -246,7 +246,7 @@ export interface PushAckPayload {
 export interface RejectedChange {
   id: string;
   entity: EntityType;
-  reason: 'version_conflict' | 'validation_error' | 'unknown';
+  reason: "version_conflict" | "validation_error" | "unknown";
   currentVersion?: number;
   currentData?: Record<string, unknown>;
 }
@@ -271,7 +271,7 @@ export interface ConflictPayload {
 export interface ConflictResolutionPayload {
   entity: EntityType;
   id: string;
-  resolution: 'keep_local' | 'keep_remote' | 'merge';
+  resolution: "keep_local" | "keep_remote" | "merge";
   mergedData?: Record<string, unknown>;
   newVersion: number;
 }
@@ -283,7 +283,7 @@ export interface FieldConflict {
   field: string;
   localValue: unknown;
   remoteValue: unknown;
-  resolution: 'local' | 'remote' | 'manual';
+  resolution: "local" | "remote" | "manual";
 }
 
 /**
@@ -310,7 +310,7 @@ export interface HeartbeatPayload {
  * GOODBYE payload
  */
 export interface GoodbyePayload {
-  reason: 'user_request' | 'timeout' | 'error';
+  reason: "user_request" | "timeout" | "error";
   finalVectorClock: VectorClock;
 }
 
@@ -333,7 +333,7 @@ export interface VectorClock {
 export function compareVectorClocks(
   a: VectorClock,
   b: VectorClock
-): 'dominates' | 'dominated' | 'concurrent' | 'equal' {
+): "dominates" | "dominated" | "concurrent" | "equal" {
   const allKeys = Array.from(new Set([...Object.keys(a), ...Object.keys(b)]));
 
   let aGreater = false;
@@ -347,10 +347,10 @@ export function compareVectorClocks(
     if (bVal > aVal) bGreater = true;
   }
 
-  if (aGreater && !bGreater) return 'dominates';
-  if (bGreater && !aGreater) return 'dominated';
-  if (!aGreater && !bGreater) return 'equal';
-  return 'concurrent';
+  if (aGreater && !bGreater) return "dominates";
+  if (bGreater && !aGreater) return "dominated";
+  if (!aGreater && !bGreater) return "equal";
+  return "concurrent";
 }
 
 /**
@@ -367,10 +367,7 @@ export function mergeVectorClocks(a: VectorClock, b: VectorClock): VectorClock {
 /**
  * Increment vector clock for a device
  */
-export function incrementVectorClock(
-  clock: VectorClock,
-  deviceId: string
-): VectorClock {
+export function incrementVectorClock(clock: VectorClock, deviceId: string): VectorClock {
   return {
     ...clock,
     [deviceId]: (clock[deviceId] || 0) + 1,
@@ -384,7 +381,7 @@ export function incrementVectorClock(
 /**
  * Trust level for paired devices
  */
-export type TrustLevel = 'paired' | 'trusted' | 'blocked';
+export type TrustLevel = "paired" | "trusted" | "blocked";
 
 /**
  * Paired device information stored in IndexedDB
@@ -418,12 +415,12 @@ export interface SyncSession {
  * Sync session states
  */
 export type SyncSessionState =
-  | 'connecting'
-  | 'handshaking'
-  | 'syncing'
-  | 'idle'
-  | 'disconnecting'
-  | 'error';
+  | "connecting"
+  | "handshaking"
+  | "syncing"
+  | "idle"
+  | "disconnecting"
+  | "error";
 
 /**
  * Message awaiting acknowledgment
@@ -458,7 +455,7 @@ export interface PairingQRData {
 export function generatePairingCode(): string {
   const array = new Uint32Array(1);
   crypto.getRandomValues(array);
-  return String(array[0] % 1000000).padStart(6, '0');
+  return String(array[0] % 1000000).padStart(6, "0");
 }
 
 /**
@@ -468,8 +465,8 @@ export function generateDeviceId(): string {
   const array = new Uint8Array(16);
   crypto.getRandomValues(array);
   return Array.from(array)
-    .map((b) => b.toString(16).padStart(2, '0'))
-    .join('');
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 /**
@@ -500,28 +497,28 @@ export interface SyncStatus {
  * Sync manager states
  */
 export type SyncManagerState =
-  | 'disabled'
-  | 'starting'
-  | 'hosting'
-  | 'connecting'
-  | 'syncing'
-  | 'idle'
-  | 'error';
+  | "disabled"
+  | "starting"
+  | "hosting"
+  | "connecting"
+  | "syncing"
+  | "idle"
+  | "error";
 
 /**
  * Sync event types
  */
 export type SyncEventType =
-  | 'status_changed'
-  | 'device_connected'
-  | 'device_disconnected'
-  | 'sync_started'
-  | 'sync_completed'
-  | 'sync_failed'
-  | 'conflict_detected'
-  | 'changes_received'
-  | 'changes_sent'
-  | 'error';
+  | "status_changed"
+  | "device_connected"
+  | "device_disconnected"
+  | "sync_started"
+  | "sync_completed"
+  | "sync_failed"
+  | "conflict_detected"
+  | "changes_received"
+  | "changes_sent"
+  | "error";
 
 /**
  * Sync event payload
@@ -571,7 +568,7 @@ export function createHelloMessage(
   publicKey: string,
   pairingCode?: string
 ): SyncMessage<HelloPayload> {
-  return createMessage('HELLO', deviceId, {
+  return createMessage("HELLO", deviceId, {
     deviceName,
     deviceId,
     pairingCode,
@@ -591,7 +588,7 @@ export function createHelloAckMessage(
   accepted: boolean,
   reason?: string
 ): SyncMessage<HelloAckPayload> {
-  return createMessage('HELLO_ACK', deviceId, {
+  return createMessage("HELLO_ACK", deviceId, {
     accepted,
     deviceName,
     deviceId,
@@ -605,12 +602,12 @@ export function createHelloAckMessage(
  */
 export function createSyncRequestMessage(
   deviceId: string,
-  mode: 'full' | 'delta',
+  mode: "full" | "delta",
   entities: EntityType[],
   vectorClock?: VectorClock,
   since?: number
 ): SyncMessage<SyncRequestPayload> {
-  return createMessage('SYNC_REQUEST', deviceId, {
+  return createMessage("SYNC_REQUEST", deviceId, {
     mode,
     entities,
     since,
@@ -626,7 +623,7 @@ export function createPushChangesMessage(
   changes: ChangeSet[],
   vectorClock: VectorClock
 ): SyncMessage<PushChangesPayload> {
-  return createMessage('PUSH_CHANGES', deviceId, {
+  return createMessage("PUSH_CHANGES", deviceId, {
     changes,
     vectorClock,
   });
@@ -639,7 +636,7 @@ export function createHeartbeatMessage(
   deviceId: string,
   pendingChanges: number
 ): SyncMessage<HeartbeatPayload> {
-  return createMessage('HEARTBEAT', deviceId, {
+  return createMessage("HEARTBEAT", deviceId, {
     timestamp: Date.now(),
     pendingChanges,
   });
@@ -650,10 +647,10 @@ export function createHeartbeatMessage(
  */
 export function createGoodbyeMessage(
   deviceId: string,
-  reason: GoodbyePayload['reason'],
+  reason: GoodbyePayload["reason"],
   vectorClock: VectorClock
 ): SyncMessage<GoodbyePayload> {
-  return createMessage('GOODBYE', deviceId, {
+  return createMessage("GOODBYE", deviceId, {
     reason,
     finalVectorClock: vectorClock,
   });
@@ -669,7 +666,7 @@ export function createGoodbyeMessage(
 export function serializeMessage(message: SyncMessage): string {
   const json = JSON.stringify(message);
   if (json.length > MAX_MESSAGE_SIZE) {
-    throw new SyncError('Message exceeds maximum size', 'MESSAGE_TOO_LARGE');
+    throw new SyncError("Message exceeds maximum size", "MESSAGE_TOO_LARGE");
   }
   return json;
 }
@@ -689,13 +686,13 @@ export function deserializeMessage(data: string): SyncMessage {
       !message.timestamp ||
       !message.deviceId
     ) {
-      throw new SyncError('Invalid message format', 'INVALID_MESSAGE');
+      throw new SyncError("Invalid message format", "INVALID_MESSAGE");
     }
 
     return message;
   } catch (error) {
     if (error instanceof SyncError) throw error;
-    throw new SyncError('Failed to parse message', 'PARSE_ERROR');
+    throw new SyncError("Failed to parse message", "PARSE_ERROR");
   }
 }
 
@@ -707,20 +704,20 @@ export function deserializeMessage(data: string): SyncMessage {
  * Sync error codes
  */
 export type SyncErrorCode =
-  | 'CONNECTION_FAILED'
-  | 'CONNECTION_TIMEOUT'
-  | 'MESSAGE_TIMEOUT'
-  | 'MESSAGE_TOO_LARGE'
-  | 'INVALID_MESSAGE'
-  | 'PARSE_ERROR'
-  | 'ENCRYPTION_ERROR'
-  | 'DECRYPTION_ERROR'
-  | 'INVALID_PAIRING_CODE'
-  | 'DEVICE_BLOCKED'
-  | 'VERSION_MISMATCH'
-  | 'SYNC_IN_PROGRESS'
-  | 'NO_ACTIVE_SESSION'
-  | 'UNKNOWN_ERROR';
+  | "CONNECTION_FAILED"
+  | "CONNECTION_TIMEOUT"
+  | "MESSAGE_TIMEOUT"
+  | "MESSAGE_TOO_LARGE"
+  | "INVALID_MESSAGE"
+  | "PARSE_ERROR"
+  | "ENCRYPTION_ERROR"
+  | "DECRYPTION_ERROR"
+  | "INVALID_PAIRING_CODE"
+  | "DEVICE_BLOCKED"
+  | "VERSION_MISMATCH"
+  | "SYNC_IN_PROGRESS"
+  | "NO_ACTIVE_SESSION"
+  | "UNKNOWN_ERROR";
 
 /**
  * Custom sync error class
@@ -732,7 +729,7 @@ export class SyncError extends Error {
     public details?: unknown
   ) {
     super(message);
-    this.name = 'SyncError';
+    this.name = "SyncError";
   }
 }
 
@@ -760,11 +757,7 @@ export function shouldPurgeTombstone(tombstone: Tombstone): boolean {
 /**
  * Create tombstone for deleted entity
  */
-export function createTombstone(
-  id: string,
-  entity: EntityType,
-  deviceId: string
-): Tombstone {
+export function createTombstone(id: string, entity: EntityType, deviceId: string): Tombstone {
   return {
     id,
     entity,
@@ -780,42 +773,39 @@ export function createTombstone(
 /**
  * Merge strategy by entity type
  */
-export const MERGE_STRATEGIES: Record<EntityType, 'lww' | 'field_merge'> = {
-  accounts: 'lww',
-  transactions: 'field_merge',
-  categories: 'lww',
-  budgets: 'field_merge',
-  receipts: 'lww',
-  subscriptions: 'lww',
-  loans: 'field_merge',
-  loanPayments: 'lww',
-  futurePurchases: 'field_merge',
-  retirementPlans: 'lww',
-  investments: 'lww',
-  portfolios: 'field_merge',
-  investmentHoldings: 'lww',
-  investmentTransactions: 'lww',
-  importMappings: 'lww',
-  importMetadata: 'lww',
+export const MERGE_STRATEGIES: Record<EntityType, "lww" | "field_merge"> = {
+  accounts: "lww",
+  transactions: "field_merge",
+  categories: "lww",
+  budgets: "field_merge",
+  receipts: "lww",
+  subscriptions: "lww",
+  loans: "field_merge",
+  loanPayments: "lww",
+  futurePurchases: "field_merge",
+  retirementPlans: "lww",
+  investments: "lww",
+  portfolios: "field_merge",
+  investmentHoldings: "lww",
+  investmentTransactions: "lww",
+  importMappings: "lww",
+  importMetadata: "lww",
 };
 
 /**
  * Fields that require manual resolution (amount/money fields)
  */
 export const MANUAL_RESOLUTION_FIELDS: Partial<Record<EntityType, string[]>> = {
-  transactions: ['amount'],
-  budgets: ['amount', 'rollover'],
-  loans: ['principal', 'interestRate'],
-  futurePurchases: ['targetAmount', 'currentSaved'],
+  transactions: ["amount"],
+  budgets: ["amount", "rollover"],
+  loans: ["principal", "interestRate"],
+  futurePurchases: ["targetAmount", "currentSaved"],
 };
 
 /**
  * Last-Write-Wins merge
  */
-export function mergeWithLWW(
-  local: SyncEntity,
-  remote: SyncEntity
-): SyncEntity {
+export function mergeWithLWW(local: SyncEntity, remote: SyncEntity): SyncEntity {
   return local.updatedAt >= remote.updatedAt ? local : remote;
 }
 
@@ -830,10 +820,7 @@ export function mergeWithFieldMerge(
   const merged: Record<string, unknown> = {};
   const conflicts: FieldConflict[] = [];
 
-  const allKeys = Array.from(new Set([
-    ...Object.keys(local.data),
-    ...Object.keys(remote.data),
-  ]));
+  const allKeys = Array.from(new Set([...Object.keys(local.data), ...Object.keys(remote.data)]));
 
   const manualFields = MANUAL_RESOLUTION_FIELDS[entityType] || [];
 
@@ -842,7 +829,7 @@ export function mergeWithFieldMerge(
     const remoteVal = remote.data[key];
 
     // Skip metadata fields
-    if (['id', 'updatedAt', 'version', 'deviceId'].includes(key)) {
+    if (["id", "updatedAt", "version", "deviceId"].includes(key)) {
       continue;
     }
 
@@ -868,7 +855,7 @@ export function mergeWithFieldMerge(
         field: key,
         localValue: localVal,
         remoteValue: remoteVal,
-        resolution: 'manual',
+        resolution: "manual",
       });
       // Keep local value pending manual resolution
       merged[key] = localVal;
@@ -879,7 +866,7 @@ export function mergeWithFieldMerge(
         field: key,
         localValue: localVal,
         remoteValue: remoteVal,
-        resolution: local.updatedAt >= remote.updatedAt ? 'local' : 'remote',
+        resolution: local.updatedAt >= remote.updatedAt ? "local" : "remote",
       });
     }
   }
@@ -958,9 +945,8 @@ export function isPairingQRExpired(data: PairingQRData): boolean {
 // Exports Summary
 // ============================================================================
 
-export type {
-  // Re-export main types for easy importing
-};
+export // Re-export main types for easy importing
+ type {};
 
 /**
  * Default export with all utilities
@@ -1017,7 +1003,7 @@ const LANSync = {
 // Re-export Encryption Module
 // ============================================================================
 
-export * from './lan-sync-encryption';
-export * from './lan-sync-encrypted-connection';
+export * from "./lan-sync-encryption";
+export * from "./lan-sync-encrypted-connection";
 
 export default LANSync;

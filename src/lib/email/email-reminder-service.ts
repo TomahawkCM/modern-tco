@@ -5,10 +5,10 @@
  * This service is called client-side and makes API requests to the email send endpoint
  */
 
-import type { Subscription } from '@/types/budget';
-import type { NotificationSettings } from '@/types/notifications';
-import type { EmailType } from '@/types/email';
-import { getNotificationSettings } from '@/lib/notifications/notification-settings';
+import type { Subscription } from "@/types/budget";
+import type { NotificationSettings } from "@/types/notifications";
+import type { EmailType } from "@/types/email";
+import { getNotificationSettings } from "@/lib/notifications/notification-settings";
 
 interface EmailReminderResult {
   success: boolean;
@@ -19,22 +19,19 @@ interface EmailReminderResult {
 /**
  * Check if email notifications should be sent for a given type
  */
-function shouldSendEmailForType(
-  type: EmailType,
-  settings: NotificationSettings
-): boolean {
+function shouldSendEmailForType(type: EmailType, settings: NotificationSettings): boolean {
   if (!settings.emailEnabled || !settings.emailAddress) {
     return false;
   }
 
   switch (type) {
-    case 'bill_reminder':
+    case "bill_reminder":
       return settings.emailBillReminders;
-    case 'budget_alert':
+    case "budget_alert":
       return settings.emailBudgetAlerts;
-    case 'goal_milestone':
+    case "goal_milestone":
       return settings.emailGoalMilestones;
-    case 'test':
+    case "test":
       return true;
     default:
       return false;
@@ -50,25 +47,25 @@ export async function sendBillReminderEmail(
 ): Promise<EmailReminderResult> {
   const settings = getNotificationSettings();
 
-  if (!shouldSendEmailForType('bill_reminder', settings)) {
-    return { success: false, error: 'Email bill reminders disabled' };
+  if (!shouldSendEmailForType("bill_reminder", settings)) {
+    return { success: false, error: "Email bill reminders disabled" };
   }
 
   if (subscription.reminderEnabled === false) {
-    return { success: false, error: 'Reminder disabled for this subscription' };
+    return { success: false, error: "Reminder disabled for this subscription" };
   }
 
   try {
-    const response = await fetch('/api/email/send', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/email/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        type: 'bill_reminder',
+        type: "bill_reminder",
         props: {
           to: settings.emailAddress,
           billName: subscription.name,
           amount: subscription.amount,
-          currency: subscription.currency || 'USD',
+          currency: subscription.currency || "USD",
           dueDate: new Date(subscription.nextBillingDate),
           daysUntilDue: daysUntilBilling,
           billingCycle: subscription.billingCycle,
@@ -86,10 +83,10 @@ export async function sendBillReminderEmail(
       error: data.error,
     };
   } catch (error) {
-    console.error('Failed to send bill reminder email:', error);
+    console.error("Failed to send bill reminder email:", error);
     return {
       success: false,
-      error: error instanceof Error ? error.message : 'Unknown error',
+      error: error instanceof Error ? error.message : "Unknown error",
     };
   }
 }
@@ -101,23 +98,23 @@ export async function sendBudgetAlertEmail(
   categoryName: string,
   budgetLimit: number,
   currentSpent: number,
-  currency: string = 'USD',
-  alertType: 'warning' | 'exceeded'
+  currency: string = "USD",
+  alertType: "warning" | "exceeded"
 ): Promise<EmailReminderResult> {
   const settings = getNotificationSettings();
 
-  if (!shouldSendEmailForType('budget_alert', settings)) {
-    return { success: false, error: 'Email budget alerts disabled' };
+  if (!shouldSendEmailForType("budget_alert", settings)) {
+    return { success: false, error: "Email budget alerts disabled" };
   }
 
   const percentUsed = Math.round((currentSpent / budgetLimit) * 100);
 
   try {
-    const response = await fetch('/api/email/send', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/email/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        type: 'budget_alert',
+        type: "budget_alert",
         props: {
           to: settings.emailAddress,
           categoryName,
@@ -140,10 +137,10 @@ export async function sendBudgetAlertEmail(
       error: data.error,
     };
   } catch (error) {
-    console.error('Failed to send budget alert email:', error);
+    console.error("Failed to send budget alert email:", error);
     return {
       success: false,
-      error: error instanceof Error ? error.message : 'Unknown error',
+      error: error instanceof Error ? error.message : "Unknown error",
     };
   }
 }
@@ -155,22 +152,22 @@ export async function sendGoalMilestoneEmail(
   goalName: string,
   targetAmount: number,
   currentAmount: number,
-  currency: string = 'USD',
+  currency: string = "USD",
   milestone: 25 | 50 | 75 | 100,
   goalId?: string
 ): Promise<EmailReminderResult> {
   const settings = getNotificationSettings();
 
-  if (!shouldSendEmailForType('goal_milestone', settings)) {
-    return { success: false, error: 'Email goal milestones disabled' };
+  if (!shouldSendEmailForType("goal_milestone", settings)) {
+    return { success: false, error: "Email goal milestones disabled" };
   }
 
   try {
-    const response = await fetch('/api/email/send', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/email/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        type: 'goal_milestone',
+        type: "goal_milestone",
         props: {
           to: settings.emailAddress,
           goalName,
@@ -194,10 +191,10 @@ export async function sendGoalMilestoneEmail(
       error: data.error,
     };
   } catch (error) {
-    console.error('Failed to send goal milestone email:', error);
+    console.error("Failed to send goal milestone email:", error);
     return {
       success: false,
-      error: error instanceof Error ? error.message : 'Unknown error',
+      error: error instanceof Error ? error.message : "Unknown error",
     };
   }
 }
@@ -210,11 +207,11 @@ export async function sendTestEmail(
   unsubscribeToken: string
 ): Promise<EmailReminderResult> {
   try {
-    const response = await fetch('/api/email/send', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/email/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        type: 'test',
+        type: "test",
         props: {
           to: emailAddress,
           unsubscribeToken,
@@ -230,10 +227,10 @@ export async function sendTestEmail(
       error: data.error,
     };
   } catch (error) {
-    console.error('Failed to send test email:', error);
+    console.error("Failed to send test email:", error);
     return {
       success: false,
-      error: error instanceof Error ? error.message : 'Unknown error',
+      error: error instanceof Error ? error.message : "Unknown error",
     };
   }
 }

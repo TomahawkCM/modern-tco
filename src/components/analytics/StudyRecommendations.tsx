@@ -44,7 +44,7 @@ interface Recommendation {
 export function StudyRecommendations() {
   const router = useRouter();
   const { getOverallStats, getDomainStats, state } = useProgress();
-  
+
   // Memoize expensive function calls to prevent infinite re-renders
   const overallStats = useMemo(() => getOverallStats(), [getOverallStats]);
   const domainStats = useMemo(() => getDomainStats(), [getDomainStats]);
@@ -267,7 +267,7 @@ export function StudyRecommendations() {
     <Card className="glass border-white/10">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-foreground">
-          <Brain className="h-5 w-5 text-tanium-accent" />
+          <Brain className="text-tanium-accent h-5 w-5" />
           Personalized Study Recommendations
         </CardTitle>
       </CardHeader>

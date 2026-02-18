@@ -23,7 +23,7 @@ const RadioGroupItem = React.forwardRef<
       className={cn(
         "aspect-square h-4 w-4 rounded-full border border-primary text-primary shadow focus:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
         // WCAG 2.2: Add padding to create 48px touch target while keeping visual size at 16px
-        "p-4 min-h-[3rem] min-w-[3rem]",
+        "min-h-[3rem] min-w-[3rem] p-4",
         className
       )}
       {...props}

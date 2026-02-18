@@ -1,12 +1,12 @@
 /**
  * Custom Count-Up Animation Hook (Phase 4)
  * Task 4.1.5: Animated progress counters
- * 
+ *
  * Smooth number animations for dashboard metrics
  * Custom implementation (zero dependencies)
  */
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from "react";
 
 interface UseCountUpOptions {
   end: number;
@@ -25,26 +25,26 @@ interface UseCountUpOptions {
 export const easingFunctions = {
   // No easing, linear
   linear: (t: number, b: number, c: number, d: number) => c * (t / d) + b,
-  
+
   // Ease out quad
   easeOutQuad: (t: number, b: number, c: number, d: number) => {
     t /= d;
     return -c * t * (t - 2) + b;
   },
-  
+
   // Ease out cubic
   easeOutCubic: (t: number, b: number, c: number, d: number) => {
     t /= d;
     t--;
     return c * (t * t * t + 1) + b;
   },
-  
+
   // Ease in out quad
   easeInOutQuad: (t: number, b: number, c: number, d: number) => {
     t /= d / 2;
-    if (t < 1) return c / 2 * t * t + b;
+    if (t < 1) return (c / 2) * t * t + b;
     t--;
-    return -c / 2 * (t * (t - 2) - 1) + b;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
   },
 };
 
@@ -56,9 +56,9 @@ export function useCountUp({
   start = 0,
   duration = 2000,
   decimals = 0,
-  prefix = '',
-  suffix = '',
-  separator = ',',
+  prefix = "",
+  suffix = "",
+  separator = ",",
   easingFn = easingFunctions.easeOutCubic,
 }: UseCountUpOptions) {
   const [count, setCount] = useState(start);
@@ -80,12 +80,7 @@ export function useCountUp({
       const progress = Math.min(elapsed / duration, 1);
 
       // Calculate current value using easing function
-      const currentValue = easingFn(
-        elapsed,
-        start,
-        end - start,
-        duration
-      );
+      const currentValue = easingFn(elapsed, start, end - start, duration);
 
       if (progress < 1) {
         setCount(currentValue);
@@ -118,13 +113,9 @@ export function useCountUp({
 /**
  * Format number with decimals and thousands separator
  */
-function formatNumber(
-  num: number,
-  decimals: number,
-  separator: string
-): string {
+function formatNumber(num: number, decimals: number, separator: string): string {
   const fixed = num.toFixed(decimals);
-  const [integer, decimal] = fixed.split('.');
+  const [integer, decimal] = fixed.split(".");
 
   // Add thousands separator
   const withSeparator = integer.replace(/\B(?=(\d{3})+(?!\d))/g, separator);
@@ -144,11 +135,11 @@ export function CountUp({
   start = 0,
   duration = 2000,
   decimals = 0,
-  prefix = '',
-  suffix = '',
-  separator = ',',
+  prefix = "",
+  suffix = "",
+  separator = ",",
   easingFn = easingFunctions.easeOutCubic,
-  className = '',
+  className = "",
 }: CountUpProps) {
   const { formattedValue } = useCountUp({
     end,
@@ -163,4 +154,3 @@ export function CountUp({
 
   return <span className={className}>{formattedValue}</span>;
 }
-

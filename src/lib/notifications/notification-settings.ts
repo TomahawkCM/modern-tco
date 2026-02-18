@@ -7,14 +7,14 @@ import {
   type NotificationSettings,
   type NotificationPermissionState,
   DEFAULT_NOTIFICATION_SETTINGS,
-} from '@/types/notifications';
+} from "@/types/notifications";
 
 // ========================
 // Constants
 // ========================
 
-const STORAGE_KEY = 'budget-app-notification-settings';
-const SETTINGS_CHANGE_EVENT = 'budget-notification-settings-change';
+const STORAGE_KEY = "budget-app-notification-settings";
+const SETTINGS_CHANGE_EVENT = "budget-notification-settings-change";
 
 // ========================
 // Storage Functions
@@ -25,7 +25,7 @@ const SETTINGS_CHANGE_EVENT = 'budget-notification-settings-change';
  * Returns default settings if none exist
  */
 export function getNotificationSettings(): NotificationSettings {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return DEFAULT_NOTIFICATION_SETTINGS;
   }
 
@@ -42,7 +42,7 @@ export function getNotificationSettings(): NotificationSettings {
       ...parsed,
     };
   } catch (error) {
-    console.error('Error reading notification settings:', error);
+    console.error("Error reading notification settings:", error);
     return DEFAULT_NOTIFICATION_SETTINGS;
   }
 }
@@ -52,7 +52,7 @@ export function getNotificationSettings(): NotificationSettings {
  * Dispatches a CustomEvent for cross-component sync
  */
 export function saveNotificationSettings(settings: NotificationSettings): void {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return;
   }
 
@@ -66,7 +66,7 @@ export function saveNotificationSettings(settings: NotificationSettings): void {
       })
     );
   } catch (error) {
-    console.error('Error saving notification settings:', error);
+    console.error("Error saving notification settings:", error);
   }
 }
 
@@ -100,7 +100,7 @@ export function resetNotificationSettings(): void {
 export function subscribeToSettingsChanges(
   callback: (settings: NotificationSettings) => void
 ): () => void {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return () => {};
   }
 
@@ -121,16 +121,16 @@ export function subscribeToSettingsChanges(
           ...settings,
         });
       } catch (error) {
-        console.error('Error parsing storage event:', error);
+        console.error("Error parsing storage event:", error);
       }
     }
   };
 
-  window.addEventListener('storage', storageHandler);
+  window.addEventListener("storage", storageHandler);
 
   return () => {
     window.removeEventListener(SETTINGS_CHANGE_EVENT, handler);
-    window.removeEventListener('storage', storageHandler);
+    window.removeEventListener("storage", storageHandler);
   };
 }
 
@@ -142,8 +142,8 @@ export function subscribeToSettingsChanges(
  * Check if push notifications are supported
  */
 export function isPushSupported(): boolean {
-  if (typeof window === 'undefined') return false;
-  return 'Notification' in window && 'serviceWorker' in navigator && 'PushManager' in window;
+  if (typeof window === "undefined") return false;
+  return "Notification" in window && "serviceWorker" in navigator && "PushManager" in window;
 }
 
 /**
@@ -151,10 +151,10 @@ export function isPushSupported(): boolean {
  */
 export function getPushPermissionState(): NotificationPermissionState {
   if (!isPushSupported()) {
-    return 'unsupported';
+    return "unsupported";
   }
 
-  const {permission} = Notification;
+  const { permission } = Notification;
   return permission as NotificationPermissionState;
 }
 
@@ -164,7 +164,7 @@ export function getPushPermissionState(): NotificationPermissionState {
  */
 export async function requestPushPermission(): Promise<NotificationPermissionState> {
   if (!isPushSupported()) {
-    return 'unsupported';
+    return "unsupported";
   }
 
   try {
@@ -172,12 +172,12 @@ export async function requestPushPermission(): Promise<NotificationPermissionSta
     const state = result as NotificationPermissionState;
 
     // Update stored settings with new permission state
-    updateNotificationSetting('pushPermissionState', state);
+    updateNotificationSetting("pushPermissionState", state);
 
     return state;
   } catch (error) {
-    console.error('Error requesting push permission:', error);
-    return 'denied';
+    console.error("Error requesting push permission:", error);
+    return "denied";
   }
 }
 
@@ -199,8 +199,8 @@ export function isWithinQuietHours(settings?: NotificationSettings): boolean {
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
   // Parse start and end times
-  const [startHour, startMin] = s.quietHoursStart.split(':').map(Number);
-  const [endHour, endMin] = s.quietHoursEnd.split(':').map(Number);
+  const [startHour, startMin] = s.quietHoursStart.split(":").map(Number);
+  const [endHour, endMin] = s.quietHoursEnd.split(":").map(Number);
 
   const startMinutes = startHour * 60 + startMin;
   const endMinutes = endHour * 60 + endMin;
@@ -229,7 +229,7 @@ export function getMinutesUntilQuietHoursEnd(settings?: NotificationSettings): n
   const now = new Date();
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-  const [endHour, endMin] = s.quietHoursEnd.split(':').map(Number);
+  const [endHour, endMin] = s.quietHoursEnd.split(":").map(Number);
   const endMinutes = endHour * 60 + endMin;
 
   // Handle overnight case
@@ -249,7 +249,7 @@ export function getMinutesUntilQuietHoursEnd(settings?: NotificationSettings): n
  * Check if a specific notification type is enabled
  */
 export function isNotificationTypeEnabled(
-  type: 'bill_reminder' | 'budget_alert' | 'goal_milestone' | 'system',
+  type: "bill_reminder" | "budget_alert" | "goal_milestone" | "system",
   settings?: NotificationSettings
 ): boolean {
   const s = settings || getNotificationSettings();
@@ -259,13 +259,13 @@ export function isNotificationTypeEnabled(
   }
 
   switch (type) {
-    case 'bill_reminder':
+    case "bill_reminder":
       return s.billReminders;
-    case 'budget_alert':
+    case "budget_alert":
       return s.budgetAlerts;
-    case 'goal_milestone':
+    case "goal_milestone":
       return s.goalMilestones;
-    case 'system':
+    case "system":
       return true; // System notifications are always enabled if master is on
     default:
       return false;
@@ -277,7 +277,7 @@ export function isNotificationTypeEnabled(
  * Considers master toggle and quiet hours
  */
 export function shouldDeliverNotification(
-  type: 'bill_reminder' | 'budget_alert' | 'goal_milestone' | 'system',
+  type: "bill_reminder" | "budget_alert" | "goal_milestone" | "system",
   settings?: NotificationSettings
 ): boolean {
   const s = settings || getNotificationSettings();

@@ -94,10 +94,12 @@ export function StudyModuleViewer({
         // Try multiple domain formats to match database
         const domainVariants = [
           domain,
-          domain.replace(/-/g, '_').toUpperCase(),
-          domain.split('-').map((word, idx) =>
-            word.charAt(0).toUpperCase() + word.slice(1)
-          ).join(' ').replace(' And ', ' & ')
+          domain.replace(/-/g, "_").toUpperCase(),
+          domain
+            .split("-")
+            .map((word, idx) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ")
+            .replace(" And ", " & "),
         ];
 
         const { data: moduleData, error: moduleError } = await (supabase as any)
@@ -112,7 +114,7 @@ export function StudyModuleViewer({
           const { data: sectionsData, error: sectionsError } = await (supabase as any)
             .from("study_sections")
             .select("*")
-            .eq("module_id", (moduleData).id)
+            .eq("module_id", moduleData.id)
             .order("order_index");
 
           if (!sectionsError && sectionsData && sectionsData.length > 0) {
@@ -122,28 +124,43 @@ export function StudyModuleViewer({
             const convertedModule: StudyModuleContent = {
               id: md.id,
               title: md.title,
-              description: md.description ?? '',
+              description: md.description ?? "",
               domain: md.domain as TCODomain,
               estimatedTime: `${md.estimated_time_minutes} min`,
               estimatedTimeMinutes: md.estimated_time_minutes,
               examWeight: md.exam_weight,
-              learningObjectives: Array.isArray(md.learning_objectives) ? (md.learning_objectives as string[]) : [],
+              learningObjectives: Array.isArray(md.learning_objectives)
+                ? (md.learning_objectives as string[])
+                : [],
               sections: sd.map((section: any) => ({
                 id: section.id,
                 title: section.title,
                 content: section.content,
-                sectionType: section.section_type as "overview" | "procedures" | "exam_prep" | "concepts" | "examples",
+                sectionType: section.section_type as
+                  | "overview"
+                  | "procedures"
+                  | "exam_prep"
+                  | "concepts"
+                  | "examples",
                 orderIndex: section.order_index,
                 estimatedTime: section.estimated_time_minutes,
                 estimatedTimeMinutes: section.estimated_time_minutes,
-                keyPoints: Array.isArray(section.key_points) ? (section.key_points as string[]) : [],
-                procedures: Array.isArray(section.procedures) ? (section.procedures as string[]) : [],
-                troubleshooting: Array.isArray(section.troubleshooting) ? (section.troubleshooting as string[]) : [],
-                references: Array.isArray(section.references) ? (section.references as string[]) : [],
+                keyPoints: Array.isArray(section.key_points)
+                  ? (section.key_points as string[])
+                  : [],
+                procedures: Array.isArray(section.procedures)
+                  ? (section.procedures as string[])
+                  : [],
+                troubleshooting: Array.isArray(section.troubleshooting)
+                  ? (section.troubleshooting as string[])
+                  : [],
+                references: Array.isArray(section.references)
+                  ? (section.references as string[])
+                  : [],
                 playbook: section.playbook ?? {},
               })),
             };
-            
+
             setModule(convertedModule);
             setSections(convertedModule.sections);
             setUsingFallback(false);
@@ -403,13 +420,15 @@ export function StudyModuleViewer({
                 {completedSections.size} of {sections.length} sections
               </span>
             </div>
-            <Progress 
-              value={completionPercentage} 
-              className="h-2" 
+            <Progress
+              value={completionPercentage}
+              className="h-2"
               aria-label={`Study module progress: ${completedSections.size} of ${sections.length} sections completed (${completionPercentage}%)`}
             />
             <div className="mt-2 flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">{completionPercentage}% Complete</span>
+              <span className="text-sm text-muted-foreground">
+                {completionPercentage}% Complete
+              </span>
               {completionPercentage === 100 && onNavigateToQuestions && (
                 <Button
                   onClick={onNavigateToQuestions}

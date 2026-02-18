@@ -53,7 +53,7 @@ interface PredictionModel {
 
 export function PerformancePredictions() {
   const { getDomainStats, getOverallStats, state } = useProgress();
-  
+
   // Memoize expensive function calls to prevent infinite re-renders
   const domainStats = useMemo(() => getDomainStats(), [getDomainStats]);
   const overallStats = useMemo(() => getOverallStats(), [getOverallStats]);
@@ -206,7 +206,7 @@ export function PerformancePredictions() {
     <Card className="glass border-white/10">
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-foreground">
-          <Brain className="h-5 w-5 text-tanium-accent" />
+          <Brain className="text-tanium-accent h-5 w-5" />
           Performance Predictions & Exam Readiness
         </CardTitle>
       </CardHeader>
@@ -240,7 +240,9 @@ export function PerformancePredictions() {
                     <Clock className="h-4 w-4" />
                     <span className="text-sm">Time to Ready</span>
                   </div>
-                  <p className="font-medium text-foreground">{predictions.examReadiness.timeToReady}</p>
+                  <p className="font-medium text-foreground">
+                    {predictions.examReadiness.timeToReady}
+                  </p>
                 </div>
                 <div>
                   <div className="mb-2 flex items-center gap-2 text-muted-foreground">
@@ -258,11 +260,11 @@ export function PerformancePredictions() {
           <div className="space-y-4">
             <div className="glass rounded-lg border border-white/10 p-4">
               <h4 className="mb-3 flex items-center gap-2 font-medium text-foreground">
-                <Target className="h-4 w-4 text-tanium-accent" />
+                <Target className="text-tanium-accent h-4 w-4" />
                 Pass Likelihood
               </h4>
               <div className="text-center">
-                <div className="mb-1 text-2xl font-bold text-tanium-accent">
+                <div className="text-tanium-accent mb-1 text-2xl font-bold">
                   {predictions.examSimulation.passLikelihood}%
                 </div>
                 <Progress value={predictions.examSimulation.passLikelihood} className="h-2" />
@@ -271,11 +273,11 @@ export function PerformancePredictions() {
 
             <div className="glass rounded-lg border border-white/10 p-4">
               <h4 className="mb-3 flex items-center gap-2 font-medium text-foreground">
-                <BarChart3 className="h-4 w-4 text-tanium-accent" />
+                <BarChart3 className="text-tanium-accent h-4 w-4" />
                 Expected Score
               </h4>
               <div className="text-center">
-                <div className="text-2xl font-bold text-tanium-accent">
+                <div className="text-tanium-accent text-2xl font-bold">
                   {predictions.examSimulation.expectedScore}%
                 </div>
               </div>
@@ -286,7 +288,7 @@ export function PerformancePredictions() {
         {/* Domain Predictions */}
         <div className="space-y-4">
           <h4 className="flex items-center gap-2 font-medium text-foreground">
-            <TrendingUp className="h-4 w-4 text-tanium-accent" />
+            <TrendingUp className="text-tanium-accent h-4 w-4" />
             Domain Performance Predictions
           </h4>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -323,7 +325,7 @@ export function PerformancePredictions() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-muted-foreground">Predicted</span>
-                    <span className="font-medium text-tanium-accent">
+                    <span className="text-tanium-accent font-medium">
                       {prediction.predictedScore}%
                     </span>
                   </div>
@@ -352,7 +354,7 @@ export function PerformancePredictions() {
         <div className="grid gap-4 md:grid-cols-2">
           <div className="glass rounded-lg border border-white/10 p-4">
             <h4 className="mb-4 flex items-center gap-2 font-medium text-foreground">
-              <Calendar className="h-4 w-4 text-tanium-accent" />
+              <Calendar className="text-tanium-accent h-4 w-4" />
               Optimized Study Plan
             </h4>
             <div className="space-y-3">
@@ -376,7 +378,7 @@ export function PerformancePredictions() {
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Expected Growth</span>
-                <span className="font-medium text-tanium-accent">
+                <span className="text-tanium-accent font-medium">
                   +{predictions.studyInsights.predictedGrowth}% per month
                 </span>
               </div>
@@ -385,12 +387,14 @@ export function PerformancePredictions() {
 
           <div className="glass rounded-lg border border-white/10 p-4">
             <h4 className="mb-4 flex items-center gap-2 font-medium text-foreground">
-              <Zap className="h-4 w-4 text-tanium-accent" />
+              <Zap className="text-tanium-accent h-4 w-4" />
               Focus Areas
             </h4>
             <div className="space-y-3">
               <div>
-                <span className="mb-2 block text-sm text-muted-foreground">Strengths to Maintain</span>
+                <span className="mb-2 block text-sm text-muted-foreground">
+                  Strengths to Maintain
+                </span>
                 <div className="flex flex-wrap gap-2">
                   {predictions.examSimulation.strengthAreas.length > 0 ? (
                     predictions.examSimulation.strengthAreas.map((area) => (
@@ -399,7 +403,9 @@ export function PerformancePredictions() {
                       </Badge>
                     ))
                   ) : (
-                    <span className="text-xs text-muted-foreground">Continue building strengths</span>
+                    <span className="text-xs text-muted-foreground">
+                      Continue building strengths
+                    </span>
                   )}
                 </div>
               </div>

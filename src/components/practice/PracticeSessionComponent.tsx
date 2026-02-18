@@ -5,15 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import {
-  CheckCircle2,
-  XCircle,
-  ArrowRight,
-  Trophy,
-  Clock,
-  BookOpen,
-  Target,
-} from "lucide-react";
+import { CheckCircle2, XCircle, ArrowRight, Trophy, Clock, BookOpen, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   type PracticeSession,
@@ -82,14 +74,9 @@ export function PracticeSessionComponent({
     if (!currentQuestion || !selectedAnswer) return;
 
     const timeSpent = Math.floor((Date.now() - questionStartTime) / 1000);
-    const {questionId} = session.questions[currentIndex];
+    const { questionId } = session.questions[currentIndex];
 
-    const result = answerPracticeQuestion(
-      session,
-      questionId,
-      selectedAnswer,
-      timeSpent
-    );
+    const result = answerPracticeQuestion(session, questionId, selectedAnswer, timeSpent);
 
     setIsCorrect(result.correct);
     setShowResult(true);
@@ -147,23 +134,19 @@ export function PracticeSessionComponent({
           {/* Stats */}
           <div className="grid grid-cols-2 gap-4">
             <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
-              <div className="flex items-center gap-2 mb-1">
+              <div className="mb-1 flex items-center gap-2">
                 <Target className="h-4 w-4 text-primary" />
                 <span className="text-sm text-muted-foreground">Accuracy</span>
               </div>
-              <div className="text-2xl font-bold text-primary">
-                {Math.round(accuracy)}%
-              </div>
+              <div className="text-2xl font-bold text-primary">{Math.round(accuracy)}%</div>
             </div>
 
             <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5 p-4">
-              <div className="flex items-center gap-2 mb-1">
+              <div className="mb-1 flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
                 <span className="text-sm text-muted-foreground">Correct</span>
               </div>
-              <div className="text-2xl font-bold text-[#22c55e]">
-                {session.score}
-              </div>
+              <div className="text-2xl font-bold text-[#22c55e]">{session.score}</div>
             </div>
           </div>
 
@@ -173,8 +156,8 @@ export function PracticeSessionComponent({
               {accuracy >= 90
                 ? "🎉 Excellent work! You're ready for harder challenges."
                 : accuracy >= 70
-                ? "👍 Good job! Keep practicing to improve further."
-                : "📚 Keep studying! Review the concepts and try again."}
+                  ? "👍 Good job! Keep practicing to improve further."
+                  : "📚 Keep studying! Review the concepts and try again."}
             </p>
           </div>
 
@@ -237,11 +220,11 @@ export function PracticeSessionComponent({
                     <Badge variant="outline">
                       {currentQuestion.type === "true-false" ? "True/False" : "Multiple Choice"}
                     </Badge>
-                    <Badge variant="outline">
-                      Difficulty: {currentQuestion.difficulty}
-                    </Badge>
+                    <Badge variant="outline">Difficulty: {currentQuestion.difficulty}</Badge>
                   </div>
-                  <p className="text-base font-medium text-foreground">{currentQuestion.question}</p>
+                  <p className="text-base font-medium text-foreground">
+                    {currentQuestion.question}
+                  </p>
                 </div>
 
                 <div className="space-y-2">
@@ -285,7 +268,7 @@ export function PracticeSessionComponent({
                         )}
                       >
                         <div className="flex items-start gap-3">
-                          <div className="flex-shrink-0 flex h-6 w-6 items-center justify-center rounded-full border border-gray-600 text-xs">
+                          <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-gray-600 text-xs">
                             {String.fromCharCode(65 + idx)}
                           </div>
                           <span className="flex-1">{option}</span>
@@ -312,7 +295,9 @@ export function PracticeSessionComponent({
           <Card
             className={cn(
               "border-2",
-              isCorrect ? "border-[#22c55e]/30 bg-[#22c55e]/5" : "border-orange-500/30 bg-orange-500/5"
+              isCorrect
+                ? "border-[#22c55e]/30 bg-[#22c55e]/5"
+                : "border-orange-500/30 bg-orange-500/5"
             )}
           >
             <CardContent className="py-6">
@@ -337,7 +322,9 @@ export function PracticeSessionComponent({
                       {currentQuestion.concept}
                     </Badge>
                   </div>
-                  <p className="text-sm font-medium text-muted-foreground">{currentQuestion.question}</p>
+                  <p className="text-sm font-medium text-muted-foreground">
+                    {currentQuestion.question}
+                  </p>
                 </div>
 
                 <div className="mb-3 rounded bg-[#22c55e]/10 px-3 py-2">
@@ -363,7 +350,9 @@ export function PracticeSessionComponent({
                     <BookOpen className="h-4 w-4 text-primary" />
                     <span className="text-xs font-semibold text-primary">Explanation:</span>
                   </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{currentQuestion.explanation}</p>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {currentQuestion.explanation}
+                  </p>
                 </div>
               </div>
 

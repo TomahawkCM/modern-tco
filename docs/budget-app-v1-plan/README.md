@@ -10,6 +10,7 @@
 ## 📚 Documentation Index
 
 ### Core Planning Documents
+
 1. **[00-IMPLEMENTATION-GUIDE.md](./00-IMPLEMENTATION-GUIDE.md)** - **START HERE**  
    Comprehensive consolidated guide covering all planning topics (IA, Design System, Accessibility, Performance, QA, Release Plan)
 
@@ -20,6 +21,7 @@
    Product Requirements Document with user personas, use cases, and functional requirements
 
 ### Execution Artifacts
+
 4. **[15-Day-1-Kickoff-Checklist.md](./15-Day-1-Kickoff-Checklist.md)**  
    Complete checklist for first day: environment setup, team alignment, initial tasks
 
@@ -31,9 +33,11 @@
 ## 🎯 Project Summary
 
 ### What We're Building
+
 **Modernize existing feature-rich budget app with world-class UI/UX, accessibility modes, and AI chatbot**
 
 **Key Enhancements**:
+
 - 🎨 UI/UX modernization (research-driven, seniors-optimized)
 - ♿ 3 theme modes (light, dark, high-contrast) + reduced motion
 - 🗺️ Reorganized navigation (mobile-first hybrid: tab bar + hamburger)
@@ -43,6 +47,7 @@
 - 📚 Comprehensive documentation (user guides + developer docs)
 
 **Preserved Features** (NOT rebuilding):
+
 - ✅ All 9 sections (Dashboard, Transactions, Budgets, Loans, Investments, Future Plans, Retirement, Reports, OCR)
 - ✅ CSV/PDF/OFX imports (15+ banks supported)
 - ✅ Loan amortization with extra payment calculator
@@ -55,16 +60,16 @@
 
 ### Epic Breakdown (60 Tasks Total)
 
-| Epic | Tasks | Focus Area | Agents |
-|------|-------|-----------|---------|
-| **1. UI/UX Research** | 5 | Competitive analysis, seniors patterns, audit | researcher, ux-specialist, accessibility-engineer |
-| **2. Design System** | 7 | Tokens, themes, typography, components | design-system-architect, frontend-architect |
-| **3. Navigation & IA** | 6 | Mobile nav, desktop sidebar, command palette | ux-architect, react-specialist, frontend-specialist |
-| **4. Accessibility** | 8 | Dark mode, high-contrast, reduced motion, testing | accessibility-engineer, qa-engineer |
-| **5. Dashboard Polish** | 7 | Metric cards, charts, customization, mobile | react-specialist, accessibility-engineer |
-| **6. Feature UI** | 9 | Transactions, budgets, loans, imports, forms | react-specialist, ux-specialist, frontend-specialist |
-| **7. AI Chatbot** | 8 | OpenAI integration, UI, privacy, testing | api-specialist, react-specialist, security-engineer |
-| **8. QA & Launch** | 10 | E2E tests, a11y audit, performance, docs, deploy | test-automator, qa-engineer, devops-engineer |
+| Epic                    | Tasks | Focus Area                                        | Agents                                               |
+| ----------------------- | ----- | ------------------------------------------------- | ---------------------------------------------------- |
+| **1. UI/UX Research**   | 5     | Competitive analysis, seniors patterns, audit     | researcher, ux-specialist, accessibility-engineer    |
+| **2. Design System**    | 7     | Tokens, themes, typography, components            | design-system-architect, frontend-architect          |
+| **3. Navigation & IA**  | 6     | Mobile nav, desktop sidebar, command palette      | ux-architect, react-specialist, frontend-specialist  |
+| **4. Accessibility**    | 8     | Dark mode, high-contrast, reduced motion, testing | accessibility-engineer, qa-engineer                  |
+| **5. Dashboard Polish** | 7     | Metric cards, charts, customization, mobile       | react-specialist, accessibility-engineer             |
+| **6. Feature UI**       | 9     | Transactions, budgets, loans, imports, forms      | react-specialist, ux-specialist, frontend-specialist |
+| **7. AI Chatbot**       | 8     | OpenAI integration, UI, privacy, testing          | api-specialist, react-specialist, security-engineer  |
+| **8. QA & Launch**      | 10    | E2E tests, a11y audit, performance, docs, deploy  | test-automator, qa-engineer, devops-engineer         |
 
 **Total**: 60 granular tasks assigned to 18 specialized agents
 
@@ -73,18 +78,21 @@
 ## 📅 4-Week Timeline
 
 ### Week 1: Research & Design
+
 - **Epic 1**: UI/UX Research (5 tasks)
 - **Epic 2**: Design System Audit (7 tasks)
 - **Milestone 1**: IA locked, design tokens defined, research complete
 - **Demo**: Friday - Present findings and design direction
 
 ### Week 2: Navigation & Accessibility
+
 - **Epic 3**: Navigation & IA (6 tasks)
 - **Epic 4**: Accessibility Modes (8 tasks)
 - **Milestone 2**: New navigation live, 3 theme modes working
 - **Demo**: Friday - Show mobile/desktop nav, theme switching
 
 ### Week 3: UI Polish & Chatbot
+
 - **Epic 5**: Dashboard Polish (7 tasks)
 - **Epic 6**: Feature UI Updates (9 tasks)
 - **Epic 7**: AI Chatbot (8 tasks)
@@ -92,6 +100,7 @@
 - **Demo**: Friday - Full app walkthrough with chatbot
 
 ### Week 4: QA & Launch
+
 - **Epic 8**: Testing, Docs, Launch (10 tasks)
 - **Milestone 4**: Production ready, docs complete, launched
 - **Demo**: Friday - Launch-ready presentation with UAT results
@@ -101,6 +110,7 @@
 ## 🎯 Success Criteria
 
 ### Accessibility & Usability
+
 - ✅ Lighthouse accessibility score 95+ (all pages, all modes)
 - ✅ All touch targets ≥48px (WCAG 2.2 Level AA)
 - ✅ Base typography 18px+ for seniors-friendliness
@@ -108,17 +118,20 @@
 - ✅ First transaction entry <90 seconds for new users
 
 ### Performance
+
 - ✅ Time to Interactive <3s on 3G networks
 - ✅ Bundle size <300KB initial load
 - ✅ Lighthouse Performance score 90+
 - ✅ 100% features work offline (local-first)
 
 ### User Validation
+
 - ✅ UAT with 5+ seniors (60+)
 - ✅ 95%+ task completion rate
 - ✅ User satisfaction 4.5+/5.0
 
 ### Technical
+
 - ✅ 80%+ Playwright E2E test coverage
 - ✅ 0 critical accessibility violations (axe-core)
 - ✅ PWA install verified (iOS/Android/Desktop)
@@ -129,11 +142,13 @@
 ## 🚀 Getting Started
 
 ### For Product/Design Team
+
 1. Read **[01-Vision-and-Non-Goals.md](./01-Vision-and-Non-Goals.md)**
 2. Review **[02-PRD-Budget-App-v1.md](./02-PRD-Budget-App-v1.md)** (personas, use cases)
 3. Check **[00-IMPLEMENTATION-GUIDE.md](./00-IMPLEMENTATION-GUIDE.md)** (IA, Design System sections)
 
 ### For Development Team
+
 1. Follow **[15-Day-1-Kickoff-Checklist.md](./15-Day-1-Kickoff-Checklist.md)**
 2. Access Archon tasks:
    ```bash
@@ -144,6 +159,7 @@
 4. Start Week 1 tasks (Epic 1 & 2)
 
 ### For QA Team
+
 1. Review **[00-IMPLEMENTATION-GUIDE.md](./00-IMPLEMENTATION-GUIDE.md)** (QA & Test Plan section)
 2. Check **[06-Accessibility-Checklist.md](./00-IMPLEMENTATION-GUIDE.md#6-accessibility-checklist-wcag-22-aa)** (in Implementation Guide)
 3. Prepare Week 4 testing (Epic 8 tasks)
@@ -153,17 +169,20 @@
 ## 📞 Team Coordination
 
 ### Archon Task Management
+
 - **Project ID**: `5b93c0bb-2bb5-4af3-b646-f7540a612dee`
 - **Task Statuses**: `todo` → `doing` → `review` → `done`
 - **Daily Updates**: Mark tasks in Archon as you progress
 
 ### Weekly Demos
+
 - **When**: Every Friday, Week 1-4
 - **Format**: 40-50 minutes, live demos + Q&A
 - **Recordings**: Published within 24 hours
 - **Scripts**: See **[16-Weekly-Demo-Scripts.md](./16-Weekly-Demo-Scripts.md)**
 
 ### Communication
+
 - **Standups**: Daily (15 min) - format in kickoff checklist
 - **Blockers**: Report immediately in team channel
 - **Questions**: Check docs first, then ask team lead
@@ -173,12 +192,15 @@
 ## 🎓 Key Learnings & Patterns
 
 ### Vibe Check Integration
+
 This project uses **Vibe Check MCP** for error prevention and pattern learning:
+
 - Session ID: `budget-app-modernization-2025-11-09`
 - Logged patterns: Success (Archon setup), Premature Implementation (data regeneration)
 - **Tip**: Always vibe-check before major task changes
 
 ### Agent Assignment Strategy
+
 - **Research/Design**: researcher, ux-specialist, product-designer
 - **Frontend**: react-specialist, frontend-specialist, frontend-architect
 - **Accessibility**: accessibility-engineer, accessibility-tester
@@ -193,6 +215,7 @@ This project uses **Vibe Check MCP** for error prevention and pattern learning:
 ## 📝 Documentation Completeness
 
 ### What's Included
+
 - ✅ Vision & Non-Goals
 - ✅ Product Requirements Document
 - ✅ Comprehensive Implementation Guide (IA, Design System, Accessibility, Performance, QA, Release Plan)
@@ -202,6 +225,7 @@ This project uses **Vibe Check MCP** for error prevention and pattern learning:
 - ✅ Vibe Check session initialized
 
 ### What's NOT Needed (Reference Existing Codebase)
+
 - Database schema (already in `/src/lib/db/`)
 - Component library (already using shadcn/ui)
 - Import flows (already working, just enhance UX)
@@ -225,6 +249,7 @@ This project uses **Vibe Check MCP** for error prevention and pattern learning:
 ## 🎉 Launch Readiness
 
 ### Pre-Launch Checklist
+
 - [ ] All 60 Archon tasks marked "done"
 - [ ] Playwright tests passing (80%+ coverage)
 - [ ] Lighthouse scores 95+ (accessibility, all pages)
@@ -235,6 +260,7 @@ This project uses **Vibe Check MCP** for error prevention and pattern learning:
 - [ ] Rollback plan documented
 
 ### Go/No-Go Criteria
+
 - ✅ No P0 bugs
 - ✅ Accessibility compliance verified
 - ✅ Performance targets met

@@ -3,12 +3,7 @@
  * Research-backed gamification for TCO certification preparation
  */
 
-export type BadgeCategory =
-  | "progress"
-  | "mastery"
-  | "streak"
-  | "practice"
-  | "excellence";
+export type BadgeCategory = "progress" | "mastery" | "streak" | "practice" | "excellence";
 
 export type BadgeTier = "bronze" | "silver" | "gold" | "platinum";
 
@@ -502,8 +497,7 @@ export const POINTS = {
 // Helper Functions
 export function getLevelFromPoints(points: number): Level {
   return (
-    LEVELS.find((level) => points >= level.minPoints && points <= level.maxPoints) ||
-    LEVELS[0]
+    LEVELS.find((level) => points >= level.minPoints && points <= level.maxPoints) || LEVELS[0]
   );
 }
 
@@ -529,10 +523,7 @@ export function getBadgesByCategory(category: BadgeCategory): Badge[] {
   return BADGES.filter((badge) => badge.category === category);
 }
 
-export function checkBadgeEligibility(
-  badge: Badge,
-  userStats: Record<string, number>
-): boolean {
+export function checkBadgeEligibility(badge: Badge, userStats: Record<string, number>): boolean {
   const statValue = userStats[badge.criteria.type] || 0;
   return statValue >= badge.criteria.threshold;
 }

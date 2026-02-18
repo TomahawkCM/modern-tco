@@ -48,26 +48,26 @@ export interface ActivityLogEntry {
 
   /** Type of action performed */
   action:
-    | 'create'
-    | 'update'
-    | 'delete'
-    | 'login'
-    | 'logout'
-    | 'export'
-    | 'import'
-    | 'pin_change'
-    | 'profile_switch';
+    | "create"
+    | "update"
+    | "delete"
+    | "login"
+    | "logout"
+    | "export"
+    | "import"
+    | "pin_change"
+    | "profile_switch";
 
   /** Type of entity affected */
   entityType:
-    | 'profile'
-    | 'transaction'
-    | 'budget'
-    | 'category'
-    | 'account'
-    | 'subscription'
-    | 'loan'
-    | 'system';
+    | "profile"
+    | "transaction"
+    | "budget"
+    | "category"
+    | "account"
+    | "subscription"
+    | "loan"
+    | "system";
 
   /** ID of the affected entity (null for system actions) */
   entityId: string | null;
@@ -85,22 +85,17 @@ export interface ActivityLogEntry {
 /**
  * Budget visibility options
  */
-export type BudgetVisibility = 'shared' | 'private';
+export type BudgetVisibility = "shared" | "private";
 
 /**
  * Profile creation input (without system-generated fields)
  */
-export type ProfileCreateInput = Omit<
-  Profile,
-  'id' | 'createdAt' | 'updatedAt' | 'isDefault'
->;
+export type ProfileCreateInput = Omit<Profile, "id" | "createdAt" | "updatedAt" | "isDefault">;
 
 /**
  * Profile update input (partial profile without read-only fields)
  */
-export type ProfileUpdateInput = Partial<
-  Omit<Profile, 'id' | 'createdAt' | 'isDefault'>
->;
+export type ProfileUpdateInput = Partial<Omit<Profile, "id" | "createdAt" | "isDefault">>;
 
 /**
  * PIN validation result
@@ -138,10 +133,10 @@ export interface ActivityLogFilter {
   profileId?: string;
 
   /** Filter by action type */
-  action?: ActivityLogEntry['action'];
+  action?: ActivityLogEntry["action"];
 
   /** Filter by entity type */
-  entityType?: ActivityLogEntry['entityType'];
+  entityType?: ActivityLogEntry["entityType"];
 
   /** Start date for date range filter */
   startDate?: Date;
@@ -172,23 +167,21 @@ export interface ProfileStats {
  * Default avatar colors for new profiles
  */
 export const DEFAULT_AVATAR_COLORS = [
-  '#10b981', // Emerald
-  '#3b82f6', // Blue
-  '#8b5cf6', // Violet
-  '#ec4899', // Pink
-  '#f59e0b', // Amber
-  '#ef4444', // Red
-  '#06b6d4', // Cyan
-  '#84cc16', // Lime
+  "#10b981", // Emerald
+  "#3b82f6", // Blue
+  "#8b5cf6", // Violet
+  "#ec4899", // Pink
+  "#f59e0b", // Amber
+  "#ef4444", // Red
+  "#06b6d4", // Cyan
+  "#84cc16", // Lime
 ] as const;
 
 /**
  * Get a random default avatar color
  */
 export function getRandomAvatarColor(): string {
-  return DEFAULT_AVATAR_COLORS[
-    Math.floor(Math.random() * DEFAULT_AVATAR_COLORS.length)
-  ];
+  return DEFAULT_AVATAR_COLORS[Math.floor(Math.random() * DEFAULT_AVATAR_COLORS.length)];
 }
 
 /**

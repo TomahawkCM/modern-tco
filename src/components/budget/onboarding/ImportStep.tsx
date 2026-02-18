@@ -60,9 +60,20 @@ const IMPORT_OPTIONS = [
 ];
 
 const SUPPORTED_BANKS = [
-  "Chase", "Bank of America", "Wells Fargo", "Citi", "Capital One",
-  "US Bank", "PNC", "TD Bank", "USAA", "Navy Federal",
-  "Discover", "American Express", "Ally Bank", "Charles Schwab",
+  "Chase",
+  "Bank of America",
+  "Wells Fargo",
+  "Citi",
+  "Capital One",
+  "US Bank",
+  "PNC",
+  "TD Bank",
+  "USAA",
+  "Navy Federal",
+  "Discover",
+  "American Express",
+  "Ally Bank",
+  "Charles Schwab",
 ];
 
 export function ImportStep({ onComplete, onSkip }: StepProps) {
@@ -73,17 +84,20 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
   const [processedCount, setProcessedCount] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleMethodSelect = useCallback((method: ImportMethod) => {
-    setSelectedMethod(method);
+  const handleMethodSelect = useCallback(
+    (method: ImportMethod) => {
+      setSelectedMethod(method);
 
-    if (method === "manual") {
-      // Skip import, go to next step
-      onComplete({ importedTransactions: 0, importMethod: "manual" });
-    } else if (method === "later") {
-      // Skip this step entirely
-      onSkip();
-    }
-  }, [onComplete, onSkip]);
+      if (method === "manual") {
+        // Skip import, go to next step
+        onComplete({ importedTransactions: 0, importMethod: "manual" });
+      } else if (method === "later") {
+        // Skip this step entirely
+        onSkip();
+      }
+    },
+    [onComplete, onSkip]
+  );
 
   const handleFileSelect = useCallback((file: File) => {
     setUploadedFile(file);
@@ -98,15 +112,18 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
     }, 1500);
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragging(false);
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      setIsDragging(false);
 
-    const file = e.dataTransfer.files[0];
-    if (file && (file.name.endsWith(".csv") || file.name.endsWith(".ofx"))) {
-      handleFileSelect(file);
-    }
-  }, [handleFileSelect]);
+      const file = e.dataTransfer.files[0];
+      if (file && (file.name.endsWith(".csv") || file.name.endsWith(".ofx"))) {
+        handleFileSelect(file);
+      }
+    },
+    [handleFileSelect]
+  );
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -117,12 +134,15 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
     setIsDragging(false);
   }, []);
 
-  const handleFileInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      handleFileSelect(file);
-    }
-  }, [handleFileSelect]);
+  const handleFileInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        handleFileSelect(file);
+      }
+    },
+    [handleFileSelect]
+  );
 
   const handleImportComplete = useCallback(() => {
     onComplete({ importedTransactions: processedCount, importMethod: "csv" });
@@ -140,7 +160,7 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
           onClick={() => fileInputRef.current?.click()}
           className={cn(
             "relative flex flex-col items-center justify-center",
-            "min-h-[200px] rounded-xl border-2 border-dashed cursor-pointer",
+            "min-h-[200px] cursor-pointer rounded-xl border-2 border-dashed",
             "transition-all duration-200",
             isDragging
               ? "border-teal-500 bg-teal-500/10"
@@ -157,44 +177,42 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
 
           {isProcessing ? (
             <div className="text-center">
-              <div className="w-12 h-12 rounded-full border-4 border-teal-500/30 border-t-teal-500 animate-spin mx-auto mb-4" />
-              <p className="text-white font-medium">Processing {uploadedFile?.name}...</p>
-              <p className="text-sm text-slate-400 mt-1">Detecting format and parsing transactions</p>
+              <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-teal-500/30 border-t-teal-500" />
+              <p className="font-medium text-white">Processing {uploadedFile?.name}...</p>
+              <p className="mt-1 text-sm text-slate-400">
+                Detecting format and parsing transactions
+              </p>
             </div>
           ) : uploadedFile && processedCount > 0 ? (
             <div className="text-center">
-              <div className="w-12 h-12 rounded-full bg-teal-500/20 flex items-center justify-center mx-auto mb-4">
+              <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-teal-500/20">
                 <Check className="h-6 w-6 text-teal-400" />
               </div>
-              <p className="text-white font-medium">{uploadedFile.name}</p>
-              <p className="text-sm text-teal-400 mt-1">
+              <p className="font-medium text-white">{uploadedFile.name}</p>
+              <p className="mt-1 text-sm text-teal-400">
                 Found {processedCount} transactions ready to import
               </p>
             </div>
           ) : (
             <>
-              <Upload className={cn(
-                "h-12 w-12 mb-4 transition-colors",
-                isDragging ? "text-teal-400" : "text-slate-500"
-              )} />
-              <p className="text-white font-medium mb-1">
+              <Upload
+                className={cn(
+                  "mb-4 h-12 w-12 transition-colors",
+                  isDragging ? "text-teal-400" : "text-slate-500"
+                )}
+              />
+              <p className="mb-1 font-medium text-white">
                 {isDragging ? "Drop your file here" : "Drag & drop your bank CSV"}
               </p>
-              <p className="text-sm text-slate-400">
-                or click to browse files
-              </p>
-              <p className="text-xs text-slate-500 mt-4">
-                Supports CSV and OFX formats
-              </p>
+              <p className="text-sm text-slate-400">or click to browse files</p>
+              <p className="mt-4 text-xs text-slate-500">Supports CSV and OFX formats</p>
             </>
           )}
         </div>
 
         {/* Supported Banks (collapsed hint) */}
-        <div className="bg-slate-800/50 rounded-lg p-4">
-          <p className="text-sm text-slate-400 mb-2">
-            Works with exports from:
-          </p>
+        <div className="rounded-lg bg-slate-800/50 p-4">
+          <p className="mb-2 text-sm text-slate-400">Works with exports from:</p>
           <p className="text-xs text-slate-500">
             {SUPPORTED_BANKS.slice(0, 8).join(", ")} and 100+ more banks
           </p>
@@ -205,7 +223,7 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
           <button
             type="button"
             onClick={() => setSelectedMethod(null)}
-            className="px-4 py-2 text-slate-400 hover:text-white transition-colors"
+            className="px-4 py-2 text-slate-400 transition-colors hover:text-white"
           >
             Back
           </button>
@@ -215,10 +233,10 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
               type="button"
               onClick={handleImportComplete}
               className={cn(
-                "flex-1 flex items-center justify-center gap-2 px-6 py-3",
+                "flex flex-1 items-center justify-center gap-2 px-6 py-3",
                 "bg-gradient-to-r from-teal-500 to-blue-500",
-                "text-white font-medium rounded-lg",
-                "hover:opacity-90 transition-opacity"
+                "rounded-lg font-medium text-white",
+                "transition-opacity hover:opacity-90"
               )}
             >
               Import {processedCount} Transactions
@@ -233,7 +251,7 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
   // Method selection view
   return (
     <div className="space-y-4">
-      <p className="text-slate-400 mb-6">
+      <p className="mb-6 text-slate-400">
         How would you like to get started with your transaction history?
       </p>
 
@@ -245,34 +263,32 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
             type="button"
             onClick={() => handleMethodSelect(option.id)}
             className={cn(
-              "w-full flex items-start gap-4 p-4 rounded-xl text-left",
-              "bg-slate-800/50 border border-white/5",
+              "flex w-full items-start gap-4 rounded-xl p-4 text-start",
+              "border border-white/5 bg-slate-800/50",
               "hover:border-teal-500/50 hover:bg-slate-800",
               "transition-all duration-200",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
             )}
           >
-            <div className={cn(
-              "shrink-0 w-12 h-12 rounded-xl flex items-center justify-center",
-              option.recommended
-                ? "bg-gradient-to-br from-teal-500 to-blue-500"
-                : "bg-slate-700"
-            )}>
+            <div
+              className={cn(
+                "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl",
+                option.recommended ? "bg-gradient-to-br from-teal-500 to-blue-500" : "bg-slate-700"
+              )}
+            >
               <option.icon className="h-6 w-6 text-white" />
             </div>
 
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-2 mb-1">
+            <div className="min-w-0 flex-1">
+              <div className="mb-1 flex items-center gap-2">
                 <h4 className="font-medium text-white">{option.title}</h4>
                 {option.recommended && (
-                  <span className="px-2 py-0.5 text-xs font-medium bg-teal-500/20 text-teal-400 rounded-full">
+                  <span className="rounded-full bg-teal-500/20 px-2 py-0.5 text-xs font-medium text-teal-400">
                     Recommended
                   </span>
                 )}
               </div>
-              <p className="text-sm text-slate-400 mb-2">
-                {option.description}
-              </p>
+              <p className="mb-2 text-sm text-slate-400">{option.description}</p>
               <ul className="space-y-1">
                 {option.details.map((detail, i) => (
                   <li key={i} className="flex items-center gap-2 text-xs text-slate-500">
@@ -283,13 +299,13 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
               </ul>
             </div>
 
-            <ArrowRight className="shrink-0 h-5 w-5 text-slate-600" />
+            <ArrowRight className="h-5 w-5 shrink-0 text-slate-600" />
           </button>
         ))}
       </div>
 
       {/* Help text */}
-      <p className="text-xs text-slate-500 text-center pt-4">
+      <p className="pt-4 text-center text-xs text-slate-500">
         Don&apos;t worry—you can always import more transactions later from Settings.
       </p>
     </div>

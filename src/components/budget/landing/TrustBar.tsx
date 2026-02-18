@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { LandingCard } from "@/components/budget/landing/LandingCard";
 import { Section } from "@/components/budget/landing/Section";

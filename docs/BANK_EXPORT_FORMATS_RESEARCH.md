@@ -23,6 +23,7 @@
 ### Canada (Primary Market)
 
 **All "Big 5" Banks Support CSV**:
+
 - ✅ BMO (Bank of Montreal) - CSV export available
 - ✅ RBC (Royal Bank of Canada) - CSV export available
 - ✅ TD (Toronto-Dominion Bank) - CSV export available
@@ -30,26 +31,29 @@
 - ✅ CIBC (Canadian Imperial Bank of Commerce) - CSV export available
 
 **OFX/QFX Status in Canada**:
+
 - ❌ Most Canadian banks **do not support OFX Direct Connect**
 - ⚠️ Some banks offer OFX file download (manual export)
 - 📊 CSV is the **de facto standard** for Canadian banking
 
 **Source**: [Wikipedia - Open Financial Exchange](https://en.wikipedia.org/wiki/Open_Financial_Exchange)
+
 > "Many United States banks let customers use personal financial management software to automatically import their bank transaction using the OFX protocol. However, most Canadian, United Kingdom and Australian banks do not allow this."
 
 ### United States
 
 **Major Banks Format Support**:
 
-| Bank | CSV | OFX/QFX | Excel | Notes |
-|------|-----|---------|-------|-------|
-| Chase | ✅ | ✅ | ✅ | Excel export, can save as CSV |
-| Wells Fargo | ✅ | ✅ | ✅ | Multiple export formats |
-| Bank of America | ✅ | ✅ | ✅ | Strong OFX support |
-| Citibank | ✅ | ✅ | ✅ | Multiple formats available |
-| Apple Card | ❌ | ✅ | ❌ | Modern OFX implementation |
+| Bank            | CSV | OFX/QFX | Excel | Notes                         |
+| --------------- | --- | ------- | ----- | ----------------------------- |
+| Chase           | ✅  | ✅      | ✅    | Excel export, can save as CSV |
+| Wells Fargo     | ✅  | ✅      | ✅    | Multiple export formats       |
+| Bank of America | ✅  | ✅      | ✅    | Strong OFX support            |
+| Citibank        | ✅  | ✅      | ✅    | Multiple formats available    |
+| Apple Card      | ❌  | ✅      | ❌    | Modern OFX implementation     |
 
 **OFX Adoption in US**:
+
 - ✅ Widely supported for **Direct Connect** (automatic sync)
 - ✅ QFX (Quicken) is **common for personal finance apps**
 - ⚠️ Some banks (like Chase) have **inconsistent CSV formats**
@@ -61,12 +65,14 @@
 ### CSV (Comma-Separated Values)
 
 **Pros**:
+
 - ✅ **Universal availability** - All banks support it
 - ✅ **Simple format** - Easy to parse with basic tools
 - ✅ **Human-readable** - Users can inspect/edit in Excel
 - ✅ **No licensing** - Open format, no proprietary restrictions
 
 **Cons**:
+
 - ❌ **No standardization** - Every bank uses different formats
 - ❌ **Inconsistent fields** - Column names vary (Date vs Transaction Date)
 - ❌ **Date format chaos** - MM/DD/YYYY vs DD/MM/YYYY vs YYYY-MM-DD
@@ -76,6 +82,7 @@
 **Common CSV Format Variations** (from QuickBooks):
 
 **3-Column Format**:
+
 ```csv
 Date,Description,Amount
 1/1/2018,Example of a payment,-100.00
@@ -83,6 +90,7 @@ Date,Description,Amount
 ```
 
 **4-Column Format**:
+
 ```csv
 Date,Description,Credit,Debit
 1/1/2018,Example of a payment,100.00,
@@ -90,11 +98,12 @@ Date,Description,Credit,Debit
 ```
 
 **Known CSV Issues**:
+
 - Dates may include day-of-week: "20/11/2018 TUE"
 - Credit card transactions may be reversed (payments as negative)
 - Some banks add zeros (0) that must be removed
 - Mac exports may not be Windows-compatible
-- QuickBooks: *"Each bank formats CSV files differently. This means you may not be able to import CSVs from certain banks since files don't have the format QuickBooks needs."*
+- QuickBooks: _"Each bank formats CSV files differently. This means you may not be able to import CSVs from certain banks since files don't have the format QuickBooks needs."_
 
 **Source**: [QuickBooks - Format CSV files](https://quickbooks.intuit.com/learn-support/en-us/help-article/bank-transactions/format-csv-files-excel-get-bank-transactions/L4BjLWckq_US_en_US)
 
@@ -103,6 +112,7 @@ Date,Description,Credit,Debit
 ### OFX (Open Financial Exchange)
 
 **Pros**:
+
 - ✅ **Standardized format** - Same structure across all banks
 - ✅ **Rich metadata** - Account info, transaction IDs, categories
 - ✅ **Direct Connect** - Automatic sync in US (no manual downloads)
@@ -110,11 +120,13 @@ Date,Description,Credit,Debit
 - ✅ **Industry standard** - Used by Quicken, QuickBooks, Mint, YNAB
 
 **Cons**:
+
 - ❌ **Limited in Canada** - Not widely supported for Direct Connect
 - ❌ **Complex parsing** - XML-based (or SGML for older versions)
 - ❌ **US-centric** - Less adoption outside United States
 
 **OFX Versions**:
+
 - **OFX 1.0-1.6**: SGML-based (legacy)
 - **OFX 2.0+**: XML-based (current standard)
 - **Latest**: OFX 2.3 (October 2020)
@@ -122,6 +134,7 @@ Date,Description,Credit,Debit
 **OFX Specification**: Managed by [Financial Data Exchange (FDX)](https://www.financialdataexchange.org/)
 
 **QFX (Quicken Financial Exchange)**:
+
 - Proprietary variant of OFX owned by Intuit
 - Used for "Web Connect" (manual file download + import)
 - OFX used for "Direct Connect" (automatic sync)
@@ -134,6 +147,7 @@ Date,Description,Credit,Debit
 ### BMO (Bank of Montreal)
 
 **Current Implementation** (already in Budget App):
+
 ```typescript
 // From /src/lib/categorization/rules.ts
 function cleanBMODescription(description: string): string {
@@ -144,12 +158,14 @@ function cleanBMODescription(description: string): string {
 ```
 
 **BMO CSV Format** (observed):
+
 ```csv
 "[PR] TIM HORTONS #1234  EDMONTON AB"
 "[OP] ONLINE PURCHASE  15NOV2024NETFLIX  MB"
 ```
 
 **Characteristics**:
+
 - Transaction type prefix: `[PR]` (physical) or `[OP]` (online)
 - Merchant name followed by location
 - Date embedded in online purchases
@@ -158,6 +174,7 @@ function cleanBMODescription(description: string): string {
 ### RBC (Royal Bank of Canada)
 
 **Expected Format** (based on documentation):
+
 ```csv
 Date,Description,Amount
 2024-11-15,NETFLIX SUBSCRIPTION,-15.99
@@ -165,6 +182,7 @@ Date,Description,Amount
 ```
 
 **Characteristics**:
+
 - ISO date format (YYYY-MM-DD)
 - Clean merchant names (no prefixes)
 - Negative for debits, positive for credits
@@ -172,6 +190,7 @@ Date,Description,Amount
 ### Chase Bank (US)
 
 **Known Issues**:
+
 - UK Chase: Only PDF exports (no CSV)
 - US Chase: Excel exports that can be saved as CSV
 - Format inconsistency reported by users
@@ -179,6 +198,7 @@ Date,Description,Amount
 ### Bank of America (US)
 
 **Supports**:
+
 - CSV export
 - OFX/QFX download
 - Strong support for personal finance apps
@@ -202,16 +222,17 @@ interface BankAdapter {
 }
 
 const adapters: BankAdapter[] = [
-  BMOAdapter,      // Already implemented
-  RBCAdapter,      // TODO: Add
-  TDAdapter,       // TODO: Add
-  ScotiabankAdapter,  // TODO: Add
-  CIBCAdapter,     // TODO: Add
-  GenericAdapter,  // Fallback for unknown banks
+  BMOAdapter, // Already implemented
+  RBCAdapter, // TODO: Add
+  TDAdapter, // TODO: Add
+  ScotiabankAdapter, // TODO: Add
+  CIBCAdapter, // TODO: Add
+  GenericAdapter, // Fallback for unknown banks
 ];
 ```
 
 **Detection Strategy**:
+
 ```typescript
 function detectBankAdapter(headers: string[]): BankAdapter {
   // Try bank-specific adapters first
@@ -220,24 +241,27 @@ function detectBankAdapter(headers: string[]): BankAdapter {
       return adapter;
     }
   }
-  
+
   // Fallback to generic 3-column or 4-column parser
   return GenericAdapter;
 }
 ```
 
 **Generic Adapter** (for unknown banks):
+
 - Support both 3-column (Date, Description, Amount) and 4-column (Date, Description, Credit, Debit)
 - Auto-detect date format (MM/DD/YYYY, DD/MM/YYYY, YYYY-MM-DD)
 - Handle common quirks (day-of-week, zeros, credit card reversals)
 
 **Benefits**:
+
 - ✅ Works with **all Canadian banks immediately**
 - ✅ Graceful degradation for unknown formats
 - ✅ Easy to add new bank adapters
 - ✅ No licensing costs
 
 **Files to Create**:
+
 - `/src/lib/csv-import/adapters/rbc-adapter.ts`
 - `/src/lib/csv-import/adapters/td-adapter.ts`
 - `/src/lib/csv-import/adapters/scotiabank-adapter.ts`
@@ -252,33 +276,37 @@ function detectBankAdapter(headers: string[]): BankAdapter {
 **Goal**: Support automatic sync and file import for US market expansion
 
 **Use Cases**:
+
 - US users with OFX-enabled banks (Chase, Wells Fargo, Bank of America)
 - Users who prefer automatic sync over manual CSV downloads
 - Cross-border users with both US and Canadian accounts
 
 **Implementation**:
+
 ```typescript
 // OFX parser library (use existing npm package)
-import OFXParser from 'ofx-js';
+import OFXParser from "ofx-js";
 
 async function parseOFX(ofxFile: string): Promise<Transaction[]> {
   const ofx = OFXParser.parse(ofxFile);
-  return ofx.transactions.map(tx => ({
+  return ofx.transactions.map((tx) => ({
     date: tx.date,
     description: tx.memo || tx.name,
     amount: tx.amount,
     type: tx.type, // DEBIT or CREDIT
-    id: tx.id,     // Unique transaction ID
+    id: tx.id, // Unique transaction ID
   }));
 }
 ```
 
 **Benefits**:
+
 - ✅ **Standardized format** - No bank-specific adapters needed
 - ✅ **Rich metadata** - Transaction IDs prevent duplicates
 - ✅ **US market** - Unlocks Chase, BofA, Wells Fargo users
 
 **Trade-offs**:
+
 - ⚠️ **Limited in Canada** - Not widely available
 - ⚠️ **Complex parsing** - Requires XML parser
 - ⚠️ **Lower priority** - CSV covers 100% of Canadian banks
@@ -292,6 +320,7 @@ async function parseOFX(ofxFile: string): Promise<Transaction[]> {
 ### ✅ Already Implemented
 
 **BMO CSV Support** (`/src/lib/categorization/rules.ts`):
+
 ```typescript
 function cleanBMODescription(description: string): string {
   // Handles [PR] and [OP] prefixes
@@ -301,6 +330,7 @@ function cleanBMODescription(description: string): string {
 ```
 
 **Merchant Intelligence System** (in production):
+
 - OpenAI categorization
 - Merchant catalog with canonical names
 - User feedback loop
@@ -308,12 +338,14 @@ function cleanBMODescription(description: string): string {
 ### 🔲 Not Yet Implemented
 
 **CSV Import Feature**:
+
 - No upload UI for CSV files
 - No CSV parser beyond BMO format
 - No bank detection logic
 - No file validation
 
 **Required for Full CSV Support**:
+
 1. File upload component (`/src/app/budget-app/import/page.tsx`)
 2. CSV parser with bank detection
 3. Transaction validation and deduplication
@@ -373,18 +405,20 @@ function cleanBMODescription(description: string): string {
 ### CSV Parser Requirements
 
 **Input**:
+
 - File type: `.csv`
 - Max size: 5MB (approx 50,000 transactions)
 - Encodings: UTF-8, Windows-1252 (Latin-1)
 
 **Detection Logic**:
+
 ```typescript
 interface CSVHeaders {
-  dateColumn: string;     // "Date", "Transaction Date", "Posted Date"
-  descColumn: string;     // "Description", "Memo", "Payee"
-  amountColumn?: string;  // "Amount" (3-column format)
-  creditColumn?: string;  // "Credit" (4-column format)
-  debitColumn?: string;   // "Debit" (4-column format)
+  dateColumn: string; // "Date", "Transaction Date", "Posted Date"
+  descColumn: string; // "Description", "Memo", "Payee"
+  amountColumn?: string; // "Amount" (3-column format)
+  creditColumn?: string; // "Credit" (4-column format)
+  debitColumn?: string; // "Debit" (4-column format)
 }
 
 function detectFormat(headers: string[]): CSVHeaders {
@@ -394,13 +428,14 @@ function detectFormat(headers: string[]): CSVHeaders {
 ```
 
 **Date Format Detection**:
+
 ```typescript
 const dateFormats = [
-  'MM/DD/YYYY',  // US format
-  'DD/MM/YYYY',  // International
-  'YYYY-MM-DD',  // ISO 8601
-  'MM-DD-YYYY',  // US with dashes
-  'DD-MM-YYYY',  // International with dashes
+  "MM/DD/YYYY", // US format
+  "DD/MM/YYYY", // International
+  "YYYY-MM-DD", // ISO 8601
+  "MM-DD-YYYY", // US with dashes
+  "DD-MM-YYYY", // International with dashes
 ];
 
 function detectDateFormat(sample: string[]): string {
@@ -409,11 +444,11 @@ function detectDateFormat(sample: string[]): string {
 ```
 
 **Amount Parsing**:
+
 ```typescript
-function parseAmount(value: string, format: '3-column' | '4-column'): number {
+function parseAmount(value: string, format: "3-column" | "4-column"): number {
   // 3-column: Negative = debit, Positive = credit
   // 4-column: Separate Credit/Debit columns
-  
   // Handle:
   // - Currency symbols ($, CAD, USD)
   // - Thousands separators (1,000.00)
@@ -425,10 +460,12 @@ function parseAmount(value: string, format: '3-column' | '4-column'): number {
 ### OFX Parser Requirements (Future)
 
 **Libraries**:
+
 - `ofx-js` - TypeScript OFX parser
 - `xml2js` - XML parser for OFX 2.0+
 
 **Sample OFX Structure**:
+
 ```xml
 <OFX>
   <BANKMSGSRSV1>
@@ -457,6 +494,7 @@ function parseAmount(value: string, format: '3-column' | '4-column'): number {
 ### CSV Import Testing
 
 **Test Cases**:
+
 1. ✅ BMO format (already working)
 2. ✅ Generic 3-column format
 3. ✅ Generic 4-column format
@@ -466,6 +504,7 @@ function parseAmount(value: string, format: '3-column' | '4-column'): number {
 7. ✅ Edge cases (zeros, day-of-week in dates, special characters)
 
 **Sample Test Files**:
+
 - `/tests/fixtures/csv/bmo-sample.csv`
 - `/tests/fixtures/csv/rbc-sample.csv`
 - `/tests/fixtures/csv/td-sample.csv`
@@ -477,6 +516,7 @@ function parseAmount(value: string, format: '3-column' | '4-column'): number {
 ### Real-World Testing
 
 **Approach**:
+
 1. Request sample CSV exports from real users
 2. Test with actual bank data (anonymized)
 3. Build adapters for discovered edge cases
@@ -488,12 +528,14 @@ function parseAmount(value: string, format: '3-column' | '4-column'): number {
 ### CSV Import
 
 **Privacy**:
+
 - ✅ All processing happens **client-side** (browser)
 - ✅ CSV files **never uploaded to server**
 - ✅ Data stored in **local IndexedDB only**
 - ✅ No transaction data sent to APIs (only merchant tokens)
 
 **Security**:
+
 - ✅ File size limits (prevent memory exhaustion)
 - ✅ Content type validation (only .csv accepted)
 - ✅ Sanitization of special characters
@@ -502,11 +544,13 @@ function parseAmount(value: string, format: '3-column' | '4-column'): number {
 ### OFX Import (Future)
 
 **Privacy**:
+
 - ⚠️ OFX files contain **account numbers** and **routing numbers**
 - ✅ Must strip sensitive fields before storage
 - ✅ Only store: date, description, amount (same as CSV)
 
 **Security**:
+
 - ✅ XML parser with **safe mode** (prevent XXE attacks)
 - ✅ Validate OFX schema before parsing
 - ✅ File size limits
@@ -525,12 +569,14 @@ function parseAmount(value: string, format: '3-column' | '4-column'): number {
 ### Recommended Action Plan
 
 **✅ Start with CSV** (Phase 1):
+
 - Build flexible CSV parser with bank adapters
 - Support all 5 major Canadian banks
 - Use generic fallback for unknown banks
 - **Target**: 100% compatibility with Canadian banks
 
 **⏳ Add OFX later** (Phase 2):
+
 - When expanding to US market
 - For users who prefer automatic sync
 - **Target**: Enhanced UX for US banks
@@ -538,12 +584,14 @@ function parseAmount(value: string, format: '3-column' | '4-column'): number {
 ### Success Metrics
 
 **Phase 1 (CSV)**:
+
 - ✅ Support 5 major Canadian banks
 - ✅ 95%+ success rate with generic adapter (unknown banks)
 - ✅ <5 seconds to import 1000 transactions
 - ✅ Zero server-side data storage
 
 **Phase 2 (OFX)**:
+
 - ✅ Support top 5 US banks
 - ✅ Parse OFX 1.x and 2.x formats
 - ✅ Handle QFX (Quicken) files

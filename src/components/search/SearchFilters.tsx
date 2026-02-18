@@ -115,7 +115,7 @@ export function SearchFilters() {
                   id={`domain-${domain}`}
                   checked={isChecked}
                   onCheckedChange={(checked) => handleDomainChange(domain, checked as boolean)}
-                  className="border-white/20 data-[state=checked]:bg-tanium-accent"
+                  className="data-[state=checked]:bg-tanium-accent border-white/20"
                 />
                 <Label
                   htmlFor={`domain-${domain}`}
@@ -165,7 +165,7 @@ export function SearchFilters() {
                   onCheckedChange={(checked) =>
                     handleDifficultyChange(difficulty, checked as boolean)
                   }
-                  className="border-white/20 data-[state=checked]:bg-tanium-accent"
+                  className="data-[state=checked]:bg-tanium-accent border-white/20"
                 />
                 <Label
                   htmlFor={`difficulty-${difficulty}`}
@@ -231,7 +231,7 @@ export function SearchFilters() {
                   id={`category-${category}`}
                   checked={isChecked}
                   onCheckedChange={(checked) => handleCategoryChange(category, checked as boolean)}
-                  className="border-white/20 data-[state=checked]:bg-tanium-accent"
+                  className="data-[state=checked]:bg-tanium-accent border-white/20"
                 />
                 <Label
                   htmlFor={`category-${category}`}
@@ -270,7 +270,7 @@ export function SearchFilters() {
               onCheckedChange={(checked) =>
                 handleFeatureChange("hasExplanation", checked ? true : undefined)
               }
-              className="border-white/20 data-[state=checked]:bg-tanium-accent"
+              className="data-[state=checked]:bg-tanium-accent border-white/20"
             />
             <Label
               htmlFor="has-explanation"
@@ -287,7 +287,7 @@ export function SearchFilters() {
               onCheckedChange={(checked) =>
                 handleFeatureChange("hasConsoleSteps", checked ? true : undefined)
               }
-              className="border-white/20 data-[state=checked]:bg-tanium-accent"
+              className="data-[state=checked]:bg-tanium-accent border-white/20"
             />
             <Label
               htmlFor="has-console-steps"

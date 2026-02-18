@@ -10,26 +10,32 @@ Comprehensive security headers have been configured for the Tanium TCO LMS to pr
 ## Implemented Security Headers
 
 ### 1. X-DNS-Prefetch-Control
+
 - **Value**: `on`
 - **Purpose**: Enables DNS prefetching for performance optimization
 
 ### 2. X-Content-Type-Options
+
 - **Value**: `nosniff`
 - **Purpose**: Prevents MIME type sniffing attacks
 
 ### 3. X-Frame-Options
+
 - **Value**: `SAMEORIGIN`
 - **Purpose**: Prevents clickjacking attacks by allowing framing only from same origin
 
 ### 4. X-XSS-Protection
+
 - **Value**: `1; mode=block`
 - **Purpose**: Enables XSS filtering in older browsers
 
 ### 5. Referrer-Policy
+
 - **Value**: `strict-origin-when-cross-origin`
 - **Purpose**: Controls referrer information sent to external sites
 
 ### 6. Permissions-Policy
+
 - **Value**: `camera=(), microphone=(), geolocation=()`
 - **Purpose**: Disables access to sensitive browser features
 
@@ -40,41 +46,49 @@ Comprehensive CSP configuration that allows only necessary external resources:
 #### Allowed Resources by Type:
 
 **Scripts:**
+
 - Self-hosted scripts
 - YouTube (for video player)
 - PostHog (analytics)
 - CDN jsdelivr (for libraries)
 
 **Styles:**
+
 - Self-hosted styles
 - Google Fonts
 - Inline styles (required for React/Next.js)
 
 **Images:**
+
 - Self-hosted images
 - YouTube thumbnails
 - Supabase storage
 - Data URLs and blobs
 
 **Fonts:**
+
 - Self-hosted fonts
 - Google Fonts (gstatic.com)
 
 **Connections:**
+
 - Self (API routes)
 - Supabase (database and real-time)
 - PostHog (analytics)
 
 **Frames:**
+
 - YouTube embeds (regular and nocookie)
 
 **Media:**
+
 - Self-hosted media
 - YouTube videos
 
 ## Security Enhancements
 
 ### Strict Security Policies:
+
 - `object-src 'none'` - No plugins allowed
 - `base-uri 'self'` - Restricts base URL to same origin
 - `form-action 'self'` - Forms can only submit to same origin
@@ -122,6 +136,7 @@ The CSP policy explicitly allows these external services:
 ## Compliance
 
 These security headers help achieve:
+
 - OWASP Top 10 protection
 - PCI DSS compliance requirements
 - GDPR security requirements
@@ -130,6 +145,7 @@ These security headers help achieve:
 ## Maintenance
 
 Review and update security headers:
+
 - When adding new external services
 - During security audits
 - When new security threats emerge
@@ -137,4 +153,4 @@ Review and update security headers:
 
 ---
 
-*Security headers configured as part of P1 priority security improvements*
+_Security headers configured as part of P1 priority security improvements_

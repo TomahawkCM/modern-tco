@@ -3,13 +3,13 @@
  * Controls which features are enabled in standalone vs online modes
  */
 
-export type AppMode = 'standalone' | 'online';
+export type AppMode = "standalone" | "online";
 
 /**
  * Current app mode - change this to 'online' when deploying cloud version
  * In standalone mode, all data stays on device. In online mode, cloud sync is enabled.
  */
-export const APP_MODE = 'standalone' as AppMode;
+export const APP_MODE = "standalone" as AppMode;
 
 /**
  * Feature flags for the budget app
@@ -40,22 +40,22 @@ export const FEATURES = {
   // ========================
 
   /** AI features - OpenAI-powered analysis (requires API key) */
-  aiFeatures: APP_MODE === 'online',
+  aiFeatures: APP_MODE === "online",
 
   /** Chatbot - AI-powered budget assistant */
-  chatbot: APP_MODE === 'online',
+  chatbot: APP_MODE === "online",
 
   /** Cloud sync - sync data across devices via cloud */
-  cloudSync: APP_MODE === 'online',
+  cloudSync: APP_MODE === "online",
 
   /** Family invites - invite family members to share budgets */
-  familyInvites: APP_MODE === 'online',
+  familyInvites: APP_MODE === "online",
 
   /** Cloud backup - automatic backup to cloud storage */
-  cloudBackup: APP_MODE === 'online',
+  cloudBackup: APP_MODE === "online",
 
   /** Real-time collaboration - see changes from family members in real-time */
-  realTimeCollab: APP_MODE === 'online',
+  realTimeCollab: APP_MODE === "online",
 } as const;
 
 /**
@@ -77,7 +77,7 @@ export function isFeatureEnabled(feature: FeatureName): boolean {
  * @returns boolean indicating if online mode is active
  */
 export function isOnlineMode(): boolean {
-  return APP_MODE === 'online';
+  return APP_MODE === "online";
 }
 
 /**
@@ -85,7 +85,7 @@ export function isOnlineMode(): boolean {
  * @returns boolean indicating if standalone mode is active
  */
 export function isStandaloneMode(): boolean {
-  return APP_MODE === 'standalone';
+  return APP_MODE === "standalone";
 }
 
 /**
@@ -93,9 +93,7 @@ export function isStandaloneMode(): boolean {
  * @returns Array of enabled feature names
  */
 export function getEnabledFeatures(): FeatureName[] {
-  return (Object.keys(FEATURES) as FeatureName[]).filter(
-    (feature) => FEATURES[feature]
-  );
+  return (Object.keys(FEATURES) as FeatureName[]).filter((feature) => FEATURES[feature]);
 }
 
 /**
@@ -103,79 +101,80 @@ export function getEnabledFeatures(): FeatureName[] {
  * @returns Array of disabled feature names
  */
 export function getDisabledFeatures(): FeatureName[] {
-  return (Object.keys(FEATURES) as FeatureName[]).filter(
-    (feature) => !FEATURES[feature]
-  );
+  return (Object.keys(FEATURES) as FeatureName[]).filter((feature) => !FEATURES[feature]);
 }
 
 /**
  * Feature descriptions for UI display
  */
-export const FEATURE_DESCRIPTIONS: Record<FeatureName, {
-  title: string;
-  description: string;
-  icon: string;
-}> = {
+export const FEATURE_DESCRIPTIONS: Record<
+  FeatureName,
+  {
+    title: string;
+    description: string;
+    icon: string;
+  }
+> = {
   multiProfiles: {
-    title: 'Multi-Profile Support',
-    description: 'Create separate profiles for different family members',
-    icon: 'users',
+    title: "Multi-Profile Support",
+    description: "Create separate profiles for different family members",
+    icon: "users",
   },
   pinAuthentication: {
-    title: 'PIN Protection',
-    description: 'Secure profiles with a 4-6 digit PIN code',
-    icon: 'lock',
+    title: "PIN Protection",
+    description: "Secure profiles with a 4-6 digit PIN code",
+    icon: "lock",
   },
   privatePublicBudgets: {
-    title: 'Private & Shared Budgets',
-    description: 'Control which budgets are visible to each profile',
-    icon: 'eye',
+    title: "Private & Shared Budgets",
+    description: "Control which budgets are visible to each profile",
+    icon: "eye",
   },
   activityLogging: {
-    title: 'Activity Log',
-    description: 'Track who made changes and when',
-    icon: 'history',
+    title: "Activity Log",
+    description: "Track who made changes and when",
+    icon: "history",
   },
   localExport: {
-    title: 'Local Export',
-    description: 'Export your data for backup or transfer',
-    icon: 'download',
+    title: "Local Export",
+    description: "Export your data for backup or transfer",
+    icon: "download",
   },
   aiFeatures: {
-    title: 'AI Features',
-    description: 'AI-powered analysis for smart import and insights',
-    icon: 'sparkles',
+    title: "AI Features",
+    description: "AI-powered analysis for smart import and insights",
+    icon: "sparkles",
   },
   chatbot: {
-    title: 'AI Chatbot',
-    description: 'Personal budget assistant powered by AI',
-    icon: 'message-circle',
+    title: "AI Chatbot",
+    description: "Personal budget assistant powered by AI",
+    icon: "message-circle",
   },
   cloudSync: {
-    title: 'Cloud Sync',
-    description: 'Sync your data across all your devices automatically',
-    icon: 'cloud',
+    title: "Cloud Sync",
+    description: "Sync your data across all your devices automatically",
+    icon: "cloud",
   },
   familyInvites: {
-    title: 'Family Invites',
-    description: 'Invite family members to collaborate on shared budgets',
-    icon: 'user-plus',
+    title: "Family Invites",
+    description: "Invite family members to collaborate on shared budgets",
+    icon: "user-plus",
   },
   cloudBackup: {
-    title: 'Cloud Backup',
-    description: 'Automatic backups to keep your data safe',
-    icon: 'cloud-upload',
+    title: "Cloud Backup",
+    description: "Automatic backups to keep your data safe",
+    icon: "cloud-upload",
   },
   realTimeCollab: {
-    title: 'Real-Time Collaboration',
-    description: 'See changes from family members instantly',
-    icon: 'refresh-cw',
+    title: "Real-Time Collaboration",
+    description: "See changes from family members instantly",
+    icon: "refresh-cw",
   },
 };
 
 // Log feature flags on module load (development only)
-if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  console.log('[Features] App Mode:', APP_MODE);
-  console.log('[Features] Enabled:', getEnabledFeatures());
-  console.log('[Features] Disabled:', getDisabledFeatures());
+if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+  console.log("[Features] App Mode:", APP_MODE);
+  console.log("[Features] Enabled:", getEnabledFeatures());
+  console.log("[Features] Disabled:", getDisabledFeatures());
 }

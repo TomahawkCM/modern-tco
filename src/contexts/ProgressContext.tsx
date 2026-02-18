@@ -216,15 +216,14 @@ function progressReducer(state: ProgressState, action: ProgressAction): Progress
       };
 
     case "UPDATE_SESSION_STATS": {
-      const {domain} = action.payload;
+      const { domain } = action.payload;
       const questionsCount = Math.max(0, Math.round(action.payload.questionsCount));
       const score = Math.max(0, Math.min(100, action.payload.score));
       const timeSpent = Math.max(0, action.payload.timeSpent);
 
       const newTotalQuestions = state.progress.totalQuestions + questionsCount;
       const newSessionCount = state.progress.sessionCount + 1;
-      const totalScoreAccum =
-        state.progress.averageScore * state.progress.sessionCount + score;
+      const totalScoreAccum = state.progress.averageScore * state.progress.sessionCount + score;
       const newAverageScore =
         newSessionCount > 0 ? Math.round(totalScoreAccum / newSessionCount) : 0;
       const newCorrectAnswers =
@@ -513,8 +512,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
     const fallbackSentinelDate = "1970-01-01"; // Jest fake timers default to epoch if system time isn't set
     const isFallbackDate = today === fallbackSentinelDate;
-    const comingFromFallback =
-      snapshot.lastStudyDate === fallbackSentinelDate && !isFallbackDate;
+    const comingFromFallback = snapshot.lastStudyDate === fallbackSentinelDate && !isFallbackDate;
 
     if (isFallbackDate) {
       fallbackStudyStreakRef.current = Math.max(

@@ -1,41 +1,43 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
+import React, { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Progress } from '@/components/ui/progress';
-import { Badge } from '@/components/ui/badge';
-import { Sparkles, CheckCircle2, XCircle, Edit, Loader2, AlertTriangle } from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
-import { QuestionGeneratorService } from '@/services/QuestionGeneratorService';
-import { QuestionPreview } from './QuestionPreview';
-import { questionService } from '@/lib/questionService';
-import type { Question, TCODomain, Difficulty, QuestionCategory } from '@/types/exam';
+} from "@/components/ui/select";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Progress } from "@/components/ui/progress";
+import { Badge } from "@/components/ui/badge";
+import { Sparkles, CheckCircle2, XCircle, Edit, Loader2, AlertTriangle } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import { QuestionGeneratorService } from "@/services/QuestionGeneratorService";
+import { QuestionPreview } from "./QuestionPreview";
+import { questionService } from "@/lib/questionService";
+import type { Question, TCODomain, Difficulty, QuestionCategory } from "@/types/exam";
 import {
   TCODomain as TCODomainEnum,
   Difficulty as DifficultyEnum,
-  QuestionCategory as QuestionCategoryEnum
-} from '@/types/exam';
+  QuestionCategory as QuestionCategoryEnum,
+} from "@/types/exam";
 
 interface GeneratedQuestionState extends Question {
-  status: 'pending' | 'approved' | 'rejected' | 'editing';
+  status: "pending" | "approved" | "rejected" | "editing";
 }
 
 export function AIGenerationPanel() {
   // Configuration state
   const [domain, setDomain] = useState<TCODomain>(TCODomainEnum.ASKING_QUESTIONS);
   const [difficulty, setDifficulty] = useState<Difficulty>(DifficultyEnum.INTERMEDIATE);
-  const [category, setCategory] = useState<QuestionCategory>(QuestionCategoryEnum.PLATFORM_FUNDAMENTALS);
+  const [category, setCategory] = useState<QuestionCategory>(
+    QuestionCategoryEnum.PLATFORM_FUNDAMENTALS
+  );
   const [count, setCount] = useState(5);
 
   // Generation state
@@ -54,9 +56,9 @@ export function AIGenerationPanel() {
   const handleGenerate = async () => {
     if (count < 1 || count > 50) {
       toast({
-        title: 'Invalid Count',
-        description: 'Please generate between 1 and 50 questions',
-        variant: 'destructive',
+        title: "Invalid Count",
+        description: "Please generate between 1 and 50 questions",
+        variant: "destructive",
       });
       return;
     }
@@ -84,22 +86,22 @@ export function AIGenerationPanel() {
       // Convert to state objects
       const questionsWithStatus: GeneratedQuestionState[] = questions.map((q) => ({
         ...q,
-        status: 'pending',
+        status: "pending",
       }));
 
       setGeneratedQuestions(questionsWithStatus);
       setProgress(100);
 
       toast({
-        title: 'Success',
+        title: "Success",
         description: `Generated ${questions.length} questions. Review and approve to save.`,
       });
     } catch (error) {
-      console.error('Generation failed:', error);
+      console.error("Generation failed:", error);
       toast({
-        title: 'Generation Failed',
-        description: error instanceof Error ? error.message : 'Failed to generate questions',
-        variant: 'destructive',
+        title: "Generation Failed",
+        description: error instanceof Error ? error.message : "Failed to generate questions",
+        variant: "destructive",
       });
     } finally {
       setIsGenerating(false);
@@ -108,13 +110,13 @@ export function AIGenerationPanel() {
 
   const handleApprove = (questionId: string) => {
     setGeneratedQuestions((prev) =>
-      prev.map((q) => (q.id === questionId ? { ...q, status: 'approved' } : q))
+      prev.map((q) => (q.id === questionId ? { ...q, status: "approved" } : q))
     );
   };
 
   const handleReject = (questionId: string) => {
     setGeneratedQuestions((prev) =>
-      prev.map((q) => (q.id === questionId ? { ...q, status: 'rejected' } : q))
+      prev.map((q) => (q.id === questionId ? { ...q, status: "rejected" } : q))
     );
   };
 
@@ -124,13 +126,13 @@ export function AIGenerationPanel() {
   };
 
   const handleSaveApproved = async () => {
-    const approvedQuestions = generatedQuestions.filter((q) => q.status === 'approved');
+    const approvedQuestions = generatedQuestions.filter((q) => q.status === "approved");
 
     if (approvedQuestions.length === 0) {
       toast({
-        title: 'No Questions Approved',
-        description: 'Please approve at least one question before saving',
-        variant: 'destructive',
+        title: "No Questions Approved",
+        description: "Please approve at least one question before saving",
+        variant: "destructive",
       });
       return;
     }
@@ -149,18 +151,18 @@ export function AIGenerationPanel() {
       }
 
       toast({
-        title: 'Success',
+        title: "Success",
         description: `Saved ${saved} questions to the database`,
       });
 
       // Clear approved questions from the list
-      setGeneratedQuestions((prev) => prev.filter((q) => q.status !== 'approved'));
+      setGeneratedQuestions((prev) => prev.filter((q) => q.status !== "approved"));
     } catch (error) {
-      console.error('Save failed:', error);
+      console.error("Save failed:", error);
       toast({
-        title: 'Save Failed',
-        description: 'Failed to save some questions',
-        variant: 'destructive',
+        title: "Save Failed",
+        description: "Failed to save some questions",
+        variant: "destructive",
       });
     } finally {
       setIsSaving(false);
@@ -168,18 +170,18 @@ export function AIGenerationPanel() {
   };
 
   const handleDiscardAll = () => {
-    if (!confirm('Are you sure you want to discard all generated questions?')) return;
+    if (!confirm("Are you sure you want to discard all generated questions?")) return;
     setGeneratedQuestions([]);
     setProgress(0);
     toast({
-      title: 'Discarded',
-      description: 'All generated questions have been discarded',
+      title: "Discarded",
+      description: "All generated questions have been discarded",
     });
   };
 
-  const approvedCount = generatedQuestions.filter((q) => q.status === 'approved').length;
-  const rejectedCount = generatedQuestions.filter((q) => q.status === 'rejected').length;
-  const pendingCount = generatedQuestions.filter((q) => q.status === 'pending').length;
+  const approvedCount = generatedQuestions.filter((q) => q.status === "approved").length;
+  const rejectedCount = generatedQuestions.filter((q) => q.status === "rejected").length;
+  const pendingCount = generatedQuestions.filter((q) => q.status === "pending").length;
 
   return (
     <div className="space-y-6">
@@ -191,11 +193,12 @@ export function AIGenerationPanel() {
             AI Question Generation
           </CardTitle>
           <CardDescription>
-            Generate TCO exam questions using Claude AI. Configure the parameters and review generated questions before saving.
+            Generate TCO exam questions using Claude AI. Configure the parameters and review
+            generated questions before saving.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="domain">Domain</Label>
               <Select value={domain} onValueChange={(value) => setDomain(value as TCODomain)}>
@@ -214,7 +217,10 @@ export function AIGenerationPanel() {
 
             <div className="space-y-2">
               <Label htmlFor="difficulty">Difficulty</Label>
-              <Select value={difficulty} onValueChange={(value) => setDifficulty(value as Difficulty)}>
+              <Select
+                value={difficulty}
+                onValueChange={(value) => setDifficulty(value as Difficulty)}
+              >
                 <SelectTrigger id="difficulty">
                   <SelectValue placeholder="Select difficulty" />
                 </SelectTrigger>
@@ -230,7 +236,10 @@ export function AIGenerationPanel() {
 
             <div className="space-y-2">
               <Label htmlFor="category">Category</Label>
-              <Select value={category} onValueChange={(value) => setCategory(value as QuestionCategory)}>
+              <Select
+                value={category}
+                onValueChange={(value) => setCategory(value as QuestionCategory)}
+              >
                 <SelectTrigger id="category">
                   <SelectValue placeholder="Select category" />
                 </SelectTrigger>
@@ -258,20 +267,15 @@ export function AIGenerationPanel() {
             </div>
           </div>
 
-          <Button
-            onClick={handleGenerate}
-            disabled={isGenerating}
-            className="w-full"
-            size="lg"
-          >
+          <Button onClick={handleGenerate} disabled={isGenerating} className="w-full" size="lg">
             {isGenerating ? (
               <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Generating... ({Math.round(progress)}%)
               </>
             ) : (
               <>
-                <Sparkles className="h-4 w-4 mr-2" />
+                <Sparkles className="mr-2 h-4 w-4" />
                 Generate Questions
               </>
             )}
@@ -280,7 +284,7 @@ export function AIGenerationPanel() {
           {isGenerating && (
             <div className="space-y-2">
               <Progress value={progress} className="w-full" />
-              <p className="text-sm text-muted-foreground text-center">
+              <p className="text-center text-sm text-muted-foreground">
                 Processing batch {currentBatch + 1} of {totalBatches}...
               </p>
             </div>
@@ -311,20 +315,13 @@ export function AIGenerationPanel() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Button
-                    variant="outline"
-                    onClick={handleDiscardAll}
-                    disabled={isSaving}
-                  >
+                  <Button variant="outline" onClick={handleDiscardAll} disabled={isSaving}>
                     Discard All
                   </Button>
-                  <Button
-                    onClick={handleSaveApproved}
-                    disabled={approvedCount === 0 || isSaving}
-                  >
+                  <Button onClick={handleSaveApproved} disabled={approvedCount === 0 || isSaving}>
                     {isSaving ? (
                       <>
-                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         Saving ({savedCount}/{approvedCount})
                       </>
                     ) : (
@@ -342,39 +339,39 @@ export function AIGenerationPanel() {
               <Card
                 key={question.id}
                 className={
-                  question.status === 'approved'
-                    ? 'border-green-500/50 bg-green-500/5'
-                    : question.status === 'rejected'
-                    ? 'border-red-500/50 bg-red-500/5'
-                    : 'border-border'
+                  question.status === "approved"
+                    ? "border-green-500/50 bg-green-500/5"
+                    : question.status === "rejected"
+                      ? "border-red-500/50 bg-red-500/5"
+                      : "border-border"
                 }
               >
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="mb-2 flex items-center gap-2">
                         <Badge variant="outline">#{index + 1}</Badge>
                         <Badge variant="secondary">{question.domain}</Badge>
                         <Badge
                           variant={
-                            question.difficulty === 'Beginner'
-                              ? 'default'
-                              : question.difficulty === 'Intermediate'
-                              ? 'secondary'
-                              : 'destructive'
+                            question.difficulty === "Beginner"
+                              ? "default"
+                              : question.difficulty === "Intermediate"
+                                ? "secondary"
+                                : "destructive"
                           }
                         >
                           {question.difficulty}
                         </Badge>
-                        {question.status === 'approved' && (
+                        {question.status === "approved" && (
                           <Badge className="bg-green-500">
-                            <CheckCircle2 className="h-3 w-3 mr-1" />
+                            <CheckCircle2 className="mr-1 h-3 w-3" />
                             Approved
                           </Badge>
                         )}
-                        {question.status === 'rejected' && (
+                        {question.status === "rejected" && (
                           <Badge className="bg-red-500">
-                            <XCircle className="h-3 w-3 mr-1" />
+                            <XCircle className="mr-1 h-3 w-3" />
                             Rejected
                           </Badge>
                         )}
@@ -382,14 +379,14 @@ export function AIGenerationPanel() {
                     </div>
 
                     <div className="flex items-center gap-2">
-                      {question.status === 'pending' && (
+                      {question.status === "pending" && (
                         <>
                           <Button
                             size="sm"
                             variant="outline"
                             onClick={() => handleReject(question.id)}
                           >
-                            <XCircle className="h-4 w-4 mr-1" />
+                            <XCircle className="mr-1 h-4 w-4" />
                             Reject
                           </Button>
                           <Button
@@ -397,18 +394,14 @@ export function AIGenerationPanel() {
                             variant="default"
                             onClick={() => handleApprove(question.id)}
                           >
-                            <CheckCircle2 className="h-4 w-4 mr-1" />
+                            <CheckCircle2 className="mr-1 h-4 w-4" />
                             Approve
                           </Button>
                         </>
                       )}
-                      {question.status !== 'pending' && (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          onClick={() => handleEdit(question.id)}
-                        >
-                          <Edit className="h-4 w-4 mr-1" />
+                      {question.status !== "pending" && (
+                        <Button size="sm" variant="outline" onClick={() => handleEdit(question.id)}>
+                          <Edit className="mr-1 h-4 w-4" />
                           Edit
                         </Button>
                       )}
@@ -432,8 +425,8 @@ export function AIGenerationPanel() {
       {generatedQuestions.length === 0 && !isGenerating && (
         <Alert>
           <AlertDescription>
-            <p className="font-semibold mb-2">How it works:</p>
-            <ol className="list-decimal list-inside space-y-1 text-sm">
+            <p className="mb-2 font-semibold">How it works:</p>
+            <ol className="list-inside list-decimal space-y-1 text-sm">
               <li>Configure the domain, difficulty, category, and number of questions</li>
               <li>Click "Generate Questions" to create questions using Claude AI</li>
               <li>Review each generated question for accuracy and quality</li>

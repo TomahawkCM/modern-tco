@@ -34,45 +34,48 @@ http://localhost:3000/budget-app
 
 ## 📊 What's Done
 
-| Feature | Status | Test It |
-|---------|--------|---------|
-| Color system docs | ✅ | Read BUDGET_APP_COLOR_SYSTEM.md |
-| Icons on amounts | ✅ | Visit /transactions |
-| Focus indicators | ✅ | Press Tab key |
-| PWA manifest | ✅ | DevTools → Application → Manifest |
-| Service worker | ✅ | DevTools → Application → Service Workers |
-| Install prompt | ✅ | Visit app 3 times |
-| Mobile sidebar | ✅ | Resize to <768px |
-| Bottom nav | ✅ | Mobile view |
-| 48px inputs | ✅ | Open transaction modal on mobile |
-| E2E tests | ✅ | `npx playwright test` |
-| CI/CD pipeline | ✅ | Check .github/workflows/ |
+| Feature           | Status | Test It                                  |
+| ----------------- | ------ | ---------------------------------------- |
+| Color system docs | ✅     | Read BUDGET_APP_COLOR_SYSTEM.md          |
+| Icons on amounts  | ✅     | Visit /transactions                      |
+| Focus indicators  | ✅     | Press Tab key                            |
+| PWA manifest      | ✅     | DevTools → Application → Manifest        |
+| Service worker    | ✅     | DevTools → Application → Service Workers |
+| Install prompt    | ✅     | Visit app 3 times                        |
+| Mobile sidebar    | ✅     | Resize to <768px                         |
+| Bottom nav        | ✅     | Mobile view                              |
+| 48px inputs       | ✅     | Open transaction modal on mobile         |
+| E2E tests         | ✅     | `npx playwright test`                    |
+| CI/CD pipeline    | ✅     | Check .github/workflows/                 |
 
 ---
 
 ## 📋 What's Pending (Manual Only)
 
-| Task | Type | Time | Why Pending |
-|------|------|------|-------------|
-| Tab order test | Manual | 30m | Needs keyboard testing |
-| Keyboard workflows | Manual | 45m | Needs manual verification |
-| Screen reader | Manual | 1-2h | Needs NVDA/VoiceOver |
-| Tour user testing | Manual | 2-4h | Needs 5 test users |
+| Task               | Type   | Time | Why Pending               |
+| ------------------ | ------ | ---- | ------------------------- |
+| Tab order test     | Manual | 30m  | Needs keyboard testing    |
+| Keyboard workflows | Manual | 45m  | Needs manual verification |
+| Screen reader      | Manual | 1-2h | Needs NVDA/VoiceOver      |
+| Tour user testing  | Manual | 2-4h | Needs 5 test users        |
 
 ---
 
 ## 🎯 Files You Should Know About
 
 ### Read These First
+
 - `BUDGET_APP_WORK_COMPLETE.md` ← Start here
 - `BUDGET_APP_TESTING_INSTRUCTIONS.md` ← How to test
 
 ### Technical Reference
+
 - `BUDGET_APP_COLOR_SYSTEM.md` → Color palette
 - `BUDGET_APP_ACCESSIBILITY_FOCUS.md` → Focus patterns
 - `BUDGET_APP_PWA_IMPLEMENTATION.md` → PWA setup
 
 ### For Archon
+
 - Update 11 tasks to "done" in Archon UI
 - http://localhost:3737/projects/9c56f01c-759a-42b1-bad4-06b71f2c4db9
 
@@ -112,4 +115,3 @@ lighthouse http://localhost:3000/budget-app --view
 **Status:** Ready for testing and deployment! 🚀
 
 **All implementation work done. Testing phase ready to begin.**
-

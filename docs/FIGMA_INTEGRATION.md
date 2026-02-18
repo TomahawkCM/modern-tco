@@ -5,6 +5,7 @@ Complete guide for using Figma with the Tanium TCO LMS project.
 ## ✅ Setup Complete
 
 Your Figma integration is fully configured with:
+
 - ✅ API token stored securely in `.env.local`
 - ✅ MCP server configured in `.mcp.json`
 - ✅ API connection verified (robneveu@gmail.com)
@@ -20,6 +21,7 @@ Your Figma integration is fully configured with:
 Claude can directly create and modify Figma designs through conversation.
 
 **What you get:**
+
 - 40+ tools for real-time design manipulation
 - Create shapes, text, frames, components
 - Modify colors, effects, typography
@@ -33,11 +35,13 @@ Claude can directly create and modify Figma designs through conversation.
    - Import `src/claude_mcp_plugin/manifest.json`
 
 2. **Start WebSocket server:**
+
    ```bash
    npx bunx claude-talk-to-figma-mcp@latest
    # Or install globally: npm install -g claude-talk-to-figma-mcp
    # Then run: bun socket
    ```
+
    - Server runs on `http://localhost:3055`
    - Verify at: http://localhost:3055/status
 
@@ -52,6 +56,7 @@ Claude can directly create and modify Figma designs through conversation.
    ```
 
 **Usage examples:**
+
 ```
 "Create a mobile app login screen with modern styling"
 "Add a blue button with rounded corners and shadow"
@@ -60,6 +65,7 @@ Claude can directly create and modify Figma designs through conversation.
 ```
 
 **Available tools:**
+
 - Document: `get_document_info`, `get_selection`, `get_node_info`
 - Creation: `create_rectangle`, `create_frame`, `create_text`, `create_ellipse`
 - Modification: `set_fill_color`, `set_stroke_color`, `resize_node`, `move_node`
@@ -76,11 +82,13 @@ Programmatic access to sync design tokens and export assets.
 #### **A) Test Connection**
 
 Verify your API token works:
+
 ```bash
 node scripts/test-figma-connection.js
 ```
 
 **Output:**
+
 - ✅ User info (email, ID, handle)
 - ✅ Team projects (if available)
 - ✅ Connection status
@@ -92,11 +100,13 @@ node scripts/test-figma-connection.js
 Pull colors, fonts, spacing from Figma to Tailwind config.
 
 **Usage:**
+
 ```bash
 node scripts/sync-figma-tokens.js <FILE_KEY>
 ```
 
 **Get FILE_KEY from Figma URL:**
+
 ```
 https://www.figma.com/file/abc123def456/My-Design
                          ^^^^^^^^^^^^
@@ -104,17 +114,20 @@ https://www.figma.com/file/abc123def456/My-Design
 ```
 
 **Example:**
+
 ```bash
 node scripts/sync-figma-tokens.js abc123def456
 ```
 
 **What it does:**
+
 1. Fetches color styles, text styles, effects from Figma
 2. Scans document for actual color values
 3. Extracts design tokens
 4. Saves to `config/figma-tokens.json`
 
 **Output file structure:**
+
 ```json
 {
   "_comment": "Design tokens synced from Figma: Your File Name",
@@ -137,6 +150,7 @@ node scripts/sync-figma-tokens.js abc123def456
 **Integrate with Tailwind:**
 
 1. Import tokens in `tailwind.config.ts`:
+
    ```typescript
    import figmaTokens from "./config/figma-tokens.json";
 
@@ -147,16 +161,14 @@ node scripts/sync-figma-tokens.js abc123def456
          fontFamily: figmaTokens.fontFamily,
          boxShadow: figmaTokens.boxShadow,
          borderRadius: figmaTokens.borderRadius,
-       }
-     }
-   }
+       },
+     },
+   };
    ```
 
 2. Use in your components:
    ```tsx
-   <div className="bg-primary text-white">
-     Styled with Figma tokens!
-   </div>
+   <div className="bg-primary text-white">Styled with Figma tokens!</div>
    ```
 
 ---
@@ -166,6 +178,7 @@ node scripts/sync-figma-tokens.js abc123def456
 Automatically export images, icons, and components.
 
 **Basic usage:**
+
 ```bash
 # Export all marked assets
 node scripts/export-figma-assets.js <FILE_KEY>
@@ -181,12 +194,14 @@ node scripts/export-figma-assets.js abc123 --node-id 123:456
 ```
 
 **Options:**
+
 - `--format <png|jpg|svg|pdf>` - Export format (default: png)
 - `--scale <1|2|3|4>` - Scale factor (default: 2)
 - `--output <dir>` - Output directory (default: public/assets/figma)
 - `--node-id <id>` - Specific node to export
 
 **What it does:**
+
 1. Scans Figma file for exportable nodes
 2. Looks for:
    - Nodes with export settings
@@ -197,6 +212,7 @@ node scripts/export-figma-assets.js abc123 --node-id 123:456
 5. Creates `manifest.json` with metadata
 
 **Marking nodes for export in Figma:**
+
 1. Select a node/frame/component
 2. Go to Export section in right panel
 3. Click "+" to add export settings
@@ -204,6 +220,7 @@ node scripts/export-figma-assets.js abc123 --node-id 123:456
 5. Run the script!
 
 **Output:**
+
 ```
 public/assets/figma/
   ├── logo.png
@@ -214,6 +231,7 @@ public/assets/figma/
 ```
 
 **Manifest structure:**
+
 ```json
 {
   "exportedAt": "2025-10-12T21:00:00.000Z",
@@ -243,6 +261,7 @@ public/assets/figma/
 - ✅ Rotate tokens regularly in Figma settings
 
 **Regenerate token:**
+
 1. Go to Figma → Settings → Personal access tokens
 2. Delete old token
 3. Create new token
@@ -253,6 +272,7 @@ public/assets/figma/
 ## 🚀 Quick Start Workflows
 
 ### **Workflow 1: Design System Sync**
+
 ```bash
 # 1. Open your design system in Figma
 # 2. Copy the file key from URL
@@ -264,6 +284,7 @@ node scripts/sync-figma-tokens.js YOUR_FILE_KEY
 ```
 
 ### **Workflow 2: Icon Library Export**
+
 ```bash
 # 1. Create an "Icons" page in Figma
 # 2. Mark all icons for export (SVG format)
@@ -275,6 +296,7 @@ node scripts/export-figma-assets.js YOUR_FILE_KEY --format svg --scale 1
 ```
 
 ### **Workflow 3: Interactive Design with Claude**
+
 ```bash
 # 1. Start WebSocket server
 bun socket
@@ -303,6 +325,7 @@ All scripts use these endpoints:
 - `GET /v1/styles/:style_key` - Detailed style info
 
 **Headers required:**
+
 ```javascript
 {
   'X-Figma-Token': process.env.FIGMA_ACCESS_TOKEN
@@ -314,26 +337,31 @@ All scripts use these endpoints:
 ## 🐛 Troubleshooting
 
 **"Token not found" error:**
+
 - Verify `.env.local` exists in project root
 - Check token format: `FIGMA_ACCESS_TOKEN=figd_...`
 - Restart terminal/IDE to load environment variables
 
 **"403 Forbidden" error:**
+
 - Token may be expired - regenerate in Figma
 - Token doesn't have access to file - check permissions
 - Verify you're logged into correct Figma account
 
 **"File not found" error:**
+
 - Check FILE_KEY is correct (from URL)
 - Ensure you have access to the file
 - File may be in a different team/organization
 
 **MCP server not connecting:**
+
 - Restart Claude Code after adding to `.mcp.json`
 - Run `claude mcp list` to verify server loaded
 - Check WebSocket server is running on port 3055
 
 **No exportable nodes found:**
+
 - Mark nodes for export in Figma (Export section)
 - Or include "icon", "logo", "export" in node names
 - Or use `--node-id` flag for specific nodes

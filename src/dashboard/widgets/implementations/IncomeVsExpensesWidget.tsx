@@ -24,25 +24,26 @@ export function IncomeVsExpensesWidget({ config }: IncomeVsExpensesWidgetProps) 
   const format = useFormatter();
 
   // Fetch current month transactions
-  const transactions = useLiveQuery(async () => {
-    try {
-      const startOfMonth = new Date();
-      startOfMonth.setDate(1);
-      startOfMonth.setHours(0, 0, 0, 0);
-      const startTime = startOfMonth.getTime();
+  const transactions =
+    useLiveQuery(async () => {
+      try {
+        const startOfMonth = new Date();
+        startOfMonth.setDate(1);
+        startOfMonth.setHours(0, 0, 0, 0);
+        const startTime = startOfMonth.getTime();
 
-      // Use filter instead of where for reliable Date comparison
-      // IndexedDB date indexing can be unreliable across browsers
-      const allTxs = await db.transactions.toArray();
-      return allTxs.filter((tx) => {
-        if (tx.isSplit) return false;
-        const txTime = new Date(tx.date).getTime();
-        return txTime >= startTime;
-      });
-    } catch {
-      return [];
-    }
-  }) || [];
+        // Use filter instead of where for reliable Date comparison
+        // IndexedDB date indexing can be unreliable across browsers
+        const allTxs = await db.transactions.toArray();
+        return allTxs.filter((tx) => {
+          if (tx.isSplit) return false;
+          const txTime = new Date(tx.date).getTime();
+          return txTime >= startTime;
+        });
+      } catch {
+        return [];
+      }
+    }) || [];
 
   // Calculate income, expenses, and net
   const { income, expenses, net } = useMemo(() => {
@@ -144,9 +145,7 @@ export function IncomeVsExpensesWidget({ config }: IncomeVsExpensesWidgetProps) 
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-slate-400">{t("net")}</span>
                 <span
-                  className={`text-xl font-bold ${
-                    net >= 0 ? "text-emerald-400" : "text-rose-400"
-                  }`}
+                  className={`text-xl font-bold ${net >= 0 ? "text-emerald-400" : "text-rose-400"}`}
                 >
                   {net >= 0 ? "+" : ""}
                   {format.number(net, { style: "currency", currency: "USD" })}

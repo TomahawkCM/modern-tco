@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Safe-to-Spend Per-Category Partials
@@ -7,9 +7,9 @@
  * including daily budget breakdown and status thresholds.
  */
 
-import { db } from '@/lib/budget-db';
-import type { Budget, Category, Transaction } from '@/types/budget';
-import { sumAmounts, subtractAmounts } from '@/lib/money';
+import { db } from "@/lib/budget-db";
+import type { Budget, Category, Transaction } from "@/types/budget";
+import { sumAmounts, subtractAmounts } from "@/lib/money";
 
 export interface CategoryPartial {
   categoryId: string;
@@ -18,7 +18,7 @@ export interface CategoryPartial {
   spent: number;
   remaining: number;
   percentUsed: number;
-  status: 'safe' | 'caution' | 'danger';
+  status: "safe" | "caution" | "danger";
 }
 
 export interface SafeToSpendData {
@@ -31,10 +31,10 @@ export interface SafeToSpendData {
 /**
  * Determine status based on percentage used
  */
-export function getSpendingStatus(percentUsed: number): 'safe' | 'caution' | 'danger' {
-  if (percentUsed >= 80) return 'danger';
-  if (percentUsed >= 50) return 'caution';
-  return 'safe';
+export function getSpendingStatus(percentUsed: number): "safe" | "caution" | "danger" {
+  if (percentUsed >= 80) return "danger";
+  if (percentUsed >= 50) return "caution";
+  return "safe";
 }
 
 /**
@@ -68,16 +68,14 @@ export async function calculateSafeToSpend(
     (tx) => !tx.isSplit && new Date(tx.date) >= firstOfMonth
   );
 
-  const expenseCategories = categories.filter((cat) => cat.type === 'expense');
+  const expenseCategories = categories.filter((cat) => cat.type === "expense");
 
   const partials: CategoryPartial[] = expenseCategories
     .map((category) => {
       const budget = budgets.find((b) => b.categoryId === category.id);
       if (!budget) return null;
 
-      const categoryTxs = currentMonthTxs.filter(
-        (tx) => tx.category === category.name
-      );
+      const categoryTxs = currentMonthTxs.filter((tx) => tx.category === category.name);
       const spent = Math.abs(
         sumAmounts(categoryTxs.filter((tx) => tx.amount < 0).map((tx) => tx.amount))
       );
@@ -85,7 +83,7 @@ export async function calculateSafeToSpend(
       let budgetAmount = budget.amount;
 
       // Include rollover if available
-      if (rolloverAmounts && rolloverAmounts.has(budget.id)) {
+      if (rolloverAmounts?.has(budget.id)) {
         const rollover = rolloverAmounts.get(budget.id) ?? 0;
         budgetAmount = sumAmounts([budgetAmount, rollover]);
       }
@@ -111,9 +109,7 @@ export async function calculateSafeToSpend(
 
   const daysRemainingInMonth = getDaysRemainingInMonth(now);
   const dailyBudget =
-    totalSafeToSpend > 0
-      ? Math.round((totalSafeToSpend / daysRemainingInMonth) * 100) / 100
-      : 0;
+    totalSafeToSpend > 0 ? Math.round((totalSafeToSpend / daysRemainingInMonth) * 100) / 100 : 0;
 
   return {
     totalSafeToSpend,

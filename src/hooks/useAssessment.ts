@@ -96,7 +96,9 @@ export function useAssessment(): UseAssessmentReturn {
         setError(null);
 
         // Update session with answer
-  const updatedAnswers = Array.isArray(currentSession.answers) ? [...currentSession.answers] : [];
+        const updatedAnswers = Array.isArray(currentSession.answers)
+          ? [...currentSession.answers]
+          : [];
         const existingAnswerIndex = updatedAnswers.findIndex((a) => a.questionId === questionId);
 
         if (existingAnswerIndex >= 0) {
@@ -125,11 +127,12 @@ export function useAssessment(): UseAssessmentReturn {
           data: {
             sessionId: currentSession.id,
             questionId,
-            selectedAnswers: ((answer as any).selectedAnswers ?? (
-              Array.isArray((answer as any).selectedAnswer)
+            selectedAnswers: (
+              (answer as any).selectedAnswers ??
+              (Array.isArray((answer as any).selectedAnswer)
                 ? (answer as any).selectedAnswer
-                : [(answer as any).selectedAnswer]
-            )).filter(Boolean),
+                : [(answer as any).selectedAnswer])
+            ).filter(Boolean),
             // Backward compatible alias
             answer: (answer as any).selectedAnswers ?? (answer as any).selectedAnswer,
             timeSpent: (answer as any).timeSpent ?? 0,
@@ -175,14 +178,14 @@ export function useAssessment(): UseAssessmentReturn {
         userId: (currentSession.userId ?? "") as any,
         moduleId: currentSession.moduleId as any,
         assessmentId: currentSession.assessmentId as any,
-        score: (result).overallScore,
-        passed: (result).passed,
-        completedAt: (result).completedAt,
-        timeSpent: (result).timeSpent ?? (result).totalTime ?? 0,
-        correctAnswers: (result).correctAnswers ?? 0,
-        incorrectAnswers: (result).incorrectAnswers ?? 0,
-        totalQuestions: (result).totalQuestions ?? 0,
-        domainBreakdown: (result).domainBreakdown,
+        score: result.overallScore,
+        passed: result.passed,
+        completedAt: result.completedAt,
+        timeSpent: result.timeSpent ?? result.totalTime ?? 0,
+        correctAnswers: result.correctAnswers ?? 0,
+        incorrectAnswers: result.incorrectAnswers ?? 0,
+        totalQuestions: result.totalQuestions ?? 0,
+        domainBreakdown: result.domainBreakdown,
       } as any);
 
       // Track assessment completion
@@ -197,7 +200,7 @@ export function useAssessment(): UseAssessmentReturn {
           timeSpent: result.timeSpent,
           correctAnswers: result.correctAnswers,
           totalQuestions: result.totalQuestions,
-          domainBreakdown: (result).domainBreakdown,
+          domainBreakdown: result.domainBreakdown,
         },
         timestamp: new Date(),
       });
@@ -221,7 +224,9 @@ export function useAssessment(): UseAssessmentReturn {
         sessionId: currentSession.id,
         data: {
           sessionId: currentSession.id,
-          questionsAnswered: Array.isArray(currentSession.answers) ? currentSession.answers.length : 0,
+          questionsAnswered: Array.isArray(currentSession.answers)
+            ? currentSession.answers.length
+            : 0,
           totalQuestions: currentSession.questions.length,
           timeSpent: Date.now() - currentSession.startTime.getTime(),
         },

@@ -24,6 +24,7 @@
 **Location**: `src/components/budget/CategoryCombobox.tsx:47-65`
 
 **Problem**:
+
 ```typescript
 // ❌ BEFORE: State initialized incorrectly
 const [matches, setMatches] = useState(false);
@@ -36,6 +37,7 @@ useEffect(() => {
 ```
 
 **What Happened**:
+
 1. **First render**: `isDesktop = false` (incorrect on desktop)
 2. **After useEffect**: `isDesktop = true` (correct on desktop)
 3. **Result**: Component switches from Drawer mode → Popover mode after mounting
@@ -53,12 +55,13 @@ useEffect(() => {
 // ✅ AFTER: Initialize with correct value immediately
 const [matches, setMatches] = useState(() => {
   // SSR-safe check
-  if (typeof window === 'undefined') return false;
+  if (typeof window === "undefined") return false;
   return window.matchMedia(query).matches;
 });
 ```
 
 **Why This Works**:
+
 - State is initialized with the **correct value immediately**
 - No component mode switching after mount
 - SSR-safe (returns `false` on server, correct value on client)
@@ -69,13 +72,15 @@ const [matches, setMatches] = useState(() => {
 **Location**: `tests/budget-app-critical-flows.spec.ts:59-81`
 
 **Before (Incorrect)**:
+
 ```typescript
 // ❌ Tried to use selectOption() on native select
-const categorySelect = page.locator('select').first();
+const categorySelect = page.locator("select").first();
 await categorySelect.selectOption({ index: 1 });
 ```
 
 **After (Correct)**:
+
 ```typescript
 // ✅ Click button-based combobox and select from popover
 const categoryButton = page.locator('button[role="combobox"]').first();
@@ -87,6 +92,7 @@ await firstOption.click();
 ```
 
 **Why This Was Needed**:
+
 - CategoryCombobox is a shadcn/ui component (button-based, not native `<select>`)
 - Uses Popover (desktop) or Drawer (mobile) for options
 - Test was looking for native select element that doesn't exist
@@ -96,6 +102,7 @@ await firstOption.click();
 ## 🧪 Verification
 
 ### E2E Test Results
+
 ```bash
 ✅ [chromium] should add a new transaction - PASSED (6.8s)
 ```
@@ -104,6 +111,7 @@ await firstOption.click();
 **After Fix**: Test passes in 6.8 seconds
 
 ### Dev Server Status
+
 ```
 ✅ No TypeScript compilation errors
 ✅ All pages loading successfully
@@ -134,10 +142,12 @@ await firstOption.click();
 **After**: ⚠️ NOT READY FOR LAUNCH (1 P1 Priority)
 
 **Progress**:
+
 - ✅ P0 Blocker #6: Transaction Modal - RESOLVED
 - ⏳ P1 Priority #7: CSV Import UI - PENDING
 
 **Next Steps**:
+
 1. Fix P1 Priority: CSV Import UI Not Found (GitHub #7)
 2. Re-run full E2E test suite (expecting 90%+ pass rate)
 3. Real mobile device testing
@@ -150,6 +160,7 @@ await firstOption.click();
 **Pattern**: React hooks with side effects (useEffect) should not be used for initialization when the value can be determined synchronously.
 
 **Best Practice**:
+
 ```typescript
 // ❌ DON'T: Initialize to default, set in useEffect
 const [value, setValue] = useState(defaultValue);
@@ -159,7 +170,7 @@ useEffect(() => {
 
 // ✅ DO: Initialize with function that returns correct value
 const [value, setValue] = useState(() => {
-  if (typeof window === 'undefined') return defaultValue;
+  if (typeof window === "undefined") return defaultValue;
   return actualValue;
 });
 ```

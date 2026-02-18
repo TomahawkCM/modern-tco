@@ -14,7 +14,10 @@ import type {
   toSRCardState,
   fromSRCardState,
 } from "@/types/flashcard";
-import { toSRCardState as convertToSRS, fromSRCardState as convertFromSRS } from "@/types/flashcard";
+import {
+  toSRCardState as convertToSRS,
+  fromSRCardState as convertFromSRS,
+} from "@/types/flashcard";
 
 class FlashcardService {
   // ==================== FLASHCARD CRUD ====================
@@ -41,8 +44,8 @@ class FlashcardService {
         user_id: userId,
         front_text: front,
         back_text: back,
-        card_type: options?.type || 'basic',
-        source: options?.source || 'manual',
+        card_type: options?.type || "basic",
+        source: options?.source || "manual",
         module_id: options?.moduleId,
         section_id: options?.sectionId,
         question_id: options?.questionId,
@@ -117,7 +120,7 @@ class FlashcardService {
       return response?.cards || [];
     }
 
-    console.log('[flashcardService] getFlashcardsByDomain:', { userId, domain });
+    console.log("[flashcardService] getFlashcardsByDomain:", { userId, domain });
 
     const { data, error } = await supabase
       .from("flashcards")
@@ -126,25 +129,22 @@ class FlashcardService {
       .contains("tags", [domain])
       .order("created_at", { ascending: false });
 
-    console.log('[flashcardService] getFlashcardsByDomain result:', { count: data?.length || 0, error: error?.message });
+    console.log("[flashcardService] getFlashcardsByDomain result:", {
+      count: data?.length || 0,
+      error: error?.message,
+    });
     if (error || !data) return [];
     return data as Flashcard[];
   }
 
   async updateFlashcard(flashcardId: string, updates: Partial<Flashcard>): Promise<boolean> {
-    const { error } = await supabase
-      .from("flashcards")
-      .update(updates)
-      .eq("id", flashcardId);
+    const { error } = await supabase.from("flashcards").update(updates).eq("id", flashcardId);
 
     return !error;
   }
 
   async deleteFlashcard(flashcardId: string): Promise<boolean> {
-    const { error } = await supabase
-      .from("flashcards")
-      .delete()
-      .eq("id", flashcardId);
+    const { error } = await supabase.from("flashcards").delete().eq("id", flashcardId);
 
     return !error;
   }
@@ -164,7 +164,7 @@ class FlashcardService {
     }
 
     const now = new Date().toISOString();
-    console.log('[flashcardService] getDueFlashcards:', { userId, limit, now });
+    console.log("[flashcardService] getDueFlashcards:", { userId, limit, now });
 
     const { data, error } = await supabase
       .from("flashcards")
@@ -174,7 +174,10 @@ class FlashcardService {
       .order("srs_due", { ascending: true })
       .limit(limit);
 
-    console.log('[flashcardService] getDueFlashcards result:', { count: data?.length || 0, error: error?.message });
+    console.log("[flashcardService] getDueFlashcards result:", {
+      count: data?.length || 0,
+      error: error?.message,
+    });
     if (error || !data) return [];
     return data as Flashcard[];
   }
@@ -212,7 +215,7 @@ class FlashcardService {
     const srsUpdates = convertFromSRS(flashcard, newState);
 
     // Update performance metrics
-    const isCorrect = rating === 'good' || rating === 'easy';
+    const isCorrect = rating === "good" || rating === "easy";
     const newTotalReviews = flashcard.total_reviews + 1;
     const newCorrectReviews = flashcard.correct_reviews + (isCorrect ? 1 : 0);
 
@@ -279,7 +282,7 @@ class FlashcardService {
       return response?.cards || [];
     }
 
-    console.log('[flashcardService] getNewFlashcards:', { userId, limit });
+    console.log("[flashcardService] getNewFlashcards:", { userId, limit });
 
     const { data, error } = await supabase
       .from("flashcards")
@@ -289,7 +292,10 @@ class FlashcardService {
       .order("created_at", { ascending: false })
       .limit(limit);
 
-    console.log('[flashcardService] getNewFlashcards result:', { count: data?.length || 0, error: error?.message });
+    console.log("[flashcardService] getNewFlashcards result:", {
+      count: data?.length || 0,
+      error: error?.message,
+    });
     if (error || !data) return [];
     return data as Flashcard[];
   }
@@ -312,17 +318,20 @@ class FlashcardService {
       };
     }
 
-    console.log('[flashcardService] getFlashcardStats:', { userId });
+    console.log("[flashcardService] getFlashcardStats:", { userId });
 
     const { data: allCards, error } = await supabase
       .from("flashcards")
       .select()
       .eq("user_id", userId);
 
-    console.log('[flashcardService] getFlashcardStats result:', { count: allCards?.length || 0, error: error?.message });
+    console.log("[flashcardService] getFlashcardStats result:", {
+      count: allCards?.length || 0,
+      error: error?.message,
+    });
 
     if (!allCards || allCards.length === 0) {
-      console.log('[flashcardService] No cards found, returning empty stats');
+      console.log("[flashcardService] No cards found, returning empty stats");
       return {
         totalCards: 0,
         dueToday: 0,
@@ -339,10 +348,10 @@ class FlashcardService {
     const now = new Date().toISOString();
 
     const totalCards = cards.length;
-    const dueToday = cards.filter(c => c.srs_due <= now).length;
-    const newCards = cards.filter(c => c.srs_reps === 0).length;
-    const learningCards = cards.filter(c => c.srs_reps > 0 && c.srs_reps < 2).length;
-    const matureCards = cards.filter(c => c.srs_reps >= 2).length;
+    const dueToday = cards.filter((c) => c.srs_due <= now).length;
+    const newCards = cards.filter((c) => c.srs_reps === 0).length;
+    const learningCards = cards.filter((c) => c.srs_reps > 0 && c.srs_reps < 2).length;
+    const matureCards = cards.filter((c) => c.srs_reps >= 2).length;
 
     const totalReviews = cards.reduce((sum, c) => sum + c.total_reviews, 0);
     const totalCorrect = cards.reduce((sum, c) => sum + c.correct_reviews, 0);
@@ -355,7 +364,7 @@ class FlashcardService {
       .eq("user_id", userId)
       .order("reviewed_at", { ascending: false });
 
-    const streaks = this.calculateStreaks(reviews?.map(r => r.reviewed_at) || []);
+    const streaks = this.calculateStreaks(reviews?.map((r) => r.reviewed_at) || []);
 
     return {
       totalCards,
@@ -403,12 +412,10 @@ class FlashcardService {
   }
 
   async addCardToDeck(deckId: string, flashcardId: string): Promise<boolean> {
-    const { error } = await supabase
-      .from("flashcard_deck_cards")
-      .insert({
-        deck_id: deckId,
-        flashcard_id: flashcardId,
-      });
+    const { error } = await supabase.from("flashcard_deck_cards").insert({
+      deck_id: deckId,
+      flashcard_id: flashcardId,
+    });
 
     return !error;
   }
@@ -437,10 +444,12 @@ class FlashcardService {
 
     const { data, error } = await supabase
       .from("flashcard_deck_cards")
-      .select(`
+      .select(
+        `
         flashcard_id,
         flashcards(*)
-      `)
+      `
+      )
       .eq("deck_id", deckId);
 
     if (error || !data) return [];
@@ -458,34 +467,32 @@ class FlashcardService {
       .single();
 
     if (!module) {
-      console.error('[flashcardService] Module not found:', moduleId);
+      console.error("[flashcardService] Module not found:", moduleId);
       return [];
     }
 
-    const objectives = Array.isArray(module.learning_objectives)
-      ? module.learning_objectives
-      : [];
+    const objectives = Array.isArray(module.learning_objectives) ? module.learning_objectives : [];
 
     try {
       // Call AI generation API
-      const response = await fetch('/api/v1/flashcards/generate', {
-        method: 'POST',
+      const response = await fetch("/api/v1/flashcards/generate", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           moduleId,
           moduleTitle: module.title,
           domain: module.domain,
           learningObjectives: objectives,
-          difficulty: 'medium',
+          difficulty: "medium",
           count: Math.min(objectives.length * 2, 15), // Generate 2 cards per objective, max 15
         }),
       });
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || 'AI generation failed');
+        throw new Error(error.error || "AI generation failed");
       }
 
       const { flashcards: aiFlashcards } = await response.json();
@@ -494,29 +501,24 @@ class FlashcardService {
       const createdCards: Flashcard[] = [];
 
       for (const aiCard of aiFlashcards) {
-        const card = await this.createFlashcard(
-          userId,
-          aiCard.front,
-          aiCard.back,
-          {
-            type: aiCard.type || 'basic',
-            source: 'auto_generated',
-            moduleId,
-            hint: aiCard.hint,
-            explanation: aiCard.explanation,
-            tags: aiCard.tags || [module.domain, 'ai-generated'],
-          }
-        );
+        const card = await this.createFlashcard(userId, aiCard.front, aiCard.back, {
+          type: aiCard.type || "basic",
+          source: "auto_generated",
+          moduleId,
+          hint: aiCard.hint,
+          explanation: aiCard.explanation,
+          tags: aiCard.tags || [module.domain, "ai-generated"],
+        });
 
         if (card) createdCards.push(card);
       }
 
       return createdCards;
     } catch (error) {
-      console.error('[flashcardService] AI generation error:', error);
+      console.error("[flashcardService] AI generation error:", error);
 
       // Fallback: Create basic flashcards from learning objectives
-      console.log('[flashcardService] Falling back to basic flashcard generation');
+      console.log("[flashcardService] Falling back to basic flashcard generation");
       const createdCards: Flashcard[] = [];
 
       for (const objective of objectives) {
@@ -525,10 +527,10 @@ class FlashcardService {
           `Explain: ${objective}`,
           `Review the "${module.title}" module for details on this learning objective.`,
           {
-            type: 'concept',
-            source: 'auto_generated',
+            type: "concept",
+            source: "auto_generated",
             moduleId,
-            tags: [module.domain, 'learning-objective'],
+            tags: [module.domain, "learning-objective"],
           }
         );
 
@@ -546,18 +548,13 @@ class FlashcardService {
     correctAnswer: string,
     explanation?: string
   ): Promise<Flashcard | null> {
-    return this.createFlashcard(
-      userId,
-      question,
-      correctAnswer,
-      {
-        type: 'basic',
-        source: 'quiz_failure',
-        questionId,
-        explanation,
-        tags: ['quiz-remediation'],
-      }
-    );
+    return this.createFlashcard(userId, question, correctAnswer, {
+      type: "basic",
+      source: "quiz_failure",
+      questionId,
+      explanation,
+      tags: ["quiz-remediation"],
+    });
   }
 
   // ==================== HELPER METHODS ====================
@@ -628,12 +625,10 @@ class FlashcardService {
     if (reviewDates.length === 0) return { longest: 0, current: 0 };
 
     // Group reviews by day
-    const reviewDays = new Set(
-      reviewDates.map(date => new Date(date).toDateString())
-    );
+    const reviewDays = new Set(reviewDates.map((date) => new Date(date).toDateString()));
 
-    const sortedDays = Array.from(reviewDays).sort((a, b) =>
-      new Date(b).getTime() - new Date(a).getTime()
+    const sortedDays = Array.from(reviewDays).sort(
+      (a, b) => new Date(b).getTime() - new Date(a).getTime()
     );
 
     let currentStreak = 0;
@@ -643,9 +638,7 @@ class FlashcardService {
 
     for (const dayStr of sortedDays) {
       const day = new Date(dayStr);
-      const diffDays = Math.floor(
-        (prevDate.getTime() - day.getTime()) / (1000 * 60 * 60 * 24)
-      );
+      const diffDays = Math.floor((prevDate.getTime() - day.getTime()) / (1000 * 60 * 60 * 24));
 
       if (diffDays <= 1) {
         streakCount++;
@@ -666,9 +659,7 @@ class FlashcardService {
       for (let i = 1; i < sortedDays.length; i++) {
         const prevDay = new Date(sortedDays[i - 1]);
         const currDay = new Date(sortedDays[i]);
-        const diff = Math.floor(
-          (prevDay.getTime() - currDay.getTime()) / (1000 * 60 * 60 * 24)
-        );
+        const diff = Math.floor((prevDay.getTime() - currDay.getTime()) / (1000 * 60 * 60 * 24));
         if (diff === 1) currentStreak++;
         else break;
       }

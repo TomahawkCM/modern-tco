@@ -4,7 +4,7 @@ import type { Question } from "./exam";
 // Re-export runtime values and types that components/tests expect
 export { Difficulty, QuestionCategory, TCODomain };
 export const QuestionDifficulty = Difficulty; // runtime alias used in some tests
-export type QuestionDifficulty = typeof Difficulty[keyof typeof Difficulty];
+export type QuestionDifficulty = (typeof Difficulty)[keyof typeof Difficulty];
 export type { Question };
 
 // Assessment Types - Updated to match component usage
@@ -141,7 +141,11 @@ export interface AssessmentResult {
   // analytics object used in some tests and telemetry
   analytics?: AssessmentAnalytics;
   // per-question detailed results used by some reporting code
-  questionResults?: Array<{ questionId: string; isCorrect: boolean; selectedAnswer?: string | string[] }>;
+  questionResults?: Array<{
+    questionId: string;
+    isCorrect: boolean;
+    selectedAnswer?: string | string[];
+  }>;
   // Add missing property that tests expect
   performanceMetrics?: {
     timeEfficiency: number;
@@ -220,8 +224,8 @@ export interface RemediationPlan {
   }>;
   // Allow authoring code to include next steps without strict rejection
   nextSteps?: Array<string | { title: string; description?: string; link?: string }>;
-    // Optional target date suggested for retake planning
-    targetRetakeDate?: Date;
+  // Optional target date suggested for retake planning
+  targetRetakeDate?: Date;
 }
 
 export interface RemediationAction {
@@ -437,7 +441,7 @@ export interface ContentAnalytics {
     views: number;
     totalQuestions?: number;
     correctAnswers?: number;
-  domainScores?: Record<TCODomain, any>;
+    domainScores?: Record<TCODomain, any>;
     streak?: number;
     lastSession?: Date;
     averageScore?: number;
@@ -455,7 +459,5 @@ export interface ContentAnalytics {
     studyStreak?: number;
     sessionCount?: number;
     achievements?: string[];
-
-    };
   };
-
+}

@@ -49,9 +49,9 @@ function Test-TCOContent {
         [string]$ContentPath = "src/content",
         [switch]$Verbose
     )
-    
+
     Write-Host "`n📋 TCO Content Validation" -ForegroundColor Blue
-    
+
     # TCO Domain requirements
     $tcoDomains = @{
         "Domain1" = @{ Name = "Asking Questions"; Weight = 22; Files = @() }
@@ -60,30 +60,30 @@ function Test-TCOContent {
         "Domain4" = @{ Name = "Navigation"; Weight = 23; Files = @() }
         "Domain5" = @{ Name = "Reporting"; Weight = 17; Files = @() }
     }
-    
+
     # Scan for domain content
     if (Test-Path $ContentPath) {
         $contentFiles = Get-ChildItem $ContentPath -Recurse -Filter "*.md*" -File
-        
+
         foreach ($file in $contentFiles) {
             $content = Get-Content $file.FullName -Raw -ErrorAction SilentlyContinue
-            
+
             # Check domain coverage
             for ($i = 1; $i -le 5; $i++) {
-                if ($content -match "Domain\s*$i|asking.questions|refining.questions|taking.action|navigation|reporting" -or 
+                if ($content -match "Domain\s*$i|asking.questions|refining.questions|taking.action|navigation|reporting" -or
                     $file.Name -match "0$i-") {
                     $tcoDomains["Domain$i"].Files += $file.Name
                 }
             }
         }
-        
+
         # Report domain coverage
         Write-Host "`n🎯 TCO Domain Coverage Analysis:" -ForegroundColor Cyan
         foreach ($domain in $tcoDomains.GetEnumerator()) {
             $fileCount = $domain.Value.Files.Count
             $status = if ($fileCount -gt 0) { "✅" } else { "❌" }
             Write-Host "  $status $($domain.Value.Name) ($($domain.Value.Weight)%): $fileCount files" -ForegroundColor $(if ($fileCount -gt 0) { "Green" } else { "Red" })
-            
+
             if ($Verbose -and $fileCount -gt 0) {
                 $domain.Value.Files | ForEach-Object { Write-Host "    - $_" -ForegroundColor Gray }
             }
@@ -107,9 +107,9 @@ function Start-ContentPipeline {
         [switch]$ValidateOnly,
         [switch]$GenerateReports
     )
-    
+
     Write-Host "`n🚀 TCO Content Generation Pipeline" -ForegroundColor Magenta
-    
+
     # Content pipeline steps
     $pipeline = @(
         @{ Step = "Validation"; Action = { Test-TCOContent } },
@@ -117,7 +117,7 @@ function Start-ContentPipeline {
         @{ Step = "Blueprint Alignment"; Action = { Test-BlueprintAlignment } },
         @{ Step = "Quality Assurance"; Action = { Test-ContentQuality } }
     )
-    
+
     foreach ($step in $pipeline) {
         Write-Host "`n📋 $($step.Step)..." -ForegroundColor Blue
         try {
@@ -127,7 +127,7 @@ function Start-ContentPipeline {
             Write-Host "❌ $($step.Step) failed: $($_.Exception.Message)" -ForegroundColor Red
         }
     }
-    
+
     if ($GenerateReports) {
         Write-Host "`n📊 Generating content reports..." -ForegroundColor Cyan
         Export-ContentReport
@@ -137,24 +137,24 @@ function Start-ContentPipeline {
 # Content quality testing functions
 function Test-MDXContent {
     Write-Host "🔍 Checking MDX content structure..." -ForegroundColor Cyan
-    
+
     $mdxFiles = Get-ChildItem "src/content" -Recurse -Filter "*.mdx" -File -ErrorAction SilentlyContinue
-    
+
     if ($mdxFiles.Count -eq 0) {
         Write-Host "⚠️ No MDX files found" -ForegroundColor Yellow
         return
     }
-    
+
     foreach ($file in $mdxFiles) {
         $content = Get-Content $file.FullName -Raw
-        
+
         # Check frontmatter
         if ($content -match "^---\s*\n.*?\n---") {
             Write-Host "  ✅ $($file.Name): Valid frontmatter" -ForegroundColor Green
         } else {
             Write-Host "  ❌ $($file.Name): Missing or invalid frontmatter" -ForegroundColor Red
         }
-        
+
         # Check content sections
         $requiredSections = @("## Learn", "## Practice", "## Assess")
         foreach ($section in $requiredSections) {
@@ -169,16 +169,16 @@ function Test-MDXContent {
 
 function Test-BlueprintAlignment {
     Write-Host "🎯 Checking TCO Blueprint alignment..." -ForegroundColor Cyan
-    
+
     # Blueprint requirements
     $blueprintWeights = @{
         "Domain 1" = 22
-        "Domain 2" = 23  
+        "Domain 2" = 23
         "Domain 3" = 15
         "Domain 4" = 23
         "Domain 5" = 17
     }
-    
+
     Write-Host "📊 Expected TCO exam weights:" -ForegroundColor Blue
     foreach ($weight in $blueprintWeights.GetEnumerator()) {
         Write-Host "  $($weight.Key): $($weight.Value)%" -ForegroundColor Cyan
@@ -187,7 +187,7 @@ function Test-BlueprintAlignment {
 
 function Test-ContentQuality {
     Write-Host "✨ Running content quality checks..." -ForegroundColor Cyan
-    
+
     # Quality metrics
     $qualityChecks = @{
         "Spell Check" = { Write-Host "    📝 Spell checking content..." -ForegroundColor Gray }
@@ -195,7 +195,7 @@ function Test-ContentQuality {
         "Image Optimization" = { Write-Host "    🖼️ Checking image assets..." -ForegroundColor Gray }
         "Accessibility" = { Write-Host "    ♿ Accessibility compliance..." -ForegroundColor Gray }
     }
-    
+
     foreach ($check in $qualityChecks.GetEnumerator()) {
         Write-Host "  🔍 $($check.Key)" -ForegroundColor Cyan
         & $check.Value
@@ -211,7 +211,7 @@ function Export-ContentReport {
         DocsFiles = (Get-ChildItem "docs" -Recurse -Filter "*.md" -File -ErrorAction SilentlyContinue).Count
         Status = "Generated via PowerShell pipeline"
     }
-    
+
     $report | ConvertTo-Json -Depth 3 | Out-File $reportPath -Encoding UTF8
     Write-Host "📊 Content report exported: $reportPath" -ForegroundColor Green
 }

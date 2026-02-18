@@ -205,9 +205,7 @@ export function DashboardContent() {
 
         <Card className="border-cyan-200 bg-gradient-to-br from-cyan-50 to-cyan-100 dark:border-cyan-800 dark:from-cyan-900/20 dark:to-cyan-800/20">
           <CardHeader className="pb-2">
-            <CardDescription className="text-cyan-600 dark:text-primary">
-              Bookmarks
-            </CardDescription>
+            <CardDescription className="text-cyan-600 dark:text-primary">Bookmarks</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex items-center gap-2">

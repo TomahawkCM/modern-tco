@@ -1,28 +1,32 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Save, Eye, X, Plus, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
-import { QuestionPreview } from './QuestionPreview';
-import { questionService } from '@/lib/questionService';
-import type { Question, Choice, TCODomain, Difficulty, QuestionCategory } from '@/types/exam';
-import { TCODomain as TCODomainEnum, Difficulty as DifficultyEnum, QuestionCategory as QuestionCategoryEnum } from '@/types/exam';
+} from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Save, Eye, X, Plus, AlertCircle, CheckCircle2 } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import { QuestionPreview } from "./QuestionPreview";
+import { questionService } from "@/lib/questionService";
+import type { Question, Choice, TCODomain, Difficulty, QuestionCategory } from "@/types/exam";
+import {
+  TCODomain as TCODomainEnum,
+  Difficulty as DifficultyEnum,
+  QuestionCategory as QuestionCategoryEnum,
+} from "@/types/exam";
 
 interface QuestionEditorProps {
   questionId?: string;
@@ -39,26 +43,28 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
-  const [activeTab, setActiveTab] = useState<'edit' | 'preview'>('edit');
+  const [activeTab, setActiveTab] = useState<"edit" | "preview">("edit");
 
   // Form state
-  const [questionText, setQuestionText] = useState('');
+  const [questionText, setQuestionText] = useState("");
   const [choices, setChoices] = useState<Choice[]>([
-    { id: 'a', text: '' },
-    { id: 'b', text: '' },
-    { id: 'c', text: '' },
-    { id: 'd', text: '' },
+    { id: "a", text: "" },
+    { id: "b", text: "" },
+    { id: "c", text: "" },
+    { id: "d", text: "" },
   ]);
-  const [correctAnswerId, setCorrectAnswerId] = useState<string>('');
+  const [correctAnswerId, setCorrectAnswerId] = useState<string>("");
   const [domain, setDomain] = useState<TCODomain>(TCODomainEnum.FUNDAMENTALS);
   const [difficulty, setDifficulty] = useState<Difficulty>(DifficultyEnum.INTERMEDIATE);
-  const [category, setCategory] = useState<QuestionCategory>(QuestionCategoryEnum.PLATFORM_FUNDAMENTALS);
-  const [explanation, setExplanation] = useState('');
+  const [category, setCategory] = useState<QuestionCategory>(
+    QuestionCategoryEnum.PLATFORM_FUNDAMENTALS
+  );
+  const [explanation, setExplanation] = useState("");
   const [tags, setTags] = useState<string[]>([]);
-  const [tagInput, setTagInput] = useState('');
-  const [studyGuideRef, setStudyGuideRef] = useState('');
+  const [tagInput, setTagInput] = useState("");
+  const [studyGuideRef, setStudyGuideRef] = useState("");
   const [consoleSteps, setConsoleSteps] = useState<string[]>([]);
-  const [consoleStepInput, setConsoleStepInput] = useState('');
+  const [consoleStepInput, setConsoleStepInput] = useState("");
 
   // Validation state
   const [errors, setErrors] = useState<ValidationError[]>([]);
@@ -87,7 +93,7 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
     setLoading(true);
     try {
       const questions = await questionService.getAllQuestions();
-      const question = questions.find(q => q.id === questionId);
+      const question = questions.find((q) => q.id === questionId);
 
       if (question) {
         setQuestionText(question.question);
@@ -96,16 +102,16 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
         setDomain(question.domain);
         setDifficulty(question.difficulty);
         setCategory(question.category);
-        setExplanation(question.explanation || '');
+        setExplanation(question.explanation || "");
         setTags(question.tags || []);
-        setStudyGuideRef(question.studyGuideRef || '');
+        setStudyGuideRef(question.studyGuideRef || "");
         setConsoleSteps(question.consoleSteps || []);
       }
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'Failed to load question',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to load question",
+        variant: "destructive",
       });
     } finally {
       setLoading(false);
@@ -113,7 +119,7 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
   };
 
   const saveDraft = () => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const draft = {
         questionText,
         choices,
@@ -127,13 +133,13 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
         consoleSteps,
         timestamp: new Date().toISOString(),
       };
-      localStorage.setItem('question_draft', JSON.stringify(draft));
+      localStorage.setItem("question_draft", JSON.stringify(draft));
     }
   };
 
   const loadDraft = () => {
-    if (typeof window !== 'undefined') {
-      const draftStr = localStorage.getItem('question_draft');
+    if (typeof window !== "undefined") {
+      const draftStr = localStorage.getItem("question_draft");
       if (draftStr) {
         try {
           const draft = JSON.parse(draftStr);
@@ -141,32 +147,32 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
           const draftTime = new Date(draft.timestamp).getTime();
           const now = new Date().getTime();
           if (now - draftTime < 24 * 60 * 60 * 1000) {
-            setQuestionText(draft.questionText || '');
+            setQuestionText(draft.questionText || "");
             setChoices(draft.choices || choices);
-            setCorrectAnswerId(draft.correctAnswerId || '');
+            setCorrectAnswerId(draft.correctAnswerId || "");
             setDomain(draft.domain || domain);
             setDifficulty(draft.difficulty || difficulty);
             setCategory(draft.category || category);
-            setExplanation(draft.explanation || '');
+            setExplanation(draft.explanation || "");
             setTags(draft.tags || []);
-            setStudyGuideRef(draft.studyGuideRef || '');
+            setStudyGuideRef(draft.studyGuideRef || "");
             setConsoleSteps(draft.consoleSteps || []);
 
             toast({
-              title: 'Draft loaded',
-              description: 'Restored your previous work',
+              title: "Draft loaded",
+              description: "Restored your previous work",
             });
           }
         } catch (error) {
-          console.error('Failed to load draft:', error);
+          console.error("Failed to load draft:", error);
         }
       }
     }
   };
 
   const clearDraft = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('question_draft');
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("question_draft");
     }
   };
 
@@ -175,35 +181,44 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
 
     // Validate question text
     if (!questionText.trim()) {
-      newErrors.push({ field: 'question', message: 'Question text is required' });
+      newErrors.push({ field: "question", message: "Question text is required" });
     } else if (questionText.trim().length < 10) {
-      newErrors.push({ field: 'question', message: 'Question text must be at least 10 characters' });
+      newErrors.push({
+        field: "question",
+        message: "Question text must be at least 10 characters",
+      });
     }
 
     // Validate choices
-    const filledChoices = choices.filter(c => c.text.trim().length > 0);
+    const filledChoices = choices.filter((c) => c.text.trim().length > 0);
     if (filledChoices.length !== 4) {
-      newErrors.push({ field: 'choices', message: 'All 4 answer choices are required' });
+      newErrors.push({ field: "choices", message: "All 4 answer choices are required" });
     }
 
     choices.forEach((choice, index) => {
       if (choice.text.trim().length > 0 && choice.text.trim().length < 3) {
-        newErrors.push({ field: `choice-${choice.id}`, message: `Choice ${choice.id.toUpperCase()} is too short` });
+        newErrors.push({
+          field: `choice-${choice.id}`,
+          message: `Choice ${choice.id.toUpperCase()} is too short`,
+        });
       }
     });
 
     // Validate correct answer
     if (!correctAnswerId) {
-      newErrors.push({ field: 'correctAnswer', message: 'Please select the correct answer' });
-    } else if (!choices.find(c => c.id === correctAnswerId)?.text.trim()) {
-      newErrors.push({ field: 'correctAnswer', message: 'Correct answer choice must have text' });
+      newErrors.push({ field: "correctAnswer", message: "Please select the correct answer" });
+    } else if (!choices.find((c) => c.id === correctAnswerId)?.text.trim()) {
+      newErrors.push({ field: "correctAnswer", message: "Correct answer choice must have text" });
     }
 
     // Validate explanation
     if (!explanation.trim()) {
-      newErrors.push({ field: 'explanation', message: 'Explanation is required' });
+      newErrors.push({ field: "explanation", message: "Explanation is required" });
     } else if (explanation.trim().length < 20) {
-      newErrors.push({ field: 'explanation', message: 'Explanation must be at least 20 characters' });
+      newErrors.push({
+        field: "explanation",
+        message: "Explanation must be at least 20 characters",
+      });
     }
 
     setErrors(newErrors);
@@ -213,9 +228,9 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
   const handleSave = async () => {
     if (!validate()) {
       toast({
-        title: 'Validation Failed',
-        description: 'Please fix the errors before saving',
-        variant: 'destructive',
+        title: "Validation Failed",
+        description: "Please fix the errors before saving",
+        variant: "destructive",
       });
       return;
     }
@@ -223,9 +238,9 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
     setSaving(true);
 
     try {
-      const questionData: Omit<Question, 'id'> = {
+      const questionData: Omit<Question, "id"> = {
         question: questionText.trim(),
-        choices: choices.map(c => ({ ...c, text: c.text.trim() })),
+        choices: choices.map((c) => ({ ...c, text: c.text.trim() })),
         correctAnswerId,
         domain,
         difficulty,
@@ -242,15 +257,15 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
         // Update existing question
         savedQuestion = await questionService.updateQuestion(questionId, questionData);
         toast({
-          title: 'Success',
-          description: 'Question updated successfully',
+          title: "Success",
+          description: "Question updated successfully",
         });
       } else {
         // Create new question
         savedQuestion = await questionService.addQuestion(questionData);
         toast({
-          title: 'Success',
-          description: 'Question created successfully',
+          title: "Success",
+          description: "Question created successfully",
         });
         clearDraft();
       }
@@ -258,13 +273,13 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
       if (onSave) {
         onSave(savedQuestion);
       } else {
-        router.push('/admin/questions');
+        router.push("/admin/questions");
       }
     } catch (error) {
       toast({
-        title: 'Error',
+        title: "Error",
         description: `Failed to save question: ${error}`,
-        variant: 'destructive',
+        variant: "destructive",
       });
     } finally {
       setSaving(false);
@@ -273,19 +288,19 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
 
   const handleCancel = () => {
     if (isDirty) {
-      const confirmed = confirm('You have unsaved changes. Are you sure you want to cancel?');
+      const confirmed = confirm("You have unsaved changes. Are you sure you want to cancel?");
       if (!confirmed) return;
     }
 
     if (onCancel) {
       onCancel();
     } else {
-      router.push('/admin/questions');
+      router.push("/admin/questions");
     }
   };
 
   const updateChoice = (id: string, text: string) => {
-    setChoices(choices.map(c => c.id === id ? { ...c, text } : c));
+    setChoices(choices.map((c) => (c.id === id ? { ...c, text } : c)));
     setIsDirty(true);
   };
 
@@ -293,13 +308,13 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
     const newTag = tagInput.trim().toLowerCase();
     if (newTag && !tags.includes(newTag)) {
       setTags([...tags, newTag]);
-      setTagInput('');
+      setTagInput("");
       setIsDirty(true);
     }
   };
 
   const removeTag = (tag: string) => {
-    setTags(tags.filter(t => t !== tag));
+    setTags(tags.filter((t) => t !== tag));
     setIsDirty(true);
   };
 
@@ -307,7 +322,7 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
     const step = consoleStepInput.trim();
     if (step) {
       setConsoleSteps([...consoleSteps, step]);
-      setConsoleStepInput('');
+      setConsoleStepInput("");
       setIsDirty(true);
     }
   };
@@ -319,7 +334,7 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
 
   const getPreviewQuestion = (): Question => {
     return {
-      id: questionId || 'preview',
+      id: questionId || "preview",
       question: questionText,
       choices,
       correctAnswerId,
@@ -336,7 +351,7 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
   if (loading) {
     return (
       <div className="flex items-center justify-center p-12">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500" />
+        <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-blue-500" />
       </div>
     );
   }
@@ -346,21 +361,21 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-foreground">
-            {questionId ? 'Edit Question' : 'Create New Question'}
+            {questionId ? "Edit Question" : "Create New Question"}
           </h1>
           <p className="text-muted-foreground">
-            {questionId ? 'Update question details' : 'Add a new question to the question bank'}
+            {questionId ? "Update question details" : "Add a new question to the question bank"}
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           <Button variant="outline" onClick={handleCancel}>
-            <X className="h-4 w-4 mr-2" />
+            <X className="mr-2 h-4 w-4" />
             Cancel
           </Button>
           <Button onClick={handleSave} disabled={saving}>
-            <Save className="h-4 w-4 mr-2" />
-            {saving ? 'Saving...' : 'Save Question'}
+            <Save className="mr-2 h-4 w-4" />
+            {saving ? "Saving..." : "Save Question"}
           </Button>
         </div>
       </div>
@@ -370,8 +385,8 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            <div className="font-semibold mb-2">Please fix the following errors:</div>
-            <ul className="list-disc list-inside space-y-1">
+            <div className="mb-2 font-semibold">Please fix the following errors:</div>
+            <ul className="list-inside list-disc space-y-1">
               {errors.map((error, index) => (
                 <li key={index}>{error.message}</li>
               ))}
@@ -380,16 +395,16 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
         </Alert>
       )}
 
-      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'edit' | 'preview')}>
+      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "edit" | "preview")}>
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="edit">Edit</TabsTrigger>
           <TabsTrigger value="preview">
-            <Eye className="h-4 w-4 mr-2" />
+            <Eye className="mr-2 h-4 w-4" />
             Preview
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="edit" className="space-y-6 mt-6">
+        <TabsContent value="edit" className="mt-6 space-y-6">
           {/* Question Text */}
           <Card>
             <CardHeader>
@@ -407,7 +422,7 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
                 className="min-h-[120px]"
                 aria-label="Question text"
               />
-              <div className="text-xs text-muted-foreground mt-2">
+              <div className="mt-2 text-xs text-muted-foreground">
                 {questionText.length} characters
               </div>
             </CardContent>
@@ -417,7 +432,9 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
           <Card>
             <CardHeader>
               <CardTitle>Answer Choices</CardTitle>
-              <CardDescription>Enter all 4 answer choices and select the correct one</CardDescription>
+              <CardDescription>
+                Enter all 4 answer choices and select the correct one
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {choices.map((choice) => (
@@ -437,7 +454,9 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
                     <Label htmlFor={`choice-${choice.id}`}>
                       Choice {choice.id.toUpperCase()}
                       {correctAnswerId === choice.id && (
-                        <Badge variant="default" className="ml-2 bg-green-600">Correct</Badge>
+                        <Badge variant="default" className="ml-2 bg-green-600">
+                          Correct
+                        </Badge>
                       )}
                     </Label>
                     <Input
@@ -459,19 +478,24 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
               <CardTitle>Question Metadata</CardTitle>
               <CardDescription>Categorize and classify the question</CardDescription>
             </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <CardContent className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <div>
                 <Label htmlFor="domain">Domain</Label>
-                <Select value={domain} onValueChange={(v) => {
-                  setDomain(v as TCODomain);
-                  setIsDirty(true);
-                }}>
+                <Select
+                  value={domain}
+                  onValueChange={(v) => {
+                    setDomain(v as TCODomain);
+                    setIsDirty(true);
+                  }}
+                >
                   <SelectTrigger id="domain">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     {Object.values(TCODomainEnum).map((d) => (
-                      <SelectItem key={d} value={d}>{d}</SelectItem>
+                      <SelectItem key={d} value={d}>
+                        {d}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -479,16 +503,21 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
 
               <div>
                 <Label htmlFor="difficulty">Difficulty</Label>
-                <Select value={difficulty} onValueChange={(v) => {
-                  setDifficulty(v as Difficulty);
-                  setIsDirty(true);
-                }}>
+                <Select
+                  value={difficulty}
+                  onValueChange={(v) => {
+                    setDifficulty(v as Difficulty);
+                    setIsDirty(true);
+                  }}
+                >
                   <SelectTrigger id="difficulty">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     {Object.values(DifficultyEnum).map((d) => (
-                      <SelectItem key={d} value={d}>{d}</SelectItem>
+                      <SelectItem key={d} value={d}>
+                        {d}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -496,16 +525,21 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
 
               <div>
                 <Label htmlFor="category">Category</Label>
-                <Select value={category} onValueChange={(v) => {
-                  setCategory(v as QuestionCategory);
-                  setIsDirty(true);
-                }}>
+                <Select
+                  value={category}
+                  onValueChange={(v) => {
+                    setCategory(v as QuestionCategory);
+                    setIsDirty(true);
+                  }}
+                >
                   <SelectTrigger id="category">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     {Object.values(QuestionCategoryEnum).map((c) => (
-                      <SelectItem key={c} value={c}>{c}</SelectItem>
+                      <SelectItem key={c} value={c}>
+                        {c}
+                      </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -530,7 +564,7 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
                 className="min-h-[120px]"
                 aria-label="Explanation"
               />
-              <div className="text-xs text-muted-foreground mt-2">
+              <div className="mt-2 text-xs text-muted-foreground">
                 {explanation.length} characters
               </div>
             </CardContent>
@@ -547,7 +581,7 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
                 <Input
                   value={tagInput}
                   onChange={(e) => setTagInput(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
+                  onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
                   placeholder="Add a tag..."
                   aria-label="Tag input"
                 />
@@ -562,7 +596,7 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
                     <Badge key={tag} variant="secondary" className="cursor-pointer">
                       {tag}
                       <X
-                        className="h-3 w-3 ml-1"
+                        className="ml-1 h-3 w-3"
                         onClick={() => removeTag(tag)}
                         aria-label={`Remove tag ${tag}`}
                       />
@@ -600,7 +634,9 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
                     <Input
                       value={consoleStepInput}
                       onChange={(e) => setConsoleStepInput(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addConsoleStep())}
+                      onKeyPress={(e) =>
+                        e.key === "Enter" && (e.preventDefault(), addConsoleStep())
+                      }
                       placeholder="Add a console step..."
                     />
                     <Button onClick={addConsoleStep} type="button">
@@ -609,7 +645,7 @@ export function QuestionEditor({ questionId, onSave, onCancel }: QuestionEditorP
                   </div>
 
                   {consoleSteps.length > 0 && (
-                    <ol className="list-decimal list-inside space-y-1 text-sm">
+                    <ol className="list-inside list-decimal space-y-1 text-sm">
                       {consoleSteps.map((step, index) => (
                         <li key={index} className="flex items-center justify-between">
                           <span>{step}</span>

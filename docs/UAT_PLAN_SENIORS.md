@@ -28,6 +28,7 @@ This document provides everything needed to conduct comprehensive user acceptanc
 ### Purpose
 
 Conduct user acceptance testing with senior citizens (60+) to validate that the Budget App is:
+
 - Easy to use for older adults
 - Accessible (font sizes, contrast, navigation)
 - Helpful for managing household finances
@@ -36,6 +37,7 @@ Conduct user acceptance testing with senior citizens (60+) to validate that the 
 ### Success Criteria
 
 UAT is successful when:
+
 - ✅ 80%+ of participants can complete core tasks without assistance
 - ✅ 90%+ of participants rate ease of use as "Good" or "Excellent"
 - ✅ No critical accessibility issues identified
@@ -97,6 +99,7 @@ UAT is successful when:
 ### Inclusion Criteria
 
 **Required**:
+
 - Age: 60+ years old
 - Owns a smartphone OR tablet (iOS or Android)
 - Manages household budget (manually or digitally)
@@ -104,6 +107,7 @@ UAT is successful when:
 - Willing to provide feedback honestly
 
 **Preferred** (but not required):
+
 - Mix of tech-savvy and tech-novice
 - Mix of iOS and Android users
 - Mix of manual budget trackers (paper) and digital (Excel, apps)
@@ -156,16 +160,19 @@ UAT is successful when:
 > We're looking for seniors (60+) to help test a new household budget app designed specifically for older adults. Your feedback will help us make the app easier to use!
 >
 > **What you'll do**:
+>
 > - Test the app for 45-60 minutes
 > - Complete simple tasks (like adding an expense)
 > - Share your honest feedback
 >
 > **What you'll get**:
+>
 > - $50 Amazon gift card (or cash, your choice)
 > - Early access to the app
 > - The satisfaction of helping other seniors!
 >
 > **Requirements**:
+>
 > - Age 60 or older
 > - Own an iPhone, iPad, or Android device
 > - Currently manage a household budget (any method)
@@ -181,6 +188,7 @@ UAT is successful when:
 **See Appendix A for full consent form template**
 
 Key points to include:
+
 - Voluntary participation (can withdraw anytime)
 - Session will be observed and possibly recorded (with permission)
 - Data will be anonymized and used only for research
@@ -200,6 +208,7 @@ Key points to include:
 ### Scenario Setup
 
 **Before each session**:
+
 1. Prepare clean installation of Budget App (no sample data)
 2. Ensure device is charged and has internet connection
 3. Have participant sign consent form
@@ -212,6 +221,7 @@ Key points to include:
 **Setup**: "You just bought groceries at Walmart for $47.50. Add this to your budget."
 
 **Steps to observe**:
+
 1. Finds "Add Transaction" button
 2. Selects correct date
 3. Enters description ("Walmart" or "Groceries")
@@ -220,11 +230,13 @@ Key points to include:
 6. Saves transaction
 
 **Success criteria**:
+
 - Completes within 2 minutes
 - No errors
 - Transaction appears in list
 
 **Failure modes to watch for**:
+
 - Can't find "Add Transaction" button
 - Confused by date picker
 - Unsure which category to choose
@@ -237,6 +249,7 @@ Key points to include:
 **Setup**: "You want to set a budget of $400 for groceries this month."
 
 **Steps to observe**:
+
 1. Navigates to Budgets section
 2. Clicks "Create Budget"
 3. Enters budget name ("Groceries")
@@ -245,10 +258,12 @@ Key points to include:
 6. Saves budget
 
 **Success criteria**:
+
 - Completes within 3 minutes
 - Budget is active and shows $0 spent (if no transactions yet)
 
 **Failure modes to watch for**:
+
 - Can't find Budgets section
 - Confused by "Monthly" vs "Weekly" vs "Yearly"
 - Enters 400 without dollar sign and gets confused
@@ -262,6 +277,7 @@ Key points to include:
 **Pre-req**: Provide participant with sample CSV file (5-10 transactions)
 
 **Steps to observe**:
+
 1. Finds Import button/section
 2. Selects CSV file
 3. Maps columns (Date, Description, Amount)
@@ -270,11 +286,13 @@ Key points to include:
 6. Verifies transactions appeared
 
 **Success criteria**:
+
 - Completes within 5 minutes
 - All transactions imported correctly
 - No duplicates created
 
 **Failure modes to watch for**:
+
 - Doesn't understand "CSV" term
 - Can't find file on device
 - Confused by column mapping
@@ -287,16 +305,19 @@ Key points to include:
 **Setup**: "You want to see how much you spent on dining out this month."
 
 **Steps to observe**:
+
 1. Navigates to Reports section
 2. Selects "Spending by Category" report
 3. Finds "Dining Out" category
 4. Reads total amount
 
 **Success criteria**:
+
 - Finds report within 1 minute
 - Correctly identifies dining out total
 
 **Failure modes to watch for**:
+
 - Can't find Reports section
 - Confused by chart/graph
 - Misreads numbers (too small?)
@@ -308,6 +329,7 @@ Key points to include:
 **Setup**: "You notice you entered $47.50 for Walmart, but it was actually $57.50. Fix it."
 
 **Steps to observe**:
+
 1. Finds the Walmart transaction in list
 2. Clicks to edit
 3. Changes amount to $57.50
@@ -315,10 +337,12 @@ Key points to include:
 5. Verifies new amount is correct
 
 **Success criteria**:
+
 - Finds transaction within 1 minute
 - Edits successfully
 
 **Failure modes to watch for**:
+
 - Can't find transaction in long list
 - Accidentally deletes instead of editing
 - Doesn't know how to access edit mode (tap vs long-press?)
@@ -409,23 +433,27 @@ Key points to include:
 During each session, observer should note:
 
 **Usability**:
+
 - [ ] Task completion rate (did they finish?)
 - [ ] Task completion time (how long?)
 - [ ] Errors made (wrong clicks, misunderstandings)
 - [ ] Assistance needed (did we have to help?)
 
 **Emotional reactions**:
+
 - [ ] Frustration moments (sighs, frowns, confusion)
 - [ ] Delight moments (smiles, "oh nice!", positive comments)
 - [ ] Confidence level (nervous, hesitant, confident)
 
 **Accessibility issues**:
+
 - [ ] Font too small to read
 - [ ] Buttons too small to tap
 - [ ] Colors hard to distinguish
 - [ ] Error messages unclear
 
 **Quotes** (capture verbatim):
+
 - "I don't understand what this means"
 - "This is confusing"
 - "Oh I like this!"
@@ -453,11 +481,13 @@ During each session, observer should note:
 ### Custom Questions
 
 **Accessibility**:
+
 - "Was the text large enough to read comfortably?" (1-5 scale)
 - "Were the buttons easy to tap?" (1-5 scale)
 - "Did any colors make it hard to see?" (Open-ended)
 
 **Value Proposition**:
+
 - "Would you use this app to manage your budget?" (Yes/No/Maybe)
 - "What would make you more likely to use it?" (Open-ended)
 - "Who else do you think would benefit from this app?" (Open-ended)
@@ -469,18 +499,21 @@ During each session, observer should note:
 ### Quantitative Metrics
 
 **Task success rate**:
+
 ```
 Success rate = (# completed tasks / total tasks attempted) × 100%
 Target: 80%+
 ```
 
 **Average task completion time**:
+
 ```
 Avg time = Sum of all task times / # of tasks
 Target: <5 minutes per task
 ```
 
 **SUS Score**:
+
 ```
 Calculate per participant (formula in Appendix B)
 Average across all participants
@@ -488,6 +521,7 @@ Target: 70+ (acceptable), 80+ (excellent)
 ```
 
 **Accessibility ratings**:
+
 - Average rating for text size (target: 4+/5)
 - Average rating for button size (target: 4+/5)
 
@@ -515,6 +549,7 @@ Target: 70+ (acceptable), 80+ (excellent)
    - Terminology confusion
 
 **Severity rating**:
+
 - **Critical** (P0): Prevents task completion, affects majority of users
 - **High** (P1): Causes significant difficulty, affects many users
 - **Medium** (P2): Minor inconvenience, affects some users
@@ -534,10 +569,10 @@ Target: 70+ (acceptable), 80+ (excellent)
 
 **Example**:
 
-| Issue | Frequency | Severity | Impact | Root Cause | Proposed Fix | Effort |
-|-------|-----------|----------|--------|------------|--------------|--------|
-| Can't find Import button | 5/7 users | High | Users can't import CSV | Button is in overflow menu | Move to main navigation | 2 hours |
-| Font too small on iPhone SE | 2/7 users | Medium | Harder to read | Base font is 14px | Increase to 16px minimum | 4 hours |
+| Issue                       | Frequency | Severity | Impact                 | Root Cause                 | Proposed Fix             | Effort  |
+| --------------------------- | --------- | -------- | ---------------------- | -------------------------- | ------------------------ | ------- |
+| Can't find Import button    | 5/7 users | High     | Users can't import CSV | Button is in overflow menu | Move to main navigation  | 2 hours |
+| Font too small on iPhone SE | 2/7 users | Medium   | Harder to read         | Base font is 14px          | Increase to 16px minimum | 4 hours |
 
 ---
 
@@ -546,6 +581,7 @@ Target: 70+ (acceptable), 80+ (excellent)
 ### Round 1 Analysis (End of Week 2)
 
 **Immediate actions**:
+
 1. Compile all observation notes
 2. Calculate quantitative metrics (success rate, SUS score, etc.)
 3. Identify top 5 critical issues (P0)
@@ -576,12 +612,14 @@ Target: 70+ (acceptable), 80+ (excellent)
 **Trigger**: If P0 or P1 issues found in Round 1
 
 **Protocol**:
+
 - Recruit NEW participants (3-5) to avoid learning bias
 - Test same scenarios PLUS new fixes
 - Focus on previously problematic areas
 - Compare metrics to Round 1
 
 **Success criteria for launch**:
+
 - ✅ No P0 issues remaining
 - ✅ P1 issues reduced by 80%+
 - ✅ SUS score 75+ (increased from Round 1)
@@ -657,36 +695,37 @@ Researcher Signature: __________________________________ Date: __________
 **Instructions**: For each statement, rate your agreement from 1 (Strongly Disagree) to 5 (Strongly Agree)
 
 1. I think I would like to use this app frequently
-   [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+   [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 2. I found the app unnecessarily complex
-   [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+   [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 3. I thought the app was easy to use
-   [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+   [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 4. I think I would need technical support to use this app
-   [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+   [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 5. I found the various functions were well integrated
-   [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+   [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 6. I thought there was too much inconsistency
-   [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+   [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 7. I would imagine most people would learn to use this quickly
-   [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+   [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 8. I found the app very awkward to use
-   [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+   [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 9. I felt very confident using the app
-   [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+   [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 10. I needed to learn a lot before I could use this app
-    [ ] 1  [ ] 2  [ ] 3  [ ] 4  [ ] 5
+    [ ] 1 [ ] 2 [ ] 3 [ ] 4 [ ] 5
 
 **Scoring**:
+
 - For odd items (1,3,5,7,9): score = rating - 1
 - For even items (2,4,6,8,10): score = 5 - rating
 - SUS Score = (Sum of scores) × 2.5

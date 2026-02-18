@@ -6305,4 +6305,3 @@ export const importedQuestionBankMetadata = {
     [QuestionCategory.LINEAR_CHAIN]: 0,
   },
 };
-

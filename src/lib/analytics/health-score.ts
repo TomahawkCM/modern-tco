@@ -13,19 +13,19 @@
  * - Historical tracking for trend analysis
  */
 
-import { db } from '@/lib/budget-db';
-import type { Transaction, Budget, FuturePurchase } from '@/types/budget';
+import { db } from "@/lib/budget-db";
+import type { Transaction, Budget, FuturePurchase } from "@/types/budget";
 
 /**
  * Health Score Factor Types (H-002)
  */
 export type FactorType =
-  | 'savingsRate'
-  | 'debtToIncome'
-  | 'budgetAdherence'
-  | 'emergencyFund'
-  | 'investmentGrowth'
-  | 'expenseStability';
+  | "savingsRate"
+  | "debtToIncome"
+  | "budgetAdherence"
+  | "emergencyFund"
+  | "investmentGrowth"
+  | "expenseStability";
 
 /**
  * Factor weight configuration
@@ -59,7 +59,7 @@ export interface HealthScoreResult {
   score: number;
   maxPossibleScore: number;
   normalizedScore: number; // 0-100 accounting for missing data
-  grade: 'A' | 'B' | 'C' | 'D' | 'F';
+  grade: "A" | "B" | "C" | "D" | "F";
   factors: FactorResult[];
   calculatedAt: Date;
   missingFactors: FactorType[];
@@ -111,7 +111,7 @@ function getMonthlyIncome(transactions: Transaction[], monthsBack: number = 3): 
   const startDate = new Date(now.getFullYear(), now.getMonth() - monthsBack, 1);
 
   const income = transactions
-    .filter(tx => tx.amount > 0 && new Date(tx.date) >= startDate)
+    .filter((tx) => tx.amount > 0 && new Date(tx.date) >= startDate)
     .reduce((sum, tx) => sum + tx.amount, 0);
 
   return income / monthsBack;
@@ -125,7 +125,7 @@ function getMonthlyExpenses(transactions: Transaction[], monthsBack: number = 3)
   const startDate = new Date(now.getFullYear(), now.getMonth() - monthsBack, 1);
 
   const expenses = transactions
-    .filter(tx => tx.amount < 0 && new Date(tx.date) >= startDate)
+    .filter((tx) => tx.amount < 0 && new Date(tx.date) >= startDate)
     .reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
 
   return expenses / monthsBack;
@@ -163,7 +163,7 @@ export function calculateSavingsRateFactor(
   }
 
   return {
-    type: 'savingsRate',
+    type: "savingsRate",
     score: Math.round(score * 10) / 10,
     maxScore: FACTOR_WEIGHTS.savingsRate,
     percentage: (score / FACTOR_WEIGHTS.savingsRate) * 100,
@@ -187,16 +187,16 @@ export function calculateDebtToIncomeFactor(
   if (income <= 0) return null;
 
   // Identify debt payments (loans, credit cards, mortgages)
-  const debtCategories = ['Loans', 'Credit Card', 'Mortgage', 'Debt', 'Car Payment'];
+  const debtCategories = ["Loans", "Credit Card", "Mortgage", "Debt", "Car Payment"];
   const now = new Date();
   const startDate = new Date(now.getFullYear(), now.getMonth() - monthsBack, 1);
 
   const debtPayments = transactions
-    .filter(tx => {
+    .filter((tx) => {
       if (tx.amount >= 0) return false;
       if (new Date(tx.date) < startDate) return false;
-      const category = tx.category?.toLowerCase() || '';
-      return debtCategories.some(dc => category.includes(dc.toLowerCase()));
+      const category = tx.category?.toLowerCase() || "";
+      return debtCategories.some((dc) => category.includes(dc.toLowerCase()));
     })
     .reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
 
@@ -226,7 +226,7 @@ export function calculateDebtToIncomeFactor(
   }
 
   return {
-    type: 'debtToIncome',
+    type: "debtToIncome",
     score: Math.round(score * 10) / 10,
     maxScore: FACTOR_WEIGHTS.debtToIncome,
     percentage: (score / FACTOR_WEIGHTS.debtToIncome) * 100,
@@ -253,9 +253,9 @@ export function calculateBudgetAdherenceFactor(
   // Calculate spending per category this month
   const spendingByCategory = new Map<string, number>();
   transactions
-    .filter(tx => tx.amount < 0 && new Date(tx.date) >= startOfMonth)
-    .forEach(tx => {
-      const category = tx.category || 'Uncategorized';
+    .filter((tx) => tx.amount < 0 && new Date(tx.date) >= startOfMonth)
+    .forEach((tx) => {
+      const category = tx.category || "Uncategorized";
       const current = spendingByCategory.get(category) || 0;
       spendingByCategory.set(category, current + Math.abs(tx.amount));
     });
@@ -264,7 +264,7 @@ export function calculateBudgetAdherenceFactor(
   let withinBudget = 0;
   let totalBudgets = 0;
 
-  budgets.forEach(budget => {
+  budgets.forEach((budget) => {
     if (budget.amount > 0) {
       totalBudgets++;
       const spent = spendingByCategory.get(budget.categoryId) || 0;
@@ -291,11 +291,11 @@ export function calculateBudgetAdherenceFactor(
   const overBudgetCount = totalBudgets - withinBudget;
   let improvementTip: string | undefined;
   if (overBudgetCount > 0) {
-    improvementTip = `${overBudgetCount} categor${overBudgetCount === 1 ? 'y is' : 'ies are'} over budget. Review spending to improve.`;
+    improvementTip = `${overBudgetCount} categor${overBudgetCount === 1 ? "y is" : "ies are"} over budget. Review spending to improve.`;
   }
 
   return {
-    type: 'budgetAdherence',
+    type: "budgetAdherence",
     score: Math.round(score * 10) / 10,
     maxScore: FACTOR_WEIGHTS.budgetAdherence,
     percentage: (score / FACTOR_WEIGHTS.budgetAdherence) * 100,
@@ -323,16 +323,17 @@ export function calculateEmergencyFundFactor(
   let emergencyFund = 0;
 
   if (emergencyFundId) {
-    const purchase = futurePurchases.find(p => p.id === emergencyFundId);
+    const purchase = futurePurchases.find((p) => p.id === emergencyFundId);
     if (purchase) {
       emergencyFund = purchase.currentSavings || 0;
     }
   } else {
     // Try to find any savings goal named "Emergency" or "Rainy Day"
-    const emergencyGoal = futurePurchases.find(p =>
-      p.name.toLowerCase().includes('emergency') ||
-      p.name.toLowerCase().includes('rainy day') ||
-      p.name.toLowerCase().includes('savings')
+    const emergencyGoal = futurePurchases.find(
+      (p) =>
+        p.name.toLowerCase().includes("emergency") ||
+        p.name.toLowerCase().includes("rainy day") ||
+        p.name.toLowerCase().includes("savings")
     );
     if (emergencyGoal) {
       emergencyFund = emergencyGoal.currentSavings || 0;
@@ -365,7 +366,7 @@ export function calculateEmergencyFundFactor(
   }
 
   return {
-    type: 'emergencyFund',
+    type: "emergencyFund",
     score: Math.round(score * 10) / 10,
     maxScore: FACTOR_WEIGHTS.emergencyFund,
     percentage: (score / FACTOR_WEIGHTS.emergencyFund) * 100,
@@ -388,12 +389,12 @@ export function calculateInvestmentGrowthFactor(
   const startDate = new Date(now.getFullYear(), now.getMonth() - monthsBack, 1);
 
   // Find investment transactions
-  const investmentCategories = ['Investment', 'Stocks', 'Retirement', '401k', 'IRA', 'Brokerage'];
+  const investmentCategories = ["Investment", "Stocks", "Retirement", "401k", "IRA", "Brokerage"];
 
-  const investmentTx = transactions.filter(tx => {
+  const investmentTx = transactions.filter((tx) => {
     if (new Date(tx.date) < startDate) return false;
-    const category = tx.category?.toLowerCase() || '';
-    return investmentCategories.some(ic => category.includes(ic.toLowerCase()));
+    const category = tx.category?.toLowerCase() || "";
+    return investmentCategories.some((ic) => category.includes(ic.toLowerCase()));
   });
 
   if (investmentTx.length === 0) {
@@ -404,11 +405,11 @@ export function calculateInvestmentGrowthFactor(
   // Estimate growth (contributions vs current value would need account data)
   // For now, use a simplified approach based on income designation
   const contributions = investmentTx
-    .filter(tx => tx.amount < 0) // Money going out to investments
+    .filter((tx) => tx.amount < 0) // Money going out to investments
     .reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
 
   const returns = investmentTx
-    .filter(tx => tx.amount > 0) // Dividends, gains
+    .filter((tx) => tx.amount > 0) // Dividends, gains
     .reduce((sum, tx) => sum + tx.amount, 0);
 
   if (contributions === 0) {
@@ -431,11 +432,11 @@ export function calculateInvestmentGrowthFactor(
 
   let improvementTip: string | undefined;
   if (growthRate < 5) {
-    improvementTip = 'Consider diversifying investments or reviewing asset allocation';
+    improvementTip = "Consider diversifying investments or reviewing asset allocation";
   }
 
   return {
-    type: 'investmentGrowth',
+    type: "investmentGrowth",
     score: Math.round(score * 10) / 10,
     maxScore: FACTOR_WEIGHTS.investmentGrowth,
     percentage: (score / FACTOR_WEIGHTS.investmentGrowth) * 100,
@@ -462,7 +463,7 @@ export function calculateExpenseStabilityFactor(
     const monthEnd = new Date(now.getFullYear(), now.getMonth() - i + 1, 0);
 
     const monthExpense = transactions
-      .filter(tx => {
+      .filter((tx) => {
         if (tx.amount >= 0) return false;
         const txDate = new Date(tx.date);
         return txDate >= monthStart && txDate <= monthEnd;
@@ -478,7 +479,8 @@ export function calculateExpenseStabilityFactor(
 
   // Calculate coefficient of variation (CV)
   const mean = monthlyExpenses.reduce((a, b) => a + b, 0) / monthlyExpenses.length;
-  const variance = monthlyExpenses.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / monthlyExpenses.length;
+  const variance =
+    monthlyExpenses.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / monthlyExpenses.length;
   const stdDev = Math.sqrt(variance);
   const cv = (stdDev / mean) * 100; // Coefficient of variation as percentage
 
@@ -494,22 +496,23 @@ export function calculateExpenseStabilityFactor(
 
   let stabilityLabel: string;
   if (cv < 15) {
-    stabilityLabel = 'Low';
+    stabilityLabel = "Low";
   } else if (cv < 30) {
-    stabilityLabel = 'Medium';
+    stabilityLabel = "Medium";
   } else {
-    stabilityLabel = 'High';
+    stabilityLabel = "High";
   }
 
   let improvementTip: string | undefined;
   if (cv >= 30) {
-    improvementTip = 'High expense variance detected. Try to smooth out irregular expenses with budgeting.';
+    improvementTip =
+      "High expense variance detected. Try to smooth out irregular expenses with budgeting.";
   } else if (cv >= 15) {
-    improvementTip = 'Consider automating regular expenses to improve stability.';
+    improvementTip = "Consider automating regular expenses to improve stability.";
   }
 
   return {
-    type: 'expenseStability',
+    type: "expenseStability",
     score: Math.round(score * 10) / 10,
     maxScore: FACTOR_WEIGHTS.expenseStability,
     percentage: (score / FACTOR_WEIGHTS.expenseStability) * 100,
@@ -531,48 +534,50 @@ export function calculateHealthScore(input: HealthScoreInput): HealthScoreResult
   // Calculate each factor
   const savingsRate = calculateSavingsRateFactor(transactions, monthsToAnalyze);
   if (savingsRate) factors.push(savingsRate);
-  else missingFactors.push('savingsRate');
+  else missingFactors.push("savingsRate");
 
   const debtToIncome = calculateDebtToIncomeFactor(transactions, monthsToAnalyze);
   if (debtToIncome) factors.push(debtToIncome);
-  else missingFactors.push('debtToIncome');
+  else missingFactors.push("debtToIncome");
 
   const budgetAdherence = calculateBudgetAdherenceFactor(transactions, budgets);
   if (budgetAdherence) factors.push(budgetAdherence);
-  else missingFactors.push('budgetAdherence');
+  else missingFactors.push("budgetAdherence");
 
-  const emergencyFund = calculateEmergencyFundFactor(transactions, futurePurchases, emergencyFundId);
+  const emergencyFund = calculateEmergencyFundFactor(
+    transactions,
+    futurePurchases,
+    emergencyFundId
+  );
   if (emergencyFund) factors.push(emergencyFund);
-  else missingFactors.push('emergencyFund');
+  else missingFactors.push("emergencyFund");
 
   const investmentGrowth = calculateInvestmentGrowthFactor(transactions, 12);
   if (investmentGrowth) factors.push(investmentGrowth);
-  else missingFactors.push('investmentGrowth');
+  else missingFactors.push("investmentGrowth");
 
   const expenseStability = calculateExpenseStabilityFactor(transactions, 6);
   if (expenseStability) factors.push(expenseStability);
-  else missingFactors.push('expenseStability');
+  else missingFactors.push("expenseStability");
 
   // Calculate scores
   const score = factors.reduce((sum, f) => sum + f.score, 0);
   const maxPossibleScore = factors.reduce((sum, f) => sum + f.maxScore, 0);
 
   // Normalize to 0-100 scale
-  const normalizedScore = maxPossibleScore > 0
-    ? (score / maxPossibleScore) * 100
-    : 0;
+  const normalizedScore = maxPossibleScore > 0 ? (score / maxPossibleScore) * 100 : 0;
 
   // Determine grade
-  let grade: 'A' | 'B' | 'C' | 'D' | 'F';
-  if (normalizedScore >= 90) grade = 'A';
-  else if (normalizedScore >= 80) grade = 'B';
-  else if (normalizedScore >= 70) grade = 'C';
-  else if (normalizedScore >= 60) grade = 'D';
-  else grade = 'F';
+  let grade: "A" | "B" | "C" | "D" | "F";
+  if (normalizedScore >= 90) grade = "A";
+  else if (normalizedScore >= 80) grade = "B";
+  else if (normalizedScore >= 70) grade = "C";
+  else if (normalizedScore >= 60) grade = "D";
+  else grade = "F";
 
   // Find top recommendation (lowest scoring factor with improvement tip)
   const sortedFactors = [...factors].sort((a, b) => a.percentage - b.percentage);
-  const topRecommendation = sortedFactors.find(f => f.improvementTip)?.improvementTip;
+  const topRecommendation = sortedFactors.find((f) => f.improvementTip)?.improvementTip;
 
   return {
     score: Math.round(score * 10) / 10,
@@ -598,22 +603,22 @@ export function getFactorBreakdown(result: HealthScoreResult): {
   icon: string;
 }[] {
   const factorLabels: Record<FactorType, { label: string; icon: string }> = {
-    savingsRate: { label: 'Savings Rate', icon: 'piggy-bank' },
-    debtToIncome: { label: 'Debt-to-Income', icon: 'credit-card' },
-    budgetAdherence: { label: 'Budget Adherence', icon: 'target' },
-    emergencyFund: { label: 'Emergency Fund', icon: 'shield' },
-    investmentGrowth: { label: 'Investment Growth', icon: 'trending-up' },
-    expenseStability: { label: 'Expense Stability', icon: 'bar-chart' },
+    savingsRate: { label: "Savings Rate", icon: "piggy-bank" },
+    debtToIncome: { label: "Debt-to-Income", icon: "credit-card" },
+    budgetAdherence: { label: "Budget Adherence", icon: "target" },
+    emergencyFund: { label: "Emergency Fund", icon: "shield" },
+    investmentGrowth: { label: "Investment Growth", icon: "trending-up" },
+    expenseStability: { label: "Expense Stability", icon: "bar-chart" },
   };
 
   const getColor = (percentage: number): string => {
-    if (percentage >= 80) return '#22c55e'; // green
-    if (percentage >= 60) return '#eab308'; // yellow
-    if (percentage >= 40) return '#f97316'; // orange
-    return '#ef4444'; // red
+    if (percentage >= 80) return "#22c55e"; // green
+    if (percentage >= 60) return "#eab308"; // yellow
+    if (percentage >= 40) return "#f97316"; // orange
+    return "#ef4444"; // red
   };
 
-  return result.factors.map(f => ({
+  return result.factors.map((f) => ({
     factor: f.type,
     label: factorLabels[f.type].label,
     score: f.score,
@@ -644,13 +649,18 @@ export async function saveHealthScoreToHistory(result: HealthScoreResult): Promi
 /**
  * Get grade color
  */
-export function getGradeColor(grade: 'A' | 'B' | 'C' | 'D' | 'F'): string {
+export function getGradeColor(grade: "A" | "B" | "C" | "D" | "F"): string {
   switch (grade) {
-    case 'A': return '#22c55e'; // green
-    case 'B': return '#84cc16'; // lime
-    case 'C': return '#eab308'; // yellow
-    case 'D': return '#f97316'; // orange
-    case 'F': return '#ef4444'; // red
+    case "A":
+      return "#22c55e"; // green
+    case "B":
+      return "#84cc16"; // lime
+    case "C":
+      return "#eab308"; // yellow
+    case "D":
+      return "#f97316"; // orange
+    case "F":
+      return "#ef4444"; // red
   }
 }
 
@@ -658,9 +668,9 @@ export function getGradeColor(grade: 'A' | 'B' | 'C' | 'D' | 'F'): string {
  * Get score interpretation text
  */
 export function getScoreInterpretation(score: number): string {
-  if (score >= 90) return 'Excellent financial health';
-  if (score >= 80) return 'Good financial health';
-  if (score >= 70) return 'Fair financial health';
-  if (score >= 60) return 'Needs improvement';
-  return 'Significant improvement needed';
+  if (score >= 90) return "Excellent financial health";
+  if (score >= 80) return "Good financial health";
+  if (score >= 70) return "Fair financial health";
+  if (score >= 60) return "Needs improvement";
+  return "Significant improvement needed";
 }

@@ -5,10 +5,10 @@
  * Lists paired devices, enables/disables sync, and shows sync status.
  */
 
-'use client';
+"use client";
 
-import React, { useState, useCallback } from 'react';
-import { useTranslations } from 'next-intl';
+import React, { useState, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import {
   Wifi,
   WifiOff,
@@ -24,18 +24,18 @@ import {
   Clock,
   Unplug,
   Link2,
-} from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
+} from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -45,17 +45,17 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/alert-dialog";
+import { cn } from "@/lib/utils";
 import {
   useLANSync,
   useSyncStats,
   useDeviceSyncStatus,
   type DeviceSyncStatus,
-} from '@/contexts/LANSyncContext';
-import type { PairedDevice } from '@/lib/lan-sync';
-import { PairingDialog } from './lan-sync/PairingDialog';
-import { SyncStatusIndicator } from './lan-sync/SyncStatusIndicator';
+} from "@/contexts/LANSyncContext";
+import type { PairedDevice } from "@/lib/lan-sync";
+import { PairingDialog } from "./lan-sync/PairingDialog";
+import { SyncStatusIndicator } from "./lan-sync/SyncStatusIndicator";
 
 // ============================================================================
 // Types
@@ -73,7 +73,7 @@ export interface LANSyncSettingsProps {
 // ============================================================================
 
 function formatLastSync(date: Date | null | undefined): string {
-  if (!date) return 'Never synced';
+  if (!date) return "Never synced";
 
   const now = new Date();
   const diff = now.getTime() - date.getTime();
@@ -81,37 +81,42 @@ function formatLastSync(date: Date | null | undefined): string {
   const hours = Math.floor(diff / 3600000);
   const days = Math.floor(diff / 86400000);
 
-  if (minutes < 1) return 'Just now';
-  if (minutes < 60) return `${minutes} minute${minutes !== 1 ? 's' : ''} ago`;
-  if (hours < 24) return `${hours} hour${hours !== 1 ? 's' : ''} ago`;
-  return `${days} day${days !== 1 ? 's' : ''} ago`;
+  if (minutes < 1) return "Just now";
+  if (minutes < 60) return `${minutes} minute${minutes !== 1 ? "s" : ""} ago`;
+  if (hours < 24) return `${hours} hour${hours !== 1 ? "s" : ""} ago`;
+  return `${days} day${days !== 1 ? "s" : ""} ago`;
 }
 
 function getDeviceIcon(deviceName: string) {
   const name = deviceName.toLowerCase();
-  if (name.includes('phone') || name.includes('mobile') || name.includes('iphone') || name.includes('android')) {
+  if (
+    name.includes("phone") ||
+    name.includes("mobile") ||
+    name.includes("iphone") ||
+    name.includes("android")
+  ) {
     return Smartphone;
   }
-  if (name.includes('tablet') || name.includes('ipad')) {
+  if (name.includes("tablet") || name.includes("ipad")) {
     return Tablet;
   }
   return Monitor;
 }
 
 function getConnectionStatusColor(status: DeviceSyncStatus | null): string {
-  if (!status) return 'text-muted-foreground';
+  if (!status) return "text-muted-foreground";
 
   switch (status.connectionState) {
-    case 'connected':
-      return 'text-green-500';
-    case 'syncing':
-      return 'text-blue-500';
-    case 'connecting':
-      return 'text-yellow-500';
-    case 'error':
-      return 'text-red-500';
+    case "connected":
+      return "text-green-500";
+    case "syncing":
+      return "text-blue-500";
+    case "connecting":
+      return "text-yellow-500";
+    case "error":
+      return "text-red-500";
     default:
-      return 'text-muted-foreground';
+      return "text-muted-foreground";
   }
 }
 
@@ -138,74 +143,70 @@ function DeviceCard({
   onSync,
   seniorsMode,
 }: DeviceCardProps) {
-  const t = useTranslations('lanSync');
+  const t = useTranslations("lanSync");
   const [showRemoveDialog, setShowRemoveDialog] = useState(false);
   const DeviceIcon = getDeviceIcon(device.name);
   const isConnected = status?.isOnline ?? false;
-  const isSyncing = status?.connectionState === 'syncing';
+  const isSyncing = status?.connectionState === "syncing";
 
   return (
     <>
       <div
         className={cn(
-          'flex items-center gap-4 p-4 rounded-lg border bg-card',
-          seniorsMode && 'p-5'
+          "flex items-center gap-4 rounded-lg border bg-card p-4",
+          seniorsMode && "p-5"
         )}
       >
         {/* Device icon */}
         <div
           className={cn(
-            'flex-shrink-0 p-2 rounded-full bg-muted',
+            "flex-shrink-0 rounded-full bg-muted p-2",
             getConnectionStatusColor(status)
           )}
         >
-          <DeviceIcon className={seniorsMode ? 'h-6 w-6' : 'h-5 w-5'} />
+          <DeviceIcon className={seniorsMode ? "h-6 w-6" : "h-5 w-5"} />
         </div>
 
         {/* Device info */}
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <h4 className={cn('font-medium truncate', seniorsMode && 'text-lg')}>
-              {device.name}
-            </h4>
+            <h4 className={cn("truncate font-medium", seniorsMode && "text-lg")}>{device.name}</h4>
             {isConnected && (
-              <Badge variant="outline" className="text-green-500 border-green-500">
-                {t('device.connected')}
+              <Badge variant="outline" className="border-green-500 text-green-500">
+                {t("device.connected")}
               </Badge>
             )}
           </div>
-          <p className={cn('text-muted-foreground truncate', seniorsMode ? 'text-sm' : 'text-xs')}>
+          <p className={cn("truncate text-muted-foreground", seniorsMode ? "text-sm" : "text-xs")}>
             {status?.lastSyncAt
-              ? t('time.lastSync', { time: formatLastSync(status.lastSyncAt) })
+              ? t("time.lastSync", { time: formatLastSync(status.lastSyncAt) })
               : formatLastSync(device.lastSyncAt)}
           </p>
           {device.lastKnownIp && (
-            <p className={cn('text-muted-foreground truncate', seniorsMode ? 'text-sm' : 'text-xs')}>
+            <p
+              className={cn("truncate text-muted-foreground", seniorsMode ? "text-sm" : "text-xs")}
+            >
               {device.lastKnownIp}:{device.lastKnownPort}
             </p>
           )}
         </div>
 
         {/* Actions */}
-        <div className="flex-shrink-0 flex items-center gap-2">
+        <div className="flex flex-shrink-0 items-center gap-2">
           {isConnected ? (
             <Button
               variant="outline"
-              size={seniorsMode ? 'default' : 'sm'}
+              size={seniorsMode ? "default" : "sm"}
               onClick={onSync}
               disabled={isSyncing}
             >
-              <RefreshCw className={cn('mr-2 h-4 w-4', isSyncing && 'animate-spin')} />
-              {isSyncing ? t('device.syncing') : t('device.sync')}
+              <RefreshCw className={cn("mr-2 h-4 w-4", isSyncing && "animate-spin")} />
+              {isSyncing ? t("device.syncing") : t("device.sync")}
             </Button>
           ) : (
-            <Button
-              variant="outline"
-              size={seniorsMode ? 'default' : 'sm'}
-              onClick={onConnect}
-            >
+            <Button variant="outline" size={seniorsMode ? "default" : "sm"} onClick={onConnect}>
               <Link2 className="mr-2 h-4 w-4" />
-              {t('device.connect')}
+              {t("device.connect")}
             </Button>
           )}
 
@@ -219,7 +220,7 @@ function DeviceCard({
               {isConnected && (
                 <DropdownMenuItem onClick={onDisconnect}>
                   <Unplug className="mr-2 h-4 w-4" />
-                  {t('device.disconnect')}
+                  {t("device.disconnect")}
                 </DropdownMenuItem>
               )}
               <DropdownMenuItem
@@ -227,7 +228,7 @@ function DeviceCard({
                 className="text-red-500 focus:text-red-500"
               >
                 <Trash2 className="mr-2 h-4 w-4" />
-                {t('device.removeDevice')}
+                {t("device.removeDevice")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -238,13 +239,13 @@ function DeviceCard({
       <AlertDialog open={showRemoveDialog} onOpenChange={setShowRemoveDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>{t('removeDialog.title')}</AlertDialogTitle>
+            <AlertDialogTitle>{t("removeDialog.title")}</AlertDialogTitle>
             <AlertDialogDescription>
-              {t('removeDialog.description', { deviceName: device.name })}
+              {t("removeDialog.description", { deviceName: device.name })}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>{t('removeDialog.cancel')}</AlertDialogCancel>
+            <AlertDialogCancel>{t("removeDialog.cancel")}</AlertDialogCancel>
             <AlertDialogAction
               onClick={() => {
                 onRemove();
@@ -252,7 +253,7 @@ function DeviceCard({
               }}
               className="bg-red-500 hover:bg-red-600"
             >
-              {t('removeDialog.remove')}
+              {t("removeDialog.remove")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -266,7 +267,7 @@ function DeviceCard({
 // ============================================================================
 
 export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSettingsProps) {
-  const t = useTranslations('lanSync');
+  const t = useTranslations("lanSync");
   const {
     state,
     setEnabled,
@@ -282,56 +283,47 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
   const [showPairingDialog, setShowPairingDialog] = useState(false);
 
   // Handle device pairing success
-  const handlePairingSuccess = useCallback(
-    (device: PairedDevice) => {
-      setShowPairingDialog(false);
-      // Device is already added via the pairing dialog
-    },
-    []
-  );
+  const handlePairingSuccess = useCallback((device: PairedDevice) => {
+    setShowPairingDialog(false);
+    // Device is already added via the pairing dialog
+  }, []);
 
   // Handle sync all
   const handleSyncAll = useCallback(async () => {
     try {
       await syncAll();
     } catch (error) {
-      console.error('Sync all failed:', error);
+      console.error("Sync all failed:", error);
     }
   }, [syncAll]);
 
-  const textSize = seniorsMode ? 'text-lg' : 'text-base';
-  const descSize = seniorsMode ? 'text-base' : 'text-sm';
+  const textSize = seniorsMode ? "text-lg" : "text-base";
+  const descSize = seniorsMode ? "text-base" : "text-sm";
 
   return (
-    <div className={cn('space-y-6', className)}>
+    <div className={cn("space-y-6", className)}>
       {/* Header with sync status */}
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               {state.isEnabled ? (
-                <Wifi className={cn('text-primary', seniorsMode ? 'h-7 w-7' : 'h-6 w-6')} />
+                <Wifi className={cn("text-primary", seniorsMode ? "h-7 w-7" : "h-6 w-6")} />
               ) : (
-                <WifiOff className={cn('text-muted-foreground', seniorsMode ? 'h-7 w-7' : 'h-6 w-6')} />
+                <WifiOff
+                  className={cn("text-muted-foreground", seniorsMode ? "h-7 w-7" : "h-6 w-6")}
+                />
               )}
               <div>
-                <CardTitle className={seniorsMode ? 'text-2xl' : ''}>
-                  {t('title')}
-                </CardTitle>
-                <CardDescription className={descSize}>
-                  {t('description')}
-                </CardDescription>
+                <CardTitle className={seniorsMode ? "text-2xl" : ""}>{t("title")}</CardTitle>
+                <CardDescription className={descSize}>{t("description")}</CardDescription>
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <Label htmlFor="lan-sync-toggle" className={cn('cursor-pointer', textSize)}>
-                {state.isEnabled ? t('enabled') : t('disabled')}
+              <Label htmlFor="lan-sync-toggle" className={cn("cursor-pointer", textSize)}>
+                {state.isEnabled ? t("enabled") : t("disabled")}
               </Label>
-              <Switch
-                id="lan-sync-toggle"
-                checked={state.isEnabled}
-                onCheckedChange={setEnabled}
-              />
+              <Switch id="lan-sync-toggle" checked={state.isEnabled} onCheckedChange={setEnabled} />
             </div>
           </div>
         </CardHeader>
@@ -345,8 +337,8 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
                 onClick={handleSyncAll}
                 disabled={stats.connectedDevices === 0 || state.isSyncing}
               >
-                <RefreshCw className={cn('mr-2 h-4 w-4', state.isSyncing && 'animate-spin')} />
-                {t('syncAll')}
+                <RefreshCw className={cn("mr-2 h-4 w-4", state.isSyncing && "animate-spin")} />
+                {t("syncAll")}
               </Button>
             </div>
           </CardContent>
@@ -359,34 +351,34 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className={seniorsMode ? 'text-xl' : ''}>
-                  {t('pairedDevices.title')}
+                <CardTitle className={seniorsMode ? "text-xl" : ""}>
+                  {t("pairedDevices.title")}
                 </CardTitle>
                 <CardDescription className={descSize}>
                   {state.pairedDevices.length === 0
-                    ? t('pairedDevices.noDevices')
-                    : t('pairedDevices.deviceCount', { count: state.pairedDevices.length })}
+                    ? t("pairedDevices.noDevices")
+                    : t("pairedDevices.deviceCount", { count: state.pairedDevices.length })}
                 </CardDescription>
               </div>
               <Button onClick={() => setShowPairingDialog(true)}>
                 <Plus className="mr-2 h-4 w-4" />
-                {t('pairedDevices.addDevice')}
+                {t("pairedDevices.addDevice")}
               </Button>
             </div>
           </CardHeader>
           <CardContent>
             {state.pairedDevices.length === 0 ? (
-              <div className="text-center py-8">
-                <Smartphone className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-                <h3 className={cn('font-medium mb-2', textSize)}>
-                  {t('pairedDevices.emptyTitle')}
+              <div className="py-8 text-center">
+                <Smartphone className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
+                <h3 className={cn("mb-2 font-medium", textSize)}>
+                  {t("pairedDevices.emptyTitle")}
                 </h3>
-                <p className={cn('text-muted-foreground mb-4', descSize)}>
-                  {t('pairedDevices.emptyDescription')}
+                <p className={cn("mb-4 text-muted-foreground", descSize)}>
+                  {t("pairedDevices.emptyDescription")}
                 </p>
                 <Button onClick={() => setShowPairingDialog(true)}>
                   <Plus className="mr-2 h-4 w-4" />
-                  {t('pairedDevices.addFirstDevice')}
+                  {t("pairedDevices.addFirstDevice")}
                 </Button>
               </div>
             ) : (
@@ -412,42 +404,40 @@ export function LANSyncSettings({ className, seniorsMode = false }: LANSyncSetti
       {state.isEnabled && (
         <Card>
           <CardHeader>
-            <CardTitle className={seniorsMode ? 'text-xl' : ''}>
-              {t('howItWorks.title')}
-            </CardTitle>
+            <CardTitle className={seniorsMode ? "text-xl" : ""}>{t("howItWorks.title")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 font-medium text-primary">
                   1
                 </div>
                 <div>
-                  <h4 className={cn('font-medium', textSize)}>{t('howItWorks.step1.title')}</h4>
-                  <p className={cn('text-muted-foreground', descSize)}>
-                    {t('howItWorks.step1.description')}
+                  <h4 className={cn("font-medium", textSize)}>{t("howItWorks.step1.title")}</h4>
+                  <p className={cn("text-muted-foreground", descSize)}>
+                    {t("howItWorks.step1.description")}
                   </p>
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 font-medium text-primary">
                   2
                 </div>
                 <div>
-                  <h4 className={cn('font-medium', textSize)}>{t('howItWorks.step2.title')}</h4>
-                  <p className={cn('text-muted-foreground', descSize)}>
-                    {t('howItWorks.step2.description')}
+                  <h4 className={cn("font-medium", textSize)}>{t("howItWorks.step2.title")}</h4>
+                  <p className={cn("text-muted-foreground", descSize)}>
+                    {t("howItWorks.step2.description")}
                   </p>
                 </div>
               </div>
               <div className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-medium">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 font-medium text-primary">
                   3
                 </div>
                 <div>
-                  <h4 className={cn('font-medium', textSize)}>{t('howItWorks.step3.title')}</h4>
-                  <p className={cn('text-muted-foreground', descSize)}>
-                    {t('howItWorks.step3.description')}
+                  <h4 className={cn("font-medium", textSize)}>{t("howItWorks.step3.title")}</h4>
+                  <p className={cn("text-muted-foreground", descSize)}>
+                    {t("howItWorks.step3.description")}
                   </p>
                 </div>
               </div>

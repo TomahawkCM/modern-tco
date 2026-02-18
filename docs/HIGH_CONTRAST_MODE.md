@@ -19,79 +19,92 @@ The setting persists across sessions and syncs across browser tabs in real-time.
 ## Color Palette
 
 ### Base Colors
-| Element | Color | Contrast Ratio | Standard |
-|---------|-------|----------------|----------|
-| Background | #000000 (Pure black) | N/A | WCAG AAA |
-| Foreground Text | #ffffff (Pure white) | **21:1** | WCAG AAA ⭐ |
-| Cards | #1a1a1a (Very dark gray) | **18:1** | WCAG AAA ⭐ |
+
+| Element         | Color                    | Contrast Ratio | Standard    |
+| --------------- | ------------------------ | -------------- | ----------- |
+| Background      | #000000 (Pure black)     | N/A            | WCAG AAA    |
+| Foreground Text | #ffffff (Pure white)     | **21:1**       | WCAG AAA ⭐ |
+| Cards           | #1a1a1a (Very dark gray) | **18:1**       | WCAG AAA ⭐ |
 
 ### Interactive Elements
-| Element | Color | Contrast Ratio | Standard |
-|---------|-------|----------------|----------|
-| Primary (Buttons) | #00ffff (Bright cyan) | **21:1** | WCAG AAA ⭐ |
-| Accent (Highlights) | #ffff00 (Bright yellow) | **21:1** | WCAG AAA ⭐ |
-| Links | #00ffff (Bright cyan) | **21:1** | WCAG AAA ⭐ |
+
+| Element             | Color                   | Contrast Ratio | Standard    |
+| ------------------- | ----------------------- | -------------- | ----------- |
+| Primary (Buttons)   | #00ffff (Bright cyan)   | **21:1**       | WCAG AAA ⭐ |
+| Accent (Highlights) | #ffff00 (Bright yellow) | **21:1**       | WCAG AAA ⭐ |
+| Links               | #00ffff (Bright cyan)   | **21:1**       | WCAG AAA ⭐ |
 
 ### Status Colors
-| Element | Color | Contrast Ratio | Standard |
-|---------|-------|----------------|----------|
-| Success | #00cc00 (Bright green) | **7.4:1** | WCAG AAA ✅ |
-| Warning | #ff9900 (Bright orange) | **10:1** | WCAG AAA ⭐ |
-| Destructive | #ff0000 (Bright red) | **5.25:1** | WCAG AA ✅ |
+
+| Element     | Color                   | Contrast Ratio | Standard    |
+| ----------- | ----------------------- | -------------- | ----------- |
+| Success     | #00cc00 (Bright green)  | **7.4:1**      | WCAG AAA ✅ |
+| Warning     | #ff9900 (Bright orange) | **10:1**       | WCAG AAA ⭐ |
+| Destructive | #ff0000 (Bright red)    | **5.25:1**     | WCAG AA ✅  |
 
 ### UI Components
-| Element | Color | Contrast Ratio | Standard |
-|---------|-------|----------------|----------|
-| Secondary Actions | #333333 / #ffffff | **15:1** | WCAG AAA ⭐ |
-| Muted Text | #d9d9d9 on #262626 | **11:1** | WCAG AAA ⭐ |
-| Borders | #ffffff (White) | **21:1** | WCAG AAA ⭐ |
-| Focus Rings | #ffff00 (Bright yellow) | **21:1** | WCAG AAA ⭐ |
+
+| Element           | Color                   | Contrast Ratio | Standard    |
+| ----------------- | ----------------------- | -------------- | ----------- |
+| Secondary Actions | #333333 / #ffffff       | **15:1**       | WCAG AAA ⭐ |
+| Muted Text        | #d9d9d9 on #262626      | **11:1**       | WCAG AAA ⭐ |
+| Borders           | #ffffff (White)         | **21:1**       | WCAG AAA ⭐ |
+| Focus Rings       | #ffff00 (Bright yellow) | **21:1**       | WCAG AAA ⭐ |
 
 **Legend:**
+
 - ⭐ = Exceeds 10:1 (Outstanding)
 - ✅ = Meets 7:1 (WCAG AAA) or 4.5:1 (WCAG AA)
 
 ## Enhanced UI Features
 
 ### 1. Buttons
+
 - **Borders:** 2px solid border for clear definition
 - **Font Weight:** 600 (semi-bold) for better readability
 - **Focus:** 4px bright yellow outline
 - **Disabled:** Dashed border at 50% opacity
 
 ### 2. Links
+
 - **Color:** Bright cyan (#00ffff)
 - **Underline:** Always visible, 2px thick on hover
 - **Font Weight:** 500 (medium) for emphasis
 - **Hover:** Changes to bright yellow (#ffff00)
 
 ### 3. Input Fields
+
 - **Border:** 2px white border
 - **Background:** Very dark (#0d0d0d)
 - **Text:** Pure white (#ffffff)
 - **Focus:** 4px yellow outline + yellow border
 
 ### 4. Cards & Panels
+
 - **Border:** 2px white border for clear separation
 - **Background:** Dark gray (#1a1a1a)
 - **No shadows:** Removed for maximum clarity
 
 ### 5. Tables
+
 - **Borders:** 2px white borders on all cells
 - **Headers:** Bold white text
 - **Alternating rows:** Subtle background differences
 
 ### 6. Code Blocks
+
 - **Background:** Medium gray (#262626)
 - **Border:** 2px white
 - **Text:** Pure white (#ffffff)
 
 ### 7. Focus Indicators
+
 - **All interactive elements:** 4px bright yellow outline
 - **Offset:** 2px for clear separation
 - **Visibility:** Extra prominent for keyboard navigation
 
 ### 8. Icons & Graphics
+
 - **Stroke Width:** Increased to 2.5px
 - **Colors:** High contrast variants
 - **No shadows:** Removed for clarity
@@ -131,10 +144,10 @@ High-contrast mode is applied via the `AccessibilitySettingsPanel` component:
 ```typescript
 function applyThemeMode(mode: ThemeMode) {
   const root = document.documentElement;
-  root.classList.remove('light', 'dark', 'high-contrast');
+  root.classList.remove("light", "dark", "high-contrast");
 
-  if (mode === 'high-contrast') {
-    root.classList.add('high-contrast');
+  if (mode === "high-contrast") {
+    root.classList.add("high-contrast");
   }
 }
 ```
@@ -142,6 +155,7 @@ function applyThemeMode(mode: ThemeMode) {
 ## Testing Checklist
 
 ### Manual Testing
+
 - [ ] Navigate to Settings → Accessibility → Theme Mode
 - [ ] Click "High Contrast" button
 - [ ] Verify all text is readable with high contrast
@@ -154,6 +168,7 @@ function applyThemeMode(mode: ThemeMode) {
 - [ ] Check disabled states show dashed borders
 
 ### Contrast Testing Tools
+
 1. **Chrome DevTools**
    - Open DevTools → Elements → Styles
    - Check computed color values
@@ -170,14 +185,15 @@ function applyThemeMode(mode: ThemeMode) {
 
 ## Browser Compatibility
 
-| Browser | Version | Support |
-|---------|---------|---------|
-| Chrome | 90+ | ✅ Full Support |
-| Firefox | 88+ | ✅ Full Support |
-| Safari | 14+ | ✅ Full Support |
-| Edge | 90+ | ✅ Full Support |
+| Browser | Version | Support         |
+| ------- | ------- | --------------- |
+| Chrome  | 90+     | ✅ Full Support |
+| Firefox | 88+     | ✅ Full Support |
+| Safari  | 14+     | ✅ Full Support |
+| Edge    | 90+     | ✅ Full Support |
 
 **CSS Features Used:**
+
 - CSS Custom Properties (CSS Variables)
 - `:focus-visible` pseudo-class
 - `::selection` pseudo-element

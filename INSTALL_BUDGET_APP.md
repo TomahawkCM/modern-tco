@@ -11,6 +11,7 @@ cd C:\Users\robne\Documents\mapmydeals-gpt5\Tanium TCO\modern-tco
 ```
 
 Or if using the WSL mount:
+
 ```powershell
 cd "\\wsl.localhost\Ubuntu\home\robne\projects\active\tanium-tco\modern-tco"
 ```
@@ -22,6 +23,7 @@ npm install dexie dexie-react-hooks papaparse react-dropzone @types/papaparse
 ```
 
 This will install:
+
 - `dexie` - IndexedDB database wrapper
 - `dexie-react-hooks` - React hooks for Dexie
 - `papaparse` - CSV file parser
@@ -46,11 +48,13 @@ Copy-Item "src\lib\budget-db.ts" "src\lib\budget-db.ts.backup"
 Open `src/lib/budget-db.ts` and make these changes:
 
 1. **Uncomment lines 9-11** (import statements):
+
    ```typescript
-   import Dexie, { Table } from 'dexie';
+   import Dexie, { Table } from "dexie";
    ```
 
 2. **Uncomment lines 23-54** (BudgetDatabase class):
+
    ```typescript
    export class BudgetDatabase extends Dexie {
      accounts!: Table<Account>;
@@ -129,20 +133,26 @@ npm list react-dropzone
 ## Troubleshooting
 
 ### Issue: npm command not found
+
 **Solution**: Make sure you're in PowerShell or Command Prompt, not WSL bash.
 
 ### Issue: Cannot find module 'dexie'
+
 **Solution**: Run `npm install` again from the project root.
 
 ### Issue: Port 3000 already in use
+
 **Solution**:
+
 - Close other Next.js dev servers
 - Or use: `npm run dev:port` (runs on port 3007)
 
 ### Issue: Data not persisting
+
 **Solution**: Make sure you completed Step 3 (enabling database persistence).
 
 ### Issue: TypeScript errors
+
 **Solution**: Run `npm run typecheck` to see specific errors. The Budget App is fully typed, so this shouldn't happen.
 
 ---
@@ -152,6 +162,7 @@ npm list react-dropzone
 The following files were created for the Budget App:
 
 ### New Files Created
+
 ```
 src/
 ├── app/budget-app/
@@ -183,6 +194,7 @@ Documentation:
 ```
 
 ### Modified Files
+
 ```
 package.json - Dependencies will be added after npm install
 ```

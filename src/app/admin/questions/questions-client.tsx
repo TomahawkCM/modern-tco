@@ -24,7 +24,9 @@ export default function AdminQuestionsPage() {
       setQuestions(list);
       if (list.length) setCurrent(list[0] || null);
     })();
-    return () => { active = false; };
+    return () => {
+      active = false;
+    };
   }, []);
 
   const filtered = useMemo(() => {
@@ -50,7 +52,8 @@ export default function AdminQuestionsPage() {
     setQuestions((prev) => {
       const idx = prev.findIndex((p) => p.id === saved.id);
       const copy = [...prev];
-      if (idx >= 0) copy[idx] = saved; else copy.unshift(saved);
+      if (idx >= 0) copy[idx] = saved;
+      else copy.unshift(saved);
       return copy;
     });
   }
@@ -64,110 +67,161 @@ export default function AdminQuestionsPage() {
 
   return (
     <AdminGuard>
-    <div className="mx-auto grid max-w-6xl gap-6 p-6 md:grid-cols-[1fr,2fr]">
-      <div className="space-y-4">
-        <Card className="glass border-white/10">
-          <CardHeader>
-            <CardTitle className="text-foreground">Questions</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <Input placeholder="Filter..." value={filter} onChange={(e) => setFilter(e.target.value)} />
-            <div className="max-h-[60vh] overflow-auto">
-              <ul className="divide-y divide-white/10">
-                {filtered.map((q) => (
-                  <li key={q.id} className="flex items-center justify-between py-2">
-                    <button className="text-left text-sm text-gray-100 hover:underline" onClick={() => setCurrent(q)}>
-                      {q.question || <span className="italic text-muted-foreground">(untitled)</span>}
-                    </button>
-                    <div className="flex items-center gap-2">
-                      {q.domain && <Badge variant="secondary">{q.domain}</Badge>}
-                      <Button size="sm" variant="destructive" onClick={() => remove(q.id)}>Delete</Button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <Button onClick={newQuestion}>New Question</Button>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="space-y-4">
-        <Card className="glass border-white/10">
-          <CardHeader>
-            <CardTitle className="text-foreground">Editor</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {!current ? (
-              <div className="text-sm text-muted-foreground">Select a question or create a new one.</div>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  void save();
-                }}
-                className="space-y-3"
-              >
-                <div>
-                  <Label className="text-muted-foreground">Question</Label>
-                  <Textarea value={current.question} onChange={(e) => setCurrent({ ...current, question: e.target.value })} className="min-h-[100px]" />
-                </div>
-                <div className="grid gap-2 md:grid-cols-2">
-                  {current.options.map((opt, i) => (
-                    <div key={opt.id}>
-                      <Label className="text-muted-foreground">Option {opt.id}</Label>
-                      <Input
-                        value={opt.text}
-                        onChange={(e) => {
-                          const copy = [...current.options];
-                          copy[i] = { ...opt, text: e.target.value };
-                          setCurrent({ ...current, options: copy });
-                        }}
-                      />
-                    </div>
+      <div className="mx-auto grid max-w-6xl gap-6 p-6 md:grid-cols-[1fr,2fr]">
+        <div className="space-y-4">
+          <Card className="glass border-white/10">
+            <CardHeader>
+              <CardTitle className="text-foreground">Questions</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <Input
+                placeholder="Filter..."
+                value={filter}
+                onChange={(e) => setFilter(e.target.value)}
+              />
+              <div className="max-h-[60vh] overflow-auto">
+                <ul className="divide-y divide-white/10">
+                  {filtered.map((q) => (
+                    <li key={q.id} className="flex items-center justify-between py-2">
+                      <button
+                        className="text-left text-sm text-gray-100 hover:underline"
+                        onClick={() => setCurrent(q)}
+                      >
+                        {q.question || (
+                          <span className="italic text-muted-foreground">(untitled)</span>
+                        )}
+                      </button>
+                      <div className="flex items-center gap-2">
+                        {q.domain && <Badge variant="secondary">{q.domain}</Badge>}
+                        <Button size="sm" variant="destructive" onClick={() => remove(q.id)}>
+                          Delete
+                        </Button>
+                      </div>
+                    </li>
                   ))}
+                </ul>
+              </div>
+              <Button onClick={newQuestion}>New Question</Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="space-y-4">
+          <Card className="glass border-white/10">
+            <CardHeader>
+              <CardTitle className="text-foreground">Editor</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {!current ? (
+                <div className="text-sm text-muted-foreground">
+                  Select a question or create a new one.
                 </div>
-                <div className="grid gap-2 md:grid-cols-2">
+              ) : (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    void save();
+                  }}
+                  className="space-y-3"
+                >
                   <div>
-                    <Label className="text-muted-foreground">Correct Answer (A-D)</Label>
-                    <Input value={current.correctAnswer} onChange={(e) => setCurrent({ ...current, correctAnswer: e.target.value.toUpperCase() })} />
-                  </div>
-                  <div>
-                    <Label className="text-muted-foreground">Domain</Label>
-                    <Input value={current.domain ?? ""} onChange={(e) => setCurrent({ ...current, domain: e.target.value })} />
-                  </div>
-                </div>
-                <div className="grid gap-2 md:grid-cols-3">
-                  <div>
-                    <Label className="text-muted-foreground">Difficulty</Label>
-                    <Input value={current.difficulty ?? ""} onChange={(e) => setCurrent({ ...current, difficulty: e.target.value })} />
-                  </div>
-                  <div>
-                    <Label className="text-muted-foreground">Category</Label>
-                    <Input value={current.category ?? ""} onChange={(e) => setCurrent({ ...current, category: e.target.value })} />
-                  </div>
-                  <div>
-                    <Label className="text-muted-foreground">Tags (comma)</Label>
-                    <Input
-                      value={(current.tags ?? []).join(", ")}
-                      onChange={(e) => setCurrent({ ...current, tags: e.target.value.split(",").map((t) => t.trim()).filter(Boolean) })}
+                    <Label className="text-muted-foreground">Question</Label>
+                    <Textarea
+                      value={current.question}
+                      onChange={(e) => setCurrent({ ...current, question: e.target.value })}
+                      className="min-h-[100px]"
                     />
                   </div>
-                </div>
-                <div>
-                  <Label className="text-muted-foreground">Explanation</Label>
-                  <Textarea value={current.explanation ?? ""} onChange={(e) => setCurrent({ ...current, explanation: e.target.value })} className="min-h-[80px]" />
-                </div>
-                <div className="flex gap-2">
-                  <Button type="submit" className="bg-tanium-accent">Save</Button>
-                  <Button type="button" variant="outline" onClick={() => setCurrent(contentService.newQuestion())}>Reset</Button>
-                </div>
-              </form>
-            )}
-          </CardContent>
-        </Card>
+                  <div className="grid gap-2 md:grid-cols-2">
+                    {current.options.map((opt, i) => (
+                      <div key={opt.id}>
+                        <Label className="text-muted-foreground">Option {opt.id}</Label>
+                        <Input
+                          value={opt.text}
+                          onChange={(e) => {
+                            const copy = [...current.options];
+                            copy[i] = { ...opt, text: e.target.value };
+                            setCurrent({ ...current, options: copy });
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid gap-2 md:grid-cols-2">
+                    <div>
+                      <Label className="text-muted-foreground">Correct Answer (A-D)</Label>
+                      <Input
+                        value={current.correctAnswer}
+                        onChange={(e) =>
+                          setCurrent({ ...current, correctAnswer: e.target.value.toUpperCase() })
+                        }
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-muted-foreground">Domain</Label>
+                      <Input
+                        value={current.domain ?? ""}
+                        onChange={(e) => setCurrent({ ...current, domain: e.target.value })}
+                      />
+                    </div>
+                  </div>
+                  <div className="grid gap-2 md:grid-cols-3">
+                    <div>
+                      <Label className="text-muted-foreground">Difficulty</Label>
+                      <Input
+                        value={current.difficulty ?? ""}
+                        onChange={(e) => setCurrent({ ...current, difficulty: e.target.value })}
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-muted-foreground">Category</Label>
+                      <Input
+                        value={current.category ?? ""}
+                        onChange={(e) => setCurrent({ ...current, category: e.target.value })}
+                      />
+                    </div>
+                    <div>
+                      <Label className="text-muted-foreground">Tags (comma)</Label>
+                      <Input
+                        value={(current.tags ?? []).join(", ")}
+                        onChange={(e) =>
+                          setCurrent({
+                            ...current,
+                            tags: e.target.value
+                              .split(",")
+                              .map((t) => t.trim())
+                              .filter(Boolean),
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <Label className="text-muted-foreground">Explanation</Label>
+                    <Textarea
+                      value={current.explanation ?? ""}
+                      onChange={(e) => setCurrent({ ...current, explanation: e.target.value })}
+                      className="min-h-[80px]"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <Button type="submit" className="bg-tanium-accent">
+                      Save
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setCurrent(contentService.newQuestion())}
+                    >
+                      Reset
+                    </Button>
+                  </div>
+                </form>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
-    </div>
     </AdminGuard>
   );
 }

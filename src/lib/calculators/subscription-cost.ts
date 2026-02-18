@@ -4,14 +4,14 @@
  * Analyze subscription costs with category breakdowns
  */
 
-import { roundToCents, sumAmounts, divideAmount, multiplyAmount } from '@/lib/money';
+import { roundToCents, sumAmounts, divideAmount, multiplyAmount } from "@/lib/money";
 import type {
   SubscriptionEntry,
   SubscriptionCostInput,
   SubscriptionCostResult,
   CategoryBreakdown,
   SubscriptionFrequency,
-} from './types';
+} from "./types";
 
 /**
  * Conversion factors to monthly cost
@@ -101,7 +101,7 @@ function groupByCategory(subscriptions: SubscriptionEntry[]): CategoryBreakdown[
   const categoryMap = new Map<string, SubscriptionEntry[]>();
 
   subscriptions.forEach((sub) => {
-    const category = sub.category || 'Uncategorized';
+    const category = sub.category || "Uncategorized";
     if (!categoryMap.has(category)) {
       categoryMap.set(category, []);
     }
@@ -154,15 +154,15 @@ export function generateSubscriptionId(): string {
  * Common subscription categories
  */
 export const SUBSCRIPTION_CATEGORIES = [
-  'Streaming',
-  'Music',
-  'Software',
-  'Gaming',
-  'News & Media',
-  'Fitness',
-  'Cloud Storage',
-  'Food Delivery',
-  'Professional',
-  'Education',
-  'Other',
+  "Streaming",
+  "Music",
+  "Software",
+  "Gaming",
+  "News & Media",
+  "Fitness",
+  "Cloud Storage",
+  "Food Delivery",
+  "Professional",
+  "Education",
+  "Other",
 ] as const;

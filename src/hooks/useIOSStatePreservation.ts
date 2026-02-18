@@ -30,8 +30,7 @@ export function useIOSStatePreservation() {
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () =>
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
   }, [pathname]);
 
   // On mount, restore scroll position if recent (within 1 hour)

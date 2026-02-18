@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   BarChart,
   Bar,
@@ -16,11 +16,11 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-} from 'recharts';
-import { AlertTriangle, TrendingUp, CheckCircle2, FileText } from 'lucide-react';
-import { questionService } from '@/lib/questionService';
-import type { TCODomain, Difficulty, QuestionCategory } from '@/types/exam';
-import { TCO_DOMAIN_WEIGHTS } from '@/types/exam';
+} from "recharts";
+import { AlertTriangle, TrendingUp, CheckCircle2, FileText } from "lucide-react";
+import { questionService } from "@/lib/questionService";
+import type { TCODomain, Difficulty, QuestionCategory } from "@/types/exam";
+import { TCO_DOMAIN_WEIGHTS } from "@/types/exam";
 
 interface QuestionStats {
   totalQuestions: number;
@@ -30,22 +30,22 @@ interface QuestionStats {
 }
 
 const DIFFICULTY_COLORS: Record<string, string> = {
-  Beginner: '#10b981',
-  Intermediate: '#3b82f6',
-  Advanced: '#f59e0b',
-  Expert: '#ef4444',
+  Beginner: "#10b981",
+  Intermediate: "#3b82f6",
+  Advanced: "#f59e0b",
+  Expert: "#ef4444",
 };
 
 const DOMAIN_COLORS = [
-  '#3b82f6', // blue
-  '#8b5cf6', // purple
-  '#ec4899', // pink
-  '#f59e0b', // amber
-  '#10b981', // green
-  '#06b6d4', // cyan
-  '#6366f1', // indigo
-  '#14b8a6', // teal
-  '#f97316', // orange
+  "#3b82f6", // blue
+  "#8b5cf6", // purple
+  "#ec4899", // pink
+  "#f59e0b", // amber
+  "#10b981", // green
+  "#06b6d4", // cyan
+  "#6366f1", // indigo
+  "#14b8a6", // teal
+  "#f97316", // orange
 ];
 
 export function QuestionStats() {
@@ -62,7 +62,7 @@ export function QuestionStats() {
       const questionStats = await questionService.getQuestionStats();
       setStats(questionStats);
     } catch (error) {
-      console.error('Failed to load stats:', error);
+      console.error("Failed to load stats:", error);
     } finally {
       setLoading(false);
     }
@@ -70,11 +70,11 @@ export function QuestionStats() {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {[1, 2, 3].map((i) => (
           <Card key={i} className="animate-pulse">
             <CardContent className="p-6">
-              <div className="h-20 bg-muted rounded" />
+              <div className="h-20 rounded bg-muted" />
             </CardContent>
           </Card>
         ))}
@@ -87,22 +87,22 @@ export function QuestionStats() {
   }
 
   // Calculate domain coverage gaps
-  const domainGaps = Object.entries(TCO_DOMAIN_WEIGHTS).map(([domain, targetPercentage]) => {
-    const count = stats.domainDistribution[domain as TCODomain] || 0;
-    const actualPercentage = stats.totalQuestions > 0
-      ? (count / stats.totalQuestions) * 100
-      : 0;
-    const deviation = Math.abs(actualPercentage - targetPercentage);
+  const domainGaps = Object.entries(TCO_DOMAIN_WEIGHTS)
+    .map(([domain, targetPercentage]) => {
+      const count = stats.domainDistribution[domain as TCODomain] || 0;
+      const actualPercentage = stats.totalQuestions > 0 ? (count / stats.totalQuestions) * 100 : 0;
+      const deviation = Math.abs(actualPercentage - targetPercentage);
 
-    return {
-      domain,
-      count,
-      actualPercentage,
-      targetPercentage,
-      deviation,
-      isUnderrepresented: actualPercentage < targetPercentage - 5,
-    };
-  }).filter(gap => gap.isUnderrepresented);
+      return {
+        domain,
+        count,
+        actualPercentage,
+        targetPercentage,
+        deviation,
+        isUnderrepresented: actualPercentage < targetPercentage - 5,
+      };
+    })
+    .filter((gap) => gap.isUnderrepresented);
 
   // Prepare chart data
   const domainChartData = Object.entries(stats.domainDistribution)
@@ -131,7 +131,7 @@ export function QuestionStats() {
   return (
     <div className="space-y-6">
       {/* Overview Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Questions</CardTitle>
@@ -139,9 +139,7 @@ export function QuestionStats() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{stats.totalQuestions}</div>
-            <p className="text-xs text-muted-foreground mt-1">
-              In question bank
-            </p>
+            <p className="mt-1 text-xs text-muted-foreground">In question bank</p>
           </CardContent>
         </Card>
 
@@ -154,7 +152,7 @@ export function QuestionStats() {
             <div className="text-2xl font-bold">
               {Object.values(stats.domainDistribution).filter((count) => count > 0).length}
             </div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="mt-1 text-xs text-muted-foreground">
               Out of {Object.keys(TCO_DOMAIN_WEIGHTS).length} total
             </p>
           </CardContent>
@@ -167,9 +165,7 @@ export function QuestionStats() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-amber-500">{domainGaps.length}</div>
-            <p className="text-xs text-muted-foreground mt-1">
-              Domains under target
-            </p>
+            <p className="mt-1 text-xs text-muted-foreground">Domains under target</p>
           </CardContent>
         </Card>
 
@@ -180,11 +176,9 @@ export function QuestionStats() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-green-500">
-              {stats.totalQuestions > 0 ? '100%' : '0%'}
+              {stats.totalQuestions > 0 ? "100%" : "0%"}
             </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              All questions validated
-            </p>
+            <p className="mt-1 text-xs text-muted-foreground">All questions validated</p>
           </CardContent>
         </Card>
       </div>
@@ -194,17 +188,19 @@ export function QuestionStats() {
         <Alert className="border-amber-500/50 bg-amber-500/10">
           <AlertTriangle className="h-4 w-4 text-amber-500" />
           <AlertDescription>
-            <div className="font-semibold text-foreground mb-2">
-              {domainGaps.length} domain{domainGaps.length > 1 ? 's' : ''} below target coverage:
+            <div className="mb-2 font-semibold text-foreground">
+              {domainGaps.length} domain{domainGaps.length > 1 ? "s" : ""} below target coverage:
             </div>
             <div className="space-y-1">
               {domainGaps.map((gap) => (
                 <div key={gap.domain} className="text-sm">
-                  <span className="font-medium">{gap.domain}</span>:{' '}
+                  <span className="font-medium">{gap.domain}</span>:{" "}
                   {gap.actualPercentage.toFixed(1)}% (target: {gap.targetPercentage}%)
-                  {' - '}
+                  {" - "}
                   <span className="text-amber-600">
-                    Need {Math.ceil((gap.targetPercentage / 100) * stats.totalQuestions - gap.count)} more questions
+                    Need{" "}
+                    {Math.ceil((gap.targetPercentage / 100) * stats.totalQuestions - gap.count)}{" "}
+                    more questions
                   </span>
                 </div>
               ))}
@@ -214,7 +210,7 @@ export function QuestionStats() {
       )}
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Domain Distribution */}
         <Card>
           <CardHeader>
@@ -231,25 +227,28 @@ export function QuestionStats() {
                     angle={-45}
                     textAnchor="end"
                     height={120}
-                    tick={{ fill: '#9ca3af', fontSize: 12 }}
+                    tick={{ fill: "#9ca3af", fontSize: 12 }}
                   />
-                  <YAxis tick={{ fill: '#9ca3af' }} />
+                  <YAxis tick={{ fill: "#9ca3af" }} />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: '#1f2937',
-                      border: '1px solid #374151',
-                      borderRadius: '8px',
+                      backgroundColor: "#1f2937",
+                      border: "1px solid #374151",
+                      borderRadius: "8px",
                     }}
                   />
                   <Bar dataKey="count" fill="#3b82f6">
                     {domainChartData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={DOMAIN_COLORS[index % DOMAIN_COLORS.length]} />
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={DOMAIN_COLORS[index % DOMAIN_COLORS.length]}
+                      />
                     ))}
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
             ) : (
-              <div className="flex items-center justify-center h-64 text-muted-foreground">
+              <div className="flex h-64 items-center justify-center text-muted-foreground">
                 No data available
               </div>
             )}
@@ -279,22 +278,22 @@ export function QuestionStats() {
                     {difficultyChartData.map((entry, index) => (
                       <Cell
                         key={`cell-${index}`}
-                        fill={DIFFICULTY_COLORS[entry.name] || '#6b7280'}
+                        fill={DIFFICULTY_COLORS[entry.name] || "#6b7280"}
                       />
                     ))}
                   </Pie>
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: '#1f2937',
-                      border: '1px solid #374151',
-                      borderRadius: '8px',
+                      backgroundColor: "#1f2937",
+                      border: "1px solid #374151",
+                      borderRadius: "8px",
                     }}
                   />
                   <Legend />
                 </PieChart>
               </ResponsiveContainer>
             ) : (
-              <div className="flex items-center justify-center h-64 text-muted-foreground">
+              <div className="flex h-64 items-center justify-center text-muted-foreground">
                 No data available
               </div>
             )}
@@ -309,16 +308,14 @@ export function QuestionStats() {
           <CardDescription>Questions organized by category</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
             {Object.entries(stats.categoryDistribution).map(([category, count]) => (
               <div
                 key={category}
-                className="flex flex-col items-center justify-center p-4 rounded-lg bg-muted/50 border border-border"
+                className="flex flex-col items-center justify-center rounded-lg border border-border bg-muted/50 p-4"
               >
                 <div className="text-2xl font-bold text-foreground">{count}</div>
-                <div className="text-xs text-muted-foreground text-center mt-1">
-                  {category}
-                </div>
+                <div className="mt-1 text-center text-xs text-muted-foreground">{category}</div>
               </div>
             ))}
           </div>

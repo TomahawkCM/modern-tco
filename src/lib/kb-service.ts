@@ -70,9 +70,7 @@ export async function getKbSummary(): Promise<KbSummary> {
 
   try {
     // Fetch all questions and aggregate client-side (PostgREST group-by syntax varies)
-    const { data, error } = await supabase
-      .from("kb_questions")
-      .select("domain");
+    const { data, error } = await supabase.from("kb_questions").select("domain");
     if (!error && Array.isArray(data)) {
       for (const row of data as any[]) {
         const d = row.domain as string;

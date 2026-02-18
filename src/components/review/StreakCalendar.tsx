@@ -34,8 +34,10 @@ export default function StreakCalendar({
     const reviewDateSet = new Set(reviewDates);
 
     // Build calendar grid (6 weeks max)
-    const weeks: Array<Array<{ date: number; isReviewed: boolean; isToday: boolean; isCurrentMonth: boolean }>> = [];
-    let currentWeek: typeof weeks[0] = [];
+    const weeks: Array<
+      Array<{ date: number; isReviewed: boolean; isToday: boolean; isCurrentMonth: boolean }>
+    > = [];
+    let currentWeek: (typeof weeks)[0] = [];
 
     // Fill leading empty cells
     for (let i = 0; i < startDayOfWeek; i++) {
@@ -109,7 +111,7 @@ export default function StreakCalendar({
       <CardContent className="space-y-4">
         {/* Streak Stats */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="flex items-center gap-3 p-3 bg-orange-50 dark:bg-orange-950/20 rounded-lg border border-orange-200 dark:border-orange-900">
+          <div className="flex items-center gap-3 rounded-lg border border-orange-200 bg-orange-50 p-3 dark:border-orange-900 dark:bg-orange-950/20">
             <Flame className="h-8 w-8 text-orange-500" />
             <div>
               <p className="text-2xl font-bold text-orange-700 dark:text-orange-400">
@@ -119,7 +121,7 @@ export default function StreakCalendar({
             </div>
           </div>
 
-          <div className="flex items-center gap-3 p-3 bg-amber-50 dark:bg-amber-950/20 rounded-lg border border-amber-200 dark:border-amber-900">
+          <div className="flex items-center gap-3 rounded-lg border border-amber-200 bg-amber-50 p-3 dark:border-amber-900 dark:bg-amber-950/20">
             <Trophy className="h-8 w-8 text-amber-500" />
             <div>
               <p className="text-2xl font-bold text-amber-700 dark:text-amber-400">
@@ -132,17 +134,14 @@ export default function StreakCalendar({
 
         {/* Calendar Grid */}
         <div className="space-y-2">
-          <p className="text-sm font-semibold text-center text-muted-foreground">
+          <p className="text-center text-sm font-semibold text-muted-foreground">
             {calendarData.monthName}
           </p>
 
           {/* Week Day Headers */}
           <div className="grid grid-cols-7 gap-1">
             {weekDays.map((day) => (
-              <div
-                key={day}
-                className="text-center text-xs font-medium text-muted-foreground py-1"
-              >
+              <div key={day} className="py-1 text-center text-xs font-medium text-muted-foreground">
                 {day}
               </div>
             ))}
@@ -156,29 +155,21 @@ export default function StreakCalendar({
                   <div
                     key={dayIndex}
                     className={cn(
-                      "aspect-square flex items-center justify-center rounded-md text-sm transition-colors",
+                      "flex aspect-square items-center justify-center rounded-md text-sm transition-colors",
                       // Base styles
-                      day.isCurrentMonth
-                        ? "text-foreground"
-                        : "text-muted-foreground/40",
+                      day.isCurrentMonth ? "text-foreground" : "text-muted-foreground/40",
                       // Today highlight
                       day.isToday && "ring-2 ring-primary ring-offset-2",
                       // Review day styling
                       day.isReviewed
-                        ? "bg-[#22c55e] dark:bg-[#22c55e] text-foreground font-semibold"
+                        ? "bg-[#22c55e] font-semibold text-foreground dark:bg-[#22c55e]"
                         : day.isCurrentMonth
-                        ? "bg-muted/30 hover:bg-muted/50"
-                        : "bg-transparent",
+                          ? "bg-muted/30 hover:bg-muted/50"
+                          : "bg-transparent",
                       // Cursor
                       day.isCurrentMonth && "cursor-default"
                     )}
-                    title={
-                      day.isReviewed
-                        ? "Reviewed on this day"
-                        : day.isToday
-                        ? "Today"
-                        : ""
-                    }
+                    title={day.isReviewed ? "Reviewed on this day" : day.isToday ? "Today" : ""}
                   >
                     {day.date}
                   </div>
@@ -191,15 +182,15 @@ export default function StreakCalendar({
         {/* Legend */}
         <div className="flex items-center justify-center gap-4 pt-2 text-xs text-muted-foreground">
           <div className="flex items-center gap-1.5">
-            <div className="w-4 h-4 rounded bg-[#22c55e] dark:bg-[#22c55e]"></div>
+            <div className="h-4 w-4 rounded bg-[#22c55e] dark:bg-[#22c55e]"></div>
             <span>Reviewed</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <div className="w-4 h-4 rounded bg-muted/30"></div>
+            <div className="h-4 w-4 rounded bg-muted/30"></div>
             <span>No review</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <div className="w-4 h-4 rounded ring-2 ring-primary ring-offset-1"></div>
+            <div className="h-4 w-4 rounded ring-2 ring-primary ring-offset-1"></div>
             <span>Today</span>
           </div>
         </div>
@@ -211,19 +202,17 @@ export default function StreakCalendar({
               {currentStreak === 1
                 ? "Great start! Keep it up tomorrow! 🎯"
                 : currentStreak < 7
-                ? `${currentStreak} days strong! Keep the momentum going! 💪`
-                : currentStreak < 30
-                ? `Amazing ${currentStreak}-day streak! You're on fire! 🔥`
-                : `Incredible ${currentStreak}-day streak! Unstoppable! 🏆`}
+                  ? `${currentStreak} days strong! Keep the momentum going! 💪`
+                  : currentStreak < 30
+                    ? `Amazing ${currentStreak}-day streak! You're on fire! 🔥`
+                    : `Incredible ${currentStreak}-day streak! Unstoppable! 🏆`}
             </p>
           </div>
         )}
 
         {currentStreak === 0 && (
           <div className="pt-2 text-center">
-            <p className="text-sm text-muted-foreground">
-              Start your review streak today! 🚀
-            </p>
+            <p className="text-sm text-muted-foreground">Start your review streak today! 🚀</p>
           </div>
         )}
       </CardContent>

@@ -1,15 +1,8 @@
-import type { NextRequest } from 'next/server';
-import { TaniumQueryEngine } from '@/lib/tanium-query-engine';
-import {
-  withErrorTracking,
-  ApiError,
-  apiSuccess
-} from '@/lib/error-tracking';
-import { rateLimit, createRateLimitResponse } from '@/lib/rate-limit';
-import {
-  SimEvalRequestSchema,
-  validateRequest
-} from '@/lib/api/schemas';
+import type { NextRequest } from "next/server";
+import { TaniumQueryEngine } from "@/lib/tanium-query-engine";
+import { withErrorTracking, ApiError, apiSuccess } from "@/lib/error-tracking";
+import { rateLimit, createRateLimitResponse } from "@/lib/rate-limit";
+import { SimEvalRequestSchema, validateRequest } from "@/lib/api/schemas";
 
 // Initialize the query engine with sample data
 const queryEngine = new TaniumQueryEngine();
@@ -28,23 +21,23 @@ export const POST = withErrorTracking(
     // VALIDATION: Zod schema validation with automatic type inference
     const { question, format, outFile } = await validateRequest(request, SimEvalRequestSchema);
 
-    console.log('[sim-eval] Processing query:', question);
+    console.log("[sim-eval] Processing query:", question);
 
     // Execute query using TypeScript engine
     try {
       const result = await queryEngine.query(question, {
-        format: format ?? 'json',
+        format: format ?? "json",
         useCache: true,
-        timeout: 5000
+        timeout: 5000,
       });
 
-      console.log('[sim-eval] Query result:', {
+      console.log("[sim-eval] Query result:", {
         ok: result.ok,
         hasHeaders: !!result.headers,
         headersCount: result.headers?.length,
         hasRows: !!result.rows,
         rowsCount: result.rows?.length,
-        error: result.error
+        error: result.error,
       });
 
       // Handle file output if requested
@@ -55,11 +48,7 @@ export const POST = withErrorTracking(
       }
 
       if (result?.ok === false) {
-        throw new ApiError(
-          result.error ?? 'Query execution failed',
-          400,
-          'QUERY_ERROR'
-        );
+        throw new ApiError(result.error ?? "Query execution failed", 400, "QUERY_ERROR");
       }
 
       return apiSuccess(result);
@@ -70,13 +59,9 @@ export const POST = withErrorTracking(
       }
 
       // Wrap other errors
-      console.error('[sim-eval] Execution error:', error);
-      throw new ApiError(
-        'Simulator invocation failed',
-        500,
-        'SIMULATOR_INVOCATION_FAILED'
-      );
+      console.error("[sim-eval] Execution error:", error);
+      throw new ApiError("Simulator invocation failed", 500, "SIMULATOR_INVOCATION_FAILED");
     }
   },
-  { endpoint: '/api/sim-eval' }
+  { endpoint: "/api/sim-eval" }
 );

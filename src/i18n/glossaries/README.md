@@ -5,6 +5,7 @@ This directory contains terminology glossaries for the Budget App i18n system. G
 ## Purpose
 
 Glossaries provide:
+
 - **Consistency**: Standardized translations for important terms
 - **Quality**: Preferred terminology validated by native speakers
 - **Alternatives**: Multiple acceptable translations for flexibility
@@ -27,40 +28,45 @@ Each glossary file is a JSON object mapping English terms to arrays of approved 
 
 ## Available Glossaries
 
-| Locale | Language | Coverage |
-|--------|----------|----------|
+| Locale       | Language              | Coverage                    |
+| ------------ | --------------------- | --------------------------- |
 | `ar-SA.json` | Arabic (Saudi Arabia) | Core Budget App terms (RTL) |
-| `de-DE.json` | German (Germany) | Core Budget App terms |
-| `es-MX.json` | Spanish (Mexico) | Core Budget App terms |
-| `fr-FR.json` | French (France) | Core Budget App terms |
-| `hi-IN.json` | Hindi (India) | Core Budget App terms |
-| `it-IT.json` | Italian (Italy) | Core Budget App terms |
-| `ja-JP.json` | Japanese (Japan) | Core Budget App terms |
-| `ko-KR.json` | Korean (South Korea) | Core Budget App terms |
-| `pt-BR.json` | Portuguese (Brazil) | Core Budget App terms |
-| `ru-RU.json` | Russian (Russia) | Core Budget App terms |
-| `th-TH.json` | Thai (Thailand) | Core Budget App terms |
-| `tr-TR.json` | Turkish (Turkey) | Core Budget App terms |
-| `vi-VN.json` | Vietnamese (Vietnam) | Core Budget App terms |
-| `zh-CN.json` | Chinese (Simplified) | Core Budget App terms |
+| `de-DE.json` | German (Germany)      | Core Budget App terms       |
+| `es-MX.json` | Spanish (Mexico)      | Core Budget App terms       |
+| `fr-FR.json` | French (France)       | Core Budget App terms       |
+| `hi-IN.json` | Hindi (India)         | Core Budget App terms       |
+| `it-IT.json` | Italian (Italy)       | Core Budget App terms       |
+| `ja-JP.json` | Japanese (Japan)      | Core Budget App terms       |
+| `ko-KR.json` | Korean (South Korea)  | Core Budget App terms       |
+| `pt-BR.json` | Portuguese (Brazil)   | Core Budget App terms       |
+| `ru-RU.json` | Russian (Russia)      | Core Budget App terms       |
+| `th-TH.json` | Thai (Thailand)       | Core Budget App terms       |
+| `tr-TR.json` | Turkish (Turkey)      | Core Budget App terms       |
+| `vi-VN.json` | Vietnamese (Vietnam)  | Core Budget App terms       |
+| `zh-CN.json` | Chinese (Simplified)  | Core Budget App terms       |
 
 ## Core Terms
 
 All glossaries include translations for:
 
 ### Navigation
+
 - dashboard, transactions, budgets, reports, accounts, categories, goals, import, export, settings, help, about
 
 ### Actions
+
 - save, cancel, delete, edit, add
 
 ### UI States
+
 - loading, recent, upcoming
 
 ### Financial Terms
+
 - spending, balance, income, expenses, trends, bills, monthly, progress
 
 ### General
+
 - data, welcome
 
 ## Usage in Translation Scripts
@@ -68,7 +74,7 @@ All glossaries include translations for:
 Glossaries are automatically loaded by `scripts/lib/translation-quality.ts`:
 
 ```typescript
-import glossary from '@/i18n/glossaries/${locale}.json';
+import glossary from "@/i18n/glossaries/${locale}.json";
 
 // Check if translation matches glossary
 const approvedTranslations = glossary[englishTerm];
@@ -99,12 +105,14 @@ When adding new terms:
 ## Quality Guidelines
 
 **Good translations:**
+
 - Natural in target language
 - Contextually appropriate for Budget App
 - Consistent with existing terminology
 - Region-specific when needed (e.g., es-MX vs es-ES)
 
 **Avoid:**
+
 - Direct word-for-word translations
 - Technical jargon unless necessary
 - Overly formal or informal tone
@@ -113,6 +121,7 @@ When adding new terms:
 ## RTL Languages
 
 RTL (right-to-left) glossaries include:
+
 - `ar-SA.json` (Arabic)
 
 These work with the RTL utilities in `/src/lib/rtl-utils.ts` to provide proper directionality support.
@@ -120,6 +129,7 @@ These work with the RTL utilities in `/src/lib/rtl-utils.ts` to provide proper d
 ## Integration
 
 Glossaries integrate with:
+
 - **Translation scripts**: `scripts/translate-incremental.ts`
 - **Quality validation**: `scripts/lib/translation-quality.ts`
 - **Coverage reports**: `scripts/generate-coverage-report.ts`

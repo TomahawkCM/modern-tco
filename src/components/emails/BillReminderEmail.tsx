@@ -4,14 +4,14 @@
  * Sent to remind users about upcoming subscription/bill payments
  */
 
-import { Link, Section, Text } from '@react-email/components';
-import * as React from 'react';
-import { EmailLayout, emailStyles } from './components/EmailLayout';
-import type { BillReminderEmailProps } from '@/types/email';
-import { format } from 'date-fns';
-import { getUnsubscribeUrl } from '@/lib/email/resend-client';
-import { generateCalendarUrls } from '@/lib/email/calendar-links';
-import type { BillingCycle } from '@/types/budget';
+import { Link, Section, Text } from "@react-email/components";
+import * as React from "react";
+import { EmailLayout, emailStyles } from "./components/EmailLayout";
+import type { BillReminderEmailProps } from "@/types/email";
+import { format } from "date-fns";
+import { getUnsubscribeUrl } from "@/lib/email/resend-client";
+import { generateCalendarUrls } from "@/lib/email/calendar-links";
+import type { BillingCycle } from "@/types/budget";
 
 export function BillReminderEmail({
   billName,
@@ -24,12 +24,12 @@ export function BillReminderEmail({
   unsubscribeToken,
   baseUrl,
 }: BillReminderEmailProps) {
-  const formattedAmount = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: currency || 'USD',
+  const formattedAmount = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: currency || "USD",
   }).format(amount);
 
-  const formattedDate = format(new Date(dueDate), 'EEEE, MMMM d, yyyy');
+  const formattedDate = format(new Date(dueDate), "EEEE, MMMM d, yyyy");
 
   const getPreviewText = () => {
     if (daysUntilDue === 0) {
@@ -43,11 +43,11 @@ export function BillReminderEmail({
 
   const getHeadingText = () => {
     if (daysUntilDue === 0) {
-      return 'Payment Due Today';
+      return "Payment Due Today";
     } else if (daysUntilDue === 1) {
-      return 'Payment Due Tomorrow';
+      return "Payment Due Tomorrow";
     } else {
-      return 'Upcoming Payment';
+      return "Upcoming Payment";
     }
   };
 
@@ -60,14 +60,14 @@ export function BillReminderEmail({
     return emailStyles.heading.color;
   };
 
-  const unsubscribeUrl = getUnsubscribeUrl(baseUrl, unsubscribeToken, 'bill_reminder');
+  const unsubscribeUrl = getUnsubscribeUrl(baseUrl, unsubscribeToken, "bill_reminder");
 
   // Generate calendar URLs
   const calendarUrls = generateCalendarUrls(
     {
       name: billName,
       amount,
-      currency: currency || 'USD',
+      currency: currency || "USD",
       dueDate: new Date(dueDate),
       billingCycle: billingCycle as BillingCycle,
     },
@@ -82,9 +82,7 @@ export function BillReminderEmail({
       footerText="You received this email because you enabled bill reminders in Budget App."
     >
       {/* Header */}
-      <Text style={{ ...emailStyles.heading, color: getHeadingColor() }}>
-        {getHeadingText()}
-      </Text>
+      <Text style={{ ...emailStyles.heading, color: getHeadingColor() }}>{getHeadingText()}</Text>
 
       {/* Bill Card */}
       <Section style={emailStyles.card}>
@@ -109,7 +107,7 @@ export function BillReminderEmail({
 
       {/* Countdown */}
       {daysUntilDue > 0 && (
-        <Text style={{ ...emailStyles.paragraph, textAlign: 'center' as const }}>
+        <Text style={{ ...emailStyles.paragraph, textAlign: "center" as const }}>
           {daysUntilDue === 1
             ? "You have 1 day to prepare for this payment."
             : `You have ${daysUntilDue} days to prepare for this payment.`}
@@ -134,7 +132,7 @@ export function BillReminderEmail({
 
       {/* CTA Button */}
       {subscriptionUrl && (
-        <Section style={{ textAlign: 'center' as const, marginTop: '24px' }}>
+        <Section style={{ textAlign: "center" as const, marginTop: "24px" }}>
           <Link href={subscriptionUrl} style={emailStyles.button}>
             View Subscription
           </Link>
@@ -142,7 +140,7 @@ export function BillReminderEmail({
       )}
 
       {/* View All Link */}
-      <Section style={{ textAlign: 'center' as const, marginTop: '16px' }}>
+      <Section style={{ textAlign: "center" as const, marginTop: "16px" }}>
         <Link href={`${baseUrl}/budget-app/subscriptions`} style={emailStyles.secondaryButton}>
           View All Subscriptions
         </Link>
@@ -153,53 +151,53 @@ export function BillReminderEmail({
 
 // Calendar section styles
 const calendarSection: React.CSSProperties = {
-  backgroundColor: '#1e293b',
-  borderRadius: '8px',
-  padding: '16px',
-  marginTop: '24px',
-  textAlign: 'center' as const,
+  backgroundColor: "#1e293b",
+  borderRadius: "8px",
+  padding: "16px",
+  marginTop: "24px",
+  textAlign: "center" as const,
 };
 
 const calendarTitle: React.CSSProperties = {
-  color: '#94a3b8',
-  fontSize: '12px',
-  fontWeight: '500',
-  textTransform: 'uppercase',
-  letterSpacing: '0.05em',
-  margin: '0 0 12px',
+  color: "#94a3b8",
+  fontSize: "12px",
+  fontWeight: "500",
+  textTransform: "uppercase",
+  letterSpacing: "0.05em",
+  margin: "0 0 12px",
 };
 
 const calendarButtonsContainer: React.CSSProperties = {
-  display: 'flex',
-  justifyContent: 'center',
-  gap: '8px',
+  display: "flex",
+  justifyContent: "center",
+  gap: "8px",
 };
 
 const calendarButton: React.CSSProperties = {
-  backgroundColor: '#2dd4bf',
-  borderRadius: '6px',
-  color: '#0f172a',
-  display: 'inline-block',
-  fontSize: '12px',
-  fontWeight: '600',
-  lineHeight: '1',
-  padding: '8px 12px',
-  textDecoration: 'none',
-  textAlign: 'center' as const,
+  backgroundColor: "#2dd4bf",
+  borderRadius: "6px",
+  color: "#0f172a",
+  display: "inline-block",
+  fontSize: "12px",
+  fontWeight: "600",
+  lineHeight: "1",
+  padding: "8px 12px",
+  textDecoration: "none",
+  textAlign: "center" as const,
 };
 
 const calendarButtonSecondary: React.CSSProperties = {
-  backgroundColor: 'transparent',
-  border: '1px solid #334155',
-  borderRadius: '6px',
-  color: '#e2e8f0',
-  display: 'inline-block',
-  fontSize: '12px',
-  fontWeight: '500',
-  lineHeight: '1',
-  padding: '8px 12px',
-  textDecoration: 'none',
-  textAlign: 'center' as const,
+  backgroundColor: "transparent",
+  border: "1px solid #334155",
+  borderRadius: "6px",
+  color: "#e2e8f0",
+  display: "inline-block",
+  fontSize: "12px",
+  fontWeight: "500",
+  lineHeight: "1",
+  padding: "8px 12px",
+  textDecoration: "none",
+  textAlign: "center" as const,
 };
 
 export default BillReminderEmail;

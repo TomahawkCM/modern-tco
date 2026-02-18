@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { db } from '@/lib/budget-db';
-import { useLiveQuery } from 'dexie-react-hooks';
-import { useMemo } from 'react';
+import { db } from "@/lib/budget-db";
+import { useLiveQuery } from "dexie-react-hooks";
+import { useMemo } from "react";
 
 interface TopCategory {
   name: string;
@@ -37,10 +37,7 @@ export function useWeeklyRecap(): WeeklyRecapData {
       startOfPrevWeek.setDate(startOfPrevWeek.getDate() - 7);
 
       // Use indexed query on `date` instead of loading every transaction
-      const twoWeeksTxs = await db.transactions
-        .where('date')
-        .above(startOfPrevWeek)
-        .toArray();
+      const twoWeeksTxs = await db.transactions.where("date").above(startOfPrevWeek).toArray();
 
       const thisWeek = twoWeeksTxs.filter((tx) => {
         if (tx.isSplit || tx.amount >= 0) return false;
@@ -58,7 +55,7 @@ export function useWeeklyRecap(): WeeklyRecapData {
       return {
         thisWeek: [],
         lastWeek: [],
-        error: err instanceof Error ? err : new Error('Failed to load weekly transactions'),
+        error: err instanceof Error ? err : new Error("Failed to load weekly transactions"),
       };
     }
   });
@@ -75,23 +72,14 @@ export function useWeeklyRecap(): WeeklyRecapData {
       };
     }
 
-    const thisWeekTotal = queryResult.thisWeek.reduce(
-      (sum, tx) => sum + Math.abs(tx.amount),
-      0,
-    );
-    const lastWeekTotal = queryResult.lastWeek.reduce(
-      (sum, tx) => sum + Math.abs(tx.amount),
-      0,
-    );
-    const change =
-      lastWeekTotal > 0
-        ? ((thisWeekTotal - lastWeekTotal) / lastWeekTotal) * 100
-        : 0;
+    const thisWeekTotal = queryResult.thisWeek.reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
+    const lastWeekTotal = queryResult.lastWeek.reduce((sum, tx) => sum + Math.abs(tx.amount), 0);
+    const change = lastWeekTotal > 0 ? ((thisWeekTotal - lastWeekTotal) / lastWeekTotal) * 100 : 0;
 
     // Top categories by spend this week
     const catMap = new Map<string, number>();
     queryResult.thisWeek.forEach((tx) => {
-      const cat = tx.category || 'Uncategorized';
+      const cat = tx.category || "Uncategorized";
       catMap.set(cat, (catMap.get(cat) || 0) + Math.abs(tx.amount));
     });
 

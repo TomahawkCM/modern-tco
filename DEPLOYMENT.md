@@ -448,9 +448,9 @@ npm run build
 
 **Sign-Off:**
 
-- Technical Lead: ******\_\_\_\_******
-- DevOps Lead: ******\_\_\_\_******
-- Production URL: ******\_\_\_\_******
+- Technical Lead: **\*\***\_\_\_\_**\*\***
+- DevOps Lead: **\*\***\_\_\_\_**\*\***
+- Production URL: **\*\***\_\_\_\_**\*\***
 
 ---
 

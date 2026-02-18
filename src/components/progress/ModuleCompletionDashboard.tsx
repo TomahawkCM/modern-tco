@@ -5,10 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { BookOpen, CheckCircle2, Target, Clock } from "lucide-react";
-import {
-  calculateModuleProgress,
-  type ModuleProgress,
-} from "@/lib/progressVisualization";
+import { calculateModuleProgress, type ModuleProgress } from "@/lib/progressVisualization";
 
 interface ModuleCompletionDashboardProps {
   /** Custom className */
@@ -24,10 +21,7 @@ interface ModuleCompletionDashboardProps {
  *
  * Research: Progress tracking increases goal achievement by 32% (Locke & Latham, 2002)
  */
-export function ModuleCompletionDashboard({
-  className,
-  moduleId,
-}: ModuleCompletionDashboardProps) {
+export function ModuleCompletionDashboard({ className, moduleId }: ModuleCompletionDashboardProps) {
   const [modules, setModules] = useState<ModuleProgress[]>([]);
   const [totalProgress, setTotalProgress] = useState(0);
 
@@ -49,14 +43,15 @@ export function ModuleCompletionDashboard({
     let moduleData = calculateModuleProgress();
 
     if (moduleId) {
-      moduleData = moduleData.filter(m => m.moduleId === moduleId);
+      moduleData = moduleData.filter((m) => m.moduleId === moduleId);
     }
 
     setModules(moduleData);
 
     // Calculate overall progress
     if (moduleData.length > 0) {
-      const avgCompletion = moduleData.reduce((sum, m) => sum + m.completionPercentage, 0) / moduleData.length;
+      const avgCompletion =
+        moduleData.reduce((sum, m) => sum + m.completionPercentage, 0) / moduleData.length;
       setTotalProgress(avgCompletion);
     }
   }
@@ -70,9 +65,9 @@ export function ModuleCompletionDashboard({
             Module Progress
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-center py-12">
+        <CardContent className="py-12 text-center">
           <p className="text-muted-foreground">No module data yet</p>
-          <p className="text-sm text-muted-foreground mt-2">
+          <p className="mt-2 text-sm text-muted-foreground">
             Start reviewing to track your module progress
           </p>
         </CardContent>
@@ -114,7 +109,7 @@ export function ModuleCompletionDashboard({
         {!moduleId && modules.length > 1 && (
           <div className="rounded-lg border border-accent/20 bg-accent/5 p-4">
             <div className="mb-3">
-              <div className="flex items-center justify-between mb-2">
+              <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Overall Completion</span>
                 <span className="text-sm font-semibold text-accent-foreground">
                   {Math.round(totalProgress)}%
@@ -124,19 +119,22 @@ export function ModuleCompletionDashboard({
             </div>
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
-                <div className="text-xs text-muted-foreground mb-1">Modules</div>
+                <div className="mb-1 text-xs text-muted-foreground">Modules</div>
                 <div className="text-lg font-bold text-accent-foreground">{modules.length}</div>
               </div>
               <div>
-                <div className="text-xs text-muted-foreground mb-1">Completed</div>
+                <div className="mb-1 text-xs text-muted-foreground">Completed</div>
                 <div className="text-lg font-bold text-[#22c55e]">
-                  {modules.filter(m => m.completionPercentage >= 80).length}
+                  {modules.filter((m) => m.completionPercentage >= 80).length}
                 </div>
               </div>
               <div>
-                <div className="text-xs text-muted-foreground mb-1">In Progress</div>
+                <div className="mb-1 text-xs text-muted-foreground">In Progress</div>
                 <div className="text-lg font-bold text-primary">
-                  {modules.filter(m => m.completionPercentage > 0 && m.completionPercentage < 80).length}
+                  {
+                    modules.filter((m) => m.completionPercentage > 0 && m.completionPercentage < 80)
+                      .length
+                  }
                 </div>
               </div>
             </div>
@@ -148,12 +146,12 @@ export function ModuleCompletionDashboard({
           {modules.map((module, idx) => (
             <div
               key={idx}
-              className="rounded-lg border border-gray-700/50 bg-card/30 p-4 space-y-3"
+              className="space-y-3 rounded-lg border border-gray-700/50 bg-card/30 p-4"
             >
               {/* Module Header */}
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="mb-1 flex items-center gap-2">
                     <h4 className="font-semibold text-muted-foreground">{module.moduleName}</h4>
                     {module.completionPercentage >= 80 && (
                       <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
@@ -186,20 +184,20 @@ export function ModuleCompletionDashboard({
               {/* Module Stats */}
               <div className="grid grid-cols-3 gap-3">
                 <div className="rounded border border-gray-700 bg-card/50 p-2 text-center">
-                  <div className="text-xs text-muted-foreground mb-1">Started</div>
-                  <div className="text-sm font-semibold text-primary">
-                    {module.conceptsStarted}
-                  </div>
+                  <div className="mb-1 text-xs text-muted-foreground">Started</div>
+                  <div className="text-sm font-semibold text-primary">{module.conceptsStarted}</div>
                 </div>
                 <div className="rounded border border-gray-700 bg-card/50 p-2 text-center">
-                  <div className="text-xs text-muted-foreground mb-1">Mastered</div>
+                  <div className="mb-1 text-xs text-muted-foreground">Mastered</div>
                   <div className="text-sm font-semibold text-[#22c55e]">
                     {module.conceptsMastered}
                   </div>
                 </div>
                 <div className="rounded border border-gray-700 bg-card/50 p-2 text-center">
-                  <div className="text-xs text-muted-foreground mb-1">Retention</div>
-                  <div className={`text-sm font-semibold ${getRetentionColor(module.averageRetention)}`}>
+                  <div className="mb-1 text-xs text-muted-foreground">Retention</div>
+                  <div
+                    className={`text-sm font-semibold ${getRetentionColor(module.averageRetention)}`}
+                  >
                     {Math.round(module.averageRetention)}%
                   </div>
                 </div>
@@ -207,20 +205,18 @@ export function ModuleCompletionDashboard({
 
               {/* Progress Breakdown */}
               <div className="flex items-center gap-2 text-xs">
-                <div className="flex-1 flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-[#22c55e]" />
-                  <span className="text-muted-foreground">
-                    Mastered: {module.conceptsMastered}
-                  </span>
+                <div className="flex flex-1 items-center gap-1">
+                  <div className="h-2 w-2 rounded-full bg-[#22c55e]" />
+                  <span className="text-muted-foreground">Mastered: {module.conceptsMastered}</span>
                 </div>
-                <div className="flex-1 flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-primary" />
+                <div className="flex flex-1 items-center gap-1">
+                  <div className="h-2 w-2 rounded-full bg-primary" />
                   <span className="text-muted-foreground">
                     In Progress: {module.conceptsStarted - module.conceptsMastered}
                   </span>
                 </div>
-                <div className="flex-1 flex items-center gap-1">
-                  <div className="w-2 h-2 rounded-full bg-muted" />
+                <div className="flex flex-1 items-center gap-1">
+                  <div className="h-2 w-2 rounded-full bg-muted" />
                   <span className="text-muted-foreground">
                     Remaining: {module.totalConcepts - module.conceptsStarted}
                   </span>
@@ -229,19 +225,19 @@ export function ModuleCompletionDashboard({
 
               {/* Completion Status */}
               {module.completionPercentage >= 80 ? (
-                <div className="text-xs text-[#22c55e] bg-[#22c55e]/10 border border-[#22c55e]/20 rounded px-2 py-1">
+                <div className="rounded border border-[#22c55e]/20 bg-[#22c55e]/10 px-2 py-1 text-xs text-[#22c55e]">
                   ✓ Module Complete - Excellent Work!
                 </div>
               ) : module.completionPercentage >= 50 ? (
-                <div className="text-xs text-primary bg-primary/10 border border-primary/20 rounded px-2 py-1">
+                <div className="rounded border border-primary/20 bg-primary/10 px-2 py-1 text-xs text-primary">
                   ⚡ Making Great Progress!
                 </div>
               ) : module.completionPercentage > 0 ? (
-                <div className="text-xs text-[#f97316] bg-[#f97316]/10 border border-[#f97316]/20 rounded px-2 py-1">
+                <div className="rounded border border-[#f97316]/20 bg-[#f97316]/10 px-2 py-1 text-xs text-[#f97316]">
                   📚 Keep Going!
                 </div>
               ) : (
-                <div className="text-xs text-muted-foreground bg-gray-500/10 border border-gray-500/20 rounded px-2 py-1">
+                <div className="rounded border border-gray-500/20 bg-gray-500/10 px-2 py-1 text-xs text-muted-foreground">
                   🎯 Ready to Start
                 </div>
               )}

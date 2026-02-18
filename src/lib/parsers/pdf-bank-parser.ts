@@ -21,18 +21,18 @@
 export interface ColumnMapping {
   dateColumn: number | null;
   descriptionColumn: number | null;
-  amountColumn: number | null;  // Single amount column (BMO style)
-  debitColumn: number | null;   // Debit column (Home Trust style)
-  creditColumn: number | null;  // Credit column (Home Trust style)
+  amountColumn: number | null; // Single amount column (BMO style)
+  debitColumn: number | null; // Debit column (Home Trust style)
+  creditColumn: number | null; // Credit column (Home Trust style)
   balanceColumn: number | null;
-  confidence: number;  // 0-1 score for detection quality
-  detectionMethod: 'keyword' | 'spatial' | 'hybrid' | 'fallback';
-  bankFormat?: 'home-trust' | 'td' | 'bmo' | 'generic';
+  confidence: number; // 0-1 score for detection quality
+  detectionMethod: "keyword" | "spatial" | "hybrid" | "fallback";
+  bankFormat?: "home-trust" | "td" | "bmo" | "generic";
 }
 
 export interface ColumnDetectionResult {
   mapping: ColumnMapping;
-  headerRow: number;  // Which row was identified as the header
+  headerRow: number; // Which row was identified as the header
   warnings: string[];
 }
 
@@ -40,7 +40,7 @@ interface ColumnCandidate {
   columnIndex: number;
   keyword: string;
   matchedText: string;
-  distance: number;  // Levenshtein distance
+  distance: number; // Levenshtein distance
   confidence: number;
 }
 
@@ -51,237 +51,402 @@ interface ColumnCandidate {
 const COLUMN_KEYWORDS = {
   date: [
     // English
-    'date', 'trans date', 'transaction date', 'posting date', 'posted', 'value date',
+    "date",
+    "trans date",
+    "transaction date",
+    "posting date",
+    "posted",
+    "value date",
     // Spanish
-    'fecha', 'fecha de transacción', 'fecha operación', 'fecha valor',
+    "fecha",
+    "fecha de transacción",
+    "fecha operación",
+    "fecha valor",
     // French
-    'date', 'date opération', 'date de valeur', 'date comptable',
+    "date",
+    "date opération",
+    "date de valeur",
+    "date comptable",
     // German
-    'datum', 'buchungstag', 'wertstellung', 'valuta',
+    "datum",
+    "buchungstag",
+    "wertstellung",
+    "valuta",
     // Portuguese
-    'data', 'data da transação', 'data movimento',
+    "data",
+    "data da transação",
+    "data movimento",
     // Italian
-    'data', 'data operazione', 'data valuta',
+    "data",
+    "data operazione",
+    "data valuta",
     // Dutch
-    'datum', 'boekingsdatum',
+    "datum",
+    "boekingsdatum",
     // Russian
-    'дата', 'дата операции',
+    "дата",
+    "дата операции",
     // Turkish
-    'tarih', 'işlem tarihi',
+    "tarih",
+    "işlem tarihi",
     // Polish
-    'data', 'data operacji',
+    "data",
+    "data operacji",
     // Japanese
-    '日付', '取引日', '処理日',
+    "日付",
+    "取引日",
+    "処理日",
     // Chinese
-    '日期', '交易日期', '记账日期',
+    "日期",
+    "交易日期",
+    "记账日期",
     // Korean
-    '날짜', '거래일', '처리일',
+    "날짜",
+    "거래일",
+    "처리일",
     // Arabic
-    'التاريخ', 'تاريخ العملية',
+    "التاريخ",
+    "تاريخ العملية",
     // Indonesian
-    'tanggal',
+    "tanggal",
     // Thai
-    'วันที่',
+    "วันที่",
     // Hindi
-    'तारीख', 'दिनांक',
+    "तारीख",
+    "दिनांक",
     // Vietnamese
-    'ngày',
+    "ngày",
     // Malay
-    'tarikh',
+    "tarikh",
     // Swedish/Norwegian/Danish
-    'dato', 'bokföringsdatum',
+    "dato",
+    "bokföringsdatum",
   ],
   description: [
     // English
-    'description', 'details', 'transaction', 'merchant', 'payee', 'particulars', 'narrative',
+    "description",
+    "details",
+    "transaction",
+    "merchant",
+    "payee",
+    "particulars",
+    "narrative",
     // Spanish
-    'descripción', 'concepto', 'detalle', 'movimiento',
+    "descripción",
+    "concepto",
+    "detalle",
+    "movimiento",
     // French
-    'libellé', 'description', 'détail', 'motif',
+    "libellé",
+    "description",
+    "détail",
+    "motif",
     // German
-    'beschreibung', 'verwendungszweck', 'buchungstext', 'empfänger',
+    "beschreibung",
+    "verwendungszweck",
+    "buchungstext",
+    "empfänger",
     // Portuguese
-    'descrição', 'histórico', 'detalhe',
+    "descrição",
+    "histórico",
+    "detalhe",
     // Italian
-    'descrizione', 'causale', 'dettaglio',
+    "descrizione",
+    "causale",
+    "dettaglio",
     // Dutch
-    'omschrijving', 'beschrijving',
+    "omschrijving",
+    "beschrijving",
     // Russian
-    'описание', 'назначение', 'получатель',
+    "описание",
+    "назначение",
+    "получатель",
     // Turkish
-    'açıklama', 'işlem açıklaması',
+    "açıklama",
+    "işlem açıklaması",
     // Polish
-    'opis', 'tytuł operacji',
+    "opis",
+    "tytuł operacji",
     // Japanese
-    '摘要', '内容', '取引内容', 'お取引内容',
+    "摘要",
+    "内容",
+    "取引内容",
+    "お取引内容",
     // Chinese
-    '摘要', '交易说明', '描述', '备注',
+    "摘要",
+    "交易说明",
+    "描述",
+    "备注",
     // Korean
-    '적요', '거래내용', '내용',
+    "적요",
+    "거래내용",
+    "내용",
     // Arabic
-    'الوصف', 'البيان', 'تفاصيل',
+    "الوصف",
+    "البيان",
+    "تفاصيل",
     // Indonesian
-    'keterangan', 'deskripsi',
+    "keterangan",
+    "deskripsi",
     // Thai
-    'รายการ', 'รายละเอียด',
+    "รายการ",
+    "รายละเอียด",
     // Hindi
-    'विवरण',
+    "विवरण",
     // Vietnamese
-    'nội dung', 'diễn giải',
+    "nội dung",
+    "diễn giải",
     // Malay
-    'keterangan', 'perihal',
+    "keterangan",
+    "perihal",
   ],
   amount: [
     // English
-    'amount', 'value', 'transaction amount', 'sum',
+    "amount",
+    "value",
+    "transaction amount",
+    "sum",
     // Spanish
-    'importe', 'monto', 'cantidad', 'valor',
+    "importe",
+    "monto",
+    "cantidad",
+    "valor",
     // French
-    'montant', 'somme',
+    "montant",
+    "somme",
     // German
-    'betrag', 'umsatz', 'summe',
+    "betrag",
+    "umsatz",
+    "summe",
     // Portuguese
-    'valor', 'montante', 'quantia',
+    "valor",
+    "montante",
+    "quantia",
     // Italian
-    'importo', 'ammontare',
+    "importo",
+    "ammontare",
     // Dutch
-    'bedrag',
+    "bedrag",
     // Russian
-    'сумма',
+    "сумма",
     // Turkish
-    'tutar', 'miktar',
+    "tutar",
+    "miktar",
     // Polish
-    'kwota',
+    "kwota",
     // Japanese
-    '金額', '取引金額', 'お取引金額',
+    "金額",
+    "取引金額",
+    "お取引金額",
     // Chinese
-    '金额', '交易金额',
+    "金额",
+    "交易金额",
     // Korean
-    '금액', '거래금액',
+    "금액",
+    "거래금액",
     // Arabic
-    'المبلغ', 'القيمة',
+    "المبلغ",
+    "القيمة",
     // Indonesian
-    'jumlah', 'nominal', 'mutasi',
+    "jumlah",
+    "nominal",
+    "mutasi",
     // Thai
-    'จำนวนเงิน',
+    "จำนวนเงิน",
     // Hindi
-    'राशि',
+    "राशि",
     // Vietnamese
-    'số tiền',
+    "số tiền",
     // Malay
-    'jumlah', 'amaun',
+    "jumlah",
+    "amaun",
   ],
   debit: [
     // English
-    'debit', 'withdrawal', 'withdrawals', 'debits', 'out', 'spent', 'charge',
+    "debit",
+    "withdrawal",
+    "withdrawals",
+    "debits",
+    "out",
+    "spent",
+    "charge",
     // Spanish
-    'débito', 'cargo', 'retiro',
+    "débito",
+    "cargo",
+    "retiro",
     // French
-    'débit', 'retrait',
+    "débit",
+    "retrait",
     // German
-    'soll', 'belastung', 'ausgabe', 'lastschrift',
+    "soll",
+    "belastung",
+    "ausgabe",
+    "lastschrift",
     // Portuguese
-    'débito', 'saída',
+    "débito",
+    "saída",
     // Italian
-    'dare', 'addebito', 'uscita',
+    "dare",
+    "addebito",
+    "uscita",
     // Dutch
-    'debet', 'af',
+    "debet",
+    "af",
     // Russian
-    'дебет', 'расход', 'списание',
+    "дебет",
+    "расход",
+    "списание",
     // Turkish
-    'borç', 'çıkış',
+    "borç",
+    "çıkış",
     // Polish
-    'debet', 'obciążenie', 'wypłata',
+    "debet",
+    "obciążenie",
+    "wypłata",
     // Japanese
-    '出金', '支出', '引き出し', 'お引出し',
+    "出金",
+    "支出",
+    "引き出し",
+    "お引出し",
     // Chinese
-    '支出', '借方', '取款',
+    "支出",
+    "借方",
+    "取款",
     // Korean
-    '출금', '차변',
+    "출금",
+    "차변",
     // Arabic
-    'مدين', 'سحب',
+    "مدين",
+    "سحب",
     // Indonesian
-    'debet', 'keluar',
+    "debet",
+    "keluar",
     // Thai
-    'เดบิต', 'ถอน',
+    "เดบิต",
+    "ถอน",
     // Hindi
-    'डेबिट', 'निकासी',
+    "डेबिट",
+    "निकासी",
   ],
   credit: [
     // English
-    'credit', 'deposit', 'deposits', 'credits', 'in', 'received', 'payment',
+    "credit",
+    "deposit",
+    "deposits",
+    "credits",
+    "in",
+    "received",
+    "payment",
     // Spanish
-    'crédito', 'abono', 'depósito',
+    "crédito",
+    "abono",
+    "depósito",
     // French
-    'crédit', 'dépôt',
+    "crédit",
+    "dépôt",
     // German
-    'haben', 'gutschrift', 'eingang',
+    "haben",
+    "gutschrift",
+    "eingang",
     // Portuguese
-    'crédito', 'entrada',
+    "crédito",
+    "entrada",
     // Italian
-    'avere', 'accredito', 'entrata',
+    "avere",
+    "accredito",
+    "entrata",
     // Dutch
-    'credit', 'bij',
+    "credit",
+    "bij",
     // Russian
-    'кредит', 'приход', 'зачисление',
+    "кредит",
+    "приход",
+    "зачисление",
     // Turkish
-    'alacak', 'giriş',
+    "alacak",
+    "giriş",
     // Polish
-    'kredyt', 'uznanie', 'wpłata',
+    "kredyt",
+    "uznanie",
+    "wpłata",
     // Japanese
-    '入金', '収入', 'お預入れ',
+    "入金",
+    "収入",
+    "お預入れ",
     // Chinese
-    '收入', '贷方', '存款',
+    "收入",
+    "贷方",
+    "存款",
     // Korean
-    '입금', '대변',
+    "입금",
+    "대변",
     // Arabic
-    'دائن', 'إيداع',
+    "دائن",
+    "إيداع",
     // Indonesian
-    'kredit', 'masuk',
+    "kredit",
+    "masuk",
     // Thai
-    'เครดิต', 'ฝาก',
+    "เครดิต",
+    "ฝาก",
     // Hindi
-    'क्रेडिट', 'जमा',
+    "क्रेडिट",
+    "जमा",
   ],
   balance: [
     // English
-    'balance', 'running balance', 'current balance', 'closing balance', 'available balance',
+    "balance",
+    "running balance",
+    "current balance",
+    "closing balance",
+    "available balance",
     // Spanish
-    'saldo', 'saldo disponible', 'saldo actual',
+    "saldo",
+    "saldo disponible",
+    "saldo actual",
     // French
-    'solde', 'solde disponible',
+    "solde",
+    "solde disponible",
     // German
-    'saldo', 'kontostand',
+    "saldo",
+    "kontostand",
     // Portuguese
-    'saldo', 'saldo disponível',
+    "saldo",
+    "saldo disponível",
     // Italian
-    'saldo', 'saldo disponibile',
+    "saldo",
+    "saldo disponibile",
     // Dutch
-    'saldo',
+    "saldo",
     // Russian
-    'баланс', 'остаток',
+    "баланс",
+    "остаток",
     // Turkish
-    'bakiye',
+    "bakiye",
     // Polish
-    'saldo',
+    "saldo",
     // Japanese
-    '残高', 'お残高',
+    "残高",
+    "お残高",
     // Chinese
-    '余额', '结余',
+    "余额",
+    "结余",
     // Korean
-    '잔액', '잔고',
+    "잔액",
+    "잔고",
     // Arabic
-    'الرصيد',
+    "الرصيد",
     // Indonesian
-    'saldo',
+    "saldo",
     // Thai
-    'ยอดคงเหลือ',
+    "ยอดคงเหลือ",
     // Hindi
-    'शेष', 'बैलेंस',
+    "शेष",
+    "बैलेंस",
     // Vietnamese
-    'số dư',
+    "số dư",
     // Malay
-    'baki',
+    "baki",
   ],
 };
 
@@ -310,8 +475,8 @@ function levenshteinDistance(str1: string, str2: string): number {
     for (let j = 1; j <= len2; j++) {
       const cost = str1[i - 1] === str2[j - 1] ? 0 : 1;
       matrix[i][j] = Math.min(
-        matrix[i - 1][j] + 1,      // deletion
-        matrix[i][j - 1] + 1,      // insertion
+        matrix[i - 1][j] + 1, // deletion
+        matrix[i][j - 1] + 1, // insertion
         matrix[i - 1][j - 1] + cost // substitution
       );
     }
@@ -335,7 +500,7 @@ function fuzzyMatchKeywords(
     const distance = levenshteinDistance(text, keyword);
     // Confidence = 1 - (distance / maxLength)
     const maxLen = Math.max(text.length, keyword.length);
-    const confidence = maxLen > 0 ? 1 - (distance / maxLen) : 0;
+    const confidence = maxLen > 0 ? 1 - distance / maxLen : 0;
 
     // Only consider matches with confidence > 0.5 (allows ~50% error for OCR noise)
     if (confidence >= 0.5) {
@@ -365,7 +530,7 @@ export function detectColumnPositions(headerRows: string[]): ColumnDetectionResu
   const headerRowIndex = findHeaderRow(headerRows);
 
   if (headerRowIndex === -1) {
-    warnings.push('No clear header row found, using first row');
+    warnings.push("No clear header row found, using first row");
     return {
       mapping: createFallbackMapping(),
       headerRow: 0,
@@ -445,11 +610,17 @@ function findHeaderRow(rows: string[]): number {
  */
 function splitIntoColumns(headerRow: string): string[] {
   // Strategy 1: Split by multiple spaces (2+)
-  let columns = headerRow.split(/\s{2,}/).map(c => c.trim()).filter(c => c.length > 0);
+  let columns = headerRow
+    .split(/\s{2,}/)
+    .map((c) => c.trim())
+    .filter((c) => c.length > 0);
 
   // Strategy 2: If only 1-2 columns, try tab split
   if (columns.length < 3) {
-    const tabColumns = headerRow.split('\t').map(c => c.trim()).filter(c => c.length > 0);
+    const tabColumns = headerRow
+      .split("\t")
+      .map((c) => c.trim())
+      .filter((c) => c.length > 0);
     if (tabColumns.length > columns.length) {
       columns = tabColumns;
     }
@@ -457,7 +628,10 @@ function splitIntoColumns(headerRow: string): string[] {
 
   // Strategy 3: If still too few, try single space split (last resort)
   if (columns.length < 3) {
-    columns = headerRow.split(/\s+/).map(c => c.trim()).filter(c => c.length > 0);
+    columns = headerRow
+      .split(/\s+/)
+      .map((c) => c.trim())
+      .filter((c) => c.length > 0);
   }
 
   return columns;
@@ -504,7 +678,7 @@ function buildColumnMapping(candidates: ColumnCandidate[], totalColumns: number)
     creditColumn: null,
     balanceColumn: null,
     confidence: 0,
-    detectionMethod: 'keyword',
+    detectionMethod: "keyword",
   };
 
   // Group candidates by keyword type, keep highest confidence
@@ -541,7 +715,8 @@ function buildColumnMapping(candidates: ColumnCandidate[], totalColumns: number)
 
   // Assign to mapping
   if (resolvedMatches.date) mapping.dateColumn = resolvedMatches.date.columnIndex;
-  if (resolvedMatches.description) mapping.descriptionColumn = resolvedMatches.description.columnIndex;
+  if (resolvedMatches.description)
+    mapping.descriptionColumn = resolvedMatches.description.columnIndex;
   if (resolvedMatches.amount) mapping.amountColumn = resolvedMatches.amount.columnIndex;
   if (resolvedMatches.debit) mapping.debitColumn = resolvedMatches.debit.columnIndex;
   if (resolvedMatches.credit) mapping.creditColumn = resolvedMatches.credit.columnIndex;
@@ -549,11 +724,11 @@ function buildColumnMapping(candidates: ColumnCandidate[], totalColumns: number)
 
   // Detect bank format
   if (mapping.debitColumn !== null && mapping.creditColumn !== null) {
-    mapping.bankFormat = 'home-trust';
+    mapping.bankFormat = "home-trust";
   } else if (mapping.amountColumn !== null) {
-    mapping.bankFormat = 'bmo';
+    mapping.bankFormat = "bmo";
   } else {
-    mapping.bankFormat = 'generic';
+    mapping.bankFormat = "generic";
   }
 
   return mapping;
@@ -563,10 +738,7 @@ function buildColumnMapping(candidates: ColumnCandidate[], totalColumns: number)
  * Calculate multi-dimensional confidence score
  * Factors: keyword matches, column count, spatial consistency
  */
-function calculateMappingConfidence(
-  mapping: ColumnMapping,
-  candidates: ColumnCandidate[]
-): number {
+function calculateMappingConfidence(mapping: ColumnMapping, candidates: ColumnCandidate[]): number {
   let score = 0;
   let factors = 0;
 
@@ -579,7 +751,10 @@ function calculateMappingConfidence(
     score += 0.2;
     factors++;
   }
-  if (mapping.amountColumn !== null || (mapping.debitColumn !== null && mapping.creditColumn !== null)) {
+  if (
+    mapping.amountColumn !== null ||
+    (mapping.debitColumn !== null && mapping.creditColumn !== null)
+  ) {
     score += 0.3;
     factors++;
   }
@@ -606,9 +781,9 @@ function createFallbackMapping(): ColumnMapping {
     debitColumn: null,
     creditColumn: null,
     balanceColumn: null,
-    confidence: 0.3,  // Low confidence for fallback
-    detectionMethod: 'fallback',
-    bankFormat: 'generic',
+    confidence: 0.3, // Low confidence for fallback
+    detectionMethod: "fallback",
+    bankFormat: "generic",
   };
 }
 
@@ -633,8 +808,8 @@ export function parseAmountColumns(row: string, mapping: ColumnMapping): number 
     const credit = extractAmountFromColumn(columns, mapping.creditColumn);
 
     // Prioritize non-zero values (bank statements use 0.00 for unused column)
-    if (debit !== null && debit !== 0) return -Math.abs(debit);  // Debits are negative
-    if (credit !== null && credit !== 0) return Math.abs(credit);  // Credits are positive
+    if (debit !== null && debit !== 0) return -Math.abs(debit); // Debits are negative
+    if (credit !== null && credit !== 0) return Math.abs(credit); // Credits are positive
 
     // If both are zero or null, return 0
     if (debit === 0) return -0;
@@ -666,21 +841,21 @@ function extractAmountFromColumn(columns: string[], columnIndex: number): number
   // Check for parentheses (negative) first
   const parenthesesMatch = text.match(/\([\d,]+\.\d{2}\)/);
   if (parenthesesMatch) {
-    const amount = parseFloat(parenthesesMatch[0].replace(/[(),]/g, '').replace(/,/g, ''));
+    const amount = parseFloat(parenthesesMatch[0].replace(/[(),]/g, "").replace(/,/g, ""));
     return isNaN(amount) ? null : -Math.abs(amount);
   }
 
   // Check for explicit negative sign
   const negativeMatch = text.match(/-\$?([\d,]+\.\d{2})/);
   if (negativeMatch) {
-    const amount = parseFloat(negativeMatch[1].replace(/,/g, ''));
+    const amount = parseFloat(negativeMatch[1].replace(/,/g, ""));
     return isNaN(amount) ? null : -Math.abs(amount);
   }
 
   // Check for positive amount
   const positiveMatch = text.match(/\$?([\d,]+\.\d{2})/);
   if (positiveMatch) {
-    const amount = parseFloat(positiveMatch[1].replace(/,/g, ''));
+    const amount = parseFloat(positiveMatch[1].replace(/,/g, ""));
     return isNaN(amount) ? null : amount;
   }
 
@@ -704,7 +879,7 @@ export function groupMultiLineTransactions(rows: string[]): string[][] {
   const grouped: string[][] = [];
   let currentGroup: string[] = [];
 
-  console.log('[groupMultiLineTransactions] Processing', rows.length, 'rows');
+  console.log("[groupMultiLineTransactions] Processing", rows.length, "rows");
 
   for (let i = 0; i < rows.length; i++) {
     const row = rows[i];
@@ -712,7 +887,9 @@ export function groupMultiLineTransactions(rows: string[]): string[][] {
 
     // Debug logging for first 10 rows to see grouping decisions
     if (i < 10) {
-      console.log(`[groupMultiLineTransactions] Row ${i + 1}: ${isNewTransaction ? 'NEW TX' : 'CONTINUATION'} - ${row.substring(0, 60)}`);
+      console.log(
+        `[groupMultiLineTransactions] Row ${i + 1}: ${isNewTransaction ? "NEW TX" : "CONTINUATION"} - ${row.substring(0, 60)}`
+      );
     }
 
     // Check if this row starts a new transaction
@@ -729,7 +906,10 @@ export function groupMultiLineTransactions(rows: string[]): string[][] {
     } else {
       // Edge case: First row doesn't start with date
       // Treat it as a new transaction anyway (orphaned row)
-      console.warn('[groupMultiLineTransactions] Orphaned row (no date detected):', row.substring(0, 60));
+      console.warn(
+        "[groupMultiLineTransactions] Orphaned row (no date detected):",
+        row.substring(0, 60)
+      );
       currentGroup = [row];
     }
   }
@@ -739,12 +919,22 @@ export function groupMultiLineTransactions(rows: string[]): string[][] {
     grouped.push(currentGroup);
   }
 
-  console.log('[groupMultiLineTransactions] Formed', grouped.length, 'transaction groups from', rows.length, 'rows');
+  console.log(
+    "[groupMultiLineTransactions] Formed",
+    grouped.length,
+    "transaction groups from",
+    rows.length,
+    "rows"
+  );
 
   // Log warning if only 1 group formed from many rows (likely a grouping bug)
   if (grouped.length === 1 && rows.length > 10) {
-    console.warn('[groupMultiLineTransactions] ⚠️ Only 1 transaction group formed from', rows.length, 'rows! This suggests date detection failed.');
-    console.warn('[groupMultiLineTransactions] First row:', rows[0].substring(0, 100));
+    console.warn(
+      "[groupMultiLineTransactions] ⚠️ Only 1 transaction group formed from",
+      rows.length,
+      "rows! This suggests date detection failed."
+    );
+    console.warn("[groupMultiLineTransactions] First row:", rows[0].substring(0, 100));
   }
 
   return grouped;
@@ -764,13 +954,13 @@ export function groupMultiLineTransactions(rows: string[]): string[][] {
 function startsWithDate(row: string): boolean {
   // Strategy 1: Standard date patterns
   const datePatterns = [
-    /^\s*\d{1,2}[\\/\-\.]\d{1,2}[\\/\-\.]\d{2,4}/,  // MM/DD/YYYY or DD/MM/YYYY
-    /^\s*\d{4}[\\/\-]\d{1,2}[\\/\-]\d{1,2}/,        // YYYY/MM/DD or YYYY-MM-DD
-    /^\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}/i,  // Month DD
-    /^\s*\d{1,2}\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/i,  // DD Month
+    /^\s*\d{1,2}[\\/\-\.]\d{1,2}[\\/\-\.]\d{2,4}/, // MM/DD/YYYY or DD/MM/YYYY
+    /^\s*\d{4}[\\/\-]\d{1,2}[\\/\-]\d{1,2}/, // YYYY/MM/DD or YYYY-MM-DD
+    /^\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}/i, // Month DD
+    /^\s*\d{1,2}\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/i, // DD Month
   ];
 
-  const hasDateAtStart = datePatterns.some(pattern => pattern.test(row));
+  const hasDateAtStart = datePatterns.some((pattern) => pattern.test(row));
 
   if (hasDateAtStart) {
     return true;
@@ -791,13 +981,13 @@ function startsWithDate(row: string): boolean {
 
   // Fallback decision: If row starts with amount AND is long enough, treat as new transaction
   if (startsWithAmount && isLongEnough) {
-    console.log('[startsWithDate] Fallback detection (amount at start):', row.substring(0, 60));
+    console.log("[startsWithDate] Fallback detection (amount at start):", row.substring(0, 60));
     return true;
   }
 
   // Fallback decision: If row has multiple numbers and is long, treat as new transaction
   if (hasMultipleNumbers && isLongEnough) {
-    console.log('[startsWithDate] Fallback detection (multiple numbers):', row.substring(0, 60));
+    console.log("[startsWithDate] Fallback detection (multiple numbers):", row.substring(0, 60));
     return true;
   }
 

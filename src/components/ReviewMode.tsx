@@ -48,7 +48,7 @@ export function ReviewMode({
   const [showExplanations, setShowExplanations] = useState(true);
 
   const currentQuestion = session.questions[currentQuestionIndex];
-  const currentResponse = (session.responses)[currentQuestion.id];
+  const currentResponse = session.responses[currentQuestion.id];
   const isCorrect = currentResponse?.selectedAnswer === currentQuestion.correctAnswer;
 
   const formatTime = (seconds: number): string => {
@@ -274,7 +274,7 @@ export function ReviewMode({
                 <CardContent>
                   <div className="mb-4 grid grid-cols-5 gap-2">
                     {session.questions.map((question, index) => {
-                      const response = (session.responses)[question.id];
+                      const response = session.responses[question.id];
                       const isCurrentQuestion = index === currentQuestionIndex;
                       const isAnswerCorrect = response?.selectedAnswer === question.correctAnswer;
 

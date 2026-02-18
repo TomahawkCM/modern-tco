@@ -366,8 +366,8 @@ Focus on Linear Chain Architecture concepts, question flow, and data processing.
     };
 
     const timestamp = Date.now().toString().slice(-6);
-  const domainCode = domainCodes[domain];
-  const difficultyCode = difficultyCodes[difficulty] || "U";
+    const domainCode = domainCodes[domain];
+    const difficultyCode = difficultyCodes[difficulty] || "U";
 
     return `TCO-${domainCode}-${difficultyCode}${timestamp}${index.toString().padStart(2, "0")}`;
   }

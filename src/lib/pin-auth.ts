@@ -22,10 +22,7 @@ const KEY_LENGTH = 32;
  * Check if Web Crypto API is available
  */
 export function isCryptoAvailable(): boolean {
-  return (
-    typeof window !== 'undefined' &&
-    window.crypto?.subtle !== undefined
-  );
+  return typeof window !== "undefined" && window.crypto?.subtle !== undefined;
 }
 
 /**
@@ -34,7 +31,7 @@ export function isCryptoAvailable(): boolean {
  */
 export async function generatePINSalt(): Promise<string> {
   if (!isCryptoAvailable()) {
-    throw new Error('Web Crypto API is not available');
+    throw new Error("Web Crypto API is not available");
   }
 
   const saltBuffer = new Uint8Array(SALT_LENGTH);
@@ -51,7 +48,7 @@ export async function generatePINSalt(): Promise<string> {
  */
 export async function hashPIN(pin: string, salt: string): Promise<string> {
   if (!isCryptoAvailable()) {
-    throw new Error('Web Crypto API is not available');
+    throw new Error("Web Crypto API is not available");
   }
 
   // Convert PIN to bytes
@@ -62,21 +59,17 @@ export async function hashPIN(pin: string, salt: string): Promise<string> {
   const saltBuffer = base64ToBuffer(salt);
 
   // Import PIN as key material
-  const keyMaterial = await window.crypto.subtle.importKey(
-    'raw',
-    pinBuffer,
-    'PBKDF2',
-    false,
-    ['deriveBits']
-  );
+  const keyMaterial = await window.crypto.subtle.importKey("raw", pinBuffer, "PBKDF2", false, [
+    "deriveBits",
+  ]);
 
   // Derive the hash using PBKDF2
   const derivedBits = await window.crypto.subtle.deriveBits(
     {
-      name: 'PBKDF2',
+      name: "PBKDF2",
       salt: saltBuffer.buffer as ArrayBuffer,
       iterations: PBKDF2_ITERATIONS,
-      hash: 'SHA-256',
+      hash: "SHA-256",
     },
     keyMaterial,
     KEY_LENGTH * 8 // bits
@@ -92,11 +85,7 @@ export async function hashPIN(pin: string, salt: string): Promise<string> {
  * @param expectedHash Base64-encoded expected hash
  * @returns True if PIN matches
  */
-export async function verifyPIN(
-  pin: string,
-  salt: string,
-  expectedHash: string
-): Promise<boolean> {
+export async function verifyPIN(pin: string, salt: string, expectedHash: string): Promise<boolean> {
   try {
     const computedHash = await hashPIN(pin, salt);
 
@@ -117,28 +106,28 @@ export function isPINValid(pin: string): { valid: boolean; error?: string } {
   if (!/^\d{4,6}$/.test(pin)) {
     return {
       valid: false,
-      error: 'PIN must be 4-6 digits',
+      error: "PIN must be 4-6 digits",
     };
   }
 
   // Check for sequential digits (ascending)
-  const sequentialAsc = ['1234', '2345', '3456', '4567', '5678', '6789', '0123'];
+  const sequentialAsc = ["1234", "2345", "3456", "4567", "5678", "6789", "0123"];
   for (const seq of sequentialAsc) {
     if (pin.includes(seq)) {
       return {
         valid: false,
-        error: 'PIN cannot contain sequential digits like 1234',
+        error: "PIN cannot contain sequential digits like 1234",
       };
     }
   }
 
   // Check for sequential digits (descending)
-  const sequentialDesc = ['4321', '5432', '6543', '7654', '8765', '9876', '3210'];
+  const sequentialDesc = ["4321", "5432", "6543", "7654", "8765", "9876", "3210"];
   for (const seq of sequentialDesc) {
     if (pin.includes(seq)) {
       return {
         valid: false,
-        error: 'PIN cannot contain sequential digits like 4321',
+        error: "PIN cannot contain sequential digits like 4321",
       };
     }
   }
@@ -147,41 +136,41 @@ export function isPINValid(pin: string): { valid: boolean; error?: string } {
   if (/^(\d)\1{3,}$/.test(pin)) {
     return {
       valid: false,
-      error: 'PIN cannot be all the same digit',
+      error: "PIN cannot be all the same digit",
     };
   }
 
   // Check for common weak PINs
   const weakPINs = [
-    '0000',
-    '1111',
-    '2222',
-    '3333',
-    '4444',
-    '5555',
-    '6666',
-    '7777',
-    '8888',
-    '9999',
-    '1234',
-    '4321',
-    '1212',
-    '2121',
-    '1010',
-    '0101',
-    '0000',
-    '1122',
-    '2211',
-    '1221',
-    '2112',
-    '123456',
-    '654321',
+    "0000",
+    "1111",
+    "2222",
+    "3333",
+    "4444",
+    "5555",
+    "6666",
+    "7777",
+    "8888",
+    "9999",
+    "1234",
+    "4321",
+    "1212",
+    "2121",
+    "1010",
+    "0101",
+    "0000",
+    "1122",
+    "2211",
+    "1221",
+    "2112",
+    "123456",
+    "654321",
   ];
 
   if (weakPINs.includes(pin)) {
     return {
       valid: false,
-      error: 'This PIN is too common. Please choose a stronger PIN.',
+      error: "This PIN is too common. Please choose a stronger PIN.",
     };
   }
 
@@ -195,12 +184,10 @@ export function isPINValid(pin: string): { valid: boolean; error?: string } {
  */
 export async function setupPIN(
   pin: string
-): Promise<
-  { success: true; salt: string; hash: string } | { success: false; error: string }
-> {
+): Promise<{ success: true; salt: string; hash: string } | { success: false; error: string }> {
   const validation = isPINValid(pin);
   if (!validation.valid) {
-    return { success: false, error: validation.error || 'Invalid PIN' };
+    return { success: false, error: validation.error || "Invalid PIN" };
   }
 
   try {
@@ -209,8 +196,8 @@ export async function setupPIN(
 
     return { success: true, salt, hash };
   } catch (error) {
-    console.error('Error setting up PIN:', error);
-    return { success: false, error: 'Failed to set up PIN. Please try again.' };
+    console.error("Error setting up PIN:", error);
+    return { success: false, error: "Failed to set up PIN. Please try again." };
   }
 }
 
@@ -222,7 +209,7 @@ export async function setupPIN(
  * Convert ArrayBuffer/Uint8Array to base64 string
  */
 function bufferToBase64(buffer: Uint8Array): string {
-  let binary = '';
+  let binary = "";
   for (let i = 0; i < buffer.length; i++) {
     binary += String.fromCharCode(buffer[i]);
   }

@@ -3,9 +3,9 @@
  * Deep dive into spending patterns with budget vs actual, progress indicators, and breakdowns
  */
 
-import type { Workbook, Worksheet } from 'exceljs';
-import type { ExcelExportOptions, CategoryAnalysisRow } from '../types';
-import type { Transaction, Category, Budget } from '@/types/budget';
+import type { Workbook, Worksheet } from "exceljs";
+import type { ExcelExportOptions, CategoryAnalysisRow } from "../types";
+import type { Transaction, Category, Budget } from "@/types/budget";
 import {
   FONTS,
   FILLS,
@@ -22,7 +22,7 @@ import {
   createSummaryRow,
   getArgbColor,
   EXCEL_COLORS,
-} from '../styles';
+} from "../styles";
 
 interface CategoryAnalysisSheetData {
   transactions: Transaction[];
@@ -35,11 +35,11 @@ interface CategoryAnalysisSheetData {
  * Get budget amount for a category (monthly)
  */
 function getBudgetForCategory(categoryId: string, budgets: Budget[]): number {
-  const budget = budgets.find(b => b.categoryId === categoryId);
+  const budget = budgets.find((b) => b.categoryId === categoryId);
   if (!budget) return 0;
 
   // Convert annual budgets to monthly
-  if (budget.period === 'annual') {
+  if (budget.period === "annual") {
     return budget.amount / 12;
   }
   return budget.amount;
@@ -57,11 +57,11 @@ function aggregateByCategory(
 
   // Initialize all expense categories
   categories
-    .filter(c => c.type === 'expense' && !c.archived)
-    .forEach(cat => {
+    .filter((c) => c.type === "expense" && !c.archived)
+    .forEach((cat) => {
       categoryMap.set(cat.name, {
         category: cat.name,
-        color: cat.color || '#6B7280',
+        color: cat.color || "#6B7280",
         icon: cat.icon,
         budget: getBudgetForCategory(cat.id, budgets),
         actual: 0,
@@ -74,9 +74,9 @@ function aggregateByCategory(
     });
 
   // Add uncategorized bucket
-  categoryMap.set('Uncategorized', {
-    category: 'Uncategorized',
-    color: '#9CA3AF',
+  categoryMap.set("Uncategorized", {
+    category: "Uncategorized",
+    color: "#9CA3AF",
     budget: 0,
     actual: 0,
     remaining: 0,
@@ -88,16 +88,16 @@ function aggregateByCategory(
 
   // Aggregate transactions
   transactions
-    .filter(tx => tx.amount < 0) // Only expenses
-    .forEach(tx => {
-      const catName = tx.category || 'Uncategorized';
+    .filter((tx) => tx.amount < 0) // Only expenses
+    .forEach((tx) => {
+      const catName = tx.category || "Uncategorized";
       let catData = categoryMap.get(catName);
 
       // Handle unknown categories
       if (!catData) {
         catData = {
           category: catName,
-          color: '#6B7280',
+          color: "#6B7280",
           budget: 0,
           actual: 0,
           remaining: 0,
@@ -115,7 +115,7 @@ function aggregateByCategory(
 
       // Track subcategory breakdown
       if (tx.subcategory) {
-        let subcat = catData.subcategories?.find(s => s.name === tx.subcategory);
+        let subcat = catData.subcategories?.find((s) => s.name === tx.subcategory);
         if (!subcat) {
           subcat = { name: tx.subcategory, amount: 0, count: 0 };
           catData.subcategories?.push(subcat);
@@ -128,13 +128,12 @@ function aggregateByCategory(
   // Calculate derived values and convert to array
   const result: CategoryAnalysisRow[] = [];
 
-  categoryMap.forEach(catData => {
+  categoryMap.forEach((catData) => {
     if (catData.actual > 0 || catData.budget > 0) {
       catData.remaining = catData.budget - catData.actual;
-      catData.percentUsed = catData.budget > 0 ? (catData.actual / catData.budget) : 0;
-      catData.avgTransaction = catData.transactionCount > 0
-        ? catData.actual / catData.transactionCount
-        : 0;
+      catData.percentUsed = catData.budget > 0 ? catData.actual / catData.budget : 0;
+      catData.avgTransaction =
+        catData.transactionCount > 0 ? catData.actual / catData.transactionCount : 0;
 
       // Sort subcategories by amount
       catData.subcategories?.sort((a, b) => b.amount - a.amount);
@@ -155,7 +154,7 @@ function aggregateByCategory(
 function createProgressBar(percent: number, width = 10): string {
   const filled = Math.min(Math.round(percent * width), width);
   const empty = width - filled;
-  return '█'.repeat(filled) + '░'.repeat(empty);
+  return "█".repeat(filled) + "░".repeat(empty);
 }
 
 /**
@@ -166,8 +165,8 @@ export async function generateCategoryAnalysisSheet(
   data: CategoryAnalysisSheetData,
   options: ExcelExportOptions
 ): Promise<Worksheet> {
-  const worksheet = workbook.addWorksheet('Category Analysis', {
-    properties: { tabColor: { argb: 'FF8B5CF6' } }, // Purple tab
+  const worksheet = workbook.addWorksheet("Category Analysis", {
+    properties: { tabColor: { argb: "FF8B5CF6" } }, // Purple tab
   });
 
   // Aggregate data
@@ -175,21 +174,21 @@ export async function generateCategoryAnalysisSheet(
 
   // Column definitions
   const columns = [
-    { header: 'Category', key: 'category', width: 22 },
-    { header: 'Budget', key: 'budget', width: 14 },
-    { header: 'Actual', key: 'actual', width: 14 },
-    { header: 'Remaining', key: 'remaining', width: 14 },
-    { header: '% Used', key: 'percentUsed', width: 10 },
-    { header: 'Progress', key: 'progress', width: 14 },
-    { header: 'Transactions', key: 'transactionCount', width: 13 },
-    { header: 'Avg Transaction', key: 'avgTransaction', width: 14 },
+    { header: "Category", key: "category", width: 22 },
+    { header: "Budget", key: "budget", width: 14 },
+    { header: "Actual", key: "actual", width: 14 },
+    { header: "Remaining", key: "remaining", width: 14 },
+    { header: "% Used", key: "percentUsed", width: 10 },
+    { header: "Progress", key: "progress", width: 14 },
+    { header: "Transactions", key: "transactionCount", width: 13 },
+    { header: "Avg Transaction", key: "avgTransaction", width: 14 },
   ];
 
   // Create title section
   let currentRow = createTitleSection(
     worksheet,
-    'Category Analysis',
-    'Spending by Category with Budget Comparison',
+    "Category Analysis",
+    "Spending by Category with Budget Comparison",
     new Date()
   );
 
@@ -200,18 +199,27 @@ export async function generateCategoryAnalysisSheet(
   const overallPercent = totalBudget > 0 ? (totalActual / totalBudget) * 100 : 0;
 
   // Summary stats
+  const locale = options.locale ?? "en-US";
   const summaryRow = worksheet.getRow(currentRow);
-  summaryRow.getCell(1).value = `Total Budget: $${totalBudget.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+  summaryRow.getCell(1).value =
+    `Total Budget: ${totalBudget.toLocaleString(locale, { style: "currency", currency: "USD" })}`;
   summaryRow.getCell(1).font = FONTS.body;
-  summaryRow.getCell(3).value = `Total Spent: $${totalActual.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
-  summaryRow.getCell(3).font = { ...FONTS.body, color: { argb: 'FFEF4444' } };
-  summaryRow.getCell(5).value = `Remaining: $${totalRemaining.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
-  summaryRow.getCell(5).font = { ...FONTS.body, color: { argb: totalRemaining >= 0 ? 'FF10B981' : 'FFEF4444' } };
+  summaryRow.getCell(3).value =
+    `Total Spent: ${totalActual.toLocaleString(locale, { style: "currency", currency: "USD" })}`;
+  summaryRow.getCell(3).font = { ...FONTS.body, color: { argb: "FFEF4444" } };
+  summaryRow.getCell(5).value =
+    `Remaining: ${totalRemaining.toLocaleString(locale, { style: "currency", currency: "USD" })}`;
+  summaryRow.getCell(5).font = {
+    ...FONTS.body,
+    color: { argb: totalRemaining >= 0 ? "FF10B981" : "FFEF4444" },
+  };
   summaryRow.getCell(7).value = `Overall: ${overallPercent.toFixed(1)}%`;
   summaryRow.getCell(7).font = {
     ...FONTS.body,
     bold: true,
-    color: { argb: overallPercent > 100 ? 'FFEF4444' : overallPercent > 80 ? 'FFF59E0B' : 'FF10B981' },
+    color: {
+      argb: overallPercent > 100 ? "FFEF4444" : overallPercent > 80 ? "FFF59E0B" : "FF10B981",
+    },
   };
   currentRow += 2;
 
@@ -225,7 +233,10 @@ export async function generateCategoryAnalysisSheet(
   currentRow++;
 
   // Set column widths
-  setColumnWidths(worksheet, columns.map(c => c.width));
+  setColumnWidths(
+    worksheet,
+    columns.map((c) => c.width)
+  );
 
   // Add data rows
   categoryData.forEach((catData, index) => {
@@ -238,7 +249,7 @@ export async function generateCategoryAnalysisSheet(
     if (catData.color) {
       row.getCell(1).border = {
         ...BORDERS.all,
-        left: { style: 'thick', color: getArgbColor(catData.color) },
+        left: { style: "thick", color: getArgbColor(catData.color) },
       };
     }
 
@@ -251,7 +262,7 @@ export async function generateCategoryAnalysisSheet(
     row.getCell(3).value = catData.actual;
     row.getCell(3).numFmt = NUMBER_FORMATS.currency;
     row.getCell(3).alignment = ALIGNMENTS.right;
-    row.getCell(3).font = { ...FONTS.body, color: { argb: 'FFEF4444' } };
+    row.getCell(3).font = { ...FONTS.body, color: { argb: "FFEF4444" } };
 
     // Remaining
     row.getCell(4).value = catData.remaining;
@@ -266,10 +277,15 @@ export async function generateCategoryAnalysisSheet(
     row.getCell(6).value = progressBar;
     row.getCell(6).alignment = ALIGNMENTS.center;
     row.getCell(6).font = {
-      name: 'Consolas',
+      name: "Consolas",
       size: 10,
       color: {
-        argb: catData.percentUsed > 1 ? 'FFEF4444' : catData.percentUsed > 0.8 ? 'FFF59E0B' : 'FF10B981',
+        argb:
+          catData.percentUsed > 1
+            ? "FFEF4444"
+            : catData.percentUsed > 0.8
+              ? "FFF59E0B"
+              : "FF10B981",
       },
     };
 
@@ -289,9 +305,9 @@ export async function generateCategoryAnalysisSheet(
     if (catData.percentUsed > 1) {
       for (let i = 1; i <= columns.length; i++) {
         row.getCell(i).fill = {
-          type: 'pattern',
-          pattern: 'solid',
-          fgColor: { argb: 'FFFEE2E2' }, // Light red
+          type: "pattern",
+          pattern: "solid",
+          fgColor: { argb: "FFFEE2E2" }, // Light red
         };
       }
     }
@@ -304,7 +320,7 @@ export async function generateCategoryAnalysisSheet(
   createSummaryRow(
     worksheet,
     currentRow,
-    'TOTAL',
+    "TOTAL",
     [
       totalBudget,
       totalActual,
@@ -319,22 +335,24 @@ export async function generateCategoryAnalysisSheet(
   currentRow += 3;
 
   // Add subcategory breakdown section
-  const categoriesWithSubcats = categoryData.filter(c => c.subcategories && c.subcategories.length > 1);
+  const categoriesWithSubcats = categoryData.filter(
+    (c) => c.subcategories && c.subcategories.length > 1
+  );
 
   if (categoriesWithSubcats.length > 0) {
     // Section header
     const sectionHeaderRow = worksheet.getRow(currentRow);
-    sectionHeaderRow.getCell(1).value = 'Subcategory Breakdown';
+    sectionHeaderRow.getCell(1).value = "Subcategory Breakdown";
     sectionHeaderRow.getCell(1).font = FONTS.subtitle;
     currentRow += 2;
 
     // Subcategory columns
     const subColumns = [
-      { header: 'Category', width: 18 },
-      { header: 'Subcategory', width: 18 },
-      { header: 'Amount', width: 14 },
-      { header: '% of Category', width: 13 },
-      { header: 'Transactions', width: 12 },
+      { header: "Category", width: 18 },
+      { header: "Subcategory", width: 18 },
+      { header: "Amount", width: 14 },
+      { header: "% of Category", width: 13 },
+      { header: "Transactions", width: 12 },
     ];
 
     const subHeaderRow = worksheet.getRow(currentRow);
@@ -345,7 +363,7 @@ export async function generateCategoryAnalysisSheet(
     currentRow++;
 
     // Add subcategory data
-    categoriesWithSubcats.forEach(catData => {
+    categoriesWithSubcats.forEach((catData) => {
       catData.subcategories?.forEach((subcat, subIndex) => {
         const row = worksheet.getRow(currentRow);
 
@@ -354,7 +372,7 @@ export async function generateCategoryAnalysisSheet(
           row.getCell(1).value = catData.category;
           row.getCell(1).font = { ...FONTS.body, bold: true };
         } else {
-          row.getCell(1).value = '';
+          row.getCell(1).value = "";
         }
 
         row.getCell(2).value = subcat.name;

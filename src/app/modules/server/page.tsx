@@ -114,18 +114,11 @@ async function ModulesContent() {
       <div className="mb-8 flex flex-col gap-4 sm:flex-row">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 transform text-muted-foreground" />
-          <Input 
-            placeholder="Search modules..." 
-            className="pl-10" 
-            aria-label="Search modules"
-          />
+          <Input placeholder="Search modules..." className="pl-10" aria-label="Search modules" />
         </div>
 
         <Select>
-          <SelectTrigger 
-            className="w-full sm:w-48"
-            aria-label="Filter modules by domain"
-          >
+          <SelectTrigger className="w-full sm:w-48" aria-label="Filter modules by domain">
             <SelectValue placeholder="All Domains" />
           </SelectTrigger>
           <SelectContent>
@@ -139,10 +132,7 @@ async function ModulesContent() {
         </Select>
 
         <Select>
-          <SelectTrigger 
-            className="w-full sm:w-40"
-            aria-label="Filter modules by difficulty level"
-          >
+          <SelectTrigger className="w-full sm:w-40" aria-label="Filter modules by difficulty level">
             <SelectValue placeholder="All Levels" />
           </SelectTrigger>
           <SelectContent>
@@ -165,14 +155,16 @@ async function ModulesContent() {
             </CardHeader>
             <CardContent>
               <ModulesStaticTable
-                rows={modules.map((m): ModuleListRow => ({
-                  id: m.id,
-                  title: m.title,
-                  domain: m.domainSlug,
-                  difficulty: m.difficulty,
-                  estimatedTimeMinutes: parseInt(String(m.estimatedTime).split(" ")[0]) || 0,
-                  slug: m.slug,
-                }))}
+                rows={modules.map(
+                  (m): ModuleListRow => ({
+                    id: m.id,
+                    title: m.title,
+                    domain: m.domainSlug,
+                    difficulty: m.difficulty,
+                    estimatedTimeMinutes: parseInt(String(m.estimatedTime).split(" ")[0]) || 0,
+                    slug: m.slug,
+                  })
+                )}
               />
             </CardContent>
           </Card>

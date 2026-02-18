@@ -3,17 +3,17 @@
  * TypeScript-based query engine replacing Python simulator
  */
 
-import { Parser, parse } from './parser';
-import { QueryExecutor, executeQuery } from './executor';
-import { CacheManager, cacheManager } from './cache';
+import { Parser, parse } from "./parser";
+import { QueryExecutor, executeQuery } from "./executor";
+import { CacheManager, cacheManager } from "./cache";
 import {
   getFieldMapping,
   resolveGroupAlias,
   isKnownField,
   getAllFieldNames,
   SENSORS_CATALOG,
-  AGGREGATE_FUNCTIONS
-} from './field-mappings';
+  AGGREGATE_FUNCTIONS,
+} from "./field-mappings";
 import {
   type QueryResult,
   type QueryNode,
@@ -24,9 +24,9 @@ import {
   type QueryTemplate,
   QueryError,
   ParseError,
-  ExecutionError
-} from './types';
-import { generateSampleDataWithScenarios } from './sample-data-generator';
+  ExecutionError,
+} from "./types";
+import { generateSampleDataWithScenarios } from "./sample-data-generator";
 
 // Generate realistic sample data with 150 machines
 const SAMPLE_DATA: MachineData[] = generateSampleDataWithScenarios();
@@ -51,7 +51,8 @@ export class TaniumQueryEngine {
     this.parser = new Parser(options?.parserOptions);
     this.data = options?.data || SAMPLE_DATA;
     this.executor = new QueryExecutor(this.data, options?.executorOptions);
-    this.cache = options?.cacheEnabled !== false ? cacheManager : new CacheManager({ enabled: false });
+    this.cache =
+      options?.cacheEnabled !== false ? cacheManager : new CacheManager({ enabled: false });
 
     // Initialize default templates
     this.initializeTemplates();
@@ -65,8 +66,8 @@ export class TaniumQueryEngine {
 
     try {
       // Validate input
-      if (!question || typeof question !== 'string') {
-        throw new QueryError('Question is required and must be a string');
+      if (!question || typeof question !== "string") {
+        throw new QueryError("Question is required and must be a string");
       }
 
       // Normalize query
@@ -79,7 +80,7 @@ export class TaniumQueryEngine {
           cached.execution = {
             ...cached.execution!,
             cacheHit: true,
-            totalTimeMs: performance.now() - startTime
+            totalTimeMs: performance.now() - startTime,
           };
           return cached;
         }
@@ -107,7 +108,7 @@ export class TaniumQueryEngine {
       // Update total time
       result.execution = {
         ...result.execution!,
-        totalTimeMs: performance.now() - startTime
+        totalTimeMs: performance.now() - startTime,
       };
 
       // Cache result
@@ -130,8 +131,8 @@ export class TaniumQueryEngine {
           scoped: 0,
           filtered: 0,
           rowsExamined: 0,
-          cacheHit: false
-        }
+          cacheHit: false,
+        },
       };
 
       return errorResult;
@@ -169,8 +170,8 @@ export class TaniumQueryEngine {
   private normalizeQuery(question: string): string {
     return question
       .trim()
-      .replace(/\s+/g, ' ')
-      .replace(/^get\s+/i, 'Get ');
+      .replace(/\s+/g, " ")
+      .replace(/^get\s+/i, "Get ");
   }
 
   /**
@@ -184,7 +185,7 @@ export class TaniumQueryEngine {
       description,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      executionCount: 0
+      executionCount: 0,
     };
 
     this.savedQueries.set(name.toLowerCase(), saved);
@@ -239,47 +240,46 @@ export class TaniumQueryEngine {
   private initializeTemplates(): void {
     // Basic templates
     this.addTemplate({
-      id: 'all-machines',
-      name: 'All Machines',
-      description: 'List all machines',
-      template: 'Get Computer Name, OS Platform, Group from all machines',
+      id: "all-machines",
+      name: "All Machines",
+      description: "List all machines",
+      template: "Get Computer Name, OS Platform, Group from all machines",
       parameters: [],
-      category: 'Basic',
-      difficulty: 1
+      category: "Basic",
+      difficulty: 1,
     });
 
     this.addTemplate({
-      id: 'high-cpu',
-      name: 'High CPU Usage',
-      description: 'Find machines with high CPU usage',
-      template: 'Get Computer Name, CPU Percent from all machines where CPU Percent is greater than "${threshold}" order by CPU Percent desc',
-      parameters: [
-        { name: 'threshold', type: 'number', required: true, default: 80 }
-      ],
-      category: 'Performance',
-      difficulty: 2
+      id: "high-cpu",
+      name: "High CPU Usage",
+      description: "Find machines with high CPU usage",
+      template:
+        'Get Computer Name, CPU Percent from all machines where CPU Percent is greater than "${threshold}" order by CPU Percent desc',
+      parameters: [{ name: "threshold", type: "number", required: true, default: 80 }],
+      category: "Performance",
+      difficulty: 2,
     });
 
     this.addTemplate({
-      id: 'low-disk',
-      name: 'Low Disk Space',
-      description: 'Find machines with low disk space',
-      template: 'Get Computer Name, Disk Free GB from all machines where Disk Free GB is less than "${threshold}" order by Disk Free GB',
-      parameters: [
-        { name: 'threshold', type: 'number', required: true, default: 50 }
-      ],
-      category: 'Performance',
-      difficulty: 2
+      id: "low-disk",
+      name: "Low Disk Space",
+      description: "Find machines with low disk space",
+      template:
+        'Get Computer Name, Disk Free GB from all machines where Disk Free GB is less than "${threshold}" order by Disk Free GB',
+      parameters: [{ name: "threshold", type: "number", required: true, default: 50 }],
+      category: "Performance",
+      difficulty: 2,
     });
 
     this.addTemplate({
-      id: 'compliance-check',
-      name: 'Compliance Check',
-      description: 'Check compliance scores by group',
-      template: 'Get avg(Compliance Score), min(Compliance Score), count() from all machines group by Group',
+      id: "compliance-check",
+      name: "Compliance Check",
+      description: "Check compliance scores by group",
+      template:
+        "Get avg(Compliance Score), min(Compliance Score), count() from all machines group by Group",
       parameters: [],
-      category: 'Governance',
-      difficulty: 3
+      category: "Governance",
+      difficulty: 3,
     });
   }
 
@@ -383,10 +383,14 @@ export class TaniumQueryEngine {
    * Export saved queries and templates
    */
   public export(): string {
-    return JSON.stringify({
-      savedQueries: Array.from(this.savedQueries.entries()),
-      templates: Array.from(this.templates.entries())
-    }, null, 2);
+    return JSON.stringify(
+      {
+        savedQueries: Array.from(this.savedQueries.entries()),
+        templates: Array.from(this.templates.entries()),
+      },
+      null,
+      2
+    );
   }
 
   /**
@@ -411,7 +415,7 @@ export class TaniumQueryEngine {
 export const queryEngine = new TaniumQueryEngine();
 
 // Re-export types and utilities
-export * from './types';
+export * from "./types";
 export {
   parse,
   executeQuery,
@@ -421,7 +425,7 @@ export {
   isKnownField,
   getAllFieldNames,
   SENSORS_CATALOG,
-  AGGREGATE_FUNCTIONS
+  AGGREGATE_FUNCTIONS,
 };
 
 // Export default

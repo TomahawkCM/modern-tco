@@ -5,10 +5,10 @@
  * Extracted and extended from the Excel export net-worth-sheet.ts module.
  */
 
-import { db } from '@/lib/budget-db';
-import { roundToCents } from '@/lib/money';
-import type { StoredNetWorthSnapshot, Account, Loan } from '@/types/budget';
-import type { Holding } from '@/lib/budget-db';
+import { db } from "@/lib/budget-db";
+import { roundToCents } from "@/lib/money";
+import type { StoredNetWorthSnapshot, Account, Loan } from "@/types/budget";
+import type { Holding } from "@/lib/budget-db";
 
 export interface NetWorthBreakdown {
   assets: {
@@ -42,11 +42,11 @@ export async function calculateCurrentNetWorth(): Promise<NetWorthBreakdown> {
 
   // Assets
   const cashChecking = accounts
-    .filter((a: Account) => a.type === 'checking')
+    .filter((a: Account) => a.type === "checking")
     .reduce((sum: number, a: Account) => sum + a.balance, 0);
 
   const savings = accounts
-    .filter((a: Account) => a.type === 'savings')
+    .filter((a: Account) => a.type === "savings")
     .reduce((sum: number, a: Account) => sum + a.balance, 0);
 
   // Use currentPrice (market value) when available, fall back to purchasePrice (cost basis)
@@ -59,15 +59,15 @@ export async function calculateCurrentNetWorth(): Promise<NetWorthBreakdown> {
 
   // Liabilities
   const creditCards = accounts
-    .filter((a: Account) => a.type === 'credit')
+    .filter((a: Account) => a.type === "credit")
     .reduce((sum: number, a: Account) => sum + Math.abs(a.balance), 0);
 
   const activeLoanBalance = loans
-    .filter((l: Loan) => l.status === 'active' && l.type !== 'mortgage')
+    .filter((l: Loan) => l.status === "active" && l.type !== "mortgage")
     .reduce((sum: number, l: Loan) => sum + l.currentBalance, 0);
 
   const mortgageBalance = loans
-    .filter((l: Loan) => l.status === 'active' && l.type === 'mortgage')
+    .filter((l: Loan) => l.status === "active" && l.type === "mortgage")
     .reduce((sum: number, l: Loan) => sum + l.currentBalance, 0);
 
   const totalAssets = cashChecking + savings + investments + propertyValue;
@@ -96,19 +96,13 @@ export async function calculateCurrentNetWorth(): Promise<NetWorthBreakdown> {
 /**
  * Milestone thresholds for net worth achievements.
  */
-export const NET_WORTH_MILESTONES = [
-  10000, 25000, 50000, 100000, 250000, 500000, 1000000,
-];
+export const NET_WORTH_MILESTONES = [10000, 25000, 50000, 100000, 250000, 500000, 1000000];
 
 /**
  * Detect milestones crossed compared to a previous snapshot.
  */
-export function detectMilestones(
-  currentNetWorth: number,
-  previousNetWorth: number
-): number[] {
+export function detectMilestones(currentNetWorth: number, previousNetWorth: number): number[] {
   return NET_WORTH_MILESTONES.filter(
     (milestone) => currentNetWorth >= milestone && previousNetWorth < milestone
   );
 }
-

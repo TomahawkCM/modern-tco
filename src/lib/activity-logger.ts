@@ -3,11 +3,8 @@
  * Tracks user actions for audit trail and activity history
  */
 
-import { db } from './budget-db';
-import type {
-  ActivityLogEntry,
-  ActivityLogFilter,
-} from '@/types/profile';
+import { db } from "./budget-db";
+import type { ActivityLogEntry, ActivityLogFilter } from "@/types/profile";
 
 // Maximum number of log entries to keep (auto-prune older entries)
 const MAX_LOG_ENTRIES = 500;
@@ -27,8 +24,8 @@ function generateLogId(): string {
 export async function logActivity(params: {
   profileId: string;
   profileName: string;
-  action: ActivityLogEntry['action'];
-  entityType: ActivityLogEntry['entityType'];
+  action: ActivityLogEntry["action"];
+  entityType: ActivityLogEntry["entityType"];
   entityId?: string | null;
   entityName?: string;
   details?: Record<string, unknown>;
@@ -53,9 +50,9 @@ export async function logActivity(params: {
 
     return entry.id;
   } catch (error) {
-    console.error('[ActivityLogger] Error logging activity:', error);
+    console.error("[ActivityLogger] Error logging activity:", error);
     // Don't throw - activity logging should not break the app
-    return '';
+    return "";
   }
 }
 
@@ -64,11 +61,9 @@ export async function logActivity(params: {
  * @param options Filter options
  * @returns Array of activity log entries
  */
-export async function getActivityLog(
-  options?: ActivityLogFilter
-): Promise<ActivityLogEntry[]> {
+export async function getActivityLog(options?: ActivityLogFilter): Promise<ActivityLogEntry[]> {
   try {
-    const collection = db.activityLog.orderBy('timestamp').reverse();
+    const collection = db.activityLog.orderBy("timestamp").reverse();
 
     // Apply filters
     const entries = await collection.toArray();
@@ -107,7 +102,7 @@ export async function getActivityLog(
 
     return filtered;
   } catch (error) {
-    console.error('[ActivityLogger] Error getting activity log:', error);
+    console.error("[ActivityLogger] Error getting activity log:", error);
     return [];
   }
 }
@@ -136,14 +131,11 @@ export async function getRecentActivity(
 export async function getActivityLogCount(profileId?: string): Promise<number> {
   try {
     if (profileId) {
-      return await db.activityLog
-        .where('profileId')
-        .equals(profileId)
-        .count();
+      return await db.activityLog.where("profileId").equals(profileId).count();
     }
     return await db.activityLog.count();
   } catch (error) {
-    console.error('[ActivityLogger] Error getting log count:', error);
+    console.error("[ActivityLogger] Error getting log count:", error);
     return 0;
   }
 }
@@ -164,18 +156,15 @@ export async function pruneActivityLog(): Promise<number> {
     const toDelete = count - MAX_LOG_ENTRIES;
 
     // Get oldest entries to delete
-    const oldestEntries = await db.activityLog
-      .orderBy('timestamp')
-      .limit(toDelete)
-      .toArray();
+    const oldestEntries = await db.activityLog.orderBy("timestamp").limit(toDelete).toArray();
 
     const idsToDelete = oldestEntries.map((e) => e.id);
     await db.activityLog.bulkDelete(idsToDelete);
 
-    console.log('[ActivityLogger] Pruned', toDelete, 'old entries');
+    console.log("[ActivityLogger] Pruned", toDelete, "old entries");
     return toDelete;
   } catch (error) {
-    console.error('[ActivityLogger] Error pruning log:', error);
+    console.error("[ActivityLogger] Error pruning log:", error);
     return 0;
   }
 }
@@ -202,9 +191,9 @@ async function pruneActivityLogIfNeeded(): Promise<void> {
 export async function clearActivityLog(): Promise<void> {
   try {
     await db.activityLog.clear();
-    console.log('[ActivityLogger] Activity log cleared');
+    console.log("[ActivityLogger] Activity log cleared");
   } catch (error) {
-    console.error('[ActivityLogger] Error clearing log:', error);
+    console.error("[ActivityLogger] Error clearing log:", error);
     throw error;
   }
 }
@@ -215,22 +204,17 @@ export async function clearActivityLog(): Promise<void> {
  * @param profileId Profile ID
  * @returns Number of entries deleted
  */
-export async function deleteProfileActivityLog(
-  profileId: string
-): Promise<number> {
+export async function deleteProfileActivityLog(profileId: string): Promise<number> {
   try {
-    const entries = await db.activityLog
-      .where('profileId')
-      .equals(profileId)
-      .toArray();
+    const entries = await db.activityLog.where("profileId").equals(profileId).toArray();
 
     const ids = entries.map((e) => e.id);
     await db.activityLog.bulkDelete(ids);
 
-    console.log('[ActivityLogger] Deleted', ids.length, 'entries for profile:', profileId);
+    console.log("[ActivityLogger] Deleted", ids.length, "entries for profile:", profileId);
     return ids.length;
   } catch (error) {
-    console.error('[ActivityLogger] Error deleting profile log:', error);
+    console.error("[ActivityLogger] Error deleting profile log:", error);
     return 0;
   }
 }
@@ -242,15 +226,12 @@ export async function deleteProfileActivityLog(
 /**
  * Log a profile login
  */
-export async function logProfileLogin(
-  profileId: string,
-  profileName: string
-): Promise<void> {
+export async function logProfileLogin(profileId: string, profileName: string): Promise<void> {
   await logActivity({
     profileId,
     profileName,
-    action: 'login',
-    entityType: 'profile',
+    action: "login",
+    entityType: "profile",
     entityId: profileId,
     entityName: profileName,
   });
@@ -259,15 +240,12 @@ export async function logProfileLogin(
 /**
  * Log a profile logout
  */
-export async function logProfileLogout(
-  profileId: string,
-  profileName: string
-): Promise<void> {
+export async function logProfileLogout(profileId: string, profileName: string): Promise<void> {
   await logActivity({
     profileId,
     profileName,
-    action: 'logout',
-    entityType: 'profile',
+    action: "logout",
+    entityType: "profile",
     entityId: profileId,
     entityName: profileName,
   });
@@ -285,8 +263,8 @@ export async function logProfileSwitch(
   await logActivity({
     profileId: fromProfileId,
     profileName: fromProfileName,
-    action: 'profile_switch',
-    entityType: 'profile',
+    action: "profile_switch",
+    entityType: "profile",
     entityId: toProfileId,
     entityName: toProfileName,
     details: {
@@ -302,7 +280,7 @@ export async function logProfileSwitch(
 export async function logTransactionAction(
   profileId: string,
   profileName: string,
-  action: 'create' | 'update' | 'delete',
+  action: "create" | "update" | "delete",
   transactionId: string,
   transactionDescription?: string,
   amount?: number
@@ -311,7 +289,7 @@ export async function logTransactionAction(
     profileId,
     profileName,
     action,
-    entityType: 'transaction',
+    entityType: "transaction",
     entityId: transactionId,
     entityName: transactionDescription,
     details: amount !== undefined ? { amount } : undefined,
@@ -324,7 +302,7 @@ export async function logTransactionAction(
 export async function logBudgetAction(
   profileId: string,
   profileName: string,
-  action: 'create' | 'update' | 'delete',
+  action: "create" | "update" | "delete",
   budgetId: string,
   categoryName?: string,
   details?: Record<string, unknown>
@@ -333,7 +311,7 @@ export async function logBudgetAction(
     profileId,
     profileName,
     action,
-    entityType: 'budget',
+    entityType: "budget",
     entityId: budgetId,
     entityName: categoryName,
     details,
@@ -346,7 +324,7 @@ export async function logBudgetAction(
 export async function logAccountAction(
   profileId: string,
   profileName: string,
-  action: 'create' | 'update' | 'delete',
+  action: "create" | "update" | "delete",
   accountId: string,
   accountName?: string
 ): Promise<void> {
@@ -354,7 +332,7 @@ export async function logAccountAction(
     profileId,
     profileName,
     action,
-    entityType: 'account',
+    entityType: "account",
     entityId: accountId,
     entityName: accountName,
   });
@@ -366,7 +344,7 @@ export async function logAccountAction(
 export async function logCategoryAction(
   profileId: string,
   profileName: string,
-  action: 'create' | 'update' | 'delete',
+  action: "create" | "update" | "delete",
   categoryId: string,
   categoryName?: string
 ): Promise<void> {
@@ -374,7 +352,7 @@ export async function logCategoryAction(
     profileId,
     profileName,
     action,
-    entityType: 'category',
+    entityType: "category",
     entityId: categoryId,
     entityName: categoryName,
   });
@@ -391,8 +369,8 @@ export async function logExport(
   await logActivity({
     profileId,
     profileName,
-    action: 'export',
-    entityType: 'system',
+    action: "export",
+    entityType: "system",
     details,
   });
 }
@@ -408,8 +386,8 @@ export async function logImport(
   await logActivity({
     profileId,
     profileName,
-    action: 'import',
-    entityType: 'system',
+    action: "import",
+    entityType: "system",
     details,
   });
 }
@@ -425,12 +403,12 @@ export async function logPINChange(
   await logActivity({
     profileId,
     profileName,
-    action: 'pin_change',
-    entityType: 'profile',
+    action: "pin_change",
+    entityType: "profile",
     entityId: profileId,
     entityName: profileName,
     details: {
-      action: wasSet ? 'PIN set' : 'PIN removed',
+      action: wasSet ? "PIN set" : "PIN removed",
     },
   });
 }
@@ -450,8 +428,8 @@ export async function getActivitySummary(
   endDate: Date
 ): Promise<{
   totalActions: number;
-  byAction: Record<ActivityLogEntry['action'], number>;
-  byEntityType: Record<ActivityLogEntry['entityType'], number>;
+  byAction: Record<ActivityLogEntry["action"], number>;
+  byEntityType: Record<ActivityLogEntry["entityType"], number>;
   byProfile: Record<string, number>;
 }> {
   try {
@@ -469,16 +447,16 @@ export async function getActivitySummary(
 
     return {
       totalActions: entries.length,
-      byAction: byAction as Record<ActivityLogEntry['action'], number>,
-      byEntityType: byEntityType as Record<ActivityLogEntry['entityType'], number>,
+      byAction: byAction as Record<ActivityLogEntry["action"], number>,
+      byEntityType: byEntityType as Record<ActivityLogEntry["entityType"], number>,
       byProfile,
     };
   } catch (error) {
-    console.error('[ActivityLogger] Error getting summary:', error);
+    console.error("[ActivityLogger] Error getting summary:", error);
     return {
       totalActions: 0,
-      byAction: {} as Record<ActivityLogEntry['action'], number>,
-      byEntityType: {} as Record<ActivityLogEntry['entityType'], number>,
+      byAction: {} as Record<ActivityLogEntry["action"], number>,
+      byEntityType: {} as Record<ActivityLogEntry["entityType"], number>,
       byProfile: {},
     };
   }
@@ -490,38 +468,38 @@ export async function getActivitySummary(
  * @returns Human-readable description
  */
 export function formatActivityEntry(entry: ActivityLogEntry): string {
-  const actionVerbs: Record<ActivityLogEntry['action'], string> = {
-    create: 'created',
-    update: 'updated',
-    delete: 'deleted',
-    login: 'logged in',
-    logout: 'logged out',
-    export: 'exported data',
-    import: 'imported data',
-    pin_change: 'changed PIN',
-    profile_switch: 'switched profile',
+  const actionVerbs: Record<ActivityLogEntry["action"], string> = {
+    create: "created",
+    update: "updated",
+    delete: "deleted",
+    login: "logged in",
+    logout: "logged out",
+    export: "exported data",
+    import: "imported data",
+    pin_change: "changed PIN",
+    profile_switch: "switched profile",
   };
 
-  const entityLabels: Record<ActivityLogEntry['entityType'], string> = {
-    profile: 'profile',
-    transaction: 'transaction',
-    budget: 'budget',
-    category: 'category',
-    account: 'account',
-    subscription: 'subscription',
-    loan: 'loan',
-    system: 'system',
+  const entityLabels: Record<ActivityLogEntry["entityType"], string> = {
+    profile: "profile",
+    transaction: "transaction",
+    budget: "budget",
+    category: "category",
+    account: "account",
+    subscription: "subscription",
+    loan: "loan",
+    system: "system",
   };
 
   const verb = actionVerbs[entry.action] || entry.action;
   const entityLabel = entityLabels[entry.entityType] || entry.entityType;
 
-  if (entry.action === 'login' || entry.action === 'logout') {
+  if (entry.action === "login" || entry.action === "logout") {
     return `${entry.profileName} ${verb}`;
   }
 
-  if (entry.action === 'profile_switch') {
-    const toName = (entry.details?.switchedToName as string) || 'another profile';
+  if (entry.action === "profile_switch") {
+    const toName = (entry.details?.switchedToName as string) || "another profile";
     return `${entry.profileName} switched to ${toName}`;
   }
 

@@ -232,7 +232,9 @@ export default function ModuleProgress({
         <div className="rounded-lg border border-white/10 bg-black/20 p-3">
           <div className="mb-1 flex items-center gap-2">
             <TrendingUp className="h-4 w-4 text-[#22c55e]" />
-            <span className="text-xs uppercase tracking-wide text-muted-foreground">Time Spent</span>
+            <span className="text-xs uppercase tracking-wide text-muted-foreground">
+              Time Spent
+            </span>
           </div>
           <div className="text-lg font-semibold text-foreground">
             {progress.totalTimeSpent ? formatTimeSpent(progress.totalTimeSpent) : "0m"}
@@ -242,7 +244,9 @@ export default function ModuleProgress({
         <div className="rounded-lg border border-white/10 bg-black/20 p-3">
           <div className="mb-1 flex items-center gap-2">
             <Target className="h-4 w-4 text-primary" />
-            <span className="text-xs uppercase tracking-wide text-muted-foreground">Objectives</span>
+            <span className="text-xs uppercase tracking-wide text-muted-foreground">
+              Objectives
+            </span>
           </div>
           <div className="text-lg font-semibold text-foreground">
             {completedObjectives}/{totalObjectives}
@@ -277,7 +281,9 @@ export default function ModuleProgress({
                       isCompleted ? "text-[#22c55e]" : "text-gray-600"
                     }`}
                   />
-                  <span className={`text-sm ${isCompleted ? "text-muted-foreground" : "text-muted-foreground"}`}>
+                  <span
+                    className={`text-sm ${isCompleted ? "text-muted-foreground" : "text-muted-foreground"}`}
+                  >
                     {objective.description}
                   </span>
                 </div>

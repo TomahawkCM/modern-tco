@@ -10,10 +10,6 @@ import { HeavyProviders } from "@/app/heavy-providers";
  *
  * This is a development/testing route that needs access to all contexts.
  */
-export default function TestDbLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function TestDbLayout({ children }: { children: React.ReactNode }) {
   return <HeavyProviders>{children}</HeavyProviders>;
 }

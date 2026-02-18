@@ -20,15 +20,16 @@ Open `src/lib/budget-db.ts` and:
 The file should look like this after editing:
 
 ```typescript
-import Dexie, { Table } from 'dexie';  // ← Make sure this is uncommented
+import Dexie, { Table } from "dexie"; // ← Make sure this is uncommented
 
-export class BudgetDatabase extends Dexie {  // ← Uncomment this whole section
+export class BudgetDatabase extends Dexie {
+  // ← Uncomment this whole section
   accounts!: Table<Account>;
   transactions!: Table<Transaction>;
   // ... rest of the class
 }
 
-export const db = new BudgetDatabase();  // ← Use this instead of TemporaryDatabase
+export const db = new BudgetDatabase(); // ← Use this instead of TemporaryDatabase
 ```
 
 ### Step 3: Start the App
@@ -44,12 +45,14 @@ Open your browser to: **http://localhost:3000/budget-app**
 ## 📦 What You Get (Phase 1 MVP)
 
 ### Pages Built & Ready to Use:
+
 ✅ **Dashboard** - Overview of your finances
 ✅ **Transactions** - View, search, filter transactions
 ✅ **Import** - Upload CSV files from BMO or Home Trust
 ✅ **Layout** - Clean navigation sidebar
 
 ### Features Working:
+
 ✅ CSV import with duplicate detection
 ✅ Auto-categorization (50+ Canadian merchant rules)
 ✅ Transaction management (view, delete, filter, search)
@@ -89,6 +92,7 @@ Open your browser to: **http://localhost:3000/budget-app**
 ## 🏦 Supported Bank Formats
 
 ### BMO (Bank of Montreal)
+
 ```csv
 Transaction Date,Description,Amount
 01/15/2025,SOBEYS #1234,-87.32
@@ -96,6 +100,7 @@ Transaction Date,Description,Amount
 ```
 
 ### Home Trust
+
 ```csv
 Date,Details,Debit/Credit
 2025-01-15,METRO GROCERY,-52.18
@@ -107,6 +112,7 @@ Date,Details,Debit/Credit
 ## 🎨 What's Next (Phase 2)
 
 ### Pages to Build:
+
 - [ ] Budget tracking (`/budget-app/budgets`)
 - [ ] Future purchase planner (`/budget-app/planning/future`)
 - [ ] Retirement calculator (`/budget-app/planning/retirement`)
@@ -115,6 +121,7 @@ Date,Details,Debit/Credit
 - [ ] Settings (`/budget-app/settings`)
 
 ### Features to Add:
+
 - [ ] Add/edit transactions manually
 - [ ] Recharts visualizations
 - [ ] Budget progress bars
@@ -136,11 +143,11 @@ Edit `src/lib/parsers/csv-parser.ts`:
 export const BANK_CONFIGS: Record<string, BankConfig> = {
   // ... existing
   myBank: {
-    name: 'My Bank',
-    dateColumn: 'Date',
-    descriptionColumn: 'Description',
-    amountColumn: 'Amount',
-    dateFormat: 'yyyy-MM-dd',
+    name: "My Bank",
+    dateColumn: "Date",
+    descriptionColumn: "Description",
+    amountColumn: "Amount",
+    dateFormat: "yyyy-MM-dd",
     hasHeader: true,
   },
 };
@@ -180,15 +187,19 @@ Edit `src/lib/categorization/rules.ts`:
 ## 🐛 Troubleshooting
 
 ### "Data disappears when I refresh"
+
 → Install Dexie and uncomment the database code (Step 2 above)
 
 ### "CSV import doesn't work"
+
 → Make sure your CSV has headers and matches the bank format
 
 ### "Categories are wrong"
+
 → Categorization is automatic but imperfect. Add custom rules or manually categorize
 
 ### "Page shows errors"
+
 → Run `npm install` to ensure all dependencies are installed
 
 ---

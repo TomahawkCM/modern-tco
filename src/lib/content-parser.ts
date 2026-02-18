@@ -7,8 +7,8 @@
 // See Archon task: "Refactor content-parser.ts for Turbopack compatibility"
 
 // Conditional imports for client/server compatibility
-const fs = typeof window === 'undefined' ? require('fs') : null;
-const path = typeof window === 'undefined' ? require('path') : null;
+const fs = typeof window === "undefined" ? require("fs") : null;
+const path = typeof window === "undefined" ? require("path") : null;
 import type { StudyModuleContent, StudySectionContent } from "@/data/study-content";
 
 interface ParsedSection {

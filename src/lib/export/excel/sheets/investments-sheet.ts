@@ -3,9 +3,9 @@
  * Portfolio overview with holdings and performance
  */
 
-import type { Workbook, Worksheet } from 'exceljs';
-import type { ExcelExportOptions, InvestmentHoldingData } from '../types';
-import type { InvestmentAccount, Holding } from '@/lib/budget-db';
+import type { Workbook, Worksheet } from "exceljs";
+import type { ExcelExportOptions, InvestmentHoldingData } from "../types";
+import type { InvestmentAccount, Holding } from "@/lib/budget-db";
 import {
   FONTS,
   FILLS,
@@ -20,7 +20,7 @@ import {
   freezePanes,
   createTitleSection,
   EXCEL_COLORS,
-} from '../styles';
+} from "../styles";
 
 interface InvestmentsSheetData {
   investmentAccounts: InvestmentAccount[];
@@ -30,13 +30,18 @@ interface InvestmentsSheetData {
 /**
  * Get account type display
  */
-function getAccountTypeDisplay(type: InvestmentAccount['type']): string {
+function getAccountTypeDisplay(type: InvestmentAccount["type"]): string {
   switch (type) {
-    case 'RRSP': return 'RRSP';
-    case 'TFSA': return 'TFSA';
-    case 'Non-registered': return 'Non-registered';
-    case 'Company shares': return 'Company Shares';
-    default: return type;
+    case "RRSP":
+      return "RRSP";
+    case "TFSA":
+      return "TFSA";
+    case "Non-registered":
+      return "Non-registered";
+    case "Company shares":
+      return "Company Shares";
+    default:
+      return type;
   }
 }
 
@@ -48,42 +53,42 @@ export async function generateInvestmentsSheet(
   data: InvestmentsSheetData,
   options: ExcelExportOptions
 ): Promise<Worksheet> {
-  const worksheet = workbook.addWorksheet('Investments', {
-    properties: { tabColor: { argb: 'FF6366F1' } }, // Indigo tab
+  const worksheet = workbook.addWorksheet("Investments", {
+    properties: { tabColor: { argb: "FF6366F1" } }, // Indigo tab
   });
 
   // Column definitions for holdings
   const holdingColumns = [
-    { header: 'Account', key: 'account', width: 20 },
-    { header: 'Type', key: 'type', width: 14 },
-    { header: 'Symbol', key: 'symbol', width: 12 },
-    { header: 'Shares', key: 'shares', width: 10 },
-    { header: 'Cost Basis', key: 'costBasis', width: 14 },
-    { header: 'Current Price', key: 'currentPrice', width: 14 },
-    { header: 'Market Value', key: 'marketValue', width: 14 },
-    { header: 'Gain/Loss', key: 'gainLoss', width: 14 },
-    { header: 'Gain %', key: 'gainPercent', width: 10 },
+    { header: "Account", key: "account", width: 20 },
+    { header: "Type", key: "type", width: 14 },
+    { header: "Symbol", key: "symbol", width: 12 },
+    { header: "Shares", key: "shares", width: 10 },
+    { header: "Cost Basis", key: "costBasis", width: 14 },
+    { header: "Current Price", key: "currentPrice", width: 14 },
+    { header: "Market Value", key: "marketValue", width: 14 },
+    { header: "Gain/Loss", key: "gainLoss", width: 14 },
+    { header: "Gain %", key: "gainPercent", width: 10 },
   ];
 
   // Create title section
   let currentRow = createTitleSection(
     worksheet,
-    'Investment Portfolio',
-    'Holdings and performance summary',
+    "Investment Portfolio",
+    "Holdings and performance summary",
     new Date()
   );
 
   // Build holdings data with account info
-  const holdingsData: InvestmentHoldingData[] = data.holdings.map(holding => {
-    const account = data.investmentAccounts.find(a => a.id === holding.accountId);
+  const holdingsData: InvestmentHoldingData[] = data.holdings.map((holding) => {
+    const account = data.investmentAccounts.find((a) => a.id === holding.accountId);
     const marketValue = holding.quantity * holding.purchasePrice; // Using purchase price as proxy for current
     const costBasis = holding.quantity * holding.purchasePrice;
     const gainLoss = 0; // Would need real market data
     const gainLossPercent = 0;
 
     return {
-      accountName: account?.name || 'Unknown',
-      accountType: account?.type || 'Non-registered',
+      accountName: account?.name || "Unknown",
+      accountType: account?.type || "Non-registered",
       symbol: holding.symbol,
       name: undefined,
       shares: holding.quantity,
@@ -103,24 +108,34 @@ export async function generateInvestmentsSheet(
 
   // Portfolio summary section
   const summaryRow = worksheet.getRow(currentRow);
-  summaryRow.getCell(1).value = 'PORTFOLIO SUMMARY';
+  summaryRow.getCell(1).value = "PORTFOLIO SUMMARY";
   summaryRow.getCell(1).font = { ...FONTS.subheader, size: 12 };
   summaryRow.getCell(1).fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'FFF3F4F6' },
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFF3F4F6" },
   };
   worksheet.mergeCells(`A${currentRow}:I${currentRow}`);
   currentRow++;
 
   const summaryData = [
-    ['Total Cost Basis:', totalCostBasis, NUMBER_FORMATS.currency, '111827'],
-    ['Total Market Value:', totalMarketValue, NUMBER_FORMATS.currency, '111827'],
-    ['Total Gain/Loss:', totalGainLoss, NUMBER_FORMATS.currency, totalGainLoss >= 0 ? '10B981' : 'EF4444'],
-    ['Total Return:', totalGainPercent / 100, NUMBER_FORMATS.percent, totalGainPercent >= 0 ? '10B981' : 'EF4444'],
+    ["Total Cost Basis:", totalCostBasis, NUMBER_FORMATS.currency, "111827"],
+    ["Total Market Value:", totalMarketValue, NUMBER_FORMATS.currency, "111827"],
+    [
+      "Total Gain/Loss:",
+      totalGainLoss,
+      NUMBER_FORMATS.currency,
+      totalGainLoss >= 0 ? "10B981" : "EF4444",
+    ],
+    [
+      "Total Return:",
+      totalGainPercent / 100,
+      NUMBER_FORMATS.percent,
+      totalGainPercent >= 0 ? "10B981" : "EF4444",
+    ],
   ];
 
-  summaryData.forEach(item => {
+  summaryData.forEach((item) => {
     const row = worksheet.getRow(currentRow);
     row.getCell(1).value = item[0];
     row.getCell(1).font = FONTS.body;
@@ -133,7 +148,7 @@ export async function generateInvestmentsSheet(
 
   // Account allocation breakdown
   const accountTotals = new Map<string, { type: string; total: number }>();
-  holdingsData.forEach(h => {
+  holdingsData.forEach((h) => {
     const existing = accountTotals.get(h.accountName);
     if (existing) {
       existing.total += h.marketValue;
@@ -144,7 +159,7 @@ export async function generateInvestmentsSheet(
 
   if (accountTotals.size > 1) {
     const allocRow = worksheet.getRow(currentRow);
-    allocRow.getCell(1).value = 'ALLOCATION BY ACCOUNT';
+    allocRow.getCell(1).value = "ALLOCATION BY ACCOUNT";
     allocRow.getCell(1).font = { ...FONTS.bodyMuted, bold: true };
     currentRow++;
 
@@ -172,7 +187,10 @@ export async function generateInvestmentsSheet(
   currentRow++;
 
   // Set column widths
-  setColumnWidths(worksheet, holdingColumns.map(c => c.width));
+  setColumnWidths(
+    worksheet,
+    holdingColumns.map((c) => c.width)
+  );
 
   // Sort holdings by market value descending
   const sortedHoldings = [...holdingsData].sort((a, b) => b.marketValue - a.marketValue);
@@ -186,7 +204,7 @@ export async function generateInvestmentsSheet(
     row.getCell(1).font = FONTS.body;
 
     // Type
-    row.getCell(2).value = getAccountTypeDisplay(holding.accountType as InvestmentAccount['type']);
+    row.getCell(2).value = getAccountTypeDisplay(holding.accountType as InvestmentAccount["type"]);
 
     // Symbol
     row.getCell(3).value = holding.symbol;
@@ -230,7 +248,7 @@ export async function generateInvestmentsSheet(
     currentRow++;
     const totalRow = worksheet.getRow(currentRow);
 
-    totalRow.getCell(1).value = 'TOTAL';
+    totalRow.getCell(1).value = "TOTAL";
     totalRow.getCell(1).font = { ...FONTS.body, bold: true };
 
     totalRow.getCell(5).value = totalCostBasis;
@@ -251,9 +269,9 @@ export async function generateInvestmentsSheet(
 
     for (let i = 1; i <= holdingColumns.length; i++) {
       totalRow.getCell(i).fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFE5E7EB' },
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "FFE5E7EB" },
       };
       totalRow.getCell(i).border = BORDERS.all;
     }
@@ -262,7 +280,8 @@ export async function generateInvestmentsSheet(
   // Note about market data
   currentRow += 2;
   const noteRow = worksheet.getRow(currentRow);
-  noteRow.getCell(1).value = 'Note: Current prices shown are purchase prices. For real-time market values, connect a market data provider.';
+  noteRow.getCell(1).value =
+    "Note: Current prices shown are purchase prices. For real-time market values, connect a market data provider.";
   noteRow.getCell(1).font = { ...FONTS.bodyMuted, italic: true };
 
   // Freeze header

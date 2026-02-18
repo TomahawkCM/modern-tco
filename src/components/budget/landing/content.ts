@@ -1,78 +1,102 @@
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
 /**
  * Hook to get landing page content with i18n support
  * Replaces the old LANDING_CONTENT constant with dynamic translations
  */
 export function useLandingContent() {
-  const t = useTranslations('landing');
+  const t = useTranslations("landing");
 
   return {
     brand: {
-      name: t('brand.name'),
-      product: t('brand.product'),
+      name: t("brand.name"),
+      product: t("brand.product"),
     },
     hero: {
-      badge: t('hero.badge'),
-      headline: t('hero.headline'),
-      subhead: t('hero.subhead'),
+      badge: t("hero.badge"),
+      headline: t("hero.headline"),
+      subhead: t("hero.subhead"),
       primaryCta: {
-        label: t('hero.primaryCta.label'),
-        href: t('hero.primaryCta.href'),
+        label: t("hero.primaryCta.label"),
+        href: t("hero.primaryCta.href"),
       },
       secondaryCta: {
-        label: t('hero.secondaryCta.label'),
-        href: t('hero.secondaryCta.href'),
+        label: t("hero.secondaryCta.label"),
+        href: t("hero.secondaryCta.href"),
       },
-      finePrint: t('hero.finePrint'),
+      finePrint: t("hero.finePrint"),
     },
     trust: [
-      { title: t('trust.0.title'), description: t('trust.0.description') },
-      { title: t('trust.1.title'), description: t('trust.1.description') },
-      { title: t('trust.2.title'), description: t('trust.2.description') },
-      { title: t('trust.3.title'), description: t('trust.3.description') },
+      { title: t("trust.0.title"), description: t("trust.0.description") },
+      { title: t("trust.1.title"), description: t("trust.1.description") },
+      { title: t("trust.2.title"), description: t("trust.2.description") },
+      { title: t("trust.3.title"), description: t("trust.3.description") },
     ],
     outcomes: [
-      { title: t('outcomes.0.title'), description: t('outcomes.0.description') },
-      { title: t('outcomes.1.title'), description: t('outcomes.1.description') },
-      { title: t('outcomes.2.title'), description: t('outcomes.2.description') },
-      { title: t('outcomes.3.title'), description: t('outcomes.3.description') },
+      { title: t("outcomes.0.title"), description: t("outcomes.0.description") },
+      { title: t("outcomes.1.title"), description: t("outcomes.1.description") },
+      { title: t("outcomes.2.title"), description: t("outcomes.2.description") },
+      { title: t("outcomes.3.title"), description: t("outcomes.3.description") },
     ],
     features: [
-      { title: t('features.0.title'), description: t('features.0.description'), href: t('features.0.href') },
-      { title: t('features.1.title'), description: t('features.1.description'), href: t('features.1.href') },
-      { title: t('features.2.title'), description: t('features.2.description'), href: t('features.2.href') },
-      { title: t('features.3.title'), description: t('features.3.description'), href: t('features.3.href') },
-      { title: t('features.4.title'), description: t('features.4.description'), href: t('features.4.href') },
-      { title: t('features.5.title'), description: t('features.5.description'), href: t('features.5.href') },
+      {
+        title: t("features.0.title"),
+        description: t("features.0.description"),
+        href: t("features.0.href"),
+      },
+      {
+        title: t("features.1.title"),
+        description: t("features.1.description"),
+        href: t("features.1.href"),
+      },
+      {
+        title: t("features.2.title"),
+        description: t("features.2.description"),
+        href: t("features.2.href"),
+      },
+      {
+        title: t("features.3.title"),
+        description: t("features.3.description"),
+        href: t("features.3.href"),
+      },
+      {
+        title: t("features.4.title"),
+        description: t("features.4.description"),
+        href: t("features.4.href"),
+      },
+      {
+        title: t("features.5.title"),
+        description: t("features.5.description"),
+        href: t("features.5.href"),
+      },
     ],
     howItWorks: [
-      { title: t('howItWorks.0.title'), description: t('howItWorks.0.description') },
-      { title: t('howItWorks.1.title'), description: t('howItWorks.1.description') },
-      { title: t('howItWorks.2.title'), description: t('howItWorks.2.description') },
+      { title: t("howItWorks.0.title"), description: t("howItWorks.0.description") },
+      { title: t("howItWorks.1.title"), description: t("howItWorks.1.description") },
+      { title: t("howItWorks.2.title"), description: t("howItWorks.2.description") },
     ],
     pricing: {
-      eyebrow: t('pricing.eyebrow'),
-      title: t('pricing.title'),
-      description: t('pricing.description'),
-      priceLabel: t('pricing.priceLabel'),
+      eyebrow: t("pricing.eyebrow"),
+      title: t("pricing.title"),
+      description: t("pricing.description"),
+      priceLabel: t("pricing.priceLabel"),
       cta: {
-        label: t('pricing.cta.label'),
-        href: t('pricing.cta.href'),
+        label: t("pricing.cta.label"),
+        href: t("pricing.cta.href"),
       },
       secondary: {
-        label: t('pricing.secondary.label'),
-        href: t('pricing.secondary.href'),
+        label: t("pricing.secondary.label"),
+        href: t("pricing.secondary.href"),
       },
-      guarantee: t('pricing.guarantee'),
+      guarantee: t("pricing.guarantee"),
     },
     faq: [
-      { q: t('faq.0.q'), a: t('faq.0.a') },
-      { q: t('faq.1.q'), a: t('faq.1.a') },
-      { q: t('faq.2.q'), a: t('faq.2.a') },
-      { q: t('faq.3.q'), a: t('faq.3.a') },
+      { q: t("faq.0.q"), a: t("faq.0.a") },
+      { q: t("faq.1.q"), a: t("faq.1.a") },
+      { q: t("faq.2.q"), a: t("faq.2.a") },
+      { q: t("faq.3.q"), a: t("faq.3.a") },
     ],
   };
 }

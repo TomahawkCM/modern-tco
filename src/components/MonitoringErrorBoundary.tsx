@@ -20,7 +20,11 @@ export class MonitoringErrorBoundary extends React.Component<Props, State> {
   override componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     trackEvent({
       type: "client_error",
-      data: { message: error.message, stack: error.stack, componentStack: errorInfo.componentStack },
+      data: {
+        message: error.message,
+        stack: error.stack,
+        componentStack: errorInfo.componentStack,
+      },
     });
   }
 
@@ -37,4 +41,3 @@ export class MonitoringErrorBoundary extends React.Component<Props, State> {
 }
 
 export default MonitoringErrorBoundary;
-

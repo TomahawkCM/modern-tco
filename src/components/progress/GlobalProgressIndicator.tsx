@@ -59,8 +59,10 @@ export function GlobalProgressIndicator({
     return (
       <div className={cn("flex items-center gap-3", className)}>
         <div className="flex items-center gap-2">
-          <TrendingUp className="h-4 w-4 text-tanium-accent" />
-          <span className="text-sm font-medium text-foreground">{progressData.overallProgress}%</span>
+          <TrendingUp className="text-tanium-accent h-4 w-4" />
+          <span className="text-sm font-medium text-foreground">
+            {progressData.overallProgress}%
+          </span>
         </div>
         <div className="w-24">
           <Progress value={progressData.overallProgress} className="h-2" />
@@ -84,7 +86,7 @@ export function GlobalProgressIndicator({
     >
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <TrendingUp className="h-5 w-5 text-tanium-accent" />
+          <TrendingUp className="text-tanium-accent h-5 w-5" />
           <div>
             <div className="text-lg font-semibold text-foreground">
               {progressData.overallProgress}% Complete

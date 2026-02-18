@@ -1,22 +1,26 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { SUPPORTED_LOCALES, LOCALE_METADATA, type SupportedLocale } from '@/i18n/config';
-import { getLocalePreferences, setLocalePreferences, type LocalePreferences } from '@/lib/locale-storage';
-import { Globe, ChevronDown } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { SUPPORTED_LOCALES, LOCALE_METADATA, type SupportedLocale } from "@/i18n/config";
+import {
+  getLocalePreferences,
+  setLocalePreferences,
+  type LocalePreferences,
+} from "@/lib/locale-storage";
+import { Globe, ChevronDown } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from "@/components/ui/dropdown-menu";
 
 interface LanguageSelectorProps {
-  variant?: 'minimal' | 'full';
+  variant?: "minimal" | "full";
   className?: string;
 }
 
-export function LanguageSelector({ variant = 'minimal', className = '' }: LanguageSelectorProps) {
+export function LanguageSelector({ variant = "minimal", className = "" }: LanguageSelectorProps) {
   const [preferences, setPreferences] = useState<LocalePreferences | null>(null);
 
   useEffect(() => {
@@ -28,9 +32,12 @@ export function LanguageSelector({ variant = 'minimal', className = '' }: Langua
       setPreferences(event.detail);
     };
 
-    window.addEventListener('localePreferencesChanged', handlePreferencesChanged as EventListener);
+    window.addEventListener("localePreferencesChanged", handlePreferencesChanged as EventListener);
     return () => {
-      window.removeEventListener('localePreferencesChanged', handlePreferencesChanged as EventListener);
+      window.removeEventListener(
+        "localePreferencesChanged",
+        handlePreferencesChanged as EventListener
+      );
     };
   }, []);
 
@@ -48,28 +55,31 @@ export function LanguageSelector({ variant = 'minimal', className = '' }: Langua
       <DropdownMenuTrigger asChild>
         <button
           className={`inline-flex items-center justify-center gap-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 ${
-            variant === 'full'
-              ? 'bg-white/5 hover:bg-white/10 border border-white/10 px-3 py-2 text-sm text-slate-300 hover:text-white'
-              : 'p-2 text-slate-400 hover:text-white hover:bg-white/5'
+            variant === "full"
+              ? "border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-300 hover:bg-white/10 hover:text-white"
+              : "p-2 text-slate-400 hover:bg-white/5 hover:text-white"
           } ${className}`}
           aria-label="Select language"
         >
           <Globe className="h-4 w-4" />
-          {variant === 'full' && (
+          {variant === "full" && (
             <>
-              <span>{currentMetadata?.label || 'Language'}</span>
+              <span>{currentMetadata?.label || "Language"}</span>
               <ChevronDown className="h-3 w-3 opacity-50" />
             </>
           )}
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="max-h-[300px] overflow-y-auto bg-slate-900 border-white/10 text-slate-200">
+      <DropdownMenuContent
+        align="end"
+        className="max-h-[300px] overflow-y-auto border-white/10 bg-slate-900 text-slate-200"
+      >
         {SUPPORTED_LOCALES.map((locale) => (
           <DropdownMenuItem
             key={locale}
             onClick={() => handleLocaleChange(locale)}
             className={`cursor-pointer focus:bg-white/10 focus:text-white ${
-              currentLocale === locale ? 'bg-teal-500/20 text-teal-400' : ''
+              currentLocale === locale ? "bg-teal-500/20 text-teal-400" : ""
             }`}
           >
             <span className="flex-1">{LOCALE_METADATA[locale].label}</span>
@@ -82,4 +92,3 @@ export function LanguageSelector({ variant = 'minimal', className = '' }: Langua
     </DropdownMenu>
   );
 }
-

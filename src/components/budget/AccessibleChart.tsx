@@ -15,12 +15,12 @@
  * - Focus management
  */
 
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import { Table, BarChart3, Eye, EyeOff } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { Button } from '@/components/ui/button';
+import { useState, useRef, useEffect } from "react";
+import { Table, BarChart3, Eye, EyeOff } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
 
 export interface ChartDataPoint {
   label: string;
@@ -37,7 +37,7 @@ interface AccessibleChartProps {
   /** Accessible description for screen readers */
   description: string;
   /** Chart type for context */
-  chartType: 'pie' | 'line' | 'area' | 'bar';
+  chartType: "pie" | "line" | "area" | "bar";
   /** Data points */
   data: ChartDataPoint[];
   /** The visual chart component */
@@ -63,7 +63,7 @@ export function AccessibleChart({
   summary,
   footer,
 }: AccessibleChartProps) {
-  const t = useTranslations('accessibleChart');
+  const t = useTranslations("accessibleChart");
   const [showTable, setShowTable] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const tableRef = useRef<HTMLDivElement>(null);
@@ -73,44 +73,48 @@ export function AccessibleChart({
   const generateSummary = (): string => {
     const parts: string[] = [];
     parts.push(`${title}. ${description}`);
-    parts.push(t('chartTypeDescription', { chartType, dataPoints: data.length }));
+    parts.push(t("chartTypeDescription", { chartType, dataPoints: data.length }));
 
     if (summary) {
       if (summary.total !== undefined) {
-        parts.push(t('summary.total', { value: summary.total }));
+        parts.push(t("summary.total", { value: summary.total }));
       }
       if (summary.average !== undefined) {
-        parts.push(t('summary.average', { value: summary.average }));
+        parts.push(t("summary.average", { value: summary.average }));
       }
       if (summary.highest) {
-        parts.push(t('summary.highest', { label: summary.highest.label, value: summary.highest.value }));
+        parts.push(
+          t("summary.highest", { label: summary.highest.label, value: summary.highest.value })
+        );
       }
       if (summary.lowest) {
-        parts.push(t('summary.lowest', { label: summary.lowest.label, value: summary.lowest.value }));
+        parts.push(
+          t("summary.lowest", { label: summary.lowest.label, value: summary.lowest.value })
+        );
       }
     }
 
-    return parts.join(' ');
+    return parts.join(" ");
   };
 
   // Keyboard navigation for data points
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
     switch (e.key) {
-      case 'ArrowRight':
-      case 'ArrowDown':
+      case "ArrowRight":
+      case "ArrowDown":
         e.preventDefault();
         setFocusedIndex((index + 1) % data.length);
         break;
-      case 'ArrowLeft':
-      case 'ArrowUp':
+      case "ArrowLeft":
+      case "ArrowUp":
         e.preventDefault();
         setFocusedIndex((index - 1 + data.length) % data.length);
         break;
-      case 'Home':
+      case "Home":
         e.preventDefault();
         setFocusedIndex(0);
         break;
-      case 'End':
+      case "End":
         e.preventDefault();
         setFocusedIndex(data.length - 1);
         break;
@@ -121,19 +125,17 @@ export function AccessibleChart({
   const toggleView = () => {
     setShowTable(!showTable);
     // Announce change to screen readers
-    const announcement = showTable
-      ? t('switchedToChart')
-      : t('switchedToTable');
+    const announcement = showTable ? t("switchedToChart") : t("switchedToTable");
     announceToScreenReader(announcement);
   };
 
   // Announce to screen readers
   const announceToScreenReader = (message: string) => {
-    const announcement = document.createElement('div');
-    announcement.setAttribute('role', 'status');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.className = 'sr-only';
+    const announcement = document.createElement("div");
+    announcement.setAttribute("role", "status");
+    announcement.setAttribute("aria-live", "polite");
+    announcement.setAttribute("aria-atomic", "true");
+    announcement.className = "sr-only";
     announcement.textContent = message;
     document.body.appendChild(announcement);
     setTimeout(() => document.body.removeChild(announcement), 1000);
@@ -148,19 +150,19 @@ export function AccessibleChart({
           variant="outline"
           size="sm"
           onClick={toggleView}
-          aria-label={showTable ? t('buttons.showChart') : t('buttons.showTable')}
+          aria-label={showTable ? t("buttons.showChart") : t("buttons.showTable")}
           aria-pressed={showTable}
           className="gap-2"
         >
           {showTable ? (
             <>
-              <BarChart3 className="w-4 h-4" aria-hidden="true" />
-              <span className="hidden sm:inline">{t('buttons.chart')}</span>
+              <BarChart3 className="h-4 w-4" aria-hidden="true" />
+              <span className="hidden sm:inline">{t("buttons.chart")}</span>
             </>
           ) : (
             <>
-              <Table className="w-4 h-4" aria-hidden="true" />
-              <span className="hidden sm:inline">{t('buttons.table')}</span>
+              <Table className="h-4 w-4" aria-hidden="true" />
+              <span className="hidden sm:inline">{t("buttons.table")}</span>
             </>
           )}
         </Button>
@@ -173,34 +175,26 @@ export function AccessibleChart({
 
       {showTable ? (
         /* Accessible Data Table */
-        <div
-          ref={tableRef}
-          role="region"
-          aria-label={`${title} data table`}
-          tabIndex={0}
-        >
-          <table className="w-full border border-gray-300 rounded-lg overflow-hidden">
+        <div ref={tableRef} role="region" aria-label={`${title} data table`} tabIndex={0}>
+          <table className="w-full overflow-hidden rounded-lg border border-gray-300">
             <caption className="sr-only">{description}</caption>
             <thead className="bg-gray-100">
               <tr>
-                <th
-                  scope="col"
-                  className="px-4 py-3 text-left text-sm font-semibold text-gray-900"
-                >
-                  {chartType === 'pie' ? t('tableHeaders.category') : t('tableHeaders.period')}
+                <th scope="col" className="px-4 py-3 text-left text-sm font-semibold text-gray-900">
+                  {chartType === "pie" ? t("tableHeaders.category") : t("tableHeaders.period")}
                 </th>
                 <th
                   scope="col"
                   className="px-4 py-3 text-right text-sm font-semibold text-gray-900"
                 >
-                  {t('tableHeaders.value')}
+                  {t("tableHeaders.value")}
                 </th>
                 {data.some((d) => d.additionalInfo) && (
                   <th
                     scope="col"
                     className="px-4 py-3 text-left text-sm font-semibold text-gray-900"
                   >
-                    {t('tableHeaders.additionalInfo')}
+                    {t("tableHeaders.additionalInfo")}
                   </th>
                 )}
               </tr>
@@ -210,7 +204,7 @@ export function AccessibleChart({
                 <tr
                   key={index}
                   className={`border-t border-gray-200 ${
-                    index === focusedIndex ? 'bg-teal-50' : 'hover:bg-gray-50'
+                    index === focusedIndex ? "bg-teal-50" : "hover:bg-gray-50"
                   }`}
                   tabIndex={0}
                   onKeyDown={(e) => handleKeyDown(e, index)}
@@ -221,7 +215,7 @@ export function AccessibleChart({
                     <div className="flex items-center gap-2">
                       {point.color && (
                         <div
-                          className="w-3 h-3 rounded-full flex-shrink-0"
+                          className="h-3 w-3 flex-shrink-0 rounded-full"
                           style={{ backgroundColor: point.color }}
                           aria-hidden="true"
                         />
@@ -229,34 +223,29 @@ export function AccessibleChart({
                       {point.label}
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-sm text-gray-900 text-right font-medium">
+                  <td className="px-4 py-3 text-right text-sm font-medium text-gray-900">
                     ${point.value.toFixed(2)}
                   </td>
                   {point.additionalInfo && (
-                    <td className="px-4 py-3 text-sm text-gray-600">
-                      {point.additionalInfo}
-                    </td>
+                    <td className="px-4 py-3 text-sm text-gray-600">{point.additionalInfo}</td>
                   )}
                 </tr>
               ))}
             </tbody>
             {summary && (
-              <tfoot className="bg-gray-50 border-t-2 border-gray-300">
+              <tfoot className="border-t-2 border-gray-300 bg-gray-50">
                 <tr>
-                  <td
-                    colSpan={data.some((d) => d.additionalInfo) ? 3 : 2}
-                    className="px-4 py-3"
-                  >
-                    <div className="text-sm text-gray-700 space-y-1">
+                  <td colSpan={data.some((d) => d.additionalInfo) ? 3 : 2} className="px-4 py-3">
+                    <div className="space-y-1 text-sm text-gray-700">
                       {summary.total !== undefined && (
                         <div className="flex justify-between">
-                          <span className="font-semibold">{t('footer.total')}</span>
+                          <span className="font-semibold">{t("footer.total")}</span>
                           <span className="font-bold">${summary.total.toFixed(2)}</span>
                         </div>
                       )}
                       {summary.average !== undefined && (
                         <div className="flex justify-between">
-                          <span>{t('footer.average')}</span>
+                          <span>{t("footer.average")}</span>
                           <span>${summary.average.toFixed(2)}</span>
                         </div>
                       )}
@@ -269,12 +258,8 @@ export function AccessibleChart({
 
           {/* Keyboard Navigation Instructions */}
           <div className="mt-2 text-xs text-gray-600">
-            <span className="sr-only">
-              {t('keyboardNav.srOnly')}
-            </span>
-            <span aria-hidden="true">
-              {t('keyboardNav.visual')}
-            </span>
+            <span className="sr-only">{t("keyboardNav.srOnly")}</span>
+            <span aria-hidden="true">{t("keyboardNav.visual")}</span>
           </div>
         </div>
       ) : (
@@ -287,10 +272,10 @@ export function AccessibleChart({
         >
           {children}
           <div id={`${id}-desc`} className="sr-only">
-            {t('chartDescription', {
+            {t("chartDescription", {
               description,
               dataPoints: data.length,
-              dataList: data.map((d) => `${d.label}: $${d.value.toFixed(2)}`).join(', '),
+              dataList: data.map((d) => `${d.label}: $${d.value.toFixed(2)}`).join(", "),
             })}
           </div>
         </div>
@@ -298,7 +283,7 @@ export function AccessibleChart({
 
       {/* Footer Notes */}
       {footer && (
-        <p className="text-xs text-gray-600 mt-2" role="note">
+        <p className="mt-2 text-xs text-gray-600" role="note">
           {footer}
         </p>
       )}

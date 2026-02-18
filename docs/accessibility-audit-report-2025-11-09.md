@@ -1,4 +1,5 @@
 # Budget App - Accessibility Audit Report
+
 **Date**: November 9, 2025
 **Auditor**: accessibility-tester
 **WCAG Version**: 2.2 Level AA
@@ -24,30 +25,30 @@
 
 ### Automated Accessibility Tests (20 tests)
 
-| Category | Passed | Failed | Status |
-|----------|--------|--------|--------|
-| WCAG 2.2 AA - All Pages | 1/8 | 7/8 | ❌ |
-| Keyboard Navigation | 3/3 | 0/3 | ✅ |
-| Screen Reader Support | 2/3 | 1/3 | ⚠️ |
-| Color Contrast | 1/1 | 0/1 | ✅ |
-| Form Accessibility | 1/1 | 0/1 | ✅ |
-| Semantic HTML | 2/2 | 0/2 | ✅ |
-| Mobile Accessibility | 2/2 | 0/2 | ✅ |
+| Category                | Passed | Failed | Status |
+| ----------------------- | ------ | ------ | ------ |
+| WCAG 2.2 AA - All Pages | 1/8    | 7/8    | ❌     |
+| Keyboard Navigation     | 3/3    | 0/3    | ✅     |
+| Screen Reader Support   | 2/3    | 1/3    | ⚠️     |
+| Color Contrast          | 1/1    | 0/1    | ✅     |
+| Form Accessibility      | 1/1    | 0/1    | ✅     |
+| Semantic HTML           | 2/2    | 0/2    | ✅     |
+| Mobile Accessibility    | 2/2    | 0/2    | ✅     |
 
 ### Keyboard Navigation Tests (10 tests)
 
-| Test | Status | Impact |
-|------|--------|--------|
-| Focus indicators visible | ✅ | - |
-| Logical tab order | ✅ | - |
-| Modal focus trap | ✅ | - |
-| Escape closes modals | ✅ | - |
-| Toggle checkboxes with Space | ✅ | - |
-| Filter transactions (keyboard only) | ✅ | - |
-| Manage budgets (keyboard only) | ✅ | - |
-| **Add transaction (keyboard only)** | ❌ | **P0 - Blocks core workflow** |
-| **Delete transaction (keyboard only)** | ❌ | **P0 - Timeout on form** |
-| **Access Import CSV (keyboard only)** | ❌ | **P1 - Import not keyboard accessible** |
+| Test                                   | Status | Impact                                  |
+| -------------------------------------- | ------ | --------------------------------------- |
+| Focus indicators visible               | ✅     | -                                       |
+| Logical tab order                      | ✅     | -                                       |
+| Modal focus trap                       | ✅     | -                                       |
+| Escape closes modals                   | ✅     | -                                       |
+| Toggle checkboxes with Space           | ✅     | -                                       |
+| Filter transactions (keyboard only)    | ✅     | -                                       |
+| Manage budgets (keyboard only)         | ✅     | -                                       |
+| **Add transaction (keyboard only)**    | ❌     | **P0 - Blocks core workflow**           |
+| **Delete transaction (keyboard only)** | ❌     | **P0 - Timeout on form**                |
+| **Access Import CSV (keyboard only)**  | ❌     | **P1 - Import not keyboard accessible** |
 
 ---
 
@@ -61,6 +62,7 @@
 **Pages Affected**: Dashboard, Transactions, Budgets, Categories, Reports, Investments, Import
 
 **Violation Details**:
+
 ```
 Violation ID: label-title-only
 Impact: critical
@@ -68,6 +70,7 @@ Tags: wcag2a, wcag412, section508.22.n
 ```
 
 **axe-core Output**:
+
 ```
 Fix any of the following:
 - Element does not have an implicit (wrapped) <label>
@@ -81,6 +84,7 @@ Fix any of the following:
 **Affected Components**:
 
 #### `SplitTransactionModal.tsx` (Lines 231-299) ❌
+
 All form fields missing proper label association:
 
 ```tsx
@@ -97,12 +101,14 @@ All form fields missing proper label association:
 ```
 
 **Missing on**:
+
 - Category select (line 234)
 - Subcategory select (line 276)
 - Amount input (line 256)
 - Notes input (line 296)
 
 #### `TransactionModal.tsx` ❌
+
 Account select dropdown missing label association:
 
 ```tsx
@@ -118,6 +124,7 @@ Account select dropdown missing label association:
 ```
 
 #### `InvestmentAccountModal.tsx` ✅
+
 **CORRECT EXAMPLE** - Properly associated labels:
 
 ```tsx
@@ -135,12 +142,14 @@ Account select dropdown missing label association:
 ```
 
 **Remediation**:
+
 1. Add unique `id` to every form input/select
 2. Add `htmlFor={id}` to corresponding labels
 3. Use pattern from `InvestmentAccountModal.tsx` (lines 100-109)
 4. Test with screen reader after fix
 
 **Example Fix for SplitTransactionModal**:
+
 ```tsx
 // ✅ FIXED
 <label htmlFor={`category-${split.id}`} className="block text-xs font-medium text-gray-700 mb-2">
@@ -165,6 +174,7 @@ Account select dropdown missing label association:
 **WCAG Criterion**: 2.1.1 Keyboard (Level A)
 
 **Failing Tests**:
+
 - `should add transaction using keyboard only` - Transaction not saved
 - `should delete transaction using keyboard only` - Timeout on form
 - `should access import CSV using keyboard only` - Import button not focusable
@@ -188,23 +198,24 @@ Account select dropdown missing label association:
 **Actual**: 0 `.sr-only` labels found
 
 **Current Code** (Transactions list):
+
 ```tsx
 // ❌ MISSING screen reader context
-<div className="text-green-600 font-semibold">
-  +${amount.toFixed(2)}
-</div>
+<div className="font-semibold text-green-600">+${amount.toFixed(2)}</div>
 ```
 
 **Recommended Fix**:
+
 ```tsx
 // ✅ ADD screen reader label
-<div className="text-green-600 font-semibold">
+<div className="font-semibold text-green-600">
   <span className="sr-only">Income: </span>
   +${amount.toFixed(2)}
 </div>
 ```
 
 **Affected Components**:
+
 - Transaction list items (Dashboard, Transactions page)
 - Budget progress indicators
 - Report summaries
@@ -214,6 +225,7 @@ Account select dropdown missing label association:
 ## Passing Tests ✅
 
 ### Keyboard Navigation
+
 - ✅ Visible focus indicators (2px teal ring)
 - ✅ Logical tab order maintained
 - ✅ Modal focus trap working
@@ -223,18 +235,22 @@ Account select dropdown missing label association:
 - ✅ Manage budgets (keyboard only)
 
 ### Screen Reader Support
+
 - ✅ All buttons have accessible names
 - ✅ Icons hidden from screen readers (`aria-hidden="true"`)
 
 ### Color Contrast
+
 - ✅ WCAG AA 4.5:1 ratio met for all text
 - ✅ UI components meet 3:1 ratio
 
 ### Semantic HTML
+
 - ✅ Landmark regions present (`<nav>`, `<main>`)
 - ✅ Buttons are `<button>` elements (not `<div>`)
 
 ### Mobile Accessibility
+
 - ✅ Touch targets ≥44px (sampled 20 elements)
 - ✅ Bottom navigation visible and accessible
 
@@ -246,14 +262,15 @@ Account select dropdown missing label association:
 
 **Estimated Time**: 2-3 hours
 
-| Task | File | Lines | Fix |
-|------|------|-------|-----|
-| Add label associations | `SplitTransactionModal.tsx` | 231-299 | Add `id` to inputs/selects, `htmlFor` to labels |
-| Add label associations | `TransactionModal.tsx` | ~300 | Add `id` to Account select, `htmlFor` to label |
-| Re-run axe-core tests | All pages | - | Verify 0 violations |
-| Fix keyboard navigation | Test suite | - | Should pass after form fix |
+| Task                    | File                        | Lines   | Fix                                             |
+| ----------------------- | --------------------------- | ------- | ----------------------------------------------- |
+| Add label associations  | `SplitTransactionModal.tsx` | 231-299 | Add `id` to inputs/selects, `htmlFor` to labels |
+| Add label associations  | `TransactionModal.tsx`      | ~300    | Add `id` to Account select, `htmlFor` to label  |
+| Re-run axe-core tests   | All pages                   | -       | Verify 0 violations                             |
+| Fix keyboard navigation | Test suite                  | -       | Should pass after form fix                      |
 
 **Acceptance Criteria**:
+
 - ✅ All 8 pages pass axe-core WCAG 2.2 AA tests
 - ✅ `npx playwright test accessibility.spec.ts` - 20/20 passing
 - ✅ `npx playwright test keyboard-navigation.spec.ts` - 10/10 passing
@@ -262,13 +279,14 @@ Account select dropdown missing label association:
 
 **Estimated Time**: 1-2 hours
 
-| Task | File | Lines | Fix |
-|------|------|-------|-----|
-| Add sr-only labels for amounts | Transaction list components | - | Add `<span className="sr-only">Income: </span>` |
-| Add sr-only labels for budget progress | Budget components | - | Add semantic labels for progress bars |
-| Manual screen reader test | All pages | - | Test with NVDA/VoiceOver/JAWS |
+| Task                                   | File                        | Lines | Fix                                             |
+| -------------------------------------- | --------------------------- | ----- | ----------------------------------------------- |
+| Add sr-only labels for amounts         | Transaction list components | -     | Add `<span className="sr-only">Income: </span>` |
+| Add sr-only labels for budget progress | Budget components           | -     | Add semantic labels for progress bars           |
+| Manual screen reader test              | All pages                   | -     | Test with NVDA/VoiceOver/JAWS                   |
 
 **Acceptance Criteria**:
+
 - ✅ Screen reader announces "Income: $500" not just "$500"
 - ✅ Budget progress announced as "Food: $200 of $500 spent (40%)"
 
@@ -276,17 +294,18 @@ Account select dropdown missing label association:
 
 **Estimated Time**: 1 hour
 
-| Task | Output | Notes |
-|------|--------|-------|
-| Update accessibility docs | `docs/accessibility-compliance.md` | Document WCAG 2.2 AA compliance |
-| Screenshot passing Lighthouse | `docs/lighthouse-scores/` | 95+ accessibility score on all pages |
-| Create remediation tickets | Archon tasks | P0/P1 issues as separate tasks |
+| Task                          | Output                             | Notes                                |
+| ----------------------------- | ---------------------------------- | ------------------------------------ |
+| Update accessibility docs     | `docs/accessibility-compliance.md` | Document WCAG 2.2 AA compliance      |
+| Screenshot passing Lighthouse | `docs/lighthouse-scores/`          | 95+ accessibility score on all pages |
+| Create remediation tickets    | Archon tasks                       | P0/P1 issues as separate tasks       |
 
 ---
 
 ## Testing Recommendations
 
 ### Before Launch
+
 1. ✅ All axe-core tests passing (0 violations)
 2. ✅ All keyboard navigation tests passing
 3. ✅ Manual screen reader test (NVDA/VoiceOver/JAWS) on 3 core pages
@@ -294,6 +313,7 @@ Account select dropdown missing label association:
 5. ✅ UAT with 5+ seniors (including 1+ screen reader user if possible)
 
 ### Test Commands
+
 ```bash
 # Automated tests
 npx playwright test accessibility.spec.ts
@@ -311,19 +331,23 @@ npx lighthouse http://localhost:3000/budget-app --only-categories=accessibility
 ## Appendix: Full Test Output
 
 ### Accessibility Tests
+
 - **Run**: November 9, 2025 20:00 UTC
 - **Duration**: 1m 30s
 - **Command**: `npx playwright test accessibility.spec.ts --reporter=list`
 - **Results**: 12 passed, 8 failed
 
 ### Keyboard Navigation Tests
+
 - **Run**: November 9, 2025 20:00 UTC
 - **Duration**: 55.6s
 - **Command**: `npx playwright test keyboard-navigation.spec.ts --reporter=list`
 - **Results**: 7 passed, 3 failed
 
 ### Detailed Violation Logs
+
 See test-results/ directory for:
+
 - Screenshot evidence
 - Error context markdown
 - axe-core JSON reports

@@ -1,6 +1,6 @@
 # What is Tanium? A Complete Beginner's Guide
 
-*Foundation Module for Complete Beginners - No Prior Knowledge Required*
+_Foundation Module for Complete Beginners - No Prior Knowledge Required_
 
 ---
 
@@ -11,6 +11,7 @@ If you've never heard of Tanium or endpoint management before, you're in the rig
 ### Quick Overview: What You'll Learn
 
 By the end of this module, you'll understand:
+
 - What endpoint management actually means (in simple terms)
 - Why organizations desperately need these capabilities
 - How Tanium solves problems that affect millions of computers
@@ -23,11 +24,13 @@ By the end of this module, you'll understand:
 ### Imagine This Scenario
 
 You're the IT manager for a company with **5,000 employees** spread across 20 offices worldwide. Each employee has:
+
 - A laptop or desktop computer
 - Sometimes a tablet or smartphone for work
 - Access to company servers and applications
 
 **That's potentially 10,000+ devices** that need to be:
+
 - ✅ **Secure** - Protected from hackers and malware
 - ✅ **Updated** - Running the latest software versions
 - ✅ **Compliant** - Following company and legal requirements
@@ -37,17 +40,18 @@ You're the IT manager for a company with **5,000 employees** spread across 20 of
 
 **Before modern endpoint management tools like Tanium:**
 
-❌ **Slow Information**: "How many computers have outdated antivirus?" → *Wait 24-48 hours for report*
+❌ **Slow Information**: "How many computers have outdated antivirus?" → _Wait 24-48 hours for report_
 
-❌ **Manual Updates**: Update software on 5,000 computers → *Send technicians to each location*
+❌ **Manual Updates**: Update software on 5,000 computers → _Send technicians to each location_
 
-❌ **Security Blindness**: "Are we under attack?" → *Hope someone notices suspicious activity*
+❌ **Security Blindness**: "Are we under attack?" → _Hope someone notices suspicious activity_
 
-❌ **Compliance Headaches**: "Show proof all computers meet regulations" → *Weeks of manual auditing*
+❌ **Compliance Headaches**: "Show proof all computers meet regulations" → _Weeks of manual auditing_
 
 ### Real-World Impact
 
 **Without proper endpoint management:**
+
 - 🚨 **Security breaches** cost companies an average of $4.45 million
 - ⏱️ **IT teams spend 60%** of their time on repetitive manual tasks
 - 📉 **System downtime** affects employee productivity and customer service
@@ -62,6 +66,7 @@ You're the IT manager for a company with **5,000 employees** spread across 20 of
 An **endpoint** is any device that connects to your organization's network:
 
 **Common Endpoints:**
+
 - 💻 **Laptops and desktops** - Where employees do their daily work
 - 📱 **Smartphones and tablets** - Mobile devices for communication and apps
 - 🖥️ **Servers** - Powerful computers that run applications and store data
@@ -71,6 +76,7 @@ An **endpoint** is any device that connects to your organization's network:
 ### Why Endpoints Matter
 
 Think of endpoints as the "entry points" where cyber threats can enter your organization. Each endpoint is both:
+
 - A **valuable asset** that needs protection
 - A **potential vulnerability** that could be exploited
 
@@ -85,14 +91,17 @@ Think of endpoints as the "entry points" where cyber threats can enter your orga
 Tanium is an **endpoint management and security platform** that solves the problems we discussed through:
 
 #### 🚀 **Speed: 15-Second Response Time**
-- Traditional tools: *"We'll have that report ready tomorrow"*
-- Tanium: *"Here's real-time data from all 50,000 endpoints in 15 seconds"*
+
+- Traditional tools: _"We'll have that report ready tomorrow"_
+- Tanium: _"Here's real-time data from all 50,000 endpoints in 15 seconds"_
 
 #### 📊 **Scale: Millions of Endpoints**
+
 - Traditional tools: Struggle with 1,000+ endpoints
 - Tanium: Manages millions of endpoints simultaneously
 
 #### 🎯 **Accuracy: Real-Time Truth**
+
 - Traditional tools: Data is hours or days old
 - Tanium: Shows you exactly what's happening right now
 
@@ -101,56 +110,69 @@ Tanium is an **endpoint management and security platform** that solves the probl
 Tanium works through two core concepts:
 
 #### 1. **Asking Questions** 🤔
+
 Instead of waiting for reports, you ask questions and get instant answers:
-- *"Which computers are missing the latest security update?"*
-- *"Show me all endpoints with suspicious network activity"*
-- *"How much disk space is available across all servers?"*
+
+- _"Which computers are missing the latest security update?"_
+- _"Show me all endpoints with suspicious network activity"_
+- _"How much disk space is available across all servers?"_
 
 #### 2. **Taking Actions** ⚡
+
 Once you have answers, you can take immediate action:
-- *"Install the security update on all vulnerable computers"*
-- *"Isolate compromised endpoints from the network"*
-- *"Clean up disk space on servers running low"*
+
+- _"Install the security update on all vulnerable computers"_
+- _"Isolate compromised endpoints from the network"_
+- _"Clean up disk space on servers running low"_
 
 ---
 
 ## Chapter 4: Real-World Tanium Use Cases
 
 ### Scenario 1: Security Incident Response
+
 **Problem:** Suspicious file detected on one computer
-**Traditional Approach:** 
+**Traditional Approach:**
+
 - Send alert to security team
 - Manually check other computers one by one
 - Takes hours or days to assess scope
 
 **Tanium Approach:**
-- Query all endpoints in 15 seconds: *"Which computers have this suspicious file?"*
+
+- Query all endpoints in 15 seconds: _"Which computers have this suspicious file?"_
 - Instantly see: 247 out of 5,000 computers affected
-- Take action: *"Remove the malicious file from all 247 computers"*
+- Take action: _"Remove the malicious file from all 247 computers"_
 - **Result:** Threat contained in minutes, not days
 
 ### Scenario 2: Compliance Reporting
+
 **Problem:** Need to prove compliance with security regulations
 **Traditional Approach:**
+
 - Manually audit sample of computers
 - Create reports over several weeks
 - Hope the audit sample represents reality
 
 **Tanium Approach:**
-- Query: *"Show compliance status for all endpoints"*
+
+- Query: _"Show compliance status for all endpoints"_
 - Get real-time report: 98.7% compliant, 67 exceptions identified
 - Generate automated compliance reports
 - **Result:** Complete visibility in minutes with actionable remediation steps
 
 ### Scenario 3: Software Asset Management
+
 **Problem:** How many licenses of Microsoft Office do we actually need?
 **Traditional Approach:**
+
 - Guess based on purchase records
 - Manually inventory computers
 - Over-purchase licenses to be safe
 
 **Tanium Approach:**
-- Query: *"Which users actively use Microsoft Office?"*
+
+- Query: _"Which users actively use Microsoft Office?"_
 - Real-time data: 3,247 active users out of 5,000 employees
 - **Result:** Accurate license count saves hundreds of thousands of dollars
 
@@ -163,6 +185,7 @@ Once you have answers, you can take immediate action:
 A **Tanium Certified Operator (TCO)** is someone who has demonstrated expertise in:
 
 #### 🎯 **Core Competencies**
+
 1. **Asking Questions** - Crafting queries to get the information you need
 2. **Refining and Targeting** - Filtering results and targeting specific endpoint groups
 3. **Taking Action** - Safely deploying updates, patches, and remediation steps
@@ -174,16 +197,19 @@ A **Tanium Certified Operator (TCO)** is someone who has demonstrated expertise 
 **Why TCO Certification Matters:**
 
 💰 **Financial Impact**
+
 - Average TCO salary: $95,000+ annually
 - Cybersecurity roles with Tanium experience: $120,000+
 - Demand significantly exceeds supply of qualified operators
 
 🚀 **Career Advancement**
+
 - Gateway to cybersecurity, IT operations, and compliance roles
 - Valuable skill for Fortune 500 companies and government agencies
 - Professional recognition in the endpoint management field
 
 🔧 **Practical Skills**
+
 - Hands-on experience with enterprise-scale technology
 - Problem-solving with real-time data and automation
 - Understanding of cybersecurity and compliance requirements
@@ -191,12 +217,14 @@ A **Tanium Certified Operator (TCO)** is someone who has demonstrated expertise 
 ### Job Roles That Value TCO Certification
 
 **Direct Tanium Roles:**
+
 - Tanium Administrator
 - Endpoint Security Analyst
 - Tanium Engineer
 - SOC Analyst (Security Operations Center)
 
 **Related Career Paths:**
+
 - Cybersecurity Analyst
 - IT Operations Manager
 - Compliance Specialist
@@ -212,11 +240,13 @@ A **Tanium Certified Operator (TCO)** is someone who has demonstrated expertise 
 This course takes you from **zero knowledge to certification-ready** through:
 
 #### **Phase 0: Foundation** (You Are Here! 🎯)
+
 - Understanding endpoint management concepts
 - Learning Tanium platform basics
 - Building confidence with fundamental knowledge
 
 #### **Phase 1: Study Modules**
+
 - **Domain 1:** Asking Questions (22% of exam)
 - **Domain 2:** Refining Questions and Targeting (23% of exam)
 - **Domain 3:** Taking Action (15% of exam)
@@ -224,11 +254,13 @@ This course takes you from **zero knowledge to certification-ready** through:
 - **Domain 5:** Reporting and Data Export (17% of exam)
 
 #### **Phase 2: Practice Questions**
+
 - Domain-specific practice with instant feedback
 - Mixed practice simulating real exam conditions
 - Detailed explanations for every answer
 
 #### **Phase 3: Mock Examinations**
+
 - Full-length 90-minute timed exams
 - Realistic exam experience and scoring
 - Performance analysis and improvement recommendations
@@ -236,6 +268,7 @@ This course takes you from **zero knowledge to certification-ready** through:
 ### Study Time Expectations
 
 **Typical Timeline for Success:**
+
 - **Foundation Building:** 2-3 days
 - **Study Modules:** 1-2 weeks (1-2 hours daily)
 - **Practice Questions:** 3-5 days (intensive practice)
@@ -245,6 +278,7 @@ This course takes you from **zero knowledge to certification-ready** through:
 ### Success Tips for Beginners
 
 #### ✅ **Do This:**
+
 - Complete the foundation modules before jumping to practice questions
 - Take notes on unfamiliar terms (use the built-in glossary)
 - Practice regularly rather than cramming
@@ -252,6 +286,7 @@ This course takes you from **zero knowledge to certification-ready** through:
 - Celebrate small wins - learning complex technology takes time!
 
 #### ❌ **Avoid This:**
+
 - Skipping foundation content because you're eager to practice
 - Memorizing answers without understanding concepts
 - Studying only your weak areas (you need well-rounded knowledge)
@@ -266,24 +301,31 @@ This course takes you from **zero knowledge to certification-ready** through:
 **Before moving forward, make sure you understand these terms:**
 
 **📊 Endpoint**
+
 - Any device connected to the network that needs management
 
 **❓ Question**
+
 - A query you send to endpoints to gather information
 
 **🎯 Targeting**
+
 - Selecting which endpoints should receive your question or action
 
 **📦 Package**
+
 - A pre-built action that can be deployed to endpoints
 
 **👥 Computer Group**
+
 - A collection of endpoints grouped by common characteristics
 
 **🖥️ Console**
+
 - The web-based interface where you interact with Tanium
 
 **📈 Sensor**
+
 - A component that collects specific types of information from endpoints
 
 ### The Tanium Philosophy
@@ -316,6 +358,7 @@ Congratulations! You now understand:
 Remember: **Every expert was once a beginner.** You don't need to understand everything perfectly right away. The goal is to build a solid foundation that supports your learning as concepts get more complex.
 
 **Available Support:**
+
 - 📚 Interactive glossary for technical terms
 - 💡 Context-aware help throughout the platform
 - 🎯 Progress tracking to keep you motivated
@@ -341,4 +384,4 @@ Remember: **Every expert was once a beginner.** You don't need to understand eve
 
 ---
 
-*Next: [Prerequisites Knowledge Check →](../prerequisites/knowledge-check)*
+_Next: [Prerequisites Knowledge Check →](../prerequisites/knowledge-check)_

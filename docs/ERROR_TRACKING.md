@@ -7,6 +7,7 @@ The Tanium TCO LMS now includes comprehensive server-side error tracking for all
 ## Features
 
 ### 🔒 PII Masking
+
 - **Automatic Detection**: Identifies and masks sensitive data patterns including:
   - Email addresses (preserves domain for debugging)
   - IP addresses (IPv4 and IPv6)
@@ -19,6 +20,7 @@ The Tanium TCO LMS now includes comprehensive server-side error tracking for all
   - Sensitive field names (password, token, auth, etc.)
 
 ### 📊 Error Tracking
+
 - **Severity Levels**: DEBUG, INFO, WARNING, ERROR, CRITICAL
 - **Context Capture**: Request method, endpoint, headers, timing
 - **Request IDs**: Unique ID for each request for tracing
@@ -26,6 +28,7 @@ The Tanium TCO LMS now includes comprehensive server-side error tracking for all
 - **Structured Logging**: JSON format for log aggregation
 
 ### 🛡️ API Handler Wrapper
+
 - **Consistent Error Responses**: Standardized error format
 - **Automatic Error Catching**: All uncaught errors are tracked
 - **Performance Monitoring**: Tracks slow API calls (>3s)
@@ -36,28 +39,23 @@ The Tanium TCO LMS now includes comprehensive server-side error tracking for all
 ### Basic API Route with Error Tracking
 
 ```typescript
-import { NextRequest } from 'next/server';
-import { withErrorTracking, apiSuccess } from '@/lib/error-tracking';
+import { NextRequest } from "next/server";
+import { withErrorTracking, apiSuccess } from "@/lib/error-tracking";
 
 export const GET = withErrorTracking(
   async (request: NextRequest) => {
     // Your API logic here
-    return apiSuccess({ data: 'response' });
+    return apiSuccess({ data: "response" });
   },
-  { endpoint: '/api/example' }
+  { endpoint: "/api/example" }
 );
 ```
 
 ### API Route with Validation
 
 ```typescript
-import { NextRequest } from 'next/server';
-import {
-  withErrorTracking,
-  ApiError,
-  apiSuccess,
-  validateBody
-} from '@/lib/error-tracking';
+import { NextRequest } from "next/server";
+import { withErrorTracking, ApiError, apiSuccess, validateBody } from "@/lib/error-tracking";
 
 type RequestPayload = {
   name: string;
@@ -72,54 +70,55 @@ export const POST = withErrorTracking(
     const validated = validateBody<RequestPayload>(payload, {
       name: {
         required: true,
-        type: 'string',
-        validate: (v) => v.length > 0 && v.length <= 100
+        type: "string",
+        validate: (v) => v.length > 0 && v.length <= 100,
       },
       email: {
         required: true,
-        type: 'string',
-        validate: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)
-      }
+        type: "string",
+        validate: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+      },
     });
 
     // Process request
     try {
       // Your business logic here
-      return apiSuccess({ message: 'Success' });
+      return apiSuccess({ message: "Success" });
     } catch (error) {
-      throw new ApiError('Processing failed', 500, 'PROCESS_ERROR');
+      throw new ApiError("Processing failed", 500, "PROCESS_ERROR");
     }
   },
-  { endpoint: '/api/example' }
+  { endpoint: "/api/example" }
 );
 ```
 
 ### Manual Error Tracking
 
 ```typescript
-import { trackError, trackWarning, ErrorSeverity } from '@/lib/error-tracking';
+import { trackError, trackWarning, ErrorSeverity } from "@/lib/error-tracking";
 
 // Track an error
 try {
   // Some operation
 } catch (error) {
   await trackError(error, {
-    userId: 'user123',
-    endpoint: '/api/custom',
-    statusCode: 500
+    userId: "user123",
+    endpoint: "/api/custom",
+    statusCode: 500,
   });
 }
 
 // Track a warning
-await trackWarning('Slow database query', {
-  query: 'SELECT * FROM large_table',
-  duration: 5000
+await trackWarning("Slow database query", {
+  query: "SELECT * FROM large_table",
+  duration: 5000,
 });
 ```
 
 ## Response Formats
 
 ### Success Response
+
 ```json
 {
   "ok": true,
@@ -129,6 +128,7 @@ await trackWarning('Slow database query', {
 ```
 
 ### Error Response
+
 ```json
 {
   "ok": false,
@@ -139,6 +139,7 @@ await trackWarning('Slow database query', {
 ```
 
 In development, additional fields are included:
+
 - `stack`: Error stack trace
 - `code`: Error code for debugging
 
@@ -164,6 +165,7 @@ ERROR_LOG_FILE=true
 ## PII Masking Examples
 
 ### Before Masking
+
 ```json
 {
   "email": "john.doe@example.com",
@@ -174,6 +176,7 @@ ERROR_LOG_FILE=true
 ```
 
 ### After Masking
+
 ```json
 {
   "email": "j***@example.com",
@@ -214,10 +217,12 @@ The following API routes have been updated with error tracking:
 ## Monitoring
 
 ### Development
+
 - Check console for error logs
 - Optional file logging in `logs/` directory
 
 ### Production
+
 - PostHog events under `api_error` event type
 - Structured logs for aggregation services
 - Request IDs for tracing across services

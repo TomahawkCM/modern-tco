@@ -17,15 +17,18 @@
 ## Issues Resolved
 
 ### 1. Archon MCP Server (NEW INSTALLATION) → ✓
+
 **Status**: Successfully installed and connected
 **Method**: Claude CLI command (HTTP transport)
 
 **Installation Command**:
+
 ```bash
 claude mcp add --transport http archon http://localhost:8051/mcp
 ```
 
 **Configuration Details**:
+
 - **Transport**: HTTP (StreamableHTTP internally, exposed as HTTP to clients)
 - **Endpoint**: http://localhost:8051/mcp
 - **Supabase Integration**: Connected to https://qnwcwoutgarhqxlgsjzs.supabase.co
@@ -35,6 +38,7 @@ claude mcp add --transport http archon http://localhost:8051/mcp
   - `archon-server` (port 8181) - Core API
 
 **Research Path**:
+
 - Initial attempt: Manual .mcp.json configuration with SSE transport (failed)
 - User guidance: "research archon mcp with claude cli. it works i have used it before. think before coding"
 - Found correct method in Archon UI source code:
@@ -44,6 +48,7 @@ claude mcp add --transport http archon http://localhost:8051/mcp
 **Result**: ✅ Server added to `~/.claude.json` and successfully connected
 
 **Why This Works**:
+
 - Archon uses Claude CLI's HTTP transport type
 - Configuration stored in `~/.claude.json` (separate from `.mcp.json`)
 - Automatic connection management by Claude Code
@@ -52,10 +57,12 @@ claude mcp add --transport http archon http://localhost:8051/mcp
 ---
 
 ### 2. Docker MCP Server ✗ → ✓
+
 **Problem**: Package `@modelcontextprotocol/server-docker` doesn't exist (404 error)
 **Solution**: Replaced with working Python package `docker-mcp` from QuantGeekDev
 
 **Changes Made**:
+
 ```json
 // .mcp.json line 68-71
 "docker": {
@@ -65,6 +72,7 @@ claude mcp add --transport http archon http://localhost:8051/mcp
 ```
 
 **Package Details**:
+
 - **Name**: `docker-mcp`
 - **Source**: https://github.com/QuantGeekDev/docker-mcp
 - **Stars**: 407 ⭐
@@ -75,21 +83,24 @@ claude mcp add --transport http archon http://localhost:8051/mcp
 ---
 
 ### 3. Serena MCP Server ✗ → ⚠️
+
 **Problem**: Server works but takes ~2-3 seconds to initialize, exceeding default MCP connection timeout
 **Solution**: Configured extended timeouts in Claude Code settings
 
 **Changes Made**:
+
 ```json
 // ~/.claude/settings.json
 {
   "env": {
-    "BASH_DEFAULT_TIMEOUT_MS": "300000",  // 5 minutes
-    "BASH_MAX_TIMEOUT_MS": "600000"       // 10 minutes
+    "BASH_DEFAULT_TIMEOUT_MS": "300000", // 5 minutes
+    "BASH_MAX_TIMEOUT_MS": "600000" // 10 minutes
   }
 }
 ```
 
 **Why This Works**:
+
 - Serena loads LSP servers, gitignore files, and project context at startup
 - Default MCP timeout (~2 min) was too short
 - Official environment variables: `BASH_DEFAULT_TIMEOUT_MS`, `BASH_MAX_TIMEOUT_MS`
@@ -100,11 +111,13 @@ claude mcp add --transport http archon http://localhost:8051/mcp
 ## Files Modified
 
 ### 1. `~/.claude.json`
+
 - **Location**: `/home/robne/.claude.json`
 - **Change**: Archon MCP server added via `claude mcp add` CLI command
 - **Backup**: Automatic (managed by Claude CLI)
 
 ### 2. `.mcp.json`
+
 - **Location**: `/home/robne/projects/active/tanium-tco/modern-tco/.mcp.json`
 - **Changes**:
   - Schema fix: Changed line 2 from `"servers"` to `"mcpServers"`
@@ -112,6 +125,7 @@ claude mcp add --transport http archon http://localhost:8051/mcp
 - **Backup**: `config-backups/.mcp.json.backup-docker-fix-20251011_*`
 
 ### 3. `~/.claude/settings.json`
+
 - **Location**: `/home/robne/.claude/settings.json`
 - **Change**: Added `env` section with timeout configuration
 - **Backup**: `~/.claude/settings.json.backup-20251011_*`
@@ -121,6 +135,7 @@ claude mcp add --transport http archon http://localhost:8051/mcp
 ## Next Steps
 
 ### 🔄 REQUIRED: Restart Claude Code
+
 **The configuration changes will NOT take effect until Claude Code is fully restarted.**
 
 1. Exit Claude Code completely
@@ -131,6 +146,7 @@ claude mcp add --transport http archon http://localhost:8051/mcp
    ```
 
 ### ✅ Expected Results (12 Total Servers)
+
 ```
 ✅ 11 Working Servers:
 - shadcn, filesystem, claude-flow, sqlite-tanium
@@ -189,6 +205,7 @@ cp ~/.claude/settings.json.backup-20251011_* ~/.claude/settings.json
 ## Technical Details
 
 ### Archon MCP Integration Research
+
 - **Initial Approach**: Attempted manual .mcp.json configuration with SSE transport
 - **Problem**: Configuration didn't work, connection failed
 - **User Guidance**: "research archon mcp with claude cli. it works i have used it before. think before coding"
@@ -202,18 +219,21 @@ cp ~/.claude/settings.json.backup-20251011_* ~/.claude/settings.json
 - **Success**: CLI command worked immediately, added to ~/.claude.json
 
 ### Docker MCP Package Research
+
 - Searched npm registry for alternatives
 - Found `mcp-docker` published by floblf974
 - Package includes Docker instance management tools
 - 85.9 kB unpacked size, single dependency (dotenv)
 
 ### Timeout Configuration Research
+
 - GitHub issue #5615 confirmed working solution
 - Multiple users verified timeout extension works
 - Must be in `~/.claude/settings.json`, not shell environment
 - Official documentation: https://docs.anthropic.com/en/docs/claude-code/settings#environment-variables
 
 ### Serena Startup Profiling
+
 ```
 INFO  Initializing Serena MCP server
 INFO  Loading Serena configuration
@@ -239,11 +259,13 @@ INFO  Loading .gitignore files starting ...
 ## Summary
 
 **Total MCP Servers**: 12
+
 - ✅ **11 Working**: shadcn, filesystem, claude-flow, sqlite-tanium, github, firecrawl, playwright, postgresql, vibe-check, docker (fixed), context7
 - ✅ **1 Added**: archon (HTTP transport, connected to Supabase)
 - ⚠️ **1 Pending**: serena (timeout fix requires restart to test)
 
 **Key Achievements**:
+
 1. Fixed Docker MCP server by replacing with Python `docker-mcp` package
 2. Fixed critical schema error that broke all servers (`"servers"` → `"mcpServers"`)
 3. Successfully installed Archon MCP using Claude CLI (HTTP transport)

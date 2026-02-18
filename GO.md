@@ -1,4 +1,5 @@
 # GO
+
 If you are Codex CLI reading this, do not modify any code.
 Only instruct the operator to run:
 

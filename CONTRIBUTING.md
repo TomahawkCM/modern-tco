@@ -149,6 +149,7 @@ modern-tco/
 
 - **Functional Components**: Always use function components with hooks
 - **TypeScript Props**: Define prop interfaces explicitly
+
   ```tsx
   interface MyComponentProps {
     title: string;
@@ -156,9 +157,14 @@ modern-tco/
   }
 
   export function MyComponent({ title, count = 0 }: MyComponentProps) {
-    return <div>{title}: {count}</div>;
+    return (
+      <div>
+        {title}: {count}
+      </div>
+    );
   }
   ```
+
 - **Client Components**: Use `'use client'` directive when needed (state, effects, browser APIs)
 - **Server Components**: Default for data fetching, static rendering
 
@@ -166,15 +172,13 @@ modern-tco/
 
 - **Tailwind CSS**: Primary styling system
 - **Class Ordering**: Use `cn()` utility for conditional classes
-  ```tsx
-  import { cn } from '@/lib/utils';
 
-  <div className={cn(
-    "base-classes",
-    condition && "conditional-classes",
-    "more-classes"
-  )} />
+  ```tsx
+  import { cn } from "@/lib/utils";
+
+  <div className={cn("base-classes", condition && "conditional-classes", "more-classes")} />;
   ```
+
 - **Responsive**: Mobile-first breakpoints
   - `sm:` (640px), `md:` (768px), `lg:` (1024px), `xl:` (1280px)
 
@@ -217,17 +221,20 @@ chore: Update dependencies to latest versions
 ### Pull Request Process
 
 1. **Create Feature Branch**
+
    ```bash
    git checkout -b feature/my-feature
    ```
 
 2. **Make Changes & Commit**
+
    ```bash
    git add .
    git commit -m "feat: Add my feature"
    ```
 
 3. **Run Quality Checks** (before pushing)
+
    ```bash
    npm run typecheck       # TypeScript compilation
    npm run lint            # ESLint
@@ -236,6 +243,7 @@ chore: Update dependencies to latest versions
    ```
 
 4. **Push & Create PR**
+
    ```bash
    git push origin feature/my-feature
    # Create PR on GitHub with description
@@ -286,24 +294,24 @@ npm run typecheck -- --watch  # Watch mode
 **E2E Test Example** (`tests/my-feature.spec.ts`):
 
 ```typescript
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe('My Feature', () => {
+test.describe("My Feature", () => {
   test.beforeEach(async ({ page }) => {
     // Dismiss onboarding tour
     await page.addInitScript(() => {
-      localStorage.setItem('budget-app-tour-completed', 'true');
+      localStorage.setItem("budget-app-tour-completed", "true");
     });
 
-    await page.goto('/budget-app/my-feature');
-    await page.waitForLoadState('networkidle');
+    await page.goto("/budget-app/my-feature");
+    await page.waitForLoadState("networkidle");
   });
 
-  test('should do something', async ({ page }) => {
-    const button = page.getByRole('button', { name: /click me/i });
+  test("should do something", async ({ page }) => {
+    const button = page.getByRole("button", { name: /click me/i });
     await button.click();
 
-    await expect(page.locator('text=/success/i')).toBeVisible();
+    await expect(page.locator("text=/success/i")).toBeVisible();
   });
 });
 ```
@@ -311,15 +319,15 @@ test.describe('My Feature', () => {
 **Unit Test Example** (`src/lib/my-util.test.ts`):
 
 ```typescript
-import { describe, it, expect } from 'vitest';
-import { myFunction } from './my-util';
+import { describe, it, expect } from "vitest";
+import { myFunction } from "./my-util";
 
-describe('myFunction', () => {
-  it('should return correct result', () => {
+describe("myFunction", () => {
+  it("should return correct result", () => {
     expect(myFunction(1, 2)).toBe(3);
   });
 
-  it('should handle edge cases', () => {
+  it("should handle edge cases", () => {
     expect(myFunction(0, 0)).toBe(0);
   });
 });
@@ -341,6 +349,7 @@ describe('myFunction', () => {
 **Schema Location**: `src/lib/budget-db.ts`
 
 **Tables**:
+
 - `accounts` - Bank accounts
 - `transactions` - Financial transactions
 - `categories` - Transaction categories
@@ -361,12 +370,12 @@ export class BudgetDatabase extends Dexie {
   myNewTable!: Table<MyNewType>;
 
   constructor() {
-    super('HouseholdBudgetApp');
+    super("HouseholdBudgetApp");
 
     // 2. Increment version & add schema
     this.version(10).stores({
       // ... existing tables ...
-      myNewTable: 'id, field1, field2'  // Indexed fields
+      myNewTable: "id, field1, field2", // Indexed fields
     });
   }
 }

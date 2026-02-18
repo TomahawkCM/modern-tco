@@ -5,7 +5,7 @@
  * Tracks sync status, connected devices, and sync health.
  */
 
-'use client';
+"use client";
 
 import React, {
   createContext,
@@ -15,30 +15,25 @@ import React, {
   useEffect,
   useMemo,
   type ReactNode,
-} from 'react';
-import type {
-  PairedDevice,
-  VectorClock,
-  SyncEventListener,
-  SyncEvent,
-} from '@/lib/lan-sync';
-import { DeviceManager, type LocalDeviceInfo } from '@/lib/lan-sync-devices';
+} from "react";
+import type { PairedDevice, VectorClock, SyncEventListener, SyncEvent } from "@/lib/lan-sync";
+import { DeviceManager, type LocalDeviceInfo } from "@/lib/lan-sync-devices";
 import {
   EncryptedConnectionPool,
   type EncryptedSyncConnection,
-} from '@/lib/lan-sync-encrypted-connection';
+} from "@/lib/lan-sync-encrypted-connection";
 
 // ============================================================================
 // Types
 // ============================================================================
 
-export type SyncHealth = 'healthy' | 'warning' | 'error' | 'offline';
+export type SyncHealth = "healthy" | "warning" | "error" | "offline";
 export type DeviceConnectionState =
-  | 'disconnected'
-  | 'connecting'
-  | 'connected'
-  | 'syncing'
-  | 'error';
+  | "disconnected"
+  | "connecting"
+  | "connected"
+  | "syncing"
+  | "error";
 
 export interface DeviceSyncStatus {
   deviceId: string;
@@ -53,7 +48,7 @@ export interface DeviceSyncStatus {
 
 export interface SyncAlert {
   id: string;
-  type: 'error' | 'warning' | 'info' | 'success';
+  type: "error" | "warning" | "info" | "success";
   title: string;
   message: string;
   deviceId?: string;
@@ -88,22 +83,22 @@ export interface LANSyncState {
 // ============================================================================
 
 type LANSyncAction =
-  | { type: 'INITIALIZE'; localDevice: LocalDeviceInfo }
-  | { type: 'SET_ENABLED'; enabled: boolean }
-  | { type: 'SET_PAIRED_DEVICES'; devices: PairedDevice[] }
-  | { type: 'ADD_PAIRED_DEVICE'; device: PairedDevice }
-  | { type: 'REMOVE_PAIRED_DEVICE'; deviceId: string }
-  | { type: 'UPDATE_DEVICE_STATUS'; deviceId: string; status: Partial<DeviceSyncStatus> }
-  | { type: 'SET_DEVICE_CONNECTION_STATE'; deviceId: string; state: DeviceConnectionState }
-  | { type: 'UPDATE_VECTOR_CLOCK'; clock: VectorClock }
-  | { type: 'ADD_ALERT'; alert: SyncAlert }
-  | { type: 'DISMISS_ALERT'; alertId: string }
-  | { type: 'CLEAR_ALERTS' }
-  | { type: 'SET_SYNCING'; isSyncing: boolean }
-  | { type: 'SYNC_COMPLETED'; deviceId: string }
-  | { type: 'SYNC_FAILED'; deviceId: string; error: string }
-  | { type: 'SET_HEALTH'; health: SyncHealth }
-  | { type: 'SET_ERROR'; error: string | null };
+  | { type: "INITIALIZE"; localDevice: LocalDeviceInfo }
+  | { type: "SET_ENABLED"; enabled: boolean }
+  | { type: "SET_PAIRED_DEVICES"; devices: PairedDevice[] }
+  | { type: "ADD_PAIRED_DEVICE"; device: PairedDevice }
+  | { type: "REMOVE_PAIRED_DEVICE"; deviceId: string }
+  | { type: "UPDATE_DEVICE_STATUS"; deviceId: string; status: Partial<DeviceSyncStatus> }
+  | { type: "SET_DEVICE_CONNECTION_STATE"; deviceId: string; state: DeviceConnectionState }
+  | { type: "UPDATE_VECTOR_CLOCK"; clock: VectorClock }
+  | { type: "ADD_ALERT"; alert: SyncAlert }
+  | { type: "DISMISS_ALERT"; alertId: string }
+  | { type: "CLEAR_ALERTS" }
+  | { type: "SET_SYNCING"; isSyncing: boolean }
+  | { type: "SYNC_COMPLETED"; deviceId: string }
+  | { type: "SYNC_FAILED"; deviceId: string; error: string }
+  | { type: "SET_HEALTH"; health: SyncHealth }
+  | { type: "SET_ERROR"; error: string | null };
 
 // ============================================================================
 // Initial State
@@ -119,7 +114,7 @@ const initialState: LANSyncState = {
   alerts: [],
   isSyncing: false,
   lastGlobalSyncAt: null,
-  health: 'offline',
+  health: "offline",
   error: null,
 };
 
@@ -129,29 +124,29 @@ const initialState: LANSyncState = {
 
 function lanSyncReducer(state: LANSyncState, action: LANSyncAction): LANSyncState {
   switch (action.type) {
-    case 'INITIALIZE':
+    case "INITIALIZE":
       return {
         ...state,
         isInitialized: true,
         localDevice: action.localDevice,
-        health: 'healthy',
+        health: "healthy",
       };
 
-    case 'SET_ENABLED':
+    case "SET_ENABLED":
       return {
         ...state,
         isEnabled: action.enabled,
-        health: action.enabled ? state.health : 'offline',
+        health: action.enabled ? state.health : "offline",
       };
 
-    case 'SET_PAIRED_DEVICES': {
+    case "SET_PAIRED_DEVICES": {
       const newStatuses = new Map(state.deviceStatuses);
       action.devices.forEach((device) => {
         if (!newStatuses.has(device.id)) {
           newStatuses.set(device.id, {
             deviceId: device.id,
             deviceName: device.name,
-            connectionState: 'disconnected',
+            connectionState: "disconnected",
             lastSyncAt: device.lastSyncAt || null,
             pendingChanges: 0,
             isOnline: false,
@@ -165,12 +160,12 @@ function lanSyncReducer(state: LANSyncState, action: LANSyncAction): LANSyncStat
       };
     }
 
-    case 'ADD_PAIRED_DEVICE': {
+    case "ADD_PAIRED_DEVICE": {
       const newStatuses = new Map(state.deviceStatuses);
       newStatuses.set(action.device.id, {
         deviceId: action.device.id,
         deviceName: action.device.name,
-        connectionState: 'disconnected',
+        connectionState: "disconnected",
         lastSyncAt: action.device.lastSyncAt || null,
         pendingChanges: 0,
         isOnline: false,
@@ -182,7 +177,7 @@ function lanSyncReducer(state: LANSyncState, action: LANSyncAction): LANSyncStat
       };
     }
 
-    case 'REMOVE_PAIRED_DEVICE': {
+    case "REMOVE_PAIRED_DEVICE": {
       const newStatuses = new Map(state.deviceStatuses);
       newStatuses.delete(action.deviceId);
       return {
@@ -192,7 +187,7 @@ function lanSyncReducer(state: LANSyncState, action: LANSyncAction): LANSyncStat
       };
     }
 
-    case 'UPDATE_DEVICE_STATUS': {
+    case "UPDATE_DEVICE_STATUS": {
       const newStatuses = new Map(state.deviceStatuses);
       const existing = newStatuses.get(action.deviceId);
       if (existing) {
@@ -205,14 +200,14 @@ function lanSyncReducer(state: LANSyncState, action: LANSyncAction): LANSyncStat
       };
     }
 
-    case 'SET_DEVICE_CONNECTION_STATE': {
+    case "SET_DEVICE_CONNECTION_STATE": {
       const newStatuses = new Map(state.deviceStatuses);
       const existing = newStatuses.get(action.deviceId);
       if (existing) {
         newStatuses.set(action.deviceId, {
           ...existing,
           connectionState: action.state,
-          isOnline: action.state === 'connected' || action.state === 'syncing',
+          isOnline: action.state === "connected" || action.state === "syncing",
         });
       }
       return {
@@ -222,46 +217,44 @@ function lanSyncReducer(state: LANSyncState, action: LANSyncAction): LANSyncStat
       };
     }
 
-    case 'UPDATE_VECTOR_CLOCK':
+    case "UPDATE_VECTOR_CLOCK":
       return {
         ...state,
         vectorClock: action.clock,
       };
 
-    case 'ADD_ALERT':
+    case "ADD_ALERT":
       return {
         ...state,
         alerts: [action.alert, ...state.alerts].slice(0, 50), // Keep last 50 alerts
       };
 
-    case 'DISMISS_ALERT':
+    case "DISMISS_ALERT":
       return {
         ...state,
-        alerts: state.alerts.map((a) =>
-          a.id === action.alertId ? { ...a, dismissed: true } : a
-        ),
+        alerts: state.alerts.map((a) => (a.id === action.alertId ? { ...a, dismissed: true } : a)),
       };
 
-    case 'CLEAR_ALERTS':
+    case "CLEAR_ALERTS":
       return {
         ...state,
         alerts: [],
       };
 
-    case 'SET_SYNCING':
+    case "SET_SYNCING":
       return {
         ...state,
         isSyncing: action.isSyncing,
       };
 
-    case 'SYNC_COMPLETED': {
+    case "SYNC_COMPLETED": {
       const newStatuses = new Map(state.deviceStatuses);
       const existing = newStatuses.get(action.deviceId);
       if (existing) {
         newStatuses.set(action.deviceId, {
           ...existing,
           lastSyncAt: new Date(),
-          connectionState: 'connected',
+          connectionState: "connected",
           lastError: undefined,
           lastErrorAt: undefined,
         });
@@ -271,17 +264,17 @@ function lanSyncReducer(state: LANSyncState, action: LANSyncAction): LANSyncStat
         deviceStatuses: newStatuses,
         lastGlobalSyncAt: new Date(),
         isSyncing: false,
-        health: 'healthy',
+        health: "healthy",
       };
     }
 
-    case 'SYNC_FAILED': {
+    case "SYNC_FAILED": {
       const newStatuses = new Map(state.deviceStatuses);
       const existing = newStatuses.get(action.deviceId);
       if (existing) {
         newStatuses.set(action.deviceId, {
           ...existing,
-          connectionState: 'error',
+          connectionState: "error",
           lastError: action.error,
           lastErrorAt: new Date(),
         });
@@ -294,17 +287,17 @@ function lanSyncReducer(state: LANSyncState, action: LANSyncAction): LANSyncStat
       };
     }
 
-    case 'SET_HEALTH':
+    case "SET_HEALTH":
       return {
         ...state,
         health: action.health,
       };
 
-    case 'SET_ERROR':
+    case "SET_ERROR":
       return {
         ...state,
         error: action.error,
-        health: action.error ? 'error' : state.health,
+        health: action.error ? "error" : state.health,
       };
 
     default:
@@ -318,16 +311,16 @@ function lanSyncReducer(state: LANSyncState, action: LANSyncAction): LANSyncStat
 
 function calculateHealth(deviceStatuses: Map<string, DeviceSyncStatus>): SyncHealth {
   const statuses = Array.from(deviceStatuses.values());
-  if (statuses.length === 0) return 'offline';
+  if (statuses.length === 0) return "offline";
 
-  const hasError = statuses.some((s) => s.connectionState === 'error');
+  const hasError = statuses.some((s) => s.connectionState === "error");
   const allOffline = statuses.every((s) => !s.isOnline);
   const someOffline = statuses.some((s) => !s.isOnline);
 
-  if (hasError) return 'error';
-  if (allOffline) return 'offline';
-  if (someOffline) return 'warning';
-  return 'healthy';
+  if (hasError) return "error";
+  if (allOffline) return "offline";
+  if (someOffline) return "warning";
+  return "healthy";
 }
 
 function generateAlertId(): string {
@@ -392,11 +385,11 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
     try {
       // Get or create local device
       const localDevice = await deviceManager.getOrCreateLocalDevice();
-      dispatch({ type: 'INITIALIZE', localDevice });
+      dispatch({ type: "INITIALIZE", localDevice });
 
       // Load paired devices
       const pairedDevices = await deviceManager.getPairedDevices();
-      dispatch({ type: 'SET_PAIRED_DEVICES', devices: pairedDevices });
+      dispatch({ type: "SET_PAIRED_DEVICES", devices: pairedDevices });
 
       // Create connection pool
       connectionPoolRef.current = new EncryptedConnectionPool(
@@ -412,8 +405,8 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
       connectionPoolRef.current.addEventListener(handleSyncEvent);
     } catch (error) {
       dispatch({
-        type: 'SET_ERROR',
-        error: error instanceof Error ? error.message : 'Failed to initialize',
+        type: "SET_ERROR",
+        error: error instanceof Error ? error.message : "Failed to initialize",
       });
     }
   }, [deviceManager, getVectorClock]);
@@ -421,19 +414,19 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
   // Handle sync events
   const handleSyncEvent: SyncEventListener = useCallback((event: SyncEvent) => {
     switch (event.type) {
-      case 'device_connected':
+      case "device_connected":
         if (event.deviceId) {
           dispatch({
-            type: 'SET_DEVICE_CONNECTION_STATE',
+            type: "SET_DEVICE_CONNECTION_STATE",
             deviceId: event.deviceId,
-            state: 'connected',
+            state: "connected",
           });
           dispatch({
-            type: 'ADD_ALERT',
+            type: "ADD_ALERT",
             alert: {
               id: generateAlertId(),
-              type: 'success',
-              title: 'Device Connected',
+              type: "success",
+              title: "Device Connected",
               message: `Connected to device`,
               deviceId: event.deviceId,
               timestamp: new Date(),
@@ -443,32 +436,32 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
         }
         break;
 
-      case 'device_disconnected':
+      case "device_disconnected":
         if (event.deviceId) {
           dispatch({
-            type: 'SET_DEVICE_CONNECTION_STATE',
+            type: "SET_DEVICE_CONNECTION_STATE",
             deviceId: event.deviceId,
-            state: 'disconnected',
+            state: "disconnected",
           });
         }
         break;
 
-      case 'sync_completed':
+      case "sync_completed":
         if (event.deviceId) {
-          dispatch({ type: 'SYNC_COMPLETED', deviceId: event.deviceId });
+          dispatch({ type: "SYNC_COMPLETED", deviceId: event.deviceId });
         }
         break;
 
-      case 'sync_failed':
+      case "sync_failed":
         if (event.deviceId) {
-          const error = (event.data as { error?: string })?.error || 'Unknown error';
-          dispatch({ type: 'SYNC_FAILED', deviceId: event.deviceId, error });
+          const error = (event.data as { error?: string })?.error || "Unknown error";
+          dispatch({ type: "SYNC_FAILED", deviceId: event.deviceId, error });
           dispatch({
-            type: 'ADD_ALERT',
+            type: "ADD_ALERT",
             alert: {
               id: generateAlertId(),
-              type: 'error',
-              title: 'Sync Failed',
+              type: "error",
+              title: "Sync Failed",
               message: error,
               deviceId: event.deviceId,
               timestamp: new Date(),
@@ -478,14 +471,14 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
         }
         break;
 
-      case 'conflict_detected':
+      case "conflict_detected":
         dispatch({
-          type: 'ADD_ALERT',
+          type: "ADD_ALERT",
           alert: {
             id: generateAlertId(),
-            type: 'warning',
-            title: 'Sync Conflict',
-            message: 'A conflict was detected and needs resolution',
+            type: "warning",
+            title: "Sync Conflict",
+            message: "A conflict was detected and needs resolution",
             deviceId: event.deviceId,
             timestamp: new Date(),
             dismissed: false,
@@ -493,14 +486,14 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
         });
         break;
 
-      case 'error':
+      case "error":
         dispatch({
-          type: 'ADD_ALERT',
+          type: "ADD_ALERT",
           alert: {
             id: generateAlertId(),
-            type: 'error',
-            title: 'Sync Error',
-            message: (event.data as { error?: string })?.error || 'An error occurred',
+            type: "error",
+            title: "Sync Error",
+            message: (event.data as { error?: string })?.error || "An error occurred",
             deviceId: event.deviceId,
             timestamp: new Date(),
             dismissed: false,
@@ -512,12 +505,12 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
 
   // Enable/disable sync
   const setEnabled = useCallback((enabled: boolean) => {
-    dispatch({ type: 'SET_ENABLED', enabled });
+    dispatch({ type: "SET_ENABLED", enabled });
   }, []);
 
   // Add device
   const addDevice = useCallback((device: PairedDevice) => {
-    dispatch({ type: 'ADD_PAIRED_DEVICE', device });
+    dispatch({ type: "ADD_PAIRED_DEVICE", device });
   }, []);
 
   // Remove device
@@ -529,7 +522,7 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
       }
       // Remove from storage
       await deviceManager.removePairedDevice(deviceId);
-      dispatch({ type: 'REMOVE_PAIRED_DEVICE', deviceId });
+      dispatch({ type: "REMOVE_PAIRED_DEVICE", deviceId });
     },
     [deviceManager]
   );
@@ -537,7 +530,7 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
   // Refresh paired devices
   const refreshPairedDevices = useCallback(async () => {
     const pairedDevices = await deviceManager.getPairedDevices();
-    dispatch({ type: 'SET_PAIRED_DEVICES', devices: pairedDevices });
+    dispatch({ type: "SET_PAIRED_DEVICES", devices: pairedDevices });
   }, [deviceManager]);
 
   // Connect to device
@@ -547,9 +540,9 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
       if (!device || !connectionPoolRef.current) return;
 
       dispatch({
-        type: 'SET_DEVICE_CONNECTION_STATE',
+        type: "SET_DEVICE_CONNECTION_STATE",
         deviceId,
-        state: 'connecting',
+        state: "connecting",
       });
 
       try {
@@ -557,15 +550,15 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
         await connectionPoolRef.current.connect(deviceId, url, device.publicKey);
 
         dispatch({
-          type: 'SET_DEVICE_CONNECTION_STATE',
+          type: "SET_DEVICE_CONNECTION_STATE",
           deviceId,
-          state: 'connected',
+          state: "connected",
         });
       } catch (error) {
         dispatch({
-          type: 'SYNC_FAILED',
+          type: "SYNC_FAILED",
           deviceId,
-          error: error instanceof Error ? error.message : 'Connection failed',
+          error: error instanceof Error ? error.message : "Connection failed",
         });
       }
     },
@@ -578,9 +571,9 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
       await connectionPoolRef.current.disconnect(deviceId);
     }
     dispatch({
-      type: 'SET_DEVICE_CONNECTION_STATE',
+      type: "SET_DEVICE_CONNECTION_STATE",
       deviceId,
-      state: 'disconnected',
+      state: "disconnected",
     });
   }, []);
 
@@ -591,37 +584,34 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
     }
     state.pairedDevices.forEach((device) => {
       dispatch({
-        type: 'SET_DEVICE_CONNECTION_STATE',
+        type: "SET_DEVICE_CONNECTION_STATE",
         deviceId: device.id,
-        state: 'disconnected',
+        state: "disconnected",
       });
     });
   }, [state.pairedDevices]);
 
   // Sync with device
-  const syncWithDevice = useCallback(
-    async (deviceId: string) => {
-      const connection = connectionPoolRef.current?.getConnection(deviceId);
-      if (!connection?.isConnected) {
-        throw new Error('Device not connected');
-      }
+  const syncWithDevice = useCallback(async (deviceId: string) => {
+    const connection = connectionPoolRef.current?.getConnection(deviceId);
+    if (!connection?.isConnected) {
+      throw new Error("Device not connected");
+    }
 
-      dispatch({
-        type: 'SET_DEVICE_CONNECTION_STATE',
-        deviceId,
-        state: 'syncing',
-      });
-      dispatch({ type: 'SET_SYNCING', isSyncing: true });
+    dispatch({
+      type: "SET_DEVICE_CONNECTION_STATE",
+      deviceId,
+      state: "syncing",
+    });
+    dispatch({ type: "SET_SYNCING", isSyncing: true });
 
-      // Actual sync will be handled by the sync engine
-      // This is a placeholder - sync engine integration will complete this
-    },
-    []
-  );
+    // Actual sync will be handled by the sync engine
+    // This is a placeholder - sync engine integration will complete this
+  }, []);
 
   // Sync all
   const syncAll = useCallback(async () => {
-    dispatch({ type: 'SET_SYNCING', isSyncing: true });
+    dispatch({ type: "SET_SYNCING", isSyncing: true });
 
     const activeConnections = connectionPoolRef.current?.getActiveConnections() || [];
     await Promise.all(
@@ -634,17 +624,17 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
       })
     );
 
-    dispatch({ type: 'SET_SYNCING', isSyncing: false });
+    dispatch({ type: "SET_SYNCING", isSyncing: false });
   }, [syncWithDevice]);
 
   // Dismiss alert
   const dismissAlert = useCallback((alertId: string) => {
-    dispatch({ type: 'DISMISS_ALERT', alertId });
+    dispatch({ type: "DISMISS_ALERT", alertId });
   }, []);
 
   // Clear alerts
   const clearAlerts = useCallback(() => {
-    dispatch({ type: 'CLEAR_ALERTS' });
+    dispatch({ type: "CLEAR_ALERTS" });
   }, []);
 
   // Get stats
@@ -702,7 +692,7 @@ export function LANSyncProvider({ children, autoInit = true }: LANSyncProviderPr
 export function useLANSync(): LANSyncContextValue {
   const context = useContext(LANSyncContext);
   if (!context) {
-    throw new Error('useLANSync must be used within a LANSyncProvider');
+    throw new Error("useLANSync must be used within a LANSyncProvider");
   }
   return context;
 }

@@ -4,7 +4,7 @@
  * See docs/BUDGET_FILE_FORMAT.md for specification.
  */
 
-import { db } from '@/lib/budget-db';
+import { db } from "@/lib/budget-db";
 import {
   type BudgetFile,
   type BudgetFileMetadata,
@@ -33,7 +33,7 @@ import {
   APP_VERSION,
   DEFAULT_SETTINGS,
   DEFAULT_PREFERENCES,
-} from './types';
+} from "./types";
 
 /**
  * Calculate SHA-256 checksum of data
@@ -43,9 +43,9 @@ async function calculateChecksum(data: object): Promise<string> {
   const encoder = new TextEncoder();
   const dataBuffer = encoder.encode(dataString);
 
-  const hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", dataBuffer);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
 
   return `sha256:${hashHex}`;
 }
@@ -71,7 +71,7 @@ async function blobToBase64(blob: Blob): Promise<string> {
     reader.onloadend = () => {
       const base64 = reader.result as string;
       // Remove data URL prefix (e.g., "data:image/jpeg;base64,")
-      const base64Data = base64.split(',')[1] || base64;
+      const base64Data = base64.split(",")[1] || base64;
       resolve(base64Data);
     };
     reader.onerror = reject;
@@ -84,7 +84,7 @@ async function blobToBase64(blob: Blob): Promise<string> {
  */
 async function exportAccounts(): Promise<AccountExport[]> {
   const accounts = await db.accounts.toArray();
-  return accounts.map(account => ({
+  return accounts.map((account) => ({
     id: account.id,
     name: account.name,
     type: account.type,
@@ -101,7 +101,7 @@ async function exportAccounts(): Promise<AccountExport[]> {
  */
 async function exportTransactions(): Promise<TransactionExport[]> {
   const transactions = await db.transactions.toArray();
-  return transactions.map(tx => ({
+  return transactions.map((tx) => ({
     id: tx.id,
     accountId: tx.accountId,
     date: toISOString(tx.date) || new Date().toISOString(),
@@ -135,7 +135,7 @@ async function exportTransactions(): Promise<TransactionExport[]> {
  */
 async function exportCategories(): Promise<CategoryExport[]> {
   const categories = await db.categories.toArray();
-  return categories.map(cat => ({
+  return categories.map((cat) => ({
     id: cat.id,
     name: cat.name,
     type: cat.type,
@@ -155,7 +155,7 @@ async function exportCategories(): Promise<CategoryExport[]> {
  */
 async function exportBudgets(): Promise<BudgetExportItem[]> {
   const budgets = await db.budgets.toArray();
-  return budgets.map(budget => ({
+  return budgets.map((budget) => ({
     id: budget.id,
     categoryId: budget.categoryId,
     amount: budget.amount,
@@ -165,7 +165,7 @@ async function exportBudgets(): Promise<BudgetExportItem[]> {
     rollover: budget.rollover,
     // Multi-Profile Support
     ownerId: budget.ownerId ?? null,
-    visibility: budget.visibility ?? 'shared',
+    visibility: budget.visibility ?? "shared",
     createdAt: toISOString(budget.createdAt) || new Date().toISOString(),
     updatedAt: toISOString(budget.updatedAt) || new Date().toISOString(),
   }));
@@ -176,7 +176,7 @@ async function exportBudgets(): Promise<BudgetExportItem[]> {
  */
 async function exportGoals(): Promise<GoalExport[]> {
   const goals = await db.futurePurchases.toArray();
-  return goals.map(goal => ({
+  return goals.map((goal) => ({
     id: goal.id,
     name: goal.name,
     description: goal.description,
@@ -198,7 +198,7 @@ async function exportGoals(): Promise<GoalExport[]> {
  */
 async function exportLoans(): Promise<LoanExport[]> {
   const loans = await db.loans.toArray();
-  return loans.map(loan => ({
+  return loans.map((loan) => ({
     id: loan.id,
     name: loan.name,
     type: loan.type,
@@ -235,7 +235,7 @@ async function exportLoans(): Promise<LoanExport[]> {
  */
 async function exportLoanPayments(): Promise<LoanPaymentExport[]> {
   const payments = await db.loanPayments.toArray();
-  return payments.map(payment => ({
+  return payments.map((payment) => ({
     id: payment.id,
     loanId: payment.loanId,
     date: toISOString(payment.date) || new Date().toISOString(),
@@ -256,7 +256,7 @@ async function exportLoanPayments(): Promise<LoanPaymentExport[]> {
  */
 async function exportSubscriptions(): Promise<SubscriptionExport[]> {
   const subscriptions = await db.subscriptions.toArray();
-  return subscriptions.map(sub => ({
+  return subscriptions.map((sub) => ({
     id: sub.id,
     name: sub.name,
     description: sub.description,
@@ -288,7 +288,7 @@ async function exportSubscriptions(): Promise<SubscriptionExport[]> {
  */
 async function exportExcludedSubscriptions(): Promise<ExcludedSubscriptionExport[]> {
   const excluded = await db.excludedSubscriptions.toArray();
-  return excluded.map(ex => ({
+  return excluded.map((ex) => ({
     id: ex.id,
     merchantToken: ex.merchantToken,
     merchantName: ex.merchantName,
@@ -302,7 +302,7 @@ async function exportExcludedSubscriptions(): Promise<ExcludedSubscriptionExport
  */
 async function exportInvestmentAccounts(): Promise<InvestmentAccountExport[]> {
   const accounts = await db.investmentAccounts.toArray();
-  return accounts.map(acc => ({
+  return accounts.map((acc) => ({
     id: acc.id,
     name: acc.name,
     type: acc.type,
@@ -318,7 +318,7 @@ async function exportInvestmentAccounts(): Promise<InvestmentAccountExport[]> {
  */
 async function exportHoldings(): Promise<HoldingExport[]> {
   const holdings = await db.holdings.toArray();
-  return holdings.map(holding => ({
+  return holdings.map((holding) => ({
     id: holding.id,
     accountId: holding.accountId,
     symbol: holding.symbol,
@@ -336,7 +336,7 @@ async function exportHoldings(): Promise<HoldingExport[]> {
  */
 async function exportRetirementPlans(): Promise<RetirementPlanExport[]> {
   const plans = await db.retirementPlans.toArray();
-  return plans.map(plan => ({
+  return plans.map((plan) => ({
     id: plan.id,
     name: plan.name,
     currentAge: plan.currentAge,
@@ -369,7 +369,7 @@ async function exportRetirementPlans(): Promise<RetirementPlanExport[]> {
  */
 async function exportImportMappings(): Promise<ImportMappingExport[]> {
   const mappings = await db.importMappings.toArray();
-  return mappings.map(mapping => ({
+  return mappings.map((mapping) => ({
     id: mapping.id,
     institution: mapping.institution,
     accountId: mapping.accountId,
@@ -388,7 +388,7 @@ async function exportImportMappings(): Promise<ImportMappingExport[]> {
  */
 async function exportImportHistory(): Promise<ImportHistoryExport[]> {
   const history = await db.importHistory.toArray();
-  return history.map(record => ({
+  return history.map((record) => ({
     id: record.id,
     fileName: record.fileName,
     fileFormat: record.fileFormat,
@@ -408,7 +408,7 @@ async function exportReceipts(): Promise<ReceiptExport[]> {
   const receipts = await db.receipts.toArray();
 
   return Promise.all(
-    receipts.map(async receipt => ({
+    receipts.map(async (receipt) => ({
       id: receipt.id,
       transactionId: receipt.transactionId,
       filename: receipt.filename,
@@ -417,15 +417,17 @@ async function exportReceipts(): Promise<ReceiptExport[]> {
       thumbnailData: receipt.thumbnail ? await blobToBase64(receipt.thumbnail) : undefined,
       fileSize: receipt.fileSize,
       uploadedAt: toISOString(receipt.uploadedAt) || new Date().toISOString(),
-      metadata: receipt.metadata ? {
-        width: receipt.metadata.width,
-        height: receipt.metadata.height,
-        pageCount: receipt.metadata.pageCount,
-        ocrText: receipt.metadata.ocrText,
-        extractedAmount: receipt.metadata.extractedAmount,
-        extractedDate: toISOString(receipt.metadata.extractedDate) || undefined,
-        extractedMerchant: receipt.metadata.extractedMerchant,
-      } : undefined,
+      metadata: receipt.metadata
+        ? {
+            width: receipt.metadata.width,
+            height: receipt.metadata.height,
+            pageCount: receipt.metadata.pageCount,
+            ocrText: receipt.metadata.ocrText,
+            extractedAmount: receipt.metadata.extractedAmount,
+            extractedDate: toISOString(receipt.metadata.extractedDate) || undefined,
+            extractedMerchant: receipt.metadata.extractedMerchant,
+          }
+        : undefined,
     }))
   );
 }
@@ -434,10 +436,10 @@ async function exportReceipts(): Promise<ReceiptExport[]> {
  * Get user settings from localStorage
  */
 function getSettings(): SettingsExport {
-  if (typeof window === 'undefined') return DEFAULT_SETTINGS;
+  if (typeof window === "undefined") return DEFAULT_SETTINGS;
 
   try {
-    const storedSettings = localStorage.getItem('budget-settings');
+    const storedSettings = localStorage.getItem("budget-settings");
     if (storedSettings) {
       return { ...DEFAULT_SETTINGS, ...JSON.parse(storedSettings) };
     }
@@ -452,10 +454,10 @@ function getSettings(): SettingsExport {
  * Get user preferences from localStorage
  */
 function getPreferences(): PreferencesExport {
-  if (typeof window === 'undefined') return DEFAULT_PREFERENCES;
+  if (typeof window === "undefined") return DEFAULT_PREFERENCES;
 
   try {
-    const storedPrefs = localStorage.getItem('budget-preferences');
+    const storedPrefs = localStorage.getItem("budget-preferences");
     if (storedPrefs) {
       return { ...DEFAULT_PREFERENCES, ...JSON.parse(storedPrefs) };
     }
@@ -472,7 +474,7 @@ function getPreferences(): PreferencesExport {
  */
 async function exportProfiles(): Promise<ProfileExport[]> {
   const profiles = await db.profiles.toArray();
-  return profiles.map(profile => ({
+  return profiles.map((profile) => ({
     id: profile.id,
     name: profile.name,
     isDefault: profile.isDefault,
@@ -490,7 +492,7 @@ async function exportProfiles(): Promise<ProfileExport[]> {
  */
 async function exportActivityLog(): Promise<ActivityLogExport[]> {
   const entries = await db.activityLog.toArray();
-  return entries.map(entry => ({
+  return entries.map((entry) => ({
     id: entry.id,
     profileId: entry.profileId,
     profileName: entry.profileName,
@@ -506,9 +508,7 @@ async function exportActivityLog(): Promise<ActivityLogExport[]> {
 /**
  * Main export function - gathers all data and creates .budget file structure
  */
-export async function exportBudgetData(
-  options: ExportOptions = {}
-): Promise<BudgetFile> {
+export async function exportBudgetData(options: ExportOptions = {}): Promise<BudgetFile> {
   const {
     includeReceipts = false,
     includeInvestments = true,
@@ -612,22 +612,20 @@ export async function exportBudgetData(
 /**
  * Export to downloadable file
  */
-export async function downloadBudgetExport(
-  options: ExportOptions = {}
-): Promise<void> {
+export async function downloadBudgetExport(options: ExportOptions = {}): Promise<void> {
   const budgetFile = await exportBudgetData(options);
 
   // Generate filename
-  const dateStr = new Date().toISOString().split('T')[0];
+  const dateStr = new Date().toISOString().split("T")[0];
   const filename = options.filename || `budget-export-${dateStr}.budget`;
 
   // Convert to JSON
   const jsonString = JSON.stringify(budgetFile, null, 2);
-  const blob = new Blob([jsonString], { type: 'application/json' });
+  const blob = new Blob([jsonString], { type: "application/json" });
 
   // Create download link
   const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = url;
   link.download = filename;
   document.body.appendChild(link);

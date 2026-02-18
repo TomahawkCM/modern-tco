@@ -1,23 +1,23 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-import { Difficulty, type Question, QuestionCategory, TCODomain } from '@/types/exam';
+import { Difficulty, type Question, QuestionCategory, TCODomain } from "@/types/exam";
 
 // Temporary fallback questions for testing
 const fallbackQuestions: Question[] = [
   {
-    id: 'test-001',
+    id: "test-001",
     domain: TCODomain.ASKING_QUESTIONS,
     category: QuestionCategory.PLATFORM_FUNDAMENTALS,
     difficulty: Difficulty.INTERMEDIATE,
-    question: 'What is the primary purpose of the Tanium platform?',
+    question: "What is the primary purpose of the Tanium platform?",
     choices: [
-      { id: 'a', text: 'Network monitoring' },
-      { id: 'b', text: 'Endpoint security and management' },
-      { id: 'c', text: 'Web application development' },
-      { id: 'd', text: 'Database management' },
+      { id: "a", text: "Network monitoring" },
+      { id: "b", text: "Endpoint security and management" },
+      { id: "c", text: "Web application development" },
+      { id: "d", text: "Database management" },
     ],
-    correctAnswerId: 'b',
-    explanation: 'Tanium is primarily focused on endpoint security and management at scale.',
-    tags: ['fundamentals', 'platform'],
+    correctAnswerId: "b",
+    explanation: "Tanium is primarily focused on endpoint security and management at scale.",
+    tags: ["fundamentals", "platform"],
   },
 ];
 
@@ -34,7 +34,7 @@ async function loadFullQuestionBank() {
   try {
     // Attempt to load full question banks with proper ES module import
     const { tcoAlignedQuestionBank, questionBankMetadata: tcoMetadata } = await import(
-      './tco-aligned-questions'
+      "./tco-aligned-questions"
     );
 
     if (
@@ -55,11 +55,11 @@ async function loadFullQuestionBank() {
       console.log(`Loaded ${questionBank.length} questions successfully`);
       return true;
     } else {
-      throw new Error('TCO aligned questions not available or empty');
+      throw new Error("TCO aligned questions not available or empty");
     }
   } catch (error) {
     const e = error as any;
-    console.log('Using fallback questions for testing:', e?.message ?? 'Unknown error');
+    console.log("Using fallback questions for testing:", e?.message ?? "Unknown error");
     // Keep fallback questions and metadata as defined above
     return false;
   }
@@ -67,7 +67,7 @@ async function loadFullQuestionBank() {
 
 // Try to load synchronously with fallback to tco-aligned-questions
 try {
-  const { tcoAlignedQuestionBank } = require('./tco-aligned-questions');
+  const { tcoAlignedQuestionBank } = require("./tco-aligned-questions");
   if (
     tcoAlignedQuestionBank &&
     Array.isArray(tcoAlignedQuestionBank) &&
@@ -84,7 +84,7 @@ try {
     console.log(`Loaded ${questionBank.length} questions from tco-aligned-questions`);
   }
 } catch (error) {
-  console.log('Could not load tco-aligned-questions synchronously, using fallback');
+  console.log("Could not load tco-aligned-questions synchronously, using fallback");
 }
 
 // Combined metadata for the complete question bank

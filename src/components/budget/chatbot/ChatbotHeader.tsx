@@ -9,10 +9,11 @@
  * - WCAG 2.2 AA compliant
  */
 
-'use client';
+"use client";
 
-import React from 'react';
-import { X } from 'lucide-react';
+import React from "react";
+import { X } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface ChatbotHeaderProps {
   onClose: () => void;
@@ -21,8 +22,9 @@ interface ChatbotHeaderProps {
 
 export const ChatbotHeader: React.FC<ChatbotHeaderProps> = ({
   onClose,
-  title = 'Budget Assistant',
+  title = "Budget Assistant",
 }) => {
+  const tAria = useTranslations("aria");
   return (
     <header className="flex h-16 shrink-0 items-center justify-between border-b border-gray-200 bg-white px-4 sm:h-14 sm:px-4">
       <h2 id="chatbot-title" className="text-lg font-semibold text-gray-900">
@@ -31,7 +33,7 @@ export const ChatbotHeader: React.FC<ChatbotHeaderProps> = ({
 
       <button
         onClick={onClose}
-        aria-label="Close chatbot"
+        aria-label={tAria("closeChatbot")}
         className="flex h-8 w-8 items-center justify-center rounded-md text-gray-500 transition-all hover:bg-gray-100 hover:text-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
         type="button"
       >

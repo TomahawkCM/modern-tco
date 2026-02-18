@@ -4,7 +4,7 @@
  */
 
 import type { TCODomain } from "./exam";
-import type React from 'react';
+import type React from "react";
 
 // Core lab exercise types
 export interface LabExercise {

@@ -18,14 +18,17 @@
 ## ✅ Well-Optimized Forms (No Changes Needed)
 
 ### 1. TransactionModal.tsx
+
 **Status**: ✅ **EXCELLENT** - Already follows all best practices
 
 **Good Patterns Found**:
+
 - Amount field: `type="number"` + `inputMode="decimal"` + `step="0.01"` (line 348-358)
 - Date field: `type="date"` for native date picker (line 364-370)
 - Account select: Native `<select>` element (line 507-517)
 
 **Example**:
+
 ```typescript
 <input
   type="number"
@@ -40,24 +43,30 @@
 ```
 
 ### 2. InvestmentAccountModal.tsx
+
 **Status**: ✅ **CORRECT** - All text fields use appropriate types
 
 **Fields**:
+
 - Account name: `type="text"` ✅ (line 87-95)
 - Institution: `type="text"` ✅ (line 129-136)
 - Account number: `type="text"` ✅ (line 144-151)
 - Account type: Native `<select>` ✅ (line 103-115)
 
 ### 3. Import Page
+
 **Status**: ✅ **CORRECT** - Only text input for natural language
 
 **Fields**:
+
 - Natural language input: `type="text"` ✅ (line 473-477)
 
 ### 4. Categories Page
+
 **Status**: ✅ **CORRECT** - All text fields
 
 **Fields**:
+
 - Category name: `type="text"` ✅ (line 176-180)
 - Subcategories: `type="text"` ✅ (line 221-225)
 
@@ -68,10 +77,12 @@
 ### 1. HoldingModal.tsx (2 inputs)
 
 **Issues**:
+
 - **Line 192-202**: Quantity field missing `inputMode="decimal"`
 - **Line 212-222**: Purchase price field missing `inputMode="decimal"`
 
 **Current Code**:
+
 ```typescript
 // Quantity field (NEEDS FIX)
 <input
@@ -103,9 +114,10 @@
 ```
 
 **Recommended Fix**:
+
 ```typescript
 // Add to both inputs:
-inputMode="decimal"
+inputMode = "decimal";
 ```
 
 **Already Good**: Date field uses `type="date"` ✅ (line 231-238)
@@ -115,9 +127,11 @@ inputMode="decimal"
 ### 2. SplitTransactionModal.tsx (1 input)
 
 **Issue**:
+
 - **Line 258-269**: Amount field missing `inputMode="decimal"`
 
 **Current Code**:
+
 ```typescript
 <input
   id={`split-amount-${split.id}`}
@@ -134,8 +148,9 @@ inputMode="decimal"
 ```
 
 **Recommended Fix**:
+
 ```typescript
-inputMode="decimal"
+inputMode = "decimal";
 ```
 
 ---
@@ -143,11 +158,13 @@ inputMode="decimal"
 ### 3. Planning Future Page (3 inputs)
 
 **Issues**:
+
 - **Line 486**: Target amount missing `inputMode="decimal"`
 - **Line 505**: Current savings missing `inputMode="decimal"`
 - **Line 525**: Monthly contribution missing `inputMode="decimal"`
 
 **Current Code**:
+
 ```typescript
 // Target amount (NEEDS FIX)
 <input
@@ -164,11 +181,13 @@ inputMode="decimal"
 ```
 
 **Recommended Fix**:
+
 ```typescript
-inputMode="decimal"  // Add to all 3 currency inputs
+inputMode = "decimal"; // Add to all 3 currency inputs
 ```
 
 **Already Good**:
+
 - Name field: `type="text"` ✅ (line 456)
 - Target date: `type="date"` ✅ (line 541)
 
@@ -177,9 +196,11 @@ inputMode="decimal"  // Add to all 3 currency inputs
 ### 4. Settings Page (1 input)
 
 **Issue**:
+
 - **Line 466**: Account balance missing `inputMode="decimal"`
 
 **Current Code**:
+
 ```typescript
 <input
   type="number"
@@ -193,11 +214,13 @@ inputMode="decimal"  // Add to all 3 currency inputs
 ```
 
 **Recommended Fix**:
+
 ```typescript
-inputMode="decimal"
+inputMode = "decimal";
 ```
 
 **Already Good**:
+
 - Account name: `type="text"` ✅
 - Institution: `type="text"` ✅
 - Category name: `type="text"` ✅
@@ -208,6 +231,7 @@ inputMode="decimal"
 ### 5. Planning Retirement Page (14 inputs) 🚨 HIGHEST PRIORITY
 
 **Currency Inputs (8 fields)** - Need `inputMode="decimal"`:
+
 - **Line 349**: Current savings
 - **Line 366**: Monthly contribution
 - **Line 416**: Desired monthly income
@@ -221,16 +245,19 @@ inputMode="decimal"
 - **Line 635**: Employer pension monthly
 
 **Age Inputs (3 fields)** - Need `inputMode="numeric"`:
+
 - **Line 318**: Current age
 - **Line 332**: Retirement age
 - **Line 431**: Life expectancy
 
 **Percentage Inputs (3 fields)** - Need `inputMode="decimal"`:
+
 - **Line 382**: Expected return (%)
 - **Line 397**: Inflation rate (%)
 - **Line 592**: Company shares growth rate (%)
 
 **Current Code Pattern**:
+
 ```typescript
 // Currency fields (NEED FIX)
 <input
@@ -270,32 +297,34 @@ inputMode="decimal"
 ```
 
 **Recommended Fix**:
+
 ```typescript
 // For currency and percentage inputs:
-inputMode="decimal"
+inputMode = "decimal";
 
 // For age inputs (whole numbers):
-inputMode="numeric"
+inputMode = "numeric";
 ```
 
 ---
 
 ## 📊 Summary of Changes Needed
 
-| File | Missing inputMode | Input Type | Priority |
-|------|-------------------|------------|----------|
-| **HoldingModal.tsx** | 2 | Currency (decimal) | HIGH |
-| **SplitTransactionModal.tsx** | 1 | Currency (decimal) | HIGH |
-| **Planning Future page** | 3 | Currency (decimal) | HIGH |
-| **Settings page** | 1 | Currency (decimal) | MEDIUM |
-| **Planning Retirement page** | 11 currency<br>3 age<br>3 percentage | decimal<br>numeric<br>decimal | **CRITICAL** |
-| **TOTAL** | **21 inputs** | - | - |
+| File                          | Missing inputMode                    | Input Type                    | Priority     |
+| ----------------------------- | ------------------------------------ | ----------------------------- | ------------ |
+| **HoldingModal.tsx**          | 2                                    | Currency (decimal)            | HIGH         |
+| **SplitTransactionModal.tsx** | 1                                    | Currency (decimal)            | HIGH         |
+| **Planning Future page**      | 3                                    | Currency (decimal)            | HIGH         |
+| **Settings page**             | 1                                    | Currency (decimal)            | MEDIUM       |
+| **Planning Retirement page**  | 11 currency<br>3 age<br>3 percentage | decimal<br>numeric<br>decimal | **CRITICAL** |
+| **TOTAL**                     | **21 inputs**                        | -                             | -            |
 
 ---
 
 ## 🎯 Implementation Plan
 
 ### Phase 1: Modal Components (HIGH Priority)
+
 **Estimated Time**: 15 minutes
 
 1. ✅ **HoldingModal.tsx** (2 inputs)
@@ -306,6 +335,7 @@ inputMode="numeric"
    - Add `inputMode="decimal"` to amount field (line 258-269)
 
 ### Phase 2: Planning Pages (CRITICAL Priority)
+
 **Estimated Time**: 30 minutes
 
 3. ✅ **Planning Future page** (3 inputs)
@@ -320,6 +350,7 @@ inputMode="numeric"
    - Add `inputMode="decimal"` to 3 percentage inputs
 
 ### Phase 3: Settings Page (MEDIUM Priority)
+
 **Estimated Time**: 5 minutes
 
 5. ✅ **Settings page** (1 input)
@@ -330,21 +361,25 @@ inputMode="numeric"
 ## 📱 Mobile Keyboard Reference
 
 ### `inputMode="decimal"`
+
 **Use For**: Currency, percentages, decimal numbers
 **Keyboard Shows**: Numeric keypad with decimal point (. or ,)
 **Example**: $45.67, 7.5%, 100.25
 
 ### `inputMode="numeric"`
+
 **Use For**: Whole numbers, ages, quantities (no decimals)
 **Keyboard Shows**: Numeric keypad (0-9) without decimal
 **Example**: Age 30, Quantity 5
 
 ### `inputMode="tel"`
+
 **Use For**: Phone numbers
 **Keyboard Shows**: Phone keypad layout
 **Example**: (555) 123-4567
 
 ### `inputMode="email"`
+
 **Use For**: Email addresses
 **Keyboard Shows**: QWERTY with @ and .com shortcuts
 **Example**: user@example.com
@@ -354,11 +389,13 @@ inputMode="numeric"
 ## ✨ Expected UX Improvement
 
 **Before**:
+
 - Mobile users get full QWERTY keyboard for number inputs
 - Must manually switch to numeric keyboard
 - Slower data entry, more errors
 
 **After**:
+
 - Mobile users get appropriate numeric keyboard immediately
 - Decimal keyboard for currency (shows . or ,)
 - Numeric keyboard for ages (no decimal point)
@@ -370,6 +407,7 @@ inputMode="numeric"
 ## 🧪 Testing Recommendations
 
 ### Manual Testing (Required):
+
 - [ ] iOS Safari: Test all number inputs show decimal keyboard
 - [ ] Android Chrome: Test all number inputs show decimal keyboard
 - [ ] iPad Safari: Test landscape and portrait modes
@@ -377,14 +415,15 @@ inputMode="numeric"
 - [ ] Verify step values still work (0.01, 0.1, etc.)
 
 ### Automated Testing (Recommended):
+
 ```typescript
 // Example Playwright test
-test('HoldingModal shows decimal keyboard for quantity', async ({ page }) => {
-  await page.goto('/budget-app/investments');
+test("HoldingModal shows decimal keyboard for quantity", async ({ page }) => {
+  await page.goto("/budget-app/investments");
   await page.click('[data-testid="add-holding"]');
 
-  const quantityInput = await page.locator('#quantity');
-  await expect(quantityInput).toHaveAttribute('inputMode', 'decimal');
+  const quantityInput = await page.locator("#quantity");
+  await expect(quantityInput).toHaveAttribute("inputMode", "decimal");
 });
 ```
 
@@ -393,13 +432,17 @@ test('HoldingModal shows decimal keyboard for quantity', async ({ page }) => {
 ## 📚 Additional Improvements (Future Consideration)
 
 ### Input Masks for Currency
+
 Consider adding currency formatting libraries:
+
 - **react-currency-input-field**: Auto-formats as user types
 - **cleave.js**: Lightweight formatting library
 - Example: User types "1234" → Displays "$12.34"
 
 ### Real-Time Validation
+
 Add helpful error messages:
+
 ```typescript
 {errors.amount && (
   <p className="text-sm text-red-600 mt-1">
@@ -409,6 +452,7 @@ Add helpful error messages:
 ```
 
 ### Form Validation Examples:
+
 - Amount must be greater than $0
 - Date must be in the future
 - Age must be between 18-120

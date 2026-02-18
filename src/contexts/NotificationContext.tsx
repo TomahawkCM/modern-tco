@@ -1,18 +1,11 @@
-'use client';
+"use client";
 
 /**
  * Notification Context
  * Manages notification state, CRUD operations, and permission tracking
  */
 
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  useRef,
-} from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
 import type {
   InAppNotification,
   NotificationSettings,
@@ -21,7 +14,7 @@ import type {
   NotificationSourceType,
   SnoozeDuration,
   SNOOZE_DURATIONS,
-} from '@/types/notifications';
+} from "@/types/notifications";
 import {
   addNotification as dbAddNotification,
   getNotifications as dbGetNotifications,
@@ -33,7 +26,7 @@ import {
   deleteNotification as dbDelete,
   clearAllNotifications as dbClearAll,
   wakeUpSnoozedNotifications,
-} from '@/lib/budget-db';
+} from "@/lib/budget-db";
 import {
   getNotificationSettings,
   saveNotificationSettings,
@@ -41,7 +34,7 @@ import {
   shouldDeliverNotification,
   getPushPermissionState,
   requestPushPermission,
-} from '@/lib/notifications/notification-settings';
+} from "@/lib/notifications/notification-settings";
 
 // ========================
 // Types
@@ -155,8 +148,8 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
           setUnreadCount(newCount);
         }
       } catch (err) {
-        console.error('[NotificationContext] Initialization error:', err);
-        setError('Failed to load notifications');
+        console.error("[NotificationContext] Initialization error:", err);
+        setError("Failed to load notifications");
       } finally {
         setIsLoading(false);
       }
@@ -199,7 +192,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
       const count = await getUnreadNotificationCount();
       setUnreadCount(count);
     } catch (err) {
-      console.error('[NotificationContext] Refresh error:', err);
+      console.error("[NotificationContext] Refresh error:", err);
     }
   }, []);
 
@@ -207,7 +200,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
     async (input: CreateNotificationInput): Promise<string | null> => {
       // Check if this type of notification should be delivered
       if (!shouldDeliverNotification(input.type, settings)) {
-        console.log('[NotificationContext] Notification blocked by settings:', input.type);
+        console.log("[NotificationContext] Notification blocked by settings:", input.type);
         return null;
       }
 
@@ -216,8 +209,8 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
           type: input.type,
           title: input.title,
           body: input.body,
-          status: 'unread',
-          priority: input.priority || 'medium',
+          status: "unread",
+          priority: input.priority || "medium",
           sourceType: input.sourceType,
           sourceId: input.sourceId,
           actionUrl: input.actionUrl,
@@ -229,7 +222,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
         await refresh();
         return id;
       } catch (err) {
-        console.error('[NotificationContext] Add notification error:', err);
+        console.error("[NotificationContext] Add notification error:", err);
         return null;
       }
     },
@@ -242,7 +235,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
         await dbMarkAsRead(id);
         await refresh();
       } catch (err) {
-        console.error('[NotificationContext] Mark as read error:', err);
+        console.error("[NotificationContext] Mark as read error:", err);
       }
     },
     [refresh]
@@ -253,19 +246,19 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
       await dbMarkAllAsRead();
       await refresh();
     } catch (err) {
-      console.error('[NotificationContext] Mark all as read error:', err);
+      console.error("[NotificationContext] Mark all as read error:", err);
     }
   }, [refresh]);
 
   const snooze = useCallback(
     async (id: string, duration: SnoozeDuration) => {
       try {
-        const { SNOOZE_DURATIONS } = await import('@/types/notifications');
+        const { SNOOZE_DURATIONS } = await import("@/types/notifications");
         const snoozedUntil = new Date(Date.now() + SNOOZE_DURATIONS[duration].ms);
         await dbSnooze(id, snoozedUntil);
         await refresh();
       } catch (err) {
-        console.error('[NotificationContext] Snooze error:', err);
+        console.error("[NotificationContext] Snooze error:", err);
       }
     },
     [refresh]
@@ -277,7 +270,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
         await dbDismiss(id);
         await refresh();
       } catch (err) {
-        console.error('[NotificationContext] Dismiss error:', err);
+        console.error("[NotificationContext] Dismiss error:", err);
       }
     },
     [refresh]
@@ -289,7 +282,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
         await dbDelete(id);
         await refresh();
       } catch (err) {
-        console.error('[NotificationContext] Delete error:', err);
+        console.error("[NotificationContext] Delete error:", err);
       }
     },
     [refresh]
@@ -300,18 +293,21 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
       await dbClearAll();
       await refresh();
     } catch (err) {
-      console.error('[NotificationContext] Clear all error:', err);
+      console.error("[NotificationContext] Clear all error:", err);
     }
   }, [refresh]);
 
-  const updateSettings = useCallback((updates: Partial<NotificationSettings>) => {
-    const newSettings = {
-      ...settings,
-      ...updates,
-    };
-    saveNotificationSettings(newSettings);
-    setSettings(newSettings);
-  }, [settings]);
+  const updateSettings = useCallback(
+    (updates: Partial<NotificationSettings>) => {
+      const newSettings = {
+        ...settings,
+        ...updates,
+      };
+      saveNotificationSettings(newSettings);
+      setSettings(newSettings);
+    },
+    [settings]
+  );
 
   const requestPermission = useCallback(async () => {
     const result = await requestPushPermission();
@@ -320,10 +316,10 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
 
   const sendTestNotification = useCallback(async () => {
     await addNotification({
-      type: 'system',
-      title: 'Test Notification',
-      body: 'This is a test notification to verify your settings are working correctly.',
-      priority: 'medium',
+      type: "system",
+      title: "Test Notification",
+      body: "This is a test notification to verify your settings are working correctly.",
+      priority: "medium",
     });
   }, [addNotification]);
 
@@ -350,11 +346,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
     sendTestNotification,
   };
 
-  return (
-    <NotificationContext.Provider value={value}>
-      {children}
-    </NotificationContext.Provider>
-  );
+  return <NotificationContext.Provider value={value}>{children}</NotificationContext.Provider>;
 }
 
 // ========================
@@ -364,7 +356,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
 export function useNotifications(): NotificationContextType {
   const context = useContext(NotificationContext);
   if (context === undefined) {
-    throw new Error('useNotifications must be used within a NotificationProvider');
+    throw new Error("useNotifications must be used within a NotificationProvider");
   }
   return context;
 }

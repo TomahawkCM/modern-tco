@@ -333,12 +333,11 @@ export class StudyModulesService {
         ...bookmarkData,
         section: bookmarkData.section
           ? {
-              ...(bookmarkData.section),
+              ...bookmarkData.section,
               content:
-                typeof (bookmarkData.section).content === "object" &&
-                (bookmarkData.section).content !== null
-                  ? ((bookmarkData.section)
-                      .content as StudySectionWithModule["content"])
+                typeof bookmarkData.section.content === "object" &&
+                bookmarkData.section.content !== null
+                  ? (bookmarkData.section.content as StudySectionWithModule["content"])
                   : {
                       overview: "",
                       key_points: [],
@@ -346,17 +345,17 @@ export class StudyModulesService {
                       troubleshooting: [],
                       references: [],
                     },
-              key_points: Array.isArray((bookmarkData.section).key_points)
-                ? ((bookmarkData.section).key_points as string[])
+              key_points: Array.isArray(bookmarkData.section.key_points)
+                ? (bookmarkData.section.key_points as string[])
                 : [],
-              procedures: Array.isArray((bookmarkData.section).procedures)
-                ? ((bookmarkData.section).procedures as string[])
+              procedures: Array.isArray(bookmarkData.section.procedures)
+                ? (bookmarkData.section.procedures as string[])
                 : [],
-              troubleshooting: Array.isArray((bookmarkData.section).troubleshooting)
-                ? ((bookmarkData.section).troubleshooting as string[])
+              troubleshooting: Array.isArray(bookmarkData.section.troubleshooting)
+                ? (bookmarkData.section.troubleshooting as string[])
                 : [],
-              references: Array.isArray((bookmarkData.section).references)
-                ? ((bookmarkData.section).references as string[])
+              references: Array.isArray(bookmarkData.section.references)
+                ? (bookmarkData.section.references as string[])
                 : [],
             }
           : undefined,

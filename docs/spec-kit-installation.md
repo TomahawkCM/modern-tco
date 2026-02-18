@@ -32,7 +32,7 @@ During the installation process, we encountered several issues:
 ### Core Philosophy
 
 - **Intent-driven development**: Define "what" before "how"
-- **Executable specifications**: Specifications become the foundation for direct implementation  
+- **Executable specifications**: Specifications become the foundation for direct implementation
 - **AI-powered interpretation**: Leverages AI models to transform specs into working code
 
 ### Key Features
@@ -203,7 +203,7 @@ uv tool install git+https://github.com/github/spec-kit.git
 
 While the full installation encountered technical challenges, we have:
 
-- ✅ Confirmed system compatibility (uv, Git, AI agent available)  
+- ✅ Confirmed system compatibility (uv, Git, AI agent available)
 - ✅ Created placeholder installation for testing concepts
 - ✅ Documented complete installation procedures
 - ✅ Identified integration opportunities with TCO project

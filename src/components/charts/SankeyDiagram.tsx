@@ -1,23 +1,29 @@
-'use client';
+"use client";
 
 /**
  * Sankey Diagram Component (S-011)
  * Interactive money flow visualization using d3-sankey.
  */
 
-import { useEffect, useRef, useState, useMemo, useCallback } from 'react';
-import * as d3 from 'd3';
-import { sankey, sankeyLinkHorizontal, SankeyGraph, type SankeyNode as D3SankeyNode, type SankeyLink as D3SankeyLink } from 'd3-sankey';
-import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
-import { useSeniorsMode } from '@/hooks/useSeniorsMode';
+import { useEffect, useRef, useState, useMemo, useCallback } from "react";
+import * as d3 from "d3";
+import {
+  sankey,
+  sankeyLinkHorizontal,
+  SankeyGraph,
+  type SankeyNode as D3SankeyNode,
+  type SankeyLink as D3SankeyLink,
+} from "d3-sankey";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { useSeniorsMode } from "@/hooks/useSeniorsMode";
 import {
   type SankeyNode,
   type SankeyLink,
   type SankeyData,
   formatCurrency,
   calculatePercentage,
-} from '@/lib/charts/sankey-utils';
+} from "@/lib/charts/sankey-utils";
 
 interface SankeyDiagramProps {
   data: SankeyData;
@@ -31,7 +37,7 @@ interface TooltipData {
   x: number;
   y: number;
   content: {
-    type: 'node' | 'link';
+    type: "node" | "link";
     title: string;
     value: number;
     percentage?: number;
@@ -43,9 +49,10 @@ interface TooltipData {
 
 // Extended types for d3-sankey computed values
 type ComputedNode = D3SankeyNode<SankeyNode, SankeyLink> & SankeyNode;
-type ComputedLink = D3SankeyLink<SankeyNode, SankeyLink> & SankeyLink & {
-  width?: number;
-};
+type ComputedLink = D3SankeyLink<SankeyNode, SankeyLink> &
+  SankeyLink & {
+    width?: number;
+  };
 
 export function SankeyDiagram({
   data,
@@ -106,7 +113,7 @@ export function SankeyDiagram({
       });
       return graph;
     } catch (error) {
-      console.error('Sankey layout error:', error);
+      console.error("Sankey layout error:", error);
       return null;
     }
   }, [data, innerWidth, innerHeight, nodeWidth, nodePadding]);
@@ -134,8 +141,10 @@ export function SankeyDiagram({
   const isLinkConnected = useCallback(
     (link: SankeyLink): boolean => {
       if (!hoveredNodeId) return false;
-      const sourceId = typeof link.source === 'object' ? (link.source as ComputedNode).id : link.source;
-      const targetId = typeof link.target === 'object' ? (link.target as ComputedNode).id : link.target;
+      const sourceId =
+        typeof link.source === "object" ? (link.source as ComputedNode).id : link.source;
+      const targetId =
+        typeof link.target === "object" ? (link.target as ComputedNode).id : link.target;
       return sourceId === hoveredNodeId || targetId === hoveredNodeId;
     },
     [hoveredNodeId]
@@ -152,15 +161,15 @@ export function SankeyDiagram({
         x: event.clientX - rect.left,
         y: event.clientY - rect.top,
         content: {
-          type: 'node',
+          type: "node",
           title: node.name,
           value: node.value || 0,
           percentage:
-            node.type === 'category' || node.type === 'subcategory'
+            node.type === "category" || node.type === "subcategory"
               ? calculatePercentage(node.value || 0, data.totalExpenses)
-              : node.type === 'income'
-              ? calculatePercentage(node.value || 0, data.totalIncome)
-              : undefined,
+              : node.type === "income"
+                ? calculatePercentage(node.value || 0, data.totalIncome)
+                : undefined,
           color: node.color,
         },
       });
@@ -182,7 +191,7 @@ export function SankeyDiagram({
         x: event.clientX - rect.left,
         y: event.clientY - rect.top,
         content: {
-          type: 'link',
+          type: "link",
           title: `${sourceNode.name} → ${targetNode.name}`,
           value: link.value,
           source: sourceNode.name,
@@ -228,7 +237,7 @@ export function SankeyDiagram({
     return (
       <div
         className={cn(
-          'flex items-center justify-center rounded-xl bg-slate-800/50 border border-white/10',
+          "flex items-center justify-center rounded-xl border border-white/10 bg-slate-800/50",
           className
         )}
         style={{ width, height }}
@@ -242,7 +251,7 @@ export function SankeyDiagram({
   const computedLinks = sankeyLayout.links as ComputedLink[];
 
   return (
-    <div className={cn('relative', className)}>
+    <div className={cn("relative", className)}>
       <svg
         ref={svgRef}
         width={width}
@@ -264,7 +273,7 @@ export function SankeyDiagram({
                   key={i}
                   d={path}
                   fill="none"
-                  stroke={sourceNode.color || '#64748b'}
+                  stroke={sourceNode.color || "#64748b"}
                   strokeWidth={Math.max(1, link.width || 1)}
                   strokeOpacity={getLinkOpacity(link, i)}
                   className="cursor-pointer transition-all duration-200"
@@ -295,7 +304,7 @@ export function SankeyDiagram({
                     y={node.y0}
                     width={(node.x1 || 0) - (node.x0 || 0)}
                     height={nodeHeight}
-                    fill={node.color || '#64748b'}
+                    fill={node.color || "#64748b"}
                     opacity={getNodeOpacity(node)}
                     rx={4}
                     className="transition-all duration-200"
@@ -304,14 +313,10 @@ export function SankeyDiagram({
                   {/* Node label */}
                   {nodeHeight > 20 && (
                     <text
-                      x={
-                        node.type === 'income'
-                          ? (node.x0 || 0) - 6
-                          : (node.x1 || 0) + 6
-                      }
+                      x={node.type === "income" ? (node.x0 || 0) - 6 : (node.x1 || 0) + 6}
                       y={(node.y0 || 0) + nodeHeight / 2}
                       dy="0.35em"
-                      textAnchor={node.type === 'income' ? 'end' : 'start'}
+                      textAnchor={node.type === "income" ? "end" : "start"}
                       fill="white"
                       fontSize={isSeniorsMode ? 14 : 12}
                       opacity={getNodeOpacity(node)}
@@ -334,28 +339,28 @@ export function SankeyDiagram({
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="pointer-events-none absolute z-50 rounded-lg bg-slate-800 px-3 py-2 shadow-xl border border-white/10"
+            className="pointer-events-none absolute z-50 rounded-lg border border-white/10 bg-slate-800 px-3 py-2 shadow-xl"
             style={{
               left: tooltip.x + 10,
               top: tooltip.y - 10,
-              transform: 'translateY(-100%)',
+              transform: "translateY(-100%)",
             }}
           >
-            <div className="flex items-center gap-2 mb-1">
+            <div className="mb-1 flex items-center gap-2">
               {tooltip.content.color && (
                 <div
                   className="h-3 w-3 rounded-full"
                   style={{ backgroundColor: tooltip.content.color }}
                 />
               )}
-              <span className={cn('font-medium text-white', isSeniorsMode && 'text-lg')}>
+              <span className={cn("font-medium text-white", isSeniorsMode && "text-lg")}>
                 {tooltip.content.title}
               </span>
             </div>
             <div className="text-sm text-slate-300">
               {formatCurrency(tooltip.content.value)}
               {tooltip.content.percentage !== undefined && (
-                <span className="text-slate-400 ml-2">
+                <span className="ml-2 text-slate-400">
                   ({tooltip.content.percentage.toFixed(1)}%)
                 </span>
               )}

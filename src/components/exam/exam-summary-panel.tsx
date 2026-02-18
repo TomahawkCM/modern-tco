@@ -73,14 +73,12 @@ export function ExamSummaryPanel({
 
   return (
     <div className={cn("hidden xl:block", className)}>
-      <div className="sticky top-4 space-y-4 w-[200px]">
+      <div className="sticky top-4 w-[200px] space-y-4">
         {/* Timer Card */}
         <Card className={cn("p-4 transition-colors", getTimerBgColor())}>
-          <div className="flex items-center justify-center gap-2 mb-2">
+          <div className="mb-2 flex items-center justify-center gap-2">
             <Clock className={cn("h-4 w-4", getTimerColor())} />
-            <span className="text-xs font-medium text-muted-foreground">
-              Time Remaining
-            </span>
+            <span className="text-xs font-medium text-muted-foreground">Time Remaining</span>
           </div>
           <div className={cn("text-center text-2xl font-bold tabular-nums", getTimerColor())}>
             {formatTime(timeRemaining)}
@@ -89,7 +87,7 @@ export function ExamSummaryPanel({
 
         {/* Statistics Card */}
         <Card className="p-4">
-          <h3 className="text-sm font-semibold mb-3">Progress</h3>
+          <h3 className="mb-3 text-sm font-semibold">Progress</h3>
 
           <div className="space-y-3">
             <div className="flex items-center justify-between text-sm">
@@ -97,7 +95,10 @@ export function ExamSummaryPanel({
                 <CheckCircle className="h-4 w-4 text-green-600" />
                 <span className="text-muted-foreground">Answered</span>
               </div>
-              <Badge variant="secondary" className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300">
+              <Badge
+                variant="secondary"
+                className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+              >
                 {answeredCount}
               </Badge>
             </div>
@@ -107,7 +108,10 @@ export function ExamSummaryPanel({
                 <Circle className="h-4 w-4 text-gray-400" />
                 <span className="text-muted-foreground">Unanswered</span>
               </div>
-              <Badge variant="secondary" className="bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300">
+              <Badge
+                variant="secondary"
+                className="bg-gray-100 text-gray-800 dark:bg-gray-900/30 dark:text-gray-300"
+              >
                 {unansweredCount}
               </Badge>
             </div>
@@ -117,7 +121,10 @@ export function ExamSummaryPanel({
                 <AlertCircle className="h-4 w-4 text-amber-500" />
                 <span className="text-muted-foreground">Marked</span>
               </div>
-              <Badge variant="secondary" className="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">
+              <Badge
+                variant="secondary"
+                className="bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
+              >
                 {markedCount}
               </Badge>
             </div>
@@ -136,7 +143,7 @@ export function ExamSummaryPanel({
         {/* Quick Filters Card (if enabled) */}
         {(onShowUnanswered || onShowMarked) && (
           <Card className="p-4">
-            <div className="flex items-center gap-2 mb-3">
+            <div className="mb-3 flex items-center gap-2">
               <Filter className="h-4 w-4 text-muted-foreground" />
               <h3 className="text-sm font-semibold">Quick Filters</h3>
             </div>
@@ -172,7 +179,7 @@ export function ExamSummaryPanel({
         {/* Submit Button - Always Visible */}
         <Button
           onClick={onSubmitExam}
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold"
+          className="w-full bg-green-600 font-semibold text-white hover:bg-green-700"
           size="lg"
         >
           <CheckCircle className="mr-2 h-4 w-4" />

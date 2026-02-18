@@ -6,16 +6,16 @@
  * This ensures the app doesn't break while maintaining structure for future translation.
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const MESSAGES_DIR = path.join(__dirname, '../src/i18n/messages');
+const MESSAGES_DIR = path.join(__dirname, "../src/i18n/messages");
 
-function getAllKeys(obj, prefix = '') {
+function getAllKeys(obj, prefix = "") {
   let keys = [];
   for (const key in obj) {
-    const fullKey = prefix ? prefix + '.' + key : key;
-    if (typeof obj[key] === 'object' && obj[key] !== null) {
+    const fullKey = prefix ? prefix + "." + key : key;
+    if (typeof obj[key] === "object" && obj[key] !== null) {
       keys = keys.concat(getAllKeys(obj[key], fullKey));
     } else {
       keys.push(fullKey);
@@ -25,11 +25,11 @@ function getAllKeys(obj, prefix = '') {
 }
 
 function getValueByPath(obj, pathStr) {
-  return pathStr.split('.').reduce((acc, part) => acc && acc[part], obj);
+  return pathStr.split(".").reduce((acc, part) => acc && acc[part], obj);
 }
 
 function setValueByPath(obj, pathStr, value) {
-  const parts = pathStr.split('.');
+  const parts = pathStr.split(".");
   let current = obj;
   for (let i = 0; i < parts.length - 1; i++) {
     if (!(parts[i] in current)) {
@@ -41,31 +41,34 @@ function setValueByPath(obj, pathStr, value) {
 }
 
 function sortObjectKeys(obj) {
-  if (typeof obj !== 'object' || obj === null) return obj;
+  if (typeof obj !== "object" || obj === null) return obj;
   if (Array.isArray(obj)) return obj.map(sortObjectKeys);
 
   const sorted = {};
-  Object.keys(obj).sort().forEach(key => {
-    sorted[key] = sortObjectKeys(obj[key]);
-  });
+  Object.keys(obj)
+    .sort()
+    .forEach((key) => {
+      sorted[key] = sortObjectKeys(obj[key]);
+    });
   return sorted;
 }
 
 function main() {
-  console.log('='.repeat(60));
-  console.log('Syncing Missing Translation Keys');
-  console.log('='.repeat(60));
+  console.log("=".repeat(60));
+  console.log("Syncing Missing Translation Keys");
+  console.log("=".repeat(60));
 
   // Load base locale
-  const enPath = path.join(MESSAGES_DIR, 'en.json');
-  const enData = JSON.parse(fs.readFileSync(enPath, 'utf8'));
+  const enPath = path.join(MESSAGES_DIR, "en.json");
+  const enData = JSON.parse(fs.readFileSync(enPath, "utf8"));
   const enKeys = getAllKeys(enData);
 
   console.log(`\nBase locale (en.json): ${enKeys.length} keys`);
 
   // Get all locale files
-  const localeFiles = fs.readdirSync(MESSAGES_DIR)
-    .filter(f => f.endsWith('.json') && f !== 'en.json')
+  const localeFiles = fs
+    .readdirSync(MESSAGES_DIR)
+    .filter((f) => f.endsWith(".json") && f !== "en.json")
     .sort();
 
   console.log(`Locale files to update: ${localeFiles.length}\n`);
@@ -74,19 +77,19 @@ function main() {
   let filesUpdated = 0;
 
   for (const file of localeFiles) {
-    const locale = file.replace('.json', '');
+    const locale = file.replace(".json", "");
     const filePath = path.join(MESSAGES_DIR, file);
 
     let localeData;
     try {
-      localeData = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      localeData = JSON.parse(fs.readFileSync(filePath, "utf8"));
     } catch (e) {
       console.log(`❌ ${locale}: Invalid JSON - ${e.message}`);
       continue;
     }
 
     const localeKeys = getAllKeys(localeData);
-    const missingKeys = enKeys.filter(k => !localeKeys.includes(k));
+    const missingKeys = enKeys.filter((k) => !localeKeys.includes(k));
 
     if (missingKeys.length === 0) {
       console.log(`✓ ${locale}: Already complete`);
@@ -103,16 +106,16 @@ function main() {
 
     // Sort keys and save
     const sortedData = sortObjectKeys(localeData);
-    fs.writeFileSync(filePath, JSON.stringify(sortedData, null, 2) + '\n');
+    fs.writeFileSync(filePath, JSON.stringify(sortedData, null, 2) + "\n");
 
     console.log(`✓ ${locale}: Added ${keysAdded} keys`);
     totalKeysAdded += keysAdded;
     filesUpdated++;
   }
 
-  console.log('\n' + '='.repeat(60));
-  console.log('Summary');
-  console.log('='.repeat(60));
+  console.log("\n" + "=".repeat(60));
+  console.log("Summary");
+  console.log("=".repeat(60));
   console.log(`Files updated: ${filesUpdated}`);
   console.log(`Total keys added: ${totalKeysAdded}`);
   console.log(`Average keys per file: ${(totalKeysAdded / filesUpdated).toFixed(0)}`);

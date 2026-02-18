@@ -20,11 +20,13 @@ Your personal financial assistant powered by OpenAI. Ask questions, get insights
 ### How to Access the Chatbot
 
 **Desktop:**
+
 - Click the **chat bubble icon** in the bottom-right corner
 - Or press **`/`** key to open chat
 - Or use Command Palette (Cmd/Ctrl+K) → "Ask Chatbot"
 
 **Mobile:**
+
 - Tap the **floating chat button** (bottom-right)
 - Or swipe up from bottom
 - Or go to More → AI Assistant
@@ -32,17 +34,20 @@ Your personal financial assistant powered by OpenAI. Ask questions, get insights
 ### Your First Question
 
 Try asking:
+
 ```
 "How much did I spend on groceries this month?"
 ```
 
 The chatbot will:
+
 1. Analyze your transactions
 2. Filter by "Groceries" category
 3. Sum amounts for current month
 4. Respond with clear answer
 
 **Example Response:**
+
 > "You've spent $347.82 on groceries this month (Nov 2025). This is $52.18 under your $400 budget. Your largest grocery transaction was $87.34 at Safeway on Nov 3rd."
 
 ---
@@ -52,6 +57,7 @@ The chatbot will:
 ### Spending Analysis
 
 **Category Spending:**
+
 ```
 "How much did I spend on groceries?"
 "What's my total dining out spending this week?"
@@ -60,6 +66,7 @@ The chatbot will:
 ```
 
 **Top Spending:**
+
 ```
 "What are my top 3 spending categories?"
 "Where does most of my money go?"
@@ -68,6 +75,7 @@ The chatbot will:
 ```
 
 **Transaction Search:**
+
 ```
 "Show all Starbucks transactions"
 "Find transactions over $100"
@@ -76,6 +84,7 @@ The chatbot will:
 ```
 
 **Time Comparisons:**
+
 ```
 "Am I spending more this month than last month?"
 "Compare my grocery spending: this month vs last month"
@@ -88,6 +97,7 @@ The chatbot will:
 ### Budget Status
 
 **Budget Progress:**
+
 ```
 "Am I under budget for groceries?"
 "How much budget do I have left?"
@@ -96,6 +106,7 @@ The chatbot will:
 ```
 
 **Budget Recommendations:**
+
 ```
 "Should I increase my grocery budget?"
 "What budget should I set for utilities?"
@@ -103,6 +114,7 @@ The chatbot will:
 ```
 
 **Alerts:**
+
 ```
 "Which budgets am I close to exceeding?"
 "Warn me if I'm over budget"
@@ -114,6 +126,7 @@ The chatbot will:
 ### Income Tracking
 
 **Income Analysis:**
+
 ```
 "How much income did I earn this month?"
 "What are my income sources?"
@@ -122,6 +135,7 @@ The chatbot will:
 ```
 
 **Income vs Expenses:**
+
 ```
 "Am I saving money this month?"
 "What's my net savings?"
@@ -134,6 +148,7 @@ The chatbot will:
 ### Trends & Insights
 
 **Spending Patterns:**
+
 ```
 "What's my average monthly spending?"
 "When do I spend the most money?" (day of week, time of month)
@@ -142,6 +157,7 @@ The chatbot will:
 ```
 
 **Category Trends:**
+
 ```
 "Is my grocery spending increasing or decreasing?"
 "What's the trend in my entertainment spending?"
@@ -149,6 +165,7 @@ The chatbot will:
 ```
 
 **Insights:**
+
 ```
 "What unusual spending do I have this month?"
 "Are there any spending patterns I should know about?"
@@ -161,6 +178,7 @@ The chatbot will:
 ### Loan & Debt Management
 
 **Loan Status:**
+
 ```
 "How much do I owe on my mortgage?"
 "What's my total debt?"
@@ -169,6 +187,7 @@ The chatbot will:
 ```
 
 **Payoff Calculations:**
+
 ```
 "How much faster can I pay off my mortgage with $200 extra per month?"
 "How much interest will I save if I pay $100 extra each month?"
@@ -180,6 +199,7 @@ The chatbot will:
 ### Quick Actions (Coming Soon)
 
 **Add Transactions:**
+
 ```
 "Add $50 coffee expense"
 "Record $87.34 grocery purchase at Safeway"
@@ -187,6 +207,7 @@ The chatbot will:
 ```
 
 **Create Budgets:**
+
 ```
 "Set a $300 grocery budget for this month"
 "Create $150 dining out budget"
@@ -194,6 +215,7 @@ The chatbot will:
 ```
 
 **Bulk Operations:**
+
 ```
 "Add all my recent Starbucks purchases"
 "Categorize all Amazon transactions as Shopping"
@@ -207,6 +229,7 @@ The chatbot will:
 ### What the Chatbot CAN Do ✅
 
 **Analyze Data:**
+
 - ✅ Sum spending by category, date range, or merchant
 - ✅ Calculate averages and trends
 - ✅ Compare time periods
@@ -215,6 +238,7 @@ The chatbot will:
 - ✅ Check budget status and progress
 
 **Provide Insights:**
+
 - ✅ Spending patterns and trends
 - ✅ Budget recommendations
 - ✅ Savings opportunities
@@ -222,12 +246,14 @@ The chatbot will:
 - ✅ Financial health summaries
 
 **Answer Questions:**
+
 - ✅ "How much did I spend on X?"
 - ✅ "Am I under budget?"
 - ✅ "What's my net worth?"
 - ✅ "When will I pay off my loan?"
 
 **Future Capabilities (Coming Q1 2026):**
+
 - 🔄 Add/edit/delete transactions
 - 🔄 Create/update budgets
 - 🔄 Categorize transactions in bulk
@@ -239,24 +265,28 @@ The chatbot will:
 ### What the Chatbot CANNOT Do ❌
 
 **Data Modification (Currently):**
+
 - ❌ Cannot add transactions (coming soon)
 - ❌ Cannot edit budgets (coming soon)
 - ❌ Cannot delete data (coming soon)
 - ❌ Cannot import bank statements
 
 **External Actions:**
+
 - ❌ Cannot access your real bank accounts
 - ❌ Cannot make actual payments
 - ❌ Cannot transfer money
 - ❌ Cannot access external financial data
 
 **Financial Advice:**
+
 - ❌ Not a licensed financial advisor
 - ❌ Cannot provide investment advice
 - ❌ Cannot give tax advice
 - ❌ Cannot recommend specific stocks/funds
 
 **Personal Information:**
+
 - ❌ Cannot remember conversations across sessions (privacy)
 - ❌ Cannot share your data with others
 - ❌ Cannot learn from other users' data
@@ -266,18 +296,21 @@ The chatbot will:
 ### Accuracy & Limitations
 
 **The chatbot is:**
+
 - ✅ **Accurate** for data within your app
 - ✅ **Fast** (1-3 second responses)
 - ✅ **Conversational** (understands natural language)
 - ✅ **Helpful** (provides context and explanations)
 
 **But may:**
+
 - ⚠️ Misinterpret ambiguous questions
 - ⚠️ Struggle with very complex multi-part queries
 - ⚠️ Require clarification for vague requests
 - ⚠️ Occasionally make calculation errors (rare)
 
 **Best Practices:**
+
 - ✅ Ask one question at a time
 - ✅ Be specific (dates, categories, amounts)
 - ✅ Verify important numbers manually
@@ -290,12 +323,14 @@ The chatbot will:
 ### What Data is Shared?
 
 **When you ask a question, the chatbot receives:**
+
 - Your question text
 - Relevant transaction data (amounts, categories, dates)
 - Budget information (if needed for your question)
 - Aggregated spending summaries
 
 **What is NOT shared:**
+
 - Your name or personal information
 - Payment methods or bank account numbers
 - Passwords or security credentials
@@ -306,17 +341,20 @@ The chatbot will:
 ### How Your Data is Protected
 
 **In Transit:**
+
 - ✅ HTTPS encryption for all API calls
 - ✅ No data stored on chatbot servers
 - ✅ Conversations not saved long-term
 
 **In Storage:**
+
 - ✅ Your transaction data stays on YOUR device
 - ✅ Only query-relevant data sent to OpenAI
 - ✅ No cross-user data sharing
 - ✅ No data used to train AI models
 
 **Privacy Controls:**
+
 1. **Disable Chatbot**: Settings → Privacy → Disable AI Features
 2. **Clear History**: Chat window → Menu → Clear History
 3. **Review Permissions**: Settings → Privacy → Chatbot Permissions
@@ -326,11 +364,13 @@ The chatbot will:
 ### OpenAI Data Usage
 
 **What OpenAI receives:**
+
 - Your question text
 - Relevant financial data (anonymized)
 - Conversation context (last 20 messages)
 
 **OpenAI's commitments:**
+
 - Does NOT use your data to train their models
 - Does NOT share data with third parties
 - Data retained for 30 days for abuse monitoring only
@@ -383,6 +423,7 @@ The chatbot will:
 **Purpose:** Handle chatbot conversations
 
 **Request Body:**
+
 ```json
 {
   "message": "How much did I spend on groceries?",
@@ -399,6 +440,7 @@ The chatbot will:
 ```
 
 **Response:**
+
 ```json
 {
   "response": "You've spent $347.82 on groceries this month.",
@@ -407,15 +449,12 @@ The chatbot will:
     "category": "Groceries",
     "transactionCount": 12
   },
-  "suggestions": [
-    "Show me my grocery transactions",
-    "Compare to last month",
-    "Am I under budget?"
-  ]
+  "suggestions": ["Show me my grocery transactions", "Compare to last month", "Am I under budget?"]
 }
 ```
 
 **Error Handling:**
+
 ```json
 {
   "error": "Rate limit exceeded. Please try again in 60 seconds.",
@@ -452,13 +491,14 @@ function buildContext(query: string, userData: UserData) {
     userPreferences: {
       currency: "CAD",
       dateFormat: "YYYY-MM-DD",
-      fiscalYearStart: "01-01"
-    }
+      fiscalYearStart: "01-01",
+    },
   };
 }
 ```
 
 **Context Limits:**
+
 - **Max tokens**: 8,000 (GPT-4 context window)
 - **Conversation history**: Last 20 messages
 - **Transaction data**: Max 100 most relevant transactions
@@ -478,16 +518,16 @@ const availableFunctions = [
     parameters: {
       category: "string",
       startDate: "ISO date",
-      endDate: "ISO date"
-    }
+      endDate: "ISO date",
+    },
   },
   {
     name: "get_budget_status",
     description: "Check budget progress for a category",
     parameters: {
       category: "string",
-      month: "YYYY-MM"
-    }
+      month: "YYYY-MM",
+    },
   },
   {
     name: "search_transactions",
@@ -496,17 +536,17 @@ const availableFunctions = [
       query: "string", // merchant name or description
       category: "string (optional)",
       minAmount: "number (optional)",
-      maxAmount: "number (optional)"
-    }
+      maxAmount: "number (optional)",
+    },
   },
   {
     name: "calculate_loan_payoff",
     description: "Calculate loan payoff with extra payments",
     parameters: {
       loanId: "string",
-      extraPayment: "number"
-    }
-  }
+      extraPayment: "number",
+    },
+  },
 ];
 ```
 
@@ -538,6 +578,7 @@ const result = await getSpendingByCategory("Groceries", "2025-10-01", "2025-10-3
 ### Caching Strategy
 
 **Query Cache (Redis/Memory):**
+
 ```
 Cache Key: hash(query + context)
 TTL: 5 minutes
@@ -545,6 +586,7 @@ Invalidation: On data change (transaction add/edit/delete)
 ```
 
 **Example:**
+
 ```typescript
 // First query (cache miss)
 Q: "How much did I spend on groceries?"
@@ -564,11 +606,13 @@ User adds grocery transaction
 ### Rate Limiting
 
 **Per User Limits:**
+
 - **Queries per minute**: 20
 - **Queries per hour**: 200
 - **Queries per day**: 1000
 
 **Enforcement:**
+
 ```typescript
 const rateLimiter = {
   check: async (userId: string) => {
@@ -579,7 +623,7 @@ const rateLimiter = {
     if (count > 20) {
       throw new RateLimitError("Please wait 60 seconds");
     }
-  }
+  },
 };
 ```
 
@@ -595,25 +639,26 @@ enum ChatbotError {
   OPENAI_API_ERROR = "OPENAI_API_ERROR",
   INVALID_CONTEXT = "INVALID_CONTEXT",
   NETWORK_ERROR = "NETWORK_ERROR",
-  INSUFFICIENT_DATA = "INSUFFICIENT_DATA"
+  INSUFFICIENT_DATA = "INSUFFICIENT_DATA",
 }
 ```
 
 **User-Friendly Messages:**
 
-| Error Code | User Message |
-|------------|--------------|
-| `RATE_LIMIT_EXCEEDED` | "You're asking questions too quickly. Please wait 60 seconds and try again." |
-| `OPENAI_API_ERROR` | "The AI service is temporarily unavailable. Please try again in a few minutes." |
-| `INVALID_CONTEXT` | "I couldn't understand your question. Could you rephrase it?" |
-| `NETWORK_ERROR` | "No internet connection. The chatbot requires internet to work." |
-| `INSUFFICIENT_DATA` | "You don't have enough transaction data yet to answer this question. Add some transactions first!" |
+| Error Code            | User Message                                                                                       |
+| --------------------- | -------------------------------------------------------------------------------------------------- |
+| `RATE_LIMIT_EXCEEDED` | "You're asking questions too quickly. Please wait 60 seconds and try again."                       |
+| `OPENAI_API_ERROR`    | "The AI service is temporarily unavailable. Please try again in a few minutes."                    |
+| `INVALID_CONTEXT`     | "I couldn't understand your question. Could you rephrase it?"                                      |
+| `NETWORK_ERROR`       | "No internet connection. The chatbot requires internet to work."                                   |
+| `INSUFFICIENT_DATA`   | "You don't have enough transaction data yet to answer this question. Add some transactions first!" |
 
 ---
 
 ### Performance Optimizations
 
 **1. Smart Context Loading:**
+
 ```typescript
 // Don't load ALL transactions
 // Load only what's needed for the query
@@ -628,6 +673,7 @@ if (intent === "spending_analysis") {
 ```
 
 **2. Response Streaming:**
+
 ```typescript
 // Stream response as it's generated (better UX)
 for await (const chunk of openai.streamChat(prompt)) {
@@ -636,12 +682,13 @@ for await (const chunk of openai.streamChat(prompt)) {
 ```
 
 **3. Background Context Preloading:**
+
 ```typescript
 // Preload common contexts on app start
 await Promise.all([
   preloadContext("current_month_summary"),
   preloadContext("budget_status"),
-  preloadContext("recent_transactions")
+  preloadContext("recent_transactions"),
 ]);
 ```
 
@@ -652,6 +699,7 @@ await Promise.all([
 ### Chatbot Not Responding
 
 **Symptoms:**
+
 - Message sent but no response
 - Spinning loader forever
 - "Network error" message
@@ -659,28 +707,35 @@ await Promise.all([
 **Solutions:**
 
 **1. Check Internet Connection**
+
 ```
 Settings → Network → Test Connection
 ```
+
 - Chatbot requires internet (OpenAI API)
 - Transactions work offline, chatbot does not
 
 **2. Clear Chat Cache**
+
 ```
 Chat window → Menu (⋯) → Clear Cache
 ```
+
 - Fixes stuck conversations
 - Resets context
 
 **3. Check Rate Limits**
+
 ```
 Wait 60 seconds if you see:
 "Too many requests. Please wait."
 ```
+
 - 20 queries per minute limit
 - 200 queries per hour limit
 
 **4. Verify API Key (Developers)**
+
 ```
 Check environment variables:
 OPENAI_API_KEY=sk-...
@@ -691,6 +746,7 @@ OPENAI_API_KEY=sk-...
 ### Incorrect or Confusing Responses
 
 **Symptoms:**
+
 - Answer doesn't match your data
 - Chatbot misunderstands question
 - Response is vague or generic
@@ -698,6 +754,7 @@ OPENAI_API_KEY=sk-...
 **Solutions:**
 
 **1. Be More Specific**
+
 ```
 ❌ "How much did I spend?"
 ✅ "How much did I spend on groceries this month?"
@@ -710,6 +767,7 @@ OPENAI_API_KEY=sk-...
 ```
 
 **2. Break Down Complex Questions**
+
 ```
 ❌ "Compare my spending to last month and tell me if I'm saving more and which categories increased"
 
@@ -719,6 +777,7 @@ OPENAI_API_KEY=sk-...
 ```
 
 **3. Verify Data Manually**
+
 ```
 If chatbot says you spent $500 on groceries:
 1. Go to Transactions
@@ -728,9 +787,11 @@ If chatbot says you spent $500 on groceries:
 ```
 
 **4. Provide Feedback**
+
 ```
 Chat → Message → 👍👎
 ```
+
 - Helps improve responses
 - Flagged for review
 
@@ -739,6 +800,7 @@ Chat → Message → 👍👎
 ### Chatbot Disabled or Missing
 
 **Symptoms:**
+
 - No chat icon visible
 - "Chatbot disabled" message
 - Menu option grayed out
@@ -746,11 +808,13 @@ Chat → Message → 👍👎
 **Solutions:**
 
 **1. Enable in Settings**
+
 ```
 Settings → Privacy → AI Features → ✅ Enable Chatbot
 ```
 
 **2. Check Browser Compatibility**
+
 ```
 Supported:
 ✅ Chrome 90+
@@ -764,6 +828,7 @@ Not Supported:
 ```
 
 **3. Disable Ad Blockers**
+
 ```
 Ad blockers may block OpenAI API calls:
 1. Whitelist budget app domain
@@ -771,6 +836,7 @@ Ad blockers may block OpenAI API calls:
 ```
 
 **4. Check Privacy Mode**
+
 ```
 Some browsers restrict AI in private/incognito mode:
 → Try in regular browsing mode
@@ -781,6 +847,7 @@ Some browsers restrict AI in private/incognito mode:
 ### Performance Issues
 
 **Symptoms:**
+
 - Slow responses (>10 seconds)
 - Lag when typing
 - Chat freezes
@@ -788,24 +855,30 @@ Some browsers restrict AI in private/incognito mode:
 **Solutions:**
 
 **1. Reduce Context Size**
+
 ```
 Settings → Chatbot → Context Size → "Current Month Only"
 ```
+
 - Sends less data to API
 - Faster responses
 - Limits historical queries
 
 **2. Clear Conversation History**
+
 ```
 Chat → Menu → Clear History
 ```
+
 - Reduces context payload
 - Speeds up API calls
 
 **3. Check Network Speed**
+
 ```
 Settings → Network → Run Speed Test
 ```
+
 - Chatbot needs decent connection
 - 1 Mbps minimum recommended
 
@@ -818,15 +891,18 @@ Settings → Network → Run Speed Test
 **When chat opens, show these:**
 
 **Getting Started:**
+
 - "What can you help me with?"
 - "How do I use this chatbot?"
 
 **Quick Insights:**
+
 - "How much did I spend this month?"
 - "What are my top spending categories?"
 - "Am I under budget?"
 
 **Common Actions (Coming Soon):**
+
 - "Add $50 coffee expense"
 - "Show my recent transactions"
 - "Create a grocery budget"
@@ -838,21 +914,25 @@ Settings → Network → Run Speed Test
 **When user is on specific pages:**
 
 **On Dashboard:**
+
 - "Explain my net worth"
 - "Why is my spending so high?"
 - "What's my biggest expense?"
 
 **On Transactions Page:**
+
 - "Find all Starbucks transactions"
 - "Categorize this transaction"
 - "Delete duplicates"
 
 **On Budgets Page:**
+
 - "Am I on track for my grocery budget?"
 - "Should I adjust my dining budget?"
 - "Which budgets should I create?"
 
 **On Loans Page:**
+
 - "How much faster can I pay off my mortgage?"
 - "What if I pay $200 extra per month?"
 - "When will I be debt-free?"
@@ -864,6 +944,7 @@ Settings → Network → Run Speed Test
 ### Testing the Chatbot
 
 **Unit Tests:**
+
 ```typescript
 describe("Chatbot Context Builder", () => {
   it("should extract category from query", () => {
@@ -874,11 +955,12 @@ describe("Chatbot Context Builder", () => {
 ```
 
 **Integration Tests:**
+
 ```typescript
 describe("Chatbot API", () => {
   it("should return spending summary", async () => {
     const response = await POST("/api/chat", {
-      message: "How much did I spend this month?"
+      message: "How much did I spend this month?",
     });
     expect(response.data.total).toBeGreaterThan(0);
   });
@@ -886,6 +968,7 @@ describe("Chatbot API", () => {
 ```
 
 **E2E Tests:**
+
 ```typescript
 test("Chatbot answers spending question", async ({ page }) => {
   await page.goto("/budget-app");
@@ -922,6 +1005,7 @@ test("Chatbot answers spending question", async ({ page }) => {
    - Abandonment rate (user leaves mid-conversation)
 
 **Dashboard:**
+
 ```
 PostHog → Dashboards → Chatbot Metrics
 ```
@@ -933,32 +1017,37 @@ PostHog → Dashboards → Chatbot Metrics
 ### Planned Features (Q1 2026)
 
 **1. Action Support:**
+
 - Add/edit/delete transactions via chat
 - Create/update budgets
 - Categorize transactions in bulk
 
 **2. Advanced Insights:**
+
 - Anomaly detection ("You spent 3x more on dining this week")
 - Predictive analytics ("You'll overspend by $50 if you continue at this rate")
 - Recommendations ("Consider reducing dining budget by $100")
 
 **3. Multi-Language Support:**
+
 - French, Spanish, German
 - Auto-detect user language
 - Seamless switching
 
 **4. Voice Input:**
+
 - Speak questions instead of typing
 - Voice responses (text-to-speech)
 - Hands-free mode
 
 **5. Scheduled Reports:**
+
 - "Send me a weekly spending summary every Monday"
 - "Alert me when I'm 80% through any budget"
 - "Monthly net worth report on the 1st"
 
 ---
 
-*Last updated: November 9, 2025*
-*OpenAI API: gpt-4o*
-*Version: 1.0 (Read-only mode)*
+_Last updated: November 9, 2025_
+_OpenAI API: gpt-4o_
+_Version: 1.0 (Read-only mode)_

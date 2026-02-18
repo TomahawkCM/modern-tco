@@ -20,9 +20,7 @@ const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 function convertDBQuestionToQuestion(dbQuestion: DBQuestion): Question {
   // Parse JSON fields
   const choices =
-    typeof dbQuestion.options === "string"
-      ? JSON.parse(dbQuestion.options)
-      : dbQuestion.options;
+    typeof dbQuestion.options === "string" ? JSON.parse(dbQuestion.options) : dbQuestion.options;
 
   const tags =
     typeof dbQuestion.tags === "string" ? JSON.parse(dbQuestion.tags) : dbQuestion.tags || [];
@@ -92,7 +90,9 @@ export async function fetchQuestions(forceRefresh = false): Promise<Question[]> 
     }
 
     // Convert database questions to application format (safely)
-    const questions = (data as unknown[]).map((row) => convertDBQuestionToQuestion(row as DBQuestion));
+    const questions = (data as unknown[]).map((row) =>
+      convertDBQuestionToQuestion(row as DBQuestion)
+    );
 
     // Update cache
     questionsCache = questions;
@@ -143,7 +143,7 @@ export async function fetchQuestionsByDomain(domain: TCODomain): Promise<Questio
       throw error;
     }
 
-  return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
+    return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
   } catch (error) {
     console.error(`Failed to fetch questions for domain ${domain}:`, error);
     return [];
@@ -168,7 +168,7 @@ export async function fetchQuestionsByDifficulty(difficulty: Difficulty): Promis
       throw error;
     }
 
-  return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
+    return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
   } catch (error) {
     console.error(`Failed to fetch questions for difficulty ${difficulty}:`, error);
     return [];
@@ -193,7 +193,7 @@ export async function fetchQuestionsByCategory(category: QuestionCategory): Prom
       throw error;
     }
 
-  return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
+    return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
   } catch (error) {
     console.error(`Failed to fetch questions for category ${category}:`, error);
     return [];
@@ -218,7 +218,7 @@ export async function searchQuestions(searchText: string): Promise<Question[]> {
       throw error;
     }
 
-  return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
+    return ((data ?? []) as unknown[]).map((r) => convertDBQuestionToQuestion(r as DBQuestion));
   } catch (error) {
     console.error(`Failed to search questions for "${searchText}":`, error);
     return [];
@@ -265,7 +265,10 @@ export async function fetchQuestionsWithFilters(filters: {
     }
 
     if (filters.difficulties && filters.difficulties.length > 0) {
-      query = query.in("difficulty", filters.difficulties.map(d => d.toLowerCase() as "beginner" | "intermediate" | "advanced"));
+      query = query.in(
+        "difficulty",
+        filters.difficulties.map((d) => d.toLowerCase() as "beginner" | "intermediate" | "advanced")
+      );
     }
 
     if (filters.categories && filters.categories.length > 0) {

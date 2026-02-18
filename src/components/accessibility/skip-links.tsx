@@ -31,7 +31,7 @@ export function SkipLinks() {
       )}
       aria-label="Skip navigation links"
     >
-      <div className="flex gap-2 border-b border-white/20 bg-tanium-primary p-2">
+      <div className="bg-tanium-primary flex gap-2 border-b border-white/20 p-2">
         <Button variant="secondary" size="sm" onClick={handleSkipToContent} className="text-sm">
           Skip to main content
         </Button>

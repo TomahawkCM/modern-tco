@@ -10,17 +10,12 @@
  * - Responsive (larger on mobile)
  */
 
-'use client';
+"use client";
 
-import * as React from 'react';
-import { Info } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import * as React from "react";
+import { Info } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface HelpTooltipProps {
   /** Tooltip content - can be a string or React node */
@@ -30,7 +25,7 @@ interface HelpTooltipProps {
   /** Accessible label for screen readers */
   ariaLabel?: string;
   /** Tooltip position - defaults to "top" */
-  side?: 'top' | 'bottom' | 'left' | 'right';
+  side?: "top" | "bottom" | "left" | "right";
   /** Icon size class - defaults to h-4 w-4 (16px) */
   iconSize?: string;
 }
@@ -39,11 +34,11 @@ export function HelpTooltip({
   content,
   learnMoreUrl,
   ariaLabel,
-  side = 'top',
-  iconSize = 'h-4 w-4',
+  side = "top",
+  iconSize = "h-4 w-4",
 }: HelpTooltipProps) {
-  const t = useTranslations('tooltip');
-  const effectiveAriaLabel = ariaLabel || t('ariaLabel');
+  const t = useTranslations("tooltip");
+  const effectiveAriaLabel = ariaLabel || t("ariaLabel");
 
   return (
     <TooltipProvider delayDuration={300}>
@@ -51,7 +46,7 @@ export function HelpTooltip({
         <TooltipTrigger asChild>
           <button
             type="button"
-            className={`inline-flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 rounded ${iconSize === 'h-4 w-4' ? 'p-1' : 'p-1.5'}`}
+            className={`inline-flex items-center justify-center rounded text-gray-500 transition-colors hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 ${iconSize === "h-4 w-4" ? "p-1" : "p-1.5"}`}
             aria-label={effectiveAriaLabel}
           >
             <Info className={`${iconSize} md:h-4 md:w-4`} />
@@ -60,7 +55,7 @@ export function HelpTooltip({
         </TooltipTrigger>
         <TooltipContent
           side={side}
-          className="max-w-[320px] md:max-w-xs bg-gray-800 text-white px-4 py-3 text-sm leading-relaxed shadow-lg"
+          className="max-w-[320px] bg-gray-800 px-4 py-3 text-sm leading-relaxed text-white shadow-lg md:max-w-xs"
           sideOffset={8}
         >
           <div className="space-y-2">
@@ -68,10 +63,10 @@ export function HelpTooltip({
             {learnMoreUrl && (
               <a
                 href={learnMoreUrl}
-                className="inline-block text-xs text-teal-300 hover:text-teal-200 hover:underline transition-colors mt-2"
+                className="mt-2 inline-block text-xs text-teal-300 transition-colors hover:text-teal-200 hover:underline"
                 onClick={(e) => e.stopPropagation()}
               >
-                {t('learnMore')}
+                {t("learnMore")}
               </a>
             )}
           </div>

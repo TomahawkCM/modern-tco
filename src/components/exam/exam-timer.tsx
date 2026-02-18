@@ -40,8 +40,8 @@ export function ExamTimer({ totalTimeMinutes, onTimeUp, onWarning, className }: 
         }
 
         // Fixed time thresholds (in seconds)
-        const THRESHOLD_30_MIN = 30 * 60;  // Green > 30min
-        const THRESHOLD_10_MIN = 10 * 60;  // Yellow 10-30min
+        const THRESHOLD_30_MIN = 30 * 60; // Green > 30min
+        const THRESHOLD_10_MIN = 10 * 60; // Yellow 10-30min
         // Red < 10min
 
         // Update color states based on fixed time thresholds
@@ -53,11 +53,13 @@ export function ExamTimer({ totalTimeMinutes, onTimeUp, onWarning, className }: 
 
         // Trigger specific warning alerts at 30min, 10min, 5min
         const warningMinutes = Math.floor(newValue / 60);
-        if ((warningMinutes === 30 || warningMinutes === 10 || warningMinutes === 5) &&
-            newValue % 60 === 0 &&
-            !warningsShown.has(warningMinutes)) {
+        if (
+          (warningMinutes === 30 || warningMinutes === 10 || warningMinutes === 5) &&
+          newValue % 60 === 0 &&
+          !warningsShown.has(warningMinutes)
+        ) {
           onWarning?.(warningMinutes);
-          setWarningsShown(prev => new Set(prev).add(warningMinutes));
+          setWarningsShown((prev) => new Set(prev).add(warningMinutes));
         }
 
         // Update context with remaining time - ensure updateTimer is available
@@ -115,19 +117,19 @@ export function ExamTimer({ totalTimeMinutes, onTimeUp, onWarning, className }: 
   const getTimerColor = () => {
     if (isCritical) return "text-red-600 dark:text-red-400";
     if (isWarning) return "text-amber-600 dark:text-amber-400";
-    return "text-green-600 dark:text-green-400";  // Green for >30min
+    return "text-green-600 dark:text-green-400"; // Green for >30min
   };
 
   const getProgressColor = () => {
     if (isCritical) return "bg-red-600";
     if (isWarning) return "bg-amber-600";
-    return "bg-green-600";  // Green for >30min
+    return "bg-green-600"; // Green for >30min
   };
 
   const getBgColor = () => {
     if (isCritical) return "bg-red-50 dark:bg-red-900/20";
     if (isWarning) return "bg-amber-50 dark:bg-amber-900/20";
-    return "bg-green-50 dark:bg-green-900/20";  // Green background for >30min
+    return "bg-green-50 dark:bg-green-900/20"; // Green background for >30min
   };
 
   return (
@@ -146,7 +148,7 @@ export function ExamTimer({ totalTimeMinutes, onTimeUp, onWarning, className }: 
           {(isWarning || isCritical) && (
             <Badge
               variant={isCritical ? "destructive" : "default"}
-              className="flex items-center space-x-1 animate-pulse"
+              className="flex animate-pulse items-center space-x-1"
             >
               <AlertTriangle className="h-4 w-4" />
               <span className="font-semibold">{isCritical ? "Critical" : "Warning"}</span>

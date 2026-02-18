@@ -627,5 +627,6 @@ _Status: 85% Complete - Production Readiness Priority_
 - Testing: Jest/Vitest/Playwright are configured with smoke and a few functional specs; expand suites to cover Practice → Result → Review and Mock timing.
 
 Actionable additions included:
+
 - `npm run content:stats` to print current question stats from code.
 - Dynamic question count on the homepage sourced from the loader.

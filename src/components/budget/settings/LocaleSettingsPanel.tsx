@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Locale & Formatting Settings Panel
@@ -7,16 +7,21 @@
  * with live format previews
  */
 
-import { useState, useEffect } from 'react';
-import { SUPPORTED_LOCALES, LOCALE_METADATA, type SupportedLocale, getBrowserLocale } from '@/i18n/config';
-import type { CurrencyCode } from '@/i18n/utils/formatCurrency';
+import { useState, useEffect } from "react";
+import {
+  SUPPORTED_LOCALES,
+  LOCALE_METADATA,
+  type SupportedLocale,
+  getBrowserLocale,
+} from "@/i18n/config";
+import type { CurrencyCode } from "@/i18n/utils/formatCurrency";
 import {
   getLocalePreferences,
   setLocalePreferences,
   resetLocalePreferences,
   type LocalePreferences,
-} from '@/lib/locale-storage';
-import { FormatPreview } from './FormatPreview';
+} from "@/lib/locale-storage";
+import { FormatPreview } from "./FormatPreview";
 
 export function LocaleSettingsPanel() {
   const [preferences, setPreferences] = useState<LocalePreferences>(getLocalePreferences());
@@ -29,9 +34,12 @@ export function LocaleSettingsPanel() {
       setHasChanges(false);
     };
 
-    window.addEventListener('localePreferencesChanged', handlePreferencesChanged as EventListener);
+    window.addEventListener("localePreferencesChanged", handlePreferencesChanged as EventListener);
     return () => {
-      window.removeEventListener('localePreferencesChanged', handlePreferencesChanged as EventListener);
+      window.removeEventListener(
+        "localePreferencesChanged",
+        handlePreferencesChanged as EventListener
+      );
     };
   }, []);
 
@@ -73,14 +81,14 @@ export function LocaleSettingsPanel() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h2 className="text-lg font-semibold mb-2">Locale & Formatting</h2>
+        <h2 className="mb-2 text-lg font-semibold">Locale & Formatting</h2>
         <p className="text-sm text-muted-foreground">
           Configure language, region, currency, and formatting preferences
         </p>
       </div>
 
       {/* Settings Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Language Dropdown */}
         <div className="space-y-2">
           <label htmlFor="language" className="text-sm font-medium">
@@ -90,7 +98,7 @@ export function LocaleSettingsPanel() {
             id="language"
             value={preferences.locale}
             onChange={(e) => handleLocaleChange(e.target.value as SupportedLocale)}
-            className="w-full px-3 py-2 border rounded-md bg-background"
+            className="w-full rounded-md border bg-background px-3 py-2"
           >
             {SUPPORTED_LOCALES.map((locale) => (
               <option key={locale} value={locale}>
@@ -109,7 +117,7 @@ export function LocaleSettingsPanel() {
             id="currency"
             value={preferences.currency || LOCALE_METADATA[preferences.locale].currency}
             onChange={(e) => handleCurrencyChange(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md bg-background"
+            className="w-full rounded-md border bg-background px-3 py-2"
           >
             <option value="USD">USD - US Dollar</option>
             <option value="CAD">CAD - Canadian Dollar</option>
@@ -131,7 +139,7 @@ export function LocaleSettingsPanel() {
             id="weekStart"
             value={preferences.weekStart ?? 0}
             onChange={(e) => handleWeekStartChange(Number(e.target.value) as 0 | 1)}
-            className="w-full px-3 py-2 border rounded-md bg-background"
+            className="w-full rounded-md border bg-background px-3 py-2"
           >
             <option value={0}>Sunday</option>
             <option value={1}>Monday</option>
@@ -140,11 +148,11 @@ export function LocaleSettingsPanel() {
       </div>
 
       {/* Live Preview */}
-      <div className="border rounded-lg p-4 bg-muted/50">
-        <h3 className="text-sm font-medium mb-3">Format Preview</h3>
+      <div className="rounded-lg border bg-muted/50 p-4">
+        <h3 className="mb-3 text-sm font-medium">Format Preview</h3>
         <FormatPreview
           locale={preferences.locale}
-          currency={(preferences.currency || LOCALE_METADATA[preferences.locale].currency)}
+          currency={preferences.currency || LOCALE_METADATA[preferences.locale].currency}
         />
       </div>
 
@@ -153,22 +161,20 @@ export function LocaleSettingsPanel() {
         <button
           onClick={handleSave}
           disabled={!hasChanges}
-          className="px-4 py-2 bg-primary text-primary-foreground rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/90 transition-colors"
+          className="rounded-md bg-primary px-4 py-2 text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Save Changes
         </button>
         <button
           onClick={handleReset}
-          className="px-4 py-2 border rounded-md hover:bg-muted/50 transition-colors"
+          className="rounded-md border px-4 py-2 transition-colors hover:bg-muted/50"
         >
           Reset to Browser Defaults
         </button>
       </div>
 
       {hasChanges && (
-        <p className="text-sm text-amber-600 dark:text-amber-500">
-          You have unsaved changes
-        </p>
+        <p className="text-sm text-amber-600 dark:text-amber-500">You have unsaved changes</p>
       )}
     </div>
   );

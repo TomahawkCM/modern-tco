@@ -12,11 +12,11 @@ import { supabase } from "./supabase";
 export class QuestionService {
   private mapChoiceIdToDb(value: string): number | string {
     // Prefer numeric 0..3 for common schemas; fall back to passthrough if not match
-    const v = (value || '').toString().toLowerCase();
+    const v = (value || "").toString().toLowerCase();
     const map: Record<string, number> = { a: 0, b: 1, c: 2, d: 3 };
     if (v in map) return map[v];
     const n = Number(v);
-    return Number.isFinite(n) ? (n) : v;
+    return Number.isFinite(n) ? n : v;
   }
   // --- Mapping helpers: DB <-> App enums ---
   private mapDbDifficultyToUi(value: string | null | undefined): Difficulty {
@@ -173,7 +173,10 @@ export class QuestionService {
    * Get questions by difficulty level
    */
   async getQuestionsByDifficulty(difficulty: Difficulty): Promise<Question[]> {
-    const dbDifficulty = this.mapUiDifficultyToDb(difficulty) as "beginner" | "intermediate" | "advanced";
+    const dbDifficulty = this.mapUiDifficultyToDb(difficulty) as
+      | "beginner"
+      | "intermediate"
+      | "advanced";
     const res: any = await supabase
       .from("questions")
       .select("*")
@@ -223,8 +226,8 @@ export class QuestionService {
     }
 
     // Transform the JSONB data back to Question objects
-  const rows = (data ?? []) as { question_data: Json }[];
-  return rows.map((row) => (row.question_data as unknown) as Question);
+    const rows = (data ?? []) as { question_data: Json }[];
+    return rows.map((row) => row.question_data as unknown as Question);
   }
 
   /**
@@ -238,11 +241,7 @@ export class QuestionService {
    * Get random questions across all domains (no weighting)
    */
   async getRandomQuestions(count: number): Promise<Question[]> {
-    const res: any = await supabase
-      .from("questions")
-      .select("*")
-      .order("RANDOM()")
-      .limit(count);
+    const res: any = await supabase.from("questions").select("*").order("RANDOM()").limit(count);
     const { data, error } = res;
     if (error) {
       throw new Error(`Failed to fetch random questions: ${error.message}`);
@@ -295,12 +294,12 @@ export class QuestionService {
     }
 
     // Get difficulty distribution
-  const diffRes: any = await supabase.from("questions").select("difficulty");
-  const difficultyData = diffRes?.data ?? [];
+    const diffRes: any = await supabase.from("questions").select("difficulty");
+    const difficultyData = diffRes?.data ?? [];
 
-  // Get category distribution
-  const catRes: any = await supabase.from("questions").select("category");
-  const categoryData = catRes?.data ?? [];
+    // Get category distribution
+    const catRes: any = await supabase.from("questions").select("category");
+    const categoryData = catRes?.data ?? [];
 
     // Process distributions
     const domainDistribution: Record<TCODomain, number> = {} as Record<TCODomain, number>;
@@ -323,7 +322,7 @@ export class QuestionService {
 
     // Count from domain statistics view
     domainRows.forEach((row) => {
-      const uiDomain = this.mapDbDomainToUi((row.domain || undefined));
+      const uiDomain = this.mapDbDomainToUi(row.domain || undefined);
       domainDistribution[uiDomain] = (domainDistribution[uiDomain] || 0) + 1;
     });
 
@@ -414,23 +413,25 @@ export class QuestionService {
         if (q.options && Array.isArray(q.options)) {
           // Normalize choice ids as strings
           const choiceIds = (q.options as unknown as Array<any>).map((c, idx) => {
-            if (c && typeof c === 'object' && 'id' in c) return String((c).id);
+            if (c && typeof c === "object" && "id" in c) return String(c.id);
             // fallback: index-based ids a/b/c/d
-            return ['a','b','c','d'][idx] || String(idx);
+            return ["a", "b", "c", "d"][idx] || String(idx);
           });
 
           const normalizeAnswer = (val: any): string => {
-            if (typeof val === 'number') return ['a','b','c','d'][val] || String(val);
-            if (typeof val === 'string') {
-              const map: Record<string,string> = { '0':'a','1':'b','2':'c','3':'d' };
+            if (typeof val === "number") return ["a", "b", "c", "d"][val] || String(val);
+            if (typeof val === "string") {
+              const map: Record<string, string> = { "0": "a", "1": "b", "2": "c", "3": "d" };
               return map[val] || val;
             }
-            return String(val ?? 'a');
+            return String(val ?? "a");
           };
 
           const normalized = normalizeAnswer(q.correct_answer);
           if (!choiceIds.includes(normalized)) {
-            errors.push(`Question ${q.id}: Correct answer ID '${q.correct_answer}' not found in choices`);
+            errors.push(
+              `Question ${q.id}: Correct answer ID '${q.correct_answer}' not found in choices`
+            );
           }
         } else {
           errors.push(`Question ${q.id}: Choices are missing or not an array.`);
@@ -438,7 +439,7 @@ export class QuestionService {
       });
 
       // Check domain distribution
-    const stats = await this.getQuestionStats();
+      const stats = await this.getQuestionStats();
       const expectedDistribution = {
         [TCODomain.ASKING_QUESTIONS]: 22,
         [TCODomain.REFINING_QUESTIONS]: 23,
@@ -476,33 +477,33 @@ export class QuestionService {
     const list = Array.isArray(dbQuestions) ? dbQuestions : dbQuestions ? [dbQuestions] : [];
 
     return list.map((dbQ: any) => {
-      const rawCorrect: any = (dbQ).correct_answer;
+      const rawCorrect: any = dbQ.correct_answer;
       let correctAnswerId: string;
-      if (typeof rawCorrect === 'number') {
-        const map = ['a','b','c','d'];
+      if (typeof rawCorrect === "number") {
+        const map = ["a", "b", "c", "d"];
         correctAnswerId = map[rawCorrect] || String(rawCorrect);
-      } else if (typeof rawCorrect === 'string') {
+      } else if (typeof rawCorrect === "string") {
         // Normalize numeric strings
-        const map: Record<string,string> = { '0':'a','1':'b','2':'c','3':'d' };
+        const map: Record<string, string> = { "0": "a", "1": "b", "2": "c", "3": "d" };
         correctAnswerId = map[rawCorrect] || rawCorrect;
       } else {
-        correctAnswerId = String(rawCorrect ?? 'a');
+        correctAnswerId = String(rawCorrect ?? "a");
       }
 
-      return ({
-      id: dbQ.id,
-      question: dbQ.question,
-      choices: (dbQ.options as unknown as Choice[]) || [], // Map options to choices, cast to unknown first
-      correctAnswerId,
-      domain: this.mapDbDomainToUi(dbQ.domain as string),
-      difficulty: this.mapDbDifficultyToUi(dbQ.difficulty as string),
-      category: this.mapDbCategoryToUi(dbQ.category as string),
-      explanation: dbQ.explanation || "",
-      tags: dbQ.tags || [],
-      studyGuideRef: dbQ.study_guide_ref || dbQ.references || "",
-      createdAt: dbQ.created_at ? new Date(dbQ.created_at) : undefined,
-      updatedAt: dbQ.updated_at ? new Date(dbQ.updated_at) : undefined, // Map updated_at
-    });
+      return {
+        id: dbQ.id,
+        question: dbQ.question,
+        choices: (dbQ.options as unknown as Choice[]) || [], // Map options to choices, cast to unknown first
+        correctAnswerId,
+        domain: this.mapDbDomainToUi(dbQ.domain as string),
+        difficulty: this.mapDbDifficultyToUi(dbQ.difficulty as string),
+        category: this.mapDbCategoryToUi(dbQ.category as string),
+        explanation: dbQ.explanation || "",
+        tags: dbQ.tags || [],
+        studyGuideRef: dbQ.study_guide_ref || dbQ.references || "",
+        createdAt: dbQ.created_at ? new Date(dbQ.created_at) : undefined,
+        updatedAt: dbQ.updated_at ? new Date(dbQ.updated_at) : undefined, // Map updated_at
+      };
     });
   }
 

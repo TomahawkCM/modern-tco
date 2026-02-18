@@ -10,16 +10,16 @@
  * Privacy: Only sends aggregated statistics and cleaned merchant names
  */
 
-import OpenAI from 'openai';
-import type { Transaction } from '@/types/budget';
+import OpenAI from "openai";
+import type { Transaction } from "@/types/budget";
 
 export interface Anomaly {
   transactionId: string;
   transaction: Transaction;
-  type: 'amount' | 'frequency' | 'merchant' | 'pattern';
+  type: "amount" | "frequency" | "merchant" | "pattern";
   confidence: number; // 0-1 scale
   message: string; // User-facing explanation
-  severity: 'low' | 'medium' | 'high';
+  severity: "low" | "medium" | "high";
   context: {
     typical: string; // "Usually $6"
     actual: string; // "This time $85"
@@ -60,21 +60,17 @@ function calculateMerchantStats(
 
   // Calculate standard deviation
   const variance =
-    amounts.reduce((sum, amt) => sum + Math.pow(amt - avgAmount, 2), 0) /
-    amounts.length;
+    amounts.reduce((sum, amt) => sum + Math.pow(amt - avgAmount, 2), 0) / amounts.length;
   const stdDevAmount = Math.sqrt(variance);
 
   // Calculate average days between transactions
-  const sortedDates = merchantTxs
-    .map((tx) => tx.date.getTime())
-    .sort((a, b) => a - b);
+  const sortedDates = merchantTxs.map((tx) => tx.date.getTime()).sort((a, b) => a - b);
   let totalDaysBetween = 0;
   for (let i = 1; i < sortedDates.length; i++) {
     const daysDiff = (sortedDates[i] - sortedDates[i - 1]) / (1000 * 60 * 60 * 24);
     totalDaysBetween += daysDiff;
   }
-  const avgDaysBetween =
-    sortedDates.length > 1 ? totalDaysBetween / (sortedDates.length - 1) : 0;
+  const avgDaysBetween = sortedDates.length > 1 ? totalDaysBetween / (sortedDates.length - 1) : 0;
 
   return {
     count: merchantTxs.length,
@@ -94,26 +90,24 @@ function detectAmountAnomalies(
   const anomalies: Anomaly[] = [];
 
   for (const tx of recentTransactions) {
-    const merchant = tx.merchant || tx.description.split(' ')[0];
+    const merchant = tx.merchant || tx.description.split(" ")[0];
     const stats = calculateMerchantStats(merchant, historicalTransactions);
 
     // Need at least 3 historical transactions to establish pattern
     if (stats.count < 3) continue;
 
     const amount = Math.abs(tx.amount);
-    const deviation = stats.stdDevAmount > 0
-      ? (amount - stats.avgAmount) / stats.stdDevAmount
-      : 0;
+    const deviation = stats.stdDevAmount > 0 ? (amount - stats.avgAmount) / stats.stdDevAmount : 0;
 
     // Flag if amount is > 2 standard deviations from average
     if (Math.abs(deviation) > 2) {
-      const severity: 'low' | 'medium' | 'high' =
-        Math.abs(deviation) > 4 ? 'high' : Math.abs(deviation) > 3 ? 'medium' : 'low';
+      const severity: "low" | "medium" | "high" =
+        Math.abs(deviation) > 4 ? "high" : Math.abs(deviation) > 3 ? "medium" : "low";
 
       anomalies.push({
         transactionId: tx.id,
         transaction: tx,
-        type: 'amount',
+        type: "amount",
         confidence: Math.min(0.95, 0.5 + Math.abs(deviation) * 0.1),
         message:
           amount > stats.avgAmount
@@ -142,7 +136,7 @@ function detectFrequencyAnomalies(
 ): Anomaly[] {
   const anomalies: Anomaly[] = [];
   const merchants = new Set(
-    recentTransactions.map((tx) => tx.merchant || tx.description.split(' ')[0])
+    recentTransactions.map((tx) => tx.merchant || tx.description.split(" ")[0])
   );
 
   for (const merchant of merchants) {
@@ -161,13 +155,13 @@ function detectFrequencyAnomalies(
 
     // Flag if frequency is > 100% different from expected
     if (Math.abs(freqDeviation) > 1.0 && actualFrequency >= 3) {
-      const severity: 'low' | 'medium' | 'high' =
-        Math.abs(freqDeviation) > 3 ? 'high' : Math.abs(freqDeviation) > 2 ? 'medium' : 'low';
+      const severity: "low" | "medium" | "high" =
+        Math.abs(freqDeviation) > 3 ? "high" : Math.abs(freqDeviation) > 2 ? "medium" : "low";
 
       anomalies.push({
         transactionId: recentMerchantTxs[0].id,
         transaction: recentMerchantTxs[0],
-        type: 'frequency',
+        type: "frequency",
         confidence: Math.min(0.9, 0.6 + Math.abs(freqDeviation) * 0.1),
         message:
           actualFrequency > expectedFrequency
@@ -189,10 +183,7 @@ function detectFrequencyAnomalies(
 /**
  * Use AI to provide context and explanations for anomalies
  */
-async function enrichAnomaliesWithAI(
-  anomalies: Anomaly[],
-  apiKey: string
-): Promise<Anomaly[]> {
+async function enrichAnomaliesWithAI(anomalies: Anomaly[], apiKey: string): Promise<Anomaly[]> {
   if (anomalies.length === 0) return [];
 
   try {
@@ -214,16 +205,17 @@ Actual: ${anomaly.context.actual}
 Provide a short (1-2 sentence) user-friendly explanation that helps the user understand what might have caused this anomaly. Be helpful but not alarmist.`;
 
       const response = await client.chat.completions.create({
-        model: 'gpt-4o-mini',
+        model: "gpt-4o-mini",
         messages: [
           {
-            role: 'system',
-            content: 'You are a helpful financial assistant. Provide brief, clear explanations for spending anomalies.'
+            role: "system",
+            content:
+              "You are a helpful financial assistant. Provide brief, clear explanations for spending anomalies.",
           },
           {
-            role: 'user',
-            content: prompt
-          }
+            role: "user",
+            content: prompt,
+          },
         ],
         temperature: 0.3,
         max_tokens: 100,
@@ -243,7 +235,7 @@ Provide a short (1-2 sentence) user-friendly explanation that helps the user und
 
     return enrichedAnomalies;
   } catch (error) {
-    console.error('[AnomalyDetection] AI enrichment error:', error);
+    console.error("[AnomalyDetection] AI enrichment error:", error);
     return anomalies; // Return without AI enrichment
   }
 }
@@ -277,14 +269,8 @@ export async function detectAnomalies(
   );
 
   // Detect different types of anomalies
-  const amountAnomalies = detectAmountAnomalies(
-    recentTransactions,
-    historicalTransactions
-  );
-  const frequencyAnomalies = detectFrequencyAnomalies(
-    recentTransactions,
-    historicalTransactions
-  );
+  const amountAnomalies = detectAmountAnomalies(recentTransactions, historicalTransactions);
+  const frequencyAnomalies = detectFrequencyAnomalies(recentTransactions, historicalTransactions);
 
   let allAnomalies = [...amountAnomalies, ...frequencyAnomalies];
 

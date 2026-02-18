@@ -33,4 +33,3 @@ Placeholder content describing how analysts formulate precise questions inside t
 ## Author Notes
 
 Keep tone instructional and align terminology with `TCODomain.ASKING_QUESTIONS`. Replace checklists with real content prior to publishing.
-

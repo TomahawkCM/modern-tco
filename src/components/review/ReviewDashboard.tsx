@@ -34,7 +34,7 @@ export default function ReviewDashboard() {
     startSession,
   } = useReview();
 
-  const [activeTab, setActiveTab] = useState<ReviewSessionType>('mixed');
+  const [activeTab, setActiveTab] = useState<ReviewSessionType>("mixed");
   const { updateReviewStreak } = useProgress();
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function ReviewDashboard() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center p-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -82,16 +82,10 @@ export default function ReviewDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Daily Review</h2>
-          <p className="text-muted-foreground">
-            Spaced repetition for long-term retention
-          </p>
+          <p className="text-muted-foreground">Spaced repetition for long-term retention</p>
         </div>
         {totalDue > 0 && (
-          <Button
-            size="lg"
-            onClick={() => handleStartReview(activeTab)}
-            className="gap-2"
-          >
+          <Button size="lg" onClick={() => handleStartReview(activeTab)} className="gap-2">
             <PlayCircle className="h-5 w-5" />
             Start Review ({totalDue} items)
           </Button>
@@ -99,10 +93,10 @@ export default function ReviewDashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
         <Card>
           <CardContent className="pt-6 text-center">
-            <Clock className="h-6 w-6 mx-auto mb-2 text-orange-500" />
+            <Clock className="mx-auto mb-2 h-6 w-6 text-orange-500" />
             <p className="text-2xl font-bold">{totalDue}</p>
             <p className="text-xs text-muted-foreground">Total Due</p>
           </CardContent>
@@ -110,7 +104,7 @@ export default function ReviewDashboard() {
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <Brain className="h-6 w-6 mx-auto mb-2 text-purple-500" />
+            <Brain className="mx-auto mb-2 h-6 w-6 text-purple-500" />
             <p className="text-2xl font-bold">{flashcardsDue}</p>
             <p className="text-xs text-muted-foreground">Flashcards</p>
           </CardContent>
@@ -118,7 +112,7 @@ export default function ReviewDashboard() {
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <Target className="h-6 w-6 mx-auto mb-2 text-primary" />
+            <Target className="mx-auto mb-2 h-6 w-6 text-primary" />
             <p className="text-2xl font-bold">{questionsDue}</p>
             <p className="text-xs text-muted-foreground">Questions</p>
           </CardContent>
@@ -126,7 +120,7 @@ export default function ReviewDashboard() {
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <Flame className="h-6 w-6 mx-auto mb-2 text-red-500" />
+            <Flame className="mx-auto mb-2 h-6 w-6 text-red-500" />
             <p className="text-2xl font-bold">{currentStreak}</p>
             <p className="text-xs text-muted-foreground">Day Streak</p>
           </CardContent>
@@ -134,7 +128,7 @@ export default function ReviewDashboard() {
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <TrendingUp className="h-6 w-6 mx-auto mb-2 text-[#22c55e]" />
+            <TrendingUp className="mx-auto mb-2 h-6 w-6 text-[#22c55e]" />
             <p className="text-2xl font-bold">{avgRetention}%</p>
             <p className="text-xs text-muted-foreground">Card Retention</p>
           </CardContent>
@@ -142,7 +136,7 @@ export default function ReviewDashboard() {
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <CheckCircle2 className="h-6 w-6 mx-auto mb-2 text-emerald-500" />
+            <CheckCircle2 className="mx-auto mb-2 h-6 w-6 text-emerald-500" />
             <p className="text-2xl font-bold">{avgMastery}%</p>
             <p className="text-xs text-muted-foreground">Question Mastery</p>
           </CardContent>
@@ -150,7 +144,7 @@ export default function ReviewDashboard() {
       </div>
 
       {/* Streak Calendar & Quick Actions */}
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid gap-4 md:grid-cols-2">
         <StreakCalendar
           currentStreak={currentStreak}
           longestStreak={streak?.longest || 0}
@@ -165,7 +159,7 @@ export default function ReviewDashboard() {
             <Button
               variant="outline"
               className="w-full justify-start gap-2"
-              onClick={() => handleStartReview('mixed', 10)}
+              onClick={() => handleStartReview("mixed", 10)}
               disabled={totalDue === 0}
             >
               <Clock className="h-4 w-4" />
@@ -174,7 +168,7 @@ export default function ReviewDashboard() {
             <Button
               variant="outline"
               className="w-full justify-start gap-2"
-              onClick={() => handleStartReview('mixed', 15)}
+              onClick={() => handleStartReview("mixed", 15)}
               disabled={totalDue === 0}
             >
               <Clock className="h-4 w-4" />
@@ -183,7 +177,7 @@ export default function ReviewDashboard() {
             <Button
               variant="outline"
               className="w-full justify-start gap-2"
-              onClick={() => handleStartReview('mixed')}
+              onClick={() => handleStartReview("mixed")}
               disabled={totalDue === 0}
             >
               <PlayCircle className="h-4 w-4" />
@@ -230,63 +224,64 @@ export default function ReviewDashboard() {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="mixed" className="space-y-4 mt-4">
+            <TabsContent value="mixed" className="mt-4 space-y-4">
               <p className="text-sm text-muted-foreground">
-                Review both flashcards and practice questions in an interleaved format for optimal learning.
+                Review both flashcards and practice questions in an interleaved format for optimal
+                learning.
               </p>
               {totalDue === 0 ? (
-                <div className="text-center py-8">
-                  <CheckCircle2 className="h-12 w-12 mx-auto mb-3 text-[#22c55e]" />
+                <div className="py-8 text-center">
+                  <CheckCircle2 className="mx-auto mb-3 h-12 w-12 text-[#22c55e]" />
                   <p className="text-lg font-semibold">All caught up!</p>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <p className="mt-1 text-sm text-muted-foreground">
                     No items due for review right now. Great work!
                   </p>
                 </div>
               ) : (
-                <div className="text-center py-4">
-                  <Button size="lg" onClick={() => handleStartReview('mixed')}>
+                <div className="py-4 text-center">
+                  <Button size="lg" onClick={() => handleStartReview("mixed")}>
                     Start Mixed Review
                   </Button>
                 </div>
               )}
             </TabsContent>
 
-            <TabsContent value="flashcards" className="space-y-4 mt-4">
+            <TabsContent value="flashcards" className="mt-4 space-y-4">
               <p className="text-sm text-muted-foreground">
                 Focus on flashcard review with spaced repetition intervals.
               </p>
               {flashcardsDue === 0 ? (
-                <div className="text-center py-8">
-                  <CheckCircle2 className="h-12 w-12 mx-auto mb-3 text-[#22c55e]" />
+                <div className="py-8 text-center">
+                  <CheckCircle2 className="mx-auto mb-3 h-12 w-12 text-[#22c55e]" />
                   <p className="text-lg font-semibold">No flashcards due!</p>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <p className="mt-1 text-sm text-muted-foreground">
                     Check back later or create new flashcards.
                   </p>
                 </div>
               ) : (
-                <div className="text-center py-4">
-                  <Button size="lg" onClick={() => handleStartReview('flashcards')}>
+                <div className="py-4 text-center">
+                  <Button size="lg" onClick={() => handleStartReview("flashcards")}>
                     Review Flashcards
                   </Button>
                 </div>
               )}
             </TabsContent>
 
-            <TabsContent value="questions" className="space-y-4 mt-4">
+            <TabsContent value="questions" className="mt-4 space-y-4">
               <p className="text-sm text-muted-foreground">
                 Practice exam questions to reinforce weak areas and track mastery.
               </p>
               {questionsDue === 0 ? (
-                <div className="text-center py-8">
-                  <CheckCircle2 className="h-12 w-12 mx-auto mb-3 text-[#22c55e]" />
+                <div className="py-8 text-center">
+                  <CheckCircle2 className="mx-auto mb-3 h-12 w-12 text-[#22c55e]" />
                   <p className="text-lg font-semibold">No questions due!</p>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <p className="mt-1 text-sm text-muted-foreground">
                     All practice questions are up to date.
                   </p>
                 </div>
               ) : (
-                <div className="text-center py-4">
-                  <Button size="lg" onClick={() => handleStartReview('questions')}>
+                <div className="py-4 text-center">
+                  <Button size="lg" onClick={() => handleStartReview("questions")}>
                     Review Questions
                   </Button>
                 </div>
@@ -302,10 +297,19 @@ export default function ReviewDashboard() {
           <CardTitle>Spaced Repetition Tips</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
-          <p>✓ <strong>Review daily</strong> for best results - even just 10 minutes maintains your streak</p>
-          <p>✓ <strong>Be honest</strong> with ratings - accurate self-assessment improves scheduling</p>
-          <p>✓ <strong>Focus on weak areas</strong> - the algorithm prioritizes struggling content</p>
-          <p>✓ <strong>Build momentum</strong> - consistent review builds long-term retention</p>
+          <p>
+            ✓ <strong>Review daily</strong> for best results - even just 10 minutes maintains your
+            streak
+          </p>
+          <p>
+            ✓ <strong>Be honest</strong> with ratings - accurate self-assessment improves scheduling
+          </p>
+          <p>
+            ✓ <strong>Focus on weak areas</strong> - the algorithm prioritizes struggling content
+          </p>
+          <p>
+            ✓ <strong>Build momentum</strong> - consistent review builds long-term retention
+          </p>
         </CardContent>
       </Card>
     </div>

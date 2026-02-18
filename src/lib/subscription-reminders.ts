@@ -7,10 +7,10 @@
  * - Reminder scheduling
  */
 
-import type { Subscription } from '@/types/budget';
-import { differenceInDays, addDays, format } from 'date-fns';
-import { getAllSubscriptions } from './budget-db';
-import { sendBillReminderEmail } from './email/email-reminder-service';
+import type { Subscription } from "@/types/budget";
+import { differenceInDays, addDays, format } from "date-fns";
+import { getAllSubscriptions } from "./budget-db";
+import { sendBillReminderEmail } from "./email/email-reminder-service";
 
 export interface UpcomingReminder {
   subscription: Subscription;
@@ -24,7 +24,7 @@ export interface UpcomingReminder {
  * Check if browser notifications are supported
  */
 export function isNotificationSupported(): boolean {
-  return typeof window !== 'undefined' && 'Notification' in window;
+  return typeof window !== "undefined" && "Notification" in window;
 }
 
 /**
@@ -33,18 +33,18 @@ export function isNotificationSupported(): boolean {
  */
 export async function requestNotificationPermission(): Promise<NotificationPermission> {
   if (!isNotificationSupported()) {
-    return 'denied';
+    return "denied";
   }
-  
+
   return await Notification.requestPermission();
 }
 
 /**
  * Get current notification permission status
  */
-export function getNotificationPermission(): NotificationPermission | 'unsupported' {
+export function getNotificationPermission(): NotificationPermission | "unsupported" {
   if (!isNotificationSupported()) {
-    return 'unsupported';
+    return "unsupported";
   }
   return Notification.permission;
 }
@@ -56,17 +56,18 @@ export function showSubscriptionNotification(
   subscription: Subscription,
   daysUntilBilling: number
 ): void {
-  if (!isNotificationSupported() || Notification.permission !== 'granted') {
+  if (!isNotificationSupported() || Notification.permission !== "granted") {
     return;
   }
 
-  const title = daysUntilBilling === 0 
-    ? `${subscription.name} billing today!`
-    : `${subscription.name} billing in ${daysUntilBilling} day${daysUntilBilling !== 1 ? 's' : ''}`;
+  const title =
+    daysUntilBilling === 0
+      ? `${subscription.name} billing today!`
+      : `${subscription.name} billing in ${daysUntilBilling} day${daysUntilBilling !== 1 ? "s" : ""}`;
 
   const body = `$${subscription.amount.toFixed(2)} ${subscription.billingCycle} charge`;
-  
-  const icon = '/icons/icon-192x192.png'; // PWA icon
+
+  const icon = "/icons/icon-192x192.png"; // PWA icon
 
   try {
     const notification = new Notification(title, {
@@ -78,7 +79,7 @@ export function showSubscriptionNotification(
 
     notification.onclick = () => {
       window.focus();
-      window.location.href = '/budget-app/subscriptions';
+      window.location.href = "/budget-app/subscriptions";
       notification.close();
     };
 
@@ -87,7 +88,7 @@ export function showSubscriptionNotification(
       setTimeout(() => notification.close(), 10000);
     }
   } catch (error) {
-    console.error('Failed to show notification:', error);
+    console.error("Failed to show notification:", error);
   }
 }
 
@@ -105,13 +106,13 @@ export async function getSubscriptionsNeedingReminders(): Promise<UpcomingRemind
   for (const sub of subscriptions) {
     // Skip if reminders disabled or not active
     if (!sub.reminderEnabled) continue;
-    if (sub.status !== 'active' && sub.status !== 'trial') continue;
+    if (sub.status !== "active" && sub.status !== "trial") continue;
 
     const billingDate = new Date(sub.nextBillingDate);
     billingDate.setHours(0, 0, 0, 0);
 
     const daysUntilBilling = differenceInDays(billingDate, now);
-    
+
     // Check if we should remind today
     if (daysUntilBilling >= 0 && daysUntilBilling <= sub.reminderDaysBefore) {
       reminders.push({
@@ -132,7 +133,9 @@ export async function getSubscriptionsNeedingReminders(): Promise<UpcomingRemind
  * Get all upcoming subscriptions within a specified number of days
  * @param daysAhead Number of days to look ahead (default: 30)
  */
-export async function getUpcomingSubscriptions(daysAhead: number = 30): Promise<UpcomingReminder[]> {
+export async function getUpcomingSubscriptions(
+  daysAhead: number = 30
+): Promise<UpcomingReminder[]> {
   const subscriptions = await getAllSubscriptions();
   const now = new Date();
   now.setHours(0, 0, 0, 0);
@@ -141,7 +144,7 @@ export async function getUpcomingSubscriptions(daysAhead: number = 30): Promise<
   const upcoming: UpcomingReminder[] = [];
 
   for (const sub of subscriptions) {
-    if (sub.status !== 'active' && sub.status !== 'trial') continue;
+    if (sub.status !== "active" && sub.status !== "trial") continue;
 
     const billingDate = new Date(sub.nextBillingDate);
     billingDate.setHours(0, 0, 0, 0);
@@ -169,10 +172,8 @@ export async function checkAndTriggerReminders(): Promise<number> {
   const shown: string[] = [];
 
   // Get already shown reminders today from localStorage
-  const todayKey = `reminders_shown_${format(new Date(), 'yyyy-MM-dd')}`;
-  const alreadyShown = new Set(
-    JSON.parse(localStorage.getItem(todayKey) || '[]') as string[]
-  );
+  const todayKey = `reminders_shown_${format(new Date(), "yyyy-MM-dd")}`;
+  const alreadyShown = new Set(JSON.parse(localStorage.getItem(todayKey) || "[]") as string[]);
 
   for (const reminder of reminders) {
     const key = `${reminder.subscription.id}_${reminder.daysUntilBilling}`;
@@ -185,12 +186,12 @@ export async function checkAndTriggerReminders(): Promise<number> {
 
     // Also send email notification (fire and forget - don't block on email)
     sendBillReminderEmail(reminder.subscription, reminder.daysUntilBilling)
-      .then(result => {
+      .then((result) => {
         if (result.success) {
           console.warn(`Email reminder sent for ${reminder.subscription.name}`);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(`Failed to send email for ${reminder.subscription.name}:`, err);
       });
 
@@ -201,7 +202,7 @@ export async function checkAndTriggerReminders(): Promise<number> {
   if (shown.length > 0) {
     const allShown = [...alreadyShown, ...shown];
     localStorage.setItem(todayKey, JSON.stringify(allShown));
-    
+
     // Clean up old reminder tracking (keep last 7 days)
     cleanupOldReminderTracking();
   }
@@ -215,17 +216,17 @@ export async function checkAndTriggerReminders(): Promise<number> {
 function cleanupOldReminderTracking(): void {
   const now = new Date();
   const keys: string[] = [];
-  
+
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    if (key?.startsWith('reminders_shown_')) {
+    if (key?.startsWith("reminders_shown_")) {
       keys.push(key);
     }
   }
 
   // Keep only last 7 days
   const cutoffDate = addDays(now, -7);
-  const cutoffKey = `reminders_shown_${format(cutoffDate, 'yyyy-MM-dd')}`;
+  const cutoffKey = `reminders_shown_${format(cutoffDate, "yyyy-MM-dd")}`;
 
   for (const key of keys) {
     if (key < cutoffKey) {
@@ -244,12 +245,12 @@ export async function calculateUpcomingCharges(daysAhead: number = 30): Promise<
   byWeek: { week: number; total: number; subscriptions: Subscription[] }[];
 }> {
   const upcoming = await getUpcomingSubscriptions(daysAhead);
-  
+
   const total = upcoming.reduce((sum, r) => sum + r.amount, 0);
-  
+
   // Group by week
   const byWeek: Map<number, { total: number; subscriptions: Subscription[] }> = new Map();
-  
+
   for (const reminder of upcoming) {
     const weekNum = Math.floor(reminder.daysUntilBilling / 7);
     const week = byWeek.get(weekNum) || { total: 0, subscriptions: [] };
@@ -275,12 +276,12 @@ export async function getSubscriptionsBillingOn(date: Date): Promise<Subscriptio
   const targetDate = new Date(date);
   targetDate.setHours(0, 0, 0, 0);
 
-  return subscriptions.filter(sub => {
-    if (sub.status !== 'active' && sub.status !== 'trial') return false;
-    
+  return subscriptions.filter((sub) => {
+    if (sub.status !== "active" && sub.status !== "trial") return false;
+
     const billingDate = new Date(sub.nextBillingDate);
     billingDate.setHours(0, 0, 0, 0);
-    
+
     return billingDate.getTime() === targetDate.getTime();
   });
 }
@@ -290,7 +291,7 @@ export async function getSubscriptionsBillingOn(date: Date): Promise<Subscriptio
  */
 export function formatReminderMessage(reminder: UpcomingReminder): string {
   const { subscription, daysUntilBilling, amount } = reminder;
-  
+
   if (daysUntilBilling === 0) {
     return `${subscription.name} ($${amount.toFixed(2)}) is billing today!`;
   } else if (daysUntilBilling === 1) {
@@ -305,13 +306,13 @@ export function formatReminderMessage(reminder: UpcomingReminder): string {
  */
 export async function initializeReminders(): Promise<void> {
   // Request permission if not already granted
-  if (isNotificationSupported() && Notification.permission === 'default') {
+  if (isNotificationSupported() && Notification.permission === "default") {
     // Don't auto-request, let the UI handle this
-    console.warn('Notification permission not yet granted. User can enable in settings.');
+    console.warn("Notification permission not yet granted. User can enable in settings.");
   }
 
   // Check for reminders on load
-  if (Notification.permission === 'granted') {
+  if (Notification.permission === "granted") {
     const shown = await checkAndTriggerReminders();
     if (shown > 0) {
       console.warn(`Showed ${shown} subscription reminder(s)`);
@@ -319,12 +320,14 @@ export async function initializeReminders(): Promise<void> {
   }
 
   // Set up periodic check (every hour)
-  if (typeof window !== 'undefined') {
-    setInterval(() => {
-      if (Notification.permission === 'granted') {
-        void checkAndTriggerReminders();
-      }
-    }, 60 * 60 * 1000); // 1 hour
+  if (typeof window !== "undefined") {
+    setInterval(
+      () => {
+        if (Notification.permission === "granted") {
+          void checkAndTriggerReminders();
+        }
+      },
+      60 * 60 * 1000
+    ); // 1 hour
   }
 }
-

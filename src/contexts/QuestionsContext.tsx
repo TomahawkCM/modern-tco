@@ -17,7 +17,7 @@ import {
   subscribeToQuestions,
 } from "@/services/questionsService";
 import { Difficulty, QuestionCategory, TCODomain, type Question } from "@/types/exam";
-import { defaultDifficultyRecord } from '@/lib/difficulty';
+import { defaultDifficultyRecord } from "@/lib/difficulty";
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -81,7 +81,14 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
     const p = (pathname || "").toLowerCase();
     // Load on admin editor and study/content areas; defer elsewhere
     return [
-      "/admin", "/study", "/learn", "/learning", "/modules", "/assessments", "/kb", "/search",
+      "/admin",
+      "/study",
+      "/learn",
+      "/learning",
+      "/modules",
+      "/assessments",
+      "/kb",
+      "/search",
     ].some((prefix) => p.startsWith(prefix));
   }, [pathname]);
 
@@ -125,7 +132,9 @@ export function QuestionsProvider({ children }: { children: React.ReactNode }) {
     });
 
     return () => {
-      try { unsub?.unsubscribe(); } catch {}
+      try {
+        unsub?.unsubscribe();
+      } catch {}
     };
   }, [loadInitialQuestions, shouldLoad]);
 

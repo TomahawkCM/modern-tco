@@ -12,7 +12,11 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import { Suspense } from "react";
 import "./globals.css";
+import "../styles/touch-targets.css";
 import { Providers } from "./providers";
+
+// Client-side sync UI wrapper
+import SyncClientWrapper from "@/components/SyncClientWrapper";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,9 +49,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   // Get locale preferences for dynamic lang and dir attributes
-  const locale = getLocalePreferences().locale || 'en-US';
-  const dir = LOCALE_METADATA[locale]?.dir || 'ltr';
-  const langCode = locale.split('-')[0]; // Extract language code (e.g., 'en' from 'en-US')
+  const locale = getLocalePreferences().locale || "en-US";
+  const dir = LOCALE_METADATA[locale]?.dir || "ltr";
+  const langCode = locale.split("-")[0]; // Extract language code (e.g., 'en' from 'en-US')
 
   return (
     <html
@@ -62,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="manifest" href="/manifest.json" />
 
         {/* Apple PWA Meta Tags */}
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Budget" />
@@ -78,7 +83,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* PDF.js from CDN for OCR functionality - bypasses webpack bundling issues */}
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
       </head>
-      <body className="bg-background text-foreground antialiased" suppressHydrationWarning>
+      <body
+        className="layout-safe bg-background text-foreground antialiased"
+        suppressHydrationWarning
+      >
         {/* Load PDF.js from CDN - bypasses webpack bundling issues */}
         <Script
           src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"
@@ -91,6 +99,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AccessibilityInitializer />
         <div className="min-h-screen bg-background">
           <Providers>
+            {/* Client wrapper renders Sync UI, Onboarding, Command Palette (uses LANSyncContext internally) */}
+            <SyncClientWrapper />
+
             <MainLayout asGlobal>
               <SkipLinks />
               <MonitoringErrorBoundary>{children}</MonitoringErrorBoundary>
@@ -105,9 +116,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Accessibility global styles - CSS-based to avoid hydration errors */}
         <style>{`
           html[data-large-text="1"] { font-size: 18px; }
-          html[data-high-contrast="1"] body { filter: contrast(1.15) saturate(1.1); }
-          html[data-high-contrast="1"] :focus-visible { outline: 2px solid #14b8a6; outline-offset: 2px; }
+          html[data-high-contrast="1"] :focus-visible { outline: 3px solid #5eead4; outline-offset: 2px; }
         `}</style>
+        {/* Register service worker on client side */}
+        <Script
+          id="register-sw"
+          strategy="afterInteractive"
+        >{`if('serviceWorker' in navigator){navigator.serviceWorker.register('/service-worker.js').catch(()=>{});}`}</Script>
       </body>
     </html>
   );

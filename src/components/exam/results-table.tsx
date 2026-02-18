@@ -168,7 +168,9 @@ export function ResultsTable() {
       <div className="grid gap-4 md:grid-cols-4">
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Total Sessions</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Total Sessions
+            </CardTitle>
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -179,7 +181,9 @@ export function ResultsTable() {
 
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Average Score</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Average Score
+            </CardTitle>
             <CheckCircle className="h-4 w-4 text-[#22c55e]" />
           </CardHeader>
           <CardContent>
@@ -192,7 +196,9 @@ export function ResultsTable() {
 
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Questions Answered</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Questions Answered
+            </CardTitle>
             <CheckCircle className="h-4 w-4 text-primary" />
           </CardHeader>
           <CardContent>
@@ -207,7 +213,9 @@ export function ResultsTable() {
 
         <Card className="glass border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Time Invested</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">
+              Time Invested
+            </CardTitle>
             <Clock className="h-4 w-4 text-orange-400" />
           </CardHeader>
           <CardContent>
@@ -239,7 +247,7 @@ export function ResultsTable() {
             </div>
 
             <Select value={filterMode} onValueChange={setFilterMode}>
-              <SelectTrigger 
+              <SelectTrigger
                 className="glass w-full border-white/20 text-foreground sm:w-[180px]"
                 aria-label="Filter exam results by mode"
               >

@@ -1,4 +1,5 @@
 # Visual Inventory & Design Specifications
+
 **Module**: Tanium Platform Foundation (00-tanium-platform-foundation.mdx)
 **Analysis Date**: 2025-10-12
 **Total Lines**: 4,155
@@ -9,12 +10,12 @@
 
 ## 📊 Visual Opportunities Summary
 
-| Priority | Category | Count | Lines | Status |
-|----------|----------|-------|-------|--------|
-| P1 | Architecture & Data Flow | 4 | 125-850 | 🔴 Critical |
-| P2 | Console UI Mockups | 3 | 997-1300 | 🟡 High |
-| P3 | Process Flow Diagrams | 3 | 1570-2100 | 🟢 Medium |
-| P4 | Infographics | 3 | Various | 🟢 Medium |
+| Priority | Category                 | Count | Lines     | Status      |
+| -------- | ------------------------ | ----- | --------- | ----------- |
+| P1       | Architecture & Data Flow | 4     | 125-850   | 🔴 Critical |
+| P2       | Console UI Mockups       | 3     | 997-1300  | 🟡 High     |
+| P3       | Process Flow Diagrams    | 3     | 1570-2100 | 🟢 Medium   |
+| P4       | Infographics             | 3     | Various   | 🟢 Medium   |
 
 **Total Diagrams**: 13
 **Estimated Design Time**: 16-20 hours
@@ -31,6 +32,7 @@
 **Replacement**: Professional comparison diagram
 
 **Design Specifications**:
+
 ```yaml
 Diagram Type: Side-by-side comparison
 Dimensions: 1200x600px
@@ -78,6 +80,7 @@ Accessibility: Alt text describing both approaches, high contrast
 **Replacement**: Animated flow diagram
 
 **Design Specifications**:
+
 ```yaml
 Diagram Type: Horizontal process flow with numbered stages
 Dimensions: 1400x400px
@@ -150,6 +153,7 @@ Accessibility: Describable step-by-step for screen readers
 **Replacement**: Interactive component diagram
 
 **Design Specifications**:
+
 ```yaml
 Diagram Type: Node-and-edge relationship graph
 Dimensions: 1000x700px
@@ -229,6 +233,7 @@ Accessibility: Clear labels, high contrast, logical reading order
 **Replacement**: Infographic with bar charts
 
 **Design Specifications**:
+
 ```yaml
 Diagram Type: Side-by-side bar chart comparison
 Dimensions: 1200x500px
@@ -301,6 +306,7 @@ Accessibility: Data table alternative provided in alt text
 **Replacement**: Professional UI mockup
 
 **Design Specifications**:
+
 ```yaml
 Mockup Type: High-fidelity console interface
 Dimensions: 1600x1000px (16:10 for realistic console view)
@@ -438,6 +444,7 @@ Accessibility: Clear visual hierarchy, sufficient contrast ratios
 **Replacement**: Interactive module selector mockup
 
 **Design Specifications**:
+
 ```yaml
 Mockup Type: Module switcher dropdown/grid
 Dimensions: 800x600px
@@ -553,6 +560,7 @@ Accessibility: Keyboard navigation, ARIA labels
 **Replacement**: Visual query builder mockup
 
 **Design Specifications**:
+
 ```yaml
 Mockup Type: Question builder UI with drag-and-drop zones
 Dimensions: 1200x700px
@@ -703,6 +711,7 @@ Accessibility: Clear focus states, keyboard shortcuts, screen reader labels
 **Replacement**: Flowchart diagram
 
 **Design Specifications**:
+
 ```yaml
 Diagram Type: Vertical flowchart with decision trees
 Dimensions: 900x1200px
@@ -793,6 +802,7 @@ Accessibility: Clear logical flow, numbered steps alternative
 **Replacement**: Infrastructure topology diagram
 
 **Design Specifications**:
+
 ```yaml
 Diagram Type: Network topology / geographic distribution
 Dimensions: 1400x900px
@@ -903,6 +913,7 @@ Accessibility: Alternative text describing hierarchy
 **Replacement**: PKI tree diagram
 
 **Design Specifications**:
+
 ```yaml
 Diagram Type: Hierarchical tree structure
 Dimensions: 1000x800px
@@ -1016,6 +1027,7 @@ Accessibility: Hierarchical heading structure in alt text
 **Replacement**: Engaging infographic with metaphors
 
 **Design Specifications**:
+
 ```yaml
 Diagram Type: Comparison infographic with visual metaphors
 Dimensions: 1200x600px
@@ -1125,6 +1137,7 @@ Accessibility: Clear numeric comparison in alt text
 **Replacement**: Line graph showing consistent performance
 
 **Design Specifications**:
+
 ```yaml
 Diagram Type: Multi-line graph with comparison
 Dimensions: 1200x700px
@@ -1250,6 +1263,7 @@ Accessibility: Data table provided as alternative
 **Replacement**: Interactive learning journey map
 
 **Design Specifications**:
+
 ```yaml
 Diagram Type: Node-based learning path / journey map
 Dimensions: 1400x800px
@@ -1418,6 +1432,7 @@ Accessibility: Linear path description in alt text
 ## 📁 Asset Organization
 
 ### **Figma File Structure**
+
 ```
 LMS Design System
 ├─ 📄 Page 1: Design System
@@ -1446,6 +1461,7 @@ LMS Design System
 ```
 
 ### **Local Asset Organization**
+
 ```
 public/assets/figma/module-foundation/
 ├─ architecture/
@@ -1481,6 +1497,7 @@ public/assets/figma/module-foundation/
 ## 🎨 Design System Specifications
 
 ### **Color Palette**
+
 ```yaml
 Primary Colors:
   - Tanium Blue: #0066CC
@@ -1513,6 +1530,7 @@ Accessibility:
 ```
 
 ### **Typography Scale**
+
 ```yaml
 Font Family:
   - Primary: Inter (Google Fonts)
@@ -1544,6 +1562,7 @@ Font Weights:
 ```
 
 ### **Icon Library**
+
 ```yaml
 Icon Style: Outline/Line style, 24px default
 Stroke Width: 2px
@@ -1588,6 +1607,7 @@ Icon Colors:
 ```
 
 ### **Component Library**
+
 ```yaml
 Buttons:
   - Primary: Blue bg, white text, 8px radius
@@ -1628,12 +1648,14 @@ Tooltips:
 ## 📋 Implementation Checklist
 
 ### **Phase 1: Analysis** ✅
+
 - [x] Analyze module content
 - [x] Identify 13 visual opportunities
 - [x] Create detailed specifications
 - [x] Document design system requirements
 
 ### **Phase 2: Design System** (User Task)
+
 - [ ] Create Figma file: "LMS Design System"
 - [ ] Set up color styles (21 colors)
 - [ ] Set up text styles (10 styles)
@@ -1641,27 +1663,32 @@ Tooltips:
 - [ ] Build reusable diagram components
 
 ### **Phase 3: Priority 1 Diagrams** (User Task)
+
 - [ ] P1.1: Architecture comparison
 - [ ] P1.2: Data flow (5 steps)
 - [ ] P1.3: Component relationships
 - [ ] P1.4: Network efficiency
 
 ### **Phase 4: Priority 2 Diagrams** (User Task)
+
 - [ ] P2.1: Console layout mockup
 - [ ] P2.2: Module navigation
 - [ ] P2.3: Question builder
 
 ### **Phase 5: Priority 3 Diagrams** (User Task)
+
 - [ ] P3.1: Client registration flow
 - [ ] P3.2: Deployment architecture
 - [ ] P3.3: PKI certificate tree
 
 ### **Phase 6: Priority 4 Diagrams** (User Task)
+
 - [ ] P4.1: Speed comparison
 - [ ] P4.2: Scalability metrics
 - [ ] P4.3: Learning path map
 
 ### **Phase 7: Export & Integration** (Claude Task)
+
 - [ ] Run export script for all 13 diagrams
 - [ ] Verify file sizes and quality
 - [ ] Replace ASCII diagrams in MDX
@@ -1669,6 +1696,7 @@ Tooltips:
 - [ ] Test responsive loading
 
 ### **Phase 8: Testing & Validation** (User Task)
+
 - [ ] Visual regression testing
 - [ ] Accessibility audit (WCAG AA)
 - [ ] Performance testing (image optimization)
@@ -1676,6 +1704,7 @@ Tooltips:
 - [ ] Mobile/tablet responsive check
 
 ### **Phase 9: Documentation** (Claude Task)
+
 - [ ] Create VISUAL_STYLE_GUIDE.md
 - [ ] Document design system
 - [ ] Create usage guidelines
@@ -1686,6 +1715,7 @@ Tooltips:
 ## 🎯 Success Metrics
 
 **Quality Standards**:
+
 - ✅ All diagrams use consistent design system
 - ✅ WCAG AA compliance (4.5:1 contrast minimum)
 - ✅ File sizes optimized (<500KB for PNG, <200KB for SVG)
@@ -1693,12 +1723,14 @@ Tooltips:
 - ✅ Responsive on mobile/tablet/desktop
 
 **Educational Impact**:
+
 - ✅ Complex concepts visualized clearly
 - ✅ Visual hierarchy guides attention
 - ✅ Consistent visual language aids learning
 - ✅ Diagrams complement text without replacing it
 
 **Technical Requirements**:
+
 - ✅ SVG for architecture/flow diagrams (scalable)
 - ✅ PNG @2x/@3x for UI mockups (retina-ready)
 - ✅ Lottie JSON optional for animations
@@ -1738,4 +1770,4 @@ Tooltips:
 
 ---
 
-*This document serves as the complete visual specification for enhancing the Tanium Platform Foundation module with professional diagrams and mockups while preserving all educational content.*
+_This document serves as the complete visual specification for enhancing the Tanium Platform Foundation module with professional diagrams and mockups while preserving all educational content._

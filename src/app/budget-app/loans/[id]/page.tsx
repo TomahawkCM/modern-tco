@@ -3,23 +3,23 @@
  * View individual loan with full amortization schedule
  */
 
-'use client';
+"use client";
 
-import { useState, useEffect, use } from 'react';
-import { useRouter } from 'next/navigation';
-import { ArrowLeft, Edit, Trash2, DollarSign, Calendar, Percent, TrendingDown } from 'lucide-react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import type { Loan } from '@/types/budget';
-import { getLoan, deleteLoan, getLoanPayments } from '@/lib/loans/loan-db';
-import { generateAmortizationSchedule, analyzeLoanCost } from '@/lib/loans/calculations';
-import { ExtraPaymentCalculator } from '@/components/budget/loans/ExtraPaymentCalculator';
-import { LazyAmortizationChart } from '@/components/budget/charts/LazyChartComponents';
-import { PaymentHistory } from '@/components/budget/loans/PaymentHistory';
-import { format } from 'date-fns';
-import { HelpTooltip } from '@/components/budget/HelpTooltip';
+import { useState, useEffect, use } from "react";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, Edit, Trash2, DollarSign, Calendar, Percent, TrendingDown } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import type { Loan } from "@/types/budget";
+import { getLoan, deleteLoan, getLoanPayments } from "@/lib/loans/loan-db";
+import { generateAmortizationSchedule, analyzeLoanCost } from "@/lib/loans/calculations";
+import { ExtraPaymentCalculator } from "@/components/budget/loans/ExtraPaymentCalculator";
+import { LazyAmortizationChart } from "@/components/budget/charts/LazyChartComponents";
+import { PaymentHistory } from "@/components/budget/loans/PaymentHistory";
+import { format } from "date-fns";
+import { HelpTooltip } from "@/components/budget/HelpTooltip";
 
 export default function LoanDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -38,7 +38,7 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
       const loanData = await getLoan(id);
       setLoan(loanData || null);
     } catch (error) {
-      console.error('Error loading loan:', error);
+      console.error("Error loading loan:", error);
     } finally {
       setLoading(false);
     }
@@ -49,19 +49,19 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
 
     try {
       await deleteLoan(loan.id);
-      router.push('/budget-app/loans');
+      router.push("/budget-app/loans");
     } catch (error) {
-      console.error('Error deleting loan:', error);
-      alert('Failed to delete loan. Please try again.');
+      console.error("Error deleting loan:", error);
+      alert("Failed to delete loan. Please try again.");
     }
   }
 
   function getLoanTypeLabel(type: string): string {
     const labels: Record<string, string> = {
-      mortgage: 'Mortgage',
-      auto: 'Auto Loan',
-      personal: 'Personal Loan',
-      student: 'Student Loan',
+      mortgage: "Mortgage",
+      auto: "Auto Loan",
+      personal: "Personal Loan",
+      student: "Student Loan",
     };
     return labels[type] || type;
   }
@@ -72,9 +72,9 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+      <div className="flex min-h-[400px] items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-500 mx-auto mb-4"></div>
+          <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-teal-500"></div>
           <p className="text-slate-400">Loading loan...</p>
         </div>
       </div>
@@ -83,9 +83,9 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
 
   if (!loan) {
     return (
-      <div className="text-center py-12">
-        <h2 className="text-2xl font-bold text-white mb-2">Loan not found</h2>
-        <p className="text-slate-400 mb-6">The loan you're looking for doesn't exist.</p>
+      <div className="py-12 text-center">
+        <h2 className="mb-2 text-2xl font-bold text-white">Loan not found</h2>
+        <p className="mb-6 text-slate-400">The loan you're looking for doesn't exist.</p>
         <Link href="/budget-app/loans">
           <Button>Back to Loans</Button>
         </Link>
@@ -104,80 +104,84 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
   );
 
   const totalMonthlyPayment =
-    loan.monthlyPayment +
-    (loan.propertyTax || 0) +
-    (loan.homeInsurance || 0) +
-    (loan.pmi || 0);
+    loan.monthlyPayment + (loan.propertyTax || 0) + (loan.homeInsurance || 0) + (loan.pmi || 0);
 
   return (
     <div className="space-y-6">
       {/* Header - Enhanced */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <div className="flex items-center gap-4">
           <Link href="/budget-app/loans">
             <Button variant="outline" size="icon" className="min-h-[48px] min-w-[48px]">
-              <ArrowLeft className="w-6 h-6" />
+              <ArrowLeft className="h-6 w-6" />
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-white">{loan.name}</h1>
-            <p className="text-base sm:text-lg text-slate-400 mt-1 font-medium">
+            <h1 className="text-3xl font-bold text-white sm:text-4xl">{loan.name}</h1>
+            <p className="mt-1 text-base font-medium text-slate-400 sm:text-lg">
               {getLoanTypeLabel(loan.type)} • {loan.lender}
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-3 w-full sm:w-auto">
+        <div className="flex w-full items-center gap-3 sm:w-auto">
           <Link href={`/budget-app/loans/${loan.id}/edit`} className="flex-1 sm:flex-none">
-            <Button variant="outline" className="w-full sm:w-auto min-h-[48px] px-4">
-              <Edit className="w-5 h-5 mr-2" />
+            <Button variant="outline" className="min-h-[48px] w-full px-4 sm:w-auto">
+              <Edit className="mr-2 h-5 w-5" />
               <span className="text-base font-semibold">Edit</span>
             </Button>
           </Link>
           <Button
             variant="outline"
             onClick={() => setShowDeleteConfirm(true)}
-            className="flex-1 sm:flex-none text-red-600 hover:text-red-700 hover:bg-red-50 min-h-[48px] px-4"
+            className="min-h-[48px] flex-1 px-4 text-red-600 hover:bg-red-50 hover:text-red-700 sm:flex-none"
           >
-            <Trash2 className="w-5 h-5 mr-2" />
+            <Trash2 className="mr-2 h-5 w-5" />
             <span className="text-base font-semibold">Delete</span>
           </Button>
         </div>
       </div>
 
       {/* Summary Cards - Enhanced for Seniors */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="shadow-md hover:shadow-lg transition-shadow">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card className="shadow-md transition-shadow hover:shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-            <CardTitle className="text-base font-semibold text-slate-300">Current Balance</CardTitle>
+            <CardTitle className="text-base font-semibold text-slate-300">
+              Current Balance
+            </CardTitle>
             <DollarSign className="h-6 w-6 text-teal-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-white">${loan.currentBalance.toLocaleString()}</div>
-            <div className="w-full bg-slate-700 rounded-full h-4 mt-3 shadow-inner">
+            <div className="text-3xl font-bold text-white">
+              ${loan.currentBalance.toLocaleString()}
+            </div>
+            <div className="mt-3 h-4 w-full rounded-full bg-slate-700 shadow-inner">
               <div
-                className="bg-teal-500 h-4 rounded-full transition-all"
+                className="h-4 rounded-full bg-teal-500 transition-all"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <p className="text-sm font-medium text-teal-500 mt-2">
+            <p className="mt-2 text-sm font-medium text-teal-500">
               {progress.toFixed(1)}% paid off
             </p>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="mt-1 text-xs text-slate-400">
               You've paid ${(loan.originalPrincipal - loan.currentBalance).toLocaleString()} so far
             </p>
           </CardContent>
         </Card>
 
-        <Card className="shadow-md hover:shadow-lg transition-shadow">
+        <Card className="shadow-md transition-shadow hover:shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <div className="flex items-center gap-2">
-              <CardTitle className="text-base font-semibold text-slate-300">Monthly Payment</CardTitle>
+              <CardTitle className="text-base font-semibold text-slate-300">
+                Monthly Payment
+              </CardTitle>
               <HelpTooltip
                 content={
                   <>
-                    <strong>Principal vs Interest:</strong> Your payment splits between the loan balance (principal)
-                    and borrowing cost (interest). Early payments are mostly interest. Later payments are mostly principal.
-                    See the Amortization Schedule tab for the full breakdown.
+                    <strong>Principal vs Interest:</strong> Your payment splits between the loan
+                    balance (principal) and borrowing cost (interest). Early payments are mostly
+                    interest. Later payments are mostly principal. See the Amortization Schedule tab
+                    for the full breakdown.
                   </>
                 }
                 learnMoreUrl="/docs/user-guide#principal-vs-interest"
@@ -187,22 +191,24 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
             <TrendingDown className="h-6 w-6 text-teal-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-white">${loan.monthlyPayment.toLocaleString()}</div>
+            <div className="text-3xl font-bold text-white">
+              ${loan.monthlyPayment.toLocaleString()}
+            </div>
             {totalMonthlyPayment > loan.monthlyPayment && (
-              <p className="text-sm font-medium text-slate-400 mt-2">
+              <p className="mt-2 text-sm font-medium text-slate-400">
                 ${totalMonthlyPayment.toLocaleString()} total with escrow
               </p>
             )}
-            <p className="text-xs text-slate-400 mt-2">
-              Principal & interest only
-            </p>
+            <p className="mt-2 text-xs text-slate-400">Principal & interest only</p>
           </CardContent>
         </Card>
 
-        <Card className="shadow-md hover:shadow-lg transition-shadow">
+        <Card className="shadow-md transition-shadow hover:shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <div className="flex items-center gap-2">
-              <CardTitle className="text-base font-semibold text-slate-300">Interest Rate</CardTitle>
+              <CardTitle className="text-base font-semibold text-slate-300">
+                Interest Rate
+              </CardTitle>
               <HelpTooltip
                 content="APR (Annual Percentage Rate) is the yearly cost to borrow money. Example: 5% APR on $10,000 = $500 interest per year. Lower APR = less you pay overall."
                 learnMoreUrl="/docs/user-guide#apr-explained"
@@ -213,21 +219,21 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold text-white">{loan.interestRate.toFixed(2)}%</div>
-            <p className="text-sm font-medium text-slate-400 mt-2">
-              Annual Percentage Rate
-            </p>
+            <p className="mt-2 text-sm font-medium text-slate-400">Annual Percentage Rate</p>
           </CardContent>
         </Card>
 
-        <Card className="shadow-md hover:shadow-lg transition-shadow">
+        <Card className="shadow-md transition-shadow hover:shadow-lg">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
             <CardTitle className="text-base font-semibold text-slate-300">Next Payment</CardTitle>
             <Calendar className="h-6 w-6 text-teal-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-white">{format(loan.nextPaymentDate, 'MMM d')}</div>
-            <p className="text-sm font-medium text-slate-400 mt-2">
-              {format(loan.nextPaymentDate, 'yyyy')}
+            <div className="text-3xl font-bold text-white">
+              {format(loan.nextPaymentDate, "MMM d")}
+            </div>
+            <p className="mt-2 text-sm font-medium text-slate-400">
+              {format(loan.nextPaymentDate, "yyyy")}
             </p>
           </CardContent>
         </Card>
@@ -250,32 +256,38 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
               <CardTitle className="text-2xl">Loan Details</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div>
-                  <p className="text-base font-medium text-slate-400 mb-1">Original Principal</p>
-                  <p className="text-xl font-bold text-white">${loan.originalPrincipal.toLocaleString()}</p>
-                  <p className="text-sm text-slate-400 mt-1">Amount you borrowed</p>
+                  <p className="mb-1 text-base font-medium text-slate-400">Original Principal</p>
+                  <p className="text-xl font-bold text-white">
+                    ${loan.originalPrincipal.toLocaleString()}
+                  </p>
+                  <p className="mt-1 text-sm text-slate-400">Amount you borrowed</p>
                 </div>
                 <div>
-                  <p className="text-base font-medium text-slate-400 mb-1">Loan Term</p>
-                  <p className="text-xl font-bold text-white">{(loan.termMonths / 12).toFixed(0)} years</p>
-                  <p className="text-sm text-slate-400 mt-1">{loan.termMonths} monthly payments</p>
+                  <p className="mb-1 text-base font-medium text-slate-400">Loan Term</p>
+                  <p className="text-xl font-bold text-white">
+                    {(loan.termMonths / 12).toFixed(0)} years
+                  </p>
+                  <p className="mt-1 text-sm text-slate-400">{loan.termMonths} monthly payments</p>
                 </div>
                 <div>
-                  <p className="text-base font-medium text-slate-400 mb-1">Start Date</p>
-                  <p className="text-xl font-bold text-white">{format(loan.startDate, 'MMM d, yyyy')}</p>
-                  <p className="text-sm text-slate-400 mt-1">First payment date</p>
+                  <p className="mb-1 text-base font-medium text-slate-400">Start Date</p>
+                  <p className="text-xl font-bold text-white">
+                    {format(loan.startDate, "MMM d, yyyy")}
+                  </p>
+                  <p className="mt-1 text-sm text-slate-400">First payment date</p>
                 </div>
                 <div>
-                  <p className="text-base font-medium text-slate-400 mb-1">Status</p>
-                  <p className="text-xl font-bold text-white capitalize">{loan.status}</p>
+                  <p className="mb-1 text-base font-medium text-slate-400">Status</p>
+                  <p className="text-xl font-bold capitalize text-white">{loan.status}</p>
                 </div>
 
                 {/* Type-specific fields */}
-                {loan.type === 'auto' && loan.vehicleMake && (
+                {loan.type === "auto" && loan.vehicleMake && (
                   <>
                     <div className="md:col-span-2">
-                      <p className="text-base font-medium text-slate-400 mb-1">Vehicle</p>
+                      <p className="mb-1 text-base font-medium text-slate-400">Vehicle</p>
                       <p className="text-xl font-bold text-white">
                         {loan.vehicleYear} {loan.vehicleMake} {loan.vehicleModel}
                       </p>
@@ -284,8 +296,8 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
                 )}
 
                 {loan.notes && (
-                  <div className="md:col-span-2 pt-4 border-t border-slate-700">
-                    <p className="text-base font-medium text-slate-400 mb-2">Notes</p>
+                  <div className="border-t border-slate-700 pt-4 md:col-span-2">
+                    <p className="mb-2 text-base font-medium text-slate-400">Notes</p>
                     <p className="text-base text-slate-300">{loan.notes}</p>
                   </div>
                 )}
@@ -294,15 +306,16 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
           </Card>
 
           {/* Cost Analysis - Enhanced with Plain Language */}
-          <Card className="shadow-md border-l-4 border-teal-500">
+          <Card className="border-l-4 border-teal-500 shadow-md">
             <CardHeader>
               <div className="flex items-center gap-3">
                 <CardTitle className="text-2xl">Cost Analysis</CardTitle>
                 <HelpTooltip
                   content={
                     <>
-                      <strong>Amortization:</strong> How your loan gets paid off over time. Each payment covers interest first,
-                      then principal. The schedule shows exactly how much goes to each, month by month. Early payments are mostly interest!
+                      <strong>Amortization:</strong> How your loan gets paid off over time. Each
+                      payment covers interest first, then principal. The schedule shows exactly how
+                      much goes to each, month by month. Early payments are mostly interest!
                     </>
                   }
                   learnMoreUrl="/docs/user-guide#amortization"
@@ -310,71 +323,82 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
                   iconSize="h-5 w-5"
                 />
               </div>
-              <CardDescription className="text-base">See the total cost of this loan over its lifetime</CardDescription>
+              <CardDescription className="text-base">
+                See the total cost of this loan over its lifetime
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                <div className="bg-slate-900/50 border border-white/10 p-4 rounded-lg">
-                  <p className="text-base font-semibold text-slate-300 mb-2">Total You'll Pay</p>
+              <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+                <div className="rounded-lg border border-white/10 bg-slate-900/50 p-4">
+                  <p className="mb-2 text-base font-semibold text-slate-300">Total You'll Pay</p>
                   <p className="text-3xl font-bold text-white">
                     ${analysis.totalPayments.toLocaleString()}
                   </p>
-                  <p className="text-sm text-slate-400 mt-2">
+                  <p className="mt-2 text-sm text-slate-400">
                     Over {(loan.termMonths / 12).toFixed(0)} years
                   </p>
                 </div>
-                <div className="bg-red-900/20 border border-red-500/30 p-4 rounded-lg">
-                  <p className="text-base font-semibold text-slate-300 mb-2">Total Interest</p>
+                <div className="rounded-lg border border-red-500/30 bg-red-900/20 p-4">
+                  <p className="mb-2 text-base font-semibold text-slate-300">Total Interest</p>
                   <p className="text-3xl font-bold text-red-500">
                     ${analysis.totalInterest.toLocaleString()}
                   </p>
-                  <p className="text-sm text-slate-400 mt-2">
-                    Extra cost above principal
-                  </p>
+                  <p className="mt-2 text-sm text-slate-400">Extra cost above principal</p>
                 </div>
-                <div className="bg-teal-900/20 border border-teal-500/30 p-4 rounded-lg">
-                  <p className="text-base font-semibold text-slate-300 mb-2">Payoff Date</p>
+                <div className="rounded-lg border border-teal-500/30 bg-teal-900/20 p-4">
+                  <p className="mb-2 text-base font-semibold text-slate-300">Payoff Date</p>
                   <p className="text-3xl font-bold text-teal-500">
-                    {format(analysis.payoffDate, 'MMM yyyy')}
+                    {format(analysis.payoffDate, "MMM yyyy")}
                   </p>
-                  <p className="text-sm text-slate-400 mt-2">
-                    Final payment month
-                  </p>
+                  <p className="mt-2 text-sm text-slate-400">Final payment month</p>
                 </div>
               </div>
 
               {/* Plain Language Explanation */}
-              <div className="bg-slate-900/50 border-l-4 border-teal-500 p-4 rounded">
+              <div className="rounded border-l-4 border-teal-500 bg-slate-900/50 p-4">
                 <p className="text-base text-slate-300">
-                  <span className="font-semibold">What this means:</span> You borrowed ${loan.originalPrincipal.toLocaleString()},
-                  but you'll pay ${analysis.totalPayments.toLocaleString()} total. The extra ${analysis.totalInterest.toLocaleString()}
-                  is interest at {loan.interestRate.toFixed(2)}% APR over {(loan.termMonths / 12).toFixed(0)} years.
+                  <span className="font-semibold">What this means:</span> You borrowed $
+                  {loan.originalPrincipal.toLocaleString()}, but you'll pay $
+                  {analysis.totalPayments.toLocaleString()} total. The extra $
+                  {analysis.totalInterest.toLocaleString()}
+                  is interest at {loan.interestRate.toFixed(2)}% APR over{" "}
+                  {(loan.termMonths / 12).toFixed(0)} years.
                 </p>
               </div>
 
-              {loan.type === 'mortgage' && (loan.propertyTax || loan.homeInsurance || loan.pmi) && (
-                <div className="mt-6 pt-6 border-t-2 border-gray-200">
-                  <p className="text-lg font-semibold text-gray-900 mb-4">Monthly Escrow Breakdown</p>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {loan.type === "mortgage" && (loan.propertyTax || loan.homeInsurance || loan.pmi) && (
+                <div className="mt-6 border-t-2 border-gray-200 pt-6">
+                  <p className="mb-4 text-lg font-semibold text-gray-900">
+                    Monthly Escrow Breakdown
+                  </p>
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                     {loan.propertyTax && (
-                      <div className="bg-gray-50 p-3 rounded-lg">
-                        <p className="text-sm font-medium text-gray-600 mb-1">Property Tax</p>
-                        <p className="text-xl font-bold text-gray-900">${loan.propertyTax.toLocaleString()}</p>
-                        <p className="text-xs text-gray-500 mt-1">Per month</p>
+                      <div className="rounded-lg bg-gray-50 p-3">
+                        <p className="mb-1 text-sm font-medium text-gray-600">Property Tax</p>
+                        <p className="text-xl font-bold text-gray-900">
+                          ${loan.propertyTax.toLocaleString()}
+                        </p>
+                        <p className="mt-1 text-xs text-gray-500">Per month</p>
                       </div>
                     )}
                     {loan.homeInsurance && (
-                      <div className="bg-gray-50 p-3 rounded-lg">
-                        <p className="text-sm font-medium text-gray-600 mb-1">Home Insurance</p>
-                        <p className="text-xl font-bold text-gray-900">${loan.homeInsurance.toLocaleString()}</p>
-                        <p className="text-xs text-gray-500 mt-1">Per month</p>
+                      <div className="rounded-lg bg-gray-50 p-3">
+                        <p className="mb-1 text-sm font-medium text-gray-600">Home Insurance</p>
+                        <p className="text-xl font-bold text-gray-900">
+                          ${loan.homeInsurance.toLocaleString()}
+                        </p>
+                        <p className="mt-1 text-xs text-gray-500">Per month</p>
                       </div>
                     )}
                     {loan.pmi && (
-                      <div className="bg-gray-50 p-3 rounded-lg">
-                        <p className="text-sm font-medium text-gray-600 mb-1">PMI (Private Mortgage Insurance)</p>
-                        <p className="text-xl font-bold text-gray-900">${loan.pmi.toLocaleString()}</p>
-                        <p className="text-xs text-gray-500 mt-1">Per month</p>
+                      <div className="rounded-lg bg-gray-50 p-3">
+                        <p className="mb-1 text-sm font-medium text-gray-600">
+                          PMI (Private Mortgage Insurance)
+                        </p>
+                        <p className="text-xl font-bold text-gray-900">
+                          ${loan.pmi.toLocaleString()}
+                        </p>
+                        <p className="mt-1 text-xs text-gray-500">Per month</p>
                       </div>
                     )}
                   </div>
@@ -392,9 +416,10 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
                 <HelpTooltip
                   content={
                     <>
-                      <strong>Extra Payments:</strong> Paying more than the minimum reduces principal faster,
-                      saving thousands in interest. Example: $100 extra/month on a 30-year mortgage can save 5-7 years!
-                      Use the Extra Payment Calculator tab to see your savings.
+                      <strong>Extra Payments:</strong> Paying more than the minimum reduces
+                      principal faster, saving thousands in interest. Example: $100 extra/month on a
+                      30-year mortgage can save 5-7 years! Use the Extra Payment Calculator tab to
+                      see your savings.
                     </>
                   }
                   learnMoreUrl="/docs/user-guide#extra-payments"
@@ -402,11 +427,14 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
                   iconSize="h-5 w-5"
                 />
               </div>
-              <CardDescription className="text-base">Month-by-month breakdown showing how your loan gets paid off</CardDescription>
-              <div className="mt-3 bg-gray-50 border-l-4 border-teal-400 p-3 rounded">
+              <CardDescription className="text-base">
+                Month-by-month breakdown showing how your loan gets paid off
+              </CardDescription>
+              <div className="mt-3 rounded border-l-4 border-teal-400 bg-gray-50 p-3">
                 <p className="text-sm text-gray-800">
-                  <span className="font-semibold">Tip:</span> Notice how early payments are mostly interest (red), but later payments are mostly principal (teal).
-                  Making extra payments early can save you thousands in interest!
+                  <span className="font-semibold">Tip:</span> Notice how early payments are mostly
+                  interest (red), but later payments are mostly principal (teal). Making extra
+                  payments early can save you thousands in interest!
                 </p>
               </div>
             </CardHeader>
@@ -425,12 +453,23 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
                   </thead>
                   <tbody>
                     {schedule.slice(0, 120).map((entry, index) => (
-                      <tr key={index} className="border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                      <tr
+                        key={index}
+                        className="border-b border-gray-200 transition-colors hover:bg-gray-50"
+                      >
                         <td className="px-3 py-4 font-semibold text-gray-900">{entry.month}</td>
-                        <td className="px-3 py-4 text-gray-700">{format(entry.date, 'MMM yyyy')}</td>
-                        <td className="px-3 py-4 text-right font-semibold text-gray-900">${entry.payment.toLocaleString()}</td>
-                        <td className="px-3 py-4 text-right font-semibold text-teal-600">${entry.principal.toLocaleString()}</td>
-                        <td className="px-3 py-4 text-right font-semibold text-red-600">${entry.interest.toLocaleString()}</td>
+                        <td className="px-3 py-4 text-gray-700">
+                          {format(entry.date, "MMM yyyy")}
+                        </td>
+                        <td className="px-3 py-4 text-right font-semibold text-gray-900">
+                          ${entry.payment.toLocaleString()}
+                        </td>
+                        <td className="px-3 py-4 text-right font-semibold text-teal-600">
+                          ${entry.principal.toLocaleString()}
+                        </td>
+                        <td className="px-3 py-4 text-right font-semibold text-red-600">
+                          ${entry.interest.toLocaleString()}
+                        </td>
                         <td className="px-3 py-4 text-right font-bold text-gray-900">
                           ${entry.balance.toLocaleString()}
                         </td>
@@ -440,24 +479,28 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
                 </table>
 
                 {schedule.length > 120 && (
-                  <div className="text-center py-4 text-base font-medium text-gray-600 bg-gray-50 mt-4 rounded-lg">
+                  <div className="mt-4 rounded-lg bg-gray-50 py-4 text-center text-base font-medium text-gray-600">
                     Showing first 120 of {schedule.length} payments •
-                    <span className="text-teal-600 ml-1">Scroll down to see more</span>
+                    <span className="ml-1 text-teal-600">Scroll down to see more</span>
                   </div>
                 )}
               </div>
 
               {/* Legend for mobile users */}
-              <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                <p className="text-sm font-semibold text-gray-700 mb-3">Color Key:</p>
+              <div className="mt-6 rounded-lg border border-gray-200 bg-gray-50 p-4">
+                <p className="mb-3 text-sm font-semibold text-gray-700">Color Key:</p>
                 <div className="grid grid-cols-2 gap-3 text-sm">
                   <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-teal-600 rounded"></div>
-                    <span className="text-gray-700"><span className="font-semibold">Principal:</span> Pays down your loan</span>
+                    <div className="h-4 w-4 rounded bg-teal-600"></div>
+                    <span className="text-gray-700">
+                      <span className="font-semibold">Principal:</span> Pays down your loan
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 bg-red-600 rounded"></div>
-                    <span className="text-gray-700"><span className="font-semibold">Interest:</span> Cost of borrowing</span>
+                    <div className="h-4 w-4 rounded bg-red-600"></div>
+                    <span className="text-gray-700">
+                      <span className="font-semibold">Interest:</span> Cost of borrowing
+                    </span>
                   </div>
                 </div>
               </div>
@@ -480,8 +523,8 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
 
       {/* Delete Confirmation Modal */}
       {showDeleteConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <Card className="max-w-md w-full mx-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <Card className="mx-4 w-full max-w-md">
             <CardHeader>
               <CardTitle>Delete Loan?</CardTitle>
               <CardDescription>
@@ -489,7 +532,7 @@ export default function LoanDetailPage({ params }: { params: Promise<{ id: strin
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center gap-3 justify-end">
+              <div className="flex items-center justify-end gap-3">
                 <Button variant="outline" onClick={() => setShowDeleteConfirm(false)}>
                   Cancel
                 </Button>

@@ -7,8 +7,8 @@
  * Uses the money utilities for proper decimal precision.
  */
 
-import { sumAmounts, subtractAmounts, roundToCents } from '@/lib/money';
-import type { Transaction, Account } from '@/types/budget';
+import { sumAmounts, subtractAmounts, roundToCents } from "@/lib/money";
+import type { Transaction, Account } from "@/types/budget";
 
 /**
  * Calculate the current balance for an account
@@ -25,9 +25,9 @@ import type { Transaction, Account } from '@/types/budget';
  */
 export function calculateCurrentBalance(
   openingBalance: number,
-  transactions: Pick<Transaction, 'amount'>[]
+  transactions: Pick<Transaction, "amount">[]
 ): number {
-  const transactionSum = sumAmounts(transactions.map(tx => tx.amount));
+  const transactionSum = sumAmounts(transactions.map((tx) => tx.amount));
   return roundToCents(openingBalance + transactionSum);
 }
 
@@ -51,7 +51,7 @@ export function calculateCurrentBalance(
  */
 export function calculateOpeningBalance(
   currentActualBalance: number,
-  transactions: Pick<Transaction, 'amount'>[]
+  transactions: Pick<Transaction, "amount">[]
 ): number {
   const netChange = calculateNetChange(transactions);
   return subtractAmounts(currentActualBalance, netChange);
@@ -68,10 +68,8 @@ export function calculateOpeningBalance(
  * calculateNetChange([{ amount: 500 }, { amount: -200 }])
  * // Returns: 300
  */
-export function calculateNetChange(
-  transactions: Pick<Transaction, 'amount'>[]
-): number {
-  return sumAmounts(transactions.map(tx => tx.amount));
+export function calculateNetChange(transactions: Pick<Transaction, "amount">[]): number {
+  return sumAmounts(transactions.map((tx) => tx.amount));
 }
 
 /**
@@ -85,12 +83,10 @@ export function calculateNetChange(
  */
 export function calculateBalanceAtDate(
   openingBalance: number,
-  transactions: Pick<Transaction, 'amount' | 'date'>[],
+  transactions: Pick<Transaction, "amount" | "date">[],
   asOfDate: Date
 ): number {
-  const relevantTransactions = transactions.filter(
-    tx => new Date(tx.date) <= asOfDate
-  );
+  const relevantTransactions = transactions.filter((tx) => new Date(tx.date) <= asOfDate);
   return calculateCurrentBalance(openingBalance, relevantTransactions);
 }
 
@@ -125,11 +121,11 @@ export interface RunningBalanceEntry {
  */
 export function calculateRunningBalances(
   openingBalance: number,
-  transactions: Pick<Transaction, 'id' | 'amount'>[]
+  transactions: Pick<Transaction, "id" | "amount">[]
 ): RunningBalanceEntry[] {
   let currentBalance = roundToCents(openingBalance);
 
-  return transactions.map(tx => {
+  return transactions.map((tx) => {
     currentBalance = roundToCents(currentBalance + tx.amount);
     return {
       transactionId: tx.id,
@@ -148,10 +144,10 @@ export function calculateRunningBalances(
  */
 export function calculateRunningBalancesMap(
   openingBalance: number,
-  transactions: Pick<Transaction, 'id' | 'amount'>[]
+  transactions: Pick<Transaction, "id" | "amount">[]
 ): Map<string, number> {
   const entries = calculateRunningBalances(openingBalance, transactions);
-  return new Map(entries.map(e => [e.transactionId, e.runningBalance]));
+  return new Map(entries.map((e) => [e.transactionId, e.runningBalance]));
 }
 
 /**
@@ -161,11 +157,11 @@ export function calculateRunningBalancesMap(
  * @returns Object with start and end dates, or null if no transactions
  */
 export function getTransactionDateRange(
-  transactions: Pick<Transaction, 'date'>[]
+  transactions: Pick<Transaction, "date">[]
 ): { start: Date; end: Date } | null {
   if (transactions.length === 0) return null;
 
-  const dates = transactions.map(tx => new Date(tx.date).getTime());
+  const dates = transactions.map((tx) => new Date(tx.date).getTime());
   const minDate = Math.min(...dates);
   const maxDate = Math.max(...dates);
 
@@ -181,18 +177,16 @@ export function getTransactionDateRange(
  * @param transactions - Array of transactions
  * @returns Object with income, expenses, and net values
  */
-export function calculateTransactionTotals(
-  transactions: Pick<Transaction, 'amount'>[]
-): {
+export function calculateTransactionTotals(transactions: Pick<Transaction, "amount">[]): {
   totalIncome: number;
   totalExpenses: number;
   netChange: number;
 } {
-  const income = transactions.filter(tx => tx.amount > 0);
-  const expenses = transactions.filter(tx => tx.amount < 0);
+  const income = transactions.filter((tx) => tx.amount > 0);
+  const expenses = transactions.filter((tx) => tx.amount < 0);
 
-  const totalIncome = sumAmounts(income.map(tx => tx.amount));
-  const totalExpenses = Math.abs(sumAmounts(expenses.map(tx => tx.amount)));
+  const totalIncome = sumAmounts(income.map((tx) => tx.amount));
+  const totalExpenses = Math.abs(sumAmounts(expenses.map((tx) => tx.amount)));
   const netChange = subtractAmounts(totalIncome, totalExpenses);
 
   return { totalIncome, totalExpenses, netChange };
@@ -219,7 +213,7 @@ export function needsReconciliation(account: Account): boolean {
  */
 export function calculateExpectedBalance(
   account: Account,
-  transactionsSinceReconciliation: Pick<Transaction, 'amount'>[]
+  transactionsSinceReconciliation: Pick<Transaction, "amount">[]
 ): number {
   const baseBalance = account.lastReconciledBalance ?? account.balance;
   const netChange = calculateNetChange(transactionsSinceReconciliation);
@@ -236,19 +230,19 @@ export function calculateExpectedBalance(
  */
 export function formatBalanceForDisplay(
   balance: number,
-  accountType: Account['type']
+  accountType: Account["type"]
 ): {
   amount: number;
   label: string;
   isNegative: boolean;
 } {
-  if (accountType === 'credit') {
+  if (accountType === "credit") {
     // For credit cards, positive balance = amount owed
     // Negative balance = credit balance (rare, means overpaid)
     const isOwed = balance >= 0;
     return {
       amount: Math.abs(balance),
-      label: isOwed ? 'Owed' : 'Credit',
+      label: isOwed ? "Owed" : "Credit",
       isNegative: !isOwed,
     };
   }
@@ -256,7 +250,7 @@ export function formatBalanceForDisplay(
   // For checking/savings, negative = overdrawn
   return {
     amount: Math.abs(balance),
-    label: balance >= 0 ? 'Balance' : 'Overdrawn',
+    label: balance >= 0 ? "Balance" : "Overdrawn",
     isNegative: balance < 0,
   };
 }

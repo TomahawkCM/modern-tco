@@ -11,13 +11,13 @@
  * - Never expose raw account numbers or sensitive identifiers
  */
 
-import { db } from './budget-db';
-import type { Transaction, Budget, Account, Category, Loan } from '@/types/budget';
+import { db } from "./budget-db";
+import type { Transaction, Budget, Account, Category, Loan } from "@/types/budget";
 import {
   isChatbotEnabled,
   getChatbotDataAccess,
-  type PrivacySettings
-} from './budget-privacy-settings';
+  type PrivacySettings,
+} from "./budget-privacy-settings";
 
 /**
  * Check if chatbot has permission to access data
@@ -26,7 +26,7 @@ export function checkChatbotPermission(): { allowed: boolean; reason?: string } 
   if (!isChatbotEnabled()) {
     return {
       allowed: false,
-      reason: 'Chatbot is disabled. Enable it in Settings → Privacy → Budget Chatbot'
+      reason: "Chatbot is disabled. Enable it in Settings → Privacy → Budget Chatbot",
     };
   }
   return { allowed: true };
@@ -42,10 +42,11 @@ export function checkChatbotActionPermission(): { allowed: boolean; reason?: str
   }
 
   const accessLevel = getChatbotDataAccess();
-  if (accessLevel === 'read-only') {
+  if (accessLevel === "read-only") {
     return {
       allowed: false,
-      reason: 'Chatbot is in read-only mode. Change to "Full Access" in Settings to enable actions.',
+      reason:
+        'Chatbot is in read-only mode. Change to "Full Access" in Settings to enable actions.',
     };
   }
 
@@ -75,20 +76,20 @@ export async function getSpendingSummary(params: {
 
   // Get all transactions in date range
   let transactions = await db.transactions
-    .where('date')
+    .where("date")
     .between(startDate, endDate, true, true)
     .toArray();
 
   // Filter by category if specified
   if (category) {
-    transactions = transactions.filter(tx =>
-      tx.category?.toLowerCase() === category.toLowerCase()
+    transactions = transactions.filter(
+      (tx) => tx.category?.toLowerCase() === category.toLowerCase()
     );
   }
 
   // Calculate totals
-  const expenses = transactions.filter(tx => tx.amount < 0);
-  const income = transactions.filter(tx => tx.amount > 0);
+  const expenses = transactions.filter((tx) => tx.amount < 0);
+  const income = transactions.filter((tx) => tx.amount > 0);
 
   const totalSpent = Math.abs(expenses.reduce((sum, tx) => sum + tx.amount, 0));
   const totalIncome = income.reduce((sum, tx) => sum + tx.amount, 0);
@@ -98,7 +99,7 @@ export async function getSpendingSummary(params: {
   const categoryMap = new Map<string, { amount: number; count: number }>();
 
   for (const tx of expenses) {
-    const category = tx.category || 'Uncategorized';
+    const category = tx.category || "Uncategorized";
     const existing = categoryMap.get(category) || { amount: 0, count: 0 };
     categoryMap.set(category, {
       amount: existing.amount + Math.abs(tx.amount),
@@ -124,16 +125,18 @@ export async function getSpendingSummary(params: {
  */
 export async function getBudgetStatus(params?: {
   category?: string;
-  period?: 'monthly' | 'weekly' | 'yearly';
-}): Promise<Array<{
-  category: string;
-  limit: number;
-  spent: number;
-  remaining: number;
-  percentUsed: number;
-  isOverBudget: boolean;
-  period: string;
-}>> {
+  period?: "monthly" | "weekly" | "yearly";
+}): Promise<
+  Array<{
+    category: string;
+    limit: number;
+    spent: number;
+    remaining: number;
+    percentUsed: number;
+    isOverBudget: boolean;
+    period: string;
+  }>
+> {
   const permission = checkChatbotPermission();
   if (!permission.allowed) {
     throw new Error(permission.reason);
@@ -143,14 +146,12 @@ export async function getBudgetStatus(params?: {
 
   // Filter by category if specified
   if (params?.category) {
-    budgets = budgets.filter(b =>
-      b.categoryId.toLowerCase() === params.category!.toLowerCase()
-    );
+    budgets = budgets.filter((b) => b.categoryId.toLowerCase() === params.category!.toLowerCase());
   }
 
   // Filter by period if specified
   if (params?.period) {
-    budgets = budgets.filter(b => b.period === params.period);
+    budgets = budgets.filter((b) => b.period === params.period);
   }
 
   const now = new Date();
@@ -161,7 +162,7 @@ export async function getBudgetStatus(params?: {
     const periodStart = new Date(budget.startDate);
     const periodEnd = new Date(periodStart);
 
-    if (budget.period === 'monthly') {
+    if (budget.period === "monthly") {
       periodEnd.setMonth(periodEnd.getMonth() + 1);
     } else {
       // Must be 'annual'
@@ -198,13 +199,15 @@ export async function getBudgetStatus(params?: {
 /**
  * Get account summaries (balances, transaction counts)
  */
-export async function getAccountSummaries(): Promise<Array<{
-  name: string;
-  type: string;
-  balance: number;
-  transactionCount: number;
-  lastTransaction?: Date;
-}>> {
+export async function getAccountSummaries(): Promise<
+  Array<{
+    name: string;
+    type: string;
+    balance: number;
+    transactionCount: number;
+    lastTransaction?: Date;
+  }>
+> {
   const permission = checkChatbotPermission();
   if (!permission.allowed) {
     throw new Error(permission.reason);
@@ -215,18 +218,16 @@ export async function getAccountSummaries(): Promise<Array<{
 
   for (const account of accounts) {
     // Get all transactions for this account
-    const transactions = await db.transactions
-      .where('accountId')
-      .equals(account.id)
-      .toArray();
+    const transactions = await db.transactions.where("accountId").equals(account.id).toArray();
 
     // Calculate balance (sum of all transactions)
     const balance = transactions.reduce((sum, tx) => sum + tx.amount, 0);
 
     // Get last transaction date
-    const lastTransaction = transactions.length > 0
-      ? new Date(Math.max(...transactions.map(tx => new Date(tx.date).getTime())))
-      : undefined;
+    const lastTransaction =
+      transactions.length > 0
+        ? new Date(Math.max(...transactions.map((tx) => new Date(tx.date).getTime())))
+        : undefined;
 
     results.push({
       name: account.name,
@@ -243,16 +244,18 @@ export async function getAccountSummaries(): Promise<Array<{
 /**
  * Get loan summaries (balances, payment schedules)
  */
-export async function getLoanSummaries(): Promise<Array<{
-  name: string;
-  type: string;
-  principal: number;
-  interestRate: number;
-  remainingBalance: number;
-  monthlyPayment: number;
-  nextPaymentDate: Date;
-  totalPaid: number;
-}>> {
+export async function getLoanSummaries(): Promise<
+  Array<{
+    name: string;
+    type: string;
+    principal: number;
+    interestRate: number;
+    remainingBalance: number;
+    monthlyPayment: number;
+    nextPaymentDate: Date;
+    totalPaid: number;
+  }>
+> {
   const permission = checkChatbotPermission();
   if (!permission.allowed) {
     throw new Error(permission.reason);
@@ -263,10 +266,7 @@ export async function getLoanSummaries(): Promise<Array<{
 
   for (const loan of loans) {
     // Get all payments for this loan
-    const payments = await db.loanPayments
-      .where('loanId')
-      .equals(loan.id)
-      .toArray();
+    const payments = await db.loanPayments.where("loanId").equals(loan.id).toArray();
 
     const totalPaid = payments.reduce((sum, payment) => sum + payment.amount, 0);
 
@@ -291,11 +291,13 @@ export async function getLoanSummaries(): Promise<Array<{
 /**
  * Get all categories
  */
-export async function getCategories(): Promise<Array<{
-  name: string;
-  type: 'income' | 'expense';
-  subcategories?: string[];
-}>> {
+export async function getCategories(): Promise<
+  Array<{
+    name: string;
+    type: "income" | "expense";
+    subcategories?: string[];
+  }>
+> {
   const permission = checkChatbotPermission();
   if (!permission.allowed) {
     throw new Error(permission.reason);
@@ -303,7 +305,7 @@ export async function getCategories(): Promise<Array<{
 
   const categories = await db.categories.toArray();
 
-  return categories.map(cat => ({
+  return categories.map((cat) => ({
     name: cat.name,
     type: cat.type,
     subcategories: cat.subcategories,
@@ -318,13 +320,15 @@ export async function searchTransactions(params: {
   limit?: number;
   startDate?: Date;
   endDate?: Date;
-}): Promise<Array<{
-  date: Date;
-  description: string;
-  category: string;
-  amount: number;
-  account: string;
-}>> {
+}): Promise<
+  Array<{
+    date: Date;
+    description: string;
+    category: string;
+    amount: number;
+    account: string;
+  }>
+> {
   const permission = checkChatbotPermission();
   if (!permission.allowed) {
     throw new Error(permission.reason);
@@ -337,7 +341,7 @@ export async function searchTransactions(params: {
 
   if (startDate && endDate) {
     transactions = await db.transactions
-      .where('date')
+      .where("date")
       .between(startDate, endDate, true, true)
       .toArray();
   } else {
@@ -346,9 +350,10 @@ export async function searchTransactions(params: {
 
   // Filter by query (description or category)
   const queryLower = query.toLowerCase();
-  const filtered = transactions.filter(tx =>
-    tx.description.toLowerCase().includes(queryLower) ||
-    tx.category?.toLowerCase().includes(queryLower)
+  const filtered = transactions.filter(
+    (tx) =>
+      tx.description.toLowerCase().includes(queryLower) ||
+      tx.category?.toLowerCase().includes(queryLower)
   );
 
   // Get account names
@@ -359,17 +364,15 @@ export async function searchTransactions(params: {
   }
 
   // Sort by date (most recent first)
-  const sorted = filtered.sort((a, b) =>
-    new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  const sorted = filtered.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   // Return limited results
-  return sorted.slice(0, limit).map(tx => ({
+  return sorted.slice(0, limit).map((tx) => ({
     date: new Date(tx.date),
     description: tx.description,
-    category: tx.category || 'Uncategorized',
+    category: tx.category || "Uncategorized",
     amount: tx.amount,
-    account: accountMap.get(tx.accountId) || 'Unknown Account',
+    account: accountMap.get(tx.accountId) || "Unknown Account",
   }));
 }
 
@@ -409,7 +412,7 @@ export async function getFinancialSummary(): Promise<{
   const budgetStatuses = await getBudgetStatus();
   const totalBudgeted = budgetStatuses.reduce((sum, b) => sum + b.limit, 0);
   const totalSpent = budgetStatuses.reduce((sum, b) => sum + b.spent, 0);
-  const budgetsOverLimit = budgetStatuses.filter(b => b.isOverBudget).length;
+  const budgetsOverLimit = budgetStatuses.filter((b) => b.isOverBudget).length;
 
   // Get loan data
   const loanSummaries = await getLoanSummaries();
@@ -418,9 +421,10 @@ export async function getFinancialSummary(): Promise<{
 
   // Get recent activity
   const allTransactions = await db.transactions.toArray();
-  const lastTransaction = allTransactions.length > 0
-    ? new Date(Math.max(...allTransactions.map(tx => new Date(tx.date).getTime())))
-    : undefined;
+  const lastTransaction =
+    allTransactions.length > 0
+      ? new Date(Math.max(...allTransactions.map((tx) => new Date(tx.date).getTime())))
+      : undefined;
 
   return {
     accounts: {
@@ -474,22 +478,22 @@ export async function addTransaction(params: {
 
   // Validate required fields
   if (!params.accountId) {
-    return { success: false, error: 'Account ID is required' };
+    return { success: false, error: "Account ID is required" };
   }
   if (!params.date) {
-    return { success: false, error: 'Date is required' };
+    return { success: false, error: "Date is required" };
   }
-  if (!params.description || params.description.trim() === '') {
-    return { success: false, error: 'Description is required' };
+  if (!params.description || params.description.trim() === "") {
+    return { success: false, error: "Description is required" };
   }
-  if (typeof params.amount !== 'number' || isNaN(params.amount)) {
-    return { success: false, error: 'Valid amount is required' };
+  if (typeof params.amount !== "number" || isNaN(params.amount)) {
+    return { success: false, error: "Valid amount is required" };
   }
   if (params.amount === 0) {
-    return { success: false, error: 'Amount cannot be zero' };
+    return { success: false, error: "Amount cannot be zero" };
   }
-  if (!params.category || params.category.trim() === '') {
-    return { success: false, error: 'Category is required' };
+  if (!params.category || params.category.trim() === "") {
+    return { success: false, error: "Category is required" };
   }
 
   // Verify account exists
@@ -507,7 +511,7 @@ export async function addTransaction(params: {
     amount: params.amount,
     category: params.category.trim(),
     subcategory: params.subcategory?.trim() || null,
-    notes: params.notes?.trim() || '',
+    notes: params.notes?.trim() || "",
     merchant: params.merchant?.trim(),
     tags: params.tags || [],
     isRecurring: false,
@@ -523,7 +527,7 @@ export async function addTransaction(params: {
       transactionId: transaction.id,
     };
   } catch (error: any) {
-    console.error('[Chatbot] Failed to add transaction:', error);
+    console.error("[Chatbot] Failed to add transaction:", error);
     return {
       success: false,
       error: `Failed to add transaction: ${error.message}`,
@@ -537,7 +541,7 @@ export async function addTransaction(params: {
 export async function createBudget(params: {
   category: string;
   amount: number;
-  period: 'monthly' | 'annual';
+  period: "monthly" | "annual";
   startDate: Date;
   rollover?: boolean;
 }): Promise<{
@@ -552,26 +556,26 @@ export async function createBudget(params: {
   }
 
   // Validate required fields
-  if (!params.category || params.category.trim() === '') {
-    return { success: false, error: 'Category is required' };
+  if (!params.category || params.category.trim() === "") {
+    return { success: false, error: "Category is required" };
   }
-  if (typeof params.amount !== 'number' || isNaN(params.amount)) {
-    return { success: false, error: 'Valid amount is required' };
+  if (typeof params.amount !== "number" || isNaN(params.amount)) {
+    return { success: false, error: "Valid amount is required" };
   }
   if (params.amount <= 0) {
-    return { success: false, error: 'Amount must be greater than zero' };
+    return { success: false, error: "Amount must be greater than zero" };
   }
-  if (!params.period || !['monthly', 'annual'].includes(params.period)) {
+  if (!params.period || !["monthly", "annual"].includes(params.period)) {
     return { success: false, error: 'Period must be "monthly" or "annual"' };
   }
   if (!params.startDate) {
-    return { success: false, error: 'Start date is required' };
+    return { success: false, error: "Start date is required" };
   }
 
   // Check if budget already exists for this category and period
   const existingBudgets = await db.budgets.toArray();
   const duplicate = existingBudgets.find(
-    b => b.categoryId === params.category && b.period === params.period
+    (b) => b.categoryId === params.category && b.period === params.period
   );
 
   if (duplicate) {
@@ -602,7 +606,7 @@ export async function createBudget(params: {
       budgetId: budget.id,
     };
   } catch (error: any) {
-    console.error('[Chatbot] Failed to create budget:', error);
+    console.error("[Chatbot] Failed to create budget:", error);
     return {
       success: false,
       error: `Failed to create budget: ${error.message}`,
@@ -633,7 +637,7 @@ export async function updateTransaction(params: {
 
   // Validate transaction ID
   if (!params.transactionId) {
-    return { success: false, error: 'Transaction ID is required' };
+    return { success: false, error: "Transaction ID is required" };
   }
 
   // Get existing transaction
@@ -644,11 +648,11 @@ export async function updateTransaction(params: {
 
   // Validate new values if provided
   if (params.amount !== undefined) {
-    if (typeof params.amount !== 'number' || isNaN(params.amount)) {
-      return { success: false, error: 'Invalid amount' };
+    if (typeof params.amount !== "number" || isNaN(params.amount)) {
+      return { success: false, error: "Invalid amount" };
     }
     if (params.amount === 0) {
-      return { success: false, error: 'Amount cannot be zero' };
+      return { success: false, error: "Amount cannot be zero" };
     }
   }
 
@@ -681,7 +685,7 @@ export async function updateTransaction(params: {
     await db.transactions.update(params.transactionId, updates);
     return { success: true };
   } catch (error: any) {
-    console.error('[Chatbot] Failed to update transaction:', error);
+    console.error("[Chatbot] Failed to update transaction:", error);
     return {
       success: false,
       error: `Failed to update transaction: ${error.message}`,
@@ -709,7 +713,7 @@ export async function updateBudget(params: {
 
   // Validate budget ID
   if (!params.budgetId) {
-    return { success: false, error: 'Budget ID is required' };
+    return { success: false, error: "Budget ID is required" };
   }
 
   // Get existing budget
@@ -720,11 +724,11 @@ export async function updateBudget(params: {
 
   // Validate new values if provided
   if (params.amount !== undefined) {
-    if (typeof params.amount !== 'number' || isNaN(params.amount)) {
-      return { success: false, error: 'Invalid amount' };
+    if (typeof params.amount !== "number" || isNaN(params.amount)) {
+      return { success: false, error: "Invalid amount" };
     }
     if (params.amount <= 0) {
-      return { success: false, error: 'Amount must be greater than zero' };
+      return { success: false, error: "Amount must be greater than zero" };
     }
   }
 
@@ -748,7 +752,7 @@ export async function updateBudget(params: {
     await db.budgets.update(params.budgetId, updates);
     return { success: true };
   } catch (error: any) {
-    console.error('[Chatbot] Failed to update budget:', error);
+    console.error("[Chatbot] Failed to update budget:", error);
     return {
       success: false,
       error: `Failed to update budget: ${error.message}`,

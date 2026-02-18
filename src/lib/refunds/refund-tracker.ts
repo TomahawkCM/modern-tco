@@ -5,8 +5,8 @@
  * and provides gross vs net spending reports.
  */
 
-import { db } from '@/lib/budget-db';
-import type { Transaction } from '@/types/budget';
+import { db } from "@/lib/budget-db";
+import type { Transaction } from "@/types/budget";
 
 /**
  * Mark a transaction as expecting a refund.
@@ -18,7 +18,7 @@ export async function markExpectingRefund(
   notes?: string
 ): Promise<void> {
   await db.transactions.update(txId, {
-    refundStatus: 'expecting',
+    refundStatus: "expecting",
     refundExpectedAmount: expectedAmount,
     refundExpectedDate: expectedDate,
     refundNotes: notes,
@@ -35,13 +35,8 @@ export async function markExpectingRefund(
  * - Date within 30 days of purchase
  * - Credit transaction (amount > 0) vs debit purchase (amount < 0)
  */
-export async function autoMatchRefunds(): Promise<
-  Array<{ purchaseId: string; refundId: string }>
-> {
-  const expecting = await db.transactions
-    .where('refundStatus')
-    .equals('expecting')
-    .toArray();
+export async function autoMatchRefunds(): Promise<Array<{ purchaseId: string; refundId: string }>> {
+  const expecting = await db.transactions.where("refundStatus").equals("expecting").toArray();
 
   if (expecting.length === 0) return [];
 
@@ -49,21 +44,18 @@ export async function autoMatchRefunds(): Promise<
   const sixtyDaysAgo = new Date();
   sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
 
-  const allRecent = await db.transactions
-    .where('date')
-    .above(sixtyDaysAgo)
-    .toArray();
+  const allRecent = await db.transactions.where("date").above(sixtyDaysAgo).toArray();
 
   const recentCredits = allRecent.filter(
     (tx) => tx.amount > 0 && !tx.refundLinkedTransactionId && !tx.isSplit
   );
 
-  const { extractMerchantToken } = await import('@/lib/merchant-tokenizer');
+  const { extractMerchantToken } = await import("@/lib/merchant-tokenizer");
   const matches: Array<{ purchaseId: string; refundId: string }> = [];
 
   for (const purchase of expecting) {
     const purchaseToken = extractMerchantToken(
-      purchase.description || purchase.originalDescription || ''
+      purchase.description || purchase.originalDescription || ""
     );
     const purchaseAmount = Math.abs(purchase.amount);
     const purchaseDate = new Date(purchase.date);
@@ -73,7 +65,7 @@ export async function autoMatchRefunds(): Promise<
       if (credit.refundLinkedTransactionId) continue;
 
       const creditToken = extractMerchantToken(
-        credit.description || credit.originalDescription || ''
+        credit.description || credit.originalDescription || ""
       );
 
       // Merchant match
@@ -93,10 +85,10 @@ export async function autoMatchRefunds(): Promise<
 
       // Match found
       const isPartial = credit.amount < purchaseAmount * 0.9;
-      const refundStatus = isPartial ? 'partial' : 'received';
+      const refundStatus = isPartial ? "partial" : "received";
 
       await db.transactions.update(purchase.id, {
-        refundStatus: refundStatus as 'partial' | 'received',
+        refundStatus,
         refundLinkedTransactionId: credit.id,
         refundReceivedAmount: credit.amount,
         updatedAt: new Date(),
@@ -123,10 +115,7 @@ export async function getRefundSummary(
   start: Date,
   end: Date
 ): Promise<{ gross: number; refunds: number; net: number }> {
-  const allTxs = await db.transactions
-    .where('date')
-    .between(start, end, true, true)
-    .toArray();
+  const allTxs = await db.transactions.where("date").between(start, end, true, true).toArray();
 
   const nonSplitTxs = allTxs.filter((tx) => !tx.isSplit);
 
@@ -137,10 +126,7 @@ export async function getRefundSummary(
     if (tx.amount < 0) {
       gross += Math.abs(tx.amount);
     }
-    if (
-      tx.amount > 0 &&
-      tx.refundLinkedTransactionId
-    ) {
+    if (tx.amount > 0 && tx.refundLinkedTransactionId) {
       refunds += tx.amount;
     }
   }
@@ -156,8 +142,5 @@ export async function getRefundSummary(
  * Get all transactions currently expecting refunds.
  */
 export async function getExpectingRefunds(): Promise<Transaction[]> {
-  return db.transactions
-    .where('refundStatus')
-    .equals('expecting')
-    .toArray();
+  return db.transactions.where("refundStatus").equals("expecting").toArray();
 }

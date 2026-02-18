@@ -177,7 +177,7 @@ specify init --here
 ### TCO-Specific Applications
 
 - **Learning Objectives**: Specify measurable learning outcomes for each domain
-- **Lab Exercises**: Define hands-on exercise requirements and validation criteria  
+- **Lab Exercises**: Define hands-on exercise requirements and validation criteria
 - **Assessment Design**: Specify question structures and difficulty progression
 - **Feature Development**: Plan interactive learning features with clear intent
 

@@ -15,6 +15,7 @@ This guide covers deploying the Tanium TCO LMS to production using Vercel, inclu
 ## ✅ Pre-Deployment Checklist
 
 ### Code Quality
+
 - [ ] All tests passing (`npm run test`, `npm run test:vitest`)
 - [ ] TypeScript compilation successful (`npm run typecheck`)
 - [ ] ESLint passes with no errors (`npm run lint`)
@@ -26,6 +27,7 @@ This guide covers deploying the Tanium TCO LMS to production using Vercel, inclu
 - [ ] No console errors in production build
 
 ### Security
+
 - [ ] All HIGH priority security items completed
 - [ ] Sentry configured for error tracking
 - [ ] Security headers verified (`next.config.js`)
@@ -33,12 +35,14 @@ This guide covers deploying the Tanium TCO LMS to production using Vercel, inclu
 - [ ] Dependency audit clean (`npm audit`)
 
 ### Content
+
 - [ ] All 140+ questions reviewed by SME
 - [ ] All 6 modules content validated
 - [ ] Videos uploaded and functional
 - [ ] Content validation checklist completed
 
 ### Database
+
 - [ ] Supabase production project created
 - [ ] Database schema deployed
 - [ ] RLS policies active and tested
@@ -54,6 +58,7 @@ This guide covers deploying the Tanium TCO LMS to production using Vercel, inclu
    - Use GitHub/GitLab/Bitbucket for easy integration
 
 2. **Import Git Repository**:
+
    ```bash
    # Via Vercel Dashboard:
    # 1. Click "Add New Project"
@@ -78,6 +83,7 @@ This guide covers deploying the Tanium TCO LMS to production using Vercel, inclu
 Configure these in **Vercel Dashboard → Settings → Environment Variables**:
 
 #### Supabase Configuration
+
 ```bash
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
@@ -87,6 +93,7 @@ SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... # Server-only,
 **Get these from**: Supabase Dashboard → Settings → API
 
 #### Admin Configuration
+
 ```bash
 NEXT_PUBLIC_ADMIN_EMAILS=admin1@example.com,admin2@example.com
 ```
@@ -94,6 +101,7 @@ NEXT_PUBLIC_ADMIN_EMAILS=admin1@example.com,admin2@example.com
 **Purpose**: Comma-separated list of emails with admin access to `/admin/questions`
 
 #### Analytics (PostHog)
+
 ```bash
 NEXT_PUBLIC_POSTHOG_KEY=phc_your_key_here
 NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
@@ -103,6 +111,7 @@ NEXT_PUBLIC_ANALYTICS_DEBUG=false # Set to true only for testing
 **Get from**: PostHog Dashboard → Project Settings → API Keys
 
 #### Error Tracking (Sentry)
+
 ```bash
 NEXT_PUBLIC_SENTRY_DSN=https://examplePublicKey@o0.ingest.sentry.io/0
 SENTRY_AUTH_TOKEN=your_auth_token_here # For sourcemaps (optional)
@@ -113,6 +122,7 @@ SENTRY_PROJECT=your-project-slug
 **Get from**: Sentry Dashboard → Settings → Projects → Client Keys (DSN)
 
 #### Optional: Stripe (if payment integration enabled)
+
 ```bash
 STRIPE_SECRET_KEY=sk_live_your_secret_key
 STRIPE_PRICE_PRO=price_xxx
@@ -123,6 +133,7 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_your_publishable_key
 **Get from**: Stripe Dashboard → Developers → API Keys
 
 #### Optional: Team Seat Limit
+
 ```bash
 NEXT_PUBLIC_TEAM_SEAT_LIMIT=50
 ```
@@ -152,6 +163,7 @@ For each variable, set the appropriate scope:
 2. **Deploy Database Schema**:
 
    **Option A: Via Supabase SQL Editor** (Recommended)
+
    ```sql
    -- Copy SQL from supabase/migrations/ directory
    -- Execute in SQL Editor
@@ -159,6 +171,7 @@ For each variable, set the appropriate scope:
    ```
 
    **Option B: Via Migration Scripts**
+
    ```bash
    # Configure Supabase CLI locally
    npx supabase login
@@ -179,6 +192,7 @@ For each variable, set the appropriate scope:
      - `study_modules`: Public read
 
 4. **Seed Production Data**:
+
    ```bash
    # Seed questions (140+ items)
    npm run content:seed
@@ -205,6 +219,7 @@ For each variable, set the appropriate scope:
 ### Deploy via Git Push
 
 1. **Push to main branch** (Vercel auto-deploys if connected):
+
    ```bash
    git add .
    git commit -m "chore: Production deployment ready"
@@ -360,6 +375,7 @@ npx lighthouse https://your-domain.vercel.app \
    - Add custom domain (e.g., `tanium-tco.example.com`)
 
 2. **Configure DNS**:
+
    ```
    Type: CNAME
    Name: tanium-tco (or @)
@@ -390,6 +406,7 @@ If deployment has critical issues:
    - Instant rollback (< 1 minute)
 
 2. **Via Vercel CLI**:
+
    ```bash
    # List deployments
    vercel ls
@@ -446,6 +463,7 @@ git push origin main --force
 ### Week 1 (Intensive Monitoring)
 
 **Daily Tasks**:
+
 - [ ] Review Sentry errors (2x per day)
 - [ ] Check uptime monitoring (morning/evening)
 - [ ] Monitor user sign-ups
@@ -453,6 +471,7 @@ git push origin main --force
 - [ ] Review user feedback/support tickets
 
 **Target Metrics**:
+
 - Uptime: > 99.5%
 - Error Rate: < 0.5%
 - Average Response Time: < 2s
@@ -461,12 +480,14 @@ git push origin main --force
 ### Month 1 (Active Monitoring)
 
 **Weekly Tasks**:
+
 - [ ] Review analytics trends
 - [ ] Check for security vulnerabilities (`npm audit`)
 - [ ] Update dependencies if needed
 - [ ] Plan hot-fixes for reported issues
 
 **Success Metrics**:
+
 - User Retention (30-day): > 50%
 - Module Completion Rate: > 40%
 - Mock Exam Attempts: Track growth
@@ -523,6 +544,7 @@ git push origin main --force
 ## ✅ Deployment Complete Checklist
 
 **Final Verification**:
+
 - [ ] Production URL accessible
 - [ ] All environment variables configured
 - [ ] Database connected and seeded
@@ -535,13 +557,13 @@ git push origin main --force
 
 **Sign-Off**:
 
-**Technical Lead**: ____________________ (Name, Date)
+**Technical Lead**: ********\_\_\_\_******** (Name, Date)
 
-**DevOps Lead**: ____________________ (Name, Date)
+**DevOps Lead**: ********\_\_\_\_******** (Name, Date)
 
 **Deployment Successful**: [ ] YES / [ ] NO
 
-**Production URL**: ______________________________________
+**Production URL**: ******************\_\_******************
 
 ---
 

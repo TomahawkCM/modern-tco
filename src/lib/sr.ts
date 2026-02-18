@@ -1,7 +1,7 @@
 // Minimal spaced repetition utilities (SM-2 inspired)
 // Used by Notes MVP to schedule reviews client-side
 
-export type SRRating = 'again' | 'hard' | 'good' | 'easy';
+export type SRRating = "again" | "hard" | "good" | "easy";
 
 export interface SRCardState {
   id: string;
@@ -44,13 +44,13 @@ export function schedule(
   rating: SRRating,
   now: Date = new Date()
 ): SRCardState {
-  let {ease} = state;
-  let {interval} = state; // days
-  let {reps} = state;
-  let {lapses} = state;
+  let { ease } = state;
+  let { interval } = state; // days
+  let { reps } = state;
+  let { lapses } = state;
 
   switch (rating) {
-    case 'again': {
+    case "again": {
       // Reset repetitions; short interval, decrease ease
       reps = 0;
       lapses += 1;
@@ -58,7 +58,7 @@ export function schedule(
       interval = 1; // review tomorrow
       break;
     }
-    case 'hard': {
+    case "hard": {
       ease = Math.max(MIN_EASE, ease - 0.15);
       if (reps <= 0) interval = 1;
       else if (reps === 1) interval = Math.max(1, Math.round(interval * 1.2));
@@ -66,14 +66,14 @@ export function schedule(
       reps = Math.max(1, reps);
       break;
     }
-    case 'good': {
+    case "good": {
       if (reps === 0) interval = 1;
       else if (reps === 1) interval = 6;
       else interval = Math.max(1, Math.round(interval * ease));
       reps += 1;
       break;
     }
-    case 'easy': {
+    case "easy": {
       ease = Math.max(MIN_EASE, ease + 0.15);
       if (reps === 0) interval = 3;
       else if (reps === 1) interval = 7;
@@ -89,8 +89,5 @@ export function schedule(
 
 export function getDueQueue(states: SRCardState[], now: Date = new Date()): SRCardState[] {
   const ts = now.getTime();
-  return states
-    .filter((s) => s.due <= ts)
-    .sort((a, b) => a.due - b.due);
+  return states.filter((s) => s.due <= ts).sort((a, b) => a.due - b.due);
 }
-

@@ -14,8 +14,8 @@
  * - Motivational support
  */
 
-import { supabase } from '@/lib/supabase';
-import Anthropic from '@anthropic-ai/sdk';
+import { supabase } from "@/lib/supabase";
+import Anthropic from "@anthropic-ai/sdk";
 
 // ==================== TYPES ====================
 
@@ -23,11 +23,17 @@ export interface Conversation {
   id: string;
   userId: string;
   title?: string;
-  conversationType: 'general_help' | 'concept_explanation' | 'exam_strategy' | 'troubleshooting' | 'study_planning' | 'motivation';
+  conversationType:
+    | "general_help"
+    | "concept_explanation"
+    | "exam_strategy"
+    | "troubleshooting"
+    | "study_planning"
+    | "motivation";
   relatedModuleId?: string;
   relatedDomain?: string;
   relatedSectionId?: string;
-  status: 'active' | 'archived';
+  status: "active" | "archived";
   lastMessageAt: Date;
   aiModel: string;
   systemPrompt?: string;
@@ -38,7 +44,7 @@ export interface Conversation {
 export interface Message {
   id: string;
   conversationId: string;
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
   model?: string;
   tokensUsed?: number;
@@ -72,7 +78,7 @@ export interface TutorResponse {
   message: Message;
   suggestedFollowUps?: string[];
   relatedResources?: {
-    type: 'module' | 'video' | 'practice' | 'lab';
+    type: "module" | "video" | "practice" | "lab";
     id: string;
     title: string;
     url: string;
@@ -81,7 +87,7 @@ export interface TutorResponse {
 
 // ==================== CONSTANTS ====================
 
-const DEFAULT_MODEL = 'claude-3-5-sonnet-20241022';
+const DEFAULT_MODEL = "claude-3-5-sonnet-20241022";
 const MAX_TOKENS = 2000;
 const TEMPERATURE = 0.7;
 
@@ -169,7 +175,7 @@ function getAnthropicClient(): Anthropic {
   if (!anthropicClient) {
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
-      throw new Error('ANTHROPIC_API_KEY environment variable is not set');
+      throw new Error("ANTHROPIC_API_KEY environment variable is not set");
     }
     anthropicClient = new Anthropic({ apiKey });
   }
@@ -180,20 +186,20 @@ function getAnthropicClient(): Anthropic {
 
 export async function createConversation(
   userId: string,
-  type: Conversation['conversationType'] = 'general_help',
+  type: Conversation["conversationType"] = "general_help",
   context?: TutorContext
 ): Promise<Conversation> {
   const systemPrompt = buildSystemPrompt(type, context);
 
   const { data, error } = await supabase
-    .from('ai_tutor_conversations')
+    .from("ai_tutor_conversations")
     .insert({
       user_id: userId,
       conversation_type: type,
       related_module_id: context?.currentModuleId,
       related_domain: context?.currentDomain,
       related_section_id: context?.currentSectionId,
-      status: 'active',
+      status: "active",
       ai_model: DEFAULT_MODEL,
       system_prompt: systemPrompt,
       message_count: 0,
@@ -207,11 +213,11 @@ export async function createConversation(
 
 export async function getActiveConversations(userId: string): Promise<Conversation[]> {
   const { data, error } = await supabase
-    .from('ai_tutor_conversations')
-    .select('*')
-    .eq('user_id', userId)
-    .eq('status', 'active')
-    .order('last_message_at', { ascending: false })
+    .from("ai_tutor_conversations")
+    .select("*")
+    .eq("user_id", userId)
+    .eq("status", "active")
+    .order("last_message_at", { ascending: false })
     .limit(10);
 
   if (error) throw error;
@@ -220,10 +226,10 @@ export async function getActiveConversations(userId: string): Promise<Conversati
 
 export async function getConversationMessages(conversationId: string): Promise<Message[]> {
   const { data, error } = await supabase
-    .from('ai_tutor_messages')
-    .select('*')
-    .eq('conversation_id', conversationId)
-    .order('created_at', { ascending: true });
+    .from("ai_tutor_messages")
+    .select("*")
+    .eq("conversation_id", conversationId)
+    .order("created_at", { ascending: true });
 
   if (error) throw error;
   return (data || []).map(camelCaseKeys) as Message[];
@@ -231,10 +237,10 @@ export async function getConversationMessages(conversationId: string): Promise<M
 
 export async function archiveConversation(conversationId: string, userId: string): Promise<void> {
   const { error } = await supabase
-    .from('ai_tutor_conversations')
-    .update({ status: 'archived' })
-    .eq('id', conversationId)
-    .eq('user_id', userId);
+    .from("ai_tutor_conversations")
+    .update({ status: "archived" })
+    .eq("id", conversationId)
+    .eq("user_id", userId);
 
   if (error) throw error;
 }
@@ -251,10 +257,10 @@ export async function sendMessage(
 
   // Save user message
   const { data: userMessageData, error: userMsgError } = await supabase
-    .from('ai_tutor_messages')
+    .from("ai_tutor_messages")
     .insert({
       conversation_id: conversationId,
-      role: 'user',
+      role: "user",
       content: userMessage,
     })
     .select()
@@ -267,15 +273,16 @@ export async function sendMessage(
 
   // Get conversation details for system prompt
   const { data: conversation } = await supabase
-    .from('ai_tutor_conversations')
-    .select('*')
-    .eq('id', conversationId)
+    .from("ai_tutor_conversations")
+    .select("*")
+    .eq("id", conversationId)
     .single();
 
-  if (!conversation) throw new Error('Conversation not found');
+  if (!conversation) throw new Error("Conversation not found");
 
   // Build context-enhanced system prompt
-  const systemPrompt = conversation.system_prompt || buildSystemPrompt(conversation.conversation_type, context);
+  const systemPrompt =
+    conversation.system_prompt || buildSystemPrompt(conversation.conversation_type, context);
   const contextualPrompt = enhancePromptWithContext(systemPrompt, context);
 
   // Call Claude API
@@ -294,15 +301,15 @@ export async function sendMessage(
   const processingTime = Date.now() - startTime;
 
   // Extract response
-  const assistantMessage = response.content[0].type === 'text' ? response.content[0].text : '';
+  const assistantMessage = response.content[0].type === "text" ? response.content[0].text : "";
   const tokensUsed = response.usage.input_tokens + response.usage.output_tokens;
 
   // Save assistant message
   const { data: assistantMessageData, error: assistantMsgError } = await supabase
-    .from('ai_tutor_messages')
+    .from("ai_tutor_messages")
     .insert({
       conversation_id: conversationId,
-      role: 'assistant',
+      role: "assistant",
       content: assistantMessage,
       model: DEFAULT_MODEL,
       tokens_used: tokensUsed,
@@ -315,12 +322,12 @@ export async function sendMessage(
 
   // Update conversation
   await supabase
-    .from('ai_tutor_conversations')
+    .from("ai_tutor_conversations")
     .update({
       last_message_at: new Date().toISOString(),
       message_count: messages.length + 2, // +user msg +assistant msg
     })
-    .eq('id', conversationId);
+    .eq("id", conversationId);
 
   // Extract suggested follow-ups and related resources
   const suggestedFollowUps = extractSuggestedFollowUps(assistantMessage, context);
@@ -341,7 +348,7 @@ export async function askQuickQuestion(
   context?: TutorContext
 ): Promise<TutorResponse> {
   // Create temporary conversation
-  const conversation = await createConversation(userId, 'general_help', context);
+  const conversation = await createConversation(userId, "general_help", context);
 
   // Send message
   const response = await sendMessage(conversation.id, userId, question, context);
@@ -357,15 +364,15 @@ export async function askQuickQuestion(
 export async function explainConcept(
   userId: string,
   conceptName: string,
-  difficultyLevel: 'simple' | 'intermediate' | 'advanced' = 'simple',
+  difficultyLevel: "simple" | "intermediate" | "advanced" = "simple",
   context?: TutorContext
 ): Promise<TutorResponse> {
-  const conversation = await createConversation(userId, 'concept_explanation', context);
+  const conversation = await createConversation(userId, "concept_explanation", context);
 
-  let question = '';
-  if (difficultyLevel === 'simple') {
+  let question = "";
+  if (difficultyLevel === "simple") {
     question = `Can you explain ${conceptName} in simple terms, like I'm new to Tanium?`;
-  } else if (difficultyLevel === 'intermediate') {
+  } else if (difficultyLevel === "intermediate") {
     question = `Can you explain ${conceptName} with some technical detail?`;
   } else {
     question = `Can you give me an advanced, comprehensive explanation of ${conceptName}?`;
@@ -380,7 +387,7 @@ export async function getExamStrategy(
   currentReadinessScore: number,
   context?: TutorContext
 ): Promise<TutorResponse> {
-  const conversation = await createConversation(userId, 'exam_strategy', context);
+  const conversation = await createConversation(userId, "exam_strategy", context);
 
   const question = `I have ${daysUntilExam} days until my TCO exam. My current readiness score is ${currentReadinessScore}%. What should my study strategy be?`;
 
@@ -392,7 +399,7 @@ export async function getMotivation(
   challenge: string,
   context?: TutorContext
 ): Promise<TutorResponse> {
-  const conversation = await createConversation(userId, 'motivation', context);
+  const conversation = await createConversation(userId, "motivation", context);
 
   const question = `I'm struggling with: ${challenge}. Can you help me stay motivated?`;
 
@@ -408,19 +415,19 @@ export async function rateMessage(
   feedback?: string
 ): Promise<void> {
   const { error } = await supabase
-    .from('ai_tutor_messages')
+    .from("ai_tutor_messages")
     .update({
       was_helpful: wasHelpful,
       user_feedback: feedback,
     })
-    .eq('id', messageId);
+    .eq("id", messageId);
 
   if (error) throw error;
 }
 
 // ==================== HELPER FUNCTIONS ====================
 
-function buildSystemPrompt(type: Conversation['conversationType'], context?: TutorContext): string {
+function buildSystemPrompt(type: Conversation["conversationType"], context?: TutorContext): string {
   let basePrompt = SYSTEM_PROMPTS[type] || SYSTEM_PROMPTS.general_help;
 
   if (context) {
@@ -433,7 +440,7 @@ function buildSystemPrompt(type: Conversation['conversationType'], context?: Tut
 function enhancePromptWithContext(basePrompt: string, context?: TutorContext): string {
   if (!context) return basePrompt;
 
-  let enhanced = `${basePrompt  }\n\n**Current Student Context:**\n`;
+  let enhanced = `${basePrompt}\n\n**Current Student Context:**\n`;
 
   if (context.currentModuleId || context.currentDomain) {
     enhanced += `- Currently studying: ${context.currentDomain || context.currentModuleId}\n`;
@@ -444,16 +451,18 @@ function enhancePromptWithContext(basePrompt: string, context?: TutorContext): s
       enhanced += `- Recent quiz score: ${context.recentPerformance.lastQuizScore}%\n`;
     }
     if (context.recentPerformance.weakAreas && context.recentPerformance.weakAreas.length > 0) {
-      enhanced += `- Weak areas: ${context.recentPerformance.weakAreas.join(', ')}\n`;
+      enhanced += `- Weak areas: ${context.recentPerformance.weakAreas.join(", ")}\n`;
     }
     if (context.recentPerformance.strongAreas && context.recentPerformance.strongAreas.length > 0) {
-      enhanced += `- Strong areas: ${context.recentPerformance.strongAreas.join(', ')}\n`;
+      enhanced += `- Strong areas: ${context.recentPerformance.strongAreas.join(", ")}\n`;
     }
   }
 
   if (context.studyGoals) {
     if (context.studyGoals.targetExamDate) {
-      const daysUntil = Math.ceil((context.studyGoals.targetExamDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
+      const daysUntil = Math.ceil(
+        (context.studyGoals.targetExamDate.getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+      );
       enhanced += `- Days until exam: ${daysUntil}\n`;
     }
     if (context.studyGoals.targetScore) {
@@ -464,7 +473,8 @@ function enhancePromptWithContext(basePrompt: string, context?: TutorContext): s
     }
   }
 
-  enhanced += '\nUse this context to personalize your response and make it more relevant to their current situation.';
+  enhanced +=
+    "\nUse this context to personalize your response and make it more relevant to their current situation.";
 
   return enhanced;
 }
@@ -473,12 +483,12 @@ function extractSuggestedFollowUps(message: string, context?: TutorContext): str
   // Basic suggestions based on conversation flow
   const suggestions: string[] = [];
 
-  if (message.toLowerCase().includes('practice')) {
-    suggestions.push('Show me practice questions on this topic');
+  if (message.toLowerCase().includes("practice")) {
+    suggestions.push("Show me practice questions on this topic");
   }
 
-  if (message.toLowerCase().includes('example')) {
-    suggestions.push('Can you give me another example?');
+  if (message.toLowerCase().includes("example")) {
+    suggestions.push("Can you give me another example?");
   }
 
   if (context?.currentDomain) {
@@ -488,37 +498,40 @@ function extractSuggestedFollowUps(message: string, context?: TutorContext): str
   return suggestions.slice(0, 3); // Max 3 suggestions
 }
 
-function extractRelatedResources(message: string, context?: TutorContext): TutorResponse['relatedResources'] {
-  const resources: TutorResponse['relatedResources'] = [];
+function extractRelatedResources(
+  message: string,
+  context?: TutorContext
+): TutorResponse["relatedResources"] {
+  const resources: TutorResponse["relatedResources"] = [];
 
   // Map domains to modules
   const domainModuleMap: Record<string, { id: string; title: string }> = {
     asking_questions: {
-      id: '01-asking-questions',
-      title: 'Asking Questions Module',
+      id: "01-asking-questions",
+      title: "Asking Questions Module",
     },
     refining_questions: {
-      id: '02-refining-questions-targeting',
-      title: 'Refining Questions Module',
+      id: "02-refining-questions-targeting",
+      title: "Refining Questions Module",
     },
     taking_action: {
-      id: '03-taking-action-packages-actions',
-      title: 'Taking Action Module',
+      id: "03-taking-action-packages-actions",
+      title: "Taking Action Module",
     },
     navigation_basic_functions: {
-      id: '04-navigation-basic-modules',
-      title: 'Navigation & Basic Modules',
+      id: "04-navigation-basic-modules",
+      title: "Navigation & Basic Modules",
     },
     report_generation_export: {
-      id: '05-reporting-data-export',
-      title: 'Reporting & Data Export Module',
+      id: "05-reporting-data-export",
+      title: "Reporting & Data Export Module",
     },
   };
 
   if (context?.currentDomain && domainModuleMap[context.currentDomain]) {
     const module = domainModuleMap[context.currentDomain];
     resources.push({
-      type: 'module',
+      type: "module",
       id: module.id,
       title: module.title,
       url: `/study/${module.id}`,

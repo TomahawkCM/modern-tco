@@ -48,7 +48,7 @@ export function AnalyticsClient() {
   // Capture pageviews on route changes
   useEffect(() => {
     if (!pathname) return;
-    const query = search ? search.toString() : '';
+    const query = search ? search.toString() : "";
     const path = query ? `${pathname}?${query}` : pathname;
     scheduleIdle(() => {
       void analytics.pageview(path);

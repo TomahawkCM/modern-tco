@@ -34,7 +34,7 @@ const DETECTED_BILLS = [
   {
     id: "2",
     name: "Electric Company",
-    amount: 142.50,
+    amount: 142.5,
     dueDay: 5,
     frequency: "monthly" as const,
     confidence: 0.95,
@@ -61,7 +61,7 @@ const DETECTED_BILLS = [
   {
     id: "5",
     name: "Car Insurance",
-    amount: 156.00,
+    amount: 156.0,
     dueDay: 20,
     frequency: "monthly" as const,
     confidence: 0.88,
@@ -106,16 +106,10 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
   const [newBillDueDay, setNewBillDueDay] = useState("1");
 
   const enabledCount = bills.filter((b) => b.enabled).length;
-  const totalMonthly = bills
-    .filter((b) => b.enabled)
-    .reduce((sum, b) => sum + b.amount, 0);
+  const totalMonthly = bills.filter((b) => b.enabled).reduce((sum, b) => sum + b.amount, 0);
 
   const handleToggleBill = useCallback((id: string) => {
-    setBills((prev) =>
-      prev.map((b) =>
-        b.id === id ? { ...b, enabled: !b.enabled } : b
-      )
-    );
+    setBills((prev) => prev.map((b) => (b.id === id ? { ...b, enabled: !b.enabled } : b)));
   }, []);
 
   const handleAddBill = useCallback(() => {
@@ -145,10 +139,14 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
   const getOrdinalSuffix = (day: number) => {
     if (day >= 11 && day <= 13) return "th";
     switch (day % 10) {
-      case 1: return "st";
-      case 2: return "nd";
-      case 3: return "rd";
-      default: return "th";
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
     }
   };
 
@@ -165,7 +163,7 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
       </div>
 
       {/* Bills List */}
-      <div className="space-y-2 max-h-[200px] overflow-y-auto pr-2">
+      <div className="max-h-[200px] space-y-2 overflow-y-auto pe-2">
         {bills.map((bill) => {
           const detected = DETECTED_BILLS.find((d) => d.id === bill.id);
 
@@ -173,11 +171,9 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
             <div
               key={bill.id}
               className={cn(
-                "flex items-center gap-4 p-3 rounded-xl",
-                "bg-slate-800/50 border transition-all",
-                bill.enabled
-                  ? "border-white/10"
-                  : "border-transparent opacity-50"
+                "flex items-center gap-4 rounded-xl p-3",
+                "border bg-slate-800/50 transition-all",
+                bill.enabled ? "border-white/10" : "border-transparent opacity-50"
               )}
             >
               {/* Toggle */}
@@ -185,33 +181,26 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
                 type="button"
                 onClick={() => handleToggleBill(bill.id)}
                 className={cn(
-                  "shrink-0 p-2 rounded-lg transition-colors",
-                  bill.enabled
-                    ? "bg-teal-500/20 text-teal-400"
-                    : "bg-slate-700/50 text-slate-500"
+                  "shrink-0 rounded-lg p-2 transition-colors",
+                  bill.enabled ? "bg-teal-500/20 text-teal-400" : "bg-slate-700/50 text-slate-500"
                 )}
               >
-                {bill.enabled ? (
-                  <Bell className="h-4 w-4" />
-                ) : (
-                  <BellOff className="h-4 w-4" />
-                )}
+                {bill.enabled ? <Bell className="h-4 w-4" /> : <BellOff className="h-4 w-4" />}
               </button>
 
               {/* Bill Icon */}
-              <div className="shrink-0 w-10 h-10 rounded-lg bg-slate-700/50 flex items-center justify-center text-lg">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-700/50 text-lg">
                 {detected?.icon || "📄"}
               </div>
 
               {/* Bill Details */}
-              <div className="flex-1 min-w-0">
-                <p className="text-white font-medium text-sm truncate">
-                  {bill.name}
-                </p>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-medium text-white">{bill.name}</p>
                 <div className="flex items-center gap-2 text-xs text-slate-500">
                   <Calendar className="h-3 w-3" />
                   <span>
-                    Due on the {bill.dueDay}{getOrdinalSuffix(bill.dueDay)}
+                    Due on the {bill.dueDay}
+                    {getOrdinalSuffix(bill.dueDay)}
                   </span>
                   {bill.enabled && (
                     <>
@@ -224,8 +213,8 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
               </div>
 
               {/* Amount */}
-              <div className="text-right">
-                <p className="text-white font-medium">${bill.amount.toFixed(2)}</p>
+              <div className="text-end">
+                <p className="font-medium text-white">${bill.amount.toFixed(2)}</p>
                 <p className="text-xs text-slate-500">/month</p>
               </div>
             </div>
@@ -235,8 +224,8 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
 
       {/* Add Custom Bill */}
       {showAddForm ? (
-        <div className="p-4 bg-slate-800/50 rounded-xl border border-white/10 space-y-3">
-          <div className="flex items-center justify-between mb-2">
+        <div className="space-y-3 rounded-xl border border-white/10 bg-slate-800/50 p-4">
+          <div className="mb-2 flex items-center justify-between">
             <p className="text-sm font-medium text-white">Add Custom Bill</p>
             <button
               type="button"
@@ -249,7 +238,7 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
 
           <div className="grid grid-cols-3 gap-3">
             <div className="col-span-2">
-              <label className="text-xs text-slate-400 mb-1 block">Bill Name</label>
+              <label className="mb-1 block text-xs text-slate-400">Bill Name</label>
               <input
                 type="text"
                 value={newBillName}
@@ -257,14 +246,14 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
                 placeholder="e.g., Phone Bill"
                 className={cn(
                   "w-full px-3 py-2 text-sm",
-                  "bg-slate-900 border border-white/10 rounded-lg",
+                  "rounded-lg border border-white/10 bg-slate-900",
                   "text-white placeholder-slate-500",
                   "focus:outline-none focus:ring-2 focus:ring-teal-500"
                 )}
               />
             </div>
             <div>
-              <label className="text-xs text-slate-400 mb-1 block">Amount</label>
+              <label className="mb-1 block text-xs text-slate-400">Amount</label>
               <input
                 type="number"
                 value={newBillAmount}
@@ -272,7 +261,7 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
                 placeholder="0.00"
                 className={cn(
                   "w-full px-3 py-2 text-sm",
-                  "bg-slate-900 border border-white/10 rounded-lg",
+                  "rounded-lg border border-white/10 bg-slate-900",
                   "text-white placeholder-slate-500",
                   "focus:outline-none focus:ring-2 focus:ring-teal-500"
                 )}
@@ -282,20 +271,21 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
 
           <div className="flex items-center gap-3">
             <div className="flex-1">
-              <label className="text-xs text-slate-400 mb-1 block">Due Day</label>
+              <label className="mb-1 block text-xs text-slate-400">Due Day</label>
               <select
                 value={newBillDueDay}
                 onChange={(e) => setNewBillDueDay(e.target.value)}
                 className={cn(
                   "w-full px-3 py-2 text-sm",
-                  "bg-slate-900 border border-white/10 rounded-lg",
+                  "rounded-lg border border-white/10 bg-slate-900",
                   "text-white",
                   "focus:outline-none focus:ring-2 focus:ring-teal-500"
                 )}
               >
                 {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
                   <option key={day} value={day}>
-                    {day}{getOrdinalSuffix(day)} of month
+                    {day}
+                    {getOrdinalSuffix(day)} of month
                   </option>
                 ))}
               </select>
@@ -306,11 +296,11 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
               onClick={handleAddBill}
               disabled={!newBillName.trim() || !newBillAmount}
               className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium mt-5",
+                "mt-5 rounded-lg px-4 py-2 text-sm font-medium",
                 "transition-colors",
                 newBillName.trim() && newBillAmount
                   ? "bg-teal-500 text-white hover:bg-teal-400"
-                  : "bg-slate-700 text-slate-500 cursor-not-allowed"
+                  : "cursor-not-allowed bg-slate-700 text-slate-500"
               )}
             >
               Add Bill
@@ -322,9 +312,9 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
           type="button"
           onClick={() => setShowAddForm(true)}
           className={cn(
-            "w-full flex items-center justify-center gap-2 p-3",
-            "border border-dashed border-slate-700 rounded-xl",
-            "text-sm text-slate-400 hover:text-white hover:border-slate-600",
+            "flex w-full items-center justify-center gap-2 p-3",
+            "rounded-xl border border-dashed border-slate-700",
+            "text-sm text-slate-400 hover:border-slate-600 hover:text-white",
             "transition-colors"
           )}
         >
@@ -334,15 +324,15 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
       )}
 
       {/* Summary */}
-      <div className="flex items-center justify-between p-4 bg-slate-800/30 rounded-xl">
+      <div className="flex items-center justify-between rounded-xl bg-slate-800/30 p-4">
         <div>
           <p className="text-sm text-slate-400">Monthly bills total</p>
           <p className="text-2xl font-bold text-white">${totalMonthly.toFixed(2)}</p>
         </div>
 
-        <div className="text-right">
+        <div className="text-end">
           <p className="text-sm text-slate-400">Reminders enabled</p>
-          <div className="flex items-center gap-2 justify-end">
+          <div className="flex items-center justify-end gap-2">
             <CheckCircle className="h-5 w-5 text-teal-400" />
             <span className="text-xl font-semibold text-white">{enabledCount}</span>
           </div>
@@ -355,9 +345,9 @@ export function BillRemindersStep({ onComplete, onSkip }: StepProps) {
           type="button"
           onClick={handleComplete}
           className={cn(
-            "flex items-center gap-2 px-6 py-2 rounded-lg font-medium",
+            "flex items-center gap-2 rounded-lg px-6 py-2 font-medium",
             "bg-gradient-to-r from-teal-500 to-blue-500 text-white",
-            "hover:opacity-90 transition-opacity"
+            "transition-opacity hover:opacity-90"
           )}
         >
           <Check className="h-4 w-4" />

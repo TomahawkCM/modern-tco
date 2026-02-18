@@ -9,7 +9,6 @@ import config from "../tailwind.config";
 
 // ─── Tailwind Config ──────────────────────────────────────────────────
 describe("Tailwind config", () => {
-
   it("has xs breakpoint at 320px", () => {
     expect(config.theme.screens.xs).toBe("320px");
   });
@@ -61,10 +60,7 @@ describe("Tailwind config", () => {
 // ─── i18n Keys ────────────────────────────────────────────────────────
 describe("i18n English locale keys", () => {
   const en = JSON.parse(
-    fs.readFileSync(
-      path.resolve(__dirname, "../src/i18n/messages/en.json"),
-      "utf-8"
-    )
+    fs.readFileSync(path.resolve(__dirname, "../src/i18n/messages/en.json"), "utf-8")
   );
 
   describe("mobileNav namespace", () => {
@@ -133,10 +129,7 @@ describe("i18n English locale keys", () => {
 // ─── manifest.json ────────────────────────────────────────────────────
 describe("PWA manifest.json", () => {
   const manifest = JSON.parse(
-    fs.readFileSync(
-      path.resolve(__dirname, "../public/manifest.json"),
-      "utf-8"
-    )
+    fs.readFileSync(path.resolve(__dirname, "../public/manifest.json"), "utf-8")
   );
 
   it("has dark background_color", () => {
@@ -182,10 +175,7 @@ describe("PWA manifest.json", () => {
 
 // ─── Design Token CSS ─────────────────────────────────────────────────
 describe("Design tokens in globals.css", () => {
-  const css = fs.readFileSync(
-    path.resolve(__dirname, "../src/app/globals.css"),
-    "utf-8"
-  );
+  const css = fs.readFileSync(path.resolve(__dirname, "../src/app/globals.css"), "utf-8");
 
   it("has 8px spacing grid variables", () => {
     expect(css).toContain("--space-1: 4px");
@@ -261,33 +251,20 @@ describe("New files created in Sprint 1", () => {
   it("FloatingActionButton component exists", () => {
     expect(
       fs.existsSync(
-        path.resolve(
-          __dirname,
-          "../src/components/budget/layout/FloatingActionButton.tsx"
-        )
+        path.resolve(__dirname, "../src/components/budget/layout/FloatingActionButton.tsx")
       )
     ).toBe(true);
   });
 
   it("IOSInstallBanner component exists", () => {
     expect(
-      fs.existsSync(
-        path.resolve(
-          __dirname,
-          "../src/components/budget/IOSInstallBanner.tsx"
-        )
-      )
+      fs.existsSync(path.resolve(__dirname, "../src/components/budget/IOSInstallBanner.tsx"))
     ).toBe(true);
   });
 
   it("useIOSStatePreservation hook exists", () => {
-    expect(
-      fs.existsSync(
-        path.resolve(
-          __dirname,
-          "../src/hooks/useIOSStatePreservation.ts"
-        )
-      )
-    ).toBe(true);
+    expect(fs.existsSync(path.resolve(__dirname, "../src/hooks/useIOSStatePreservation.ts"))).toBe(
+      true
+    );
   });
 });

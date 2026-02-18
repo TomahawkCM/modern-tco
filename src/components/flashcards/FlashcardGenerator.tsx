@@ -25,7 +25,11 @@ interface FlashcardGeneratorProps {
   onCardCreated?: () => void;
 }
 
-export default function FlashcardGenerator({ moduleId, sectionId, onCardCreated }: FlashcardGeneratorProps) {
+export default function FlashcardGenerator({
+  moduleId,
+  sectionId,
+  onCardCreated,
+}: FlashcardGeneratorProps) {
   const { user } = useAuth();
   const { toast } = useToast();
   const [isCreating, setIsCreating] = useState(false);
@@ -57,8 +61,11 @@ export default function FlashcardGenerator({ moduleId, sectionId, onCardCreated 
         sectionId,
         hint: hint.trim() || undefined,
         explanation: explanation.trim() || undefined,
-        tags: tags.split(',').map(t => t.trim()).filter(Boolean),
-        source: 'manual',
+        tags: tags
+          .split(",")
+          .map((t) => t.trim())
+          .filter(Boolean),
+        source: "manual",
       });
 
       if (card) {
@@ -137,10 +144,10 @@ export default function FlashcardGenerator({ moduleId, sectionId, onCardCreated 
       <CardContent className="space-y-6">
         {/* Auto-Generate Section */}
         {moduleId && (
-          <div className="p-4 bg-muted rounded-lg">
+          <div className="rounded-lg bg-muted p-4">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <h4 className="font-medium mb-1 flex items-center gap-2">
+                <h4 className="mb-1 flex items-center gap-2 font-medium">
                   <Sparkles className="h-4 w-4 text-primary" />
                   Auto-Generate from Module
                 </h4>
@@ -148,11 +155,7 @@ export default function FlashcardGenerator({ moduleId, sectionId, onCardCreated 
                   Automatically create flashcards from all learning objectives in this module
                 </p>
               </div>
-              <Button
-                onClick={handleAutoGenerate}
-                disabled={isAutoGenerating}
-                variant="secondary"
-              >
+              <Button onClick={handleAutoGenerate} disabled={isAutoGenerating} variant="secondary">
                 {isAutoGenerating && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Generate
               </Button>

@@ -4,7 +4,7 @@
  * Shared types for SimpleFIN bank connection integration
  */
 
-import type { SimpleFINAccount, SimpleFINTransaction } from './client';
+import type { SimpleFINAccount, SimpleFINTransaction } from "./client";
 
 // =============================================================================
 // CONNECTION TYPES
@@ -14,12 +14,12 @@ import type { SimpleFINAccount, SimpleFINTransaction } from './client';
  * Status of a SimpleFIN connection
  */
 export type ConnectionStatus =
-  | 'disconnected'
-  | 'connecting'
-  | 'connected'
-  | 'syncing'
-  | 'error'
-  | 'expired';
+  | "disconnected"
+  | "connecting"
+  | "connected"
+  | "syncing"
+  | "error"
+  | "expired";
 
 /**
  * Stored SimpleFIN connection
@@ -105,7 +105,7 @@ export interface SyncResult {
  * Sync progress callback
  */
 export interface SyncProgress {
-  stage: 'connecting' | 'fetching' | 'processing' | 'importing' | 'complete' | 'error';
+  stage: "connecting" | "fetching" | "processing" | "importing" | "complete" | "error";
   accountIndex: number;
   totalAccounts: number;
   currentAccount: string;
@@ -210,19 +210,17 @@ export interface ParsedSimpleFINAccount {
 /**
  * Parse SimpleFIN account for display
  */
-export function parseSimpleFINAccountForDisplay(
-  account: SimpleFINAccount
-): ParsedSimpleFINAccount {
+export function parseSimpleFINAccountForDisplay(account: SimpleFINAccount): ParsedSimpleFINAccount {
   return {
     id: account.id,
     name: account.name,
-    institution: account.org.name || account.org.domain || 'Unknown Institution',
+    institution: account.org.name || account.org.domain || "Unknown Institution",
     currency: account.currency,
     balance: parseFloat(account.balance),
-    availableBalance: account['available-balance']
-      ? parseFloat(account['available-balance'])
+    availableBalance: account["available-balance"]
+      ? parseFloat(account["available-balance"])
       : undefined,
-    balanceDate: new Date(account['balance-date'] * 1000),
+    balanceDate: new Date(account["balance-date"] * 1000),
     transactionCount: account.transactions?.length || 0,
   };
 }

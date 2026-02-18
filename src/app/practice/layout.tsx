@@ -10,10 +10,6 @@ import { HeavyProviders } from "@/app/heavy-providers";
  * This layout ensures contexts are only loaded for practice routes,
  * improving performance for other pages.
  */
-export default function PracticeLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function PracticeLayout({ children }: { children: React.ReactNode }) {
   return <HeavyProviders>{children}</HeavyProviders>;
 }

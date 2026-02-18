@@ -149,7 +149,8 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
     {
       id: "exam",
       title: "Certification Readiness",
-      description: "Take full-length timed mock exams to simulate real certification conditions - recommended only after mastering foundations",
+      description:
+        "Take full-length timed mock exams to simulate real certification conditions - recommended only after mastering foundations",
       icon: GraduationCap,
       color: "text-[#f97316]",
       bgColor: "bg-yellow-900/20",
@@ -244,7 +245,7 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
       <Card className="glass border-white/10">
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-foreground">
-            <TrendingUp className="h-6 w-6 text-tanium-accent" />
+            <TrendingUp className="text-tanium-accent h-6 w-6" />
             Your TCO Certification Journey
           </CardTitle>
         </CardHeader>
@@ -266,9 +267,9 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
               </div>
             </div>
           </div>
-          <Progress 
-            value={overallProgress} 
-            className="h-3" 
+          <Progress
+            value={overallProgress}
+            className="h-3"
             aria-label={`Overall study pathway progress: ${overallProgress}% towards Tanium Certified Operator goal`}
           />
         </CardContent>
@@ -277,7 +278,7 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
       {/* Study Pathway Steps */}
       <div className="space-y-4">
         <div className="mb-4 flex items-center gap-2">
-          <Brain className="h-5 w-5 text-tanium-accent" />
+          <Brain className="text-tanium-accent h-5 w-5" />
           <h3 className="text-lg font-semibold text-foreground">Recommended Study Path</h3>
         </div>
 
@@ -314,9 +315,9 @@ export function StudyPathwayGuide({ className }: StudyPathwayGuideProps) {
                             {phase.progress}%
                           </div>
                           <div className="mt-1 w-16">
-                            <Progress 
-                              value={phase.progress} 
-                              className="h-1" 
+                            <Progress
+                              value={phase.progress}
+                              className="h-1"
                               aria-label={`${phase.title} phase progress: ${phase.progress}%`}
                             />
                           </div>

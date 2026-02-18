@@ -3,13 +3,10 @@
  * Provides consistent error handling and tracking for all API routes
  */
 
-import { type NextRequest, NextResponse } from 'next/server';
-import { trackError, trackWarning, type ErrorContext } from './error-tracker';
+import { type NextRequest, NextResponse } from "next/server";
+import { trackError, trackWarning, type ErrorContext } from "./error-tracker";
 
-export type ApiHandler = (
-  request: NextRequest,
-  params?: any
-) => Promise<NextResponse | Response>;
+export type ApiHandler = (request: NextRequest, params?: any) => Promise<NextResponse | Response>;
 
 export interface ApiErrorResponse {
   ok: false;
@@ -34,7 +31,7 @@ export class ApiError extends Error {
     public code?: string
   ) {
     super(message);
-    this.name = 'ApiError';
+    this.name = "ApiError";
   }
 }
 
@@ -64,9 +61,9 @@ export function withErrorTracking(
       // Optional: Add authentication check
       if (options.requireAuth) {
         // This is a placeholder - implement based on your auth system
-        const authHeader = request.headers.get('authorization');
+        const authHeader = request.headers.get("authorization");
         if (!authHeader) {
-          throw new ApiError('Authentication required', 401, 'AUTH_REQUIRED');
+          throw new ApiError("Authentication required", 401, "AUTH_REQUIRED");
         }
       }
 
@@ -76,55 +73,51 @@ export function withErrorTracking(
       // Track slow API calls as warnings
       const duration = Date.now() - startTime;
       if (duration > 3000) {
-        await trackWarning(
-          `Slow API call: ${duration}ms`,
-          { ...context, duration },
-          request
-        );
+        await trackWarning(`Slow API call: ${duration}ms`, { ...context, duration }, request);
       }
 
       // Add request ID to successful responses
       if (response instanceof NextResponse) {
-        response.headers.set('x-request-id', requestId);
+        response.headers.set("x-request-id", requestId);
       }
 
       return response as NextResponse;
-
     } catch (error) {
       const duration = Date.now() - startTime;
 
       // Determine status code
       let statusCode = 500;
-      let errorMessage = 'Internal server error';
-      let errorCode = 'INTERNAL_ERROR';
+      let errorMessage = "Internal server error";
+      let errorCode = "INTERNAL_ERROR";
 
       if (error instanceof ApiError) {
         statusCode = error.statusCode;
         errorMessage = error.message;
-        errorCode = error.code || 'API_ERROR';
+        errorCode = error.code || "API_ERROR";
       } else if (error instanceof Error) {
         // Check for common error patterns
-        if (error.message.includes('Invalid JSON')) {
+        if (error.message.includes("Invalid JSON")) {
           statusCode = 400;
-          errorMessage = 'Invalid request body';
-          errorCode = 'INVALID_JSON';
-        } else if (error.message.includes('not found')) {
+          errorMessage = "Invalid request body";
+          errorCode = "INVALID_JSON";
+        } else if (error.message.includes("not found")) {
           statusCode = 404;
-          errorMessage = 'Resource not found';
-          errorCode = 'NOT_FOUND';
-        } else if (error.message.includes('unauthorized') || error.message.includes('auth')) {
+          errorMessage = "Resource not found";
+          errorCode = "NOT_FOUND";
+        } else if (error.message.includes("unauthorized") || error.message.includes("auth")) {
           statusCode = 401;
-          errorMessage = 'Unauthorized';
-          errorCode = 'UNAUTHORIZED';
-        } else if (error.message.includes('forbidden')) {
+          errorMessage = "Unauthorized";
+          errorCode = "UNAUTHORIZED";
+        } else if (error.message.includes("forbidden")) {
           statusCode = 403;
-          errorMessage = 'Forbidden';
-          errorCode = 'FORBIDDEN';
+          errorMessage = "Forbidden";
+          errorCode = "FORBIDDEN";
         } else {
           // For unexpected errors, use a generic message in production
-          errorMessage = process.env.NODE_ENV === 'development'
-            ? error.message
-            : 'An error occurred processing your request';
+          errorMessage =
+            process.env.NODE_ENV === "development"
+              ? error.message
+              : "An error occurred processing your request";
         }
       }
 
@@ -135,7 +128,7 @@ export function withErrorTracking(
           ...context,
           statusCode,
           duration,
-          errorCode
+          errorCode,
         },
         request
       );
@@ -145,11 +138,11 @@ export function withErrorTracking(
         ok: false,
         error: errorMessage,
         requestId,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
 
       // Add more details in development
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.NODE_ENV === "development") {
         (errorResponse as any).stack = error instanceof Error ? error.stack : undefined;
         (errorResponse as any).code = errorCode;
       }
@@ -157,8 +150,8 @@ export function withErrorTracking(
       return NextResponse.json(errorResponse, {
         status: statusCode,
         headers: {
-          'x-request-id': requestId
-        }
+          "x-request-id": requestId,
+        },
       });
     }
   };
@@ -178,12 +171,12 @@ export function apiSuccess<T = any>(
   const response: ApiSuccessResponse<T> = {
     ok: true,
     data,
-    requestId: options.requestId
+    requestId: options.requestId,
   };
 
   return NextResponse.json(response, {
     status: options.status || 200,
-    headers: options.headers
+    headers: options.headers,
   });
 }
 
@@ -202,10 +195,10 @@ export function apiError(
     ok: false,
     error: message,
     requestId: options.requestId,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 
-  if (process.env.NODE_ENV === 'development' && options.code) {
+  if (process.env.NODE_ENV === "development" && options.code) {
     (response as any).code = options.code;
   }
 
@@ -220,13 +213,13 @@ export function validateBody<T>(
   schema: {
     [K in keyof T]: {
       required?: boolean;
-      type?: 'string' | 'number' | 'boolean' | 'object' | 'array';
+      type?: "string" | "number" | "boolean" | "object" | "array";
       validate?: (value: any) => boolean;
-    }
+    };
   }
 ): T {
-  if (!body || typeof body !== 'object') {
-    throw new ApiError('Invalid request body', 400, 'INVALID_BODY');
+  if (!body || typeof body !== "object") {
+    throw new ApiError("Invalid request body", 400, "INVALID_BODY");
   }
 
   const validated: any = {};
@@ -235,27 +228,23 @@ export function validateBody<T>(
     const value = (body as any)[key];
 
     if (rules.required && value === undefined) {
-      throw new ApiError(`Missing required field: ${String(key)}`, 400, 'MISSING_FIELD');
+      throw new ApiError(`Missing required field: ${String(key)}`, 400, "MISSING_FIELD");
     }
 
     if (value !== undefined) {
       if (rules.type) {
-        const actualType = Array.isArray(value) ? 'array' : typeof value;
+        const actualType = Array.isArray(value) ? "array" : typeof value;
         if (actualType !== rules.type) {
           throw new ApiError(
             `Invalid type for ${String(key)}: expected ${rules.type}, got ${actualType}`,
             400,
-            'INVALID_TYPE'
+            "INVALID_TYPE"
           );
         }
       }
 
       if (rules.validate && !rules.validate(value)) {
-        throw new ApiError(
-          `Validation failed for field: ${String(key)}`,
-          400,
-          'VALIDATION_FAILED'
-        );
+        throw new ApiError(`Validation failed for field: ${String(key)}`, 400, "VALIDATION_FAILED");
       }
 
       validated[key] = value;

@@ -15,6 +15,7 @@ The Phase 2 implementation is complete and ready for deployment. However, **Type
 ### 1. Missing Table Types
 
 **Error Pattern:**
+
 ```
 Argument of type '"flashcards"' is not assignable to parameter...
 Argument of type '"flashcard_reviews"' is not assignable to parameter...
@@ -25,6 +26,7 @@ Argument of type '"review_sessions"' is not assignable to parameter...
 **Cause**: The Supabase type definitions haven't been regenerated since Phase 2 migrations were created.
 
 **Resolution**: After applying migrations, regenerate types:
+
 ```bash
 npx supabase gen types typescript --project-id qnwcwoutgarhqxlgsjzs > src/lib/database.types.ts
 ```
@@ -32,6 +34,7 @@ npx supabase gen types typescript --project-id qnwcwoutgarhqxlgsjzs > src/lib/da
 ### 2. Missing Database Functions
 
 **Error Pattern:**
+
 ```
 Argument of type '"get_review_stats"' is not assignable...
 Argument of type '"get_unified_review_queue_fast"' is not assignable...
@@ -49,6 +52,7 @@ Argument of type '"calculate_review_streak"' is not assignable...
 **Follow this exact sequence to avoid type errors:**
 
 ### Step 1: Apply Database Migrations
+
 ```bash
 # Connect to production Supabase
 npx supabase link --project-ref qnwcwoutgarhqxlgsjzs
@@ -68,6 +72,7 @@ npx supabase db execute "
 ```
 
 ### Step 2: Regenerate Supabase Types
+
 ```bash
 # Generate fresh types from production schema
 npx supabase gen types typescript --project-id qnwcwoutgarhqxlgsjzs > src/lib/database.types.ts
@@ -77,6 +82,7 @@ npm run typecheck
 ```
 
 ### Step 3: Build and Deploy
+
 ```bash
 # Production build (should pass now)
 npm run build
@@ -90,9 +96,11 @@ vercel --prod
 ## Current Build Status
 
 ### ✅ Fixed Issues
+
 - [x] StudySession.tsx `answers` → `choices` property (fixed 2025-01-03)
 
 ### ⚠️ Pending Issues (Resolved After Migrations)
+
 - [ ] Supabase table types (flashcards, flashcard_reviews, question_reviews, review_sessions)
 - [ ] Database function types (get_review_stats, get_unified_review_queue_fast, etc.)
 - [ ] Related type inference errors in service layer

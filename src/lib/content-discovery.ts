@@ -4,8 +4,8 @@
  */
 
 // Conditional imports for client/server compatibility
-const fs = typeof window === 'undefined' ? require('fs/promises') : null;
-const path = typeof window === 'undefined' ? require('path') : null;
+const fs = typeof window === "undefined" ? require("fs/promises") : null;
+const path = typeof window === "undefined" ? require("path") : null;
 import { type MDXFrontmatter, validateFrontmatter, MDXValidationError } from "./mdx-schema";
 
 export interface ModuleMetadata extends MDXFrontmatter {
@@ -105,9 +105,7 @@ export async function discoverModules(): Promise<ContentDiscoveryResult> {
     const mdxFiles = files.filter((file: string) => {
       // Only include .mdx files, exclude experimental and example files
       return (
-        CONTENT_PATTERN.test(file) &&
-        !file.includes("experimental") &&
-        !file.includes("EXAMPLE")
+        CONTENT_PATTERN.test(file) && !file.includes("experimental") && !file.includes("EXAMPLE")
       );
     });
 

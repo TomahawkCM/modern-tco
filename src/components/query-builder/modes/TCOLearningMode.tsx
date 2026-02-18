@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Progress } from '@/components/ui/progress';
+import React, { useState, useMemo } from "react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Progress } from "@/components/ui/progress";
 import {
   Shield,
   AlertTriangle,
@@ -19,131 +19,155 @@ import {
   Lightbulb,
   BookOpen,
   CheckCircle,
-  XCircle
-} from 'lucide-react';
+  XCircle,
+} from "lucide-react";
 
 // TCO Domain definitions aligned with certification blueprint
 const TCO_DOMAINS = [
   {
-    id: 'asking_questions',
-    name: 'Asking Questions',
+    id: "asking_questions",
+    name: "Asking Questions",
     weight: 22,
     icon: Database,
-    description: 'Master Tanium query construction and sensor usage',
+    description: "Master Tanium query construction and sensor usage",
     objectives: [
-      'Construct basic queries using sensors',
-      'Apply filters and conditions',
-      'Use aggregate functions',
-      'Optimize query performance'
-    ]
+      "Construct basic queries using sensors",
+      "Apply filters and conditions",
+      "Use aggregate functions",
+      "Optimize query performance",
+    ],
   },
   {
-    id: 'refining_questions',
-    name: 'Refining Questions',
+    id: "refining_questions",
+    name: "Refining Questions",
     weight: 23,
     icon: Settings,
-    description: 'Optimize and enhance query effectiveness',
+    description: "Optimize and enhance query effectiveness",
     objectives: [
-      'Merge and filter questions',
-      'Use advanced operators',
-      'Create parameterized queries',
-      'Implement drill-down logic'
-    ]
+      "Merge and filter questions",
+      "Use advanced operators",
+      "Create parameterized queries",
+      "Implement drill-down logic",
+    ],
   },
   {
-    id: 'taking_action',
-    name: 'Taking Action',
+    id: "taking_action",
+    name: "Taking Action",
     weight: 15,
     icon: Activity,
-    description: 'Execute actions based on query results',
+    description: "Execute actions based on query results",
     objectives: [
-      'Deploy packages',
-      'Execute remediation actions',
-      'Schedule recurring actions',
-      'Monitor action progress'
-    ]
+      "Deploy packages",
+      "Execute remediation actions",
+      "Schedule recurring actions",
+      "Monitor action progress",
+    ],
   },
   {
-    id: 'navigation',
-    name: 'Navigation & Module Functions',
+    id: "navigation",
+    name: "Navigation & Module Functions",
     weight: 23,
     icon: Settings,
-    description: 'Navigate Tanium console and use modules effectively',
+    description: "Navigate Tanium console and use modules effectively",
     objectives: [
-      'Navigate between modules',
-      'Use saved questions',
-      'Manage computer groups',
-      'Configure user permissions'
-    ]
+      "Navigate between modules",
+      "Use saved questions",
+      "Manage computer groups",
+      "Configure user permissions",
+    ],
   },
   {
-    id: 'reporting',
-    name: 'Report Generation & Data Export',
+    id: "reporting",
+    name: "Report Generation & Data Export",
     weight: 17,
     icon: Database,
-    description: 'Generate reports and export data for analysis',
+    description: "Generate reports and export data for analysis",
     objectives: [
-      'Create custom reports',
-      'Export data in various formats',
-      'Schedule automated reports',
-      'Use dashboard widgets'
-    ]
-  }
+      "Create custom reports",
+      "Export data in various formats",
+      "Schedule automated reports",
+      "Use dashboard widgets",
+    ],
+  },
 ];
 
 // Scenario templates for each domain
 const SCENARIOS = {
   asking_questions: [
     {
-      id: 'basic-inventory',
-      title: 'Asset Inventory Query',
-      difficulty: 'beginner',
-      scenario: 'Your security team needs a quick inventory of all Windows servers in production.',
-      expectedQuery: 'Get Computer Name and Operating System and IP Address from all machines with Operating System containing "Windows Server"',
-      hints: ['Use Operating System sensor', 'Filter for Windows Server', 'Include IP Address for network context'],
-      learningPoints: ['Basic sensor selection', 'Text filtering with contains', 'Multiple sensor queries']
+      id: "basic-inventory",
+      title: "Asset Inventory Query",
+      difficulty: "beginner",
+      scenario: "Your security team needs a quick inventory of all Windows servers in production.",
+      expectedQuery:
+        'Get Computer Name and Operating System and IP Address from all machines with Operating System containing "Windows Server"',
+      hints: [
+        "Use Operating System sensor",
+        "Filter for Windows Server",
+        "Include IP Address for network context",
+      ],
+      learningPoints: [
+        "Basic sensor selection",
+        "Text filtering with contains",
+        "Multiple sensor queries",
+      ],
     },
     {
-      id: 'high-cpu',
-      title: 'Performance Monitoring',
-      difficulty: 'intermediate',
-      scenario: 'Identify systems with CPU usage above 80% that might indicate performance issues or cryptomining.',
-      expectedQuery: 'Get Computer Name and CPU Percent and Running Processes from all machines with CPU Percent greater than 80',
-      hints: ['Use CPU Percent sensor', 'Apply numeric comparison', 'Include process information for context'],
-      learningPoints: ['Numeric comparisons', 'Performance sensors', 'Correlating metrics']
+      id: "high-cpu",
+      title: "Performance Monitoring",
+      difficulty: "intermediate",
+      scenario:
+        "Identify systems with CPU usage above 80% that might indicate performance issues or cryptomining.",
+      expectedQuery:
+        "Get Computer Name and CPU Percent and Running Processes from all machines with CPU Percent greater than 80",
+      hints: [
+        "Use CPU Percent sensor",
+        "Apply numeric comparison",
+        "Include process information for context",
+      ],
+      learningPoints: ["Numeric comparisons", "Performance sensors", "Correlating metrics"],
     },
     {
-      id: 'compliance-check',
-      title: 'Compliance Validation',
-      difficulty: 'advanced',
-      scenario: 'Verify that all financial systems have the latest security patches and encryption enabled.',
-      expectedQuery: 'Get Computer Name and Windows Updates and Registry Value[key="HKLM\\Software\\Policies\\Microsoft\\Windows\\BitLocker",value="EncryptionMethod"] from all machines with Computer Group equals "Financial Systems"',
-      hints: ['Target specific computer group', 'Check Windows Updates', 'Query registry for encryption settings'],
-      learningPoints: ['Computer group targeting', 'Registry queries', 'Compliance validation']
-    }
+      id: "compliance-check",
+      title: "Compliance Validation",
+      difficulty: "advanced",
+      scenario:
+        "Verify that all financial systems have the latest security patches and encryption enabled.",
+      expectedQuery:
+        'Get Computer Name and Windows Updates and Registry Value[key="HKLM\\Software\\Policies\\Microsoft\\Windows\\BitLocker",value="EncryptionMethod"] from all machines with Computer Group equals "Financial Systems"',
+      hints: [
+        "Target specific computer group",
+        "Check Windows Updates",
+        "Query registry for encryption settings",
+      ],
+      learningPoints: ["Computer group targeting", "Registry queries", "Compliance validation"],
+    },
   ],
   refining_questions: [
     {
-      id: 'merge-filter',
-      title: 'Merge and Filter Results',
-      difficulty: 'intermediate',
-      scenario: 'Combine results from multiple queries to identify vulnerable systems missing critical patches.',
-      expectedQuery: 'Get Computer Name and Operating System and Windows Updates from all machines with Windows Updates not containing "KB5001234" and Last Reboot greater than 30 days ago',
-      hints: ['Combine multiple conditions', 'Use negative filtering', 'Check reboot time'],
-      learningPoints: ['Complex filtering', 'Negative conditions', 'Time-based queries']
-    }
+      id: "merge-filter",
+      title: "Merge and Filter Results",
+      difficulty: "intermediate",
+      scenario:
+        "Combine results from multiple queries to identify vulnerable systems missing critical patches.",
+      expectedQuery:
+        'Get Computer Name and Operating System and Windows Updates from all machines with Windows Updates not containing "KB5001234" and Last Reboot greater than 30 days ago',
+      hints: ["Combine multiple conditions", "Use negative filtering", "Check reboot time"],
+      learningPoints: ["Complex filtering", "Negative conditions", "Time-based queries"],
+    },
   ],
   taking_action: [
     {
-      id: 'deploy-patch',
-      title: 'Deploy Critical Patch',
-      difficulty: 'intermediate',
-      scenario: 'Deploy a critical security patch to all vulnerable Windows 10 machines.',
-      expectedQuery: 'Deploy Package "Critical Security Update" to all machines with Operating System equals "Windows 10" and Windows Updates not containing "KB5001234"',
-      hints: ['Target specific OS version', 'Check for missing update', 'Use deploy action'],
-      learningPoints: ['Package deployment', 'Targeted actions', 'Patch management']
-    }
-  ]
+      id: "deploy-patch",
+      title: "Deploy Critical Patch",
+      difficulty: "intermediate",
+      scenario: "Deploy a critical security patch to all vulnerable Windows 10 machines.",
+      expectedQuery:
+        'Deploy Package "Critical Security Update" to all machines with Operating System equals "Windows 10" and Windows Updates not containing "KB5001234"',
+      hints: ["Target specific OS version", "Check for missing update", "Use deploy action"],
+      learningPoints: ["Package deployment", "Targeted actions", "Patch management"],
+    },
+  ],
 };
 
 interface TCOLearningModeProps {
@@ -154,9 +178,12 @@ interface TCOLearningModeProps {
 export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearningModeProps) {
   const [selectedDomain, setSelectedDomain] = useState(TCO_DOMAINS[0]);
   const [currentScenario, setCurrentScenario] = useState(SCENARIOS.asking_questions[0]);
-  const [userQuery, setUserQuery] = useState('');
+  const [userQuery, setUserQuery] = useState("");
   const [showHints, setShowHints] = useState(false);
-  const [feedback, setFeedback] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
+  const [feedback, setFeedback] = useState<{ type: "success" | "error" | null; message: string }>({
+    type: null,
+    message: "",
+  });
   const [domainProgress, setDomainProgress] = useState<Record<string, number>>({});
 
   // Get scenarios for selected domain
@@ -169,7 +196,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
     const totalWeight = TCO_DOMAINS.reduce((sum, d) => sum + d.weight, 0);
     const weightedProgress = TCO_DOMAINS.reduce((sum, d) => {
       const progress = domainProgress[d.id] || 0;
-      return sum + (progress * d.weight);
+      return sum + progress * d.weight;
     }, 0);
     return Math.round(weightedProgress / totalWeight);
   }, [domainProgress]);
@@ -179,15 +206,15 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
     const queryLower = userQuery.toLowerCase();
     const expectedLower = currentScenario.expectedQuery.toLowerCase();
 
-    if (queryLower.includes('get') && queryLower.includes('from all machines')) {
+    if (queryLower.includes("get") && queryLower.includes("from all machines")) {
       setFeedback({
-        type: 'success',
-        message: `Excellent! Your query correctly addresses the scenario. Key concepts mastered: ${  currentScenario.learningPoints.join(', ')}`
+        type: "success",
+        message: `Excellent! Your query correctly addresses the scenario. Key concepts mastered: ${currentScenario.learningPoints.join(", ")}`,
       });
 
       // Update progress
       const newProgress = Math.min(100, (domainProgress[selectedDomain.id] || 0) + 20);
-      setDomainProgress(prev => ({ ...prev, [selectedDomain.id]: newProgress }));
+      setDomainProgress((prev) => ({ ...prev, [selectedDomain.id]: newProgress }));
       onProgressUpdate?.(selectedDomain.id, newProgress);
 
       // Move to next scenario after delay
@@ -195,15 +222,16 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
         const currentIndex = domainScenarios.indexOf(currentScenario);
         if (currentIndex < domainScenarios.length - 1) {
           setCurrentScenario(domainScenarios[currentIndex + 1]);
-          setUserQuery('');
-          setFeedback({ type: null, message: '' });
+          setUserQuery("");
+          setFeedback({ type: null, message: "" });
           setShowHints(false);
         }
       }, 3000);
     } else {
       setFeedback({
-        type: 'error',
-        message: 'Not quite right. Review the scenario requirements and try again. Consider using the hints if you\'re stuck.'
+        type: "error",
+        message:
+          "Not quite right. Review the scenario requirements and try again. Consider using the hints if you're stuck.",
       });
     }
 
@@ -223,7 +251,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
               </CardDescription>
             </div>
             <div className="text-right">
-              <div className="text-2xl font-bold text-tanium-accent">{overallProgress}%</div>
+              <div className="text-tanium-accent text-2xl font-bold">{overallProgress}%</div>
               <div className="text-sm text-muted-foreground">Overall Progress</div>
             </div>
           </div>
@@ -232,21 +260,21 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
           <Progress value={overallProgress} className="mb-4" />
 
           {/* Domain progress breakdown */}
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-            {TCO_DOMAINS.map(domain => {
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-5">
+            {TCO_DOMAINS.map((domain) => {
               const DomainIcon = domain.icon;
               const progress = domainProgress[domain.id] || 0;
               return (
                 <button
                   key={domain.id}
                   onClick={() => setSelectedDomain(domain)}
-                  className={`p-3 rounded-lg border transition-all ${
+                  className={`rounded-lg border p-3 transition-all ${
                     selectedDomain.id === domain.id
-                      ? 'bg-tanium-accent/20 border-tanium-accent'
-                      : 'glass border-white/10 hover:bg-white/5'
+                      ? "bg-tanium-accent/20 border-tanium-accent"
+                      : "glass border-white/10 hover:bg-white/5"
                   }`}
                 >
-                  <DomainIcon className="h-5 w-5 mb-1 text-tanium-accent" />
+                  <DomainIcon className="text-tanium-accent mb-1 h-5 w-5" />
                   <div className="text-xs font-medium text-foreground">{domain.weight}%</div>
                   <div className="text-xs text-muted-foreground">{domain.name}</div>
                   <Progress value={progress} className="mt-2 h-1" />
@@ -258,23 +286,27 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
       </Card>
 
       {/* Learning Interface */}
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid gap-6 md:grid-cols-3">
         {/* Scenario Panel */}
-        <div className="md:col-span-2 space-y-4">
+        <div className="space-y-4 md:col-span-2">
           <Card className="glass border-white/10">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-foreground flex items-center gap-2">
-                    <Target className="h-5 w-5 text-tanium-accent" />
+                  <CardTitle className="flex items-center gap-2 text-foreground">
+                    <Target className="text-tanium-accent h-5 w-5" />
                     {currentScenario.title}
                   </CardTitle>
-                  <div className="flex items-center gap-2 mt-2">
-                    <Badge variant={
-                      currentScenario.difficulty === 'beginner' ? 'default' :
-                      currentScenario.difficulty === 'intermediate' ? 'secondary' :
-                      'destructive'
-                    }>
+                  <div className="mt-2 flex items-center gap-2">
+                    <Badge
+                      variant={
+                        currentScenario.difficulty === "beginner"
+                          ? "default"
+                          : currentScenario.difficulty === "intermediate"
+                            ? "secondary"
+                            : "destructive"
+                      }
+                    >
                       {currentScenario.difficulty}
                     </Badge>
                     <span className="text-sm text-muted-foreground">
@@ -300,7 +332,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
                   value={userQuery}
                   onChange={(e) => setUserQuery(e.target.value)}
                   placeholder="Type your Tanium query here..."
-                  className="w-full h-32 px-4 py-2 bg-card border border-gray-700 rounded-lg text-foreground placeholder-gray-500 focus:ring-2 focus:ring-tanium-accent focus:border-transparent"
+                  className="focus:ring-tanium-accent h-32 w-full rounded-lg border border-gray-700 bg-card px-4 py-2 text-foreground placeholder-gray-500 focus:border-transparent focus:ring-2"
                 />
               </div>
 
@@ -310,7 +342,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
                   <Lightbulb className="h-4 w-4 text-[#f97316]" />
                   <AlertDescription className="text-[#f97316]">
                     <strong>Hints:</strong>
-                    <ul className="list-disc list-inside mt-2">
+                    <ul className="mt-2 list-inside list-disc">
                       {currentScenario.hints.map((hint, idx) => (
                         <li key={idx}>{hint}</li>
                       ))}
@@ -321,13 +353,17 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
 
               {/* Feedback */}
               {feedback.type && (
-                <Alert className={`border-${feedback.type === 'success' ? 'green' : 'red'}-500 bg-${feedback.type === 'success' ? 'green' : 'red'}-500/10`}>
-                  {feedback.type === 'success' ? (
+                <Alert
+                  className={`border-${feedback.type === "success" ? "green" : "red"}-500 bg-${feedback.type === "success" ? "green" : "red"}-500/10`}
+                >
+                  {feedback.type === "success" ? (
                     <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                   ) : (
                     <XCircle className="h-4 w-4 text-red-400" />
                   )}
-                  <AlertDescription className={`text-${feedback.type === 'success' ? 'green' : 'red'}-300`}>
+                  <AlertDescription
+                    className={`text-${feedback.type === "success" ? "green" : "red"}-300`}
+                  >
                     {feedback.message}
                   </AlertDescription>
                 </Alert>
@@ -338,10 +374,10 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
                 <Button
                   variant="outline"
                   onClick={() => setShowHints(!showHints)}
-                  className="text-[#f97316] border-yellow-400"
+                  className="border-yellow-400 text-[#f97316]"
                 >
-                  <Lightbulb className="h-4 w-4 mr-2" />
-                  {showHints ? 'Hide Hints' : 'Show Hints'}
+                  <Lightbulb className="mr-2 h-4 w-4" />
+                  {showHints ? "Hide Hints" : "Show Hints"}
                 </Button>
                 <div className="space-x-2">
                   <Button
@@ -355,7 +391,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
                     onClick={handleQuerySubmit}
                     className="bg-tanium-accent hover:bg-tanium-accent/80"
                   >
-                    <ChevronRight className="h-4 w-4 mr-2" />
+                    <ChevronRight className="mr-2 h-4 w-4" />
                     Submit Query
                   </Button>
                 </div>
@@ -369,8 +405,8 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
           {/* Domain objectives */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-foreground text-sm flex items-center gap-2">
-                <BookOpen className="h-4 w-4 text-tanium-accent" />
+              <CardTitle className="flex items-center gap-2 text-sm text-foreground">
+                <BookOpen className="text-tanium-accent h-4 w-4" />
                 Learning Objectives
               </CardTitle>
             </CardHeader>
@@ -378,7 +414,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
               <ul className="space-y-2">
                 {selectedDomain.objectives.map((obj, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <CheckCircle className="h-4 w-4 text-tanium-accent mt-0.5" />
+                    <CheckCircle className="text-tanium-accent mt-0.5 h-4 w-4" />
                     <span className="text-sm text-muted-foreground">{obj}</span>
                   </li>
                 ))}
@@ -389,8 +425,8 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
           {/* Key concepts */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-foreground text-sm flex items-center gap-2">
-                <Trophy className="h-4 w-4 text-tanium-accent" />
+              <CardTitle className="flex items-center gap-2 text-sm text-foreground">
+                <Trophy className="text-tanium-accent h-4 w-4" />
                 Key Concepts
               </CardTitle>
             </CardHeader>
@@ -408,7 +444,7 @@ export function TCOLearningMode({ onQuerySubmit, onProgressUpdate }: TCOLearning
           {/* Quick tips */}
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-foreground text-sm">Quick Tips</CardTitle>
+              <CardTitle className="text-sm text-foreground">Quick Tips</CardTitle>
             </CardHeader>
             <CardContent>
               <ul className="space-y-2 text-sm text-muted-foreground">

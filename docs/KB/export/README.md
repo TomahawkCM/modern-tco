@@ -4,36 +4,42 @@ This directory houses the assets required to deploy and synchronize the Knowledg
 
 ## Files
 
-| File | Purpose |
-| ---- | ------- |
-| `SCHEMA_SQL_SETUP_KB.sql` | Creates tables, indexes, and read-only policies for the KB schema. |
+| File                          | Purpose                                                                    |
+| ----------------------------- | -------------------------------------------------------------------------- |
+| `SCHEMA_SQL_SETUP_KB.sql`     | Creates tables, indexes, and read-only policies for the KB schema.         |
 | `LESSON_EXPORT_TEMPLATE.json` | Canonical JSON layout that mirrors the structure produced by the exporter. |
-| `out/kb-lessons.json` | Latest generated bundle from `npm run kb:export-lessons`. |
-| `README.md` | You are here. |
+| `out/kb-lessons.json`         | Latest generated bundle from `npm run kb:export-lessons`.                  |
+| `README.md`                   | You are here.                                                              |
 
 ## Usage
 
 1. **Apply Schema**
+
    ```bash
    npm run kb:apply-schema
    ```
+
    - Preview the SQL without executing it: `npm run kb:apply-schema -- -- --dry-run`
    - Target a different schema (default `kb`): `npm run kb:apply-schema -- -- --schema custom_schema`
 
 2. **Generate Lesson Payloads**
+
    ```bash
    npm run kb:export-lessons
    ```
+
    - Reads markdown from `docs/KB/lessons/`
    - Produces a JSON bundle shaped like `LESSON_EXPORT_TEMPLATE.json`
    - Saves output into `docs/KB/export/out/kb-lessons.json`
    - Use `npm run kb:export-lessons -- --compact` for minified JSON
 
 3. **Load Into Supabase**
+
    ```bash
    npm run kb:import-lessons -- -- --dry-run  # inspect planned upserts
    npm run kb:import-lessons                  # apply modules + lessons
    ```
+
    - Respects `KB_SCHEMA` env var or `--schema` CLI flag (defaults to `kb`)
    - Requires `SUPABASE_DB_URL` / `DIRECT_DATABASE_URL` in `.env.local`
 
@@ -41,6 +47,7 @@ This directory houses the assets required to deploy and synchronize the Knowledg
    ```bash
    TABLE_PREFIX=kb_ node scripts/import-questions.ts ./docs/KB/export/out/questions.json
    ```
+
    - Until a dedicated KB question loader ships, reuse the existing exam importer with a `kb_` prefix.
 
 ## Operational Notes

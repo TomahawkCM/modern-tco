@@ -185,8 +185,8 @@ function getMissedQuestions(count: number): Question[] {
   const missedQuestionIds = new Set<string>();
 
   // Find questions that were answered incorrectly
-  stats.recentSessions.forEach(session => {
-    session.questions.forEach(pq => {
+  stats.recentSessions.forEach((session) => {
+    session.questions.forEach((pq) => {
       if (pq.correct === false) {
         missedQuestionIds.add(pq.questionId);
       }
@@ -203,9 +203,9 @@ function getMissedQuestions(count: number): Question[] {
  * Mix difficulties in question set
  */
 function mixDifficulties(questions: Question[]): Question[] {
-  const easy = questions.filter(q => q.difficulty === "easy");
-  const medium = questions.filter(q => q.difficulty === "medium");
-  const hard = questions.filter(q => q.difficulty === "hard");
+  const easy = questions.filter((q) => q.difficulty === "easy");
+  const medium = questions.filter((q) => q.difficulty === "medium");
+  const hard = questions.filter((q) => q.difficulty === "hard");
 
   const mixed: Question[] = [];
   const target = questions.length;
@@ -221,7 +221,7 @@ function mixDifficulties(questions: Question[]): Question[] {
 
   // Fill remaining with any available questions
   while (mixed.length < target && questions.length > mixed.length) {
-    const remaining = questions.filter(q => !mixed.includes(q));
+    const remaining = questions.filter((q) => !mixed.includes(q));
     if (remaining.length === 0) break;
     mixed.push(remaining[0]);
   }
@@ -250,7 +250,7 @@ export function answerPracticeQuestion(
   userAnswer: string,
   timeSpent: number
 ): { correct: boolean; question: Question } {
-  const question = session.questions.find(pq => pq.questionId === questionId)?.question;
+  const question = session.questions.find((pq) => pq.questionId === questionId)?.question;
 
   if (!question) {
     throw new Error("Question not found in session");
@@ -259,7 +259,7 @@ export function answerPracticeQuestion(
   const correct = userAnswer === question.correctAnswer;
 
   // Update question in session
-  const practiceQuestion = session.questions.find(pq => pq.questionId === questionId);
+  const practiceQuestion = session.questions.find((pq) => pq.questionId === questionId);
   if (practiceQuestion) {
     practiceQuestion.userAnswer = userAnswer;
     practiceQuestion.correct = correct;
@@ -350,13 +350,14 @@ function savePracticeSession(session: PracticeSession): void {
   // Update totals
   stats.totalSessions++;
   stats.totalQuestions += session.questions.length;
-  const correctQuestions = session.questions.filter(pq => pq.correct).length;
+  const correctQuestions = session.questions.filter((pq) => pq.correct).length;
   stats.totalCorrect += correctQuestions;
   stats.accuracyRate = (stats.totalCorrect / stats.totalQuestions) * 100;
 
   // Update average time
   const totalTime = session.questions.reduce((sum, pq) => sum + pq.timeSpent, 0);
-  const currentTotalTime = stats.averageTimePerQuestion * (stats.totalQuestions - session.questions.length);
+  const currentTotalTime =
+    stats.averageTimePerQuestion * (stats.totalQuestions - session.questions.length);
   stats.averageTimePerQuestion = (currentTotalTime + totalTime) / stats.totalQuestions;
 
   // Update module stats
@@ -379,9 +380,9 @@ function savePracticeSession(session: PracticeSession): void {
   }
 
   // Update concept stats
-  session.questions.forEach(pq => {
-    const {concept} = pq.question;
-    const {moduleId} = pq.question;
+  session.questions.forEach((pq) => {
+    const { concept } = pq.question;
+    const { moduleId } = pq.question;
 
     if (!stats.byConcept[concept]) {
       stats.byConcept[concept] = {
@@ -427,7 +428,7 @@ export function getWeakConcepts(minQuestions: number = 3): ConceptPracticeStats[
   const stats = getPracticeStats();
 
   return Object.values(stats.byConcept)
-    .filter(c => c.questions >= minQuestions)
+    .filter((c) => c.questions >= minQuestions)
     .sort((a, b) => a.accuracy - b.accuracy)
     .slice(0, 10);
 }
@@ -439,7 +440,7 @@ export function getStrongConcepts(minQuestions: number = 3): ConceptPracticeStat
   const stats = getPracticeStats();
 
   return Object.values(stats.byConcept)
-    .filter(c => c.questions >= minQuestions)
+    .filter((c) => c.questions >= minQuestions)
     .sort((a, b) => b.accuracy - a.accuracy)
     .slice(0, 10);
 }
@@ -468,7 +469,7 @@ export function getPracticeRecommendations(): string[] {
 
   // Not practiced recently
   const conceptsNeedingPractice = Object.values(stats.byConcept)
-    .filter(c => {
+    .filter((c) => {
       const daysSince = (Date.now() - c.lastPracticed.getTime()) / (1000 * 60 * 60 * 24);
       return daysSince > 7;
     })
@@ -482,16 +483,12 @@ export function getPracticeRecommendations(): string[] {
 
   // High accuracy - ready for harder questions
   if (stats.accuracyRate > 90 && stats.totalQuestions >= 20) {
-    recommendations.push(
-      `🚀 Excellent progress! Try harder difficulty questions.`
-    );
+    recommendations.push(`🚀 Excellent progress! Try harder difficulty questions.`);
   }
 
   // No recent practice
   if (stats.totalSessions === 0) {
-    recommendations.push(
-      `👋 Start practicing to build confidence before your next review!`
-    );
+    recommendations.push(`👋 Start practicing to build confidence before your next review!`);
   }
 
   return recommendations;
@@ -517,14 +514,8 @@ export function getPracticeVsReviewComparison(): {
       try {
         const sessions = JSON.parse(reviewSessionsData);
         reviewSessions = sessions.length;
-        const totalCorrect = sessions.reduce(
-          (sum: number, s: any) => sum + s.itemsCorrect,
-          0
-        );
-        const totalItems = sessions.reduce(
-          (sum: number, s: any) => sum + s.itemsReviewed,
-          0
-        );
+        const totalCorrect = sessions.reduce((sum: number, s: any) => sum + s.itemsCorrect, 0);
+        const totalItems = sessions.reduce((sum: number, s: any) => sum + s.itemsReviewed, 0);
         reviewAccuracy = totalItems > 0 ? (totalCorrect / totalItems) * 100 : 0;
       } catch {
         // Ignore errors

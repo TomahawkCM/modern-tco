@@ -453,17 +453,17 @@ function fix { npm run fix:pwsh }
 
 ## Quick Reference Card
 
-| Task | PowerShell Command |
-|------|-------------------|
-| Start Dev Server | `npm run dev` |
-| Build Project | `npm run build` |
-| Run Tests | `npm run test` |
-| Lint (PowerShell) | `npm run lint:pwsh` |
-| Format (PowerShell) | `npm run format:pwsh` |
-| Quality Check | `npm run quality:pwsh` |
-| Fix Issues | `npm run fix:pwsh` |
-| Type Check | `npm run typecheck` |
-| Database Verify | `npm run db:verify` |
-| Supabase Setup | `.\scripts\supabase-automation\supabase-global-setup.ps1` |
+| Task                | PowerShell Command                                        |
+| ------------------- | --------------------------------------------------------- |
+| Start Dev Server    | `npm run dev`                                             |
+| Build Project       | `npm run build`                                           |
+| Run Tests           | `npm run test`                                            |
+| Lint (PowerShell)   | `npm run lint:pwsh`                                       |
+| Format (PowerShell) | `npm run format:pwsh`                                     |
+| Quality Check       | `npm run quality:pwsh`                                    |
+| Fix Issues          | `npm run fix:pwsh`                                        |
+| Type Check          | `npm run typecheck`                                       |
+| Database Verify     | `npm run db:verify`                                       |
+| Supabase Setup      | `.\scripts\supabase-automation\supabase-global-setup.ps1` |
 
 **Happy coding in PowerShell! 🎉**

@@ -1,8 +1,5 @@
 import { NextResponse } from "next/server";
-import {
-  StripeCheckoutMockRequestSchema,
-  validateRequest
-} from "@/lib/api/schemas";
+import { StripeCheckoutMockRequestSchema, validateRequest } from "@/lib/api/schemas";
 
 type Plan = "free" | "pro" | "team";
 
@@ -25,8 +22,8 @@ export async function POST(req: Request) {
     // Security fix: Return 400 error instead of silently using default plan
     return NextResponse.json(
       {
-        error: 'Invalid request body',
-        message: 'Request must include a valid plan (free, pro, or team)'
+        error: "Invalid request body",
+        message: "Request must include a valid plan (free, pro, or team)",
       },
       { status: 400 }
     );

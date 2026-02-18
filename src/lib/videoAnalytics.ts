@@ -83,12 +83,15 @@ export interface VideoAnalyticsSummary {
   /** Average completion rate */
   completionRate: number;
   /** Videos by module */
-  byModule: Record<string, {
-    moduleSlug: string;
-    videosWatched: number;
-    videosCompleted: number;
-    totalWatchTime: number;
-  }>;
+  byModule: Record<
+    string,
+    {
+      moduleSlug: string;
+      videosWatched: number;
+      videosCompleted: number;
+      totalWatchTime: number;
+    }
+  >;
   /** Recent videos */
   recentVideos: VideoProgress[];
   /** Most watched videos */
@@ -146,11 +149,12 @@ export function getAllVideoProgress(): VideoProgress[] {
       ...p,
       firstWatched: new Date(p.firstWatched),
       lastWatched: new Date(p.lastWatched),
-      sessions: p.sessions?.map((s: any) => ({
-        ...s,
-        startTime: new Date(s.startTime),
-        endTime: s.endTime ? new Date(s.endTime) : undefined,
-      })) || [],
+      sessions:
+        p.sessions?.map((s: any) => ({
+          ...s,
+          startTime: new Date(s.startTime),
+          endTime: s.endTime ? new Date(s.endTime) : undefined,
+        })) || [],
     }));
   } catch {
     return [];
@@ -162,7 +166,7 @@ export function getAllVideoProgress(): VideoProgress[] {
  */
 export function getVideoProgress(youtubeId: string): VideoProgress | null {
   const allProgress = getAllVideoProgress();
-  return allProgress.find(p => p.youtubeId === youtubeId) || null;
+  return allProgress.find((p) => p.youtubeId === youtubeId) || null;
 }
 
 /**
@@ -175,10 +179,12 @@ function saveVideoProgress(progress: VideoProgress[]): void {
     localStorage.setItem(VIDEO_PROGRESS_KEY, JSON.stringify(progress));
 
     // Dispatch storage event for real-time updates
-    window.dispatchEvent(new StorageEvent("storage", {
-      key: VIDEO_PROGRESS_KEY,
-      newValue: JSON.stringify(progress),
-    }));
+    window.dispatchEvent(
+      new StorageEvent("storage", {
+        key: VIDEO_PROGRESS_KEY,
+        newValue: JSON.stringify(progress),
+      })
+    );
   } catch (error) {
     console.error("Failed to save video progress:", error);
   }
@@ -187,13 +193,9 @@ function saveVideoProgress(progress: VideoProgress[]): void {
 /**
  * Track video impression (video became visible)
  */
-export function trackVideoImpression(
-  youtubeId: string,
-  title: string,
-  moduleSlug?: string
-): void {
+export function trackVideoImpression(youtubeId: string, title: string, moduleSlug?: string): void {
   const allProgress = getAllVideoProgress();
-  let progress = allProgress.find(p => p.youtubeId === youtubeId);
+  let progress = allProgress.find((p) => p.youtubeId === youtubeId);
 
   if (!progress) {
     progress = {
@@ -222,15 +224,11 @@ export function trackVideoImpression(
 /**
  * Start a video watch session
  */
-export function startVideoSession(
-  youtubeId: string,
-  title: string,
-  moduleSlug?: string
-): string {
+export function startVideoSession(youtubeId: string, title: string, moduleSlug?: string): string {
   const sessionId = `video-session-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
   const allProgress = getAllVideoProgress();
-  let progress = allProgress.find(p => p.youtubeId === youtubeId);
+  let progress = allProgress.find((p) => p.youtubeId === youtubeId);
 
   if (!progress) {
     progress = {
@@ -285,11 +283,11 @@ export function updateVideoProgress(
   milestone?: number
 ): void {
   const allProgress = getAllVideoProgress();
-  const progress = allProgress.find(p => p.youtubeId === youtubeId);
+  const progress = allProgress.find((p) => p.youtubeId === youtubeId);
 
   if (!progress) return;
 
-  const session = progress.sessions.find(s => s.id === sessionId);
+  const session = progress.sessions.find((s) => s.id === sessionId);
   if (!session) return;
 
   session.lastPosition = position;
@@ -321,11 +319,11 @@ export function endVideoSession(
   watchTime: number
 ): void {
   const allProgress = getAllVideoProgress();
-  const progress = allProgress.find(p => p.youtubeId === youtubeId);
+  const progress = allProgress.find((p) => p.youtubeId === youtubeId);
 
   if (!progress) return;
 
-  const session = progress.sessions.find(s => s.id === sessionId);
+  const session = progress.sessions.find((s) => s.id === sessionId);
   if (!session) return;
 
   session.endTime = new Date();
@@ -348,20 +346,18 @@ export function endVideoSession(
 export function getVideoAnalytics(moduleSlug?: string): VideoAnalyticsSummary {
   const allProgress = getAllVideoProgress();
   const filtered = moduleSlug
-    ? allProgress.filter(p => p.moduleSlug === moduleSlug)
+    ? allProgress.filter((p) => p.moduleSlug === moduleSlug)
     : allProgress;
 
   const totalVideos = filtered.length;
-  const videosCompleted = filtered.filter(p => p.completed).length;
+  const videosCompleted = filtered.filter((p) => p.completed).length;
   const totalWatchTime = filtered.reduce((sum, p) => sum + p.totalWatchTime, 0) / 3600; // Convert to hours
 
-  const completionRate = totalVideos > 0
-    ? (videosCompleted / totalVideos) * 100
-    : 0;
+  const completionRate = totalVideos > 0 ? (videosCompleted / totalVideos) * 100 : 0;
 
   // Group by module
   const byModule: Record<string, any> = {};
-  allProgress.forEach(p => {
+  allProgress.forEach((p) => {
     const module = p.moduleSlug || "unknown";
     if (!byModule[module]) {
       byModule[module] = {
@@ -400,15 +396,18 @@ export function getVideoAnalytics(moduleSlug?: string): VideoAnalyticsSummary {
 /**
  * Get video completion status by module
  */
-export function getVideoCompletionByModule(): Record<string, {
-  total: number;
-  completed: number;
-  percentage: number;
-}> {
+export function getVideoCompletionByModule(): Record<
+  string,
+  {
+    total: number;
+    completed: number;
+    percentage: number;
+  }
+> {
   const allProgress = getAllVideoProgress();
   const byModule: Record<string, { total: number; completed: number; percentage: number }> = {};
 
-  allProgress.forEach(p => {
+  allProgress.forEach((p) => {
     const module = p.moduleSlug || "unknown";
     if (!byModule[module]) {
       byModule[module] = { total: 0, completed: 0, percentage: 0 };
@@ -418,7 +417,7 @@ export function getVideoCompletionByModule(): Record<string, {
   });
 
   // Calculate percentages
-  Object.values(byModule).forEach(stats => {
+  Object.values(byModule).forEach((stats) => {
     stats.percentage = stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
   });
 
@@ -459,10 +458,12 @@ function saveStudySessions(sessions: StudySession[]): void {
   try {
     localStorage.setItem(STUDY_SESSIONS_KEY, JSON.stringify(sessions));
 
-    window.dispatchEvent(new StorageEvent("storage", {
-      key: STUDY_SESSIONS_KEY,
-      newValue: JSON.stringify(sessions),
-    }));
+    window.dispatchEvent(
+      new StorageEvent("storage", {
+        key: STUDY_SESSIONS_KEY,
+        newValue: JSON.stringify(sessions),
+      })
+    );
   } catch (error) {
     console.error("Failed to save study sessions:", error);
   }
@@ -503,7 +504,7 @@ export function addStudyActivity(
   }
 ): void {
   const sessions = getAllStudySessions();
-  const session = sessions.find(s => s.id === sessionId);
+  const session = sessions.find((s) => s.id === sessionId);
 
   if (!session) return;
 
@@ -512,12 +513,14 @@ export function addStudyActivity(
 
   // Calculate quality score (0-100)
   // Based on: variety of activities, time spent, performance
-  const varietyScore = new Set(session.activities.map(a => a.type)).size * 20; // Max 80 for 4 types
-  const performanceScore = session.activities
-    .filter(a => a.performance !== undefined)
-    .reduce((sum, a) => sum + (a.performance || 0), 0) / Math.max(session.activities.filter(a => a.performance !== undefined).length, 1);
+  const varietyScore = new Set(session.activities.map((a) => a.type)).size * 20; // Max 80 for 4 types
+  const performanceScore =
+    session.activities
+      .filter((a) => a.performance !== undefined)
+      .reduce((sum, a) => sum + (a.performance || 0), 0) /
+    Math.max(session.activities.filter((a) => a.performance !== undefined).length, 1);
 
-  session.qualityScore = Math.round((varietyScore * 0.3) + (performanceScore * 0.7));
+  session.qualityScore = Math.round(varietyScore * 0.3 + performanceScore * 0.7);
 
   saveStudySessions(sessions);
 }
@@ -527,7 +530,7 @@ export function addStudyActivity(
  */
 export function endStudySession(sessionId: string): void {
   const sessions = getAllStudySessions();
-  const session = sessions.find(s => s.id === sessionId);
+  const session = sessions.find((s) => s.id === sessionId);
 
   if (!session) return;
 
@@ -553,30 +556,32 @@ export function getStudySessionAnalytics(daysBack: number = 30): {
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - daysBack);
 
-  const recentSessions = sessions.filter(s => new Date(s.startTime) >= cutoff);
+  const recentSessions = sessions.filter((s) => new Date(s.startTime) >= cutoff);
 
   const totalSessions = recentSessions.length;
   const totalStudyTime = recentSessions.reduce((sum, s) => sum + s.totalDuration, 0) / 3600; // hours
 
-  const averageSessionDuration = totalSessions > 0
-    ? (totalStudyTime * 60) / totalSessions // minutes
-    : 0;
+  const averageSessionDuration =
+    totalSessions > 0
+      ? (totalStudyTime * 60) / totalSessions // minutes
+      : 0;
 
-  const averageQualityScore = totalSessions > 0
-    ? recentSessions.reduce((sum, s) => sum + s.qualityScore, 0) / totalSessions
-    : 0;
+  const averageQualityScore =
+    totalSessions > 0
+      ? recentSessions.reduce((sum, s) => sum + s.qualityScore, 0) / totalSessions
+      : 0;
 
   // Sessions by day
   const sessionsByDay: Record<string, number> = {};
-  recentSessions.forEach(s => {
-    const dateKey = new Date(s.startTime).toISOString().split('T')[0];
+  recentSessions.forEach((s) => {
+    const dateKey = new Date(s.startTime).toISOString().split("T")[0];
     sessionsByDay[dateKey] = (sessionsByDay[dateKey] || 0) + 1;
   });
 
   // Activity breakdown
   const activityCounts: Record<string, number> = {};
-  recentSessions.forEach(s => {
-    s.activities.forEach(a => {
+  recentSessions.forEach((s) => {
+    s.activities.forEach((a) => {
       activityCounts[a.type] = (activityCounts[a.type] || 0) + a.duration;
     });
   });
@@ -615,7 +620,9 @@ export function getStudyRecommendations(): string[] {
   // Session variety
   const activityTypes = Object.keys(sessionAnalytics.activityBreakdown).length;
   if (activityTypes < 3) {
-    recommendations.push("🎯 Diversify your study: Mix videos, practice, and reviews for better retention");
+    recommendations.push(
+      "🎯 Diversify your study: Mix videos, practice, and reviews for better retention"
+    );
   }
 
   // Study frequency
@@ -625,14 +632,18 @@ export function getStudyRecommendations(): string[] {
 
   // Session quality
   if (sessionAnalytics.averageQualityScore < 60) {
-    recommendations.push("⚡ Increase session quality: Focus on one topic at a time with mixed activities");
+    recommendations.push(
+      "⚡ Increase session quality: Focus on one topic at a time with mixed activities"
+    );
   }
 
   // Session duration
   if (sessionAnalytics.averageSessionDuration < 15) {
     recommendations.push("⏱️ Extend study sessions: Aim for 20-30 minute focused sessions");
   } else if (sessionAnalytics.averageSessionDuration > 60) {
-    recommendations.push("🧠 Break up long sessions: Take breaks every 25-30 minutes for better retention");
+    recommendations.push(
+      "🧠 Break up long sessions: Take breaks every 25-30 minutes for better retention"
+    );
   }
 
   return recommendations.length > 0

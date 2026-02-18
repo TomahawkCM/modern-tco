@@ -8,54 +8,70 @@
  * Tier 3: Automated validation for remaining locales
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 // ============================================================================
 // Configuration
 // ============================================================================
 
-const MESSAGES_DIR = path.join(__dirname, '../src/i18n/messages');
+const MESSAGES_DIR = path.join(__dirname, "../src/i18n/messages");
 
 // Tier 1: Core locales - Full testing (100% key coverage verification)
 const TIER_1_LOCALES = [
-  'en-US', // English (Base)
-  'es-MX', // Spanish (Americas)
-  'fr-FR', // French
-  'de-DE', // German
-  'ja-JP', // Japanese
-  'zh-CN', // Chinese Simplified
-  'ar-SA', // Arabic (RTL)
-  'he-IL', // Hebrew (RTL)
-  'ru-RU', // Russian (Cyrillic)
-  'hi-IN', // Hindi (Devanagari)
+  "en-US", // English (Base)
+  "es-MX", // Spanish (Americas)
+  "fr-FR", // French
+  "de-DE", // German
+  "ja-JP", // Japanese
+  "zh-CN", // Chinese Simplified
+  "ar-SA", // Arabic (RTL)
+  "he-IL", // Hebrew (RTL)
+  "ru-RU", // Russian (Cyrillic)
+  "hi-IN", // Hindi (Devanagari)
 ];
 
 // Tier 2: Regional locales - Spot checks (key existence + sample content)
 const TIER_2_LOCALES = [
-  'en-GB', 'en-AU', 'en-CA', 'en-IN',  // English variants
-  'es-ES', 'es-AR', 'es-CO',            // Spanish variants
-  'fr-CA', 'fr-BE',                      // French variants
-  'de-AT', 'de-CH',                      // German variants
-  'pt-BR', 'pt-PT',                      // Portuguese
-  'it-IT', 'nl-NL', 'pl-PL',            // European
-  'ko-KR', 'zh-TW', 'zh-HK',            // East Asian
-  'th-TH', 'vi-VN', 'id-ID',            // Southeast Asian
-  'tr-TR', 'uk-UA', 'cs-CZ',            // Others
+  "en-GB",
+  "en-AU",
+  "en-CA",
+  "en-IN", // English variants
+  "es-ES",
+  "es-AR",
+  "es-CO", // Spanish variants
+  "fr-CA",
+  "fr-BE", // French variants
+  "de-AT",
+  "de-CH", // German variants
+  "pt-BR",
+  "pt-PT", // Portuguese
+  "it-IT",
+  "nl-NL",
+  "pl-PL", // European
+  "ko-KR",
+  "zh-TW",
+  "zh-HK", // East Asian
+  "th-TH",
+  "vi-VN",
+  "id-ID", // Southeast Asian
+  "tr-TR",
+  "uk-UA",
+  "cs-CZ", // Others
 ];
 
 // RTL languages for directional testing
-const RTL_LOCALES = ['ar-SA', 'ar-AE', 'he-IL', 'fa-IR', 'ur-PK'];
+const RTL_LOCALES = ["ar-SA", "ar-AE", "he-IL", "fa-IR", "ur-PK"];
 
 // ============================================================================
 // Utility Functions
 // ============================================================================
 
-function getAllKeys(obj, prefix = '') {
+function getAllKeys(obj, prefix = "") {
   let keys = [];
   for (const key in obj) {
     const fullKey = prefix ? `${prefix}.${key}` : key;
-    if (typeof obj[key] === 'object' && obj[key] !== null) {
+    if (typeof obj[key] === "object" && obj[key] !== null) {
       keys = keys.concat(getAllKeys(obj[key], fullKey));
     } else {
       keys.push(fullKey);
@@ -65,7 +81,7 @@ function getAllKeys(obj, prefix = '') {
 }
 
 function getValueByPath(obj, path) {
-  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
 }
 
 function loadLocale(locale) {
@@ -74,16 +90,17 @@ function loadLocale(locale) {
     return null;
   }
   try {
-    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    return JSON.parse(fs.readFileSync(filePath, "utf8"));
   } catch (e) {
     return { error: e.message };
   }
 }
 
 function getAllLocaleFiles() {
-  return fs.readdirSync(MESSAGES_DIR)
-    .filter(f => f.endsWith('.json'))
-    .map(f => f.replace('.json', ''));
+  return fs
+    .readdirSync(MESSAGES_DIR)
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => f.replace(".json", ""));
 }
 
 // ============================================================================
@@ -92,8 +109,8 @@ function getAllLocaleFiles() {
 
 function validateKeyCompleteness(baseKeys, localeData, locale) {
   const localeKeys = getAllKeys(localeData);
-  const missing = baseKeys.filter(k => !localeKeys.includes(k));
-  const extra = localeKeys.filter(k => !baseKeys.includes(k));
+  const missing = baseKeys.filter((k) => !localeKeys.includes(k));
+  const extra = localeKeys.filter((k) => !baseKeys.includes(k));
 
   return {
     locale,
@@ -101,7 +118,7 @@ function validateKeyCompleteness(baseKeys, localeData, locale) {
     totalFound: localeKeys.length,
     missing,
     extra,
-    completeness: ((baseKeys.length - missing.length) / baseKeys.length * 100).toFixed(2),
+    completeness: (((baseKeys.length - missing.length) / baseKeys.length) * 100).toFixed(2),
   };
 }
 
@@ -113,17 +130,21 @@ function validatePlaceholders(baseData, localeData, locale) {
     const baseValue = getValueByPath(baseData, key);
     const localeValue = getValueByPath(localeData, key);
 
-    if (typeof baseValue !== 'string' || typeof localeValue !== 'string') continue;
+    if (typeof baseValue !== "string" || typeof localeValue !== "string") continue;
 
     // Check for ICU placeholders {variable}
     const basePlaceholders = baseValue.match(/\{[^}]+\}/g) || [];
     const localePlaceholders = localeValue.match(/\{[^}]+\}/g) || [];
 
-    const basePlaceholderNames = basePlaceholders.map(p => p.replace(/\{([^,}]+).*\}/, '$1'));
-    const localePlaceholderNames = localePlaceholders.map(p => p.replace(/\{([^,}]+).*\}/, '$1'));
+    const basePlaceholderNames = basePlaceholders.map((p) => p.replace(/\{([^,}]+).*\}/, "$1"));
+    const localePlaceholderNames = localePlaceholders.map((p) => p.replace(/\{([^,}]+).*\}/, "$1"));
 
-    const missingPlaceholders = basePlaceholderNames.filter(p => !localePlaceholderNames.includes(p));
-    const extraPlaceholders = localePlaceholderNames.filter(p => !basePlaceholderNames.includes(p));
+    const missingPlaceholders = basePlaceholderNames.filter(
+      (p) => !localePlaceholderNames.includes(p)
+    );
+    const extraPlaceholders = localePlaceholderNames.filter(
+      (p) => !basePlaceholderNames.includes(p)
+    );
 
     if (missingPlaceholders.length > 0 || extraPlaceholders.length > 0) {
       issues.push({
@@ -140,7 +161,7 @@ function validatePlaceholders(baseData, localeData, locale) {
 }
 
 function validateNoUntranslated(baseData, localeData, locale) {
-  if (locale === 'en-US' || locale === 'en') return { locale, untranslated: [] };
+  if (locale === "en-US" || locale === "en") return { locale, untranslated: [] };
 
   const untranslated = [];
   const baseKeys = getAllKeys(baseData);
@@ -149,9 +170,10 @@ function validateNoUntranslated(baseData, localeData, locale) {
     const baseValue = getValueByPath(baseData, key);
     const localeValue = getValueByPath(localeData, key);
 
-    if (typeof baseValue === 'string' && baseValue === localeValue) {
+    if (typeof baseValue === "string" && baseValue === localeValue) {
       // Check if it's likely meant to be the same (brand names, abbreviations, etc.)
-      const isLikelyIntentional = /^[A-Z]{2,}$/.test(baseValue) || // Acronyms
+      const isLikelyIntentional =
+        /^[A-Z]{2,}$/.test(baseValue) || // Acronyms
         /^\$/.test(baseValue) || // Currency symbols
         /^\d+$/.test(baseValue) || // Numbers
         baseValue.length <= 2; // Very short strings
@@ -169,11 +191,11 @@ function validateJsonStructure(locale) {
   const filePath = path.join(MESSAGES_DIR, `${locale}.json`);
 
   if (!fs.existsSync(filePath)) {
-    return { locale, valid: false, error: 'File not found' };
+    return { locale, valid: false, error: "File not found" };
   }
 
   try {
-    const content = fs.readFileSync(filePath, 'utf8');
+    const content = fs.readFileSync(filePath, "utf8");
     JSON.parse(content);
     return { locale, valid: true, size: content.length };
   } catch (e) {
@@ -186,9 +208,9 @@ function validateJsonStructure(locale) {
 // ============================================================================
 
 function runTier1Tests(baseData) {
-  console.log('\n' + '='.repeat(70));
-  console.log('TIER 1: Full Testing - Core Locales');
-  console.log('='.repeat(70));
+  console.log("\n" + "=".repeat(70));
+  console.log("TIER 1: Full Testing - Core Locales");
+  console.log("=".repeat(70));
 
   const baseKeys = getAllKeys(baseData);
   console.log(`Base locale (en.json) has ${baseKeys.length} translation keys\n`);
@@ -196,7 +218,7 @@ function runTier1Tests(baseData) {
   const results = {
     tier: 1,
     locales: [],
-    summary: { passed: 0, failed: 0, warnings: 0 }
+    summary: { passed: 0, failed: 0, warnings: 0 },
   };
 
   for (const locale of TIER_1_LOCALES) {
@@ -205,14 +227,14 @@ function runTier1Tests(baseData) {
     const localeData = loadLocale(locale);
     if (!localeData) {
       console.log(`  ❌ FAIL: Locale file not found`);
-      results.locales.push({ locale, status: 'FAIL', reason: 'File not found' });
+      results.locales.push({ locale, status: "FAIL", reason: "File not found" });
       results.summary.failed++;
       continue;
     }
 
     if (localeData.error) {
       console.log(`  ❌ FAIL: Invalid JSON - ${localeData.error}`);
-      results.locales.push({ locale, status: 'FAIL', reason: localeData.error });
+      results.locales.push({ locale, status: "FAIL", reason: localeData.error });
       results.summary.failed++;
       continue;
     }
@@ -223,7 +245,7 @@ function runTier1Tests(baseData) {
     if (completeness.missing.length > 0) {
       console.log(`    Missing keys: ${completeness.missing.length}`);
       if (completeness.missing.length <= 5) {
-        completeness.missing.forEach(k => console.log(`      - ${k}`));
+        completeness.missing.forEach((k) => console.log(`      - ${k}`));
       }
     }
 
@@ -231,7 +253,9 @@ function runTier1Tests(baseData) {
     const placeholders = validatePlaceholders(baseData, localeData, locale);
     console.log(`  Placeholder Issues: ${placeholders.issues.length}`);
     if (placeholders.issues.length > 0 && placeholders.issues.length <= 3) {
-      placeholders.issues.forEach(i => console.log(`    - ${i.key}: missing {${i.missing.join(', ')}}`));
+      placeholders.issues.forEach((i) =>
+        console.log(`    - ${i.key}: missing {${i.missing.join(", ")}}`)
+      );
     }
 
     // Test 3: Untranslated strings
@@ -239,18 +263,20 @@ function runTier1Tests(baseData) {
     console.log(`  Potentially Untranslated: ${untranslated.untranslated.length}`);
 
     // Determine status
-    let status = 'PASS';
+    let status = "PASS";
     if (completeness.missing.length > 0 || placeholders.issues.length > 5) {
-      status = 'FAIL';
+      status = "FAIL";
       results.summary.failed++;
     } else if (placeholders.issues.length > 0 || untranslated.untranslated.length > 10) {
-      status = 'WARN';
+      status = "WARN";
       results.summary.warnings++;
     } else {
       results.summary.passed++;
     }
 
-    console.log(`  Status: ${status === 'PASS' ? '✅' : status === 'WARN' ? '⚠️' : '❌'} ${status}`);
+    console.log(
+      `  Status: ${status === "PASS" ? "✅" : status === "WARN" ? "⚠️" : "❌"} ${status}`
+    );
 
     results.locales.push({
       locale,
@@ -266,28 +292,28 @@ function runTier1Tests(baseData) {
 }
 
 function runTier2Tests(baseData) {
-  console.log('\n' + '='.repeat(70));
-  console.log('TIER 2: Spot Checks - Regional Locales');
-  console.log('='.repeat(70));
+  console.log("\n" + "=".repeat(70));
+  console.log("TIER 2: Spot Checks - Regional Locales");
+  console.log("=".repeat(70));
 
   const baseKeys = getAllKeys(baseData);
   const results = {
     tier: 2,
     locales: [],
-    summary: { passed: 0, failed: 0, warnings: 0 }
+    summary: { passed: 0, failed: 0, warnings: 0 },
   };
 
   for (const locale of TIER_2_LOCALES) {
     const localeData = loadLocale(locale);
 
     if (!localeData) {
-      results.locales.push({ locale, status: 'FAIL', reason: 'File not found' });
+      results.locales.push({ locale, status: "FAIL", reason: "File not found" });
       results.summary.failed++;
       continue;
     }
 
     if (localeData.error) {
-      results.locales.push({ locale, status: 'FAIL', reason: localeData.error });
+      results.locales.push({ locale, status: "FAIL", reason: localeData.error });
       results.summary.failed++;
       continue;
     }
@@ -295,12 +321,12 @@ function runTier2Tests(baseData) {
     const completeness = validateKeyCompleteness(baseKeys, localeData, locale);
     const placeholders = validatePlaceholders(baseData, localeData, locale);
 
-    let status = 'PASS';
+    let status = "PASS";
     if (parseFloat(completeness.completeness) < 95) {
-      status = 'FAIL';
+      status = "FAIL";
       results.summary.failed++;
     } else if (placeholders.issues.length > 3) {
-      status = 'WARN';
+      status = "WARN";
       results.summary.warnings++;
     } else {
       results.summary.passed++;
@@ -314,9 +340,9 @@ function runTier2Tests(baseData) {
     });
   }
 
-  console.log('\nResults:');
+  console.log("\nResults:");
   for (const result of results.locales) {
-    const icon = result.status === 'PASS' ? '✅' : result.status === 'WARN' ? '⚠️' : '❌';
+    const icon = result.status === "PASS" ? "✅" : result.status === "WARN" ? "⚠️" : "❌";
     console.log(`  ${icon} ${result.locale}: ${result.completeness}% complete`);
   }
 
@@ -324,13 +350,13 @@ function runTier2Tests(baseData) {
 }
 
 function runTier3Tests(baseData) {
-  console.log('\n' + '='.repeat(70));
-  console.log('TIER 3: Automated Validation - All Remaining Locales');
-  console.log('='.repeat(70));
+  console.log("\n" + "=".repeat(70));
+  console.log("TIER 3: Automated Validation - All Remaining Locales");
+  console.log("=".repeat(70));
 
   const allLocales = getAllLocaleFiles();
   const tier1And2 = [...TIER_1_LOCALES, ...TIER_2_LOCALES];
-  const tier3Locales = allLocales.filter(l => !tier1And2.includes(l) && l !== 'en');
+  const tier3Locales = allLocales.filter((l) => !tier1And2.includes(l) && l !== "en");
 
   console.log(`Testing ${tier3Locales.length} remaining locales...\n`);
 
@@ -338,14 +364,14 @@ function runTier3Tests(baseData) {
   const results = {
     tier: 3,
     locales: [],
-    summary: { passed: 0, failed: 0, warnings: 0 }
+    summary: { passed: 0, failed: 0, warnings: 0 },
   };
 
   for (const locale of tier3Locales) {
     const structureResult = validateJsonStructure(locale);
 
     if (!structureResult.valid) {
-      results.locales.push({ locale, status: 'FAIL', reason: structureResult.error });
+      results.locales.push({ locale, status: "FAIL", reason: structureResult.error });
       results.summary.failed++;
       continue;
     }
@@ -353,12 +379,12 @@ function runTier3Tests(baseData) {
     const localeData = loadLocale(locale);
     const completeness = validateKeyCompleteness(baseKeys, localeData, locale);
 
-    let status = 'PASS';
+    let status = "PASS";
     if (parseFloat(completeness.completeness) < 90) {
-      status = 'FAIL';
+      status = "FAIL";
       results.summary.failed++;
     } else if (parseFloat(completeness.completeness) < 100) {
-      status = 'WARN';
+      status = "WARN";
       results.summary.warnings++;
     } else {
       results.summary.passed++;
@@ -372,17 +398,17 @@ function runTier3Tests(baseData) {
   }
 
   // Print summary
-  const failedLocales = results.locales.filter(l => l.status === 'FAIL');
-  const warnLocales = results.locales.filter(l => l.status === 'WARN');
+  const failedLocales = results.locales.filter((l) => l.status === "FAIL");
+  const warnLocales = results.locales.filter((l) => l.status === "WARN");
 
   if (failedLocales.length > 0) {
-    console.log('Failed locales:');
-    failedLocales.forEach(l => console.log(`  ❌ ${l.locale}: ${l.completeness || l.reason}`));
+    console.log("Failed locales:");
+    failedLocales.forEach((l) => console.log(`  ❌ ${l.locale}: ${l.completeness || l.reason}`));
   }
 
   if (warnLocales.length > 0) {
-    console.log('\nWarning locales (< 100% complete):');
-    warnLocales.slice(0, 10).forEach(l => console.log(`  ⚠️ ${l.locale}: ${l.completeness}%`));
+    console.log("\nWarning locales (< 100% complete):");
+    warnLocales.slice(0, 10).forEach((l) => console.log(`  ⚠️ ${l.locale}: ${l.completeness}%`));
     if (warnLocales.length > 10) {
       console.log(`  ... and ${warnLocales.length - 10} more`);
     }
@@ -400,14 +426,14 @@ function runTier3Tests(baseData) {
 // ============================================================================
 
 function main() {
-  console.log('╔══════════════════════════════════════════════════════════════════════╗');
-  console.log('║          i18n Validation - 3-Tier Testing Strategy                   ║');
-  console.log('╚══════════════════════════════════════════════════════════════════════╝');
+  console.log("╔══════════════════════════════════════════════════════════════════════╗");
+  console.log("║          i18n Validation - 3-Tier Testing Strategy                   ║");
+  console.log("╚══════════════════════════════════════════════════════════════════════╝");
 
   // Load base locale (en.json as source of truth)
-  const baseData = loadLocale('en');
+  const baseData = loadLocale("en");
   if (!baseData) {
-    console.error('ERROR: Could not load base locale (en.json)');
+    console.error("ERROR: Could not load base locale (en.json)");
     process.exit(1);
   }
 
@@ -422,19 +448,26 @@ function main() {
   const tier3Results = runTier3Tests(baseData);
 
   // Final Summary
-  console.log('\n' + '='.repeat(70));
-  console.log('FINAL SUMMARY');
-  console.log('='.repeat(70));
+  console.log("\n" + "=".repeat(70));
+  console.log("FINAL SUMMARY");
+  console.log("=".repeat(70));
 
-  const totalPassed = tier1Results.summary.passed + tier2Results.summary.passed + tier3Results.summary.passed;
-  const totalWarnings = tier1Results.summary.warnings + tier2Results.summary.warnings + tier3Results.summary.warnings;
-  const totalFailed = tier1Results.summary.failed + tier2Results.summary.failed + tier3Results.summary.failed;
+  const totalPassed =
+    tier1Results.summary.passed + tier2Results.summary.passed + tier3Results.summary.passed;
+  const totalWarnings =
+    tier1Results.summary.warnings + tier2Results.summary.warnings + tier3Results.summary.warnings;
+  const totalFailed =
+    tier1Results.summary.failed + tier2Results.summary.failed + tier3Results.summary.failed;
 
   console.log(`\nTier 1 (Core): ${tier1Results.summary.passed}/${TIER_1_LOCALES.length} passed`);
   console.log(`Tier 2 (Regional): ${tier2Results.summary.passed}/${TIER_2_LOCALES.length} passed`);
-  console.log(`Tier 3 (Automated): ${tier3Results.summary.passed}/${tier3Results.locales.length} passed`);
+  console.log(
+    `Tier 3 (Automated): ${tier3Results.summary.passed}/${tier3Results.locales.length} passed`
+  );
 
-  console.log(`\nOverall: ✅ ${totalPassed} passed, ⚠️ ${totalWarnings} warnings, ❌ ${totalFailed} failed`);
+  console.log(
+    `\nOverall: ✅ ${totalPassed} passed, ⚠️ ${totalWarnings} warnings, ❌ ${totalFailed} failed`
+  );
 
   // Write results to JSON file
   const report = {
@@ -444,10 +477,10 @@ function main() {
     tier1: tier1Results,
     tier2: tier2Results,
     tier3: tier3Results,
-    summary: { passed: totalPassed, warnings: totalWarnings, failed: totalFailed }
+    summary: { passed: totalPassed, warnings: totalWarnings, failed: totalFailed },
   };
 
-  const reportPath = path.join(__dirname, '../i18n-validation-report.json');
+  const reportPath = path.join(__dirname, "../i18n-validation-report.json");
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
   console.log(`\nReport saved to: ${reportPath}`);
 

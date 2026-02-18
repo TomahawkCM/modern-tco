@@ -119,9 +119,7 @@ export function generateRetentionTimeline(
   daysBack: number = 30
 ): TimelineDataPoint[] {
   const allItems = getAllReviewItems();
-  const filteredItems = moduleId
-    ? allItems.filter(item => item.moduleId === moduleId)
-    : allItems;
+  const filteredItems = moduleId ? allItems.filter((item) => item.moduleId === moduleId) : allItems;
 
   const userPoints = getUserPoints();
   const practiceStats = getPracticeStats();
@@ -134,7 +132,7 @@ export function generateRetentionTimeline(
   for (let i = 0; i < daysBack; i++) {
     const date = new Date(today);
     date.setDate(date.getDate() - i);
-    const dateKey = date.toISOString().split('T')[0];
+    const dateKey = date.toISOString().split("T")[0];
 
     dateBuckets.set(dateKey, {
       date: new Date(date),
@@ -148,8 +146,8 @@ export function generateRetentionTimeline(
   }
 
   // Aggregate review data by date (based on lastReviewed)
-  filteredItems.forEach(item => {
-    const dateKey = new Date(item.lastReviewed).toISOString().split('T')[0];
+  filteredItems.forEach((item) => {
+    const dateKey = new Date(item.lastReviewed).toISOString().split("T")[0];
     const bucket = dateBuckets.get(dateKey);
 
     if (bucket) {
@@ -162,18 +160,19 @@ export function generateRetentionTimeline(
 
   // Calculate average retention for each day
   dateBuckets.forEach((bucket, dateKey) => {
-    const itemsOnDate = filteredItems.filter(item =>
-      new Date(item.lastReviewed).toISOString().split('T')[0] === dateKey
+    const itemsOnDate = filteredItems.filter(
+      (item) => new Date(item.lastReviewed).toISOString().split("T")[0] === dateKey
     );
 
     if (itemsOnDate.length > 0) {
-      bucket.averageRetention = itemsOnDate.reduce((sum, item) => sum + item.retention, 0) / itemsOnDate.length;
+      bucket.averageRetention =
+        itemsOnDate.reduce((sum, item) => sum + item.retention, 0) / itemsOnDate.length;
     }
   });
 
   // Add points data
-  userPoints.pointsHistory.forEach(entry => {
-    const dateKey = new Date(entry.timestamp).toISOString().split('T')[0];
+  userPoints.pointsHistory.forEach((entry) => {
+    const dateKey = new Date(entry.timestamp).toISOString().split("T")[0];
     const bucket = dateBuckets.get(dateKey);
 
     if (bucket) {
@@ -185,8 +184,8 @@ export function generateRetentionTimeline(
   });
 
   // Add practice data
-  practiceStats.recentSessions.forEach(session => {
-    const dateKey = new Date(session.startTime).toISOString().split('T')[0];
+  practiceStats.recentSessions.forEach((session) => {
+    const dateKey = new Date(session.startTime).toISOString().split("T")[0];
     const bucket = dateBuckets.get(dateKey);
 
     if (bucket) {
@@ -195,8 +194,7 @@ export function generateRetentionTimeline(
   });
 
   // Convert to array and sort by date
-  return Array.from(dateBuckets.values())
-    .sort((a, b) => a.date.getTime() - b.date.getTime());
+  return Array.from(dateBuckets.values()).sort((a, b) => a.date.getTime() - b.date.getTime());
 }
 
 // ============================================================================
@@ -209,7 +207,7 @@ const MODULE_NAMES: Record<string, string> = {
   "refining-questions": "Refining Questions",
   "taking-action": "Taking Action & Remediation",
   "reporting-export": "Reporting & Data Export",
-  "troubleshooting": "Troubleshooting",
+  troubleshooting: "Troubleshooting",
 };
 
 /**
@@ -220,7 +218,7 @@ export function calculateModuleProgress(): ModuleProgress[] {
   const moduleMap = new Map<string, ReviewItem[]>();
 
   // Group items by module
-  allItems.forEach(item => {
+  allItems.forEach((item) => {
     if (!moduleMap.has(item.moduleId)) {
       moduleMap.set(item.moduleId, []);
     }
@@ -231,10 +229,10 @@ export function calculateModuleProgress(): ModuleProgress[] {
   const moduleProgress: ModuleProgress[] = [];
 
   moduleMap.forEach((items, moduleId) => {
-    const uniqueConcepts = new Set(items.map(item => item.concept));
+    const uniqueConcepts = new Set(items.map((item) => item.concept));
     const totalConcepts = uniqueConcepts.size;
-    const conceptsStarted = items.filter(item => item.retention > 70).length;
-    const conceptsMastered = items.filter(item => item.retention > 90).length;
+    const conceptsStarted = items.filter((item) => item.retention > 70).length;
+    const conceptsMastered = items.filter((item) => item.retention > 90).length;
 
     const averageRetention = items.reduce((sum, item) => sum + item.retention, 0) / items.length;
 
@@ -243,9 +241,7 @@ export function calculateModuleProgress(): ModuleProgress[] {
       return itemDate > latest ? itemDate : latest;
     }, new Date(0));
 
-    const completionPercentage = totalConcepts > 0
-      ? (conceptsMastered / totalConcepts) * 100
-      : 0;
+    const completionPercentage = totalConcepts > 0 ? (conceptsMastered / totalConcepts) * 100 : 0;
 
     moduleProgress.push({
       moduleId,
@@ -267,7 +263,7 @@ export function calculateModuleProgress(): ModuleProgress[] {
  */
 export function getModuleProgress(moduleId: string): ModuleProgress | null {
   const allProgress = calculateModuleProgress();
-  return allProgress.find(p => p.moduleId === moduleId) || null;
+  return allProgress.find((p) => p.moduleId === moduleId) || null;
 }
 
 // ============================================================================
@@ -307,20 +303,20 @@ function getTrend(item: ReviewItem): "improving" | "stable" | "declining" {
  */
 export function generateConceptMastery(moduleId?: string): ConceptMastery[] {
   const allItems = getAllReviewItems();
-  const filteredItems = moduleId
-    ? allItems.filter(item => item.moduleId === moduleId)
-    : allItems;
+  const filteredItems = moduleId ? allItems.filter((item) => item.moduleId === moduleId) : allItems;
 
-  return filteredItems.map(item => ({
-    concept: item.concept,
-    moduleId: item.moduleId,
-    sectionId: item.sectionId,
-    retention: item.retention,
-    reviewCount: item.totalReviews || 0,
-    lastReviewed: new Date(item.lastReviewed),
-    masteryLevel: getMasteryLevel(item.retention),
-    trend: getTrend(item),
-  })).sort((a, b) => b.retention - a.retention);
+  return filteredItems
+    .map((item) => ({
+      concept: item.concept,
+      moduleId: item.moduleId,
+      sectionId: item.sectionId,
+      retention: item.retention,
+      reviewCount: item.totalReviews || 0,
+      lastReviewed: new Date(item.lastReviewed),
+      masteryLevel: getMasteryLevel(item.retention),
+      trend: getTrend(item),
+    }))
+    .sort((a, b) => b.retention - a.retention);
 }
 
 /**
@@ -330,7 +326,7 @@ export function getConceptMasteryByModule(): Map<string, ConceptMastery[]> {
   const allMastery = generateConceptMastery();
   const grouped = new Map<string, ConceptMastery[]>();
 
-  allMastery.forEach(concept => {
+  allMastery.forEach((concept) => {
     if (!grouped.has(concept.moduleId)) {
       grouped.set(concept.moduleId, []);
     }
@@ -354,16 +350,15 @@ export function calculateProgressSummary(): ProgressSummary {
 
   // Calculate total items and mastered items
   const totalItems = allItems.length;
-  const itemsMastered = allItems.filter(item => item.retention > 90).length;
+  const itemsMastered = allItems.filter((item) => item.retention > 90).length;
 
   // Calculate overall retention
-  const overallRetention = totalItems > 0
-    ? allItems.reduce((sum, item) => sum + item.retention, 0) / totalItems
-    : 0;
+  const overallRetention =
+    totalItems > 0 ? allItems.reduce((sum, item) => sum + item.retention, 0) / totalItems : 0;
 
   // Estimate learning hours (10 minutes per review session average)
   const totalReviews = allItems.reduce((sum, item) => sum + (item.totalReviews || 0), 0);
-  const totalHours = Math.round((totalReviews * 10) / 60 * 10) / 10; // Round to 1 decimal
+  const totalHours = Math.round(((totalReviews * 10) / 60) * 10) / 10; // Round to 1 decimal
 
   // Calculate current streak (placeholder - TODO: implement in Week 4)
   const currentStreak = 0;
@@ -380,11 +375,14 @@ export function calculateProgressSummary(): ProgressSummary {
   const sessionsCompleted = reviewSessions + practiceSessions;
 
   // Calculate exam readiness score (weighted formula)
-  const examReadiness = Math.min(100, Math.round(
-    (overallRetention * 0.5) +           // 50% weight on retention
-    ((itemsMastered / totalItems) * 100 * 0.3) + // 30% weight on mastery
-    (Math.min(currentLevel / 15, 1) * 100 * 0.2)  // 20% weight on level progress
-  ));
+  const examReadiness = Math.min(
+    100,
+    Math.round(
+      overallRetention * 0.5 + // 50% weight on retention
+        (itemsMastered / totalItems) * 100 * 0.3 + // 30% weight on mastery
+        Math.min(currentLevel / 15, 1) * 100 * 0.2 // 20% weight on level progress
+    )
+  );
 
   return {
     totalHours,
@@ -415,11 +413,11 @@ export function calculateLearningVelocity(weeksBack: number = 4): number[] {
 
   for (let week = 0; week < weeksBack; week++) {
     const weekStart = new Date(today);
-    weekStart.setDate(weekStart.getDate() - ((week + 1) * 7));
+    weekStart.setDate(weekStart.getDate() - (week + 1) * 7);
     const weekEnd = new Date(weekStart);
     weekEnd.setDate(weekEnd.getDate() + 7);
 
-    const masteredInWeek = allItems.filter(item => {
+    const masteredInWeek = allItems.filter((item) => {
       // Check if item reached mastery (>90% retention) during this week
       if (item.retention < 90) return false;
 
@@ -489,8 +487,8 @@ export function compareToBenchmarks(): ProgressBenchmark[] {
       metric: "Concepts Mastered",
       userValue: (summary.itemsMastered / summary.totalItems) * 100,
       benchmarkValue: 80, // 80% mastery recommended
-      percentile: ((summary.itemsMastered / summary.totalItems) / 0.8) * 100,
-      status: (summary.itemsMastered / summary.totalItems) >= 0.8 ? "meets" : "below",
+      percentile: (summary.itemsMastered / summary.totalItems / 0.8) * 100,
+      status: summary.itemsMastered / summary.totalItems >= 0.8 ? "meets" : "below",
     },
     {
       metric: "Study Hours",
@@ -504,7 +502,8 @@ export function compareToBenchmarks(): ProgressBenchmark[] {
       userValue: summary.examReadiness,
       benchmarkValue: 85, // Recommended for exam
       percentile: (summary.examReadiness / 85) * 100,
-      status: summary.examReadiness >= 85 ? "meets" : summary.examReadiness >= 75 ? "meets" : "below",
+      status:
+        summary.examReadiness >= 85 ? "meets" : summary.examReadiness >= 75 ? "meets" : "below",
     },
   ];
 }

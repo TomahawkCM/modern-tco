@@ -19,7 +19,7 @@ export default function ProgressPage() {
   }, [user?.id]);
 
   return (
-    <main className="container mx-auto max-w-5xl px-4 py-8 space-y-6">
+    <main className="container mx-auto max-w-5xl space-y-6 px-4 py-8">
       <h1 className="text-2xl font-semibold">Progress</h1>
 
       <Card>
@@ -30,7 +30,9 @@ export default function ProgressPage() {
           {attempts === null ? (
             <div className="text-sm text-slate-600 dark:text-muted-foreground">Loading…</div>
           ) : attempts.length === 0 ? (
-            <div className="text-sm text-slate-600 dark:text-muted-foreground">No attempts recorded.</div>
+            <div className="text-sm text-slate-600 dark:text-muted-foreground">
+              No attempts recorded.
+            </div>
           ) : (
             <ul className="divide-y divide-slate-200 dark:divide-slate-800">
               {attempts.map((a) => (
@@ -38,11 +40,19 @@ export default function ProgressPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <div className="font-medium">{a.type}</div>
-                      <div className="text-muted-foreground dark:text-muted-foreground">{new Date(a.date).toLocaleString()}</div>
+                      <div className="text-muted-foreground dark:text-muted-foreground">
+                        {new Date(a.date).toLocaleString()}
+                      </div>
                     </div>
                     <div className="text-right">
-                      {typeof a.score === "number" && <div className="font-medium">{Math.round(a.score * 100)}%</div>}
-                      {typeof a.questions === "number" && <div className="text-muted-foreground dark:text-muted-foreground">{a.questions} questions</div>}
+                      {typeof a.score === "number" && (
+                        <div className="font-medium">{Math.round(a.score * 100)}%</div>
+                      )}
+                      {typeof a.questions === "number" && (
+                        <div className="text-muted-foreground dark:text-muted-foreground">
+                          {a.questions} questions
+                        </div>
+                      )}
                     </div>
                   </div>
                 </li>
@@ -63,4 +73,3 @@ export default function ProgressPage() {
     </main>
   );
 }
-

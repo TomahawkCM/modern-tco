@@ -23,7 +23,7 @@ This checklist covers everything needed to deploy the Budget App to production (
 
 ## Pre-Deployment Checklist
 
-###  Critical Requirements
+### Critical Requirements
 
 - [ ] **Code Quality**
   - [x] All TypeScript errors resolved (verified with `npm run typecheck`)
@@ -120,11 +120,13 @@ vercel link
 **In Vercel Dashboard → Settings → Build & Development Settings**:
 
 - **Build Command Override**:
+
   ```bash
   npm run build
   ```
 
 - **Output Directory Override**:
+
   ```
   .next
   ```
@@ -188,6 +190,7 @@ NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 ### Environment Scope Configuration
 
 **For each variable, set scope**:
+
 - ✅ Production (always)
 - ⚠️ Preview (optional, use staging values)
 - ❌ Development (no, use `.env.local`)
@@ -209,6 +212,7 @@ cat .env.vercel  # Verify values (without secrets)
 **Create Missing Assets**:
 
 1. **App Shortcut Icons** (96x96px):
+
    ```bash
    # Create these in public/icons/:
    # - add-transaction.png
@@ -217,6 +221,7 @@ cat .env.vercel  # Verify values (without secrets)
    ```
 
 2. **Screenshots**:
+
    ```bash
    # Create public/screenshots/:
    mkdir -p public/screenshots
@@ -259,6 +264,7 @@ lighthouse http://localhost:3000/budget-app \
 ```
 
 **Required Checks** (all must pass):
+
 - ✅ Registers a service worker that controls page and start_url
 - ✅ Web app manifest meets the installability requirements
 - ✅ Configured for a custom splash screen
@@ -288,38 +294,38 @@ lighthouse https://yourdomain.com/budget-app \
 
 **Chrome/Edge (Windows/Mac/Linux)**:
 
-| Test | Steps | Expected Result |
-|------|-------|-----------------|
-| **Install Prompt** | 1. Open https://yourdomain.com/budget-app<br>2. Wait for install icon in address bar | Install icon appears |
-| **Installation** | 1. Click install icon<br>2. Click "Install" | App installs in ~2 seconds |
-| **Standalone Mode** | 1. Open installed app | Runs in standalone window (no browser UI) |
-| **Offline Mode** | 1. Disconnect internet<br>2. Open app<br>3. Navigate between cached pages | App loads, transactions visible |
-| **Service Worker** | 1. Open DevTools → Application → Service Workers | Status: "activated and running" |
-| **Shortcuts** | 1. Right-click app icon in taskbar/dock | 3 shortcuts visible (Add Transaction, Import CSV, Reports) |
+| Test                | Steps                                                                                | Expected Result                                            |
+| ------------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| **Install Prompt**  | 1. Open https://yourdomain.com/budget-app<br>2. Wait for install icon in address bar | Install icon appears                                       |
+| **Installation**    | 1. Click install icon<br>2. Click "Install"                                          | App installs in ~2 seconds                                 |
+| **Standalone Mode** | 1. Open installed app                                                                | Runs in standalone window (no browser UI)                  |
+| **Offline Mode**    | 1. Disconnect internet<br>2. Open app<br>3. Navigate between cached pages            | App loads, transactions visible                            |
+| **Service Worker**  | 1. Open DevTools → Application → Service Workers                                     | Status: "activated and running"                            |
+| **Shortcuts**       | 1. Right-click app icon in taskbar/dock                                              | 3 shortcuts visible (Add Transaction, Import CSV, Reports) |
 
 ### iOS Testing (Safari)
 
 **iPhone/iPad**:
 
-| Test | Steps | Expected Result |
-|------|-------|-----------------|
-| **Manual Install** | 1. Open in Safari<br>2. Tap Share → "Add to Home Screen"<br>3. Tap "Add" | Icon appears on home screen |
-| **Launch** | 1. Tap home screen icon | Opens in full-screen (no Safari UI) |
-| **Offline Mode** | 1. Enable Airplane Mode<br>2. Open app | App loads with cached content |
-| **Theme Color** | 1. Observe status bar | Status bar is teal (#14b8a6) |
+| Test               | Steps                                                                    | Expected Result                     |
+| ------------------ | ------------------------------------------------------------------------ | ----------------------------------- |
+| **Manual Install** | 1. Open in Safari<br>2. Tap Share → "Add to Home Screen"<br>3. Tap "Add" | Icon appears on home screen         |
+| **Launch**         | 1. Tap home screen icon                                                  | Opens in full-screen (no Safari UI) |
+| **Offline Mode**   | 1. Enable Airplane Mode<br>2. Open app                                   | App loads with cached content       |
+| **Theme Color**    | 1. Observe status bar                                                    | Status bar is teal (#14b8a6)        |
 
 ### Android Testing (Chrome)
 
 **Android Phone/Tablet**:
 
-| Test | Steps | Expected Result |
-|------|-------|-----------------|
-| **Auto Prompt** | 1. Open https://yourdomain.com/budget-app<br>2. Wait 30 seconds | Install banner appears at bottom |
-| **Installation** | 1. Tap "Install"<br>2. Tap "Install" in dialog | App appears in app drawer |
-| **Launch** | 1. Open from app drawer | Opens in standalone window |
-| **Offline Mode** | 1. Enable Airplane Mode<br>2. Open app | App loads with cached content |
-| **Shortcuts** | 1. Long-press app icon | 3 shortcuts visible |
-| **Share Target** | 1. Share CSV file → Budget App | App opens import flow |
+| Test             | Steps                                                           | Expected Result                  |
+| ---------------- | --------------------------------------------------------------- | -------------------------------- |
+| **Auto Prompt**  | 1. Open https://yourdomain.com/budget-app<br>2. Wait 30 seconds | Install banner appears at bottom |
+| **Installation** | 1. Tap "Install"<br>2. Tap "Install" in dialog                  | App appears in app drawer        |
+| **Launch**       | 1. Open from app drawer                                         | Opens in standalone window       |
+| **Offline Mode** | 1. Enable Airplane Mode<br>2. Open app                          | App loads with cached content    |
+| **Shortcuts**    | 1. Long-press app icon                                          | 3 shortcuts visible              |
+| **Share Target** | 1. Share CSV file → Budget App                                  | App opens import flow            |
 
 ### Performance Testing
 
@@ -332,6 +338,7 @@ lighthouse https://yourdomain.com/budget-app \
 ```
 
 **Target Scores**:
+
 - Performance: 90+ ✅
 - First Contentful Paint (FCP): < 1.8s ✅
 - Largest Contentful Paint (LCP): < 2.5s ✅
@@ -379,7 +386,7 @@ open https://yourdomain.com/budget-app
 1. Trigger test error:
    ```javascript
    // In browser console:
-   throw new Error('Production deployment test error');
+   throw new Error("Production deployment test error");
    ```
 2. Verify error appears in Sentry Issues
 3. Check environment tag: "production"
@@ -466,13 +473,14 @@ git checkout main
 **Symptom**: Users see old version after deployment
 
 **Workaround**:
+
 ```javascript
 // In public/sw.js, increment version:
-const CACHE_VERSION = 'v2';  // Increment this on each deploy
+const CACHE_VERSION = "v2"; // Increment this on each deploy
 
 // Or force update in browser console:
-navigator.serviceWorker.getRegistrations().then(registrations => {
-  registrations.forEach(registration => registration.unregister());
+navigator.serviceWorker.getRegistrations().then((registrations) => {
+  registrations.forEach((registration) => registration.unregister());
 });
 ```
 
@@ -482,6 +490,7 @@ navigator.serviceWorker.getRegistrations().then(registrations => {
 
 **Known Limitation**: iOS Safari has limited service worker support
 **Workaround**:
+
 - Use AppCache manifest (deprecated but still works on iOS)
 - Or accept limitation and show "Offline mode not supported on iOS" message
 
@@ -490,6 +499,7 @@ navigator.serviceWorker.getRegistrations().then(registrations => {
 **Symptom**: No install prompt on Android
 
 **Solutions**:
+
 1. Ensure HTTPS (required)
 2. Verify manifest is valid (Chrome DevTools → Application → Manifest)
 3. Check service worker is registered and active
@@ -501,6 +511,7 @@ navigator.serviceWorker.getRegistrations().then(registrations => {
 **Symptom**: Build exceeds 45 minutes (Hobby plan limit)
 
 **Solutions**:
+
 1. Optimize build: Remove unused dependencies
 2. Enable Next.js caching: `vercel build --yes`
 3. Upgrade to Pro plan (60 minute timeout)

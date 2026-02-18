@@ -17,16 +17,7 @@ import * as MDXReact from "@mdx-js/react";
 import * as ReactJsxRuntime from "react/jsx-runtime";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  Clock,
-  Target,
-  CheckCircle,
-  AlertCircle,
-  Info,
-  Brain,
-  Lightbulb,
-  Zap,
-} from "lucide-react";
+import { Clock, Target, CheckCircle, AlertCircle, Info, Brain, Lightbulb, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ClientMDXContentProps {
@@ -37,7 +28,7 @@ function createRuntimeWithDevSupport() {
   const baseRuntime = { ...MDXReact, ...ReactJsxRuntime } as Record<string, unknown>;
 
   if (typeof baseRuntime.jsxDEV !== "function") {
-    const {jsx} = ReactJsxRuntime;
+    const { jsx } = ReactJsxRuntime;
     baseRuntime.jsxDEV = function jsxDEV(type: unknown, props: unknown, key?: unknown) {
       return jsx(type as any, props as any, key as any);
     };
@@ -49,11 +40,17 @@ function createRuntimeWithDevSupport() {
 // MDX Components that can be used within the module content
 const mdxComponents = {
   // Custom components available in MDX
-  PracticeButton: (props: React.ComponentProps<typeof PracticeButton>) => <PracticeButton {...props} />,
+  PracticeButton: (props: React.ComponentProps<typeof PracticeButton>) => (
+    <PracticeButton {...props} />
+  ),
   MiniProject: (props: React.ComponentProps<typeof MiniProject>) => <MiniProject {...props} />,
-  QueryPlayground: (props: React.ComponentProps<typeof QueryPlayground>) => <QueryPlayground {...props} />,
+  QueryPlayground: (props: React.ComponentProps<typeof QueryPlayground>) => (
+    <QueryPlayground {...props} />
+  ),
   SkillGate: (props: React.ComponentProps<typeof SkillGate>) => <SkillGate {...props} />,
-  ModuleTransition: (props: React.ComponentProps<typeof ModuleTransition>) => <ModuleTransition {...props} />,
+  ModuleTransition: (props: React.ComponentProps<typeof ModuleTransition>) => (
+    <ModuleTransition {...props} />
+  ),
   MicroSection: (props: React.ComponentProps<typeof MicroSection>) => <MicroSection {...props} />,
   MicroQuizMDX: (props: React.ComponentProps<typeof MicroQuizMDX>) => <MicroQuizMDX {...props} />,
   InfoBox: (props: React.ComponentProps<typeof InfoBox>) => <InfoBox {...props} />,
@@ -107,7 +104,10 @@ const mdxComponents = {
   ),
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
     <ol
-      className={cn("my-4 ml-6 list-decimal space-y-2 text-muted-foreground [&>li]:mt-2", className)}
+      className={cn(
+        "my-4 ml-6 list-decimal space-y-2 text-muted-foreground [&>li]:mt-2",
+        className
+      )}
       {...props}
     />
   ),

@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from 'next-intl';
+import { useTranslations } from "next-intl";
 
 export function LogoMarquee() {
-  const t = useTranslations('landing.marquee');
-  const logos = t.raw('logos') as string[];
+  const t = useTranslations("landing.marquee");
+  const logos = t.raw("logos") as string[];
   const row = [...logos, ...logos];
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#070A12] to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#070A12] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 start-0 w-24 bg-gradient-to-r from-[#070A12] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 end-0 w-24 bg-gradient-to-l from-[#070A12] to-transparent" />
 
       <motion.div
         className="flex items-center gap-4 py-4"
@@ -32,5 +32,3 @@ export function LogoMarquee() {
     </div>
   );
 }
-
-

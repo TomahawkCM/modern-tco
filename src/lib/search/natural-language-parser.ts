@@ -9,7 +9,7 @@
  * - "large purchases yesterday" -> { amountMin: 100, dateRange: yesterday }
  */
 
-import { parseSearchQuery, type ParsedQuery, type ParsedFilters } from './query-parser';
+import { parseSearchQuery, type ParsedQuery, type ParsedFilters } from "./query-parser";
 
 export interface NaturalLanguageResult {
   /** Structured query from parsing */
@@ -25,19 +25,31 @@ export interface NaturalLanguageResult {
 // Amount-related patterns
 const AMOUNT_PATTERNS: [RegExp, (match: RegExpMatchArray) => Partial<ParsedFilters>][] = [
   // "over $50", "above $100", "more than $25"
-  [/(?:over|above|more\s+than)\s+\$?(\d+(?:\.\d+)?)/i, (m) => ({ amountMin: parseFloat(m[1]) + 0.01 })],
+  [
+    /(?:over|above|more\s+than)\s+\$?(\d+(?:\.\d+)?)/i,
+    (m) => ({ amountMin: parseFloat(m[1]) + 0.01 }),
+  ],
   // "under $50", "below $100", "less than $25"
-  [/(?:under|below|less\s+than)\s+\$?(\d+(?:\.\d+)?)/i, (m) => ({ amountMax: parseFloat(m[1]) - 0.01 })],
+  [
+    /(?:under|below|less\s+than)\s+\$?(\d+(?:\.\d+)?)/i,
+    (m) => ({ amountMax: parseFloat(m[1]) - 0.01 }),
+  ],
   // "$50-100", "$50 to $100"
-  [/\$(\d+(?:\.\d+)?)\s*(?:-|to)\s*\$?(\d+(?:\.\d+)?)/i, (m) => ({
-    amountMin: parseFloat(m[1]),
-    amountMax: parseFloat(m[2]),
-  })],
+  [
+    /\$(\d+(?:\.\d+)?)\s*(?:-|to)\s*\$?(\d+(?:\.\d+)?)/i,
+    (m) => ({
+      amountMin: parseFloat(m[1]),
+      amountMax: parseFloat(m[2]),
+    }),
+  ],
   // "around $50", "about $100", "roughly $25"
-  [/(?:around|about|roughly|approximately)\s+\$?(\d+(?:\.\d+)?)/i, (m) => ({
-    amountMin: parseFloat(m[1]) * 0.8,
-    amountMax: parseFloat(m[1]) * 1.2,
-  })],
+  [
+    /(?:around|about|roughly|approximately)\s+\$?(\d+(?:\.\d+)?)/i,
+    (m) => ({
+      amountMin: parseFloat(m[1]) * 0.8,
+      amountMax: parseFloat(m[1]) * 1.2,
+    }),
+  ],
   // "expensive" (arbitrary threshold)
   [/\bexpensive\b/i, () => ({ amountMin: 100 })],
   // "cheap", "small"
@@ -52,114 +64,158 @@ type DatePatternFn = (match?: RegExpMatchArray) => { dateStart: Date; dateEnd: D
 
 const DATE_PATTERNS: [RegExp, DatePatternFn][] = [
   // "today"
-  [/\btoday\b/i, () => {
-    const start = new Date();
-    start.setHours(0, 0, 0, 0);
-    const end = new Date();
-    end.setHours(23, 59, 59, 999);
-    return { dateStart: start, dateEnd: end };
-  }],
+  [
+    /\btoday\b/i,
+    () => {
+      const start = new Date();
+      start.setHours(0, 0, 0, 0);
+      const end = new Date();
+      end.setHours(23, 59, 59, 999);
+      return { dateStart: start, dateEnd: end };
+    },
+  ],
   // "yesterday"
-  [/\byesterday\b/i, () => {
-    const start = new Date();
-    start.setDate(start.getDate() - 1);
-    start.setHours(0, 0, 0, 0);
-    const end = new Date(start);
-    end.setHours(23, 59, 59, 999);
-    return { dateStart: start, dateEnd: end };
-  }],
+  [
+    /\byesterday\b/i,
+    () => {
+      const start = new Date();
+      start.setDate(start.getDate() - 1);
+      start.setHours(0, 0, 0, 0);
+      const end = new Date(start);
+      end.setHours(23, 59, 59, 999);
+      return { dateStart: start, dateEnd: end };
+    },
+  ],
   // "last week", "this week"
-  [/\blast\s+week\b/i, () => {
-    const end = new Date();
-    const start = new Date();
-    start.setDate(start.getDate() - 7);
-    start.setHours(0, 0, 0, 0);
-    return { dateStart: start, dateEnd: end };
-  }],
-  [/\bthis\s+week\b/i, () => {
-    const now = new Date();
-    const dayOfWeek = now.getDay();
-    const start = new Date(now);
-    start.setDate(now.getDate() - dayOfWeek);
-    start.setHours(0, 0, 0, 0);
-    return { dateStart: start, dateEnd: now };
-  }],
+  [
+    /\blast\s+week\b/i,
+    () => {
+      const end = new Date();
+      const start = new Date();
+      start.setDate(start.getDate() - 7);
+      start.setHours(0, 0, 0, 0);
+      return { dateStart: start, dateEnd: end };
+    },
+  ],
+  [
+    /\bthis\s+week\b/i,
+    () => {
+      const now = new Date();
+      const dayOfWeek = now.getDay();
+      const start = new Date(now);
+      start.setDate(now.getDate() - dayOfWeek);
+      start.setHours(0, 0, 0, 0);
+      return { dateStart: start, dateEnd: now };
+    },
+  ],
   // "last month", "this month"
-  [/\blast\s+month\b/i, () => {
-    const now = new Date();
-    const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-    const end = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999);
-    return { dateStart: start, dateEnd: end };
-  }],
-  [/\bthis\s+month\b/i, () => {
-    const now = new Date();
-    const start = new Date(now.getFullYear(), now.getMonth(), 1);
-    return { dateStart: start, dateEnd: now };
-  }],
+  [
+    /\blast\s+month\b/i,
+    () => {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      const end = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999);
+      return { dateStart: start, dateEnd: end };
+    },
+  ],
+  [
+    /\bthis\s+month\b/i,
+    () => {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), now.getMonth(), 1);
+      return { dateStart: start, dateEnd: now };
+    },
+  ],
   // "last year", "this year"
-  [/\blast\s+year\b/i, () => {
-    const now = new Date();
-    const start = new Date(now.getFullYear() - 1, 0, 1);
-    const end = new Date(now.getFullYear() - 1, 11, 31, 23, 59, 59, 999);
-    return { dateStart: start, dateEnd: end };
-  }],
-  [/\bthis\s+year\b/i, () => {
-    const now = new Date();
-    const start = new Date(now.getFullYear(), 0, 1);
-    return { dateStart: start, dateEnd: now };
-  }],
+  [
+    /\blast\s+year\b/i,
+    () => {
+      const now = new Date();
+      const start = new Date(now.getFullYear() - 1, 0, 1);
+      const end = new Date(now.getFullYear() - 1, 11, 31, 23, 59, 59, 999);
+      return { dateStart: start, dateEnd: end };
+    },
+  ],
+  [
+    /\bthis\s+year\b/i,
+    () => {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 1);
+      return { dateStart: start, dateEnd: now };
+    },
+  ],
   // "past X days/weeks/months"
-  [/\bpast\s+(\d+)\s+days?\b/i, (match?: RegExpMatchArray) => {
-    const days = match ? parseInt(match[1], 10) : 7;
-    const end = new Date();
-    const start = new Date();
-    start.setDate(start.getDate() - days);
-    start.setHours(0, 0, 0, 0);
-    return { dateStart: start, dateEnd: end };
-  }],
-  [/\bpast\s+(\d+)\s+weeks?\b/i, (match?: RegExpMatchArray) => {
-    const weeks = match ? parseInt(match[1], 10) : 1;
-    const end = new Date();
-    const start = new Date();
-    start.setDate(start.getDate() - weeks * 7);
-    start.setHours(0, 0, 0, 0);
-    return { dateStart: start, dateEnd: end };
-  }],
-  [/\bpast\s+(\d+)\s+months?\b/i, (match?: RegExpMatchArray) => {
-    const months = match ? parseInt(match[1], 10) : 1;
-    const end = new Date();
-    const start = new Date();
-    start.setMonth(start.getMonth() - months);
-    start.setHours(0, 0, 0, 0);
-    return { dateStart: start, dateEnd: end };
-  }],
+  [
+    /\bpast\s+(\d+)\s+days?\b/i,
+    (match?: RegExpMatchArray) => {
+      const days = match ? parseInt(match[1], 10) : 7;
+      const end = new Date();
+      const start = new Date();
+      start.setDate(start.getDate() - days);
+      start.setHours(0, 0, 0, 0);
+      return { dateStart: start, dateEnd: end };
+    },
+  ],
+  [
+    /\bpast\s+(\d+)\s+weeks?\b/i,
+    (match?: RegExpMatchArray) => {
+      const weeks = match ? parseInt(match[1], 10) : 1;
+      const end = new Date();
+      const start = new Date();
+      start.setDate(start.getDate() - weeks * 7);
+      start.setHours(0, 0, 0, 0);
+      return { dateStart: start, dateEnd: end };
+    },
+  ],
+  [
+    /\bpast\s+(\d+)\s+months?\b/i,
+    (match?: RegExpMatchArray) => {
+      const months = match ? parseInt(match[1], 10) : 1;
+      const end = new Date();
+      const start = new Date();
+      start.setMonth(start.getMonth() - months);
+      start.setHours(0, 0, 0, 0);
+      return { dateStart: start, dateEnd: end };
+    },
+  ],
   // "recently", "recent"
-  [/\brecent(?:ly)?\b/i, () => {
-    const end = new Date();
-    const start = new Date();
-    start.setDate(start.getDate() - 7);
-    start.setHours(0, 0, 0, 0);
-    return { dateStart: start, dateEnd: end };
-  }],
+  [
+    /\brecent(?:ly)?\b/i,
+    () => {
+      const end = new Date();
+      const start = new Date();
+      start.setDate(start.getDate() - 7);
+      start.setHours(0, 0, 0, 0);
+      return { dateStart: start, dateEnd: end };
+    },
+  ],
 ];
 
 // Type patterns
-const TYPE_PATTERNS: [RegExp, 'income' | 'expense'][] = [
-  [/\b(?:income|salary|payment|deposit|refund)\b/i, 'income'],
-  [/\b(?:expense|spent|purchase|bought|paid|bill)\b/i, 'expense'],
+const TYPE_PATTERNS: [RegExp, "income" | "expense"][] = [
+  [/\b(?:income|salary|payment|deposit|refund)\b/i, "income"],
+  [/\b(?:expense|spent|purchase|bought|paid|bill)\b/i, "expense"],
 ];
 
 // Common category aliases
 const CATEGORY_ALIASES: Record<string, string[]> = {
-  'Food & Dining': ['food', 'restaurant', 'restaurants', 'dining', 'eating out', 'takeout', 'delivery'],
-  'Groceries': ['grocery', 'groceries', 'supermarket', 'market'],
-  'Transportation': ['transport', 'gas', 'fuel', 'uber', 'lyft', 'taxi', 'transit', 'bus', 'subway'],
-  'Entertainment': ['entertainment', 'movies', 'games', 'streaming', 'netflix', 'spotify'],
-  'Shopping': ['shopping', 'clothes', 'clothing', 'amazon', 'online shopping'],
-  'Utilities': ['utilities', 'electric', 'electricity', 'water', 'internet', 'phone', 'cell'],
-  'Healthcare': ['health', 'healthcare', 'medical', 'doctor', 'pharmacy', 'prescription'],
-  'Travel': ['travel', 'hotel', 'flight', 'airbnb', 'vacation'],
-  'Subscriptions': ['subscription', 'subscriptions', 'monthly', 'recurring'],
+  "Food & Dining": [
+    "food",
+    "restaurant",
+    "restaurants",
+    "dining",
+    "eating out",
+    "takeout",
+    "delivery",
+  ],
+  Groceries: ["grocery", "groceries", "supermarket", "market"],
+  Transportation: ["transport", "gas", "fuel", "uber", "lyft", "taxi", "transit", "bus", "subway"],
+  Entertainment: ["entertainment", "movies", "games", "streaming", "netflix", "spotify"],
+  Shopping: ["shopping", "clothes", "clothing", "amazon", "online shopping"],
+  Utilities: ["utilities", "electric", "electricity", "water", "internet", "phone", "cell"],
+  Healthcare: ["health", "healthcare", "medical", "doctor", "pharmacy", "prescription"],
+  Travel: ["travel", "hotel", "flight", "airbnb", "vacation"],
+  Subscriptions: ["subscription", "subscriptions", "monthly", "recurring"],
 };
 
 /**
@@ -188,7 +244,7 @@ export function parseNaturalLanguage(input: string): NaturalLanguageResult {
     if (match) {
       const extracted = extractFilter(match);
       Object.assign(filters, extracted);
-      remainingInput = remainingInput.replace(match[0], '').trim();
+      remainingInput = remainingInput.replace(match[0], "").trim();
       interpretations.push(formatAmountFilter(extracted));
       confidence *= 0.9;
     }
@@ -201,7 +257,7 @@ export function parseNaturalLanguage(input: string): NaturalLanguageResult {
       const range = getRange(match);
       filters.dateStart = range.dateStart;
       filters.dateEnd = range.dateEnd;
-      remainingInput = remainingInput.replace(match[0], '').trim();
+      remainingInput = remainingInput.replace(match[0], "").trim();
       interpretations.push(formatDateFilter(range));
       confidence *= 0.9;
       break; // Only use first date match
@@ -212,7 +268,7 @@ export function parseNaturalLanguage(input: string): NaturalLanguageResult {
   for (const [pattern, type] of TYPE_PATTERNS) {
     if (pattern.test(remainingInput)) {
       filters.type = type;
-      remainingInput = remainingInput.replace(pattern, '').trim();
+      remainingInput = remainingInput.replace(pattern, "").trim();
       interpretations.push(`Type: ${type}`);
       confidence *= 0.85;
       break;
@@ -222,10 +278,10 @@ export function parseNaturalLanguage(input: string): NaturalLanguageResult {
   // Match category aliases
   for (const [category, aliases] of Object.entries(CATEGORY_ALIASES)) {
     for (const alias of aliases) {
-      const aliasPattern = new RegExp(`\\b${alias}\\b`, 'i');
+      const aliasPattern = new RegExp(`\\b${alias}\\b`, "i");
       if (aliasPattern.test(remainingInput)) {
         filters.category = category;
-        remainingInput = remainingInput.replace(aliasPattern, '').trim();
+        remainingInput = remainingInput.replace(aliasPattern, "").trim();
         interpretations.push(`Category: ${category}`);
         confidence *= 0.85;
         break;
@@ -236,8 +292,8 @@ export function parseNaturalLanguage(input: string): NaturalLanguageResult {
 
   // Clean up remaining text
   remainingInput = remainingInput
-    .replace(/\s+/g, ' ')
-    .replace(/\b(?:for|at|in|from|the|a|an|my|to)\b/gi, '')
+    .replace(/\s+/g, " ")
+    .replace(/\b(?:for|at|in|from|the|a|an|my|to)\b/gi, "")
     .trim();
 
   // Build result
@@ -250,9 +306,10 @@ export function parseNaturalLanguage(input: string): NaturalLanguageResult {
       hasStructuredFilters: hasFilters,
     },
     confidence: hasFilters ? confidence : 0.7,
-    interpretation: interpretations.length > 0
-      ? interpretations.join(', ')
-      : `Searching for "${remainingInput || input}"`,
+    interpretation:
+      interpretations.length > 0
+        ? interpretations.join(", ")
+        : `Searching for "${remainingInput || input}"`,
     originalInput: input,
   };
 }
@@ -283,7 +340,7 @@ function formatFilters(filters: ParsedFilters): string {
     parts.push(`type: ${filters.type}`);
   }
 
-  return parts.join(', ') || 'none';
+  return parts.join(", ") || "none";
 }
 
 /**
@@ -297,7 +354,7 @@ function formatAmountFilter(filter: Partial<ParsedFilters>): string {
   } else if (filter.amountMax !== undefined) {
     return `Amount: under $${filter.amountMax.toFixed(0)}`;
   }
-  return '';
+  return "";
 }
 
 /**
@@ -305,15 +362,13 @@ function formatAmountFilter(filter: Partial<ParsedFilters>): string {
  */
 function formatDateFilter(range: { dateStart: Date; dateEnd: Date }): string {
   const now = new Date();
-  const daysDiff = Math.floor(
-    (now.getTime() - range.dateStart.getTime()) / (1000 * 60 * 60 * 24)
-  );
+  const daysDiff = Math.floor((now.getTime() - range.dateStart.getTime()) / (1000 * 60 * 60 * 24));
 
-  if (daysDiff === 0) return 'Date: today';
-  if (daysDiff === 1) return 'Date: yesterday';
-  if (daysDiff <= 7) return 'Date: last 7 days';
-  if (daysDiff <= 30) return 'Date: last 30 days';
-  if (daysDiff <= 90) return 'Date: last 3 months';
+  if (daysDiff === 0) return "Date: today";
+  if (daysDiff === 1) return "Date: yesterday";
+  if (daysDiff <= 7) return "Date: last 7 days";
+  if (daysDiff <= 30) return "Date: last 30 days";
+  if (daysDiff <= 90) return "Date: last 3 months";
   return `Date: ${range.dateStart.toLocaleDateString()} - ${range.dateEnd.toLocaleDateString()}`;
 }
 
@@ -322,13 +377,13 @@ function formatDateFilter(range: { dateStart: Date; dateEnd: Date }): string {
  */
 export function getSearchExamples(): { query: string; description: string }[] {
   return [
-    { query: 'coffee last week', description: 'Coffee purchases from the past week' },
-    { query: 'Amazon over $50', description: 'Amazon orders over $50' },
-    { query: 'groceries this month', description: 'Grocery spending this month' },
-    { query: 'restaurants yesterday', description: 'Restaurant charges from yesterday' },
-    { query: 'large purchases', description: 'Transactions over $100' },
-    { query: 'amount:>200 category:shopping', description: 'Shopping over $200 (structured)' },
-    { query: '$25-100 last 30 days', description: 'Mid-range purchases recently' },
-    { query: 'type:income this year', description: 'All income this year' },
+    { query: "coffee last week", description: "Coffee purchases from the past week" },
+    { query: "Amazon over $50", description: "Amazon orders over $50" },
+    { query: "groceries this month", description: "Grocery spending this month" },
+    { query: "restaurants yesterday", description: "Restaurant charges from yesterday" },
+    { query: "large purchases", description: "Transactions over $100" },
+    { query: "amount:>200 category:shopping", description: "Shopping over $200 (structured)" },
+    { query: "$25-100 last 30 days", description: "Mid-range purchases recently" },
+    { query: "type:income this year", description: "All income this year" },
   ];
 }

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * SimpleFIN Status Indicators
@@ -9,17 +9,12 @@
  * - SimpleFINAccountList - List of connected accounts
  */
 
-import { useState, useEffect } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
+import { useState, useEffect } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   Loader2,
   CheckCircle,
@@ -31,8 +26,8 @@ import {
   Building2,
   AlertTriangle,
   XCircle,
-} from 'lucide-react';
-import type { ConnectionStatus, SyncProgress, LinkedAccount, SyncResult } from '@/lib/simplefin';
+} from "lucide-react";
+import type { ConnectionStatus, SyncProgress, LinkedAccount, SyncResult } from "@/lib/simplefin";
 
 // =============================================================================
 // STATUS BADGE
@@ -44,67 +39,66 @@ interface SimpleFINStatusBadgeProps {
   onClick?: () => void;
 }
 
-const statusConfig: Record<ConnectionStatus, {
-  icon: React.ReactNode;
-  label: string;
-  variant: 'default' | 'secondary' | 'destructive' | 'outline';
-  color: string;
-}> = {
+const statusConfig: Record<
+  ConnectionStatus,
+  {
+    icon: React.ReactNode;
+    label: string;
+    variant: "default" | "secondary" | "destructive" | "outline";
+    color: string;
+  }
+> = {
   disconnected: {
-    icon: <WifiOff className="w-3 h-3" />,
-    label: 'Disconnected',
-    variant: 'secondary',
-    color: 'text-muted-foreground',
+    icon: <WifiOff className="h-3 w-3" />,
+    label: "Disconnected",
+    variant: "secondary",
+    color: "text-muted-foreground",
   },
   connecting: {
-    icon: <Loader2 className="w-3 h-3 animate-spin" />,
-    label: 'Connecting...',
-    variant: 'outline',
-    color: 'text-blue-500',
+    icon: <Loader2 className="h-3 w-3 animate-spin" />,
+    label: "Connecting...",
+    variant: "outline",
+    color: "text-blue-500",
   },
   connected: {
-    icon: <Wifi className="w-3 h-3" />,
-    label: 'Connected',
-    variant: 'default',
-    color: 'text-green-500',
+    icon: <Wifi className="h-3 w-3" />,
+    label: "Connected",
+    variant: "default",
+    color: "text-green-500",
   },
   syncing: {
-    icon: <RefreshCw className="w-3 h-3 animate-spin" />,
-    label: 'Syncing...',
-    variant: 'outline',
-    color: 'text-blue-500',
+    icon: <RefreshCw className="h-3 w-3 animate-spin" />,
+    label: "Syncing...",
+    variant: "outline",
+    color: "text-blue-500",
   },
   error: {
-    icon: <AlertCircle className="w-3 h-3" />,
-    label: 'Error',
-    variant: 'destructive',
-    color: 'text-red-500',
+    icon: <AlertCircle className="h-3 w-3" />,
+    label: "Error",
+    variant: "destructive",
+    color: "text-red-500",
   },
   expired: {
-    icon: <AlertTriangle className="w-3 h-3" />,
-    label: 'Expired',
-    variant: 'destructive',
-    color: 'text-yellow-500',
+    icon: <AlertTriangle className="h-3 w-3" />,
+    label: "Expired",
+    variant: "destructive",
+    color: "text-yellow-500",
   },
 };
 
-export function SimpleFINStatusBadge({
-  status,
-  lastSync,
-  onClick,
-}: SimpleFINStatusBadgeProps) {
+export function SimpleFINStatusBadge({ status, lastSync, onClick }: SimpleFINStatusBadgeProps) {
   const config = statusConfig[status];
 
   const formatLastSync = (date: Date | null | undefined) => {
-    if (!date) return 'Never synced';
+    if (!date) return "Never synced";
     const now = new Date();
     const diff = now.getTime() - date.getTime();
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const days = Math.floor(hours / 24);
 
-    if (hours < 1) return 'Synced just now';
+    if (hours < 1) return "Synced just now";
     if (hours < 24) return `Synced ${hours}h ago`;
-    if (days === 1) return 'Synced yesterday';
+    if (days === 1) return "Synced yesterday";
     return `Synced ${days}d ago`;
   };
 
@@ -123,11 +117,7 @@ export function SimpleFINStatusBadge({
         </TooltipTrigger>
         <TooltipContent>
           <p className="font-medium">SimpleFIN: {config.label}</p>
-          {lastSync && (
-            <p className="text-xs text-muted-foreground">
-              {formatLastSync(lastSync)}
-            </p>
-          )}
+          {lastSync && <p className="text-xs text-muted-foreground">{formatLastSync(lastSync)}</p>}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
@@ -143,18 +133,14 @@ interface SimpleFINSyncProgressProps {
   onCancel?: () => void;
 }
 
-export function SimpleFINSyncProgress({
-  progress,
-  onCancel,
-}: SimpleFINSyncProgressProps) {
+export function SimpleFINSyncProgress({ progress, onCancel }: SimpleFINSyncProgressProps) {
   if (!progress) return null;
 
-  const isComplete = progress.stage === 'complete';
-  const isError = progress.stage === 'error';
+  const isComplete = progress.stage === "complete";
+  const isError = progress.stage === "error";
 
-  const progressPercent = progress.totalAccounts > 0
-    ? (progress.accountIndex / progress.totalAccounts) * 100
-    : 0;
+  const progressPercent =
+    progress.totalAccounts > 0 ? (progress.accountIndex / progress.totalAccounts) * 100 : 0;
 
   return (
     <Card className="w-full">
@@ -162,15 +148,13 @@ export function SimpleFINSyncProgress({
         <CardTitle className="flex items-center justify-between text-base">
           <div className="flex items-center gap-2">
             {isComplete ? (
-              <CheckCircle className="w-5 h-5 text-green-500" />
+              <CheckCircle className="h-5 w-5 text-green-500" />
             ) : isError ? (
-              <XCircle className="w-5 h-5 text-red-500" />
+              <XCircle className="h-5 w-5 text-red-500" />
             ) : (
-              <RefreshCw className="w-5 h-5 animate-spin text-blue-500" />
+              <RefreshCw className="h-5 w-5 animate-spin text-blue-500" />
             )}
-            <span>
-              {isComplete ? 'Sync Complete' : isError ? 'Sync Failed' : 'Syncing...'}
-            </span>
+            <span>{isComplete ? "Sync Complete" : isError ? "Sync Failed" : "Syncing..."}</span>
           </div>
           {!isComplete && !isError && onCancel && (
             <Button variant="ghost" size="sm" onClick={onCancel}>
@@ -215,23 +199,18 @@ interface SimpleFINSyncResultProps {
   onDismiss?: () => void;
 }
 
-export function SimpleFINSyncResult({
-  result,
-  onDismiss,
-}: SimpleFINSyncResultProps) {
+export function SimpleFINSyncResult({ result, onDismiss }: SimpleFINSyncResultProps) {
   return (
-    <Card className={`w-full ${result.success ? 'border-green-500/50' : 'border-red-500/50'}`}>
+    <Card className={`w-full ${result.success ? "border-green-500/50" : "border-red-500/50"}`}>
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center justify-between text-base">
           <div className="flex items-center gap-2">
             {result.success ? (
-              <CheckCircle className="w-5 h-5 text-green-500" />
+              <CheckCircle className="h-5 w-5 text-green-500" />
             ) : (
-              <AlertCircle className="w-5 h-5 text-red-500" />
+              <AlertCircle className="h-5 w-5 text-red-500" />
             )}
-            <span>
-              {result.success ? 'Sync Successful' : 'Sync Completed with Errors'}
-            </span>
+            <span>{result.success ? "Sync Successful" : "Sync Completed with Errors"}</span>
           </div>
           {onDismiss && (
             <Button variant="ghost" size="sm" onClick={onDismiss}>
@@ -239,20 +218,16 @@ export function SimpleFINSyncResult({
             </Button>
           )}
         </CardTitle>
-        <CardDescription>
-          {result.syncedAt.toLocaleString()}
-        </CardDescription>
+        <CardDescription>{result.syncedAt.toLocaleString()}</CardDescription>
       </CardHeader>
 
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
-          <div className="text-center p-3 bg-muted/50 rounded-lg">
-            <p className="text-2xl font-bold text-green-600">
-              {result.totalTransactionsImported}
-            </p>
+          <div className="rounded-lg bg-muted/50 p-3 text-center">
+            <p className="text-2xl font-bold text-green-600">{result.totalTransactionsImported}</p>
             <p className="text-xs text-muted-foreground">Imported</p>
           </div>
-          <div className="text-center p-3 bg-muted/50 rounded-lg">
+          <div className="rounded-lg bg-muted/50 p-3 text-center">
             <p className="text-2xl font-bold text-muted-foreground">
               {result.totalTransactionsSkipped}
             </p>
@@ -265,19 +240,17 @@ export function SimpleFINSyncResult({
           {result.accounts.map((account) => (
             <div
               key={account.accountId}
-              className="flex items-center justify-between text-sm p-2 rounded bg-muted/30"
+              className="flex items-center justify-between rounded bg-muted/30 p-2 text-sm"
             >
               <div className="flex items-center gap-2">
                 {account.success ? (
-                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  <CheckCircle className="h-4 w-4 text-green-500" />
                 ) : (
-                  <XCircle className="w-4 h-4 text-red-500" />
+                  <XCircle className="h-4 w-4 text-red-500" />
                 )}
                 <span>{account.accountName}</span>
               </div>
-              <span className="text-muted-foreground">
-                +{account.transactionsImported}
-              </span>
+              <span className="text-muted-foreground">+{account.transactionsImported}</span>
             </div>
           ))}
         </div>
@@ -287,7 +260,7 @@ export function SimpleFINSyncResult({
           <div className="space-y-1">
             <p className="text-sm font-medium text-red-500">Errors:</p>
             {result.errors.map((error, i) => (
-              <p key={i} className="text-xs text-red-500/80 pl-2">
+              <p key={i} className="pl-2 text-xs text-red-500/80">
                 • {error}
               </p>
             ))}
@@ -299,7 +272,7 @@ export function SimpleFINSyncResult({
           <div className="space-y-1">
             <p className="text-sm font-medium text-yellow-500">Warnings:</p>
             {result.warnings.map((warning, i) => (
-              <p key={i} className="text-xs text-yellow-500/80 pl-2">
+              <p key={i} className="pl-2 text-xs text-yellow-500/80">
                 • {warning}
               </p>
             ))}
@@ -331,10 +304,8 @@ export function SimpleFINAccountList({
     return (
       <Card>
         <CardContent className="py-8 text-center">
-          <Building2 className="w-12 h-12 mx-auto text-muted-foreground/50" />
-          <p className="mt-4 text-muted-foreground">
-            No bank accounts connected
-          </p>
+          <Building2 className="mx-auto h-12 w-12 text-muted-foreground/50" />
+          <p className="mt-4 text-muted-foreground">No bank accounts connected</p>
         </CardContent>
       </Card>
     );
@@ -348,12 +319,11 @@ export function SimpleFINAccountList({
             <div className="flex items-start justify-between">
               <div>
                 <h4 className="font-medium">{account.simplefinAccountName}</h4>
-                <p className="text-sm text-muted-foreground">
-                  {account.institutionName}
-                </p>
-                <div className="flex items-center gap-2 mt-2 text-sm">
+                <p className="text-sm text-muted-foreground">{account.institutionName}</p>
+                <div className="mt-2 flex items-center gap-2 text-sm">
                   <span className="font-medium">
-                    {account.currency} {account.lastBalance.toLocaleString(undefined, {
+                    {account.currency}{" "}
+                    {account.lastBalance.toLocaleString(undefined, {
                       minimumFractionDigits: 2,
                     })}
                   </span>
@@ -366,12 +336,12 @@ export function SimpleFINAccountList({
               <div className="flex items-center gap-2">
                 {account.importEnabled ? (
                   <Badge variant="default" className="gap-1">
-                    <CheckCircle className="w-3 h-3" />
+                    <CheckCircle className="h-3 w-3" />
                     Active
                   </Badge>
                 ) : (
                   <Badge variant="secondary" className="gap-1">
-                    <Clock className="w-3 h-3" />
+                    <Clock className="h-3 w-3" />
                     Paused
                   </Badge>
                 )}
@@ -379,14 +349,14 @@ export function SimpleFINAccountList({
             </div>
 
             {(onSync || onUnlink || onToggleImport) && (
-              <div className="flex gap-2 mt-4 pt-4 border-t">
+              <div className="mt-4 flex gap-2 border-t pt-4">
                 {onSync && (
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => onSync(account.simplefinAccountId)}
                   >
-                    <RefreshCw className="w-3 h-3 mr-1" />
+                    <RefreshCw className="mr-1 h-3 w-3" />
                     Sync
                   </Button>
                 )}
@@ -394,12 +364,11 @@ export function SimpleFINAccountList({
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => onToggleImport(
-                      account.simplefinAccountId,
-                      !account.importEnabled
-                    )}
+                    onClick={() =>
+                      onToggleImport(account.simplefinAccountId, !account.importEnabled)
+                    }
                   >
-                    {account.importEnabled ? 'Pause' : 'Resume'}
+                    {account.importEnabled ? "Pause" : "Resume"}
                   </Button>
                 )}
                 {onUnlink && (
@@ -444,7 +413,7 @@ export function SimpleFINSyncIndicator({
     const minutes = Math.floor(diff / 60000);
     const hours = Math.floor(minutes / 60);
 
-    if (minutes < 1) return 'just now';
+    if (minutes < 1) return "just now";
     if (minutes < 60) return `${minutes}m ago`;
     if (hours < 24) return `${hours}h ago`;
     return date.toLocaleDateString();
@@ -462,21 +431,15 @@ export function SimpleFINSyncIndicator({
             disabled={isSyncing}
           >
             {isSyncing ? (
-              <RefreshCw className="w-4 h-4 animate-spin" />
+              <RefreshCw className="h-4 w-4 animate-spin" />
             ) : (
-              <RefreshCw className="w-4 h-4" />
+              <RefreshCw className="h-4 w-4" />
             )}
-            <span className="hidden sm:inline">
-              {isSyncing ? 'Syncing...' : 'Sync'}
-            </span>
+            <span className="hidden sm:inline">{isSyncing ? "Syncing..." : "Sync"}</span>
           </Button>
         </TooltipTrigger>
         <TooltipContent>
-          {lastSync ? (
-            <p>Last synced: {formatRelativeTime(lastSync)}</p>
-          ) : (
-            <p>Never synced</p>
-          )}
+          {lastSync ? <p>Last synced: {formatRelativeTime(lastSync)}</p> : <p>Never synced</p>}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

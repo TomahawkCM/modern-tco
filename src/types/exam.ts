@@ -62,19 +62,19 @@ export const TCODomain = {
   TROUBLESHOOTING: "Troubleshooting",
 } as const;
 
-export type TCODomain = typeof TCODomain[keyof typeof TCODomain];
+export type TCODomain = (typeof TCODomain)[keyof typeof TCODomain];
 
 /**
  * Database domain format (snake_case) aligned with content population schema
  * Used by: flashcard_library, questions (with domain field), mock exam builder
  */
 export type DatabaseDomain =
-  | 'asking_questions'
-  | 'refining_targeting'
-  | 'taking_action'
-  | 'navigation'
-  | 'reporting'
-  | 'troubleshooting';
+  | "asking_questions"
+  | "refining_targeting"
+  | "taking_action"
+  | "navigation"
+  | "reporting"
+  | "troubleshooting";
 
 // Official TCO Exam Domain Weightings - using core enum only
 export const TCO_DOMAIN_WEIGHTS: Record<TCODomain, number> = {
@@ -98,7 +98,7 @@ export const QuestionCategory = {
   LINEAR_CHAIN: "Linear Chain Architecture",
 } as const;
 
-export type QuestionCategory = typeof QuestionCategory[keyof typeof QuestionCategory];
+export type QuestionCategory = (typeof QuestionCategory)[keyof typeof QuestionCategory];
 
 export const Difficulty = {
   BEGINNER: "Beginner",
@@ -112,7 +112,7 @@ export const Difficulty = {
   expert: "Expert",
 } as const;
 
-export type Difficulty = typeof Difficulty[keyof typeof Difficulty];
+export type Difficulty = (typeof Difficulty)[keyof typeof Difficulty];
 
 // Backwards-compatible alias
 export type QuestionDifficulty = Difficulty;

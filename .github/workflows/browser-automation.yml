@@ -8,9 +8,13 @@ on:
   workflow_dispatch:
     inputs:
       visual_test_pages:
-        description: 'Pages to test (comma-separated, e.g., /welcome,/practice)'
+        description: "Pages to test (comma-separated, e.g., /welcome,/practice)"
         required: false
-        default: ''
+        default: ""
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
   visual-regression:
@@ -25,8 +29,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: "22"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -145,8 +149,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: "22"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci

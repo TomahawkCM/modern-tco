@@ -23,24 +23,24 @@ The Budget App is a **local-first, privacy-focused household budget management s
 
 ## 🛠️ Tech Stack
 
-| Category | Technology | Version | Purpose |
-|----------|------------|---------|---------|
-| **Framework** | Next.js | 16.0.0 | React framework with App Router |
-| **Runtime** | React | 19.2.0 | UI library |
-| **Language** | TypeScript | 5.9.3 | Type safety (strict mode) |
-| **Database** | Dexie.js | 4.2.1 | IndexedDB wrapper |
-| **Storage** | IndexedDB | - | Browser database (~50MB quota) |
-| **UI Components** | shadcn/ui | 3.4.0 | Accessible components (Radix UI) |
-| **Styling** | Tailwind CSS | 3.4.18 | Utility-first CSS |
-| **Icons** | Lucide React | 0.544.0 | Icon library |
-| **Charts** | Recharts | 3.1.2 | Data visualization |
-| **Forms** | React Hook Form | 7.62.0 | Form management |
-| **Validation** | Zod | 4.1.11 | Schema validation |
-| **OCR** | Tesseract.js | 6.0.1 | Receipt scanning |
-| **CSV Parsing** | PapaParse | 5.5.3 | CSV import |
-| **AI** | OpenAI API | 6.3.0 | Chatbot (optional) |
-| **Encryption** | Web Crypto API | - | Client-side encryption |
-| **PWA** | Next.js PWA | - | Service workers, manifest |
+| Category          | Technology      | Version | Purpose                          |
+| ----------------- | --------------- | ------- | -------------------------------- |
+| **Framework**     | Next.js         | 16.0.0  | React framework with App Router  |
+| **Runtime**       | React           | 19.2.0  | UI library                       |
+| **Language**      | TypeScript      | 5.9.3   | Type safety (strict mode)        |
+| **Database**      | Dexie.js        | 4.2.1   | IndexedDB wrapper                |
+| **Storage**       | IndexedDB       | -       | Browser database (~50MB quota)   |
+| **UI Components** | shadcn/ui       | 3.4.0   | Accessible components (Radix UI) |
+| **Styling**       | Tailwind CSS    | 3.4.18  | Utility-first CSS                |
+| **Icons**         | Lucide React    | 0.544.0 | Icon library                     |
+| **Charts**        | Recharts        | 3.1.2   | Data visualization               |
+| **Forms**         | React Hook Form | 7.62.0  | Form management                  |
+| **Validation**    | Zod             | 4.1.11  | Schema validation                |
+| **OCR**           | Tesseract.js    | 6.0.1   | Receipt scanning                 |
+| **CSV Parsing**   | PapaParse       | 5.5.3   | CSV import                       |
+| **AI**            | OpenAI API      | 6.3.0   | Chatbot (optional)               |
+| **Encryption**    | Web Crypto API  | -       | Client-side encryption           |
+| **PWA**           | Next.js PWA     | -       | Service workers, manifest        |
 
 ---
 
@@ -150,12 +150,13 @@ src/
 **13 Tables**:
 
 1. **accounts** - Bank accounts
+
    ```typescript
    interface Account {
      id: string;
      name: string;
      institution: string;
-     type: 'checking' | 'savings' | 'credit';
+     type: "checking" | "savings" | "credit";
      balance: number;
      currency: string;
      createdAt: Date;
@@ -163,6 +164,7 @@ src/
    ```
 
 2. **transactions** - Financial transactions
+
    ```typescript
    interface Transaction {
      id: string;
@@ -171,19 +173,20 @@ src/
      amount: number;
      category: string;
      description: string;
-     type: 'income' | 'expense' | 'transfer';
-     splitFromId?: string;  // For split transactions
+     type: "income" | "expense" | "transfer";
+     splitFromId?: string; // For split transactions
      isSplit: boolean;
      receiptId?: string;
    }
    ```
 
 3. **categories** - Transaction categories
+
    ```typescript
    interface Category {
      id: string;
      name: string;
-     type: 'income' | 'expense';
+     type: "income" | "expense";
      icon?: string;
      color?: string;
      order: number;
@@ -191,33 +194,36 @@ src/
    ```
 
 4. **budgets** - Budget allocations
+
    ```typescript
    interface Budget {
      id: string;
      categoryId: string;
      amount: number;
-     period: 'monthly' | 'yearly';
+     period: "monthly" | "yearly";
      startDate: Date;
      rollover: boolean;
    }
    ```
 
 5. **loans** - Loan tracking
+
    ```typescript
    interface Loan {
      id: string;
      name: string;
-     type: 'mortgage' | 'auto' | 'student' | 'personal';
+     type: "mortgage" | "auto" | "student" | "personal";
      principal: number;
      interestRate: number;
      term: number; // months
      startDate: Date;
      monthlyPayment: number;
-     status: 'active' | 'paid_off';
+     status: "active" | "paid_off";
    }
    ```
 
 6. **loanPayments** - Payment history
+
    ```typescript
    interface LoanPayment {
      id: string;
@@ -242,17 +248,18 @@ src/
 
 ```typescript
 this.version(9).stores({
-  accounts: 'id, name, institution, type',
-  transactions: 'id, accountId, date, category, amount, description, splitFromId, isSplit',
-  categories: 'id, name, type, order',
-  budgets: 'id, categoryId, period, startDate',
-  loans: 'id, name, type, status, createdAt',
-  loanPayments: 'id, loanId, date',
+  accounts: "id, name, institution, type",
+  transactions: "id, accountId, date, category, amount, description, splitFromId, isSplit",
+  categories: "id, name, type, order",
+  budgets: "id, categoryId, period, startDate",
+  loans: "id, name, type, status, createdAt",
+  loanPayments: "id, loanId, date",
   // ... compound indexes for efficient queries
 });
 ```
 
 **Key Features**:
+
 - **Migrations**: Auto-upgrade from v1 → v9
 - **Transactions**: Atomic operations
 - **Queries**: Indexed for performance
@@ -269,17 +276,16 @@ this.version(9).stores({
 ### State Patterns
 
 1. **Local Component State** (90% of cases)
+
    ```tsx
    const [isOpen, setIsOpen] = useState(false);
    ```
 
 2. **Database as Source of Truth**
+
    ```tsx
    useEffect(() => {
-     db.transactions
-       .where('accountId').equals(accountId)
-       .toArray()
-       .then(setTransactions);
+     db.transactions.where("accountId").equals(accountId).toArray().then(setTransactions);
    }, [accountId]);
    ```
 
@@ -291,7 +297,7 @@ this.version(9).stores({
 4. **URL State** (for shareable state)
    ```tsx
    const searchParams = useSearchParams();
-   const filter = searchParams.get('filter'); // /transactions?filter=groceries
+   const filter = searchParams.get("filter"); // /transactions?filter=groceries
    ```
 
 ### Data Flow
@@ -329,7 +335,9 @@ UI Update
     </DialogHeader>
     <TransactionForm onSubmit={handleSubmit} />
     <DialogFooter>
-      <Button variant="outline" onClick={onCancel}>Cancel</Button>
+      <Button variant="outline" onClick={onCancel}>
+        Cancel
+      </Button>
       <Button type="submit">Save</Button>
     </DialogFooter>
   </DialogContent>
@@ -346,7 +354,8 @@ function useTransactions(accountId: string) {
   useEffect(() => {
     setLoading(true);
     db.transactions
-      .where('accountId').equals(accountId)
+      .where("accountId")
+      .equals(accountId)
       .toArray()
       .then(setTransactions)
       .finally(() => setLoading(false));
@@ -359,9 +368,9 @@ function useTransactions(accountId: string) {
 ### 3. Controlled Forms (React Hook Form)
 
 ```tsx
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
 const schema = z.object({
   amount: z.number().positive(),
@@ -372,7 +381,7 @@ const schema = z.object({
 function TransactionForm() {
   const form = useForm({
     resolver: zodResolver(schema),
-    defaultValues: { amount: 0, category: '', description: '' },
+    defaultValues: { amount: 0, category: "", description: "" },
   });
 
   const onSubmit = (data) => {
@@ -392,6 +401,7 @@ function TransactionForm() {
 **File**: `src/lib/encryption/budget-encryption.ts`
 
 **Features**:
+
 - Web Crypto API (AES-GCM 256-bit)
 - User-provided passphrase (PBKDF2 key derivation)
 - Encrypts: transactions, accounts, budgets
@@ -400,7 +410,7 @@ function TransactionForm() {
 **Usage**:
 
 ```typescript
-import { encryptTransaction, decryptTransaction } from '@/lib/encryption';
+import { encryptTransaction, decryptTransaction } from "@/lib/encryption";
 
 // Encrypt before storing
 const encrypted = await encryptTransaction(transaction, userKey);
@@ -444,6 +454,7 @@ const decrypted = await decryptTransaction(encrypted, userKey);
 **File**: `public/sw.js` (generated by Next.js)
 
 **Caching Strategy**:
+
 - **App Shell**: Cache static assets (HTML, CSS, JS)
 - **Offline Fallback**: Show offline page when no network
 - **Runtime Caching**: Cache API responses (if used)
@@ -483,14 +494,14 @@ npm run test
 
 ## 📊 Performance Targets
 
-| Metric | Target | Rationale |
-|--------|--------|-----------|
-| **Lighthouse Performance** | 90+ | Fast page loads |
+| Metric                        | Target    | Rationale                           |
+| ----------------------------- | --------- | ----------------------------------- |
+| **Lighthouse Performance**    | 90+       | Fast page loads                     |
 | **Time to Interactive (TTI)** | <3s on 3G | Seniors often on slower connections |
-| **First Load JS** | <300KB | Minimize bundle size |
-| **Accessibility Score** | 95+ | WCAG 2.2 AA compliance |
-| **Touch Target Size** | ≥48px | Seniors-friendly (WCAG 2.2) |
-| **Base Font Size** | 18px | Readable for older adults |
+| **First Load JS**             | <300KB    | Minimize bundle size                |
+| **Accessibility Score**       | 95+       | WCAG 2.2 AA compliance              |
+| **Touch Target Size**         | ≥48px     | Seniors-friendly (WCAG 2.2)         |
+| **Base Font Size**            | 18px      | Readable for older adults           |
 
 ### Optimizations
 

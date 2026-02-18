@@ -55,17 +55,17 @@ function mapDomain(domain: string): string {
     "TAKING ACTION": "taking-action",
     "NAVIGATION MODULES": "navigation-modules",
     "REPORTING EXPORT": "reporting-export",
-    "AQ": "asking-questions",
-    "RQ": "refining-questions",
-    "TA": "taking-action",
-    "NB": "navigation-modules",
-    "RD": "reporting-export",
-    "foundation": "platform-foundation",
-    "asking": "asking-questions",
-    "refining": "refining-questions",
-    "action": "taking-action",
-    "troubleshooting": "troubleshooting",
-    "advanced": "advanced-topics",
+    AQ: "asking-questions",
+    RQ: "refining-questions",
+    TA: "taking-action",
+    NB: "navigation-modules",
+    RD: "reporting-export",
+    foundation: "platform-foundation",
+    asking: "asking-questions",
+    refining: "refining-questions",
+    action: "taking-action",
+    troubleshooting: "troubleshooting",
+    advanced: "advanced-topics",
   };
 
   const normalized = domain.toLowerCase().replace(/[^a-z0-9]/g, "-");
@@ -121,7 +121,7 @@ async function importToQuestionBank() {
   }
 
   const filePath = args[0];
-  const format = args.find(a => a.startsWith("--format="))?.split("=")[1] || "json";
+  const format = args.find((a) => a.startsWith("--format="))?.split("=")[1] || "json";
 
   // Check file exists
   if (!fs.existsSync(filePath)) {
@@ -157,7 +157,7 @@ async function importToQuestionBank() {
   const byDifficulty: Record<string, number> = {};
   const byType: Record<string, number> = {};
 
-  questions.forEach(q => {
+  questions.forEach((q) => {
     byModule[q.moduleId] = (byModule[q.moduleId] || 0) + 1;
     byDifficulty[q.difficulty] = (byDifficulty[q.difficulty] || 0) + 1;
     byType[q.type] = (byType[q.type] || 0) + 1;
@@ -220,7 +220,10 @@ export const importedQuestionsMetadata = {
   // Instructions
   log("\n📝 Next Steps:", "yellow");
   log("1. Import the questions in your code:", "cyan");
-  log(`   import { importedQuestions } from "@/data/question-bank/imported-${timestamp}";`, "reset");
+  log(
+    `   import { importedQuestions } from "@/data/question-bank/imported-${timestamp}";`,
+    "reset"
+  );
   log(`   import { addQuestions } from "@/lib/questionBank";`, "reset");
   log(`   addQuestions(importedQuestions);`, "reset");
   log("\n2. Or manually add them via localStorage in browser console:", "cyan");
@@ -231,7 +234,7 @@ export const importedQuestionsMetadata = {
 
 // Run
 if (require.main === module) {
-  importToQuestionBank().catch(error => {
+  importToQuestionBank().catch((error) => {
     log(`\n✗ Fatal error: ${error}`, "red");
     process.exit(1);
   });

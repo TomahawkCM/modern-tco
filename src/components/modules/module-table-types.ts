@@ -6,7 +6,6 @@ export type ModuleListRow = {
   estimatedTimeMinutes: number;
   slug: string;
   // Optional fields when user progress is available
-  status?: 'not_started' | 'in_progress' | 'completed' | 'bookmarked';
+  status?: "not_started" | "in_progress" | "completed" | "bookmarked";
   progressPct?: number; // 0-100
 };
-

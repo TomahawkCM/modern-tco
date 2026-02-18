@@ -14,7 +14,7 @@
 // CONSTANTS
 // =============================================================================
 
-const ALGORITHM = 'AES-GCM';
+const ALGORITHM = "AES-GCM";
 const KEY_LENGTH = 256;
 const IV_LENGTH = 12; // 96 bits recommended for GCM
 
@@ -43,25 +43,22 @@ function toArrayBuffer(data: Uint8Array): ArrayBuffer {
  * Derive encryption key from password/secret
  * Uses PBKDF2 for key derivation
  */
-export async function deriveKey(
-  password: string,
-  salt: Uint8Array
-): Promise<CryptoKey> {
+export async function deriveKey(password: string, salt: Uint8Array): Promise<CryptoKey> {
   const encoder = new TextEncoder();
   const passwordKey = await crypto.subtle.importKey(
-    'raw',
+    "raw",
     encoder.encode(password),
-    'PBKDF2',
+    "PBKDF2",
     false,
-    ['deriveKey']
+    ["deriveKey"]
   );
 
   return crypto.subtle.deriveKey(
     {
-      name: 'PBKDF2',
+      name: "PBKDF2",
       salt: toArrayBuffer(salt),
       iterations: 100000,
-      hash: 'SHA-256',
+      hash: "SHA-256",
     },
     passwordKey,
     {
@@ -69,7 +66,7 @@ export async function deriveKey(
       length: KEY_LENGTH,
     },
     false,
-    ['encrypt', 'decrypt']
+    ["encrypt", "decrypt"]
   );
 }
 
@@ -84,7 +81,7 @@ export async function generateKey(): Promise<CryptoKey> {
       length: KEY_LENGTH,
     },
     true,
-    ['encrypt', 'decrypt']
+    ["encrypt", "decrypt"]
   );
 }
 
@@ -92,7 +89,7 @@ export async function generateKey(): Promise<CryptoKey> {
  * Export key to raw format for storage
  */
 export async function exportKey(key: CryptoKey): Promise<Uint8Array> {
-  const exported = await crypto.subtle.exportKey('raw', key);
+  const exported = await crypto.subtle.exportKey("raw", key);
   return new Uint8Array(exported);
 }
 
@@ -101,14 +98,14 @@ export async function exportKey(key: CryptoKey): Promise<Uint8Array> {
  */
 export async function importKey(keyData: Uint8Array): Promise<CryptoKey> {
   return crypto.subtle.importKey(
-    'raw',
+    "raw",
     toArrayBuffer(keyData),
     {
       name: ALGORITHM,
       length: KEY_LENGTH,
     },
     false,
-    ['encrypt', 'decrypt']
+    ["encrypt", "decrypt"]
   );
 }
 
@@ -188,11 +185,11 @@ export async function decryptAccessUrl(
  */
 function bufferToBase64(buffer: Uint8Array): string {
   // Browser environment
-  if (typeof btoa !== 'undefined') {
+  if (typeof btoa !== "undefined") {
     return btoa(String.fromCharCode(...buffer));
   }
   // Node.js environment
-  return Buffer.from(buffer).toString('base64');
+  return Buffer.from(buffer).toString("base64");
 }
 
 /**
@@ -200,7 +197,7 @@ function bufferToBase64(buffer: Uint8Array): string {
  */
 function base64ToBuffer(base64: string): Uint8Array {
   // Browser environment
-  if (typeof atob !== 'undefined') {
+  if (typeof atob !== "undefined") {
     const binary = atob(base64);
     const bytes = new Uint8Array(binary.length);
     for (let i = 0; i < binary.length; i++) {
@@ -209,7 +206,7 @@ function base64ToBuffer(base64: string): Uint8Array {
     return bytes;
   }
   // Node.js environment
-  return new Uint8Array(Buffer.from(base64, 'base64'));
+  return new Uint8Array(Buffer.from(base64, "base64"));
 }
 
 /**
@@ -281,7 +278,7 @@ export class SecureTokenStorage {
     salt: string;
   }> {
     if (!this.key || !this.salt) {
-      throw new Error('Storage not initialized. Call initialize() first.');
+      throw new Error("Storage not initialized. Call initialize() first.");
     }
 
     const { encrypted, iv } = await encryptAccessUrl(accessUrl, this.key);
@@ -297,7 +294,7 @@ export class SecureTokenStorage {
    */
   async retrieve(encrypted: string, iv: string): Promise<string> {
     if (!this.key) {
-      throw new Error('Storage not initialized. Call initialize() first.');
+      throw new Error("Storage not initialized. Call initialize() first.");
     }
 
     return decryptAccessUrl(encrypted, iv, this.key);

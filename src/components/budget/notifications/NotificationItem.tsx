@@ -1,26 +1,18 @@
-'use client';
+"use client";
 
 /**
  * NotificationItem Component
  * Individual notification row in the notification center
  */
 
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import {
-  Bell,
-  Calendar,
-  Target,
-  AlertCircle,
-  X,
-  ExternalLink,
-  Clock,
-} from 'lucide-react';
-import { SnoozeMenu } from './SnoozeMenu';
-import type { InAppNotification, SnoozeDuration } from '@/types/notifications';
-import { useTranslations } from 'next-intl';
-import { formatDistanceToNow } from 'date-fns';
-import Link from 'next/link';
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Bell, Calendar, Target, AlertCircle, X, ExternalLink, Clock } from "lucide-react";
+import { SnoozeMenu } from "./SnoozeMenu";
+import type { InAppNotification, SnoozeDuration } from "@/types/notifications";
+import { useTranslations } from "next-intl";
+import { formatDistanceToNow } from "date-fns";
+import Link from "next/link";
 
 interface NotificationItemProps {
   notification: InAppNotification;
@@ -37,10 +29,10 @@ const typeIcons = {
 };
 
 const priorityColors = {
-  low: 'border-l-slate-400',
-  medium: 'border-l-blue-500',
-  high: 'border-l-orange-500',
-  urgent: 'border-l-red-500',
+  low: "border-s-slate-400",
+  medium: "border-s-blue-500",
+  high: "border-s-orange-500",
+  urgent: "border-s-red-500",
 };
 
 export function NotificationItem({
@@ -49,10 +41,11 @@ export function NotificationItem({
   onSnooze,
   onDismiss,
 }: NotificationItemProps) {
-  const t = useTranslations('notifications');
+  const t = useTranslations("notifications");
+  const tAria = useTranslations("aria");
   const Icon = typeIcons[notification.type] || Bell;
-  const isUnread = notification.status === 'unread';
-  const isSnoozed = notification.status === 'snoozed';
+  const isUnread = notification.status === "unread";
+  const isSnoozed = notification.status === "snoozed";
 
   const handleClick = () => {
     if (isUnread) {
@@ -72,62 +65,56 @@ export function NotificationItem({
   const content = (
     <div
       className={cn(
-        'group relative flex items-start gap-3 p-4 border-l-4 rounded-lg transition-colors',
+        "group relative flex items-start gap-3 rounded-lg border-s-4 p-4 transition-colors",
         priorityColors[notification.priority],
-        isUnread
-          ? 'bg-white/10 hover:bg-white/15'
-          : 'bg-white/5 hover:bg-white/10',
-        isSnoozed && 'opacity-60'
+        isUnread ? "bg-white/10 hover:bg-white/15" : "bg-white/5 hover:bg-white/10",
+        isSnoozed && "opacity-60"
       )}
       onClick={handleClick}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (e.key === "Enter" || e.key === " ") {
           handleClick();
         }
       }}
-      aria-label={`${notification.title}. ${notification.body}`}
+      aria-label={tAria("notificationDescription", { title: notification.title, body: notification.body })}
     >
       {/* Icon */}
       <div
         className={cn(
-          'flex h-10 w-10 shrink-0 items-center justify-center rounded-full',
+          "flex h-10 w-10 shrink-0 items-center justify-center rounded-full",
           isUnread
-            ? 'bg-gradient-to-br from-teal-500/20 to-blue-500/20 text-teal-400'
-            : 'bg-slate-700/50 text-slate-400'
+            ? "bg-gradient-to-br from-teal-500/20 to-blue-500/20 text-teal-400"
+            : "bg-slate-700/50 text-slate-400"
         )}
       >
         <Icon className="h-5 w-5" />
       </div>
 
       {/* Content */}
-      <div className="flex-1 min-w-0">
+      <div className="min-w-0 flex-1">
         <div className="flex items-start justify-between gap-2">
-          <div className="flex-1 min-w-0">
+          <div className="min-w-0 flex-1">
             <p
               className={cn(
-                'text-sm font-medium truncate',
-                isUnread ? 'text-white' : 'text-slate-300'
+                "truncate text-sm font-medium",
+                isUnread ? "text-white" : "text-slate-300"
               )}
             >
               {notification.title}
-              {isUnread && (
-                <span className="ml-2 inline-block h-2 w-2 rounded-full bg-teal-400" />
-              )}
+              {isUnread && <span className="ms-2 inline-block h-2 w-2 rounded-full bg-teal-400" />}
             </p>
-            <p className="mt-0.5 text-sm text-slate-400 line-clamp-2">
-              {notification.body}
-            </p>
+            <p className="mt-0.5 line-clamp-2 text-sm text-slate-400">{notification.body}</p>
           </div>
 
           {/* Dismiss button */}
           <Button
             variant="ghost"
             size="icon"
-            className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+            className="h-6 w-6 opacity-0 transition-opacity group-hover:opacity-100"
             onClick={handleDismiss}
-            aria-label={t('dismiss')}
+            aria-label={t("dismiss")}
           >
             <X className="h-4 w-4" />
           </Button>
@@ -136,7 +123,7 @@ export function NotificationItem({
         {/* Amount (for bill reminders) */}
         {notification.amount !== undefined && (
           <p className="mt-1 text-sm font-medium text-teal-400">
-            {notification.currency || '$'}
+            {notification.currency || "$"}
             {notification.amount.toLocaleString(undefined, {
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
@@ -155,24 +142,17 @@ export function NotificationItem({
           {isSnoozed && notification.snoozedUntil && (
             <span className="flex items-center gap-1">
               <Clock className="h-3 w-3" />
-              {t('snoozedUntil', {
+              {t("snoozedUntil", {
                 time: formatDistanceToNow(new Date(notification.snoozedUntil)),
               })}
             </span>
           )}
 
           {/* Actions */}
-          <div className="ml-auto flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-            {!isSnoozed && (
-              <SnoozeMenu onSnooze={handleSnooze} iconOnly />
-            )}
+          <div className="ms-auto flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+            {!isSnoozed && <SnoozeMenu onSnooze={handleSnooze} iconOnly />}
             {notification.actionUrl && (
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-6 w-6"
-                asChild
-              >
+              <Button variant="ghost" size="icon" className="h-6 w-6" asChild>
                 <Link href={notification.actionUrl}>
                   <ExternalLink className="h-3 w-3" />
                 </Link>

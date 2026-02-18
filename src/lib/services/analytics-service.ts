@@ -50,7 +50,7 @@ class AnalyticsServiceClass {
       event_type: event.type,
       event_timestamp: event.timestamp.toISOString(),
       event_data: event.data, // Store entire data object as JSONB
-    } as TablesInsert<'analytics_events'>;
+    } as TablesInsert<"analytics_events">;
 
     // Cast to any at call-site to avoid overly-strict generated Supabase insert overloads
     const { error } = await (supabase as any).from("analytics_events").insert(payload);
@@ -188,21 +188,17 @@ export const analyticsService = new AnalyticsServiceClass();
 // `AnalyticsService.track(...)`. We bind the instance methods to the class
 // constructor to preserve existing usage without refactoring callers.
 (AnalyticsServiceClass as any).track = analyticsService.track.bind(analyticsService);
-(AnalyticsServiceClass as any).getUserAnalytics = analyticsService.getUserAnalytics.bind(
-  analyticsService
-);
-(AnalyticsServiceClass as any).getContentAnalytics = analyticsService.getContentAnalytics.bind(
-  analyticsService
-);
+(AnalyticsServiceClass as any).getUserAnalytics =
+  analyticsService.getUserAnalytics.bind(analyticsService);
+(AnalyticsServiceClass as any).getContentAnalytics =
+  analyticsService.getContentAnalytics.bind(analyticsService);
 
 // Static signatures for compatibility with call-sites that use the class as a static holder
 (AnalyticsServiceClass as any).track = analyticsService.track.bind(analyticsService);
-(AnalyticsServiceClass as any).getUserAnalytics = analyticsService.getUserAnalytics.bind(
-  analyticsService
-);
-(AnalyticsServiceClass as any).getContentAnalytics = analyticsService.getContentAnalytics.bind(
-  analyticsService
-);
+(AnalyticsServiceClass as any).getUserAnalytics =
+  analyticsService.getUserAnalytics.bind(analyticsService);
+(AnalyticsServiceClass as any).getContentAnalytics =
+  analyticsService.getContentAnalytics.bind(analyticsService);
 
 export { AnalyticsServiceClass as AnalyticsService }; // Keep class alias export for tests/mocks
 export default analyticsService;

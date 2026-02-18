@@ -21,10 +21,10 @@ objectives:
 ---
 
 export const meta = {
-  id: 'module-tanium-platform-foundation',
-  title: 'Tanium Platform Foundation',
+  id: "module-tanium-platform-foundation",
+  title: "Tanium Platform Foundation",
   objectives: 5,
-  domainSlug: 'platform-foundation'
+  domainSlug: "platform-foundation",
 };
 
 # Tanium Platform Foundation: Your Complete Starting Point
@@ -36,13 +36,15 @@ export const meta = {
 Welcome to your Tanium journey! This comprehensive foundation module is designed for absolute beginners with zero prior knowledge of Tanium or endpoint management. By the end of this 3-hour module, you'll have a solid understanding of the Tanium platform and be ready to tackle the certification domains.
 
 <InfoBox title="Learning Path Context">
-  This foundation module serves as the prerequisite for all TCO certification domains. While it doesn't contribute to exam scoring (blueprintWeight: 0), the concepts learned here are essential for success in the certification program.
+  This foundation module serves as the prerequisite for all TCO certification domains. While it
+  doesn't contribute to exam scoring (blueprintWeight: 0), the concepts learned here are essential
+  for success in the certification program.
 </InfoBox>
 
 ## 📚 What You'll Learn (3 Hours Total)
 
 - **Section 1**: What is Tanium? (45 minutes) - Platform overview and architecture
-- **Section 2**: Platform Terminology (45 minutes) - Essential concepts and vocabulary  
+- **Section 2**: Platform Terminology (45 minutes) - Essential concepts and vocabulary
 - **Section 3**: Client-Server Communication (30 minutes) - How Tanium achieves real-time scale
 - **Section 4**: Console Tour (45 minutes) - Interface navigation and core features
 - **Section 5**: Why Tanium is Efficient (15 minutes) - Performance and scalability advantages
@@ -58,13 +60,16 @@ Welcome to your Tanium journey! This comprehensive foundation module is designed
 Before Tanium, enterprise IT faced a fundamental problem: **how do you manage thousands or millions of endpoints in real-time?**
 
 **Traditional Approach Problems**:
+
 - ❌ **Slow**: Data collection took hours or days
 - ❌ **Limited Scale**: Systems broke down with large endpoint counts
 - ❌ **Network Intensive**: Generated massive network traffic
 - ❌ **Stale Data**: Information was outdated by the time it was received
 
 <InfoBox title="Real-World Impact">
-  A Fortune 500 company with 100,000 endpoints might wait 24-48 hours to answer: "How many computers are missing the latest security patch?" By then, attackers could have compromised hundreds of vulnerable systems.
+  A Fortune 500 company with 100,000 endpoints might wait 24-48 hours to answer: "How many computers
+  are missing the latest security patch?" By then, attackers could have compromised hundreds of
+  vulnerable systems.
 </InfoBox>
 
 ### The Tanium Solution: Linear Chain Architecture
@@ -78,39 +83,47 @@ Tanium revolutionized endpoint management with its **Linear Chain Technology** -
 ### Linear Chain Technology Explained
 
 **Traditional Architecture (Hub-and-Spoke)**:
+
 ```
 Server ←→ Endpoint 1
-Server ←→ Endpoint 2  
+Server ←→ Endpoint 2
 Server ←→ Endpoint 3
 ...
 Server ←→ Endpoint 100,000
 ```
-*Result: Server overwhelmed, network congested*
+
+_Result: Server overwhelmed, network congested_
 
 **Tanium Linear Chain Architecture**:
+
 ```
 Server ←→ Endpoint 1 ←→ Endpoint 2 ←→ Endpoint 3 ←→ ... ←→ Endpoint 100,000
 ```
-*Result: Constant network load regardless of scale*
+
+_Result: Constant network load regardless of scale_
 
 ### Benefits of Linear Chain Architecture
 
 #### ⚡ **Speed and Real-Time Response**
+
 - **15-second response time** for queries across millions of endpoints
 - Real-time visibility into endpoint status and changes
 - Immediate action deployment and feedback
 
 #### 📈 **Unlimited Scalability**
+
 - Network load remains constant as endpoints are added
 - Successfully deployed in environments with **5+ million endpoints**
 - Linear performance characteristics regardless of scale
 
-#### 🛡️ **Network Efficiency**  
+#### 🛡️ **Network Efficiency**
+
 - **Less than 0.1%** typical network bandwidth utilization
 - No database sprawl or storage explosion
 - Reduced infrastructure requirements
 
 #### 🎯 **Accuracy and Freshness**
+
 - Data is collected when needed, not stored indefinitely
 - Real-time truth instead of historical snapshots
 - Immediate validation of actions and changes
@@ -119,28 +132,31 @@ Server ←→ Endpoint 1 ←→ Endpoint 2 ←→ Endpoint 3 ←→ ... ←→ E
 
 ### Enterprise Management Tool Comparison
 
-| Capability | Traditional Tools | Tanium Platform |
-|------------|------------------|-----------------|
-| **Query Response Time** | Hours to days | 15 seconds |
-| **Maximum Scale** | 10,000-50,000 endpoints | 5+ million endpoints |
-| **Network Impact** | High (increases with scale) | Less than 0.1% bandwidth |
-| **Data Freshness** | Hours to days old | Real-time |
-| **Action Deployment** | Hours to days | Minutes |
-| **Infrastructure Required** | Extensive (servers, databases) | Minimal |
-| **Deployment Complexity** | High | Moderate |
-| **Total Cost of Ownership** | High | Lower |
+| Capability                  | Traditional Tools              | Tanium Platform          |
+| --------------------------- | ------------------------------ | ------------------------ |
+| **Query Response Time**     | Hours to days                  | 15 seconds               |
+| **Maximum Scale**           | 10,000-50,000 endpoints        | 5+ million endpoints     |
+| **Network Impact**          | High (increases with scale)    | Less than 0.1% bandwidth |
+| **Data Freshness**          | Hours to days old              | Real-time                |
+| **Action Deployment**       | Hours to days                  | Minutes                  |
+| **Infrastructure Required** | Extensive (servers, databases) | Minimal                  |
+| **Deployment Complexity**   | High                           | Moderate                 |
+| **Total Cost of Ownership** | High                           | Lower                    |
 
 ### Real-Time Endpoint Management Concepts
 
 #### **Pull vs Push Model**
+
 - **Traditional**: Systems "push" data to central collectors continuously
 - **Tanium**: Systems "pull" data only when needed, reducing overhead
 
 #### **Question-Based Approach**
+
 - **Traditional**: Pre-configured reports and dashboards
 - **Tanium**: Natural language questions answered in real-time
 
 #### **Action at Scale**
+
 - **Traditional**: Deploy actions to small groups over time
 - **Tanium**: Deploy actions to unlimited endpoints simultaneously
 
@@ -170,13 +186,15 @@ Understanding Tanium terminology is crucial for effective platform use. This sec
 **Built-in Sensor Categories**:
 
 #### **System Information Sensors**
+
 - **Computer Name**: Unique identifier for each endpoint
-- **Operating System**: Windows, macOS, Linux version information  
+- **Operating System**: Windows, macOS, Linux version information
 - **IP Address**: Network identification and location
 - **Uptime**: How long the system has been running
 - **Last Logged In User**: User activity tracking
 
 #### **Security-Related Sensors**
+
 - **Running Processes**: All active processes and applications
 - **Open Ports**: Network ports accepting connections
 - **Installed Applications**: Software inventory management
@@ -184,13 +202,16 @@ Understanding Tanium terminology is crucial for effective platform use. This sec
 - **User Rights**: Permission and privilege information
 
 #### **Performance and Hardware Sensors**
+
 - **CPU Usage**: Processor utilization metrics
 - **Memory Usage**: RAM consumption and availability
 - **Disk Space**: Storage capacity and utilization
 - **Network Interface**: Network adapter configuration
 
 <InfoBox title="Sensor Deep Dive">
-  Tanium includes **500+ built-in sensors** covering virtually every aspect of endpoint management. Sensors can also be customized or created from scratch using PowerShell, bash scripts, or other tools.
+  Tanium includes **500+ built-in sensors** covering virtually every aspect of endpoint management.
+  Sensors can also be customized or created from scratch using PowerShell, bash scripts, or other
+  tools.
 </InfoBox>
 
 ### Questions: Information Requests
@@ -198,11 +219,13 @@ Understanding Tanium terminology is crucial for effective platform use. This sec
 **Definition**: Questions are natural language queries that request specific information from targeted endpoints using sensors.
 
 **Question Anatomy**:
+
 ```
 Get [Sensor] from [Target] where [Condition]
 ```
 
 **Example Questions**:
+
 - `Get Computer Name from all machines`
 - `Get Running Processes from all machines where Computer Name contains "SERVER"`
 - `Get Disk Space from Windows machines where Disk Space ends with "% Free"`
@@ -214,17 +237,20 @@ Get [Sensor] from [Target] where [Condition]
 **Action Categories**:
 
 #### **Software Management Actions**
+
 - Install applications and updates
 - Uninstall unwanted software
 - Configure application settings
 
 #### **Security Actions**
+
 - Deploy security patches
 - Update antivirus definitions
 - Configure firewall rules
 - Isolate compromised endpoints
 
 #### **System Maintenance Actions**
+
 - Clean temporary files
 - Restart services
 - Apply configuration changes
@@ -237,17 +263,20 @@ Get [Sensor] from [Target] where [Condition]
 **Package Types**:
 
 #### **Tanium-Provided Packages**
+
 - **Patch**: Windows, macOS, and Linux patching
 - **Asset**: Hardware and software inventory
 - **Comply**: Configuration and compliance management
 - **Connect**: SIEM and third-party integrations
 
 #### **Community Packages**
+
 - User-contributed solutions
 - Industry-specific tools
 - Custom organizational packages
 
 #### **Custom Packages**
+
 - Developed for specific organizational needs
 - Combine multiple actions and sensors
 - Reusable across different deployments
@@ -257,32 +286,39 @@ Get [Sensor] from [Target] where [Condition]
 ### Tanium Module Categories
 
 #### **Core Platform Modules**
+
 - **Interact**: Real-time endpoint querying and action deployment
 - **Trends**: Historical data analysis and reporting
 - **Connect**: Integration with third-party security tools
 
 #### **Vulnerability and Patch Management**
+
 - **Patch**: Automated patch deployment and management
 - **Asset**: Comprehensive asset inventory and tracking
 - **Comply**: Configuration compliance and remediation
 
 #### **Security and Threat Detection**
+
 - **Threat Response**: Incident response and threat hunting
 - **Reputation**: File and process reputation analysis
 - **Discover**: Network discovery and asset identification
 
 #### **Operational Modules**
+
 - **Deploy**: Software distribution and installation
 - **Direct Connect**: Secure remote endpoint access
 - **Client Management**: Tanium client deployment and updates
 
 <InfoBox title="Module Integration">
-  While each module serves specific functions, they're designed to work together seamlessly. Data collected by one module can be used by others, creating a comprehensive endpoint management ecosystem.
+  While each module serves specific functions, they're designed to work together seamlessly. Data
+  collected by one module can be used by others, creating a comprehensive endpoint management
+  ecosystem.
 </InfoBox>
 
 ## 📚 Comprehensive Glossary of Key Terms
 
 ### **A-C**
+
 - **Action**: An operation that makes changes to endpoints
 - **Asset**: Any hardware or software component in your environment
 - **Client**: The Tanium software installed on managed endpoints
@@ -290,12 +326,14 @@ Get [Sensor] from [Target] where [Condition]
 - **Console**: The web-based interface for interacting with Tanium
 
 ### **D-H**
+
 - **Deploy**: To distribute and install software on endpoints
 - **Endpoint**: Any device connected to the network (computers, servers, mobile devices)
 - **Filter**: Criteria used to narrow down question results
 - **Hash**: A unique identifier for files, used for security analysis
 
 ### **I-P**
+
 - **Interact**: Tanium's core module for real-time querying and actions
 - **Module**: A functional component that extends Tanium capabilities
 - **Natural Language**: Human-readable query format used in Tanium
@@ -303,6 +341,7 @@ Get [Sensor] from [Target] where [Condition]
 - **Patch**: Software update that fixes bugs or security vulnerabilities
 
 ### **Q-Z**
+
 - **Question**: A query that requests information from endpoints
 - **Real-time**: Data that reflects current conditions, not historical snapshots
 - **Sensor**: Component that collects specific information from endpoints
@@ -314,6 +353,7 @@ Get [Sensor] from [Target] where [Condition]
 Understanding how these components work together:
 
 **Information Flow**:
+
 1. **Sensors** collect data from endpoints
 2. **Questions** use sensors to request specific information
 3. **Results** are analyzed to understand endpoint status
@@ -321,8 +361,9 @@ Understanding how these components work together:
 5. **Packages** combine these elements into reusable solutions
 
 **Management Hierarchy**:
+
 1. **Console** provides the user interface
-2. **Modules** organize functionality by use case  
+2. **Modules** organize functionality by use case
 3. **Computer Groups** organize endpoints logically
 4. **Questions and Actions** target specific groups
 5. **Results** inform decision-making and next steps
@@ -351,15 +392,17 @@ The Tanium communication model is fundamentally different from traditional clien
 ### Traditional Hub-and-Spoke Model
 
 **Problems with Traditional Architecture**:
+
 ```
 [Server] ← Query/Response → [Client 1]
-[Server] ← Query/Response → [Client 2]  
+[Server] ← Query/Response → [Client 2]
 [Server] ← Query/Response → [Client 3]
 ...
 [Server] ← Query/Response → [Client N]
 ```
 
 **Issues**:
+
 - ❌ **Server Bottleneck**: Central server overwhelmed with requests
 - ❌ **Network Congestion**: N×2 network connections (query + response for each client)
 - ❌ **Poor Scalability**: Performance degrades as client count increases
@@ -368,6 +411,7 @@ The Tanium communication model is fundamentally different from traditional clien
 ### Tanium's Linear Chain Model
 
 **Efficient Chain Communication**:
+
 ```
 [Server] ↔ [Client 1] ↔ [Client 2] ↔ [Client 3] ↔ ... ↔ [Client N]
          ↓             ↓             ↓                    ↓
@@ -375,6 +419,7 @@ The Tanium communication model is fundamentally different from traditional clien
 ```
 
 **Benefits**:
+
 - ✅ **Constant Load**: Server handles same load regardless of client count
 - ✅ **Efficient Network Use**: Each query traverses the network once
 - ✅ **Linear Scalability**: Performance remains consistent as clients are added
@@ -385,12 +430,14 @@ The Tanium communication model is fundamentally different from traditional clien
 ### Bandwidth Optimization Strategies
 
 #### **Query Propagation**
+
 1. **Single Traversal**: Each question travels through the chain only once
 2. **Intelligent Routing**: Clients automatically find optimal network paths
 3. **Compression**: Data is compressed during transmission
 4. **Batching**: Multiple questions can be combined in single network packets
 
 #### **Response Aggregation**
+
 1. **Smart Collection**: Responses are aggregated as they flow back
 2. **Deduplication**: Identical responses are consolidated
 3. **Summarization**: Large datasets are summarized to reduce bandwidth
@@ -399,28 +446,34 @@ The Tanium communication model is fundamentally different from traditional clien
 ### Real-Time Data Collection Model
 
 #### **Just-in-Time Collection**
+
 - **Traditional**: Continuously collect and store all data
 - **Tanium**: Collect specific data only when requested
 
 **Benefits**:
+
 - **Reduced Storage**: No massive databases to maintain
 - **Current Data**: Information is fresh and accurate
 - **Lower Infrastructure Cost**: Minimal storage and processing requirements
 - **Better Performance**: No database queries or index maintenance
 
 #### **Dynamic Targeting**
+
 - **Traditional**: Pre-defined groups with static membership
 - **Tanium**: Dynamic targeting based on real-time conditions
 
 **Example**:
+
 ```
-Get Installed Applications from all machines where 
-  Operating System contains "Windows 10" and 
+Get Installed Applications from all machines where
+  Operating System contains "Windows 10" and
   Last Reboot is older than "7 days"
 ```
 
 <InfoBox title="Network Impact Reality">
-  In a typical enterprise deployment with 50,000 endpoints, Tanium consumes less than 0.1% of available network bandwidth, even during peak query activity. Traditional tools often consume 10-20% or more.
+  In a typical enterprise deployment with 50,000 endpoints, Tanium consumes less than 0.1% of
+  available network bandwidth, even during peak query activity. Traditional tools often consume
+  10-20% or more.
 </InfoBox>
 
 ## 🏗️ Scalability Architecture
@@ -428,12 +481,14 @@ Get Installed Applications from all machines where
 ### How Tanium Handles Scale
 
 #### **Linear Performance Characteristics**
+
 - **10 Endpoints**: 15-second response time
-- **1,000 Endpoints**: 15-second response time  
+- **1,000 Endpoints**: 15-second response time
 - **100,000 Endpoints**: 15-second response time
 - **1,000,000+ Endpoints**: 15-second response time
 
 #### **Zone-Based Architecture**
+
 For very large deployments, Tanium uses **Zones** to organize network segments:
 
 ```
@@ -445,6 +500,7 @@ Internet Cloud
 ```
 
 **Zone Benefits**:
+
 - **Network Segmentation**: Respect existing network boundaries
 - **Geographic Distribution**: Place servers close to endpoint populations
 - **Fault Isolation**: Problems in one zone don't affect others
@@ -453,12 +509,14 @@ Internet Cloud
 ### Communication Security
 
 #### **Encrypted Communications**
+
 - **TLS Encryption**: All client-server communications are encrypted
 - **Certificate Validation**: Clients verify server identity
 - **Mutual Authentication**: Servers verify client identity
 - **Data Integrity**: Communications are protected against tampering
 
 #### **Network Resilience**
+
 - **Automatic Failover**: Clients automatically connect to backup servers
 - **Self-Healing Chains**: Broken chain links are automatically bypassed
 - **Network Discovery**: Clients automatically discover optimal network paths
@@ -486,7 +544,9 @@ The Tanium Console is your primary interface for all platform interactions. This
 ### Main Interface Components
 
 #### **Top Navigation Bar**
+
 Located at the very top of the console:
+
 - **Tanium Logo**: Returns to home dashboard
 - **Module Selector**: Quick access to installed modules
 - **User Menu**: Account settings, preferences, and logout
@@ -494,21 +554,27 @@ Located at the very top of the console:
 - **Notifications**: System alerts and status updates
 
 #### **Left Sidebar Navigation**
+
 Primary navigation for current module:
+
 - **Dashboard**: Module-specific overview and metrics
 - **Main Functions**: Core module capabilities
 - **Administration**: Module configuration and settings
 - **Expand/Collapse Toggle**: Hide sidebar for more screen space
 
 #### **Content Area**
+
 Main working space:
+
 - **Page Headers**: Current location and navigation breadcrumbs
 - **Action Buttons**: Primary actions for current page
 - **Data Tables**: Results, configurations, and information displays
 - **Forms**: Input areas for questions, actions, and configurations
 
 #### **Status Bar** (bottom)
+
 System status information:
+
 - **Connection Status**: Client connectivity indicators
 - **Performance Metrics**: Query execution status
 - **Background Tasks**: Running operations and progress
@@ -518,19 +584,23 @@ System status information:
 When you first log into Tanium, you see the **Home Dashboard**:
 
 #### **System Health Widgets**
+
 - **Endpoint Status**: Online/offline client summary
-- **Recent Activity**: Latest questions, actions, and alerts  
+- **Recent Activity**: Latest questions, actions, and alerts
 - **Performance Metrics**: System responsiveness and utilization
 - **License Status**: Usage against available licenses
 
 #### **Quick Actions Panel**
+
 - **Ask a Question**: Launch Interact module for immediate queries
 - **Deploy an Action**: Quick access to common deployment tasks
 - **View Reports**: Access saved reports and scheduled outputs
 - **Module Access**: Icons for installed modules
 
 <InfoBox title="Navigation Tip">
-  The console is designed for efficiency. Most common tasks are accessible within 2-3 clicks from any location. Use the breadcrumb navigation to understand your current location and easily navigate back.
+  The console is designed for efficiency. Most common tasks are accessible within 2-3 clicks from
+  any location. Use the breadcrumb navigation to understand your current location and easily
+  navigate back.
 </InfoBox>
 
 ## 🏢 Primary Modules Overview
@@ -538,25 +608,30 @@ When you first log into Tanium, you see the **Home Dashboard**:
 ### Core Platform Modules
 
 #### **Interact Module** - Real-Time Operations
+
 **Purpose**: Real-time endpoint querying and action deployment
 
 **Key Features**:
+
 - **Question Builder**: Natural language query construction
-- **Live Results**: Real-time response streaming  
+- **Live Results**: Real-time response streaming
 - **Action Deployment**: Deploy actions to question results
 - **Saved Questions**: Store and share frequently used queries
 - **Scheduled Questions**: Automate regular data collection
 
 **Common Use Cases**:
+
 - Investigate security incidents
 - Deploy emergency patches
 - Gather compliance information
 - Perform system maintenance tasks
 
 #### **Trends Module** - Historical Analysis
+
 **Purpose**: Historical data analysis and trending
 
 **Key Features**:
+
 - **Data Retention**: Store question results over time
 - **Trend Analysis**: Visualize changes and patterns
 - **Reporting**: Create scheduled reports and dashboards
@@ -564,15 +639,18 @@ When you first log into Tanium, you see the **Home Dashboard**:
 - **Alerting**: Set thresholds and notifications
 
 **Common Use Cases**:
+
 - Track patch compliance over time
 - Monitor system performance trends
 - Generate executive dashboards
 - Analyze user behavior patterns
 
 #### **Connect Module** - Third-Party Integration
+
 **Purpose**: Integration with SIEM, ticketing, and other systems
 
 **Key Features**:
+
 - **Data Feeds**: Send Tanium data to external systems
 - **Event Processing**: React to external system events
 - **API Integration**: Bi-directional data exchange
@@ -580,6 +658,7 @@ When you first log into Tanium, you see the **Home Dashboard**:
 - **Filtering**: Send only relevant data to external systems
 
 **Common Use Cases**:
+
 - Feed endpoint data to SIEM systems
 - Create tickets from security incidents
 - Synchronize with asset management systems
@@ -588,21 +667,27 @@ When you first log into Tanium, you see the **Home Dashboard**:
 ### Specialized Modules
 
 #### **Patch Module** - Update Management
+
 **Primary Functions**:
+
 - **Vulnerability Scanning**: Identify missing patches
 - **Patch Deployment**: Automated update installation
 - **Maintenance Windows**: Schedule patching activities
 - **Compliance Reporting**: Track patch status across environment
 
 #### **Asset Module** - Inventory Management
+
 **Primary Functions**:
+
 - **Hardware Inventory**: Track physical device specifications
 - **Software Inventory**: Monitor installed applications and licenses
 - **Asset Discovery**: Identify new devices on the network
 - **Change Tracking**: Monitor asset modifications over time
 
 #### **Comply Module** - Configuration Management
+
 **Primary Functions**:
+
 - **Configuration Baselines**: Define expected system configurations
 - **Compliance Monitoring**: Continuously assess configuration drift
 - **Remediation**: Automatically fix configuration issues
@@ -613,16 +698,19 @@ When you first log into Tanium, you see the **Home Dashboard**:
 ### User Role Hierarchy
 
 #### **Administrator Roles**
+
 - **Tanium Administrator**: Full platform access and configuration
 - **Module Administrator**: Administrative access within specific modules
 - **Content Administrator**: Manage questions, actions, and packages
 
 #### **Operator Roles**
+
 - **Tanium Operator**: Standard operational access to most functions
 - **Module Operator**: Operational access within specific modules
 - **Read-Only Operator**: View-only access to data and reports
 
 #### **Specialized Roles**
+
 - **Question Author**: Create and modify questions and sensors
 - **Action Author**: Create and modify actions and packages
 - **Report Viewer**: Access to specific reports and dashboards
@@ -630,7 +718,9 @@ When you first log into Tanium, you see the **Home Dashboard**:
 ### Permission Management
 
 #### **Granular Permissions**
+
 Access control operates at multiple levels:
+
 - **Module Access**: Which modules users can access
 - **Function Access**: Which functions within modules are available
 - **Data Access**: Which endpoints and data users can see
@@ -638,14 +728,17 @@ Access control operates at multiple levels:
 - **Administrative Rights**: Which configuration changes are allowed
 
 #### **Computer Group Restrictions**
+
 Users can be limited to specific endpoint groups:
+
 - **Geographic Limitations**: Access only endpoints in specific locations
 - **Departmental Boundaries**: See only endpoints for specific business units
 - **Security Zones**: Restrict access based on security classifications
 - **Functional Groupings**: Access endpoints relevant to job function
 
 <InfoBox title="Security Best Practice">
-  Follow the principle of least privilege - users should have only the minimum access required to perform their job functions. Start with restrictive permissions and add access as needed.
+  Follow the principle of least privilege - users should have only the minimum access required to
+  perform their job functions. Start with restrictive permissions and add access as needed.
 </InfoBox>
 
 ## 🎛️ User Interface Components
@@ -653,6 +746,7 @@ Users can be limited to specific endpoint groups:
 ### Interactive Elements
 
 #### **Question Interface**
+
 - **Query Box**: Natural language input area
 - **Sensor Browser**: Explore available sensors and their parameters
 - **Target Selector**: Choose which endpoints to query
@@ -660,6 +754,7 @@ Users can be limited to specific endpoint groups:
 - **Action Buttons**: Deploy actions based on query results
 
 #### **Action Interface**
+
 - **Package Selector**: Choose pre-built or custom packages
 - **Parameter Configuration**: Set action-specific options
 - **Target Confirmation**: Review which endpoints will receive the action
@@ -667,6 +762,7 @@ Users can be limited to specific endpoint groups:
 - **Result Validation**: Confirm successful action completion
 
 #### **Configuration Interface**
+
 - **Settings Forms**: Module and system configuration options
 - **User Management**: Account creation and permission assignment
 - **Content Library**: Manage questions, actions, and packages
@@ -675,6 +771,7 @@ Users can be limited to specific endpoint groups:
 ### Data Visualization
 
 #### **Table Views**
+
 - **Sortable Columns**: Click headers to sort data
 - **Filtering**: Search and filter results
 - **Export Options**: CSV, Excel, PDF export capabilities
@@ -682,6 +779,7 @@ Users can be limited to specific endpoint groups:
 - **Column Customization**: Show/hide columns as needed
 
 #### **Dashboard Widgets**
+
 - **Status Indicators**: Quick health and status summaries
 - **Charts and Graphs**: Visual representation of trends and metrics
 - **Progress Bars**: Show completion status for ongoing operations
@@ -690,12 +788,14 @@ Users can be limited to specific endpoint groups:
 ### Customization Options
 
 #### **Personal Preferences**
+
 - **Theme Selection**: Light or dark interface themes
 - **Layout Options**: Adjust sidebar and panel configurations
 - **Default Views**: Set preferred starting pages and displays
 - **Notification Settings**: Control alert and notification preferences
 
 #### **Dashboard Customization**
+
 - **Widget Selection**: Choose which widgets appear on dashboards
 - **Layout Arrangement**: Organize widgets for optimal workflow
 - **Data Sources**: Configure data feeds for dashboard widgets
@@ -723,6 +823,7 @@ Understanding why Tanium outperforms traditional endpoint management tools is cr
 ### Bandwidth Efficiency
 
 #### **Traditional Tool Network Impact**
+
 ```
 Typical enterprise with 50,000 endpoints:
 - Continuous data collection: 10-20% of network bandwidth
@@ -732,6 +833,7 @@ Typical enterprise with 50,000 endpoints:
 ```
 
 #### **Tanium Network Impact**
+
 ```
 Same 50,000 endpoint environment:
 - Query propagation: Less than 0.01% bandwidth during execution
@@ -743,22 +845,27 @@ Same 50,000 endpoint environment:
 ### Communication Efficiency Principles
 
 #### **Just-in-Time Data Collection**
+
 - **Traditional**: Collect everything, store everything, query databases
 - **Tanium**: Collect only what's needed, when it's needed
 
 **Real-World Impact**:
+
 - **95% reduction** in network traffic
-- **99% reduction** in storage requirements  
+- **99% reduction** in storage requirements
 - **90% reduction** in server infrastructure needs
 
 #### **Linear Chain Advantages**
+
 1. **Constant Complexity**: O(1) network load regardless of endpoint count
 2. **Self-Organizing**: Clients automatically optimize communication paths
 3. **Fault Tolerant**: Automatic routing around failed or slow endpoints
 4. **Bandwidth Adaptive**: Communication adjusts to available network capacity
 
 <InfoBox title="Scalability Mathematics">
-  With traditional tools, adding 10x more endpoints typically requires 10x more network bandwidth and 10x more server capacity. With Tanium, adding 10x more endpoints has virtually no impact on network utilization or server load.
+  With traditional tools, adding 10x more endpoints typically requires 10x more network bandwidth
+  and 10x more server capacity. With Tanium, adding 10x more endpoints has virtually no impact on
+  network utilization or server load.
 </InfoBox>
 
 ## 📊 Scalability Principles
@@ -766,26 +873,30 @@ Same 50,000 endpoint environment:
 ### Linear Performance Characteristics
 
 #### **Response Time Consistency**
+
 Tanium maintains consistent 15-second response times regardless of scale:
 
 | Endpoint Count | Traditional Tool Response | Tanium Response |
-|----------------|--------------------------|-----------------|
-| 1,000 | 5-10 minutes | 15 seconds |
-| 10,000 | 30-60 minutes | 15 seconds |
-| 100,000 | 2-8 hours | 15 seconds |
-| 1,000,000+ | 24+ hours (often fails) | 15 seconds |
+| -------------- | ------------------------- | --------------- |
+| 1,000          | 5-10 minutes              | 15 seconds      |
+| 10,000         | 30-60 minutes             | 15 seconds      |
+| 100,000        | 2-8 hours                 | 15 seconds      |
+| 1,000,000+     | 24+ hours (often fails)   | 15 seconds      |
 
 #### **Infrastructure Requirements**
+
 Comparison for managing 100,000 endpoints:
 
 **Traditional Architecture**:
+
 - **Database servers**: 4-8 high-end servers
-- **Application servers**: 6-12 servers  
+- **Application servers**: 6-12 servers
 - **Storage**: 50-100 TB for historical data
 - **Network**: Dedicated high-bandwidth connections
 - **Personnel**: 8-12 full-time administrators
 
 **Tanium Architecture**:
+
 - **Tanium servers**: 2-4 standard servers (with redundancy)
 - **Storage**: 1-5 TB for configuration and temporary data
 - **Network**: Standard enterprise networking
@@ -796,18 +907,22 @@ Comparison for managing 100,000 endpoints:
 #### **Operational Speed Advantages**
 
 **Security Incident Response**:
+
 - **Traditional**: "We'll have the containment report ready tomorrow"
 - **Tanium**: "Here's the real-time status across all endpoints - threat contained"
 
 **Patch Management**:
+
 - **Traditional**: "Patch deployment will take 2-4 weeks to complete"
 - **Tanium**: "Patches deployed to all eligible systems in 2-4 hours"
 
 **Compliance Auditing**:
+
 - **Traditional**: "The compliance report will be ready in 1-2 weeks"
 - **Tanium**: "Here's the real-time compliance status right now"
 
 #### **Decision-Making Speed**
+
 - **Traditional**: Decisions based on hours or days-old data
 - **Tanium**: Decisions based on current, real-time information
 
@@ -818,12 +933,14 @@ Comparison for managing 100,000 endpoints:
 ### Technical Advantages
 
 #### **Architecture Benefits**
+
 - **Linear Chain**: Constant performance regardless of scale
 - **Real-Time Processing**: No batch processing delays
 - **Minimal Infrastructure**: Reduced hardware and maintenance costs
 - **Self-Organizing**: Automatic optimization and fault tolerance
 
-#### **Operational Benefits**  
+#### **Operational Benefits**
+
 - **Faster Decisions**: Real-time data enables immediate action
 - **Reduced Complexity**: Simpler architecture is easier to manage
 - **Lower Costs**: Significant reduction in infrastructure and personnel needs
@@ -832,25 +949,30 @@ Comparison for managing 100,000 endpoints:
 ### Business Impact
 
 #### **Cost Savings**
+
 - **Infrastructure**: 60-80% reduction in server and storage costs
 - **Personnel**: 50-70% reduction in administrative overhead
 - **Network**: 95% reduction in bandwidth utilization
 - **Licensing**: Simpler licensing model with predictable costs
 
 #### **Risk Reduction**
+
 - **Security**: Faster threat detection and response
 - **Compliance**: Real-time compliance monitoring and reporting
 - **Downtime**: Proactive issue identification and resolution
 - **Operational**: Reduced complexity means fewer points of failure
 
 #### **Competitive Advantage**
+
 - **Agility**: Respond to changes and threats in minutes, not hours
 - **Visibility**: Complete real-time visibility into entire environment
 - **Efficiency**: Focus on value-added activities instead of maintenance
 - **Innovation**: Platform enables new capabilities and use cases
 
 <InfoBox title="Success Metrics">
-  Organizations implementing Tanium typically see: 15x faster query response times, 10x reduction in infrastructure costs, 5x improvement in security incident response speed, and 3x increase in IT team productivity.
+  Organizations implementing Tanium typically see: 15x faster query response times, 10x reduction in
+  infrastructure costs, 5x improvement in security incident response speed, and 3x increase in IT
+  team productivity.
 </InfoBox>
 
 ---
@@ -889,30 +1011,35 @@ Congratulations! You have completed the Tanium Platform Foundation module. You s
 With this foundation complete, you're prepared to tackle the five TCO certification domains:
 
 #### **Domain 1: Asking Questions** (22% of exam)
+
 - Natural language query construction
 - Sensor mastery and custom sensor creation
 - Saved question management and optimization
 - **Estimated Time**: 8-10 hours
 
 #### **Domain 2: Refining Questions and Targeting** (23% of exam)
+
 - Advanced filtering and targeting techniques
 - Computer group management
 - Query performance optimization
 - **Estimated Time**: 8-10 hours
 
 #### **Domain 3: Taking Action** (15% of exam)
+
 - Package deployment and management
 - Action creation and customization
 - Safety procedures and validation
 - **Estimated Time**: 6-8 hours
 
 #### **Domain 4: Navigation and Module Functions** (23% of exam)
+
 - Advanced console navigation
 - Module-specific functionality
 - Administrative procedures
 - **Estimated Time**: 8-10 hours
 
 #### **Domain 5: Reporting and Data Export** (17% of exam)
+
 - Report creation and scheduling
 - Data export and analysis
 - Dashboard creation and sharing
@@ -940,12 +1067,14 @@ The concepts learned in this module will appear throughout the certification exa
 ### Success Strategies
 
 #### **Build on This Foundation**
+
 - Reference this module when advanced concepts seem unclear
 - Practice using correct terminology in all communications
 - Think about how architectural principles apply to specific use cases
 - Connect efficiency benefits to business value propositions
 
 #### **Maintain Learning Momentum**
+
 - Schedule consistent study time rather than cramming
 - Complete practice exercises in each domain
 - Take notes on challenging concepts
@@ -956,16 +1085,19 @@ The concepts learned in this module will appear throughout the certification exa
 ## 📚 Additional Resources
 
 ### Official Documentation
+
 - **Tanium Documentation Portal**: Complete technical documentation
 - **Tanium Community**: User forums and best practices
 - **Knowledge Base**: Troubleshooting and FAQ resources
 
 ### Continued Learning
+
 - **Advanced Tanium Courses**: Deep-dive technical training
 - **Industry Certifications**: Complement TCO with broader security certifications
 - **Practical Experience**: Request access to lab environments for hands-on practice
 
 ### Support and Community
+
 - **Study Groups**: Connect with other TCO candidates
 - **Mentorship**: Find experienced Tanium professionals for guidance
 - **Practice Partners**: Work through scenarios with peers
@@ -987,6 +1119,7 @@ The concepts learned in this module will appear throughout the certification exa
 The Tanium Server is the central nervous system of the entire platform, orchestrating all operations across the enterprise.
 
 **Key Responsibilities**:
+
 - Question processing and distribution
 - Action package deployment
 - Client registration and management
@@ -996,6 +1129,7 @@ The Tanium Server is the central nervous system of the entire platform, orchestr
 - WebSocket management for real-time communication
 
 **High Availability Configuration**:
+
 ```yaml
 Tanium Server Cluster:
   Primary Server:
@@ -1024,6 +1158,7 @@ Tanium Server Cluster:
 ```
 
 **Performance Specifications**:
+
 ```
 Small Deployment (1-5,000 endpoints):
   - CPU: 8 cores
@@ -1050,6 +1185,7 @@ Large Deployment (50,000+ endpoints):
 Zone Servers act as regional aggregation points, reducing WAN traffic and improving scalability.
 
 **Zone Server Functions**:
+
 - Linear chain forwarding
 - Answer aggregation
 - Package caching
@@ -1057,6 +1193,7 @@ Zone Servers act as regional aggregation points, reducing WAN traffic and improv
 - Regional failover
 
 **Deployment Strategies**:
+
 ```python
 def calculate_zone_servers(endpoints, locations, wan_quality):
     """
@@ -1082,6 +1219,7 @@ def calculate_zone_servers(endpoints, locations, wan_quality):
 ```
 
 **Zone Server Chain Optimization**:
+
 ```
 Linear Chain Example:
   Endpoint → Zone Server 1 → Zone Server 2 → Tanium Server
@@ -1104,6 +1242,7 @@ Configuration:
 The Tanium Client is the lightweight agent installed on every managed endpoint.
 
 **Client Architecture**:
+
 ```
 Tanium Client Components:
 ├── Core Service (TaniumClient.exe/taniumclient)
@@ -1126,6 +1265,7 @@ Tanium Client Components:
 ```
 
 **Client Communication Protocol**:
+
 ```python
 class TaniumClientProtocol:
     def __init__(self):
@@ -1163,6 +1303,7 @@ class TaniumClientProtocol:
 ```
 
 **Client Performance Metrics**:
+
 ```
 Resource Usage:
   - CPU: &lt;1% idle, 2-5% during questions
@@ -1184,6 +1325,7 @@ Tuning Parameters:
 #### Core Modules Overview
 
 **1. Interact Module**
+
 ```yaml
 Purpose: Real-time endpoint interrogation
 Key Features:
@@ -1206,6 +1348,7 @@ Integrations:
 ```
 
 **2. Patch Module**
+
 ```yaml
 Purpose: Vulnerability and patch management
 Components:
@@ -1214,8 +1357,7 @@ Components:
   - Deployment: Staged rollout
   - Reporting: Compliance dashboards
 
-Workflow:
-  1. Import patches from vendors
+Workflow: 1. Import patches from vendors
   2. Scan endpoints for applicability
   3. Create deployment packages
   4. Target computer groups
@@ -1231,6 +1373,7 @@ Best Practices:
 ```
 
 **3. Threat Response Module**
+
 ```yaml
 Purpose: Security incident detection and response
 Capabilities:
@@ -1256,6 +1399,7 @@ Response Actions:
 ```
 
 **4. Comply Module**
+
 ```yaml
 Purpose: Compliance and configuration management
 Frameworks:
@@ -1272,8 +1416,7 @@ Components:
   - Reporting Engine
   - Audit Trail
 
-Workflow:
-  1. Define configuration items
+Workflow: 1. Define configuration items
   2. Create compliance policies
   3. Scan endpoints
   4. Identify non-compliance
@@ -1286,6 +1429,7 @@ Workflow:
 #### PostgreSQL Implementation
 
 **Database Schema Overview**:
+
 ```sql
 -- Core Tables Structure
 CREATE SCHEMA tanium;
@@ -1350,6 +1494,7 @@ CREATE INDEX idx_computers_os ON tanium.computers(operating_system);
 ```
 
 **Database Performance Tuning**:
+
 ```sql
 -- PostgreSQL configuration for Tanium
 -- postgresql.conf optimizations
@@ -1382,6 +1527,7 @@ autovacuum_analyze_scale_factor = 0.02
 ```
 
 **Backup and Recovery Strategy**:
+
 ```bash
 #!/bin/bash
 # Tanium database backup script
@@ -1464,6 +1610,7 @@ cleanup_backups
 #### Certificate Management
 
 **PKI Infrastructure**:
+
 ```
 Tanium PKI Hierarchy:
 ├── Root CA (Offline)
@@ -1481,6 +1628,7 @@ Tanium PKI Hierarchy:
 ```
 
 **Certificate Deployment Process**:
+
 ```python
 def deploy_certificates(environment):
     """
@@ -1525,6 +1673,7 @@ def deploy_certificates(environment):
 #### Authentication and Authorization
 
 **SAML 2.0 Integration**:
+
 ```xml
 <!-- Tanium SAML Configuration -->
 <EntityDescriptor entityID="https://tanium.company.com">
@@ -1552,6 +1701,7 @@ def deploy_certificates(environment):
 ```
 
 **LDAP/Active Directory Integration**:
+
 ```python
 class TaniumLDAPConfig:
     def __init__(self):
@@ -1586,6 +1736,7 @@ class TaniumLDAPConfig:
 #### Port and Protocol Requirements
 
 **Complete Port Matrix**:
+
 ```
 Tanium Communication Ports:
 
@@ -1621,6 +1772,7 @@ Administrative Access:
 ```
 
 **Bandwidth Calculations**:
+
 ```python
 def calculate_bandwidth_requirements(endpoints, questions_per_hour, avg_result_size):
     """
@@ -1651,6 +1803,7 @@ def calculate_bandwidth_requirements(endpoints, questions_per_hour, avg_result_s
 #### Firewall and Proxy Configuration
 
 **Firewall Rules Template**:
+
 ```bash
 #!/bin/bash
 # Tanium firewall configuration script
@@ -1678,6 +1831,7 @@ firewall-cmd --zone=tanium --list-all
 ```
 
 **Proxy Configuration**:
+
 ```xml
 <!-- Tanium Client Proxy Settings -->
 <configuration>
@@ -1702,6 +1856,7 @@ firewall-cmd --zone=tanium --list-all
 #### Server Tuning
 
 **Operating System Optimization**:
+
 ```bash
 #!/bin/bash
 # Linux kernel tuning for Tanium Server
@@ -1743,6 +1898,7 @@ EOF
 ```
 
 **Database Query Optimization**:
+
 ```sql
 -- Tanium query performance optimization
 
@@ -1802,6 +1958,7 @@ SELECT cron.schedule('partition-maintenance', '0 0 1 * *',
 #### Business Continuity Planning
 
 **Recovery Objectives**:
+
 ```yaml
 RTO (Recovery Time Objective): 4 hours
 RPO (Recovery Point Objective): 1 hour
@@ -1824,6 +1981,7 @@ Tiers:
 ```
 
 **Disaster Recovery Procedures**:
+
 ```python
 class TaniumDisasterRecovery:
     def __init__(self):
@@ -1885,6 +2043,7 @@ class TaniumDisasterRecovery:
 #### Regulatory Compliance
 
 **GDPR Compliance**:
+
 ```python
 class TaniumGDPRCompliance:
     def __init__(self):
@@ -1931,6 +2090,7 @@ class TaniumGDPRCompliance:
 ```
 
 **SOX Compliance**:
+
 ```sql
 -- SOX compliance audit queries
 
@@ -1982,6 +2142,7 @@ ORDER BY change_date DESC;
 #### SIEM Integration
 
 **Splunk Integration**:
+
 ```python
 class TaniumSplunkConnector:
     def __init__(self):
@@ -2047,61 +2208,62 @@ class TaniumSplunkConnector:
 #### ServiceNow Integration
 
 **CMDB Synchronization**:
+
 ```javascript
 // ServiceNow Integration Script
 var TaniumCMDBSync = Class.create();
 TaniumCMDBSync.prototype = {
-    initialize: function() {
-        this.taniumAPI = 'https://tanium.company.com/api/v2';
-        this.mapping = {
-            'Computer Name': 'name',
-            'Operating System': 'os',
-            'IP Address': 'ip_address',
-            'Serial Number': 'serial_number',
-            'Model': 'model_id',
-            'Last Seen': 'last_discovered'
-        };
-    },
+  initialize: function () {
+    this.taniumAPI = "https://tanium.company.com/api/v2";
+    this.mapping = {
+      "Computer Name": "name",
+      "Operating System": "os",
+      "IP Address": "ip_address",
+      "Serial Number": "serial_number",
+      Model: "model_id",
+      "Last Seen": "last_discovered",
+    };
+  },
 
-    syncComputers: function() {
-        var computers = this.getTaniumComputers();
-        var results = {
-            created: 0,
-            updated: 0,
-            errors: 0
-        };
+  syncComputers: function () {
+    var computers = this.getTaniumComputers();
+    var results = {
+      created: 0,
+      updated: 0,
+      errors: 0,
+    };
 
-        computers.forEach(function(computer) {
-            try {
-                var ci = this.findOrCreateCI(computer);
-                if (ci.isNewRecord()) {
-                    results.created++;
-                } else {
-                    results.updated++;
-                }
-                this.updateCI(ci, computer);
-            } catch (e) {
-                results.errors++;
-                gs.error('Failed to sync: ' + computer['Computer Name']);
-            }
-        }, this);
+    computers.forEach(function (computer) {
+      try {
+        var ci = this.findOrCreateCI(computer);
+        if (ci.isNewRecord()) {
+          results.created++;
+        } else {
+          results.updated++;
+        }
+        this.updateCI(ci, computer);
+      } catch (e) {
+        results.errors++;
+        gs.error("Failed to sync: " + computer["Computer Name"]);
+      }
+    }, this);
 
-        return results;
-    },
+    return results;
+  },
 
-    createIncidentFromTanium: function(alert) {
-        var incident = new GlideRecord('incident');
-        incident.initialize();
-        incident.short_description = alert.title;
-        incident.description = alert.description;
-        incident.impact = this.mapSeverity(alert.severity);
-        incident.urgency = this.mapUrgency(alert.severity);
-        incident.assignment_group = 'Security Operations';
-        incident.category = 'Security';
-        incident.subcategory = 'Endpoint';
-        incident.insert();
-        return incident.getUniqueValue();
-    }
+  createIncidentFromTanium: function (alert) {
+    var incident = new GlideRecord("incident");
+    incident.initialize();
+    incident.short_description = alert.title;
+    incident.description = alert.description;
+    incident.impact = this.mapSeverity(alert.severity);
+    incident.urgency = this.mapUrgency(alert.severity);
+    incident.assignment_group = "Security Operations";
+    incident.category = "Security";
+    incident.subcategory = "Endpoint";
+    incident.insert();
+    return incident.getUniqueValue();
+  },
 };
 ```
 
@@ -2112,6 +2274,7 @@ TaniumCMDBSync.prototype = {
 ### Exam Format and Structure
 
 **Exam Details**:
+
 - Duration: 90 minutes
 - Questions: 60-65
 - Passing Score: 70%
@@ -2119,6 +2282,7 @@ TaniumCMDBSync.prototype = {
 - Delivery: Online proctored
 
 **Domain Weightings**:
+
 1. Asking Questions (22%): 13-14 questions
 2. Refining Questions & Targeting (23%): 14-15 questions
 3. Taking Action (15%): 9-10 questions
@@ -2128,6 +2292,7 @@ TaniumCMDBSync.prototype = {
 ### Study Strategy
 
 **12-Week Study Plan**:
+
 ```
 Weeks 1-2: Foundation
 - Platform architecture
@@ -2205,16 +2370,13 @@ Weeks 11-12: Reporting & Review
 ### Lab Exercises
 
 <InfoBox type="tip">
-**Lab Environment Setup**:
-Minimum requirements for TCO practice lab:
-- 1 Tanium Server (8 CPU, 32GB RAM)
-- 1 Zone Server (4 CPU, 16GB RAM)
-- 10+ Clients (mixed OS)
-- PostgreSQL database
-- 100GB storage
+  **Lab Environment Setup**: Minimum requirements for TCO practice lab: - 1 Tanium Server (8 CPU,
+  32GB RAM) - 1 Zone Server (4 CPU, 16GB RAM) - 10+ Clients (mixed OS) - PostgreSQL database - 100GB
+  storage
 </InfoBox>
 
 **Lab 1: Platform Installation**
+
 1. Install Tanium Server on Windows/Linux
 2. Configure PostgreSQL database
 3. Generate and deploy certificates
@@ -2223,6 +2385,7 @@ Minimum requirements for TCO practice lab:
 6. Verify linear chain formation
 
 **Lab 2: High Availability Configuration**
+
 1. Set up database replication
 2. Configure server clustering
 3. Implement load balancing
@@ -2230,6 +2393,7 @@ Minimum requirements for TCO practice lab:
 5. Verify client reconnection
 
 **Lab 3: Module Deployment**
+
 1. License activation
 2. Install core modules
 3. Configure module services
@@ -2291,12 +2455,14 @@ Minimum requirements for TCO practice lab:
 ---
 
 <InfoBox type="success">
-**Foundation Module Complete!** You now have a comprehensive understanding of the Tanium platform architecture, components, and enterprise deployment considerations. This foundation is essential for TCO certification success.
+  **Foundation Module Complete!** You now have a comprehensive understanding of the Tanium platform
+  architecture, components, and enterprise deployment considerations. This foundation is essential
+  for TCO certification success.
 </InfoBox>
 
 <PracticeButton moduleId="platform-foundation" difficulty="final-review" />
 
-*Your Tanium expertise journey begins now! The foundation you've built here will support everything that follows.*
+_Your Tanium expertise journey begins now! The foundation you've built here will support everything that follows._
 
 ---
 
@@ -2307,6 +2473,7 @@ Minimum requirements for TCO practice lab:
 #### Client Registration Problems
 
 **Issue: Clients Not Registering**
+
 ```bash
 # Diagnostic Steps
 1. Check client service status
@@ -2329,6 +2496,7 @@ Minimum requirements for TCO practice lab:
 ```
 
 **Common Causes and Solutions**:
+
 ```python
 def diagnose_registration_failure(client_logs):
     """
@@ -2387,6 +2555,7 @@ def diagnose_registration_failure(client_logs):
 #### Linear Chain Formation Issues
 
 **Troubleshooting Chain Problems**:
+
 ```bash
 #!/bin/bash
 # Linear chain diagnostic script
@@ -2454,6 +2623,7 @@ analyze_chain_metrics
 #### Performance Degradation
 
 **Performance Troubleshooting Matrix**:
+
 ```python
 class PerformanceTroubleshooter:
     def __init__(self):
@@ -2549,6 +2719,7 @@ class PerformanceTroubleshooter:
 #### Migrating from SCCM to Tanium
 
 **Migration Planning Framework**:
+
 ```yaml
 SCCM to Tanium Migration:
   Phase 1 - Assessment (Week 1-2):
@@ -2581,6 +2752,7 @@ SCCM to Tanium Migration:
 ```
 
 **SCCM Collection to Computer Group Mapping**:
+
 ```python
 class SCCMToTaniumMigrator:
     def __init__(self):
@@ -2645,6 +2817,7 @@ class SCCMToTaniumMigrator:
 #### Migrating from BigFix to Tanium
 
 **BigFix Fixlet to Tanium Package Conversion**:
+
 ```xml
 <!-- BigFix Fixlet Example -->
 <BES>
@@ -2713,6 +2886,7 @@ def convert_relevance_to_sensor(relevance):
 #### Multi-Tenant Architecture
 
 **Enterprise Multi-Tenant Deployment**:
+
 ```yaml
 Multi-Tenant Tanium Architecture:
   Shared Infrastructure Model:
@@ -2750,6 +2924,7 @@ Multi-Tenant Tanium Architecture:
 ```
 
 **Multi-Tenant RBAC Configuration**:
+
 ```sql
 -- Create tenant isolation in database
 CREATE SCHEMA tenant_a;
@@ -2786,6 +2961,7 @@ ALTER TABLE tanium.computers ENABLE ROW LEVEL SECURITY;
 #### Air-Gapped Deployment
 
 **Disconnected Network Configuration**:
+
 ```python
 class AirGappedTaniumDeployment:
     def __init__(self):
@@ -2859,6 +3035,7 @@ class AirGappedTaniumDeployment:
 #### Comprehensive Monitoring Framework
 
 **Monitoring Stack Integration**:
+
 ```yaml
 Tanium Monitoring Stack:
   Metrics Collection:
@@ -2867,10 +3044,10 @@ Tanium Monitoring Stack:
       - Metrics endpoint: /metrics
       - Scrape interval: 30s
       - Key metrics:
-        - tanium_query_duration_seconds
-        - tanium_active_clients_total
-        - tanium_chain_depth
-        - tanium_answer_rate_per_second
+          - tanium_query_duration_seconds
+          - tanium_active_clients_total
+          - tanium_chain_depth
+          - tanium_answer_rate_per_second
 
   Visualization:
     Grafana Dashboards:
@@ -2890,6 +3067,7 @@ Tanium Monitoring Stack:
 ```
 
 **Custom Prometheus Exporter**:
+
 ```python
 from prometheus_client import Gauge, Counter, Histogram, start_http_server
 import time
@@ -2972,6 +3150,7 @@ if __name__ == '__main__':
 ```
 
 **Grafana Dashboard JSON**:
+
 ```json
 {
   "dashboard": {
@@ -3021,9 +3200,9 @@ if __name__ == '__main__':
           }
         ],
         "thresholds": [
-          {"value": 10, "color": "green"},
-          {"value": 20, "color": "yellow"},
-          {"value": 30, "color": "red"}
+          { "value": 10, "color": "green" },
+          { "value": 20, "color": "yellow" },
+          { "value": 30, "color": "red" }
         ]
       }
     ]
@@ -3036,6 +3215,7 @@ if __name__ == '__main__':
 #### Sizing Calculator
 
 **Enterprise Capacity Planning Tool**:
+
 ```python
 class TaniumCapacityPlanner:
     def __init__(self):
@@ -3155,6 +3335,7 @@ class TaniumCapacityPlanner:
 **Objective**: Configure complete HA solution with automatic failover
 
 **Steps**:
+
 ```bash
 # Lab 4: Enterprise HA Configuration
 
@@ -3246,6 +3427,7 @@ psql -h localhost -p 5000 -U tanium -c "SELECT pg_is_in_recovery();"
 ```
 
 **Expected Results**:
+
 - Automatic failover within 30 seconds
 - Zero data loss (RPO = 0)
 - Client connections automatically redirected
@@ -3256,6 +3438,7 @@ psql -h localhost -p 5000 -U tanium -c "SELECT pg_is_in_recovery();"
 **Objective**: Implement enterprise security controls
 
 **Implementation**:
+
 ```python
 #!/usr/bin/env python3
 """
@@ -3416,71 +3599,77 @@ Apply your foundation knowledge in a practical scenario.
     "Identify key sensors needed for network discovery",
     "Design basic queries for system inventory",
     "Understand console navigation requirements",
-    "Plan for network efficiency at scale"
+    "Plan for network efficiency at scale",
   ]}
   tasks={[
     {
       id: "task1",
       title: "Map the Network Topology",
-      description: "Design how Tanium's linear chain would work in a network with 5,000 endpoints across 3 locations.",
+      description:
+        "Design how Tanium's linear chain would work in a network with 5,000 endpoints across 3 locations.",
       hints: [
         "Consider how endpoints would form chains within each location",
         "Think about WAN links between locations",
-        "Remember that network load remains constant"
+        "Remember that network load remains constant",
       ],
-      validation: "Document should show chains forming within subnets first"
+      validation: "Document should show chains forming within subnets first",
     },
     {
       id: "task2",
       title: "Identify Essential Sensors",
-      description: "List the top 10 sensors you would use for initial network discovery and inventory.",
+      description:
+        "List the top 10 sensors you would use for initial network discovery and inventory.",
       hints: [
         "Start with basic identification sensors",
         "Include both hardware and software sensors",
-        "Consider security-relevant sensors"
+        "Consider security-relevant sensors",
       ],
-      validation: "Must include Computer Name, IP Address, Operating System, and Installed Applications"
+      validation:
+        "Must include Computer Name, IP Address, Operating System, and Installed Applications",
     },
     {
       id: "task3",
       title: "Write Basic Discovery Queries",
-      description: "Create 5 Tanium queries to discover: all Windows servers, all laptops, machines with low disk space, machines missing antivirus, and high CPU usage systems.",
+      description:
+        "Create 5 Tanium queries to discover: all Windows servers, all laptops, machines with low disk space, machines missing antivirus, and high CPU usage systems.",
       hints: [
         "Use 'Get Computer Name from all machines where...' format",
         "Remember to use 'contains' for partial matches",
-        "Use comparison operators for numeric values"
+        "Use comparison operators for numeric values",
       ],
-      validation: "Queries must follow proper Tanium syntax"
+      validation: "Queries must follow proper Tanium syntax",
     },
     {
       id: "task4",
       title: "Plan Console Access Structure",
-      description: "Design a role-based access plan with at least 3 different user roles and their console permissions.",
+      description:
+        "Design a role-based access plan with at least 3 different user roles and their console permissions.",
       hints: [
         "Consider IT operations, security team, and management roles",
         "Think about who needs to run queries vs just view results",
-        "Remember the principle of least privilege"
+        "Remember the principle of least privilege",
       ],
-      validation: "Must include Administrator, Operator, and Read-Only roles minimum"
+      validation: "Must include Administrator, Operator, and Read-Only roles minimum",
     },
     {
       id: "task5",
       title: "Calculate Network Impact",
-      description: "Estimate the network bandwidth usage for your 5,000 endpoint deployment during peak query times.",
+      description:
+        "Estimate the network bandwidth usage for your 5,000 endpoint deployment during peak query times.",
       hints: [
         "Remember Tanium uses less than 0.1% bandwidth typically",
         "Consider your available WAN bandwidth",
-        "Factor in the 15-second query response time"
+        "Factor in the 15-second query response time",
       ],
-      validation: "Calculation should show minimal impact even during peak usage"
-    }
+      validation: "Calculation should show minimal impact even during peak usage",
+    },
   ]}
   successCriteria={[
     "All 5 tasks completed with proper documentation",
     "Queries follow correct Tanium syntax",
     "Network design leverages linear chain benefits",
     "Role-based access follows security best practices",
-    "Demonstrates understanding of Tanium's efficiency"
+    "Demonstrates understanding of Tanium's efficiency",
   ]}
 />
 
@@ -3499,21 +3688,19 @@ Before moving on to the next module, let's ensure you've mastered the foundation
         "It requires more servers for redundancy",
         "It maintains constant network load regardless of endpoint count",
         "It stores more historical data",
-        "It uses encrypted databases"
+        "It uses encrypted databases",
       ],
       correctAnswer: 1,
-      explanation: "Linear Chain Technology ensures network load remains constant as endpoints scale, unlike hub-and-spoke architectures."
+      explanation:
+        "Linear Chain Technology ensures network load remains constant as endpoints scale, unlike hub-and-spoke architectures.",
     },
     {
-      question: "In a Tanium environment with 100,000 endpoints, how long does it typically take to get query results?",
-      options: [
-        "Several hours",
-        "30-60 minutes",
-        "15 seconds",
-        "5-10 minutes"
-      ],
+      question:
+        "In a Tanium environment with 100,000 endpoints, how long does it typically take to get query results?",
+      options: ["Several hours", "30-60 minutes", "15 seconds", "5-10 minutes"],
       correctAnswer: 2,
-      explanation: "Tanium's architecture delivers results in approximately 15 seconds, regardless of scale."
+      explanation:
+        "Tanium's architecture delivers results in approximately 15 seconds, regardless of scale.",
     },
     {
       question: "What is the basic format of a Tanium question?",
@@ -3521,21 +3708,18 @@ Before moving on to the next module, let's ensure you've mastered the foundation
         "SELECT [data] FROM [computers] WHERE [condition]",
         "Get [sensor] from [targets] where [filters]",
         "QUERY [information] ON [machines] IF [criteria]",
-        "FETCH [results] FROM [endpoints] WHEN [condition]"
+        "FETCH [results] FROM [endpoints] WHEN [condition]",
       ],
       correctAnswer: 1,
-      explanation: "Tanium uses natural language format: Get [sensor] from [targets] where [filters]"
+      explanation:
+        "Tanium uses natural language format: Get [sensor] from [targets] where [filters]",
     },
     {
       question: "Which component collects specific types of information from endpoints?",
-      options: [
-        "Actions",
-        "Packages",
-        "Sensors",
-        "Modules"
-      ],
+      options: ["Actions", "Packages", "Sensors", "Modules"],
       correctAnswer: 2,
-      explanation: "Sensors are the components that collect specific types of information from endpoints."
+      explanation:
+        "Sensors are the components that collect specific types of information from endpoints.",
     },
     {
       question: "What is the typical network bandwidth utilization for Tanium?",
@@ -3543,11 +3727,12 @@ Before moving on to the next module, let's ensure you've mastered the foundation
         "10-15% of available bandwidth",
         "5-10% of available bandwidth",
         "Less than 0.1% of bandwidth",
-        "2-5% of available bandwidth"
+        "2-5% of available bandwidth",
       ],
       correctAnswer: 2,
-      explanation: "Tanium typically uses less than 0.1% of network bandwidth due to its efficient architecture."
-    }
+      explanation:
+        "Tanium typically uses less than 0.1% of network bandwidth due to its efficient architecture.",
+    },
   ]}
 />
 
@@ -3558,6 +3743,7 @@ Before moving on to the next module, let's ensure you've mastered the foundation
 You've successfully completed the comprehensive Tanium Platform Foundation module! This enterprise-grade foundation prepares you for advanced platform management and TCO certification success.
 
 **Key Takeaways**:
+
 - Master understanding of linear chain architecture
 - Complete platform component knowledge
 - Enterprise deployment patterns
@@ -3568,5 +3754,6 @@ You've successfully completed the comprehensive Tanium Platform Foundation modul
 **Next Steps**: Continue to [Domain 1: Asking Questions →](/study/asking-questions)
 
 <InfoBox type="success">
-**Foundation Complete!** With 3000+ lines of enterprise content, you're fully prepared for the TCO certification journey ahead.
+  **Foundation Complete!** With 3000+ lines of enterprise content, you're fully prepared for the TCO
+  certification journey ahead.
 </InfoBox>

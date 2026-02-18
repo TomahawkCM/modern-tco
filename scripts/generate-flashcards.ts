@@ -18,13 +18,13 @@
  * - Provides detailed statistics
  */
 
-import dotenv from 'dotenv';
-import OpenAI from 'openai';
-import * as fs from 'fs';
-import * as path from 'path';
+import dotenv from "dotenv";
+import OpenAI from "openai";
+import * as fs from "fs";
+import * as path from "path";
 
 // Load environment variables from .env.local
-dotenv.config({ path: path.resolve(__dirname, '../.env.local') });
+dotenv.config({ path: path.resolve(__dirname, "../.env.local") });
 
 // ==================== TYPES ====================
 
@@ -58,79 +58,79 @@ interface DomainInfo {
 
 const TCO_DOMAINS: Record<string, DomainInfo> = {
   asking_questions: {
-    name: 'Asking Questions',
+    name: "Asking Questions",
     weight: 22,
     topics: [
-      'Interact module navigation',
-      'Natural language query syntax',
-      'Sensor library (500+ sensors)',
-      'Question construction best practices',
-      'Saved questions management',
-      'Common sensors (Computer Name, IP Address, OS)',
-      'Question result interpretation',
+      "Interact module navigation",
+      "Natural language query syntax",
+      "Sensor library (500+ sensors)",
+      "Question construction best practices",
+      "Saved questions management",
+      "Common sensors (Computer Name, IP Address, OS)",
+      "Question result interpretation",
     ],
-    description: 'Master asking effective questions using Tanium\'s natural language interface.',
+    description: "Master asking effective questions using Tanium's natural language interface.",
   },
   refining_targeting: {
-    name: 'Refining Questions & Targeting',
+    name: "Refining Questions & Targeting",
     weight: 23,
     topics: [
-      'Computer groups (static and dynamic)',
-      'Advanced filtering techniques',
-      'Targeting specific endpoints',
-      'RBAC (Role-Based Access Control)',
-      'Content set scoping',
-      'Boolean logic in filters',
-      'Computer group hierarchy',
+      "Computer groups (static and dynamic)",
+      "Advanced filtering techniques",
+      "Targeting specific endpoints",
+      "RBAC (Role-Based Access Control)",
+      "Content set scoping",
+      "Boolean logic in filters",
+      "Computer group hierarchy",
     ],
-    description: 'Learn to refine questions using filters and target specific computer groups.',
+    description: "Learn to refine questions using filters and target specific computer groups.",
   },
   taking_action: {
-    name: 'Taking Action - Packages & Actions',
+    name: "Taking Action - Packages & Actions",
     weight: 15,
     topics: [
-      'Package library overview',
-      'Package deployment workflows',
-      'Action execution monitoring',
-      'Package parameters',
-      'Action scheduling',
-      'Rollback procedures',
-      'Pre-approved actions',
+      "Package library overview",
+      "Package deployment workflows",
+      "Action execution monitoring",
+      "Package parameters",
+      "Action scheduling",
+      "Rollback procedures",
+      "Pre-approved actions",
     ],
-    description: 'Deploy packages and execute actions across endpoints.',
+    description: "Deploy packages and execute actions across endpoints.",
   },
   navigation: {
-    name: 'Navigation & Basic Module Functions',
+    name: "Navigation & Basic Module Functions",
     weight: 23,
     topics: [
-      'Tanium console navigation',
-      'Module overview (Interact, Deploy, Connect, Trends)',
-      'Dashboard customization',
-      'Trends module for historical data',
-      'Connect module for data export',
-      'Reporting module',
-      'User interface elements',
+      "Tanium console navigation",
+      "Module overview (Interact, Deploy, Connect, Trends)",
+      "Dashboard customization",
+      "Trends module for historical data",
+      "Connect module for data export",
+      "Reporting module",
+      "User interface elements",
     ],
-    description: 'Navigate the Tanium console and understand core modules.',
+    description: "Navigate the Tanium console and understand core modules.",
   },
   reporting: {
-    name: 'Reporting & Data Export',
+    name: "Reporting & Data Export",
     weight: 17,
     topics: [
-      'Report creation from questions',
-      'Scheduled report automation',
-      'Data export formats (CSV, JSON, XML)',
-      'Connect integration',
-      'Report sharing',
-      'Data visualization',
-      'Report templates',
+      "Report creation from questions",
+      "Scheduled report automation",
+      "Data export formats (CSV, JSON, XML)",
+      "Connect integration",
+      "Report sharing",
+      "Data visualization",
+      "Report templates",
     ],
-    description: 'Create reports, export data, and integrate with external systems.',
+    description: "Create reports, export data, and integrate with external systems.",
   },
 };
 
-const DIFFICULTIES = ['easy', 'medium', 'hard'];
-const CATEGORIES = ['terminology', 'syntax', 'best_practices', 'troubleshooting', 'exam_focused'];
+const DIFFICULTIES = ["easy", "medium", "hard"];
+const CATEGORIES = ["terminology", "syntax", "best_practices", "troubleshooting", "exam_focused"];
 
 // ==================== OPENAI API CLIENT ====================
 
@@ -150,7 +150,7 @@ function buildFlashcardGenerationPrompt(
 **Domain:** ${domainInfo.name}
 **Exam Blueprint Weight:** ${domainInfo.weight}%
 **Difficulty:** ${difficulty}
-**Topics to Cover:** ${domainInfo.topics.join(', ')}
+**Topics to Cover:** ${domainInfo.topics.join(", ")}
 
 **Domain Description:** ${domainInfo.description}
 
@@ -201,7 +201,7 @@ Return a valid JSON object with a "flashcards" array using this exact structure:
       "front": "What is the primary module used to ask real-time questions of Tanium endpoints?",
       "back": "Interact is the console module specifically designed for asking questions of endpoints in real time using natural language syntax. It provides access to the sensor library and question builder.",
       "hint": "Think about which module is used for querying...",
-      "domain": "${domainInfo.name.toLowerCase().replace(/ /g, '_').replace(/&/g, '').replace(/_-_/g, '_')}",
+      "domain": "${domainInfo.name.toLowerCase().replace(/ /g, "_").replace(/&/g, "").replace(/_-_/g, "_")}",
       "category": "terminology",
       "difficulty": "${difficulty}",
       "tags": ["interact-module", "real-time-queries", "basic-concepts"],
@@ -224,37 +224,40 @@ Generate ${count} flashcards now. Return ONLY the JSON object, no other text:`;
 // ==================== FLASHCARD GENERATION ====================
 
 async function generateFlashcards(config: GenerationConfig): Promise<GeneratedFlashcard[]> {
-  const domainKey = config.domain === 'all' ? Object.keys(TCO_DOMAINS)[0] : config.domain;
+  const domainKey = config.domain === "all" ? Object.keys(TCO_DOMAINS)[0] : config.domain;
   const domainInfo = TCO_DOMAINS[domainKey];
 
   if (!domainInfo) {
     throw new Error(`Invalid domain: ${config.domain}`);
   }
 
-  console.log(`\n🤖 Generating ${config.count} ${config.difficulty} flashcards for ${domainInfo.name}...`);
+  console.log(
+    `\n🤖 Generating ${config.count} ${config.difficulty} flashcards for ${domainInfo.name}...`
+  );
   console.log(`📊 Exam Weight: ${domainInfo.weight}%\n`);
 
   const prompt = buildFlashcardGenerationPrompt(domainInfo, config.difficulty, config.count);
 
   try {
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4-turbo-preview',
+      model: "gpt-4-turbo-preview",
       max_tokens: 4000,
       temperature: 0.8, // Higher creativity for diverse flashcards
       messages: [
         {
-          role: 'system',
-          content: 'You are an expert Tanium TCO (Certified Operator) flashcard creator. You always respond with valid JSON objects containing flashcards.',
+          role: "system",
+          content:
+            "You are an expert Tanium TCO (Certified Operator) flashcard creator. You always respond with valid JSON objects containing flashcards.",
         },
         {
-          role: 'user',
+          role: "user",
           content: prompt,
         },
       ],
-      response_format: { type: 'json_object' },
+      response_format: { type: "json_object" },
     });
 
-    const responseText = completion.choices[0].message.content || '';
+    const responseText = completion.choices[0].message.content || "";
 
     // Extract JSON from response
     let flashcards: GeneratedFlashcard[];
@@ -267,7 +270,7 @@ async function generateFlashcards(config: GenerationConfig): Promise<GeneratedFl
       // Fallback: extract JSON array from response
       const jsonMatch = responseText.match(/\[[\s\S]*\]/);
       if (!jsonMatch) {
-        throw new Error('No JSON array found in OpenAI response');
+        throw new Error("No JSON array found in OpenAI response");
       }
       flashcards = JSON.parse(jsonMatch[0]);
     }
@@ -276,7 +279,7 @@ async function generateFlashcards(config: GenerationConfig): Promise<GeneratedFl
 
     return flashcards;
   } catch (error) {
-    console.error('❌ Error generating flashcards:', error);
+    console.error("❌ Error generating flashcards:", error);
     throw error;
   }
 }
@@ -295,27 +298,27 @@ function validateFlashcards(flashcards: GeneratedFlashcard[]): {
 
     // Required fields
     if (!f.front || f.front.trim().length < 10) {
-      errors.push('Front text is missing or too short');
+      errors.push("Front text is missing or too short");
     }
     if (!f.back || f.back.trim().length < 10) {
-      errors.push('Back text is missing or too short');
+      errors.push("Back text is missing or too short");
     }
     if (!f.domain) {
-      errors.push('Domain is required');
+      errors.push("Domain is required");
     }
     if (!f.category || !CATEGORIES.includes(f.category)) {
-      errors.push('Invalid or missing category');
+      errors.push("Invalid or missing category");
     }
     if (!f.difficulty || !DIFFICULTIES.includes(f.difficulty)) {
-      errors.push('Invalid or missing difficulty');
+      errors.push("Invalid or missing difficulty");
     }
     if (!f.tags || f.tags.length < 2) {
-      errors.push('Must have at least 2 tags');
+      errors.push("Must have at least 2 tags");
     }
 
     // Atomic principle check (one concept)
-    if (f.front.includes(' and ') && f.front.includes('?')) {
-      errors.push('Flashcard may contain multiple concepts (violates atomic principle)');
+    if (f.front.includes(" and ") && f.front.includes("?")) {
+      errors.push("Flashcard may contain multiple concepts (violates atomic principle)");
     }
 
     if (errors.length > 0) {
@@ -330,9 +333,12 @@ function validateFlashcards(flashcards: GeneratedFlashcard[]): {
 
 // ==================== FILE OUTPUT ====================
 
-function generateTypeScriptFile(flashcards: GeneratedFlashcard[], config: GenerationConfig): string {
-  const timestamp = new Date().toISOString().split('T')[0];
-  const domainLabel = config.domain === 'all' ? 'multi-domain' : config.domain;
+function generateTypeScriptFile(
+  flashcards: GeneratedFlashcard[],
+  config: GenerationConfig
+): string {
+  const timestamp = new Date().toISOString().split("T")[0];
+  const domainLabel = config.domain === "all" ? "multi-domain" : config.domain;
   const fileName = `generated-flashcards-${domainLabel}-${config.difficulty}-${timestamp}.ts`;
   const filePath = path.join(config.outputDir, fileName);
 
@@ -363,15 +369,18 @@ export default generatedFlashcards;
 // ==================== STATISTICS ====================
 
 function printStatistics(flashcards: GeneratedFlashcard[]): void {
-  console.log('\n📊 Generation Statistics:\n');
+  console.log("\n📊 Generation Statistics:\n");
 
   // Count by category
-  const byCategory = flashcards.reduce((acc, f) => {
-    acc[f.category] = (acc[f.category] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const byCategory = flashcards.reduce(
+    (acc, f) => {
+      acc[f.category] = (acc[f.category] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
 
-  console.log('Category Distribution:');
+  console.log("Category Distribution:");
   for (const [category, count] of Object.entries(byCategory)) {
     const percentage = ((count / flashcards.length) * 100).toFixed(1);
     console.log(`  ${category}: ${count} (${percentage}%)`);
@@ -379,13 +388,13 @@ function printStatistics(flashcards: GeneratedFlashcard[]): void {
 
   // Flashcards with hints
   const withHints = flashcards.filter((f) => f.hint).length;
-  console.log(`\nFlashcards with hints: ${withHints} (${((withHints / flashcards.length) * 100).toFixed(1)}%)`);
+  console.log(
+    `\nFlashcards with hints: ${withHints} (${((withHints / flashcards.length) * 100).toFixed(1)}%)`
+  );
 
   // Average lengths
-  const avgFrontLength =
-    flashcards.reduce((sum, f) => sum + f.front.length, 0) / flashcards.length;
-  const avgBackLength =
-    flashcards.reduce((sum, f) => sum + f.back.length, 0) / flashcards.length;
+  const avgFrontLength = flashcards.reduce((sum, f) => sum + f.front.length, 0) / flashcards.length;
+  const avgBackLength = flashcards.reduce((sum, f) => sum + f.back.length, 0) / flashcards.length;
   console.log(`\nAverage Front Length: ${avgFrontLength.toFixed(0)} characters`);
   console.log(`Average Back Length: ${avgBackLength.toFixed(0)} characters`);
 
@@ -394,11 +403,14 @@ function printStatistics(flashcards: GeneratedFlashcard[]): void {
   const uniqueTags = new Set(allTags);
   console.log(`Total Unique Tags: ${uniqueTags.size}`);
 
-  console.log('\nMost Common Tags:');
-  const tagCounts = allTags.reduce((acc, tag) => {
-    acc[tag] = (acc[tag] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  console.log("\nMost Common Tags:");
+  const tagCounts = allTags.reduce(
+    (acc, tag) => {
+      acc[tag] = (acc[tag] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
   const sortedTags = Object.entries(tagCounts)
     .sort(([, a], [, b]) => b - a)
     .slice(0, 10);
@@ -412,24 +424,24 @@ function printStatistics(flashcards: GeneratedFlashcard[]): void {
 async function main() {
   const args = process.argv.slice(2);
   const config: GenerationConfig = {
-    domain: 'asking_questions',
-    difficulty: 'medium',
+    domain: "asking_questions",
+    difficulty: "medium",
     count: 20,
-    outputDir: path.join(__dirname, '..', 'src', 'data', 'generated'),
+    outputDir: path.join(__dirname, "..", "src", "data", "generated"),
   };
 
   // Parse arguments
   for (let i = 0; i < args.length; i++) {
-    if (args[i] === '--domain' && args[i + 1]) {
+    if (args[i] === "--domain" && args[i + 1]) {
       config.domain = args[i + 1];
       i++;
-    } else if (args[i] === '--difficulty' && args[i + 1]) {
+    } else if (args[i] === "--difficulty" && args[i + 1]) {
       config.difficulty = args[i + 1];
       i++;
-    } else if (args[i] === '--count' && args[i + 1]) {
+    } else if (args[i] === "--count" && args[i + 1]) {
       config.count = parseInt(args[i + 1], 10);
       i++;
-    } else if (args[i] === '--output' && args[i + 1]) {
+    } else if (args[i] === "--output" && args[i + 1]) {
       config.outputDir = args[i + 1];
       i++;
     }
@@ -437,20 +449,20 @@ async function main() {
 
   // Validate config
   if (!process.env.OPENAI_API_KEY) {
-    console.error('❌ Error: OPENAI_API_KEY environment variable not set');
-    console.error('Set it with: export OPENAI_API_KEY=your-api-key');
+    console.error("❌ Error: OPENAI_API_KEY environment variable not set");
+    console.error("Set it with: export OPENAI_API_KEY=your-api-key");
     process.exit(1);
   }
 
-  if (config.domain !== 'all' && !TCO_DOMAINS[config.domain]) {
+  if (config.domain !== "all" && !TCO_DOMAINS[config.domain]) {
     console.error(`❌ Error: Invalid domain "${config.domain}"`);
-    console.error(`Valid domains: ${Object.keys(TCO_DOMAINS).join(', ')}, all`);
+    console.error(`Valid domains: ${Object.keys(TCO_DOMAINS).join(", ")}, all`);
     process.exit(1);
   }
 
-  if (!DIFFICULTIES.includes(config.difficulty) && config.difficulty !== 'all') {
+  if (!DIFFICULTIES.includes(config.difficulty) && config.difficulty !== "all") {
     console.error(`❌ Error: Invalid difficulty "${config.difficulty}"`);
-    console.error(`Valid difficulties: ${DIFFICULTIES.join(', ')}, all`);
+    console.error(`Valid difficulties: ${DIFFICULTIES.join(", ")}, all`);
     process.exit(1);
   }
 
@@ -459,8 +471,8 @@ async function main() {
     fs.mkdirSync(config.outputDir, { recursive: true });
   }
 
-  console.log('🚀 AI Flashcard Generator');
-  console.log('========================\n');
+  console.log("🚀 AI Flashcard Generator");
+  console.log("========================\n");
   console.log(`Domain: ${config.domain}`);
   console.log(`Difficulty: ${config.difficulty}`);
   console.log(`Count: ${config.count}`);
@@ -482,7 +494,7 @@ async function main() {
     }
 
     if (valid.length === 0) {
-      console.error('\n❌ No valid flashcards generated. Please try again.');
+      console.error("\n❌ No valid flashcards generated. Please try again.");
       process.exit(1);
     }
 
@@ -495,7 +507,7 @@ async function main() {
     console.log(`\n✅ Success! Generated ${valid.length} valid flashcards.`);
     console.log(`📁 Output file: ${filePath}\n`);
   } catch (error) {
-    console.error('\n❌ Fatal error:', error);
+    console.error("\n❌ Fatal error:", error);
     process.exit(1);
   }
 }

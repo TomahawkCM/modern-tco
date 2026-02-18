@@ -10,26 +10,26 @@
  * - WCAG 2.2 AA compliant
  */
 
-'use client';
+"use client";
 
-import React from 'react';
-import { useChatbot } from '@/contexts/ChatbotContext';
-import { ChatbotButton } from './ChatbotButton';
-import { ChatbotPanel } from './ChatbotPanel';
+import React from "react";
+import { useChatbot } from "@/contexts/ChatbotContext";
+import { ChatbotButton } from "./ChatbotButton";
+import { ChatbotPanel } from "./ChatbotPanel";
 
 export const ChatbotWidget: React.FC = () => {
   const { isOpen, isEnabled, openChatbot, closeChatbot } = useChatbot();
 
   // Debug logging for testing
-  console.log('[ChatbotWidget] Rendering - isEnabled:', isEnabled, 'isOpen:', isOpen);
+  console.log("[ChatbotWidget] Rendering - isEnabled:", isEnabled, "isOpen:", isOpen);
 
   // Don't render if chatbot is disabled
   if (!isEnabled) {
-    console.log('[ChatbotWidget] Not rendering - chatbot disabled');
+    console.log("[ChatbotWidget] Not rendering - chatbot disabled");
     return null;
   }
 
-  console.log('[ChatbotWidget] Rendering chatbot button and panel');
+  console.log("[ChatbotWidget] Rendering chatbot button and panel");
 
   return (
     <>

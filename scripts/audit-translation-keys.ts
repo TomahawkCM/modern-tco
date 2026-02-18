@@ -14,12 +14,12 @@
  *   npm run audit:translations -- --component BudgetNav.tsx
  */
 
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from "fs";
+import * as path from "path";
 
 // Paths
-const BUDGET_COMPONENTS_DIR = path.join(__dirname, '../src/components/budget');
-const SOURCE_FILE = path.join(__dirname, '../src/i18n/messages/en-US.json');
+const BUDGET_COMPONENTS_DIR = path.join(__dirname, "../src/components/budget");
+const SOURCE_FILE = path.join(__dirname, "../src/i18n/messages/en-US.json");
 
 // CLI Options
 interface CLIOptions {
@@ -62,23 +62,23 @@ interface AuditReport {
  * Main entry point
  */
 async function main() {
-  console.log('🔍 Translation Keys Audit Tool\n');
+  console.log("🔍 Translation Keys Audit Tool\n");
 
   // Parse CLI arguments
   const options = parseArgs(process.argv.slice(2));
 
   // Load source translation keys
-  console.log('📖 Loading translation keys...');
+  console.log("📖 Loading translation keys...");
   const sourceKeys = loadTranslationKeys(SOURCE_FILE);
   console.log(`   Found: ${sourceKeys.size} translation keys\n`);
 
   // Scan components
-  console.log('🔎 Scanning components...');
+  console.log("🔎 Scanning components...");
   const components = scanComponents(BUDGET_COMPONENTS_DIR, options.component);
   console.log(`   Scanned: ${components.length} components\n`);
 
   // Audit each component
-  console.log('📊 Auditing...');
+  console.log("📊 Auditing...");
   const audits: ComponentAudit[] = [];
   const allUsedKeys = new Set<string>();
 
@@ -87,11 +87,11 @@ async function main() {
     audits.push(audit);
 
     // Track all used keys
-    audit.usedKeys.forEach(key => allUsedKeys.add(key));
+    audit.usedKeys.forEach((key) => allUsedKeys.add(key));
   }
 
   // Find unused keys
-  const unusedKeys = Array.from(sourceKeys).filter(key => !allUsedKeys.has(key));
+  const unusedKeys = Array.from(sourceKeys).filter((key) => !allUsedKeys.has(key));
 
   // Generate report
   const report = generateReport(audits, unusedKeys);
@@ -113,15 +113,15 @@ function parseArgs(args: string[]): CLIOptions {
     const arg = args[i];
 
     switch (arg) {
-      case '--verbose':
-      case '-v':
+      case "--verbose":
+      case "-v":
         options.verbose = true;
         break;
-      case '--show-unused':
+      case "--show-unused":
         options.showUnused = true;
         break;
-      case '--component':
-      case '-c':
+      case "--component":
+      case "-c":
         if (i + 1 < args.length) {
           options.component = args[++i];
         }
@@ -136,14 +136,14 @@ function parseArgs(args: string[]): CLIOptions {
  * Load translation keys from source file
  */
 function loadTranslationKeys(filePath: string): Set<string> {
-  const content = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  const content = JSON.parse(fs.readFileSync(filePath, "utf-8"));
   const keys = new Set<string>();
 
-  function traverse(obj: any, prefix: string = '') {
+  function traverse(obj: any, prefix: string = "") {
     for (const [key, value] of Object.entries(obj)) {
       const fullKey = prefix ? `${prefix}.${key}` : key;
 
-      if (value && typeof value === 'object' && !Array.isArray(value)) {
+      if (value && typeof value === "object" && !Array.isArray(value)) {
         traverse(value, fullKey);
       } else {
         keys.add(fullKey);
@@ -169,12 +169,12 @@ function scanComponents(dir: string, specificComponent?: string): string[] {
 
       if (entry.isDirectory()) {
         scanDir(fullPath);
-      } else if (entry.name.endsWith('.tsx') || entry.name.endsWith('.ts')) {
+      } else if (entry.name.endsWith(".tsx") || entry.name.endsWith(".ts")) {
         // Skip test files, types, and non-component files
         if (
-          entry.name.endsWith('.test.tsx') ||
-          entry.name.endsWith('.d.ts') ||
-          entry.name.endsWith('.types.ts')
+          entry.name.endsWith(".test.tsx") ||
+          entry.name.endsWith(".d.ts") ||
+          entry.name.endsWith(".types.ts")
         ) {
           continue;
         }
@@ -197,11 +197,11 @@ function scanComponents(dir: string, specificComponent?: string): string[] {
  * Audit a single component
  */
 function auditComponent(filePath: string, sourceKeys: Set<string>): ComponentAudit {
-  const content = fs.readFileSync(filePath, 'utf-8');
-  const lines = content.split('\n');
+  const content = fs.readFileSync(filePath, "utf-8");
+  const lines = content.split("\n");
 
   // Check if component uses translations
-  const usesTranslations = content.includes('useTranslations(');
+  const usesTranslations = content.includes("useTranslations(");
 
   // Find hardcoded strings using simple heuristics
   const hardcodedStrings: HardcodedString[] = findHardcodedStrings(lines);
@@ -210,14 +210,14 @@ function auditComponent(filePath: string, sourceKeys: Set<string>): ComponentAud
   const usedKeys: string[] = findUsedKeys(content);
 
   // Find missing keys (used but not in source)
-  const missingKeys = usedKeys.filter(key => !sourceKeys.has(key));
+  const missingKeys = usedKeys.filter((key) => !sourceKeys.has(key));
 
   // Calculate coverage
   const totalStrings = hardcodedStrings.length + usedKeys.length;
   const coverage = totalStrings > 0 ? (usedKeys.length / totalStrings) * 100 : 100;
 
   return {
-    file: path.relative(path.join(__dirname, '..'), filePath),
+    file: path.relative(path.join(__dirname, ".."), filePath),
     usesTranslations,
     hardcodedStrings,
     missingKeys,
@@ -236,11 +236,11 @@ function findHardcodedStrings(lines: string[]): HardcodedString[] {
     // Skip imports, comments, exports
     const trimmed = line.trim();
     if (
-      trimmed.startsWith('import ') ||
-      trimmed.startsWith('//') ||
-      trimmed.startsWith('*') ||
-      trimmed.startsWith('/*') ||
-      trimmed.startsWith('export ')
+      trimmed.startsWith("import ") ||
+      trimmed.startsWith("//") ||
+      trimmed.startsWith("*") ||
+      trimmed.startsWith("/*") ||
+      trimmed.startsWith("export ")
     ) {
       return;
     }
@@ -301,20 +301,20 @@ function findUsedKeys(content: string): string[] {
  */
 function isCodeKeyword(text: string): boolean {
   const keywords = [
-    'className',
-    'onClick',
-    'onChange',
-    'onSubmit',
-    'useState',
-    'useEffect',
-    'return',
-    'true',
-    'false',
-    'null',
-    'undefined',
-    'const',
-    'let',
-    'var',
+    "className",
+    "onClick",
+    "onChange",
+    "onSubmit",
+    "useState",
+    "useEffect",
+    "return",
+    "true",
+    "false",
+    "null",
+    "undefined",
+    "const",
+    "let",
+    "var",
   ];
   return keywords.includes(text);
 }
@@ -323,7 +323,7 @@ function isCodeKeyword(text: string): boolean {
  * Generate audit report
  */
 function generateReport(audits: ComponentAudit[], unusedKeys: string[]): AuditReport {
-  const usingTranslations = audits.filter(a => a.usesTranslations).length;
+  const usingTranslations = audits.filter((a) => a.usesTranslations).length;
   const totalHardcodedStrings = audits.reduce((sum, a) => sum + a.hardcodedStrings.length, 0);
   const totalMissingKeys = audits.reduce((sum, a) => sum + a.missingKeys.length, 0);
   const totalUsedKeys = audits.reduce((sum, a) => sum + a.usedKeys.length, 0);
@@ -332,7 +332,7 @@ function generateReport(audits: ComponentAudit[], unusedKeys: string[]): AuditRe
     audits.length > 0 ? audits.reduce((sum, a) => sum + a.coverage, 0) / audits.length : 0;
 
   const componentsNeedingMigration = audits.filter(
-    a => !a.usesTranslations || a.hardcodedStrings.length > 0
+    (a) => !a.usesTranslations || a.hardcodedStrings.length > 0
   ).length;
 
   return {
@@ -354,12 +354,12 @@ function generateReport(audits: ComponentAudit[], unusedKeys: string[]): AuditRe
  * Print audit report
  */
 function printReport(report: AuditReport, options: CLIOptions) {
-  console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-  console.log('📊 Translation Audit Report');
-  console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
+  console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+  console.log("📊 Translation Audit Report");
+  console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
 
   // Summary
-  console.log('📈 Summary:');
+  console.log("📈 Summary:");
   console.log(`   Total Components: ${report.totalComponents}`);
   console.log(
     `   Using Translations: ${report.usingTranslations} (${((report.usingTranslations / report.totalComponents) * 100).toFixed(1)}%)`
@@ -373,19 +373,21 @@ function printReport(report: AuditReport, options: CLIOptions) {
 
   // Components with most hardcoded strings
   const mostHardcoded = [...report.components]
-    .filter(c => c.hardcodedStrings.length > 0)
+    .filter((c) => c.hardcodedStrings.length > 0)
     .sort((a, b) => b.hardcodedStrings.length - a.hardcodedStrings.length)
     .slice(0, 10);
 
   if (mostHardcoded.length > 0) {
-    console.log('🚨 Top Components with Hardcoded Strings:');
+    console.log("🚨 Top Components with Hardcoded Strings:");
     mostHardcoded.forEach((c, i) => {
       console.log(`   ${i + 1}. ${c.file}`);
-      console.log(`      Hardcoded: ${c.hardcodedStrings.length}, Coverage: ${c.coverage.toFixed(1)}%`);
+      console.log(
+        `      Hardcoded: ${c.hardcodedStrings.length}, Coverage: ${c.coverage.toFixed(1)}%`
+      );
 
       if (options.verbose && c.hardcodedStrings.length > 0) {
         console.log(`      Examples:`);
-        c.hardcodedStrings.slice(0, 3).forEach(s => {
+        c.hardcodedStrings.slice(0, 3).forEach((s) => {
           console.log(`         Line ${s.line}: "${s.match}"`);
         });
         if (c.hardcodedStrings.length > 3) {
@@ -397,11 +399,11 @@ function printReport(report: AuditReport, options: CLIOptions) {
   }
 
   // Components not using translations
-  const notUsingTranslations = report.components.filter(c => !c.usesTranslations);
+  const notUsingTranslations = report.components.filter((c) => !c.usesTranslations);
 
   if (notUsingTranslations.length > 0 && options.verbose) {
     console.log(`📋 Components Not Using Translations (${notUsingTranslations.length}):`);
-    notUsingTranslations.slice(0, 10).forEach(c => {
+    notUsingTranslations.slice(0, 10).forEach((c) => {
       console.log(`   - ${c.file} (${c.hardcodedStrings.length} hardcoded strings)`);
     });
     if (notUsingTranslations.length > 10) {
@@ -414,11 +416,11 @@ function printReport(report: AuditReport, options: CLIOptions) {
   if (report.totalMissingKeys > 0) {
     console.log(`⚠️  Missing Translation Keys (${report.totalMissingKeys}):`);
     const allMissingKeys = new Set<string>();
-    report.components.forEach(c => c.missingKeys.forEach(k => allMissingKeys.add(k)));
+    report.components.forEach((c) => c.missingKeys.forEach((k) => allMissingKeys.add(k)));
 
     Array.from(allMissingKeys)
       .slice(0, 10)
-      .forEach(key => {
+      .forEach((key) => {
         console.log(`   - ${key}`);
       });
 
@@ -431,7 +433,7 @@ function printReport(report: AuditReport, options: CLIOptions) {
   // Unused keys
   if (options.showUnused && report.unusedKeys.length > 0) {
     console.log(`🗑️  Unused Translation Keys (${report.unusedKeys.length}):`);
-    report.unusedKeys.slice(0, 20).forEach(key => {
+    report.unusedKeys.slice(0, 20).forEach((key) => {
       console.log(`   - ${key}`);
     });
     if (report.unusedKeys.length > 20) {
@@ -441,9 +443,11 @@ function printReport(report: AuditReport, options: CLIOptions) {
   }
 
   // Recommendations
-  console.log('💡 Recommendations:');
+  console.log("💡 Recommendations:");
   if (report.summary.componentsNeedingMigration > 0) {
-    console.log(`   1. Migrate ${report.summary.componentsNeedingMigration} components to use useTranslations()`);
+    console.log(
+      `   1. Migrate ${report.summary.componentsNeedingMigration} components to use useTranslations()`
+    );
   }
   if (report.totalMissingKeys > 0) {
     console.log(`   2. Add ${report.totalMissingKeys} missing keys to en-US.json`);
@@ -452,13 +456,15 @@ function printReport(report: AuditReport, options: CLIOptions) {
     console.log(`   3. Consider removing ${report.unusedKeys.length} unused keys`);
   }
   if (report.summary.averageCoverage < 90) {
-    console.log(`   4. Target 90%+ coverage (currently ${report.summary.averageCoverage.toFixed(1)}%)`);
+    console.log(
+      `   4. Target 90%+ coverage (currently ${report.summary.averageCoverage.toFixed(1)}%)`
+    );
   }
   console.log();
 }
 
 // Run main function
-main().catch(error => {
-  console.error('\n❌ Fatal error:', error);
+main().catch((error) => {
+  console.error("\n❌ Fatal error:", error);
   process.exit(1);
 });

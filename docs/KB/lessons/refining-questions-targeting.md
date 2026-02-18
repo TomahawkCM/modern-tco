@@ -33,4 +33,3 @@ Draft outline for improving question precision through segmentation, filters, an
 ## Author Notes
 
 Focus on practical examples that highlight mistakes to avoid (wildcard overload, stale sensors). Replace placeholders before marking status as `ready`.
-

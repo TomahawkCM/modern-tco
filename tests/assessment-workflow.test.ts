@@ -153,7 +153,12 @@ const mockAssessmentResult: AssessmentResult = {
     fastestQuestion: 45,
     slowestQuestion: 300,
     confidenceAlignment: 0.8,
-    difficultyProgression: { beginnerAccuracy: 0.7, intermediateAccuracy: 0.8, advancedAccuracy: 0.85, suggestedLevel:  "Intermediate" as any },
+    difficultyProgression: {
+      beginnerAccuracy: 0.7,
+      intermediateAccuracy: 0.8,
+      advancedAccuracy: 0.85,
+      suggestedLevel: "Intermediate" as any,
+    },
   },
   analytics: {
     averageTimePerQuestion: 120,
@@ -180,12 +185,12 @@ describe("Assessment Workflow Integration Tests", () => {
     mockAssessmentEngine.updateSession = vi.fn().mockResolvedValue(undefined);
     mockAssessmentEngine.calculateResults = vi.fn().mockResolvedValue(mockAssessmentResult);
 
-  mockProgressService.updateAssessmentProgress = vi.fn().mockResolvedValue(undefined);
-  mockProgressService.updateQuestionProgress = vi.fn().mockResolvedValue(undefined);
-  mockProgressService.getUserProgress = vi.fn().mockResolvedValue(null);
+    mockProgressService.updateAssessmentProgress = vi.fn().mockResolvedValue(undefined);
+    mockProgressService.updateQuestionProgress = vi.fn().mockResolvedValue(undefined);
+    mockProgressService.getUserProgress = vi.fn().mockResolvedValue(null);
 
-  mockAnalyticsService.track = vi.fn().mockResolvedValue(undefined);
-  mockAnalyticsService.getUserAnalytics = vi.fn().mockResolvedValue({});
+    mockAnalyticsService.track = vi.fn().mockResolvedValue(undefined);
+    mockAnalyticsService.getUserAnalytics = vi.fn().mockResolvedValue({});
   });
 
   afterEach(() => {
@@ -495,7 +500,7 @@ describe("Assessment Workflow Integration Tests", () => {
         timeSpent: 450,
       };
 
-    mockProgressService.getUserProgress.mockResolvedValue(mockProgress as any);
+      mockProgressService.getUserProgress.mockResolvedValue(mockProgress as any);
 
       let progress;
       await act(async () => {
@@ -557,8 +562,8 @@ describe("Assessment Workflow Integration Tests", () => {
         assessmentResult = await result.current.submitAssessment();
       });
 
-  expect((assessmentResult as any)?.passed).toBe(false); // Add optional chaining
-  expect((assessmentResult as any)?.overallScore).toBe(0.65); // Add optional chaining
+      expect((assessmentResult as any)?.passed).toBe(false); // Add optional chaining
+      expect((assessmentResult as any)?.overallScore).toBe(0.65); // Add optional chaining
 
       // Verify that progress service was called with failed status
       expect(mockProgressService.updateAssessmentProgress).toHaveBeenCalledWith(
@@ -613,13 +618,13 @@ describe("Assessment Workflow Integration Tests", () => {
         assessmentResult = await result.current.submitAssessment();
       });
 
-  expect((assessmentResult as any)?.remediation?.weakAreas).toEqual([
+      expect((assessmentResult as any)?.remediation?.weakAreas).toEqual([
         TCODomain.TAKING_ACTION,
         TCODomain.REFINING_QUESTIONS,
       ]);
-  expect((assessmentResult as any)?.remediation?.recommendedStudyTime).toBe(120);
-  expect((assessmentResult as any)?.remediation?.suggestedResources).toBeDefined();
-  expect((assessmentResult as any)?.remediation?.studyPlan).toBeDefined();
+      expect((assessmentResult as any)?.remediation?.recommendedStudyTime).toBe(120);
+      expect((assessmentResult as any)?.remediation?.suggestedResources).toBeDefined();
+      expect((assessmentResult as any)?.remediation?.studyPlan).toBeDefined();
     });
   });
 });

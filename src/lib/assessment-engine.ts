@@ -9,7 +9,12 @@ import type {
   AssessmentResponse,
   AssessmentConfig,
 } from "@/types/assessment";
-import type { Question, TCODomain, QuestionDifficulty, Difficulty as DifficultyType } from "@/types/exam";
+import type {
+  Question,
+  TCODomain,
+  QuestionDifficulty,
+  Difficulty as DifficultyType,
+} from "@/types/exam";
 import { TCO_DOMAIN_WEIGHTS as TCO_DOMAIN_WEIGHTS_FROM_TYPES } from "@/types/exam";
 
 // TCO Domain Weights (from certification blueprint)
@@ -39,12 +44,11 @@ export class AssessmentEngine {
       ? sessionLike.responses
       : Object.values(sessionLike?.responses || {});
 
-    const inferredDomain: TCODomain = (
+    const inferredDomain: TCODomain =
       (sessionLike?.domain as TCODomain) ||
-      (sessionLike?.domainFilter) ||
+      sessionLike?.domainFilter ||
       (sessionLike?.questions?.[0]?.domain as TCODomain) ||
-      ("ASKING_QUESTIONS" as TCODomain)
-    );
+      ("ASKING_QUESTIONS" as TCODomain);
 
     const properSession: AssessmentSession = {
       id: sessionLike?.id || `assessment-${Date.now()}`,
@@ -57,7 +61,7 @@ export class AssessmentEngine {
       status: sessionLike?.status || "completed",
       timeLimit: sessionLike?.timeLimit,
       config: {
-        type: (sessionLike?.type) || "practice",
+        type: sessionLike?.type || "practice",
         moduleId: sessionLike?.moduleId,
         domainFilter: Array.isArray(sessionLike?.domainFilter)
           ? sessionLike.domainFilter[0]
@@ -65,29 +69,28 @@ export class AssessmentEngine {
         questionCount: sessionLike?.questions?.length || 0,
         timeLimit: sessionLike?.timeLimit,
         userId: sessionLike?.userId,
-            assessmentId: sessionLike?.id,
+        assessmentId: sessionLike?.id,
         allowReview: true,
         showExplanations: true,
         randomizeQuestions: true,
         randomizeOptions: true,
         adaptiveDifficulty: false,
         enableAnalytics: true,
-  difficulty: "Beginner" as any,
+        difficulty: "Beginner" as any,
       },
     };
 
-  const engine = new AssessmentEngine();
+    const engine = new AssessmentEngine();
     const score = engine.calculateScore(properSession);
     const performance = engine.calculatePerformanceMetrics(properSession);
     const remediation = engine.generateRemediationPlan(properSession, score, performance);
     if ((remediation as any).canRetake === undefined) {
       (remediation as any).canRetake = false;
     }
-  const safePassThreshold = (
-    (properSession.config?.passThreshold) ??
-    (properSession.config?.type === "practice-test" ? 0.6 : 0.7)
-  );
-  const passed = score.percentage >= safePassThreshold * 100;
+    const safePassThreshold =
+      properSession.config?.passThreshold ??
+      (properSession.config?.type === "practice-test" ? 0.6 : 0.7);
+    const passed = score.percentage >= safePassThreshold * 100;
 
     const result: AssessmentResult = {
       sessionId: properSession.id,
@@ -167,9 +170,10 @@ export class AssessmentEngine {
       const question = questions.find((q) => q.id === response.questionId);
       if (!question) return;
 
-  const difficultyKey = typeof question.difficulty === 'string' ? question.difficulty : String(question.difficulty);
-  const difficultyWeight = DIFFICULTY_WEIGHTS[difficultyKey] || 1.0;
-  const domainWeight = (TCO_DOMAIN_WEIGHTS_FROM_TYPES as any)[question.domain] || 0.2;
+      const difficultyKey =
+        typeof question.difficulty === "string" ? question.difficulty : String(question.difficulty);
+      const difficultyWeight = DIFFICULTY_WEIGHTS[difficultyKey] || 1.0;
+      const domainWeight = (TCO_DOMAIN_WEIGHTS_FROM_TYPES as any)[question.domain] || 0.2;
       const questionWeight = difficultyWeight * domainWeight;
 
       totalWeight += questionWeight;
@@ -187,10 +191,13 @@ export class AssessmentEngine {
   private calculateDomainBreakdown(responses: AssessmentResponse[], questions: Question[]) {
     const domainStats: Record<TCODomain, { correct: number; total: number }> = Object.keys(
       TCO_DOMAIN_WEIGHTS_FROM_TYPES
-    ).reduce((acc: any, key) => {
-      acc[key] = { correct: 0, total: 0 };
-      return acc;
-    }, {} as Record<string, { correct: number; total: number }>);
+    ).reduce(
+      (acc: any, key) => {
+        acc[key] = { correct: 0, total: 0 };
+        return acc;
+      },
+      {} as Record<string, { correct: number; total: number }>
+    );
 
     responses.forEach((response) => {
       const question = questions.find((q) => q.id === response.questionId);
@@ -221,8 +228,8 @@ export class AssessmentEngine {
       const ids: string[] = (q as any).objectiveIds
         ? (q as any).objectiveIds
         : (q as any).objectiveId
-        ? [(q as any).objectiveId]
-        : [];
+          ? [(q as any).objectiveId]
+          : [];
       ids.forEach((id) => {
         if (!objectiveStats[id]) {
           objectiveStats[id] = { correct: 0, total: 0, name: this.getObjectiveName(id) };
@@ -237,8 +244,8 @@ export class AssessmentEngine {
       const ids: string[] = (question as any).objectiveIds
         ? (question as any).objectiveIds
         : (question as any).objectiveId
-        ? [(question as any).objectiveId]
-        : [];
+          ? [(question as any).objectiveId]
+          : [];
       if (ids.length === 0) return;
 
       ids.forEach((objectiveId) => {
@@ -384,16 +391,16 @@ export class AssessmentEngine {
     });
 
     const beginnerAccuracy =
-      difficultyStats['Beginner'].total > 0
-        ? (difficultyStats['Beginner'].correct / difficultyStats['Beginner'].total) * 100
+      difficultyStats["Beginner"].total > 0
+        ? (difficultyStats["Beginner"].correct / difficultyStats["Beginner"].total) * 100
         : 0;
     const intermediateAccuracy =
-      difficultyStats['Intermediate'].total > 0
-        ? (difficultyStats['Intermediate'].correct / difficultyStats['Intermediate'].total) * 100
+      difficultyStats["Intermediate"].total > 0
+        ? (difficultyStats["Intermediate"].correct / difficultyStats["Intermediate"].total) * 100
         : 0;
     const advancedAccuracy =
-      difficultyStats['Advanced'].total > 0
-        ? (difficultyStats['Advanced'].correct / difficultyStats['Advanced'].total) * 100
+      difficultyStats["Advanced"].total > 0
+        ? (difficultyStats["Advanced"].correct / difficultyStats["Advanced"].total) * 100
         : 0;
 
     const suggestedLevel = this.suggestDifficultyLevel(
@@ -419,20 +426,20 @@ export class AssessmentEngine {
     advancedAccuracy: number
   ): QuestionDifficulty {
     // If struggling with beginner, stay at beginner
-  if (beginnerAccuracy < 70) return "Beginner" as any;
+    if (beginnerAccuracy < 70) return "Beginner" as any;
 
     // If mastering intermediate, move to advanced
-  if (intermediateAccuracy >= 85) return "Advanced" as any;
+    if (intermediateAccuracy >= 85) return "Advanced" as any;
 
     // If comfortable with beginner but struggling with intermediate, stay intermediate
-  if (beginnerAccuracy >= 80 && intermediateAccuracy < 70) return "Intermediate" as any;
+    if (beginnerAccuracy >= 80 && intermediateAccuracy < 70) return "Intermediate" as any;
 
     // If mastering advanced, suggest expert level
-  if (advancedAccuracy >= 85) return "Expert" as any;
+    if (advancedAccuracy >= 85) return "Expert" as any;
 
     // Default progression
-  if (beginnerAccuracy >= 80) return "Intermediate" as any;
-  return "Beginner" as any;
+    if (beginnerAccuracy >= 80) return "Intermediate" as any;
+    return "Beginner" as any;
   }
 
   /**
@@ -443,14 +450,14 @@ export class AssessmentEngine {
     score: AssessmentScore,
     performance: PerformanceMetrics
   ): RemediationPlan {
-  const safeConfig: AssessmentConfig = session.config ?? ({} as AssessmentConfig);
-  const overallRecommendation = this.determineOverallRecommendation(score, safeConfig);
+    const safeConfig: AssessmentConfig = session.config ?? ({} as AssessmentConfig);
+    const overallRecommendation = this.determineOverallRecommendation(score, safeConfig);
     const objectiveRemediation = this.generateObjectiveRemediation(
       score.objectiveBreakdown,
       session.questions
     );
-  const studyPlan = this.createStudyPlan(objectiveRemediation, score);
-  const retakeEligibility = this.determineRetakeEligibility(score, safeConfig);
+    const studyPlan = this.createStudyPlan(objectiveRemediation, score);
+    const retakeEligibility = this.determineRetakeEligibility(score, safeConfig);
 
     return {
       overallRecommendation,
@@ -633,7 +640,7 @@ export class AssessmentEngine {
 
   private createStudyPlan(objectiveRemediation: ObjectiveRemediation[], score: AssessmentScore) {
     // Create ordered study plan based on remediation priorities
-  const studyItems: import("@/types/assessment").StudyPlanItem[] = [];
+    const studyItems: import("@/types/assessment").StudyPlanItem[] = [];
     let order = 1;
 
     // Sort by priority: critical gaps first, then needs review, then needs practice
@@ -673,7 +680,7 @@ export class AssessmentEngine {
   }
 
   private determineRetakeEligibility(score: AssessmentScore, config: AssessmentConfig) {
-    const passed = score.percentage >= ((config.passThreshold ?? 0.7) * 100);
+    const passed = score.percentage >= (config.passThreshold ?? 0.7) * 100;
 
     return {
       eligible: !passed,
@@ -697,11 +704,9 @@ export class AssessmentEngine {
     if ((remediation as any).canRetake === undefined) {
       (remediation as any).canRetake = false;
     }
-  const safeThreshold = (
-    (session.config?.passThreshold) ??
-    (session.config?.type === "practice-test" ? 0.6 : 0.7)
-  );
-  const passed = score.percentage >= safeThreshold * 100;
+    const safeThreshold =
+      session.config?.passThreshold ?? (session.config?.type === "practice-test" ? 0.6 : 0.7);
+    const passed = score.percentage >= safeThreshold * 100;
 
     const result: AssessmentResult = {
       sessionId: session.id,

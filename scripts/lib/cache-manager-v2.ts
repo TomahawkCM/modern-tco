@@ -39,12 +39,12 @@
  * }
  */
 
-import * as fs from 'fs';
-import * as crypto from 'crypto';
-import * as path from 'path';
-import type { SupportedLocale } from '../../src/i18n/config';
+import * as fs from "fs";
+import * as crypto from "crypto";
+import * as path from "path";
+import type { SupportedLocale } from "../../src/i18n/config";
 
-const CACHE_FILE = path.join(__dirname, '../.translation-cache.json');
+const CACHE_FILE = path.join(__dirname, "../.translation-cache.json");
 
 export interface KeyCacheEntry {
   value: string | number | boolean;
@@ -86,13 +86,13 @@ export interface TranslationCacheV2 {
  * Flatten nested object to dot notation
  * { nav: { dashboard: "Dashboard" } } => { "nav.dashboard": "Dashboard" }
  */
-function flattenObject(obj: any, prefix: string = ''): Record<string, any> {
+function flattenObject(obj: any, prefix: string = ""): Record<string, any> {
   const result: Record<string, any> = {};
 
   for (const [key, value] of Object.entries(obj)) {
     const fullKey = prefix ? `${prefix}.${key}` : key;
 
-    if (value && typeof value === 'object' && !Array.isArray(value)) {
+    if (value && typeof value === "object" && !Array.isArray(value)) {
       Object.assign(result, flattenObject(value, fullKey));
     } else {
       result[fullKey] = value;
@@ -110,7 +110,7 @@ function unflattenObject(flat: Record<string, any>): any {
   const result: any = {};
 
   for (const [key, value] of Object.entries(flat)) {
-    const parts = key.split('.');
+    const parts = key.split(".");
     let current = result;
 
     for (let i = 0; i < parts.length - 1; i++) {
@@ -130,8 +130,8 @@ function unflattenObject(flat: Record<string, any>): any {
  * Compute MD5 hash of a value
  */
 function computeHash(value: any): string {
-  const json = typeof value === 'string' ? value : JSON.stringify(value);
-  return crypto.createHash('md5').update(json).digest('hex');
+  const json = typeof value === "string" ? value : JSON.stringify(value);
+  return crypto.createHash("md5").update(json).digest("hex");
 }
 
 /**
@@ -152,12 +152,12 @@ export class CacheManagerV2 {
   private load(): TranslationCacheV2 {
     try {
       if (fs.existsSync(this.cacheFile)) {
-        const data = fs.readFileSync(this.cacheFile, 'utf-8');
+        const data = fs.readFileSync(this.cacheFile, "utf-8");
         const parsed = JSON.parse(data);
 
         // Migrate v1 to v2 if needed
-        if (parsed.version === '1.0') {
-          console.log('📦 Migrating cache from v1.0 to v2.0...');
+        if (parsed.version === "1.0") {
+          console.log("📦 Migrating cache from v1.0 to v2.0...");
           return this.migrateV1ToV2(parsed);
         }
 
@@ -169,8 +169,8 @@ export class CacheManagerV2 {
 
     // Return empty cache
     return {
-      version: '2.0',
-      sourceHash: '',
+      version: "2.0",
+      sourceHash: "",
       lastUpdated: new Date().toISOString(),
       locales: {},
       errors: {},
@@ -182,8 +182,8 @@ export class CacheManagerV2 {
    */
   private migrateV1ToV2(v1Cache: any): TranslationCacheV2 {
     const v2Cache: TranslationCacheV2 = {
-      version: '2.0',
-      sourceHash: v1Cache.sourceHash || '',
+      version: "2.0",
+      sourceHash: v1Cache.sourceHash || "",
       lastUpdated: v1Cache.lastUpdated || new Date().toISOString(),
       locales: {},
       errors: v1Cache.errors || {},
@@ -209,7 +209,7 @@ export class CacheManagerV2 {
         metadata: {
           totalKeys: Object.keys(keys).length,
           lastTranslatedAt: v1Entry.translatedAt,
-          baseLocale: v1Entry.baseLocale || 'en-US',
+          baseLocale: v1Entry.baseLocale || "en-US",
         },
       };
     }
@@ -233,7 +233,7 @@ export class CacheManagerV2 {
         fs.mkdirSync(dir, { recursive: true });
       }
 
-      fs.writeFileSync(this.cacheFile, JSON.stringify(this.cache, null, 2), 'utf-8');
+      fs.writeFileSync(this.cacheFile, JSON.stringify(this.cache, null, 2), "utf-8");
     } catch (error) {
       console.error(`Error saving cache: ${error}`);
     }
@@ -251,11 +251,7 @@ export class CacheManagerV2 {
   /**
    * Get cached value for a specific key
    */
-  getCachedKey(
-    locale: SupportedLocale,
-    key: string,
-    sourceValue: any
-  ): any | null {
+  getCachedKey(locale: SupportedLocale, key: string, sourceValue: any): any | null {
     const localeEntry = this.cache.locales[locale];
     if (!localeEntry) return null;
 
@@ -279,7 +275,7 @@ export class CacheManagerV2 {
     key: string,
     value: any,
     sourceValue: any,
-    baseLocale: SupportedLocale = 'en-US'
+    baseLocale: SupportedLocale = "en-US"
   ): void {
     // Initialize locale entry if needed
     if (!this.cache.locales[locale]) {
@@ -339,7 +335,7 @@ export class CacheManagerV2 {
     locale: SupportedLocale,
     keys: Record<string, any>,
     sourceContent: object,
-    baseLocale: SupportedLocale = 'en-US'
+    baseLocale: SupportedLocale = "en-US"
   ): void {
     const flatSource = flattenObject(sourceContent);
 
@@ -368,10 +364,7 @@ export class CacheManagerV2 {
   /**
    * Get keys that need re-translation (source changed)
    */
-  getKeysToTranslate(
-    locale: SupportedLocale,
-    sourceContent: object
-  ): string[] {
+  getKeysToTranslate(locale: SupportedLocale, sourceContent: object): string[] {
     const flatSource = flattenObject(sourceContent);
     const localeEntry = this.cache.locales[locale];
 
@@ -478,7 +471,7 @@ export class CacheManagerV2 {
     const stats = this.getStats();
 
     const parts: string[] = [
-      '📊 Cache Statistics (V2):',
+      "📊 Cache Statistics (V2):",
       `   Version: ${stats.version}`,
       `   Cached locales: ${stats.totalLocales}`,
       `   Cache hit rate: ${stats.cacheHitRate.toFixed(1)}%`,
@@ -488,16 +481,18 @@ export class CacheManagerV2 {
     ];
 
     if (stats.failed > 0) {
-      parts.push('\n❌ Failed locales:');
-      Object.entries(this.cache.errors).slice(0, 5).forEach(([locale, entry]) => {
-        parts.push(`   - ${locale}: ${entry.error} (${entry.attempts} attempts)`);
-      });
+      parts.push("\n❌ Failed locales:");
+      Object.entries(this.cache.errors)
+        .slice(0, 5)
+        .forEach(([locale, entry]) => {
+          parts.push(`   - ${locale}: ${entry.error} (${entry.attempts} attempts)`);
+        });
       if (stats.failed > 5) {
         parts.push(`   ... and ${stats.failed - 5} more`);
       }
     }
 
-    return parts.join('\n');
+    return parts.join("\n");
   }
 
   /**
@@ -514,8 +509,8 @@ export class CacheManagerV2 {
    */
   clearAll(): void {
     this.cache = {
-      version: '2.0',
-      sourceHash: '',
+      version: "2.0",
+      sourceHash: "",
       lastUpdated: new Date().toISOString(),
       locales: {},
       errors: {},
@@ -528,7 +523,7 @@ export class CacheManagerV2 {
  * Load source file and compute hash
  */
 export function loadSourceWithHash(sourceFile: string): { content: object; hash: string } {
-  const content = JSON.parse(fs.readFileSync(sourceFile, 'utf-8'));
+  const content = JSON.parse(fs.readFileSync(sourceFile, "utf-8"));
   const flat = flattenObject(content);
   const hash = computeHash(flat);
   return { content, hash };

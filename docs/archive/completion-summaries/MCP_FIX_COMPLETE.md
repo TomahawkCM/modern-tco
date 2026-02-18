@@ -5,6 +5,7 @@
 **Root Cause**: Claude Code v2.0.14 expects `"mcpServers"` schema, NOT `"servers"`
 
 **Evidence**:
+
 - Working backup from yesterday used `"mcpServers"`
 - /doctor output showed paths like `mcpServers.github`
 - Error message: "mcpServers: Does not adhere to schema"
@@ -16,7 +17,9 @@
 ## ✅ Changes Made
 
 ### **1. Fixed `.mcp.json` (Project Config)**
+
 **Line 2**: Changed `"servers": {` → `"mcpServers": {`
+
 - **Backup created**: `config-backups/.mcp.json.backup-servers-schema-TIMESTAMP`
 - **Servers configured**: All 11 servers maintained
   1. shadcn
@@ -32,7 +35,9 @@
   11. serena
 
 ### **2. Fixed `/home/robne/.claude.json` (Global Config)**
+
 **Line 1624**: Changed `"servers": {` → `"mcpServers": {`
+
 - **Backup created**: `/home/robne/.claude.json.backup-fix-mcpServers-TIMESTAMP`
 - **Scope**: Local config override for tanium-tco project
 - **Servers configured**: 4 additional servers
@@ -56,6 +61,7 @@
 ## 📋 Next Steps
 
 ### **1. Restart Claude Code**
+
 ```bash
 # Exit current Claude Code session
 # Restart Claude Code in the project directory
@@ -64,12 +70,14 @@ claude
 ```
 
 ### **2. Verify MCP Servers**
+
 ```bash
 # Inside Claude Code, run:
 /mcp
 ```
 
 ### **3. Expected Result**
+
 ```
 ✅ All 11 servers should appear and be connected:
 1. shadcn - ✔ connected
@@ -96,6 +104,7 @@ Plus 4 additional from global config:
 ## 🚨 If Issues Persist
 
 ### **Rollback Option 1: Restore Project Config**
+
 ```bash
 # Find latest backup
 ls -lt config-backups/.mcp.json.backup-* | head -1
@@ -105,6 +114,7 @@ cp config-backups/.mcp.json.backup-servers-schema-TIMESTAMP .mcp.json
 ```
 
 ### **Rollback Option 2: Restore Global Config**
+
 ```bash
 # Find latest backup
 ls -lt /home/robne/.claude.json.backup-* | head -1
@@ -114,6 +124,7 @@ cp /home/robne/.claude.json.backup-fix-mcpServers-TIMESTAMP /home/robne/.claude.
 ```
 
 ### **Rollback Option 3: Complete Restore to Yesterday**
+
 ```bash
 # Restore working backup from yesterday (7 servers)
 cp config-backups/.mcp-working-config.json .mcp.json
@@ -125,19 +136,20 @@ cp config-backups/.mcp-working-config.json .mcp.json
 
 ## 📊 Configuration Comparison
 
-| Aspect | Yesterday | Before Fix | After Fix |
-|--------|-----------|------------|-----------|
-| **Schema** | `"mcpServers"` | `"servers"` | `"mcpServers"` ✅ |
-| **Server Count** | 7 | 11 | 11 ✅ |
-| **sqlite-tanium** | npx | Docker | Docker ✅ |
-| **API Keys** | Present | Present | Present ✅ |
-| **Status** | ✅ Working | ❌ Broken | ✅ Should Work |
+| Aspect            | Yesterday      | Before Fix  | After Fix         |
+| ----------------- | -------------- | ----------- | ----------------- |
+| **Schema**        | `"mcpServers"` | `"servers"` | `"mcpServers"` ✅ |
+| **Server Count**  | 7              | 11          | 11 ✅             |
+| **sqlite-tanium** | npx            | Docker      | Docker ✅         |
+| **API Keys**      | Present        | Present     | Present ✅        |
+| **Status**        | ✅ Working     | ❌ Broken   | ✅ Should Work    |
 
 ---
 
 ## 📁 Backup Files Created
 
 All backups in chronological order:
+
 1. `config-backups/.mcp-working-config.json` (yesterday's working state)
 2. `config-backups/.mcp.json.backup-YYYYMMDD_HHMMSS` (Phase 1 backup)
 3. `config-backups/.vscode-mcp.json.backup-YYYYMMDD_HHMMSS` (Phase 1 backup)
@@ -171,17 +183,21 @@ All backups in chronological order:
 When you restart Claude Code and run `/mcp`:
 
 **Minimum Expected** (from `.mcp.json`):
+
 - 11 project servers connected
 
 **Maximum Expected** (includes global config):
+
 - 11 project servers + 4 global servers = up to 15 server connections
 - Some servers may appear twice (project + global instances)
 
 **Warnings are OK**:
+
 - Missing env vars (GITHUB_TOKEN, FIRECRAWL_API_KEY, DATABASE_URL) are normal if not set
 - These don't prevent servers from loading, just some features won't work
 
 **Success Criteria**:
+
 - ✅ No "Failed to parse" error
 - ✅ No "mcpServers: Does not adhere" error
 - ✅ Servers list appears (even if some have warnings)

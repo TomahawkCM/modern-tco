@@ -3,9 +3,9 @@
  * All recurring costs with monthly/annual totals
  */
 
-import type { Workbook, Worksheet } from 'exceljs';
-import type { ExcelExportOptions } from '../types';
-import type { Subscription } from '@/types/budget';
+import type { Workbook, Worksheet } from "exceljs";
+import type { ExcelExportOptions } from "../types";
+import type { Subscription } from "@/types/budget";
 import {
   FONTS,
   FILLS,
@@ -19,7 +19,7 @@ import {
   createTitleSection,
   createSummaryRow,
   EXCEL_COLORS,
-} from '../styles';
+} from "../styles";
 
 interface SubscriptionsSheetData {
   subscriptions: Subscription[];
@@ -28,41 +28,58 @@ interface SubscriptionsSheetData {
 /**
  * Convert any billing cycle to monthly cost
  */
-function toMonthlyCost(amount: number, cycle: Subscription['billingCycle']): number {
+function toMonthlyCost(amount: number, cycle: Subscription["billingCycle"]): number {
   switch (cycle) {
-    case 'weekly': return amount * 4.33;
-    case 'bi-weekly': return amount * 2.17;
-    case 'monthly': return amount;
-    case 'quarterly': return amount / 3;
-    case 'annual': return amount / 12;
-    default: return amount;
+    case "weekly":
+      return amount * 4.33;
+    case "bi-weekly":
+      return amount * 2.17;
+    case "monthly":
+      return amount;
+    case "quarterly":
+      return amount / 3;
+    case "annual":
+      return amount / 12;
+    default:
+      return amount;
   }
 }
 
 /**
  * Get billing cycle display name
  */
-function getBillingCycleDisplay(cycle: Subscription['billingCycle']): string {
+function getBillingCycleDisplay(cycle: Subscription["billingCycle"]): string {
   switch (cycle) {
-    case 'weekly': return 'Weekly';
-    case 'bi-weekly': return 'Bi-weekly';
-    case 'monthly': return 'Monthly';
-    case 'quarterly': return 'Quarterly';
-    case 'annual': return 'Annual';
-    default: return cycle;
+    case "weekly":
+      return "Weekly";
+    case "bi-weekly":
+      return "Bi-weekly";
+    case "monthly":
+      return "Monthly";
+    case "quarterly":
+      return "Quarterly";
+    case "annual":
+      return "Annual";
+    default:
+      return cycle;
   }
 }
 
 /**
  * Get status display with styling info
  */
-function getStatusInfo(status: Subscription['status']): { display: string; color: string } {
+function getStatusInfo(status: Subscription["status"]): { display: string; color: string } {
   switch (status) {
-    case 'active': return { display: 'Active', color: '10B981' };
-    case 'trial': return { display: 'Trial', color: '3B82F6' };
-    case 'paused': return { display: 'Paused', color: 'F59E0B' };
-    case 'cancelled': return { display: 'Cancelled', color: 'EF4444' };
-    default: return { display: status, color: '6B7280' };
+    case "active":
+      return { display: "Active", color: "10B981" };
+    case "trial":
+      return { display: "Trial", color: "3B82F6" };
+    case "paused":
+      return { display: "Paused", color: "F59E0B" };
+    case "cancelled":
+      return { display: "Cancelled", color: "EF4444" };
+    default:
+      return { display: status, color: "6B7280" };
   }
 }
 
@@ -74,61 +91,66 @@ export async function generateSubscriptionsSheet(
   data: SubscriptionsSheetData,
   options: ExcelExportOptions
 ): Promise<Worksheet> {
-  const worksheet = workbook.addWorksheet('Subscriptions', {
-    properties: { tabColor: { argb: 'FFEC4899' } }, // Pink tab
+  const worksheet = workbook.addWorksheet("Subscriptions", {
+    properties: { tabColor: { argb: "FFEC4899" } }, // Pink tab
   });
 
   // Column definitions
   const columns = [
-    { header: 'Name', key: 'name', width: 22 },
-    { header: 'Amount', key: 'amount', width: 12 },
-    { header: 'Frequency', key: 'frequency', width: 12 },
-    { header: 'Monthly Cost', key: 'monthlyCost', width: 14 },
-    { header: 'Annual Cost', key: 'annualCost', width: 14 },
-    { header: 'Next Billing', key: 'nextBilling', width: 14 },
-    { header: 'Status', key: 'status', width: 10 },
-    { header: 'Category', key: 'category', width: 16 },
+    { header: "Name", key: "name", width: 22 },
+    { header: "Amount", key: "amount", width: 12 },
+    { header: "Frequency", key: "frequency", width: 12 },
+    { header: "Monthly Cost", key: "monthlyCost", width: 14 },
+    { header: "Annual Cost", key: "annualCost", width: 14 },
+    { header: "Next Billing", key: "nextBilling", width: 14 },
+    { header: "Status", key: "status", width: 10 },
+    { header: "Category", key: "category", width: 16 },
   ];
 
   // Create title section
   let currentRow = createTitleSection(
     worksheet,
-    'Subscriptions',
-    'Recurring costs and billing schedule',
+    "Subscriptions",
+    "Recurring costs and billing schedule",
     new Date()
   );
 
   // Calculate totals
-  const activeSubscriptions = data.subscriptions.filter(s => s.status === 'active' || s.status === 'trial');
-  const totalMonthly = activeSubscriptions.reduce((sum, s) => sum + toMonthlyCost(s.amount, s.billingCycle), 0);
+  const activeSubscriptions = data.subscriptions.filter(
+    (s) => s.status === "active" || s.status === "trial"
+  );
+  const totalMonthly = activeSubscriptions.reduce(
+    (sum, s) => sum + toMonthlyCost(s.amount, s.billingCycle),
+    0
+  );
   const totalAnnual = totalMonthly * 12;
 
   // Upcoming in 7 days
   const now = new Date();
   const sevenDaysFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
-  const upcomingCount = activeSubscriptions.filter(s => {
+  const upcomingCount = activeSubscriptions.filter((s) => {
     const nextBilling = new Date(s.nextBillingDate);
     return nextBilling >= now && nextBilling <= sevenDaysFromNow;
   }).length;
 
   // Summary section
   const summaryRow = worksheet.getRow(currentRow);
-  summaryRow.getCell(1).value = 'SUBSCRIPTION SUMMARY';
+  summaryRow.getCell(1).value = "SUBSCRIPTION SUMMARY";
   summaryRow.getCell(1).font = { ...FONTS.subheader, size: 12 };
   summaryRow.getCell(1).fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'FFF3F4F6' },
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFF3F4F6" },
   };
   worksheet.mergeCells(`A${currentRow}:H${currentRow}`);
   currentRow++;
 
   // Summary stats
   const statsData = [
-    ['Total Monthly Cost:', totalMonthly, NUMBER_FORMATS.currency],
-    ['Total Annual Cost:', totalAnnual, NUMBER_FORMATS.currency],
-    ['Active Subscriptions:', activeSubscriptions.length, null],
-    ['Upcoming (7 days):', upcomingCount, null],
+    ["Total Monthly Cost:", totalMonthly, NUMBER_FORMATS.currency],
+    ["Total Annual Cost:", totalAnnual, NUMBER_FORMATS.currency],
+    ["Active Subscriptions:", activeSubscriptions.length, null],
+    ["Upcoming (7 days):", upcomingCount, null],
   ];
 
   statsData.forEach((stat, index) => {
@@ -139,7 +161,11 @@ export async function generateSubscriptionsSheet(
     if (stat[2]) {
       row.getCell(2).numFmt = stat[2] as string;
     }
-    row.getCell(2).font = { ...FONTS.body, bold: true, color: { argb: index === 0 ? 'FFEF4444' : 'FF111827' } };
+    row.getCell(2).font = {
+      ...FONTS.body,
+      bold: true,
+      color: { argb: index === 0 ? "FFEF4444" : "FF111827" },
+    };
     currentRow++;
   });
   currentRow++;
@@ -154,13 +180,16 @@ export async function generateSubscriptionsSheet(
   currentRow++;
 
   // Set column widths
-  setColumnWidths(worksheet, columns.map(c => c.width));
+  setColumnWidths(
+    worksheet,
+    columns.map((c) => c.width)
+  );
 
   // Sort subscriptions: active first, then by monthly cost descending
   const sortedSubscriptions = [...data.subscriptions].sort((a, b) => {
     // Active/trial first
-    const aActive = a.status === 'active' || a.status === 'trial' ? 0 : 1;
-    const bActive = b.status === 'active' || b.status === 'trial' ? 0 : 1;
+    const aActive = a.status === "active" || a.status === "trial" ? 0 : 1;
+    const bActive = b.status === "active" || b.status === "trial" ? 0 : 1;
     if (aActive !== bActive) return aActive - bActive;
 
     // Then by monthly cost
@@ -206,9 +235,9 @@ export async function generateSubscriptionsSheet(
     const nextBilling = new Date(sub.nextBillingDate);
     if (nextBilling >= now && nextBilling <= sevenDaysFromNow) {
       row.getCell(6).fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFFEF3C7' }, // Warning yellow
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "FFFEF3C7" }, // Warning yellow
       };
       row.getCell(6).font = { ...FONTS.body, bold: true };
     }
@@ -219,15 +248,15 @@ export async function generateSubscriptionsSheet(
     row.getCell(7).alignment = ALIGNMENTS.center;
 
     // Category
-    row.getCell(8).value = sub.category || '';
+    row.getCell(8).value = sub.category || "";
 
     // Style the row
     styleDataRow(row, index, columns.length);
 
     // Dim cancelled subscriptions
-    if (sub.status === 'cancelled') {
+    if (sub.status === "cancelled") {
       for (let i = 1; i <= columns.length; i++) {
-        row.getCell(i).font = { ...row.getCell(i).font, color: { argb: 'FF9CA3AF' } };
+        row.getCell(i).font = { ...row.getCell(i).font, color: { argb: "FF9CA3AF" } };
       }
     }
 
@@ -238,7 +267,7 @@ export async function generateSubscriptionsSheet(
   if (activeSubscriptions.length > 0) {
     currentRow++;
     const totalRow = worksheet.getRow(currentRow);
-    totalRow.getCell(1).value = 'TOTAL (Active)';
+    totalRow.getCell(1).value = "TOTAL (Active)";
     totalRow.getCell(1).font = { ...FONTS.body, bold: true };
 
     totalRow.getCell(4).value = totalMonthly;
@@ -251,9 +280,9 @@ export async function generateSubscriptionsSheet(
 
     for (let i = 1; i <= columns.length; i++) {
       totalRow.getCell(i).fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFE5E7EB' },
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "FFE5E7EB" },
       };
       totalRow.getCell(i).border = BORDERS.all;
     }

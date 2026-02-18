@@ -84,9 +84,7 @@ export function StudyGuideViewer({
     // Secure markdown rendering using react-markdown (prevents XSS attacks)
     return (
       <div className="prose prose-slate dark:prose-invert max-w-none">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {content}
-        </ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
       </div>
     );
   };

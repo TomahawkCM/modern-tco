@@ -1,7 +1,6 @@
 import type { DetailedAnalytics } from "@/lib/assessment/assessment-engine";
 import type { AssessmentResult } from "@/types/assessment";
 
-
 interface QuestionProgress {
   userId: string;
   questionId: string;
@@ -74,7 +73,10 @@ class ProgressServiceClass {
     return (progressService as any).getUserProgress(userId, moduleId);
   }
 
-  static async getDomainProgress(userId: string, domain?: string): Promise<DomainProgress | DomainProgress[]> {
+  static async getDomainProgress(
+    userId: string,
+    domain?: string
+  ): Promise<DomainProgress | DomainProgress[]> {
     return (progressService as any).getDomainProgress(userId, domain);
   }
 
@@ -185,17 +187,16 @@ export const progressService = new ProgressServiceClass();
 // Bind instance methods to the class so existing call-sites using the class
 // as a static holder (e.g. `ProgressService.updateQuestionProgress(...)`) continue
 // to work without refactoring callers.
-(ProgressServiceClass as any).updateQuestionProgress = progressService.updateQuestionProgress.bind(
-  progressService
-);
-(ProgressServiceClass as any).updateAssessmentProgress = progressService.updateAssessmentProgress.bind(
-  progressService
-);
-(ProgressServiceClass as any).getUserProgress = progressService.getUserProgress.bind(progressService);
-(ProgressServiceClass as any).getDomainProgress = progressService.getDomainProgress.bind(progressService);
-(ProgressServiceClass as any).getLearningAnalytics = progressService.getLearningAnalytics.bind(
-  progressService
-);
+(ProgressServiceClass as any).updateQuestionProgress =
+  progressService.updateQuestionProgress.bind(progressService);
+(ProgressServiceClass as any).updateAssessmentProgress =
+  progressService.updateAssessmentProgress.bind(progressService);
+(ProgressServiceClass as any).getUserProgress =
+  progressService.getUserProgress.bind(progressService);
+(ProgressServiceClass as any).getDomainProgress =
+  progressService.getDomainProgress.bind(progressService);
+(ProgressServiceClass as any).getLearningAnalytics =
+  progressService.getLearningAnalytics.bind(progressService);
 
 export { ProgressServiceClass as ProgressService }; // Keep class alias export for tests/mocks
 export default progressService;

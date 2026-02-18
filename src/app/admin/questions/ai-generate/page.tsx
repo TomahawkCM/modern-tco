@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 import { AdminGuard } from "@/components/auth/AdminGuard";
 import { AIGenerationPanel } from "@/components/admin/questions/AIGenerationPanel";
 import { Button } from "@/components/ui/button";
@@ -6,8 +6,8 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'AI Question Generation | Admin',
-  description: 'Generate TCO certification questions using Claude AI',
+  title: "AI Question Generation | Admin",
+  description: "Generate TCO certification questions using Claude AI",
 };
 
 // AI Question Generation - Admin tool for TCO certification questions

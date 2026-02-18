@@ -38,8 +38,8 @@ Each micro-section follows the **Learn → Test → Review** pattern:
 ### Basic Usage
 
 ```tsx
-import MicroSection from '@/components/mdx/MicroSection';
-import MicroQuizMDX from '@/components/mdx/MicroQuizMDX';
+import MicroSection from "@/components/mdx/MicroSection";
+import MicroQuizMDX from "@/components/mdx/MicroQuizMDX";
 
 <MicroSection
   id="asking-questions-basics"
@@ -51,7 +51,7 @@ import MicroQuizMDX from '@/components/mdx/MicroQuizMDX';
   keyTakeaways={[
     "Tanium queries follow: Get [sensor] from [targets] where [filters]",
     "Natural language processing converts queries to system operations",
-    "500+ built-in sensors provide immediate endpoint data access"
+    "500+ built-in sensors provide immediate endpoint data access",
   ]}
   quickCheck={
     <MicroQuizMDX
@@ -60,7 +60,7 @@ import MicroQuizMDX from '@/components/mdx/MicroQuizMDX';
         "Get [sensor] from [targets] where [filters]",
         "SELECT [field] FROM [table] WHERE [condition]",
         "Query [endpoints] for [data] using [filter]",
-        "Search [systems] with [parameters]"
+        "Search [systems] with [parameters]",
       ]}
       correctAnswer="Get [sensor] from [targets] where [filters]"
       explanation="Tanium uses natural language format: 'Get [sensor] from [targets] where [filters]' to construct queries that are converted into real-time endpoint interrogation."
@@ -69,26 +69,14 @@ import MicroQuizMDX from '@/components/mdx/MicroQuizMDX';
   }
 >
   {/* Learning Content */}
-
-  ## Natural Language Query Construction
-
-  Tanium's revolutionary approach uses **natural language processing** to convert
-  human-readable questions into powerful system queries.
-
-  **Example Query Patterns**:
-  - `Get Computer Name from all machines`
-  - `Get Running Services from all machines where IP Address contains "192.168"`
-  - `Get Installed Applications from all machines where Computer Name contains "SERVER"`
-
-  ### Practice Examples
-
-  Try constructing your first query:
-  1. Start with "Get"
-  2. Specify the sensor (e.g., "Computer Name")
-  3. Define the target (e.g., "from all machines")
-  4. Optionally add filters (e.g., "where OS contains Windows")
-
-</MicroSection>
+  ## Natural Language Query Construction Tanium's revolutionary approach uses **natural language
+  processing** to convert human-readable questions into powerful system queries. **Example Query
+  Patterns**: - `Get Computer Name from all machines` - `Get Running Services from all machines
+  where IP Address contains "192.168"` - `Get Installed Applications from all machines where
+  Computer Name contains "SERVER"` ### Practice Examples Try constructing your first query: 1. Start
+  with "Get" 2. Specify the sensor (e.g., "Computer Name") 3. Define the target (e.g., "from all
+  machines") 4. Optionally add filters (e.g., "where OS contains Windows")
+</MicroSection>;
 ```
 
 ## 📊 Module Breakdown into Micro-Sections
@@ -119,15 +107,15 @@ import MicroQuizMDX from '@/components/mdx/MicroQuizMDX';
 
 ### Complete 11.6 Hour Breakdown
 
-| Module | Time | Micro-Sections | Avg Section |
-|--------|------|----------------|-------------|
-| 0: Platform Foundation | 180 min | 18 sections | 10 min |
-| 1: Asking Questions | 45 min | 5 sections | 9 min |
-| 2: Refining Questions | 90 min | 9 sections | 10 min |
-| 3: Taking Action | 120 min | 12 sections | 10 min |
-| 4: Navigation & Modules | 210 min | 21 sections | 10 min |
-| 5: Reporting & Export | 180 min | 18 sections | 10 min |
-| **TOTAL** | **825 min (13.75h)** | **83 sections** | **~10 min** |
+| Module                  | Time                 | Micro-Sections  | Avg Section |
+| ----------------------- | -------------------- | --------------- | ----------- |
+| 0: Platform Foundation  | 180 min              | 18 sections     | 10 min      |
+| 1: Asking Questions     | 45 min               | 5 sections      | 9 min       |
+| 2: Refining Questions   | 90 min               | 9 sections      | 10 min      |
+| 3: Taking Action        | 120 min              | 12 sections     | 10 min      |
+| 4: Navigation & Modules | 210 min              | 21 sections     | 10 min      |
+| 5: Reporting & Export   | 180 min              | 18 sections     | 10 min      |
+| **TOTAL**               | **825 min (13.75h)** | **83 sections** | **~10 min** |
 
 ## 🎯 Content Creation Guidelines
 
@@ -177,7 +165,7 @@ import MicroQuizMDX from '@/components/mdx/MicroQuizMDX';
 
 ```typescript
 // Stored in localStorage: micro-section-{moduleId}-{sectionId}
-"true" // or "false"
+"true"; // or "false"
 ```
 
 ## 🚀 Implementation Checklist
@@ -216,6 +204,7 @@ For each study module:
 ### Spaced Repetition (Week 2)
 
 After completing sections, they enter spaced repetition queue:
+
 - Day 1: Initial learning
 - Day 3: First review
 - Day 7: Second review
@@ -225,6 +214,7 @@ After completing sections, they enter spaced repetition queue:
 ### Active Recall (Built-in)
 
 Every Quick Check uses active recall:
+
 1. Student attempts to answer from memory
 2. Immediate feedback provided
 3. Explanation reinforces correct understanding
@@ -233,6 +223,7 @@ Every Quick Check uses active recall:
 ### Chunking (Current Implementation)
 
 Information organized into digestible chunks:
+
 - Module → Micro-sections → Concepts → Examples
 - Each chunk builds on previous
 - Prevents cognitive overload

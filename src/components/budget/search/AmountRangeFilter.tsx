@@ -4,13 +4,13 @@
  * Features: Preset chips, precise input fields, visual feedback
  */
 
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import { useTranslations } from 'next-intl';
-import { DollarSign, X as XIcon } from 'lucide-react';
-import * as SliderPrimitive from '@radix-ui/react-slider';
-import { cn } from '@/lib/utils';
+import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
+import { DollarSign, X as XIcon } from "lucide-react";
+import * as SliderPrimitive from "@radix-ui/react-slider";
+import { cn } from "@/lib/utils";
 
 export interface AmountRangeFilterProps {
   /** Minimum value selected */
@@ -35,10 +35,10 @@ export interface AmountRangeFilterProps {
 
 // Preset amount ranges
 const PRESETS = [
-  { label: 'Under $25', min: undefined, max: 25 },
-  { label: '$25-100', min: 25, max: 100 },
-  { label: '$100-500', min: 100, max: 500 },
-  { label: '$500+', min: 500, max: undefined },
+  { label: "Under $25", min: undefined, max: 25 },
+  { label: "$25-100", min: 25, max: 100 },
+  { label: "$100-500", min: 100, max: 500 },
+  { label: "$500+", min: 500, max: undefined },
 ] as const;
 
 export function AmountRangeFilter({
@@ -52,7 +52,7 @@ export function AmountRangeFilter({
   showPresets = true,
   transactionAmounts = [],
 }: AmountRangeFilterProps) {
-  const t = useTranslations('amountFilter');
+  const t = useTranslations("amountFilter");
 
   // Internal state for slider values
   const [sliderValues, setSliderValues] = useState<[number, number]>([
@@ -61,8 +61,8 @@ export function AmountRangeFilter({
   ]);
 
   // Input field states
-  const [minInput, setMinInput] = useState(minValue?.toString() || '');
-  const [maxInput, setMaxInput] = useState(maxValue?.toString() || '');
+  const [minInput, setMinInput] = useState(minValue?.toString() || "");
+  const [maxInput, setMaxInput] = useState(maxValue?.toString() || "");
 
   // Active preset
   const [activePreset, setActivePreset] = useState<number | null>(null);
@@ -70,31 +70,28 @@ export function AmountRangeFilter({
   // Sync slider with props
   useEffect(() => {
     setSliderValues([minValue ?? min, maxValue ?? max]);
-    setMinInput(minValue?.toString() || '');
-    setMaxInput(maxValue?.toString() || '');
+    setMinInput(minValue?.toString() || "");
+    setMaxInput(maxValue?.toString() || "");
   }, [minValue, maxValue, min, max]);
 
   // Handle slider change
-  const handleSliderChange = useCallback((values: number[]) => {
-    const [newMin, newMax] = values as [number, number];
-    setSliderValues([newMin, newMax]);
-    setMinInput(newMin === min ? '' : newMin.toString());
-    setMaxInput(newMax === max ? '' : newMax.toString());
-    setActivePreset(null);
+  const handleSliderChange = useCallback(
+    (values: number[]) => {
+      const [newMin, newMax] = values as [number, number];
+      setSliderValues([newMin, newMax]);
+      setMinInput(newMin === min ? "" : newMin.toString());
+      setMaxInput(newMax === max ? "" : newMax.toString());
+      setActivePreset(null);
 
-    // Emit change with undefined for min/max boundaries
-    onChange(
-      newMin === min ? undefined : newMin,
-      newMax === max ? undefined : newMax
-    );
-  }, [min, max, onChange]);
+      // Emit change with undefined for min/max boundaries
+      onChange(newMin === min ? undefined : newMin, newMax === max ? undefined : newMax);
+    },
+    [min, max, onChange]
+  );
 
   // Handle input field change
-  const handleInputChange = useCallback((
-    type: 'min' | 'max',
-    value: string
-  ) => {
-    if (type === 'min') {
+  const handleInputChange = useCallback((type: "min" | "max", value: string) => {
+    if (type === "min") {
       setMinInput(value);
     } else {
       setMaxInput(value);
@@ -102,71 +99,71 @@ export function AmountRangeFilter({
   }, []);
 
   // Handle input field blur - commit value
-  const handleInputBlur = useCallback((type: 'min' | 'max') => {
-    let newMin = minInput ? parseFloat(minInput) : undefined;
-    let newMax = maxInput ? parseFloat(maxInput) : undefined;
+  const handleInputBlur = useCallback(
+    (type: "min" | "max") => {
+      let newMin = minInput ? parseFloat(minInput) : undefined;
+      let newMax = maxInput ? parseFloat(maxInput) : undefined;
 
-    // Validate and clamp values
-    if (newMin !== undefined) {
-      newMin = Math.max(min, Math.min(newMin, newMax ?? max));
-    }
-    if (newMax !== undefined) {
-      newMax = Math.min(max, Math.max(newMax, newMin ?? min));
-    }
+      // Validate and clamp values
+      if (newMin !== undefined) {
+        newMin = Math.max(min, Math.min(newMin, newMax ?? max));
+      }
+      if (newMax !== undefined) {
+        newMax = Math.min(max, Math.max(newMax, newMin ?? min));
+      }
 
-    // Update slider
-    setSliderValues([newMin ?? min, newMax ?? max]);
-    setActivePreset(null);
+      // Update slider
+      setSliderValues([newMin ?? min, newMax ?? max]);
+      setActivePreset(null);
 
-    // Emit change
-    onChange(newMin, newMax);
-  }, [minInput, maxInput, min, max, onChange]);
+      // Emit change
+      onChange(newMin, newMax);
+    },
+    [minInput, maxInput, min, max, onChange]
+  );
 
   // Handle preset click
-  const handlePresetClick = useCallback((
-    preset: typeof PRESETS[number],
-    index: number
-  ) => {
-    setActivePreset(index);
-    setSliderValues([preset.min ?? min, preset.max ?? max]);
-    setMinInput(preset.min?.toString() || '');
-    setMaxInput(preset.max?.toString() || '');
-    onChange(preset.min, preset.max);
-  }, [min, max, onChange]);
+  const handlePresetClick = useCallback(
+    (preset: (typeof PRESETS)[number], index: number) => {
+      setActivePreset(index);
+      setSliderValues([preset.min ?? min, preset.max ?? max]);
+      setMinInput(preset.min?.toString() || "");
+      setMaxInput(preset.max?.toString() || "");
+      onChange(preset.min, preset.max);
+    },
+    [min, max, onChange]
+  );
 
   // Clear filter
   const handleClear = useCallback(() => {
     setSliderValues([min, max]);
-    setMinInput('');
-    setMaxInput('');
+    setMinInput("");
+    setMaxInput("");
     setActivePreset(null);
     onChange(undefined, undefined);
   }, [min, max, onChange]);
 
   // Calculate distribution histogram (optional visualization)
-  const histogram = transactionAmounts.length > 0
-    ? calculateHistogram(transactionAmounts, min, max, 20)
-    : null;
+  const histogram =
+    transactionAmounts.length > 0 ? calculateHistogram(transactionAmounts, min, max, 20) : null;
 
   const hasFilter = minValue !== undefined || maxValue !== undefined;
 
   return (
-    <div className={cn('space-y-4', className)}>
+    <div className={cn("space-y-4", className)}>
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <DollarSign className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm font-medium text-foreground">
-            {t('title')}
-          </span>
+          <span className="text-sm font-medium text-foreground">{t("title")}</span>
         </div>
         {hasFilter && (
           <button
             onClick={handleClear}
-            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            className="flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             <XIcon className="h-3 w-3" />
-            {t('clear')}
+            {t("clear")}
           </button>
         )}
       </div>
@@ -179,10 +176,10 @@ export function AmountRangeFilter({
               key={preset.label}
               onClick={() => handlePresetClick(preset, index)}
               className={cn(
-                'px-3 py-1.5 rounded-full text-sm font-medium transition-all',
+                "rounded-full px-3 py-1.5 text-sm font-medium transition-all",
                 activePreset === index
-                  ? 'bg-teal-600 text-white shadow-md scale-105'
-                  : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                  ? "scale-105 bg-teal-600 text-white shadow-md"
+                  : "bg-muted text-muted-foreground hover:bg-muted/80"
               )}
             >
               {preset.label}
@@ -193,14 +190,14 @@ export function AmountRangeFilter({
 
       {/* Histogram (optional) */}
       {histogram && (
-        <div className="h-8 flex items-end gap-px px-1">
+        <div className="flex h-8 items-end gap-px px-1">
           {histogram.map((count, i) => (
             <div
               key={i}
-              className="flex-1 bg-teal-200 rounded-t transition-all"
+              className="flex-1 rounded-t bg-teal-200 transition-all"
               style={{
                 height: `${(count / Math.max(...histogram)) * 100}%`,
-                minHeight: count > 0 ? '2px' : '0',
+                minHeight: count > 0 ? "2px" : "0",
               }}
             />
           ))}
@@ -210,7 +207,7 @@ export function AmountRangeFilter({
       {/* Dual-Thumb Slider */}
       <div className="px-1">
         <SliderPrimitive.Root
-          className="relative flex w-full touch-none select-none items-center h-5"
+          className="relative flex h-5 w-full touch-none select-none items-center"
           value={sliderValues}
           onValueChange={handleSliderChange}
           min={min}
@@ -222,18 +219,18 @@ export function AmountRangeFilter({
             <SliderPrimitive.Range className="absolute h-full bg-teal-500" />
           </SliderPrimitive.Track>
           <SliderPrimitive.Thumb
-            className="block h-5 w-5 rounded-full border-2 border-teal-500 bg-background shadow-lg ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-grab active:cursor-grabbing"
-            aria-label={t('minThumb')}
+            className="block h-5 w-5 cursor-grab rounded-full border-2 border-teal-500 bg-background shadow-lg ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:cursor-grabbing disabled:pointer-events-none disabled:opacity-50"
+            aria-label={t("minThumb")}
           />
           <SliderPrimitive.Thumb
-            className="block h-5 w-5 rounded-full border-2 border-teal-500 bg-background shadow-lg ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-grab active:cursor-grabbing"
-            aria-label={t('maxThumb')}
+            className="block h-5 w-5 cursor-grab rounded-full border-2 border-teal-500 bg-background shadow-lg ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:cursor-grabbing disabled:pointer-events-none disabled:opacity-50"
+            aria-label={t("maxThumb")}
           />
         </SliderPrimitive.Root>
       </div>
 
       {/* Value Labels */}
-      <div className="flex justify-between text-xs text-muted-foreground px-1">
+      <div className="flex justify-between px-1 text-xs text-muted-foreground">
         <span>${min}</span>
         <span>${max}+</span>
       </div>
@@ -241,39 +238,43 @@ export function AmountRangeFilter({
       {/* Input Fields */}
       <div className="flex items-center gap-3">
         <div className="flex-1">
-          <label className="sr-only">{t('minLabel')}</label>
+          <label className="sr-only">{t("minLabel")}</label>
           <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+            <span className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+              $
+            </span>
             <input
               type="number"
               value={minInput}
-              onChange={(e) => handleInputChange('min', e.target.value)}
-              onBlur={() => handleInputBlur('min')}
-              onKeyDown={(e) => e.key === 'Enter' && handleInputBlur('min')}
-              placeholder={t('minPlaceholder')}
+              onChange={(e) => handleInputChange("min", e.target.value)}
+              onBlur={() => handleInputBlur("min")}
+              onKeyDown={(e) => e.key === "Enter" && handleInputBlur("min")}
+              placeholder={t("minPlaceholder")}
               min={min}
               max={max}
               step={step}
-              className="w-full rounded-lg border border-input bg-background pl-7 pr-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full rounded-lg border border-input bg-background py-2 ps-7 pe-3 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             />
           </div>
         </div>
         <span className="text-muted-foreground">—</span>
         <div className="flex-1">
-          <label className="sr-only">{t('maxLabel')}</label>
+          <label className="sr-only">{t("maxLabel")}</label>
           <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
+            <span className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+              $
+            </span>
             <input
               type="number"
               value={maxInput}
-              onChange={(e) => handleInputChange('max', e.target.value)}
-              onBlur={() => handleInputBlur('max')}
-              onKeyDown={(e) => e.key === 'Enter' && handleInputBlur('max')}
-              placeholder={t('maxPlaceholder')}
+              onChange={(e) => handleInputChange("max", e.target.value)}
+              onBlur={() => handleInputBlur("max")}
+              onKeyDown={(e) => e.key === "Enter" && handleInputBlur("max")}
+              placeholder={t("maxPlaceholder")}
               min={min}
               max={max}
               step={step}
-              className="w-full rounded-lg border border-input bg-background pl-7 pr-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full rounded-lg border border-input bg-background py-2 ps-7 pe-3 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             />
           </div>
         </div>
@@ -281,7 +282,7 @@ export function AmountRangeFilter({
 
       {/* Current Filter Summary */}
       {hasFilter && (
-        <div className="text-center text-sm text-teal-600 font-medium">
+        <div className="text-center text-sm font-medium text-teal-600">
           {minValue !== undefined && maxValue !== undefined
             ? `$${minValue.toFixed(0)} — $${maxValue.toFixed(0)}`
             : minValue !== undefined
@@ -308,10 +309,7 @@ function calculateHistogram(
   for (const amount of amounts) {
     const absAmount = Math.abs(amount);
     if (absAmount < min || absAmount > max) continue;
-    const bucketIndex = Math.min(
-      Math.floor((absAmount - min) / bucketSize),
-      buckets - 1
-    );
+    const bucketIndex = Math.min(Math.floor((absAmount - min) / bucketSize), buckets - 1);
     histogram[bucketIndex]++;
   }
 
@@ -319,5 +317,5 @@ function calculateHistogram(
 }
 
 // Export preset type for external use
-export type AmountPreset = typeof PRESETS[number];
+export type AmountPreset = (typeof PRESETS)[number];
 export { PRESETS as AMOUNT_PRESETS };

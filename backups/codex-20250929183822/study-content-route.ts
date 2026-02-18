@@ -31,7 +31,7 @@ interface ParsedModule {
 class ServerSideContentParser {
   private static extractExamWeight(content: string): number {
     const weightMatch = content.match(/(\d+)%\s+Exam\s+Weight/i);
-    return weightMatch ? parseInt(weightMatch[1] || '0') : 0;
+    return weightMatch ? parseInt(weightMatch[1] || "0") : 0;
   }
 
   private static extractLearningObjectives(content: string): string[] {
@@ -40,7 +40,9 @@ class ServerSideContentParser {
 
     if (objectivesMatch) {
       const objectivesText = objectivesMatch[1];
-      const matches = objectivesText ? objectivesText.match(/\d+\.\s+\*\*(.*?)\*\*\s+-\s+(.*?)(?=\n\d+\.|$)/g) : null;
+      const matches = objectivesText
+        ? objectivesText.match(/\d+\.\s+\*\*(.*?)\*\*\s+-\s+(.*?)(?=\n\d+\.|$)/g)
+        : null;
 
       if (matches) {
         matches.forEach((match) => {

@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
 /**
  * Split Transaction Modal Component (Phase 6)
  * Task 6.1.1 & 6.1.2: Design and implement split transaction modal
- * 
+ *
  * Allows splitting a transaction across multiple categories
  */
 
-import { useState, useEffect } from 'react';
-import { X, Plus, Trash2, AlertCircle, CheckCircle } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import type { Transaction, Category } from '@/types/budget';
-import { useFocusTrap } from '@/hooks/useFocusTrap';
+import { useState, useEffect } from "react";
+import { X, Plus, Trash2, AlertCircle, CheckCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
+import type { Transaction, Category } from "@/types/budget";
+import { useFocusTrap } from "@/hooks/useFocusTrap";
 
 interface Split {
   id: string;
@@ -34,27 +34,27 @@ export function SplitTransactionModal({
   onSave,
   onClose,
 }: SplitTransactionModalProps) {
-  const t = useTranslations('splitTransaction');
+  const t = useTranslations("splitTransaction");
   const originalAmount = Math.abs(transaction.amount);
-  
+
   // Initialize with 2 splits (50/50)
   const [splits, setSplits] = useState<Split[]>([
     {
       id: `split_${Date.now()}_1`,
-      category: '',
-      subcategory: '',
+      category: "",
+      subcategory: "",
       amount: originalAmount / 2,
-      notes: '',
+      notes: "",
     },
     {
       id: `split_${Date.now()}_2`,
-      category: '',
-      subcategory: '',
+      category: "",
+      subcategory: "",
       amount: originalAmount / 2,
-      notes: '',
+      notes: "",
     },
   ]);
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Focus trap for modal accessibility
@@ -63,15 +63,15 @@ export function SplitTransactionModal({
   // Handle Escape key to close modal (Task 2.2.3)
   useEffect(() => {
     function handleEscapeKey(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         onClose();
       }
     }
 
-    document.addEventListener('keydown', handleEscapeKey);
+    document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
+      document.removeEventListener("keydown", handleEscapeKey);
     };
   }, [onClose]);
 
@@ -82,44 +82,46 @@ export function SplitTransactionModal({
 
   function addSplit() {
     if (splits.length >= 5) {
-      alert(t('maxSplitsReached'));
+      alert(t("maxSplitsReached"));
       return;
     }
 
     const remaining = originalAmount - total;
     const newSplit: Split = {
       id: `split_${Date.now()}_${splits.length + 1}`,
-      category: '',
-      subcategory: '',
+      category: "",
+      subcategory: "",
       amount: remaining > 0 ? remaining : 0,
-      notes: '',
+      notes: "",
     };
     setSplits([...splits, newSplit]);
   }
 
   function removeSplit(id: string) {
     if (splits.length <= 2) {
-      alert(t('minSplitsRequired'));
+      alert(t("minSplitsRequired"));
       return;
     }
-    setSplits(splits.filter(split => split.id !== id));
+    setSplits(splits.filter((split) => split.id !== id));
   }
 
   function updateSplit(id: string, field: keyof Split, value: string | number) {
-    setSplits(splits.map(split => 
-      split.id === id ? { ...split, [field]: value } : split
-    ));
+    setSplits(splits.map((split) => (split.id === id ? { ...split, [field]: value } : split)));
   }
 
   function handleCategoryChange(id: string, categoryName: string) {
-    const category = categories.find(c => c.name === categoryName);
-    setSplits(splits.map(split =>
-      split.id === id ? { 
-        ...split, 
-        category: categoryName,
-        subcategory: '' // Reset subcategory when category changes
-      } : split
-    ));
+    const category = categories.find((c) => c.name === categoryName);
+    setSplits(
+      splits.map((split) =>
+        split.id === id
+          ? {
+              ...split,
+              category: categoryName,
+              subcategory: "", // Reset subcategory when category changes
+            }
+          : split
+      )
+    );
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -127,14 +129,14 @@ export function SplitTransactionModal({
 
     // Validation
     if (!isValid) {
-      alert(t('validation.amountsMustMatch'));
+      alert(t("validation.amountsMustMatch"));
       return;
     }
 
     // Check all splits have categories
-    const missingCategory = splits.some(split => !split.category);
+    const missingCategory = splits.some((split) => !split.category);
     if (missingCategory) {
-      alert(t('validation.categoryRequired'));
+      alert(t("validation.categoryRequired"));
       return;
     }
 
@@ -144,8 +146,8 @@ export function SplitTransactionModal({
       await onSave(splits);
       onClose();
     } catch (error) {
-      console.error('Error saving split transaction:', error);
-      alert(t('errors.saveFailed'));
+      console.error("Error saving split transaction:", error);
+      alert(t("errors.saveFailed"));
     } finally {
       setIsSubmitting(false);
     }
@@ -153,46 +155,51 @@ export function SplitTransactionModal({
 
   function distributeEvenly() {
     const amountPerSplit = originalAmount / splits.length;
-    setSplits(splits.map(split => ({
-      ...split,
-      amount: amountPerSplit,
-    })));
+    setSplits(
+      splits.map((split) => ({
+        ...split,
+        amount: amountPerSplit,
+      }))
+    );
   }
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-end sm:items-center justify-center z-50 p-4 sm:p-4 p-0">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 p-0 p-4 sm:items-center sm:p-4">
       {/* Phase 3.1.5: Mobile-optimized with bottom sheet on mobile, centered on desktop */}
-      <div ref={modalRef} className="bg-white rounded-t-2xl sm:rounded-lg shadow-xl w-full sm:max-w-3xl max-h-[90vh] overflow-y-auto">
+      <div
+        ref={modalRef}
+        className="max-h-[90vh] w-full overflow-y-auto rounded-t-2xl bg-white shadow-xl sm:max-w-3xl sm:rounded-lg"
+      >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 sticky top-0 bg-white z-10">
+        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white p-6">
           <div>
-            <h2 className="text-xl font-bold text-gray-900">{t('title')}</h2>
-            <p className="text-sm text-gray-600 mt-2">
+            <h2 className="text-xl font-bold text-gray-900">{t("title")}</h2>
+            <p className="mt-2 text-sm text-gray-600">
               {transaction.description} • ${originalAmount.toFixed(2)}
             </p>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
-            aria-label={t('closeModal')}
+            className="text-gray-400 transition-colors hover:text-gray-600"
+            aria-label={t("closeModal")}
           >
-            <X className="w-5 h-5" />
+            <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 p-6">
           {/* Original Transaction Info */}
-          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div>
-                <span className="text-gray-600">{t('originalAmount')}</span>
+                <span className="text-gray-600">{t("originalAmount")}</span>
                 <span className="ml-2 font-semibold text-gray-900">
                   ${originalAmount.toFixed(2)}
                 </span>
               </div>
               <div>
-                <span className="text-gray-600">{t('date')}</span>
+                <span className="text-gray-600">{t("date")}</span>
                 <span className="ml-2 font-semibold text-gray-900">
                   {new Date(transaction.date).toLocaleDateString()}
                 </span>
@@ -204,44 +211,47 @@ export function SplitTransactionModal({
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-semibold text-gray-900">
-                {t('splitsCount', { current: splits.length, max: 5 })}
+                {t("splitsCount", { current: splits.length, max: 5 })}
               </h3>
               <button
                 type="button"
                 onClick={distributeEvenly}
-                className="text-xs text-teal-600 hover:text-teal-700 underline"
+                className="text-xs text-teal-600 underline hover:text-teal-700"
               >
-                {t('distributeEvenly')}
+                {t("distributeEvenly")}
               </button>
             </div>
 
             {splits.map((split, index) => {
-              const selectedCategory = categories.find(c => c.name === split.category);
-              
+              const selectedCategory = categories.find((c) => c.name === split.category);
+
               return (
-                <div key={split.id} className="bg-white border border-gray-200 rounded-lg p-4">
+                <div key={split.id} className="rounded-lg border border-gray-200 bg-white p-4">
                   <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-8 h-8 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center text-sm font-semibold">
+                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-teal-100 text-sm font-semibold text-teal-700">
                       {index + 1}
                     </div>
-                    
+
                     <div className="flex-1 space-y-4">
                       {/* Category and Amount Row */}
                       <div className="grid grid-cols-2 gap-4">
                         {/* Category */}
                         <div>
-                          <label htmlFor={`split-category-${split.id}`} className="block text-xs font-medium text-gray-700 mb-2">
-                            {t('category')} <span className="text-red-600">*</span>
+                          <label
+                            htmlFor={`split-category-${split.id}`}
+                            className="mb-2 block text-xs font-medium text-gray-700"
+                          >
+                            {t("category")} <span className="text-red-600">*</span>
                           </label>
                           <select
                             id={`split-category-${split.id}`}
                             value={split.category}
                             onChange={(e) => handleCategoryChange(split.id, e.target.value)}
-                            className="w-full h-12 px-4 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            className="h-12 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
                             aria-required="true"
                             required
                           >
-                            <option value="">{t('selectCategory')}</option>
+                            <option value="">{t("selectCategory")}</option>
                             {categories.map((cat) => (
                               <option key={cat.id} value={cat.name}>
                                 {cat.name}
@@ -252,21 +262,28 @@ export function SplitTransactionModal({
 
                         {/* Amount */}
                         <div>
-                          <label htmlFor={`split-amount-${split.id}`} className="block text-xs font-medium text-gray-700 mb-2">
-                            {t('amount')} <span className="text-red-600">*</span>
+                          <label
+                            htmlFor={`split-amount-${split.id}`}
+                            className="mb-2 block text-xs font-medium text-gray-700"
+                          >
+                            {t("amount")} <span className="text-red-600">*</span>
                           </label>
                           <div className="relative">
-                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">$</span>
+                            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-gray-500">
+                              $
+                            </span>
                             <input
                               id={`split-amount-${split.id}`}
                               type="number"
                               step="0.01"
                               min="0"
                               max={originalAmount}
-                              value={split.amount || ''}
-                              onChange={(e) => updateSplit(split.id, 'amount', parseFloat(e.target.value) || 0)}
+                              value={split.amount || ""}
+                              onChange={(e) =>
+                                updateSplit(split.id, "amount", parseFloat(e.target.value) || 0)
+                              }
                               inputMode="decimal"
-                              className="w-full h-12 pl-8 pr-4 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                              className="h-12 w-full rounded-lg border border-gray-300 pl-8 pr-4 text-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
                               aria-required="true"
                               required
                             />
@@ -277,16 +294,19 @@ export function SplitTransactionModal({
                       {/* Subcategory */}
                       {selectedCategory && selectedCategory.subcategories.length > 0 && (
                         <div>
-                          <label htmlFor={`split-subcategory-${split.id}`} className="block text-xs font-medium text-gray-700 mb-2">
-                            {t('subcategory')}
+                          <label
+                            htmlFor={`split-subcategory-${split.id}`}
+                            className="mb-2 block text-xs font-medium text-gray-700"
+                          >
+                            {t("subcategory")}
                           </label>
                           <select
                             id={`split-subcategory-${split.id}`}
                             value={split.subcategory}
-                            onChange={(e) => updateSplit(split.id, 'subcategory', e.target.value)}
-                            className="w-full h-12 px-4 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                            onChange={(e) => updateSplit(split.id, "subcategory", e.target.value)}
+                            className="h-12 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
                           >
-                            <option value="">{t('none')}</option>
+                            <option value="">{t("none")}</option>
                             {selectedCategory.subcategories.map((subcat) => (
                               <option key={subcat} value={subcat}>
                                 {subcat}
@@ -298,16 +318,19 @@ export function SplitTransactionModal({
 
                       {/* Notes */}
                       <div>
-                        <label htmlFor={`split-notes-${split.id}`} className="block text-xs font-medium text-gray-700 mb-2">
-                          {t('notes')}
+                        <label
+                          htmlFor={`split-notes-${split.id}`}
+                          className="mb-2 block text-xs font-medium text-gray-700"
+                        >
+                          {t("notes")}
                         </label>
                         <input
                           id={`split-notes-${split.id}`}
                           type="text"
                           value={split.notes}
-                          onChange={(e) => updateSplit(split.id, 'notes', e.target.value)}
-                          placeholder={t('notesPlaceholder')}
-                          className="w-full h-12 px-4 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                          onChange={(e) => updateSplit(split.id, "notes", e.target.value)}
+                          placeholder={t("notesPlaceholder")}
+                          className="h-12 w-full rounded-lg border border-gray-300 px-4 text-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
                         />
                       </div>
                     </div>
@@ -317,10 +340,10 @@ export function SplitTransactionModal({
                       <button
                         type="button"
                         onClick={() => removeSplit(split.id)}
-                        className="flex-shrink-0 p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                        title={t('removeThisSplit')}
+                        className="flex-shrink-0 rounded-lg p-2 text-red-600 transition-colors hover:bg-red-50"
+                        title={t("removeThisSplit")}
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="h-4 w-4" />
                       </button>
                     )}
                   </div>
@@ -333,46 +356,41 @@ export function SplitTransactionModal({
               <button
                 type="button"
                 onClick={addSplit}
-                className="w-full py-2 border-2 border-dashed border-gray-300 text-gray-600 rounded-lg hover:border-teal-500 hover:text-teal-600 transition-colors flex items-center justify-center gap-2"
+                className="flex w-full items-center justify-center gap-2 rounded-lg border-2 border-dashed border-gray-300 py-2 text-gray-600 transition-colors hover:border-teal-500 hover:text-teal-600"
               >
-                <Plus className="w-4 h-4" />
-                {t('addSplit', { current: splits.length, max: 5 })}
+                <Plus className="h-4 w-4" />
+                {t("addSplit", { current: splits.length, max: 5 })}
               </button>
             )}
           </div>
 
           {/* Validation Summary */}
-          <div className={`rounded-lg p-4 border-2 ${
-            isValid
-              ? 'bg-green-50 border-green-200'
-              : 'bg-red-50 border-red-200'
-          }`}>
+          <div
+            className={`rounded-lg border-2 p-4 ${
+              isValid ? "border-green-200 bg-green-50" : "border-red-200 bg-red-50"
+            }`}
+          >
             <div className="flex items-start gap-4">
               {isValid ? (
-                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-600" />
               ) : (
-                <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-600" />
               )}
               <div className="flex-1">
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`font-semibold ${isValid ? 'text-green-900' : 'text-red-900'}`}>
-                    {t('validation.total')} ${total.toFixed(2)}
+                <div className="mb-2 flex items-center justify-between">
+                  <span className={`font-semibold ${isValid ? "text-green-900" : "text-red-900"}`}>
+                    {t("validation.total")} ${total.toFixed(2)}
                   </span>
-                  <span className={`text-sm ${isValid ? 'text-green-700' : 'text-red-700'}`}>
-                    {isValid ? (
-                      t('validation.matchesOriginal')
-                    ) : (
-                      difference > 0
-                        ? t('validation.overBy', { amount: Math.abs(difference).toFixed(2) })
-                        : t('validation.underBy', { amount: Math.abs(difference).toFixed(2) })
-                    )}
+                  <span className={`text-sm ${isValid ? "text-green-700" : "text-red-700"}`}>
+                    {isValid
+                      ? t("validation.matchesOriginal")
+                      : difference > 0
+                        ? t("validation.overBy", { amount: Math.abs(difference).toFixed(2) })
+                        : t("validation.underBy", { amount: Math.abs(difference).toFixed(2) })}
                   </span>
                 </div>
-                <p className={`text-sm ${isValid ? 'text-green-700' : 'text-red-700'}`}>
-                  {isValid
-                    ? t('validation.readyToSave')
-                    : t('validation.adjustAmounts')
-                  }
+                <p className={`text-sm ${isValid ? "text-green-700" : "text-red-700"}`}>
+                  {isValid ? t("validation.readyToSave") : t("validation.adjustAmounts")}
                 </p>
               </div>
             </div>
@@ -383,30 +401,30 @@ export function SplitTransactionModal({
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+              className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
               disabled={isSubmitting}
             >
-              {t('buttons.cancel')}
+              {t("buttons.cancel")}
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 rounded-lg bg-teal-500 px-4 py-2 text-white transition-colors hover:bg-teal-600 disabled:cursor-not-allowed disabled:opacity-50"
               disabled={!isValid || isSubmitting}
             >
-              {isSubmitting ? t('buttons.saving') : t('buttons.save')}
+              {isSubmitting ? t("buttons.saving") : t("buttons.save")}
             </button>
           </div>
         </form>
 
         {/* Help Text */}
         <div className="px-6 pb-6">
-          <div className="bg-teal-50 border border-teal-200 rounded-lg p-4 text-sm text-teal-800">
-            <p className="font-medium mb-2">{t('help.title')}</p>
-            <ul className="list-disc list-inside space-y-2 text-xs">
-              <li>{t('help.step1', { amount: originalAmount.toFixed(2) })}</li>
-              <li>{t('help.step2')}</li>
-              <li>{t('help.step3')}</li>
-              <li>{t('help.step4')}</li>
+          <div className="rounded-lg border border-teal-200 bg-teal-50 p-4 text-sm text-teal-800">
+            <p className="mb-2 font-medium">{t("help.title")}</p>
+            <ul className="list-inside list-disc space-y-2 text-xs">
+              <li>{t("help.step1", { amount: originalAmount.toFixed(2) })}</li>
+              <li>{t("help.step2")}</li>
+              <li>{t("help.step3")}</li>
+              <li>{t("help.step4")}</li>
             </ul>
           </div>
         </div>
@@ -414,4 +432,3 @@ export function SplitTransactionModal({
     </div>
   );
 }
-

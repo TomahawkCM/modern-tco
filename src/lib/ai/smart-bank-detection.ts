@@ -11,9 +11,9 @@
  * Privacy: Only sends cleaned transaction samples (no account numbers, no PII)
  */
 
-import { chatCompletionJSON, cleanDescriptionForAI } from './openai-service';
-import { BANK_CONFIGS } from '@/lib/parsers/csv-parser';
-import type { CSVRow } from '@/types/budget';
+import { chatCompletionJSON, cleanDescriptionForAI } from "./openai-service";
+import { BANK_CONFIGS } from "@/lib/parsers/csv-parser";
+import type { CSVRow } from "@/types/budget";
 
 // ============================================================================
 // Types
@@ -23,7 +23,7 @@ export interface BankDetectionResult {
   bankKey: string | null; // Key from BANK_CONFIGS (e.g., 'bmo', 'td', 'chase')
   bankName: string | null; // Human-readable name (e.g., 'BMO', 'TD Canada Trust')
   confidence: number; // 0-1 scale (0 = no match, 1 = perfect match)
-  detectionMethod: 'ai-pattern' | 'header-fuzzy' | 'header-exact' | 'unknown';
+  detectionMethod: "ai-pattern" | "header-fuzzy" | "header-exact" | "unknown";
   reasoning?: string; // AI explanation of detection
   alternatives?: Array<{
     bankKey: string;
@@ -49,22 +49,22 @@ interface AIBankDetectionResponse {
  */
 const BANK_SIGNATURES: Record<string, string[]> = {
   // Canadian Banks
-  bmo: ['[PR]', '[OP]', 'BMO ', 'BANK OF MONTREAL'],
-  homeTrust: ['HOME TRUST', 'HOMETRUST'],
-  td: ['TD BANK', 'TD CANADA', 'TD VISA', 'TD CREDIT'],
-  rbc: ['RBC', 'ROYAL BANK', 'ROYAL BK'],
-  scotiabank: ['SCOTIABANK', 'SCOTIA', 'BNS'],
-  cibc: ['CIBC', 'CANADIAN IMPERIAL'],
-  tangerine: ['TANGERINE', 'TNG'],
-  simplii: ['SIMPLII', 'PC FINANCIAL'],
+  bmo: ["[PR]", "[OP]", "BMO ", "BANK OF MONTREAL"],
+  homeTrust: ["HOME TRUST", "HOMETRUST"],
+  td: ["TD BANK", "TD CANADA", "TD VISA", "TD CREDIT"],
+  rbc: ["RBC", "ROYAL BANK", "ROYAL BK"],
+  scotiabank: ["SCOTIABANK", "SCOTIA", "BNS"],
+  cibc: ["CIBC", "CANADIAN IMPERIAL"],
+  tangerine: ["TANGERINE", "TNG"],
+  simplii: ["SIMPLII", "PC FINANCIAL"],
 
   // US Banks
-  chase: ['CHASE', 'JPM', 'JPMORGAN'],
-  bofa: ['BANK OF AMERICA', 'BOFA', 'BOA '],
-  wellsFargo: ['WELLS FARGO', 'WF '],
-  citibank: ['CITIBANK', 'CITI', 'CITICORP'],
-  capitalOne: ['CAPITAL ONE', 'CAP1'],
-  usBank: ['U.S. BANK', 'US BANK', 'USB'],
+  chase: ["CHASE", "JPM", "JPMORGAN"],
+  bofa: ["BANK OF AMERICA", "BOFA", "BOA "],
+  wellsFargo: ["WELLS FARGO", "WF "],
+  citibank: ["CITIBANK", "CITI", "CITICORP"],
+  capitalOne: ["CAPITAL ONE", "CAP1"],
+  usBank: ["U.S. BANK", "US BANK", "USB"],
 };
 
 // ============================================================================
@@ -94,7 +94,7 @@ export async function detectBankWithAI(
       bankKey: null,
       bankName: null,
       confidence: 0,
-      detectionMethod: 'unknown',
+      detectionMethod: "unknown",
     };
   }
 
@@ -103,16 +103,16 @@ export async function detectBankWithAI(
 
   // Call OpenAI API
   const response = await chatCompletionJSON<AIBankDetectionResponse>(prompt, {
-    model: 'gpt-3.5-turbo',
+    model: "gpt-3.5-turbo",
     temperature: 0.3, // Low temperature for consistency
     maxTokens: 300,
-    cacheKey: `bank-detection-${headers.join(',')}-${cleanedSamples[0]}`,
+    cacheKey: `bank-detection-${headers.join(",")}-${cleanedSamples[0]}`,
     systemPrompt:
-      'You are a bank transaction format detection system. Analyze transaction patterns and identify the bank. Respond with valid JSON only.',
+      "You are a bank transaction format detection system. Analyze transaction patterns and identify the bank. Respond with valid JSON only.",
   });
 
   if (!response.success || !response.data) {
-    console.error('[SmartBankDetection] AI detection failed:', response.error);
+    console.error("[SmartBankDetection] AI detection failed:", response.error);
     // Fallback to header-based detection
     return detectBankFromHeaders(headers);
   }
@@ -121,7 +121,7 @@ export async function detectBankWithAI(
 
   // Validate AI response
   if (!aiResult.bank_key || !BANK_CONFIGS[aiResult.bank_key]) {
-    console.warn('[SmartBankDetection] AI returned invalid bank key:', aiResult.bank_key);
+    console.warn("[SmartBankDetection] AI returned invalid bank key:", aiResult.bank_key);
     return detectBankFromHeaders(headers);
   }
 
@@ -129,7 +129,7 @@ export async function detectBankWithAI(
     bankKey: aiResult.bank_key,
     bankName: BANK_CONFIGS[aiResult.bank_key].name,
     confidence: aiResult.confidence,
-    detectionMethod: 'ai-pattern',
+    detectionMethod: "ai-pattern",
     reasoning: aiResult.reasoning,
   };
 }
@@ -137,29 +137,26 @@ export async function detectBankWithAI(
 /**
  * Build AI detection prompt
  */
-function buildAIDetectionPrompt(
-  transactionSamples: string[],
-  headers: string[]
-): string {
+function buildAIDetectionPrompt(transactionSamples: string[], headers: string[]): string {
   const availableBanks = Object.keys(BANK_CONFIGS)
     .map((key) => `${key}: ${BANK_CONFIGS[key].name}`)
-    .join(', ');
+    .join(", ");
 
   return `Analyze these bank transaction samples and identify which bank they came from.
 
 **Transaction Samples** (cleaned for privacy):
-${transactionSamples.map((s, i) => `${i + 1}. "${s}"`).join('\n')}
+${transactionSamples.map((s, i) => `${i + 1}. "${s}"`).join("\n")}
 
 **CSV Headers**:
-${headers.join(', ')}
+${headers.join(", ")}
 
 **Available Banks**:
 ${availableBanks}
 
 **Bank Signature Patterns**:
 ${Object.entries(BANK_SIGNATURES)
-  .map(([key, patterns]) => `${key}: ${patterns.join(', ')}`)
-  .join('\n')}
+  .map(([key, patterns]) => `${key}: ${patterns.join(", ")}`)
+  .join("\n")}
 
 **Instructions**:
 1. Look for signature patterns in transaction descriptions (e.g., "[PR]" for BMO, "CHASE" for Chase)
@@ -186,12 +183,12 @@ ${Object.entries(BANK_SIGNATURES)
  * Fallback method when AI detection fails or is unavailable
  */
 function detectBankFromHeaders(headers: string[]): BankDetectionResult {
-  const headerString = headers.join(' ').toLowerCase();
+  const headerString = headers.join(" ").toLowerCase();
   let bestMatch: {
     bankKey: string;
     bankName: string;
     confidence: number;
-    method: 'header-exact' | 'header-fuzzy';
+    method: "header-exact" | "header-fuzzy";
   } | null = null;
 
   for (const [bankKey, config] of Object.entries(BANK_CONFIGS)) {
@@ -205,7 +202,7 @@ function detectBankFromHeaders(headers: string[]): BankDetectionResult {
         bankKey,
         bankName: config.name,
         confidence: 1.0,
-        detectionMethod: 'header-exact',
+        detectionMethod: "header-exact",
       };
     }
 
@@ -217,7 +214,7 @@ function detectBankFromHeaders(headers: string[]): BankDetectionResult {
           bankKey,
           bankName: config.name,
           confidence,
-          method: 'header-fuzzy',
+          method: "header-fuzzy",
         };
       }
     }
@@ -233,47 +230,49 @@ function detectBankFromHeaders(headers: string[]): BankDetectionResult {
   }
 
   // Last resort: Try to find the best generic match based on common column patterns
-  console.warn('[SmartBankDetection] No bank match found, attempting best-fit fallback');
+  console.warn("[SmartBankDetection] No bank match found, attempting best-fit fallback");
 
   // Check for common column name patterns
-  const headerLower = headers.map(h => h.toLowerCase());
-  const hasDate = headerLower.some(h => h.includes('date'));
-  const hasTransDate = headerLower.some(h => h === 'trans date' || h === 'transaction date');
-  const hasDescription = headerLower.some(h => h.includes('desc') || h.includes('detail'));
-  const hasMerchant = headerLower.some(h => h.includes('merchant'));
-  const hasAmount = headerLower.some(h => h.includes('amount') || h.includes('debit') || h.includes('credit'));
-  const hasMCC = headerLower.some(h => h.includes('mcc'));
+  const headerLower = headers.map((h) => h.toLowerCase());
+  const hasDate = headerLower.some((h) => h.includes("date"));
+  const hasTransDate = headerLower.some((h) => h === "trans date" || h === "transaction date");
+  const hasDescription = headerLower.some((h) => h.includes("desc") || h.includes("detail"));
+  const hasMerchant = headerLower.some((h) => h.includes("merchant"));
+  const hasAmount = headerLower.some(
+    (h) => h.includes("amount") || h.includes("debit") || h.includes("credit")
+  );
+  const hasMCC = headerLower.some((h) => h.includes("mcc"));
 
   // Check for credit card format: Trans Date + Merchant Name + Amount (+ MCC columns)
   if (hasTransDate && hasMerchant && hasAmount) {
-    console.log('[SmartBankDetection] Detected credit card format: Trans Date + Merchant Name');
-    const bankKey = hasMCC ? 'homeTrustVisa' : 'genericCreditCard';
+    console.log("[SmartBankDetection] Detected credit card format: Trans Date + Merchant Name");
+    const bankKey = hasMCC ? "homeTrustVisa" : "genericCreditCard";
     return {
       bankKey,
-      bankName: BANK_CONFIGS[bankKey]?.name || 'Credit Card (Generic)',
+      bankName: BANK_CONFIGS[bankKey]?.name || "Credit Card (Generic)",
       confidence: hasMCC ? 0.9 : 0.8, // Higher confidence with MCC columns
-      detectionMethod: 'header-fuzzy',
+      detectionMethod: "header-fuzzy",
     };
   }
 
   if (hasDate && (hasDescription || hasMerchant) && hasAmount) {
     // Found generic pattern - use Home Trust as it has simple format
-    console.log('[SmartBankDetection] Using Home Trust config as generic fallback');
+    console.log("[SmartBankDetection] Using Home Trust config as generic fallback");
     return {
-      bankKey: 'homeTrust',
-      bankName: 'Generic CSV Format',
+      bankKey: "homeTrust",
+      bankName: "Generic CSV Format",
       confidence: 0.7, // Minimum threshold to allow import processing
-      detectionMethod: 'header-fuzzy',
+      detectionMethod: "header-fuzzy",
     };
   }
 
   // If even basic columns aren't found, still return something to avoid blocking
-  console.error('[SmartBankDetection] Unable to identify CSV columns, using fallback anyway');
+  console.error("[SmartBankDetection] Unable to identify CSV columns, using fallback anyway");
   return {
-    bankKey: 'homeTrust', // Most flexible format
-    bankName: 'Unknown Format',
+    bankKey: "homeTrust", // Most flexible format
+    bankName: "Unknown Format",
     confidence: 0.5, // Lower confidence but still allows processing
-    detectionMethod: 'unknown',
+    detectionMethod: "unknown",
   };
 }
 
@@ -288,10 +287,8 @@ function detectBankFromHeaders(headers: string[]): BankDetectionResult {
  * @param transactionSamples - Array of sample transaction descriptions
  * @returns Bank detection result or null if no signature match
  */
-export function detectBankFromSignatures(
-  transactionSamples: string[]
-): BankDetectionResult | null {
-  const sampleText = transactionSamples.slice(0, 5).join(' ').toUpperCase();
+export function detectBankFromSignatures(transactionSamples: string[]): BankDetectionResult | null {
+  const sampleText = transactionSamples.slice(0, 5).join(" ").toUpperCase();
 
   for (const [bankKey, signatures] of Object.entries(BANK_SIGNATURES)) {
     const matchCount = signatures.filter((sig) => sampleText.includes(sig)).length;
@@ -302,7 +299,7 @@ export function detectBankFromSignatures(
         bankKey,
         bankName: BANK_CONFIGS[bankKey]?.name || bankKey,
         confidence,
-        detectionMethod: 'header-fuzzy', // Using header-fuzzy as it's pattern-based
+        detectionMethod: "header-fuzzy", // Using header-fuzzy as it's pattern-based
       };
     }
   }
@@ -330,12 +327,12 @@ export async function detectBank(
   headers: string[],
   useAI: boolean = true
 ): Promise<BankDetectionResult> {
-  console.log('[SmartBankDetection] Starting bank detection...');
+  console.log("[SmartBankDetection] Starting bank detection...");
 
   // Strategy 1: Fast signature matching (0 API calls)
   const signatureMatch = detectBankFromSignatures(transactionSamples);
   if (signatureMatch && signatureMatch.confidence >= 0.9) {
-    console.log('[SmartBankDetection] High-confidence signature match:', signatureMatch);
+    console.log("[SmartBankDetection] High-confidence signature match:", signatureMatch);
     return signatureMatch;
   }
 
@@ -344,17 +341,17 @@ export async function detectBank(
     try {
       const aiResult = await detectBankWithAI(transactionSamples, headers);
       if (aiResult.confidence >= 0.7) {
-        console.log('[SmartBankDetection] AI detection successful:', aiResult);
+        console.log("[SmartBankDetection] AI detection successful:", aiResult);
         return aiResult;
       }
     } catch (error) {
-      console.warn('[SmartBankDetection] AI detection failed, using fallback methods');
+      console.warn("[SmartBankDetection] AI detection failed, using fallback methods");
       // Continue to Strategy 3 (header-based fallback)
     }
   }
 
   // Strategy 3: Header-based fallback
-  console.log('[SmartBankDetection] Using pattern-based detection');
+  console.log("[SmartBankDetection] Using pattern-based detection");
   const headerResult = detectBankFromHeaders(headers);
 
   // If we have a low-confidence signature match, use it instead of header match
@@ -373,13 +370,10 @@ export async function detectBank(
  * Extract transaction description samples from CSV rows
  * Returns first 5-10 non-empty descriptions
  */
-export function extractTransactionSamples(
-  rows: CSVRow[],
-  descriptionColumn: string
-): string[] {
+export function extractTransactionSamples(rows: CSVRow[], descriptionColumn: string): string[] {
   return rows
     .slice(0, 20) // Check first 20 rows
-    .map((row) => row[descriptionColumn] || '')
+    .map((row) => row[descriptionColumn] || "")
     .filter((desc) => desc.trim().length > 0)
     .slice(0, 10); // Return max 10 samples
 }

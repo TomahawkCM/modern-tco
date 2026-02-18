@@ -5,7 +5,7 @@
  * This file will be imported by Next.js middleware when implemented
  */
 
-import { DEFAULT_LOCALE, SUPPORTED_LOCALES, type SupportedLocale } from './config';
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES, type SupportedLocale } from "./config";
 
 /**
  * Get locale from request headers (Accept-Language)
@@ -17,9 +17,9 @@ export function getLocaleFromHeaders(acceptLanguage?: string | null): SupportedL
 
   // Parse Accept-Language header
   const languages = acceptLanguage
-    .split(',')
+    .split(",")
     .map((lang) => {
-      const [locale, q = '1'] = lang.trim().split(';q=');
+      const [locale, q = "1"] = lang.trim().split(";q=");
       return {
         locale: locale.trim(),
         quality: parseFloat(q),
@@ -36,7 +36,7 @@ export function getLocaleFromHeaders(acceptLanguage?: string | null): SupportedL
 
   // Try to find language prefix match
   for (const { locale } of languages) {
-    const langPrefix = locale.split('-')[0];
+    const langPrefix = locale.split("-")[0];
     const match = SUPPORTED_LOCALES.find((supported) => supported.startsWith(langPrefix));
     if (match) {
       return match;

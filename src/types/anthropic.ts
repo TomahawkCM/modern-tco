@@ -55,7 +55,10 @@ export type ToolResultBlock = ToolResultBlockParam;
 export type DifficultyLevel = "beginner" | "intermediate" | "advanced" | "easy" | "medium" | "hard";
 
 // AI Model types
-export type AIModel = "claude-3-5-sonnet-20241022" | "claude-3-5-haiku-20241022" | "claude-3-opus-20240229";
+export type AIModel =
+  | "claude-3-5-sonnet-20241022"
+  | "claude-3-5-haiku-20241022"
+  | "claude-3-opus-20240229";
 
 // Token counting and information
 export interface TokenInfo {

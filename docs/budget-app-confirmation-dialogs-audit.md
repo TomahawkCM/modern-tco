@@ -29,9 +29,10 @@
 ### 1. Transactions (`src/app/budget-app/transactions/page.tsx`)
 
 **Delete Transaction** (Lines 125-157):
+
 ```typescript
 async function deleteTransaction(id: string) {
-  const confirmed = await toast.confirm('Are you sure you want to delete this transaction?');
+  const confirmed = await toast.confirm("Are you sure you want to delete this transaction?");
   if (!confirmed) return;
 
   // Complex split transaction logic
@@ -40,33 +41,38 @@ async function deleteTransaction(id: string) {
 ```
 
 **Issues**:
+
 - ❌ Generic message: "Are you sure you want to delete this transaction?"
 - ❌ No transaction details shown (amount, date, description)
 - ✅ Shows impact for split transactions (good!)
 - ❌ Not using AlertDialog component
 
 **Unsplit Transaction** (Lines 178-192):
+
 ```typescript
 async function handleUnsplit(transaction: Transaction) {
-  const confirmed = await toast.confirm('Restore the original unsplit transaction?');
+  const confirmed = await toast.confirm("Restore the original unsplit transaction?");
   if (!confirmed) return;
 }
 ```
 
 **Bulk Categorization** (Lines 219-250):
+
 ```typescript
 async function applyBulkCategorization() {
-  const confirmMessage = `Categorize ${selectedTransactionIds.size} transaction(s) as "${bulkCategory}"${bulkSubcategory ? ` - ${bulkSubcategory}` : ''}?`;
+  const confirmMessage = `Categorize ${selectedTransactionIds.size} transaction(s) as "${bulkCategory}"${bulkSubcategory ? ` - ${bulkSubcategory}` : ""}?`;
   const confirmed = await toast.confirm(confirmMessage);
   if (!confirmed) return;
 }
 ```
 
 **Issues**:
+
 - ✅ Good impact message (shows count and category) - **KEEP THIS PATTERN**
 - ❌ Not using AlertDialog
 
 **Delete Triggers**:
+
 - Desktop: Trash2 button (line 710)
 - Mobile: Swipe-to-delete gesture (line 792) + Trash2 button (line 982)
 
@@ -75,9 +81,10 @@ async function applyBulkCategorization() {
 ### 2. Budgets (`src/app/budget-app/budgets/page.tsx`)
 
 **Delete Budget** (Lines 124-136):
+
 ```typescript
 async function deleteBudget(budgetId: string) {
-  const confirmed = await toast.confirm('Are you sure you want to delete this budget?');
+  const confirmed = await toast.confirm("Are you sure you want to delete this budget?");
   if (!confirmed) return;
 
   await db.budgets.delete(budgetId);
@@ -85,6 +92,7 @@ async function deleteBudget(budgetId: string) {
 ```
 
 **Issues**:
+
 - ❌ Generic message
 - ❌ No impact shown:
   - Budget amount ($X/month or $X/year)
@@ -100,16 +108,19 @@ async function deleteBudget(budgetId: string) {
 ### 3. Investments (`src/app/budget-app/investments/page.tsx`)
 
 **Delete Account** (Line 123):
+
 ```typescript
-const confirmed = await toast.confirm('Delete this investment account and all its holdings?');
+const confirmed = await toast.confirm("Delete this investment account and all its holdings?");
 ```
 
 **Delete Holding** (Line 137):
+
 ```typescript
-const confirmed = await toast.confirm('Delete this holding?');
+const confirmed = await toast.confirm("Delete this holding?");
 ```
 
 **Issues**:
+
 - ✅ Account delete shows impact: "and all its holdings" - good!
 - ❌ Holding delete is generic
 - ❌ No specific details (account name, balance, holding count)
@@ -120,13 +131,15 @@ const confirmed = await toast.confirm('Delete this holding?');
 ### 4. Planning - Future Purchases (`src/app/budget-app/planning/future/page.tsx`)
 
 **Delete Goal** (Lines 51-52):
+
 ```typescript
 async function deletePurchase(id: string) {
-  if (!confirm('Are you sure you want to delete this goal?')) return;
+  if (!confirm("Are you sure you want to delete this goal?")) return;
 }
 ```
 
 **Issues**:
+
 - ❌ **USING NATIVE confirm()** - different system!
 - ❌ Generic message
 - ❌ No goal details (name, target amount, saved amount, timeline)
@@ -137,13 +150,15 @@ async function deletePurchase(id: string) {
 ### 5. Planning - Retirement (`src/app/budget-app/planning/retirement/page.tsx`)
 
 **Delete Plan** (Lines 258-259):
+
 ```typescript
 async function deletePlan(id: string) {
-  if (!confirm('Are you sure you want to delete this retirement plan?')) return;
+  if (!confirm("Are you sure you want to delete this retirement plan?")) return;
 }
 ```
 
 **Issues**:
+
 - ❌ **USING NATIVE confirm()** - different system!
 - ❌ Generic message
 - ❌ No plan details (name, target amount, contributions, retirement age)
@@ -197,6 +212,7 @@ const [showFinalWarning, setShowFinalWarning] = useState(false);
 ```
 
 **Why This is Excellent**:
+
 - ✅ Uses shadcn AlertDialog (already installed)
 - ✅ Shows detailed impact with specific data
 - ✅ Two-step confirmation for critical actions
@@ -241,17 +257,17 @@ interface ConfirmDialogProps {
   };
 
   // Button labels
-  confirmLabel?: string;  // Default: "Confirm"
-  cancelLabel?: string;   // Default: "Cancel"
+  confirmLabel?: string; // Default: "Confirm"
+  cancelLabel?: string; // Default: "Cancel"
 
   // Styling
-  variant?: 'destructive' | 'default';  // Default: 'default'
-  icon?: React.ReactNode;  // Optional icon for title
+  variant?: "destructive" | "default"; // Default: 'default'
+  icon?: React.ReactNode; // Optional icon for title
 
   // Two-step confirmation (optional)
   requireTypedConfirmation?: {
-    text: string;  // e.g., "DELETE"
-    placeholder: string;  // e.g., "Type DELETE to confirm"
+    text: string; // e.g., "DELETE"
+    placeholder: string; // e.g., "Type DELETE to confirm"
   };
 }
 ```
@@ -259,6 +275,7 @@ interface ConfirmDialogProps {
 ### Usage Examples
 
 **Transaction Delete**:
+
 ```typescript
 <ConfirmDialog
   open={deleteConfirmOpen}
@@ -285,6 +302,7 @@ interface ConfirmDialogProps {
 ```
 
 **Budget Delete**:
+
 ```typescript
 <ConfirmDialog
   open={deleteConfirmOpen}
@@ -309,6 +327,7 @@ interface ConfirmDialogProps {
 ```
 
 **Investment Account Delete** (Two-step):
+
 ```typescript
 <ConfirmDialog
   open={deleteConfirmOpen}
@@ -338,6 +357,7 @@ interface ConfirmDialogProps {
 ```
 
 **Bulk Categorization** (Non-destructive):
+
 ```typescript
 <ConfirmDialog
   open={bulkConfirmOpen}
@@ -357,6 +377,7 @@ interface ConfirmDialogProps {
 ## 📋 Implementation Checklist
 
 ### Phase 1: Create Component
+
 - [ ] Create `src/components/budget/ConfirmDialog.tsx`
 - [ ] Import shadcn AlertDialog components
 - [ ] Implement basic structure with title, description, buttons
@@ -370,6 +391,7 @@ interface ConfirmDialogProps {
 ### Phase 2: Replace Existing Confirmations
 
 **Transactions** (`src/app/budget-app/transactions/page.tsx`):
+
 - [ ] Replace `deleteTransaction()` confirmation (line 126)
 - [ ] Replace `handleUnsplit()` confirmation (line 181)
 - [ ] Replace `applyBulkCategorization()` confirmation (line 231)
@@ -378,20 +400,25 @@ interface ConfirmDialogProps {
 - [ ] Handle swipe-to-delete gesture (line 792)
 
 **Budgets** (`src/app/budget-app/budgets/page.tsx`):
+
 - [ ] Replace `deleteBudget()` confirmation (line 125)
 - [ ] Update delete button click handler (line 263)
 
 **Investments** (`src/app/budget-app/investments/page.tsx`):
+
 - [ ] Replace account delete confirmation (line 123)
 - [ ] Replace holding delete confirmation (line 137)
 
 **Planning - Future** (`src/app/budget-app/planning/future/page.tsx`):
+
 - [ ] Replace native `confirm()` in `deletePurchase()` (line 52)
 
 **Planning - Retirement** (`src/app/budget-app/planning/retirement/page.tsx`):
+
 - [ ] Replace native `confirm()` in `deletePlan()` (line 259)
 
 ### Phase 3: Testing
+
 - [ ] Test keyboard navigation (Tab, Escape, Enter)
 - [ ] Test screen reader announcements
 - [ ] Test focus trap (can't tab outside dialog)
@@ -402,6 +429,7 @@ interface ConfirmDialogProps {
 - [ ] Verify all native confirm() calls removed
 
 ### Phase 4: Documentation
+
 - [ ] Add JSDoc comments to ConfirmDialog component
 - [ ] Update this audit document with implementation details
 - [ ] Mark Archon task as "done"
@@ -411,6 +439,7 @@ interface ConfirmDialogProps {
 ## 🎨 Visual Design
 
 **Destructive Actions** (Red theme):
+
 ```
 ┌─────────────────────────────────────┐
 │ [🗑️] Delete Transaction             │
@@ -431,6 +460,7 @@ interface ConfirmDialogProps {
 ```
 
 **Non-Destructive Actions** (Teal theme):
+
 ```
 ┌─────────────────────────────────────┐
 │ Bulk Categorize Transactions        │
@@ -446,6 +476,7 @@ interface ConfirmDialogProps {
 ```
 
 **Two-Step Confirmation** (Critical actions):
+
 ```
 ┌─────────────────────────────────────┐
 │ [⚠️] Delete Investment Account      │
@@ -478,6 +509,7 @@ interface ConfirmDialogProps {
 ## 📚 Component Dependencies
 
 **Already Installed**:
+
 - ✅ `src/components/ui/alert-dialog.tsx` - shadcn AlertDialog (Radix UI)
 - ✅ `src/components/ui/button.tsx` - shadcn Button
 - ✅ `src/components/ui/input.tsx` - shadcn Input (for typed confirmation)
@@ -499,15 +531,17 @@ The current `toast.confirm()` is likely a custom hook returning a Promise<boolea
 ### State Management Pattern
 
 **Before** (toast.confirm):
+
 ```typescript
 async function deleteTransaction(id: string) {
-  const confirmed = await toast.confirm('Delete?');
+  const confirmed = await toast.confirm("Delete?");
   if (!confirmed) return;
   await db.transactions.delete(id);
 }
 ```
 
 **After** (ConfirmDialog):
+
 ```typescript
 const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
 const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -541,6 +575,7 @@ async function confirmDelete() {
 ## ✅ Success Criteria
 
 **Before marking task as "done"**:
+
 1. ✅ All `toast.confirm()` calls replaced
 2. ✅ All native `confirm()` calls replaced
 3. ✅ ConfirmDialog component created and tested
@@ -555,6 +590,7 @@ async function confirmDelete() {
 ---
 
 **Next Steps**:
+
 1. Create `ConfirmDialog.tsx` component
 2. Test component in isolation (keyboard, screen reader)
 3. Replace confirmations systematically (transactions first)

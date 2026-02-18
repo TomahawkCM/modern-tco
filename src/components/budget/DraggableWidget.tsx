@@ -5,12 +5,12 @@
  * Provides accessible drag handle and visual feedback during drag operations.
  */
 
-'use client';
+"use client";
 
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
-import { GripVertical } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { GripVertical } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface DraggableWidgetProps {
   id: string;
@@ -18,20 +18,9 @@ interface DraggableWidgetProps {
   isDragDisabled?: boolean;
 }
 
-export function DraggableWidget({
-  id,
-  children,
-  isDragDisabled = false,
-}: DraggableWidgetProps) {
-  const t = useTranslations('draggableWidget');
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
+export function DraggableWidget({ id, children, isDragDisabled = false }: DraggableWidgetProps) {
+  const t = useTranslations("draggableWidget");
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id,
     disabled: isDragDisabled,
   });
@@ -43,17 +32,17 @@ export function DraggableWidget({
   };
 
   return (
-    <div ref={setNodeRef} style={style} className="relative group">
+    <div ref={setNodeRef} style={style} className="group relative">
       {/* Drag Handle */}
       {!isDragDisabled && (
         <button
           {...attributes}
           {...listeners}
-          className="absolute -top-2 -right-2 z-10 bg-teal-500 text-white p-2 rounded-lg shadow-md opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity cursor-grab active:cursor-grabbing hover:bg-teal-600 focus:ring-2 focus:ring-teal-400 focus:ring-offset-2"
-          aria-label={t('dragToReorder')}
+          className="absolute -right-2 -top-2 z-10 cursor-grab rounded-lg bg-teal-500 p-2 text-white opacity-0 shadow-md transition-opacity hover:bg-teal-600 focus:opacity-100 focus:ring-2 focus:ring-teal-400 focus:ring-offset-2 active:cursor-grabbing group-hover:opacity-100"
+          aria-label={t("dragToReorder")}
           tabIndex={0}
         >
-          <GripVertical className="w-4 h-4" />
+          <GripVertical className="h-4 w-4" />
         </button>
       )}
 

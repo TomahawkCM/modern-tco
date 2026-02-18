@@ -4,8 +4,8 @@
  * Calculate emergency fund targets and timeline
  */
 
-import { roundToCents, divideAmount, multiplyAmount, subtractAmounts } from '@/lib/money';
-import type { EmergencyFundInput, EmergencyFundResult } from './types';
+import { roundToCents, divideAmount, multiplyAmount, subtractAmounts } from "@/lib/money";
+import type { EmergencyFundInput, EmergencyFundResult } from "./types";
 
 /**
  * Calculate emergency fund projections
@@ -33,9 +33,8 @@ export function calculateEmergencyFund(input: EmergencyFundInput): EmergencyFund
   completionDate.setMonth(completionDate.getMonth() + monthsToGoal);
 
   // Calculate progress percentage
-  const progressPercent = targetAmount > 0
-    ? Math.min(100, roundToCents((currentSavings / targetAmount) * 100))
-    : 0;
+  const progressPercent =
+    targetAmount > 0 ? Math.min(100, roundToCents((currentSavings / targetAmount) * 100)) : 0;
 
   // Check if goal is already met
   const isGoalMet = currentSavings >= targetAmount;

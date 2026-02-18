@@ -27,11 +27,13 @@ Automatically translates changes to `src/i18n/messages/en-US.json` into all 113 
 #### Setup Requirements
 
 **Required Secret:**
+
 ```
 ANTHROPIC_API_KEY
 ```
 
 To configure:
+
 1. Go to **Settings** → **Secrets and variables** → **Actions**
 2. Click **New repository secret**
 3. Name: `ANTHROPIC_API_KEY`
@@ -50,6 +52,7 @@ To configure:
 #### Output Files
 
 The workflow updates:
+
 - `src/i18n/messages/*.json` (113 locale files)
 - `scripts/.translation-cache.json` (translation cache)
 
@@ -61,15 +64,18 @@ The workflow updates:
 I've automatically translated the updated keys in `en-US.json` to **113 locales**.
 
 ### What was translated
+
 - ✅ All changed/added keys in `en-US.json`
 - ✅ Glossary-validated terminology
 - ✅ Quality checks passed
 
 ### Files updated
+
 - `src/i18n/messages/*.json` (113 locale files)
 - `scripts/.translation-cache.json` (translation cache)
 
 ### Review checklist
+
 - [ ] Verify translations in key locales (es-MX, fr-FR, de-DE, pt-BR, ja-JP)
 - [ ] Check RTL languages if applicable (ar-SA, he-IL, fa-IR, ur-PK)
 - [ ] Run `npm run coverage:report` to verify coverage increased
@@ -102,15 +108,19 @@ git push
 #### Troubleshooting
 
 **Problem**: Workflow skipped with "ANTHROPIC_API_KEY not configured"
+
 - **Solution**: Add the API key secret (see Setup Requirements)
 
 **Problem**: Translation quality issues
+
 - **Solution**: Check `/src/i18n/glossaries/` for terminology standards
 
 **Problem**: Workflow doesn't trigger
+
 - **Solution**: Ensure `en-US.json` was modified in the PR
 
 **Problem**: Workflow runs in a loop
+
 - **Solution**: Verify PR branch doesn't start with `i18n/auto-translate-`
 
 #### Performance

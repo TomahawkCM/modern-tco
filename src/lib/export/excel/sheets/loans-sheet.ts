@@ -3,9 +3,9 @@
  * Debt tracking with amortization schedules and payoff analysis
  */
 
-import type { Workbook, Worksheet } from 'exceljs';
-import type { ExcelExportOptions, AmortizationEntry } from '../types';
-import type { Loan, LoanPayment } from '@/types/budget';
+import type { Workbook, Worksheet } from "exceljs";
+import type { ExcelExportOptions, AmortizationEntry } from "../types";
+import type { Loan, LoanPayment } from "@/types/budget";
 import {
   FONTS,
   FILLS,
@@ -19,7 +19,7 @@ import {
   freezePanes,
   createTitleSection,
   EXCEL_COLORS,
-} from '../styles';
+} from "../styles";
 
 interface LoansSheetData {
   loans: Loan[];
@@ -29,26 +29,36 @@ interface LoansSheetData {
 /**
  * Get loan type display name
  */
-function getLoanTypeDisplay(type: Loan['type']): string {
+function getLoanTypeDisplay(type: Loan["type"]): string {
   switch (type) {
-    case 'mortgage': return 'Mortgage';
-    case 'auto': return 'Auto Loan';
-    case 'personal': return 'Personal Loan';
-    case 'student': return 'Student Loan';
-    default: return type;
+    case "mortgage":
+      return "Mortgage";
+    case "auto":
+      return "Auto Loan";
+    case "personal":
+      return "Personal Loan";
+    case "student":
+      return "Student Loan";
+    default:
+      return type;
   }
 }
 
 /**
  * Get status display with color
  */
-function getStatusInfo(status: Loan['status']): { display: string; color: string } {
+function getStatusInfo(status: Loan["status"]): { display: string; color: string } {
   switch (status) {
-    case 'active': return { display: 'Active', color: '10B981' };
-    case 'paid-off': return { display: 'Paid Off', color: '3B82F6' };
-    case 'refinanced': return { display: 'Refinanced', color: 'F59E0B' };
-    case 'defaulted': return { display: 'Defaulted', color: 'EF4444' };
-    default: return { display: status, color: '6B7280' };
+    case "active":
+      return { display: "Active", color: "10B981" };
+    case "paid-off":
+      return { display: "Paid Off", color: "3B82F6" };
+    case "refinanced":
+      return { display: "Refinanced", color: "F59E0B" };
+    case "defaulted":
+      return { display: "Defaulted", color: "EF4444" };
+    default:
+      return { display: status, color: "6B7280" };
   }
 }
 
@@ -66,7 +76,7 @@ function calculateRemainingMonths(loan: Loan): number {
   // Using loan amortization formula
   const remainingPayments = Math.ceil(
     Math.log(loan.monthlyPayment / (loan.monthlyPayment - loan.currentBalance * monthlyRate)) /
-    Math.log(1 + monthlyRate)
+      Math.log(1 + monthlyRate)
   );
 
   return Math.max(0, remainingPayments);
@@ -169,57 +179,60 @@ export async function generateLoansSheet(
   data: LoansSheetData,
   options: ExcelExportOptions
 ): Promise<Worksheet> {
-  const worksheet = workbook.addWorksheet('Loans', {
-    properties: { tabColor: { argb: 'FFEF4444' } }, // Red tab
+  const worksheet = workbook.addWorksheet("Loans", {
+    properties: { tabColor: { argb: "FFEF4444" } }, // Red tab
   });
 
   // Column definitions for loan summary
   const columns = [
-    { header: 'Loan Name', key: 'name', width: 22 },
-    { header: 'Type', key: 'type', width: 14 },
-    { header: 'Original', key: 'original', width: 14 },
-    { header: 'Balance', key: 'balance', width: 14 },
-    { header: 'Rate', key: 'rate', width: 8 },
-    { header: 'Monthly Payment', key: 'payment', width: 16 },
-    { header: 'Remaining Mo.', key: 'remaining', width: 13 },
-    { header: 'Total Interest', key: 'totalInterest', width: 14 },
-    { header: 'Status', key: 'status', width: 10 },
+    { header: "Loan Name", key: "name", width: 22 },
+    { header: "Type", key: "type", width: 14 },
+    { header: "Original", key: "original", width: 14 },
+    { header: "Balance", key: "balance", width: 14 },
+    { header: "Rate", key: "rate", width: 8 },
+    { header: "Monthly Payment", key: "payment", width: 16 },
+    { header: "Remaining Mo.", key: "remaining", width: 13 },
+    { header: "Total Interest", key: "totalInterest", width: 14 },
+    { header: "Status", key: "status", width: 10 },
   ];
 
   // Create title section
   let currentRow = createTitleSection(
     worksheet,
-    'Loan Summary',
-    'Debt tracking and amortization',
+    "Loan Summary",
+    "Debt tracking and amortization",
     new Date()
   );
 
   // Calculate totals
-  const activeLoans = data.loans.filter(l => l.status === 'active');
+  const activeLoans = data.loans.filter((l) => l.status === "active");
   const totalDebt = activeLoans.reduce((sum, l) => sum + l.currentBalance, 0);
   const totalMonthlyPayment = activeLoans.reduce((sum, l) => sum + l.monthlyPayment, 0);
-  const totalInterestRemaining = activeLoans.reduce((sum, l) => sum + calculateTotalInterestRemaining(l), 0);
+  const totalInterestRemaining = activeLoans.reduce(
+    (sum, l) => sum + calculateTotalInterestRemaining(l),
+    0
+  );
 
   // Summary section
   const summaryRow = worksheet.getRow(currentRow);
-  summaryRow.getCell(1).value = 'LOAN SUMMARY';
+  summaryRow.getCell(1).value = "LOAN SUMMARY";
   summaryRow.getCell(1).font = { ...FONTS.subheader, size: 12 };
   summaryRow.getCell(1).fill = {
-    type: 'pattern',
-    pattern: 'solid',
-    fgColor: { argb: 'FFF3F4F6' },
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFF3F4F6" },
   };
   worksheet.mergeCells(`A${currentRow}:I${currentRow}`);
   currentRow++;
 
   const summaryData = [
-    ['Total Debt:', totalDebt, true],
-    ['Monthly Payments:', totalMonthlyPayment, true],
-    ['Est. Interest Remaining:', totalInterestRemaining, true],
-    ['Active Loans:', activeLoans.length, false],
+    ["Total Debt:", totalDebt, true],
+    ["Monthly Payments:", totalMonthlyPayment, true],
+    ["Est. Interest Remaining:", totalInterestRemaining, true],
+    ["Active Loans:", activeLoans.length, false],
   ];
 
-  summaryData.forEach(item => {
+  summaryData.forEach((item) => {
     const row = worksheet.getRow(currentRow);
     row.getCell(1).value = item[0];
     row.getCell(1).font = FONTS.body;
@@ -227,7 +240,7 @@ export async function generateLoansSheet(
     if (item[2]) {
       row.getCell(2).numFmt = NUMBER_FORMATS.currency;
     }
-    row.getCell(2).font = { ...FONTS.body, bold: true, color: { argb: 'FFEF4444' } };
+    row.getCell(2).font = { ...FONTS.body, bold: true, color: { argb: "FFEF4444" } };
     currentRow++;
   });
   currentRow++;
@@ -242,7 +255,10 @@ export async function generateLoansSheet(
   currentRow++;
 
   // Set column widths
-  setColumnWidths(worksheet, columns.map(c => c.width));
+  setColumnWidths(
+    worksheet,
+    columns.map((c) => c.width)
+  );
 
   // Add loan rows
   data.loans.forEach((loan, index) => {
@@ -265,7 +281,7 @@ export async function generateLoansSheet(
     row.getCell(4).value = loan.currentBalance;
     row.getCell(4).numFmt = NUMBER_FORMATS.currency;
     row.getCell(4).alignment = ALIGNMENTS.right;
-    row.getCell(4).font = { ...FONTS.body, color: { argb: 'FFEF4444' } };
+    row.getCell(4).font = { ...FONTS.body, color: { argb: "FFEF4444" } };
 
     // Interest rate
     row.getCell(5).value = loan.interestRate / 100;
@@ -296,7 +312,7 @@ export async function generateLoansSheet(
   });
 
   // Add amortization schedules for each active loan
-  activeLoans.forEach(loan => {
+  activeLoans.forEach((loan) => {
     currentRow += 2;
 
     // Loan amortization header
@@ -304,15 +320,23 @@ export async function generateLoansSheet(
     amortHeaderRow.getCell(1).value = `${loan.name} - Next 12 Payments`;
     amortHeaderRow.getCell(1).font = { ...FONTS.subheader, size: 11 };
     amortHeaderRow.getCell(1).fill = {
-      type: 'pattern',
-      pattern: 'solid',
-      fgColor: { argb: 'FFF3F4F6' },
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "FFF3F4F6" },
     };
     worksheet.mergeCells(`A${currentRow}:G${currentRow}`);
     currentRow++;
 
     // Amortization table header
-    const amortColumns = ['#', 'Date', 'Payment', 'Principal', 'Interest', 'Balance', 'Cum. Interest'];
+    const amortColumns = [
+      "#",
+      "Date",
+      "Payment",
+      "Principal",
+      "Interest",
+      "Balance",
+      "Cum. Interest",
+    ];
     const amortWidths = [6, 12, 12, 12, 12, 14, 14];
 
     const amortTableHeader = worksheet.getRow(currentRow);
@@ -320,9 +344,9 @@ export async function generateLoansSheet(
       amortTableHeader.getCell(index + 1).value = col;
       amortTableHeader.getCell(index + 1).font = FONTS.header;
       amortTableHeader.getCell(index + 1).fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FF374151' },
+        type: "pattern",
+        pattern: "solid",
+        fgColor: { argb: "FF374151" },
       };
       amortTableHeader.getCell(index + 1).border = BORDERS.all;
       amortTableHeader.getCell(index + 1).alignment = ALIGNMENTS.center;
@@ -348,12 +372,12 @@ export async function generateLoansSheet(
       row.getCell(4).value = entry.principal;
       row.getCell(4).numFmt = NUMBER_FORMATS.currency;
       row.getCell(4).alignment = ALIGNMENTS.right;
-      row.getCell(4).font = { ...FONTS.body, color: { argb: 'FF10B981' } };
+      row.getCell(4).font = { ...FONTS.body, color: { argb: "FF10B981" } };
 
       row.getCell(5).value = entry.interest;
       row.getCell(5).numFmt = NUMBER_FORMATS.currency;
       row.getCell(5).alignment = ALIGNMENTS.right;
-      row.getCell(5).font = { ...FONTS.body, color: { argb: 'FFEF4444' } };
+      row.getCell(5).font = { ...FONTS.body, color: { argb: "FFEF4444" } };
 
       row.getCell(6).value = entry.balance;
       row.getCell(6).numFmt = NUMBER_FORMATS.currency;
@@ -370,20 +394,21 @@ export async function generateLoansSheet(
     // Early payoff analysis
     currentRow += 1;
     const payoffHeader = worksheet.getRow(currentRow);
-    payoffHeader.getCell(1).value = 'EARLY PAYOFF ANALYSIS';
+    payoffHeader.getCell(1).value = "EARLY PAYOFF ANALYSIS";
     payoffHeader.getCell(1).font = { ...FONTS.bodyMuted, bold: true };
     currentRow++;
 
     const scenarios = [
-      { extra: 100, label: 'Extra $100/month' },
-      { extra: 200, label: 'Extra $200/month' },
-      { extra: 500, label: 'Extra $500/month' },
+      { extra: 100, label: "Extra $100/month" },
+      { extra: 200, label: "Extra $200/month" },
+      { extra: 500, label: "Extra $500/month" },
     ];
 
-    scenarios.forEach(scenario => {
+    scenarios.forEach((scenario) => {
       const savings = calculateExtraPaymentSavings(loan, scenario.extra);
       const row = worksheet.getRow(currentRow);
-      row.getCell(1).value = `${scenario.label} saves: $${savings.interestSaved.toFixed(2)} interest, pays off ${savings.monthsSaved} months early`;
+      row.getCell(1).value =
+        `${scenario.label} saves: $${savings.interestSaved.toFixed(2)} interest, pays off ${savings.monthsSaved} months early`;
       row.getCell(1).font = FONTS.body;
       currentRow++;
     });

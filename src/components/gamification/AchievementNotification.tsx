@@ -53,7 +53,7 @@ export function AchievementNotification({ achievement, onClose }: AchievementNot
   return (
     <div
       className={cn(
-        "fixed top-4 right-4 z-50 transition-all duration-300",
+        "fixed right-4 top-4 z-50 transition-all duration-300",
         isVisible ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
       )}
     >
@@ -66,30 +66,27 @@ export function AchievementNotification({ achievement, onClose }: AchievementNot
         <div className="flex items-start gap-3">
           {/* Icon */}
           <div className="flex-shrink-0">
-            <Trophy className="h-6 w-6 text-[#f97316] animate-bounce" />
+            <Trophy className="h-6 w-6 animate-bounce text-[#f97316]" />
           </div>
 
           {/* Content */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
+          <div className="min-w-0 flex-1">
+            <div className="mb-1 flex items-center gap-2">
               <h4 className="font-bold text-foreground">Achievement Unlocked!</h4>
               <Badge variant="outline" className="text-xs">
                 {achievement.rarity}
               </Badge>
             </div>
 
-            <div className="flex items-center gap-2 mb-2">
+            <div className="mb-2 flex items-center gap-2">
               <span className="text-2xl">{achievement.icon}</span>
               <span className="font-semibold text-muted-foreground">{achievement.name}</span>
             </div>
 
-            <p className="text-sm text-muted-foreground mb-2">
-              {achievement.description}
-            </p>
+            <p className="mb-2 text-sm text-muted-foreground">{achievement.description}</p>
 
             <Badge variant="secondary" className="gap-1">
-              <TrendingUp className="h-3 w-3" />
-              +{achievement.points} points
+              <TrendingUp className="h-3 w-3" />+{achievement.points} points
             </Badge>
           </div>
 
@@ -99,7 +96,7 @@ export function AchievementNotification({ achievement, onClose }: AchievementNot
               setIsVisible(false);
               setTimeout(onClose, 300);
             }}
-            className="flex-shrink-0 rounded-full p-1 hover:bg-white/10 transition-colors"
+            className="flex-shrink-0 rounded-full p-1 transition-colors hover:bg-white/10"
           >
             <X className="h-4 w-4 text-muted-foreground" />
           </button>
@@ -121,7 +118,7 @@ export function AchievementNotificationManager() {
   // Listen for new achievements
   useEffect(() => {
     const handleAchievementUnlocked = (e: CustomEvent<Achievement>) => {
-      setQueue(prev => [...prev, e.detail]);
+      setQueue((prev) => [...prev, e.detail]);
     };
 
     window.addEventListener(
@@ -141,7 +138,7 @@ export function AchievementNotificationManager() {
   useEffect(() => {
     if (!current && queue.length > 0) {
       setCurrent(queue[0]);
-      setQueue(prev => prev.slice(1));
+      setQueue((prev) => prev.slice(1));
     }
   }, [current, queue]);
 

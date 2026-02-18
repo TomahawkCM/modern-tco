@@ -12,12 +12,12 @@
  * - Goal types → Future purchase suggestions
  */
 
-import type { Budget, FuturePurchase } from '@/types/budget';
+import type { Budget, FuturePurchase } from "@/types/budget";
 import type {
   NormalizedMonthlyBudget,
   NormalizedCategoryGroup,
   ParsedYNABData,
-} from './ynab-parser';
+} from "./ynab-parser";
 
 // ============================================================================
 // Types
@@ -27,7 +27,7 @@ export interface BudgetTransformOptions {
   /** Category ID mapping from YNAB IDs to our IDs */
   categoryIdMap: Map<string, string>;
   /** How to handle rollover */
-  rolloverMode: 'preserve' | 'disable' | 'auto';
+  rolloverMode: "preserve" | "disable" | "auto";
   /** Only import the most recent N months */
   recentMonthsOnly?: number;
   /** Start date for budget imports */
@@ -122,11 +122,8 @@ export function transformYNABBudgets(
   let monthsToProcess = data.monthlyBudgets;
 
   if (options.startFromMonth) {
-    monthsToProcess = monthsToProcess.filter(
-      (m) => m.month >= options.startFromMonth!
-    );
-    stats.monthsSkipped =
-      data.monthlyBudgets.length - monthsToProcess.length;
+    monthsToProcess = monthsToProcess.filter((m) => m.month >= options.startFromMonth!);
+    stats.monthsSkipped = data.monthlyBudgets.length - monthsToProcess.length;
   }
 
   if (options.recentMonthsOnly && options.recentMonthsOnly > 0) {
@@ -134,20 +131,12 @@ export function transformYNABBudgets(
     monthsToProcess = [...monthsToProcess]
       .sort((a, b) => b.month.localeCompare(a.month))
       .slice(0, options.recentMonthsOnly);
-    stats.monthsSkipped = Math.max(
-      0,
-      data.monthlyBudgets.length - monthsToProcess.length
-    );
+    stats.monthsSkipped = Math.max(0, data.monthlyBudgets.length - monthsToProcess.length);
   }
 
   // Process each month
   for (const monthData of monthsToProcess) {
-    const monthBudgets = processMonth(
-      monthData,
-      options,
-      warnings,
-      categoriesWithBudget
-    );
+    const monthBudgets = processMonth(monthData, options, warnings, categoriesWithBudget);
 
     budgets.push(...monthBudgets);
     stats.totalBudgetEntries += monthBudgets.length;
@@ -159,19 +148,14 @@ export function transformYNABBudgets(
 
   // Process goals from category data
   if (options.importGoals) {
-    const goals = extractGoalsFromCategories(
-      data.categoryGroups,
-      options.categoryIdMap,
-      warnings
-    );
+    const goals = extractGoalsFromCategories(data.categoryGroups, options.categoryIdMap, warnings);
     futurePurchases.push(...goals);
     stats.goalsImported = goals.length;
   }
 
   // Calculate category stats
   stats.categoriesWithBudget = categoriesWithBudget.size;
-  stats.categoriesWithoutBudget =
-    options.categoryIdMap.size - categoriesWithBudget.size;
+  stats.categoriesWithoutBudget = options.categoryIdMap.size - categoriesWithBudget.size;
 
   // Sort summaries by month (newest first)
   monthlySummaries.sort((a, b) => b.month.localeCompare(a.month));
@@ -199,7 +183,7 @@ function processMonth(
   const now = new Date();
 
   // Parse month string to dates
-  const [year, month] = monthData.month.split('-').map(Number);
+  const [year, month] = monthData.month.split("-").map(Number);
   const startDate = new Date(year, month - 1, 1);
   const endDate = new Date(year, month, 0); // Last day of month
 
@@ -212,10 +196,7 @@ function processMonth(
 
     if (!ourCategoryId) {
       // Try to find by name as fallback
-      const byName = findCategoryIdByName(
-        cat.categoryName,
-        options.categoryIdMap
-      );
+      const byName = findCategoryIdByName(cat.categoryName, options.categoryIdMap);
       if (!byName) {
         warnings.push(
           `Skipping budget for unknown category: ${cat.categoryName} (${cat.categoryId})`
@@ -233,10 +214,10 @@ function processMonth(
 
     // Determine rollover based on balance
     let rollover = false;
-    if (options.rolloverMode === 'preserve') {
+    if (options.rolloverMode === "preserve") {
       // Rollover if there's a positive balance
       rollover = cat.balance > 0;
-    } else if (options.rolloverMode === 'auto') {
+    } else if (options.rolloverMode === "auto") {
       // Auto-detect based on category type (savings-like categories roll over)
       rollover = isSavingsCategory(cat.categoryName, cat.groupName);
     }
@@ -245,7 +226,7 @@ function processMonth(
       id: crypto.randomUUID(),
       categoryId,
       amount: cat.budgeted,
-      period: 'monthly',
+      period: "monthly",
       startDate,
       endDate,
       rollover,
@@ -257,10 +238,7 @@ function processMonth(
   return budgets;
 }
 
-function findCategoryIdByName(
-  name: string,
-  categoryIdMap: Map<string, string>
-): string | null {
+function findCategoryIdByName(name: string, categoryIdMap: Map<string, string>): string | null {
   // This is a fallback - we'd need a reverse lookup
   // For now, return null to trigger the warning
   return null;
@@ -282,9 +260,7 @@ function isSavingsCategory(categoryName: string, groupName: string): boolean {
   return savingsPatterns.some((p) => p.test(fullName));
 }
 
-function createMonthlySummary(
-  monthData: NormalizedMonthlyBudget
-): MonthlyBudgetSummary {
+function createMonthlySummary(monthData: NormalizedMonthlyBudget): MonthlyBudgetSummary {
   let totalBudgeted = 0;
   let totalActivity = 0;
   let totalAvailable = 0;
@@ -327,11 +303,7 @@ function extractGoalsFromCategories(
       // These would come from the original YNAB goal data
       // For now, we'll check for savings-type categories with balances
 
-      if (
-        isSavingsCategory(cat.name, group.name) &&
-        cat.balance > 0 &&
-        cat.budgeted > 0
-      ) {
+      if (isSavingsCategory(cat.name, group.name) && cat.balance > 0 && cat.budgeted > 0) {
         // Calculate estimated target based on funding pattern
         const estimatedTarget = cat.budgeted * 12; // Assume 12 months
 
@@ -342,12 +314,8 @@ function extractGoalsFromCategories(
           targetAmount: estimatedTarget,
           currentSavings: cat.balance,
           monthlyContribution: cat.budgeted,
-          targetDate: new Date(
-            now.getFullYear() + 1,
-            now.getMonth(),
-            now.getDate()
-          ), // Default 1 year
-          priority: 'medium',
+          targetDate: new Date(now.getFullYear() + 1, now.getMonth(), now.getDate()), // Default 1 year
+          priority: "medium",
           category: group.name,
           notes: `Auto-imported from YNAB savings category`,
           isCompleted: false,
@@ -374,7 +342,7 @@ export function quickTransformBudgets(
 ): BudgetTransformResult {
   return transformYNABBudgets(data, {
     categoryIdMap,
-    rolloverMode: 'auto',
+    rolloverMode: "auto",
     recentMonthsOnly: 12, // Last 12 months
     importGoals: true,
   });
@@ -395,9 +363,7 @@ export function getBudgetSummaryForMonth(
 /**
  * Calculate average monthly budget by category
  */
-export function calculateAverageMonthlyBudget(
-  data: ParsedYNABData
-): Map<string, number> {
+export function calculateAverageMonthlyBudget(data: ParsedYNABData): Map<string, number> {
   const categoryTotals = new Map<string, { total: number; count: number }>();
 
   for (const month of data.monthlyBudgets) {
@@ -433,7 +399,7 @@ export function createCurrentMonthBudgets(
   const budgets: Budget[] = [];
 
   for (const [key, avgAmount] of averages) {
-    const [groupName, categoryName] = key.split(':');
+    const [groupName, categoryName] = key.split(":");
 
     // Find our category ID
     // This is simplified - in practice you'd have a proper lookup
@@ -444,7 +410,7 @@ export function createCurrentMonthBudgets(
       id: crypto.randomUUID(),
       categoryId,
       amount: Math.round(avgAmount * 100) / 100, // Round to 2 decimals
-      period: 'monthly',
+      period: "monthly",
       startDate,
       endDate,
       rollover: isSavingsCategory(categoryName, groupName),
@@ -456,10 +422,7 @@ export function createCurrentMonthBudgets(
   return budgets;
 }
 
-function findCategoryByName(
-  name: string,
-  categoryIdMap: Map<string, string>
-): string | null {
+function findCategoryByName(name: string, categoryIdMap: Map<string, string>): string | null {
   // Look for exact match in values
   for (const [ynabId, ourId] of categoryIdMap) {
     if (ynabId.toLowerCase().includes(name.toLowerCase())) {

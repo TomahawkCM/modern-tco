@@ -12,10 +12,6 @@ import { HeavyProviders } from "@/app/heavy-providers";
  *
  * Note: Uses HeavyProviders instead of ExamOnlyProviders to include ProgressProvider.
  */
-export default function MockExamLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function MockExamLayout({ children }: { children: React.ReactNode }) {
   return <HeavyProviders>{children}</HeavyProviders>;
 }

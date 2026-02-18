@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import {
   applyAccessibilityPreferences,
   getAccessibilityPreferences,
-} from '@/components/budget/AccessibilitySettingsPanel';
+} from "@/components/budget/AccessibilitySettingsPanel";
 
 /**
  * BudgetAccessibilityInitializer
@@ -20,10 +20,9 @@ export function BudgetAccessibilityInitializer() {
       applyAccessibilityPreferences(prefs);
     } catch (error) {
       // Fail silently if preferences cannot be loaded (e.g., localStorage blocked)
-      console.warn('Budget accessibility preferences unavailable:', error);
+      console.warn("Budget accessibility preferences unavailable:", error);
     }
   }, []);
 
   return null;
 }
-

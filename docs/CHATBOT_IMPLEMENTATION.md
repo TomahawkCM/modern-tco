@@ -66,6 +66,7 @@ src/
 **Purpose**: Provides privacy-controlled access to user's financial data.
 
 **Key Functions**:
+
 - `checkChatbotPermission()` - Verify chatbot is enabled
 - `checkChatbotActionPermission()` - Verify full-access mode for actions
 - `getSpendingSummary()` - Get spending totals and category breakdowns
@@ -76,19 +77,21 @@ src/
 - `getFinancialSummary()` - High-level overview of all financial data
 
 **Privacy Features**:
+
 - All functions check `isChatbotEnabled()` before returning data
 - Only returns aggregated/summarized data when possible
 - Never exposes raw account numbers or sensitive identifiers
 - Respects `chatbotDataAccess` level (read-only vs full-access)
 
 **Example Usage**:
+
 ```typescript
-import { getSpendingSummary } from '@/lib/chatbot-data-access';
+import { getSpendingSummary } from "@/lib/chatbot-data-access";
 
 const summary = await getSpendingSummary({
-  startDate: new Date('2025-11-01'),
-  endDate: new Date('2025-11-30'),
-  category: 'Groceries'
+  startDate: new Date("2025-11-01"),
+  endDate: new Date("2025-11-30"),
+  category: "Groceries",
 });
 
 console.log(summary);
@@ -110,12 +113,14 @@ console.log(summary);
 **Purpose**: Handles communication with OpenAI GPT-4 API using function calling.
 
 **Key Features**:
+
 - **Function Calling**: Defines 7 functions that GPT-4 can call to access data
 - **Automatic Execution**: Executes function calls and returns results to GPT-4
 - **Multi-Turn**: Supports follow-up questions with conversation context
 - **Error Handling**: Graceful error recovery with user-friendly messages
 
 **Available Functions**:
+
 1. `getSpendingSummary` - Spending analysis by date range/category
 2. `getBudgetStatus` - Budget progress and overspend detection
 3. `getAccountSummaries` - Account balances and activity
@@ -125,13 +130,12 @@ console.log(summary);
 7. `getFinancialSummary` - High-level financial overview
 
 **Example Usage**:
+
 ```typescript
-import { chatWithAssistant } from '@/lib/chatbot-openai-service';
+import { chatWithAssistant } from "@/lib/chatbot-openai-service";
 
 const response = await chatWithAssistant({
-  messages: [
-    { role: 'user', content: 'How much did I spend on groceries this month?' }
-  ],
+  messages: [{ role: "user", content: "How much did I spend on groceries this month?" }],
   isFirstTime: false,
   hasError: false,
 });
@@ -156,17 +160,19 @@ console.log(response);
 **Purpose**: Defines AI assistant behavior for different modes and contexts.
 
 **Available Prompts**:
+
 - `FINANCIAL_ASSISTANT_PROMPT` - Read-only mode (default)
 - `FINANCIAL_ASSISTANT_FULL_ACCESS_PROMPT` - Full-access mode (can perform actions)
 - `ONBOARDING_PROMPT` - First-time user greeting
 - `ERROR_RECOVERY_PROMPT` - Error recovery and troubleshooting
 
 **Dynamic Prompt Selection**:
+
 ```typescript
-import { getSystemPrompt } from '@/lib/chatbot-prompts';
+import { getSystemPrompt } from "@/lib/chatbot-prompts";
 
 const prompt = getSystemPrompt({
-  accessLevel: 'read-only',
+  accessLevel: "read-only",
   isFirstTime: true,
   hasError: false,
 });
@@ -175,6 +181,7 @@ const prompt = getSystemPrompt({
 
 **Customization**:
 Edit prompts in `chatbot-prompts.ts` to:
+
 - Change assistant personality
 - Add domain-specific knowledge
 - Customize response formatting
@@ -187,22 +194,26 @@ Edit prompts in `chatbot-prompts.ts` to:
 **Purpose**: Manages chatbot state across the application.
 
 **State Management**:
+
 - `messages: ChatMessage[]` - Conversation history
 - `isLoading: boolean` - Loading state during API calls
 - `error: string | null` - Error messages
 - `isEnabled: boolean` - Whether chatbot is enabled
 
 **Key Methods**:
+
 - `sendMessage(content: string)` - Send user message and get AI response
 - `clearHistory()` - Delete all conversation history
 - `retryLastMessage()` - Retry last failed message
 
 **Persistence**:
+
 - Saves messages to `localStorage` automatically
 - Respects retention policy (7 days, 30 days, or forever)
 - Auto-deletes expired conversations on load
 
 **Example Usage**:
+
 ```typescript
 import { useChatbot } from '@/contexts/ChatbotContext';
 
@@ -226,23 +237,26 @@ function MyChatComponent() {
 ### 5. Privacy Controls
 
 **Opt-In Dialog** (`ChatbotOptInDialog.tsx`):
+
 - Shown on first chatbot access
 - Explains data usage and OpenAI processing
 - Privacy controls: Data Access (read-only/full-access), Retention (7/30/forever)
 - GDPR compliance notice
 
 **Settings Integration** (`settings-privacy-panel.tsx`):
+
 - Chatbot section in Privacy settings
 - Master toggle (enable/disable)
 - Data access level selector
 - Conversation retention selector
 
 **Privacy Settings** (`budget-privacy-settings.ts`):
+
 ```typescript
 interface PrivacySettings {
-  enableChatbot: boolean;                          // Master switch (default: false)
-  chatbotDataAccess: 'read-only' | 'full-access';  // Access level (default: read-only)
-  chatbotConversationRetention: 7 | 30 | 'forever'; // Retention (default: 7 days)
+  enableChatbot: boolean; // Master switch (default: false)
+  chatbotDataAccess: "read-only" | "full-access"; // Access level (default: read-only)
+  chatbotConversationRetention: 7 | 30 | "forever"; // Retention (default: 7 days)
 }
 ```
 
@@ -253,6 +267,7 @@ interface PrivacySettings {
 ### Prerequisites
 
 1. **OpenAI API Key**:
+
    ```bash
    # Add to .env.local
    NEXT_PUBLIC_OPENAI_API_KEY=sk-xxx
@@ -307,6 +322,7 @@ export default function ChatbotPage() {
 ## 💬 Example Queries
 
 ### Spending Analysis
+
 ```
 User: "How much did I spend on groceries this month?"
 AI: "You spent $450.00 on groceries this month across 12 transactions.
@@ -317,6 +333,7 @@ AI: "You spent $450.00 on groceries this month across 12 transactions.
 ```
 
 ### Budget Status
+
 ```
 User: "Am I over budget in any categories?"
 AI: "You're over budget in 2 categories:
@@ -327,6 +344,7 @@ AI: "You're over budget in 2 categories:
 ```
 
 ### Transaction Search
+
 ```
 User: "Show me my coffee purchases from last week"
 AI: "Here are your coffee purchases from last week:
@@ -339,6 +357,7 @@ AI: "Here are your coffee purchases from last week:
 ```
 
 ### Financial Overview
+
 ```
 User: "What's my financial situation?"
 AI: "Here's your financial overview:
@@ -364,9 +383,10 @@ AI: "Here's your financial overview:
 ### Changing AI Model
 
 Edit `chatbot-openai-service.ts`:
+
 ```typescript
 const response = await openai.chat.completions.create({
-  model: 'gpt-4-turbo-preview', // Change to 'gpt-3.5-turbo' for faster/cheaper
+  model: "gpt-4-turbo-preview", // Change to 'gpt-3.5-turbo' for faster/cheaper
   // ...
 });
 ```
@@ -374,6 +394,7 @@ const response = await openai.chat.completions.create({
 ### Adjusting Context Window
 
 Edit `ChatbotContext.tsx`:
+
 ```typescript
 const MAX_CONTEXT_MESSAGES = 20; // Increase for longer memory, decrease for performance
 ```
@@ -381,6 +402,7 @@ const MAX_CONTEXT_MESSAGES = 20; // Increase for longer memory, decrease for per
 ### Custom System Prompts
 
 Edit `chatbot-prompts.ts` to customize assistant behavior:
+
 ```typescript
 export const FINANCIAL_ASSISTANT_PROMPT = `
 You are a strict financial advisor...
@@ -432,21 +454,21 @@ The chatbot tracks the following events (see `budget-analytics.ts`):
 
 ```typescript
 // Example test (Jest + React Testing Library)
-import { render, screen, waitFor } from '@testing-library/react';
-import { ChatbotProvider, useChatbot } from '@/contexts/ChatbotContext';
+import { render, screen, waitFor } from "@testing-library/react";
+import { ChatbotProvider, useChatbot } from "@/contexts/ChatbotContext";
 
-test('sends message and gets response', async () => {
+test("sends message and gets response", async () => {
   const { result } = renderHook(() => useChatbot(), {
     wrapper: ChatbotProvider,
   });
 
   await act(async () => {
-    await result.current.sendMessage('Hello');
+    await result.current.sendMessage("Hello");
   });
 
   await waitFor(() => {
     expect(result.current.messages).toHaveLength(2); // User + AI
-    expect(result.current.messages[1].role).toBe('assistant');
+    expect(result.current.messages[1].role).toBe("assistant");
   });
 });
 ```
@@ -456,20 +478,26 @@ test('sends message and gets response', async () => {
 ## 🐛 Troubleshooting
 
 ### "OpenAI API key not found"
+
 **Solution**: Add `NEXT_PUBLIC_OPENAI_API_KEY` to `.env.local`
 
 ### "Chatbot is disabled"
+
 **Solution**: Enable in Settings → Privacy → Budget Chatbot
 
 ### "Failed to get response from chatbot"
+
 **Check**:
+
 1. OpenAI API key is valid
 2. API quota not exceeded
 3. Network connection stable
 4. Browser console for detailed errors
 
 ### Conversations not persisting
+
 **Check**:
+
 1. `localStorage` not disabled in browser
 2. Retention policy not set to expired date
 3. Browser not in private/incognito mode
@@ -479,6 +507,7 @@ test('sends message and gets response', async () => {
 ## 🔜 Future Enhancements
 
 **Planned Features** (not yet implemented):
+
 - [ ] **Chatbot Actions** - Add transactions, create budgets via chat
 - [ ] **Multi-Turn Context** - Better conversation memory
 - [ ] **Voice Input** - Speech-to-text for queries

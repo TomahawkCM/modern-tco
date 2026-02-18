@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect } from "react";
 
 /**
  * AccessibilityInitializer - Prevents React hydration errors for accessibility features
@@ -25,19 +25,19 @@ export function AccessibilityInitializer() {
   useLayoutEffect(() => {
     try {
       // Apply large text setting
-      const largeText = localStorage.getItem('tco-large-text');
-      if (largeText === '1') {
-        document.documentElement.setAttribute('data-large-text', '1');
+      const largeText = localStorage.getItem("tco-large-text");
+      if (largeText === "1") {
+        document.documentElement.setAttribute("data-large-text", "1");
       }
 
       // Apply high contrast setting
-      const highContrast = localStorage.getItem('tco-high-contrast');
-      if (highContrast === '1') {
-        document.documentElement.setAttribute('data-high-contrast', '1');
+      const highContrast = localStorage.getItem("tco-high-contrast");
+      if (highContrast === "1") {
+        document.documentElement.setAttribute("data-high-contrast", "1");
       }
     } catch (e) {
       // Silently fail if localStorage is unavailable (SSR, private browsing, etc.)
-      console.warn('Accessibility settings unavailable:', e);
+      console.warn("Accessibility settings unavailable:", e);
     }
   }, []);
 

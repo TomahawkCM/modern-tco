@@ -1,33 +1,21 @@
 "use client";
 
-import React, { useMemo } from 'react';
-import DOMPurify from 'dompurify';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
-import {
-  Code,
-  AlertCircle,
-  Info,
-  CheckCircle,
-  Copy,
-  Eye,
-  EyeOff
-} from 'lucide-react';
+import React, { useMemo } from "react";
+import DOMPurify from "dompurify";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Code, AlertCircle, Info, CheckCircle, Copy, Eye, EyeOff } from "lucide-react";
 
-import {
-  type QueryPreviewProps,
-  PartialQuery,
-  ValidationState
-} from './types/queryBuilder';
+import { type QueryPreviewProps, PartialQuery, ValidationState } from "./types/queryBuilder";
 
 export function QueryPreview({
   query,
   validation,
   syntaxHighlight = true,
   showWarnings = true,
-  className = ""
+  className = "",
 }: QueryPreviewProps) {
   const [showRaw, setShowRaw] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
@@ -42,11 +30,11 @@ export function QueryPreview({
 
     // GET clause
     if (query.sensors.length > 0 || query.aggregates.length > 0) {
-      parts.push('Get');
+      parts.push("Get");
 
       // Add sensors
-      const sensorParts = query.sensors.map(s => {
-        let sensorStr = 'name' in s.sensor ? (s.sensor.name ?? '') : '';
+      const sensorParts = query.sensors.map((s) => {
+        let sensorStr = "name" in s.sensor ? (s.sensor.name ?? "") : "";
         if (s.filter) {
           sensorStr += ` ${s.filter.operator} "${s.filter.value}"`;
         }
@@ -54,46 +42,46 @@ export function QueryPreview({
       });
 
       // Add aggregates
-      const aggregateParts = query.aggregates.map(a => {
-        return `${a.function}(${a.sensor ?? ''})`;
+      const aggregateParts = query.aggregates.map((a) => {
+        return `${a.function}(${a.sensor ?? ""})`;
       });
 
-      parts.push([...sensorParts, ...aggregateParts].join(' and '));
+      parts.push([...sensorParts, ...aggregateParts].join(" and "));
     }
 
     // FROM clause
-    parts.push('from');
-    if (query.scope.type === 'all') {
-      parts.push('all machines');
-    } else if (query.scope.type === 'group' && query.scope.computerGroup) {
+    parts.push("from");
+    if (query.scope.type === "all") {
+      parts.push("all machines");
+    } else if (query.scope.type === "group" && query.scope.computerGroup) {
       parts.push(`group "${query.scope.computerGroup}"`);
-    } else if (query.scope.type === 'custom' && query.scope.customFilter) {
+    } else if (query.scope.type === "custom" && query.scope.customFilter) {
       // Custom targeting will be handled separately
-      parts.push('all machines');
+      parts.push("all machines");
     }
 
     // WHERE clause
     if (query.filters.length > 0) {
-      parts.push('where');
-      const filterParts = query.filters.map(f => {
-        return `${f.sensor} ${f.operator.replace('_', ' ')} "${f.value}"`;
+      parts.push("where");
+      const filterParts = query.filters.map((f) => {
+        return `${f.sensor} ${f.operator.replace("_", " ")} "${f.value}"`;
       });
       parts.push(filterParts.join(` ${query.filterLogic.toLowerCase()} `));
     }
 
     // GROUP BY clause
     if (query.groupBy.length > 0) {
-      parts.push('group by');
-      parts.push(query.groupBy.join(', '));
+      parts.push("group by");
+      parts.push(query.groupBy.join(", "));
     }
 
     // ORDER BY clause
     if (query.orderBy.length > 0) {
-      parts.push('order by');
-      const orderParts = query.orderBy.map(o => {
+      parts.push("order by");
+      const orderParts = query.orderBy.map((o) => {
         return `${o.sensor} ${o.direction}`;
       });
-      parts.push(orderParts.join(', '));
+      parts.push(orderParts.join(", "));
     }
 
     // LIMIT clause
@@ -101,7 +89,7 @@ export function QueryPreview({
       parts.push(`limit ${query.limit}`);
     }
 
-    return parts.join(' ');
+    return parts.join(" ");
   }, [query]);
 
   // Apply syntax highlighting
@@ -114,28 +102,47 @@ export function QueryPreview({
 
     // Keywords
     const keywords = [
-      'Get', 'from', 'where', 'with', 'group by', 'order by', 'limit',
-      'and', 'or', 'all machines', 'group'
+      "Get",
+      "from",
+      "where",
+      "with",
+      "group by",
+      "order by",
+      "limit",
+      "and",
+      "or",
+      "all machines",
+      "group",
     ];
-    keywords.forEach(keyword => {
-      const regex = new RegExp(`\\b(${keyword})\\b`, 'gi');
-      highlighted = highlighted.replace(regex, `<span class="text-primary font-semibold">$1</span>`);
+    keywords.forEach((keyword) => {
+      const regex = new RegExp(`\\b(${keyword})\\b`, "gi");
+      highlighted = highlighted.replace(
+        regex,
+        `<span class="text-primary font-semibold">$1</span>`
+      );
     });
 
     // Operators
     const operators = [
-      'contains', 'does not contain', 'equals', 'not equals',
-      'greater than', 'less than', 'starts with', 'ends with', 'matches'
+      "contains",
+      "does not contain",
+      "equals",
+      "not equals",
+      "greater than",
+      "less than",
+      "starts with",
+      "ends with",
+      "matches",
     ];
-    operators.forEach(op => {
-      const regex = new RegExp(`\\b(${op})\\b`, 'gi');
+    operators.forEach((op) => {
+      const regex = new RegExp(`\\b(${op})\\b`, "gi");
       highlighted = highlighted.replace(regex, `<span class="text-accent-foreground">$1</span>`);
     });
 
     // Aggregate functions
-    const aggregates = ['count', 'min', 'max', 'avg', 'sum'];
-    aggregates.forEach(func => {
-      const regex = new RegExp(`\\b(${func})\\(`, 'gi');
+    const aggregates = ["count", "min", "max", "avg", "sum"];
+    aggregates.forEach((func) => {
+      const regex = new RegExp(`\\b(${func})\\(`, "gi");
       highlighted = highlighted.replace(regex, `<span class="text-[#22c55e]">$1</span>(`);
     });
 
@@ -147,11 +154,17 @@ export function QueryPreview({
 
     // Sensor names (capitalize first letter of each word for common sensors)
     const commonSensors = [
-      'Computer Name', 'Operating System', 'IP Address', 'CPU Percent',
-      'Disk Free GB', 'Memory GB', 'Last Reboot', 'Last Logged In User'
+      "Computer Name",
+      "Operating System",
+      "IP Address",
+      "CPU Percent",
+      "Disk Free GB",
+      "Memory GB",
+      "Last Reboot",
+      "Last Logged In User",
     ];
-    commonSensors.forEach(sensor => {
-      const regex = new RegExp(`\\b(${sensor})\\b`, 'gi');
+    commonSensors.forEach((sensor) => {
+      const regex = new RegExp(`\\b(${sensor})\\b`, "gi");
       highlighted = highlighted.replace(regex, `<span class="text-primary">$1</span>`);
     });
 
@@ -224,25 +237,25 @@ export function QueryPreview({
         {/* Query display */}
         <div className="relative">
           <div
-            className="p-4 bg-gray-900 rounded border border-gray-700 font-mono text-sm overflow-x-auto"
-            style={{ minHeight: '60px' }}
+            className="overflow-x-auto rounded border border-gray-700 bg-gray-900 p-4 font-mono text-sm"
+            style={{ minHeight: "60px" }}
           >
             {queryString ? (
               showRaw ? (
-                <pre className="text-muted-foreground whitespace-pre-wrap">{queryString}</pre>
+                <pre className="whitespace-pre-wrap text-muted-foreground">{queryString}</pre>
               ) : (
                 <div
                   className="text-muted-foreground"
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(highlightedQuery, {
-                      ALLOWED_TAGS: ['span', 'div'],
-                      ALLOWED_ATTR: ['class']
-                    })
+                      ALLOWED_TAGS: ["span", "div"],
+                      ALLOWED_ATTR: ["class"],
+                    }),
                   }}
                 />
               )
             ) : (
-              <span className="text-muted-foreground italic">
+              <span className="italic text-muted-foreground">
                 Start building your query above...
               </span>
             )}
@@ -250,7 +263,7 @@ export function QueryPreview({
 
           {/* Validation overlay for empty query */}
           {!queryString && (
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
               <Badge variant="outline" className="border-gray-600 text-muted-foreground">
                 Empty Query
               </Badge>
@@ -263,8 +276,8 @@ export function QueryPreview({
           <Alert className="border-red-500 bg-red-500/10">
             <AlertCircle className="h-4 w-4 text-red-500" />
             <AlertDescription className="text-red-400">
-              <div className="font-semibold mb-1">Query Errors:</div>
-              <ul className="list-disc list-inside space-y-1">
+              <div className="mb-1 font-semibold">Query Errors:</div>
+              <ul className="list-inside list-disc space-y-1">
                 {validation.errors.map((error, index) => (
                   <li key={index} className="text-sm">
                     {error.field && <span className="font-mono">{error.field}: </span>}
@@ -281,14 +294,14 @@ export function QueryPreview({
           <Alert className="border-yellow-500 bg-[#f97316]/10">
             <Info className="h-4 w-4 text-[#f97316]" />
             <AlertDescription className="text-[#f97316]">
-              <div className="font-semibold mb-1">Warnings:</div>
-              <ul className="list-disc list-inside space-y-1">
+              <div className="mb-1 font-semibold">Warnings:</div>
+              <ul className="list-inside list-disc space-y-1">
                 {validation.warnings.map((warning, index) => (
                   <li key={index} className="text-sm">
                     {warning.field && <span className="font-mono">{warning.field}: </span>}
                     {warning.message}
                     {warning.suggestion && (
-                      <div className="ml-4 text-xs text-[#f97316] mt-0.5">
+                      <div className="ml-4 mt-0.5 text-xs text-[#f97316]">
                         💡 {warning.suggestion}
                       </div>
                     )}
@@ -314,27 +327,27 @@ export function QueryPreview({
           <div className="flex flex-wrap gap-2">
             {query.sensors.length > 0 && (
               <Badge variant="outline" className="text-xs">
-                {query.sensors.length} sensor{query.sensors.length !== 1 ? 's' : ''}
+                {query.sensors.length} sensor{query.sensors.length !== 1 ? "s" : ""}
               </Badge>
             )}
             {query.aggregates.length > 0 && (
               <Badge variant="outline" className="text-xs">
-                {query.aggregates.length} aggregate{query.aggregates.length !== 1 ? 's' : ''}
+                {query.aggregates.length} aggregate{query.aggregates.length !== 1 ? "s" : ""}
               </Badge>
             )}
             {query.filters.length > 0 && (
               <Badge variant="outline" className="text-xs">
-                {query.filters.length} filter{query.filters.length !== 1 ? 's' : ''}
+                {query.filters.length} filter{query.filters.length !== 1 ? "s" : ""}
               </Badge>
             )}
             {query.groupBy.length > 0 && (
               <Badge variant="outline" className="text-xs">
-                Grouped by {query.groupBy.length} field{query.groupBy.length !== 1 ? 's' : ''}
+                Grouped by {query.groupBy.length} field{query.groupBy.length !== 1 ? "s" : ""}
               </Badge>
             )}
             {query.orderBy.length > 0 && (
               <Badge variant="outline" className="text-xs">
-                Sorted by {query.orderBy.length} field{query.orderBy.length !== 1 ? 's' : ''}
+                Sorted by {query.orderBy.length} field{query.orderBy.length !== 1 ? "s" : ""}
               </Badge>
             )}
             {query.limit && (

@@ -11,26 +11,31 @@ The Budget App includes an **AI-powered subscription detection system** that aut
 The system analyzes transactions using a **multi-factor approach**:
 
 #### 1. **Merchant Grouping**
+
 ```typescript
 // Group transactions by normalized merchant token
 // Example: "NETFLIX" → All Netflix transactions
-const merchantGroups = groupByMerchant(transactions, 'bmo');
+const merchantGroups = groupByMerchant(transactions, "bmo");
 ```
 
 #### 2. **Pattern Analysis**
+
 For each merchant group (minimum 2 transactions required):
 
 **Recurrence Detection:**
+
 - Calculate intervals between charges (days)
 - Compute average interval and standard deviation
 - Measure regularity score (0-1, higher = more regular)
 
 **Amount Consistency:**
+
 - Calculate average, min, max amounts
 - Check variance (±10% tolerance)
 - High variance reduces confidence
 
 **Interval Classification:**
+
 - **Weekly**: 5-9 days (avg 7 ±2)
 - **Monthly**: 25-35 days (avg 30 ±5)
 - **Annual**: 350-380 days (avg 365 ±15)
@@ -39,7 +44,7 @@ For each merchant group (minimum 2 transactions required):
 #### 3. **Confidence Scoring**
 
 ```typescript
-confidence = regularityScore + occurrenceBoost - variancePenalty
+confidence = regularityScore + occurrenceBoost - variancePenalty;
 
 // Where:
 // - regularityScore: 0-1 (from interval consistency)
@@ -69,36 +74,36 @@ const enriched = await enrichSubscriptionsWithMerchantData(detected);
 ```typescript
 interface SubscriptionPattern {
   id: string;
-  merchant_token: string;        // "NETFLIX"
-  merchant_name: string;          // "Netflix"
-  category: string;               // "Entertainment"
-  subcategory: string | null;     // "Streaming Services"
+  merchant_token: string; // "NETFLIX"
+  merchant_name: string; // "Netflix"
+  category: string; // "Entertainment"
+  subcategory: string | null; // "Streaming Services"
 
   // Financial
-  average_amount: number;         // $15.99
-  min_amount: number;             // $15.99
-  max_amount: number;             // $15.99
-  currency: string;               // "CAD"
+  average_amount: number; // $15.99
+  min_amount: number; // $15.99
+  max_amount: number; // $15.99
+  currency: string; // "CAD"
 
   // Recurrence
-  interval_type: 'weekly' | 'monthly' | 'annual' | 'irregular';
-  interval_days: number;          // 30
-  confidence: number;             // 0.95 (95% confident)
+  interval_type: "weekly" | "monthly" | "annual" | "irregular";
+  interval_days: number; // 30
+  confidence: number; // 0.95 (95% confident)
 
   // History
-  occurrence_count: number;       // 6 charges
-  first_charge: Date;             // 2024-06-15
-  last_charge: Date;              // 2024-11-15
-  next_expected_charge?: Date;    // 2024-12-15
+  occurrence_count: number; // 6 charges
+  first_charge: Date; // 2024-06-15
+  last_charge: Date; // 2024-11-15
+  next_expected_charge?: Date; // 2024-12-15
 
   // Metadata
-  is_active: boolean;             // true
+  is_active: boolean; // true
   is_subscription_merchant: boolean; // true (from AI)
   transaction_ids: string[];
 
   // Analytics
-  total_spent: number;            // $95.94
-  annual_cost_estimate: number;   // $191.88
+  total_spent: number; // $95.94
+  annual_cost_estimate: number; // $191.88
 }
 ```
 
@@ -107,12 +112,14 @@ interface SubscriptionPattern {
 ### Subscriptions Page (`/budget-app/subscriptions`)
 
 **Stats Dashboard:**
+
 - Active subscription count
 - Monthly cost estimate
 - Annual projection
 - Upcoming charges (next 7 days)
 
 **Subscription Cards:**
+
 - Merchant name and category
 - Amount and billing frequency
 - Next charge date
@@ -121,17 +128,20 @@ interface SubscriptionPattern {
 - Quick actions (view transactions)
 
 **Filtering:**
+
 - Active subscriptions (default)
 - All subscriptions (includes inactive)
 
 ### Visual Indicators
 
 **Confidence Levels:**
+
 - 🟢 **High** (≥90%): 5/5 dots filled
 - 🟡 **Medium** (70-89%): 3-4/5 dots filled
 - 🟠 **Low** (<70%): 1-2/5 dots filled + warning
 
 **Status Badges:**
+
 - ✅ **AI Verified**: Merchant catalog confirms subscription
 - **Inactive**: No charge in 2x interval period
 
@@ -140,6 +150,7 @@ interface SubscriptionPattern {
 ### Example 1: Netflix (High Confidence)
 
 **Transactions:**
+
 ```
 2024-06-15: [OP] ONLINE PURCHASE 15JUN2024NETFLIX → -$15.99
 2024-07-15: [OP] ONLINE PURCHASE 15JUL2024NETFLIX → -$15.99
@@ -150,6 +161,7 @@ interface SubscriptionPattern {
 ```
 
 **Detection:**
+
 - Intervals: [30, 31, 31, 30, 31] days
 - Average: 30.6 days
 - Regularity: 0.98 (very consistent)
@@ -157,6 +169,7 @@ interface SubscriptionPattern {
 - **Confidence: 0.95 → High**
 
 **AI Enrichment:**
+
 - Merchant: "Netflix"
 - Category: "Entertainment" / "Streaming Services"
 - is_subscription: true
@@ -165,6 +178,7 @@ interface SubscriptionPattern {
 ### Example 2: SkipTheDishes (Medium Confidence)
 
 **Transactions:**
+
 ```
 2024-06-05: [OP] ONLINE PURCHASE 5JUN2024SKIPTHEDISHES → -$32.45
 2024-07-12: [OP] ONLINE PURCHASE 12JUL2024SKIPTHEDISHES → -$28.99
@@ -172,6 +186,7 @@ interface SubscriptionPattern {
 ```
 
 **Detection:**
+
 - Intervals: [37, 39] days
 - Average: 38 days
 - Regularity: 0.85 (fairly consistent)
@@ -183,12 +198,14 @@ interface SubscriptionPattern {
 ### Example 3: Pembridge Insurance (Annual)
 
 **Transactions:**
+
 ```
 2023-11-15: [PR] PEMBRIDGE INS #123 AB → -$1,245.00
 2024-11-15: [PR] PEMBRIDGE INS #123 AB → -$1,245.00
 ```
 
 **Detection:**
+
 - Intervals: [365] days
 - Average: 365 days
 - Regularity: 1.0 (perfect)
@@ -207,28 +224,35 @@ interface SubscriptionPattern {
 ## Performance Optimizations
 
 ### 1. **Client-Side Detection**
+
 Pattern analysis runs in browser using last 12 months of transactions:
+
 ```typescript
 const twelveMonthsAgo = new Date();
 twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 12);
 ```
 
 ### 2. **Cached Merchant Data**
+
 Merchant catalog lookups are cached in database:
+
 - First lookup: API call to OpenAI
 - Subsequent lookups: Database cache hit
 
 ### 3. **Debounced Enrichment**
+
 AI enrichment only called once per detected subscription, not per transaction.
 
 ## API Integration
 
 ### Merchant Resolution
+
 ```
 GET /api/merchants/resolve?token=NETFLIX
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -256,11 +280,13 @@ GET /api/merchants/resolve?token=NETFLIX
 ### "No subscriptions detected"
 
 **Causes:**
+
 - Not enough transaction history (need ≥12 months)
 - Irregular payment patterns (confidence < 0.6)
 - Missing merchant tokens (generic descriptions)
 
 **Solutions:**
+
 - Import more historical transactions
 - Review transactions manually to confirm patterns
 - Check that merchant tokens are extractable
@@ -268,11 +294,13 @@ GET /api/merchants/resolve?token=NETFLIX
 ### "Low confidence subscription"
 
 **Causes:**
+
 - High amount variance (±10% exceeded)
 - Irregular intervals (not weekly/monthly/annual)
 - Few occurrences (<3 charges)
 
 **Solutions:**
+
 - Wait for more data points
 - Manually verify if pattern is legitimate
 - Adjust confidence threshold in code if needed
@@ -282,6 +310,7 @@ GET /api/merchants/resolve?token=NETFLIX
 **Cause:** Last charge within 2x interval period
 
 **Example:**
+
 - Monthly subscription ($30 every 30 days)
 - Last charge: 45 days ago
 - Still considered "active" until 60 days

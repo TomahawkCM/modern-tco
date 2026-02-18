@@ -29,6 +29,7 @@ Common questions and answers to help you get the most out of your learning exper
 **A:** It's an enterprise-grade learning platform specifically designed for Tanium Core Operator (TCO) certification preparation. It uses four research-backed techniques - spaced repetition, active recall, gamification, and analytics - to maximize your learning efficiency and retention.
 
 **Key benefits:**
+
 - 42% better retention through spaced repetition
 - 34% improvement from active recall testing
 - 48% more engagement via gamification
@@ -39,6 +40,7 @@ Common questions and answers to help you get the most out of your learning exper
 ### Q: Do I need any special software or equipment?
 
 **A:** No special software needed! You just need:
+
 - A modern web browser (Chrome, Firefox, Safari, or Edge)
 - Internet connection
 - Optional: Mobile device for on-the-go study
@@ -50,6 +52,7 @@ The platform is fully web-based and works on desktop, tablet, and mobile devices
 ### Q: How long does it take to complete the certification preparation?
 
 **A:** Most students invest **40-60 hours** over **6-8 weeks** to reach exam readiness. However, this varies based on:
+
 - Prior Tanium experience
 - Study pace and frequency
 - Learning style
@@ -72,12 +75,14 @@ The platform tracks your progress and predicts your readiness date based on your
 **A:** Account creation depends on your organization's setup:
 
 **Option 1: Self-Registration** (if enabled)
+
 1. Click "Sign Up" on the homepage
 2. Enter your email and create a password
 3. Confirm your email address via the link sent to your inbox
 4. Complete the onboarding flow
 
 **Option 2: Admin-Created Accounts**
+
 1. Your administrator creates your account
 2. You receive an invitation email with login credentials
 3. Log in and set a new password
@@ -129,6 +134,7 @@ If you have prior Tanium experience, you can skip ahead, but still complete the 
 ### Q: How long should I study each day?
 
 **A:** **Quality over quantity!** Research shows:
+
 - **Minimum**: 15-20 minutes daily for reviews
 - **Optimal**: 30-45 minutes daily (mix of videos, reading, practice, and reviews)
 - **Maximum**: 60-90 minutes (take breaks every 25-30 minutes)
@@ -140,6 +146,7 @@ If you have prior Tanium experience, you can skip ahead, but still complete the 
 ### Q: Can I study offline?
 
 **A:** The platform requires an internet connection for full functionality (videos, real-time progress sync). However, **limited offline support** is available:
+
 - Downloaded modules (if admin enabled this feature)
 - Locally-cached progress data
 - Practice questions previously loaded
@@ -151,6 +158,7 @@ Sync your progress when you reconnect to the internet.
 ### Q: How do I take notes?
 
 **A:** Click the "Add Note" button while studying any module. Your notes are:
+
 - Saved automatically to the database
 - Searchable across all modules
 - Exportable via Settings → Data Export
@@ -165,6 +173,7 @@ Sync your progress when you reconnect to the internet.
 **A:** Spaced repetition is a learning technique where you review information at increasing intervals. Instead of cramming, you review right before you're about to forget, which strengthens memory efficiently.
 
 **The 2357 Method:**
+
 - Day 1: First review (2 days after learning)
 - Day 3: Second review (3 days after first)
 - Day 7: Third review (5 days after second)
@@ -178,6 +187,7 @@ This method increases retention by **42%** compared to traditional studying.
 ### Q: What happens if I miss a review?
 
 **A:** Missed reviews accumulate and remain in your queue. The platform doesn't "penalize" you, but:
+
 - Your retention scores may decrease
 - You'll have more reviews due the next day
 - Your exam readiness score will adjust
@@ -189,6 +199,7 @@ This method increases retention by **42%** compared to traditional studying.
 ### Q: Can I reschedule reviews?
 
 **A:** Reviews are automatically scheduled by the algorithm for optimal retention. You can't manually reschedule, but you can:
+
 - Complete them early (they'll appear in your "Reviews Due" count)
 - Complete them late (they'll wait in the queue)
 - Use Practice Mode if you want to quiz yourself without affecting the schedule
@@ -199,13 +210,13 @@ This method increases retention by **42%** compared to traditional studying.
 
 **A:**
 
-| Feature | Review Questions | Practice Questions |
-|---------|-----------------|-------------------|
-| **When** | Scheduled by system | Anytime you want |
-| **Points** | 10 base + multipliers | 5 points (no multipliers) |
-| **Purpose** | Long-term retention | Build confidence, test knowledge |
-| **Affects retention** | Yes | No |
-| **Recommended frequency** | Daily | 2-3 times per week |
+| Feature                   | Review Questions      | Practice Questions               |
+| ------------------------- | --------------------- | -------------------------------- |
+| **When**                  | Scheduled by system   | Anytime you want                 |
+| **Points**                | 10 base + multipliers | 5 points (no multipliers)        |
+| **Purpose**               | Long-term retention   | Build confidence, test knowledge |
+| **Affects retention**     | Yes                   | No                               |
+| **Recommended frequency** | Daily                 | 2-3 times per week               |
 
 ---
 
@@ -241,6 +252,7 @@ Use Missed Questions most frequently to target your weaknesses.
 ### Q: How many practice questions should I do?
 
 **A:** It varies by your needs:
+
 - **Minimum**: 10-15 questions per domain per week
 - **Recommended**: 50-100 questions per domain total before exam
 - **Maximum**: No limit, but prioritize reviews over practice
@@ -266,6 +278,7 @@ Use Missed Questions most frequently to target your weaknesses.
 ### Q: Are videos required or optional?
 
 **A:** Videos are **highly recommended** but not strictly required. Research shows:
+
 - 60% higher engagement with video content
 - 45% better completion rates with milestone tracking
 - Significant improvement in conceptual understanding
@@ -277,6 +290,7 @@ Skip at your own risk - videos explain complex concepts more clearly than text a
 ### Q: Can I watch videos at different speeds?
 
 **A:** Yes! Use the standard YouTube controls to adjust playback speed (0.5x to 2x). However:
+
 - **First viewing**: Watch at normal speed for best comprehension
 - **Review**: 1.5x or 2x speed is fine for reinforcement
 
@@ -314,6 +328,7 @@ If still broken, report the issue to your administrator with the video title and
 ### Q: What is "Exam Readiness" and how is it calculated?
 
 **A:** Exam Readiness is a comprehensive 0-100% score that combines:
+
 - **Module completion** (30% weight): How many modules you've finished
 - **Retention scores** (40% weight): Your average retention across all concepts
 - **Study hours** (15% weight): Time invested (target: 40+ hours)
@@ -326,12 +341,14 @@ If still broken, report the issue to your administrator with the video title and
 ### Q: What does "retention score" mean?
 
 **A:** Retention score represents how well you remember a concept based on your review performance. It's calculated using:
+
 - Accuracy on recent reviews
 - Time since last review
 - Difficulty of questions answered
 - Number of reviews completed
 
 **Ranges:**
+
 - 90%+: Mastered (green)
 - 70-89%: Advanced (blue)
 - 50-69%: Learning (yellow)
@@ -342,6 +359,7 @@ If still broken, report the issue to your administrator with the video title and
 ### Q: Why is my exam readiness going down?
 
 **A:** Exam readiness can decrease for several reasons:
+
 - **Missed reviews**: Skipping scheduled reviews lowers retention
 - **Poor performance**: Consistently missing questions affects accuracy
 - **Time decay**: Not reviewing concepts causes natural forgetting
@@ -354,6 +372,7 @@ If still broken, report the issue to your administrator with the video title and
 ### Q: How do I export my progress data?
 
 **A:** Go to **Settings → Data Export → Export Progress Data**. You'll receive a CSV file with:
+
 - All module completion percentages
 - Retention scores by concept
 - Assessment history
@@ -375,6 +394,7 @@ If still broken, report the issue to your administrator with the video title and
 **A:** You earn points through:
 
 **Review Sessions** (10 base points × multipliers):
+
 - Difficulty: 1.0x (easy), 1.5x (medium), 2.0x (hard)
 - Streak: Up to 2.0x for 30-day streaks
 - Retention: 1.5x for mastered concepts (90%+)
@@ -389,6 +409,7 @@ If still broken, report the issue to your administrator with the video title and
 ### Q: What are levels and how do I level up?
 
 **A:** Points accumulate to increase your level (1-15):
+
 - Level 1: 0 points (Novice)
 - Level 5: 2,500 points (Apprentice)
 - Level 10: 20,000 points (Proficient)
@@ -401,6 +422,7 @@ Higher levels unlock special achievements and bragging rights!
 ### Q: What achievements are available?
 
 **A:** There are 5 achievement categories:
+
 - **Streaks**: 3, 7, 14, 30 consecutive review days
 - **Accuracy**: 90%, 95%, 100% session accuracy
 - **Volume**: 50, 100, 500, 1000 total reviews
@@ -483,12 +505,14 @@ Still broken? Report specific video and error message to support.
 **A:** Yes! The platform is mobile-responsive. However:
 
 **✅ Great on mobile:**
+
 - Watching videos
 - Quick reviews (5-10 questions)
 - Practice sessions
 - Checking progress
 
 **📱 Better on desktop:**
+
 - Reading long-form content
 - Detailed analytics
 - Extended study sessions
@@ -534,6 +558,7 @@ It's better to delay and pass than rush and fail.
 **A:**
 
 **DO:**
+
 - ✅ Light review only (30 minutes max)
 - ✅ Review your strongest concepts (confidence booster)
 - ✅ Get a full night's sleep (8 hours minimum)
@@ -541,6 +566,7 @@ It's better to delay and pass than rush and fail.
 - ✅ Do something relaxing (movie, exercise, friends)
 
 **DON'T:**
+
 - ❌ Cram new material (won't help at this point)
 - ❌ Study late into the night (hurts more than helps)
 - ❌ Panic or stress (trust your preparation)
@@ -551,6 +577,7 @@ It's better to delay and pass than rush and fail.
 ### Q: Can I take a practice exam that simulates the real test?
 
 **A:** Yes! Use **Module Practice** with:
+
 - **Mixed difficulty**
 - **25 questions** (simulates exam length)
 - **Timed mode** (if enabled by your admin)
@@ -565,6 +592,7 @@ Aim for 75%+ accuracy on each domain practice exam.
 **A:** Students who reach **85% exam readiness** have a **90%+ pass rate** on the Tanium TCO certification exam. This is significantly higher than the industry average.
 
 Key success factors:
+
 - Consistent daily study habit
 - Completing all scheduled reviews
 - Reaching all certification benchmarks
@@ -603,6 +631,7 @@ Maximum 1000 users per batch.
 ### Q: Can I customize the platform branding?
 
 **A:** Yes! Customize:
+
 - Logo: Replace `/public/logo.svg`
 - Colors: Edit `tailwind.config.ts` theme
 - Name: Update environment variable `NEXT_PUBLIC_APP_NAME`
@@ -614,6 +643,7 @@ See [ADMIN_GUIDE.md](./ADMIN_GUIDE.md#platform-customization) for details.
 ### Q: How do I view student analytics?
 
 **A:** Go to **Admin → Student Progress**. You can:
+
 - View cohort-level aggregates
 - Drill into individual student reports
 - Identify at-risk students (low progress + approaching exam)
@@ -628,6 +658,7 @@ See [ADMIN_GUIDE.md](./ADMIN_GUIDE.md#student-analytics) for full guide.
 **A:** Database backups depend on your hosting:
 
 **Supabase** (recommended):
+
 - Daily automatic backups (retained 7 days)
 - Point-in-time recovery (24 hours)
 - Manual backups via Supabase CLI

@@ -9,10 +9,6 @@ import { ExamOnlyProviders } from "@/app/heavy-providers";
  * This layout ensures contexts are only loaded for exam routes,
  * improving performance for other pages.
  */
-export default function MockExamLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function MockExamLayout({ children }: { children: React.ReactNode }) {
   return <ExamOnlyProviders>{children}</ExamOnlyProviders>;
 }

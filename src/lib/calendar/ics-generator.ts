@@ -4,11 +4,8 @@
  * Supports recurring events (RRULE) and reminders (VALARM)
  */
 
-import type {
-  CalendarEventOptions,
-  CalendarRecurrence,
-} from '@/types/notifications';
-import type { Subscription, BillingCycle } from '@/types/budget';
+import type { CalendarEventOptions, CalendarRecurrence } from "@/types/notifications";
+import type { Subscription, BillingCycle } from "@/types/budget";
 
 // ========================
 // Constants
@@ -25,16 +22,19 @@ const ICS_LINE_MAX = 75; // RFC 5545 max line length
  */
 function formatICSDate(date: Date, allDay = false): string {
   if (allDay) {
-    return date.toISOString().slice(0, 10).replace(/-/g, '');
+    return date.toISOString().slice(0, 10).replace(/-/g, "");
   }
-  return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  return date
+    .toISOString()
+    .replace(/[-:]/g, "")
+    .replace(/\.\d{3}/, "");
 }
 
 /**
  * Format a Date to ICS date format (YYYYMMDD)
  */
 function formatICSDateOnly(date: Date): string {
-  return date.toISOString().slice(0, 10).replace(/-/g, '');
+  return date.toISOString().slice(0, 10).replace(/-/g, "");
 }
 
 /**
@@ -43,10 +43,10 @@ function formatICSDateOnly(date: Date): string {
  */
 function escapeICSText(text: string): string {
   return text
-    .replace(/\\/g, '\\\\')
-    .replace(/;/g, '\\;')
-    .replace(/,/g, '\\,')
-    .replace(/\n/g, '\\n');
+    .replace(/\\/g, "\\\\")
+    .replace(/;/g, "\\;")
+    .replace(/,/g, "\\,")
+    .replace(/\n/g, "\\n");
 }
 
 /**
@@ -66,11 +66,11 @@ function foldLine(line: string): string {
 
   // Continuation lines start with a space
   while (remaining.length > 0) {
-    lines.push(` ${  remaining.slice(0, ICS_LINE_MAX - 1)}`);
+    lines.push(` ${remaining.slice(0, ICS_LINE_MAX - 1)}`);
     remaining = remaining.slice(ICS_LINE_MAX - 1);
   }
 
-  return lines.join('\r\n');
+  return lines.join("\r\n");
 }
 
 /**
@@ -87,18 +87,18 @@ function generateUID(): string {
  */
 function billingCycleToRRULE(cycle: BillingCycle): CalendarRecurrence {
   switch (cycle) {
-    case 'weekly':
-      return { frequency: 'WEEKLY' };
-    case 'bi-weekly':
-      return { frequency: 'WEEKLY', interval: 2 };
-    case 'monthly':
-      return { frequency: 'MONTHLY' };
-    case 'quarterly':
-      return { frequency: 'MONTHLY', interval: 3 };
-    case 'annual':
-      return { frequency: 'YEARLY' };
+    case "weekly":
+      return { frequency: "WEEKLY" };
+    case "bi-weekly":
+      return { frequency: "WEEKLY", interval: 2 };
+    case "monthly":
+      return { frequency: "MONTHLY" };
+    case "quarterly":
+      return { frequency: "MONTHLY", interval: 3 };
+    case "annual":
+      return { frequency: "YEARLY" };
     default:
-      return { frequency: 'MONTHLY' };
+      return { frequency: "MONTHLY" };
   }
 }
 
@@ -125,14 +125,14 @@ function buildRRULE(recurrence: CalendarRecurrence): string {
   }
 
   if (recurrence.byDay && recurrence.byDay.length > 0) {
-    parts.push(`BYDAY=${recurrence.byDay.join(',')}`);
+    parts.push(`BYDAY=${recurrence.byDay.join(",")}`);
   }
 
   if (recurrence.byMonthDay) {
     parts.push(`BYMONTHDAY=${recurrence.byMonthDay}`);
   }
 
-  return parts.join(';');
+  return parts.join(";");
 }
 
 // ========================
@@ -143,15 +143,15 @@ function buildRRULE(recurrence: CalendarRecurrence): string {
  * Build a VALARM component for reminders
  */
 function buildVALARM(minutesBefore: number, title: string): string {
-  const trigger = minutesBefore > 0 ? `-PT${minutesBefore}M` : 'PT0M';
+  const trigger = minutesBefore > 0 ? `-PT${minutesBefore}M` : "PT0M";
 
   return [
-    'BEGIN:VALARM',
-    'ACTION:DISPLAY',
+    "BEGIN:VALARM",
+    "ACTION:DISPLAY",
     foldLine(`DESCRIPTION:${escapeICSText(title)}`),
     `TRIGGER:${trigger}`,
-    'END:VALARM',
-  ].join('\r\n');
+    "END:VALARM",
+  ].join("\r\n");
 }
 
 // ========================
@@ -166,11 +166,7 @@ function buildVEVENT(options: CalendarEventOptions): string {
   const now = new Date();
   const endDate = options.endDate || new Date(options.startDate.getTime() + 60 * 60 * 1000);
 
-  const lines: string[] = [
-    'BEGIN:VEVENT',
-    `UID:${uid}`,
-    `DTSTAMP:${formatICSDate(now)}`,
-  ];
+  const lines: string[] = ["BEGIN:VEVENT", `UID:${uid}`, `DTSTAMP:${formatICSDate(now)}`];
 
   // Start and end dates
   if (options.allDay) {
@@ -204,9 +200,9 @@ function buildVEVENT(options: CalendarEventOptions): string {
     lines.push(buildVALARM(options.reminderMinutes, options.title));
   }
 
-  lines.push('END:VEVENT');
+  lines.push("END:VEVENT");
 
-  return lines.join('\r\n');
+  return lines.join("\r\n");
 }
 
 // ========================
@@ -218,22 +214,22 @@ function buildVEVENT(options: CalendarEventOptions): string {
  */
 function buildVCALENDAR(events: CalendarEventOptions[]): string {
   const lines: string[] = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Budget App//Bill Reminders//EN',
-    'CALSCALE:GREGORIAN',
-    'METHOD:PUBLISH',
-    'X-WR-CALNAME:Budget App - Bill Reminders',
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Budget App//Bill Reminders//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "X-WR-CALNAME:Budget App - Bill Reminders",
   ];
 
   for (const event of events) {
     lines.push(buildVEVENT(event));
   }
 
-  lines.push('END:VCALENDAR');
+  lines.push("END:VCALENDAR");
 
   // ICS requires CRLF line endings
-  return lines.join('\r\n');
+  return lines.join("\r\n");
 }
 
 // ========================
@@ -249,7 +245,7 @@ export function generateSubscriptionICS(
 ): string {
   const event: CalendarEventOptions = {
     title: `Bill Due: ${subscription.name}`,
-    description: `${subscription.name} - ${subscription.currency || '$'}${subscription.amount.toFixed(2)} ${subscription.billingCycle}`,
+    description: `${subscription.name} - ${subscription.currency || "$"}${subscription.amount.toFixed(2)} ${subscription.billingCycle}`,
     startDate: new Date(subscription.nextBillingDate),
     allDay: true,
     recurrence: billingCycleToRRULE(subscription.billingCycle),
@@ -268,7 +264,7 @@ export function generateMultipleSubscriptionsICS(
 ): string {
   const events: CalendarEventOptions[] = subscriptions.map((sub) => ({
     title: `Bill Due: ${sub.name}`,
-    description: `${sub.name} - ${sub.currency || '$'}${sub.amount.toFixed(2)} ${sub.billingCycle}`,
+    description: `${sub.name} - ${sub.currency || "$"}${sub.amount.toFixed(2)} ${sub.billingCycle}`,
     startDate: new Date(sub.nextBillingDate),
     allDay: true,
     recurrence: billingCycleToRRULE(sub.billingCycle),
@@ -289,12 +285,12 @@ export function generateCustomEventICS(options: CalendarEventOptions): string {
  * Download an ICS file
  */
 export function downloadICS(content: string, filename: string): void {
-  const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
+  const blob = new Blob([content], { type: "text/calendar;charset=utf-8" });
   const url = URL.createObjectURL(blob);
 
-  const link = document.createElement('a');
+  const link = document.createElement("a");
   link.href = url;
-  link.download = filename.endsWith('.ics') ? filename : `${filename}.ics`;
+  link.download = filename.endsWith(".ics") ? filename : `${filename}.ics`;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
@@ -311,7 +307,7 @@ export function downloadSubscriptionICS(
   reminderMinutes?: number
 ): void {
   const content = generateSubscriptionICS(subscription, reminderMinutes);
-  const filename = `${subscription.name.replace(/[^a-z0-9]/gi, '_')}_reminder.ics`;
+  const filename = `${subscription.name.replace(/[^a-z0-9]/gi, "_")}_reminder.ics`;
   downloadICS(content, filename);
 }
 

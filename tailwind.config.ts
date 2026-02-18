@@ -10,14 +10,14 @@ const config: Config = {
   ],
   safelist: [
     // Background gradients used in budget app
-    'bg-slate-950',
-    'bg-slate-900',
-    'from-slate-900',
-    'via-slate-950',
-    'to-black',
-    'bg-teal-500/10',
-    'bg-blue-600/10',
-    'blur-[120px]',
+    "bg-slate-950",
+    "bg-slate-900",
+    "from-slate-900",
+    "via-slate-950",
+    "to-black",
+    "bg-teal-500/10",
+    "bg-blue-600/10",
+    "blur-[120px]",
   ],
   theme: {
     container: {
@@ -219,10 +219,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("tailwindcss-rtl"),
-  ],
+  plugins: [require("tailwindcss-animate"), require("tailwindcss-rtl")],
 };
 
 export default config;

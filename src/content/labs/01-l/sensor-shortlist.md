@@ -18,11 +18,11 @@ You are preparing an executive readiness check for **Windows update hygiene** ac
 
 ### Sample shortlist entry
 
-| Sensor | Purpose | Key Columns | Run Time Notes |
-| --- | --- | --- | --- |
-| `Windows Update Status` | Shows last install status and KBs required | `Computer Name`, `Status`, `Last Install Date` | Returns in <10s across laptop group |
-| `Pending Actions` | Surfaces outstanding remediation actions | `Action Name`, `Status`, `Age` | Slightly slower (~20s) due to enrichment |
-| `Patch Status` | High-level compliance roll-up | `Compliance State`, `Missing Patches` | Fast (<5s), great for quick exec readouts |
+| Sensor                  | Purpose                                    | Key Columns                                    | Run Time Notes                            |
+| ----------------------- | ------------------------------------------ | ---------------------------------------------- | ----------------------------------------- |
+| `Windows Update Status` | Shows last install status and KBs required | `Computer Name`, `Status`, `Last Install Date` | Returns in <10s across laptop group       |
+| `Pending Actions`       | Surfaces outstanding remediation actions   | `Action Name`, `Status`, `Age`                 | Slightly slower (~20s) due to enrichment  |
+| `Patch Status`          | High-level compliance roll-up              | `Compliance State`, `Missing Patches`          | Fast (<5s), great for quick exec readouts |
 
 ### Self-check
 

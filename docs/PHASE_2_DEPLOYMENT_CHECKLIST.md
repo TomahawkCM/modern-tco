@@ -12,22 +12,26 @@
 ### 1. Database Migrations
 
 - [ ] **Apply Phase 2 schema migration**
+
   ```bash
   # In production Supabase instance
   npx supabase migration up 20251002000002_add_question_reviews
   ```
 
 - [ ] **Apply performance optimization migration**
+
   ```bash
   npx supabase migration up 20251003000001_performance_optimizations
   ```
 
 - [ ] **Refresh materialized view (first time)**
+
   ```sql
   SELECT refresh_review_queue();
   ```
 
 - [ ] **Verify tables created**
+
   ```sql
   -- Should return 4 rows
   SELECT table_name FROM information_schema.tables
@@ -48,6 +52,7 @@
 ### 2. Environment Variables
 
 - [ ] **PostHog Analytics**
+
   ```bash
   # Vercel environment variables
   NEXT_PUBLIC_POSTHOG_KEY=phc_XXXXXXXXXXXXXXXXXX
@@ -76,16 +81,19 @@
 ### 4. Build Verification
 
 - [ ] **Run production build**
+
   ```bash
   npm run build
   ```
 
 - [ ] **Check for TypeScript errors**
+
   ```bash
   npm run typecheck
   ```
 
 - [ ] **Check for linting issues**
+
   ```bash
   npm run lint
   ```
@@ -101,6 +109,7 @@
 ### 5. Testing
 
 - [ ] **Unit tests pass** (if implemented)
+
   ```bash
   npm run test
   ```
@@ -158,6 +167,7 @@
 ### 7. Database Performance
 
 - [ ] **Set up materialized view refresh cron** (optional but recommended)
+
   ```sql
   -- Refresh daily at 2 AM UTC
   CREATE EXTENSION IF NOT EXISTS pg_cron;
@@ -170,6 +180,7 @@
   ```
 
 - [ ] **Verify RLS policies active**
+
   ```sql
   -- Should return true for all tables
   SELECT tablename, rowsecurity
@@ -190,6 +201,7 @@
 ### 8. Rollback Plan
 
 - [ ] **Database rollback script prepared**
+
   ```sql
   -- If needed, can drop tables (CAUTION: data loss)
   DROP TABLE IF EXISTS public.question_review_attempts CASCADE;
@@ -200,12 +212,14 @@
   ```
 
 - [ ] **Code rollback**
+
   ```bash
   # Revert to previous deployment
   vercel rollback
   ```
 
 - [ ] **Feature flag** (optional)
+
   ```typescript
   // Add environment variable to disable Phase 2
   const PHASE_2_ENABLED = process.env.NEXT_PUBLIC_PHASE_2_ENABLED !== 'false';
@@ -311,12 +325,14 @@ npx supabase db execute "SELECT COUNT(*) FROM mv_unified_review_queue;"
 ## 📊 Success Metrics
 
 **Week 1 Targets:**
+
 - [ ] 50+ users start a review session
 - [ ] 70%+ session completion rate
 - [ ] 80%+ average accuracy (flashcards + questions)
 - [ ] No critical errors in Sentry
 
 **Month 1 Targets:**
+
 - [ ] 500+ review sessions completed
 - [ ] 25%+ of users have 7+ day streak
 - [ ] 90%+ session completion rate
@@ -380,14 +396,17 @@ npx supabase db execute "SELECT COUNT(*) FROM mv_unified_review_queue;"
 ## 📞 Support Contacts
 
 **Technical Issues**:
+
 - Sentry: https://sentry.io/organizations/tco/issues/
 - Vercel: https://vercel.com/robne/modern-tco
 - Supabase: https://supabase.com/dashboard/project/qnwcwoutgarhqxlgsjzs
 
 **Analytics**:
+
 - PostHog: https://app.posthog.com
 
 **Documentation**:
+
 - Handoff Doc: `/docs/PHASE_2_COMPLETION_HANDOFF.md`
 - Integration Guide: `/docs/PHASE_2_COMPLETION_HANDOFF.md#integration-guide`
 
@@ -403,10 +422,10 @@ npx supabase db execute "SELECT COUNT(*) FROM mv_unified_review_queue;"
 - [ ] Team notified of deployment
 - [ ] Post-deployment monitoring ready
 
-**Deployment Approved By**: _________________
-**Date**: _________________
-**Deployed By**: _________________
-**Deployment Date**: _________________
+**Deployment Approved By**: ********\_********
+**Date**: ********\_********
+**Deployed By**: ********\_********
+**Deployment Date**: ********\_********
 
 ---
 

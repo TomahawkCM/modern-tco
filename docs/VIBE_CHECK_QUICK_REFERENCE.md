@@ -11,6 +11,7 @@ Purpose: Prevent over-engineering, maintain production focus, ensure quality
 ## 🎯 What is Vibe Check?
 
 Vibe Check is a **metacognitive oversight layer** that helps prevent:
+
 - ❌ Over-engineering (creating duplicate systems)
 - ❌ Tunnel vision (missing existing solutions)
 - ❌ Scope creep (adding unnecessary features)
@@ -28,6 +29,7 @@ Vibe Check is a **metacognitive oversight layer** that helps prevent:
 **Purpose**: Break tunnel vision before making critical decisions
 
 **When to Use**:
+
 - ✅ Before adding new React contexts (11+ already exist)
 - ✅ Before creating new database tables or RLS policies
 - ✅ Before modifying assessment/spaced repetition logic
@@ -36,24 +38,32 @@ Vibe Check is a **metacognitive oversight layer** that helps prevent:
 - ✅ Before deploying to production
 
 **Example Usage**:
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_check({
-  context: "User wants to track video watch time analytics",
-  assumptions: [
-    "Need new React context for video state",
-    "Need new database table for video_analytics",
-    "Need new analytics dashboard component"
-  ],
-  decision: "Create VideoAnalyticsContext, video_analytics table, and dashboard"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__vibe_check({
+    context: "User wants to track video watch time analytics",
+    assumptions: [
+      "Need new React context for video state",
+      "Need new database table for video_analytics",
+      "Need new analytics dashboard component",
+    ],
+    decision: "Create VideoAnalyticsContext, video_analytics table, and dashboard",
+  });
 ```
 
 **Expected Response**:
+
 - ⚠️ Questions your assumptions
 - ⚠️ Points out existing solutions
 - ✅ Verifies alignment with production goals
 
 **Real-World Example**:
+
 ```javascript
 // BEFORE implementing new feature
 vibe_check({
@@ -61,10 +71,10 @@ vibe_check({
   assumptions: [
     "Need new ProgressTracker component",
     "Need new user_progress table",
-    "Need new API route for progress"
+    "Need new API route for progress",
   ],
-  decision: "Create new progress tracking system"
-})
+  decision: "Create new progress tracking system",
+});
 
 // RESPONSE:
 // ⚠️ ProgressContext already exists with 95% of needed functionality
@@ -80,6 +90,7 @@ vibe_check({
 **Purpose**: Track errors and solutions to prevent recurring issues
 
 **When to Use**:
+
 - ✅ After fixing TypeScript errors
 - ✅ After resolving accessibility violations
 - ✅ After optimizing performance bottlenecks
@@ -87,16 +98,23 @@ vibe_check({
 - ✅ After debugging test failures
 
 **Example Usage**:
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
-  error: "Type 'boolean | undefined' not assignable to type 'boolean'",
-  solution: "Added Boolean() coercion: Boolean(isComplete)",
-  pattern: "localStorage returns string|null, always coerce to expected type",
-  category: "typescript-strict-mode"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__vibe_learn({
+    error: "Type 'boolean | undefined' not assignable to type 'boolean'",
+    solution: "Added Boolean() coercion: Boolean(isComplete)",
+    pattern: "localStorage returns string|null, always coerce to expected type",
+    category: "typescript-strict-mode",
+  });
 ```
 
 **Categories**:
+
 - `typescript-strict-mode` - Type errors and resolutions
 - `accessibility` - WCAG violations and fixes
 - `security` - RLS policies and vulnerabilities
@@ -105,14 +123,15 @@ mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
 - `deployment` - Production issues and rollbacks
 
 **Real-World Example**:
+
 ```javascript
 // AFTER fixing accessibility bug
 vibe_learn({
   error: "Button not keyboard accessible (missing onKeyDown)",
   solution: "Added onKeyDown handler with Enter/Space key support",
   pattern: "All interactive elements need keyboard handlers, not just onClick",
-  category: "accessibility"
-})
+  category: "accessibility",
+});
 
 // BENEFIT: Future agents will know this pattern!
 ```
@@ -124,20 +143,28 @@ vibe_learn({
 **Purpose**: Append project-specific guidelines for this session (in-memory)
 
 **When to Use**:
+
 - ✅ Starting a new sprint with specific constraints
 - ✅ Adding temporary rules for experimental features
 - ✅ Enforcing deadline-driven priorities
 - ✅ Setting up special security requirements
 
 **Example Usage**:
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__update_constitution({
-  rule: "SPRINT_RULE",
-  content: "This sprint: ONLY content population. NO new features or refactoring."
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__update_constitution({
+    rule: "SPRINT_RULE",
+    content: "This sprint: ONLY content population. NO new features or refactoring.",
+  });
 ```
 
 **Real-World Example**:
+
 ```javascript
 // During production preparation sprint
 update_constitution({
@@ -148,8 +175,8 @@ update_constitution({
     - NO feature additions (content population only)
     - YES bug fixes (security + critical only)
     - YES content import (videos, questions, labs)
-  `
-})
+  `,
+});
 ```
 
 ---
@@ -159,23 +186,31 @@ update_constitution({
 **Purpose**: Start fresh with new guidelines (clears in-memory rules)
 
 **When to Use**:
+
 - ✅ Switching between different project phases
 - ✅ Moving from development to production prep
 - ✅ Starting a new major feature
 - ✅ After completing a sprint
 
 **Example Usage**:
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__reset_constitution({
-  rules: [
-    "NEW_PHASE: Post-launch optimization",
-    "PRIORITY: Performance and scalability",
-    "CONSTRAINTS: Maintain backward compatibility"
-  ]
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__reset_constitution({
+    rules: [
+      "NEW_PHASE: Post-launch optimization",
+      "PRIORITY: Performance and scalability",
+      "CONSTRAINTS: Maintain backward compatibility",
+    ],
+  });
 ```
 
 **Real-World Example**:
+
 ```javascript
 // Transitioning from learning science to production
 reset_constitution({
@@ -183,9 +218,9 @@ reset_constitution({
     "Phase: Production Preparation",
     "Learning science: COMPLETE - NO modifications",
     "Priority: Content population + testing + deployment",
-    "Quality gates: All tests pass, accessibility audit, security review"
-  ]
-})
+    "Quality gates: All tests pass, accessibility audit, security review",
+  ],
+});
 ```
 
 ---
@@ -195,17 +230,20 @@ reset_constitution({
 **Purpose**: Review active constitutional rules for this session
 
 **When to Use**:
+
 - ✅ Starting a new task (verify current constraints)
 - ✅ Before making architectural decisions
 - ✅ When unsure about project priorities
 - ✅ Debugging why certain actions are blocked
 
 **Example Usage**:
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__check_constitution()
+mcp__pv - bhat - vibe - check - mcp - server__check_constitution();
 ```
 
 **Expected Response**:
+
 ```
 Current Constitutional Rules:
 1. PROJECT_PHASE: Production Preparation
@@ -276,19 +314,21 @@ Do you need to:
 **Scenario**: User requests video bookmark functionality
 
 **Step 1: Metacognitive Check**
+
 ```javascript
 vibe_check({
   context: "User wants to bookmark videos for later viewing",
   assumptions: [
     "Need VideoBookmarkContext for state",
     "Need video_bookmarks database table",
-    "Need BookmarkButton component"
+    "Need BookmarkButton component",
   ],
-  decision: "Implement full bookmarking system"
-})
+  decision: "Implement full bookmarking system",
+});
 ```
 
 **Step 2: Review Response**
+
 ```
 ⚠️ Question: Does ProgressContext track video completion already?
 ⚠️ Challenge: Can you extend existing bookmark system?
@@ -296,18 +336,20 @@ vibe_check({
 ```
 
 **Step 3: Implement Efficiently**
+
 - Found: ProgressContext has bookmark foundation
 - Found: user_bookmarks table exists (generic)
 - Action: Extend existing system (2 hours vs 6 hours)
 
 **Step 4: Learn from Pattern**
+
 ```javascript
 vibe_learn({
   error: "Almost created duplicate bookmark system",
   solution: "Extended existing ProgressContext and user_bookmarks table",
   pattern: "Always check existing contexts and database schema before creating new",
-  category: "over-engineering-prevention"
-})
+  category: "over-engineering-prevention",
+});
 ```
 
 ---
@@ -317,27 +359,34 @@ vibe_learn({
 **Scenario**: localStorage type error breaks build
 
 **Step 1: Fix the Error**
+
 ```typescript
 // BEFORE (error)
-const isComplete = localStorage.getItem('sectionComplete');
-if (isComplete) { /* ... */ }  // Error: Type 'string | null' not assignable
+const isComplete = localStorage.getItem("sectionComplete");
+if (isComplete) {
+  /* ... */
+} // Error: Type 'string | null' not assignable
 
 // AFTER (fixed)
-const isComplete = Boolean(localStorage.getItem('sectionComplete'));
-if (isComplete) { /* ... */ }  // ✅ Works!
+const isComplete = Boolean(localStorage.getItem("sectionComplete"));
+if (isComplete) {
+  /* ... */
+} // ✅ Works!
 ```
 
 **Step 2: Learn the Pattern**
+
 ```javascript
 vibe_learn({
   error: "localStorage.getItem returns string | null, not boolean",
   solution: "Used Boolean() coercion to convert to expected type",
   pattern: "localStorage always returns string | null - coerce to expected type",
-  category: "typescript-strict-mode"
-})
+  category: "typescript-strict-mode",
+});
 ```
 
 **Step 3: Prevent Recurrence**
+
 - Future agents see this pattern
 - Similar errors avoided automatically
 - Team knowledge grows organically
@@ -349,6 +398,7 @@ vibe_learn({
 **Scenario**: Preparing for first production deployment
 
 **Step 1: Set Production Rules**
+
 ```javascript
 reset_constitution({
   rules: [
@@ -356,12 +406,13 @@ reset_constitution({
     "TESTING_MANDATE: 100% E2E coverage for critical flows",
     "SECURITY_AUDIT: All RLS policies validated",
     "PERFORMANCE_GATE: Lighthouse score >90",
-    "ROLLBACK_READY: Instant rollback plan documented"
-  ]
-})
+    "ROLLBACK_READY: Instant rollback plan documented",
+  ],
+});
 ```
 
 **Step 2: Verify Before Deploy**
+
 ```javascript
 vibe_check({
   context: "Ready to deploy to production",
@@ -369,13 +420,14 @@ vibe_check({
     "All tests passing",
     "Security audit complete",
     "Performance benchmarks met",
-    "Rollback plan documented"
+    "Rollback plan documented",
   ],
-  decision: "Deploy to production now"
-})
+  decision: "Deploy to production now",
+});
 ```
 
 **Step 3: Review Checklist**
+
 ```
 ✅ All E2E tests passing? YES
 ✅ Security audit complete? YES
@@ -391,43 +443,51 @@ vibe_check({
 ### Existing Architecture (DO NOT DUPLICATE)
 
 **11+ React Contexts**:
+
 - AuthContext, DatabaseContext, ExamContext, ProgressContext
 - AssessmentContext, QuestionsContext, IncorrectAnswersContext
 - PracticeContext, SearchContext, SettingsContext, GlobalNavContext
 
 **Before creating new context**, use vibe_check:
+
 ```javascript
 vibe_check({
   context: "Need state for [feature]",
   assumptions: ["Need new React context"],
-  decision: "Create [Feature]Context"
-})
+  decision: "Create [Feature]Context",
+});
 // RESPONSE: Check if existing context can be extended first!
 ```
 
 **Video System** (642 lines):
+
 - `lib/videoAnalytics.ts` + VideoEmbed component
 - Milestone tracking, watch time analytics
 
 **Interactive Labs** (949 lines):
+
 - `types/lab.ts` (430 lines) + InteractiveLabSystem (519 lines)
 - Step validation, hint system
 
 **Question Bank**:
+
 - 200 questions active (4,108+ ready to migrate)
 - 6 TCO domains with blueprint alignment
 
 **Assessment Engine**:
+
 - Weighted scoring algorithm
 - Domain breakdown (22%, 23%, 15%, 23%, 17%)
 - Adaptive remediation engine
 
 **Spaced Repetition**:
+
 - 2357 method ([1, 2, 4, 9, 19] day intervals)
 - DailyReview + ReviewSession components
 - Weak concept tracking
 
 **Gamification**:
+
 - 27 badges across 5 categories
 - 6 progression levels
 - Points system with multipliers
@@ -442,6 +502,7 @@ vibe_check({
 **Project Overview**: `.claude/CLAUDE.md`
 
 **Learn More**:
+
 - Official Docs: https://pruthvibhat.com/work/vibecheck-mcp/
 - GitHub Repo: https://github.com/PV-Bhat/vibe-check-mcp-server
 - Smithery Page: https://smithery.ai/server/@PV-Bhat/vibe-check-mcp-server
@@ -451,42 +512,67 @@ vibe_check({
 ## 🚀 Quick Start Commands
 
 ### Check Current Rules
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__check_constitution()
+mcp__pv - bhat - vibe - check - mcp - server__check_constitution();
 ```
 
 ### Before Major Decision
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_check({
-  context: "What you're trying to do",
-  assumptions: ["Your assumptions"],
-  decision: "Your proposed approach"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__vibe_check({
+    context: "What you're trying to do",
+    assumptions: ["Your assumptions"],
+    decision: "Your proposed approach",
+  });
 ```
 
 ### After Fixing Error
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__vibe_learn({
-  error: "The error you encountered",
-  solution: "How you fixed it",
-  pattern: "General lesson learned",
-  category: "typescript-strict-mode | accessibility | security | performance"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__vibe_learn({
+    error: "The error you encountered",
+    solution: "How you fixed it",
+    pattern: "General lesson learned",
+    category: "typescript-strict-mode | accessibility | security | performance",
+  });
 ```
 
 ### Add Sprint Rule
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__update_constitution({
-  rule: "RULE_NAME",
-  content: "Rule description and constraints"
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__update_constitution({
+    rule: "RULE_NAME",
+    content: "Rule description and constraints",
+  });
 ```
 
 ### Reset for New Phase
+
 ```javascript
-mcp__pv-bhat-vibe-check-mcp-server__reset_constitution({
-  rules: ["New phase rules"]
-})
+mcp__pv -
+  bhat -
+  vibe -
+  check -
+  mcp -
+  server__reset_constitution({
+    rules: ["New phase rules"],
+  });
 ```
 
 ---
@@ -494,6 +580,7 @@ mcp__pv-bhat-vibe-check-mcp-server__reset_constitution({
 ## ✅ Success Metrics
 
 **Vibe Check prevents:**
+
 - 🎯 40% reduction in over-engineering
 - 🎯 60% fewer duplicate implementations
 - 🎯 80% improvement in pattern recognition
@@ -501,6 +588,7 @@ mcp__pv-bhat-vibe-check-mcp-server__reset_constitution({
 - 🎯 99.88% uptime and reliability
 
 **Your LMS benefits:**
+
 - ✅ Faster development (avoid duplicate work)
 - ✅ Higher quality (learn from mistakes)
 - ✅ Better alignment (stay focused on production)

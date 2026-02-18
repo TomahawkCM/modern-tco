@@ -54,11 +54,11 @@ This comprehensive guide provides administrators, instructors, and platform mana
 
 The platform supports **three administrative roles**:
 
-| Role | Permissions | Typical Use Case |
-|------|------------|------------------|
-| **Super Admin** | Full system access, user management, content creation, analytics, configuration | Platform owner, IT administrator |
-| **Instructor** | Content creation, question management, student analytics, grading | Tanium instructors, subject matter experts |
-| **Content Manager** | Content creation, video management, module editing | Content writers, video producers |
+| Role                | Permissions                                                                     | Typical Use Case                           |
+| ------------------- | ------------------------------------------------------------------------------- | ------------------------------------------ |
+| **Super Admin**     | Full system access, user management, content creation, analytics, configuration | Platform owner, IT administrator           |
+| **Instructor**      | Content creation, question management, student analytics, grading               | Tanium instructors, subject matter experts |
+| **Content Manager** | Content creation, video management, module editing                              | Content writers, video producers           |
 
 ### First-Time Admin Setup
 
@@ -72,6 +72,7 @@ The platform supports **three administrative roles**:
 ### Admin Dashboard Overview
 
 **Key Sections**:
+
 - **📊 Platform Analytics**: Real-time metrics (active users, completion rates, average scores)
 - **👥 User Management**: User list, roles, permissions, activity logs
 - **📚 Content Library**: Modules, videos, questions, assessments
@@ -103,6 +104,7 @@ VALUES (
 ```
 
 **Via Admin UI** (recommended):
+
 1. Navigate to **Admin → Users → Add New User**
 2. Fill in required fields:
    - Email (required, must be unique)
@@ -128,6 +130,7 @@ VALUES ('user-uuid-here', 'create_content');
 ```
 
 **Available Permissions**:
+
 - `view_analytics` - Access platform analytics and reports
 - `create_content` - Create/edit modules, videos, questions
 - `manage_users` - Add, edit, delete users
@@ -137,6 +140,7 @@ VALUES ('user-uuid-here', 'create_content');
 ### Bulk User Import
 
 **CSV Format**:
+
 ```csv
 email,display_name,role,cohort,exam_date
 student1@example.com,Alice Smith,student,2025-Q1,2025-03-15
@@ -145,6 +149,7 @@ instructor@example.com,Carol Williams,instructor,2025-Q1,
 ```
 
 **Import Process**:
+
 1. Navigate to **Admin → Users → Bulk Import**
 2. Upload CSV file (max 1000 users per batch)
 3. Review validation results
@@ -153,6 +158,7 @@ instructor@example.com,Carol Williams,instructor,2025-Q1,
 ### Monitoring User Activity
 
 **Activity Dashboard**:
+
 ```sql
 -- Recent user activity
 SELECT
@@ -168,6 +174,7 @@ LIMIT 50;
 ```
 
 **Key Metrics**:
+
 - Last login date
 - Total study hours
 - Modules completed
@@ -181,11 +188,13 @@ LIMIT 50;
 ### Module Structure
 
 **File Locations**:
+
 - **MDX Content**: `/src/content/modules/`
 - **Module Manifest**: `/src/content/modules/manifest.json`
 - **Assets**: `/public/assets/modules/`
 
 **Module Manifest Schema**:
+
 ```json
 {
   "modules": [
@@ -252,11 +261,7 @@ After completing this module, you will be able to:
 
 Content goes here with **markdown** formatting.
 
-<VideoEmbed
-  youtubeId="VIDEO_ID_HERE"
-  title="Section 1 Video"
-  moduleSlug="module-name"
-/>
+<VideoEmbed youtubeId="VIDEO_ID_HERE" title="Section 1 Video" moduleSlug="module-name" />
 
 ### Subsection 1.1
 
@@ -268,7 +273,7 @@ More content...
     "Get Computer Name",
     "SELECT Computer Name",
     "QUERY Computer Name",
-    "FETCH Computer Name"
+    "FETCH Computer Name",
   ]}
   correctAnswer={0}
   explanation="Tanium uses 'Get' syntax for querying sensors."
@@ -315,6 +320,7 @@ npm run build
 ### Editing Existing Modules
 
 **Best Practices**:
+
 - Always test changes locally before deploying to production
 - Use `git` for version control and rollback capability
 - Update `lastmod` date in sitemap.xml after changes
@@ -322,6 +328,7 @@ npm run build
 - Test embedded videos and interactive quizzes
 
 **Common MDX Components**:
+
 - `<VideoEmbed>` - Embed YouTube or custom videos
 - `<MicroQuiz>` - Interactive knowledge checks
 - `<CodeBlock>` - Syntax-highlighted code examples
@@ -331,6 +338,7 @@ npm run build
 ### Content Versioning
 
 **Git Workflow**:
+
 ```bash
 # Create feature branch
 git checkout -b content/update-asking-questions
@@ -345,6 +353,7 @@ git push origin content/update-asking-questions
 ```
 
 **Rollback Strategy**:
+
 ```bash
 # Revert to previous version
 git revert HEAD
@@ -385,6 +394,7 @@ CREATE TABLE practice_questions (
 ### Adding New Questions
 
 **Via Admin UI**:
+
 1. Navigate to **Admin → Question Bank → Add New Question**
 2. Fill in required fields:
    - **Question Text**: Clear, concise question (avoid ambiguity)
@@ -433,12 +443,14 @@ VALUES (
 ### Bulk Question Import
 
 **CSV Format**:
+
 ```csv
 question_text,question_type,option_1,option_2,option_3,option_4,correct_answer,explanation,domain,difficulty,learning_objective,tags
 "What is Tanium?","multiple_choice","Endpoint management","Network monitoring","Cloud platform","Database system","0","Tanium is an endpoint management and security platform.","Domain 1: Platform Foundation","easy","Understand Tanium architecture","platform,architecture"
 ```
 
 **Import Script**:
+
 ```bash
 # Upload CSV to /admin/questions/import
 # System validates format and content
@@ -449,6 +461,7 @@ question_text,question_type,option_1,option_2,option_3,option_4,correct_answer,e
 ### Question Quality Standards
 
 **Best Practices**:
+
 - **Clear Language**: Avoid jargon, use simple grammar
 - **Specific Focus**: Test one concept per question
 - **Plausible Distractors**: Incorrect options should be believable
@@ -458,6 +471,7 @@ question_text,question_type,option_1,option_2,option_3,option_4,correct_answer,e
 - **Regular Updates**: Review questions quarterly for accuracy
 
 **Question Review Workflow**:
+
 ```sql
 -- Mark questions for review
 UPDATE practice_questions
@@ -502,6 +516,7 @@ WHERE id = 'question-uuid' AND reviewed_by = 'admin-uuid';
 **Location**: `/src/content/modules/manifest.json` → `videos` array
 
 **Video Object Schema**:
+
 ```json
 {
   "id": "vid-ask-001",
@@ -519,6 +534,7 @@ WHERE id = 'question-uuid' AND reviewed_by = 'admin-uuid';
 ### Adding New Videos
 
 **Step 1: Upload Video** (if custom hosting)
+
 ```bash
 # Upload to CDN or video hosting service
 aws s3 cp video.mp4 s3://tco-videos/modules/asking-questions/intro.mp4 --acl public-read
@@ -528,6 +544,7 @@ https://cdn.example.com/videos/asking-questions/intro.mp4
 ```
 
 **Step 2: Add to Manifest**
+
 ```json
 {
   "id": "vid-ask-002",
@@ -540,6 +557,7 @@ https://cdn.example.com/videos/asking-questions/intro.mp4
 ```
 
 **Step 3: Embed in Module**
+
 ```mdx
 ## Advanced Filtering
 
@@ -555,6 +573,7 @@ Watch this video to learn about complex filters:
 ### Video Analytics
 
 **Tracked Metrics**:
+
 - **Impressions**: Number of times video is shown
 - **Starts**: Number of times video playback begins
 - **Milestones**: 25%, 50%, 75%, 100% completion
@@ -563,6 +582,7 @@ Watch this video to learn about complex filters:
 - **Average View Duration**: Mean watch time across all students
 
 **Query Video Analytics**:
+
 ```sql
 -- Video completion rates by module
 SELECT
@@ -584,6 +604,7 @@ ORDER BY completion_rate DESC;
 ### Student Performance Reports
 
 **Individual Student Report**:
+
 ```sql
 -- Comprehensive student performance
 SELECT
@@ -601,6 +622,7 @@ GROUP BY up.display_name, up.email;
 ```
 
 **Cohort Performance Report**:
+
 ```sql
 -- Cohort-level analytics
 SELECT
@@ -620,6 +642,7 @@ GROUP BY up.cohort;
 ### Domain-Level Analytics
 
 **Performance by Domain**:
+
 ```sql
 -- Identify weak domains across all students
 SELECT
@@ -638,6 +661,7 @@ ORDER BY avg_domain_score ASC;
 **PostHog Integration**:
 
 Access PostHog dashboard at `https://app.posthog.com` for:
+
 - **Session Recordings**: Watch how students navigate the platform
 - **Funnels**: Identify drop-off points in learning journey
 - **Retention**: Cohort retention analysis (Day 1, 7, 14, 30)
@@ -645,6 +669,7 @@ Access PostHog dashboard at `https://app.posthog.com` for:
 - **Custom Events**: Track specific interactions (video play, quiz completion)
 
 **Key Events to Monitor**:
+
 - `video_play` - Video engagement
 - `assessment_start` - Assessment attempts
 - `quiz_correct` - Correct quiz answers
@@ -654,6 +679,7 @@ Access PostHog dashboard at `https://app.posthog.com` for:
 ### Exporting Reports
 
 **CSV Export**:
+
 ```sql
 -- Export student progress to CSV
 COPY (
@@ -671,6 +697,7 @@ COPY (
 ```
 
 **Admin UI Export**:
+
 1. Navigate to **Admin → Analytics → Export**
 2. Select report type (Student Progress, Assessment Results, Video Analytics)
 3. Filter by cohort, date range, or module
@@ -686,6 +713,7 @@ COPY (
 **Location**: `.env.local` (local) or Vercel dashboard (production)
 
 **Required Variables**:
+
 ```bash
 # Supabase Configuration
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
@@ -713,6 +741,7 @@ YOUTUBE_API_KEY=your-youtube-api-key
 ### Feature Flag Management
 
 **Toggle Features**:
+
 ```typescript
 // src/lib/featureFlags.ts
 export const featureFlags = {
@@ -731,12 +760,14 @@ if (featureFlags.videoAnalytics) {
 ### Platform Customization
 
 **Branding**:
+
 - **Logo**: Update `/public/logo.svg` and `/public/logo-dark.svg`
 - **Favicon**: Update `/public/favicon.ico`
 - **Colors**: Edit `tailwind.config.ts` theme colors
 - **Font**: Modify `src/app/layout.tsx` font imports
 
 **Email Templates**:
+
 - **Location**: `/src/lib/email/templates/`
 - **Templates**: Welcome email, password reset, assessment reminder, achievement notification
 - **Customization**: Edit HTML and text versions
@@ -750,6 +781,7 @@ if (featureFlags.videoAnalytics) {
 **URL**: https://app.supabase.com/project/YOUR_PROJECT_ID
 
 **Common Admin Tasks**:
+
 1. **SQL Editor**: Run custom queries and migrations
 2. **Table Editor**: View/edit data directly
 3. **Authentication**: Manage users and auth providers
@@ -759,6 +791,7 @@ if (featureFlags.videoAnalytics) {
 ### Running Migrations
 
 **Create Migration**:
+
 ```sql
 -- Create new migration file: supabase/migrations/YYYYMMDDHHMMSS_description.sql
 
@@ -773,6 +806,7 @@ WHERE certification_expiry_date IS NOT NULL;
 ```
 
 **Apply Migration** (Supabase CLI):
+
 ```bash
 # Apply pending migrations to local database
 supabase db push
@@ -784,10 +818,12 @@ supabase db push --db-url "postgresql://postgres:[YOUR_PASSWORD]@db.project.supa
 ### Database Backups
 
 **Automated Backups** (Supabase):
+
 - **Daily backups**: Retained for 7 days (Pro plan)
 - **Point-in-time recovery**: Last 24 hours (Enterprise)
 
 **Manual Backup**:
+
 ```bash
 # Export entire database
 pg_dump -h db.project.supabase.co -U postgres -d postgres > backup_$(date +%Y%m%d).sql
@@ -799,6 +835,7 @@ psql -h db.project.supabase.co -U postgres -d postgres < backup_20250103.sql
 ### Performance Optimization
 
 **Query Optimization**:
+
 ```sql
 -- Identify slow queries
 SELECT
@@ -816,6 +853,7 @@ ON student_assessments(user_id, created_at DESC);
 ```
 
 **Connection Pooling**:
+
 - **Supabase**: Built-in connection pooling via PgBouncer
 - **Max Connections**: 60 (Free), 200 (Pro), 500 (Enterprise)
 - **Monitor**: Dashboard → Settings → Database → Connection Pooling
@@ -827,6 +865,7 @@ ON student_assessments(user_id, created_at DESC);
 ### Row-Level Security (RLS) Policies
 
 **View RLS Policies**:
+
 ```sql
 -- List all RLS policies
 SELECT
@@ -842,6 +881,7 @@ WHERE schemaname = 'public';
 ```
 
 **Example RLS Policy**:
+
 ```sql
 -- Students can only view their own progress
 CREATE POLICY "Students view own progress"
@@ -865,12 +905,14 @@ USING (
 ### Data Protection & Privacy
 
 **GDPR Compliance**:
+
 - **Right to Access**: Students can export their data via Settings → Data Export
 - **Right to Erasure**: Admin can delete user accounts and all associated data
 - **Data Minimization**: Only collect essential data for learning purposes
 - **Consent**: Users accept Terms of Service and Privacy Policy on signup
 
 **Data Deletion**:
+
 ```sql
 -- Delete user and all associated data (GDPR)
 BEGIN;
@@ -885,6 +927,7 @@ COMMIT;
 ### Audit Logging
 
 **Track Admin Actions**:
+
 ```sql
 CREATE TABLE admin_audit_log (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -916,6 +959,7 @@ VALUES (
 ### Application Performance
 
 **Vercel Analytics**:
+
 - **Real User Monitoring (RUM)**: Track actual user experience metrics
 - **Core Web Vitals**: LCP, FID, CLS scores
 - **Page Load Times**: Time to First Byte (TTFB), First Contentful Paint (FCP)
@@ -926,6 +970,7 @@ VALUES (
 ### Database Performance
 
 **Monitor Query Performance**:
+
 ```sql
 -- Enable pg_stat_statements extension
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
@@ -943,6 +988,7 @@ LIMIT 10;
 ```
 
 **Database Size Monitoring**:
+
 ```sql
 -- Table sizes
 SELECT
@@ -959,6 +1005,7 @@ ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;
 **Configuration**: `sentry.server.config.ts`, `sentry.client.config.ts`, `sentry.edge.config.ts`
 
 **Monitor**:
+
 - **Error Rate**: Errors per minute/hour
 - **Performance Issues**: Slow database queries, API calls
 - **Release Tracking**: Compare error rates across deployments
@@ -975,6 +1022,7 @@ ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;
 **Symptoms**: "Access Denied" or empty module list
 
 **Diagnosis**:
+
 ```sql
 -- Check user role and permissions
 SELECT role, active, email_confirmed_at
@@ -988,6 +1036,7 @@ RESET ROLE;
 ```
 
 **Solution**:
+
 ```sql
 -- Confirm email if not verified
 UPDATE auth.users
@@ -1005,28 +1054,30 @@ WHERE email = 'student@example.com';
 **Symptoms**: "Video failed to load" or infinite loading
 
 **Diagnosis**:
+
 1. Check browser console for errors (F12 → Console)
 2. Verify YouTube video ID is correct and video is public
 3. Test video URL directly: `https://www.youtube.com/watch?v=VIDEO_ID`
 4. Check Content Security Policy (CSP) headers
 
 **Solution**:
+
 ```typescript
 // Update CSP to allow YouTube embeds (next.config.js)
 module.exports = {
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: "/:path*",
         headers: [
           {
-            key: 'Content-Security-Policy',
-            value: "frame-src 'self' https://www.youtube-nocookie.com https://*.youtube.com;"
-          }
-        ]
-      }
+            key: "Content-Security-Policy",
+            value: "frame-src 'self' https://www.youtube-nocookie.com https://*.youtube.com;",
+          },
+        ],
+      },
     ];
-  }
+  },
 };
 ```
 
@@ -1035,6 +1086,7 @@ module.exports = {
 **Symptoms**: Scores reset after page refresh
 
 **Diagnosis**:
+
 ```sql
 -- Check if scores are being written to database
 SELECT * FROM student_assessments
@@ -1047,6 +1099,7 @@ SELECT * FROM pg_policies WHERE tablename = 'student_assessments';
 ```
 
 **Solution**:
+
 ```sql
 -- Ensure INSERT policy exists
 CREATE POLICY "Students can insert own assessments"
@@ -1061,6 +1114,7 @@ WITH CHECK (auth.uid() = user_id);
 ### Support Ticket System
 
 **Workflow**:
+
 1. Student submits support request via **Settings → Help**
 2. Ticket created in support system (or email to `support@your-domain.com`)
 3. Admin reviews ticket in **Admin → Support Tickets**
@@ -1068,6 +1122,7 @@ WITH CHECK (auth.uid() = user_id);
 5. Resolution tracked and student notified
 
 **Priority Levels**:
+
 - **Critical**: Platform down, security issue, data loss (< 1 hour response)
 - **High**: Feature broken, assessment issues, many users affected (< 4 hours)
 - **Medium**: Individual user issues, content errors (< 24 hours)
@@ -1128,12 +1183,14 @@ WITH CHECK (auth.uid() = user_id);
 ### System Outage
 
 **Immediate Actions**:
+
 1. Check Vercel status: https://www.vercel-status.com/
 2. Check Supabase status: https://status.supabase.com/
 3. Review Sentry for error spike
 4. Notify students via email/status page
 
 **Rollback Deployment**:
+
 ```bash
 # Via Vercel CLI
 vercel rollback
@@ -1145,6 +1202,7 @@ vercel rollback
 ### Data Corruption
 
 **Immediate Actions**:
+
 1. Identify affected tables/records
 2. Disable write access to affected tables
 3. Restore from most recent backup
@@ -1153,6 +1211,7 @@ vercel rollback
 6. Notify affected users
 
 **Database Restore**:
+
 ```bash
 # Restore specific table
 pg_restore -h db.project.supabase.co -U postgres -d postgres -t table_name backup.dump
@@ -1164,6 +1223,7 @@ psql -h db.project.supabase.co -U postgres -c "SELECT COUNT(*) FROM table_name;"
 ### Security Breach
 
 **Immediate Actions**:
+
 1. **Identify Scope**: Determine what data was accessed
 2. **Contain**: Disable compromised accounts, revoke API keys
 3. **Investigate**: Review audit logs and access patterns
@@ -1176,15 +1236,18 @@ psql -h db.project.supabase.co -U postgres -c "SELECT COUNT(*) FROM table_name;"
 ## Support Contacts
 
 **Technical Support**:
+
 - Email: support@your-domain.com
 - Phone: 1-800-XXX-XXXX
 - Hours: 9 AM - 5 PM EST, Monday-Friday
 
 **Emergency Contact** (Critical Issues):
+
 - On-call Engineer: emergency@your-domain.com
 - Phone: 1-800-XXX-XXXX (24/7)
 
 **Vendor Support**:
+
 - **Vercel**: support@vercel.com
 - **Supabase**: support@supabase.io
 - **PostHog**: hey@posthog.com
@@ -1232,6 +1295,7 @@ ORDER BY days_until_exam;
 ### API Endpoints
 
 **Admin API**:
+
 - `GET /api/admin/users` - List all users
 - `POST /api/admin/users` - Create new user
 - `PUT /api/admin/users/:id` - Update user

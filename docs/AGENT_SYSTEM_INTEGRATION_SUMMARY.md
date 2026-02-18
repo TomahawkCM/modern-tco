@@ -19,24 +19,28 @@ Your Tanium TCO LMS now has a **sophisticated multi-agent architecture** with **
 **Location**: `.claude/commands/agents/`
 
 #### `/spawn-lms-team`
+
 - **Purpose**: Full LMS feature development
 - **Agents**: 10 (Core Dev + Quality + Infrastructure + Coordination)
 - **Topology**: Hierarchical (Queen-led)
 - **Use Case**: "Build new adaptive quiz feature"
 
 #### `/spawn-content-team`
+
 - **Purpose**: Content creation and validation
 - **Agents**: 7 (Content + QA + Analytics + Coordination)
 - **Topology**: Mesh (Peer-to-peer)
 - **Use Case**: "Create Tanium Comply module with videos"
 
 #### `/spawn-testing-team`
+
 - **Purpose**: Comprehensive testing and QA
 - **Agents**: 9 (Test Creation + QA + Analysis + Coordination)
 - **Topology**: Hierarchical (Queen-led)
 - **Use Case**: "Run full testing suite before deployment"
 
 #### `/spawn-deployment-team`
+
 - **Purpose**: Production deployment with zero-downtime
 - **Agents**: 8 (Deployment + Security + Monitoring + Coordination)
 - **Topology**: Hierarchical (Queen-led)
@@ -49,6 +53,7 @@ Your Tanium TCO LMS now has a **sophisticated multi-agent architecture** with **
 **Location**: `scripts/hive-mind-config.js`
 
 **Features**:
+
 - SQLite database for agent tracking and performance metrics
 - Cross-session memory persistence with 7-day TTL
 - Truth verification system (0.95 threshold)
@@ -57,6 +62,7 @@ Your Tanium TCO LMS now has a **sophisticated multi-agent architecture** with **
 - Automatic metrics tracking (token usage, execution time, quality)
 
 **Usage**:
+
 ```bash
 node scripts/hive-mind-config.js
 ```
@@ -68,6 +74,7 @@ node scripts/hive-mind-config.js
 **Location**: `.claude/hooks/on-session-start.sh`
 
 **Automatic Initialization**:
+
 1. Detects enterprise LMS architecture (Next.js, TypeScript, Supabase)
 2. Loads 240+ agent ecosystem
 3. Configures 8 essential MCP servers
@@ -84,6 +91,7 @@ node scripts/hive-mind-config.js
 **Location**: `.claude/CLAUDE.md`
 
 **Updates**:
+
 - Complete catalog of **240+ agents** (54 core + 186 specialized)
 - Detailed breakdown by category:
   - React/TypeScript Specialists (12)
@@ -107,6 +115,7 @@ node scripts/hive-mind-config.js
 **Location**: `docs/AGENT_INTEGRATION_GUIDE.md`
 
 **Contents** (6,000+ words):
+
 - Overview of 240+ agent ecosystem
 - Complete agent catalog with descriptions
 - Quick start guide
@@ -125,6 +134,7 @@ node scripts/hive-mind-config.js
 **Location**: `docs/AGENT_SYSTEM_TEST_RESULTS.md`
 
 **Test Coverage**:
+
 - Directory structure validation ✅
 - File permissions verification ✅
 - Configuration schema validation ✅
@@ -146,6 +156,7 @@ Claude now **automatically selects optimal agents** based on task keywords:
 **Example Task**: "Build a new dashboard component with accessibility"
 
 **Auto-Spawns**:
+
 - react-specialist
 - typescript-pro
 - tco-ui-architect
@@ -185,12 +196,14 @@ Claude now **automatically selects optimal agents** based on task keywords:
 ### Performance Tracking
 
 All agents track:
+
 - Token usage
 - Execution time
 - Quality score (0-100)
 - Collaboration effectiveness
 
 View metrics:
+
 ```bash
 cat .claude-flow/metrics/performance.json
 ```
@@ -206,6 +219,7 @@ node scripts/hive-mind-config.js
 ```
 
 This creates:
+
 - `.claude-flow/` directory structure
 - SQLite database for agent tracking
 - Hive-mind configuration file
@@ -216,6 +230,7 @@ This creates:
 ### Step 2: Start a New Claude Code Session
 
 The `.claude/hooks/on-session-start.sh` script will automatically:
+
 - Detect your enterprise LMS architecture
 - Load 240+ agents
 - Configure MCP servers
@@ -233,11 +248,13 @@ For common workflows, use pre-configured slash commands:
 ```
 
 Then provide your task:
+
 ```
 User: "Build a new adaptive quiz feature with AI-powered difficulty adjustment"
 ```
 
 Claude will automatically:
+
 1. Spawn 10 specialized agents
 2. Set up hierarchical coordination
 3. Execute with 95%+ first-pass success
@@ -247,12 +264,14 @@ Claude will automatically:
 ## 📊 Performance Improvements
 
 ### Before Agent System
+
 - Manual agent selection
 - No coordination
 - Single-agent approach
 - Limited specialization
 
 ### After Agent System
+
 - **Automatic agent selection** (95%+ accuracy)
 - **Hierarchical coordination** for complex tasks
 - **10x agent specialization** (240+ vs 24)
@@ -270,6 +289,7 @@ User: "Build a new gamification system with points and badges"
 ```
 
 **Auto-Spawns**: `/spawn-lms-team`
+
 - react-specialist (UI components)
 - typescript-pro (Type safety)
 - database-architect (Supabase schema)
@@ -289,6 +309,7 @@ User: "Create Domain 5 module with 3 videos and 30 practice questions"
 ```
 
 **Auto-Spawns**: `/spawn-content-team`
+
 - tco-content-specialist (MDX authoring)
 - video-system-architect (YouTube integration)
 - assessment-engine-specialist (Questions)
@@ -308,6 +329,7 @@ User: "Run full testing suite before production deployment"
 ```
 
 **Auto-Spawns**: `/spawn-testing-team`
+
 - test-automator (Unit tests)
 - playwright-specialist (E2E tests)
 - performance-tester (Load tests)
@@ -328,6 +350,7 @@ User: "Deploy latest changes to production with zero-downtime"
 ```
 
 **Auto-Spawns**: `/spawn-deployment-team`
+
 - tco-deployment-manager (Vercel deployment)
 - devops-engineer (CI/CD)
 - vercel-specialist (Optimization)
@@ -375,11 +398,13 @@ User: "Deploy latest changes to production with zero-downtime"
 ### Issue: Agents not auto-spawning
 
 **Solution**: Check session initialization
+
 ```bash
 cat .claude-flow/hive-config.json
 ```
 
 If missing, run:
+
 ```bash
 node scripts/hive-mind-config.js
 ```
@@ -389,11 +414,13 @@ node scripts/hive-mind-config.js
 ### Issue: Slash commands not working
 
 **Solution**: Verify commands directory
+
 ```bash
 ls .claude/commands/agents/
 ```
 
 Should show:
+
 - spawn-lms-team.md
 - spawn-content-team.md
 - spawn-testing-team.md
@@ -404,6 +431,7 @@ Should show:
 ### Issue: Poor agent performance
 
 **Solution**: Check metrics and adjust token budgets
+
 ```bash
 cat .claude-flow/metrics/performance.json
 ```
@@ -432,6 +460,7 @@ Edit token budgets in `scripts/hive-mind-config.js` under `agentProfiles`.
 ### Immediate Actions
 
 1. **Start Using Agent System**
+
    ```bash
    # Try a slash command
    /spawn-lms-team
@@ -464,16 +493,19 @@ Edit token budgets in `scripts/hive-mind-config.js` under `agentProfiles`.
 ## 📈 Expected Benefits
 
 ### Development Speed
+
 - **3x faster** feature development with agent teams
 - **5x faster** assessment creation with specialized agents
 - **10x faster** type error resolution with typescript-pro
 
 ### Quality Improvements
+
 - **95%+ first-pass success** for complex features
 - **100% WCAG 2.1 AA compliance** with accessibility-tester
 - **90%+ test coverage** with testing-team
 
 ### Performance Optimization
+
 - **<3s page load times** with performance-engineer
 - **99%+ scoring algorithm precision** with assessment-engine-specialist
 - **<100ms database queries** with database-architect optimization
@@ -495,6 +527,7 @@ Your Tanium TCO LMS now has a **production-ready multi-agent architecture** with
 **The system is ready for immediate use!**
 
 Start with:
+
 ```bash
 /spawn-lms-team
 ```

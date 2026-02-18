@@ -1,24 +1,24 @@
-'use client';
+"use client";
 
 /**
  * Health Score Widget Component (H-020)
  * Circular gauge displaying the user's financial health score
  */
 
-import { useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
-import { cn } from '@/lib/utils';
+import { useMemo } from "react";
+import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 import {
   type HealthScoreResult,
   getGradeColor,
   getScoreInterpretation,
-} from '@/lib/analytics/health-score';
-import { useSeniorsMode } from '@/hooks/useSeniorsMode';
+} from "@/lib/analytics/health-score";
+import { useSeniorsMode } from "@/hooks/useSeniorsMode";
 
 interface HealthScoreWidgetProps {
   result: HealthScoreResult | null;
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
   showLabel?: boolean;
   showGrade?: boolean;
   className?: string;
@@ -27,13 +27,13 @@ interface HealthScoreWidgetProps {
 
 export function HealthScoreWidget({
   result,
-  size = 'md',
+  size = "md",
   showLabel = true,
   showGrade = true,
   className,
   onClick,
 }: HealthScoreWidgetProps) {
-  const t = useTranslations('healthScore');
+  const t = useTranslations("healthScore");
   const { isSeniorsMode } = useSeniorsMode();
 
   // Size configurations
@@ -44,7 +44,11 @@ export function HealthScoreWidget({
   };
 
   const config = isSeniorsMode
-    ? { ...sizeConfig[size], width: sizeConfig[size].width * 1.2, fontSize: sizeConfig[size].fontSize * 1.2 }
+    ? {
+        ...sizeConfig[size],
+        width: sizeConfig[size].width * 1.2,
+        fontSize: sizeConfig[size].fontSize * 1.2,
+      }
     : sizeConfig[size];
 
   // Calculate gauge properties
@@ -56,13 +60,13 @@ export function HealthScoreWidget({
     // Calculate color based on score
     let scoreColor: string;
     if (normalizedScore >= 80) {
-      scoreColor = '#22c55e'; // green-500
+      scoreColor = "#22c55e"; // green-500
     } else if (normalizedScore >= 60) {
-      scoreColor = '#eab308'; // yellow-500
+      scoreColor = "#eab308"; // yellow-500
     } else if (normalizedScore >= 40) {
-      scoreColor = '#f97316'; // orange-500
+      scoreColor = "#f97316"; // orange-500
     } else {
-      scoreColor = '#ef4444'; // red-500
+      scoreColor = "#ef4444"; // red-500
     }
 
     // Calculate dash offset for progress (start from top, 270 degrees = 75%)
@@ -74,7 +78,7 @@ export function HealthScoreWidget({
       color: scoreColor,
       circumference: circ,
       dashOffset: offset,
-      interpretation: result ? getScoreInterpretation(result.normalizedScore) : 'No data',
+      interpretation: result ? getScoreInterpretation(result.normalizedScore) : "No data",
     };
   }, [result, config.width, config.strokeWidth]);
 
@@ -86,14 +90,14 @@ export function HealthScoreWidget({
     return (
       <div
         className={cn(
-          'flex flex-col items-center justify-center rounded-xl bg-slate-800/50 border border-white/10 p-4',
+          "flex flex-col items-center justify-center rounded-xl border border-white/10 bg-slate-800/50 p-4",
           className
         )}
         style={{ width: config.width + 32, height: config.width + (showLabel ? 48 : 32) }}
       >
-        <div className="text-slate-400 text-center">
-          <p className="text-sm">{t('emptyState.line1')}</p>
-          <p className="text-sm font-medium">{t('emptyState.line2')}</p>
+        <div className="text-center text-slate-400">
+          <p className="text-sm">{t("emptyState.line1")}</p>
+          <p className="text-sm font-medium">{t("emptyState.line2")}</p>
         </div>
       </div>
     );
@@ -102,15 +106,15 @@ export function HealthScoreWidget({
   return (
     <div
       className={cn(
-        'flex flex-col items-center cursor-pointer transition-transform hover:scale-105',
+        "flex cursor-pointer flex-col items-center transition-transform hover:scale-105",
         className
       )}
       onClick={onClick}
       role="button"
       tabIndex={0}
-      aria-label={t('ariaLabel', { score: score.toFixed(0), interpretation })}
+      aria-label={t("ariaLabel", { score: score.toFixed(0), interpretation })}
       onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (e.key === "Enter" || e.key === " ") {
           onClick?.();
         }
       }}
@@ -120,7 +124,7 @@ export function HealthScoreWidget({
         <svg
           width={config.width}
           height={config.width}
-          className="transform -rotate-[135deg]"
+          className="-rotate-[135deg] transform"
           aria-hidden="true"
         >
           {/* Background arc */}
@@ -147,7 +151,7 @@ export function HealthScoreWidget({
             strokeLinecap="round"
             initial={{ strokeDashoffset: circumference * 0.75 }}
             animate={{ strokeDashoffset: dashOffset }}
-            transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           />
 
           {/* Glow effect */}
@@ -164,7 +168,7 @@ export function HealthScoreWidget({
             filter="blur(8px)"
             initial={{ strokeDashoffset: circumference * 0.75 }}
             animate={{ strokeDashoffset: dashOffset }}
-            transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
+            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
           />
         </svg>
 
@@ -193,7 +197,7 @@ export function HealthScoreWidget({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.8 }}
             >
-              {t('grade', { grade: result.grade })}
+              {t("grade", { grade: result.grade })}
             </motion.span>
           )}
         </div>
@@ -207,7 +211,7 @@ export function HealthScoreWidget({
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
         >
-          <p className="text-sm font-medium text-white">{t('title')}</p>
+          <p className="text-sm font-medium text-white">{t("title")}</p>
           <p className="text-xs text-slate-400">{interpretation}</p>
         </motion.div>
       )}
@@ -220,7 +224,7 @@ export function HealthScoreWidget({
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
         >
-          {t('missingFactors', { count: result.missingFactors.length })}
+          {t("missingFactors", { count: result.missingFactors.length })}
         </motion.p>
       )}
     </div>

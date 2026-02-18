@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Subscription Cost Calculator Page
@@ -6,39 +6,45 @@
  * Analyze subscription costs with category breakdowns
  */
 
-import { useState, useMemo } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
-import Link from 'next/link';
-import { ArrowLeft, Repeat, Plus, Trash2, DollarSign, PieChart } from 'lucide-react';
-import { CurrencyInput, ResultsPanel } from '@/components/budget/calculators';
+import { useState, useMemo } from "react";
+import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
+import { ArrowLeft, Repeat, Plus, Trash2, DollarSign, PieChart } from "lucide-react";
+import { CurrencyInput, ResultsPanel } from "@/components/budget/calculators";
 import {
   calculateSubscriptionCost,
   generateSubscriptionId,
   SUBSCRIPTION_CATEGORIES,
-} from '@/lib/calculators/subscription-cost';
-import { formatCurrency } from '@/i18n/utils/formatCurrency';
-import { formatPercent } from '@/i18n/utils/formatNumber';
-import type { SupportedLocale } from '@/i18n/config';
-import type { SubscriptionEntry, SubscriptionFrequency } from '@/lib/calculators/types';
-import { LOCALE_METADATA } from '@/i18n/config';
-import { cn } from '@/lib/utils';
+} from "@/lib/calculators/subscription-cost";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { formatPercent } from "@/i18n/utils/formatNumber";
+import type { SupportedLocale } from "@/i18n/config";
+import type { SubscriptionEntry, SubscriptionFrequency } from "@/lib/calculators/types";
+import { LOCALE_METADATA } from "@/i18n/config";
+import { cn } from "@/lib/utils";
 
-const FREQUENCIES: SubscriptionFrequency[] = ['weekly', 'biweekly', 'monthly', 'quarterly', 'annual'];
+const FREQUENCIES: SubscriptionFrequency[] = [
+  "weekly",
+  "biweekly",
+  "monthly",
+  "quarterly",
+  "annual",
+];
 
 export default function SubscriptionCostCalculatorPage() {
-  const t = useTranslations('calculators');
+  const t = useTranslations("calculators");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA['en-US'];
+  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
   const currency = localeMeta.currency as string;
 
   // Subscriptions state
   const [subscriptions, setSubscriptions] = useState<SubscriptionEntry[]>([
     {
       id: generateSubscriptionId(),
-      name: '',
+      name: "",
       amount: 0,
-      frequency: 'monthly',
-      category: 'Other',
+      frequency: "monthly",
+      category: "Other",
       isEssential: false,
     },
   ]);
@@ -62,10 +68,10 @@ export default function SubscriptionCostCalculatorPage() {
       ...subscriptions,
       {
         id: generateSubscriptionId(),
-        name: '',
+        name: "",
         amount: 0,
-        frequency: 'monthly',
-        category: 'Other',
+        frequency: "monthly",
+        category: "Other",
         isEssential: false,
       },
     ]);
@@ -84,11 +90,7 @@ export default function SubscriptionCostCalculatorPage() {
     field: keyof SubscriptionEntry,
     value: string | number | boolean
   ) => {
-    setSubscriptions(
-      subscriptions.map((s) =>
-        s.id === id ? { ...s, [field]: value } : s
-      )
-    );
+    setSubscriptions(subscriptions.map((s) => (s.id === id ? { ...s, [field]: value } : s)));
   };
 
   const hasSubscriptions = subscriptions.some((s) => s.amount > 0 && s.name.trim());
@@ -99,33 +101,33 @@ export default function SubscriptionCostCalculatorPage() {
       <div className="flex items-start gap-4">
         <Link
           href="/budget-app/calculators"
-          className="mt-1 p-2 rounded-lg hover:bg-slate-800 transition-colors"
-          aria-label={t('common.back')}
+          className="mt-1 rounded-lg p-2 transition-colors hover:bg-slate-800"
+          aria-label={t("common.back")}
         >
-          <ArrowLeft className="w-5 h-5 text-slate-400" />
+          <ArrowLeft className="h-5 w-5 text-slate-400" />
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-white flex items-center gap-3">
-            <Repeat className="w-8 h-8 text-purple-400" />
-            {t('subscriptionCost.title')}
+          <h1 className="flex items-center gap-3 text-3xl font-bold text-white">
+            <Repeat className="h-8 w-8 text-purple-400" />
+            {t("subscriptionCost.title")}
           </h1>
-          <p className="text-slate-400 mt-2">{t('subscriptionCost.subtitle')}</p>
+          <p className="mt-2 text-slate-400">{t("subscriptionCost.subtitle")}</p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Subscription List */}
-        <div className="lg:col-span-2 bg-slate-800/50 rounded-xl border border-slate-700 p-6">
-          <div className="flex items-center justify-between mb-6">
+        <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-6 lg:col-span-2">
+          <div className="mb-6 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-white">
-              {t('subscriptionCost.yourSubscriptions')}
+              {t("subscriptionCost.yourSubscriptions")}
             </h2>
             <button
               onClick={addSubscription}
-              className="flex items-center gap-2 px-4 py-2 bg-purple-500/20 text-purple-400 rounded-lg hover:bg-purple-500/30 transition-colors"
+              className="flex items-center gap-2 rounded-lg bg-purple-500/20 px-4 py-2 text-purple-400 transition-colors hover:bg-purple-500/30"
             >
-              <Plus className="w-4 h-4" />
-              {t('subscriptionCost.addSubscription')}
+              <Plus className="h-4 w-4" />
+              {t("subscriptionCost.addSubscription")}
             </button>
           </div>
 
@@ -133,30 +135,30 @@ export default function SubscriptionCostCalculatorPage() {
             {subscriptions.map((sub, index) => (
               <div
                 key={sub.id}
-                className="grid grid-cols-1 md:grid-cols-6 gap-4 p-4 bg-slate-700/30 rounded-lg"
+                className="grid grid-cols-1 gap-4 rounded-lg bg-slate-700/30 p-4 md:grid-cols-6"
               >
                 {/* Name */}
                 <div className="md:col-span-2">
-                  <label className="block text-xs font-medium text-slate-400 mb-1">
-                    {t('subscriptionCost.name')}
+                  <label className="mb-1 block text-xs font-medium text-slate-400">
+                    {t("subscriptionCost.name")}
                   </label>
                   <input
                     type="text"
                     value={sub.name}
-                    onChange={(e) => updateSubscription(sub.id, 'name', e.target.value)}
-                    placeholder={t('subscriptionCost.namePlaceholder')}
-                    className="w-full py-2 px-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    onChange={(e) => updateSubscription(sub.id, "name", e.target.value)}
+                    placeholder={t("subscriptionCost.namePlaceholder")}
+                    className="w-full rounded-lg border border-slate-600 bg-slate-800/50 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                 </div>
 
                 {/* Amount */}
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-1">
-                    {t('subscriptionCost.amount')}
+                  <label className="mb-1 block text-xs font-medium text-slate-400">
+                    {t("subscriptionCost.amount")}
                   </label>
                   <CurrencyInput
                     value={sub.amount}
-                    onChange={(value) => updateSubscription(sub.id, 'amount', value)}
+                    onChange={(value) => updateSubscription(sub.id, "amount", value)}
                     currency={currency}
                     locale={locale}
                     min={0}
@@ -166,15 +168,19 @@ export default function SubscriptionCostCalculatorPage() {
 
                 {/* Frequency */}
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-1">
-                    {t('subscriptionCost.frequency.label')}
+                  <label className="mb-1 block text-xs font-medium text-slate-400">
+                    {t("subscriptionCost.frequency.label")}
                   </label>
                   <select
                     value={sub.frequency}
                     onChange={(e) =>
-                      updateSubscription(sub.id, 'frequency', e.target.value as SubscriptionFrequency)
+                      updateSubscription(
+                        sub.id,
+                        "frequency",
+                        e.target.value as SubscriptionFrequency
+                      )
                     }
-                    className="w-full py-2 px-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="w-full rounded-lg border border-slate-600 bg-slate-800/50 px-3 py-2 text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
                   >
                     {FREQUENCIES.map((freq) => (
                       <option key={freq} value={freq}>
@@ -186,17 +192,15 @@ export default function SubscriptionCostCalculatorPage() {
 
                 {/* Essential toggle */}
                 <div className="flex items-end">
-                  <label className="flex items-center gap-2 cursor-pointer">
+                  <label className="flex cursor-pointer items-center gap-2">
                     <input
                       type="checkbox"
                       checked={sub.isEssential}
-                      onChange={(e) =>
-                        updateSubscription(sub.id, 'isEssential', e.target.checked)
-                      }
-                      className="w-4 h-4 rounded border-slate-600 bg-slate-800 text-purple-500 focus:ring-purple-500"
+                      onChange={(e) => updateSubscription(sub.id, "isEssential", e.target.checked)}
+                      className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-purple-500 focus:ring-purple-500"
                     />
                     <span className="text-sm text-slate-300">
-                      {t('subscriptionCost.essential')}
+                      {t("subscriptionCost.essential")}
                     </span>
                   </label>
                 </div>
@@ -206,10 +210,10 @@ export default function SubscriptionCostCalculatorPage() {
                   <button
                     onClick={() => removeSubscription(sub.id)}
                     disabled={subscriptions.length === 1}
-                    className="p-2 text-red-400 hover:bg-red-500/20 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    aria-label={t('subscriptionCost.remove')}
+                    className="rounded-lg p-2 text-red-400 transition-colors hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-50"
+                    aria-label={t("subscriptionCost.remove")}
                   >
-                    <Trash2 className="w-5 h-5" />
+                    <Trash2 className="h-5 w-5" />
                   </button>
                 </div>
               </div>
@@ -217,21 +221,21 @@ export default function SubscriptionCostCalculatorPage() {
           </div>
 
           {/* Income field toggle */}
-          <div className="mt-6 pt-6 border-t border-slate-700">
-            <label className="flex items-center gap-2 cursor-pointer mb-4">
+          <div className="mt-6 border-t border-slate-700 pt-6">
+            <label className="mb-4 flex cursor-pointer items-center gap-2">
               <input
                 type="checkbox"
                 checked={showIncomeField}
                 onChange={(e) => setShowIncomeField(e.target.checked)}
-                className="w-4 h-4 rounded border-slate-600 bg-slate-800 text-purple-500 focus:ring-purple-500"
+                className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-purple-500 focus:ring-purple-500"
               />
               <span className="text-sm text-slate-300">
-                {t('subscriptionCost.showIncomePercent')}
+                {t("subscriptionCost.showIncomePercent")}
               </span>
             </label>
             {showIncomeField && (
               <CurrencyInput
-                label={t('subscriptionCost.monthlyIncome')}
+                label={t("subscriptionCost.monthlyIncome")}
                 value={monthlyIncome}
                 onChange={setMonthlyIncome}
                 currency={currency}
@@ -246,33 +250,33 @@ export default function SubscriptionCostCalculatorPage() {
         {/* Results */}
         <div className="space-y-6">
           {/* Total Cost Card */}
-          <div className="bg-purple-500/10 rounded-xl border border-purple-500/30 p-6">
-            <h3 className="text-sm font-medium text-purple-400 mb-4">
-              {t('subscriptionCost.totalCost')}
+          <div className="rounded-xl border border-purple-500/30 bg-purple-500/10 p-6">
+            <h3 className="mb-4 text-sm font-medium text-purple-400">
+              {t("subscriptionCost.totalCost")}
             </h3>
             <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <span className="text-slate-400">{t('subscriptionCost.daily')}</span>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-400">{t("subscriptionCost.daily")}</span>
                 <span className="text-lg font-bold text-white">
                   {formatCurrency(result.totalDaily, currency, locale)}
                 </span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-slate-400">{t('subscriptionCost.monthly')}</span>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-400">{t("subscriptionCost.monthly")}</span>
                 <span className="text-2xl font-bold text-white">
                   {formatCurrency(result.totalMonthly, currency, locale)}
                 </span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-slate-400">{t('subscriptionCost.yearly')}</span>
+              <div className="flex items-center justify-between">
+                <span className="text-slate-400">{t("subscriptionCost.yearly")}</span>
                 <span className="text-lg font-bold text-white">
                   {formatCurrency(result.totalYearly, currency, locale)}
                 </span>
               </div>
               {result.percentOfIncome !== undefined && (
-                <div className="pt-4 border-t border-purple-500/30">
-                  <div className="flex justify-between items-center">
-                    <span className="text-slate-400">{t('subscriptionCost.percentOfIncome')}</span>
+                <div className="border-t border-purple-500/30 pt-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-400">{t("subscriptionCost.percentOfIncome")}</span>
                     <span className="text-lg font-bold text-purple-400">
                       {formatPercent(result.percentOfIncome / 100, locale, 1)}
                     </span>
@@ -284,19 +288,19 @@ export default function SubscriptionCostCalculatorPage() {
 
           {/* Essential vs Non-Essential */}
           {hasSubscriptions && (
-            <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6">
-              <h3 className="text-sm font-medium text-slate-400 mb-4">
-                {t('subscriptionCost.breakdown')}
+            <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
+              <h3 className="mb-4 text-sm font-medium text-slate-400">
+                {t("subscriptionCost.breakdown")}
               </h3>
               <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-300">{t('subscriptionCost.essentialCost')}</span>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-300">{t("subscriptionCost.essentialCost")}</span>
                   <span className="font-medium text-white">
                     {formatCurrency(result.essentialMonthly, currency, locale)}
                   </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-300">{t('subscriptionCost.nonEssentialCost')}</span>
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-300">{t("subscriptionCost.nonEssentialCost")}</span>
                   <span className="font-medium text-white">
                     {formatCurrency(result.nonEssentialMonthly, currency, locale)}
                   </span>
@@ -307,37 +311,35 @@ export default function SubscriptionCostCalculatorPage() {
 
           {/* Potential Savings */}
           {result.potentialYearlySavings > 0 && (
-            <div className="bg-green-500/10 rounded-xl border border-green-500/30 p-6">
-              <h3 className="text-sm font-medium text-green-400 mb-2">
-                {t('subscriptionCost.potentialSavings')}
+            <div className="rounded-xl border border-green-500/30 bg-green-500/10 p-6">
+              <h3 className="mb-2 text-sm font-medium text-green-400">
+                {t("subscriptionCost.potentialSavings")}
               </h3>
               <p className="text-2xl font-bold text-white">
                 {formatCurrency(result.potentialYearlySavings, currency, locale)}
-                <span className="text-sm font-normal text-slate-400 ms-2">
-                  {t('subscriptionCost.perYear')}
+                <span className="ms-2 text-sm font-normal text-slate-400">
+                  {t("subscriptionCost.perYear")}
                 </span>
               </p>
-              <p className="text-xs text-slate-400 mt-2">
-                {t('subscriptionCost.potentialSavingsHelp')}
+              <p className="mt-2 text-xs text-slate-400">
+                {t("subscriptionCost.potentialSavingsHelp")}
               </p>
             </div>
           )}
 
           {/* Category Breakdown */}
           {result.byCategory.length > 0 && (
-            <div className="bg-slate-800/50 rounded-xl border border-slate-700 p-6">
-              <h3 className="text-sm font-medium text-slate-400 mb-4 flex items-center gap-2">
-                <PieChart className="w-4 h-4" />
-                {t('subscriptionCost.byCategory')}
+            <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
+              <h3 className="mb-4 flex items-center gap-2 text-sm font-medium text-slate-400">
+                <PieChart className="h-4 w-4" />
+                {t("subscriptionCost.byCategory")}
               </h3>
               <div className="space-y-3">
                 {result.byCategory.map((cat) => (
-                  <div key={cat.category} className="flex justify-between items-center">
+                  <div key={cat.category} className="flex items-center justify-between">
                     <div>
                       <span className="text-slate-300">{cat.category}</span>
-                      <span className="text-xs text-slate-500 ms-2">
-                        ({cat.count})
-                      </span>
+                      <span className="ms-2 text-xs text-slate-500">({cat.count})</span>
                     </div>
                     <span className="font-medium text-white">
                       {formatCurrency(cat.monthly, currency, locale)}

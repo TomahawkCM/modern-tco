@@ -1,13 +1,13 @@
 "use client";
 
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Info, CheckCircle2, BookOpen, Terminal } from 'lucide-react';
-import type { Question } from '@/types/exam';
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Info, CheckCircle2, BookOpen, Terminal } from "lucide-react";
+import type { Question } from "@/types/exam";
 
 interface QuestionPreviewProps {
   question: Question;
@@ -30,18 +30,23 @@ export function QuestionPreview({
         <CardHeader>
           <div className="flex items-start justify-between">
             <div className="flex-1">
-              <CardTitle className="text-foreground text-lg">
-                {question.question || 'Question text preview...'}
+              <CardTitle className="text-lg text-foreground">
+                {question.question || "Question text preview..."}
               </CardTitle>
               {showMetadata && (
-                <div className="flex flex-wrap gap-2 mt-3">
+                <div className="mt-3 flex flex-wrap gap-2">
                   <Badge variant="secondary">{question.domain}</Badge>
-                  <Badge variant={
-                    question.difficulty === 'Beginner' ? 'default' :
-                    question.difficulty === 'Intermediate' ? 'secondary' :
-                    question.difficulty === 'Advanced' ? 'destructive' :
-                    'outline'
-                  }>
+                  <Badge
+                    variant={
+                      question.difficulty === "Beginner"
+                        ? "default"
+                        : question.difficulty === "Intermediate"
+                          ? "secondary"
+                          : question.difficulty === "Advanced"
+                            ? "destructive"
+                            : "outline"
+                    }
+                  >
                     {question.difficulty}
                   </Badge>
                   <Badge variant="outline">{question.category}</Badge>
@@ -53,11 +58,7 @@ export function QuestionPreview({
 
         <CardContent className="space-y-4">
           {/* Answer Choices */}
-          <RadioGroup
-            value={selectedAnswer}
-            onValueChange={onAnswerSelect}
-            className="space-y-3"
-          >
+          <RadioGroup value={selectedAnswer} onValueChange={onAnswerSelect} className="space-y-3">
             {question.choices.map((choice) => {
               const isCorrect = choice.id === question.correctAnswerId;
               const isSelected = choice.id === selectedAnswer;
@@ -65,16 +66,15 @@ export function QuestionPreview({
               return (
                 <div
                   key={choice.id}
-                  className={`
-                    flex items-start space-x-3 p-4 rounded-lg border-2 transition-colors
-                    ${isSelected && showExplanation && isCorrect
-                      ? 'border-green-500 bg-green-500/10'
+                  className={`flex items-start space-x-3 rounded-lg border-2 p-4 transition-colors ${
+                    isSelected && showExplanation && isCorrect
+                      ? "border-green-500 bg-green-500/10"
                       : isSelected && showExplanation && !isCorrect
-                      ? 'border-red-500 bg-red-500/10'
-                      : isSelected
-                      ? 'border-blue-500 bg-blue-500/10'
-                      : 'border-gray-700 hover:border-gray-600'}
-                  `}
+                        ? "border-red-500 bg-red-500/10"
+                        : isSelected
+                          ? "border-blue-500 bg-blue-500/10"
+                          : "border-gray-700 hover:border-gray-600"
+                  } `}
                 >
                   <RadioGroupItem
                     value={choice.id}
@@ -85,11 +85,13 @@ export function QuestionPreview({
                     htmlFor={`preview-choice-${choice.id}`}
                     className="flex-1 cursor-pointer leading-relaxed"
                   >
-                    <span className="font-semibold">{choice.id.toUpperCase()}.</span>{' '}
-                    {choice.text || <span className="text-muted-foreground italic">Choice text...</span>}
+                    <span className="font-semibold">{choice.id.toUpperCase()}.</span>{" "}
+                    {choice.text || (
+                      <span className="italic text-muted-foreground">Choice text...</span>
+                    )}
                   </Label>
                   {showExplanation && isCorrect && (
-                    <CheckCircle2 className="h-5 w-5 text-green-500 flex-shrink-0" />
+                    <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-green-500" />
                   )}
                 </div>
               );
@@ -101,7 +103,7 @@ export function QuestionPreview({
             <Alert className="border-blue-500/50 bg-blue-500/10">
               <Info className="h-4 w-4 text-blue-500" />
               <AlertDescription className="text-sm">
-                <div className="font-semibold text-foreground mb-1">Explanation</div>
+                <div className="mb-1 font-semibold text-foreground">Explanation</div>
                 <div className="text-muted-foreground">{question.explanation}</div>
               </AlertDescription>
             </Alert>
@@ -110,7 +112,7 @@ export function QuestionPreview({
           {/* Study Guide Reference */}
           {showMetadata && question.studyGuideRef && (
             <div className="flex items-start gap-2 text-sm text-muted-foreground">
-              <BookOpen className="h-4 w-4 mt-0.5 flex-shrink-0" />
+              <BookOpen className="mt-0.5 h-4 w-4 flex-shrink-0" />
               <div>
                 <span className="font-semibold">Study Guide:</span> {question.studyGuideRef}
               </div>
@@ -124,7 +126,7 @@ export function QuestionPreview({
                 <Terminal className="h-4 w-4" />
                 Console Steps
               </div>
-              <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground ml-6">
+              <ol className="ml-6 list-inside list-decimal space-y-1 text-sm text-muted-foreground">
                 {question.consoleSteps.map((step, index) => (
                   <li key={index}>{step}</li>
                 ))}
@@ -150,22 +152,24 @@ export function QuestionPreview({
         <Card className="glass border-white/10">
           <CardHeader>
             <CardTitle className="text-sm">Mobile Preview</CardTitle>
-            <CardDescription className="text-xs">How this question appears on mobile devices</CardDescription>
+            <CardDescription className="text-xs">
+              How this question appears on mobile devices
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="max-w-[375px] mx-auto">
-              <div className="bg-gray-900 rounded-lg p-4 space-y-3">
-                <div className="text-sm text-foreground font-medium">
-                  {question.question || 'Question text preview...'}
+            <div className="mx-auto max-w-[375px]">
+              <div className="space-y-3 rounded-lg bg-gray-900 p-4">
+                <div className="text-sm font-medium text-foreground">
+                  {question.question || "Question text preview..."}
                 </div>
                 <div className="space-y-2">
                   {question.choices.map((choice) => (
                     <div
                       key={choice.id}
-                      className="bg-gray-800 rounded p-2 text-xs text-muted-foreground"
+                      className="rounded bg-gray-800 p-2 text-xs text-muted-foreground"
                     >
-                      <span className="font-semibold">{choice.id.toUpperCase()}.</span>{' '}
-                      {choice.text || 'Choice text...'}
+                      <span className="font-semibold">{choice.id.toUpperCase()}.</span>{" "}
+                      {choice.text || "Choice text..."}
                     </div>
                   ))}
                 </div>

@@ -6,7 +6,7 @@
  * Alternative: Alpha Vantage (requires free API key)
  */
 
-import { db, type PriceCache } from './budget-db';
+import { db, type PriceCache } from "./budget-db";
 
 const CACHE_TTL = 3600000; // 1 hour in milliseconds
 
@@ -26,10 +26,10 @@ async function fetchYahooQuote(symbol: string): Promise<StockQuote | null> {
   try {
     // Yahoo Finance query API (unofficial but widely used)
     const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=1d&range=1d`;
-    
+
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'Mozilla/5.0',
+        "User-Agent": "Mozilla/5.0",
       },
     });
 
@@ -39,22 +39,22 @@ async function fetchYahooQuote(symbol: string): Promise<StockQuote | null> {
     }
 
     const data = await response.json();
-    
+
     if (!data.chart?.result?.[0]?.meta) {
       console.warn(`No data returned for ${symbol}`);
       return null;
     }
 
-    const {meta} = data.chart.result[0];
-    const {regularMarketPrice} = meta;
+    const { meta } = data.chart.result[0];
+    const { regularMarketPrice } = meta;
     const previousClose = meta.previousClose || meta.chartPreviousClose;
-    
+
     if (!regularMarketPrice) {
       return null;
     }
 
     const change = previousClose ? regularMarketPrice - previousClose : 0;
-    const changePercent = previousClose ? ((change / previousClose) * 100) : 0;
+    const changePercent = previousClose ? (change / previousClose) * 100 : 0;
 
     return {
       symbol,
@@ -79,24 +79,21 @@ async function getCachedPrice(symbol: string): Promise<PriceCache | null> {
       return null;
     }
 
-    const cached = await db.priceCache
-      .where('symbol')
-      .equals(symbol.toUpperCase())
-      .first();
+    const cached = await db.priceCache.where("symbol").equals(symbol.toUpperCase()).first();
 
     if (!cached) {
       return null;
     }
 
     const age = Date.now() - new Date(cached.fetchedAt).getTime();
-    
+
     if (age < CACHE_TTL) {
       return cached;
     }
 
     return null;
   } catch (error) {
-    console.error('Error reading cache:', error);
+    console.error("Error reading cache:", error);
     return null;
   }
 }
@@ -104,10 +101,10 @@ async function getCachedPrice(symbol: string): Promise<PriceCache | null> {
 /**
  * Cache stock price
  */
-async function cachePrice(quote: StockQuote, source: 'yahoo' | 'fallback'): Promise<void> {
+async function cachePrice(quote: StockQuote, source: "yahoo" | "fallback"): Promise<void> {
   try {
     if (!db.priceCache) {
-      console.warn('Price cache table not available');
+      console.warn("Price cache table not available");
       return;
     }
 
@@ -124,7 +121,7 @@ async function cachePrice(quote: StockQuote, source: 'yahoo' | 'fallback'): Prom
 
     await db.priceCache.put(cacheEntry);
   } catch (error) {
-    console.error('Error caching price:', error);
+    console.error("Error caching price:", error);
   }
 }
 
@@ -145,27 +142,24 @@ export async function getStockPrice(symbol: string): Promise<number | null> {
   // Fetch from Yahoo Finance
   console.log(`Fetching fresh price for ${normalizedSymbol}...`);
   const quote = await fetchYahooQuote(normalizedSymbol);
-  
+
   if (quote) {
-    await cachePrice(quote, 'yahoo');
+    await cachePrice(quote, "yahoo");
     return quote.price;
   }
 
   // Fallback: check if we have any cached price (even if expired)
   try {
     if (db.priceCache) {
-      const staleCache = await db.priceCache
-        .where('symbol')
-        .equals(normalizedSymbol)
-        .first();
-      
+      const staleCache = await db.priceCache.where("symbol").equals(normalizedSymbol).first();
+
       if (staleCache) {
         console.warn(`Using stale cache for ${normalizedSymbol} (API fetch failed)`);
         return staleCache.price;
       }
     }
   } catch (error) {
-    console.error('Error reading stale cache:', error);
+    console.error("Error reading stale cache:", error);
   }
 
   return null;
@@ -191,9 +185,9 @@ export async function getStockQuote(symbol: string): Promise<StockQuote | null> 
 
   // Fetch from API
   const quote = await fetchYahooQuote(normalizedSymbol);
-  
+
   if (quote) {
-    await cachePrice(quote, 'yahoo');
+    await cachePrice(quote, "yahoo");
     return quote;
   }
 
@@ -204,37 +198,35 @@ export async function getStockQuote(symbol: string): Promise<StockQuote | null> 
  * Batch fetch prices for multiple symbols
  * Optimized to use cache when possible
  */
-export async function getBatchStockPrices(
-  symbols: string[]
-): Promise<Record<string, number>> {
+export async function getBatchStockPrices(symbols: string[]): Promise<Record<string, number>> {
   const prices: Record<string, number> = {};
-  
+
   // Process symbols concurrently (but with a limit to avoid rate limiting)
   const batchSize = 5;
-  const normalizedSymbols = Array.from(new Set(symbols.map(s => s.toUpperCase())));
-  
+  const normalizedSymbols = Array.from(new Set(symbols.map((s) => s.toUpperCase())));
+
   for (let i = 0; i < normalizedSymbols.length; i += batchSize) {
     const batch = normalizedSymbols.slice(i, i + batchSize);
-    
+
     const results = await Promise.all(
       batch.map(async (symbol) => {
         const price = await getStockPrice(symbol);
         return { symbol, price };
       })
     );
-    
+
     results.forEach(({ symbol, price }) => {
       if (price !== null) {
         prices[symbol] = price;
       }
     });
-    
+
     // Small delay between batches to respect rate limits
     if (i + batchSize < normalizedSymbols.length) {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
   }
-  
+
   return prices;
 }
 
@@ -245,10 +237,10 @@ export async function clearPriceCache(): Promise<void> {
   try {
     if (db.priceCache) {
       await db.priceCache.clear();
-      console.log('Price cache cleared');
+      console.log("Price cache cleared");
     }
   } catch (error) {
-    console.error('Error clearing cache:', error);
+    console.error("Error clearing cache:", error);
   }
 }
 
@@ -275,13 +267,13 @@ export async function getCacheStats(): Promise<{
 
     const allEntries = await db.priceCache.toArray();
     const now = Date.now();
-    
+
     const freshEntries = allEntries.filter(
-      entry => now - new Date(entry.fetchedAt).getTime() < CACHE_TTL
+      (entry) => now - new Date(entry.fetchedAt).getTime() < CACHE_TTL
     );
-    
-    const dates = allEntries.map(e => new Date(e.fetchedAt).getTime());
-    
+
+    const dates = allEntries.map((e) => new Date(e.fetchedAt).getTime());
+
     return {
       totalEntries: allEntries.length,
       freshEntries: freshEntries.length,
@@ -290,7 +282,7 @@ export async function getCacheStats(): Promise<{
       newestEntry: dates.length > 0 ? new Date(Math.max(...dates)) : null,
     };
   } catch (error) {
-    console.error('Error getting cache stats:', error);
+    console.error("Error getting cache stats:", error);
     return {
       totalEntries: 0,
       freshEntries: 0,
@@ -300,4 +292,3 @@ export async function getCacheStats(): Promise<{
     };
   }
 }
-

@@ -102,13 +102,11 @@ export default function SettingsPage() {
     <div className="mx-auto max-w-5xl space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-foreground flex items-center gap-3">
+        <h1 className="flex items-center gap-3 text-3xl font-bold text-foreground">
           <Settings className="h-8 w-8" />
           Settings & Preferences
         </h1>
-        <p className="text-muted-foreground mt-2">
-          Customize your TCO exam preparation experience
-        </p>
+        <p className="mt-2 text-muted-foreground">Customize your TCO exam preparation experience</p>
       </div>
 
       {/* Account Settings */}
@@ -118,12 +116,10 @@ export default function SettingsPage() {
             <User className="h-5 w-5" />
             Account Information
           </CardTitle>
-          <CardDescription>
-            Manage your account details and authentication
-          </CardDescription>
+          <CardDescription>Manage your account details and authentication</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="email" className="text-foreground">
                 Email Address
@@ -135,9 +131,7 @@ export default function SettingsPage() {
                 className="glass border-white/20 text-foreground"
                 disabled
               />
-              <p className="text-xs text-muted-foreground">
-                Contact support to change your email
-              </p>
+              <p className="text-xs text-muted-foreground">Contact support to change your email</p>
             </div>
             <div className="space-y-2">
               <Label htmlFor="name" className="text-foreground">
@@ -162,7 +156,7 @@ export default function SettingsPage() {
               onClick={() => router.push("/profile")}
               className="border-white/20 text-foreground hover:bg-white/10"
             >
-              <User className="h-4 w-4 mr-2" />
+              <User className="mr-2 h-4 w-4" />
               View Profile
             </Button>
             <Button
@@ -170,7 +164,7 @@ export default function SettingsPage() {
               onClick={() => signOut()}
               className="border-white/20 text-foreground hover:bg-white/10"
             >
-              <Mail className="h-4 w-4 mr-2" />
+              <Mail className="mr-2 h-4 w-4" />
               Sign Out
             </Button>
           </div>
@@ -184,17 +178,13 @@ export default function SettingsPage() {
             <Bell className="h-5 w-5" />
             Notifications
           </CardTitle>
-          <CardDescription>
-            Choose what updates you want to receive
-          </CardDescription>
+          <CardDescription>Choose what updates you want to receive</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
               <Label className="text-foreground">Email Notifications</Label>
-              <p className="text-sm text-muted-foreground">
-                Receive updates via email
-              </p>
+              <p className="text-sm text-muted-foreground">Receive updates via email</p>
             </div>
             <Switch
               checked={settings.emailNotifications}
@@ -215,9 +205,7 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.studyReminders}
-              onCheckedChange={(checked) =>
-                setSettings({ ...settings, studyReminders: checked })
-              }
+              onCheckedChange={(checked) => setSettings({ ...settings, studyReminders: checked })}
             />
           </div>
 
@@ -226,9 +214,7 @@ export default function SettingsPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
               <Label className="text-foreground">Achievement Alerts</Label>
-              <p className="text-sm text-muted-foreground">
-                Get notified when you earn badges
-              </p>
+              <p className="text-sm text-muted-foreground">Get notified when you earn badges</p>
             </div>
             <Switch
               checked={settings.achievementAlerts}
@@ -249,9 +235,7 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.weeklyProgress}
-              onCheckedChange={(checked) =>
-                setSettings({ ...settings, weeklyProgress: checked })
-              }
+              onCheckedChange={(checked) => setSettings({ ...settings, weeklyProgress: checked })}
             />
           </div>
         </CardContent>
@@ -264,16 +248,17 @@ export default function SettingsPage() {
             <Palette className="h-5 w-5" />
             Appearance & Accessibility
           </CardTitle>
-          <CardDescription>
-            Customize how the platform looks and feels
-          </CardDescription>
+          <CardDescription>Customize how the platform looks and feels</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="theme" className="text-foreground">
               Theme
             </Label>
-            <Select value={settings.theme} onValueChange={(value) => setSettings({ ...settings, theme: value })}>
+            <Select
+              value={settings.theme}
+              onValueChange={(value) => setSettings({ ...settings, theme: value })}
+            >
               <SelectTrigger className="glass border-white/20 text-foreground">
                 <SelectValue />
               </SelectTrigger>
@@ -296,9 +281,7 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.largeText}
-              onCheckedChange={(checked) =>
-                setSettings({ ...settings, largeText: checked })
-              }
+              onCheckedChange={(checked) => setSettings({ ...settings, largeText: checked })}
             />
           </div>
 
@@ -313,9 +296,7 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.highContrast}
-              onCheckedChange={(checked) =>
-                setSettings({ ...settings, highContrast: checked })
-              }
+              onCheckedChange={(checked) => setSettings({ ...settings, highContrast: checked })}
             />
           </div>
 
@@ -324,15 +305,11 @@ export default function SettingsPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-0.5">
               <Label className="text-foreground">Reduced Motion</Label>
-              <p className="text-sm text-muted-foreground">
-                Minimize animations and transitions
-              </p>
+              <p className="text-sm text-muted-foreground">Minimize animations and transitions</p>
             </div>
             <Switch
               checked={settings.reducedMotion}
-              onCheckedChange={(checked) =>
-                setSettings({ ...settings, reducedMotion: checked })
-              }
+              onCheckedChange={(checked) => setSettings({ ...settings, reducedMotion: checked })}
             />
           </div>
         </CardContent>
@@ -345,21 +322,17 @@ export default function SettingsPage() {
             <BookOpen className="h-5 w-5" />
             Study Preferences
           </CardTitle>
-          <CardDescription>
-            Customize your learning experience
-          </CardDescription>
+          <CardDescription>Customize your learning experience</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="questionsPerSession" className="text-foreground">
                 Questions Per Session
               </Label>
               <Select
                 value={settings.questionsPerSession}
-                onValueChange={(value) =>
-                  setSettings({ ...settings, questionsPerSession: value })
-                }
+                onValueChange={(value) => setSettings({ ...settings, questionsPerSession: value })}
               >
                 <SelectTrigger className="glass border-white/20 text-foreground">
                   <SelectValue />
@@ -404,9 +377,7 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.showExplanations}
-              onCheckedChange={(checked) =>
-                setSettings({ ...settings, showExplanations: checked })
-              }
+              onCheckedChange={(checked) => setSettings({ ...settings, showExplanations: checked })}
             />
           </div>
 
@@ -421,9 +392,7 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.autoAdvance}
-              onCheckedChange={(checked) =>
-                setSettings({ ...settings, autoAdvance: checked })
-              }
+              onCheckedChange={(checked) => setSettings({ ...settings, autoAdvance: checked })}
             />
           </div>
         </CardContent>
@@ -436,9 +405,7 @@ export default function SettingsPage() {
             <Shield className="h-5 w-5" />
             Privacy & Data
           </CardTitle>
-          <CardDescription>
-            Control your data and privacy preferences
-          </CardDescription>
+          <CardDescription>Control your data and privacy preferences</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
@@ -450,9 +417,7 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.shareProgress}
-              onCheckedChange={(checked) =>
-                setSettings({ ...settings, shareProgress: checked })
-              }
+              onCheckedChange={(checked) => setSettings({ ...settings, shareProgress: checked })}
             />
           </div>
 
@@ -467,9 +432,7 @@ export default function SettingsPage() {
             </div>
             <Switch
               checked={settings.publicProfile}
-              onCheckedChange={(checked) =>
-                setSettings({ ...settings, publicProfile: checked })
-              }
+              onCheckedChange={(checked) => setSettings({ ...settings, publicProfile: checked })}
             />
           </div>
 
@@ -477,7 +440,7 @@ export default function SettingsPage() {
 
           <div className="space-y-2">
             <Label className="text-foreground">Account Management</Label>
-            <p className="text-sm text-muted-foreground mb-2">
+            <p className="mb-2 text-sm text-muted-foreground">
               Permanently delete your account and all associated data
             </p>
             <Button
@@ -485,7 +448,7 @@ export default function SettingsPage() {
               onClick={handleDeleteAccount}
               className="bg-red-600 hover:bg-red-700"
             >
-              <Trash2 className="h-4 w-4 mr-2" />
+              <Trash2 className="mr-2 h-4 w-4" />
               Delete Account
             </Button>
           </div>
@@ -499,7 +462,7 @@ export default function SettingsPage() {
           onClick={handleReset}
           className="border-white/20 text-foreground hover:bg-white/10"
         >
-          <RotateCcw className="h-4 w-4 mr-2" />
+          <RotateCcw className="mr-2 h-4 w-4" />
           Reset to Defaults
         </Button>
         <div className="flex gap-3">
@@ -514,7 +477,7 @@ export default function SettingsPage() {
             onClick={handleSave}
             className="bg-tanium-accent text-foreground hover:bg-blue-600"
           >
-            <Save className="h-4 w-4 mr-2" />
+            <Save className="mr-2 h-4 w-4" />
             Save Changes
           </Button>
         </div>

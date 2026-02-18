@@ -38,7 +38,9 @@ export function ScoreChart({ data, title, type = "line", showTrend = true }: Sco
           <p className="font-medium">{label}</p>
           <p className="text-tanium-accent">Score: {payload[0].value}%</p>
           {payload[0].payload.questions && (
-            <p className="text-sm text-muted-foreground">Questions: {payload[0].payload.questions}</p>
+            <p className="text-sm text-muted-foreground">
+              Questions: {payload[0].payload.questions}
+            </p>
           )}
         </div>
       );
@@ -52,9 +54,9 @@ export function ScoreChart({ data, title, type = "line", showTrend = true }: Sco
         <CardTitle className="flex items-center justify-between text-foreground">
           <div className="flex items-center gap-2">
             {type === "line" ? (
-              <TrendingUp className="h-5 w-5 text-tanium-accent" />
+              <TrendingUp className="text-tanium-accent h-5 w-5" />
             ) : (
-              <BarChart3 className="h-5 w-5 text-tanium-accent" />
+              <BarChart3 className="text-tanium-accent h-5 w-5" />
             )}
             {title}
           </div>

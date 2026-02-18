@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Budget Chatbot Component
@@ -13,17 +13,18 @@
  * - Conversation history with configurable retention
  */
 
-import React, { useState, useRef, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
-import { MessageSquare, Send, Trash2, AlertCircle, X, Loader2, Download } from 'lucide-react';
-import { useChatbot } from '@/contexts/ChatbotContext';
-import { isChatbotEnabled } from '@/lib/budget-privacy-settings';
-import { ChatbotOptInDialog } from './ChatbotOptInDialog';
+import React, { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
+import { MessageSquare, Send, Trash2, AlertCircle, X, Loader2, Download } from "lucide-react";
+import { useChatbot } from "@/contexts/ChatbotContext";
+import { isChatbotEnabled } from "@/lib/budget-privacy-settings";
+import { ChatbotOptInDialog } from "./ChatbotOptInDialog";
 
 export function Chatbot() {
-  const t = useTranslations('chatbot');
-  const { messages, isTyping, error, isEnabled, sendMessage, clearHistory, exportConversation } = useChatbot();
-  const [input, setInput] = useState('');
+  const t = useTranslations("chatbot");
+  const { messages, isTyping, error, isEnabled, sendMessage, clearHistory, exportConversation } =
+    useChatbot();
+  const [input, setInput] = useState("");
   const [showOptIn, setShowOptIn] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -36,7 +37,7 @@ export function Chatbot() {
 
   // Auto-scroll to bottom when messages change
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -44,7 +45,7 @@ export function Chatbot() {
     if (!input.trim() || isTyping) return;
 
     const message = input.trim();
-    setInput('');
+    setInput("");
     await sendMessage(message);
   };
 
@@ -65,18 +66,16 @@ export function Chatbot() {
 
   if (!isEnabled) {
     return (
-      <div className="flex items-center justify-center h-full p-8">
+      <div className="flex h-full items-center justify-center p-8">
         <div className="text-center">
-          <MessageSquare className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">{t('disabled.title')}</h3>
-          <p className="text-sm text-gray-600 mb-4">
-            {t('disabled.description')}
-          </p>
+          <MessageSquare className="mx-auto mb-4 h-12 w-12 text-gray-400" />
+          <h3 className="mb-2 text-lg font-semibold text-gray-900">{t("disabled.title")}</h3>
+          <p className="mb-4 text-sm text-gray-600">{t("disabled.description")}</p>
           <button
             onClick={() => setShowOptIn(true)}
-            className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+            className="rounded-lg bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-700"
           >
-            {t('disabled.enableButton')}
+            {t("disabled.enableButton")}
           </button>
         </div>
       </div>
@@ -84,53 +83,51 @@ export function Chatbot() {
   }
 
   return (
-    <div className="flex flex-col h-full bg-gray-50">
+    <div className="flex h-full flex-col bg-gray-50">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 p-4 flex items-center justify-between">
+      <div className="flex items-center justify-between border-b border-gray-200 bg-white p-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center">
-            <MessageSquare className="w-5 h-5 text-teal-600" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-teal-100">
+            <MessageSquare className="h-5 w-5 text-teal-600" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">{t('header.title')}</h2>
-            <p className="text-xs text-gray-600">{t('header.subtitle')}</p>
+            <h2 className="text-lg font-semibold text-gray-900">{t("header.title")}</h2>
+            <p className="text-xs text-gray-600">{t("header.subtitle")}</p>
           </div>
         </div>
         {messages.length > 0 && (
           <div className="flex items-center gap-2">
             <button
               onClick={exportConversation}
-              className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-              title={t('buttons.exportConversation')}
+              className="p-2 text-gray-400 transition-colors hover:text-gray-600"
+              title={t("buttons.exportConversation")}
             >
-              <Download className="w-5 h-5" />
+              <Download className="h-5 w-5" />
             </button>
             <button
               onClick={clearHistory}
-              className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-              title={t('buttons.clearHistory')}
+              className="p-2 text-gray-400 transition-colors hover:text-gray-600"
+              title={t("buttons.clearHistory")}
             >
-              <Trash2 className="w-5 h-5" />
+              <Trash2 className="h-5 w-5" />
             </button>
           </div>
         )}
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 space-y-4 overflow-y-auto p-4">
         {messages.length === 0 && (
-          <div className="text-center py-12">
-            <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">{t('emptyState.title')}</h3>
-            <p className="text-sm text-gray-600 mb-6">
-              {t('emptyState.description')}
-            </p>
-            <div className="space-y-2 max-w-md mx-auto">
-              {(['spending', 'budget', 'groceries', 'balance'] as const).map((key) => (
+          <div className="py-12 text-center">
+            <MessageSquare className="mx-auto mb-4 h-16 w-16 text-gray-300" />
+            <h3 className="mb-2 text-lg font-semibold text-gray-900">{t("emptyState.title")}</h3>
+            <p className="mb-6 text-sm text-gray-600">{t("emptyState.description")}</p>
+            <div className="mx-auto max-w-md space-y-2">
+              {(["spending", "budget", "groceries", "balance"] as const).map((key) => (
                 <button
                   key={key}
                   onClick={() => setInput(t(`emptyState.examples.${key}`))}
-                  className="w-full p-3 bg-white border border-gray-200 rounded-lg text-left text-sm text-gray-700 hover:border-teal-500 hover:bg-teal-50 transition-colors"
+                  className="w-full rounded-lg border border-gray-200 bg-white p-3 text-left text-sm text-gray-700 transition-colors hover:border-teal-500 hover:bg-teal-50"
                 >
                   {t(`emptyState.examples.${key}`)}
                 </button>
@@ -142,28 +139,28 @@ export function Chatbot() {
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
           >
             <div
               className={`max-w-[80%] rounded-lg p-4 ${
-                message.role === 'user'
-                  ? 'bg-teal-600 text-white'
-                  : 'bg-white border border-gray-200 text-gray-900'
+                message.role === "user"
+                  ? "bg-teal-600 text-white"
+                  : "border border-gray-200 bg-white text-gray-900"
               }`}
             >
               <div className="whitespace-pre-wrap break-words">{message.content}</div>
               {message.functionCalls && message.functionCalls.length > 0 && (
-                <div className="mt-2 pt-2 border-t border-gray-300">
+                <div className="mt-2 border-t border-gray-300 pt-2">
                   <div className="text-xs text-gray-600">
-                    <strong>{t('messages.dataAccessed')}</strong>{' '}
-                    {message.functionCalls.map((fc) => fc.name).join(', ')}
+                    <strong>{t("messages.dataAccessed")}</strong>{" "}
+                    {message.functionCalls.map((fc) => fc.name).join(", ")}
                   </div>
                 </div>
               )}
-              <div className="text-xs mt-2 opacity-70">
+              <div className="mt-2 text-xs opacity-70">
                 {message.timestamp.toLocaleTimeString([], {
-                  hour: '2-digit',
-                  minute: '2-digit',
+                  hour: "2-digit",
+                  minute: "2-digit",
                 })}
               </div>
             </div>
@@ -172,10 +169,10 @@ export function Chatbot() {
 
         {isTyping && (
           <div className="flex justify-start">
-            <div className="bg-white border border-gray-200 rounded-lg p-4">
+            <div className="rounded-lg border border-gray-200 bg-white p-4">
               <div className="flex items-center gap-2 text-gray-600">
-                <Loader2 className="w-4 h-4 animate-spin" />
-                <span className="text-sm">{t('messages.thinking')}</span>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span className="text-sm">{t("messages.thinking")}</span>
               </div>
             </div>
           </div>
@@ -183,12 +180,12 @@ export function Chatbot() {
 
         {error && (
           <div className="flex justify-center">
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 max-w-md">
+            <div className="max-w-md rounded-lg border border-red-200 bg-red-50 p-4">
               <div className="flex items-start gap-2 text-red-800">
-                <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0" />
                 <div>
-                  <div className="font-medium text-sm">{t('messages.error')}</div>
-                  <div className="text-sm mt-1">{error}</div>
+                  <div className="text-sm font-medium">{t("messages.error")}</div>
+                  <div className="mt-1 text-sm">{error}</div>
                 </div>
               </div>
             </div>
@@ -199,28 +196,26 @@ export function Chatbot() {
       </div>
 
       {/* Input */}
-      <div className="bg-white border-t border-gray-200 p-4">
+      <div className="border-t border-gray-200 bg-white p-4">
         <form onSubmit={handleSubmit} className="flex gap-2">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={t('input.placeholder')}
+            placeholder={t("input.placeholder")}
             disabled={isTyping}
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+            className="flex-1 rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 disabled:cursor-not-allowed disabled:bg-gray-100"
           />
           <button
             type="submit"
             disabled={!input.trim() || isTyping}
-            className="px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2"
+            className="flex items-center gap-2 rounded-lg bg-teal-600 px-6 py-3 text-white transition-colors hover:bg-teal-700 disabled:cursor-not-allowed disabled:bg-gray-300"
           >
-            <Send className="w-5 h-5" />
-            <span className="hidden sm:inline">{t('buttons.send')}</span>
+            <Send className="h-5 w-5" />
+            <span className="hidden sm:inline">{t("buttons.send")}</span>
           </button>
         </form>
-        <p className="text-xs text-gray-500 mt-2">
-          {t('input.disclaimer')}
-        </p>
+        <p className="mt-2 text-xs text-gray-500">{t("input.disclaimer")}</p>
       </div>
     </div>
   );

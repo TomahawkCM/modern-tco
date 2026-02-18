@@ -157,7 +157,9 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
 
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">Number of Questions</label>
+                <label className="text-sm font-medium text-muted-foreground">
+                  Number of Questions
+                </label>
                 <select
                   value={config.questionCount}
                   onChange={(e) => setConfig({ ...config, questionCount: Number(e.target.value) })}
@@ -177,7 +179,9 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">Difficulty Level</label>
+                <label className="text-sm font-medium text-muted-foreground">
+                  Difficulty Level
+                </label>
                 <select
                   value={config.difficulty}
                   onChange={(e) => setConfig({ ...config, difficulty: e.target.value as any })}
@@ -193,7 +197,9 @@ export function ExamStartDialog({ trigger, mode, onStart }: ExamStartDialogProps
 
             {mode === ExamMode.PRACTICE && (
               <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">Focus Domain (Optional)</label>
+                <label className="text-sm font-medium text-muted-foreground">
+                  Focus Domain (Optional)
+                </label>
                 <select
                   value={config.domain ?? ""}
                   onChange={(e) =>
@@ -479,7 +485,7 @@ export function ExamResultsDialog({
             </Button>
           </div>
 
-          <Button onClick={onGoHome} className="w-full bg-tanium-accent hover:bg-blue-600">
+          <Button onClick={onGoHome} className="bg-tanium-accent w-full hover:bg-blue-600">
             Back to Dashboard
           </Button>
         </DialogFooter>

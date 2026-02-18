@@ -5,16 +5,19 @@ This directory contains archived MCP configuration files that were moved here du
 ## Archived Files
 
 ### `.mcp.codex.json`
+
 - **Archived**: 2025-10-11
 - **Reason**: Uses invalid `"mcpServers"` key instead of `"servers"`
 - **Servers**: 5 servers (supabase, shadcn, firecrawl, chrome-devtools, postgresql)
 
 ### `.mcp-working-config.json`
+
 - **Archived**: 2025-10-11
 - **Reason**: Uses invalid `"mcpServers"` key instead of `"servers"`
 - **Servers**: 7 servers (shadcn, filesystem, claude-flow, sqlite-tanium, github, firecrawl, playwright)
 
 ### `.mcp-servers-master.json`
+
 - **Archived**: 2025-10-11
 - **Reason**:
   - Uses invalid `"mcpServers"` key instead of `"servers"`
@@ -52,6 +55,7 @@ The correct Claude Code schema is:
 ## Restoration
 
 If you need to restore any servers from these archives:
+
 1. Copy the server configuration block
 2. Update the key from `"mcpServers"` to `"servers"`
 3. Remove any non-standard keys

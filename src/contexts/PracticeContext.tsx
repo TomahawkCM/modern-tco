@@ -18,12 +18,12 @@ import type { PracticeTargeting, QuestionPool, TCODomain } from "@/types/exam";
 import {
   type Module3Section,
   MODULE_3_SECTIONS,
-  createSectionPracticeTargeting
+  createSectionPracticeTargeting,
 } from "@/lib/module3-section-definitions";
 import {
   getModule3SectionQuestions,
   buildModule3PracticeSession,
-  getModule3PracticeRecommendations
+  getModule3PracticeRecommendations,
 } from "@/lib/module3-practice-integration";
 import {
   PracticeSessionState,
@@ -99,13 +99,16 @@ export interface PracticeContextType {
   canGoToPrevious: () => boolean;
 
   // Module 3 Enhanced Analytics
-  getModule3SectionProgress: () => Record<Module3Section, {
-    questionsAttempted: number;
-    questionsCorrect: number;
-    accuracy: number;
-    timeSpent: number;
-    lastAttempted?: Date;
-  }>;
+  getModule3SectionProgress: () => Record<
+    Module3Section,
+    {
+      questionsAttempted: number;
+      questionsCorrect: number;
+      accuracy: number;
+      timeSpent: number;
+      lastAttempted?: Date;
+    }
+  >;
   getModule3Recommendations: () => {
     prioritySections: Module3Section[];
     recommendedSessionType: "focused" | "comprehensive" | "review";
@@ -265,7 +268,11 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
 
         // Start session
         const manager = new PracticeSessionManager();
-        const session = await manager.startSession(sessionConfig, user?.id || 'anonymous', pool.questions);
+        const session = await manager.startSession(
+          sessionConfig,
+          user?.id || "anonymous",
+          pool.questions
+        );
 
         setSessionManager(manager);
         setCurrentSession(session);
@@ -363,19 +370,21 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
           // Weight by needs-review counts (incorrect answers that haven't been reviewed)
           const domainStats = getDomainStats();
           const totalNeedsReview = domains.reduce(
-            (sum, domain) => sum + (domainStats[domain]?.count || 0) - (domainStats[domain]?.reviewed || 0),
+            (sum, domain) =>
+              sum + (domainStats[domain]?.count || 0) - (domainStats[domain]?.reviewed || 0),
             0
           );
 
           if (totalNeedsReview > 0) {
             // Distribute based on needs-review counts with a minimum of 1 question per domain
             for (const domain of domains) {
-              const needsReview = (domainStats[domain]?.count || 0) - (domainStats[domain]?.reviewed || 0);
+              const needsReview =
+                (domainStats[domain]?.count || 0) - (domainStats[domain]?.reviewed || 0);
               const weight = needsReview / totalNeedsReview;
               const domainQuestionCount = Math.max(1, Math.round(totalQuestions * weight));
 
               // Prioritize questions that were previously answered incorrectly
-              const incorrectQuestionIds = getAnswersByDomain(domain).map(a => a.questionId);
+              const incorrectQuestionIds = getAnswersByDomain(domain).map((a) => a.questionId);
 
               const domainQuestions = await getQuestionsWithFilters({
                 domains: [domain],
@@ -383,13 +392,15 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
               });
 
               // Sort questions to prioritize those that were answered incorrectly
-              const prioritized = domainQuestions.sort((a: any, b: any) => {
-                const aIncorrect = incorrectQuestionIds.includes(a.id);
-                const bIncorrect = incorrectQuestionIds.includes(b.id);
-                if (aIncorrect && !bIncorrect) return -1;
-                if (!aIncorrect && bIncorrect) return 1;
-                return 0;
-              }).slice(0, domainQuestionCount);
+              const prioritized = domainQuestions
+                .sort((a: any, b: any) => {
+                  const aIncorrect = incorrectQuestionIds.includes(a.id);
+                  const bIncorrect = incorrectQuestionIds.includes(b.id);
+                  if (aIncorrect && !bIncorrect) return -1;
+                  if (!aIncorrect && bIncorrect) return 1;
+                  return 0;
+                })
+                .slice(0, domainQuestionCount);
 
               allQuestions = [...allQuestions, ...prioritized];
             }
@@ -453,7 +464,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
           questionCount: allQuestions.length,
           passingScore: config?.passingScore || 75,
           timeLimit: config?.timeLimit,
-          tags: domains.map(d => `Domain:${d}`),
+          tags: domains.map((d) => `Domain:${d}`),
         };
 
         const manager = new PracticeSessionManager();
@@ -638,44 +649,53 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
   /**
    * Module3 Session Management
    */
-  const startModule3SectionPractice = useCallback(async (
-    sectionId: Module3Section,
-    config?: {
-      includePrerequisites?: boolean;
-      includeRelatedSections?: boolean;
-      adaptiveDifficulty?: boolean;
-      focusOnGaps?: boolean;
-      questionCount?: number;
-    }
-  ): Promise<boolean> => {
-    // TODO: Implement Module3 section practice
-    console.log("Starting Module3 section practice:", sectionId, config);
-    return Promise.resolve(false);
-  }, []);
+  const startModule3SectionPractice = useCallback(
+    async (
+      sectionId: Module3Section,
+      config?: {
+        includePrerequisites?: boolean;
+        includeRelatedSections?: boolean;
+        adaptiveDifficulty?: boolean;
+        focusOnGaps?: boolean;
+        questionCount?: number;
+      }
+    ): Promise<boolean> => {
+      // TODO: Implement Module3 section practice
+      console.log("Starting Module3 section practice:", sectionId, config);
+      return Promise.resolve(false);
+    },
+    []
+  );
 
-  const startModule3ComprehensivePractice = useCallback(async (
-    sections: Module3Section[],
-    config?: {
-      questionsPerSection?: number;
-      randomizeOrder?: boolean;
-      focusOnWeakAreas?: boolean;
-      timeLimit?: number;
-    }
-  ): Promise<boolean> => {
-    // TODO: Implement Module3 comprehensive practice
-    console.log("Starting Module3 comprehensive practice:", sections, config);
-    return Promise.resolve(false);
-  }, []);
+  const startModule3ComprehensivePractice = useCallback(
+    async (
+      sections: Module3Section[],
+      config?: {
+        questionsPerSection?: number;
+        randomizeOrder?: boolean;
+        focusOnWeakAreas?: boolean;
+        timeLimit?: number;
+      }
+    ): Promise<boolean> => {
+      // TODO: Implement Module3 comprehensive practice
+      console.log("Starting Module3 comprehensive practice:", sections, config);
+      return Promise.resolve(false);
+    },
+    []
+  );
 
   const getModule3SectionProgress = useCallback(() => {
     // TODO: Implement Module3 progress tracking
-    return {} as Record<Module3Section, {
-      questionsAttempted: number;
-      questionsCorrect: number;
-      accuracy: number;
-      timeSpent: number;
-      lastAttempted?: Date;
-    }>;
+    return {} as Record<
+      Module3Section,
+      {
+        questionsAttempted: number;
+        questionsCorrect: number;
+        accuracy: number;
+        timeSpent: number;
+        lastAttempted?: Date;
+      }
+    >;
   }, []);
 
   const getModule3Recommendations = useCallback(() => {
@@ -683,7 +703,7 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
     return {
       prioritySections: [] as Module3Section[],
       recommendedSessionType: "focused" as const,
-      suggestedDuration: 30
+      suggestedDuration: 30,
     };
   }, []);
 
@@ -693,7 +713,9 @@ export function PracticeProvider({ children }: { children: ReactNode }) {
     return {
       available: true,
       questionCount: section?.currentQuestionCount || 0,
-      coverage: section ? Math.floor((section.currentQuestionCount / section.questionTargetCount) * 100) : 0
+      coverage: section
+        ? Math.floor((section.currentQuestionCount / section.questionTargetCount) * 100)
+        : 0,
     };
   }, []);
 

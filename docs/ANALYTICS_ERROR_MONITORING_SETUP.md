@@ -27,18 +27,21 @@ This guide covers the complete setup for PostHog analytics and Sentry error trac
 ### What's Included
 
 **PostHog Analytics**:
+
 - User behavior tracking (page views, feature usage)
 - Custom budget app events (50+ event types)
 - Performance metrics (DAU, WAU, MAU)
 - Privacy-compliant data collection
 
 **Sentry Error Tracking**:
+
 - Client-side error monitoring
 - Performance tracing (5% sample rate)
 - Source maps for production debugging
 - Context-rich error reports
 
 **Privacy Features**:
+
 - User opt-out controls in Settings
 - No PII tracking (no transaction amounts, descriptions, account numbers)
 - Data sanitization before sending
@@ -89,6 +92,7 @@ NEXT_PUBLIC_POSTHOG_HOST=https://app.posthog.com
 ```
 
 **Verification**:
+
 ```bash
 # Check environment variable is set
 npm run dev
@@ -129,10 +133,11 @@ console.log(process.env.NEXT_PUBLIC_POSTHOG_KEY);
    - `page_view`
 
 **Check user properties**:
+
 ```typescript
 // In browser console:
-posthog?.identify('user-id', {
-  plan: 'free',
+posthog?.identify("user-id", {
+  plan: "free",
   budgets_count: 5,
 });
 ```
@@ -166,6 +171,7 @@ NEXT_PUBLIC_SENTRY_ENVIRONMENT=production
 ```
 
 **Verification**:
+
 ```bash
 # Check environment variable is set
 npm run dev
@@ -198,10 +204,11 @@ console.log(process.env.NEXT_PUBLIC_SENTRY_DSN);
 
 ```typescript
 // In browser console:
-throw new Error('Sentry test error');
+throw new Error("Sentry test error");
 ```
 
 **Check error appears in Sentry**:
+
 1. Go to Sentry → Issues
 2. You should see: "Sentry test error"
 3. Click to view details (stack trace, user context, breadcrumbs)
@@ -235,6 +242,7 @@ NEXT_PUBLIC_POSTHOG_RECORD_SESSIONS=true  # Enable session recording
 ### Deployment Environments
 
 **Development** (`.env.local`):
+
 ```bash
 NEXT_PUBLIC_POSTHOG_KEY=phc_dev_key
 NEXT_PUBLIC_SENTRY_DSN=  # Leave empty to disable in dev
@@ -242,6 +250,7 @@ NEXT_PUBLIC_SENTRY_ENVIRONMENT=development
 ```
 
 **Staging** (Vercel environment variables):
+
 ```bash
 NEXT_PUBLIC_POSTHOG_KEY=phc_staging_key
 NEXT_PUBLIC_SENTRY_DSN=https://staging_dsn
@@ -249,6 +258,7 @@ NEXT_PUBLIC_SENTRY_ENVIRONMENT=staging
 ```
 
 **Production** (Vercel environment variables):
+
 ```bash
 NEXT_PUBLIC_POSTHOG_KEY=phc_prod_key
 NEXT_PUBLIC_SENTRY_DSN=https://prod_dsn
@@ -268,6 +278,7 @@ NEXT_PUBLIC_SENTRY_ENVIRONMENT=production
 3. **Default**: Both enabled (user can disable anytime)
 
 **Data Minimization**:
+
 - ✅ Only track event metadata (no PII)
 - ✅ Sanitize transaction descriptions (remove sensitive info)
 - ✅ No account numbers, credit card numbers, SSNs
@@ -276,12 +287,14 @@ NEXT_PUBLIC_SENTRY_ENVIRONMENT=production
 ### Privacy-Safe Data
 
 **What we track**:
+
 - Feature usage counts (e.g., "5 transactions added")
 - Category names (e.g., "Groceries", "Dining Out")
 - Success/failure status
 - Performance metrics (page load time, database query time)
 
 **What we DON'T track**:
+
 - Transaction amounts (except counts)
 - Transaction descriptions (sanitized)
 - Account balances
@@ -323,11 +336,11 @@ npm run dev
 
 ```typescript
 // In browser console:
-import { trackBudgetEvent } from '@/lib/budget-analytics';
+import { trackBudgetEvent } from "@/lib/budget-analytics";
 
-trackBudgetEvent('transaction_added', {
-  section: 'transactions',
-  method: 'manual',
+trackBudgetEvent("transaction_added", {
+  section: "transactions",
+  method: "manual",
   success: true,
 });
 
@@ -339,7 +352,7 @@ trackBudgetEvent('transaction_added', {
 
 ```typescript
 // In browser console:
-throw new Error('Test error for Sentry');
+throw new Error("Test error for Sentry");
 
 // Check Sentry dashboard → Issues
 // Error should appear within seconds
@@ -409,6 +422,7 @@ vercel env add NEXT_PUBLIC_SENTRY_ENVIRONMENT production
 ```
 
 **Or via Vercel dashboard**:
+
 1. Go to Project Settings → Environment Variables
 2. Add each variable with production scope
 
@@ -425,17 +439,20 @@ curl https://yourdomain.com/api/health
 ### Post-Deployment Verification
 
 **1. Verify PostHog events**:
+
 - Open production site
 - Perform actions (add transaction, view reports)
 - Check PostHog dashboard → Activity → Live Events
 - Verify events appear with `$current_url` = your production domain
 
 **2. Verify Sentry errors**:
+
 - Trigger test error in production (via browser console)
 - Check Sentry dashboard → Issues
 - Verify error has correct environment tag ("production")
 
 **3. Check performance**:
+
 - Run Lighthouse audit
 - Verify analytics/error tracking doesn't impact:
   - Time to Interactive (TTI) < 3.5s
@@ -451,18 +468,21 @@ curl https://yourdomain.com/api/health
 **Create custom dashboards** (PostHog → Dashboards → New Dashboard):
 
 **1. Budget App Overview Dashboard**:
+
 - DAU / WAU / MAU chart
 - Top 10 events (past 7 days)
 - Feature usage breakdown (transactions, budgets, loans, reports)
 - User retention cohort
 
 **2. Transaction Tracking Dashboard**:
+
 - `transaction_added` events (daily)
 - `csv_import_completed` events
 - `ocr_success` rate
 - Top categories used
 
 **3. Error Rate Dashboard**:
+
 - `client_error` events
 - `import_failure_rate`
 - `ocr_failure_rate`
@@ -473,16 +493,19 @@ curl https://yourdomain.com/api/health
 **Create alerts** (Sentry → Alerts → Create Alert):
 
 **1. High Error Rate Alert**:
+
 - Condition: Error count > 10 in 5 minutes
 - Notify: Email + Slack
 - Environment: production
 
 **2. Performance Degradation Alert**:
+
 - Condition: p95 page load time > 5 seconds
 - Notify: Email
 - Environment: production
 
 **3. New Issue Alert**:
+
 - Condition: First seen issue (new error type)
 - Notify: Email
 - Environment: production
@@ -490,16 +513,19 @@ curl https://yourdomain.com/api/health
 ### Key Metrics to Monitor
 
 **Daily**:
+
 - DAU (Daily Active Users)
 - Error rate (errors per 1000 requests)
 - Page load time (p95)
 
 **Weekly**:
+
 - WAU (Weekly Active Users)
 - Feature adoption (% users using new features)
 - Retention rate (week-over-week)
 
 **Monthly**:
+
 - MAU (Monthly Active Users)
 - Churn rate
 - Average session duration
@@ -513,7 +539,9 @@ curl https://yourdomain.com/api/health
 **Symptom**: Events not showing in PostHog dashboard
 
 **Solutions**:
+
 1. **Check environment variable**:
+
    ```bash
    # In browser console:
    console.log(process.env.NEXT_PUBLIC_POSTHOG_KEY);
@@ -542,7 +570,9 @@ curl https://yourdomain.com/api/health
 **Symptom**: Errors not showing in Sentry dashboard
 
 **Solutions**:
+
 1. **Check environment variable**:
+
    ```bash
    # In browser console:
    console.log(process.env.NEXT_PUBLIC_SENTRY_DSN);
@@ -550,6 +580,7 @@ curl https://yourdomain.com/api/health
    ```
 
 2. **Check Sentry SDK loaded**:
+
    ```typescript
    // In browser console:
    console.log(window.Sentry);
@@ -563,7 +594,7 @@ curl https://yourdomain.com/api/health
 
 4. **Trigger test error**:
    ```typescript
-   throw new Error('Sentry test error');
+   throw new Error("Sentry test error");
    ```
 
 ### Performance Impact
@@ -571,11 +602,13 @@ curl https://yourdomain.com/api/health
 **Symptom**: Slow page loads after enabling analytics
 
 **Solutions**:
+
 1. **Lazy load analytics**:
    - Already implemented via `requestIdleCallback`
    - Loads after page is interactive
 
 2. **Reduce Sentry sample rate**:
+
    ```typescript
    // In monitoring-client.tsx:
    tracesSampleRate: 0.01, // Reduce from 0.05 to 0.01 (1%)
@@ -590,6 +623,7 @@ curl https://yourdomain.com/api/health
 **Symptom**: PII appearing in PostHog/Sentry events
 
 **Solutions**:
+
 1. **Check sanitization**:
    - Review `src/lib/budget-analytics.ts` → `sanitizeProperties()`
    - Ensure only allowlisted properties pass through
@@ -630,16 +664,19 @@ curl https://yourdomain.com/api/health
 ## Resources
 
 **PostHog**:
+
 - Docs: https://posthog.com/docs
 - API Reference: https://posthog.com/docs/api
 - Community: https://posthog.com/questions
 
 **Sentry**:
+
 - Docs: https://docs.sentry.io/platforms/javascript/guides/nextjs/
 - Source Maps: https://docs.sentry.io/platforms/javascript/sourcemaps/
 - Performance: https://docs.sentry.io/product/performance/
 
 **Budget App**:
+
 - Code: `src/lib/budget-analytics.ts` (analytics wrapper)
 - Privacy: `src/lib/budget-privacy-settings.ts` (user controls)
 - Client: `src/app/analytics-client.tsx` (PostHog integration)

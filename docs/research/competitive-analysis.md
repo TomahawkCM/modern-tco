@@ -23,6 +23,7 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 ## 1. App Overviews
 
 ### Mint (Intuit) - SHUT DOWN Jan 1, 2024
+
 **Historical Reference Only**
 
 - **Rating**: Mixed (3-4/5) before shutdown
@@ -34,6 +35,7 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 - **Why Relevant**: Was the dominant budget app for a decade; user expectations shaped by Mint's UX
 
 ### YNAB (You Need A Budget)
+
 **Active, Premium Tier**
 
 - **Rating**: 4.5+/5
@@ -52,6 +54,7 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 - **Accessibility**: **⭐ Best-in-class** - only app with documented accessibility features and active improvement
 
 ### Monarch Money
+
 **Active, Modern Challenger**
 
 - **Rating**: 4+/5
@@ -69,6 +72,7 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 - **Design**: Cohesive color schemes, visual appeal, user-friendly
 
 ### Copilot Money
+
 **Active, Premium iOS-First**
 
 - **Rating**: **4.8/5** (24,000+ reviews) - **Highest rated**
@@ -95,6 +99,7 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 - **Design**: "Clean design and easy to use" (user reviews), emphasis on native UI patterns
 
 ### Simplifi by Quicken
+
 **Active, Quicken Ecosystem**
 
 - **Rating**: 4+/5
@@ -117,20 +122,20 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 
 ### Mobile Navigation Approaches
 
-| App | Pattern | Primary Nav Items | Secondary Access | Notes |
-|-----|---------|-------------------|------------------|-------|
-| **Mint** | Tab bar + hamburger | Dashboard, Budgets, Transactions | Hamburger menu | Historical reference |
-| **YNAB** | Unknown | Unknown | iOS widgets | Widgets reduce need for in-app navigation |
-| **Monarch** | **Tab bar + menu** | Transactions (center), + menu button | Menu for all sections | 2024 redesign |
-| **Copilot** | **Quick launcher** | Category list sidebar | Quick launcher (Cmd+K) | Desktop/iPad focus |
-| **Simplifi** | **Hamburger menu** | Dashboard tiles | 3-line menu icon | Traditional pattern |
+| App          | Pattern             | Primary Nav Items                    | Secondary Access       | Notes                                     |
+| ------------ | ------------------- | ------------------------------------ | ---------------------- | ----------------------------------------- |
+| **Mint**     | Tab bar + hamburger | Dashboard, Budgets, Transactions     | Hamburger menu         | Historical reference                      |
+| **YNAB**     | Unknown             | Unknown                              | iOS widgets            | Widgets reduce need for in-app navigation |
+| **Monarch**  | **Tab bar + menu**  | Transactions (center), + menu button | Menu for all sections  | 2024 redesign                             |
+| **Copilot**  | **Quick launcher**  | Category list sidebar                | Quick launcher (Cmd+K) | Desktop/iPad focus                        |
+| **Simplifi** | **Hamburger menu**  | Dashboard tiles                      | 3-line menu icon       | Traditional pattern                       |
 
 ### Desktop Navigation Approaches
 
-| App | Pattern | Sidebar | Quick Access |
-|-----|---------|---------|--------------|
-| **Copilot** | Left sidebar + quick launcher | Category list | Cmd+K fast search |
-| **Others** | Likely responsive web (not native desktop) | Varies | N/A |
+| App         | Pattern                                    | Sidebar       | Quick Access      |
+| ----------- | ------------------------------------------ | ------------- | ----------------- |
+| **Copilot** | Left sidebar + quick launcher              | Category list | Cmd+K fast search |
+| **Others**  | Likely responsive web (not native desktop) | Varies        | N/A               |
 
 ### Pattern Insights
 
@@ -154,6 +159,7 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 ### Common Patterns
 
 **All apps use modular dashboard widgets with:**
+
 - Account summary tiles/cards (net worth, cash flow)
 - Budget progress visualizations (progress bars, pie charts)
 - Recent transactions list (5-10 items)
@@ -162,13 +168,13 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 
 ### Visualization Approaches
 
-| App | Primary Chart Types | Customization | Mobile Optimization |
-|-----|---------------------|---------------|---------------------|
-| **Mint** | Pie charts, bar graphs | Limited | Responsive web |
-| **YNAB** | Unknown | Unknown | Widgets reduce dashboard reliance |
-| **Monarch** | Progress bars, line charts | Sort/hide widgets | Visual appeal prioritized |
-| **Copilot** | Sankey (cash flow), sparklines, pie | Dashboard widgets | Native performance |
-| **Simplifi** | Tiles with swipe navigation | Sort/hide tiles | Simplified for mobile |
+| App          | Primary Chart Types                 | Customization     | Mobile Optimization               |
+| ------------ | ----------------------------------- | ----------------- | --------------------------------- |
+| **Mint**     | Pie charts, bar graphs              | Limited           | Responsive web                    |
+| **YNAB**     | Unknown                             | Unknown           | Widgets reduce dashboard reliance |
+| **Monarch**  | Progress bars, line charts          | Sort/hide widgets | Visual appeal prioritized         |
+| **Copilot**  | Sankey (cash flow), sparklines, pie | Dashboard widgets | Native performance                |
+| **Simplifi** | Tiles with swipe navigation         | Sort/hide tiles   | Simplified for mobile             |
 
 ### Best Practices Identified
 
@@ -192,6 +198,7 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 ### Common UX Patterns
 
 **Standard Transaction Form Fields:**
+
 - Amount (required)
 - Date (default: today)
 - Category (auto-suggested)
@@ -202,13 +209,13 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 
 ### Smart Defaults & Automation
 
-| App | Auto-Categorization | Smart Defaults | Bulk Actions |
-|-----|---------------------|----------------|--------------|
-| **Mint** | AI categorization | Last category used | Unknown |
-| **YNAB** | Rule-based | Today's date | Unknown |
-| **Monarch** | AI + rules | Not documented | Unknown |
-| **Copilot** | **AI Intelligence** (personalized) | Custom rules | **Bulk edit/categorize** ✅ |
-| **Simplifi** | Auto-categorization | Not documented | Unknown |
+| App          | Auto-Categorization                | Smart Defaults     | Bulk Actions                |
+| ------------ | ---------------------------------- | ------------------ | --------------------------- |
+| **Mint**     | AI categorization                  | Last category used | Unknown                     |
+| **YNAB**     | Rule-based                         | Today's date       | Unknown                     |
+| **Monarch**  | AI + rules                         | Not documented     | Unknown                     |
+| **Copilot**  | **AI Intelligence** (personalized) | Custom rules       | **Bulk edit/categorize** ✅ |
+| **Simplifi** | Auto-categorization                | Not documented     | Unknown                     |
 
 ### Transaction Rules
 
@@ -231,13 +238,13 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 
 ### Platform Strategy
 
-| App | iOS | Android | Web | Desktop App |
-|-----|-----|---------|-----|-------------|
-| **Mint** | ✅ | ✅ | ✅ | ❌ (shutdown) |
-| **YNAB** | ✅ | ✅ | ✅ | ❌ |
-| **Monarch** | ✅ | ✅ | ✅ | ❌ |
-| **Copilot** | **✅ Native** | ❌ | ❌ | **✅ Native Mac** |
-| **Simplifi** | ✅ | ✅ | ✅ | ❌ |
+| App          | iOS           | Android | Web | Desktop App       |
+| ------------ | ------------- | ------- | --- | ----------------- |
+| **Mint**     | ✅            | ✅      | ✅  | ❌ (shutdown)     |
+| **YNAB**     | ✅            | ✅      | ✅  | ❌                |
+| **Monarch**  | ✅            | ✅      | ✅  | ❌                |
+| **Copilot**  | **✅ Native** | ❌      | ❌  | **✅ Native Mac** |
+| **Simplifi** | ✅            | ✅      | ✅  | ❌                |
 
 ### Key Insights
 
@@ -249,15 +256,18 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 ### Mobile-First UX Patterns
 
 **Typography:**
+
 - **Standard**: 14-16px base font size
 - **Copilot**: Unknown (but praised for readability)
 - **Gap**: No apps explicitly use 18px+ base for seniors
 
 **Touch Targets:**
+
 - **Standard**: Likely 44px (iOS default)
 - **Gap**: No apps explicitly use 48px+ (WCAG 2.2 Level AA)
 
 **Gestures:**
+
 - **Swipe actions**: Simplifi (swipe on transactions)
 - **Pull-to-refresh**: Standard across all apps
 - **Pinch-to-zoom**: Not documented (likely disabled in native apps)
@@ -277,29 +287,29 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 
 ### Screen Reader Support
 
-| App | VoiceOver (iOS) | NVDA/JAWS (Web) | Documentation | Compliance |
-|-----|-----------------|-----------------|---------------|------------|
-| **Mint** | Unknown | Unknown | ❌ None | Unknown |
-| **YNAB** | **✅ Active work** | Unknown | **✅ Support docs** | Partial (gaps in new features) |
-| **Monarch** | Unknown | Unknown | ❌ None | Unknown |
-| **Copilot** | Likely supported | N/A (no web) | ❌ None | Unknown |
-| **Simplifi** | Unknown | Unknown | ❌ None | Unknown |
+| App          | VoiceOver (iOS)    | NVDA/JAWS (Web) | Documentation       | Compliance                     |
+| ------------ | ------------------ | --------------- | ------------------- | ------------------------------ |
+| **Mint**     | Unknown            | Unknown         | ❌ None             | Unknown                        |
+| **YNAB**     | **✅ Active work** | Unknown         | **✅ Support docs** | Partial (gaps in new features) |
+| **Monarch**  | Unknown            | Unknown         | ❌ None             | Unknown                        |
+| **Copilot**  | Likely supported   | N/A (no web)    | ❌ None             | Unknown                        |
+| **Simplifi** | Unknown            | Unknown         | ❌ None             | Unknown                        |
 
 ### Theme Mode Support
 
-| App | Light Mode | Dark Mode | High-Contrast | Auto-Switch |
-|-----|-----------|-----------|---------------|-------------|
-| **Mint** | ✅ | Unknown | ❌ | Unknown |
-| **YNAB** | ✅ | Unknown | ❌ | Unknown |
-| **Monarch** | ✅ | Unknown | ❌ | Unknown |
-| **Copilot** | **✅** | **✅** | ❌ | Likely (iOS native) |
-| **Simplifi** | ✅ | Unknown | ❌ | Unknown |
+| App          | Light Mode | Dark Mode | High-Contrast | Auto-Switch         |
+| ------------ | ---------- | --------- | ------------- | ------------------- |
+| **Mint**     | ✅         | Unknown   | ❌            | Unknown             |
+| **YNAB**     | ✅         | Unknown   | ❌            | Unknown             |
+| **Monarch**  | ✅         | Unknown   | ❌            | Unknown             |
+| **Copilot**  | **✅**     | **✅**    | ❌            | Likely (iOS native) |
+| **Simplifi** | ✅         | Unknown   | ❌            | Unknown             |
 
 ### Reduced Motion
 
-| App | Supports prefers-reduced-motion | Documentation |
-|-----|--------------------------------|---------------|
-| **All Apps** | Unknown | ❌ None found |
+| App          | Supports prefers-reduced-motion | Documentation |
+| ------------ | ------------------------------- | ------------- |
+| **All Apps** | Unknown                         | ❌ None found |
 
 ### Critical Gaps Identified
 
@@ -326,10 +336,12 @@ This analysis examines 5 leading budget apps to inform Budget App v1 modernizati
 ### Research Findings
 
 **Apps Tested for Senior-Friendliness:**
+
 - Monarch Money mentioned in "Best Money Management Apps for Seniors" list
 - Testing criteria: Simple setup, large buttons, clear instructions, phone support
 
 **Industry Standard Gaps:**
+
 - **Typography**: No apps use 18px+ base font (WCAG 2.2 recommendation)
 - **Touch Targets**: No apps document 48px+ targets (WCAG 2.2 Level AA)
 - **Plain Language**: Not prioritized in UI labels
@@ -366,6 +378,7 @@ From "Designing Apps For Seniors" article and AARP/GoodRx/Medisafe patterns:
 ### Navigation
 
 **✅ Adopt:**
+
 - Bottom tab bar (4-5 primary sections: Home, Transactions, Budgets, Loans, More)
 - Hamburger menu in "More" for remaining sections (Investments, Retirement, Reports, OCR)
 - Command palette (Cmd/Ctrl+K) for quick navigation
@@ -373,6 +386,7 @@ From "Designing Apps For Seniors" article and AARP/GoodRx/Medisafe patterns:
 - Breadcrumbs for deep pages ("Dashboard > Loans > Mortgage Details")
 
 **❌ Avoid:**
+
 - Tab bar with 8-9 items (too crowded)
 - Desktop-only navigation patterns
 - Hidden features without discoverability
@@ -380,6 +394,7 @@ From "Designing Apps For Seniors" article and AARP/GoodRx/Medisafe patterns:
 ### Dashboard
 
 **✅ Adopt:**
+
 - Metric cards with large numbers + trend arrows
 - Visual progress bars (not color-only)
 - Widget customization (drag-and-drop, show/hide)
@@ -387,6 +402,7 @@ From "Designing Apps For Seniors" article and AARP/GoodRx/Medisafe patterns:
 - Sparklines for trends (space-efficient)
 
 **❌ Avoid:**
+
 - Complex charts on mobile (use data tables as alternative)
 - Fixed layouts (users want control)
 - Color-only indicators (not accessible)
@@ -394,6 +410,7 @@ From "Designing Apps For Seniors" article and AARP/GoodRx/Medisafe patterns:
 ### Forms
 
 **✅ Adopt:**
+
 - Smart defaults (today's date, last category)
 - Native HTML5 inputs (`type="number"`, `type="date"`)
 - Optional fields collapsible (reduce cognitive load)
@@ -401,6 +418,7 @@ From "Designing Apps For Seniors" article and AARP/GoodRx/Medisafe patterns:
 - Receipt photo upload (OCR)
 
 **❌ Avoid:**
+
 - Floating labels (confusing for seniors)
 - 10+ required fields (overwhelming)
 - Cryptic error messages ("Invalid input")
@@ -408,6 +426,7 @@ From "Designing Apps For Seniors" article and AARP/GoodRx/Medisafe patterns:
 ### Accessibility
 
 **✅ Adopt:**
+
 - 3 theme modes (light, dark, high-contrast)
 - Reduced motion support
 - 48px+ touch targets
@@ -416,6 +435,7 @@ From "Designing Apps For Seniors" article and AARP/GoodRx/Medisafe patterns:
 - Text alternatives for charts
 
 **❌ Avoid:**
+
 - Color-only indicators
 - Animations without reduced motion fallback
 - Missing alt text
@@ -464,22 +484,23 @@ From "Designing Apps For Seniors" article and AARP/GoodRx/Medisafe patterns:
 
 ### Our Strengths vs Competitors
 
-| Feature | Budget App v1 | Mint | YNAB | Monarch | Copilot | Simplifi |
-|---------|---------------|------|------|---------|---------|----------|
-| **Free** | ✅ | ❌ (shutdown) | ❌ | ❌ | ❌ | ❌ |
-| **Local-First** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **Offline PWA** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **18px Typography** | ✅ | ❌ | ❌ | ❌ | Unknown | ❌ |
-| **48px Touch Targets** | ✅ | ❌ | ❌ | ❌ | Unknown | ❌ |
-| **High-Contrast Mode** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| **WCAG 2.2 AA** | ✅ (target) | Unknown | Partial | Unknown | Unknown | Unknown |
-| **AI Chatbot** | ✅ (OpenAI) | ❌ | ❌ | ❌ | ✅ (categorization) | ❌ |
+| Feature                | Budget App v1 | Mint          | YNAB    | Monarch | Copilot             | Simplifi |
+| ---------------------- | ------------- | ------------- | ------- | ------- | ------------------- | -------- |
+| **Free**               | ✅            | ❌ (shutdown) | ❌      | ❌      | ❌                  | ❌       |
+| **Local-First**        | ✅            | ❌            | ❌      | ❌      | ❌                  | ❌       |
+| **Offline PWA**        | ✅            | ❌            | ❌      | ❌      | ❌                  | ❌       |
+| **18px Typography**    | ✅            | ❌            | ❌      | ❌      | Unknown             | ❌       |
+| **48px Touch Targets** | ✅            | ❌            | ❌      | ❌      | Unknown             | ❌       |
+| **High-Contrast Mode** | ✅            | ❌            | ❌      | ❌      | ❌                  | ❌       |
+| **WCAG 2.2 AA**        | ✅ (target)   | Unknown       | Partial | Unknown | Unknown             | Unknown  |
+| **AI Chatbot**         | ✅ (OpenAI)   | ❌            | ❌      | ❌      | ✅ (categorization) | ❌       |
 
 ### Positioning Statement
 
 **"The only budget app built for everyone: free, private, accessible, and seniors-friendly."**
 
 **Target users:**
+
 - Seniors (60+) seeking simple, clear budgeting tools
 - Privacy-conscious users who want local-first data
 - Accessibility-focused users (screen reader, high-contrast, reduced motion)

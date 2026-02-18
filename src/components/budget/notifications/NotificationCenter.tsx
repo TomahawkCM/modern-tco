@@ -1,29 +1,23 @@
-'use client';
+"use client";
 
 /**
  * NotificationCenter Component
  * Bell icon with dropdown panel showing notifications
  */
 
-import { useState, useRef, useEffect } from 'react';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-  Bell,
-  Check,
-  Trash2,
-  BellOff,
-  Inbox,
-} from 'lucide-react';
-import { NotificationBadge } from './NotificationBadge';
-import { NotificationItem } from './NotificationItem';
-import { useNotificationsOptional } from '@/contexts/NotificationContext';
-import { useTranslations } from 'next-intl';
-import { AnimatePresence, motion } from 'framer-motion';
-import type { InAppNotification, SnoozeDuration } from '@/types/notifications';
+import { useState, useRef, useEffect } from "react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Bell, Check, Trash2, BellOff, Inbox } from "lucide-react";
+import { NotificationBadge } from "./NotificationBadge";
+import { NotificationItem } from "./NotificationItem";
+import { useNotificationsOptional } from "@/contexts/NotificationContext";
+import { useTranslations } from "next-intl";
+import { AnimatePresence, motion } from "framer-motion";
+import type { InAppNotification, SnoozeDuration } from "@/types/notifications";
 
-type FilterTab = 'all' | 'unread' | 'snoozed';
+type FilterTab = "all" | "unread" | "snoozed";
 
 interface NotificationCenterProps {
   className?: string;
@@ -32,10 +26,10 @@ interface NotificationCenterProps {
 }
 
 export function NotificationCenter({ className, compact = false }: NotificationCenterProps) {
-  const t = useTranslations('notifications');
+  const t = useTranslations("notifications");
   const context = useNotificationsOptional();
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<FilterTab>('all');
+  const [activeTab, setActiveTab] = useState<FilterTab>("all");
   const panelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -53,46 +47,41 @@ export function NotificationCenter({ className, compact = false }: NotificationC
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen]);
 
   // Close on Escape
   useEffect(() => {
     function handleEscape(event: KeyboardEvent) {
-      if (event.key === 'Escape' && isOpen) {
+      if (event.key === "Escape" && isOpen) {
         setIsOpen(false);
         buttonRef.current?.focus();
       }
     }
 
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, [isOpen]);
 
   // Don't render if context is not available
   if (!context) {
     // Debug: show that component mounted but context missing
-    console.warn('[NotificationCenter] Context not available - NotificationProvider may be missing');
+    console.warn(
+      "[NotificationCenter] Context not available - NotificationProvider may be missing"
+    );
     return null;
   }
 
-  const {
-    notifications,
-    unreadCount,
-    markAsRead,
-    markAllAsRead,
-    snooze,
-    dismiss,
-    clearAll,
-  } = context;
+  const { notifications, unreadCount, markAsRead, markAllAsRead, snooze, dismiss, clearAll } =
+    context;
 
   // Filter notifications based on active tab
   const filteredNotifications = notifications.filter((n) => {
-    if (activeTab === 'unread') return n.status === 'unread';
-    if (activeTab === 'snoozed') return n.status === 'snoozed';
+    if (activeTab === "unread") return n.status === "unread";
+    if (activeTab === "snoozed") return n.status === "snoozed";
     // 'all' tab shows everything except dismissed
-    return n.status !== 'dismissed';
+    return n.status !== "dismissed";
   });
 
   const handleMarkAsRead = (id: string) => {
@@ -116,23 +105,20 @@ export function NotificationCenter({ className, compact = false }: NotificationC
   };
 
   return (
-    <div className={cn('relative', className)}>
+    <div className={cn("relative", className)}>
       {/* Bell Button */}
       <Button
         ref={buttonRef}
         variant="ghost"
-        size={compact ? 'icon' : 'sm'}
-        className={cn(
-          'relative',
-          compact ? 'h-9 w-9' : 'gap-2'
-        )}
+        size={compact ? "icon" : "sm"}
+        className={cn("relative", compact ? "h-9 w-9" : "gap-2")}
         onClick={() => setIsOpen(!isOpen)}
-        aria-label={t('title')}
+        aria-label={t("title")}
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <Bell className={cn('h-5 w-5', isOpen && 'text-teal-400')} />
-        {!compact && <span>{t('title')}</span>}
+        <Bell className={cn("h-5 w-5", isOpen && "text-teal-400")} />
+        {!compact && <span>{t("title")}</span>}
         <NotificationBadge count={unreadCount} />
       </Button>
 
@@ -146,17 +132,17 @@ export function NotificationCenter({ className, compact = false }: NotificationC
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.15 }}
             className={cn(
-              'absolute right-0 top-full mt-2 z-50',
-              'w-[380px] max-h-[500px] overflow-hidden',
-              'rounded-xl border border-white/10 bg-slate-900/95 backdrop-blur-xl shadow-2xl',
-              'flex flex-col'
+              "absolute end-0 top-full z-50 mt-2",
+              "max-h-[500px] w-[380px] overflow-hidden",
+              "rounded-xl border border-white/10 bg-slate-900/95 shadow-2xl backdrop-blur-xl",
+              "flex flex-col"
             )}
             role="dialog"
-            aria-label={t('title')}
+            aria-label={t("title")}
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
-              <h2 className="text-sm font-semibold text-white">{t('title')}</h2>
+              <h2 className="text-sm font-semibold text-white">{t("title")}</h2>
               <div className="flex items-center gap-1">
                 {unreadCount > 0 && (
                   <Button
@@ -165,8 +151,8 @@ export function NotificationCenter({ className, compact = false }: NotificationC
                     className="h-7 text-xs"
                     onClick={handleMarkAllAsRead}
                   >
-                    <Check className="mr-1 h-3 w-3" />
-                    {t('markAllRead')}
+                    <Check className="me-1 h-3 w-3" />
+                    {t("markAllRead")}
                   </Button>
                 )}
                 {notifications.length > 0 && (
@@ -176,8 +162,8 @@ export function NotificationCenter({ className, compact = false }: NotificationC
                     className="h-7 text-xs text-slate-400 hover:text-red-400"
                     onClick={handleClearAll}
                   >
-                    <Trash2 className="mr-1 h-3 w-3" />
-                    {t('clearAll')}
+                    <Trash2 className="me-1 h-3 w-3" />
+                    {t("clearAll")}
                   </Button>
                 )}
               </div>
@@ -185,51 +171,44 @@ export function NotificationCenter({ className, compact = false }: NotificationC
 
             {/* Tabs */}
             <div className="border-b border-white/10 px-4 py-2">
-              <Tabs
-                value={activeTab}
-                onValueChange={(v) => setActiveTab(v as FilterTab)}
-              >
+              <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as FilterTab)}>
                 <TabsList className="grid w-full grid-cols-3 bg-white/5">
                   <TabsTrigger value="all" className="text-xs">
-                    {t('tabs.all')}
+                    {t("tabs.all")}
                   </TabsTrigger>
                   <TabsTrigger value="unread" className="text-xs">
-                    {t('tabs.unread')}
+                    {t("tabs.unread")}
                     {unreadCount > 0 && (
-                      <span className="ml-1 text-[10px] text-teal-400">
-                        ({unreadCount})
-                      </span>
+                      <span className="ms-1 text-[10px] text-teal-400">({unreadCount})</span>
                     )}
                   </TabsTrigger>
                   <TabsTrigger value="snoozed" className="text-xs">
-                    {t('tabs.snoozed')}
+                    {t("tabs.snoozed")}
                   </TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
 
             {/* Notifications List */}
-            <div className="flex-1 overflow-y-auto custom-scrollbar">
+            <div className="custom-scrollbar flex-1 overflow-y-auto">
               {filteredNotifications.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
+                <div className="flex flex-col items-center justify-center px-4 py-12 text-center">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-800">
-                    {activeTab === 'unread' ? (
+                    {activeTab === "unread" ? (
                       <Check className="h-6 w-6 text-slate-500" />
-                    ) : activeTab === 'snoozed' ? (
+                    ) : activeTab === "snoozed" ? (
                       <BellOff className="h-6 w-6 text-slate-500" />
                     ) : (
                       <Inbox className="h-6 w-6 text-slate-500" />
                     )}
                   </div>
-                  <p className="mt-3 text-sm font-medium text-slate-400">
-                    {t('empty')}
-                  </p>
+                  <p className="mt-3 text-sm font-medium text-slate-400">{t("empty")}</p>
                   <p className="mt-1 text-xs text-slate-500">
-                    {activeTab === 'unread'
-                      ? t('emptyUnread')
-                      : activeTab === 'snoozed'
-                      ? t('emptySnoozed')
-                      : t('emptyAll')}
+                    {activeTab === "unread"
+                      ? t("emptyUnread")
+                      : activeTab === "snoozed"
+                        ? t("emptySnoozed")
+                        : t("emptyAll")}
                   </p>
                 </div>
               ) : (

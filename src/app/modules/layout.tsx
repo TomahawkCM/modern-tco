@@ -9,10 +9,6 @@ import { LearningProviders } from "@/app/heavy-providers";
  * This layout ensures contexts are only loaded for module/learning routes,
  * improving performance for other pages.
  */
-export default function ModulesLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ModulesLayout({ children }: { children: React.ReactNode }) {
   return <LearningProviders>{children}</LearningProviders>;
 }

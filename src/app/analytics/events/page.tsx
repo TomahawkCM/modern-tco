@@ -61,67 +61,69 @@ export default function AnalyticsEventsPage() {
   }, []);
 
   return (
-      <div className="mx-auto max-w-6xl space-y-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-foreground">Analytics Events</h1>
-          <div className="flex gap-2">
-            <Input
-              placeholder="Search events (type, text, session, user)"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="w-80 bg-white/5 text-foreground placeholder:text-foreground/40"
-            />
-            <Button onClick={load} disabled={loading} className="bg-tanium-accent">
-              {loading ? "Refreshing..." : "Refresh"}
-            </Button>
-          </div>
+    <div className="mx-auto max-w-6xl space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold text-foreground">Analytics Events</h1>
+        <div className="flex gap-2">
+          <Input
+            placeholder="Search events (type, text, session, user)"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-80 bg-white/5 text-foreground placeholder:text-foreground/40"
+          />
+          <Button onClick={load} disabled={loading} className="bg-tanium-accent">
+            {loading ? "Refreshing..." : "Refresh"}
+          </Button>
         </div>
-
-        {error && (
-          <div className="rounded border border-red-500/30 bg-red-500/10 p-3 text-red-300">
-            {error}
-          </div>
-        )}
-
-        <Card className="glass border-white/10">
-          <CardHeader>
-            <CardTitle className="text-foreground">Recent Events ({filtered.length})</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="overflow-auto">
-              <table className="w-full table-fixed border-separate border-spacing-y-2">
-                <thead>
-                  <tr className="text-left text-sm text-foreground/70">
-                    <th className="w-40 px-2">Timestamp</th>
-                    <th className="w-40 px-2">Type</th>
-                    <th className="w-40 px-2">Session</th>
-                    <th className="w-40 px-2">User</th>
-                    <th className="px-2">Data</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.map((e) => (
-                    <tr key={e.event_id} className="text-sm text-foreground/90">
-                      <td className="px-2 align-top whitespace-nowrap">
-                        {new Date(e.event_timestamp).toLocaleString()}
-                      </td>
-                      <td className="px-2 align-top">
-                        <span className="rounded bg-white/10 px-2 py-1 text-foreground">{e.event_type}</span>
-                      </td>
-                      <td className="px-2 align-top">{e.session_id ?? ""}</td>
-                      <td className="px-2 align-top">{e.user_id ?? ""}</td>
-                      <td className="px-2 align-top">
-                        <pre className="max-h-40 overflow-auto whitespace-pre-wrap break-words rounded bg-black/20 p-2 text-xs text-foreground/70">
-                          {JSON.stringify(e.event_data ?? {}, null, 2)}
-                        </pre>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </CardContent>
-        </Card>
       </div>
+
+      {error && (
+        <div className="rounded border border-red-500/30 bg-red-500/10 p-3 text-red-300">
+          {error}
+        </div>
+      )}
+
+      <Card className="glass border-white/10">
+        <CardHeader>
+          <CardTitle className="text-foreground">Recent Events ({filtered.length})</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-auto">
+            <table className="w-full table-fixed border-separate border-spacing-y-2">
+              <thead>
+                <tr className="text-left text-sm text-foreground/70">
+                  <th className="w-40 px-2">Timestamp</th>
+                  <th className="w-40 px-2">Type</th>
+                  <th className="w-40 px-2">Session</th>
+                  <th className="w-40 px-2">User</th>
+                  <th className="px-2">Data</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.map((e) => (
+                  <tr key={e.event_id} className="text-sm text-foreground/90">
+                    <td className="whitespace-nowrap px-2 align-top">
+                      {new Date(e.event_timestamp).toLocaleString()}
+                    </td>
+                    <td className="px-2 align-top">
+                      <span className="rounded bg-white/10 px-2 py-1 text-foreground">
+                        {e.event_type}
+                      </span>
+                    </td>
+                    <td className="px-2 align-top">{e.session_id ?? ""}</td>
+                    <td className="px-2 align-top">{e.user_id ?? ""}</td>
+                    <td className="px-2 align-top">
+                      <pre className="max-h-40 overflow-auto whitespace-pre-wrap break-words rounded bg-black/20 p-2 text-xs text-foreground/70">
+                        {JSON.stringify(e.event_data ?? {}, null, 2)}
+                      </pre>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }

@@ -11,14 +11,14 @@
  * - Tracking: Supabase 'exam_sessions' table
  */
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import {
   type MockExamTemplate,
   getMockExamTemplate,
   calculateDomainQuestionCounts,
   calculateDifficultyQuestionCounts,
-} from '@/data/mock-exam-configs';
-import type { Question, TCODomain } from '@/types/exam';
+} from "@/data/mock-exam-configs";
+import type { Question, TCODomain } from "@/types/exam";
 
 // =====================================================
 // TYPES
@@ -43,7 +43,7 @@ export interface MockExamSession {
   expiresAt: string; // startedAt + timeLimitMinutes
 
   // Status
-  status: 'active' | 'completed' | 'expired';
+  status: "active" | "completed" | "expired";
 
   // Metadata stored in exam_sessions.config JSONB
   config: {
@@ -92,7 +92,7 @@ export interface MockExamResult {
  */
 interface QuestionSelectionCriteria {
   domain: TCODomain;
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: "easy" | "medium" | "hard";
   count: number;
 }
 
@@ -141,11 +141,11 @@ export async function createMockExamSession(
   const expiresAt = new Date(startedAt.getTime() + template.timeLimitMinutes * 60 * 1000);
 
   const { data: session, error } = await supabase
-    .from('exam_sessions')
+    .from("exam_sessions")
     .insert({
       user_id: userId,
       started_at: startedAt.toISOString(),
-      status: 'active',
+      status: "active",
       total_questions: shuffledQuestions.length,
       config: {
         templateId: template.id,
@@ -162,7 +162,7 @@ export async function createMockExamSession(
     .single();
 
   if (error) {
-    console.error('Error creating mock exam session:', error);
+    console.error("Error creating mock exam session:", error);
     return null;
   }
 
@@ -176,7 +176,7 @@ export async function createMockExamSession(
     timeLimitMinutes: template.timeLimitMinutes,
     startedAt: startedAt.toISOString(),
     expiresAt: expiresAt.toISOString(),
-    status: 'active',
+    status: "active",
     config: session.config,
   };
 }
@@ -193,36 +193,33 @@ export async function completeMockExamSession(
 
   // Get exam session
   const { data: session, error: sessionError } = await supabase
-    .from('exam_sessions')
-    .select('*')
-    .eq('id', sessionId)
-    .eq('user_id', userId)
+    .from("exam_sessions")
+    .select("*")
+    .eq("id", sessionId)
+    .eq("user_id", userId)
     .single();
 
   if (sessionError || !session) {
-    console.error('Error fetching exam session:', sessionError);
+    console.error("Error fetching exam session:", sessionError);
     return null;
   }
 
   // Get questions
   const questionIds = session.config.questionIds || [];
   const { data: questions, error: questionsError } = await supabase
-    .from('questions')
-    .select('*')
-    .in('id', questionIds);
+    .from("questions")
+    .select("*")
+    .in("id", questionIds);
 
   if (questionsError || !questions) {
-    console.error('Error fetching questions:', questionsError);
+    console.error("Error fetching questions:", questionsError);
     return null;
   }
 
   // Calculate scores
   let correctAnswers = 0;
-  const answerDetails: MockExamResult['answers'] = [];
-  const domainScores: Record<
-    TCODomain,
-    { correct: number; total: number; percentage: number }
-  > = {
+  const answerDetails: MockExamResult["answers"] = [];
+  const domainScores: Record<TCODomain, { correct: number; total: number; percentage: number }> = {
     asking_questions: { correct: 0, total: 0, percentage: 0 },
     refining_targeting: { correct: 0, total: 0, percentage: 0 },
     taking_action: { correct: 0, total: 0, percentage: 0 },
@@ -249,10 +246,10 @@ export async function completeMockExamSession(
 
     answerDetails.push({
       questionId: question.id,
-      selectedAnswer: selectedAnswer || '',
-      correctAnswer: correctAnswer || '',
+      selectedAnswer: selectedAnswer || "",
+      correctAnswer: correctAnswer || "",
       isCorrect,
-      domain: domain || 'asking_questions',
+      domain: domain || "asking_questions",
     });
   });
 
@@ -273,17 +270,17 @@ export async function completeMockExamSession(
 
   // Update exam session
   const { error: updateError } = await supabase
-    .from('exam_sessions')
+    .from("exam_sessions")
     .update({
       completed_at: completedAt.toISOString(),
-      status: 'completed',
+      status: "completed",
       correct_answers: correctAnswers,
       score: scorePercentage,
     })
-    .eq('id', sessionId);
+    .eq("id", sessionId);
 
   if (updateError) {
-    console.error('Error updating exam session:', updateError);
+    console.error("Error updating exam session:", updateError);
   }
 
   return {
@@ -305,9 +302,7 @@ export async function completeMockExamSession(
 /**
  * Get user's mock exam history
  */
-export async function getMockExamHistory(
-  userId: string
-): Promise<
+export async function getMockExamHistory(userId: string): Promise<
   Array<{
     sessionId: string;
     templateId: string;
@@ -321,15 +316,15 @@ export async function getMockExamHistory(
   const supabase = createClientComponentClient();
 
   const { data: sessions, error } = await supabase
-    .from('exam_sessions')
-    .select('*')
-    .eq('user_id', userId)
-    .not('config->templateId', 'is', null) // Only mock exams
-    .eq('status', 'completed')
-    .order('completed_at', { ascending: false });
+    .from("exam_sessions")
+    .select("*")
+    .eq("user_id", userId)
+    .not("config->templateId", "is", null) // Only mock exams
+    .eq("status", "completed")
+    .order("completed_at", { ascending: false });
 
   if (error) {
-    console.error('Error fetching mock exam history:', error);
+    console.error("Error fetching mock exam history:", error);
     return [];
   }
 
@@ -337,9 +332,7 @@ export async function getMockExamHistory(
     sessions?.map((session) => {
       const startedAt = new Date(session.started_at);
       const completedAt = new Date(session.completed_at || session.started_at);
-      const timeTakenMinutes = Math.round(
-        (completedAt.getTime() - startedAt.getTime()) / 60000
-      );
+      const timeTakenMinutes = Math.round((completedAt.getTime() - startedAt.getTime()) / 60000);
 
       return {
         sessionId: session.id,
@@ -364,18 +357,18 @@ export async function getMockExamHistory(
  */
 function buildSelectionCriteria(
   domainCounts: Record<TCODomain, number>,
-  difficultyCounts: Record<'easy' | 'medium' | 'hard', number>,
+  difficultyCounts: Record<"easy" | "medium" | "hard", number>,
   template: MockExamTemplate
 ): QuestionSelectionCriteria[] {
   const criteria: QuestionSelectionCriteria[] = [];
   const domains: TCODomain[] = [
-    'asking_questions',
-    'refining_targeting',
-    'taking_action',
-    'navigation',
-    'reporting',
+    "asking_questions",
+    "refining_targeting",
+    "taking_action",
+    "navigation",
+    "reporting",
   ];
-  const difficulties: Array<'easy' | 'medium' | 'hard'> = ['easy', 'medium', 'hard'];
+  const difficulties: Array<"easy" | "medium" | "hard"> = ["easy", "medium", "hard"];
 
   // For each domain
   domains.forEach((domain) => {
@@ -407,10 +400,10 @@ async function selectQuestions(
 
   for (const criterion of criteria) {
     const { data, error } = await supabase
-      .from('questions')
-      .select('*')
-      .eq('domain', criterion.domain)
-      .eq('difficulty', criterion.difficulty)
+      .from("questions")
+      .select("*")
+      .eq("domain", criterion.domain)
+      .eq("difficulty", criterion.difficulty)
       .limit(criterion.count);
 
     if (error) {

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 /**
  * Quick Categorize Dialog - Ultra-Modern Command Palette
  * Searchable, keyboard-navigable category selection with explicit save
  */
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from "react";
 import {
   CommandDialog,
   CommandEmpty,
@@ -13,12 +13,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
-import { DialogTitle } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Tag, ChevronRight, Check, Loader2 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import type { Category, Transaction } from '@/types/budget';
+} from "@/components/ui/command";
+import { DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Tag, ChevronRight, Check, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
+import type { Category, Transaction } from "@/types/budget";
 
 interface QuickCategorizeDialogProps {
   open: boolean;
@@ -35,8 +35,8 @@ export function QuickCategorizeDialog({
   onSelect,
   transaction,
 }: QuickCategorizeDialogProps) {
-  const t = useTranslations('quickCategorize');
-  const [search, setSearch] = useState('');
+  const t = useTranslations("quickCategorize");
+  const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -44,7 +44,7 @@ export function QuickCategorizeDialog({
   // Clear state when dialog closes
   useEffect(() => {
     if (!open) {
-      setSearch('');
+      setSearch("");
       setSelectedCategory(null);
       setSelectedSubcategory(null);
       setIsSaving(false);
@@ -64,7 +64,7 @@ export function QuickCategorizeDialog({
       await onSelect(selectedCategory, selectedSubcategory);
       // Parent will close dialog after successful save
     } catch (error) {
-      console.error('Save failed:', error);
+      console.error("Save failed:", error);
       setIsSaving(false);
     }
   }, [selectedCategory, selectedSubcategory, onSelect]);
@@ -78,14 +78,14 @@ export function QuickCategorizeDialog({
     if (!open || !selectedCategory || isSaving) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
+      if (e.key === "Enter") {
         e.preventDefault();
         handleSave();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [open, selectedCategory, isSaving, handleSave]);
 
   const isSelected = (category: string, subcategory: string | null) => {
@@ -94,14 +94,10 @@ export function QuickCategorizeDialog({
 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
-      <DialogTitle className="sr-only">{t('title')}</DialogTitle>
-      <CommandInput
-        placeholder={t('searchPlaceholder')}
-        value={search}
-        onValueChange={setSearch}
-      />
+      <DialogTitle className="sr-only">{t("title")}</DialogTitle>
+      <CommandInput placeholder={t("searchPlaceholder")} value={search} onValueChange={setSearch} />
       <CommandList>
-        <CommandEmpty>{t('noResults')}</CommandEmpty>
+        <CommandEmpty>{t("noResults")}</CommandEmpty>
 
         {categories.map((cat) => (
           <CommandGroup key={cat.id} heading={cat.name}>
@@ -109,16 +105,16 @@ export function QuickCategorizeDialog({
             <CommandItem
               onSelect={() => handleSelect(cat.name, null)}
               className={`flex items-center gap-2 ${
-                isSelected(cat.name, null) ? 'bg-teal-50 text-teal-900' : ''
+                isSelected(cat.name, null) ? "bg-teal-50 text-teal-900" : ""
               }`}
             >
               {isSelected(cat.name, null) ? (
-                <Check className="w-4 h-4 text-teal-600" />
+                <Check className="h-4 w-4 text-teal-600" />
               ) : (
-                <Tag className="w-4 h-4 text-teal-600" />
+                <Tag className="h-4 w-4 text-teal-600" />
               )}
               <span className="font-medium">{cat.name}</span>
-              <span className="ml-auto text-xs text-gray-500">{t('general')}</span>
+              <span className="ml-auto text-xs text-gray-500">{t("general")}</span>
             </CommandItem>
 
             {/* Subcategories */}
@@ -127,13 +123,13 @@ export function QuickCategorizeDialog({
                 key={`${cat.id}-${sub}`}
                 onSelect={() => handleSelect(cat.name, sub)}
                 className={`flex items-center gap-2 pl-6 ${
-                  isSelected(cat.name, sub) ? 'bg-teal-50 text-teal-900' : ''
+                  isSelected(cat.name, sub) ? "bg-teal-50 text-teal-900" : ""
                 }`}
               >
                 {isSelected(cat.name, sub) ? (
-                  <Check className="w-3 h-3 text-teal-600" />
+                  <Check className="h-3 w-3 text-teal-600" />
                 ) : (
-                  <ChevronRight className="w-3 h-3 text-gray-400" />
+                  <ChevronRight className="h-3 w-3 text-gray-400" />
                 )}
                 <span>{sub}</span>
               </CommandItem>
@@ -143,7 +139,7 @@ export function QuickCategorizeDialog({
       </CommandList>
 
       {/* Action buttons footer */}
-      <div className="border-t border-gray-200 p-3 flex items-center justify-between bg-gray-50">
+      <div className="flex items-center justify-between border-t border-gray-200 bg-gray-50 p-3">
         <div className="text-xs text-gray-500">
           {selectedCategory ? (
             <span className="font-medium text-teal-700">
@@ -151,13 +147,11 @@ export function QuickCategorizeDialog({
               {selectedSubcategory && ` - ${selectedSubcategory}`}
             </span>
           ) : (
-            <span>{t('clickToSelect')}</span>
+            <span>{t("clickToSelect")}</span>
           )}
         </div>
         <div className="flex items-center gap-3">
-          {selectedCategory && (
-            <span className="text-xs text-gray-400">{t('pressEnter')}</span>
-          )}
+          {selectedCategory && <span className="text-xs text-gray-400">{t("pressEnter")}</span>}
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"
@@ -166,7 +160,7 @@ export function QuickCategorizeDialog({
               disabled={isSaving}
               className="h-8"
             >
-              {t('buttons.cancel')}
+              {t("buttons.cancel")}
             </Button>
             <Button
               size="sm"
@@ -176,13 +170,13 @@ export function QuickCategorizeDialog({
             >
               {isSaving ? (
                 <>
-                  <Loader2 className="w-3 h-3 mr-1.5 animate-spin" />
-                  {t('saving')}
+                  <Loader2 className="mr-1.5 h-3 w-3 animate-spin" />
+                  {t("saving")}
                 </>
               ) : (
                 <>
-                  <Check className="w-3 h-3 mr-1.5" />
-                  {t('buttons.save')}
+                  <Check className="mr-1.5 h-3 w-3" />
+                  {t("buttons.save")}
                 </>
               )}
             </Button>

@@ -13,31 +13,31 @@
  * Privacy: Only returns normalized merchant tokens, never raw transaction data.
  */
 
-export type BankType = 'bmo' | 'generic';
+export type BankType = "bmo" | "generic";
 
 /**
  * Generic tokens that should not be used as merchant identifiers
  * These are too broad to classify meaningfully
  */
 const GENERIC_TOKENS = new Set([
-  'ONLINE PURCHASE',
-  'ONLINE',  // Added to catch "ONLINE" after "PURCHASE" is stripped
-  'PURCHASE',
-  'PAYMENT',
-  'TRANSFER',
-  'DEBIT',
-  'CREDIT',
-  'WITHDRAWAL',
-  'DEPOSIT',
-  'ATM',
-  'INTERAC',
-  'E-TRANSFER',
-  'ETRANSFER',
-  'CHEQUE',
-  'CHECK',
-  'FEE',
-  'CHARGE',
-  'REFUND',
+  "ONLINE PURCHASE",
+  "ONLINE", // Added to catch "ONLINE" after "PURCHASE" is stripped
+  "PURCHASE",
+  "PAYMENT",
+  "TRANSFER",
+  "DEBIT",
+  "CREDIT",
+  "WITHDRAWAL",
+  "DEPOSIT",
+  "ATM",
+  "INTERAC",
+  "E-TRANSFER",
+  "ETRANSFER",
+  "CHEQUE",
+  "CHECK",
+  "FEE",
+  "CHARGE",
+  "REFUND",
 ]);
 
 /**
@@ -54,14 +54,14 @@ function cleanBMODescription(description: string): string {
   const isOnlinePurchase = /^\[OP\]/i.test(cleaned);
 
   // Remove BMO-specific prefixes: [PR], [OP], etc.
-  cleaned = cleaned.replace(/^\[[A-Z]{2}\]/i, '').trim();
+  cleaned = cleaned.replace(/^\[[A-Z]{2}\]/i, "").trim();
 
   if (isOnlinePurchase) {
     // Handle [OP] format: "ONLINE PURCHASE  1AUG2025SKIPTHEDISHES MB"
     // Extract merchant from: TYPE  DATEMERCHANTNAME LOCATION
 
     // Remove "ONLINE PURCHASE" prefix
-    cleaned = cleaned.replace(/^ONLINE PURCHASE\s*/i, '').trim();
+    cleaned = cleaned.replace(/^ONLINE PURCHASE\s*/i, "").trim();
 
     // Find date pattern and capture everything after it: \d{1,2}[A-Z]{3}\d{4}(.+)
     const dateMatch = cleaned.match(/\d{1,2}[A-Z]{3}\d{4}(.+)/);
@@ -70,10 +70,10 @@ function cleanBMODescription(description: string): string {
       let merchant = dateMatch[1].trim();
 
       // Remove trailing data: #numbers, 2-letter location codes, email addresses
-      merchant = merchant.replace(/#\d+.*$/, '').trim(); // Remove # and everything after
-      merchant = merchant.replace(/\s+\S+@\S+\.\S+.*$/, '').trim(); // Remove email addresses
-      merchant = merchant.replace(/\s+\d{3,}\s*$/, '').trim(); // Remove trailing numbers (3+ digits)
-      merchant = merchant.replace(/\s+([A-Z]{2}|CAN)\s*$/i, '').trim(); // Remove province/country
+      merchant = merchant.replace(/#\d+.*$/, "").trim(); // Remove # and everything after
+      merchant = merchant.replace(/\s+\S+@\S+\.\S+.*$/, "").trim(); // Remove email addresses
+      merchant = merchant.replace(/\s+\d{3,}\s*$/, "").trim(); // Remove trailing numbers (3+ digits)
+      merchant = merchant.replace(/\s+([A-Z]{2}|CAN)\s*$/i, "").trim(); // Remove province/country
 
       return merchant;
     }
@@ -84,11 +84,11 @@ function cleanBMODescription(description: string): string {
 
   // Handle [PR] physical purchases (original logic)
   // Remove location info (multiple spaces followed by location)
-  cleaned = cleaned.replace(/\s{2,}.*$/, '').trim();
+  cleaned = cleaned.replace(/\s{2,}.*$/, "").trim();
 
   // Remove trailing # numbers and location codes
-  cleaned = cleaned.replace(/\s+#\d+.*$/, '').trim();
-  cleaned = cleaned.replace(/\s+(AB|BC|ON|QC|MB|SK|NS|NB|PE|NL|YT|NT|NU|CAN)(\s+.*)?$/i, '').trim();
+  cleaned = cleaned.replace(/\s+#\d+.*$/, "").trim();
+  cleaned = cleaned.replace(/\s+(AB|BC|ON|QC|MB|SK|NS|NB|PE|NL|YT|NT|NU|CAN)(\s+.*)?$/i, "").trim();
 
   return cleaned;
 }
@@ -100,42 +100,42 @@ function cleanBMODescription(description: string): string {
  * Enhanced for merchant token extraction
  */
 function extractGenericVendor(description: string): string {
-  if (!description) return '';
+  if (!description) return "";
 
   let vendor = description.toUpperCase().trim();
 
   // Remove bank statement prefixes / bracketed tags
-  vendor = vendor.replace(/^\[[A-Z]+\]\s*/i, ''); // e.g. [PR], [DS], [OP]
-  vendor = vendor.replace(/^\[ONLINE PURCHASE\]\s*/i, '');
+  vendor = vendor.replace(/^\[[A-Z]+\]\s*/i, ""); // e.g. [PR], [DS], [OP]
+  vendor = vendor.replace(/^\[ONLINE PURCHASE\]\s*/i, "");
 
   // Legacy specific prefixes (kept for backward compatibility)
-  vendor = vendor.replace(/^PURCHASE\s+/i, '');
-  vendor = vendor.replace(/^PAYMENT\s+/i, '');
-  vendor = vendor.replace(/^DEBIT\s+/i, '');
-  vendor = vendor.replace(/^POS\s+/i, '');
+  vendor = vendor.replace(/^PURCHASE\s+/i, "");
+  vendor = vendor.replace(/^PAYMENT\s+/i, "");
+  vendor = vendor.replace(/^DEBIT\s+/i, "");
+  vendor = vendor.replace(/^POS\s+/i, "");
 
   // Remove transaction IDs (e.g., #260, #123)
-  vendor = vendor.replace(/#\d+/g, '');
+  vendor = vendor.replace(/#\d+/g, "");
 
   // Remove dates in various formats
-  vendor = vendor.replace(/\d{1,2}[A-Z]{3}\d{2,4}/gi, ''); // 4NOV20, 11NOV2025
-  vendor = vendor.replace(/\d{1,2}\/\d{1,2}\/\d{2,4}/g, ''); // 11/7/2025
-  vendor = vendor.replace(/\d{4}-\d{2}-\d{2}/g, ''); // 2025-11-07
+  vendor = vendor.replace(/\d{1,2}[A-Z]{3}\d{2,4}/gi, ""); // 4NOV20, 11NOV2025
+  vendor = vendor.replace(/\d{1,2}\/\d{1,2}\/\d{2,4}/g, ""); // 11/7/2025
+  vendor = vendor.replace(/\d{4}-\d{2}-\d{2}/g, ""); // 2025-11-07
 
   // Remove email addresses
-  vendor = vendor.replace(/\s+\S+@\S+\.\S+.*$/, ''); // Remove email and everything after
+  vendor = vendor.replace(/\s+\S+@\S+\.\S+.*$/, ""); // Remove email and everything after
 
   // Remove common location indicators (word boundary to avoid matching "NS" in "HORTONS")
-  vendor = vendor.replace(/\s+\b(AB|BC|ON|QC|SK|MB|NB|NS|PE|NL|YT|NT|NU)\b\s*$/i, ''); // Canadian provinces
-  vendor = vendor.replace(/\s+CANADA\s*$/i, '');
-  vendor = vendor.replace(/\s+CA\s*$/i, '');
-  vendor = vendor.replace(/\s+(EDMONTON|CALGARY|TORONTO|VANCOUVER|MONTREAL|OTTAWA)\s*$/i, ''); // Cities
+  vendor = vendor.replace(/\s+\b(AB|BC|ON|QC|SK|MB|NB|NS|PE|NL|YT|NT|NU)\b\s*$/i, ""); // Canadian provinces
+  vendor = vendor.replace(/\s+CANADA\s*$/i, "");
+  vendor = vendor.replace(/\s+CA\s*$/i, "");
+  vendor = vendor.replace(/\s+(EDMONTON|CALGARY|TORONTO|VANCOUVER|MONTREAL|OTTAWA)\s*$/i, ""); // Cities
 
   // Remove trailing reference numbers/codes (must contain at least one digit to avoid removing merchant names)
-  vendor = vendor.replace(/\s+[A-Z0-9]*\d[A-Z0-9]{5,}\s*$/, ''); // Long alphanumeric codes with digits
+  vendor = vendor.replace(/\s+[A-Z0-9]*\d[A-Z0-9]{5,}\s*$/, ""); // Long alphanumeric codes with digits
 
   // Clean up extra whitespace
-  vendor = vendor.replace(/\s+/g, ' ').trim();
+  vendor = vendor.replace(/\s+/g, " ").trim();
 
   return vendor;
 }
@@ -192,13 +192,13 @@ function isValidMerchantToken(token: string): boolean {
  */
 export function extractMerchantToken(
   description: string,
-  bankType: BankType = 'generic'
+  bankType: BankType = "generic"
 ): string | null {
   if (!description) return null;
 
   // Step 1: Bank-specific normalization
   let token: string;
-  if (bankType === 'bmo') {
+  if (bankType === "bmo") {
     token = cleanBMODescription(description);
   } else {
     token = extractGenericVendor(description);
@@ -225,7 +225,7 @@ export function extractMerchantToken(
  */
 export function batchExtractMerchantTokens(
   descriptions: string[],
-  bankType: BankType = 'generic'
+  bankType: BankType = "generic"
 ): Map<string, string | null> {
   const results = new Map<string, string | null>();
 
@@ -247,7 +247,7 @@ export function batchExtractMerchantTokens(
  */
 export function getUniqueMerchantTokens(
   descriptions: string[],
-  bankType: BankType = 'generic'
+  bankType: BankType = "generic"
 ): Set<string> {
   const tokens = new Set<string>();
 

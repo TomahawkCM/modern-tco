@@ -87,8 +87,8 @@ export function useStudyProgress() {
     // Database doesn't have completion_percentage field
     // Calculate based on status: completed = 100%, in_progress = 50%, not_started = 0%
     if (!sectionProgress) return 0;
-    if (sectionProgress.status === 'completed' || sectionProgress.completed_at) return 100;
-    if (sectionProgress.status === 'in_progress') return 50;
+    if (sectionProgress.status === "completed" || sectionProgress.completed_at) return 100;
+    if (sectionProgress.status === "in_progress") return 50;
     return 0;
   };
 

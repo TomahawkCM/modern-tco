@@ -1,24 +1,21 @@
-'use client';
+"use client";
 
 import videoManifest from "@/content/videos/manifest.json";
 import type { ModuleManifest } from "@/types/manifest";
 import dynamic from "next/dynamic";
 
 // Lazy load VideoEmbed to reduce initial bundle size (saves ~20-30 KB)
-const VideoEmbed = dynamic(
-  () => import("@/components/videos/VideoEmbed"),
-  {
-    loading: () => (
-      <div className="aspect-video flex items-center justify-center bg-gray-900 rounded-lg">
-        <div className="text-center space-y-2">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-500 mx-auto"></div>
-          <p className="text-muted-foreground text-xs">Loading video player...</p>
-        </div>
+const VideoEmbed = dynamic(() => import("@/components/videos/VideoEmbed"), {
+  loading: () => (
+    <div className="flex aspect-video items-center justify-center rounded-lg bg-gray-900">
+      <div className="space-y-2 text-center">
+        <div className="mx-auto h-8 w-8 animate-spin rounded-full border-b-2 border-cyan-500"></div>
+        <p className="text-xs text-muted-foreground">Loading video player...</p>
       </div>
-    ),
-    ssr: false
-  }
-);
+    </div>
+  ),
+  ssr: false,
+});
 
 function toEnvKey(slug: string) {
   return `NEXT_PUBLIC_VIDEOS_${slug.replace(/[^a-z0-9]/gi, "_").toUpperCase()}`;
@@ -47,7 +44,10 @@ interface ModuleVideosProps {
 
 export function ModuleVideos({ slug }: ModuleVideosProps) {
   const data = videoManifest as unknown as {
-    modules: Array<{ slug: string; videos: Array<{ id: string; title: string; youtubeId: string; start?: number }> }>;
+    modules: Array<{
+      slug: string;
+      videos: Array<{ id: string; title: string; youtubeId: string; start?: number }>;
+    }>;
   };
   const entry = data.modules.find((m) => m.slug === slug);
 
@@ -56,22 +56,33 @@ export function ModuleVideos({ slug }: ModuleVideosProps) {
   const envValue = process.env[envKey];
   let videos = entry?.videos ?? [];
   if (envValue && envValue.trim().length > 0) {
-    const ids = envValue.split(",").map((s) => parseYouTubeId(s)).filter(Boolean) as string[];
+    const ids = envValue
+      .split(",")
+      .map((s) => parseYouTubeId(s))
+      .filter(Boolean) as string[];
     if (ids.length > 0) {
-      videos = ids.map((id, i) => ({ id: `${slug}-${i + 1}`, title: `Training Video ${i + 1}`, youtubeId: id }));
+      videos = ids.map((id, i) => ({
+        id: `${slug}-${i + 1}`,
+        title: `Training Video ${i + 1}`,
+        youtubeId: id,
+      }));
     }
   }
 
   // Client-side local override via localStorage (set by /videos/admin)
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     try {
-      const raw = localStorage.getItem('tco-videos-override');
+      const raw = localStorage.getItem("tco-videos-override");
       if (raw) {
         const map = JSON.parse(raw) as Record<string, string[]>;
         const arr = map[slug] || [];
         const ids = arr.map(parseYouTubeId).filter(Boolean) as string[];
         if (ids.length > 0) {
-          videos = ids.map((id, i) => ({ id: `${slug}-ls-${i + 1}`, title: `Training Video ${i + 1}`, youtubeId: id }));
+          videos = ids.map((id, i) => ({
+            id: `${slug}-ls-${i + 1}`,
+            title: `Training Video ${i + 1}`,
+            youtubeId: id,
+          }));
         }
       }
     } catch {}
@@ -87,8 +98,9 @@ export function ModuleVideos({ slug }: ModuleVideosProps) {
           No videos available yet for this module.
           {envValue ? (
             <>
-              {" "}A videos override was provided but could not be parsed. Ensure values are comma‑separated YouTube
-              URLs or IDs.
+              {" "}
+              A videos override was provided but could not be parsed. Ensure values are
+              comma‑separated YouTube URLs or IDs.
             </>
           ) : null}
         </p>

@@ -25,10 +25,7 @@ interface VideoAnalyticsDashboardProps {
  *
  * Research: Video learning increases engagement by 60% (Mayer, 2021)
  */
-export function VideoAnalyticsDashboard({
-  moduleSlug,
-  className,
-}: VideoAnalyticsDashboardProps) {
+export function VideoAnalyticsDashboard({ moduleSlug, className }: VideoAnalyticsDashboardProps) {
   const [analytics, setAnalytics] = useState<VideoAnalyticsSummary | null>(null);
   const [moduleCompletion, setModuleCompletion] = useState<Record<string, any>>({});
 
@@ -73,9 +70,9 @@ export function VideoAnalyticsDashboard({
             Video Analytics
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-center py-12">
+        <CardContent className="py-12 text-center">
           <Video className="mx-auto mb-4 h-16 w-16 text-gray-600 opacity-50" />
-          <p className="text-muted-foreground mb-2">No videos watched yet</p>
+          <p className="mb-2 text-muted-foreground">No videos watched yet</p>
           <p className="text-sm text-muted-foreground">
             Start watching videos to see your progress here
           </p>
@@ -103,9 +100,9 @@ export function VideoAnalyticsDashboard({
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Key Metrics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <Video className="h-4 w-4 text-primary" />
                 <span className="text-xs text-muted-foreground">Videos Watched</span>
               </div>
@@ -113,7 +110,7 @@ export function VideoAnalyticsDashboard({
             </div>
 
             <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5 p-4">
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
                 <span className="text-xs text-muted-foreground">Completed</span>
               </div>
@@ -121,7 +118,7 @@ export function VideoAnalyticsDashboard({
             </div>
 
             <div className="rounded-lg border border-accent/20 bg-accent/5 p-4">
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <Clock className="h-4 w-4 text-accent-foreground" />
                 <span className="text-xs text-muted-foreground">Watch Time</span>
               </div>
@@ -131,7 +128,7 @@ export function VideoAnalyticsDashboard({
             </div>
 
             <div className="rounded-lg border border-[#f97316]/20 bg-yellow-500/5 p-4">
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <TrendingUp className="h-4 w-4 text-[#f97316]" />
                 <span className="text-xs text-muted-foreground">Completion Rate</span>
               </div>
@@ -169,17 +166,14 @@ export function VideoAnalyticsDashboard({
               .map(([module, stats]) => (
                 <div key={module} className="space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground capitalize">
+                    <span className="text-sm capitalize text-muted-foreground">
                       {module.replace(/-/g, " ")}
                     </span>
                     <div className="flex items-center gap-2">
                       <span className="text-xs text-muted-foreground">
                         {stats.completed} / {stats.total}
                       </span>
-                      <Badge
-                        variant="outline"
-                        className={getCompletionColor(stats.percentage)}
-                      >
+                      <Badge variant="outline" className={getCompletionColor(stats.percentage)}>
                         {Math.round(stats.percentage)}%
                       </Badge>
                     </div>
@@ -207,7 +201,7 @@ export function VideoAnalyticsDashboard({
                 className="flex items-center justify-between rounded border border-gray-700/50 bg-card/30 p-3"
               >
                 <div className="flex-1">
-                  <div className="text-sm text-muted-foreground mb-1">{video.title}</div>
+                  <div className="mb-1 text-sm text-muted-foreground">{video.title}</div>
                   <div className="flex items-center gap-3 text-xs text-muted-foreground">
                     <span>{new Date(video.lastWatched).toLocaleDateString()}</span>
                     {video.moduleSlug && (
@@ -220,15 +214,16 @@ export function VideoAnalyticsDashboard({
                 </div>
                 <div className="flex items-center gap-2">
                   {video.completed ? (
-                    <Badge variant="outline" className="text-[#22c55e] border-green-400">
-                      <CheckCircle2 className="h-3 w-3 mr-1" />
+                    <Badge variant="outline" className="border-green-400 text-[#22c55e]">
+                      <CheckCircle2 className="mr-1 h-3 w-3" />
                       Complete
                     </Badge>
                   ) : (
-                    <Badge variant="outline" className="text-primary border-blue-400">
+                    <Badge variant="outline" className="border-blue-400 text-primary">
                       {Object.entries(video.milestones)
                         .reverse()
-                        .find(([_, reached]) => reached)?.[0] || "0"}%
+                        .find(([_, reached]) => reached)?.[0] || "0"}
+                      %
                     </Badge>
                   )}
                 </div>
@@ -254,16 +249,14 @@ export function VideoAnalyticsDashboard({
                 className="flex items-center justify-between rounded border border-gray-700/50 bg-card/30 p-3"
               >
                 <div className="flex-1">
-                  <div className="text-sm text-muted-foreground mb-1">{video.title}</div>
+                  <div className="mb-1 text-sm text-muted-foreground">{video.title}</div>
                   <div className="flex items-center gap-3 text-xs text-muted-foreground">
                     <span>{video.viewCount} views</span>
                     <span>•</span>
                     <span>{Math.round(video.totalWatchTime / 60)} min total</span>
                   </div>
                 </div>
-                {video.completed && (
-                  <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />
-                )}
+                {video.completed && <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />}
               </div>
             ))}
           </CardContent>

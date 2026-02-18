@@ -1,11 +1,13 @@
-const { writeFileSync } = require('node:fs');
+const { writeFileSync } = require("node:fs");
 
 const wsUrl = process.argv[2];
-const outputPath = process.argv[3] || 'tmp/devtools-screenshot.png';
-const targetUrl = process.argv[4] || 'http://127.0.0.1:3001/';
+const outputPath = process.argv[3] || "tmp/devtools-screenshot.png";
+const targetUrl = process.argv[4] || "http://127.0.0.1:3001/";
 
 if (!wsUrl) {
-  console.error('Usage: node tmp/devtools-screenshot.js <webSocketDebuggerUrl> [outputPath] [targetUrl]');
+  console.error(
+    "Usage: node tmp/devtools-screenshot.js <webSocketDebuggerUrl> [outputPath] [targetUrl]"
+  );
   process.exit(1);
 }
 
@@ -24,18 +26,18 @@ function send(method, params = {}) {
 
 ws.onopen = async () => {
   try {
-    await send('Page.enable');
-    await send('Runtime.enable');
-    await send('Network.enable');
-    await send('Emulation.setDeviceMetricsOverride', {
+    await send("Page.enable");
+    await send("Runtime.enable");
+    await send("Network.enable");
+    await send("Emulation.setDeviceMetricsOverride", {
       width: 1280,
       height: 720,
       deviceScaleFactor: 1,
       mobile: false,
     });
-    await send('Page.navigate', { url: targetUrl });
+    await send("Page.navigate", { url: targetUrl });
   } catch (error) {
-    console.error('Setup failed', error.message || error);
+    console.error("Setup failed", error.message || error);
     ws.close();
   }
 };
@@ -53,13 +55,13 @@ ws.onmessage = async (event) => {
     return;
   }
 
-  if (message.method === 'Page.loadEventFired') {
+  if (message.method === "Page.loadEventFired") {
     try {
-      const { data } = await send('Page.captureScreenshot', { format: 'png', fromSurface: true });
-      writeFileSync(outputPath, Buffer.from(data, 'base64'));
+      const { data } = await send("Page.captureScreenshot", { format: "png", fromSurface: true });
+      writeFileSync(outputPath, Buffer.from(data, "base64"));
       console.log(`Saved screenshot to ${outputPath}`);
     } catch (error) {
-      console.error('Screenshot failed', error.message || error);
+      console.error("Screenshot failed", error.message || error);
     } finally {
       ws.close();
     }
@@ -67,10 +69,10 @@ ws.onmessage = async (event) => {
 };
 
 ws.onerror = (error) => {
-  console.error('WebSocket error', error.message || error);
+  console.error("WebSocket error", error.message || error);
 };
 
 setTimeout(() => {
-  console.error('Timed out waiting for load event');
+  console.error("Timed out waiting for load event");
   ws.close();
 }, 10000);

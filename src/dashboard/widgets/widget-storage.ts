@@ -9,15 +9,15 @@
  * - On app init, checks Supabase for newer data and merges if needed
  */
 
-import type { DashboardConfig } from './types';
-import type { DeviceClass } from '@/lib/breakpoints';
-import { getDefaultPreset } from './presets';
+import type { DashboardConfig } from "./types";
+import type { DeviceClass } from "@/lib/breakpoints";
+import { getDefaultPreset } from "./presets";
 import {
   syncWidgetConfigToSupabase,
   loadWidgetConfigFromSupabase,
-} from '@/lib/supabase/user-preferences';
+} from "@/lib/supabase/user-preferences";
 
-const STORAGE_KEY = 'budget_app_widget_config';
+const STORAGE_KEY = "budget_app_widget_config";
 const CONFIG_VERSION = 1;
 
 /**
@@ -25,7 +25,7 @@ const CONFIG_VERSION = 1;
  * If no config exists, returns default preset based on device class
  */
 export function getWidgetConfig(deviceClass: DeviceClass): DashboardConfig {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return getDefaultPreset(deviceClass);
   }
 
@@ -50,13 +50,13 @@ export function getWidgetConfig(deviceClass: DeviceClass): DashboardConfig {
 
     // Validate required fields
     if (!config.widgets || !Array.isArray(config.widgets)) {
-      console.error('Invalid widget config structure');
+      console.error("Invalid widget config structure");
       return getDefaultPreset(deviceClass);
     }
 
     return config;
   } catch (error) {
-    console.error('Error loading widget config from localStorage:', error);
+    console.error("Error loading widget config from localStorage:", error);
     return getDefaultPreset(deviceClass);
   }
 }
@@ -67,7 +67,7 @@ export function getWidgetConfig(deviceClass: DeviceClass): DashboardConfig {
  * Syncs to Supabase (debounced, 1 second)
  */
 export function setWidgetConfig(config: DashboardConfig): void {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return;
   }
 
@@ -86,14 +86,14 @@ export function setWidgetConfig(config: DashboardConfig): void {
     syncWidgetConfigToSupabase(updatedConfig);
 
     // Dispatch custom event for cross-component sync
-    const event = new CustomEvent('widgetConfigChanged', {
+    const event = new CustomEvent("widgetConfigChanged", {
       detail: updatedConfig,
     });
     window.dispatchEvent(event);
 
-    console.log('Widget config saved to localStorage');
+    console.log("Widget config saved to localStorage");
   } catch (error) {
-    console.error('Error saving widget config to localStorage:', error);
+    console.error("Error saving widget config to localStorage:", error);
     throw error;
   }
 }
@@ -110,15 +110,15 @@ export function resetWidgetConfig(deviceClass: DeviceClass): void {
  * Clear widget configuration from localStorage
  */
 export function clearWidgetConfig(): void {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return;
   }
 
   try {
     localStorage.removeItem(STORAGE_KEY);
-    console.log('Widget config cleared from localStorage');
+    console.log("Widget config cleared from localStorage");
   } catch (error) {
-    console.error('Error clearing widget config from localStorage:', error);
+    console.error("Error clearing widget config from localStorage:", error);
   }
 }
 
@@ -126,14 +126,14 @@ export function clearWidgetConfig(): void {
  * Check if widget configuration exists in localStorage
  */
 export function hasWidgetConfig(): boolean {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return false;
   }
 
   try {
     return localStorage.getItem(STORAGE_KEY) !== null;
   } catch (error) {
-    console.error('Error checking widget config existence:', error);
+    console.error("Error checking widget config existence:", error);
     return false;
   }
 }
@@ -142,7 +142,7 @@ export function hasWidgetConfig(): boolean {
  * Get widget configuration timestamp
  */
 export function getWidgetConfigTimestamp(): number | null {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return null;
   }
 
@@ -153,7 +153,7 @@ export function getWidgetConfigTimestamp(): number | null {
     const config: DashboardConfig = JSON.parse(stored);
     return config.updatedAt || null;
   } catch (error) {
-    console.error('Error getting widget config timestamp:', error);
+    console.error("Error getting widget config timestamp:", error);
     return null;
   }
 }
@@ -163,7 +163,7 @@ export function getWidgetConfigTimestamp(): number | null {
  * Useful for backup or sharing
  */
 export function exportWidgetConfig(): string | null {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return null;
   }
 
@@ -175,7 +175,7 @@ export function exportWidgetConfig(): string | null {
     const config = JSON.parse(stored);
     return JSON.stringify(config, null, 2);
   } catch (error) {
-    console.error('Error exporting widget config:', error);
+    console.error("Error exporting widget config:", error);
     return null;
   }
 }
@@ -184,7 +184,7 @@ export function exportWidgetConfig(): string | null {
  * Import widget configuration from JSON string
  */
 export function importWidgetConfig(jsonString: string): boolean {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return false;
   }
 
@@ -193,14 +193,14 @@ export function importWidgetConfig(jsonString: string): boolean {
 
     // Basic validation
     if (!config.widgets || !Array.isArray(config.widgets)) {
-      console.error('Invalid widget config format');
+      console.error("Invalid widget config format");
       return false;
     }
 
     setWidgetConfig(config);
     return true;
   } catch (error) {
-    console.error('Error importing widget config:', error);
+    console.error("Error importing widget config:", error);
     return false;
   }
 }
@@ -216,10 +216,8 @@ export function importWidgetConfig(jsonString: string): boolean {
  *
  * @param deviceClass - Current device class for default preset fallback
  */
-export async function initializeWidgetConfig(
-  deviceClass: DeviceClass
-): Promise<void> {
-  if (typeof window === 'undefined') {
+export async function initializeWidgetConfig(deviceClass: DeviceClass): Promise<void> {
+  if (typeof window === "undefined") {
     return;
   }
 
@@ -235,17 +233,17 @@ export async function initializeWidgetConfig(
 
       // Dispatch event to notify components
       window.dispatchEvent(
-        new CustomEvent('widgetConfigChanged', {
+        new CustomEvent("widgetConfigChanged", {
           detail: supabaseConfig,
         })
       );
 
-      console.log('Widget config initialized from Supabase');
+      console.log("Widget config initialized from Supabase");
     } else {
-      console.log('Widget config: using local data');
+      console.log("Widget config: using local data");
     }
   } catch (error) {
-    console.error('Error initializing widget config:', error);
+    console.error("Error initializing widget config:", error);
     // Continue with localStorage data on error
   }
 }

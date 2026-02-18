@@ -4,11 +4,11 @@
  * Sent when a savings goal reaches a milestone (25%, 50%, 75%, 100%)
  */
 
-import { Link, Section, Text } from '@react-email/components';
-import * as React from 'react';
-import { EmailLayout, emailStyles } from './components/EmailLayout';
-import type { GoalMilestoneEmailProps } from '@/types/email';
-import { getUnsubscribeUrl } from '@/lib/email/resend-client';
+import { Link, Section, Text } from "@react-email/components";
+import * as React from "react";
+import { EmailLayout, emailStyles } from "./components/EmailLayout";
+import type { GoalMilestoneEmailProps } from "@/types/email";
+import { getUnsubscribeUrl } from "@/lib/email/resend-client";
 
 export function GoalMilestoneEmail({
   goalName,
@@ -21,9 +21,9 @@ export function GoalMilestoneEmail({
   baseUrl,
 }: GoalMilestoneEmailProps) {
   const formatCurrency = (value: number) =>
-    new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: currency || 'USD',
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency || "USD",
     }).format(value);
 
   const remaining = targetAmount - currentAmount;
@@ -38,7 +38,7 @@ export function GoalMilestoneEmail({
 
   const getHeadingText = () => {
     if (isComplete) {
-      return 'Goal Achieved!';
+      return "Goal Achieved!";
     }
     return `${milestone}% Milestone Reached!`;
   };
@@ -46,15 +46,15 @@ export function GoalMilestoneEmail({
   const getEmoji = () => {
     switch (milestone) {
       case 25:
-        return '🌱';
+        return "🌱";
       case 50:
-        return '🚀';
+        return "🚀";
       case 75:
-        return '🔥';
+        return "🔥";
       case 100:
-        return '🎉';
+        return "🎉";
       default:
-        return '⭐';
+        return "⭐";
     }
   };
 
@@ -67,13 +67,13 @@ export function GoalMilestoneEmail({
       case 75:
         return "Almost there! The finish line is in sight.";
       case 100:
-        return 'Incredible work! You did it!';
+        return "Incredible work! You did it!";
       default:
-        return 'Great progress on your savings goal!';
+        return "Great progress on your savings goal!";
     }
   };
 
-  const unsubscribeUrl = getUnsubscribeUrl(baseUrl, unsubscribeToken, 'goal_milestone');
+  const unsubscribeUrl = getUnsubscribeUrl(baseUrl, unsubscribeToken, "goal_milestone");
 
   return (
     <EmailLayout
@@ -83,7 +83,7 @@ export function GoalMilestoneEmail({
       footerText="You received this email because you enabled goal milestone notifications in Budget App."
     >
       {/* Celebration Emoji */}
-      <Text style={{ fontSize: '48px', textAlign: 'center' as const, margin: '0 0 16px' }}>
+      <Text style={{ fontSize: "48px", textAlign: "center" as const, margin: "0 0 16px" }}>
         {getEmoji()}
       </Text>
 
@@ -91,15 +91,15 @@ export function GoalMilestoneEmail({
       <Text
         style={{
           ...emailStyles.heading,
-          color: isComplete ? emailStyles.success.color : '#2dd4bf',
-          textAlign: 'center' as const,
+          color: isComplete ? emailStyles.success.color : "#2dd4bf",
+          textAlign: "center" as const,
         }}
       >
         {getHeadingText()}
       </Text>
 
       {/* Goal Name */}
-      <Text style={{ ...emailStyles.paragraph, textAlign: 'center' as const }}>
+      <Text style={{ ...emailStyles.paragraph, textAlign: "center" as const }}>
         <strong>{goalName}</strong>
       </Text>
 
@@ -107,21 +107,16 @@ export function GoalMilestoneEmail({
       <Section style={emailStyles.card}>
         {/* Progress Bar */}
         <div style={emailStyles.progressBar}>
-          <div
-            style={emailStyles.progressFill(
-              milestone,
-              isComplete ? '#4ade80' : '#2dd4bf'
-            )}
-          />
+          <div style={emailStyles.progressFill(milestone, isComplete ? "#4ade80" : "#2dd4bf")} />
         </div>
 
         {/* Current Amount */}
-        <div style={{ marginTop: '24px', textAlign: 'center' as const }}>
+        <div style={{ marginTop: "24px", textAlign: "center" as const }}>
           <Text style={emailStyles.amountLabel}>You&apos;ve Saved</Text>
           <Text
             style={{
               ...emailStyles.amount,
-              color: isComplete ? '#4ade80' : '#2dd4bf',
+              color: isComplete ? "#4ade80" : "#2dd4bf",
             }}
           >
             {formatCurrency(currentAmount)}
@@ -132,25 +127,23 @@ export function GoalMilestoneEmail({
         <div style={emailStyles.divider} />
         <table width="100%" cellPadding="0" cellSpacing="0" role="presentation">
           <tr>
-            <td style={{ width: '50%' }}>
+            <td style={{ width: "50%" }}>
               <Text style={emailStyles.amountLabel}>Goal</Text>
-              <Text style={{ ...emailStyles.paragraph, fontWeight: '600', margin: 0 }}>
+              <Text style={{ ...emailStyles.paragraph, fontWeight: "600", margin: 0 }}>
                 {formatCurrency(targetAmount)}
               </Text>
             </td>
-            <td style={{ width: '50%', textAlign: 'right' as const }}>
-              <Text style={emailStyles.amountLabel}>
-                {isComplete ? 'Completed' : 'Remaining'}
-              </Text>
+            <td style={{ width: "50%", textAlign: "right" as const }}>
+              <Text style={emailStyles.amountLabel}>{isComplete ? "Completed" : "Remaining"}</Text>
               <Text
                 style={{
                   ...emailStyles.paragraph,
-                  fontWeight: '600',
+                  fontWeight: "600",
                   margin: 0,
-                  color: isComplete ? '#4ade80' : undefined,
+                  color: isComplete ? "#4ade80" : undefined,
                 }}
               >
-                {isComplete ? '100%' : formatCurrency(remaining)}
+                {isComplete ? "100%" : formatCurrency(remaining)}
               </Text>
             </td>
           </tr>
@@ -158,13 +151,11 @@ export function GoalMilestoneEmail({
       </Section>
 
       {/* Motivational Message */}
-      <Text style={{ ...emailStyles.paragraph, textAlign: 'center' as const }}>
-        {getMessage()}
-      </Text>
+      <Text style={{ ...emailStyles.paragraph, textAlign: "center" as const }}>{getMessage()}</Text>
 
       {/* CTA Button */}
       {goalUrl && (
-        <Section style={{ textAlign: 'center' as const, marginTop: '24px' }}>
+        <Section style={{ textAlign: "center" as const, marginTop: "24px" }}>
           <Link href={goalUrl} style={emailStyles.button}>
             View Goal
           </Link>
@@ -172,7 +163,7 @@ export function GoalMilestoneEmail({
       )}
 
       {/* View All Link */}
-      <Section style={{ textAlign: 'center' as const, marginTop: '16px' }}>
+      <Section style={{ textAlign: "center" as const, marginTop: "16px" }}>
         <Link href={`${baseUrl}/budget-app/goals`} style={emailStyles.secondaryButton}>
           View All Goals
         </Link>

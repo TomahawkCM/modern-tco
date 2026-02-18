@@ -5,13 +5,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Linear Chain Technology ensures that network load remains constant as endpoints are added, unlike hub-and-spoke systems where each additional endpoint increases server and network burden proportionally.",
-    "tags": [
-      "architecture",
-      "linear-chain",
-      "scalability",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["architecture", "linear-chain", "scalability", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -21,13 +15,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Sensors are components that collect specific types of information from endpoints, such as Computer Name, Running Processes, or Disk Space.",
-    "tags": [
-      "sensors",
-      "terminology",
-      "data-collection",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["sensors", "terminology", "data-collection", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -37,13 +25,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Tanium's linear chain architecture consumes less than 0.1% of network bandwidth even during peak activity, regardless of scale.",
-    "tags": [
-      "network-efficiency",
-      "bandwidth",
-      "performance",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["network-efficiency", "bandwidth", "performance", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: tanium, linear chain"
@@ -54,13 +36,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The Interact module is Tanium's core module for real-time endpoint querying and action deployment.",
-    "tags": [
-      "interact",
-      "modules",
-      "console",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["interact", "modules", "console", "exam-aligned", "foundation"],
     "domain": "navigation-basic-modules",
     "difficulty": "beginner"
   },
@@ -70,13 +46,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Tanium's just-in-time model collects specific data only when requested, ensuring data freshness while minimizing storage and network overhead.",
-    "tags": [
-      "just-in-time",
-      "data-collection",
-      "architecture",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["just-in-time", "data-collection", "architecture", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: tanium"
@@ -87,13 +57,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "A Package is a pre-configured bundle that combines sensors, questions, and actions to solve specific IT challenges, making complex workflows reusable.",
-    "tags": [
-      "packages",
-      "terminology",
-      "workflow",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["packages", "terminology", "workflow", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -103,13 +67,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Tanium maintains a consistent 15-second response time regardless of scale due to its linear chain architecture.",
-    "tags": [
-      "performance",
-      "scalability",
-      "response-time",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["performance", "scalability", "response-time", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -119,13 +77,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "In Linear Chain architecture, endpoints form a communication chain where each endpoint communicates with its immediate neighbors, creating an efficient path from server to all endpoints.",
-    "tags": [
-      "linear-chain",
-      "communication",
-      "architecture",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["linear-chain", "communication", "architecture", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: linear chain"
@@ -136,13 +88,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Tanium Administrator role provides full platform access and configuration capabilities across all modules and functions.",
-    "tags": [
-      "roles",
-      "permissions",
-      "administration",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["roles", "permissions", "administration", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -152,13 +98,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Organizations typically see 60-80% reduction in server and storage costs due to Tanium's efficient architecture that eliminates the need for extensive database infrastructure.",
-    "tags": [
-      "cost-savings",
-      "infrastructure",
-      "roi",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["cost-savings", "infrastructure", "roi", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: tanium"
@@ -169,13 +109,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "An Action is an operation that makes changes to endpoints, such as installing software, updating configurations, or running scripts.",
-    "tags": [
-      "actions",
-      "terminology",
-      "endpoint-management",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["actions", "terminology", "endpoint-management", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -185,13 +119,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The Trends module is designed for historical data analysis, trending, and creating reports based on data collected over time.",
-    "tags": [
-      "trends",
-      "modules",
-      "historical-data",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["trends", "modules", "historical-data", "exam-aligned", "foundation"],
     "domain": "navigation-basic-modules",
     "difficulty": "beginner"
   },
@@ -217,13 +145,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Organizations using Tanium report approximately 10x faster incident response times due to real-time data collection and immediate action deployment capabilities.",
-    "tags": [
-      "incident-response",
-      "security",
-      "business-value",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["incident-response", "security", "business-value", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: tanium, report"
@@ -234,13 +156,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The console's status bar displays system status information including client connectivity, query execution status, and running operations progress.",
-    "tags": [
-      "console",
-      "status-bar",
-      "interface",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["console", "status-bar", "interface", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -250,13 +166,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "'Running Processes' is categorized as a Security-Related Sensor because it's commonly used for security investigations and threat hunting.",
-    "tags": [
-      "sensors",
-      "security",
-      "processes",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["sensors", "security", "processes", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -266,13 +176,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Tanium uses TLS encryption for all communications, with certificate validation for server identity, mutual authentication, and data integrity protection.",
-    "tags": [
-      "security",
-      "encryption",
-      "authentication",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["security", "encryption", "authentication", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: tanium"
@@ -283,13 +187,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Tanium's just-in-time approach collects data only when needed rather than continuously collecting and storing everything, resulting in 99% reduction in storage requirements.",
-    "tags": [
-      "storage",
-      "just-in-time",
-      "efficiency",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["storage", "just-in-time", "efficiency", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: tanium"
@@ -300,13 +198,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The Connect module provides integration capabilities with SIEM, ticketing, and other external systems through data feeds and API integration.",
-    "tags": [
-      "connect",
-      "integration",
-      "siem",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["connect", "integration", "siem", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -316,13 +208,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Organizations typically see 50-70% reduction in administrative overhead due to Tanium's automation capabilities and simplified architecture.",
-    "tags": [
-      "administrative-overhead",
-      "efficiency",
-      "automation",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["administrative-overhead", "efficiency", "automation", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: tanium"
@@ -333,13 +219,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Tanium questions follow the natural language structure: 'Get [Sensor] from [Target] where [Condition]', making them intuitive to construct.",
-    "tags": [
-      "questions",
-      "syntax",
-      "natural-language",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["questions", "syntax", "natural-language", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -349,13 +229,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Question Author role provides permissions to create and modify questions and sensors without the ability to deploy potentially disruptive actions.",
-    "tags": [
-      "roles",
-      "permissions",
-      "question-author",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["roles", "permissions", "question-author", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -365,13 +239,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Users can customize dashboard widgets, layout arrangements, notification settings, themes, and default views to optimize their workflow.",
-    "tags": [
-      "customization",
-      "dashboard",
-      "user-experience",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["customization", "dashboard", "user-experience", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -381,13 +249,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Real-time data enables immediate decision-making and action, compared to traditional tools that provide decisions based on hours or days-old data.",
-    "tags": [
-      "real-time",
-      "decision-making",
-      "competitive-advantage",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["real-time", "decision-making", "competitive-advantage", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: action"
@@ -398,13 +260,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Tanium requires significantly fewer servers (2-4 with redundancy) compared to traditional tools that might require 10-20 servers for the same endpoint count.",
-    "tags": [
-      "infrastructure",
-      "servers",
-      "cost-efficiency",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["infrastructure", "servers", "cost-efficiency", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: tanium"
@@ -415,13 +271,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Organizations implementing Tanium typically see a 3x increase in IT team productivity due to automation, real-time capabilities, and reduced administrative overhead.",
-    "tags": [
-      "productivity",
-      "success-metrics",
-      "business-value",
-      "exam-aligned",
-      "foundation"
-    ],
+    "tags": ["productivity", "success-metrics", "business-value", "exam-aligned", "foundation"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: tanium"
@@ -432,14 +282,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Tanium Questions query endpoints for current state in real time, providing immediate visibility into endpoint conditions.",
-    "tags": [
-      "basics",
-      "questions",
-      "real-time",
-      "purpose",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["basics", "questions", "real-time", "purpose", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -449,13 +292,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The Question Parser maps plain language questions to appropriate sensors and parameters, enabling natural language querying.",
-    "tags": [
-      "parser",
-      "sensors",
-      "natural-language",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["parser", "sensors", "natural-language", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -465,13 +302,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Starting with a basic query allows you to validate results and understand the data before adding complexity through filters and constraints.",
-    "tags": [
-      "best-practice",
-      "iteration",
-      "methodology",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["best-practice", "iteration", "methodology", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -481,13 +312,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Sensors that return current endpoint state will show values that reflect the actual current conditions on endpoints, updated in real-time.",
-    "tags": [
-      "sensors",
-      "real-time",
-      "validation",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["sensors", "real-time", "validation", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -497,13 +322,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The preview results grid allows you to see which endpoints respond to your question and validate the data before taking further action.",
-    "tags": [
-      "validation",
-      "ui",
-      "targeting",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["validation", "ui", "targeting", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -513,13 +332,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "This question immediately propagates through the linear chain to all connected endpoints, which respond with their current computer names in real-time.",
-    "tags": [
-      "example-query",
-      "real-time",
-      "computer-name",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["example-query", "real-time", "computer-name", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -529,13 +342,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Simplifying the question helps isolate issues and understand what's causing unexpected results before adding complexity back incrementally.",
-    "tags": [
-      "troubleshooting",
-      "methodology",
-      "debugging",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["troubleshooting", "methodology", "debugging", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -545,13 +352,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The 'Running Processes' sensor returns information about processes currently active and executing on endpoints at the time of the query.",
-    "tags": [
-      "running-processes",
-      "sensors",
-      "real-time",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["running-processes", "sensors", "real-time", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -561,13 +362,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Saved Questions are valuable for queries you'll use repeatedly, want to share with team members, or want to standardize across your organization.",
-    "tags": [
-      "saved-questions",
-      "reusability",
-      "collaboration",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["saved-questions", "reusability", "collaboration", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -577,13 +372,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Well-constructed Tanium questions typically return results within 15-20 seconds regardless of the number of endpoints being queried.",
-    "tags": [
-      "performance",
-      "response-time",
-      "expectations",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["performance", "response-time", "expectations", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -593,13 +382,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "'Disk Space' is categorized as a Performance and Hardware Sensor because it provides information about physical storage resources and system performance.",
-    "tags": [
-      "sensors",
-      "disk-space",
-      "categorization",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["sensors", "disk-space", "categorization", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -609,13 +392,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "No results often indicate overly restrictive targeting criteria, offline endpoints, or syntax issues in the question construction.",
-    "tags": [
-      "troubleshooting",
-      "no-results",
-      "targeting",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["troubleshooting", "no-results", "targeting", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -625,13 +402,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The filter condition is 'where Operating System contains Windows', which restricts results to only Windows machines.",
-    "tags": [
-      "filters",
-      "syntax",
-      "operating-system",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["filters", "syntax", "operating-system", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -641,13 +412,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The 'Last Logged In User' sensor provides the identity of the most recent user to successfully log into each endpoint.",
-    "tags": [
-      "user-tracking",
-      "sensors",
-      "login-information",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["user-tracking", "sensors", "login-information", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -657,13 +422,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Tanium's natural language approach uses human-readable syntax like 'Get [sensor] from [target] where [condition]' instead of complex SQL syntax.",
-    "tags": [
-      "natural-language",
-      "syntax",
-      "usability",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["natural-language", "syntax", "usability", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: tanium, sensor"
@@ -674,13 +433,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The Question Builder provides guided assistance, suggests sensors and filters, and helps reduce syntax errors through its structured interface.",
-    "tags": [
-      "question-builder",
-      "ui",
-      "error-reduction",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["question-builder", "ui", "error-reduction", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -690,13 +443,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "'Installed Applications' provides comprehensive software inventory, while 'Running Processes' shows currently active software.",
-    "tags": [
-      "software-inventory",
-      "sensors",
-      "asset-management",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["software-inventory", "sensors", "asset-management", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -706,13 +453,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "This question uses performance sensors with a filter condition to identify endpoints with high CPU usage that might indicate performance problems.",
-    "tags": [
-      "performance-monitoring",
-      "filters",
-      "troubleshooting",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["performance-monitoring", "filters", "troubleshooting", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: filter"
@@ -723,13 +464,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Real-time questioning provides current, up-to-date information rather than relying on potentially outdated database snapshots or periodic collections.",
-    "tags": [
-      "real-time",
-      "accuracy",
-      "current-data",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["real-time", "accuracy", "current-data", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -739,13 +474,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Testing questions on a small group first allows you to validate syntax, targeting, and expected results before broader deployment.",
-    "tags": [
-      "validation",
-      "testing",
-      "best-practice",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["validation", "testing", "best-practice", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -755,13 +484,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "'Running Processes' can identify suspicious active processes, while 'Installed Applications' can reveal unwanted or malicious software installations.",
-    "tags": [
-      "security-investigation",
-      "malware",
-      "threat-hunting",
-      "exam-aligned",
-      "module-1"
-    ],
+    "tags": ["security-investigation", "malware", "threat-hunting", "exam-aligned", "module-1"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -771,13 +494,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Refining and targeting questions helps focus results on specific endpoints that match your criteria, improving efficiency and reducing irrelevant data.",
-    "tags": [
-      "targeting",
-      "efficiency",
-      "refinement",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["targeting", "efficiency", "refinement", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -787,13 +504,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The 'starts with' operator matches values that begin with the specified text, perfect for naming convention patterns like 'WS-'.",
-    "tags": [
-      "filters",
-      "operators",
-      "naming-conventions",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["filters", "operators", "naming-conventions", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -803,13 +514,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Computer Groups are logical collections of endpoints that share characteristics, making it easier to target specific sets of machines for questions and actions.",
-    "tags": [
-      "computer-groups",
-      "organization",
-      "targeting",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["computer-groups", "organization", "targeting", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -819,13 +524,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Adding more specific filter conditions helps narrow the scope of results to only the endpoints or data that match your specific criteria.",
-    "tags": [
-      "optimization",
-      "filtering",
-      "refinement",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["optimization", "filtering", "refinement", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: filter"
@@ -836,13 +535,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The 'not equals' operator excludes endpoints or data that match the specified value, useful for filtering out unwanted results.",
-    "tags": [
-      "filters",
-      "exclusion",
-      "operators",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["filters", "exclusion", "operators", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -852,13 +545,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Dynamic groups based on naming conventions automatically include endpoints that follow departmental naming patterns, maintaining group membership automatically.",
-    "tags": [
-      "computer-groups",
-      "dynamic",
-      "organization",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["computer-groups", "dynamic", "organization", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -868,13 +555,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Filtering by 'Last Reboot' older than a specific timeframe helps identify endpoints that may not have received recent updates or patches.",
-    "tags": [
-      "filters",
-      "maintenance",
-      "date-filtering",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["filters", "maintenance", "date-filtering", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -884,13 +565,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Logical operators 'AND' and 'OR' allow you to combine multiple filter conditions to create more specific targeting criteria.",
-    "tags": [
-      "logical-operators",
-      "complex-filtering",
-      "and-or",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["logical-operators", "complex-filtering", "and-or", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: filter"
@@ -901,13 +576,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Overly restrictive targeting criteria might result in no matching endpoints, so it's important to validate that your filters aren't too narrow.",
-    "tags": [
-      "targeting",
-      "validation",
-      "criteria",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["targeting", "validation", "criteria", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -917,13 +586,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The 'is less than' operator compares numerical values, making it ideal for identifying endpoints below critical thresholds like disk space.",
-    "tags": [
-      "numeric-comparison",
-      "operators",
-      "thresholds",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["numeric-comparison", "operators", "thresholds", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -933,13 +596,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Dynamic groups automatically adjust membership as endpoint characteristics change, eliminating the need for manual maintenance of group membership.",
-    "tags": [
-      "computer-groups",
-      "dynamic",
-      "automation",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["computer-groups", "dynamic", "automation", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -949,13 +606,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Running a simple question with the same targeting criteria shows which endpoints match your filters before executing more complex or resource-intensive queries.",
-    "tags": [
-      "validation",
-      "testing",
-      "targeting",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["validation", "testing", "targeting", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -965,13 +616,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "'Contains' matches values that include the specified text anywhere within them, while 'equals' requires an exact match of the entire value.",
-    "tags": [
-      "operators",
-      "matching",
-      "contains-equals",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["operators", "matching", "contains-equals", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -981,13 +626,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "More specific targeting reduces the number of endpoints that need to respond, optimizing network utilization while still getting the information you need.",
-    "tags": [
-      "optimization",
-      "network",
-      "efficiency",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["optimization", "network", "efficiency", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -997,13 +636,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "The 'ends with' operator is useful for identifying patterns at the end of values, such as file extensions (.exe) or domain suffixes (.domain.com).",
-    "tags": [
-      "operators",
-      "patterns",
-      "file-extensions",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["operators", "patterns", "file-extensions", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -1013,13 +646,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Tanium supports time-based filtering with operators like 'older than' and 'newer than' for sensors that return date/time information.",
-    "tags": [
-      "time-filtering",
-      "date-comparison",
-      "temporal",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["time-filtering", "date-comparison", "temporal", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: tanium"
@@ -1030,13 +657,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Too many results usually indicate that targeting criteria are too broad or contain errors, so adding restrictions or checking for typos is the first step.",
-    "tags": [
-      "troubleshooting",
-      "too-many-results",
-      "refinement",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["troubleshooting", "too-many-results", "refinement", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "intermediate"
   },
@@ -1046,13 +667,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Computer Groups simplify targeting by allowing you to reference predefined collections of endpoints rather than reconstructing complex filter criteria each time.",
-    "tags": [
-      "computer-groups",
-      "targeting",
-      "simplification",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["computer-groups", "targeting", "simplification", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -1062,13 +677,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Gradually removing filter conditions helps identify which specific criteria might be preventing endpoints from matching your query.",
-    "tags": [
-      "troubleshooting",
-      "no-results",
-      "debugging",
-      "exam-aligned",
-      "module-2"
-    ],
+    "tags": ["troubleshooting", "no-results", "debugging", "exam-aligned", "module-2"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: filter"
@@ -1079,13 +688,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Tanium Actions are designed to make changes or perform tasks on endpoints, such as installing software, applying configurations, or running maintenance scripts.",
-    "tags": [
-      "actions",
-      "purpose",
-      "endpoint-changes",
-      "exam-aligned",
-      "module-3"
-    ],
+    "tags": ["actions", "purpose", "endpoint-changes", "exam-aligned", "module-3"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -1095,13 +698,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Testing actions on a small group first helps identify potential issues and validates expected behavior before broader deployment.",
-    "tags": [
-      "testing",
-      "validation",
-      "best-practice",
-      "exam-aligned",
-      "module-3"
-    ],
+    "tags": ["testing", "validation", "best-practice", "exam-aligned", "module-3"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -1111,13 +708,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Exit codes indicate whether an action succeeded (typically 0) or failed (non-zero values), providing crucial feedback on action execution.",
-    "tags": [
-      "exit-codes",
-      "status",
-      "success-failure",
-      "exam-aligned",
-      "module-3"
-    ],
+    "tags": ["exit-codes", "status", "success-failure", "exam-aligned", "module-3"],
     "domain": "asking-questions",
     "difficulty": "beginner"
   },
@@ -1127,13 +718,7 @@
     "card_type": "concept",
     "source": "mcq",
     "explanation": "Any action making significant changes should have a rollback plan to quickly restore endpoints to their previous state if issues occur.",
-    "tags": [
-      "rollback",
-      "risk-management",
-      "planning",
-      "exam-aligned",
-      "module-3"
-    ],
+    "tags": ["rollback", "risk-management", "planning", "exam-aligned", "module-3"],
     "domain": "asking-questions",
     "difficulty": "intermediate",
     "hint": "Think about: action"
@@ -1143,10 +728,7 @@
     "back_text": "The Sensor Library is Tanium's comprehensive collection of over 500 pre-built sensors that collect specific endpoint data such as Computer Name, Running Processes, Installed Applications, IP Address, Operating System, and more. These sensors are ready to use and cover common IT operations needs.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "sensors",
-      "fundamentals"
-    ],
+    "tags": ["sensors", "fundamentals"],
     "domain": "asking-questions"
   },
   {
@@ -1154,10 +736,7 @@
     "back_text": "A basic Tanium question follows the pattern: 'Get [Sensor] from [Target]'. For example: 'Get Computer Name from all machines' or 'Get Running Processes from Windows Servers'. The 'Get' keyword initiates the query, followed by the sensor name and target scope.",
     "card_type": "basic",
     "source": "generated",
-    "tags": [
-      "question-construction",
-      "syntax"
-    ],
+    "tags": ["question-construction", "syntax"],
     "domain": "asking-questions"
   },
   {
@@ -1166,10 +745,7 @@
     "card_type": "concept",
     "source": "generated",
     "hint": "Think about whether you need values or statistics",
-    "tags": [
-      "query-types",
-      "get-vs-count"
-    ],
+    "tags": ["query-types", "get-vs-count"],
     "domain": "asking-questions"
   },
   {
@@ -1177,10 +753,7 @@
     "back_text": "The 'Installed Applications' sensor retrieves a list of all software installed on an endpoint, including application name, version, publisher, and install date.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "asking-questions",
-      "tco-exam"
-    ],
+    "tags": ["asking-questions", "tco-exam"],
     "domain": "asking-questions"
   },
   {
@@ -1188,9 +761,7 @@
     "back_text": "Click the 'Save Question' button in the Question Results panel, provide a descriptive name, and optionally assign it to a Computer Group. Saved questions appear in the 'Saved Questions' menu for quick access.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "saved-questions"
-    ],
+    "tags": ["saved-questions"],
     "domain": "asking-questions"
   },
   {
@@ -1198,9 +769,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1208,9 +777,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1218,10 +785,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1229,10 +793,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1240,10 +801,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1251,9 +809,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1261,9 +817,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1271,10 +825,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1282,10 +833,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1293,10 +841,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1304,9 +849,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1314,9 +857,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1324,10 +865,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1335,10 +873,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1346,10 +881,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1357,9 +889,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1367,9 +897,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1377,10 +905,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1388,10 +913,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1399,10 +921,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1410,9 +929,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1420,9 +937,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1430,10 +945,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1441,10 +953,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1452,10 +961,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1463,9 +969,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1473,9 +977,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1483,10 +985,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1494,10 +993,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1505,10 +1001,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1516,9 +1009,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1526,9 +1017,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1536,10 +1025,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1547,10 +1033,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1558,10 +1041,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1569,9 +1049,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1579,9 +1057,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1589,10 +1065,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1600,10 +1073,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1611,10 +1081,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1622,9 +1089,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1632,9 +1097,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1642,10 +1105,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1653,10 +1113,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1664,10 +1121,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1675,9 +1129,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1685,9 +1137,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1695,10 +1145,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1706,10 +1153,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1717,10 +1161,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1728,9 +1169,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1738,9 +1177,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1748,10 +1185,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1759,10 +1193,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1770,10 +1201,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1781,9 +1209,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1791,9 +1217,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1801,10 +1225,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1812,10 +1233,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1823,10 +1241,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1834,9 +1249,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1844,9 +1257,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1854,10 +1265,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1865,10 +1273,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1876,10 +1281,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1887,9 +1289,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1897,9 +1297,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1907,10 +1305,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1918,10 +1313,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1929,10 +1321,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1940,9 +1329,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1950,9 +1337,7 @@
     "back_text": "Navigate to Administration > Computer Groups, click 'New', define filter criteria using sensors (e.g., 'Operating System contains Windows'), test the filter, and save with a descriptive name.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups"
-    ],
+    "tags": ["computer-groups"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1960,10 +1345,7 @@
     "back_text": "Available operators include: 'contains', 'starts with', 'ends with', 'equals', 'does not contain', '>', '<', '>=', '<=', 'is', 'is not'. Use these in 'where' clauses to refine results.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "filtering",
-      "operators"
-    ],
+    "tags": ["filtering", "operators"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1971,10 +1353,7 @@
     "back_text": "Role-Based Access Control (RBAC) uses Computer Groups to restrict user permissions. Users only see endpoints in their assigned groups, ensuring data isolation and security.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rbac",
-      "security"
-    ],
+    "tags": ["rbac", "security"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1982,10 +1361,7 @@
     "back_text": "Dynamic groups update automatically based on sensor criteria (e.g., 'OS=Windows'). Static groups contain manually specified endpoints. Dynamic groups adapt to infrastructure changes, while static groups remain fixed.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "computer-groups",
-      "types"
-    ],
+    "tags": ["computer-groups", "types"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -1993,9 +1369,7 @@
     "back_text": "The 'from' clause specifies the target scope: 'from all machines' queries every endpoint, while 'from [Computer Group]' targets only endpoints in that group.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "targeting"
-    ],
+    "tags": ["targeting"],
     "domain": "refining-questions-targeting"
   },
   {
@@ -2003,10 +1377,7 @@
     "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "actions"
-    ],
+    "tags": ["packages", "actions"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2014,9 +1385,7 @@
     "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "deployment"
-    ],
+    "tags": ["deployment"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2024,10 +1393,7 @@
     "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "monitoring",
-      "action-status"
-    ],
+    "tags": ["monitoring", "action-status"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2035,10 +1401,7 @@
     "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rollback",
-      "remediation"
-    ],
+    "tags": ["rollback", "remediation"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2046,10 +1409,7 @@
     "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "parameters"
-    ],
+    "tags": ["packages", "parameters"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2057,10 +1417,7 @@
     "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "actions"
-    ],
+    "tags": ["packages", "actions"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2068,9 +1425,7 @@
     "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "deployment"
-    ],
+    "tags": ["deployment"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2078,10 +1433,7 @@
     "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "monitoring",
-      "action-status"
-    ],
+    "tags": ["monitoring", "action-status"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2089,10 +1441,7 @@
     "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rollback",
-      "remediation"
-    ],
+    "tags": ["rollback", "remediation"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2100,10 +1449,7 @@
     "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "parameters"
-    ],
+    "tags": ["packages", "parameters"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2111,10 +1457,7 @@
     "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "actions"
-    ],
+    "tags": ["packages", "actions"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2122,9 +1465,7 @@
     "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "deployment"
-    ],
+    "tags": ["deployment"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2132,10 +1473,7 @@
     "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "monitoring",
-      "action-status"
-    ],
+    "tags": ["monitoring", "action-status"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2143,10 +1481,7 @@
     "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rollback",
-      "remediation"
-    ],
+    "tags": ["rollback", "remediation"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2154,10 +1489,7 @@
     "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "parameters"
-    ],
+    "tags": ["packages", "parameters"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2165,10 +1497,7 @@
     "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "actions"
-    ],
+    "tags": ["packages", "actions"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2176,9 +1505,7 @@
     "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "deployment"
-    ],
+    "tags": ["deployment"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2186,10 +1513,7 @@
     "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "monitoring",
-      "action-status"
-    ],
+    "tags": ["monitoring", "action-status"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2197,10 +1521,7 @@
     "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rollback",
-      "remediation"
-    ],
+    "tags": ["rollback", "remediation"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2208,10 +1529,7 @@
     "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "parameters"
-    ],
+    "tags": ["packages", "parameters"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2219,10 +1537,7 @@
     "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "actions"
-    ],
+    "tags": ["packages", "actions"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2230,9 +1545,7 @@
     "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "deployment"
-    ],
+    "tags": ["deployment"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2240,10 +1553,7 @@
     "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "monitoring",
-      "action-status"
-    ],
+    "tags": ["monitoring", "action-status"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2251,10 +1561,7 @@
     "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rollback",
-      "remediation"
-    ],
+    "tags": ["rollback", "remediation"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2262,10 +1569,7 @@
     "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "parameters"
-    ],
+    "tags": ["packages", "parameters"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2273,10 +1577,7 @@
     "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "actions"
-    ],
+    "tags": ["packages", "actions"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2284,9 +1585,7 @@
     "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "deployment"
-    ],
+    "tags": ["deployment"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2294,10 +1593,7 @@
     "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "monitoring",
-      "action-status"
-    ],
+    "tags": ["monitoring", "action-status"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2305,10 +1601,7 @@
     "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rollback",
-      "remediation"
-    ],
+    "tags": ["rollback", "remediation"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2316,10 +1609,7 @@
     "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "parameters"
-    ],
+    "tags": ["packages", "parameters"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2327,10 +1617,7 @@
     "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "actions"
-    ],
+    "tags": ["packages", "actions"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2338,9 +1625,7 @@
     "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "deployment"
-    ],
+    "tags": ["deployment"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2348,10 +1633,7 @@
     "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "monitoring",
-      "action-status"
-    ],
+    "tags": ["monitoring", "action-status"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2359,10 +1641,7 @@
     "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rollback",
-      "remediation"
-    ],
+    "tags": ["rollback", "remediation"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2370,10 +1649,7 @@
     "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "parameters"
-    ],
+    "tags": ["packages", "parameters"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2381,10 +1657,7 @@
     "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "actions"
-    ],
+    "tags": ["packages", "actions"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2392,9 +1665,7 @@
     "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "deployment"
-    ],
+    "tags": ["deployment"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2402,10 +1673,7 @@
     "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "monitoring",
-      "action-status"
-    ],
+    "tags": ["monitoring", "action-status"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2413,10 +1681,7 @@
     "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rollback",
-      "remediation"
-    ],
+    "tags": ["rollback", "remediation"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2424,10 +1689,7 @@
     "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "parameters"
-    ],
+    "tags": ["packages", "parameters"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2435,10 +1697,7 @@
     "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "actions"
-    ],
+    "tags": ["packages", "actions"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2446,9 +1705,7 @@
     "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "deployment"
-    ],
+    "tags": ["deployment"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2456,10 +1713,7 @@
     "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "monitoring",
-      "action-status"
-    ],
+    "tags": ["monitoring", "action-status"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2467,10 +1721,7 @@
     "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rollback",
-      "remediation"
-    ],
+    "tags": ["rollback", "remediation"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2478,10 +1729,7 @@
     "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "parameters"
-    ],
+    "tags": ["packages", "parameters"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2489,10 +1737,7 @@
     "back_text": "A Package is the deployment unit (script/command/files to execute). An Action is the execution instance that applies a Package to specific endpoints. One Package can be used in multiple Actions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "actions"
-    ],
+    "tags": ["packages", "actions"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2500,9 +1745,7 @@
     "back_text": "Create an Action by selecting a Package, specify target endpoints using Computer Groups or filters, set deployment parameters (schedule, timeout, reissue), and click 'Deploy Action'.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "deployment"
-    ],
+    "tags": ["deployment"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2510,10 +1753,7 @@
     "back_text": "Action Status shows real-time deployment progress: pending/running/completed/failed counts, detailed endpoint results, error messages, and performance metrics. Use it to monitor and troubleshoot deployments.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "monitoring",
-      "action-status"
-    ],
+    "tags": ["monitoring", "action-status"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2521,10 +1761,7 @@
     "back_text": "Create a new Action with a rollback Package that reverses the changes (e.g., uninstall software, restore configuration). Target the same endpoints, verify success in Action Status, then confirm state with verification questions.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "rollback",
-      "remediation"
-    ],
+    "tags": ["rollback", "remediation"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2532,10 +1769,7 @@
     "back_text": "Package parameters allow customization at deployment time. For example, a 'Software Install' package might accept parameters for install path, license key, or configuration options without modifying the Package itself.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "packages",
-      "parameters"
-    ],
+    "tags": ["packages", "parameters"],
     "domain": "taking-action-packages-actions"
   },
   {
@@ -2543,10 +1777,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2554,10 +1785,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2565,9 +1793,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2575,10 +1801,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2586,10 +1809,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2597,10 +1817,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2608,10 +1825,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2619,9 +1833,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2629,10 +1841,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2640,10 +1849,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2651,10 +1857,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2662,10 +1865,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2673,9 +1873,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2683,10 +1881,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2694,10 +1889,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2705,10 +1897,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2716,10 +1905,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2727,9 +1913,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2737,10 +1921,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2748,10 +1929,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2759,10 +1937,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2770,10 +1945,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2781,9 +1953,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2791,10 +1961,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2802,10 +1969,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2813,10 +1977,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2824,10 +1985,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2835,9 +1993,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2845,10 +2001,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2856,10 +2009,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2867,10 +2017,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2878,10 +2025,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2889,9 +2033,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2899,10 +2041,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2910,10 +2049,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2921,10 +2057,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2932,10 +2065,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2943,9 +2073,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2953,10 +2081,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2964,10 +2089,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2975,10 +2097,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2986,10 +2105,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -2997,9 +2113,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3007,10 +2121,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3018,10 +2129,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3029,10 +2137,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3040,10 +2145,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3051,9 +2153,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3061,10 +2161,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3072,10 +2169,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3083,10 +2177,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3094,10 +2185,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3105,9 +2193,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3115,10 +2201,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3126,10 +2209,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3137,10 +2217,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3148,10 +2225,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3159,9 +2233,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3169,10 +2241,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3180,10 +2249,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3191,10 +2257,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3202,10 +2265,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3213,9 +2273,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3223,10 +2281,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3234,10 +2289,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3245,10 +2297,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3256,10 +2305,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3267,9 +2313,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3277,10 +2321,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3288,10 +2329,7 @@
     "back_text": "Interact leverages Linear Chain Technology to deliver query results in sub-second time, even across millions of endpoints. This real-time capability enables live troubleshooting and instant visibility.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "interact",
-      "performance"
-    ],
+    "tags": ["interact", "performance"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3299,10 +2337,7 @@
     "back_text": "Trends records question results over time for historical analysis, compliance reporting, and change detection. It visualizes data trends, identifies anomalies, and supports audit requirements.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "trends",
-      "historical"
-    ],
+    "tags": ["trends", "historical"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3310,10 +2345,7 @@
     "back_text": "Connect exports Tanium data to SIEM, SOAR, ticketing, and reporting platforms using REST API, Syslog, JDBC, or scheduled file delivery. It supports JSON, CSV, XML formats for seamless integration.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "connect",
-      "integration"
-    ],
+    "tags": ["connect", "integration"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3321,9 +2353,7 @@
     "back_text": "Reporting creates formatted reports with charts, tables, and visualizations. It supports scheduled delivery, custom templates, multi-format export (PDF/CSV/Excel), and automated distribution to stakeholders.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "reporting"
-    ],
+    "tags": ["reporting"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3331,10 +2361,7 @@
     "back_text": "Use the main navigation menu (top or side bar depending on version) to switch between Interact, Trends, Connect, Reporting, and other modules. Each module has its own workspace and functionality.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "navigation",
-      "ui"
-    ],
+    "tags": ["navigation", "ui"],
     "domain": "navigation-basic-modules"
   },
   {
@@ -3342,10 +2369,7 @@
     "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "export",
-      "formats"
-    ],
+    "tags": ["export", "formats"],
     "domain": "reporting-data-export"
   },
   {
@@ -3353,10 +2377,7 @@
     "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "scheduling",
-      "automation"
-    ],
+    "tags": ["scheduling", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3364,10 +2385,7 @@
     "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "api",
-      "rest"
-    ],
+    "tags": ["api", "rest"],
     "domain": "reporting-data-export"
   },
   {
@@ -3375,10 +2393,7 @@
     "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "siem",
-      "integration"
-    ],
+    "tags": ["siem", "integration"],
     "domain": "reporting-data-export"
   },
   {
@@ -3386,10 +2401,7 @@
     "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "json",
-      "automation"
-    ],
+    "tags": ["json", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3397,10 +2409,7 @@
     "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "export",
-      "formats"
-    ],
+    "tags": ["export", "formats"],
     "domain": "reporting-data-export"
   },
   {
@@ -3408,10 +2417,7 @@
     "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "scheduling",
-      "automation"
-    ],
+    "tags": ["scheduling", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3419,10 +2425,7 @@
     "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "api",
-      "rest"
-    ],
+    "tags": ["api", "rest"],
     "domain": "reporting-data-export"
   },
   {
@@ -3430,10 +2433,7 @@
     "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "siem",
-      "integration"
-    ],
+    "tags": ["siem", "integration"],
     "domain": "reporting-data-export"
   },
   {
@@ -3441,10 +2441,7 @@
     "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "json",
-      "automation"
-    ],
+    "tags": ["json", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3452,10 +2449,7 @@
     "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "export",
-      "formats"
-    ],
+    "tags": ["export", "formats"],
     "domain": "reporting-data-export"
   },
   {
@@ -3463,10 +2457,7 @@
     "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "scheduling",
-      "automation"
-    ],
+    "tags": ["scheduling", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3474,10 +2465,7 @@
     "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "api",
-      "rest"
-    ],
+    "tags": ["api", "rest"],
     "domain": "reporting-data-export"
   },
   {
@@ -3485,10 +2473,7 @@
     "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "siem",
-      "integration"
-    ],
+    "tags": ["siem", "integration"],
     "domain": "reporting-data-export"
   },
   {
@@ -3496,10 +2481,7 @@
     "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "json",
-      "automation"
-    ],
+    "tags": ["json", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3507,10 +2489,7 @@
     "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "export",
-      "formats"
-    ],
+    "tags": ["export", "formats"],
     "domain": "reporting-data-export"
   },
   {
@@ -3518,10 +2497,7 @@
     "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "scheduling",
-      "automation"
-    ],
+    "tags": ["scheduling", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3529,10 +2505,7 @@
     "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "api",
-      "rest"
-    ],
+    "tags": ["api", "rest"],
     "domain": "reporting-data-export"
   },
   {
@@ -3540,10 +2513,7 @@
     "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "siem",
-      "integration"
-    ],
+    "tags": ["siem", "integration"],
     "domain": "reporting-data-export"
   },
   {
@@ -3551,10 +2521,7 @@
     "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "json",
-      "automation"
-    ],
+    "tags": ["json", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3562,10 +2529,7 @@
     "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "export",
-      "formats"
-    ],
+    "tags": ["export", "formats"],
     "domain": "reporting-data-export"
   },
   {
@@ -3573,10 +2537,7 @@
     "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "scheduling",
-      "automation"
-    ],
+    "tags": ["scheduling", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3584,10 +2545,7 @@
     "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "api",
-      "rest"
-    ],
+    "tags": ["api", "rest"],
     "domain": "reporting-data-export"
   },
   {
@@ -3595,10 +2553,7 @@
     "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "siem",
-      "integration"
-    ],
+    "tags": ["siem", "integration"],
     "domain": "reporting-data-export"
   },
   {
@@ -3606,10 +2561,7 @@
     "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "json",
-      "automation"
-    ],
+    "tags": ["json", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3617,10 +2569,7 @@
     "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "export",
-      "formats"
-    ],
+    "tags": ["export", "formats"],
     "domain": "reporting-data-export"
   },
   {
@@ -3628,10 +2577,7 @@
     "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "scheduling",
-      "automation"
-    ],
+    "tags": ["scheduling", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3639,10 +2585,7 @@
     "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "api",
-      "rest"
-    ],
+    "tags": ["api", "rest"],
     "domain": "reporting-data-export"
   },
   {
@@ -3650,10 +2593,7 @@
     "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "siem",
-      "integration"
-    ],
+    "tags": ["siem", "integration"],
     "domain": "reporting-data-export"
   },
   {
@@ -3661,10 +2601,7 @@
     "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "json",
-      "automation"
-    ],
+    "tags": ["json", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3672,10 +2609,7 @@
     "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "export",
-      "formats"
-    ],
+    "tags": ["export", "formats"],
     "domain": "reporting-data-export"
   },
   {
@@ -3683,10 +2617,7 @@
     "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "scheduling",
-      "automation"
-    ],
+    "tags": ["scheduling", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3694,10 +2625,7 @@
     "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "api",
-      "rest"
-    ],
+    "tags": ["api", "rest"],
     "domain": "reporting-data-export"
   },
   {
@@ -3705,10 +2633,7 @@
     "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "siem",
-      "integration"
-    ],
+    "tags": ["siem", "integration"],
     "domain": "reporting-data-export"
   },
   {
@@ -3716,10 +2641,7 @@
     "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "json",
-      "automation"
-    ],
+    "tags": ["json", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3727,10 +2649,7 @@
     "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "export",
-      "formats"
-    ],
+    "tags": ["export", "formats"],
     "domain": "reporting-data-export"
   },
   {
@@ -3738,10 +2657,7 @@
     "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "scheduling",
-      "automation"
-    ],
+    "tags": ["scheduling", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3749,10 +2665,7 @@
     "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "api",
-      "rest"
-    ],
+    "tags": ["api", "rest"],
     "domain": "reporting-data-export"
   },
   {
@@ -3760,10 +2673,7 @@
     "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "siem",
-      "integration"
-    ],
+    "tags": ["siem", "integration"],
     "domain": "reporting-data-export"
   },
   {
@@ -3771,10 +2681,7 @@
     "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "json",
-      "automation"
-    ],
+    "tags": ["json", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3782,10 +2689,7 @@
     "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "export",
-      "formats"
-    ],
+    "tags": ["export", "formats"],
     "domain": "reporting-data-export"
   },
   {
@@ -3793,10 +2697,7 @@
     "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "scheduling",
-      "automation"
-    ],
+    "tags": ["scheduling", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3804,10 +2705,7 @@
     "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "api",
-      "rest"
-    ],
+    "tags": ["api", "rest"],
     "domain": "reporting-data-export"
   },
   {
@@ -3815,10 +2713,7 @@
     "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "siem",
-      "integration"
-    ],
+    "tags": ["siem", "integration"],
     "domain": "reporting-data-export"
   },
   {
@@ -3826,10 +2721,7 @@
     "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "json",
-      "automation"
-    ],
+    "tags": ["json", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3837,10 +2729,7 @@
     "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "export",
-      "formats"
-    ],
+    "tags": ["export", "formats"],
     "domain": "reporting-data-export"
   },
   {
@@ -3848,10 +2737,7 @@
     "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "scheduling",
-      "automation"
-    ],
+    "tags": ["scheduling", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3859,10 +2745,7 @@
     "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "api",
-      "rest"
-    ],
+    "tags": ["api", "rest"],
     "domain": "reporting-data-export"
   },
   {
@@ -3870,10 +2753,7 @@
     "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "siem",
-      "integration"
-    ],
+    "tags": ["siem", "integration"],
     "domain": "reporting-data-export"
   },
   {
@@ -3881,10 +2761,7 @@
     "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "json",
-      "automation"
-    ],
+    "tags": ["json", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3892,10 +2769,7 @@
     "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "export",
-      "formats"
-    ],
+    "tags": ["export", "formats"],
     "domain": "reporting-data-export"
   },
   {
@@ -3903,10 +2777,7 @@
     "back_text": "In the Reporting module, create a report template, click 'Schedule', set frequency (daily/weekly/monthly), specify recipients (email/API), choose format, and configure delivery options. Scheduled reports run automatically.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "scheduling",
-      "automation"
-    ],
+    "tags": ["scheduling", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3914,10 +2785,7 @@
     "back_text": "Use the '/api/v2/result_data/question' endpoint with GET or POST methods. Specify question ID or sensor names, apply filters, and receive JSON/CSV results programmatically for custom integrations.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "api",
-      "rest"
-    ],
+    "tags": ["api", "rest"],
     "domain": "reporting-data-export"
   },
   {
@@ -3925,10 +2793,7 @@
     "back_text": "Configure a Connect destination with SIEM connection details (API endpoint, Syslog server, or JDBC). Create a scheduled export for relevant questions, map fields to SIEM format, and enable real-time or batch delivery.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "siem",
-      "integration"
-    ],
+    "tags": ["siem", "integration"],
     "domain": "reporting-data-export"
   },
   {
@@ -3936,10 +2801,7 @@
     "back_text": "JSON export provides structured, machine-readable data ideal for API integrations, custom dashboards, and automated processing. It preserves data types, supports nested structures, and enables programmatic parsing.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "json",
-      "automation"
-    ],
+    "tags": ["json", "automation"],
     "domain": "reporting-data-export"
   },
   {
@@ -3947,10 +2809,7 @@
     "back_text": "Tanium supports CSV (comma-separated values), JSON (JavaScript Object Notation), XML (Extensible Markup Language), PDF (formatted reports), Excel (XLSX), and direct SIEM/SOAR integration via REST API.",
     "card_type": "concept",
     "source": "generated",
-    "tags": [
-      "export",
-      "formats"
-    ],
+    "tags": ["export", "formats"],
     "domain": "reporting-data-export"
   }
 ]

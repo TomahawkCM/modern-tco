@@ -92,9 +92,7 @@ async function importLessons(options: ImportOptions) {
   }
 
   const connectionString = getConnectionString();
-  const ssl = connectionString.includes("localhost")
-    ? false
-    : { rejectUnauthorized: false };
+  const ssl = connectionString.includes("localhost") ? false : { rejectUnauthorized: false };
 
   const client = new Client({ connectionString, ssl });
   await client.connect();

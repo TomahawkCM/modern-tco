@@ -28,11 +28,14 @@ function lsGet(): AdminQuestion[] {
 }
 
 function lsSet(qs: AdminQuestion[]) {
-  try { localStorage.setItem(LS_KEY, JSON.stringify(qs)); } catch {}
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify(qs));
+  } catch {}
 }
 
 function uuid(): string {
-  if (typeof crypto !== "undefined" && (crypto as any).randomUUID) return (crypto as any).randomUUID();
+  if (typeof crypto !== "undefined" && (crypto as any).randomUUID)
+    return (crypto as any).randomUUID();
   return Math.random().toString(36).slice(2) + Date.now().toString(36);
 }
 
@@ -88,13 +91,13 @@ export const contentService = {
     if (typeof window !== "undefined") {
       const cur = lsGet();
       const idx = cur.findIndex((x) => x.id === q.id);
-      if (idx >= 0) cur[idx] = q; else cur.unshift(q);
+      if (idx >= 0) cur[idx] = q;
+      else cur.unshift(q);
       lsSet(cur);
     }
     try {
-      await (supabase as any)
-        .from("questions")
-        .upsert({
+      await (supabase as any).from("questions").upsert(
+        {
           id: q.id,
           question: q.question,
           options: q.options,
@@ -104,7 +107,9 @@ export const contentService = {
           category: q.category,
           tags: q.tags,
           domain: q.domain,
-        }, { onConflict: "id" });
+        },
+        { onConflict: "id" }
+      );
     } catch {}
     return q;
   },
@@ -114,7 +119,8 @@ export const contentService = {
       const cur = lsGet().filter((x) => x.id !== id);
       lsSet(cur);
     }
-    try { await (supabase as any).from("questions").delete().eq("id", id); } catch {}
+    try {
+      await (supabase as any).from("questions").delete().eq("id", id);
+    } catch {}
   },
 };
-

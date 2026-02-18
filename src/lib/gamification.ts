@@ -100,9 +100,9 @@ export const POINT_MULTIPLIERS = {
     30: 2.0,
   },
   retention: {
-    70: 1.0,  // Struggling
-    80: 1.2,  // Normal
-    90: 1.5,  // Mastered
+    70: 1.0, // Struggling
+    80: 1.2, // Normal
+    90: 1.5, // Mastered
   },
 };
 
@@ -118,20 +118,20 @@ export const BASE_POINTS = {
 
 // Level progression (points needed for each level)
 export const LEVEL_THRESHOLDS = [
-  0,      // Level 1
-  100,    // Level 2
-  250,    // Level 3
-  500,    // Level 4
-  1000,   // Level 5
-  2000,   // Level 6
-  4000,   // Level 7
-  7500,   // Level 8
-  12000,  // Level 9
-  20000,  // Level 10
-  30000,  // Level 11
-  45000,  // Level 12
-  65000,  // Level 13
-  90000,  // Level 14
+  0, // Level 1
+  100, // Level 2
+  250, // Level 3
+  500, // Level 4
+  1000, // Level 5
+  2000, // Level 6
+  4000, // Level 7
+  7500, // Level 8
+  12000, // Level 9
+  20000, // Level 10
+  30000, // Level 11
+  45000, // Level 12
+  65000, // Level 13
+  90000, // Level 14
   120000, // Level 15
 ];
 
@@ -532,9 +532,9 @@ export function checkAchievements(stats: {
   const userAchievements = getUserAchievements();
   const newlyUnlocked: Achievement[] = [];
 
-  ACHIEVEMENTS.forEach(achievementDef => {
+  ACHIEVEMENTS.forEach((achievementDef) => {
     // Check if already unlocked
-    if (userAchievements.unlocked.some(a => a.id === achievementDef.id)) {
+    if (userAchievements.unlocked.some((a) => a.id === achievementDef.id)) {
       return;
     }
 
@@ -600,43 +600,40 @@ export function getAchievementProgress(stats: {
 }): AchievementProgress[] {
   const userAchievements = getUserAchievements();
 
-  return ACHIEVEMENTS.filter(
-    a => !userAchievements.unlocked.some(u => u.id === a.id)
-  ).map(achievement => {
-    let currentValue = 0;
-    switch (achievement.requirement.type) {
-      case "review_streak_days":
-        currentValue = stats.streakDays;
-        break;
-      case "perfect_sessions":
-        currentValue = stats.perfectSessions;
-        break;
-      case "total_reviews":
-        currentValue = stats.totalReviews;
-        break;
-      case "total_points":
-        currentValue = stats.totalPoints;
-        break;
-      case "items_mastered":
-        currentValue = stats.itemsMastered;
-        break;
-      case "practice_sessions":
-        currentValue = stats.practiceSessions;
-        break;
+  return ACHIEVEMENTS.filter((a) => !userAchievements.unlocked.some((u) => u.id === a.id)).map(
+    (achievement) => {
+      let currentValue = 0;
+      switch (achievement.requirement.type) {
+        case "review_streak_days":
+          currentValue = stats.streakDays;
+          break;
+        case "perfect_sessions":
+          currentValue = stats.perfectSessions;
+          break;
+        case "total_reviews":
+          currentValue = stats.totalReviews;
+          break;
+        case "total_points":
+          currentValue = stats.totalPoints;
+          break;
+        case "items_mastered":
+          currentValue = stats.itemsMastered;
+          break;
+        case "practice_sessions":
+          currentValue = stats.practiceSessions;
+          break;
+      }
+
+      const percentage = Math.min(100, (currentValue / achievement.requirement.value) * 100);
+
+      return {
+        achievementId: achievement.id,
+        currentValue,
+        requiredValue: achievement.requirement.value,
+        percentage,
+      };
     }
-
-    const percentage = Math.min(
-      100,
-      (currentValue / achievement.requirement.value) * 100
-    );
-
-    return {
-      achievementId: achievement.id,
-      currentValue,
-      requiredValue: achievement.requirement.value,
-      percentage,
-    };
-  });
+  );
 }
 
 /**

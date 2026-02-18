@@ -48,14 +48,16 @@ bash scripts/setup-accessibility-tests.sh
 **Tests will skip axe-core checks** until the package is installed.
 
 The following tests will still run without @axe-core/playwright:
+
 - ✅ Keyboard navigation tests
-- ✅ Screen reader support tests  
+- ✅ Screen reader support tests
 - ✅ Semantic HTML tests
 - ✅ Mobile accessibility tests
 - ✅ Form label tests
 - ✅ Touch target size tests
 
 The following tests require @axe-core/playwright:
+
 - ⏸️ WCAG 2.2 AA automated scans (skipped)
 - ⏸️ Color contrast automated checks (skipped)
 
@@ -88,6 +90,7 @@ npx playwright test tests/accessibility.spec.ts
 **Error:** `ENOTEMPTY: directory not empty, rename 'node_modules\msw'`
 
 **Causes:**
+
 - VSCode or another process has file handle open
 - Windows Defender scanning files
 - npm cache issue
@@ -95,6 +98,7 @@ npx playwright test tests/accessibility.spec.ts
 **Solutions:**
 
 1. **Close all editors and terminals:**
+
    ```bash
    # Close VSCode
    # Close all terminals
@@ -103,12 +107,14 @@ npx playwright test tests/accessibility.spec.ts
    ```
 
 2. **Clear npm cache:**
+
    ```bash
    npm cache clean --force
    npm install -D @axe-core/playwright
    ```
 
 3. **Delete node_modules and reinstall:**
+
    ```bash
    # WARNING: This will take 5-10 minutes
    rm -rf node_modules
@@ -130,6 +136,7 @@ npx playwright test tests/accessibility.spec.ts
 **The tests are designed to work without @axe-core/playwright.**
 
 They will:
+
 - ✅ Skip axe-specific tests
 - ✅ Run all other accessibility tests
 - ✅ Provide useful coverage
@@ -142,11 +149,13 @@ They will:
 ## 📊 Test Coverage
 
 ### Without @axe-core/playwright
+
 - ~15 tests run
 - ~8 tests skipped
 - Coverage: ~65%
 
-### With @axe-core/playwright  
+### With @axe-core/playwright
+
 - ~23 tests run
 - 0 tests skipped
 - Coverage: 100%
@@ -156,4 +165,3 @@ They will:
 **Recommendation:** Install the package when convenient. Tests work without it for now.
 
 **Last Updated:** November 6, 2025
-

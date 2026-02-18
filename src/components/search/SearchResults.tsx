@@ -59,7 +59,7 @@ function QuestionResultCard({
     const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
     return text.split(regex).map((part, index) =>
       regex.test(part) ? (
-        <mark key={index} className="rounded bg-tanium-accent/30 px-1 text-tanium-accent">
+        <mark key={index} className="bg-tanium-accent/30 text-tanium-accent rounded px-1">
           {part}
         </mark>
       ) : (
@@ -76,7 +76,7 @@ function QuestionResultCard({
           <Checkbox
             checked={isSelected}
             onCheckedChange={onToggleSelection}
-            className="mt-1 border-white/20 data-[state=checked]:bg-tanium-accent"
+            className="data-[state=checked]:bg-tanium-accent mt-1 border-white/20"
           />
 
           <div className="min-w-0 flex-1">
@@ -100,7 +100,7 @@ function QuestionResultCard({
               {relevanceScore > 1 && (
                 <Badge
                   variant="secondary"
-                  className="bg-tanium-accent/20 text-xs text-tanium-accent"
+                  className="bg-tanium-accent/20 text-tanium-accent text-xs"
                 >
                   {Math.round(relevanceScore * 10)}% match
                 </Badge>
@@ -120,7 +120,7 @@ function QuestionResultCard({
                   <Badge
                     key={index}
                     variant="outline"
-                    className="border-tanium-accent/50 text-xs text-tanium-accent"
+                    className="border-tanium-accent/50 text-tanium-accent text-xs"
                   >
                     {field}
                   </Badge>
@@ -245,7 +245,9 @@ function QuestionResultCard({
                 <div className="space-y-2">
                   {question.consoleSteps.map((step, index) => (
                     <div key={index} className="flex items-start gap-3 rounded bg-card/50 p-2">
-                      <span className="mt-1 font-mono text-xs text-muted-foreground">{index + 1}.</span>
+                      <span className="mt-1 font-mono text-xs text-muted-foreground">
+                        {index + 1}.
+                      </span>
                       <code className="flex-1 font-mono text-xs text-[#22c55e]">{step}</code>
                     </div>
                   ))}
@@ -322,7 +324,7 @@ export function SearchResults() {
     return (
       <div className="flex items-center justify-center py-12">
         <div className="flex items-center gap-3 text-muted-foreground">
-          <div className="h-6 w-6 animate-spin rounded-full border-b-2 border-tanium-accent"></div>
+          <div className="border-tanium-accent h-6 w-6 animate-spin rounded-full border-b-2"></div>
           <span>Searching questions...</span>
         </div>
       </div>
@@ -374,7 +376,7 @@ export function SearchResults() {
           <Checkbox
             checked={selectAll}
             onCheckedChange={handleSelectAll}
-            className="border-white/20 data-[state=checked]:bg-tanium-accent"
+            className="data-[state=checked]:bg-tanium-accent border-white/20"
           />
           <span className="text-sm text-muted-foreground">
             Select all ({paginatedResults.length} questions)

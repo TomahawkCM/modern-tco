@@ -9,8 +9,8 @@
  * - Closed account handling
  */
 
-import type { Account } from '@/types/budget';
-import type { NormalizedAccount, ParsedYNABData } from './ynab-parser';
+import type { Account } from "@/types/budget";
+import type { NormalizedAccount, ParsedYNABData } from "./ynab-parser";
 
 // ============================================================================
 // Types
@@ -57,35 +57,29 @@ export interface AccountTransformStats {
 /**
  * Maps YNAB account types to our simplified types
  */
-const ACCOUNT_TYPE_MAP: Record<
-  NormalizedAccount['type'],
-  Account['type']
-> = {
-  checking: 'checking',
-  savings: 'savings',
-  credit: 'credit',
-  cash: 'checking', // We don't have a cash type, map to checking
-  loan: 'credit', // Map loans to credit for liability tracking
-  investment: 'savings', // Map investments to savings for now
+const ACCOUNT_TYPE_MAP: Record<NormalizedAccount["type"], Account["type"]> = {
+  checking: "checking",
+  savings: "savings",
+  credit: "credit",
+  cash: "checking", // We don't have a cash type, map to checking
+  loan: "credit", // Map loans to credit for liability tracking
+  investment: "savings", // Map investments to savings for now
 };
 
 /**
  * Determines if account type is an asset (positive is good)
  */
-const ASSET_TYPES = new Set<NormalizedAccount['type']>([
-  'checking',
-  'savings',
-  'cash',
-  'investment',
+const ASSET_TYPES = new Set<NormalizedAccount["type"]>([
+  "checking",
+  "savings",
+  "cash",
+  "investment",
 ]);
 
 /**
  * Determines if account type is a liability (negative is expected)
  */
-const LIABILITY_TYPES = new Set<NormalizedAccount['type']>([
-  'credit',
-  'loan',
-]);
+const LIABILITY_TYPES = new Set<NormalizedAccount["type"]>(["credit", "loan"]);
 
 // ============================================================================
 // Institution Detection
@@ -99,52 +93,52 @@ const INSTITUTION_PATTERNS: Array<{
   institution: string;
 }> = [
   // US Banks
-  { pattern: /chase/i, institution: 'Chase' },
-  { pattern: /bank\s+of\s+america|boa|bofa/i, institution: 'Bank of America' },
-  { pattern: /wells\s+fargo/i, institution: 'Wells Fargo' },
-  { pattern: /citi|citibank/i, institution: 'Citibank' },
-  { pattern: /capital\s+one/i, institution: 'Capital One' },
-  { pattern: /usaa/i, institution: 'USAA' },
-  { pattern: /discover/i, institution: 'Discover' },
-  { pattern: /american\s+express|amex/i, institution: 'American Express' },
-  { pattern: /td\s+bank/i, institution: 'TD Bank' },
-  { pattern: /pnc/i, institution: 'PNC' },
+  { pattern: /chase/i, institution: "Chase" },
+  { pattern: /bank\s+of\s+america|boa|bofa/i, institution: "Bank of America" },
+  { pattern: /wells\s+fargo/i, institution: "Wells Fargo" },
+  { pattern: /citi|citibank/i, institution: "Citibank" },
+  { pattern: /capital\s+one/i, institution: "Capital One" },
+  { pattern: /usaa/i, institution: "USAA" },
+  { pattern: /discover/i, institution: "Discover" },
+  { pattern: /american\s+express|amex/i, institution: "American Express" },
+  { pattern: /td\s+bank/i, institution: "TD Bank" },
+  { pattern: /pnc/i, institution: "PNC" },
 
   // Canadian Banks
-  { pattern: /bmo|bank\s+of\s+montreal/i, institution: 'BMO' },
-  { pattern: /rbc|royal\s+bank/i, institution: 'RBC' },
-  { pattern: /td\s+canada|toronto\s+dominion/i, institution: 'TD Canada' },
-  { pattern: /scotiabank/i, institution: 'Scotiabank' },
-  { pattern: /cibc/i, institution: 'CIBC' },
-  { pattern: /tangerine/i, institution: 'Tangerine' },
-  { pattern: /simplii/i, institution: 'Simplii' },
-  { pattern: /eq\s+bank/i, institution: 'EQ Bank' },
-  { pattern: /home\s+trust/i, institution: 'Home Trust' },
+  { pattern: /bmo|bank\s+of\s+montreal/i, institution: "BMO" },
+  { pattern: /rbc|royal\s+bank/i, institution: "RBC" },
+  { pattern: /td\s+canada|toronto\s+dominion/i, institution: "TD Canada" },
+  { pattern: /scotiabank/i, institution: "Scotiabank" },
+  { pattern: /cibc/i, institution: "CIBC" },
+  { pattern: /tangerine/i, institution: "Tangerine" },
+  { pattern: /simplii/i, institution: "Simplii" },
+  { pattern: /eq\s+bank/i, institution: "EQ Bank" },
+  { pattern: /home\s+trust/i, institution: "Home Trust" },
 
   // Credit Unions
-  { pattern: /credit\s+union/i, institution: 'Credit Union' },
-  { pattern: /navy\s+federal/i, institution: 'Navy Federal' },
-  { pattern: /alliant/i, institution: 'Alliant' },
+  { pattern: /credit\s+union/i, institution: "Credit Union" },
+  { pattern: /navy\s+federal/i, institution: "Navy Federal" },
+  { pattern: /alliant/i, institution: "Alliant" },
 
   // Investment
-  { pattern: /vanguard/i, institution: 'Vanguard' },
-  { pattern: /fidelity/i, institution: 'Fidelity' },
-  { pattern: /schwab|charles\s+schwab/i, institution: 'Charles Schwab' },
-  { pattern: /wealthsimple/i, institution: 'Wealthsimple' },
-  { pattern: /questrade/i, institution: 'Questrade' },
-  { pattern: /robinhood/i, institution: 'Robinhood' },
+  { pattern: /vanguard/i, institution: "Vanguard" },
+  { pattern: /fidelity/i, institution: "Fidelity" },
+  { pattern: /schwab|charles\s+schwab/i, institution: "Charles Schwab" },
+  { pattern: /wealthsimple/i, institution: "Wealthsimple" },
+  { pattern: /questrade/i, institution: "Questrade" },
+  { pattern: /robinhood/i, institution: "Robinhood" },
 
   // Fintech
-  { pattern: /ally/i, institution: 'Ally' },
-  { pattern: /marcus/i, institution: 'Marcus' },
-  { pattern: /sofi/i, institution: 'SoFi' },
-  { pattern: /chime/i, institution: 'Chime' },
-  { pattern: /paypal/i, institution: 'PayPal' },
-  { pattern: /venmo/i, institution: 'Venmo' },
+  { pattern: /ally/i, institution: "Ally" },
+  { pattern: /marcus/i, institution: "Marcus" },
+  { pattern: /sofi/i, institution: "SoFi" },
+  { pattern: /chime/i, institution: "Chime" },
+  { pattern: /paypal/i, institution: "PayPal" },
+  { pattern: /venmo/i, institution: "Venmo" },
 
   // Generic
-  { pattern: /cash/i, institution: 'Cash' },
-  { pattern: /wallet/i, institution: 'Wallet' },
+  { pattern: /cash/i, institution: "Cash" },
+  { pattern: /wallet/i, institution: "Wallet" },
 ];
 
 // ============================================================================
@@ -161,7 +155,7 @@ export function transformYNABAccounts(
   const {
     includeClosedAccounts = false,
     includeOffBudgetAccounts = true,
-    defaultCurrency = 'USD',
+    defaultCurrency = "USD",
     institutionMappings = {},
   } = options;
 
@@ -220,13 +214,10 @@ export function transformYNABAccounts(
     accountIdMap.set(ynabAccount.id, ourAccountId);
 
     // Detect institution
-    const institution = detectInstitution(
-      ynabAccount.name,
-      institutionMappings
-    );
+    const institution = detectInstitution(ynabAccount.name, institutionMappings);
 
     // Map account type
-    const accountType = ACCOUNT_TYPE_MAP[ynabAccount.type] || 'checking';
+    const accountType = ACCOUNT_TYPE_MAP[ynabAccount.type] || "checking";
 
     // Create account
     accounts.push({
@@ -255,10 +246,7 @@ export function transformYNABAccounts(
 // Helper Functions
 // ============================================================================
 
-function detectInstitution(
-  accountName: string,
-  customMappings: Record<string, string>
-): string {
+function detectInstitution(accountName: string, customMappings: Record<string, string>): string {
   // Check custom mappings first
   for (const [pattern, institution] of Object.entries(customMappings)) {
     if (accountName.toLowerCase().includes(pattern.toLowerCase())) {
@@ -283,20 +271,13 @@ function detectInstitution(
   const words = accountName.split(/\s+/);
   if (words.length >= 2 && words[0].length > 2) {
     // Check if first word is a known type
-    const typeWords = [
-      'checking',
-      'savings',
-      'credit',
-      'card',
-      'account',
-      'my',
-    ];
+    const typeWords = ["checking", "savings", "credit", "card", "account", "my"];
     if (!typeWords.includes(words[0].toLowerCase())) {
       return words[0];
     }
   }
 
-  return 'Unknown';
+  return "Unknown";
 }
 
 // ============================================================================
@@ -306,13 +287,11 @@ function detectInstitution(
 /**
  * Quick transform with default options
  */
-export function quickTransformAccounts(
-  data: ParsedYNABData
-): AccountTransformResult {
+export function quickTransformAccounts(data: ParsedYNABData): AccountTransformResult {
   return transformYNABAccounts(data, {
     includeClosedAccounts: false,
     includeOffBudgetAccounts: true,
-    defaultCurrency: data.currency || 'USD',
+    defaultCurrency: data.currency || "USD",
   });
 }
 
@@ -371,9 +350,7 @@ export function matchAccountsByName(
   existingAccounts: Account[]
 ): Map<string, string> {
   const matches = new Map<string, string>();
-  const existingByName = new Map(
-    existingAccounts.map((a) => [a.name.toLowerCase(), a.id])
-  );
+  const existingByName = new Map(existingAccounts.map((a) => [a.name.toLowerCase(), a.id]));
 
   for (const ynabAcc of ynabAccounts) {
     const lowerName = ynabAcc.name.toLowerCase();
@@ -387,10 +364,7 @@ export function matchAccountsByName(
 
     // Try fuzzy match (contains)
     for (const [existingName, existingId] of existingByName) {
-      if (
-        lowerName.includes(existingName) ||
-        existingName.includes(lowerName)
-      ) {
+      if (lowerName.includes(existingName) || existingName.includes(lowerName)) {
         matches.set(ynabAcc.id, existingId);
         break;
       }

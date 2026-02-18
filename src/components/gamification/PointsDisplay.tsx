@@ -80,7 +80,9 @@ export function PointsDisplay({ compact = false, className }: PointsDisplayProps
               </Badge>
             </TooltipTrigger>
             <TooltipContent>
-              <p>{Math.round(levelInfo.progress)}% to Level {levelInfo.level + 1}</p>
+              <p>
+                {Math.round(levelInfo.progress)}% to Level {levelInfo.level + 1}
+              </p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -89,7 +91,12 @@ export function PointsDisplay({ compact = false, className }: PointsDisplayProps
   }
 
   return (
-    <Card className={cn("border-[#f97316]/20 bg-gradient-to-br from-yellow-500/5 to-orange-500/5", className)}>
+    <Card
+      className={cn(
+        "border-[#f97316]/20 bg-gradient-to-br from-yellow-500/5 to-orange-500/5",
+        className
+      )}
+    >
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Trophy className="h-5 w-5 text-[#f97316]" />
@@ -124,9 +131,13 @@ export function PointsDisplay({ compact = false, className }: PointsDisplayProps
           <div className="space-y-1">
             <Progress value={levelInfo.progress} className="h-2" />
             <div className="flex justify-between text-xs text-muted-foreground">
-              <span>{(userPoints.totalPoints - levelInfo.currentLevelPoints).toLocaleString()} pts</span>
+              <span>
+                {(userPoints.totalPoints - levelInfo.currentLevelPoints).toLocaleString()} pts
+              </span>
               <span>{Math.round(levelInfo.progress)}%</span>
-              <span>{(levelInfo.nextLevelPoints - levelInfo.currentLevelPoints).toLocaleString()} pts</span>
+              <span>
+                {(levelInfo.nextLevelPoints - levelInfo.currentLevelPoints).toLocaleString()} pts
+              </span>
             </div>
           </div>
         </div>
@@ -158,20 +169,23 @@ export function PointsDisplay({ compact = false, className }: PointsDisplayProps
           <div className="space-y-2">
             <h4 className="text-sm font-semibold text-muted-foreground">Recent Activity</h4>
             <div className="space-y-1">
-              {userPoints.pointsHistory.slice(-3).reverse().map((entry, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center justify-between rounded border border-gray-700/50 bg-card/30 px-2 py-1 text-xs"
-                >
-                  <span className="text-muted-foreground">
-                    {formatPointsReason(entry.reason)}
-                    {entry.multiplier && entry.multiplier > 1 && (
-                      <span className="ml-1 text-[#f97316]">×{entry.multiplier.toFixed(1)}</span>
-                    )}
-                  </span>
-                  <span className="font-semibold text-[#22c55e]">+{entry.points}</span>
-                </div>
-              ))}
+              {userPoints.pointsHistory
+                .slice(-3)
+                .reverse()
+                .map((entry, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center justify-between rounded border border-gray-700/50 bg-card/30 px-2 py-1 text-xs"
+                  >
+                    <span className="text-muted-foreground">
+                      {formatPointsReason(entry.reason)}
+                      {entry.multiplier && entry.multiplier > 1 && (
+                        <span className="ml-1 text-[#f97316]">×{entry.multiplier.toFixed(1)}</span>
+                      )}
+                    </span>
+                    <span className="font-semibold text-[#22c55e]">+{entry.points}</span>
+                  </div>
+                ))}
             </div>
           </div>
         )}

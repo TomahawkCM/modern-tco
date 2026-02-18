@@ -3,7 +3,7 @@
  * Provides amortization schedules, payment calculations, and loan analytics
  */
 
-import type { Loan, AmortizationEntry } from '@/types/budget';
+import type { Loan, AmortizationEntry } from "@/types/budget";
 
 /**
  * Calculate monthly payment using standard amortization formula
@@ -24,8 +24,7 @@ export function calculateMonthlyPayment(
 
   const monthlyRate = annualInterestRate / 100 / 12;
   const payment =
-    principal *
-    (monthlyRate * Math.pow(1 + monthlyRate, termMonths)) /
+    (principal * (monthlyRate * Math.pow(1 + monthlyRate, termMonths))) /
     (Math.pow(1 + monthlyRate, termMonths) - 1);
 
   return Math.round(payment * 100) / 100; // Round to 2 decimals
@@ -43,7 +42,8 @@ export function generateAmortizationSchedule(
 ): AmortizationEntry[] {
   if (principal <= 0 || termMonths <= 0) return [];
 
-  const payment = monthlyPayment || calculateMonthlyPayment(principal, annualInterestRate, termMonths);
+  const payment =
+    monthlyPayment || calculateMonthlyPayment(principal, annualInterestRate, termMonths);
   const monthlyRate = annualInterestRate / 100 / 12;
   const schedule: AmortizationEntry[] = [];
 
@@ -112,7 +112,8 @@ export function calculateExtraPaymentImpact(
     loan.startDate
   );
 
-  const originalTotalInterest = originalSchedule[originalSchedule.length - 1]?.cumulativeInterest || 0;
+  const originalTotalInterest =
+    originalSchedule[originalSchedule.length - 1]?.cumulativeInterest || 0;
   const monthlyRate = loan.interestRate / 100 / 12;
   const regularPayment = loan.monthlyPayment;
 
@@ -121,7 +122,8 @@ export function calculateExtraPaymentImpact(
   let cumulativeInterest = 0;
   let month = 1;
 
-  while (balance > 0 && month <= loan.termMonths * 2) { // Safety limit: 2x original term
+  while (balance > 0 && month <= loan.termMonths * 2) {
+    // Safety limit: 2x original term
     // Interest for this period
     const interestPayment = balance * monthlyRate;
 
@@ -132,7 +134,7 @@ export function calculateExtraPaymentImpact(
     principalPayment += extraMonthlyPayment;
 
     // Add one-time payment if scheduled for this month
-    const oneTimePayment = oneTimePayments.find(p => p.month === month);
+    const oneTimePayment = oneTimePayments.find((p) => p.month === month);
     if (oneTimePayment) {
       principalPayment += oneTimePayment.amount;
     }
@@ -218,10 +220,7 @@ export function analyzeLoanCost(loan: Loan): LoanCostAnalysis {
 /**
  * Calculate remaining balance on a specific date
  */
-export function calculateBalanceOnDate(
-  loan: Loan,
-  targetDate: Date
-): number {
+export function calculateBalanceOnDate(loan: Loan, targetDate: Date): number {
   const schedule = generateAmortizationSchedule(
     loan.currentBalance,
     loan.interestRate,
@@ -232,7 +231,7 @@ export function calculateBalanceOnDate(
 
   // Find the entry closest to (but before or on) target date
   const entry = schedule
-    .filter(e => e.date <= targetDate)
+    .filter((e) => e.date <= targetDate)
     .sort((a, b) => b.date.getTime() - a.date.getTime())[0];
 
   return entry?.balance || loan.currentBalance;
@@ -241,11 +240,7 @@ export function calculateBalanceOnDate(
 /**
  * Calculate how much interest will be paid over a time period
  */
-export function calculateInterestForPeriod(
-  loan: Loan,
-  startDate: Date,
-  endDate: Date
-): number {
+export function calculateInterestForPeriod(loan: Loan, startDate: Date, endDate: Date): number {
   const schedule = generateAmortizationSchedule(
     loan.currentBalance,
     loan.interestRate,
@@ -254,9 +249,7 @@ export function calculateInterestForPeriod(
     loan.monthlyPayment
   );
 
-  const relevantEntries = schedule.filter(
-    e => e.date >= startDate && e.date <= endDate
-  );
+  const relevantEntries = schedule.filter((e) => e.date >= startDate && e.date <= endDate);
 
   return relevantEntries.reduce((sum, entry) => sum + entry.interest, 0);
 }
@@ -274,10 +267,7 @@ export interface LoanComparison {
   recommendation: string;
 }
 
-export function compareLoans(
-  loan1: Loan,
-  loan2: Loan
-): LoanComparison {
+export function compareLoans(loan1: Loan, loan2: Loan): LoanComparison {
   const analysis1 = analyzeLoanCost(loan1);
   const analysis2 = analyzeLoanCost(loan2);
 
@@ -285,16 +275,15 @@ export function compareLoans(
   const interestSavings = analysis1.totalInterest - analysis2.totalInterest;
   const paymentDifference = analysis1.monthlyPayment - analysis2.monthlyPayment;
   const timeDifference =
-    (analysis1.payoffDate.getTime() - analysis2.payoffDate.getTime()) /
-    (1000 * 60 * 60 * 24 * 30); // Rough months
+    (analysis1.payoffDate.getTime() - analysis2.payoffDate.getTime()) / (1000 * 60 * 60 * 24 * 30); // Rough months
 
-  let recommendation = '';
+  let recommendation = "";
   if (totalSavings > 0) {
     recommendation = `Loan 2 saves $${Math.abs(totalSavings).toFixed(2)} total`;
   } else if (totalSavings < 0) {
     recommendation = `Loan 1 saves $${Math.abs(totalSavings).toFixed(2)} total`;
   } else {
-    recommendation = 'Both loans have similar total costs';
+    recommendation = "Both loans have similar total costs";
   }
 
   return {
@@ -318,10 +307,7 @@ export interface DebtPayoffPlan {
   totalInterest: number;
 }
 
-export function calculateDebtSnowball(
-  loans: Loan[],
-  extraMonthlyAmount: number
-): DebtPayoffPlan[] {
+export function calculateDebtSnowball(loans: Loan[], extraMonthlyAmount: number): DebtPayoffPlan[] {
   // Sort by current balance (smallest first)
   const sortedLoans = [...loans].sort((a, b) => a.currentBalance - b.currentBalance);
 

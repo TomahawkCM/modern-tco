@@ -87,6 +87,7 @@ importanceWeight = {
 ```
 
 **Example Calculations**:
+
 - Flashcard: 40% mastery, 5 days overdue → `(0.6) × (1.70) × 1.0 × 100 = 102`
 - Question: 40% mastery, 5 days overdue → `(0.6) × (1.70) × 1.2 × 100 = 122` (higher priority)
 
@@ -109,6 +110,7 @@ Priority Sorting → ReviewQueueItem[] → UI Components
 ### New Files (11 total)
 
 #### Database & Migrations
+
 1. **`/supabase/migrations/20251002000002_add_question_reviews.sql`** (387 lines)
    - Core Phase 2 schema (question_reviews, review_sessions, question_review_attempts)
    - PostgreSQL functions for queue aggregation and streak calculation
@@ -120,6 +122,7 @@ Priority Sorting → ReviewQueueItem[] → UI Components
    - Optimized functions: `get_unified_review_queue_fast()`, `get_review_stats_fast()`
 
 #### Services
+
 3. **`/src/services/questionReviewService.ts`** (400+ lines)
    - SM-2 algorithm implementation for questions
    - Auto-rating based on correctness and mastery level
@@ -131,18 +134,21 @@ Priority Sorting → ReviewQueueItem[] → UI Components
    - Streak calculation and statistics
 
 #### Types
+
 5. **`/src/types/review.ts`** (250+ lines)
    - Complete type definitions for review system
    - Type guards: `isFlashcardItem()`, `isQuestionItem()`
    - Helper functions: `formatTimeRemaining()`, `calculateStreak()`
 
 #### Contexts
+
 6. **`/src/contexts/ReviewContext.tsx`** (435 lines)
    - State management for review sessions
    - Queue loading and item tracking
    - Analytics event tracking (PostHog integration)
 
 #### Components
+
 7. **`/src/components/review/ReviewDashboard.tsx`** (339 lines)
    - Main review interface with stats, streak, quick-start options
    - Tab system for flashcards/questions/mixed queues
@@ -171,6 +177,7 @@ Priority Sorting → ReviewQueueItem[] → UI Components
     - High-priority indicator
 
 #### Documentation
+
 12. **`/docs/REVIEW_ANALYTICS_EVENTS.md`** (600+ lines)
     - Complete PostHog event taxonomy (7 events)
     - Example queries for metrics and funnels
@@ -211,6 +218,7 @@ Priority Sorting → ReviewQueueItem[] → UI Components
 **Service**: `questionReviewService.ts`
 
 **Key Methods**:
+
 ```typescript
 // Get or create review record
 async getOrCreateReview(userId: string, questionId: string): Promise<QuestionReview>
@@ -231,13 +239,14 @@ async getQuestionReviewStats(userId: string): Promise<QuestionReviewStats>
 ```
 
 **Intelligent Rating**:
+
 ```typescript
 // Auto-calculates SM-2 rating from correctness + mastery
-if (!isCorrect) return 'again';
-if (currentReps === 0) return 'good';  // First attempt correct = good
-if (masteryLevel >= 0.9) return 'easy';
-if (masteryLevel >= 0.7) return 'good';
-return 'hard';
+if (!isCorrect) return "again";
+if (currentReps === 0) return "good"; // First attempt correct = good
+if (masteryLevel >= 0.9) return "easy";
+if (masteryLevel >= 0.7) return "good";
+return "hard";
 ```
 
 ### 2. Unified Review Queue
@@ -245,11 +254,13 @@ return 'hard';
 **Service**: `reviewService.ts`
 
 **Queue Types**:
+
 - **Mixed** (default): Interleaved flashcards + questions
 - **Flashcards**: Flashcards only
 - **Questions**: Questions only
 
 **Priority Sorting**:
+
 ```typescript
 // Items sorted by priority score (high to low)
 const queue = await reviewService.getUnifiedReviewQueue(userId, 50);
@@ -261,6 +272,7 @@ const queue = await reviewService.getUnifiedReviewQueue(userId, 50);
 ```
 
 **Performance Optimization**:
+
 ```typescript
 // Fast version (10-20x faster using materialized view)
 const queue = await reviewService.getUnifiedReviewQueueFast(userId, 50);
@@ -271,12 +283,13 @@ const queue = await reviewService.getUnifiedReviewQueueFast(userId, 50);
 ### 3. Review Sessions
 
 **Session Lifecycle**:
+
 ```typescript
 // 1. Start session
-const session = await reviewService.startSession(userId, 'mixed', 15);
+const session = await reviewService.startSession(userId, "mixed", 15);
 
 // 2. Review items
-await reviewFlashcard(flashcardId, 'good', 12);
+await reviewFlashcard(flashcardId, "good", 12);
 await reviewQuestion(questionId, true, 45);
 
 // 3. Complete session
@@ -285,11 +298,12 @@ await reviewService.completeSession(sessionId, {
   questionsReviewed: 8,
   correctCount: 16,
   totalCount: 18,
-  actualDurationSeconds: 890
+  actualDurationSeconds: 890,
 });
 ```
 
 **Time-Boxed Options**:
+
 - 10 minutes (quick session)
 - 15 minutes (recommended)
 - 30 minutes (deep focus)
@@ -298,6 +312,7 @@ await reviewService.completeSession(sessionId, {
 ### 4. Streak Tracking
 
 **Calculation Logic**:
+
 ```typescript
 // Current streak: consecutive days from today/yesterday
 // Breaks if no review 2+ days ago
@@ -309,6 +324,7 @@ await reviewService.completeSession(sessionId, {
 ```
 
 **Achievements**:
+
 - 7 days: "Review Warrior"
 - 30 days: "Review Master"
 - 100 days: "Review Legend"
@@ -318,6 +334,7 @@ await reviewService.completeSession(sessionId, {
 **PostHog Events** (7 total):
 
 1. **`review_session_started`**
+
    ```json
    {
      "sessionType": "mixed",
@@ -327,6 +344,7 @@ await reviewService.completeSession(sessionId, {
    ```
 
 2. **`review_session_completed`**
+
    ```json
    {
      "sessionId": "uuid",
@@ -339,6 +357,7 @@ await reviewService.completeSession(sessionId, {
    ```
 
 3. **`flashcard_reviewed`**
+
    ```json
    {
      "flashcardId": "fc_123",
@@ -396,10 +415,7 @@ export default function ReviewPage() {
 
   if (activeSession || showSession) {
     return (
-      <StudySession
-        onComplete={() => setShowSession(false)}
-        onExit={() => setShowSession(false)}
-      />
+      <StudySession onComplete={() => setShowSession(false)} onExit={() => setShowSession(false)} />
     );
   }
 
@@ -492,15 +508,15 @@ SELECT refresh_review_queue();
 
 ```typescript
 // questionReviewService.test.ts
-describe('QuestionReviewService', () => {
-  test('creates new review with default SRS state', async () => {
+describe("QuestionReviewService", () => {
+  test("creates new review with default SRS state", async () => {
     const review = await questionReviewService.getOrCreateReview(userId, questionId);
     expect(review.srs_interval).toBe(0);
     expect(review.srs_ease).toBe(2.5);
     expect(review.total_attempts).toBe(0);
   });
 
-  test('calculates intelligent rating from correctness', async () => {
+  test("calculates intelligent rating from correctness", async () => {
     // First correct answer → 'good'
     const result = await questionReviewService.reviewQuestion(questionId, userId, true, 30);
     expect(result.review.srs_interval).toBeGreaterThan(0);
@@ -508,21 +524,24 @@ describe('QuestionReviewService', () => {
 });
 
 // reviewService.test.ts
-describe('ReviewService', () => {
-  test('prioritizes low mastery items', async () => {
+describe("ReviewService", () => {
+  test("prioritizes low mastery items", async () => {
     const queue = await reviewService.getUnifiedReviewQueue(userId, 50);
     expect(queue[0].mastery).toBeLessThan(queue[queue.length - 1].mastery);
   });
 
-  test('weights questions higher than flashcards', async () => {
+  test("weights questions higher than flashcards", async () => {
     const queue = await reviewService.getUnifiedReviewQueue(userId, 50);
-    const question = queue.find(item => item.itemType === 'question');
-    const flashcard = queue.find(item => item.itemType === 'flashcard');
+    const question = queue.find((item) => item.itemType === "question");
+    const flashcard = queue.find((item) => item.itemType === "flashcard");
 
     // Same mastery/overdue → question has higher priority
-    if (question && flashcard &&
-        question.mastery === flashcard.mastery &&
-        Math.abs(question.dueDate.getTime() - flashcard.dueDate.getTime()) < 86400000) {
+    if (
+      question &&
+      flashcard &&
+      question.mastery === flashcard.mastery &&
+      Math.abs(question.dueDate.getTime() - flashcard.dueDate.getTime()) < 86400000
+    ) {
       expect(question.priorityScore).toBeGreaterThan(flashcard.priorityScore);
     }
   });
@@ -533,18 +552,18 @@ describe('ReviewService', () => {
 
 ```typescript
 // review-flow.test.ts
-describe('Review Flow', () => {
-  test('complete mixed review session', async () => {
+describe("Review Flow", () => {
+  test("complete mixed review session", async () => {
     // Start session
-    const session = await startSession('mixed', 15);
-    expect(session.session_type).toBe('mixed');
+    const session = await startSession("mixed", 15);
+    expect(session.session_type).toBe("mixed");
 
     // Load queue
-    const queue = await loadQueue('mixed');
+    const queue = await loadQueue("mixed");
     expect(queue.length).toBeGreaterThan(0);
 
     // Review flashcard
-    await reviewFlashcard(queue[0].flashcard.id, 'good', 15);
+    await reviewFlashcard(queue[0].flashcard.id, "good", 15);
 
     // Review question
     await reviewQuestion(queue[1].question.id, true, 30);
@@ -593,12 +612,14 @@ describe('Review Flow', () => {
 ### Query Performance
 
 **Without Optimization** (real-time calculation):
+
 ```sql
 -- getUnifiedReviewQueue()
 -- Query time: ~450ms (10,000 flashcards + 5,000 questions)
 ```
 
 **With Optimization** (materialized view):
+
 ```sql
 -- getUnifiedReviewQueueFast()
 -- Query time: ~25ms (same dataset)
@@ -608,6 +629,7 @@ describe('Review Flow', () => {
 ### Database Indexes
 
 **Critical Indexes** (15 total):
+
 ```sql
 -- Most impactful for query performance
 idx_question_reviews_user_due        -- 95% of queue queries
@@ -620,6 +642,7 @@ idx_question_reviews_user_mastery    -- Priority sorting
 **Added Dependencies**: None (uses existing PostHog analytics wrapper)
 
 **Component Sizes**:
+
 - ReviewDashboard: ~12 KB (gzipped)
 - StudySession: ~15 KB (gzipped)
 - StreakCalendar: ~8 KB (gzipped)
@@ -659,17 +682,17 @@ idx_question_reviews_user_mastery    -- Priority sorting
 
 ```tsx
 // Add at 30-second warning
-{timeRemaining === 30 && (
-  <Alert>
-    <Clock className="h-4 w-4" />
-    <AlertTitle>30 seconds remaining</AlertTitle>
-    <AlertDescription>
-      <Button onClick={() => setTimeRemaining(prev => prev + 60)}>
-        Add 1 Minute
-      </Button>
-    </AlertDescription>
-  </Alert>
-)}
+{
+  timeRemaining === 30 && (
+    <Alert>
+      <Clock className="h-4 w-4" />
+      <AlertTitle>30 seconds remaining</AlertTitle>
+      <AlertDescription>
+        <Button onClick={() => setTimeRemaining((prev) => prev + 60)}>Add 1 Minute</Button>
+      </AlertDescription>
+    </Alert>
+  );
+}
 
 // Add confirmation before auto-submit
 if (timeRemaining <= 1) {

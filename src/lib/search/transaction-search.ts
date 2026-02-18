@@ -4,9 +4,10 @@
  * Features: Multi-field search, typo tolerance, result scoring, instant results
  */
 
-import Fuse, { type IFuseOptions, type FuseResult } from 'fuse.js';
-import type { Transaction, Category } from '@/types/budget';
-import { parseSearchQuery, type ParsedQuery } from './query-parser';
+import Fuse, { type IFuseOptions, type FuseResult } from "fuse.js";
+import type { Transaction, Category } from "@/types/budget";
+import { parseSearchQuery, type ParsedQuery } from "./query-parser";
+import { normalizeText } from "./text-utils";
 
 // Search result with score and match info
 export interface SearchResult {
@@ -32,13 +33,13 @@ export interface SearchableTransaction extends Transaction {
 const FUSE_OPTIONS: IFuseOptions<SearchableTransaction> = {
   // Fields to search with weights (higher = more important)
   keys: [
-    { name: 'description', weight: 0.35 },
-    { name: 'merchant', weight: 0.25 },
-    { name: 'categoryName', weight: 0.15 },
-    { name: 'notes', weight: 0.10 },
-    { name: 'originalDescription', weight: 0.08 },
-    { name: 'accountName', weight: 0.05 },
-    { name: 'allText', weight: 0.02 },
+    { name: "description", weight: 0.35 },
+    { name: "merchant", weight: 0.25 },
+    { name: "categoryName", weight: 0.15 },
+    { name: "notes", weight: 0.1 },
+    { name: "originalDescription", weight: 0.08 },
+    { name: "accountName", weight: 0.05 },
+    { name: "allText", weight: 0.02 },
   ],
   // Fuzzy search settings
   threshold: 0.35, // 0 = exact match, 1 = match anything (0.35 = good typo tolerance)
@@ -59,41 +60,65 @@ let cachedFuse: Fuse<SearchableTransaction> | null = null;
 let cachedTransactions: Transaction[] = [];
 let cachedCategories: Category[] = [];
 let cachedAccounts: { id: string; name: string }[] = [];
+let cachedLocale: string = "en-US";
+
+// Re-export normalizeText so existing consumers importing from this file still work
+export { normalizeText } from "./text-utils";
 
 /**
- * Prepare transaction for search by flattening related data
+ * Prepare transaction for search by flattening related data.
+ * All text fields are normalized (diacritics stripped) so that Fuse.js indexes
+ * the normalized form, allowing accent-insensitive matching.
  */
 function prepareForSearch(
   transaction: Transaction,
   categoryMap: Map<string, string>,
-  accountMap: Map<string, string>
+  accountMap: Map<string, string>,
+  locale: string = "en-US"
 ): SearchableTransaction {
   const categoryName = transaction.category
-    ? (categoryMap.get(transaction.category) || transaction.category)
-    : 'Uncategorized';
-  const accountName = accountMap.get(transaction.accountId) || 'Unknown Account';
-  const amountFormatted = `$${Math.abs(transaction.amount).toFixed(2)}`;
-  const dateFormatted = new Date(transaction.date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
+    ? categoryMap.get(transaction.category) || transaction.category
+    : "Uncategorized";
+  const accountName = accountMap.get(transaction.accountId) || "Unknown Account";
+
+  // Locale-aware currency formatting instead of hardcoded "$"
+  const amountFormatted = new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: getCurrencyForLocale(locale),
+  }).format(Math.abs(transaction.amount));
+
+  const dateFormatted = new Date(transaction.date).toLocaleDateString(locale, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   });
 
-  // Combine all searchable text for broad queries
-  const allText = [
-    transaction.description,
-    transaction.merchant,
-    transaction.notes,
-    transaction.originalDescription,
-    categoryName,
-    accountName,
-    transaction.tags?.join(' '),
-  ].filter(Boolean).join(' ');
+  // Combine all searchable text for broad queries, normalized for diacritics
+  const allText = normalizeText(
+    [
+      transaction.description,
+      transaction.merchant,
+      transaction.notes,
+      transaction.originalDescription,
+      categoryName,
+      accountName,
+      transaction.tags?.join(" "),
+    ]
+      .filter(Boolean)
+      .join(" ")
+  );
 
   return {
     ...transaction,
-    categoryName,
-    accountName,
+    // Normalize text fields for accent-insensitive search
+    description: normalizeText(transaction.description),
+    merchant: transaction.merchant ? normalizeText(transaction.merchant) : transaction.merchant,
+    notes: transaction.notes ? normalizeText(transaction.notes) : transaction.notes,
+    originalDescription: transaction.originalDescription
+      ? normalizeText(transaction.originalDescription)
+      : transaction.originalDescription,
+    categoryName: normalizeText(categoryName),
+    accountName: normalizeText(accountName),
     amountFormatted,
     dateFormatted,
     allText,
@@ -101,31 +126,94 @@ function prepareForSearch(
 }
 
 /**
+ * Map a locale to its most common currency code.
+ * Falls back to "USD" for unknown locales.
+ */
+function getCurrencyForLocale(locale: string): string {
+  const currencyMap: Record<string, string> = {
+    "en-US": "USD",
+    "en-GB": "GBP",
+    "en-CA": "CAD",
+    "en-AU": "AUD",
+    "de-DE": "EUR",
+    "fr-FR": "EUR",
+    "es-ES": "EUR",
+    "it-IT": "EUR",
+    "nl-NL": "EUR",
+    "pt-BR": "BRL",
+    "ja-JP": "JPY",
+    "zh-CN": "CNY",
+    "ko-KR": "KRW",
+    "sv-SE": "SEK",
+    "nb-NO": "NOK",
+    "da-DK": "DKK",
+    "pl-PL": "PLN",
+    "cs-CZ": "CZK",
+    "hu-HU": "HUF",
+    "ro-RO": "RON",
+    "bg-BG": "BGN",
+    "hr-HR": "EUR",
+    "tr-TR": "TRY",
+    "ru-RU": "RUB",
+    "uk-UA": "UAH",
+    "th-TH": "THB",
+    "vi-VN": "VND",
+    "id-ID": "IDR",
+    "ms-MY": "MYR",
+    "hi-IN": "INR",
+    "ar-SA": "SAR",
+    "he-IL": "ILS",
+    "zh-TW": "TWD",
+    "en-NZ": "NZD",
+    "en-IE": "EUR",
+    "fi-FI": "EUR",
+    "el-GR": "EUR",
+    "sk-SK": "EUR",
+    "sl-SI": "EUR",
+    "et-EE": "EUR",
+    "lv-LV": "EUR",
+    "lt-LT": "EUR",
+  };
+
+  // Try exact match first, then language prefix
+  return currencyMap[locale] || currencyMap[locale.split("-")[0]] || "USD";
+}
+
+/**
  * Initialize or update the search index
  * Call this when transactions, categories, or accounts change
+ *
+ * @param locale - BCP 47 locale tag (e.g. "en-US", "de-DE") used for
+ *   date and currency formatting in searchable text. Defaults to "en-US".
  */
 export function initializeSearchIndex(
   transactions: Transaction[],
   categories: Category[] = [],
-  accounts: { id: string; name: string }[] = []
+  accounts: { id: string; name: string }[] = [],
+  locale: string = "en-US"
 ): void {
   // Skip if data hasn't changed
   if (
     transactions === cachedTransactions &&
     categories === cachedCategories &&
     accounts === cachedAccounts &&
+    locale === cachedLocale &&
     cachedFuse
   ) {
     return;
   }
 
-  // Build lookup maps
-  const categoryMap = new Map(categories.map(c => [c.name, c.name]));
-  const accountMap = new Map(accounts.map(a => [a.id, a.name]));
+  // Build lookup maps (support both id→name and name→name lookups)
+  const categoryMap = new Map<string, string>();
+  for (const c of categories) {
+    categoryMap.set(c.id, c.name);
+    categoryMap.set(c.name, c.name);
+  }
+  const accountMap = new Map(accounts.map((a) => [a.id, a.name]));
 
-  // Prepare transactions for search
-  const searchableTransactions = transactions.map(tx =>
-    prepareForSearch(tx, categoryMap, accountMap)
+  // Prepare transactions for search (text fields normalized for diacritics)
+  const searchableTransactions = transactions.map((tx) =>
+    prepareForSearch(tx, categoryMap, accountMap, locale)
   );
 
   // Create new Fuse instance
@@ -133,6 +221,7 @@ export function initializeSearchIndex(
   cachedTransactions = transactions;
   cachedCategories = categories;
   cachedAccounts = accounts;
+  cachedLocale = locale;
 }
 
 /**
@@ -146,66 +235,175 @@ function applyStructuredFilters(
 
   // Amount filters
   if (query.filters.amountMin !== undefined) {
-    filtered = filtered.filter(tx => Math.abs(tx.amount) >= query.filters.amountMin!);
+    filtered = filtered.filter((tx) => Math.abs(tx.amount) >= query.filters.amountMin!);
   }
   if (query.filters.amountMax !== undefined) {
-    filtered = filtered.filter(tx => Math.abs(tx.amount) <= query.filters.amountMax!);
+    filtered = filtered.filter((tx) => Math.abs(tx.amount) <= query.filters.amountMax!);
   }
 
   // Category filter
   if (query.filters.category) {
     const categoryLower = query.filters.category.toLowerCase();
-    filtered = filtered.filter(tx =>
-      tx.categoryName.toLowerCase().includes(categoryLower) ||
-      tx.category?.toLowerCase().includes(categoryLower)
+    filtered = filtered.filter(
+      (tx) =>
+        tx.categoryName.toLowerCase().includes(categoryLower) ||
+        tx.category?.toLowerCase().includes(categoryLower)
     );
   }
 
   // Date filters
   if (query.filters.dateStart) {
     const startTime = query.filters.dateStart.getTime();
-    filtered = filtered.filter(tx => new Date(tx.date).getTime() >= startTime);
+    filtered = filtered.filter((tx) => new Date(tx.date).getTime() >= startTime);
   }
   if (query.filters.dateEnd) {
     const endTime = query.filters.dateEnd.getTime();
-    filtered = filtered.filter(tx => new Date(tx.date).getTime() <= endTime);
+    filtered = filtered.filter((tx) => new Date(tx.date).getTime() <= endTime);
   }
 
   // Account filter
   if (query.filters.account) {
     const accountLower = query.filters.account.toLowerCase();
-    filtered = filtered.filter(tx =>
-      tx.accountName.toLowerCase().includes(accountLower)
-    );
+    filtered = filtered.filter((tx) => tx.accountName.toLowerCase().includes(accountLower));
   }
 
   // Type filter (income/expense)
   if (query.filters.type) {
-    if (query.filters.type === 'income') {
-      filtered = filtered.filter(tx => tx.amount > 0);
-    } else if (query.filters.type === 'expense') {
-      filtered = filtered.filter(tx => tx.amount < 0);
+    if (query.filters.type === "income") {
+      filtered = filtered.filter((tx) => tx.amount > 0);
+    } else if (query.filters.type === "expense") {
+      filtered = filtered.filter((tx) => tx.amount < 0);
     }
   }
 
   // Tag filter
   if (query.filters.tag) {
     const tagLower = query.filters.tag.toLowerCase();
-    filtered = filtered.filter(tx =>
-      tx.tags?.some(t => t.toLowerCase().includes(tagLower))
-    );
+    filtered = filtered.filter((tx) => tx.tags?.some((t) => t.toLowerCase().includes(tagLower)));
   }
 
   // Merchant filter
   if (query.filters.merchant) {
     const merchantLower = query.filters.merchant.toLowerCase();
-    filtered = filtered.filter(tx =>
-      tx.merchant?.toLowerCase().includes(merchantLower) ||
-      tx.description.toLowerCase().includes(merchantLower)
+    filtered = filtered.filter(
+      (tx) =>
+        tx.merchant?.toLowerCase().includes(merchantLower) ||
+        tx.description.toLowerCase().includes(merchantLower)
     );
   }
 
+  // Recurring filter (is:recurring)
+  if (query.filters.isRecurring !== undefined) {
+    filtered = filtered.filter((tx) => tx.isRecurring === query.filters.isRecurring);
+  }
+
+  // Split filter (is:split)
+  if (query.filters.isSplit !== undefined) {
+    filtered = filtered.filter((tx) => tx.isSplit === query.filters.isSplit);
+  }
+
+  // Negated filters (exclude matching results)
+  if (query.filters.negated) {
+    const neg = query.filters.negated;
+    if (neg.category) {
+      const catLower = neg.category.toLowerCase();
+      filtered = filtered.filter(
+        (tx) =>
+          !tx.categoryName.toLowerCase().includes(catLower) &&
+          !tx.category?.toLowerCase().includes(catLower)
+      );
+    }
+    if (neg.merchant) {
+      const merchLower = neg.merchant.toLowerCase();
+      filtered = filtered.filter(
+        (tx) =>
+          !tx.merchant?.toLowerCase().includes(merchLower) &&
+          !tx.description.toLowerCase().includes(merchLower)
+      );
+    }
+    if (neg.tag) {
+      const tagLower = neg.tag.toLowerCase();
+      filtered = filtered.filter(
+        (tx) => !tx.tags?.some((t) => t.toLowerCase().includes(tagLower))
+      );
+    }
+    if (neg.type) {
+      if (neg.type === "income") {
+        filtered = filtered.filter((tx) => tx.amount <= 0);
+      } else if (neg.type === "expense") {
+        filtered = filtered.filter((tx) => tx.amount >= 0);
+      }
+    }
+    if (neg.account) {
+      const acctLower = neg.account.toLowerCase();
+      filtered = filtered.filter((tx) => !tx.accountName.toLowerCase().includes(acctLower));
+    }
+  }
+
   return filtered;
+}
+
+/**
+ * Search using pre-parsed filters (from NL parser or external query)
+ * Applies structured filters, then fuzzy-searches any remaining text
+ */
+export function searchTransactionsWithFilters(
+  parsedQuery: ParsedQuery,
+  options: {
+    limit?: number;
+    sortBy?: "relevance" | "date" | "amount";
+    sortDirection?: "asc" | "desc";
+  } = {}
+): SearchResult[] {
+  const { limit = 50, sortBy = "relevance", sortDirection = "desc" } = options;
+
+  if (!cachedFuse) {
+    console.warn("[TransactionSearch] Index not initialized. Call initializeSearchIndex first.");
+    return [];
+  }
+
+  if (parsedQuery.hasStructuredFilters) {
+    const categoryMap = new Map<string, string>();
+    for (const c of cachedCategories) {
+      categoryMap.set(c.id, c.name);
+      categoryMap.set(c.name, c.name);
+    }
+    const accountMap = new Map(cachedAccounts.map((a) => [a.id, a.name]));
+
+    const searchableTransactions = cachedTransactions.map((tx) =>
+      prepareForSearch(tx, categoryMap, accountMap, cachedLocale)
+    );
+
+    const filtered = applyStructuredFilters(searchableTransactions, parsedQuery);
+
+    if (parsedQuery.textQuery.trim()) {
+      const tempFuse = new Fuse(filtered, FUSE_OPTIONS);
+      // Normalize query to match diacritics-stripped indexed text
+      const fuseResults = tempFuse.search(normalizeText(parsedQuery.textQuery));
+      const results = fuseResults.map(transformFuseResult);
+      return sortResults(results, sortBy, sortDirection).slice(0, limit);
+    }
+
+    const results: SearchResult[] = filtered.map((item) => ({
+      item: cachedTransactions.find((tx) => tx.id === item.id)!,
+      score: 1,
+    }));
+    return sortResults(results, "date", "desc").slice(0, limit);
+  }
+
+  // No structured filters — fall back to pure fuzzy search
+  if (!parsedQuery.textQuery.trim()) {
+    const allResults: SearchResult[] = cachedTransactions.map((item) => ({
+      item,
+      score: 1,
+    }));
+    return sortResults(allResults, sortBy, sortDirection).slice(0, limit);
+  }
+
+  // Normalize query to match diacritics-stripped indexed text
+  const fuseResults = cachedFuse.search(normalizeText(parsedQuery.textQuery));
+  const results = fuseResults.map(transformFuseResult);
+  return sortResults(results, sortBy, sortDirection).slice(0, limit);
 }
 
 /**
@@ -216,20 +414,20 @@ export function searchTransactions(
   query: string,
   options: {
     limit?: number;
-    sortBy?: 'relevance' | 'date' | 'amount';
-    sortDirection?: 'asc' | 'desc';
+    sortBy?: "relevance" | "date" | "amount";
+    sortDirection?: "asc" | "desc";
   } = {}
 ): SearchResult[] {
-  const { limit = 50, sortBy = 'relevance', sortDirection = 'desc' } = options;
+  const { limit = 50, sortBy = "relevance", sortDirection = "desc" } = options;
 
   if (!cachedFuse) {
-    console.warn('[TransactionSearch] Index not initialized. Call initializeSearchIndex first.');
+    console.warn("[TransactionSearch] Index not initialized. Call initializeSearchIndex first.");
     return [];
   }
 
   // Empty query returns all transactions
   if (!query.trim()) {
-    const allResults: SearchResult[] = cachedTransactions.map(item => ({
+    const allResults: SearchResult[] = cachedTransactions.map((item) => ({
       item,
       score: 1,
     }));
@@ -241,11 +439,15 @@ export function searchTransactions(
 
   // If we have structured filters, apply them first
   if (parsedQuery.hasStructuredFilters) {
-    const categoryMap = new Map(cachedCategories.map(c => [c.name, c.name]));
-    const accountMap = new Map(cachedAccounts.map(a => [a.id, a.name]));
+    const categoryMap = new Map<string, string>();
+    for (const c of cachedCategories) {
+      categoryMap.set(c.id, c.name);
+      categoryMap.set(c.name, c.name);
+    }
+    const accountMap = new Map(cachedAccounts.map((a) => [a.id, a.name]));
 
-    const searchableTransactions = cachedTransactions.map(tx =>
-      prepareForSearch(tx, categoryMap, accountMap)
+    const searchableTransactions = cachedTransactions.map((tx) =>
+      prepareForSearch(tx, categoryMap, accountMap, cachedLocale)
     );
 
     const filtered = applyStructuredFilters(searchableTransactions, parsedQuery);
@@ -253,21 +455,22 @@ export function searchTransactions(
     // If there's remaining text, do fuzzy search on filtered results
     if (parsedQuery.textQuery.trim()) {
       const tempFuse = new Fuse(filtered, FUSE_OPTIONS);
-      const fuseResults = tempFuse.search(parsedQuery.textQuery);
+      // Normalize query to match diacritics-stripped indexed text
+      const fuseResults = tempFuse.search(normalizeText(parsedQuery.textQuery));
       const results = fuseResults.map(transformFuseResult);
       return sortResults(results, sortBy, sortDirection).slice(0, limit);
     }
 
     // No text query, return filtered results sorted by date
-    const results: SearchResult[] = filtered.map(item => ({
-      item: cachedTransactions.find(tx => tx.id === item.id)!,
+    const results: SearchResult[] = filtered.map((item) => ({
+      item: cachedTransactions.find((tx) => tx.id === item.id)!,
       score: 1,
     }));
-    return sortResults(results, 'date', 'desc').slice(0, limit);
+    return sortResults(results, "date", "desc").slice(0, limit);
   }
 
-  // Pure fuzzy search
-  const fuseResults = cachedFuse.search(query);
+  // Pure fuzzy search — normalize query to match diacritics-stripped indexed text
+  const fuseResults = cachedFuse.search(normalizeText(query));
   const results = fuseResults.map(transformFuseResult);
   return sortResults(results, sortBy, sortDirection).slice(0, limit);
 }
@@ -277,11 +480,11 @@ export function searchTransactions(
  */
 function transformFuseResult(result: FuseResult<SearchableTransaction>): SearchResult {
   return {
-    item: cachedTransactions.find(tx => tx.id === result.item.id) || result.item,
+    item: cachedTransactions.find((tx) => tx.id === result.item.id) || result.item,
     score: result.score || 0,
-    matches: result.matches?.map(m => ({
-      key: m.key || '',
-      value: m.value || '',
+    matches: result.matches?.map((m) => ({
+      key: m.key || "",
+      value: m.value || "",
       indices: m.indices as [number, number][],
     })),
   };
@@ -292,19 +495,19 @@ function transformFuseResult(result: FuseResult<SearchableTransaction>): SearchR
  */
 function sortResults(
   results: SearchResult[],
-  sortBy: 'relevance' | 'date' | 'amount',
-  direction: 'asc' | 'desc'
+  sortBy: "relevance" | "date" | "amount",
+  direction: "asc" | "desc"
 ): SearchResult[] {
-  const multiplier = direction === 'asc' ? 1 : -1;
+  const multiplier = direction === "asc" ? 1 : -1;
 
   return [...results].sort((a, b) => {
     switch (sortBy) {
-      case 'relevance':
+      case "relevance":
         // Lower score = better match
         return (a.score - b.score) * multiplier;
-      case 'date':
+      case "date":
         return (new Date(a.item.date).getTime() - new Date(b.item.date).getTime()) * multiplier;
-      case 'amount':
+      case "amount":
         return (Math.abs(a.item.amount) - Math.abs(b.item.amount)) * multiplier;
       default:
         return 0;
@@ -320,7 +523,7 @@ export function filterByAmountRange(
   minAmount: number | undefined,
   maxAmount: number | undefined
 ): Transaction[] {
-  return transactions.filter(tx => {
+  return transactions.filter((tx) => {
     const absAmount = Math.abs(tx.amount);
     if (minAmount !== undefined && absAmount < minAmount) return false;
     if (maxAmount !== undefined && absAmount > maxAmount) return false;
@@ -331,15 +534,12 @@ export function filterByAmountRange(
 /**
  * Get search suggestions based on partial query
  */
-export function getSearchSuggestions(
-  partialQuery: string,
-  limit: number = 5
-): string[] {
+export function getSearchSuggestions(partialQuery: string, limit: number = 5): string[] {
   if (!cachedFuse || !partialQuery.trim()) {
     return [];
   }
 
-  const results = cachedFuse.search(partialQuery, { limit: limit * 2 });
+  const results = cachedFuse.search(normalizeText(partialQuery), { limit: limit * 2 });
   const suggestions = new Set<string>();
 
   for (const result of results) {
@@ -348,13 +548,13 @@ export function getSearchSuggestions(
       suggestions.add(result.item.merchant);
     }
     // Add category names
-    if (result.item.categoryName && result.item.categoryName !== 'Uncategorized') {
+    if (result.item.categoryName && result.item.categoryName !== "Uncategorized") {
       suggestions.add(result.item.categoryName);
     }
     // Add description excerpts
     if (result.item.description) {
       // Extract first meaningful word/phrase
-      const words = result.item.description.split(/\s+/).filter(w => w.length > 3);
+      const words = result.item.description.split(/\s+/).filter((w) => w.length > 3);
       if (words.length > 0) {
         suggestions.add(words[0]);
       }

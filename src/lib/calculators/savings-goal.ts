@@ -7,9 +7,9 @@
  * - "howMuch": Given target date, calculate required monthly contribution
  */
 
-import Decimal from 'decimal.js';
-import { roundToCents } from '@/lib/money';
-import type { SavingsGoalInput, SavingsGoalResult } from './types';
+import Decimal from "decimal.js";
+import { roundToCents } from "@/lib/money";
+import type { SavingsGoalInput, SavingsGoalResult } from "./types";
 
 // Configure Decimal.js for financial precision
 Decimal.set({ precision: 20, rounding: Decimal.ROUND_HALF_UP });
@@ -33,7 +33,7 @@ export function calculateSavingsGoal(input: SavingsGoalInput): SavingsGoalResult
   const monthlyRate = new Decimal(expectedAnnualReturn).dividedBy(100).dividedBy(12);
   const hasInterest = expectedAnnualReturn > 0;
 
-  if (mode === 'when') {
+  if (mode === "when") {
     return calculateWhenMode(
       goalAmount,
       currentSavings,
@@ -42,13 +42,7 @@ export function calculateSavingsGoal(input: SavingsGoalInput): SavingsGoalResult
       hasInterest
     );
   } else {
-    return calculateHowMuchMode(
-      goalAmount,
-      currentSavings,
-      targetDate!,
-      monthlyRate,
-      hasInterest
-    );
+    return calculateHowMuchMode(goalAmount, currentSavings, targetDate!, monthlyRate, hasInterest);
   }
 }
 
@@ -62,7 +56,7 @@ function calculateWhenMode(
   monthlyRate: Decimal,
   hasInterest: boolean
 ): SavingsGoalResult {
-  const projections: SavingsGoalResult['projections'] = [];
+  const projections: SavingsGoalResult["projections"] = [];
   const goal = new Decimal(goalAmount);
   let balance = new Decimal(currentSavings);
   let totalContributions = new Decimal(currentSavings);
@@ -111,9 +105,7 @@ function calculateWhenMode(
   const completionDate = new Date();
   completionDate.setMonth(completionDate.getMonth() + month);
 
-  const progressPercent = goalAmount > 0
-    ? Math.min(100, (currentSavings / goalAmount) * 100)
-    : 0;
+  const progressPercent = goalAmount > 0 ? Math.min(100, (currentSavings / goalAmount) * 100) : 0;
 
   return {
     monthsToGoal: month,
@@ -140,8 +132,7 @@ function calculateHowMuchMode(
   const now = new Date();
   const months = Math.max(
     1,
-    (targetDate.getFullYear() - now.getFullYear()) * 12 +
-      (targetDate.getMonth() - now.getMonth())
+    (targetDate.getFullYear() - now.getFullYear()) * 12 + (targetDate.getMonth() - now.getMonth())
   );
 
   const goal = new Decimal(goalAmount);
@@ -170,14 +161,12 @@ function calculateHowMuchMode(
   } else {
     // Simple calculation without interest
     const amountNeeded = goal.minus(pv);
-    requiredMonthly = amountNeeded.greaterThan(0)
-      ? amountNeeded.dividedBy(months)
-      : new Decimal(0);
+    requiredMonthly = amountNeeded.greaterThan(0) ? amountNeeded.dividedBy(months) : new Decimal(0);
   }
 
   // Generate projections with the calculated monthly contribution
   const monthlyContribution = Math.max(0, roundToCents(requiredMonthly.toNumber()));
-  const projections: SavingsGoalResult['projections'] = [];
+  const projections: SavingsGoalResult["projections"] = [];
   let balance = new Decimal(currentSavings);
   let totalContributions = new Decimal(currentSavings);
   let totalInterest = new Decimal(0);
@@ -214,9 +203,7 @@ function calculateHowMuchMode(
     }
   }
 
-  const progressPercent = goalAmount > 0
-    ? Math.min(100, (currentSavings / goalAmount) * 100)
-    : 0;
+  const progressPercent = goalAmount > 0 ? Math.min(100, (currentSavings / goalAmount) * 100) : 0;
 
   return {
     requiredMonthlyContribution: monthlyContribution,

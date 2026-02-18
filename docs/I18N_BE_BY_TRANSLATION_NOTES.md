@@ -10,6 +10,7 @@ The be-BY (Belarusian - Belarus) translation file was incomplete with only 51 ke
 ### Rationale for uk-UA Copy
 
 Copied from uk-UA.json (Ukrainian) due to:
+
 - **Linguistic similarity**: Both Belarusian and Ukrainian use Cyrillic script with shared grammar structures
 - **95%+ terminology overlap**: UI and technical terms are nearly identical between the two languages
 - **Low risk**: Most translations will be correct or comprehensible to Belarusian users
@@ -28,6 +29,7 @@ Copied from uk-UA.json (Ukrainian) due to:
 While be-BY and uk-UA are linguistically similar, there are some terminology differences to be aware of:
 
 ### Potential Terminology Variations
+
 - **be-BY** uses Belarusian-specific terminology that may differ in:
   - Regional financial terms (banking terminology, payment methods)
   - Formal vs informal address (different conventions than Ukrainian)
@@ -35,7 +37,9 @@ While be-BY and uk-UA are linguistically similar, there are some terminology dif
   - Government/regulatory terminology
 
 ### Examples of Similarity
+
 From the translated files:
+
 - **Dashboard**: be-BY "Панэль кіравання" vs uk-UA "Панель керування"
 - **Transactions**: be-BY "Транзакцыі" vs uk-UA "Транзакції"
 - **Budgets**: be-BY "Бюджэты" vs uk-UA "Бюджети"
@@ -46,6 +50,7 @@ These minor spelling variations reflect dialectal differences while maintaining 
 ## Future Refinement Recommendations
 
 ### Phase 2 Enhancements (v2.0)
+
 1. **Native Belarusian Review**: Engage a native Belarusian speaker to review and refine translations
 2. **Regional Customization**: Adjust terminology for:
    - Banking and financial services specific to Belarus
@@ -57,6 +62,7 @@ These minor spelling variations reflect dialectal differences while maintaining 
 4. **Community Feedback**: Provide in-app mechanism for translation suggestions
 
 ### Monitoring & Maintenance
+
 - Track user feedback from be-BY locale users
 - Monitor error rates and console warnings specific to be-BY
 - Review analytics for be-BY user engagement vs other locales
@@ -65,10 +71,13 @@ These minor spelling variations reflect dialectal differences while maintaining 
 ## Maintenance Instructions
 
 ### When en.json Updates
+
 1. **Use Incremental Translation**:
+
    ```bash
    npm run translate:incremental -- --locales be-BY
    ```
+
    This will:
    - Detect new/changed keys in en.json
    - Use AI to translate only the changed keys
@@ -81,6 +90,7 @@ These minor spelling variations reflect dialectal differences while maintaining 
    - Validate with `npm run build` before committing
 
 ### When Refining Existing Translations
+
 1. **Edit be-BY.json directly** for specific key updates
 2. **Clear cache entry** for be-BY in `scripts/.translation-cache.json`
 3. **Validate changes**:
@@ -91,7 +101,9 @@ These minor spelling variations reflect dialectal differences while maintaining 
 4. **Test in browser** with be-BY locale selected
 
 ### Cache Management
+
 The translation cache (`scripts/.translation-cache.json`) tracks:
+
 - Source hash (en.json content hash)
 - Translation status for each locale
 - Error states and retry attempts
@@ -101,11 +113,13 @@ After fixing be-BY, the cache should be updated to reflect successful translatio
 ## Technical Details
 
 ### File Locations
+
 - **Source**: `src/i18n/messages/en.json` (444 lines, 15,477 bytes)
 - **Ukrainian**: `src/i18n/messages/uk-UA.json` (444 lines, same structure)
 - **Belarusian**: `src/i18n/messages/be-BY.json` (444 lines after fix)
 
 ### Translation Cache
+
 - **Location**: `scripts/.translation-cache.json`
 - **Purpose**: Tracks translation status, errors, and retry attempts
 - **Structure**:
@@ -125,12 +139,14 @@ After fixing be-BY, the cache should be updated to reflect successful translatio
 ## Validation Criteria
 
 The translation system validates:
+
 1. **Structure**: All keys from en.json must exist in translation
 2. **Types**: Value types must match (string, object, array)
 3. **Quality**: Detects untranslated English in non-English locales
 4. **Length**: Warns if translation is <30% or >400% of source length
 
 ### be-BY Validation Status
+
 - ✅ All 337 keys present
 - ✅ Correct Cyrillic text (not English)
 - ✅ Reasonable translation lengths
@@ -146,6 +162,7 @@ The translation system validates:
 ## Changelog
 
 ### 2026-01-01 - Initial Fix
+
 - **Action**: Copied uk-UA.json → be-BY.json
 - **Reason**: Original be-BY translation incomplete (65 lines vs 444 required)
 - **Result**: All 337 keys now present, build passes, ready for deployment

@@ -3,13 +3,13 @@
  * Automatically detect and suggest transactions that may be loan payments
  */
 
-import type { Transaction, Loan, LoanPayment } from '@/types/budget';
-import { differenceInDays, isSameMonth } from 'date-fns';
+import type { Transaction, Loan, LoanPayment } from "@/types/budget";
+import { differenceInDays, isSameMonth } from "date-fns";
 
 export interface TransactionMatch {
   transaction: Transaction;
   loan: Loan;
-  confidence: 'high' | 'medium' | 'low';
+  confidence: "high" | "medium" | "low";
   matchReasons: string[];
   suggestedPrincipal: number;
   suggestedInterest: number;
@@ -24,11 +24,11 @@ export function findPotentialLoanPayments(
   loans: Loan[]
 ): TransactionMatch[] {
   const matches: TransactionMatch[] = [];
-  const activeLoans = loans.filter(l => l.status === 'active');
+  const activeLoans = loans.filter((l) => l.status === "active");
 
   // Only consider expense transactions (negative amounts)
   const expenseTransactions = transactions.filter(
-    tx => tx.amount < 0 && !tx.category?.startsWith('Loan Payment -') // Not already linked
+    (tx) => tx.amount < 0 && !tx.category?.startsWith("Loan Payment -") // Not already linked
   );
 
   for (const transaction of expenseTransactions) {
@@ -53,10 +53,7 @@ export function findPotentialLoanPayments(
 /**
  * Score how well a transaction matches a loan payment
  */
-function scoreTransactionLoanMatch(
-  transaction: Transaction,
-  loan: Loan
-): TransactionMatch | null {
+function scoreTransactionLoanMatch(transaction: Transaction, loan: Loan): TransactionMatch | null {
   const matchReasons: string[] = [];
   let confidencePoints = 0;
   const txAmount = Math.abs(transaction.amount);
@@ -69,15 +66,15 @@ function scoreTransactionLoanMatch(
 
   if (amountDiffPercent < 1) {
     // Exact match
-    matchReasons.push('Exact amount match');
+    matchReasons.push("Exact amount match");
     confidencePoints += 40;
   } else if (amountDiffPercent < 5) {
     // Very close
-    matchReasons.push('Very close amount match');
+    matchReasons.push("Very close amount match");
     confidencePoints += 30;
   } else if (amountDiffPercent < 10) {
     // Close (might include extra principal)
-    matchReasons.push('Close amount match (possible extra payment)');
+    matchReasons.push("Close amount match (possible extra payment)");
     confidencePoints += 20;
   } else if (txAmount < loan.monthlyPayment * 0.5) {
     // Too far off, likely not a match
@@ -88,18 +85,18 @@ function scoreTransactionLoanMatch(
   const daysDiff = Math.abs(differenceInDays(txDate, nextPaymentDate));
 
   if (daysDiff <= 2) {
-    matchReasons.push('Payment date matches');
+    matchReasons.push("Payment date matches");
     confidencePoints += 30;
   } else if (daysDiff <= 7) {
-    matchReasons.push('Close to payment date');
+    matchReasons.push("Close to payment date");
     confidencePoints += 20;
   } else if (isSameMonth(txDate, nextPaymentDate)) {
-    matchReasons.push('Same month as payment');
+    matchReasons.push("Same month as payment");
     confidencePoints += 10;
   }
 
   // 3. Check merchant/description match
-  const description = (transaction.description || '').toLowerCase();
+  const description = (transaction.description || "").toLowerCase();
   const lenderLower = loan.lender.toLowerCase();
   const loanNameLower = loan.name.toLowerCase();
 
@@ -112,10 +109,10 @@ function scoreTransactionLoanMatch(
   }
 
   // Check for loan-related keywords
-  const loanKeywords = ['loan', 'mortgage', 'auto pay', 'payment', 'financing'];
-  const hasLoanKeyword = loanKeywords.some(keyword => description.includes(keyword));
+  const loanKeywords = ["loan", "mortgage", "auto pay", "payment", "financing"];
+  const hasLoanKeyword = loanKeywords.some((keyword) => description.includes(keyword));
   if (hasLoanKeyword) {
-    matchReasons.push('Description contains loan keyword');
+    matchReasons.push("Description contains loan keyword");
     confidencePoints += 10;
   }
 
@@ -125,13 +122,13 @@ function scoreTransactionLoanMatch(
   }
 
   // Determine confidence level
-  let confidence: 'high' | 'medium' | 'low';
+  let confidence: "high" | "medium" | "low";
   if (confidencePoints >= 70) {
-    confidence = 'high';
+    confidence = "high";
   } else if (confidencePoints >= 50) {
-    confidence = 'medium';
+    confidence = "medium";
   } else {
-    confidence = 'low';
+    confidence = "low";
   }
 
   // Calculate suggested principal/interest split
@@ -159,18 +156,18 @@ export function findUnlinkedTransactionsForLoan(
   loan: Loan
 ): TransactionMatch[] {
   const expenseTransactions = transactions.filter(
-    tx => tx.amount < 0 && !tx.category?.startsWith('Loan Payment -')
+    (tx) => tx.amount < 0 && !tx.category?.startsWith("Loan Payment -")
   );
 
   const matches: TransactionMatch[] = [];
   for (const transaction of expenseTransactions) {
     const match = scoreTransactionLoanMatch(transaction, loan);
-    if (match && match.confidence !== 'low') {
+    if (match && match.confidence !== "low") {
       matches.push(match);
     }
   }
 
-  return matches.sort((a, b) =>
-    new Date(b.transaction.date).getTime() - new Date(a.transaction.date).getTime()
+  return matches.sort(
+    (a, b) => new Date(b.transaction.date).getTime() - new Date(a.transaction.date).getTime()
   );
 }

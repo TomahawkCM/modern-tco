@@ -11,18 +11,18 @@
  * - WCAG 2.2 AA compliant (48px touch targets)
  */
 
-'use client';
+"use client";
 
-import Link from 'next/link';
-import type { LucideIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { Button } from '@/components/ui/button';
+import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
 
 interface CTAButton {
   label: string;
   href: string;
   icon?: LucideIcon;
-  variant?: 'primary' | 'secondary';
+  variant?: "primary" | "secondary";
 }
 
 interface EmptyStateProps {
@@ -40,35 +40,31 @@ export function EmptyState({
   description,
   primaryCTA,
   secondaryCTA,
-  className = '',
+  className = "",
 }: EmptyStateProps) {
   return (
-    <div className={`text-center py-20 ${className}`}>
-      <div className="max-w-md mx-auto">
+    <div className={`py-20 text-center ${className}`}>
+      <div className="mx-auto max-w-md">
         {/* Icon */}
-        <div className="bg-teal-500 rounded-full w-24 h-24 flex items-center justify-center mx-auto shadow-lg">
-          <Icon className="w-12 h-12 text-white" aria-hidden="true" />
+        <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-teal-500 shadow-lg">
+          <Icon className="h-12 w-12 text-white" aria-hidden="true" />
         </div>
 
         {/* Heading */}
-        <h2 className="mt-8 text-3xl font-bold text-gray-900">
-          {heading}
-        </h2>
+        <h2 className="mt-8 text-3xl font-bold text-gray-900">{heading}</h2>
 
         {/* Description */}
-        <p className="mt-4 text-lg text-gray-600 max-w-lg mx-auto">
-          {description}
-        </p>
+        <p className="mx-auto mt-4 max-w-lg text-lg text-gray-600">{description}</p>
 
         {/* CTA Buttons */}
         {(primaryCTA || secondaryCTA) && (
-          <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
             {primaryCTA && (
               <Link
                 href={primaryCTA.href}
-                className="inline-flex items-center justify-center gap-2 px-6 py-2 min-h-[48px] bg-teal-700 text-white rounded-lg hover:bg-teal-800 transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2"
+                className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg bg-teal-700 px-6 py-2 text-white shadow-md transition-all hover:bg-teal-800 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-700 focus:ring-offset-2"
               >
-                {primaryCTA.icon && <primaryCTA.icon className="w-5 h-5" aria-hidden="true" />}
+                {primaryCTA.icon && <primaryCTA.icon className="h-5 w-5" aria-hidden="true" />}
                 {primaryCTA.label}
               </Link>
             )}
@@ -76,9 +72,9 @@ export function EmptyState({
             {secondaryCTA && (
               <Link
                 href={secondaryCTA.href}
-                className="inline-flex items-center justify-center gap-2 px-6 py-2 min-h-[48px] border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+                className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg border-2 border-gray-300 px-6 py-2 text-gray-700 transition-all hover:border-gray-400 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
               >
-                {secondaryCTA.icon && <secondaryCTA.icon className="w-5 h-5" aria-hidden="true" />}
+                {secondaryCTA.icon && <secondaryCTA.icon className="h-5 w-5" aria-hidden="true" />}
                 {secondaryCTA.label}
               </Link>
             )}
@@ -103,40 +99,40 @@ import {
   TrendingUp,
   BarChart3,
   Tags,
-  PiggyBank
-} from 'lucide-react';
+  PiggyBank,
+} from "lucide-react";
 
 // Wrapper components for section-specific empty states with translations
 function TransactionsEmptyState({ onAddClick }: { onAddClick?: () => void }) {
-  const t = useTranslations('emptyStates.transactions');
+  const t = useTranslations("emptyStates.transactions");
   return (
     <EmptyState
       icon={Receipt}
-      heading={t('heading')}
-      description={t('description')}
+      heading={t("heading")}
+      description={t("description")}
       primaryCTA={{
-        label: t('primaryCta'),
-        href: '/budget-app/transactions',
+        label: t("primaryCta"),
+        href: "/budget-app/transactions",
         icon: Receipt,
       }}
       secondaryCTA={{
-        label: t('secondaryCta'),
-        href: '/budget-app/import',
+        label: t("secondaryCta"),
+        href: "/budget-app/import",
       }}
     />
   );
 }
 
 function BudgetsEmptyState() {
-  const t = useTranslations('emptyStates.budgets');
+  const t = useTranslations("emptyStates.budgets");
   return (
     <EmptyState
       icon={PieChart}
-      heading={t('heading')}
-      description={t('description')}
+      heading={t("heading")}
+      description={t("description")}
       primaryCTA={{
-        label: t('primaryCta'),
-        href: '/budget-app/budgets',
+        label: t("primaryCta"),
+        href: "/budget-app/budgets",
         icon: PieChart,
       }}
     />
@@ -144,15 +140,15 @@ function BudgetsEmptyState() {
 }
 
 function LoansEmptyState() {
-  const t = useTranslations('emptyStates.loans');
+  const t = useTranslations("emptyStates.loans");
   return (
     <EmptyState
       icon={CreditCard}
-      heading={t('heading')}
-      description={t('description')}
+      heading={t("heading")}
+      description={t("description")}
       primaryCTA={{
-        label: t('primaryCta'),
-        href: '/budget-app/loans/new',
+        label: t("primaryCta"),
+        href: "/budget-app/loans/new",
         icon: CreditCard,
       }}
     />
@@ -160,15 +156,15 @@ function LoansEmptyState() {
 }
 
 function InvestmentsEmptyState() {
-  const t = useTranslations('emptyStates.investments');
+  const t = useTranslations("emptyStates.investments");
   return (
     <EmptyState
       icon={Wallet}
-      heading={t('heading')}
-      description={t('description')}
+      heading={t("heading")}
+      description={t("description")}
       primaryCTA={{
-        label: t('primaryCta'),
-        href: '/budget-app/investments',
+        label: t("primaryCta"),
+        href: "/budget-app/investments",
         icon: Wallet,
       }}
     />
@@ -176,15 +172,15 @@ function InvestmentsEmptyState() {
 }
 
 function FuturePlansEmptyState() {
-  const t = useTranslations('emptyStates.futurePlans');
+  const t = useTranslations("emptyStates.futurePlans");
   return (
     <EmptyState
       icon={Target}
-      heading={t('heading')}
-      description={t('description')}
+      heading={t("heading")}
+      description={t("description")}
       primaryCTA={{
-        label: t('primaryCta'),
-        href: '/budget-app/planning/future',
+        label: t("primaryCta"),
+        href: "/budget-app/planning/future",
         icon: Target,
       }}
     />
@@ -192,15 +188,15 @@ function FuturePlansEmptyState() {
 }
 
 function RetirementEmptyState() {
-  const t = useTranslations('emptyStates.retirement');
+  const t = useTranslations("emptyStates.retirement");
   return (
     <EmptyState
       icon={TrendingUp}
-      heading={t('heading')}
-      description={t('description')}
+      heading={t("heading")}
+      description={t("description")}
       primaryCTA={{
-        label: t('primaryCta'),
-        href: '/budget-app/planning/retirement',
+        label: t("primaryCta"),
+        href: "/budget-app/planning/retirement",
         icon: TrendingUp,
       }}
     />
@@ -208,35 +204,35 @@ function RetirementEmptyState() {
 }
 
 function ReportsEmptyState() {
-  const t = useTranslations('emptyStates.reports');
+  const t = useTranslations("emptyStates.reports");
   return (
     <EmptyState
       icon={BarChart3}
-      heading={t('heading')}
-      description={t('description')}
+      heading={t("heading")}
+      description={t("description")}
       primaryCTA={{
-        label: t('primaryCta'),
-        href: '/budget-app/transactions',
+        label: t("primaryCta"),
+        href: "/budget-app/transactions",
         icon: Receipt,
       }}
       secondaryCTA={{
-        label: t('secondaryCta'),
-        href: '/budget-app/import',
+        label: t("secondaryCta"),
+        href: "/budget-app/import",
       }}
     />
   );
 }
 
 function CategoriesEmptyState() {
-  const t = useTranslations('emptyStates.categories');
+  const t = useTranslations("emptyStates.categories");
   return (
     <EmptyState
       icon={Tags}
-      heading={t('heading')}
-      description={t('description')}
+      heading={t("heading")}
+      description={t("description")}
       primaryCTA={{
-        label: t('primaryCta'),
-        href: '/budget-app/categories',
+        label: t("primaryCta"),
+        href: "/budget-app/categories",
         icon: Tags,
       }}
     />
@@ -244,19 +240,19 @@ function CategoriesEmptyState() {
 }
 
 function DashboardEmptyState() {
-  const t = useTranslations('emptyStates.dashboard');
+  const t = useTranslations("emptyStates.dashboard");
   return (
     <EmptyState
       icon={PiggyBank}
-      heading={t('heading')}
-      description={t('description')}
+      heading={t("heading")}
+      description={t("description")}
       primaryCTA={{
-        label: t('primaryCta'),
-        href: '/budget-app/import',
+        label: t("primaryCta"),
+        href: "/budget-app/import",
       }}
       secondaryCTA={{
-        label: t('secondaryCta'),
-        href: '/budget-app/transactions',
+        label: t("secondaryCta"),
+        href: "/budget-app/transactions",
       }}
     />
   );

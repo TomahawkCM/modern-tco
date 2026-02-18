@@ -45,4 +45,3 @@ describe("sr scheduling", () => {
     expect(s.interval).toBe(1);
   });
 });
-

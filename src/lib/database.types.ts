@@ -250,6 +250,672 @@ export type Database = {
         }
         Relationships: []
       }
+      archon_code_examples: {
+        Row: {
+          chunk_number: number
+          content: string
+          content_search_vector: unknown
+          created_at: string
+          embedding_1024: string | null
+          embedding_1536: string | null
+          embedding_3072: string | null
+          embedding_384: string | null
+          embedding_768: string | null
+          embedding_dimension: number | null
+          embedding_model: string | null
+          id: number
+          llm_chat_model: string | null
+          metadata: Json
+          source_id: string
+          summary: string
+          url: string
+        }
+        Insert: {
+          chunk_number: number
+          content: string
+          content_search_vector?: unknown
+          created_at?: string
+          embedding_1024?: string | null
+          embedding_1536?: string | null
+          embedding_3072?: string | null
+          embedding_384?: string | null
+          embedding_768?: string | null
+          embedding_dimension?: number | null
+          embedding_model?: string | null
+          id?: number
+          llm_chat_model?: string | null
+          metadata?: Json
+          source_id: string
+          summary: string
+          url: string
+        }
+        Update: {
+          chunk_number?: number
+          content?: string
+          content_search_vector?: unknown
+          created_at?: string
+          embedding_1024?: string | null
+          embedding_1536?: string | null
+          embedding_3072?: string | null
+          embedding_384?: string | null
+          embedding_768?: string | null
+          embedding_dimension?: number | null
+          embedding_model?: string | null
+          id?: number
+          llm_chat_model?: string | null
+          metadata?: Json
+          source_id?: string
+          summary?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "archon_code_examples_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "archon_sources"
+            referencedColumns: ["source_id"]
+          },
+        ]
+      }
+      archon_crawled_pages: {
+        Row: {
+          chunk_number: number
+          content: string
+          content_search_vector: unknown
+          created_at: string
+          embedding_1024: string | null
+          embedding_1536: string | null
+          embedding_3072: string | null
+          embedding_384: string | null
+          embedding_768: string | null
+          embedding_dimension: number | null
+          embedding_model: string | null
+          id: number
+          llm_chat_model: string | null
+          metadata: Json
+          page_id: string | null
+          source_id: string
+          url: string
+        }
+        Insert: {
+          chunk_number: number
+          content: string
+          content_search_vector?: unknown
+          created_at?: string
+          embedding_1024?: string | null
+          embedding_1536?: string | null
+          embedding_3072?: string | null
+          embedding_384?: string | null
+          embedding_768?: string | null
+          embedding_dimension?: number | null
+          embedding_model?: string | null
+          id?: number
+          llm_chat_model?: string | null
+          metadata?: Json
+          page_id?: string | null
+          source_id: string
+          url: string
+        }
+        Update: {
+          chunk_number?: number
+          content?: string
+          content_search_vector?: unknown
+          created_at?: string
+          embedding_1024?: string | null
+          embedding_1536?: string | null
+          embedding_3072?: string | null
+          embedding_384?: string | null
+          embedding_768?: string | null
+          embedding_dimension?: number | null
+          embedding_model?: string | null
+          id?: number
+          llm_chat_model?: string | null
+          metadata?: Json
+          page_id?: string | null
+          source_id?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "archon_crawled_pages_page_id_fkey"
+            columns: ["page_id"]
+            isOneToOne: false
+            referencedRelation: "archon_page_metadata"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "archon_crawled_pages_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "archon_sources"
+            referencedColumns: ["source_id"]
+          },
+        ]
+      }
+      archon_document_versions: {
+        Row: {
+          change_summary: string | null
+          change_type: string | null
+          content: Json
+          created_at: string | null
+          created_by: string | null
+          document_id: string | null
+          field_name: string
+          id: string
+          project_id: string | null
+          task_id: string | null
+          version_number: number
+        }
+        Insert: {
+          change_summary?: string | null
+          change_type?: string | null
+          content: Json
+          created_at?: string | null
+          created_by?: string | null
+          document_id?: string | null
+          field_name: string
+          id?: string
+          project_id?: string | null
+          task_id?: string | null
+          version_number: number
+        }
+        Update: {
+          change_summary?: string | null
+          change_type?: string | null
+          content?: Json
+          created_at?: string | null
+          created_by?: string | null
+          document_id?: string | null
+          field_name?: string
+          id?: string
+          project_id?: string | null
+          task_id?: string | null
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "archon_document_versions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "archon_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "archon_document_versions_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "archon_tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      archon_migrations: {
+        Row: {
+          applied_at: string | null
+          checksum: string | null
+          id: string
+          migration_name: string
+          version: string
+        }
+        Insert: {
+          applied_at?: string | null
+          checksum?: string | null
+          id?: string
+          migration_name: string
+          version: string
+        }
+        Update: {
+          applied_at?: string | null
+          checksum?: string | null
+          id?: string
+          migration_name?: string
+          version?: string
+        }
+        Relationships: []
+      }
+      archon_page_metadata: {
+        Row: {
+          char_count: number
+          chunk_count: number
+          created_at: string | null
+          full_content: string
+          id: string
+          metadata: Json | null
+          section_order: number | null
+          section_title: string | null
+          source_id: string
+          updated_at: string | null
+          url: string
+          word_count: number
+        }
+        Insert: {
+          char_count: number
+          chunk_count?: number
+          created_at?: string | null
+          full_content: string
+          id?: string
+          metadata?: Json | null
+          section_order?: number | null
+          section_title?: string | null
+          source_id: string
+          updated_at?: string | null
+          url: string
+          word_count: number
+        }
+        Update: {
+          char_count?: number
+          chunk_count?: number
+          created_at?: string | null
+          full_content?: string
+          id?: string
+          metadata?: Json | null
+          section_order?: number | null
+          section_title?: string | null
+          source_id?: string
+          updated_at?: string | null
+          url?: string
+          word_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "archon_page_metadata_source_fk"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "archon_sources"
+            referencedColumns: ["source_id"]
+          },
+        ]
+      }
+      archon_project_sources: {
+        Row: {
+          created_by: string | null
+          id: string
+          linked_at: string | null
+          notes: string | null
+          project_id: string | null
+          source_id: string
+        }
+        Insert: {
+          created_by?: string | null
+          id?: string
+          linked_at?: string | null
+          notes?: string | null
+          project_id?: string | null
+          source_id: string
+        }
+        Update: {
+          created_by?: string | null
+          id?: string
+          linked_at?: string | null
+          notes?: string | null
+          project_id?: string | null
+          source_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "archon_project_sources_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "archon_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      archon_projects: {
+        Row: {
+          created_at: string | null
+          data: Json | null
+          description: string | null
+          docs: Json | null
+          features: Json | null
+          github_repo: string | null
+          id: string
+          pinned: boolean | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          data?: Json | null
+          description?: string | null
+          docs?: Json | null
+          features?: Json | null
+          github_repo?: string | null
+          id?: string
+          pinned?: boolean | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          data?: Json | null
+          description?: string | null
+          docs?: Json | null
+          features?: Json | null
+          github_repo?: string | null
+          id?: string
+          pinned?: boolean | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      archon_prompts: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: string
+          prompt: string
+          prompt_name: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          prompt: string
+          prompt_name: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          prompt?: string
+          prompt_name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      archon_settings: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          description: string | null
+          encrypted_value: string | null
+          id: string
+          is_encrypted: boolean | null
+          key: string
+          updated_at: string | null
+          value: string | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          encrypted_value?: string | null
+          id?: string
+          is_encrypted?: boolean | null
+          key: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          description?: string | null
+          encrypted_value?: string | null
+          id?: string
+          is_encrypted?: boolean | null
+          key?: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Relationships: []
+      }
+      archon_sources: {
+        Row: {
+          created_at: string
+          metadata: Json | null
+          source_display_name: string | null
+          source_id: string
+          source_url: string | null
+          summary: string | null
+          title: string | null
+          total_word_count: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          metadata?: Json | null
+          source_display_name?: string | null
+          source_id: string
+          source_url?: string | null
+          summary?: string | null
+          title?: string | null
+          total_word_count?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          metadata?: Json | null
+          source_display_name?: string | null
+          source_id?: string
+          source_url?: string | null
+          summary?: string | null
+          title?: string | null
+          total_word_count?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      archon_tasks: {
+        Row: {
+          archived: boolean | null
+          archived_at: string | null
+          archived_by: string | null
+          assignee: string | null
+          code_examples: Json | null
+          created_at: string | null
+          description: string | null
+          feature: string | null
+          id: string
+          parent_task_id: string | null
+          priority: Database["public"]["Enums"]["task_priority"]
+          project_id: string | null
+          sources: Json | null
+          status: Database["public"]["Enums"]["task_status"] | null
+          task_order: number | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          archived?: boolean | null
+          archived_at?: string | null
+          archived_by?: string | null
+          assignee?: string | null
+          code_examples?: Json | null
+          created_at?: string | null
+          description?: string | null
+          feature?: string | null
+          id?: string
+          parent_task_id?: string | null
+          priority?: Database["public"]["Enums"]["task_priority"]
+          project_id?: string | null
+          sources?: Json | null
+          status?: Database["public"]["Enums"]["task_status"] | null
+          task_order?: number | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          archived?: boolean | null
+          archived_at?: string | null
+          archived_by?: string | null
+          assignee?: string | null
+          code_examples?: Json | null
+          created_at?: string | null
+          description?: string | null
+          feature?: string | null
+          id?: string
+          parent_task_id?: string | null
+          priority?: Database["public"]["Enums"]["task_priority"]
+          project_id?: string | null
+          sources?: Json | null
+          status?: Database["public"]["Enums"]["task_status"] | null
+          task_order?: number | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "archon_tasks_parent_task_id_fkey"
+            columns: ["parent_task_id"]
+            isOneToOne: false
+            referencedRelation: "archon_tasks"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "archon_tasks_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "archon_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      audit_log: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          id: string
+          metadata: Json
+          target_user_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          id?: string
+          metadata?: Json
+          target_user_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          id?: string
+          metadata?: Json
+          target_user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_log_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "audit_log_target_user_id_fkey"
+            columns: ["target_user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bank_formats: {
+        Row: {
+          amount_format: string | null
+          bank_name: string
+          bank_slug: string
+          column_mappings: Json
+          confidence: number | null
+          created_at: string | null
+          date_format: string | null
+          failed_imports: number | null
+          has_header_row: boolean | null
+          id: string
+          last_successful_import: string | null
+          successful_imports: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          amount_format?: string | null
+          bank_name: string
+          bank_slug: string
+          column_mappings: Json
+          confidence?: number | null
+          created_at?: string | null
+          date_format?: string | null
+          failed_imports?: number | null
+          has_header_row?: boolean | null
+          id?: string
+          last_successful_import?: string | null
+          successful_imports?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          amount_format?: string | null
+          bank_name?: string
+          bank_slug?: string
+          column_mappings?: Json
+          confidence?: number | null
+          created_at?: string | null
+          date_format?: string | null
+          failed_imports?: number | null
+          has_header_row?: boolean | null
+          id?: string
+          last_successful_import?: string | null
+          successful_imports?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      category_patterns: {
+        Row: {
+          category: string
+          confidence: number | null
+          created_at: string | null
+          description_pattern: string
+          first_seen: string | null
+          id: string
+          last_seen: string | null
+          pattern_type: string
+          rejection_count: number | null
+          source: string | null
+          subcategory: string | null
+          success_count: number | null
+          updated_at: string | null
+          usage_count: number | null
+        }
+        Insert: {
+          category: string
+          confidence?: number | null
+          created_at?: string | null
+          description_pattern: string
+          first_seen?: string | null
+          id?: string
+          last_seen?: string | null
+          pattern_type?: string
+          rejection_count?: number | null
+          source?: string | null
+          subcategory?: string | null
+          success_count?: number | null
+          updated_at?: string | null
+          usage_count?: number | null
+        }
+        Update: {
+          category?: string
+          confidence?: number | null
+          created_at?: string | null
+          description_pattern?: string
+          first_seen?: string | null
+          id?: string
+          last_seen?: string | null
+          pattern_type?: string
+          rejection_count?: number | null
+          source?: string | null
+          subcategory?: string | null
+          success_count?: number | null
+          updated_at?: string | null
+          usage_count?: number | null
+        }
+        Relationships: []
+      }
       cohort_benchmarks: {
         Row: {
           avg_completion_percentage: number | null
@@ -497,6 +1163,89 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "exam_sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      family_groups: {
+        Row: {
+          created_at: string
+          id: string
+          invite_code: string | null
+          name: string
+          owner_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          invite_code?: string | null
+          name: string
+          owner_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          invite_code?: string | null
+          name?: string
+          owner_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "family_groups_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      family_members: {
+        Row: {
+          can_see_all_accounts: boolean
+          created_at: string
+          family_id: string
+          id: string
+          permissions: Json
+          role: string
+          spending_limit: number | null
+          user_id: string
+          visible_accounts: string[]
+        }
+        Insert: {
+          can_see_all_accounts?: boolean
+          created_at?: string
+          family_id: string
+          id?: string
+          permissions?: Json
+          role?: string
+          spending_limit?: number | null
+          user_id: string
+          visible_accounts?: string[]
+        }
+        Update: {
+          can_see_all_accounts?: boolean
+          created_at?: string
+          family_id?: string
+          id?: string
+          permissions?: Json
+          role?: string
+          spending_limit?: number | null
+          user_id?: string
+          visible_accounts?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "family_members_family_id_fkey"
+            columns: ["family_id"]
+            isOneToOne: false
+            referencedRelation: "family_groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "family_members_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "users"
@@ -1552,6 +2301,113 @@ export type Database = {
         }
         Relationships: []
       }
+      merchant_feedback: {
+        Row: {
+          accepted_suggestion: boolean
+          chosen_category: string
+          chosen_subcategory: string | null
+          country: string | null
+          created_at: string | null
+          id: string
+          merchant_id: string
+          previous_category: string | null
+          previous_subcategory: string | null
+          user_or_tenant_key: string
+        }
+        Insert: {
+          accepted_suggestion: boolean
+          chosen_category: string
+          chosen_subcategory?: string | null
+          country?: string | null
+          created_at?: string | null
+          id?: string
+          merchant_id: string
+          previous_category?: string | null
+          previous_subcategory?: string | null
+          user_or_tenant_key: string
+        }
+        Update: {
+          accepted_suggestion?: boolean
+          chosen_category?: string
+          chosen_subcategory?: string | null
+          country?: string | null
+          created_at?: string | null
+          id?: string
+          merchant_id?: string
+          previous_category?: string | null
+          previous_subcategory?: string | null
+          user_or_tenant_key?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "merchant_feedback_merchant_id_fkey"
+            columns: ["merchant_id"]
+            isOneToOne: false
+            referencedRelation: "merchants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      merchants: {
+        Row: {
+          business_type: Database["public"]["Enums"]["business_type"] | null
+          canonical_name: string
+          classification_count: number | null
+          confidence: number | null
+          created_at: string | null
+          default_category: string
+          default_subcategory: string | null
+          explanation: string | null
+          first_seen_at: string | null
+          id: string
+          is_subscription: boolean | null
+          last_seen_at: string | null
+          merchant_token: string
+          source: Database["public"]["Enums"]["merchant_source"]
+          updated_at: string | null
+          user_agreement_count: number | null
+          user_correction_count: number | null
+        }
+        Insert: {
+          business_type?: Database["public"]["Enums"]["business_type"] | null
+          canonical_name: string
+          classification_count?: number | null
+          confidence?: number | null
+          created_at?: string | null
+          default_category: string
+          default_subcategory?: string | null
+          explanation?: string | null
+          first_seen_at?: string | null
+          id?: string
+          is_subscription?: boolean | null
+          last_seen_at?: string | null
+          merchant_token: string
+          source?: Database["public"]["Enums"]["merchant_source"]
+          updated_at?: string | null
+          user_agreement_count?: number | null
+          user_correction_count?: number | null
+        }
+        Update: {
+          business_type?: Database["public"]["Enums"]["business_type"] | null
+          canonical_name?: string
+          classification_count?: number | null
+          confidence?: number | null
+          created_at?: string | null
+          default_category?: string
+          default_subcategory?: string | null
+          explanation?: string | null
+          first_seen_at?: string | null
+          id?: string
+          is_subscription?: boolean | null
+          last_seen_at?: string | null
+          merchant_token?: string
+          source?: Database["public"]["Enums"]["merchant_source"]
+          updated_at?: string | null
+          user_agreement_count?: number | null
+          user_correction_count?: number | null
+        }
+        Relationships: []
+      }
       mv_refresh_log: {
         Row: {
           completed_at: string | null
@@ -2575,24 +3431,36 @@ export type Database = {
           created_at: string | null
           email: string
           id: string
+          is_suspended: boolean
           last_login: string | null
           name: string | null
+          role: string | null
+          subscription_status: string | null
+          trial_start: string | null
           updated_at: string | null
         }
         Insert: {
           created_at?: string | null
           email: string
           id: string
+          is_suspended?: boolean
           last_login?: string | null
           name?: string | null
+          role?: string | null
+          subscription_status?: string | null
+          trial_start?: string | null
           updated_at?: string | null
         }
         Update: {
           created_at?: string | null
           email?: string
           id?: string
+          is_suspended?: boolean
           last_login?: string | null
           name?: string | null
+          role?: string | null
+          subscription_status?: string | null
+          trial_start?: string | null
           updated_at?: string | null
         }
         Relationships: []
@@ -2628,6 +3496,10 @@ export type Database = {
       }
     }
     Functions: {
+      archive_task: {
+        Args: { archived_by_param?: string; task_id_param: string }
+        Returns: boolean
+      }
       assign_student_to_cohorts: {
         Args: { p_user_id: string }
         Returns: undefined
@@ -2636,17 +3508,15 @@ export type Database = {
         Args: { p_module_id: string; p_user_id: string }
         Returns: number
       }
-      calculate_global_cohort_benchmarks: {
-        Args: Record<PropertyKey, never>
-        Returns: undefined
-      }
-      calculate_review_streak: {
-        Args: { p_user_id: string }
-        Returns: number
-      }
+      calculate_global_cohort_benchmarks: { Args: never; Returns: undefined }
+      calculate_review_streak: { Args: { p_user_id: string }; Returns: number }
       calculate_student_percentiles: {
         Args: { p_user_id: string }
         Returns: undefined
+      }
+      detect_embedding_dimension: {
+        Args: { embedding_vector: string }
+        Returns: number
       }
       get_active_learning_path: {
         Args: { p_user_id: string }
@@ -2688,6 +3558,10 @@ export type Database = {
           srs_interval: number
           total_attempts: number
         }[]
+      }
+      get_embedding_column_name: {
+        Args: { dimension: number }
+        Returns: string
       }
       get_latest_pass_probability: {
         Args: { p_user_id: string }
@@ -2787,49 +3661,182 @@ export type Database = {
           question_data: Json
         }[]
       }
-      gtrgm_compress: {
-        Args: { "": unknown }
-        Returns: unknown
+      hybrid_search_archon_code_examples: {
+        Args: {
+          filter?: Json
+          match_count?: number
+          query_embedding: string
+          query_text: string
+          source_filter?: string
+        }
+        Returns: {
+          chunk_number: number
+          content: string
+          id: number
+          match_type: string
+          metadata: Json
+          similarity: number
+          source_id: string
+          summary: string
+          url: string
+        }[]
       }
-      gtrgm_decompress: {
-        Args: { "": unknown }
-        Returns: unknown
+      hybrid_search_archon_code_examples_multi: {
+        Args: {
+          embedding_dimension: number
+          filter?: Json
+          match_count?: number
+          query_embedding: string
+          query_text: string
+          source_filter?: string
+        }
+        Returns: {
+          chunk_number: number
+          content: string
+          id: number
+          match_type: string
+          metadata: Json
+          similarity: number
+          source_id: string
+          summary: string
+          url: string
+        }[]
       }
-      gtrgm_in: {
-        Args: { "": unknown }
-        Returns: unknown
+      hybrid_search_archon_crawled_pages: {
+        Args: {
+          filter?: Json
+          match_count?: number
+          query_embedding: string
+          query_text: string
+          source_filter?: string
+        }
+        Returns: {
+          chunk_number: number
+          content: string
+          id: number
+          match_type: string
+          metadata: Json
+          similarity: number
+          source_id: string
+          url: string
+        }[]
       }
-      gtrgm_options: {
-        Args: { "": unknown }
+      hybrid_search_archon_crawled_pages_multi: {
+        Args: {
+          embedding_dimension: number
+          filter?: Json
+          match_count?: number
+          query_embedding: string
+          query_text: string
+          source_filter?: string
+        }
+        Returns: {
+          chunk_number: number
+          content: string
+          id: number
+          match_type: string
+          metadata: Json
+          similarity: number
+          source_id: string
+          url: string
+        }[]
+      }
+      increment_merchant_counters: {
+        Args: {
+          p_increment_agreement?: boolean
+          p_increment_classification?: boolean
+          p_increment_correction?: boolean
+          p_merchant_id: string
+        }
         Returns: undefined
-      }
-      gtrgm_out: {
-        Args: { "": unknown }
-        Returns: unknown
       }
       log_mv_refresh_complete: {
         Args: { p_error?: string; p_log_id: string; p_status: string }
         Returns: undefined
       }
-      log_mv_refresh_start: {
-        Args: { p_view_name: string }
-        Returns: string
+      log_mv_refresh_start: { Args: { p_view_name: string }; Returns: string }
+      match_archon_code_examples: {
+        Args: {
+          filter?: Json
+          match_count?: number
+          query_embedding: string
+          source_filter?: string
+        }
+        Returns: {
+          chunk_number: number
+          content: string
+          id: number
+          metadata: Json
+          similarity: number
+          source_id: string
+          summary: string
+          url: string
+        }[]
       }
-      refresh_review_queue: {
-        Args: Record<PropertyKey, never>
+      match_archon_code_examples_multi: {
+        Args: {
+          embedding_dimension: number
+          filter?: Json
+          match_count?: number
+          query_embedding: string
+          source_filter?: string
+        }
+        Returns: {
+          chunk_number: number
+          content: string
+          id: number
+          metadata: Json
+          similarity: number
+          source_id: string
+          summary: string
+          url: string
+        }[]
+      }
+      match_archon_crawled_pages: {
+        Args: {
+          filter?: Json
+          match_count?: number
+          query_embedding: string
+          source_filter?: string
+        }
+        Returns: {
+          chunk_number: number
+          content: string
+          id: number
+          metadata: Json
+          similarity: number
+          source_id: string
+          url: string
+        }[]
+      }
+      match_archon_crawled_pages_multi: {
+        Args: {
+          embedding_dimension: number
+          filter?: Json
+          match_count?: number
+          query_embedding: string
+          source_filter?: string
+        }
+        Returns: {
+          chunk_number: number
+          content: string
+          id: number
+          metadata: Json
+          similarity: number
+          source_id: string
+          url: string
+        }[]
+      }
+      refresh_review_queue: { Args: never; Returns: undefined }
+      show_limit: { Args: never; Returns: number }
+      show_trgm: { Args: { "": string }; Returns: string[] }
+      update_bank_format_result: {
+        Args: { p_bank_slug: string; p_success: boolean }
         Returns: undefined
       }
-      set_limit: {
-        Args: { "": number }
-        Returns: number
-      }
-      show_limit: {
-        Args: Record<PropertyKey, never>
-        Returns: number
-      }
-      show_trgm: {
-        Args: { "": string }
-        Returns: string[]
+      update_category_pattern_feedback: {
+        Args: { p_accepted: boolean; p_pattern_id: string }
+        Returns: undefined
       }
       update_flashcard_library_progress: {
         Args: {
@@ -2845,6 +3852,18 @@ export type Database = {
       }
     }
     Enums: {
+      business_type:
+        | "saas"
+        | "retail"
+        | "restaurant"
+        | "grocery"
+        | "utility"
+        | "insurance"
+        | "subscription"
+        | "entertainment"
+        | "healthcare"
+        | "transportation"
+        | "other"
       difficulty_level: "beginner" | "intermediate" | "advanced"
       flashcard_source:
         | "manual"
@@ -2852,7 +3871,10 @@ export type Database = {
         | "quiz_failure"
         | "video_concept"
       flashcard_type: "basic" | "cloze" | "concept" | "diagram" | "code"
+      merchant_source: "openai" | "user" | "rule" | "mixed"
       session_type: "practice" | "mock" | "timed"
+      task_priority: "low" | "medium" | "high" | "critical"
+      task_status: "todo" | "doing" | "review" | "done"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -2983,6 +4005,19 @@ export const Constants = {
   },
   public: {
     Enums: {
+      business_type: [
+        "saas",
+        "retail",
+        "restaurant",
+        "grocery",
+        "utility",
+        "insurance",
+        "subscription",
+        "entertainment",
+        "healthcare",
+        "transportation",
+        "other",
+      ],
       difficulty_level: ["beginner", "intermediate", "advanced"],
       flashcard_source: [
         "manual",
@@ -2991,7 +4026,10 @@ export const Constants = {
         "video_concept",
       ],
       flashcard_type: ["basic", "cloze", "concept", "diagram", "code"],
+      merchant_source: ["openai", "user", "rule", "mixed"],
       session_type: ["practice", "mock", "timed"],
+      task_priority: ["low", "medium", "high", "critical"],
+      task_status: ["todo", "doing", "review", "done"],
     },
   },
 } as const

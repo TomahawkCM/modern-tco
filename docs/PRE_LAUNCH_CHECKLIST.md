@@ -11,6 +11,7 @@
 ### 1. Error Tracking & Monitoring ✅ IN PROGRESS
 
 #### Sentry Configuration
+
 - [x] Install Sentry packages (`@sentry/nextjs`, `@sentry/cli`)
 - [x] Create `sentry.client.config.ts`
 - [x] Create `sentry.server.config.ts`
@@ -28,6 +29,7 @@
 - [ ] **Set up email notifications** for production errors
 
 #### Uptime Monitoring
+
 - [ ] **Sign up for UptimeRobot** (free tier: https://uptimerobot.com)
 - [ ] **Add monitor for production URL**
 - [ ] **Set check interval**: 5 minutes
@@ -39,6 +41,7 @@
 - [ ] **Verify all team members receive alerts**
 
 #### Alternative: Vercel Monitoring
+
 - [ ] **Enable Vercel Speed Insights** (built-in)
 - [ ] **Enable Vercel Web Analytics** (built-in)
 - [ ] **Configure Vercel Integrations**:
@@ -50,6 +53,7 @@
 ### 2. Security Hardening ✅ PARTIALLY COMPLETE
 
 #### Security Headers
+
 - [x] **CSP (Content Security Policy)** configured in `next.config.js`
 - [x] **HSTS (HTTP Strict Transport Security)** added (production only)
 - [x] **X-Frame-Options** set to SAMEORIGIN
@@ -58,6 +62,7 @@
 - [x] **Permissions-Policy** restricts geolocation, mic, camera
 
 #### Security Audit Tasks
+
 - [ ] **Review all API endpoints** for authentication
 - [ ] **Audit admin routes** (verify NEXT_PUBLIC_ADMIN_EMAILS works)
 - [ ] **Test RLS policies** in Supabase (Row Level Security)
@@ -79,6 +84,7 @@
   - Attempt SQL injection in search/filters
 
 #### Penetration Testing
+
 - [ ] **Run OWASP ZAP** scan (free tool)
 - [ ] **Test with Burp Suite Community** (free tier)
 - [ ] **Manual security testing**:
@@ -93,6 +99,7 @@
 ### 3. Testing Coverage 🟡 NEEDS EXPANSION
 
 #### Current Status
+
 - ✅ 11 test suites passing (30 tests)
 - ✅ Jest configured for unit tests
 - ✅ Vitest configured for component tests
@@ -100,6 +107,7 @@
 - ⚠️ Coverage estimated at 40-50% (needs expansion)
 
 #### Unit Tests (Target: 80%+ coverage)
+
 - [ ] **Test all React contexts**:
   - [ ] AuthContext (sign in, sign out, session persistence)
   - [ ] ExamContext (score calculation, timer logic)
@@ -122,6 +130,7 @@
 - [ ] **Verify coverage > 80%**
 
 #### E2E Tests (Critical User Flows)
+
 - [ ] **Authentication flow**:
   - [ ] Sign up → verify email → sign in
   - [ ] Sign in → dashboard → sign out
@@ -149,6 +158,7 @@
   - [ ] Change theme → persists across sessions
 
 #### Load Testing
+
 - [ ] **Set up k6 or Artillery** (load testing tool)
 - [ ] **Test scenarios**:
   - 10 concurrent users browsing
@@ -166,7 +176,8 @@
 ### 4. Content Validation 📝 NEEDS EXPERT REVIEW
 
 #### Question Bank Audit (140+ questions)
-- [ ] **Assign Tanium expert reviewer** (name: _____________)
+
+- [ ] **Assign Tanium expert reviewer** (name: ******\_******)
 - [ ] **Review criteria for each question**:
   - Factual accuracy (matches official Tanium docs)
   - Certification blueprint alignment
@@ -186,6 +197,7 @@
 - [ ] **Final approval** by Tanium SME (Subject Matter Expert)
 
 #### Learning Modules Content Review (11.6 hours)
+
 - [ ] **Module 00: Tanium Platform Foundation**
   - [ ] Technical accuracy verified
   - [ ] Screenshots/images current
@@ -213,6 +225,7 @@
   - [ ] API examples work
 
 #### Video Content
+
 - [ ] **Upload all videos** to hosting platform
 - [ ] **Verify YouTube integration** working
 - [ ] **Test video playback** on all devices
@@ -227,6 +240,7 @@
 ### 5. Production Environment Setup
 
 #### Vercel Configuration
+
 - [ ] **Create Vercel project** (or connect existing)
 - [ ] **Configure environment variables**:
   ```
@@ -251,6 +265,7 @@
   ```
 
 #### Supabase Production Setup
+
 - [ ] **Review database schema** in production
 - [ ] **Verify RLS policies** active
 - [ ] **Set up database backups**:
@@ -262,6 +277,7 @@
 - [ ] **Document rollback procedure**
 
 #### DNS & Domain
+
 - [ ] **Purchase/configure domain** (if not using Vercel subdomain)
 - [ ] **Set up DNS records** (A/CNAME)
 - [ ] **Configure redirects** (www → non-www or vice versa)
@@ -272,6 +288,7 @@
 ### 6. Analytics & Tracking
 
 #### PostHog Configuration
+
 - [ ] **Verify PostHog key** in environment
 - [ ] **Test event tracking**:
   - Pageview events
@@ -294,6 +311,7 @@
 ### 7. Performance Optimization
 
 #### Lighthouse Audit
+
 - [ ] **Run Lighthouse on all major routes**:
   ```bash
   npm run lighthouse:all
@@ -307,6 +325,7 @@
 - [ ] **Re-run and verify improvements**
 
 #### Performance Targets
+
 - [ ] **First Contentful Paint** < 1.8s
 - [ ] **Largest Contentful Paint** < 2.5s
 - [ ] **Cumulative Layout Shift** < 0.1
@@ -314,6 +333,7 @@
 - [ ] **Total Blocking Time** < 300ms
 
 #### Optimizations
+
 - [ ] **Image optimization** with next/image
 - [ ] **Font loading** strategy optimized
 - [ ] **Code splitting** verified
@@ -326,6 +346,7 @@
 ### 8. Documentation & Operations
 
 #### Production Runbook
+
 - [ ] **Create** `docs/OPS/RUNBOOK.md` (already exists - review)
 - [ ] **Document common issues** and solutions
 - [ ] **Database connection troubleshooting**
@@ -334,6 +355,7 @@
 - [ ] **Incident response plan**
 
 #### Disaster Recovery
+
 - [ ] **Database backup verification** (test restore)
 - [ ] **Code repository backup** (GitHub should be source of truth)
 - [ ] **Environment variable backup** (secure location)
@@ -342,6 +364,7 @@
 - [ ] **Test disaster recovery** scenario
 
 #### User Documentation
+
 - [ ] **Create user guide** (getting started)
 - [ ] **FAQ page** with common questions
 - [ ] **Video tutorials** (optional but helpful)
@@ -378,6 +401,7 @@
 ## 📊 Success Metrics (Post-Launch)
 
 ### Week 1 Metrics
+
 - [ ] **Monitor error rate** (target: < 0.1%)
 - [ ] **Track uptime** (target: 99.9%)
 - [ ] **User sign-ups** (track count)
@@ -386,6 +410,7 @@
 - [ ] **Average session duration** (engagement metric)
 
 ### Month 1 Metrics
+
 - [ ] **User retention** (30-day: target > 50%)
 - [ ] **Exam pass rate** (target: > 85%)
 - [ ] **User satisfaction** (survey: target NPS > 50)
@@ -397,6 +422,7 @@
 ## ✅ FINAL GO/NO-GO CHECKLIST
 
 ### Critical Path (Must All Be YES)
+
 - [ ] **Sentry configured** and tested
 - [ ] **Uptime monitoring** active
 - [ ] **Security audit** completed (no critical issues)
@@ -409,16 +435,18 @@
 - [ ] **Team trained** on monitoring and incident response
 
 ### Final Approval
-- [ ] **Technical lead approval**: __________________ (Name, Date)
-- [ ] **Content expert approval**: __________________ (Name, Date)
-- [ ] **Security review approval**: __________________ (Name, Date)
-- [ ] **Stakeholder sign-off**: __________________ (Name, Date)
+
+- [ ] **Technical lead approval**: ********\_\_******** (Name, Date)
+- [ ] **Content expert approval**: ********\_\_******** (Name, Date)
+- [ ] **Security review approval**: ********\_\_******** (Name, Date)
+- [ ] **Stakeholder sign-off**: ********\_\_******** (Name, Date)
 
 ---
 
 ## 🚀 LAUNCH SEQUENCE
 
 ### T-7 Days (1 Week Before Launch)
+
 1. Complete all HIGH priority items
 2. Run full test suite (unit + E2E + load)
 3. Deploy to staging environment
@@ -426,18 +454,21 @@
 5. Content freeze (no more changes)
 
 ### T-3 Days (3 Days Before Launch)
+
 1. Final production deployment (staging → production)
 2. Smoke test all critical features
 3. Verify monitoring and alerting working
 4. Brief team on launch plan and incident response
 
 ### T-1 Day (Day Before Launch)
+
 1. Final go/no-go decision
 2. Notify all stakeholders
 3. Prepare rollback plan (just in case)
 4. Ensure team availability for launch day
 
 ### T-0 (Launch Day)
+
 1. **Early morning**: Deploy to production
 2. **Morning**: Monitor errors, uptime, performance
 3. **Afternoon**: Address any immediate issues
@@ -445,6 +476,7 @@
 5. **Announce publicly** (after confirming stability)
 
 ### T+1 (Day After Launch)
+
 1. Review overnight metrics
 2. Address any overnight issues
 3. Collect user feedback

@@ -3,7 +3,7 @@
  * Generates synthetic training examples from existing rules
  */
 
-import { CATEGORY_RULES } from './rules';
+import { CATEGORY_RULES } from "./rules";
 
 export interface TrainingExample {
   text: string;
@@ -14,16 +14,20 @@ export interface TrainingExample {
 /**
  * Generate variations of merchant names that match a pattern
  */
-function generateVariations(pattern: RegExp, category: string, subcategory?: string): TrainingExample[] {
+function generateVariations(
+  pattern: RegExp,
+  category: string,
+  subcategory?: string
+): TrainingExample[] {
   const examples: TrainingExample[] = [];
 
   // Extract keywords from the regex pattern
   const patternStr = pattern.source.toLowerCase();
   const keywords = patternStr
-    .replace(/[\^$|\\()[\]{}*+?.]/g, ' ')
-    .split('|')
-    .map(k => k.trim())
-    .filter(k => k.length > 2);
+    .replace(/[\^$|\\()[\]{}*+?.]/g, " ")
+    .split("|")
+    .map((k) => k.trim())
+    .filter((k) => k.length > 2);
 
   // Generate examples for each keyword
   for (const keyword of keywords) {
@@ -72,11 +76,7 @@ export function generateTrainingData(): TrainingExample[] {
   const trainingData: TrainingExample[] = [];
 
   for (const rule of CATEGORY_RULES) {
-    const variations = generateVariations(
-      rule.pattern,
-      rule.category,
-      rule.subcategory
-    );
+    const variations = generateVariations(rule.pattern, rule.category, rule.subcategory);
     trainingData.push(...variations);
   }
 
@@ -103,17 +103,14 @@ export function splitTrainTest(
  * Get unique categories from training data
  */
 export function getUniqueCategories(data: TrainingExample[]): string[] {
-  const categories = new Set(data.map(d => d.category));
+  const categories = new Set(data.map((d) => d.category));
   return Array.from(categories).sort();
 }
 
 /**
  * Convert category to one-hot encoding
  */
-export function categoryToOneHot(
-  category: string,
-  allCategories: string[]
-): number[] {
+export function categoryToOneHot(category: string, allCategories: string[]): number[] {
   const oneHot = new Array(allCategories.length).fill(0);
   const index = allCategories.indexOf(category);
   if (index !== -1) {
@@ -125,10 +122,7 @@ export function categoryToOneHot(
 /**
  * Convert one-hot encoding back to category
  */
-export function oneHotToCategory(
-  oneHot: number[],
-  allCategories: string[]
-): string {
+export function oneHotToCategory(oneHot: number[], allCategories: string[]): string {
   const maxIndex = oneHot.indexOf(Math.max(...oneHot));
-  return allCategories[maxIndex] || 'Miscellaneous';
+  return allCategories[maxIndex] || "Miscellaneous";
 }

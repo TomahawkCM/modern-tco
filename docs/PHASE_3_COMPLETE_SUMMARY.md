@@ -26,6 +26,7 @@
 **File:** `supabase/migrations/20251010000001_add_ai_personalization.sql` (650 lines)
 
 **9 Production Tables:**
+
 1. **`student_goals`** - Learning preferences and targets
 2. **`adaptive_learning_paths`** - AI-generated study plans
 3. **`learning_path_steps`** - Individual study actions
@@ -37,11 +38,13 @@
 9. **`intervention_alerts`** - Early warning system
 
 **3 Helper Functions:**
+
 - `get_active_learning_path()` - Current study path
 - `get_next_recommendation()` - Highest priority suggestion
 - `get_latest_pass_probability()` - Current readiness score
 
 **Security:**
+
 - ✅ Row-level security (RLS) on all tables
 - ✅ User-scoped access policies
 - ✅ 30+ performance indexes
@@ -54,6 +57,7 @@
 **File:** `src/lib/ai/adaptiveLearningPath.ts` (1,100 lines)
 
 **Key Features:**
+
 - AI-powered path generation using Claude 3.5 Sonnet
 - Student goal management (exam date, hours/week, learning style)
 - Performance data analysis (domain scores, weak areas, learning velocity)
@@ -64,12 +68,14 @@
 - Completion date predictions
 
 **AI Integration:**
+
 - Sophisticated prompt engineering with 500+ token context
 - Fallback path generation if AI unavailable
 - Confidence scoring on AI-generated plans
 - Token usage tracking for cost management
 
 **API Functions:**
+
 ```typescript
 createStudentGoal() - Set learning preferences
 gatherPerformanceData() - Analyze current progress
@@ -86,6 +92,7 @@ completeStep() - Mark progress, unlock next
 **File:** `src/lib/ai/aiTutor.ts` (900 lines)
 
 **Conversation Management:**
+
 - 6 specialized tutoring modes (general_help, concept_explanation, exam_strategy, troubleshooting, study_planning, motivation)
 - Context-aware responses (knows student location in course)
 - Message history tracking
@@ -93,6 +100,7 @@ completeStep() - Mark progress, unlock next
 - Token usage monitoring
 
 **AI Tutor Capabilities:**
+
 - **Concept Explanation:** Progressive disclosure (simple → advanced)
 - **Exam Strategy:** Time management, question approach, anxiety reduction
 - **Troubleshooting:** Systematic problem-solving guidance
@@ -101,6 +109,7 @@ completeStep() - Mark progress, unlock next
 - **General Help:** Broad TCO assistance with domain awareness
 
 **API Functions:**
+
 ```typescript
 createConversation() - Start new chat
 sendMessage() - Context-aware AI response
@@ -118,6 +127,7 @@ rateMessage() - Feedback collection
 **File:** `src/components/ai/AITutorChat.tsx` (600 lines)
 
 **Professional Chat UI:**
+
 - Real-time message display with typing indicators
 - User/AI message differentiation (color-coded bubbles)
 - Auto-scroll to latest message
@@ -130,6 +140,7 @@ rateMessage() - Feedback collection
 - Error handling with toast notifications
 
 **Accessibility:**
+
 - Keyboard navigation support
 - Screen reader friendly
 - High contrast colors
@@ -143,6 +154,7 @@ rateMessage() - Feedback collection
 **File:** `src/lib/ai/smartRecommendations.ts` (1,200 lines)
 
 **Recommendation Types:**
+
 1. **Intervention (CRITICAL)** - Urgent alerts for struggling students
 2. **Next Action (HIGH)** - Immediate next best step
 3. **Weak Domain (HIGH)** - Focus areas needing improvement
@@ -151,12 +163,14 @@ rateMessage() - Feedback collection
 6. **Strategy (LOW-MEDIUM)** - Learning technique recommendations
 
 **Intervention Detection:**
+
 - Low engagement (7+ days no study) → Critical alert
 - Declining performance (scores trending down) → High priority
 - Exam unready (<30 days, <70% ready) → Critical alert
 - Burnout risk (21+ day streak, high intensity) → Warning
 
 **Weekly Study Plan Generation:**
+
 - AI-generated personalized schedules
 - Considers available hours and preferred times
 - Balances learning activities (modules, practice, video, review)
@@ -164,6 +178,7 @@ rateMessage() - Feedback collection
 - Adjusts for weak domains
 
 **API Functions:**
+
 ```typescript
 gatherRecommendationContext() - Collect performance data
 generateRecommendations() - AI-powered suggestions
@@ -180,6 +195,7 @@ completeRecommendation() - Mark as done
 **File:** `src/components/ai/SmartRecommendationsPanel.tsx` (500 lines)
 
 **Visual Features:**
+
 - Priority-sorted recommendations (critical → low)
 - Color-coded cards (red/orange/yellow/blue by priority)
 - Expandable details (suggested actions, estimated impact)
@@ -190,6 +206,7 @@ completeRecommendation() - Mark as done
 - Loading skeletons
 
 **Priority Display:**
+
 - **Critical:** Red background, urgent icon
 - **High:** Orange background, trending up icon
 - **Medium:** Yellow background, calendar/book icons
@@ -204,27 +221,32 @@ completeRecommendation() - Mark as done
 **ML Prediction Models:**
 
 **Bayesian Model:**
+
 - Prior probability (baseline 70% pass rate)
 - Likelihood factors (completion, accuracy, mock exams, practice, engagement)
 - Weighted combination with posterior update
 - Research-validated approach
 
 **Regression Model:**
+
 - Linear combination of features
 - Trained coefficients (completion, accuracy, mock exams, practice, streak)
 - Intercept + weighted features
 
 **Rule-Based Model:**
+
 - Expert-defined scoring rules
 - Bonuses for milestones (completion, accuracy, mock exams, practice)
 - Quick assessment without ML complexity
 
 **Ensemble Model (FINAL):**
+
 - Combines all 3 models (40% Bayesian, 40% Regression, 20% Rule-based)
 - Confidence intervals based on model agreement
 - Lower variance = higher confidence
 
 **Prediction Features (15 total):**
+
 - Progress: modules completed, completion %, study hours
 - Performance: overall accuracy, domain scores, mock exam avg/best/count
 - Engagement: study streak, sessions, practice questions, practice accuracy
@@ -232,6 +254,7 @@ completeRecommendation() - Mark as done
 - Exam: days until exam, target score
 
 **Outputs:**
+
 - Overall pass probability (0-100%)
 - Confidence interval (±5-15%)
 - Domain-level predictions (scores per domain)
@@ -242,6 +265,7 @@ completeRecommendation() - Mark as done
 - Estimated study hours needed (to reach 80% probability)
 
 **API Functions:**
+
 ```typescript
 predictPassProbability() - Generate new prediction
 getLatestPrediction() - Retrieve most recent
@@ -257,6 +281,7 @@ getPredictionHistory() - Historical trend data
 **Visual Components:**
 
 **Probability Gauge:**
+
 - SVG arc gauge (semicircle)
 - Color-coded (green 80%+, yellow 70-80%, orange 60-70%, red <60%)
 - Large percentage display with confidence interval
@@ -264,29 +289,34 @@ getPredictionHistory() - Historical trend data
 - Days until exam countdown
 
 **Domain Breakdown:**
+
 - Progress bars for all 5 TCO domains
 - Color-coded by score (green 75%+, yellow 60-75%, red <60%)
 - Percentage scores
 - Domain names with weights
 
 **Strengths & Weaknesses Cards:**
+
 - Side-by-side grid layout
 - Green checkmarks for strengths
 - Orange trending-up icons for weaknesses
 - Gap analysis (+X% needed)
 
 **Risk Factors Alert:**
+
 - Orange-bordered card for visibility
 - Bulleted list of concerns
 - Highlights high-weight domains
 
 **Recommended Actions:**
+
 - Priority-color-coded cards (red/yellow/blue)
 - Action description
 - Estimated impact
 - Sorted by priority (high → low)
 
 **Metadata:**
+
 - Last updated timestamp
 - Model version and method
 - "Refresh" button to regenerate
@@ -298,6 +328,7 @@ getPredictionHistory() - Historical trend data
 ### Code Metrics
 
 **Total Lines of Code:** ~7,800 lines
+
 - Database Schema: 650 lines SQL
 - Adaptive Learning Path: 1,100 lines TypeScript
 - AI Tutor Service: 900 lines TypeScript
@@ -355,26 +386,31 @@ getPredictionHistory() - Historical trend data
 ### Claude API Usage
 
 **Adaptive Path Generation:**
+
 - ~2,000 tokens per path
 - Cost: ~$0.01 per path
 - Frequency: Once per student initially, occasional regeneration
 
 **AI Tutor Conversations:**
+
 - ~500-1,500 tokens per message
 - Cost: ~$0.002-0.005 per message
 - Frequency: 10-50 messages/day per active student
 
 **Recommendation Generation:**
+
 - ~1,500 tokens per generation
 - Cost: ~$0.004 per generation
 - Frequency: Daily or weekly per student
 
 **Weekly Study Plan:**
+
 - ~1,000 tokens per plan
 - Cost: ~$0.003 per plan
 - Frequency: Weekly per student
 
 **Estimated Monthly Costs (100 active students):**
+
 - Path generation: ~$1 (1 per student)
 - AI tutor: ~$50-75 (avg 30 messages/student/month)
 - Recommendations: ~$12 (weekly generation)
@@ -390,6 +426,7 @@ getPredictionHistory() - Historical trend data
 ### Prerequisites
 
 1. **Environment Variables:**
+
 ```bash
 # .env.local
 ANTHROPIC_API_KEY=sk-ant-your-key-here  # Required
@@ -399,6 +436,7 @@ SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 ```
 
 2. **Database Migration:**
+
 ```bash
 # Apply migration
 psql -h your-db-host -U postgres -d your-db < supabase/migrations/20251010000001_add_ai_personalization.sql
@@ -408,12 +446,14 @@ npx supabase db push
 ```
 
 3. **NPM Dependencies (already installed):**
+
 - `@anthropic-ai/sdk` (v0.60.0)
 - `@anthropic-ai/tokenizer` (v0.0.4)
 
 ### Rate Limiting Recommendations
 
 To control costs:
+
 - Adaptive path generation: 1 per day per student
 - AI tutor messages: 50 per day per student
 - Quick questions: 10 per hour per student
@@ -423,6 +463,7 @@ To control costs:
 ### Monitoring Setup
 
 **Track these metrics:**
+
 - API response times
 - Token usage per endpoint
 - Error rates
@@ -441,14 +482,14 @@ import {
   createStudentGoal,
   generateAdaptiveLearningPath,
   gatherPerformanceData,
-} from '@/lib/ai/adaptiveLearningPath';
+} from "@/lib/ai/adaptiveLearningPath";
 
 // Student sets goals
 const goal = await createStudentGoal(userId, {
-  targetExamDate: new Date('2025-12-15'),
+  targetExamDate: new Date("2025-12-15"),
   studyHoursPerWeek: 12,
-  learningStyle: 'visual',
-  preferredContentTypes: ['video', 'practice'],
+  learningStyle: "visual",
+  preferredContentTypes: ["video", "practice"],
   targetPassScore: 85,
 });
 
@@ -463,7 +504,10 @@ console.log(`Estimated: ${path.estimatedCompletionHours} hours`);
 ### Example 2: Daily Recommendations Check
 
 ```typescript
-import { generateRecommendations, gatherRecommendationContext } from '@/lib/ai/smartRecommendations';
+import {
+  generateRecommendations,
+  gatherRecommendationContext,
+} from "@/lib/ai/smartRecommendations";
 
 // Generate daily recommendations
 const context = await gatherRecommendationContext(userId);
@@ -479,32 +523,35 @@ console.log(`Impact: ${top.estimatedImpact}`);
 ### Example 3: AI Tutor Interaction
 
 ```typescript
-import { askQuickQuestion } from '@/lib/ai/aiTutor';
+import { askQuickQuestion } from "@/lib/ai/aiTutor";
 
 const response = await askQuickQuestion(
   userId,
   "What's the difference between sensors and packages in Tanium?",
   {
-    currentDomain: 'asking_questions',
+    currentDomain: "asking_questions",
     recentPerformance: { lastQuizScore: 72 },
   }
 );
 
 console.log(response.message.content);
-console.log('Follow-ups:', response.suggestedFollowUps);
+console.log("Follow-ups:", response.suggestedFollowUps);
 ```
 
 ### Example 4: Pass Probability Check
 
 ```typescript
-import { predictPassProbability } from '@/lib/ai/passProbabilityPredictor';
+import { predictPassProbability } from "@/lib/ai/passProbabilityPredictor";
 
 const prediction = await predictPassProbability(userId);
 
 console.log(`Pass Probability: ${prediction.predictedProbability}%`);
 console.log(`Confidence: ±${prediction.confidenceInterval}%`);
 console.log(`Study Hours Needed: ${prediction.estimatedStudyHoursNeeded}h`);
-console.log('Weak Domains:', prediction.weaknesses.map(w => w.domain));
+console.log(
+  "Weak Domains:",
+  prediction.weaknesses.map((w) => w.domain)
+);
 ```
 
 ---
@@ -538,16 +585,19 @@ console.log('Weak Domains:', prediction.weaknesses.map(w => w.domain));
 ### Optional Advanced Analytics (Not Critical for Production)
 
 **3.3.1: Comparative Analytics** (2-3 hours)
+
 - Compare student vs cohort average
 - Percentile ranking
 - Relative strengths/weaknesses
 
 **3.3.2: Weakness Heatmaps** (2-3 hours)
+
 - Visual heatmap of domain performance
 - Drill-down to specific topics
 - Interactive visualization
 
 **3.3.3: Time-to-Mastery Predictions** (2-3 hours)
+
 - Predict days until each domain mastered
 - Learning velocity tracking
 - Projected completion dates
@@ -560,17 +610,17 @@ console.log('Weak Domains:', prediction.weaknesses.map(w => w.domain));
 
 ### Your Platform vs Competitors
 
-| Feature | Your Platform | Coursera | LinkedIn Learning | Udemy |
-|---------|--------------|----------|-------------------|-------|
-| **Adaptive Learning Paths** | ✅ AI-generated | ⚠️ Basic | ❌ No | ❌ No |
-| **24/7 AI Tutor** | ✅ Claude-powered | ❌ No | ❌ No | ❌ No |
-| **Pass Probability Prediction** | ✅ ML ensemble | ❌ No | ❌ No | ❌ No |
-| **Smart Recommendations** | ✅ AI-powered | ⚠️ Basic | ⚠️ Basic | ⚠️ Basic |
-| **Intervention Alerts** | ✅ 4 types | ❌ No | ❌ No | ❌ No |
-| **Context-Aware Help** | ✅ Full context | ❌ No | ❌ No | ❌ No |
-| **Domain Expertise** | ✅ TCO-specific | ⚠️ Generic | ⚠️ Generic | ⚠️ Generic |
-| **Spaced Repetition** | ✅ 2357 method | ❌ No | ❌ No | ❌ No |
-| **Exam Blueprint Alignment** | ✅ 100% | ⚠️ Varies | ⚠️ Varies | ⚠️ Varies |
+| Feature                         | Your Platform     | Coursera   | LinkedIn Learning | Udemy      |
+| ------------------------------- | ----------------- | ---------- | ----------------- | ---------- |
+| **Adaptive Learning Paths**     | ✅ AI-generated   | ⚠️ Basic   | ❌ No             | ❌ No      |
+| **24/7 AI Tutor**               | ✅ Claude-powered | ❌ No      | ❌ No             | ❌ No      |
+| **Pass Probability Prediction** | ✅ ML ensemble    | ❌ No      | ❌ No             | ❌ No      |
+| **Smart Recommendations**       | ✅ AI-powered     | ⚠️ Basic   | ⚠️ Basic          | ⚠️ Basic   |
+| **Intervention Alerts**         | ✅ 4 types        | ❌ No      | ❌ No             | ❌ No      |
+| **Context-Aware Help**          | ✅ Full context   | ❌ No      | ❌ No             | ❌ No      |
+| **Domain Expertise**            | ✅ TCO-specific   | ⚠️ Generic | ⚠️ Generic        | ⚠️ Generic |
+| **Spaced Repetition**           | ✅ 2357 method    | ❌ No      | ❌ No             | ❌ No      |
+| **Exam Blueprint Alignment**    | ✅ 100%           | ⚠️ Varies  | ⚠️ Varies         | ⚠️ Varies  |
 
 **Verdict:** Your platform **exceeds all major competitors** in AI personalization features.
 
@@ -581,6 +631,7 @@ console.log('Weak Domains:', prediction.weaknesses.map(w => w.domain));
 ### Overall Completion: **90% toward world-class status**
 
 **✅ World-Class NOW:**
+
 - Learning science implementation (spaced repetition, microlearning, active recall)
 - Content quality (9.2/10) and exam alignment (100%)
 - AI-powered personalization (adaptive paths, recommendations)
@@ -590,6 +641,7 @@ console.log('Weak Domains:', prediction.weaknesses.map(w => w.domain));
 - Enterprise-grade architecture
 
 **⚠️ To Reach 100%:**
+
 - Social learning features (forums, study groups, peer interaction)
 - Content population (more videos, question migration, additional labs)
 - Optional analytics enhancements (heatmaps, cohort comparisons)
@@ -599,6 +651,7 @@ console.log('Weak Domains:', prediction.weaknesses.map(w => w.domain));
 ## 📈 EXPECTED OUTCOMES
 
 ### Learning Effectiveness
+
 - **35% dropout reduction** from adaptive paths
 - **20% time efficiency** from smart sequencing
 - **40% satisfaction increase** from AI tutor
@@ -607,12 +660,14 @@ console.log('Weak Domains:', prediction.weaknesses.map(w => w.domain));
 - **85-90% predicted pass rate** for students who complete path
 
 ### Engagement Metrics
+
 - **70-80% daily active users** (vs 50-60% typical)
 - **80-85% completion rate** (vs <10% MOOC average)
 - **60% higher engagement** from AI tutor
 - **+48% from achievement system**
 
 ### Cost-Effectiveness
+
 - **~$0.70/student/month** for AI features
 - **20h study time** vs 35-50h traditional (40-60% reduction)
 - **ROI: 50-100x** (cost vs value of improved outcomes)
@@ -635,6 +690,7 @@ console.log('Weak Domains:', prediction.weaknesses.map(w => w.domain));
 ### Next Steps:
 
 **Option 1: Deploy Phase 3 to Production** (Recommended)
+
 - Set ANTHROPIC_API_KEY
 - Run database migration
 - Test AI features with sample users
@@ -642,11 +698,13 @@ console.log('Weak Domains:', prediction.weaknesses.map(w => w.domain));
 - Iterate based on user feedback
 
 **Option 2: Continue with Remaining Phases**
+
 - Phase 1: Social Learning (forums, study groups) - 6-8 weeks
 - Phase 2: Content Population (videos, questions, labs) - 4-6 weeks
 - Phase 3 Optional: Advanced analytics - 6-9 hours
 
 **Option 3: Polish & Optimize Current Features**
+
 - Performance optimization
 - UI/UX refinements
 - Additional error handling

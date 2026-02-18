@@ -4,7 +4,7 @@
  * Locale-aware number formatting with special support for Indian numbering system (lakh/crore)
  */
 
-import type { SupportedLocale } from '../config';
+import type { SupportedLocale } from "../config";
 
 /**
  * Format number with locale-specific grouping
@@ -21,13 +21,13 @@ import type { SupportedLocale } from '../config';
  */
 export function formatNumber(
   value: number,
-  locale: SupportedLocale = 'en-US',
+  locale: SupportedLocale = "en-US",
   options?: Intl.NumberFormatOptions
 ): string {
   try {
     return new Intl.NumberFormat(locale, options).format(value);
   } catch (error) {
-    console.error('Number formatting error:', error);
+    console.error("Number formatting error:", error);
     return value.toString();
   }
 }
@@ -44,15 +44,15 @@ export function formatNumber(
  * formatCompactNumber(1500000, 'en-US')   // "1.5M"
  * formatCompactNumber(1500000, 'ko-KR')   // "150만"
  */
-export function formatCompactNumber(value: number, locale: SupportedLocale = 'en-US'): string {
+export function formatCompactNumber(value: number, locale: SupportedLocale = "en-US"): string {
   try {
     return new Intl.NumberFormat(locale, {
-      notation: 'compact',
-      compactDisplay: 'short',
+      notation: "compact",
+      compactDisplay: "short",
       maximumFractionDigits: 1,
     }).format(value);
   } catch (error) {
-    console.error('Compact number formatting error:', error);
+    console.error("Compact number formatting error:", error);
     return value.toString();
   }
 }
@@ -71,17 +71,17 @@ export function formatCompactNumber(value: number, locale: SupportedLocale = 'en
  */
 export function formatPercent(
   value: number,
-  locale: SupportedLocale = 'en-US',
+  locale: SupportedLocale = "en-US",
   decimals: number = 2
 ): string {
   try {
     return new Intl.NumberFormat(locale, {
-      style: 'percent',
+      style: "percent",
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals,
     }).format(value);
   } catch (error) {
-    console.error('Percentage formatting error:', error);
+    console.error("Percentage formatting error:", error);
     return `${(value * 100).toFixed(decimals)}%`;
   }
 }
@@ -100,7 +100,7 @@ export function formatPercent(
  */
 export function formatIndianNumber(value: number): string {
   const absValue = Math.abs(value);
-  const sign = value < 0 ? '-' : '';
+  const sign = value < 0 ? "-" : "";
 
   if (absValue >= 10000000) {
     // Crore (10 million)
@@ -111,7 +111,7 @@ export function formatIndianNumber(value: number): string {
     const lakhs = absValue / 100000;
     return `${sign}${lakhs.toFixed(2)} lakh`;
   } else {
-    return formatNumber(value, 'en-IN');
+    return formatNumber(value, "en-IN");
   }
 }
 
@@ -125,10 +125,10 @@ export function formatIndianNumber(value: number): string {
  */
 export function formatNumberWithLocale(
   value: number,
-  locale: SupportedLocale = 'en-US',
+  locale: SupportedLocale = "en-US",
   useIndianLabels: boolean = false
 ): string {
-  if (locale === 'en-IN' && useIndianLabels) {
+  if (locale === "en-IN" && useIndianLabels) {
     return formatIndianNumber(value);
   }
   return formatNumber(value, locale);
@@ -142,15 +142,18 @@ export function formatNumberWithLocale(
  * @param locale - Locale used for formatting
  * @returns Parsed number or NaN if invalid
  */
-export function parseFormattedNumber(formattedValue: string, locale: SupportedLocale = 'en-US'): number {
+export function parseFormattedNumber(
+  formattedValue: string,
+  locale: SupportedLocale = "en-US"
+): number {
   // Get decimal separator for locale
   const decimalSeparator = new Intl.NumberFormat(locale).format(1.1).charAt(1);
 
   // Remove all characters except digits and decimal separator
   const cleaned = formattedValue
-    .replace(/[^\d.,]/g, '')
-    .replace(decimalSeparator === ',' ? /\./g : /,/g, '')
-    .replace(decimalSeparator, '.');
+    .replace(/[^\d.,]/g, "")
+    .replace(decimalSeparator === "," ? /\./g : /,/g, "")
+    .replace(decimalSeparator, ".");
 
   return parseFloat(cleaned);
 }

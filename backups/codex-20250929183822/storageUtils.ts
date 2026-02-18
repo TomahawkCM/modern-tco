@@ -378,8 +378,12 @@ export const sanitizers = {
       id: (typeof obj?.id === "string" ? obj.id : null) ?? `session-${Date.now()}`,
       mode: (typeof obj?.mode === "string" ? obj.mode : null) ?? "practice",
       questions: Array.isArray(obj?.questions) ? obj.questions : [],
-      currentIndex: Math.max(0, (typeof obj?.currentIndex === "number" ? obj.currentIndex : null) ?? 0),
-      answers: (typeof obj?.answers === "object" && obj?.answers !== null ? obj.answers : null) ?? {},
+      currentIndex: Math.max(
+        0,
+        (typeof obj?.currentIndex === "number" ? obj.currentIndex : null) ?? 0
+      ),
+      answers:
+        (typeof obj?.answers === "object" && obj?.answers !== null ? obj.answers : null) ?? {},
       startTime: obj?.startTime ? new Date(obj.startTime as string | number | Date) : new Date(),
       completed: Boolean(obj?.completed),
       score: Math.max(0, Math.min(100, (typeof obj?.score === "number" ? obj.score : null) ?? 0)),
@@ -390,7 +394,7 @@ export const sanitizers = {
     const obj = data as Record<string, unknown>;
     const theme = typeof obj?.theme === "string" ? obj.theme : "light";
     const difficulty = typeof obj?.difficulty === "string" ? obj.difficulty : "medium";
-    
+
     return {
       theme: ["light", "dark"].includes(theme) ? theme : "light",
       language: typeof obj?.language === "string" ? obj.language : "en",

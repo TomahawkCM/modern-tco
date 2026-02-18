@@ -4,17 +4,17 @@
  * Features: Merchant suggestions, category suggestions, amount presets, recent searches
  */
 
-import type { Transaction, Category } from '@/types/budget';
-import { getFilterSuggestions } from './query-parser';
+import type { Transaction, Category } from "@/types/budget";
+import { getFilterSuggestions } from "./query-parser";
 
 // Recent searches storage key
-const RECENT_SEARCHES_KEY = 'budget-app-recent-searches';
-const SAVED_FILTERS_KEY = 'budget-app-saved-filters';
+const RECENT_SEARCHES_KEY = "budget-app-recent-searches";
+const SAVED_FILTERS_KEY = "budget-app-saved-filters";
 const MAX_RECENT_SEARCHES = 10;
 const MAX_SAVED_FILTERS = 20;
 
 export interface AutocompleteSuggestion {
-  type: 'merchant' | 'category' | 'amount' | 'filter' | 'recent' | 'saved';
+  type: "merchant" | "category" | "amount" | "filter" | "recent" | "saved";
   value: string;
   label: string;
   description?: string;
@@ -70,22 +70,37 @@ export function initializeAutocompleteCache(
   }
 
   // Calculate amount distribution buckets
-  const amounts = transactions.map(tx => Math.abs(tx.amount));
+  const amounts = transactions.map((tx) => Math.abs(tx.amount));
   const maxAmount = Math.max(...amounts, 1000);
 
   // Dynamic buckets based on data distribution
   amountBuckets = [
-    { label: 'Under $25', max: 25, count: amounts.filter(a => a < 25).length },
-    { label: '$25-100', min: 25, max: 100, count: amounts.filter(a => a >= 25 && a < 100).length },
-    { label: '$100-500', min: 100, max: 500, count: amounts.filter(a => a >= 100 && a < 500).length },
-    { label: '$500-1000', min: 500, max: 1000, count: amounts.filter(a => a >= 500 && a < 1000).length },
+    { label: "Under $25", max: 25, count: amounts.filter((a) => a < 25).length },
+    {
+      label: "$25-100",
+      min: 25,
+      max: 100,
+      count: amounts.filter((a) => a >= 25 && a < 100).length,
+    },
+    {
+      label: "$100-500",
+      min: 100,
+      max: 500,
+      count: amounts.filter((a) => a >= 100 && a < 500).length,
+    },
+    {
+      label: "$500-1000",
+      min: 500,
+      max: 1000,
+      count: amounts.filter((a) => a >= 500 && a < 1000).length,
+    },
   ];
 
   if (maxAmount > 1000) {
     amountBuckets.push({
       label: `$1000+`,
       min: 1000,
-      count: amounts.filter(a => a >= 1000).length,
+      count: amounts.filter((a) => a >= 1000).length,
     });
   }
 
@@ -98,9 +113,9 @@ export function initializeAutocompleteCache(
 function extractMerchantFromDescription(description: string): string {
   // Remove common suffixes and clean up
   const cleaned = description
-    .replace(/\s*(#\d+|Card \d+|\*{4}\d+|Transaction|Payment|Purchase|Debit|Credit).*$/i, '')
-    .replace(/^\d{2}\/\d{2}\s*/, '') // Remove leading dates
-    .replace(/\s{2,}/g, ' ')
+    .replace(/\s*(#\d+|Card \d+|\*{4}\d+|Transaction|Payment|Purchase|Debit|Credit).*$/i, "")
+    .replace(/^\d{2}\/\d{2}\s*/, "") // Remove leading dates
+    .replace(/\s{2,}/g, " ")
     .trim();
 
   // Take first meaningful part (before location info)
@@ -123,11 +138,11 @@ export function getAutocompleteSuggestions(
     const recentSearches = getRecentSearches();
     for (const search of recentSearches.slice(0, 3)) {
       suggestions.push({
-        type: 'recent',
+        type: "recent",
         value: search,
         label: search,
-        description: 'Recent search',
-        icon: 'history',
+        description: "Recent search",
+        icon: "history",
       });
     }
 
@@ -135,11 +150,11 @@ export function getAutocompleteSuggestions(
     const savedFilters = getSavedFilters();
     for (const filter of savedFilters.slice(0, 2)) {
       suggestions.push({
-        type: 'saved',
+        type: "saved",
         value: filter.query,
         label: filter.name,
         description: `Used ${filter.usageCount} times`,
-        icon: 'bookmark',
+        icon: "bookmark",
       });
     }
 
@@ -151,11 +166,11 @@ export function getAutocompleteSuggestions(
 
       for (const [merchant, count] of topMerchants) {
         suggestions.push({
-          type: 'merchant',
+          type: "merchant",
           value: merchant,
           label: merchant,
           description: `${count} transactions`,
-          icon: 'store',
+          icon: "store",
           count,
         });
       }
@@ -165,18 +180,21 @@ export function getAutocompleteSuggestions(
   }
 
   // Check for filter prefix suggestions
-  if (lowerQuery.includes(':') || lowerQuery.startsWith('$') ||
-      ['amount', 'category', 'date', 'type', 'tag', 'account', 'merchant'].some(p =>
-        lowerQuery.startsWith(p)
-      )) {
+  if (
+    lowerQuery.includes(":") ||
+    lowerQuery.startsWith("$") ||
+    ["amount", "category", "date", "type", "tag", "account", "merchant"].some((p) =>
+      lowerQuery.startsWith(p)
+    )
+  ) {
     const filterSuggestions = getFilterSuggestions(lowerQuery);
     for (const filter of filterSuggestions.slice(0, 4)) {
       suggestions.push({
-        type: 'filter',
+        type: "filter",
         value: filter,
         label: filter,
-        description: 'Search filter',
-        icon: 'filter',
+        description: "Search filter",
+        icon: "filter",
       });
     }
   }
@@ -197,11 +215,11 @@ export function getAutocompleteSuggestions(
 
     for (const [merchant, count] of matchingMerchants) {
       suggestions.push({
-        type: 'merchant',
+        type: "merchant",
         value: merchant,
         label: merchant,
         description: `${count} transactions`,
-        icon: 'store',
+        icon: "store",
         count,
       });
     }
@@ -216,11 +234,11 @@ export function getAutocompleteSuggestions(
 
     for (const [category, count] of matchingCategories) {
       suggestions.push({
-        type: 'category',
+        type: "category",
         value: `category:${category}`,
         label: category,
-        description: count > 0 ? `${count} transactions` : 'No transactions yet',
-        icon: 'tag',
+        description: count > 0 ? `${count} transactions` : "No transactions yet",
+        icon: "tag",
         count,
       });
     }
@@ -231,28 +249,29 @@ export function getAutocompleteSuggestions(
   if (amountMatch) {
     const amount = parseInt(amountMatch[1], 10);
     suggestions.push({
-      type: 'amount',
+      type: "amount",
       value: `$${amount}-${amount + 50}`,
       label: `$${amount} - $${amount + 50}`,
-      description: 'Amount range',
-      icon: 'dollar-sign',
+      description: "Amount range",
+      icon: "dollar-sign",
     });
   }
 
   // Add amount bucket suggestions if query looks amount-related
-  if (lowerQuery.startsWith('$') || lowerQuery.includes('amount') || /^\d/.test(lowerQuery)) {
-    for (const bucket of amountBuckets.filter(b => b.count > 0).slice(0, 2)) {
-      const value = bucket.min !== undefined && bucket.max !== undefined
-        ? `$${bucket.min}-${bucket.max}`
-        : bucket.max !== undefined
-          ? `amount:<${bucket.max}`
-          : `amount:>=${bucket.min}`;
+  if (lowerQuery.startsWith("$") || lowerQuery.includes("amount") || /^\d/.test(lowerQuery)) {
+    for (const bucket of amountBuckets.filter((b) => b.count > 0).slice(0, 2)) {
+      const value =
+        bucket.min !== undefined && bucket.max !== undefined
+          ? `$${bucket.min}-${bucket.max}`
+          : bucket.max !== undefined
+            ? `amount:<${bucket.max}`
+            : `amount:>=${bucket.min}`;
       suggestions.push({
-        type: 'amount',
+        type: "amount",
         value,
         label: bucket.label,
         description: `${bucket.count} transactions`,
-        icon: 'dollar-sign',
+        icon: "dollar-sign",
         count: bucket.count,
       });
     }
@@ -261,25 +280,25 @@ export function getAutocompleteSuggestions(
   // Match recent searches
   const recentSearches = getRecentSearches();
   const matchingRecent = recentSearches
-    .filter(s => s.toLowerCase().includes(lowerQuery))
+    .filter((s) => s.toLowerCase().includes(lowerQuery))
     .slice(0, 2);
 
   for (const search of matchingRecent) {
     // Avoid duplicates
-    if (!suggestions.some(s => s.value === search)) {
+    if (!suggestions.some((s) => s.value === search)) {
       suggestions.push({
-        type: 'recent',
+        type: "recent",
         value: search,
         label: search,
-        description: 'Recent search',
-        icon: 'history',
+        description: "Recent search",
+        icon: "history",
       });
     }
   }
 
   // Deduplicate by value
   const seen = new Set<string>();
-  const deduplicated = suggestions.filter(s => {
+  const deduplicated = suggestions.filter((s) => {
     if (seen.has(s.value.toLowerCase())) return false;
     seen.add(s.value.toLowerCase());
     return true;
@@ -292,7 +311,7 @@ export function getAutocompleteSuggestions(
  * Get recent searches from localStorage
  */
 export function getRecentSearches(): string[] {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === "undefined") return [];
 
   try {
     const stored = localStorage.getItem(RECENT_SEARCHES_KEY);
@@ -306,11 +325,11 @@ export function getRecentSearches(): string[] {
  * Add a search to recent searches
  */
 export function addRecentSearch(query: string): void {
-  if (typeof window === 'undefined' || !query.trim()) return;
+  if (typeof window === "undefined" || !query.trim()) return;
 
   try {
     const recent = getRecentSearches();
-    const filtered = recent.filter(s => s.toLowerCase() !== query.toLowerCase());
+    const filtered = recent.filter((s) => s.toLowerCase() !== query.toLowerCase());
     const updated = [query, ...filtered].slice(0, MAX_RECENT_SEARCHES);
     localStorage.setItem(RECENT_SEARCHES_KEY, JSON.stringify(updated));
   } catch {
@@ -322,7 +341,7 @@ export function addRecentSearch(query: string): void {
  * Clear recent searches
  */
 export function clearRecentSearches(): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   try {
     localStorage.removeItem(RECENT_SEARCHES_KEY);
@@ -335,7 +354,7 @@ export function clearRecentSearches(): void {
  * Get saved filters from localStorage
  */
 export function getSavedFilters(): SavedFilter[] {
-  if (typeof window === 'undefined') return [];
+  if (typeof window === "undefined") return [];
 
   try {
     const stored = localStorage.getItem(SAVED_FILTERS_KEY);
@@ -358,14 +377,18 @@ export function saveFilter(name: string, query: string): SavedFilter {
     usageCount: 0,
   };
 
-  if (typeof window === 'undefined') return filter;
+  if (typeof window === "undefined") return filter;
 
   try {
     const filters = getSavedFilters();
     // Check for duplicate name
-    const existing = filters.findIndex(f => f.name.toLowerCase() === name.toLowerCase());
+    const existing = filters.findIndex((f) => f.name.toLowerCase() === name.toLowerCase());
     if (existing >= 0) {
-      filters[existing] = { ...filters[existing], query, usageCount: filters[existing].usageCount + 1 };
+      filters[existing] = {
+        ...filters[existing],
+        query,
+        usageCount: filters[existing].usageCount + 1,
+      };
     } else {
       filters.push(filter);
     }
@@ -382,11 +405,11 @@ export function saveFilter(name: string, query: string): SavedFilter {
  * Delete a saved filter
  */
 export function deleteSavedFilter(id: string): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   try {
     const filters = getSavedFilters();
-    const updated = filters.filter(f => f.id !== id);
+    const updated = filters.filter((f) => f.id !== id);
     localStorage.setItem(SAVED_FILTERS_KEY, JSON.stringify(updated));
   } catch {
     // Ignore storage errors
@@ -397,11 +420,11 @@ export function deleteSavedFilter(id: string): void {
  * Increment usage count for a saved filter
  */
 export function useSavedFilter(id: string): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   try {
     const filters = getSavedFilters();
-    const filter = filters.find(f => f.id === id);
+    const filter = filters.find((f) => f.id === id);
     if (filter) {
       filter.usageCount++;
       localStorage.setItem(SAVED_FILTERS_KEY, JSON.stringify(filters));
@@ -414,8 +437,13 @@ export function useSavedFilter(id: string): void {
 /**
  * Get suggested amount ranges based on transaction distribution
  */
-export function getAmountRangeSuggestions(): { label: string; min?: number; max?: number; count: number }[] {
-  return amountBuckets.filter(b => b.count > 0);
+export function getAmountRangeSuggestions(): {
+  label: string;
+  min?: number;
+  max?: number;
+  count: number;
+}[] {
+  return amountBuckets.filter((b) => b.count > 0);
 }
 
 /**

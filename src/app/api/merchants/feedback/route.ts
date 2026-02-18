@@ -35,9 +35,9 @@
  * Privacy: Uses hashed user keys, never stores raw PII
  */
 
-import { type NextRequest, NextResponse } from 'next/server';
-import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import crypto from 'crypto';
+import { type NextRequest, NextResponse } from "next/server";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import crypto from "crypto";
 
 // ============================================================================
 // Types
@@ -74,9 +74,9 @@ async function getMerchantByToken(
   merchantToken: string
 ): Promise<MerchantRecord | null> {
   const { data, error } = await supabase
-    .from('merchants')
-    .select('id, merchant_token, canonical_name, default_category, default_subcategory')
-    .eq('merchant_token', merchantToken)
+    .from("merchants")
+    .select("id, merchant_token, canonical_name, default_category, default_subcategory")
+    .eq("merchant_token", merchantToken)
     .single();
 
   if (error || !data) {
@@ -101,25 +101,25 @@ async function createPlaceholderMerchant(
     canonical_name: merchantToken, // Use token as name until OpenAI classifies
     default_category: category,
     default_subcategory: subcategory || null,
-    business_type: 'other',
+    business_type: "other",
     is_subscription: false,
     confidence: 0.5, // Medium confidence for user-provided data
-    source: 'user',
-    explanation: 'User-provided classification (placeholder until AI verification)',
+    source: "user",
+    explanation: "User-provided classification (placeholder until AI verification)",
     classification_count: 0,
     user_agreement_count: 0,
     user_correction_count: 0,
   };
 
   const { data, error } = await supabase
-    .from('merchants')
+    .from("merchants")
     .insert(placeholderData as any)
-    .select('id, merchant_token, canonical_name, default_category, default_subcategory')
+    .select("id, merchant_token, canonical_name, default_category, default_subcategory")
     .single();
 
   if (error) {
-    console.error('Error creating placeholder merchant:', error);
-    throw new Error('Failed to create merchant record');
+    console.error("Error creating placeholder merchant:", error);
+    throw new Error("Failed to create merchant record");
   }
 
   return data as MerchantRecord;
@@ -134,12 +134,9 @@ async function storeFeedback(
   feedback: FeedbackRequest
 ): Promise<string> {
   // Hash user key for privacy (if provided)
-  let hashedUserKey = 'anonymous';
+  let hashedUserKey = "anonymous";
   if (feedback.user_or_tenant_key) {
-    hashedUserKey = crypto
-      .createHash('sha256')
-      .update(feedback.user_or_tenant_key)
-      .digest('hex');
+    hashedUserKey = crypto.createHash("sha256").update(feedback.user_or_tenant_key).digest("hex");
   }
 
   const feedbackData = {
@@ -154,14 +151,14 @@ async function storeFeedback(
   };
 
   const { data, error } = await supabase
-    .from('merchant_feedback')
+    .from("merchant_feedback")
     .insert(feedbackData as any)
-    .select('id')
+    .select("id")
     .single();
 
   if (error) {
-    console.error('Error storing feedback:', error);
-    throw new Error('Failed to store feedback');
+    console.error("Error storing feedback:", error);
+    throw new Error("Failed to store feedback");
   }
 
   return data.id;
@@ -176,7 +173,7 @@ async function updateMerchantCounters(
   acceptedSuggestion: boolean
 ): Promise<void> {
   // Call the increment_merchant_counters() database function
-  const { error } = await supabase.rpc('increment_merchant_counters', {
+  const { error } = await supabase.rpc("increment_merchant_counters", {
     p_merchant_id: merchantId,
     p_increment_classification: true,
     p_increment_agreement: acceptedSuggestion,
@@ -184,8 +181,8 @@ async function updateMerchantCounters(
   } as any);
 
   if (error) {
-    console.error('Error updating merchant counters:', error);
-    throw new Error('Failed to update merchant statistics');
+    console.error("Error updating merchant counters:", error);
+    throw new Error("Failed to update merchant statistics");
   }
 }
 
@@ -202,30 +199,30 @@ function validateFeedbackRequest(body: any): {
   data?: FeedbackRequest;
 } {
   // Required fields
-  if (!body.merchant_token || typeof body.merchant_token !== 'string') {
-    return { valid: false, error: 'Missing or invalid merchant_token' };
+  if (!body.merchant_token || typeof body.merchant_token !== "string") {
+    return { valid: false, error: "Missing or invalid merchant_token" };
   }
 
-  if (typeof body.chosen_category !== 'string') {
-    return { valid: false, error: 'Missing or invalid chosen_category' };
+  if (typeof body.chosen_category !== "string") {
+    return { valid: false, error: "Missing or invalid chosen_category" };
   }
 
-  if (typeof body.accepted_suggestion !== 'boolean') {
-    return { valid: false, error: 'Missing or invalid accepted_suggestion (must be boolean)' };
+  if (typeof body.accepted_suggestion !== "boolean") {
+    return { valid: false, error: "Missing or invalid accepted_suggestion (must be boolean)" };
   }
 
   // Merchant token length validation
   if (body.merchant_token.length < 3) {
-    return { valid: false, error: 'merchant_token too short (minimum 3 characters)' };
+    return { valid: false, error: "merchant_token too short (minimum 3 characters)" };
   }
 
   // Category validation (check empty after type check)
   if (body.chosen_category.trim().length === 0) {
-    return { valid: false, error: 'chosen_category cannot be empty' };
+    return { valid: false, error: "chosen_category cannot be empty" };
   }
 
   // Country code validation (if provided)
-  if (body.country && (typeof body.country !== 'string' || body.country.length !== 2)) {
+  if (body.country && (typeof body.country !== "string" || body.country.length !== 2)) {
     return { valid: false, error: 'country must be a 2-letter ISO code (e.g., "CA", "US")' };
   }
 
@@ -275,7 +272,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          error: 'Database configuration missing',
+          error: "Database configuration missing",
         },
         { status: 500 }
       );
@@ -306,18 +303,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       message: feedback.accepted_suggestion
-        ? 'Feedback recorded - AI suggestion accepted'
-        : 'Feedback recorded - user correction applied',
+        ? "Feedback recorded - AI suggestion accepted"
+        : "Feedback recorded - user correction applied",
       feedback_id: feedbackId,
       merchant_id: merchant.id,
     });
   } catch (error) {
-    console.error('Merchant feedback error:', error);
+    console.error("Merchant feedback error:", error);
 
     return NextResponse.json(
       {
         success: false,
-        error: error instanceof Error ? error.message : 'Internal server error',
+        error: error instanceof Error ? error.message : "Internal server error",
       },
       { status: 500 }
     );

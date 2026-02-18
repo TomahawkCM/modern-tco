@@ -40,25 +40,26 @@ export function MonthlyTrendsWidget({ config }: MonthlyTrendsWidgetProps) {
   const format = useFormatter();
 
   // Fetch transactions from last 6 months
-  const transactions = useLiveQuery(async () => {
-    try {
-      const sixMonthsAgo = new Date();
-      sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
-      sixMonthsAgo.setDate(1);
-      sixMonthsAgo.setHours(0, 0, 0, 0);
-      const startTime = sixMonthsAgo.getTime();
+  const transactions =
+    useLiveQuery(async () => {
+      try {
+        const sixMonthsAgo = new Date();
+        sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+        sixMonthsAgo.setDate(1);
+        sixMonthsAgo.setHours(0, 0, 0, 0);
+        const startTime = sixMonthsAgo.getTime();
 
-      // Use filter instead of where for reliable Date comparison
-      const allTxs = await db.transactions.toArray();
-      return allTxs.filter((tx) => {
-        if (tx.isSplit) return false;
-        const txTime = new Date(tx.date).getTime();
-        return txTime >= startTime;
-      });
-    } catch {
-      return [];
-    }
-  }) || [];
+        // Use filter instead of where for reliable Date comparison
+        const allTxs = await db.transactions.toArray();
+        return allTxs.filter((tx) => {
+          if (tx.isSplit) return false;
+          const txTime = new Date(tx.date).getTime();
+          return txTime >= startTime;
+        });
+      } catch {
+        return [];
+      }
+    }) || [];
 
   // Aggregate by month
   const monthlyData = useMemo<MonthData[]>(() => {
@@ -174,9 +175,7 @@ export function MonthlyTrendsWidget({ config }: MonthlyTrendsWidgetProps) {
                 />
                 <Legend
                   wrapperStyle={{ paddingTop: "10px" }}
-                  formatter={(value) =>
-                    value === "income" ? t("income") : t("expenses")
-                  }
+                  formatter={(value) => (value === "income" ? t("income") : t("expenses"))}
                 />
                 <Line
                   type="monotone"

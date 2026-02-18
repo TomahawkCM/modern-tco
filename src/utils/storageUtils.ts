@@ -130,7 +130,11 @@ export const safeLocalStorage = {
   /**
    * Set item with validation and backup creation
    */
-  setItem<TValue = unknown>(key: string, value: TValue, options: StorageOptions<TValue> = {}): boolean {
+  setItem<TValue = unknown>(
+    key: string,
+    value: TValue,
+    options: StorageOptions<TValue> = {}
+  ): boolean {
     const { validate, sanitize, backupKey } = options;
 
     try {
@@ -333,7 +337,11 @@ export const safeSessionStorage = {
     }
   },
 
-  setItem<TValue = unknown>(key: string, value: TValue, options: StorageOptions<TValue> = {}): boolean {
+  setItem<TValue = unknown>(
+    key: string,
+    value: TValue,
+    options: StorageOptions<TValue> = {}
+  ): boolean {
     const { validate, sanitize } = options;
 
     try {
@@ -399,11 +407,7 @@ export const validators = {
       return false;
     }
 
-    return (
-      isString(data.theme) &&
-      isString(data.language) &&
-      isString(data.difficulty)
-    );
+    return isString(data.theme) && isString(data.language) && isString(data.difficulty);
   },
 
   progress: (data: unknown): data is Record<string, unknown> => {
@@ -499,14 +503,11 @@ export const sanitizers = {
     };
 
     const allowedThemes = new Set(["light", "dark"]);
-    const theme = isString(rawTheme) && allowedThemes.has(rawTheme)
-      ? rawTheme
-      : "light";
+    const theme = isString(rawTheme) && allowedThemes.has(rawTheme) ? rawTheme : "light";
 
     const allowedDifficulty = new Set(["easy", "medium", "hard"]);
-    const difficulty = isString(rawDifficulty) && allowedDifficulty.has(rawDifficulty)
-      ? rawDifficulty
-      : "medium";
+    const difficulty =
+      isString(rawDifficulty) && allowedDifficulty.has(rawDifficulty) ? rawDifficulty : "medium";
 
     const language = isString(rawLanguage) ? rawLanguage : "en";
 
@@ -514,9 +515,7 @@ export const sanitizers = {
       theme,
       language,
       difficulty,
-      notifications: isBoolean(rawNotifications)
-        ? rawNotifications
-        : Boolean(rawNotifications),
+      notifications: isBoolean(rawNotifications) ? rawNotifications : Boolean(rawNotifications),
       autoSave: isBoolean(rawAutoSave) ? rawAutoSave : Boolean(rawAutoSave),
     };
   },

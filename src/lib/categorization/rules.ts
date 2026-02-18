@@ -3,8 +3,8 @@
  * Canadian merchants and common patterns
  */
 
-import type { CategoryRule, CategorizationResult } from '@/types/budget';
-import { getVendorLearnedCategory } from '@/lib/vendor-learning';
+import type { CategoryRule, CategorizationResult } from "@/types/budget";
+import { getVendorLearnedCategory } from "@/lib/vendor-learning";
 
 /**
  * Clean BMO-specific formatting from description
@@ -17,7 +17,7 @@ function cleanBMODescription(description: string): string {
   const isOnlinePurchase = /^\[OP\]/i.test(cleaned);
 
   // Remove BMO-specific prefixes: [PR], [OP], etc.
-  cleaned = cleaned.replace(/^\[[A-Z]{2}\]/i, '').trim();
+  cleaned = cleaned.replace(/^\[[A-Z]{2}\]/i, "").trim();
 
   if (isOnlinePurchase) {
     // Handle [OP] format: "ONLINE PURCHASE  1AUG2025SKIPTHEDISHES MB"
@@ -30,8 +30,8 @@ function cleanBMODescription(description: string): string {
       let merchant = dateMatch[1].trim();
 
       // Remove trailing 2-letter location codes and numbers
-      merchant = merchant.replace(/\s+\d+\s*$/, '').trim(); // Remove trailing numbers
-      merchant = merchant.replace(/\s+([A-Z]{2}|CAN)\s*$/i, '').trim(); // Remove province/country
+      merchant = merchant.replace(/\s+\d+\s*$/, "").trim(); // Remove trailing numbers
+      merchant = merchant.replace(/\s+([A-Z]{2}|CAN)\s*$/i, "").trim(); // Remove province/country
 
       return merchant;
     }
@@ -39,11 +39,11 @@ function cleanBMODescription(description: string): string {
 
   // Handle [PR] physical purchases (original logic)
   // Remove location info (multiple spaces followed by location)
-  cleaned = cleaned.replace(/\s{2,}.*$/,'').trim();
+  cleaned = cleaned.replace(/\s{2,}.*$/, "").trim();
 
   // Remove trailing # numbers and location codes
-  cleaned = cleaned.replace(/\s+#\d+.*$/, '').trim();
-  cleaned = cleaned.replace(/\s+(AB|BC|ON|QC|MB|SK|NS|NB|PE|NL|YT|NT|NU|CAN)(\s+.*)?$/i, '').trim();
+  cleaned = cleaned.replace(/\s+#\d+.*$/, "").trim();
+  cleaned = cleaned.replace(/\s+(AB|BC|ON|QC|MB|SK|NS|NB|PE|NL|YT|NT|NU|CAN)(\s+.*)?$/i, "").trim();
 
   return cleaned;
 }
@@ -53,8 +53,8 @@ export const CATEGORY_RULES: CategoryRule[] = [
   // Food & Dining - Coffee
   {
     pattern: /tim hortons|tims|starbucks|second cup|bridgehead/i,
-    category: 'Food & Dining',
-    subcategory: 'Coffee',
+    category: "Food & Dining",
+    subcategory: "Coffee",
     confidence: 0.95,
   },
 
@@ -62,8 +62,8 @@ export const CATEGORY_RULES: CategoryRule[] = [
   {
     pattern:
       /safeway|sobeys|metro|loblaws|no frills|freshco|food basics|walmart|costco|independent|fortinos|zehrs|valu-mart|superstore|real cdn|real canadian|italian centre|mini max/i,
-    category: 'Food & Dining',
-    subcategory: 'Groceries',
+    category: "Food & Dining",
+    subcategory: "Groceries",
     confidence: 0.95,
   },
 
@@ -71,8 +71,8 @@ export const CATEGORY_RULES: CategoryRule[] = [
   {
     pattern:
       /restaurant|pizza|burger|sushi|thai|chinese|indian|pub|grill|cafe|bistro|diner|ninja noodle|banh mi|chili's|chilis/i,
-    category: 'Food & Dining',
-    subcategory: 'Restaurants',
+    category: "Food & Dining",
+    subcategory: "Restaurants",
     confidence: 0.85,
   },
 
@@ -80,58 +80,56 @@ export const CATEGORY_RULES: CategoryRule[] = [
   {
     pattern:
       /mcdonalds|burger king|wendy's|arby's|a&w|kfc|subway|harvey's|mary brown's|popeyes|domino/i,
-    category: 'Food & Dining',
-    subcategory: 'Fast Food',
+    category: "Food & Dining",
+    subcategory: "Fast Food",
     confidence: 0.95,
   },
 
   // Food & Dining - Delivery
   {
     pattern: /uber eats|doordash|skip the dishes|skipthedishes|grubhub|deliveroo/i,
-    category: 'Food & Dining',
-    subcategory: 'Delivery',
+    category: "Food & Dining",
+    subcategory: "Delivery",
     confidence: 0.95,
   },
 
   // Transportation - Gas
   {
-    pattern:
-      /shell|esso|petro-can|petro canada|husky|pioneer|ultramar|mohawk|circle k/i,
-    category: 'Transportation',
-    subcategory: 'Gas',
+    pattern: /shell|esso|petro-can|petro canada|husky|pioneer|ultramar|mohawk|circle k/i,
+    category: "Transportation",
+    subcategory: "Gas",
     confidence: 0.95,
   },
 
   // Transportation - Public Transit
   {
     pattern: /ttc|presto|go transit|oc transpo|stm|translink|transit/i,
-    category: 'Transportation',
-    subcategory: 'Public Transit',
+    category: "Transportation",
+    subcategory: "Public Transit",
     confidence: 0.95,
   },
 
   // Transportation - Parking
   {
     pattern: /parking|impark|easypark|honk/i,
-    category: 'Transportation',
-    subcategory: 'Parking',
+    category: "Transportation",
+    subcategory: "Parking",
     confidence: 0.9,
   },
 
   // Bills & Utilities - Phone
   {
-    pattern:
-      /rogers|bell|telus|fido|koodo|virgin mobile|freedom mobile|shaw mobile|videotron/i,
-    category: 'Bills & Utilities',
-    subcategory: 'Phone',
+    pattern: /rogers|bell|telus|fido|koodo|virgin mobile|freedom mobile|shaw mobile|videotron/i,
+    category: "Bills & Utilities",
+    subcategory: "Phone",
     confidence: 0.95,
   },
 
   // Bills & Utilities - Internet
   {
     pattern: /rogers|bell|telus|shaw|cogeco|teksavvy|start\.ca|vmedia/i,
-    category: 'Bills & Utilities',
-    subcategory: 'Internet',
+    category: "Bills & Utilities",
+    subcategory: "Internet",
     confidence: 0.85,
   },
 
@@ -139,25 +137,24 @@ export const CATEGORY_RULES: CategoryRule[] = [
   {
     pattern:
       /hydro|toronto hydro|enbridge|fortis|bc hydro|hydro one|alectra|epcor|saskpower|manitoba hydro/i,
-    category: 'Bills & Utilities',
-    subcategory: 'Electricity',
+    category: "Bills & Utilities",
+    subcategory: "Electricity",
     confidence: 0.95,
   },
 
   // Bills & Utilities - Insurance
   {
-    pattern:
-      /insurance|intact|td insurance|desjardins|wawanesa|co-operators|belair|rbc insurance/i,
-    category: 'Bills & Utilities',
-    subcategory: 'Insurance',
+    pattern: /insurance|intact|td insurance|desjardins|wawanesa|co-operators|belair|rbc insurance/i,
+    category: "Bills & Utilities",
+    subcategory: "Insurance",
     confidence: 0.9,
   },
 
   // Bills & Utilities - Subscriptions
   {
     pattern: /apple\.com\/bill|apple\.com|recurring pymnt|online purchase.*apple/i,
-    category: 'Bills & Utilities',
-    subcategory: 'Subscriptions',
+    category: "Bills & Utilities",
+    subcategory: "Subscriptions",
     confidence: 0.9,
   },
 
@@ -165,106 +162,104 @@ export const CATEGORY_RULES: CategoryRule[] = [
   {
     pattern:
       /amazon|walmart|canadian tire|winners|homesense|marshalls|giant tiger|dollarama|dollar tree/i,
-    category: 'Shopping',
-    subcategory: 'Home Goods',
+    category: "Shopping",
+    subcategory: "Home Goods",
     confidence: 0.85,
   },
 
   // Shopping - Electronics
   {
     pattern: /best buy|the source|canada computers|staples|apple store|microsoft/i,
-    category: 'Shopping',
-    subcategory: 'Electronics',
+    category: "Shopping",
+    subcategory: "Electronics",
     confidence: 0.9,
   },
 
   // Shopping - Clothing
   {
-    pattern:
-      /h&m|zara|gap|old navy|american eagle|roots|lululemon|sportchek|mark's|hudson bay/i,
-    category: 'Shopping',
-    subcategory: 'Clothing',
+    pattern: /h&m|zara|gap|old navy|american eagle|roots|lululemon|sportchek|mark's|hudson bay/i,
+    category: "Shopping",
+    subcategory: "Clothing",
     confidence: 0.9,
   },
 
   // Entertainment - Streaming
   {
-    pattern:
-      /netflix|spotify|apple music|disney\+|amazon prime|crave|youtube premium/i,
-    category: 'Entertainment',
-    subcategory: 'Streaming',
+    pattern: /netflix|spotify|apple music|disney\+|amazon prime|crave|youtube premium/i,
+    category: "Entertainment",
+    subcategory: "Streaming",
     confidence: 0.95,
   },
 
   // Entertainment - Movies
   {
     pattern: /cineplex|landmark|imax|theatre/i,
-    category: 'Entertainment',
-    subcategory: 'Movies',
+    category: "Entertainment",
+    subcategory: "Movies",
     confidence: 0.9,
   },
 
   // Health & Fitness - Gym
   {
     pattern: /goodlife|fit4less|planet fitness|ymca|community centre|yoga|gym/i,
-    category: 'Health & Fitness',
-    subcategory: 'Gym',
+    category: "Health & Fitness",
+    subcategory: "Gym",
     confidence: 0.9,
   },
 
   // Health & Fitness - Pharmacy
   {
     pattern: /shoppers|rexall|pharma plus|walmart pharmacy|costco pharmacy/i,
-    category: 'Health & Fitness',
-    subcategory: 'Pharmacy',
+    category: "Health & Fitness",
+    subcategory: "Pharmacy",
     confidence: 0.9,
   },
 
   // Housing - Utilities (catch-all)
   {
     pattern: /rent|mortgage|property tax|condo fee|maintenance fee/i,
-    category: 'Housing',
-    subcategory: 'Rent/Mortgage',
+    category: "Housing",
+    subcategory: "Rent/Mortgage",
     confidence: 0.85,
   },
 
   // Income
   {
     pattern: /payroll|salary|direct deposit|etransfer|e-transfer/i,
-    category: 'Income',
-    subcategory: 'Salary',
+    category: "Income",
+    subcategory: "Salary",
     confidence: 0.9,
   },
 
   // Savings & Investments
   {
     pattern: /questrade|wealthsimple|td direct|rbc direct|tfsa|rrsp|investment/i,
-    category: 'Savings & Investments',
-    subcategory: 'Stocks',
+    category: "Savings & Investments",
+    subcategory: "Stocks",
     confidence: 0.9,
   },
 
   // Education
   {
     pattern: /university|college|tuition|textbook|bookstore|coursera|udemy/i,
-    category: 'Education',
-    subcategory: 'Tuition',
+    category: "Education",
+    subcategory: "Tuition",
     confidence: 0.85,
   },
 
   // Pets
   {
     pattern: /pet|petsmart|petvalue|ren's pets|vet|veterinary/i,
-    category: 'Pets',
-    subcategory: 'Food',
+    category: "Pets",
+    subcategory: "Food",
     confidence: 0.85,
   },
 
   // Travel
   {
     pattern: /air canada|westjet|hotel|airbnb|booking\.com|expedia/i,
-    category: 'Travel',
-    subcategory: 'Flights',
+    category: "Travel",
+    subcategory: "Flights",
     confidence: 0.9,
   },
 ];
@@ -272,9 +267,7 @@ export const CATEGORY_RULES: CategoryRule[] = [
 /**
  * Categorize a transaction using rules
  */
-export function categorizeTransaction(
-  description: string
-): CategorizationResult | null {
+export function categorizeTransaction(description: string): CategorizationResult | null {
   // 0. Vendor-learning override (highest priority)
   const learned = getVendorLearnedCategory(description);
   if (learned) {
@@ -282,7 +275,7 @@ export function categorizeTransaction(
       category: learned.category,
       subcategory: learned.subcategory ?? undefined,
       confidence: 0.99,
-      method: 'ml', // Vendor learning is a machine learning approach
+      method: "ml", // Vendor learning is a machine learning approach
     };
   }
 
@@ -297,7 +290,7 @@ export function categorizeTransaction(
         category: rule.category,
         subcategory: rule.subcategory,
         confidence: rule.confidence,
-        method: 'rule',
+        method: "rule",
       };
     }
   }
@@ -320,7 +313,7 @@ export async function categorizeTransactionHybrid(
 
   // Fall back to ML model for unknown patterns
   try {
-    const { getMLCategorizer } = await import('./ml-categorizer');
+    const { getMLCategorizer } = await import("./ml-categorizer");
     const mlCategorizer = getMLCategorizer();
 
     if (mlCategorizer.ready) {
@@ -330,7 +323,7 @@ export async function categorizeTransactionHybrid(
       }
     }
   } catch (error) {
-    console.error('ML categorization failed:', error);
+    console.error("ML categorization failed:", error);
   }
 
   return null;
@@ -339,16 +332,14 @@ export async function categorizeTransactionHybrid(
 /**
  * Batch categorize transactions
  */
-export function categorizeTransactions(
-  descriptions: string[]
-): CategorizationResult[] {
+export function categorizeTransactions(descriptions: string[]): CategorizationResult[] {
   return descriptions.map(
     (desc) =>
       categorizeTransaction(desc) || {
-        category: 'Miscellaneous',
-        subcategory: 'Other',
+        category: "Miscellaneous",
+        subcategory: "Other",
         confidence: 0.5,
-        method: 'rule',
+        method: "rule",
       }
   );
 }
@@ -399,7 +390,7 @@ export function recordCorrection(correction: UserCorrection): void {
     const pattern = extractCommonPattern(similar.map((c) => c.originalDescription));
     if (pattern) {
       addCustomRule({
-        pattern: new RegExp(pattern, 'i'),
+        pattern: new RegExp(pattern, "i"),
         category: correction.correctedCategory,
         subcategory: correction.correctedSubcategory,
         confidence: 0.8,
@@ -422,9 +413,7 @@ function extractCommonPattern(descriptions: string[]): string | null {
       .filter((w) => w.length > 3)
   );
 
-  const commonWords = words[0].filter((word) =>
-    words.every((wordList) => wordList.includes(word))
-  );
+  const commonWords = words[0].filter((word) => words.every((wordList) => wordList.includes(word)));
 
   return commonWords.length > 0 ? commonWords[0] : null;
 }

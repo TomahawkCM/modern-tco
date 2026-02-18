@@ -32,4 +32,3 @@ export function buildExamConfig(
     enableAnalytics: true,
   } as AssessmentConfig;
 }
-

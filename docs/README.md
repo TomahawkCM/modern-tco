@@ -1,9 +1,9 @@
-
 # Documentation Index – Modern TCO LMS
 
 Use this index to find the right document quickly during development, staging, and production operations.
 
 ## Operations & Production
+
 - Production Readiness Playbook: `docs/OPS/PRODUCTION_READINESS_PLAYBOOK.md`
 - Production Design (architecture & ops): `docs/OPS/PRODUCTION_DESIGN.md`
 - Go‑Live Checklist: `docs/OPS/GO_LIVE_CHECKLIST.md`
@@ -12,6 +12,7 @@ Use this index to find the right document quickly during development, staging, a
 - CSP Template & Guidance: `docs/OPS/CSP_TEMPLATE.md`
 
 ## Development & Testing
+
 - Next Session TODOs: `docs/NEXT_SESSION_TODO.md`
 - Test Strategy & Commands: `docs/OPS/TEST_STRATEGY.md`
 - Query Builder Enhancements: `docs/QUERY_BUILDER_ENHANCEMENTS.md` ← **NEW**
@@ -19,12 +20,14 @@ Use this index to find the right document quickly during development, staging, a
 - PostgreSQL Guides: `docs/postgresql/`
 
 ## Content & Knowledge Base
+
 - Learning Modules (MDX): `src/content/modules/`
 - Question Bank (JSON, import/export): `src/content/questions/`
 - Knowledge Base (research): `docs/knowledge-base/`
   - Lighthouse Knowledge Base: `docs/knowledge-base/LIGHTHOUSE_KNOWLEDGE_BASE.md` ← **NEW**
 
 ## App Routes (handy)
+
 - Study Center: `/modules`
 - Review Center: `/study/review` (lists all needs‑review sections across modules)
 - Practice launcher: `/practice`
@@ -40,6 +43,7 @@ Use this index to find the right document quickly during development, staging, a
 - Mock exam: `/mock?variant=A` (105Q/105min; variants A/B/C)
 
 ## Useful Commands (quick copy/paste)
+
 ```
 set -a; source .env.local 2>/dev/null || true; set +a
 
@@ -64,6 +68,7 @@ npm run test
 ```
 
 ## Lighthouse (local dev)
+
 ```
 # Install Chromium for Playwright once
 npm run lighthouse:setup

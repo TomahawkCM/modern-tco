@@ -23,7 +23,9 @@ export default function TeamPage() {
       const list = await teamService.list(user);
       if (active) setSeats(list);
     })();
-    return () => { active = false; };
+    return () => {
+      active = false;
+    };
   }, [user?.id]);
 
   const used = seats.filter((s) => s.status !== "revoked").length;
@@ -63,7 +65,11 @@ export default function TeamPage() {
   async function handleActivate(id: string) {
     await teamService.activate(id, user);
     void analytics.capture("team_activate", { id });
-    setSeats((prev) => prev.map((s) => (s.id === id ? { ...s, status: "active", acceptedAt: new Date().toISOString() } : s)));
+    setSeats((prev) =>
+      prev.map((s) =>
+        s.id === id ? { ...s, status: "active", acceptedAt: new Date().toISOString() } : s
+      )
+    );
   }
 
   const sorted = useMemo(() => {
@@ -73,7 +79,10 @@ export default function TeamPage() {
   return (
     <div className="mx-auto max-w-5xl p-6">
       <h1 className="mb-4 text-3xl font-bold text-foreground">Team Seats (Beta)</h1>
-      <p className="mb-6 text-muted-foreground">Invite teammates to use your Team plan. This MVP stores seats in your account with Supabase when available, with a local fallback for development.</p>
+      <p className="mb-6 text-muted-foreground">
+        Invite teammates to use your Team plan. This MVP stores seats in your account with Supabase
+        when available, with a local fallback for development.
+      </p>
 
       <Card className="glass border-white/10">
         <CardHeader>
@@ -81,8 +90,12 @@ export default function TeamPage() {
         </CardHeader>
         <CardContent className="flex items-center justify-between text-sm text-muted-foreground">
           <div>
-            <div><span className="font-medium">Limit:</span> {limit}</div>
-            <div><span className="font-medium">Used:</span> {used}</div>
+            <div>
+              <span className="font-medium">Limit:</span> {limit}
+            </div>
+            <div>
+              <span className="font-medium">Used:</span> {used}
+            </div>
           </div>
           <Badge variant={remaining > 0 ? "secondary" : "outline"}>
             {remaining} seats remaining
@@ -90,30 +103,44 @@ export default function TeamPage() {
         </CardContent>
       </Card>
 
-      <Card className="mt-6 glass border-white/10">
+      <Card className="glass mt-6 border-white/10">
         <CardHeader>
           <CardTitle className="text-foreground">Invite a teammate</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="grid gap-2 sm:grid-cols-[1fr_auto] sm:items-end">
             <div>
-              <Label htmlFor="invite-email" className="text-muted-foreground">Email</Label>
-              <Input id="invite-email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="teammate@company.com" disabled={!user} />
+              <Label htmlFor="invite-email" className="text-muted-foreground">
+                Email
+              </Label>
+              <Input
+                id="invite-email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="teammate@company.com"
+                disabled={!user}
+              />
             </div>
-            <Button onClick={handleInvite} disabled={!email.trim() || !user} className="sm:ml-2">Invite</Button>
+            <Button onClick={handleInvite} disabled={!email.trim() || !user} className="sm:ml-2">
+              Invite
+            </Button>
           </div>
-          {!user && <div className="text-sm text-[#f97316]">Sign in to invite and manage seats.</div>}
+          {!user && (
+            <div className="text-sm text-[#f97316]">Sign in to invite and manage seats.</div>
+          )}
           {error && <div className="text-sm text-red-400">{error}</div>}
         </CardContent>
       </Card>
 
-      <Card className="mt-6 glass border-white/10">
+      <Card className="glass mt-6 border-white/10">
         <CardHeader>
           <CardTitle className="text-foreground">Seats</CardTitle>
         </CardHeader>
         <CardContent>
           {sorted.length === 0 ? (
-            <div className="text-sm text-muted-foreground">No seats yet. Invite your first teammate above.</div>
+            <div className="text-sm text-muted-foreground">
+              No seats yet. Invite your first teammate above.
+            </div>
           ) : (
             <ul className="divide-y divide-white/10">
               {sorted.map((s) => (
@@ -122,15 +149,21 @@ export default function TeamPage() {
                     <div className="text-foreground">{s.email}</div>
                     <div className="text-xs text-muted-foreground">
                       Invited {new Date(s.invitedAt).toLocaleString()} • Status: {s.status}
-                      {s.acceptedAt ? ` • Activated ${new Date(s.acceptedAt).toLocaleString()}` : ""}
+                      {s.acceptedAt
+                        ? ` • Activated ${new Date(s.acceptedAt).toLocaleString()}`
+                        : ""}
                     </div>
                   </div>
                   <div className="flex gap-2">
                     {s.status === "invited" && (
-                      <Button size="sm" variant="outline" onClick={() => handleActivate(s.id)}>Mark Active</Button>
+                      <Button size="sm" variant="outline" onClick={() => handleActivate(s.id)}>
+                        Mark Active
+                      </Button>
                     )}
                     {s.status !== "revoked" && (
-                      <Button size="sm" variant="destructive" onClick={() => handleRevoke(s.id)}>Revoke</Button>
+                      <Button size="sm" variant="destructive" onClick={() => handleRevoke(s.id)}>
+                        Revoke
+                      </Button>
                     )}
                   </div>
                 </li>

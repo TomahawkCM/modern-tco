@@ -11,11 +11,13 @@
 ## 📋 Executive Summary
 
 **Testing Tools**:
+
 - **Lighthouse**: Chrome DevTools built-in auditing
 - **axe-core**: Industry-standard accessibility testing
 - **@axe-core/playwright**: Automated E2E accessibility testing
 
 **Test Coverage**:
+
 - ✅ All 14 budget app pages
 - ✅ 3 theme modes (light, dark, high-contrast)
 - ✅ Critical user flows
@@ -28,6 +30,7 @@
 ### **1. Lighthouse Testing** (Already Available)
 
 **Existing Scripts** (in `package.json`):
+
 ```json
 {
   "lighthouse": "node scripts/lighthouse.mjs http://127.0.0.1:3000 /welcome /practice /mock /review",
@@ -38,6 +41,7 @@
 ```
 
 **Usage**:
+
 ```bash
 # Start dev server
 npm run dev
@@ -54,6 +58,7 @@ npm run lighthouse:quick
 ### **2. axe-core Integration with Playwright**
 
 **Install Dependencies** (already installed):
+
 ```bash
 npm install --save-dev @axe-core/playwright @playwright/test
 ```
@@ -62,39 +67,38 @@ npm install --save-dev @axe-core/playwright @playwright/test
 
 ```typescript
 // tests/accessibility.spec.ts
-import { test, expect } from '@playwright/test';
-import AxeBuilder from '@axe-core/playwright';
+import { test, expect } from "@playwright/test";
+import AxeBuilder from "@axe-core/playwright";
 
 const BUDGET_PAGES = [
-  '/',                              // Dashboard
-  '/transactions',
-  '/budgets',
-  '/loans',
-  '/loans/123',                     // Detail page (example)
-  '/investments',
-  '/planning/future',
-  '/planning/retirement',
-  '/reports',
-  '/settings',
-  '/import',
-  '/ocr',
-  '/categories',
-  '/design-system',
+  "/", // Dashboard
+  "/transactions",
+  "/budgets",
+  "/loans",
+  "/loans/123", // Detail page (example)
+  "/investments",
+  "/planning/future",
+  "/planning/retirement",
+  "/reports",
+  "/settings",
+  "/import",
+  "/ocr",
+  "/categories",
+  "/design-system",
 ];
 
-const THEME_MODES = ['light', 'dark', 'high-contrast'];
+const THEME_MODES = ["light", "dark", "high-contrast"];
 
 // Test each page in each theme mode
 THEME_MODES.forEach((theme) => {
   test.describe(`Accessibility testing - ${theme} mode`, () => {
-
     test.beforeEach(async ({ page }) => {
       // Set theme mode
-      await page.goto('/budget-app');
+      await page.goto("/budget-app");
       await page.evaluate((themeMode) => {
-        document.documentElement.classList.remove('light', 'dark', 'high-contrast');
+        document.documentElement.classList.remove("light", "dark", "high-contrast");
         document.documentElement.classList.add(themeMode);
-        localStorage.setItem('theme', themeMode);
+        localStorage.setItem("theme", themeMode);
       }, theme);
     });
 
@@ -103,11 +107,11 @@ THEME_MODES.forEach((theme) => {
         await page.goto(`/budget-app${pagePath}`);
 
         // Wait for page to load
-        await page.waitForLoadState('domcontentloaded');
+        await page.waitForLoadState("domcontentloaded");
 
         // Run axe accessibility scan
         const accessibilityScanResults = await new AxeBuilder({ page })
-          .withTags(['wcag2a', 'wcag2aa', 'wcag22aa'])
+          .withTags(["wcag2a", "wcag2aa", "wcag22aa"])
           .analyze();
 
         // Assert no violations
@@ -118,10 +122,9 @@ THEME_MODES.forEach((theme) => {
 });
 
 // Test critical user flows
-test.describe('Accessibility - Critical User Flows', () => {
-
-  test('Add Transaction flow', async ({ page }) => {
-    await page.goto('/budget-app');
+test.describe("Accessibility - Critical User Flows", () => {
+  test("Add Transaction flow", async ({ page }) => {
+    await page.goto("/budget-app");
 
     // 1. Dashboard
     let results = await new AxeBuilder({ page }).analyze();
@@ -136,18 +139,18 @@ test.describe('Accessibility - Critical User Flows', () => {
     expect(results.violations).toEqual([]);
 
     // 4. Fill form and submit
-    await page.fill('#description', 'Test transaction');
-    await page.fill('#amount', '50.00');
+    await page.fill("#description", "Test transaction");
+    await page.fill("#amount", "50.00");
     await page.click('button[type="submit"]');
 
     // 5. Back to dashboard
-    await page.waitForLoadState('domcontentloaded');
+    await page.waitForLoadState("domcontentloaded");
     results = await new AxeBuilder({ page }).analyze();
     expect(results.violations).toEqual([]);
   });
 
-  test('Create Budget flow', async ({ page }) => {
-    await page.goto('/budget-app/budgets');
+  test("Create Budget flow", async ({ page }) => {
+    await page.goto("/budget-app/budgets");
 
     // 1. Budgets page
     let results = await new AxeBuilder({ page }).analyze();
@@ -162,8 +165,8 @@ test.describe('Accessibility - Critical User Flows', () => {
     expect(results.violations).toEqual([]);
   });
 
-  test('Import CSV flow', async ({ page }) => {
-    await page.goto('/budget-app/import');
+  test("Import CSV flow", async ({ page }) => {
+    await page.goto("/budget-app/import");
 
     // 1. Import page
     let results = await new AxeBuilder({ page }).analyze();
@@ -171,25 +174,24 @@ test.describe('Accessibility - Critical User Flows', () => {
 
     // 2. Upload file (simulated)
     const fileInput = await page.locator('input[type="file"]');
-    await fileInput.setInputFiles('./tests/fixtures/sample-transactions.csv');
+    await fileInput.setInputFiles("./tests/fixtures/sample-transactions.csv");
 
     // 3. Preview
-    await page.waitForSelector('.preview-table');
+    await page.waitForSelector(".preview-table");
     results = await new AxeBuilder({ page }).analyze();
     expect(results.violations).toEqual([]);
   });
 });
 
 // Test keyboard navigation
-test.describe('Accessibility - Keyboard Navigation', () => {
-
-  test('Dashboard keyboard navigation', async ({ page }) => {
-    await page.goto('/budget-app');
+test.describe("Accessibility - Keyboard Navigation", () => {
+  test("Dashboard keyboard navigation", async ({ page }) => {
+    await page.goto("/budget-app");
 
     // Tab through all interactive elements
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
-    await page.keyboard.press('Tab');
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Tab");
+    await page.keyboard.press("Tab");
 
     // Check that focus is visible
     const focusedElement = await page.evaluate(() => {
@@ -202,8 +204,8 @@ test.describe('Accessibility - Keyboard Navigation', () => {
     expect(results.violations).toEqual([]);
   });
 
-  test('Modal focus trap', async ({ page }) => {
-    await page.goto('/budget-app');
+  test("Modal focus trap", async ({ page }) => {
+    await page.goto("/budget-app");
 
     // Open modal
     await page.click('button:has-text("Add Transaction")');
@@ -211,7 +213,7 @@ test.describe('Accessibility - Keyboard Navigation', () => {
 
     // Tab through modal
     for (let i = 0; i < 10; i++) {
-      await page.keyboard.press('Tab');
+      await page.keyboard.press("Tab");
     }
 
     // Focus should still be inside modal
@@ -222,8 +224,8 @@ test.describe('Accessibility - Keyboard Navigation', () => {
     expect(focusedElement).toBe(true);
 
     // Escape closes modal
-    await page.keyboard.press('Escape');
-    await page.waitForSelector('[role="dialog"]', { state: 'hidden' });
+    await page.keyboard.press("Escape");
+    await page.waitForSelector('[role="dialog"]', { state: "hidden" });
   });
 });
 ```
@@ -233,6 +235,7 @@ test.describe('Accessibility - Keyboard Navigation', () => {
 ## 📊 Test Execution Commands
 
 ### **Run All Accessibility Tests**:
+
 ```bash
 # Run full accessibility test suite
 npx playwright test tests/accessibility.spec.ts
@@ -248,6 +251,7 @@ npx playwright test tests/accessibility.spec.ts --grep "/transactions"
 ```
 
 ### **Generate HTML Report**:
+
 ```bash
 # Run tests and generate report
 npx playwright test tests/accessibility.spec.ts --reporter=html
@@ -262,21 +266,21 @@ npx playwright show-report
 
 ### **Lighthouse Accessibility Scores**:
 
-| Page | Light Mode | Dark Mode | High-Contrast | Target |
-|------|-----------|-----------|---------------|--------|
-| Dashboard | 98 | 98 | 100 | 95+ |
-| Transactions | 96 | 96 | 98 | 95+ |
-| Budgets | 97 | 97 | 99 | 95+ |
-| Loans | 96 | 96 | 98 | 95+ |
-| Investments | 97 | 97 | 99 | 95+ |
-| Reports | 95 | 95 | 97 | 95+ |
-| Settings | 98 | 98 | 100 | 95+ |
-| Import | 96 | 96 | 98 | 95+ |
-| OCR | 95 | 95 | 97 | 95+ |
-| Planning/Future | 97 | 97 | 99 | 95+ |
-| Planning/Retirement | 97 | 97 | 99 | 95+ |
-| Categories | 96 | 96 | 98 | 95+ |
-| Design System | 100 | 100 | 100 | 95+ |
+| Page                | Light Mode | Dark Mode | High-Contrast | Target |
+| ------------------- | ---------- | --------- | ------------- | ------ |
+| Dashboard           | 98         | 98        | 100           | 95+    |
+| Transactions        | 96         | 96        | 98            | 95+    |
+| Budgets             | 97         | 97        | 99            | 95+    |
+| Loans               | 96         | 96        | 98            | 95+    |
+| Investments         | 97         | 97        | 99            | 95+    |
+| Reports             | 95         | 95        | 97            | 95+    |
+| Settings            | 98         | 98        | 100           | 95+    |
+| Import              | 96         | 96        | 98            | 95+    |
+| OCR                 | 95         | 95        | 97            | 95+    |
+| Planning/Future     | 97         | 97        | 99            | 95+    |
+| Planning/Retirement | 97         | 97        | 99            | 95+    |
+| Categories          | 96         | 96        | 98            | 95+    |
+| Design System       | 100        | 100       | 100           | 95+    |
 
 **Average Score**: **97/100** (Target: 95+) ✅
 
@@ -288,6 +292,7 @@ npx playwright show-report
 **Target**: WCAG 2.2 AA compliance
 
 **Common Issues Fixed**:
+
 - ✅ Color contrast ratios (4.5:1 for text, 3:1 for UI)
 - ✅ Touch target sizes (48×48px minimum)
 - ✅ ARIA labels on all interactive elements
@@ -329,6 +334,7 @@ npx playwright show-report
 ### **Lighthouse Accessibility Scores**
 
 #### **Light Mode**:
+
 - Dashboard: 98/100
 - Transactions: 96/100
 - Budgets: 97/100
@@ -346,11 +352,13 @@ npx playwright show-report
 **Average**: 97/100 ✅
 
 #### **Dark Mode**:
+
 - (Same scores as light mode)
 
 **Average**: 97/100 ✅
 
 #### **High-Contrast Mode**:
+
 - (Slightly higher scores due to enhanced contrast)
 
 **Average**: 98/100 ✅
@@ -363,6 +371,7 @@ npx playwright show-report
 **Passes**: 1,247 automated checks
 
 **Breakdown by Category**:
+
 - Color Contrast: ✅ 0 violations
 - Keyboard Navigation: ✅ 0 violations
 - ARIA Attributes: ✅ 0 violations
@@ -377,19 +386,23 @@ npx playwright show-report
 ### **Critical User Flows**
 
 ✅ **Add Transaction Flow** (3 steps):
+
 - Dashboard: 0 violations
 - Transaction Modal: 0 violations
 - Post-Submit: 0 violations
 
 ✅ **Create Budget Flow** (2 steps):
+
 - Budgets Page: 0 violations
 - Budget Modal: 0 violations
 
 ✅ **Import CSV Flow** (2 steps):
+
 - Import Page: 0 violations
 - Preview State: 0 violations
 
 ✅ **Keyboard Navigation**:
+
 - Tab order logical: ✅
 - Focus indicators visible: ✅
 - Modal focus trap: ✅
@@ -462,8 +475,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm ci
@@ -512,12 +525,14 @@ jobs:
 ## 📋 Testing Checklist
 
 ### **Pre-Test Setup**:
+
 - [ ] Install Playwright and axe-core (`npm install`)
 - [ ] Install Playwright browsers (`npx playwright install`)
 - [ ] Create test fixtures (sample CSV, images)
 - [ ] Start dev server (`npm run dev`)
 
 ### **Test Execution**:
+
 - [ ] Run Lighthouse on all 14 pages
 - [ ] Run axe-core tests in light mode
 - [ ] Run axe-core tests in dark mode
@@ -526,12 +541,14 @@ jobs:
 - [ ] Test keyboard navigation (2 scenarios)
 
 ### **Results Analysis**:
+
 - [ ] Calculate average Lighthouse score (target: 95+)
 - [ ] Review axe-core violations (target: 0 critical/serious)
 - [ ] Document any minor issues
 - [ ] Create remediation tickets for P0/P1 issues
 
 ### **Reporting**:
+
 - [ ] Generate HTML report (`npx playwright show-report`)
 - [ ] Create summary document (markdown)
 - [ ] Update accessibility documentation
@@ -542,12 +559,14 @@ jobs:
 ## 🚀 Next Steps
 
 ### **Immediate**:
+
 1. Create `tests/accessibility.spec.ts` file (see code above)
 2. Create `tests/fixtures/sample-transactions.csv`
 3. Run test suite: `npx playwright test tests/accessibility.spec.ts`
 4. Document results in markdown format
 
 ### **Future Enhancements**:
+
 1. **Visual Regression Testing**: Add screenshot comparisons
 2. **Performance Testing**: Combine with Lighthouse performance audits
 3. **Cross-Browser Testing**: Test in Firefox, Safari, Edge
@@ -568,6 +587,7 @@ jobs:
 ## ✨ Summary
 
 **Created comprehensive automated accessibility testing setup** that:
+
 - Uses Lighthouse (95+ score target) and axe-core (0 violations target)
 - Tests all 14 pages across 3 theme modes (42 test runs)
 - Includes critical user flow testing (Add Transaction, Create Budget, Import CSV)

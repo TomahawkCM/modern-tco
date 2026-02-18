@@ -10,10 +10,10 @@
  * - Keyboard navigation (↑↓ to navigate, Enter to select)
  */
 
-'use client';
+"use client";
 
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { useTranslations } from 'next-intl';
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import {
   Search,
   X as XIcon,
@@ -26,9 +26,9 @@ import {
   HelpCircle,
   ChevronDown,
   Sparkles,
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
-import type { Transaction, Category } from '@/types/budget';
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import type { Transaction, Category } from "@/types/budget";
 import {
   getAutocompleteSuggestions,
   addRecentSearch,
@@ -38,8 +38,8 @@ import {
   type AutocompleteSuggestion,
   type SavedFilter,
   initializeAutocompleteCache,
-} from '@/lib/search/autocomplete';
-import { getSearchExamples } from '@/lib/search/natural-language-parser';
+} from "@/lib/search/autocomplete";
+import { getSearchExamples } from "@/lib/search/natural-language-parser";
 
 export interface TransactionSearchBarProps {
   /** Current search value */
@@ -67,19 +67,19 @@ export interface TransactionSearchBarProps {
 }
 
 // Icon for suggestion type
-function SuggestionIcon({ type }: { type: AutocompleteSuggestion['type'] }) {
+function SuggestionIcon({ type }: { type: AutocompleteSuggestion["type"] }) {
   switch (type) {
-    case 'merchant':
+    case "merchant":
       return <Store className="h-4 w-4 text-muted-foreground" />;
-    case 'category':
+    case "category":
       return <Tag className="h-4 w-4 text-muted-foreground" />;
-    case 'amount':
+    case "amount":
       return <DollarSign className="h-4 w-4 text-muted-foreground" />;
-    case 'filter':
+    case "filter":
       return <Filter className="h-4 w-4 text-muted-foreground" />;
-    case 'recent':
+    case "recent":
       return <History className="h-4 w-4 text-muted-foreground" />;
-    case 'saved':
+    case "saved":
       return <Bookmark className="h-4 w-4 text-muted-foreground" />;
     default:
       return <Search className="h-4 w-4 text-muted-foreground" />;
@@ -99,7 +99,8 @@ export function TransactionSearchBar({
   className,
   autoFocus = false,
 }: TransactionSearchBarProps) {
-  const t = useTranslations('transactionSearch');
+  const t = useTranslations("transactionSearch");
+  const tAria = useTranslations("aria");
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -109,7 +110,7 @@ export function TransactionSearchBar({
   const [showTipsModal, setShowTipsModal] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [suggestions, setSuggestions] = useState<AutocompleteSuggestion[]>([]);
-  const [saveFilterName, setSaveFilterName] = useState('');
+  const [saveFilterName, setSaveFilterName] = useState("");
   const [showSaveFilter, setShowSaveFilter] = useState(false);
 
   // Initialize autocomplete cache when transactions change
@@ -136,50 +137,66 @@ export function TransactionSearchBar({
   }, [value]);
 
   // Handle keyboard navigation
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    const items = suggestions.length > 0 ? suggestions : [];
-    const totalItems = items.length + (value && showSaveFilter ? 1 : 0);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      const items = suggestions.length > 0 ? suggestions : [];
+      const totalItems = items.length + (value && showSaveFilter ? 1 : 0);
 
-    switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        setSelectedIndex(prev => Math.min(prev + 1, totalItems - 1));
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        setSelectedIndex(prev => Math.max(prev - 1, -1));
-        break;
-      case 'Enter':
-        e.preventDefault();
-        if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
-          selectSuggestion(suggestions[selectedIndex]);
-        } else if (value) {
-          handleSubmit();
-        }
-        break;
-      case 'Escape':
-        setShowDropdown(false);
-        inputRef.current?.blur();
-        break;
-    }
-  }, [suggestions, selectedIndex, value, showSaveFilter]);
+      switch (e.key) {
+        case "ArrowDown":
+          e.preventDefault();
+          setSelectedIndex((prev) => Math.min(prev + 1, totalItems - 1));
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          setSelectedIndex((prev) => Math.max(prev - 1, -1));
+          break;
+        case "Tab":
+          // Tab-to-complete: accept the selected or first suggestion
+          if (showDropdown && suggestions.length > 0) {
+            e.preventDefault();
+            const idx = selectedIndex >= 0 ? selectedIndex : 0;
+            if (idx < suggestions.length) {
+              selectSuggestion(suggestions[idx]);
+            }
+          }
+          break;
+        case "Enter":
+          e.preventDefault();
+          if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
+            selectSuggestion(suggestions[selectedIndex]);
+          } else if (value) {
+            handleSubmit();
+          }
+          break;
+        case "Escape":
+          setShowDropdown(false);
+          inputRef.current?.blur();
+          break;
+      }
+    },
+    [suggestions, selectedIndex, value, showSaveFilter]
+  );
 
   // Select a suggestion
-  const selectSuggestion = useCallback((suggestion: AutocompleteSuggestion) => {
-    onChange(suggestion.value);
-    setShowDropdown(false);
-    inputRef.current?.focus();
+  const selectSuggestion = useCallback(
+    (suggestion: AutocompleteSuggestion) => {
+      onChange(suggestion.value);
+      setShowDropdown(false);
+      inputRef.current?.focus();
 
-    // Add to recent if it's not already a filter syntax
-    if (!suggestion.value.includes(':')) {
-      addRecentSearch(suggestion.value);
-    }
+      // Add to recent if it's not already a filter syntax
+      if (!suggestion.value.includes(":")) {
+        addRecentSearch(suggestion.value);
+      }
 
-    // Submit if it's a saved filter or recent search
-    if (suggestion.type === 'saved' || suggestion.type === 'recent') {
-      onSubmit?.(suggestion.value);
-    }
-  }, [onChange, onSubmit]);
+      // Submit if it's a saved filter or recent search
+      if (suggestion.type === "saved" || suggestion.type === "recent") {
+        onSubmit?.(suggestion.value);
+      }
+    },
+    [onChange, onSubmit]
+  );
 
   // Submit search
   const handleSubmit = useCallback(() => {
@@ -195,13 +212,13 @@ export function TransactionSearchBar({
     if (value.trim() && saveFilterName.trim()) {
       saveFilter(saveFilterName.trim(), value.trim());
       setShowSaveFilter(false);
-      setSaveFilterName('');
+      setSaveFilterName("");
     }
   }, [value, saveFilterName]);
 
   // Clear search
   const handleClear = useCallback(() => {
-    onChange('');
+    onChange("");
     inputRef.current?.focus();
   }, [onChange]);
 
@@ -218,8 +235,8 @@ export function TransactionSearchBar({
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Determine what to show in dropdown
@@ -227,15 +244,26 @@ export function TransactionSearchBar({
   const showRecent = !value && recentSearches.length > 0;
   const showSaved = !value && savedFilters.length > 0;
   const showAnything = showSuggestions || showRecent || showSaved;
+  const isDropdownVisible = showDropdown && showAnything;
+
+  // Generate active descendant ID for ARIA
+  const activeDescendantId =
+    selectedIndex >= 0 ? `search-suggestion-${selectedIndex}` : undefined;
 
   return (
-    <div className={cn('relative', className)}>
+    <div className={cn("relative", className)}>
       {/* Search Input */}
       <div className="relative">
-        <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+        <Search className="absolute start-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
         <input
           ref={inputRef}
           type="text"
+          role="combobox"
+          aria-expanded={isDropdownVisible}
+          aria-haspopup="listbox"
+          aria-controls="search-suggestions-listbox"
+          aria-activedescendant={activeDescendantId}
+          aria-autocomplete="list"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => {
@@ -244,21 +272,21 @@ export function TransactionSearchBar({
           }}
           onBlur={() => setIsFocused(false)}
           onKeyDown={handleKeyDown}
-          placeholder={placeholder || t('placeholderExtended')}
+          placeholder={placeholder || t("placeholderExtended")}
           autoFocus={autoFocus}
           className={cn(
-            'w-full rounded-lg border border-input bg-background py-3 pl-10 pr-20 text-base text-foreground',
-            'focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20',
-            'placeholder:text-muted-foreground',
-            isLoading && 'animate-pulse'
+            "w-full rounded-lg border border-input bg-background py-3 ps-10 pe-20 text-base text-foreground",
+            "focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20",
+            "placeholder:text-muted-foreground",
+            isLoading && "animate-pulse"
           )}
         />
 
         {/* Right side buttons */}
-        <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+        <div className="absolute end-2 top-1/2 flex -translate-y-1/2 items-center gap-1">
           {/* Result count badge */}
           {resultCount !== undefined && value && (
-            <span className="px-2 py-0.5 text-xs font-medium text-muted-foreground bg-muted rounded-full">
+            <span className="rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
               {resultCount}
             </span>
           )}
@@ -267,8 +295,8 @@ export function TransactionSearchBar({
           {value && (
             <button
               onClick={handleClear}
-              className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              aria-label="Clear search"
+              className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              aria-label={tAria("clearSearch")}
             >
               <XIcon className="h-4 w-4" />
             </button>
@@ -278,8 +306,8 @@ export function TransactionSearchBar({
           {showTips && (
             <button
               onClick={() => setShowTipsModal(!showTipsModal)}
-              className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-              aria-label="Search tips"
+              className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              aria-label={tAria("searchTips")}
             >
               <HelpCircle className="h-4 w-4" />
             </button>
@@ -287,27 +315,40 @@ export function TransactionSearchBar({
         </div>
       </div>
 
+      {/* Live region for screen reader announcements */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {resultCount !== undefined && value
+          ? `${resultCount} results found`
+          : isDropdownVisible && suggestions.length > 0
+            ? `${suggestions.length} suggestions available`
+            : ""}
+      </div>
+
       {/* Dropdown */}
-      {showDropdown && showAnything && (
+      {isDropdownVisible && (
         <div
           ref={dropdownRef}
-          className="absolute z-50 mt-1 w-full rounded-lg border border-border bg-popover shadow-lg overflow-hidden"
+          id="search-suggestions-listbox"
+          role="listbox"
+          aria-label={tAria("searchSuggestions")}
+          className="absolute z-50 mt-1 w-full overflow-hidden rounded-lg border border-border bg-popover shadow-lg"
         >
           {/* Suggestions */}
           {showSuggestions && (
             <div className="p-1">
               <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
-                Suggestions
+                {t("suggestionsHeading")}
               </div>
               {suggestions.map((suggestion, idx) => (
                 <button
                   key={`${suggestion.type}-${suggestion.value}-${idx}`}
+                  id={`search-suggestion-${idx}`}
+                  role="option"
+                  aria-selected={selectedIndex === idx}
                   onClick={() => selectSuggestion(suggestion)}
                   className={cn(
-                    'w-full flex items-center gap-3 px-3 py-2 rounded-md text-left transition-colors',
-                    selectedIndex === idx
-                      ? 'bg-accent text-accent-foreground'
-                      : 'hover:bg-muted'
+                    "flex w-full items-center gap-3 rounded-md px-3 py-2 text-start transition-colors",
+                    selectedIndex === idx ? "bg-accent text-accent-foreground" : "hover:bg-muted"
                   )}
                 >
                   <SuggestionIcon type={suggestion.type} />
@@ -322,9 +363,9 @@ export function TransactionSearchBar({
 
           {/* Recent Searches */}
           {showRecent && (
-            <div className="p-1 border-t border-border">
+            <div className="border-t border-border p-1">
               <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
-                {t('recentSearches')}
+                {t("recentSearches")}
               </div>
               {recentSearches.map((search, idx) => (
                 <button
@@ -334,7 +375,7 @@ export function TransactionSearchBar({
                     onSubmit?.(search);
                     setShowDropdown(false);
                   }}
-                  className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-left hover:bg-muted transition-colors"
+                  className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-start transition-colors hover:bg-muted"
                 >
                   <History className="h-4 w-4 text-muted-foreground" />
                   <span className="flex-1 truncate">{search}</span>
@@ -345,9 +386,9 @@ export function TransactionSearchBar({
 
           {/* Saved Filters */}
           {showSaved && (
-            <div className="p-1 border-t border-border">
+            <div className="border-t border-border p-1">
               <div className="px-2 py-1.5 text-xs font-medium text-muted-foreground">
-                {t('savedFilters')}
+                {t("savedFilters")}
               </div>
               {savedFilters.map((filter) => (
                 <button
@@ -357,11 +398,11 @@ export function TransactionSearchBar({
                     onSubmit?.(filter.query);
                     setShowDropdown(false);
                   }}
-                  className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-left hover:bg-muted transition-colors"
+                  className="flex w-full items-center gap-3 rounded-md px-3 py-2 text-start transition-colors hover:bg-muted"
                 >
                   <Bookmark className="h-4 w-4 text-muted-foreground" />
                   <span className="flex-1 truncate">{filter.name}</span>
-                  <span className="text-xs text-muted-foreground truncate max-w-[120px]">
+                  <span className="max-w-[120px] truncate text-xs text-muted-foreground">
                     {filter.query}
                   </span>
                 </button>
@@ -371,36 +412,36 @@ export function TransactionSearchBar({
 
           {/* Save Filter Option */}
           {value && value.length >= 3 && (
-            <div className="p-2 border-t border-border bg-muted/50">
+            <div className="border-t border-border bg-muted/50 p-2">
               {showSaveFilter ? (
                 <div className="flex items-center gap-2">
                   <input
                     type="text"
                     value={saveFilterName}
                     onChange={(e) => setSaveFilterName(e.target.value)}
-                    placeholder={t('filterName')}
-                    className="flex-1 px-2 py-1 text-sm rounded border border-input bg-background focus:outline-none focus:ring-1 focus:ring-teal-500"
+                    placeholder={t("filterName")}
+                    className="flex-1 rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
                     autoFocus
                     onKeyDown={(e) => {
-                      if (e.key === 'Enter') handleSaveFilter();
-                      if (e.key === 'Escape') setShowSaveFilter(false);
+                      if (e.key === "Enter") handleSaveFilter();
+                      if (e.key === "Escape") setShowSaveFilter(false);
                     }}
                   />
                   <button
                     onClick={handleSaveFilter}
                     disabled={!saveFilterName.trim()}
-                    className="px-3 py-1 text-sm font-medium text-white bg-teal-600 rounded hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="rounded bg-teal-600 px-3 py-1 text-sm font-medium text-white hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    Save
+                    {t("save")}
                   </button>
                 </div>
               ) : (
                 <button
                   onClick={() => setShowSaveFilter(true)}
-                  className="w-full flex items-center gap-2 px-2 py-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="flex w-full items-center gap-2 px-2 py-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
                 >
                   <Bookmark className="h-4 w-4" />
-                  <span>{t('saveFilter')}</span>
+                  <span>{t("saveFilter")}</span>
                 </button>
               )}
             </div>
@@ -410,30 +451,27 @@ export function TransactionSearchBar({
 
       {/* Tips Modal */}
       {showTipsModal && (
-        <div className="absolute z-50 mt-1 right-0 w-80 rounded-lg border border-border bg-popover shadow-lg p-4">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="font-medium flex items-center gap-2">
+        <div className="absolute end-0 z-50 mt-1 w-80 rounded-lg border border-border bg-popover p-4 shadow-lg">
+          <div className="mb-3 flex items-center justify-between">
+            <h3 className="flex items-center gap-2 font-medium">
               <Sparkles className="h-4 w-4 text-teal-500" />
-              {t('tips.title')}
+              {t("tips.title")}
             </h3>
-            <button
-              onClick={() => setShowTipsModal(false)}
-              className="p-1 rounded hover:bg-muted"
-            >
+            <button onClick={() => setShowTipsModal(false)} className="rounded p-1 hover:bg-muted">
               <XIcon className="h-4 w-4" />
             </button>
           </div>
 
           <div className="space-y-2 text-sm">
-            <p className="text-muted-foreground">{t('tips.fuzzy')}</p>
-            <p className="text-muted-foreground">{t('tips.amount')}</p>
-            <p className="text-muted-foreground">{t('tips.date')}</p>
-            <p className="text-muted-foreground">{t('tips.category')}</p>
-            <p className="text-muted-foreground">{t('tips.type')}</p>
+            <p className="text-muted-foreground">{t("tips.fuzzy")}</p>
+            <p className="text-muted-foreground">{t("tips.amount")}</p>
+            <p className="text-muted-foreground">{t("tips.date")}</p>
+            <p className="text-muted-foreground">{t("tips.category")}</p>
+            <p className="text-muted-foreground">{t("tips.type")}</p>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-border">
-            <p className="text-xs font-medium text-muted-foreground mb-2">Examples:</p>
+          <div className="mt-4 border-t border-border pt-3">
+            <p className="mb-2 text-xs font-medium text-muted-foreground">Examples:</p>
             <div className="space-y-1">
               {searchExamples.slice(0, 4).map((example, idx) => (
                 <button
@@ -443,10 +481,10 @@ export function TransactionSearchBar({
                     setShowTipsModal(false);
                     inputRef.current?.focus();
                   }}
-                  className="w-full text-left text-xs py-1 px-2 rounded hover:bg-muted transition-colors"
+                  className="w-full rounded px-2 py-1 text-start text-xs transition-colors hover:bg-muted"
                 >
                   <code className="text-teal-600">{example.query}</code>
-                  <span className="text-muted-foreground ml-2">— {example.description}</span>
+                  <span className="ms-2 text-muted-foreground">— {example.description}</span>
                 </button>
               ))}
             </div>

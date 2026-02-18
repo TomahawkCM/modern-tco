@@ -20,7 +20,7 @@ import {
   isNYNABBudget,
   isYNAB4Budget,
   detectYNABVersion,
-} from './ynab-types';
+} from "./ynab-types";
 
 // ============================================================================
 // Normalized Output Types
@@ -32,7 +32,7 @@ import {
 export interface NormalizedAccount {
   id: string;
   name: string;
-  type: 'checking' | 'savings' | 'credit' | 'cash' | 'loan' | 'investment';
+  type: "checking" | "savings" | "credit" | "cash" | "loan" | "investment";
   balance: number;
   onBudget: boolean;
   closed: boolean;
@@ -115,7 +115,7 @@ export interface NormalizedMonthlyBudget {
  * Complete parsed YNAB data
  */
 export interface ParsedYNABData {
-  version: 'nynab' | 'ynab4' | 'csv';
+  version: "nynab" | "ynab4" | "csv";
   budgetName: string;
   currency: string;
   accounts: NormalizedAccount[];
@@ -137,33 +137,33 @@ export interface ParsedYNABData {
 // Account Type Mapping
 // ============================================================================
 
-const NYNAB_ACCOUNT_TYPE_MAP: Record<string, NormalizedAccount['type']> = {
-  checking: 'checking',
-  savings: 'savings',
-  creditCard: 'credit',
-  cash: 'cash',
-  lineOfCredit: 'credit',
-  otherAsset: 'investment',
-  otherLiability: 'loan',
-  mortgage: 'loan',
-  autoLoan: 'loan',
-  studentLoan: 'loan',
-  personalLoan: 'loan',
-  medicalDebt: 'loan',
-  otherDebt: 'loan',
+const NYNAB_ACCOUNT_TYPE_MAP: Record<string, NormalizedAccount["type"]> = {
+  checking: "checking",
+  savings: "savings",
+  creditCard: "credit",
+  cash: "cash",
+  lineOfCredit: "credit",
+  otherAsset: "investment",
+  otherLiability: "loan",
+  mortgage: "loan",
+  autoLoan: "loan",
+  studentLoan: "loan",
+  personalLoan: "loan",
+  medicalDebt: "loan",
+  otherDebt: "loan",
 };
 
-const YNAB4_ACCOUNT_TYPE_MAP: Record<string, NormalizedAccount['type']> = {
-  Checking: 'checking',
-  Savings: 'savings',
-  CreditCard: 'credit',
-  Cash: 'cash',
-  LineOfCredit: 'credit',
-  Merchant: 'credit',
-  InvestmentAccount: 'investment',
-  Mortgage: 'loan',
-  OtherAsset: 'investment',
-  OtherLiability: 'loan',
+const YNAB4_ACCOUNT_TYPE_MAP: Record<string, NormalizedAccount["type"]> = {
+  Checking: "checking",
+  Savings: "savings",
+  CreditCard: "credit",
+  Cash: "cash",
+  LineOfCredit: "credit",
+  Merchant: "credit",
+  InvestmentAccount: "investment",
+  Mortgage: "loan",
+  OtherAsset: "investment",
+  OtherLiability: "loan",
 };
 
 // ============================================================================
@@ -180,21 +180,13 @@ export function parseNYNAB(budget: YNABBudget): ParsedYNABData {
   const accounts = parseNYNABAccounts(budget.accounts, warnings);
 
   // Create account lookup for transaction parsing
-  const accountLookup = new Map(
-    budget.accounts.map((a) => [a.id, a])
-  );
+  const accountLookup = new Map(budget.accounts.map((a) => [a.id, a]));
 
   // Parse categories
-  const categoryGroups = parseNYNABCategories(
-    budget.category_groups,
-    budget.categories,
-    warnings
-  );
+  const categoryGroups = parseNYNABCategories(budget.category_groups, budget.categories, warnings);
 
   // Create category lookup
-  const categoryLookup = new Map(
-    budget.categories.map((c) => [c.id, c])
-  );
+  const categoryLookup = new Map(budget.categories.map((c) => [c.id, c]));
 
   // Parse transactions
   const transactions = parseNYNABTransactions(
@@ -211,9 +203,9 @@ export function parseNYNAB(budget: YNABBudget): ParsedYNABData {
   const metadata = calculateMetadata(accounts, transactions, categoryGroups);
 
   return {
-    version: 'nynab',
+    version: "nynab",
     budgetName: budget.name,
-    currency: budget.currency_format?.iso_code || 'USD',
+    currency: budget.currency_format?.iso_code || "USD",
     accounts,
     transactions,
     categoryGroups,
@@ -223,10 +215,7 @@ export function parseNYNAB(budget: YNABBudget): ParsedYNABData {
   };
 }
 
-function parseNYNABAccounts(
-  accounts: YNABAccount[],
-  warnings: string[]
-): NormalizedAccount[] {
+function parseNYNABAccounts(accounts: YNABAccount[], warnings: string[]): NormalizedAccount[] {
   return accounts
     .filter((a) => !a.deleted)
     .map((account) => {
@@ -238,7 +227,7 @@ function parseNYNABAccounts(
       return {
         id: account.id,
         name: account.name,
-        type: type || 'checking',
+        type: type || "checking",
         balance: fromMilliunits(account.balance),
         onBudget: account.on_budget,
         closed: account.closed,
@@ -258,8 +247,8 @@ function parseNYNABCategories(
   for (const group of activeGroups) {
     // Skip internal system groups
     if (
-      group.name.toLowerCase().includes('internal') ||
-      group.name.toLowerCase() === 'hidden categories'
+      group.name.toLowerCase().includes("internal") ||
+      group.name.toLowerCase() === "hidden categories"
     ) {
       continue;
     }
@@ -340,7 +329,7 @@ function parseNYNABTransactions(
       id: crypto.randomUUID(),
       date: parseYNABDate(txn.date),
       amount: fromMilliunits(txn.amount),
-      description: txn.payee_name || txn.memo || 'Unknown',
+      description: txn.payee_name || txn.memo || "Unknown",
       accountId: txn.account_id,
       accountName: account.name,
       category,
@@ -348,7 +337,7 @@ function parseNYNABTransactions(
       memo: txn.memo,
       isTransfer: txn.transfer_account_id !== null,
       transferAccountId: txn.transfer_account_id,
-      cleared: txn.cleared === 'cleared' || txn.cleared === 'reconciled',
+      cleared: txn.cleared === "cleared" || txn.cleared === "reconciled",
       splits,
       originalId: txn.id,
       flagColor: txn.flag_color,
@@ -362,7 +351,7 @@ function parseNYNABTransactions(
 }
 
 function parseNYNABMonthlyBudgets(
-  months: YNABBudget['months'],
+  months: YNABBudget["months"],
   _warnings: string[]
 ): NormalizedMonthlyBudget[] {
   if (!months) return [];
@@ -376,7 +365,7 @@ function parseNYNABMonthlyBudgets(
         .map((cat) => ({
           categoryId: cat.id,
           categoryName: cat.name,
-          groupName: cat.category_group_name || 'Uncategorized',
+          groupName: cat.category_group_name || "Uncategorized",
           budgeted: fromMilliunits(cat.budgeted),
           activity: fromMilliunits(cat.activity),
           balance: fromMilliunits(cat.balance),
@@ -396,12 +385,8 @@ export function parseYNAB4(budget: YNAB4Budget): ParsedYNABData {
   const warnings: string[] = [];
 
   // Build lookup maps
-  const accountLookup = new Map(
-    budget.accounts.map((a) => [a.entityId, a])
-  );
-  const payeeLookup = new Map(
-    budget.payees.map((p) => [p.entityId, p])
-  );
+  const accountLookup = new Map(budget.accounts.map((a) => [a.entityId, a]));
+  const payeeLookup = new Map(budget.payees.map((p) => [p.entityId, p]));
   const categoryLookup = buildYNAB4CategoryLookup(budget.masterCategories);
 
   // Parse accounts
@@ -420,19 +405,15 @@ export function parseYNAB4(budget: YNAB4Budget): ParsedYNABData {
   );
 
   // Parse monthly budgets
-  const monthlyBudgets = parseYNAB4MonthlyBudgets(
-    budget.monthlyBudgets,
-    categoryLookup,
-    warnings
-  );
+  const monthlyBudgets = parseYNAB4MonthlyBudgets(budget.monthlyBudgets, categoryLookup, warnings);
 
   // Calculate metadata
   const metadata = calculateMetadata(accounts, transactions, categoryGroups);
 
   return {
-    version: 'ynab4',
-    budgetName: 'YNAB4 Budget', // YNAB4 doesn't store budget name in the file
-    currency: budget.budgetMetaData.currencyISOSymbol || 'USD',
+    version: "ynab4",
+    budgetName: "YNAB4 Budget", // YNAB4 doesn't store budget name in the file
+    currency: budget.budgetMetaData.currencyISOSymbol || "USD",
     accounts,
     transactions,
     categoryGroups,
@@ -459,10 +440,7 @@ function buildYNAB4CategoryLookup(
   return lookup;
 }
 
-function parseYNAB4Accounts(
-  accounts: YNAB4Account[],
-  warnings: string[]
-): NormalizedAccount[] {
+function parseYNAB4Accounts(accounts: YNAB4Account[], warnings: string[]): NormalizedAccount[] {
   return accounts
     .filter((a) => !a.hidden)
     .map((account) => {
@@ -474,7 +452,7 @@ function parseYNAB4Accounts(
       return {
         id: account.entityId,
         name: account.accountName,
-        type: type || 'checking',
+        type: type || "checking",
         balance: account.lastReconciledBalance || 0,
         onBudget: account.onBudget,
         closed: false, // YNAB4 doesn't have explicit closed flag
@@ -531,23 +509,22 @@ function parseYNAB4Transactions(
     const categoryInfo = categoryLookup.get(txn.categoryId);
 
     // Parse splits (YNAB4 uses regular decimals)
-    const splits: NormalizedSplitTransaction[] = (txn.subTransactions || [])
-      .map((sub) => {
-        const subCatInfo = categoryLookup.get(sub.categoryId);
-        return {
-          id: sub.entityId,
-          amount: sub.amount, // Already in regular decimals
-          category: subCatInfo?.name || null,
-          categoryGroup: subCatInfo?.groupName || null,
-          memo: sub.memo,
-        };
-      });
+    const splits: NormalizedSplitTransaction[] = (txn.subTransactions || []).map((sub) => {
+      const subCatInfo = categoryLookup.get(sub.categoryId);
+      return {
+        id: sub.entityId,
+        amount: sub.amount, // Already in regular decimals
+        category: subCatInfo?.name || null,
+        categoryGroup: subCatInfo?.groupName || null,
+        memo: sub.memo,
+      };
+    });
 
     result.push({
       id: crypto.randomUUID(),
       date: parseYNABDate(txn.date),
       amount: txn.amount, // YNAB4 already uses regular decimals
-      description: payee?.name || txn.memo || 'Unknown',
+      description: payee?.name || txn.memo || "Unknown",
       accountId: txn.accountId,
       accountName: account.accountName,
       category: categoryInfo?.name || null,
@@ -555,7 +532,7 @@ function parseYNAB4Transactions(
       memo: txn.memo,
       isTransfer: !!txn.targetAccountId,
       transferAccountId: txn.targetAccountId || null,
-      cleared: txn.cleared === 'Cleared' || txn.cleared === 'Reconciled',
+      cleared: txn.cleared === "Cleared" || txn.cleared === "Reconciled",
       splits,
       originalId: txn.entityId,
       flagColor: txn.flag || null,
@@ -568,7 +545,7 @@ function parseYNAB4Transactions(
 }
 
 function parseYNAB4MonthlyBudgets(
-  monthlyBudgets: YNAB4Budget['monthlyBudgets'],
+  monthlyBudgets: YNAB4Budget["monthlyBudgets"],
   categoryLookup: Map<string, { name: string; groupName: string }>,
   _warnings: string[]
 ): NormalizedMonthlyBudget[] {
@@ -580,8 +557,8 @@ function parseYNAB4MonthlyBudgets(
       const catInfo = categoryLookup.get(sub.categoryId);
       return {
         categoryId: sub.categoryId,
-        categoryName: catInfo?.name || 'Unknown',
-        groupName: catInfo?.groupName || 'Uncategorized',
+        categoryName: catInfo?.name || "Unknown",
+        groupName: catInfo?.groupName || "Uncategorized",
         budgeted: sub.budgeted,
         activity: 0, // Not directly available in YNAB4 monthly budget
         balance: 0,
@@ -599,7 +576,7 @@ function parseYNAB4MonthlyBudgets(
  */
 export function parseYNABCSV(
   rows: YNABCSVTransaction[],
-  budgetName = 'YNAB Import'
+  budgetName = "YNAB Import"
 ): ParsedYNABData {
   const warnings: string[] = [];
   const accounts = new Map<string, NormalizedAccount>();
@@ -612,7 +589,7 @@ export function parseYNABCSV(
       accounts.set(row.Account, {
         id: crypto.randomUUID(),
         name: row.Account,
-        type: 'checking', // Default, can't determine from CSV
+        type: "checking", // Default, can't determine from CSV
         balance: 0,
         onBudget: true,
         closed: false,
@@ -624,13 +601,13 @@ export function parseYNABCSV(
     let category: string | null = null;
     let categoryGroup: string | null = null;
 
-    if (row['Category Group/Category']) {
-      const parts = row['Category Group/Category'].split(': ');
+    if (row["Category Group/Category"]) {
+      const parts = row["Category Group/Category"].split(": ");
       if (parts.length >= 2) {
         categoryGroup = parts[0];
-        category = parts.slice(1).join(': ');
+        category = parts.slice(1).join(": ");
       } else {
-        category = row['Category Group/Category'];
+        category = row["Category Group/Category"];
       }
 
       // Build category group structure
@@ -676,17 +653,17 @@ export function parseYNABCSV(
       id: crypto.randomUUID(),
       date,
       amount,
-      description: row.Payee || 'Unknown',
+      description: row.Payee || "Unknown",
       accountId: account.id,
       accountName: account.name,
       category,
       categoryGroup,
       memo: row.Memo || null,
-      isTransfer: row.Payee.startsWith('Transfer :'),
+      isTransfer: row.Payee.startsWith("Transfer :"),
       transferAccountId: null,
-      cleared: row.Cleared.toLowerCase() === 'cleared',
+      cleared: row.Cleared.toLowerCase() === "cleared",
       splits: [],
-      originalId: '', // CSV doesn't have IDs
+      originalId: "", // CSV doesn't have IDs
       flagColor: row.Flag || null,
     });
   }
@@ -700,9 +677,9 @@ export function parseYNABCSV(
   );
 
   return {
-    version: 'csv',
+    version: "csv",
     budgetName,
-    currency: 'USD', // Can't determine from CSV
+    currency: "USD", // Can't determine from CSV
     accounts: Array.from(accounts.values()),
     transactions,
     categoryGroups: Array.from(categoryGroupMap.values()),
@@ -715,7 +692,7 @@ export function parseYNABCSV(
 function parseCSVAmount(value: string): number {
   if (!value) return 0;
   // Remove currency symbols and commas
-  const cleaned = value.replace(/[$,]/g, '').trim();
+  const cleaned = value.replace(/[$,]/g, "").trim();
   return parseFloat(cleaned) || 0;
 }
 
@@ -754,7 +731,7 @@ function calculateMetadata(
   accounts: NormalizedAccount[],
   transactions: NormalizedTransaction[],
   categoryGroups: NormalizedCategoryGroup[]
-): ParsedYNABData['metadata'] {
+): ParsedYNABData["metadata"] {
   let dateRange: { start: Date; end: Date } | null = null;
   let totalIncome = 0;
   let totalExpenses = 0;
@@ -775,10 +752,7 @@ function calculateMetadata(
     }
   }
 
-  const categoryCount = categoryGroups.reduce(
-    (sum, g) => sum + g.categories.length,
-    0
-  );
+  const categoryCount = categoryGroups.reduce((sum, g) => sum + g.categories.length, 0);
 
   return {
     dateRange,
@@ -805,18 +779,15 @@ export function parseYNABData(
   const version = detectYNABVersion(data);
 
   switch (version) {
-    case 'nynab':
+    case "nynab":
       return parseNYNAB(data as YNABBudget);
-    case 'ynab4':
+    case "ynab4":
       return parseYNAB4(data as YNAB4Budget);
-    case 'csv':
-      return parseYNABCSV(
-        data as YNABCSVTransaction[],
-        options.budgetName
-      );
+    case "csv":
+      return parseYNABCSV(data as YNABCSVTransaction[], options.budgetName);
     default:
       throw new Error(
-        'Unknown YNAB format. Expected nYNAB JSON, YNAB4 Budget.yfull, or CSV export.'
+        "Unknown YNAB format. Expected nYNAB JSON, YNAB4 Budget.yfull, or CSV export."
       );
   }
 }
@@ -825,16 +796,12 @@ export function parseYNABData(
  * Parse YNAB file content
  * Handles JSON parsing and format detection
  */
-export async function parseYNABFile(
-  content: string,
-  fileName: string
-): Promise<ParsedYNABData> {
-  const isCSV =
-    fileName.endsWith('.csv') || fileName.endsWith('.tsv');
+export async function parseYNABFile(content: string, fileName: string): Promise<ParsedYNABData> {
+  const isCSV = fileName.endsWith(".csv") || fileName.endsWith(".tsv");
 
   if (isCSV) {
     const rows = parseCSVContent(content);
-    return parseYNABCSV(rows, fileName.replace(/\.[^.]+$/, ''));
+    return parseYNABCSV(rows, fileName.replace(/\.[^.]+$/, ""));
   }
 
   // Try JSON parsing
@@ -842,7 +809,7 @@ export async function parseYNABFile(
     const data = JSON.parse(content);
     return parseYNABData(data);
   } catch {
-    throw new Error('Invalid file format. Expected JSON or CSV.');
+    throw new Error("Invalid file format. Expected JSON or CSV.");
   }
 }
 
@@ -850,11 +817,11 @@ export async function parseYNABFile(
  * Parse CSV content into rows
  */
 function parseCSVContent(content: string): YNABCSVTransaction[] {
-  const lines = content.trim().split('\n');
+  const lines = content.trim().split("\n");
   if (lines.length < 2) return [];
 
   // Detect delimiter (comma or tab)
-  const delimiter = lines[0].includes('\t') ? '\t' : ',';
+  const delimiter = lines[0].includes("\t") ? "\t" : ",";
 
   // Parse header
   const headers = parseCSVLine(lines[0], delimiter);
@@ -867,12 +834,12 @@ function parseCSVContent(content: string): YNABCSVTransaction[] {
 
     const row: Record<string, string> = {};
     headers.forEach((header, index) => {
-      row[header.trim().replace(/^"/, '').replace(/"$/, '')] =
-        values[index]?.replace(/^"/, '').replace(/"$/, '') || '';
+      row[header.trim().replace(/^"/, "").replace(/"$/, "")] =
+        values[index]?.replace(/^"/, "").replace(/"$/, "") || "";
     });
 
     // Validate required fields
-    if (row['Account'] && row['Date']) {
+    if (row["Account"] && row["Date"]) {
       rows.push(row as unknown as YNABCSVTransaction);
     }
   }
@@ -882,7 +849,7 @@ function parseCSVContent(content: string): YNABCSVTransaction[] {
 
 function parseCSVLine(line: string, delimiter: string): string[] {
   const result: string[] = [];
-  let current = '';
+  let current = "";
   let inQuotes = false;
 
   for (let i = 0; i < line.length; i++) {
@@ -897,7 +864,7 @@ function parseCSVLine(line: string, delimiter: string): string[] {
       }
     } else if (char === delimiter && !inQuotes) {
       result.push(current);
-      current = '';
+      current = "";
     } else {
       current += char;
     }

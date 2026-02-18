@@ -4,10 +4,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, Clock, Target, Lightbulb, Activity, TrendingUp } from "lucide-react";
-import {
-  getStudySessionAnalytics,
-  getStudyRecommendations,
-} from "@/lib/videoAnalytics";
+import { getStudySessionAnalytics, getStudyRecommendations } from "@/lib/videoAnalytics";
 
 interface StudyInsightsDashboardProps {
   /** Number of days to analyze */
@@ -21,10 +18,7 @@ interface StudyInsightsDashboardProps {
  *
  * Displays study session analytics, patterns, and personalized recommendations
  */
-export function StudyInsightsDashboard({
-  daysBack = 30,
-  className,
-}: StudyInsightsDashboardProps) {
+export function StudyInsightsDashboard({ daysBack = 30, className }: StudyInsightsDashboardProps) {
   const [analytics, setAnalytics] = useState<any>(null);
   const [recommendations, setRecommendations] = useState<string[]>([]);
 
@@ -86,9 +80,9 @@ export function StudyInsightsDashboard({
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Key Metrics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             <div className="rounded-lg border border-accent/20 bg-accent/5 p-4">
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <Activity className="h-4 w-4 text-accent-foreground" />
                 <span className="text-xs text-muted-foreground">Sessions</span>
               </div>
@@ -98,7 +92,7 @@ export function StudyInsightsDashboard({
             </div>
 
             <div className="rounded-lg border border-primary/20 bg-primary/5 p-4">
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <Clock className="h-4 w-4 text-primary" />
                 <span className="text-xs text-muted-foreground">Study Time</span>
               </div>
@@ -108,7 +102,7 @@ export function StudyInsightsDashboard({
             </div>
 
             <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5 p-4">
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <TrendingUp className="h-4 w-4 text-[#22c55e]" />
                 <span className="text-xs text-muted-foreground">Avg Session</span>
               </div>
@@ -118,11 +112,13 @@ export function StudyInsightsDashboard({
             </div>
 
             <div className="rounded-lg border border-[#f97316]/20 bg-yellow-500/5 p-4">
-              <div className="flex items-center gap-2 mb-2">
+              <div className="mb-2 flex items-center gap-2">
                 <Target className="h-4 w-4 text-[#f97316]" />
                 <span className="text-xs text-muted-foreground">Quality</span>
               </div>
-              <div className={`text-3xl font-bold ${getQualityColor(analytics.averageQualityScore).split(" ")[0]}`}>
+              <div
+                className={`text-3xl font-bold ${getQualityColor(analytics.averageQualityScore).split(" ")[0]}`}
+              >
                 {Math.round(analytics.averageQualityScore)}
               </div>
             </div>
@@ -132,14 +128,14 @@ export function StudyInsightsDashboard({
           <div className="rounded-lg border border-gray-700 bg-card/30 p-4">
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-sm text-muted-foreground mb-1">Session Quality Score</div>
+                <div className="mb-1 text-sm text-muted-foreground">Session Quality Score</div>
                 <p className="text-xs text-muted-foreground">
                   Based on activity variety and performance
                 </p>
               </div>
               <Badge
                 variant="outline"
-                className={`text-lg px-4 py-2 ${getQualityColor(analytics.averageQualityScore)}`}
+                className={`px-4 py-2 text-lg ${getQualityColor(analytics.averageQualityScore)}`}
               >
                 {getQualityLabel(analytics.averageQualityScore)}
               </Badge>
@@ -165,25 +161,27 @@ export function StudyInsightsDashboard({
                 .map(([type, percentage]) => (
                   <div key={type} className="space-y-1">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground capitalize flex items-center gap-2">
+                      <span className="flex items-center gap-2 capitalize text-muted-foreground">
                         {type === "video" && "📺"}
                         {type === "practice" && "✍️"}
                         {type === "review" && "🔄"}
                         {type === "reading" && "📚"}
                         {type}
                       </span>
-                      <span className="text-muted-foreground">{Math.round(percentage as number)}%</span>
+                      <span className="text-muted-foreground">
+                        {Math.round(percentage as number)}%
+                      </span>
                     </div>
-                    <div className="h-2 bg-gray-700/50 rounded-full overflow-hidden">
+                    <div className="h-2 overflow-hidden rounded-full bg-gray-700/50">
                       <div
                         className={`h-full transition-all ${
                           type === "video"
                             ? "bg-accent"
                             : type === "practice"
-                            ? "bg-primary"
-                            : type === "review"
-                            ? "bg-[#22c55e]"
-                            : "bg-yellow-500"
+                              ? "bg-primary"
+                              : type === "review"
+                                ? "bg-[#22c55e]"
+                                : "bg-yellow-500"
                         }`}
                         style={{ width: `${percentage}%` }}
                       />
@@ -194,7 +192,7 @@ export function StudyInsightsDashboard({
 
             {/* Recommendation for balanced studying */}
             {Object.keys(analytics.activityBreakdown).length < 3 && (
-              <div className="text-xs text-[#f97316] bg-[#f97316]/10 border border-[#f97316]/20 rounded px-3 py-2">
+              <div className="rounded border border-[#f97316]/20 bg-[#f97316]/10 px-3 py-2 text-xs text-[#f97316]">
                 💡 Tip: Mix videos, practice, and reviews for optimal learning
               </div>
             )}
@@ -212,31 +210,33 @@ export function StudyInsightsDashboard({
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex items-end justify-between gap-1 h-32">
+            <div className="flex h-32 items-end justify-between gap-1">
               {Object.entries(analytics.sessionsByDay)
                 .slice(-14) // Last 14 days
                 .map(([date, count]) => {
-                  const maxSessions = Math.max(...(Object.values(analytics.sessionsByDay) as number[]));
+                  const maxSessions = Math.max(
+                    ...(Object.values(analytics.sessionsByDay) as number[])
+                  );
                   const height = maxSessions > 0 ? ((count as number) / maxSessions) * 100 : 0;
                   const dateObj = new Date(date);
 
                   return (
-                    <div key={date} className="flex-1 flex flex-col items-center">
-                      <div className="flex-1 flex items-end w-full">
+                    <div key={date} className="flex flex-1 flex-col items-center">
+                      <div className="flex w-full flex-1 items-end">
                         <div
-                          className="w-full bg-primary rounded-t transition-all hover:bg-blue-400"
+                          className="w-full rounded-t bg-primary transition-all hover:bg-blue-400"
                           style={{ height: `${height}%` }}
-                          title={`${dateObj.toLocaleDateString()}: ${count} session${count !== 1 ? 's' : ''}`}
+                          title={`${dateObj.toLocaleDateString()}: ${count} session${count !== 1 ? "s" : ""}`}
                         />
                       </div>
-                      <div className="text-[10px] text-muted-foreground mt-1 text-center">
+                      <div className="mt-1 text-center text-[10px] text-muted-foreground">
                         {dateObj.getDate()}
                       </div>
                     </div>
                   );
                 })}
             </div>
-            <div className="text-xs text-muted-foreground mt-3 text-center">
+            <div className="mt-3 text-center text-xs text-muted-foreground">
               Daily study sessions
             </div>
           </CardContent>
@@ -256,7 +256,7 @@ export function StudyInsightsDashboard({
             {recommendations.map((rec, idx) => (
               <div
                 key={idx}
-                className="text-sm text-muted-foreground bg-card/30 border border-gray-700/50 rounded p-3"
+                className="rounded border border-gray-700/50 bg-card/30 p-3 text-sm text-muted-foreground"
               >
                 {rec}
               </div>
@@ -268,9 +268,9 @@ export function StudyInsightsDashboard({
       {/* No Data State */}
       {analytics.totalSessions === 0 && (
         <Card>
-          <CardContent className="text-center py-12">
+          <CardContent className="py-12 text-center">
             <BookOpen className="mx-auto mb-4 h-16 w-16 text-gray-600 opacity-50" />
-            <p className="text-muted-foreground mb-2">No study sessions yet</p>
+            <p className="mb-2 text-muted-foreground">No study sessions yet</p>
             <p className="text-sm text-muted-foreground">
               Start studying to see insights and recommendations
             </p>

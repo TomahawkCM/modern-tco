@@ -7,7 +7,7 @@
  * <div ref={trapRef}>Modal content...</div>
  */
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 export function useFocusTrap(isActive: boolean = true) {
   const elementRef = useRef<HTMLDivElement>(null);
@@ -23,21 +23,19 @@ export function useFocusTrap(isActive: boolean = true) {
     // Get all focusable elements within the container
     function getFocusableElements(): HTMLElement[] {
       const focusableSelectors = [
-        'a[href]',
-        'button:not([disabled])',
-        'textarea:not([disabled])',
-        'input:not([disabled])',
-        'select:not([disabled])',
+        "a[href]",
+        "button:not([disabled])",
+        "textarea:not([disabled])",
+        "input:not([disabled])",
+        "select:not([disabled])",
         '[tabindex]:not([tabindex="-1"])',
-      ].join(', ');
+      ].join(", ");
 
-      return Array.from(
-        element.querySelectorAll<HTMLElement>(focusableSelectors)
-      ).filter((el) => {
+      return Array.from(element.querySelectorAll<HTMLElement>(focusableSelectors)).filter((el) => {
         return (
           el.offsetParent !== null && // element is visible
-          !el.hasAttribute('disabled') &&
-          !el.getAttribute('aria-hidden')
+          !el.hasAttribute("disabled") &&
+          !el.getAttribute("aria-hidden")
         );
       });
     }
@@ -50,7 +48,7 @@ export function useFocusTrap(isActive: boolean = true) {
 
     // Handle Tab and Shift+Tab keyboard navigation
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key !== 'Tab') return;
+      if (e.key !== "Tab") return;
 
       const focusableElements = getFocusableElements();
       if (focusableElements.length === 0) return;
@@ -74,11 +72,11 @@ export function useFocusTrap(isActive: boolean = true) {
       }
     }
 
-    element.addEventListener('keydown', handleKeyDown);
+    element.addEventListener("keydown", handleKeyDown);
 
     // Cleanup: restore focus and remove event listener
     return () => {
-      element.removeEventListener('keydown', handleKeyDown);
+      element.removeEventListener("keydown", handleKeyDown);
       if (previouslyFocused && previouslyFocused.focus) {
         previouslyFocused.focus();
       }

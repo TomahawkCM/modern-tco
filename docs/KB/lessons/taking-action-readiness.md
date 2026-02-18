@@ -33,4 +33,3 @@ Placeholder narrative covering the lifecycle from question results to approved a
 ## Author Notes
 
 Maintain alignment with operational security messaging. When replacing placeholders, ensure examples respect production safeguards.
-

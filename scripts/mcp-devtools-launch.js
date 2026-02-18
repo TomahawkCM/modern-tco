@@ -8,17 +8,17 @@
  *  - Spawn chrome-devtools-mcp@latest using that executable in headless mode
  */
 
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const { spawn, spawnSync } = require('child_process');
+const fs = require("fs");
+const path = require("path");
+const os = require("os");
+const { spawn, spawnSync } = require("child_process");
 
-const projectRoot = path.join(__dirname, '..');
-const chromeDir = path.join(projectRoot, '.chrome');
-const logFile = path.join(chromeDir, 'devtools-mcp.log');
+const projectRoot = path.join(__dirname, "..");
+const chromeDir = path.join(projectRoot, ".chrome");
+const logFile = path.join(chromeDir, "devtools-mcp.log");
 
 function resolveCommand(baseCommand, platform = os.platform()) {
-  return platform === 'win32' ? `${baseCommand}.cmd` : baseCommand;
+  return platform === "win32" ? `${baseCommand}.cmd` : baseCommand;
 }
 
 function listSubdirectories(dir) {
@@ -39,31 +39,33 @@ function listSubdirectories(dir) {
 }
 
 function resolveChromeBinary(baseDir, platform = os.platform()) {
-  const chromeRoot = path.join(baseDir, 'chrome');
+  const chromeRoot = path.join(baseDir, "chrome");
   const candidates = listSubdirectories(chromeRoot);
   if (candidates.length === 0) return null;
 
   candidates.sort((a, b) =>
-    path.basename(b).localeCompare(path.basename(a), undefined, { numeric: true, sensitivity: 'base' })
+    path
+      .basename(b)
+      .localeCompare(path.basename(a), undefined, { numeric: true, sensitivity: "base" })
   );
 
   const tryPathsForPlatform = (platformId, dir) => {
     switch (platformId) {
-      case 'darwin':
+      case "darwin":
         return [
-          path.join(dir, 'chrome-mac', 'Chromium.app', 'Contents', 'MacOS', 'Chromium'),
-          path.join(dir, 'chrome-mac-arm64', 'Chromium.app', 'Contents', 'MacOS', 'Chromium'),
+          path.join(dir, "chrome-mac", "Chromium.app", "Contents", "MacOS", "Chromium"),
+          path.join(dir, "chrome-mac-arm64", "Chromium.app", "Contents", "MacOS", "Chromium"),
         ];
-      case 'win32':
+      case "win32":
         return [
-          path.join(dir, 'chrome-win64', 'chrome.exe'),
-          path.join(dir, 'chrome-win32', 'chrome.exe'),
+          path.join(dir, "chrome-win64", "chrome.exe"),
+          path.join(dir, "chrome-win32", "chrome.exe"),
         ];
-      case 'linux':
+      case "linux":
       default:
         return [
-          path.join(dir, 'chrome-linux64', 'chrome'),
-          path.join(dir, 'chrome-linux', 'chrome'),
+          path.join(dir, "chrome-linux64", "chrome"),
+          path.join(dir, "chrome-linux", "chrome"),
         ];
     }
   };
@@ -89,18 +91,15 @@ function ensureChromeBinary(baseDir, platform = os.platform()) {
   console.error(`[mcp-devtools] Chrome for Testing not found. Installing to ${baseDir} ...`);
   fs.mkdirSync(baseDir, { recursive: true });
 
-  const installResult = spawnSync(resolveCommand('npx', platform), [
-    '-y',
-    '@puppeteer/browsers',
-    'install',
-    'chrome@stable',
-    '--path',
-    baseDir,
-  ], {
-    stdio: 'inherit',
-    cwd: projectRoot,
-    env: process.env,
-  });
+  const installResult = spawnSync(
+    resolveCommand("npx", platform),
+    ["-y", "@puppeteer/browsers", "install", "chrome@stable", "--path", baseDir],
+    {
+      stdio: "inherit",
+      cwd: projectRoot,
+      env: process.env,
+    }
+  );
 
   if (installResult.status !== 0) {
     throw new Error(`Failed to install Chrome for Testing (exit code ${installResult.status})`);
@@ -108,7 +107,9 @@ function ensureChromeBinary(baseDir, platform = os.platform()) {
 
   chromeBin = resolveChromeBinary(baseDir, platform);
   if (!chromeBin) {
-    throw new Error(`Chrome for Testing installation succeeded but executable not found under ${baseDir}`);
+    throw new Error(
+      `Chrome for Testing installation succeeded but executable not found under ${baseDir}`
+    );
   }
 
   return chromeBin;
@@ -129,28 +130,28 @@ function launchChromeDevtoolsMcp() {
   console.error(`[mcp-devtools] Using Chrome: ${chromeBin}`);
 
   const args = [
-    '-y',
-    'chrome-devtools-mcp@latest',
-    '--executablePath',
+    "-y",
+    "chrome-devtools-mcp@latest",
+    "--executablePath",
     chromeBin,
-    '--headless',
-    '--isolated=false',
-    '--logFile',
+    "--headless",
+    "--isolated=false",
+    "--logFile",
     logFile,
   ];
 
-  const child = spawn(resolveCommand('npx', platform), args, {
-    stdio: 'inherit',
+  const child = spawn(resolveCommand("npx", platform), args, {
+    stdio: "inherit",
     cwd: projectRoot,
     env: process.env,
   });
 
-  child.on('error', (error) => {
+  child.on("error", (error) => {
     console.error(`[mcp-devtools] Failed to launch chrome-devtools-mcp: ${error.message}`);
     process.exit(1);
   });
 
-  child.on('exit', (code, signal) => {
+  child.on("exit", (code, signal) => {
     if (signal) {
       process.kill(process.pid, signal);
     } else {
@@ -158,7 +159,7 @@ function launchChromeDevtoolsMcp() {
     }
   });
 
-  ['SIGINT', 'SIGTERM', 'SIGQUIT'].forEach((signal) => forwardSignal(child, signal));
+  ["SIGINT", "SIGTERM", "SIGQUIT"].forEach((signal) => forwardSignal(child, signal));
 }
 
 if (require.main === module) {

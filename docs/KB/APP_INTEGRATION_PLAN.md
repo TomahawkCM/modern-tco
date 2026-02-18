@@ -15,12 +15,12 @@ This plan documents how the read-only Knowledge Base (KB) integrates with the mo
 
 ### Tables
 
-| Table | Purpose | Key Columns |
-| ----- | ------- | ----------- |
-| `kb_modules` | Master list of KB lesson modules displayed in the UI | `id`, `title`, `domain`, `status`, `metadata`, `order_index` |
-| `kb_lessons` | Structured lesson pages mapped to modules | `id`, `module_id`, `slug`, `title`, `summary`, `duration_minutes`, `contributors`, `status`, `content` |
-| `kb_questions` | Question bank aligned with KB domains | `id`, `module_id`, `domain`, `question`, `answer`, `choices`, `difficulty`, `tags`, `metadata` |
-| `kb_exports` | Tracks export batches pushed to downstream systems | `id`, `batch_type`, `status`, `started_at`, `completed_at`, `payload_path`, `metadata` |
+| Table          | Purpose                                              | Key Columns                                                                                            |
+| -------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| `kb_modules`   | Master list of KB lesson modules displayed in the UI | `id`, `title`, `domain`, `status`, `metadata`, `order_index`                                           |
+| `kb_lessons`   | Structured lesson pages mapped to modules            | `id`, `module_id`, `slug`, `title`, `summary`, `duration_minutes`, `contributors`, `status`, `content` |
+| `kb_questions` | Question bank aligned with KB domains                | `id`, `module_id`, `domain`, `question`, `answer`, `choices`, `difficulty`, `tags`, `metadata`         |
+| `kb_exports`   | Tracks export batches pushed to downstream systems   | `id`, `batch_type`, `status`, `started_at`, `completed_at`, `payload_path`, `metadata`                 |
 
 ### Relationships
 

@@ -30,9 +30,7 @@ export function SafeToSpendWidget({ config }: SafeToSpendWidgetProps) {
   const currency = useDefaultCurrency();
 
   // Reactively calculate safe-to-spend whenever DB data changes
-  const data = useLiveQuery(
-    () => calculateSafeToSpend()
-  ) ?? null;
+  const data = useLiveQuery(() => calculateSafeToSpend()) ?? null;
 
   // Size-based span class
   const spanClass =
@@ -42,8 +40,7 @@ export function SafeToSpendWidget({ config }: SafeToSpendWidgetProps) {
         ? "md:col-span-2"
         : "";
 
-  const formatCurrency = (value: number) =>
-    format.number(value, { style: "currency", currency });
+  const formatCurrency = (value: number) => format.number(value, { style: "currency", currency });
 
   return (
     <div className={spanClass}>
@@ -95,9 +92,7 @@ export function SafeToSpendWidget({ config }: SafeToSpendWidgetProps) {
                   </span>
                 </span>
                 <span className="text-slate-600">|</span>
-                <span>
-                  {t("daysRemaining", { days: data.daysRemainingInMonth })}
-                </span>
+                <span>{t("daysRemaining", { days: data.daysRemainingInMonth })}</span>
               </div>
             </div>
 
@@ -125,11 +120,7 @@ interface CategoryPartialItemProps {
   t: ReturnType<typeof useTranslations>;
 }
 
-function CategoryPartialItem({
-  partial,
-  formatCurrency,
-  t,
-}: CategoryPartialItemProps) {
+function CategoryPartialItem({ partial, formatCurrency, t }: CategoryPartialItemProps) {
   const barColor =
     partial.status === "danger"
       ? "bg-red-500"
@@ -147,9 +138,7 @@ function CategoryPartialItem({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-slate-200">
-          {partial.categoryName}
-        </span>
+        <span className="text-sm font-medium text-slate-200">{partial.categoryName}</span>
         <div className="text-right">
           <span className={`text-xs font-medium ${textColor}`}>
             {formatCurrency(partial.spent)}
@@ -178,9 +167,7 @@ function CategoryPartialItem({
                 amount: formatCurrency(Math.abs(partial.remaining)),
               })}
         </span>
-        <span className="text-slate-400">
-          {Math.round(partial.percentUsed)}%
-        </span>
+        <span className="text-slate-400">{Math.round(partial.percentUsed)}%</span>
       </div>
     </div>
   );

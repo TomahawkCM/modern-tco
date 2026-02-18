@@ -7,12 +7,14 @@ This guide demonstrates the complete **Learn → Test → Review** flow with **8
 ## 🏗️ Architecture Components
 
 ### 1. MicroSection Component
+
 - Wraps 10-minute learning sections
 - Enforces quiz completion before allowing section completion
 - Tracks progress in localStorage
 - Visual feedback for quiz status
 
 ### 2. QuickCheckQuiz Component
+
 - Multi-question quiz with scoring
 - 80% pass threshold (configurable)
 - Detailed results with explanations
@@ -20,6 +22,7 @@ This guide demonstrates the complete **Learn → Test → Review** flow with **8
 - Retry functionality for failed attempts
 
 ### 3. MicroQuizMDX Component
+
 - Individual quiz questions
 - Multiple choice format
 - Immediate feedback
@@ -42,14 +45,14 @@ objectives:
   - "Track weak areas for spaced repetition"
 ---
 
-import MicroSection from '../../components/mdx/MicroSection';
-import QuickCheckQuiz from '../../components/study/QuickCheckQuiz';
+import MicroSection from "../../components/mdx/MicroSection";
+import QuickCheckQuiz from "../../components/study/QuickCheckQuiz";
 
 export const meta = {
-  id: 'example-learn-test-review',
-  title: 'Complete Learn-Test-Review Example',
+  id: "example-learn-test-review",
+  title: "Complete Learn-Test-Review Example",
   objectives: 3,
-  domainSlug: 'example-ltr'
+  domainSlug: "example-ltr",
 };
 
 # Complete Learn → Test → Review Example Module
@@ -157,6 +160,7 @@ This example shows the full implementation of learning science-based microlearni
 ### What Makes Tanium Different?
 
 Traditional IT management tools use a **hub-and-spoke** architecture where a central server polls each endpoint individually. This approach:
+
 - ❌ Creates massive server load with large environments
 - ❌ Takes hours or days to gather data from thousands of endpoints
 - ❌ Requires expensive data warehouses to store historical data
@@ -183,17 +187,18 @@ Instead of the server communicating with every endpoint, Tanium uses a brilliant
    - **Total time: ~15 seconds for 15,000 endpoints**
 
 ### Visual Representation
-
 ```
+
 Server → [EP1, EP2, EP3, ... EP10]
-           ↓    ↓    ↓         ↓
-         10 EPs each forward to 10 more EPs
-           ↓    ↓    ↓         ↓
-        100 EPs each forward to 10 more EPs
-           ↓    ↓    ↓         ↓
-      1,000 EPs each forward to 10 more EPs
-           ↓    ↓    ↓         ↓
-     10,000+ endpoints covered in ~15 seconds
+↓ ↓ ↓ ↓
+10 EPs each forward to 10 more EPs
+↓ ↓ ↓ ↓
+100 EPs each forward to 10 more EPs
+↓ ↓ ↓ ↓
+1,000 EPs each forward to 10 more EPs
+↓ ↓ ↓ ↓
+10,000+ endpoints covered in ~15 seconds
+
 ```
 
 ### Key Benefits
@@ -288,16 +293,19 @@ Server → [EP1, EP2, EP3, ... EP10]
 ### localStorage Keys
 
 **Quiz Pass Status**:
+
 ```javascript
 `quiz-passed-${moduleId}-${sectionId}` → "true" | "false"
 ```
 
 **Section Completion**:
+
 ```javascript
 `micro-section-${moduleId}-${sectionId}` → "true" | "false"
 ```
 
 **Quiz Attempts**:
+
 ```javascript
 `quiz-attempt-${moduleId}-${sectionId}` → [
   {
@@ -316,6 +324,7 @@ Server → [EP1, EP2, EP3, ... EP10]
 ```
 
 **Weak Areas** (for spaced repetition):
+
 ```javascript
 `weak-areas-${moduleId}` → {
   "Linear Chain Architecture": 2,  // Failed 2 times
@@ -325,6 +334,7 @@ Server → [EP1, EP2, EP3, ... EP10]
 ```
 
 **Module Progress**:
+
 ```javascript
 `module-progress-${moduleId}` → {
   completedSections: ["section-1", "section-2"],
@@ -364,21 +374,25 @@ Server → [EP1, EP2, EP3, ... EP10]
 ## 🧠 Learning Science Integration
 
 ### Active Recall
+
 - Immediate testing after learning
 - Retrieval practice strengthens memory
 - 42% better retention vs passive reading
 
 ### 80% Pass Threshold
+
 - Ensures mastery before progression
 - Prevents "illusion of competence"
 - Research shows 80% threshold optimal for retention
 
 ### Weak Area Tracking
+
 - Identifies struggling concepts
 - Prepares data for spaced repetition (Week 2)
 - Personalizes review schedule
 
 ### Immediate Feedback
+
 - Explanations provided for all answers
 - Reinforces correct understanding
 - Corrects misconceptions immediately
@@ -386,18 +400,21 @@ Server → [EP1, EP2, EP3, ... EP10]
 ## ✅ Benefits
 
 **For Students**:
+
 - ✅ Clear understanding of progress
 - ✅ Can't proceed without mastery
 - ✅ Immediate feedback on understanding
 - ✅ Personalized weak area identification
 
 **For Learning Outcomes**:
+
 - ✅ 25-60% retention (vs 8-10% traditional)
 - ✅ 40-60% faster learning
 - ✅ 85%+ predicted exam pass rate
 - ✅ 80%+ completion rate
 
 **For System**:
+
 - ✅ Automated progress tracking
 - ✅ Data ready for spaced repetition
 - ✅ Weak area identification

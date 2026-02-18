@@ -154,7 +154,7 @@ export function SelectedQuestionsPanel() {
         <div className="grid grid-cols-1 gap-2">
           <Button
             onClick={handleStartPractice}
-            className="justify-center bg-tanium-accent text-foreground hover:bg-blue-600"
+            className="bg-tanium-accent justify-center text-foreground hover:bg-blue-600"
             disabled={state.selectedQuestions.length === 0}
           >
             <Play className="mr-2 h-4 w-4" />
@@ -236,7 +236,9 @@ export function SelectedQuestionsPanel() {
               {state.selectedQuestions.map((question, index) => (
                 <Card key={question.id} className="border-white/10 bg-white/5 p-3">
                   <div className="flex items-start gap-2">
-                    <span className="mt-1 shrink-0 text-xs text-muted-foreground">{index + 1}.</span>
+                    <span className="mt-1 shrink-0 text-xs text-muted-foreground">
+                      {index + 1}.
+                    </span>
                     <div className="min-w-0 flex-1">
                       <p className="mb-2 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
                         {question.question}

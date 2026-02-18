@@ -61,13 +61,7 @@
       "description": "Geographic or network zone indicator."
     }
   ],
-  "aggregates": [
-    "count()",
-    "min()",
-    "max()",
-    "avg()",
-    "sum()"
-  ],
+  "aggregates": ["count()", "min()", "max()", "avg()", "sum()"],
   "domains": [
     {
       "code": "AQ",

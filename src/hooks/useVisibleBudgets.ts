@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
 /**
  * Hook for accessing budgets filtered by profile visibility
  * Integrates profile context with budget visibility filtering
  */
 
-import { useState, useEffect, useCallback } from 'react';
-import { useProfile } from '@/contexts/ProfileContext';
+import { useState, useEffect, useCallback } from "react";
+import { useProfile } from "@/contexts/ProfileContext";
 import {
   getVisibleBudgets,
   getPrivateBudgets,
@@ -14,10 +14,10 @@ import {
   canAccessBudget,
   makeBudgetPrivate,
   makeBudgetShared,
-} from '@/lib/profile-db';
-import { db } from '@/lib/budget-db';
-import type { Budget } from '@/types/budget';
-import { isFeatureEnabled } from '@/config/features';
+} from "@/lib/profile-db";
+import { db } from "@/lib/budget-db";
+import type { Budget } from "@/types/budget";
+import { isFeatureEnabled } from "@/config/features";
 
 interface UseVisibleBudgetsResult {
   /** All budgets visible to the current profile */
@@ -53,7 +53,7 @@ export function useVisibleBudgets(): UseVisibleBudgetsResult {
       setIsLoading(true);
       setError(null);
 
-      if (!isFeatureEnabled('privatePublicBudgets') || !currentProfile) {
+      if (!isFeatureEnabled("privatePublicBudgets") || !currentProfile) {
         // Feature disabled or no profile - return all budgets
         const allBudgets = await db.budgets.toArray();
         setBudgets(allBudgets);
@@ -81,8 +81,8 @@ export function useVisibleBudgets(): UseVisibleBudgetsResult {
       setPrivateBudgets(personal);
       setSharedBudgets(shared);
     } catch (err) {
-      console.error('[useVisibleBudgets] Error loading budgets:', err);
-      setError(err instanceof Error ? err.message : 'Failed to load budgets');
+      console.error("[useVisibleBudgets] Error loading budgets:", err);
+      setError(err instanceof Error ? err.message : "Failed to load budgets");
     } finally {
       setIsLoading(false);
     }
@@ -95,7 +95,7 @@ export function useVisibleBudgets(): UseVisibleBudgetsResult {
 
   const canAccess = useCallback(
     async (budgetId: string): Promise<boolean> => {
-      if (!currentProfile || !isFeatureEnabled('privatePublicBudgets')) {
+      if (!currentProfile || !isFeatureEnabled("privatePublicBudgets")) {
         return true;
       }
       return canAccessBudget(currentProfile.id, budgetId);
@@ -106,7 +106,7 @@ export function useVisibleBudgets(): UseVisibleBudgetsResult {
   const makePrivate = useCallback(
     async (budgetId: string): Promise<void> => {
       if (!currentProfile) {
-        throw new Error('No active profile');
+        throw new Error("No active profile");
       }
       await makeBudgetPrivate(budgetId, currentProfile.id);
       await loadBudgets();
@@ -157,7 +157,7 @@ export function useBudgetAccess(budgetId: string | null): {
         return;
       }
 
-      if (!isFeatureEnabled('privatePublicBudgets')) {
+      if (!isFeatureEnabled("privatePublicBudgets")) {
         setCanAccess(true);
         setIsOwner(false);
         setIsLoading(false);

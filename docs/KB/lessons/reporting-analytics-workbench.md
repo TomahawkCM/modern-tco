@@ -33,4 +33,3 @@ Starter outline on building executive-ready reports, exporting data to downstrea
 ## Author Notes
 
 Include compliance and data governance reminders in the final draft. Coordinate with analytics SMEs for best-practice checks.
-

@@ -20,6 +20,7 @@
 - **WebKit/Safari**: ❌ 0% pass rate (browser installation issue)
 
 **Launch Recommendation**: ✅ **PROCEED WITH CAUTION**
+
 - Firefox and Mobile Chrome show excellent accessibility compliance
 - Chromium timeout issues suggest performance problems, not accessibility violations
 - WebKit/Safari require browser installation for proper testing
@@ -32,17 +33,18 @@
 
 **Results**: 38/38 tests passed (100%)
 
-| Theme Mode | Pages Tested | Violations | Status |
-|------------|--------------|------------|--------|
-| Light Mode | 11 pages | 0 | ✅ PASS |
-| Dark Mode | 11 pages | 0 | ✅ PASS |
-| High-Contrast | 11 pages | 0 | ✅ PASS |
-| Critical Flows | 3 flows | 0 | ✅ PASS |
-| Keyboard Nav | 2 tests | 1 failure* | ⚠️ MINOR |
+| Theme Mode     | Pages Tested | Violations  | Status   |
+| -------------- | ------------ | ----------- | -------- |
+| Light Mode     | 11 pages     | 0           | ✅ PASS  |
+| Dark Mode      | 11 pages     | 0           | ✅ PASS  |
+| High-Contrast  | 11 pages     | 0           | ✅ PASS  |
+| Critical Flows | 3 flows      | 0           | ✅ PASS  |
+| Keyboard Nav   | 2 tests      | 1 failure\* | ⚠️ MINOR |
 
-*Dashboard keyboard navigation failed (same issue as Chromium)
+\*Dashboard keyboard navigation failed (same issue as Chromium)
 
 **Pages Tested**:
+
 - Dashboard (/)
 - Transactions
 - Budgets
@@ -63,17 +65,18 @@
 
 **Results**: 37/38 tests passed (97%)
 
-| Theme Mode | Pages Tested | Violations | Status |
-|------------|--------------|------------|--------|
-| Light Mode | 11 pages | 0 | ✅ PASS |
-| Dark Mode | 11 pages | 0 | ✅ PASS |
-| High-Contrast | 11 pages | 0 | ✅ PASS |
-| Critical Flows | 3 flows | 0 | ✅ PASS |
-| Keyboard Nav | 2 tests | 1 failure* | ⚠️ MINOR |
+| Theme Mode     | Pages Tested | Violations  | Status   |
+| -------------- | ------------ | ----------- | -------- |
+| Light Mode     | 11 pages     | 0           | ✅ PASS  |
+| Dark Mode      | 11 pages     | 0           | ✅ PASS  |
+| High-Contrast  | 11 pages     | 0           | ✅ PASS  |
+| Critical Flows | 3 flows      | 0           | ✅ PASS  |
+| Keyboard Nav   | 2 tests      | 1 failure\* | ⚠️ MINOR |
 
-*Dashboard keyboard navigation failed (focus management issue)
+\*Dashboard keyboard navigation failed (focus management issue)
 
 **Mobile-Specific Findings**:
+
 - ✅ Touch targets ≥48px (WCAG 2.2 requirement met)
 - ✅ Text resizable without loss of functionality
 - ✅ 320px viewport support (mobile-first confirmed)
@@ -88,16 +91,17 @@
 
 **Results**: 24/38 tests passed (63%)
 
-| Theme Mode | Pages Tested | Violations | Status |
-|------------|--------------|------------|--------|
-| Light Mode | 11 pages | **12 failures** | ❌ TIMEOUT |
-| Dark Mode | 11 pages | 1 failure (Dashboard) | ⚠️ MINOR |
-| High-Contrast | 11 pages | 0 | ✅ PASS |
-| Critical Flows | 3 flows | 0 | ✅ PASS |
-| Keyboard Nav | 2 tests | 1 failure | ⚠️ MINOR |
+| Theme Mode     | Pages Tested | Violations            | Status     |
+| -------------- | ------------ | --------------------- | ---------- |
+| Light Mode     | 11 pages     | **12 failures**       | ❌ TIMEOUT |
+| Dark Mode      | 11 pages     | 1 failure (Dashboard) | ⚠️ MINOR   |
+| High-Contrast  | 11 pages     | 0                     | ✅ PASS    |
+| Critical Flows | 3 flows      | 0                     | ✅ PASS    |
+| Keyboard Nav   | 2 tests      | 1 failure             | ⚠️ MINOR   |
 
 **Light Mode Failures (12 pages)**:
 All failures were **timeouts** (page.goto exceeded 30000ms), not accessibility violations:
+
 - Dashboard (/)
 - Transactions
 - Budgets
@@ -111,6 +115,7 @@ All failures were **timeouts** (page.goto exceeded 30000ms), not accessibility v
 - OCR
 
 **Analysis**:
+
 - **Root Cause**: Performance issue, not accessibility issue
 - **Impact**: Pages eventually load but exceed 30s timeout
 - **Dark/High-Contrast**: No issues (passed 100%)
@@ -129,11 +134,13 @@ All failures were **timeouts** (page.goto exceeded 30000ms), not accessibility v
 **Root Cause**: Playwright WebKit browser not installed
 
 **Error Pattern**:
+
 ```
 Error: browserType.launch: Executable doesn't exist at /home/robne/.cache/ms-playwright/webkit-2104/pw_run.sh
 ```
 
 **Verdict**: Cannot verify Safari accessibility until WebKit browser is installed. Recommend running:
+
 ```bash
 npx playwright install webkit
 ```
@@ -157,10 +164,12 @@ npx playwright install webkit
 ### Automated Testing (axe-core)
 
 **Tools Used**:
+
 - @axe-core/playwright (industry-standard accessibility scanner)
 - WCAG 2.2 AA ruleset (wcag2a, wcag2aa, wcag22aa tags)
 
 **Rules Tested** (50+ rules):
+
 - Form label associations (label-title-only, label, label-content-name-mismatch)
 - Heading hierarchy (heading-order)
 - Landmarks (region, landmark-one-main)
@@ -171,6 +180,7 @@ npx playwright install webkit
 - Interactive element names (button-name, link-name)
 
 **Results**:
+
 - Firefox: ✅ 0 violations detected
 - Mobile Chrome: ✅ 0 violations detected
 - Chromium (dark/high-contrast): ✅ 0 violations detected
@@ -182,20 +192,20 @@ npx playwright install webkit
 ### Recommended Screen Readers
 
 **Windows**:
+
 1. **NVDA** (Free) - Test with Chrome/Firefox
 2. **JAWS** (Commercial) - Test with Chrome/Edge
 
-**macOS**:
-3. **VoiceOver** (Built-in) - Test with Safari/Chrome
+**macOS**: 3. **VoiceOver** (Built-in) - Test with Safari/Chrome
 
-**Mobile**:
-4. **TalkBack** (Android) - Test with Chrome
-5. **VoiceOver** (iOS) - Test with Safari
+**Mobile**: 4. **TalkBack** (Android) - Test with Chrome 5. **VoiceOver** (iOS) - Test with Safari
 
 ### Critical User Flows to Test
 
 #### 1. Add Transaction Flow
+
 **Steps**:
+
 1. Navigate to dashboard with screen reader
 2. Find and activate "Add Transaction" button
 3. Fill all form fields (amount, description, category, date)
@@ -203,6 +213,7 @@ npx playwright install webkit
 5. Verify success confirmation
 
 **Expected Announcements**:
+
 - Button: "Add Transaction, button"
 - Form heading: "Add New Transaction, heading level 2"
 - Fields: "Amount, required, edit, spin button", "Description, edit", etc.
@@ -210,7 +221,9 @@ npx playwright install webkit
 - Success: "Transaction added successfully, status, region"
 
 #### 2. Create Budget Flow
+
 **Steps**:
+
 1. Navigate to /budgets page
 2. Find "Create Budget" button
 3. Fill budget form (category, amount, period)
@@ -218,12 +231,15 @@ npx playwright install webkit
 5. Verify budget appears in list
 
 **Expected Announcements**:
+
 - Button: "Create Budget, button"
 - Form: All fields properly labeled
 - Progress bar: "Budget progress, 0 of 500 dollars, progress bar, 0 percent"
 
 #### 3. Import CSV Flow
+
 **Steps**:
+
 1. Navigate to /import page
 2. Upload CSV file
 3. Map columns
@@ -231,12 +247,15 @@ npx playwright install webkit
 5. Confirm import
 
 **Expected Announcements**:
+
 - File input: "Select CSV file, button"
 - Table: "Column mapping, table, 3 rows"
 - Preview: "Transaction preview, table, showing 10 of 100 transactions"
 
 #### 4. Navigate with Keyboard Only
+
 **Steps**:
+
 1. Use Tab to navigate all interactive elements
 2. Use arrow keys in lists/tables
 3. Use Enter/Space to activate buttons
@@ -258,6 +277,7 @@ npx playwright install webkit
 **Recommendation**: Manually verify with screen reader that all form fields announce their labels.
 
 **Example to Test**:
+
 ```tsx
 // Open split transaction modal
 // Screen reader should announce: "Category, required, combobox"
@@ -267,6 +287,7 @@ npx playwright install webkit
 #### 2. Chart Accessibility - **STATUS: PASS ✅**
 
 All chart elements passed automated tests. No violations detected for:
+
 - SVG alt text
 - ARIA labels
 - Data table alternatives
@@ -276,6 +297,7 @@ All chart elements passed automated tests. No violations detected for:
 Modal focus trap test passed in Firefox, Chromium, and Mobile Chrome.
 
 Verified:
+
 - ✅ Focus stays inside modal when tabbing
 - ✅ Escape closes modal
 - ✅ Focus returns to trigger element
@@ -286,52 +308,52 @@ Verified:
 
 ### Level A (Minimum)
 
-| Criterion | Status | Details |
-|-----------|--------|---------|
-| 1.1.1 Non-text Content | ✅ PASS | All images have alt text |
-| 1.3.1 Info and Relationships | ✅ PASS | Semantic HTML used |
-| 1.3.2 Meaningful Sequence | ✅ PASS | Logical reading order |
-| 1.3.3 Sensory Characteristics | ✅ PASS | Not relying on shape/color only |
-| 1.4.1 Use of Color | ✅ PASS | Icons + text for status |
-| 2.1.1 Keyboard | ⚠️ MINOR | 1 keyboard nav test failed |
-| 2.1.2 No Keyboard Trap | ✅ PASS | No traps detected |
-| 2.4.1 Bypass Blocks | ✅ PASS | Skip links present |
-| 2.4.2 Page Titled | ✅ PASS | All pages have titles |
-| 2.4.4 Link Purpose | ✅ PASS | Links are descriptive |
-| 3.1.1 Language of Page | ✅ PASS | `lang="en"` declared |
-| 4.1.1 Parsing | ✅ PASS | Valid HTML |
-| 4.1.2 Name, Role, Value | ⚠️ VERIFY | **Requires manual screen reader testing** |
+| Criterion                     | Status    | Details                                   |
+| ----------------------------- | --------- | ----------------------------------------- |
+| 1.1.1 Non-text Content        | ✅ PASS   | All images have alt text                  |
+| 1.3.1 Info and Relationships  | ✅ PASS   | Semantic HTML used                        |
+| 1.3.2 Meaningful Sequence     | ✅ PASS   | Logical reading order                     |
+| 1.3.3 Sensory Characteristics | ✅ PASS   | Not relying on shape/color only           |
+| 1.4.1 Use of Color            | ✅ PASS   | Icons + text for status                   |
+| 2.1.1 Keyboard                | ⚠️ MINOR  | 1 keyboard nav test failed                |
+| 2.1.2 No Keyboard Trap        | ✅ PASS   | No traps detected                         |
+| 2.4.1 Bypass Blocks           | ✅ PASS   | Skip links present                        |
+| 2.4.2 Page Titled             | ✅ PASS   | All pages have titles                     |
+| 2.4.4 Link Purpose            | ✅ PASS   | Links are descriptive                     |
+| 3.1.1 Language of Page        | ✅ PASS   | `lang="en"` declared                      |
+| 4.1.1 Parsing                 | ✅ PASS   | Valid HTML                                |
+| 4.1.2 Name, Role, Value       | ⚠️ VERIFY | **Requires manual screen reader testing** |
 
 ### Level AA (Target)
 
-| Criterion | Status | Details |
-|-----------|--------|---------|
-| 1.4.3 Contrast (Minimum) | ✅ PASS | 4.5:1 for text, 3:1 for UI |
-| 1.4.5 Images of Text | ✅ PASS | Real text used |
-| 2.4.5 Multiple Ways | ✅ PASS | Navigation + search |
-| 2.4.6 Headings and Labels | ✅ PASS | Clear and descriptive |
-| 2.4.7 Focus Visible | ✅ PASS | 2px teal ring |
-| 3.1.2 Language of Parts | ✅ PASS | No lang changes |
-| 3.2.3 Consistent Navigation | ✅ PASS | Same nav on all pages |
-| 3.2.4 Consistent Identification | ✅ PASS | Icons consistent |
-| 3.3.1 Error Identification | ✅ PASS | Errors shown in text |
-| 3.3.2 Labels or Instructions | ⚠️ VERIFY | **Requires manual verification** |
-| 3.3.3 Error Suggestion | ✅ PASS | Helpful error messages |
-| 3.3.4 Error Prevention | ✅ PASS | Confirmation for delete |
+| Criterion                       | Status    | Details                          |
+| ------------------------------- | --------- | -------------------------------- |
+| 1.4.3 Contrast (Minimum)        | ✅ PASS   | 4.5:1 for text, 3:1 for UI       |
+| 1.4.5 Images of Text            | ✅ PASS   | Real text used                   |
+| 2.4.5 Multiple Ways             | ✅ PASS   | Navigation + search              |
+| 2.4.6 Headings and Labels       | ✅ PASS   | Clear and descriptive            |
+| 2.4.7 Focus Visible             | ✅ PASS   | 2px teal ring                    |
+| 3.1.2 Language of Parts         | ✅ PASS   | No lang changes                  |
+| 3.2.3 Consistent Navigation     | ✅ PASS   | Same nav on all pages            |
+| 3.2.4 Consistent Identification | ✅ PASS   | Icons consistent                 |
+| 3.3.1 Error Identification      | ✅ PASS   | Errors shown in text             |
+| 3.3.2 Labels or Instructions    | ⚠️ VERIFY | **Requires manual verification** |
+| 3.3.3 Error Suggestion          | ✅ PASS   | Helpful error messages           |
+| 3.3.4 Error Prevention          | ✅ PASS   | Confirmation for delete          |
 
 ### WCAG 2.2 New Criteria
 
-| Criterion | Status | Details |
-|-----------|--------|---------|
-| 2.4.11 Focus Not Obscured (Min) | ✅ PASS | Focus always visible |
-| 2.4.12 Focus Not Obscured (Enhanced) | ✅ PASS | No overlapping elements |
-| 2.4.13 Focus Appearance | ✅ PASS | 2px solid ring, high contrast |
-| 2.5.7 Dragging Movements | ✅ PASS | All drag functions have keyboard alt |
-| 2.5.8 Target Size (Minimum) | ✅ PASS | All targets ≥48px (Mobile Chrome verified) |
-| 3.2.6 Consistent Help | ✅ PASS | Help icon consistent |
-| 3.3.7 Redundant Entry | ✅ PASS | Form data persists |
-| 3.3.8 Accessible Authentication (Min) | N/A | No authentication in budget app |
-| 3.3.9 Accessible Authentication (Enhanced) | N/A | No authentication |
+| Criterion                                  | Status  | Details                                    |
+| ------------------------------------------ | ------- | ------------------------------------------ |
+| 2.4.11 Focus Not Obscured (Min)            | ✅ PASS | Focus always visible                       |
+| 2.4.12 Focus Not Obscured (Enhanced)       | ✅ PASS | No overlapping elements                    |
+| 2.4.13 Focus Appearance                    | ✅ PASS | 2px solid ring, high contrast              |
+| 2.5.7 Dragging Movements                   | ✅ PASS | All drag functions have keyboard alt       |
+| 2.5.8 Target Size (Minimum)                | ✅ PASS | All targets ≥48px (Mobile Chrome verified) |
+| 3.2.6 Consistent Help                      | ✅ PASS | Help icon consistent                       |
+| 3.3.7 Redundant Entry                      | ✅ PASS | Form data persists                         |
+| 3.3.8 Accessible Authentication (Min)      | N/A     | No authentication in budget app            |
+| 3.3.9 Accessible Authentication (Enhanced) | N/A     | No authentication                          |
 
 ---
 
@@ -368,7 +390,7 @@ Verified:
    - **Recommended**: HTML reporter with screenshots
    - **Config**:
      ```js
-     reporter: [['html', { outputFolder: 'test-results/accessibility-report' }]]
+     reporter: [["html", { outputFolder: "test-results/accessibility-report" }]];
      ```
 
 6. **Create Screen Reader Test Matrix** 📋
@@ -398,14 +420,17 @@ Verified:
 ## Testing Artifacts
 
 ### Test Files
+
 - `tests/accessibility.spec.ts` (161 lines)
 - `playwright.config.ts` (configured web server, projects)
 
 ### Reports Generated
+
 - Playwright list output (console)
 - Screenshots for 52 failures (WebKit/Safari browser errors)
 
 ### Commands Used
+
 ```bash
 # Run all accessibility tests
 npx playwright test tests/accessibility.spec.ts --reporter=list
@@ -427,6 +452,7 @@ npx playwright test tests/accessibility.spec.ts --debug --grep "Dashboard"
 ### Overall Assessment: ⚠️ **CONDITIONAL PASS**
 
 **Strengths**:
+
 - ✅ Firefox: Perfect score (100% pass rate)
 - ✅ Mobile Chrome: Near-perfect (97% pass rate)
 - ✅ WCAG 2.2 AA compliance verified in 2 major browsers
@@ -434,6 +460,7 @@ npx playwright test tests/accessibility.spec.ts --debug --grep "Dashboard"
 - ✅ Zero accessibility violations detected by axe-core
 
 **Weaknesses**:
+
 - ❌ Chromium light mode: Severe performance issues (timeouts)
 - ❌ Safari: Untested (40% of test suite)
 - ⚠️ Manual screen reader testing: Required but not yet done
@@ -446,6 +473,7 @@ npx playwright test tests/accessibility.spec.ts --debug --grep "Dashboard"
 **Can claim WCAG 2.2 AA compliance**: ⚠️ NOT YET (manual SR testing required)
 
 **Blocker Removal Checklist**:
+
 - [ ] Fix Chromium light mode performance (P0)
 - [ ] Install WebKit and run Safari tests (P0)
 - [ ] Complete manual screen reader testing (P0 for WCAG compliance)
@@ -453,6 +481,7 @@ npx playwright test tests/accessibility.spec.ts --debug --grep "Dashboard"
 - [ ] Document findings in final accessibility audit report (P1)
 
 **Estimated Time to Full Compliance**: 6-8 hours
+
 - 2 hours: Performance fixes
 - 1 hour: Safari testing
 - 3 hours: Manual screen reader testing
@@ -464,6 +493,7 @@ npx playwright test tests/accessibility.spec.ts --debug --grep "Dashboard"
 ## Appendix: Test Configuration
 
 ### Playwright Projects Tested
+
 1. `chromium` - Desktop Chrome/Edge (Chromium engine)
 2. `firefox` - Desktop Firefox
 3. `webkit` - Desktop Safari (not installed)
@@ -471,11 +501,13 @@ npx playwright test tests/accessibility.spec.ts --debug --grep "Dashboard"
 5. `mobile-safari` - iOS Safari simulation (not installed)
 
 ### Theme Modes Tested
+
 1. Light mode (default)
 2. Dark mode
 3. High-contrast mode
 
 ### Pages Tested (11 total)
+
 - `/` - Dashboard
 - `/transactions` - Transaction list
 - `/budgets` - Budget management
@@ -489,11 +521,13 @@ npx playwright test tests/accessibility.spec.ts --debug --grep "Dashboard"
 - `/ocr` - Receipt scanner
 
 ### Critical Flows Tested (3)
+
 1. Add Transaction
 2. Create Budget
 3. Import CSV
 
 ### Keyboard Navigation Tests (2)
+
 1. Dashboard keyboard navigation
 2. Modal focus trap
 
@@ -509,6 +543,7 @@ npx playwright test tests/accessibility.spec.ts --debug --grep "Dashboard"
 ---
 
 **Next Steps**:
+
 1. Review this report with QA team
 2. Assign P0 tasks to engineers (performance, WebKit install)
 3. Schedule manual screen reader testing sessions (2-3 hours)

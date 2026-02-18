@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Custom Toast Notification System (Phase 4)
@@ -8,11 +8,11 @@
  * Lightweight custom toast system with animated success feedback
  */
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
-import { CheckCircle, XCircle, AlertCircle, Info, X } from 'lucide-react';
-import { SuccessCheckmark } from './SuccessCheckmark';
+import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { CheckCircle, XCircle, AlertCircle, Info, X } from "lucide-react";
+import { SuccessCheckmark } from "./SuccessCheckmark";
 
-type ToastType = 'success' | 'error' | 'warning' | 'info';
+type ToastType = "success" | "error" | "warning" | "info";
 
 interface Toast {
   id: string;
@@ -36,7 +36,7 @@ const ToastContext = createContext<ToastContextType | undefined>(undefined);
 export function useToast() {
   const context = useContext(ToastContext);
   if (!context) {
-    throw new Error('useToast must be used within ToastProvider');
+    throw new Error("useToast must be used within ToastProvider");
   }
   return context;
 }
@@ -48,38 +48,53 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     resolve: (value: boolean) => void;
   } | null>(null);
   const [showSuccessAnimation, setShowSuccessAnimation] = useState(false);
-  const [successAnimationMessage, setSuccessAnimationMessage] = useState<string>('');
+  const [successAnimationMessage, setSuccessAnimationMessage] = useState<string>("");
 
   const removeToast = useCallback((id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   }, []);
 
-  const toast = useCallback((type: ToastType, message: string, duration: number = 4000) => {
-    const id = `toast_${Date.now()}_${Math.random()}`;
-    const newToast: Toast = { id, type, message, duration };
-    
-    setToasts((prev) => [...prev, newToast]);
-    
-    if (duration > 0) {
-      setTimeout(() => removeToast(id), duration);
-    }
-  }, [removeToast]);
+  const toast = useCallback(
+    (type: ToastType, message: string, duration: number = 4000) => {
+      const id = `toast_${Date.now()}_${Math.random()}`;
+      const newToast: Toast = { id, type, message, duration };
 
-  const success = useCallback((message: string, duration?: number) => {
-    toast('success', message, duration);
-  }, [toast]);
+      setToasts((prev) => [...prev, newToast]);
 
-  const error = useCallback((message: string, duration?: number) => {
-    toast('error', message, duration);
-  }, [toast]);
+      if (duration > 0) {
+        setTimeout(() => removeToast(id), duration);
+      }
+    },
+    [removeToast]
+  );
 
-  const warning = useCallback((message: string, duration?: number) => {
-    toast('warning', message, duration);
-  }, [toast]);
+  const success = useCallback(
+    (message: string, duration?: number) => {
+      toast("success", message, duration);
+    },
+    [toast]
+  );
 
-  const info = useCallback((message: string, duration?: number) => {
-    toast('info', message, duration);
-  }, [toast]);
+  const error = useCallback(
+    (message: string, duration?: number) => {
+      toast("error", message, duration);
+    },
+    [toast]
+  );
+
+  const warning = useCallback(
+    (message: string, duration?: number) => {
+      toast("warning", message, duration);
+    },
+    [toast]
+  );
+
+  const info = useCallback(
+    (message: string, duration?: number) => {
+      toast("info", message, duration);
+    },
+    [toast]
+  );
 
   const confirm = useCallback((message: string): Promise<boolean> => {
     return new Promise((resolve) => {
@@ -89,19 +104,24 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 
   // Phase 4.1.2: Success animation for important actions
   const successWithAnimation = useCallback((message?: string) => {
-    setSuccessAnimationMessage(message || 'Success!');
+    setSuccessAnimationMessage(message || "Success!");
     setShowSuccessAnimation(true);
   }, []);
 
-  const handleConfirm = useCallback((result: boolean) => {
-    if (confirmDialog) {
-      confirmDialog.resolve(result);
-      setConfirmDialog(null);
-    }
-  }, [confirmDialog]);
+  const handleConfirm = useCallback(
+    (result: boolean) => {
+      if (confirmDialog) {
+        confirmDialog.resolve(result);
+        setConfirmDialog(null);
+      }
+    },
+    [confirmDialog]
+  );
 
   return (
-    <ToastContext.Provider value={{ toast, success, error, warning, info, confirm, successWithAnimation }}>
+    <ToastContext.Provider
+      value={{ toast, success, error, warning, info, confirm, successWithAnimation }}
+    >
       {children}
 
       {/* Phase 4.1.2: Success Checkmark Animation */}
@@ -113,7 +133,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 
       {/* Toast Container - ARIA Live Region for Screen Readers */}
       <div
-        className="fixed top-4 end-4 z-50 space-y-2 pointer-events-none"
+        className="pointer-events-none fixed end-4 top-4 z-50 space-y-2"
         role="region"
         aria-label="Notifications"
       >
@@ -125,24 +145,26 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       {/* Confirm Dialog - Accessible Modal */}
       {confirmDialog && (
         <div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
           role="dialog"
           aria-modal="true"
           aria-labelledby="confirm-dialog-title"
         >
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
-            <h3 id="confirm-dialog-title" className="text-lg font-semibold text-gray-900 mb-4">Confirm Action</h3>
-            <p className="text-gray-700 mb-6">{confirmDialog.message}</p>
+          <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
+            <h3 id="confirm-dialog-title" className="mb-4 text-lg font-semibold text-gray-900">
+              Confirm Action
+            </h3>
+            <p className="mb-6 text-gray-700">{confirmDialog.message}</p>
             <div className="flex gap-4">
               <button
                 onClick={() => handleConfirm(false)}
-                className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
               >
                 Cancel
               </button>
               <button
                 onClick={() => handleConfirm(true)}
-                className="flex-1 px-4 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors"
+                className="flex-1 rounded-lg bg-teal-500 px-4 py-2 text-white transition-colors hover:bg-teal-600"
               >
                 Confirm
               </button>
@@ -163,43 +185,42 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: () => void }) 
   };
 
   const colors = {
-    success: 'bg-green-50 border-green-500 text-green-900',
-    error: 'bg-red-50 border-red-500 text-red-900',
-    warning: 'bg-amber-50 border-amber-500 text-amber-900',
-    info: 'bg-teal-50 border-teal-500 text-teal-900',
+    success: "bg-green-50 border-green-500 text-green-900",
+    error: "bg-red-50 border-red-500 text-red-900",
+    warning: "bg-amber-50 border-amber-500 text-amber-900",
+    info: "bg-teal-50 border-teal-500 text-teal-900",
   };
 
   const iconColors = {
-    success: 'text-green-600',
-    error: 'text-red-600',
-    warning: 'text-amber-600',
-    info: 'text-teal-600',
+    success: "text-green-600",
+    error: "text-red-600",
+    warning: "text-amber-600",
+    info: "text-teal-600",
   };
 
   const Icon = icons[toast.type];
 
   // Use assertive for errors (urgent), polite for others
-  const isUrgent = toast.type === 'error';
+  const isUrgent = toast.type === "error";
 
   return (
     <div
       role={isUrgent ? "alert" : "status"}
       aria-live={isUrgent ? "assertive" : "polite"}
       aria-atomic="true"
-      className={`${colors[toast.type]} border-s-4 rounded-lg shadow-lg p-4 max-w-sm w-full pointer-events-auto animate-in slide-in-from-right duration-300`}
+      className={`${colors[toast.type]} pointer-events-auto w-full max-w-sm rounded-lg border-s-4 p-4 shadow-lg duration-300 animate-in slide-in-from-right`}
     >
       <div className="flex items-start gap-4">
-        <Icon className={`w-5 h-5 flex-shrink-0 ${iconColors[toast.type]}`} />
-        <p className="text-sm font-medium flex-1">{toast.message}</p>
+        <Icon className={`h-5 w-5 flex-shrink-0 ${iconColors[toast.type]}`} />
+        <p className="flex-1 text-sm font-medium">{toast.message}</p>
         <button
           onClick={onRemove}
-          className="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors"
+          className="flex-shrink-0 text-gray-400 transition-colors hover:text-gray-600"
           aria-label="Close notification"
         >
-          <X className="w-4 h-4" />
+          <X className="h-4 w-4" />
         </button>
       </div>
     </div>
   );
 }
-

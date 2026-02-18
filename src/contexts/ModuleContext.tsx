@@ -323,7 +323,7 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
 
           // Convert database records to progress format
           const progressMap: Record<string, ModuleProgress> = {};
-              (data as any[]).forEach((record: any) => {
+          (data as any[]).forEach((record: any) => {
             progressMap[record.module_id] = {
               moduleId: record.module_id,
               userId: record.user_id || user?.id || "anonymous",
@@ -381,7 +381,7 @@ export function ModuleProvider({ children }: { children: ReactNode }) {
 
       if (user && db) {
         // Save to database for each changed module
-              for (const [moduleId, progress] of Object.entries(state.moduleProgress)) {
+        for (const [moduleId, progress] of Object.entries(state.moduleProgress)) {
           if (progress.startedAt || progress.completedAt) {
             try {
               const { error } = await supabase

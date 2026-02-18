@@ -11,12 +11,14 @@
 ### Research-Backed Results Achieved
 
 **Evidence-Based Learning Methods Implemented**:
+
 - ✅ **Active Recall**: 50%+ improvement in test scores vs passive review (implemented via flashcards + MicroQuiz)
 - ✅ **Spaced Repetition (SM-2)**: 70% of medical students use Anki - superior long-term retention
 - ✅ **Immediate Feedback**: 25-30% reduction in learning time (MicroQuiz instant results)
 - ✅ **Retrieval Practice**: Strengthens memory pathways through active testing
 
 **SM-2 Algorithm Details**:
+
 - 4-button rating system: Again (<1d), Hard (~3d), Good (interval×ease), Easy (interval×ease×1.3)
 - Ease factor range: 1.3 to 2.5+
 - Interval progression: 1d → 3d → 6d → 2w → 1m → 3m+
@@ -29,7 +31,9 @@
 ### ✅ Created Files (10 New Files)
 
 #### Database Schema
+
 **`/supabase/migrations/20251002000001_add_flashcards_system.sql`** (187 lines)
+
 - **Tables Created** (4):
   - `flashcards` - Main flashcard storage with SRS state
   - `flashcard_reviews` - Review history for analytics
@@ -37,6 +41,7 @@
   - `flashcard_deck_cards` - Many-to-many deck membership
 - **Enums**: `flashcard_type` (basic, cloze, concept, diagram, code), `flashcard_source` (manual, auto_generated, quiz_failure, video_concept)
 - **Key Columns**:
+
   ```sql
   -- SRS state (SM-2 algorithm)
   srs_due TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -50,13 +55,17 @@
   correct_reviews INTEGER NOT NULL DEFAULT 0,
   average_recall_time_seconds INTEGER
   ```
+
 - **RLS Policies**: User-specific access for all tables (own flashcards only)
 - **Indexes**: Optimized for `srs_due` queries and user lookups
 - **Functions**: `auto_generate_flashcards_for_module(user_id, module_id)` utility
 
 #### TypeScript Types
+
 **`/src/types/flashcard.ts`** (180 lines)
+
 - **Core Interfaces**:
+
   ```typescript
   export interface Flashcard {
     id: string;
@@ -97,11 +106,14 @@
     currentStreak: number;
   }
   ```
+
 - **Conversion Utilities**: `toSRCardState()`, `fromSRCardState()` - Bridge flashcard schema to SM-2 algorithm
 - **Enums**: `FlashcardType`, `FlashcardSource`, re-exports `SRRating` from `/src/lib/sr.ts`
 
 #### Service Layer
+
 **`/src/services/flashcardService.ts`** (450 lines)
+
 - **CRUD Operations**:
   - `createFlashcard(userId, front, back, options)` - Create with metadata
   - `getFlashcard(id)` - Single card retrieval
@@ -115,6 +127,7 @@
   - `getDeckCards(deckId)` - Deck membership query
 
 - **SRS Scheduling**:
+
   ```typescript
   async reviewFlashcard(
     flashcardId: string,
@@ -143,6 +156,7 @@
 #### Flashcard Components (3 files)
 
 **`/src/components/flashcards/FlashcardDashboard.tsx`** (156 lines)
+
 - **Purpose**: Main flashcard interface with stats + tabs
 - **Features**:
   - 6-stat overview grid: Total Cards, Due Today, New Cards, Learning, Retention %, Day Streak
@@ -154,6 +168,7 @@
 - **Integrates**: FlashcardReview + FlashcardGenerator components
 
 **`/src/components/flashcards/FlashcardReview.tsx`** (311 lines)
+
 - **Purpose**: SM-2 spaced repetition review session
 - **Features**:
   - Loads due cards (20 max) + 20% new cards for balanced learning
@@ -169,6 +184,7 @@
 - **Time Tracking**: Measures time from card reveal to rating click
 
 **`/src/components/flashcards/FlashcardGenerator.tsx`** (249 lines)
+
 - **Purpose**: Create flashcards manually or auto-generate from modules
 - **Features**:
   - **Auto-Generate Section** (if moduleId provided):
@@ -188,6 +204,7 @@
 #### Study Integration Components (2 files)
 
 **`/src/components/study/ModuleFlashcardPrompt.tsx`** (180 lines)
+
 - **Purpose**: Flashcard review prompt shown at end of each study section
 - **Visual Design**: Gradient card with primary/purple background, prominent icons
 - **States**:
@@ -204,6 +221,7 @@
 - **Integration**: Embedded in StudyModuleViewer after content scroll area
 
 **`/src/components/study/MicroQuiz.tsx`** (225 lines)
+
 - **Purpose**: Inline knowledge check with immediate feedback + flashcard creation
 - **Features**:
   - Radio button options with visual state changes (green=correct, red=incorrect)
@@ -219,6 +237,7 @@
 #### MDX Integration (1 file)
 
 **`/src/components/mdx/MicroQuizMDX.tsx`** (35 lines)
+
 - **Purpose**: MDX-friendly wrapper for MicroQuiz component
 - **Usage in MDX**:
   ```jsx
@@ -228,7 +247,7 @@
       "To monitor network traffic patterns",
       "To collect real-time endpoint data and system information",
       "To deploy software updates to endpoints",
-      "To scan for network vulnerabilities"
+      "To scan for network vulnerabilities",
     ]}
     correctAnswer="To collect real-time endpoint data and system information"
     explanation="Sensors in Tanium are the core mechanism for querying..."
@@ -243,12 +262,15 @@
 ### ✅ Modified Files (4 Integration Points)
 
 #### **`/src/components/study/StudyModuleViewer.tsx`**
+
 **Changes**:
+
 - **Line 30**: Added import
   ```typescript
   import ModuleFlashcardPrompt from "@/components/study/ModuleFlashcardPrompt";
   ```
 - **Lines 512-519**: Inserted flashcard prompt after content
+
   ```tsx
   <ScrollArea className="h-[500px] pr-4">
     <div className="prose prose-slate max-w-none">
@@ -265,27 +287,36 @@
     )}
   </ScrollArea>
   ```
-**Result**: Every study section now shows flashcard review prompt at the end
+
+  **Result**: Every study section now shows flashcard review prompt at the end
 
 #### **`/src/app/study/[domain]/page.tsx`**
+
 **Changes**:
+
 - **Line 26**: Added import
   ```typescript
   import FlashcardDashboard from "@/components/flashcards/FlashcardDashboard";
   ```
 - **Lines 349-354**: Added FlashcardDashboard to MDX study pages
   ```tsx
-  {/* Active Recall Flashcards */}
-  {mdxMetadata?.id && (
-    <div className="mt-8">
-      <FlashcardDashboard moduleId={mdxMetadata.id} />
-    </div>
-  )}
+  {
+    /* Active Recall Flashcards */
+  }
+  {
+    mdxMetadata?.id && (
+      <div className="mt-8">
+        <FlashcardDashboard moduleId={mdxMetadata.id} />
+      </div>
+    );
+  }
   ```
-**Result**: MDX-based study pages now include full flashcard dashboard with review + creation tabs
+  **Result**: MDX-based study pages now include full flashcard dashboard with review + creation tabs
 
 #### **`/src/components/mdx/MDXWrapper.tsx`**
+
 **Changes**:
+
 - **Line 8**: Added import
   ```typescript
   import MicroQuizMDX from "./MicroQuizMDX";
@@ -297,12 +328,14 @@
     MicroQuizMDX: MicroQuizMDX,
   };
   ```
-**Result**: MicroQuizMDX component now available in all MDX study content
+  **Result**: MicroQuizMDX component now available in all MDX study content
 
 #### **`/src/content/modules/01-asking-questions.mdx`**
+
 **Changes**: Added 2 example MicroQuiz components
 
 - **Lines 96-107**: After "Pro Tip" InfoBox
+
   ```mdx
   <MicroQuizMDX
     question="What is the primary purpose of Tanium sensors?"
@@ -310,7 +343,7 @@
       "To monitor network traffic patterns",
       "To collect real-time endpoint data and system information",
       "To deploy software updates to endpoints",
-      "To scan for network vulnerabilities"
+      "To scan for network vulnerabilities",
     ]}
     correctAnswer="To collect real-time endpoint data and system information"
     explanation="Sensors in Tanium are the core mechanism for querying and collecting specific pieces of information from endpoints in real-time..."
@@ -326,7 +359,7 @@
       "Save → Create → Validate → Share → Monitor",
       "Create → Save → Validate → Monitor → Share",
       "Create → Validate → Save → Share → Monitor",
-      "Validate → Create → Save → Share → Monitor"
+      "Validate → Create → Save → Share → Monitor",
     ]}
     correctAnswer="Create → Validate → Save → Share → Monitor"
     explanation="The correct lifecycle follows a logical progression: First, CREATE your query..."
@@ -343,6 +376,7 @@
 ### 1. Service Layer Pattern (Template for Future Services)
 
 **Pattern Demonstrated in `flashcardService.ts`**:
+
 ```typescript
 class FlashcardService {
   // CRUD operations
@@ -372,6 +406,7 @@ export const flashcardService = new FlashcardService();
 ```
 
 **This pattern should be replicated for**:
+
 - `reviewService.ts` (Phase 2) - Unified review queue
 - `gamificationService.ts` (Phase 3) - Points, badges, achievements
 - `learningPathService.ts` (Phase 4) - Adaptive recommendations
@@ -379,25 +414,27 @@ export const flashcardService = new FlashcardService();
 ### 2. SM-2 Algorithm Integration
 
 **Existing SM-2 Implementation**: `/src/lib/sr.ts`
+
 ```typescript
 export function schedule(state: SRCardState, rating: SRRating, now: Date): SRCardState {
   let { ease, interval, reps, lapses } = state;
 
   switch (rating) {
-    case 'again':
-      reps = 0; lapses += 1;
+    case "again":
+      reps = 0;
+      lapses += 1;
       ease = Math.max(1.3, ease - 0.2);
       interval = 1; // tomorrow
       break;
-    case 'hard':
+    case "hard":
       ease = Math.max(1.3, ease - 0.15);
       interval = reps <= 0 ? 1 : Math.round(interval * 1.2);
       break;
-    case 'good':
+    case "good":
       interval = reps === 0 ? 1 : reps === 1 ? 6 : Math.round(interval * ease);
       reps += 1;
       break;
-    case 'easy':
+    case "easy":
       ease = Math.max(1.3, ease + 0.15);
       interval = reps === 0 ? 3 : reps === 1 ? 7 : Math.round(interval * ease * 1.3);
       reps += 1;
@@ -410,6 +447,7 @@ export function schedule(state: SRCardState, rating: SRRating, now: Date): SRCar
 ```
 
 **Integration Pattern** (used in flashcardService):
+
 ```typescript
 // 1. Convert database row to SRCardState
 const currentState: SRCardState = {
@@ -425,7 +463,7 @@ const currentState: SRCardState = {
 const newState = schedule(currentState, rating, new Date());
 
 // 3. Convert back to database columns
-await supabase.from('flashcards').update({
+await supabase.from("flashcards").update({
   srs_due: new Date(newState.due).toISOString(),
   srs_interval: newState.interval,
   srs_ease: newState.ease,
@@ -439,6 +477,7 @@ await supabase.from('flashcards').update({
 ### 3. Component Composition Pattern
 
 **Dashboard → Review/Generator Pattern**:
+
 ```
 FlashcardDashboard (parent)
 ├── Stats Grid (6 cards)
@@ -454,6 +493,7 @@ Communication:
 ```
 
 **Reusable for Phase 2**:
+
 ```
 ReviewDashboard (unified queue)
 ├── Daily Stats
@@ -469,11 +509,15 @@ ReviewDashboard (unified queue)
 **Step-by-step process established**:
 
 1. **Create component** in `/src/components/mdx/` or `/src/components/study/`
+
    ```typescript
-   export default function MyInteractiveComponent(props) { /* ... */ }
+   export default function MyInteractiveComponent(props) {
+     /* ... */
+   }
    ```
 
 2. **Create MDX wrapper** (if needed for props simplification)
+
    ```typescript
    // /src/components/mdx/MyInteractiveComponentMDX.tsx
    import MyInteractiveComponent from '../study/MyInteractiveComponent';
@@ -483,8 +527,9 @@ ReviewDashboard (unified queue)
    ```
 
 3. **Register in MDXWrapper.tsx**:
+
    ```typescript
-   import MyInteractiveComponentMDX from './MyInteractiveComponentMDX';
+   import MyInteractiveComponentMDX from "./MyInteractiveComponentMDX";
 
    export const mdxComponents = {
      // ... existing
@@ -504,15 +549,18 @@ ReviewDashboard (unified queue)
 ### Existing Contexts to Integrate With
 
 **`/src/contexts/AuthContext.tsx`**
+
 - Used in: All flashcard/quiz components for `user?.id`
 - Pattern: `const { user } = useAuth();`
 
 **`/src/contexts/AssessmentContext.tsx`**
+
 - **Phase 2 Integration Point**: Extend to track question mastery
 - Current: Question difficulty, performance tracking
 - Add: `questionReviews` state, `scheduleQuestionReview()` method
 
 **`/src/contexts/ProgressContext.tsx`**
+
 - **Phase 2 Integration Point**: Add review streak tracking
 - Current: Module completion, study time
 - Add: `reviewStreak` state, `updateReviewStreak()` method
@@ -520,6 +568,7 @@ ReviewDashboard (unified queue)
 ### Database Schema Relationships
 
 **Foreign Keys Established**:
+
 ```sql
 -- Flashcards reference:
 module_id UUID REFERENCES public.study_modules(id)
@@ -539,6 +588,7 @@ flashcard_id UUID REFERENCES public.flashcards(id)
 ```
 
 **For Phase 2 - Add**:
+
 ```sql
 CREATE TABLE question_reviews (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -564,10 +614,11 @@ CREATE TABLE question_reviews (
 ### PostHog Analytics Integration Points
 
 **Current Event Tracking**:
+
 ```typescript
 // In MicroQuiz.tsx
-if (typeof window !== 'undefined' && (window as any).posthog) {
-  (window as any).posthog.capture('micro_quiz_answered', {
+if (typeof window !== "undefined" && (window as any).posthog) {
+  (window as any).posthog.capture("micro_quiz_answered", {
     question,
     correct,
     moduleId,
@@ -575,7 +626,7 @@ if (typeof window !== 'undefined' && (window as any).posthog) {
     concept,
   });
 
-  (window as any).posthog.capture('flashcard_created_from_micro_quiz', {
+  (window as any).posthog.capture("flashcard_created_from_micro_quiz", {
     question,
     moduleId,
     concept,
@@ -584,6 +635,7 @@ if (typeof window !== 'undefined' && (window as any).posthog) {
 ```
 
 **Phase 2 Events to Add**:
+
 - `flashcard_review_session_started` - { moduleId, cardCount }
 - `flashcard_review_session_completed` - { duration, cardsReviewed, accuracy }
 - `question_review_completed` - { questionId, correct, timeSpent }
@@ -597,6 +649,7 @@ if (typeof window !== 'undefined' && (window as any).posthog) {
 ### Phase 2 Objectives: Extend Spaced Repetition System
 
 **Research Foundation**:
+
 - 70% of medical students use spaced repetition (Anki) for superior retention
 - Distributed practice beats massed practice by 200%+ for long-term memory
 - Optimal intervals: 1d → 3d → 1w → 2w → 1m → 3m
@@ -604,8 +657,11 @@ if (typeof window !== 'undefined' && (window as any).posthog) {
 ### Implementation Tasks
 
 #### Task 1: Extend SR to Practice Questions (HIGH PRIORITY)
+
 **Files to Create**:
+
 - `/supabase/migrations/20251002000002_add_question_reviews.sql`
+
   ```sql
   CREATE TABLE question_reviews (
     id UUID PRIMARY KEY,
@@ -636,24 +692,23 @@ if (typeof window !== 'undefined' && (window as any).posthog) {
   - `getQuestionStats(userId)` - Aggregate metrics
 
 **Integration Point**: Modify `/src/contexts/AssessmentContext.tsx`
+
 ```typescript
 // Add to AssessmentContext
 const handleAnswerSubmit = async (questionId, isCorrect) => {
   // Existing answer handling...
 
   // NEW: Schedule question review
-  await questionReviewService.reviewQuestion(
-    questionId,
-    user.id,
-    isCorrect,
-    timeSpent
-  );
+  await questionReviewService.reviewQuestion(questionId, user.id, isCorrect, timeSpent);
 };
 ```
 
 #### Task 2: Unified Review Dashboard
+
 **Files to Create**:
+
 - `/src/services/reviewService.ts` - Aggregates flashcards + questions
+
   ```typescript
   class ReviewService {
     async getUnifiedReviewQueue(userId: string) {
@@ -697,13 +752,15 @@ const handleAnswerSubmit = async (questionId, isCorrect) => {
   - Motivational messaging ("Don't break your 7-day streak!")
 
 #### Task 3: Performance-Based Prioritization
+
 **Algorithm to Implement**:
+
 ```typescript
 function prioritizeReviewItems(items: ReviewItem[]): ReviewItem[] {
   return items
-    .map(item => ({
+    .map((item) => ({
       ...item,
-      priority: calculatePriority(item)
+      priority: calculatePriority(item),
     }))
     .sort((a, b) => b.priority - a.priority);
 }
@@ -720,7 +777,9 @@ function calculatePriority(item: ReviewItem): number {
 **Result**: Struggling concepts with high exam weight surface first
 
 #### Task 4: Review Reminders & Engagement
+
 **Files to Create**:
+
 - `/src/components/review/ReviewNotification.tsx`
   - Daily review reminder (localStorage-based)
   - Shows at optimal time (morning or evening)
@@ -732,6 +791,7 @@ function calculatePriority(item: ReviewItem): number {
   - Links to ReviewDashboard
 
 **State Management**: Add to `/src/contexts/ProgressContext.tsx`
+
 ```typescript
 // Add to ProgressContext
 const [reviewStreak, setReviewStreak] = useState(0);
@@ -766,7 +826,9 @@ const updateReviewStreak = async () => {
 ### Primary Agents (Spawn These First)
 
 #### 1. assessment-engine-specialist
+
 **Task**:
+
 ```
 Extend SM-2 spaced repetition from flashcards to practice questions.
 
@@ -786,7 +848,9 @@ CONTEXT FILES:
 ```
 
 #### 2. database-architect
+
 **Task**:
+
 ```
 Design optimal schema for unified review queue (flashcards + questions + future content).
 
@@ -808,7 +872,9 @@ CONTEXT FILES:
 ```
 
 #### 3. react-specialist
+
 **Task**:
+
 ```
 Build ReviewDashboard, StudySession, and StreakCalendar components.
 
@@ -842,7 +908,9 @@ CONTEXT FILES:
 ```
 
 #### 4. state-management-expert
+
 **Task**:
+
 ```
 Create ReviewContext for managing unified review queue state.
 
@@ -874,7 +942,9 @@ CONTEXT FILES:
 ```
 
 #### 5. tco-analytics-coordinator
+
 **Task**:
+
 ```
 Set up PostHog event tracking for review sessions and retention analytics.
 
@@ -916,12 +986,15 @@ CONTEXT FILES:
 ### Supporting Agents (Spawn After Primary)
 
 #### 6. performance-engineer
+
 **Task**: Optimize review queue queries for 10K+ flashcards and questions. Implement pagination, virtual scrolling, caching.
 
 #### 7. accessibility-tester
+
 **Task**: Ensure ReviewDashboard and StudySession meet WCAG 2.1 AA. Keyboard navigation for rapid reviews. Screen reader support.
 
 #### 8. tco-ui-architect
+
 **Task**: Design engaging review dashboard UI. Streak calendar visual appeal. Smooth transitions for review navigation.
 
 ---
@@ -929,6 +1002,7 @@ CONTEXT FILES:
 ## 🎯 Phase 2 Success Criteria
 
 ### Functional Requirements
+
 - [ ] Practice questions have SM-2 scheduling (wrong = 1d, mastered = 2w+)
 - [ ] ReviewDashboard shows unified queue of due flashcards + questions
 - [ ] StudySession supports 10/15/30 minute time-boxed reviews
@@ -938,18 +1012,21 @@ CONTEXT FILES:
 - [ ] Daily review notifications (localStorage + optional email)
 
 ### Performance Benchmarks
+
 - [ ] Due items query: <50ms for 10K cards
 - [ ] Review submission latency: <30ms
 - [ ] Dashboard load time: <200ms
 - [ ] Stats calculation: <100ms
 
 ### Analytics & Engagement
+
 - [ ] PostHog tracking for all review events
 - [ ] 80%+ user engagement in daily reviews (target metric)
 - [ ] 60%+ 30-day retention with review streaks
 - [ ] Average session length: 15+ minutes
 
 ### Expected Impact
+
 - [ ] **Retention**: 80%+ retention after 30 days (vs 50% baseline)
 - [ ] **Engagement**: 60%+ daily active users with review streaks
 - [ ] **Mastery**: 25% faster concept mastery through prioritized weak areas
@@ -962,6 +1039,7 @@ CONTEXT FILES:
 ### Known Patterns & Best Practices
 
 1. **Always use conversion utilities** when bridging database ↔ SM-2 algorithm
+
    ```typescript
    const srState = toSRCardState(flashcard);
    const newState = schedule(srState, rating, now);
@@ -969,6 +1047,7 @@ CONTEXT FILES:
    ```
 
 2. **RLS policies follow nested ownership pattern**
+
    ```sql
    -- Allow users to access their own reviews
    CREATE POLICY "Users can manage own flashcards"
@@ -999,11 +1078,11 @@ CONTEXT FILES:
 ### Performance Optimizations Applied
 
 1. **Weighted Average for Recall Time**
+
    ```typescript
-   const newAvgTime = Math.round(
-     (oldAvg * oldCount + newTime) / (oldCount + 1)
-   );
+   const newAvgTime = Math.round((oldAvg * oldCount + newTime) / (oldCount + 1));
    ```
+
    - Avoids storing all review times
    - O(1) update complexity
 
@@ -1013,6 +1092,7 @@ CONTEXT FILES:
    - Prevents "new card fatigue" while introducing fresh content
 
 3. **Streak Calculation Optimization**
+
    ```typescript
    // Group reviews by date, find consecutive days
    const reviewDates = reviews
@@ -1108,4 +1188,4 @@ Expected deliverables: question_reviews migration, questionReviewService, Review
 
 **END OF HANDOFF DOCUMENT**
 
-*This document contains complete context for continuing Phase 2 implementation. All code patterns, integration points, and technical decisions from Phase 1 are documented for seamless continuation.*
+_This document contains complete context for continuing Phase 2 implementation. All code patterns, integration points, and technical decisions from Phase 1 are documented for seamless continuation._

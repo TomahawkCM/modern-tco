@@ -8,7 +8,9 @@
 ## 📋 What Happened
 
 ### Initial Problem
+
 Your `.mcp.json` configuration uses:
+
 ```json
 "archon": {
   "command": "docker",
@@ -19,20 +21,24 @@ Your `.mcp.json` configuration uses:
 This looked like it needed a wrapper module because `mcp_server` doesn't exist at the root level.
 
 ### My Attempted Solution
+
 I created a wrapper module at `/app/mcp_server/` to redirect to `src.mcp_server`.
 
 ### Test Results
+
 ✅ **Phase 1 passed**: Wrapper created successfully  
 ✅ **Phase 2 passed**: Module imports correctly  
 ✅ **Phase 3 passed**: 6 tools register  
 ❌ **Phase 4 failed**: Port conflict - address already in use
 
 ### Root Cause Discovered
+
 **Archon MCP uses HTTP POST transport, not stdin/stdout.**
 
 The container is already running an MCP server on port 8051. When `docker exec -i python -m mcp_server` runs, it tries to start a SECOND server on the same port, which fails.
 
 From the logs:
+
 ```
 INFO: 172.18.0.1:47624 - "POST /mcp HTTP/1.1" 200 OK
 Processing request of type ListToolsRequest
@@ -45,11 +51,13 @@ This proves Archon is already receiving and processing MCP requests via HTTP!
 ## ✅ Changes Reverted
 
 I've removed all modifications:
+
 - ❌ Deleted `/app/mcp_server/` wrapper directory
 - ✅ Container is back to clean state
 - ✅ No code changes remain
 
 Verification:
+
 ```bash
 docker exec archon-mcp ls -la /app/ | grep mcp_server
 # Returns nothing - wrapper is gone
@@ -76,6 +84,7 @@ docker exec archon-mcp ls -la /app/ | grep mcp_server
 ```
 
 **Why this works:**
+
 - Archon MCP server is already running at `http://localhost:8051/mcp`
 - It uses HTTP POST for MCP protocol communication
 - No need to start a new process via docker exec
@@ -86,6 +95,7 @@ docker exec archon-mcp ls -la /app/ | grep mcp_server
 ## 🔬 Evidence from Testing
 
 ### 1. Container Architecture
+
 ```bash
 $ docker ps | grep archon
 archon-mcp      Up 5 hours (healthy)   0.0.0.0:8051->8051/tcp
@@ -94,6 +104,7 @@ archon-ui       Up 5 hours (healthy)   0.0.0.0:3737->3737/tcp
 ```
 
 ### 2. MCP Server Startup Log
+
 ```
 🚀 Starting Archon MCP Server
    Mode: Streamable HTTP
@@ -108,6 +119,7 @@ archon-ui       Up 5 hours (healthy)   0.0.0.0:3737->3737/tcp
 ```
 
 ### 3. Active MCP Requests
+
 ```
 INFO: 172.18.0.1:47624 - "POST /mcp HTTP/1.1" 200 OK
 Processing request of type ListToolsRequest

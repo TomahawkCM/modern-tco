@@ -32,8 +32,7 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
 
   const passwordsMatch = password === confirmPassword;
   const passwordStrength = getPasswordStrength(password);
-  const canProceed =
-    mode === "automatic" || (password.length >= 8 && passwordsMatch);
+  const canProceed = mode === "automatic" || (password.length >= 8 && passwordsMatch);
 
   const handleSetupVault = useCallback(async () => {
     setIsSettingUp(true);
@@ -65,41 +64,35 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
   return (
     <div className="space-y-6">
       {/* Security Header */}
-      <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-teal-500/10 to-blue-500/10 rounded-xl border border-teal-500/20">
-        <div className="p-2 bg-teal-500/20 rounded-lg">
+      <div className="flex items-center gap-3 rounded-xl border border-teal-500/20 bg-gradient-to-r from-teal-500/10 to-blue-500/10 p-4">
+        <div className="rounded-lg bg-teal-500/20 p-2">
           <ShieldCheck className="h-6 w-6 text-teal-400" />
         </div>
         <div>
-          <p className="text-white font-medium">Bank-Grade Security</p>
-          <p className="text-sm text-slate-400">
-            Your data is encrypted with AES-256 encryption
-          </p>
+          <p className="font-medium text-white">Bank-Grade Security</p>
+          <p className="text-sm text-slate-400">Your data is encrypted with AES-256 encryption</p>
         </div>
       </div>
 
       {/* Encryption Mode Selection */}
       <div className="space-y-3">
-        <p className="text-sm text-slate-400">
-          Choose how you want to protect your data:
-        </p>
+        <p className="text-sm text-slate-400">Choose how you want to protect your data:</p>
 
         {/* Automatic Mode */}
         <button
           type="button"
           onClick={() => setMode("automatic")}
           className={cn(
-            "w-full flex items-start gap-4 p-4 rounded-xl border transition-all text-left",
+            "flex w-full items-start gap-4 rounded-xl border p-4 text-start transition-all",
             mode === "automatic"
-              ? "bg-teal-500/10 border-teal-500/50"
-              : "bg-slate-800/50 border-white/10 hover:border-white/20"
+              ? "border-teal-500/50 bg-teal-500/10"
+              : "border-white/10 bg-slate-800/50 hover:border-white/20"
           )}
         >
           <div
             className={cn(
-              "shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center",
-              mode === "automatic"
-                ? "bg-teal-500 border-teal-500"
-                : "border-slate-600"
+              "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
+              mode === "automatic" ? "border-teal-500 bg-teal-500" : "border-slate-600"
             )}
           >
             {mode === "automatic" && <Check className="h-3 w-3 text-white" />}
@@ -107,14 +100,14 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
           <div className="flex-1">
             <div className="flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-teal-400" />
-              <p className="text-white font-medium">Automatic Protection</p>
-              <span className="px-2 py-0.5 text-xs bg-teal-500/20 text-teal-400 rounded-full">
+              <p className="font-medium text-white">Automatic Protection</p>
+              <span className="rounded-full bg-teal-500/20 px-2 py-0.5 text-xs text-teal-400">
                 Recommended
               </span>
             </div>
-            <p className="text-sm text-slate-400 mt-1">
-              Your device creates a unique encryption key automatically.
-              No password to remember - your data is protected seamlessly.
+            <p className="mt-1 text-sm text-slate-400">
+              Your device creates a unique encryption key automatically. No password to remember -
+              your data is protected seamlessly.
             </p>
           </div>
         </button>
@@ -124,18 +117,16 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
           type="button"
           onClick={() => setMode("password")}
           className={cn(
-            "w-full flex items-start gap-4 p-4 rounded-xl border transition-all text-left",
+            "flex w-full items-start gap-4 rounded-xl border p-4 text-start transition-all",
             mode === "password"
-              ? "bg-teal-500/10 border-teal-500/50"
-              : "bg-slate-800/50 border-white/10 hover:border-white/20"
+              ? "border-teal-500/50 bg-teal-500/10"
+              : "border-white/10 bg-slate-800/50 hover:border-white/20"
           )}
         >
           <div
             className={cn(
-              "shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center",
-              mode === "password"
-                ? "bg-teal-500 border-teal-500"
-                : "border-slate-600"
+              "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2",
+              mode === "password" ? "border-teal-500 bg-teal-500" : "border-slate-600"
             )}
           >
             {mode === "password" && <Check className="h-3 w-3 text-white" />}
@@ -143,11 +134,11 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
           <div className="flex-1">
             <div className="flex items-center gap-2">
               <KeyRound className="h-4 w-4 text-amber-400" />
-              <p className="text-white font-medium">Password Protection</p>
+              <p className="font-medium text-white">Password Protection</p>
             </div>
-            <p className="text-sm text-slate-400 mt-1">
-              Create a master password to encrypt your vault.
-              More secure if you share this device with others.
+            <p className="mt-1 text-sm text-slate-400">
+              Create a master password to encrypt your vault. More secure if you share this device
+              with others.
             </p>
           </div>
         </button>
@@ -155,11 +146,9 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
 
       {/* Password Input (when password mode selected) */}
       {mode === "password" && (
-        <div className="space-y-4 p-4 bg-slate-800/30 rounded-xl border border-white/10">
+        <div className="space-y-4 rounded-xl border border-white/10 bg-slate-800/30 p-4">
           <div>
-            <label className="text-sm text-slate-400 mb-1 block">
-              Master Password
-            </label>
+            <label className="mb-1 block text-sm text-slate-400">Master Password</label>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -167,25 +156,19 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter a strong password"
                 className={cn(
-                  "w-full px-4 py-3 pr-12 text-sm",
-                  "bg-slate-900 border rounded-lg",
+                  "w-full px-4 py-3 pe-12 text-sm",
+                  "rounded-lg border bg-slate-900",
                   "text-white placeholder-slate-500",
                   "focus:outline-none focus:ring-2 focus:ring-teal-500",
-                  password && passwordStrength.score < 2
-                    ? "border-amber-500/50"
-                    : "border-white/10"
+                  password && passwordStrength.score < 2 ? "border-amber-500/50" : "border-white/10"
                 )}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-white"
+                className="absolute end-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-white"
               >
-                {showPassword ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )}
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
 
@@ -198,9 +181,7 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
                       key={level}
                       className={cn(
                         "h-1 flex-1 rounded-full transition-colors",
-                        level < passwordStrength.score
-                          ? passwordStrength.color
-                          : "bg-slate-700"
+                        level < passwordStrength.score ? passwordStrength.color : "bg-slate-700"
                       )}
                     />
                   ))}
@@ -211,8 +192,8 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
                     passwordStrength.score >= 3
                       ? "text-green-400"
                       : passwordStrength.score >= 2
-                      ? "text-amber-400"
-                      : "text-red-400"
+                        ? "text-amber-400"
+                        : "text-red-400"
                   )}
                 >
                   {passwordStrength.label}
@@ -222,9 +203,7 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
           </div>
 
           <div>
-            <label className="text-sm text-slate-400 mb-1 block">
-              Confirm Password
-            </label>
+            <label className="mb-1 block text-sm text-slate-400">Confirm Password</label>
             <input
               type={showPassword ? "text" : "password"}
               value={confirmPassword}
@@ -232,23 +211,21 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
               placeholder="Confirm your password"
               className={cn(
                 "w-full px-4 py-3 text-sm",
-                "bg-slate-900 border rounded-lg",
+                "rounded-lg border bg-slate-900",
                 "text-white placeholder-slate-500",
                 "focus:outline-none focus:ring-2 focus:ring-teal-500",
-                confirmPassword && !passwordsMatch
-                  ? "border-red-500/50"
-                  : "border-white/10"
+                confirmPassword && !passwordsMatch ? "border-red-500/50" : "border-white/10"
               )}
             />
             {confirmPassword && !passwordsMatch && (
-              <p className="text-xs text-red-400 mt-1">Passwords do not match</p>
+              <p className="mt-1 text-xs text-red-400">Passwords do not match</p>
             )}
           </div>
 
-          <div className="p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg">
+          <div className="rounded-lg border border-amber-500/20 bg-amber-500/10 p-3">
             <p className="text-xs text-amber-300">
-              ⚠️ <strong>Important:</strong> If you forget this password, your data cannot be recovered.
-              We cannot reset it for you.
+              ⚠️ <strong>Important:</strong> If you forget this password, your data cannot be
+              recovered. We cannot reset it for you.
             </p>
           </div>
         </div>
@@ -256,11 +233,11 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
 
       {/* Security Features */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="flex items-center gap-2 p-3 bg-slate-800/30 rounded-lg">
+        <div className="flex items-center gap-2 rounded-lg bg-slate-800/30 p-3">
           <Lock className="h-4 w-4 text-teal-400" />
           <span className="text-sm text-slate-300">AES-256 Encryption</span>
         </div>
-        <div className="flex items-center gap-2 p-3 bg-slate-800/30 rounded-lg">
+        <div className="flex items-center gap-2 rounded-lg bg-slate-800/30 p-3">
           <Shield className="h-4 w-4 text-teal-400" />
           <span className="text-sm text-slate-300">Zero Knowledge</span>
         </div>
@@ -268,7 +245,7 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
 
       {/* Error Display */}
       {error && (
-        <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg">
+        <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-3">
           <p className="text-sm text-red-400">{error}</p>
         </div>
       )}
@@ -280,16 +257,16 @@ export function VaultSetupStep({ onComplete, onSkip }: StepProps) {
           onClick={handleSetupVault}
           disabled={!canProceed || isSettingUp}
           className={cn(
-            "flex items-center gap-2 px-6 py-2 rounded-lg font-medium",
+            "flex items-center gap-2 rounded-lg px-6 py-2 font-medium",
             "transition-all",
             canProceed && !isSettingUp
               ? "bg-gradient-to-r from-teal-500 to-blue-500 text-white hover:opacity-90"
-              : "bg-slate-700 text-slate-500 cursor-not-allowed"
+              : "cursor-not-allowed bg-slate-700 text-slate-500"
           )}
         >
           {isSettingUp ? (
             <>
-              <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
               Setting Up...
             </>
           ) : (
@@ -331,13 +308,7 @@ function getPasswordStrength(password: string): {
   score = Math.min(score, 4);
 
   const labels = ["Very Weak", "Weak", "Fair", "Strong", "Very Strong"];
-  const colors = [
-    "bg-red-500",
-    "bg-orange-500",
-    "bg-amber-500",
-    "bg-green-500",
-    "bg-emerald-500",
-  ];
+  const colors = ["bg-red-500", "bg-orange-500", "bg-amber-500", "bg-green-500", "bg-emerald-500"];
 
   return {
     score,

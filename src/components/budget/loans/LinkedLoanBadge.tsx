@@ -3,26 +3,29 @@
  * Shows when a transaction is linked to a loan payment
  */
 
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Link as LinkIcon, ExternalLink, Unlink, Loader2 } from 'lucide-react';
-import { getLinkedLoanForTransaction, type LinkedLoanInfo } from '@/lib/loans/transaction-link-operations';
-import { unlinkPayment } from '@/lib/loans/loan-db';
-import Link from 'next/link';
+import { useState, useEffect } from "react";
+import { Link as LinkIcon, ExternalLink, Unlink, Loader2 } from "lucide-react";
+import {
+  getLinkedLoanForTransaction,
+  type LinkedLoanInfo,
+} from "@/lib/loans/transaction-link-operations";
+import { unlinkPayment } from "@/lib/loans/loan-db";
+import Link from "next/link";
 
 interface LinkedLoanBadgeProps {
   transactionId: string;
   onUnlink?: () => void;
   showUnlinkButton?: boolean;
-  size?: 'sm' | 'md';
+  size?: "sm" | "md";
 }
 
 export function LinkedLoanBadge({
   transactionId,
   onUnlink,
   showUnlinkButton = true,
-  size = 'sm',
+  size = "sm",
 }: LinkedLoanBadgeProps) {
   const [linkedInfo, setLinkedInfo] = useState<LinkedLoanInfo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +38,7 @@ export function LinkedLoanBadge({
         const info = await getLinkedLoanForTransaction(transactionId);
         setLinkedInfo(info);
       } catch (error) {
-        console.error('Error loading linked loan info:', error);
+        console.error("Error loading linked loan info:", error);
         setLinkedInfo(null);
       } finally {
         setIsLoading(false);
@@ -48,7 +51,7 @@ export function LinkedLoanBadge({
   async function handleUnlink() {
     if (!linkedInfo || isUnlinking) return;
 
-    if (!confirm('Unlink this transaction from the loan payment?')) return;
+    if (!confirm("Unlink this transaction from the loan payment?")) return;
 
     setIsUnlinking(true);
     try {
@@ -59,8 +62,8 @@ export function LinkedLoanBadge({
       setLinkedInfo(null);
       onUnlink?.();
     } catch (error) {
-      console.error('Error unlinking transaction:', error);
-      alert('Failed to unlink transaction. Please try again.');
+      console.error("Error unlinking transaction:", error);
+      alert("Failed to unlink transaction. Please try again.");
     } finally {
       setIsUnlinking(false);
     }
@@ -68,8 +71,8 @@ export function LinkedLoanBadge({
 
   if (isLoading) {
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-gray-100 text-gray-500 text-xs">
-        <Loader2 className="w-3 h-3 animate-spin" />
+      <span className="inline-flex items-center gap-1 rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500">
+        <Loader2 className="h-3 w-3 animate-spin" />
       </span>
     );
   }
@@ -78,15 +81,13 @@ export function LinkedLoanBadge({
     return null;
   }
 
-  const sizeClasses = size === 'sm'
-    ? 'text-xs px-2 py-0.5 gap-1'
-    : 'text-sm px-3 py-1 gap-2';
+  const sizeClasses = size === "sm" ? "text-xs px-2 py-0.5 gap-1" : "text-sm px-3 py-1 gap-2";
 
-  const iconSize = size === 'sm' ? 'w-3 h-3' : 'w-4 h-4';
+  const iconSize = size === "sm" ? "w-3 h-3" : "w-4 h-4";
 
   return (
     <span
-      className={`inline-flex items-center rounded-full bg-teal-100 text-teal-800 font-medium ${sizeClasses}`}
+      className={`inline-flex items-center rounded-full bg-teal-100 font-medium text-teal-800 ${sizeClasses}`}
     >
       <LinkIcon className={iconSize} />
       <span>Loan: {linkedInfo.loan.name}</span>
@@ -94,7 +95,7 @@ export function LinkedLoanBadge({
       {/* View Loan Link */}
       <Link
         href={`/budget-app/loans/${linkedInfo.loan.id}`}
-        className="text-teal-600 hover:text-teal-800 transition-colors"
+        className="text-teal-600 transition-colors hover:text-teal-800"
         title="View loan details"
         onClick={(e) => e.stopPropagation()}
       >
@@ -110,7 +111,7 @@ export function LinkedLoanBadge({
             handleUnlink();
           }}
           disabled={isUnlinking}
-          className="text-teal-600 hover:text-red-600 transition-colors disabled:opacity-50"
+          className="text-teal-600 transition-colors hover:text-red-600 disabled:opacity-50"
           title="Unlink from loan"
         >
           {isUnlinking ? (
@@ -145,7 +146,7 @@ export function LinkedLoanBadgeInline({
   async function handleUnlink() {
     if (isUnlinking) return;
 
-    if (!confirm('Unlink this transaction from the loan payment?')) return;
+    if (!confirm("Unlink this transaction from the loan payment?")) return;
 
     setIsUnlinking(true);
     try {
@@ -155,16 +156,16 @@ export function LinkedLoanBadgeInline({
       });
       onUnlink?.();
     } catch (error) {
-      console.error('Error unlinking transaction:', error);
-      alert('Failed to unlink transaction. Please try again.');
+      console.error("Error unlinking transaction:", error);
+      alert("Failed to unlink transaction. Please try again.");
     } finally {
       setIsUnlinking(false);
     }
   }
 
   return (
-    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-teal-100 text-teal-800 text-xs font-medium">
-      <LinkIcon className="w-3 h-3" />
+    <span className="inline-flex items-center gap-1 rounded-full bg-teal-100 px-2 py-0.5 text-xs font-medium text-teal-800">
+      <LinkIcon className="h-3 w-3" />
       <span>{loanName}</span>
       <Link
         href={`/budget-app/loans/${loanId}`}
@@ -172,7 +173,7 @@ export function LinkedLoanBadgeInline({
         title="View loan"
         onClick={(e) => e.stopPropagation()}
       >
-        <ExternalLink className="w-3 h-3" />
+        <ExternalLink className="h-3 w-3" />
       </Link>
       <button
         type="button"
@@ -185,9 +186,9 @@ export function LinkedLoanBadgeInline({
         title="Unlink"
       >
         {isUnlinking ? (
-          <Loader2 className="w-3 h-3 animate-spin" />
+          <Loader2 className="h-3 w-3 animate-spin" />
         ) : (
-          <Unlink className="w-3 h-3" />
+          <Unlink className="h-3 w-3" />
         )}
       </button>
     </span>

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Friday Money Review Page
@@ -7,9 +7,9 @@
  * A step-by-step review of the week's finances with celebration at completion.
  */
 
-import { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
@@ -21,22 +21,22 @@ import {
   Target,
   Calendar,
   PartyPopper,
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useSeniorsMode } from '@/hooks/useSeniorsMode';
-import { cn } from '@/lib/utils';
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useSeniorsMode } from "@/hooks/useSeniorsMode";
+import { cn } from "@/lib/utils";
 
 // Step definitions
 const STEPS = [
-  { id: 'welcome', title: 'Welcome', icon: Sparkles },
-  { id: 'spending', title: 'Spending Recap', icon: TrendingUp },
-  { id: 'budgets', title: 'Budget Check', icon: PieChart },
-  { id: 'goals', title: 'Goal Progress', icon: Target },
-  { id: 'upcoming', title: 'Upcoming Bills', icon: Calendar },
-  { id: 'celebration', title: 'Celebration', icon: PartyPopper },
+  { id: "welcome", title: "Welcome", icon: Sparkles },
+  { id: "spending", title: "Spending Recap", icon: TrendingUp },
+  { id: "budgets", title: "Budget Check", icon: PieChart },
+  { id: "goals", title: "Goal Progress", icon: Target },
+  { id: "upcoming", title: "Upcoming Bills", icon: Calendar },
+  { id: "celebration", title: "Celebration", icon: PartyPopper },
 ] as const;
 
-type StepId = (typeof STEPS)[number]['id'];
+type StepId = (typeof STEPS)[number]["id"];
 
 // Animation variants
 const pageVariants = {
@@ -55,8 +55,8 @@ const pageVariants = {
 };
 
 const pageTransition = {
-  type: 'tween' as const,
-  ease: 'easeInOut' as const,
+  type: "tween" as const,
+  ease: "easeInOut" as const,
   duration: 0.3,
 };
 
@@ -73,12 +73,15 @@ export default function FridayReviewPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  const goToStep = useCallback((stepIndex: number) => {
-    if (stepIndex >= 0 && stepIndex < STEPS.length) {
-      setDirection(stepIndex > currentStep ? 1 : -1);
-      setCurrentStep(stepIndex);
-    }
-  }, [currentStep]);
+  const goToStep = useCallback(
+    (stepIndex: number) => {
+      if (stepIndex >= 0 && stepIndex < STEPS.length) {
+        setDirection(stepIndex > currentStep ? 1 : -1);
+        setCurrentStep(stepIndex);
+      }
+    },
+    [currentStep]
+  );
 
   const nextStep = useCallback(() => {
     if (currentStep < STEPS.length - 1) {
@@ -93,23 +96,23 @@ export default function FridayReviewPage() {
   }, [currentStep, goToStep]);
 
   const handleClose = useCallback(() => {
-    router.push('/budget-app');
+    router.push("/budget-app");
   }, [router]);
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === 'Enter') {
+      if (e.key === "ArrowRight" || e.key === "Enter") {
         nextStep();
-      } else if (e.key === 'ArrowLeft') {
+      } else if (e.key === "ArrowLeft") {
         prevStep();
-      } else if (e.key === 'Escape') {
+      } else if (e.key === "Escape") {
         handleClose();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [nextStep, prevStep, handleClose]);
 
   const currentStepData = STEPS[currentStep];
@@ -166,35 +169,31 @@ export default function FridayReviewPage() {
               key={step.id}
               onClick={() => goToStep(index)}
               className={cn(
-                'group relative flex items-center justify-center transition-all',
-                isActive ? 'scale-110' : 'scale-100',
-                isSeniorsMode ? 'h-12 w-12' : 'h-8 w-8'
+                "group relative flex items-center justify-center transition-all",
+                isActive ? "scale-110" : "scale-100",
+                isSeniorsMode ? "h-12 w-12" : "h-8 w-8"
               )}
               aria-label={`Go to ${step.title}`}
-              aria-current={isActive ? 'step' : undefined}
+              aria-current={isActive ? "step" : undefined}
             >
               {/* Circle background */}
               <div
                 className={cn(
-                  'absolute inset-0 rounded-full transition-all',
+                  "absolute inset-0 rounded-full transition-all",
                   isActive
-                    ? 'bg-teal-500 shadow-lg shadow-teal-500/30'
+                    ? "bg-teal-500 shadow-lg shadow-teal-500/30"
                     : isCompleted
-                      ? 'bg-teal-500/30'
-                      : 'bg-white/10'
+                      ? "bg-teal-500/30"
+                      : "bg-white/10"
                 )}
               />
 
               {/* Icon */}
               <StepIcon
                 className={cn(
-                  'relative z-10 transition-colors',
-                  isSeniorsMode ? 'h-5 w-5' : 'h-4 w-4',
-                  isActive
-                    ? 'text-white'
-                    : isCompleted
-                      ? 'text-teal-300'
-                      : 'text-slate-500'
+                  "relative z-10 transition-colors",
+                  isSeniorsMode ? "h-5 w-5" : "h-4 w-4",
+                  isActive ? "text-white" : isCompleted ? "text-teal-300" : "text-slate-500"
                 )}
               />
 
@@ -202,8 +201,8 @@ export default function FridayReviewPage() {
               {index < STEPS.length - 1 && (
                 <div
                   className={cn(
-                    'absolute left-full top-1/2 h-0.5 w-4 -translate-y-1/2',
-                    index < currentStep ? 'bg-teal-500/50' : 'bg-white/10'
+                    "absolute left-full top-1/2 h-0.5 w-4 -translate-y-1/2",
+                    index < currentStep ? "bg-teal-500/50" : "bg-white/10"
                   )}
                 />
               )}
@@ -211,8 +210,8 @@ export default function FridayReviewPage() {
               {/* Tooltip */}
               <span
                 className={cn(
-                  'absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-slate-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100',
-                  isActive && 'opacity-100'
+                  "absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-slate-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100",
+                  isActive && "opacity-100"
                 )}
               >
                 {step.title}
@@ -223,12 +222,7 @@ export default function FridayReviewPage() {
       </div>
 
       {/* Live region for screen readers */}
-      <div
-        role="status"
-        aria-live="polite"
-        aria-atomic="true"
-        className="sr-only"
-      >
+      <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
         Step {currentStep + 1} of {STEPS.length}: {currentStepData.title}
       </div>
 
@@ -261,8 +255,8 @@ export default function FridayReviewPage() {
           onClick={prevStep}
           disabled={isFirstStep}
           className={cn(
-            'gap-2 border-white/20 text-slate-300 hover:bg-white/10',
-            isFirstStep && 'invisible'
+            "gap-2 border-white/20 text-slate-300 hover:bg-white/10",
+            isFirstStep && "invisible"
           )}
         >
           <ArrowLeft className="h-4 w-4" />
@@ -276,10 +270,10 @@ export default function FridayReviewPage() {
         <Button
           onClick={isLastStep ? handleClose : nextStep}
           className={cn(
-            'gap-2',
+            "gap-2",
             isLastStep
-              ? 'bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600'
-              : 'bg-teal-500 hover:bg-teal-600'
+              ? "bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600"
+              : "bg-teal-500 hover:bg-teal-600"
           )}
         >
           {isLastStep ? (
@@ -303,34 +297,34 @@ export default function FridayReviewPage() {
 function StepContent({ stepId }: { stepId: StepId }) {
   const content: Record<StepId, { emoji: string; title: string; subtitle: string }> = {
     welcome: {
-      emoji: '👋',
-      title: 'Happy Friday!',
+      emoji: "👋",
+      title: "Happy Friday!",
       subtitle: "Let's check in on your week.",
     },
     spending: {
-      emoji: '💰',
-      title: 'Spending Recap',
+      emoji: "💰",
+      title: "Spending Recap",
       subtitle: "Here's where your money went this week.",
     },
     budgets: {
-      emoji: '📊',
-      title: 'Budget Check',
-      subtitle: 'How are your budgets doing?',
+      emoji: "📊",
+      title: "Budget Check",
+      subtitle: "How are your budgets doing?",
     },
     goals: {
-      emoji: '🎯',
-      title: 'Goal Progress',
+      emoji: "🎯",
+      title: "Goal Progress",
       subtitle: "You're making progress on your goals!",
     },
     upcoming: {
-      emoji: '📅',
-      title: 'Upcoming Bills',
+      emoji: "📅",
+      title: "Upcoming Bills",
       subtitle: "Heads up for next week.",
     },
     celebration: {
-      emoji: '🎉',
-      title: 'Great job this week!',
-      subtitle: 'See you next Friday!',
+      emoji: "🎉",
+      title: "Great job this week!",
+      subtitle: "See you next Friday!",
     },
   };
 

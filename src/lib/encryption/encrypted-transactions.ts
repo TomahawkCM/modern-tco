@@ -3,20 +3,14 @@
  * Wraps database operations to automatically encrypt/decrypt transaction data
  */
 
-import { db } from '@/lib/budget-db';
-import type { Transaction } from '@/types/budget';
-import {
-  encryptTransaction,
-  decryptTransaction,
-  isEncryptionEnabled,
-} from './budget-encryption';
+import { db } from "@/lib/budget-db";
+import type { Transaction } from "@/types/budget";
+import { encryptTransaction, decryptTransaction, isEncryptionEnabled } from "./budget-encryption";
 
 /**
  * Add transaction with automatic encryption
  */
-export async function addEncryptedTransaction(
-  transaction: Transaction
-): Promise<string> {
+export async function addEncryptedTransaction(transaction: Transaction): Promise<string> {
   if (isEncryptionEnabled()) {
     const encrypted = await encryptTransaction(transaction);
     return await db.transactions.add(encrypted as Transaction);
@@ -27,13 +21,9 @@ export async function addEncryptedTransaction(
 /**
  * Add multiple transactions with automatic encryption
  */
-export async function addEncryptedTransactions(
-  transactions: Transaction[]
-): Promise<string[]> {
+export async function addEncryptedTransactions(transactions: Transaction[]): Promise<string[]> {
   if (isEncryptionEnabled()) {
-    const encrypted = await Promise.all(
-      transactions.map((tx) => encryptTransaction(tx))
-    );
+    const encrypted = await Promise.all(transactions.map((tx) => encryptTransaction(tx)));
     return await db.transactions.bulkAdd(encrypted as Transaction[]);
   }
   return await db.transactions.bulkAdd(transactions);
@@ -61,9 +51,7 @@ export async function updateEncryptedTransaction(
 /**
  * Get transaction with automatic decryption
  */
-export async function getEncryptedTransaction(
-  id: string
-): Promise<Transaction | undefined> {
+export async function getEncryptedTransaction(id: string): Promise<Transaction | undefined> {
   const transaction = await db.transactions.get(id);
   if (!transaction) {
     return undefined;
@@ -85,9 +73,7 @@ export async function getAllEncryptedTransactions(): Promise<Transaction[]> {
   if (isEncryptionEnabled()) {
     return Promise.all(
       transactions.map((tx) =>
-        tx.encryptedDescription || tx.encryptedAmount
-          ? decryptTransaction(tx)
-          : Promise.resolve(tx)
+        tx.encryptedDescription || tx.encryptedAmount ? decryptTransaction(tx) : Promise.resolve(tx)
       )
     );
   }
@@ -106,13 +92,10 @@ export async function queryEncryptedTransactions(
   if (isEncryptionEnabled()) {
     return Promise.all(
       transactions.map((tx) =>
-        tx.encryptedDescription || tx.encryptedAmount
-          ? decryptTransaction(tx)
-          : Promise.resolve(tx)
+        tx.encryptedDescription || tx.encryptedAmount ? decryptTransaction(tx) : Promise.resolve(tx)
       )
     );
   }
 
   return transactions;
 }
-

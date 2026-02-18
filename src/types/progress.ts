@@ -7,4 +7,3 @@ export interface ModuleProgress {
 }
 
 export type ModuleProgressMap = Record<string, ModuleProgress>;
-

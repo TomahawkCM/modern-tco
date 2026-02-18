@@ -1,31 +1,25 @@
-'use client';
+"use client";
 
 /**
  * Activity Log Panel
  * Displays activity history with filtering options
  */
 
-import React, { useState, useEffect, useCallback } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import React, { useState, useEffect, useCallback } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
+} from "@/components/ui/select";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import {
   History,
   RefreshCw,
@@ -44,19 +38,15 @@ import {
   Lock,
   ArrowRightLeft,
   Clock,
-} from 'lucide-react';
-import { useProfile } from '@/contexts/ProfileContext';
-import {
-  getActivityLog,
-  getActivityLogCount,
-  formatActivityEntry,
-} from '@/lib/activity-logger';
-import type { ActivityLogEntry, ActivityLogFilter } from '@/types/profile';
-import { getProfileInitials } from '@/types/profile';
-import { isFeatureEnabled } from '@/config/features';
-import { cn } from '@/lib/utils';
+} from "lucide-react";
+import { useProfile } from "@/contexts/ProfileContext";
+import { getActivityLog, getActivityLogCount, formatActivityEntry } from "@/lib/activity-logger";
+import type { ActivityLogEntry, ActivityLogFilter } from "@/types/profile";
+import { getProfileInitials } from "@/types/profile";
+import { isFeatureEnabled } from "@/config/features";
+import { cn } from "@/lib/utils";
 
-const ACTION_ICONS: Record<ActivityLogEntry['action'], React.ReactNode> = {
+const ACTION_ICONS: Record<ActivityLogEntry["action"], React.ReactNode> = {
   create: <span className="text-green-500">+</span>,
   update: <span className="text-blue-500">~</span>,
   delete: <span className="text-red-500">-</span>,
@@ -68,7 +58,7 @@ const ACTION_ICONS: Record<ActivityLogEntry['action'], React.ReactNode> = {
   profile_switch: <ArrowRightLeft className="h-4 w-4 text-cyan-500" />,
 };
 
-const ENTITY_ICONS: Record<ActivityLogEntry['entityType'], React.ReactNode> = {
+const ENTITY_ICONS: Record<ActivityLogEntry["entityType"], React.ReactNode> = {
   profile: <User className="h-4 w-4" />,
   transaction: <CreditCard className="h-4 w-4" />,
   budget: <PiggyBank className="h-4 w-4" />,
@@ -87,15 +77,15 @@ function formatRelativeTime(date: Date): string {
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
 
-  if (seconds < 60) return 'Just now';
+  if (seconds < 60) return "Just now";
   if (minutes < 60) return `${minutes}m ago`;
   if (hours < 24) return `${hours}h ago`;
   if (days < 7) return `${days}d ago`;
 
   return date.toLocaleDateString(undefined, {
-    month: 'short',
-    day: 'numeric',
-    year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined,
+    month: "short",
+    day: "numeric",
+    year: date.getFullYear() !== now.getFullYear() ? "numeric" : undefined,
   });
 }
 
@@ -107,10 +97,10 @@ export function ActivityLogPanel() {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   // Filters
-  const [filterProfileId, setFilterProfileId] = useState<string>('all');
-  const [filterAction, setFilterAction] = useState<string>('all');
-  const [filterEntityType, setFilterEntityType] = useState<string>('all');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [filterProfileId, setFilterProfileId] = useState<string>("all");
+  const [filterAction, setFilterAction] = useState<string>("all");
+  const [filterEntityType, setFilterEntityType] = useState<string>("all");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const loadEntries = useCallback(async () => {
     try {
@@ -118,21 +108,21 @@ export function ActivityLogPanel() {
         limit: 100,
       };
 
-      if (filterProfileId !== 'all') {
+      if (filterProfileId !== "all") {
         filter.profileId = filterProfileId;
       }
 
-      if (filterAction !== 'all') {
-        filter.action = filterAction as ActivityLogEntry['action'];
+      if (filterAction !== "all") {
+        filter.action = filterAction as ActivityLogEntry["action"];
       }
 
-      if (filterEntityType !== 'all') {
-        filter.entityType = filterEntityType as ActivityLogEntry['entityType'];
+      if (filterEntityType !== "all") {
+        filter.entityType = filterEntityType as ActivityLogEntry["entityType"];
       }
 
       const [fetchedEntries, count] = await Promise.all([
         getActivityLog(filter),
-        getActivityLogCount(filterProfileId !== 'all' ? filterProfileId : undefined),
+        getActivityLogCount(filterProfileId !== "all" ? filterProfileId : undefined),
       ]);
 
       // Client-side search filtering
@@ -150,7 +140,7 @@ export function ActivityLogPanel() {
       setEntries(filtered);
       setTotalCount(count);
     } catch (error) {
-      console.error('[ActivityLogPanel] Error loading entries:', error);
+      console.error("[ActivityLogPanel] Error loading entries:", error);
     }
   }, [filterProfileId, filterAction, filterEntityType, searchTerm]);
 
@@ -165,7 +155,7 @@ export function ActivityLogPanel() {
     setIsRefreshing(false);
   };
 
-  if (!isFeatureEnabled('activityLogging')) {
+  if (!isFeatureEnabled("activityLogging")) {
     return (
       <Card>
         <CardHeader>
@@ -192,15 +182,8 @@ export function ActivityLogPanel() {
               Track changes made by all profiles ({totalCount} total entries)
             </CardDescription>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={handleRefresh}
-            disabled={isRefreshing}
-          >
-            <RefreshCw
-              className={cn('h-4 w-4 mr-2', isRefreshing && 'animate-spin')}
-            />
+          <Button variant="outline" size="sm" onClick={handleRefresh} disabled={isRefreshing}>
+            <RefreshCw className={cn("me-2 h-4 w-4", isRefreshing && "animate-spin")} />
             Refresh
           </Button>
         </div>
@@ -258,13 +241,13 @@ export function ActivityLogPanel() {
             </SelectContent>
           </Select>
 
-          <div className="relative flex-1 min-w-[200px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <div className="relative min-w-[200px] flex-1">
+            <Search className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               placeholder="Search activities..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9"
+              className="ps-9"
             />
           </div>
         </div>
@@ -274,24 +257,24 @@ export function ActivityLogPanel() {
         {/* Activity List */}
         <ScrollArea className="h-[400px]">
           {isLoading ? (
-            <div className="flex items-center justify-center h-full">
+            <div className="flex h-full items-center justify-center">
               <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
             </div>
           ) : entries.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
-              <History className="h-12 w-12 mb-2 opacity-50" />
+            <div className="flex h-full flex-col items-center justify-center text-muted-foreground">
+              <History className="mb-2 h-12 w-12 opacity-50" />
               <p>No activity found</p>
-              {(filterProfileId !== 'all' ||
-                filterAction !== 'all' ||
-                filterEntityType !== 'all' ||
+              {(filterProfileId !== "all" ||
+                filterAction !== "all" ||
+                filterEntityType !== "all" ||
                 searchTerm) && (
                 <Button
                   variant="link"
                   onClick={() => {
-                    setFilterProfileId('all');
-                    setFilterAction('all');
-                    setFilterEntityType('all');
-                    setSearchTerm('');
+                    setFilterProfileId("all");
+                    setFilterAction("all");
+                    setFilterEntityType("all");
+                    setSearchTerm("");
                   }}
                 >
                   Clear filters
@@ -306,28 +289,27 @@ export function ActivityLogPanel() {
                 return (
                   <div
                     key={entry.id}
-                    className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors"
+                    className="flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-muted/50"
                   >
                     {/* Profile Avatar */}
                     <Avatar className="h-8 w-8 flex-shrink-0">
                       <AvatarFallback
                         style={{
-                          backgroundColor:
-                            profile?.avatarColor || '#6b7280',
+                          backgroundColor: profile?.avatarColor || "#6b7280",
                         }}
-                        className="text-white text-xs"
+                        className="text-xs text-white"
                       >
                         {getProfileInitials(entry.profileName)}
                       </AvatarFallback>
                     </Avatar>
 
                     {/* Content */}
-                    <div className="flex-1 min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="text-sm">{formatActivityEntry(entry)}</p>
-                      <div className="flex items-center gap-2 mt-1">
+                      <div className="mt-1 flex items-center gap-2">
                         <Badge variant="outline" className="text-xs">
                           {ENTITY_ICONS[entry.entityType]}
-                          <span className="ml-1">{entry.entityType}</span>
+                          <span className="ms-1">{entry.entityType}</span>
                         </Badge>
                         <span className="text-xs text-muted-foreground">
                           {formatRelativeTime(entry.timestamp)}
@@ -336,9 +318,7 @@ export function ActivityLogPanel() {
                     </div>
 
                     {/* Action Icon */}
-                    <div className="flex-shrink-0">
-                      {ACTION_ICONS[entry.action]}
-                    </div>
+                    <div className="flex-shrink-0">{ACTION_ICONS[entry.action]}</div>
                   </div>
                 );
               })}

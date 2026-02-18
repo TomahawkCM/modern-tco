@@ -11,6 +11,7 @@ import { useGuidedTour } from "@/hooks/useGuidedTour";
 import { cn } from "@/lib/utils";
 import { HardDrive, Lock, Sparkles, WifiOff, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const STORAGE_KEY = "budget-app-onboarding";
 
@@ -30,6 +31,7 @@ interface WelcomeBannerProps {
 }
 
 export function WelcomeBanner({ forceShow = false }: WelcomeBannerProps) {
+  const tAria = useTranslations("aria");
   const { startTour } = useGuidedTour();
   const [state, setState] = useState<OnboardingState>(defaultState);
   const [isVisible, setIsVisible] = useState(false);
@@ -108,7 +110,7 @@ export function WelcomeBanner({ forceShow = false }: WelcomeBannerProps) {
         "border-teal-500/20 backdrop-blur-sm"
       )}
       role="banner"
-      aria-label="Welcome to Budget App"
+      aria-label={tAria("welcomeBudgetApp")}
     >
       {/* Main Banner Content */}
       <div className="mx-auto max-w-7xl px-4 py-4 md:px-6">
@@ -119,9 +121,7 @@ export function WelcomeBanner({ forceShow = false }: WelcomeBannerProps) {
               <Sparkles className="h-5 w-5 text-white" />
             </div>
             <div className="min-w-0 flex-1">
-              <h2 className="text-lg font-semibold text-white">
-                Welcome to Budget App!
-              </h2>
+              <h2 className="text-lg font-semibold text-white">Welcome to Budget App!</h2>
               <p className="text-sm text-slate-400">
                 Your finances, your device. No cloud, no compromise.
               </p>
@@ -150,7 +150,7 @@ export function WelcomeBanner({ forceShow = false }: WelcomeBannerProps) {
               size="icon"
               onClick={handleDismiss}
               className="h-8 w-8 text-slate-400 hover:bg-white/10 hover:text-white"
-              aria-label="Dismiss welcome banner"
+              aria-label={tAria("dismissWelcome")}
             >
               <X className="h-4 w-4" />
             </Button>

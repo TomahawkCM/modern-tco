@@ -730,7 +730,7 @@ describe("Utility Functions", () => {
   it("should truncate long text", () => {
     const longText = "This is a very long text that needs truncation";
     const maxLength = 20;
-    const truncated = `${longText.slice(0, maxLength)  }...`;
+    const truncated = `${longText.slice(0, maxLength)}...`;
     expect(truncated.length).toBeLessThanOrEqual(maxLength + 3);
   });
 

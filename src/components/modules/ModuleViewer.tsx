@@ -177,18 +177,24 @@ export function ModuleViewer({
       {/* Module Content Tabs */}
       <Tabs defaultValue="content" className="space-y-6">
         <TabsList className="glass grid w-full grid-cols-3 border border-white/10">
-          <TabsTrigger value="content" className="text-foreground data-[state=active]:bg-tanium-accent">
+          <TabsTrigger
+            value="content"
+            className="data-[state=active]:bg-tanium-accent text-foreground"
+          >
             <BookOpen className="mr-2 h-4 w-4" />
             Content
           </TabsTrigger>
           <TabsTrigger
             value="objectives"
-            className="text-foreground data-[state=active]:bg-tanium-accent"
+            className="data-[state=active]:bg-tanium-accent text-foreground"
           >
             <Target className="mr-2 h-4 w-4" />
             Objectives
           </TabsTrigger>
-          <TabsTrigger value="progress" className="text-foreground data-[state=active]:bg-tanium-accent">
+          <TabsTrigger
+            value="progress"
+            className="data-[state=active]:bg-tanium-accent text-foreground"
+          >
             <Trophy className="mr-2 h-4 w-4" />
             Progress
           </TabsTrigger>
@@ -285,7 +291,7 @@ export function ModuleViewer({
                   >
                     <div className="flex items-center gap-3">
                       <div className="flex items-center gap-2">
-                        <span className="font-medium text-tanium-accent">{index + 1}</span>
+                        <span className="text-tanium-accent font-medium">{index + 1}</span>
                         {completedSections.has(section.id) && (
                           <CheckCircle className="h-4 w-4 text-[#22c55e]" />
                         )}
@@ -328,7 +334,7 @@ export function ModuleViewer({
                     onClick={() => handleObjectiveToggle(objective.id)}
                   >
                     <div className="mt-1 flex items-center gap-3">
-                      <div className="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 text-xs font-medium text-tanium-accent">
+                      <div className="text-tanium-accent flex h-6 w-6 items-center justify-center rounded-full border border-white/20 text-xs font-medium">
                         {index + 1}
                       </div>
                       <div

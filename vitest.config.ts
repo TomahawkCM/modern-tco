@@ -17,10 +17,7 @@ export default defineConfig({
       "tests/**/*.vitest.{ts,tsx}",
       "tests/**/*.test.{ts,tsx}",
     ],
-    exclude: [
-      "node_modules/**",
-      ".next/**",
-    ],
+    exclude: ["node_modules/**", ".next/**"],
     coverage: {
       enabled: false,
       provider: "v8",

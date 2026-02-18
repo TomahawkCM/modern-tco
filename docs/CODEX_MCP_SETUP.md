@@ -45,6 +45,7 @@ npm run codex:mcp:sync:global
 This writes the necessary `env` values into `~/.codex/config.toml` under each `[mcp_servers.<name>.env]`. You can verify with `codex mcp get supabase --json`.
 
 Both scripts:
+
 - Keep the working directory at the project root.
 - Pass the MCP config to Codex via env vars and, when supported, the `--mcp-config` flag.
 - Load required environment variables from your shell, falling back to `.env.local` for:

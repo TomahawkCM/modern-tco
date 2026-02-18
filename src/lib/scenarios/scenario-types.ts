@@ -5,11 +5,11 @@
  */
 
 export type ScenarioType =
-  | 'cancel_subscription'
-  | 'change_income'
-  | 'add_expense'
-  | 'pay_off_debt'
-  | 'increase_savings_rate';
+  | "cancel_subscription"
+  | "change_income"
+  | "add_expense"
+  | "pay_off_debt"
+  | "increase_savings_rate";
 
 export interface ScenarioInput {
   type: ScenarioType;

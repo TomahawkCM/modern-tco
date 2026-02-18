@@ -70,9 +70,9 @@ export function PracticeStats({ className }: PracticeStatsProps) {
             Practice Statistics
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-center py-12">
+        <CardContent className="py-12 text-center">
           <Target className="mx-auto mb-4 h-16 w-16 text-gray-600 opacity-50" />
-          <p className="text-muted-foreground mb-2">No practice sessions yet</p>
+          <p className="mb-2 text-muted-foreground">No practice sessions yet</p>
           <p className="text-sm text-muted-foreground">
             Start practicing to see your statistics here!
           </p>
@@ -100,23 +100,23 @@ export function PracticeStats({ className }: PracticeStatsProps) {
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Main Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
             <div>
-              <div className="text-sm text-muted-foreground mb-1">Total Sessions</div>
+              <div className="mb-1 text-sm text-muted-foreground">Total Sessions</div>
               <div className="text-2xl font-bold text-accent-foreground">{stats.totalSessions}</div>
             </div>
             <div>
-              <div className="text-sm text-muted-foreground mb-1">Questions</div>
+              <div className="mb-1 text-sm text-muted-foreground">Questions</div>
               <div className="text-2xl font-bold text-primary">{stats.totalQuestions}</div>
             </div>
             <div>
-              <div className="text-sm text-muted-foreground mb-1">Accuracy</div>
+              <div className="mb-1 text-sm text-muted-foreground">Accuracy</div>
               <div className={`text-2xl font-bold ${getAccuracyColor(stats.accuracyRate)}`}>
                 {Math.round(stats.accuracyRate)}%
               </div>
             </div>
             <div>
-              <div className="text-sm text-muted-foreground mb-1">Avg Time</div>
+              <div className="mb-1 text-sm text-muted-foreground">Avg Time</div>
               <div className="text-2xl font-bold text-[#22c55e]">
                 {Math.round(stats.averageTimePerQuestion)}s
               </div>
@@ -148,20 +148,20 @@ export function PracticeStats({ className }: PracticeStatsProps) {
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
               <div className="rounded-lg border border-accent/20 bg-accent/5 p-4">
-                <div className="text-sm text-muted-foreground mb-2">Practice</div>
+                <div className="mb-2 text-sm text-muted-foreground">Practice</div>
                 <div className="text-3xl font-bold text-accent-foreground">
                   {Math.round(comparison.practice.accuracy)}%
                 </div>
-                <div className="text-xs text-muted-foreground mt-1">
+                <div className="mt-1 text-xs text-muted-foreground">
                   {comparison.practice.sessions} sessions
                 </div>
               </div>
               <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/5 p-4">
-                <div className="text-sm text-muted-foreground mb-2">Review</div>
+                <div className="mb-2 text-sm text-muted-foreground">Review</div>
                 <div className="text-3xl font-bold text-[#22c55e]">
                   {Math.round(comparison.review.accuracy)}%
                 </div>
-                <div className="text-xs text-muted-foreground mt-1">
+                <div className="mt-1 text-xs text-muted-foreground">
                   {comparison.review.sessions} sessions
                 </div>
               </div>
@@ -255,7 +255,7 @@ export function PracticeStats({ className }: PracticeStatsProps) {
             {Object.values(stats.byModule).map((moduleStats, idx) => (
               <div key={idx} className="space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground capitalize">
+                  <span className="text-sm capitalize text-muted-foreground">
                     {moduleStats.moduleId.replace(/-/g, " ")}
                   </span>
                   <div className="flex items-center gap-2">
@@ -285,9 +285,8 @@ export function PracticeStats({ className }: PracticeStatsProps) {
           </CardHeader>
           <CardContent className="space-y-2">
             {stats.recentSessions.slice(0, 5).map((session, idx) => {
-              const accuracy = session.questions.length > 0
-                ? (session.score / session.questions.length) * 100
-                : 0;
+              const accuracy =
+                session.questions.length > 0 ? (session.score / session.questions.length) * 100 : 0;
 
               return (
                 <div
@@ -299,10 +298,10 @@ export function PracticeStats({ className }: PracticeStatsProps) {
                       {session.mode === "concept"
                         ? `📍 ${session.concept}`
                         : session.mode === "module"
-                        ? `📚 ${session.moduleId}`
-                        : session.mode === "missed"
-                        ? "🎯 Missed Questions"
-                        : "🎲 Random"}
+                          ? `📚 ${session.moduleId}`
+                          : session.mode === "missed"
+                            ? "🎯 Missed Questions"
+                            : "🎲 Random"}
                     </div>
                     <div className="text-xs text-muted-foreground">
                       {new Date(session.startTime).toLocaleDateString()}
@@ -312,10 +311,7 @@ export function PracticeStats({ className }: PracticeStatsProps) {
                     <span className="text-sm text-muted-foreground">
                       {session.score} / {session.questions.length}
                     </span>
-                    <Badge
-                      variant="outline"
-                      className={getAccuracyColor(accuracy)}
-                    >
+                    <Badge variant="outline" className={getAccuracyColor(accuracy)}>
                       {Math.round(accuracy)}%
                     </Badge>
                   </div>

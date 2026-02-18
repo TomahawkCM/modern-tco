@@ -13,7 +13,7 @@ import fs from "fs/promises";
 import path from "path";
 import { QuestionGeneratorService } from "../services/QuestionGeneratorService";
 import { Difficulty, QuestionCategory, TCODomain, TCO_DOMAIN_WEIGHTS } from "../types/exam";
-import { defaultDifficultyRecord } from '../lib/difficulty';
+import { defaultDifficultyRecord } from "../lib/difficulty";
 
 interface GenerationPlan {
   domain: TCODomain;

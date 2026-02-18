@@ -13,13 +13,13 @@
  * @returns Sanitized error message safe for client
  */
 export function sanitizeError(error: unknown, context?: string): string {
-  const isDevelopment = process.env.NODE_ENV === 'development';
+  const isDevelopment = process.env.NODE_ENV === "development";
 
   // Log full error server-side (with context if provided)
   if (context) {
     console.error(`[${context}] Error:`, error);
   } else {
-    console.error('Error:', error);
+    console.error("Error:", error);
   }
 
   // Return detailed error in development, generic in production
@@ -31,7 +31,7 @@ export function sanitizeError(error: unknown, context?: string): string {
   }
 
   // Production: Generic error messages only
-  return 'An unexpected error occurred. Please try again later.';
+  return "An unexpected error occurred. Please try again later.";
 }
 
 /**
@@ -60,16 +60,16 @@ export function createErrorResponse(
  * @returns Masked value safe for logs
  */
 export function maskPII(value: string | null | undefined): string {
-  if (!value) return '[empty]';
+  if (!value) return "[empty]";
 
   // Email masking: user@example.com -> u***@example.com
-  if (value.includes('@')) {
-    const [username, domain] = value.split('@');
+  if (value.includes("@")) {
+    const [username, domain] = value.split("@");
     return `${username[0]}***@${domain}`;
   }
 
   // UUID masking: show first/last 4 chars only
-  if (value.length === 36 && value.includes('-')) {
+  if (value.length === 36 && value.includes("-")) {
     return `${value.slice(0, 4)}...${value.slice(-4)}`;
   }
 
@@ -78,7 +78,7 @@ export function maskPII(value: string | null | undefined): string {
     return `${value.slice(0, 3)}***`;
   }
 
-  return '***';
+  return "***";
 }
 
 /**
@@ -98,7 +98,7 @@ export function logOperation(
   if (metadata) {
     for (const [key, value] of Object.entries(metadata)) {
       // Mask sensitive fields
-      if (['email', 'userId', 'user_id', 'id'].includes(key)) {
+      if (["email", "userId", "user_id", "id"].includes(key)) {
         sanitizedMetadata[key] = maskPII(String(value));
       } else {
         sanitizedMetadata[key] = value;
@@ -126,27 +126,27 @@ export function logOperation(
 export class ValidationError extends Error {
   constructor(message: string) {
     super(message);
-    this.name = 'ValidationError';
+    this.name = "ValidationError";
   }
 }
 
 export class AuthenticationError extends Error {
-  constructor(message: string = 'Authentication required') {
+  constructor(message: string = "Authentication required") {
     super(message);
-    this.name = 'AuthenticationError';
+    this.name = "AuthenticationError";
   }
 }
 
 export class AuthorizationError extends Error {
-  constructor(message: string = 'Insufficient permissions') {
+  constructor(message: string = "Insufficient permissions") {
     super(message);
-    this.name = 'AuthorizationError';
+    this.name = "AuthorizationError";
   }
 }
 
 export class RateLimitError extends Error {
-  constructor(message: string = 'Too many requests') {
+  constructor(message: string = "Too many requests") {
     super(message);
-    this.name = 'RateLimitError';
+    this.name = "RateLimitError";
   }
 }

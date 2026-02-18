@@ -50,14 +50,14 @@ interface ModuleAnalytics {
   totalObjectives: number;
 }
 
-export function ResetProgressDialog({
-  open,
-  onOpenChange,
-  onConfirm,
-}: ResetProgressDialogProps) {
+export function ResetProgressDialog({ open, onOpenChange, onConfirm }: ResetProgressDialogProps) {
   const { modules, moduleProgress, resetProgress: resetModuleProgress } = useModules();
   const { state: progressState, getOverallStats, getDomainStats } = useProgress();
-  const { state: incorrectState, getTotalIncorrectCount, getDomainStats: getIncorrectDomainStats } = useIncorrectAnswers();
+  const {
+    state: incorrectState,
+    getTotalIncorrectCount,
+    getDomainStats: getIncorrectDomainStats,
+  } = useIncorrectAnswers();
 
   const [isResetting, setIsResetting] = useState(false);
   const [moduleAnalytics, setModuleAnalytics] = useState<ModuleAnalytics[]>([]);
@@ -88,7 +88,7 @@ export function ResetProgressDialog({
       };
     });
 
-    setModuleAnalytics(analytics.filter(a => a.timeSpent > 0 || a.completionPercentage > 0));
+    setModuleAnalytics(analytics.filter((a) => a.timeSpent > 0 || a.completionPercentage > 0));
   }, [modules, moduleProgress]);
 
   const overallStats = getOverallStats();
@@ -107,7 +107,7 @@ export function ResetProgressDialog({
     setIsResetting(true);
 
     // Simulate reset process
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Call the actual reset functions
     onConfirm();
@@ -118,12 +118,13 @@ export function ResetProgressDialog({
   };
 
   const totalTimeInvested = moduleAnalytics.reduce((sum, m) => sum + m.timeSpent, 0);
-  const completedModules = moduleAnalytics.filter(m => m.completionPercentage === 100).length;
-  const averageAccuracy = domainStats.reduce((sum, d) => sum + (d.percentage || 0), 0) / (domainStats.length || 1);
+  const completedModules = moduleAnalytics.filter((m) => m.completionPercentage === 100).length;
+  const averageAccuracy =
+    domainStats.reduce((sum, d) => sum + (d.percentage || 0), 0) / (domainStats.length || 1);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl max-h-[80vh] overflow-hidden flex flex-col">
+      <DialogContent className="flex max-h-[80vh] max-w-3xl flex-col overflow-hidden">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <AlertTriangle className="h-5 w-5 text-[#f97316]" />
@@ -187,7 +188,7 @@ export function ResetProgressDialog({
                 <AlertTriangle className="h-4 w-4 text-[#f97316]" />
                 <AlertDescription>
                   <strong>You will lose:</strong>
-                  <ul className="mt-2 space-y-1 list-disc list-inside">
+                  <ul className="mt-2 list-inside list-disc space-y-1">
                     <li>{overallStats.totalQuestions} answered questions</li>
                     <li>{totalIncorrect} questions marked for review</li>
                     <li>All module progress and completion status</li>
@@ -214,9 +215,7 @@ export function ResetProgressDialog({
                           <div className="flex items-center justify-between">
                             <div>
                               <p className="font-medium">{module.title}</p>
-                              <p className="text-sm text-muted-foreground">
-                                {module.domain}
-                              </p>
+                              <p className="text-sm text-muted-foreground">{module.domain}</p>
                             </div>
                             <div className="text-right">
                               <p className="text-sm font-medium">
@@ -300,11 +299,7 @@ export function ResetProgressDialog({
         <DialogFooter className="flex gap-2">
           {!showFinalWarning ? (
             <>
-              <Button
-                variant="outline"
-                onClick={() => onOpenChange(false)}
-                disabled={isResetting}
-              >
+              <Button variant="outline" onClick={() => onOpenChange(false)} disabled={isResetting}>
                 Cancel
               </Button>
               <Button
@@ -321,7 +316,8 @@ export function ResetProgressDialog({
               <Alert className="flex-1 border-red-200 bg-red-50/10">
                 <AlertTriangle className="h-4 w-4 text-red-400" />
                 <AlertDescription>
-                  <strong>Final Confirmation:</strong> Type "RESET" to confirm you want to permanently delete all progress.
+                  <strong>Final Confirmation:</strong> Type "RESET" to confirm you want to
+                  permanently delete all progress.
                 </AlertDescription>
               </Alert>
               <Button
@@ -331,11 +327,7 @@ export function ResetProgressDialog({
               >
                 Back
               </Button>
-              <Button
-                variant="destructive"
-                onClick={handleReset}
-                disabled={isResetting}
-              >
+              <Button variant="destructive" onClick={handleReset} disabled={isResetting}>
                 {isResetting ? (
                   <>
                     <div className="mr-2 h-4 w-4 animate-spin rounded-full border-b-2 border-white" />

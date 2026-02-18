@@ -41,7 +41,7 @@
  * - Creating adjustment transactions if needed
  */
 
-import type { NormalizedMonthlyBudget, ParsedYNABData } from './ynab-parser';
+import type { NormalizedMonthlyBudget, ParsedYNABData } from "./ynab-parser";
 
 // ============================================================================
 // Types
@@ -116,16 +116,16 @@ export interface RolloverStats {
 export interface RolloverRecommendation {
   categoryId: string;
   categoryName: string;
-  recommendation: 'enable_rollover' | 'disable_rollover' | 'review_budget';
+  recommendation: "enable_rollover" | "disable_rollover" | "review_budget";
   reason: string;
   suggestedAction?: string;
 }
 
 export interface RolloverOptions {
   /** How to handle positive rollover */
-  positiveRollover: 'enable' | 'disable' | 'smart';
+  positiveRollover: "enable" | "disable" | "smart";
   /** How to handle negative rollover (overspent) */
-  negativeRollover: 'ignore' | 'create_adjustment' | 'warn';
+  negativeRollover: "ignore" | "create_adjustment" | "warn";
   /** Threshold for enabling rollover (% of budget) */
   rolloverThreshold?: number;
   /** Categories to always enable rollover */
@@ -141,16 +141,12 @@ export interface RolloverOptions {
 /**
  * Analyze YNAB data for rollover patterns
  */
-export function analyzeYNABRollovers(
-  data: ParsedYNABData
-): RolloverAnalysis {
+export function analyzeYNABRollovers(data: ParsedYNABData): RolloverAnalysis {
   const fidelityWarnings: string[] = [];
   const categories = new Map<string, CategoryRolloverTracker>();
 
   // Sort months chronologically
-  const sortedMonths = [...data.monthlyBudgets].sort((a, b) =>
-    a.month.localeCompare(b.month)
-  );
+  const sortedMonths = [...data.monthlyBudgets].sort((a, b) => a.month.localeCompare(b.month));
 
   // Track monthly summaries
   const monthlyRollovers: MonthlyRolloverSummary[] = [];
@@ -240,24 +236,18 @@ interface CategoryRolloverTracker {
   activityAmounts: number[];
 }
 
-function analyzeCategoryRollover(
-  tracker: CategoryRolloverTracker
-): CategoryRolloverInfo {
-  const {balances} = tracker;
+function analyzeCategoryRollover(tracker: CategoryRolloverTracker): CategoryRolloverInfo {
+  const { balances } = tracker;
 
   // Calculate metrics
   const positiveBalances = balances.filter((b) => b > 0);
   const negativeBalances = balances.filter((b) => b < 0);
 
   const avgRollover =
-    balances.length > 0
-      ? balances.reduce((a, b) => a + b, 0) / balances.length
-      : 0;
+    balances.length > 0 ? balances.reduce((a, b) => a + b, 0) / balances.length : 0;
 
-  const maxPositive =
-    positiveBalances.length > 0 ? Math.max(...positiveBalances) : 0;
-  const maxNegative =
-    negativeBalances.length > 0 ? Math.min(...negativeBalances) : 0;
+  const maxPositive = positiveBalances.length > 0 ? Math.max(...positiveBalances) : 0;
+  const maxNegative = negativeBalances.length > 0 ? Math.min(...negativeBalances) : 0;
 
   const finalBalance = balances.length > 0 ? balances[balances.length - 1] : 0;
 
@@ -310,7 +300,7 @@ function determineRolloverRecommendation(
   if (savingsPatterns.some((p) => p.test(fullName))) {
     return {
       recommend: true,
-      reason: 'Savings/goal category - rollover preserves progress',
+      reason: "Savings/goal category - rollover preserves progress",
     };
   }
 
@@ -328,7 +318,7 @@ function determineRolloverRecommendation(
   if (annualPatterns.some((p) => p.test(fullName))) {
     return {
       recommend: true,
-      reason: 'Annual/periodic expense - needs accumulation',
+      reason: "Annual/periodic expense - needs accumulation",
     };
   }
 
@@ -351,13 +341,11 @@ function determineRolloverRecommendation(
   // Default: spending category, no rollover
   return {
     recommend: false,
-    reason: 'Regular spending category - resets monthly',
+    reason: "Regular spending category - resets monthly",
   };
 }
 
-function generateRecommendations(
-  categories: CategoryRolloverInfo[]
-): RolloverRecommendation[] {
+function generateRecommendations(categories: CategoryRolloverInfo[]): RolloverRecommendation[] {
   const recommendations: RolloverRecommendation[] = [];
 
   for (const cat of categories) {
@@ -365,7 +353,7 @@ function generateRecommendations(
       recommendations.push({
         categoryId: cat.categoryId,
         categoryName: cat.categoryName,
-        recommendation: 'enable_rollover',
+        recommendation: "enable_rollover",
         reason: cat.rolloverReason,
         suggestedAction: `Enable rollover for "${cat.categoryName}"`,
       });
@@ -373,7 +361,7 @@ function generateRecommendations(
       recommendations.push({
         categoryId: cat.categoryId,
         categoryName: cat.categoryName,
-        recommendation: 'review_budget',
+        recommendation: "review_budget",
         reason: cat.rolloverReason,
         suggestedAction: `Consider increasing budget for "${cat.categoryName}" - frequently overspent`,
       });
@@ -398,21 +386,15 @@ function calculateRolloverStats(
   const savingsLike = categories.filter((c) => c.recommendRollover).length;
   const spending = categories.filter((c) => !c.recommendRollover).length;
   const problematic = categories.filter(
-    (c) =>
-      c.overspentMonths > 0 &&
-      c.overspentMonths > c.positiveRolloverMonths
+    (c) => c.overspentMonths > 0 && c.overspentMonths > c.positiveRolloverMonths
   ).length;
 
   const avgMonthlyRollover =
     monthlyRollovers.length > 0
-      ? monthlyRollovers.reduce((sum, m) => sum + m.netRollover, 0) /
-        monthlyRollovers.length
+      ? monthlyRollovers.reduce((sum, m) => sum + m.netRollover, 0) / monthlyRollovers.length
       : 0;
 
-  const finalTotal = categories.reduce(
-    (sum, c) => sum + c.finalBalance,
-    0
-  );
+  const finalTotal = categories.reduce((sum, c) => sum + c.finalBalance, 0);
 
   return {
     monthsAnalyzed: monthlyRollovers.length,
@@ -424,29 +406,20 @@ function calculateRolloverStats(
   };
 }
 
-function addFidelityWarnings(
-  warnings: string[],
-  stats: RolloverStats
-): void {
+function addFidelityWarnings(warnings: string[], stats: RolloverStats): void {
   warnings.push(
-    'YNAB Migration Fidelity Notice: The following features cannot be fully preserved:'
+    "YNAB Migration Fidelity Notice: The following features cannot be fully preserved:"
   );
 
   warnings.push(
     `1. Per-category available balances: YNAB tracks $${stats.finalTotalAvailable.toFixed(2)} in available balances that will be lost`
   );
 
-  warnings.push(
-    '2. Month-to-month rollover history: Only final balances are captured'
-  );
+  warnings.push("2. Month-to-month rollover history: Only final balances are captured");
 
-  warnings.push(
-    '3. Negative balance (overspent) tracking: Our app does not track category debt'
-  );
+  warnings.push("3. Negative balance (overspent) tracking: Our app does not track category debt");
 
-  warnings.push(
-    '4. Ready to Assign balance: Unallocated money is not tracked in our model'
-  );
+  warnings.push("4. Ready to Assign balance: Unallocated money is not tracked in our model");
 
   if (stats.problematicCategories > 0) {
     warnings.push(
@@ -455,7 +428,7 @@ function addFidelityWarnings(
   }
 
   warnings.push(
-    '\nRecommendation: Review the rollover recommendations and enable rollover for savings-type categories'
+    "\nRecommendation: Review the rollover recommendations and enable rollover for savings-type categories"
   );
 }
 
@@ -498,11 +471,11 @@ export function applyRolloverSettings(
     }
 
     // Apply smart logic
-    if (options.positiveRollover === 'enable') {
+    if (options.positiveRollover === "enable") {
       if (cat.averageRollover > 0) {
         categoriesToRollover.add(cat.categoryId);
       }
-    } else if (options.positiveRollover === 'smart') {
+    } else if (options.positiveRollover === "smart") {
       if (cat.recommendRollover) {
         categoriesToRollover.add(cat.categoryId);
       }
@@ -510,13 +483,13 @@ export function applyRolloverSettings(
 
     // Handle negative rollover (overspent)
     if (cat.finalBalance < 0) {
-      if (options.negativeRollover === 'create_adjustment') {
+      if (options.negativeRollover === "create_adjustment") {
         adjustments.push({
           categoryId: cat.categoryId,
           amount: Math.abs(cat.finalBalance),
           reason: `Adjustment for overspent balance from YNAB migration`,
         });
-      } else if (options.negativeRollover === 'warn') {
+      } else if (options.negativeRollover === "warn") {
         warnings.push(
           `Category "${cat.categoryName}" has overspent balance of $${Math.abs(cat.finalBalance).toFixed(2)}`
         );
@@ -538,9 +511,7 @@ export function applyRolloverSettings(
 /**
  * Quick rollover analysis with default options
  */
-export function quickRolloverAnalysis(
-  data: ParsedYNABData
-): {
+export function quickRolloverAnalysis(data: ParsedYNABData): {
   savingsCategories: string[];
   spendingCategories: string[];
   needsReview: string[];

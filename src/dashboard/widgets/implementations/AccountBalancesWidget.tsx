@@ -24,50 +24,41 @@ export function AccountBalancesWidget({ config }: AccountBalancesWidgetProps) {
 
   // Fetch accounts from Dexie
   const accounts = useLiveQuery(() => db.accounts.toArray()) || [];
-  
+
   // Fetch all transactions to calculate current balances
-  const transactions = useLiveQuery(async () => {
-    const allTxs = await db.transactions.toArray();
-    return allTxs.filter((tx) => !tx.isSplit);
-  }) || [];
+  const transactions =
+    useLiveQuery(async () => {
+      const allTxs = await db.transactions.toArray();
+      return allTxs.filter((tx) => !tx.isSplit);
+    }) || [];
 
   // Calculate current balance for each account
   // Current Balance = Starting Balance (account.balance) + Net Transactions
   const accountsWithCurrentBalance = useMemo<AccountWithCurrentBalance[]>(() => {
     // Get all account IDs
     const accountIds = new Set(accounts.map((a) => a.id));
-    
+
     // Find transactions that don't belong to any existing account
-    const unassignedTransactions = transactions.filter(
-      (tx) => !accountIds.has(tx.accountId)
-    );
-    const unassignedTotal = unassignedTransactions.reduce(
-      (sum, tx) => sum + tx.amount,
-      0
-    );
-    
+    const unassignedTransactions = transactions.filter((tx) => !accountIds.has(tx.accountId));
+    const unassignedTotal = unassignedTransactions.reduce((sum, tx) => sum + tx.amount, 0);
+
     // If there's only one account and there are unassigned transactions,
     // add them to that account (common case: user imports, then creates account)
     const shouldAddUnassignedToFirst = accounts.length === 1 && unassignedTransactions.length > 0;
-    
+
     return accounts.map((account, index) => {
       // Sum all transactions for this account
-      const accountTransactions = transactions.filter(
-        (tx) => tx.accountId === account.id
-      );
-      let transactionTotal = accountTransactions.reduce(
-        (sum, tx) => sum + tx.amount,
-        0
-      );
-      
+      const accountTransactions = transactions.filter((tx) => tx.accountId === account.id);
+      let transactionTotal = accountTransactions.reduce((sum, tx) => sum + tx.amount, 0);
+
       // Add unassigned transactions to the first (or only) account
       if (shouldAddUnassignedToFirst && index === 0) {
         transactionTotal += unassignedTotal;
       }
-      
+
       // Current balance = starting balance + transaction total
       const currentBalance = account.balance + transactionTotal;
-      
+
       return {
         ...account,
         currentBalance,
@@ -81,23 +72,25 @@ export function AccountBalancesWidget({ config }: AccountBalancesWidgetProps) {
     if (accountsWithCurrentBalance.length > 0) {
       return accountsWithCurrentBalance;
     }
-    
+
     // No accounts but have transactions - show transaction totals
     if (transactions.length > 0) {
       const transactionTotal = transactions.reduce((sum, tx) => sum + tx.amount, 0);
-      return [{
-        id: 'virtual-default',
-        name: 'All Transactions',
-        type: 'checking' as const,
-        institution: 'Imported',
-        balance: 0,
-        currentBalance: transactionTotal,
-        currency: 'CAD',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }];
+      return [
+        {
+          id: "virtual-default",
+          name: "All Transactions",
+          type: "checking" as const,
+          institution: "Imported",
+          balance: 0,
+          currentBalance: transactionTotal,
+          currency: "CAD",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ];
     }
-    
+
     return [];
   }, [accountsWithCurrentBalance, transactions]);
 

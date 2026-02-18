@@ -18,10 +18,10 @@
  * - Rollback on failure
  */
 
-import { createClient } from '@supabase/supabase-js';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as glob from 'glob';
+import { createClient } from "@supabase/supabase-js";
+import * as fs from "fs";
+import * as path from "path";
+import * as glob from "glob";
 
 // ==================== TYPES ====================
 
@@ -54,7 +54,7 @@ function getSupabaseClient() {
 
   if (!supabaseUrl || !supabaseServiceKey) {
     throw new Error(
-      'Missing environment variables: NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY required'
+      "Missing environment variables: NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY required"
     );
   }
 
@@ -74,7 +74,7 @@ async function loadFlashcardsFromFile(filePath: string): Promise<Flashcard[]> {
   const flashcards = module.generatedFlashcards || module.default;
 
   if (!Array.isArray(flashcards)) {
-    throw new Error('File does not export a valid flashcards array');
+    throw new Error("File does not export a valid flashcards array");
   }
 
   console.log(`   Found ${flashcards.length} flashcards`);
@@ -88,22 +88,22 @@ function validateFlashcard(flashcard: Flashcard, index: number): string[] {
   const errors: string[] = [];
 
   if (!flashcard.front || flashcard.front.trim().length < 10) {
-    errors.push('Front text is missing or too short');
+    errors.push("Front text is missing or too short");
   }
   if (!flashcard.back || flashcard.back.trim().length < 10) {
-    errors.push('Back text is missing or too short');
+    errors.push("Back text is missing or too short");
   }
   if (!flashcard.domain) {
-    errors.push('Domain is required');
+    errors.push("Domain is required");
   }
   if (!flashcard.category) {
-    errors.push('Category is required');
+    errors.push("Category is required");
   }
   if (!flashcard.difficulty) {
-    errors.push('Difficulty is required');
+    errors.push("Difficulty is required");
   }
   if (!flashcard.tags || flashcard.tags.length < 2) {
-    errors.push('Must have at least 2 tags');
+    errors.push("Must have at least 2 tags");
   }
 
   return errors;
@@ -112,10 +112,7 @@ function validateFlashcard(flashcard: Flashcard, index: number): string[] {
 /**
  * Import flashcards to database
  */
-async function importFlashcards(
-  supabase: any,
-  flashcards: Flashcard[]
-): Promise<ImportResult> {
+async function importFlashcards(supabase: any, flashcards: Flashcard[]): Promise<ImportResult> {
   const result: ImportResult = {
     success: false,
     totalItems: flashcards.length,
@@ -128,13 +125,13 @@ async function importFlashcards(
   console.log(`\n🚀 Starting import of ${flashcards.length} flashcards...`);
 
   // Validate all flashcards first
-  console.log('   Validating flashcards...');
+  console.log("   Validating flashcards...");
   for (let i = 0; i < flashcards.length; i++) {
     const errors = validateFlashcard(flashcards[i], i);
     if (errors.length > 0) {
       result.errors.push({
         index: i,
-        error: `Validation failed: ${errors.join(', ')}`,
+        error: `Validation failed: ${errors.join(", ")}`,
       });
       result.failedItems++;
     }
@@ -161,7 +158,7 @@ async function importFlashcards(
     console.log(`   Batch ${batchNumber}/${totalBatches} (${batch.length} flashcards)...`);
 
     const { data, error } = await supabase
-      .from('flashcard_library')
+      .from("flashcard_library")
       .insert(
         batch.map((f) => ({
           front: f.front,
@@ -178,7 +175,7 @@ async function importFlashcards(
           average_ease_factor: 2.5,
         }))
       )
-      .select('id');
+      .select("id");
 
     if (error) {
       console.error(`   ❌ Batch ${batchNumber} failed:`, error.message);
@@ -204,14 +201,10 @@ async function importFlashcards(
 /**
  * Log import to content_import_logs table
  */
-async function logImport(
-  supabase: any,
-  result: ImportResult,
-  sourceFile: string
-): Promise<void> {
-  await supabase.from('content_import_logs').insert({
-    content_type: 'flashcards',
-    import_method: 'bulk_api',
+async function logImport(supabase: any, result: ImportResult, sourceFile: string): Promise<void> {
+  await supabase.from("content_import_logs").insert({
+    content_type: "flashcards",
+    import_method: "bulk_api",
     source_file: sourceFile,
     source_description: `Bulk import from ${path.basename(sourceFile)}`,
     total_items: result.totalItems,
@@ -221,27 +214,29 @@ async function logImport(
     error_log: result.errors.length > 0 ? { errors: result.errors } : null,
   });
 
-  console.log('📋 Import logged to content_import_logs');
+  console.log("📋 Import logged to content_import_logs");
 }
 
 /**
  * Print import summary
  */
 function printSummary(result: ImportResult): void {
-  console.log('\n' + '='.repeat(60));
-  console.log('📊 Import Summary');
-  console.log('='.repeat(60));
+  console.log("\n" + "=".repeat(60));
+  console.log("📊 Import Summary");
+  console.log("=".repeat(60));
   console.log(`Total flashcards:    ${result.totalItems}`);
   console.log(`Successful imports:  ${result.successfulItems} ✅`);
   console.log(`Failed imports:      ${result.failedItems} ❌`);
-  console.log(`Success rate:        ${((result.successfulItems / result.totalItems) * 100).toFixed(1)}%`);
-  console.log('='.repeat(60));
+  console.log(
+    `Success rate:        ${((result.successfulItems / result.totalItems) * 100).toFixed(1)}%`
+  );
+  console.log("=".repeat(60));
 
   if (result.success) {
-    console.log('\n✅ Import completed successfully!');
+    console.log("\n✅ Import completed successfully!");
   } else {
-    console.log('\n❌ Import completed with errors');
-    console.log('\nErrors:');
+    console.log("\n❌ Import completed with errors");
+    console.log("\nErrors:");
     result.errors.slice(0, 10).forEach((err, idx) => {
       console.log(`  ${idx + 1}. Index ${err.index}: ${err.error}`);
     });
@@ -257,13 +252,15 @@ async function main() {
   const args = process.argv.slice(2);
 
   if (args.length === 0) {
-    console.error('❌ Error: No file path provided');
-    console.error('\nUsage:');
-    console.error('  npx tsx scripts/bulk-import-flashcards.ts <file-path>');
-    console.error('  npx tsx scripts/bulk-import-flashcards.ts --all');
-    console.error('\nExamples:');
-    console.error('  npx tsx scripts/bulk-import-flashcards.ts src/data/generated/generated-flashcards-asking_questions-medium-2025-10-10.ts');
-    console.error('  npx tsx scripts/bulk-import-flashcards.ts --all');
+    console.error("❌ Error: No file path provided");
+    console.error("\nUsage:");
+    console.error("  npx tsx scripts/bulk-import-flashcards.ts <file-path>");
+    console.error("  npx tsx scripts/bulk-import-flashcards.ts --all");
+    console.error("\nExamples:");
+    console.error(
+      "  npx tsx scripts/bulk-import-flashcards.ts src/data/generated/generated-flashcards-asking_questions-medium-2025-10-10.ts"
+    );
+    console.error("  npx tsx scripts/bulk-import-flashcards.ts --all");
     process.exit(1);
   }
 
@@ -274,14 +271,14 @@ async function main() {
     let filePaths: string[] = [];
 
     // Handle --all flag
-    if (args[0] === '--all') {
-      console.log('🔍 Finding all generated flashcard files...');
-      const generatedDir = path.join(__dirname, '..', 'src', 'data', 'generated');
-      const pattern = path.join(generatedDir, 'generated-flashcards-*.ts');
+    if (args[0] === "--all") {
+      console.log("🔍 Finding all generated flashcard files...");
+      const generatedDir = path.join(__dirname, "..", "src", "data", "generated");
+      const pattern = path.join(generatedDir, "generated-flashcards-*.ts");
       filePaths = glob.sync(pattern);
 
       if (filePaths.length === 0) {
-        console.error('❌ No generated flashcard files found');
+        console.error("❌ No generated flashcard files found");
         console.error(`   Looking in: ${generatedDir}`);
         process.exit(1);
       }
@@ -297,9 +294,9 @@ async function main() {
     let totalFailed = 0;
 
     for (const filePath of filePaths) {
-      console.log('\n' + '='.repeat(60));
+      console.log("\n" + "=".repeat(60));
       console.log(`Processing: ${path.basename(filePath)}`);
-      console.log('='.repeat(60));
+      console.log("=".repeat(60));
 
       // Load flashcards
       const flashcards = await loadFlashcardsFromFile(filePath);
@@ -320,18 +317,18 @@ async function main() {
 
     // Overall summary for multiple files
     if (filePaths.length > 1) {
-      console.log('\n' + '='.repeat(60));
-      console.log('📊 Overall Summary');
-      console.log('='.repeat(60));
+      console.log("\n" + "=".repeat(60));
+      console.log("📊 Overall Summary");
+      console.log("=".repeat(60));
       console.log(`Files processed:     ${filePaths.length}`);
       console.log(`Total imported:      ${totalSuccess} ✅`);
       console.log(`Total failed:        ${totalFailed} ❌`);
-      console.log('='.repeat(60));
+      console.log("=".repeat(60));
     }
 
-    console.log('\n🎉 All imports completed!');
+    console.log("\n🎉 All imports completed!");
   } catch (error) {
-    console.error('\n❌ Fatal error:', error);
+    console.error("\n❌ Fatal error:", error);
     process.exit(1);
   }
 }

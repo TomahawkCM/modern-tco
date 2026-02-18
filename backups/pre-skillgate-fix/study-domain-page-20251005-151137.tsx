@@ -30,7 +30,8 @@ import MicrolearningProgress from "@/components/study/MicrolearningProgress";
 const DOMAIN_CONFIG = {
   "platform-foundation": {
     title: "Tanium Platform Foundation",
-    description: "Complete foundation for zero-knowledge students - understand architecture, terminology, and console basics",
+    description:
+      "Complete foundation for zero-knowledge students - understand architecture, terminology, and console basics",
     icon: "🏗️",
     difficulty: "Beginner",
     estimatedTime: "180 min",
@@ -90,7 +91,7 @@ export default function StudyDomainPage() {
   const [useDatabase, setUseDatabase] = useState(true);
   const [module, setModule] = useState<any>(null);
 
-  const raw = (params?.domain ?? "");
+  const raw = params?.domain ?? "";
   const domainSlug = Array.isArray(raw) ? raw[0] : raw;
   const domainConfig = domainSlug ? DOMAIN_CONFIG[domainSlug as DomainKey] : null;
 
@@ -154,56 +155,52 @@ export default function StudyDomainPage() {
 
   if (isLoading) {
     return (
-      
-        <div className="flex min-h-[60vh] items-center justify-center">
-          <Card className="glass border-white/10 p-8">
-            <div className="space-y-4 text-center">
-              <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-tanium-accent"></div>
-              <p className="text-white">Loading study content...</p>
-            </div>
-          </Card>
-        </div>
-      
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <Card className="glass border-white/10 p-8">
+          <div className="space-y-4 text-center">
+            <div className="border-tanium-accent mx-auto h-12 w-12 animate-spin rounded-full border-b-2"></div>
+            <p className="text-white">Loading study content...</p>
+          </div>
+        </Card>
+      </div>
     );
   }
 
   if (error || !domainConfig) {
     return (
-      
-        <div className="mx-auto max-w-4xl space-y-6">
-          <div className="flex items-center gap-4">
-            <Button
-              variant="outline"
-              onClick={() => router.push("/study")}
-              className="border-white/20 text-white hover:bg-white/10"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Study
-            </Button>
-          </div>
-
-          <Alert className="border-red-500 bg-red-900/20">
-            <AlertCircle className="h-4 w-4 text-red-400" />
-            <AlertDescription className="text-red-200">
-              <strong>Domain Not Found:</strong> The requested study domain "{domainSlug}" doesn't
-              exist.
-            </AlertDescription>
-          </Alert>
-
-          <div className="text-center">
-            <h1 className="mb-4 text-2xl font-bold text-white">Study Domain Not Found</h1>
-            <p className="mb-6 text-gray-300">
-              The domain you're looking for doesn't exist or may have been moved.
-            </p>
-            <Button
-              onClick={() => router.push("/study")}
-              className="bg-tanium-accent hover:bg-blue-600"
-            >
-              Browse Available Domains
-            </Button>
-          </div>
+      <div className="mx-auto max-w-4xl space-y-6">
+        <div className="flex items-center gap-4">
+          <Button
+            variant="outline"
+            onClick={() => router.push("/study")}
+            className="border-white/20 text-white hover:bg-white/10"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Study
+          </Button>
         </div>
-      
+
+        <Alert className="border-red-500 bg-red-900/20">
+          <AlertCircle className="h-4 w-4 text-red-400" />
+          <AlertDescription className="text-red-200">
+            <strong>Domain Not Found:</strong> The requested study domain "{domainSlug}" doesn't
+            exist.
+          </AlertDescription>
+        </Alert>
+
+        <div className="text-center">
+          <h1 className="mb-4 text-2xl font-bold text-white">Study Domain Not Found</h1>
+          <p className="mb-6 text-gray-300">
+            The domain you're looking for doesn't exist or may have been moved.
+          </p>
+          <Button
+            onClick={() => router.push("/study")}
+            className="bg-tanium-accent hover:bg-blue-600"
+          >
+            Browse Available Domains
+          </Button>
+        </div>
+      </div>
     );
   }
 
@@ -211,15 +208,15 @@ export default function StudyDomainPage() {
   if (useDatabase && module) {
     // Map domain slug to TCODomain enum
     const domainMapping: Record<string, any> = {
-      'platform-foundation': 'PLATFORM_FOUNDATION',
-      'asking-questions': 'ASKING_QUESTIONS',
-      'refining-questions-targeting': 'REFINING_QUESTIONS',
-      'refining-questions': 'REFINING_QUESTIONS',
-      'taking-action': 'TAKING_ACTION',
-      'navigation-modules': 'NAVIGATION_MODULES',
-      'navigation-and-basic-module-functions': 'NAVIGATION_MODULES',
-      'reporting-export': 'REPORTING_EXPORT',
-      'report-generation-and-data-export': 'REPORTING_EXPORT',
+      "platform-foundation": "PLATFORM_FOUNDATION",
+      "asking-questions": "ASKING_QUESTIONS",
+      "refining-questions-targeting": "REFINING_QUESTIONS",
+      "refining-questions": "REFINING_QUESTIONS",
+      "taking-action": "TAKING_ACTION",
+      "navigation-modules": "NAVIGATION_MODULES",
+      "navigation-and-basic-module-functions": "NAVIGATION_MODULES",
+      "reporting-export": "REPORTING_EXPORT",
+      "report-generation-and-data-export": "REPORTING_EXPORT",
     };
 
     return (
@@ -251,7 +248,7 @@ export default function StudyDomainPage() {
   const objectives = mdxMetadata?.objectives ?? [
     "Master natural language query construction and sensor library usage",
     "Learn saved question management and result interpretation techniques",
-    "Understand query optimization and performance best practices"
+    "Understand query optimization and performance best practices",
   ];
 
   const estimatedTimeMinutes = domainConfig?.estimatedTime
@@ -268,8 +265,7 @@ export default function StudyDomainPage() {
       objectives={objectives}
       prerequisites={[]}
     >
-      <div className="space-y-6 max-w-full">
-
+      <div className="max-w-full space-y-6">
         {/* Microlearning Progress Tracker - Top Banner */}
         {mdxMetadata?.id && (
           <MicrolearningProgress
@@ -281,40 +277,44 @@ export default function StudyDomainPage() {
 
         {/* Study Content Viewer - Full Width */}
         <Card className="glass-card border-archon-border-bright/30">
-          <CardHeader className="border-b border-archon-border/30">
-            <CardTitle className="flex items-center gap-3 text-archon-text-primary">
-              <div className="p-2 bg-archon-cyan-primary/20 rounded-lg">
-                <BookOpen className="h-5 w-5 text-archon-cyan-bright" />
+          <CardHeader className="border-archon-border/30 border-b">
+            <CardTitle className="text-archon-text-primary flex items-center gap-3">
+              <div className="bg-archon-cyan-primary/20 rounded-lg p-2">
+                <BookOpen className="text-archon-cyan-bright h-5 w-5" />
               </div>
               <span className="archon-text-glow">Study Content</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="pt-6">
-            <div className="space-y-6 max-w-none">
+            <div className="max-w-none space-y-6">
               {/* MDX Content Rendering - Full Width with Archon Theme */}
               {mdxModule ? (
-                <div className="rounded-lg border border-archon-border/50 bg-archon-bg-panel/50 p-6 backdrop-blur-sm">
+                <div className="border-archon-border/50 bg-archon-bg-panel/50 rounded-lg border p-6 backdrop-blur-sm">
                   <MDXWrapper>
-                    <Suspense fallback={
-                      <div className="text-archon-text-primary flex items-center gap-2">
-                        <div className="h-4 w-4 animate-spin rounded-full border-2 border-archon-cyan-bright border-t-transparent"></div>
-                        Loading content...
-                      </div>
-                    }>
+                    <Suspense
+                      fallback={
+                        <div className="text-archon-text-primary flex items-center gap-2">
+                          <div className="border-archon-cyan-bright h-4 w-4 animate-spin rounded-full border-2 border-t-transparent"></div>
+                          Loading content...
+                        </div>
+                      }
+                    >
                       <mdxModule.default />
                     </Suspense>
                   </MDXWrapper>
                 </div>
               ) : (
-                <div className="rounded-lg border border-archon-cyan-primary/30 bg-archon-cyan-primary/10 p-4">
-                  <div className="mb-2 flex items-center gap-2 text-archon-cyan-bright">
+                <div className="border-archon-cyan-primary/30 bg-archon-cyan-primary/10 rounded-lg border p-4">
+                  <div className="text-archon-cyan-bright mb-2 flex items-center gap-2">
                     <BookOpen className="h-4 w-4" />
                     <span className="font-medium">Study Content Loading</span>
                   </div>
-                  <p className="text-sm text-archon-text-secondary">
+                  <p className="text-archon-text-secondary text-sm">
                     {domainConfig.title} (
                     {domainConfig?.estimatedTime
-                      ? Math.round((parseInt(domainConfig.estimatedTime.split(" ")[0]) || 45) * 0.22 * 100) / 100
+                      ? Math.round(
+                          (parseInt(domainConfig.estimatedTime.split(" ")[0]) || 45) * 0.22 * 100
+                        ) / 100
                       : 10}
                     % exam weight) - {domainConfig.description}
                   </p>
@@ -331,7 +331,7 @@ export default function StudyDomainPage() {
               <div className="flex gap-4">
                 <Button
                   onClick={() => router.push(domainConfig.practiceRoute)}
-                  className="glass-button bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white border-green-400/30"
+                  className="glass-button border-green-400/30 bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-500 hover:to-emerald-500"
                 >
                   <Target className="mr-2 h-4 w-4" />
                   Start Practice Questions
@@ -344,9 +344,9 @@ export default function StudyDomainPage() {
 
         {/* Next Steps */}
         <Card className="glass-card border-archon-border-bright/30">
-          <CardHeader className="border-b border-archon-border/30">
-            <CardTitle className="flex items-center gap-3 text-archon-text-primary">
-              <div className="p-2 bg-green-500/20 rounded-lg">
+          <CardHeader className="border-archon-border/30 border-b">
+            <CardTitle className="text-archon-text-primary flex items-center gap-3">
+              <div className="rounded-lg bg-green-500/20 p-2">
                 <CheckCircle className="h-5 w-5 text-green-400" />
               </div>
               <span>Ready for Practice?</span>
@@ -362,7 +362,7 @@ export default function StudyDomainPage() {
               <div className="flex flex-wrap gap-4">
                 <Button
                   onClick={() => router.push(domainConfig.practiceRoute)}
-                  className="glass-button bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-500 hover:to-emerald-500 text-white border-green-400/30"
+                  className="glass-button border-green-400/30 bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-500 hover:to-emerald-500"
                 >
                   <Target className="mr-2 h-4 w-4" />
                   Practice Questions
@@ -384,13 +384,14 @@ export default function StudyDomainPage() {
 
         {/* Study Tips for this Domain */}
         <Alert className="border-archon-cyan-primary/30 bg-archon-cyan-primary/10 backdrop-blur-sm">
-          <div className="p-1.5 bg-archon-cyan-primary/20 rounded-md inline-block">
-            <BookOpen className="h-4 w-4 text-archon-cyan-bright" />
+          <div className="bg-archon-cyan-primary/20 inline-block rounded-md p-1.5">
+            <BookOpen className="text-archon-cyan-bright h-4 w-4" />
           </div>
           <AlertDescription className="text-archon-text-secondary mt-2">
-            <strong className="text-archon-cyan-bright">Study Tip:</strong> Take your time with each section and use the bookmark
-            feature to save important concepts you want to review later. The practice questions will
-            test your understanding of the key points covered in this module.
+            <strong className="text-archon-cyan-bright">Study Tip:</strong> Take your time with each
+            section and use the bookmark feature to save important concepts you want to review
+            later. The practice questions will test your understanding of the key points covered in
+            this module.
           </AlertDescription>
         </Alert>
       </div>

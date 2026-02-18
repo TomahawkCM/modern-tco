@@ -26,13 +26,14 @@ export default function ExamSimulator() {
   const [timeRemaining, setTimeRemaining] = useState<number>(0);
   const questionStartRef = useRef<number | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const storageKey = user?.id && currentSession?.id ? `tco-exam-answers:${user.id}:${currentSession.id}` : null;
+  const storageKey =
+    user?.id && currentSession?.id ? `tco-exam-answers:${user.id}:${currentSession.id}` : null;
 
   const handleStart = async (m: ExamModeSim) => {
     setMode(m);
     const config = buildExamConfig(m, {});
     await startAssessment(config);
-    };
+  };
 
   // Timer management: initialize on session start
   useEffect(() => {
@@ -60,11 +61,11 @@ export default function ExamSimulator() {
       if (!raw) return;
       const parsed = JSON.parse(raw) as { answers?: Record<string, string>; index?: number };
       if (parsed.answers) setAnswers(parsed.answers);
-      if (typeof parsed.index === "number") setIndex(Math.max(0, Math.min((currentSession?.questions?.length ?? 1) - 1, parsed.index)));
+      if (typeof parsed.index === "number")
+        setIndex(Math.max(0, Math.min((currentSession?.questions?.length ?? 1) - 1, parsed.index)));
     } catch (error) {
       // ignore
     }
-     
   }, [storageKey]);
 
   // Set question start timer on index change
@@ -91,10 +92,12 @@ export default function ExamSimulator() {
     } catch (error) {
       // ignore storage errors
     }
-     
   }, [index, currentSession?.id]);
 
-  const question = useMemo(() => currentSession?.questions?.[index], [currentSession?.questions, index]);
+  const question = useMemo(
+    () => currentSession?.questions?.[index],
+    [currentSession?.questions, index]
+  );
   const isLast = useMemo(() => {
     const len = currentSession?.questions?.length ?? 0;
     return len > 0 && index === len - 1;
@@ -152,19 +155,27 @@ export default function ExamSimulator() {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <Button disabled={isLoading} onClick={() => handleStart("practice-test")}>Start Practice Test</Button>
+        <Button disabled={isLoading} onClick={() => handleStart("practice-test")}>
+          Start Practice Test
+        </Button>
         <Button variant="secondary" disabled={isLoading} onClick={() => handleStart("mock-exam")}>
           Start Mock Exam
         </Button>
       </div>
 
       {currentSession ? (
-        <div data-testid="exam-session" className="rounded border p-4 space-y-4">
+        <div data-testid="exam-session" className="space-y-4 rounded border p-4">
           <div className="flex items-center justify-between text-sm text-slate-600 dark:text-muted-foreground">
-            <span>Session: {currentSession.id} · Type: {mode}</span>
-            <span aria-live="polite" aria-label="Time remaining">⏱ {formatTime(timeRemaining)}</span>
+            <span>
+              Session: {currentSession.id} · Type: {mode}
+            </span>
+            <span aria-live="polite" aria-label="Time remaining">
+              ⏱ {formatTime(timeRemaining)}
+            </span>
           </div>
-          <div className="font-medium">Question {index + 1} of {currentSession.questions.length}</div>
+          <div className="font-medium">
+            Question {index + 1} of {currentSession.questions.length}
+          </div>
 
           {question ? (
             <div>
@@ -175,8 +186,14 @@ export default function ExamSimulator() {
                   size="sm"
                   onClick={async () => {
                     const text = `Q: ${question.question}\nAnswer: ${question.choices?.find((c) => c.id === question.correctAnswerId)?.text ?? ""}${question.explanation ? `\nWhy: ${question.explanation}` : ""}`;
-                    await saveQuickNote(text, { tags: ["exam", question.domain, question.difficulty], user });
-                    toast({ title: "Added to Notes", description: "View it under Notes for spaced review." });
+                    await saveQuickNote(text, {
+                      tags: ["exam", question.domain, question.difficulty],
+                      user,
+                    });
+                    toast({
+                      title: "Added to Notes",
+                      description: "View it under Notes for spaced review.",
+                    });
                   }}
                 >
                   Add to Notes
@@ -184,7 +201,7 @@ export default function ExamSimulator() {
               </div>
               <div className="space-y-2">
                 {question.choices?.map((c) => (
-                  <label key={c.id} className="flex items-center gap-2 cursor-pointer">
+                  <label key={c.id} className="flex cursor-pointer items-center gap-2">
                     <input
                       type="radio"
                       name={`q-${question.id}`}
@@ -201,7 +218,7 @@ export default function ExamSimulator() {
 
               {/* Mini-map navigation */}
               <div className="mt-4">
-                <div className="text-xs text-muted-foreground mb-1">Jump to question</div>
+                <div className="mb-1 text-xs text-muted-foreground">Jump to question</div>
                 <div className="flex flex-wrap gap-2" data-testid="mini-map">
                   {currentSession.questions.map((q, i) => {
                     const sel = answers[q.id];
@@ -211,9 +228,15 @@ export default function ExamSimulator() {
                     if (isCurrent) cls += " bg-blue-600 text-foreground";
                     else if (completed) {
                       const correct = sel && sel === q.correctAnswerId;
-                      cls += correct ? " bg-[#22c55e] text-foreground" : sel ? " bg-red-600 text-foreground" : " bg-slate-200 dark:bg-slate-700";
+                      cls += correct
+                        ? " bg-[#22c55e] text-foreground"
+                        : sel
+                          ? " bg-red-600 text-foreground"
+                          : " bg-slate-200 dark:bg-slate-700";
                     } else {
-                      cls += sel ? " bg-blue-100 dark:bg-blue-900 text-blue-700" : " bg-slate-200 dark:bg-slate-700";
+                      cls += sel
+                        ? " bg-blue-100 dark:bg-blue-900 text-blue-700"
+                        : " bg-slate-200 dark:bg-slate-700";
                     }
                     return (
                       <button
@@ -234,7 +257,7 @@ export default function ExamSimulator() {
             </div>
           ) : null}
 
-          <div className="flex items-center justify-between mt-4">
+          <div className="mt-4 flex items-center justify-between">
             <Button
               variant="outline"
               onClick={() => setIndex((v) => Math.max(0, v - 1))}
@@ -244,15 +267,23 @@ export default function ExamSimulator() {
             </Button>
             <div className="flex items-center gap-2">
               {!isLast && (
-                <Button onClick={() => setIndex((v) => Math.min((currentSession?.questions?.length ?? 1) - 1, v + 1))}>
+                <Button
+                  onClick={() =>
+                    setIndex((v) => Math.min((currentSession?.questions?.length ?? 1) - 1, v + 1))
+                  }
+                >
                   Next
                 </Button>
               )}
               {isLast && (
-                <Button onClick={async () => {
-                  await submitAssessment();
-                  try { if (storageKey) localStorage.removeItem(storageKey); } catch {}
-                }}>
+                <Button
+                  onClick={async () => {
+                    await submitAssessment();
+                    try {
+                      if (storageKey) localStorage.removeItem(storageKey);
+                    } catch {}
+                  }}
+                >
                   Submit Exam
                 </Button>
               )}
@@ -262,8 +293,8 @@ export default function ExamSimulator() {
       ) : null}
 
       {/* Review Panel */}
-      {currentSession && (currentSession as any).status === 'completed' ? (
-        <div className="rounded border p-4 space-y-3" data-testid="review-panel">
+      {currentSession && (currentSession as any).status === "completed" ? (
+        <div className="space-y-3 rounded border p-4" data-testid="review-panel">
           <div className="flex items-center justify-between">
             <div className="font-semibold">Exam Review</div>
             <div className="flex items-center gap-2">
@@ -275,7 +306,9 @@ export default function ExamSimulator() {
                   setIndex(0);
                   setAnswers({});
                   setTimeRemaining(0);
-                  try { if (storageKey) localStorage.removeItem(storageKey); } catch {}
+                  try {
+                    if (storageKey) localStorage.removeItem(storageKey);
+                  } catch {}
                 }}
               >
                 Back to start
@@ -300,13 +333,20 @@ export default function ExamSimulator() {
               const selected = answers[q.id];
               const correct = q.correctAnswerId;
               const isCorrect = selected === correct;
-              const getText = (id?: string) => q.choices.find((c) => c.id === id)?.text ?? '';
+              const getText = (id?: string) => q.choices.find((c) => c.id === id)?.text ?? "";
               return (
-                <div key={q.id} className="border rounded p-3" data-testid="review-item">
+                <div key={q.id} className="rounded border p-3" data-testid="review-item">
                   <div className="mb-2">{q.question}</div>
-                  <div className="text-sm">Your answer: <span className={isCorrect ? 'text-[#22c55e]' : 'text-red-600'}>{getText(selected)}</span></div>
+                  <div className="text-sm">
+                    Your answer:{" "}
+                    <span className={isCorrect ? "text-[#22c55e]" : "text-red-600"}>
+                      {getText(selected)}
+                    </span>
+                  </div>
                   {!isCorrect && (
-                    <div className="text-sm">Correct answer: <span className="text-[#22c55e]">{getText(correct)}</span></div>
+                    <div className="text-sm">
+                      Correct answer: <span className="text-[#22c55e]">{getText(correct)}</span>
+                    </div>
                   )}
                 </div>
               );
@@ -320,28 +360,34 @@ export default function ExamSimulator() {
 
 function ReviewSummary({ result }: { result: any | null }) {
   if (!result) return null;
-  const percent = typeof result.overallScore === 'number' ? Math.round(result.overallScore * 100) : null;
+  const percent =
+    typeof result.overallScore === "number" ? Math.round(result.overallScore * 100) : null;
   const time = (result.timeSpent ?? result.totalTime ?? 0) as number;
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
   return (
-    <div className="rounded bg-slate-50 dark:bg-card border p-3 text-sm">
-      <div>Score: {percent !== null ? `${percent}%` : '—'} · Passed: {String(result.passed)}</div>
+    <div className="rounded border bg-slate-50 p-3 text-sm dark:bg-card">
       <div>
-        Questions: {result.correctAnswers ?? 0} correct / {result.incorrectAnswers ?? 0} incorrect of {result.totalQuestions ?? 0}
+        Score: {percent !== null ? `${percent}%` : "—"} · Passed: {String(result.passed)}
       </div>
-      <div>Time Spent: {minutes}:{seconds.toString().padStart(2, '0')}</div>
+      <div>
+        Questions: {result.correctAnswers ?? 0} correct / {result.incorrectAnswers ?? 0} incorrect
+        of {result.totalQuestions ?? 0}
+      </div>
+      <div>
+        Time Spent: {minutes}:{seconds.toString().padStart(2, "0")}
+      </div>
       {result.domainBreakdown ? (
         <div className="mt-2">
           <div className="font-medium">Domain Breakdown</div>
-          <ul className="mt-1 grid grid-cols-1 sm:grid-cols-2 gap-1">
+          <ul className="mt-1 grid grid-cols-1 gap-1 sm:grid-cols-2">
             {Object.entries(result.domainBreakdown as Record<string, any>).map(([domain, d]) => {
-              const pct = typeof d.score === 'number' ? Math.round(d.score * 100) : d.score;
+              const pct = typeof d.score === "number" ? Math.round(d.score * 100) : d.score;
               return (
                 <li key={domain} className="flex justify-between">
                   <span>{domain}</span>
                   <span>
-                    {(d.correct ?? 0)}/{(d.total ?? 0)} · {pct}%
+                    {d.correct ?? 0}/{d.total ?? 0} · {pct}%
                   </span>
                 </li>
               );

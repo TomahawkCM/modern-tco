@@ -9,6 +9,7 @@ The Budget App supports both **Standalone** and **Online** deployment modes. Thi
 ### Standalone Mode (Current)
 
 The standalone version runs entirely locally in your browser:
+
 - **No account required** - Start using immediately
 - **100% local storage** - Data never leaves your device
 - **Offline capable** - Works without internet connection
@@ -17,6 +18,7 @@ The standalone version runs entirely locally in your browser:
 ### Online Mode (Coming Soon)
 
 The online version adds cloud-powered features:
+
 - **Cloud sync** - Access data from any device
 - **Family sharing** - Invite family members via email
 - **Automatic backups** - Daily encrypted backups
@@ -26,41 +28,41 @@ The online version adds cloud-powered features:
 
 ## Feature Comparison Matrix
 
-| Feature | Standalone | Online |
-|---------|:----------:|:------:|
-| **Core Budgeting** | | |
-| Transaction tracking | ✅ | ✅ |
-| Budget categories | ✅ | ✅ |
-| Spending reports | ✅ | ✅ |
-| Goal tracking | ✅ | ✅ |
-| Loan management | ✅ | ✅ |
-| Subscription tracking | ✅ | ✅ |
-| **Multi-Profile** | | |
-| Multiple profiles | ✅ | ✅ |
-| PIN protection | ✅ | ✅ |
-| Private budgets | ✅ | ✅ |
-| Shared budgets | ✅ | ✅ |
-| Activity logging | ✅ | ✅ |
-| Auto-lock timeout | ✅ | ✅ |
-| **Data Storage** | | |
-| Local storage | ✅ | ✅ |
-| Cloud storage | ❌ | ✅ |
-| Automatic sync | ❌ | ✅ |
-| **Backup & Export** | | |
-| Manual export (.budget) | ✅ | ✅ |
-| Manual import | ✅ | ✅ |
-| Automatic backups | ❌ | ✅ |
-| Point-in-time restore | ❌ | ✅ |
-| **Collaboration** | | |
-| Same-device sharing | ✅ | ✅ |
-| Multi-device access | ❌ | ✅ |
-| Family invites | ❌ | ✅ |
-| Real-time updates | ❌ | ✅ |
-| **Security** | | |
-| PIN authentication | ✅ | ✅ |
-| Encrypted exports | ✅ | ✅ |
-| Bank-level encryption | N/A | ✅ |
-| Two-factor auth | N/A | ✅ |
+| Feature                 | Standalone | Online |
+| ----------------------- | :--------: | :----: |
+| **Core Budgeting**      |            |        |
+| Transaction tracking    |     ✅     |   ✅   |
+| Budget categories       |     ✅     |   ✅   |
+| Spending reports        |     ✅     |   ✅   |
+| Goal tracking           |     ✅     |   ✅   |
+| Loan management         |     ✅     |   ✅   |
+| Subscription tracking   |     ✅     |   ✅   |
+| **Multi-Profile**       |            |        |
+| Multiple profiles       |     ✅     |   ✅   |
+| PIN protection          |     ✅     |   ✅   |
+| Private budgets         |     ✅     |   ✅   |
+| Shared budgets          |     ✅     |   ✅   |
+| Activity logging        |     ✅     |   ✅   |
+| Auto-lock timeout       |     ✅     |   ✅   |
+| **Data Storage**        |            |        |
+| Local storage           |     ✅     |   ✅   |
+| Cloud storage           |     ❌     |   ✅   |
+| Automatic sync          |     ❌     |   ✅   |
+| **Backup & Export**     |            |        |
+| Manual export (.budget) |     ✅     |   ✅   |
+| Manual import           |     ✅     |   ✅   |
+| Automatic backups       |     ❌     |   ✅   |
+| Point-in-time restore   |     ❌     |   ✅   |
+| **Collaboration**       |            |        |
+| Same-device sharing     |     ✅     |   ✅   |
+| Multi-device access     |     ❌     |   ✅   |
+| Family invites          |     ❌     |   ✅   |
+| Real-time updates       |     ❌     |   ✅   |
+| **Security**            |            |        |
+| PIN authentication      |     ✅     |   ✅   |
+| Encrypted exports       |     ✅     |   ✅   |
+| Bank-level encryption   |    N/A     |   ✅   |
+| Two-factor auth         |    N/A     |   ✅   |
 
 ---
 
@@ -121,10 +123,10 @@ export const FEATURES = {
 ### Checking Feature Availability
 
 ```typescript
-import { isFeatureEnabled, isOnlineMode } from '@/config/features';
+import { isFeatureEnabled, isOnlineMode } from "@/config/features";
 
 // Check specific feature
-if (isFeatureEnabled('multiProfiles')) {
+if (isFeatureEnabled("multiProfiles")) {
   // Show profile selector
 }
 
@@ -219,21 +221,25 @@ budgets: {
 ## Coming Soon (Online Mode)
 
 ### Cloud Sync
+
 - Automatic synchronization across devices
 - Conflict resolution with last-write-wins
 - Offline support with sync when online
 
 ### Family Invites
+
 - Invite family members via email
 - Permission levels: view, edit, admin
 - Accept/decline invitations
 
 ### Cloud Backup
+
 - Daily automatic backups
 - 30-day backup retention
 - One-click restore to any point
 
 ### Real-time Collaboration
+
 - See family members' changes instantly
 - Live activity feed
 - Collaborative budget planning

@@ -49,32 +49,25 @@ export function getQuestionsForReview(
 
   // Filter questions for this concept
   let conceptQuestions = allQuestions.filter(
-    q => q.moduleId === moduleId &&
-         q.sectionId === sectionId &&
-         q.concept === concept
+    (q) => q.moduleId === moduleId && q.sectionId === sectionId && q.concept === concept
   );
 
   // If no exact matches, try just module and concept
   if (conceptQuestions.length === 0) {
-    conceptQuestions = allQuestions.filter(
-      q => q.moduleId === moduleId && q.concept === concept
-    );
+    conceptQuestions = allQuestions.filter((q) => q.moduleId === moduleId && q.concept === concept);
   }
 
   // If still no matches, try just module
   if (conceptQuestions.length === 0) {
-    conceptQuestions = allQuestions.filter(q => q.moduleId === moduleId);
+    conceptQuestions = allQuestions.filter((q) => q.moduleId === moduleId);
   }
 
   // Prioritize questions matching difficulty level
-  const matchingDifficulty = conceptQuestions.filter(q => q.difficulty === difficulty);
-  const otherQuestions = conceptQuestions.filter(q => q.difficulty !== difficulty);
+  const matchingDifficulty = conceptQuestions.filter((q) => q.difficulty === difficulty);
+  const otherQuestions = conceptQuestions.filter((q) => q.difficulty !== difficulty);
 
   // Shuffle and combine
-  const shuffled = [
-    ...shuffle(matchingDifficulty),
-    ...shuffle(otherQuestions)
-  ];
+  const shuffled = [...shuffle(matchingDifficulty), ...shuffle(otherQuestions)];
 
   return shuffled.slice(0, count);
 }
@@ -82,10 +75,7 @@ export function getQuestionsForReview(
 /**
  * Get random question for a concept
  */
-export function getRandomQuestion(
-  moduleId: string,
-  concept: string
-): Question | null {
+export function getRandomQuestion(moduleId: string, concept: string): Question | null {
   const questions = getQuestionsForReview(moduleId, "", concept, "medium", 1);
   return questions.length > 0 ? questions[0] : null;
 }
@@ -137,7 +127,7 @@ export function addQuestions(questions: Question[]): void {
 
   // Remove duplicates by ID
   const unique = combined.filter(
-    (q, index, self) => index === self.findIndex(t => t.id === q.id)
+    (q, index, self) => index === self.findIndex((t) => t.id === q.id)
   );
 
   saveQuestionBank(unique);
@@ -167,12 +157,12 @@ export function importLegacyQuestions(legacyQuestions: any[]): Question[] {
  */
 function mapLegacyDomain(domain: string): string {
   const mapping: Record<string, string> = {
-    "foundation": "platform-foundation",
-    "asking": "asking-questions",
-    "refining": "refining-questions",
-    "action": "taking-action",
-    "troubleshooting": "troubleshooting",
-    "advanced": "advanced-topics",
+    foundation: "platform-foundation",
+    asking: "asking-questions",
+    refining: "refining-questions",
+    action: "taking-action",
+    troubleshooting: "troubleshooting",
+    advanced: "advanced-topics",
   };
 
   const normalized = domain.toLowerCase().replace(/\s+/g, "-");
@@ -215,12 +205,14 @@ function getDefaultQuestions(): Question[] {
         "It uses less disk space than traditional solutions",
         "It scales to query thousands of endpoints in seconds with minimal server load",
         "It requires no network connectivity",
-        "It automatically updates all software"
+        "It automatically updates all software",
       ],
-      correctAnswer: "It scales to query thousands of endpoints in seconds with minimal server load",
-      explanation: "The linear chain architecture allows Tanium to scale exponentially by using each endpoint as a relay point, enabling rapid queries across massive environments without overwhelming the server.",
+      correctAnswer:
+        "It scales to query thousands of endpoints in seconds with minimal server load",
+      explanation:
+        "The linear chain architecture allows Tanium to scale exponentially by using each endpoint as a relay point, enabling rapid queries across massive environments without overwhelming the server.",
       difficulty: "easy",
-      tags: ["architecture", "scalability"]
+      tags: ["architecture", "scalability"],
     },
     {
       id: "pf-lc-2",
@@ -233,12 +225,13 @@ function getDefaultQuestions(): Question[] {
         "By caching all endpoint data on the server",
         "By using each endpoint as a relay point to forward queries",
         "By only querying a sample of endpoints",
-        "By querying endpoints only during off-peak hours"
+        "By querying endpoints only during off-peak hours",
       ],
       correctAnswer: "By using each endpoint as a relay point to forward queries",
-      explanation: "Each endpoint receives a query, executes it locally, returns results, and forwards the query to other endpoints. This creates an exponential pattern that dramatically reduces server load.",
+      explanation:
+        "Each endpoint receives a query, executes it locally, returns results, and forwards the query to other endpoints. This creates an exponential pattern that dramatically reduces server load.",
       difficulty: "medium",
-      tags: ["architecture", "efficiency"]
+      tags: ["architecture", "efficiency"],
     },
     {
       id: "pf-lc-3",
@@ -248,9 +241,10 @@ function getDefaultQuestions(): Question[] {
       question: "True or False: Tanium can query 15,000 endpoints in approximately 15 seconds.",
       type: "true-false",
       correctAnswer: "True",
-      explanation: "This is one of Tanium's key performance advantages. The linear chain architecture enables querying 15,000 endpoints in about 15 seconds, compared to hours with traditional tools.",
+      explanation:
+        "This is one of Tanium's key performance advantages. The linear chain architecture enables querying 15,000 endpoints in about 15 seconds, compared to hours with traditional tools.",
       difficulty: "easy",
-      tags: ["performance", "speed"]
+      tags: ["performance", "speed"],
     },
     {
       id: "pf-lc-4",
@@ -263,12 +257,13 @@ function getDefaultQuestions(): Question[] {
         "Network firewalls",
         "Endpoint agents",
         "Centralized data warehouses",
-        "Administrator accounts"
+        "Administrator accounts",
       ],
       correctAnswer: "Centralized data warehouses",
-      explanation: "Because Tanium queries endpoints in real-time and doesn't rely on pre-collected data, it eliminates the need for massive centralized data warehouses. Data is always current and retrieved on-demand.",
+      explanation:
+        "Because Tanium queries endpoints in real-time and doesn't rely on pre-collected data, it eliminates the need for massive centralized data warehouses. Data is always current and retrieved on-demand.",
       difficulty: "medium",
-      tags: ["architecture", "benefits"]
+      tags: ["architecture", "benefits"],
     },
     {
       id: "pf-lc-5",
@@ -281,12 +276,13 @@ function getDefaultQuestions(): Question[] {
         "A passive data repository only",
         "An active relay point forwarding queries",
         "A backup server in case the main server fails",
-        "A data aggregation point for nearby endpoints"
+        "A data aggregation point for nearby endpoints",
       ],
       correctAnswer: "An active relay point forwarding queries",
-      explanation: "Each endpoint is an active participant that receives queries, executes them locally, and forwards them to other endpoints it knows about, creating the linear chain effect.",
+      explanation:
+        "Each endpoint is an active participant that receives queries, executes them locally, and forwards them to other endpoints it knows about, creating the linear chain effect.",
       difficulty: "hard",
-      tags: ["architecture", "endpoints"]
+      tags: ["architecture", "endpoints"],
     },
 
     // Asking Questions - Natural Language
@@ -301,12 +297,13 @@ function getDefaultQuestions(): Question[] {
         "SELECT [data] FROM [endpoints] WHERE [condition]",
         "Get [sensor] from [targets] where [filters]",
         "QUERY [endpoints] FOR [data] IF [condition]",
-        "FIND [data] ON [machines] WITH [criteria]"
+        "FIND [data] ON [machines] WITH [criteria]",
       ],
       correctAnswer: "Get [sensor] from [targets] where [filters]",
-      explanation: "Tanium uses a natural language format: 'Get [sensor] from [targets] where [filters]'. For example: 'Get Computer Name from all machines'.",
+      explanation:
+        "Tanium uses a natural language format: 'Get [sensor] from [targets] where [filters]'. For example: 'Get Computer Name from all machines'.",
       difficulty: "easy",
-      tags: ["query", "syntax"]
+      tags: ["query", "syntax"],
     },
     {
       id: "aq-nl-2",
@@ -319,12 +316,13 @@ function getDefaultQuestions(): Question[] {
         "A hardware device attached to endpoints",
         "A script that retrieves specific data from endpoints",
         "A network monitoring tool",
-        "A type of firewall rule"
+        "A type of firewall rule",
       ],
       correctAnswer: "A script that retrieves specific data from endpoints",
-      explanation: "A Tanium sensor is a script (written in various languages) that executes on endpoints to retrieve specific information like Computer Name, IP Address, or Installed Applications.",
+      explanation:
+        "A Tanium sensor is a script (written in various languages) that executes on endpoints to retrieve specific information like Computer Name, IP Address, or Installed Applications.",
       difficulty: "medium",
-      tags: ["sensors", "concepts"]
+      tags: ["sensors", "concepts"],
     },
     {
       id: "aq-nl-3",
@@ -334,9 +332,10 @@ function getDefaultQuestions(): Question[] {
       question: "True or False: Tanium questions can combine multiple sensors in a single query.",
       type: "true-false",
       correctAnswer: "True",
-      explanation: "Tanium questions can combine multiple sensors. For example: 'Get Computer Name and IP Address and Operating System from all machines'.",
+      explanation:
+        "Tanium questions can combine multiple sensors. For example: 'Get Computer Name and IP Address and Operating System from all machines'.",
       difficulty: "easy",
-      tags: ["query", "sensors"]
+      tags: ["query", "sensors"],
     },
     {
       id: "aq-nl-4",
@@ -349,12 +348,13 @@ function getDefaultQuestions(): Question[] {
         "The time range for historical data",
         "Which endpoints to query (target selection)",
         "The output format for results",
-        "The administrator running the query"
+        "The administrator running the query",
       ],
       correctAnswer: "Which endpoints to query (target selection)",
-      explanation: "The 'from' clause specifies which endpoints to query. You can use 'all machines' or filter to specific groups like 'from Windows machines' or 'from machines with IP Address contains 192.168'.",
+      explanation:
+        "The 'from' clause specifies which endpoints to query. You can use 'all machines' or filter to specific groups like 'from Windows machines' or 'from machines with IP Address contains 192.168'.",
       difficulty: "medium",
-      tags: ["targeting", "filters"]
+      tags: ["targeting", "filters"],
     },
     {
       id: "aq-nl-5",
@@ -363,16 +363,12 @@ function getDefaultQuestions(): Question[] {
       concept: "Filters",
       question: "Which of the following is a valid Tanium filter operator?",
       type: "multiple-choice",
-      options: [
-        "equals",
-        "contains",
-        "starts with",
-        "All of the above"
-      ],
+      options: ["equals", "contains", "starts with", "All of the above"],
       correctAnswer: "All of the above",
-      explanation: "Tanium supports multiple filter operators including 'equals', 'contains', 'starts with', 'ends with', 'does not equal', 'does not contain', and more.",
+      explanation:
+        "Tanium supports multiple filter operators including 'equals', 'contains', 'starts with', 'ends with', 'does not equal', 'does not contain', and more.",
       difficulty: "hard",
-      tags: ["filters", "operators"]
+      tags: ["filters", "operators"],
     },
 
     // Taking Action
@@ -387,24 +383,27 @@ function getDefaultQuestions(): Question[] {
         "A compressed file containing Tanium software updates",
         "A script or command that performs actions on endpoints",
         "A data storage container for query results",
-        "A network packet sent between endpoints"
+        "A network packet sent between endpoints",
       ],
       correctAnswer: "A script or command that performs actions on endpoints",
-      explanation: "A Tanium package is a script or command that performs remediation actions on endpoints, such as installing software, modifying registry keys, or running cleanup scripts.",
+      explanation:
+        "A Tanium package is a script or command that performs remediation actions on endpoints, such as installing software, modifying registry keys, or running cleanup scripts.",
       difficulty: "easy",
-      tags: ["packages", "actions"]
+      tags: ["packages", "actions"],
     },
     {
       id: "ta-pkg-2",
       moduleId: "taking-action",
       sectionId: "packages",
       concept: "Package Deployment",
-      question: "True or False: Tanium packages can be deployed to specific endpoints based on question results.",
+      question:
+        "True or False: Tanium packages can be deployed to specific endpoints based on question results.",
       type: "true-false",
       correctAnswer: "True",
-      explanation: "Tanium's Deploy Action feature allows you to target packages to specific endpoints based on question results, ensuring remediation actions reach only the systems that need them.",
+      explanation:
+        "Tanium's Deploy Action feature allows you to target packages to specific endpoints based on question results, ensuring remediation actions reach only the systems that need them.",
       difficulty: "medium",
-      tags: ["deployment", "targeting"]
+      tags: ["deployment", "targeting"],
     },
     {
       id: "ta-pkg-3",
@@ -417,12 +416,13 @@ function getDefaultQuestions(): Question[] {
         "Scheduled Deployment",
         "Maintenance Window",
         "Deploy Action Now",
-        "Patch Management"
+        "Patch Management",
       ],
       correctAnswer: "Deploy Action Now",
-      explanation: "'Deploy Action Now' executes the package immediately on all targeted endpoints using the linear chain for rapid deployment.",
+      explanation:
+        "'Deploy Action Now' executes the package immediately on all targeted endpoints using the linear chain for rapid deployment.",
       difficulty: "medium",
-      tags: ["deployment", "scheduling"]
+      tags: ["deployment", "scheduling"],
     },
 
     // Troubleshooting
@@ -437,24 +437,27 @@ function getDefaultQuestions(): Question[] {
         "Restart the Tanium Server",
         "Check if the target filter is too restrictive",
         "Reinstall the Tanium Client on all endpoints",
-        "Contact Tanium support immediately"
+        "Contact Tanium support immediately",
       ],
       correctAnswer: "Check if the target filter is too restrictive",
-      explanation: "The most common reason for no results is overly restrictive targeting. Always verify your 'from' clause and filters first before assuming there's a technical issue.",
+      explanation:
+        "The most common reason for no results is overly restrictive targeting. Always verify your 'from' clause and filters first before assuming there's a technical issue.",
       difficulty: "easy",
-      tags: ["troubleshooting", "debugging"]
+      tags: ["troubleshooting", "debugging"],
     },
     {
       id: "ts-dbg-2",
       moduleId: "troubleshooting",
       sectionId: "debugging",
       concept: "Client Connectivity",
-      question: "True or False: If an endpoint doesn't appear in Tanium results, it means the Tanium Client is not running or cannot communicate with the server.",
+      question:
+        "True or False: If an endpoint doesn't appear in Tanium results, it means the Tanium Client is not running or cannot communicate with the server.",
       type: "true-false",
       correctAnswer: "True",
-      explanation: "Endpoints must have a running Tanium Client that can communicate with the Tanium Server (directly or via other endpoints in the linear chain) to appear in results.",
+      explanation:
+        "Endpoints must have a running Tanium Client that can communicate with the Tanium Server (directly or via other endpoints in the linear chain) to appear in results.",
       difficulty: "easy",
-      tags: ["connectivity", "client"]
+      tags: ["connectivity", "client"],
     },
   ];
 }
@@ -462,14 +465,9 @@ function getDefaultQuestions(): Question[] {
 /**
  * Get all questions for a specific section
  */
-export function getQuestionsForSection(
-  moduleId: string,
-  sectionId: string
-): Question[] {
+export function getQuestionsForSection(moduleId: string, sectionId: string): Question[] {
   const allQuestions = getQuestionBank();
-  return allQuestions.filter(
-    q => q.moduleId === moduleId && q.sectionId === sectionId
-  );
+  return allQuestions.filter((q) => q.moduleId === moduleId && q.sectionId === sectionId);
 }
 
 /**
@@ -482,17 +480,18 @@ export function getAvailableSections(moduleId?: string): Array<{
   concepts: string[];
 }> {
   const allQuestions = getQuestionBank();
-  const filtered = moduleId
-    ? allQuestions.filter(q => q.moduleId === moduleId)
-    : allQuestions;
+  const filtered = moduleId ? allQuestions.filter((q) => q.moduleId === moduleId) : allQuestions;
 
-  const sectionMap = new Map<string, {
-    moduleId: string;
-    sectionId: string;
-    questions: Question[];
-  }>();
+  const sectionMap = new Map<
+    string,
+    {
+      moduleId: string;
+      sectionId: string;
+      questions: Question[];
+    }
+  >();
 
-  filtered.forEach(q => {
+  filtered.forEach((q) => {
     const key = `${q.moduleId}::${q.sectionId}`;
     if (!sectionMap.has(key)) {
       sectionMap.set(key, {
@@ -504,10 +503,8 @@ export function getAvailableSections(moduleId?: string): Array<{
     sectionMap.get(key)!.questions.push(q);
   });
 
-  return Array.from(sectionMap.values()).map(section => {
-    const concepts = Array.from(
-      new Set(section.questions.map(q => q.concept))
-    );
+  return Array.from(sectionMap.values()).map((section) => {
+    const concepts = Array.from(new Set(section.questions.map((q) => q.concept)));
     return {
       moduleId: section.moduleId,
       sectionId: section.sectionId,
@@ -520,20 +517,14 @@ export function getAvailableSections(moduleId?: string): Array<{
 /**
  * Get question count for a specific section
  */
-export function getSectionQuestionCount(
-  moduleId: string,
-  sectionId: string
-): number {
+export function getSectionQuestionCount(moduleId: string, sectionId: string): number {
   return getQuestionsForSection(moduleId, sectionId).length;
 }
 
 /**
  * Check if a section has questions available
  */
-export function hasSectionQuestions(
-  moduleId: string,
-  sectionId: string
-): boolean {
+export function hasSectionQuestions(moduleId: string, sectionId: string): boolean {
   return getSectionQuestionCount(moduleId, sectionId) > 0;
 }
 
@@ -552,7 +543,7 @@ export function getQuestionBankStats(): {
   const byDifficulty: Record<string, number> = {};
   const byType: Record<string, number> = {};
 
-  questions.forEach(q => {
+  questions.forEach((q) => {
     byModule[q.moduleId] = (byModule[q.moduleId] || 0) + 1;
     byDifficulty[q.difficulty] = (byDifficulty[q.difficulty] || 0) + 1;
     byType[q.type] = (byType[q.type] || 0) + 1;

@@ -47,7 +47,7 @@ if (Test-Path "modern-tco") {
 # Architecture stack verification
 function Test-TCOArchitecture {
     Write-Host "`n🔍 TCO Architecture Stack Validation" -ForegroundColor Blue
-    
+
     # Verify Next.js 15.5.2
     try {
         $nextVersion = npx next --version 2>$null
@@ -59,7 +59,7 @@ function Test-TCOArchitecture {
     } catch {
         Write-Host "❌ Next.js not available" -ForegroundColor Red
     }
-    
+
     # Verify Supabase configuration
     if (Test-Path ".env.local") {
         $envContent = Get-Content ".env.local" -Raw
@@ -71,14 +71,14 @@ function Test-TCOArchitecture {
     } else {
         Write-Host "❌ Environment file missing (.env.local)" -ForegroundColor Red
     }
-    
+
     # Verify shadcn/ui installation
     if (Test-Path "components.json") {
         Write-Host "✅ shadcn/ui configured" -ForegroundColor Green
     } else {
         Write-Host "⚠️ shadcn/ui configuration missing" -ForegroundColor Yellow
     }
-    
+
     # Check React Context providers
     $contextFiles = Get-ChildItem "src" -Recurse -Filter "*Context*" -File 2>$null
     if ($contextFiles.Count -ge 9) {
@@ -86,7 +86,7 @@ function Test-TCOArchitecture {
     } else {
         Write-Host "⚠️ Expected 9+ Context providers, found: $($contextFiles.Count)" -ForegroundColor Yellow
     }
-    
+
     # Verify TypeScript configuration
     if (Test-Path "tsconfig.json") {
         Write-Host "✅ TypeScript configuration present" -ForegroundColor Green
@@ -105,14 +105,14 @@ Test-TCOArchitecture
 # Comprehensive architecture analysis
 function Get-TCOArchitectureReport {
     Write-Host "`n📊 TCO Architecture Analysis Report" -ForegroundColor Magenta
-    
+
     # Package.json analysis
     if (Test-Path "package.json") {
         $package = Get-Content "package.json" | ConvertFrom-Json
-        
+
         Write-Host "`n🔧 Core Dependencies:" -ForegroundColor Cyan
         $coreDeps = @("next", "react", "typescript", "@supabase/supabase-js", "tailwindcss")
-        
+
         foreach ($dep in $coreDeps) {
             $version = $package.dependencies.$dep ?? $package.devDependencies.$dep
             if ($version) {
@@ -121,12 +121,12 @@ function Get-TCOArchitectureReport {
                 Write-Host "  ❌ $dep: Not found" -ForegroundColor Red
             }
         }
-        
+
         # Count total dependencies
         $totalDeps = ($package.dependencies.PSObject.Properties.Count ?? 0) + ($package.devDependencies.PSObject.Properties.Count ?? 0)
         Write-Host "`n📦 Total Dependencies: $totalDeps" -ForegroundColor Cyan
     }
-    
+
     # Project structure analysis
     Write-Host "`n📁 Architecture Structure:" -ForegroundColor Cyan
     $architecturalPaths = @{
@@ -137,7 +137,7 @@ function Get-TCOArchitectureReport {
         "supabase" = "Database & Migrations"
         "docs" = "Documentation"
     }
-    
+
     foreach ($path in $architecturalPaths.GetEnumerator()) {
         if (Test-Path $path.Key) {
             $fileCount = (Get-ChildItem $path.Key -Recurse -File -ErrorAction SilentlyContinue).Count

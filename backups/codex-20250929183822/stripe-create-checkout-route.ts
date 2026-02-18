@@ -16,11 +16,11 @@ export async function POST(req: Request) {
   const selected = plan ?? "pro";
   const origin = originFrom(req);
 
-  const secret = process.env['STRIPE_SECRET_KEY'];
+  const secret = process.env["STRIPE_SECRET_KEY"];
   const priceMap: Record<Plan, string | undefined> = {
-    free: process.env['STRIPE_PRICE_FREE'],
-    pro: process.env['STRIPE_PRICE_PRO'],
-    team: process.env['STRIPE_PRICE_TEAM'],
+    free: process.env["STRIPE_PRICE_FREE"],
+    pro: process.env["STRIPE_PRICE_PRO"],
+    team: process.env["STRIPE_PRICE_TEAM"],
   };
 
   // Fallback: mock redirect when not configured

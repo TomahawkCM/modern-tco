@@ -8,6 +8,7 @@
 ## 🔍 Testing Results
 
 ### What I Tested
+
 1. ✅ Created wrapper module for `docker exec -i` approach
 2. ✅ Verified module imports successfully
 3. ✅ Confirmed 6 tool modules register
@@ -18,12 +19,14 @@
 **Archon MCP uses HTTP POST transport, NOT stdin/stdout.**
 
 Evidence from logs:
+
 ```
 INFO:     172.18.0.1:47624 - "POST /mcp HTTP/1.1" 200 OK
 Processing request of type ListToolsRequest
 ```
 
 When using `docker exec -i`, Archon tries to start a new HTTP server on port 8051, which is already in use by the main container process, causing:
+
 ```
 ERROR: [Errno 98] address already in use
 ```
@@ -72,12 +75,14 @@ Archon MCP should be configured to use HTTP transport, not docker exec:
 ## 🧪 How to Verify Archon is Working
 
 ### 1. Check Container Status
+
 ```bash
 docker ps | grep archon-mcp
 # Should show: Up X hours (healthy)
 ```
 
 ### 2. Check MCP Endpoint
+
 ```bash
 curl -X POST http://localhost:8051/mcp \
   -H "Content-Type: application/json" \
@@ -87,14 +92,16 @@ curl -X POST http://localhost:8051/mcp \
 Expected response: JSON with list of tools
 
 ### 3. Check Container Logs
+
 ```bash
 docker logs archon-mcp --tail 50 | grep -E "(tools registered|Starting)"
 ```
 
 Should show:
+
 ```
 ✓ RAG tools registered
-✓ Project tools registered  
+✓ Project tools registered
 ✓ Task tools registered
 ✓ Document tools registered
 ✓ Version tools registered
@@ -119,6 +126,7 @@ Supabase Database
 ```
 
 **Key Points:**
+
 - Archon MCP is an HTTP-based MCP server
 - It uses FastMCP library with "Streamable HTTP" mode
 - Primary endpoint: `http://localhost:8051/mcp`
@@ -131,6 +139,7 @@ Supabase Database
 Once configured correctly, these tools are available:
 
 ### RAG (Knowledge Base)
+
 - `rag_search_knowledge_base(query, source_id?, match_count?)`
 - `rag_search_code_examples(query, source_id?, match_count?)`
 - `rag_get_available_sources()`
@@ -138,22 +147,27 @@ Once configured correctly, these tools are available:
 - `rag_read_full_page(page_id?, url?)`
 
 ### Projects
+
 - `find_projects(query?, project_id?, page?, per_page?)`
 - `manage_project(action, project_id?, title?, description?, github_repo?)`
 
 ### Tasks
+
 - `find_tasks(query?, task_id?, filter_by?, filter_value?, project_id?, page?, per_page?)`
 - `manage_task(action, task_id?, project_id?, title?, description?, status?, assignee?, task_order?, feature?)`
 
 ### Documents
+
 - `find_documents(project_id, document_id?, query?, document_type?, page?, per_page?)`
 - `manage_document(action, project_id, document_id?, title?, document_type?, content?, tags?, author?)`
 
 ### Versions
+
 - `find_versions(project_id, field_name?, version_number?, page?, per_page?)`
 - `manage_version(action, project_id, field_name, version_number?, content?, change_summary?, document_id?, created_by?)`
 
 ### Features
+
 - `get_project_features(project_id)`
 
 ---
@@ -172,6 +186,7 @@ Once configured correctly, these tools are available:
 ### Claude Code Can't Connect
 
 1. **Verify Archon is running:**
+
    ```bash
    curl http://localhost:8051/mcp
    ```
@@ -191,6 +206,7 @@ Once configured correctly, these tools are available:
 ### "Address Already in Use" Error
 
 This means you're trying to start a second MCP server. Solution:
+
 - Don't use `docker exec -i python -m ...`
 - Use HTTP configuration instead
 
@@ -199,6 +215,7 @@ This means you're trying to start a second MCP server. Solution:
 ## 📚 Changes Reverted
 
 I've removed the wrapper module that was created:
+
 - ❌ Removed `/app/mcp_server/` directory
 - ✅ Archon container is back to clean state
 - ✅ No modifications to original Archon code

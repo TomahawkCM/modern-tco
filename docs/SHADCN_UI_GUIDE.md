@@ -5,6 +5,7 @@ This document captures the shadcn/ui setup, patterns implemented, file locations
 ## Overview
 
 Implemented patterns mirror Tanium Console conventions:
+
 - Global Command Palette for search/actions
 - User Menu dropdown in the header
 - Resizable split views (table + chart)
@@ -48,25 +49,30 @@ Implemented patterns mirror Tanium Console conventions:
 
 ## How To Extend to Other Views
 
-1) Add a new table
+1. Add a new table
+
 - Create `YourXxxTable.tsx` in `src/components/data-table/`.
 - Define `types.ts` (row type) and `columns.tsx` (ColumnDef array).
 - Compose `DataTable` with your columns and data.
 
-2) Add filters/facets + persistence
+2. Add filters/facets + persistence
+
 - Text filter: bind to `table.getColumn('yourCol').setFilterValue(e.target.value)`.
 - Facets: maintain `selectedX: string[]`; set as the filter value for the target column and implement `filterFn` in that column similar to `domainColumns`.
 - Numeric thresholds: use a dropdown + custom filter function or store `{ min: number }` for range semantics.
 - Persist state using `usePersistentState(key, initial)` from `src/lib/usePersistentState.ts`.
 
-3) Make headers sticky
+3. Make headers sticky
+
 - Wrap table in a container with `max-h-[Npx] overflow-auto` and apply sticky header styles as in `DomainStatsTable`.
 
-4) Resizable layout
+4. Resizable layout
+
 - Use `ResizablePanelGroup`, `ResizablePanel`, and `ResizableHandle` from `src/components/ui/resizable.tsx`.
 - Keep sensible `defaultSize` and `minSize`.
 
-5) Keyboard shortcuts
+5. Keyboard shortcuts
+
 - For global palette, ensure the `useEffect` key handler is in a top-level header component.
 - Avoid duplicate listeners when nesting layouts (one palette per top shell).
 

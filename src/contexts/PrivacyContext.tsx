@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 
 /**
  * Privacy Mode Context
@@ -72,11 +65,7 @@ export function PrivacyProvider({ children }: { children: ReactNode }) {
   // Keyboard shortcut: Cmd+Shift+P / Ctrl+Shift+P
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (
-        event.shiftKey &&
-        (event.metaKey || event.ctrlKey) &&
-        event.key.toLowerCase() === "p"
-      ) {
+      if (event.shiftKey && (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "p") {
         event.preventDefault();
         setIsPrivacyMode((prev) => !prev);
       }
@@ -100,11 +89,7 @@ export function PrivacyProvider({ children }: { children: ReactNode }) {
     setPrivacyMode,
   };
 
-  return (
-    <PrivacyContext.Provider value={value}>
-      {children}
-    </PrivacyContext.Provider>
-  );
+  return <PrivacyContext.Provider value={value}>{children}</PrivacyContext.Provider>;
 }
 
 /**

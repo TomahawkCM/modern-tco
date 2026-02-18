@@ -97,26 +97,28 @@ User selects locale (es-MX)
 
 ```typescript
 // Lines 11, 15, 54
-import OpenAI from 'openai';
-const OPENAI_MODEL = 'gpt-4o-mini';
+import OpenAI from "openai";
+const OPENAI_MODEL = "gpt-4o-mini";
 
-export class ClaudeAPIClient {  // ⚠️ Actually uses OpenAI, not Claude!
+export class ClaudeAPIClient {
+  // ⚠️ Actually uses OpenAI, not Claude!
   private client: OpenAI;
 
   constructor(concurrency: number = 5) {
-    const apiKey = process.env.OPENAI_API_KEY;  // From .env.local
+    const apiKey = process.env.OPENAI_API_KEY; // From .env.local
     this.client = new OpenAI({ apiKey });
     this.rateLimiter = new RateLimiter(concurrency);
   }
 
   async translateBase(locale: SupportedLocale, source: object): Promise<object> {
     const prompt = buildBaseTranslationPrompt(locale, source);
-    return this.callAPI(locale, prompt, 'base');
+    return this.callAPI(locale, prompt, "base");
   }
 }
 ```
 
 **Why OpenAI instead of Claude?**
+
 - GPT-4o-mini is significantly cheaper ($0.015 per 1M input tokens vs Claude's $0.30)
 - For 240 keys × 103 locales, costs only $0.375 vs $7.50 with Claude Haiku
 - Translation quality is comparable for UI strings (simple, repetitive text)
@@ -143,6 +145,7 @@ $ du -sh src/i18n/messages/
 ```
 
 **File Structure** (example: `es-ES.json`):
+
 ```json
 {
   "nav": {
@@ -194,10 +197,10 @@ $ du -sh src/i18n/messages/
 ```typescript
 const loadMessages = async () => {
   const prefs = getLocalePreferences();
-  const currentLocale = prefs.locale || 'en-US';  // 1st fallback: DEFAULT_LOCALE
+  const currentLocale = prefs.locale || "en-US"; // 1st fallback: DEFAULT_LOCALE
 
-  if (currentLocale === 'en-US') {
-    setMessages(enMessages);  // Already imported statically
+  if (currentLocale === "en-US") {
+    setMessages(enMessages); // Already imported statically
   } else {
     try {
       // 2nd attempt: Dynamic import for requested locale
@@ -205,13 +208,14 @@ const loadMessages = async () => {
       setMessages(loadedMessages);
     } catch (error) {
       console.error(`Failed to load messages for ${currentLocale}`, error);
-      setMessages(enMessages);  // 3rd fallback: English
+      setMessages(enMessages); // 3rd fallback: English
     }
   }
 };
 ```
 
 **Fallback Chain**:
+
 1. User-selected locale (from localStorage/Supabase)
 2. Browser-detected locale (via `navigator.languages`)
 3. Default locale (`en-US`)
@@ -222,13 +226,14 @@ const loadMessages = async () => {
 **File**: `src/lib/rtl-utils.ts`
 
 **RTL Locales** (5 total):
+
 ```typescript
 const RTL_LOCALES: SupportedLocale[] = [
-  'ar-AE',  // Arabic (UAE)
-  'ar-SA',  // Arabic (Saudi Arabia)
-  'fa-IR',  // Persian (Iran)
-  'he-IL',  // Hebrew (Israel)
-  'ur-PK',  // Urdu (Pakistan)
+  "ar-AE", // Arabic (UAE)
+  "ar-SA", // Arabic (Saudi Arabia)
+  "fa-IR", // Persian (Iran)
+  "he-IL", // Hebrew (Israel)
+  "ur-PK", // Urdu (Pakistan)
 ];
 ```
 
@@ -236,33 +241,32 @@ const RTL_LOCALES: SupportedLocale[] = [
 
 ```typescript
 // Get direction for locale
-export function getLocaleDirection(locale: SupportedLocale): 'rtl' | 'ltr' {
-  return RTL_LOCALES.includes(locale) ? 'rtl' : 'ltr';
+export function getLocaleDirection(locale: SupportedLocale): "rtl" | "ltr" {
+  return RTL_LOCALES.includes(locale) ? "rtl" : "ltr";
 }
 
 // React hook for RTL state
 export function useRTL(): boolean {
   const locale = getLocalePreferences().locale || DEFAULT_LOCALE;
-  return getLocaleDirection(locale) === 'rtl';
+  return getLocaleDirection(locale) === "rtl";
 }
 
 // Auto-flip alignment
-export function getRTLAlignment(align: 'left' | 'right'): 'left' | 'right' {
+export function getRTLAlignment(align: "left" | "right"): "left" | "right" {
   const isRTL = useRTL();
   if (!isRTL) return align;
-  return align === 'left' ? 'right' : 'left';
+  return align === "left" ? "right" : "left";
 }
 
 // Auto-flip padding/margin sides
-export function getRTLSide(side: 'start' | 'end'): 'left' | 'right' {
+export function getRTLSide(side: "start" | "end"): "left" | "right" {
   const isRTL = useRTL();
-  return side === 'start'
-    ? (isRTL ? 'right' : 'left')
-    : (isRTL ? 'left' : 'right');
+  return side === "start" ? (isRTL ? "right" : "left") : isRTL ? "left" : "right";
 }
 ```
 
 **Usage in Root Layout** (`src/app/layout.tsx:42-44`):
+
 ```typescript
 const locale = getLocalePreferences().locale || 'en-US';
 const dir = LOCALE_METADATA[locale]?.dir || 'ltr';
@@ -283,8 +287,9 @@ return (
 **File**: `src/i18n/utils/formatCurrency.ts`
 
 **Supported Currencies** (8 total):
+
 ```typescript
-export type CurrencyCode = 'USD' | 'CAD' | 'INR' | 'KRW' | 'SGD' | 'PHP' | 'EUR' | 'GBP';
+export type CurrencyCode = "USD" | "CAD" | "INR" | "KRW" | "SGD" | "PHP" | "EUR" | "GBP";
 ```
 
 **Key Functions**:
@@ -297,7 +302,7 @@ export function formatCurrency(
   locale: SupportedLocale
 ): string {
   return new Intl.NumberFormat(locale, {
-    style: 'currency',
+    style: "currency",
     currency,
     minimumFractionDigits: getDecimalPlaces(currency),
     maximumFractionDigits: getDecimalPlaces(currency),
@@ -305,25 +310,26 @@ export function formatCurrency(
 }
 
 // Examples:
-formatCurrency(1234.56, 'USD', 'en-US')  // "$1,234.56"
-formatCurrency(1234.56, 'INR', 'en-IN')  // "₹1,234.56"
-formatCurrency(1234, 'KRW', 'ko-KR')     // "₩1,234" (no decimals)
+formatCurrency(1234.56, "USD", "en-US"); // "$1,234.56"
+formatCurrency(1234.56, "INR", "en-IN"); // "₹1,234.56"
+formatCurrency(1234, "KRW", "ko-KR"); // "₩1,234" (no decimals)
 ```
 
 **⚠️ IMPORTANT**: NO currency conversion!
+
 - System displays multi-currency amounts as-is
 - Users must manually input correct currency per transaction
 - Summing mixed currencies throws error (safety check)
 
 ```typescript
 export function validateSameCurrency(items: { currency: CurrencyCode }[]): boolean {
-  const currencies = new Set(items.map(i => i.currency));
+  const currencies = new Set(items.map((i) => i.currency));
   return currencies.size <= 1;
 }
 
 export function sumCurrencyAmounts(items: { amount: number; currency: CurrencyCode }[]): number {
   if (!validateSameCurrency(items)) {
-    throw new Error('Cannot sum amounts with different currencies');
+    throw new Error("Cannot sum amounts with different currencies");
   }
   return items.reduce((sum, item) => sum + item.amount, 0);
 }
@@ -339,23 +345,23 @@ export function sumCurrencyAmounts(items: { amount: number; currency: CurrencyCo
 // Basic date formatting
 export function formatDate(date: Date, locale: SupportedLocale): string {
   return new Intl.DateTimeFormat(locale, {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
   }).format(date);
 }
 
 // Examples:
-formatDate(new Date('2025-12-31'), 'en-US')  // "12/31/2025"
-formatDate(new Date('2025-12-31'), 'ko-KR')  // "2025. 12. 31."
-formatDate(new Date('2025-12-31'), 'ar-SA')  // "٣١‏/١٢‏/٢٠٢٥" (Arabic numerals)
+formatDate(new Date("2025-12-31"), "en-US"); // "12/31/2025"
+formatDate(new Date("2025-12-31"), "ko-KR"); // "2025. 12. 31."
+formatDate(new Date("2025-12-31"), "ar-SA"); // "٣١‏/١٢‏/٢٠٢٥" (Arabic numerals)
 
 // Long date format
 export function formatLongDate(date: Date, locale: SupportedLocale): string {
   return new Intl.DateTimeFormat(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   }).format(date);
 }
 
@@ -371,14 +377,14 @@ export function formatRelativeTime(
   const diffMs = date.getTime() - baseDate.getTime();
   const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
 
-  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
+  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
 
   if (Math.abs(diffDays) < 7) {
-    return rtf.format(diffDays, 'day');
+    return rtf.format(diffDays, "day");
   } else if (Math.abs(diffDays) < 30) {
-    return rtf.format(Math.round(diffDays / 7), 'week');
+    return rtf.format(Math.round(diffDays / 7), "week");
   } else {
-    return rtf.format(Math.round(diffDays / 30), 'month');
+    return rtf.format(Math.round(diffDays / 30), "month");
   }
 }
 
@@ -393,11 +399,11 @@ export function formatDateWithTimezone(
   timeZone: string = getUserTimezone()
 ): string {
   return new Intl.DateTimeFormat(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+    year: "numeric",
+    month: "long",
+    day: "numeric",
     timeZone,
-    timeZoneName: 'short',
+    timeZoneName: "short",
   }).format(date);
 }
 
@@ -424,19 +430,19 @@ export function formatNumber(
 }
 
 // Examples:
-formatNumber(1234567.89, 'en-US')  // "1,234,567.89"
-formatNumber(1234567.89, 'en-IN')  // "12,34,567.89" (lakh grouping!)
-formatNumber(1234567.89, 'de-DE')  // "1.234.567,89" (period/comma swapped)
+formatNumber(1234567.89, "en-US"); // "1,234,567.89"
+formatNumber(1234567.89, "en-IN"); // "12,34,567.89" (lakh grouping!)
+formatNumber(1234567.89, "de-DE"); // "1.234.567,89" (period/comma swapped)
 
 // Compact numbers (K, M, B abbreviations)
 export function formatCompactNumber(
   num: number,
   locale: SupportedLocale,
-  notation: 'compact' | 'short' | 'long' = 'compact'
+  notation: "compact" | "short" | "long" = "compact"
 ): string {
   return new Intl.NumberFormat(locale, {
     notation,
-    compactDisplay: 'short',
+    compactDisplay: "short",
   }).format(num);
 }
 
@@ -451,7 +457,7 @@ export function formatPercent(
   decimals: number = 0
 ): string {
   return new Intl.NumberFormat(locale, {
-    style: 'percent',
+    style: "percent",
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   }).format(value);
@@ -467,7 +473,7 @@ export function formatIndianNumber(num: number): string {
   } else if (num >= 100000) {
     return `${(num / 100000).toFixed(2)} lakh`;
   } else {
-    return num.toLocaleString('en-IN');
+    return num.toLocaleString("en-IN");
   }
 }
 
@@ -485,14 +491,15 @@ export function formatIndianNumber(num: number): string {
 **File**: `src/lib/locale-storage.ts`
 
 **Interface**:
+
 ```typescript
 export interface LocalePreferences {
-  locale: SupportedLocale;      // e.g., 'es-MX'
-  region?: string;              // Optional geographic region
-  currency?: CurrencyCode;      // Default currency
-  weekStart?: 0 | 1;            // 0=Sunday, 1=Monday
-  timezone?: string;            // IANA timezone (e.g., 'America/New_York')
-  updatedAt?: number;           // Timestamp for conflict resolution
+  locale: SupportedLocale; // e.g., 'es-MX'
+  region?: string; // Optional geographic region
+  currency?: CurrencyCode; // Default currency
+  weekStart?: 0 | 1; // 0=Sunday, 1=Monday
+  timezone?: string; // IANA timezone (e.g., 'America/New_York')
+  updatedAt?: number; // Timestamp for conflict resolution
 }
 ```
 
@@ -504,10 +511,10 @@ export function setLocalePreferences(prefs: Partial<LocalePreferences>): void {
   const current = getLocalePreferences();
   const updated = { ...current, ...prefs, updatedAt: Date.now() };
 
-  localStorage.setItem('budget-locale-preferences', JSON.stringify(updated));
+  localStorage.setItem("budget-locale-preferences", JSON.stringify(updated));
 
   // Trigger UI update
-  window.dispatchEvent(new CustomEvent('localePreferencesChanged'));
+  window.dispatchEvent(new CustomEvent("localePreferencesChanged"));
 
   // Sync to Supabase (debounced 1 second to avoid rapid writes)
   debouncedSyncToSupabase(updated);
@@ -516,15 +523,13 @@ export function setLocalePreferences(prefs: Partial<LocalePreferences>): void {
 // 2. Supabase (cloud sync, cross-device persistence)
 const debouncedSyncToSupabase = debounce(async (prefs: LocalePreferences) => {
   const { data: session } = await supabase.auth.getSession();
-  if (!session) return;  // Only sync for authenticated users
+  if (!session) return; // Only sync for authenticated users
 
-  await supabase
-    .from('user_preferences')
-    .upsert({
-      user_id: session.user.id,
-      locale_preferences: prefs,
-      updated_at: new Date(prefs.updatedAt!).toISOString(),
-    });
+  await supabase.from("user_preferences").upsert({
+    user_id: session.user.id,
+    locale_preferences: prefs,
+    updated_at: new Date(prefs.updatedAt!).toISOString(),
+  });
 }, 1000);
 ```
 
@@ -540,9 +545,9 @@ export async function initializeLocalePreferences(): Promise<LocalePreferences> 
   if (!session) return localPrefs;
 
   const { data } = await supabase
-    .from('user_preferences')
-    .select('locale_preferences, updated_at')
-    .eq('user_id', session.user.id)
+    .from("user_preferences")
+    .select("locale_preferences, updated_at")
+    .eq("user_id", session.user.id)
     .single();
 
   if (!data) return localPrefs;
@@ -552,12 +557,12 @@ export async function initializeLocalePreferences(): Promise<LocalePreferences> 
 
   // 3. Conflict resolution: Prefer localStorage if updated in last 5 minutes
   if (localPrefs.updatedAt && Date.now() - localPrefs.updatedAt < 5 * 60 * 1000) {
-    return localPrefs;  // Local wins (user just changed settings)
+    return localPrefs; // Local wins (user just changed settings)
   }
 
   // 4. Otherwise, prefer Supabase (more recent cloud sync)
   if (cloudUpdatedAt > (localPrefs.updatedAt || 0)) {
-    setLocalePreferences(cloudPrefs);  // Update localStorage with cloud data
+    setLocalePreferences(cloudPrefs); // Update localStorage with cloud data
     return cloudPrefs;
   }
 
@@ -595,20 +600,21 @@ export default function DashboardPage() {
 ```
 
 **Behind the Scenes** (`useTranslations()` from next-intl):
+
 ```typescript
 // Simplified conceptual implementation (actual is in next-intl package)
 function useTranslations() {
   const { messages, locale } = useContext(NextIntlContext);
 
   return function t(key: string): string {
-    const keys = key.split('.');
+    const keys = key.split(".");
     let value = messages;
 
     for (const k of keys) {
       value = value?.[k];
       if (!value) {
         console.warn(`Missing translation for key: ${key}`);
-        return key;  // Fallback to key name
+        return key; // Fallback to key name
       }
     }
 
@@ -620,6 +626,7 @@ function useTranslations() {
 ### 3. Caching Strategy
 
 **Build-Time Bundling** (Next.js Webpack):
+
 - All 114 locale files are included in production bundle
 - Dynamic imports enable code-splitting per locale
 - Only requested locale is loaded (lazy loading)
@@ -630,6 +637,7 @@ const loadedMessages = (await import(`../../i18n/messages/${currentLocale}.json`
 ```
 
 **Runtime Caching** (Browser):
+
 - Once loaded, messages stay in React state (no re-fetch)
 - CustomEvent listener reloads only when locale changes
 - Persists across navigation (client-side routing)
@@ -641,6 +649,7 @@ const loadedMessages = (await import(`../../i18n/messages/${currentLocale}.json`
 ### 1. Translation Build Pipeline
 
 **Step 1: Source File Creation** (`src/i18n/messages/en.json`)
+
 ```json
 {
   "nav": {
@@ -651,6 +660,7 @@ const loadedMessages = (await import(`../../i18n/messages/${currentLocale}.json`
 ```
 
 **Step 2: Run Translation Script**
+
 ```bash
 $ npm run translate:incremental
 
@@ -697,11 +707,13 @@ $ npm run translate:incremental
 ```
 
 **Step 3: Validation** (automatic)
+
 - Structure check: Ensures JSON matches source file structure
 - Key completeness: Verifies all source keys present in translation
 - Type safety: Validates string values (no accidental objects/arrays)
 
 **Step 4: File Output**
+
 ```bash
 $ ls src/i18n/messages/ | wc -l
 117  # 114 locales + en.json + en-US.json + metadata file
@@ -710,6 +722,7 @@ $ ls src/i18n/messages/ | wc -l
 ### 2. Next.js Build Integration
 
 **Package.json Scripts**:
+
 ```json
 {
   "scripts": {
@@ -725,6 +738,7 @@ $ ls src/i18n/messages/ | wc -l
 ```
 
 **Build Process**:
+
 1. Translations must be pre-generated (not auto-run during `next build`)
 2. Run `npm run translate:incremental` before committing new i18n keys
 3. Optional: Add git pre-commit hook to auto-translate staged changes
@@ -733,14 +747,15 @@ $ ls src/i18n/messages/ | wc -l
 ### 3. PWA Offline Support
 
 **Service Worker** (`public/service-worker.js` - conceptual):
+
 ```javascript
 // Cache all locale files during install
-self.addEventListener('install', (event) => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open('i18n-v1').then((cache) => {
+    caches.open("i18n-v1").then((cache) => {
       return cache.addAll([
-        '/_next/static/chunks/i18n-messages-es-MX.json',
-        '/_next/static/chunks/i18n-messages-ko-KR.json',
+        "/_next/static/chunks/i18n-messages-es-MX.json",
+        "/_next/static/chunks/i18n-messages-ko-KR.json",
         // ... all 114 locales
       ]);
     })
@@ -748,8 +763,8 @@ self.addEventListener('install', (event) => {
 });
 
 // Serve from cache when offline
-self.addEventListener('fetch', (event) => {
-  if (event.request.url.includes('i18n-messages')) {
+self.addEventListener("fetch", (event) => {
+  if (event.request.url.includes("i18n-messages")) {
     event.respondWith(
       caches.match(event.request).then((response) => {
         return response || fetch(event.request);
@@ -760,6 +775,7 @@ self.addEventListener('fetch', (event) => {
 ```
 
 **Manifest** (`public/manifest.json`):
+
 ```json
 {
   "name": "Budget App",
@@ -779,6 +795,7 @@ self.addEventListener('fetch', (event) => {
 ## Reproduction Guide
 
 ### Prerequisites
+
 1. Next.js 15.1.6+ with App Router
 2. OpenAI API key (GPT-4o-mini access)
 3. Node.js 18+
@@ -797,24 +814,37 @@ Create `src/i18n/config.ts`:
 
 ```typescript
 export type SupportedLocale =
-  | 'en-US' | 'es-ES' | 'es-MX' | 'fr-FR' | 'de-DE'
-  | 'ja-JP' | 'ko-KR' | 'zh-CN' | 'ar-SA' | 'hi-IN'
-  // ... add all 114 locales
+  | "en-US"
+  | "es-ES"
+  | "es-MX"
+  | "fr-FR"
+  | "de-DE"
+  | "ja-JP"
+  | "ko-KR"
+  | "zh-CN"
+  | "ar-SA"
+  | "hi-IN";
+// ... add all 114 locales
 
 export const SUPPORTED_LOCALES: SupportedLocale[] = [
-  'en-US', 'es-ES', 'es-MX', // ... all locales
+  "en-US",
+  "es-ES",
+  "es-MX", // ... all locales
 ];
 
-export const DEFAULT_LOCALE: SupportedLocale = 'en-US';
+export const DEFAULT_LOCALE: SupportedLocale = "en-US";
 
-export const LOCALE_METADATA: Record<SupportedLocale, {
-  label: string;
-  dir: 'ltr' | 'rtl';
-  currency: string;
-  numberingSystem: string;
-}> = {
-  'en-US': { label: 'English (US)', dir: 'ltr', currency: 'USD', numberingSystem: 'standard' },
-  'ar-SA': { label: 'Arabic (Saudi)', dir: 'rtl', currency: 'SAR', numberingSystem: 'standard' },
+export const LOCALE_METADATA: Record<
+  SupportedLocale,
+  {
+    label: string;
+    dir: "ltr" | "rtl";
+    currency: string;
+    numberingSystem: string;
+  }
+> = {
+  "en-US": { label: "English (US)", dir: "ltr", currency: "USD", numberingSystem: "standard" },
+  "ar-SA": { label: "Arabic (Saudi)", dir: "rtl", currency: "SAR", numberingSystem: "standard" },
   // ... all locales
 };
 ```
@@ -846,35 +876,35 @@ Create `scripts/translate-messages.ts` (simplified version):
 
 ```typescript
 #!/usr/bin/env tsx
-import dotenv from 'dotenv';
-import OpenAI from 'openai';
-import fs from 'fs';
-import path from 'path';
-import { SUPPORTED_LOCALES } from '../src/i18n/config';
+import dotenv from "dotenv";
+import OpenAI from "openai";
+import fs from "fs";
+import path from "path";
+import { SUPPORTED_LOCALES } from "../src/i18n/config";
 
-dotenv.config({ path: '.env.local' });
+dotenv.config({ path: ".env.local" });
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-const SOURCE_FILE = path.join(__dirname, '../src/i18n/messages/en.json');
-const MESSAGES_DIR = path.join(__dirname, '../src/i18n/messages');
+const SOURCE_FILE = path.join(__dirname, "../src/i18n/messages/en.json");
+const MESSAGES_DIR = path.join(__dirname, "../src/i18n/messages");
 
 async function translateLocale(locale: string, source: object): Promise<object> {
   const prompt = `Translate this JSON to ${locale}. Preserve structure exactly:\n\n${JSON.stringify(source, null, 2)}`;
 
   const response = await client.chat.completions.create({
-    model: 'gpt-4o-mini',
-    messages: [{ role: 'user', content: prompt }],
-    response_format: { type: 'json_object' },
+    model: "gpt-4o-mini",
+    messages: [{ role: "user", content: prompt }],
+    response_format: { type: "json_object" },
   });
 
   return JSON.parse(response.choices[0].message.content!);
 }
 
 async function main() {
-  const source = JSON.parse(fs.readFileSync(SOURCE_FILE, 'utf-8'));
+  const source = JSON.parse(fs.readFileSync(SOURCE_FILE, "utf-8"));
 
   for (const locale of SUPPORTED_LOCALES) {
-    if (locale === 'en') continue;
+    if (locale === "en") continue;
 
     console.log(`Translating ${locale}...`);
     const translation = await translateLocale(locale, source);
@@ -892,7 +922,7 @@ main();
 Create `src/lib/locale-storage.ts`:
 
 ```typescript
-import type { SupportedLocale } from '@/i18n/config';
+import type { SupportedLocale } from "@/i18n/config";
 
 export interface LocalePreferences {
   locale: SupportedLocale;
@@ -900,18 +930,18 @@ export interface LocalePreferences {
 }
 
 export function getLocalePreferences(): LocalePreferences {
-  if (typeof window === 'undefined') return { locale: 'en-US' };
+  if (typeof window === "undefined") return { locale: "en-US" };
 
-  const stored = localStorage.getItem('locale-preferences');
-  return stored ? JSON.parse(stored) : { locale: 'en-US' };
+  const stored = localStorage.getItem("locale-preferences");
+  return stored ? JSON.parse(stored) : { locale: "en-US" };
 }
 
 export function setLocalePreferences(prefs: Partial<LocalePreferences>): void {
   const current = getLocalePreferences();
   const updated = { ...current, ...prefs, updatedAt: Date.now() };
 
-  localStorage.setItem('locale-preferences', JSON.stringify(updated));
-  window.dispatchEvent(new CustomEvent('localePreferencesChanged'));
+  localStorage.setItem("locale-preferences", JSON.stringify(updated));
+  window.dispatchEvent(new CustomEvent("localePreferencesChanged"));
 }
 ```
 
@@ -1161,31 +1191,38 @@ Use this checklist to verify the i18n implementation:
 ## Evidence from Repository
 
 ### Configuration Files
+
 - `/src/i18n/config.ts` (960 lines) - Locale metadata, validation, browser detection
 - `/src/i18n/middleware.ts` (58 lines) - Accept-Language header parsing
 
 ### Storage & State
+
 - `/src/lib/locale-storage.ts` (233 lines) - localStorage + Supabase sync, conflict resolution
 - `/src/components/budget/ClientI18nProvider.tsx` (65 lines) - React context provider, dynamic imports
 
 ### Formatting Utilities
+
 - `/src/i18n/utils/formatCurrency.ts` (115 lines) - Multi-currency, no conversion, validation
 - `/src/i18n/utils/formatDate.ts` (212 lines) - Timezone-aware, relative time, long dates
 - `/src/i18n/utils/formatNumber.ts` (157 lines) - Indian numbering, compact notation, percentages
 
 ### RTL Support
+
 - `/src/lib/rtl-utils.ts` (176 lines) - Direction detection, alignment flipping, side mapping
 
 ### Translation Build Scripts
+
 - `/scripts/translate-messages.ts` (429 lines) - Full translation with OpenAI GPT-4o-mini
 - `/scripts/translate-incremental.ts` (489 lines) - Git diff detection, incremental translation
 - `/scripts/lib/claude-api-client.ts` (100+ lines) - OpenAI API wrapper, rate limiting, retry logic
 
 ### Translation Data
+
 - `/src/i18n/messages/` (117 files, 2.3MB) - 114 locale files + source files
 - `/src/i18n/glossaries/` (14 files) - Terminology glossaries for major languages
 
 ### App Integration
+
 - `/src/app/layout.tsx` (104 lines) - Root HTML with dynamic `lang` and `dir` attributes
 - `/src/app/budget-app/layout.tsx` (190 lines) - Budget app wrapper with ClientI18nProvider
 - `/src/app/budget-app/page.tsx` (196 lines) - Dashboard using `useTranslations()` and `useFormatter()`
@@ -1196,5 +1233,6 @@ Use this checklist to verify the i18n implementation:
 **Last Reviewed**: 2025-12-31
 **Maintainer**: Budget App Development Team
 **Related Docs**:
+
 - `src/i18n/glossaries/README.md` - Translation glossaries guide
 - `FINAL_COMPLETION_SUMMARY.md` - Complete LMS implementation details

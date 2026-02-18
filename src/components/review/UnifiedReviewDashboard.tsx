@@ -77,10 +77,13 @@ export default function UnifiedReviewDashboard() {
       }
 
       // Get unified review queue (flashcards + questions)
-      const { data: queueData, error: queueError } = await supabase.rpc("get_unified_review_queue", {
-        p_user_id: user.id,
-        p_limit: 50,
-      });
+      const { data: queueData, error: queueError } = await supabase.rpc(
+        "get_unified_review_queue",
+        {
+          p_user_id: user.id,
+          p_limit: 50,
+        }
+      );
 
       if (queueError) {
         console.error("Error loading queue:", queueError);
@@ -129,8 +132,8 @@ export default function UnifiedReviewDashboard() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center p-12">
-        <div className="text-center space-y-4">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+        <div className="space-y-4 text-center">
+          <div className="mx-auto h-12 w-12 animate-spin rounded-full border-b-2 border-primary"></div>
           <p className="text-muted-foreground">Loading review dashboard...</p>
         </div>
       </div>
@@ -153,7 +156,7 @@ export default function UnifiedReviewDashboard() {
                 <Brain className="h-7 w-7 text-primary" />
                 Daily Review Dashboard
               </CardTitle>
-              <p className="text-sm text-muted-foreground mt-2">
+              <p className="mt-2 text-sm text-muted-foreground">
                 Spaced repetition system with 42% retention improvement
               </p>
             </div>
@@ -171,10 +174,10 @@ export default function UnifiedReviewDashboard() {
       </Card>
 
       {/* Statistics Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         <Card className={totalDue > 0 ? "border-orange-500/50" : "border-green-500/50"}>
           <CardContent className="pt-6 text-center">
-            <div className="flex items-center justify-center mb-2">
+            <div className="mb-2 flex items-center justify-center">
               {totalDue > 0 ? (
                 <AlertCircle className="h-6 w-6 text-orange-500" />
               ) : (
@@ -188,7 +191,7 @@ export default function UnifiedReviewDashboard() {
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <Brain className="h-6 w-6 mx-auto mb-2 text-primary" />
+            <Brain className="mx-auto mb-2 h-6 w-6 text-primary" />
             <p className="text-3xl font-bold">{flashcardCount}</p>
             <p className="text-xs text-muted-foreground">Flashcards</p>
           </CardContent>
@@ -196,7 +199,7 @@ export default function UnifiedReviewDashboard() {
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <BookOpen className="h-6 w-6 mx-auto mb-2 text-purple-500" />
+            <BookOpen className="mx-auto mb-2 h-6 w-6 text-purple-500" />
             <p className="text-3xl font-bold">{questionCount}</p>
             <p className="text-xs text-muted-foreground">Questions</p>
           </CardContent>
@@ -204,9 +207,12 @@ export default function UnifiedReviewDashboard() {
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <TrendingUp className="h-6 w-6 mx-auto mb-2 text-[#22c55e]" />
+            <TrendingUp className="mx-auto mb-2 h-6 w-6 text-[#22c55e]" />
             <p className="text-3xl font-bold">
-              {Math.round(((stats?.avg_flashcard_retention || 0) + (stats?.avg_question_mastery || 0)) / 2)}%
+              {Math.round(
+                ((stats?.avg_flashcard_retention || 0) + (stats?.avg_question_mastery || 0)) / 2
+              )}
+              %
             </p>
             <p className="text-xs text-muted-foreground">Avg Mastery</p>
           </CardContent>
@@ -214,7 +220,7 @@ export default function UnifiedReviewDashboard() {
       </div>
 
       {/* Action Cards */}
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid gap-4 md:grid-cols-2">
         {/* Flashcards */}
         <Card>
           <CardHeader>
@@ -224,7 +230,7 @@ export default function UnifiedReviewDashboard() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
+            <div className="flex items-center justify-between rounded-lg bg-muted p-3">
               <div>
                 <p className="font-medium">Active Recall Practice</p>
                 <p className="text-sm text-muted-foreground">
@@ -251,9 +257,9 @@ export default function UnifiedReviewDashboard() {
               className="w-full"
               size="sm"
             >
-              <Brain className="h-4 w-4 mr-2" />
+              <Brain className="mr-2 h-4 w-4" />
               Manage Flashcards
-              <ExternalLink className="h-3 w-3 ml-2" />
+              <ExternalLink className="ml-2 h-3 w-3" />
             </Button>
 
             <div className="text-xs text-muted-foreground">
@@ -271,7 +277,7 @@ export default function UnifiedReviewDashboard() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
+            <div className="flex items-center justify-between rounded-lg bg-muted p-3">
               <div>
                 <p className="font-medium">Exam Question Bank</p>
                 <p className="text-sm text-muted-foreground">
@@ -336,10 +342,10 @@ export default function UnifiedReviewDashboard() {
               {queue.slice(0, 10).map((item, idx) => (
                 <div
                   key={item.item_id}
-                  className="flex items-center justify-between p-2 rounded-lg bg-muted/50"
+                  className="flex items-center justify-between rounded-lg bg-muted/50 p-2"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-sm font-mono text-muted-foreground">#{idx + 1}</span>
+                    <span className="font-mono text-sm text-muted-foreground">#{idx + 1}</span>
                     {item.item_type === "flashcard" ? (
                       <Brain className="h-4 w-4 text-primary" />
                     ) : (

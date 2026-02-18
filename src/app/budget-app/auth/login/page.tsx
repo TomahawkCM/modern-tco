@@ -70,7 +70,10 @@ export default function BudgetLoginPage() {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <label className="text-sm font-medium text-slate-300">Password</label>
-            <Link href="/budget-app/auth/forgot-password" className="text-xs text-teal-400 hover:text-teal-300">
+            <Link
+              href="/budget-app/auth/forgot-password"
+              className="text-xs text-teal-400 hover:text-teal-300"
+            >
               Forgot password?
             </Link>
           </div>

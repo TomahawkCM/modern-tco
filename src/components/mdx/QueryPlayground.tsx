@@ -1,12 +1,19 @@
-'use client';
+"use client";
 
-import React, { useState, useCallback } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { CheckCircle2, XCircle, HelpCircle, Play, RotateCcw, Lightbulb } from 'lucide-react';
-import { Textarea } from '@/components/ui/textarea';
-import { ErrorMessages } from '@/lib/error-messages';
+import React, { useState, useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { CheckCircle2, XCircle, HelpCircle, Play, RotateCcw, Lightbulb } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { ErrorMessages } from "@/lib/error-messages";
 
 interface QueryPlaygroundProps {
   title?: string;
@@ -14,7 +21,7 @@ interface QueryPlaygroundProps {
   expectedQuery: string;
   expectedResult?: string;
   hint?: string;
-  difficulty?: 'beginner' | 'intermediate' | 'advanced';
+  difficulty?: "beginner" | "intermediate" | "advanced";
   children?: React.ReactNode;
 }
 
@@ -24,22 +31,22 @@ export default function QueryPlayground({
   expectedQuery,
   expectedResult = "Query results would appear here",
   hint,
-  difficulty = 'beginner',
-  children
+  difficulty = "beginner",
+  children,
 }: QueryPlaygroundProps) {
-  const [userQuery, setUserQuery] = useState('');
+  const [userQuery, setUserQuery] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [showHint, setShowHint] = useState(false);
-  const [feedback, setFeedback] = useState<'correct' | 'incorrect' | null>(null);
+  const [feedback, setFeedback] = useState<"correct" | "incorrect" | null>(null);
   const [attempts, setAttempts] = useState(0);
 
   const normalizeQuery = (query: string): string => {
     return query
       .toLowerCase()
-      .replace(/\s+/g, ' ')
+      .replace(/\s+/g, " ")
       .trim()
-      .replace(/['"]/g, '')
-      .replace(/\s*,\s*/g, ',');
+      .replace(/['"]/g, "")
+      .replace(/\s*,\s*/g, ",");
   };
 
   const checkQuery = useCallback(() => {
@@ -47,31 +54,32 @@ export default function QueryPlayground({
     const expected = normalizeQuery(expectedQuery);
 
     // Check for exact match or close match
-    const isCorrect = normalized === expected ||
-      (normalized.includes('get') &&
-       normalized.includes('from all machines') &&
-       expectedQuery.split(' ').every(word =>
-         normalized.includes(word.toLowerCase().replace(/[,'"]/g, ''))
-       ));
+    const isCorrect =
+      normalized === expected ||
+      (normalized.includes("get") &&
+        normalized.includes("from all machines") &&
+        expectedQuery
+          .split(" ")
+          .every((word) => normalized.includes(word.toLowerCase().replace(/[,'"]/g, ""))));
 
-    setFeedback(isCorrect ? 'correct' : 'incorrect');
+    setFeedback(isCorrect ? "correct" : "incorrect");
     setShowResult(isCorrect);
-    setAttempts(prev => prev + 1);
+    setAttempts((prev) => prev + 1);
 
     // Save progress to localStorage
     if (isCorrect) {
-      const progress = JSON.parse(localStorage.getItem('queryPlaygroundProgress') || '{}');
+      const progress = JSON.parse(localStorage.getItem("queryPlaygroundProgress") || "{}");
       progress[title] = {
         completed: true,
         attempts: attempts + 1,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
-      localStorage.setItem('queryPlaygroundProgress', JSON.stringify(progress));
+      localStorage.setItem("queryPlaygroundProgress", JSON.stringify(progress));
     }
   }, [userQuery, expectedQuery, title, attempts]);
 
   const reset = () => {
-    setUserQuery('');
+    setUserQuery("");
     setShowResult(false);
     setFeedback(null);
     setShowHint(false);
@@ -79,11 +87,15 @@ export default function QueryPlayground({
   };
 
   const getDifficultyColor = () => {
-    switch(difficulty) {
-      case 'beginner': return 'text-[#22c55e]';
-      case 'intermediate': return 'text-yellow-600';
-      case 'advanced': return 'text-red-600';
-      default: return 'text-gray-600';
+    switch (difficulty) {
+      case "beginner":
+        return "text-[#22c55e]";
+      case "intermediate":
+        return "text-yellow-600";
+      case "advanced":
+        return "text-red-600";
+      default:
+        return "text-gray-600";
     }
   };
 
@@ -92,7 +104,7 @@ export default function QueryPlayground({
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">
-            <Play className="w-5 h-5" />
+            <Play className="h-5 w-5" />
             {title}
           </CardTitle>
           <span className={`text-sm font-medium ${getDifficultyColor()}`}>
@@ -104,7 +116,7 @@ export default function QueryPlayground({
 
       <CardContent className="space-y-4">
         <div>
-          <label htmlFor="query-input" className="block text-sm font-medium mb-2">
+          <label htmlFor="query-input" className="mb-2 block text-sm font-medium">
             Enter your Tanium query:
           </label>
           <Textarea
@@ -118,23 +130,23 @@ export default function QueryPlayground({
         </div>
 
         {feedback && (
-          <Alert className={feedback === 'correct' ? 'border-green-500' : 'border-orange-400'}>
+          <Alert className={feedback === "correct" ? "border-green-500" : "border-orange-400"}>
             <div className="flex items-center gap-2">
-              {feedback === 'correct' ? (
+              {feedback === "correct" ? (
                 <>
-                  <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
+                  <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />
                   <AlertDescription className="text-green-700">
-                    Excellent work! Your query is correct. You're getting the hang of Tanium queries! 🎉
+                    Excellent work! Your query is correct. You're getting the hang of Tanium
+                    queries! 🎉
                   </AlertDescription>
                 </>
               ) : (
                 <>
-                  <XCircle className="w-5 h-5 text-orange-500" />
+                  <XCircle className="h-5 w-5 text-orange-500" />
                   <AlertDescription className="text-orange-700">
                     {attempts >= 2
                       ? `Close! Check out the hint below for guidance. Remember, practice makes perfect! 💡`
-                      : `Almost there! Give it another shot. Try comparing your query with the example format. 🤔`
-                    }
+                      : `Almost there! Give it another shot. Try comparing your query with the example format. 🤔`}
                   </AlertDescription>
                 </>
               )}
@@ -143,9 +155,9 @@ export default function QueryPlayground({
         )}
 
         {showResult && (
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <p className="text-sm font-medium mb-2">Query Results:</p>
-            <pre className="text-xs bg-white p-3 rounded border overflow-x-auto">
+          <div className="rounded-lg bg-gray-50 p-4">
+            <p className="mb-2 text-sm font-medium">Query Results:</p>
+            <pre className="overflow-x-auto rounded border bg-white p-3 text-xs">
               {expectedResult}
             </pre>
           </div>
@@ -153,18 +165,14 @@ export default function QueryPlayground({
 
         {showHint && hint && (
           <Alert className="border-blue-300 bg-blue-50">
-            <Lightbulb className="w-4 h-4 text-blue-600" />
+            <Lightbulb className="h-4 w-4 text-blue-600" />
             <AlertDescription className="text-blue-700">
               <strong>Hint:</strong> {hint}
             </AlertDescription>
           </Alert>
         )}
 
-        {children && (
-          <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-            {children}
-          </div>
-        )}
+        {children && <div className="mt-4 rounded-lg bg-gray-50 p-4">{children}</div>}
       </CardContent>
 
       <CardFooter className="flex justify-between">
@@ -174,26 +182,22 @@ export default function QueryPlayground({
             disabled={!userQuery.trim()}
             className="flex items-center gap-2"
           >
-            <Play className="w-4 h-4" />
+            <Play className="h-4 w-4" />
             Run Query
           </Button>
-          <Button
-            onClick={reset}
-            variant="outline"
-            className="flex items-center gap-2"
-          >
-            <RotateCcw className="w-4 h-4" />
+          <Button onClick={reset} variant="outline" className="flex items-center gap-2">
+            <RotateCcw className="h-4 w-4" />
             Reset
           </Button>
         </div>
 
-        {hint && !showHint && attempts >= 1 && feedback !== 'correct' && (
+        {hint && !showHint && attempts >= 1 && feedback !== "correct" && (
           <Button
             onClick={() => setShowHint(true)}
             variant="ghost"
             className="flex items-center gap-2"
           >
-            <HelpCircle className="w-4 h-4" />
+            <HelpCircle className="h-4 w-4" />
             Show Hint
           </Button>
         )}

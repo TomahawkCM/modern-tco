@@ -7,7 +7,7 @@ import {
   Module3Section,
   MODULE_3_SECTIONS,
   createSectionPracticeTargeting,
-  type SectionMetadata
+  type SectionMetadata,
 } from "@/lib/module3-section-definitions";
 import { PracticeQuestionTargeting } from "@/lib/practice-question-targeting";
 import { TCODomain, type Question, type PracticeTargeting } from "@/types/exam";
@@ -43,7 +43,7 @@ export function getModule3SectionQuestions(
   // Include prerequisites if requested
   if (config?.includePrerequisites && section.prerequisites) {
     const prereqTags = section.prerequisites.map(
-      prereqId => MODULE_3_SECTIONS[prereqId].primaryTag
+      (prereqId) => MODULE_3_SECTIONS[prereqId].primaryTag
     );
     targeting.optionalTags = [...targeting.optionalTags, ...prereqTags];
   }
@@ -51,7 +51,7 @@ export function getModule3SectionQuestions(
   // Include related sections if requested
   if (config?.includeRelatedSections) {
     const relatedSections = getRelatedSections(sectionId);
-    const relatedTags = relatedSections.map(s => s.primaryTag);
+    const relatedTags = relatedSections.map((s) => s.primaryTag);
     targeting.optionalTags = [...targeting.optionalTags, ...relatedTags];
   }
 
@@ -73,44 +73,44 @@ function getRelatedSections(sectionId: Module3Section): SectionMetadata[] {
   const relatedMap: Record<Module3Section, Module3Section[]> = {
     [Module3Section.PACKAGE_VALIDATION]: [
       Module3Section.DEPENDENCY_MANAGEMENT,
-      Module3Section.ERROR_HANDLING
+      Module3Section.ERROR_HANDLING,
     ],
     [Module3Section.DEPLOYMENT_STRATEGIES]: [
       Module3Section.SCHEDULING_AUTOMATION,
-      Module3Section.BATCH_OPERATIONS
+      Module3Section.BATCH_OPERATIONS,
     ],
     [Module3Section.ERROR_HANDLING]: [
       Module3Section.ROLLBACK_PROCEDURES,
-      Module3Section.PACKAGE_VALIDATION
+      Module3Section.PACKAGE_VALIDATION,
     ],
     [Module3Section.ROLLBACK_PROCEDURES]: [
       Module3Section.ERROR_HANDLING,
-      Module3Section.PERFORMANCE_MONITORING
+      Module3Section.PERFORMANCE_MONITORING,
     ],
     [Module3Section.PERFORMANCE_MONITORING]: [
       Module3Section.BATCH_OPERATIONS,
-      Module3Section.ROLLBACK_PROCEDURES
+      Module3Section.ROLLBACK_PROCEDURES,
     ],
     [Module3Section.SECURITY_CONSIDERATIONS]: [
       Module3Section.DEPLOYMENT_STRATEGIES,
-      Module3Section.DEPENDENCY_MANAGEMENT
+      Module3Section.DEPENDENCY_MANAGEMENT,
     ],
     [Module3Section.BATCH_OPERATIONS]: [
       Module3Section.PERFORMANCE_MONITORING,
-      Module3Section.DEPLOYMENT_STRATEGIES
+      Module3Section.DEPLOYMENT_STRATEGIES,
     ],
     [Module3Section.SCHEDULING_AUTOMATION]: [
       Module3Section.DEPLOYMENT_STRATEGIES,
-      Module3Section.BATCH_OPERATIONS
+      Module3Section.BATCH_OPERATIONS,
     ],
     [Module3Section.DEPENDENCY_MANAGEMENT]: [
       Module3Section.PACKAGE_VALIDATION,
-      Module3Section.SECURITY_CONSIDERATIONS
-    ]
+      Module3Section.SECURITY_CONSIDERATIONS,
+    ],
   };
 
   const relatedIds = relatedMap[sectionId] || [];
-  return relatedIds.map(id => MODULE_3_SECTIONS[id]);
+  return relatedIds.map((id) => MODULE_3_SECTIONS[id]);
 }
 
 /**
@@ -123,7 +123,7 @@ function applyAdaptiveDifficulty(
   const difficultyDistribution = {
     Beginner: { beginner: 0.6, intermediate: 0.3, advanced: 0.1 },
     Intermediate: { beginner: 0.2, intermediate: 0.6, advanced: 0.2 },
-    Advanced: { beginner: 0.1, intermediate: 0.3, advanced: 0.6 }
+    Advanced: { beginner: 0.1, intermediate: 0.3, advanced: 0.6 },
   };
 
   const distribution = difficultyDistribution[baseDifficulty];
@@ -131,16 +131,16 @@ function applyAdaptiveDifficulty(
 
   // Group questions by difficulty
   const byDifficulty = {
-    beginner: questions.filter(q => q.difficulty === "Beginner"),
-    intermediate: questions.filter(q => q.difficulty === "Intermediate"),
-    advanced: questions.filter(q => q.difficulty === "Advanced")
+    beginner: questions.filter((q) => q.difficulty === "Beginner"),
+    intermediate: questions.filter((q) => q.difficulty === "Intermediate"),
+    advanced: questions.filter((q) => q.difficulty === "Advanced"),
   };
 
   // Calculate target counts
   const targets = {
     beginner: Math.floor(totalQuestions * distribution.beginner),
     intermediate: Math.floor(totalQuestions * distribution.intermediate),
-    advanced: Math.ceil(totalQuestions * distribution.advanced)
+    advanced: Math.ceil(totalQuestions * distribution.advanced),
   };
 
   // Select questions based on targets
@@ -155,7 +155,7 @@ function applyAdaptiveDifficulty(
 
   // Fill remaining slots if needed
   while (selected.length < totalQuestions && selected.length < questions.length) {
-    const remaining = questions.filter(q => !selected.includes(q));
+    const remaining = questions.filter((q) => !selected.includes(q));
     if (remaining.length === 0) break;
     selected.push(remaining[Math.floor(Math.random() * remaining.length)]);
   }
@@ -189,14 +189,14 @@ export function buildModule3PracticeSession(
   const sectionBreakdown: Partial<Record<Module3Section, number>> = {};
 
   // Process each requested section
-  config.sections.forEach(sectionId => {
+  config.sections.forEach((sectionId) => {
     const section = MODULE_3_SECTIONS[sectionId];
     if (!section) return;
 
     // Adjust question count based on gaps if focusing on weak areas
     let targetCount = config.questionsPerSection;
     if (config.focusOnWeakAreas) {
-      const gapRatio = 1 - (section.currentQuestionCount / section.questionTargetCount);
+      const gapRatio = 1 - section.currentQuestionCount / section.questionTargetCount;
       targetCount = Math.ceil(config.questionsPerSection * (1 + gapRatio * 0.5));
     }
 
@@ -204,7 +204,7 @@ export function buildModule3PracticeSession(
     const sectionQuestions = getModule3SectionQuestions(allQuestions, sectionId, {
       sectionId,
       includeRelatedSections: config.sections.length === 1, // Include related if single section
-      adaptiveDifficulty: true
+      adaptiveDifficulty: true,
     });
 
     // Limit to target count
@@ -224,7 +224,7 @@ export function buildModule3PracticeSession(
   return {
     questions: sessionQuestions,
     sectionBreakdown: sectionBreakdown as Record<Module3Section, number>,
-    estimatedTime
+    estimatedTime,
   };
 }
 
@@ -272,7 +272,7 @@ export function getModule3PracticeRecommendations(
   return {
     prioritySections,
     recommendedSessionType,
-    suggestedDuration
+    suggestedDuration,
   };
 }
 
@@ -290,11 +290,11 @@ export function createModule3PracticeTargeting(
   const allTags: string[] = [];
   const allObjectives: string[] = [];
 
-  sections.forEach(sectionId => {
+  sections.forEach((sectionId) => {
     const section = MODULE_3_SECTIONS[sectionId];
     if (section) {
       allTags.push(section.primaryTag, ...section.tags);
-      allObjectives.push(...section.learningObjectives.map(obj => obj.split(":")[0]));
+      allObjectives.push(...section.learningObjectives.map((obj) => obj.split(":")[0]));
     }
   });
 
@@ -306,10 +306,10 @@ export function createModule3PracticeTargeting(
     moduleId: "module-taking-action",
     primaryDomain: TCODomain.TAKING_ACTION,
     targetObjectives: uniqueObjectives,
-    requiredTags: sections.map(s => MODULE_3_SECTIONS[s].primaryTag),
+    requiredTags: sections.map((s) => MODULE_3_SECTIONS[s].primaryTag),
     optionalTags: uniqueTags,
     minQuestions: (options?.minQuestionsPerSection || 5) * sections.length,
     idealQuestions: (options?.maxQuestionsPerSection || 10) * sections.length,
-    fallbackStrategy: options?.includeCrossSectionQuestions ? "mixed-content" : "expand-domain"
+    fallbackStrategy: options?.includeCrossSectionQuestions ? "mixed-content" : "expand-domain",
   };
 }

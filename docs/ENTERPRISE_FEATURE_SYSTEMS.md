@@ -54,11 +54,11 @@ The assessment engine implements sophisticated scoring based on the official Tan
 ```typescript
 // Domain Weight Distribution (Official TCO Certification)
 const DOMAIN_WEIGHTS = {
-  "asking-questions": 0.22,        // 22% - Question construction and sensor mastery
-  "refining-targeting": 0.23,      // 23% - Computer groups and targeting (highest priority)
-  "taking-action": 0.15,           // 15% - Package deployment and action execution
-  "navigation-modules": 0.23,      // 23% - Console navigation and module functions (highest priority)
-  "reporting-export": 0.17         // 17% - Reporting and data export procedures
+  "asking-questions": 0.22, // 22% - Question construction and sensor mastery
+  "refining-targeting": 0.23, // 23% - Computer groups and targeting (highest priority)
+  "taking-action": 0.15, // 15% - Package deployment and action execution
+  "navigation-modules": 0.23, // 23% - Console navigation and module functions (highest priority)
+  "reporting-export": 0.17, // 17% - Reporting and data export procedures
 };
 ```
 
@@ -97,7 +97,7 @@ const videoAnalytics = {
   play: { provider: "youtube", youtubeId, title, moduleSlug },
   progress: { provider: "youtube", youtubeId, title, moduleSlug, milestone },
   pause: { provider: "youtube", youtubeId, title, moduleSlug, position, percent },
-  complete: { provider: "youtube", youtubeId, title, moduleSlug, duration }
+  complete: { provider: "youtube", youtubeId, title, moduleSlug, duration },
 };
 ```
 
@@ -160,25 +160,25 @@ CREATE TRIGGER update_search_vector
 // Analytics Event Tracking
 export const analytics = {
   capture: (event: string, properties: Record<string, any>) => {
-    if (typeof window !== 'undefined' && window.posthog) {
+    if (typeof window !== "undefined" && window.posthog) {
       window.posthog.capture(event, {
         ...properties,
         timestamp: new Date().toISOString(),
         user_agent: navigator.userAgent,
-        session_id: sessionStorage.getItem('session_id')
+        session_id: sessionStorage.getItem("session_id"),
       });
     }
-  }
+  },
 };
 
 // Video Analytics Events
 const videoEvents = [
-  'video_impression',    // Video component rendered
-  'video_visible',       // Video becomes visible (50% threshold)
-  'video_play',          // User starts video playback
-  'video_progress',      // Milestone completion (25%, 50%, 75%, 100%)
-  'video_pause',         // User pauses video
-  'video_complete'       // Video fully completed
+  "video_impression", // Video component rendered
+  "video_visible", // Video becomes visible (50% threshold)
+  "video_play", // User starts video playback
+  "video_progress", // Milestone completion (25%, 50%, 75%, 100%)
+  "video_pause", // User pauses video
+  "video_complete", // Video fully completed
 ];
 ```
 
@@ -245,20 +245,28 @@ CREATE POLICY team_access_policy ON team_seats
 // AI-Powered Content Generation
 const aiFeatures = {
   dynamicQuestionGeneration: {
-    provider: 'anthropic',
-    model: 'claude-3-sonnet',
-    capabilities: ['question-authoring', 'difficulty-adjustment', 'content-validation']
+    provider: "anthropic",
+    model: "claude-3-sonnet",
+    capabilities: ["question-authoring", "difficulty-adjustment", "content-validation"],
   },
   intelligentRemediation: {
-    provider: 'anthropic',
-    model: 'claude-3-haiku',
-    capabilities: ['learning-path-optimization', 'weakness-identification', 'study-recommendations']
+    provider: "anthropic",
+    model: "claude-3-haiku",
+    capabilities: [
+      "learning-path-optimization",
+      "weakness-identification",
+      "study-recommendations",
+    ],
   },
   contentAnalysis: {
-    provider: 'anthropic',
-    model: 'claude-3-opus',
-    capabilities: ['content-quality-assessment', 'difficulty-calibration', 'learning-objective-alignment']
-  }
+    provider: "anthropic",
+    model: "claude-3-opus",
+    capabilities: [
+      "content-quality-assessment",
+      "difficulty-calibration",
+      "learning-objective-alignment",
+    ],
+  },
 };
 ```
 
@@ -279,15 +287,19 @@ const aiFeatures = {
 // Real-time Subscriptions
 useEffect(() => {
   const subscription = supabase
-    .channel('progress_updates')
-    .on('postgres_changes', {
-      event: '*',
-      schema: 'public',
-      table: 'user_progress',
-      filter: `user_id=eq.${user.id}`
-    }, (payload) => {
-      updateProgressState(payload);
-    })
+    .channel("progress_updates")
+    .on(
+      "postgres_changes",
+      {
+        event: "*",
+        schema: "public",
+        table: "user_progress",
+        filter: `user_id=eq.${user.id}`,
+      },
+      (payload) => {
+        updateProgressState(payload);
+      }
+    )
     .subscribe();
 
   return () => subscription.unsubscribe();
@@ -362,6 +374,6 @@ This system now competes directly with enterprise Learning Management Systems, p
 
 ---
 
-*Last Updated: January 2025*
-*Status: Enterprise-Grade LMS Complete*
-*Next Phase: Content Expansion & Advanced Analytics*
+_Last Updated: January 2025_
+_Status: Enterprise-Grade LMS Complete_
+_Next Phase: Content Expansion & Advanced Analytics_

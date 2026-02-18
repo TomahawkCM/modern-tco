@@ -13,16 +13,16 @@
  * @deprecated Use CacheManagerV2 from './cache-manager-v2' instead
  */
 
-import * as fs from 'fs';
-import * as crypto from 'crypto';
-import * as path from 'path';
-import type { SupportedLocale } from '../../src/i18n/config';
-import { isValid } from './translation-validator';
+import * as fs from "fs";
+import * as crypto from "crypto";
+import * as path from "path";
+import type { SupportedLocale } from "../../src/i18n/config";
+import { isValid } from "./translation-validator";
 
-const CACHE_FILE = path.join(__dirname, '../.translation-cache.json');
+const CACHE_FILE = path.join(__dirname, "../.translation-cache.json");
 
 // Re-export V2 for convenience
-export { CacheManagerV2, loadSourceWithHash as loadSourceWithHashV2 } from './cache-manager-v2';
+export { CacheManagerV2, loadSourceWithHash as loadSourceWithHashV2 } from "./cache-manager-v2";
 
 export interface TranslationCacheEntry {
   content: object;
@@ -64,7 +64,7 @@ export class CacheManager {
   private load(): TranslationCache {
     try {
       if (fs.existsSync(this.cacheFile)) {
-        const data = fs.readFileSync(this.cacheFile, 'utf-8');
+        const data = fs.readFileSync(this.cacheFile, "utf-8");
         return JSON.parse(data) as TranslationCache;
       }
     } catch (error) {
@@ -73,8 +73,8 @@ export class CacheManager {
 
     // Return empty cache
     return {
-      version: '1.0',
-      sourceHash: '',
+      version: "1.0",
+      sourceHash: "",
       lastUpdated: new Date().toISOString(),
       translations: {},
       errors: {},
@@ -94,7 +94,7 @@ export class CacheManager {
         fs.mkdirSync(dir, { recursive: true });
       }
 
-      fs.writeFileSync(this.cacheFile, JSON.stringify(this.cache, null, 2), 'utf-8');
+      fs.writeFileSync(this.cacheFile, JSON.stringify(this.cache, null, 2), "utf-8");
     } catch (error) {
       console.error(`Error saving cache: ${error}`);
     }
@@ -111,10 +111,7 @@ export class CacheManager {
   /**
    * Get cached translation if valid
    */
-  getCachedTranslation(
-    locale: SupportedLocale,
-    sourceHash: string
-  ): object | null {
+  getCachedTranslation(locale: SupportedLocale, sourceHash: string): object | null {
     const entry = this.cache.translations[locale];
 
     if (!entry) {
@@ -199,7 +196,7 @@ export class CacheManager {
     sourceHash: string,
     retryFailed: boolean = false
   ): SupportedLocale[] {
-    return allLocales.filter(locale => {
+    return allLocales.filter((locale) => {
       // Include if retry-failed mode and locale has errors
       if (retryFailed && this.cache.errors[locale]) {
         return true;
@@ -228,8 +225,8 @@ export class CacheManager {
    */
   clearAll(): void {
     this.cache = {
-      version: '1.0',
-      sourceHash: '',
+      version: "1.0",
+      sourceHash: "",
       lastUpdated: new Date().toISOString(),
       translations: {},
       errors: {},
@@ -293,7 +290,7 @@ export class CacheManager {
     const errors = this.cache.errors;
 
     const parts: string[] = [
-      '📊 Cache Statistics:',
+      "📊 Cache Statistics:",
       `   Cached translations: ${stats.cached}`,
       `   Failed translations: ${stats.failed}`,
       `   Source hash: ${stats.sourceHash.substring(0, 8)}...`,
@@ -301,16 +298,18 @@ export class CacheManager {
     ];
 
     if (stats.failed > 0) {
-      parts.push('\n❌ Failed locales:');
-      Object.entries(errors).slice(0, 5).forEach(([locale, entry]) => {
-        parts.push(`   - ${locale}: ${entry.error} (${entry.attempts} attempts)`);
-      });
+      parts.push("\n❌ Failed locales:");
+      Object.entries(errors)
+        .slice(0, 5)
+        .forEach(([locale, entry]) => {
+          parts.push(`   - ${locale}: ${entry.error} (${entry.attempts} attempts)`);
+        });
       if (stats.failed > 5) {
         parts.push(`   ... and ${stats.failed - 5} more`);
       }
     }
 
-    return parts.join('\n');
+    return parts.join("\n");
   }
 }
 
@@ -319,14 +318,14 @@ export class CacheManager {
  */
 function computeHash(content: object): string {
   const json = JSON.stringify(content, Object.keys(content).sort());
-  return crypto.createHash('md5').update(json).digest('hex');
+  return crypto.createHash("md5").update(json).digest("hex");
 }
 
 /**
  * Load source file and compute hash
  */
 export function loadSourceWithHash(sourceFile: string): { content: object; hash: string } {
-  const content = JSON.parse(fs.readFileSync(sourceFile, 'utf-8'));
+  const content = JSON.parse(fs.readFileSync(sourceFile, "utf-8"));
   const hash = computeHash(content);
   return { content, hash };
 }

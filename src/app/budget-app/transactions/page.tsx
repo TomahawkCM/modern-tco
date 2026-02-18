@@ -1,5 +1,5 @@
-import { Suspense } from 'react';
-import TransactionsPageClient from './TransactionsPageClient';
+import { Suspense } from "react";
+import TransactionsPageClient from "./TransactionsPageClient";
 
 /**
  * Transactions Page Server Wrapper
@@ -7,14 +7,14 @@ import TransactionsPageClient from './TransactionsPageClient';
  */
 
 // Force dynamic rendering to avoid static generation issues with useSearchParams
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 // Loading fallback component
 function TransactionsLoading() {
   return (
-    <div className="flex items-center justify-center h-64">
+    <div className="flex h-64 items-center justify-center">
       <div className="text-center">
-        <div className="w-16 h-16 border-4 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+        <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-teal-600 border-t-transparent"></div>
         <p className="mt-4 text-gray-600">Loading transactions...</p>
       </div>
     </div>

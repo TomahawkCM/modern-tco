@@ -58,7 +58,7 @@ export interface Transaction {
   transactionType?: string; // OFX: TRNTYPE (DEBIT, CREDIT, CHECK, etc.)
 
   // Refund Tracking Fields
-  refundStatus?: 'expecting' | 'received' | 'partial' | null;
+  refundStatus?: "expecting" | "received" | "partial" | null;
   refundLinkedTransactionId?: string;
   refundExpectedAmount?: number;
   refundReceivedAmount?: number;
@@ -266,7 +266,7 @@ export interface ParsedTransaction {
   matchedTransactionId?: string; // ID of matched existing transaction
   requiresReview?: boolean; // True if confidence is below threshold and needs manual review
   // Source format tracking
-  sourceFormat?: 'csv' | 'ofx' | 'qfx' | 'qbo' | 'pdf' | 'qif' | 'mt940' | 'camt053';
+  sourceFormat?: "csv" | "ofx" | "qfx" | "qbo" | "pdf" | "qif" | "mt940" | "camt053";
   balance?: number; // Running balance if available from statement
 }
 
@@ -662,6 +662,10 @@ export interface Subscription {
 
   // Source tracking
   source: SubscriptionSource;
+
+  // Usage tracking (cost-per-use analysis)
+  usageFrequency?: "daily" | "weekly" | "monthly" | "rarely";
+  usageCount?: number;
 }
 
 // Excluded/Dismissed auto-detected subscriptions
@@ -690,7 +694,7 @@ export interface MerchantRule {
   category: string;
   subcategory?: string;
   confidence: number;
-  source: 'user' | 'auto-learned';
+  source: "user" | "auto-learned";
   applyCount: number;
   createdAt: Date;
   updatedAt: Date;
@@ -699,7 +703,13 @@ export interface MerchantRule {
 // Gamification Events
 export interface GamificationEvent {
   id: string;
-  eventType: 'login' | 'transaction_added' | 'budget_under' | 'review_completed' | 'receipt_scanned' | 'no_spend_day';
+  eventType:
+    | "login"
+    | "transaction_added"
+    | "budget_under"
+    | "review_completed"
+    | "receipt_scanned"
+    | "no_spend_day";
   timestamp: Date;
   metadata?: Record<string, unknown>;
 }
@@ -717,10 +727,10 @@ export interface BudgetAchievement {
   name: string;
   description: string;
   icon: string;
-  category: 'budgeting' | 'saving' | 'debt' | 'receipt' | 'streak' | 'import';
+  category: "budgeting" | "saving" | "debt" | "receipt" | "streak" | "import";
   requirement: { type: string; value: number };
   points: number;
-  rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+  rarity: "common" | "uncommon" | "rare" | "epic" | "legendary";
   unlockedAt?: Date;
 }
 
@@ -752,7 +762,7 @@ export interface Property {
   id: string;
   name: string;
   address?: string;
-  type: 'primary_residence' | 'rental' | 'vacation' | 'land' | 'commercial';
+  type: "primary_residence" | "rental" | "vacation" | "land" | "commercial";
   purchasePrice: number;
   purchaseDate: Date;
   currentValue: number;
@@ -761,7 +771,7 @@ export interface Property {
   loanId?: string;
   hasManualMortgage?: boolean;
   manualMortgageBalance?: number;
-  paymentFrequency?: 'weekly' | 'bi-weekly' | 'monthly' | 'quarterly' | 'semi-annual' | 'annual';
+  paymentFrequency?: "weekly" | "bi-weekly" | "monthly" | "quarterly" | "semi-annual" | "annual";
   annualPropertyTax?: number;
   annualInsurance?: number;
   monthlyHOA?: number;
@@ -780,7 +790,7 @@ export interface EventBudget {
   id: string;
   name: string;
   description?: string;
-  status: 'planning' | 'active' | 'completed' | 'cancelled';
+  status: "planning" | "active" | "completed" | "cancelled";
   totalBudget: number;
   currency: string;
   startDate: Date;
@@ -799,4 +809,64 @@ export interface EventBudgetCategory {
   categoryName: string;
   budgeted: number;
   spent: number;
+}
+
+// Expense Splitting Types
+export interface SplitPerson {
+  id: string;
+  name: string;
+  emoji: string;
+  createdAt: Date;
+}
+
+export interface ExpenseSplit {
+  id: string;
+  transactionId: string;
+  personId: string;
+  amount: number;
+  settled: boolean;
+  createdAt: Date;
+  settledDate?: Date;
+  settledMethod?: string;
+}
+
+// Paycheck Planning Types
+export type PaycheckSchedule = "weekly" | "biweekly" | "semimonthly" | "monthly" | "irregular";
+
+export interface PaycheckAllocation {
+  categoryId: string;
+  amount: number;
+}
+
+export interface Paycheck {
+  id: string;
+  label: string;
+  expectedDate: string;
+  expectedAmount: number;
+  currency: string;
+  allocations: PaycheckAllocation[];
+}
+
+export interface PaycheckPlan {
+  id: string;
+  schedule: PaycheckSchedule;
+  paychecks: Paycheck[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Debt Scenario Types (saved what-if comparisons)
+export interface DebtScenario {
+  id: number;
+  name: string;
+  strategy: string;
+  extraMonthlyPayment: number;
+  customOrder?: string[];
+  oneTimePayments: Array<{ targetDebtId: string; amount: number; month: number }>;
+  totalMonths: number;
+  totalInterest: number;
+  totalPaid: number;
+  debtFreeDate: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

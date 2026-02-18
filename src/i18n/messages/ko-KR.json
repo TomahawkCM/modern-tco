@@ -1,933 +1,1349 @@
 {
-  "accessibilitySettings": {
-    "fontSize": {
-      "default": "Default",
-      "description": "Adjust the base text size for better readability",
-      "extraLarge": "Extra Large",
-      "large": "Large",
-      "title": "Font Size"
+  "nav": {
+    "dashboard": "대시보드",
+    "transactions": "거래내역",
+    "budgets": "예산",
+    "reports": "보고서",
+    "accounts": "계좌",
+    "categories": "카테고리",
+    "goals": "목표",
+    "import": "가져오기",
+    "export": "내보내기",
+    "settings": "설정",
+    "help": "도움말",
+    "about": "정보"
+  },
+  "actions": {
+    "addTransaction": "거래 추가",
+    "importData": "데이터 가져오기",
+    "import": "가져오기",
+    "editDashboard": "대시보드 편집",
+    "saveChanges": "변경사항 저장",
+    "resetDefaults": "기본값으로 재설정"
+  },
+  "welcome": {
+    "title": "예산 앱에 오신 것을 환영합니다",
+    "subtitle": "첫 거래를 추가하거나 은행에서 데이터를 가져오는 것으로 시작하세요"
+  },
+  "common": {
+    "save": "저장",
+    "cancel": "취소",
+    "delete": "삭제",
+    "edit": "편집",
+    "loading": "로딩 중..."
+  },
+  "dashboard": {
+    "widgets": {
+      "accountBalances": {
+        "title": "Account Balances",
+        "netWorth": "Net Worth",
+        "noAccounts": "No accounts added yet",
+        "addAccount": "Add Account",
+        "viewAll": "View All"
+      },
+      "recentTransactions": {
+        "title": "Recent Transactions",
+        "noTransactions": "No transactions yet",
+        "addTransaction": "Add Transaction",
+        "viewAll": "View All",
+        "uncategorized": "Uncategorized"
+      },
+      "spendingByCategory": {
+        "title": "Spending by Category",
+        "noData": "No spending tracked yet",
+        "addTransactions": "Add Transactions",
+        "thisMonth": "This Month",
+        "uncategorized": "Uncategorized"
+      },
+      "budgetProgress": {
+        "title": "Budget Progress",
+        "noBudgets": "No budgets set",
+        "createBudget": "Create Budget",
+        "spent": "Spent",
+        "remaining": "Remaining",
+        "overBudget": "Over budget by {amount}",
+        "viewAll": "View All Budgets"
+      },
+      "incomeVsExpenses": {
+        "title": "Income vs Expenses",
+        "noData": "No transactions yet",
+        "addTransactions": "Add Transactions",
+        "income": "Income",
+        "expenses": "Expenses",
+        "net": "Net",
+        "thisMonth": "This Month"
+      },
+      "monthlyTrends": {
+        "title": "Monthly Trends",
+        "notEnoughData": "Not enough history",
+        "needMoreData": "Add transactions for 2+ months to see trends",
+        "income": "Income",
+        "expenses": "Expenses",
+        "lastSixMonths": "Last 6 Months"
+      },
+      "upcomingBills": {
+        "title": "Upcoming Bills",
+        "noBills": "No upcoming bills",
+        "addSubscription": "Add Subscription",
+        "dueIn": "Due in {days} days",
+        "dueToday": "Due today",
+        "dueTomorrow": "Due tomorrow",
+        "viewAll": "View All"
+      },
+      "safeToSpend": {
+        "title": "Safe to Spend",
+        "noData": "No budgets set up yet",
+        "noBudgets": "No budgets set up yet",
+        "createBudget": "Create Budget",
+        "dailyBudget": "Daily budget",
+        "daysRemaining": "{days} days left",
+        "totalSafe": "Total safe to spend",
+        "perCategory": "Per category",
+        "safe": "On track",
+        "caution": "Watch spending",
+        "danger": "Over budget",
+        "remaining": "{amount} remaining",
+        "overBudget": "{amount} over budget",
+        "viewAll": "View All"
+      },
+      "streaks": {
+        "title": "Streaks & Badges",
+        "dayStreak": "day streak",
+        "points": "points",
+        "badges": "badges"
+      },
+      "weeklyRecap": {
+        "title": "Weekly Recap",
+        "viewFull": "Full Review",
+        "vsLastWeek": "vs last week"
+      },
+      "netWorthMini": {
+        "title": "Net Worth",
+        "viewDetails": "View Details",
+        "assets": "Assets",
+        "liabilities": "Liabilities"
+      },
+      "eventBudget": {
+        "title": "Event Budgets",
+        "viewAll": "View All",
+        "noEvents": "No active events"
+      }
+    }
+  },
+  "widget": {
+    "spendingByCategory": {
+      "title": "카테고리별 지출",
+      "description": "돈이 어디에 쓰이는지 시각적으로 확인하세요"
     },
-    "infoBox": {
-      "savedAutomatically": "Settings are saved automatically and persist across sessions",
-      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
-      "storedLocally": "Your preferences are stored locally and never sent to servers",
-      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
-      "title": "About Accessibility Settings"
+    "recentTransactions": {
+      "title": "최근 거래",
+      "description": "최신 재무 활동을 빠르게 확인하세요"
     },
-    "presets": {
-      "full": "Full",
-      "fullDesc": "Maximum accessibility",
-      "mild": "Mild",
-      "mildDesc": "Slightly enhanced",
-      "moderate": "Moderate",
-      "moderateDesc": "Recommended for most",
-      "off": "Off",
-      "offDesc": "Standard interface",
-      "title": "Quick Presets:"
+    "budgetProgress": {
+      "title": "예산 진행 상황",
+      "description": "예산 목표에 대한 진행 상황을 추적하세요"
     },
-    "reducedMotion": {
-      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
-      "title": "Reduced Motion",
-      "toggleLabel": "Toggle reduced motion mode"
+    "accountBalances": {
+      "title": "계좌 잔액",
+      "description": "모든 계좌의 현재 잔액"
     },
-    "seniorsMode": {
-      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
-      "title": "Seniors Mode"
+    "incomeVsExpenses": {
+      "title": "수입 대 지출",
+      "description": "시간에 따른 수입과 지출을 비교하세요"
     },
-    "themeMode": {
-      "auto": "Auto",
-      "autoDesc": "Match system",
-      "dark": "Dark",
-      "darkDesc": "Easy on eyes",
-      "description": "Choose your preferred color scheme for the budget app",
-      "highContrast": "High Contrast",
-      "highContrastDesc": "Maximum visibility",
-      "light": "Light",
-      "lightDesc": "Bright and clear",
-      "title": "Theme Mode"
+    "monthlyTrends": {
+      "title": "월별 추세",
+      "description": "매달 재무 패턴을 시각화하세요"
+    },
+    "upcomingBills": {
+      "title": "다가오는 청구서",
+      "description": "청구서 알림으로 결제를 놓치지 마세요"
+    },
+    "safeToSpend": {
+      "title": "Safe to Spend",
+      "description": "See how much you can safely spend per category"
+    },
+    "streaks": {
+      "title": "Streaks & Badges",
+      "description": "Track your engagement streaks and achievements"
+    },
+    "weeklyRecap": {
+      "title": "Weekly Recap",
+      "description": "Summary of your weekly spending patterns"
+    },
+    "netWorthMini": {
+      "title": "Net Worth",
+      "description": "Quick view of your total net worth"
+    },
+    "eventBudget": {
+      "title": "Event Budgets",
+      "description": "Track spending for events and projects"
+    }
+  },
+  "dashboardCustomizer": {
+    "button": "Customize",
+    "ariaLabel": "Customize dashboard layout",
+    "title": "Customize Dashboard",
+    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
+    "widgetsVisible": "{visible} of {total} widgets visible",
+    "widgetVisibility": "Widget Visibility",
+    "alwaysVisible": "Always visible",
+    "toggleVisibility": "Toggle {name} visibility",
+    "reorderTitle": "Reorder Widgets",
+    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
+    "resetButton": "Reset to Defaults"
+  },
+  "draggableWidget": {
+    "dragToReorder": "Drag to reorder widget"
+  },
+  "healthScore": {
+    "title": "Financial Health",
+    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "grade": "Grade: {grade}",
+    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
+    "emptyState": {
+      "line1": "Add transactions to see your",
+      "line2": "Financial Health Score"
+    }
+  },
+  "spendingTrendChart": {
+    "title": "Spending Trends & Forecast",
+    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "stats": {
+      "avgMonthly": "Avg Monthly",
+      "lastMonth": "Last Month",
+      "projected": "Projected"
+    },
+    "legend": {
+      "actualSpending": "Actual Spending",
+      "projected": "Projected"
+    },
+    "forecastFooter": "Forecast based on linear regression of last {months} months"
+  },
+  "predictiveSpendingChart": {
+    "title": "Spending Forecast: {category}",
+    "predictionUnavailable": "Prediction Unavailable",
+    "trainingModel": "Training model and generating predictions...",
+    "noData": "No data available for predictions",
+    "stats": {
+      "nextMonth": "Next Month",
+      "avgConfidence": "Avg Confidence",
+      "threeMonthAvg": "3-Month Avg"
+    },
+    "legend": {
+      "confidenceInterval": "Confidence Interval",
+      "actual": "Actual",
+      "predicted": "Predicted"
+    },
+    "table": {
+      "title": "Monthly Predictions",
+      "month": "Month",
+      "predicted": "Predicted",
+      "range": "Range",
+      "confidence": "Confidence"
     }
   },
   "accessibleChart": {
+    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "summary": {
+      "total": "Total: {value}.",
+      "average": "Average: {value}.",
+      "highest": "Highest value: {label} at {value}.",
+      "lowest": "Lowest value: {label} at {value}."
+    },
+    "switchedToChart": "Switched to chart view",
+    "switchedToTable": "Switched to table view",
     "buttons": {
-      "chart": "Chart",
       "showChart": "Show chart view",
       "showTable": "Show data table view",
+      "chart": "Chart",
       "table": "Table"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
-    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "tableHeaders": {
+      "category": "Category",
+      "period": "Period",
+      "value": "Value",
+      "additionalInfo": "Additional Info"
+    },
     "footer": {
-      "average": "Average:",
-      "total": "Total:"
+      "total": "Total:",
+      "average": "Average:"
     },
     "keyboardNav": {
       "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
       "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
     },
-    "summary": {
-      "average": "Average: {value}.",
-      "highest": "Highest value: {label} at {value}.",
-      "lowest": "Lowest value: {label} at {value}.",
-      "total": "Total: {value}."
-    },
-    "switchedToChart": "Switched to chart view",
-    "switchedToTable": "Switched to table view",
-    "tableHeaders": {
-      "additionalInfo": "Additional Info",
-      "category": "Category",
-      "period": "Period",
-      "value": "Value"
-    }
-  },
-  "actions": {
-    "addTransaction": "거래 추가",
-    "editDashboard": "대시보드 편집",
-    "import": "가져오기",
-    "importData": "데이터 가져오기",
-    "resetDefaults": "기본값으로 재설정",
-    "saveChanges": "변경사항 저장"
-  },
-  "aiColumnMapper": {
-    "analyzing": "Analyzing CSV structure with AI...",
-    "buttons": {
-      "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
-    },
-    "closeModal": "Close modal",
-    "columnMappings": "Column Mappings",
-    "columnTypes": {
-      "amount": "Amount",
-      "balance": "Balance",
-      "credit": "Credit",
-      "date": "Date",
-      "debit": "Debit",
-      "description": "Description",
-      "ignore": "Ignore"
-    },
-    "confidence": {
-      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
-      "title": "Detection Confidence"
-    },
-    "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
-      "title": "Transaction Preview"
-    },
-    "samples": "Samples:",
-    "saveConfig": {
-      "hint": "Next time you import from this bank, mappings will be automatic",
-      "label": "Save this bank configuration for future imports",
-      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
-    },
-    "subtitle": "Review AI-detected columns and adjust if needed",
-    "title": "AI Column Mapping Wizard"
-  },
-  "bulkActions": {
-    "applyTo": "Apply to {count}",
-    "categorize": "Categorize",
-    "clearSelection": "Clear selection",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
-    "noSubcategory": "No subcategory",
-    "selectAll": "Select all",
-    "selectCategory": "Select category...",
-    "selected": "{count} selected"
-  },
-  "chatbot": {
-    "buttons": {
-      "clearHistory": "Clear chat history",
-      "exportConversation": "Export conversation",
-      "send": "Send"
-    },
-    "disabled": {
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot",
-      "title": "Chatbot Disabled"
-    },
-    "emptyState": {
-      "description": "Ask me anything about your finances. Here are some examples:",
-      "examples": {
-        "balance": "What's my total account balance?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "spending": "How much did I spend this month?"
-      },
-      "title": "Start a Conversation"
-    },
-    "header": {
-      "subtitle": "Ask me about your finances",
-      "title": "Budget Assistant"
-    },
-    "input": {
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
-      "placeholder": "Ask about your finances..."
-    },
-    "messages": {
-      "dataAccessed": "Data accessed:",
-      "error": "Error",
-      "thinking": "Thinking..."
-    }
-  },
-  "chatbotHelp": {
-    "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
-    }
-  },
-  "chatbotOptIn": {
-    "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
-    },
-    "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
-    },
-    "closeDialog": "Close chatbot opt-in dialog",
-    "controls": {
-      "dataAccess": {
-        "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
-        },
-        "label": "What can the chatbot do with your data?",
-        "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
-        }
-      },
-      "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
-      },
-      "title": "Privacy Controls"
-    },
-    "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
-    },
-    "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
-    },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
-  },
-  "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
-  },
-  "commandPalette": {
-    "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
-    },
-    "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
-    },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
-  },
-  "common": {
-    "cancel": "취소",
-    "delete": "삭제",
-    "edit": "편집",
-    "loading": "로딩 중...",
-    "save": "저장"
-  },
-  "dashboard": {
-    "widgets": {
-      "accountBalances": {
-        "addAccount": "Add Account",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
-      },
-      "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
-      },
-      "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
-      },
-      "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
-      },
-      "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
-      },
-      "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "uncategorized": "Uncategorized"
-      },
-      "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
-      }
-    }
-  },
-  "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
-  },
-  "debtAnalysis": {
-    "cards": {
-      "avgRate": {
-        "subtitle": "Weighted average",
-        "title": "Avg Interest Rate"
-      },
-      "debtFreeDate": {
-        "subtitle": "Estimated payoff",
-        "title": "Debt-Free Date"
-      },
-      "monthlyPayment": {
-        "subtitle": "Total monthly obligations",
-        "title": "Monthly Payment"
-      },
-      "totalDebt": {
-        "subtitle": "Across {count} active loans",
-        "title": "Total Debt"
-      }
-    },
-    "charts": {
-      "byType": {
-        "description": "Distribution of debt across loan types",
-        "title": "Debt by Type"
-      },
-      "projection": {
-        "description": "Expected debt reduction over the next year",
-        "expectedReduction": "Expected reduction: {amount} over 12 months",
-        "title": "12-Month Payoff Projection"
-      }
-    },
-    "comparison": {
-      "description": "Side-by-side comparison of your active loans",
-      "headers": {
-        "balance": "Balance",
-        "interestRate": "Interest Rate",
-        "loan": "Loan",
-        "monthlyPayment": "Monthly Payment",
-        "percentOfTotal": "% of Total Debt"
-      },
-      "title": "Loan Comparison",
-      "total": "Total"
-    },
-    "empty": {
-      "addFirstLoan": "Add Your First Loan",
-      "description": "You don't have any active loans. Add a loan to see debt analytics.",
-      "title": "No Debt to Analyze"
-    },
-    "subtitle": "Comprehensive view of your loans and obligations",
-    "title": "Debt Analysis",
-    "viewAllLoans": "View All Loans"
-  },
-  "dialog": {
-    "cancel": "취소",
-    "confirm": "확인",
-    "finalConfirmation": "최종 확인:",
-    "processing": "처리 중...",
-    "typeToConfirm": "{text}을(를) 입력하여 이 작업을 확인하세요."
-  },
-  "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
-  },
-  "emptyStates": {
-    "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
-    },
-    "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
-    },
-    "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
-    },
-    "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
-    },
-    "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
-    },
-    "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
-    },
-    "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
-    },
-    "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
-    },
-    "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
-    }
-  },
-  "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
-    "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
-    },
-    "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
-    },
-    "subtitle": "Don't worry! We can help you fix this.",
-    "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
-    },
-    "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
-    },
-    "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
-      "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
-    },
-    "title": "Import Failed"
-  },
-  "exportDialog": {
-    "buttons": {
-      "cancel": "Cancel",
-      "done": "Done!",
-      "download": "Download",
-      "export": "Export Data"
-    },
-    "complete": {
-      "download": "Your file is ready to download",
-      "success": "Export complete! Check your downloads folder."
-    },
-    "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
-    },
-    "exporting": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Exporting..."
-    },
-    "format": {
-      "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
-      },
-      "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
-      },
-      "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
-      },
-      "label": "Export Format"
-    },
-    "options": {
-      "encrypt": {
-        "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
-      },
-      "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
-      }
-    },
-    "password": {
-      "confirm": "Confirm Password",
-      "confirmPlaceholder": "Confirm password",
-      "hint": "Password Hint (Optional)",
-      "hintNote": "This hint will be stored unencrypted in the file",
-      "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
-      "minLength": "Password must be at least 8 characters",
-      "mismatch": "Passwords do not match",
-      "placeholder": "Enter password (min 8 characters)",
-      "required": "Password is required for encryption"
-    },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
-  },
-  "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
-  },
-  "footer": {
-    "copyright": "© {year} {brandName}",
-    "links": {
-      "login": "로그인",
-      "settings": "설정",
-      "signup": "체험 시작",
-      "upgrade": "업그레이드"
-    },
-    "tagline": "프리미엄 예산 관리, 일회성 업그레이드로."
-  },
-  "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
-    "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
-    },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
-  },
-  "importDialog": {
-    "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
-    },
-    "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
-    },
-    "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
-      "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
-      },
-      "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
-      },
-      "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
-      },
-      "title": "Conflicts Found"
-    },
-    "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
-    },
-    "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
-    },
-    "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
-    },
-    "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
-    },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
-  },
-  "investmentAccountModal": {
-    "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
-    },
-    "closeModal": "Close modal",
-    "errors": {
-      "saveFailed": "Failed to save account"
-    },
-    "fields": {
-      "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
-      },
-      "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
-      },
-      "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
-      },
-      "type": {
-        "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
-        },
-        "label": "Account Type"
-      }
-    },
-    "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
-    },
-    "validation": {
-      "nameRequired": "Please enter an account name"
-    }
+    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support."
   },
   "investmentCharts": {
     "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "titles": {
+      "portfolioAllocation": "Portfolio Allocation by Holding",
+      "accountTypeAllocation": "Allocation by Account Type",
+      "gainLoss": "Gain/Loss by Holding",
+      "performanceSummary": "Performance Summary"
+    },
+    "tooltip": {
+      "percentOfPortfolio": "{percent}% of portfolio",
+      "costBasis": "Cost Basis",
+      "currentValue": "Current Value"
+    },
     "legend": {
       "gain": "Gain",
       "loss": "Loss"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
+      "symbol": "Symbol",
       "costBasis": "Cost Basis",
       "currentValue": "Current Value",
       "gainLoss": "Gain/Loss",
       "percentReturn": "% Return",
-      "symbol": "Symbol",
+      "allocation": "Allocation",
       "total": "Total"
-    },
-    "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
-    },
-    "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
     }
   },
-  "lanSync": {
-    "description": "Sync your budget data across devices on your local network",
-    "device": {
-      "connect": "Connect",
-      "connected": "Connected",
-      "disconnect": "Disconnect",
-      "removeDevice": "Remove Device",
-      "sync": "Sync",
-      "syncing": "Syncing..."
+  "subscriptionCostChart": {
+    "loadingChart": "Loading chart...",
+    "emptyState": "No active subscriptions to analyze",
+    "perMonth": "/month",
+    "moreCharges": "+{count} more charges",
+    "summary": {
+      "monthlyCost": "Monthly Cost",
+      "annualCost": "Annual Cost",
+      "next30Days": "Next 30 Days",
+      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
+      "projectedYearly": "Projected yearly spend",
+      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
     },
-    "disabled": "Disabled",
-    "enabled": "Enabled",
-    "howItWorks": {
-      "step1": {
-        "description": "Scan a QR code or enter connection details to pair devices on the same network",
-        "title": "Pair Devices"
-      },
-      "step2": {
-        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
-        "title": "Sync Securely"
-      },
-      "step3": {
-        "description": "Changes sync automatically when devices are connected on the same network",
-        "title": "Automatic Updates"
-      },
-      "title": "How LAN Sync Works"
+    "sections": {
+      "costByCategory": "Cost by Category",
+      "potentialSavings": "Potential Savings",
+      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+    }
+  },
+  "emptyStates": {
+    "transactions": {
+      "heading": "No Transactions Yet",
+      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
+      "primaryCta": "Add Transaction",
+      "secondaryCta": "Import CSV"
     },
-    "pairedDevices": {
-      "addDevice": "Add Device",
-      "addFirstDevice": "Add Your First Device",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
-      "emptyDescription": "Pair a device to start syncing your budget data",
-      "emptyTitle": "No devices paired",
-      "noDevices": "No devices paired yet",
-      "title": "Paired Devices"
+    "budgets": {
+      "heading": "No Budgets Created",
+      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
+      "primaryCta": "Create Your First Budget"
     },
-    "removeDialog": {
-      "cancel": "Cancel",
-      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
+    "loans": {
+      "heading": "No Loans Tracked",
+      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
+      "primaryCta": "Add Your First Loan"
+    },
+    "investments": {
+      "heading": "No Investments Tracked",
+      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
+      "primaryCta": "Add Investment Account"
+    },
+    "futurePlans": {
+      "heading": "No Future Plans",
+      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
+      "primaryCta": "Create a Goal"
+    },
+    "retirement": {
+      "heading": "No Retirement Plans",
+      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
+      "primaryCta": "Start Planning"
+    },
+    "reports": {
+      "heading": "No Data to Report",
+      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
+      "primaryCta": "Add Transactions",
+      "secondaryCta": "Import CSV"
+    },
+    "categories": {
+      "heading": "No Custom Categories",
+      "description": "Create custom categories to organize your transactions beyond the default ones.",
+      "primaryCta": "Add Category"
+    },
+    "dashboard": {
+      "heading": "Welcome to Your Budget App!",
+      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
+      "primaryCta": "Import CSV",
+      "secondaryCta": "Add Transaction"
+    }
+  },
+  "tooltip": {
+    "ariaLabel": "자세한 정보",
+    "learnMore": "자세히 알아보기 →"
+  },
+  "footer": {
+    "tagline": "프리미엄 예산 관리, 일회성 업그레이드로.",
+    "links": {
+      "login": "로그인",
+      "signup": "체험 시작",
+      "upgrade": "업그레이드",
+      "settings": "설정"
+    },
+    "copyright": "© {year} {brandName}"
+  },
+  "combobox": {
+    "select": "Select...",
+    "search": "Search...",
+    "noResults": "No results found."
+  },
+  "pwaInstall": {
+    "title": "Install Budget App",
+    "description": "Add to your home screen for quick access and offline use",
+    "close": "Close install prompt",
+    "buttons": {
+      "install": "Install",
+      "notNow": "Not now"
+    },
+    "features": {
+      "offline": "Works offline",
+      "fastSecure": "Fast & secure",
+      "noAppStore": "No app store needed"
+    },
+    "iosTitle": "Install Budget App",
+    "iosTap": "Tap",
+    "iosThen": "then",
+    "iosAddToHome": "\"Add to Home Screen\"",
+    "iosForFullExperience": "for the full app experience with faster loading."
+  },
+  "dialog": {
+    "confirm": "확인",
+    "cancel": "취소",
+    "processing": "처리 중...",
+    "finalConfirmation": "최종 확인:",
+    "typeToConfirm": "{text}을(를) 입력하여 이 작업을 확인하세요."
+  },
+  "sidebar": {
+    "appTitle": "예산 앱",
+    "appSubtitle": "프리미엄 금융",
+    "search": "검색...",
+    "shortcuts": "단축키",
+    "navigation": {
+      "dashboard": "대시보드",
+      "transactions": "거래내역",
+      "accounts": "Accounts",
+      "scanReceipt": "영수증 스캔",
+      "categories": "카테고리",
+      "budgets": "예산",
+      "subscriptions": "구독",
+      "reminders": "Reminders",
+      "loans": "대출",
+      "investments": "투자",
+      "futurePlans": "미래 계획",
+      "retirement": "은퇴",
+      "reports": "보고서",
+      "calculators": "Calculators",
+      "netWorth": "Net Worth",
+      "properties": "Properties",
+      "events": "Events",
+      "scenarios": "What-If",
+      "import": "Import CSV",
+      "settings": "Settings"
+    },
+    "actions": {
+      "importCsv": "CSV 가져오기",
+      "settings": "설정",
+      "showLess": "덜 보기",
+      "showAllItems": "모든 항목 보기",
+      "backToHome": "Back to Home",
+      "expandSidebar": "Expand sidebar",
+      "collapseSidebar": "Collapse sidebar"
+    }
+  },
+  "onboarding": {
+    "skipTour": "투어 건너뛰기",
+    "stepCounter": "{current} / {total} 단계",
+    "dontShowAgain": "이 투어 다시 보지 않기",
+    "quickTip": "💡 빠른 팁",
+    "navigation": {
+      "previous": "이전",
+      "next": "다음",
+      "getStarted": "시작하기",
+      "startTour": "투어 시작"
+    },
+    "steps": {
+      "welcome": {
+        "title": "👋 예산 앱에 오신 것을 환영합니다!",
+        "description": "가정 재무 관리 시작을 돕기 위해 간단한 투어를 진행합니다. 오래 걸리지 않을 것입니다!"
+      },
+      "import": {
+        "title": "📥 거래 가져오기",
+        "description": "CSV 파일에서 은행 거래를 가져오는 것으로 시작하세요. BMO, Home Trust 및 기타 여러 은행을 지원합니다. 앱이 자동으로 거래를 분류합니다!"
+      },
+      "categorize": {
+        "title": "🏷️ 분류 및 정리",
+        "description": "거래 카테고리를 검토하고 조정하세요. 우리의 스마트 분류는 귀하의 수정 사항에서 학습하여 시간이 지남에 따라 개선됩니다. 여러 거래를 한 번에 분류하는 일괄 작업을 사용하세요!"
+      },
+      "budgets": {
+        "title": "🎯 예산 설정",
+        "description": "다양한 지출 카테고리에 대한 예산을 만드세요. 한 달 동안 진행 상황을 추적하고 한도에 가까워지면 알림을 받으세요."
+      },
+      "reports": {
+        "title": "📊 보고서 및 통계 보기",
+        "description": "지출 패턴을 시각화하고 순자산을 추적하며 정보에 기반한 재무 결정을 내리세요. 거래가 발생할 때마다 대시보드가 자동으로 업데이트됩니다!"
+      }
+    },
+    "tips": {
+      "import": "CSV 파일을 드래그 앤 드롭하거나 클릭하여 찾아보세요. BMO 및 Home Trust 형식을 자동으로 감지합니다!",
+      "categorize": "빠른 분류 버튼을 사용하거나 여러 거래를 선택하여 일괄 분류하세요.",
+      "budgets": "현실적인 예산을 설정하고, 초과 지출할 가능성이 있을 때 알림을 받으세요."
+    }
+  },
+  "transactionModal": {
+    "title": {
+      "edit": "Edit Transaction",
+      "add": "Add Transaction"
+    },
+    "closeModal": "Close modal",
+    "learned": {
+      "title": "Learned!",
+      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize."
+    },
+    "type": {
+      "label": "Type",
+      "expense": "Expense",
+      "income": "Income"
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "e.g., Grocery shopping at Sobeys"
+    },
+    "amount": {
+      "label": "Amount",
+      "placeholder": "0.00",
+      "validationError": "Please enter a valid amount"
+    },
+    "date": {
+      "label": "Date"
+    },
+    "category": {
+      "label": "Category",
+      "aiCategorizing": "AI categorizing...",
+      "selectPlaceholder": "Select category...",
+      "createNew": "+ Create New Category",
+      "namePlaceholder": "Category name...",
+      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)",
+      "create": "Create",
+      "lastUsed": "Using last: {category}"
+    },
+    "subcategory": {
+      "label": "Subcategory",
+      "none": "None",
+      "selectPlaceholder": "Select subcategory..."
+    },
+    "advancedOptions": {
+      "label": "Advanced Options",
+      "available": "{count} available"
+    },
+    "account": {
+      "label": "Account"
+    },
+    "notes": {
+      "label": "Notes",
+      "placeholder": "Add any additional notes..."
+    },
+    "tags": {
+      "label": "Tags (comma-separated)",
+      "placeholder": "e.g., groceries, weekly, essential"
+    },
+    "receipts": {
+      "label": "Receipt Attachments",
+      "existing": "Existing receipts ({count})",
+      "viewFull": "View full receipt",
+      "deleteReceipt": "Delete receipt",
+      "addNew": "Add New Receipt",
+      "newFile": "New: {filename}",
       "remove": "Remove",
-      "title": "Remove Device"
+      "deleteConfirm": "Are you sure you want to delete this receipt?",
+      "deleteFailed": "Failed to delete receipt"
     },
-    "syncAll": "Sync All",
-    "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
-      "justNow": "Just now",
-      "lastSync": "Last sync: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
-      "neverSynced": "Never synced"
+    "buttons": {
+      "cancel": "Cancel",
+      "update": "Update Transaction",
+      "add": "Add Transaction",
+      "updating": "Updating...",
+      "adding": "Adding..."
     },
-    "title": "LAN Sync"
+    "createCategory": {
+      "nameRequired": "Category name is required",
+      "created": "Category \"{name}\" created!",
+      "failed": "Failed to create category"
+    }
+  },
+  "importDialog": {
+    "title": "Import Data",
+    "subtitle": "Restore from .budget file",
+    "selectFile": {
+      "label": "Click to select a .budget file",
+      "dragDrop": "or drag and drop here"
+    },
+    "encryption": {
+      "encrypted": "This file is encrypted",
+      "hint": "Hint: {hint}",
+      "password": "Password",
+      "enterPassword": "Enter password",
+      "decrypt": "Decrypt & Continue"
+    },
+    "preview": {
+      "fileInfo": "File Information",
+      "version": "Version",
+      "exported": "Exported",
+      "dataToImport": "Data to Import"
+    },
+    "conflicts": {
+      "title": "Conflicts Found",
+      "existing": "{count} existing",
+      "handleLabel": "Handle Conflicts",
+      "skip": {
+        "label": "Skip existing",
+        "description": "Keep current data"
+      },
+      "overwrite": {
+        "label": "Overwrite",
+        "description": "Replace with imported"
+      },
+      "rename": {
+        "label": "Create new",
+        "description": "Import as new entries"
+      }
+    },
+    "importing": {
+      "title": "Importing your data...",
+      "pleaseWait": "Please wait, this may take a moment"
+    },
+    "complete": {
+      "success": "Import Complete!",
+      "itemsImported": "{count} items imported successfully",
+      "withIssues": "Import Completed with Issues"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "back": "Back",
+      "import": "Import Data",
+      "done": "Done"
+    }
+  },
+  "exportDialog": {
+    "title": "Export Data",
+    "subtitle": "Download your budget data",
+    "dataSummary": {
+      "title": "Data Summary",
+      "transactions": "Transactions",
+      "accounts": "Accounts",
+      "estimatedSize": "Est. Size"
+    },
+    "format": {
+      "label": "Export Format",
+      "budget": {
+        "label": ".budget file",
+        "description": "Complete backup including all data"
+      },
+      "csv": {
+        "label": "CSV file",
+        "description": "Spreadsheet-compatible format"
+      },
+      "json": {
+        "label": "JSON file",
+        "description": "Developer-friendly format"
+      }
+    },
+    "options": {
+      "includeReceipts": {
+        "label": "Include Receipts",
+        "description": "Attach receipt images (increases file size)"
+      },
+      "encrypt": {
+        "label": "Encrypt with Password",
+        "description": "Protect your data with AES-256 encryption"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter password (min 8 characters)",
+      "confirm": "Confirm Password",
+      "confirmPlaceholder": "Confirm password",
+      "hint": "Password Hint (Optional)",
+      "hintPlaceholder": "A hint to help you remember",
+      "hintNote": "This hint will be stored unencrypted in the file",
+      "mismatch": "Passwords do not match",
+      "required": "Password is required for encryption",
+      "minLength": "Password must be at least 8 characters"
+    },
+    "exporting": {
+      "title": "Exporting...",
+      "pleaseWait": "Please wait, this may take a moment"
+    },
+    "complete": {
+      "success": "Export complete! Check your downloads folder.",
+      "download": "Your file is ready to download"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "export": "Export Data",
+      "download": "Download",
+      "done": "Done!"
+    }
+  },
+  "quickCategorize": {
+    "title": "Quick Categorize",
+    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
+    "searchPlaceholder": "Search categories...",
+    "noResults": "No categories found",
+    "general": "General",
+    "clickToSelect": "Click a category to select",
+    "pressEnter": "Press ↵ Enter",
+    "saving": "Saving...",
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "apply": "Apply Category"
+    }
+  },
+  "bulkActions": {
+    "selected": "{count} selected",
+    "categorize": "Categorize",
+    "delete": "Delete",
+    "export": "Export",
+    "clearSelection": "Clear selection",
+    "selectAll": "Select all",
+    "selectCategory": "Select category...",
+    "noSubcategory": "No subcategory",
+    "applyTo": "Apply to {count}",
+    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
+    "deleteWarning": "This action cannot be undone."
+  },
+  "transactionTable": {
+    "headers": {
+      "date": "Date",
+      "description": "Description",
+      "category": "Category",
+      "amount": "Amount",
+      "account": "Account",
+      "actions": "Actions"
+    },
+    "emptyState": "No transactions to display",
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "split": "Split",
+      "attachReceipt": "Attach receipt"
+    }
+  },
+  "filters": {
+    "search": "Search transactions...",
+    "dateRange": "Date range",
+    "category": "Category",
+    "account": "Account",
+    "type": "Type",
+    "allCategories": "All categories",
+    "allAccounts": "All accounts",
+    "allTypes": "All types",
+    "income": "Income",
+    "expense": "Expense",
+    "clearFilters": "Clear filters",
+    "apply": "Apply filters"
+  },
+  "quickFilters": {
+    "timePeriod": "Time Period",
+    "presets": {
+      "thisMonth": "This Month",
+      "last30": "Last 30 Days",
+      "last90": "Last 90 Days",
+      "thisYear": "This Year"
+    },
+    "categories": "Categories",
+    "all": "All",
+    "moreCategories": "+{count} more",
+    "clearFilters": "Clear Filters"
+  },
+  "splitTransaction": {
+    "title": "Split Transaction",
+    "closeModal": "Close modal",
+    "originalAmount": "Original Amount:",
+    "date": "Date:",
+    "splitsCount": "Splits ({current}/{max})",
+    "distributeEvenly": "Distribute Evenly",
+    "category": "Category",
+    "amount": "Amount",
+    "subcategory": "Subcategory",
+    "notes": "Notes (Optional)",
+    "notesPlaceholder": "e.g., Business expense, Personal use",
+    "selectCategory": "Select category...",
+    "none": "None",
+    "removeThisSplit": "Remove this split",
+    "addSplit": "Add Split ({current}/{max})",
+    "maxSplitsReached": "Maximum 5 splits allowed",
+    "minSplitsRequired": "Minimum 2 splits required",
+    "validation": {
+      "total": "Total:",
+      "matchesOriginal": "✓ Matches original",
+      "overBy": "Over by ${amount}",
+      "underBy": "Under by ${amount}",
+      "readyToSave": "Split amounts match the original transaction. Ready to save!",
+      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
+      "amountsMustMatch": "Split amounts must equal the original transaction amount",
+      "categoryRequired": "All splits must have a category"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "save": "Save Split"
+    },
+    "help": {
+      "title": "How to split transactions:",
+      "step1": "Enter the amount for each category (must total ${amount})",
+      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
+      "step3": "Add up to 5 splits per transaction",
+      "step4": "The original transaction will be hidden and replaced with split items"
+    },
+    "errors": {
+      "saveFailed": "Failed to save split transaction"
+    }
+  },
+  "shortcutsModal": {
+    "title": "Keyboard Shortcuts",
+    "subtitle": "Power-user productivity tips",
+    "close": "Close shortcuts help",
+    "proTip": {
+      "title": "💡 Pro Tip",
+      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help."
+    }
+  },
+  "chatbotHelp": {
+    "tabs": {
+      "spending": "Spending",
+      "budget": "Budget",
+      "income": "Income",
+      "trends": "Trends",
+      "actions": "Actions"
+    }
+  },
+  "chatbotOptIn": {
+    "title": "Enable Budget Chatbot?",
+    "subtitle": "AI-powered financial assistant",
+    "closeDialog": "Close chatbot opt-in dialog",
+    "capabilities": {
+      "title": "What the Chatbot Can Do",
+      "answer": "Answer questions about your transactions, budgets, and spending patterns",
+      "search": "Search your financial data using natural language",
+      "insights": "Provide insights and recommendations based on your data",
+      "actions": "Optionally perform actions like adding transactions or creating budgets"
+    },
+    "privacy": {
+      "title": "Privacy & Data Usage",
+      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
+      "dataSent": "Financial data is sent to the API to answer your questions",
+      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
+      "disable": "You can disable the chatbot anytime in Settings → Privacy"
+    },
+    "controls": {
+      "title": "Privacy Controls",
+      "dataAccess": {
+        "label": "What can the chatbot do with your data?",
+        "readOnly": {
+          "title": "Read-Only (Recommended)",
+          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets"
+        },
+        "fullAccess": {
+          "title": "Full Access",
+          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data"
+        }
+      },
+      "retention": {
+        "label": "How long should we keep your conversations?",
+        "days7": "7 days (Recommended)",
+        "days30": "30 days",
+        "forever": "Keep forever",
+        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+      }
+    },
+    "gdpr": {
+      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+    },
+    "buttons": {
+      "decline": "No Thanks",
+      "enable": "Enable Chatbot"
+    }
+  },
+  "aiColumnMapper": {
+    "title": "AI Column Mapping Wizard",
+    "subtitle": "Review AI-detected columns and adjust if needed",
+    "closeModal": "Close modal",
+    "analyzing": "Analyzing CSV structure with AI...",
+    "confidence": {
+      "title": "Detection Confidence",
+      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows"
+    },
+    "columnMappings": "Column Mappings",
+    "samples": "Samples:",
+    "columnTypes": {
+      "ignore": "Ignore",
+      "date": "Date",
+      "description": "Description",
+      "amount": "Amount",
+      "debit": "Debit",
+      "credit": "Credit",
+      "balance": "Balance"
+    },
+    "preview": {
+      "title": "Transaction Preview",
+      "date": "Date",
+      "description": "Description",
+      "amount": "Amount"
+    },
+    "saveConfig": {
+      "label": "Save this bank configuration for future imports",
+      "placeholder": "Enter bank name (e.g., My Local Credit Union)",
+      "hint": "Next time you import from this bank, mappings will be automatic"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "apply": "Apply Mappings & Import"
+    }
+  },
+  "commandPalette": {
+    "placeholder": "Type a command or search...",
+    "noResults": "No results found.",
+    "groups": {
+      "tracking": "Tracking & Analysis",
+      "wealth": "Wealth & Planning",
+      "tools": "Tools & Settings",
+      "quickActions": "Quick Actions",
+      "appearance": "Appearance"
+    },
+    "commands": {
+      "dashboard": "Dashboard",
+      "transactions": "Transactions",
+      "scanReceipt": "Scan Receipt",
+      "budgets": "Budgets",
+      "reports": "Reports",
+      "loans": "Loans",
+      "investments": "Investments",
+      "futurePlans": "Future Plans",
+      "retirement": "Retirement",
+      "categories": "Categories",
+      "importCsv": "Import CSV",
+      "exportData": "Export Data",
+      "settings": "Settings",
+      "addTransaction": "Add Transaction",
+      "newBudget": "New Budget",
+      "lightTheme": "Light Theme",
+      "darkTheme": "Dark Theme",
+      "highContrastTheme": "High-Contrast Theme"
+    }
+  },
+  "receiptUpload": {
+    "cameraInputLabel": "Camera capture input",
+    "removeFile": "Remove file",
+    "receiptPreview": "Receipt preview",
+    "errors": {
+      "tooLarge": "File is too large. Maximum size is {size}MB",
+      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
+      "rejected": "File was rejected. Please try again",
+      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
+      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
+      "extractionFailed": "Failed to extract data. Please try again or enter manually."
+    },
+    "dropzone": {
+      "dropHere": "Drop the receipt here",
+      "dragDrop": "Drag & drop receipt here",
+      "browseFiles": "or <link>browse files</link>",
+      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+    },
+    "camera": {
+      "takePhoto": "Take Photo with Camera",
+      "useDevice": "Use your device camera to capture receipt"
+    },
+    "pdf": {
+      "title": "PDF Receipt",
+      "noPreview": "Preview not available"
+    },
+    "extracted": {
+      "title": "Data Extracted",
+      "merchant": "Merchant:",
+      "amount": "Amount:",
+      "date": "Date:",
+      "confidence": "Confidence: {percent}%"
+    },
+    "buttons": {
+      "chooseDifferent": "Choose Different",
+      "extracting": "Extracting...",
+      "extractData": "Extract Data",
+      "attachReceipt": "Attach Receipt"
+    }
+  },
+  "errorRecovery": {
+    "title": "Import Failed",
+    "subtitle": "Don't worry! We can help you fix this.",
+    "closeModal": "Close modal",
+    "summary": {
+      "title": "Error Summary",
+      "category": "Category: {category}"
+    },
+    "aiAnalysis": "AI Analysis:",
+    "recovery": {
+      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
+      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
+      "optionsTitle": "Recovery Options"
+    },
+    "suggestions": {
+      "autoFix": "AUTO-FIX",
+      "confidence": "{percent}% confidence",
+      "technicalDetails": "Technical Details",
+      "fixing": "Fixing...",
+      "autoFixButton": "Auto-Fix",
+      "learnMore": "Learn More"
+    },
+    "technical": {
+      "title": "Advanced Technical Details",
+      "errorCategory": "Error Category:",
+      "severity": "Severity:",
+      "canRecover": "Can Recover:",
+      "suggestions": "Suggestions:",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "footer": {
+      "close": "Close",
+      "needHelp": "Need more help?",
+      "viewGuide": "View troubleshooting guide"
+    }
+  },
+  "debtAnalysis": {
+    "title": "Debt Analysis",
+    "subtitle": "Comprehensive view of your loans and obligations",
+    "viewAllLoans": "View All Loans",
+    "empty": {
+      "title": "No Debt to Analyze",
+      "description": "You don't have any active loans. Add a loan to see debt analytics.",
+      "addFirstLoan": "Add Your First Loan"
+    },
+    "cards": {
+      "totalDebt": {
+        "title": "Total Debt",
+        "subtitle": "Across {count} active loans"
+      },
+      "monthlyPayment": {
+        "title": "Monthly Payment",
+        "subtitle": "Total monthly obligations"
+      },
+      "avgRate": {
+        "title": "Avg Interest Rate",
+        "subtitle": "Weighted average"
+      },
+      "debtFreeDate": {
+        "title": "Debt-Free Date",
+        "subtitle": "Estimated payoff"
+      }
+    },
+    "charts": {
+      "byType": {
+        "title": "Debt by Type",
+        "description": "Distribution of debt across loan types"
+      },
+      "projection": {
+        "title": "12-Month Payoff Projection",
+        "description": "Expected debt reduction over the next year",
+        "expectedReduction": "Expected reduction: {amount} over 12 months"
+      }
+    },
+    "comparison": {
+      "title": "Loan Comparison",
+      "description": "Side-by-side comparison of your active loans",
+      "headers": {
+        "loan": "Loan",
+        "balance": "Balance",
+        "monthlyPayment": "Monthly Payment",
+        "interestRate": "Interest Rate",
+        "percentOfTotal": "% of Total Debt"
+      },
+      "total": "Total"
+    }
   },
   "landing": {
-    "accessibility": {
-      "badges": {
-        "keyboardFirst": "키보드 우선",
-        "largeTouchTargets": "큰 터치 타겟",
-        "seniorsMode": "노인 모드"
-      },
-      "buttons": {
-        "openApp": "앱 열기",
-        "settings": "접근성 설정"
-      },
-      "description": "노인 모드는 단순화된 내비게이션과 큰 터치 타겟을 제공합니다. 키보드 단축키, 포커스 상태 및 명확한 대비가 모두를 더 빠르게 이동하도록 돕습니다.",
-      "title": "기본적으로 접근 가능"
-    },
     "brand": {
       "name": "BudgetPro",
       "product": "예산 앱"
     },
+    "hero": {
+      "badge": "개인정보 보호 우선 • 로컬 전용 • 제로 추적",
+      "headline": "데이터를 판매하지 않고 돈을 관리하세요.",
+      "subhead": "스프레드시트의 힘. 앱의 단순함. 데이터가 절대 기기를 떠나지 않는 유일한 예산 앱으로 재무 명확성을 경험하세요.",
+      "primaryCta": {
+        "label": "로컬 프로토콜 시작 (무료)",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondaryCta": {
+        "label": "로그인",
+        "href": "/budget-app/auth/login"
+      },
+      "finePrint": "은행 자격 증명이 필요 없습니다. 로컬 모드에 계정이 필요하지 않습니다."
+    },
+    "trust": {
+      "0": {
+        "title": "당신의 기기, 당신의 데이터",
+        "description": "데이터는 브라우저의 IndexedDB에 저장됩니다. 우리는 그것을 볼 수 없습니다."
+      },
+      "1": {
+        "title": "스프레드시트의 힘",
+        "description": "대량 편집, 피벗 및 전문가처럼 분석하세요. 복잡한 수식 없이."
+      },
+      "2": {
+        "title": "오프라인 속도",
+        "description": "제로 지연. 산 정상이나 지하철 터널에서도 작동합니다."
+      },
+      "3": {
+        "title": "수동 의식",
+        "description": "가져오기 마법사가 금요일 재무 검토를 만족스러운 습관으로 만듭니다."
+      }
+    },
+    "outcomes": {
+      "0": {
+        "title": "집계기와의 싸움 중단",
+        "description": "더 이상 끊어진 연결이나 재인증 루프가 없습니다. 데이터 입력을 제어하세요."
+      },
+      "1": {
+        "title": "디자인에 의한 개인정보 보호",
+        "description": "우리는 데이터를 판매하지 않기 때문에 데이터를 가지고 있지 않습니다. 끝."
+      },
+      "2": {
+        "title": "미래 대비 계획",
+        "description": "은퇴, 대출 상환 및 저축 목표를 하나의 통합된 보기에서 모델링하세요."
+      },
+      "3": {
+        "title": "구독 킬러",
+        "description": "다른 앱이 놓치는 지갑의 반복적인 지출을 찾아보세요."
+      }
+    },
+    "features": {
+      "0": {
+        "title": "로컬 대시보드",
+        "description": "순자산, 현금 흐름 및 카테고리 분류. 즉각적인 로드 시간.",
+        "href": "/budget-app"
+      },
+      "1": {
+        "title": "가져오기 마법사",
+        "description": "BMO, Home Trust 및 사용자 정의 형식에 대한 스마트 CSV 매핑.",
+        "href": "/budget-app/import"
+      },
+      "2": {
+        "title": "영수증 OCR",
+        "description": "Tesseract.js로 영수증을 로컬에서 스캔하세요. 클라우드 처리 없음.",
+        "href": "/budget-app/ocr"
+      },
+      "3": {
+        "title": "카테고리 예산",
+        "description": "제로 기반 또는 이월 예산으로 세부 카테고리 제어.",
+        "href": "/budget-app/budgets"
+      },
+      "4": {
+        "title": "은퇴 계산기",
+        "description": "복리 이자 시각화로 자유 날짜를 예측하세요.",
+        "href": "/budget-app/planning/retirement"
+      },
+      "5": {
+        "title": "개인정보 보호 방패",
+        "description": "추가 보안을 위한 선택적 클라이언트 측 암호화.",
+        "href": "/budget-app/settings"
+      }
+    },
+    "howItWorks": {
+      "0": {
+        "title": "가져오기",
+        "description": "CSV를 드래그 앤 드롭하거나 영수증을 스캔하세요. AI가 로컬에서 열을 매핑합니다."
+      },
+      "1": {
+        "title": "검토",
+        "description": "스마트 규칙과 일괄 작업으로 빠른 분류."
+      },
+      "2": {
+        "title": "계획",
+        "description": "모든 달러에 작업을 할당하고 미래의 순자산을 예측하세요."
+      }
+    },
+    "pricing": {
+      "eyebrow": "공정한 가격",
+      "title": "로컬은 무료입니다. 동기화는 프로입니다.",
+      "description": "강력한 로컬 프로토콜로 시작하세요. 나중에 다중 장치 동기화가 필요하면 업그레이드하세요.",
+      "priceLabel": "영원히 무료",
+      "cta": {
+        "label": "로컬 프로토콜 시작",
+        "href": "/budget-app/auth/signup"
+      },
+      "secondary": {
+        "label": "프로 기능 보기",
+        "href": "#pricing"
+      },
+      "guarantee": "로컬 프로토콜에 대한 신용 카드 필요 없음."
+    },
+    "faq": {
+      "0": {
+        "q": "내 데이터는 정말로 비공개인가요?",
+        "a": "네. 로컬 프로토콜에서는 데이터가 기기를 떠나지 않습니다. 브라우저의 IndexedDB에 저장됩니다."
+      },
+      "1": {
+        "q": "내 데이터를 어떻게 백업하나요?",
+        "a": "언제든지 전체 JSON 백업을 내보낼 수 있습니다. 정기적인 CSV 내보내기도 권장합니다."
+      },
+      "2": {
+        "q": "'동기화' 프로란 무엇인가요?",
+        "a": "곧 출시 예정: 장치 간에 암호화된 데이터를 동기화하는 선택적 구독 서비스."
+      },
+      "3": {
+        "q": "은행에 연결하나요?",
+        "a": "아니요. 우리는 수동 가져오기가 더 안전하고 신뢰할 수 있으며 더 나은 재무 인식을 구축한다고 믿습니다."
+      }
+    },
+    "security": {
+      "title": "디자인에 의한 개인정보 보호 우선",
+      "description": "예산 앱은 데이터를 로컬에 저장(오프라인 준비 완료)하고 AI 기능, 내보내기 및 삭제에 대한 제어 기능을 제공합니다.",
+      "buttons": {
+        "privacy": "개인정보 보호 및 설정",
+        "offline": "오프라인 지원"
+      },
+      "cards": {
+        "localStorage": {
+          "title": "로컬 저장소",
+          "description": "예산 데이터는 브라우저에 저장(IndexedDB)되어 앱이 빠르고 오프라인에서도 사용 가능합니다."
+        },
+        "encryption": {
+          "title": "암호화 지원",
+          "description": "앱에는 활성화 시 민감한 예산 기록을 보호하는 암호화 레이어가 포함되어 있습니다."
+        },
+        "aiControls": {
+          "title": "AI 기능 제어",
+          "description": "AI 기반 기능(예: 이상 탐지)을 전환하고 설정에서 챗봇 접근을 관리하세요."
+        },
+        "exportDelete": {
+          "title": "내보내기 및 삭제",
+          "description": "데이터 및 개인정보 보호 설정을 내보내거나 앱에서 직접 로컬 데이터를 삭제하세요."
+        }
+      }
+    },
     "comparison": {
-      "bankConnections": {
-        "cloud": "필수 집계",
-        "feature": "은행 연결",
-        "local": "CSV / 수동만 가능",
-        "sync": "선택적 (암호화됨)"
-      },
-      "cost": {
-        "cloud": "$100+/년 구독",
-        "feature": "비용",
-        "local": "영원히 무료",
-        "sync": "일회성 업그레이드"
-      },
-      "dataPrivacy": {
-        "cloud": "직원들이 볼 수 있음",
-        "feature": "데이터 개인정보 보호",
-        "local": "100% 비공개 (로컬)",
-        "sync": "종단 간 암호화"
-      },
       "headers": {
-        "cloud": "일반 클라우드 앱",
         "feature": "기능",
         "local": "BudgetPro 로컬",
-        "sync": "BudgetPro 동기화 (프로)"
+        "sync": "BudgetPro 동기화 (프로)",
+        "cloud": "일반 클라우드 앱"
+      },
+      "dataPrivacy": {
+        "feature": "데이터 개인정보 보호",
+        "local": "100% 비공개 (로컬)",
+        "sync": "종단 간 암호화",
+        "cloud": "직원들이 볼 수 있음"
+      },
+      "cost": {
+        "feature": "비용",
+        "local": "영원히 무료",
+        "sync": "일회성 업그레이드",
+        "cloud": "$100+/년 구독"
       },
       "offlineMode": {
         "feature": "오프라인 모드"
       },
+      "bankConnections": {
+        "feature": "은행 연결",
+        "local": "CSV / 수동만 가능",
+        "sync": "선택적 (암호화됨)",
+        "cloud": "필수 집계"
+      },
       "storageLocation": {
-        "cloud": "그들의 데이터베이스",
         "feature": "저장 위치",
         "local": "당신의 기기",
-        "sync": "제로 지식 클라우드"
+        "sync": "제로 지식 클라우드",
+        "cloud": "그들의 데이터베이스"
       }
     },
-    "faq": {
-      "0": {
-        "a": "네. 로컬 프로토콜에서는 데이터가 기기를 떠나지 않습니다. 브라우저의 IndexedDB에 저장됩니다.",
-        "q": "내 데이터는 정말로 비공개인가요?"
-      },
-      "1": {
-        "a": "언제든지 전체 JSON 백업을 내보낼 수 있습니다. 정기적인 CSV 내보내기도 권장합니다.",
-        "q": "내 데이터를 어떻게 백업하나요?"
-      },
-      "2": {
-        "a": "곧 출시 예정: 장치 간에 암호화된 데이터를 동기화하는 선택적 구독 서비스.",
-        "q": "'동기화' 프로란 무엇인가요?"
-      },
-      "3": {
-        "a": "아니요. 우리는 수동 가져오기가 더 안전하고 신뢰할 수 있으며 더 나은 재무 인식을 구축한다고 믿습니다.",
-        "q": "은행에 연결하나요?"
+    "socialProof": {
+      "title": "프리미엄 품질, 내장",
+      "description": "예산을 유지하는 세부 사항: 온보딩, 단축키, 모바일 내비게이션 및 오프라인 준비 성능.",
+      "features": {
+        "onboarding": {
+          "title": "온보딩 투어",
+          "description": "가이드 투어가 새로운 사용자가 빠르게 가치를 얻도록 돕습니다."
+        },
+        "shortcuts": {
+          "title": "키보드 단축키",
+          "description": "UI에 내장된 검색 및 작업 단축키로 빠르게 이동하세요."
+        },
+        "mobileUx": {
+          "title": "모바일 우선 UX",
+          "description": "바닥 내비게이션 및 반응형 레이아웃이 자연스럽게 느껴집니다."
+        },
+        "pwaInstall": {
+          "title": "PWA 설치",
+          "description": "앱처럼 설치하고 불안정한 인터넷에서도 계속 진행하세요."
+        }
       }
     },
-    "faqSection": {
-      "description": "체험, 가격 및 접근에 대한 일반적인 질문에 대한 간단한 답변.",
-      "title": "자주 묻는 질문"
-    },
-    "features": {
-      "0": {
-        "description": "순자산, 현금 흐름 및 카테고리 분류. 즉각적인 로드 시간.",
-        "href": "/budget-app",
-        "title": "로컬 대시보드"
-      },
-      "1": {
-        "description": "BMO, Home Trust 및 사용자 정의 형식에 대한 스마트 CSV 매핑.",
-        "href": "/budget-app/import",
-        "title": "가져오기 마법사"
-      },
-      "2": {
-        "description": "Tesseract.js로 영수증을 로컬에서 스캔하세요. 클라우드 처리 없음.",
-        "href": "/budget-app/ocr",
-        "title": "영수증 OCR"
-      },
-      "3": {
-        "description": "제로 기반 또는 이월 예산으로 세부 카테고리 제어.",
-        "href": "/budget-app/budgets",
-        "title": "카테고리 예산"
-      },
-      "4": {
-        "description": "복리 이자 시각화로 자유 날짜를 예측하세요.",
-        "href": "/budget-app/planning/retirement",
-        "title": "은퇴 계산기"
-      },
-      "5": {
-        "description": "추가 보안을 위한 선택적 클라이언트 측 암호화.",
-        "href": "/budget-app/settings",
-        "title": "개인정보 보호 방패"
-      }
-    },
-    "featuresDeepDive": {
-      "cta": "무료 체험 시작",
-      "description": "부서진 수식과의 싸움을 중단하세요. 현대 앱의 속도로 수동 제어의 유연성을 얻으세요.",
-      "explore": "탐색하기",
-      "heading1": "스프레드시트의 힘.",
-      "heading2": "앱의 단순함."
-    },
-    "hero": {
-      "badge": "개인정보 보호 우선 • 로컬 전용 • 제로 추적",
-      "finePrint": "은행 자격 증명이 필요 없습니다. 로컬 모드에 계정이 필요하지 않습니다.",
-      "headline": "데이터를 판매하지 않고 돈을 관리하세요.",
-      "primaryCta": {
-        "href": "/budget-app/auth/signup",
-        "label": "로컬 프로토콜 시작 (무료)"
-      },
-      "secondaryCta": {
-        "href": "/budget-app/auth/login",
-        "label": "로그인"
-      },
-      "subhead": "스프레드시트의 힘. 앱의 단순함. 데이터가 절대 기기를 떠나지 않는 유일한 예산 앱으로 재무 명확성을 경험하세요."
+    "pricingSection": {
+      "recommended": "추천",
+      "productName": "로컬 프로토콜",
+      "productDescription": "전적으로 당신의 기기에서 실행되는 완벽한 예산 경험.",
+      "whyChoose": "로컬 프로토콜을 선택해야 하는 이유?",
+      "whyChooseDescription": "클라우드 거대 기업과 비교해 보세요.",
+      "features": "무제한 거래, 계좌, 예산 및 전체 로컬 백업 기능 포함."
     },
     "heroSection": {
+      "cta": {
+        "heading": "혼란이 아닌 명확성을 위해 구축되었습니다.",
+        "viewPricing": "가격 보기"
+      },
       "badges": {
         "noSubscriptions": "구독 없음",
         "offlineReady": "오프라인 준비 완료",
         "seniorsMode": "노인 모드"
       },
-      "cta": {
-        "heading": "혼란이 아닌 명확성을 위해 구축되었습니다.",
-        "viewPricing": "가격 보기"
-      },
-      "modes": {
-        "budgets": "예산",
-        "dashboard": "대시보드",
-        "subscriptions": "구독"
-      },
       "preview": {
-        "categoryBudgets": "카테고리 예산",
         "livePreview": "실시간 미리보기",
         "recentTransactions": "최근 거래",
+        "categoryBudgets": "카테고리 예산",
         "recurring": "반복"
+      },
+      "modes": {
+        "dashboard": "대시보드",
+        "budgets": "예산",
+        "subscriptions": "구독"
       }
     },
-    "howItWorks": {
-      "0": {
-        "description": "CSV를 드래그 앤 드롭하거나 영수증을 스캔하세요. AI가 로컬에서 열을 매핑합니다.",
-        "title": "가져오기"
+    "featuresDeepDive": {
+      "heading1": "스프레드시트의 힘.",
+      "heading2": "앱의 단순함.",
+      "description": "부서진 수식과의 싸움을 중단하세요. 현대 앱의 속도로 수동 제어의 유연성을 얻으세요.",
+      "cta": "무료 체험 시작",
+      "explore": "탐색하기"
+    },
+    "accessibility": {
+      "title": "기본적으로 접근 가능",
+      "description": "노인 모드는 단순화된 내비게이션과 큰 터치 타겟을 제공합니다. 키보드 단축키, 포커스 상태 및 명확한 대비가 모두를 더 빠르게 이동하도록 돕습니다.",
+      "badges": {
+        "seniorsMode": "노인 모드",
+        "largeTouchTargets": "큰 터치 타겟",
+        "keyboardFirst": "키보드 우선"
       },
-      "1": {
-        "description": "스마트 규칙과 일괄 작업으로 빠른 분류.",
-        "title": "검토"
-      },
-      "2": {
-        "description": "모든 달러에 작업을 할당하고 미래의 순자산을 예측하세요.",
-        "title": "계획"
+      "buttons": {
+        "openApp": "앱 열기",
+        "settings": "접근성 설정"
       }
+    },
+    "faqSection": {
+      "title": "자주 묻는 질문",
+      "description": "체험, 가격 및 접근에 대한 일반적인 질문에 대한 간단한 답변."
+    },
+    "outcomesSection": {
+      "title": "스프레드시트가 아닌 실제 생활을 위해 구축됨",
+      "description": "대부분의 예산 앱은 사용자가 작업을 수행하게 만듭니다. BudgetPro는 마찰을 줄이면서 사용자가 제어할 수 있도록 설계되었습니다."
     },
     "howItWorksSection": {
-      "description": "복잡한 시스템에 잠기지 않고 빠르게 명확성을 얻는 워크플로우.",
-      "title": "작동 방식"
+      "title": "작동 방식",
+      "description": "복잡한 시스템에 잠기지 않고 빠르게 명확성을 얻는 워크플로우."
+    },
+    "nav": {
+      "tagline": "프리미엄 예산 관리"
     },
     "marquee": {
       "logos": [
@@ -940,816 +1356,473 @@
         "오프라인",
         "노인 모드"
       ]
+    }
+  },
+  "investmentAccountModal": {
+    "title": {
+      "add": "Add Investment Account",
+      "edit": "Edit Investment Account"
     },
-    "nav": {
-      "tagline": "프리미엄 예산 관리"
-    },
-    "outcomes": {
-      "0": {
-        "description": "더 이상 끊어진 연결이나 재인증 루프가 없습니다. 데이터 입력을 제어하세요.",
-        "title": "집계기와의 싸움 중단"
+    "closeModal": "Close modal",
+    "fields": {
+      "name": {
+        "label": "Account Name",
+        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
       },
-      "1": {
-        "description": "우리는 데이터를 판매하지 않기 때문에 데이터를 가지고 있지 않습니다. 끝.",
-        "title": "디자인에 의한 개인정보 보호"
+      "type": {
+        "label": "Account Type",
+        "descriptions": {
+          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
+          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals",
+          "Non-registered": "Taxable investment account",
+          "Company shares": "Employee stock purchase or stock options"
+        }
       },
-      "2": {
-        "description": "은퇴, 대출 상환 및 저축 목표를 하나의 통합된 보기에서 모델링하세요.",
-        "title": "미래 대비 계획"
+      "institution": {
+        "label": "Financial Institution (Optional)",
+        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
       },
-      "3": {
-        "description": "다른 앱이 놓치는 지갑의 반복적인 지출을 찾아보세요.",
-        "title": "구독 킬러"
+      "accountNumber": {
+        "label": "Account Number (Optional)",
+        "placeholder": "e.g., Last 4 digits: 1234"
       }
     },
-    "outcomesSection": {
-      "description": "대부분의 예산 앱은 사용자가 작업을 수행하게 만듭니다. BudgetPro는 마찰을 줄이면서 사용자가 제어할 수 있도록 설계되었습니다.",
-      "title": "스프레드시트가 아닌 실제 생활을 위해 구축됨"
+    "validation": {
+      "nameRequired": "Please enter an account name"
     },
-    "pricing": {
-      "cta": {
-        "href": "/budget-app/auth/signup",
-        "label": "로컬 프로토콜 시작"
-      },
-      "description": "강력한 로컬 프로토콜로 시작하세요. 나중에 다중 장치 동기화가 필요하면 업그레이드하세요.",
-      "eyebrow": "공정한 가격",
-      "guarantee": "로컬 프로토콜에 대한 신용 카드 필요 없음.",
-      "priceLabel": "영원히 무료",
-      "secondary": {
-        "href": "#pricing",
-        "label": "프로 기능 보기"
-      },
-      "title": "로컬은 무료입니다. 동기화는 프로입니다."
+    "errors": {
+      "saveFailed": "Failed to save account"
     },
-    "pricingSection": {
-      "features": "무제한 거래, 계좌, 예산 및 전체 로컬 백업 기능 포함.",
-      "productDescription": "전적으로 당신의 기기에서 실행되는 완벽한 예산 경험.",
-      "productName": "로컬 프로토콜",
-      "recommended": "추천",
-      "whyChoose": "로컬 프로토콜을 선택해야 하는 이유?",
-      "whyChooseDescription": "클라우드 거대 기업과 비교해 보세요."
+    "buttons": {
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "create": "Create Account",
+      "update": "Update Account"
+    }
+  },
+  "lanSync": {
+    "title": "LAN Sync",
+    "description": "Sync your budget data across devices on your local network",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "syncAll": "Sync All",
+    "time": {
+      "neverSynced": "Never synced",
+      "justNow": "Just now",
+      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
+      "lastSync": "Last sync: {time}"
     },
-    "security": {
-      "buttons": {
-        "offline": "오프라인 지원",
-        "privacy": "개인정보 보호 및 설정"
-      },
-      "cards": {
-        "aiControls": {
-          "description": "AI 기반 기능(예: 이상 탐지)을 전환하고 설정에서 챗봇 접근을 관리하세요.",
-          "title": "AI 기능 제어"
-        },
-        "encryption": {
-          "description": "앱에는 활성화 시 민감한 예산 기록을 보호하는 암호화 레이어가 포함되어 있습니다.",
-          "title": "암호화 지원"
-        },
-        "exportDelete": {
-          "description": "데이터 및 개인정보 보호 설정을 내보내거나 앱에서 직접 로컬 데이터를 삭제하세요.",
-          "title": "내보내기 및 삭제"
-        },
-        "localStorage": {
-          "description": "예산 데이터는 브라우저에 저장(IndexedDB)되어 앱이 빠르고 오프라인에서도 사용 가능합니다.",
-          "title": "로컬 저장소"
-        }
-      },
-      "description": "예산 앱은 데이터를 로컬에 저장(오프라인 준비 완료)하고 AI 기능, 내보내기 및 삭제에 대한 제어 기능을 제공합니다.",
-      "title": "디자인에 의한 개인정보 보호 우선"
+    "device": {
+      "connected": "Connected",
+      "syncing": "Syncing...",
+      "sync": "Sync",
+      "connect": "Connect",
+      "disconnect": "Disconnect",
+      "removeDevice": "Remove Device"
     },
-    "socialProof": {
-      "description": "예산을 유지하는 세부 사항: 온보딩, 단축키, 모바일 내비게이션 및 오프라인 준비 성능.",
-      "features": {
-        "mobileUx": {
-          "description": "바닥 내비게이션 및 반응형 레이아웃이 자연스럽게 느껴집니다.",
-          "title": "모바일 우선 UX"
-        },
-        "onboarding": {
-          "description": "가이드 투어가 새로운 사용자가 빠르게 가치를 얻도록 돕습니다.",
-          "title": "온보딩 투어"
-        },
-        "pwaInstall": {
-          "description": "앱처럼 설치하고 불안정한 인터넷에서도 계속 진행하세요.",
-          "title": "PWA 설치"
-        },
-        "shortcuts": {
-          "description": "UI에 내장된 검색 및 작업 단축키로 빠르게 이동하세요.",
-          "title": "키보드 단축키"
-        }
-      },
-      "title": "프리미엄 품질, 내장"
+    "removeDialog": {
+      "title": "Remove Device",
+      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
+      "cancel": "Cancel",
+      "remove": "Remove"
     },
-    "trust": {
-      "0": {
-        "description": "데이터는 브라우저의 IndexedDB에 저장됩니다. 우리는 그것을 볼 수 없습니다.",
-        "title": "당신의 기기, 당신의 데이터"
+    "pairedDevices": {
+      "title": "Paired Devices",
+      "noDevices": "No devices paired yet",
+      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
+      "addDevice": "Add Device",
+      "emptyTitle": "No devices paired",
+      "emptyDescription": "Pair a device to start syncing your budget data",
+      "addFirstDevice": "Add Your First Device"
+    },
+    "howItWorks": {
+      "title": "How LAN Sync Works",
+      "step1": {
+        "title": "Pair Devices",
+        "description": "Scan a QR code or enter connection details to pair devices on the same network"
       },
-      "1": {
-        "description": "대량 편집, 피벗 및 전문가처럼 분석하세요. 복잡한 수식 없이.",
-        "title": "스프레드시트의 힘"
+      "step2": {
+        "title": "Sync Securely",
+        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required"
       },
-      "2": {
-        "description": "제로 지연. 산 정상이나 지하철 터널에서도 작동합니다.",
-        "title": "오프라인 속도"
-      },
-      "3": {
-        "description": "가져오기 마법사가 금요일 재무 검토를 만족스러운 습관으로 만듭니다.",
-        "title": "수동 의식"
+      "step3": {
+        "title": "Automatic Updates",
+        "description": "Changes sync automatically when devices are connected on the same network"
       }
     }
   },
-  "nav": {
-    "about": "정보",
-    "accounts": "계좌",
-    "budgets": "예산",
-    "categories": "카테고리",
-    "dashboard": "대시보드",
-    "export": "내보내기",
-    "goals": "목표",
-    "help": "도움말",
-    "import": "가져오기",
-    "reports": "보고서",
-    "settings": "설정",
-    "transactions": "거래내역"
-  },
-  "onboarding": {
-    "dontShowAgain": "이 투어 다시 보지 않기",
-    "navigation": {
-      "getStarted": "시작하기",
-      "next": "다음",
-      "previous": "이전",
-      "startTour": "투어 시작"
+  "subscriptionCard": {
+    "interval": {
+      "weekly": "Weekly",
+      "bi-weekly": "Bi-weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "annual": "Annual",
+      "irregular": "Irregular"
     },
-    "quickTip": "💡 빠른 팁",
-    "skipTour": "투어 건너뛰기",
-    "stepCounter": "{current} / {total} 단계",
-    "steps": {
-      "budgets": {
-        "description": "다양한 지출 카테고리에 대한 예산을 만드세요. 한 달 동안 진행 상황을 추적하고 한도에 가까워지면 알림을 받으세요.",
-        "title": "🎯 예산 설정"
-      },
-      "categorize": {
-        "description": "거래 카테고리를 검토하고 조정하세요. 우리의 스마트 분류는 귀하의 수정 사항에서 학습하여 시간이 지남에 따라 개선됩니다. 여러 거래를 한 번에 분류하는 일괄 작업을 사용하세요!",
-        "title": "🏷️ 분류 및 정리"
-      },
-      "import": {
-        "description": "CSV 파일에서 은행 거래를 가져오는 것으로 시작하세요. BMO, Home Trust 및 기타 여러 은행을 지원합니다. 앱이 자동으로 거래를 분류합니다!",
-        "title": "📥 거래 가져오기"
-      },
-      "reports": {
-        "description": "지출 패턴을 시각화하고 순자산을 추적하며 정보에 기반한 재무 결정을 내리세요. 거래가 발생할 때마다 대시보드가 자동으로 업데이트됩니다!",
-        "title": "📊 보고서 및 통계 보기"
-      },
-      "welcome": {
-        "description": "가정 재무 관리 시작을 돕기 위해 간단한 투어를 진행합니다. 오래 걸리지 않을 것입니다!",
-        "title": "👋 예산 앱에 오신 것을 환영합니다!"
-      }
+    "confidence": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low",
+      "label": "Detection Confidence"
     },
-    "tips": {
-      "budgets": "현실적인 예산을 설정하고, 초과 지출할 가능성이 있을 때 알림을 받으세요.",
-      "categorize": "빠른 분류 버튼을 사용하거나 여러 거래를 선택하여 일괄 분류하세요.",
-      "import": "CSV 파일을 드래그 앤 드롭하거나 클릭하여 찾아보세요. BMO 및 Home Trust 형식을 자동으로 감지합니다!"
-    }
-  },
-  "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
-    "progress": {
-      "label": "Current progress"
+    "source": {
+      "manual": "Manual",
+      "auto-detected": "Auto-detected",
+      "merged": "Tracked"
+    },
+    "badges": {
+      "aiVerified": "AI Verified",
+      "paused": "Paused",
+      "cancelled": "Cancelled",
+      "trial": "Trial"
+    },
+    "menu": {
+      "viewTransactions": "View Transactions",
+      "edit": "Edit",
+      "resume": "Resume",
+      "pause": "Pause",
+      "cancelSubscription": "Cancel Subscription",
+      "claimManage": "Claim & Manage",
+      "notSubscription": "Not a Subscription",
+      "delete": "Delete"
+    },
+    "trial": {
+      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
     },
     "stats": {
+      "amount": "Amount",
+      "frequency": "Frequency",
+      "nextCharge": "Next Charge",
+      "totalSpent": "Total Spent",
+      "annualCost": "Annual Cost"
+    },
+    "details": {
+      "occurrences": "Occurrences",
+      "charges": "{count} charges",
+      "firstCharge": "First Charge",
+      "lastCharge": "Last Charge",
+      "reminder": "Reminder",
+      "daysBefore": "{count} days before",
+      "payment": "Payment"
+    },
+    "buttons": {
+      "transactions": "Transactions",
+      "claimManage": "Claim & Manage",
+      "edit": "Edit"
+    },
+    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually."
+  },
+  "overspendingAlerts": {
+    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
+    "stats": {
       "budget": "Budget",
-      "daysLeft": "Days Left",
+      "spentSoFar": "Spent So Far",
       "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "daysLeft": "Days Left"
+    },
+    "progress": {
+      "label": "Current progress"
     },
     "tip": {
       "label": "Tip:",
       "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
     }
   },
-  "predictiveSpendingChart": {
-    "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+  "chatbot": {
+    "disabled": {
+      "title": "Chatbot Disabled",
+      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
+      "enableButton": "Enable Chatbot"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
-    "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+    "header": {
+      "title": "Budget Assistant",
+      "subtitle": "Ask me about your finances"
     },
-    "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
-    },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
-  },
-  "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "exportConversation": "Export conversation",
+      "clearHistory": "Clear chat history",
+      "send": "Send"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
-    "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+    "emptyState": {
+      "title": "Start a Conversation",
+      "description": "Ask me anything about your finances. Here are some examples:",
+      "examples": {
+        "spending": "How much did I spend this month?",
+        "budget": "Am I over budget in any categories?",
+        "groceries": "Show me my recent grocery purchases",
+        "balance": "What's my total account balance?"
+      }
     },
-    "title": "Install Budget App"
-  },
-  "quickCategorize": {
-    "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+    "messages": {
+      "thinking": "Thinking...",
+      "dataAccessed": "Data accessed:",
+      "error": "Error"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
-  },
-  "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
-    "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
-    },
-    "timePeriod": "Time Period"
-  },
-  "receiptUpload": {
-    "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
-    },
-    "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
-    },
-    "cameraInputLabel": "Camera capture input",
-    "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
-    },
-    "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
-    },
-    "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
-    },
-    "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
-    },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "input": {
+      "placeholder": "Ask about your finances...",
+      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training."
+    }
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
+    "title": "Recurring Transactions",
+    "subtitle": "Detected subscriptions and bills",
     "estimatedMonthly": "Estimated Monthly",
     "frequency": {
+      "weekly": "Weekly",
       "biweekly": "Bi-weekly",
       "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "quarterly": "Quarterly"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
     "next": "Next: {date}",
+    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
     "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "confidence": "{percent}% confidence",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
+      "week": "per week",
       "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "per month",
+      "quarter": "per quarter"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
-  },
-  "shortcutsModal": {
-    "close": "Close shortcuts help",
-    "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
-    },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
-  },
-  "sidebar": {
-    "actions": {
-      "importCsv": "CSV 가져오기",
-      "settings": "설정",
-      "showAllItems": "모든 항목 보기",
-      "showLess": "덜 보기"
-    },
-    "appSubtitle": "프리미엄 금융",
-    "appTitle": "예산 앱",
-    "navigation": {
-      "budgets": "예산",
-      "categories": "카테고리",
-      "dashboard": "대시보드",
-      "futurePlans": "미래 계획",
-      "investments": "투자",
-      "loans": "대출",
-      "reports": "보고서",
-      "retirement": "은퇴",
-      "scanReceipt": "영수증 스캔",
-      "subscriptions": "구독",
-      "transactions": "거래내역",
-      "accounts": "Accounts",
-      "calculators": "Calculators"
-    },
-    "search": "검색...",
-    "shortcuts": "단축키"
-  },
-  "simplefinSettings": {
-    "connectedAccounts": {
-      "description": "Manage your linked bank accounts",
-      "title": "Connected Accounts"
-    },
-    "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
-      "connectButton": "Connect Bank Account",
-      "connected": "Connected",
-      "description": "Connect your bank accounts to automatically import transactions",
-      "notConnected": "Not Connected",
-      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
-      "title": "SimpleFIN Connection"
-    },
-    "disconnect": {
-      "button": "Disconnect",
-      "cancel": "Cancel",
-      "confirm": "Disconnect",
-      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
-      "dialogTitle": "Disconnect SimpleFIN?"
-    },
-    "help": {
-      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
-      "protocolDocs": "SimpleFIN Protocol Documentation",
-      "title": "Need Help?"
-    },
-    "sync": {
-      "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
-      "lastSynced": "Last synced: {time}",
-      "lessThanHour": "Less than an hour ago",
-      "never": "Never",
-      "syncNow": "Sync Now",
-      "syncing": "Syncing..."
-    },
-    "syncSettings": {
-      "autoCategorize": {
-        "description": "Automatically categorize imported transactions using AI",
-        "label": "Auto-Categorize"
-      },
-      "autoSync": {
-        "description": "Automatically sync transactions on a schedule",
-        "label": "Automatic Sync"
-      },
-      "description": "Configure how and when transactions are synced",
-      "frequency": {
-        "every12Hours": "Every 12 hours",
-        "every2Days": "Every 2 days",
-        "every6Hours": "Every 6 hours",
-        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
-        "label": "Sync Frequency",
-        "onceDaily": "Once daily"
-      },
-      "notifications": {
-        "description": "Show notification when sync completes",
-        "label": "Sync Notifications"
-      },
-      "pendingTransactions": {
-        "description": "Include transactions that haven't posted yet",
-        "label": "Import Pending Transactions"
-      },
-      "title": "Sync Settings",
-      "transactionHistory": {
-        "days": "{count} days",
-        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
-        "label": "Transaction History"
-      }
-    }
-  },
-  "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
-    "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
-    },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
-    "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
-    },
-    "title": "Spending Trends & Forecast"
-  },
-  "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
-    "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
-    },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
-    "errors": {
-      "saveFailed": "Failed to save split transaction"
-    },
-    "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
-    },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
-    "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
-    }
-  },
-  "subscriptionCard": {
-    "badges": {
-      "aiVerified": "AI Verified",
-      "cancelled": "Cancelled",
-      "paused": "Paused",
-      "trial": "Trial"
-    },
-    "buttons": {
-      "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
-    },
-    "confidence": {
-      "high": "High",
-      "label": "Detection Confidence",
-      "low": "Low",
-      "medium": "Medium"
-    },
-    "details": {
-      "charges": "{count} charges",
-      "daysBefore": "{count} days before",
-      "firstCharge": "First Charge",
-      "lastCharge": "Last Charge",
-      "occurrences": "Occurrences",
-      "payment": "Payment",
-      "reminder": "Reminder"
-    },
-    "interval": {
-      "annual": "Annual",
-      "bi-weekly": "Bi-weekly",
-      "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
-    },
-    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
-    "menu": {
-      "cancelSubscription": "Cancel Subscription",
-      "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
-      "notSubscription": "Not a Subscription",
-      "pause": "Pause",
-      "resume": "Resume",
-      "viewTransactions": "View Transactions"
-    },
-    "source": {
-      "auto-detected": "Auto-detected",
-      "manual": "Manual",
-      "merged": "Tracked"
-    },
-    "stats": {
-      "amount": "Amount",
-      "annualCost": "Annual Cost",
-      "frequency": "Frequency",
-      "nextCharge": "Next Charge",
-      "totalSpent": "Total Spent"
-    },
-    "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
-    }
-  },
-  "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
-    "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
-    },
-    "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
-    }
-  },
-  "tooltip": {
-    "ariaLabel": "자세한 정보",
-    "learnMore": "자세히 알아보기 →"
-  },
-  "transactionModal": {
-    "account": {
-      "label": "Account"
-    },
-    "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
-    },
-    "amount": {
-      "label": "Amount",
-      "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
-    },
-    "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
-    },
-    "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
-    },
-    "closeModal": "Close modal",
-    "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
-    },
-    "date": {
-      "label": "Date"
-    },
-    "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
-    },
-    "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
-    },
-    "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
-    },
-    "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
-    },
-    "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
-    },
-    "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
-    },
-    "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
-    },
-    "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
-    }
-  },
-  "transactionTable": {
-    "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
-    },
-    "emptyState": "No transactions to display",
-    "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
-    }
-  },
-  "welcome": {
-    "subtitle": "첫 거래를 추가하거나 은행에서 데이터를 가져오는 것으로 시작하세요",
-    "title": "예산 앱에 오신 것을 환영합니다"
-  },
-  "widget": {
-    "accountBalances": {
-      "description": "모든 계좌의 현재 잔액",
-      "title": "계좌 잔액"
-    },
-    "budgetProgress": {
-      "description": "예산 목표에 대한 진행 상황을 추적하세요",
-      "title": "예산 진행 상황"
-    },
-    "incomeVsExpenses": {
-      "description": "시간에 따른 수입과 지출을 비교하세요",
-      "title": "수입 대 지출"
-    },
-    "monthlyTrends": {
-      "description": "매달 재무 패턴을 시각화하세요",
-      "title": "월별 추세"
-    },
-    "recentTransactions": {
-      "description": "최신 재무 활동을 빠르게 확인하세요",
-      "title": "최근 거래"
-    },
-    "spendingByCategory": {
-      "description": "돈이 어디에 쓰이는지 시각적으로 확인하세요",
-      "title": "카테고리별 지출"
-    },
-    "upcomingBills": {
-      "description": "청구서 알림으로 결제를 놓치지 마세요",
-      "title": "다가오는 청구서"
-    }
+    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}"
   },
   "ynabMigrationWizard": {
-    "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
-      "createNew": "Create New",
-      "description": "Map YNAB categories to your existing categories or create new ones.",
-      "mapToExisting": "Map to Existing",
-      "selectCategory": "Select category...",
-      "skip": "Skip",
-      "title": "Category Mapping",
-      "willCreate": "Will create:"
+    "steps": {
+      "upload": {
+        "title": "Upload",
+        "description": "Select YNAB export file"
+      },
+      "categories": {
+        "title": "Categories",
+        "description": "Map to existing categories"
+      },
+      "options": {
+        "title": "Options",
+        "description": "Configure import settings"
+      },
+      "preview": {
+        "title": "Preview",
+        "description": "Review before import"
+      },
+      "importing": {
+        "title": "Importing",
+        "description": "Processing your data"
+      },
+      "complete": {
+        "title": "Complete",
+        "description": "Migration finished"
+      }
     },
-    "completeStep": {
-      "errors": "Errors",
-      "importAnother": "Import Another",
-      "success": "Import Complete!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
-      "viewTransactions": "View Transactions",
-      "whatNext": "What would you like to do next?",
-      "withIssues": "Import Completed with Issues"
+    "header": {
+      "title": "Import from YNAB",
+      "subtitle": "Migrate your budget data seamlessly",
+      "closeLabel": "Close wizard"
     },
     "footer": {
       "back": "Back",
-      "done": "Done",
       "next": "Next",
-      "startImport": "Start Import"
-    },
-    "header": {
-      "closeLabel": "Close wizard",
-      "subtitle": "Migrate your budget data seamlessly",
-      "title": "Import from YNAB"
-    },
-    "importingStep": {
-      "finishing": "Finishing up...",
-      "importingAccounts": "Importing accounts...",
-      "importingBudgets": "Importing budgets...",
-      "importingCategories": "Importing categories...",
-      "importingTransactions": "Importing transactions...",
-      "title": "Importing your YNAB data..."
-    },
-    "optionsStep": {
-      "accountOptions": {
-        "includeClosedAccounts": "Include closed accounts",
-        "includeOffBudgetAccounts": "Include off-budget accounts",
-        "title": "Account Options"
-      },
-      "budgetOptions": {
-        "importGoals": "Import savings goals as future purchases",
-        "title": "Budget Options"
-      },
-      "hiddenCategories": {
-        "archive": "Archive",
-        "archiveDesc": "Import as archived (recommended)",
-        "description": "How to handle YNAB categories marked as hidden?",
-        "import": "Import",
-        "importDesc": "Import as active categories",
-        "skip": "Skip",
-        "skipDesc": "Don't import hidden categories",
-        "title": "Hidden Categories"
-      }
-    },
-    "previewStep": {
-      "accounts": "Accounts",
-      "allocations": "{count} allocations",
-      "budgetMonths": "Budget Months",
-      "categories": "Categories",
-      "dateRange": "Transaction Date Range",
-      "description": "Review the data that will be imported.",
-      "duplicates": "{count} duplicates",
-      "new": "{count} new",
-      "newMapped": "{created} new, {mapped} mapped",
-      "preparingPreview": "Preparing preview...",
-      "title": "Import Preview",
-      "transactions": "Transactions",
-      "warnings": "Warnings"
-    },
-    "steps": {
-      "categories": {
-        "description": "Map to existing categories",
-        "title": "Categories"
-      },
-      "complete": {
-        "description": "Migration finished",
-        "title": "Complete"
-      },
-      "importing": {
-        "description": "Processing your data",
-        "title": "Importing"
-      },
-      "options": {
-        "description": "Configure import settings",
-        "title": "Options"
-      },
-      "preview": {
-        "description": "Review before import",
-        "title": "Preview"
-      },
-      "upload": {
-        "description": "Select YNAB export file",
-        "title": "Upload"
-      }
+      "startImport": "Start Import",
+      "done": "Done"
     },
     "uploadStep": {
-      "accounts": "Accounts",
-      "categories": "Categories",
+      "supportedFormats": "Supported Formats",
+      "formatApiExport": "YNAB API Export",
+      "formatApiExportDesc": "JSON from nYNAB",
+      "formatYfull": "Budget.yfull / Budget.ynab4",
+      "formatYfullDesc": "YNAB4 desktop export",
+      "formatCsv": "CSV Export",
+      "formatCsvDesc": "From YNAB web app",
+      "parsing": "Parsing file...",
       "clickToSelect": "Click to select a file",
       "dragAndDrop": "or drag and drop here",
       "fileSummary": "File Summary",
-      "format": "Format",
-      "formatApiExport": "YNAB API Export",
-      "formatApiExportDesc": "JSON from nYNAB",
-      "formatCsv": "CSV Export",
-      "formatCsvDesc": "From YNAB web app",
-      "formatYfull": "Budget.yfull / Budget.ynab4",
-      "formatYfullDesc": "YNAB4 desktop export",
-      "parsing": "Parsing file...",
-      "supportedFormats": "Supported Formats",
-      "transactions": "Transactions"
+      "accounts": "Accounts",
+      "transactions": "Transactions",
+      "categories": "Categories",
+      "format": "Format"
+    },
+    "categoryStep": {
+      "title": "Category Mapping",
+      "description": "Map YNAB categories to your existing categories or create new ones.",
+      "createNew": "Create New",
+      "mapToExisting": "Map to Existing",
+      "skip": "Skip",
+      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "selectCategory": "Select category...",
+      "willCreate": "Will create:"
+    },
+    "optionsStep": {
+      "hiddenCategories": {
+        "title": "Hidden Categories",
+        "description": "How to handle YNAB categories marked as hidden?",
+        "archive": "Archive",
+        "archiveDesc": "Import as archived (recommended)",
+        "skip": "Skip",
+        "skipDesc": "Don't import hidden categories",
+        "import": "Import",
+        "importDesc": "Import as active categories"
+      },
+      "accountOptions": {
+        "title": "Account Options",
+        "includeClosedAccounts": "Include closed accounts",
+        "includeOffBudgetAccounts": "Include off-budget accounts"
+      },
+      "budgetOptions": {
+        "title": "Budget Options",
+        "importGoals": "Import savings goals as future purchases"
+      }
+    },
+    "previewStep": {
+      "title": "Import Preview",
+      "description": "Review the data that will be imported.",
+      "accounts": "Accounts",
+      "transactions": "Transactions",
+      "categories": "Categories",
+      "budgetMonths": "Budget Months",
+      "new": "{count} new",
+      "duplicates": "{count} duplicates",
+      "newMapped": "{created} new, {mapped} mapped",
+      "allocations": "{count} allocations",
+      "dateRange": "Transaction Date Range",
+      "warnings": "Warnings",
+      "preparingPreview": "Preparing preview..."
+    },
+    "importingStep": {
+      "title": "Importing your YNAB data...",
+      "importingAccounts": "Importing accounts...",
+      "importingCategories": "Importing categories...",
+      "importingTransactions": "Importing transactions...",
+      "importingBudgets": "Importing budgets...",
+      "finishing": "Finishing up..."
+    },
+    "completeStep": {
+      "success": "Import Complete!",
+      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
+      "withIssues": "Import Completed with Issues",
+      "errors": "Errors",
+      "whatNext": "What would you like to do next?",
+      "viewTransactions": "View Transactions",
+      "importAnother": "Import Another"
+    }
+  },
+  "accessibilitySettings": {
+    "seniorsMode": {
+      "title": "Seniors Mode",
+      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface"
+    },
+    "themeMode": {
+      "title": "Theme Mode",
+      "description": "Choose your preferred color scheme for the budget app",
+      "light": "Light",
+      "lightDesc": "Bright and clear",
+      "dark": "Dark",
+      "darkDesc": "Easy on eyes",
+      "highContrast": "High Contrast",
+      "highContrastDesc": "Maximum visibility",
+      "auto": "Auto",
+      "autoDesc": "Match system"
+    },
+    "reducedMotion": {
+      "title": "Reduced Motion",
+      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
+      "toggleLabel": "Toggle reduced motion mode"
+    },
+    "fontSize": {
+      "title": "Font Size",
+      "description": "Adjust the base text size for better readability",
+      "default": "Default",
+      "large": "Large",
+      "extraLarge": "Extra Large"
+    },
+    "infoBox": {
+      "title": "About Accessibility Settings",
+      "savedAutomatically": "Settings are saved automatically and persist across sessions",
+      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
+      "storedLocally": "Your preferences are stored locally and never sent to servers",
+      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization"
+    },
+    "presets": {
+      "title": "Quick Presets:",
+      "off": "Off",
+      "offDesc": "Standard interface",
+      "mild": "Mild",
+      "mildDesc": "Slightly enhanced",
+      "moderate": "Moderate",
+      "moderateDesc": "Recommended for most",
+      "full": "Full",
+      "fullDesc": "Maximum accessibility"
+    }
+  },
+  "simplefinSettings": {
+    "connection": {
+      "title": "SimpleFIN Connection",
+      "description": "Connect your bank accounts to automatically import transactions",
+      "connected": "Connected",
+      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
+      "notConnected": "Not Connected",
+      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
+      "connectButton": "Connect Bank Account"
+    },
+    "sync": {
+      "syncing": "Syncing...",
+      "syncNow": "Sync Now",
+      "lastSynced": "Last synced: {time}",
+      "never": "Never",
+      "lessThanHour": "Less than an hour ago",
+      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
+      "date": "{date}"
+    },
+    "disconnect": {
+      "button": "Disconnect",
+      "dialogTitle": "Disconnect SimpleFIN?",
+      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
+      "cancel": "Cancel",
+      "confirm": "Disconnect"
+    },
+    "syncSettings": {
+      "title": "Sync Settings",
+      "description": "Configure how and when transactions are synced",
+      "autoSync": {
+        "label": "Automatic Sync",
+        "description": "Automatically sync transactions on a schedule"
+      },
+      "frequency": {
+        "label": "Sync Frequency",
+        "every6Hours": "Every 6 hours",
+        "every12Hours": "Every 12 hours",
+        "onceDaily": "Once daily",
+        "every2Days": "Every 2 days",
+        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended."
+      },
+      "transactionHistory": {
+        "label": "Transaction History",
+        "days": "{count} days",
+        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)"
+      },
+      "pendingTransactions": {
+        "label": "Import Pending Transactions",
+        "description": "Include transactions that haven't posted yet"
+      },
+      "autoCategorize": {
+        "label": "Auto-Categorize",
+        "description": "Automatically categorize imported transactions using AI"
+      },
+      "notifications": {
+        "label": "Sync Notifications",
+        "description": "Show notification when sync completes"
+      }
+    },
+    "connectedAccounts": {
+      "title": "Connected Accounts",
+      "description": "Manage your linked bank accounts"
+    },
+    "help": {
+      "title": "Need Help?",
+      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
+      "protocolDocs": "SimpleFIN Protocol Documentation"
     }
   },
   "calculators": {
@@ -1908,5 +1981,567 @@
       "over": "Over",
       "under": "On Track"
     }
+  },
+  "amountFilter": {
+    "title": "Amount Range",
+    "clear": "Clear",
+    "minThumb": "Minimum amount",
+    "maxThumb": "Maximum amount",
+    "minLabel": "Minimum amount",
+    "maxLabel": "Maximum amount",
+    "minPlaceholder": "Min",
+    "maxPlaceholder": "Max"
+  },
+  "transactionSearch": {
+    "placeholder": "Search transactions...",
+    "placeholderExtended": "Try 'coffee last week' or 'amount:>50'",
+    "noResults": "No transactions found",
+    "noResultsDescription": "Try a different search or adjust your filters",
+    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
+    "searchingFor": "Searching for: {query}",
+    "recentSearches": "Recent Searches",
+    "savedFilters": "Saved Filters",
+    "clearRecent": "Clear",
+    "saveFilter": "Save Filter",
+    "filterName": "Filter name",
+    "suggestions": {
+      "merchants": "Merchants",
+      "categories": "Categories",
+      "amounts": "Amount Ranges",
+      "recent": "Recent"
+    },
+    "tips": {
+      "title": "Search Tips",
+      "fuzzy": "Typo-tolerant: 'starbukcs' finds 'Starbucks'",
+      "amount": "Amount: '$50-100' or 'amount:>50'",
+      "date": "Date: 'last week', 'this month', 'date:last30'",
+      "category": "Category: 'groceries' or 'category:food'",
+      "type": "Type: 'type:income' or 'type:expense'"
+    },
+    "suggestionsHeading": "Suggestions",
+    "viewAllResults": "View all {count} results",
+    "searchTipsIntro": "Search Tips:",
+    "searchTipChars": "Type 3+ characters to search transactions",
+    "searchTipAmount": "Use <code>$50-100</code> for amount ranges",
+    "searchTipNL": "Try <code>coffee last week</code> for natural language",
+    "recentSearchLabel": "Recent search",
+    "searchFilterLabel": "Search filter",
+    "amountRangeLabel": "Amount range",
+    "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
+    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
+    "noTransactionsYet": "No transactions yet",
+    "save": "Save"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all read",
+    "clearAll": "Clear all",
+    "snooze": "Snooze",
+    "dismiss": "Dismiss",
+    "empty": "No notifications",
+    "emptyAll": "You're all caught up!",
+    "emptyUnread": "No unread notifications",
+    "emptySnoozed": "No snoozed notifications",
+    "snoozedUntil": "Snoozed for {time}",
+    "tabs": {
+      "all": "All",
+      "unread": "Unread",
+      "snoozed": "Snoozed"
+    },
+    "snoozeOptions": {
+      "1hour": "1 hour",
+      "3hours": "3 hours",
+      "1day": "1 day",
+      "3days": "3 days",
+      "1week": "1 week"
+    },
+    "types": {
+      "bill_reminder": "Bill Reminder",
+      "budget_alert": "Budget Alert",
+      "goal_milestone": "Goal Milestone",
+      "system": "System"
+    }
+  },
+  "notificationSettings": {
+    "title": "Notifications",
+    "notAvailable": "Notification settings are not available.",
+    "masterToggle": {
+      "title": "Enable Notifications",
+      "description": "Turn all notifications on or off"
+    },
+    "pushPermission": {
+      "title": "Push Notifications",
+      "description": "Receive notifications even when the app is closed",
+      "enable": "Enable Push Notifications",
+      "notSupported": "Not supported in this browser",
+      "deniedHint": "Enable in browser settings",
+      "states": {
+        "granted": "Enabled",
+        "denied": "Blocked",
+        "default": "Not set",
+        "unsupported": "Unsupported"
+      }
+    },
+    "notificationTypes": {
+      "title": "Notification Types",
+      "description": "Choose which notifications you want to receive",
+      "billReminders": {
+        "title": "Bill Reminders",
+        "description": "Get notified before subscriptions are due"
+      },
+      "budgetAlerts": {
+        "title": "Budget Alerts",
+        "description": "Alerts when approaching budget limits"
+      },
+      "goalMilestones": {
+        "title": "Goal Milestones",
+        "description": "Celebrate when you hit savings milestones"
+      }
+    },
+    "quietHours": {
+      "title": "Quiet Hours",
+      "description": "No notifications during this time window",
+      "start": "Start time",
+      "end": "End time"
+    },
+    "reminderDays": {
+      "title": "Default Reminder",
+      "description": "How many days before a bill is due to remind you",
+      "daysBeforeDue": "days before due date"
+    },
+    "testNotification": {
+      "title": "Test Notification",
+      "description": "Send a test notification to verify your settings",
+      "button": "Send Test"
+    },
+    "infoBox": {
+      "storedLocally": "Notification settings are stored locally on your device.",
+      "pushExplanation": "Push notifications require browser permission and work even when the app is closed.",
+      "emailExplanation": "Email notifications are sent via our secure email service and require a valid email address."
+    },
+    "emailNotifications": {
+      "title": "Email Notifications",
+      "description": "Receive notifications via email",
+      "emailAddress": "Email Address",
+      "invalidEmail": "Please enter a valid email address",
+      "types": "Email notification types",
+      "testEmail": "Test Email",
+      "testEmailDescription": "Send a test email to verify your settings",
+      "sendTest": "Send Test",
+      "testEmailSent": "Email sent!",
+      "testEmailFailed": "Failed to send"
+    }
+  },
+  "calendarExport": {
+    "addToCalendar": "Add to Calendar",
+    "exportToCalendar": "Export to Calendar",
+    "downloadICS": "Download ICS File",
+    "downloadAllICS": "Download All as ICS",
+    "selectSubscriptions": "Select Subscriptions...",
+    "googleCalendar": "Google Calendar",
+    "outlookCalendar": "Outlook Calendar",
+    "dialog": {
+      "title": "Export to Calendar",
+      "description": "Add bill reminders to your calendar",
+      "exportMethod": "Export Method",
+      "selectSubscriptions": "Select Subscriptions",
+      "selectAll": "Select all",
+      "deselectAll": "Deselect all",
+      "cancel": "Cancel",
+      "export": "Export {count} subscription(s)",
+      "exporting": "Exporting..."
+    }
+  },
+  "mobileNav": {
+    "home": "Home",
+    "budget": "Budget",
+    "accounts": "Accounts",
+    "activity": "Activity",
+    "more": "More"
+  },
+  "pullToRefresh": {
+    "pull": "Pull to refresh",
+    "release": "Release to refresh"
+  },
+  "morePage": {
+    "title": "More",
+    "groups": {
+      "trackingAnalysis": "Tracking & Analysis",
+      "wealthPlanning": "Wealth & Planning",
+      "toolsSettings": "Tools & Settings"
+    }
+  },
+  "quickStats": {
+    "balance": "Total Balance",
+    "income": "Income",
+    "expenses": "Expenses",
+    "savingsRate": "Savings Rate",
+    "savingsRateDescription": "Percentage of income saved this month"
+  },
+  "bottomSheet": {
+    "close": "Close",
+    "dragToClose": "Drag down to close"
+  },
+  "budget": {
+    "privacy": {
+      "toggle": "Privacy Mode",
+      "enabled": "Financial values are hidden",
+      "disabled": "Financial values are visible",
+      "tapToReveal": "Tap to reveal",
+      "shortcut": "Cmd+Shift+P"
+    },
+    "safeToSpend": {
+      "title": "Safe to Spend",
+      "totalSafe": "Total Safe to Spend",
+      "dailyBudget": "Daily Budget",
+      "daysLeft": "{count} days left this month",
+      "perCategory": "By Category",
+      "safe": "On Track",
+      "caution": "Watch Spending",
+      "danger": "Over Budget",
+      "remaining": "remaining",
+      "noData": "Set up budgets to see safe-to-spend amounts"
+    },
+    "rollover": {
+      "title": "Budget Rollover",
+      "enabled": "Rollover enabled",
+      "disabled": "Rollover disabled",
+      "includesRollover": "Includes {amount} rollover",
+      "negativeRollover": "Overspend of {amount} carried forward",
+      "toggle": "Enable rollover for this category",
+      "effective": "Effective budget"
+    },
+    "gamification": {
+      "currentStreak": "Current streak",
+      "longestStreak": "Best: {count} days",
+      "achievementUnlocked": "Achievement Unlocked!",
+      "points": "Points",
+      "badges": "Badges",
+      "streaks": "Streaks",
+      "noAchievements": "Complete actions to earn badges",
+      "totalPoints": "Total Points"
+    },
+    "review": {
+      "title": "Review Transactions",
+      "subtitle": "Categorize your uncategorized transactions",
+      "progress": "{reviewed} of {total} reviewed",
+      "approve": "Approve",
+      "skip": "Skip",
+      "approveKey": "Approve (→/A)",
+      "skipKey": "Skip (←/F)",
+      "allDone": "All caught up!",
+      "allDoneDescription": "No more transactions to review",
+      "noDescription": "No description",
+      "swipeRight": "Swipe right to approve",
+      "swipeLeft": "Swipe left to skip"
+    },
+    "merchantRules": {
+      "title": "Merchant Rules",
+      "description": "Auto-categorize transactions by merchant",
+      "createRule": "Always categorize {merchant} as {category}?",
+      "yes": "Yes, always",
+      "no": "No, just this time",
+      "ruleCreated": "Rule created",
+      "noRules": "No merchant rules yet",
+      "noRulesDescription": "Rules are created when you re-categorize transactions",
+      "merchant": "Merchant",
+      "category": "Category",
+      "applied": "Applied {count} times",
+      "deleteRule": "Delete Rule"
+    },
+    "refunds": {
+      "title": "Refund Tracking",
+      "expecting": "Expecting refund",
+      "received": "Refund received",
+      "partial": "Partial refund",
+      "markExpecting": "Expect Refund",
+      "expectedAmount": "Expected amount",
+      "expectedDate": "Expected by",
+      "autoMatched": "Auto-matched refund",
+      "grossVsNet": "Gross vs Net",
+      "gross": "Gross",
+      "refundsTotal": "Refunds",
+      "net": "Net",
+      "expectRefund": "Expect Refund",
+      "expectRefundDescription": "Mark this transaction as expecting a refund",
+      "notes": "Notes",
+      "notesPlaceholder": "Any additional details about this refund...",
+      "submitting": "Submitting..."
+    },
+    "weeklyRecap": {
+      "title": "Weekly Recap",
+      "thisWeek": "This week",
+      "lastWeek": "Last week",
+      "topCategories": "Top Categories",
+      "viewFullReview": "View Full Review",
+      "dismissed": "Dismissed for this week"
+    },
+    "scenarios": {
+      "title": "What-If Scenarios",
+      "subtitle": "Model financial changes and see their impact",
+      "amountLabel": "Amount",
+      "run": "Run Scenario",
+      "before": "Before",
+      "after": "After",
+      "impact": "Impact",
+      "monthlyCashFlow": "Monthly Cash Flow",
+      "annualSavings": "Annual Savings",
+      "healthScore": "Health Score",
+      "types": {
+        "cancelSubscription": {
+          "title": "Cancel Subscription",
+          "description": "See savings from canceling a recurring charge"
+        },
+        "changeIncome": {
+          "title": "Change Income",
+          "description": "Model an income increase or decrease"
+        },
+        "addExpense": {
+          "title": "Add Expense",
+          "description": "See the impact of a new recurring expense"
+        },
+        "payOffDebt": {
+          "title": "Pay Off Debt",
+          "description": "Calculate interest savings from early payoff"
+        },
+        "increaseSavings": {
+          "title": "Increase Savings",
+          "description": "See goal timeline acceleration"
+        }
+      }
+    },
+    "netWorth": {
+      "title": "Net Worth",
+      "totalNetWorth": "Total Net Worth",
+      "totalAssets": "Total Assets",
+      "totalLiabilities": "Total Liabilities",
+      "assetBreakdown": "Asset Breakdown",
+      "liabilityBreakdown": "Liability Breakdown",
+      "cashChecking": "Cash & Checking",
+      "savings": "Savings",
+      "investments": "Investments",
+      "property": "Property",
+      "creditCards": "Credit Cards",
+      "loans": "Loans",
+      "mortgage": "Mortgage",
+      "noLiabilities": "No liabilities — great job!",
+      "history": "Historical Snapshots",
+      "milestoneReached": "Milestone reached: {amount}!",
+      "trend": "Trend"
+    },
+    "property": {
+      "title": "Properties",
+      "addProperty": "Add Property",
+      "totalValue": "Total Value",
+      "totalProperties": "Total Properties",
+      "noProperties": "No properties tracked",
+      "noPropertiesDescription": "Add your first property to track equity and appreciation",
+      "currentValue": "Current Value",
+      "equity": "Equity",
+      "annualAppreciation": "Annual Appreciation",
+      "purchasePrice": "Purchase Price",
+      "mortgageBalance": "Mortgage Balance",
+      "monthlyIncome": "Monthly Income",
+      "propertyTax": "Property Tax",
+      "notFound": "Property not found",
+      "backToProperties": "Back to Properties",
+      "appreciation": "Appreciation",
+      "totalAppreciation": "Total Appreciation",
+      "rentalROI": "Rental ROI",
+      "monthlyROI": "Monthly ROI",
+      "annualROI": "Annual ROI",
+      "occupancyRate": "Occupancy Rate",
+      "loanDetails": "Loan Details",
+      "lender": "Lender",
+      "interestRate": "Interest Rate",
+      "currentBalance": "Current Balance",
+      "monthlyPayment": "Monthly Payment",
+      "notes": "Notes"
+    },
+    "events": {
+      "title": "Event Budgets",
+      "createEvent": "Create Event",
+      "suggestedTemplates": "Suggested Templates",
+      "noEvents": "No active events",
+      "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more",
+      "remaining": "Remaining",
+      "daysLeft": "{count} days left",
+      "tagTransaction": "Tag to event",
+      "untagTransaction": "Remove from event",
+      "progress": "Progress",
+      "completed": "Completed",
+      "active": "Active",
+      "planning": "Planning"
+    },
+    "templates": {
+      "title": "Budget Templates",
+      "useTemplate": "Use Template",
+      "preview": "Preview",
+      "categories": "Categories",
+      "holidaySeason": "Holiday Season",
+      "taxSeason": "Tax Season",
+      "summerTravel": "Summer Travel",
+      "backToSchool": "Back to School",
+      "homeImprovement": "Home Improvement",
+      "weddingEvent": "Wedding / Event"
+    }
+  },
+  "simplefinStatus": {
+    "disconnected": "Disconnected",
+    "connecting": "Connecting...",
+    "connected": "Connected",
+    "syncing": "Syncing...",
+    "error": "Error",
+    "expired": "Expired",
+    "neverSynced": "Never synced",
+    "syncedJustNow": "Synced just now",
+    "syncedHoursAgo": "Synced {hours}h ago",
+    "syncedYesterday": "Synced yesterday",
+    "syncedDaysAgo": "Synced {days}d ago",
+    "syncComplete": "Sync Complete",
+    "syncFailed": "Sync Failed",
+    "cancel": "Cancel",
+    "processing": "Processing: {account}",
+    "transactionsCount": "({count} transactions)",
+    "imported": "Imported",
+    "skippedDuplicates": "Skipped (duplicates)",
+    "syncSuccessful": "Sync Successful",
+    "syncCompletedWithErrors": "Sync Completed with Errors",
+    "dismiss": "Dismiss",
+    "errorsLabel": "Errors:",
+    "warningsLabel": "Warnings:",
+    "noBankAccounts": "No bank accounts connected",
+    "active": "Active",
+    "paused": "Paused",
+    "sync": "Sync",
+    "pause": "Pause",
+    "resume": "Resume",
+    "unlink": "Unlink",
+    "justNow": "just now",
+    "minutesAgo": "{minutes}m ago",
+    "hoursAgo": "{hours}h ago",
+    "lastSynced": "Last synced: {time}",
+    "statusLabel": "SimpleFIN: {status}",
+    "asOf": "as of {date}"
+  },
+  "trialBanner": {
+    "expired": "Your trial has expired",
+    "expiredDescription": "App is in read-only mode. Upgrade to continue managing your finances.",
+    "upgradeNow": "Upgrade Now - {price}",
+    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
+    "upgradePrompt": "Upgrade now to keep full access to your budget data.",
+    "upgrade": "Upgrade - {price}",
+    "dismiss": "Dismiss",
+    "daysRemaining": "{count} days remaining in your free trial",
+    "viewPricing": "View pricing"
+  },
+  "validationWarnings": {
+    "title": "Transaction Validation Results",
+    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
+    "criticalIssues": "Critical Issues",
+    "warnings": "Warnings",
+    "informational": "Informational",
+    "aiAnalysis": "AI Analysis:",
+    "issuesDetected": "Issues Detected",
+    "transactionNumber": "Transaction #{number}",
+    "confidence": "{percent}% confidence",
+    "suggestion": "Suggestion:",
+    "hideDetails": "Hide Transaction Details",
+    "viewDetails": "View Transaction Details",
+    "date": "Date:",
+    "amount": "Amount:",
+    "description": "Description:",
+    "marked": "Marked",
+    "remove": "Remove",
+    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
+    "cancelImport": "Cancel Import",
+    "ignoreAllContinue": "Ignore All & Continue",
+    "removeAndContinue": "Remove {count} & Continue",
+    "continueWithAll": "Continue with All",
+    "closeModal": "Close modal"
+  },
+  "duration": {
+    "months": "{count, plural, =1 {1 month} other {# months}}",
+    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "yearsAndMonths": "{years}y {months}m"
+  },
+  "apiErrors": {
+    "noApiKey": "AI API key not configured. AI extraction requires an active subscription.",
+    "noFileProvided": "No file provided",
+    "fileMustBePdf": "File must be a PDF",
+    "fileTooLarge": "File too large. Maximum {maxSize}.",
+    "noAiResponse": "No response from AI model",
+    "failedToParseResponse": "Failed to parse AI response",
+    "responseValidationIssues": "Response structure validation had issues",
+    "rateLimitExceeded": "Rate limit exceeded. Please try again later.",
+    "aiApiError": "AI API error: {message}",
+    "unknownError": "An unknown error occurred",
+    "missingHeaders": "Missing or invalid headers",
+    "missingSampleData": "Missing or invalid sample data",
+    "aiAnalysisUnavailable": "AI analysis unavailable, using pattern matching",
+    "lowConfidence": "Low confidence - please verify mappings",
+    "autoDetectionUnavailable": "Auto-detection unavailable - using column order guess",
+    "verifyMappings": "Please verify all mappings before importing",
+    "emptyAiResponse": "Empty response from AI",
+    "internalServerError": "Internal server error"
+  },
+  "aria": {
+    "accessibilitySettings": "Accessibility settings",
+    "closeAccessibilityMenu": "Close accessibility menu",
+    "decreaseTextSize": "Decrease text size",
+    "increaseTextSize": "Increase text size",
+    "clearSearch": "Clear search",
+    "searchTips": "Search tips",
+    "searchSuggestions": "Search suggestions",
+    "mainSidebar": "Main sidebar",
+    "primaryNavigation": "Primary navigation",
+    "closeModal": "Close modal",
+    "mobileNavigation": "Mobile navigation",
+    "addTransaction": "Add transaction",
+    "qrScannerViewport": "QR code scanner viewport",
+    "dragToClose": "Drag down to close",
+    "close": "Close",
+    "notifications": "Notifications",
+    "closeNotification": "Close notification",
+    "breadcrumb": "Breadcrumb",
+    "home": "Home",
+    "aiChatbot": "AI chatbot - Premium feature",
+    "openChatbot": "Open AI chatbot",
+    "dismissAlert": "Dismiss alert",
+    "editTransaction": "Edit transaction",
+    "deleteTransaction": "Delete transaction",
+    "progress": "Progress",
+    "chatMessages": "Chat messages",
+    "selectLanguage": "Select language",
+    "dismiss": "Dismiss",
+    "loadingChart": "Loading chart...",
+    "primaryNav": "Primary",
+    "closeSubscriptionModal": "Close modal",
+    "closeIconPicker": "Close icon picker",
+    "typeQuestion": "Type your question",
+    "sendMessage": "Send message",
+    "closeHoldingModal": "Close modal",
+    "closeReceiptViewer": "Close receipt viewer",
+    "assistantTyping": "Assistant is typing",
+    "closeOnboarding": "Close onboarding wizard",
+    "welcomeBudgetApp": "Welcome to Budget App",
+    "dismissWelcome": "Dismiss welcome banner",
+    "closeChatbot": "Close chatbot",
+    "createBudget": "Create budget",
+    "toggleSeniorsMode": "Toggle Seniors Mode",
+    "showSimplifiedMenu": "Show simplified menu",
+    "showAllMenuItems": "Show all menu items",
+    "dataTable": "{title} data table",
+    "selectIcon": "Select {name} icon",
+    "selectColor": "Select color {color}",
+    "syncStatus": "Sync status: {status}",
+    "qrCodePairing": "QR code for pairing. Pairing code: {code}",
+    "pairingCode": "Pairing code: {code}",
+    "copied": "Copied",
+    "copyPairingCode": "Copy pairing code",
+    "reorderDebt": "Reorder {name}",
+    "selectSubscription": "Select {name}",
+    "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
+    "notificationDescription": "{title}. {body}"
   }
 }

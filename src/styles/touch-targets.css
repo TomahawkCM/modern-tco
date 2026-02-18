@@ -1,0 +1,13 @@
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 10px 12px;
+}
+:root {
+  --safe-top: constant(safe-area-inset-top, 0);
+  --safe-top-env: env(safe-area-inset-top, 0);
+}
+.layout-safe {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}

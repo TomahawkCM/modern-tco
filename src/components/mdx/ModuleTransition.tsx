@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
 import {
   CheckCircle2,
   XCircle,
@@ -14,9 +14,9 @@ import {
   Unlock,
   Trophy,
   AlertCircle,
-  RotateCcw
-} from 'lucide-react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+  RotateCcw,
+} from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface Skill {
   id: string;
@@ -51,7 +51,7 @@ export default function ModuleTransition({
   nextModuleTitle,
   requiredSkills,
   challenges,
-  minimumScore = 0.8
+  minimumScore = 0.8,
 }: ModuleTransitionProps) {
   const [skills, setSkills] = useState<Skill[]>(requiredSkills);
   const [currentChallengeIndex, setCurrentChallengeIndex] = useState(0);
@@ -82,7 +82,7 @@ export default function ModuleTransition({
       completed,
       unlocked,
       attempts,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
     localStorage.setItem(`transition-${currentModuleId}-${nextModuleId}`, JSON.stringify(progress));
   };
@@ -99,12 +99,12 @@ export default function ModuleTransition({
     const isCorrect = selectedAnswer === currentChallenge.correctAnswer;
 
     // Update skill status
-    const updatedSkills = skills.map(skill => {
+    const updatedSkills = skills.map((skill) => {
       if (skill.id === currentChallenge.skillId) {
         return {
           ...skill,
           tested: true,
-          passed: isCorrect ?? skill.passed // Keep passed if already passed
+          passed: isCorrect ?? skill.passed, // Keep passed if already passed
         };
       }
       return skill;
@@ -137,7 +137,7 @@ export default function ModuleTransition({
   };
 
   const handleRetry = () => {
-    setSkills(requiredSkills.map(s => ({ ...s, tested: false, passed: false })));
+    setSkills(requiredSkills.map((s) => ({ ...s, tested: false, passed: false })));
     setCurrentChallengeIndex(0);
     setSelectedAnswer(null);
     setShowExplanation(false);
@@ -149,9 +149,10 @@ export default function ModuleTransition({
   };
 
   const currentChallenge = challenges[currentChallengeIndex];
-  const progressPercentage = ((currentChallengeIndex + (showExplanation ? 1 : 0)) / challenges.length) * 100;
+  const progressPercentage =
+    ((currentChallengeIndex + (showExplanation ? 1 : 0)) / challenges.length) * 100;
   const scorePercentage = (score / challenges.length) * 100;
-  const passedSkillsCount = skills.filter(s => s.passed).length;
+  const passedSkillsCount = skills.filter((s) => s.passed).length;
 
   if (completed) {
     return (
@@ -160,12 +161,12 @@ export default function ModuleTransition({
           <CardTitle className="flex items-center gap-2 text-xl">
             {unlocked ? (
               <>
-                <Trophy className="w-6 h-6 text-[#f97316]" />
+                <Trophy className="h-6 w-6 text-[#f97316]" />
                 Module Transition Complete!
               </>
             ) : (
               <>
-                <AlertCircle className="w-6 h-6 text-orange-500" />
+                <AlertCircle className="h-6 w-6 text-orange-500" />
                 Additional Practice Needed
               </>
             )}
@@ -175,30 +176,29 @@ export default function ModuleTransition({
           </CardDescription>
         </CardHeader>
 
-        <CardContent className="pt-6 space-y-6">
+        <CardContent className="space-y-6 pt-6">
           {/* Final Score */}
-          <div className="text-center space-y-2">
-            <div className="text-4xl font-bold">
-              {Math.round(scorePercentage)}%
-            </div>
+          <div className="space-y-2 text-center">
+            <div className="text-4xl font-bold">{Math.round(scorePercentage)}%</div>
             <div className="text-sm text-gray-600">
               {score} out of {challenges.length} correct
             </div>
-            <div className="text-sm">
-              Required: {Math.round(minimumScore * 100)}%
-            </div>
+            <div className="text-sm">Required: {Math.round(minimumScore * 100)}%</div>
           </div>
 
           {/* Skills Summary */}
           <div className="space-y-3">
             <h3 className="font-semibold">Skills Assessment:</h3>
             {skills.map((skill) => (
-              <div key={skill.id} className="flex items-center justify-between p-2 rounded-lg bg-gray-50">
+              <div
+                key={skill.id}
+                className="flex items-center justify-between rounded-lg bg-gray-50 p-2"
+              >
                 <span className="text-sm">{skill.name}</span>
                 {skill.passed ? (
-                  <CheckCircle2 className="w-4 h-4 text-[#22c55e]" />
+                  <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
                 ) : (
-                  <XCircle className="w-4 h-4 text-red-600" />
+                  <XCircle className="h-4 w-4 text-red-600" />
                 )}
               </div>
             ))}
@@ -209,26 +209,22 @@ export default function ModuleTransition({
             {unlocked ? (
               <Button
                 className="w-full bg-[#22c55e] hover:bg-green-700"
-                onClick={() => window.location.href = `/modules/${nextModuleId}`}
+                onClick={() => (window.location.href = `/modules/${nextModuleId}`)}
               >
-                <Unlock className="w-4 h-4 mr-2" />
+                <Unlock className="mr-2 h-4 w-4" />
                 Continue to {nextModuleTitle}
               </Button>
             ) : (
               <>
                 <Alert className="border-orange-200 bg-orange-50">
-                  <AlertCircle className="w-4 h-4 text-orange-600" />
+                  <AlertCircle className="h-4 w-4 text-orange-600" />
                   <AlertDescription className="text-orange-700">
-                    You need {Math.round(minimumScore * 100)}% to unlock the next module.
-                    Review the skills you missed and try again.
+                    You need {Math.round(minimumScore * 100)}% to unlock the next module. Review the
+                    skills you missed and try again.
                   </AlertDescription>
                 </Alert>
-                <Button
-                  onClick={handleRetry}
-                  className="w-full"
-                  variant="outline"
-                >
-                  <RotateCcw className="w-4 h-4 mr-2" />
+                <Button onClick={handleRetry} className="w-full" variant="outline">
+                  <RotateCcw className="mr-2 h-4 w-4" />
                   Retry Assessment (Attempt {attempts + 1})
                 </Button>
               </>
@@ -252,7 +248,7 @@ export default function ModuleTransition({
         <div className="flex items-start justify-between">
           <div>
             <CardTitle className="flex items-center gap-2 text-xl">
-              <Lock className="w-6 h-6 text-blue-600" />
+              <Lock className="h-6 w-6 text-blue-600" />
               Module Transition Checkpoint
             </CardTitle>
             <CardDescription className="mt-2">
@@ -272,10 +268,10 @@ export default function ModuleTransition({
             <TabsTrigger value="skills">Required Skills</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="assessment" className="space-y-4 mt-4">
+          <TabsContent value="assessment" className="mt-4 space-y-4">
             {/* Progress Bar */}
             <div>
-              <div className="flex justify-between text-sm text-gray-600 mb-2">
+              <div className="mb-2 flex justify-between text-sm text-gray-600">
                 <span>Progress</span>
                 <span>{Math.round(progressPercentage)}%</span>
               </div>
@@ -284,8 +280,8 @@ export default function ModuleTransition({
 
             {/* Current Challenge */}
             <div className="space-y-4">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="font-medium text-lg">{currentChallenge.question}</p>
+              <div className="rounded-lg bg-gray-50 p-4">
+                <p className="text-lg font-medium">{currentChallenge.question}</p>
               </div>
 
               {/* Answer Options */}
@@ -295,16 +291,16 @@ export default function ModuleTransition({
                     key={index}
                     onClick={() => handleAnswerSelect(index)}
                     disabled={showExplanation}
-                    className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
+                    className={`w-full rounded-lg border-2 p-4 text-left transition-all ${
                       selectedAnswer === index
                         ? showExplanation
                           ? index === currentChallenge.correctAnswer
-                            ? 'border-green-500 bg-green-50'
-                            : 'border-red-500 bg-red-50'
-                          : 'border-blue-500 bg-blue-50'
+                            ? "border-green-500 bg-green-50"
+                            : "border-red-500 bg-red-50"
+                          : "border-blue-500 bg-blue-50"
                         : showExplanation && index === currentChallenge.correctAnswer
-                        ? 'border-green-500 bg-green-50'
-                        : 'border-gray-200 hover:bg-gray-50'
+                          ? "border-green-500 bg-green-50"
+                          : "border-gray-200 hover:bg-gray-50"
                     }`}
                   >
                     <div className="flex items-center justify-between">
@@ -312,10 +308,10 @@ export default function ModuleTransition({
                       {showExplanation && (
                         <>
                           {index === currentChallenge.correctAnswer && (
-                            <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
+                            <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />
                           )}
                           {index === selectedAnswer && index !== currentChallenge.correctAnswer && (
-                            <XCircle className="w-5 h-5 text-red-600" />
+                            <XCircle className="h-5 w-5 text-red-600" />
                           )}
                         </>
                       )}
@@ -327,7 +323,7 @@ export default function ModuleTransition({
               {/* Explanation */}
               {showExplanation && (
                 <Alert className="border-blue-200 bg-blue-50">
-                  <AlertCircle className="w-4 h-4 text-blue-600" />
+                  <AlertCircle className="h-4 w-4 text-blue-600" />
                   <AlertDescription className="text-blue-900">
                     <strong>Explanation:</strong> {currentChallenge.explanation}
                   </AlertDescription>
@@ -344,19 +340,16 @@ export default function ModuleTransition({
                   Submit Answer
                 </Button>
               ) : (
-                <Button
-                  onClick={handleNextChallenge}
-                  className="w-full"
-                >
+                <Button onClick={handleNextChallenge} className="w-full">
                   {currentChallengeIndex < challenges.length - 1 ? (
                     <>
                       Next Question
-                      <ChevronRight className="w-4 h-4 ml-2" />
+                      <ChevronRight className="ml-2 h-4 w-4" />
                     </>
                   ) : (
                     <>
                       View Results
-                      <Trophy className="w-4 h-4 ml-2" />
+                      <Trophy className="ml-2 h-4 w-4" />
                     </>
                   )}
                 </Button>
@@ -371,34 +364,34 @@ export default function ModuleTransition({
 
           <TabsContent value="skills" className="mt-4">
             <div className="space-y-3">
-              <p className="text-sm text-gray-600 mb-4">
+              <p className="mb-4 text-sm text-gray-600">
                 Master these skills from {currentModuleTitle} to proceed:
               </p>
               {skills.map((skill) => (
                 <div
                   key={skill.id}
-                  className={`p-3 rounded-lg border ${
+                  className={`rounded-lg border p-3 ${
                     skill.tested
                       ? skill.passed
-                        ? 'bg-green-50 border-green-300'
-                        : 'bg-red-50 border-red-300'
-                      : 'bg-white border-gray-200'
+                        ? "border-green-300 bg-green-50"
+                        : "border-red-300 bg-red-50"
+                      : "border-gray-200 bg-white"
                   }`}
                 >
                   <div className="flex items-start justify-between">
                     <div>
                       <h4 className="font-medium">{skill.name}</h4>
-                      <p className="text-sm text-gray-600 mt-1">{skill.description}</p>
+                      <p className="mt-1 text-sm text-gray-600">{skill.description}</p>
                     </div>
                     <div className="mt-1">
                       {skill.tested ? (
                         skill.passed ? (
-                          <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
+                          <CheckCircle2 className="h-5 w-5 text-[#22c55e]" />
                         ) : (
-                          <XCircle className="w-5 h-5 text-red-600" />
+                          <XCircle className="h-5 w-5 text-red-600" />
                         )
                       ) : (
-                        <div className="w-5 h-5 rounded-full border-2 border-gray-300" />
+                        <div className="h-5 w-5 rounded-full border-2 border-gray-300" />
                       )}
                     </div>
                   </div>

@@ -247,7 +247,8 @@ Always include:
     const correctAnswers = sessions.reduce(
       (sum, s) =>
         sum +
-        (s.userAnswers?.filter((ans, idx) => ans === s.questionsAnswered?.[idx]?.correctAnswer).length ?? 0),
+        (s.userAnswers?.filter((ans, idx) => ans === s.questionsAnswered?.[idx]?.correctAnswer)
+          .length ?? 0),
       0
     );
     const totalTime = sessions.reduce((sum, s) => sum + (s.timeSpent ?? 0), 0);
@@ -441,7 +442,7 @@ Format as JSON with topics array containing:
    */
   async chatAssist(message: string, context: ChatSession["context"]): Promise<ChatMessage> {
     // Type guard for ChatSessionContext
-    const sessionContext = typeof context === 'string' ? undefined : context;
+    const sessionContext = typeof context === "string" ? undefined : context;
 
     const prompt = `User question: "${message}"
 

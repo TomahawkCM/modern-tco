@@ -26,7 +26,6 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
   useEffect(() => {
     loadStats();
-     
   }, [user?.id]);
 
   const loadStats = async () => {
@@ -53,12 +52,12 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
     setError(null);
 
     try {
-      console.log('🔄 Attempting to auto-seed flashcards...');
+      console.log("🔄 Attempting to auto-seed flashcards...");
 
-      const response = await fetch('/api/v1/flashcards/seed', {
-        method: 'POST',
+      const response = await fetch("/api/v1/flashcards/seed", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ user_id: user.id }),
       });
@@ -81,14 +80,12 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         const errorMsg = data?.details || data?.error || response.statusText || "Unknown error";
         console.error("❌ Failed to auto-seed flashcards:", data);
         setError(
-          `Failed to load flashcards: ${errorMsg}${
-            data?.suggestion ? ` (${data.suggestion})` : ""
-          }`
+          `Failed to load flashcards: ${errorMsg}${data?.suggestion ? ` (${data.suggestion})` : ""}`
         );
       }
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Unknown error';
-      console.error('❌ Error auto-seeding flashcards:', err);
+      const errorMsg = err instanceof Error ? err.message : "Unknown error";
+      console.error("❌ Error auto-seeding flashcards:", err);
       setError(`Network error: ${errorMsg}`);
     } finally {
       setIsSeeding(false);
@@ -108,12 +105,10 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
   if (isLoading || isSeeding) {
     return (
-      <div className="flex flex-col items-center justify-center p-8 space-y-4">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      <div className="flex flex-col items-center justify-center space-y-4 p-8">
+        <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-primary"></div>
         {isSeeding && (
-          <p className="text-sm text-muted-foreground">
-            Loading your 331 TCO flashcards...
-          </p>
+          <p className="text-sm text-muted-foreground">Loading your 331 TCO flashcards...</p>
         )}
       </div>
     );
@@ -128,10 +123,18 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">{error}</p>
           <div className="flex gap-2">
-            <Button onClick={() => { setError(null); loadStats(); }}>
+            <Button
+              onClick={() => {
+                setError(null);
+                loadStats();
+              }}
+            >
               Retry
             </Button>
-            <Button variant="outline" onClick={() => window.open('/api/flashcards/debug', '_blank')}>
+            <Button
+              variant="outline"
+              onClick={() => window.open("/api/flashcards/debug", "_blank")}
+            >
               View Debug Info
             </Button>
           </div>
@@ -147,17 +150,18 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         <Card className="border-accent/50 bg-accent/10">
           <CardContent className="py-3">
             <p className="text-sm text-accent-foreground">
-              ⚠️ <strong>Shared Flashcard Library</strong> - Showing read-only TCO flashcards without authentication.
+              ⚠️ <strong>Shared Flashcard Library</strong> - Showing read-only TCO flashcards
+              without authentication.
             </p>
           </CardContent>
         </Card>
       )}
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
         <Card>
           <CardContent className="pt-6 text-center">
-            <Brain className="h-6 w-6 mx-auto mb-2 text-primary" />
+            <Brain className="mx-auto mb-2 h-6 w-6 text-primary" />
             <p className="text-2xl font-bold text-foreground">{stats?.totalCards || 0}</p>
             <p className="text-xs text-muted-foreground">Total Cards</p>
           </CardContent>
@@ -165,7 +169,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <Clock className="h-6 w-6 mx-auto mb-2 text-orange-500" />
+            <Clock className="mx-auto mb-2 h-6 w-6 text-orange-500" />
             <p className="text-2xl font-bold text-foreground">{stats?.dueToday || 0}</p>
             <p className="text-xs text-muted-foreground">Due Today</p>
           </CardContent>
@@ -173,7 +177,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <Target className="h-6 w-6 mx-auto mb-2 text-[#22c55e]" />
+            <Target className="mx-auto mb-2 h-6 w-6 text-[#22c55e]" />
             <p className="text-2xl font-bold text-foreground">{stats?.newCards || 0}</p>
             <p className="text-xs text-muted-foreground">New Cards</p>
           </CardContent>
@@ -181,7 +185,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <BookOpen className="h-6 w-6 mx-auto mb-2 text-primary" />
+            <BookOpen className="mx-auto mb-2 h-6 w-6 text-primary" />
             <p className="text-2xl font-bold text-foreground">{stats?.learningCards || 0}</p>
             <p className="text-xs text-muted-foreground">Learning</p>
           </CardContent>
@@ -189,7 +193,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <TrendingUp className="h-6 w-6 mx-auto mb-2 text-purple-500" />
+            <TrendingUp className="mx-auto mb-2 h-6 w-6 text-purple-500" />
             <p className="text-2xl font-bold text-foreground">{stats?.avgRetentionRate || 0}%</p>
             <p className="text-xs text-muted-foreground">Retention</p>
           </CardContent>
@@ -197,7 +201,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
 
         <Card>
           <CardContent className="pt-6 text-center">
-            <Flame className="h-6 w-6 mx-auto mb-2 text-red-500" />
+            <Flame className="mx-auto mb-2 h-6 w-6 text-red-500" />
             <p className="text-2xl font-bold text-foreground">{stats?.currentStreak || 0}</p>
             <p className="text-xs text-muted-foreground">Day Streak</p>
           </CardContent>
@@ -208,11 +212,11 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="review">
-            <Brain className="h-4 w-4 mr-2" />
+            <Brain className="mr-2 h-4 w-4" />
             Review Cards
           </TabsTrigger>
           <TabsTrigger value="create">
-            <Target className="h-4 w-4 mr-2" />
+            <Target className="mr-2 h-4 w-4" />
             Create Cards
           </TabsTrigger>
         </TabsList>
@@ -226,10 +230,7 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         </TabsContent>
 
         <TabsContent value="create" className="mt-6">
-          <FlashcardGenerator
-            moduleId={moduleId}
-            onCardCreated={handleCardCreated}
-          />
+          <FlashcardGenerator moduleId={moduleId} onCardCreated={handleCardCreated} />
         </TabsContent>
       </Tabs>
 
@@ -238,11 +239,23 @@ export default function FlashcardDashboard({ moduleId }: FlashcardDashboardProps
         <CardHeader>
           <CardTitle className="text-base">💡 Study Tips</CardTitle>
         </CardHeader>
-        <CardContent className="text-sm space-y-2">
-          <p>• <strong>Daily consistency</strong> beats marathon sessions - review for 10-15 minutes daily</p>
-          <p>• <strong>Don't peek!</strong> Try to recall the answer before revealing it for maximum retention</p>
-          <p>• <strong>Be honest</strong> with your ratings - the algorithm adapts to your actual performance</p>
-          <p>• <strong>Create cards</strong> from mistakes - add failed quiz questions to reinforce weak areas</p>
+        <CardContent className="space-y-2 text-sm">
+          <p>
+            • <strong>Daily consistency</strong> beats marathon sessions - review for 10-15 minutes
+            daily
+          </p>
+          <p>
+            • <strong>Don't peek!</strong> Try to recall the answer before revealing it for maximum
+            retention
+          </p>
+          <p>
+            • <strong>Be honest</strong> with your ratings - the algorithm adapts to your actual
+            performance
+          </p>
+          <p>
+            • <strong>Create cards</strong> from mistakes - add failed quiz questions to reinforce
+            weak areas
+          </p>
         </CardContent>
       </Card>
     </div>

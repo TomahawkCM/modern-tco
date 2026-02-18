@@ -13,10 +13,6 @@ import { LearningProviders } from "@/app/heavy-providers";
  * This layout ensures contexts are only loaded for review routes,
  * improving performance for other pages.
  */
-export default function ReviewLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ReviewLayout({ children }: { children: React.ReactNode }) {
   return <LearningProviders>{children}</LearningProviders>;
 }

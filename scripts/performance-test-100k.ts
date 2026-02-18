@@ -28,12 +28,72 @@ const CATEGORIES = [
 
 // Realistic vendor names by category
 const VENDORS: Record<string, string[]> = {
-  food: ["Walmart", "Target", "Kroger", "Costco", "Trader Joe's", "Whole Foods", "Aldi", "Safeway", "Starbucks", "McDonald's", "Chipotle", "Subway"],
-  transport: ["Shell", "Chevron", "BP", "Exxon", "Uber", "Lyft", "Metro Transit", "Parking Garage", "Car Wash", "Auto Zone"],
-  bills: ["Electric Company", "Gas Utility", "Water District", "Internet Provider", "Phone Bill", "Insurance Co", "Mortgage", "Rent Payment"],
-  shopping: ["Amazon", "Best Buy", "Home Depot", "Lowe's", "IKEA", "Macy's", "Nordstrom", "REI", "Apple Store"],
-  entertainment: ["Netflix", "Spotify", "Disney+", "HBO Max", "AMC Theaters", "Concert Venue", "Steam", "PlayStation Store"],
-  health: ["CVS Pharmacy", "Walgreens", "Planet Fitness", "Doctor's Office", "Dentist", "Eye Doctor", "Hospital"],
+  food: [
+    "Walmart",
+    "Target",
+    "Kroger",
+    "Costco",
+    "Trader Joe's",
+    "Whole Foods",
+    "Aldi",
+    "Safeway",
+    "Starbucks",
+    "McDonald's",
+    "Chipotle",
+    "Subway",
+  ],
+  transport: [
+    "Shell",
+    "Chevron",
+    "BP",
+    "Exxon",
+    "Uber",
+    "Lyft",
+    "Metro Transit",
+    "Parking Garage",
+    "Car Wash",
+    "Auto Zone",
+  ],
+  bills: [
+    "Electric Company",
+    "Gas Utility",
+    "Water District",
+    "Internet Provider",
+    "Phone Bill",
+    "Insurance Co",
+    "Mortgage",
+    "Rent Payment",
+  ],
+  shopping: [
+    "Amazon",
+    "Best Buy",
+    "Home Depot",
+    "Lowe's",
+    "IKEA",
+    "Macy's",
+    "Nordstrom",
+    "REI",
+    "Apple Store",
+  ],
+  entertainment: [
+    "Netflix",
+    "Spotify",
+    "Disney+",
+    "HBO Max",
+    "AMC Theaters",
+    "Concert Venue",
+    "Steam",
+    "PlayStation Store",
+  ],
+  health: [
+    "CVS Pharmacy",
+    "Walgreens",
+    "Planet Fitness",
+    "Doctor's Office",
+    "Dentist",
+    "Eye Doctor",
+    "Hospital",
+  ],
   personal: ["Hair Salon", "Spa", "Barber Shop", "Nail Salon", "Dry Cleaner"],
   income: ["Employer Payroll", "Freelance Client", "Investment Dividend", "Tax Refund", "Side Gig"],
   transfer: ["Savings Transfer", "Investment Account", "Venmo", "PayPal", "Zelle"],
@@ -74,7 +134,8 @@ interface PerformanceMetrics {
 function randomDate(): string {
   const now = new Date();
   const threeYearsAgo = new Date(now.getFullYear() - 3, now.getMonth(), now.getDate());
-  const randomTime = threeYearsAgo.getTime() + Math.random() * (now.getTime() - threeYearsAgo.getTime());
+  const randomTime =
+    threeYearsAgo.getTime() + Math.random() * (now.getTime() - threeYearsAgo.getTime());
   return new Date(randomTime).toISOString().split("T")[0];
 }
 
@@ -138,7 +199,9 @@ function generateTransactions(count: number): Transaction[] {
   }
 
   const endTime = performance.now();
-  console.log(`✅ Generated ${count.toLocaleString()} transactions in ${(endTime - startTime).toFixed(0)}ms`);
+  console.log(
+    `✅ Generated ${count.toLocaleString()} transactions in ${(endTime - startTime).toFixed(0)}ms`
+  );
 
   return transactions;
 }
@@ -152,9 +215,8 @@ function testSearchPerformance(transactions: Transaction[]): number {
 
   for (const term of searchTerms) {
     const start = performance.now();
-    const _results = transactions.filter(t =>
-      t.description.toLowerCase().includes(term) ||
-      t.vendor.toLowerCase().includes(term)
+    const _results = transactions.filter(
+      (t) => t.description.toLowerCase().includes(term) || t.vendor.toLowerCase().includes(term)
     );
     totalTime += performance.now() - start;
   }
@@ -170,7 +232,7 @@ function testCategoryFilterPerformance(transactions: Transaction[]): number {
 
   for (const category of CATEGORIES) {
     const start = performance.now();
-    const _results = transactions.filter(t => t.category === category.id);
+    const _results = transactions.filter((t) => t.category === category.id);
     totalTime += performance.now() - start;
   }
 
@@ -195,7 +257,7 @@ function testDateRangePerformance(transactions: Transaction[]): number {
     const endStr = range.end.toISOString().split("T")[0];
 
     const start = performance.now();
-    const _results = transactions.filter(t => t.date >= startStr && t.date <= endStr);
+    const _results = transactions.filter((t) => t.date >= startStr && t.date <= endStr);
     totalTime += performance.now() - start;
   }
 
@@ -223,7 +285,10 @@ function testSortPerformance(transactions: Transaction[]): number {
 /**
  * Calculate performance metrics
  */
-function calculateMetrics(transactions: Transaction[], generationTimeMs: number): PerformanceMetrics {
+function calculateMetrics(
+  transactions: Transaction[],
+  generationTimeMs: number
+): PerformanceMetrics {
   const jsonData = JSON.stringify(transactions);
   const dataSizeBytes = new TextEncoder().encode(jsonData).length;
   const dataSizeMB = dataSizeBytes / (1024 * 1024);
@@ -285,7 +350,7 @@ function calculateMetrics(transactions: Transaction[], generationTimeMs: number)
     estimatedLoadTimeMs,
     estimatedSearchTimeMs,
     memoryEstimateMB,
-    passesAllCriteria: Object.values(criteria).every(c => c.passes),
+    passesAllCriteria: Object.values(criteria).every((c) => c.passes),
     criteria,
   };
 }
@@ -411,12 +476,22 @@ async function main(): Promise<void> {
   console.log(`⏱️  Generation Time: ${metrics.generationTimeMs.toFixed(0)}ms`);
 
   console.log("\n📋 Performance Criteria:");
-  console.log(`   Load Time:     ${metrics.criteria.loadTime.estimated} (target: ${metrics.criteria.loadTime.target}) ${metrics.criteria.loadTime.passes ? "✅" : "❌"}`);
-  console.log(`   Scroll FPS:    ${metrics.criteria.scrollFps.estimated} (target: ${metrics.criteria.scrollFps.target}) ${metrics.criteria.scrollFps.passes ? "✅" : "❌"}`);
-  console.log(`   Search Time:   ${metrics.criteria.searchLatency.estimated} (target: ${metrics.criteria.searchLatency.target}) ${metrics.criteria.searchLatency.passes ? "✅" : "❌"}`);
-  console.log(`   Memory Usage:  ${metrics.criteria.memoryUsage.estimated} (target: ${metrics.criteria.memoryUsage.target}) ${metrics.criteria.memoryUsage.passes ? "✅" : "❌"}`);
+  console.log(
+    `   Load Time:     ${metrics.criteria.loadTime.estimated} (target: ${metrics.criteria.loadTime.target}) ${metrics.criteria.loadTime.passes ? "✅" : "❌"}`
+  );
+  console.log(
+    `   Scroll FPS:    ${metrics.criteria.scrollFps.estimated} (target: ${metrics.criteria.scrollFps.target}) ${metrics.criteria.scrollFps.passes ? "✅" : "❌"}`
+  );
+  console.log(
+    `   Search Time:   ${metrics.criteria.searchLatency.estimated} (target: ${metrics.criteria.searchLatency.target}) ${metrics.criteria.searchLatency.passes ? "✅" : "❌"}`
+  );
+  console.log(
+    `   Memory Usage:  ${metrics.criteria.memoryUsage.estimated} (target: ${metrics.criteria.memoryUsage.target}) ${metrics.criteria.memoryUsage.passes ? "✅" : "❌"}`
+  );
 
-  console.log(`\n🏆 Overall: ${metrics.passesAllCriteria ? "ALL CRITERIA PASSED ✅" : "SOME CRITERIA FAILED ❌"}`);
+  console.log(
+    `\n🏆 Overall: ${metrics.passesAllCriteria ? "ALL CRITERIA PASSED ✅" : "SOME CRITERIA FAILED ❌"}`
+  );
 
   // Generate sample data file
   generateSampleDataFile(transactions);

@@ -17,6 +17,7 @@ This document defines the **core UX principles and measurable design goals** tha
 4. **Budget App UX Audit** (37 improvement opportunities identified)
 
 **How to Use**:
+
 - **Design Decisions**: When choosing between two design approaches, check which aligns better with these principles
 - **Code Reviews**: Reject implementations that violate core principles (e.g., touch targets <48px)
 - **Feature Prioritization**: Features that support multiple principles take priority
@@ -31,6 +32,7 @@ This document defines the **core UX principles and measurable design goals** tha
 **Principle**: Design for users aged 60-80 first. If it works for seniors, it works for everyone.
 
 **What This Means**:
+
 - ✅ **18px base typography** (not 16px industry standard)
 - ✅ **48px minimum touch targets** (not 44px iOS minimum)
 - ✅ **7:1 contrast in high-contrast mode** (not just 4.5:1 WCAG AA)
@@ -40,6 +42,7 @@ This document defines the **core UX principles and measurable design goals** tha
 - ❌ **No tiny text** (no text-xs/12px anywhere)
 
 **Decision Framework**:
+
 - Before adding a feature: "Can my 70-year-old parent use this without my help?"
 - Before shipping UI: "Would this pass a contrast checker at 7:1?"
 
@@ -55,11 +58,12 @@ This document defines the **core UX principles and measurable design goals** tha
 | Text-xs usage | 23 instances | 0 instances | `grep -r "text-xs" src/` |
 
 **Reject If**:
+
 - Touch target <48px
 - Base text size <18px
 - Color-only differentiation
 - Jargon without explanation
-- >6 widgets on default dashboard
+- > 6 widgets on default dashboard
 
 ---
 
@@ -68,6 +72,7 @@ This document defines the **core UX principles and measurable design goals** tha
 **Principle**: Design for mobile (375px width) first, then scale up. Mobile users are the majority.
 
 **What This Means**:
+
 - ✅ **Bottom tab bar** for primary navigation (Home, Transactions, Budgets, More)
 - ✅ **4 tabs maximum** (not 5) - proven pattern from Copilot, YNAB, Monarch
 - ✅ **Sheet menu** for secondary navigation (accessed via "More")
@@ -78,6 +83,7 @@ This document defines the **core UX principles and measurable design goals** tha
 - ❌ **No horizontal scrolling** required
 
 **Decision Framework**:
+
 - Design mobile view FIRST for every feature
 - Desktop is enhancement, not requirement
 - Test every page on iPhone SE (smallest common screen: 375x667px)
@@ -94,9 +100,10 @@ This document defines the **core UX principles and measurable design goals** tha
 | Mobile-first components | Unknown | 100% | Code review |
 
 **Reject If**:
+
 - Requires horizontal scrolling
 - Hamburger-only navigation
-- >4 items in mobile tab bar
+- > 4 items in mobile tab bar
 - Feature only works on desktop
 
 ---
@@ -106,6 +113,7 @@ This document defines the **core UX principles and measurable design goals** tha
 **Principle**: Users should reach any feature within 3 taps from the home screen. Zero dead ends.
 
 **What This Means**:
+
 - ✅ **Flat information architecture** (max 3 levels deep)
 - ✅ **Breadcrumbs** on all pages (Dashboard > Loans > Mortgage Details)
 - ✅ **Command palette** (Cmd/Ctrl+K) for power users (1-tap to anywhere)
@@ -114,6 +122,7 @@ This document defines the **core UX principles and measurable design goals** tha
 - ❌ **No dead ends** (always a clear path back)
 
 **Decision Framework**:
+
 - Count taps from dashboard to feature: ≤3 taps OR accessible via command palette
 - Always provide breadcrumbs on pages >2 levels deep
 - Critical actions (Add Transaction) should be 1-tap from anywhere
@@ -129,6 +138,7 @@ This document defines the **core UX principles and measurable design goals** tha
 | Generate Report | 3 | 3 | More → Reports → Select Type |
 
 **Command Palette** (1-tap to anywhere):
+
 ```
 Cmd/Ctrl+K opens:
 - "new transaction" → Add Transaction modal
@@ -147,6 +157,7 @@ Cmd/Ctrl+K opens:
 | Dashboard quick actions | 3 | 5+ | page.tsx check |
 
 **Reject If**:
+
 - Feature requires >3 taps AND not in command palette
 - Page has no breadcrumbs (if >2 levels deep)
 - Dead end (no way back to dashboard)
@@ -158,6 +169,7 @@ Cmd/Ctrl+K opens:
 **Principle**: Meet or exceed WCAG 2.2 Level AA standards. First budget app to publicly claim this.
 
 **What This Means**:
+
 - ✅ **48px touch targets** (2.5.8 Target Size - Level AA new in WCAG 2.2)
 - ✅ **4.5:1 text contrast** minimum (1.4.3 Contrast - Level AA)
 - ✅ **3:1 UI component contrast** (1.4.11 Non-text Contrast - Level AA)
@@ -170,6 +182,7 @@ Cmd/Ctrl+K opens:
 - ❌ **No keyboard traps** (2.1.2 No Keyboard Trap - Level A)
 
 **Decision Framework**:
+
 - Run axe DevTools on EVERY page before merging PR
 - Test with NVDA (Windows), VoiceOver (Mac/iOS), JAWS (enterprise)
 - All new features must pass Lighthouse Accessibility audit (95+)
@@ -188,6 +201,7 @@ Cmd/Ctrl+K opens:
 | Charts with table toggle | 0 of 2 | 2 of 2 | Feature check |
 
 **Testing Checklist** (before launch):
+
 - [ ] Lighthouse: 95+ on all pages
 - [ ] axe DevTools: 0 critical violations
 - [ ] NVDA: All pages navigable
@@ -197,6 +211,7 @@ Cmd/Ctrl+K opens:
 - [ ] Color contrast: All text 4.5:1+, UI 3:1+
 
 **Reject If**:
+
 - Lighthouse Accessibility <95
 - axe DevTools shows critical violations
 - Color-only differentiation (red=bad, green=good without icon/text)
@@ -210,6 +225,7 @@ Cmd/Ctrl+K opens:
 **Principle**: Show the essentials, hide the complexity. Advanced features are available, not prominent.
 
 **What This Means**:
+
 - ✅ **Default dashboard**: 4-5 widgets (metrics, budget status, recent transactions, quick actions)
 - ✅ **Advanced dashboard**: User can show/hide 5+ additional widgets (charts, insights, anomaly alerts)
 - ✅ **Simple forms**: Amount, category, date, note. Advanced fields (tags, splits, recurring) collapsible
@@ -219,6 +235,7 @@ Cmd/Ctrl+K opens:
 - ❌ **No required advanced fields**: Split transactions, tags, recurring patterns are optional
 
 **Decision Framework**:
+
 - Essential (shown by default): What 80% of users need 80% of the time
 - Advanced (hidden/collapsible): What 20% of users need or 80% need rarely
 - Test with new users: "What should happen when you click this button?"
@@ -242,6 +259,7 @@ Cmd/Ctrl+K opens:
 | Cognitive load score | N/A | <40 (SUS System Usability Scale) | User survey |
 
 **Reject If**:
+
 - Dashboard shows >6 widgets by default
 - Form requires >5 fields for basic transaction
 - Advanced feature is not discoverable (no tooltip, help text, or onboarding hint)
@@ -254,6 +272,7 @@ Cmd/Ctrl+K opens:
 **Principle**: Data lives on the user's device. Zero server sync, zero tracking, zero data mining.
 
 **What This Means**:
+
 - ✅ **IndexedDB storage** (all transactions, budgets, categories local)
 - ✅ **No server calls** for budget data
 - ✅ **Offline-first PWA** (works without internet)
@@ -264,6 +283,7 @@ Cmd/Ctrl+K opens:
 - ❌ **No cloud sync** (maybe future feature, but never required)
 
 **Decision Framework**:
+
 - Does this feature send data to a server? → Requires opt-in consent
 - Can this work offline? → Make it work offline first
 - Does this use cookies/tracking? → Requires cookie consent banner
@@ -280,6 +300,7 @@ Cmd/Ctrl+K opens:
 | PWA installable | No | Yes | Lighthouse PWA check |
 
 **Reject If**:
+
 - Core feature requires internet
 - Analytics/tracking enabled by default
 - Data sent to server without explicit user action (export, AI chat)
@@ -292,6 +313,7 @@ Cmd/Ctrl+K opens:
 **Principle**: Fast is a feature. Smooth animations, instant feedback, <3s page loads.
 
 **What This Means**:
+
 - ✅ **<3s Time to Interactive (TTI)** on 4G mobile
 - ✅ **<1s page transitions** (Next.js App Router)
 - ✅ **Instant feedback** on user actions (optimistic UI updates)
@@ -303,6 +325,7 @@ Cmd/Ctrl+K opens:
 - ❌ **No jank** (no >16ms frame times on interactions)
 
 **Decision Framework**:
+
 - Lighthouse Performance score: ≥90 on mobile (4G throttled)
 - Run performance budget check on every PR
 - User should FEEL the speed difference vs competitors
@@ -317,6 +340,7 @@ Cmd/Ctrl+K opens:
 | Cumulative Layout Shift (CLS) | Unknown | <0.1 | Reserve space for dynamic content |
 
 **Animation Standards**:
+
 - Fast (150ms): Button hovers, focus rings
 - Normal (300ms): Page transitions, modals open/close
 - Slow (500ms): Data visualizations, progressive reveals
@@ -332,6 +356,7 @@ Cmd/Ctrl+K opens:
 | Frame rate during animations | Unknown | 60fps | Chrome DevTools |
 
 **Reject If**:
+
 - Lighthouse Performance <90
 - Blocking operation on UI thread >500ms
 - Animation <60fps (when motion-safe)
@@ -346,11 +371,13 @@ Cmd/Ctrl+K opens:
 **Goal**: Achieve WCAG 2.2 AA compliance and 95+ Lighthouse Accessibility score across all pages before v1 launch.
 
 **Why This Matters**:
+
 - **Competitive advantage**: First budget app to publicly claim WCAG 2.2 AA
 - **Legal compliance**: Meets ADA requirements for public-facing apps
 - **Seniors-friendly**: Ensures 60+ users can use all features
 
 **Success Criteria**:
+
 - [ ] Lighthouse Accessibility ≥95 on ALL pages (Dashboard, Transactions, Budgets, Loans, Reports, Settings)
 - [ ] axe DevTools: 0 critical violations
 - [ ] Manual screen reader testing: NVDA, VoiceOver, JAWS pass
@@ -372,11 +399,13 @@ Cmd/Ctrl+K opens:
 **Goal**: Implement 18px base typography and 48px minimum touch targets as the new standard, tested with users 60+.
 
 **Why This Matters**:
+
 - **Untapped market**: NO budget apps currently optimize for seniors
 - **Age-related vision**: 18px readable without reading glasses for most 60-69 year-olds
 - **Motor skills**: 48px targets accommodate arthritis, tremors, reduced dexterity
 
 **Success Criteria**:
+
 - [ ] Base font size: 18px (Tailwind `text-base` updated in config)
 - [ ] Minimum touch target: 48x48px on ALL interactive elements
 - [ ] text-xs (12px) usage: 0 instances in codebase
@@ -388,6 +417,7 @@ Cmd/Ctrl+K opens:
 **Owner**: Frontend Specialist + Design System Architect
 
 **Tracking**:
+
 ```bash
 # Automated check in CI/CD
 npm run check-typography  # Fails if text-xs found or base != 18px
@@ -395,6 +425,7 @@ npm run check-touch-targets  # Fails if any button <48px
 ```
 
 **User Testing Tasks**:
+
 1. Add a grocery expense of $45.67
 2. View your budget for Groceries
 3. Find a transaction from last month
@@ -408,11 +439,13 @@ npm run check-touch-targets  # Fails if any button <48px
 **Goal**: Refactor mobile navigation to 4-tab bottom bar + grouped "More" menu, matching industry standards.
 
 **Why This Matters**:
+
 - **Proven pattern**: Copilot (4.8/5), YNAB, Monarch all use 4 tabs
 - **Thumb-reach ergonomics**: 5 tabs harder to reach on large phones
 - **Reduced cognitive load**: Fewer choices = faster decisions
 
 **Success Criteria**:
+
 - [ ] Mobile tab bar: Exactly 4 items (Home, Transactions, Budgets, More)
 - [ ] "More" menu: Grouped into 3 sections (Tracking, Wealth, Tools)
 - [ ] Touch targets: min-h-[48px] on all tab bar items (up from 44px)
@@ -424,6 +457,7 @@ npm run check-touch-targets  # Fails if any button <48px
 **Owner**: React Specialist + UX Specialist
 
 **Before/After**:
+
 ```typescript
 // BEFORE (5 tabs)
 [Home] [Transactions] [Loans] [Budgets] [More]
@@ -456,11 +490,13 @@ TOOLS & SETTINGS
 **Goal**: Implement 3-mode theme system with persistent user preference, including industry-first high-contrast mode.
 
 **Why This Matters**:
+
 - **Accessibility**: High-contrast mode (7:1) helps low-vision users
 - **Modern expectation**: Dark mode is table stakes in 2025
 - **Competitive first**: NO budget apps offer high-contrast mode
 
 **Success Criteria**:
+
 - [ ] 3 theme modes implemented: Light, Dark, High-Contrast
 - [ ] Theme switcher in Settings (3 large buttons, 64px touch targets)
 - [ ] Persistent preference (localStorage)
@@ -474,11 +510,13 @@ TOOLS & SETTINGS
 **Owner**: Design System Architect + Frontend Architect
 
 **Testing**:
+
 - [ ] Contrast checker (Stark plugin): All pass 7:1 in high-contrast mode
 - [ ] User testing: "Which theme do you prefer?" (track adoption)
 - [ ] Lighthouse: Still 95+ in all 3 themes
 
 **Color Tokens**:
+
 ```typescript
 // High-Contrast Mode (7:1+ minimum)
 {
@@ -497,11 +535,13 @@ TOOLS & SETTINGS
 **Goal**: Implement Cmd/Ctrl+K command palette for 1-tap access to any feature (fuzzy search).
 
 **Why This Matters**:
+
 - **Power user love**: Copilot (4.8/5) has this, users rave about it
 - **Accessibility**: Keyboard-only users can navigate without mouse
 - **Efficiency**: Faster than 3 taps for power users
 
 **Success Criteria**:
+
 - [ ] Cmd/Ctrl+K opens command palette
 - [ ] Fuzzy search all features (transactions, budgets, settings, navigation)
 - [ ] Keyboard-only operation (arrow keys, enter, escape)
@@ -518,6 +558,7 @@ TOOLS & SETTINGS
 **shadcn Component**: Use `Command` component (keyboard-accessible)
 
 **Command Examples**:
+
 ```
 Type "new" → "New Transaction", "New Budget", "New Loan"
 Type "theme" → "Light Mode", "Dark Mode", "High-Contrast Mode"
@@ -533,11 +574,13 @@ Type "budget" → "View Budgets", "Add Budget", "Budget Report"
 **Goal**: Allow users to show/hide dashboard widgets and reorder via drag-and-drop (defaults to simplified 4-5 widgets).
 
 **Why This Matters**:
+
 - **Progressive disclosure**: Seniors get simple 4-widget dashboard, power users customize
 - **User preference**: Monarch Money (high rating) offers this
 - **Reduced cognitive load**: Hide widgets you don't use
 
 **Success Criteria**:
+
 - [ ] Default dashboard: 4-5 widgets (Net Worth, Monthly Summary, Budget Status, Recent Transactions, Quick Actions)
 - [ ] Widget settings: Show/hide each widget (toggle)
 - [ ] Advanced widgets hidden by default: Charts, Insights, Anomalies, Debt, Recurring
@@ -551,22 +594,23 @@ Type "budget" → "View Budgets", "Add Budget", "Budget Report"
 **Owner**: React Specialist + UX Specialist
 
 **Default vs Advanced Widgets**:
+
 ```typescript
 // DEFAULT (simple, shown to new users)
 const defaultWidgets = [
-  'net-worth',           // 4 metric cards
-  'budget-status',       // Top 3 budgets
-  'recent-transactions', // Last 8 transactions
-  'quick-actions',       // Add, Import, Reports buttons
+  "net-worth", // 4 metric cards
+  "budget-status", // Top 3 budgets
+  "recent-transactions", // Last 8 transactions
+  "quick-actions", // Add, Import, Reports buttons
 ];
 
 // ADVANCED (hidden, power users enable)
 const advancedWidgets = [
-  'spending-by-category',  // Pie chart
-  'income-vs-expenses',    // Area chart
-  'recurring-transactions', // Auto-detected patterns
-  'anomaly-alerts',        // Unusual spending
-  'debt-overview',         // Loan summary
+  "spending-by-category", // Pie chart
+  "income-vs-expenses", // Area chart
+  "recurring-transactions", // Auto-detected patterns
+  "anomaly-alerts", // Unusual spending
+  "debt-overview", // Loan summary
 ];
 ```
 
@@ -579,6 +623,7 @@ const advancedWidgets = [
 **Example**: User requests "Recurring transaction templates"
 
 **Questions to Ask**:
+
 1. **Accessible to All Ages**: Can a 70-year-old create a template without my help?
    - ✅ Use plain language: "Repeat This Transaction" not "Create Recurring Template"
    - ✅ 48px button touch targets
@@ -621,6 +666,7 @@ const advancedWidgets = [
 **Decision**: Designer proposes 40x40px icon buttons for mobile transaction list actions.
 
 **Analysis**:
+
 - ❌ **Violates Principle 1** (Accessible to All Ages): 40px < 48px minimum
 - ❌ **Violates Principle 4** (WCAG 2.2 AA): WCAG 2.5.8 requires 24px minimum, we target 48px
 - ✅ **Aligns with Principle 2** (Mobile-First): Touch-optimized
@@ -632,6 +678,7 @@ const advancedWidgets = [
 ### Scenario 3: Prioritizing Features
 
 **3 feature requests**:
+
 1. Add cryptocurrency tracking
 2. Add high-contrast mode
 3. Add loan amortization calculator
@@ -644,6 +691,7 @@ const advancedWidgets = [
 | Amortization | 0 | 1 | 1 | 0 | 1 | 1 | 0 | **4** | P1 (post-launch) |
 
 **Decision**:
+
 1. **High-contrast mode** (5 principles) → P0, ship in v1
 2. **Amortization calculator** (4 principles) → P1, ship post-launch
 3. **Crypto tracking** (1 principle) → P2, maybe later
@@ -654,25 +702,25 @@ const advancedWidgets = [
 
 **Track weekly in standups**:
 
-| Metric | Week 1 | Week 2 | Week 3 | Week 4 | Target |
-|--------|--------|--------|--------|--------|--------|
-| **Lighthouse Accessibility** | ? | ? | ? | ? | 95+ |
-| **Base font size** | 16px | 18px ✅ | 18px | 18px | 18px |
-| **Touch targets <48px** | ? | 0 ✅ | 0 | 0 | 0 |
-| **Mobile tab bar items** | 5 | 5 | 4 ✅ | 4 | 4 |
-| **Theme modes** | 1 (Light) | 3 ✅ | 3 | 3 | 3 |
-| **Command palette** | ❌ | ❌ | ✅ | ✅ | ✅ |
-| **Dashboard widgets** | 7 | 7 | 5 ✅ | 5 | 4-5 |
-| **Lighthouse Performance** | ? | ? | 90+ ✅ | 90+ | 90+ |
+| Metric                       | Week 1    | Week 2  | Week 3 | Week 4 | Target |
+| ---------------------------- | --------- | ------- | ------ | ------ | ------ |
+| **Lighthouse Accessibility** | ?         | ?       | ?      | ?      | 95+    |
+| **Base font size**           | 16px      | 18px ✅ | 18px   | 18px   | 18px   |
+| **Touch targets <48px**      | ?         | 0 ✅    | 0      | 0      | 0      |
+| **Mobile tab bar items**     | 5         | 5       | 4 ✅   | 4      | 4      |
+| **Theme modes**              | 1 (Light) | 3 ✅    | 3      | 3      | 3      |
+| **Command palette**          | ❌        | ❌      | ✅     | ✅     | ✅     |
+| **Dashboard widgets**        | 7         | 7       | 5 ✅   | 5      | 4-5    |
+| **Lighthouse Performance**   | ?         | ?       | 90+ ✅ | 90+    | 90+    |
 
 ---
 
 ## Revision History
 
-| Version | Date | Changes | Author |
-|---------|------|---------|--------|
-| 1.0 | 2025-11-09 | Initial principles defined based on Epic 1 research | Product Designer |
-| | | | |
+| Version | Date       | Changes                                             | Author           |
+| ------- | ---------- | --------------------------------------------------- | ---------------- |
+| 1.0     | 2025-11-09 | Initial principles defined based on Epic 1 research | Product Designer |
+|         |            |                                                     |                  |
 
 ---
 

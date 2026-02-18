@@ -8,14 +8,14 @@ Transform the privacy-first offline budget app into **the ProtonMail of personal
 
 ## What Makes This BETTER Than YNAB/Mint/Monarch
 
-| Differentiator | Competitors | Our Online Version |
-|----------------|-------------|-------------------|
-| **Data Privacy** | Cloud-stored, company can read | E2E encrypted, zero-knowledge |
-| **Offline Mode** | View-only or none | Full functionality |
-| **Family Roles** | All-or-nothing access | Granular permissions per account |
-| **Open Data** | Limited export | Full API, webhooks, any format |
-| **AI Privacy** | Data mined for training | Local-first ML, opt-in only |
-| **Self-Hosting** | SaaS only | Optional Docker deployment |
+| Differentiator   | Competitors                    | Our Online Version               |
+| ---------------- | ------------------------------ | -------------------------------- |
+| **Data Privacy** | Cloud-stored, company can read | E2E encrypted, zero-knowledge    |
+| **Offline Mode** | View-only or none              | Full functionality               |
+| **Family Roles** | All-or-nothing access          | Granular permissions per account |
+| **Open Data**    | Limited export                 | Full API, webhooks, any format   |
+| **AI Privacy**   | Data mined for training        | Local-first ML, opt-in only      |
+| **Self-Hosting** | SaaS only                      | Optional Docker deployment       |
 
 ---
 
@@ -78,12 +78,14 @@ Transform the privacy-first offline budget app into **the ProtonMail of personal
 **Extend**: `src/lib/encryption/budget-encryption.ts`
 
 **New Files**:
+
 - `src/lib/auth/cloud-auth.ts` - Supabase Auth wrapper
 - `src/lib/auth/key-derivation.ts` - Password → Master Key → Device Keys
 - `src/lib/auth/recovery-key.ts` - 24-word recovery phrase generation
 - `src/lib/encryption/cloud-encryption.ts` - Cloud-specific E2E
 
 **Key Derivation Flow**:
+
 ```
 User Password ──PBKDF2──▶ Master Key (never leaves device)
                               │
@@ -126,11 +128,13 @@ sync_state (user_id, device_id, last_sync_at, vector_clock)
 **Reuse**: `src/lib/sync/sync-engine.ts` (vector clocks, conflict resolution)
 
 **New Files**:
+
 - `src/lib/sync/cloud-sync-engine.ts` - Orchestration
 - `src/lib/sync/cloud-transport.ts` - Supabase Realtime transport
 - `src/lib/sync/encrypted-payload.ts` - Encrypt before cloud, decrypt after
 
 **Sync Flow**:
+
 1. Local change → Encrypt → Queue
 2. Online → Push encrypted blobs to Supabase
 3. Supabase Realtime → Notify other devices
@@ -139,20 +143,21 @@ sync_state (user_id, device_id, last_sync_at, vector_clock)
 ### 1.4 Subscription & Billing
 
 **Stripe Integration**:
+
 - `src/lib/stripe/subscription-manager.ts`
 - `src/app/api/stripe/webhook/route.ts`
 - `src/components/budget/pricing/PricingPage.tsx`
 
 **Tiers**:
 
-| Feature | Free | Premium $4.99/mo | Family $9.99/mo |
-|---------|------|------------------|-----------------|
-| Accounts | 3 | Unlimited | Unlimited |
-| Bank Connections | 1 | 5 | 10 |
-| Devices | 1 | 5 | 10 |
-| Family Members | 1 | 1 | 6 |
-| API Access | No | Yes | Yes |
-| Priority Support | No | Yes | Yes |
+| Feature          | Free | Premium $4.99/mo | Family $9.99/mo |
+| ---------------- | ---- | ---------------- | --------------- |
+| Accounts         | 3    | Unlimited        | Unlimited       |
+| Bank Connections | 1    | 5                | 10              |
+| Devices          | 1    | 5                | 10              |
+| Family Members   | 1    | 1                | 6               |
+| API Access       | No   | Yes              | Yes             |
+| Priority Support | No   | Yes              | Yes             |
 
 ---
 
@@ -161,10 +166,12 @@ sync_state (user_id, device_id, last_sync_at, vector_clock)
 ### 2.1 Complete SimpleFIN
 
 **Existing Files to Complete**:
+
 - `src/lib/simplefin/client.ts` - API client (80% done)
 - `src/lib/simplefin/sync.ts` - Transaction sync
 
 **New Files**:
+
 - `src/lib/simplefin/account-matcher.ts`
 - `src/lib/simplefin/ui/ConnectionWizard.tsx`
 - `src/app/budget-app/connections/page.tsx`
@@ -172,12 +179,14 @@ sync_state (user_id, device_id, last_sync_at, vector_clock)
 ### 2.2 Plaid Integration (Premium)
 
 **New Files**:
+
 - `src/lib/plaid/client.ts`
 - `src/lib/plaid/link-handler.ts`
 - `src/app/api/plaid/link/route.ts`
 - `src/app/api/plaid/webhook/route.ts`
 
 **Database**:
+
 ```sql
 bank_connections (
   id, user_id, provider,
@@ -193,6 +202,7 @@ bank_connections (
 ### 3.1 Family Groups
 
 **Database**:
+
 ```sql
 family_groups (id, name, owner_id, invite_code)
 
@@ -208,6 +218,7 @@ shared_budgets (budget_entity_id, family_id, shared_by)
 ```
 
 **Roles**:
+
 - **Owner**: Full control, billing, can delete group
 - **Admin**: Manage members, see all, edit all
 - **Member**: See shared, edit own transactions
@@ -217,12 +228,14 @@ shared_budgets (budget_entity_id, family_id, shared_by)
 ### 3.2 Couple-Specific Features
 
 **Components**:
+
 - `src/components/budget/family/JointAccountView.tsx`
 - `src/components/budget/family/SplitBillTracker.tsx`
 - `src/components/budget/family/SpendingApprovalWorkflow.tsx`
 - `src/components/budget/family/ActivityFeed.tsx`
 
 **Features**:
+
 - Joint vs Individual account views
 - "Who owes whom" tracking
 - Approval workflow for purchases over threshold
@@ -237,6 +250,7 @@ shared_budgets (budget_entity_id, family_id, shared_by)
 **Extend**: `src/lib/analytics/lstm-predictive-spending.ts`
 
 **New Capabilities**:
+
 - Improved categorization accuracy (target: 95%+)
 - Bill negotiation suggestions
 - Subscription overlap detection
@@ -246,6 +260,7 @@ shared_budgets (budget_entity_id, family_id, shared_by)
 ### 4.2 Federated Learning (Opt-In)
 
 **Architecture**:
+
 ```
 User Device                          Cloud
     │                                  │
@@ -265,6 +280,7 @@ User Device                          Cloud
 ```
 
 **Files**:
+
 - `src/lib/ai/federated-learning.ts`
 - `src/lib/ai/differential-privacy.ts`
 - `src/components/budget/settings/AIPrivacySettings.tsx`
@@ -276,6 +292,7 @@ User Device                          Cloud
 ### 5.1 Public API
 
 **Endpoints** (`src/app/api/v2/`):
+
 ```
 Accounts:     GET/POST /accounts, GET/PUT/DELETE /accounts/:id
 Transactions: GET/POST /transactions, GET/PUT/DELETE /transactions/:id
@@ -290,12 +307,14 @@ Webhooks:     POST/DELETE /webhooks
 ### 5.2 Webhooks
 
 **Events**:
+
 - `transaction.created`, `transaction.updated`
 - `budget.exceeded`, `budget.warning`
 - `account.balance_changed`
 - `bank_sync.completed`, `bank_sync.failed`
 
 **Database**:
+
 ```sql
 webhooks (id, user_id, url, secret, events[], active)
 webhook_deliveries (id, webhook_id, event_type, payload, status)
@@ -313,11 +332,13 @@ webhook_deliveries (id, webhook_id, event_type, payload, status)
 ### 6.1 Push Notifications
 
 **Files**:
+
 - `src/lib/notifications/push-manager.ts`
 - `src/lib/notifications/notification-preferences.ts`
 - Enhanced service worker for push
 
 **Notification Types**:
+
 - Budget exceeded/warning
 - Large transaction alert
 - Bill due reminder
@@ -335,35 +356,36 @@ webhook_deliveries (id, webhook_id, event_type, payload, status)
 
 ## Critical Implementation Files
 
-| Existing File | Purpose | Modifications Needed |
-|---------------|---------|---------------------|
-| `src/lib/budget-db.ts` | IndexedDB schema | Keep as-is (local cache) |
-| `src/lib/encryption/budget-encryption.ts` | AES-GCM encryption | Extend for cloud keys |
-| `src/lib/sync/sync-engine.ts` | Vector clock sync | Add cloud transport |
-| `src/lib/sync/offline-manager.ts` | Change queue | Connect to cloud sync |
-| `src/lib/simplefin/client.ts` | Bank API | Complete implementation |
-| `src/contexts/ProfileContext.tsx` | Multi-profile | Extend for family |
-| `src/contexts/AuthContext.tsx` | Authentication | Add cloud auth mode |
+| Existing File                             | Purpose            | Modifications Needed     |
+| ----------------------------------------- | ------------------ | ------------------------ |
+| `src/lib/budget-db.ts`                    | IndexedDB schema   | Keep as-is (local cache) |
+| `src/lib/encryption/budget-encryption.ts` | AES-GCM encryption | Extend for cloud keys    |
+| `src/lib/sync/sync-engine.ts`             | Vector clock sync  | Add cloud transport      |
+| `src/lib/sync/offline-manager.ts`         | Change queue       | Connect to cloud sync    |
+| `src/lib/simplefin/client.ts`             | Bank API           | Complete implementation  |
+| `src/contexts/ProfileContext.tsx`         | Multi-profile      | Extend for family        |
+| `src/contexts/AuthContext.tsx`            | Authentication     | Add cloud auth mode      |
 
 ---
 
 ## Timeline Summary
 
-| Phase | Duration | Deliverable |
-|-------|----------|-------------|
-| 1. Foundation | 8 weeks | MVP: Auth, E2E encryption, cloud sync, billing |
-| 2. Bank Sync | 4 weeks | SimpleFIN + Plaid integration |
-| 3. Family | 4 weeks | Groups, permissions, couple features |
-| 4. AI | 4 weeks | Enhanced ML, federated learning |
-| 5. Platform | 3 weeks | API, webhooks, export/import |
-| 6. Launch | 1 week | Notifications, polish, deployment |
-| **Total** | **24 weeks** | |
+| Phase         | Duration     | Deliverable                                    |
+| ------------- | ------------ | ---------------------------------------------- |
+| 1. Foundation | 8 weeks      | MVP: Auth, E2E encryption, cloud sync, billing |
+| 2. Bank Sync  | 4 weeks      | SimpleFIN + Plaid integration                  |
+| 3. Family     | 4 weeks      | Groups, permissions, couple features           |
+| 4. AI         | 4 weeks      | Enhanced ML, federated learning                |
+| 5. Platform   | 3 weeks      | API, webhooks, export/import                   |
+| 6. Launch     | 1 week       | Notifications, polish, deployment              |
+| **Total**     | **24 weeks** |                                                |
 
 ---
 
 ## Verification Plan
 
 ### Testing Strategy
+
 1. **E2E Encryption**: Verify server cannot decrypt data
 2. **Sync**: Multi-device conflict resolution tests
 3. **Offline**: Full functionality without network
@@ -371,11 +393,13 @@ webhook_deliveries (id, webhook_id, event_type, payload, status)
 5. **API**: Rate limiting, auth, payload validation
 
 ### Security Audit
+
 - Third-party audit of encryption implementation
 - Penetration testing before launch
 - Bug bounty program post-launch
 
 ### Performance Benchmarks
+
 - Sync latency < 2 seconds
 - Offline-to-online transition seamless
 - Handle 100k+ transactions per account
@@ -384,11 +408,11 @@ webhook_deliveries (id, webhook_id, event_type, payload, status)
 
 ## Success Metrics
 
-| Metric | Target |
-|--------|--------|
+| Metric                  | Target                 |
+| ----------------------- | ---------------------- |
 | E2E encryption coverage | 100% of financial data |
-| Offline functionality | 100% feature parity |
-| Sync conflict rate | < 0.1% |
-| API uptime | 99.9% |
-| Premium conversion | 5% of free users |
-| Family plan adoption | 20% of premium |
+| Offline functionality   | 100% feature parity    |
+| Sync conflict rate      | < 0.1%                 |
+| API uptime              | 99.9%                  |
+| Premium conversion      | 5% of free users       |
+| Family plan adoption    | 20% of premium         |

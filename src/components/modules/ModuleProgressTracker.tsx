@@ -53,7 +53,9 @@ export default function ModuleProgressTracker({
   }
 
   function stripEtaSuffix(title: string) {
-    return title.replace(/\s*\((?:\d+(?:\.\d+)?\s*(?:min|minutes|m|h|hour|hours))\)\s*$/i, "").trim();
+    return title
+      .replace(/\s*\((?:\d+(?:\.\d+)?\s*(?:min|minutes|m|h|hour|hours))\)\s*$/i, "")
+      .trim();
   }
 
   function formatMinutes(min?: number) {
@@ -119,10 +121,15 @@ export default function ModuleProgressTracker({
   }, []);
 
   // Mark section complete/needs review
-  const markSection = async (id: string, status: "completed" | "needs_review" | "in_progress" | "not_started") => {
+  const markSection = async (
+    id: string,
+    status: "completed" | "needs_review" | "in_progress" | "not_started"
+  ) => {
     setSections((prev) =>
       prev.map((s) =>
-        s.id === id ? { ...s, completed: status === "completed", needsReview: status === "needs_review" } : s
+        s.id === id
+          ? { ...s, completed: status === "completed", needsReview: status === "needs_review" }
+          : s
       )
     );
 
@@ -135,7 +142,9 @@ export default function ModuleProgressTracker({
   };
 
   const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60).toString().padStart(2, "0");
+    const m = Math.floor(seconds / 60)
+      .toString()
+      .padStart(2, "0");
     const s = (seconds % 60).toString().padStart(2, "0");
     return `${m}:${s}`;
   };
@@ -153,7 +162,7 @@ export default function ModuleProgressTracker({
   const completedCount = sections.filter((s) => s.completed).length;
   const progress = sections.length > 0 ? Math.round((completedCount / sections.length) * 100) : 0;
   const totalEta = sections.reduce((sum, s) => sum + (s.etaMin ?? 0), 0);
-  const remainingEta = sections.reduce((sum, s) => sum + (s.completed ? 0 : s.etaMin ?? 0), 0);
+  const remainingEta = sections.reduce((sum, s) => sum + (s.completed ? 0 : (s.etaMin ?? 0)), 0);
 
   return (
     <div className="sticky top-24 space-y-4">
@@ -161,7 +170,7 @@ export default function ModuleProgressTracker({
       <Card className="border-primary/30 bg-gradient-to-r from-cyan-950/30 to-blue-950/20">
         <CardContent className="pt-4">
           <div className="space-y-3">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <span className="text-sm text-cyan-100">Progress</span>
               <span className="text-sm font-semibold text-cyan-100">{progress}%</span>
             </div>
@@ -188,7 +197,7 @@ export default function ModuleProgressTracker({
       {/* Study Progress Card */}
       <Card className="border-primary/30 bg-gradient-to-b from-gray-900/50 to-blue-900/30">
         <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-muted-foreground text-base">
+          <CardTitle className="flex items-center gap-2 text-base text-muted-foreground">
             <Book className="h-4 w-4" /> Study Progress
           </CardTitle>
           {lastViewed && (
@@ -204,7 +213,7 @@ export default function ModuleProgressTracker({
           )}
         </CardHeader>
         <CardContent>
-          <div className="space-y-2 mb-4">
+          <div className="mb-4 space-y-2">
             <Button
               size="sm"
               className="w-full bg-green-700 hover:bg-[#22c55e]"
@@ -221,7 +230,9 @@ export default function ModuleProgressTracker({
               variant="outline"
               className="w-full border-gray-600 text-muted-foreground hover:bg-gray-900/30"
               onClick={() => {
-                setSections((prev) => prev.map((s) => ({ ...s, completed: false, needsReview: false })));
+                setSections((prev) =>
+                  prev.map((s) => ({ ...s, completed: false, needsReview: false }))
+                );
               }}
             >
               Reset progress
@@ -230,17 +241,25 @@ export default function ModuleProgressTracker({
 
           <ul className="space-y-2">
             {sections.map((s) => (
-              <li key={s.id} className={cn("flex items-start gap-2", activeId === s.id ? "opacity-100" : "opacity-80")}>
+              <li
+                key={s.id}
+                className={cn(
+                  "flex items-start gap-2",
+                  activeId === s.id ? "opacity-100" : "opacity-80"
+                )}
+              >
                 <input
                   type="checkbox"
                   className="mt-1"
                   checked={s.completed}
-                  onChange={(e) => markSection(s.id, e.target.checked ? "completed" : "in_progress")}
+                  onChange={(e) =>
+                    markSection(s.id, e.target.checked ? "completed" : "in_progress")
+                  }
                   aria-label={`Mark ${s.title} complete`}
                 />
                 <button
                   className={cn(
-                    "text-left text-sm hover:underline flex-1",
+                    "flex-1 text-left text-sm hover:underline",
                     activeId === s.id ? "text-primary" : "text-blue-100"
                   )}
                   onClick={() => scrollToSection(s.id)}

@@ -9,6 +9,7 @@
 **Open Chatbot**: Click chat icon (bottom-right) or press `Ctrl + /` (Windows) / `Cmd + /` (Mac)
 
 **First Questions to Try**:
+
 1. "Hello" → Get welcome message
 2. "How much did I spend this month?" → Total spending
 3. "Help" → See all example questions
@@ -19,47 +20,47 @@
 
 ### Spending Analysis
 
-| Question | What It Does |
-|----------|--------------|
-| "How much did I spend this month?" | Total expenses for current month |
+| Question                                 | What It Does                             |
+| ---------------------------------------- | ---------------------------------------- |
+| "How much did I spend this month?"       | Total expenses for current month         |
 | "What are my top 5 spending categories?" | Breakdown of highest spending categories |
-| "Show me all Starbucks transactions" | Filter by merchant name |
-| "How much did I spend on groceries?" | Category-specific total |
-| "What did I buy yesterday?" | All transactions from yesterday |
+| "Show me all Starbucks transactions"     | Filter by merchant name                  |
+| "How much did I spend on groceries?"     | Category-specific total                  |
+| "What did I buy yesterday?"              | All transactions from yesterday          |
 
 ### Budget Status
 
-| Question | What It Does |
-|----------|--------------|
-| "Am I under budget this month?" | Overall budget health check |
-| "How much budget do I have left?" | Remaining amounts by category |
+| Question                           | What It Does                    |
+| ---------------------------------- | ------------------------------- |
+| "Am I under budget this month?"    | Overall budget health check     |
+| "How much budget do I have left?"  | Remaining amounts by category   |
 | "Am I over budget for dining out?" | Specific category budget status |
-| "Show my budget progress" | Visual breakdown of all budgets |
+| "Show my budget progress"          | Visual breakdown of all budgets |
 
 ### Income & Savings
 
-| Question | What It Does |
-|----------|--------------|
+| Question                                 | What It Does                   |
+| ---------------------------------------- | ------------------------------ |
 | "How much income did I earn this month?" | Total income for current month |
-| "What's my net savings this month?" | Income minus expenses |
-| "Show my income trends" | Historical income chart |
+| "What's my net savings this month?"      | Income minus expenses          |
+| "Show my income trends"                  | Historical income chart        |
 
 ### Trends & Comparisons
 
-| Question | What It Does |
-|----------|--------------|
-| "Compare this month to last month" | Month-over-month spending |
-| "Am I spending more this month?" | Trend analysis |
-| "Show my spending trend for the year" | Annual spending chart |
-| "What's my average weekly spending?" | Weekly average calculation |
+| Question                              | What It Does               |
+| ------------------------------------- | -------------------------- |
+| "Compare this month to last month"    | Month-over-month spending  |
+| "Am I spending more this month?"      | Trend analysis             |
+| "Show my spending trend for the year" | Annual spending chart      |
+| "What's my average weekly spending?"  | Weekly average calculation |
 
 ### Quick Actions (Coming Soon)
 
-| Command | What It Does |
-|---------|--------------|
-| "Add $50 grocery expense" | Create new transaction |
-| "Set a $300 grocery budget" | Create new budget |
-| "Find transactions from last week" | Search by date range |
+| Command                            | What It Does           |
+| ---------------------------------- | ---------------------- |
+| "Add $50 grocery expense"          | Create new transaction |
+| "Set a $300 grocery budget"        | Create new budget      |
+| "Find transactions from last week" | Search by date range   |
 
 ---
 
@@ -81,13 +82,13 @@
 
 ## ⌨️ Keyboard Shortcuts
 
-| Action | Shortcut |
-|--------|----------|
-| Open Chatbot | `Ctrl + /` or `Cmd + /` |
-| Close Chatbot | `Esc` |
-| Send Message | `Enter` |
-| New Line | `Shift + Enter` |
-| Clear Input | `Esc` (when focused) |
+| Action        | Shortcut                |
+| ------------- | ----------------------- |
+| Open Chatbot  | `Ctrl + /` or `Cmd + /` |
+| Close Chatbot | `Esc`                   |
+| Send Message  | `Enter`                 |
+| New Line      | `Shift + Enter`         |
+| Clear Input   | `Esc` (when focused)    |
 
 ---
 
@@ -105,16 +106,19 @@ Type these in the chatbot:
 ## 🚨 Troubleshooting
 
 **Chatbot not responding?**
+
 1. Check internet connection
 2. Verify AI Features are enabled (Settings → Privacy)
 3. Refresh the page (F5)
 
 **Wrong data shown?**
+
 1. Verify transactions are categorized correctly
 2. Check date filters in Transactions page
 3. Look for duplicate transactions
 
 **"I don't understand" error?**
+
 - Rephrase in simpler language
 - Use example questions as templates
 - Check for typos in category names
@@ -124,12 +128,15 @@ Type these in the chatbot:
 ## 📊 Understanding Responses
 
 **Text Answer**: Simple response
+
 > "You spent $347.50 on groceries this month."
 
 **Chart/Visualization**: Data shown graphically
+
 > [Spending breakdown pie chart]
 
 **Action Confirmation**: Transaction or budget created
+
 > "✅ Added $50 grocery transaction. Anything else?"
 
 ---
@@ -137,11 +144,13 @@ Type these in the chatbot:
 ## 🔒 Privacy
 
 **What's sent to OpenAI (if AI enabled)**:
+
 - Category names (e.g., "Groceries")
 - Amounts and dates
-- Cleaned merchant names (e.g., "Amazon" not "AMAZON.COM*XY1234")
+- Cleaned merchant names (e.g., "Amazon" not "AMAZON.COM\*XY1234")
 
 **NEVER sent**:
+
 - Account numbers
 - Full merchant details
 - Personal information

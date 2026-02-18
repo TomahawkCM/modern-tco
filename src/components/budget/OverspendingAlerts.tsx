@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * Overspending Alerts Component (Phase 4)
@@ -7,16 +7,16 @@
  * Shows warnings when user is projected to exceed budget
  */
 
-import { useTranslations } from 'next-intl';
-import { AlertTriangle, TrendingUp } from 'lucide-react';
-import type { OverspendingAlert } from '@/lib/analytics/overspending-detector';
+import { useTranslations } from "next-intl";
+import { AlertTriangle, TrendingUp } from "lucide-react";
+import type { OverspendingAlert } from "@/lib/analytics/overspending-detector";
 
 interface OverspendingAlertsProps {
   alerts: OverspendingAlert[];
 }
 
 export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
-  const t = useTranslations('overspendingAlerts');
+  const t = useTranslations("overspendingAlerts");
   if (alerts.length === 0) {
     return null;
   }
@@ -31,93 +31,89 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
           <div
             key={index}
             className={`rounded-lg border-s-4 p-4 ${
-              alert.severity === 'danger'
-                ? 'bg-red-50 border-red-500'
-                : 'bg-amber-50 border-amber-500'
+              alert.severity === "danger"
+                ? "border-red-500 bg-red-50"
+                : "border-amber-500 bg-amber-50"
             }`}
           >
             <div className="flex items-start gap-4">
               <div className="flex-shrink-0">
                 <AlertTriangle
-                  className={`w-5 h-5 ${
-                    alert.severity === 'danger' ? 'text-red-600' : 'text-amber-600'
+                  className={`h-5 w-5 ${
+                    alert.severity === "danger" ? "text-red-600" : "text-amber-600"
                   }`}
                 />
               </div>
-              
+
               <div className="flex-1">
-                <div className="flex items-center justify-between mb-2">
+                <div className="mb-2 flex items-center justify-between">
                   <h4
                     className={`font-semibold ${
-                      alert.severity === 'danger' ? 'text-red-900' : 'text-amber-900'
+                      alert.severity === "danger" ? "text-red-900" : "text-amber-900"
                     }`}
                   >
                     {alert.categoryName}
                   </h4>
                   <span
                     className={`text-sm font-medium ${
-                      alert.severity === 'danger' ? 'text-red-700' : 'text-amber-700'
+                      alert.severity === "danger" ? "text-red-700" : "text-amber-700"
                     }`}
                   >
-                    {t('percentOfBudget', { percent: projectedPercentage.toFixed(0) })}
+                    {t("percentOfBudget", { percent: projectedPercentage.toFixed(0) })}
                   </span>
                 </div>
 
                 <p
-                  className={`text-sm mb-4 ${
-                    alert.severity === 'danger' ? 'text-red-800' : 'text-amber-800'
+                  className={`mb-4 text-sm ${
+                    alert.severity === "danger" ? "text-red-800" : "text-amber-800"
                   }`}
                 >
-                  ⚠️ {t('exceededWarning', { amount: `$${alert.projectedOverage.toFixed(2)}` })}
+                  ⚠️ {t("exceededWarning", { amount: `$${alert.projectedOverage.toFixed(2)}` })}
                 </p>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
+                <div className="grid grid-cols-2 gap-4 text-xs sm:grid-cols-4">
                   <div>
-                    <div className="text-gray-600">{t('stats.budget')}</div>
+                    <div className="text-gray-600">{t("stats.budget")}</div>
                     <div className="font-semibold text-gray-900">
                       ${alert.budgetAmount.toFixed(2)}
                     </div>
                   </div>
                   <div>
-                    <div className="text-gray-600">{t('stats.spentSoFar')}</div>
+                    <div className="text-gray-600">{t("stats.spentSoFar")}</div>
                     <div className="font-semibold text-gray-900">
                       ${alert.currentSpent.toFixed(2)}
                     </div>
                   </div>
                   <div>
-                    <div className="text-gray-600">{t('stats.projectedTotal')}</div>
+                    <div className="text-gray-600">{t("stats.projectedTotal")}</div>
                     <div
                       className={`font-semibold ${
-                        alert.severity === 'danger' ? 'text-red-700' : 'text-amber-700'
+                        alert.severity === "danger" ? "text-red-700" : "text-amber-700"
                       }`}
                     >
                       ${alert.projectedSpending.toFixed(2)}
                     </div>
                   </div>
                   <div>
-                    <div className="text-gray-600">{t('stats.daysLeft')}</div>
-                    <div className="font-semibold text-gray-900">
-                      {alert.daysRemaining}
-                    </div>
+                    <div className="text-gray-600">{t("stats.daysLeft")}</div>
+                    <div className="font-semibold text-gray-900">{alert.daysRemaining}</div>
                   </div>
                 </div>
 
                 {/* Progress Bar */}
                 <div className="mt-4">
-                  <div className="flex items-center justify-between text-xs mb-2">
-                    <span className="text-gray-600">{t('progress.label')}</span>
+                  <div className="mb-2 flex items-center justify-between text-xs">
+                    <span className="text-gray-600">{t("progress.label")}</span>
                     <span
-                      className={
-                        alert.severity === 'danger' ? 'text-red-700' : 'text-amber-700'
-                      }
+                      className={alert.severity === "danger" ? "text-red-700" : "text-amber-700"}
                     >
                       {percentageUsed.toFixed(1)}%
                     </span>
                   </div>
-                  <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="h-2 overflow-hidden rounded-full bg-gray-200">
                     <div
                       className={`h-full rounded-full transition-all ${
-                        alert.severity === 'danger' ? 'bg-red-500' : 'bg-amber-500'
+                        alert.severity === "danger" ? "bg-red-500" : "bg-amber-500"
                       }`}
                       style={{ width: `${Math.min(percentageUsed, 100)}%` }}
                     />
@@ -127,15 +123,16 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
                 {/* Suggestion */}
                 <div
                   className={`mt-4 text-xs ${
-                    alert.severity === 'danger' ? 'text-red-700' : 'text-amber-700'
+                    alert.severity === "danger" ? "text-red-700" : "text-amber-700"
                   }`}
                 >
-                  <TrendingUp className="w-3 h-3 inline mr-2" />
-                  <span className="font-medium">{t('tip.label')}</span>{' '}
-                  {t('tip.reduceSpending', {
+                  <TrendingUp className="mr-2 inline h-3 w-3" />
+                  <span className="font-medium">{t("tip.label")}</span>{" "}
+                  {t("tip.reduceSpending", {
                     amount: `$${(
-                      alert.budgetAmount / new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate()
-                    ).toFixed(2)}`
+                      alert.budgetAmount /
+                      new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate()
+                    ).toFixed(2)}`,
                   })}
                 </div>
               </div>
@@ -146,4 +143,3 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
     </div>
   );
 }
-

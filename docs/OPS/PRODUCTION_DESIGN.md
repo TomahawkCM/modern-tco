@@ -22,6 +22,7 @@ This document describes the production‑ready design for the Modern TCO LMS, in
 - Production: main branch → Vercel prod; Supabase prod project
 
 Branching strategy
+
 - `main` = production
 - Feature branches → PR → preview → merge to main
 
@@ -112,4 +113,3 @@ Branching strategy
   - Harden CSP for prod
   - Expand monitoring dashboards; error budgets
   - Stripe checkout if needed (guarded by keys)
-

@@ -16,9 +16,9 @@
  * - Server-side routes use process.env.OPENAI_API_KEY directly
  */
 
-import OpenAI from 'openai';
-import { isAIFeaturesEnabled } from '@/lib/budget-privacy-settings';
-import { isOnlineMode } from '@/config/features';
+import OpenAI from "openai";
+import { isAIFeaturesEnabled } from "@/lib/budget-privacy-settings";
+import { isOnlineMode } from "@/config/features";
 
 // ============================================================================
 // Configuration
@@ -34,7 +34,7 @@ const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 // ============================================================================
 
 export interface OpenAIRequestOptions {
-  model?: 'gpt-3.5-turbo' | 'gpt-4' | 'gpt-4-turbo-preview';
+  model?: "gpt-3.5-turbo" | "gpt-4" | "gpt-4-turbo-preview";
   temperature?: number;
   maxTokens?: number;
   cacheKey?: string; // Optional cache key for deduplication
@@ -97,7 +97,9 @@ export function hasOpenAIKey(): boolean {
   // This exposed the API key in browser - security risk
   const clientKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
   if (clientKey && clientKey.length > 0) {
-    console.warn('[OpenAI] Using NEXT_PUBLIC_OPENAI_API_KEY is deprecated and insecure. Use server-side API routes instead.');
+    console.warn(
+      "[OpenAI] Using NEXT_PUBLIC_OPENAI_API_KEY is deprecated and insecure. Use server-side API routes instead."
+    );
     return true;
   }
 
@@ -118,16 +120,16 @@ function getClient(): OpenAI {
       apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
       if (apiKey) {
         console.warn(
-          '[OpenAI] SECURITY WARNING: Using NEXT_PUBLIC_OPENAI_API_KEY exposes your API key in browser. ' +
-          'Please migrate to server-side API routes (/api/import/analyze-columns, /api/import/analyze-error).'
+          "[OpenAI] SECURITY WARNING: Using NEXT_PUBLIC_OPENAI_API_KEY exposes your API key in browser. " +
+            "Please migrate to server-side API routes (/api/import/analyze-columns, /api/import/analyze-error)."
         );
       }
     }
 
     if (!apiKey) {
       throw new Error(
-        'OpenAI API key not configured. For client-side code, use the server-side API routes ' +
-        '(/api/import/analyze-columns, /api/import/analyze-error) instead of direct AI calls.'
+        "OpenAI API key not configured. For client-side code, use the server-side API routes " +
+          "(/api/import/analyze-columns, /api/import/analyze-error) instead of direct AI calls."
       );
     }
 
@@ -219,7 +221,7 @@ function cacheResponse(cacheKey: string, data: any, tokensUsed: number): void {
  * - GPT-4: $0.03 / 1K tokens (input), $0.06 / 1K tokens (output)
  */
 function calculateCost(model: string, tokensUsed: number): number {
-  const pricePerToken = model.startsWith('gpt-4') ? 0.00003 : 0.000001;
+  const pricePerToken = model.startsWith("gpt-4") ? 0.00003 : 0.000001;
   return tokensUsed * pricePerToken;
 }
 
@@ -242,7 +244,7 @@ export async function chatCompletion(
   if (!isOnlineMode()) {
     return {
       success: false,
-      error: 'AI features not available in standalone mode',
+      error: "AI features not available in standalone mode",
     };
   }
 
@@ -250,25 +252,28 @@ export async function chatCompletion(
   if (!isAIFeaturesEnabled()) {
     return {
       success: false,
-      error: 'AI features are disabled in privacy settings',
+      error: "AI features are disabled in privacy settings",
     };
   }
 
   // Check if API key is configured
   if (!hasOpenAIKey()) {
-    console.warn('[OpenAI] API key not configured, skipping AI request. Use server-side API routes for AI features.');
+    console.warn(
+      "[OpenAI] API key not configured, skipping AI request. Use server-side API routes for AI features."
+    );
     return {
       success: false,
-      error: 'AI not available. Use server-side API routes (/api/import/analyze-columns, /api/import/analyze-error) instead.',
+      error:
+        "AI not available. Use server-side API routes (/api/import/analyze-columns, /api/import/analyze-error) instead.",
     };
   }
 
   const {
-    model = 'gpt-3.5-turbo',
+    model = "gpt-3.5-turbo",
     temperature = 0.7,
     maxTokens = 500,
     cacheKey,
-    systemPrompt = 'You are a helpful financial assistant.',
+    systemPrompt = "You are a helpful financial assistant.",
     retryOnError = true,
   } = options;
 
@@ -276,7 +281,7 @@ export async function chatCompletion(
   if (cacheKey) {
     const cached = getCachedResponse(cacheKey);
     if (cached) {
-      console.log('[OpenAI] Cache hit:', cacheKey);
+      console.log("[OpenAI] Cache hit:", cacheKey);
       return {
         success: true,
         data: cached.data,
@@ -301,14 +306,14 @@ export async function chatCompletion(
       const response = await client.chat.completions.create({
         model,
         messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt },
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userPrompt },
         ],
         temperature,
         max_tokens: maxTokens,
       });
 
-      const content = response.choices[0]?.message?.content || '';
+      const content = response.choices[0]?.message?.content || "";
       const tokensUsed = response.usage?.total_tokens || 0;
 
       // Cache the response
@@ -332,9 +337,7 @@ export async function chatCompletion(
       }
 
       // Exponential backoff
-      await new Promise((resolve) =>
-        setTimeout(resolve, RETRY_DELAY_MS * Math.pow(2, attempt))
-      );
+      await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS * Math.pow(2, attempt)));
       attempt++;
     }
   }
@@ -342,7 +345,7 @@ export async function chatCompletion(
   // All retries failed
   return {
     success: false,
-    error: lastError?.message || 'Unknown error',
+    error: lastError?.message || "Unknown error",
   };
 }
 
@@ -358,21 +361,21 @@ export async function chatCompletionJSON<T>(
     ...options,
     systemPrompt:
       options.systemPrompt ||
-      'You are a helpful assistant that responds with valid JSON only. Do not include any text outside the JSON object.',
+      "You are a helpful assistant that responds with valid JSON only. Do not include any text outside the JSON object.",
   });
 
   if (!response.success || !response.data) {
     return {
       success: false,
-      error: response.error || 'Failed to get response',
+      error: response.error || "Failed to get response",
     };
   }
 
   try {
     // Clean markdown code blocks if present
     let cleaned = response.data.trim();
-    cleaned = cleaned.replace(/^```json\n?/i, '');
-    cleaned = cleaned.replace(/\n?```$/i, '');
+    cleaned = cleaned.replace(/^```json\n?/i, "");
+    cleaned = cleaned.replace(/\n?```$/i, "");
 
     const parsed = JSON.parse(cleaned);
 
@@ -384,7 +387,7 @@ export async function chatCompletionJSON<T>(
       cost: response.cost,
     };
   } catch (error) {
-    console.error('[OpenAI] JSON parse error:', error);
+    console.error("[OpenAI] JSON parse error:", error);
     return {
       success: false,
       error: `Failed to parse JSON: ${(error as Error).message}`,
@@ -416,10 +419,7 @@ export function getRateLimitStatus(): {
 
   return {
     requestsInLastMinute,
-    remainingRequests: Math.max(
-      0,
-      RATE_LIMIT_REQUESTS_PER_MINUTE - requestsInLastMinute
-    ),
+    remainingRequests: Math.max(0, RATE_LIMIT_REQUESTS_PER_MINUTE - requestsInLastMinute),
     rateLimitReached: requestsInLastMinute >= RATE_LIMIT_REQUESTS_PER_MINUTE,
   };
 }
@@ -452,22 +452,22 @@ export function cleanDescriptionForAI(description: string): string {
   let cleaned = description.trim();
 
   // Remove account numbers (patterns like XXXX-1234, 1234567890)
-  cleaned = cleaned.replace(/\b\d{4}[- ]?\d{4,}\b/g, '[ACCOUNT]');
-  cleaned = cleaned.replace(/\bXXXX[- ]?\d{4,}\b/gi, '[ACCOUNT]');
+  cleaned = cleaned.replace(/\b\d{4}[- ]?\d{4,}\b/g, "[ACCOUNT]");
+  cleaned = cleaned.replace(/\bXXXX[- ]?\d{4,}\b/gi, "[ACCOUNT]");
 
   // Remove transaction IDs (long numeric strings)
-  cleaned = cleaned.replace(/\b\d{10,}\b/g, '[ID]');
+  cleaned = cleaned.replace(/\b\d{10,}\b/g, "[ID]");
 
   // Remove common prefixes that don't help with matching
-  cleaned = cleaned.replace(/^\[[A-Z]{2}\]\s*/i, ''); // [PR], [OP] etc
-  cleaned = cleaned.replace(/^(PURCHASE|DEBIT|CREDIT|PAYMENT|AUTH)\s+/i, '');
+  cleaned = cleaned.replace(/^\[[A-Z]{2}\]\s*/i, ""); // [PR], [OP] etc
+  cleaned = cleaned.replace(/^(PURCHASE|DEBIT|CREDIT|PAYMENT|AUTH)\s+/i, "");
 
   // Remove dates in various formats
-  cleaned = cleaned.replace(/\d{1,2}\/\d{1,2}\/\d{2,4}/g, '[DATE]');
-  cleaned = cleaned.replace(/\d{4}-\d{2}-\d{2}/g, '[DATE]');
+  cleaned = cleaned.replace(/\d{1,2}\/\d{1,2}\/\d{2,4}/g, "[DATE]");
+  cleaned = cleaned.replace(/\d{4}-\d{2}-\d{2}/g, "[DATE]");
 
   // Clean up extra whitespace
-  cleaned = cleaned.replace(/\s+/g, ' ').trim();
+  cleaned = cleaned.replace(/\s+/g, " ").trim();
 
   return cleaned;
 }

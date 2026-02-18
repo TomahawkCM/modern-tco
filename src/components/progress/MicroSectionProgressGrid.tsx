@@ -120,8 +120,7 @@ export default function MicroSectionProgressGrid({
       <CardContent className="space-y-6">
         {/* Module Sections Grid */}
         {modules.map((module) => {
-          const moduleProgress =
-            (module.completedSections / module.totalSections) * 100;
+          const moduleProgress = (module.completedSections / module.totalSections) * 100;
           const color = moduleColors[module.moduleId] || "bg-gray-500";
 
           return (
@@ -129,22 +128,20 @@ export default function MicroSectionProgressGrid({
               {/* Module Header */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className={`w-3 h-3 rounded-full ${color}`} />
+                  <div className={`h-3 w-3 rounded-full ${color}`} />
                   <h3 className="font-medium">{module.moduleName}</h3>
                   <Badge variant="outline" className="text-xs">
                     {module.completedSections}/{module.totalSections}
                   </Badge>
                 </div>
-                <span className="text-sm text-muted-foreground">
-                  {Math.round(moduleProgress)}%
-                </span>
+                <span className="text-sm text-muted-foreground">{Math.round(moduleProgress)}%</span>
               </div>
 
               {/* Module Progress Bar */}
               <Progress value={moduleProgress} className="h-2" />
 
               {/* Section Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3">
                 {module.sections.map((section) => (
                   <div
                     key={section.id}
@@ -157,10 +154,8 @@ export default function MicroSectionProgressGrid({
                     }}
                   >
                     {getSectionIcon(section)}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate">
-                        {section.title}
-                      </p>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium">{section.title}</p>
                       <p className="text-xs text-muted-foreground">
                         {section.estimatedMinutes} min
                       </p>
@@ -173,8 +168,8 @@ export default function MicroSectionProgressGrid({
         })}
 
         {/* Legend */}
-        <div className="pt-4 border-t">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+        <div className="border-t pt-4">
+          <div className="grid grid-cols-2 gap-4 text-xs md:grid-cols-4">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="h-4 w-4 text-[#22c55e]" />
               <span className="text-muted-foreground">Completed</span>
@@ -196,24 +191,20 @@ export default function MicroSectionProgressGrid({
 
         {/* Study Recommendations */}
         {overallProgress < 100 && (
-          <div className="p-3 bg-primary/10 border border-primary/20 rounded-lg">
-            <p className="text-sm font-medium text-primary mb-1">
-              Continue Your Journey
-            </p>
+          <div className="rounded-lg border border-primary/20 bg-primary/10 p-3">
+            <p className="mb-1 text-sm font-medium text-primary">Continue Your Journey</p>
             <p className="text-xs text-muted-foreground">
               {totalSections - totalCompleted} sections remaining. Complete{" "}
-              {Math.min(5, totalSections - totalCompleted)} today to stay on
-              track for your 20-hour goal!
+              {Math.min(5, totalSections - totalCompleted)} today to stay on track for your 20-hour
+              goal!
             </p>
           </div>
         )}
 
         {overallProgress === 100 && (
-          <div className="p-3 bg-[#22c55e]/10 border border-[#22c55e]/20 rounded-lg text-center">
-            <p className="text-sm font-medium text-[#22c55e]">
-              🎉 All Sections Complete!
-            </p>
-            <p className="text-xs text-muted-foreground mt-1">
+          <div className="rounded-lg border border-[#22c55e]/20 bg-[#22c55e]/10 p-3 text-center">
+            <p className="text-sm font-medium text-[#22c55e]">🎉 All Sections Complete!</p>
+            <p className="mt-1 text-xs text-muted-foreground">
               Ready for practice exams and certification assessment
             </p>
           </div>

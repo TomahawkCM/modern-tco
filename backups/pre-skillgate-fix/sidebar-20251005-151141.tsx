@@ -207,8 +207,8 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
           <CollapsibleTrigger asChild>
             <button
               className={cn(
-                "inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-archon-cyan-primary disabled:pointer-events-none disabled:opacity-50",
-                "text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright hover:border-l-2 hover:border-archon-cyan-bright",
+                "focus-visible:ring-archon-cyan-primary inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50",
+                "text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright hover:border-archon-cyan-bright hover:border-l-2",
                 level > 0 && "ml-6 w-[calc(100%-1.5rem)]"
               )}
             >
@@ -235,10 +235,12 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       <div key={item.id}>
         <button
           className={cn(
-            "inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-archon-cyan-primary disabled:pointer-events-none disabled:opacity-50",
+            "focus-visible:ring-archon-cyan-primary inline-flex h-9 w-full items-center justify-start gap-2 whitespace-nowrap rounded-md px-4 py-2 text-left text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50",
             level > 0 && "ml-6 w-[calc(100%-1.5rem)]",
-            isActive && "bg-gradient-to-r from-archon-cyan-primary/20 to-archon-purple-primary/10 text-archon-cyan-bright border-l-2 border-archon-cyan-bright shadow-[0_0_15px_rgba(0,212,255,0.2)]",
-            !isActive && "text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright hover:border-l-2 hover:border-archon-cyan-bright/50"
+            isActive &&
+              "from-archon-cyan-primary/20 to-archon-purple-primary/10 text-archon-cyan-bright border-archon-cyan-bright border-l-2 bg-gradient-to-r shadow-[0_0_15px_rgba(0,212,255,0.2)]",
+            !isActive &&
+              "text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright hover:border-archon-cyan-bright/50 hover:border-l-2"
           )}
           onClick={() => handleItemClick(item)}
         >
@@ -255,17 +257,19 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
   };
 
   const SidebarContent = () => (
-    <div className="flex h-full flex-col bg-gradient-to-b from-archon-bg-panel/95 to-archon-bg-start/95">
+    <div className="from-archon-bg-panel/95 to-archon-bg-start/95 flex h-full flex-col bg-gradient-to-b">
       {/* Profile section - Fixed at top */}
-      <div className="p-4 flex-shrink-0">
-        <div className="glass-card rounded-lg p-3 border-archon-border-bright cyber-border">
+      <div className="flex-shrink-0 p-4">
+        <div className="glass-card border-archon-border-bright cyber-border rounded-lg p-3">
           <div className="flex items-center space-x-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-archon-cyan-bright to-archon-cyan-primary shadow-[0_0_20px_rgba(0,212,255,0.3)]">
+            <div className="from-archon-cyan-bright to-archon-cyan-primary flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br shadow-[0_0_20px_rgba(0,212,255,0.3)]">
               <User className="h-5 w-5 text-white" />
             </div>
             <div>
-              <p className="text-sm font-medium text-archon-text-primary archon-text-glow">Study Progress</p>
-              <div className="flex items-center space-x-2 text-xs text-archon-text-secondary">
+              <p className="text-archon-text-primary archon-text-glow text-sm font-medium">
+                Study Progress
+              </p>
+              <div className="text-archon-text-secondary flex items-center space-x-2 text-xs">
                 <Trophy className="h-3 w-3 text-yellow-400 drop-shadow-[0_0_5px_rgba(250,204,21,0.5)]" />
                 <span>Level 3 Learner</span>
               </div>
@@ -274,16 +278,16 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
 
           {/* Overall progress */}
           <div className="mt-3">
-            <div className="mb-1 flex justify-between text-xs text-archon-text-secondary">
+            <div className="text-archon-text-secondary mb-1 flex justify-between text-xs">
               <span>Overall Progress</span>
               <div className="flex items-center gap-1">
-                <span className="text-sm font-medium text-archon-cyan-bright">62%</span>
+                <span className="text-archon-cyan-bright text-sm font-medium">62%</span>
               </div>
             </div>
-            <div className="relative h-2 w-full overflow-hidden rounded-full bg-archon-cyan-primary/20 border border-archon-cyan-bright/30">
+            <div className="bg-archon-cyan-primary/20 border-archon-cyan-bright/30 relative h-2 w-full overflow-hidden rounded-full border">
               <div
-                className="h-full bg-gradient-to-r from-archon-cyan-bright to-archon-cyan-primary transition-all progress-glow"
-                style={{ width: '62%' }}
+                className="from-archon-cyan-bright to-archon-cyan-primary progress-glow h-full bg-gradient-to-r transition-all"
+                style={{ width: "62%" }}
               />
             </div>
           </div>
@@ -291,10 +295,10 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       </div>
 
       {/* Navigation - Scrollable */}
-      <nav className="flex-1 px-4 pb-4 overflow-y-auto scrollbar-thin scrollbar-thumb-archon-cyan-primary/30 scrollbar-track-transparent">
+      <nav className="scrollbar-thin scrollbar-thumb-archon-cyan-primary/30 scrollbar-track-transparent flex-1 overflow-y-auto px-4 pb-4">
         <div className="space-y-2">{navigationItems.map((item) => renderNavItem(item))}</div>
 
-        <hr className="my-4 h-[1px] w-full shrink-0 bg-archon-border-bright/30" />
+        <hr className="bg-archon-border-bright/30 my-4 h-[1px] w-full shrink-0" />
 
         {/* Study Progress - Only show when actively studying a module */}
         {studySession && (
@@ -307,9 +311,14 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
                     "text-archon-text-secondary hover:bg-archon-cyan-primary/10 hover:text-archon-cyan-bright"
                   )}
                 >
-                  <span className="text-xs font-semibold text-archon-cyan-bright">CURRENT MODULE</span>
+                  <span className="text-archon-cyan-bright text-xs font-semibold">
+                    CURRENT MODULE
+                  </span>
                   <ChevronDown
-                    className={cn("ml-auto h-4 w-4 transition-transform", isStudyProgressExpanded && "rotate-180")}
+                    className={cn(
+                      "ml-auto h-4 w-4 transition-transform",
+                      isStudyProgressExpanded && "rotate-180"
+                    )}
                   />
                 </button>
               </CollapsibleTrigger>
@@ -317,25 +326,25 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
                 <StudyProgressPanel />
               </CollapsibleContent>
             </Collapsible>
-            <hr className="my-4 h-[1px] w-full shrink-0 bg-archon-border-bright/30" />
+            <hr className="bg-archon-border-bright/30 my-4 h-[1px] w-full shrink-0" />
           </div>
         )}
 
         {/* Domain Progress Summary */}
         <div className="space-y-3">
-          <h3 className="px-2 text-sm font-medium text-archon-text-accent flex items-center gap-2">
-            <div className="h-[2px] w-2 bg-archon-cyan-bright rounded-full"></div>
+          <h3 className="text-archon-text-accent flex items-center gap-2 px-2 text-sm font-medium">
+            <div className="bg-archon-cyan-bright h-[2px] w-2 rounded-full"></div>
             Domain Progress
           </h3>
           {domainProgress.map((domain) => (
-            <div key={domain.name} className="space-y-1 px-2 group">
-              <div className="flex justify-between text-xs text-archon-text-secondary group-hover:text-archon-cyan-bright transition-colors">
+            <div key={domain.name} className="group space-y-1 px-2">
+              <div className="text-archon-text-secondary group-hover:text-archon-cyan-bright flex justify-between text-xs transition-colors">
                 <span className="truncate">{domain.name}</span>
                 <span className="font-medium">{domain.progress}%</span>
               </div>
-              <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-archon-cyan-primary/20 border border-archon-border/50">
+              <div className="bg-archon-cyan-primary/20 border-archon-border/50 relative h-1.5 w-full overflow-hidden rounded-full border">
                 <div
-                  className="h-full bg-gradient-to-r from-archon-purple-primary to-archon-cyan-primary transition-all duration-500"
+                  className="from-archon-purple-primary to-archon-cyan-primary h-full bg-gradient-to-r transition-all duration-500"
                   style={{ width: `${domain.progress || 0}%` }}
                 />
               </div>
@@ -344,15 +353,15 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
         </div>
 
         {/* Study streak */}
-        <div className="glass-card mt-4 rounded-lg p-3 border-archon-border-bright/30 hover:border-archon-cyan-bright/50 transition-all">
+        <div className="glass-card border-archon-border-bright/30 hover:border-archon-cyan-bright/50 mt-4 rounded-lg p-3 transition-all">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <div className="p-1.5 bg-orange-500/20 rounded-md">
+              <div className="rounded-md bg-orange-500/20 p-1.5">
                 <Clock className="h-4 w-4 text-orange-400 drop-shadow-[0_0_8px_rgba(251,146,60,0.5)]" />
               </div>
-              <span className="text-sm text-archon-text-primary font-medium">Study Streak</span>
+              <span className="text-archon-text-primary text-sm font-medium">Study Streak</span>
             </div>
-            <Badge className="text-xs bg-gradient-to-r from-archon-cyan-primary to-archon-purple-primary border-archon-cyan-bright/30 text-white">
+            <Badge className="from-archon-cyan-primary to-archon-purple-primary border-archon-cyan-bright/30 bg-gradient-to-r text-xs text-white">
               7 days
             </Badge>
           </div>
@@ -376,16 +385,24 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
         aria-label="Main navigation"
         tabIndex={-1}
       >
-        <div className="h-full border-r border-archon-border-bright/30 backdrop-blur-xl rounded-r-xl shadow-[0_0_30px_rgba(0,212,255,0.1)] bg-gradient-to-b from-archon-bg-panel/98 to-archon-bg-start/98">
+        <div className="border-archon-border-bright/30 from-archon-bg-panel/98 to-archon-bg-start/98 h-full rounded-r-xl border-r bg-gradient-to-b shadow-[0_0_30px_rgba(0,212,255,0.1)] backdrop-blur-xl">
           <SidebarContent />
         </div>
       </aside>
 
       {/* Mobile Sheet Navigation - Overlay */}
-      <Sheet open={isOpen && typeof window !== 'undefined' && window.innerWidth < 768} onOpenChange={onClose}>
-        <SheetContent side="left" className="w-64 border-archon-border-bright/30 backdrop-blur-xl p-0 bg-gradient-to-b from-archon-bg-panel/98 to-archon-bg-start/98">
-          <SheetHeader className="p-4 pb-0 border-b border-archon-border/30">
-            <SheetTitle className="text-archon-text-primary text-left font-bold archon-text-glow">Navigation</SheetTitle>
+      <Sheet
+        open={isOpen && typeof window !== "undefined" && window.innerWidth < 768}
+        onOpenChange={onClose}
+      >
+        <SheetContent
+          side="left"
+          className="border-archon-border-bright/30 from-archon-bg-panel/98 to-archon-bg-start/98 w-64 bg-gradient-to-b p-0 backdrop-blur-xl"
+        >
+          <SheetHeader className="border-archon-border/30 border-b p-4 pb-0">
+            <SheetTitle className="text-archon-text-primary archon-text-glow text-left font-bold">
+              Navigation
+            </SheetTitle>
           </SheetHeader>
           <div className="h-[calc(100%-4rem)]">
             <SidebarContent />

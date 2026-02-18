@@ -1,4 +1,5 @@
 # Budget App - Performance Audit Report
+
 **Date**: November 9, 2025
 **Auditor**: performance-engineer
 **Test Environment**: Production build (npm run build + npm run start)
@@ -16,6 +17,7 @@
 - **SEO**: 100/100 ✅
 
 **Critical Issues**:
+
 - Time to Interactive: 5.8s (Target <3s) - **93% over target**
 - Total Blocking Time: 460ms - **Too high**
 - Largest Contentful Paint: 5.2s - **Too slow**
@@ -28,23 +30,23 @@
 
 ### Category Scores
 
-| Category | Score | Target | Status | Notes |
-|----------|-------|--------|--------|-------|
-| Performance | 69 | 90+ | ⚠️ FAIL | Below target by 21 points |
-| Accessibility | 96 | 95+ | ✅ PASS | Excellent score |
-| Best Practices | 100 | 90+ | ✅ PASS | Perfect score |
-| SEO | 100 | 90+ | ✅ PASS | Perfect score |
+| Category       | Score | Target | Status  | Notes                     |
+| -------------- | ----- | ------ | ------- | ------------------------- |
+| Performance    | 69    | 90+    | ⚠️ FAIL | Below target by 21 points |
+| Accessibility  | 96    | 95+    | ✅ PASS | Excellent score           |
+| Best Practices | 100   | 90+    | ✅ PASS | Perfect score             |
+| SEO            | 100   | 90+    | ✅ PASS | Perfect score             |
 
 ### Core Web Vitals
 
-| Metric | Value | Target | Status | Impact |
-|--------|-------|--------|--------|--------|
-| **First Contentful Paint (FCP)** | 0.9s | <1.8s | ✅ GOOD | Fast initial render |
-| **Largest Contentful Paint (LCP)** | 5.2s | <2.5s | ❌ POOR | **108% over target** |
-| **Total Blocking Time (TBT)** | 460ms | <200ms | ❌ POOR | **130% over target** |
-| **Cumulative Layout Shift (CLS)** | 0 | <0.1 | ✅ GOOD | Perfect stability |
-| **Speed Index** | 1.2s | <3.4s | ✅ GOOD | Fast visual completeness |
-| **Time to Interactive (TTI)** | 5.8s | <3.8s | ❌ POOR | **53% over target** |
+| Metric                             | Value | Target | Status  | Impact                   |
+| ---------------------------------- | ----- | ------ | ------- | ------------------------ |
+| **First Contentful Paint (FCP)**   | 0.9s  | <1.8s  | ✅ GOOD | Fast initial render      |
+| **Largest Contentful Paint (LCP)** | 5.2s  | <2.5s  | ❌ POOR | **108% over target**     |
+| **Total Blocking Time (TBT)**      | 460ms | <200ms | ❌ POOR | **130% over target**     |
+| **Cumulative Layout Shift (CLS)**  | 0     | <0.1   | ✅ GOOD | Perfect stability        |
+| **Speed Index**                    | 1.2s  | <3.4s  | ✅ GOOD | Fast visual completeness |
+| **Time to Interactive (TTI)**      | 5.8s  | <3.8s  | ❌ POOR | **53% over target**      |
 
 ---
 
@@ -52,28 +54,28 @@
 
 ### Production Chunks (Top 20)
 
-| File | Size | Notes |
-|------|------|-------|
-| `8021-aea2598127d0c157.js` | 828KB | ⚠️ **Largest chunk - needs code splitting** |
-| `7661.802c45e121e6218b.js` | 548KB | ⚠️ Heavy dependency |
-| `aaea2bcf.e8c6ebd51bc71d36.js` | 320KB | - |
-| `8372.06ce0ef2ba98d67e.js` | 300KB | - |
-| `279.36b0c2162878b959.js` | 260KB | - |
-| `1025.16e60b66f94d4d8d.js` | 260KB | - |
-| `6894.0c7480fc1c48a24d.js` | 228KB | - |
-| `5303-c558dc4087714026.js` | 220KB | - |
-| `4bd1b696-f2d4e710f64d59e5.js` | 196KB | - |
-| `4512-6bee33551907c45b.js` | 196KB | - |
-| `1454.94b29ac21830d644.js` | 192KB | - |
-| `framework-2c8c022cbba8ff8e.js` | 188KB | React framework (expected) |
-| `6428-05a70ee26bd48c79.js` | 144KB | - |
-| `main-4e5718b5f28662ab.js` | 136KB | Main bundle |
-| `945-04e6864880bf2fa9.js` | 128KB | - |
-| `6365.3f22ff0d2c6af536.js` | 124KB | - |
-| `6504-721d94a3043c047a.js` | 116KB | - |
-| `5889.6e20dfc3bf39525e.js` | 116KB | - |
-| `polyfills-42372ed130431b0a.js` | 112KB | Browser polyfills (expected) |
-| `2885-2aab5ea4e8d1e53d.js` | 112KB | - |
+| File                            | Size  | Notes                                       |
+| ------------------------------- | ----- | ------------------------------------------- |
+| `8021-aea2598127d0c157.js`      | 828KB | ⚠️ **Largest chunk - needs code splitting** |
+| `7661.802c45e121e6218b.js`      | 548KB | ⚠️ Heavy dependency                         |
+| `aaea2bcf.e8c6ebd51bc71d36.js`  | 320KB | -                                           |
+| `8372.06ce0ef2ba98d67e.js`      | 300KB | -                                           |
+| `279.36b0c2162878b959.js`       | 260KB | -                                           |
+| `1025.16e60b66f94d4d8d.js`      | 260KB | -                                           |
+| `6894.0c7480fc1c48a24d.js`      | 228KB | -                                           |
+| `5303-c558dc4087714026.js`      | 220KB | -                                           |
+| `4bd1b696-f2d4e710f64d59e5.js`  | 196KB | -                                           |
+| `4512-6bee33551907c45b.js`      | 196KB | -                                           |
+| `1454.94b29ac21830d644.js`      | 192KB | -                                           |
+| `framework-2c8c022cbba8ff8e.js` | 188KB | React framework (expected)                  |
+| `6428-05a70ee26bd48c79.js`      | 144KB | -                                           |
+| `main-4e5718b5f28662ab.js`      | 136KB | Main bundle                                 |
+| `945-04e6864880bf2fa9.js`       | 128KB | -                                           |
+| `6365.3f22ff0d2c6af536.js`      | 124KB | -                                           |
+| `6504-721d94a3043c047a.js`      | 116KB | -                                           |
+| `5889.6e20dfc3bf39525e.js`      | 116KB | -                                           |
+| `polyfills-42372ed130431b0a.js` | 112KB | Browser polyfills (expected)                |
+| `2885-2aab5ea4e8d1e53d.js`      | 112KB | -                                           |
 
 **Total Initial Load**: ~1.6MB (across 20 largest chunks)
 **Target**: <300KB initial load
@@ -81,14 +83,14 @@
 
 ### Largest Development Dependencies
 
-| Package | Size | Impact |
-|---------|------|--------|
-| `@tensorflow` | 37MB | ⚠️ **Should be lazy loaded** |
-| `recharts` | 2.6MB | ⚠️ Charts library - consider code splitting |
-| `@radix-ui` | 1.9MB | UI components (necessary) |
-| `framer-motion` | 1.0MB | ⚠️ Animations - lazy load where possible |
-| `@supabase` | 1.2MB | Database client (necessary) |
-| `openai` | 1.1MB | AI chatbot (necessary) |
+| Package         | Size  | Impact                                      |
+| --------------- | ----- | ------------------------------------------- |
+| `@tensorflow`   | 37MB  | ⚠️ **Should be lazy loaded**                |
+| `recharts`      | 2.6MB | ⚠️ Charts library - consider code splitting |
+| `@radix-ui`     | 1.9MB | UI components (necessary)                   |
+| `framer-motion` | 1.0MB | ⚠️ Animations - lazy load where possible    |
+| `@supabase`     | 1.2MB | Database client (necessary)                 |
+| `openai`        | 1.1MB | AI chatbot (necessary)                      |
 
 ---
 
@@ -101,6 +103,7 @@
 **Impact**: Users wait 5.8s before page is fully interactive
 
 **Root Causes**:
+
 1. Large JavaScript bundles (1.6MB+ initial load)
 2. Heavy dependencies loaded upfront (TensorFlow, Recharts)
 3. No code splitting for heavy libraries
@@ -109,17 +112,17 @@
 
 ```tsx
 // ❌ CURRENT - All loaded upfront
-import { LineChart } from 'recharts';
-import * as tf from '@tensorflow/tfjs';
+import { LineChart } from "recharts";
+import * as tf from "@tensorflow/tfjs";
 
 // ✅ FIX - Lazy load heavy components
-const LineChart = dynamic(() => import('recharts').then(mod => ({ default: mod.LineChart })), {
+const LineChart = dynamic(() => import("recharts").then((mod) => ({ default: mod.LineChart })), {
   loading: () => <div>Loading chart...</div>,
-  ssr: false
+  ssr: false,
 });
 
-const MLCategorizer = dynamic(() => import('@/lib/categorization/ml-categorizer'), {
-  ssr: false
+const MLCategorizer = dynamic(() => import("@/lib/categorization/ml-categorizer"), {
+  ssr: false,
 });
 ```
 
@@ -134,6 +137,7 @@ const MLCategorizer = dynamic(() => import('@/lib/categorization/ml-categorizer'
 **Impact**: Users see blank/loading screen for 5.2s
 
 **Root Causes**:
+
 1. Heavy components rendering on initial load
 2. Large bundle blocking paint
 3. No image optimization
@@ -141,13 +145,14 @@ const MLCategorizer = dynamic(() => import('@/lib/categorization/ml-categorizer'
 **Recommended Fixes**:
 
 1. **Optimize Images**:
+
    ```tsx
    // ❌ CURRENT
-   <img src="/images/chart.png" />
+   <img src="/images/chart.png" />;
 
    // ✅ FIX - Use Next.js Image
-   import Image from 'next/image';
-   <Image src="/images/chart.png" width={800} height={400} priority />
+   import Image from "next/image";
+   <Image src="/images/chart.png" width={800} height={400} priority />;
    ```
 
 2. **Critical CSS Inlining**:
@@ -169,6 +174,7 @@ const MLCategorizer = dynamic(() => import('@/lib/categorization/ml-categorizer'
 **Impact**: Page feels sluggish, delayed interactions
 
 **Root Causes**:
+
 1. Heavy JavaScript execution on main thread
 2. TensorFlow model initialization blocking
 3. Large component re-renders
@@ -176,18 +182,20 @@ const MLCategorizer = dynamic(() => import('@/lib/categorization/ml-categorizer'
 **Recommended Fixes**:
 
 1. **Lazy Load TensorFlow**:
+
    ```tsx
    // Only load when user activates ML categorization
    const initML = async () => {
-     const { MLCategorizer } = await import('@/lib/categorization/ml-categorizer');
+     const { MLCategorizer } = await import("@/lib/categorization/ml-categorizer");
      return new MLCategorizer();
    };
    ```
 
 2. **Code Splitting by Route**:
+
    ```tsx
    // Budget pages should not load TCO exam modules
-   const BudgetApp = dynamic(() => import('@/app/budget-app/page'));
+   const BudgetApp = dynamic(() => import("@/app/budget-app/page"));
    ```
 
 3. **Memoize Heavy Components**:
@@ -216,11 +224,13 @@ const MLCategorizer = dynamic(() => import('@/lib/categorization/ml-categorizer'
    - Lazy load each budget section
 
 2. **Remove Unused Dependencies**:
+
    ```bash
    npx depcheck
    ```
 
 3. **Bundle Analysis**:
+
    ```bash
    npm run build -- --profile
    npx webpack-bundle-analyzer .next/analyze/bundle-stats.json
@@ -240,19 +250,21 @@ const MLCategorizer = dynamic(() => import('@/lib/categorization/ml-categorizer'
 **Recommendation**: Use Next.js Image component
 
 **Benefits**:
+
 - Automatic WebP conversion
 - Lazy loading by default
 - Responsive srcset generation
 - Proper sizing
 
 **Example**:
+
 ```tsx
 // ❌ CURRENT
-<img src="/logo.png" alt="Logo" className="w-32 h-32" />
+<img src="/logo.png" alt="Logo" className="h-32 w-32" />;
 
 // ✅ FIX
-import Image from 'next/image';
-<Image src="/logo.png" alt="Logo" width={128} height={128} />
+import Image from "next/image";
+<Image src="/logo.png" alt="Logo" width={128} height={128} />;
 ```
 
 ---
@@ -263,11 +275,11 @@ import Image from 'next/image';
 **Recommendation**: Use `next/font` for optimal font loading
 
 ```tsx
-import { Inter } from 'next/font/google';
+import { Inter } from "next/font/google";
 
 const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap', // Prevents FOIT
+  subsets: ["latin"],
+  display: "swap", // Prevents FOIT
 });
 ```
 
@@ -308,17 +320,18 @@ const inter = Inter({
 
 ### Proposed Budgets
 
-| Resource Type | Current | Target | Status |
-|---------------|---------|--------|--------|
-| **Initial JavaScript** | 1.6MB | 300KB | ❌ 5.3x over |
-| **Initial CSS** | ~50KB | 50KB | ✅ On target |
-| **Images (per page)** | Variable | 500KB | ⚠️ Monitor |
-| **Fonts** | ~20KB | 50KB | ✅ Good |
-| **Total Initial Load** | ~1.7MB | 600KB | ❌ 2.8x over |
+| Resource Type          | Current  | Target | Status       |
+| ---------------------- | -------- | ------ | ------------ |
+| **Initial JavaScript** | 1.6MB    | 300KB  | ❌ 5.3x over |
+| **Initial CSS**        | ~50KB    | 50KB   | ✅ On target |
+| **Images (per page)**  | Variable | 500KB  | ⚠️ Monitor   |
+| **Fonts**              | ~20KB    | 50KB   | ✅ Good      |
+| **Total Initial Load** | ~1.7MB   | 600KB  | ❌ 2.8x over |
 
 ### Set Up Performance Budgets
 
 Add to `lighthouserc.json`:
+
 ```json
 {
   "ci": {
@@ -329,12 +342,12 @@ Add to `lighthouserc.json`:
     "assert": {
       "preset": "lighthouse:recommended",
       "assertions": {
-        "categories:performance": ["error", {"minScore": 0.9}],
-        "first-contentful-paint": ["error", {"maxNumericValue": 1800}],
-        "largest-contentful-paint": ["error", {"maxNumericValue": 2500}],
-        "interactive": ["error", {"maxNumericValue": 3800}],
-        "total-blocking-time": ["error", {"maxNumericValue": 200}],
-        "cumulative-layout-shift": ["error", {"maxNumericValue": 0.1}]
+        "categories:performance": ["error", { "minScore": 0.9 }],
+        "first-contentful-paint": ["error", { "maxNumericValue": 1800 }],
+        "largest-contentful-paint": ["error", { "maxNumericValue": 2500 }],
+        "interactive": ["error", { "maxNumericValue": 3800 }],
+        "total-blocking-time": ["error", { "maxNumericValue": 200 }],
+        "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }]
       }
     }
   }
@@ -347,14 +360,15 @@ Add to `lighthouserc.json`:
 
 ### Phase 1: Quick Wins (2-3 hours) - **DO FIRST**
 
-| Task | Impact | Effort | Priority |
-|------|--------|--------|----------|
-| Lazy load TensorFlow | -300KB, TTI -1.5s | Low | P1 |
-| Lazy load Recharts on chart pages | -200KB, TTI -1s | Low | P1 |
-| Code split budget app routes | -400KB | Medium | P1 |
-| Use Next.js Image for all images | LCP -1s | Low | P1 |
+| Task                              | Impact            | Effort | Priority |
+| --------------------------------- | ----------------- | ------ | -------- |
+| Lazy load TensorFlow              | -300KB, TTI -1.5s | Low    | P1       |
+| Lazy load Recharts on chart pages | -200KB, TTI -1s   | Low    | P1       |
+| Code split budget app routes      | -400KB            | Medium | P1       |
+| Use Next.js Image for all images  | LCP -1s           | Low    | P1       |
 
 **Expected Results After Phase 1**:
+
 - Performance Score: 69 → ~82 (+19%)
 - TTI: 5.8s → ~3.8s (-34%)
 - LCP: 5.2s → ~3.2s (-38%)
@@ -362,15 +376,16 @@ Add to `lighthouserc.json`:
 
 ### Phase 2: Deep Optimization (4-6 hours) - **Before UAT**
 
-| Task | Impact | Effort | Priority |
-|------|--------|--------|----------|
-| Implement route-based code splitting | -500KB | High | P1 |
-| Tree shake unused code | -100KB | Medium | P2 |
-| Optimize bundle with webpack analyzer | -200KB | High | P1 |
-| Memoize heavy components | TBT -150ms | Medium | P2 |
-| Add Web Workers for ML | TBT -100ms | High | P2 |
+| Task                                  | Impact     | Effort | Priority |
+| ------------------------------------- | ---------- | ------ | -------- |
+| Implement route-based code splitting  | -500KB     | High   | P1       |
+| Tree shake unused code                | -100KB     | Medium | P2       |
+| Optimize bundle with webpack analyzer | -200KB     | High   | P1       |
+| Memoize heavy components              | TBT -150ms | Medium | P2       |
+| Add Web Workers for ML                | TBT -100ms | High   | P2       |
 
 **Expected Results After Phase 2**:
+
 - Performance Score: 82 → ~91 (+11%)
 - TTI: 3.8s → ~2.5s (-34%)
 - TBT: 460ms → ~180ms (-61%)
@@ -378,12 +393,12 @@ Add to `lighthouserc.json`:
 
 ### Phase 3: Fine-tuning (2-3 hours) - **Post-launch**
 
-| Task | Impact | Effort | Priority |
-|------|--------|--------|----------|
-| Implement service worker caching | FCP -200ms | Medium | P2 |
-| Add resource hints (preload/prefetch) | LCP -300ms | Low | P2 |
-| Optimize CSS delivery | FCP -100ms | Low | P3 |
-| Add CDN for static assets | All metrics -10% | High | P2 |
+| Task                                  | Impact           | Effort | Priority |
+| ------------------------------------- | ---------------- | ------ | -------- |
+| Implement service worker caching      | FCP -200ms       | Medium | P2       |
+| Add resource hints (preload/prefetch) | LCP -300ms       | Low    | P2       |
+| Optimize CSS delivery                 | FCP -100ms       | Low    | P3       |
+| Add CDN for static assets             | All metrics -10% | High   | P2       |
 
 ---
 
@@ -392,6 +407,7 @@ Add to `lighthouserc.json`:
 ### Before Each Optimization
 
 1. **Baseline Lighthouse Run**:
+
    ```bash
    npx lighthouse http://localhost:3000/budget-app --output=json --output-path=./lighthouse-before.json
    ```
@@ -399,6 +415,7 @@ Add to `lighthouserc.json`:
 2. **Implement Optimization**
 
 3. **After Lighthouse Run**:
+
    ```bash
    npx lighthouse http://localhost:3000/budget-app --output=json --output-path=./lighthouse-after.json
    ```
@@ -459,6 +476,7 @@ npm install -D size-limit @size-limit/preset-app
 ### Opportunities (Automated Recommendations)
 
 From Lighthouse JSON report (`lighthouse-budget-app.json`):
+
 - Eliminate render-blocking resources
 - Reduce unused JavaScript
 - Properly size images
@@ -480,6 +498,7 @@ From Lighthouse JSON report (`lighthouse-budget-app.json`):
 **Auditor**: performance-engineer
 **Status**: ⚠️ **NEEDS OPTIMIZATION** - P1 performance issues
 **Next Steps**:
+
 1. Implement Phase 1 optimizations (quick wins)
 2. Re-run Lighthouse to verify improvements
 3. Proceed to Phase 2 if needed
