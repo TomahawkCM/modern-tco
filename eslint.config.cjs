@@ -1,5 +1,3 @@
-require("@rushstack/eslint-patch/modern-module-resolution");
-
 const js = require("@eslint/js");
 const { FlatCompat } = require("@eslint/eslintrc");
 const tseslint = require("typescript-eslint");
