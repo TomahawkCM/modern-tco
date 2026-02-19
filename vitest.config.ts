@@ -16,6 +16,8 @@ export default defineConfig({
       // Run all Vitest tests in tests/ folder
       "tests/**/*.vitest.{ts,tsx}",
       "tests/**/*.test.{ts,tsx}",
+      // Also run tests co-located in src/
+      "src/**/__tests__/*.test.{ts,tsx}",
     ],
     exclude: ["node_modules/**", ".next/**"],
     coverage: {

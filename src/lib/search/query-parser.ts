@@ -10,6 +10,7 @@
  */
 
 import { normalizeText } from "./text-utils";
+import { canonicalizeQuery, type LocalizedOperators } from "./i18n/locale-operators";
 
 export interface ParsedFilters {
   amountMin?: number;
@@ -152,18 +153,18 @@ const FILTER_PATTERNS = {
   // $50-100, $>50, $<100, over $50, under $100
   dollarAmount:
     /(?:\$([<>]=?)?(\d+(?:\.\d+)?)?(?:\.\.|-)?(\d+(?:\.\d+)?)?|(?:over|above|more\s+than)\s+\$?(\d+(?:\.\d+)?)|(?:under|below|less\s+than)\s+\$?(\d+(?:\.\d+)?))/gi,
-  // category:groceries, cat:food, category:"Food & Dining"
-  category: /(?:category|cat):(?:"([^"]+)"|(\w+))/gi,
+  // category:groceries, cat:food, category:"Food & Dining", カテゴリー:食品
+  category: /(?:category|cat):(?:"([^"]+)"|([^\s"]+))/gi,
   // date:last30, date:thismonth
   date: /date:(\w+)/gi,
   // account:checking, acc:savings, account:"My Savings"
-  account: /(?:account|acc):(?:"([^"]+)"|(\w+))/gi,
+  account: /(?:account|acc):(?:"([^"]+)"|([^\s"]+))/gi,
   // type:income, type:expense
   type: /type:(income|expense)/gi,
   // tag:vacation, tag:business, tag:"road trip"
-  tag: /tag:(?:"([^"]+)"|(\w+))/gi,
+  tag: /tag:(?:"([^"]+)"|([^\s"]+))/gi,
   // merchant:amazon, from:starbucks, merchant:"Whole Foods"
-  merchant: /(?:merchant|from):(?:"([^"]+)"|(\w+))/gi,
+  merchant: /(?:merchant|from):(?:"([^"]+)"|([^\s"]+))/gi,
   // is:recurring, is:split
   is: /is:(recurring|split|income|expense)/gi,
 };
@@ -178,9 +179,21 @@ const NEGATION_PATTERNS = {
 };
 
 /**
- * Parse a search query into structured filters and remaining text
+ * Parse a search query into structured filters and remaining text.
+ *
+ * @param query - Raw user query
+ * @param localizedOps - Optional locale operator map for canonicalization.
+ *   When provided, localized operators (e.g. "betrag:" in German) are
+ *   replaced with canonical English before parsing.
  */
-export function parseSearchQuery(query: string): ParsedQuery {
+export function parseSearchQuery(
+  query: string,
+  localizedOps?: LocalizedOperators | null
+): ParsedQuery {
+  // Canonicalize localized operators to English before parsing
+  if (localizedOps) {
+    query = canonicalizeQuery(query, localizedOps);
+  }
   const filters: ParsedFilters = {};
   let remainingQuery = query;
   let hasStructuredFilters = false;
@@ -470,14 +483,29 @@ export function formatParsedQuery(parsed: ParsedQuery): string {
 }
 
 /**
- * Get available filter suggestions for autocomplete
+ * Get available filter suggestions for autocomplete.
+ *
+ * @param partial - The partial query to suggest completions for
+ * @param localizedOps - Optional localized operators for locale-aware suggestions
  */
-export function getFilterSuggestions(partial: string): string[] {
+export function getFilterSuggestions(
+  partial: string,
+  localizedOps?: LocalizedOperators | null
+): string[] {
   const suggestions: string[] = [];
   const lowerPartial = partial.toLowerCase();
 
-  // Suggest filter prefixes
+  // Build locale-aware prefixes
   const prefixes = ["amount:", "category:", "date:", "account:", "type:", "tag:", "merchant:"];
+  if (localizedOps) {
+    for (const [localized, canonical] of Object.entries(localizedOps.operators)) {
+      prefixes.push(`${localized}:`);
+      // Also suggest the canonical if user is typing localized
+      if (lowerPartial.startsWith(localized)) {
+        prefixes.push(`${canonical}:`);
+      }
+    }
+  }
 
   for (const prefix of prefixes) {
     if (prefix.startsWith(lowerPartial)) {
@@ -485,13 +513,25 @@ export function getFilterSuggestions(partial: string): string[] {
     }
   }
 
-  // Suggest amount operators
-  if (lowerPartial.startsWith("amount:") || lowerPartial.startsWith("$")) {
+  // Suggest amount operators (match both canonical and localized)
+  const amountPrefixes = ["amount:"];
+  if (localizedOps?.operators) {
+    for (const [localized, canonical] of Object.entries(localizedOps.operators)) {
+      if (canonical === "amount") amountPrefixes.push(`${localized}:`);
+    }
+  }
+  if (amountPrefixes.some((p) => lowerPartial.startsWith(p)) || lowerPartial.startsWith("$")) {
     suggestions.push("amount:>100", "amount:<50", "amount:50-100", "$50-100");
   }
 
   // Suggest date shortcuts
-  if (lowerPartial.startsWith("date:")) {
+  const datePrefixes = ["date:"];
+  if (localizedOps?.operators) {
+    for (const [localized, canonical] of Object.entries(localizedOps.operators)) {
+      if (canonical === "date") datePrefixes.push(`${localized}:`);
+    }
+  }
+  if (datePrefixes.some((p) => lowerPartial.startsWith(p))) {
     suggestions.push(
       "date:today",
       "date:yesterday",
@@ -504,7 +544,13 @@ export function getFilterSuggestions(partial: string): string[] {
   }
 
   // Suggest types
-  if (lowerPartial.startsWith("type:") || lowerPartial.startsWith("is:")) {
+  const typePrefixes = ["type:", "is:"];
+  if (localizedOps?.operators) {
+    for (const [localized, canonical] of Object.entries(localizedOps.operators)) {
+      if (canonical === "type" || canonical === "is") typePrefixes.push(`${localized}:`);
+    }
+  }
+  if (typePrefixes.some((p) => lowerPartial.startsWith(p))) {
     suggestions.push("type:income", "type:expense", "is:recurring");
   }
 

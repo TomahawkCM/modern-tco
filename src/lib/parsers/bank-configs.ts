@@ -21,6 +21,9 @@ export const CANADIAN_BANKS: Record<string, BankConfig> = {
     amountMultiplier: -1, // Flip sign: negative in CSV means expense
     hasHeader: true,
     skipRows: 0,
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 3,
   },
 
   rbc: {
@@ -32,6 +35,9 @@ export const CANADIAN_BANKS: Record<string, BankConfig> = {
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 2,
   },
 
   scotiabank: {
@@ -65,6 +71,9 @@ export const CANADIAN_BANKS: Record<string, BankConfig> = {
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 2,
   },
 
   simplii: {
@@ -103,6 +112,9 @@ export const AMERICAN_BANKS: Record<string, BankConfig> = {
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 2,
   },
 
   bankofamerica: {
@@ -114,6 +126,9 @@ export const AMERICAN_BANKS: Record<string, BankConfig> = {
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 2,
   },
 
   wellsfargo: {
@@ -125,6 +140,9 @@ export const AMERICAN_BANKS: Record<string, BankConfig> = {
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 2,
   },
 
   citibank: {
@@ -176,6 +194,9 @@ export const UK_BANKS: Record<string, BankConfig> = {
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 2,
   },
 
   // ✅ Barclays UK - Alternative format with Number/Sort Code
@@ -200,6 +221,9 @@ export const UK_BANKS: Record<string, BankConfig> = {
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 2,
   },
 
   // ✅ HSBC UK Credit Card
@@ -266,6 +290,9 @@ export const EU_BANKS: Record<string, BankConfig> = {
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 2,
   },
 
   // ✅ N26 Alternative format
@@ -290,6 +317,9 @@ export const EU_BANKS: Record<string, BankConfig> = {
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 2,
   },
 
   // ✅ Revolut - Alternative format
@@ -368,6 +398,9 @@ export const AU_BANKS: Record<string, BankConfig> = {
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 2,
   },
 
   // ✅ CommBank - Alternative format
@@ -392,6 +425,9 @@ export const AU_BANKS: Record<string, BankConfig> = {
     amountMultiplier: 1,
     hasHeader: true,
     skipRows: 0,
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 2,
   },
 
   // ✅ ANZ Alternative format
@@ -554,6 +590,9 @@ export const SINGAPORE_BANKS: Record<string, BankConfig> = {
     skipRows: 0,
     encoding: "UTF-8",
     region: "ASIA",
+    verified: true,
+    verifiedDate: "2026-02-17",
+    sampleRowCount: 2,
   },
 
   // ✅ DBS/POSB - Consumer banking
@@ -1226,4 +1265,30 @@ export function getAsianBanks(): Record<string, BankConfig> {
 export function getBankEncoding(bankKey: string): string {
   const config = getBankConfig(bankKey);
   return config?.encoding || "UTF-8";
+}
+
+/**
+ * Check if a bank config has been verified with sample data
+ */
+export function isBankVerified(bankKey: string): boolean {
+  const config = getBankConfig(bankKey);
+  return config?.verified === true;
+}
+
+/**
+ * Get all verified bank keys
+ */
+export function getVerifiedBankKeys(): string[] {
+  return Object.entries(ALL_BANKS)
+    .filter(([, config]) => config.verified === true)
+    .map(([key]) => key);
+}
+
+/**
+ * Get all unverified bank keys
+ */
+export function getUnverifiedBankKeys(): string[] {
+  return Object.entries(ALL_BANKS)
+    .filter(([, config]) => !config.verified)
+    .map(([key]) => key);
 }

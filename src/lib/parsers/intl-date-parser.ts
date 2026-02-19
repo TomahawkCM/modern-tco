@@ -757,3 +757,122 @@ function isReasonableDate(date: Date): boolean {
 
   return date >= tenYearsAgo && date <= nearFuture;
 }
+
+// ============================================================================
+// Batch Date Disambiguation
+// ============================================================================
+
+export type DateOrder = "DMY" | "MDY" | "YMD" | "ambiguous";
+
+/**
+ * Analyze a column of date strings to determine the most likely date format.
+ * Examines all rows — if ANY row has a day > 12, locks to DD/MM (DMY).
+ * If ANY row has a month > 12 in second position, locks to MM/DD (MDY).
+ * Falls back to locale hint from bank config region.
+ *
+ * @param dateStrings - Array of date strings from the column
+ * @param regionHint - Optional region from bank config ("NA", "EU", "UK", "AU", "ASIA")
+ * @returns Detected date order
+ */
+export function disambiguateDateFormat(
+  dateStrings: string[],
+  regionHint?: "NA" | "EU" | "UK" | "AU" | "ASIA"
+): DateOrder {
+  // Only analyze numeric date patterns (DD/MM/YYYY, MM/DD/YYYY)
+  const numericPattern = /^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})$/;
+
+  let hasDayAbove12InFirst = false;
+  let hasDayAbove12InSecond = false;
+  let allAmbiguous = true;
+
+  for (const str of dateStrings) {
+    const match = str.trim().match(numericPattern);
+    if (!match) continue;
+
+    const first = parseInt(match[1], 10);
+    const second = parseInt(match[2], 10);
+
+    if (first > 12 && first <= 31) {
+      // First position has value > 12 → must be day → DD/MM format
+      hasDayAbove12InFirst = true;
+      allAmbiguous = false;
+    }
+    if (second > 12 && second <= 31) {
+      // Second position has value > 12 → must be day → MM/DD format
+      hasDayAbove12InSecond = true;
+      allAmbiguous = false;
+    }
+  }
+
+  // Contradictory signals (shouldn't happen with clean data)
+  if (hasDayAbove12InFirst && hasDayAbove12InSecond) {
+    return "ambiguous";
+  }
+
+  // Clear signal from data
+  if (hasDayAbove12InFirst) return "DMY";
+  if (hasDayAbove12InSecond) return "MDY";
+
+  // All values <= 12 in both positions — use region hint
+  if (allAmbiguous && regionHint) {
+    switch (regionHint) {
+      case "NA":
+        return "MDY"; // US/Canada typically use MM/DD
+      case "EU":
+      case "UK":
+      case "AU":
+      case "ASIA":
+        return "DMY"; // Most of the world uses DD/MM
+    }
+  }
+
+  return "ambiguous";
+}
+
+/**
+ * Parse a date string using the detected date order.
+ * Should be used after disambiguateDateFormat() resolves the column format.
+ *
+ * @param str - Date string
+ * @param dateOrder - Resolved date order from disambiguateDateFormat()
+ * @returns Parsed Date or null
+ */
+export function parseDateWithOrder(str: string, dateOrder: DateOrder): Date | null {
+  if (!str || typeof str !== "string") return null;
+  const cleaned = str.trim();
+
+  const match = cleaned.match(/^(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})$/);
+  if (!match) {
+    // Not a numeric date — fall back to general parsing
+    return parseDate(cleaned);
+  }
+
+  const a = parseInt(match[1], 10);
+  const b = parseInt(match[2], 10);
+  let year = parseInt(match[3], 10);
+  if (year < 100) year = year < 50 ? 2000 + year : 1900 + year;
+
+  let date: Date | null = null;
+
+  switch (dateOrder) {
+    case "DMY":
+      date = new Date(year, b - 1, a);
+      if (isValidDate(date, year, b, a) && isReasonableDate(date)) return date;
+      break;
+    case "MDY":
+      date = new Date(year, a - 1, b);
+      if (isValidDate(date, year, a, b) && isReasonableDate(date)) return date;
+      break;
+    case "ambiguous":
+    default:
+      // Try DMY first (more common worldwide), then MDY
+      date = new Date(year, b - 1, a);
+      if (isValidDate(date, year, b, a) && isReasonableDate(date)) return date;
+      date = new Date(year, a - 1, b);
+      if (isValidDate(date, year, a, b) && isReasonableDate(date)) return date;
+      break;
+  }
+
+  // Fall through to general parser
+  return parseDate(cleaned);
+}

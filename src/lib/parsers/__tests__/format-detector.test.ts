@@ -1,9 +1,9 @@
 /**
  * Unit Tests for Format Detector Module
- * Tests content-based format detection for CSV, OFX, QFX, QBO
+ * Tests content-based format detection for CSV, OFX, QFX, QBO, QIF, MT940, CAMT.053
  */
 
-import { describe, it, expect } from "@jest/globals";
+import { describe, it, expect } from "vitest";
 import {
   detectFromContent,
   validateFormat,
@@ -114,15 +114,46 @@ VERSION:102
   });
 
   // ========================================
-  // detectFromContent() - QBO Tests
+  // detectFromContent() - QIF Tests
   // ========================================
-  describe("detectFromContent() - QBO Format", () => {
-    it("should detect QBO format with !Type:", () => {
-      const qboContent = `!Type:Bank
+  describe("detectFromContent() - QIF Format", () => {
+    it("should detect QIF format with !Type: and ^ delimiters", () => {
+      const qifContent = `!Type:Bank
 D01/01/2025
 T-50.00
 PAMAZON.COM
 ^`;
+
+      const result = detectFromContent(qifContent);
+      expect(result.format).toBe("qif");
+      expect(result.confidence).toBeGreaterThanOrEqual(0.8);
+      expect(result.signature).toBe("QIF");
+    });
+
+    it("should detect QIF with multiple records", () => {
+      const qifContent = `!Type:Bank
+D01/15/2025
+T-25.00
+PStarbucks
+^
+D01/16/2025
+T-100.00
+PGrocery Store
+^`;
+
+      const result = detectFromContent(qifContent);
+      expect(result.format).toBe("qif");
+      expect(result.confidence).toBeGreaterThanOrEqual(0.8);
+    });
+  });
+
+  // ========================================
+  // detectFromContent() - QBO Tests
+  // ========================================
+  describe("detectFromContent() - QBO Format", () => {
+    it("should detect QBO format with !Type: but no ^ delimiters", () => {
+      const qboContent = `!Type:Bank
+Some content without QIF markers`;
 
       const result = detectFromContent(qboContent);
       expect(result.format).toBe("qbo");
@@ -132,11 +163,76 @@ PAMAZON.COM
 
     it("should handle case-insensitive QBO detection", () => {
       const qboContent = `!type:Bank
-D01/01/2025`;
+Some other content`;
 
       const result = detectFromContent(qboContent);
       expect(result.format).toBe("qbo");
       expect(result.confidence).toBeGreaterThanOrEqual(0.8);
+    });
+  });
+
+  // ========================================
+  // detectFromContent() - MT940 Tests
+  // ========================================
+  describe("detectFromContent() - MT940 Format", () => {
+    it("should detect MT940 with :20: tag", () => {
+      const mt940Content = `:20:STMT2025010601
+:25:DEUTDEFF/1234567890
+:28C:1/1
+:60F:C250105EUR1234,56
+:61:250106D50,00NTRFNONREF
+:86:Payment to supplier
+:62F:C250106EUR1184,56`;
+
+      const result = detectFromContent(mt940Content);
+      expect(result.format).toBe("mt940");
+      expect(result.confidence).toBeGreaterThanOrEqual(0.9);
+      expect(result.signature).toBe("MT940");
+    });
+
+    it("should detect MT940 with SWIFT envelope {1:", () => {
+      const mt940Content = `{1:F01DEUTDEFFAXXX0000000000}
+{2:O9400000000000DEUTDEFFAXXX00000000000000000000N}
+{4:
+:20:STMT001
+:25:1234567890`;
+
+      const result = detectFromContent(mt940Content);
+      expect(result.format).toBe("mt940");
+      expect(result.confidence).toBeGreaterThanOrEqual(0.9);
+    });
+  });
+
+  // ========================================
+  // detectFromContent() - CAMT.053 Tests
+  // ========================================
+  describe("detectFromContent() - CAMT.053 Format", () => {
+    it("should detect CAMT.053 XML with namespace", () => {
+      const camtContent = `<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02">
+  <BkToCstmrStmt>
+    <GrpHdr>
+      <MsgId>MSG001</MsgId>
+    </GrpHdr>
+  </BkToCstmrStmt>
+</Document>`;
+
+      const result = detectFromContent(camtContent);
+      expect(result.format).toBe("camt053");
+      expect(result.confidence).toBeGreaterThanOrEqual(0.9);
+      expect(result.signature).toBe("CAMT053");
+    });
+
+    it("should detect CAMT.053 without XML declaration", () => {
+      const camtContent = `<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.06">
+  <BkToCstmrStmt>
+    <GrpHdr><MsgId>MSG002</MsgId></GrpHdr>
+  </BkToCstmrStmt>
+</Document>`;
+
+      const result = detectFromContent(camtContent);
+      expect(result.format).toBe("camt053");
+      expect(result.confidence).toBeGreaterThanOrEqual(0.9);
     });
   });
 
@@ -282,6 +378,36 @@ T-50.00`;
       expect(result.errors).toContain("Missing !Type: declaration");
     });
 
+    it("should validate correct QIF content", () => {
+      const validQIF = `!Type:Bank
+D01/01/2025
+T-50.00
+PStarbucks
+^`;
+      const result = validateFormat(validQIF, "qif");
+      expect(result.isValid).toBe(true);
+      expect(result.errors).toHaveLength(0);
+    });
+
+    it("should validate correct MT940 content", () => {
+      const validMT940 = `:20:STMT001
+:25:DEUTDEFF/1234567890
+:60F:C250105EUR1234,56`;
+      const result = validateFormat(validMT940, "mt940");
+      expect(result.isValid).toBe(true);
+      expect(result.errors).toHaveLength(0);
+    });
+
+    it("should validate correct CAMT.053 content", () => {
+      const validCAMT = `<?xml version="1.0"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.02">
+  <BkToCstmrStmt></BkToCstmrStmt>
+</Document>`;
+      const result = validateFormat(validCAMT, "camt053");
+      expect(result.isValid).toBe(true);
+      expect(result.errors).toHaveLength(0);
+    });
+
     it("should reject unknown format", () => {
       const content = "Some random content";
       const result = validateFormat(content, "unknown");
@@ -299,6 +425,9 @@ T-50.00`;
       expect(getFormatDisplayName("ofx")).toBe("OFX (Open Financial Exchange)");
       expect(getFormatDisplayName("qfx")).toBe("QFX (Quicken)");
       expect(getFormatDisplayName("qbo")).toBe("QBO (QuickBooks)");
+      expect(getFormatDisplayName("qif")).toBe("QIF (Quicken Interchange Format)");
+      expect(getFormatDisplayName("mt940")).toBe("MT940 (SWIFT Bank Statement)");
+      expect(getFormatDisplayName("camt053")).toBe("CAMT.053 (ISO 20022 Bank Statement)");
       expect(getFormatDisplayName("unknown")).toBe("Unknown Format");
     });
 
@@ -307,13 +436,18 @@ T-50.00`;
       expect(supported).toContain("csv");
       expect(supported).toContain("ofx");
       expect(supported).toContain("qfx");
-      // QBO might not be fully supported yet
+      expect(supported).toContain("qif");
+      expect(supported).toContain("mt940");
+      expect(supported).toContain("camt053");
     });
 
     it("isFormatSupported() should correctly identify supported formats", () => {
       expect(isFormatSupported("csv")).toBe(true);
       expect(isFormatSupported("ofx")).toBe(true);
       expect(isFormatSupported("qfx")).toBe(true);
+      expect(isFormatSupported("qif")).toBe(true);
+      expect(isFormatSupported("mt940")).toBe(true);
+      expect(isFormatSupported("camt053")).toBe(true);
       expect(isFormatSupported("unknown")).toBe(false);
     });
   });

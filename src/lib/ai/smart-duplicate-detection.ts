@@ -35,7 +35,8 @@ export interface DuplicateMatch {
   existingTransaction: Transaction;
   confidence: number; // 0-1 scale
   reason: string; // Explanation of why they match
-  matchType: "exact" | "fuzzy" | "semantic" | "merchant" | "fitid";
+  matchType: "exact" | "fuzzy" | "semantic" | "merchant" | "fitid" | "cross-format";
+  isRefund?: boolean; // True if this is a refund pair, not a duplicate
 }
 
 export interface SmartDuplicateDetectionOptions {
@@ -359,6 +360,88 @@ function detectMerchantMatches(
 }
 
 // ============================================================================
+// Cross-Format Duplicate Detection
+// ============================================================================
+
+/**
+ * Detect duplicates across different file formats (e.g., CSV + OFX overlap).
+ * Uses looser matching: date ±1 day, exact amount, fuzzy description > 0.6
+ */
+function detectCrossFormatMatches(
+  newTransactions: ParsedTransaction[],
+  existingTransactions: Transaction[]
+): DuplicateMatch[] {
+  const matches: DuplicateMatch[] = [];
+
+  for (const newTx of newTransactions) {
+    if (newTx.isDuplicate) continue;
+
+    for (const existingTx of existingTransactions) {
+      // Check for refund first
+      if (isLikelyRefund(newTx, existingTx)) continue;
+
+      // Date tolerance: ±1 day (cross-format dates may differ by a day)
+      const dateDiff = Math.abs(newTx.date.getTime() - existingTx.date.getTime());
+      const daysDiff = dateDiff / (24 * 60 * 60 * 1000);
+      if (daysDiff > 1) continue;
+
+      // Amount must match exactly
+      const amountDiff = Math.abs(newTx.amount - existingTx.amount);
+      if (amountDiff > 0.01) continue;
+
+      // Fuzzy description match with lower threshold (cross-format descriptions vary more)
+      const descriptionScore = fuzzyMatchScore(
+        cleanDescription(newTx.description),
+        cleanDescription(existingTx.description)
+      );
+
+      if (descriptionScore >= 0.6) {
+        const confidence = Math.min(0.85, 0.6 + descriptionScore * 0.25);
+        matches.push({
+          newTransaction: newTx,
+          existingTransaction: existingTx,
+          confidence,
+          reason: `Cross-format match: same amount, ${daysDiff === 0 ? "same" : "adjacent"} date, description ${(descriptionScore * 100).toFixed(0)}% similar`,
+          matchType: "cross-format",
+        });
+      }
+    }
+  }
+
+  return matches;
+}
+
+/**
+ * Detect refund pairs — transactions with opposite signs but similar details.
+ * Returns them as informational matches (not duplicates).
+ */
+function detectRefundPairs(
+  newTransactions: ParsedTransaction[],
+  existingTransactions: Transaction[]
+): DuplicateMatch[] {
+  const matches: DuplicateMatch[] = [];
+
+  for (const newTx of newTransactions) {
+    if (newTx.isDuplicate) continue;
+
+    for (const existingTx of existingTransactions) {
+      if (isLikelyRefund(newTx, existingTx)) {
+        matches.push({
+          newTransaction: newTx,
+          existingTransaction: existingTx,
+          confidence: 0.8,
+          reason: `This may be a refund of "${existingTx.description}" (${existingTx.date.toLocaleDateString()})`,
+          matchType: "exact",
+          isRefund: true,
+        });
+      }
+    }
+  }
+
+  return matches;
+}
+
+// ============================================================================
 // AI-Powered Duplicate Detection
 // ============================================================================
 
@@ -593,6 +676,35 @@ export async function detectDuplicatesEnhanced(
       if (match.confidence >= 0.7 && match.confidence < 0.9) {
         match.newTransaction.requiresReview = true;
       }
+    }
+  });
+
+  // Step 3.5: Cross-format matches (CSV + OFX overlap detection)
+  const crossFormatMatches = detectCrossFormatMatches(newTransactions, existingTransactions);
+  console.log("[SmartDuplicate] Found", crossFormatMatches.length, "cross-format matches");
+
+  crossFormatMatches.forEach((match) => {
+    if (!match.newTransaction.isDuplicate) {
+      match.newTransaction.isDuplicate = match.confidence >= 0.85;
+      match.newTransaction.confidence = match.confidence;
+      match.newTransaction.duplicateReason = match.reason;
+      match.newTransaction.matchedTransactionId = match.existingTransaction.id;
+
+      if (match.confidence >= 0.6 && match.confidence < 0.85) {
+        match.newTransaction.requiresReview = true;
+      }
+    }
+  });
+
+  // Step 3.6: Refund pair detection (informational, not flagged as duplicates)
+  const refundPairs = detectRefundPairs(newTransactions, existingTransactions);
+  console.log("[SmartDuplicate] Found", refundPairs.length, "potential refund pairs");
+
+  refundPairs.forEach((match) => {
+    if (!match.newTransaction.isDuplicate && !match.newTransaction.requiresReview) {
+      // Don't flag as duplicate, but add informational note
+      match.newTransaction.duplicateReason = match.reason;
+      match.newTransaction.matchedTransactionId = match.existingTransaction.id;
     }
   });
 

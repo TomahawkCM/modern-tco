@@ -38,7 +38,8 @@ export type ValidationIssueType =
   | "missing_description"
   | "missing_date"
   | "unusual_pattern"
-  | "round_number_cluster";
+  | "round_number_cluster"
+  | "balance_mismatch";
 
 export interface ValidationIssue {
   transactionIndex: number; // Index in the import batch
@@ -326,6 +327,51 @@ function findRoundNumberClusters(transactions: ParsedTransaction[]): ValidationI
         autoFixable: false,
       });
     }
+  }
+
+  return issues;
+}
+
+// ============================================================================
+// Running Balance Validation
+// ============================================================================
+
+/**
+ * Validate transactions against opening/closing balance.
+ * If the statement includes balance info, verify computed balance matches.
+ *
+ * @param transactions - Sorted transactions (oldest first)
+ * @param openingBalance - Opening balance from statement
+ * @param closingBalance - Closing balance from statement
+ */
+export function validateRunningBalance(
+  transactions: ParsedTransaction[],
+  openingBalance: number,
+  closingBalance: number
+): ValidationIssue[] {
+  const issues: ValidationIssue[] = [];
+
+  // Compute running balance from transactions
+  let computedBalance = openingBalance;
+  for (const tx of transactions) {
+    computedBalance += tx.amount;
+  }
+
+  // Compare with stated closing balance (tolerance: $0.01)
+  const discrepancy = Math.abs(computedBalance - closingBalance);
+  if (discrepancy > 0.01) {
+    issues.push({
+      transactionIndex: -1, // Not tied to a specific transaction
+      transaction: transactions[0], // Use first transaction as reference
+      type: "balance_mismatch",
+      severity: discrepancy > 100 ? "critical" : "warning",
+      title: "Balance Discrepancy Detected",
+      message: `Computed closing balance ($${computedBalance.toFixed(2)}) differs from stated closing balance ($${closingBalance.toFixed(2)}) by $${discrepancy.toFixed(2)}. This may indicate missing transactions or a parsing error.`,
+      suggestion:
+        "Compare the transaction count and amounts against your bank statement to identify missing or incorrectly parsed transactions.",
+      confidence: 0.9,
+      autoFixable: false,
+    });
   }
 
   return issues;

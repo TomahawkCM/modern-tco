@@ -34,6 +34,8 @@ import type {
   ExpenseSplit,
   PaycheckPlan,
   DebtScenario,
+  ImportedFITID,
+  MerchantCorrection,
 } from "@/types/budget";
 import type { InAppNotification } from "@/types/notifications";
 import type { Profile, ActivityLogEntry } from "@/types/profile";
@@ -143,6 +145,9 @@ export class BudgetDatabase extends Dexie {
   expenseSplits!: Table<ExpenseSplit>;
   paycheckPlans!: Table<PaycheckPlan>;
   debtScenarios!: Table<DebtScenario>;
+  // Phase 21: Import improvements — persistent FITID + merchant corrections
+  importedFITIDs!: Table<ImportedFITID>;
+  merchantCorrections!: Table<MerchantCorrection>;
 
   constructor() {
     super(getDatabaseName());
@@ -684,6 +689,51 @@ export class BudgetDatabase extends Dexie {
       expenseSplits: "id, transactionId, personId, settled, createdAt",
       paycheckPlans: "id, schedule, createdAt",
       debtScenarios: "++id, name, strategy, createdAt",
+    });
+
+    // Version 21: Add persistent FITID store and merchant corrections
+    // FITID store enables cross-session OFX duplicate detection
+    // Merchant corrections enable learning from user edits
+    this.version(21).stores({
+      accounts: "id, name, institution, type, bankId",
+      transactions:
+        "id, accountId, date, category, amount, description, splitFromId, isSplit, refundStatus, eventBudgetId",
+      categories: "id, name, type, order",
+      budgets: "id, categoryId, period, startDate, ownerId, visibility",
+      futurePurchases: "id, targetDate, priority, isCompleted",
+      retirementPlans: "id, name, createdAt",
+      importMappings: "id, institution, accountId",
+      importHistory: "id, importDate, fileFormat, bank, fileName",
+      receipts: "id, transactionId, uploadedAt, mimeType, fileSize",
+      investmentAccounts: "id, type, name, createdAt",
+      holdings: "id, accountId, symbol, purchaseDate, [accountId+symbol]",
+      priceCache: "id, symbol, fetchedAt, source",
+      anomalyFeedback: "id, transactionId, merchant, category, createdAt",
+      predictionAccuracy: "id, category, month, recordedAt",
+      loans: "id, type, status, lender, nextPaymentDate, accountId, paymentFrequency",
+      loanPayments: "id, loanId, date, transactionId, isScheduled",
+      subscriptions:
+        "id, name, status, category, nextBillingDate, billingCycle, merchantToken, source",
+      excludedSubscriptions: "id, merchantToken, excludedAt",
+      pairedDevices: "id, deviceId, deviceName, trustLevel, lastSyncAt, createdAt",
+      profiles: "id, name, isDefault, createdAt",
+      activityLog: "id, profileId, action, entityType, timestamp, [profileId+timestamp]",
+      inAppNotifications:
+        "id, type, status, priority, createdAt, snoozedUntil, sourceType, sourceId",
+      budgetRollovers: "id, budgetId, month, [budgetId+month]",
+      gamificationState: "id, eventType, timestamp",
+      merchantRules: "id, merchantToken, category, createdAt",
+      netWorthSnapshots: "id, date, netWorth",
+      properties: "id, name, currency, type, createdAt",
+      eventBudgets: "id, name, status, startDate, endDate",
+      eventBudgetCategories: "id, eventBudgetId, [eventBudgetId+categoryName]",
+      splitPeople: "id, name, createdAt",
+      expenseSplits: "id, transactionId, personId, settled, createdAt",
+      paycheckPlans: "id, schedule, createdAt",
+      debtScenarios: "++id, name, strategy, createdAt",
+      // New tables
+      importedFITIDs: "id, fitid, accountId, importDate, [accountId+fitid]",
+      merchantCorrections: "id, rawDescription, normalizedMerchant, lastUsed",
     });
   }
 }

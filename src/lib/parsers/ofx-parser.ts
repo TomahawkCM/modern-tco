@@ -300,6 +300,192 @@ export async function parseOFXFile(
   };
 }
 
+// ============================================================================
+// Multi-Account OFX Support
+// ============================================================================
+
+export interface ParsedOFXAccount {
+  accountInfo: OFXAccountInfo;
+  transactions: ParsedTransaction[];
+  balances: OFXBalances;
+  currency: string;
+}
+
+/**
+ * Parse an OFX file that may contain multiple account statements.
+ * Some banks export multiple STMTTRNRS blocks in a single file.
+ */
+export function parseMultiAccountOFX(content: string): ParsedOFXAccount[] {
+  const variant = detectOFXVariant(content);
+  if (!variant) {
+    throw new Error("Unable to detect OFX format. File may be corrupted.");
+  }
+
+  let xmlContent = content;
+  if (variant === "ofx1" || variant === "qfx") {
+    xmlContent = convertOFX1ToXML(content);
+  }
+
+  const parser = new XMLParser({
+    ignoreAttributes: true,
+    parseTagValue: false,
+    trimValues: true,
+    isArray: (name) => name === "STMTTRNRS" || name === "CCSTMTTRNRS" || name === "STMTTRN",
+  });
+
+  let parsed: any;
+  try {
+    parsed = parser.parse(xmlContent);
+  } catch {
+    // Try malformed recovery
+    const recovered = recoverMalformedOFX(content);
+    if (recovered) {
+      parsed = parser.parse(recovered);
+    } else {
+      throw new Error("Failed to parse OFX XML and recovery failed");
+    }
+  }
+
+  const accounts: ParsedOFXAccount[] = [];
+
+  // Extract bank account statements
+  const bankStmts = parsed?.OFX?.BANKMSGSRSV1?.STMTTRNRS;
+  if (bankStmts) {
+    const stmtArray = Array.isArray(bankStmts) ? bankStmts : [bankStmts];
+    for (const stmt of stmtArray) {
+      const stmtrs = stmt?.STMTRS;
+      if (!stmtrs) continue;
+
+      const acctFrom = stmtrs.BANKACCTFROM;
+      const tranList = stmtrs.BANKTRANLIST?.STMTTRN;
+      const ledgerBal = stmtrs.LEDGERBAL;
+      const availBal = stmtrs.AVAILBAL;
+      const currency = stmtrs.CURDEF || "USD";
+
+      const txnArray = Array.isArray(tranList) ? tranList : tranList ? [tranList] : [];
+      const transactions: OFXTransaction[] = txnArray
+        .filter((txn: any) => txn?.FITID)
+        .map((txn: any) => ({
+          TRNTYPE: txn.TRNTYPE || "OTHER",
+          DTPOSTED: txn.DTPOSTED,
+          TRNAMT: txn.TRNAMT,
+          FITID: txn.FITID,
+          NAME: txn.NAME,
+          MEMO: txn.MEMO,
+          CHECKNUM: txn.CHECKNUM,
+        }));
+
+      const accountId = acctFrom?.ACCTID || "unknown";
+      accounts.push({
+        accountInfo: {
+          BANKID: acctFrom?.BANKID,
+          ACCTID: accountId,
+          ACCTTYPE: acctFrom?.ACCTTYPE || "CHECKING",
+        },
+        transactions: transactions.map((txn) => mapOFXTransaction(txn, accountId)),
+        balances: {
+          ledgerBalance: ledgerBal ? parseFloat(ledgerBal.BALAMT) : 0,
+          ledgerDate: ledgerBal?.DTASOF ? parseOFXDate(ledgerBal.DTASOF) : new Date(),
+          availableBalance: availBal ? parseFloat(availBal.BALAMT) : undefined,
+          availableDate: availBal?.DTASOF ? parseOFXDate(availBal.DTASOF) : undefined,
+        },
+        currency,
+      });
+    }
+  }
+
+  // Extract credit card statements
+  const ccStmts = parsed?.OFX?.CREDITCARDMSGSRSV1?.CCSTMTTRNRS;
+  if (ccStmts) {
+    const stmtArray = Array.isArray(ccStmts) ? ccStmts : [ccStmts];
+    for (const stmt of stmtArray) {
+      const stmtrs = stmt?.CCSTMTRS;
+      if (!stmtrs) continue;
+
+      const acctFrom = stmtrs.CCACCTFROM;
+      const tranList = stmtrs.BANKTRANLIST?.STMTTRN;
+      const ledgerBal = stmtrs.LEDGERBAL;
+      const currency = stmtrs.CURDEF || "USD";
+
+      const txnArray = Array.isArray(tranList) ? tranList : tranList ? [tranList] : [];
+      const transactions: OFXTransaction[] = txnArray
+        .filter((txn: any) => txn?.FITID)
+        .map((txn: any) => ({
+          TRNTYPE: txn.TRNTYPE || "OTHER",
+          DTPOSTED: txn.DTPOSTED,
+          TRNAMT: txn.TRNAMT,
+          FITID: txn.FITID,
+          NAME: txn.NAME,
+          MEMO: txn.MEMO,
+          CHECKNUM: txn.CHECKNUM,
+        }));
+
+      const accountId = acctFrom?.ACCTID || "unknown";
+      accounts.push({
+        accountInfo: {
+          ACCTID: accountId,
+          ACCTTYPE: "CREDITCARD",
+        },
+        transactions: transactions.map((txn) => mapOFXTransaction(txn, accountId)),
+        balances: {
+          ledgerBalance: ledgerBal ? parseFloat(ledgerBal.BALAMT) : 0,
+          ledgerDate: ledgerBal?.DTASOF ? parseOFXDate(ledgerBal.DTASOF) : new Date(),
+        },
+        currency,
+      });
+    }
+  }
+
+  // If no structured accounts found, fall back to single-account parsing
+  if (accounts.length === 0) {
+    const ofxData = parseOFXContent(content);
+    accounts.push({
+      accountInfo: ofxData.accountInfo,
+      transactions: ofxData.transactions.map((txn) => mapOFXTransaction(txn, ofxData.accountInfo.ACCTID)),
+      balances: ofxData.balances,
+      currency: ofxData.currency,
+    });
+  }
+
+  return accounts;
+}
+
+// ============================================================================
+// Malformed OFX 1.x Recovery
+// ============================================================================
+
+/**
+ * Attempt to recover transactions from malformed OFX 1.x files.
+ * Some banks produce broken SGML (unclosed tags, missing OFXHEADER).
+ * Falls back to regex extraction of transaction fields.
+ */
+function recoverMalformedOFX(content: string): string | null {
+  try {
+    // Check if <OFX> tag exists at all
+    const ofxMatch = content.match(/<OFX>/i);
+    if (!ofxMatch) return null;
+
+    // Extract content from <OFX> onwards
+    const ofxStart = content.indexOf(ofxMatch[0]);
+    let xmlContent = content.substring(ofxStart);
+
+    // Ensure closing tag
+    if (!xmlContent.includes("</OFX>")) {
+      xmlContent += "\n</OFX>";
+    }
+
+    // Add XML declaration
+    xmlContent = `<?xml version="1.0" encoding="UTF-8"?>\n${xmlContent}`;
+
+    // Convert SGML tags: <TAG>value → <TAG>value</TAG>
+    xmlContent = xmlContent.replace(/<([A-Z0-9]+)>([^<>\n]+)(?=\n|<)/g, "<$1>$2</$1>");
+
+    return xmlContent;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Validate OFX file before parsing
  */
