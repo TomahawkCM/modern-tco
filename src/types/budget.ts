@@ -200,6 +200,31 @@ export interface ImportMetadata {
   dateRangeEnd: Date | null; // Latest transaction date
 }
 
+/**
+ * Persistent FITID store for cross-session OFX duplicate detection
+ */
+export interface ImportedFITID {
+  id: string; // `${accountId}_${fitid}`
+  fitid: string;
+  accountId: string;
+  importDate: string; // ISO date
+  transactionDate: string; // ISO date
+}
+
+/**
+ * Persistent merchant correction for learning from user edits
+ */
+export interface MerchantCorrection {
+  id: string;
+  rawDescription: string; // Original bank description
+  normalizedMerchant: string; // User's preferred merchant name
+  category?: string; // User's chosen category
+  subcategory?: string;
+  correctionCount: number; // Times user made this correction
+  lastUsed: string; // ISO date
+  createdAt: string; // ISO date
+}
+
 export interface BudgetSummary {
   totalIncome: number;
   totalExpenses: number;
@@ -284,6 +309,11 @@ export interface BankConfig {
   decimalSeparator?: "." | ","; // Period (most) or Comma (Indonesia, Germany)
   thousandSeparator?: "," | "." | " " | ""; // Thousand separator
   region?: "NA" | "EU" | "UK" | "AU" | "ASIA"; // Region for date/number parsing hints
+  // Verification metadata
+  verified?: boolean; // Tested with real sample data
+  verifiedDate?: string; // ISO date of last verification
+  sampleRowCount?: number; // How many sample rows tested
+  communityContributed?: boolean; // Submitted by community member
 }
 
 // OFX/QFX Types (Phase 2)
@@ -318,6 +348,18 @@ export interface OFXData {
   balances: OFXBalances;
   dateStart?: Date; // Transaction list start date
   dateEnd?: Date; // Transaction list end date
+}
+
+/**
+ * Parsed investment transaction from OFX INVSTMTMSGSRSV1 blocks.
+ * Extends ParsedTransaction with security/trade details.
+ */
+export interface ParsedInvestmentTransaction extends ParsedTransaction {
+  securityId?: string; // CUSIP or ISIN
+  units?: number; // Number of shares/units
+  unitPrice?: number; // Price per unit
+  investmentType?: "buy" | "sell" | "dividend" | "reinvest" | "transfer";
+  tradeAmount?: number; // Total trade value (units * unitPrice + fees)
 }
 
 // Categorization

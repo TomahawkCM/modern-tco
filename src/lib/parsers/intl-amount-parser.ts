@@ -278,6 +278,62 @@ function escapeRegex(str: string): string {
 }
 
 /**
+ * Zero-decimal currencies — amounts should never have decimal places.
+ * If a parsed amount in one of these currencies has decimals, it's likely a parsing error.
+ */
+const ZERO_DECIMAL_CURRENCIES = new Set([
+  "JPY", // Japanese Yen
+  "KRW", // South Korean Won
+  "VND", // Vietnamese Dong
+  "IDR", // Indonesian Rupiah
+  "CLP", // Chilean Peso
+  "ISK", // Icelandic Krona
+  "UGX", // Ugandan Shilling
+  "RWF", // Rwandan Franc
+  "PYG", // Paraguayan Guarani
+  "GNF", // Guinean Franc
+  "KMF", // Comorian Franc
+  "XAF", // Central African CFA Franc
+  "XOF", // West African CFA Franc
+  "XPF", // CFP Franc
+  "BIF", // Burundian Franc
+  "DJF", // Djiboutian Franc
+  "HUF", // Hungarian Forint (technically 0 decimals in practice)
+  "TWD", // New Taiwan Dollar (technically 0 in practice)
+]);
+
+/**
+ * Check if a currency uses zero decimal places.
+ */
+export function isZeroDecimalCurrency(currencyCode: string): boolean {
+  return ZERO_DECIMAL_CURRENCIES.has(currencyCode.toUpperCase());
+}
+
+/**
+ * Validate an amount against its currency's decimal expectations.
+ * Returns a warning message if the amount has unexpected decimals.
+ *
+ * @param amount - Parsed numeric amount
+ * @param currencyCode - ISO 4217 currency code
+ * @returns Warning message or null if valid
+ */
+export function validateCurrencyDecimals(
+  amount: number,
+  currencyCode: string
+): string | null {
+  if (!currencyCode) return null;
+
+  const isZeroDecimal = isZeroDecimalCurrency(currencyCode);
+  const hasDecimals = amount !== Math.floor(amount);
+
+  if (isZeroDecimal && hasDecimals) {
+    return `${currencyCode} is a zero-decimal currency but amount ${amount} has decimal places. This may indicate a parsing error (e.g., thousands separator misinterpreted as decimal).`;
+  }
+
+  return null;
+}
+
+/**
  * Detect the currency from a string containing currency symbols or codes.
  *
  * @param str - String that may contain currency symbols or ISO codes

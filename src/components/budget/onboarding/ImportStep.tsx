@@ -118,7 +118,8 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
       setIsDragging(false);
 
       const file = e.dataTransfer.files[0];
-      if (file && (file.name.endsWith(".csv") || file.name.endsWith(".ofx"))) {
+      const supportedExtensions = [".csv", ".ofx", ".qfx", ".pdf", ".qif", ".sta", ".mt940", ".xml"];
+      if (file && supportedExtensions.some((ext) => file.name.toLowerCase().endsWith(ext))) {
         handleFileSelect(file);
       }
     },
@@ -170,7 +171,7 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
           <input
             ref={fileInputRef}
             type="file"
-            accept=".csv,.ofx"
+            accept=".csv,.ofx,.qfx,.pdf,.qif,.sta,.mt940,.xml"
             onChange={handleFileInputChange}
             className="hidden"
           />

@@ -2025,7 +2025,7 @@ export default function ImportPage() {
               </p>
               <input
                 type="file"
-                accept=".csv,.ofx,.qfx,.pdf"
+                accept=".csv,.ofx,.qfx,.pdf,.qif,.sta,.mt940,.xml"
                 onChange={handleFileSelect}
                 className="hidden"
                 id="file-upload"

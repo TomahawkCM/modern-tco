@@ -25,6 +25,7 @@
 import { chatCompletionJSON } from "./openai-service";
 import type { ParsedTransaction } from "@/types/budget";
 import { lookupMerchant, lookupCategoryPattern } from "@/lib/collective-learning-service";
+import { lookupCorrection } from "@/lib/import/merchant-correction-store";
 
 // ============================================================================
 // Types
@@ -451,10 +452,38 @@ export async function enrichTransactions(
   let cacheHits = 0;
   let enrichedCount = 0;
 
-  // Step 1: Apply collective learning + rule-based normalization + recurring detection
+  // Step 1: Apply corrections → collective learning → rule-based normalization → recurring detection
+  // Confidence cascade:
+  //   1. User firm rules (100% confidence)
+  //   2. Persistent correction history (90%)
+  //   3. Collective learning database (variable)
+  //   4. In-memory cache (80%)
+  //   5. AI enrichment (variable)
+  //   6. Generic pattern rules (60%)
   for (let i = 0; i < transactions.length; i++) {
     const tx = transactions[i];
     const enrichedTx: EnrichedTransaction = { ...tx };
+
+    // Step 0: Check user's persistent corrections first (highest priority)
+    try {
+      const correction = await lookupCorrection(tx.description);
+      if (correction) {
+        enrichedTx.normalizedMerchant = correction.normalizedMerchant;
+        enrichedTx.merchantConfidence = correction.correctionCount >= 2 ? 1.0 : 0.9;
+        if (correction.category) {
+          enrichedTx.suggestedCategory = correction.category;
+          enrichedTx.suggestedSubcategory = correction.subcategory;
+          enrichedTx.categoryConfidence = enrichedTx.merchantConfidence;
+        }
+        enrichedTx.enrichmentSource = "rules"; // Treated as deterministic rule
+        enrichedCount++;
+
+        enriched.push(enrichedTx);
+        continue; // Skip all other enrichment — user correction wins
+      }
+    } catch (error) {
+      console.warn("[TransactionEnrichment] Correction lookup failed:", error);
+    }
 
     // Step 1a: Check collective learning database first (global knowledge)
     try {

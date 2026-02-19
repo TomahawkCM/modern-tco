@@ -1,10 +1,19 @@
 /**
  * Format Detection Module
- * Automatically detects file format (CSV, OFX, QFX, QBO) based on content analysis
- * Used by import wizard to route files to appropriate parsers
+ * Automatically detects file format (CSV, OFX, QFX, QBO, QIF, MT940, CAMT.053)
+ * based on content analysis. Used by import wizard to route files to appropriate parsers.
  */
 
-export type FileFormat = "csv" | "ofx" | "qfx" | "qbo" | "pdf" | "unknown";
+export type FileFormat =
+  | "csv"
+  | "ofx"
+  | "qfx"
+  | "qbo"
+  | "pdf"
+  | "qif"
+  | "mt940"
+  | "camt053"
+  | "unknown";
 
 export interface FormatDetectionResult {
   format: FileFormat;
@@ -56,7 +65,7 @@ export function detectFromContent(content: string): {
   }
 
   // ========================================
-  // OFX 2.x (XML with <?xml declaration)
+  // XML-based formats (OFX 2.x, CAMT.053)
   // ========================================
   if (trimmed.startsWith("<?xml") || trimmed.startsWith("<?XML")) {
     // Check if it contains <OFX> tag
@@ -65,6 +74,14 @@ export function detectFromContent(content: string): {
         format: "ofx",
         confidence: 0.95,
         signature: "XML-OFX",
+      };
+    }
+    // Check for CAMT.053 (ISO 20022 bank-to-customer statement)
+    if (upper.includes("URN:ISO:STD:ISO:20022:TECH:XSD:CAMT.053")) {
+      return {
+        format: "camt053",
+        confidence: 0.95,
+        signature: "CAMT053",
       };
     }
     // Might be some other XML format
@@ -98,13 +115,51 @@ export function detectFromContent(content: string): {
   }
 
   // ========================================
-  // QBO (QuickBooks format - starts with !Type)
+  // CAMT.053 without XML declaration (starts with <Document>)
+  // ========================================
+  if (trimmed.startsWith("<Document") && upper.includes("URN:ISO:STD:ISO:20022:TECH:XSD:CAMT.053")) {
+    return {
+      format: "camt053",
+      confidence: 0.95,
+      signature: "CAMT053",
+    };
+  }
+
+  // ========================================
+  // QIF (Quicken Interchange Format)
+  // Lines starting with !Type: or records with D/T/P prefixes delimited by ^
+  // Note: QBO also uses !Type: but QIF has ^ record delimiters
   // ========================================
   if (trimmed.startsWith("!Type:") || upper.includes("!TYPE:")) {
+    // Distinguish QIF from QBO: QIF has ^ record delimiters with D/T/P field prefixes
+    const hasRecordDelimiters = trimmed.includes("^");
+    const hasQIFFields = /^[DTP]/m.test(trimmed.substring(trimmed.indexOf("\n") + 1));
+
+    if (hasRecordDelimiters && hasQIFFields) {
+      return {
+        format: "qif",
+        confidence: 0.9,
+        signature: "QIF",
+      };
+    }
+
+    // Fall through to QBO detection if no QIF markers
     return {
       format: "qbo",
       confidence: 0.9,
       signature: "QBO",
+    };
+  }
+
+  // ========================================
+  // MT940 (SWIFT bank statement format)
+  // Starts with :20: or :25: SWIFT message tags
+  // ========================================
+  if (/^:20:/.test(trimmed) || /^:25:/.test(trimmed) || /^\{1:/.test(trimmed)) {
+    return {
+      format: "mt940",
+      confidence: 0.95,
+      signature: "MT940",
     };
   }
 
@@ -231,8 +286,21 @@ function combineSignals(
   // Low confidence - fall back to extension
   // ========================================
   if (contentAnalysis.confidence < 0.5) {
-    if (extension && ["csv", "ofx", "qfx", "qbo", "pdf"].includes(extension)) {
-      result.format = extension as FileFormat;
+    // Map common extensions to formats (including aliases)
+    const extensionMap: Record<string, FileFormat> = {
+      csv: "csv",
+      ofx: "ofx",
+      qfx: "qfx",
+      qbo: "qbo",
+      pdf: "pdf",
+      qif: "qif",
+      sta: "mt940",
+      mt940: "mt940",
+      xml: "camt053", // XML extension could be CAMT.053 (low confidence)
+    };
+    const mappedFormat = extension ? extensionMap[extension] : undefined;
+    if (mappedFormat) {
+      result.format = mappedFormat;
       result.confidence = 0.5; // Extension-based detection has medium confidence
       result.suggestions?.push(
         `Unable to detect format from content. Using file extension (.${extension}).`
@@ -241,7 +309,7 @@ function combineSignals(
       result.format = "unknown";
       result.confidence = 0;
       result.suggestions?.push(
-        `Unable to detect file format. Please ensure the file is a valid CSV, OFX, QFX, or PDF bank statement.`
+        `Unable to detect file format. Please ensure the file is a valid CSV, OFX, QFX, QIF, MT940, CAMT.053, or PDF bank statement.`
       );
     }
   }
@@ -324,6 +392,27 @@ export function validateFormat(
       }
       break;
 
+    case "qif":
+      // Check for QIF markers
+      if (!content.includes("!Type:") && !content.includes("^")) {
+        errors.push("Missing QIF record markers (!Type: or ^ delimiters)");
+      }
+      break;
+
+    case "mt940":
+      // Check for SWIFT message tags
+      if (!content.includes(":20:") && !content.includes(":25:") && !content.includes("{1:")) {
+        errors.push("Missing MT940 SWIFT message tags (:20:, :25:)");
+      }
+      break;
+
+    case "camt053":
+      // Check for ISO 20022 CAMT.053 namespace
+      if (!content.includes("camt.053")) {
+        errors.push("Missing CAMT.053 namespace declaration");
+      }
+      break;
+
     default:
       errors.push(`Unsupported format: ${detectedFormat}`);
   }
@@ -344,6 +433,9 @@ export function getFormatDisplayName(format: FileFormat): string {
     qfx: "QFX (Quicken)",
     qbo: "QBO (QuickBooks)",
     pdf: "PDF (Bank Statement)",
+    qif: "QIF (Quicken Interchange Format)",
+    mt940: "MT940 (SWIFT Bank Statement)",
+    camt053: "CAMT.053 (ISO 20022 Bank Statement)",
     unknown: "Unknown Format",
   };
   return names[format] || "Unknown Format";
@@ -353,8 +445,7 @@ export function getFormatDisplayName(format: FileFormat): string {
  * Get supported formats list
  */
 export function getSupportedFormats(): FileFormat[] {
-  return ["csv", "ofx", "qfx", "pdf"];
-  // Note: QBO support can be added in future
+  return ["csv", "ofx", "qfx", "pdf", "qif", "mt940", "camt053"];
 }
 
 /**
