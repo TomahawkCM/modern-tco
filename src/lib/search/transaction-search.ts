@@ -7,7 +7,17 @@
 import Fuse, { type IFuseOptions, type FuseResult } from "fuse.js";
 import type { Transaction, Category } from "@/types/budget";
 import { parseSearchQuery, type ParsedQuery } from "./query-parser";
-import { normalizeText } from "./text-utils";
+import {
+  normalizeText,
+  tokenizeForIndex,
+  expandWithGlossary,
+  loadGlossary,
+  getCachedGlossary,
+  containsCJK,
+  type Glossary,
+} from "./text-utils";
+import { romanize, hasRomanizableContent } from "./i18n/romanization";
+import type { LocalizedOperators } from "./i18n/locale-operators";
 
 // Search result with score and match info
 export interface SearchResult {
@@ -69,12 +79,16 @@ export { normalizeText } from "./text-utils";
  * Prepare transaction for search by flattening related data.
  * All text fields are normalized (diacritics stripped) so that Fuse.js indexes
  * the normalized form, allowing accent-insensitive matching.
+ *
+ * For CJK locales, text is additionally tokenized via Intl.Segmenter and
+ * expanded with glossary synonyms and romanized variants.
  */
 function prepareForSearch(
   transaction: Transaction,
   categoryMap: Map<string, string>,
   accountMap: Map<string, string>,
-  locale: string = "en-US"
+  locale: string = "en-US",
+  glossary: Glossary | null = null
 ): SearchableTransaction {
   const categoryName = transaction.category
     ? categoryMap.get(transaction.category) || transaction.category
@@ -93,20 +107,35 @@ function prepareForSearch(
     day: "numeric",
   });
 
-  // Combine all searchable text for broad queries, normalized for diacritics
-  const allText = normalizeText(
-    [
-      transaction.description,
-      transaction.merchant,
-      transaction.notes,
-      transaction.originalDescription,
-      categoryName,
-      accountName,
-      transaction.tags?.join(" "),
-    ]
-      .filter(Boolean)
-      .join(" ")
-  );
+  // Combine all searchable text for broad queries
+  const rawParts = [
+    transaction.description,
+    transaction.merchant,
+    transaction.notes,
+    transaction.originalDescription,
+    categoryName,
+    accountName,
+    transaction.tags?.join(" "),
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  // Normalize diacritics
+  let allText = normalizeText(rawParts);
+
+  // CJK tokenization: segment words so Fuse.js can match substrings
+  allText = tokenizeForIndex(allText, locale);
+
+  // Glossary expansion: add English↔locale synonyms
+  allText = expandWithGlossary(allText, glossary);
+
+  // Romanization: add romaji/romanized variants for type-ahead matching
+  if (hasRomanizableContent(rawParts)) {
+    const romanized = romanize(rawParts, locale);
+    if (romanized !== rawParts.toLowerCase()) {
+      allText = `${allText} ${romanized}`;
+    }
+  }
 
   return {
     ...transaction,
@@ -180,11 +209,13 @@ function getCurrencyForLocale(locale: string): string {
 }
 
 /**
- * Initialize or update the search index
- * Call this when transactions, categories, or accounts change
+ * Initialize or update the search index.
+ * Call this when transactions, categories, or accounts change.
  *
  * @param locale - BCP 47 locale tag (e.g. "en-US", "de-DE") used for
  *   date and currency formatting in searchable text. Defaults to "en-US".
+ *
+ * Automatically loads the locale glossary for cross-language matching.
  */
 export function initializeSearchIndex(
   transactions: Transaction[],
@@ -203,6 +234,32 @@ export function initializeSearchIndex(
     return;
   }
 
+  // Load glossary for the locale (async, but index is built immediately
+  // with whatever is cached; re-index happens when glossary loads)
+  const glossary = getCachedGlossary(locale);
+  if (!glossary && locale !== "en-US" && !locale.startsWith("en")) {
+    // Trigger async load — will be available on next index rebuild
+    loadGlossary(locale).then((g) => {
+      if (g && cachedLocale === locale) {
+        // Glossary loaded, rebuild index with glossary data
+        rebuildIndex(transactions, categories, accounts, locale, g);
+      }
+    });
+  }
+
+  rebuildIndex(transactions, categories, accounts, locale, glossary);
+}
+
+/**
+ * Internal: rebuild the Fuse.js index with current data and glossary.
+ */
+function rebuildIndex(
+  transactions: Transaction[],
+  categories: Category[],
+  accounts: { id: string; name: string }[],
+  locale: string,
+  glossary: Glossary | null
+): void {
   // Build lookup maps (support both id→name and name→name lookups)
   const categoryMap = new Map<string, string>();
   for (const c of categories) {
@@ -211,9 +268,10 @@ export function initializeSearchIndex(
   }
   const accountMap = new Map(accounts.map((a) => [a.id, a.name]));
 
-  // Prepare transactions for search (text fields normalized for diacritics)
+  // Prepare transactions for search (text fields normalized for diacritics,
+  // CJK tokenized, glossary expanded, romanized)
   const searchableTransactions = transactions.map((tx) =>
-    prepareForSearch(tx, categoryMap, accountMap, locale)
+    prepareForSearch(tx, categoryMap, accountMap, locale, glossary)
   );
 
   // Create new Fuse instance
@@ -353,9 +411,10 @@ export function searchTransactionsWithFilters(
     limit?: number;
     sortBy?: "relevance" | "date" | "amount";
     sortDirection?: "asc" | "desc";
+    locale?: string;
   } = {}
 ): SearchResult[] {
-  const { limit = 50, sortBy = "relevance", sortDirection = "desc" } = options;
+  const { limit = 50, sortBy = "relevance", sortDirection = "desc", locale = cachedLocale } = options;
 
   if (!cachedFuse) {
     console.warn("[TransactionSearch] Index not initialized. Call initializeSearchIndex first.");
@@ -363,6 +422,7 @@ export function searchTransactionsWithFilters(
   }
 
   if (parsedQuery.hasStructuredFilters) {
+    const glossary = getCachedGlossary(locale);
     const categoryMap = new Map<string, string>();
     for (const c of cachedCategories) {
       categoryMap.set(c.id, c.name);
@@ -371,7 +431,7 @@ export function searchTransactionsWithFilters(
     const accountMap = new Map(cachedAccounts.map((a) => [a.id, a.name]));
 
     const searchableTransactions = cachedTransactions.map((tx) =>
-      prepareForSearch(tx, categoryMap, accountMap, cachedLocale)
+      prepareForSearch(tx, categoryMap, accountMap, locale, glossary)
     );
 
     const filtered = applyStructuredFilters(searchableTransactions, parsedQuery);
@@ -381,14 +441,14 @@ export function searchTransactionsWithFilters(
       // Normalize query to match diacritics-stripped indexed text
       const fuseResults = tempFuse.search(normalizeText(parsedQuery.textQuery));
       const results = fuseResults.map(transformFuseResult);
-      return sortResults(results, sortBy, sortDirection).slice(0, limit);
+      return sortResults(results, sortBy, sortDirection, locale).slice(0, limit);
     }
 
     const results: SearchResult[] = filtered.map((item) => ({
       item: cachedTransactions.find((tx) => tx.id === item.id)!,
       score: 1,
     }));
-    return sortResults(results, "date", "desc").slice(0, limit);
+    return sortResults(results, "date", "desc", locale).slice(0, limit);
   }
 
   // No structured filters — fall back to pure fuzzy search
@@ -397,18 +457,21 @@ export function searchTransactionsWithFilters(
       item,
       score: 1,
     }));
-    return sortResults(allResults, sortBy, sortDirection).slice(0, limit);
+    return sortResults(allResults, sortBy, sortDirection, locale).slice(0, limit);
   }
 
   // Normalize query to match diacritics-stripped indexed text
   const fuseResults = cachedFuse.search(normalizeText(parsedQuery.textQuery));
   const results = fuseResults.map(transformFuseResult);
-  return sortResults(results, sortBy, sortDirection).slice(0, limit);
+  return sortResults(results, sortBy, sortDirection, locale).slice(0, limit);
 }
 
 /**
  * Main search function - instant fuzzy search with structured query support
  * Returns results in <50ms for typical datasets (<100k transactions)
+ *
+ * @param query - User's search query
+ * @param options - Search options including locale and localized operators
  */
 export function searchTransactions(
   query: string,
@@ -416,9 +479,17 @@ export function searchTransactions(
     limit?: number;
     sortBy?: "relevance" | "date" | "amount";
     sortDirection?: "asc" | "desc";
+    locale?: string;
+    localizedOps?: LocalizedOperators | null;
   } = {}
 ): SearchResult[] {
-  const { limit = 50, sortBy = "relevance", sortDirection = "desc" } = options;
+  const {
+    limit = 50,
+    sortBy = "relevance",
+    sortDirection = "desc",
+    locale = cachedLocale,
+    localizedOps,
+  } = options;
 
   if (!cachedFuse) {
     console.warn("[TransactionSearch] Index not initialized. Call initializeSearchIndex first.");
@@ -431,14 +502,27 @@ export function searchTransactions(
       item,
       score: 1,
     }));
-    return sortResults(allResults, sortBy, sortDirection).slice(0, limit);
+    return sortResults(allResults, sortBy, sortDirection, locale).slice(0, limit);
+  }
+
+  // Normalize the query for CJK: if query contains CJK, also produce a
+  // romanized variant to match against the romanized index content
+  let normalizedQuery = normalizeText(query);
+  if (containsCJK(query)) {
+    const romanized = romanize(query, locale);
+    if (romanized !== query.toLowerCase()) {
+      // Append romanized form so Fuse.js can match either
+      normalizedQuery = `${normalizedQuery} | ${romanized}`;
+    }
   }
 
   // Parse structured query (e.g., "amount:>100 category:groceries coffee")
-  const parsedQuery = parseSearchQuery(query);
+  // with locale operator canonicalization
+  const parsedQuery = parseSearchQuery(query, localizedOps);
 
   // If we have structured filters, apply them first
   if (parsedQuery.hasStructuredFilters) {
+    const glossary = getCachedGlossary(locale);
     const categoryMap = new Map<string, string>();
     for (const c of cachedCategories) {
       categoryMap.set(c.id, c.name);
@@ -447,7 +531,7 @@ export function searchTransactions(
     const accountMap = new Map(cachedAccounts.map((a) => [a.id, a.name]));
 
     const searchableTransactions = cachedTransactions.map((tx) =>
-      prepareForSearch(tx, categoryMap, accountMap, cachedLocale)
+      prepareForSearch(tx, categoryMap, accountMap, locale, glossary)
     );
 
     const filtered = applyStructuredFilters(searchableTransactions, parsedQuery);
@@ -458,7 +542,7 @@ export function searchTransactions(
       // Normalize query to match diacritics-stripped indexed text
       const fuseResults = tempFuse.search(normalizeText(parsedQuery.textQuery));
       const results = fuseResults.map(transformFuseResult);
-      return sortResults(results, sortBy, sortDirection).slice(0, limit);
+      return sortResults(results, sortBy, sortDirection, locale).slice(0, limit);
     }
 
     // No text query, return filtered results sorted by date
@@ -466,13 +550,13 @@ export function searchTransactions(
       item: cachedTransactions.find((tx) => tx.id === item.id)!,
       score: 1,
     }));
-    return sortResults(results, "date", "desc").slice(0, limit);
+    return sortResults(results, "date", "desc", locale).slice(0, limit);
   }
 
   // Pure fuzzy search — normalize query to match diacritics-stripped indexed text
   const fuseResults = cachedFuse.search(normalizeText(query));
   const results = fuseResults.map(transformFuseResult);
-  return sortResults(results, sortBy, sortDirection).slice(0, limit);
+  return sortResults(results, sortBy, sortDirection, locale).slice(0, limit);
 }
 
 /**
@@ -490,15 +574,29 @@ function transformFuseResult(result: FuseResult<SearchableTransaction>): SearchR
   };
 }
 
+// Collator cache per locale
+const collatorCache = new Map<string, Intl.Collator>();
+
+function getCollator(locale: string): Intl.Collator {
+  let collator = collatorCache.get(locale);
+  if (!collator) {
+    collator = new Intl.Collator(locale, { sensitivity: "base" });
+    collatorCache.set(locale, collator);
+  }
+  return collator;
+}
+
 /**
- * Sort search results
+ * Sort search results with locale-aware text comparison.
  */
 function sortResults(
   results: SearchResult[],
-  sortBy: "relevance" | "date" | "amount",
-  direction: "asc" | "desc"
+  sortBy: "relevance" | "date" | "amount" | "description" | "merchant",
+  direction: "asc" | "desc",
+  locale: string = "en-US"
 ): SearchResult[] {
   const multiplier = direction === "asc" ? 1 : -1;
+  const collator = getCollator(locale);
 
   return [...results].sort((a, b) => {
     switch (sortBy) {
@@ -509,6 +607,12 @@ function sortResults(
         return (new Date(a.item.date).getTime() - new Date(b.item.date).getTime()) * multiplier;
       case "amount":
         return (Math.abs(a.item.amount) - Math.abs(b.item.amount)) * multiplier;
+      case "description":
+        return collator.compare(a.item.description, b.item.description) * multiplier;
+      case "merchant":
+        return (
+          collator.compare(a.item.merchant || "", b.item.merchant || "") * multiplier
+        );
       default:
         return 0;
     }

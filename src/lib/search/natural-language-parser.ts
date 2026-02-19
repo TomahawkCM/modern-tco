@@ -10,6 +10,8 @@
  */
 
 import { parseSearchQuery, type ParsedQuery, type ParsedFilters } from "./query-parser";
+import type { LocalizedOperators } from "./i18n/locale-operators";
+import type { LocaleKeywordPatterns } from "./i18n/locale-nl-keywords";
 
 export interface NaturalLanguageResult {
   /** Structured query from parsing */
@@ -219,16 +221,27 @@ const CATEGORY_ALIASES: Record<string, string[]> = {
 };
 
 /**
- * Parse natural language query into structured filters
+ * Parse natural language query into structured filters.
+ *
+ * @param input - User's natural language query
+ * @param options - Optional locale-aware configuration
+ * @param options.localizedOps - Localized operator map for query canonicalization
+ * @param options.localeKeywords - Locale-specific keyword patterns
  */
-export function parseNaturalLanguage(input: string): NaturalLanguageResult {
+export function parseNaturalLanguage(
+  input: string,
+  options?: {
+    localizedOps?: LocalizedOperators | null;
+    localeKeywords?: LocaleKeywordPatterns | null;
+  }
+): NaturalLanguageResult {
   let remainingInput = input.toLowerCase().trim();
   const filters: ParsedFilters = {};
   const interpretations: string[] = [];
   let confidence = 1.0;
 
-  // Try structured query parser first
-  const structuredResult = parseSearchQuery(input);
+  // Try structured query parser first (with locale operator support)
+  const structuredResult = parseSearchQuery(input, options?.localizedOps);
   if (structuredResult.hasStructuredFilters) {
     return {
       query: structuredResult,
@@ -272,6 +285,52 @@ export function parseNaturalLanguage(input: string): NaturalLanguageResult {
       interpretations.push(`Type: ${type}`);
       confidence *= 0.85;
       break;
+    }
+  }
+
+  // --- Locale-specific keyword matching (runs after English patterns) ---
+  const localeKw = options?.localeKeywords;
+  if (localeKw) {
+    // Locale amount patterns
+    if (!filters.amountMin && !filters.amountMax) {
+      for (const [pattern, getFilter] of localeKw.amountPatterns) {
+        if (pattern.test(remainingInput)) {
+          const extracted = getFilter();
+          Object.assign(filters, extracted);
+          remainingInput = remainingInput.replace(pattern, "").trim();
+          interpretations.push(formatAmountFilter(extracted));
+          confidence *= 0.85;
+          break;
+        }
+      }
+    }
+
+    // Locale date patterns
+    if (!filters.dateStart) {
+      for (const [pattern, getRange] of localeKw.datePatterns) {
+        if (pattern.test(remainingInput)) {
+          const range = getRange();
+          filters.dateStart = range.dateStart;
+          filters.dateEnd = range.dateEnd;
+          remainingInput = remainingInput.replace(pattern, "").trim();
+          interpretations.push(formatDateFilter(range));
+          confidence *= 0.85;
+          break;
+        }
+      }
+    }
+
+    // Locale type patterns
+    if (!filters.type) {
+      for (const [pattern, type] of localeKw.typePatterns) {
+        if (pattern.test(remainingInput)) {
+          filters.type = type;
+          remainingInput = remainingInput.replace(pattern, "").trim();
+          interpretations.push(`Type: ${type}`);
+          confidence *= 0.8;
+          break;
+        }
+      }
     }
   }
 
@@ -373,10 +432,16 @@ function formatDateFilter(range: { dateStart: Date; dateEnd: Date }): string {
 }
 
 /**
- * Get search examples for user guidance
+ * Get search examples for user guidance.
+ *
+ * @param t - Optional translation function for locale-aware examples.
+ *   Expected to resolve keys from `searchNaturalLanguage` namespace.
  */
-export function getSearchExamples(): { query: string; description: string }[] {
-  return [
+export function getSearchExamples(
+  t?: (key: string) => string
+): { query: string; description: string }[] {
+  // Default English examples
+  const examples = [
     { query: "coffee last week", description: "Coffee purchases from the past week" },
     { query: "Amazon over $50", description: "Amazon orders over $50" },
     { query: "groceries this month", description: "Grocery spending this month" },
@@ -386,4 +451,37 @@ export function getSearchExamples(): { query: string; description: string }[] {
     { query: "$25-100 last 30 days", description: "Mid-range purchases recently" },
     { query: "type:income this year", description: "All income this year" },
   ];
+
+  if (!t) return examples;
+
+  // Try to build locale-aware examples using translations
+  try {
+    const localizedExamples = [
+      {
+        query: `coffee ${t("lastWeek")}`,
+        description: t("exampleCoffeeLastWeek"),
+      },
+      {
+        query: `Amazon ${t("over")} $50`,
+        description: t("exampleAmazonOver50"),
+      },
+      {
+        query: `${t("expensive")}`,
+        description: t("exampleExpensive"),
+      },
+      {
+        query: "amount:>200 category:shopping",
+        description: t("exampleStructured"),
+      },
+    ];
+
+    // Filter out examples that failed translation (returned the key itself)
+    const valid = localizedExamples.filter(
+      (ex) => ex.query && ex.description && !ex.description.startsWith("example")
+    );
+
+    return valid.length > 0 ? [...valid, ...examples.slice(valid.length)] : examples;
+  } catch {
+    return examples;
+  }
 }

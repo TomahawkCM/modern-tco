@@ -32,6 +32,9 @@ import {
   type SavedFilter,
 } from "@/lib/search/autocomplete";
 import { parseSearchQuery, type ParsedQuery } from "@/lib/search/query-parser";
+import type { AbstractIntlMessages } from "next-intl";
+import { getOperatorMap } from "@/lib/search/i18n/locale-operators";
+import { getKeywordPatterns } from "@/lib/search/i18n/locale-nl-keywords";
 
 export interface UseTransactionSearchOptions {
   /** Initial transactions to index */
@@ -40,6 +43,10 @@ export interface UseTransactionSearchOptions {
   categories?: Category[];
   /** Accounts for search enrichment */
   accounts?: { id: string; name: string }[];
+  /** BCP 47 locale tag (default: "en-US") */
+  locale?: string;
+  /** next-intl messages object for building localized operators/keywords */
+  messages?: AbstractIntlMessages;
   /** Debounce delay in ms (default: 50) */
   debounceMs?: number;
   /** Max results to return (default: 50) */
@@ -98,10 +105,22 @@ export function useTransactionSearch(
     transactions,
     categories = [],
     accounts = [],
+    locale = "en-US",
+    messages,
     debounceMs = 50,
     limit = 50,
     enableAutocomplete = true,
   } = options;
+
+  // Build locale-aware operator and keyword maps (cached internally)
+  const localizedOps = useMemo(
+    () => getOperatorMap(locale, messages),
+    [locale, messages]
+  );
+  const localeKeywords = useMemo(
+    () => getKeywordPatterns(locale, messages),
+    [locale, messages]
+  );
 
   // State
   const [query, setQueryInternal] = useState("");
@@ -118,10 +137,10 @@ export function useTransactionSearch(
   const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const suggestionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Initialize search index when transactions change
+  // Initialize search index when transactions or locale change
   useEffect(() => {
     if (transactions.length > 0) {
-      initializeSearchIndex(transactions, categories, accounts);
+      initializeSearchIndex(transactions, categories, accounts, locale);
       initializeAutocompleteCache(transactions, categories);
     }
 
@@ -129,7 +148,7 @@ export function useTransactionSearch(
     return () => {
       clearSearchIndex();
     };
-  }, [transactions, categories, accounts]);
+  }, [transactions, categories, accounts, locale]);
 
   // Load recent searches and saved filters on mount
   useEffect(() => {
@@ -142,14 +161,16 @@ export function useTransactionSearch(
     (searchQuery: string) => {
       const startTime = performance.now();
 
-      // Parse query for structured filters
-      const parsed = parseSearchQuery(searchQuery);
+      // Parse query for structured filters (with locale operator support)
+      const parsed = parseSearchQuery(searchQuery, localizedOps);
       setParsedQuery(parsed);
 
-      // Perform search
+      // Perform search (with locale for sorting and operator canonicalization)
       const searchResults = searchTransactions(searchQuery, {
         limit,
         sortBy: "relevance",
+        locale,
+        localizedOps,
       });
 
       const endTime = performance.now();
@@ -166,7 +187,7 @@ export function useTransactionSearch(
         setRecentSearches(getRecentSearches());
       }
     },
-    [limit]
+    [limit, locale, localizedOps]
   );
 
   // Set query with debounced search

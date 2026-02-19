@@ -6,7 +6,7 @@
 
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { DollarSign, X as XIcon } from "lucide-react";
 import * as SliderPrimitive from "@radix-ui/react-slider";
@@ -31,14 +31,18 @@ export interface AmountRangeFilterProps {
   showPresets?: boolean;
   /** Transaction amounts for distribution visualization */
   transactionAmounts?: number[];
+  /** BCP 47 locale for currency formatting */
+  locale?: string;
+  /** ISO 4217 currency code (default: "USD") */
+  currency?: string;
 }
 
-// Preset amount ranges
-const PRESETS = [
-  { label: "Under $25", min: undefined, max: 25 },
-  { label: "$25-100", min: 25, max: 100 },
-  { label: "$100-500", min: 100, max: 500 },
-  { label: "$500+", min: 500, max: undefined },
+// Preset amount ranges (values only; labels are generated locale-aware)
+const PRESET_VALUES = [
+  { min: undefined, max: 25 },
+  { min: 25, max: 100 },
+  { min: 100, max: 500 },
+  { min: 500, max: undefined },
 ] as const;
 
 export function AmountRangeFilter({
@@ -51,8 +55,52 @@ export function AmountRangeFilter({
   className,
   showPresets = true,
   transactionAmounts = [],
+  locale = "en-US",
+  currency = "USD",
 }: AmountRangeFilterProps) {
   const t = useTranslations("amountFilter");
+
+  // Locale-aware currency formatter
+  const formatAmount = useCallback(
+    (amount: number) => {
+      try {
+        return new Intl.NumberFormat(locale, {
+          style: "currency",
+          currency,
+          maximumFractionDigits: 0,
+        }).format(amount);
+      } catch {
+        return `$${amount}`;
+      }
+    },
+    [locale, currency]
+  );
+
+  // Get currency symbol for input fields
+  const currencySymbol = useMemo(() => {
+    try {
+      return new Intl.NumberFormat(locale, { style: "currency", currency })
+        .formatToParts(0)
+        .find((p) => p.type === "currency")?.value || "$";
+    } catch {
+      return "$";
+    }
+  }, [locale, currency]);
+
+  // Build locale-aware preset labels
+  const PRESETS = useMemo(
+    () =>
+      PRESET_VALUES.map((p) => ({
+        ...p,
+        label:
+          p.min === undefined
+            ? t("presetUnder", { amount: formatAmount(p.max!) })
+            : p.max === undefined
+              ? `${formatAmount(p.min)}+`
+              : `${formatAmount(p.min)}–${formatAmount(p.max)}`,
+      })),
+    [formatAmount, t]
+  );
 
   // Internal state for slider values
   const [sliderValues, setSliderValues] = useState<[number, number]>([
@@ -231,8 +279,8 @@ export function AmountRangeFilter({
 
       {/* Value Labels */}
       <div className="flex justify-between px-1 text-xs text-muted-foreground">
-        <span>${min}</span>
-        <span>${max}+</span>
+        <span>{formatAmount(min)}</span>
+        <span>{formatAmount(max)}+</span>
       </div>
 
       {/* Input Fields */}
@@ -241,7 +289,7 @@ export function AmountRangeFilter({
           <label className="sr-only">{t("minLabel")}</label>
           <div className="relative">
             <span className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-              $
+              {currencySymbol}
             </span>
             <input
               type="number"
@@ -262,7 +310,7 @@ export function AmountRangeFilter({
           <label className="sr-only">{t("maxLabel")}</label>
           <div className="relative">
             <span className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground">
-              $
+              {currencySymbol}
             </span>
             <input
               type="number"
@@ -284,10 +332,10 @@ export function AmountRangeFilter({
       {hasFilter && (
         <div className="text-center text-sm font-medium text-teal-600">
           {minValue !== undefined && maxValue !== undefined
-            ? `$${minValue.toFixed(0)} — $${maxValue.toFixed(0)}`
+            ? `${formatAmount(minValue)} — ${formatAmount(maxValue)}`
             : minValue !== undefined
-              ? `$${minValue.toFixed(0)} and up`
-              : `Up to $${maxValue!.toFixed(0)}`}
+              ? `${formatAmount(minValue)} ${t("andUp")}`
+              : `${t("upTo")} ${formatAmount(maxValue!)}`}
         </div>
       )}
     </div>
@@ -316,6 +364,6 @@ function calculateHistogram(
   return histogram;
 }
 
-// Export preset type for external use
-export type AmountPreset = (typeof PRESETS)[number];
-export { PRESETS as AMOUNT_PRESETS };
+// Export preset values for external use
+export type AmountPreset = (typeof PRESET_VALUES)[number];
+export { PRESET_VALUES as AMOUNT_PRESET_VALUES };
