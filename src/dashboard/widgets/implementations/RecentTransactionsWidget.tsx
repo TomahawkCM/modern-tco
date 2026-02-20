@@ -1,3 +1,4 @@
+import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
 import { db } from "@/lib/budget-db";
 import { useLiveQuery } from "dexie-react-hooks";
@@ -39,17 +40,14 @@ export function RecentTransactionsWidget({ config }: RecentTransactionsWidgetPro
 
         <div className="custom-scrollbar space-y-1 overflow-y-auto">
           {transactions.length === 0 ? (
-            <div className="py-8 text-center text-sm text-slate-500">
-              {t("noTransactions")}
-              <div className="mt-4">
-                <NextLink
-                  href="/budget-app/transactions"
-                  className="rounded-lg bg-white/5 px-4 py-2 text-sm text-slate-300 transition-colors hover:bg-white/10"
-                >
-                  {t("addTransaction")}
-                </NextLink>
-              </div>
-            </div>
+            <EmptyState
+              icon={Receipt}
+              title={t("noTransactions")}
+              description={t("addTransaction")}
+              actionLabel={t("addTransaction")}
+              onAction={() => (window.location.href = "/budget-app/transactions")}
+              className="min-h-[200px] border-none bg-transparent p-0"
+            />
           ) : (
             transactions.map((transaction) => (
               <div

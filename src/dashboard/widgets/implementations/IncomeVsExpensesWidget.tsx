@@ -6,12 +6,12 @@
  * Compares total income vs expenses for the current month
  */
 
+import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
 import { db } from "@/lib/budget-db";
 import { useLiveQuery } from "dexie-react-hooks";
-import { ArrowDownRight, ArrowUpRight, BarChart3, Plus, Scale } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, BarChart3, Scale } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
-import NextLink from "next/link";
 import { useMemo } from "react";
 import type { WidgetConfig } from "../types";
 
@@ -89,17 +89,14 @@ export function IncomeVsExpensesWidget({ config }: IncomeVsExpensesWidgetProps) 
 
         {/* Content */}
         {!hasData ? (
-          <div className="flex flex-1 flex-col items-center justify-center py-8 text-center">
-            <Scale className="mb-3 h-12 w-12 text-slate-600" />
-            <p className="text-sm text-slate-500">{t("noData")}</p>
-            <NextLink
-              href="/budget-app/transactions"
-              className="mt-4 flex items-center gap-2 rounded-lg border border-blue-500/20 bg-blue-600/20 px-4 py-2 text-sm font-medium text-blue-300 transition-colors hover:bg-blue-600/30"
-            >
-              <Plus className="h-4 w-4" />
-              {t("addTransactions")}
-            </NextLink>
-          </div>
+          <EmptyState
+            icon={Scale}
+            title={t("noData")}
+            description={t("addTransactions")}
+            actionLabel={t("addTransactions")}
+            onAction={() => (window.location.href = "/budget-app/transactions")}
+            className="min-h-[200px] border-none bg-transparent p-0"
+          />
         ) : (
           <div className="flex flex-1 flex-col justify-center space-y-6">
             {/* Income Bar */}

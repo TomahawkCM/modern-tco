@@ -8,8 +8,9 @@
 
 import { AccessibilityQuickToggle } from "@/components/budget/AccessibilityQuickToggle";
 import { BudgetAccessibilityInitializer } from "@/components/budget/BudgetAccessibilityInitializer";
-import { OnboardingTour } from "@/components/budget/OnboardingTour";
+import { CommandPalette } from "@/components/budget/CommandPalette";
 import { IOSInstallBanner } from "@/components/budget/IOSInstallBanner";
+import { OnboardingTour } from "@/components/budget/OnboardingTour";
 import { PWAInstallPrompt } from "@/components/budget/PWAInstallPrompt";
 import { ShortcutsModal } from "@/components/budget/ShortcutsModal";
 import { ToastProvider } from "@/components/budget/Toast";
@@ -18,15 +19,14 @@ import { ChatbotWidget } from "@/components/budget/chatbot/ChatbotWidget";
 import { FloatingActionButton } from "@/components/budget/layout/FloatingActionButton";
 import { MobileNav } from "@/components/budget/layout/MobileNav";
 import { Sidebar } from "@/components/budget/layout/Sidebar";
-import { CommandPalette } from "@/components/budget/CommandPalette";
 import { WelcomeBanner } from "@/components/budget/onboarding";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ChatbotProvider } from "@/contexts/ChatbotContext";
 import { NotificationProvider } from "@/contexts/NotificationContext";
-import { ProfileProvider } from "@/contexts/ProfileContext";
 import { PrivacyProvider } from "@/contexts/PrivacyContext";
+import { ProfileProvider } from "@/contexts/ProfileContext";
 import { SeniorsModeProvider } from "@/contexts/SeniorsModeContext";
 import { useIOSStatePreservation } from "@/hooks/useIOSStatePreservation";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
@@ -34,7 +34,7 @@ import { usePWA } from "@/hooks/usePWA";
 import { Menu, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Breadcrumb } from "@/components/budget/Breadcrumb";
 import { ClientI18nProvider } from "@/components/budget/ClientI18nProvider";
@@ -52,6 +52,20 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
     pathname?.startsWith("/budget-app/landing") ||
     pathname?.startsWith("/budget-app/auth") ||
     pathname?.startsWith("/budget-app/admin");
+
+  const isOnboardingRoute = pathname === "/budget-app/onboarding";
+
+  // Check for onboarding completion
+  useEffect(() => {
+    // Skip check for public routes or if we're already on onboarding
+    if (isPublicRoute || isOnboardingRoute) return;
+
+    const isOnboarded = localStorage.getItem("budget_app_onboarding_completed");
+
+    if (!isOnboarded) {
+      router.push("/budget-app/onboarding");
+    }
+  }, [pathname, isPublicRoute, isOnboardingRoute, router]);
 
   // PWA functionality - Phase 3.2
   usePWA(); // Register service worker
@@ -79,7 +93,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
   });
 
   // Render simplified layout for public/auth/admin routes
-  if (isPublicRoute) {
+  if (isPublicRoute || isOnboardingRoute) {
     return (
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
         <SeniorsModeProvider>
@@ -203,10 +217,9 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
 
                         <div className="mx-auto max-w-[1440px] px-4 py-6 sm:px-6 lg:px-8">
                           {/* Breadcrumbs for deep pages (depth > 2 past /budget-app/) */}
-                          {pathname &&
-                            pathname.split("/").filter(Boolean).length > 2 && (
-                              <Breadcrumb className="mb-2" />
-                            )}
+                          {pathname && pathname.split("/").filter(Boolean).length > 2 && (
+                            <Breadcrumb className="mb-2" />
+                          )}
                           <ToastProvider>{children}</ToastProvider>
                         </div>
                       </main>

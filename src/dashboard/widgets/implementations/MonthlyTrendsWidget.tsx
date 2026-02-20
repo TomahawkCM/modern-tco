@@ -6,6 +6,7 @@
  * Shows a line chart of income and expense trends over the last 6 months
  */
 
+import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
 import { db } from "@/lib/budget-db";
 import { useLiveQuery } from "dexie-react-hooks";
@@ -133,11 +134,14 @@ export function MonthlyTrendsWidget({ config }: MonthlyTrendsWidgetProps) {
 
         {/* Content */}
         {!hasEnoughData ? (
-          <div className="flex flex-1 flex-col items-center justify-center py-8 text-center">
-            <TrendingUp className="mb-3 h-12 w-12 text-slate-600" />
-            <p className="text-sm text-slate-500">{t("notEnoughData")}</p>
-            <p className="mt-2 max-w-xs text-xs text-slate-600">{t("needMoreData")}</p>
-          </div>
+          <EmptyState
+            icon={TrendingUp}
+            title={t("notEnoughData")}
+            description={t("needMoreData")}
+            actionLabel={t("addTransactions")}
+            onAction={() => (window.location.href = "/budget-app/transactions")}
+            className="min-h-[200px] border-none bg-transparent p-0"
+          />
         ) : (
           <div className="flex-1">
             <ResponsiveContainer width="100%" height={220}>

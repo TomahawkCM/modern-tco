@@ -5,17 +5,18 @@
  * Create and manage monthly/annual budgets by category
  */
 
-import { useState, useEffect } from "react";
-import { Plus, Edit, Trash2, TrendingUp, TrendingDown, AlertCircle } from "lucide-react";
-import { db } from "@/lib/budget-db";
-import type { Budget, Category, Transaction } from "@/types/budget";
-import { sumAmounts, subtractAmounts } from "@/lib/money";
-import { detectOverspending } from "@/lib/analytics/overspending-detector";
-import { OverspendingAlerts } from "@/components/budget/OverspendingAlerts";
 import { ConfirmDialog } from "@/components/budget/ConfirmDialog";
-import { useToast } from "@/components/budget/Toast";
 import { HelpTooltip } from "@/components/budget/HelpTooltip";
+import { OverspendingAlerts } from "@/components/budget/OverspendingAlerts";
+import { useToast } from "@/components/budget/Toast";
 import { PullToRefresh } from "@/components/budget/layout/PullToRefresh";
+import { EmptyState } from "@/components/budget/states/EmptyState";
+import { detectOverspending } from "@/lib/analytics/overspending-detector";
+import { db } from "@/lib/budget-db";
+import { subtractAmounts, sumAmounts } from "@/lib/money";
+import type { Budget, Category, Transaction } from "@/types/budget";
+import { AlertCircle, Edit, Plus, Trash2, TrendingDown, TrendingUp } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface CategoryBudgetData {
   category: Category;
@@ -184,310 +185,322 @@ export default function BudgetsPage() {
 
   return (
     <PullToRefresh onRefresh={loadData}>
-    <div className="space-y-6">
-      {/* Header - Enhanced */}
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="flex items-center gap-3">
-            <h1 className="text-4xl font-bold text-white">Budgets</h1>
-            <HelpTooltip
-              content="Set spending limits for each category. Track your progress with color-coded alerts: Green = On Track, Yellow = Warning (80%), Red = Over Budget (100%)."
-              learnMoreUrl="/docs/user-guide#budgets"
-              ariaLabel="More information about budgets"
-              iconSize="h-5 w-5"
-            />
-          </div>
-          <p className="mt-2 text-lg font-medium text-slate-400">
-            {new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })}
-          </p>
-        </div>
-        <button
-          onClick={() => setShowAddModal(true)}
-          className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-teal-500 px-6 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-        >
-          <Plus className="h-5 w-5" />
-          Add Budget
-        </button>
-      </div>
-
-      {/* Overall Summary - Enhanced */}
-      <div className="rounded-lg border-l-4 border-teal-500 bg-white p-8 shadow-md">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+      <div className="space-y-6">
+        {/* Header - Enhanced */}
+        <div className="flex items-center justify-between">
           <div>
-            <p className="mb-2 text-base font-medium text-gray-700">Total Budgeted</p>
-            <p className="text-3xl font-bold text-gray-900">${totalBudgeted.toFixed(2)}</p>
-          </div>
-          <div>
-            <p className="mb-2 text-base font-medium text-gray-700">Total Spent</p>
-            <p className="flex items-center gap-2 text-3xl font-bold text-red-600">
-              <TrendingDown className="h-6 w-6" aria-hidden="true" />
-              <span className="sr-only">Total expenses: </span>${totalSpent.toFixed(2)}
-            </p>
-          </div>
-          <div>
-            <p className="mb-2 text-base font-medium text-gray-700">Remaining</p>
-            <p
-              className={`flex items-center gap-2 text-3xl font-bold ${totalRemaining >= 0 ? "text-green-600" : "text-red-600"}`}
-            >
-              {totalRemaining >= 0 ? (
-                <TrendingUp className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <AlertCircle className="h-6 w-6" aria-hidden="true" />
-              )}
-              ${Math.abs(totalRemaining).toFixed(2)}
-            </p>
-          </div>
-          <div>
-            <div className="mb-2 flex items-center gap-2">
-              <p className="text-base font-medium text-gray-700">Overall Progress</p>
+            <div className="flex items-center gap-3">
+              <h1 className="text-4xl font-bold text-white">Budgets</h1>
               <HelpTooltip
-                content={
-                  <>
-                    <strong>Budget Progress:</strong> Green (✓ On Track) = 0-79% spent. Yellow (⚠
-                    Warning) = 80-99% spent. Red (✖ Over) = 100%+ spent. Colors update
-                    automatically as you spend.
-                  </>
-                }
-                learnMoreUrl="/docs/user-guide#budget-progress"
-                ariaLabel="More information about budget progress and alert thresholds"
+                content="Set spending limits for each category. Track your progress with color-coded alerts: Green = On Track, Yellow = Warning (80%), Red = Over Budget (100%)."
+                learnMoreUrl="/docs/user-guide#budgets"
+                ariaLabel="More information about budgets"
+                iconSize="h-5 w-5"
               />
             </div>
-            <div className="space-y-2">
-              <div className="h-6 overflow-hidden rounded-full bg-gray-200 shadow-inner">
-                <div
-                  className={`h-full transition-all ${
-                    overallPercentage < 80
-                      ? "bg-green-500"
-                      : overallPercentage < 100
-                        ? "bg-yellow-500"
-                        : "bg-red-500"
-                  }`}
-                  style={{ width: `${Math.min(overallPercentage, 100)}%` }}
+            <p className="mt-2 text-lg font-medium text-slate-400">
+              {new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+            </p>
+          </div>
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-teal-500 px-6 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+          >
+            <Plus className="h-5 w-5" />
+            Add Budget
+          </button>
+        </div>
+
+        {/* Overall Summary - Enhanced */}
+        <div className="rounded-lg border-l-4 border-teal-500 bg-white p-8 shadow-md">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+            <div>
+              <p className="mb-2 text-base font-medium text-gray-700">Total Budgeted</p>
+              <p className="text-3xl font-bold text-gray-900">${totalBudgeted.toFixed(2)}</p>
+            </div>
+            <div>
+              <p className="mb-2 text-base font-medium text-gray-700">Total Spent</p>
+              <p className="flex items-center gap-2 text-3xl font-bold text-red-600">
+                <TrendingDown className="h-6 w-6" aria-hidden="true" />
+                <span className="sr-only">Total expenses: </span>${totalSpent.toFixed(2)}
+              </p>
+            </div>
+            <div>
+              <p className="mb-2 text-base font-medium text-gray-700">Remaining</p>
+              <p
+                className={`flex items-center gap-2 text-3xl font-bold ${totalRemaining >= 0 ? "text-green-600" : "text-red-600"}`}
+              >
+                {totalRemaining >= 0 ? (
+                  <TrendingUp className="h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <AlertCircle className="h-6 w-6" aria-hidden="true" />
+                )}
+                ${Math.abs(totalRemaining).toFixed(2)}
+              </p>
+            </div>
+            <div>
+              <div className="mb-2 flex items-center gap-2">
+                <p className="text-base font-medium text-gray-700">Overall Progress</p>
+                <HelpTooltip
+                  content={
+                    <>
+                      <strong>Budget Progress:</strong> Green (✓ On Track) = 0-79% spent. Yellow (⚠
+                      Warning) = 80-99% spent. Red (✖ Over) = 100%+ spent. Colors update
+                      automatically as you spend.
+                    </>
+                  }
+                  learnMoreUrl="/docs/user-guide#budget-progress"
+                  ariaLabel="More information about budget progress and alert thresholds"
                 />
               </div>
-              <div className="flex items-center justify-between">
-                <span
-                  className={`text-xl font-bold ${
-                    overallPercentage < 80
-                      ? "text-green-600"
+              <div className="space-y-2">
+                <div className="h-6 overflow-hidden rounded-full bg-gray-200 shadow-inner">
+                  <div
+                    className={`h-full transition-all ${
+                      overallPercentage < 80
+                        ? "bg-green-500"
+                        : overallPercentage < 100
+                          ? "bg-yellow-500"
+                          : "bg-red-500"
+                    }`}
+                    style={{ width: `${Math.min(overallPercentage, 100)}%` }}
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`text-xl font-bold ${
+                      overallPercentage < 80
+                        ? "text-green-600"
+                        : overallPercentage < 100
+                          ? "text-yellow-600"
+                          : "text-red-600"
+                    }`}
+                  >
+                    {overallPercentage.toFixed(0)}%
+                  </span>
+                  <span
+                    className={`rounded-full px-3 py-1 text-sm font-semibold ${
+                      overallPercentage < 80
+                        ? "bg-green-100 text-green-700"
+                        : overallPercentage < 100
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    {overallPercentage < 80
+                      ? "✓ On Track"
                       : overallPercentage < 100
-                        ? "text-yellow-600"
-                        : "text-red-600"
-                  }`}
-                >
-                  {overallPercentage.toFixed(0)}%
-                </span>
-                <span
-                  className={`rounded-full px-3 py-1 text-sm font-semibold ${
-                    overallPercentage < 80
-                      ? "bg-green-100 text-green-700"
-                      : overallPercentage < 100
-                        ? "bg-yellow-100 text-yellow-700"
-                        : "bg-red-100 text-red-700"
-                  }`}
-                >
-                  {overallPercentage < 80
-                    ? "✓ On Track"
-                    : overallPercentage < 100
-                      ? "⚠ Warning"
-                      : "✖ Over"}
-                </span>
+                        ? "⚠ Warning"
+                        : "✖ Over"}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Overspending Alerts */}
-      {overspendingAlerts.length > 0 && (
-        <div>
-          <h2 className="mb-4 text-lg font-semibold text-gray-900">⚠️ Budget Alerts</h2>
-          <OverspendingAlerts alerts={overspendingAlerts} />
-        </div>
-      )}
+        {/* Overspending Alerts */}
+        {overspendingAlerts.length > 0 && (
+          <div>
+            <h2 className="mb-4 text-lg font-semibold text-gray-900">⚠️ Budget Alerts</h2>
+            <OverspendingAlerts alerts={overspendingAlerts} />
+          </div>
+        )}
 
-      {/* Budget Categories - Modern responsive design */}
-      <div className="space-y-4">
-        {budgetData.map((data) => (
-          <div
-            key={data.category.id}
-            className="rounded-lg border-l-4 bg-white p-6 shadow transition-shadow hover:shadow-md"
-            style={{ borderLeftColor: data.category.color }}
-          >
-            <div className="mb-6 flex items-start justify-between">
-              <div className="flex items-center gap-4">
-                <div
-                  className="flex h-14 w-14 items-center justify-center rounded-full shadow-sm"
-                  style={{ backgroundColor: `${data.category.color}20` }}
-                >
-                  <div className="text-3xl">{getCategoryIcon(data.category.icon)}</div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900">{data.category.name}</h3>
-                  <p className="text-base font-medium text-gray-600">
-                    {data.transactionCount} transactions
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                {data.budget && (
-                  <>
-                    <button
-                      onClick={() => setEditingBudget(data.budget)}
-                      className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg p-3 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
-                      title="Edit budget"
-                      aria-label="Edit budget"
+        {/* Budget Categories - Modern responsive design */}
+        {/* Budget Categories - Modern responsive design */}
+        {budgetData.length > 0 ? (
+          <div className="space-y-4">
+            {budgetData.map((data) => (
+              <div
+                key={data.category.id}
+                className="rounded-lg border-l-4 bg-white p-6 shadow transition-shadow hover:shadow-md"
+                style={{ borderLeftColor: data.category.color }}
+              >
+                <div className="mb-6 flex items-start justify-between">
+                  <div className="flex items-center gap-4">
+                    <div
+                      className="flex h-14 w-14 items-center justify-center rounded-full shadow-sm"
+                      style={{ backgroundColor: `${data.category.color}20` }}
                     >
-                      <Edit className="h-6 w-6" />
-                    </button>
-                    <button
-                      onClick={() => initiateDeleteBudget(data.budget!, data)}
-                      className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg p-3 text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
-                      title="Delete budget"
-                      aria-label="Delete budget"
-                    >
-                      <Trash2 className="h-6 w-6" />
-                    </button>
-                  </>
-                )}
-              </div>
-            </div>
-
-            {data.budget ? (
-              <div className="space-y-5">
-                {/* Progress Bar - Enhanced */}
-                <div>
-                  <div className="mb-3 flex items-center justify-between">
-                    <span className="text-base font-semibold text-gray-700">
-                      ${data.spent.toFixed(2)} <span className="font-normal text-gray-500">of</span>{" "}
-                      ${data.budget.amount.toFixed(2)}
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`text-xl font-bold ${
-                          data.percentage < 80
-                            ? "text-green-600"
-                            : data.percentage < 100
-                              ? "text-yellow-600"
-                              : "text-red-600"
-                        }`}
-                      >
-                        {data.percentage.toFixed(0)}%
-                      </span>
-                      <span
-                        className={`rounded-full px-3 py-1 text-sm font-semibold ${
-                          data.percentage < 80
-                            ? "bg-green-100 text-green-700"
-                            : data.percentage < 100
-                              ? "bg-yellow-100 text-yellow-700"
-                              : "bg-red-100 text-red-700"
-                        }`}
-                      >
-                        {data.percentage < 80
-                          ? "✓ On Track"
-                          : data.percentage < 100
-                            ? "⚠ Warning"
-                            : "✖ Over"}
-                      </span>
+                      <div className="text-3xl">{getCategoryIcon(data.category.icon)}</div>
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900">{data.category.name}</h3>
+                      <p className="text-base font-medium text-gray-600">
+                        {data.transactionCount} transactions
+                      </p>
                     </div>
                   </div>
-                  <div className="h-6 overflow-hidden rounded-full bg-gray-200 shadow-inner">
-                    <div
-                      className={`h-full transition-all ${
-                        data.percentage < 80
-                          ? "bg-green-500"
-                          : data.percentage < 100
-                            ? "bg-yellow-500"
-                            : "bg-red-500"
-                      }`}
-                      style={{ width: `${Math.min(data.percentage, 100)}%` }}
-                    />
+                  <div className="flex items-center gap-3">
+                    {data.budget && (
+                      <>
+                        <button
+                          onClick={() => setEditingBudget(data.budget)}
+                          className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg p-3 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
+                          title="Edit budget"
+                          aria-label="Edit budget"
+                        >
+                          <Edit className="h-6 w-6" />
+                        </button>
+                        <button
+                          onClick={() => initiateDeleteBudget(data.budget!, data)}
+                          className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg p-3 text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
+                          title="Delete budget"
+                          aria-label="Delete budget"
+                        >
+                          <Trash2 className="h-6 w-6" />
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
 
-                {/* Status Message - Enhanced */}
-                <div className="flex items-center gap-3 border-t-2 border-gray-100 pt-2">
-                  {data.remaining >= 0 ? (
-                    <>
-                      <TrendingUp className="h-6 w-6 flex-shrink-0 text-green-600" />
-                      <p className="text-base font-semibold text-green-700">
-                        ${data.remaining.toFixed(2)} remaining this month
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <AlertCircle className="h-6 w-6 flex-shrink-0 text-red-600" />
-                      <p className="text-base font-semibold text-red-700">
-                        ${Math.abs(data.remaining).toFixed(2)} over budget this month
-                      </p>
-                    </>
-                  )}
-                </div>
+                {data.budget ? (
+                  <div className="space-y-5">
+                    {/* Progress Bar - Enhanced */}
+                    <div>
+                      <div className="mb-3 flex items-center justify-between">
+                        <span className="text-base font-semibold text-gray-700">
+                          ${data.spent.toFixed(2)}{" "}
+                          <span className="font-normal text-gray-500">of</span> $
+                          {data.budget.amount.toFixed(2)}
+                        </span>
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`text-xl font-bold ${
+                              data.percentage < 80
+                                ? "text-green-600"
+                                : data.percentage < 100
+                                  ? "text-yellow-600"
+                                  : "text-red-600"
+                            }`}
+                          >
+                            {data.percentage.toFixed(0)}%
+                          </span>
+                          <span
+                            className={`rounded-full px-3 py-1 text-sm font-semibold ${
+                              data.percentage < 80
+                                ? "bg-green-100 text-green-700"
+                                : data.percentage < 100
+                                  ? "bg-yellow-100 text-yellow-700"
+                                  : "bg-red-100 text-red-700"
+                            }`}
+                          >
+                            {data.percentage < 80
+                              ? "✓ On Track"
+                              : data.percentage < 100
+                                ? "⚠ Warning"
+                                : "✖ Over"}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="h-6 overflow-hidden rounded-full bg-gray-200 shadow-inner">
+                        <div
+                          className={`h-full transition-all ${
+                            data.percentage < 80
+                              ? "bg-green-500"
+                              : data.percentage < 100
+                                ? "bg-yellow-500"
+                                : "bg-red-500"
+                          }`}
+                          style={{ width: `${Math.min(data.percentage, 100)}%` }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Status Message - Enhanced */}
+                    <div className="flex items-center gap-3 border-t-2 border-gray-100 pt-2">
+                      {data.remaining >= 0 ? (
+                        <>
+                          <TrendingUp className="h-6 w-6 flex-shrink-0 text-green-600" />
+                          <p className="text-base font-semibold text-green-700">
+                            ${data.remaining.toFixed(2)} remaining this month
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <AlertCircle className="h-6 w-6 flex-shrink-0 text-red-600" />
+                          <p className="text-base font-semibold text-red-700">
+                            ${Math.abs(data.remaining).toFixed(2)} over budget this month
+                          </p>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => {
+                      setEditingBudget({
+                        id: `budget_${Date.now()}`,
+                        categoryId: data.category.id,
+                        amount: 0,
+                        period: "monthly",
+                        startDate: new Date(),
+                        endDate: null,
+                        rollover: false,
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                      });
+                    }}
+                    className="min-h-[48px] w-full rounded-lg border-2 border-dashed border-gray-300 px-4 py-3 text-base font-semibold text-gray-600 transition-all hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:shadow-md"
+                  >
+                    + Set Budget
+                  </button>
+                )}
               </div>
-            ) : (
-              <button
-                onClick={() => {
-                  setEditingBudget({
-                    id: `budget_${Date.now()}`,
-                    categoryId: data.category.id,
-                    amount: 0,
-                    period: "monthly",
-                    startDate: new Date(),
-                    endDate: null,
-                    rollover: false,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                  });
-                }}
-                className="min-h-[48px] w-full rounded-lg border-2 border-dashed border-gray-300 px-4 py-3 text-base font-semibold text-gray-600 transition-all hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:shadow-md"
-              >
-                + Set Budget
-              </button>
-            )}
+            ))}
           </div>
-        ))}
-      </div>
+        ) : (
+          <EmptyState
+            icon={TrendingUp}
+            title="No budgets set"
+            description="Create a budget to track your spending limits and goals."
+            actionLabel="Create First Budget"
+            onAction={() => setShowAddModal(true)}
+          />
+        )}
 
-      {/* Budget Modal */}
-      {(showAddModal || editingBudget) && (
-        <BudgetModal
-          categories={categories.filter((c) => c.type === "expense")}
-          budget={editingBudget}
-          onSave={saveBudget}
-          onClose={() => {
-            setShowAddModal(false);
-            setEditingBudget(null);
-          }}
+        {/* Budget Modal */}
+        {(showAddModal || editingBudget) && (
+          <BudgetModal
+            categories={categories.filter((c) => c.type === "expense")}
+            budget={editingBudget}
+            onSave={saveBudget}
+            onClose={() => {
+              setShowAddModal(false);
+              setEditingBudget(null);
+            }}
+          />
+        )}
+
+        {/* Delete Confirmation Dialog */}
+        <ConfirmDialog
+          open={deleteConfirmOpen}
+          onOpenChange={setDeleteConfirmOpen}
+          onConfirm={confirmDeleteBudget}
+          title="Delete Budget"
+          description="This will remove the budget limit for this category. Transactions will not be deleted."
+          impact={
+            deletingBudget
+              ? {
+                  title: "You will lose:",
+                  items: [
+                    `${deletingBudget.data.category.name}: $${deletingBudget.budget.amount.toFixed(2)}/${deletingBudget.budget.period}`,
+                    `Current progress: ${deletingBudget.data.percentage.toFixed(0)}% spent ($${deletingBudget.data.spent.toFixed(2)})`,
+                    `${deletingBudget.data.transactionCount} transaction${deletingBudget.data.transactionCount === 1 ? "" : "s"} will become unbudgeted`,
+                    deletingBudget.data.remaining < 0
+                      ? `Currently ${Math.abs(deletingBudget.data.remaining).toFixed(2)} over budget`
+                      : `$${deletingBudget.data.remaining.toFixed(2)} remaining budget`,
+                  ],
+                }
+              : undefined
+          }
+          confirmLabel="Delete Budget"
+          variant="destructive"
+          icon={<Trash2 className="h-5 w-5" />}
         />
-      )}
-
-      {/* Delete Confirmation Dialog */}
-      <ConfirmDialog
-        open={deleteConfirmOpen}
-        onOpenChange={setDeleteConfirmOpen}
-        onConfirm={confirmDeleteBudget}
-        title="Delete Budget"
-        description="This will remove the budget limit for this category. Transactions will not be deleted."
-        impact={
-          deletingBudget
-            ? {
-                title: "You will lose:",
-                items: [
-                  `${deletingBudget.data.category.name}: $${deletingBudget.budget.amount.toFixed(2)}/${deletingBudget.budget.period}`,
-                  `Current progress: ${deletingBudget.data.percentage.toFixed(0)}% spent ($${deletingBudget.data.spent.toFixed(2)})`,
-                  `${deletingBudget.data.transactionCount} transaction${deletingBudget.data.transactionCount === 1 ? "" : "s"} will become unbudgeted`,
-                  deletingBudget.data.remaining < 0
-                    ? `Currently ${Math.abs(deletingBudget.data.remaining).toFixed(2)} over budget`
-                    : `$${deletingBudget.data.remaining.toFixed(2)} remaining budget`,
-                ],
-              }
-            : undefined
-        }
-        confirmLabel="Delete Budget"
-        variant="destructive"
-        icon={<Trash2 className="h-5 w-5" />}
-      />
-    </div>
+      </div>
     </PullToRefresh>
   );
 }

@@ -6,12 +6,12 @@
  * Shows a pie chart of spending distribution by category for the current month
  */
 
+import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
 import { db } from "@/lib/budget-db";
 import { useLiveQuery } from "dexie-react-hooks";
-import { PieChart, Plus, ShoppingBag } from "lucide-react";
+import { PieChart, ShoppingBag } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
-import NextLink from "next/link";
 import { useMemo } from "react";
 import { Cell, Pie, PieChart as RechartsPieChart, ResponsiveContainer, Tooltip } from "recharts";
 import type { WidgetConfig } from "../types";
@@ -119,17 +119,14 @@ export function SpendingByCategoryWidget({ config }: SpendingByCategoryWidgetPro
 
         {/* Content */}
         {!hasData ? (
-          <div className="flex flex-1 flex-col items-center justify-center py-8 text-center">
-            <ShoppingBag className="mb-3 h-12 w-12 text-slate-600" />
-            <p className="text-sm text-slate-500">{t("noData")}</p>
-            <NextLink
-              href="/budget-app/transactions"
-              className="mt-4 flex items-center gap-2 rounded-lg border border-violet-500/20 bg-violet-600/20 px-4 py-2 text-sm font-medium text-violet-300 transition-colors hover:bg-violet-600/30"
-            >
-              <Plus className="h-4 w-4" />
-              {t("addTransactions")}
-            </NextLink>
-          </div>
+          <EmptyState
+            icon={ShoppingBag}
+            title={t("noData")}
+            description={t("addTransactions")}
+            actionLabel={t("addTransactions")}
+            onAction={() => (window.location.href = "/budget-app/transactions")}
+            className="min-h-[200px] border-none bg-transparent p-0"
+          />
         ) : (
           <div className="flex flex-1 flex-col gap-4 lg:flex-row">
             {/* Pie Chart */}

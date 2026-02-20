@@ -10,69 +10,63 @@
  * - Pull-to-refresh on transaction list
  */
 
-import { useState, useEffect, useRef, useMemo, useCallback } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import {
-  Plus,
-  Search,
-  Filter,
-  Download,
-  Edit,
-  Trash2,
-  Tag,
-  FileImage,
-  Split,
-  Check,
-  X as XIcon,
-  ArrowUp,
-  ArrowDown,
-  TrendingUp,
-  TrendingDown,
-  Receipt,
-  Upload,
-  ChevronDown,
-  ChevronUp,
-  Landmark,
-  CreditCard,
-} from "lucide-react";
-import { motion, type PanInfo } from "framer-motion";
-import {
-  db,
-  splitTransaction,
-  unsplitTransaction,
-  getSplitChildren,
-  type SplitData,
-} from "@/lib/budget-db";
-import type { Transaction, Category, Account } from "@/types/budget";
-import { sumAmounts, subtractAmounts } from "@/lib/money";
-import { calculateRunningBalancesMap } from "@/lib/utils/balanceCalculations";
-import { TransactionModal } from "@/components/budget/TransactionModal";
+import { BulkCategorizeConfirmation } from "@/components/budget/BulkCategorizeConfirmation";
+import { ConfirmDialog } from "@/components/budget/ConfirmDialog";
+import { HelpTooltip } from "@/components/budget/HelpTooltip";
+import { QuickCategorizeDialog } from "@/components/budget/QuickCategorizeDialog";
+import { QuickFiltersRow } from "@/components/budget/QuickFiltersRow";
 import { ReceiptThumbnail } from "@/components/budget/ReceiptThumbnail";
 import { SplitTransactionModal } from "@/components/budget/SplitTransactionModal";
-import { ConfirmDialog } from "@/components/budget/ConfirmDialog";
-import { recordCorrection, categorizeTransaction } from "@/lib/categorization/rules";
-import { useToast } from "@/components/budget/Toast";
-import { HelpTooltip } from "@/components/budget/HelpTooltip";
-import { EmptyState } from "@/components/budget/EmptyState";
 import { StickyBulkActionsBar } from "@/components/budget/StickyBulkActionsBar";
-import { QuickFiltersRow } from "@/components/budget/QuickFiltersRow";
-import { QuickCategorizeDialog } from "@/components/budget/QuickCategorizeDialog";
-import { BulkCategorizeConfirmation } from "@/components/budget/BulkCategorizeConfirmation";
+import { useToast } from "@/components/budget/Toast";
+import { TransactionModal } from "@/components/budget/TransactionModal";
 import { TransactionReviewModal } from "@/components/budget/TransactionReviewModal";
-import { extractVendorName } from "@/lib/vendor-matcher";
-import { aiFindMatchingVendorTransactions } from "@/lib/ai-vendor-matcher";
-import Link from "next/link";
-import { TransactionSearchBar } from "@/components/budget/search";
-import {
-  initializeSearchIndex,
-  searchTransactions,
-  initializeAutocompleteCache,
-} from "@/lib/search";
+import { PullToRefresh } from "@/components/budget/layout/PullToRefresh";
 import { LinkToLoanButton } from "@/components/budget/loans/LinkToLoanPopover";
 import { LinkedLoanBadgeInline } from "@/components/budget/loans/LinkedLoanBadge";
-import { PullToRefresh } from "@/components/budget/layout/PullToRefresh";
-import { getPaymentByTransactionId, getAllLoans } from "@/lib/loans/loan-db";
-import type { LoanPayment, Loan } from "@/types/budget";
+import { TransactionSearchBar } from "@/components/budget/search";
+import { EmptyState } from "@/components/budget/states/EmptyState";
+import { aiFindMatchingVendorTransactions } from "@/lib/ai-vendor-matcher";
+import {
+  db,
+  getSplitChildren,
+  splitTransaction,
+  unsplitTransaction,
+  type SplitData,
+} from "@/lib/budget-db";
+import { categorizeTransaction, recordCorrection } from "@/lib/categorization/rules";
+import { getAllLoans, getPaymentByTransactionId } from "@/lib/loans/loan-db";
+import { subtractAmounts, sumAmounts } from "@/lib/money";
+import {
+  initializeAutocompleteCache,
+  initializeSearchIndex,
+  searchTransactions,
+} from "@/lib/search";
+import { calculateRunningBalancesMap } from "@/lib/utils/balanceCalculations";
+import { extractVendorName } from "@/lib/vendor-matcher";
+import type { Account, Category, LoanPayment, Transaction } from "@/types/budget";
+import { motion, type PanInfo } from "framer-motion";
+import {
+  ArrowDown,
+  ArrowUp,
+  ChevronDown,
+  ChevronUp,
+  CreditCard,
+  Edit,
+  Landmark,
+  Plus,
+  Receipt,
+  Split,
+  Tag,
+  Trash2,
+  TrendingDown,
+  TrendingUp,
+  Upload,
+  X as XIcon,
+} from "lucide-react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export default function TransactionsPageClient() {
   const toast = useToast();
@@ -147,7 +141,6 @@ export default function TransactionsPageClient() {
   // Date range state
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-
 
   useEffect(() => {
     loadData();

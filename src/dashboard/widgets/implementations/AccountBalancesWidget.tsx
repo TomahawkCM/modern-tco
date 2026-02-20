@@ -1,6 +1,7 @@
+import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
 import { db } from "@/lib/budget-db";
-import { type Account, Transaction } from "@/types/budget";
+import type { Account } from "@/types/budget";
 import { useLiveQuery } from "dexie-react-hooks";
 import { CreditCard, Landmark, TrendingUp, Wallet } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
@@ -138,7 +139,14 @@ export function AccountBalancesWidget({ config }: AccountBalancesWidgetProps) {
 
         <div className="custom-scrollbar max-h-[200px] space-y-3 overflow-y-auto pr-2">
           {displayAccounts.length === 0 ? (
-            <div className="py-4 text-center text-sm text-slate-500">{t("noAccounts")}</div>
+            <EmptyState
+              icon={Wallet}
+              title={t("noAccounts")}
+              description={t("addAccount")}
+              actionLabel={t("addAccount")}
+              onAction={() => (window.location.href = "/budget-app/accounts")}
+              className="min-h-[200px] border-none bg-transparent p-0"
+            />
           ) : (
             displayAccounts.map((account) => {
               const Icon = getIcon(account.type);

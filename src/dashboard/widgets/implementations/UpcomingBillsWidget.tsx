@@ -6,11 +6,12 @@
  * Displays subscriptions with billing dates in the next 14 days
  */
 
+import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
 import { db } from "@/lib/budget-db";
 import type { Subscription } from "@/types/budget";
 import { useLiveQuery } from "dexie-react-hooks";
-import { Calendar, CreditCard, Plus } from "lucide-react";
+import { Calendar, CreditCard } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import NextLink from "next/link";
 import { useMemo } from "react";
@@ -98,17 +99,14 @@ export function UpcomingBillsWidget({ config }: UpcomingBillsWidgetProps) {
 
         {/* Content */}
         {upcomingBills.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center py-8 text-center">
-            <Calendar className="mb-3 h-12 w-12 text-slate-600" />
-            <p className="text-sm text-slate-500">{t("noBills")}</p>
-            <NextLink
-              href="/budget-app/subscriptions"
-              className="mt-4 flex items-center gap-2 rounded-lg border border-orange-500/20 bg-orange-600/20 px-4 py-2 text-sm font-medium text-orange-300 transition-colors hover:bg-orange-600/30"
-            >
-              <Plus className="h-4 w-4" />
-              {t("addSubscription")}
-            </NextLink>
-          </div>
+          <EmptyState
+            icon={Calendar}
+            title={t("noBills")}
+            description={t("addSubscription")}
+            actionLabel={t("addSubscription")}
+            onAction={() => (window.location.href = "/budget-app/subscriptions")}
+            className="min-h-[200px] border-none bg-transparent p-0"
+          />
         ) : (
           <div className="custom-scrollbar max-h-[250px] space-y-2 overflow-y-auto pr-1">
             {upcomingBills.map((bill) => (

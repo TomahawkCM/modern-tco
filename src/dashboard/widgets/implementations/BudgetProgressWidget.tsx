@@ -6,6 +6,7 @@
  * Shows progress bars comparing actual spending vs budget per category
  */
 
+import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
 import { db } from "@/lib/budget-db";
 import { useLiveQuery } from "dexie-react-hooks";
@@ -120,17 +121,14 @@ export function BudgetProgressWidget({ config }: BudgetProgressWidgetProps) {
 
         {/* Content */}
         {budgetProgress.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center py-8 text-center">
-            <Target className="mb-3 h-12 w-12 text-slate-600" />
-            <p className="text-sm text-slate-500">{t("noBudgets")}</p>
-            <NextLink
-              href="/budget-app/budgets"
-              className="mt-4 flex items-center gap-2 rounded-lg border border-emerald-500/20 bg-emerald-600/20 px-4 py-2 text-sm font-medium text-emerald-300 transition-colors hover:bg-emerald-600/30"
-            >
-              <TrendingUp className="h-4 w-4" />
-              {t("createBudget")}
-            </NextLink>
-          </div>
+          <EmptyState
+            icon={Target}
+            title={t("noBudgets")}
+            description={t("createBudget")}
+            actionLabel={t("createBudget")}
+            onAction={() => (window.location.href = "/budget-app/budgets")}
+            className="min-h-[200px] border-none bg-transparent p-0"
+          />
         ) : (
           <div className="custom-scrollbar max-h-[280px] space-y-4 overflow-y-auto pr-1">
             {budgetProgress.slice(0, 5).map((item) => (
