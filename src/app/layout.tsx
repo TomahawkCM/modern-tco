@@ -62,8 +62,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        {/* PWA Manifest */}
+        {/* PWA Manifest (both names to be safe) */}
         <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="/manifest.webmanifest" />
 
         {/* Apple PWA Meta Tags */}
         <meta name="mobile-web-app-capable" content="yes" />
