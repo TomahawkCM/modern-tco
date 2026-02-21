@@ -8,3 +8,4 @@ export { CurrencyInput } from "./CurrencyInput";
 export { PercentInput } from "./PercentInput";
 export { ResultsPanel } from "./ResultsPanel";
 export { CalculatorCard } from "./CalculatorCard";
+export { TransparencyPanel } from "./TransparencyPanel";
