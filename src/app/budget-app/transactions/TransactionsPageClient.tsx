@@ -25,7 +25,7 @@ import { PullToRefresh } from "@/components/budget/layout/PullToRefresh";
 import { LinkToLoanButton } from "@/components/budget/loans/LinkToLoanPopover";
 import { LinkedLoanBadgeInline } from "@/components/budget/loans/LinkedLoanBadge";
 import { TransactionSearchBar } from "@/components/budget/search";
-import { EmptyState } from "@/components/budget/states/EmptyState";
+import { EmptyState } from "@/components/budget/EmptyState";
 import { aiFindMatchingVendorTransactions } from "@/lib/ai-vendor-matcher";
 import {
   db,

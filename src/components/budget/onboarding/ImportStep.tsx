@@ -93,7 +93,7 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
         onComplete({ importedTransactions: 0, importMethod: "manual" });
       } else if (method === "later") {
         // Skip this step entirely
-        onSkip();
+        onSkip?.();
       }
     },
     [onComplete, onSkip]
@@ -118,7 +118,16 @@ export function ImportStep({ onComplete, onSkip }: StepProps) {
       setIsDragging(false);
 
       const file = e.dataTransfer.files[0];
-      const supportedExtensions = [".csv", ".ofx", ".qfx", ".pdf", ".qif", ".sta", ".mt940", ".xml"];
+      const supportedExtensions = [
+        ".csv",
+        ".ofx",
+        ".qfx",
+        ".pdf",
+        ".qif",
+        ".sta",
+        ".mt940",
+        ".xml",
+      ];
       if (file && supportedExtensions.some((ext) => file.name.toLowerCase().endsWith(ext))) {
         handleFileSelect(file);
       }

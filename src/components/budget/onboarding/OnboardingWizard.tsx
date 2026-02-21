@@ -18,6 +18,22 @@ import { useProfile } from "@/contexts/ProfileContext";
 import { Check, ChevronRight, User, Globe, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+export interface StepProps {
+  onComplete: (data?: Record<string, unknown>) => void;
+  onSkip?: () => void;
+}
+
+export function restartOnboarding(): void {
+  localStorage.removeItem("budget_app_onboarding_completed");
+}
+
+export function isOnboardingCompleted(): boolean {
+  return (
+    typeof window !== "undefined" &&
+    localStorage.getItem("budget_app_onboarding_completed") === "true"
+  );
+}
+
 export function OnboardingWizard() {
   const router = useRouter();
   const t = useTranslations();
