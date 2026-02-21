@@ -15,7 +15,7 @@ export function useSetBudgetLimit(
   budgets: Budget[],
   privacyMode: boolean,
   onBudgetUpdated?: () => void
-) {
+): BudgetToolHandler {
   const handler = useCallback(
     async (input: Record<string, unknown>) => {
       if (privacyMode) {
@@ -105,4 +105,6 @@ export function useSetBudgetLimit(
     handler,
     annotations: { readOnlyHint: false },
   });
+
+  return handler;
 }

@@ -8,7 +8,7 @@ import { useWebMCP } from "@mcp-b/react-webmcp";
 import type { Category } from "@/types/budget";
 import { ListCategoriesInput } from "./schemas";
 
-export function useListCategories(categories: Category[], privacyMode: boolean) {
+export function useListCategories(categories: Category[], privacyMode: boolean): BudgetToolHandler {
   const handler = useCallback(
     async (input: Record<string, unknown>) => {
       if (privacyMode) {
@@ -58,4 +58,6 @@ export function useListCategories(categories: Category[], privacyMode: boolean) 
     handler,
     annotations: { readOnlyHint: true },
   });
+
+  return handler;
 }

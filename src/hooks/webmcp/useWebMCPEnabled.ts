@@ -11,9 +11,15 @@ import { useSyncExternalStore } from "react";
 import { FEATURES } from "@/config/features";
 
 const STORAGE_KEY = "budget-webmcp-enabled";
+const BRIDGE_KEY = "budget-playwright-bridge";
 
 function getSnapshot(): boolean {
   if (typeof window === "undefined") return false;
+
+  // Dev-mode Playwright bridge: bypass browser API requirement
+  if (process.env.NODE_ENV === "development" && localStorage.getItem(BRIDGE_KEY) === "true") {
+    return true;
+  }
 
   // Check feature flag (compile-time gate)
   if (!FEATURES.webMCP) return false;
@@ -34,7 +40,7 @@ function getServerSnapshot(): boolean {
 function subscribe(callback: () => void): () => void {
   // Re-check when localStorage changes (cross-tab sync)
   const handler = (e: StorageEvent) => {
-    if (e.key === STORAGE_KEY) callback();
+    if (e.key === STORAGE_KEY || e.key === BRIDGE_KEY) callback();
   };
   window.addEventListener("storage", handler);
   return () => window.removeEventListener("storage", handler);

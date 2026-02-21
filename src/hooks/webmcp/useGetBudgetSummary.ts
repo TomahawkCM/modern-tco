@@ -20,7 +20,7 @@ export function useGetBudgetSummary(
   budgets: Budget[],
   categories: Category[],
   privacyMode: boolean
-) {
+): BudgetToolHandler {
   const handler = useCallback(
     async (input: Record<string, unknown>) => {
       if (privacyMode) {
@@ -98,4 +98,6 @@ export function useGetBudgetSummary(
     handler,
     annotations: { readOnlyHint: true },
   });
+
+  return handler;
 }

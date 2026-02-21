@@ -14,7 +14,7 @@ export function useCategorizeTransaction(
   categories: Category[],
   privacyMode: boolean,
   onTransactionUpdated?: () => void
-) {
+): BudgetToolHandler {
   const handler = useCallback(
     async (input: Record<string, unknown>) => {
       if (privacyMode) {
@@ -80,4 +80,6 @@ export function useCategorizeTransaction(
     handler,
     annotations: { readOnlyHint: false },
   });
+
+  return handler;
 }

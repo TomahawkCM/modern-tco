@@ -16,7 +16,7 @@ export function useAddTransaction(
   categories: Category[],
   privacyMode: boolean,
   onTransactionAdded?: () => void
-) {
+): BudgetToolHandler {
   const handler = useCallback(
     async (input: Record<string, unknown>) => {
       if (privacyMode) {
@@ -91,4 +91,6 @@ export function useAddTransaction(
     handler,
     annotations: { readOnlyHint: false },
   });
+
+  return handler;
 }

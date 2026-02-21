@@ -15,7 +15,7 @@ export function useSearchTransactions(
   categories: Category[],
   accounts: Account[],
   privacyMode: boolean
-) {
+): BudgetToolHandler {
   // Keep search index current
   useMemo(() => {
     if (transactions.length === 0) return;
@@ -131,4 +131,6 @@ export function useSearchTransactions(
     handler,
     annotations: { readOnlyHint: true },
   });
+
+  return handler;
 }

@@ -15,7 +15,7 @@ export function useGetAccountBalances(
   accounts: Account[],
   transactions: Transaction[],
   privacyMode: boolean
-) {
+): BudgetToolHandler {
   const handler = useCallback(
     async (input: Record<string, unknown>) => {
       if (privacyMode) {
@@ -62,4 +62,6 @@ export function useGetAccountBalances(
     handler,
     annotations: { readOnlyHint: true },
   });
+
+  return handler;
 }

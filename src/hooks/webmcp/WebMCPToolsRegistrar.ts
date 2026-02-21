@@ -66,16 +66,74 @@ export function WebMCPToolsRegistrar({ children }: { children: ReactNode }) {
     void loadData();
   }, [loadData]);
 
-  // Register all 9 tools
-  useSearchTransactions(transactions, categories, accounts, isPrivacyMode);
-  useGetBudgetSummary(transactions, budgets, categories, isPrivacyMode);
-  useGetSpendingByCategory(transactions, categories, budgets, isPrivacyMode);
-  useGetAccountBalances(accounts, transactions, isPrivacyMode);
-  useListCategories(categories, isPrivacyMode);
-  useGetSubscriptions(subscriptions, isPrivacyMode);
-  useAddTransaction(accounts, categories, isPrivacyMode, refresh);
-  useCategorizeTransaction(transactions, categories, isPrivacyMode, refresh);
-  useSetBudgetLimit(categories, budgets, isPrivacyMode, refresh);
+  // Register all 9 tools and capture handlers for bridge
+  const searchTransactions = useSearchTransactions(
+    transactions,
+    categories,
+    accounts,
+    isPrivacyMode
+  );
+  const getBudgetSummary = useGetBudgetSummary(transactions, budgets, categories, isPrivacyMode);
+  const getSpendingByCategory = useGetSpendingByCategory(
+    transactions,
+    categories,
+    budgets,
+    isPrivacyMode
+  );
+  const getAccountBalances = useGetAccountBalances(accounts, transactions, isPrivacyMode);
+  const listCategories = useListCategories(categories, isPrivacyMode);
+  const getSubscriptions = useGetSubscriptions(subscriptions, isPrivacyMode);
+  const addTransaction = useAddTransaction(accounts, categories, isPrivacyMode, refresh);
+  const categorizeTransaction = useCategorizeTransaction(
+    transactions,
+    categories,
+    isPrivacyMode,
+    refresh
+  );
+  const setBudgetLimit = useSetBudgetLimit(categories, budgets, isPrivacyMode, refresh);
+
+  // Dev-only window bridge for Playwright
+  useEffect(() => {
+    if (process.env.NODE_ENV !== "development") return;
+
+    window.__budgetTools = {
+      search_transactions: searchTransactions,
+      get_budget_summary: getBudgetSummary,
+      get_spending_by_category: getSpendingByCategory,
+      get_account_balances: getAccountBalances,
+      list_categories: listCategories,
+      get_subscriptions: getSubscriptions,
+      add_transaction: addTransaction,
+      categorize_transaction: categorizeTransaction,
+      set_budget_limit: setBudgetLimit,
+      _meta: {
+        ready: true,
+        toolCount: 9,
+        privacyMode: isPrivacyMode,
+        dataLoaded: transactions.length > 0 || accounts.length > 0,
+        lastRefresh: new Date().toISOString(),
+      },
+      refresh: loadData,
+    };
+
+    return () => {
+      delete window.__budgetTools;
+    };
+  }, [
+    searchTransactions,
+    getBudgetSummary,
+    getSpendingByCategory,
+    getAccountBalances,
+    listCategories,
+    getSubscriptions,
+    addTransaction,
+    categorizeTransaction,
+    setBudgetLimit,
+    isPrivacyMode,
+    transactions,
+    accounts,
+    loadData,
+  ]);
 
   return createElement("div", { "data-webmcp": "active" }, children);
 }
