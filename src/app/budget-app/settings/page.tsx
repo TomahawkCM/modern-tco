@@ -31,6 +31,7 @@ import {
   Wrench,
   Users,
   Bell,
+  Bot,
 } from "lucide-react";
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -662,13 +663,16 @@ function SettingsContent() {
 
       {/* Privacy Tab */}
       {activeTab === "privacy" && (
-        <PrivacyControlsPanel
-          settings={privacySettings}
-          onSettingsChange={(newSettings) => {
-            setPrivacySettings(newSettings);
-            savePrivacySettings(newSettings);
-          }}
-        />
+        <>
+          <PrivacyControlsPanel
+            settings={privacySettings}
+            onSettingsChange={(newSettings) => {
+              setPrivacySettings(newSettings);
+              savePrivacySettings(newSettings);
+            }}
+          />
+          <WebMCPSettingsSection />
+        </>
       )}
 
       {/* Accessibility Tab */}
@@ -1255,6 +1259,93 @@ function CategoryModal({
           onClose={() => setShowIconPicker(false)}
         />
       )}
+    </div>
+  );
+}
+
+// WebMCP Experimental Settings Section
+function WebMCPSettingsSection() {
+  const STORAGE_KEY = "budget-webmcp-enabled";
+  const [enabled, setEnabled] = useState(false);
+  const [hasSupport, setHasSupport] = useState(false);
+
+  useEffect(() => {
+    setEnabled(localStorage.getItem(STORAGE_KEY) === "true");
+    setHasSupport(
+      typeof navigator !== "undefined" &&
+        "modelContext" in navigator &&
+        typeof (navigator as unknown as Record<string, unknown>).modelContext === "object"
+    );
+  }, []);
+
+  function toggle() {
+    const next = !enabled;
+    localStorage.setItem(STORAGE_KEY, String(next));
+    setEnabled(next);
+    // Force reload so the WebMCPProvider picks up the change
+    window.location.reload();
+  }
+
+  return (
+    <div className="mt-6 rounded-xl border border-white/10 bg-white/5 p-6">
+      <div className="mb-4 flex items-center gap-3">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20">
+          <Bot className="h-5 w-5 text-purple-400" />
+        </div>
+        <div>
+          <h3 className="flex items-center gap-2 text-lg font-semibold text-white">Experimental</h3>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex-1">
+            <div className="flex items-center gap-2">
+              <span className="font-medium text-white">WebMCP AI Agent Tools</span>
+              <span className="rounded-full bg-purple-500/20 px-2 py-0.5 text-xs font-semibold text-purple-300">
+                Experimental
+              </span>
+            </div>
+            <p className="mt-1 text-sm text-slate-400">
+              Allow browser AI agents to interact with your budget data. Requires Chrome 146+ with
+              the WebMCP flag enabled.
+            </p>
+            {!hasSupport && enabled && (
+              <p className="mt-2 text-xs text-amber-400">
+                Your browser does not support WebMCP yet. Enable{" "}
+                <code className="rounded bg-white/10 px-1">chrome://flags/#webmcp-for-testing</code>{" "}
+                in Chrome 146 Canary.
+              </p>
+            )}
+          </div>
+          <button
+            onClick={toggle}
+            className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-900 ${
+              enabled ? "bg-teal-500" : "bg-slate-600"
+            }`}
+            role="switch"
+            aria-checked={enabled}
+            aria-label="Toggle WebMCP AI Agent Tools"
+          >
+            <span
+              className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+                enabled ? "translate-x-5" : "translate-x-0"
+              }`}
+            />
+          </button>
+        </div>
+
+        {enabled && (
+          <div className="rounded-lg border border-white/10 bg-slate-800/50 p-4">
+            <p className="text-xs text-slate-400">
+              When enabled, 9 tools are exposed to browser AI agents: search transactions, get
+              budget summary, spending by category, account balances, list categories, get
+              subscriptions, add transaction, categorize transaction, and set budget limit.
+              Encryption fields and bank identification data are never shared.
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

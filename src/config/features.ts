@@ -56,6 +56,13 @@ export const FEATURES = {
 
   /** Real-time collaboration - see changes from family members in real-time */
   realTimeCollab: APP_MODE === "online",
+
+  // ========================
+  // Experimental Features
+  // ========================
+
+  /** WebMCP - expose budget tools to browser AI agents (Chrome 146+ experimental) */
+  webMCP: false,
 } as const;
 
 /**
@@ -169,6 +176,12 @@ export const FEATURE_DESCRIPTIONS: Record<
     title: "Real-Time Collaboration",
     description: "See changes from family members instantly",
     icon: "refresh-cw",
+  },
+  webMCP: {
+    title: "WebMCP AI Agent Tools",
+    description:
+      "Allow browser AI agents to interact with your budget data (Chrome 146+ experimental)",
+    icon: "bot",
   },
 };
 
