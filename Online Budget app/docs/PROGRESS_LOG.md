@@ -307,6 +307,88 @@ Target:
 
 ---
 
+## Date: 2026-02-22
+
+### Session Objective
+
+- Session 4: Core Database Schema (Transactions + Accounts). Implement financial data schema — institutions, accounts, transactions, categories, category_translations, and user_category_overrides tables with RLS policies and proper indexing. No bank API calls, no categorization logic, no AI logic.
+
+### Skill(s) Used
+
+- Skill: superpowers:writing-plans
+- Skill: superpowers:subagent-driven-development
+
+### Completed
+
+- Files created:
+  - supabase/migrations/003_accounts_transactions_categories.sql (6 tables, indexes, RLS, triggers)
+  - docs/plans/2026-02-22-session-4-core-database-schema.md (implementation plan)
+- Files modified:
+  - supabase/database.types.ts (added 6 new table types: institutions, accounts, transactions, categories, category_translations, user_category_overrides — all with Relationships arrays)
+- Database schema changes:
+  - Created institutions table (shared reference, no RLS — provider_id, name, country_code)
+  - Created accounts table (user-owned, RLS — type CHECK constraint, balance_minor bigint, currency ISO 4217)
+  - Created categories table (system-level shared, no RLS — key UNIQUE, hierarchical parent_id)
+  - Created category_translations table (shared, no RLS — category_id + locale UNIQUE constraint)
+  - Created user_category_overrides table (user-owned, RLS — custom_name per category per user)
+  - Created transactions table (user-owned, RLS — amount_minor bigint, currency ISO 4217, FK to accounts + categories)
+  - 12 indexes created: provider_id, user_id, institution_id, parent_id, key, category_id, locale, user_id (overrides), user_id+transaction_date (composite), account_id, category_id (transactions)
+  - 2 updated_at triggers (accounts, transactions) using existing handle_updated_at() function
+- API routes added:
+  - None (schema only session)
+
+### Architectural Decisions
+
+- Decision: Institutions and categories are shared reference tables (no RLS)
+- Reason: Institutions are populated by bank sync integration (shared across users). Categories are system-level definitions with per-user overrides via user_category_overrides. Both need to be readable by all authenticated users.
+- Decision: Separate category_translations table instead of JSONB on categories
+- Reason: V1-DATABASE-SCHEMA-DESIGN.md specifies separate translations table. Enables clean locale-based lookups without JSONB extraction. UNIQUE(category_id, locale) prevents duplicates.
+- Decision: All money amounts as BIGINT minor units
+- Reason: Per project governance — currency stored in minor units (integer). No floating point. balance_minor on accounts, amount_minor on transactions. Currency as VARCHAR(3) ISO 4217.
+- Decision: CHECK constraints on account type and category key uniqueness
+- Reason: Postgres constraints enforce integrity at database level. Account types limited to checking/savings/credit/investment/loan/other. Category keys must be unique for reliable lookups.
+- Decision: DELETE policies on user-owned tables (accounts, transactions, overrides)
+- Reason: Users need to be able to delete their own accounts and transactions. Previous sessions (users, user_settings) deliberately omitted DELETE. Financial tables need it for user data management.
+- Decision: FK ordering in single migration file
+- Reason: institutions -> accounts -> categories -> translations -> overrides -> transactions. Categories must be created before transactions (FK dependency). Single migration file keeps all Session 4 schema changes atomic.
+
+### Financial Engine Impact
+
+- Confirmed no duplication of math logic
+- Engine version unchanged: v0.0.1 (no financial logic added in Session 4)
+- No financial calculations in any schema code
+- Schema stores raw financial data (amount_minor, balance_minor) — all computation will be in engine/ (Session 5)
+
+### Security & RLS Review
+
+- RLS enabled on: accounts, transactions, user_category_overrides (3 user-owned tables)
+- 12 RLS policies created (SELECT/INSERT/UPDATE/DELETE for each user-owned table)
+- All policies enforce auth.uid() = user_id
+- No RLS on: institutions, categories, category_translations (shared reference data)
+- institutions writable only by service role (no authenticated INSERT/UPDATE policies)
+- categories writable only by service role (no authenticated INSERT/UPDATE policies)
+
+### Known Gaps / TODO
+
+- Migrations not yet applied to Supabase (001 + 002 + 003 all pending — needs `supabase db push` or SQL editor)
+- No seed data for categories (system categories like "groceries", "rent", etc. need to be seeded before categorization works)
+- No bank API calls yet (accounts table ready but no Plaid/Salt Edge integration)
+- No categorization logic yet (transactions.category_id is nullable, confidence_score unused)
+- No AI logic yet (confidence_score column exists but no AI populates it)
+- Parent project ESLint tsconfig.eslint.json still doesn't include online-budget-app files (carried over)
+
+### Risks Identified
+
+- category_id FK on transactions means categories must be seeded before transactions can be categorized. No seed migration exists yet.
+- institutions table has no RLS — if Supabase anon key is exposed, anyone could read institution data. Acceptable for V1 since institution data is not user-specific.
+- No unique constraint on (user_id, provider_account_id) for accounts — could allow duplicate provider accounts. May need to add in future session.
+
+### Next Session Target
+
+- Session 5: Engine Integration Skeleton — implement engine folder skeleton, add Money module, add Aggregation module (basic income/expense totals), wire minimal test call from dashboard page. All financial math must live in engine/.
+
+---
+
 ---
 
 ## TEMPLATE FOR EACH SESSION ENTRY
