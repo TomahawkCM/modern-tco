@@ -13,6 +13,7 @@ export {
   addMinor,
   subtractMinor,
   sumMinor,
+  absMinor,
   toMajorUnits,
   formatMoney,
 } from "./operations";

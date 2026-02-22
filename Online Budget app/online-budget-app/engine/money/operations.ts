@@ -29,6 +29,10 @@ export function sumMinor(amounts: MinorAmount[], currency: string): MinorAmount 
   return { amountMinor: total, currency };
 }
 
+export function absMinor(amount: MinorAmount): MinorAmount {
+  return { amountMinor: Math.abs(amount.amountMinor), currency: amount.currency };
+}
+
 export function toMajorUnits(amountMinor: number, decimals: number = 2): number {
   return amountMinor / Math.pow(10, decimals);
 }

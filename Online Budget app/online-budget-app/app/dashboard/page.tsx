@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getSubscription } from "@/lib/subscription";
 import {
   aggregateIncomeExpense,
+  absMinor,
   toMajorUnits,
   ENGINE_VERSION,
 } from "@/engine";
@@ -54,7 +55,7 @@ export default async function DashboardPage() {
   const summary = aggregateIncomeExpense(engineInput, currency);
 
   const income = toMajorUnits(summary.totalIncome.amountMinor);
-  const expense = toMajorUnits(Math.abs(summary.totalExpense.amountMinor));
+  const expense = toMajorUnits(absMinor(summary.totalExpense).amountMinor);
   const net = toMajorUnits(summary.net.amountMinor);
 
   return (

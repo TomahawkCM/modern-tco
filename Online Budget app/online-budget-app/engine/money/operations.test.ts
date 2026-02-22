@@ -3,6 +3,7 @@ import {
   addMinor,
   subtractMinor,
   sumMinor,
+  absMinor,
   toMajorUnits,
   formatMoney,
   minorAmount,
@@ -79,6 +80,25 @@ describe("sumMinor", () => {
       minorAmount(200, "EUR"),
     ];
     expect(() => sumMinor(amounts, "USD")).toThrow("Currency mismatch");
+  });
+});
+
+describe("absMinor", () => {
+  it("returns absolute value of negative amount", () => {
+    const result = absMinor(minorAmount(-1500, "USD"));
+    expect(result.amountMinor).toBe(1500);
+    expect(result.currency).toBe("USD");
+  });
+
+  it("returns same value for positive amount", () => {
+    const result = absMinor(minorAmount(1500, "USD"));
+    expect(result.amountMinor).toBe(1500);
+  });
+
+  it("returns zero for zero amount", () => {
+    const result = absMinor(minorAmount(0, "EUR"));
+    expect(result.amountMinor).toBe(0);
+    expect(result.currency).toBe("EUR");
   });
 });
 
