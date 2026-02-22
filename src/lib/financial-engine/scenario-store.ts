@@ -19,7 +19,10 @@ export type CalculatorType =
   | "retirement"
   | "savings-goal"
   | "debt-payoff"
-  | "emergency-fund";
+  | "emergency-fund"
+  | "tax-estimator"
+  | "fire"
+  | "net-worth-forecast";
 
 export interface CalculatorScenario {
   id?: number;

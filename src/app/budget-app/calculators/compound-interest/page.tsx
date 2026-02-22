@@ -16,8 +16,9 @@ import {
   PercentInput,
   ResultsPanel,
   TransparencyPanel,
+  ExportButton,
 } from "@/components/budget/calculators";
-import { compoundInterest } from "@/lib/financial-engine";
+import { compoundInterest, COMPOUND_INTEREST_COLUMNS } from "@/lib/financial-engine";
 import type { CompoundingFrequency } from "@/lib/financial-engine";
 import { formatCurrency } from "@/i18n/utils/formatCurrency";
 import { formatPercent } from "@/i18n/utils/formatNumber";
@@ -322,9 +323,14 @@ export default function CompoundInterestCalculatorPage() {
       {/* Chart */}
       {result.timeline.length > 1 && (
         <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
-          <h3 className="mb-4 text-lg font-semibold text-white">
-            {t("compoundInterest.chartTitle")}
-          </h3>
+          <div className="mb-4 flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-white">{t("compoundInterest.chartTitle")}</h3>
+            <ExportButton
+              filename="compound-interest"
+              columns={COMPOUND_INTEREST_COLUMNS}
+              rows={result.timeline as unknown as Record<string, unknown>[]}
+            />
+          </div>
           <Suspense fallback={<ChartSkeleton />}>
             <CompoundInterestChart data={chartData} locale={locale} currency={currency} />
           </Suspense>

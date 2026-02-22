@@ -7,21 +7,24 @@
  * Organized into three sections: Core, Financial Planning, and Tools.
  */
 
-import { useTranslations } from "next-intl";
+import { CalculatorCard } from "@/components/budget/calculators";
 import {
-  Shield,
-  TrendingDown,
-  Target,
-  Repeat,
-  PieChart,
-  TrendingUp,
-  Home,
-  Landmark,
-  CreditCard,
   BarChart3,
   Building2,
+  CreditCard,
+  Dices,
+  Flame,
+  Home,
+  Landmark,
+  PieChart,
+  Receipt,
+  Repeat,
+  Shield,
+  Target,
+  TrendingDown,
+  TrendingUp,
 } from "lucide-react";
-import { CalculatorCard } from "@/components/budget/calculators";
+import { useTranslations } from "next-intl";
 
 export default function CalculatorsPage() {
   const t = useTranslations("calculators");
@@ -79,6 +82,30 @@ export default function CalculatorsPage() {
 
   const planningCalculators = [
     {
+      id: "fire",
+      title: t("fire.title"),
+      description: t("fire.description"),
+      href: "/budget-app/calculators/fire",
+      icon: <Flame className="h-6 w-6" />,
+      color: "orange" as const,
+    },
+    {
+      id: "tax-estimator",
+      title: t("taxEstimator.title"),
+      description: t("taxEstimator.description"),
+      href: "/budget-app/calculators/tax-estimator",
+      icon: <Receipt className="h-6 w-6" />,
+      color: "green" as const,
+    },
+    {
+      id: "net-worth-forecast",
+      title: t("netWorthForecast.title"),
+      description: t("netWorthForecast.description"),
+      href: "/budget-app/calculators/net-worth-forecast",
+      icon: <BarChart3 className="h-6 w-6" />,
+      color: "blue" as const,
+    },
+    {
       id: "inflation",
       title: t("inflation.title"),
       description: t("inflation.description"),
@@ -92,6 +119,14 @@ export default function CalculatorsPage() {
       description: t("subscriptionCost.description"),
       href: "/budget-app/calculators/subscription-cost",
       icon: <Repeat className="h-6 w-6" />,
+      color: "purple" as const,
+    },
+    {
+      id: "monte-carlo",
+      title: t("monteCarlo.title"),
+      description: t("monteCarlo.description"),
+      href: "/budget-app/calculators/monte-carlo",
+      icon: <Dices className="h-6 w-6" />,
       color: "purple" as const,
     },
     {

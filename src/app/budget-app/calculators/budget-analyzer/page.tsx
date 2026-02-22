@@ -244,11 +244,17 @@ export default function BudgetAnalyzerPage() {
                     className={cn(
                       "rounded px-2 py-1 text-sm",
                       analysis.isOverBudget
-                        ? "bg-red-500/20 text-red-400"
+                        ? bucket === "savings"
+                          ? "bg-green-500/20 text-green-400"
+                          : "bg-red-500/20 text-red-400"
                         : "bg-green-500/20 text-green-400"
                     )}
                   >
-                    {analysis.isOverBudget ? t("budgetAnalyzer.over") : t("budgetAnalyzer.under")}
+                    {analysis.isOverBudget
+                      ? bucket === "savings"
+                        ? t("budgetAnalyzer.exceeding")
+                        : t("budgetAnalyzer.over")
+                      : t("budgetAnalyzer.under")}
                   </span>
                 </div>
 
@@ -274,7 +280,9 @@ export default function BudgetAnalyzerPage() {
                     <div
                       className={cn(
                         "h-full rounded-full transition-all duration-500",
-                        analysis.isOverBudget ? "bg-red-500" : config.color.replace("text-", "bg-")
+                        analysis.isOverBudget && bucket !== "savings"
+                          ? "bg-red-500"
+                          : config.color.replace("text-", "bg-")
                       )}
                       style={{ width: `${Math.min(100, analysis.actualPercent)}%` }}
                     />
@@ -304,7 +312,11 @@ export default function BudgetAnalyzerPage() {
                     <span
                       className={cn(
                         "font-medium",
-                        analysis.variance > 0 ? "text-red-400" : "text-green-400"
+                        analysis.variance > 0
+                          ? bucket === "savings"
+                            ? "text-green-400"
+                            : "text-red-400"
+                          : "text-green-400"
                       )}
                     >
                       {analysis.variance > 0 ? "+" : ""}
