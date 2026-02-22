@@ -24,17 +24,25 @@ export default async function Home() {
           <div className="flex flex-col items-center gap-2">
             <p className="text-sm text-zinc-500">Signed in as {user.email}</p>
             {subscription?.isActive ? (
-              <p className="text-sm text-green-600">
-                Subscription: {subscription.status}
-                {subscription.status === "trialing" &&
-                  subscription.trialEnd && (
-                    <span className="text-zinc-500">
-                      {" "}
-                      (trial ends{" "}
-                      {new Date(subscription.trialEnd).toLocaleDateString()})
-                    </span>
-                  )}
-              </p>
+              <>
+                <p className="text-sm text-green-600">
+                  Subscription: {subscription.status}
+                  {subscription.status === "trialing" &&
+                    subscription.trialEnd && (
+                      <span className="text-zinc-500">
+                        {" "}
+                        (trial ends{" "}
+                        {new Date(subscription.trialEnd).toLocaleDateString()})
+                      </span>
+                    )}
+                </p>
+                <a
+                  href="/dashboard"
+                  className="rounded bg-zinc-900 px-4 py-2 text-white hover:bg-zinc-700"
+                >
+                  Go to Dashboard
+                </a>
+              </>
             ) : (
               <SubscribeButton />
             )}
