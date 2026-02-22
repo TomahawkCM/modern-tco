@@ -389,6 +389,89 @@ Target:
 
 ---
 
+## Date: 2026-02-22
+
+### Session Objective
+
+- Session 5: Engine Integration Skeleton. Implement Money module and Aggregation module in the unified financial engine, wire them to a dashboard page that displays total income vs expenses, and verify all financial math lives exclusively in engine/. Install Vitest for unit testing.
+
+### Skill(s) Used
+
+- Skill: superpowers:writing-plans
+- Skill: superpowers:subagent-driven-development
+- Skill: superpowers:test-driven-development
+
+### Completed
+
+- Files created:
+  - vitest.config.ts (Vitest configuration with path aliases and globals)
+  - engine/money/types.ts (MinorAmount interface — readonly amountMinor + currency)
+  - engine/money/operations.ts (minorAmount, addMinor, subtractMinor, sumMinor, toMajorUnits, formatMoney)
+  - engine/money/operations.test.ts (15 unit tests across 6 describe blocks)
+  - engine/aggregation/types.ts (TransactionForAggregation, IncomeExpenseSummary interfaces)
+  - engine/aggregation/income-expense.ts (aggregateIncomeExpense — splits positive/negative, currency safety)
+  - engine/aggregation/income-expense.test.ts (7 unit tests across 1 describe block)
+  - app/dashboard/page.tsx (server component — fetches transactions, passes through engine, displays income/expense/net)
+  - docs/plans/2026-02-22-session-5-engine-integration.md (implementation plan)
+- Files modified:
+  - package.json (added vitest v4.0.18 as devDependency, added test/test:watch scripts)
+  - engine/money/index.ts (barrel export — MinorAmount type + 6 operation functions)
+  - engine/aggregation/index.ts (barrel export — TransactionForAggregation, IncomeExpenseSummary types + aggregateIncomeExpense)
+  - engine/index.ts (entry point — re-exports ENGINE_VERSION, Money module, Aggregation module)
+  - engine/version.ts (bumped ENGINE_VERSION from "0.0.1" to "0.1.0")
+  - app/page.tsx (added "Go to Dashboard" link for subscribed users)
+- Database schema changes:
+  - None (engine is pure computation, no DB changes)
+- API routes added:
+  - None (dashboard is a server component, not an API route)
+
+### Architectural Decisions
+
+- Decision: Integer minor units for all money operations (no decimal.js)
+- Reason: Add and subtract on integers are exact. No division or multiplication on money amounts in V1 engine. decimal.js dependency not needed. Parent project uses decimal.js but online engine avoids the 31KB dependency.
+- Decision: Currency safety on all binary/aggregate operations
+- Reason: Every function that combines two MinorAmounts (addMinor, subtractMinor, sumMinor, aggregateIncomeExpense) throws Error on currency mismatch. Prevents accidental cross-currency arithmetic (e.g., USD + EUR).
+- Decision: Pure computation pattern — engine has zero external dependencies
+- Reason: Engine functions are deterministic pure functions. No DB, no API, no env vars, no side effects. This enables simple unit testing and guarantees reproducible results. Dashboard fetches data and passes it to engine; engine never fetches.
+- Decision: Vitest for unit testing (not Jest)
+- Reason: Vitest is native ESM, faster than Jest, built on Vite, requires minimal config. Parent project CLAUDE.md already lists Vitest as the test runner. Configured with globals: true for clean test syntax.
+- Decision: Dashboard page is a server component with auth + subscription guards
+- Reason: Server component avoids client-side data exposure. Auth redirect to /login if not signed in. Subscription warning banner (not blocking) if subscription not active. All financial math delegated to engine — dashboard only formats output for display.
+
+### Financial Engine Impact
+
+- Engine version bumped: v0.0.1 → v0.1.0
+- Money module implemented: minorAmount, addMinor, subtractMinor, sumMinor, toMajorUnits, formatMoney
+- Aggregation module implemented: aggregateIncomeExpense (income vs expense totals)
+- 22 unit tests (15 money + 7 aggregation) — all passing
+- Verified: no financial math outside engine/ — dashboard only calls engine functions and formats output
+
+### Security & RLS Review
+
+- Dashboard page protected by auth redirect (supabase.auth.getUser() → redirect to /login if null)
+- Transaction data fetched through RLS (user_id filter enforced by Supabase policies)
+- No new RLS policies needed (uses existing transaction/user_settings policies from Sessions 2-4)
+
+### Known Gaps / TODO
+
+- Migrations not yet applied to Supabase (001 + 002 + 003 all pending)
+- No seed data for categories or transactions (dashboard will show $0.00 until data exists)
+- No budgeting/goals/projections modules yet (engine stubs exist, no implementation)
+- No bank API calls yet (Plaid/Salt Edge integration not started)
+- Parent project ESLint tsconfig.eslint.json still doesn't include online-budget-app files (carried over)
+
+### Risks Identified
+
+- Vitest v4.0.18 added as devDependency — 30 transitive packages. Bundle size impact is dev-only.
+- toMajorUnits divides by 100 (default decimals=2) which produces floating point for display only. All storage and computation uses integers.
+- JavaScript Number.MAX_SAFE_INTEGER limits minor unit sums to ~$90 trillion — not a practical concern for personal budgets.
+
+### Next Session Target
+
+- Milestone 1 Governance Checkpoint: Review all 5 sessions before proceeding to Milestone 2. Verify all exit criteria met, no architectural drift, no financial math leakage.
+
+---
+
 ---
 
 ## TEMPLATE FOR EACH SESSION ENTRY
