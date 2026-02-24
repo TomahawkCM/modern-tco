@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+
 export function SubscribeButton() {
   async function handleSubscribe() {
     const response = await fetch("/api/stripe/checkout", { method: "POST" });
@@ -10,11 +12,8 @@ export function SubscribeButton() {
   }
 
   return (
-    <button
-      onClick={handleSubscribe}
-      className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-500"
-    >
+    <Button onClick={handleSubscribe}>
       Subscribe — Start Free Trial
-    </button>
+    </Button>
   );
 }
