@@ -38,3 +38,8 @@ export {
   narrateBudgetRisk,
   narrateAffordability,
 } from "./narrators";
+
+// Chat
+export { CHAT_SYSTEM_PROMPT } from "./chat-system-prompt";
+export { buildChatContext, sanitizeUserMessage } from "./chat-context-builder";
+export { answerChat } from "./chat";
