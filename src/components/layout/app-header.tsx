@@ -144,22 +144,19 @@ export function AppHeader({ onMenuClick, currentScore = 0, studyStreak = 0 }: Ap
               <Wallet className="mr-2 h-4 w-4" />
               <span className="hidden sm:inline">Budget</span>
             </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="glass border border-blue-500/20 text-blue-400 hover:bg-blue-500/10 hover:text-blue-300"
-              onClick={() =>
-                window.open(
-                  process.env.NEXT_PUBLIC_ONLINE_BUDGET_URL || "http://localhost:3001",
-                  "_blank"
-                )
-              }
-              aria-label="Online Budget App"
-            >
-              <Wallet className="mr-2 h-4 w-4" />
-              <span className="hidden sm:inline">Online Budget</span>
-              <Sparkles className="ml-1.5 h-3 w-3 text-amber-400" />
-            </Button>
+            {process.env.NEXT_PUBLIC_ONLINE_BUDGET_URL && (
+              <Button
+                variant="outline"
+                size="sm"
+                className="glass border border-blue-500/20 text-blue-400 hover:bg-blue-500/10 hover:text-blue-300"
+                onClick={() => window.open(process.env.NEXT_PUBLIC_ONLINE_BUDGET_URL, "_blank")}
+                aria-label="Online Budget App"
+              >
+                <Wallet className="mr-2 h-4 w-4" />
+                <span className="hidden sm:inline">Online Budget</span>
+                <Sparkles className="ml-1.5 h-3 w-3 text-amber-400" />
+              </Button>
+            )}
           </div>
 
           {/* Center - Search/Command */}

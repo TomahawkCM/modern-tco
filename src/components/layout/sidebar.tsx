@@ -194,13 +194,17 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       icon: Wallet,
       href: "/budget-app",
     },
-    {
-      id: "online-budget",
-      label: "Online Budget",
-      icon: Wallet,
-      badge: "ONLINE",
-      href: process.env.NEXT_PUBLIC_ONLINE_BUDGET_URL || "http://localhost:3001",
-    },
+    ...(process.env.NEXT_PUBLIC_ONLINE_BUDGET_URL
+      ? [
+          {
+            id: "online-budget",
+            label: "Online Budget",
+            icon: Wallet,
+            badge: "ONLINE",
+            href: process.env.NEXT_PUBLIC_ONLINE_BUDGET_URL,
+          },
+        ]
+      : []),
     ...(isAdmin
       ? [
           {
