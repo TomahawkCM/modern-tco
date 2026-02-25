@@ -17,3 +17,4 @@ export {
   toMajorUnits,
   formatMoney,
 } from "./operations";
+export { convertMinor } from "./convert";

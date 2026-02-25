@@ -296,6 +296,8 @@ export interface Database {
           key: string;
           parent_id: string | null;
           is_system: boolean;
+          type: "income" | "expense" | "transfer";
+          display_order: number;
           created_at: string;
         };
         Insert: {
@@ -303,6 +305,8 @@ export interface Database {
           key: string;
           parent_id?: string | null;
           is_system?: boolean;
+          type?: "income" | "expense" | "transfer";
+          display_order?: number;
           created_at?: string;
         };
         Update: {
@@ -310,6 +314,8 @@ export interface Database {
           key?: string;
           parent_id?: string | null;
           is_system?: boolean;
+          type?: "income" | "expense" | "transfer";
+          display_order?: number;
           created_at?: string;
         };
         Relationships: [
@@ -390,10 +396,105 @@ export interface Database {
           },
         ];
       };
+      merchant_mappings: {
+        Row: {
+          id: string;
+          user_id: string;
+          merchant_token: string;
+          display_name: string;
+          category_id: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          merchant_token: string;
+          display_name: string;
+          category_id: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          merchant_token?: string;
+          display_name?: string;
+          category_id?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "merchant_mappings_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "merchant_mappings_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      budgets: {
+        Row: {
+          id: string;
+          user_id: string;
+          category_id: string;
+          amount_minor: number;
+          currency: string;
+          period: "monthly";
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          category_id: string;
+          amount_minor: number;
+          currency?: string;
+          period?: "monthly";
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          category_id?: string;
+          amount_minor?: number;
+          currency?: string;
+          period?: "monthly";
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "budgets_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "budgets_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
-    Enums: Record<string, never>;
+    Enums: {
+      category_type: "income" | "expense" | "transfer";
+    };
     CompositeTypes: Record<string, never>;
   };
 }
