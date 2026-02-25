@@ -1949,6 +1949,136 @@ Target:
 
 ---
 
+## Date: 2026-02-24
+
+### Session Objective
+
+- Frontend V1: Install shadcn/ui and build 4 pages (Dashboard, Chat, Transactions, Budgets) consuming all existing backend APIs from Milestones 1–5
+
+### Skill(s) Used
+
+- Skill: superpowers:brainstorming
+- Skill: superpowers:writing-plans
+- Skill: superpowers:subagent-driven-development
+- Skill: superpowers:verification-before-completion
+
+### Completed
+
+- Files created:
+  - online-budget-app/lib/utils.ts (cn() utility — clsx + tailwind-merge)
+  - online-budget-app/components.json (shadcn config — new-york style, zinc, oklch, Tailwind v4)
+  - online-budget-app/components/ui/card.tsx
+  - online-budget-app/components/ui/button.tsx
+  - online-budget-app/components/ui/badge.tsx
+  - online-budget-app/components/ui/progress.tsx
+  - online-budget-app/components/ui/input.tsx
+  - online-budget-app/components/ui/label.tsx
+  - online-budget-app/components/ui/select.tsx
+  - online-budget-app/components/ui/dialog.tsx
+  - online-budget-app/components/ui/table.tsx
+  - online-budget-app/components/ui/separator.tsx
+  - online-budget-app/components/app-nav.tsx (navigation with 4 routes + sign out)
+  - online-budget-app/app/(app)/layout.tsx (auth guard + nav wrapper)
+  - online-budget-app/components/dashboard/account-cards.tsx
+  - online-budget-app/components/dashboard/income-expense-summary.tsx
+  - online-budget-app/components/dashboard/category-breakdown.tsx
+  - online-budget-app/components/dashboard/budget-progress-list.tsx
+  - online-budget-app/components/chat/chat-panel.tsx (client component — message state, fetch /api/chat, auto-scroll)
+  - online-budget-app/app/(app)/chat/page.tsx
+  - online-budget-app/components/transactions/transaction-table.tsx (shadcn Table)
+  - online-budget-app/components/transactions/transaction-filters.tsx (date range + URL params)
+  - online-budget-app/app/(app)/transactions/page.tsx (server component — Supabase fetch + engine formatting)
+  - online-budget-app/components/budgets/budget-list.tsx (progress cards)
+  - online-budget-app/components/budgets/create-budget-form.tsx (controlled Select + fetch POST)
+  - online-budget-app/app/(app)/budgets/page.tsx (server component — parallel fetch + engine computation)
+  - online-budget-app/docs/plans/2026-02-23-frontend-v1.md (8-task implementation plan)
+- Files modified:
+  - online-budget-app/styles/globals.css (oklch theme variables, @theme inline block, shadcn base layer)
+  - online-budget-app/app/layout.tsx (body classes: bg-background font-sans antialiased)
+  - online-budget-app/app/(app)/dashboard/page.tsx (moved from app/dashboard/, refactored to use 4 presentational components)
+  - online-budget-app/app/page.tsx (shadcn Card + Button)
+  - online-budget-app/app/(auth)/login/page.tsx (shadcn Card, Input, Label, Button)
+  - online-budget-app/app/(auth)/signup/page.tsx (shadcn Card, Input, Label, Button)
+  - online-budget-app/components/subscribe-button.tsx (shadcn Button)
+  - online-budget-app/package.json (added: class-variance-authority, clsx, tailwind-merge, lucide-react, radix-ui)
+- Files deleted:
+  - online-budget-app/app/dashboard/page.tsx (moved to app/(app)/dashboard/)
+- Database schema changes:
+  - None (frontend only)
+- API routes added:
+  - None (all APIs existed from Milestones 1–5)
+
+### Architectural Decisions
+
+- Decision: Install shadcn/ui with Tailwind v4 CSS-based config
+- Reason: Tailwind v4 uses @theme inline blocks and oklch color space. No tailwind.config.js needed. components.json uses empty string for tailwind.config field.
+- Decision: Route group (app) for authenticated pages
+- Reason: Shared auth guard layout without affecting URL paths. Dashboard, Chat, Transactions, Budgets all under (app)/ with single auth check in layout.tsx.
+- Decision: Presentational component pattern for dashboard
+- Reason: Components receive pre-computed data as props. No Supabase or engine runtime imports in components/ — only type-only imports for prop typing. Server pages handle all data fetching and engine computation.
+- Decision: Controlled state for shadcn Select (not native FormData)
+- Reason: shadcn's Select doesn't support native name attribute for FormData. Used useState + onValueChange + direct state read in submit handler.
+- Decision: Next.js 16 searchParams as Promise
+- Reason: In Next.js 16, searchParams is a Promise that must be awaited. Transaction page correctly types and awaits it.
+
+### Financial Engine Impact
+
+- Confirmed no duplication of math logic
+- Engine version unchanged: v0.2.0
+- UI components use type-only imports from engine (MinorAmount, BudgetProgressItem)
+- All financial computation happens in server pages, not in components
+- formatMoney() used for display only
+
+### Security & RLS Review
+
+- Auth: (app)/layout.tsx enforces supabase.auth.getUser() — redirects to /login if no user
+- No new API routes — all existing routes retain their auth + subscription guards
+- No PII exposed in client components — only formatted display data
+- Chat panel sends user input to /api/chat which has rate limiting + subscription enforcement
+
+### Layering Boundary Verification (Task 8)
+
+- tsc --noEmit: PASS (exit 0)
+- vitest run: PASS (22 files, 220/220 tests)
+- No Supabase imports in components/: PASS (0 matches)
+- No fetch() in server pages (dashboard, transactions, budgets): PASS (0 matches)
+- Engine imports in components/: PASS (6 files, all type-only imports — erased at compile time)
+
+### Commits (7)
+
+- 044f0e05 — feat(ui): install shadcn/ui with Tailwind v4 and zinc theme
+- 6f42f00e — feat(ui): add app shell with navigation layout
+- c3d079d3 — feat(ui): refactor dashboard with shadcn Card, Badge, and Progress components
+- a148aef3 — feat(ui): add AI chat page with message bubbles and auto-scroll
+- fe22f50e — feat(ui): add transaction list page with date filtering
+- 863cf176 — feat(ui): add budget management page with progress and create form
+- 08c50797 — feat(ui): refactor landing and auth pages with shadcn components
+
+### Known Gaps / TODO
+
+- Migrations 001-006 not yet applied to Supabase (carried forward)
+- No caching of AI responses (carried forward)
+- In-memory rate limiter will not persist across serverless cold starts (carried forward)
+- No loading states or skeleton UI on pages
+- No error boundary components
+- No responsive design testing done yet
+- Transaction recategorization UI not built (API exists at PATCH /api/transactions/[id])
+- Budget edit/delete UI not built (API exists)
+- No onboarding flow
+- No settings page
+
+### Risks Identified
+
+- ESLint tsconfig.eslint.json path error persists for Online Budget App files (pre-existing, does not affect builds or tests)
+- Chat auto-scroll may not work in all browsers (uses scrollIntoView with smooth behavior)
+- In-memory rate limiter resets on serverless cold start (carried forward)
+
+### Next Session Target
+
+- Milestone 7 or continued Frontend polish: Loading states, error boundaries, responsive design, transaction recategorization UI
+
+---
+
 ---
 
 ## TEMPLATE FOR EACH SESSION ENTRY
@@ -2052,11 +2182,16 @@ Copy this block and append below for each session:
 - [x] RAG context injection (buildChatContext — token-budgeted, categories capped at 5, no raw transactions)
 - [x] Guardrails enforced (locked system prompt, input sanitization, data exposure boundary, 500-char limit)
 
-## Milestone 6 — Polish & Hardening
+## Milestone 6 — Frontend V1
 
-- [ ] Performance optimization
-- [ ] Sync stability review
-- [ ] Cost monitoring hooks
+- [x] shadcn/ui installed with Tailwind v4 + oklch theme (10 base components)
+- [x] App shell with authenticated navigation layout (4 routes)
+- [x] Dashboard refactored with presentational components (account cards, income/expense, categories, budgets)
+- [x] AI chat page with message bubbles and auto-scroll
+- [x] Transaction list page with date filtering
+- [x] Budget management page with progress visualization and create form
+- [x] Landing + auth pages polished with shadcn components
+- [x] Full verification passed (tsc, vitest 220/220, boundary checks)
 
 ---
 
