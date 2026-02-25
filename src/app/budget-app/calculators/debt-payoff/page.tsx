@@ -6,7 +6,7 @@
  * Compare snowball vs avalanche debt repayment strategies
  */
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, lazy, Suspense } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import { ArrowLeft, TrendingDown, Plus, Trash2, Award, Calendar } from "lucide-react";
@@ -17,6 +17,146 @@ import type { SupportedLocale } from "@/i18n/config";
 import type { DebtAccount, DebtStrategy } from "@/lib/calculators/types";
 import { LOCALE_METADATA } from "@/i18n/config";
 import { cn } from "@/lib/utils";
+
+const DebtComparisonChart = lazy(() =>
+  import("recharts").then((mod) => {
+    const Chart = ({
+      snowballInterest,
+      avalancheInterest,
+      snowballMonths,
+      avalancheMonths,
+      locale,
+      currency,
+    }: {
+      snowballInterest: number;
+      avalancheInterest: number;
+      snowballMonths: number;
+      avalancheMonths: number;
+      locale: SupportedLocale;
+      currency: string;
+    }) => {
+      const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
+        mod;
+      const data = [
+        { name: "Total Interest", Snowball: snowballInterest, Avalanche: avalancheInterest },
+      ];
+      return (
+        <div className="space-y-4">
+          <ResponsiveContainer width="100%" height={200}>
+            <BarChart data={data} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+              <XAxis
+                type="number"
+                stroke="#64748b"
+                tick={{ fontSize: 12 }}
+                tickFormatter={(val: number) =>
+                  formatCurrency(val, currency, locale).replace(/\.00$/, "")
+                }
+              />
+              <YAxis type="category" dataKey="name" stroke="#64748b" tick={{ fontSize: 12 }} />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#1e293b",
+                  border: "1px solid #475569",
+                  borderRadius: "8px",
+                }}
+                formatter={(value: number, name: string) => [
+                  formatCurrency(value, currency, locale),
+                  name,
+                ]}
+              />
+              <Legend />
+              <Bar dataKey="Snowball" fill="#3b82f6" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="Avalanche" fill="#22c55e" radius={[0, 4, 4, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      );
+    };
+    return { default: Chart };
+  })
+);
+
+const DebtBalanceChart = lazy(() =>
+  import("recharts").then((mod) => {
+    const Chart = ({
+      snowballSchedule,
+      avalancheSchedule,
+      locale,
+      currency,
+    }: {
+      snowballSchedule: { month: number; totalRemaining: number }[];
+      avalancheSchedule: { month: number; totalRemaining: number }[];
+      locale: SupportedLocale;
+      currency: string;
+    }) => {
+      const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
+        mod;
+
+      // Combine into one dataset
+      const maxMonths = Math.max(snowballSchedule.length, avalancheSchedule.length);
+      const data = [];
+      for (let i = 0; i < maxMonths; i++) {
+        data.push({
+          month: i + 1,
+          snowball: snowballSchedule[i]?.totalRemaining ?? 0,
+          avalanche: avalancheSchedule[i]?.totalRemaining ?? 0,
+        });
+      }
+
+      // Sample at intervals for large datasets
+      const sampled =
+        data.length > 60 ? data.filter((_, i) => i % 3 === 0 || i === data.length - 1) : data;
+
+      return (
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={sampled}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+            <XAxis dataKey="month" stroke="#64748b" tick={{ fontSize: 12 }} />
+            <YAxis
+              stroke="#64748b"
+              tick={{ fontSize: 12 }}
+              tickFormatter={(val: number) =>
+                formatCurrency(val, currency, locale).replace(/\.00$/, "")
+              }
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1e293b",
+                border: "1px solid #475569",
+                borderRadius: "8px",
+              }}
+              labelStyle={{ color: "#94a3b8" }}
+              formatter={(value: number, name: string) => [
+                formatCurrency(value, currency, locale),
+                name,
+              ]}
+              labelFormatter={(label: number) => `Month ${label}`}
+            />
+            <Legend />
+            <Line
+              type="monotone"
+              dataKey="snowball"
+              stroke="#3b82f6"
+              strokeWidth={2}
+              dot={false}
+              name="Snowball"
+            />
+            <Line
+              type="monotone"
+              dataKey="avalanche"
+              stroke="#22c55e"
+              strokeWidth={2}
+              dot={false}
+              name="Avalanche"
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      );
+    };
+    return { default: Chart };
+  })
+);
 
 export default function DebtPayoffCalculatorPage() {
   const t = useTranslations("calculators");
@@ -275,6 +415,50 @@ export default function DebtPayoffCalculatorPage() {
               months: Math.abs(result.monthsSaved),
             })}
           </p>
+        </div>
+      )}
+
+      {/* Strategy Comparison Charts */}
+      {hasDebts && result.snowball.schedule.length > 0 && (
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
+            <h3 className="mb-4 text-lg font-semibold text-white">
+              {t("debtPayoff.totalInterest")}
+            </h3>
+            <Suspense
+              fallback={
+                <div className="flex h-[200px] animate-pulse items-center justify-center rounded-lg bg-slate-800">
+                  <span className="text-sm text-slate-500">Loading chart...</span>
+                </div>
+              }
+            >
+              <DebtComparisonChart
+                snowballInterest={result.snowball.totalInterest}
+                avalancheInterest={result.avalanche.totalInterest}
+                snowballMonths={result.snowball.totalMonths}
+                avalancheMonths={result.avalanche.totalMonths}
+                locale={locale}
+                currency={currency}
+              />
+            </Suspense>
+          </div>
+          <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
+            <h3 className="mb-4 text-lg font-semibold text-white">{t("debtPayoff.remaining")}</h3>
+            <Suspense
+              fallback={
+                <div className="flex h-[300px] animate-pulse items-center justify-center rounded-lg bg-slate-800">
+                  <span className="text-sm text-slate-500">Loading chart...</span>
+                </div>
+              }
+            >
+              <DebtBalanceChart
+                snowballSchedule={result.snowball.schedule}
+                avalancheSchedule={result.avalanche.schedule}
+                locale={locale}
+                currency={currency}
+              />
+            </Suspense>
+          </div>
         </div>
       )}
 

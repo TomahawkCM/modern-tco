@@ -15,7 +15,17 @@ interface CalculatorCardProps {
   description: string;
   href: string;
   icon: React.ReactNode;
-  color?: "teal" | "blue" | "purple" | "orange" | "green";
+  color?:
+    | "teal"
+    | "blue"
+    | "purple"
+    | "orange"
+    | "green"
+    | "red"
+    | "indigo"
+    | "amber"
+    | "rose"
+    | "slate";
   className?: string;
 }
 
@@ -57,6 +67,36 @@ export function CalculatorCard({
       border: "hover:border-green-500/50",
       iconBg: "bg-green-500/20",
       iconText: "text-green-400",
+    },
+    red: {
+      gradient: "from-red-500/20 to-red-600/10",
+      border: "hover:border-red-500/50",
+      iconBg: "bg-red-500/20",
+      iconText: "text-red-400",
+    },
+    indigo: {
+      gradient: "from-indigo-500/20 to-indigo-600/10",
+      border: "hover:border-indigo-500/50",
+      iconBg: "bg-indigo-500/20",
+      iconText: "text-indigo-400",
+    },
+    amber: {
+      gradient: "from-amber-500/20 to-amber-600/10",
+      border: "hover:border-amber-500/50",
+      iconBg: "bg-amber-500/20",
+      iconText: "text-amber-400",
+    },
+    rose: {
+      gradient: "from-rose-500/20 to-rose-600/10",
+      border: "hover:border-rose-500/50",
+      iconBg: "bg-rose-500/20",
+      iconText: "text-rose-400",
+    },
+    slate: {
+      gradient: "from-slate-500/20 to-slate-600/10",
+      border: "hover:border-slate-500/50",
+      iconBg: "bg-slate-500/20",
+      iconText: "text-slate-400",
     },
   };
 
