@@ -80,6 +80,10 @@ BEGIN
   INSERT INTO public.user_settings (user_id)
   VALUES (NEW.id);
 
+  -- Auto-provision 14-day trial subscription
+  INSERT INTO public.subscriptions (user_id, status, tier, trial_end)
+  VALUES (NEW.id, 'trialing', 'premium', now() + interval '14 days');
+
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;

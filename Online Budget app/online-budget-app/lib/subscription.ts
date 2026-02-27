@@ -35,10 +35,26 @@ export async function getSubscription(): Promise<SubscriptionCheck> {
     .single();
 
   if (!subscription) {
+    // No subscription row — treat as trial based on user creation date
+    // Safety net for trigger race condition or legacy users
+    const { data: userRow } = await supabase
+      .from("users")
+      .select("created_at")
+      .eq("id", user.id)
+      .single();
+
+    const createdAt = userRow?.created_at
+      ? new Date(userRow.created_at)
+      : new Date();
+    const trialEnd = new Date(
+      createdAt.getTime() + 14 * 24 * 60 * 60 * 1000
+    );
+    const isTrialActive = new Date() < trialEnd;
+
     return {
-      isActive: false,
-      status: null,
-      trialEnd: null,
+      isActive: isTrialActive,
+      status: isTrialActive ? "trialing" : null,
+      trialEnd: trialEnd.toISOString(),
       currentPeriodEnd: null,
     };
   }
