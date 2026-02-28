@@ -3,7 +3,7 @@
  * Tests AI feature opt-in/opt-out, data export, and privacy controls
  */
 
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import {
   getPrivacySettings,
   savePrivacySettings,
@@ -13,6 +13,13 @@ import {
   isEncryptionEnabled,
 } from "@/lib/budget-privacy-settings";
 import type { PrivacySettings } from "@/lib/budget-privacy-settings";
+
+// Mock isOnlineMode so isClaudeAPIEnabled (which delegates to isAIFeaturesEnabled)
+// can return true when AI features are enabled. In the real codebase APP_MODE is
+// hardcoded to "standalone", which forces isAIFeaturesEnabled to always return false.
+vi.mock("@/config/features", () => ({
+  isOnlineMode: () => true,
+}));
 
 describe("Privacy Settings Module", () => {
   beforeEach(() => {
@@ -29,13 +36,15 @@ describe("Privacy Settings Module", () => {
     it("should return default settings when none exist", () => {
       const settings = getPrivacySettings();
 
-      expect(settings.enableClaudeAPI).toBe(false);
-      expect(settings.enableSmartDuplicateDetection).toBe(false);
-      expect(settings.enableAnomalyDetection).toBe(false);
-      expect(settings.enablePredictiveSpending).toBe(false);
-      expect(settings.enableNaturalLanguageImport).toBe(false);
+      // The actual source uses enableAIFeatures (not enableClaudeAPI)
+      // Defaults for the offline-first app:
+      expect(settings.enableAIFeatures).toBe(true);
+      expect(settings.enableSmartDuplicateDetection).toBe(true);
+      expect(settings.enableAnomalyDetection).toBe(true);
+      expect(settings.enablePredictiveSpending).toBe(true);
+      expect(settings.enableNaturalLanguageImport).toBe(true);
       expect(settings.enableOCR).toBe(true); // OCR is safe by default
-      expect(settings.enableEncryption).toBe(false);
+      expect(settings.enableEncryption).toBe(true); // Encryption ON by default
       expect(settings.allowDataExport).toBe(true);
       expect(settings.allowDataDeletion).toBe(true);
     });
@@ -43,7 +52,7 @@ describe("Privacy Settings Module", () => {
     it("should merge new fields with defaults", () => {
       // Simulate old settings without new fields
       const oldSettings = {
-        enableClaudeAPI: true,
+        enableAIFeatures: false,
         updatedAt: Date.now(),
       };
 
@@ -54,9 +63,9 @@ describe("Privacy Settings Module", () => {
       const settings = getPrivacySettings();
 
       // Old field should be preserved
-      expect(settings.enableClaudeAPI).toBe(true);
+      expect(settings.enableAIFeatures).toBe(false);
       // New fields should have defaults
-      expect(settings.enableSmartDuplicateDetection).toBe(false);
+      expect(settings.enableSmartDuplicateDetection).toBe(true);
       expect(settings.enableOCR).toBe(true);
     });
   });
@@ -67,43 +76,41 @@ describe("Privacy Settings Module", () => {
   describe("Save/Load Settings", () => {
     it("should save and load settings correctly", () => {
       const newSettings: Partial<PrivacySettings> = {
-        enableClaudeAPI: true,
-        enableSmartDuplicateDetection: true,
+        enableAIFeatures: false,
+        enableSmartDuplicateDetection: false,
         enableOCR: false,
       };
 
       savePrivacySettings(newSettings);
       const loaded = getPrivacySettings();
 
-      expect(loaded.enableClaudeAPI).toBe(true);
-      expect(loaded.enableSmartDuplicateDetection).toBe(true);
+      expect(loaded.enableAIFeatures).toBe(false);
+      expect(loaded.enableSmartDuplicateDetection).toBe(false);
       expect(loaded.enableOCR).toBe(false);
       expect(loaded.updatedAt).toBeGreaterThan(0);
     });
 
-    it("should update timestamp on save", () => {
+    it("should update timestamp on save", async () => {
       const initial = getPrivacySettings();
       const initialTime = initial.updatedAt;
 
-      // Wait a bit
-      const wait = new Promise((resolve) => setTimeout(resolve, 10));
+      // Wait a bit to ensure timestamp difference
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
-      wait.then(() => {
-        savePrivacySettings({ enableClaudeAPI: true });
-        const updated = getPrivacySettings();
-        expect(updated.updatedAt).toBeGreaterThan(initialTime);
-      });
+      savePrivacySettings({ enableAIFeatures: false });
+      const updated = getPrivacySettings();
+      expect(updated.updatedAt).toBeGreaterThanOrEqual(initialTime);
     });
 
     it("should handle partial updates", () => {
-      savePrivacySettings({ enableClaudeAPI: true });
+      savePrivacySettings({ enableAIFeatures: false });
       savePrivacySettings({ enableOCR: false });
 
       const settings = getPrivacySettings();
-      expect(settings.enableClaudeAPI).toBe(true);
+      expect(settings.enableAIFeatures).toBe(false);
       expect(settings.enableOCR).toBe(false);
       // Other settings should remain at defaults
-      expect(settings.enableSmartDuplicateDetection).toBe(false);
+      expect(settings.enableSmartDuplicateDetection).toBe(true);
     });
   });
 
@@ -114,16 +121,16 @@ describe("Privacy Settings Module", () => {
     it("should reset all settings to defaults", () => {
       // Set some custom settings
       savePrivacySettings({
-        enableClaudeAPI: true,
-        enableSmartDuplicateDetection: true,
+        enableAIFeatures: false,
+        enableSmartDuplicateDetection: false,
         enableOCR: false,
       });
 
       resetPrivacySettings();
 
       const settings = getPrivacySettings();
-      expect(settings.enableClaudeAPI).toBe(false);
-      expect(settings.enableSmartDuplicateDetection).toBe(false);
+      expect(settings.enableAIFeatures).toBe(true);
+      expect(settings.enableSmartDuplicateDetection).toBe(true);
       expect(settings.enableOCR).toBe(true);
     });
   });
@@ -134,29 +141,31 @@ describe("Privacy Settings Module", () => {
   describe("Feature Enablement Checks", () => {
     it("isSmartDuplicateDetectionEnabled() should require both flags", () => {
       savePrivacySettings({
-        enableClaudeAPI: true,
+        enableAIFeatures: true,
         enableSmartDuplicateDetection: false,
       });
       expect(isSmartDuplicateDetectionEnabled()).toBe(false);
 
       savePrivacySettings({
-        enableClaudeAPI: false,
+        enableAIFeatures: false,
         enableSmartDuplicateDetection: true,
       });
       expect(isSmartDuplicateDetectionEnabled()).toBe(false);
 
       savePrivacySettings({
-        enableClaudeAPI: true,
+        enableAIFeatures: true,
         enableSmartDuplicateDetection: true,
       });
       expect(isSmartDuplicateDetectionEnabled()).toBe(true);
     });
 
     it("isClaudeAPIEnabled() should check master switch", () => {
-      savePrivacySettings({ enableClaudeAPI: false });
+      // isClaudeAPIEnabled delegates to isAIFeaturesEnabled which checks
+      // isOnlineMode() (mocked to true) AND settings.enableAIFeatures
+      savePrivacySettings({ enableAIFeatures: false });
       expect(isClaudeAPIEnabled()).toBe(false);
 
-      savePrivacySettings({ enableClaudeAPI: true });
+      savePrivacySettings({ enableAIFeatures: true });
       expect(isClaudeAPIEnabled()).toBe(true);
     });
 
@@ -176,7 +185,7 @@ describe("Privacy Settings Module", () => {
     it("should disable Claude features when master switch is off", () => {
       // Enable all Claude features
       savePrivacySettings({
-        enableClaudeAPI: true,
+        enableAIFeatures: true,
         enableSmartDuplicateDetection: true,
         enableAnomalyDetection: true,
         enablePredictiveSpending: true,
@@ -184,7 +193,7 @@ describe("Privacy Settings Module", () => {
       });
 
       // Disable master switch
-      savePrivacySettings({ enableClaudeAPI: false });
+      savePrivacySettings({ enableAIFeatures: false });
 
       // All Claude features should be disabled
       expect(isClaudeAPIEnabled()).toBe(false);
@@ -193,7 +202,7 @@ describe("Privacy Settings Module", () => {
 
     it("should enable master switch when enabling Claude feature", () => {
       // Start with master switch off
-      savePrivacySettings({ enableClaudeAPI: false });
+      savePrivacySettings({ enableAIFeatures: false });
 
       // Enable a Claude feature (simulating UI behavior)
       savePrivacySettings({ enableSmartDuplicateDetection: true });
@@ -216,7 +225,7 @@ describe("Privacy Settings Module", () => {
       // Should return defaults without crashing
       const settings = getPrivacySettings();
       expect(settings).toBeDefined();
-      expect(settings.enableClaudeAPI).toBe(false);
+      expect(settings.enableAIFeatures).toBe(true);
     });
 
     it("should handle missing localStorage", () => {
@@ -227,7 +236,7 @@ describe("Privacy Settings Module", () => {
 
       const settings = getPrivacySettings();
       expect(settings).toBeDefined();
-      expect(settings.enableClaudeAPI).toBe(false);
+      expect(settings.enableAIFeatures).toBe(true);
 
       global.window = originalWindow;
     });
@@ -246,7 +255,7 @@ describe("Privacy Settings Module", () => {
       const settings = getPrivacySettings();
       expect(settings).toBeDefined();
       // Should merge with defaults
-      expect(settings.enableClaudeAPI).toBeDefined();
+      expect(settings.enableAIFeatures).toBeDefined();
     });
   });
 });

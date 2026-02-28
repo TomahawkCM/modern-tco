@@ -2,10 +2,12 @@
  * Analytics wrapper smoke tests
  */
 
+import { describe, test, expect, beforeEach, afterAll, vi } from "vitest";
+
 describe("analytics wrapper", () => {
   const OLD_ENV = process.env;
   beforeEach(() => {
-    jest.resetModules();
+    vi.resetModules();
     process.env = { ...OLD_ENV };
   });
   afterAll(() => {

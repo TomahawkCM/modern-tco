@@ -6,19 +6,20 @@
  */
 
 import React from "react";
+import { vi } from "vitest";
 import { renderHook, act, waitFor } from "@testing-library/react";
 import { ProgressProvider, useProgress } from "../ProgressContext";
 import { TCODomain } from "@/types/exam";
 
 // Mock dependencies
-const mockUseAuth = jest.fn();
-const mockUseDatabase = jest.fn();
+const mockUseAuth = vi.fn();
+const mockUseDatabase = vi.fn();
 
-jest.mock("@/contexts/AuthContext", () => ({
+vi.mock("@/contexts/AuthContext", () => ({
   useAuth: () => mockUseAuth(),
 }));
 
-jest.mock("@/hooks/useDatabase", () => ({
+vi.mock("@/hooks/useDatabase", () => ({
   useDatabase: () => mockUseDatabase(),
 }));
 
@@ -52,22 +53,22 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 describe("ProgressContext", () => {
   beforeEach(() => {
     localStorageMock.clear();
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     mockUseAuth.mockReturnValue({
       user: null,
       session: null,
       loading: false,
       error: null,
-      signIn: jest.fn(),
-      signUp: jest.fn(),
-      signOut: jest.fn(),
-      resetPassword: jest.fn(),
-      updateProfile: jest.fn(),
+      signIn: vi.fn(),
+      signUp: vi.fn(),
+      signOut: vi.fn(),
+      resetPassword: vi.fn(),
+      updateProfile: vi.fn(),
     });
 
     mockUseDatabase.mockReturnValue({
-      upsertUserStatistics: jest.fn().mockResolvedValue({}),
+      upsertUserStatistics: vi.fn().mockResolvedValue({}),
     });
   });
 
@@ -234,12 +235,12 @@ describe("ProgressContext", () => {
   describe("Study Streak Management", () => {
     beforeEach(() => {
       // Mock Date for predictable streak testing
-      jest.useFakeTimers();
-      jest.setSystemTime(new Date("2025-10-04T12:00:00Z"));
+      vi.useFakeTimers();
+      vi.setSystemTime(new Date("2025-10-04T12:00:00Z"));
     });
 
     afterEach(() => {
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
 
     it("should initialize streak on first session", () => {
@@ -263,7 +264,7 @@ describe("ProgressContext", () => {
 
       // Day 2
       act(() => {
-        jest.setSystemTime(new Date("2025-10-05T12:00:00Z"));
+        vi.setSystemTime(new Date("2025-10-05T12:00:00Z"));
         result.current.updateSessionStats(80, 10, 300);
       });
 
@@ -280,7 +281,7 @@ describe("ProgressContext", () => {
 
       // Day 3 (skipped Day 2)
       act(() => {
-        jest.setSystemTime(new Date("2025-10-06T12:00:00Z"));
+        vi.setSystemTime(new Date("2025-10-06T12:00:00Z"));
         result.current.updateSessionStats(80, 10, 300);
       });
 
@@ -363,12 +364,12 @@ describe("ProgressContext", () => {
 
       act(() => {
         // Manually set streak to 7 by updating multiple days
-        jest.useFakeTimers();
+        vi.useFakeTimers();
         for (let i = 0; i < 7; i++) {
-          jest.setSystemTime(new Date(`2025-10-${4 + i}T12:00:00Z`));
+          vi.setSystemTime(new Date(`2025-10-${4 + i}T12:00:00Z`));
           result.current.updateSessionStats(80, 10, 300);
         }
-        jest.useRealTimers();
+        vi.useRealTimers();
       });
 
       expect(result.current.state.progress.achievements).toContain("Week Warrior");
@@ -670,7 +671,7 @@ describe("ProgressContext", () => {
   describe("Context Provider Error Handling", () => {
     it("should throw error when useProgress is used outside provider", () => {
       // Suppress console.error for this test
-      const consoleSpy = jest.spyOn(console, "error").mockImplementation();
+      const consoleSpy = vi.spyOn(console, "error").mockImplementation();
 
       expect(() => {
         renderHook(() => useProgress());

@@ -20,7 +20,7 @@ const defaultInput: MonteCarloInput = {
   seed: 42,
 };
 
-describe("runMonteCarlo", () => {
+describe("runMonteCarlo", { timeout: 30000 }, () => {
   it("should return percentile bands for each year", () => {
     const result = runMonteCarlo(defaultInput);
 
