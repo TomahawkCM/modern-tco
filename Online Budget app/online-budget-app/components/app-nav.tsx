@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   ArrowLeftRight,
   Wallet,
+  Lightbulb,
   MessageCircle,
   LogOut,
 } from "lucide-react";
@@ -15,6 +16,7 @@ const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/transactions", label: "Transactions", icon: ArrowLeftRight },
   { href: "/budgets", label: "Budgets", icon: Wallet },
+  { href: "/insights", label: "Insights", icon: Lightbulb },
   { href: "/chat", label: "AI Chat", icon: MessageCircle },
 ];
 

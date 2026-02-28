@@ -20,6 +20,9 @@ import { AccountCards } from "@/components/dashboard/account-cards";
 import { IncomeExpenseSummary } from "@/components/dashboard/income-expense-summary";
 import { CategoryBreakdown } from "@/components/dashboard/category-breakdown";
 import { BudgetProgressList } from "@/components/dashboard/budget-progress-list";
+import { HealthScoreWidget } from "@/components/insights/health-score-widget";
+import { InsightAlerts } from "@/components/dashboard/insight-alerts";
+import { computeFinancialHealthScore } from "@/engine/insights/health-score";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -136,6 +139,23 @@ export default async function DashboardPage() {
       ? ((incomeMinor + summary.totalExpense.amountMinor) / incomeMinor) * 100
       : 0;
 
+  // 6. Financial health score
+  const budgetAdherencePercent =
+    budgetProgress.length > 0
+      ? budgetProgress.reduce((sum, b) => {
+          // Adherence = 100% if under budget, otherwise (limit/spent)*100
+          const pct = b.percentUsed <= 100 ? 100 : (100 / b.percentUsed) * 100;
+          return sum + pct;
+        }, 0) / budgetProgress.length
+      : 100;
+
+  const healthScore = computeFinancialHealthScore({
+    savingsRatePercent: savingsRate,
+    budgetAdherencePercent,
+    hasEmergencyFund: false, // No data source yet
+    debtToIncomePercent: 0, // No debt tracking yet
+  });
+
   // === FORMATTING (display only) ===
   const fmt = (amt: { amountMinor: number; currency: string }) =>
     formatMoney(amt, locale);
@@ -157,6 +177,13 @@ export default async function DashboardPage() {
           Subscription required for full access
         </p>
       )}
+
+      <section>
+        <h2 className="mb-3 text-lg font-medium">Financial Health</h2>
+        <HealthScoreWidget result={healthScore} />
+      </section>
+
+      <InsightAlerts />
 
       <section>
         <h2 className="mb-3 text-lg font-medium">Accounts</h2>
