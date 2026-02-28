@@ -1,10 +1,11 @@
 import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { render, waitFor } from "@testing-library/react";
 
 // Track calls
-const updateSessionStatsMock = jest.fn();
+const updateSessionStatsMock = vi.fn();
 
-jest.mock("@/contexts/ProgressContext", () => ({
+vi.mock("@/contexts/ProgressContext", () => ({
   useProgress: () => ({
     updateSessionStats: updateSessionStatsMock,
     state: { progress: { recentSessions: [] } },
@@ -22,7 +23,7 @@ jest.mock("@/contexts/ProgressContext", () => ({
   }),
 }));
 
-jest.mock("@/contexts/ExamContext", () => ({
+vi.mock("@/contexts/ExamContext", () => ({
   useExam: () => ({
     state: {
       isLoading: false,
@@ -35,12 +36,12 @@ jest.mock("@/contexts/ExamContext", () => ({
         endTime: new Date(),
       },
     },
-    startExam: jest.fn(),
-    answerQuestion: jest.fn(),
-    nextQuestion: jest.fn(),
-    previousQuestion: jest.fn(),
-    finishExam: jest.fn(),
-    resetExam: jest.fn(),
+    startExam: vi.fn(),
+    answerQuestion: vi.fn(),
+    nextQuestion: vi.fn(),
+    previousQuestion: vi.fn(),
+    finishExam: vi.fn(),
+    resetExam: vi.fn(),
     getCurrentQuestion: () => null,
     getProgress: () => ({ current: 1, total: 1, percentage: 100 }),
     getScore: () => 80,
@@ -48,8 +49,8 @@ jest.mock("@/contexts/ExamContext", () => ({
 }));
 
 // Silence analytics
-jest.mock("@/lib/analytics", () => ({
-  analytics: { capture: jest.fn(), pageview: jest.fn(), init: () => true },
+vi.mock("@/lib/analytics", () => ({
+  analytics: { capture: vi.fn(), pageview: vi.fn(), init: () => true },
 }));
 
 import PracticePage from "@/app/practice/page";

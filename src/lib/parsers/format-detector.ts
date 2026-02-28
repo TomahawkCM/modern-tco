@@ -117,7 +117,10 @@ export function detectFromContent(content: string): {
   // ========================================
   // CAMT.053 without XML declaration (starts with <Document>)
   // ========================================
-  if (trimmed.startsWith("<Document") && upper.includes("URN:ISO:STD:ISO:20022:TECH:XSD:CAMT.053")) {
+  if (
+    trimmed.startsWith("<Document") &&
+    upper.includes("URN:ISO:STD:ISO:20022:TECH:XSD:CAMT.053")
+  ) {
     return {
       format: "camt053",
       confidence: 0.95,
@@ -205,12 +208,11 @@ function analyzeCSVStructure(content: string): {
     return { isCSV: false, confidence: 0 };
   }
 
-  // Check if first line looks like headers (letters, spaces, capitals)
-  const firstLine = lines[0];
-  const hasLetters = /[a-zA-Z]/.test(firstLine);
-  const hasCommas = firstLine.includes(",");
+  // Find the first line that contains commas (skip preamble lines like "Account Number: 123")
+  const firstCommaLine = lines.find((line) => line.includes(","));
+  const hasLetters = firstCommaLine ? /[a-zA-Z]/.test(firstCommaLine) : false;
 
-  if (!hasLetters || !hasCommas) {
+  if (!firstCommaLine || !hasLetters) {
     return { isCSV: false, confidence: 0.2 };
   }
 
