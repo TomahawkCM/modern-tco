@@ -1548,12 +1548,15 @@
       "title": "Upload Receipt",
       "dragDrop": "Drag & drop or click to upload",
       "supportedFormats": "Supported formats: JPG, PNG, PDF",
-      "maxSize": "Max file size: 10MB"
+      "maxSize": "Max file size: 10MB",
+      "browse": "Browse Files",
+      "dropHere": "Drop your receipt here"
     },
     "processing": {
       "title": "Processing Receipt",
       "analyzing": "Analyzing receipt...",
-      "extracting": "Extracting data..."
+      "extracting": "Extracting data...",
+      "progress": "{progress}% complete"
     },
     "results": {
       "title": "Extracted Data",
@@ -1561,19 +1564,167 @@
       "amount": "Amount",
       "date": "Date",
       "items": "Line Items",
-      "confidence": "Confidence"
+      "confidence": "Confidence",
+      "merchantPlaceholder": "e.g. Walmart, Target",
+      "amountPlaceholder": "0.00",
+      "itemsPlaceholder": "One item per line",
+      "rawText": "Raw OCR Text",
+      "account": "Account",
+      "selectAccount": "Select an account",
+      "noAccounts": "No accounts found. Create one first."
     },
     "actions": {
       "scan": "Scan Receipt",
       "rescan": "Rescan",
       "createTransaction": "Create Transaction",
       "saveReceipt": "Save Receipt",
-      "discard": "Discard"
+      "discard": "Discard",
+      "creating": "Creating...",
+      "saving": "Saving..."
     },
     "errors": {
       "noText": "Could not extract text from this image",
       "uploadFailed": "Upload failed",
-      "tooLarge": "File is too large (max 10MB)"
+      "tooLarge": "File is too large (max 10MB)",
+      "invalidType": "Unsupported file type. Use JPG, PNG, or PDF.",
+      "createFailed": "Failed to create transaction",
+      "saveFailed": "Failed to save receipt",
+      "accountRequired": "Please select an account first",
+      "ocrFailed": "OCR processing failed. Please try again."
+    },
+    "success": {
+      "transactionCreated": "Transaction created successfully",
+      "receiptSaved": "Receipt saved successfully"
+    }
+  },
+  "commandPalette": {
+    "placeholder": "Type a command or search...",
+    "noResults": "No results found",
+    "groups": {
+      "navigation": "Navigation",
+      "actions": "Actions",
+      "theme": "Theme"
+    },
+    "commands": {
+      "dashboard": "Go to Dashboard",
+      "transactions": "Go to Transactions",
+      "accounts": "Go to Accounts",
+      "budgets": "Go to Budgets",
+      "categories": "Go to Categories",
+      "subscriptions": "Go to Subscriptions",
+      "loans": "Go to Loans",
+      "investments": "Go to Investments",
+      "properties": "Go to Properties",
+      "netWorth": "Go to Net Worth",
+      "reports": "Go to Reports",
+      "insights": "Go to Insights",
+      "calculators": "Go to Calculators",
+      "futurePlans": "Go to Future Plans",
+      "retirement": "Go to Retirement Planner",
+      "paycheck": "Go to Paycheck Planner",
+      "debtPayoff": "Go to Debt Payoff",
+      "scenarios": "Go to Scenarios",
+      "events": "Go to Event Budgets",
+      "splits": "Go to Expense Splits",
+      "review": "Go to Transaction Review",
+      "fridayReview": "Go to Friday Review",
+      "ocr": "Go to Receipt Scanner",
+      "import": "Go to Import",
+      "export": "Go to Export",
+      "settings": "Go to Settings",
+      "chat": "Go to AI Chat"
+    },
+    "actions": {
+      "addTransaction": "Add Transaction",
+      "addAccount": "Add Account",
+      "addBudget": "Add Budget",
+      "importData": "Import Data",
+      "exportData": "Export Data"
+    },
+    "theme": {
+      "light": "Light Mode",
+      "dark": "Dark Mode",
+      "system": "System Theme"
+    }
+  },
+  "onboarding": {
+    "title": "Welcome to Budget App",
+    "description": "Let's set up your account in a few quick steps",
+    "steps": {
+      "welcome": {
+        "title": "Welcome!",
+        "description": "We'll help you get started with managing your finances.",
+        "features": {
+          "track": "Track your income and expenses",
+          "budget": "Create and manage budgets",
+          "plan": "Plan for the future",
+          "insights": "Get AI-powered insights"
+        }
+      },
+      "import": {
+        "title": "Import Your Data",
+        "description": "Import existing transactions from your bank or a CSV file.",
+        "skipLabel": "Skip for now",
+        "importLabel": "Import Transactions"
+      },
+      "categories": {
+        "title": "Set Up Categories",
+        "description": "Customize your spending categories or use our defaults.",
+        "useDefaults": "Use Default Categories",
+        "customize": "Customize Categories"
+      },
+      "budget": {
+        "title": "Create Your First Budget",
+        "description": "Set a monthly budget to start tracking your spending.",
+        "category": "Category",
+        "amount": "Monthly Budget Amount",
+        "skipLabel": "Skip for now",
+        "createLabel": "Create Budget"
+      },
+      "done": {
+        "title": "You're All Set!",
+        "description": "Your account is ready. Start tracking your finances today.",
+        "goToDashboard": "Go to Dashboard"
+      }
+    },
+    "progress": "Step {current} of {total}",
+    "next": "Next",
+    "previous": "Previous",
+    "skip": "Skip"
+  },
+  "morePage": {
+    "title": "More",
+    "sections": {
+      "financial": "Financial Tracking",
+      "planning": "Planning & Goals",
+      "analysis": "Analysis & Reports",
+      "tools": "Tools",
+      "settings": "Settings & Account"
+    },
+    "items": {
+      "subscriptions": "Subscriptions",
+      "loans": "Loans",
+      "investments": "Investments",
+      "properties": "Properties",
+      "netWorth": "Net Worth",
+      "futurePlans": "Future Plans",
+      "retirement": "Retirement",
+      "paycheck": "Paycheck Planner",
+      "debtPayoff": "Debt Payoff",
+      "scenarios": "Scenarios",
+      "events": "Event Budgets",
+      "reports": "Reports",
+      "insights": "AI Insights",
+      "calculators": "Calculators",
+      "splits": "Expense Splits",
+      "review": "Transaction Review",
+      "fridayReview": "Friday Review",
+      "ocr": "Receipt Scanner",
+      "import": "Import",
+      "export": "Export",
+      "settings": "Settings",
+      "merchantRules": "Merchant Rules",
+      "chat": "AI Chat"
     }
   }
 }

@@ -756,51 +756,51 @@ CREATE TABLE connected_banks (
 
 **Agent:** general-purpose
 
-- [ ] `npx shadcn@latest add command`
+- [x] `npx shadcn@latest add command`
 
 ### Task 7.2: Create UX components
 
 **Agent:** general-purpose
 
-- [ ] Create `components/layout/command-palette.tsx` — Cmd/Ctrl+K, navigation commands for all pages, theme switching. Reference: offline `src/components/budget/CommandPalette.tsx`. Use `useTranslations("commandPalette")`
-- [ ] Create `components/layout/floating-action-button.tsx` — mobile-only FAB for "Add Transaction", fixed above bottom tab bar. Reference: offline FAB
+- [x] Create `components/layout/command-palette.tsx` — Cmd/Ctrl+K, navigation commands for all pages, theme switching. Reference: offline `src/components/budget/CommandPalette.tsx`. Use `useTranslations("commandPalette")`
+- [x] Create `components/layout/floating-action-button.tsx` — mobile-only FAB for "Add Transaction", fixed above bottom tab bar. Reference: offline FAB
 
 ### Task 7.3: Add i18n namespaces
 
 **Agent:** general-purpose
 
-- [ ] Add `commandPalette`, `onboarding`, `morePage` namespaces to `en.json`
-- [ ] Regenerate locale files
+- [x] Add `commandPalette`, `onboarding`, `morePage` namespaces to `en.json`
+- [x] Regenerate locale files
 
 ### Task 7.4: Create pages
 
 **Agent:** general-purpose
 
-- [ ] `app/(app)/onboarding/page.tsx` — step wizard: Welcome → Import → Categories → First Budget → Done. Marks onboarding complete in `user_settings`. Use **Skill: brainstorming** to design wizard flow.
-- [ ] `app/(app)/more/page.tsx` — mobile overflow page, groups all non-primary links. Reference: offline `src/app/budget-app/more/MorePageClient.tsx`
-- [ ] `app/(auth)/forgot-password/page.tsx` — Supabase `resetPasswordForEmail()`
-- [ ] `app/(auth)/reset-password/page.tsx` — Supabase `updateUser({ password })`
+- [x] `app/(app)/onboarding/page.tsx` — step wizard: Welcome → Import → Categories → First Budget → Done. Marks onboarding complete in `user_settings`. Use **Skill: brainstorming** to design wizard flow.
+- [x] `app/(app)/more/page.tsx` — mobile overflow page, groups all non-primary links. Reference: offline `src/app/budget-app/more/MorePageClient.tsx`
+- [x] `app/(auth)/forgot-password/page.tsx` — Supabase `resetPasswordForEmail()`
+- [x] `app/(auth)/reset-password/page.tsx` — Supabase `updateUser({ password })`
 
 ### Task 7.5: Wire command palette into layout
 
 **Agent:** general-purpose
 
-- [ ] Add `CommandPalette` to `app/(app)/layout.tsx`
-- [ ] Add keyboard shortcut listener (Cmd/Ctrl+K)
-- [ ] Add `FloatingActionButton` to layout (mobile only)
+- [x] Add `CommandPalette` to `app/(app)/layout.tsx`
+- [x] Add keyboard shortcut listener (Cmd/Ctrl+K)
+- [x] Add `FloatingActionButton` to layout (mobile only)
 
 ### Task 7.6: Verify Phase 7
 
 **Agent:** code-reviewer
 
-- [ ] Cmd+K opens command palette, navigation works
-- [ ] Onboarding wizard completes and marks user as onboarded
-- [ ] Mobile "More" page shows all links
-- [ ] FAB creates new transaction on mobile
-- [ ] Forgot/reset password flow works
-- [ ] All translated
-- [ ] `npm run check-types && npm test && npm run build`
-- [ ] Commit updated plan with Phase 7 tasks checked off
+- [x] Cmd+K opens command palette, navigation works
+- [x] Onboarding wizard completes and marks user as onboarded
+- [x] Mobile "More" page shows all links
+- [x] FAB creates new transaction on mobile
+- [x] Forgot/reset password flow works
+- [x] All translated
+- [x] `npm run check-types && npm test && npm run build`
+- [x] Commit updated plan with Phase 7 tasks checked off
 
 ---
 

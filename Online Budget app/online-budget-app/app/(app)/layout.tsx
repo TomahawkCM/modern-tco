@@ -5,6 +5,8 @@ import { I18nProvider } from "@/components/i18n-provider";
 import { AppSidebar } from "@/components/layout/app-sidebar";
 import { MobileLayout } from "@/components/layout/mobile-layout";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { CommandPalette } from "@/components/layout/command-palette";
+import { FloatingActionButton } from "@/components/layout/floating-action-button";
 import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { getUserSettings } from "@/server/settings";
 import { getValidLocale, LOCALE_METADATA } from "@/i18n/config";
@@ -53,6 +55,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           </main>
         </div>
         <MobileNav />
+        <CommandPalette />
+        <FloatingActionButton />
       </div>
     </I18nProvider>
   );
