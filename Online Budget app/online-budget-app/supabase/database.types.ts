@@ -933,6 +933,188 @@ export interface Database {
           },
         ];
       };
+      future_purchases: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          target_amount_minor: number;
+          current_savings_minor: number;
+          monthly_savings_minor: number;
+          target_date: string | null;
+          priority: string | null;
+          currency: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          target_amount_minor: number;
+          current_savings_minor?: number;
+          monthly_savings_minor?: number;
+          target_date?: string | null;
+          priority?: string | null;
+          currency?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          target_amount_minor?: number;
+          current_savings_minor?: number;
+          monthly_savings_minor?: number;
+          target_date?: string | null;
+          priority?: string | null;
+          currency?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "future_purchases_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      retirement_plans: {
+        Row: {
+          id: string;
+          user_id: string;
+          current_age: number;
+          retirement_age: number;
+          current_savings_minor: number;
+          monthly_contribution_minor: number;
+          expected_return_percent: number;
+          currency: string;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          current_age: number;
+          retirement_age?: number;
+          current_savings_minor?: number;
+          monthly_contribution_minor?: number;
+          expected_return_percent?: number;
+          currency?: string;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          current_age?: number;
+          retirement_age?: number;
+          current_savings_minor?: number;
+          monthly_contribution_minor?: number;
+          expected_return_percent?: number;
+          currency?: string;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "retirement_plans_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      paycheck_plans: {
+        Row: {
+          id: string;
+          user_id: string;
+          schedule_type: string;
+          pay_amount_minor: number;
+          next_pay_date: string;
+          currency: string;
+          allocations: Json;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          schedule_type: string;
+          pay_amount_minor: number;
+          next_pay_date: string;
+          currency?: string;
+          allocations?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          schedule_type?: string;
+          pay_amount_minor?: number;
+          next_pay_date?: string;
+          currency?: string;
+          allocations?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "paycheck_plans_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      debt_scenarios: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          strategy: string;
+          extra_payment_minor: number;
+          config: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          strategy: string;
+          extra_payment_minor?: number;
+          config?: Json;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          strategy?: string;
+          extra_payment_minor?: number;
+          config?: Json;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "debt_scenarios_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
