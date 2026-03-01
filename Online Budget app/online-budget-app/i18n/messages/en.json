@@ -1146,14 +1146,57 @@
       "percentage": "Percentage"
     },
     "heatmap": {
+      "title": "Spending Heatmap",
+      "noData": "No spending data to display",
       "less": "Less",
       "more": "More",
-      "spent": "{amount} spent"
+      "spent": "{amount} spent",
+      "totalSpent": "Total Spent",
+      "busiestDay": "Busiest Day",
+      "avgPerDay": "Avg. per Day"
+    },
+    "dayShort": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    },
+    "trend": {
+      "title": "Income vs Expenses Trend",
+      "noData": "No trend data to display",
+      "income": "Income",
+      "expenses": "Expenses",
+      "avgIncome": "Avg. Income",
+      "avgExpenses": "Avg. Expenses",
+      "netSavings": "Net Savings",
+      "savingsRate": "Savings Rate",
+      "footer": "Showing {months} months of data"
     },
     "sankey": {
+      "title": "Money Flow",
+      "noData": "No money flow data to display",
       "source": "Source",
       "target": "Target",
-      "value": "Value"
+      "value": "Value",
+      "viewToggle": "View Mode",
+      "chartView": "Chart",
+      "tableView": "Table",
+      "legendIncome": "Income Sources",
+      "legendExpenses": "Expense Categories",
+      "colFrom": "From",
+      "colTo": "To",
+      "colAmount": "Amount",
+      "colPercent": "Percent",
+      "chartAnnouncement": "Showing money flow as a chart",
+      "tableAnnouncement": "Showing money flow as a table",
+      "chartLabel": "Money flow diagram showing income sources to expense categories",
+      "chartHint": "Hover over flows to see details",
+      "tableHint": "All flows sorted by amount",
+      "tableLabel": "Money flow table",
+      "srSummary": "{flows} flows totaling {total}"
     },
     "display": {
       "showChart": "Show Chart",
