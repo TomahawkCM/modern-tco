@@ -21,11 +21,7 @@ async function loadMessages(locale: string) {
   }
 }
 
-export default async function AppLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
   const {
     data: { user },
@@ -35,7 +31,7 @@ export default async function AppLayout({
     redirect("/login");
   }
 
-  const settings = await getUserSettings(user.id);
+  const settings = await getUserSettings(supabase, user.id);
   const locale = getValidLocale(settings.locale);
   const messages = await loadMessages(locale);
 
@@ -51,7 +47,7 @@ export default async function AppLayout({
         <AppSidebar />
         <div className="flex flex-1 flex-col">
           <MobileLayout />
-          <main className="flex-1 mx-auto w-full max-w-6xl px-4 py-6 pb-20 md:pb-6">
+          <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 pb-20 md:pb-6">
             <Breadcrumb />
             {children}
           </main>

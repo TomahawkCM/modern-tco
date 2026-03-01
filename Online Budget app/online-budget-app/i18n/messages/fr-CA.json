@@ -247,7 +247,45 @@
   },
   "settings": {
     "title": "Settings",
-    "description": "Manage your preferences"
+    "description": "Manage your preferences",
+    "general": {
+      "title": "General",
+      "description": "Language, currency, and display preferences"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Manage your notification preferences"
+    },
+    "locale": {
+      "label": "Language & Region",
+      "description": "This affects date formats, number formatting, and translations"
+    },
+    "currency": {
+      "label": "Primary Currency",
+      "description": "Default currency for new accounts and calculations"
+    },
+    "language": {
+      "label": "Language",
+      "description": "Display language for the app"
+    },
+    "saved": "Settings saved successfully",
+    "merchantRules": {
+      "title": "Merchant Rules",
+      "description": "Auto-categorize transactions by merchant name",
+      "noRules": "No merchant rules yet",
+      "noRulesDescription": "Rules are created when you categorize transactions. You can also add rules manually.",
+      "addRule": "Add Rule",
+      "editRule": "Edit Rule",
+      "deleteRule": "Delete Rule",
+      "confirmDelete": "Are you sure you want to delete this rule?",
+      "fields": {
+        "merchant": "Merchant Name",
+        "merchantPlaceholder": "e.g., Starbucks",
+        "category": "Category",
+        "selectCategory": "Select a category"
+      },
+      "applied": "Applied {count} times"
+    }
   },
   "duration": {
     "months": "{count, plural, =1 {1 month} other {# months}}",
@@ -720,5 +758,154 @@
       "title": "Property & Assets",
       "description": "Track property values, vehicles, and other assets"
     }
+  },
+  "accounts": {
+    "title": "Accounts",
+    "description": "Manage your bank accounts and balances",
+    "addAccount": "Add Account",
+    "editAccount": "Edit Account",
+    "deleteAccount": "Delete Account",
+    "confirmDelete": "Are you sure you want to delete this account? This action cannot be undone.",
+    "noAccounts": "No accounts yet",
+    "noAccountsDescription": "Add your first account to start tracking your finances.",
+    "fields": {
+      "name": "Account Name",
+      "namePlaceholder": "e.g., Checking Account",
+      "type": "Account Type",
+      "currency": "Currency",
+      "balance": "Current Balance",
+      "institution": "Institution",
+      "institutionPlaceholder": "e.g., Chase, Bank of America"
+    },
+    "types": {
+      "checking": "Checking",
+      "savings": "Savings",
+      "credit": "Credit Card",
+      "investment": "Investment",
+      "loan": "Loan",
+      "other": "Other"
+    },
+    "totalBalance": "Total Balance",
+    "transactionCount": "{count, plural, =0 {No transactions} =1 {1 transaction} other {# transactions}}",
+    "manual": "Manual",
+    "linked": "Linked"
+  },
+  "categories": {
+    "title": "Categories",
+    "description": "View and customize transaction categories",
+    "systemCategories": "System Categories",
+    "userOverrides": "Custom Names",
+    "noOverrides": "No custom category names yet",
+    "noOverridesDescription": "You can rename any category to your preference.",
+    "addOverride": "Customize Name",
+    "editOverride": "Edit Custom Name",
+    "fields": {
+      "originalName": "Original Name",
+      "customName": "Custom Name",
+      "customNamePlaceholder": "Enter your preferred name"
+    },
+    "types": {
+      "income": "Income",
+      "expense": "Expense",
+      "transfer": "Transfer"
+    },
+    "resetToDefault": "Reset to Default"
+  },
+  "import": {
+    "title": "Import Transactions",
+    "description": "Import transactions from your bank",
+    "steps": {
+      "upload": "Upload File",
+      "configure": "Configure",
+      "preview": "Preview",
+      "import": "Import"
+    },
+    "upload": {
+      "title": "Upload your bank file",
+      "description": "Drag and drop or click to select a file",
+      "supportedFormats": "Supported formats: CSV, OFX, QFX, QBO",
+      "maxSize": "Maximum file size: 10MB",
+      "dropHere": "Drop file here",
+      "browse": "Browse files",
+      "selectedFile": "Selected file"
+    },
+    "configure": {
+      "title": "Configure Import",
+      "account": "Target Account",
+      "selectAccount": "Select an account",
+      "bankDetected": "Bank detected: {bank}",
+      "bankNotDetected": "Bank not detected — using universal parser",
+      "dateFormat": "Date Format",
+      "encoding": "File Encoding"
+    },
+    "preview": {
+      "title": "Preview Transactions",
+      "description": "{count, plural, =1 {1 transaction} other {# transactions}} found",
+      "duplicates": "{count, plural, =0 {No duplicates} =1 {1 duplicate} other {# duplicates}} will be skipped",
+      "columns": {
+        "date": "Date",
+        "description": "Description",
+        "amount": "Amount",
+        "status": "Status"
+      },
+      "status": {
+        "new": "New",
+        "duplicate": "Duplicate",
+        "error": "Error"
+      }
+    },
+    "importing": {
+      "title": "Importing transactions...",
+      "progress": "{imported} of {total} imported"
+    },
+    "complete": {
+      "title": "Import Complete",
+      "imported": "{count, plural, =1 {1 transaction} other {# transactions}} imported successfully",
+      "skipped": "{count, plural, =0 {No transactions} =1 {1 transaction} other {# transactions}} skipped as duplicates",
+      "viewTransactions": "View Transactions"
+    },
+    "errors": {
+      "invalidFile": "Invalid file format",
+      "fileTooLarge": "File is too large (max 10MB)",
+      "parseError": "Failed to parse file",
+      "noTransactions": "No transactions found in file",
+      "importFailed": "Import failed. Please try again."
+    }
+  },
+  "export": {
+    "title": "Export Data",
+    "description": "Download your financial data",
+    "dateRange": {
+      "label": "Date Range",
+      "from": "From",
+      "to": "To",
+      "allTime": "All Time",
+      "thisMonth": "This Month",
+      "thisYear": "This Year",
+      "lastYear": "Last Year",
+      "custom": "Custom Range"
+    },
+    "format": {
+      "label": "Export Format",
+      "csv": {
+        "label": "CSV",
+        "description": "Spreadsheet-compatible format"
+      },
+      "json": {
+        "label": "JSON",
+        "description": "Developer-friendly format"
+      }
+    },
+    "include": {
+      "label": "Include",
+      "transactions": "Transactions",
+      "accounts": "Accounts",
+      "budgets": "Budgets",
+      "categories": "Categories"
+    },
+    "exporting": "Exporting...",
+    "download": "Download",
+    "exportButton": "Export Data",
+    "noData": "No data to export for the selected range"
   }
 }

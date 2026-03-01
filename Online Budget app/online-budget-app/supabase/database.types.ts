@@ -1,10 +1,4 @@
-export type Json =
-  | string
-  | number
-  | boolean
-  | null
-  | { [key: string]: Json | undefined }
-  | Json[];
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export interface Database {
   public: {
@@ -146,13 +140,7 @@ export interface Database {
           institution_id: string | null;
           provider_account_id: string | null;
           name: string;
-          type:
-            | "checking"
-            | "savings"
-            | "credit"
-            | "investment"
-            | "loan"
-            | "other";
+          type: "checking" | "savings" | "credit" | "investment" | "loan" | "other";
           currency: string;
           balance_minor: number;
           is_manual: boolean;
@@ -165,13 +153,7 @@ export interface Database {
           institution_id?: string | null;
           provider_account_id?: string | null;
           name: string;
-          type?:
-            | "checking"
-            | "savings"
-            | "credit"
-            | "investment"
-            | "loan"
-            | "other";
+          type?: "checking" | "savings" | "credit" | "investment" | "loan" | "other";
           currency?: string;
           balance_minor?: number;
           is_manual?: boolean;
@@ -184,13 +166,7 @@ export interface Database {
           institution_id?: string | null;
           provider_account_id?: string | null;
           name?: string;
-          type?:
-            | "checking"
-            | "savings"
-            | "credit"
-            | "investment"
-            | "loan"
-            | "other";
+          type?: "checking" | "savings" | "credit" | "investment" | "loan" | "other";
           currency?: string;
           balance_minor?: number;
           is_manual?: boolean;
@@ -485,6 +461,83 @@ export interface Database {
             columns: ["category_id"];
             isOneToOne: false;
             referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      import_metadata: {
+        Row: {
+          id: string;
+          user_id: string;
+          filename: string;
+          bank_slug: string | null;
+          row_count: number;
+          imported_count: number;
+          skipped_count: number;
+          imported_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          filename: string;
+          bank_slug?: string | null;
+          row_count: number;
+          imported_count: number;
+          skipped_count?: number;
+          imported_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          filename?: string;
+          bank_slug?: string | null;
+          row_count?: number;
+          imported_count?: number;
+          skipped_count?: number;
+          imported_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "import_metadata_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      imported_fitids: {
+        Row: {
+          id: string;
+          user_id: string;
+          fitid: string;
+          account_id: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          fitid: string;
+          account_id?: string | null;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          fitid?: string;
+          account_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "imported_fitids_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "imported_fitids_account_id_fkey";
+            columns: ["account_id"];
+            isOneToOne: false;
+            referencedRelation: "accounts";
             referencedColumns: ["id"];
           },
         ];
