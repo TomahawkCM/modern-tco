@@ -348,15 +348,22 @@
     "wait-on": "^9.0.3"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "src/**/*.{ts,tsx}": [
       "eslint --fix --cache",
       "prettier --write"
     ],
-    "*.{js,jsx}": [
+    "src/**/*.{js,jsx}": [
+      "eslint --fix --cache",
+      "prettier --write"
+    ],
+    "scripts/**/*.{ts,js}": [
       "eslint --fix --cache",
       "prettier --write"
     ],
     "*.{json,md,css}": [
+      "prettier --write"
+    ],
+    "Online Budget app/**/*.{ts,tsx,js,jsx}": [
       "prettier --write"
     ]
   }
