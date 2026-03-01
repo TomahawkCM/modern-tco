@@ -814,38 +814,38 @@ CREATE TABLE connected_banks (
 
 **Agent:** general-purpose — **Use Explore agent first** to research Plaid API patterns
 
-- [ ] Complete `integrations/plaid/index.ts`: `createLinkToken`, `exchangePublicToken`, `syncTransactions`, `getAccounts`
-- [ ] `npm install plaid` (or `@plaid/link`)
-- [ ] Create API routes: `POST /api/plaid/link-token`, `POST /api/plaid/exchange-token`, `POST /api/plaid/sync`
-- [ ] Create `components/bank-sync/plaid-link-button.tsx` — Plaid Link UI component
-- [ ] Create `components/bank-sync/sync-status.tsx` — sync status indicator
-- [ ] Add `connected_banks` table migration (see Master List)
+- [x] Complete `integrations/plaid/index.ts`: `createLinkToken`, `exchangePublicToken`, `syncTransactions`, `getAccounts`
+- [x] `npm install plaid` (or `@plaid/link`)
+- [x] Create API routes: `POST /api/plaid/link-token`, `POST /api/plaid/exchange-token`, `POST /api/plaid/sync`
+- [x] Create `components/bank-sync/plaid-link-button.tsx` — Plaid Link UI component
+- [x] Create `components/bank-sync/sync-status.tsx` — sync status indicator
+- [x] Add `connected_banks` table migration (see Master List)
 
 ### Task 8.2: Add i18n namespace
 
 **Agent:** general-purpose
 
-- [ ] Add `bankSync` namespace to `en.json`
-- [ ] Regenerate locale files
+- [x] Add `bankSync` namespace to `en.json`
+- [x] Regenerate locale files
 
 ### Task 8.3: Integrate into accounts page
 
 **Agent:** general-purpose
 
-- [ ] Add "Connect Bank" button to `/accounts` page using Plaid Link
-- [ ] Show sync status on connected accounts
-- [ ] Add manual sync trigger button
+- [x] Add "Connect Bank" button to `/accounts` page using Plaid Link
+- [x] Show sync status on connected accounts
+- [x] Add manual sync trigger button
 
 ### Task 8.4: Verify Phase 8
 
 **Agent:** code-reviewer
 
-- [ ] Plaid Link opens and connects sandbox bank
-- [ ] Accounts created from Plaid data
-- [ ] Transactions sync from Plaid
-- [ ] All translated
-- [ ] `npm run check-types && npm test`
-- [ ] Commit updated plan with Phase 8 tasks checked off
+- [x] Plaid Link opens and connects sandbox bank
+- [x] Accounts created from Plaid data
+- [x] Transactions sync from Plaid
+- [x] All translated
+- [x] `npm run check-types && npm test`
+- [x] Commit updated plan with Phase 8 tasks checked off
 
 ---
 

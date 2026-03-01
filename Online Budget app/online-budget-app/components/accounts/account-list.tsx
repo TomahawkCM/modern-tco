@@ -35,7 +35,10 @@ import {
   TrendingUpIcon,
   LandmarkIcon,
   CircleEllipsisIcon,
+  LinkIcon,
 } from "lucide-react";
+import { PlaidLinkButton } from "@/components/bank-sync/plaid-link-button";
+import { SyncStatus } from "@/components/bank-sync/sync-status";
 
 interface AccountRow {
   id: string;
@@ -51,11 +54,21 @@ interface AccountRow {
   updated_at: string;
 }
 
+/** Client-safe subset of ConnectedBankRow (no access_token_encrypted). */
+interface ConnectedBankSafe {
+  id: string;
+  provider: string;
+  institution_id: string | null;
+  status: string;
+  last_synced_at: string | null;
+}
+
 interface AccountListProps {
   accounts: AccountRow[];
   totalBalance: MinorAmount;
   currency: string;
   formatAmount: (amt: MinorAmount) => string;
+  connectedBanks?: ConnectedBankSafe[];
 }
 
 const ACCOUNT_TYPES = ["checking", "savings", "credit", "investment", "loan", "other"] as const;
@@ -85,9 +98,16 @@ const INITIAL_FORM: AccountFormData = {
   balance: "0",
 };
 
-export function AccountList({ accounts, totalBalance, currency, formatAmount }: AccountListProps) {
+export function AccountList({
+  accounts,
+  totalBalance,
+  currency,
+  formatAmount,
+  connectedBanks = [],
+}: AccountListProps) {
   const t = useTranslations("accounts");
   const tc = useTranslations("common");
+  const tbs = useTranslations("bankSync");
   const router = useRouter();
 
   const [createOpen, setCreateOpen] = useState(false);
@@ -356,6 +376,38 @@ export function AccountList({ accounts, totalBalance, currency, formatAmount }: 
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Bank Sync section */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <LinkIcon className="h-5 w-5 text-muted-foreground" />
+            <h2 className="text-lg font-semibold">{tbs("connectedBanks")}</h2>
+          </div>
+          <PlaidLinkButton onSuccess={() => router.refresh()} />
+        </div>
+
+        {connectedBanks.length === 0 ? (
+          <Card>
+            <CardContent className="py-12 text-center">
+              <p className="text-sm text-muted-foreground">{tbs("noConnectedBanks")}</p>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {connectedBanks.map((bank) => (
+              <SyncStatus
+                key={bank.id}
+                connectedBankId={bank.id}
+                provider={bank.provider}
+                status={bank.status}
+                lastSyncedAt={bank.last_synced_at}
+                onSyncComplete={() => router.refresh()}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

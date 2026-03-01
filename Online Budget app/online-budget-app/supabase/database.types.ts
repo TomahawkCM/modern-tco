@@ -1361,6 +1361,60 @@ export interface Database {
           },
         ];
       };
+      connected_banks: {
+        Row: {
+          id: string;
+          user_id: string;
+          provider: string;
+          access_token_encrypted: string;
+          institution_id: string | null;
+          last_synced_at: string | null;
+          sync_cursor: string | null;
+          status: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          provider: string;
+          access_token_encrypted: string;
+          institution_id?: string | null;
+          last_synced_at?: string | null;
+          sync_cursor?: string | null;
+          status?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          provider?: string;
+          access_token_encrypted?: string;
+          institution_id?: string | null;
+          last_synced_at?: string | null;
+          sync_cursor?: string | null;
+          status?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "connected_banks_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "connected_banks_institution_id_fkey";
+            columns: ["institution_id"];
+            isOneToOne: false;
+            referencedRelation: "institutions";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;

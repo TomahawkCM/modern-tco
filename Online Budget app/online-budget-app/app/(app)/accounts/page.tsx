@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { getTranslations } from "next-intl/server";
 import { listAccounts } from "@/server/accounts";
+import { listConnectedBanks } from "@/server/connected-banks";
 import { formatMoney, minorAmount, sumMinor } from "@/engine";
 import { AccountList } from "@/components/accounts/account-list";
 
@@ -21,7 +22,19 @@ export default async function AccountsPage() {
   const currency = settings?.primary_currency ?? "USD";
   const locale = settings?.locale ?? "en-US";
 
-  const accounts = await listAccounts(supabase, user.id);
+  const [accounts, connectedBanksRaw] = await Promise.all([
+    listAccounts(supabase, user.id),
+    listConnectedBanks(supabase, user.id),
+  ]);
+
+  // Strip sensitive fields before sending to the client
+  const connectedBanks = connectedBanksRaw.map((bank) => ({
+    id: bank.id,
+    provider: bank.provider,
+    institution_id: bank.institution_id,
+    status: bank.status,
+    last_synced_at: bank.last_synced_at,
+  }));
 
   // Compute total balance via engine
   const primaryAccounts = accounts.filter((a) => a.currency === currency);
@@ -46,6 +59,7 @@ export default async function AccountsPage() {
         totalBalance={totalBalance}
         currency={currency}
         formatAmount={fmt}
+        connectedBanks={connectedBanks}
       />
     </div>
   );

@@ -21,7 +21,8 @@
       "loading": "Loading...",
       "error": "Unable to connect to payment service",
       "checkoutError": "Unable to start checkout"
-    }
+    },
+    "addTransaction": "Add Transaction"
   },
   "nav": {
     "brand": "Budget",
@@ -238,6 +239,25 @@
       "submit": "Create Account",
       "hasAccount": "Already have an account?",
       "signInLink": "Sign in"
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "description": "Enter your email and we'll send you a reset link",
+      "emailLabel": "Email",
+      "emailPlaceholder": "your@email.com",
+      "sendLink": "Send Reset Link",
+      "success": "Check your email for a password reset link",
+      "backToLogin": "Back to Login"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Enter your new password",
+      "passwordLabel": "New Password",
+      "confirmLabel": "Confirm Password",
+      "resetButton": "Reset Password",
+      "success": "Password reset successfully",
+      "mismatch": "Passwords do not match",
+      "backToLogin": "Back to Login"
     }
   },
   "landing": {
@@ -1726,5 +1746,28 @@
       "merchantRules": "Merchant Rules",
       "chat": "AI Chat"
     }
+  },
+  "bankSync": {
+    "title": "Bank Sync",
+    "description": "Connect your bank accounts for automatic transaction syncing",
+    "notConfigured": "Bank sync is not available. Please configure your Plaid credentials.",
+    "connectedBanks": "Connected Banks",
+    "noConnectedBanks": "No banks connected yet. Connect a bank to start syncing transactions automatically.",
+    "disconnect": "Disconnect",
+    "confirmDisconnect": "Are you sure you want to disconnect this bank? Existing transactions will not be deleted.",
+    "connectBank": "Connect Bank",
+    "connecting": "Connecting…",
+    "connectionFailed": "Failed to connect to your bank. Please try again.",
+    "connectionSuccess": "Bank connected successfully!",
+    "syncStatus": "Sync Status",
+    "statusActive": "Active",
+    "statusError": "Error",
+    "statusInactive": "Inactive",
+    "neverSynced": "Never synced",
+    "provider": "Provider",
+    "lastSynced": "Last synced",
+    "syncResult": "{added} added, {modified} modified, {removed} removed",
+    "syncing": "Syncing…",
+    "syncNow": "Sync Now"
   }
 }
