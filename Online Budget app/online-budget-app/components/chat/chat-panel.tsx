@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +13,7 @@ interface Message {
 }
 
 export function ChatPanel() {
+  const t = useTranslations("chat");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -48,7 +50,7 @@ export function ChatPanel() {
           ...prev,
           {
             role: "assistant",
-            content: data.error ?? "Something went wrong",
+            content: data.error ?? t("defaultError"),
           },
         ]);
         return;
@@ -64,14 +66,14 @@ export function ChatPanel() {
           ...prev,
           {
             role: "assistant",
-            content: data.error ?? "Failed to get response",
+            content: data.error ?? t("defaultError"),
           },
         ]);
       }
     } catch {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "Network error. Please try again." },
+        { role: "assistant", content: t("networkError") },
       ]);
     } finally {
       setIsLoading(false);
@@ -85,7 +87,7 @@ export function ChatPanel() {
         {messages.length === 0 && (
           <div className="flex h-full items-center justify-center">
             <p className="text-sm text-muted-foreground">
-              Ask me anything about your finances
+              {t("emptyState")}
             </p>
           </div>
         )}
@@ -119,7 +121,7 @@ export function ChatPanel() {
         <Input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="How much did I spend on food?"
+          placeholder={t("placeholder")}
           maxLength={500}
           disabled={isLoading}
           autoFocus

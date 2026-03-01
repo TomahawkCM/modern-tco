@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import type { MinorAmount } from "@/engine";
 
@@ -18,12 +21,14 @@ export function IncomeExpenseSummary({
   savingsRate,
   formatAmount,
 }: IncomeExpenseSummaryProps) {
+  const t = useTranslations("dashboard.incomeExpense");
+
   return (
     <div>
       <div className="grid grid-cols-3 gap-6">
         <Card>
           <CardContent>
-            <p className="text-sm text-muted-foreground">Income</p>
+            <p className="text-sm text-muted-foreground">{t("income")}</p>
             <p className="text-xl font-semibold text-green-600">
               {formatAmount(income)}
             </p>
@@ -31,7 +36,7 @@ export function IncomeExpenseSummary({
         </Card>
         <Card>
           <CardContent>
-            <p className="text-sm text-muted-foreground">Expenses</p>
+            <p className="text-sm text-muted-foreground">{t("expenses")}</p>
             <p className="text-xl font-semibold text-red-600">
               {formatAmount(expense)}
             </p>
@@ -39,7 +44,7 @@ export function IncomeExpenseSummary({
         </Card>
         <Card>
           <CardContent>
-            <p className="text-sm text-muted-foreground">Net</p>
+            <p className="text-sm text-muted-foreground">{t("net")}</p>
             <p
               className={`text-xl font-semibold ${net.amountMinor >= 0 ? "text-green-600" : "text-red-600"}`}
             >
@@ -49,8 +54,8 @@ export function IncomeExpenseSummary({
         </Card>
       </div>
       <div className="mt-2 flex gap-4 text-xs text-muted-foreground">
-        <span>{transactionCount} transactions</span>
-        <span>Savings rate: {savingsRate.toFixed(1)}%</span>
+        <span>{t("transactionCount", { count: transactionCount })}</span>
+        <span>{t("savingsRate", { rate: savingsRate.toFixed(1) })}</span>
       </div>
     </div>
   );

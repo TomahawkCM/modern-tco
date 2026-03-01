@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { getTranslations } from "next-intl/server";
 import {
   aggregateByCategory,
   computeBudgetProgress,
@@ -104,10 +105,12 @@ export default async function BudgetsPage() {
   const fmt = (amt: { amountMinor: number; currency: string }) =>
     formatMoney(amt, locale);
 
+  const t = await getTranslations("budgets");
+
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold tracking-tight">Budgets</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
         <span className="text-sm text-muted-foreground">{monthName}</span>
       </div>
       <BudgetList

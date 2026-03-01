@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { getTranslations } from "next-intl/server";
 import { formatMoney, minorAmount } from "@/engine";
 import { TransactionTable } from "@/components/transactions/transaction-table";
 import { TransactionFilters } from "@/components/transactions/transaction-filters";
@@ -77,12 +78,14 @@ export default async function TransactionsPage({ searchParams }: Props) {
     isPending: tx.is_pending,
   }));
 
+  const t = await getTranslations("transactions");
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold tracking-tight">Transactions</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
         <span className="text-sm text-muted-foreground">
-          {transactions.length} results
+          {transactions.length} {t("title").toLowerCase()}
         </span>
       </div>
       <TransactionFilters />

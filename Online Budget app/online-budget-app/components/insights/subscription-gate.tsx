@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { Lock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { SubscribeButton } from "@/components/subscribe-button";
+import { useTranslations } from "next-intl";
 
 interface SubscriptionGateProps {
   isSubscriptionRequired: boolean;
@@ -16,6 +17,8 @@ export function SubscriptionGate({
   featureName,
   children,
 }: SubscriptionGateProps) {
+  const t = useTranslations("insights.gate");
+
   if (!isSubscriptionRequired) {
     return <>{children}</>;
   }
@@ -27,7 +30,7 @@ export function SubscriptionGate({
         <div>
           <p className="font-medium">{featureName}</p>
           <p className="text-sm text-muted-foreground">
-            Subscribe to unlock AI-powered insights
+            {t("subscribeToUnlock")}
           </p>
         </div>
         <SubscribeButton />

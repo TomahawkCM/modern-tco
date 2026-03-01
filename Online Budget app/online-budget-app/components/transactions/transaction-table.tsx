@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import {
   Table,
   TableBody,
@@ -28,10 +31,13 @@ export function TransactionTable({
   transactions,
   formatAmount,
 }: TransactionTableProps) {
+  const tRoot = useTranslations("transactions");
+  const t = useTranslations("transactions.table");
+
   if (transactions.length === 0) {
     return (
       <p className="py-8 text-center text-sm text-muted-foreground">
-        No transactions found
+        {tRoot("noTransactions")}
       </p>
     );
   }
@@ -40,10 +46,10 @@ export function TransactionTable({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Date</TableHead>
-          <TableHead>Description</TableHead>
-          <TableHead>Category</TableHead>
-          <TableHead className="text-right">Amount</TableHead>
+          <TableHead>{t("date")}</TableHead>
+          <TableHead>{t("description")}</TableHead>
+          <TableHead>{t("category")}</TableHead>
+          <TableHead className="text-right">{t("amount")}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -56,13 +62,13 @@ export function TransactionTable({
               </span>
               {tx.isPending && (
                 <Badge variant="secondary" className="ml-2">
-                  Pending
+                  {t("pending")}
                 </Badge>
               )}
             </TableCell>
             <TableCell>
               <span className="text-sm text-muted-foreground">
-                {tx.categoryKey ?? "Uncategorized"}
+                {tx.categoryKey ?? t("uncategorized")}
               </span>
             </TableCell>
             <TableCell

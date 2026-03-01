@@ -4,22 +4,24 @@ import { ShieldAlert } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useInsight } from "./use-insight";
 import { SubscriptionGate } from "./subscription-gate";
+import { useTranslations } from "next-intl";
 
 export function BudgetRiskCard() {
   const { narrative, loading, error, isSubscriptionRequired } = useInsight(
     "/api/insights/budget-risk",
   );
+  const t = useTranslations("insights.budgetRisk");
 
   return (
     <SubscriptionGate
       isSubscriptionRequired={isSubscriptionRequired}
-      featureName="Budget Risk Assessment"
+      featureName={t("title")}
     >
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <ShieldAlert className="h-5 w-5" />
-            Budget Risk
+            {t("title")}
           </CardTitle>
         </CardHeader>
         <CardContent>

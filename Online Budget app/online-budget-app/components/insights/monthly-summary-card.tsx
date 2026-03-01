@@ -4,22 +4,24 @@ import { TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useInsight } from "./use-insight";
 import { SubscriptionGate } from "./subscription-gate";
+import { useTranslations } from "next-intl";
 
 export function MonthlySummaryCard() {
   const { narrative, loading, error, isSubscriptionRequired } = useInsight(
     "/api/insights/monthly-summary",
   );
+  const t = useTranslations("insights.monthlySummary");
 
   return (
     <SubscriptionGate
       isSubscriptionRequired={isSubscriptionRequired}
-      featureName="Monthly Summary"
+      featureName={t("title")}
     >
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <TrendingUp className="h-5 w-5" />
-            Monthly Summary
+            {t("title")}
           </CardTitle>
         </CardHeader>
         <CardContent>

@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import type { MinorAmount } from "@/engine";
@@ -18,6 +21,7 @@ export function CategoryBreakdown({
   categories,
   formatAmount,
 }: CategoryBreakdownProps) {
+  const t = useTranslations("dashboard.categories");
   const expenses = categories.filter((c) => c.total.amountMinor < 0);
 
   if (expenses.length === 0) {
@@ -25,7 +29,7 @@ export function CategoryBreakdown({
       <Card>
         <CardContent>
           <p className="text-sm text-muted-foreground">
-            No expenses this month
+            {t("noExpenses")}
           </p>
         </CardContent>
       </Card>
@@ -40,10 +44,10 @@ export function CategoryBreakdown({
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-sm font-medium">
-                  {cat.categoryKey ?? "Uncategorized"}
+                  {cat.categoryKey ?? t("uncategorized")}
                 </span>
                 <span className="ml-2 text-xs text-muted-foreground">
-                  {cat.transactionCount} txn
+                  {t("transactionCount", { count: cat.transactionCount })}
                 </span>
               </div>
               <span className="text-sm font-semibold text-red-600">

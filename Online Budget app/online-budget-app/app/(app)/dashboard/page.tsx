@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { getSubscription } from "@/lib/subscription";
+import { getTranslations } from "next-intl/server";
 import {
   aggregateIncomeExpense,
   aggregateByCategory,
@@ -165,28 +166,30 @@ export default async function DashboardPage() {
     year: "numeric",
   });
 
+  const t = await getTranslations("dashboard");
+
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
         <span className="text-sm text-muted-foreground">{monthName}</span>
       </div>
 
       {!subscription?.isActive && (
         <p className="rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-700">
-          Subscription required for full access
+          {t("subscriptionWarning")}
         </p>
       )}
 
       <section>
-        <h2 className="mb-3 text-lg font-medium">Financial Health</h2>
+        <h2 className="mb-3 text-lg font-medium">{t("sections.healthScore")}</h2>
         <HealthScoreWidget result={healthScore} />
       </section>
 
       <InsightAlerts />
 
       <section>
-        <h2 className="mb-3 text-lg font-medium">Accounts</h2>
+        <h2 className="mb-3 text-lg font-medium">{t("sections.accounts")}</h2>
         <AccountCards
           accounts={primaryAccounts}
           totalBalance={totalBalance}
@@ -195,7 +198,7 @@ export default async function DashboardPage() {
       </section>
 
       <section>
-        <h2 className="mb-3 text-lg font-medium">Income vs Expenses</h2>
+        <h2 className="mb-3 text-lg font-medium">{t("sections.incomeExpense")}</h2>
         <IncomeExpenseSummary
           income={summary.totalIncome}
           expense={absMinor(summary.totalExpense)}
@@ -207,7 +210,7 @@ export default async function DashboardPage() {
       </section>
 
       <section>
-        <h2 className="mb-3 text-lg font-medium">Spending by Category</h2>
+        <h2 className="mb-3 text-lg font-medium">{t("sections.categories")}</h2>
         <CategoryBreakdown
           categories={categoryBreakdown.categories}
           formatAmount={fmt}
@@ -215,7 +218,7 @@ export default async function DashboardPage() {
       </section>
 
       <section>
-        <h2 className="mb-3 text-lg font-medium">Budget Progress</h2>
+        <h2 className="mb-3 text-lg font-medium">{t("sections.budgets")}</h2>
         <BudgetProgressList
           items={budgetProgress}
           currency={currency}

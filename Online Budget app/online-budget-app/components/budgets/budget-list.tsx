@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
@@ -10,11 +13,13 @@ interface BudgetListProps {
 }
 
 export function BudgetList({ items, currency, formatAmount }: BudgetListProps) {
+  const t = useTranslations("budgets");
+
   if (items.length === 0) {
     return (
       <Card>
         <CardContent className="py-8 text-center text-sm text-muted-foreground">
-          No budgets set. Create one below.
+          {t("noBudgets")}
         </CardContent>
       </Card>
     );
@@ -39,7 +44,7 @@ export function BudgetList({ items, currency, formatAmount }: BudgetListProps) {
                 }
               >
                 {bp.isOverBudget
-                  ? "Over budget"
+                  ? t("overBudget")
                   : `${bp.percentUsed.toFixed(0)}%`}
               </Badge>
             </div>
@@ -48,18 +53,17 @@ export function BudgetList({ items, currency, formatAmount }: BudgetListProps) {
             <Progress value={Math.min(bp.percentUsed, 100)} className="mb-2" />
             <div className="flex justify-between text-xs text-muted-foreground">
               <span>
-                {formatAmount({ amountMinor: bp.spentMinor, currency })} spent
+                {t("spent", { amount: formatAmount({ amountMinor: bp.spentMinor, currency }) })}
               </span>
               <span>
-                {formatAmount({ amountMinor: bp.limitMinor, currency })} limit
+                {t("limit", { amount: formatAmount({ amountMinor: bp.limitMinor, currency }) })}
               </span>
             </div>
             <p className="mt-1 text-xs text-muted-foreground">
-              {formatAmount({
+              {t("remaining", { amount: formatAmount({
                 amountMinor: Math.max(bp.limitMinor - bp.spentMinor, 0),
                 currency,
-              })}{" "}
-              remaining
+              }) })}
             </p>
           </CardContent>
         </Card>

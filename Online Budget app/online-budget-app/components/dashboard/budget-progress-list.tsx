@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -14,6 +17,8 @@ export function BudgetProgressList({
   currency,
   formatAmount,
 }: BudgetProgressListProps) {
+  const t = useTranslations("dashboard.budgetProgress");
+
   if (items.length === 0) {
     return null;
   }
@@ -34,8 +39,8 @@ export function BudgetProgressList({
                 <span className="text-sm font-medium">{bp.categoryKey}</span>
                 <Badge variant={variant}>
                   {bp.isOverBudget
-                    ? "Over budget"
-                    : `${bp.percentUsed.toFixed(0)}%`}
+                    ? t("overBudget")
+                    : t("percentUsed", { percent: bp.percentUsed.toFixed(0) })}
                 </Badge>
               </div>
               <Progress
@@ -44,18 +49,20 @@ export function BudgetProgressList({
               />
               <div className="mt-1 flex justify-between text-xs text-muted-foreground">
                 <span>
-                  {formatAmount({
-                    amountMinor: bp.spentMinor,
-                    currency,
-                  })}{" "}
-                  spent
+                  {t("spent", {
+                    amount: formatAmount({
+                      amountMinor: bp.spentMinor,
+                      currency,
+                    }),
+                  })}
                 </span>
                 <span>
-                  {formatAmount({
-                    amountMinor: bp.limitMinor,
-                    currency,
-                  })}{" "}
-                  limit
+                  {t("limit", {
+                    amount: formatAmount({
+                      amountMinor: bp.limitMinor,
+                      currency,
+                    }),
+                  })}
                 </span>
               </div>
             </CardContent>

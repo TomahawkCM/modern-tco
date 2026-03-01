@@ -2,10 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export function SubscribeButton() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const t = useTranslations("common.subscribe");
 
   async function handleSubscribe() {
     setLoading(true);
@@ -16,10 +18,10 @@ export function SubscribeButton() {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        setError(data.error || "Unable to start checkout");
+        setError(data.error || t("checkoutError"));
       }
     } catch {
-      setError("Unable to connect to payment service");
+      setError(t("error"));
     } finally {
       setLoading(false);
     }
@@ -28,7 +30,7 @@ export function SubscribeButton() {
   return (
     <div className="flex flex-col items-center gap-2">
       <Button onClick={handleSubscribe} disabled={loading}>
-        {loading ? "Loading..." : "Subscribe — Start Free Trial"}
+        {loading ? t("loading") : t("button")}
       </Button>
       {error && <p className="text-sm text-red-500">{error}</p>}
     </div>

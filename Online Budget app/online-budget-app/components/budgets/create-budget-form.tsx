@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,8 @@ export function CreateBudgetForm({
   categories,
   currency,
 }: CreateBudgetFormProps) {
+  const t = useTranslations("budgets.create");
+  const tc = useTranslations("common");
   const router = useRouter();
   const [categoryId, setCategoryId] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,7 +45,7 @@ export function CreateBudgetForm({
     const amountMajor = parseFloat(formData.get("amount") as string);
 
     if (!categoryId || isNaN(amountMajor) || amountMajor <= 0) {
-      setError("Please select a category and enter a valid amount");
+      setError(t("error"));
       setIsSubmitting(false);
       return;
     }
@@ -66,7 +69,7 @@ export function CreateBudgetForm({
 
       router.refresh();
     } catch {
-      setError("Network error. Please try again.");
+      setError(tc("networkError"));
     } finally {
       setIsSubmitting(false);
     }
@@ -75,17 +78,17 @@ export function CreateBudgetForm({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-sm">Set Budget</CardTitle>
+        <CardTitle className="text-sm">{t("title")}</CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="flex items-end gap-3">
           <div className="flex-1">
             <Label htmlFor="category_id" className="text-xs">
-              Category
+              {t("category")}
             </Label>
             <Select value={categoryId} onValueChange={setCategoryId}>
               <SelectTrigger>
-                <SelectValue placeholder="Select category" />
+                <SelectValue placeholder={t("selectCategory")} />
               </SelectTrigger>
               <SelectContent>
                 {categories.map((cat) => (
@@ -98,7 +101,7 @@ export function CreateBudgetForm({
           </div>
           <div className="w-32">
             <Label htmlFor="amount" className="text-xs">
-              Monthly limit ({currency})
+              {t("monthlyLimit", { currency })}
             </Label>
             <Input
               name="amount"
@@ -110,7 +113,7 @@ export function CreateBudgetForm({
             />
           </div>
           <Button type="submit" disabled={isSubmitting} size="sm">
-            {isSubmitting ? "Saving..." : "Save"}
+            {isSubmitting ? t("saving") : t("save")}
           </Button>
         </form>
         {error && <p className="mt-2 text-sm text-destructive">{error}</p>}

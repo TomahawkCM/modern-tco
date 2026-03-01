@@ -5,23 +5,25 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useInsight } from "./use-insight";
 import { SubscriptionGate } from "./subscription-gate";
+import { useTranslations } from "next-intl";
 
 export function AnomalyCard() {
   const { narrative, loading, error, isSubscriptionRequired } = useInsight(
     "/api/insights/anomalies",
   );
+  const t = useTranslations("insights.anomalies");
 
   return (
     <SubscriptionGate
       isSubscriptionRequired={isSubscriptionRequired}
-      featureName="Anomaly Detection"
+      featureName={t("title")}
     >
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <AlertTriangle className="h-5 w-5" />
-            Anomaly Detection
-            {narrative && <Badge variant="destructive">Alert</Badge>}
+            {t("title")}
+            {narrative && <Badge variant="destructive">{t("alert")}</Badge>}
           </CardTitle>
         </CardHeader>
         <CardContent>

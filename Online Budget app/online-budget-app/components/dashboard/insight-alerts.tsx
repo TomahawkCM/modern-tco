@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { AlertTriangle, Lightbulb } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useInsight } from "@/components/insights/use-insight";
 
 export function InsightAlerts() {
+  const t = useTranslations("insights.alerts");
   const { narrative, loading, isSubscriptionRequired } = useInsight(
     "/api/insights/anomalies",
   );
@@ -19,10 +21,10 @@ export function InsightAlerts() {
         <CardContent className="flex items-center gap-3 py-3">
           <Lightbulb className="h-5 w-5 shrink-0 text-blue-600" />
           <p className="flex-1 text-sm text-blue-700">
-            Unlock AI-powered financial insights with a subscription.
+            {t("unlockMessage")}
           </p>
           <Button variant="outline" size="sm" asChild>
-            <Link href="/insights">Learn more</Link>
+            <Link href="/insights">{t("learnMore")}</Link>
           </Button>
         </CardContent>
       </Card>
@@ -39,7 +41,7 @@ export function InsightAlerts() {
           {narrative}
         </p>
         <Button variant="outline" size="sm" asChild>
-          <Link href="/insights">View details</Link>
+          <Link href="/insights">{t("viewDetails")}</Link>
         </Button>
       </CardContent>
     </Card>

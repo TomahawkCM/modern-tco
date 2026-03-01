@@ -4,22 +4,24 @@ import { RotateCcw } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useInsight } from "./use-insight";
 import { SubscriptionGate } from "./subscription-gate";
+import { useTranslations } from "next-intl";
 
 export function SubscriptionDetectionCard() {
   const { narrative, loading, error, isSubscriptionRequired } = useInsight(
     "/api/insights/subscriptions",
   );
+  const t = useTranslations("insights.subscriptions");
 
   return (
     <SubscriptionGate
       isSubscriptionRequired={isSubscriptionRequired}
-      featureName="Subscription Detection"
+      featureName={t("title")}
     >
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <RotateCcw className="h-5 w-5" />
-            Recurring Subscriptions
+            {t("title")}
           </CardTitle>
         </CardHeader>
         <CardContent>

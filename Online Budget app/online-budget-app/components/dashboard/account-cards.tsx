@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { MinorAmount } from "@/engine";
@@ -21,12 +24,14 @@ export function AccountCards({
   totalBalance,
   formatAmount,
 }: AccountCardsProps) {
+  const t = useTranslations("dashboard.accounts");
+
   if (accounts.length === 0) {
     return (
       <Card>
         <CardContent>
           <p className="text-sm text-muted-foreground">
-            No accounts connected yet
+            {t("noAccounts")}
           </p>
         </CardContent>
       </Card>
@@ -52,8 +57,7 @@ export function AccountCards({
         ))}
       </div>
       <p className="mt-2 text-sm text-muted-foreground">
-        Net balance:{" "}
-        <span className="font-medium">{formatAmount(totalBalance)}</span>
+        {t("netBalance", { balance: formatAmount(totalBalance) })}
       </p>
     </div>
   );

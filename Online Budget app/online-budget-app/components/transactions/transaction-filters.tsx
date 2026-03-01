@@ -1,10 +1,12 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export function TransactionFilters() {
+  const t = useTranslations("transactions.filters");
   const router = useRouter();
   const searchParams = useSearchParams();
   const fromDate = searchParams.get("from") ?? "";
@@ -23,16 +25,16 @@ export function TransactionFilters() {
     <form action={applyFilters} className="flex items-end gap-3">
       <div>
         <label className="mb-1 block text-xs text-muted-foreground">
-          From
+          {t("from")}
         </label>
         <Input type="date" name="from" defaultValue={fromDate} />
       </div>
       <div>
-        <label className="mb-1 block text-xs text-muted-foreground">To</label>
+        <label className="mb-1 block text-xs text-muted-foreground">{t("to")}</label>
         <Input type="date" name="to" defaultValue={toDate} />
       </div>
       <Button type="submit" variant="secondary" size="sm">
-        Filter
+        {t("filter")}
       </Button>
     </form>
   );

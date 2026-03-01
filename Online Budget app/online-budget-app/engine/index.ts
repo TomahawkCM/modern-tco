@@ -12,6 +12,7 @@
  * - goals/           Goal progress, time-to-target estimation
  * - insights/        Spending trends, anomalies, subscriptions, affordability, health score
  * - projections/     Forecasting, scenario modeling, FX display conversion
+ * - calculators/     14 financial calculator engines (compound interest, retirement, FIRE, etc.)
  */
 export { ENGINE_VERSION } from "./version";
 
@@ -87,3 +88,8 @@ export {
   computeAffordabilityFromSummary,
   computeFinancialHealthScore,
 } from "./insights";
+
+// Calculators module — financial projection engines
+// Re-exported as namespace to avoid name conflicts with insights module
+// (both have AffordabilityInput/Result, but for different purposes)
+export * as calculators from "./calculators";
