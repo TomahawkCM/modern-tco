@@ -21,7 +21,16 @@ export default async function PaycheckPage() {
   const currency = settings?.primary_currency ?? "USD";
   const locale = settings?.locale ?? "en-US";
 
-  const plans = await listPaycheckPlans(supabase, user.id);
+  const rawPlans = await listPaycheckPlans(supabase, user.id);
+
+  // Cast JSONB allocations from Json to expected Allocation[]
+  const plans = rawPlans.map((p) => ({
+    ...p,
+    allocations: (Array.isArray(p.allocations) ? p.allocations : []) as {
+      label: string;
+      amount_minor: number;
+    }[],
+  }));
 
   const fmt = (amt: { amountMinor: number; currency: string }) => formatMoney(amt, locale);
 

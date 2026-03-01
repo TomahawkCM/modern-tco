@@ -448,11 +448,11 @@ export function RetirementPlanner({ plans, currency, formatAmount }: RetirementP
                       borderRadius: "0.5rem",
                       color: "hsl(var(--popover-foreground))",
                     }}
-                    formatter={(value: number) => [
-                      formatAmount({ amountMinor: Math.round(value * 100), currency }),
+                    formatter={(value: number | undefined) => [
+                      formatAmount({ amountMinor: Math.round((value ?? 0) * 100), currency }),
                       t("chart.savings"),
                     ]}
-                    labelFormatter={(label: number) => `${t("chart.age")}: ${label}`}
+                    labelFormatter={(label: unknown) => `${t("chart.age")}: ${label}`}
                   />
                   <Area
                     type="monotone"

@@ -55,26 +55,26 @@ const PIE_COLORS = [
 
 function getDateRange(range: TimeRange): { startDate: string; endDate: string } {
   const now = new Date();
-  const endDate = now.toISOString().split("T")[0];
+  const endDate = now.toISOString().split("T")[0] ?? "";
   let startDate: string;
 
   switch (range) {
     case "month": {
       const d = new Date(now);
       d.setMonth(d.getMonth() - 1);
-      startDate = d.toISOString().split("T")[0];
+      startDate = d.toISOString().split("T")[0] ?? "";
       break;
     }
     case "quarter": {
       const d = new Date(now);
       d.setMonth(d.getMonth() - 3);
-      startDate = d.toISOString().split("T")[0];
+      startDate = d.toISOString().split("T")[0] ?? "";
       break;
     }
     case "year": {
       const d = new Date(now);
       d.setFullYear(d.getFullYear() - 1);
-      startDate = d.toISOString().split("T")[0];
+      startDate = d.toISOString().split("T")[0] ?? "";
       break;
     }
     case "all":
@@ -182,8 +182,8 @@ export function ReportsDashboard({
     // For a proper heatmap, we'd need daily transaction data. For now, use monthly totals spread.
     const result: { date: string; amount: number }[] = [];
     for (const m of monthlyTotals) {
-      const year = parseInt(m.month.split("-")[0]);
-      const month = parseInt(m.month.split("-")[1]) - 1;
+      const year = parseInt(m.month.split("-")[0] ?? "2000");
+      const month = parseInt(m.month.split("-")[1] ?? "1") - 1;
       const daysInMonth = new Date(year, month + 1, 0).getDate();
       const dailyExpense = m.expenses / 100 / daysInMonth;
 
@@ -367,7 +367,7 @@ export function ReportsDashboard({
                         cx="50%"
                         cy="50%"
                         outerRadius={80}
-                        label={({ key }: { key?: string }) => key ?? ""}
+                        label={({ name }: { name?: string }) => name ?? ""}
                       >
                         {pieData.map((_, idx) => (
                           <Cell key={idx} fill={PIE_COLORS[idx % PIE_COLORS.length]} />

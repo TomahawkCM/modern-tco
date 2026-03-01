@@ -65,7 +65,7 @@ export async function createDebtScenario(
       name: input.name,
       strategy: input.strategy,
       extra_payment_minor: input.extra_payment_minor ?? 0,
-      config: input.config ?? {},
+      config: (input.config ?? {}) as import("@/supabase/database.types").Json,
     })
     .select("*")
     .returns<DebtScenarioRow[]>()

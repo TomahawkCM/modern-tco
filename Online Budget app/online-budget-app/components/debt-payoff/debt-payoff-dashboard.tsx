@@ -456,11 +456,11 @@ export function DebtPayoffDashboard({
                       borderRadius: "0.5rem",
                       color: "hsl(var(--popover-foreground))",
                     }}
-                    formatter={(value: number) => [
-                      formatAmount({ amountMinor: Math.round(value * 100), currency }),
+                    formatter={(value: number | undefined) => [
+                      formatAmount({ amountMinor: Math.round((value ?? 0) * 100), currency }),
                       t("chart.remaining"),
                     ]}
-                    labelFormatter={(label: number) => `${t("chart.month")} ${label}`}
+                    labelFormatter={(label: unknown) => `${t("chart.month")} ${label}`}
                   />
                   <Legend />
                   <Area

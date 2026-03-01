@@ -46,7 +46,7 @@ const PALETTE = [
 ];
 
 function getColor(index: number): string {
-  return PALETTE[index % PALETTE.length];
+  return PALETTE[index % PALETTE.length] ?? "#6366f1";
 }
 
 /* ---------- layout engine ---------- */

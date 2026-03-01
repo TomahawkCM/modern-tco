@@ -102,7 +102,7 @@ export function SpendingHeatmap({ data, currency, formatAmount }: SpendingHeatma
 
     const cursor = new Date(startDate);
     while (cursor <= endDate) {
-      const dateKey = cursor.toISOString().split("T")[0];
+      const dateKey = cursor.toISOString().split("T")[0] ?? "";
       const amount = spendingByDate.get(dateKey) ?? 0;
       if (amount > maxAmt) maxAmt = amount;
 
@@ -146,7 +146,7 @@ export function SpendingHeatmap({ data, currency, formatAmount }: SpendingHeatma
     const dayTotals = [0, 0, 0, 0, 0, 0, 0];
     for (const point of data) {
       const dayOfWeek = new Date(point.date + "T00:00:00").getDay();
-      dayTotals[dayOfWeek] += point.amount;
+      dayTotals[dayOfWeek] = (dayTotals[dayOfWeek] ?? 0) + point.amount;
     }
     const busiestDayIndex = dayTotals.indexOf(Math.max(...dayTotals));
 

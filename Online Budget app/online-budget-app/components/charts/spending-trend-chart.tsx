@@ -157,8 +157,8 @@ export function SpendingTrendChart({ data, currency, formatAmount }: SpendingTre
                 borderRadius: "0.5rem",
                 color: "hsl(var(--popover-foreground))",
               }}
-              formatter={(value: number, name: string) => [
-                tooltipFormatter(value),
+              formatter={(value: number | undefined, name: string | undefined) => [
+                tooltipFormatter(value ?? 0),
                 name === "income" ? t("trend.income") : t("trend.expenses"),
               ]}
               labelStyle={{ color: "hsl(var(--muted-foreground))" }}

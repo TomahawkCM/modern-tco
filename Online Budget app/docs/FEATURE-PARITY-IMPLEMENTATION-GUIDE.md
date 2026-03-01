@@ -633,59 +633,59 @@ CREATE TABLE connected_banks (
 
 **Agent:** general-purpose
 
-- [ ] Create migration with tables: `future_purchases`, `retirement_plans`, `paycheck_plans`, `debt_scenarios` (see Master List)
-- [ ] Add RLS policies
+- [x] Create migration with tables: `future_purchases`, `retirement_plans`, `paycheck_plans`, `debt_scenarios` (see Master List)
+- [x] Add RLS policies
 
 ### Task 5.2: Create server functions
 
 **Agent:** general-purpose
 
-- [ ] Create `server/reports.ts`: `getMonthlyTotals`, `getCategorySpendingOverTime`
-- [ ] Create `server/planning.ts`: CRUD for `future_purchases`, `retirement_plans`, `paycheck_plans`
-- [ ] Create `server/debt-payoff.ts`: CRUD for `debt_scenarios`, `getDebtPayoffData`
+- [x] Create `server/reports.ts`: `getMonthlyTotals`, `getCategorySpendingOverTime`
+- [x] Create `server/planning.ts`: CRUD for `future_purchases`, `retirement_plans`, `paycheck_plans`
+- [x] Create `server/debt-payoff.ts`: CRUD for `debt_scenarios`, `getDebtPayoffData`
 
 ### Task 5.3: Install dependencies
 
 **Agent:** general-purpose
 
-- [ ] `npm install html-to-image`
+- [x] `npm install html-to-image`
 
 ### Task 5.4: Port chart components
 
 **Agent:** general-purpose
 
-- [ ] Create `components/charts/spending-heatmap.tsx` — port from offline
-- [ ] Create `components/charts/spending-trend-chart.tsx` — port from offline
-- [ ] Create `components/charts/sankey-diagram.tsx` — port from offline `src/components/charts/SankeyWithAccessibility.tsx`
+- [x] Create `components/charts/spending-heatmap.tsx` — port from offline
+- [x] Create `components/charts/spending-trend-chart.tsx` — port from offline
+- [x] Create `components/charts/sankey-diagram.tsx` — port from offline `src/components/charts/SankeyWithAccessibility.tsx`
 
 ### Task 5.5: Add i18n namespaces
 
 **Agent:** general-purpose
 
-- [ ] Add `reports`, `planning`, `debtPayoff` namespaces to `en.json`
-- [ ] Regenerate locale files
+- [x] Add `reports`, `planning`, `debtPayoff` namespaces to `en.json`
+- [x] Regenerate locale files
 
 ### Task 5.6: Create pages
 
 **Agent:** general-purpose
 
-- [ ] `app/(app)/reports/page.tsx` — time range selector, spending by category (PieChart + table), income vs expense trend (LineChart), spending heatmap, Sankey money flow, PNG/SVG export. Reference: offline reports page
-- [ ] `app/(app)/planning/future/page.tsx` — future purchase goals list, progress bars, CRUD modal. Uses engine `computeGoalProgress`
-- [ ] `app/(app)/planning/retirement/page.tsx` — retirement plan form + projection chart. Uses `calculateRetirement`
-- [ ] `app/(app)/planning/paycheck/page.tsx` — paycheck allocation planner, visual breakdown
-- [ ] `app/(app)/debt-payoff/page.tsx` — reads loans, strategy configurator (avalanche/snowball), payoff timeline chart, scenario save/load. Uses `calculateDebtPayoff`
+- [x] `app/(app)/reports/page.tsx` — time range selector, spending by category (PieChart + table), income vs expense trend (LineChart), spending heatmap, Sankey money flow, PNG/SVG export. Reference: offline reports page
+- [x] `app/(app)/planning/future/page.tsx` — future purchase goals list, progress bars, CRUD modal. Uses engine `computeGoalProgress`
+- [x] `app/(app)/planning/retirement/page.tsx` — retirement plan form + projection chart. Uses `calculateRetirement`
+- [x] `app/(app)/planning/paycheck/page.tsx` — paycheck allocation planner, visual breakdown
+- [x] `app/(app)/debt-payoff/page.tsx` — reads loans, strategy configurator (avalanche/snowball), payoff timeline chart, scenario save/load. Uses `calculateDebtPayoff`
 
 ### Task 5.7: Verify Phase 5
 
 **Agent:** code-reviewer
 
-- [ ] Reports page shows all chart types with real data
-- [ ] Sankey exports to PNG/SVG
-- [ ] Planning pages CRUD works
-- [ ] Debt payoff reads real loans and computes payoff timelines
-- [ ] All translated, all currency-formatted correctly
-- [ ] `npm run check-types && npm test`
-- [ ] Commit updated plan with Phase 5 tasks checked off
+- [x] Reports page shows all chart types with real data
+- [x] Sankey exports to PNG/SVG
+- [x] Planning pages CRUD works
+- [x] Debt payoff reads real loans and computes payoff timelines
+- [x] All translated, all currency-formatted correctly
+- [x] `npm run check-types && npm test` — 0 TS errors, 331/331 tests pass
+- [x] Commit updated plan with Phase 5 tasks checked off
 
 ---
 

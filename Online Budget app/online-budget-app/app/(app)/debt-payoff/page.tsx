@@ -21,7 +21,15 @@ export default async function DebtPayoffPage() {
   const currency = settings?.primary_currency ?? "USD";
   const locale = settings?.locale ?? "en-US";
 
-  const { loans, scenarios } = await getDebtPayoffData(supabase, user.id);
+  const { loans, scenarios: rawScenarios } = await getDebtPayoffData(supabase, user.id);
+
+  // Cast JSONB config from Json to expected Record<string, unknown>
+  const scenarios = rawScenarios.map((s) => ({
+    ...s,
+    config: (typeof s.config === "object" && s.config !== null && !Array.isArray(s.config)
+      ? s.config
+      : {}) as Record<string, unknown>,
+  }));
 
   const fmt = (amt: { amountMinor: number; currency: string }) => formatMoney(amt, locale);
 

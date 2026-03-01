@@ -25,8 +25,8 @@ export default async function ReportsPage() {
   const now = new Date();
   const startDate = new Date(now);
   startDate.setFullYear(startDate.getFullYear() - 1);
-  const startStr = startDate.toISOString().split("T")[0];
-  const endStr = now.toISOString().split("T")[0];
+  const startStr = startDate.toISOString().split("T")[0] ?? "2000-01-01";
+  const endStr = now.toISOString().split("T")[0] ?? "2099-12-31";
 
   const [monthlyTotals, categorySpending] = await Promise.all([
     getMonthlyTotals(supabase, user.id, startStr, endStr),
