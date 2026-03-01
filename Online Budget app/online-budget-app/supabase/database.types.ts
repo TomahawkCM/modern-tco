@@ -542,6 +542,397 @@ export interface Database {
           },
         ];
       };
+      user_subscriptions: {
+        Row: {
+          id: string;
+          user_id: string;
+          merchant_name: string;
+          amount_minor: number;
+          currency: string;
+          frequency: string;
+          category_id: string | null;
+          next_billing_date: string | null;
+          is_active: boolean;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          merchant_name: string;
+          amount_minor: number;
+          currency?: string;
+          frequency?: string;
+          category_id?: string | null;
+          next_billing_date?: string | null;
+          is_active?: boolean;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          merchant_name?: string;
+          amount_minor?: number;
+          currency?: string;
+          frequency?: string;
+          category_id?: string | null;
+          next_billing_date?: string | null;
+          is_active?: boolean;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "user_subscriptions_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "user_subscriptions_category_id_fkey";
+            columns: ["category_id"];
+            isOneToOne: false;
+            referencedRelation: "categories";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      excluded_subscription_merchants: {
+        Row: {
+          id: string;
+          user_id: string;
+          merchant_token: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          merchant_token: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          merchant_token?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "excluded_subscription_merchants_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      loans: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          loan_type: string;
+          original_balance_minor: number;
+          current_balance_minor: number;
+          interest_rate: number;
+          minimum_payment_minor: number;
+          start_date: string | null;
+          end_date: string | null;
+          status: string;
+          currency: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          loan_type: string;
+          original_balance_minor: number;
+          current_balance_minor: number;
+          interest_rate: number;
+          minimum_payment_minor?: number;
+          start_date?: string | null;
+          end_date?: string | null;
+          status?: string;
+          currency?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          loan_type?: string;
+          original_balance_minor?: number;
+          current_balance_minor?: number;
+          interest_rate?: number;
+          minimum_payment_minor?: number;
+          start_date?: string | null;
+          end_date?: string | null;
+          status?: string;
+          currency?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "loans_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      loan_payments: {
+        Row: {
+          id: string;
+          user_id: string;
+          loan_id: string;
+          amount_minor: number;
+          payment_date: string;
+          principal_minor: number | null;
+          interest_minor: number | null;
+          notes: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          loan_id: string;
+          amount_minor: number;
+          payment_date: string;
+          principal_minor?: number | null;
+          interest_minor?: number | null;
+          notes?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          loan_id?: string;
+          amount_minor?: number;
+          payment_date?: string;
+          principal_minor?: number | null;
+          interest_minor?: number | null;
+          notes?: string | null;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "loan_payments_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "loan_payments_loan_id_fkey";
+            columns: ["loan_id"];
+            isOneToOne: false;
+            referencedRelation: "loans";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      investment_accounts: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          account_type: string;
+          institution: string | null;
+          currency: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          account_type: string;
+          institution?: string | null;
+          currency?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          account_type?: string;
+          institution?: string | null;
+          currency?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "investment_accounts_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      holdings: {
+        Row: {
+          id: string;
+          user_id: string;
+          investment_account_id: string;
+          symbol: string;
+          name: string | null;
+          shares: number;
+          purchase_price_minor: number;
+          purchase_date: string | null;
+          currency: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          investment_account_id: string;
+          symbol: string;
+          name?: string | null;
+          shares: number;
+          purchase_price_minor: number;
+          purchase_date?: string | null;
+          currency?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          investment_account_id?: string;
+          symbol?: string;
+          name?: string | null;
+          shares?: number;
+          purchase_price_minor?: number;
+          purchase_date?: string | null;
+          currency?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "holdings_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "holdings_investment_account_id_fkey";
+            columns: ["investment_account_id"];
+            isOneToOne: false;
+            referencedRelation: "investment_accounts";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      properties: {
+        Row: {
+          id: string;
+          user_id: string;
+          address: string;
+          purchase_price_minor: number | null;
+          current_value_minor: number | null;
+          mortgage_balance_minor: number | null;
+          monthly_expenses_minor: number | null;
+          purchase_date: string | null;
+          currency: string;
+          notes: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          address: string;
+          purchase_price_minor?: number | null;
+          current_value_minor?: number | null;
+          mortgage_balance_minor?: number | null;
+          monthly_expenses_minor?: number | null;
+          purchase_date?: string | null;
+          currency?: string;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          address?: string;
+          purchase_price_minor?: number | null;
+          current_value_minor?: number | null;
+          mortgage_balance_minor?: number | null;
+          monthly_expenses_minor?: number | null;
+          purchase_date?: string | null;
+          currency?: string;
+          notes?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "properties_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      net_worth_snapshots: {
+        Row: {
+          id: string;
+          user_id: string;
+          snapshot_date: string;
+          total_assets_minor: number;
+          total_liabilities_minor: number;
+          net_worth_minor: number;
+          breakdown: Json | null;
+          currency: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          snapshot_date: string;
+          total_assets_minor: number;
+          total_liabilities_minor: number;
+          net_worth_minor: number;
+          breakdown?: Json | null;
+          currency?: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          snapshot_date?: string;
+          total_assets_minor?: number;
+          total_liabilities_minor?: number;
+          net_worth_minor?: number;
+          breakdown?: Json | null;
+          currency?: string;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "net_worth_snapshots_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
