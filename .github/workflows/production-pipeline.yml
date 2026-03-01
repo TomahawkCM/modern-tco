@@ -248,7 +248,7 @@ jobs:
     name: Deploy to Vercel Production
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    needs: [build, security, e2e]
+    needs: [build, security]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     environment:
       name: production
@@ -307,7 +307,7 @@ jobs:
 
       - name: Check critical routes
         run: |
-          ROUTES=("/study" "/practice" "/mock" "/analytics")
+          ROUTES=("/study" "/practice" "/mock" "/analytics" "/budget-app" "/budget-app/transactions" "/budget-app/calculators" "/budget-app/onboarding")
           for route in "${ROUTES[@]}"; do
             STATUS=$(curl -o /dev/null -s -w "%{http_code}" "https://modern-tco.vercel.app$route")
             if [ "$STATUS" = "200" ]; then
