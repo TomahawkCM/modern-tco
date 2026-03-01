@@ -1,8 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { rateLimitAuth, createRateLimitResponse } from "@/lib/rate-limit";
 import { createLinkToken, isPlaidConfigured } from "@/integrations/plaid";
 
-export async function POST() {
+export async function POST(request: NextRequest) {
+  const rl = await rateLimitAuth(request);
+  if (!rl.success) return createRateLimitResponse(rl);
+
   if (!isPlaidConfigured()) {
     return NextResponse.json({ error: "Bank sync is not configured" }, { status: 503 });
   }

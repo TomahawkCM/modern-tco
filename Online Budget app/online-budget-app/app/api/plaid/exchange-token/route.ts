@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
+import { rateLimitAuth, createRateLimitResponse } from "@/lib/rate-limit";
 import { exchangePublicToken, isPlaidConfigured } from "@/integrations/plaid";
 import { createConnectedBank } from "@/server/connected-banks";
 import { encrypt } from "@/lib/encryption";
@@ -11,6 +12,9 @@ const exchangeSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  const rl = await rateLimitAuth(request);
+  if (!rl.success) return createRateLimitResponse(rl);
+
   if (!isPlaidConfigured()) {
     return NextResponse.json({ error: "Bank sync is not configured" }, { status: 503 });
   }

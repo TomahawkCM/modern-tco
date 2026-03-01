@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { rateLimitAuth, createRateLimitResponse } from "@/lib/rate-limit";
 import { getStripe } from "@/integrations/stripe";
 
 export async function POST(request: Request) {
+  const rl = await rateLimitAuth(request);
+  if (!rl.success) return createRateLimitResponse(rl);
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -18,10 +22,7 @@ export async function POST(request: Request) {
 
   const priceId = process.env.STRIPE_PRICE_PREMIUM_MONTHLY;
   if (!priceId) {
-    return NextResponse.json(
-      { error: "Stripe price not configured" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Stripe price not configured" }, { status: 500 });
   }
 
   const session = await stripe.checkout.sessions.create({

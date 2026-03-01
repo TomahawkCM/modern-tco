@@ -199,8 +199,6 @@ export function CommandPalette() {
               onSelect={() =>
                 runCommand(() => {
                   // Theme switching will be wired up when a theme provider is added.
-                  // For now, we just close the dialog.
-                  console.log(`Theme selected: ${cmd.value}`);
                 })
               }
             >
