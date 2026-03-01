@@ -1115,6 +1115,252 @@ export interface Database {
           },
         ];
       };
+      financial_scenarios: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          description: string | null;
+          config: Json;
+          results: Json | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          description?: string | null;
+          config?: Json;
+          results?: Json | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          description?: string | null;
+          config?: Json;
+          results?: Json | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "financial_scenarios_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      event_budgets: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          total_budget_minor: number;
+          start_date: string | null;
+          end_date: string | null;
+          currency: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          total_budget_minor: number;
+          start_date?: string | null;
+          end_date?: string | null;
+          currency?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          total_budget_minor?: number;
+          start_date?: string | null;
+          end_date?: string | null;
+          currency?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "event_budgets_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      event_budget_items: {
+        Row: {
+          id: string;
+          event_budget_id: string;
+          category_name: string;
+          budget_minor: number;
+          spent_minor: number;
+          notes: string | null;
+        };
+        Insert: {
+          id?: string;
+          event_budget_id: string;
+          category_name: string;
+          budget_minor: number;
+          spent_minor?: number;
+          notes?: string | null;
+        };
+        Update: {
+          id?: string;
+          event_budget_id?: string;
+          category_name?: string;
+          budget_minor?: number;
+          spent_minor?: number;
+          notes?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "event_budget_items_event_budget_id_fkey";
+            columns: ["event_budget_id"];
+            isOneToOne: false;
+            referencedRelation: "event_budgets";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      split_persons: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          email: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          email?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          email?: string | null;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "split_persons_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      expense_splits: {
+        Row: {
+          id: string;
+          user_id: string;
+          transaction_id: string | null;
+          person_id: string;
+          amount_minor: number;
+          is_settled: boolean;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          transaction_id?: string | null;
+          person_id: string;
+          amount_minor: number;
+          is_settled?: boolean;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          transaction_id?: string | null;
+          person_id?: string;
+          amount_minor?: number;
+          is_settled?: boolean;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "expense_splits_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "expense_splits_transaction_id_fkey";
+            columns: ["transaction_id"];
+            isOneToOne: false;
+            referencedRelation: "transactions";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "expense_splits_person_id_fkey";
+            columns: ["person_id"];
+            isOneToOne: false;
+            referencedRelation: "split_persons";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      receipts: {
+        Row: {
+          id: string;
+          user_id: string;
+          transaction_id: string | null;
+          storage_path: string;
+          extracted_data: Json | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          transaction_id?: string | null;
+          storage_path: string;
+          extracted_data?: Json | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          transaction_id?: string | null;
+          storage_path?: string;
+          extracted_data?: Json | null;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "receipts_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "receipts_transaction_id_fkey";
+            columns: ["transaction_id"];
+            isOneToOne: false;
+            referencedRelation: "transactions";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;

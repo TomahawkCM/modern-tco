@@ -1374,5 +1374,227 @@
     },
     "addScenario": "Add Scenario",
     "comparisons": "Compare Strategies"
+  },
+  "scenarios": {
+    "title": "Financial Scenarios",
+    "description": "Model what-if scenarios for your finances",
+    "fields": {
+      "name": "Scenario Name",
+      "namePlaceholder": "e.g., What if I get a raise?",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the scenario..."
+    },
+    "config": {
+      "title": "Scenario Parameters",
+      "incomeChange": "Income Change",
+      "expenseChange": "Expense Change",
+      "savingsRate": "Savings Rate",
+      "investmentReturn": "Investment Return",
+      "inflationRate": "Inflation Rate",
+      "timeHorizon": "Time Horizon (months)"
+    },
+    "results": {
+      "title": "Projected Results",
+      "netWorthProjection": "Net Worth Projection",
+      "savingsProjection": "Savings Projection",
+      "monthlyBalance": "Monthly Balance"
+    },
+    "actions": {
+      "create": "Create Scenario",
+      "edit": "Edit Scenario",
+      "delete": "Delete Scenario",
+      "run": "Run Scenario",
+      "compare": "Compare Scenarios"
+    },
+    "confirmDelete": "Are you sure you want to delete this scenario?",
+    "noScenarios": "No scenarios yet",
+    "noScenariosDescription": "Create a what-if scenario to explore different financial futures."
+  },
+  "events": {
+    "title": "Event Budgets",
+    "description": "Track budgets for events and projects",
+    "fields": {
+      "name": "Event Name",
+      "namePlaceholder": "e.g., Wedding, Vacation, Home Renovation",
+      "totalBudget": "Total Budget",
+      "startDate": "Start Date",
+      "endDate": "End Date"
+    },
+    "items": {
+      "title": "Budget Items",
+      "category": "Category",
+      "categoryPlaceholder": "e.g., Venue, Catering, Travel",
+      "budgeted": "Budgeted",
+      "spent": "Spent",
+      "remaining": "Remaining",
+      "notes": "Notes",
+      "addItem": "Add Item"
+    },
+    "stats": {
+      "totalBudget": "Total Budget",
+      "totalSpent": "Total Spent",
+      "remaining": "Remaining",
+      "percentUsed": "% Used"
+    },
+    "actions": {
+      "create": "Create Event Budget",
+      "edit": "Edit Event",
+      "delete": "Delete Event"
+    },
+    "confirmDelete": "Are you sure you want to delete this event budget?",
+    "noEvents": "No event budgets yet",
+    "noEventsDescription": "Create a budget for your next event or project."
+  },
+  "splits": {
+    "title": "Expense Splitting",
+    "description": "Split expenses with friends and family",
+    "persons": {
+      "title": "People",
+      "name": "Name",
+      "email": "Email",
+      "addPerson": "Add Person",
+      "editPerson": "Edit Person",
+      "deletePerson": "Delete Person",
+      "noPeople": "No people added yet",
+      "noPeopleDescription": "Add people to split expenses with."
+    },
+    "expenses": {
+      "title": "Split Expenses",
+      "amount": "Amount",
+      "person": "Person",
+      "settled": "Settled",
+      "unsettled": "Unsettled",
+      "markSettled": "Mark as Settled",
+      "markUnsettled": "Mark as Unsettled",
+      "addSplit": "Add Split",
+      "noSplits": "No expense splits yet",
+      "noSplitsDescription": "Add a split to track shared expenses."
+    },
+    "balance": {
+      "title": "Balance Summary",
+      "owes": "owes you",
+      "youOwe": "you owe",
+      "settled": "Settled",
+      "totalOwed": "Total Owed to You",
+      "totalOwing": "Total You Owe"
+    },
+    "actions": {
+      "settleAll": "Settle All",
+      "delete": "Delete Split"
+    },
+    "confirmDelete": "Are you sure you want to delete this split?"
+  },
+  "review": {
+    "title": "Transaction Review",
+    "description": "Review and categorize uncategorized transactions",
+    "queue": {
+      "title": "Review Queue",
+      "remaining": "{count} transactions to review",
+      "allDone": "All caught up!",
+      "allDoneDescription": "No uncategorized transactions to review."
+    },
+    "actions": {
+      "categorize": "Categorize",
+      "skip": "Skip",
+      "skipAll": "Skip All",
+      "bulkCategorize": "Bulk Categorize"
+    },
+    "fields": {
+      "category": "Category",
+      "selectCategory": "Select a category...",
+      "merchant": "Merchant",
+      "amount": "Amount",
+      "date": "Date",
+      "createRule": "Create merchant rule"
+    }
+  },
+  "weeklyRecap": {
+    "title": "Friday Review",
+    "description": "Weekly guided review of your finances",
+    "steps": {
+      "welcome": "Weekly Financial Check-in",
+      "welcomeDescription": "Let's review your week and plan ahead.",
+      "spending": "Spending Review",
+      "spendingDescription": "Review your spending for the past week.",
+      "categories": "Category Breakdown",
+      "categoriesDescription": "See where your money went this week.",
+      "budget": "Budget Check",
+      "budgetDescription": "How are your budgets looking?",
+      "upcoming": "Upcoming",
+      "upcomingDescription": "Bills and subscriptions due next week.",
+      "goals": "Goal Progress",
+      "goalsDescription": "Check in on your savings goals.",
+      "summary": "Weekly Summary",
+      "summaryDescription": "Here's your week at a glance."
+    },
+    "stats": {
+      "weeklySpending": "This Week's Spending",
+      "vsLastWeek": "vs. Last Week",
+      "topCategory": "Top Category",
+      "transactionCount": "Transactions",
+      "dailyAverage": "Daily Average"
+    },
+    "actions": {
+      "next": "Next",
+      "previous": "Previous",
+      "finish": "Finish Review",
+      "startReview": "Start Review"
+    }
+  },
+  "ocr": {
+    "title": "Receipt Scanner",
+    "description": "Scan receipts and create transactions",
+    "upload": {
+      "title": "Upload Receipt",
+      "dragDrop": "Drag & drop or click to upload",
+      "supportedFormats": "Supported formats: JPG, PNG, PDF",
+      "maxSize": "Max file size: 10MB",
+      "browse": "Browse Files",
+      "dropHere": "Drop your receipt here"
+    },
+    "processing": {
+      "title": "Processing Receipt",
+      "analyzing": "Analyzing receipt...",
+      "extracting": "Extracting data...",
+      "progress": "{progress}% complete"
+    },
+    "results": {
+      "title": "Extracted Data",
+      "merchant": "Merchant",
+      "merchantPlaceholder": "e.g. Walmart, Target",
+      "amount": "Amount",
+      "amountPlaceholder": "0.00",
+      "date": "Date",
+      "items": "Line Items",
+      "itemsPlaceholder": "One item per line",
+      "rawText": "Raw OCR Text",
+      "confidence": "Confidence",
+      "account": "Account",
+      "selectAccount": "Select an account",
+      "noAccounts": "No accounts found. Create one first."
+    },
+    "actions": {
+      "scan": "Scan Receipt",
+      "rescan": "Rescan",
+      "createTransaction": "Create Transaction",
+      "saveReceipt": "Save Receipt",
+      "discard": "Discard",
+      "creating": "Creating...",
+      "saving": "Saving..."
+    },
+    "success": {
+      "transactionCreated": "Transaction created successfully",
+      "receiptSaved": "Receipt saved successfully"
+    },
+    "errors": {
+      "noText": "Could not extract text from this image",
+      "uploadFailed": "Upload failed",
+      "tooLarge": "File is too large (max 10MB)",
+      "invalidType": "Unsupported file type. Use JPG, PNG, or PDF.",
+      "createFailed": "Failed to create transaction",
+      "saveFailed": "Failed to save receipt",
+      "accountRequired": "Please select an account first",
+      "ocrFailed": "OCR processing failed. Please try again."
+    }
   }
 }

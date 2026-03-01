@@ -699,50 +699,50 @@ CREATE TABLE connected_banks (
 
 **Agent:** general-purpose
 
-- [ ] Create migration with tables: `financial_scenarios`, `event_budgets`, `event_budget_items`, `split_persons`, `expense_splits`, `receipts` (see Master List)
-- [ ] Create Supabase Storage bucket `receipt-images`
-- [ ] Add RLS policies
+- [x] Create migration with tables: `financial_scenarios`, `event_budgets`, `event_budget_items`, `split_persons`, `expense_splits`, `receipts` (see Master List)
+- [x] Create Supabase Storage bucket `receipt-images`
+- [x] Add RLS policies
 
 ### Task 6.2: Create server functions
 
 **Agent:** general-purpose
 
-- [ ] Create server CRUD for all new tables: `server/scenarios.ts`, `server/events.ts`, `server/splits.ts`, `server/receipts.ts`
+- [x] Create server CRUD for all new tables: `server/scenarios.ts`, `server/events.ts`, `server/splits.ts`, `server/receipts.ts`
 
 ### Task 6.3: Add i18n namespaces
 
 **Agent:** general-purpose
 
-- [ ] Add `scenarios`, `events`, `splits`, `review`, `weeklyRecap`, `ocr` namespaces to `en.json`
-- [ ] Regenerate locale files
+- [x] Add `scenarios`, `events`, `splits`, `review`, `weeklyRecap`, `ocr` namespaces to `en.json`
+- [x] Regenerate locale files
 
 ### Task 6.4: Create pages
 
 **Agent:** general-purpose
 
-- [ ] `app/(app)/scenarios/page.tsx` — what-if financial scenario modeling
-- [ ] `app/(app)/events/page.tsx` — event/project budget tracking, CRUD
-- [ ] `app/(app)/splits/page.tsx` — expense splitting, balance summary
-- [ ] `app/(app)/review/page.tsx` — uncategorized transaction review queue
-- [ ] `app/(app)/friday-review/page.tsx` — weekly guided review wizard
+- [x] `app/(app)/scenarios/page.tsx` — what-if financial scenario modeling
+- [x] `app/(app)/events/page.tsx` — event/project budget tracking, CRUD
+- [x] `app/(app)/splits/page.tsx` — expense splitting, balance summary
+- [x] `app/(app)/review/page.tsx` — uncategorized transaction review queue
+- [x] `app/(app)/friday-review/page.tsx` — weekly guided review wizard
 
 ### Task 6.5: Create OCR page (lower priority)
 
 **Agent:** general-purpose
 
-- [ ] `npm install tesseract.js`
-- [ ] `app/(app)/ocr/page.tsx` — receipt photo upload → client-side Tesseract OCR → create transaction, store receipt in Supabase Storage
+- [x] `npm install tesseract.js`
+- [x] `app/(app)/ocr/page.tsx` — receipt photo upload → client-side Tesseract OCR → create transaction, store receipt in Supabase Storage
 
 ### Task 6.6: Verify Phase 6
 
 **Agent:** code-reviewer
 
-- [ ] Each page renders and CRUD works
-- [ ] Expense splits track balances correctly
-- [ ] Review page filters uncategorized transactions
-- [ ] All translated
-- [ ] `npm run check-types && npm test`
-- [ ] Commit updated plan with Phase 6 tasks checked off
+- [x] Each page renders and CRUD works
+- [x] Expense splits track balances correctly
+- [x] Review page filters uncategorized transactions
+- [x] All translated
+- [x] `npm run check-types && npm test`
+- [x] Commit updated plan with Phase 6 tasks checked off
 
 ---
 
