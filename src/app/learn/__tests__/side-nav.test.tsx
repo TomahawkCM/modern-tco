@@ -3,17 +3,18 @@
  * Minimal test to verify SideNav renders modules from the manifest
  */
 
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import SideNav from "@/components/SideNav";
 import manifest from "@/config/modules.manifest.json";
 
 // Mock AuthContext to provide a user id (avoids provider requirement)
-jest.mock("@/contexts/AuthContext", () => ({
+vi.mock("@/contexts/AuthContext", () => ({
   useAuth: () => ({ user: { id: "test-user" } }),
 }));
 
 // Mock progress function to avoid Supabase calls
-jest.mock("@/lib/progress", () => ({
+vi.mock("@/lib/progress", () => ({
   getModuleProgress: async () => ({ moduleId: "x", percentage: 0 }),
 }));
 

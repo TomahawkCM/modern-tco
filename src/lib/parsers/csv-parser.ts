@@ -2724,13 +2724,18 @@ export async function detectDuplicates(
 /**
  * Calculate string similarity (0-1)
  */
-function calculateSimilarity(str1: string, str2: string): number {
+export function calculateSimilarity(str1: string, str2: string): number {
   const s1 = str1.toLowerCase().trim();
   const s2 = str2.toLowerCase().trim();
 
   if (s1 === s2) return 1.0;
 
-  // Simple similarity: count matching words
+  // Substring containment — one description is a prefix/subset of the other
+  if (s1.includes(s2) || s2.includes(s1)) {
+    return 0.9;
+  }
+
+  // Word-based Jaccard similarity
   const words1 = s1.split(/\s+/);
   const words2 = s2.split(/\s+/);
   const set1 = new Set(words1);

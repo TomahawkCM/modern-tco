@@ -1,0 +1,1773 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "saving": "Saving...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "back": "Back",
+    "next": "Next",
+    "close": "Close",
+    "confirm": "Confirm",
+    "search": "Search",
+    "filter": "Filter",
+    "noResults": "No results found",
+    "error": "Something went wrong",
+    "networkError": "Network error. Please try again.",
+    "addTransaction": "Add Transaction",
+    "subscribe": {
+      "button": "Subscribe — Start Free Trial",
+      "loading": "Loading...",
+      "error": "Unable to connect to payment service",
+      "checkoutError": "Unable to start checkout"
+    }
+  },
+  "nav": {
+    "brand": "Budget",
+    "dashboard": "Dashboard",
+    "transactions": "Transactions",
+    "budgets": "Budgets",
+    "insights": "Insights",
+    "chat": "AI Chat",
+    "signOut": "Sign Out"
+  },
+  "sidebar": {
+    "brand": "Budget",
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar",
+    "groups": {
+      "core": "Core",
+      "planning": "Planning",
+      "wealth": "Wealth",
+      "analysis": "Analysis",
+      "tools": "Tools"
+    },
+    "dashboard": "Dashboard",
+    "transactions": "Transactions",
+    "accounts": "Accounts",
+    "categories": "Categories",
+    "budgets": "Budgets",
+    "subscriptions": "Subscriptions",
+    "loans": "Loans",
+    "investments": "Investments",
+    "properties": "Properties",
+    "netWorth": "Net Worth",
+    "reports": "Reports",
+    "insights": "Insights",
+    "calculators": "Calculators",
+    "futurePlans": "Future Plans",
+    "retirement": "Retirement",
+    "paycheckPlanner": "Paycheck Planner",
+    "debtPayoff": "Debt Payoff",
+    "scenarios": "Scenarios",
+    "import": "Import",
+    "settings": "Settings",
+    "chat": "AI Chat"
+  },
+  "mobileNav": {
+    "home": "Home",
+    "budgets": "Budgets",
+    "accounts": "Accounts",
+    "transactions": "Txns",
+    "more": "More"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "transactions": "Transactions",
+    "budgets": "Budgets",
+    "accounts": "Accounts",
+    "categories": "Categories",
+    "insights": "Insights",
+    "chat": "AI Chat",
+    "settings": "Settings",
+    "import": "Import",
+    "export": "Export",
+    "calculators": "Calculators",
+    "reports": "Reports",
+    "subscriptions": "Subscriptions",
+    "loans": "Loans",
+    "investments": "Investments",
+    "properties": "Properties",
+    "netWorth": "Net Worth",
+    "merchantRules": "Merchant Rules",
+    "futurePlans": "Future Plans",
+    "retirement": "Retirement",
+    "paycheckPlanner": "Paycheck Planner",
+    "debtPayoff": "Debt Payoff",
+    "more": "More",
+    "details": "Details"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Your financial overview",
+    "subscriptionWarning": "Your subscription is inactive. Some features may be limited.",
+    "sections": {
+      "healthScore": "Financial Health",
+      "alerts": "Alerts",
+      "accounts": "Accounts",
+      "incomeExpense": "Income vs Expenses",
+      "categories": "Spending by Category",
+      "budgets": "Budget Progress"
+    },
+    "accounts": {
+      "noAccounts": "No accounts connected yet",
+      "netBalance": "Net balance: {balance}"
+    },
+    "incomeExpense": {
+      "income": "Income",
+      "expenses": "Expenses",
+      "net": "Net",
+      "transactionCount": "{count} transactions",
+      "savingsRate": "Savings rate: {rate}%"
+    },
+    "budgetProgress": {
+      "overBudget": "Over budget",
+      "percentUsed": "{percent}%",
+      "spent": "{amount} spent",
+      "limit": "{amount} limit",
+      "remaining": "{amount} remaining"
+    },
+    "categories": {
+      "noExpenses": "No expenses this month",
+      "uncategorized": "Uncategorized",
+      "transactionCount": "{count} txn"
+    },
+    "healthScore": {
+      "title": "Financial Health",
+      "score": "{score} / 100",
+      "savingsRate": "Savings Rate",
+      "budgetAdherence": "Budget Adherence",
+      "emergencyFund": "Emergency Fund",
+      "debtManagement": "Debt Management"
+    }
+  },
+  "transactions": {
+    "title": "Transactions",
+    "description": "View and manage your transactions",
+    "noTransactions": "No transactions found",
+    "table": {
+      "date": "Date",
+      "description": "Description",
+      "category": "Category",
+      "amount": "Amount",
+      "pending": "Pending",
+      "uncategorized": "Uncategorized"
+    },
+    "filters": {
+      "from": "From",
+      "to": "To",
+      "filter": "Filter"
+    }
+  },
+  "budgets": {
+    "title": "Budgets",
+    "description": "Set and track monthly spending limits",
+    "noBudgets": "No budgets set. Create one below.",
+    "overBudget": "Over budget",
+    "spent": "{amount} spent",
+    "limit": "{amount} limit",
+    "remaining": "{amount} remaining",
+    "create": {
+      "title": "Set Budget",
+      "category": "Category",
+      "selectCategory": "Select category",
+      "monthlyLimit": "Monthly limit ({currency})",
+      "save": "Save",
+      "saving": "Saving...",
+      "error": "Please select a category and enter a valid amount"
+    }
+  },
+  "insights": {
+    "title": "AI Insights",
+    "description": "AI-powered analysis of your finances",
+    "monthlySummary": {
+      "title": "Monthly Summary"
+    },
+    "anomalies": {
+      "title": "Anomaly Detection",
+      "alert": "Alert"
+    },
+    "budgetRisk": {
+      "title": "Budget Risk"
+    },
+    "subscriptions": {
+      "title": "Recurring Subscriptions"
+    },
+    "affordability": {
+      "title": "Affordability Check",
+      "itemLabel": "Item or expense",
+      "itemPlaceholder": "e.g. Gym membership",
+      "amountLabel": "Amount",
+      "recurringLabel": "This is a recurring monthly expense",
+      "checkButton": "Check Affordability",
+      "checking": "Checking..."
+    },
+    "alerts": {
+      "unlockMessage": "Unlock AI-powered financial insights with a subscription.",
+      "learnMore": "Learn more",
+      "viewDetails": "View details"
+    },
+    "gate": {
+      "subscribeToUnlock": "Subscribe to unlock AI-powered insights"
+    }
+  },
+  "chat": {
+    "title": "AI Chat",
+    "description": "Ask questions about your finances",
+    "placeholder": "How much did I spend on food?",
+    "emptyState": "Ask me anything about your finances",
+    "networkError": "Network error. Please try again.",
+    "defaultError": "Something went wrong"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "noAccount": "Don't have an account?",
+      "signUpLink": "Sign up"
+    },
+    "signup": {
+      "title": "Create Account",
+      "email": "Email",
+      "password": "Password",
+      "passwordHint": "Must be at least 8 characters",
+      "submit": "Create Account",
+      "hasAccount": "Already have an account?",
+      "signInLink": "Sign in"
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "description": "Enter your email and we'll send you a reset link",
+      "emailLabel": "Email",
+      "emailPlaceholder": "your@email.com",
+      "sendLink": "Send Reset Link",
+      "success": "Check your email for a password reset link",
+      "backToLogin": "Back to Login"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "description": "Enter your new password",
+      "passwordLabel": "New Password",
+      "confirmLabel": "Confirm Password",
+      "resetButton": "Reset Password",
+      "success": "Password reset successfully",
+      "mismatch": "Passwords do not match",
+      "backToLogin": "Back to Login"
+    }
+  },
+  "landing": {
+    "title": "Online Budget App",
+    "subtitle": "AI-powered, bank-connected global budgeting",
+    "signedInAs": "Signed in as {email}",
+    "subscriptionActive": "Subscription active",
+    "subscriptionInactive": "Subscription inactive",
+    "goToDashboard": "Go to Dashboard",
+    "subscribe": "Subscribe",
+    "signIn": "Sign In",
+    "createAccount": "Create Account"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Manage your preferences",
+    "general": {
+      "title": "General",
+      "description": "Language, currency, and display preferences"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Manage your notification preferences"
+    },
+    "locale": {
+      "label": "Language & Region",
+      "description": "This affects date formats, number formatting, and translations"
+    },
+    "currency": {
+      "label": "Primary Currency",
+      "description": "Default currency for new accounts and calculations"
+    },
+    "language": {
+      "label": "Language",
+      "description": "Display language for the app"
+    },
+    "saved": "Settings saved successfully",
+    "merchantRules": {
+      "title": "Merchant Rules",
+      "description": "Auto-categorize transactions by merchant name",
+      "noRules": "No merchant rules yet",
+      "noRulesDescription": "Rules are created when you categorize transactions. You can also add rules manually.",
+      "addRule": "Add Rule",
+      "editRule": "Edit Rule",
+      "deleteRule": "Delete Rule",
+      "confirmDelete": "Are you sure you want to delete this rule?",
+      "fields": {
+        "merchant": "Merchant Name",
+        "merchantPlaceholder": "e.g., Starbucks",
+        "category": "Category",
+        "selectCategory": "Select a category"
+      },
+      "applied": "Applied {count} times"
+    }
+  },
+  "duration": {
+    "months": "{count, plural, =1 {1 month} other {# months}}",
+    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "yearsAndMonths": "{years}y {months}m"
+  },
+  "calculators": {
+    "hub": {
+      "title": "Financial Calculators",
+      "subtitle": "Tools to help you plan and analyze your finances",
+      "infoTitle": "About These Calculators",
+      "privacyTitle": "100% Private",
+      "privacyDescription": "All calculations happen on your device. Your financial data never leaves your browser.",
+      "accuracyTitle": "Precise Calculations",
+      "accuracyDescription": "Using financial-grade arithmetic to avoid floating-point errors in all calculations.",
+      "sectionCore": "Core Calculators",
+      "sectionPlanning": "Financial Planning",
+      "sectionTools": "Tools & Links"
+    },
+    "common": {
+      "back": "Back to calculators",
+      "calculate": "Calculate",
+      "save": "Save Plan",
+      "reset": "Reset",
+      "months": "months",
+      "years": "years"
+    },
+    "transparency": {
+      "title": "How This Works",
+      "assumptions": "Assumptions",
+      "formula": "Formula"
+    },
+    "emergencyFund": {
+      "title": "Emergency Fund Calculator",
+      "description": "Calculate how much you need for financial security and track your progress",
+      "subtitle": "Build your financial safety net",
+      "inputTitle": "Your Information",
+      "monthlyExpenses": "Monthly Expenses",
+      "monthlyExpensesHelp": "Include rent, utilities, groceries, insurance, and other essential costs",
+      "targetMonths": "Target Months of Coverage",
+      "targetMonthsHelp": "Experts recommend {months} months for most situations",
+      "currentSavings": "Current Emergency Savings",
+      "monthlyContribution": "Monthly Savings Amount",
+      "monthlyContributionHelp": "How much you can save towards your emergency fund each month",
+      "resultsTitle": "Your Results",
+      "targetAmount": "Target Emergency Fund",
+      "monthsToGoal": "Months to Reach Goal",
+      "completionDate": "Estimated Completion",
+      "progress": "Current Progress",
+      "goalMet": "Goal Achieved!",
+      "goalProgress": "Building Your Safety Net",
+      "amountNeeded": "You need {amount} more to reach your goal",
+      "tipsTitle": "Tips for Building Your Emergency Fund",
+      "tip1": "Keep your emergency fund in a high-yield savings account for easy access and better returns",
+      "tip2": "Automate your contributions by setting up automatic transfers on payday",
+      "tip3": "Start small if needed - even saving a little consistently adds up over time"
+    },
+    "savingsGoal": {
+      "title": "Savings Goal Calculator",
+      "description": "Plan your savings with compound interest projections",
+      "subtitle": "Reach your financial goals faster",
+      "inputTitle": "Goal Details",
+      "modeWhen": "When will I reach my goal?",
+      "modeHowMuch": "How much should I save monthly?",
+      "goalAmount": "Goal Amount",
+      "currentSavings": "Current Savings",
+      "monthlyContribution": "Monthly Contribution",
+      "targetDate": "Target Date",
+      "expectedReturn": "Expected Annual Return (%)",
+      "expectedReturnHelp": "High-yield savings: 4-5%, Investments: 6-8%",
+      "resultWhenTitle": "You'll Reach Your Goal",
+      "resultHowMuchTitle": "Monthly Savings Needed",
+      "inMonths": "In {months} months",
+      "perMonth": "per month",
+      "projectionTitle": "Savings Projection",
+      "projectedAmount": "Projected Total",
+      "totalContributions": "Total Contributions",
+      "interestEarned": "Interest Earned",
+      "progress": "Current Progress",
+      "timelineTitle": "Growth Timeline"
+    },
+    "debtPayoff": {
+      "title": "Debt Payoff Calculator",
+      "description": "Compare snowball vs avalanche strategies to pay off debt faster",
+      "subtitle": "Find the fastest path to debt freedom",
+      "yourDebts": "Your Debts",
+      "addDebt": "Add Debt",
+      "debtName": "Name",
+      "debtNamePlaceholder": "Debt {number}",
+      "balance": "Balance",
+      "apr": "APR (%)",
+      "minimumPayment": "Min Payment",
+      "removeDebt": "Remove debt",
+      "extraMonthlyPayment": "Extra Monthly Payment",
+      "extraMonthlyPaymentHelp": "Additional amount you can pay beyond minimums each month",
+      "snowball": "Snowball Strategy",
+      "snowballDescription": "Pay smallest balance first for quick wins and motivation",
+      "avalanche": "Avalanche Strategy",
+      "avalancheDescription": "Pay highest interest first to save the most money",
+      "recommended": "Recommended",
+      "morePsychological": "Motivational wins",
+      "totalInterest": "Total Interest",
+      "payoffDate": "Payoff Time",
+      "savingsTitle": "Interest Savings with Avalanche",
+      "savingsDescription": "You'll save {amount} in interest and be debt-free {months} months sooner with the avalanche method",
+      "paymentSchedule": "Payment Schedule",
+      "month": "Month",
+      "payment": "Payment",
+      "remaining": "Remaining"
+    },
+    "subscriptionCost": {
+      "title": "Subscription Cost Calculator",
+      "description": "Track and analyze the true cost of your subscriptions",
+      "subtitle": "See where your recurring money goes",
+      "yourSubscriptions": "Your Subscriptions",
+      "addSubscription": "Add Subscription",
+      "name": "Name",
+      "namePlaceholder": "e.g., Netflix, Spotify",
+      "amount": "Amount",
+      "essential": "Essential",
+      "remove": "Remove subscription",
+      "frequency": {
+        "label": "Frequency",
+        "weekly": "Weekly",
+        "biweekly": "Bi-weekly",
+        "monthly": "Monthly",
+        "quarterly": "Quarterly",
+        "annual": "Annual"
+      },
+      "showIncomePercent": "Show percentage of income",
+      "monthlyIncome": "Monthly Income",
+      "totalCost": "Total Subscription Cost",
+      "daily": "Daily",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "percentOfIncome": "% of Income",
+      "breakdown": "Essential vs Non-Essential",
+      "essentialCost": "Essential",
+      "nonEssentialCost": "Non-Essential",
+      "potentialSavings": "Potential Yearly Savings",
+      "perYear": "/year",
+      "potentialSavingsHelp": "If you cancelled all non-essential subscriptions",
+      "byCategory": "By Category"
+    },
+    "budgetAnalyzer": {
+      "title": "50/30/20 Budget Analyzer",
+      "description": "Analyze your spending against the popular budgeting rule",
+      "subtitle": "See how your budget measures up",
+      "ruleExplanation": "The 50/30/20 Rule",
+      "needs": "Needs",
+      "needsDescription": "Housing, utilities, groceries, insurance, minimum debt payments",
+      "needsExamples": "rent, utilities, groceries",
+      "wants": "Wants",
+      "wantsDescription": "Dining out, entertainment, shopping, subscriptions",
+      "wantsExamples": "dining, entertainment, shopping",
+      "savings": "Savings",
+      "savingsDescription": "Emergency fund, investments, retirement, extra debt payments",
+      "savingsExamples": "savings, investments, extra debt",
+      "inputTitle": "Your Monthly Finances",
+      "monthlyIncome": "Monthly Net Income",
+      "monthlyIncomeHelp": "Your take-home pay after taxes",
+      "enterSpending": "Enter your monthly spending by category:",
+      "balanced": "Your Budget is Balanced!",
+      "needsAdjustment": "Adjustments Recommended",
+      "actual": "Actual",
+      "target": "Target",
+      "variance": "Variance",
+      "over": "Over",
+      "under": "On Track",
+      "exceeding": "Exceeding"
+    },
+    "compoundInterest": {
+      "title": "Compound Interest Calculator",
+      "description": "See how your money grows with the power of compound interest",
+      "subtitle": "Watch your money grow over time",
+      "inputTitle": "Investment Details",
+      "initialDeposit": "Initial Deposit",
+      "monthlyContribution": "Monthly Contribution",
+      "annualRate": "Annual Interest Rate (%)",
+      "annualRateHelp": "Savings: 4-5%, Bonds: 5-6%, Stocks: 7-10%",
+      "years": "Investment Period (Years)",
+      "compoundingFrequency": "Compounding Frequency",
+      "frequency": {
+        "daily": "Daily (365/yr)",
+        "weekly": "Weekly (52/yr)",
+        "monthly": "Monthly (12/yr)",
+        "quarterly": "Quarterly (4/yr)",
+        "semiannually": "Semi-annually (2/yr)",
+        "annually": "Annually (1/yr)"
+      },
+      "resultTitle": "Your Investment Growth",
+      "finalBalance": "Final Balance",
+      "totalContributions": "Total Contributions",
+      "interestEarned": "Interest Earned",
+      "effectiveRate": "Effective Annual Rate",
+      "chartTitle": "Growth Over Time",
+      "formulaText": "FV = PV(1+r/n)^(nt) + PMT[((1+r/n)^(nt)-1)/(r/n)]",
+      "formulaExplanation": "FV = Future Value, PV = Present Value, r = annual rate, n = compounds per year, t = years, PMT = periodic payment",
+      "assumptionCompounding": "Compounding",
+      "assumptionTiming": "Contributions at end of each period",
+      "assumptionReinvest": "All interest reinvested"
+    },
+    "mortgage": {
+      "title": "Mortgage Calculator",
+      "description": "Calculate payments or find out how much home you can afford",
+      "subtitle": "Plan your home purchase with confidence",
+      "modePayment": "Calculate Payment",
+      "modeAffordability": "What Can I Afford?",
+      "inputTitle": "Loan Details",
+      "loanAmount": "Loan Amount",
+      "homePrice": "Home Price",
+      "downPayment": "Down Payment",
+      "downPaymentPercent": "Down Payment (%)",
+      "annualRate": "Interest Rate (%)",
+      "annualRateHelp": "Current average: 6-7% for 30-year fixed",
+      "term": "Loan Term",
+      "term15": "15 Years",
+      "term30": "30 Years",
+      "extraPayment": "Extra Monthly Payment",
+      "extraPaymentHelp": "Additional payment applied to principal each month",
+      "annualIncome": "Annual Gross Income",
+      "monthlyDebts": "Monthly Debt Payments",
+      "monthlyDebtsHelp": "Car loans, student loans, credit cards, etc.",
+      "maxDTI": "Maximum DTI Ratio (%)",
+      "resultTitle": "Payment Summary",
+      "monthlyPayment": "Monthly Payment",
+      "totalCost": "Total Cost of Loan",
+      "totalInterest": "Total Interest Paid",
+      "payoffMonths": "Payoff Time",
+      "affordabilityTitle": "Your Affordability",
+      "maxHomePrice": "Maximum Home Price",
+      "maxLoanAmount": "Maximum Loan Amount",
+      "downPaymentAmount": "Down Payment",
+      "dtiRatio": "Debt-to-Income Ratio",
+      "scheduleTitle": "Amortization Schedule",
+      "scheduleMonth": "Month",
+      "schedulePayment": "Payment",
+      "schedulePrincipal": "Principal",
+      "scheduleInterest": "Interest",
+      "scheduleBalance": "Balance",
+      "showFullSchedule": "Show Full Schedule",
+      "hideFullSchedule": "Hide Full Schedule",
+      "formulaText": "M = P[i(1+i)^n] / [(1+i)^n - 1]",
+      "formulaExplanation": "M = Monthly payment, P = Principal, i = Monthly interest rate, n = Total number of payments",
+      "assumptionFixedRate": "Fixed interest rate for full term",
+      "assumptionNoEscrow": "Does not include taxes, insurance, or HOA"
+    },
+    "inflation": {
+      "title": "Inflation Impact Calculator",
+      "description": "See how inflation erodes your purchasing power over time",
+      "subtitle": "Understand the real cost of inflation",
+      "inputTitle": "Calculate Impact",
+      "currentAmount": "Current Amount",
+      "inflationRate": "Annual Inflation Rate (%)",
+      "inflationRateHelp": "US historical average: ~3%",
+      "timeHorizon": "Time Horizon (Years)",
+      "presets": "Presets",
+      "presetLow": "Low (2%)",
+      "presetAverage": "Average (3%)",
+      "presetHigh": "High (5%)",
+      "heroTitle": "Purchasing Power Impact",
+      "heroDescription": "Your {amount} will have the buying power of {futureAmount} in {years} years",
+      "resultTitle": "Detailed Breakdown",
+      "purchasingPower": "Future Purchasing Power",
+      "powerLost": "Purchasing Power Lost",
+      "powerRemaining": "Purchasing Power Remaining",
+      "chartTitle": "Purchasing Power Over Time",
+      "chartNominal": "Nominal Value (unchanged)",
+      "chartReal": "Real Purchasing Power",
+      "tableTitle": "Year-by-Year Breakdown",
+      "tableYear": "Year",
+      "tableNominal": "Nominal Value",
+      "tableReal": "Real Value",
+      "tableLost": "Value Lost",
+      "formulaText": "Real Value = Nominal Value / (1 + inflation)^years",
+      "formulaExplanation": "Shows how much your money will actually buy in the future, adjusted for rising prices",
+      "assumptionConstant": "Constant annual inflation rate",
+      "assumptionCompound": "Inflation compounds annually"
+    },
+    "retirement": {
+      "title": "Retirement Planner",
+      "description": "Plan your retirement with a comprehensive savings and withdrawal projection",
+      "subtitle": "Secure your financial future",
+      "inputTitle": "Your Details",
+      "currentAge": "Current Age",
+      "retirementAge": "Retirement Age",
+      "currentSavings": "Current Retirement Savings",
+      "monthlyContribution": "Monthly Contribution",
+      "desiredIncome": "Desired Monthly Income (today's dollars)",
+      "desiredIncomeHelp": "How much you want to spend monthly in retirement, in today's dollars",
+      "advancedTitle": "Advanced Settings",
+      "preRetirementReturn": "Pre-Retirement Return (%)",
+      "preRetirementReturnHelp": "Expected annual return while saving (stocks avg ~7-10%)",
+      "postRetirementReturn": "Post-Retirement Return (%)",
+      "postRetirementReturnHelp": "Expected annual return while withdrawing (conservative ~4-5%)",
+      "inflationRate": "Inflation Rate (%)",
+      "lifeExpectancy": "Life Expectancy",
+      "socialSecurity": "Social Security / Pension (monthly)",
+      "socialSecurityAge": "Social Security Start Age",
+      "heroSufficient": "Your savings will last {years} years in retirement",
+      "heroInsufficient": "Your savings may run out at age {age}",
+      "heroSufficientBadge": "On Track",
+      "heroInsufficientBadge": "Action Needed",
+      "heroNeutralBadge": "Close",
+      "resultTitle": "Retirement Projection",
+      "balanceAtRetirement": "Balance at Retirement",
+      "monthlyWithdrawal": "Monthly Withdrawal (at retirement)",
+      "yearsMoneyLasts": "Years Money Lasts",
+      "shortfall": "Shortfall at Life Expectancy",
+      "surplus": "Surplus at Life Expectancy",
+      "chartTitle": "Portfolio Balance Over Time",
+      "chartAccumulation": "Accumulation Phase",
+      "chartWithdrawal": "Withdrawal Phase",
+      "formulaText": "Accumulation: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | Withdrawal: Balance_n = Balance_(n-1)(1+r) - W",
+      "formulaExplanation": "Two-phase simulation: grow savings until retirement, then draw down with inflation-adjusted withdrawals",
+      "assumptionInflation": "Inflation rate",
+      "assumptionPreReturn": "Pre-retirement return",
+      "assumptionPostReturn": "Post-retirement return",
+      "assumptionSS": "Social Security included from age {age}"
+    },
+    "fire": {
+      "title": "FIRE Calculator",
+      "description": "Calculate your Financial Independence, Retire Early number",
+      "subtitle": "Find your path to financial independence",
+      "inputTitle": "Your Financial Details",
+      "currentAge": "Current Age",
+      "annualIncome": "Annual Income",
+      "annualExpenses": "Annual Expenses",
+      "currentSavings": "Current Savings",
+      "expectedReturn": "Expected Annual Return (%)",
+      "expectedReturnHelp": "Stocks: 7-10%, Balanced: 5-7%",
+      "safeWithdrawalRate": "Safe Withdrawal Rate (%)",
+      "safeWithdrawalRateHelp": "Traditional: 4%, Conservative: 3.5%",
+      "inflationRate": "Inflation Rate (%)",
+      "resultTitle": "FIRE Results",
+      "heroAlready": "You've already reached FIRE!",
+      "heroOnTrack": "You can reach FIRE at age {age}",
+      "fireNumber": "FIRE Number",
+      "fireNumberHelp": "Annual expenses divided by safe withdrawal rate",
+      "yearsToFIRE": "Years to FIRE",
+      "fireAge": "FIRE Age",
+      "savingsRate": "Savings Rate",
+      "annualSavings": "Annual Savings",
+      "milestones": "FIRE Milestones",
+      "leanFIRE": "Lean FIRE",
+      "leanFIREHelp": "Covers basic expenses only (50% of current)",
+      "coastFIRE": "Coast FIRE",
+      "coastFIREHelp": "Stop saving — investments grow to target by retirement",
+      "fatFIRE": "Fat FIRE",
+      "fatFIREHelp": "Comfortable lifestyle (150% of current expenses)",
+      "chartTitle": "Portfolio Growth to FIRE",
+      "formulaText": "FIRE Number = Annual Expenses / SWR; Years = ln(FN/S × r + 1) / ln(1 + r)",
+      "formulaExplanation": "Calculates when investments can sustain your lifestyle through safe withdrawals",
+      "assumptionReturn": "Expected annual return",
+      "assumptionSWR": "Safe withdrawal rate",
+      "assumptionInflation": "Inflation-adjusted expenses"
+    },
+    "monteCarlo": {
+      "title": "Monte Carlo Simulator",
+      "description": "Stress-test your financial plan with probabilistic modeling",
+      "subtitle": "Run thousands of market simulations to see how your plan holds up",
+      "scenarioMode": "Scenario Mode",
+      "modeAccumulation": "Saving (Accumulation)",
+      "modeWithdrawal": "Spending (Withdrawal)",
+      "inputTitle": "Simulation Parameters",
+      "initialBalance": "Starting Portfolio Balance",
+      "monthlyContribution": "Monthly Contribution",
+      "monthlyWithdrawal": "Monthly Withdrawal",
+      "expectedReturn": "Expected Annual Return (%)",
+      "expectedReturnHelp": "Stocks: 7-10%, Bonds: 3-5%, Balanced: 5-7%",
+      "volatility": "Annual Volatility / Std Dev (%)",
+      "volatilityHelp": "S&P 500 historical: ~15%. Higher = wider outcome range.",
+      "inflationRate": "Inflation Rate (%)",
+      "timeHorizon": "Time Horizon (Years)",
+      "simulations": "Number of Simulations",
+      "simulationsHelp": "More simulations = more accurate percentiles, but slower",
+      "heroTitle": "Simulation Results",
+      "successRateLabel": "Success Rate",
+      "successRateDescription": "{total} simulations run, {failures} ran out of money",
+      "badgeStrong": "Strong Plan",
+      "badgeCaution": "Needs Review",
+      "badgeRisk": "High Risk",
+      "resultsTitle": "Outcome Distribution",
+      "medianFinal": "Median Final Balance",
+      "p90Final": "Best Case (90th %ile)",
+      "p10Final": "Worst Case (10th %ile)",
+      "totalSimulations": "Simulations Run",
+      "chartTitle": "Percentile Bands Over Time",
+      "assumptionReturns": "Return distribution",
+      "assumptionReturnsValue": "Normal distribution (Box-Muller)",
+      "assumptionVolatility": "Volatility (std dev)",
+      "assumptionInflation": "Inflation adjustment",
+      "assumptionInflationApplied": "Applied to withdrawals (compounding)",
+      "assumptionInflationNone": "Not applied in accumulation mode",
+      "assumptionPRNG": "Random number generator",
+      "assumptionPRNGValue": "Seeded PRNG (Mulberry32) — deterministic",
+      "formulaText": "Monthly return = Normal(μ/12, σ/√12); Balance_t = Balance_(t-1) × (1 + r_t) + C - W",
+      "formulaExplanation": "Each month draws a random return from a normal distribution. Contributions are added, inflation-adjusted withdrawals subtracted. Repeated across N simulations."
+    },
+    "taxEstimator": {
+      "title": "Tax Estimator",
+      "description": "Estimate your US federal income tax and effective rate",
+      "subtitle": "Understand your tax burden",
+      "inputTitle": "Income Details",
+      "grossIncome": "Gross Annual Income",
+      "filingStatus": "Filing Status",
+      "statusSingle": "Single",
+      "statusMarriedJoint": "Married Filing Jointly",
+      "statusMarriedSeparate": "Married Filing Separately",
+      "statusHeadOfHousehold": "Head of Household",
+      "useItemized": "Use Itemized Deductions",
+      "itemizedDeductions": "Itemized Deductions",
+      "retirementContributions": "Retirement Contributions (401k/IRA)",
+      "otherDeductions": "Other Above-the-Line Deductions",
+      "resultTitle": "Tax Estimate",
+      "agi": "Adjusted Gross Income",
+      "deduction": "Deduction",
+      "taxableIncome": "Taxable Income",
+      "totalTax": "Total Federal Tax",
+      "effectiveRate": "Effective Tax Rate",
+      "marginalRate": "Marginal Tax Rate",
+      "takeHome": "Annual Take-Home",
+      "monthlyTakeHome": "Monthly Take-Home",
+      "bracketBreakdown": "Tax Bracket Breakdown",
+      "bracketRate": "Rate",
+      "formulaText": "Tax = Σ (bracket_amount × bracket_rate) for each bracket",
+      "formulaExplanation": "Progressive taxation: income is taxed at increasing rates as it moves through tax brackets",
+      "assumptionBrackets": "2024 US federal tax brackets",
+      "assumptionDeduction": "Standard deduction applied unless itemized",
+      "assumptionScope": "Federal income tax only (excludes state, FICA)"
+    },
+    "netWorthForecast": {
+      "title": "Net Worth Forecast",
+      "description": "Project your net worth growth over time with assets and liabilities",
+      "subtitle": "See your financial future",
+      "inputTitle": "Your Assets & Liabilities",
+      "addAsset": "Add Asset",
+      "addLiability": "Add Liability",
+      "assetValue": "Current Value",
+      "assetGrowth": "Annual Growth (%)",
+      "assetContribution": "Monthly Contribution",
+      "liabilityBalance": "Current Balance",
+      "liabilityRate": "Interest Rate (%)",
+      "liabilityPayment": "Monthly Payment",
+      "growthRate": "Growth Rate",
+      "years": "Forecast Period (Years)",
+      "remove": "Remove",
+      "resultTitle": "Forecast Results",
+      "currentNetWorth": "Current Net Worth",
+      "projectedNetWorth": "Projected Net Worth",
+      "totalGrowth": "Total Growth",
+      "millionaireYear": "Millionaire Year",
+      "debtFreeYear": "Debt-Free Year",
+      "never": "Not in forecast period",
+      "chartTitle": "Net Worth Projection",
+      "formulaText": "NW_t = Σ(Assets × (1+g)^t + C×t) - Σ(Liabilities × (1+r)^t - P×t)",
+      "formulaExplanation": "Each asset grows at its specified rate with monthly contributions; liabilities accrue interest minus monthly payments",
+      "assumptionGrowth": "Constant annual growth rates",
+      "assumptionInflation": "Not inflation-adjusted"
+    },
+    "loanTracker": {
+      "title": "Loan Tracker",
+      "description": "Track all your loans, payments, and payoff progress"
+    },
+    "netWorth": {
+      "title": "Net Worth",
+      "description": "View your complete financial picture with assets and liabilities"
+    },
+    "property": {
+      "title": "Property & Assets",
+      "description": "Track property values, vehicles, and other assets"
+    }
+  },
+  "accounts": {
+    "title": "Accounts",
+    "description": "Manage your bank accounts and balances",
+    "addAccount": "Add Account",
+    "editAccount": "Edit Account",
+    "deleteAccount": "Delete Account",
+    "confirmDelete": "Are you sure you want to delete this account? This action cannot be undone.",
+    "noAccounts": "No accounts yet",
+    "noAccountsDescription": "Add your first account to start tracking your finances.",
+    "fields": {
+      "name": "Account Name",
+      "namePlaceholder": "e.g., Checking Account",
+      "type": "Account Type",
+      "currency": "Currency",
+      "balance": "Current Balance",
+      "institution": "Institution",
+      "institutionPlaceholder": "e.g., Chase, Bank of America"
+    },
+    "types": {
+      "checking": "Checking",
+      "savings": "Savings",
+      "credit": "Credit Card",
+      "investment": "Investment",
+      "loan": "Loan",
+      "other": "Other"
+    },
+    "totalBalance": "Total Balance",
+    "transactionCount": "{count, plural, =0 {No transactions} =1 {1 transaction} other {# transactions}}",
+    "manual": "Manual",
+    "linked": "Linked"
+  },
+  "bankSync": {
+    "title": "Bank Sync",
+    "description": "Connect your bank accounts for automatic transaction syncing",
+    "notConfigured": "Bank sync is not available. Please configure your Plaid credentials.",
+    "connectedBanks": "Connected Banks",
+    "noConnectedBanks": "No banks connected yet. Connect a bank to start syncing transactions automatically.",
+    "disconnect": "Disconnect",
+    "confirmDisconnect": "Are you sure you want to disconnect this bank? Existing transactions will not be deleted.",
+    "connectBank": "Connect Bank",
+    "connecting": "Connecting…",
+    "connectionFailed": "Failed to connect to your bank. Please try again.",
+    "connectionSuccess": "Bank connected successfully!",
+    "syncStatus": "Sync Status",
+    "statusActive": "Active",
+    "statusError": "Error",
+    "statusInactive": "Inactive",
+    "neverSynced": "Never synced",
+    "provider": "Provider",
+    "lastSynced": "Last synced",
+    "syncResult": "{added} added, {modified} modified, {removed} removed",
+    "syncing": "Syncing…",
+    "syncNow": "Sync Now"
+  },
+  "categories": {
+    "title": "Categories",
+    "description": "View and customize transaction categories",
+    "systemCategories": "System Categories",
+    "userOverrides": "Custom Names",
+    "noOverrides": "No custom category names yet",
+    "noOverridesDescription": "You can rename any category to your preference.",
+    "addOverride": "Customize Name",
+    "editOverride": "Edit Custom Name",
+    "fields": {
+      "originalName": "Original Name",
+      "customName": "Custom Name",
+      "customNamePlaceholder": "Enter your preferred name"
+    },
+    "types": {
+      "income": "Income",
+      "expense": "Expense",
+      "transfer": "Transfer"
+    },
+    "resetToDefault": "Reset to Default"
+  },
+  "import": {
+    "title": "Import Transactions",
+    "description": "Import transactions from your bank",
+    "steps": {
+      "upload": "Upload File",
+      "configure": "Configure",
+      "preview": "Preview",
+      "import": "Import"
+    },
+    "upload": {
+      "title": "Upload your bank file",
+      "description": "Drag and drop or click to select a file",
+      "supportedFormats": "Supported formats: CSV, OFX, QFX, QBO",
+      "maxSize": "Maximum file size: 10MB",
+      "dropHere": "Drop file here",
+      "browse": "Browse files",
+      "selectedFile": "Selected file"
+    },
+    "configure": {
+      "title": "Configure Import",
+      "account": "Target Account",
+      "selectAccount": "Select an account",
+      "bankDetected": "Bank detected: {bank}",
+      "bankNotDetected": "Bank not detected — using universal parser",
+      "dateFormat": "Date Format",
+      "encoding": "File Encoding"
+    },
+    "preview": {
+      "title": "Preview Transactions",
+      "description": "{count, plural, =1 {1 transaction} other {# transactions}} found",
+      "duplicates": "{count, plural, =0 {No duplicates} =1 {1 duplicate} other {# duplicates}} will be skipped",
+      "columns": {
+        "date": "Date",
+        "description": "Description",
+        "amount": "Amount",
+        "status": "Status"
+      },
+      "status": {
+        "new": "New",
+        "duplicate": "Duplicate",
+        "error": "Error"
+      }
+    },
+    "importing": {
+      "title": "Importing transactions...",
+      "progress": "{imported} of {total} imported"
+    },
+    "complete": {
+      "title": "Import Complete",
+      "imported": "{count, plural, =1 {1 transaction} other {# transactions}} imported successfully",
+      "skipped": "{count, plural, =0 {No transactions} =1 {1 transaction} other {# transactions}} skipped as duplicates",
+      "viewTransactions": "View Transactions"
+    },
+    "errors": {
+      "invalidFile": "Invalid file format",
+      "fileTooLarge": "File is too large (max 10MB)",
+      "parseError": "Failed to parse file",
+      "noTransactions": "No transactions found in file",
+      "importFailed": "Import failed. Please try again."
+    }
+  },
+  "export": {
+    "title": "Export Data",
+    "description": "Download your financial data",
+    "dateRange": {
+      "label": "Date Range",
+      "from": "From",
+      "to": "To",
+      "allTime": "All Time",
+      "thisMonth": "This Month",
+      "thisYear": "This Year",
+      "lastYear": "Last Year",
+      "custom": "Custom Range"
+    },
+    "format": {
+      "label": "Export Format",
+      "csv": {
+        "label": "CSV",
+        "description": "Spreadsheet-compatible format"
+      },
+      "json": {
+        "label": "JSON",
+        "description": "Developer-friendly format"
+      }
+    },
+    "include": {
+      "label": "Include",
+      "transactions": "Transactions",
+      "accounts": "Accounts",
+      "budgets": "Budgets",
+      "categories": "Categories"
+    },
+    "exporting": "Exporting...",
+    "download": "Download",
+    "exportButton": "Export Data",
+    "noData": "No data to export for the selected range"
+  },
+  "investments": {
+    "title": "Investments",
+    "description": "Track your investment portfolio",
+    "addAccount": "Add Account",
+    "editAccount": "Edit Account",
+    "deleteAccount": "Delete Account",
+    "confirmDeleteAccount": "This will permanently delete the account and all its holdings.",
+    "noAccounts": "No investment accounts yet",
+    "noAccountsDescription": "Add your first investment account to start tracking.",
+    "addHolding": "Add Holding",
+    "editHolding": "Edit Holding",
+    "deleteHolding": "Delete Holding",
+    "confirmDeleteHolding": "This will permanently remove this holding.",
+    "fields": {
+      "name": "Account Name",
+      "namePlaceholder": "e.g., Retirement RRSP",
+      "accountType": "Account Type",
+      "institution": "Institution",
+      "institutionPlaceholder": "e.g., Wealthsimple",
+      "currency": "Currency"
+    },
+    "holdingFields": {
+      "symbol": "Symbol",
+      "symbolPlaceholder": "e.g., VFV.TO",
+      "holdingName": "Name (Optional)",
+      "shares": "Shares",
+      "purchasePrice": "Purchase Price",
+      "purchaseDate": "Purchase Date",
+      "currency": "Currency"
+    },
+    "accountTypes": {
+      "brokerage": "Brokerage",
+      "rrsp": "RRSP",
+      "tfsa": "TFSA",
+      "401k": "401(k)",
+      "ira": "IRA",
+      "roth_ira": "Roth IRA",
+      "other": "Other"
+    },
+    "stats": {
+      "totalValue": "Total Value",
+      "totalCost": "Total Cost",
+      "gainLoss": "Gain/Loss",
+      "return": "Return"
+    },
+    "portfolio": "Portfolio Allocation",
+    "holdings": "holdings",
+    "showDetails": "Show Details",
+    "hideDetails": "Hide Details"
+  },
+  "loans": {
+    "title": "Loans",
+    "description": "Track and manage your loans",
+    "addLoan": "Add Loan",
+    "editLoan": "Edit Loan",
+    "deleteLoan": "Delete Loan",
+    "confirmDelete": "Are you sure you want to delete this loan and all its payments?",
+    "newLoan": "New Loan",
+    "noLoans": "No loans yet",
+    "noLoansDescription": "Add your first loan to start tracking your debt.",
+    "detail": "Loan Detail",
+    "fields": {
+      "name": "Loan Name",
+      "namePlaceholder": "e.g., Home Mortgage",
+      "loanType": "Loan Type",
+      "originalBalance": "Original Balance",
+      "currentBalance": "Current Balance",
+      "interestRate": "Interest Rate (%)",
+      "minimumPayment": "Minimum Payment",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "status": "Status",
+      "currency": "Currency"
+    },
+    "types": {
+      "mortgage": "Mortgage",
+      "auto": "Auto Loan",
+      "personal": "Personal Loan",
+      "student": "Student Loan",
+      "other": "Other"
+    },
+    "statuses": {
+      "active": "Active",
+      "paid_off": "Paid Off",
+      "refinanced": "Refinanced",
+      "defaulted": "Defaulted"
+    },
+    "stats": {
+      "totalDebt": "Total Debt",
+      "monthlyPayments": "Monthly Payments",
+      "avgRate": "Avg Interest Rate",
+      "debtFreeDate": "Debt-Free Date"
+    },
+    "payments": {
+      "title": "Payment History",
+      "addPayment": "Record Payment",
+      "date": "Date",
+      "amount": "Amount",
+      "principal": "Principal",
+      "interest": "Interest",
+      "notes": "Notes",
+      "noPayments": "No payments recorded yet"
+    },
+    "amortization": {
+      "title": "Amortization Schedule",
+      "month": "Month",
+      "payment": "Payment",
+      "principal": "Principal",
+      "interest": "Interest",
+      "balance": "Balance",
+      "extraPayment": "Extra Payment"
+    },
+    "paidOff": "paid off",
+    "progress": "Progress"
+  },
+  "netWorth": {
+    "title": "Net Worth",
+    "description": "Track your total financial picture",
+    "takeSnapshot": "Take Snapshot",
+    "snapshotTaken": "Snapshot recorded",
+    "noData": "No net worth data yet",
+    "noDataDescription": "Add accounts, investments, and properties, then take a snapshot.",
+    "current": "Current Net Worth",
+    "history": "Net Worth History",
+    "breakdown": "Breakdown",
+    "assets": "Total Assets",
+    "liabilities": "Total Liabilities",
+    "categories": {
+      "accounts": "Bank Accounts",
+      "investments": "Investments",
+      "properties": "Properties",
+      "loans": "Loans"
+    }
+  },
+  "properties": {
+    "title": "Properties",
+    "description": "Track your real estate portfolio",
+    "addProperty": "Add Property",
+    "editProperty": "Edit Property",
+    "deleteProperty": "Delete Property",
+    "confirmDelete": "Are you sure you want to delete this property?",
+    "noProperties": "No properties yet",
+    "noPropertiesDescription": "Add your first property to track real estate.",
+    "detail": "Property Detail",
+    "fields": {
+      "address": "Address",
+      "addressPlaceholder": "e.g., 123 Main St",
+      "purchasePrice": "Purchase Price",
+      "currentValue": "Current Value",
+      "mortgageBalance": "Mortgage Balance",
+      "monthlyExpenses": "Monthly Expenses",
+      "purchaseDate": "Purchase Date",
+      "currency": "Currency",
+      "notes": "Notes"
+    },
+    "stats": {
+      "totalValue": "Total Value",
+      "totalEquity": "Total Equity",
+      "totalMortgage": "Total Mortgage",
+      "monthlyExpenses": "Monthly Expenses"
+    },
+    "equity": "Equity"
+  },
+  "subscriptions": {
+    "title": "Subscriptions",
+    "description": "Manage your recurring payments",
+    "addSubscription": "Add Subscription",
+    "editSubscription": "Edit Subscription",
+    "deleteSubscription": "Delete Subscription",
+    "confirmDelete": "Are you sure you want to delete this subscription?",
+    "noSubscriptions": "No subscriptions yet",
+    "noSubscriptionsDescription": "Add your first subscription to start tracking recurring costs.",
+    "fields": {
+      "merchantName": "Merchant Name",
+      "merchantNamePlaceholder": "e.g., Netflix, Spotify",
+      "amount": "Amount",
+      "frequency": "Billing Frequency",
+      "category": "Category",
+      "nextBillingDate": "Next Billing Date",
+      "notes": "Notes",
+      "active": "Active"
+    },
+    "frequencies": {
+      "weekly": "Weekly",
+      "biweekly": "Bi-weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "annual": "Annual"
+    },
+    "stats": {
+      "active": "Active",
+      "monthly": "Monthly Cost",
+      "annual": "Annual Cost",
+      "upcoming": "Upcoming (7 days)"
+    },
+    "costChart": "Cost Breakdown"
+  },
+  "reports": {
+    "title": "Reports",
+    "description": "Analyze your financial data with visual reports",
+    "timeRange": {
+      "label": "Time Range",
+      "month": "Month",
+      "quarter": "Quarter",
+      "year": "Year",
+      "all": "All Time",
+      "customRange": "Custom Range",
+      "from": "From",
+      "to": "To"
+    },
+    "sections": {
+      "spendingByCategory": "Spending by Category",
+      "incomeVsExpense": "Income vs Expenses",
+      "spendingHeatmap": "Spending Heatmap",
+      "moneyFlow": "Money Flow"
+    },
+    "stats": {
+      "totalIncome": "Total Income",
+      "totalExpenses": "Total Expenses",
+      "netSavings": "Net Savings",
+      "savingsRate": "Savings Rate",
+      "avgIncome": "Avg. Income",
+      "avgExpenses": "Avg. Expenses",
+      "avgPerDay": "Avg. per Day",
+      "busiestDay": "Busiest Day"
+    },
+    "categoryTable": {
+      "category": "Category",
+      "amount": "Amount",
+      "percentage": "Percentage"
+    },
+    "heatmap": {
+      "title": "Spending Heatmap",
+      "noData": "No spending data to display",
+      "less": "Less",
+      "more": "More",
+      "spent": "{amount} spent",
+      "totalSpent": "Total Spent",
+      "busiestDay": "Busiest Day",
+      "avgPerDay": "Avg. per Day"
+    },
+    "dayShort": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    },
+    "trend": {
+      "title": "Income vs Expenses Trend",
+      "noData": "No trend data to display",
+      "income": "Income",
+      "expenses": "Expenses",
+      "avgIncome": "Avg. Income",
+      "avgExpenses": "Avg. Expenses",
+      "netSavings": "Net Savings",
+      "savingsRate": "Savings Rate",
+      "footer": "Showing {months} months of data"
+    },
+    "sankey": {
+      "title": "Money Flow",
+      "noData": "No money flow data to display",
+      "source": "Source",
+      "target": "Target",
+      "value": "Value",
+      "viewToggle": "View Mode",
+      "chartView": "Chart",
+      "tableView": "Table",
+      "legendIncome": "Income Sources",
+      "legendExpenses": "Expense Categories",
+      "colFrom": "From",
+      "colTo": "To",
+      "colAmount": "Amount",
+      "colPercent": "Percent",
+      "chartAnnouncement": "Showing money flow as a chart",
+      "tableAnnouncement": "Showing money flow as a table",
+      "chartLabel": "Money flow diagram showing income sources to expense categories",
+      "chartHint": "Hover over flows to see details",
+      "tableHint": "All flows sorted by amount",
+      "tableLabel": "Money flow table",
+      "srSummary": "{flows} flows totaling {total}"
+    },
+    "display": {
+      "showChart": "Show Chart",
+      "showTable": "Show Table"
+    },
+    "export": {
+      "exportChart": "Export Chart",
+      "exportAsPng": "Export as PNG",
+      "exportAsSvg": "Export as SVG"
+    },
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "noData": "No data available",
+    "noDataDescription": "Add transactions to see your financial reports."
+  },
+  "planning": {
+    "title": "Planning",
+    "description": "Plan your financial future",
+    "future": {
+      "title": "Future Plans",
+      "description": "Track savings goals for future purchases",
+      "fields": {
+        "name": "Goal Name",
+        "namePlaceholder": "e.g., New Car, Vacation",
+        "targetAmount": "Target Amount",
+        "currentSavings": "Current Savings",
+        "monthlySavings": "Monthly Savings",
+        "targetDate": "Target Date",
+        "priority": "Priority",
+        "currency": "Currency"
+      },
+      "priorities": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      },
+      "stats": {
+        "totalGoals": "Total Goals",
+        "totalTarget": "Total Target",
+        "totalSaved": "Total Saved",
+        "onTrack": "On Track"
+      },
+      "progress": "Progress",
+      "percentComplete": "{percent}% complete",
+      "estimatedDate": "Estimated Completion",
+      "monthsToGoal": "{count, plural, =1 {1 month} other {# months}} to goal",
+      "addGoal": "Add Goal",
+      "editGoal": "Edit Goal",
+      "deleteGoal": "Delete Goal",
+      "confirmDelete": "Are you sure you want to delete this goal?",
+      "noGoals": "No goals yet",
+      "noGoalsDescription": "Create your first savings goal to start tracking."
+    },
+    "retirement": {
+      "title": "Retirement Planner",
+      "description": "Plan and project your retirement savings",
+      "fields": {
+        "currentAge": "Current Age",
+        "retirementAge": "Retirement Age",
+        "currentSavings": "Current Savings",
+        "monthlyContribution": "Monthly Contribution",
+        "expectedReturn": "Expected Annual Return (%)",
+        "currency": "Currency",
+        "notes": "Notes",
+        "notesPlaceholder": "Add any notes about your plan..."
+      },
+      "projection": {
+        "projectedSavings": "Projected Savings",
+        "yearsToRetirement": "Years to Retirement",
+        "monthlyIncome": "Projected Monthly Income",
+        "savingsAtRetirement": "Savings at Retirement"
+      },
+      "chart": {
+        "projectionChart": "Retirement Projection",
+        "age": "Age",
+        "savings": "Savings"
+      },
+      "addPlan": "Add Plan",
+      "editPlan": "Edit Plan",
+      "deletePlan": "Delete Plan",
+      "confirmDelete": "Are you sure you want to delete this plan?",
+      "noPlan": "No retirement plan yet",
+      "noPlanDescription": "Create a retirement plan to project your savings."
+    },
+    "paycheck": {
+      "title": "Paycheck Planner",
+      "description": "Allocate your paycheck to expenses and savings",
+      "fields": {
+        "scheduleType": "Pay Schedule",
+        "payAmount": "Pay Amount",
+        "nextPayDate": "Next Pay Date",
+        "currency": "Currency"
+      },
+      "scheduleTypes": {
+        "weekly": "Weekly",
+        "biweekly": "Bi-weekly",
+        "semimonthly": "Semi-monthly",
+        "monthly": "Monthly"
+      },
+      "allocations": {
+        "title": "Allocations",
+        "addAllocation": "Add Allocation",
+        "label": "Label",
+        "amount": "Amount",
+        "remaining": "Remaining",
+        "total": "Total Allocated",
+        "unallocated": "Unallocated"
+      },
+      "stats": {
+        "totalPay": "Total Pay",
+        "allocated": "Allocated",
+        "unallocatedAmount": "Unallocated"
+      },
+      "addPlan": "Add Plan",
+      "editPlan": "Edit Plan",
+      "deletePlan": "Delete Plan",
+      "confirmDelete": "Are you sure you want to delete this plan?",
+      "noPlan": "No paycheck plan yet",
+      "noPlanDescription": "Create a plan to allocate your paycheck."
+    }
+  },
+  "debtPayoff": {
+    "title": "Debt Payoff Planner",
+    "description": "Create a strategy to pay off your debts faster",
+    "strategy": {
+      "label": "Strategy",
+      "avalanche": "Avalanche",
+      "snowball": "Snowball",
+      "custom": "Custom",
+      "avalancheDescription": "Pay highest interest rate first to minimize total interest paid",
+      "snowballDescription": "Pay smallest balance first for quick wins and motivation"
+    },
+    "fields": {
+      "name": "Scenario Name",
+      "namePlaceholder": "e.g., Aggressive Payoff Plan",
+      "extraPayment": "Extra Monthly Payment",
+      "extraPaymentDescription": "Additional amount to put toward debt each month beyond minimums"
+    },
+    "stats": {
+      "totalDebt": "Total Debt",
+      "weightedAvgApr": "Weighted Avg. APR",
+      "monthsToPayoff": "Months to Payoff",
+      "totalInterest": "Total Interest",
+      "interestSaved": "Interest Saved"
+    },
+    "loans": {
+      "currentLoans": "Current Loans",
+      "loanName": "Loan Name",
+      "balance": "Balance",
+      "rate": "APR (%)",
+      "minimumPayment": "Minimum Payment",
+      "noLoans": "No loans to pay off"
+    },
+    "scenarios": {
+      "title": "Scenarios",
+      "saveScenario": "Save Scenario",
+      "loadScenario": "Load Scenario",
+      "deleteScenario": "Delete Scenario",
+      "confirmDelete": "Are you sure you want to delete this scenario?",
+      "noScenarios": "No saved scenarios",
+      "noScenariosDescription": "Save a scenario to compare different payoff strategies."
+    },
+    "chart": {
+      "payoffTimeline": "Payoff Timeline",
+      "month": "Month",
+      "remaining": "Remaining Balance",
+      "paid": "Amount Paid"
+    },
+    "addScenario": "Add Scenario",
+    "comparisons": "Compare Strategies"
+  },
+  "scenarios": {
+    "title": "Financial Scenarios",
+    "description": "Model what-if scenarios for your finances",
+    "fields": {
+      "name": "Scenario Name",
+      "namePlaceholder": "e.g., What if I get a raise?",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe the scenario..."
+    },
+    "config": {
+      "title": "Scenario Parameters",
+      "incomeChange": "Income Change",
+      "expenseChange": "Expense Change",
+      "savingsRate": "Savings Rate",
+      "investmentReturn": "Investment Return",
+      "inflationRate": "Inflation Rate",
+      "timeHorizon": "Time Horizon (months)"
+    },
+    "results": {
+      "title": "Projected Results",
+      "netWorthProjection": "Net Worth Projection",
+      "savingsProjection": "Savings Projection",
+      "monthlyBalance": "Monthly Balance"
+    },
+    "actions": {
+      "create": "Create Scenario",
+      "edit": "Edit Scenario",
+      "delete": "Delete Scenario",
+      "run": "Run Scenario",
+      "compare": "Compare Scenarios"
+    },
+    "confirmDelete": "Are you sure you want to delete this scenario?",
+    "noScenarios": "No scenarios yet",
+    "noScenariosDescription": "Create a what-if scenario to explore different financial futures."
+  },
+  "events": {
+    "title": "Event Budgets",
+    "description": "Track budgets for events and projects",
+    "fields": {
+      "name": "Event Name",
+      "namePlaceholder": "e.g., Wedding, Vacation, Home Renovation",
+      "totalBudget": "Total Budget",
+      "startDate": "Start Date",
+      "endDate": "End Date"
+    },
+    "items": {
+      "title": "Budget Items",
+      "category": "Category",
+      "categoryPlaceholder": "e.g., Venue, Catering, Travel",
+      "budgeted": "Budgeted",
+      "spent": "Spent",
+      "remaining": "Remaining",
+      "notes": "Notes",
+      "addItem": "Add Item"
+    },
+    "stats": {
+      "totalBudget": "Total Budget",
+      "totalSpent": "Total Spent",
+      "remaining": "Remaining",
+      "percentUsed": "% Used"
+    },
+    "actions": {
+      "create": "Create Event Budget",
+      "edit": "Edit Event",
+      "delete": "Delete Event"
+    },
+    "confirmDelete": "Are you sure you want to delete this event budget?",
+    "noEvents": "No event budgets yet",
+    "noEventsDescription": "Create a budget for your next event or project."
+  },
+  "splits": {
+    "title": "Expense Splitting",
+    "description": "Split expenses with friends and family",
+    "persons": {
+      "title": "People",
+      "name": "Name",
+      "email": "Email",
+      "addPerson": "Add Person",
+      "editPerson": "Edit Person",
+      "deletePerson": "Delete Person",
+      "noPeople": "No people added yet",
+      "noPeopleDescription": "Add people to split expenses with."
+    },
+    "expenses": {
+      "title": "Split Expenses",
+      "amount": "Amount",
+      "person": "Person",
+      "settled": "Settled",
+      "unsettled": "Unsettled",
+      "markSettled": "Mark as Settled",
+      "markUnsettled": "Mark as Unsettled",
+      "addSplit": "Add Split",
+      "noSplits": "No expense splits yet",
+      "noSplitsDescription": "Add a split to track shared expenses."
+    },
+    "balance": {
+      "title": "Balance Summary",
+      "owes": "owes you",
+      "youOwe": "you owe",
+      "settled": "Settled",
+      "totalOwed": "Total Owed to You",
+      "totalOwing": "Total You Owe"
+    },
+    "actions": {
+      "settleAll": "Settle All",
+      "delete": "Delete Split"
+    },
+    "confirmDelete": "Are you sure you want to delete this split?"
+  },
+  "review": {
+    "title": "Transaction Review",
+    "description": "Review and categorize uncategorized transactions",
+    "queue": {
+      "title": "Review Queue",
+      "remaining": "{count} transactions to review",
+      "allDone": "All caught up!",
+      "allDoneDescription": "No uncategorized transactions to review."
+    },
+    "actions": {
+      "categorize": "Categorize",
+      "skip": "Skip",
+      "skipAll": "Skip All",
+      "bulkCategorize": "Bulk Categorize"
+    },
+    "fields": {
+      "category": "Category",
+      "selectCategory": "Select a category...",
+      "merchant": "Merchant",
+      "amount": "Amount",
+      "date": "Date",
+      "createRule": "Create merchant rule"
+    }
+  },
+  "weeklyRecap": {
+    "title": "Friday Review",
+    "description": "Weekly guided review of your finances",
+    "steps": {
+      "welcome": "Weekly Financial Check-in",
+      "welcomeDescription": "Let's review your week and plan ahead.",
+      "spending": "Spending Review",
+      "spendingDescription": "Review your spending for the past week.",
+      "categories": "Category Breakdown",
+      "categoriesDescription": "See where your money went this week.",
+      "budget": "Budget Check",
+      "budgetDescription": "How are your budgets looking?",
+      "upcoming": "Upcoming",
+      "upcomingDescription": "Bills and subscriptions due next week.",
+      "goals": "Goal Progress",
+      "goalsDescription": "Check in on your savings goals.",
+      "summary": "Weekly Summary",
+      "summaryDescription": "Here's your week at a glance."
+    },
+    "stats": {
+      "weeklySpending": "This Week's Spending",
+      "vsLastWeek": "vs. Last Week",
+      "topCategory": "Top Category",
+      "transactionCount": "Transactions",
+      "dailyAverage": "Daily Average"
+    },
+    "actions": {
+      "next": "Next",
+      "previous": "Previous",
+      "finish": "Finish Review",
+      "startReview": "Start Review"
+    }
+  },
+  "ocr": {
+    "title": "Receipt Scanner",
+    "description": "Scan receipts and create transactions",
+    "upload": {
+      "title": "Upload Receipt",
+      "dragDrop": "Drag & drop or click to upload",
+      "supportedFormats": "Supported formats: JPG, PNG, PDF",
+      "maxSize": "Max file size: 10MB",
+      "browse": "Browse Files",
+      "dropHere": "Drop your receipt here"
+    },
+    "processing": {
+      "title": "Processing Receipt",
+      "analyzing": "Analyzing receipt...",
+      "extracting": "Extracting data...",
+      "progress": "{progress}% complete"
+    },
+    "results": {
+      "title": "Extracted Data",
+      "merchant": "Merchant",
+      "merchantPlaceholder": "e.g. Walmart, Target",
+      "amount": "Amount",
+      "amountPlaceholder": "0.00",
+      "date": "Date",
+      "items": "Line Items",
+      "itemsPlaceholder": "One item per line",
+      "rawText": "Raw OCR Text",
+      "confidence": "Confidence",
+      "account": "Account",
+      "selectAccount": "Select an account",
+      "noAccounts": "No accounts found. Create one first."
+    },
+    "actions": {
+      "scan": "Scan Receipt",
+      "rescan": "Rescan",
+      "createTransaction": "Create Transaction",
+      "saveReceipt": "Save Receipt",
+      "discard": "Discard",
+      "creating": "Creating...",
+      "saving": "Saving..."
+    },
+    "success": {
+      "transactionCreated": "Transaction created successfully",
+      "receiptSaved": "Receipt saved successfully"
+    },
+    "errors": {
+      "noText": "Could not extract text from this image",
+      "uploadFailed": "Upload failed",
+      "tooLarge": "File is too large (max 10MB)",
+      "invalidType": "Unsupported file type. Use JPG, PNG, or PDF.",
+      "createFailed": "Failed to create transaction",
+      "saveFailed": "Failed to save receipt",
+      "accountRequired": "Please select an account first",
+      "ocrFailed": "OCR processing failed. Please try again."
+    }
+  },
+  "commandPalette": {
+    "placeholder": "Type a command or search...",
+    "noResults": "No results found",
+    "groups": {
+      "navigation": "Navigation",
+      "actions": "Actions",
+      "theme": "Theme"
+    },
+    "commands": {
+      "dashboard": "Go to Dashboard",
+      "transactions": "Go to Transactions",
+      "accounts": "Go to Accounts",
+      "budgets": "Go to Budgets",
+      "categories": "Go to Categories",
+      "subscriptions": "Go to Subscriptions",
+      "loans": "Go to Loans",
+      "investments": "Go to Investments",
+      "properties": "Go to Properties",
+      "netWorth": "Go to Net Worth",
+      "reports": "Go to Reports",
+      "insights": "Go to Insights",
+      "calculators": "Go to Calculators",
+      "futurePlans": "Go to Future Plans",
+      "retirement": "Go to Retirement Planner",
+      "paycheck": "Go to Paycheck Planner",
+      "debtPayoff": "Go to Debt Payoff",
+      "scenarios": "Go to Scenarios",
+      "events": "Go to Event Budgets",
+      "splits": "Go to Expense Splits",
+      "review": "Go to Transaction Review",
+      "fridayReview": "Go to Friday Review",
+      "ocr": "Go to Receipt Scanner",
+      "import": "Go to Import",
+      "export": "Go to Export",
+      "settings": "Go to Settings",
+      "chat": "Go to AI Chat"
+    },
+    "actions": {
+      "addTransaction": "Add Transaction",
+      "addAccount": "Add Account",
+      "addBudget": "Add Budget",
+      "importData": "Import Data",
+      "exportData": "Export Data"
+    },
+    "theme": {
+      "light": "Light Mode",
+      "dark": "Dark Mode",
+      "system": "System Theme"
+    }
+  },
+  "onboarding": {
+    "title": "Welcome to Budget App",
+    "description": "Let's set up your account in a few quick steps",
+    "steps": {
+      "welcome": {
+        "title": "Welcome!",
+        "description": "We'll help you get started with managing your finances.",
+        "features": {
+          "track": "Track your income and expenses",
+          "budget": "Create and manage budgets",
+          "plan": "Plan for the future",
+          "insights": "Get AI-powered insights"
+        }
+      },
+      "import": {
+        "title": "Import Your Data",
+        "description": "Import existing transactions from your bank or a CSV file.",
+        "skipLabel": "Skip for now",
+        "importLabel": "Import Transactions"
+      },
+      "categories": {
+        "title": "Set Up Categories",
+        "description": "Customize your spending categories or use our defaults.",
+        "useDefaults": "Use Default Categories",
+        "customize": "Customize Categories"
+      },
+      "budget": {
+        "title": "Create Your First Budget",
+        "description": "Set a monthly budget to start tracking your spending.",
+        "category": "Category",
+        "amount": "Monthly Budget Amount",
+        "skipLabel": "Skip for now",
+        "createLabel": "Create Budget"
+      },
+      "done": {
+        "title": "You're All Set!",
+        "description": "Your account is ready. Start tracking your finances today.",
+        "goToDashboard": "Go to Dashboard"
+      }
+    },
+    "progress": "Step {current} of {total}",
+    "next": "Next",
+    "previous": "Previous",
+    "skip": "Skip"
+  },
+  "morePage": {
+    "title": "More",
+    "sections": {
+      "financial": "Financial Tracking",
+      "planning": "Planning & Goals",
+      "analysis": "Analysis & Reports",
+      "tools": "Tools",
+      "settings": "Settings & Account"
+    },
+    "items": {
+      "subscriptions": "Subscriptions",
+      "loans": "Loans",
+      "investments": "Investments",
+      "properties": "Properties",
+      "netWorth": "Net Worth",
+      "futurePlans": "Future Plans",
+      "retirement": "Retirement",
+      "paycheck": "Paycheck Planner",
+      "debtPayoff": "Debt Payoff",
+      "scenarios": "Scenarios",
+      "events": "Event Budgets",
+      "reports": "Reports",
+      "insights": "AI Insights",
+      "calculators": "Calculators",
+      "splits": "Expense Splits",
+      "review": "Transaction Review",
+      "fridayReview": "Friday Review",
+      "ocr": "Receipt Scanner",
+      "import": "Import",
+      "export": "Export",
+      "settings": "Settings",
+      "merchantRules": "Merchant Rules",
+      "chat": "AI Chat"
+    }
+  }
+}

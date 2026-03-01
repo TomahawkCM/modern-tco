@@ -7,6 +7,7 @@
  * Priority: HIGH - Run before every deployment
  */
 
+import { vi } from "vitest";
 import {
   render as _render,
   screen as _screen,
@@ -16,11 +17,11 @@ import {
 import "@testing-library/jest-dom";
 
 // Mock Next.js router
-jest.mock("next/navigation", () => ({
+vi.mock("next/navigation", () => ({
   useRouter: () => ({
-    push: jest.fn(),
-    replace: jest.fn(),
-    prefetch: jest.fn(),
+    push: vi.fn(),
+    replace: vi.fn(),
+    prefetch: vi.fn(),
   }),
   usePathname: () => "/",
   useSearchParams: () => new URLSearchParams(),

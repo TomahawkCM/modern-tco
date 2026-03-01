@@ -7,14 +7,15 @@
  * Priority: MEDIUM - Expands test coverage beyond critical components
  */
 
+import { vi } from "vitest";
 import "@testing-library/jest-dom";
 
 // Mock Next.js router
-jest.mock("next/navigation", () => ({
+vi.mock("next/navigation", () => ({
   useRouter: () => ({
-    push: jest.fn(),
-    replace: jest.fn(),
-    prefetch: jest.fn(),
+    push: vi.fn(),
+    replace: vi.fn(),
+    prefetch: vi.fn(),
   }),
   usePathname: () => "/",
   useSearchParams: () => new URLSearchParams(),
@@ -23,7 +24,7 @@ jest.mock("next/navigation", () => ({
 describe("UI Component Tests", () => {
   describe("Button Component Behavior", () => {
     test("should handle button click events", () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       const button = document.createElement("button");
       button.onclick = handleClick;
       button.click();
@@ -51,8 +52,8 @@ describe("UI Component Tests", () => {
     });
 
     test("should support keyboard navigation (Enter key)", () => {
-      const handleKeyPress = jest.fn();
-      const event = { key: "Enter", preventDefault: jest.fn() };
+      const handleKeyPress = vi.fn();
+      const event = { key: "Enter", preventDefault: vi.fn() };
 
       if (event.key === "Enter") {
         handleKeyPress();

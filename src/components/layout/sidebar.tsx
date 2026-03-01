@@ -194,6 +194,17 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
       icon: Wallet,
       href: "/budget-app",
     },
+    ...(process.env.NEXT_PUBLIC_ONLINE_BUDGET_URL
+      ? [
+          {
+            id: "online-budget",
+            label: "Online Budget",
+            icon: Wallet,
+            badge: "ONLINE",
+            href: process.env.NEXT_PUBLIC_ONLINE_BUDGET_URL,
+          },
+        ]
+      : []),
     ...(isAdmin
       ? [
           {
@@ -250,7 +261,11 @@ export function Sidebar({ isOpen = true, onClose, className }: SidebarProps) {
     } else {
       setActiveItem(item.id);
       if (item.href) {
-        void router.push(item.href);
+        if (item.href.startsWith("http")) {
+          window.open(item.href, "_blank");
+        } else {
+          void router.push(item.href);
+        }
       }
       if (onClose) onClose();
     }

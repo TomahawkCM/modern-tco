@@ -7,7 +7,7 @@
  * Two modes: "when will I reach my goal" or "how much should I save"
  */
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, lazy, Suspense } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import { ArrowLeft, Target, Calendar, DollarSign, TrendingUp, Sparkles } from "lucide-react";
@@ -19,6 +19,79 @@ import type { SupportedLocale } from "@/i18n/config";
 import type { SavingsGoalMode } from "@/lib/calculators/types";
 import { LOCALE_METADATA } from "@/i18n/config";
 import { cn } from "@/lib/utils";
+
+const SavingsGrowthChart = lazy(() =>
+  import("recharts").then((mod) => {
+    const Chart = ({
+      data,
+      locale,
+      currency,
+    }: {
+      data: { month: number; contributions: number; interest: number }[];
+      locale: SupportedLocale;
+      currency: string;
+    }) => {
+      const { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
+        mod;
+      return (
+        <ResponsiveContainer width="100%" height={300}>
+          <AreaChart data={data}>
+            <defs>
+              <linearGradient id="savContrib" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.4} />
+                <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
+              </linearGradient>
+              <linearGradient id="savInterest" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#10b981" stopOpacity={0.4} />
+                <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
+            <XAxis dataKey="month" stroke="#64748b" tick={{ fontSize: 12 }} />
+            <YAxis
+              stroke="#64748b"
+              tick={{ fontSize: 12 }}
+              tickFormatter={(val: number) =>
+                formatCurrency(val, currency, locale).replace(/\.00$/, "")
+              }
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#1e293b",
+                border: "1px solid #475569",
+                borderRadius: "8px",
+              }}
+              labelStyle={{ color: "#94a3b8" }}
+              formatter={(value: number, name: string) => [
+                formatCurrency(value, currency, locale),
+                name,
+              ]}
+              labelFormatter={(label: number) => `Month ${label}`}
+            />
+            <Legend />
+            <Area
+              type="monotone"
+              dataKey="contributions"
+              stackId="1"
+              stroke="#3b82f6"
+              fill="url(#savContrib)"
+              name="Contributions"
+            />
+            <Area
+              type="monotone"
+              dataKey="interest"
+              stackId="1"
+              stroke="#10b981"
+              fill="url(#savInterest)"
+              name="Interest"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      );
+    };
+    return { default: Chart };
+  })
+);
 
 export default function SavingsGoalCalculatorPage() {
   const t = useTranslations("calculators");
@@ -284,6 +357,32 @@ export default function SavingsGoalCalculatorPage() {
           )}
         </div>
       </div>
+
+      {/* Growth Chart */}
+      {result.projections.length > 2 && (
+        <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
+          <h3 className="mb-4 text-lg font-semibold text-white">
+            {t("savingsGoal.timelineTitle")}
+          </h3>
+          <Suspense
+            fallback={
+              <div className="flex h-[300px] animate-pulse items-center justify-center rounded-lg bg-slate-800">
+                <span className="text-sm text-slate-500">Loading chart...</span>
+              </div>
+            }
+          >
+            <SavingsGrowthChart
+              data={result.projections.slice(1).map((p) => ({
+                month: p.month,
+                contributions: p.contributions,
+                interest: p.interest,
+              }))}
+              locale={locale}
+              currency={currency}
+            />
+          </Suspense>
+        </div>
+      )}
     </div>
   );
 }

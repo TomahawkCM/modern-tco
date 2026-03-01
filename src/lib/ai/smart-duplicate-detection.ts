@@ -70,7 +70,7 @@ interface AIMatchResponse {
  * Clean transaction description for privacy
  * Removes sensitive information before sending to API
  */
-function cleanDescription(description: string): string {
+export function cleanDescription(description: string): string {
   let cleaned = description.trim();
 
   // Remove account numbers (patterns like XXXX-1234, 1234567890)

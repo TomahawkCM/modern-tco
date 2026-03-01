@@ -1,8 +1,9 @@
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import type { Question } from "@/lib/questionBank";
 
-const mockFrom = jest.fn();
+const mockFrom = vi.fn();
 
-jest.mock("@/lib/supabase", () => ({
+vi.mock("@/lib/supabase", () => ({
   __esModule: true,
   supabase: {
     from: mockFrom,
@@ -16,10 +17,10 @@ type SupabaseResult = {
 
 function createQueryBuilder(result: SupabaseResult) {
   return {
-    select: jest.fn().mockReturnThis(),
-    limit: jest.fn().mockReturnThis(),
-    eq: jest.fn().mockReturnThis(),
-    contains: jest.fn().mockReturnThis(),
+    select: vi.fn().mockReturnThis(),
+    limit: vi.fn().mockReturnThis(),
+    eq: vi.fn().mockReturnThis(),
+    contains: vi.fn().mockReturnThis(),
     then<T>(onFulfilled: (value: SupabaseResult) => T, onRejected?: (reason: unknown) => T) {
       return Promise.resolve(result).then(onFulfilled, onRejected);
     },
@@ -129,7 +130,7 @@ describe("getReadOnlyQuestions", () => {
   });
 
   it("returns an empty array and logs when Supabase returns an error", async () => {
-    const warnSpy = jest.spyOn(console, "warn").mockImplementation(() => undefined);
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => undefined);
 
     const builder = createQueryBuilder({ data: null, error: new Error("boom") });
     mockFrom.mockReturnValue(builder);

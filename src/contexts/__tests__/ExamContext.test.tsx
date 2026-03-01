@@ -2,51 +2,65 @@
  * ExamContext Unit Tests
  *
  * Comprehensive test suite for ExamContext state management
- * Target: 100% coverage for critical exam workflow
+ * Aligned with actual ExamContext API (reducer-based, ExamMode enum, string IDs)
  */
 
 import React from "react";
+import { vi, describe, it, expect, beforeEach } from "vitest";
 import { renderHook, act, waitFor } from "@testing-library/react";
 import { ExamProvider, useExam } from "../ExamContext";
-import type { Question } from "@/types";
+import { ExamMode } from "@/types/exam";
+import type { Question } from "@/types/exam";
 
 // Mock dependencies
-const mockUseAuth = jest.fn();
-const mockUseIncorrectAnswers = jest.fn();
-const mockUseDatabase = jest.fn();
+const mockUseAuth = vi.fn();
+const mockUseIncorrectAnswers = vi.fn();
+const mockUseDatabase = vi.fn();
 
-jest.mock("@/contexts/AuthContext", () => ({
+vi.mock("@/contexts/AuthContext", () => ({
   useAuth: () => mockUseAuth(),
 }));
 
-jest.mock("@/contexts/IncorrectAnswersContext", () => ({
+vi.mock("@/contexts/IncorrectAnswersContext", () => ({
   useIncorrectAnswers: () => mockUseIncorrectAnswers(),
 }));
 
-jest.mock("@/hooks/useDatabase", () => ({
+vi.mock("@/hooks/useDatabase", () => ({
   useDatabase: (...args: unknown[]) => mockUseDatabase(...args),
 }));
 
-jest.mock("@/lib/supabase/client", () => ({
+vi.mock("@/lib/supabase/client", () => ({
   supabase: {
-    from: jest.fn(() => ({
-      select: jest.fn().mockResolvedValue({ data: [], error: null }),
-      insert: jest.fn().mockResolvedValue({ data: [], error: null }),
-      update: jest.fn().mockResolvedValue({ data: [], error: null }),
+    from: vi.fn(() => ({
+      select: vi.fn().mockResolvedValue({ data: [], error: null }),
+      insert: vi.fn().mockResolvedValue({ data: [], error: null }),
+      update: vi.fn().mockResolvedValue({ data: [], error: null }),
     })),
   },
 }));
 
+vi.mock("@/lib/examLogic", () => ({
+  getAllAvailableQuestions: () => [],
+  getDatabaseWeightedQuestions: vi.fn(),
+  getMockExamQuestions: vi.fn(),
+  getPracticeQuestions: vi.fn(),
+}));
+
 // Test data factory
 const createMockQuestion = (overrides: Partial<Question> = {}): Question => ({
-  id: `q-${Math.random()}`,
-  domain: "Asking Questions",
+  id: `q-${Math.random().toString(36).slice(2)}`,
+  domain: "Asking Questions" as any,
   question: "What is Tanium?",
-  options: ["Option A", "Option B", "Option C", "Option D"],
-  correctAnswer: 0,
+  choices: [
+    { id: "0", text: "Option A" },
+    { id: "1", text: "Option B" },
+    { id: "2", text: "Option C" },
+    { id: "3", text: "Option D" },
+  ],
+  correctAnswerId: "0",
+  difficulty: "medium" as any,
+  category: "conceptual" as any,
   explanation: "Test explanation",
-  difficulty: "medium",
-  learningObjective: "test-objective",
   ...overrides,
 });
 
@@ -57,30 +71,30 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 
 describe("ExamContext", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
 
     mockUseAuth.mockReturnValue({
       user: null,
       session: null,
       loading: false,
       error: null,
-      signIn: jest.fn(),
-      signOut: jest.fn(),
-      signUp: jest.fn(),
-      resetPassword: jest.fn(),
-      updateProfile: jest.fn(),
+      signIn: vi.fn(),
+      signOut: vi.fn(),
+      signUp: vi.fn(),
+      resetPassword: vi.fn(),
+      updateProfile: vi.fn(),
     });
 
     mockUseIncorrectAnswers.mockReturnValue({
-      addIncorrectAnswer: jest.fn(),
-      clearIncorrectAnswers: jest.fn(),
+      addIncorrectAnswer: vi.fn(),
+      clearIncorrectAnswers: vi.fn(),
     });
 
     mockUseDatabase.mockReturnValue({
-      insertExamSession: jest.fn().mockResolvedValue({ id: "db-session-1" }),
-      updateExamSession: jest.fn().mockResolvedValue({}),
-      insertUserProgress: jest.fn().mockResolvedValue({}),
-      getExamSessions: jest.fn().mockResolvedValue([]),
+      insertExamSession: vi.fn().mockResolvedValue({ id: "db-session-1" }),
+      updateExamSession: vi.fn().mockResolvedValue({}),
+      insertUserProgress: vi.fn().mockResolvedValue({}),
+      getExamSessions: vi.fn().mockResolvedValue([]),
     });
   });
 
@@ -88,16 +102,9 @@ describe("ExamContext", () => {
     it("should provide default exam state", () => {
       const { result } = renderHook(() => useExam(), { wrapper });
 
-      expect(result.current.examState).toEqual({
-        mode: null,
-        questions: [],
-        currentIndex: 0,
-        answers: {},
-        startTime: null,
-        endTime: null,
-        completed: false,
-        timeRemaining: 0,
-      });
+      expect(result.current.state.currentSession).toBeNull();
+      expect(result.current.state.isLoading).toBe(false);
+      expect(result.current.state.error).toBeNull();
     });
 
     it("should provide all required context methods", () => {
@@ -105,111 +112,110 @@ describe("ExamContext", () => {
 
       expect(result.current.startExam).toBeDefined();
       expect(result.current.answerQuestion).toBeDefined();
-      expect(result.current.submitExam).toBeDefined();
+      expect(result.current.finishExam).toBeDefined();
       expect(result.current.nextQuestion).toBeDefined();
       expect(result.current.previousQuestion).toBeDefined();
-      expect(result.current.flagQuestion).toBeDefined();
-      expect(result.current.calculateScore).toBeDefined();
+      expect(result.current.toggleMarkForReview).toBeDefined();
+      expect(result.current.getScore).toBeDefined();
+      expect(result.current.resetExam).toBeDefined();
     });
   });
 
   describe("startExam", () => {
-    it("should initialize exam with practice mode", () => {
+    it("should initialize exam with practice mode", async () => {
+      vi.useFakeTimers();
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [createMockQuestion(), createMockQuestion()];
 
-      act(() => {
-        result.current.startExam({
-          mode: "practice",
-          questions,
-          timeLimit: 3600000, // 60 minutes
-        });
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, questions);
       });
 
-      expect(result.current.examState.mode).toBe("practice");
-      expect(result.current.examState.questions).toHaveLength(2);
-      expect(result.current.examState.currentIndex).toBe(0);
-      expect(result.current.examState.startTime).toBeTruthy();
-      expect(result.current.examState.completed).toBe(false);
+      // startExam dispatches START_EXAM after a 500ms setTimeout
+      act(() => {
+        vi.advanceTimersByTime(600);
+      });
+
+      expect(result.current.state.currentSession).not.toBeNull();
+      expect(result.current.state.currentSession?.mode).toBe(ExamMode.PRACTICE);
+      expect(result.current.state.currentSession?.questions).toHaveLength(2);
+      expect(result.current.state.currentSession?.currentIndex).toBe(0);
+      expect(result.current.state.currentSession?.completed).toBe(false);
+
+      vi.useRealTimers();
     });
 
-    it("should initialize exam with mock mode and timer", () => {
+    it("should initialize exam with mock mode", async () => {
+      vi.useFakeTimers();
       const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = Array.from({ length: 75 }, (_, i) => createMockQuestion({ id: `q-${i}` }));
+      const questions = Array.from({ length: 75 }, (_, i) =>
+        createMockQuestion({ id: `q-${i}` })
+      );
 
-      act(() => {
-        result.current.startExam({
-          mode: "mock",
-          questions,
-          timeLimit: 6300000, // 105 minutes
-        });
+      await act(async () => {
+        result.current.startExam(ExamMode.MOCK, questions);
       });
 
-      expect(result.current.examState.mode).toBe("mock");
-      expect(result.current.examState.questions).toHaveLength(75);
-      expect(result.current.examState.timeRemaining).toBe(6300000);
-    });
-
-    it("should reset previous exam state", () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions1 = [createMockQuestion({ id: "q1" })];
-      const questions2 = [createMockQuestion({ id: "q2" })];
-
-      // Start first exam
       act(() => {
-        result.current.startExam({ mode: "practice", questions: questions1 });
+        vi.advanceTimersByTime(600);
       });
 
-      // Answer a question
-      act(() => {
-        result.current.answerQuestion(0, 0);
-      });
+      expect(result.current.state.currentSession?.mode).toBe(ExamMode.MOCK);
+      expect(result.current.state.currentSession?.questions).toHaveLength(75);
 
-      expect(result.current.examState.answers).toHaveProperty("0");
-
-      // Start second exam - should reset
-      act(() => {
-        result.current.startExam({ mode: "mock", questions: questions2 });
-      });
-
-      expect(result.current.examState.answers).toEqual({});
-      expect(result.current.examState.currentIndex).toBe(0);
-      expect(result.current.examState.questions[0].id).toBe("q2");
+      vi.useRealTimers();
     });
   });
 
   describe("answerQuestion", () => {
-    it("should record answer for current question", () => {
+    it("should record answer for a question", async () => {
+      vi.useFakeTimers();
       const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [createMockQuestion()];
+      const q = createMockQuestion({ id: "q1" });
 
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, [q]);
+      });
       act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.answerQuestion(0, 2);
+        vi.advanceTimersByTime(600);
       });
 
-      expect(result.current.examState.answers[0]).toBe(2);
+      act(() => {
+        result.current.answerQuestion("q1", "2");
+      });
+
+      expect(result.current.state.currentSession?.answers["q1"]).toBe("2");
+
+      vi.useRealTimers();
     });
 
-    it("should allow changing answer", () => {
+    it("should allow changing answer", async () => {
+      vi.useFakeTimers();
       const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [createMockQuestion()];
+      const q = createMockQuestion({ id: "q1" });
 
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, [q]);
+      });
       act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.answerQuestion(0, 1);
+        vi.advanceTimersByTime(600);
       });
 
-      expect(result.current.examState.answers[0]).toBe(1);
+      act(() => {
+        result.current.answerQuestion("q1", "1");
+      });
+      expect(result.current.state.currentSession?.answers["q1"]).toBe("1");
 
       act(() => {
-        result.current.answerQuestion(0, 3);
+        result.current.answerQuestion("q1", "3");
       });
+      expect(result.current.state.currentSession?.answers["q1"]).toBe("3");
 
-      expect(result.current.examState.answers[0]).toBe(3);
+      vi.useRealTimers();
     });
 
-    it("should record answers for multiple questions", () => {
+    it("should record answers for multiple questions", async () => {
+      vi.useFakeTimers();
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [
         createMockQuestion({ id: "q1" }),
@@ -217,350 +223,312 @@ describe("ExamContext", () => {
         createMockQuestion({ id: "q3" }),
       ];
 
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, questions);
+      });
       act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.answerQuestion(0, 0);
-        result.current.answerQuestion(1, 1);
-        result.current.answerQuestion(2, 2);
+        vi.advanceTimersByTime(600);
       });
 
-      expect(result.current.examState.answers).toEqual({
-        0: 0,
-        1: 1,
-        2: 2,
+      act(() => {
+        result.current.answerQuestion("q1", "0");
+        result.current.answerQuestion("q2", "1");
+        result.current.answerQuestion("q3", "2");
       });
+
+      expect(result.current.state.currentSession?.answers).toEqual({
+        q1: "0",
+        q2: "1",
+        q3: "2",
+      });
+
+      vi.useRealTimers();
     });
   });
 
   describe("Navigation", () => {
-    it("should navigate to next question", () => {
+    it("should navigate to next question", async () => {
+      vi.useFakeTimers();
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [createMockQuestion(), createMockQuestion()];
-
-      act(() => {
-        result.current.startExam({ mode: "practice", questions });
-      });
-
-      expect(result.current.examState.currentIndex).toBe(0);
-
-      act(() => {
-        result.current.nextQuestion();
-      });
-
-      expect(result.current.examState.currentIndex).toBe(1);
-    });
-
-    it("should not navigate past last question", () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [createMockQuestion()];
-
-      act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.nextQuestion();
-      });
-
-      expect(result.current.examState.currentIndex).toBe(0);
-    });
-
-    it("should navigate to previous question", () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [createMockQuestion(), createMockQuestion()];
-
-      act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.nextQuestion();
-      });
-
-      expect(result.current.examState.currentIndex).toBe(1);
-
-      act(() => {
-        result.current.previousQuestion();
-      });
-
-      expect(result.current.examState.currentIndex).toBe(0);
-    });
-
-    it("should not navigate before first question", () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [createMockQuestion()];
-
-      act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.previousQuestion();
-      });
-
-      expect(result.current.examState.currentIndex).toBe(0);
-    });
-  });
-
-  describe("Question Flagging", () => {
-    it("should flag question for review", () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [createMockQuestion()];
-
-      act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.flagQuestion(0, true);
-      });
-
-      expect(result.current.examState.flaggedQuestions).toContain(0);
-    });
-
-    it("should unflag question", () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [createMockQuestion()];
-
-      act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.flagQuestion(0, true);
-        result.current.flagQuestion(0, false);
-      });
-
-      expect(result.current.examState.flaggedQuestions).not.toContain(0);
-    });
-  });
-
-  describe("submitExam", () => {
-    it("should submit exam and mark as completed", async () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [
-        createMockQuestion({ correctAnswer: 0 }),
-        createMockQuestion({ correctAnswer: 1 }),
-      ];
-
-      act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.answerQuestion(0, 0); // Correct
-        result.current.answerQuestion(1, 2); // Incorrect
-      });
 
       await act(async () => {
-        await result.current.submitExam();
+        result.current.startExam(ExamMode.PRACTICE, questions);
+      });
+      act(() => {
+        vi.advanceTimersByTime(600);
       });
 
-      expect(result.current.examState.completed).toBe(true);
-      expect(result.current.examState.endTime).toBeTruthy();
+      expect(result.current.state.currentSession?.currentIndex).toBe(0);
+
+      act(() => {
+        result.current.nextQuestion();
+      });
+
+      expect(result.current.state.currentSession?.currentIndex).toBe(1);
+
+      vi.useRealTimers();
+    });
+
+    it("should not navigate past last question", async () => {
+      vi.useFakeTimers();
+      const { result } = renderHook(() => useExam(), { wrapper });
+      const questions = [createMockQuestion()];
+
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, questions);
+      });
+      act(() => {
+        vi.advanceTimersByTime(600);
+      });
+
+      act(() => {
+        result.current.nextQuestion();
+      });
+
+      expect(result.current.state.currentSession?.currentIndex).toBe(0);
+
+      vi.useRealTimers();
+    });
+
+    it("should navigate to previous question", async () => {
+      vi.useFakeTimers();
+      const { result } = renderHook(() => useExam(), { wrapper });
+      const questions = [createMockQuestion(), createMockQuestion()];
+
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, questions);
+      });
+      act(() => {
+        vi.advanceTimersByTime(600);
+      });
+
+      act(() => {
+        result.current.nextQuestion();
+      });
+      expect(result.current.state.currentSession?.currentIndex).toBe(1);
+
+      act(() => {
+        result.current.previousQuestion();
+      });
+      expect(result.current.state.currentSession?.currentIndex).toBe(0);
+
+      vi.useRealTimers();
+    });
+
+    it("should not navigate before first question", async () => {
+      vi.useFakeTimers();
+      const { result } = renderHook(() => useExam(), { wrapper });
+      const questions = [createMockQuestion()];
+
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, questions);
+      });
+      act(() => {
+        vi.advanceTimersByTime(600);
+      });
+
+      act(() => {
+        result.current.previousQuestion();
+      });
+
+      expect(result.current.state.currentSession?.currentIndex).toBe(0);
+
+      vi.useRealTimers();
+    });
+  });
+
+  describe("Mark for Review", () => {
+    it("should mark question for review", async () => {
+      vi.useFakeTimers();
+      const { result } = renderHook(() => useExam(), { wrapper });
+      const q = createMockQuestion({ id: "q1" });
+
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, [q]);
+      });
+      act(() => {
+        vi.advanceTimersByTime(600);
+      });
+
+      act(() => {
+        result.current.toggleMarkForReview("q1");
+      });
+
+      expect(result.current.state.currentSession?.markedForReview).toContain("q1");
+
+      vi.useRealTimers();
+    });
+
+    it("should unmark question for review", async () => {
+      vi.useFakeTimers();
+      const { result } = renderHook(() => useExam(), { wrapper });
+      const q = createMockQuestion({ id: "q1" });
+
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, [q]);
+      });
+      act(() => {
+        vi.advanceTimersByTime(600);
+      });
+
+      act(() => {
+        result.current.toggleMarkForReview("q1");
+      });
+      expect(result.current.state.currentSession?.markedForReview).toContain("q1");
+
+      act(() => {
+        result.current.toggleMarkForReview("q1");
+      });
+      expect(result.current.state.currentSession?.markedForReview).not.toContain("q1");
+
+      vi.useRealTimers();
+    });
+  });
+
+  describe("finishExam", () => {
+    it("should finish exam and mark as completed", async () => {
+      vi.useFakeTimers();
+      const { result } = renderHook(() => useExam(), { wrapper });
+      const questions = [
+        createMockQuestion({ id: "q1", correctAnswerId: "0" }),
+        createMockQuestion({ id: "q2", correctAnswerId: "1" }),
+      ];
+
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, questions);
+      });
+      act(() => {
+        vi.advanceTimersByTime(600);
+      });
+
+      act(() => {
+        result.current.answerQuestion("q1", "0"); // Correct
+        result.current.answerQuestion("q2", "2"); // Incorrect
+      });
+
+      act(() => {
+        result.current.finishExam();
+      });
+
+      expect(result.current.state.currentSession?.completed).toBe(true);
+      expect(result.current.state.currentSession?.endTime).toBeTruthy();
+      expect(result.current.state.currentSession?.score).toBe(50); // 1/2
+
+      vi.useRealTimers();
     });
 
     it("should calculate correct score", async () => {
+      vi.useFakeTimers();
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [
-        createMockQuestion({ id: "q1", correctAnswer: 0 }),
-        createMockQuestion({ id: "q2", correctAnswer: 1 }),
-        createMockQuestion({ id: "q3", correctAnswer: 2 }),
-        createMockQuestion({ id: "q4", correctAnswer: 3 }),
+        createMockQuestion({ id: "q1", correctAnswerId: "0" }),
+        createMockQuestion({ id: "q2", correctAnswerId: "1" }),
+        createMockQuestion({ id: "q3", correctAnswerId: "2" }),
+        createMockQuestion({ id: "q4", correctAnswerId: "3" }),
       ];
 
-      act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.answerQuestion(0, 0); // Correct
-        result.current.answerQuestion(1, 1); // Correct
-        result.current.answerQuestion(2, 0); // Incorrect
-        result.current.answerQuestion(3, 3); // Correct
-      });
-
       await act(async () => {
-        await result.current.submitExam();
+        result.current.startExam(ExamMode.PRACTICE, questions);
       });
-
-      const score = result.current.calculateScore();
-      expect(score.correct).toBe(3);
-      expect(score.total).toBe(4);
-      expect(score.percentage).toBe(75);
-    });
-
-    it("should persist exam results to database", async () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [createMockQuestion()];
+      act(() => {
+        vi.advanceTimersByTime(600);
+      });
 
       act(() => {
-        result.current.startExam({ mode: "mock", questions });
-        result.current.answerQuestion(0, 0);
+        result.current.answerQuestion("q1", "0"); // Correct
+        result.current.answerQuestion("q2", "1"); // Correct
+        result.current.answerQuestion("q3", "0"); // Incorrect
+        result.current.answerQuestion("q4", "3"); // Correct
       });
 
-      await act(async () => {
-        await result.current.submitExam();
+      act(() => {
+        result.current.finishExam();
       });
 
-      // Verify database call would be made
-      // (mocked in real implementation)
-      expect(result.current.examState.completed).toBe(true);
+      expect(result.current.state.currentSession?.score).toBe(75); // 3/4
+      expect(result.current.state.currentSession?.completed).toBe(true);
+
+      vi.useRealTimers();
     });
   });
 
-  describe("Score Calculation", () => {
-    it("should calculate score with all correct answers", () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [
-        createMockQuestion({ correctAnswer: 0 }),
-        createMockQuestion({ correctAnswer: 1 }),
-      ];
-
-      act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.answerQuestion(0, 0);
-        result.current.answerQuestion(1, 1);
-      });
-
-      const score = result.current.calculateScore();
-      expect(score.percentage).toBe(100);
-    });
-
-    it("should calculate score with all incorrect answers", () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [
-        createMockQuestion({ correctAnswer: 0 }),
-        createMockQuestion({ correctAnswer: 1 }),
-      ];
-
-      act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.answerQuestion(0, 2);
-        result.current.answerQuestion(1, 3);
-      });
-
-      const score = result.current.calculateScore();
-      expect(score.percentage).toBe(0);
-    });
-
-    it("should calculate score with unanswered questions", () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [
-        createMockQuestion({ correctAnswer: 0 }),
-        createMockQuestion({ correctAnswer: 1 }),
-        createMockQuestion({ correctAnswer: 2 }),
-      ];
-
-      act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.answerQuestion(0, 0); // Correct
-        // Question 1 and 2 unanswered
-      });
-
-      const score = result.current.calculateScore();
-      expect(score.correct).toBe(1);
-      expect(score.total).toBe(3);
-      expect(score.unanswered).toBe(2);
-    });
-
-    it("should calculate domain breakdown", () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [
-        createMockQuestion({ domain: "Asking Questions", correctAnswer: 0 }),
-        createMockQuestion({ domain: "Asking Questions", correctAnswer: 1 }),
-        createMockQuestion({ domain: "Refining Questions", correctAnswer: 0 }),
-      ];
-
-      act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.answerQuestion(0, 0); // Correct
-        result.current.answerQuestion(1, 2); // Incorrect
-        result.current.answerQuestion(2, 0); // Correct
-      });
-
-      const score = result.current.calculateScore();
-      expect(score.byDomain).toEqual({
-        "Asking Questions": { correct: 1, total: 2, percentage: 50 },
-        "Refining Questions": { correct: 1, total: 1, percentage: 100 },
-      });
-    });
-  });
-
-  describe("Timer Management", () => {
-    it("should track time remaining", () => {
-      jest.useFakeTimers();
+  describe("resetExam", () => {
+    it("should reset exam state", async () => {
+      vi.useFakeTimers();
       const { result } = renderHook(() => useExam(), { wrapper });
       const questions = [createMockQuestion()];
 
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, questions);
+      });
       act(() => {
-        result.current.startExam({
-          mode: "mock",
-          questions,
-          timeLimit: 60000, // 1 minute
-        });
+        vi.advanceTimersByTime(600);
       });
 
-      expect(result.current.examState.timeRemaining).toBe(60000);
+      expect(result.current.state.currentSession).not.toBeNull();
 
       act(() => {
-        jest.advanceTimersByTime(30000); // 30 seconds
+        result.current.resetExam();
       });
 
-      // Timer should be running (tested via interval in actual implementation)
+      expect(result.current.state.currentSession).toBeNull();
 
-      jest.useRealTimers();
-    });
-
-    it("should auto-submit when time expires", async () => {
-      jest.useFakeTimers();
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [createMockQuestion()];
-
-      act(() => {
-        result.current.startExam({
-          mode: "mock",
-          questions,
-          timeLimit: 1000, // 1 second
-        });
-      });
-
-      act(() => {
-        jest.advanceTimersByTime(1000);
-      });
-
-      // Exam should auto-submit (tested in actual implementation)
-
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
   });
 
   describe("Edge Cases", () => {
-    it("should handle empty question list", () => {
+    it("should handle empty question list", async () => {
+      vi.useFakeTimers();
       const { result } = renderHook(() => useExam(), { wrapper });
 
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, []);
+      });
       act(() => {
-        result.current.startExam({ mode: "practice", questions: [] });
+        vi.advanceTimersByTime(600);
       });
 
-      expect(result.current.examState.questions).toHaveLength(0);
-      const score = result.current.calculateScore();
-      expect(score.percentage).toBe(0);
+      expect(result.current.state.currentSession?.questions).toHaveLength(0);
+
+      vi.useRealTimers();
     });
 
-    it("should handle null answers", () => {
+    it("should handle rapid state changes", async () => {
+      vi.useFakeTimers();
       const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [createMockQuestion()];
+      const questions = [
+        createMockQuestion({ id: "q1" }),
+        createMockQuestion({ id: "q2" }),
+      ];
 
+      await act(async () => {
+        result.current.startExam(ExamMode.PRACTICE, questions);
+      });
       act(() => {
-        result.current.startExam({ mode: "practice", questions });
+        vi.advanceTimersByTime(600);
       });
 
-      const score = result.current.calculateScore();
-      expect(score.unanswered).toBe(1);
-    });
-
-    it("should handle rapid state changes", () => {
-      const { result } = renderHook(() => useExam(), { wrapper });
-      const questions = [createMockQuestion(), createMockQuestion()];
-
       act(() => {
-        result.current.startExam({ mode: "practice", questions });
-        result.current.answerQuestion(0, 0);
+        result.current.answerQuestion("q1", "0");
         result.current.nextQuestion();
-        result.current.answerQuestion(1, 1);
+        result.current.answerQuestion("q2", "1");
         result.current.previousQuestion();
-        result.current.answerQuestion(0, 2);
+        result.current.answerQuestion("q1", "2");
       });
 
-      expect(result.current.examState.answers[0]).toBe(2);
-      expect(result.current.examState.answers[1]).toBe(1);
+      expect(result.current.state.currentSession?.answers["q1"]).toBe("2");
+      expect(result.current.state.currentSession?.answers["q2"]).toBe("1");
+
+      vi.useRealTimers();
     });
   });
 
   describe("Context Provider Error Handling", () => {
     it("should throw error when useExam is used outside provider", () => {
       // Suppress console.error for this test
-      const consoleSpy = jest.spyOn(console, "error").mockImplementation();
+      const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
       expect(() => {
         renderHook(() => useExam());
