@@ -4,57 +4,40 @@ Copy and paste this into Claude Code to continue implementation:
 
 ---
 
-using the best agents and skills.....Continue implementing the Online Budget App feature parity plan. Read the implementation guide at `Online Budget app/docs/FEATURE-PARITY-IMPLEMENTATION-GUIDE.md` to see what's done (`[x]`) and what's next (`[ ]`).
+Use your skills and agents to continue implementing the Online Budget App. Read the implementation guide at `Online Budget app/docs/FEATURE-PARITY-IMPLEMENTATION-GUIDE.md` — tasks marked `[x]` are done, tasks marked `[ ]` are next.
 
-**Phases 1, 2, 3, 4, and 5 are complete.** All i18n infrastructure (next-intl, 113 locales, 24+ namespaces), sidebar navigation (desktop + mobile), 15 calculator pages with chart infrastructure, all core CRUD pages (accounts, categories, settings, merchant rules, import wizard, export), all financial tracking pages (subscriptions, loans x4, investments, properties x2, net worth), and all reports + planning pages (reports with heatmap/trend/sankey/export, future plans, retirement planner, paycheck planner, debt payoff with avalanche/snowball strategies) are done. TypeScript compiles clean, 331/331 tests pass across 35 test files.
+## Status
 
-**Start Phase 6: Advanced Features.** This phase adds Scenarios, Events, Splits, Reviews, Friday Review, and OCR — 6 new pages total, 5+ new Supabase tables + a storage bucket, new server functions + API routes.
+**Phases 1–7 are complete.** The app has: i18n (next-intl, 113 locales, 36 namespaces), sidebar + mobile nav, 15 calculator pages, chart infrastructure (recharts lazy-loaded + spending heatmap, trend chart, Sankey diagram), core CRUD (accounts, categories, settings, merchant rules, import wizard, export), financial tracking (subscriptions, loans ×4, investments, properties ×2, net worth), reports + planning (reports with 4 chart types + PNG/SVG export, future plans, retirement planner, paycheck planner, debt payoff with avalanche/snowball), advanced features (scenarios, events, splits, review queue, friday review wizard, OCR receipt scanner with tesseract.js), and polish (Cmd+K command palette, mobile FAB, onboarding wizard, more page, forgot/reset password). TypeScript compiles clean, 331/331 tests pass across 35 test files.
 
-Follow these steps in order:
+## What to do
 
-1. **Task 6.1**: Create migration `supabase/migrations/011_advanced_tables.sql` with tables: `financial_scenarios`, `event_budgets`, `event_budget_items`, `split_persons`, `expense_splits`, `receipts`. Create Supabase Storage bucket `receipt-images`. Add RLS policies for all tables. Table schemas are in the "New Supabase Tables Master List" section of the implementation guide. Also add type definitions to `supabase/database.types.ts`.
+**Implement Phase 8 (Bank Sync — Online-Exclusive).** This is the final phase. Use subagent-driven development.
 
-2. **Task 6.2**: Create server function files:
-   - `server/scenarios.ts` — CRUD for `financial_scenarios`
-   - `server/events.ts` — CRUD for `event_budgets` + `event_budget_items`
-   - `server/splits.ts` — CRUD for `split_persons` + `expense_splits`
-   - `server/receipts.ts` — CRUD for `receipts`, upload to Supabase Storage
-   - Create Zod schemas in `server/schemas/` for all new entities
+### Phase 8: Bank Sync (4 tasks)
 
-3. **Task 6.3**: Add `scenarios`, `events`, `splits`, `review`, `weeklyRecap`, `ocr` namespaces to `i18n/messages/en.json`. Regenerate locale files.
+1. **Task 8.1** — Implement Plaid integration: complete `integrations/plaid/index.ts`, `npm install plaid`, API routes for link-token/exchange-token/sync, Plaid Link UI component, sync status component, `connected_banks` table migration
+2. **Task 8.2** — i18n: Add `bankSync` namespace to `en.json`, regenerate locales
+3. **Task 8.3** — Integrate into accounts page: "Connect Bank" button, sync status on connected accounts, manual sync trigger
+4. **Task 8.4** — Verify: all translated, `npm run check-types && npm test`, commit + push
 
-4. **Task 6.4**: Create 5 pages (server components with client companion components):
-   - `app/(app)/scenarios/page.tsx` — what-if financial scenario modeling
-   - `app/(app)/events/page.tsx` — event/project budget tracking, CRUD
-   - `app/(app)/splits/page.tsx` — expense splitting, balance summary
-   - `app/(app)/review/page.tsx` — uncategorized transaction review queue
-   - `app/(app)/friday-review/page.tsx` — weekly guided review wizard
+## Workflow
 
-5. **Task 6.5**: Create OCR page (lower priority):
-   - `npm install tesseract.js`
-   - `app/(app)/ocr/page.tsx` — receipt photo upload → client-side Tesseract OCR → create transaction, store receipt in Supabase Storage
+- Use `superpowers:subagent-driven-development` skill — one implementation agent per task, spec review after each
+- After each task completes, edit the implementation guide to mark items `[x]`
+- After phase verification passes, commit with `feat(budget): ...` and push
+- Follow existing patterns — read Phase 6/7 files as reference
+- All strings via `useTranslations()` / `getTranslations()`, amounts as `amount_minor` (integer cents), shadcn/zinc theme
 
-6. **Task 6.6**: Verify — `npm run check-types && npm test`, mark tasks done in the guide, commit and push
+## Key references
 
-**Key patterns to follow:**
-
-- Server components fetch from Supabase → pass data as props to client components
-- Client components call API routes via `fetch()` for mutations (create/update/delete)
-- All user-facing strings use `useTranslations()` / `getTranslations()` from `next-intl`
-- Financial amounts: `amount_minor` (integer cents) in DB/server, divide by 100 for display
-- Charts use lazy-loaded recharts from `components/charts/lazy-charts.tsx`
-- Use existing shadcn/ui components (Card, Button, Dialog, Input, Label, Select, Table, Badge, Progress, Tabs)
-- Online app uses shadcn/zinc theme, semantic Tailwind colors (`text-foreground`, `bg-card`, `border-border`)
-- Zod schemas for all API inputs in `server/schemas/`
-- RLS policies on all new tables (4 policies each: select_own, insert_own, update_own, delete_own)
-
-**Key reference files:**
-
-- Implementation guide: `Online Budget app/docs/FEATURE-PARITY-IMPLEMENTATION-GUIDE.md` (table schemas in "New Supabase Tables Master List")
-- Existing server functions pattern: `server/transactions.ts`, `server/planning.ts`, `server/reports.ts`
-- Existing API route pattern: `app/api/planning/future/route.ts`, `app/api/debt-payoff/route.ts`
-- Existing page pattern: `app/(app)/reports/page.tsx` (server) + `components/reports/reports-dashboard.tsx` (client)
-- Phase 5 pages for reference: `app/(app)/reports/`, `app/(app)/planning/`, `app/(app)/debt-payoff/`
-- Chart infrastructure: `components/charts/lazy-charts.tsx`
-
-After Phase 6, continue with Phase 7 (Polish + Onboarding) if time permits.
+| What                      | Where                                                                                    |
+| ------------------------- | ---------------------------------------------------------------------------------------- |
+| Full plan + table schemas | `Online Budget app/docs/FEATURE-PARITY-IMPLEMENTATION-GUIDE.md`                          |
+| Server function pattern   | `server/scenarios.ts`, `server/planning.ts`                                              |
+| API route pattern         | `app/api/scenarios/route.ts`, `app/api/events/route.ts`                                  |
+| Page pattern (server)     | `app/(app)/scenarios/page.tsx`, `app/(app)/events/page.tsx`                              |
+| Page pattern (client)     | `components/scenarios/scenarios-dashboard.tsx`, `components/events/events-dashboard.tsx` |
+| Zod schemas               | `server/schemas/scenarios.ts`, `server/schemas/events.ts`                                |
+| Existing Plaid stub       | `integrations/plaid/index.ts`                                                            |
+| Offline reference         | `src/app/budget-app/` (for UX reference)                                                 |
