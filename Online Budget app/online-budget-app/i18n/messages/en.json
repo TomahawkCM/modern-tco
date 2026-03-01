@@ -58,6 +58,8 @@
     "calculators": "Calculators",
     "futurePlans": "Future Plans",
     "retirement": "Retirement",
+    "paycheckPlanner": "Paycheck Planner",
+    "debtPayoff": "Debt Payoff",
     "scenarios": "Scenarios",
     "import": "Import",
     "settings": "Settings",
@@ -90,6 +92,10 @@
     "properties": "Properties",
     "netWorth": "Net Worth",
     "merchantRules": "Merchant Rules",
+    "futurePlans": "Future Plans",
+    "retirement": "Retirement",
+    "paycheckPlanner": "Paycheck Planner",
+    "debtPayoff": "Debt Payoff",
     "more": "More",
     "details": "Details"
   },
@@ -1104,5 +1110,226 @@
       "upcoming": "Upcoming (7 days)"
     },
     "costChart": "Cost Breakdown"
+  },
+  "reports": {
+    "title": "Reports",
+    "description": "Analyze your financial data with visual reports",
+    "timeRange": {
+      "label": "Time Range",
+      "month": "Month",
+      "quarter": "Quarter",
+      "year": "Year",
+      "all": "All Time",
+      "customRange": "Custom Range",
+      "from": "From",
+      "to": "To"
+    },
+    "sections": {
+      "spendingByCategory": "Spending by Category",
+      "incomeVsExpense": "Income vs Expenses",
+      "spendingHeatmap": "Spending Heatmap",
+      "moneyFlow": "Money Flow"
+    },
+    "stats": {
+      "totalIncome": "Total Income",
+      "totalExpenses": "Total Expenses",
+      "netSavings": "Net Savings",
+      "savingsRate": "Savings Rate",
+      "avgIncome": "Avg. Income",
+      "avgExpenses": "Avg. Expenses",
+      "avgPerDay": "Avg. per Day",
+      "busiestDay": "Busiest Day"
+    },
+    "categoryTable": {
+      "category": "Category",
+      "amount": "Amount",
+      "percentage": "Percentage"
+    },
+    "heatmap": {
+      "less": "Less",
+      "more": "More",
+      "spent": "{amount} spent"
+    },
+    "sankey": {
+      "source": "Source",
+      "target": "Target",
+      "value": "Value"
+    },
+    "display": {
+      "showChart": "Show Chart",
+      "showTable": "Show Table"
+    },
+    "export": {
+      "exportChart": "Export Chart",
+      "exportAsPng": "Export as PNG",
+      "exportAsSvg": "Export as SVG"
+    },
+    "days": {
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday",
+      "sunday": "Sunday"
+    },
+    "noData": "No data available",
+    "noDataDescription": "Add transactions to see your financial reports."
+  },
+  "planning": {
+    "title": "Planning",
+    "description": "Plan your financial future",
+    "future": {
+      "title": "Future Plans",
+      "description": "Track savings goals for future purchases",
+      "fields": {
+        "name": "Goal Name",
+        "namePlaceholder": "e.g., New Car, Vacation",
+        "targetAmount": "Target Amount",
+        "currentSavings": "Current Savings",
+        "monthlySavings": "Monthly Savings",
+        "targetDate": "Target Date",
+        "priority": "Priority",
+        "currency": "Currency"
+      },
+      "priorities": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      },
+      "stats": {
+        "totalGoals": "Total Goals",
+        "totalTarget": "Total Target",
+        "totalSaved": "Total Saved",
+        "onTrack": "On Track"
+      },
+      "progress": "Progress",
+      "percentComplete": "{percent}% complete",
+      "estimatedDate": "Estimated Completion",
+      "monthsToGoal": "{count, plural, =1 {1 month} other {# months}} to goal",
+      "addGoal": "Add Goal",
+      "editGoal": "Edit Goal",
+      "deleteGoal": "Delete Goal",
+      "confirmDelete": "Are you sure you want to delete this goal?",
+      "noGoals": "No goals yet",
+      "noGoalsDescription": "Create your first savings goal to start tracking."
+    },
+    "retirement": {
+      "title": "Retirement Planner",
+      "description": "Plan and project your retirement savings",
+      "fields": {
+        "currentAge": "Current Age",
+        "retirementAge": "Retirement Age",
+        "currentSavings": "Current Savings",
+        "monthlyContribution": "Monthly Contribution",
+        "expectedReturn": "Expected Annual Return (%)",
+        "currency": "Currency",
+        "notes": "Notes",
+        "notesPlaceholder": "Add any notes about your plan..."
+      },
+      "projection": {
+        "projectedSavings": "Projected Savings",
+        "yearsToRetirement": "Years to Retirement",
+        "monthlyIncome": "Projected Monthly Income",
+        "savingsAtRetirement": "Savings at Retirement"
+      },
+      "chart": {
+        "projectionChart": "Retirement Projection",
+        "age": "Age",
+        "savings": "Savings"
+      },
+      "addPlan": "Add Plan",
+      "editPlan": "Edit Plan",
+      "deletePlan": "Delete Plan",
+      "confirmDelete": "Are you sure you want to delete this plan?",
+      "noPlan": "No retirement plan yet",
+      "noPlanDescription": "Create a retirement plan to project your savings."
+    },
+    "paycheck": {
+      "title": "Paycheck Planner",
+      "description": "Allocate your paycheck to expenses and savings",
+      "fields": {
+        "scheduleType": "Pay Schedule",
+        "payAmount": "Pay Amount",
+        "nextPayDate": "Next Pay Date",
+        "currency": "Currency"
+      },
+      "scheduleTypes": {
+        "weekly": "Weekly",
+        "biweekly": "Bi-weekly",
+        "semimonthly": "Semi-monthly",
+        "monthly": "Monthly"
+      },
+      "allocations": {
+        "title": "Allocations",
+        "addAllocation": "Add Allocation",
+        "label": "Label",
+        "amount": "Amount",
+        "remaining": "Remaining",
+        "total": "Total Allocated",
+        "unallocated": "Unallocated"
+      },
+      "stats": {
+        "totalPay": "Total Pay",
+        "allocated": "Allocated",
+        "unallocatedAmount": "Unallocated"
+      },
+      "addPlan": "Add Plan",
+      "editPlan": "Edit Plan",
+      "deletePlan": "Delete Plan",
+      "confirmDelete": "Are you sure you want to delete this plan?",
+      "noPlan": "No paycheck plan yet",
+      "noPlanDescription": "Create a plan to allocate your paycheck."
+    }
+  },
+  "debtPayoff": {
+    "title": "Debt Payoff Planner",
+    "description": "Create a strategy to pay off your debts faster",
+    "strategy": {
+      "label": "Strategy",
+      "avalanche": "Avalanche",
+      "snowball": "Snowball",
+      "custom": "Custom",
+      "avalancheDescription": "Pay highest interest rate first to minimize total interest paid",
+      "snowballDescription": "Pay smallest balance first for quick wins and motivation"
+    },
+    "fields": {
+      "name": "Scenario Name",
+      "namePlaceholder": "e.g., Aggressive Payoff Plan",
+      "extraPayment": "Extra Monthly Payment",
+      "extraPaymentDescription": "Additional amount to put toward debt each month beyond minimums"
+    },
+    "stats": {
+      "totalDebt": "Total Debt",
+      "weightedAvgApr": "Weighted Avg. APR",
+      "monthsToPayoff": "Months to Payoff",
+      "totalInterest": "Total Interest",
+      "interestSaved": "Interest Saved"
+    },
+    "loans": {
+      "currentLoans": "Current Loans",
+      "loanName": "Loan Name",
+      "balance": "Balance",
+      "rate": "APR (%)",
+      "minimumPayment": "Minimum Payment",
+      "noLoans": "No loans to pay off"
+    },
+    "scenarios": {
+      "title": "Scenarios",
+      "saveScenario": "Save Scenario",
+      "loadScenario": "Load Scenario",
+      "deleteScenario": "Delete Scenario",
+      "confirmDelete": "Are you sure you want to delete this scenario?",
+      "noScenarios": "No saved scenarios",
+      "noScenariosDescription": "Save a scenario to compare different payoff strategies."
+    },
+    "chart": {
+      "payoffTimeline": "Payoff Timeline",
+      "month": "Month",
+      "remaining": "Remaining Balance",
+      "paid": "Amount Paid"
+    },
+    "addScenario": "Add Scenario",
+    "comparisons": "Compare Strategies"
   }
 }
