@@ -41,6 +41,22 @@ export function usePWA() {
             console.error("[PWA] Service Worker registration failed:", error);
           });
       });
+
+      // Listen for deployment-changed messages from the service worker.
+      // When a Next.js chunk 404s it means a new deployment shipped and the
+      // client is running stale JS. Reload once to pick up fresh assets.
+      navigator.serviceWorker.addEventListener("message", (event) => {
+        if (event.data?.type === "DEPLOYMENT_CHANGED") {
+          const key = "budget-app-last-deploy-reload";
+          const last = sessionStorage.getItem(key);
+          // Reload at most once per session to avoid loops
+          if (!last) {
+            console.log("[PWA] Deployment changed — reloading for fresh assets");
+            sessionStorage.setItem(key, Date.now().toString());
+            window.location.reload();
+          }
+        }
+      });
     }
 
     // Check if app is already installed

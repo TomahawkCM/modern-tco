@@ -10,8 +10,8 @@
  * - Background sync for transactions (future)
  */
 
-const CACHE_NAME = "budget-app-v5-prod";
-const RUNTIME_CACHE = "budget-app-runtime-v5-prod";
+const CACHE_NAME = "budget-app-v6-prod";
+const RUNTIME_CACHE = "budget-app-runtime-v6-prod";
 
 // App shell files to cache on install
 const APP_SHELL = [
@@ -110,7 +110,14 @@ self.addEventListener("fetch", (event) => {
 });
 
 /**
- * Determine if a request should use cache-first strategy
+ * Determine if a request should use cache-first strategy.
+ *
+ * IMPORTANT: Next.js build chunks (/_next/static/) and page routes MUST use
+ * network-first. Chunks are content-hashed per deployment — when a new deploy
+ * ships, old hashes no longer exist on the server and cache-first would either
+ * serve stale code or pass through a 404. Only truly immutable static assets
+ * (icons, images, manifest) should be cache-first.
+ *
  * @param {URL} url - The request URL
  * @returns {boolean}
  */
@@ -134,22 +141,17 @@ function shouldCacheFirst(url) {
     return false;
   }
 
-  // Cache-first for same-origin requests:
-  // - App pages (routes)
-  // - Static assets (icons, images)
-  // - Scripts and styles
-  // - Locale files (i18n JSON)
+  // Cache-first ONLY for truly immutable static assets
+  // Everything else (pages, JS chunks, CSS) uses network-first
   return (
-    url.pathname.startsWith("/budget-app") ||
     url.pathname.startsWith("/icons/") ||
-    url.pathname.startsWith("/_next/static/") ||
-    url.pathname.includes("/chunks/src_i18n_messages_") || // Locale chunks
-    url.pathname.endsWith(".js") ||
-    url.pathname.endsWith(".css") ||
-    url.pathname.endsWith(".json") || // Include all JSON files
+    url.pathname === "/manifest.json" ||
     url.pathname.endsWith(".png") ||
     url.pathname.endsWith(".jpg") ||
-    url.pathname.endsWith(".svg")
+    url.pathname.endsWith(".svg") ||
+    url.pathname.endsWith(".ico") ||
+    url.pathname.endsWith(".woff2") ||
+    url.pathname.endsWith(".woff")
   );
 }
 
@@ -222,9 +224,23 @@ async function cacheFirstStrategy(request) {
  * @returns {Promise<Response>}
  */
 async function networkFirstStrategy(request) {
+  const url = new URL(request.url);
+
   try {
     // Try network first
     const networkResponse = await fetch(request);
+
+    // If a Next.js chunk returns 404, it means the deployment changed
+    // and the client is requesting stale hashes. Notify client to reload.
+    if (networkResponse.status === 404 && url.pathname.startsWith("/_next/static/")) {
+      console.warn("[Service Worker] Chunk 404 — deployment changed, notifying clients to reload");
+      self.clients.matchAll({ type: "window" }).then((windowClients) => {
+        windowClients.forEach((client) => {
+          client.postMessage({ type: "DEPLOYMENT_CHANGED" });
+        });
+      });
+      return networkResponse;
+    }
 
     // Cache successful responses
     if (networkResponse && networkResponse.status === 200) {
