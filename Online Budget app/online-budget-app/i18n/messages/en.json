@@ -1368,7 +1368,8 @@
         "amount": "Amount",
         "remaining": "Remaining",
         "total": "Total Allocated",
-        "unallocated": "Unallocated"
+        "unallocated": "Unallocated",
+        "remove": "Remove allocation"
       },
       "stats": {
         "totalPay": "Total Pay",

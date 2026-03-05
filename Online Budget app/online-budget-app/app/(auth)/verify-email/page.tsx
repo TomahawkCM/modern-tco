@@ -34,7 +34,10 @@ export default async function VerifyEmailPage({ searchParams }: Props) {
         </CardHeader>
         <CardContent className="space-y-4">
           {error && (
-            <p className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+            <p
+              role="alert"
+              className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700"
+            >
               {error}
             </p>
           )}

@@ -57,10 +57,7 @@ export function ChatPanel() {
       }
 
       if (data.ok) {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: data.reply },
-        ]);
+        setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
       } else {
         setMessages((prev) => [
           ...prev,
@@ -71,10 +68,7 @@ export function ChatPanel() {
         ]);
       }
     } catch {
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: t("networkError") },
-      ]);
+      setMessages((prev) => [...prev, { role: "assistant", content: t("networkError") }]);
     } finally {
       setIsLoading(false);
     }
@@ -86,21 +80,16 @@ export function ChatPanel() {
       <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto pb-4">
         {messages.length === 0 && (
           <div className="flex h-full items-center justify-center">
-            <p className="text-sm text-muted-foreground">
-              {t("emptyState")}
-            </p>
+            <p className="text-sm text-muted-foreground">{t("emptyState")}</p>
           </div>
         )}
         {messages.map((msg, i) => (
-          <div
-            key={i}
-            className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-          >
+          <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
             <Card
               className={`max-w-[80%] ${msg.role === "user" ? "bg-primary text-primary-foreground" : ""}`}
             >
               <CardContent className="px-4 py-2.5">
-                <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
+                <p className="whitespace-pre-wrap text-sm">{msg.content}</p>
               </CardContent>
             </Card>
           </div>
@@ -130,6 +119,7 @@ export function ChatPanel() {
           type="submit"
           size="icon"
           disabled={isLoading || !input.trim()}
+          aria-label="Send message"
         >
           <Send className="h-4 w-4" />
         </Button>

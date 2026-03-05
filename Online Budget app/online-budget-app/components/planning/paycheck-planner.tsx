@@ -302,7 +302,13 @@ export function PaycheckPlanner({ plans, currency, formatAmount }: PaycheckPlann
             onChange={(e) => updateAllocation(idx, "amount", e.target.value)}
             className="w-28"
           />
-          <Button variant="ghost" size="icon" onClick={() => removeAllocation(idx)} type="button">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => removeAllocation(idx)}
+            type="button"
+            aria-label={t("allocations.remove")}
+          >
             <XIcon className="size-4" />
           </Button>
         </div>
