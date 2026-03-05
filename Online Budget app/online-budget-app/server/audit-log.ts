@@ -22,7 +22,9 @@ export type AuditAction =
   | "email_verified"
   | "session_revoked_all"
   | "admin_action"
-  | "oauth_login";
+  | "oauth_login"
+  | "passkey_registered"
+  | "passkey_deleted";
 
 interface AuditMetadata {
   error?: string;
