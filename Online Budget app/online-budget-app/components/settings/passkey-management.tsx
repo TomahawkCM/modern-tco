@@ -101,12 +101,18 @@ export function PasskeyManagement() {
       </CardHeader>
       <CardContent className="space-y-4">
         {error && (
-          <p className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+          <p
+            role="alert"
+            className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700"
+          >
             {error}
           </p>
         )}
         {success && (
-          <p className="rounded-md border border-green-200 bg-green-50 p-3 text-sm text-green-700">
+          <p
+            role="status"
+            className="rounded-md border border-green-200 bg-green-50 p-3 text-sm text-green-700"
+          >
             {success}
           </p>
         )}

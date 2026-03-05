@@ -103,25 +103,21 @@ export function AppSidebar() {
   return (
     <aside
       className={cn(
-        "hidden md:flex flex-col border-r bg-muted/40 transition-all duration-200",
-        collapsed ? "w-16" : "lg:w-60 w-16"
+        "hidden flex-col border-r bg-muted/40 transition-all duration-200 md:flex",
+        collapsed ? "w-16" : "w-16 lg:w-60"
       )}
     >
       {/* Brand */}
       <div className="flex h-14 items-center border-b px-4">
-        {!collapsed && (
-          <span className="hidden lg:block text-sm font-semibold">
-            {t("brand")}
-          </span>
-        )}
+        {!collapsed && <span className="hidden text-sm font-semibold lg:block">{t("brand")}</span>}
       </div>
 
       {/* Nav groups */}
-      <nav className="flex-1 overflow-y-auto py-2">
+      <nav aria-label="Main navigation" className="flex-1 overflow-y-auto py-2">
         {navGroups.map((group) => (
           <div key={group.labelKey} className="mb-2">
             {!collapsed && (
-              <p className="hidden lg:block px-4 py-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+              <p className="hidden px-4 py-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground lg:block">
                 {t(`groups.${group.labelKey}`)}
               </p>
             )}
@@ -133,17 +129,13 @@ export function AppSidebar() {
                   "flex items-center gap-3 px-4 py-2 text-sm transition-colors",
                   "hover:bg-accent hover:text-accent-foreground",
                   isActive(item.href)
-                    ? "bg-accent text-accent-foreground font-medium"
+                    ? "bg-accent font-medium text-accent-foreground"
                     : "text-muted-foreground"
                 )}
                 title={collapsed ? t(item.labelKey) : undefined}
               >
                 <item.icon className="h-4 w-4 shrink-0" />
-                {!collapsed && (
-                  <span className="hidden lg:block truncate">
-                    {t(item.labelKey)}
-                  </span>
-                )}
+                {!collapsed && <span className="hidden truncate lg:block">{t(item.labelKey)}</span>}
               </Link>
             ))}
           </div>
@@ -160,23 +152,19 @@ export function AppSidebar() {
               "flex items-center gap-3 px-4 py-2 text-sm transition-colors",
               "hover:bg-accent hover:text-accent-foreground",
               isActive(item.href)
-                ? "bg-accent text-accent-foreground font-medium"
+                ? "bg-accent font-medium text-accent-foreground"
                 : "text-muted-foreground"
             )}
             title={collapsed ? t(item.labelKey) : undefined}
           >
             <item.icon className="h-4 w-4 shrink-0" />
-            {!collapsed && (
-              <span className="hidden lg:block truncate">
-                {t(item.labelKey)}
-              </span>
-            )}
+            {!collapsed && <span className="hidden truncate lg:block">{t(item.labelKey)}</span>}
           </Link>
         ))}
       </div>
 
       {/* Collapse toggle — desktop lg+ only */}
-      <div className="hidden lg:flex border-t p-2 justify-center">
+      <div className="hidden justify-center border-t p-2 lg:flex">
         <Button
           variant="ghost"
           size="icon"
@@ -184,11 +172,7 @@ export function AppSidebar() {
           onClick={() => setCollapsed(!collapsed)}
           aria-label={collapsed ? t("expand") : t("collapse")}
         >
-          {collapsed ? (
-            <ChevronRight className="h-4 w-4" />
-          ) : (
-            <ChevronLeft className="h-4 w-4" />
-          )}
+          {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
         </Button>
       </div>
     </aside>

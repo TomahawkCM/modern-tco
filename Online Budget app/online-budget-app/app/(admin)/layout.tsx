@@ -57,7 +57,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <div className="flex h-14 items-center border-b px-4">
             <h2 className="text-lg font-semibold">{t("title")}</h2>
           </div>
-          <nav className="space-y-1 p-2">
+          <nav aria-label="Admin navigation" className="space-y-1 p-2">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}

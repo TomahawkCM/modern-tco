@@ -48,10 +48,19 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     <I18nProvider locale={locale} messages={messages}>
       <CurrencyProvider value={settings.primary_currency}>
         <div className="flex min-h-screen" dir={dir}>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:outline-none"
+          >
+            Skip to main content
+          </a>
           <AppSidebar />
           <div className="flex flex-1 flex-col">
             <MobileLayout />
-            <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 pb-20 md:pb-6">
+            <main
+              id="main-content"
+              className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 pb-20 md:pb-6"
+            >
               <Breadcrumb />
               {children}
             </main>

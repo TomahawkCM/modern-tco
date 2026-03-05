@@ -2,8 +2,8 @@
 
 ## Current State
 
-- **Current Sprint**: Sprint 4 — Passkey Authentication (COMPLETE)
-- **Current Session**: S8 — Passkey Authentication (COMPLETE)
+- **Current Sprint**: Sprint 5 — Accessibility & Cleanup (COMPLETE)
+- **Current Session**: S9 — Accessibility Hardening + Plan Cleanup (COMPLETE)
 - **Last Updated**: 2026-03-05
 
 ## Completed Sessions
@@ -309,7 +309,44 @@
 - [x] `eslint` passes on all new/modified files (0 errors)
 - [x] `vitest run` — 362 tests pass (37 files)
 
-## Next Session: S9
+### Session 9 — Accessibility Hardening + Plan Document Cleanup (2026-03-05)
+
+- [x] Skip navigation link — `<a href="#main-content">` with sr-only/focus:not-sr-only (WCAG 2.4.1)
+- [x] Main content landmark — `<main id="main-content">` added to app layout
+- [x] ARIA labels on icon-only buttons — fixed chat send button + paycheck remove button
+- [x] `aria-label` on `<nav>` elements — admin nav, sidebar, mobile nav (3 elements)
+- [x] `role="alert"` on auth error messages — login, reset-password, forgot-password, verify-email, passkey-management (5 files)
+- [x] `role="status"` on success messages — passkey-management
+- [x] Focus indicators verified — shadcn/ui Button already has `focus-visible:ring-[3px]` on all variants
+- [x] Archived 10 stale/superseded plan documents to `Plans/archived/` and `Online Budget app/docs/archived/`
+
+**Files modified**:
+
+- `app/(app)/layout.tsx` — skip nav link + `id="main-content"` on `<main>`
+- `app/(admin)/layout.tsx` — `aria-label="Admin navigation"` on `<nav>`
+- `app/(auth)/login/page.tsx` — `role="alert"` on error message
+- `app/(auth)/reset-password/page.tsx` — `role="alert"` on error message
+- `app/(auth)/forgot-password/page.tsx` — `role="alert"` on error message
+- `app/(auth)/verify-email/page.tsx` — `role="alert"` on error message
+- `components/chat/chat-panel.tsx` — `aria-label="Send message"` on send button
+- `components/planning/paycheck-planner.tsx` — `aria-label` on remove allocation button
+- `components/settings/passkey-management.tsx` — `role="alert"` + `role="status"` on messages
+- `components/layout/app-sidebar.tsx` — `aria-label="Main navigation"` on `<nav>`
+- `components/layout/mobile-nav.tsx` — `aria-label="Mobile navigation"` on `<nav>`
+- `i18n/messages/en.json` — added `allocations.remove` key
+
+**Plan documents archived** (10):
+
+- `Plans/archived/`: BUDGET_APP_AUTHORITATIVE_PLAN, CLAUDE_CODE_EXECUTION_PLAN, BUDGET_APP_ONLINE_VERSION_PLAN_UPDATED, BUDGET_APP_COMPLETE_IMPLEMENTATION_PLAN, BUDGET_APP_UI_UX_PLAN_2026, UI_UX_CROSS_PLATFORM_ADDENDUM, BUDGET_APP_EXPANSION_SECTIONS
+- `Online Budget app/docs/archived/`: ONLINE-BUDGET-APP-MASTER-PLAN, V1-ONLINE-PLAN-AND-MILESTONES, FIRST-5-CODING-SESSIONS-PLAN
+
+**Verification**:
+
+- [x] `tsc --noEmit` passes (0 errors)
+- [x] `eslint` passes on all modified files (0 errors)
+- [x] `vitest run` — 362 tests pass (37 files)
+
+## Next Session: S10
 
 **Tasks**: TBD
 
