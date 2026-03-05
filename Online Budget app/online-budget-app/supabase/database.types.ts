@@ -35,6 +35,11 @@ export interface Database {
           timezone: string;
           language: string;
           ai_enabled: boolean;
+          budget_methodology:
+            | "envelope"
+            | "zero_based"
+            | "fifty_thirty_twenty"
+            | "pay_yourself_first";
           created_at: string;
           updated_at: string;
         };
@@ -45,6 +50,11 @@ export interface Database {
           timezone?: string;
           language?: string;
           ai_enabled?: boolean;
+          budget_methodology?:
+            | "envelope"
+            | "zero_based"
+            | "fifty_thirty_twenty"
+            | "pay_yourself_first";
           created_at?: string;
           updated_at?: string;
         };
@@ -55,6 +65,11 @@ export interface Database {
           timezone?: string;
           language?: string;
           ai_enabled?: boolean;
+          budget_methodology?:
+            | "envelope"
+            | "zero_based"
+            | "fifty_thirty_twenty"
+            | "pay_yourself_first";
           created_at?: string;
           updated_at?: string;
         };

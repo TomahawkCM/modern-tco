@@ -71,6 +71,7 @@ describe("fx-rates", () => {
             }),
           }),
         }),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any;
 
       const result = await getRates("USD", ["EUR"], mockSupabase);
@@ -93,6 +94,7 @@ describe("fx-rates", () => {
             }),
           }),
         }),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any;
 
       // Make the from().upsert() chain work for caching

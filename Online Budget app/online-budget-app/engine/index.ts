@@ -40,11 +40,7 @@ export type {
 export { aggregateIncomeExpense, aggregateByCategory } from "./aggregation";
 
 // Categorization module
-export type {
-  CategorizationResult,
-  MerchantRule,
-  PatternRule,
-} from "./categorization";
+export type { CategorizationResult, MerchantRule, PatternRule } from "./categorization";
 export { categorize, extractMerchantToken, PATTERN_RULES } from "./categorization";
 
 // Budgeting module
@@ -52,10 +48,20 @@ export type {
   BudgetLimit,
   CategoryActualSpending,
   BudgetProgressItem,
+  SafeToSpendInput,
+  SafeToSpendResult,
+  BudgetMethodology,
+  MethodologyAllocation,
+  MethodologyGuide,
 } from "./budgeting";
 export {
   computeBudgetProgress,
   computeBudgetProgressFromTransactions,
+  computeSafeToSpend,
+  METHODOLOGIES,
+  computeFiftyThirtyTwenty,
+  computePayYourselfFirst,
+  computeZeroBasedStatus,
 } from "./budgeting";
 
 // Goals module

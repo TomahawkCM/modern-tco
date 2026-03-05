@@ -111,7 +111,14 @@
       "accounts": "Accounts",
       "incomeExpense": "Income vs Expenses",
       "categories": "Spending by Category",
-      "budgets": "Budget Progress"
+      "budgets": "Budget Progress",
+      "safeToSpend": "Safe to Spend"
+    },
+    "safeToSpend": {
+      "dailyLabel": "Safe to spend today",
+      "monthlyLabel": "Remaining this month",
+      "perDay": "{days, plural, one {# day left} other {# days left}}",
+      "overspentWarning": "You've spent more than your income this month."
     },
     "accounts": {
       "noAccounts": "No accounts connected yet",
@@ -179,6 +186,22 @@
       "save": "Save",
       "saving": "Saving...",
       "error": "Please select a category and enter a valid amount"
+    },
+    "methodology": {
+      "title": "Budget Method",
+      "description": "Choose how you want to organize your budget",
+      "methods": {
+        "envelope": "Envelope",
+        "zero_based": "Zero-Based",
+        "fifty_thirty_twenty": "50/30/20 Rule",
+        "pay_yourself_first": "Pay Yourself First"
+      },
+      "hints": {
+        "envelope": "Assign specific amounts to each spending category. Flexible and intuitive.",
+        "zero_based": "Every dollar gets a job. Your total allocations should equal your income.",
+        "fifty_thirty_twenty": "50% needs, 30% wants, 20% savings. A simple framework for balanced spending.",
+        "pay_yourself_first": "Set aside savings first, then spend what's left. Prioritizes your financial goals."
+      }
     }
   },
   "insights": {

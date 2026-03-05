@@ -1,19 +1,16 @@
 import { createClient } from "@/lib/supabase/server";
 import { getTranslations } from "next-intl/server";
-import {
-  aggregateByCategory,
-  computeBudgetProgress,
-  absMinor,
-  formatMoney,
-} from "@/engine";
+import { aggregateByCategory, computeBudgetProgress, absMinor, formatMoney } from "@/engine";
 import type {
   TransactionForCategoryAggregation,
   BudgetLimit,
   CategoryActualSpending,
 } from "@/engine";
 import { listBudgets } from "@/server/budgets";
+import { getUserSettings } from "@/server/settings";
 import { BudgetList } from "@/components/budgets/budget-list";
 import { CreateBudgetForm } from "@/components/budgets/create-budget-form";
+import { MethodologySelector } from "@/components/budgets/methodology-selector";
 
 export default async function BudgetsPage() {
   const supabase = await createClient();
@@ -23,22 +20,13 @@ export default async function BudgetsPage() {
 
   if (!user) return null;
 
-  const { data: settings } = await supabase
-    .from("user_settings")
-    .select("primary_currency, locale")
-    .eq("user_id", user.id)
-    .single();
-
-  const currency = settings?.primary_currency ?? "USD";
-  const locale = settings?.locale ?? "en-US";
+  const settings = await getUserSettings(supabase, user.id);
+  const currency = settings.primary_currency;
+  const locale = settings.locale;
 
   const now = new Date();
-  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1)
-    .toISOString()
-    .split("T")[0]!;
-  const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0)
-    .toISOString()
-    .split("T")[0]!;
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split("T")[0]!;
+  const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split("T")[0]!;
   const monthName = now.toLocaleString(locale, {
     month: "long",
     year: "numeric",
@@ -68,15 +56,11 @@ export default async function BudgetsPage() {
   }
 
   // Engine: category spending
-  const categoryInput: TransactionForCategoryAggregation[] = transactions.map(
-    (t) => ({
-      amountMinor: t.amount_minor,
-      currency: t.currency,
-      categoryKey: t.category_id
-        ? (categoryKeyMap.get(t.category_id) ?? null)
-        : null,
-    })
-  );
+  const categoryInput: TransactionForCategoryAggregation[] = transactions.map((t) => ({
+    amountMinor: t.amount_minor,
+    currency: t.currency,
+    categoryKey: t.category_id ? (categoryKeyMap.get(t.category_id) ?? null) : null,
+  }));
   const categoryBreakdown = aggregateByCategory(categoryInput, currency);
 
   // Engine: budget progress
@@ -88,22 +72,16 @@ export default async function BudgetsPage() {
       currency: b.currency,
     }));
 
-  const actualSpending: CategoryActualSpending[] =
-    categoryBreakdown.categories
-      .filter((c) => c.categoryKey !== null && c.total.amountMinor < 0)
-      .map((c) => ({
-        categoryKey: c.categoryKey!,
-        spentMinor: absMinor(c.total).amountMinor,
-      }));
+  const actualSpending: CategoryActualSpending[] = categoryBreakdown.categories
+    .filter((c) => c.categoryKey !== null && c.total.amountMinor < 0)
+    .map((c) => ({
+      categoryKey: c.categoryKey!,
+      spentMinor: absMinor(c.total).amountMinor,
+    }));
 
-  const budgetProgress = computeBudgetProgress(
-    budgetLimits,
-    actualSpending,
-    currency
-  );
+  const budgetProgress = computeBudgetProgress(budgetLimits, actualSpending, currency);
 
-  const fmt = (amt: { amountMinor: number; currency: string }) =>
-    formatMoney(amt, locale);
+  const fmt = (amt: { amountMinor: number; currency: string }) => formatMoney(amt, locale);
 
   const t = await getTranslations("budgets");
 
@@ -113,11 +91,8 @@ export default async function BudgetsPage() {
         <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
         <span className="text-sm text-muted-foreground">{monthName}</span>
       </div>
-      <BudgetList
-        items={budgetProgress}
-        currency={currency}
-        formatAmount={fmt}
-      />
+      <MethodologySelector currentMethodology={settings.budget_methodology} />
+      <BudgetList items={budgetProgress} currency={currency} formatAmount={fmt} />
       <CreateBudgetForm categories={categories} currency={currency} />
     </div>
   );

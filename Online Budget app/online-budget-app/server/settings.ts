@@ -13,16 +13,20 @@ import type { UpdateSettingsInput } from "./schemas/settings";
 
 type UserSettingsRow = Database["public"]["Tables"]["user_settings"]["Row"];
 
+import type { BudgetMethodology } from "@/engine";
+
 export interface UserSettings {
   locale: string;
   language: string;
   primary_currency: string;
+  budget_methodology: BudgetMethodology;
 }
 
 const DEFAULTS: UserSettings = {
   locale: "en-US",
   language: "en",
   primary_currency: "USD",
+  budget_methodology: "envelope",
 };
 
 export async function getUserSettings(
@@ -31,9 +35,11 @@ export async function getUserSettings(
 ): Promise<UserSettings> {
   const { data, error } = await supabase
     .from("user_settings")
-    .select("locale, language, primary_currency")
+    .select("locale, language, primary_currency, budget_methodology")
     .eq("user_id", userId)
-    .returns<Pick<UserSettingsRow, "locale" | "language" | "primary_currency">[]>()
+    .returns<
+      Pick<UserSettingsRow, "locale" | "language" | "primary_currency" | "budget_methodology">[]
+    >()
     .single();
 
   if (error && error.code === "PGRST116") return DEFAULTS;
@@ -44,6 +50,7 @@ export async function getUserSettings(
     locale: data.locale ?? DEFAULTS.locale,
     language: data.language ?? DEFAULTS.language,
     primary_currency: data.primary_currency ?? DEFAULTS.primary_currency,
+    budget_methodology: data.budget_methodology ?? DEFAULTS.budget_methodology,
   };
 }
 
@@ -61,8 +68,10 @@ export async function updateUserSettings(
       },
       { onConflict: "user_id" }
     )
-    .select("locale, language, primary_currency")
-    .returns<Pick<UserSettingsRow, "locale" | "language" | "primary_currency">[]>()
+    .select("locale, language, primary_currency, budget_methodology")
+    .returns<
+      Pick<UserSettingsRow, "locale" | "language" | "primary_currency" | "budget_methodology">[]
+    >()
     .single();
 
   if (error) throw error;
@@ -71,5 +80,6 @@ export async function updateUserSettings(
     locale: data.locale ?? DEFAULTS.locale,
     language: data.language ?? DEFAULTS.language,
     primary_currency: data.primary_currency ?? DEFAULTS.primary_currency,
+    budget_methodology: data.budget_methodology ?? DEFAULTS.budget_methodology,
   };
 }

@@ -2,8 +2,8 @@
 
 ## Current State
 
-- **Current Sprint**: Sprint 5 — Accessibility & Cleanup (COMPLETE)
-- **Current Session**: S9 — Accessibility Hardening + Plan Cleanup (COMPLETE)
+- **Current Sprint**: Sprint 6 — Phase 1 Completion
+- **Current Session**: S10 — Safe-to-Spend + Budget Methodology (COMPLETE)
 - **Last Updated**: 2026-03-05
 
 ## Completed Sessions
@@ -346,7 +346,47 @@
 - [x] `eslint` passes on all modified files (0 errors)
 - [x] `vitest run` — 362 tests pass (37 files)
 
-## Next Session: S10
+### Session 10 — Safe-to-Spend + Budget Methodology (2026-03-05)
+
+- [x] Safe-to-Spend engine — `engine/budgeting/safe-to-spend.ts` with `computeSafeToSpend()` (monthly + daily amounts, overspent detection)
+- [x] Safe-to-Spend dashboard widget — `components/dashboard/safe-to-spend-card.tsx` (daily/monthly display, overspent warning)
+- [x] Dashboard integration — safe-to-spend section between health score and alerts
+- [x] Budget methodology engine — `engine/budgeting/methodology.ts` with `computeFiftyThirtyTwenty()`, `computePayYourselfFirst()`, `computeZeroBasedStatus()`
+- [x] Budget methodology selector — `components/budgets/methodology-selector.tsx` (4 methods: Envelope, Zero-Based, 50/30/20, Pay-Yourself-First)
+- [x] Migration `016_budget_methodology.sql` — `budget_methodology` column on `user_settings`
+- [x] Updated `database.types.ts`, `server/settings.ts`, `server/schemas/settings.ts` for methodology support
+- [x] i18n: 16 new keys — `dashboard.safeToSpend.*` (4), `dashboard.sections.safeToSpend` (1), `budgets.methodology.*` (11)
+- [x] Gap analysis updated: Safe-to-Spend → DONE, Budget methodology → DONE
+
+**Files created**:
+
+- `engine/budgeting/safe-to-spend.ts` — safe-to-spend computation
+- `engine/budgeting/safe-to-spend.test.ts` — 5 tests
+- `engine/budgeting/methodology.ts` — budget methodology allocation engine
+- `engine/budgeting/methodology.test.ts` — 10 tests
+- `components/dashboard/safe-to-spend-card.tsx` — dashboard widget
+- `components/budgets/methodology-selector.tsx` — methodology picker UI
+- `supabase/migrations/016_budget_methodology.sql` — schema migration
+
+**Files modified**:
+
+- `engine/budgeting/index.ts` — re-exports for safe-to-spend + methodology
+- `engine/index.ts` — re-exports for safe-to-spend + methodology
+- `app/(app)/dashboard/page.tsx` — safe-to-spend computation + widget
+- `app/(app)/budgets/page.tsx` — methodology selector + settings integration
+- `server/settings.ts` — budget_methodology field
+- `server/schemas/settings.ts` — budget_methodology Zod validation
+- `supabase/database.types.ts` — budget_methodology column type
+- `i18n/messages/en.json` — 16 new keys
+- `docs/BUDGET_APP_GAP_ANALYSIS_2026-03-03.md` — S10 marked done
+
+**Verification**:
+
+- [x] `tsc --noEmit` passes (0 errors)
+- [x] `eslint` passes on all new/modified files (0 errors)
+- [x] `vitest run` — 377 tests pass (39 files, +15 new tests)
+
+## Next Session: S11
 
 **Tasks**: TBD
 
