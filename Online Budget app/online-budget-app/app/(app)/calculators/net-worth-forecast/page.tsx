@@ -20,14 +20,8 @@ import { forecastNetWorth } from "@/engine/calculators";
 import type { Asset, Liability } from "@/engine/calculators";
 import { formatCurrency } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
   LazyAreaChart,
@@ -40,13 +34,13 @@ import {
   ResponsiveContainer,
 } from "@/components/charts/lazy-charts";
 
-function ChartSkeleton() {
+function ChartSkeleton({ label }: { label: string }) {
   return (
     <div
       className="flex w-full animate-pulse items-center justify-center rounded-lg bg-muted"
       style={{ height: 350 }}
     >
-      <span className="text-sm text-muted-foreground">Loading chart...</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
     </div>
   );
 }
@@ -62,9 +56,9 @@ const DEFAULT_LIABILITIES: Liability[] = [
 
 export default function NetWorthForecastPage() {
   const t = useTranslations("calculators");
+  const tc = useTranslations("common");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   const [assets, setAssets] = useState<Asset[]>(DEFAULT_ASSETS);
   const [liabilities, setLiabilities] = useState<Liability[]>(DEFAULT_LIABILITIES);
@@ -86,12 +80,9 @@ export default function NetWorthForecastPage() {
     [result.timeline]
   );
 
-  const updateAsset = useCallback(
-    (index: number, field: keyof Asset, value: string | number) => {
-      setAssets((prev) => prev.map((a, i) => (i === index ? { ...a, [field]: value } : a)));
-    },
-    []
-  );
+  const updateAsset = useCallback((index: number, field: keyof Asset, value: string | number) => {
+    setAssets((prev) => prev.map((a, i) => (i === index ? { ...a, [field]: value } : a)));
+  }, []);
 
   const updateLiability = useCallback(
     (index: number, field: keyof Liability, value: string | number) => {
@@ -101,10 +92,7 @@ export default function NetWorthForecastPage() {
   );
 
   const addAsset = useCallback(() => {
-    setAssets((prev) => [
-      ...prev,
-      { name: "New Asset", currentValue: 0, annualGrowthRate: 5 },
-    ]);
+    setAssets((prev) => [...prev, { name: "New Asset", currentValue: 0, annualGrowthRate: 5 }]);
   }, []);
 
   const addLiability = useCallback(() => {
@@ -381,7 +369,7 @@ export default function NetWorthForecastPage() {
             <CardTitle>{t("netWorthForecast.chartTitle")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <Suspense fallback={<ChartSkeleton />}>
+            <Suspense fallback={<ChartSkeleton label={tc("loadingChart")} />}>
               <ResponsiveContainer width="100%" height={350}>
                 <LazyAreaChart data={chartData}>
                   <defs>
@@ -395,7 +383,11 @@ export default function NetWorthForecastPage() {
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                  <XAxis dataKey="year" stroke="hsl(var(--muted-foreground))" tick={{ fontSize: 12 }} />
+                  <XAxis
+                    dataKey="year"
+                    stroke="hsl(var(--muted-foreground))"
+                    tick={{ fontSize: 12 }}
+                  />
                   <YAxis
                     stroke="hsl(var(--muted-foreground))"
                     tick={{ fontSize: 12 }}

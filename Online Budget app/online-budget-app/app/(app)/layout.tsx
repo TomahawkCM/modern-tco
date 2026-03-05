@@ -10,6 +10,7 @@ import { FloatingActionButton } from "@/components/layout/floating-action-button
 import { Breadcrumb } from "@/components/layout/breadcrumb";
 import { getUserSettings } from "@/server/settings";
 import { getValidLocale, LOCALE_METADATA } from "@/i18n/config";
+import { CurrencyProvider } from "@/contexts/currency-context";
 import enMessages from "@/i18n/messages/en.json";
 
 async function loadMessages(locale: string) {
@@ -45,19 +46,21 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <I18nProvider locale={locale} messages={messages}>
-      <div className="flex min-h-screen" dir={dir}>
-        <AppSidebar />
-        <div className="flex flex-1 flex-col">
-          <MobileLayout />
-          <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 pb-20 md:pb-6">
-            <Breadcrumb />
-            {children}
-          </main>
+      <CurrencyProvider value={settings.primary_currency}>
+        <div className="flex min-h-screen" dir={dir}>
+          <AppSidebar />
+          <div className="flex flex-1 flex-col">
+            <MobileLayout />
+            <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 pb-20 md:pb-6">
+              <Breadcrumb />
+              {children}
+            </main>
+          </div>
+          <MobileNav />
+          <CommandPalette />
+          <FloatingActionButton />
         </div>
-        <MobileNav />
-        <CommandPalette />
-        <FloatingActionButton />
-      </div>
+      </CurrencyProvider>
     </I18nProvider>
   );
 }

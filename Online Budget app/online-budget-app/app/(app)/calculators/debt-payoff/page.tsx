@@ -15,14 +15,9 @@ import { calculateDebtPayoff, generateDebtId } from "@/engine/calculators";
 import type { DebtAccount, DebtStrategy } from "@/engine/calculators";
 import { formatCurrency } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
 import { cn } from "@/lib/utils";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   LazyBarChart,
   Bar,
@@ -34,22 +29,22 @@ import {
   ResponsiveContainer,
 } from "@/components/charts/lazy-charts";
 
-function ChartSkeleton() {
+function ChartSkeleton({ label }: { label: string }) {
   return (
     <div
       className="flex w-full animate-pulse items-center justify-center rounded-lg bg-muted"
       style={{ height: 200 }}
     >
-      <span className="text-sm text-muted-foreground">Loading chart...</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
     </div>
   );
 }
 
 export default function DebtPayoffCalculatorPage() {
   const t = useTranslations("calculators");
+  const tc = useTranslations("common");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   const [debts, setDebts] = useState<DebtAccount[]>([
     { id: generateDebtId(), name: "", balance: 0, apr: 0, minimumPayment: 0 },
@@ -63,10 +58,7 @@ export default function DebtPayoffCalculatorPage() {
   }, [debts, extraMonthlyPayment]);
 
   const addDebt = () => {
-    setDebts([
-      ...debts,
-      { id: generateDebtId(), name: "", balance: 0, apr: 0, minimumPayment: 0 },
-    ]);
+    setDebts([...debts, { id: generateDebtId(), name: "", balance: 0, apr: 0, minimumPayment: 0 }]);
   };
 
   const removeDebt = (id: string) => {
@@ -140,7 +132,7 @@ export default function DebtPayoffCalculatorPage() {
                     value={debt.name}
                     onChange={(e) => updateDebt(debt.id, "name", e.target.value)}
                     placeholder={t("debtPayoff.debtNamePlaceholder", { number: index + 1 })}
-                    className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                    className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
                   />
                 </div>
                 <div>
@@ -240,17 +232,13 @@ export default function DebtPayoffCalculatorPage() {
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs text-muted-foreground">
-                    {t("debtPayoff.totalInterest")}
-                  </p>
+                  <p className="text-xs text-muted-foreground">{t("debtPayoff.totalInterest")}</p>
                   <p className="text-xl font-bold text-foreground">
                     {formatCurrency(result.snowball.totalInterest, currency, locale)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground">
-                    {t("debtPayoff.payoffDate")}
-                  </p>
+                  <p className="text-xs text-muted-foreground">{t("debtPayoff.payoffDate")}</p>
                   <p className="text-xl font-bold text-foreground">
                     {result.snowball.totalMonths} {t("common.months")}
                   </p>
@@ -286,17 +274,13 @@ export default function DebtPayoffCalculatorPage() {
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-xs text-muted-foreground">
-                    {t("debtPayoff.totalInterest")}
-                  </p>
+                  <p className="text-xs text-muted-foreground">{t("debtPayoff.totalInterest")}</p>
                   <p className="text-xl font-bold text-foreground">
                     {formatCurrency(result.avalanche.totalInterest, currency, locale)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground">
-                    {t("debtPayoff.payoffDate")}
-                  </p>
+                  <p className="text-xs text-muted-foreground">{t("debtPayoff.payoffDate")}</p>
                   <p className="text-xl font-bold text-foreground">
                     {result.avalanche.totalMonths} {t("common.months")}
                   </p>
@@ -334,7 +318,7 @@ export default function DebtPayoffCalculatorPage() {
             <CardTitle>{t("debtPayoff.totalInterest")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <Suspense fallback={<ChartSkeleton />}>
+            <Suspense fallback={<ChartSkeleton label={tc("loadingChart")} />}>
               <ResponsiveContainer width="100%" height={200}>
                 <LazyBarChart data={chartData} layout="vertical">
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -346,7 +330,12 @@ export default function DebtPayoffCalculatorPage() {
                       formatCurrency(val, currency, locale).replace(/\.00$/, "")
                     }
                   />
-                  <YAxis type="category" dataKey="name" stroke="hsl(var(--muted-foreground))" tick={{ fontSize: 12 }} />
+                  <YAxis
+                    type="category"
+                    dataKey="name"
+                    stroke="hsl(var(--muted-foreground))"
+                    tick={{ fontSize: 12 }}
+                  />
                   <Tooltip
                     formatter={(value: number | undefined, name: string | undefined) => [
                       formatCurrency(value ?? 0, currency, locale),

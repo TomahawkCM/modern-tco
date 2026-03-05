@@ -10,23 +10,14 @@ import { useState, useMemo, Suspense } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import { ArrowLeft, Target, Calendar, DollarSign, Sparkles } from "lucide-react";
-import {
-  CurrencyInput,
-  PercentInput,
-  ResultsPanel,
-} from "@/components/calculators";
+import { CurrencyInput, PercentInput, ResultsPanel } from "@/components/calculators";
 import { calculateSavingsGoal } from "@/engine/calculators";
 import type { SavingsGoalMode } from "@/engine/calculators";
 import { formatCurrency } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
 import { cn } from "@/lib/utils";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
   LazyAreaChart,
@@ -39,22 +30,22 @@ import {
   ResponsiveContainer,
 } from "@/components/charts/lazy-charts";
 
-function ChartSkeleton() {
+function ChartSkeleton({ label }: { label: string }) {
   return (
     <div
       className="flex w-full animate-pulse items-center justify-center rounded-lg bg-muted"
       style={{ height: 300 }}
     >
-      <span className="text-sm text-muted-foreground">Loading chart...</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
     </div>
   );
 }
 
 export default function SavingsGoalCalculatorPage() {
   const t = useTranslations("calculators");
+  const tc = useTranslations("common");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   const [mode, setMode] = useState<SavingsGoalMode>("when");
   const [goalAmount, setGoalAmount] = useState(10000);
@@ -186,7 +177,7 @@ export default function SavingsGoalCalculatorPage() {
                   value={targetDate}
                   onChange={(e) => setTargetDate(e.target.value)}
                   min={new Date().toISOString().split("T")[0]}
-                  className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
                 />
               </div>
             )}
@@ -300,7 +291,7 @@ export default function SavingsGoalCalculatorPage() {
             <CardTitle>{t("savingsGoal.timelineTitle")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <Suspense fallback={<ChartSkeleton />}>
+            <Suspense fallback={<ChartSkeleton label={tc("loadingChart")} />}>
               <ResponsiveContainer width="100%" height={300}>
                 <LazyAreaChart data={chartData}>
                   <defs>
@@ -314,7 +305,11 @@ export default function SavingsGoalCalculatorPage() {
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                  <XAxis dataKey="month" stroke="hsl(var(--muted-foreground))" tick={{ fontSize: 12 }} />
+                  <XAxis
+                    dataKey="month"
+                    stroke="hsl(var(--muted-foreground))"
+                    tick={{ fontSize: 12 }}
+                  />
                   <YAxis
                     stroke="hsl(var(--muted-foreground))"
                     tick={{ fontSize: 12 }}

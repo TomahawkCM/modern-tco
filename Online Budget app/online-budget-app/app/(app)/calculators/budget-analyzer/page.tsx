@@ -23,20 +23,14 @@ import { calculateBudgetAnalysis } from "@/engine/calculators";
 import type { CategoryMapping, BudgetBucket } from "@/engine/calculators";
 import { formatCurrency, formatPercent } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
 import { cn } from "@/lib/utils";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function BudgetAnalyzerPage() {
   const t = useTranslations("calculators");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   // Form state
   const [monthlyIncome, setMonthlyIncome] = useState(5000);
@@ -129,9 +123,7 @@ export default function BudgetAnalyzerPage() {
             <div className="flex items-start gap-3 rounded-lg border border-blue-500/30 bg-blue-500/5 p-4">
               <Home className="mt-0.5 h-6 w-6 text-blue-600 dark:text-blue-400" />
               <div>
-                <p className="font-semibold text-foreground">
-                  50% {t("budgetAnalyzer.needs")}
-                </p>
+                <p className="font-semibold text-foreground">50% {t("budgetAnalyzer.needs")}</p>
                 <p className="text-sm text-muted-foreground">
                   {t("budgetAnalyzer.needsDescription")}
                 </p>
@@ -140,9 +132,7 @@ export default function BudgetAnalyzerPage() {
             <div className="flex items-start gap-3 rounded-lg border border-purple-500/30 bg-purple-500/5 p-4">
               <Sparkles className="mt-0.5 h-6 w-6 text-purple-600 dark:text-purple-400" />
               <div>
-                <p className="font-semibold text-foreground">
-                  30% {t("budgetAnalyzer.wants")}
-                </p>
+                <p className="font-semibold text-foreground">30% {t("budgetAnalyzer.wants")}</p>
                 <p className="text-sm text-muted-foreground">
                   {t("budgetAnalyzer.wantsDescription")}
                 </p>
@@ -151,9 +141,7 @@ export default function BudgetAnalyzerPage() {
             <div className="flex items-start gap-3 rounded-lg border border-green-500/30 bg-green-500/5 p-4">
               <PiggyBank className="mt-0.5 h-6 w-6 text-green-600 dark:text-green-400" />
               <div>
-                <p className="font-semibold text-foreground">
-                  20% {t("budgetAnalyzer.savings")}
-                </p>
+                <p className="font-semibold text-foreground">20% {t("budgetAnalyzer.savings")}</p>
                 <p className="text-sm text-muted-foreground">
                   {t("budgetAnalyzer.savingsDescription")}
                 </p>

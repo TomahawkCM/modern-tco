@@ -7,18 +7,21 @@ export interface Database {
         Row: {
           id: string;
           email: string;
+          role: string;
           created_at: string;
           updated_at: string;
         };
         Insert: {
           id: string;
           email: string;
+          role?: string;
           created_at?: string;
           updated_at?: string;
         };
         Update: {
           id?: string;
           email?: string;
+          role?: string;
           created_at?: string;
           updated_at?: string;
         };
@@ -1414,6 +1417,81 @@ export interface Database {
             referencedColumns: ["id"];
           },
         ];
+      };
+      rate_limits: {
+        Row: {
+          key: string;
+          count: number;
+          window_start: string;
+          window_ms: number;
+        };
+        Insert: {
+          key: string;
+          count?: number;
+          window_start?: string;
+          window_ms?: number;
+        };
+        Update: {
+          key?: string;
+          count?: number;
+          window_start?: string;
+          window_ms?: number;
+        };
+        Relationships: [];
+      };
+      audit_log: {
+        Row: {
+          id: string;
+          user_id: string | null;
+          action: string;
+          ip_address: string | null;
+          user_agent: string | null;
+          metadata: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id?: string | null;
+          action: string;
+          ip_address?: string | null;
+          user_agent?: string | null;
+          metadata?: Json;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string | null;
+          action?: string;
+          ip_address?: string | null;
+          user_agent?: string | null;
+          metadata?: Json;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      fx_rates: {
+        Row: {
+          id: string;
+          base_currency: string;
+          target_currency: string;
+          rate: number;
+          fetched_at: string;
+        };
+        Insert: {
+          id?: string;
+          base_currency: string;
+          target_currency: string;
+          rate: number;
+          fetched_at?: string;
+        };
+        Update: {
+          id?: string;
+          base_currency?: string;
+          target_currency?: string;
+          rate?: number;
+          fetched_at?: string;
+        };
+        Relationships: [];
       };
     };
     Views: Record<string, never>;

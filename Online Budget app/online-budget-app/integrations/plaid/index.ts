@@ -64,15 +64,18 @@ export function isPlaidConfigured(): boolean {
 /**
  * Create a Plaid Link token for the given user.
  */
-export async function createLinkToken(userId: string): Promise<string> {
+export async function createLinkToken(
+  userId: string,
+  options?: { countryCodes?: CountryCode[]; language?: string }
+): Promise<string> {
   const client = getPlaidClient();
 
   const response = await client.linkTokenCreate({
     user: { client_user_id: userId },
     client_name: "Budget App",
     products: [Products.Transactions],
-    country_codes: [CountryCode.Us],
-    language: "en",
+    country_codes: options?.countryCodes ?? [CountryCode.Us],
+    language: options?.language ?? "en",
   });
 
   return response.data.link_token;

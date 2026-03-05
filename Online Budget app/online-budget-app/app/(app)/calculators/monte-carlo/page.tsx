@@ -20,14 +20,9 @@ import {
 import { runMonteCarlo } from "@/engine/calculators";
 import { formatCurrency, formatPercent } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
 import { cn } from "@/lib/utils";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
   LazyAreaChart,
@@ -40,13 +35,13 @@ import {
   ResponsiveContainer,
 } from "@/components/charts/lazy-charts";
 
-function ChartSkeleton() {
+function ChartSkeleton({ label }: { label: string }) {
   return (
     <div
       className="flex w-full animate-pulse items-center justify-center rounded-lg bg-muted"
       style={{ height: 400 }}
     >
-      <span className="text-sm text-muted-foreground">Loading chart...</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
     </div>
   );
 }
@@ -55,9 +50,9 @@ type SimMode = "accumulation" | "withdrawal";
 
 export default function MonteCarloPage() {
   const t = useTranslations("calculators");
+  const tc = useTranslations("common");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   // Mode
   const [mode, setMode] = useState<SimMode>("accumulation");
@@ -85,7 +80,16 @@ export default function MonteCarloPage() {
         simulations,
         seed: 42,
       }),
-    [initialBalance, monthlyAmount, expectedReturn, volatility, inflationRate, years, simulations, mode]
+    [
+      initialBalance,
+      monthlyAmount,
+      expectedReturn,
+      volatility,
+      inflationRate,
+      years,
+      simulations,
+      mode,
+    ]
   );
 
   const chartData = useMemo(
@@ -258,7 +262,7 @@ export default function MonteCarloPage() {
                 <select
                   value={simulations}
                   onChange={(e) => setSimulations(Number(e.target.value))}
-                  className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                  className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
                 >
                   <option value={100}>100</option>
                   <option value={500}>500</option>
@@ -307,9 +311,7 @@ export default function MonteCarloPage() {
                 <p className="mb-1 text-4xl font-bold text-foreground">
                   {formatPercent(result.successRate / 100, locale, 1)}
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  {t("monteCarlo.successRateLabel")}
-                </p>
+                <p className="text-sm text-muted-foreground">{t("monteCarlo.successRateLabel")}</p>
 
                 {/* Visual gauge bar */}
                 <div className="mx-auto mt-4 h-3 max-w-xs overflow-hidden rounded-full bg-muted">
@@ -364,7 +366,7 @@ export default function MonteCarloPage() {
               },
               {
                 label: t("monteCarlo.totalSimulations"),
-                value: `${result.totalSimulations.toLocaleString()}`,
+                value: `${result.totalSimulations.toLocaleString(locale)}`,
                 type: "text",
               },
             ]}
@@ -421,7 +423,7 @@ export default function MonteCarloPage() {
             </div>
           </CardHeader>
           <CardContent>
-            <Suspense fallback={<ChartSkeleton />}>
+            <Suspense fallback={<ChartSkeleton label={tc("loadingChart")} />}>
               <ResponsiveContainer width="100%" height={400}>
                 <LazyAreaChart data={chartData}>
                   <defs>

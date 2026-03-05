@@ -110,8 +110,8 @@ function computeProjection(config: ScenarioConfig): ProjectionResult {
   const monthlyInflation = (config.inflation_rate_pct ?? 3) / 100 / 12;
 
   // Assume a baseline of 500000 minor units (5000.00) monthly income
-  let baseIncome = 500000;
-  let baseExpense = 400000;
+  const baseIncome = 500000;
+  const baseExpense = 400000;
   let cumulativeSavings = 0;
   let cumulativeNetWorth = 0;
 

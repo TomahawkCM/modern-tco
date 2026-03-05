@@ -17,20 +17,12 @@ import {
   ResultsPanel,
   TransparencyPanel,
 } from "@/components/calculators";
-import {
-  generateAmortizationSchedule,
-  calculateAffordability,
-} from "@/engine/calculators";
+import { generateAmortizationSchedule, calculateAffordability } from "@/engine/calculators";
 import { formatCurrency } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
 import { cn } from "@/lib/utils";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   LazyAreaChart,
   Area,
@@ -42,13 +34,13 @@ import {
   ResponsiveContainer,
 } from "@/components/charts/lazy-charts";
 
-function ChartSkeleton() {
+function ChartSkeleton({ label }: { label: string }) {
   return (
     <div
       className="flex w-full animate-pulse items-center justify-center rounded-lg bg-muted"
       style={{ height: 350 }}
     >
-      <span className="text-sm text-muted-foreground">Loading chart...</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
     </div>
   );
 }
@@ -57,9 +49,9 @@ type MortgageMode = "payment" | "affordability";
 
 export default function MortgageCalculatorPage() {
   const t = useTranslations("calculators");
+  const tc = useTranslations("common");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   const [mode, setMode] = useState<MortgageMode>("payment");
 
@@ -377,7 +369,7 @@ export default function MortgageCalculatorPage() {
             <CardTitle>{t("mortgage.scheduleTitle")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <Suspense fallback={<ChartSkeleton />}>
+            <Suspense fallback={<ChartSkeleton label={tc("loadingChart")} />}>
               <ResponsiveContainer width="100%" height={350}>
                 <LazyAreaChart data={chartData}>
                   <defs>
@@ -469,14 +461,9 @@ export default function MortgageCalculatorPage() {
                 onClick={() => setShowFullSchedule(!showFullSchedule)}
                 className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-input py-2 text-sm text-muted-foreground transition-colors hover:bg-muted"
               >
-                {showFullSchedule
-                  ? t("mortgage.hideFullSchedule")
-                  : t("mortgage.showFullSchedule")}
+                {showFullSchedule ? t("mortgage.hideFullSchedule") : t("mortgage.showFullSchedule")}
                 <ChevronDown
-                  className={cn(
-                    "h-4 w-4 transition-transform",
-                    showFullSchedule && "rotate-180"
-                  )}
+                  className={cn("h-4 w-4 transition-transform", showFullSchedule && "rotate-180")}
                 />
               </button>
             )}

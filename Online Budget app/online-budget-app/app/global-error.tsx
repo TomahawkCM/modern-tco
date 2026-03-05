@@ -1,5 +1,21 @@
 "use client";
 
+// NOTE: This is the catastrophic error boundary. i18n may not be available here,
+// so all strings are kept in English as a safe fallback.
+
+import * as Sentry from "@sentry/nextjs";
+import { useEffect } from "react";
+
+function getLangFromCookie(): string {
+  try {
+    const match = document.cookie.match(/(?:^|;\s*)locale=([^;]*)/);
+    if (match?.[1]) return match[1].split("-")[0] || "en";
+  } catch {
+    // cookie access may fail in some contexts
+  }
+  return "en";
+}
+
 export default function GlobalError({
   error,
   reset,
@@ -7,8 +23,14 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  useEffect(() => {
+    Sentry.captureException(error);
+  }, [error]);
+
+  const lang = typeof document !== "undefined" ? getLangFromCookie() : "en";
+
   return (
-    <html lang="en">
+    <html lang={lang}>
       <body
         style={{
           margin: 0,

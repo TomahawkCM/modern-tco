@@ -10,22 +10,13 @@ import { useState, useMemo } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import { ArrowLeft, FileText, Sparkles } from "lucide-react";
-import {
-  CurrencyInput,
-  ResultsPanel,
-  TransparencyPanel,
-} from "@/components/calculators";
+import { CurrencyInput, ResultsPanel, TransparencyPanel } from "@/components/calculators";
 import { calculateTaxEstimate } from "@/engine/calculators";
 import type { FilingStatus } from "@/engine/calculators";
 import { formatCurrency } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 
 const FILING_STATUSES: { value: FilingStatus; labelKey: string }[] = [
@@ -38,8 +29,7 @@ const FILING_STATUSES: { value: FilingStatus; labelKey: string }[] = [
 export default function TaxEstimatorPage() {
   const t = useTranslations("calculators");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   const [grossIncome, setGrossIncome] = useState(85000);
   const [filingStatus, setFilingStatus] = useState<FilingStatus>("single");
@@ -58,7 +48,14 @@ export default function TaxEstimatorPage() {
         useItemized,
         itemizedDeductions,
       }),
-    [grossIncome, filingStatus, retirementContributions, otherDeductions, useItemized, itemizedDeductions]
+    [
+      grossIncome,
+      filingStatus,
+      retirementContributions,
+      otherDeductions,
+      useItemized,
+      itemizedDeductions,
+    ]
   );
 
   return (
@@ -102,7 +99,7 @@ export default function TaxEstimatorPage() {
               <select
                 value={filingStatus}
                 onChange={(e) => setFilingStatus(e.target.value as FilingStatus)}
-                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
               >
                 {FILING_STATUSES.map((fs) => (
                   <option key={fs.value} value={fs.value}>

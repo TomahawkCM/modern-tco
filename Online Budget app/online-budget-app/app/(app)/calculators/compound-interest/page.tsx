@@ -21,13 +21,8 @@ import { compoundInterest } from "@/engine/calculators";
 import type { CompoundingFrequency } from "@/engine/calculators";
 import { formatCurrency } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -41,13 +36,13 @@ import {
   ResponsiveContainer,
 } from "@/components/charts/lazy-charts";
 
-function ChartSkeleton() {
+function ChartSkeleton({ label }: { label: string }) {
   return (
     <div
       className="flex w-full animate-pulse items-center justify-center rounded-lg bg-muted"
       style={{ height: 350 }}
     >
-      <span className="text-sm text-muted-foreground">Loading chart...</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
     </div>
   );
 }
@@ -63,9 +58,9 @@ const FREQUENCIES: CompoundingFrequency[] = [
 
 export default function CompoundInterestCalculatorPage() {
   const t = useTranslations("calculators");
+  const tc = useTranslations("common");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   const [principal, setPrincipal] = useState(10000);
   const [monthlyContribution, setMonthlyContribution] = useState(500);
@@ -111,9 +106,7 @@ export default function CompoundInterestCalculatorPage() {
             <CircleDollarSign className="h-8 w-8 text-primary" />
             {t("compoundInterest.title")}
           </h1>
-          <p className="mt-2 text-muted-foreground">
-            {t("compoundInterest.subtitle")}
-          </p>
+          <p className="mt-2 text-muted-foreground">{t("compoundInterest.subtitle")}</p>
         </div>
       </div>
 
@@ -157,9 +150,7 @@ export default function CompoundInterestCalculatorPage() {
               <Input
                 type="number"
                 value={years}
-                onChange={(e) =>
-                  setYears(Math.max(1, Math.min(50, Number(e.target.value))))
-                }
+                onChange={(e) => setYears(Math.max(1, Math.min(50, Number(e.target.value))))}
                 min={1}
                 max={50}
               />
@@ -169,10 +160,8 @@ export default function CompoundInterestCalculatorPage() {
               <Label>{t("compoundInterest.compoundingFrequency")}</Label>
               <select
                 value={frequency}
-                onChange={(e) =>
-                  setFrequency(e.target.value as CompoundingFrequency)
-                }
-                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                onChange={(e) => setFrequency(e.target.value as CompoundingFrequency)}
+                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
               >
                 {FREQUENCIES.map((f) => (
                   <option key={f} value={f}>
@@ -260,49 +249,25 @@ export default function CompoundInterestCalculatorPage() {
             <CardTitle>{t("compoundInterest.chartTitle")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <Suspense fallback={<ChartSkeleton />}>
+            <Suspense fallback={<ChartSkeleton label={tc("loadingChart")} />}>
               <ResponsiveContainer width="100%" height={350}>
                 <LazyAreaChart data={chartData}>
                   <defs>
-                    <linearGradient
-                      id="colorContributions"
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
-                    >
-                      <stop
-                        offset="5%"
-                        stopColor="#3b82f6"
-                        stopOpacity={0.4}
-                      />
-                      <stop
-                        offset="95%"
-                        stopColor="#3b82f6"
-                        stopOpacity={0}
-                      />
+                    <linearGradient id="colorContributions" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.4} />
+                      <stop offset="95%" stopColor="#3b82f6" stopOpacity={0} />
                     </linearGradient>
-                    <linearGradient
-                      id="colorInterest"
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
-                    >
-                      <stop
-                        offset="5%"
-                        stopColor="#10b981"
-                        stopOpacity={0.4}
-                      />
-                      <stop
-                        offset="95%"
-                        stopColor="#10b981"
-                        stopOpacity={0}
-                      />
+                    <linearGradient id="colorInterest" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#10b981" stopOpacity={0.4} />
+                      <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                  <XAxis dataKey="period" stroke="hsl(var(--muted-foreground))" tick={{ fontSize: 12 }} />
+                  <XAxis
+                    dataKey="period"
+                    stroke="hsl(var(--muted-foreground))"
+                    tick={{ fontSize: 12 }}
+                  />
                   <YAxis
                     stroke="hsl(var(--muted-foreground))"
                     tick={{ fontSize: 12 }}

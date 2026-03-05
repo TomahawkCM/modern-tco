@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { createBudgetSchema, listBudgetsSchema } from "@/server/schemas/budget";
 import { createBudget, listBudgets } from "@/server/budgets";
+import { getUserSettings } from "@/server/settings";
 
 export async function GET(request: NextRequest) {
   const supabase = await createClient();
@@ -31,10 +32,7 @@ export async function GET(request: NextRequest) {
     const result = await listBudgets(supabase, user.id, parsed.data);
     return NextResponse.json(result);
   } catch {
-    return NextResponse.json(
-      { error: "Failed to fetch budgets" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to fetch budgets" }, { status: 500 });
   }
 }
 
@@ -67,13 +65,16 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  // Supply user's primary_currency if not provided
+  if (!parsed.data.currency) {
+    const settings = await getUserSettings(supabase, user.id);
+    parsed.data.currency = settings.primary_currency;
+  }
+
   try {
     const budget = await createBudget(supabase, user.id, parsed.data);
     return NextResponse.json(budget, { status: 201 });
   } catch {
-    return NextResponse.json(
-      { error: "Failed to create budget" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to create budget" }, { status: 500 });
   }
 }

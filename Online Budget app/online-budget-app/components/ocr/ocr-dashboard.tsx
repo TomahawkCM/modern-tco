@@ -24,6 +24,7 @@ import {
   XIcon,
   ImageIcon,
 } from "lucide-react";
+import { getCurrencySymbol } from "@/lib/format";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -157,7 +158,7 @@ function extractLineItems(text: string): string[] {
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
-export function OcrDashboard({ currency }: OcrDashboardProps) {
+export function OcrDashboard({ currency, locale }: OcrDashboardProps) {
   const t = useTranslations("ocr");
 
   /* ---- State ---- */
@@ -605,13 +606,7 @@ export function OcrDashboard({ currency }: OcrDashboardProps) {
               <Label htmlFor="ocr-amount">{t("results.amount")}</Label>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-                  {currency === "USD"
-                    ? "$"
-                    : currency === "EUR"
-                      ? "\u20AC"
-                      : currency === "GBP"
-                        ? "\u00A3"
-                        : currency}
+                  {getCurrencySymbol(currency, locale)}
                 </span>
                 <Input
                   id="ocr-amount"

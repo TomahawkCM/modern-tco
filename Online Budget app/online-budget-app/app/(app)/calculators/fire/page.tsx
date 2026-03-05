@@ -20,13 +20,8 @@ import {
 import { calculateFIRE } from "@/engine/calculators";
 import { formatCurrency } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -40,22 +35,22 @@ import {
   ResponsiveContainer,
 } from "@/components/charts/lazy-charts";
 
-function ChartSkeleton() {
+function ChartSkeleton({ label }: { label: string }) {
   return (
     <div
       className="flex w-full animate-pulse items-center justify-center rounded-lg bg-muted"
       style={{ height: 350 }}
     >
-      <span className="text-sm text-muted-foreground">Loading chart...</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
     </div>
   );
 }
 
 export default function FIRECalculatorPage() {
   const t = useTranslations("calculators");
+  const tc = useTranslations("common");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   const [currentAge, setCurrentAge] = useState(30);
   const [annualIncome, setAnnualIncome] = useState(100000);
@@ -156,11 +151,7 @@ export default function FIRECalculatorPage() {
               <Input
                 type="number"
                 value={currentAge}
-                onChange={(e) =>
-                  setCurrentAge(
-                    Math.max(18, Math.min(80, Number(e.target.value)))
-                  )
-                }
+                onChange={(e) => setCurrentAge(Math.max(18, Math.min(80, Number(e.target.value))))}
                 min={18}
                 max={80}
               />
@@ -299,9 +290,7 @@ export default function FIRECalculatorPage() {
                       <X className="h-5 w-5 text-muted-foreground" />
                     )}
                     <div>
-                      <span className="font-medium text-foreground">
-                        {m.label}
-                      </span>
+                      <span className="font-medium text-foreground">{m.label}</span>
                       <p className="text-xs text-muted-foreground">{m.help}</p>
                     </div>
                   </div>
@@ -341,7 +330,7 @@ export default function FIRECalculatorPage() {
             <CardTitle>{t("fire.chartTitle")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <Suspense fallback={<ChartSkeleton />}>
+            <Suspense fallback={<ChartSkeleton label={tc("loadingChart")} />}>
               <ResponsiveContainer width="100%" height={350}>
                 <LazyAreaChart data={chartData}>
                   <defs>
@@ -351,7 +340,11 @@ export default function FIRECalculatorPage() {
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                  <XAxis dataKey="age" stroke="hsl(var(--muted-foreground))" tick={{ fontSize: 12 }} />
+                  <XAxis
+                    dataKey="age"
+                    stroke="hsl(var(--muted-foreground))"
+                    tick={{ fontSize: 12 }}
+                  />
                   <YAxis
                     stroke="hsl(var(--muted-foreground))"
                     tick={{ fontSize: 12 }}

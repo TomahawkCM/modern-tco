@@ -14,8 +14,16 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "@/components/charts/lazy-charts";
-import { WalletIcon, TrendingUpIcon, HomeIcon, LandmarkIcon, CameraIcon } from "lucide-react";
-import type { Database, Json } from "@/supabase/database.types";
+import {
+  WalletIcon,
+  TrendingUpIcon,
+  HomeIcon,
+  LandmarkIcon,
+  CameraIcon,
+  AlertTriangleIcon,
+  ArrowRightLeftIcon,
+} from "lucide-react";
+import type { Database } from "@/supabase/database.types";
 
 type NetWorthSnapshotRow = Database["public"]["Tables"]["net_worth_snapshots"]["Row"];
 
@@ -31,6 +39,8 @@ interface NetWorthDashboardProps {
   snapshots: NetWorthSnapshotRow[];
   currency: string;
   formatAmount: (amt: { amountMinor: number; currency: string }) => string;
+  hasConversions?: boolean;
+  fxWarning?: boolean;
 }
 
 export function NetWorthDashboard({
@@ -41,10 +51,11 @@ export function NetWorthDashboard({
   investmentsTotal,
   propertiesTotal,
   loansTotal,
-  latestSnapshot,
   snapshots,
   currency,
   formatAmount,
+  hasConversions,
+  fxWarning,
 }: NetWorthDashboardProps) {
   const t = useTranslations("netWorth");
   const tc = useTranslations("common");
@@ -147,8 +158,21 @@ export function NetWorthDashboard({
           >
             {fmt(netWorth)}
           </p>
+          {hasConversions && (
+            <p className="mt-1 flex items-center justify-center gap-1 text-xs text-muted-foreground">
+              <ArrowRightLeftIcon className="size-3" />
+              {t("converted")}
+            </p>
+          )}
         </CardContent>
       </Card>
+
+      {fxWarning && (
+        <div className="flex items-center gap-2 rounded-md border border-yellow-300 bg-yellow-50 p-3 text-sm text-yellow-800 dark:border-yellow-800 dark:bg-yellow-950/30 dark:text-yellow-200">
+          <AlertTriangleIcon className="size-4 shrink-0" />
+          {t("fxWarning")}
+        </div>
+      )}
 
       {/* Assets vs Liabilities row */}
       <div className="grid gap-4 sm:grid-cols-2">

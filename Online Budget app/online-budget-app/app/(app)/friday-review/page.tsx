@@ -53,7 +53,6 @@ export default async function FridayReviewPage() {
     .lt("transaction_date", thisMondayStr);
 
   // Budget progress (current month budgets)
-  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().slice(0, 10);
   const { data: budgets } = await supabase
     .from("budgets")
     .select("id, category_id, amount_minor, currency")

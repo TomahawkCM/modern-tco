@@ -11,21 +11,12 @@ import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import { ArrowLeft, Repeat, Plus, Trash2, PieChart } from "lucide-react";
 import { CurrencyInput } from "@/components/calculators";
-import {
-  calculateSubscriptionCost,
-  generateSubscriptionId,
-  SUBSCRIPTION_CATEGORIES,
-} from "@/engine/calculators";
+import { calculateSubscriptionCost, generateSubscriptionId } from "@/engine/calculators";
 import type { SubscriptionEntry, SubscriptionFrequency } from "@/engine/calculators";
 import { formatCurrency, formatPercent } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const FREQUENCIES: SubscriptionFrequency[] = [
   "weekly",
@@ -38,8 +29,7 @@ const FREQUENCIES: SubscriptionFrequency[] = [
 export default function SubscriptionCostCalculatorPage() {
   const t = useTranslations("calculators");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   const [subscriptions, setSubscriptions] = useState<SubscriptionEntry[]>([
     {
@@ -88,9 +78,7 @@ export default function SubscriptionCostCalculatorPage() {
     field: keyof SubscriptionEntry,
     value: string | number | boolean
   ) => {
-    setSubscriptions(
-      subscriptions.map((s) => (s.id === id ? { ...s, [field]: value } : s))
-    );
+    setSubscriptions(subscriptions.map((s) => (s.id === id ? { ...s, [field]: value } : s)));
   };
 
   const hasSubscriptions = subscriptions.some((s) => s.amount > 0 && s.name.trim());
@@ -144,7 +132,7 @@ export default function SubscriptionCostCalculatorPage() {
                       value={sub.name}
                       onChange={(e) => updateSubscription(sub.id, "name", e.target.value)}
                       placeholder={t("subscriptionCost.namePlaceholder")}
-                      className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                      className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
                     />
                   </div>
                   <div>
@@ -167,9 +155,13 @@ export default function SubscriptionCostCalculatorPage() {
                     <select
                       value={sub.frequency}
                       onChange={(e) =>
-                        updateSubscription(sub.id, "frequency", e.target.value as SubscriptionFrequency)
+                        updateSubscription(
+                          sub.id,
+                          "frequency",
+                          e.target.value as SubscriptionFrequency
+                        )
                       }
-                      className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+                      className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
                     >
                       {FREQUENCIES.map((freq) => (
                         <option key={freq} value={freq}>
@@ -284,9 +276,7 @@ export default function SubscriptionCostCalculatorPage() {
                 </h3>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-foreground">
-                      {t("subscriptionCost.essentialCost")}
-                    </span>
+                    <span className="text-foreground">{t("subscriptionCost.essentialCost")}</span>
                     <span className="font-medium text-foreground">
                       {formatCurrency(result.essentialMonthly, currency, locale)}
                     </span>

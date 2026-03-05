@@ -3,7 +3,7 @@ import { z } from "zod";
 export const createBudgetSchema = z.object({
   category_id: z.string().uuid(),
   amount_minor: z.number().int().positive(),
-  currency: z.string().length(3).optional().default("USD"),
+  currency: z.string().length(3).optional(),
 });
 
 export const updateBudgetSchema = z

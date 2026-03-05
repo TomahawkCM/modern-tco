@@ -6,14 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { DownloadIcon, FileSpreadsheetIcon, FileJsonIcon } from "lucide-react";
 
 interface ExportFormProps {
@@ -57,9 +49,9 @@ function getDateRange(preset: DateRangePreset): { from: string; to: string } {
   }
 }
 
-export function ExportForm({ currency, locale }: ExportFormProps) {
+export function ExportForm({ locale }: ExportFormProps) {
+  // currency available in props for future export formatting
   const t = useTranslations("export");
-  const tc = useTranslations("common");
 
   const [preset, setPreset] = useState<DateRangePreset>("all");
   const [customFrom, setCustomFrom] = useState("");

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
-import { useTranslations } from "next-intl";
+import { useState, useCallback, useRef, useEffect } from "react";
+import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -41,6 +41,7 @@ import {
   getBankConfig,
 } from "@/lib/parsers";
 import type { ParsedTransaction, FormatDetectionResult, BankDetectionResult } from "@/lib/parsers";
+import { formatCurrency } from "@/lib/format";
 
 type Step = "upload" | "configure" | "preview" | "import";
 const STEPS: Step[] = ["upload", "configure", "preview", "import"];
@@ -60,6 +61,7 @@ interface ImportResult {
 export default function ImportPage() {
   const t = useTranslations("import");
   const tc = useTranslations("common");
+  const locale = useLocale();
   const router = useRouter();
 
   const [step, setStep] = useState<Step>("upload");
@@ -70,7 +72,7 @@ export default function ImportPage() {
   const [transactions, setTransactions] = useState<ParsedTransaction[]>([]);
   const [accounts, setAccounts] = useState<AccountOption[]>([]);
   const [selectedAccountId, setSelectedAccountId] = useState<string>("");
-  const [selectedCurrency, setSelectedCurrency] = useState<string>("USD");
+  const [selectedCurrency, setSelectedCurrency] = useState<string>("");
   const [importing, setImporting] = useState(false);
   const [importProgress, setImportProgress] = useState(0);
   const [importResult, setImportResult] = useState<ImportResult | null>(null);
@@ -78,6 +80,20 @@ export default function ImportPage() {
   const [dragOver, setDragOver] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Fetch user's primary currency as default
+  useEffect(() => {
+    if (!selectedCurrency) {
+      fetch("/api/settings")
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (data?.primary_currency && !selectedCurrency) {
+            setSelectedCurrency(data.primary_currency);
+          }
+        })
+        .catch(() => setSelectedCurrency("USD"));
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fetch accounts
   const fetchAccounts = useCallback(async () => {
@@ -439,7 +455,9 @@ export default function ImportPage() {
                 <TableBody>
                   {transactions.slice(0, 50).map((tx, i) => (
                     <TableRow key={i}>
-                      <TableCell className="text-sm">{tx.date.toLocaleDateString()}</TableCell>
+                      <TableCell className="text-sm">
+                        {tx.date.toLocaleDateString(locale)}
+                      </TableCell>
                       <TableCell className="max-w-48 truncate text-sm">{tx.description}</TableCell>
                       <TableCell
                         className={`text-right text-sm font-medium ${
@@ -447,7 +465,7 @@ export default function ImportPage() {
                         }`}
                       >
                         {tx.amount >= 0 ? "+" : ""}
-                        {tx.amount.toFixed(2)}
+                        {formatCurrency(Math.abs(tx.amount), selectedCurrency || "USD", locale)}
                       </TableCell>
                       <TableCell>
                         <Badge variant={tx.isDuplicate ? "secondary" : "default"}>

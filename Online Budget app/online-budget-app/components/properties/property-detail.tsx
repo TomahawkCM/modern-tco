@@ -85,7 +85,7 @@ const PIE_COLORS = ["#10b981", "#6366f1"];
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
-export function PropertyDetail({ property, equity, currency, formatAmount }: PropertyDetailProps) {
+export function PropertyDetail({ property, equity, formatAmount }: PropertyDetailProps) {
   const t = useTranslations("properties");
   const tc = useTranslations("common");
   const router = useRouter();

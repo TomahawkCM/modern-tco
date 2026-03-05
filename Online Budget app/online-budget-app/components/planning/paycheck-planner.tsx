@@ -208,7 +208,7 @@ export function PaycheckPlanner({ plans, currency, formatAmount }: PaycheckPlann
     } finally {
       setSaving(false);
     }
-  }, [form, allocations, currency, router, buildAllocationsPayload]);
+  }, [form, currency, router, buildAllocationsPayload]);
 
   const handleEdit = useCallback(async () => {
     if (!selectedPlan) return;
@@ -235,7 +235,7 @@ export function PaycheckPlanner({ plans, currency, formatAmount }: PaycheckPlann
     } finally {
       setSaving(false);
     }
-  }, [form, allocations, selectedPlan, currency, router, buildAllocationsPayload]);
+  }, [form, selectedPlan, currency, router, buildAllocationsPayload]);
 
   const handleDelete = useCallback(async () => {
     if (!selectedPlan) return;

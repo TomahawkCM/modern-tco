@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,6 +40,7 @@ export function SyncStatus({
   onSyncComplete,
 }: SyncStatusProps) {
   const t = useTranslations("bankSync");
+  const locale = useLocale();
 
   const [syncing, setSyncing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -95,7 +96,7 @@ export function SyncStatus({
         : t("statusInactive");
 
   const formattedLastSync = lastSyncedAt
-    ? new Date(lastSyncedAt).toLocaleString()
+    ? new Date(lastSyncedAt).toLocaleString(locale)
     : t("neverSynced");
 
   return (

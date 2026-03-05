@@ -24,17 +24,12 @@ export default async function TransactionsPage({ searchParams }: Props) {
     .eq("user_id", user.id)
     .single();
 
-  const currency = settings?.primary_currency ?? "USD";
   const locale = settings?.locale ?? "en-US";
 
   // Default to current month when no filters provided
   const now = new Date();
-  const defaultFrom = new Date(now.getFullYear(), now.getMonth(), 1)
-    .toISOString()
-    .split("T")[0]!;
-  const defaultTo = new Date(now.getFullYear(), now.getMonth() + 1, 0)
-    .toISOString()
-    .split("T")[0]!;
+  const defaultFrom = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split("T")[0]!;
+  const defaultTo = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split("T")[0]!;
   const fromDate = params.from ?? defaultFrom;
   const toDate = params.to ?? defaultTo;
 
@@ -63,17 +58,14 @@ export default async function TransactionsPage({ searchParams }: Props) {
     categoryKeyMap.set(cat.id, cat.key);
   }
 
-  const fmt = (amt: { amountMinor: number; currency: string }) =>
-    formatMoney(amt, locale);
+  const fmt = (amt: { amountMinor: number; currency: string }) => formatMoney(amt, locale);
 
   const displayTransactions = transactions.map((tx) => ({
     id: tx.id,
     date: tx.transaction_date,
     description: tx.description,
     merchantName: tx.merchant_name,
-    categoryKey: tx.category_id
-      ? (categoryKeyMap.get(tx.category_id) ?? null)
-      : null,
+    categoryKey: tx.category_id ? (categoryKeyMap.get(tx.category_id) ?? null) : null,
     amount: minorAmount(tx.amount_minor, tx.currency),
     isPending: tx.is_pending,
   }));
@@ -89,10 +81,7 @@ export default async function TransactionsPage({ searchParams }: Props) {
         </span>
       </div>
       <TransactionFilters />
-      <TransactionTable
-        transactions={displayTransactions}
-        formatAmount={fmt}
-      />
+      <TransactionTable transactions={displayTransactions} formatAmount={fmt} />
     </div>
   );
 }

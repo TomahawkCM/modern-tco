@@ -5,6 +5,7 @@ import { rateLimitAuth, createRateLimitResponse } from "@/lib/rate-limit";
 import { syncTransactions, isPlaidConfigured } from "@/integrations/plaid";
 import { getConnectedBank, updateConnectedBank } from "@/server/connected-banks";
 import { decrypt } from "@/lib/encryption";
+import { getUserSettings } from "@/server/settings";
 
 const syncSchema = z.object({
   connected_bank_id: z.string().uuid(),
@@ -85,13 +86,14 @@ export async function POST(request: NextRequest) {
 
     // If no linked account exists, create a placeholder for this bank connection
     if (!defaultAccountId) {
+      const settings = await getUserSettings(supabase, user.id);
       const { data: newAccount, error: accountError } = await supabase
         .from("accounts")
         .insert({
           user_id: user.id,
           name: `Bank Connection ${bank.id.slice(0, 8)}`,
           type: "checking" as const,
-          currency: "USD",
+          currency: settings.primary_currency,
           balance_minor: 0,
           is_manual: false,
           institution_id: bank.institution_id ?? null,
