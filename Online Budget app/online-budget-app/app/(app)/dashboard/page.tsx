@@ -5,6 +5,7 @@ import {
   aggregateIncomeExpense,
   aggregateByCategory,
   computeBudgetProgress,
+  computeSafeToSpend,
   absMinor,
   sumMinor,
   formatMoney,
@@ -23,6 +24,7 @@ import { CategoryBreakdown } from "@/components/dashboard/category-breakdown";
 import { BudgetProgressList } from "@/components/dashboard/budget-progress-list";
 import { HealthScoreWidget } from "@/components/insights/health-score-widget";
 import { InsightAlerts } from "@/components/dashboard/insight-alerts";
+import { SafeToSpendCard } from "@/components/dashboard/safe-to-spend-card";
 import { computeFinancialHealthScore } from "@/engine/insights/health-score";
 
 export default async function DashboardPage() {
@@ -48,12 +50,8 @@ export default async function DashboardPage() {
 
   // Fetch current month boundaries
   const now = new Date();
-  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1)
-    .toISOString()
-    .split("T")[0]!;
-  const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0)
-    .toISOString()
-    .split("T")[0]!;
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split("T")[0]!;
+  const monthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split("T")[0]!;
 
   // Parallel data fetching — accounts, transactions, budgets, category keys
   const [accounts, txResult, budgetResult, categoryRows] = await Promise.all([
@@ -89,26 +87,18 @@ export default async function DashboardPage() {
   const summary = aggregateIncomeExpense(incomeExpenseInput, currency);
 
   // 2. Category spending breakdown
-  const categoryInput: TransactionForCategoryAggregation[] = transactions.map(
-    (t) => ({
-      amountMinor: t.amount_minor,
-      currency: t.currency,
-      categoryKey: t.category_id
-        ? (categoryKeyMap.get(t.category_id) ?? null)
-        : null,
-    })
-  );
+  const categoryInput: TransactionForCategoryAggregation[] = transactions.map((t) => ({
+    amountMinor: t.amount_minor,
+    currency: t.currency,
+    categoryKey: t.category_id ? (categoryKeyMap.get(t.category_id) ?? null) : null,
+  }));
   const categoryBreakdown = aggregateByCategory(categoryInput, currency);
 
   // 3. Account balances (sum via engine)
   const primaryAccounts = accounts.filter((a) => a.currency === currency);
-  const accountAmounts = primaryAccounts.map((a) =>
-    minorAmount(a.balance_minor, a.currency)
-  );
+  const accountAmounts = primaryAccounts.map((a) => minorAmount(a.balance_minor, a.currency));
   const totalBalance =
-    accountAmounts.length > 0
-      ? sumMinor(accountAmounts, currency)
-      : minorAmount(0, currency);
+    accountAmounts.length > 0 ? sumMinor(accountAmounts, currency) : minorAmount(0, currency);
 
   // 4. Budget progress
   const budgetLimits: BudgetLimit[] = budgets
@@ -119,28 +109,35 @@ export default async function DashboardPage() {
       currency: b.currency,
     }));
 
-  const actualSpending: CategoryActualSpending[] =
-    categoryBreakdown.categories
-      .filter((c) => c.categoryKey !== null && c.total.amountMinor < 0)
-      .map((c) => ({
-        categoryKey: c.categoryKey!,
-        spentMinor: absMinor(c.total).amountMinor,
-      }));
+  const actualSpending: CategoryActualSpending[] = categoryBreakdown.categories
+    .filter((c) => c.categoryKey !== null && c.total.amountMinor < 0)
+    .map((c) => ({
+      categoryKey: c.categoryKey!,
+      spentMinor: absMinor(c.total).amountMinor,
+    }));
 
-  const budgetProgress = computeBudgetProgress(
-    budgetLimits,
-    actualSpending,
-    currency
-  );
+  const budgetProgress = computeBudgetProgress(budgetLimits, actualSpending, currency);
 
   // 5. Savings rate (engine values only — division for display percentage)
   const incomeMinor = summary.totalIncome.amountMinor;
   const savingsRate =
-    incomeMinor > 0
-      ? ((incomeMinor + summary.totalExpense.amountMinor) / incomeMinor) * 100
-      : 0;
+    incomeMinor > 0 ? ((incomeMinor + summary.totalExpense.amountMinor) / incomeMinor) * 100 : 0;
 
-  // 6. Financial health score
+  // 6. Safe-to-spend
+  const totalBudgetedMinor = budgetLimits.reduce((sum, b) => sum + b.limitMinor, 0);
+  const totalSpentMinor = absMinor(summary.totalExpense).amountMinor;
+  const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+
+  const safeToSpend = computeSafeToSpend({
+    incomeMinor,
+    totalBudgetedMinor,
+    totalSpentMinor,
+    currentDay: now.getDate(),
+    daysInMonth,
+    currency,
+  });
+
+  // 7. Financial health score
   const budgetAdherencePercent =
     budgetProgress.length > 0
       ? budgetProgress.reduce((sum, b) => {
@@ -158,8 +155,7 @@ export default async function DashboardPage() {
   });
 
   // === FORMATTING (display only) ===
-  const fmt = (amt: { amountMinor: number; currency: string }) =>
-    formatMoney(amt, locale);
+  const fmt = (amt: { amountMinor: number; currency: string }) => formatMoney(amt, locale);
 
   const monthName = now.toLocaleString(locale, {
     month: "long",
@@ -186,15 +182,16 @@ export default async function DashboardPage() {
         <HealthScoreWidget result={healthScore} />
       </section>
 
+      <section>
+        <h2 className="mb-3 text-lg font-medium">{t("sections.safeToSpend")}</h2>
+        <SafeToSpendCard result={safeToSpend} formatAmount={fmt} />
+      </section>
+
       <InsightAlerts />
 
       <section>
         <h2 className="mb-3 text-lg font-medium">{t("sections.accounts")}</h2>
-        <AccountCards
-          accounts={primaryAccounts}
-          totalBalance={totalBalance}
-          formatAmount={fmt}
-        />
+        <AccountCards accounts={primaryAccounts} totalBalance={totalBalance} formatAmount={fmt} />
       </section>
 
       <section>
@@ -211,19 +208,12 @@ export default async function DashboardPage() {
 
       <section>
         <h2 className="mb-3 text-lg font-medium">{t("sections.categories")}</h2>
-        <CategoryBreakdown
-          categories={categoryBreakdown.categories}
-          formatAmount={fmt}
-        />
+        <CategoryBreakdown categories={categoryBreakdown.categories} formatAmount={fmt} />
       </section>
 
       <section>
         <h2 className="mb-3 text-lg font-medium">{t("sections.budgets")}</h2>
-        <BudgetProgressList
-          items={budgetProgress}
-          currency={currency}
-          formatAmount={fmt}
-        />
+        <BudgetProgressList items={budgetProgress} currency={currency} formatAmount={fmt} />
       </section>
     </div>
   );

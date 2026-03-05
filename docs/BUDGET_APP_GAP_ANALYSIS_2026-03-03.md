@@ -1,7 +1,7 @@
 # Online Budget App: Plans vs Production Gap Analysis
 
 **Date**: 2026-03-03 | **Type**: Analysis (read-only, no code changes) | **Verified against codebase**
-**Updated**: 2026-03-04 — Sessions 1-7 completed, gap items marked done
+**Updated**: 2026-03-05 — Sessions 1-9 completed, gap items marked done
 
 ### Completed Since Original Analysis (Sessions 1-7)
 
@@ -14,6 +14,9 @@
 | S5      | Multi-Currency | FX rate service, USD hardcode elimination, net worth multi-currency, CurrencyProvider                   |
 | S6      | i18n           | Full i18n completion — admin, errors, landing, locale-aware formatting, html lang/dir                   |
 | S7      | OAuth          | Google + GitHub OAuth via Supabase PKCE, login page i18n                                                |
+| S8      | Auth           | Passkey/WebAuthn (SimpleWebAuthn v13), discoverable credentials, magic link sessions                    |
+| S9      | Accessibility  | Skip nav, ARIA landmarks, role="alert"/role="status", icon button labels, 10 plan docs archived         |
+| S10     | Phase 1 Gaps   | Safe-to-Spend engine + dashboard widget, budget methodology selector (4 methods), methodology engine    |
 
 ---
 
@@ -91,9 +94,9 @@ All items (Vite, Mantine, React Router, Hono.js, Cloudflare, new repo) abandoned
 | E2E encryption              | **DONE**          | `src/lib/encryption/budget-encryption.ts`: PBKDF2 (100K iterations) + AES-GCM + device fingerprint derivation. `encrypted-db-wrapper.ts`, `encrypted-transactions.ts`, `migrate-to-encryption.ts`, `lan-sync-encryption.ts`. No 24-word recovery or multi-device key exchange. |
 | Cloud sync engine           | **PARTIAL**       | Online app uses Supabase PostgreSQL. No offline-first sync with conflict resolution (CRDT/OT). LAN sync exists (6-component QR-based subsystem) but is device-to-device, not cloud.                                                                                            |
 | Stripe billing              | **DONE** (online) | Online app: `api/stripe/checkout/route.ts`, `api/stripe/webhook/route.ts`, `api/subscription/status/route.ts`. Embedded: only `api/v1/stripe/create-checkout-session/route.ts`.                                                                                                |
-| Passkey auth (WebAuthn)     | **NOT STARTED**   | No FIDO2/SimpleWebAuthn implementation. PIN-based auth exists (`PINSetupDialog`, `PINEntryDialog`).                                                                                                                                                                            |
-| Safe-to-Spend engine        | **PARTIAL**       | Budget tracking + health score widgets exist (`HealthScoreWidget.tsx`, `HealthScoreHistory.tsx`). No dedicated "safe to spend today" widget.                                                                                                                                   |
-| Budget methodology selector | **PARTIAL**       | Budgets page exists with rollover support (`BudgetRollover` type). Unclear if all 4 methods (envelope, zero-based, 50/30/20, pay-yourself-first) are selectable.                                                                                                               |
+| Passkey auth (WebAuthn)     | **DONE** (S8)     | SimpleWebAuthn v13: register/login API routes, discoverable credentials, challenge cookies, counter-based replay protection, magic link session creation. `PasskeyManagement` settings component, `PasskeyLoginButton` on login page. Migration `015_user_passkeys.sql`.       |
+| Safe-to-Spend engine        | **DONE** (S10)    | `engine/budgeting/safe-to-spend.ts` with `computeSafeToSpend()`. Dashboard widget shows daily + monthly safe amounts. 5 unit tests.                                                                                                                                            |
+| Budget methodology selector | **DONE** (S10)    | 4 methods (Envelope, Zero-Based, 50/30/20, Pay-Yourself-First) selectable in budgets page. Engine functions for each methodology in `engine/budgeting/methodology.ts`. Stored in `user_settings.budget_methodology`. 10 unit tests.                                            |
 | Multi-currency engine       | **DONE** (S5)     | FX rate service (`lib/currency/fx-rates.ts`), frankfurter.app + Supabase cache (24h TTL), `convertAmount()`, net worth multi-currency aggregation, CurrencyProvider context, all hardcoded USD eliminated.                                                                     |
 | Localization (114 locales)  | **DONE** (S6)     | 113 locales in `src/i18n/messages/` via next-intl. Full i18n completion: admin pages, error pages, landing page, locale-aware formatting, dynamic html lang + dir. RTL support confirmed.                                                                                      |
 
@@ -246,12 +249,11 @@ Public API, document vault, rules engine, Canadian tax, native mobile, self-host
 - Options: (a) Merge into one app with feature flags, (b) Keep separate with shared engine library, (c) Sunset embedded in favor of online
 - **Effort**: Architectural decision. **Impact**: Determines all future development.
 
-### 5. Passkey Authentication (WebAuthn) — NEXT PRIORITY
+### 5. ~~Passkey Authentication (WebAuthn)~~ — DONE (Session 8)
 
-- PIN auth exists but no FIDO2
-- Plans call for SimpleWebAuthn — library selected but not implemented
-- OAuth (Google + GitHub) added in Session 7 — WebAuthn is the next auth step
-- **Effort**: Medium. **Impact**: Security differentiator, required for premium tier.
+- ~~PIN auth exists but no FIDO2~~
+- SimpleWebAuthn v13 implemented: registration + login flows, discoverable credentials, httpOnly challenge cookies, counter-based replay protection, magic link session creation via Supabase admin API.
+- PasskeyManagement settings UI + PasskeyLoginButton on login page.
 
 ### 6. Family Sharing & Collaboration
 
@@ -260,19 +262,18 @@ Public API, document vault, rules engine, Canadian tax, native mobile, self-host
 - Expense splitting exists but is single-user (no household accounts)
 - **Effort**: Large. **Impact**: Justifies premium tier revenue.
 
-### 7. Finish PRD Accessibility Items
+### 7. Finish PRD Accessibility Items — PARTIALLY DONE (Session 9)
 
-- 5 pending tasks from PRD (keyboard testing, screen reader testing, form optimization)
-- Accessibility infrastructure exists (seniors mode, accessible charts, WCAG components)
+- S9 completed: skip nav, main landmark, ARIA labels on nav/buttons, role="alert"/role="status", focus indicators verified
+- Remaining: keyboard testing, screen reader testing, form optimization
 - **Effort**: Low. **Impact**: Quality/compliance.
 
-### 8. Plan Document Cleanup
+### 8. ~~Plan Document Cleanup~~ — DONE (Session 9)
 
-- Archive 10 documents (all Vite/Mantine references)
-- Keep 2 as valid (PDF import plan, offline upgrade plan)
-- Audit 3 PRDs for completion status
-- Keep 2 as research references
-- **Effort**: Low. **Impact**: Prevents future confusion.
+- ~~Archive 10 documents (all Vite/Mantine references)~~
+- 10 stale plan documents archived to `Plans/archived/` and `Online Budget app/docs/archived/` in S9.
+- Remaining valid docs: PDF_IMPORT_REDESIGN_PLAN, OFFLINE_VERSION_UPGRADE_PLAN, BUDGET_APP_COMPLETE_PRD, BUDGET_APP_UI_UX_PRD.
+- Research references kept: 02-PRD-Budget-App-v1, ONLINE_BUDGET_APP_PLAN_COMPARISON.
 
 ---
 
