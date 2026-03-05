@@ -27,14 +27,9 @@ import {
 import { calculateRetirement, DEFAULT_ASSUMPTIONS } from "@/engine/calculators";
 import { formatCurrency, formatPercent } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
 import { cn } from "@/lib/utils";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -49,22 +44,22 @@ import {
   ResponsiveContainer,
 } from "@/components/charts/lazy-charts";
 
-function ChartSkeleton() {
+function ChartSkeleton({ label }: { label: string }) {
   return (
     <div
       className="flex w-full animate-pulse items-center justify-center rounded-lg bg-muted"
       style={{ height: 400 }}
     >
-      <span className="text-sm text-muted-foreground">Loading chart...</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
     </div>
   );
 }
 
 export default function RetirementPlannerPage() {
   const t = useTranslations("calculators");
+  const tc = useTranslations("common");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   const [currentAge, setCurrentAge] = useState(30);
   const [retirementAge, setRetirementAge] = useState(65);
@@ -79,18 +74,12 @@ export default function RetirementPlannerPage() {
   const [postRetirementReturn, setPostRetirementReturn] = useState<number>(
     DEFAULT_ASSUMPTIONS.postRetirementReturn
   );
-  const [inflationRate, setInflationRate] = useState<number>(
-    DEFAULT_ASSUMPTIONS.inflationRate
-  );
-  const [lifeExpectancy, setLifeExpectancy] = useState<number>(
-    DEFAULT_ASSUMPTIONS.lifeExpectancy
-  );
+  const [inflationRate, setInflationRate] = useState<number>(DEFAULT_ASSUMPTIONS.inflationRate);
+  const [lifeExpectancy, setLifeExpectancy] = useState<number>(DEFAULT_ASSUMPTIONS.lifeExpectancy);
   const [socialSecurity, setSocialSecurity] = useState<number>(
     DEFAULT_ASSUMPTIONS.socialSecurityMonthly
   );
-  const [ssStartAge, setSSStartAge] = useState<number>(
-    DEFAULT_ASSUMPTIONS.socialSecurityStartAge
-  );
+  const [ssStartAge, setSSStartAge] = useState<number>(DEFAULT_ASSUMPTIONS.socialSecurityStartAge);
 
   const result = useMemo(
     () =>
@@ -133,29 +122,23 @@ export default function RetirementPlannerPage() {
   );
 
   const getBadge = () => {
-    if (
-      result.isSufficient &&
-      result.yearsMoneyLasts >= lifeExpectancy - retirementAge
-    ) {
+    if (result.isSufficient && result.yearsMoneyLasts >= lifeExpectancy - retirementAge) {
       return {
         text: t("retirement.heroSufficientBadge"),
-        color:
-          "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/50",
+        color: "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/50",
         icon: <CheckCircle2 className="h-5 w-5" />,
       };
     }
     if (result.isSufficient) {
       return {
         text: t("retirement.heroNeutralBadge"),
-        color:
-          "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border-yellow-500/50",
+        color: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border-yellow-500/50",
         icon: <AlertTriangle className="h-5 w-5" />,
       };
     }
     return {
       text: t("retirement.heroInsufficientBadge"),
-      color:
-        "bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/50",
+      color: "bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/50",
       icon: <XCircle className="h-5 w-5" />,
     };
   };
@@ -178,9 +161,7 @@ export default function RetirementPlannerPage() {
             <TrendingUp className="h-8 w-8 text-primary" />
             {t("retirement.title")}
           </h1>
-          <p className="mt-2 text-muted-foreground">
-            {t("retirement.subtitle")}
-          </p>
+          <p className="mt-2 text-muted-foreground">{t("retirement.subtitle")}</p>
         </div>
       </div>
 
@@ -199,9 +180,7 @@ export default function RetirementPlannerPage() {
                     type="number"
                     value={currentAge}
                     onChange={(e) =>
-                      setCurrentAge(
-                        Math.max(18, Math.min(80, Number(e.target.value)))
-                      )
+                      setCurrentAge(Math.max(18, Math.min(80, Number(e.target.value))))
                     }
                     min={18}
                     max={80}
@@ -214,10 +193,7 @@ export default function RetirementPlannerPage() {
                     value={retirementAge}
                     onChange={(e) =>
                       setRetirementAge(
-                        Math.max(
-                          currentAge + 1,
-                          Math.min(80, Number(e.target.value))
-                        )
+                        Math.max(currentAge + 1, Math.min(80, Number(e.target.value)))
                       )
                     }
                     min={currentAge + 1}
@@ -310,9 +286,7 @@ export default function RetirementPlannerPage() {
                     type="number"
                     value={lifeExpectancy}
                     onChange={(e) =>
-                      setLifeExpectancy(
-                        Math.max(retirementAge + 1, Number(e.target.value))
-                      )
+                      setLifeExpectancy(Math.max(retirementAge + 1, Number(e.target.value)))
                     }
                     min={retirementAge + 1}
                     max={110}
@@ -334,9 +308,7 @@ export default function RetirementPlannerPage() {
                     type="number"
                     value={ssStartAge}
                     onChange={(e) =>
-                      setSSStartAge(
-                        Math.max(62, Math.min(70, Number(e.target.value)))
-                      )
+                      setSSStartAge(Math.max(62, Math.min(70, Number(e.target.value))))
                     }
                     min={62}
                     max={70}
@@ -415,8 +387,7 @@ export default function RetirementPlannerPage() {
                     : t("retirement.shortfall"),
                 value: Math.abs(result.shortfallOrSurplus),
                 type: "currency",
-                variant:
-                  result.shortfallOrSurplus >= 0 ? "success" : "danger",
+                variant: result.shortfallOrSurplus >= 0 ? "success" : "danger",
               },
             ]}
           />
@@ -453,7 +424,7 @@ export default function RetirementPlannerPage() {
             <CardTitle>{t("retirement.chartTitle")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <Suspense fallback={<ChartSkeleton />}>
+            <Suspense fallback={<ChartSkeleton label={tc("loadingChart")} />}>
               <ResponsiveContainer width="100%" height={400}>
                 <LazyAreaChart data={chartData}>
                   <defs>
@@ -467,7 +438,11 @@ export default function RetirementPlannerPage() {
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                  <XAxis dataKey="age" stroke="hsl(var(--muted-foreground))" tick={{ fontSize: 12 }} />
+                  <XAxis
+                    dataKey="age"
+                    stroke="hsl(var(--muted-foreground))"
+                    tick={{ fontSize: 12 }}
+                  />
                   <YAxis
                     stroke="hsl(var(--muted-foreground))"
                     tick={{ fontSize: 12 }}

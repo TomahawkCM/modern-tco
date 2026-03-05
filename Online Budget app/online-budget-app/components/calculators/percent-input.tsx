@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useRef, useId } from "react";
 import { useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
 import { parseFormattedNumber } from "@/lib/format";
@@ -34,7 +34,6 @@ export function PercentInput({
   id,
   min = 0,
   max = 100,
-  step = 0.1,
   decimals = 2,
   helperText,
   error,
@@ -50,30 +49,23 @@ export function PercentInput({
   const dir = localeMeta.dir || "ltr";
   const isRTL = dir === "rtl";
 
-  const [displayValue, setDisplayValue] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
+  const [editingValue, setEditingValue] = useState<string | null>(null);
+  const isFocused = useRef(false);
 
-  const formatForDisplay = useCallback(
-    (num: number, loc: SupportedLocale, dec: number) => {
-      if (isNaN(num)) return "";
-      return new Intl.NumberFormat(loc, {
-        minimumFractionDigits: dec,
-        maximumFractionDigits: dec,
-      }).format(num);
-    },
-    []
-  );
+  function formatForDisplay(num: number, loc: SupportedLocale, dec: number) {
+    if (isNaN(num)) return "";
+    return new Intl.NumberFormat(loc, {
+      minimumFractionDigits: dec,
+      maximumFractionDigits: dec,
+    }).format(num);
+  }
 
-  useEffect(() => {
-    if (!isFocused) {
-      setDisplayValue(formatForDisplay(value, locale, decimals));
-    }
-  }, [value, locale, decimals, isFocused, formatForDisplay]);
+  const displayValue = editingValue ?? formatForDisplay(value, locale, decimals);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const rawValue = e.target.value;
-      setDisplayValue(rawValue);
+      setEditingValue(rawValue);
 
       const parsed = parseFormattedNumber(rawValue, locale);
       if (!isNaN(parsed)) {
@@ -89,31 +81,26 @@ export function PercentInput({
   );
 
   const handleFocus = useCallback(() => {
-    setIsFocused(true);
-    if (!isNaN(value)) setDisplayValue(value.toFixed(decimals));
+    isFocused.current = true;
+    if (!isNaN(value)) setEditingValue(value.toFixed(decimals));
   }, [value, decimals]);
 
   const handleBlur = useCallback(() => {
-    setIsFocused(false);
-    setDisplayValue(formatForDisplay(value, locale, decimals));
-  }, [value, locale, decimals, formatForDisplay]);
+    isFocused.current = false;
+    setEditingValue(null);
+  }, []);
 
-  const inputId =
-    id || `percent-input-${Math.random().toString(36).substr(2, 9)}`;
+  const reactId = useId();
+  const inputId = id || `percent-input-${reactId.replace(/:/g, "")}`;
   const helperId = `${inputId}-helper`;
   const errorId = `${inputId}-error`;
   const describedBy =
-    [helperText ? helperId : null, error ? errorId : null]
-      .filter(Boolean)
-      .join(" ") || undefined;
+    [helperText ? helperId : null, error ? errorId : null].filter(Boolean).join(" ") || undefined;
 
   return (
     <div className={cn("space-y-1", className)} dir={dir}>
       {label && (
-        <label
-          htmlFor={inputId}
-          className="block text-sm font-medium text-foreground"
-        >
+        <label htmlFor={inputId} className="block text-sm font-medium text-foreground">
           {label}
           {required && <span className="ms-1 text-destructive">*</span>}
         </label>

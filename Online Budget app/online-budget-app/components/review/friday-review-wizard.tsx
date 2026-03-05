@@ -2,9 +2,8 @@
 
 import { useState, useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import {
   ArrowRightIcon,
@@ -173,7 +172,7 @@ export function FridayReviewWizard({
       topCategory,
       budgetProgress,
     };
-  }, [thisWeekTransactions, lastWeekTransactions, budgets, categoryMap]);
+  }, [thisWeekTransactions, lastWeekTransactions, budgets, categoryMap, tTx]);
 
   /* ---- Navigation ---- */
 

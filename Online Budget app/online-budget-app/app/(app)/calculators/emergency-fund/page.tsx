@@ -9,37 +9,21 @@
 import { useState, useMemo } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
-import {
-  ArrowLeft,
-  Shield,
-  Calendar,
-  Target,
-  TrendingUp,
-  CheckCircle,
-} from "lucide-react";
+import { ArrowLeft, Shield, Calendar, Target, TrendingUp, CheckCircle } from "lucide-react";
 import { CurrencyInput, ResultsPanel } from "@/components/calculators";
-import {
-  calculateEmergencyFund,
-  getRecommendedMonths,
-} from "@/engine/calculators";
+import { calculateEmergencyFund, getRecommendedMonths } from "@/engine/calculators";
 import { formatCurrency } from "@/lib/format";
 import { formatPercent } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
 import { cn } from "@/lib/utils";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 
 export default function EmergencyFundCalculatorPage() {
   const t = useTranslations("calculators");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   const [monthlyExpenses, setMonthlyExpenses] = useState(3000);
   const [targetMonths, setTargetMonths] = useState(6);
@@ -57,10 +41,7 @@ export default function EmergencyFundCalculatorPage() {
     [monthlyExpenses, targetMonths, currentSavings, monthlyContribution]
   );
 
-  const recommendedMonths = useMemo(
-    () => getRecommendedMonths(true, false, false),
-    []
-  );
+  const recommendedMonths = useMemo(() => getRecommendedMonths(true, false, false), []);
 
   return (
     <div className="space-y-8">
@@ -78,9 +59,7 @@ export default function EmergencyFundCalculatorPage() {
             <Shield className="h-8 w-8 text-primary" />
             {t("emergencyFund.title")}
           </h1>
-          <p className="mt-2 text-muted-foreground">
-            {t("emergencyFund.subtitle")}
-          </p>
+          <p className="mt-2 text-muted-foreground">{t("emergencyFund.subtitle")}</p>
         </div>
       </div>
 
@@ -162,9 +141,7 @@ export default function EmergencyFundCalculatorPage() {
                   <Target className="h-6 w-6 text-primary" />
                 )}
                 <h3 className="text-lg font-semibold text-foreground">
-                  {result.isGoalMet
-                    ? t("emergencyFund.goalMet")
-                    : t("emergencyFund.goalProgress")}
+                  {result.isGoalMet ? t("emergencyFund.goalMet") : t("emergencyFund.goalProgress")}
                 </h3>
               </div>
 
@@ -199,11 +176,7 @@ export default function EmergencyFundCalculatorPage() {
               {!result.isGoalMet && result.amountNeeded > 0 && (
                 <p className="text-sm text-muted-foreground">
                   {t("emergencyFund.amountNeeded", {
-                    amount: formatCurrency(
-                      result.amountNeeded,
-                      currency,
-                      locale
-                    ),
+                    amount: formatCurrency(result.amountNeeded, currency, locale),
                   })}
                 </p>
               )}

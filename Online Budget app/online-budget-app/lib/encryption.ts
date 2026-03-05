@@ -1,9 +1,16 @@
 /**
- * Simple AES-256-GCM encryption / decryption for sensitive tokens.
+ * AES-256-GCM encryption / decryption with key rotation support.
  *
- * Uses the ENCRYPTION_KEY env var (hex-encoded 32-byte key).
- * If ENCRYPTION_KEY is not set, falls back to a reversible base64 encoding
- * with a prefix so we can distinguish encrypted vs. encoded values later.
+ * Uses ENCRYPTION_KEY (current) for all new encryptions.
+ * Uses ENCRYPTION_KEY_PREVIOUS (comma-separated) as fallback for decryption,
+ * enabling zero-downtime key rotation.
+ *
+ * Key rotation workflow:
+ * 1. Generate a new 64-char hex key
+ * 2. Set ENCRYPTION_KEY_PREVIOUS to the old key(s)
+ * 3. Set ENCRYPTION_KEY to the new key
+ * 4. Deploy — new data encrypted with new key, old data still decryptable
+ * 5. (Optional) Re-encrypt old data with `reEncrypt()` then remove old keys
  */
 
 import { createCipheriv, createDecipheriv, randomBytes } from "crypto";
@@ -14,28 +21,58 @@ const AUTH_TAG_LENGTH = 16;
 const ENCRYPTED_PREFIX = "enc:";
 const ENCODED_PREFIX = "b64:";
 
-function getEncryptionKey(): Buffer | null {
-  const hex = process.env.ENCRYPTION_KEY;
-  if (!hex) return null;
+function parseHexKey(hex: string): Buffer {
   const buf = Buffer.from(hex, "hex");
   if (buf.length !== 32) {
-    throw new Error("ENCRYPTION_KEY must be a 64-character hex string (32 bytes)");
+    throw new Error(
+      `Encryption key must be a 64-character hex string (32 bytes), got ${hex.length} chars`
+    );
   }
   return buf;
 }
 
 /**
- * Encrypt a plaintext string.
- * Returns a prefixed string: "enc:<iv>:<authTag>:<ciphertext>" (all hex)
- * or "b64:<base64>" when no ENCRYPTION_KEY is configured.
+ * Get the current (primary) encryption key.
+ * Returns null only in non-production when ENCRYPTION_KEY is unset.
+ */
+function getCurrentKey(): Buffer | null {
+  const hex = process.env.ENCRYPTION_KEY;
+  if (!hex) return null;
+  return parseHexKey(hex);
+}
+
+/**
+ * Get all decryption keys: current key first, then previous keys.
+ * Decryption tries each key in order until one succeeds.
+ */
+function getAllKeys(): Buffer[] {
+  const keys: Buffer[] = [];
+
+  const current = getCurrentKey();
+  if (current) keys.push(current);
+
+  const previous = process.env.ENCRYPTION_KEY_PREVIOUS;
+  if (previous) {
+    for (const hex of previous.split(",")) {
+      const trimmed = hex.trim();
+      if (trimmed) keys.push(parseHexKey(trimmed));
+    }
+  }
+
+  return keys;
+}
+
+/**
+ * Encrypt a plaintext string with the current key.
+ * Returns "enc:<iv>:<authTag>:<ciphertext>" (all hex).
+ * In dev without ENCRYPTION_KEY, returns "b64:<base64>" (not secure).
  */
 export function encrypt(plaintext: string): string {
-  const key = getEncryptionKey();
+  const key = getCurrentKey();
   if (!key) {
     if (process.env.NODE_ENV === "production") {
       throw new Error("ENCRYPTION_KEY is required in production");
     }
-    // Fallback: base64 encode (not secure, but allows development without key)
     return ENCODED_PREFIX + Buffer.from(plaintext, "utf-8").toString("base64");
   }
 
@@ -58,23 +95,18 @@ export function encrypt(plaintext: string): string {
 
 /**
  * Decrypt a string previously encrypted with `encrypt()`.
+ * Tries the current key first, then all previous keys for rotation support.
  */
 export function decrypt(ciphertext: string): string {
   if (ciphertext.startsWith(ENCODED_PREFIX)) {
     if (process.env.NODE_ENV === "production") {
       throw new Error("ENCRYPTION_KEY is required in production");
     }
-    // Fallback: base64 decode
     return Buffer.from(ciphertext.slice(ENCODED_PREFIX.length), "base64").toString("utf-8");
   }
 
   if (!ciphertext.startsWith(ENCRYPTED_PREFIX)) {
     throw new Error("Invalid encrypted value: missing prefix");
-  }
-
-  const key = getEncryptionKey();
-  if (!key) {
-    throw new Error("ENCRYPTION_KEY is required to decrypt AES-encrypted values");
   }
 
   const payload = ciphertext.slice(ENCRYPTED_PREFIX.length);
@@ -88,12 +120,55 @@ export function decrypt(ciphertext: string): string {
   const authTag = Buffer.from(authTagHex, "hex");
   const encrypted = Buffer.from(dataHex, "hex");
 
-  const decipher = createDecipheriv(ALGORITHM, key, iv, {
-    authTagLength: AUTH_TAG_LENGTH,
-  });
-  decipher.setAuthTag(authTag);
+  const keys = getAllKeys();
+  if (keys.length === 0) {
+    throw new Error("ENCRYPTION_KEY is required to decrypt AES-encrypted values");
+  }
 
-  const decrypted = Buffer.concat([decipher.update(encrypted), decipher.final()]);
+  // Try each key in order (current first, then previous)
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i]!;
+    try {
+      const decipher = createDecipheriv(ALGORITHM, key, iv, {
+        authTagLength: AUTH_TAG_LENGTH,
+      });
+      decipher.setAuthTag(authTag);
+      const decrypted = Buffer.concat([decipher.update(encrypted), decipher.final()]);
+      return decrypted.toString("utf-8");
+    } catch {
+      // Wrong key — try next one
+      if (i === keys.length - 1) {
+        throw new Error(
+          "Decryption failed: none of the configured encryption keys could decrypt this value"
+        );
+      }
+    }
+  }
 
-  return decrypted.toString("utf-8");
+  // Unreachable, but TypeScript needs it
+  throw new Error("Decryption failed");
+}
+
+/**
+ * Re-encrypt a value with the current key.
+ * Use during key rotation to migrate data from old keys to the new key.
+ * Returns the original ciphertext if it's already encrypted with the current key.
+ */
+export function reEncrypt(ciphertext: string): string {
+  const plaintext = decrypt(ciphertext);
+  return encrypt(plaintext);
+}
+
+/**
+ * Check whether the encryption subsystem is properly configured.
+ * Returns true if ENCRYPTION_KEY is set and valid, or if in development mode.
+ */
+export function isEncryptionConfigured(): boolean {
+  try {
+    const key = getCurrentKey();
+    if (key) return true;
+    return process.env.NODE_ENV !== "production";
+  } catch {
+    return false;
+  }
 }

@@ -19,14 +19,9 @@ import {
 import { purchasingPowerOverTime } from "@/engine/calculators";
 import { formatCurrency, formatPercent } from "@/lib/format";
 import type { SupportedLocale } from "@/i18n/config";
-import { LOCALE_METADATA } from "@/i18n/config";
+import { usePrimaryCurrency } from "@/contexts/currency-context";
 import { cn } from "@/lib/utils";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
   LazyLineChart,
@@ -39,22 +34,22 @@ import {
   ResponsiveContainer,
 } from "@/components/charts/lazy-charts";
 
-function ChartSkeleton() {
+function ChartSkeleton({ label }: { label: string }) {
   return (
     <div
       className="flex w-full animate-pulse items-center justify-center rounded-lg bg-muted"
       style={{ height: 350 }}
     >
-      <span className="text-sm text-muted-foreground">Loading chart...</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
     </div>
   );
 }
 
 export default function InflationCalculatorPage() {
   const t = useTranslations("calculators");
+  const tc = useTranslations("common");
   const locale = useLocale() as SupportedLocale;
-  const localeMeta = LOCALE_METADATA[locale] || LOCALE_METADATA["en-US"];
-  const currency = localeMeta.currency;
+  const currency = usePrimaryCurrency();
 
   const [currentAmount, setCurrentAmount] = useState(100000);
   const [inflationRate, setInflationRate] = useState(3);
@@ -241,11 +236,15 @@ export default function InflationCalculatorPage() {
             <CardTitle>{t("inflation.chartTitle")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <Suspense fallback={<ChartSkeleton />}>
+            <Suspense fallback={<ChartSkeleton label={tc("loadingChart")} />}>
               <ResponsiveContainer width="100%" height={350}>
                 <LazyLineChart data={result.timeline}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                  <XAxis dataKey="year" stroke="hsl(var(--muted-foreground))" tick={{ fontSize: 12 }} />
+                  <XAxis
+                    dataKey="year"
+                    stroke="hsl(var(--muted-foreground))"
+                    tick={{ fontSize: 12 }}
+                  />
                   <YAxis
                     stroke="hsl(var(--muted-foreground))"
                     tick={{ fontSize: 12 }}

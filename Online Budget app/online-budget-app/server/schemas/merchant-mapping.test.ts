@@ -1,8 +1,5 @@
 import { describe, it, expect } from "vitest";
-import {
-  createMerchantMappingSchema,
-  listMerchantMappingsSchema,
-} from "./merchant-mapping";
+import { createMerchantMappingSchema, listMerchantMappingsSchema } from "./merchant-mapping";
 
 describe("createMerchantMappingSchema", () => {
   const validInput = {
@@ -17,7 +14,7 @@ describe("createMerchantMappingSchema", () => {
   });
 
   it("rejects missing merchant_token", () => {
-    const { merchant_token, ...rest } = validInput;
+    const { merchant_token: _merchant_token, ...rest } = validInput;
     const result = createMerchantMappingSchema.safeParse(rest);
     expect(result.success).toBe(false);
   });

@@ -1,9 +1,5 @@
 import { describe, it, expect } from "vitest";
-import {
-  createBudgetSchema,
-  updateBudgetSchema,
-  listBudgetsSchema,
-} from "./budget";
+import { createBudgetSchema, updateBudgetSchema, listBudgetsSchema } from "./budget";
 
 describe("createBudgetSchema", () => {
   const validInput = {
@@ -18,7 +14,7 @@ describe("createBudgetSchema", () => {
   });
 
   it("rejects missing category_id", () => {
-    const { category_id, ...rest } = validInput;
+    const { category_id: _category_id, ...rest } = validInput;
     const result = createBudgetSchema.safeParse(rest);
     expect(result.success).toBe(false);
   });
@@ -47,12 +43,12 @@ describe("createBudgetSchema", () => {
     expect(result.success).toBe(false);
   });
 
-  it("defaults currency to USD when not provided", () => {
-    const { currency, ...rest } = validInput;
+  it("accepts missing currency (API layer supplies user default)", () => {
+    const { currency: _currency, ...rest } = validInput;
     const result = createBudgetSchema.safeParse(rest);
     expect(result.success).toBe(true);
     if (result.success) {
-      expect(result.data.currency).toBe("USD");
+      expect(result.data.currency).toBeUndefined();
     }
   });
 

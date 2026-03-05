@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useCallback, useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -111,6 +111,7 @@ export function SplitsDashboard({
 }: SplitsDashboardProps) {
   const t = useTranslations("splits");
   const tc = useTranslations("common");
+  const locale = useLocale();
   const router = useRouter();
 
   // Person state
@@ -538,7 +539,7 @@ export function SplitsDashboard({
                         {personMap.get(split.person_id) ?? split.person_id}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        {new Date(split.created_at).toLocaleDateString()}
+                        {new Date(split.created_at).toLocaleDateString(locale)}
                       </p>
                     </div>
                   </div>

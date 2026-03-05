@@ -1,6 +1,7 @@
 {
   "common": {
     "loading": "Loading...",
+    "loadingChart": "Loading chart...",
     "saving": "Saving...",
     "save": "Save",
     "cancel": "Cancel",
@@ -1089,7 +1090,9 @@
       "investments": "Investments",
       "properties": "Properties",
       "loans": "Loans"
-    }
+    },
+    "converted": "Amounts converted to your primary currency",
+    "fxWarning": "Exchange rates could not be fetched. Totals may include unconverted amounts from other currencies."
   },
   "properties": {
     "title": "Properties",
@@ -1769,5 +1772,104 @@
       "merchantRules": "Merchant Rules",
       "chat": "AI Chat"
     }
+  },
+  "admin": {
+    "title": "Admin",
+    "nav": {
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "auditLog": "Audit Log",
+      "backToApp": "Back to App"
+    },
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "totalUsers": "Total Users",
+      "mrr": "MRR",
+      "activeSubscriptions": "Active Subscriptions",
+      "activeTrials": "Active Trials",
+      "signupTrend": "Signups (Last 30 Days)"
+    },
+    "users": {
+      "title": "User Management",
+      "searchPlaceholder": "Search by email...",
+      "search": "Search",
+      "columns": {
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "trialEnds": "Trial Ends",
+        "joined": "Joined",
+        "actions": "Actions"
+      },
+      "noUsers": "No users found",
+      "noSub": "No sub",
+      "extendTrial": "Extend trial 14 days",
+      "toggleSuspend": "Toggle suspend",
+      "toggleAdmin": "Toggle admin role",
+      "totalCount": "{count, plural, one {# user} other {# users}} total",
+      "pageOf": "Page {current} of {total}"
+    },
+    "auditLog": {
+      "title": "Audit Log",
+      "filters": {
+        "action": "Action",
+        "from": "From",
+        "to": "To",
+        "filter": "Filter",
+        "allActions": "All actions"
+      },
+      "actions": {
+        "loginSuccess": "Login success",
+        "loginFailure": "Login failure",
+        "signup": "Signup",
+        "logout": "Logout",
+        "passwordResetRequest": "Password reset request",
+        "passwordResetComplete": "Password reset complete",
+        "emailVerificationResend": "Email verification resend",
+        "emailVerified": "Email verified",
+        "sessionRevokedAll": "Session revoked (all)",
+        "adminAction": "Admin action"
+      },
+      "columns": {
+        "time": "Time",
+        "action": "Action",
+        "user": "User",
+        "ipAddress": "IP Address",
+        "details": "Details"
+      },
+      "noEntries": "No audit log entries found",
+      "totalCount": "{count, plural, one {# entry} other {# entries}} total",
+      "pageOf": "Page {current} of {total}"
+    }
+  },
+  "auth": {
+    "login": "Log In",
+    "loginDescription": "Sign in to your account to continue",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithGithub": "Continue with GitHub",
+    "orContinueWithEmail": "Or continue with email",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "callbackFailed": "Authentication failed. Please try again."
+  },
+  "errors": {
+    "title": "Something went wrong",
+    "defaultMessage": "An unexpected error occurred.",
+    "tryAgain": "Try again",
+    "goToDashboard": "Go to Dashboard"
+  },
+  "landing": {
+    "title": "Online Budget App",
+    "description": "AI-powered, bank-connected global budgeting",
+    "signedInAs": "Signed in as {email}",
+    "subscription": "Subscription: {status}",
+    "trialEnds": "(trial ends {date})",
+    "goToDashboard": "Go to Dashboard",
+    "logIn": "Log In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out"
   }
 }

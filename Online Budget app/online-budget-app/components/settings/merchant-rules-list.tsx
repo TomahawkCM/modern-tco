@@ -50,7 +50,7 @@ interface MerchantRulesListProps {
   categories: CategoryWithTranslation[];
 }
 
-export function MerchantRulesList({ mappings, totalCount, categories }: MerchantRulesListProps) {
+export function MerchantRulesList({ mappings, categories }: MerchantRulesListProps) {
   const t = useTranslations("settings.merchantRules");
   const tc = useTranslations("common");
   const router = useRouter();
