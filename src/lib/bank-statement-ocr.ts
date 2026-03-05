@@ -21,6 +21,8 @@ import {
   groupMultiLineTransactions,
   type ColumnMapping,
 } from "./parsers/pdf-bank-parser";
+import { parseDate } from "./parsers/intl-date-parser";
+import { parseAmount } from "./parsers/intl-amount-parser";
 
 // ============================================================================
 // Types
@@ -80,7 +82,8 @@ interface ColumnPositions {
 export async function extractBankStatementData(
   file: File,
   accountId: string,
-  onProgress?: (current: number, total: number) => void
+  onProgress?: (current: number, total: number) => void,
+  language?: string
 ): Promise<BankStatementResult> {
   try {
     // Validate file is a PDF
@@ -124,7 +127,7 @@ export async function extractBankStatementData(
 
       try {
         // Perform OCR on this page
-        const result = await Tesseract.recognize(page.canvas, "eng");
+        const result = await Tesseract.recognize(page.canvas, language ?? "eng");
         const rawText = result.data.text;
         const ocrTextConfidence = result.data.confidence / 100;
 
@@ -670,64 +673,19 @@ export function parseTransactionRow(line: string, lineNumber: number): DetectedT
 
 /**
  * Extract date from a line of text
- * Supports multiple date formats commonly found on bank statements
+ * Uses international date parser for multi-language support
  */
 function extractDateFromLine(line: string): Date | null {
-  const datePatterns = [
-    // MM/DD/YYYY or MM-DD-YYYY or MM.DD.YYYY
-    /(\d{1,2})[\\/\-\.](\d{1,2})[\\/\-\.](\d{4})/,
-    // YYYY/MM/DD or YYYY-MM-DD
-    /(\d{4})[\\/\-](\d{1,2})[\\/\-](\d{1,2})/,
-    // DD Month or Month DD (e.g., "15 Jan" or "Jan 15")
-    /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{1,2})/i,
-    /(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*/i,
-  ];
+  const date = parseDate(line);
+  if (!date) return null;
 
-  for (const pattern of datePatterns) {
-    const match = line.match(pattern);
-    if (match) {
-      try {
-        let date: Date | null = null;
+  // Validate: not in the future and not too old (> 10 years)
+  const now = new Date();
+  const tenYearsAgo = new Date();
+  tenYearsAgo.setFullYear(now.getFullYear() - 10);
 
-        if (pattern === datePatterns[0]) {
-          // MM/DD/YYYY (US format)
-          const [, month, day, year] = match;
-          date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-        } else if (pattern === datePatterns[1]) {
-          // YYYY/MM/DD (ISO format)
-          const [, year, month, day] = match;
-          date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-        } else if (pattern === datePatterns[2]) {
-          // Month DD (assume current year)
-          const [, month, day] = match;
-          const monthNum = getMonthNumber(month);
-          if (monthNum !== null) {
-            date = new Date(new Date().getFullYear(), monthNum, parseInt(day));
-          }
-        } else if (pattern === datePatterns[3]) {
-          // DD Month (assume current year)
-          const [, day, month] = match;
-          const monthNum = getMonthNumber(month);
-          if (monthNum !== null) {
-            date = new Date(new Date().getFullYear(), monthNum, parseInt(day));
-          }
-        }
-
-        // Validate date
-        if (date && !isNaN(date.getTime())) {
-          // Ensure date is not in the future and not too old (> 10 years)
-          const now = new Date();
-          const tenYearsAgo = new Date();
-          tenYearsAgo.setFullYear(now.getFullYear() - 10);
-
-          if (date <= now && date >= tenYearsAgo) {
-            return date;
-          }
-        }
-      } catch {
-        // Continue to next pattern
-      }
-    }
+  if (date <= now && date >= tenYearsAgo) {
+    return date;
   }
 
   return null;
@@ -735,58 +693,28 @@ function extractDateFromLine(line: string): Date | null {
 
 /**
  * Extract amount from a line of text
- * Handles negative amounts (expenses) and positive (income)
+ * Uses international amount parser for multi-locale support
  */
 function extractAmountFromLine(line: string): number | null {
-  // Strategy: Check for negative patterns first, then positive
-  // This prevents "-12.45" from matching both negative and positive patterns
+  // Try to find all amount-like segments in the line
+  // Split on whitespace groups that separate columns in bank statements
+  const segments = line.split(/\s{2,}/).filter((s) => s.trim());
 
-  const amounts: number[] = [];
-
-  // Pattern 1: Explicit negative with minus sign (-$123.45 or -123.45)
-  const negativeMatches = Array.from(line.matchAll(/-\$?([\d,]+\.\d{2})/g));
-  for (const match of negativeMatches) {
-    if (match && match[1]) {
-      const amount = parseFloat(match[1].replace(/,/g, ""));
-      if (!isNaN(amount) && amount !== 0) {
-        amounts.push(-Math.abs(amount));
-      }
+  // Try parsing each segment from right to left (rightmost is typically the transaction amount)
+  for (let i = segments.length - 1; i >= 0; i--) {
+    const amount = parseAmount(segments[i]);
+    if (amount !== null && amount !== 0) {
+      return amount;
     }
   }
 
-  // Pattern 2: Parentheses for negative (($123.45) or (123.45))
-  const parenthesesMatches = Array.from(line.matchAll(/\(\$?([\d,]+\.\d{2})\)/g));
-  for (const match of parenthesesMatches) {
-    if (match && match[1]) {
-      const amount = parseFloat(match[1].replace(/,/g, ""));
-      if (!isNaN(amount) && amount !== 0) {
-        amounts.push(-Math.abs(amount));
-      }
-    }
+  // Fallback: try parsing the entire line
+  const amount = parseAmount(line);
+  if (amount !== null && amount !== 0) {
+    return amount;
   }
 
-  // Pattern 3: Positive amounts ($123.45 or 123.45)
-  // Only check if we haven't found negative amounts
-  if (amounts.length === 0) {
-    const positiveMatches = Array.from(line.matchAll(/\$?([\d,]+\.\d{2})/g));
-    for (const match of positiveMatches) {
-      if (match && match[1]) {
-        const amount = parseFloat(match[1].replace(/,/g, ""));
-        if (!isNaN(amount) && amount !== 0) {
-          amounts.push(amount);
-        }
-      }
-    }
-  }
-
-  if (amounts.length === 0) {
-    return null;
-  }
-
-  // If multiple amounts found, use the rightmost one (typically the transaction amount)
-  // Bank statements often have: Description | Debit | Credit | Balance
-  // We want the transaction amount (debit or credit), not the balance
-  return amounts[amounts.length - 1];
+  return null;
 }
 
 /**
@@ -830,27 +758,4 @@ function extractDescriptionFromLine(
   }
 
   return cleanLine;
-}
-
-/**
- * Convert month name to number (0-11)
- */
-function getMonthNumber(monthName: string): number | null {
-  const months = [
-    "jan",
-    "feb",
-    "mar",
-    "apr",
-    "may",
-    "jun",
-    "jul",
-    "aug",
-    "sep",
-    "oct",
-    "nov",
-    "dec",
-  ];
-
-  const index = months.findIndex((m) => monthName.toLowerCase().startsWith(m));
-  return index !== -1 ? index : null;
 }
