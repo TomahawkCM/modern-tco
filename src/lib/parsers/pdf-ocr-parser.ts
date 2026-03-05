@@ -249,8 +249,6 @@ async function performOCR(
   try {
     // Configure for best accuracy with bank statements
     await worker.setParameters({
-      tessedit_char_whitelist:
-        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,/-$() ",
       preserve_interword_spaces: "1",
     });
 

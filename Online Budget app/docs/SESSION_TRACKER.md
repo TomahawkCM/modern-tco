@@ -386,9 +386,47 @@
 - [x] `eslint` passes on all new/modified files (0 errors)
 - [x] `vitest run` — 377 tests pass (39 files, +15 new tests)
 
-## Next Session: S11
+### Session 11 — OCR Pipeline Internationalization (2026-03-04)
 
-**Tasks**: TBD
+- [x] Remove ASCII whitelist from Tesseract config (pdf-ocr-parser.ts) — was stripping all non-Latin characters
+- [x] Wire `language` parameter into `extractBankStatementData()` (bank-statement-ocr.ts) — replaces hardcoded "eng"
+- [x] Wire `language` parameter into `extractReceiptData()` (receipt-ocr.ts) — replaces hardcoded "eng" in 2 locations
+- [x] Replace English-only date parsing in bank-statement-ocr.ts with `intl-date-parser` (supports 30+ languages)
+- [x] Replace English-only amount parsing in bank-statement-ocr.ts with `intl-amount-parser` (supports all number formats)
+- [x] Replace English-only date parsing in receipt-ocr.ts with `intl-date-parser`
+- [x] Replace English-only amount parsing in receipt-ocr.ts with `intl-amount-parser`
+- [x] Wire locale through import page → OCR functions via `getOCRLanguage(locale)`
+- [x] Write 41 new tests: intl-amount-parser (17), intl-date-parser (12), tesseract-lang-map (12)
+
+**Files modified**:
+
+- `src/lib/parsers/pdf-ocr-parser.ts` — removed `tessedit_char_whitelist`
+- `src/lib/bank-statement-ocr.ts` — added `language` param, replaced `extractDateFromLine` and `extractAmountFromLine` with intl parsers, removed `getMonthNumber`
+- `src/lib/receipt-ocr.ts` — added `language` param to 3 functions, replaced `extractAmount` and `extractDate` with intl parsers, removed `getMonthNumber`
+- `src/app/budget-app/import/page.tsx` — added `useLocale()`, passes `getOCRLanguage(locale)` to OCR
+
+**Files created**:
+
+- `src/lib/parsers/__tests__/intl-amount-parser.test.ts` — 17 tests
+- `src/lib/parsers/__tests__/intl-date-parser.test.ts` — 12 tests
+- `src/lib/parsers/__tests__/tesseract-lang-map.test.ts` — 12 tests
+- `docs/plans/2026-03-04-s11-ocr-internationalization.md` — session plan
+
+**Architecture decisions**:
+
+- Existing i18n parsers (`intl-amount-parser.ts`, `intl-date-parser.ts`, `tesseract-lang-map.ts`) were already built but not wired into OCR pipeline — this session integrated them
+- Receipt total label patterns expanded to include international labels (SUMA, MONTANT, BETRAG, TOTALE, GESAMT)
+- Bank statement amount parsing now splits on column whitespace and tries each segment with intl parser (preserves rightmost-amount heuristic)
+
+**Verification**:
+
+- [x] `tsc --noEmit` passes (0 errors)
+- [x] `eslint` passes on all new/modified files (0 errors)
+- [x] `vitest run` — 1454 tests pass (86 files, +41 new tests)
+
+## Next Session: S12
+
+**Tasks**: Import Pipeline Phase 1b — International date parsing integration, native PDF text extraction, column detection expansion
 
 ## Blockers
 

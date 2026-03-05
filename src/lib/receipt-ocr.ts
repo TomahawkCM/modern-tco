@@ -6,6 +6,8 @@
 
 import Tesseract from "tesseract.js";
 import { convertPdfToImages, isPdfFile } from "./pdf-to-image";
+import { parseDate as intlParseDate } from "./parsers/intl-date-parser";
+import { parseAmount as intlParseAmount } from "./parsers/intl-amount-parser";
 
 export interface ExtractedReceiptData {
   merchant: string | null;
@@ -25,15 +27,16 @@ export interface ExtractedReceiptData {
  */
 export async function extractReceiptData(
   file: File,
-  onProgress?: (current: number, total: number) => void
+  onProgress?: (current: number, total: number) => void,
+  language?: string
 ): Promise<ExtractedReceiptData> {
   try {
     // Check if file is a PDF
     if (isPdfFile(file)) {
-      return await extractFromPdf(file, onProgress);
+      return await extractFromPdf(file, onProgress, language);
     } else {
       // Process as image
-      return await extractFromImage(file);
+      return await extractFromImage(file, language);
     }
   } catch (error) {
     console.error("OCR extraction failed:", error);
@@ -50,8 +53,8 @@ export async function extractReceiptData(
 /**
  * Extract data from an image file
  */
-async function extractFromImage(file: File): Promise<ExtractedReceiptData> {
-  const result = await Tesseract.recognize(file, "eng");
+async function extractFromImage(file: File, language?: string): Promise<ExtractedReceiptData> {
+  const result = await Tesseract.recognize(file, language ?? "eng");
 
   const rawText = result.data.text;
   const confidence = result.data.confidence / 100; // Convert to 0-1 scale
@@ -75,7 +78,8 @@ async function extractFromImage(file: File): Promise<ExtractedReceiptData> {
  */
 async function extractFromPdf(
   file: File,
-  onProgress?: (current: number, total: number) => void
+  onProgress?: (current: number, total: number) => void,
+  language?: string
 ): Promise<ExtractedReceiptData> {
   // Convert PDF pages to images
   const pages = await convertPdfToImages(file, 10); // Max 10 pages
@@ -96,7 +100,7 @@ async function extractFromPdf(
     }
 
     // Perform OCR on the page canvas
-    const result = await Tesseract.recognize(page.canvas, "eng");
+    const result = await Tesseract.recognize(page.canvas, language ?? "eng");
 
     const rawText = result.data.text;
     const confidence = result.data.confidence / 100;
@@ -187,9 +191,24 @@ const KNOWN_MERCHANTS: [RegExp, string][] = [
 
 /** Words that should be ignored when they appear as standalone all-caps lines */
 const SKIP_WORDS = new Set([
-  "RECEIPT", "INVOICE", "BILL", "TOTAL", "SUBTOTAL", "TAX", "DATE", "TIME",
-  "AMOUNT", "CHANGE", "CASH", "CREDIT", "DEBIT", "VISA", "MASTERCARD",
-  "STATEMENT", "PAGE", "BALANCE",
+  "RECEIPT",
+  "INVOICE",
+  "BILL",
+  "TOTAL",
+  "SUBTOTAL",
+  "TAX",
+  "DATE",
+  "TIME",
+  "AMOUNT",
+  "CHANGE",
+  "CASH",
+  "CREDIT",
+  "DEBIT",
+  "VISA",
+  "MASTERCARD",
+  "STATEMENT",
+  "PAGE",
+  "BALANCE",
 ]);
 
 /**
@@ -202,7 +221,10 @@ const SKIP_WORDS = new Set([
  * Strategy E — short-line fallback (last resort)
  */
 export function extractMerchant(text: string, filename?: string): string | null {
-  const lines = text.split("\n").map((l) => l.trim()).filter((l) => l.length > 0);
+  const lines = text
+    .split("\n")
+    .map((l) => l.trim())
+    .filter((l) => l.length > 0);
 
   // ── Strategy A: Known merchant patterns ──────────────────────────
   const fullText = text;
@@ -282,41 +304,32 @@ export function extractMerchant(text: string, filename?: string): string | null 
 
 /**
  * Extract amount from receipt text
- * Looks for currency patterns like $12.34 or 12.34
+ * Uses international amount parser for multi-locale support
  */
 function extractAmount(text: string): number | null {
-  // Look for common total patterns
-  const totalPatterns = [
-    /TOTAL[\s:]*\$?([\d,]+\.\d{2})/i,
-    /AMOUNT[\s:]*\$?([\d,]+\.\d{2})/i,
-    /BALANCE[\s:]*\$?([\d,]+\.\d{2})/i,
-    /GRAND TOTAL[\s:]*\$?([\d,]+\.\d{2})/i,
-  ];
-
-  // Try to find total amount first
-  for (const pattern of totalPatterns) {
-    const match = text.match(pattern);
-    if (match && match[1]) {
-      const amount = parseFloat(match[1].replace(/,/g, ""));
-      if (!isNaN(amount) && amount > 0) {
-        return amount;
-      }
+  // Look for total label lines first (highest confidence)
+  const totalLabelPattern =
+    /(?:TOTAL|AMOUNT|BALANCE|GRAND\s*TOTAL|SUMA|MONTANT|BETRAG|TOTALE|GESAMT)[\s:]*(.+)/gim;
+  const labelMatches = [...text.matchAll(totalLabelPattern)];
+  for (const match of labelMatches) {
+    const amount = intlParseAmount(match[1].trim());
+    if (amount !== null && amount > 0) {
+      return amount;
     }
   }
 
-  // Fallback: Find all currency amounts and take the largest
-  const currencyPattern = /\$?([\d,]+\.\d{2})/g;
-  const matches = [...text.matchAll(currencyPattern)];
-
-  if (matches.length > 0) {
-    const amounts = matches
-      .map((m) => parseFloat(m[1].replace(/,/g, "")))
-      .filter((n) => !isNaN(n) && n > 0);
-
-    if (amounts.length > 0) {
-      // Return the largest amount (likely to be the total)
-      return Math.max(...amounts);
+  // Fallback: find all amounts in text and take the largest
+  const lines = text.split("\n");
+  const amounts: number[] = [];
+  for (const line of lines) {
+    const amount = intlParseAmount(line.trim());
+    if (amount !== null && amount > 0) {
+      amounts.push(amount);
     }
+  }
+
+  if (amounts.length > 0) {
+    return Math.max(...amounts);
   }
 
   return null;
@@ -324,91 +337,24 @@ function extractAmount(text: string): number | null {
 
 /**
  * Extract date from receipt text
- * Looks for various date formats
+ * Uses international date parser for multi-language support
  */
 function extractDate(text: string): Date | null {
-  // Common date patterns on receipts
-  const datePatterns = [
-    // MM/DD/YYYY or MM-DD-YYYY
-    /(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/,
-    // YYYY/MM/DD or YYYY-MM-DD
-    /(\d{4})[\/\-](\d{1,2})[\/\-](\d{1,2})/,
-    // Month DD, YYYY (e.g., Jan 15, 2025)
-    /(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{1,2}),?\s+(\d{4})/i,
-    // DD Month YYYY (e.g., 15 Jan 2025)
-    /(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{4})/i,
-  ];
+  // Try each line for a date (receipts often have date on its own line)
+  const lines = text.split("\n");
+  for (const line of lines) {
+    const date = intlParseDate(line.trim());
+    if (date && !isNaN(date.getTime())) {
+      // Validate: not in the future and not too old (> 5 years)
+      const now = new Date();
+      const fiveYearsAgo = new Date();
+      fiveYearsAgo.setFullYear(now.getFullYear() - 5);
 
-  for (const pattern of datePatterns) {
-    const match = text.match(pattern);
-    if (match) {
-      try {
-        // Try to parse the date
-        let date: Date | null = null;
-
-        if (pattern === datePatterns[0]) {
-          // MM/DD/YYYY
-          const [, month, day, year] = match;
-          date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-        } else if (pattern === datePatterns[1]) {
-          // YYYY/MM/DD
-          const [, year, month, day] = match;
-          date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
-        } else if (pattern === datePatterns[2]) {
-          // Month DD, YYYY
-          const [, month, day, year] = match;
-          const monthNum = getMonthNumber(month);
-          if (monthNum !== null) {
-            date = new Date(parseInt(year), monthNum, parseInt(day));
-          }
-        } else if (pattern === datePatterns[3]) {
-          // DD Month YYYY
-          const [, day, month, year] = match;
-          const monthNum = getMonthNumber(month);
-          if (monthNum !== null) {
-            date = new Date(parseInt(year), monthNum, parseInt(day));
-          }
-        }
-
-        // Validate the date
-        if (date && !isNaN(date.getTime())) {
-          // Ensure date is not in the future and not too old (> 5 years)
-          const now = new Date();
-          const fiveYearsAgo = new Date();
-          fiveYearsAgo.setFullYear(now.getFullYear() - 5);
-
-          if (date <= now && date >= fiveYearsAgo) {
-            return date;
-          }
-        }
-      } catch {
-        // Continue to next pattern
+      if (date <= now && date >= fiveYearsAgo) {
+        return date;
       }
     }
   }
 
   return null;
-}
-
-/**
- * Convert month name to number (0-11)
- */
-function getMonthNumber(monthName: string): number | null {
-  const months = [
-    "jan",
-    "feb",
-    "mar",
-    "apr",
-    "may",
-    "jun",
-    "jul",
-    "aug",
-    "sep",
-    "oct",
-    "nov",
-    "dec",
-  ];
-
-  const index = months.findIndex((m) => monthName.toLowerCase().startsWith(m));
-  return index !== -1 ? index : null;
 }

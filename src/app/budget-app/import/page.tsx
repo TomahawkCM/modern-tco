@@ -8,6 +8,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 import { Upload, FileText, CheckCircle, AlertCircle, Download, Eye, X, Check } from "lucide-react";
 import { db, saveImportMetadata, getImportHistory } from "@/lib/budget-db";
 import {
@@ -62,6 +63,7 @@ import BalanceReconciliationModal, {
 
 export default function ImportPage() {
   const router = useRouter();
+  const locale = useLocale();
   const [file, setFile] = useState<File | null>(null);
   const [formatDetection, setFormatDetection] = useState<FormatDetectionResult | null>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -615,11 +617,19 @@ export default function ImportPage() {
 
         const { extractBankStatementData } = await import("@/lib/bank-statement-ocr");
 
-        const result = await extractBankStatementData(file, accountId, (current, total) => {
-          setPdfCurrentPage(current);
-          setPdfTotalPages(total);
-          setProcessingStage(`Processing page ${current}/${total}...`);
-        });
+        const { getOCRLanguage } = await import("@/lib/parsers/tesseract-lang-map");
+        const ocrLanguage = getOCRLanguage(locale);
+
+        const result = await extractBankStatementData(
+          file,
+          accountId,
+          (current, total) => {
+            setPdfCurrentPage(current);
+            setPdfTotalPages(total);
+            setProcessingStage(`Processing page ${current}/${total}...`);
+          },
+          ocrLanguage
+        );
 
         // Handle OCR errors
         if (result.errors.length > 0) {
