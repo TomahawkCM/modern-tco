@@ -21,7 +21,8 @@ export type AuditAction =
   | "email_verification_resend"
   | "email_verified"
   | "session_revoked_all"
-  | "admin_action";
+  | "admin_action"
+  | "oauth_login";
 
 interface AuditMetadata {
   error?: string;

@@ -125,6 +125,38 @@ export async function signOutAllDevices() {
   redirect("/login");
 }
 
+export async function signInWithGoogle() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/callback`,
+    },
+  });
+
+  if (error) {
+    redirect(`/login?error=${encodeURIComponent(error.message)}`);
+  }
+
+  redirect(data.url);
+}
+
+export async function signInWithGitHub() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "github",
+    options: {
+      redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}/callback`,
+    },
+  });
+
+  if (error) {
+    redirect(`/login?error=${encodeURIComponent(error.message)}`);
+  }
+
+  redirect(data.url);
+}
+
 export async function resendVerificationEmail(formData: FormData) {
   const req = await buildRequestFromHeaders();
   const email = formData.get("email") as string;

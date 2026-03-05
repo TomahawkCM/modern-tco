@@ -2,8 +2,8 @@
 
 ## Current State
 
-- **Current Sprint**: Sprint 2 — Multi-Currency + i18n (COMPLETE)
-- **Current Session**: S6 — i18n Completion (COMPLETE)
+- **Current Sprint**: Sprint 3 — OAuth & Social Login (COMPLETE)
+- **Current Session**: S7 — OAuth & Social Login (COMPLETE)
 - **Last Updated**: 2026-03-04
 
 ## Completed Sessions
@@ -231,12 +231,40 @@
 - [x] `grep '"Loading chart' app/ --include='*.tsx'` → 0 hits
 - [x] `grep 'toLocaleString()' app/ components/ --include='*.tsx'` → 0 hits
 
-## Next Session: S7 — OAuth & Social Login
+### Session 7 — OAuth & Social Login (2026-03-04)
 
-**Tasks**:
+- [x] Google OAuth integration via Supabase Auth (`signInWithOAuth({ provider: "google" })`)
+- [x] GitHub OAuth integration via Supabase Auth (`signInWithOAuth({ provider: "github" })`)
+- [x] Login page UI: social login buttons (Google + GitHub) with branded SVG icons, "Or continue with email" divider
+- [x] Audit logging: callback route logs OAuth `login_success`/`login_failure` with `provider` metadata
+- [x] i18n: all login page strings use `getTranslations("auth")`, added 11 `auth.*` keys to en.json
+- [x] Login page fully i18n'd (was previously hardcoded English)
 
-- [ ] Google OAuth integration
-- [ ] GitHub OAuth integration
+**Files created**: (none — all changes in existing files)
+
+**Files modified**:
+
+- `app/(auth)/actions.ts` — added `signInWithGoogle()`, `signInWithGitHub()` server actions
+- `app/(auth)/callback/route.ts` — added audit logging with `provider` from `app_metadata`
+- `app/(auth)/login/page.tsx` — social login buttons, divider, full i18n with `getTranslations("auth")`
+- `server/audit-log.ts` — added `oauth_login` to `AuditAction` union type
+- `i18n/messages/en.json` — added `auth.*` namespace (11 keys: login, loginDescription, continueWithGoogle, continueWithGithub, orContinueWithEmail, email, password, forgotPassword, noAccount, signUp, callbackFailed)
+
+**Architecture decisions**:
+
+- OAuth uses Supabase PKCE flow (`signInWithOAuth` → redirect → `/callback` → `exchangeCodeForSession`)
+- Login page remains a server component — social buttons use `formAction` with server actions (no client JS needed)
+- `NEXT_PUBLIC_SITE_URL` env var used for OAuth redirect URL (falls back to `http://localhost:3000`)
+- Provider detection in callback via `data.user.app_metadata.provider` (set by Supabase automatically)
+
+**Verification**:
+
+- [x] `tsc --noEmit` passes (0 errors)
+- [x] `eslint` passes on all modified files (0 errors)
+
+## Next Session: S8
+
+**Tasks**: TBD
 
 ## Blockers
 

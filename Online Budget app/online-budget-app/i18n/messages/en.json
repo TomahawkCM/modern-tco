@@ -1842,6 +1842,19 @@
       "pageOf": "Page {current} of {total}"
     }
   },
+  "auth": {
+    "login": "Log In",
+    "loginDescription": "Sign in to your account to continue",
+    "continueWithGoogle": "Continue with Google",
+    "continueWithGithub": "Continue with GitHub",
+    "orContinueWithEmail": "Or continue with email",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "callbackFailed": "Authentication failed. Please try again."
+  },
   "errors": {
     "title": "Something went wrong",
     "defaultMessage": "An unexpected error occurred.",
