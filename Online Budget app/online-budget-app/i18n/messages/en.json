@@ -312,6 +312,18 @@
         "selectCategory": "Select a category"
       },
       "applied": "Applied {count} times"
+    },
+    "passkeys": {
+      "title": "Passkeys",
+      "description": "Use biometrics or security keys for passwordless login",
+      "addPasskey": "Add Passkey",
+      "registering": "Registering...",
+      "deviceNamePlaceholder": "Device name (e.g., MacBook)",
+      "registerSuccess": "Passkey registered successfully!",
+      "alreadyRegistered": "This authenticator is already registered.",
+      "cancelled": "Registration was cancelled.",
+      "addedOn": "Added on {date}",
+      "remove": "Remove"
     }
   },
   "duration": {
@@ -1853,6 +1865,7 @@
     "forgotPassword": "Forgot password?",
     "noAccount": "Don't have an account?",
     "signUp": "Sign up",
+    "signInWithPasskey": "Sign in with Passkey",
     "callbackFailed": "Authentication failed. Please try again."
   },
   "errors": {

@@ -1,6 +1,19 @@
 # Online Budget App: Plans vs Production Gap Analysis
 
 **Date**: 2026-03-03 | **Type**: Analysis (read-only, no code changes) | **Verified against codebase**
+**Updated**: 2026-03-04 — Sessions 1-7 completed, gap items marked done
+
+### Completed Since Original Analysis (Sessions 1-7)
+
+| Session | Sprint         | What was done                                                                                           |
+| ------- | -------------- | ------------------------------------------------------------------------------------------------------- |
+| S1      | Security       | CSP/HSTS headers, Sentry monitoring, health endpoint, env validation                                    |
+| S2      | Security       | Auth rate limiting (Supabase-backed), email verification, audit logging, session management, RBAC roles |
+| S3      | Security       | Admin dashboard (stats, user management, audit log viewer)                                              |
+| S4      | Security       | Encryption key rotation, 22 encryption tests                                                            |
+| S5      | Multi-Currency | FX rate service, USD hardcode elimination, net worth multi-currency, CurrencyProvider                   |
+| S6      | i18n           | Full i18n completion — admin, errors, landing, locale-aware formatting, html lang/dir                   |
+| S7      | OAuth          | Google + GitHub OAuth via Supabase PKCE, login page i18n                                                |
 
 ---
 
@@ -81,8 +94,8 @@ All items (Vite, Mantine, React Router, Hono.js, Cloudflare, new repo) abandoned
 | Passkey auth (WebAuthn)     | **NOT STARTED**   | No FIDO2/SimpleWebAuthn implementation. PIN-based auth exists (`PINSetupDialog`, `PINEntryDialog`).                                                                                                                                                                            |
 | Safe-to-Spend engine        | **PARTIAL**       | Budget tracking + health score widgets exist (`HealthScoreWidget.tsx`, `HealthScoreHistory.tsx`). No dedicated "safe to spend today" widget.                                                                                                                                   |
 | Budget methodology selector | **PARTIAL**       | Budgets page exists with rollover support (`BudgetRollover` type). Unclear if all 4 methods (envelope, zero-based, 50/30/20, pay-yourself-first) are selectable.                                                                                                               |
-| Multi-currency engine       | **NOT STARTED**   | Account model includes `currency` field but no FX rates, currency conversion engine, travel mode, or multi-currency aggregation. 113 locales but zero currency math.                                                                                                           |
-| Localization (114 locales)  | **DONE**          | 113 locales in `src/i18n/messages/` via next-intl. `LocaleSettingsPanel.tsx`, `LanguageSelector.tsx`, `FormatPreview.tsx`. RTL support confirmed.                                                                                                                              |
+| Multi-currency engine       | **DONE** (S5)     | FX rate service (`lib/currency/fx-rates.ts`), frankfurter.app + Supabase cache (24h TTL), `convertAmount()`, net worth multi-currency aggregation, CurrencyProvider context, all hardcoded USD eliminated.                                                                     |
+| Localization (114 locales)  | **DONE** (S6)     | 113 locales in `src/i18n/messages/` via next-intl. Full i18n completion: admin pages, error pages, landing page, locale-aware formatting, dynamic html lang + dir. RTL support confirmed.                                                                                      |
 
 ### Phase 2: Bank Sync
 
@@ -221,12 +234,11 @@ Public API, document vault, rules engine, Canadian tax, native mobile, self-host
 - Need: CRDT/OT-based sync engine, offline queue, conflict UI
 - **Effort**: Large. **Impact**: Blocks family sharing, multi-device, and app convergence.
 
-### 3. Multi-Currency Support
+### 3. ~~Multi-Currency Support~~ — DONE (Session 5)
 
-- 113 locales but zero currency conversion
-- Account model has `currency` field but no FX engine
-- Need: Exchange rate service, base/display currency toggle, multi-currency aggregation, travel mode
-- **Effort**: Medium. **Impact**: Glaring gap for an international finance app.
+- ~~113 locales but zero currency conversion~~
+- FX rate service, Supabase cache, multi-currency aggregation, hardcoded USD elimination — all complete.
+- Remaining: Travel mode (stretch goal).
 
 ### 4. Decide App Convergence Strategy
 
@@ -234,10 +246,11 @@ Public API, document vault, rules engine, Canadian tax, native mobile, self-host
 - Options: (a) Merge into one app with feature flags, (b) Keep separate with shared engine library, (c) Sunset embedded in favor of online
 - **Effort**: Architectural decision. **Impact**: Determines all future development.
 
-### 5. Passkey Authentication (WebAuthn)
+### 5. Passkey Authentication (WebAuthn) — NEXT PRIORITY
 
 - PIN auth exists but no FIDO2
 - Plans call for SimpleWebAuthn — library selected but not implemented
+- OAuth (Google + GitHub) added in Session 7 — WebAuthn is the next auth step
 - **Effort**: Medium. **Impact**: Security differentiator, required for premium tier.
 
 ### 6. Family Sharing & Collaboration

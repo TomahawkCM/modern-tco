@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { getUserSettings } from "@/server/settings";
 import { SettingsForm } from "@/components/settings/settings-form";
 import { SessionManagement } from "@/components/settings/session-management";
+import { PasskeyManagement } from "@/components/settings/passkey-management";
 
 export default async function SettingsPage() {
   const supabase = await createClient();
@@ -26,6 +27,7 @@ export default async function SettingsPage() {
         initialLanguage={settings.language}
         initialCurrency={settings.primary_currency}
       />
+      <PasskeyManagement />
       <SessionManagement userEmail={user.email ?? ""} lastLoginAt={user.last_sign_in_at ?? null} />
     </div>
   );

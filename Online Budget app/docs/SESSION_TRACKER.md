@@ -2,9 +2,9 @@
 
 ## Current State
 
-- **Current Sprint**: Sprint 3 — OAuth & Social Login (COMPLETE)
-- **Current Session**: S7 — OAuth & Social Login (COMPLETE)
-- **Last Updated**: 2026-03-04
+- **Current Sprint**: Sprint 4 — Passkey Authentication (COMPLETE)
+- **Current Session**: S8 — Passkey Authentication (COMPLETE)
+- **Last Updated**: 2026-03-05
 
 ## Completed Sessions
 
@@ -262,7 +262,54 @@
 - [x] `tsc --noEmit` passes (0 errors)
 - [x] `eslint` passes on all modified files (0 errors)
 
-## Next Session: S8
+### Session 8 — Passkey Authentication / WebAuthn (2026-03-05)
+
+- [x] Install `@simplewebauthn/server@13.2.3` + `@simplewebauthn/browser@13.2.2`
+- [x] Create Supabase migration `015_user_passkeys.sql` (credential_id, public_key, counter, transports, device_name, user_id, created_at) with RLS
+- [x] Create `/api/auth/passkey/register-options` route (generateRegistrationOptions, challenge cookie)
+- [x] Create `/api/auth/passkey/register-verify` route (verifyRegistrationResponse, store credential)
+- [x] Create `/api/auth/passkey/login-options` route (generateAuthenticationOptions, discoverable credentials)
+- [x] Create `/api/auth/passkey/login-verify` route (verifyAuthenticationResponse, counter update, magic link session)
+- [x] Add `PasskeyManagement` component to settings page (list/register/delete passkeys)
+- [x] Add `PasskeyLoginButton` client component to login page (fingerprint icon, alongside Google/GitHub/email)
+- [x] Audit logging: `passkey_registered` + `passkey_deleted` types, login events logged with `provider: "passkey"`
+- [x] i18n: 13 keys — `auth.signInWithPasskey`, `settings.passkeys.*` (title, description, addPasskey, registering, deviceNamePlaceholder, registerSuccess, alreadyRegistered, cancelled, addedOn, remove)
+
+**Files created**:
+
+- `supabase/migrations/015_user_passkeys.sql` — user_passkeys table with RLS policies
+- `lib/passkey/config.ts` — RP config (rpName, getRpID, getOrigin)
+- `app/api/auth/passkey/register-options/route.ts` — registration options endpoint
+- `app/api/auth/passkey/register-verify/route.ts` — registration verification endpoint
+- `app/api/auth/passkey/login-options/route.ts` — authentication options endpoint
+- `app/api/auth/passkey/login-verify/route.ts` — authentication verification + session creation
+- `components/settings/passkey-management.tsx` — passkey CRUD in settings
+- `components/auth/passkey-login-button.tsx` — passkey login button for login page
+
+**Files modified**:
+
+- `app/(auth)/login/page.tsx` — added PasskeyLoginButton
+- `app/(app)/settings/page.tsx` — added PasskeyManagement component
+- `server/audit-log.ts` — added `passkey_registered`, `passkey_deleted` to AuditAction
+- `supabase/database.types.ts` — added `user_passkeys` table types
+- `i18n/messages/en.json` — added 13 passkey i18n keys
+- `package.json` + `package-lock.json` — SimpleWebAuthn dependencies
+
+**Architecture decisions**:
+
+- Passkeys use discoverable credential flow (resident keys required) for true passwordless login
+- Challenge stored in httpOnly cookie (5-min TTL) — no server-side session storage needed
+- Session creation via Supabase `admin.generateLink({ type: "magiclink" })` → client-side `verifyOtp({ token_hash })` — creates a real Supabase session
+- Counter updated after each login to prevent replay attacks
+- RLS on user_passkeys: users can select/insert/delete their own, admin client bypasses for login verification
+
+**Verification**:
+
+- [x] `tsc --noEmit` passes (0 errors)
+- [x] `eslint` passes on all new/modified files (0 errors)
+- [x] `vitest run` — 362 tests pass (37 files)
+
+## Next Session: S9
 
 **Tasks**: TBD
 

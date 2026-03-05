@@ -5,6 +5,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { PasskeyLoginButton } from "@/components/auth/passkey-login-button";
 
 interface Props {
   searchParams: Promise<{ error?: string }>;
@@ -74,6 +75,7 @@ export default async function LoginPage({ searchParams }: Props) {
                 {t("continueWithGithub")}
               </Button>
             </form>
+            <PasskeyLoginButton label={t("signInWithPasskey")} />
           </div>
 
           {/* Divider */}
