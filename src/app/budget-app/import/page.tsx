@@ -613,7 +613,28 @@ export default function ImportPage() {
       // ========================================
       else if (resolvedDetection.format === "pdf") {
         console.log("[ImportPage] Processing PDF bank statement...");
-        setProcessingStage("Extracting transactions from PDF (OCR)...");
+
+        // Try native text extraction first (faster, works for all languages)
+        let useOcr = true;
+        try {
+          setProcessingStage("Checking PDF for selectable text...");
+          const { pdfHasText } = await import("@/lib/parsers/pdf-text-extractor");
+          const hasText = await pdfHasText(file);
+          if (hasText) {
+            console.log("[ImportPage] PDF has selectable text — using native extraction");
+            useOcr = false;
+          } else {
+            console.log("[ImportPage] PDF is scanned — falling back to OCR");
+          }
+        } catch (err) {
+          console.warn("[ImportPage] Text extraction check failed, using OCR:", err);
+        }
+
+        setProcessingStage(
+          useOcr
+            ? "Extracting transactions from PDF (OCR)..."
+            : "Extracting transactions from PDF (text layer)..."
+        );
 
         const { extractBankStatementData } = await import("@/lib/bank-statement-ocr");
 

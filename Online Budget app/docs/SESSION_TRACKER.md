@@ -424,9 +424,38 @@
 - [x] `eslint` passes on all new/modified files (0 errors)
 - [x] `vitest run` — 1454 tests pass (86 files, +41 new tests)
 
-## Next Session: S12
+### Session 12 — PDF Text Extraction Integration + Parser Tests (2026-03-04)
 
-**Tasks**: Import Pipeline Phase 1b — International date parsing integration, native PDF text extraction, column detection expansion
+- [x] Write 18 tests for transaction-normalizer (normalize descriptions, dates, amounts, currency detection, sorting, parseRawTransaction)
+- [x] Write 4 tests for pdf-text-extractor (module exports, error handling in non-browser env)
+- [x] Integrate text extraction detection into import page (pdfHasText check before OCR)
+- [x] Import page shows whether PDF has text layer or requires OCR scan
+
+**Files created**:
+
+- `src/lib/parsers/__tests__/transaction-normalizer.test.ts` — 18 tests
+- `src/lib/parsers/__tests__/pdf-text-extractor.test.ts` — 4 tests
+- `docs/plans/2026-03-04-s12-pdf-text-extraction.md` — session plan
+
+**Files modified**:
+
+- `src/app/budget-app/import/page.tsx` — added pdfHasText() check before OCR, shows text layer vs OCR status
+
+**Architecture decisions**:
+
+- Text extraction detection added as foundation — full text-to-parse pipeline (bypassing OCR entirely) deferred to when bank-statement parser is refactored to accept pre-extracted text
+- pdf-text-extractor and transaction-normalizer were already complete — only needed tests
+- Column keywords in pdf-bank-parser.ts already support 20+ languages — no changes needed
+
+**Verification**:
+
+- [x] `tsc --noEmit` passes (0 errors)
+- [x] `eslint` passes on all new/modified files (0 errors)
+- [x] `vitest run` — 1476 tests pass (88 files, +22 new tests)
+
+## Next Session: S13
+
+**Tasks**: Import Pipeline Phase 3 — QIF/MT940/CAMT.053 parser tests + format detector integration
 
 ## Blockers
 
