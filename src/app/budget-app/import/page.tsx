@@ -767,9 +767,48 @@ export default function ImportPage() {
             ? `${Math.round((result.diagnostics.transactionsParsed / result.diagnostics.transactionGroupsFormed) * 100)}%`
             : "N/A"
         );
+      }
+
+      // ========================================
+      // QIF Processing
+      // ========================================
+      else if (resolvedDetection.format === "qif") {
+        console.log("[ImportPage] Processing QIF file...");
+        setProcessingStage("Parsing QIF file...");
+
+        const { parseQIFFile } = await import("@/lib/parsers/qif-parser");
+        transactions = parseQIFFile(text, { locale });
+
+        console.log("[ImportPage] QIF parsing complete:", transactions.length, "transactions");
+      }
+
+      // ========================================
+      // MT940 Processing
+      // ========================================
+      else if (resolvedDetection.format === "mt940") {
+        console.log("[ImportPage] Processing MT940 file...");
+        setProcessingStage("Parsing MT940 (SWIFT) file...");
+
+        const { parseMT940File } = await import("@/lib/parsers/mt940-parser");
+        transactions = await parseMT940File(text, { locale });
+
+        console.log("[ImportPage] MT940 parsing complete:", transactions.length, "transactions");
+      }
+
+      // ========================================
+      // CAMT.053 Processing
+      // ========================================
+      else if (resolvedDetection.format === "camt053") {
+        console.log("[ImportPage] Processing CAMT.053 file...");
+        setProcessingStage("Parsing CAMT.053 (ISO 20022) file...");
+
+        const { parseCAMT053File } = await import("@/lib/parsers/camt053-parser");
+        transactions = parseCAMT053File(text, { locale });
+
+        console.log("[ImportPage] CAMT.053 parsing complete:", transactions.length, "transactions");
       } else {
         setError(
-          `Unsupported file format: ${resolvedDetection.format}. Please use CSV, OFX, QFX, or PDF files.`
+          `Unsupported file format: ${resolvedDetection.format}. Please use CSV, OFX, QFX, QIF, MT940, CAMT.053, or PDF files.`
         );
         return;
       }
