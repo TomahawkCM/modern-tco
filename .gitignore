@@ -88,3 +88,7 @@ scripts/.translation-cache.json
 # Playwright test artifacts
 playwright-report/
 test-results/
+
+# Legacy tool directories (no longer used)
+.serena/
+.specify/
