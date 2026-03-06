@@ -20,7 +20,12 @@ export interface EmailConfig {
 // Email Types
 // ========================
 
-export type EmailType = "bill_reminder" | "budget_alert" | "goal_milestone" | "test";
+export type EmailType =
+  | "bill_reminder"
+  | "budget_alert"
+  | "goal_milestone"
+  | "weekly_digest"
+  | "test";
 
 export type EmailStatus = "pending" | "sent" | "failed" | "bounced";
 
@@ -129,6 +134,51 @@ export interface GoalMilestoneEmailProps {
   baseUrl: string;
 }
 
+export interface WeeklyDigestEmailProps {
+  /** Recipient email address */
+  to: string;
+  /** Currency code (e.g., USD) */
+  currency: string;
+  /** Week date range label (e.g. "Feb 24 – Mar 2, 2026") */
+  weekLabel: string;
+  /** Top categories with spending vs budget */
+  categorySpending: {
+    categoryName: string;
+    spent: number;
+    budgeted: number;
+    percentUsed: number;
+  }[];
+  /** Total income for the week */
+  totalIncome: number;
+  /** Total expenses for the week */
+  totalExpenses: number;
+  /** Net savings (income - expenses) */
+  netSavings: number;
+  /** Week-over-week expense change percentage (null = no prior week data) */
+  weekOverWeekChange: number | null;
+  /** Categories at 80%+ budget usage */
+  atRiskCategories: {
+    categoryName: string;
+    spent: number;
+    budgeted: number;
+    percentUsed: number;
+    status: "warning" | "exceeded";
+  }[];
+  /** Bills due in the next 7 days */
+  upcomingBills: {
+    name: string;
+    amount: number;
+    dueDate: string;
+    daysUntilDue: number;
+  }[];
+  /** Link to the dashboard */
+  dashboardUrl: string;
+  /** Unsubscribe token */
+  unsubscribeToken: string;
+  /** App base URL */
+  baseUrl: string;
+}
+
 export interface TestEmailProps {
   /** Recipient email address */
   to: string;
@@ -144,7 +194,12 @@ export interface TestEmailProps {
 
 export interface SendEmailRequest {
   type: EmailType;
-  props: BillReminderEmailProps | BudgetAlertEmailProps | GoalMilestoneEmailProps | TestEmailProps;
+  props:
+    | BillReminderEmailProps
+    | BudgetAlertEmailProps
+    | GoalMilestoneEmailProps
+    | WeeklyDigestEmailProps
+    | TestEmailProps;
 }
 
 export interface SendEmailResponse {

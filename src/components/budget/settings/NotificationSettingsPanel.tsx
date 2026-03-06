@@ -302,6 +302,19 @@ export function NotificationSettingsPanel() {
                   aria-label={t("notificationTypes.goalMilestones.title")}
                 />
               </div>
+
+              {/* Weekly Digest */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Mail className="h-4 w-4 text-teal-400" />
+                  <span className="text-sm">{t("notificationTypes.weeklyDigest.title")}</span>
+                </div>
+                <Switch
+                  checked={settings.emailWeeklyDigest}
+                  onCheckedChange={(v) => updateSettings({ emailWeeklyDigest: v })}
+                  aria-label={t("notificationTypes.weeklyDigest.title")}
+                />
+              </div>
             </div>
 
             <Separator />

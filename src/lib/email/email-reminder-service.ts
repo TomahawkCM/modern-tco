@@ -7,7 +7,7 @@
 
 import type { Subscription } from "@/types/budget";
 import type { NotificationSettings } from "@/types/notifications";
-import type { EmailType } from "@/types/email";
+import type { EmailType, WeeklyDigestEmailProps } from "@/types/email";
 import { getNotificationSettings } from "@/lib/notifications/notification-settings";
 
 interface EmailReminderResult {
@@ -31,6 +31,8 @@ function shouldSendEmailForType(type: EmailType, settings: NotificationSettings)
       return settings.emailBudgetAlerts;
     case "goal_milestone":
       return settings.emailGoalMilestones;
+    case "weekly_digest":
+      return settings.emailWeeklyDigest;
     case "test":
       return true;
     default:
@@ -192,6 +194,48 @@ export async function sendGoalMilestoneEmail(
     };
   } catch (error) {
     console.error("Failed to send goal milestone email:", error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    };
+  }
+}
+
+/**
+ * Send a weekly digest email with pre-computed data
+ */
+export async function sendWeeklyDigestEmail(
+  data: Omit<WeeklyDigestEmailProps, "to" | "unsubscribeToken" | "baseUrl">
+): Promise<EmailReminderResult> {
+  const settings = getNotificationSettings();
+
+  if (!shouldSendEmailForType("weekly_digest", settings)) {
+    return { success: false, error: "Email weekly digest disabled" };
+  }
+
+  try {
+    const response = await fetch("/api/email/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: "weekly_digest",
+        props: {
+          ...data,
+          to: settings.emailAddress,
+          unsubscribeToken: settings.emailUnsubscribeToken,
+          baseUrl: window.location.origin,
+        },
+      }),
+    });
+
+    const result = await response.json();
+    return {
+      success: result.success,
+      messageId: result.messageId,
+      error: result.error,
+    };
+  } catch (error) {
+    console.error("Failed to send weekly digest email:", error);
     return {
       success: false,
       error: error instanceof Error ? error.message : "Unknown error",

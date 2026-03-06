@@ -2308,6 +2308,10 @@
       "goalMilestones": {
         "title": "Goal Milestones",
         "description": "Celebrate when you hit savings milestones"
+      },
+      "weeklyDigest": {
+        "title": "Weekly Digest",
+        "description": "A weekly summary of your income, spending, and budgets"
       }
     },
     "quietHours": {

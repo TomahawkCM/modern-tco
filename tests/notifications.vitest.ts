@@ -24,6 +24,7 @@ describe("Notification Types", () => {
       expect(DEFAULT_NOTIFICATION_SETTINGS.quietHoursStart).toBe("22:00");
       expect(DEFAULT_NOTIFICATION_SETTINGS.quietHoursEnd).toBe("08:00");
       expect(DEFAULT_NOTIFICATION_SETTINGS.defaultReminderDays).toBe(3);
+      expect(DEFAULT_NOTIFICATION_SETTINGS.emailWeeklyDigest).toBe(true);
     });
   });
 

@@ -40,6 +40,8 @@ export interface NotificationSettings {
   emailBudgetAlerts: boolean;
   /** Enable email goal milestones */
   emailGoalMilestones: boolean;
+  /** Enable weekly digest email */
+  emailWeeklyDigest: boolean;
   /** Unique token for email unsubscribe (RFC 8058) */
   emailUnsubscribeToken: string;
 }
@@ -224,5 +226,6 @@ export const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
   emailBillReminders: true,
   emailBudgetAlerts: true,
   emailGoalMilestones: true,
+  emailWeeklyDigest: true,
   emailUnsubscribeToken: "",
 };
