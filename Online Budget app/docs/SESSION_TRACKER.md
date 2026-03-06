@@ -487,9 +487,37 @@
 - [x] `eslint` passes on all new/modified files (0 errors)
 - [x] `vitest run` — 1510 tests pass (91 files, +34 new tests)
 
-## Next Session: S14
+### Session 14 — Import UI Redesign (2026-03-05)
 
-**Tasks**: Import Pipeline Phase 4 — UI Redesign (format selection, language override, smart PDF flow)
+- [x] Update upload area to show all 8 supported formats (CSV, OFX, QFX, PDF, QIF, MT940, CAMT.053)
+- [x] Add OCR language override dropdown (16 languages) for PDF imports
+- [x] Wire language override into OCR processing (overrides auto-detection from locale)
+- [x] Update gap analysis with PDF Import Redesign status
+
+**Files created**:
+
+- `docs/plans/2026-03-05-s14-import-ui-redesign.md` — session plan
+
+**Files modified**:
+
+- `src/app/budget-app/import/page.tsx` — upload text, language selector dropdown, ocrLanguageOverride state
+- `docs/BUDGET_APP_GAP_ANALYSIS_2026-03-03.md` — PDF Import Redesign marked as DONE
+
+**Architecture decisions**:
+
+- Language selector shows 16 most common languages + auto-detect based on user locale
+- Auto-detect remains the default — manual override only needed when OCR language differs from app locale
+- Language selector only appears for PDF format (irrelevant for structured formats like CSV, QIF, MT940, CAMT.053)
+
+**Verification**:
+
+- [x] `tsc --noEmit` passes (0 errors)
+- [x] `eslint` passes on all modified files (0 errors)
+- [x] `vitest run` — 1510 tests pass (91 files)
+
+## Next Session: S15
+
+**Tasks**: TBD
 
 ## Blockers
 
