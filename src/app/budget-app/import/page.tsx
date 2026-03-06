@@ -79,6 +79,7 @@ export default function ImportPage() {
   const [showAccountSelector, setShowAccountSelector] = useState(false);
   const [step, setStep] = useState<"upload" | "preview" | "complete">("upload");
   const [error, setError] = useState<string | null>(null);
+  const [ocrLanguageOverride, setOcrLanguageOverride] = useState<string>("");
   const [expandedReviewIndex, setExpandedReviewIndex] = useState<number | null>(null);
   const [matchedTransactions, setMatchedTransactions] = useState<Map<number, Transaction>>(
     new Map()
@@ -639,7 +640,7 @@ export default function ImportPage() {
         const { extractBankStatementData } = await import("@/lib/bank-statement-ocr");
 
         const { getOCRLanguage } = await import("@/lib/parsers/tesseract-lang-map");
-        const ocrLanguage = getOCRLanguage(locale);
+        const ocrLanguage = ocrLanguageOverride || getOCRLanguage(locale);
 
         const result = await extractBankStatementData(
           file,
@@ -1856,6 +1857,37 @@ export default function ImportPage() {
                   <p className="mt-1">💡 Please carefully review all transactions for accuracy.</p>
                 </div>
               )}
+            {formatDetection.format === "pdf" && (
+              <div className="flex items-center gap-2 text-xs">
+                <label htmlFor="ocr-language" className="text-slate-400">
+                  OCR Language:
+                </label>
+                <select
+                  id="ocr-language"
+                  value={ocrLanguageOverride}
+                  onChange={(e) => setOcrLanguageOverride(e.target.value)}
+                  className="rounded border border-slate-300 bg-white px-2 py-1 text-xs text-slate-700"
+                >
+                  <option value="">Auto-detect ({locale})</option>
+                  <option value="eng">English</option>
+                  <option value="deu">German</option>
+                  <option value="fra">French</option>
+                  <option value="spa">Spanish</option>
+                  <option value="por">Portuguese</option>
+                  <option value="ita">Italian</option>
+                  <option value="nld">Dutch</option>
+                  <option value="rus">Russian</option>
+                  <option value="jpn">Japanese</option>
+                  <option value="chi_sim">Chinese (Simplified)</option>
+                  <option value="chi_tra">Chinese (Traditional)</option>
+                  <option value="kor">Korean</option>
+                  <option value="ara">Arabic</option>
+                  <option value="tur">Turkish</option>
+                  <option value="pol">Polish</option>
+                  <option value="hin">Hindi</option>
+                </select>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -2091,7 +2123,10 @@ export default function ImportPage() {
                 {file ? file.name : "Upload Bank Statement"}
               </h2>
               <p className="mb-6 text-base font-medium text-gray-700">
-                Drag and drop your CSV, OFX, QFX, or PDF file here, or click to browse
+                Drag and drop your bank statement here, or click to browse
+              </p>
+              <p className="mb-4 text-sm text-gray-500">
+                Supported: CSV, OFX, QFX, PDF, QIF, MT940, CAMT.053 (ISO 20022)
               </p>
               <input
                 type="file"
