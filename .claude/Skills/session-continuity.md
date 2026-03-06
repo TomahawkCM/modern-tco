@@ -17,7 +17,7 @@ Cross-session state management for the Online Budget App implementation roadmap.
 
 ## Session Start Workflow
 
-1. Read `Online Budget app/docs/SESSION_TRACKER.md`
+1. Read `docs/SESSION_TRACKER.md`
 2. Print current sprint and session number
 3. List completed sessions (summary)
 4. List current session's remaining tasks
@@ -40,7 +40,7 @@ Cross-session state management for the Online Budget App implementation roadmap.
 
 ## Tracker File Format
 
-The tracker at `Online Budget app/docs/SESSION_TRACKER.md` uses this structure:
+The tracker at `docs/SESSION_TRACKER.md` uses this structure:
 
 ```markdown
 # Session Tracker
