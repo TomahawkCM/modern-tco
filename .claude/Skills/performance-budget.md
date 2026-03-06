@@ -202,6 +202,10 @@ import Image from 'next/image';
 - [ ] All images use `next/image` with explicit dimensions
 - [ ] Skeleton loaders prevent layout shift
 
+## Reference
+
+- `references/performance-benchmarks.md` — detailed performance benchmarks and targets
+
 ## Related Skills
 
 - `mobile-first-ux` — performance critical on mobile

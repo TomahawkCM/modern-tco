@@ -2,129 +2,109 @@
 
 ## Product Overview
 
-**Household Budget App** - A privacy-first, locally-running budget tracker designed specifically for Canadian families.
-
-## Core Value Proposition
-
-The app runs 100% in your browser with zero backend servers or cloud dependencies. All financial data stays completely local (using IndexedDB), ensuring complete privacy. It's built for Canadian banks and includes pre-configured support for common Canadian merchants.
+**Online Budget App** - A privacy-first personal finance manager with end-to-end encryption, multi-format bank import, and AI-powered categorization. Part of the Modern TCO dual-app monorepo.
 
 ## Technical Stack
 
-- **Frontend**: React 18 with Vite
-- **Storage**: IndexedDB via Dexie.js (client-side only)
-- **ML Engine**: TensorFlow.js for transaction categorization
-- **Charts**: Chart.js for visualizations
-- **CSV Parser**: PapaParse for bank statement imports
-- **Deployment**: Static hosting (Vercel, Netlify, or local file)
+- **Framework**: Next.js 16, React 19, TypeScript 5.9 (strict mode)
+- **Database**: Supabase PostgreSQL (server) + Dexie.js IndexedDB (client cache)
+- **UI**: shadcn/ui + Radix UI, Tailwind CSS
+- **State**: 18 React contexts in `src/contexts/`
+- **Charts**: Recharts
+- **ML**: TensorFlow.js (`src/lib/analytics/lstm-predictive-spending.ts`)
+- **i18n**: next-intl (113 locales in `src/i18n/messages/`)
+- **Financial math**: Decimal.js (never floating point)
+- **Encryption**: AES-256-GCM via `src/lib/encrypted-db-wrapper.ts`
+- **Auth**: Supabase Auth with admin role support
+- **API**: 22 routes in `src/app/api/`
+- **Deployment**: Vercel (CLI deploy, git integration disabled)
 
 ## Key Features
 
-### 1. Smart CSV Import
-- Supports BMO Bank and Home Trust credit card formats out of the box
-- Also handles generic CSV formats from any Canadian bank
-- Automatic duplicate detection
-- Date range validation
-- Batch import capability
+### 1. Multi-Format Bank Import
+- CSV, PDF, and OCR bank statement import (`src/app/budget-app/import/`)
+- Format auto-detection with configurable parser pipeline
+- Supports BMO, Home Trust, and generic Canadian bank formats
+- Duplicate detection and batch import
 
 ### 2. AI-Powered Transaction Categorization
-- Uses TensorFlow.js model that learns from your corrections
-- Pre-configured Canadian merchant patterns:
-  - Tim Hortons, Loblaws, No Frills
-  - Rogers, Bell, Telus
-  - Canadian Tire, Shoppers Drug Mart
-  - And 50+ more common Canadian merchants
-- Gets smarter with every correction you make
-- Automatic subcategory detection
-- Confidence scoring for each categorization
+- TensorFlow.js LSTM model for predictive spending
+- Rule-based engine with 50+ Canadian merchant patterns
+- Confidence scoring with visual meters
+- Learns from user corrections
 
-### 3. Visual Dashboard
-- Cash flow overview (income vs expenses)
-- Spending by category with pie/bar charts
-- Balance trends over time
-- Monthly comparisons
-- Net worth tracking
+### 3. Investment Tracking
+- Portfolio management with live market data (Yahoo Finance)
+- Account types: TFSA, RRSP, non-registered
+- Holdings with real-time price updates
+- Charts: allocation pie, performance bar, area chart
+- `src/app/budget-app/investments/page.tsx`
 
-### 4. Budget Management
-- Create monthly/annual budgets by category
-- Track spending vs budget in real-time
-- Rollover unused budget amounts
-- Visual progress indicators
-- Budget templates (50/30/20 rule, custom)
+### 4. Net Worth Dashboard
+- Net worth tracking with forecasting
+- Asset and liability management
+- Export to spreadsheet
+- `src/app/budget-app/net-worth/client.tsx`
 
-### 5. Transaction Management
-- Browse all transactions with filters
-- Edit categories, amounts, descriptions
-- Split transactions for shared expenses
-- Tag transactions for custom organization
-- Search by merchant, amount, or date range
+### 5. Budget Management
+- Create budgets by category with templates (50/30/20, custom)
+- Track spending vs budget with progress bars
+- Rollover support, visual alerts for over-budget
 
-### 6. Goals & Savings Planning
-- Track multiple financial goals simultaneously
-- Emergency fund calculator (3-6 months expenses)
-- Debt payoff planner (snowball/avalanche methods)
-- House down payment tracker
-- Timeline visualization for each goal
+### 6. Transaction Management
+- Split transactions (2-5 way)
+- Bulk categorization with multi-select
+- Receipt attachments with thumbnail preview
+- Recurring transaction detection
+- Keyboard shortcuts (press `?` for help)
 
-### 7. Retirement Planner
-- Input current investment portfolio
-- Project growth scenarios
-- Calculate required monthly savings
-- Retirement age "what-if" analysis
-- Compound interest visualizations
+### 7. Financial Calculators
+- Retirement calculator, mortgage calculator, savings goals
+- `src/app/budget-app/calculators/`
 
-### 8. Data Privacy & Control
-- **Zero external API calls** - Nothing leaves your browser
-- **No tracking or analytics** - Complete privacy
-- **Backup/Restore** - Export all data as JSON
-- **Clear data** - Delete everything with one click
-- **Offline capable** - Works without internet after initial load
+### 8. Reports & Analytics
+- Spending heat map, category breakdowns, trends
+- `src/app/budget-app/reports/`
 
-### 9. Multi-Account Support
-- Track checking accounts, savings, credit cards
-- Manual balance reconciliation
-- Account-level reporting
-- Transfer tracking between accounts
+### 9. Data Privacy & Security
+- End-to-end encryption for all PII (AES-256-GCM)
+- Zero-knowledge architecture — server never sees plaintext
+- Supabase RLS policies for row-level security
+- Encrypted local cache via IndexedDB
 
-## Unique Selling Points
+### 10. Admin Dashboard
+- User management, system statistics
+- Admin role required
+- `src/app/budget-app/admin/`
 
-1. **Canadian-First**: Built specifically for Canadian banks and merchants
-2. **Privacy-Obsessed**: Data literally never leaves your browser
-3. **No Subscription**: Free forever, no hidden costs
-4. **Smart Learning**: ML that improves with your usage
-5. **Family-Friendly**: Easy enough for non-technical users
-6. **Offline-Ready**: No internet required after first load
-7. **Open & Transparent**: No vendor lock-in, export anytime
+### 11. PWA Support
+- Service worker for offline capability
+- Install prompt after 3 visits
+- Manifest with icons
+
+## Codebase Structure
+
+```
+src/app/budget-app/          # 36 pages
+src/components/budget/       # 50+ components
+src/contexts/                # 18 React contexts
+src/lib/                     # Utils, parsers, encryption, analytics
+src/app/api/                 # 22 API routes
+src/i18n/messages/           # 113 locale files
+supabase/migrations/         # Database schema migrations
+```
+
+## External Integrations
+
+- **Supabase**: PostgreSQL database, auth, real-time subscriptions
+- **OpenAI**: AI merchant matching for import pipeline
+- **SimpleFIN**: Bank connection aggregator (planned)
+- **Yahoo Finance**: Live market data for investment tracking
+- **PostHog**: Analytics (optional, requires `NEXT_PUBLIC_POSTHOG_KEY`)
 
 ## Target Users
 
-- Privacy-conscious Canadians
-- Families managing household budgets together
-- People tired of subscription-based budget apps
-- Those who want control over their financial data
-- Tech-savvy users who appreciate local-first software
-- Canadians frustrated with US-centric budget apps
-
-## Technical Differentiators
-
-- **No backend**: Eliminates server costs, security risks, and privacy concerns
-- **Browser-native ML**: TensorFlow.js runs categorization without cloud AI
-- **IndexedDB storage**: Fast, reliable, and unlimited local storage
-- **Static deployment**: Can be hosted anywhere or run as a local file
-- **Zero dependencies on external services**: Won't break if APIs change
-
-## Common Use Cases
-
-1. **Monthly Budget Tracking**: Import statements, review spending, adjust budget
-2. **Savings Goals**: Plan for vacation, house down payment, emergency fund
-3. **Retirement Planning**: Project when you can retire comfortably
-4. **Debt Payoff**: Track progress on paying off credit cards, loans
-5. **Family Financial Transparency**: Share view of household finances
-6. **Tax Preparation**: Export categorized transactions for tax time
-
-## Design Philosophy
-
-- **Local-first**: All data processing happens in your browser
-- **Privacy by default**: No accounts, no servers, no tracking
-- **Progressive enhancement**: Core features work everywhere
-- **Canadian context**: Built for Canadian banks, merchants, and needs
-- **Simplicity**: Complex enough to be useful, simple enough to understand
+- Privacy-conscious individuals and families
+- Canadian users (pre-configured bank formats and merchant rules)
+- Users who want control over their financial data with encryption
+- People managing budgets, investments, and net worth in one app

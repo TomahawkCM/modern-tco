@@ -194,6 +194,10 @@ Pinch        → Zoom chart (if applicable)
 - [ ] Tested in Chrome DevTools mobile emulator
 - [ ] PWA install prompt works on supported browsers
 
+## Reference
+
+- `references/mobile-design-patterns.md` — detailed mobile design patterns and examples
+
 ## Related Skills
 
 - `design-tokens` — spacing/color system used in responsive designs

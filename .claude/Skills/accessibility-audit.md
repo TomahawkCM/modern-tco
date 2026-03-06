@@ -239,6 +239,10 @@ axe.run().then(results => console.log(results.violations));
 - [ ] Seniors mode scales text and targets correctly
 - [ ] No `outline-none` without replacement focus style
 
+## Reference
+
+- `references/accessibility-checklist.md` — detailed WCAG checklist
+
 ## Related Skills
 
 - `mobile-first-ux` — touch targets overlap with a11y requirements
