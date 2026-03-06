@@ -453,9 +453,43 @@
 - [x] `eslint` passes on all new/modified files (0 errors)
 - [x] `vitest run` — 1476 tests pass (88 files, +22 new tests)
 
-## Next Session: S13
+### Session 13 — Format Parser Integration (QIF, MT940, CAMT.053) (2026-03-05)
 
-**Tasks**: Import Pipeline Phase 3 — QIF/MT940/CAMT.053 parser tests + format detector integration
+- [x] Write 15 tests for QIF parser (parsing, format detection, account type extraction)
+- [x] Write 4 tests for MT940 parser (format detection)
+- [x] Write 15 tests for CAMT.053 parser (parsing, debit/credit, dates, descriptions, currency, fitid, format detection)
+- [x] Wire QIF processing into import page (dynamic import, locale-aware)
+- [x] Wire MT940 processing into import page (async parsing)
+- [x] Wire CAMT.053 processing into import page
+- [x] Update error message to list all supported formats
+
+**Files created**:
+
+- `src/lib/parsers/__tests__/qif-parser.test.ts` — 15 tests
+- `src/lib/parsers/__tests__/mt940-parser.test.ts` — 4 tests
+- `src/lib/parsers/__tests__/camt053-parser.test.ts` — 15 tests
+- `docs/plans/2026-03-05-s13-format-parser-integration.md` — session plan
+
+**Files modified**:
+
+- `src/app/budget-app/import/page.tsx` — added QIF, MT940, CAMT.053 processing blocks in format dispatch
+
+**Architecture decisions**:
+
+- QIF, MT940, CAMT.053 parsers were already complete — only needed tests and import page wiring
+- Format detector already detects all 3 formats — no changes needed
+- All parsers loaded via dynamic `import()` to keep initial bundle small
+- MT940 uses mt940-js library with manual fallback parser
+
+**Verification**:
+
+- [x] `tsc --noEmit` passes (0 errors)
+- [x] `eslint` passes on all new/modified files (0 errors)
+- [x] `vitest run` — 1510 tests pass (91 files, +34 new tests)
+
+## Next Session: S14
+
+**Tasks**: Import Pipeline Phase 4 — UI Redesign (format selection, language override, smart PDF flow)
 
 ## Blockers
 
