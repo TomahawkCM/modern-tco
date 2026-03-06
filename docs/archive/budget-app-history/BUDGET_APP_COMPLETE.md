@@ -11,6 +11,7 @@ Your household budget app is fully built and ready to use! All planned features 
 ### **Complete Feature List**
 
 #### ✅ Core Infrastructure
+
 - **TypeScript Types** - Complete type system for all data models ([src/types/budget.ts](src/types/budget.ts))
 - **Database Layer** - IndexedDB with Dexie.js ([src/lib/budget-db.ts](src/lib/budget-db.ts))
   - Temporary in-memory fallback included
@@ -98,6 +99,7 @@ Your household budget app is fully built and ready to use! All planned features 
    - Import summary statistics
 
 #### ✅ Components
+
 - **TransactionModal** ([src/components/budget/TransactionModal.tsx](src/components/budget/TransactionModal.tsx))
   - Add/edit transactions
   - Income/expense toggle
@@ -125,14 +127,15 @@ Edit [src/lib/budget-db.ts](src/lib/budget-db.ts):
 The file should look like this:
 
 ```typescript
-import Dexie, { Table } from 'dexie';  // ← Uncommented
+import Dexie, { Table } from "dexie"; // ← Uncommented
 
-export class BudgetDatabase extends Dexie {  // ← Uncommented
+export class BudgetDatabase extends Dexie {
+  // ← Uncommented
   accounts!: Table<Account>;
   // ... rest of the class
 }
 
-export const db = new BudgetDatabase();  // ← Use this instead
+export const db = new BudgetDatabase(); // ← Use this instead
 ```
 
 ### **Step 3: Run the App**
@@ -180,12 +183,14 @@ modern-tco/
 ## 🎨 Features Overview
 
 ### **1. Dashboard**
+
 - 4 summary cards (Net Worth, Income, Expenses, Savings)
 - Recent transactions (last 5)
 - Quick stats
 - Empty state with call-to-action
 
 ### **2. Transaction Management**
+
 - Add new transactions (income or expense)
 - Edit existing transactions
 - Delete transactions
@@ -195,6 +200,7 @@ modern-tco/
 - Auto-categorization suggestions
 
 ### **3. Budget Tracking**
+
 - Set monthly/annual budgets by category
 - Visual progress bars (green < 80%, yellow 80-100%, red > 100%)
 - Overall budget summary
@@ -202,6 +208,7 @@ modern-tco/
 - Budget vs. actual comparison
 
 ### **4. Future Purchase Planning**
+
 - Create savings goals
 - Track progress towards goals
 - Calculate timeline based on monthly contributions
@@ -210,6 +217,7 @@ modern-tco/
 - Mark goals as complete
 
 ### **5. Retirement Calculator**
+
 - Input current age, retirement age, savings
 - Monthly contribution tracking
 - Expected return rate (compound interest)
@@ -219,6 +227,7 @@ modern-tco/
 - Save multiple scenarios
 
 ### **6. Reports & Visualizations**
+
 - **Pie chart** - Spending by category
 - **Bar chart** - Top 5 spending categories
 - **Line chart** - Income vs Expenses (6 months)
@@ -227,18 +236,21 @@ modern-tco/
 - Summary cards with key metrics
 
 ### **7. Data Management**
+
 - **Export** full backup to JSON
 - **Export** transactions to CSV
 - **Import** from JSON backup
 - **Delete** all data (with confirmations)
 
 ### **8. Settings**
+
 - **Account management** (BMO, Home Trust, etc.)
 - **Category management** (custom categories & subcategories)
 - Color customization
 - Subcategory support
 
 ### **9. CSV Import**
+
 - Drag & drop upload
 - Auto-detect bank format
 - Duplicate detection
@@ -250,17 +262,19 @@ modern-tco/
 ## 🔧 Technical Details
 
 ### **Dependencies Added**
+
 ```json
 {
-  "dexie": "^4.0.11",              // IndexedDB wrapper
-  "dexie-react-hooks": "^2.0.0",   // React hooks for Dexie
-  "papaparse": "^5.4.1",           // CSV parser
-  "react-dropzone": "^14.3.5",     // File upload
-  "@types/papaparse": "^5.3.14"    // TypeScript types
+  "dexie": "^4.0.11", // IndexedDB wrapper
+  "dexie-react-hooks": "^2.0.0", // React hooks for Dexie
+  "papaparse": "^5.4.1", // CSV parser
+  "react-dropzone": "^14.3.5", // File upload
+  "@types/papaparse": "^5.3.14" // TypeScript types
 }
 ```
 
 ### **Already Installed** (from TCO app)
+
 - `recharts` - Charts and visualizations
 - `date-fns` - Date manipulation
 - `zod` - Schema validation
@@ -268,11 +282,13 @@ modern-tco/
 - `tailwindcss` - Styling
 
 ### **Data Storage**
+
 - **Current**: In-memory (temporary, for testing)
 - **After Dexie setup**: IndexedDB (persistent, ~50-100MB capacity)
 - **Location**: Browser's local storage (never sent to server)
 
 ### **Privacy & Security**
+
 ✅ All data stays local - nothing sent to servers
 ✅ No authentication - just for you and your family
 ✅ No tracking - no analytics, no cookies
@@ -284,6 +300,7 @@ modern-tco/
 ## 🎯 Usage Examples
 
 ### **Example 1: Import Bank Statement**
+
 1. Download CSV from BMO or Home Trust
 2. Go to `/budget-app/import`
 3. Drag & drop CSV file
@@ -292,6 +309,7 @@ modern-tco/
 6. Done! Transactions are auto-categorized
 
 ### **Example 2: Set Monthly Budget**
+
 1. Go to `/budget-app/budgets`
 2. Click "Add Budget"
 3. Select category (e.g., "Food & Dining")
@@ -301,6 +319,7 @@ modern-tco/
 7. Track progress throughout the month
 
 ### **Example 3: Plan Future Purchase**
+
 1. Go to `/budget-app/planning/future`
 2. Click "Add Goal"
 3. Enter: "New Car", $25,000 target, $500/month, target June 2026
@@ -309,6 +328,7 @@ modern-tco/
 6. See projected timeline: "On track! You'll reach your goal by May 2026"
 
 ### **Example 4: Calculate Retirement**
+
 1. Go to `/budget-app/planning/retirement`
 2. Enter your details:
    - Current age: 30
@@ -321,6 +341,7 @@ modern-tco/
 5. Save plan for future reference
 
 ### **Example 5: View Spending Reports**
+
 1. Go to `/budget-app/reports`
 2. Select time range (e.g., "Month")
 3. View:
@@ -342,12 +363,12 @@ Edit [src/lib/parsers/csv-parser.ts](src/lib/parsers/csv-parser.ts):
 export const BANK_CONFIGS: Record<string, BankConfig> = {
   // ... existing configs
   yourBank: {
-    name: 'Your Bank',
-    dateColumn: 'Transaction Date',    // CSV header for date
-    descriptionColumn: 'Description',  // CSV header for description
-    amountColumn: 'Amount',            // CSV header for amount
-    dateFormat: 'MM/dd/yyyy',          // Date format
-    amountMultiplier: 1,               // Use -1 if expenses are positive
+    name: "Your Bank",
+    dateColumn: "Transaction Date", // CSV header for date
+    descriptionColumn: "Description", // CSV header for description
+    amountColumn: "Amount", // CSV header for amount
+    dateFormat: "MM/dd/yyyy", // Date format
+    amountMultiplier: 1, // Use -1 if expenses are positive
     hasHeader: true,
   },
 };
@@ -371,8 +392,8 @@ export const CATEGORY_RULES: CategoryRule[] = [
   // ... existing rules
   {
     pattern: /your merchant|another store/i,
-    category: 'Shopping',
-    subcategory: 'Clothing',
+    category: "Shopping",
+    subcategory: "Clothing",
     confidence: 0.9,
   },
 ];
@@ -383,6 +404,7 @@ export const CATEGORY_RULES: CategoryRule[] = [
 ## 🐛 Troubleshooting
 
 ### **Issue: Data not persisting**
+
 **Solution**: Install Dexie and uncomment the code in [budget-db.ts](src/lib/budget-db.ts)
 
 ```bash
@@ -390,20 +412,26 @@ npm install dexie dexie-react-hooks
 ```
 
 ### **Issue: CSV import fails**
+
 **Solutions**:
+
 1. Check your CSV has headers
 2. Verify bank format matches configuration
 3. Try manual bank selection instead of auto-detect
 4. Check date format (MM/DD/YYYY vs YYYY-MM-DD)
 
 ### **Issue: Duplicate transactions imported**
+
 **Solution**: System auto-detects duplicates (same date, amount, description), but may miss some. Always review the preview before importing.
 
 ### **Issue: Categories incorrect**
+
 **Solution**: Auto-categorization uses pattern matching and may not be 100% accurate. Edit transactions manually or add custom rules.
 
 ### **Issue: Module not found errors**
+
 **Solution**: Make sure all dependencies are installed:
+
 ```bash
 npm install dexie dexie-react-hooks papaparse react-dropzone @types/papaparse
 ```
@@ -413,6 +441,7 @@ npm install dexie dexie-react-hooks papaparse react-dropzone @types/papaparse
 ## 🚀 Next Steps (Optional Enhancements)
 
 ### **Phase 3: Advanced Features (Future)**
+
 - [ ] Recurring transaction auto-detection
 - [ ] Bill reminders & due date tracking
 - [ ] ML categorization (TensorFlow.js)
@@ -427,6 +456,7 @@ npm install dexie dexie-react-hooks papaparse react-dropzone @types/papaparse
 - [ ] Dark mode
 
 ### **Phase 4: Multi-User (If Needed)**
+
 - [ ] Supabase backend integration
 - [ ] User authentication
 - [ ] Multi-device sync
@@ -459,6 +489,7 @@ npm install dexie dexie-react-hooks papaparse react-dropzone @types/papaparse
 Your household budget app is complete and ready to use. Here's what to do next:
 
 1. **Install dependencies**:
+
    ```bash
    npm install dexie dexie-react-hooks papaparse react-dropzone @types/papaparse
    ```
@@ -466,6 +497,7 @@ Your household budget app is complete and ready to use. Here's what to do next:
 2. **Enable database** (uncomment Dexie code in `budget-db.ts`)
 
 3. **Run the app**:
+
    ```bash
    npm run dev
    ```
