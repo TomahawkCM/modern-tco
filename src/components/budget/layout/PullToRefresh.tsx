@@ -74,7 +74,7 @@ export function PullToRefresh({
   return (
     <div
       ref={containerRef}
-      className="relative md:hidden"
+      className="relative"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
