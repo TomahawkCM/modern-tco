@@ -19,6 +19,7 @@ import {
   FileText,
   Plus,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { extractReceiptData, type ExtractedReceiptData } from "@/lib/receipt-ocr";
 import { getPrivacySettings } from "@/lib/budget-privacy-settings";
 import { db } from "@/lib/budget-db";
@@ -27,6 +28,7 @@ import type { Category } from "@/types/budget";
 import Link from "next/link";
 
 export default function ReceiptScannerPage() {
+  const t = useTranslations("ocr");
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -75,13 +77,13 @@ export default function ReceiptScannerPage() {
     const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
 
     if (!isImage && !isPdf) {
-      setError("Please select an image or PDF file (JPG, PNG, PDF)");
+      setError(t("errorInvalidFileType"));
       return;
     }
 
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
-      setError("File must be less than 10MB");
+      setError(t("errorFileSize"));
       return;
     }
 
@@ -115,13 +117,13 @@ export default function ReceiptScannerPage() {
     const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
 
     if (!isImage && !isPdf) {
-      setError("Please drop an image or PDF file (JPG, PNG, PDF)");
+      setError(t("errorInvalidFileType"));
       return;
     }
 
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
-      setError("File must be less than 10MB");
+      setError(t("errorFileSize"));
       return;
     }
 
@@ -172,11 +174,11 @@ export default function ReceiptScannerPage() {
       if (data.merchant) setDescription(data.merchant);
 
       if (data.confidence < 0.5) {
-        setError("Low confidence OCR result. Please verify the extracted data carefully.");
+        setError(t("errorLowConfidence"));
       }
     } catch (err) {
       console.error("OCR processing error:", err);
-      setError("Failed to process receipt. Please try again or enter the data manually.");
+      setError(t("errorProcessingFailed"));
     } finally {
       setIsProcessing(false);
       setProcessingProgress(null);
@@ -185,7 +187,7 @@ export default function ReceiptScannerPage() {
 
   const saveTransaction = async () => {
     if (!merchant || !amount || !date) {
-      setError("Please fill in merchant, amount, and date before saving");
+      setError(t("errorRequiredFields"));
       return;
     }
 
@@ -193,7 +195,7 @@ export default function ReceiptScannerPage() {
       // Get default account (or first account)
       const accounts = await db.accounts.toArray();
       if (accounts.length === 0) {
-        setError("Please create an account first in the main app");
+        setError(t("errorNoAccount"));
         return;
       }
 
@@ -230,7 +232,7 @@ export default function ReceiptScannerPage() {
       }, 2000);
     } catch (err) {
       console.error("Error saving transaction:", err);
-      setError("Failed to save transaction. Please try again.");
+      setError(t("errorSaveFailed"));
     }
   };
 
@@ -294,22 +296,19 @@ export default function ReceiptScannerPage() {
   if (!isOCREnabled) {
     return (
       <div className="mx-auto max-w-2xl">
-        <h1 className="mb-6 text-3xl font-bold text-white">Scan Receipt</h1>
+        <h1 className="mb-6 text-3xl font-bold text-white">{t("title")}</h1>
 
         <div className="rounded-lg border border-yellow-500/30 bg-yellow-900/20 p-6">
           <div className="flex items-start gap-3">
             <AlertCircle className="mt-0.5 h-6 w-6 flex-shrink-0 text-yellow-500" />
             <div>
-              <h3 className="mb-2 text-lg font-semibold text-white">OCR Disabled</h3>
-              <p className="mb-4 text-slate-300">
-                Receipt scanning (OCR) is currently disabled in your privacy settings. Enable it to
-                automatically extract transaction details from receipt images.
-              </p>
+              <h3 className="mb-2 text-lg font-semibold text-white">{t("ocrDisabled")}</h3>
+              <p className="mb-4 text-slate-300">{t("ocrDisabledDescription")}</p>
               <Link
                 href="/budget-app/settings"
                 className="inline-flex items-center rounded-lg bg-yellow-600 px-4 py-2 text-white transition-colors hover:bg-yellow-700"
               >
-                Go to Settings
+                {t("goToSettings")}
               </Link>
             </div>
           </div>
@@ -319,11 +318,8 @@ export default function ReceiptScannerPage() {
           <div className="flex items-start gap-3">
             <Eye className="mt-0.5 h-5 w-5 flex-shrink-0 text-teal-500" />
             <div>
-              <h4 className="mb-1 text-sm font-semibold text-white">Privacy Note</h4>
-              <p className="text-sm text-slate-300">
-                OCR processing happens entirely in your browser using Tesseract.js. No receipt
-                images are uploaded to any server. All data stays on your device.
-              </p>
+              <h4 className="mb-1 text-sm font-semibold text-white">{t("privacyNote")}</h4>
+              <p className="text-sm text-slate-300">{t("privacyNoteDescription")}</p>
             </div>
           </div>
         </div>
@@ -334,11 +330,8 @@ export default function ReceiptScannerPage() {
   return (
     <div className="mx-auto max-w-4xl">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-white">Scan Receipt</h1>
-        <p className="mt-2 text-slate-400">
-          Upload a receipt image or PDF (JPG, PNG, PDF) to automatically extract transaction details
-          using OCR
-        </p>
+        <h1 className="text-3xl font-bold text-white">{t("title")}</h1>
+        <p className="mt-2 text-slate-400">{t("subtitle")}</p>
       </div>
 
       {/* Privacy Notice */}
@@ -346,10 +339,8 @@ export default function ReceiptScannerPage() {
         <div className="flex items-start gap-3">
           <Eye className="mt-0.5 h-5 w-5 flex-shrink-0 text-teal-500" />
           <div className="flex-1">
-            <h4 className="mb-1 text-sm font-semibold text-white">Privacy First</h4>
-            <p className="text-sm text-slate-300">
-              All OCR processing happens in your browser. No images are uploaded to servers.
-            </p>
+            <h4 className="mb-1 text-sm font-semibold text-white">{t("privacyFirst")}</h4>
+            <p className="text-sm text-slate-300">{t("privacyFirstDescription")}</p>
           </div>
         </div>
       </div>
@@ -361,7 +352,7 @@ export default function ReceiptScannerPage() {
           <div className="rounded-lg border border-white/10 bg-slate-800/50 p-6">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
               <Camera className="h-5 w-5 text-teal-500" />
-              Upload Receipt
+              {t("uploadReceipt")}
             </h2>
 
             {!imagePreview ? (
@@ -373,17 +364,17 @@ export default function ReceiptScannerPage() {
               >
                 <Upload className="mx-auto mb-4 h-12 w-12 text-slate-400" />
                 <p className="mb-2 text-slate-300">
-                  <span className="font-semibold text-teal-500">Click to upload</span> or drag and
-                  drop
+                  <span className="font-semibold text-teal-500">{t("clickToUpload")}</span>{" "}
+                  {t("orDragAndDrop")}
                 </p>
-                <p className="text-sm text-slate-400">JPG, PNG, PDF up to 10MB</p>
+                <p className="text-sm text-slate-400">{t("supportedFormats")}</p>
                 <input
                   ref={fileInputRef}
                   type="file"
                   accept="image/*,application/pdf"
                   onChange={handleFileSelect}
                   className="hidden"
-                  aria-label="Upload receipt image or PDF"
+                  aria-label={t("uploadReceiptAriaLabel")}
                 />
               </div>
             ) : (
@@ -412,13 +403,16 @@ export default function ReceiptScannerPage() {
                       <>
                         <Loader2 className="h-5 w-5 animate-spin" />
                         {processingProgress
-                          ? `Processing page ${processingProgress.current} of ${processingProgress.total}...`
-                          : "Processing..."}
+                          ? t("processingPage", {
+                              current: processingProgress.current,
+                              total: processingProgress.total,
+                            })
+                          : t("processing")}
                       </>
                     ) : (
                       <>
                         <Camera className="h-5 w-5" />
-                        Scan Receipt
+                        {t("scanReceipt")}
                       </>
                     )}
                   </button>
@@ -427,7 +421,7 @@ export default function ReceiptScannerPage() {
                     disabled={isProcessing}
                     className="rounded-lg border border-slate-600 px-4 py-2 text-slate-300 transition-colors hover:bg-slate-700"
                   >
-                    Clear
+                    {t("clear")}
                   </button>
                 </div>
               </div>
@@ -437,21 +431,23 @@ export default function ReceiptScannerPage() {
           {/* OCR Results */}
           {extractedData && (
             <div className="rounded-lg border border-white/10 bg-slate-800/50 p-6">
-              <h3 className="mb-4 text-lg font-semibold text-white">OCR Results</h3>
+              <h3 className="mb-4 text-lg font-semibold text-white">{t("ocrResults")}</h3>
 
               {/* Show PDF info if multi-page */}
               {extractedData.pagesProcessed && extractedData.pagesProcessed > 1 && (
                 <div className="mb-4 rounded-lg bg-slate-900/50 p-3 text-sm text-slate-300">
-                  <p className="font-medium">📄 Processed {extractedData.pagesProcessed} pages</p>
+                  <p className="font-medium">
+                    {t("processedPages", { count: extractedData.pagesProcessed })}
+                  </p>
                   <p className="mt-1 text-xs">
-                    Best result from page {extractedData.bestPageNumber}
+                    {t("bestResultPage", { page: extractedData.bestPageNumber ?? 0 })}
                   </p>
                 </div>
               )}
 
               <div className="space-y-3 text-sm">
                 <div className="flex items-center justify-between border-b border-slate-700 pb-2">
-                  <span className="text-slate-400">Confidence:</span>
+                  <span className="text-slate-400">{t("confidence")}:</span>
                   <span
                     className={`font-semibold ${
                       extractedData.confidence >= 0.7
@@ -466,25 +462,25 @@ export default function ReceiptScannerPage() {
                 </div>
 
                 <div className="flex items-center justify-between border-b border-slate-700 pb-2">
-                  <span className="text-slate-400">Merchant:</span>
+                  <span className="text-slate-400">{t("merchantLabel")}:</span>
                   <span className="font-medium text-white">
-                    {extractedData.merchant || "Not found"}
+                    {extractedData.merchant || t("notFound")}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between border-b border-slate-700 pb-2">
-                  <span className="text-slate-400">Amount:</span>
+                  <span className="text-slate-400">{t("amountLabel")}:</span>
                   <span className="font-medium text-white">
                     {extractedData.amount !== null
                       ? `$${extractedData.amount.toFixed(2)}`
-                      : "Not found"}
+                      : t("notFound")}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between border-b border-slate-700 pb-2">
-                  <span className="text-slate-400">Date:</span>
+                  <span className="text-slate-400">{t("dateLabel")}:</span>
                   <span className="font-medium text-white">
-                    {extractedData.date ? extractedData.date.toLocaleDateString() : "Not found"}
+                    {extractedData.date ? extractedData.date.toLocaleDateString() : t("notFound")}
                   </span>
                 </div>
               </div>
@@ -492,7 +488,7 @@ export default function ReceiptScannerPage() {
               {extractedData.rawText && (
                 <details className="mt-4">
                   <summary className="cursor-pointer text-sm text-slate-400 hover:text-white">
-                    View Raw OCR Text
+                    {t("viewRawOcrText")}
                   </summary>
                   <pre className="mt-2 max-h-48 overflow-auto rounded bg-slate-900/50 p-3 text-xs text-slate-300">
                     {extractedData.rawText}
@@ -507,25 +503,29 @@ export default function ReceiptScannerPage() {
         <div className="rounded-lg border border-white/10 bg-slate-800/50 p-6">
           <h2 className="mb-4 flex items-center gap-2 text-lg font-semibold text-white">
             <Save className="h-5 w-5 text-teal-500" />
-            Transaction Details
+            {t("transactionDetails")}
           </h2>
 
           <div className="space-y-4">
             {/* Merchant */}
             <div>
-              <label className="mb-1 block text-sm font-medium text-slate-300">Merchant *</label>
+              <label className="mb-1 block text-sm font-medium text-slate-300">
+                {t("merchantRequired")}
+              </label>
               <input
                 type="text"
                 value={merchant}
                 onChange={(e) => setMerchant(e.target.value)}
-                placeholder="e.g., Walmart, Starbucks"
+                placeholder={t("merchantPlaceholder")}
                 className="w-full rounded-lg border border-slate-600 bg-slate-900/50 px-3 py-2 text-white placeholder-slate-500 focus:border-transparent focus:ring-2 focus:ring-teal-500"
               />
             </div>
 
             {/* Amount */}
             <div>
-              <label className="mb-1 block text-sm font-medium text-slate-300">Amount *</label>
+              <label className="mb-1 block text-sm font-medium text-slate-300">
+                {t("amountRequired")}
+              </label>
               <div className="relative">
                 <span className="absolute left-3 top-2.5 text-slate-400">$</span>
                 <input
@@ -545,33 +545,37 @@ export default function ReceiptScannerPage() {
                 htmlFor="receipt-date"
                 className="mb-1 block text-sm font-medium text-slate-300"
               >
-                Date *
+                {t("dateRequired")}
               </label>
               <input
                 id="receipt-date"
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                aria-label="Receipt date"
+                aria-label={t("receiptDateAriaLabel")}
                 className="w-full rounded-lg border border-slate-600 bg-slate-900/50 px-3 py-2 text-white focus:border-transparent focus:ring-2 focus:ring-teal-500"
               />
             </div>
 
             {/* Description */}
             <div>
-              <label className="mb-1 block text-sm font-medium text-slate-300">Description</label>
+              <label className="mb-1 block text-sm font-medium text-slate-300">
+                {t("descriptionLabel")}
+              </label>
               <input
                 type="text"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Optional description"
+                placeholder={t("descriptionPlaceholder")}
                 className="w-full rounded-lg border border-slate-600 bg-slate-900/50 px-3 py-2 text-white placeholder-slate-500 focus:border-transparent focus:ring-2 focus:ring-teal-500"
               />
             </div>
 
             {/* Category */}
             <div>
-              <label className="mb-1 block text-sm font-medium text-slate-300">Category</label>
+              <label className="mb-1 block text-sm font-medium text-slate-300">
+                {t("categoryLabel")}
+              </label>
               {!showCreateCategory ? (
                 <CategoryCombobox
                   options={[
@@ -579,7 +583,7 @@ export default function ReceiptScannerPage() {
                       value: cat.name,
                       label: cat.name,
                     })),
-                    { value: "__create__", label: "+ Create New Category" },
+                    { value: "__create__", label: t("createNewCategory") },
                   ]}
                   value={category}
                   onChange={(value) => {
@@ -591,7 +595,7 @@ export default function ReceiptScannerPage() {
                       setSubcategory("");
                     }
                   }}
-                  placeholder="Select category..."
+                  placeholder={t("selectCategory")}
                 />
               ) : (
                 <div className="space-y-2 rounded-lg border-2 border-teal-500 bg-slate-900/50 p-3">
@@ -599,14 +603,14 @@ export default function ReceiptScannerPage() {
                     type="text"
                     value={newCategoryName}
                     onChange={(e) => setNewCategoryName(e.target.value)}
-                    placeholder="Category name"
+                    placeholder={t("categoryNamePlaceholder")}
                     className="w-full rounded-lg border border-slate-600 bg-slate-900/50 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-transparent focus:ring-2 focus:ring-teal-500"
                   />
                   <input
                     type="text"
                     value={newCategorySubcats}
                     onChange={(e) => setNewCategorySubcats(e.target.value)}
-                    placeholder="Subcategories (comma-separated, optional)"
+                    placeholder={t("subcategoriesPlaceholder")}
                     className="w-full rounded-lg border border-slate-600 bg-slate-900/50 px-3 py-2 text-sm text-white placeholder-slate-500 focus:border-transparent focus:ring-2 focus:ring-teal-500"
                   />
                   <div className="flex gap-2">
@@ -616,7 +620,7 @@ export default function ReceiptScannerPage() {
                       className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-teal-600 px-3 py-2 text-sm text-white hover:bg-teal-700"
                     >
                       <Plus className="h-4 w-4" />
-                      Create
+                      {t("create")}
                     </button>
                     <button
                       type="button"
@@ -627,7 +631,7 @@ export default function ReceiptScannerPage() {
                       }}
                       className="flex-1 rounded-lg border border-slate-600 px-3 py-2 text-sm text-slate-300 hover:bg-slate-700"
                     >
-                      Cancel
+                      {t("cancel")}
                     </button>
                   </div>
                 </div>
@@ -637,10 +641,12 @@ export default function ReceiptScannerPage() {
             {/* Subcategory */}
             {selectedCategory && selectedCategory.subcategories.length > 0 && (
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-300">Subcategory</label>
+                <label className="mb-1 block text-sm font-medium text-slate-300">
+                  {t("subcategoryLabel")}
+                </label>
                 <CategoryCombobox
                   options={[
-                    { value: "", label: "None" },
+                    { value: "", label: t("none") },
                     ...selectedCategory.subcategories.map((sub) => ({
                       value: sub,
                       label: sub,
@@ -648,7 +654,7 @@ export default function ReceiptScannerPage() {
                   ]}
                   value={subcategory}
                   onChange={setSubcategory}
-                  placeholder="Select subcategory..."
+                  placeholder={t("selectSubcategory")}
                 />
               </div>
             )}
@@ -660,7 +666,7 @@ export default function ReceiptScannerPage() {
               className="flex w-full items-center justify-center gap-2 rounded-lg bg-teal-500 px-4 py-3 font-medium text-white transition-colors hover:bg-teal-600 disabled:cursor-not-allowed disabled:bg-slate-600"
             >
               <Save className="h-5 w-5" />
-              Save Transaction
+              {t("saveTransaction")}
             </button>
           </div>
 
@@ -677,15 +683,13 @@ export default function ReceiptScannerPage() {
             <div className="mt-4 rounded-lg border border-green-500/30 bg-green-900/20 p-3">
               <div className="mb-2 flex items-start gap-2">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
-                <p className="text-sm font-medium text-green-300">
-                  Transaction saved successfully!
-                </p>
+                <p className="text-sm font-medium text-green-300">{t("transactionSaved")}</p>
               </div>
               <Link
                 href="/budget-app/transactions"
                 className="inline-flex items-center text-sm text-green-400 underline hover:text-green-300"
               >
-                View in Transactions
+                {t("viewInTransactions")}
               </Link>
             </div>
           )}

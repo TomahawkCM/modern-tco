@@ -23,6 +23,52 @@ const CONFLICT_WINDOW_MS = 5 * 60 * 1000;
 let localeSyncTimer: NodeJS.Timeout | null = null;
 let widgetSyncTimer: NodeJS.Timeout | null = null;
 
+// Cache whether the user_preferences table exists in remote Supabase.
+// Avoids repeated 404s when the migration hasn't been applied yet.
+let tableStatus: "unknown" | "available" | "unavailable" = "unknown";
+
+/**
+ * Check if the user_preferences table is available.
+ * On first call (per page load), probes the table with a HEAD request.
+ * Caches the result so subsequent calls are free (no network request).
+ * Returns false early if not authenticated (no network request).
+ */
+async function ensureTableAvailable(): Promise<boolean> {
+  if (tableStatus === "available") return true;
+  if (tableStatus === "unavailable") return false;
+
+  // Check auth from local session (no network request)
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  if (!session) return false;
+
+  // Probe the table with a HEAD request (at most one 404 per session)
+  const { error } = await supabase
+    .from("user_preferences" as any)
+    .select("user_id", { count: "exact", head: true } as any);
+
+  if (error) {
+    const code = error.code || "";
+    const message = error.message || "";
+    if (
+      code === "PGRST204" ||
+      code === "42P01" ||
+      message.includes("relation") ||
+      message.includes("not found")
+    ) {
+      tableStatus = "unavailable";
+      console.debug("[User Preferences] Table not available — run: supabase db push");
+      return false;
+    }
+    // Other errors (network, etc.) — don't cache, allow retry next time
+    return false;
+  }
+
+  tableStatus = "available";
+  return true;
+}
+
 /**
  * User preferences row from Supabase
  */
@@ -53,6 +99,8 @@ async function getCurrentUserId(): Promise<string | null> {
  * Fetch user preferences from Supabase
  */
 export async function fetchUserPreferences(): Promise<UserPreferencesRow | null> {
+  if (!(await ensureTableAvailable())) return null;
+
   const userId = await getCurrentUserId();
   if (!userId) return null;
 
@@ -99,6 +147,8 @@ export function syncLocaleToSupabase(preferences: LocalePreferences): void {
 
   // Set new debounced timer
   localeSyncTimer = setTimeout(async () => {
+    if (!(await ensureTableAvailable())) return;
+
     const userId = await getCurrentUserId();
     if (!userId) return;
 
@@ -185,6 +235,8 @@ export function syncWidgetConfigToSupabase(config: DashboardConfig): void {
 
   // Set new debounced timer
   widgetSyncTimer = setTimeout(async () => {
+    if (!(await ensureTableAvailable())) return;
+
     const userId = await getCurrentUserId();
     if (!userId) return;
 
@@ -316,6 +368,8 @@ export async function loadWidgetConfigFromSupabase(
  * Delete user preferences from Supabase
  */
 export async function deleteUserPreferences(): Promise<void> {
+  if (!(await ensureTableAvailable())) return;
+
   const userId = await getCurrentUserId();
   if (!userId) return;
 

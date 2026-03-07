@@ -12,6 +12,26 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 }
 
+/**
+ * Check if the user is eligible for a custom install prompt.
+ * Called during beforeinstallprompt to decide whether to capture the event.
+ * Mirrors shouldShowPrompt() logic but reads from localStorage directly
+ * (React state not available at event time).
+ */
+function isEligibleForCustomPrompt(): boolean {
+  if (typeof window === "undefined") return false;
+  if (window.matchMedia("(display-mode: standalone)").matches) return false;
+  if (localStorage.getItem("budget-app-installed") === "true") return false;
+  const visits = parseInt(localStorage.getItem("budget-app-visits") || "0");
+  if (visits < 3) return false;
+  const dismissedAt = localStorage.getItem("budget-app-install-dismissed");
+  if (dismissedAt) {
+    const daysSinceDismissed = (Date.now() - parseInt(dismissedAt)) / (1000 * 60 * 60 * 24);
+    if (daysSinceDismissed < 7) return false;
+  }
+  return true;
+}
+
 export function usePWA() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isInstallable, setIsInstallable] = useState(false);
@@ -67,14 +87,18 @@ export function usePWA() {
 
     // Listen for install prompt event
     const handleBeforeInstallPrompt = (e: Event) => {
-      console.log("[PWA] Install prompt event fired");
-      e.preventDefault();
-      setDeferredPrompt(e as BeforeInstallPromptEvent);
-      setIsInstallable(true);
-
-      // Track that user saw the prompt after 3 visits
+      // Always increment visit counter
       const visits = parseInt(localStorage.getItem("budget-app-visits") || "0");
       localStorage.setItem("budget-app-visits", (visits + 1).toString());
+
+      // Only capture the event for custom install UI if eligible.
+      // Avoids Chrome "Banner not shown: preventDefault() called" console message
+      // on early visits, dismissed state, or already-installed state.
+      if (isEligibleForCustomPrompt()) {
+        e.preventDefault();
+        setDeferredPrompt(e as BeforeInstallPromptEvent);
+        setIsInstallable(true);
+      }
     };
 
     // Listen for app installed event

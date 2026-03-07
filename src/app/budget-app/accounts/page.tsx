@@ -25,6 +25,10 @@ import { db } from "@/lib/budget-db";
 import type { Account, Transaction } from "@/types/budget";
 import { ConfirmDialog } from "@/components/budget/ConfirmDialog";
 import { useToast } from "@/components/budget/Toast";
+import { getCurrentCurrency, getCurrentLocale } from "@/lib/locale-storage";
+import { LOCALE_METADATA } from "@/i18n/config";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useTranslations } from "next-intl";
 import { v4 as uuidv4 } from "uuid";
 import {
   migrateDefaultTransactions,
@@ -39,6 +43,7 @@ import { PullToRefresh } from "@/components/budget/layout/PullToRefresh";
 export default function AccountsPage() {
   const router = useRouter();
   const toast = useToast();
+  const t = useTranslations("budget.accounts");
   const [accounts, setAccounts] = useState<Account[]>([]);
   const [transactionCounts, setTransactionCounts] = useState<Record<string, number>>({});
   const [accountBalances, setAccountBalances] = useState<Record<string, number>>({});
@@ -124,13 +129,21 @@ export default function AccountsPage() {
         lastReconciledBalance: currentBalance,
         updatedAt: now,
       });
-      toast.success(`Starting balance set to $${startingBalance.toLocaleString()}`);
+      toast.success(
+        t("startingBalanceSetTo", {
+          amount: formatCurrency(
+            startingBalance,
+            getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency,
+            getCurrentLocale()
+          ),
+        })
+      );
       clearPendingReconciliation(reconciliationAccountId);
       loadPendingReconciliations();
       loadAccounts();
     } catch (error) {
       console.error("Error updating account balance:", error);
-      toast.error("Failed to update account balance");
+      toast.error(t("failedToUpdateBalance"));
     }
   }
 
@@ -152,16 +165,16 @@ export default function AccountsPage() {
     try {
       const result = await migrateDefaultTransactions();
       if (result.migrated > 0) {
-        toast.success(`Migrated ${result.migrated} transactions to accounts`);
+        toast.success(t("migratedTransactions", { count: result.migrated }));
         if (result.created.length > 0) {
-          toast.info(`Created account: ${result.created.join(", ")}`);
+          toast.info(t("createdAccount", { names: result.created.join(", ") }));
         }
       }
       setUnassignedCount(0);
       loadAccounts();
     } catch (error) {
       console.error("Error migrating transactions:", error);
-      toast.error("Failed to migrate transactions");
+      toast.error(t("failedToMigrate"));
     } finally {
       setIsMigrating(false);
     }
@@ -174,13 +187,13 @@ export default function AccountsPage() {
     try {
       const count = await assignUnassignedTransactionsTo(selectedTargetAccount);
       const targetName = accounts.find((a) => a.id === selectedTargetAccount)?.name;
-      toast.success(`Assigned ${count} transactions to ${targetName}`);
+      toast.success(t("assignedTransactions", { count, name: targetName ?? "" }));
       setShowAssignModal(false);
       setUnassignedCount(0);
       loadAccounts(); // Refresh balances
     } catch (error) {
       console.error("Error assigning transactions:", error);
-      toast.error("Failed to assign transactions");
+      toast.error(t("failedToAssign"));
     } finally {
       setIsMigrating(false);
     }
@@ -189,13 +202,13 @@ export default function AccountsPage() {
   async function handleClearAllTransactions() {
     try {
       await db.transactions.clear();
-      toast.success("All transactions cleared. You can now re-import your statements.");
+      toast.success(t("allTransactionsCleared"));
       setShowResetConfirm(false);
       loadAccounts();
       checkUnassignedTransactions();
     } catch (error) {
       console.error("Error clearing transactions:", error);
-      toast.error("Failed to clear transactions");
+      toast.error(t("failedToClear"));
     }
   }
 
@@ -221,7 +234,7 @@ export default function AccountsPage() {
       setAccountBalances(balances);
     } catch (error) {
       console.error("Error loading accounts:", error);
-      toast.error("Failed to load accounts");
+      toast.error(t("failedToLoad"));
     } finally {
       setIsLoading(false);
     }
@@ -251,7 +264,7 @@ export default function AccountsPage() {
 
   async function handleSave() {
     if (!formName.trim()) {
-      toast.error("Account name is required");
+      toast.error(t("nameRequired"));
       return;
     }
 
@@ -267,7 +280,7 @@ export default function AccountsPage() {
           balance,
           updatedAt: new Date(),
         });
-        toast.success("Account updated");
+        toast.success(t("accountUpdated"));
       } else {
         // Create new account
         const newAccount: Account = {
@@ -276,19 +289,19 @@ export default function AccountsPage() {
           type: formType,
           institution: formInstitution.trim(),
           balance,
-          currency: "CAD",
+          currency: getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency,
           createdAt: new Date(),
           updatedAt: new Date(),
         };
         await db.accounts.add(newAccount);
-        toast.success("Account created");
+        toast.success(t("accountCreated"));
       }
 
       setShowAddModal(false);
       loadAccounts();
     } catch (error) {
       console.error("Error saving account:", error);
-      toast.error("Failed to save account");
+      toast.error(t("failedToSave"));
     }
   }
 
@@ -297,13 +310,13 @@ export default function AccountsPage() {
 
     try {
       await db.accounts.delete(deletingAccount.id);
-      toast.success("Account deleted");
+      toast.success(t("accountDeleted"));
       setDeleteConfirmOpen(false);
       setDeletingAccount(null);
       loadAccounts();
     } catch (error) {
       console.error("Error deleting account:", error);
-      toast.error("Failed to delete account");
+      toast.error(t("failedToDelete"));
     }
   }
 
@@ -323,412 +336,427 @@ export default function AccountsPage() {
   if (isLoading) {
     return (
       <div className="p-8">
-        <h1 className="mb-4 text-2xl font-bold">Accounts</h1>
-        <p>Loading accounts...</p>
+        <h1 className="mb-4 text-2xl font-bold">{t("title")}</h1>
+        <p>{t("loading")}</p>
       </div>
     );
   }
 
   return (
-    <PullToRefresh onRefresh={async () => { await loadAccounts(); checkUnassignedTransactions(); loadPendingReconciliations(); }}>
-    <div className="mx-auto max-w-4xl p-6">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Accounts</h1>
-          <p className="mt-1 text-gray-600">Manage your bank accounts and starting balances</p>
-        </div>
-        <button
-          onClick={openAddModal}
-          className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
-        >
-          <Plus className="h-5 w-5" />
-          Add Account
-        </button>
-      </div>
-
-      {/* Total Balance Summary */}
-      <div className="mb-6 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white shadow-lg">
-        <p className="mb-1 text-sm font-medium text-blue-100">Total Starting Balance</p>
-        <p className="text-4xl font-bold">
-          ${totalBalance.toLocaleString("en-US", { minimumFractionDigits: 2 })}
-        </p>
-        <p className="mt-2 text-sm text-blue-200">
-          This is added to your transaction totals to show your current balance
-        </p>
-      </div>
-
-      {/* Unassigned Transactions Banner */}
-      {unassignedCount > 0 && (
-        <div className="mb-6 rounded-lg border border-yellow-200 bg-yellow-50 p-4">
-          <div className="flex items-start gap-3">
-            <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-yellow-600" />
-            <div className="flex-1">
-              <h3 className="text-sm font-semibold text-yellow-900">
-                {unassignedCount} transaction{unassignedCount !== 1 ? "s" : ""} need
-                {unassignedCount === 1 ? "s" : ""} account assignment
-              </h3>
-              <p className="mt-1 text-sm text-yellow-700">
-                These transactions were imported before accounts were set up.
-                {accounts.length > 0
-                  ? " Click below to automatically assign them to your accounts."
-                  : " Create an account first, then they will be automatically assigned."}
-              </p>
-              {accounts.length > 0 && (
-                <button
-                  onClick={handleMigrateTransactions}
-                  disabled={isMigrating}
-                  className="mt-3 inline-flex items-center gap-2 rounded-lg bg-yellow-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-yellow-700 disabled:bg-yellow-400"
-                >
-                  {isMigrating ? "Assigning..." : "Assign Transactions Now"}
-                </button>
-              )}
-            </div>
+    <PullToRefresh
+      onRefresh={async () => {
+        await loadAccounts();
+        checkUnassignedTransactions();
+        loadPendingReconciliations();
+      }}
+    >
+      <div className="mx-auto max-w-4xl p-6">
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">{t("title")}</h1>
+            <p className="mt-1 text-gray-600">{t("subtitle")}</p>
           </div>
-        </div>
-      )}
-
-      {/* Pending Balance Reconciliation Reminders */}
-      {Object.keys(pendingReconciliations).length > 0 && (
-        <div className="mb-6 space-y-3">
-          {Object.entries(pendingReconciliations).map(([accountId, data]) => (
-            <div
-              key={accountId}
-              className="rounded-lg border border-teal-200 bg-teal-50 p-4 dark:border-teal-800 dark:bg-teal-950/30"
-            >
-              <div className="flex items-start gap-3">
-                <Wallet className="mt-0.5 h-5 w-5 flex-shrink-0 text-teal-600 dark:text-teal-400" />
-                <div className="flex-1">
-                  <h3 className="text-sm font-semibold text-teal-900 dark:text-teal-100">
-                    Set starting balance for {data.accountName}
-                  </h3>
-                  <p className="mt-1 text-sm text-teal-700 dark:text-teal-300">
-                    Enter your current bank balance to ensure accurate account totals.
-                  </p>
-                  <button
-                    onClick={() => openReconciliationModal(accountId)}
-                    className="mt-3 inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-teal-700"
-                  >
-                    <Wallet className="h-4 w-4" />
-                    Set Balance Now
-                  </button>
-                </div>
-                <button
-                  onClick={() => {
-                    clearPendingReconciliation(accountId);
-                    loadPendingReconciliations();
-                    toast.info("Reminder dismissed");
-                  }}
-                  className="rounded-lg p-1.5 text-teal-600 transition-colors hover:bg-teal-100 dark:hover:bg-teal-900"
-                  aria-label="Dismiss reminder"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Accounts List */}
-      {accounts.length === 0 ? (
-        <div className="rounded-lg bg-white p-8 text-center shadow-md">
-          <Landmark className="mx-auto mb-4 h-16 w-16 text-gray-300" />
-          <h2 className="mb-2 text-xl font-semibold text-gray-700">No accounts yet</h2>
-          <p className="mb-4 text-gray-500">
-            Add your bank accounts to track starting balances and get accurate totals.
-          </p>
           <button
             onClick={openAddModal}
-            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+            className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
           >
             <Plus className="h-5 w-5" />
-            Add Your First Account
+            {t("addAccount")}
           </button>
         </div>
-      ) : (
-        <div className="space-y-4">
-          {accounts.map((account) => {
-            const txCount = transactionCounts[account.id] || 0;
-            const currentBalance = accountBalances[account.id] ?? account.balance;
 
-            return (
-              <div
-                key={account.id}
-                className="overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg"
-              >
-                {/* Clickable main area */}
-                <button
-                  onClick={() => viewAccountTransactions(account.id)}
-                  className="flex w-full items-center justify-between p-6 text-left transition-colors hover:bg-gray-50"
-                >
-                  <div className="flex items-center gap-4">
-                    <div
-                      className={`rounded-full p-3 ${
-                        account.type === "checking"
-                          ? "bg-blue-100 text-blue-600"
-                          : account.type === "savings"
-                            ? "bg-green-100 text-green-600"
-                            : "bg-purple-100 text-purple-600"
-                      }`}
-                    >
-                      {getAccountIcon(account.type)}
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">{account.name}</h3>
-                      <p className="text-sm text-gray-500">
-                        {account.institution} •{" "}
-                        {account.type.charAt(0).toUpperCase() + account.type.slice(1)}
-                      </p>
-                      <p className="mt-1 flex items-center gap-1 text-xs text-blue-600">
-                        <Eye className="h-3 w-3" />
-                        {txCount} transaction{txCount !== 1 ? "s" : ""} • Click to view
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="text-right">
-                      <p className="text-xs text-gray-400">Starting</p>
-                      <p className="text-sm text-gray-500">
-                        ${account.balance.toLocaleString("en-US", { minimumFractionDigits: 2 })}
-                      </p>
-                      <p className="mt-2 text-xs text-gray-400">Current</p>
-                      <p
-                        className={`text-xl font-bold ${currentBalance >= 0 ? "text-green-600" : "text-red-600"}`}
-                      >
-                        ${currentBalance.toLocaleString("en-US", { minimumFractionDigits: 2 })}
-                      </p>
-                    </div>
-                    <ArrowRight className="h-5 w-5 text-gray-400" />
-                  </div>
-                </button>
+        {/* Total Balance Summary */}
+        <div className="mb-6 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 p-6 text-white shadow-lg">
+          <p className="mb-1 text-sm font-medium text-blue-100">{t("totalStartingBalance")}</p>
+          <p className="text-4xl font-bold">
+            {formatCurrency(
+              totalBalance,
+              getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency,
+              getCurrentLocale()
+            )}
+          </p>
+          <p className="mt-2 text-sm text-blue-200">{t("balanceExplanation")}</p>
+        </div>
 
-                {/* Action buttons */}
-                <div className="flex border-t border-gray-100">
+        {/* Unassigned Transactions Banner */}
+        {unassignedCount > 0 && (
+          <div className="mb-6 rounded-lg border border-yellow-200 bg-yellow-50 p-4">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-yellow-600" />
+              <div className="flex-1">
+                <h3 className="text-sm font-semibold text-yellow-900">
+                  {t("unassignedTitle", { count: unassignedCount })}
+                </h3>
+                <p className="mt-1 text-sm text-yellow-700">
+                  {t("unassignedDescription")}
+                  {accounts.length > 0
+                    ? ` ${t("unassignedClickToAssign")}`
+                    : ` ${t("unassignedCreateFirst")}`}
+                </p>
+                {accounts.length > 0 && (
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openEditModal(account);
-                    }}
-                    className="flex flex-1 items-center justify-center gap-2 py-3 text-sm text-gray-500 transition-colors hover:bg-blue-50 hover:text-blue-600"
+                    onClick={handleMigrateTransactions}
+                    disabled={isMigrating}
+                    className="mt-3 inline-flex items-center gap-2 rounded-lg bg-yellow-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-yellow-700 disabled:bg-yellow-400"
                   >
-                    <Edit className="h-4 w-4" />
-                    Edit
+                    {isMigrating ? t("assigning") : t("assignTransactionsNow")}
                   </button>
-                  <div className="w-px bg-gray-100" />
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Pending Balance Reconciliation Reminders */}
+        {Object.keys(pendingReconciliations).length > 0 && (
+          <div className="mb-6 space-y-3">
+            {Object.entries(pendingReconciliations).map(([accountId, data]) => (
+              <div
+                key={accountId}
+                className="rounded-lg border border-teal-200 bg-teal-50 p-4 dark:border-teal-800 dark:bg-teal-950/30"
+              >
+                <div className="flex items-start gap-3">
+                  <Wallet className="mt-0.5 h-5 w-5 flex-shrink-0 text-teal-600 dark:text-teal-400" />
+                  <div className="flex-1">
+                    <h3 className="text-sm font-semibold text-teal-900 dark:text-teal-100">
+                      {t("setStartingBalanceFor", { name: data.accountName })}
+                    </h3>
+                    <p className="mt-1 text-sm text-teal-700 dark:text-teal-300">
+                      {t("enterBankBalance")}
+                    </p>
+                    <button
+                      onClick={() => openReconciliationModal(accountId)}
+                      className="mt-3 inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-teal-700"
+                    >
+                      <Wallet className="h-4 w-4" />
+                      {t("setBalanceNow")}
+                    </button>
+                  </div>
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setDeletingAccount(account);
-                      setDeleteConfirmOpen(true);
+                    onClick={() => {
+                      clearPendingReconciliation(accountId);
+                      loadPendingReconciliations();
+                      toast.info(t("reminderDismissed"));
                     }}
-                    className="flex flex-1 items-center justify-center gap-2 py-3 text-sm text-gray-500 transition-colors hover:bg-red-50 hover:text-red-600"
+                    className="rounded-lg p-1.5 text-teal-600 transition-colors hover:bg-teal-100 dark:hover:bg-teal-900"
+                    aria-label={t("dismissReminder")}
                   >
-                    <Trash2 className="h-4 w-4" />
-                    Delete
+                    <X className="h-4 w-4" />
                   </button>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
 
-      {/* Add/Edit Modal */}
-      {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="mx-4 w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
-            <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-xl font-bold">
-                {editingAccount ? "Edit Account" : "Add Account"}
-              </h2>
-              <button
-                onClick={() => setShowAddModal(false)}
-                className="rounded-lg p-2 hover:bg-gray-100"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+        {/* Accounts List */}
+        {accounts.length === 0 ? (
+          <div className="rounded-lg bg-white p-8 text-center shadow-md">
+            <Landmark className="mx-auto mb-4 h-16 w-16 text-gray-300" />
+            <h2 className="mb-2 text-xl font-semibold text-gray-700">{t("noAccountsYet")}</h2>
+            <p className="mb-4 text-gray-500">{t("noAccountsDescription")}</p>
+            <button
+              onClick={openAddModal}
+              className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+            >
+              <Plus className="h-5 w-5" />
+              {t("addFirstAccount")}
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {accounts.map((account) => {
+              const txCount = transactionCounts[account.id] || 0;
+              const currentBalance = accountBalances[account.id] ?? account.balance;
 
-            <div className="space-y-4">
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">
-                  Account Name *
-                </label>
-                <input
-                  type="text"
-                  value={formName}
-                  onChange={(e) => setFormName(e.target.value)}
-                  placeholder="e.g., BMO Chequing"
-                  className="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Account Type</label>
-                <select
-                  value={formType}
-                  onChange={(e) => setFormType(e.target.value as any)}
-                  className="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              return (
+                <div
+                  key={account.id}
+                  className="overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg"
                 >
-                  <option value="checking">Checking</option>
-                  <option value="savings">Savings</option>
-                  <option value="credit">Credit Card</option>
-                </select>
+                  {/* Clickable main area */}
+                  <button
+                    onClick={() => viewAccountTransactions(account.id)}
+                    className="flex w-full items-center justify-between p-6 text-left transition-colors hover:bg-gray-50"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div
+                        className={`rounded-full p-3 ${
+                          account.type === "checking"
+                            ? "bg-blue-100 text-blue-600"
+                            : account.type === "savings"
+                              ? "bg-green-100 text-green-600"
+                              : "bg-purple-100 text-purple-600"
+                        }`}
+                      >
+                        {getAccountIcon(account.type)}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900">{account.name}</h3>
+                        <p className="text-sm text-gray-500">
+                          {account.institution} • {t(`accountType.${account.type}`)}
+                        </p>
+                        <p className="mt-1 flex items-center gap-1 text-xs text-blue-600">
+                          <Eye className="h-3 w-3" />
+                          {t("transactionCount", { count: txCount })} • {t("clickToView")}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <p className="text-xs text-gray-400">{t("starting")}</p>
+                        <p className="text-sm text-gray-500">
+                          {formatCurrency(
+                            account.balance,
+                            getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency,
+                            getCurrentLocale()
+                          )}
+                        </p>
+                        <p className="mt-2 text-xs text-gray-400">{t("current")}</p>
+                        <p
+                          className={`text-xl font-bold ${currentBalance >= 0 ? "text-green-600" : "text-red-600"}`}
+                        >
+                          {formatCurrency(
+                            currentBalance,
+                            getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency,
+                            getCurrentLocale()
+                          )}
+                        </p>
+                      </div>
+                      <ArrowRight className="h-5 w-5 text-gray-400" />
+                    </div>
+                  </button>
+
+                  {/* Action buttons */}
+                  <div className="flex border-t border-gray-100">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openEditModal(account);
+                      }}
+                      className="flex flex-1 items-center justify-center gap-2 py-3 text-sm text-gray-500 transition-colors hover:bg-blue-50 hover:text-blue-600"
+                    >
+                      <Edit className="h-4 w-4" />
+                      {t("edit")}
+                    </button>
+                    <div className="w-px bg-gray-100" />
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setDeletingAccount(account);
+                        setDeleteConfirmOpen(true);
+                      }}
+                      className="flex flex-1 items-center justify-center gap-2 py-3 text-sm text-gray-500 transition-colors hover:bg-red-50 hover:text-red-600"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                      {t("delete")}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Add/Edit Modal */}
+        {showAddModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <div className="mx-4 w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
+              <div className="mb-6 flex items-center justify-between">
+                <h2 className="text-xl font-bold">
+                  {editingAccount ? t("editAccount") : t("addAccount")}
+                </h2>
+                <button
+                  onClick={() => setShowAddModal(false)}
+                  className="rounded-lg p-2 hover:bg-gray-100"
+                >
+                  <X className="h-5 w-5" />
+                </button>
               </div>
 
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Institution</label>
-                <input
-                  type="text"
-                  value={formInstitution}
-                  onChange={(e) => setFormInstitution(e.target.value)}
-                  placeholder="e.g., BMO, TD, RBC"
-                  className="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">
-                  Starting Balance
-                </label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+              <div className="space-y-4">
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-gray-700">
+                    {t("accountNameLabel")}
+                  </label>
                   <input
-                    type="number"
-                    step="0.01"
-                    value={formBalance}
-                    onChange={(e) => setFormBalance(e.target.value)}
-                    placeholder="0.00"
-                    className="w-full rounded-lg border py-2 pl-7 pr-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                    type="text"
+                    value={formName}
+                    onChange={(e) => setFormName(e.target.value)}
+                    placeholder={t("accountNamePlaceholder")}
+                    className="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
-                <p className="mt-1 text-xs text-gray-500">
-                  Enter your account balance BEFORE the first imported transaction
-                </p>
+
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-gray-700">
+                    {t("accountTypeLabel")}
+                  </label>
+                  <select
+                    value={formType}
+                    onChange={(e) => setFormType(e.target.value as any)}
+                    className="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="checking">{t("accountType.checking")}</option>
+                    <option value="savings">{t("accountType.savings")}</option>
+                    <option value="credit">{t("accountType.credit")}</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-gray-700">
+                    {t("institutionLabel")}
+                  </label>
+                  <input
+                    type="text"
+                    value={formInstitution}
+                    onChange={(e) => setFormInstitution(e.target.value)}
+                    placeholder={t("institutionPlaceholder")}
+                    className="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-gray-700">
+                    {t("startingBalanceLabel")}
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
+                      $
+                    </span>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={formBalance}
+                      onChange={(e) => setFormBalance(e.target.value)}
+                      placeholder="0.00"
+                      className="w-full rounded-lg border py-2 pl-7 pr-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                    />
+                  </div>
+                  <p className="mt-1 text-xs text-gray-500">{t("startingBalanceHint")}</p>
+                </div>
+              </div>
+
+              <div className="mt-6 flex gap-3">
+                <button
+                  onClick={() => setShowAddModal(false)}
+                  className="flex-1 rounded-lg border border-gray-300 px-4 py-2 transition-colors hover:bg-gray-50"
+                >
+                  {t("cancel")}
+                </button>
+                <button
+                  onClick={handleSave}
+                  className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
+                >
+                  <Save className="h-4 w-4" />
+                  {editingAccount ? t("update") : t("create")}
+                </button>
               </div>
             </div>
+          </div>
+        )}
 
-            <div className="mt-6 flex gap-3">
-              <button
-                onClick={() => setShowAddModal(false)}
-                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 transition-colors hover:bg-gray-50"
+        {/* Assign Transactions Modal */}
+        {showAssignModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <div className="mx-4 w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-xl font-bold text-gray-900">{t("assignTransactions")}</h2>
+                <button
+                  onClick={() => setShowAssignModal(false)}
+                  className="rounded-lg p-2 hover:bg-gray-100"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              <p className="mb-4 text-gray-600">
+                {t("assignModalDescription", { count: unassignedCount })}
+              </p>
+
+              <label className="mb-2 block text-sm font-medium text-gray-700">
+                {t("selectTargetAccount")}
+              </label>
+              <select
+                value={selectedTargetAccount}
+                onChange={(e) => setSelectedTargetAccount(e.target.value)}
+                className="mb-4 w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
               >
-                Cancel
-              </button>
-              <button
-                onClick={handleSave}
-                className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
-              >
-                <Save className="h-4 w-4" />
-                {editingAccount ? "Update" : "Create"}
-              </button>
+                <option value="">{t("chooseAccount")}</option>
+                {accounts.map((acc) => (
+                  <option key={acc.id} value={acc.id}>
+                    {acc.name} ({acc.institution})
+                  </option>
+                ))}
+              </select>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowAssignModal(false)}
+                  className="flex-1 rounded-lg border border-gray-300 px-4 py-2 transition-colors hover:bg-gray-50"
+                >
+                  {t("cancel")}
+                </button>
+                <button
+                  onClick={handleAssignToSelected}
+                  disabled={!selectedTargetAccount || isMigrating}
+                  className="flex-1 rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
+                >
+                  {isMigrating ? t("assigning") : t("assignCount", { count: unassignedCount })}
+                </button>
+              </div>
             </div>
           </div>
+        )}
+
+        {/* Data Management Section */}
+        <div className="mt-8 border-t border-gray-200 pt-6">
+          <h3 className="mb-3 text-sm font-medium text-gray-500">{t("dataManagement")}</h3>
+          <button
+            onClick={() => setShowResetConfirm(true)}
+            className="text-sm text-red-600 hover:text-red-800 hover:underline"
+          >
+            {t("clearAllTransactions")}
+          </button>
         </div>
-      )}
 
-      {/* Assign Transactions Modal */}
-      {showAssignModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="mx-4 w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-gray-900">Assign Transactions</h2>
-              <button
-                onClick={() => setShowAssignModal(false)}
-                className="rounded-lg p-2 hover:bg-gray-100"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
+        {/* Delete Confirmation */}
+        <ConfirmDialog
+          open={deleteConfirmOpen}
+          onOpenChange={(open) => {
+            setDeleteConfirmOpen(open);
+            if (!open) setDeletingAccount(null);
+          }}
+          onConfirm={handleDelete}
+          title={t("deleteAccountTitle")}
+          description={t("deleteAccountDescription", { name: deletingAccount?.name ?? "" })}
+          confirmLabel={t("delete")}
+          variant="destructive"
+        />
 
-            <p className="mb-4 text-gray-600">
-              {unassignedCount} transaction{unassignedCount !== 1 ? "s" : ""} need to be assigned to
-              an account.
-            </p>
+        {/* Reset Transactions Confirmation */}
+        <ConfirmDialog
+          open={showResetConfirm}
+          onOpenChange={setShowResetConfirm}
+          onConfirm={handleClearAllTransactions}
+          title={t("clearAllTitle")}
+          description={t("clearAllDescription")}
+          confirmLabel={t("clearAllConfirm")}
+          variant="destructive"
+        />
 
-            <label className="mb-2 block text-sm font-medium text-gray-700">
-              Select target account:
-            </label>
-            <select
-              value={selectedTargetAccount}
-              onChange={(e) => setSelectedTargetAccount(e.target.value)}
-              className="mb-4 w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Choose an account...</option>
-              {accounts.map((acc) => (
-                <option key={acc.id} value={acc.id}>
-                  {acc.name} ({acc.institution})
-                </option>
-              ))}
-            </select>
-
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowAssignModal(false)}
-                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 transition-colors hover:bg-gray-50"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleAssignToSelected}
-                disabled={!selectedTargetAccount || isMigrating}
-                className="flex-1 rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
-              >
-                {isMigrating ? "Assigning..." : `Assign ${unassignedCount} Transactions`}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Data Management Section */}
-      <div className="mt-8 border-t border-gray-200 pt-6">
-        <h3 className="mb-3 text-sm font-medium text-gray-500">Data Management</h3>
-        <button
-          onClick={() => setShowResetConfirm(true)}
-          className="text-sm text-red-600 hover:text-red-800 hover:underline"
-        >
-          Clear all transactions and start fresh
-        </button>
+        {/* Balance Reconciliation Modal */}
+        <BalanceReconciliationModal
+          open={showReconciliationModal}
+          onOpenChange={setShowReconciliationModal}
+          accountId={reconciliationAccountId}
+          accountName={reconciliationAccountName}
+          accountType={reconciliationAccountType}
+          transactionNetChange={reconciliationNetChange}
+          onComplete={handleReconciliationComplete}
+          onSkip={handleReconciliationSkip}
+        />
       </div>
-
-      {/* Delete Confirmation */}
-      <ConfirmDialog
-        open={deleteConfirmOpen}
-        onOpenChange={(open) => {
-          setDeleteConfirmOpen(open);
-          if (!open) setDeletingAccount(null);
-        }}
-        onConfirm={handleDelete}
-        title="Delete Account"
-        description={`Are you sure you want to delete "${deletingAccount?.name}"? This will not delete associated transactions.`}
-        confirmLabel="Delete"
-        variant="destructive"
-      />
-
-      {/* Reset Transactions Confirmation */}
-      <ConfirmDialog
-        open={showResetConfirm}
-        onOpenChange={setShowResetConfirm}
-        onConfirm={handleClearAllTransactions}
-        title="Clear All Transactions"
-        description="This will permanently delete ALL transactions from the database. Your accounts and their starting balances will be preserved. You can then re-import your bank statements fresh. This action cannot be undone."
-        confirmLabel="Clear All Transactions"
-        variant="destructive"
-      />
-
-      {/* Balance Reconciliation Modal */}
-      <BalanceReconciliationModal
-        open={showReconciliationModal}
-        onOpenChange={setShowReconciliationModal}
-        accountId={reconciliationAccountId}
-        accountName={reconciliationAccountName}
-        accountType={reconciliationAccountType}
-        transactionNetChange={reconciliationNetChange}
-        onComplete={handleReconciliationComplete}
-        onSkip={handleReconciliationSkip}
-      />
-    </div>
     </PullToRefresh>
   );
 }
