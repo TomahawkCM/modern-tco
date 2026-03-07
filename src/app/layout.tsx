@@ -123,7 +123,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script
           id="register-sw"
           strategy="afterInteractive"
-        >{`if('serviceWorker' in navigator){navigator.serviceWorker.register('/service-worker.js').catch(()=>{});}`}</Script>
+        >{`if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}`}</Script>
       </body>
     </html>
   );
