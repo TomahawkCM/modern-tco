@@ -227,18 +227,17 @@ export default function BudgetAppLandingPage() {
           className="perspective-1000 container mx-auto mt-20 max-w-6xl px-4 [perspective:2000px]"
         >
           <div className="relative overflow-hidden rounded-xl border border-white/10 bg-neutral-900/50 shadow-2xl backdrop-blur-xl">
-            {/* CSS-only Dashboard Mockup — decorative, not translated */}
             <div className="flex flex-col p-6 md:h-[600px]">
               {/* Header */}
               <div className="mb-8 flex items-center justify-between border-b border-white/5 pb-6">
                 <div className="space-y-1">
-                  <h3 className="text-xl font-bold text-white">Overview</h3>
-                  <p className="text-sm text-slate-400">Welcome back, Alex</p>
+                  <h3 className="text-xl font-bold text-white">{t("preview.overview")}</h3>
+                  <p className="text-sm text-slate-400">{t("preview.welcomeBack")}</p>
                 </div>
                 <div className="flex gap-4">
                   <div className="flex items-center gap-2 rounded-full border border-lime-500/20 bg-lime-500/10 px-3 py-1">
                     <div className="h-2 w-2 animate-pulse rounded-full bg-lime-500" />
-                    <span className="text-xs font-medium text-lime-400">Live</span>
+                    <span className="text-xs font-medium text-lime-400">{t("preview.live")}</span>
                   </div>
                   <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-yellow-400 to-amber-500 text-xs font-bold text-black shadow-lg">
                     AJ
@@ -251,14 +250,18 @@ export default function BudgetAppLandingPage() {
                 <div className="rounded-xl border border-yellow-500/20 bg-gradient-to-br from-yellow-500/10 to-yellow-600/5 p-6">
                   <div className="mb-4 flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-yellow-500/20 text-yellow-400">
-                      <span className="text-xl font-bold">$</span>
+                      <span className="text-xl font-bold">{t("preview.currencySymbol")}</span>
                     </div>
-                    <span className="text-sm font-medium text-slate-400">Total Balance</span>
+                    <span className="text-sm font-medium text-slate-400">
+                      {t("preview.totalBalance")}
+                    </span>
                   </div>
-                  <div className="mb-2 text-3xl font-bold text-white">$24,500.00</div>
+                  <div className="mb-2 text-3xl font-bold text-white">
+                    {t("preview.balanceAmount")}
+                  </div>
                   <div className="flex items-center gap-2 text-sm text-lime-400">
-                    <span>+12.5%</span>
-                    <span className="text-slate-500">vs last month</span>
+                    <span>{t("preview.balanceChange")}</span>
+                    <span className="text-slate-500">{t("preview.vsLastMonth")}</span>
                   </div>
                 </div>
 
@@ -267,12 +270,16 @@ export default function BudgetAppLandingPage() {
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-orange-500/20 text-orange-400">
                       <BarChart3 className="h-5 w-5" />
                     </div>
-                    <span className="text-sm font-medium text-slate-400">Expenses</span>
+                    <span className="text-sm font-medium text-slate-400">
+                      {t("preview.expenses")}
+                    </span>
                   </div>
-                  <div className="mb-2 text-3xl font-bold text-white">$1,250.00</div>
+                  <div className="mb-2 text-3xl font-bold text-white">
+                    {t("preview.expensesAmount")}
+                  </div>
                   <div className="flex items-center gap-2 text-sm text-lime-400">
-                    <span>-5.2%</span>
-                    <span className="text-slate-500">vs last month</span>
+                    <span>{t("preview.expensesChange")}</span>
+                    <span className="text-slate-500">{t("preview.vsLastMonth")}</span>
                   </div>
                 </div>
 
@@ -281,9 +288,13 @@ export default function BudgetAppLandingPage() {
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-500/20 text-amber-400">
                       <Sparkles className="h-5 w-5" />
                     </div>
-                    <span className="text-sm font-medium text-slate-400">Savings Goal</span>
+                    <span className="text-sm font-medium text-slate-400">
+                      {t("preview.savingsGoal")}
+                    </span>
                   </div>
-                  <div className="mb-4 text-3xl font-bold text-white">85%</div>
+                  <div className="mb-4 text-3xl font-bold text-white">
+                    {t("preview.savingsPercent")}
+                  </div>
                   <div className="h-2 w-full rounded-full bg-slate-700">
                     <div className="h-2 w-[85%] rounded-full bg-amber-500" />
                   </div>
@@ -293,27 +304,29 @@ export default function BudgetAppLandingPage() {
               {/* Transactions List */}
               <div className="mt-6 flex-1 overflow-hidden rounded-xl border border-white/5 bg-white/5 p-6">
                 <div className="mb-4 flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-white">Recent Transactions</h3>
+                  <h3 className="text-lg font-semibold text-white">
+                    {t("preview.recentTransactions")}
+                  </h3>
                   <div className="h-8 w-24 rounded-lg bg-white/5" />
                 </div>
                 <div className="space-y-4">
                   {[
                     {
-                      name: "Grocery Store",
-                      date: "Today, 2:30 PM",
-                      amount: "-$124.50",
+                      name: t("preview.tx0Name"),
+                      date: t("preview.tx0Date"),
+                      amount: t("preview.tx0Amount"),
                       icon: "🛒",
                     },
                     {
-                      name: "Tech Solutions Inc.",
-                      date: "Yesterday, 9:00 AM",
-                      amount: "+$4,250.00",
+                      name: t("preview.tx1Name"),
+                      date: t("preview.tx1Date"),
+                      amount: t("preview.tx1Amount"),
                       icon: "💼",
                     },
                     {
-                      name: "Netflix Subscription",
-                      date: "Oct 24, 2025",
-                      amount: "-$15.99",
+                      name: t("preview.tx2Name"),
+                      date: t("preview.tx2Date"),
+                      amount: t("preview.tx2Amount"),
                       icon: "🎬",
                     },
                   ].map((tx, i) => (
@@ -562,73 +575,73 @@ export default function BudgetAppLandingPage() {
             </div>
 
             <div>
-              <h4 className="mb-4 font-semibold text-white">Product</h4>
+              <h4 className="mb-4 font-semibold text-white">{t("footer.product")}</h4>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li>
                   <Link href="#" className="transition-colors hover:text-yellow-400">
-                    Features
+                    {t("footer.features")}
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="transition-colors hover:text-yellow-400">
-                    Pricing
+                    {t("footer.pricing")}
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="transition-colors hover:text-yellow-400">
-                    Download
+                    {t("footer.download")}
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="transition-colors hover:text-yellow-400">
-                    Changelog
+                    {t("footer.changelog")}
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="mb-4 font-semibold text-white">Resources</h4>
+              <h4 className="mb-4 font-semibold text-white">{t("footer.resources")}</h4>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li>
                   <Link href="#" className="transition-colors hover:text-yellow-400">
-                    Documentation
+                    {t("footer.documentation")}
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="transition-colors hover:text-yellow-400">
-                    API
+                    {t("footer.api")}
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="transition-colors hover:text-yellow-400">
-                    Community
+                    {t("footer.community")}
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="transition-colors hover:text-yellow-400">
-                    Help Center
+                    {t("footer.helpCenter")}
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h4 className="mb-4 font-semibold text-white">Legal</h4>
+              <h4 className="mb-4 font-semibold text-white">{t("footer.legal")}</h4>
               <ul className="space-y-2 text-sm text-slate-400">
                 <li>
                   <Link href="#" className="transition-colors hover:text-yellow-400">
-                    Privacy Policy
+                    {t("footer.privacyPolicy")}
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="transition-colors hover:text-yellow-400">
-                    Terms of Service
+                    {t("footer.termsOfService")}
                   </Link>
                 </li>
                 <li>
                   <Link href="#" className="transition-colors hover:text-yellow-400">
-                    Cookie Policy
+                    {t("footer.cookiePolicy")}
                   </Link>
                 </li>
               </ul>
@@ -637,7 +650,7 @@ export default function BudgetAppLandingPage() {
 
           <div className="border-t border-white/5 pt-8 text-center text-sm text-slate-500">
             <p>
-              &copy; {new Date().getFullYear()} {t("brand.name")}. All rights reserved.
+              &copy; {new Date().getFullYear()} {t("brand.name")}. {t("footer.allRightsReserved")}
             </p>
           </div>
         </div>

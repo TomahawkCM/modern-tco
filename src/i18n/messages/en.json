@@ -1356,6 +1356,48 @@
         "Offline",
         "Seniors Mode"
       ]
+    },
+    "preview": {
+      "overview": "Overview",
+      "welcomeBack": "Welcome back, Alex",
+      "live": "Live",
+      "totalBalance": "Total Balance",
+      "expenses": "Expenses",
+      "savingsGoal": "Savings Goal",
+      "vsLastMonth": "vs last month",
+      "recentTransactions": "Recent Transactions",
+      "tx0Name": "Grocery Store",
+      "tx0Date": "Today, 2:30 PM",
+      "tx0Amount": "-$124.50",
+      "tx1Name": "Tech Solutions Inc.",
+      "tx1Date": "Yesterday, 9:00 AM",
+      "tx1Amount": "+$4,250.00",
+      "tx2Name": "Netflix Subscription",
+      "tx2Date": "Oct 24, 2025",
+      "tx2Amount": "-$15.99",
+      "balanceAmount": "$24,500.00",
+      "balanceChange": "+12.5%",
+      "expensesAmount": "$1,250.00",
+      "expensesChange": "-5.2%",
+      "savingsPercent": "85%",
+      "currencySymbol": "$"
+    },
+    "footer": {
+      "product": "Product",
+      "resources": "Resources",
+      "legal": "Legal",
+      "features": "Features",
+      "pricing": "Pricing",
+      "download": "Download",
+      "changelog": "Changelog",
+      "documentation": "Documentation",
+      "api": "API",
+      "community": "Community",
+      "helpCenter": "Help Center",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "cookiePolicy": "Cookie Policy",
+      "allRightsReserved": "All rights reserved."
     }
   },
   "investmentAccountModal": {
