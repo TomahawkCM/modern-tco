@@ -240,6 +240,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         email,
         password,
         options: {
+          emailRedirectTo: `${window.location.origin}/budget-app/auth/callback`,
           data: {
             first_name: options?.firstName || "",
             last_name: options?.lastName || "",
