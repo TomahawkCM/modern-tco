@@ -1,7 +1,10 @@
-// Environment variable type declarations for offline mode
+// Environment variable type declarations
 declare namespace NodeJS {
   interface ProcessEnv {
-    // Offline mode flag - when 'true', cloud features are disabled
+    // App target: "tco" | "budget-offline" | "budget-online"
+    NEXT_PUBLIC_APP_TARGET?: string;
+
+    // Backward compat: derived from APP_TARGET ("true" when budget-offline)
     NEXT_PUBLIC_OFFLINE_MODE?: string;
 
     // Tree-shaking flags (set by webpack DefinePlugin)

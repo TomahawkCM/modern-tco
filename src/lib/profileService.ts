@@ -1,8 +1,9 @@
+import { isBudgetOffline } from "@/config/app-target";
 import type { User } from "@supabase/supabase-js";
 import { supabase, supabaseAdmin } from "./supabase";
 
 // Offline mode check - skip Supabase queries for local users
-const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === "true";
+const isOfflineMode = isBudgetOffline;
 const LOCAL_USER_ID = "local-user-offline";
 const LOCAL_USER_PREFIX = "local-user";
 

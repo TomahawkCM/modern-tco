@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { isBudgetOffline } from "@/config/app-target";
 import { useTrialStatus } from "@/hooks/useTrialStatus";
 import { APP_PRICE } from "@/lib/subscriptionService";
 import { AlertCircle, Clock, Sparkles, X } from "lucide-react";
@@ -9,7 +10,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 // Trial status banner is not shown in offline mode (no subscriptions)
-const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === "true";
+const isOfflineMode = isBudgetOffline;
 
 interface TrialStatusBannerProps {
   /** Only show banner when trial has 3 or fewer days remaining */
@@ -67,9 +68,7 @@ export function TrialStatusBanner({
             <AlertCircle className="h-5 w-5 shrink-0 text-rose-400" />
             <div>
               <p className="text-sm font-medium text-rose-300">{t("expired")}</p>
-              <p className="text-xs text-rose-400/80">
-                {t("expiredDescription")}
-              </p>
+              <p className="text-xs text-rose-400/80">{t("expiredDescription")}</p>
             </div>
           </div>
           <Link href="/budget-app/auth/upgrade">
@@ -94,9 +93,7 @@ export function TrialStatusBanner({
               <p className="text-sm font-medium text-amber-300">
                 {t("daysLeft", { count: daysRemaining })}
               </p>
-              <p className="text-xs text-amber-400/80">
-                {t("upgradePrompt")}
-              </p>
+              <p className="text-xs text-amber-400/80">{t("upgradePrompt")}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
@@ -126,9 +123,7 @@ export function TrialStatusBanner({
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Sparkles className="h-4 w-4 shrink-0 text-teal-400" />
-            <p className="text-sm text-teal-300">
-              {t("daysRemaining", { count: daysRemaining })}
-            </p>
+            <p className="text-sm text-teal-300">{t("daysRemaining", { count: daysRemaining })}</p>
           </div>
           <div className="flex items-center gap-2">
             <Link

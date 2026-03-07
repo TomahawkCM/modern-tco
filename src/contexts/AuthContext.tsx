@@ -1,12 +1,13 @@
 "use client";
 
+import { isBudgetOffline } from "@/config/app-target";
 import { createUserProfile } from "@/lib/profileService";
 import { createClient } from "@/utils/supabase/client";
 import type { AuthError, Session, User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 // Offline mode flag - when true, use local user instead of Supabase auth
-const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === "true";
+const isOfflineMode = isBudgetOffline;
 
 // Create a singleton browser client that uses cookies for session storage
 // This allows server actions to access the auth session

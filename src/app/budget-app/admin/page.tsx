@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { isBudgetOffline } from "@/config/app-target";
 import { useAuth } from "@/contexts/AuthContext";
 import { Clock, LogOut, RefreshCw, Search, ShieldAlert } from "lucide-react";
 import { notFound } from "next/navigation";
@@ -42,7 +43,7 @@ import {
 } from "./actions";
 
 // Admin dashboard is not available in offline mode
-const isOfflineMode = process.env.NEXT_PUBLIC_OFFLINE_MODE === "true";
+const isOfflineMode = isBudgetOffline;
 
 interface AdminUser {
   id: string;

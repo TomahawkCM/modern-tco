@@ -3,13 +3,15 @@
  * Controls which features are enabled in standalone vs online modes
  */
 
+import { isBudgetOnline } from "./app-target";
+
 export type AppMode = "standalone" | "online";
 
 /**
- * Current app mode - change this to 'online' when deploying cloud version
- * In standalone mode, all data stays on device. In online mode, cloud sync is enabled.
+ * Current app mode - derived from APP_TARGET environment variable.
+ * "budget-online" → "online" (cloud sync enabled), everything else → "standalone" (data on device).
  */
-export const APP_MODE = "standalone" as AppMode;
+export const APP_MODE: AppMode = isBudgetOnline ? "online" : "standalone";
 
 /**
  * Feature flags for the budget app
