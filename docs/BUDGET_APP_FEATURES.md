@@ -2,7 +2,7 @@
 
 ## Overview
 
-A full-featured personal finance management application built with Next.js 16, React 19, TypeScript, and Supabase. Supports 114 languages, 71+ bank formats, and includes AI-powered features for intelligent transaction management.
+A full-featured personal finance management application built with Next.js 16, React 19, TypeScript, and Supabase. Supports 113 languages, 71+ bank formats, and includes AI-powered features for intelligent transaction management.
 
 ---
 
@@ -39,7 +39,7 @@ A full-featured personal finance management application built with Next.js 16, R
 | **Charts**        | Recharts + D3.js                          |
 | **AI**            | OpenAI GPT-4                              |
 | **OCR**           | Tesseract.js + PDF.js                     |
-| **i18n**          | next-intl (114 locales)                   |
+| **i18n**          | next-intl (113 locales)                   |
 | **State**         | React Context (18 contexts)               |
 | **Auth**          | Supabase Auth                             |
 | **Analytics**     | PostHog                                   |
@@ -467,8 +467,8 @@ Location: `src/lib/calculators/`
 
 ### Coverage
 
-- **114 locales** with full translations
-- **1,200+ translation keys** per locale (including calculators namespace)
+- **113 locales** with full translations
+- **1,981 translation keys across 106 namespaces** per locale
 - **RTL support** for Arabic, Hebrew, Farsi, Urdu
 
 ### Language Groups
@@ -484,6 +484,34 @@ Location: `src/lib/calculators/`
 | SE Asian | Thai, Vietnamese, Indonesian, + 4 more (7)  |
 | European | 20+ languages                               |
 
+### i18n Namespaces (106 total)
+
+The translation system is organized into 106 namespaces. Key namespaces added during the i18n overhaul include:
+
+| Namespace             | Scope                                     |
+| --------------------- | ----------------------------------------- |
+| `amortizationChart`   | Loan amortization chart labels & tooltips |
+| `linkToLoan`          | Transaction-to-loan linking UI            |
+| `paymentHistoryPanel` | Loan payment history table & filters      |
+| `iconPicker`          | Category icon selection dialog            |
+| `subscriptionModal`   | Subscription add/edit modal               |
+| `profileDialog`       | User profile dialog                       |
+| `pinDialog`           | PIN entry/setup dialog                    |
+| `vaultSetup`          | Encrypted vault onboarding                |
+| `activityLog`         | Security activity log viewer              |
+| `manualPairing`       | LAN sync manual pairing flow              |
+| `privacyPanel`        | Privacy settings panel                    |
+| `loanPaymentSelector` | Loan payment frequency & amount selector  |
+
+### i18n Hooks & Utilities
+
+| Hook / Utility                             | Usage                                                                                                  |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `useTranslations("namespace")`             | Primary translation hook (next-intl) — now used in **55+ components** (15 newly added in overhaul)     |
+| `useDefaultCurrency()`                     | Returns the user's preferred currency code — used in **10+ components** for dynamic currency switching |
+| `useLocale()` (from next-intl)             | Returns current locale string — used in **17+ components** for locale-aware date formatting            |
+| `formatCurrency(amount, currency, locale)` | Locale-aware currency formatter — replaces raw `.toLocaleString()` in loan/debt components             |
+
 ### i18n Components
 
 - `LanguageSelector.tsx` - Language picker
@@ -491,12 +519,14 @@ Location: `src/lib/calculators/`
 - `src/i18n/config.ts` - Locale configuration
 - `src/i18n/middleware.ts` - Route localization
 - `src/i18n/utils/` - Format utilities (date, currency, number)
+- `src/hooks/useDefaultCurrency.ts` - Default currency hook
+- `src/lib/locale-storage.ts` - Persistent locale preference storage
 
 ### Format Localization
 
-- Date formats per locale
+- Date formats per locale (via `useLocale()` + `Intl.DateTimeFormat`)
 - Number formatting (decimal/thousand separators)
-- Currency symbols and positioning
+- Currency symbols and positioning (via `formatCurrency()`)
 - RTL text direction
 
 ---
@@ -703,7 +733,7 @@ src/
 │       └── presets.ts            # Layout presets
 ├── hooks/                        # Custom hooks (20)
 ├── i18n/
-│   ├── messages/                 # 114 locale files
+│   ├── messages/                 # 113 locale files
 │   ├── config.ts                 # i18n config
 │   └── utils/                    # Format utilities
 ├── lib/

@@ -49,6 +49,13 @@
 8. Preview → user review
 9. Import → bulk add to IndexedDB
 
+## i18n / Locale Work
+
+- **Translating locales**: Use `/budget:translate-locales` skill
+- **Adding new keys**: Add to `src/i18n/messages/en.json` under the appropriate namespace, then sync to other locales
+- **Key hooks**: `useDefaultCurrency()`, `useLocale()`, `useTranslations()`, `formatCurrency()`
+- **Utilities**: `src/i18n/utils/formatCurrency.ts`, `src/hooks/useDefaultCurrency.ts`, `src/lib/locale-storage.ts`
+
 ## Key Budget App Files
 
 | Category | Files |

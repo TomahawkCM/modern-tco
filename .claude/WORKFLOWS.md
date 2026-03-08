@@ -55,3 +55,12 @@ docker ps, docker logs, docker restart
 | **Container issue** | docker.list-containers → docker.get-logs → diagnose → fix |
 | **Code change** | edit → test → commit |
 | **PR creation** | git add → git commit → git push → gh pr create |
+| **i18n string** | Add key to en.json → use `t()` in component → `/budget:translate-locales` → validate |
+
+## i18n Workflow
+
+1. Add keys to `src/i18n/messages/en.json` under the appropriate namespace
+2. Use `useTranslations("namespace")` in the component
+3. Replace hardcoded strings with `t("keyName")` calls
+4. Run `/budget:translate-locales` to sync translations to other locales
+5. Validate with `node scripts/validate-translations.js`

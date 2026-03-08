@@ -3,8 +3,8 @@
 ## Current State
 
 - **Current Sprint**: Sprint 6 — Phase 1 Completion
-- **Current Session**: S10 — Safe-to-Spend + Budget Methodology (COMPLETE)
-- **Last Updated**: 2026-03-05
+- **Current Session**: S15 — Fix All Language & Currency Switching Across Budget App (COMPLETE)
+- **Last Updated**: 2026-03-08
 
 ## Completed Sessions
 
@@ -515,7 +515,66 @@
 - [x] `eslint` passes on all modified files (0 errors)
 - [x] `vitest run` — 1510 tests pass (91 files)
 
-## Next Session: S15
+### Session 15 — Fix All Language & Currency Switching Across Budget App (2026-03-08)
+
+- [x] Phase 1: Replaced hardcoded "USD" with `useDefaultCurrency()` in 10 files (6 dashboard widgets + RolloverBadge, CommandPalette, debt-payoff, settings)
+- [x] Phase 2: Fixed locale-unaware date formatting in 17 files (`.toLocaleDateString()` now passes locale)
+- [x] Phase 3: Replaced `.toLocaleString()` with `formatCurrency()` in 8 loan/debt components
+- [x] Phase 4A: Extracted hardcoded English to `useTranslations()` in 5 high-visibility components (SimpleFINConnect, LoanForm, DebtOverview, AccessibilityQuickToggle, ColumnMapperModal)
+- [x] Phase 4B+C: Extracted hardcoded English in 15 more components (AmortizationChart, LinkToLoanPopover, PaymentHistory, IconPicker, SubscriptionModal, ProfileCreateDialog, ProfileEditDialog, PINSetupDialog, PINEntryDialog, VaultSetupStep, ActivityLogPanel, ManualPairingEntry, settings-privacy-panel, LoanPaymentSelector)
+- [x] Added 12 new i18n namespaces with 363 translation keys to en.json
+- [x] Updated 113 locale JSON files with translations
+- [x] en.json now has 106 namespaces, 1,981 total keys
+
+**Commit**: `5d644a5c` on main
+
+**Stats**: 194 files changed, 173,744 insertions, 4,111 deletions
+
+**Files modified** (194):
+
+- `src/hooks/useDefaultCurrency.ts` — currency hook used across budget app
+- `src/lib/locale-storage.ts` — locale persistence
+- `src/middleware.ts` — locale middleware
+- 6 dashboard widgets — `AccountBalancesWidget`, `BudgetProgressWidget`, `IncomeVsExpensesWidget`, `MonthlyTrendsWidget`, `RecentTransactionsWidget`, `SpendingByCategoryWidget`, `UpcomingBillsWidget`
+- `src/components/budget/RolloverBadge.tsx`, `src/components/budget/CommandPalette.tsx` — currency hardcode fix
+- `src/app/budget-app/debt-payoff/page.tsx`, `src/app/budget-app/settings/page.tsx` — currency hardcode fix
+- 17 files — `.toLocaleDateString()` updated to pass locale parameter
+- 8 loan/debt components — `.toLocaleString()` replaced with `formatCurrency()`
+- 5 high-visibility components — `SimpleFINConnect`, `LoanForm`, `DebtOverview`, `AccessibilityQuickToggle`, `ColumnMapperModal`
+- 15 additional components — `AmortizationChart`, `LinkToLoanPopover`, `PaymentHistory`, `IconPicker`, `SubscriptionModal`, `ProfileCreateDialog`, `ProfileEditDialog`, `PINSetupDialog`, `PINEntryDialog`, `VaultSetupStep`, `ActivityLogPanel`, `ManualPairingEntry`, `settings-privacy-panel`, `LoanPaymentSelector`
+- `src/i18n/messages/en.json` — 12 new namespaces, 363 new keys (106 namespaces, 1,981 total keys)
+- 113 locale JSON files in `src/i18n/messages/` — translations for all new keys
+
+**New i18n namespaces** (12):
+
+- `simplefin` — SimpleFIN connection UI strings
+- `loanForm` — loan creation/editing form
+- `debtOverview` — debt overview dashboard
+- `accessibility` — accessibility quick toggle
+- `columnMapper` — CSV column mapper modal
+- `amortization` — amortization chart
+- `paymentHistory` — loan payment history
+- `loanPaymentSelector` — loan payment selector
+- `subscriptions` — subscription management
+- `vault` — vault/encryption setup
+- `activityLog` — activity log panel
+- `lanSync` — LAN sync/pairing
+
+**Architecture decisions**:
+
+- `useDefaultCurrency()` hook is the single source of truth for currency across all budget components — eliminates hardcoded "USD"
+- All `.toLocaleDateString()` calls now receive explicit `locale` from `useLocale()` — ensures dates format correctly when language changes
+- `formatCurrency()` used consistently for monetary display instead of raw `.toLocaleString()` — respects user's currency and locale settings
+- All user-facing strings extracted to i18n namespaces — no hardcoded English remains in budget app components
+
+**Verification**:
+
+- [x] `tsc --noEmit` passes (0 errors)
+- [x] `vitest run` — 1,510/1,510 tests pass
+- [x] `eslint` passes on all modified files (0 errors)
+- [x] Prettier formatting clean
+
+## Next Session: S16
 
 **Tasks**: TBD
 

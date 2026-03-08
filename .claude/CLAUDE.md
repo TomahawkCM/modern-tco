@@ -32,7 +32,7 @@ Dual-app monorepo:
 **Stack**: Next.js 16, React 19, TypeScript 5.9, Supabase PostgreSQL, shadcn/ui + Radix UI, Tailwind CSS
 **State**: 18 React contexts in `src/contexts/`
 **API**: 22 routes in `src/app/api/`
-**i18n**: 113 locales in `src/i18n/messages/` (next-intl)
+**i18n**: 114 locales in `src/i18n/messages/` (next-intl)
 
 ## Code Style
 
@@ -41,6 +41,9 @@ Dual-app monorepo:
 - Tailwind CSS for styling; `tailwind-merge` + `clsx` for conditional classes
 - Import order: React/Next → external libraries → local modules
 - All user-facing strings must use `useTranslations` from `next-intl`
+- Currency amounts: use `useDefaultCurrency()` hook, never hardcode `"USD"`
+- Date formatting: always pass `locale` from `useLocale()` to `.toLocaleDateString(locale)`
+- Currency formatting in non-hook contexts: use `formatCurrency(amount, currency, locale)` from `src/i18n/utils/formatCurrency.ts`
 - Financial amounts: use `Decimal.js`, never floating point
 - Input validation: Zod schemas
 
