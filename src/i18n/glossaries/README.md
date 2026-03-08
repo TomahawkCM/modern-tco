@@ -130,10 +130,10 @@ These work with the RTL utilities in `/src/lib/rtl-utils.ts` to provide proper d
 
 Glossaries integrate with:
 
-- **Translation scripts**: `scripts/translate-incremental.ts`
-- **Quality validation**: `scripts/lib/translation-quality.ts`
-- **Coverage reports**: `scripts/generate-coverage-report.ts`
-- **AI translation**: Claude API prompts include glossary terms
+- **Translation skill**: `/budget:translate-locales` (Claude Code skill)
+- **Quality validation**: `scripts/lib/translation-validator.ts`
+- **Coverage reports**: `scripts/check-untranslated.ts`
+- **Structure sync**: `scripts/sync-translations.js`
 
 ## Future Enhancements
 

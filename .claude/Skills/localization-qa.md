@@ -30,37 +30,24 @@ Quality assurance for the budget app's 114 locale support — translation comple
 
 ### Step 1: Translation Completeness Check
 
+Run the dedicated translation status tools:
+
 ```bash
-# Script to check all locales have all keys
-node -e "
-const fs = require('fs');
-const path = require('path');
-const messagesDir = 'src/i18n/messages';
-const baseKeys = Object.keys(flattenJSON(JSON.parse(fs.readFileSync(path.join(messagesDir, 'en.json')))));
-const files = fs.readdirSync(messagesDir).filter(f => f.endsWith('.json'));
+# Structural completeness — checks all locales have all keys
+node scripts/validate-translations.js
 
-for (const file of files) {
-  const locale = file.replace('.json', '');
-  const keys = Object.keys(flattenJSON(JSON.parse(fs.readFileSync(path.join(messagesDir, file)))));
-  const missing = baseKeys.filter(k => !keys.includes(k));
-  if (missing.length > 0) {
-    console.log(\`\${locale}: \${missing.length} missing keys\`);
-    missing.slice(0, 5).forEach(k => console.log(\`  - \${k}\`));
-  }
-}
+# Translation coverage — identifies keys still using English values
+npx tsx scripts/check-untranslated.ts                # All locales summary
+npx tsx scripts/check-untranslated.ts --verbose       # With key previews
+npx tsx scripts/check-untranslated.ts --keys es-ES    # Untranslated keys for one locale
 
-function flattenJSON(obj, prefix = '') {
-  return Object.entries(obj).reduce((acc, [key, val]) => {
-    const newKey = prefix ? \`\${prefix}.\${key}\` : key;
-    if (typeof val === 'object' && val !== null && !Array.isArray(val)) {
-      Object.assign(acc, flattenJSON(val, newKey));
-    } else {
-      acc[newKey] = val;
-    }
-    return acc;
-  }, {});
-}
-"
+# npm shorthand
+npm run check:translations
+```
+
+To fix gaps found, use the translation skill:
+```bash
+/budget:translate-locales es-ES fr-FR    # Translate specific locales
 ```
 
 ### Step 2: Representative Locale Test Matrix
@@ -156,8 +143,11 @@ const pluralTests = [
 
 | File | Role |
 |------|------|
-| `src/i18n/messages/` | 113 locale message files |
+| `src/i18n/messages/` | 114 locale message files |
 | `src/i18n/messages/en.json` | Base locale (source of truth for keys) |
+| `scripts/check-untranslated.ts` | Translation coverage checker (value comparison) |
+| `scripts/validate-translations.js` | Structural completeness validator (key presence) |
+| `scripts/sync-translations.js` | Sync en.json structure to all locales |
 | `src/app/globals.css` | RTL styles |
 | `src/lib/parsers/intl-amount-parser.ts` | Locale-aware amount parsing |
 | `src/lib/parsers/intl-date-parser.ts` | Locale-aware date parsing |
@@ -187,6 +177,7 @@ const pluralTests = [
 ## Related Skills
 
 - `i18n-workflow` — adding new translations
+- `translate-locales` — translating locale files (Claude-powered, no external API)
 - `design-tokens` — typography and spacing for different scripts
 - `accessibility-audit` — screen reader language support
 - `test-patterns` — i18n test helpers

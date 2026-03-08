@@ -124,16 +124,6 @@ echo "   Hook location: $HOOK_PATH"
 echo "   Executable: $([ -x "$HOOK_PATH" ] && echo 'Yes' || echo 'No')"
 echo ""
 
-# Test if translate:incremental script exists
-if grep -q '"translate:incremental"' package.json; then
-  echo -e "${GREEN}✅ translate:incremental script found${NC}"
-else
-  echo -e "${RED}❌ translate:incremental script not found in package.json${NC}"
-  echo "   Add the script to package.json:"
-  echo '   "translate:incremental": "tsx scripts/translate-incremental.ts"'
-  exit 1
-fi
-
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo -e "${GREEN}  Setup Complete!${NC}"
