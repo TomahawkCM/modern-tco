@@ -16,6 +16,7 @@ import { db } from "@/lib/budget-db";
 import { subtractAmounts, sumAmounts } from "@/lib/money";
 import type { Budget, Category, Transaction } from "@/types/budget";
 import { AlertCircle, Edit, Plus, Trash2, TrendingDown, TrendingUp } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 interface CategoryBudgetData {
@@ -29,6 +30,8 @@ interface CategoryBudgetData {
 
 export default function BudgetsPage() {
   const toast = useToast();
+  const locale = useLocale();
+  const t = useTranslations("budget.budgets");
   const [categories, setCategories] = useState<Category[]>([]);
   const [budgets, setBudgets] = useState<Budget[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -142,7 +145,7 @@ export default function BudgetsPage() {
       setEditingBudget(null);
     } catch (error) {
       console.error("Error saving budget:", error);
-      alert("Failed to save budget");
+      alert(t("failedToSave"));
     }
   }
 
@@ -157,12 +160,12 @@ export default function BudgetsPage() {
     try {
       await db.budgets.delete(deletingBudget.budget.id);
       await loadData();
-      toast.success("Budget deleted successfully");
+      toast.success(t("budgetDeleted"));
       setDeleteConfirmOpen(false);
       setDeletingBudget(null);
     } catch (error) {
       console.error("Error deleting budget:", error);
-      toast.error("Failed to delete budget");
+      toast.error(t("failedToDelete"));
       // Keep dialog open on error
     }
   }
@@ -172,7 +175,7 @@ export default function BudgetsPage() {
       <div className="flex h-64 items-center justify-center">
         <div className="text-center">
           <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-teal-600 border-t-transparent"></div>
-          <p className="mt-4 text-gray-600">Loading budgets...</p>
+          <p className="mt-4 text-gray-600">{t("loading")}</p>
         </div>
       </div>
     );
@@ -190,16 +193,16 @@ export default function BudgetsPage() {
         <div className="flex items-center justify-between">
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-4xl font-bold text-white">Budgets</h1>
+              <h1 className="text-4xl font-bold text-white">{t("title")}</h1>
               <HelpTooltip
-                content="Set spending limits for each category. Track your progress with color-coded alerts: Green = On Track, Yellow = Warning (80%), Red = Over Budget (100%)."
+                content={t("helpTooltip")}
                 learnMoreUrl="/docs/user-guide#budgets"
-                ariaLabel="More information about budgets"
+                ariaLabel={t("helpTooltipAriaLabel")}
                 iconSize="h-5 w-5"
               />
             </div>
             <p className="mt-2 text-lg font-medium text-slate-400">
-              {new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+              {new Date().toLocaleDateString(locale, { month: "long", year: "numeric" })}
             </p>
           </div>
           <button
@@ -207,7 +210,7 @@ export default function BudgetsPage() {
             className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-teal-500 px-6 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
           >
             <Plus className="h-5 w-5" />
-            Add Budget
+            {t("addBudget")}
           </button>
         </div>
 
@@ -215,18 +218,18 @@ export default function BudgetsPage() {
         <div className="rounded-lg border-l-4 border-teal-500 bg-white p-8 shadow-md">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
             <div>
-              <p className="mb-2 text-base font-medium text-gray-700">Total Budgeted</p>
+              <p className="mb-2 text-base font-medium text-gray-700">{t("totalBudgeted")}</p>
               <p className="text-3xl font-bold text-gray-900">${totalBudgeted.toFixed(2)}</p>
             </div>
             <div>
-              <p className="mb-2 text-base font-medium text-gray-700">Total Spent</p>
+              <p className="mb-2 text-base font-medium text-gray-700">{t("totalSpent")}</p>
               <p className="flex items-center gap-2 text-3xl font-bold text-red-600">
                 <TrendingDown className="h-6 w-6" aria-hidden="true" />
-                <span className="sr-only">Total expenses: </span>${totalSpent.toFixed(2)}
+                <span className="sr-only">{t("totalExpenses")}: </span>${totalSpent.toFixed(2)}
               </p>
             </div>
             <div>
-              <p className="mb-2 text-base font-medium text-gray-700">Remaining</p>
+              <p className="mb-2 text-base font-medium text-gray-700">{t("remaining")}</p>
               <p
                 className={`flex items-center gap-2 text-3xl font-bold ${totalRemaining >= 0 ? "text-green-600" : "text-red-600"}`}
               >
@@ -240,17 +243,11 @@ export default function BudgetsPage() {
             </div>
             <div>
               <div className="mb-2 flex items-center gap-2">
-                <p className="text-base font-medium text-gray-700">Overall Progress</p>
+                <p className="text-base font-medium text-gray-700">{t("overallProgress")}</p>
                 <HelpTooltip
-                  content={
-                    <>
-                      <strong>Budget Progress:</strong> Green (✓ On Track) = 0-79% spent. Yellow (⚠
-                      Warning) = 80-99% spent. Red (✖ Over) = 100%+ spent. Colors update
-                      automatically as you spend.
-                    </>
-                  }
+                  content={t("progressHelpTooltip")}
                   learnMoreUrl="/docs/user-guide#budget-progress"
-                  ariaLabel="More information about budget progress and alert thresholds"
+                  ariaLabel={t("progressHelpTooltipAriaLabel")}
                 />
               </div>
               <div className="space-y-2">
@@ -288,10 +285,10 @@ export default function BudgetsPage() {
                     }`}
                   >
                     {overallPercentage < 80
-                      ? "✓ On Track"
+                      ? t("statusOnTrack")
                       : overallPercentage < 100
-                        ? "⚠ Warning"
-                        : "✖ Over"}
+                        ? t("statusWarning")
+                        : t("statusOver")}
                   </span>
                 </div>
               </div>
@@ -302,7 +299,7 @@ export default function BudgetsPage() {
         {/* Overspending Alerts */}
         {overspendingAlerts.length > 0 && (
           <div>
-            <h2 className="mb-4 text-lg font-semibold text-gray-900">⚠️ Budget Alerts</h2>
+            <h2 className="mb-4 text-lg font-semibold text-gray-900">{t("budgetAlerts")}</h2>
             <OverspendingAlerts alerts={overspendingAlerts} />
           </div>
         )}
@@ -328,7 +325,7 @@ export default function BudgetsPage() {
                     <div>
                       <h3 className="text-xl font-bold text-gray-900">{data.category.name}</h3>
                       <p className="text-base font-medium text-gray-600">
-                        {data.transactionCount} transactions
+                        {t("transactionCount", { count: data.transactionCount })}
                       </p>
                     </div>
                   </div>
@@ -338,16 +335,16 @@ export default function BudgetsPage() {
                         <button
                           onClick={() => setEditingBudget(data.budget)}
                           className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg p-3 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
-                          title="Edit budget"
-                          aria-label="Edit budget"
+                          title={t("editBudget")}
+                          aria-label={t("editBudget")}
                         >
                           <Edit className="h-6 w-6" />
                         </button>
                         <button
                           onClick={() => initiateDeleteBudget(data.budget!, data)}
                           className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg p-3 text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
-                          title="Delete budget"
-                          aria-label="Delete budget"
+                          title={t("deleteBudget")}
+                          aria-label={t("deleteBudget")}
                         >
                           <Trash2 className="h-6 w-6" />
                         </button>
@@ -363,7 +360,7 @@ export default function BudgetsPage() {
                       <div className="mb-3 flex items-center justify-between">
                         <span className="text-base font-semibold text-gray-700">
                           ${data.spent.toFixed(2)}{" "}
-                          <span className="font-normal text-gray-500">of</span> $
+                          <span className="font-normal text-gray-500">{t("of")}</span> $
                           {data.budget.amount.toFixed(2)}
                         </span>
                         <div className="flex items-center gap-2">
@@ -388,10 +385,10 @@ export default function BudgetsPage() {
                             }`}
                           >
                             {data.percentage < 80
-                              ? "✓ On Track"
+                              ? t("statusOnTrack")
                               : data.percentage < 100
-                                ? "⚠ Warning"
-                                : "✖ Over"}
+                                ? t("statusWarning")
+                                : t("statusOver")}
                           </span>
                         </div>
                       </div>
@@ -415,14 +412,16 @@ export default function BudgetsPage() {
                         <>
                           <TrendingUp className="h-6 w-6 flex-shrink-0 text-green-600" />
                           <p className="text-base font-semibold text-green-700">
-                            ${data.remaining.toFixed(2)} remaining this month
+                            {t("remainingThisMonth", { amount: `$${data.remaining.toFixed(2)}` })}
                           </p>
                         </>
                       ) : (
                         <>
                           <AlertCircle className="h-6 w-6 flex-shrink-0 text-red-600" />
                           <p className="text-base font-semibold text-red-700">
-                            ${Math.abs(data.remaining).toFixed(2)} over budget this month
+                            {t("overBudgetThisMonth", {
+                              amount: `$${Math.abs(data.remaining).toFixed(2)}`,
+                            })}
                           </p>
                         </>
                       )}
@@ -445,7 +444,7 @@ export default function BudgetsPage() {
                     }}
                     className="min-h-[48px] w-full rounded-lg border-2 border-dashed border-gray-300 px-4 py-3 text-base font-semibold text-gray-600 transition-all hover:border-teal-500 hover:bg-teal-50 hover:text-teal-600 hover:shadow-md"
                   >
-                    + Set Budget
+                    {t("setBudget")}
                   </button>
                 )}
               </div>
@@ -454,9 +453,9 @@ export default function BudgetsPage() {
         ) : (
           <EmptyState
             icon={TrendingUp}
-            title="No budgets set"
-            description="Create a budget to track your spending limits and goals."
-            actionLabel="Create First Budget"
+            title={t("noBudgetsSet")}
+            description={t("noBudgetsDescription")}
+            actionLabel={t("createFirstBudget")}
             onAction={() => setShowAddModal(true)}
           />
         )}
@@ -479,24 +478,33 @@ export default function BudgetsPage() {
           open={deleteConfirmOpen}
           onOpenChange={setDeleteConfirmOpen}
           onConfirm={confirmDeleteBudget}
-          title="Delete Budget"
-          description="This will remove the budget limit for this category. Transactions will not be deleted."
+          title={t("deleteBudgetTitle")}
+          description={t("deleteBudgetDescription")}
           impact={
             deletingBudget
               ? {
-                  title: "You will lose:",
+                  title: t("youWillLose"),
                   items: [
                     `${deletingBudget.data.category.name}: $${deletingBudget.budget.amount.toFixed(2)}/${deletingBudget.budget.period}`,
-                    `Current progress: ${deletingBudget.data.percentage.toFixed(0)}% spent ($${deletingBudget.data.spent.toFixed(2)})`,
-                    `${deletingBudget.data.transactionCount} transaction${deletingBudget.data.transactionCount === 1 ? "" : "s"} will become unbudgeted`,
+                    t("currentProgress", {
+                      percentage: deletingBudget.data.percentage.toFixed(0),
+                      spent: `$${deletingBudget.data.spent.toFixed(2)}`,
+                    }),
+                    t("transactionsWillBecomeUnbudgeted", {
+                      count: deletingBudget.data.transactionCount,
+                    }),
                     deletingBudget.data.remaining < 0
-                      ? `Currently ${Math.abs(deletingBudget.data.remaining).toFixed(2)} over budget`
-                      : `$${deletingBudget.data.remaining.toFixed(2)} remaining budget`,
+                      ? t("currentlyOverBudget", {
+                          amount: `$${Math.abs(deletingBudget.data.remaining).toFixed(2)}`,
+                        })
+                      : t("remainingBudget", {
+                          amount: `$${deletingBudget.data.remaining.toFixed(2)}`,
+                        }),
                   ],
                 }
               : undefined
           }
-          confirmLabel="Delete Budget"
+          confirmLabel={t("deleteBudgetConfirm")}
           variant="destructive"
           icon={<Trash2 className="h-5 w-5" />}
         />
@@ -543,6 +551,7 @@ function BudgetModal({
   onClose: () => void;
 }) {
   const toast = useToast();
+  const t = useTranslations("budget.budgets");
   const [selectedCategory, setSelectedCategory] = useState(
     budget?.categoryId || categories[0]?.id || ""
   );
@@ -569,7 +578,7 @@ function BudgetModal({
     e.preventDefault();
     const amountNum = parseFloat(amount);
     if (isNaN(amountNum) || amountNum <= 0) {
-      toast.warning("Please enter a valid amount");
+      toast.warning(t("enterValidAmount"));
       return;
     }
     onSave(selectedCategory, amountNum, period, rollover);
@@ -580,13 +589,15 @@ function BudgetModal({
       <div className="mx-4 w-full max-w-md rounded-lg bg-white shadow-xl">
         <div className="border-b border-gray-200 p-6">
           <h2 className="text-xl font-semibold text-gray-900">
-            {budget ? "Edit Budget" : "Add Budget"}
+            {budget ? t("editBudget") : t("addBudget")}
           </h2>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 p-6">
           <div>
-            <label className="mb-2 block text-sm font-medium text-gray-700">Category</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">
+              {t("categoryLabel")}
+            </label>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
@@ -602,7 +613,9 @@ function BudgetModal({
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium text-gray-700">Amount</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">
+              {t("amountLabel")}
+            </label>
             <div className="relative">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
               <input
@@ -620,11 +633,11 @@ function BudgetModal({
 
           <div>
             <div className="mb-2 flex items-center gap-2">
-              <label className="block text-sm font-medium text-gray-700">Period</label>
+              <label className="block text-sm font-medium text-gray-700">{t("periodLabel")}</label>
               <HelpTooltip
-                content="Monthly budgets reset each month. Annual budgets divide the total across 12 months. Example: $1,200 annual = $100 per month."
+                content={t("periodHelpTooltip")}
                 learnMoreUrl="/docs/user-guide#budget-period"
-                ariaLabel="More information about budget periods"
+                ariaLabel={t("periodHelpTooltipAriaLabel")}
               />
             </div>
             <select
@@ -632,8 +645,8 @@ function BudgetModal({
               onChange={(e) => setPeriod(e.target.value as "monthly" | "annual")}
               className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             >
-              <option value="monthly">Monthly</option>
-              <option value="annual">Annual</option>
+              <option value="monthly">{t("monthly")}</option>
+              <option value="annual">{t("annual")}</option>
             </select>
           </div>
 
@@ -651,34 +664,16 @@ function BudgetModal({
                 htmlFor="rollover"
                 className="cursor-pointer text-sm font-medium text-gray-700"
               >
-                Carry over unused budget to next month
+                {t("rolloverLabel")}
               </label>
               <HelpTooltip
-                content={
-                  <>
-                    <strong>What is budget rollover?</strong>
-                    <br />
-                    When enabled, any unspent money from this budget carries over to the next month.
-                    <br />
-                    <br />
-                    <strong>Example:</strong>
-                    <br />
-                    • Budget: $500/month
-                    <br />
-                    • Spent: $400
-                    <br />
-                    • Leftover: $100
-                    <br />• Next month starts with: $600 ($500 + $100 leftover)
-                  </>
-                }
+                content={t("rolloverHelpTooltip")}
                 learnMoreUrl="/docs/user-guide#budget-rollover"
-                ariaLabel="More information about budget rollover"
+                ariaLabel={t("rolloverHelpTooltipAriaLabel")}
               />
             </div>
             <p className="ml-8 text-xs text-gray-500">
-              {rollover
-                ? "Leftover funds will be added to next month's budget"
-                : "Budget resets each month regardless of spending"}
+              {rollover ? t("rolloverEnabled") : t("rolloverDisabled")}
             </p>
           </div>
 
@@ -688,13 +683,13 @@ function BudgetModal({
               onClick={onClose}
               className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
             >
-              Cancel
+              {t("cancel")}
             </button>
             <button
               type="submit"
               className="flex-1 rounded-lg bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             >
-              Save Budget
+              {t("saveBudget")}
             </button>
           </div>
         </form>

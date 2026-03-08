@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse } from "next/server";
  * Route filtering middleware based on NEXT_PUBLIC_APP_TARGET.
  *
  * - "tco":            Block /budget-app/* routes, budget-only APIs
- * - "budget-offline": Block non-budget routes, TCO-only APIs. Root / → /budget-app
+ * - "budget-offline": Block non-budget routes, TCO-only APIs. Root / → /budget-app/landing
  * - "budget-online":  Same as budget-offline
  */
 
@@ -48,9 +48,9 @@ export function middleware(request: NextRequest) {
   }
 
   if (isBudgetApp) {
-    // Budget: root / → redirect to /budget-app
+    // Budget: root / → redirect to /budget-app/landing
     if (pathname === "/") {
-      return NextResponse.redirect(new URL("/budget-app", request.url));
+      return NextResponse.redirect(new URL("/budget-app/landing", request.url));
     }
 
     // Budget: allow /budget-app/* routes
@@ -58,8 +58,8 @@ export function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    // Budget: block all other page routes → redirect to /budget-app
-    return NextResponse.redirect(new URL("/budget-app", request.url));
+    // Budget: block all other page routes → redirect to /budget-app/landing
+    return NextResponse.redirect(new URL("/budget-app/landing", request.url));
   }
 
   return NextResponse.next();

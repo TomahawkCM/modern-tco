@@ -15,6 +15,7 @@
  */
 
 import { useState, useCallback } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -105,6 +106,8 @@ export function SimpleFINConnect({
   onConnect,
 }: SimpleFINConnectProps) {
   // State
+  const locale = useLocale();
+  const t = useTranslations("simplefinConnect");
   const [step, setStep] = useState<Step>("intro");
   const [setupToken, setSetupToken] = useState("");
   const [accessUrl, setAccessUrl] = useState("");
@@ -139,7 +142,7 @@ export function SimpleFINConnect({
   // Claim token and fetch accounts
   const claimToken = useCallback(async () => {
     if (!setupToken.trim()) {
-      setError("Please enter your SimpleFIN setup token");
+      setError(t("enterTokenError"));
       return;
     }
 
@@ -157,9 +160,7 @@ export function SimpleFINConnect({
       const data = await client.getAccounts({ balancesOnly: true });
 
       if (data.accounts.length === 0) {
-        throw new Error(
-          "No accounts found. Please ensure you have connected bank accounts in SimpleFIN Bridge."
-        );
+        throw new Error(t("noAccountsFound"));
       }
 
       // Parse accounts for display
@@ -184,7 +185,7 @@ export function SimpleFINConnect({
       } else if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError("An unexpected error occurred");
+        setError(t("unexpectedError"));
       }
       setStep("error");
     } finally {
@@ -213,7 +214,7 @@ export function SimpleFINConnect({
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError("Failed to save connection");
+        setError(t("failedToSave"));
       }
       setStep("error");
     } finally {
@@ -232,10 +233,8 @@ export function SimpleFINConnect({
                 <Building2 className="h-8 w-8 text-primary" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold">Connect Your Bank</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Automatically import transactions from your bank accounts
-                </p>
+                <h3 className="text-lg font-semibold">{t("connectYourBank")}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{t("autoImportDescription")}</p>
               </div>
             </div>
 
@@ -243,52 +242,46 @@ export function SimpleFINConnect({
               <div className="flex items-start gap-3 rounded-lg bg-muted/50 p-3">
                 <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-green-500" />
                 <div>
-                  <p className="text-sm font-medium">Secure & Private</p>
-                  <p className="text-xs text-muted-foreground">
-                    SimpleFIN never sees your login credentials. You control access.
-                  </p>
+                  <p className="text-sm font-medium">{t("securePrivate")}</p>
+                  <p className="text-xs text-muted-foreground">{t("securePrivateDescription")}</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3 rounded-lg bg-muted/50 p-3">
                 <RefreshCw className="mt-0.5 h-5 w-5 shrink-0 text-blue-500" />
                 <div>
-                  <p className="text-sm font-medium">Automatic Sync</p>
-                  <p className="text-xs text-muted-foreground">
-                    Transactions sync daily. Manual import anytime.
-                  </p>
+                  <p className="text-sm font-medium">{t("automaticSync")}</p>
+                  <p className="text-xs text-muted-foreground">{t("automaticSyncDescription")}</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3 rounded-lg bg-muted/50 p-3">
                 <Link2 className="mt-0.5 h-5 w-5 shrink-0 text-purple-500" />
                 <div>
-                  <p className="text-sm font-medium">Link to Budget</p>
-                  <p className="text-xs text-muted-foreground">
-                    Map bank accounts to your budget accounts.
-                  </p>
+                  <p className="text-sm font-medium">{t("linkToBudget")}</p>
+                  <p className="text-xs text-muted-foreground">{t("linkToBudgetDescription")}</p>
                 </div>
               </div>
             </div>
 
             <Alert>
               <AlertCircle className="h-4 w-4" />
-              <AlertTitle>SimpleFIN Bridge Subscription</AlertTitle>
+              <AlertTitle>{t("subscriptionTitle")}</AlertTitle>
               <AlertDescription>
-                SimpleFIN costs $1.50/month for up to 25 bank connections.
+                {t("subscriptionDescription")}
                 <a
                   href="https://bridge.simplefin.org"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ms-1 inline-flex items-center gap-1 text-primary hover:underline"
                 >
-                  Learn more <ExternalLink className="h-3 w-3" />
+                  {t("learnMore")} <ExternalLink className="h-3 w-3" />
                 </a>
               </AlertDescription>
             </Alert>
 
             <Button onClick={() => setStep("get-token")} className="w-full">
-              Get Started
+              {t("getStarted")}
               <ArrowRight className="ms-2 h-4 w-4" />
             </Button>
           </div>
@@ -298,34 +291,32 @@ export function SimpleFINConnect({
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <h3 className="text-lg font-semibold">Step 1: Get Setup Token</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Create or sign into your SimpleFIN account
-              </p>
+              <h3 className="text-lg font-semibold">{t("step1Title")}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{t("step1Description")}</p>
             </div>
 
             <div className="space-y-4">
               <ol className="list-inside list-decimal space-y-2 text-sm text-muted-foreground">
-                <li>Click the button below to open SimpleFIN Bridge</li>
-                <li>Sign in or create an account</li>
-                <li>Connect your bank accounts</li>
-                <li>Copy the Setup Token provided</li>
-                <li>Return here and paste the token</li>
+                <li>{t("instruction1")}</li>
+                <li>{t("instruction2")}</li>
+                <li>{t("instruction3")}</li>
+                <li>{t("instruction4")}</li>
+                <li>{t("instruction5")}</li>
               </ol>
 
               <Button onClick={openSimpleFINBridge} className="w-full">
-                Open SimpleFIN Bridge
+                {t("openBridge")}
                 <ExternalLink className="ms-2 h-4 w-4" />
               </Button>
             </div>
 
             <p className="text-center text-xs text-muted-foreground">
-              Already have a token?{" "}
+              {t("alreadyHaveToken")}{" "}
               <button
                 onClick={() => setStep("enter-token")}
                 className="text-primary hover:underline"
               >
-                Enter it here
+                {t("enterItHere")}
               </button>
             </p>
           </div>
@@ -335,15 +326,13 @@ export function SimpleFINConnect({
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <h3 className="text-lg font-semibold">Step 2: Enter Setup Token</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Paste the token from SimpleFIN Bridge
-              </p>
+              <h3 className="text-lg font-semibold">{t("step2Title")}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{t("step2Description")}</p>
             </div>
 
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="setup-token">Setup Token</Label>
+                <Label htmlFor="setup-token">{t("setupToken")}</Label>
                 <div className="relative">
                   <Input
                     id="setup-token"
@@ -369,9 +358,7 @@ export function SimpleFINConnect({
                     <Copy className="h-3.5 w-3.5" />
                   </Button>
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  The token is a long string starting with letters and numbers
-                </p>
+                <p className="text-xs text-muted-foreground">{t("tokenHint")}</p>
               </div>
 
               {error && (
@@ -389,11 +376,11 @@ export function SimpleFINConnect({
                 {isLoading ? (
                   <>
                     <Loader2 className="me-2 h-4 w-4 animate-spin" />
-                    Connecting...
+                    {t("connecting")}
                   </>
                 ) : (
                   <>
-                    Connect
+                    {t("connect")}
                     <ArrowRight className="ms-2 h-4 w-4" />
                   </>
                 )}
@@ -401,7 +388,7 @@ export function SimpleFINConnect({
             </div>
 
             <Button variant="ghost" onClick={() => setStep("get-token")} className="w-full">
-              Back
+              {t("back")}
             </Button>
           </div>
         );
@@ -412,10 +399,8 @@ export function SimpleFINConnect({
             <div className="space-y-4 text-center">
               <Loader2 className="mx-auto h-12 w-12 animate-spin text-primary" />
               <div>
-                <h3 className="text-lg font-semibold">Connecting...</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Fetching your bank accounts from SimpleFIN
-                </p>
+                <h3 className="text-lg font-semibold">{t("connectingTitle")}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{t("fetchingAccounts")}</p>
               </div>
             </div>
             <Progress value={33} className="w-full" />
@@ -426,10 +411,8 @@ export function SimpleFINConnect({
         return (
           <div className="space-y-6">
             <div className="text-center">
-              <h3 className="text-lg font-semibold">Step 3: Link Accounts</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Choose which accounts to sync and where to import transactions
-              </p>
+              <h3 className="text-lg font-semibold">{t("step3Title")}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{t("step3Description")}</p>
             </div>
 
             <div className="max-h-[300px] space-y-4 overflow-y-auto">
@@ -451,7 +434,7 @@ export function SimpleFINConnect({
                           })}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          as of {account.balanceDate.toLocaleDateString()}
+                          {t("asOf", { date: account.balanceDate.toLocaleDateString(locale) })}
                         </p>
                       </div>
                     </div>
@@ -468,14 +451,14 @@ export function SimpleFINConnect({
                           }
                         />
                         <Label htmlFor={`import-${account.id}`} className="text-sm">
-                          Import transactions
+                          {t("importTransactions")}
                         </Label>
                       </div>
                     </div>
 
                     {config?.importEnabled && localAccounts.length > 0 && (
                       <div className="space-y-2">
-                        <Label className="text-sm">Import to:</Label>
+                        <Label className="text-sm">{t("importTo")}</Label>
                         <Select
                           value={config?.localAccountId || "new"}
                           onValueChange={(value) =>
@@ -485,10 +468,10 @@ export function SimpleFINConnect({
                           }
                         >
                           <SelectTrigger>
-                            <SelectValue placeholder="Select account" />
+                            <SelectValue placeholder={t("selectAccount")} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="new">Create new account</SelectItem>
+                            <SelectItem value="new">{t("createNewAccount")}</SelectItem>
                             {localAccounts.map((local) => (
                               <SelectItem key={local.id} value={local.id}>
                                 {local.name}
@@ -507,11 +490,11 @@ export function SimpleFINConnect({
               {isLoading ? (
                 <>
                   <Loader2 className="me-2 h-4 w-4 animate-spin" />
-                  Saving...
+                  {t("saving")}
                 </>
               ) : (
                 <>
-                  Complete Setup
+                  {t("completeSetup")}
                   <CheckCircle className="ms-2 h-4 w-4" />
                 </>
               )}
@@ -527,9 +510,9 @@ export function SimpleFINConnect({
                 <CheckCircle className="h-8 w-8 text-green-600 dark:text-green-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold">Connection Successful!</h3>
+                <h3 className="text-lg font-semibold">{t("connectionSuccessful")}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  {accounts.length} account{accounts.length !== 1 ? "s" : ""} connected
+                  {t("accountsConnected", { count: accounts.length })}
                 </p>
               </div>
             </div>
@@ -549,13 +532,10 @@ export function SimpleFINConnect({
               ))}
             </div>
 
-            <p className="text-center text-sm text-muted-foreground">
-              Your transactions will be automatically synced daily. You can also sync manually from
-              the Import page.
-            </p>
+            <p className="text-center text-sm text-muted-foreground">{t("syncDescription")}</p>
 
             <Button onClick={() => handleOpenChange(false)} className="w-full">
-              Done
+              {t("done")}
             </Button>
           </div>
         );
@@ -568,19 +548,17 @@ export function SimpleFINConnect({
                 <AlertCircle className="h-8 w-8 text-red-600 dark:text-red-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold">Connection Failed</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {error || "An error occurred while connecting"}
-                </p>
+                <h3 className="text-lg font-semibold">{t("connectionFailed")}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{error || t("genericError")}</p>
               </div>
             </div>
 
             <div className="space-y-2">
               <Button onClick={() => setStep("enter-token")} className="w-full">
-                Try Again
+                {t("tryAgain")}
               </Button>
               <Button variant="outline" onClick={() => handleOpenChange(false)} className="w-full">
-                Cancel
+                {t("cancel")}
               </Button>
             </div>
           </div>
@@ -597,9 +575,9 @@ export function SimpleFINConnect({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Building2 className="h-5 w-5" />
-            Connect Bank Account
+            {t("dialogTitle")}
           </DialogTitle>
-          <DialogDescription>Link your bank accounts via SimpleFIN Bridge</DialogDescription>
+          <DialogDescription>{t("dialogDescription")}</DialogDescription>
         </DialogHeader>
 
         {renderStep()}

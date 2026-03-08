@@ -14,7 +14,7 @@
  */
 
 import { useState, useCallback, useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Upload,
@@ -1168,6 +1168,8 @@ interface PreviewStepProps {
 }
 
 function PreviewStep({ preview, isSeniorsMode, t, onGeneratePreview }: PreviewStepProps) {
+  const locale = useLocale();
+
   // Auto-generate preview on mount
   if (!preview) {
     onGeneratePreview();
@@ -1220,8 +1222,8 @@ function PreviewStep({ preview, isSeniorsMode, t, onGeneratePreview }: PreviewSt
       <div className="rounded-xl border border-white/10 bg-white/5 p-4">
         <h3 className="mb-2 text-sm font-medium text-slate-400">{t("previewStep.dateRange")}</h3>
         <p className="text-white">
-          {preview.transactions.dateRange.start.toLocaleDateString()} —{" "}
-          {preview.transactions.dateRange.end.toLocaleDateString()}
+          {preview.transactions.dateRange.start.toLocaleDateString(locale)} —{" "}
+          {preview.transactions.dateRange.end.toLocaleDateString(locale)}
         </p>
       </div>
 

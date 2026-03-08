@@ -8,6 +8,7 @@
 
 import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import { db } from "@/lib/budget-db";
 import { useLiveQuery } from "dexie-react-hooks";
 import { ArrowDownRight, ArrowUpRight, BarChart3, Scale } from "lucide-react";
@@ -22,6 +23,7 @@ interface IncomeVsExpensesWidgetProps {
 export function IncomeVsExpensesWidget({ config }: IncomeVsExpensesWidgetProps) {
   const t = useTranslations("dashboard.widgets.incomeVsExpenses");
   const format = useFormatter();
+  const currency = useDefaultCurrency();
 
   // Fetch current month transactions
   const transactions =
@@ -107,7 +109,7 @@ export function IncomeVsExpensesWidget({ config }: IncomeVsExpensesWidgetProps) 
                   <span className="text-sm font-medium text-slate-300">{t("income")}</span>
                 </div>
                 <span className="text-sm font-semibold text-emerald-400">
-                  {format.number(income, { style: "currency", currency: "USD" })}
+                  {format.number(income, { style: "currency", currency })}
                 </span>
               </div>
               <div className="h-4 overflow-hidden rounded-full bg-slate-700">
@@ -126,7 +128,7 @@ export function IncomeVsExpensesWidget({ config }: IncomeVsExpensesWidgetProps) 
                   <span className="text-sm font-medium text-slate-300">{t("expenses")}</span>
                 </div>
                 <span className="text-sm font-semibold text-rose-400">
-                  {format.number(expenses, { style: "currency", currency: "USD" })}
+                  {format.number(expenses, { style: "currency", currency })}
                 </span>
               </div>
               <div className="h-4 overflow-hidden rounded-full bg-slate-700">
@@ -145,13 +147,13 @@ export function IncomeVsExpensesWidget({ config }: IncomeVsExpensesWidgetProps) 
                   className={`text-xl font-bold ${net >= 0 ? "text-emerald-400" : "text-rose-400"}`}
                 >
                   {net >= 0 ? "+" : ""}
-                  {format.number(net, { style: "currency", currency: "USD" })}
+                  {format.number(net, { style: "currency", currency })}
                 </span>
               </div>
               <p className="mt-1 text-xs text-slate-500">
                 {net >= 0
                   ? `You're saving ${format.number((net / income) * 100 || 0, { maximumFractionDigits: 1 })}% of your income`
-                  : `You're overspending by ${format.number(Math.abs(net), { style: "currency", currency: "USD" })}`}
+                  : `You're overspending by ${format.number(Math.abs(net), { style: "currency", currency })}`}
               </p>
             </div>
           </div>

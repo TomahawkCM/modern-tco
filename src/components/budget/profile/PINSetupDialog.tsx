@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -37,6 +38,7 @@ export function PINSetupDialog({
   mode = "set",
   onSuccess,
 }: PINSetupDialogProps) {
+  const tPin = useTranslations("pinDialog");
   const { setPIN, removePIN, unlockProfile, hasPIN } = useProfile();
 
   const [currentPIN, setCurrentPIN] = useState("");
@@ -75,11 +77,11 @@ export function PINSetupDialog({
 
     const validation = isPINValid(newPIN);
     if (!validation.valid) {
-      return validation.error || "Invalid PIN";
+      return validation.error || tPin("errorInvalidPin");
     }
 
     if (newPIN !== confirmPIN) {
-      return "PINs do not match";
+      return tPin("errorPinMismatch");
     }
 
     return null;
@@ -104,10 +106,10 @@ export function PINSetupDialog({
           setStep("new");
         }
       } else {
-        setError("Incorrect current PIN");
+        setError(tPin("errorIncorrectPin"));
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Verification failed");
+      setError(err instanceof Error ? err.message : tPin("errorVerificationFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -131,10 +133,10 @@ export function PINSetupDialog({
         handleClose();
         onSuccess?.();
       } else {
-        setError("Failed to set PIN");
+        setError(tPin("errorSetFailed"));
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to set PIN");
+      setError(err instanceof Error ? err.message : tPin("errorSetFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -152,7 +154,8 @@ export function PINSetupDialog({
 
   if (!profile) return null;
 
-  const title = mode === "remove" ? "Remove PIN" : mode === "change" ? "Change PIN" : "Set PIN";
+  const title =
+    mode === "remove" ? tPin("removePin") : mode === "change" ? tPin("changePin") : tPin("setPin");
   const icon = mode === "remove" ? ShieldOff : mode === "change" ? Lock : ShieldCheck;
   const Icon = icon;
 
@@ -167,10 +170,10 @@ export function PINSetupDialog({
             </DialogTitle>
             <DialogDescription>
               {mode === "remove"
-                ? "Remove PIN protection from this profile. Anyone will be able to access it."
+                ? tPin("removeDescription")
                 : mode === "change"
-                  ? "Change the PIN for this profile."
-                  : "Set a PIN to protect this profile from unauthorized access."}
+                  ? tPin("changeDescription")
+                  : tPin("setDescription")}
             </DialogDescription>
           </DialogHeader>
 
@@ -178,7 +181,7 @@ export function PINSetupDialog({
             {/* Current PIN Step */}
             {step === "current" && requiresCurrentPIN && (
               <div className="grid gap-2">
-                <Label htmlFor="current-pin">Current PIN</Label>
+                <Label htmlFor="current-pin">{tPin("currentPinLabel")}</Label>
                 <Input
                   id="current-pin"
                   type="password"
@@ -187,7 +190,7 @@ export function PINSetupDialog({
                   maxLength={6}
                   value={currentPIN}
                   onChange={(e) => setCurrentPIN(e.target.value.replace(/\D/g, ""))}
-                  placeholder="Enter current PIN"
+                  placeholder={tPin("enterCurrentPinPlaceholder")}
                   autoFocus
                 />
               </div>
@@ -197,7 +200,7 @@ export function PINSetupDialog({
             {step === "new" && mode !== "remove" && (
               <>
                 <div className="grid gap-2">
-                  <Label htmlFor="new-pin">New PIN (4-6 digits)</Label>
+                  <Label htmlFor="new-pin">{tPin("newPinLabel")}</Label>
                   <Input
                     id="new-pin"
                     type="password"
@@ -206,12 +209,12 @@ export function PINSetupDialog({
                     maxLength={6}
                     value={newPIN}
                     onChange={(e) => setNewPIN(e.target.value.replace(/\D/g, ""))}
-                    placeholder="Enter new PIN"
+                    placeholder={tPin("enterNewPinPlaceholder")}
                     autoFocus
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="confirm-new-pin">Confirm New PIN</Label>
+                  <Label htmlFor="confirm-new-pin">{tPin("confirmNewPinLabel")}</Label>
                   <Input
                     id="confirm-new-pin"
                     type="password"
@@ -220,23 +223,17 @@ export function PINSetupDialog({
                     maxLength={6}
                     value={confirmPIN}
                     onChange={(e) => setConfirmPIN(e.target.value.replace(/\D/g, ""))}
-                    placeholder="Confirm new PIN"
+                    placeholder={tPin("confirmNewPinPlaceholder")}
                   />
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  Choose a PIN that&apos;s easy to remember but hard to guess. Avoid simple patterns
-                  like 1234 or repeated digits.
-                </p>
+                <p className="text-xs text-muted-foreground">{tPin("pinAdviceText")}</p>
               </>
             )}
 
             {/* Remove PIN Confirmation */}
             {step === "new" && mode === "remove" && (
               <div className="rounded-lg border border-destructive/20 bg-destructive/10 p-4">
-                <p className="text-sm">
-                  Are you sure you want to remove PIN protection? This profile will be accessible
-                  without any authentication.
-                </p>
+                <p className="text-sm">{tPin("removeConfirmation")}</p>
               </div>
             )}
 
@@ -246,7 +243,7 @@ export function PINSetupDialog({
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={handleClose} disabled={isLoading}>
-              Cancel
+              {tPin("cancel")}
             </Button>
             <Button
               type="submit"
@@ -256,11 +253,11 @@ export function PINSetupDialog({
               {isLoading && <Loader2 className="me-2 h-4 w-4 animate-spin" />}
               {step === "current" && requiresCurrentPIN
                 ? mode === "remove"
-                  ? "Verify & Remove"
-                  : "Continue"
+                  ? tPin("verifyAndRemove")
+                  : tPin("continue")
                 : mode === "remove"
-                  ? "Remove PIN"
-                  : "Set PIN"}
+                  ? tPin("removePin")
+                  : tPin("setPin")}
             </Button>
           </DialogFooter>
         </form>

@@ -10,8 +10,10 @@ import { WifiOff, RefreshCw, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function OfflinePage() {
+  const t = useTranslations("offline");
   const [isOnline, setIsOnline] = useState(false);
 
   useEffect(() => {
@@ -45,21 +47,17 @@ export default function OfflinePage() {
         </div>
 
         {/* Title */}
-        <h1 className="mb-3 text-2xl font-bold text-gray-900">You're Offline</h1>
+        <h1 className="mb-3 text-2xl font-bold text-gray-900">{t("title")}</h1>
 
         {/* Description */}
-        <p className="mb-6 text-gray-600">
-          {isOnline
-            ? "You're back online! Click refresh to reload the page."
-            : "It looks like you've lost your internet connection. The page you're trying to reach isn't available offline yet."}
-        </p>
+        <p className="mb-6 text-gray-600">{isOnline ? t("backOnline") : t("lostConnection")}</p>
 
         {/* Status Indicator */}
         <div className="mb-6 rounded-lg bg-gray-50 p-4">
           <div className="flex items-center justify-center gap-2">
             <div className={`h-3 w-3 rounded-full ${isOnline ? "bg-green-500" : "bg-gray-400"}`} />
             <span className="text-sm font-medium text-gray-700">
-              {isOnline ? "Connection restored" : "No internet connection"}
+              {isOnline ? t("connectionRestored") : t("noConnection")}
             </span>
           </div>
         </div>
@@ -72,24 +70,21 @@ export default function OfflinePage() {
             size="lg"
           >
             <RefreshCw className="mr-2 h-5 w-5" />
-            {isOnline ? "Reload Page" : "Try Again"}
+            {isOnline ? t("reloadPage") : t("tryAgain")}
           </Button>
 
           <Link href="/budget-app" className="block">
             <Button variant="outline" className="w-full" size="lg">
               <Home className="mr-2 h-5 w-5" />
-              Go to Dashboard
+              {t("goToDashboard")}
             </Button>
           </Link>
         </div>
 
         {/* Info */}
         <div className="mt-8 border-t border-gray-200 pt-6">
-          <h3 className="mb-2 text-sm font-semibold text-gray-900">Offline Features</h3>
-          <p className="text-xs text-gray-600">
-            Once you visit a page while online, it will be available offline. All your data is
-            stored locally on your device.
-          </p>
+          <h3 className="mb-2 text-sm font-semibold text-gray-900">{t("offlineFeatures")}</h3>
+          <p className="text-xs text-gray-600">{t("offlineFeaturesDescription")}</p>
         </div>
       </div>
     </div>

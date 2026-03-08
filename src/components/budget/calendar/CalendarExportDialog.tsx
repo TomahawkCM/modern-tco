@@ -26,7 +26,7 @@ import {
   openSubscriptionGoogleCalendar,
   openSubscriptionOutlookCalendar,
 } from "@/lib/calendar/google-calendar-url";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { cn } from "@/lib/utils";
 
 interface CalendarExportDialogProps {
@@ -44,6 +44,7 @@ export function CalendarExportDialog({
 }: CalendarExportDialogProps) {
   const t = useTranslations("calendarExport");
   const tAria = useTranslations("aria");
+  const locale = useLocale();
   const [selectedIds, setSelectedIds] = useState<Set<string>>(
     new Set(subscriptions.map((s) => s.id))
   );
@@ -206,7 +207,7 @@ export function CalendarExportDialog({
                   </div>
                   <div className="flex items-center gap-1 text-xs text-slate-500">
                     <CalendarDays className="h-3 w-3" />
-                    {new Date(subscription.nextBillingDate).toLocaleDateString()}
+                    {new Date(subscription.nextBillingDate).toLocaleDateString(locale)}
                   </div>
                 </div>
               ))}

@@ -49,7 +49,18 @@ export function LanguageSelector({ variant = "minimal", className = "" }: Langua
   const currentMetadata = LOCALE_METADATA[currentLocale];
 
   const handleLocaleChange = (locale: SupportedLocale) => {
-    setLocalePreferences({ locale });
+    const current = getLocalePreferences();
+    const updates: Partial<LocalePreferences> = { locale };
+
+    // Auto-update currency if user hasn't explicitly chosen one
+    if (!current.currencyExplicitlySet) {
+      const localeCurrency = LOCALE_METADATA[locale]?.currency;
+      if (localeCurrency) {
+        updates.currency = localeCurrency;
+      }
+    }
+
+    setLocalePreferences(updates);
   };
 
   return (

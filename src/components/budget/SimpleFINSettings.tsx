@@ -8,7 +8,7 @@
  */
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -87,6 +87,7 @@ export function SimpleFINSettingsPage({
   isSyncing = false,
 }: SimpleFINSettingsPageProps) {
   const t = useTranslations("simplefinSettings");
+  const locale = useLocale();
   const [showDisconnectDialog, setShowDisconnectDialog] = useState(false);
   const isConnected = connectionStatus === "connected" || connectionStatus === "syncing";
 
@@ -98,7 +99,7 @@ export function SimpleFINSettingsPage({
 
     if (hours < 1) return t("sync.lessThanHour");
     if (hours < 24) return t("sync.hoursAgo", { hours });
-    return t("sync.date", { date: date.toLocaleDateString() });
+    return t("sync.date", { date: date.toLocaleDateString(locale) });
   };
 
   return (

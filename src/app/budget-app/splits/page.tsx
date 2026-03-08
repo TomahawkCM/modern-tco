@@ -38,6 +38,10 @@ import {
   UserPlus,
   Search,
 } from "lucide-react";
+import { getCurrentCurrency, getCurrentLocale } from "@/lib/locale-storage";
+import { LOCALE_METADATA } from "@/i18n/config";
+import { formatCurrency as formatCurrencyUtil } from "@/i18n/utils/formatCurrency";
+import { useTranslations } from "next-intl";
 
 // ---------------------------------------------------------------------------
 // Emoji picker options
@@ -81,17 +85,18 @@ const EMOJI_OPTIONS = [
 // Settlement method options
 // ---------------------------------------------------------------------------
 const SETTLEMENT_METHODS = [
-  { value: "cash", label: "Cash" },
-  { value: "e-transfer", label: "E-Transfer" },
-  { value: "venmo", label: "Venmo" },
-  { value: "paypal", label: "PayPal" },
-  { value: "other", label: "Other" },
-];
+  { value: "cash", labelKey: "settlementMethods.cash" },
+  { value: "e-transfer", labelKey: "settlementMethods.eTransfer" },
+  { value: "venmo", labelKey: "settlementMethods.venmo" },
+  { value: "paypal", labelKey: "settlementMethods.paypal" },
+  { value: "other", labelKey: "settlementMethods.other" },
+] as const;
 
 // ---------------------------------------------------------------------------
 // Main page component
 // ---------------------------------------------------------------------------
 export default function ExpenseSplitsPage() {
+  const t = useTranslations("splits");
   // Data state
   const [people, setPeople] = useState<SplitPerson[]>([]);
   const [splits, setSplits] = useState<ExpenseSplit[]>([]);
@@ -373,15 +378,13 @@ export default function ExpenseSplitsPage() {
   // Helpers
   // ---------------------------------------------------------------------------
   function formatCurrency(amount: number): string {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(amount);
+    const currency = getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency;
+    return formatCurrencyUtil(amount, currency, getCurrentLocale());
   }
 
   function formatDate(date: Date | string): string {
     const d = typeof date === "string" ? new Date(date) : date;
-    return d.toLocaleDateString("en-US", {
+    return d.toLocaleDateString(getCurrentLocale(), {
       month: "short",
       day: "numeric",
       year: "numeric",
@@ -418,7 +421,7 @@ export default function ExpenseSplitsPage() {
           className="inline-flex min-h-[48px] items-center gap-2 text-slate-400 transition-colors hover:text-white"
         >
           <ArrowLeft className="h-5 w-5" />
-          Back to Splits
+          {t("backToSplits")}
         </button>
 
         <header className="flex items-center justify-between">
@@ -432,10 +435,10 @@ export default function ExpenseSplitsPage() {
                 }`}
               >
                 {balance > 0
-                  ? `Owes you ${formatCurrency(balance)}`
+                  ? t("owesYou", { amount: formatCurrency(balance) })
                   : balance < 0
-                    ? `You owe ${formatCurrency(Math.abs(balance))}`
-                    : "All settled up"}
+                    ? t("youOwe", { amount: formatCurrency(Math.abs(balance)) })
+                    : t("allSettledUp")}
               </p>
             </div>
           </div>
@@ -447,7 +450,7 @@ export default function ExpenseSplitsPage() {
                 className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-teal-500 px-4 py-2.5 text-white shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-400"
               >
                 <HandCoins className="h-5 w-5" />
-                Settle Up
+                {t("settleUp")}
               </button>
             )}
             <button
@@ -462,12 +465,14 @@ export default function ExpenseSplitsPage() {
         {/* Unsettled splits */}
         <section>
           <h2 className="mb-4 text-lg font-semibold text-white">
-            Unsettled Splits ({personUnsettledSplits.length})
+            {t("unsettledSplits", { count: personUnsettledSplits.length })}
           </h2>
           {personUnsettledSplits.length === 0 ? (
             <div className="rounded-lg border border-white/10 bg-white/5 p-8 text-center">
               <Check className="mx-auto mb-3 h-10 w-10 text-green-400" />
-              <p className="text-slate-400">All settled up with {selectedPerson.name}!</p>
+              <p className="text-slate-400">
+                {t("allSettledUpWith", { name: selectedPerson.name })}
+              </p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -480,11 +485,11 @@ export default function ExpenseSplitsPage() {
                   >
                     <div>
                       <p className="font-medium text-white">
-                        {tx?.description ?? "Unknown transaction"}
+                        {tx?.description ?? t("unknownTransaction")}
                       </p>
                       <p className="text-sm text-slate-400">
                         {formatDate(split.createdAt)}
-                        {tx && ` -- ${formatCurrency(Math.abs(tx.amount))} total`}
+                        {tx && ` -- ${formatCurrency(Math.abs(tx.amount))} ${t("total")}`}
                       </p>
                     </div>
                     <span
@@ -506,7 +511,7 @@ export default function ExpenseSplitsPage() {
         {personSettledSplits.length > 0 && (
           <section>
             <h2 className="mb-4 text-lg font-semibold text-white">
-              Settled History ({personSettledSplits.length})
+              {t("settledHistory", { count: personSettledSplits.length })}
             </h2>
             <div className="space-y-3">
               {personSettledSplits.map((split) => {
@@ -518,11 +523,11 @@ export default function ExpenseSplitsPage() {
                   >
                     <div>
                       <p className="font-medium text-white">
-                        {tx?.description ?? "Unknown transaction"}
+                        {tx?.description ?? t("unknownTransaction")}
                       </p>
                       <p className="text-sm text-slate-400">
-                        Settled {split.settledDate ? formatDate(split.settledDate) : ""}
-                        {split.settledMethod && ` via ${split.settledMethod}`}
+                        {t("settled")} {split.settledDate ? formatDate(split.settledDate) : ""}
+                        {split.settledMethod && ` ${t("via")} ${split.settledMethod}`}
                       </p>
                     </div>
                     <span className="text-lg font-semibold text-slate-400 line-through">
@@ -540,7 +545,7 @@ export default function ExpenseSplitsPage() {
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
             <div className="w-full max-w-md rounded-2xl border border-white/10 bg-slate-800 p-6 shadow-xl">
               <div className="mb-6 flex items-center justify-between">
-                <h3 className="text-xl font-bold text-white">Settle Up</h3>
+                <h3 className="text-xl font-bold text-white">{t("settleUp")}</h3>
                 <button
                   onClick={() => setSettlePersonId(null)}
                   className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
@@ -551,7 +556,9 @@ export default function ExpenseSplitsPage() {
 
               <div className="space-y-4">
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-slate-300">Amount</label>
+                  <label className="mb-1 block text-sm font-medium text-slate-300">
+                    {t("amount")}
+                  </label>
                   <input
                     type="number"
                     step="0.01"
@@ -564,7 +571,7 @@ export default function ExpenseSplitsPage() {
 
                 <div>
                   <label className="mb-1 block text-sm font-medium text-slate-300">
-                    Payment Method
+                    {t("paymentMethod")}
                   </label>
                   <select
                     value={settleMethod}
@@ -573,7 +580,7 @@ export default function ExpenseSplitsPage() {
                   >
                     {SETTLEMENT_METHODS.map((m) => (
                       <option key={m.value} value={m.value}>
-                        {m.label}
+                        {t(m.labelKey)}
                       </option>
                     ))}
                   </select>
@@ -587,10 +594,10 @@ export default function ExpenseSplitsPage() {
                   {settleLoading ? (
                     <span className="inline-flex items-center gap-2">
                       <Loader2 className="h-4 w-4 animate-spin" />
-                      Settling...
+                      {t("settling")}
                     </span>
                   ) : (
-                    `Settle ${formatCurrency(parseFloat(settleAmount) || 0)}`
+                    t("settleAmount", { amount: formatCurrency(parseFloat(settleAmount) || 0) })
                   )}
                 </button>
               </div>
@@ -605,9 +612,9 @@ export default function ExpenseSplitsPage() {
             if (!open) setDeletePersonId(null);
           }}
           onConfirm={handleDeletePerson}
-          title="Remove Person"
-          description={`Are you sure you want to remove ${selectedPerson.name}? All their split records will be deleted.`}
-          confirmLabel="Remove"
+          title={t("confirmRemovePerson.title")}
+          description={t("confirmRemovePerson.descriptionNamed", { name: selectedPerson.name })}
+          confirmLabel={t("confirmRemovePerson.confirmLabel")}
           variant="destructive"
           icon={<Trash2 className="h-5 w-5" />}
         />
@@ -627,8 +634,10 @@ export default function ExpenseSplitsPage() {
           {/* Header */}
           <div className="mb-6 flex items-center justify-between">
             <div>
-              <h3 className="text-xl font-bold text-white">Split a Transaction</h3>
-              <p className="text-sm text-slate-400">Step {splitStep} of 5</p>
+              <h3 className="text-xl font-bold text-white">{t("splitFlow.title")}</h3>
+              <p className="text-sm text-slate-400">
+                {t("splitFlow.step", { current: splitStep, total: 5 })}
+              </p>
             </div>
             <button
               onClick={closeSplitFlow}
@@ -653,20 +662,20 @@ export default function ExpenseSplitsPage() {
           {/* Step 1: Select transaction */}
           {splitStep === 1 && (
             <div className="space-y-4">
-              <h4 className="font-semibold text-white">Select a transaction</h4>
+              <h4 className="font-semibold text-white">{t("splitFlow.selectTransaction")}</h4>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
                 <input
                   type="text"
                   value={txSearchQuery}
                   onChange={(e) => setTxSearchQuery(e.target.value)}
-                  placeholder="Search transactions..."
+                  placeholder={t("splitFlow.searchTransactions")}
                   className="min-h-[48px] w-full rounded-lg border border-white/10 bg-white/5 py-3 pl-10 pr-4 text-white placeholder-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
                 />
               </div>
               <div className="max-h-[40vh] space-y-2 overflow-y-auto">
                 {filteredTransactions.length === 0 ? (
-                  <p className="py-8 text-center text-slate-400">No transactions found</p>
+                  <p className="py-8 text-center text-slate-400">{t("splitFlow.noTransactions")}</p>
                 ) : (
                   filteredTransactions.map((tx) => (
                     <button
@@ -704,11 +713,11 @@ export default function ExpenseSplitsPage() {
           {/* Step 2: Select people */}
           {splitStep === 2 && (
             <div className="space-y-4">
-              <h4 className="font-semibold text-white">Who to split with?</h4>
+              <h4 className="font-semibold text-white">{t("splitFlow.whoToSplitWith")}</h4>
               {people.length === 0 ? (
                 <div className="rounded-lg border border-white/10 bg-white/5 p-8 text-center">
                   <Users className="mx-auto mb-3 h-10 w-10 text-slate-500" />
-                  <p className="mb-4 text-slate-400">No people added yet</p>
+                  <p className="mb-4 text-slate-400">{t("noPeopleYet")}</p>
                   <button
                     onClick={() => {
                       closeSplitFlow();
@@ -717,7 +726,7 @@ export default function ExpenseSplitsPage() {
                     className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-teal-500 px-4 py-2.5 text-white transition-all hover:bg-teal-400"
                   >
                     <UserPlus className="h-4 w-4" />
-                    Add a Person
+                    {t("addAPerson")}
                   </button>
                 </div>
               ) : (
@@ -748,27 +757,27 @@ export default function ExpenseSplitsPage() {
           {/* Step 3: Choose split mode */}
           {splitStep === 3 && (
             <div className="space-y-4">
-              <h4 className="font-semibold text-white">How to split?</h4>
+              <h4 className="font-semibold text-white">{t("splitFlow.howToSplit")}</h4>
               <div className="space-y-2">
                 {(
                   [
                     {
                       mode: "equal" as SplitMode,
-                      label: "Split Equally",
-                      desc: "Everyone pays the same amount",
+                      labelKey: "splitFlow.modes.equal.label",
+                      descKey: "splitFlow.modes.equal.description",
                     },
                     {
                       mode: "custom" as SplitMode,
-                      label: "Custom Amounts",
-                      desc: "Set specific amounts for each person",
+                      labelKey: "splitFlow.modes.custom.label",
+                      descKey: "splitFlow.modes.custom.description",
                     },
                     {
                       mode: "percentage" as SplitMode,
-                      label: "By Percentage",
-                      desc: "Set percentage shares for each person",
+                      labelKey: "splitFlow.modes.percentage.label",
+                      descKey: "splitFlow.modes.percentage.description",
                     },
                   ] as const
-                ).map(({ mode, label, desc }) => (
+                ).map(({ mode, labelKey, descKey }) => (
                   <button
                     key={mode}
                     onClick={() => {
@@ -782,8 +791,8 @@ export default function ExpenseSplitsPage() {
                         : "border-white/10 bg-white/5 hover:bg-white/10"
                     }`}
                   >
-                    <p className="font-medium text-white">{label}</p>
-                    <p className="text-sm text-slate-400">{desc}</p>
+                    <p className="font-medium text-white">{t(labelKey)}</p>
+                    <p className="text-sm text-slate-400">{t(descKey)}</p>
                   </button>
                 ))}
               </div>
@@ -792,7 +801,7 @@ export default function ExpenseSplitsPage() {
               {splitMode === "custom" && selectedTransaction && (
                 <div className="mt-4 space-y-3">
                   <p className="text-sm text-slate-400">
-                    Total: {formatCurrency(Math.abs(selectedTransaction.amount))}
+                    {t("total")}: {formatCurrency(Math.abs(selectedTransaction.amount))}
                   </p>
                   {selectedPeopleIds.map((personId, index) => {
                     const person = people.find((p) => p.id === personId);
@@ -822,10 +831,14 @@ export default function ExpenseSplitsPage() {
                     const diff = Math.round((total - sum) * 100) / 100;
                     if (Math.abs(diff) > 0.01) {
                       return (
-                        <p className="text-sm text-amber-400">Remaining: {formatCurrency(diff)}</p>
+                        <p className="text-sm text-amber-400">
+                          {t("splitFlow.remaining", { amount: formatCurrency(diff) })}
+                        </p>
                       );
                     }
-                    return <p className="text-sm text-green-400">Amounts add up correctly</p>;
+                    return (
+                      <p className="text-sm text-green-400">{t("splitFlow.amountsCorrect")}</p>
+                    );
                   })()}
                 </div>
               )}
@@ -862,10 +875,14 @@ export default function ExpenseSplitsPage() {
                     const sum = Math.round(percentages.reduce((a, b) => a + b, 0) * 100) / 100;
                     if (Math.abs(sum - 100) > 0.01) {
                       return (
-                        <p className="text-sm text-amber-400">Total: {sum}% (must equal 100%)</p>
+                        <p className="text-sm text-amber-400">
+                          {t("splitFlow.percentageTotal", { sum })}
+                        </p>
                       );
                     }
-                    return <p className="text-sm text-green-400">Percentages add up to 100%</p>;
+                    return (
+                      <p className="text-sm text-green-400">{t("splitFlow.percentagesCorrect")}</p>
+                    );
                   })()}
                 </div>
               )}
@@ -875,12 +892,12 @@ export default function ExpenseSplitsPage() {
           {/* Step 4: Preview */}
           {splitStep === 4 && selectedTransaction && (
             <div className="space-y-4">
-              <h4 className="font-semibold text-white">Preview Split</h4>
+              <h4 className="font-semibold text-white">{t("splitFlow.previewSplit")}</h4>
               <div className="rounded-lg border border-white/10 bg-white/5 p-4">
                 <p className="font-medium text-white">{selectedTransaction.description}</p>
                 <p className="text-sm text-slate-400">
                   {formatDate(selectedTransaction.date)} --{" "}
-                  {formatCurrency(Math.abs(selectedTransaction.amount))} total
+                  {formatCurrency(Math.abs(selectedTransaction.amount))} {t("total")}
                 </p>
               </div>
 
@@ -912,11 +929,9 @@ export default function ExpenseSplitsPage() {
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-teal-500/20">
                 <Check className="h-8 w-8 text-teal-400" />
               </div>
-              <h4 className="text-xl font-bold text-white">Confirm Split</h4>
+              <h4 className="text-xl font-bold text-white">{t("splitFlow.confirmSplit")}</h4>
               <p className="text-slate-400">
-                This will create {splitPreview.length} split
-                {splitPreview.length !== 1 ? "s" : ""} for this transaction. Each person&apos;s
-                share will be tracked until settled.
+                {t("splitFlow.confirmDescription", { count: splitPreview.length })}
               </p>
             </div>
           )}
@@ -928,7 +943,7 @@ export default function ExpenseSplitsPage() {
                 onClick={() => setSplitStep((prev) => prev - 1)}
                 className="min-h-[48px] flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-slate-300 transition-all hover:bg-white/10"
               >
-                Back
+                {t("back")}
               </button>
             )}
             {splitStep < 5 ? (
@@ -940,7 +955,7 @@ export default function ExpenseSplitsPage() {
                 }
                 className="min-h-[48px] flex-1 rounded-xl bg-teal-500 px-4 py-3 font-semibold text-white shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-400 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Continue
+                {t("continue")}
               </button>
             ) : (
               <button
@@ -951,10 +966,10 @@ export default function ExpenseSplitsPage() {
                 {splitLoading ? (
                   <span className="inline-flex items-center gap-2">
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    Creating...
+                    {t("creating")}
                   </span>
                 ) : (
-                  "Confirm Split"
+                  t("splitFlow.confirmSplit")
                 )}
               </button>
             )}
@@ -974,14 +989,11 @@ export default function ExpenseSplitsPage() {
         <div>
           <h1 className="flex items-center gap-3 text-4xl font-bold tracking-tight text-white">
             <Users className="h-9 w-9 text-teal-400" />
-            Expense Splitting
+            {t("title")}
           </h1>
           <p className="mt-2 text-lg text-slate-400">
-            Track shared expenses and settle up with friends
-            <HelpTooltip
-              content="Split transactions with friends and family. Track who owes what and settle debts via Cash, E-Transfer, Venmo, or PayPal."
-              side="right"
-            />
+            {t("subtitle")}
+            <HelpTooltip content={t("helpTooltip")} side="right" />
           </p>
         </div>
         <div className="flex gap-3">
@@ -990,14 +1002,14 @@ export default function ExpenseSplitsPage() {
             className="inline-flex min-h-[48px] items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-slate-300 transition-all hover:bg-white/10 hover:text-white"
           >
             <UserPlus className="h-4 w-4" />
-            <span className="hidden sm:inline">Add Person</span>
+            <span className="hidden sm:inline">{t("addPerson")}</span>
           </button>
           <button
             onClick={openSplitFlow}
             className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-teal-500 px-4 py-2.5 text-white shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-400"
           >
             <Receipt className="h-4 w-4" />
-            <span className="hidden sm:inline">Split a Transaction</span>
+            <span className="hidden sm:inline">{t("splitATransaction")}</span>
           </button>
         </div>
       </header>
@@ -1009,7 +1021,7 @@ export default function ExpenseSplitsPage() {
             <div className="rounded-lg bg-green-500/20 p-2">
               <TrendingUp className="h-5 w-5 text-green-400" />
             </div>
-            <span className="text-sm font-medium text-green-300">Owed to You</span>
+            <span className="text-sm font-medium text-green-300">{t("owedToYou")}</span>
           </div>
           <p className="text-2xl font-bold text-green-400">{formatCurrency(totalOwedToYou)}</p>
         </div>
@@ -1019,7 +1031,7 @@ export default function ExpenseSplitsPage() {
             <div className="rounded-lg bg-red-500/20 p-2">
               <TrendingDown className="h-5 w-5 text-red-400" />
             </div>
-            <span className="text-sm font-medium text-red-300">You Owe</span>
+            <span className="text-sm font-medium text-red-300">{t("youOweLabel")}</span>
           </div>
           <p className="text-2xl font-bold text-red-400">{formatCurrency(totalYouOwe)}</p>
         </div>
@@ -1044,7 +1056,7 @@ export default function ExpenseSplitsPage() {
                 netBalance >= 0 ? "text-teal-300" : "text-amber-300"
               }`}
             >
-              Net Balance
+              {t("netBalance")}
             </span>
           </div>
           <p
@@ -1059,22 +1071,22 @@ export default function ExpenseSplitsPage() {
       {/* People Management Section */}
       <section>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-white">People ({people.length})</h2>
+          <h2 className="text-xl font-semibold text-white">
+            {t("people", { count: people.length })}
+          </h2>
         </div>
 
         {people.length === 0 ? (
           <div className="rounded-xl border border-white/10 bg-white/5 p-12 text-center">
             <Users className="mx-auto mb-4 h-12 w-12 text-slate-500" />
-            <h3 className="mb-2 text-lg font-semibold text-white">No people yet</h3>
-            <p className="mx-auto mb-6 max-w-md text-slate-400">
-              Add people you split expenses with. Track shared bills, dinners, and more.
-            </p>
+            <h3 className="mb-2 text-lg font-semibold text-white">{t("noPeopleTitle")}</h3>
+            <p className="mx-auto mb-6 max-w-md text-slate-400">{t("noPeopleDescription")}</p>
             <button
               onClick={() => setShowAddPerson(true)}
               className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-teal-500 px-6 py-3 text-white shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-400"
             >
               <UserPlus className="h-5 w-5" />
-              Add Your First Person
+              {t("addFirstPerson")}
             </button>
           </div>
         ) : (
@@ -1096,8 +1108,7 @@ export default function ExpenseSplitsPage() {
                           {person.name}
                         </p>
                         <p className="text-sm text-slate-400">
-                          {summary.splitCount} unsettled split
-                          {summary.splitCount !== 1 ? "s" : ""}
+                          {t("unsettledSplitCount", { count: summary.splitCount })}
                         </p>
                       </div>
                     </div>
@@ -1128,7 +1139,7 @@ export default function ExpenseSplitsPage() {
                           : "bg-red-500/10 text-red-400"
                       }`}
                     >
-                      {summary.balance > 0 ? "Owes you" : "You owe"}
+                      {summary.balance > 0 ? t("owesYouLabel") : t("youOweLabel")}
                     </p>
                   )}
                 </button>
@@ -1151,7 +1162,7 @@ export default function ExpenseSplitsPage() {
                         <p className="font-semibold text-white transition-colors group-hover:text-teal-300">
                           {person.name}
                         </p>
-                        <p className="text-sm text-slate-400">No splits yet</p>
+                        <p className="text-sm text-slate-400">{t("noSplitsYet")}</p>
                       </div>
                     </div>
                     <ChevronRight className="h-5 w-5 text-slate-500 transition-colors group-hover:text-slate-300" />
@@ -1167,7 +1178,7 @@ export default function ExpenseSplitsPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
           <div className="w-full max-w-md rounded-2xl border border-white/10 bg-slate-800 p-6 shadow-xl">
             <div className="mb-6 flex items-center justify-between">
-              <h3 className="text-xl font-bold text-white">Add Person</h3>
+              <h3 className="text-xl font-bold text-white">{t("addPerson")}</h3>
               <button
                 onClick={() => setShowAddPerson(false)}
                 className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-white/10 hover:text-white"
@@ -1179,12 +1190,12 @@ export default function ExpenseSplitsPage() {
             <div className="space-y-4">
               {/* Name input */}
               <div>
-                <label className="mb-1 block text-sm font-medium text-slate-300">Name</label>
+                <label className="mb-1 block text-sm font-medium text-slate-300">{t("name")}</label>
                 <input
                   type="text"
                   value={newPersonName}
                   onChange={(e) => setNewPersonName(e.target.value)}
-                  placeholder="e.g., Alice, Bob"
+                  placeholder={t("namePlaceholder")}
                   className="min-h-[48px] w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
                   autoFocus
                   onKeyDown={(e) => {
@@ -1197,7 +1208,9 @@ export default function ExpenseSplitsPage() {
 
               {/* Emoji picker */}
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-300">Emoji</label>
+                <label className="mb-2 block text-sm font-medium text-slate-300">
+                  {t("emoji")}
+                </label>
                 <div className="grid grid-cols-8 gap-2">
                   {EMOJI_OPTIONS.map((emoji) => (
                     <button
@@ -1229,7 +1242,7 @@ export default function ExpenseSplitsPage() {
                 disabled={!newPersonName.trim()}
                 className="min-h-[48px] w-full rounded-xl bg-teal-500 px-4 py-3 font-semibold text-white shadow-lg shadow-teal-500/20 transition-all hover:bg-teal-400 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Add Person
+                {t("addPerson")}
               </button>
             </div>
           </div>
@@ -1246,9 +1259,9 @@ export default function ExpenseSplitsPage() {
           if (!open) setDeletePersonId(null);
         }}
         onConfirm={handleDeletePerson}
-        title="Remove Person"
-        description="Are you sure you want to remove this person? All their split records will be deleted."
-        confirmLabel="Remove"
+        title={t("confirmRemovePerson.title")}
+        description={t("confirmRemovePerson.description")}
+        confirmLabel={t("confirmRemovePerson.confirmLabel")}
         variant="destructive"
         icon={<Trash2 className="h-5 w-5" />}
       />

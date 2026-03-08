@@ -20,6 +20,7 @@ import {
   ChevronUp,
   Loader2,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { db } from "@/lib/budget-db";
 import {
   downloadExcelExport,
@@ -29,49 +30,50 @@ import {
 
 type DateRangeOption = ExcelExportOptions["dateRange"];
 
-const DATE_RANGE_OPTIONS: { value: DateRangeOption; label: string }[] = [
-  { value: "all", label: "All Time" },
-  { value: "ytd", label: "Year to Date" },
-  { value: "last12months", label: "Last 12 Months" },
-  { value: "last6months", label: "Last 6 Months" },
-  { value: "last3months", label: "Last 3 Months" },
-  { value: "custom", label: "Custom Range" },
+const DATE_RANGE_VALUES: DateRangeOption[] = [
+  "all",
+  "ytd",
+  "last12months",
+  "last6months",
+  "last3months",
+  "custom",
 ];
 
 const SHEET_OPTIONS = [
-  {
-    key: "includeDashboard",
-    label: "Dashboard",
-    description: "Executive summary with key metrics",
-  },
-  {
-    key: "includeTransactions",
-    label: "Transactions",
-    description: "Complete transaction history",
-  },
+  { key: "includeDashboard", labelKey: "sheetDashboard", descKey: "sheetDashboardDesc" },
+  { key: "includeTransactions", labelKey: "sheetTransactions", descKey: "sheetTransactionsDesc" },
   {
     key: "includeMonthlySummary",
-    label: "Monthly Summary",
-    description: "Month-by-month overview",
+    labelKey: "sheetMonthlySummary",
+    descKey: "sheetMonthlySummaryDesc",
   },
   {
     key: "includeCategoryAnalysis",
-    label: "Category Analysis",
-    description: "Spending by category",
+    labelKey: "sheetCategoryAnalysis",
+    descKey: "sheetCategoryAnalysisDesc",
   },
-  { key: "includeAccounts", label: "Accounts", description: "All accounts with balances" },
-  { key: "includeBudgets", label: "Budgets", description: "Budget vs actual comparison" },
-  { key: "includeSubscriptions", label: "Subscriptions", description: "Recurring costs tracking" },
-  { key: "includeLoans", label: "Loans", description: "Debt with amortization schedules" },
-  { key: "includeInvestments", label: "Investments", description: "Portfolio holdings" },
-  { key: "includeNetWorth", label: "Net Worth", description: "Assets vs liabilities" },
-  { key: "includeGoals", label: "Goals", description: "Savings goals progress" },
-  { key: "includeDataDictionary", label: "Data Dictionary", description: "Field explanations" },
+  { key: "includeAccounts", labelKey: "sheetAccounts", descKey: "sheetAccountsDesc" },
+  { key: "includeBudgets", labelKey: "sheetBudgets", descKey: "sheetBudgetsDesc" },
+  {
+    key: "includeSubscriptions",
+    labelKey: "sheetSubscriptions",
+    descKey: "sheetSubscriptionsDesc",
+  },
+  { key: "includeLoans", labelKey: "sheetLoans", descKey: "sheetLoansDesc" },
+  { key: "includeInvestments", labelKey: "sheetInvestments", descKey: "sheetInvestmentsDesc" },
+  { key: "includeNetWorth", labelKey: "sheetNetWorth", descKey: "sheetNetWorthDesc" },
+  { key: "includeGoals", labelKey: "sheetGoals", descKey: "sheetGoalsDesc" },
+  {
+    key: "includeDataDictionary",
+    labelKey: "sheetDataDictionary",
+    descKey: "sheetDataDictionaryDesc",
+  },
 ] as const;
 
 type SheetOptionKey = (typeof SHEET_OPTIONS)[number]["key"];
 
 export default function ExportPage() {
+  const t = useTranslations("export");
   const [isExporting, setIsExporting] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
   const [exportStatus, setExportStatus] = useState<"idle" | "success" | "error">("idle");
@@ -146,7 +148,10 @@ export default function ExportPage() {
       if (result.success) {
         setExportStatus("success");
         setStatusMessage(
-          `Excel workbook exported successfully! (${result.sheetsIncluded.length} sheets, ${(result.fileSize / 1024).toFixed(1)} KB)`
+          t("excelExportedSuccess", {
+            sheets: result.sheetsIncluded.length,
+            size: (result.fileSize / 1024).toFixed(1),
+          })
         );
       } else {
         throw new Error(result.error || "Export failed");
@@ -154,7 +159,7 @@ export default function ExportPage() {
     } catch (error) {
       console.error("Excel export error:", error);
       setExportStatus("error");
-      setStatusMessage(error instanceof Error ? error.message : "Failed to export Excel workbook");
+      setStatusMessage(error instanceof Error ? error.message : t("failedToExportExcel"));
     } finally {
       setIsExporting(false);
       setExportProgress(null);
@@ -218,11 +223,11 @@ export default function ExportPage() {
       URL.revokeObjectURL(url);
 
       setExportStatus("success");
-      setStatusMessage("Data exported successfully!");
+      setStatusMessage(t("dataExportedSuccess"));
     } catch (error) {
       console.error("Export error:", error);
       setExportStatus("error");
-      setStatusMessage("Failed to export data");
+      setStatusMessage(t("failedToExport"));
     } finally {
       setIsExporting(false);
     }
@@ -266,11 +271,11 @@ export default function ExportPage() {
       URL.revokeObjectURL(url);
 
       setExportStatus("success");
-      setStatusMessage("Transactions exported to CSV!");
+      setStatusMessage(t("csvExportedSuccess"));
     } catch (error) {
       console.error("CSV export error:", error);
       setExportStatus("error");
-      setStatusMessage("Failed to export to CSV");
+      setStatusMessage(t("failedToExportCsv"));
     } finally {
       setIsExporting(false);
     }
@@ -285,12 +290,12 @@ export default function ExportPage() {
       const data = JSON.parse(text);
 
       if (!data.version || !data.exportDate) {
-        throw new Error("Invalid backup file format");
+        throw new Error(t("invalidBackupFormat"));
       }
 
       // Confirm before importing
       const confirmed = confirm(
-        `This will replace all existing data with the backup from ${new Date(data.exportDate).toLocaleDateString()}. Continue?`
+        t("confirmImport", { date: new Date(data.exportDate).toLocaleDateString() })
       );
 
       if (!confirmed) {
@@ -324,11 +329,11 @@ export default function ExportPage() {
       });
 
       setImportStatus("success");
-      setStatusMessage("Data imported successfully! Refresh the page to see changes.");
+      setStatusMessage(t("dataImportedSuccess"));
     } catch (error) {
       console.error("Import error:", error);
       setImportStatus("error");
-      setStatusMessage("Failed to import data. Please check the file format.");
+      setStatusMessage(t("failedToImport"));
     } finally {
       setIsImporting(false);
     }
@@ -342,13 +347,11 @@ export default function ExportPage() {
   }
 
   async function clearAllData() {
-    const confirmed = confirm(
-      "Are you sure you want to delete ALL data? This action cannot be undone.\n\nMake sure you have exported a backup first!"
-    );
+    const confirmed = confirm(t("confirmDeleteAll"));
 
     if (!confirmed) return;
 
-    const doubleConfirm = confirm("This is your last chance. Really delete EVERYTHING?");
+    const doubleConfirm = confirm(t("confirmDeleteAllFinal"));
 
     if (!doubleConfirm) return;
 
@@ -364,11 +367,11 @@ export default function ExportPage() {
         db.importMappings.clear(),
         db.receipts.clear(),
       ]);
-      alert("All data has been deleted. The page will now refresh.");
+      alert(t("allDataDeleted"));
       window.location.reload();
     } catch (error) {
       console.error("Error clearing data:", error);
-      alert("Failed to clear data");
+      alert(t("failedToClearData"));
     }
   }
 
@@ -378,8 +381,8 @@ export default function ExportPage() {
     <div className="mx-auto max-w-4xl space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-white">Export & Backup</h1>
-        <p className="mt-2 text-slate-400">Backup your data or export to different formats</p>
+        <h1 className="text-3xl font-bold text-white">{t("title")}</h1>
+        <p className="mt-2 text-slate-400">{t("subtitle")}</p>
       </div>
 
       {/* Status Messages */}
@@ -415,7 +418,7 @@ export default function ExportPage() {
 
       {/* Export Options */}
       <div className="rounded-lg bg-white p-6 shadow">
-        <h2 className="mb-4 text-xl font-semibold text-gray-900">Export Data</h2>
+        <h2 className="mb-4 text-xl font-semibold text-gray-900">{t("exportData")}</h2>
 
         <div className="space-y-4">
           {/* Excel Export - Featured */}
@@ -426,19 +429,12 @@ export default function ExportPage() {
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2">
-                  <h3 className="font-semibold text-gray-900">
-                    Financial Summary Workbook (Excel)
-                  </h3>
+                  <h3 className="font-semibold text-gray-900">{t("excelWorkbookTitle")}</h3>
                   <span className="rounded-full bg-teal-500 px-2 py-0.5 text-xs font-medium text-white">
-                    Recommended
+                    {t("recommended")}
                   </span>
                 </div>
-                <p className="mt-2 text-sm text-gray-600">
-                  Comprehensive Excel workbook with 12 sheets: Dashboard, Transactions, Monthly
-                  Summary, Category Analysis, Accounts, Budgets, Subscriptions, Loans, Investments,
-                  Net Worth, Goals, and Data Dictionary. Includes professional formatting, formulas,
-                  and charts.
-                </p>
+                <p className="mt-2 text-sm text-gray-600">{t("excelWorkbookDescription")}</p>
               </div>
               <div className="flex flex-col gap-2">
                 <button
@@ -454,7 +450,7 @@ export default function ExportPage() {
                   ) : (
                     <>
                       <Download className="h-4 w-4" />
-                      Export Excel
+                      {t("exportExcel")}
                     </>
                   )}
                 </button>
@@ -463,7 +459,7 @@ export default function ExportPage() {
                   className="flex items-center justify-center gap-1 px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
                 >
                   <Settings2 className="h-4 w-4" />
-                  Options
+                  {t("options")}
                   {showExcelOptions ? (
                     <ChevronUp className="h-4 w-4" />
                   ) : (
@@ -500,20 +496,20 @@ export default function ExportPage() {
                 <div>
                   <label className="mb-2 block flex items-center gap-2 text-sm font-medium text-gray-700">
                     <Calendar className="h-4 w-4" />
-                    Date Range
+                    {t("dateRange")}
                   </label>
                   <div className="flex flex-wrap gap-2">
-                    {DATE_RANGE_OPTIONS.map((option) => (
+                    {DATE_RANGE_VALUES.map((value) => (
                       <button
-                        key={option.value}
-                        onClick={() => setDateRange(option.value)}
+                        key={value}
+                        onClick={() => setDateRange(value)}
                         className={`rounded-lg border px-3 py-1.5 text-sm transition-colors ${
-                          dateRange === option.value
+                          dateRange === value
                             ? "border-teal-600 bg-teal-600 text-white"
                             : "border-gray-300 bg-white text-gray-700 hover:border-teal-500"
                         }`}
                       >
-                        {option.label}
+                        {t(`dateRange_${value}`)}
                       </button>
                     ))}
                   </div>
@@ -522,7 +518,7 @@ export default function ExportPage() {
                   {dateRange === "custom" && (
                     <div className="mt-3 flex gap-4">
                       <div>
-                        <label className="mb-1 block text-xs text-gray-500">Start Date</label>
+                        <label className="mb-1 block text-xs text-gray-500">{t("startDate")}</label>
                         <input
                           type="date"
                           value={customStartDate}
@@ -531,7 +527,7 @@ export default function ExportPage() {
                         />
                       </div>
                       <div>
-                        <label className="mb-1 block text-xs text-gray-500">End Date</label>
+                        <label className="mb-1 block text-xs text-gray-500">{t("endDate")}</label>
                         <input
                           type="date"
                           value={customEndDate}
@@ -547,21 +543,24 @@ export default function ExportPage() {
                 <div>
                   <div className="mb-2 flex items-center justify-between">
                     <label className="block text-sm font-medium text-gray-700">
-                      Sheets to Include ({selectedSheetCount} of {SHEET_OPTIONS.length})
+                      {t("sheetsToInclude", {
+                        selected: selectedSheetCount,
+                        total: SHEET_OPTIONS.length,
+                      })}
                     </label>
                     <div className="flex gap-2">
                       <button
                         onClick={selectAllSheets}
                         className="text-xs text-teal-600 hover:text-teal-700"
                       >
-                        Select All
+                        {t("selectAll")}
                       </button>
                       <span className="text-gray-300">|</span>
                       <button
                         onClick={deselectAllSheets}
                         className="text-xs text-gray-500 hover:text-gray-700"
                       >
-                        Deselect All
+                        {t("deselectAll")}
                       </button>
                     </div>
                   </div>
@@ -582,8 +581,10 @@ export default function ExportPage() {
                           className="mt-0.5 rounded border-gray-300 text-teal-600 focus:ring-teal-500"
                         />
                         <div>
-                          <span className="text-sm font-medium text-gray-900">{option.label}</span>
-                          <p className="text-xs text-gray-500">{option.description}</p>
+                          <span className="text-sm font-medium text-gray-900">
+                            {t(option.labelKey)}
+                          </span>
+                          <p className="text-xs text-gray-500">{t(option.descKey)}</p>
                         </div>
                       </label>
                     ))}
@@ -599,11 +600,8 @@ export default function ExportPage() {
               <Database className="h-6 w-6 text-teal-600" />
             </div>
             <div className="flex-1">
-              <h3 className="font-semibold text-gray-900">Full Backup (JSON)</h3>
-              <p className="mt-2 text-sm text-gray-600">
-                Export all data including accounts, transactions, budgets, goals, and settings. Use
-                this for complete backups that can be restored later.
-              </p>
+              <h3 className="font-semibold text-gray-900">{t("fullBackupTitle")}</h3>
+              <p className="mt-2 text-sm text-gray-600">{t("fullBackupDescription")}</p>
             </div>
             <button
               onClick={exportToJSON}
@@ -611,7 +609,7 @@ export default function ExportPage() {
               className="flex items-center gap-2 rounded-lg bg-gray-700 px-4 py-2 text-white transition-colors hover:bg-gray-800 disabled:bg-gray-400"
             >
               <Download className="h-4 w-4" />
-              Export JSON
+              {t("exportJson")}
             </button>
           </div>
 
@@ -621,10 +619,8 @@ export default function ExportPage() {
               <FileText className="h-6 w-6 text-green-600" />
             </div>
             <div className="flex-1">
-              <h3 className="font-semibold text-gray-900">Transactions (CSV)</h3>
-              <p className="mt-2 text-sm text-gray-600">
-                Export transactions to simple CSV format for use in other spreadsheet tools
-              </p>
+              <h3 className="font-semibold text-gray-900">{t("transactionsCsvTitle")}</h3>
+              <p className="mt-2 text-sm text-gray-600">{t("transactionsCsvDescription")}</p>
             </div>
             <button
               onClick={exportTransactionsToCSV}
@@ -632,7 +628,7 @@ export default function ExportPage() {
               className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white transition-colors hover:bg-green-700 disabled:bg-gray-400"
             >
               <Download className="h-4 w-4" />
-              Export CSV
+              {t("exportCsv")}
             </button>
           </div>
         </div>
@@ -640,19 +636,17 @@ export default function ExportPage() {
 
       {/* Import Options */}
       <div className="rounded-lg bg-white p-6 shadow">
-        <h2 className="mb-4 text-xl font-semibold text-gray-900">Import Data</h2>
+        <h2 className="mb-4 text-xl font-semibold text-gray-900">{t("importData")}</h2>
 
         <div className="flex items-start gap-4 rounded-lg border border-gray-200 p-4 transition-colors hover:border-gray-300">
           <div className="rounded-full bg-gray-100 p-4">
             <Upload className="h-6 w-6 text-gray-700" />
           </div>
           <div className="flex-1">
-            <h3 className="font-semibold text-gray-900">Restore from Backup</h3>
-            <p className="mb-4 mt-2 text-sm text-gray-600">
-              Import a previously exported JSON backup file
-            </p>
+            <h3 className="font-semibold text-gray-900">{t("restoreFromBackup")}</h3>
+            <p className="mb-4 mt-2 text-sm text-gray-600">{t("restoreDescription")}</p>
             <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 text-sm text-yellow-800">
-              Warning: This will replace ALL existing data with the backup
+              {t("restoreWarning")}
             </div>
           </div>
           <div>
@@ -671,7 +665,7 @@ export default function ExportPage() {
               }`}
             >
               <Upload className="h-4 w-4" />
-              {isImporting ? "Importing..." : "Import JSON"}
+              {isImporting ? t("importing") : t("importJson")}
             </label>
           </div>
         </div>
@@ -679,58 +673,49 @@ export default function ExportPage() {
 
       {/* Danger Zone */}
       <div className="rounded-lg border-2 border-red-200 bg-white p-6 shadow">
-        <h2 className="mb-4 text-xl font-semibold text-red-900">Danger Zone</h2>
+        <h2 className="mb-4 text-xl font-semibold text-red-900">{t("dangerZone")}</h2>
 
         <div className="flex items-start gap-4 rounded-lg border border-red-200 bg-red-50 p-4">
           <div className="flex-1">
-            <h3 className="font-semibold text-red-900">Delete All Data</h3>
-            <p className="mt-2 text-sm text-red-700">
-              Permanently delete all accounts, transactions, budgets, and settings. This action
-              cannot be undone.
-            </p>
+            <h3 className="font-semibold text-red-900">{t("deleteAllData")}</h3>
+            <p className="mt-2 text-sm text-red-700">{t("deleteAllDataDescription")}</p>
           </div>
           <button
             onClick={clearAllData}
             className="whitespace-nowrap rounded-lg bg-red-600 px-4 py-2 text-white transition-colors hover:bg-red-700"
           >
-            Delete Everything
+            {t("deleteEverything")}
           </button>
         </div>
       </div>
 
       {/* Tips */}
       <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
-        <h3 className="mb-4 font-semibold text-gray-900">Backup Tips</h3>
+        <h3 className="mb-4 font-semibold text-gray-900">{t("backupTips")}</h3>
         <ul className="space-y-2 text-sm text-gray-700">
           <li className="flex items-start gap-2">
             <span className="mt-0.5 text-teal-500">•</span>
-            <span>
-              <strong>Excel export</strong> is best for analysis and sharing - it includes
-              formatting, formulas, and multiple sheets
-            </span>
+            <span>{t("tipExcel")}</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="mt-0.5 text-teal-500">•</span>
-            <span>
-              <strong>JSON backup</strong> is best for restoring data - keep regular backups in a
-              safe location
-            </span>
+            <span>{t("tipJson")}</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="mt-0.5 text-teal-500">•</span>
-            <span>Back up your data regularly (weekly recommended)</span>
+            <span>{t("tipRegularBackup")}</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="mt-0.5 text-teal-500">•</span>
-            <span>Store backups in a safe location (cloud storage, external drive)</span>
+            <span>{t("tipSafeLocation")}</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="mt-0.5 text-teal-500">•</span>
-            <span>Test your backups by importing them to ensure they work</span>
+            <span>{t("tipTestBackups")}</span>
           </li>
           <li className="flex items-start gap-2">
             <span className="mt-0.5 text-teal-500">•</span>
-            <span>All data is stored locally in your browser's IndexedDB</span>
+            <span>{t("tipLocalStorage")}</span>
           </li>
         </ul>
       </div>

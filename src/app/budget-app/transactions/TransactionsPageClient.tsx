@@ -64,11 +64,17 @@ import {
   Upload,
   X as XIcon,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { getCurrentCurrency, getCurrentLocale } from "@/lib/locale-storage";
+import { LOCALE_METADATA } from "@/i18n/config";
+import { formatCurrency as formatCurrencyUtil } from "@/i18n/utils/formatCurrency";
 
 export default function TransactionsPageClient() {
+  const t = useTranslations("transactions");
+  const locale = useLocale();
   const toast = useToast();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -358,7 +364,7 @@ export default function TransactionsPageClient() {
       });
 
       setIsMatchingVendors(true);
-      toast.info(`🔍 Searching for other "${currentVendor}" transactions...`, 3000);
+      toast.info(t("searchingVendorTransactions", { vendor: currentVendor }), 3000);
 
       const perfStart = performance.now();
 
@@ -376,7 +382,11 @@ export default function TransactionsPageClient() {
       if (matches.length >= 1) {
         console.log("[Vendor Matching] Matches found, opening bulk dialog for", transaction.id);
         toast.success(
-          `✓ Found ${matches.length} matching "${currentVendor}" transactions (${searchTime}s)`
+          t("foundMatchingTransactions", {
+            count: matches.length,
+            vendor: currentVendor,
+            time: searchTime,
+          })
         );
 
         setPendingCategorization({
@@ -387,13 +397,11 @@ export default function TransactionsPageClient() {
         setMatchingTransactions(matches);
         setShowVendorBulkConfirm(true);
       } else {
-        toast.info(`No other "${currentVendor}" transactions found (${searchTime}s)`);
+        toast.info(t("noMatchingTransactions", { vendor: currentVendor, time: searchTime }));
       }
     } catch (error) {
       console.error("[Vendor Matching] Error during AI vendor matching:", error);
-      toast.error(
-        "Vendor matching failed. Transaction was saved, but matches could not be loaded."
-      );
+      toast.error(t("vendorMatchingFailed"));
     } finally {
       setIsMatchingVendors(false);
     }
@@ -444,7 +452,7 @@ export default function TransactionsPageClient() {
       }
     } catch (error) {
       console.error("❌ Error saving transaction:", error);
-      toast.error("Failed to save transaction");
+      toast.error(t("failedToSave"));
       void loadData(); // Reload on error to ensure consistency
     } finally {
       setIsSavingTransaction(false);
@@ -465,9 +473,7 @@ export default function TransactionsPageClient() {
         const siblings = await getSplitChildren(deletingTransaction.splitFromId);
         if (siblings.length === 1) {
           // Last child - ask if they want to restore original transaction
-          const shouldRestore = await toast.confirm(
-            "This is the last split item. Restore the original transaction?"
-          );
+          const shouldRestore = await toast.confirm(t("lastSplitItemRestore"));
           if (shouldRestore) {
             await unsplitTransaction(deletingTransaction.splitFromId);
           } else {
@@ -482,12 +488,12 @@ export default function TransactionsPageClient() {
       }
 
       await loadData();
-      toast.success("Transaction deleted successfully");
+      toast.success(t("transactionDeleted"));
       setDeleteConfirmOpen(false);
       setDeletingTransaction(null);
     } catch (error) {
       console.error("Error deleting transaction:", error);
-      toast.error("Failed to delete transaction");
+      toast.error(t("failedToDelete"));
       // Keep dialog open on error
     }
   }
@@ -523,12 +529,12 @@ export default function TransactionsPageClient() {
     try {
       await unsplitTransaction(unsplittingTransaction.splitFromId);
       await loadData();
-      toast.success("Transaction unsplit successfully");
+      toast.success(t("transactionUnsplit"));
       setUnsplitConfirmOpen(false);
       setUnsplittingTransaction(null);
     } catch (error) {
       console.error("Error unsplitting:", error);
-      toast.error("Failed to unsplit transaction");
+      toast.error(t("failedToUnsplit"));
       // Keep dialog open on error
     }
   }
@@ -563,12 +569,12 @@ export default function TransactionsPageClient() {
 
   function initiateBulkCategorization() {
     if (!bulkCategory) {
-      toast.warning("Please select a category");
+      toast.warning(t("pleaseSelectCategory"));
       return;
     }
 
     if (selectedTransactionIds.size === 0) {
-      toast.warning("Please select transactions to categorize");
+      toast.warning(t("pleaseSelectTransactions"));
       return;
     }
 
@@ -587,11 +593,11 @@ export default function TransactionsPageClient() {
 
       await loadData();
       clearSelection();
-      toast.success(`Successfully categorized ${selectedTransactionIds.size} transaction(s)`);
+      toast.success(t("bulkCategorizeSuccess", { count: selectedTransactionIds.size }));
       setBulkConfirmOpen(false);
     } catch (error) {
       console.error("Error bulk categorizing:", error);
-      toast.error("Failed to categorize transactions");
+      toast.error(t("failedToCategorize"));
       // Keep dialog open on error
     }
   }
@@ -609,10 +615,10 @@ export default function TransactionsPageClient() {
 
       await loadData();
       clearSelection();
-      toast.success(`Successfully categorized ${selectedTransactionIds.size} transaction(s)`);
+      toast.success(t("bulkCategorizeSuccess", { count: selectedTransactionIds.size }));
     } catch (error) {
       console.error("Error bulk categorizing:", error);
-      toast.error("Failed to categorize transactions");
+      toast.error(t("failedToCategorize"));
     }
   }
 
@@ -682,11 +688,11 @@ export default function TransactionsPageClient() {
       );
 
       toast.success(
-        `Categorized as ${categoryName}${subcategoryName ? ` - ${subcategoryName}` : ""}`
+        t("categorizedAs", { category: categoryName, subcategory: subcategoryName || "" })
       );
     } catch (error) {
       console.error("Error quick categorizing:", error);
-      toast.error("Failed to categorize transaction");
+      toast.error(t("failedToCategorizeSingle"));
       // Reload on error to ensure consistency
       await loadData();
     }
@@ -726,13 +732,15 @@ export default function TransactionsPageClient() {
         );
 
         toast.success(
-          `Categorized ${transactionIds.length} transactions as ${category}${
-            subcategory ? ` - ${subcategory}` : ""
-          }`
+          t("bulkCategorized", {
+            count: transactionIds.length,
+            category,
+            subcategory: subcategory || "",
+          })
         );
       } catch (error) {
         console.error("Error bulk categorizing:", error);
-        toast.error("Failed to bulk categorize transactions");
+        toast.error(t("failedToBulkCategorize"));
         // Reload on error to ensure consistency
         await loadData();
       }
@@ -829,22 +837,20 @@ export default function TransactionsPageClient() {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-4xl font-bold text-white">Transactions</h1>
+            <h1 className="text-4xl font-bold text-white">{t("title")}</h1>
             <HelpTooltip
               content={
                 <>
-                  <strong>Split Transactions:</strong> Divide a single purchase across multiple
-                  categories. Example: Grocery store visit ($100) → Groceries ($80) + Household
-                  ($20). Click the Split button on any transaction to divide it.
+                  <strong>{t("splitTransactionsLabel")}:</strong> {t("splitTransactionsHelp")}
                 </>
               }
               learnMoreUrl="/docs/user-guide#split-transactions"
-              ariaLabel="More information about transaction features"
+              ariaLabel={t("transactionFeaturesInfo")}
               iconSize="h-5 w-5"
             />
           </div>
           <p className="mt-2 text-lg font-medium text-slate-400">
-            {filteredTransactions.length} transaction{filteredTransactions.length !== 1 ? "s" : ""}
+            {t("transactionCount", { count: filteredTransactions.length })}
           </p>
         </div>
         <button
@@ -855,7 +861,7 @@ export default function TransactionsPageClient() {
           className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-teal-500 px-6 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
         >
           <Plus className="h-5 w-5" />
-          Add Transaction
+          {t("addTransaction")}
         </button>
       </div>
 
@@ -871,12 +877,12 @@ export default function TransactionsPageClient() {
                   htmlFor="search-transactions"
                   className="text-sm font-medium text-foreground"
                 >
-                  Search Transactions
+                  {t("searchTransactions")}
                 </label>
                 <HelpTooltip
-                  content="Fuzzy search by description, merchant, category, notes, or amount. Try 'coffee last week' or '$50-100'."
+                  content={t("searchTransactionsHelp")}
                   learnMoreUrl="/docs/user-guide#search-transactions"
-                  ariaLabel="More information about searching transactions"
+                  ariaLabel={t("searchTransactionsInfo")}
                 />
               </div>
               <TransactionSearchBar
@@ -885,7 +891,7 @@ export default function TransactionsPageClient() {
                 transactions={transactions}
                 categories={categories}
                 resultCount={searchTerm ? filteredTransactions.length : undefined}
-                placeholder="Try 'coffee last week' or 'amount:>50'..."
+                placeholder={t("searchPlaceholder")}
               />
             </div>
 
@@ -893,7 +899,7 @@ export default function TransactionsPageClient() {
             <div>
               <div className="mb-2 flex items-center gap-2">
                 <label htmlFor="account-filter" className="text-sm font-medium text-foreground">
-                  Filter by Account
+                  {t("filterByAccount")}
                 </label>
               </div>
               <select
@@ -902,7 +908,7 @@ export default function TransactionsPageClient() {
                 onChange={(e) => setSelectedAccount(e.target.value)}
                 className="w-full rounded-lg border border-input bg-background px-4 py-3 text-base text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
               >
-                <option value="all">All Accounts</option>
+                <option value="all">{t("allAccounts")}</option>
                 {accounts.map((acct) => (
                   <option key={acct.id} value={acct.id}>
                     {acct.name}
@@ -915,12 +921,12 @@ export default function TransactionsPageClient() {
             <div>
               <div className="mb-2 flex items-center gap-2">
                 <label htmlFor="category-filter" className="text-sm font-medium text-foreground">
-                  Filter by Category
+                  {t("filterByCategory")}
                 </label>
                 <HelpTooltip
-                  content="Show only transactions from specific categories. You can select multiple categories at once using bulk actions."
+                  content={t("filterByCategoryHelp")}
                   learnMoreUrl="/docs/user-guide#filter-transactions"
-                  ariaLabel="More information about filtering by category"
+                  ariaLabel={t("filterByCategoryInfo")}
                 />
               </div>
               <select
@@ -929,7 +935,7 @@ export default function TransactionsPageClient() {
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 className="w-full rounded-lg border border-input bg-background px-4 py-3 text-base text-foreground focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
               >
-                <option value="all">All Categories</option>
+                <option value="all">{t("allCategories")}</option>
                 {categories.map((cat) => (
                   <option key={cat.id} value={cat.name}>
                     {cat.name}
@@ -944,7 +950,7 @@ export default function TransactionsPageClient() {
             {/* Start Date */}
             <div>
               <label htmlFor="start-date" className="mb-1 block text-sm font-medium text-gray-700">
-                From Date
+                {t("fromDate")}
               </label>
               <input
                 id="start-date"
@@ -958,7 +964,7 @@ export default function TransactionsPageClient() {
             {/* End Date */}
             <div>
               <label htmlFor="end-date" className="mb-1 block text-sm font-medium text-gray-700">
-                To Date
+                {t("toDate")}
               </label>
               <input
                 id="end-date"
@@ -975,8 +981,8 @@ export default function TransactionsPageClient() {
               onChange={(e) => setSortBy(e.target.value as "date" | "amount")}
               className="rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             >
-              <option value="date">Sort by Date</option>
-              <option value="amount">Sort by Amount</option>
+              <option value="date">{t("sortByDate")}</option>
+              <option value="amount">{t("sortByAmount")}</option>
             </select>
 
             {/* Sort Direction */}
@@ -985,8 +991,8 @@ export default function TransactionsPageClient() {
               onChange={(e) => setSortDirection(e.target.value as "asc" | "desc")}
               className="rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             >
-              <option value="desc">Newest First</option>
-              <option value="asc">Oldest First</option>
+              <option value="desc">{t("newestFirst")}</option>
+              <option value="asc">{t("oldestFirst")}</option>
             </select>
           </div>
 
@@ -1010,7 +1016,7 @@ export default function TransactionsPageClient() {
                 className="inline-flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-200"
               >
                 <XIcon className="h-4 w-4" />
-                Clear Filters
+                {t("clearFilters")}
               </button>
             </div>
           )}
@@ -1021,7 +1027,7 @@ export default function TransactionsPageClient() {
               <div className="flex items-center gap-2">
                 <Landmark className="h-5 w-5 text-blue-600" />
                 <span className="text-blue-800">
-                  Showing transactions for <strong>{selectedAccountName}</strong>
+                  {t("showingTransactionsFor")} <strong>{selectedAccountName}</strong>
                 </span>
               </div>
               <button
@@ -1029,7 +1035,7 @@ export default function TransactionsPageClient() {
                 className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-800"
               >
                 <XIcon className="h-4 w-4" />
-                Show All
+                {t("showAll")}
               </button>
             </div>
           )}
@@ -1041,29 +1047,50 @@ export default function TransactionsPageClient() {
         <div className="rounded-lg border-l-4 border-green-500 bg-white p-6 shadow-md">
           <div className="mb-3 flex items-center gap-2">
             <TrendingUp className="h-5 w-5 text-green-600" aria-hidden="true" />
-            <p className="text-base font-medium text-gray-700">Total Income</p>
+            <p className="text-base font-medium text-gray-700">{t("totalIncome")}</p>
           </div>
           <p className="flex items-center gap-2 text-3xl font-bold text-green-600">
             <ArrowUp className="h-6 w-6" aria-hidden="true" />
-            <span className="sr-only">Income: </span>${totalIncome.toFixed(2)}
+            <span className="sr-only">{t("incomeLabel")}: </span>
+            {formatCurrencyUtil(
+              totalIncome,
+              getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency,
+              getCurrentLocale()
+            )}
           </p>
         </div>
         <div className="rounded-lg border-l-4 border-red-500 bg-white p-6 shadow-md">
           <div className="mb-3 flex items-center gap-2">
             <TrendingDown className="h-5 w-5 text-red-600" aria-hidden="true" />
-            <p className="text-base font-medium text-gray-700">Total Expenses</p>
+            <p className="text-base font-medium text-gray-700">{t("totalExpenses")}</p>
           </div>
           <p className="flex items-center gap-2 text-3xl font-bold text-red-600">
             <ArrowDown className="h-6 w-6" aria-hidden="true" />
-            <span className="sr-only">Expense: </span>${totalExpenses.toFixed(2)}
+            <span className="sr-only">{t("expenseLabel")}: </span>
+            {formatCurrencyUtil(
+              totalExpenses,
+              getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency,
+              getCurrentLocale()
+            )}
           </p>
         </div>
         <div className="rounded-lg border-l-4 border-blue-500 bg-white p-6 shadow-md">
           <div className="mb-3 flex items-center gap-2">
-            <p className="text-base font-medium text-gray-700">Current Balance</p>
+            <p className="text-base font-medium text-gray-700">{t("currentBalance")}</p>
             {startingBalance !== 0 && (
               <HelpTooltip
-                content={`Starting balance: $${startingBalance.toFixed(2)} + Net change: $${(totalIncome - totalExpenses).toFixed(2)}`}
+                content={t("balanceTooltip", {
+                  startingBalance: formatCurrencyUtil(
+                    startingBalance,
+                    getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency,
+                    getCurrentLocale()
+                  ),
+                  netChange: formatCurrencyUtil(
+                    totalIncome - totalExpenses,
+                    getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency,
+                    getCurrentLocale()
+                  ),
+                })}
               />
             )}
           </div>
@@ -1075,12 +1102,12 @@ export default function TransactionsPageClient() {
             {currentBalance >= 0 ? (
               <>
                 <ArrowUp className="h-6 w-6" aria-hidden="true" />
-                <span className="sr-only">Positive: </span>
+                <span className="sr-only">{t("positive")}: </span>
               </>
             ) : (
               <>
                 <ArrowDown className="h-6 w-6" aria-hidden="true" />
-                <span className="sr-only">Negative: </span>
+                <span className="sr-only">{t("negative")}: </span>
               </>
             )}
             ${Math.abs(currentBalance).toFixed(2)}
@@ -1088,7 +1115,7 @@ export default function TransactionsPageClient() {
           {startingBalance === 0 && (
             <p className="mt-2 text-xs text-gray-500">
               <Link href="/budget-app/accounts" className="text-blue-600 hover:underline">
-                Set account starting balance →
+                {t("setStartingBalance")}
               </Link>
             </p>
           )}
@@ -1119,29 +1146,29 @@ export default function TransactionsPageClient() {
                           }
                         }}
                         className="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-                        title="Select all visible transactions"
+                        title={t("selectAllVisible")}
                       />
                     </th>
                     <th className="w-28 bg-gray-50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 md:px-6">
-                      Date
+                      {t("date")}
                     </th>
                     <th className="bg-gray-50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 md:px-6">
-                      Description
+                      {t("description")}
                     </th>
                     <th className="hidden w-36 bg-gray-50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 sm:table-cell md:px-6">
-                      Category
+                      {t("category")}
                     </th>
                     <th className="hidden w-24 bg-gray-50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-700 md:px-6 lg:table-cell">
-                      Receipt
+                      {t("receipt")}
                     </th>
                     <th className="w-28 bg-gray-50 px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-700 md:px-6">
-                      Amount
+                      {t("amount")}
                     </th>
                     <th className="hidden w-28 bg-gray-50 px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-700 md:px-6 xl:table-cell">
-                      Balance
+                      {t("balance")}
                     </th>
                     <th className="w-28 bg-gray-50 px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider text-gray-700 md:px-6">
-                      Actions
+                      {t("actions")}
                     </th>
                   </tr>
                 </thead>
@@ -1161,7 +1188,7 @@ export default function TransactionsPageClient() {
                         />
                       </td>
                       <td className="whitespace-nowrap px-4 py-4 text-sm font-medium text-gray-900 md:px-6">
-                        {new Date(tx.date).toLocaleDateString()}
+                        {new Date(tx.date).toLocaleDateString(locale)}
                       </td>
                       <td className="max-w-xs px-4 py-4 text-sm text-gray-900 md:px-6">
                         <div>
@@ -1181,7 +1208,7 @@ export default function TransactionsPageClient() {
                             )}
                             {tx.splitFromId && (
                               <span className="inline-flex flex-shrink-0 items-center rounded bg-teal-100 px-2 py-0.5 text-xs font-medium text-teal-700">
-                                Split
+                                {t("split")}
                               </span>
                             )}
                           </div>
@@ -1202,7 +1229,7 @@ export default function TransactionsPageClient() {
                           </span>
                         ) : (
                           <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-800">
-                            Uncategorized
+                            {t("uncategorized")}
                           </span>
                         )}
                       </td>
@@ -1215,7 +1242,7 @@ export default function TransactionsPageClient() {
                             <>
                               <ArrowUp className="h-4 w-4 text-green-600" aria-hidden="true" />
                               <span className="text-sm font-semibold text-green-600">
-                                <span className="sr-only">Income: </span>
+                                <span className="sr-only">{t("incomeLabel")}: </span>
                                 +${Math.abs(tx.amount).toFixed(2)}
                               </span>
                             </>
@@ -1223,7 +1250,7 @@ export default function TransactionsPageClient() {
                             <>
                               <ArrowDown className="h-4 w-4 text-red-600" aria-hidden="true" />
                               <span className="text-sm font-semibold text-red-600">
-                                <span className="sr-only">Expense: </span>
+                                <span className="sr-only">{t("expenseLabel")}: </span>
                                 -${Math.abs(tx.amount).toFixed(2)}
                               </span>
                             </>
@@ -1255,7 +1282,7 @@ export default function TransactionsPageClient() {
                             <button
                               onClick={() => setQuickCategorizingId(tx.id)}
                               className="rounded-md p-1.5 text-green-600 transition-colors hover:bg-green-50 hover:text-green-700"
-                              title="Quick Categorize"
+                              title={t("quickCategorize")}
                             >
                               <Tag className="h-4 w-4" />
                             </button>
@@ -1278,7 +1305,7 @@ export default function TransactionsPageClient() {
                             <button
                               onClick={() => initiateUnsplit(tx)}
                               className="rounded-md p-1.5 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
-                              title="Unsplit transaction"
+                              title={t("unsplitTransaction")}
                             >
                               <Split className="h-4 w-4" />
                             </button>
@@ -1286,7 +1313,7 @@ export default function TransactionsPageClient() {
                             <button
                               onClick={() => openSplitModal(tx)}
                               className="rounded-md p-1.5 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
-                              title="Split transaction"
+                              title={t("splitTransaction")}
                             >
                               <Split className="h-4 w-4" />
                             </button>
@@ -1298,16 +1325,16 @@ export default function TransactionsPageClient() {
                               setShowModal(true);
                             }}
                             className="rounded-md p-1.5 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
-                            title="Edit"
-                            aria-label="Edit transaction"
+                            title={t("edit")}
+                            aria-label={t("editTransaction")}
                           >
                             <Edit className="h-4 w-4" />
                           </button>
                           <button
                             onClick={() => initiateDeleteTransaction(tx)}
                             className="rounded-md p-1.5 text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
-                            title="Delete"
-                            aria-label="Delete transaction"
+                            title={t("delete")}
+                            aria-label={t("deleteTransaction")}
                           >
                             <Trash2 className="h-4 w-4" />
                           </button>
@@ -1376,7 +1403,7 @@ export default function TransactionsPageClient() {
                           )}
                           {tx.splitFromId && (
                             <span className="inline-flex flex-shrink-0 items-center rounded bg-teal-100 px-2.5 py-1 text-sm font-medium text-teal-700">
-                              Split
+                              {t("split")}
                             </span>
                           )}
                         </div>
@@ -1398,10 +1425,12 @@ export default function TransactionsPageClient() {
                             <>
                               <div className="flex items-center gap-1.5">
                                 <ArrowUp className="h-5 w-5 text-green-600" aria-hidden="true" />
-                                <span className="text-sm font-semibold text-green-600">Income</span>
+                                <span className="text-sm font-semibold text-green-600">
+                                  {t("incomeLabel")}
+                                </span>
                               </div>
                               <p className="text-2xl font-bold text-green-600">
-                                <span className="sr-only">Income: </span>
+                                <span className="sr-only">{t("incomeLabel")}: </span>
                                 +${Math.abs(tx.amount).toFixed(2)}
                               </p>
                             </>
@@ -1409,10 +1438,12 @@ export default function TransactionsPageClient() {
                             <>
                               <div className="flex items-center gap-1.5">
                                 <ArrowDown className="h-5 w-5 text-red-600" aria-hidden="true" />
-                                <span className="text-sm font-semibold text-red-600">Expense</span>
+                                <span className="text-sm font-semibold text-red-600">
+                                  {t("expenseLabel")}
+                                </span>
                               </div>
                               <p className="text-2xl font-bold text-red-600">
-                                <span className="sr-only">Expense: </span>
+                                <span className="sr-only">{t("expenseLabel")}: </span>
                                 -${Math.abs(tx.amount).toFixed(2)}
                               </p>
                             </>
@@ -1432,20 +1463,20 @@ export default function TransactionsPageClient() {
                           </span>
                         ) : (
                           <span className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-800">
-                            Uncategorized
+                            {t("uncategorized")}
                           </span>
                         )}
                       </div>
 
                       {/* Date */}
                       <div className="whitespace-nowrap text-base font-medium text-gray-600">
-                        {new Date(tx.date).toLocaleDateString()}
+                        {new Date(tx.date).toLocaleDateString(locale)}
                       </div>
 
                       {/* Running Balance */}
                       {runningBalances.get(tx.id) !== undefined && (
                         <div className="text-right">
-                          <span className="text-xs uppercase text-gray-500">Balance</span>
+                          <span className="text-xs uppercase text-gray-500">{t("balance")}</span>
                           <p
                             className={`text-sm font-semibold ${(runningBalances.get(tx.id) || 0) < 0 ? "text-red-600" : "text-gray-700"}`}
                           >
@@ -1473,7 +1504,7 @@ export default function TransactionsPageClient() {
                           className="inline-flex min-h-[44px] items-center gap-2.5 rounded-lg bg-green-50 px-4 py-2 text-sm font-medium text-green-700 transition-colors hover:bg-green-100"
                         >
                           <Tag className="h-4 w-4" />
-                          Categorize
+                          {t("categorize")}
                         </button>
                       )}
 
@@ -1499,19 +1530,19 @@ export default function TransactionsPageClient() {
                         <button
                           onClick={() => initiateUnsplit(tx)}
                           className="inline-flex min-h-[44px] items-center gap-2.5 rounded-lg bg-teal-50 px-4 py-2 text-sm font-medium text-teal-700 transition-colors hover:bg-teal-100"
-                          title="Unsplit transaction"
+                          title={t("unsplitTransaction")}
                         >
                           <Split className="h-4 w-4" />
-                          Unsplit
+                          {t("unsplit")}
                         </button>
                       ) : (
                         <button
                           onClick={() => openSplitModal(tx)}
                           className="inline-flex min-h-[44px] items-center gap-2.5 rounded-lg bg-teal-50 px-4 py-2 text-sm font-medium text-teal-700 transition-colors hover:bg-teal-100"
-                          title="Split transaction"
+                          title={t("splitTransaction")}
                         >
                           <Split className="h-4 w-4" />
-                          Split
+                          {t("split")}
                         </button>
                       )}
 
@@ -1522,22 +1553,22 @@ export default function TransactionsPageClient() {
                           setShowModal(true);
                         }}
                         className="inline-flex min-h-[44px] items-center gap-2.5 rounded-lg bg-teal-50 px-4 py-2 text-sm font-medium text-teal-700 transition-colors hover:bg-teal-100"
-                        title="Edit"
-                        aria-label="Edit transaction"
+                        title={t("edit")}
+                        aria-label={t("editTransaction")}
                       >
                         <Edit className="h-4 w-4" />
-                        Edit
+                        {t("edit")}
                       </button>
 
                       {/* Delete Button */}
                       <button
                         onClick={() => initiateDeleteTransaction(tx)}
                         className="inline-flex min-h-[44px] items-center gap-2.5 rounded-lg bg-red-50 px-4 py-2 text-sm font-medium text-red-700 transition-colors hover:bg-red-100"
-                        title="Delete"
-                        aria-label="Delete transaction"
+                        title={t("delete")}
+                        aria-label={t("deleteTransaction")}
                       >
                         <Trash2 className="h-4 w-4" />
-                        Delete
+                        {t("delete")}
                       </button>
                     </div>
                   </motion.div>
@@ -1548,15 +1579,15 @@ export default function TransactionsPageClient() {
         ) : (
           <EmptyState
             icon={Receipt}
-            heading="No Transactions Yet"
-            description="Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file."
+            heading={t("noTransactionsYet")}
+            description={t("noTransactionsDescription")}
             primaryCTA={{
-              label: "Add Transaction",
+              label: t("addTransaction"),
               href: "/budget-app/transactions",
               icon: Plus,
             }}
             secondaryCTA={{
-              label: "Import CSV",
+              label: t("importCSV"),
               href: "/budget-app/import",
               icon: Upload,
             }}
@@ -1598,25 +1629,38 @@ export default function TransactionsPageClient() {
         open={deleteConfirmOpen}
         onOpenChange={setDeleteConfirmOpen}
         onConfirm={confirmDeleteTransaction}
-        title="Delete Transaction"
-        description="This action cannot be undone."
+        title={t("deleteTransactionTitle")}
+        description={t("deleteCannotBeUndone")}
         impact={
           deletingTransaction
             ? {
-                title: "You will lose:",
+                title: t("youWillLose"),
                 items: [
-                  `$${Math.abs(deletingTransaction.amount).toFixed(2)} ${deletingTransaction.amount > 0 ? "income" : "expense"} from ${new Date(deletingTransaction.date).toLocaleDateString()}`,
-                  `Description: "${deletingTransaction.description}"`,
+                  t("deleteImpactAmount", {
+                    amount: formatCurrencyUtil(
+                      Math.abs(deletingTransaction.amount),
+                      getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency,
+                      getCurrentLocale()
+                    ),
+                    type: deletingTransaction.amount > 0 ? t("incomeLabel") : t("expenseLabel"),
+                    date: new Date(deletingTransaction.date).toLocaleDateString(getCurrentLocale()),
+                  }),
+                  t("deleteImpactDescription", { description: deletingTransaction.description }),
                   deletingTransaction.category
-                    ? `Category: ${deletingTransaction.category}${deletingTransaction.subcategory ? ` - ${deletingTransaction.subcategory}` : ""}`
+                    ? t("deleteImpactCategory", {
+                        category: deletingTransaction.category,
+                        subcategory: deletingTransaction.subcategory || "",
+                      })
                     : null,
-                  deletingTransaction.notes ? `Notes: "${deletingTransaction.notes}"` : null,
-                  deletingTransaction.splitFromId ? "(This is a split transaction)" : null,
+                  deletingTransaction.notes
+                    ? t("deleteImpactNotes", { notes: deletingTransaction.notes })
+                    : null,
+                  deletingTransaction.splitFromId ? t("deleteImpactSplit") : null,
                 ].filter(Boolean),
               }
             : undefined
         }
-        confirmLabel="Delete Transaction"
+        confirmLabel={t("deleteTransactionTitle")}
         variant="destructive"
         icon={<Trash2 className="h-5 w-5" />}
       />
@@ -1626,21 +1670,21 @@ export default function TransactionsPageClient() {
         open={unsplitConfirmOpen}
         onOpenChange={setUnsplitConfirmOpen}
         onConfirm={confirmUnsplit}
-        title="Restore Original Transaction"
-        description="This will restore the original unsplit transaction and remove all split items."
+        title={t("restoreOriginalTitle")}
+        description={t("restoreOriginalDescription")}
         impact={
           unsplittingTransaction
             ? {
-                title: "What will happen:",
+                title: t("whatWillHappen"),
                 items: [
-                  "All split items will be removed",
-                  "The original transaction will be restored",
-                  "Categories and notes from splits will be lost",
+                  t("allSplitItemsRemoved"),
+                  t("originalTransactionRestored"),
+                  t("categoriesAndNotesLost"),
                 ],
               }
             : undefined
         }
-        confirmLabel="Restore Original"
+        confirmLabel={t("restoreOriginal")}
         variant="default"
         icon={<Split className="h-5 w-5" />}
       />
@@ -1650,17 +1694,21 @@ export default function TransactionsPageClient() {
         open={bulkConfirmOpen}
         onOpenChange={setBulkConfirmOpen}
         onConfirm={confirmBulkCategorization}
-        title="Bulk Categorize Transactions"
-        description={`Apply "${bulkCategory}${bulkSubcategory ? ` - ${bulkSubcategory}` : ""}" to ${selectedTransactionIds.size} transaction(s)?`}
+        title={t("bulkCategorizeTitle")}
+        description={t("bulkCategorizeDescription", {
+          category: bulkCategory,
+          subcategory: bulkSubcategory || "",
+          count: selectedTransactionIds.size,
+        })}
         impact={{
-          title: "This will update:",
+          title: t("thisWillUpdate"),
           items: [
-            `${selectedTransactionIds.size} transaction${selectedTransactionIds.size === 1 ? "" : "s"}`,
-            `Category: ${bulkCategory}${bulkSubcategory ? ` - ${bulkSubcategory}` : ""}`,
-            "Any existing categories will be replaced",
+            t("transactionCount", { count: selectedTransactionIds.size }),
+            t("bulkCategoryLabel", { category: bulkCategory, subcategory: bulkSubcategory || "" }),
+            t("existingCategoriesReplaced"),
           ],
         }}
-        confirmLabel="Apply to Selected"
+        confirmLabel={t("applyToSelected")}
         variant="default"
         icon={<Tag className="h-5 w-5" />}
       />
@@ -1686,7 +1734,7 @@ export default function TransactionsPageClient() {
             setIsMatchingVendors(true);
 
             // Show immediate feedback with vendor name (auto-dismiss after 3s)
-            toast.info(`🔍 Searching for ${vendorName} transactions...`, 3000);
+            toast.info(t("searchingVendorTransactions", { vendor: vendorName }), 3000);
 
             const perfStart = performance.now();
 
@@ -1707,7 +1755,11 @@ export default function TransactionsPageClient() {
               if (matches.length >= 2) {
                 // Show success toast with match count
                 toast.success(
-                  `✓ Found ${matches.length} matching ${vendorName} transactions (${searchTime}s)`
+                  t("foundMatchingTransactions", {
+                    count: matches.length,
+                    vendor: vendorName,
+                    time: searchTime,
+                  })
                 );
 
                 // Found matches - show confirmation dialog
@@ -1716,7 +1768,7 @@ export default function TransactionsPageClient() {
                 setShowVendorBulkConfirm(true);
               } else {
                 // Show info toast - no matches
-                toast.info(`No other ${vendorName} transactions found (${searchTime}s)`);
+                toast.info(t("noMatchingTransactions", { vendor: vendorName, time: searchTime }));
               }
             } catch (error) {
               // Ensure loading state is cleared even on error
@@ -1727,7 +1779,7 @@ export default function TransactionsPageClient() {
 
               // The function should have already fallen back to string matching,
               // but if it still throws, we'll just continue without bulk categorization
-              toast.info(`Using basic matching for ${vendorName} transactions`);
+              toast.info(t("usingBasicMatching", { vendor: vendorName }));
             }
           }
         }}

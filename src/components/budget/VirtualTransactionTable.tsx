@@ -12,6 +12,8 @@ import { useRef, useMemo } from "react";
 import { Edit, Trash2, Tag, Split, ArrowUp, ArrowDown } from "lucide-react";
 import type { Transaction, Category } from "@/types/budget";
 import { ReceiptThumbnail } from "./ReceiptThumbnail";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { getCurrentCurrency, getCurrentLocale } from "@/lib/locale-storage";
 
 interface VirtualTransactionTableProps {
   transactions: Transaction[];
@@ -50,8 +52,11 @@ export function VirtualTransactionTable({
   onCategorySelect,
   onReceiptDeleted,
 }: VirtualTransactionTableProps) {
+  const t = useTranslations("transactions");
   const tAria = useTranslations("aria");
   const parentRef = useRef<HTMLDivElement>(null);
+  const currency = getCurrentCurrency() || "USD";
+  const locale = getCurrentLocale();
 
   // Memoize row virtualizer for performance
   const rowVirtualizer = useVirtualizer({
@@ -83,24 +88,26 @@ export function VirtualTransactionTable({
                 }
               }}
               className="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
-              title="Select all visible transactions"
+              title={t("selectAllVisible")}
             />
           </div>
-          <div className="text-xs font-semibold uppercase tracking-wider text-gray-700">Date</div>
           <div className="text-xs font-semibold uppercase tracking-wider text-gray-700">
-            Description
+            {t("date")}
+          </div>
+          <div className="text-xs font-semibold uppercase tracking-wider text-gray-700">
+            {t("description")}
           </div>
           <div className="hidden text-xs font-semibold uppercase tracking-wider text-gray-700 sm:block">
-            Category
+            {t("category")}
           </div>
           <div className="hidden text-xs font-semibold uppercase tracking-wider text-gray-700 lg:block">
-            Receipt
+            {t("receipt")}
           </div>
           <div className="text-end text-xs font-semibold uppercase tracking-wider text-gray-700">
-            Amount
+            {t("amount")}
           </div>
           <div className="text-end text-xs font-semibold uppercase tracking-wider text-gray-700">
-            Actions
+            {t("actions")}
           </div>
         </div>
       </div>
@@ -153,7 +160,7 @@ export function VirtualTransactionTable({
 
                   {/* Date */}
                   <div className="whitespace-nowrap text-sm font-medium text-gray-900">
-                    {new Date(tx.date).toLocaleDateString()}
+                    {new Date(tx.date).toLocaleDateString(locale)}
                   </div>
 
                   {/* Description */}
@@ -162,7 +169,7 @@ export function VirtualTransactionTable({
                       <span className="text-sm font-semibold">{tx.description}</span>
                       {tx.splitFromId && (
                         <span className="inline-flex items-center rounded bg-teal-100 px-2 py-0.5 text-xs font-medium text-teal-700">
-                          Split
+                          {t("split")}
                         </span>
                       )}
                     </div>
@@ -178,7 +185,7 @@ export function VirtualTransactionTable({
                       </span>
                     ) : (
                       <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-800">
-                        Uncategorized
+                        {t("uncategorized")}
                       </span>
                     )}
                   </div>
@@ -195,16 +202,16 @@ export function VirtualTransactionTable({
                         <>
                           <ArrowUp className="h-4 w-4 text-green-600" aria-hidden="true" />
                           <span className="text-sm font-semibold text-green-600">
-                            <span className="sr-only">Income: </span>
-                            +${Math.abs(tx.amount).toFixed(2)}
+                            <span className="sr-only">{t("incomeLabel")}: </span>
+                            {formatCurrency(Math.abs(tx.amount), currency, locale)}
                           </span>
                         </>
                       ) : (
                         <>
                           <ArrowDown className="h-4 w-4 text-red-600" aria-hidden="true" />
                           <span className="text-sm font-semibold text-red-600">
-                            <span className="sr-only">Expense: </span>
-                            -${Math.abs(tx.amount).toFixed(2)}
+                            <span className="sr-only">{t("expenseLabel")}: </span>-
+                            {formatCurrency(Math.abs(tx.amount), currency, locale)}
                           </span>
                         </>
                       )}
@@ -220,7 +227,7 @@ export function VirtualTransactionTable({
                           <button
                             onClick={() => onQuickCategorize(tx)}
                             className="rounded-md p-1.5 text-green-600 transition-colors hover:bg-green-50 hover:text-green-700"
-                            title="Quick Categorize"
+                            title={t("quickCategorize")}
                           >
                             <Tag className="h-4 w-4" />
                           </button>
@@ -235,7 +242,7 @@ export function VirtualTransactionTable({
                               <div className="absolute end-0 top-8 z-20 max-h-96 w-64 overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg">
                                 <div className="sticky top-0 border-b border-gray-200 bg-white p-3">
                                   <p className="text-sm font-semibold text-gray-700">
-                                    Quick Categorize
+                                    {t("quickCategorize")}
                                   </p>
                                 </div>
                                 <div className="p-2">
@@ -274,7 +281,7 @@ export function VirtualTransactionTable({
                         <button
                           onClick={() => onUnsplit(tx)}
                           className="rounded-md p-1.5 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
-                          title="Unsplit transaction"
+                          title={t("unsplitTransaction")}
                         >
                           <Split className="h-4 w-4" />
                         </button>
@@ -282,7 +289,7 @@ export function VirtualTransactionTable({
                         <button
                           onClick={() => onSplit(tx)}
                           className="rounded-md p-1.5 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
-                          title="Split transaction"
+                          title={t("splitTransaction")}
                         >
                           <Split className="h-4 w-4" />
                         </button>
@@ -292,7 +299,7 @@ export function VirtualTransactionTable({
                       <button
                         onClick={() => onEdit(tx)}
                         className="rounded-md p-1.5 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
-                        title="Edit"
+                        title={t("edit")}
                         aria-label={tAria("editTransaction")}
                       >
                         <Edit className="h-4 w-4" />
@@ -302,7 +309,7 @@ export function VirtualTransactionTable({
                       <button
                         onClick={() => onDelete(tx)}
                         className="rounded-md p-1.5 text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
-                        title="Delete"
+                        title={t("delete")}
                         aria-label={tAria("deleteTransaction")}
                       >
                         <Trash2 className="h-4 w-4" />

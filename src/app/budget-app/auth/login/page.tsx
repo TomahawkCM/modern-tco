@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
 import { Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -16,6 +17,7 @@ export default function BudgetLoginPage() {
   const [error, setError] = useState<string | null>(null);
   const { signIn, user } = useAuth();
   const router = useRouter();
+  const t = useTranslations("auth");
 
   // Redirect if already logged in?
   // We'll let the layout/guard handle that typically, but good to have here too maybe.
@@ -34,7 +36,7 @@ export default function BudgetLoginPage() {
 
       router.push("/budget-app");
     } catch (err: any) {
-      setError(err.message || "Failed to sign in");
+      setError(err.message || t("login.defaultError"));
     } finally {
       setIsSubmitting(false);
     }
@@ -43,8 +45,8 @@ export default function BudgetLoginPage() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-white">Welcome Back</h2>
-        <p className="mt-2 text-sm text-slate-400">Sign in to your BudgetPro account</p>
+        <h2 className="text-2xl font-bold text-white">{t("login.title")}</h2>
+        <p className="mt-2 text-sm text-slate-400">{t("login.subtitle")}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -55,10 +57,10 @@ export default function BudgetLoginPage() {
         )}
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Email</label>
+          <label className="text-sm font-medium text-slate-300">{t("login.emailLabel")}</label>
           <Input
             type="email"
-            placeholder="you@example.com"
+            placeholder={t("login.emailPlaceholder")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="border-white/10 bg-white/5 text-white placeholder:text-slate-500 focus:border-teal-500 focus:ring-teal-500/20"
@@ -69,12 +71,12 @@ export default function BudgetLoginPage() {
 
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-300">Password</label>
+            <label className="text-sm font-medium text-slate-300">{t("login.passwordLabel")}</label>
             <Link
               href="/budget-app/auth/forgot-password"
               className="text-xs text-teal-400 hover:text-teal-300"
             >
-              Forgot password?
+              {t("login.forgotPassword")}
             </Link>
           </div>
           <Input
@@ -94,17 +96,17 @@ export default function BudgetLoginPage() {
           disabled={isSubmitting}
         >
           {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-          Sign In
+          {t("login.signInButton")}
         </Button>
       </form>
 
       <div className="text-center text-sm text-slate-400">
-        Don&apos;t have an account?{" "}
+        {t("login.noAccount")}{" "}
         <Link
           href="/budget-app/auth/signup"
           className="font-medium text-teal-400 hover:text-teal-300"
         >
-          Start your free trial
+          {t("login.startFreeTrial")}
         </Link>
       </div>
     </div>

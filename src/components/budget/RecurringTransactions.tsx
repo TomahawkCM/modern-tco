@@ -11,6 +11,8 @@ import { useTranslations } from "next-intl";
 import { RefreshCw, Calendar, DollarSign } from "lucide-react";
 import type { RecurringPattern } from "@/lib/analytics/recurring-detector";
 import type { Transaction } from "@/types/budget";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { getCurrentCurrency, getCurrentLocale } from "@/lib/locale-storage";
 
 interface RecurringTransactionsProps {
   patterns: RecurringPattern[];
@@ -18,6 +20,8 @@ interface RecurringTransactionsProps {
 
 export function RecurringTransactions({ patterns }: RecurringTransactionsProps) {
   const t = useTranslations("recurringTransactions");
+  const currency = getCurrentCurrency() || "USD";
+  const locale = getCurrentLocale();
 
   if (patterns.length === 0) {
     return null;
@@ -52,7 +56,9 @@ export function RecurringTransactions({ patterns }: RecurringTransactionsProps) 
         </div>
         <div className="text-end">
           <div className="text-xs text-gray-600">{t("estimatedMonthly")}</div>
-          <div className="text-xl font-bold text-teal-600">${totalMonthly.toFixed(2)}</div>
+          <div className="text-xl font-bold text-teal-600">
+            {formatCurrency(totalMonthly, currency, locale)}
+          </div>
         </div>
       </div>
 
@@ -87,12 +93,12 @@ export function RecurringTransactions({ patterns }: RecurringTransactionsProps) 
                   <div className="flex items-center gap-4 text-sm text-gray-600">
                     <div className="flex items-center gap-2">
                       <DollarSign className="h-3 w-3" />
-                      <span>${pattern.averageAmount.toFixed(2)}</span>
+                      <span>{formatCurrency(pattern.averageAmount, currency, locale)}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Calendar className="h-3 w-3" />
                       <span>
-                        {t("next", { date: pattern.nextExpectedDate.toLocaleDateString() })}
+                        {t("next", { date: pattern.nextExpectedDate.toLocaleDateString(locale) })}
                       </span>
                       {isUpcoming && (
                         <span className="font-medium text-amber-700">
@@ -114,7 +120,7 @@ export function RecurringTransactions({ patterns }: RecurringTransactionsProps) 
 
                 <div className="text-end">
                   <div className="text-sm font-semibold text-gray-900">
-                    ${pattern.averageAmount.toFixed(2)}
+                    {formatCurrency(pattern.averageAmount, currency, locale)}
                   </div>
                   <div className="text-xs text-gray-500">
                     {pattern.frequency === "weekly" && t("perPeriod.week")}

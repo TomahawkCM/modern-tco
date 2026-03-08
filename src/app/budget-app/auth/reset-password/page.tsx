@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createClient } from "@/utils/supabase/client";
 import { CheckCircle2, Loader2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
@@ -19,6 +20,7 @@ function ResetPasswordForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const supabase = createClient();
+  const t = useTranslations("auth");
 
   useEffect(() => {
     // Check if we have a valid recovery session
@@ -37,12 +39,12 @@ function ResetPasswordForm() {
     setError(null);
 
     if (password.length < 8) {
-      setError("Password must be at least 8 characters");
+      setError(t("resetPassword.passwordTooShort"));
       return;
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setError(t("resetPassword.passwordsMismatch"));
       return;
     }
 
@@ -61,7 +63,7 @@ function ResetPasswordForm() {
         router.push("/budget-app/auth/login");
       }, 3000);
     } catch (err: any) {
-      setError(err.message || "Failed to reset password");
+      setError(err.message || t("resetPassword.defaultError"));
     } finally {
       setIsSubmitting(false);
     }
@@ -81,15 +83,15 @@ function ResetPasswordForm() {
     return (
       <div className="space-y-6">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-white">Invalid or Expired Link</h2>
-          <p className="mt-2 text-sm text-slate-400">
-            This password reset link is invalid or has expired. Please request a new one.
-          </p>
+          <h2 className="text-2xl font-bold text-white">{t("resetPassword.invalidLinkTitle")}</h2>
+          <p className="mt-2 text-sm text-slate-400">{t("resetPassword.invalidLinkDescription")}</p>
         </div>
 
         <div className="text-center">
           <Link href="/budget-app/auth/forgot-password">
-            <Button className="bg-teal-500 text-white hover:bg-teal-400">Request New Link</Button>
+            <Button className="bg-teal-500 text-white hover:bg-teal-400">
+              {t("resetPassword.requestNewLink")}
+            </Button>
           </Link>
         </div>
       </div>
@@ -103,10 +105,8 @@ function ResetPasswordForm() {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal-500/20">
             <CheckCircle2 className="h-6 w-6 text-teal-400" />
           </div>
-          <h2 className="mt-4 text-2xl font-bold text-white">Password Updated</h2>
-          <p className="mt-2 text-sm text-slate-400">
-            Your password has been successfully reset. Redirecting you to sign in...
-          </p>
+          <h2 className="mt-4 text-2xl font-bold text-white">{t("resetPassword.successTitle")}</h2>
+          <p className="mt-2 text-sm text-slate-400">{t("resetPassword.successDescription")}</p>
         </div>
       </div>
     );
@@ -115,8 +115,8 @@ function ResetPasswordForm() {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-white">Set New Password</h2>
-        <p className="mt-2 text-sm text-slate-400">Enter your new password below</p>
+        <h2 className="text-2xl font-bold text-white">{t("resetPassword.title")}</h2>
+        <p className="mt-2 text-sm text-slate-400">{t("resetPassword.subtitle")}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -127,7 +127,9 @@ function ResetPasswordForm() {
         )}
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">New Password</label>
+          <label className="text-sm font-medium text-slate-300">
+            {t("resetPassword.newPasswordLabel")}
+          </label>
           <Input
             type="password"
             placeholder="••••••••"
@@ -138,11 +140,13 @@ function ResetPasswordForm() {
             disabled={isSubmitting}
             minLength={8}
           />
-          <p className="text-xs text-slate-500">Must be at least 8 characters</p>
+          <p className="text-xs text-slate-500">{t("resetPassword.passwordHint")}</p>
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-300">Confirm Password</label>
+          <label className="text-sm font-medium text-slate-300">
+            {t("resetPassword.confirmPasswordLabel")}
+          </label>
           <Input
             type="password"
             placeholder="••••••••"
@@ -160,7 +164,7 @@ function ResetPasswordForm() {
           disabled={isSubmitting}
         >
           {isSubmitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-          Reset Password
+          {t("resetPassword.resetButton")}
         </Button>
       </form>
     </div>

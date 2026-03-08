@@ -39,6 +39,7 @@ export function ProfileEditDialog({
   onSuccess,
 }: ProfileEditDialogProps) {
   const tAria = useTranslations("aria");
+  const tProfile = useTranslations("profileDialog");
   const { updateProfile } = useProfile();
 
   const [name, setName] = useState("");
@@ -63,11 +64,11 @@ export function ProfileEditDialog({
 
   const validateForm = (): string | null => {
     if (!name.trim()) {
-      return "Please enter a name for the profile";
+      return tProfile("errorNameRequired");
     }
 
     if (name.trim().length > 30) {
-      return "Name must be 30 characters or less";
+      return tProfile("errorNameTooLong");
     }
 
     return null;
@@ -96,7 +97,7 @@ export function ProfileEditDialog({
       handleClose();
       onSuccess?.();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to update profile");
+      setError(err instanceof Error ? err.message : tProfile("errorUpdateFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -111,9 +112,9 @@ export function ProfileEditDialog({
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Edit className="h-5 w-5" />
-              Edit Profile
+              {tProfile("editTitle")}
             </DialogTitle>
-            <DialogDescription>Update the profile name and avatar color.</DialogDescription>
+            <DialogDescription>{tProfile("editDescription")}</DialogDescription>
           </DialogHeader>
 
           <div className="grid gap-4 py-4">
@@ -149,12 +150,12 @@ export function ProfileEditDialog({
 
             {/* Name Input */}
             <div className="grid gap-2">
-              <Label htmlFor="edit-name">Name</Label>
+              <Label htmlFor="edit-name">{tProfile("nameLabel")}</Label>
               <Input
                 id="edit-name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Enter profile name"
+                placeholder={tProfile("namePlaceholder")}
                 maxLength={30}
                 autoFocus
               />
@@ -162,9 +163,7 @@ export function ProfileEditDialog({
 
             {/* Default Profile Badge */}
             {profile.isDefault && (
-              <p className="text-sm text-muted-foreground">
-                This is the default profile and will be selected on app start.
-              </p>
+              <p className="text-sm text-muted-foreground">{tProfile("defaultProfileNote")}</p>
             )}
 
             {/* Error Display */}
@@ -173,11 +172,11 @@ export function ProfileEditDialog({
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={handleClose} disabled={isLoading}>
-              Cancel
+              {tProfile("cancel")}
             </Button>
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Loader2 className="me-2 h-4 w-4 animate-spin" />}
-              Save Changes
+              {tProfile("saveChanges")}
             </Button>
           </DialogFooter>
         </form>

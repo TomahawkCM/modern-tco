@@ -178,7 +178,8 @@ export function BalanceReconciliationModal({
               <div className="flex items-center gap-3">
                 <Calendar className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm text-foreground">
-                  {dateRangeStart.toLocaleDateString()} - {dateRangeEnd.toLocaleDateString()}
+                  {dateRangeStart.toLocaleDateString(locale)} -{" "}
+                  {dateRangeEnd.toLocaleDateString(locale)}
                 </span>
               </div>
             )}
@@ -222,7 +223,7 @@ export function BalanceReconciliationModal({
                   step="0.01"
                   inputMode="decimal"
                   autoFocus
-                  className="min-h-[56px] w-full rounded-lg border-2 border-input bg-background ps-8 pe-4 text-xl font-medium text-foreground transition-colors focus:border-teal-500 focus:ring-2 focus:ring-teal-500"
+                  className="min-h-[56px] w-full rounded-lg border-2 border-input bg-background pe-4 ps-8 text-xl font-medium text-foreground transition-colors focus:border-teal-500 focus:ring-2 focus:ring-teal-500"
                   aria-describedby="balance-helper"
                 />
               </div>

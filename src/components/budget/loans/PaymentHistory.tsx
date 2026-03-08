@@ -30,6 +30,10 @@ import {
   type TransactionMatch,
 } from "@/lib/loans/transaction-matcher";
 import { format } from "date-fns";
+import { useLocale, useTranslations } from "next-intl";
+import type { SupportedLocale } from "@/i18n/config";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 
 interface PaymentHistoryProps {
   loan: Loan;
@@ -37,6 +41,9 @@ interface PaymentHistoryProps {
 }
 
 export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
+  const t = useTranslations("paymentHistoryPanel");
+  const currency = useDefaultCurrency();
+  const locale = useLocale() as SupportedLocale;
   const [payments, setPayments] = useState<LoanPayment[]>([]);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [suggestedMatches, setSuggestedMatches] = useState<TransactionMatch[]>([]);
@@ -135,7 +142,7 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
       onLoanUpdate?.();
     } catch (error) {
       console.error("Error adding payment:", error);
-      alert("Failed to add payment. Please try again.");
+      alert(t("addPaymentError"));
     }
   }
 
@@ -151,14 +158,14 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
         extraPrincipal: match.suggestedExtraPrincipal,
         balanceAfter:
           loan.currentBalance - (match.suggestedPrincipal + match.suggestedExtraPrincipal),
-        notes: `Linked from transaction: ${match.transaction.description}`,
+        notes: t("linkedFromTransaction", { description: match.transaction.description }),
         transactionId: match.transaction.id,
         isScheduled: false,
       });
 
       // Update transaction to mark it as linked
       await db.transactions.update(match.transaction.id, {
-        category: `Loan Payment - ${loan.name}`,
+        category: t("loanPaymentCategory", { name: loan.name }),
       });
 
       // Reload data
@@ -166,14 +173,14 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
       onLoanUpdate?.();
     } catch (error) {
       console.error("Error linking transaction:", error);
-      alert("Failed to link transaction. Please try again.");
+      alert(t("linkTransactionError"));
     }
   }
 
   async function handleUnlinkPayment(payment: LoanPayment) {
     if (!payment.transactionId) return;
 
-    if (!confirm("Unlink this payment from the transaction?")) return;
+    if (!confirm(t("unlinkConfirm"))) return;
 
     try {
       // Update payment to remove transaction link
@@ -182,7 +189,7 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
       // Optionally reset transaction category
       if (payment.transactionId) {
         await db.transactions.update(payment.transactionId, {
-          category: "Uncategorized",
+          category: t("uncategorized"),
         });
       }
 
@@ -191,12 +198,12 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
       onLoanUpdate?.();
     } catch (error) {
       console.error("Error unlinking payment:", error);
-      alert("Failed to unlink payment. Please try again.");
+      alert(t("unlinkError"));
     }
   }
 
   async function handleDeletePayment(payment: LoanPayment) {
-    if (!confirm("Delete this payment record? This action cannot be undone.")) return;
+    if (!confirm(t("deleteConfirm"))) return;
 
     try {
       await deletePayment(payment.id);
@@ -204,7 +211,7 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
       onLoanUpdate?.();
     } catch (error) {
       console.error("Error deleting payment:", error);
-      alert("Failed to delete payment. Please try again.");
+      alert(t("deleteError"));
     }
   }
 
@@ -213,7 +220,7 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
       <div className="flex items-center justify-center py-12">
         <div className="text-center">
           <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-teal-500"></div>
-          <p className="text-gray-500">Loading payment history...</p>
+          <p className="text-gray-500">{t("loading")}</p>
         </div>
       </div>
     );
@@ -229,16 +236,15 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
               <div>
                 <CardTitle className="flex items-center gap-2 text-lg">
                   <AlertCircle className="h-5 w-5 text-teal-600" />
-                  Suggested Transaction Matches
+                  {t("suggestedMatches")}
                 </CardTitle>
                 <CardDescription>
-                  We found {visibleMatches.length} transaction
-                  {visibleMatches.length !== 1 ? "s" : ""} that might be loan payments
+                  {t("suggestedMatchesDescription", { count: visibleMatches.length })}
                 </CardDescription>
               </div>
               {suggestedMatches.length > visibleMatches.length && (
                 <span className="text-xs text-gray-500">
-                  {suggestedMatches.length - visibleMatches.length} dismissed
+                  {t("dismissed", { count: suggestedMatches.length - visibleMatches.length })}
                 </span>
               )}
             </div>
@@ -266,10 +272,10 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
                         }`}
                       >
                         {match.confidence === "high"
-                          ? "High Confidence"
+                          ? t("highConfidence")
                           : match.confidence === "medium"
-                            ? "Medium Confidence"
-                            : "Low Confidence"}
+                            ? t("mediumConfidence")
+                            : t("lowConfidence")}
                       </span>
                     </div>
                     <p
@@ -280,7 +286,7 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
                     </p>
                   </div>
                   <p className="whitespace-nowrap text-lg font-bold text-gray-900">
-                    ${Math.abs(match.transaction.amount).toLocaleString()}
+                    {formatCurrency(Math.abs(match.transaction.amount), currency, locale)}
                   </p>
                 </div>
 
@@ -296,22 +302,22 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
                 {/* Payment Split Preview */}
                 <div className="mb-3 grid grid-cols-3 gap-2 rounded bg-gray-50 p-2 text-xs">
                   <div className="text-center">
-                    <span className="block text-gray-500">Principal</span>
+                    <span className="block text-gray-500">{t("principal")}</span>
                     <span className="font-semibold text-teal-600">
-                      ${match.suggestedPrincipal.toFixed(2)}
+                      {formatCurrency(match.suggestedPrincipal, currency, locale)}
                     </span>
                   </div>
                   <div className="text-center">
-                    <span className="block text-gray-500">Interest</span>
+                    <span className="block text-gray-500">{t("interest")}</span>
                     <span className="font-semibold text-red-600">
-                      ${match.suggestedInterest.toFixed(2)}
+                      {formatCurrency(match.suggestedInterest, currency, locale)}
                     </span>
                   </div>
                   {match.suggestedExtraPrincipal > 0 && (
                     <div className="text-center">
-                      <span className="block text-gray-500">Extra</span>
+                      <span className="block text-gray-500">{t("extra")}</span>
                       <span className="font-semibold text-green-600">
-                        ${match.suggestedExtraPrincipal.toFixed(2)}
+                        {formatCurrency(match.suggestedExtraPrincipal, currency, locale)}
                       </span>
                     </div>
                   )}
@@ -323,18 +329,18 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
                     <a
                       href={`/budget-app/transactions?search=${encodeURIComponent(match.transaction.description)}`}
                       className="inline-flex items-center gap-1 rounded px-2 py-1 text-xs text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
-                      title="View transaction"
+                      title={t("viewTransaction")}
                     >
                       <ExternalLink className="h-3 w-3" />
-                      View
+                      {t("view")}
                     </a>
                     <button
                       onClick={() => dismissMatch(match.transaction.id)}
                       className="inline-flex items-center gap-1 rounded px-2 py-1 text-xs text-gray-500 transition-colors hover:bg-red-50 hover:text-red-600"
-                      title="Dismiss this match"
+                      title={t("dismissThisMatch")}
                     >
                       <XIcon className="h-3 w-3" />
-                      Dismiss
+                      {t("dismiss")}
                     </button>
                   </div>
                   <Button
@@ -343,7 +349,7 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
                     className="bg-teal-600 hover:bg-teal-700"
                   >
                     <LinkIcon className="me-2 h-4 w-4" />
-                    Link Payment
+                    {t("linkPayment")}
                   </Button>
                 </div>
               </div>
@@ -357,15 +363,15 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle>Payment History</CardTitle>
-              <CardDescription>Track your loan payments and link to transactions</CardDescription>
+              <CardTitle>{t("title")}</CardTitle>
+              <CardDescription>{t("description")}</CardDescription>
             </div>
             <Button
               onClick={() => setShowAddPayment(!showAddPayment)}
               className="bg-teal-500 hover:bg-teal-600"
             >
               <Plus className="me-2 h-4 w-4" />
-              Add Payment
+              {t("addPayment")}
             </Button>
           </div>
         </CardHeader>
@@ -374,7 +380,7 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
           <CardContent className="border-t border-gray-200 pt-6">
             <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
-                <Label htmlFor="paymentDate">Payment Date</Label>
+                <Label htmlFor="paymentDate">{t("paymentDate")}</Label>
                 <Input
                   id="paymentDate"
                   type="date"
@@ -385,7 +391,7 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
               </div>
 
               <div>
-                <Label htmlFor="paymentAmount">Payment Amount</Label>
+                <Label htmlFor="paymentAmount">{t("paymentAmount")}</Label>
                 <div className="relative mt-1">
                   <DollarSign className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                   <Input
@@ -400,7 +406,7 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
               </div>
 
               <div>
-                <Label htmlFor="extraPrincipal">Extra Principal (Optional)</Label>
+                <Label htmlFor="extraPrincipal">{t("extraPrincipalLabel")}</Label>
                 <div className="relative mt-1">
                   <DollarSign className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                   <Input
@@ -415,12 +421,12 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
               </div>
 
               <div>
-                <Label htmlFor="notes">Notes (Optional)</Label>
+                <Label htmlFor="notes">{t("notesLabel")}</Label>
                 <Input
                   id="notes"
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Payment notes..."
+                  placeholder={t("notesPlaceholder")}
                   className="mt-1"
                 />
               </div>
@@ -428,10 +434,10 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
 
             <div className="flex justify-end gap-2">
               <Button variant="outline" onClick={() => setShowAddPayment(false)}>
-                Cancel
+                {t("cancel")}
               </Button>
               <Button onClick={handleAddPayment} className="bg-teal-500 hover:bg-teal-600">
-                Save Payment
+                {t("savePayment")}
               </Button>
             </div>
           </CardContent>
@@ -441,32 +447,38 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
           {payments.length === 0 ? (
             <div className="py-12 text-center">
               <Calendar className="mx-auto mb-4 h-16 w-16 text-gray-300" />
-              <p className="mb-2 text-gray-600">No payment history yet</p>
-              <p className="text-sm text-gray-500">
-                Add payments manually or link them from your transactions
-              </p>
+              <p className="mb-2 text-gray-600">{t("emptyState")}</p>
+              <p className="text-sm text-gray-500">{t("emptyStateDescription")}</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-gray-200 bg-gray-50">
-                    <th className="px-4 py-3 text-start font-medium text-gray-700">Date</th>
-                    <th className="px-4 py-3 text-end font-medium text-gray-700">Amount</th>
-                    <th className="px-4 py-3 text-end font-medium text-gray-700">Principal</th>
-                    <th className="px-4 py-3 text-end font-medium text-gray-700">Interest</th>
-                    <th className="px-4 py-3 text-end font-medium text-gray-700">Extra</th>
+                    <th className="px-4 py-3 text-start font-medium text-gray-700">{t("date")}</th>
+                    <th className="px-4 py-3 text-end font-medium text-gray-700">{t("amount")}</th>
                     <th className="px-4 py-3 text-end font-medium text-gray-700">
-                      Balance After
+                      {t("principal")}
                     </th>
-                    <th className="px-4 py-3 text-center font-medium text-gray-700">Status</th>
-                    <th className="px-4 py-3 text-center font-medium text-gray-700">Actions</th>
+                    <th className="px-4 py-3 text-end font-medium text-gray-700">
+                      {t("interest")}
+                    </th>
+                    <th className="px-4 py-3 text-end font-medium text-gray-700">{t("extra")}</th>
+                    <th className="px-4 py-3 text-end font-medium text-gray-700">
+                      {t("balanceAfter")}
+                    </th>
+                    <th className="px-4 py-3 text-center font-medium text-gray-700">
+                      {t("status")}
+                    </th>
+                    <th className="px-4 py-3 text-center font-medium text-gray-700">
+                      {t("actions")}
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {payments.map((payment) => {
                     const linkedTransaction = payment.transactionId
-                      ? transactions.find((t) => t.id === payment.transactionId)
+                      ? transactions.find((tx) => tx.id === payment.transactionId)
                       : null;
 
                     return (
@@ -475,30 +487,30 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
                           {format(new Date(payment.date), "MMM d, yyyy")}
                         </td>
                         <td className="px-4 py-3 text-end text-gray-900">
-                          ${payment.amount.toLocaleString()}
+                          {formatCurrency(payment.amount, currency, locale)}
                         </td>
                         <td className="px-4 py-3 text-end text-teal-600">
-                          ${payment.principalAmount.toLocaleString()}
+                          {formatCurrency(payment.principalAmount, currency, locale)}
                         </td>
                         <td className="px-4 py-3 text-end text-red-600">
-                          ${payment.interestAmount.toLocaleString()}
+                          {formatCurrency(payment.interestAmount, currency, locale)}
                         </td>
                         <td className="px-4 py-3 text-end text-green-600">
                           {payment.extraPrincipal > 0
-                            ? `$${payment.extraPrincipal.toLocaleString()}`
+                            ? formatCurrency(payment.extraPrincipal, currency, locale)
                             : "-"}
                         </td>
                         <td className="px-4 py-3 text-end font-medium text-gray-900">
-                          ${payment.balanceAfter.toLocaleString()}
+                          {formatCurrency(payment.balanceAfter, currency, locale)}
                         </td>
                         <td className="px-4 py-3 text-center">
                           {linkedTransaction ? (
                             <div className="flex items-center justify-center gap-1">
                               <CheckCircle2 className="h-4 w-4 text-green-600" />
-                              <span className="text-xs text-green-700">Linked</span>
+                              <span className="text-xs text-green-700">{t("linked")}</span>
                             </div>
                           ) : (
-                            <span className="text-xs text-gray-500">Manual</span>
+                            <span className="text-xs text-gray-500">{t("manual")}</span>
                           )}
                         </td>
                         <td className="px-4 py-3">
@@ -518,7 +530,7 @@ export function PaymentHistory({ loan, onLoanUpdate }: PaymentHistoryProps) {
                               onClick={() => handleDeletePayment(payment)}
                               className="text-red-600 hover:text-red-700"
                             >
-                              Delete
+                              {t("delete")}
                             </Button>
                           </div>
                         </td>

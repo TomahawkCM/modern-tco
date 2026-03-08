@@ -43,7 +43,7 @@ import {
 } from "@/lib/export";
 import { cn } from "@/lib/utils";
 import { useSeniorsMode } from "@/hooks/useSeniorsMode";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 interface ImportDialogProps {
   isOpen: boolean;
@@ -82,6 +82,7 @@ const tableDisplayNames: Record<string, string> = {
 export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialogProps) {
   const { isSeniorsMode } = useSeniorsMode();
   const t = useTranslations("importDialog");
+  const locale = useLocale();
   const [step, setStep] = useState<ImportStep>("select");
   const [error, setError] = useState<string | null>(null);
 
@@ -298,7 +299,7 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                           onChange={(e) => setPassword(e.target.value)}
                           placeholder={t("encryption.enterPassword")}
                           className={cn(
-                            "w-full rounded-lg border border-white/10 bg-white/5 py-3 ps-10 pe-12 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500",
+                            "w-full rounded-lg border border-white/10 bg-white/5 py-3 pe-12 ps-10 text-white placeholder:text-slate-500 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500",
                             isSeniorsMode && "py-4 text-lg"
                           )}
                           onKeyDown={(e) => e.key === "Enter" && handlePasswordSubmit()}
@@ -348,7 +349,7 @@ export function ImportDialog({ isOpen, onClose, onImportComplete }: ImportDialog
                     <div className="flex justify-between">
                       <span className="text-slate-500">{t("preview.exported")}</span>
                       <span className="text-white">
-                        {new Date(preview.metadata.exportedAt).toLocaleDateString()}
+                        {new Date(preview.metadata.exportedAt).toLocaleDateString(locale)}
                       </span>
                     </div>
                   </div>

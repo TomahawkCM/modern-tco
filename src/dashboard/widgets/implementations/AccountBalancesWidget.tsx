@@ -1,5 +1,6 @@
 import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import { db } from "@/lib/budget-db";
 import type { Account } from "@/types/budget";
 import { useLiveQuery } from "dexie-react-hooks";
@@ -22,6 +23,7 @@ interface AccountWithCurrentBalance extends Account {
 export function AccountBalancesWidget({ config }: AccountBalancesWidgetProps) {
   const t = useTranslations("dashboard.widgets.accountBalances");
   const format = useFormatter();
+  const currency = useDefaultCurrency();
 
   // Fetch accounts from Dexie
   const accounts = useLiveQuery(() => db.accounts.toArray()) || [];
@@ -85,7 +87,7 @@ export function AccountBalancesWidget({ config }: AccountBalancesWidgetProps) {
           institution: "Imported",
           balance: 0,
           currentBalance: transactionTotal,
-          currency: "CAD",
+          currency,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -93,7 +95,7 @@ export function AccountBalancesWidget({ config }: AccountBalancesWidgetProps) {
     }
 
     return [];
-  }, [accountsWithCurrentBalance, transactions]);
+  }, [accountsWithCurrentBalance, transactions, currency]);
 
   // Calculate net worth from current balances
   const netWorth = displayAccounts.reduce((sum, a) => sum + a.currentBalance, 0);
@@ -132,8 +134,7 @@ export function AccountBalancesWidget({ config }: AccountBalancesWidgetProps) {
         <div className="mb-6">
           <p className="mb-1 text-sm text-slate-400">{t("netWorth")}</p>
           <div className="text-2xl font-bold text-white">
-            {format.number(netWorth, { style: "currency", currency: "USD" })}
-            {/* Currency should ideally come from user settings */}
+            {format.number(netWorth, { style: "currency", currency })}
           </div>
         </div>
 
@@ -169,7 +170,7 @@ export function AccountBalancesWidget({ config }: AccountBalancesWidgetProps) {
                   >
                     {format.number(account.currentBalance, {
                       style: "currency",
-                      currency: account.currency || "USD",
+                      currency: account.currency || currency,
                     })}
                   </div>
                 </div>

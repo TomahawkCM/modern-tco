@@ -6,12 +6,29 @@
  */
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { TrendingUp, DollarSign, Calendar, PiggyBank, Upload, Trash2 } from "lucide-react";
 import { db } from "@/lib/budget-db";
+import { getCurrentCurrency, getCurrentLocale } from "@/lib/locale-storage";
+import { LOCALE_METADATA } from "@/i18n/config";
+import { formatCurrency as formatCurrencyUtil } from "@/i18n/utils/formatCurrency";
 import type { RetirementPlan } from "@/types/budget";
 import { ConfirmDialog } from "@/components/budget/ConfirmDialog";
 
+function fmtCurrency(amount: number): string {
+  return formatCurrencyUtil(
+    amount,
+    getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency,
+    getCurrentLocale()
+  );
+}
+
+function fmtNumber(amount: number, maxDigits: number = 0): string {
+  return amount.toLocaleString(getCurrentLocale(), { maximumFractionDigits: maxDigits });
+}
+
 export default function RetirementPage() {
+  const t = useTranslations("planning.retirement");
   const [plans, setPlans] = useState<RetirementPlan[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -277,10 +294,10 @@ export default function RetirementPage() {
       }
 
       await loadPlans();
-      alert("Retirement plan saved!");
+      alert(t("planSaved"));
     } catch (error) {
       console.error("Error saving plan:", error);
-      alert("Failed to save plan");
+      alert(t("failedToSavePlan"));
     }
   }
 
@@ -299,7 +316,7 @@ export default function RetirementPage() {
       setDeletingPlan(null);
     } catch (error) {
       console.error("Error deleting plan:", error);
-      alert("Failed to delete plan");
+      alert(t("failedToDeletePlan"));
       // Keep dialog open on error
     }
   }
@@ -312,7 +329,7 @@ export default function RetirementPage() {
       <div className="flex h-64 items-center justify-center">
         <div className="text-center">
           <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-teal-600 border-t-transparent"></div>
-          <p className="mt-4 text-gray-600">Loading calculator...</p>
+          <p className="mt-4 text-gray-600">{t("loading")}</p>
         </div>
       </div>
     );
@@ -322,22 +339,22 @@ export default function RetirementPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-white">Retirement Calculator</h1>
-        <p className="mt-2 text-slate-400">
-          Plan your retirement with compound interest projections
-        </p>
+        <h1 className="text-3xl font-bold text-white">{t("title")}</h1>
+        <p className="mt-2 text-slate-400">{t("subtitle")}</p>
       </div>
 
       {/* Calculator Grid */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Input Form */}
         <div className="rounded-lg bg-white p-6 shadow">
-          <h2 className="mb-6 text-xl font-semibold text-gray-900">Your Information</h2>
+          <h2 className="mb-6 text-xl font-semibold text-gray-900">{t("yourInformation")}</h2>
 
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700">Current Age</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700">
+                  {t("currentAge")}
+                </label>
                 <input
                   type="number"
                   value={currentAge}
@@ -351,7 +368,7 @@ export default function RetirementPage() {
 
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700">
-                  Retirement Age
+                  {t("retirementAge")}
                 </label>
                 <input
                   type="number"
@@ -367,7 +384,7 @@ export default function RetirementPage() {
 
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
-                Current Savings
+                {t("currentSavings")}
               </label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
@@ -385,7 +402,7 @@ export default function RetirementPage() {
 
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
-                Monthly Contribution
+                {t("monthlyContribution")}
               </label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
@@ -404,7 +421,7 @@ export default function RetirementPage() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700">
-                  Expected Return (%)
+                  {t("expectedReturn")}
                 </label>
                 <input
                   type="number"
@@ -420,7 +437,7 @@ export default function RetirementPage() {
 
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700">
-                  Inflation Rate (%)
+                  {t("inflationRate")}
                 </label>
                 <input
                   type="number"
@@ -438,7 +455,7 @@ export default function RetirementPage() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700">
-                  Desired Monthly Income
+                  {t("desiredMonthlyIncome")}
                 </label>
                 <div className="relative">
                   <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
@@ -456,7 +473,7 @@ export default function RetirementPage() {
 
               <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700">
-                  Life Expectancy
+                  {t("lifeExpectancy")}
                 </label>
                 <input
                   type="number"
@@ -473,7 +490,7 @@ export default function RetirementPage() {
             {/* Canadian Government Pensions */}
             <div className="mt-4 border-t border-gray-200 pt-4">
               <h3 className="mb-4 text-base font-semibold text-gray-900">
-                Canadian Government Pensions
+                {t("canadianGovernmentPensions")}
               </h3>
 
               <div className="space-y-4">
@@ -485,7 +502,7 @@ export default function RetirementPage() {
                       onChange={(e) => setIncludeCPP(e.target.checked)}
                       className="h-4 w-4 rounded text-teal-600 focus:ring-2 focus:ring-teal-500"
                     />
-                    <span className="text-sm font-medium text-gray-700">Include CPP</span>
+                    <span className="text-sm font-medium text-gray-700">{t("includeCPP")}</span>
                   </label>
                   {includeCPP && (
                     <div className="flex-1">
@@ -499,12 +516,12 @@ export default function RetirementPage() {
                           onChange={(e) => setEstimatedCPPMonthly(e.target.value)}
                           step="10"
                           min="0"
-                          placeholder="Monthly CPP"
+                          placeholder={t("monthlyCPP")}
                           inputMode="decimal"
                           className="w-full rounded-lg border border-gray-300 py-2 pl-8 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-teal-500"
                         />
                       </div>
-                      <p className="mt-2 text-xs text-gray-500">Max CPP 2024: $1,307/mo</p>
+                      <p className="mt-2 text-xs text-gray-500">{t("maxCPP2024")}</p>
                     </div>
                   )}
                 </div>
@@ -517,7 +534,7 @@ export default function RetirementPage() {
                       onChange={(e) => setIncludeOAS(e.target.checked)}
                       className="h-4 w-4 rounded text-teal-600 focus:ring-2 focus:ring-teal-500"
                     />
-                    <span className="text-sm font-medium text-gray-700">Include OAS</span>
+                    <span className="text-sm font-medium text-gray-700">{t("includeOAS")}</span>
                   </label>
                   {includeOAS && (
                     <div className="flex-1">
@@ -531,12 +548,12 @@ export default function RetirementPage() {
                           onChange={(e) => setEstimatedOASMonthly(e.target.value)}
                           step="10"
                           min="0"
-                          placeholder="Monthly OAS"
+                          placeholder={t("monthlyOAS")}
                           inputMode="decimal"
                           className="w-full rounded-lg border border-gray-300 py-2 pl-8 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-teal-500"
                         />
                       </div>
-                      <p className="mt-2 text-xs text-gray-500">Max OAS 2024: $708/mo</p>
+                      <p className="mt-2 text-xs text-gray-500">{t("maxOAS2024")}</p>
                     </div>
                   )}
                 </div>
@@ -545,12 +562,14 @@ export default function RetirementPage() {
 
             {/* Investment Accounts */}
             <div className="mt-4 border-t border-gray-200 pt-4">
-              <h3 className="mb-4 text-base font-semibold text-gray-900">Investment Accounts</h3>
+              <h3 className="mb-4 text-base font-semibold text-gray-900">
+                {t("investmentAccounts")}
+              </h3>
 
               <div className="space-y-4">
                 <div>
                   <label className="mb-2 block text-sm font-medium text-gray-700">
-                    RRSP Balance
+                    {t("rrspBalance")}
                   </label>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
@@ -570,7 +589,7 @@ export default function RetirementPage() {
 
                 <div>
                   <label className="mb-2 block text-sm font-medium text-gray-700">
-                    TFSA Balance
+                    {t("tfsaBalance")}
                   </label>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
@@ -590,7 +609,7 @@ export default function RetirementPage() {
 
                 <div>
                   <label className="mb-2 block text-sm font-medium text-gray-700">
-                    Non-Registered Balance
+                    {t("nonRegisteredBalance")}
                   </label>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
@@ -612,13 +631,13 @@ export default function RetirementPage() {
 
             {/* Company Benefits */}
             <div className="mt-4 border-t border-gray-200 pt-4">
-              <h3 className="mb-4 text-base font-semibold text-gray-900">Company Benefits</h3>
+              <h3 className="mb-4 text-base font-semibold text-gray-900">{t("companyBenefits")}</h3>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="mb-2 block text-sm font-medium text-gray-700">
-                      Company Shares
+                      {t("companyShares")}
                     </label>
                     <div className="relative">
                       <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
@@ -638,7 +657,7 @@ export default function RetirementPage() {
 
                   <div>
                     <label className="mb-2 block text-sm font-medium text-gray-700">
-                      Growth Rate (%)
+                      {t("growthRate")}
                     </label>
                     <input
                       type="number"
@@ -655,7 +674,7 @@ export default function RetirementPage() {
 
                 <div>
                   <label className="mb-2 block text-sm font-medium text-gray-700">
-                    Stock Options (Vested)
+                    {t("stockOptionsVested")}
                   </label>
                   <div className="relative">
                     <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
@@ -681,7 +700,9 @@ export default function RetirementPage() {
                       onChange={(e) => setPensionPlan(e.target.checked)}
                       className="h-4 w-4 rounded text-teal-600 focus:ring-2 focus:ring-teal-500"
                     />
-                    <span className="text-sm font-medium text-gray-700">Employer Pension Plan</span>
+                    <span className="text-sm font-medium text-gray-700">
+                      {t("employerPensionPlan")}
+                    </span>
                   </label>
                   {pensionPlan && (
                     <div className="flex-1">
@@ -695,7 +716,7 @@ export default function RetirementPage() {
                           onChange={(e) => setEmployerPensionMonthly(e.target.value)}
                           step="10"
                           min="0"
-                          placeholder="Monthly pension"
+                          placeholder={t("monthlyPension")}
                           inputMode="decimal"
                           className="w-full rounded-lg border border-gray-300 py-2 pl-8 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-teal-500"
                         />
@@ -710,7 +731,7 @@ export default function RetirementPage() {
               onClick={savePlan}
               className="mt-6 w-full rounded-lg bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-700"
             >
-              Save This Plan
+              {t("saveThisPlan")}
             </button>
           </div>
         </div>
@@ -722,7 +743,7 @@ export default function RetirementPage() {
             <div className="rounded-lg bg-white p-4 shadow">
               <div className="mb-2 flex items-center gap-2 text-gray-600">
                 <Calendar className="h-4 w-4" />
-                <p className="text-xs">Years to Retirement</p>
+                <p className="text-xs">{t("yearsToRetirement")}</p>
               </div>
               <p className="text-2xl font-bold text-gray-900">{yearsToRetirement}</p>
             </div>
@@ -730,30 +751,26 @@ export default function RetirementPage() {
             <div className="rounded-lg bg-white p-4 shadow">
               <div className="mb-2 flex items-center gap-2 text-gray-600">
                 <TrendingUp className="h-4 w-4" />
-                <p className="text-xs">Projected Savings</p>
+                <p className="text-xs">{t("projectedSavings")}</p>
               </div>
-              <p className="text-2xl font-bold text-teal-600">
-                ${projectedSavings.toLocaleString("en-US", { maximumFractionDigits: 0 })}
-              </p>
+              <p className="text-2xl font-bold text-teal-600">{fmtCurrency(projectedSavings)}</p>
             </div>
 
             <div className="rounded-lg bg-white p-4 shadow">
               <div className="mb-2 flex items-center gap-2 text-gray-600">
                 <PiggyBank className="h-4 w-4" />
-                <p className="text-xs">Required Savings</p>
+                <p className="text-xs">{t("requiredSavings")}</p>
               </div>
-              <p className="text-2xl font-bold text-gray-900">
-                ${requiredSavings.toLocaleString("en-US", { maximumFractionDigits: 0 })}
-              </p>
+              <p className="text-2xl font-bold text-gray-900">{fmtCurrency(requiredSavings)}</p>
             </div>
 
             <div className="rounded-lg bg-white p-4 shadow">
               <div className="mb-2 flex items-center gap-2 text-gray-600">
                 <DollarSign className="h-4 w-4" />
-                <p className="text-xs">Monthly Income</p>
+                <p className="text-xs">{t("monthlyIncome")}</p>
               </div>
               <p className="text-2xl font-bold text-green-600">
-                ${monthlyIncomeAtRetirement.toLocaleString("en-US", { maximumFractionDigits: 0 })}
+                {fmtCurrency(monthlyIncomeAtRetirement)}
               </p>
             </div>
           </div>
@@ -763,30 +780,33 @@ export default function RetirementPage() {
             <h3
               className={`mb-2 text-lg font-semibold ${isOnTrack ? "text-green-900" : "text-yellow-900"}`}
             >
-              {isOnTrack ? "✓ You're on track!" : "⚠ Adjustment needed"}
+              {isOnTrack ? t("onTrack") : t("adjustmentNeeded")}
             </h3>
             <p className={`mb-4 text-sm ${isOnTrack ? "text-green-700" : "text-yellow-700"}`}>
               {isOnTrack
-                ? `Your projected savings of $${projectedSavings.toLocaleString("en-US", { maximumFractionDigits: 0 })} exceeds your required savings.`
-                : `You're projected to be short by $${Math.abs(shortfall).toLocaleString("en-US", { maximumFractionDigits: 0 })}.`}
+                ? t("onTrackDescription", { amount: fmtCurrency(projectedSavings) })
+                : t("shortfallDescription", { amount: fmtCurrency(Math.abs(shortfall)) })}
             </p>
 
             {!isOnTrack && (
               <div className="space-y-2 text-sm">
                 <p className={`font-medium ${isOnTrack ? "text-green-900" : "text-yellow-900"}`}>
-                  To reach your goal, you could:
+                  {t("toReachGoal")}
                 </p>
                 <ul
                   className={`list-inside list-disc space-y-2 ${isOnTrack ? "text-green-700" : "text-yellow-700"}`}
                 >
                   <li>
-                    Increase monthly contribution by $
-                    {(shortfall / (yearsToRetirement * 12)).toFixed(0)}
+                    {t("increaseContribution", {
+                      amount: fmtCurrency(shortfall / (yearsToRetirement * 12)),
+                    })}
                   </li>
                   <li>
-                    Work {Math.ceil(shortfall / (parseFloat(monthlyContribution) * 12))} more years
+                    {t("workMoreYears", {
+                      years: Math.ceil(shortfall / (parseFloat(monthlyContribution) * 12)),
+                    })}
                   </li>
-                  <li>Reduce desired monthly income to ${monthlyIncomeAtRetirement.toFixed(0)}</li>
+                  <li>{t("reduceIncome", { amount: fmtCurrency(monthlyIncomeAtRetirement) })}</li>
                 </ul>
               </div>
             )}
@@ -794,18 +814,16 @@ export default function RetirementPage() {
 
           {/* Growth Chart Preview */}
           <div className="rounded-lg bg-white p-6 shadow">
-            <h3 className="mb-4 text-lg font-semibold text-gray-900">Savings Growth</h3>
+            <h3 className="mb-4 text-lg font-semibold text-gray-900">{t("savingsGrowth")}</h3>
             <div className="max-h-64 space-y-2 overflow-y-auto">
               {yearlyBreakdown
                 .filter((_, i) => i % 5 === 0 || i === yearlyBreakdown.length - 1)
                 .map((item) => (
                   <div key={item.year} className="flex items-center justify-between text-sm">
                     <span className="text-gray-600">
-                      {item.year} (Age {item.age})
+                      {t("yearAge", { year: item.year, age: item.age })}
                     </span>
-                    <span className="font-semibold text-gray-900">
-                      ${item.balance.toLocaleString("en-US", { maximumFractionDigits: 0 })}
-                    </span>
+                    <span className="font-semibold text-gray-900">{fmtCurrency(item.balance)}</span>
                   </div>
                 ))}
             </div>
@@ -816,7 +834,7 @@ export default function RetirementPage() {
       {/* Saved Plans */}
       {plans.length > 0 && (
         <div className="rounded-lg bg-white p-6 shadow">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900">Saved Plans</h2>
+          <h2 className="mb-4 text-xl font-semibold text-gray-900">{t("savedPlans")}</h2>
           <div className="space-y-2">
             {plans.map((plan) => (
               <div
@@ -826,29 +844,35 @@ export default function RetirementPage() {
                 <div className="flex-1">
                   <p className="font-medium text-gray-900">{plan.name}</p>
                   <p className="text-sm text-gray-600">
-                    Age {plan.currentAge} → {plan.retirementAge} | ${plan.monthlyContribution}/mo |{" "}
-                    {plan.expectedReturn}% return
+                    {t("planSummary", {
+                      currentAge: plan.currentAge,
+                      retirementAge: plan.retirementAge,
+                      monthlyContribution: fmtCurrency(plan.monthlyContribution),
+                      expectedReturn: plan.expectedReturn,
+                    })}
                   </p>
                   <p className="mt-2 text-xs text-gray-500">
-                    Last updated: {new Date(plan.updatedAt).toLocaleDateString()}
+                    {t("lastUpdated", {
+                      date: new Date(plan.updatedAt).toLocaleDateString(getCurrentLocale()),
+                    })}
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => loadPlanIntoForm(plan)}
                     className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
-                    title="Load this plan"
+                    title={t("loadThisPlan")}
                   >
                     <Upload className="h-4 w-4" />
-                    Load
+                    {t("load")}
                   </button>
                   <button
                     onClick={() => initiateDeletePlan(plan)}
                     className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
-                    title="Delete this plan"
+                    title={t("deleteThisPlan")}
                   >
                     <Trash2 className="h-4 w-4" />
-                    Delete
+                    {t("delete")}
                   </button>
                 </div>
               </div>
@@ -862,24 +886,26 @@ export default function RetirementPage() {
         open={deleteConfirmOpen}
         onOpenChange={setDeleteConfirmOpen}
         onConfirm={confirmDeletePlan}
-        title="Delete Retirement Plan"
-        description="This will permanently remove this retirement plan and all its projections."
+        title={t("deleteRetirementPlan")}
+        description={t("deleteRetirementPlanDescription")}
         impact={
           deletingPlan
             ? {
-                title: "You will lose:",
+                title: t("youWillLose"),
                 items: [
-                  `Plan: ${deletingPlan.name}`,
-                  `Current age: ${deletingPlan.currentAge} years`,
-                  `Retirement age: ${deletingPlan.retirementAge} years`,
-                  `Monthly contribution: $${deletingPlan.monthlyContribution.toFixed(2)}`,
-                  `Current savings: $${deletingPlan.currentSavings.toFixed(2)}`,
-                  "All growth projections and calculations",
+                  t("planName", { name: deletingPlan.name }),
+                  t("currentAgeYears", { age: deletingPlan.currentAge }),
+                  t("retirementAgeYears", { age: deletingPlan.retirementAge }),
+                  t("monthlyContributionAmount", {
+                    amount: fmtCurrency(deletingPlan.monthlyContribution),
+                  }),
+                  t("currentSavingsAmount", { amount: fmtCurrency(deletingPlan.currentSavings) }),
+                  t("allGrowthProjections"),
                 ],
               }
             : undefined
         }
-        confirmLabel="Delete Plan"
+        confirmLabel={t("deletePlan")}
         variant="destructive"
         icon={<Trash2 className="h-5 w-5" />}
       />

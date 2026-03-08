@@ -15,6 +15,7 @@ import {
 import { isBudgetOffline } from "@/config/app-target";
 import { useAuth } from "@/contexts/AuthContext";
 import { Clock, LogOut, RefreshCw, Search, ShieldAlert } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { notFound } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
@@ -99,6 +100,7 @@ interface FamilyMember {
  * Required when migrating from localStorage to cookie-based auth
  */
 function SessionRefreshHelper() {
+  const t = useTranslations("admin");
   const { signOut } = useAuth();
   const [isSigningOut, setIsSigningOut] = useState(false);
 
@@ -120,10 +122,7 @@ function SessionRefreshHelper() {
 
   return (
     <div className="mt-3 space-y-2">
-      <p className="text-sm text-slate-400">
-        Your session needs to be refreshed. Please sign out and sign back in to establish a new
-        session.
-      </p>
+      <p className="text-sm text-slate-400">{t("sessionRefreshMessage")}</p>
       <Button
         variant="outline"
         size="sm"
@@ -132,7 +131,7 @@ function SessionRefreshHelper() {
         disabled={isSigningOut}
       >
         <LogOut className="mr-2 h-4 w-4" />
-        {isSigningOut ? "Signing out..." : "Sign Out & Refresh Session"}
+        {isSigningOut ? t("signingOut") : t("signOutRefresh")}
       </Button>
     </div>
   );
@@ -151,6 +150,8 @@ export default function AdminDashboardPage() {
 }
 
 function AdminDashboardContent() {
+  const t = useTranslations("admin");
+  const locale = useLocale();
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [filteredUsers, setFilteredUsers] = useState<AdminUser[]>([]);
   const [selectedUserIds, setSelectedUserIds] = useState<Set<string>>(new Set());
@@ -240,8 +241,8 @@ function AdminDashboardContent() {
       <div className="mx-auto max-w-7xl space-y-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
-            <p className="text-slate-400">Manage users and subscriptions</p>
+            <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
+            <p className="text-slate-400">{t("subtitle")}</p>
           </div>
           <Button
             onClick={loadData}
@@ -249,22 +250,22 @@ function AdminDashboardContent() {
             className="border-white/10 text-white hover:bg-white/5"
           >
             <RefreshCw className={`mr-2 h-4 w-4 ${isLoading ? "animate-spin" : ""}`} />
-            Refresh
+            {t("refresh")}
           </Button>
         </div>
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           <GlassCard className="p-6">
-            <h3 className="text-sm font-medium text-slate-400">Total Users</h3>
+            <h3 className="text-sm font-medium text-slate-400">{t("totalUsers")}</h3>
             <div className="mt-2 text-3xl font-bold">{totalUsers}</div>
           </GlassCard>
           <GlassCard className="p-6">
-            <h3 className="text-sm font-medium text-slate-400">Active Trials</h3>
+            <h3 className="text-sm font-medium text-slate-400">{t("activeTrials")}</h3>
             <div className="mt-2 text-3xl font-bold text-teal-400">{activeTrials}</div>
           </GlassCard>
           <GlassCard className="p-6">
-            <h3 className="text-sm font-medium text-slate-400">Paid Plans</h3>
+            <h3 className="text-sm font-medium text-slate-400">{t("paidPlans")}</h3>
             <div className="mt-2 text-3xl font-bold text-blue-400">{paidUsers}</div>
           </GlassCard>
           <GlassCard className="p-6">
@@ -550,7 +551,7 @@ function AdminDashboardContent() {
                       </div>
                     </TableCell>
                     <TableCell className="text-slate-300">
-                      {user.created_at ? new Date(user.created_at).toLocaleDateString() : "-"}
+                      {user.created_at ? new Date(user.created_at).toLocaleDateString(locale) : "-"}
                     </TableCell>
                     <TableCell>
                       {user.status.status === "active" ? (
@@ -593,7 +594,9 @@ function AdminDashboardContent() {
                       )}
                     </TableCell>
                     <TableCell className="text-slate-300">
-                      {user.last_login ? new Date(user.last_login).toLocaleDateString() : "Never"}
+                      {user.last_login
+                        ? new Date(user.last_login).toLocaleDateString(locale)
+                        : "Never"}
                     </TableCell>
                     <TableCell>
                       <div className="flex flex-wrap gap-2">

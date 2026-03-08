@@ -6,6 +6,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Link as LinkIcon, CreditCard, DollarSign, Loader2, X, ChevronRight } from "lucide-react";
 import type { Loan, Transaction } from "@/types/budget";
 import { getActiveLoans, createPaymentFromTransaction } from "@/lib/loans/loan-db";
@@ -22,6 +23,7 @@ interface LinkToLoanPopoverProps {
 }
 
 export function LinkToLoanPopover({ transaction, onLinked, onClose }: LinkToLoanPopoverProps) {
+  const t = useTranslations("linkToLoan");
   const [loans, setLoans] = useState<Loan[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLinking, setIsLinking] = useState(false);
@@ -105,7 +107,7 @@ export function LinkToLoanPopover({ transaction, onLinked, onClose }: LinkToLoan
       onLinked();
     } catch (error) {
       console.error("Error linking transaction to loan:", error);
-      alert("Failed to link transaction. Please try again.");
+      alert(t("linkError"));
     } finally {
       setIsLinking(false);
     }
@@ -125,7 +127,7 @@ export function LinkToLoanPopover({ transaction, onLinked, onClose }: LinkToLoan
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <div className="flex items-center gap-2">
           <LinkIcon className="h-4 w-4 text-teal-600" />
-          <span className="font-semibold text-foreground">Link to Loan</span>
+          <span className="font-semibold text-foreground">{t("title")}</span>
         </div>
         <button
           type="button"
@@ -145,7 +147,7 @@ export function LinkToLoanPopover({ transaction, onLinked, onClose }: LinkToLoan
         ) : loans.length === 0 ? (
           <div className="py-6 text-center">
             <CreditCard className="mx-auto mb-2 h-12 w-12 text-muted-foreground" />
-            <p className="text-sm text-muted-foreground">No active loans found</p>
+            <p className="text-sm text-muted-foreground">{t("noActiveLoans")}</p>
           </div>
         ) : (
           <>
@@ -180,16 +182,16 @@ export function LinkToLoanPopover({ transaction, onLinked, onClose }: LinkToLoan
                           }`}
                         >
                           {confidence === "high"
-                            ? "Best Match"
+                            ? t("bestMatch")
                             : confidence === "medium"
-                              ? "Possible Match"
-                              : "Low Match"}
+                              ? t("possibleMatch")
+                              : t("lowMatch")}
                         </span>
                       )}
                     </div>
                     <div className="flex items-center justify-between text-sm text-muted-foreground">
                       <span>{loan.lender}</span>
-                      <span>${loan.monthlyPayment.toFixed(2)}/mo</span>
+                      <span>{t("monthlyPayment", { amount: loan.monthlyPayment.toFixed(2) })}</span>
                     </div>
                   </button>
                 );
@@ -200,20 +202,20 @@ export function LinkToLoanPopover({ transaction, onLinked, onClose }: LinkToLoan
             {selectedLoan && paymentSplit && (
               <div className="space-y-2 rounded-lg bg-muted/50 p-3">
                 <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  Payment Breakdown
+                  {t("paymentBreakdown")}
                 </h4>
                 <div className="grid grid-cols-2 gap-2 text-sm">
-                  <span className="text-muted-foreground">Principal:</span>
+                  <span className="text-muted-foreground">{t("principal")}:</span>
                   <span className="text-end font-medium text-teal-600">
                     ${paymentSplit.principal.toFixed(2)}
                   </span>
-                  <span className="text-muted-foreground">Interest:</span>
+                  <span className="text-muted-foreground">{t("interest")}:</span>
                   <span className="text-end font-medium text-red-600">
                     ${paymentSplit.interest.toFixed(2)}
                   </span>
                   {paymentSplit.extra > 0 && (
                     <>
-                      <span className="text-muted-foreground">Extra:</span>
+                      <span className="text-muted-foreground">{t("extra")}:</span>
                       <span className="text-end font-medium text-green-600">
                         ${paymentSplit.extra.toFixed(2)}
                       </span>
@@ -233,7 +235,7 @@ export function LinkToLoanPopover({ transaction, onLinked, onClose }: LinkToLoan
           onClick={onClose}
           className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground"
         >
-          Cancel
+          {t("cancel")}
         </button>
         <button
           type="button"
@@ -244,12 +246,12 @@ export function LinkToLoanPopover({ transaction, onLinked, onClose }: LinkToLoan
           {isLinking ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin" />
-              Linking...
+              {t("linking")}
             </>
           ) : (
             <>
               <LinkIcon className="h-4 w-4" />
-              Link Payment
+              {t("linkPayment")}
             </>
           )}
         </button>
@@ -267,6 +269,7 @@ interface LinkToLoanButtonProps {
 }
 
 export function LinkToLoanButton({ transaction, onLinked }: LinkToLoanButtonProps) {
+  const t = useTranslations("linkToLoan");
   const [showPopover, setShowPopover] = useState(false);
 
   // Only show for expense transactions
@@ -283,7 +286,7 @@ export function LinkToLoanButton({ transaction, onLinked }: LinkToLoanButtonProp
           setShowPopover(true);
         }}
         className="rounded-md p-1.5 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
-        title="Link to Loan"
+        title={t("title")}
       >
         <CreditCard className="h-4 w-4" />
       </button>

@@ -4,33 +4,20 @@ import { Button } from "@/components/ui/button";
 import { useTrialStatus } from "@/hooks/useTrialStatus";
 import { APP_PRICE, TRIAL_DURATION_DAYS } from "@/lib/subscriptionService";
 import { Check, CreditCard, Lock, Shield, Sparkles, Zap } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
-const features = [
-  {
-    icon: Zap,
-    title: "Unlimited Transactions",
-    description: "Import and track as many transactions as you need",
-  },
-  {
-    icon: Shield,
-    title: "AI-Powered Insights",
-    description: "Smart categorization and spending analysis",
-  },
-  {
-    icon: Lock,
-    title: "Bank-Level Security",
-    description: "Your data is encrypted and never shared",
-  },
-  {
-    icon: CreditCard,
-    title: "Subscription Tracking",
-    description: "Never miss a recurring charge again",
-  },
-];
+const featureIcons = [Zap, Shield, Lock, CreditCard];
+const featureKeys = [
+  "unlimitedTransactions",
+  "aiInsights",
+  "bankSecurity",
+  "subscriptionTracking",
+] as const;
 
 export default function UpgradePage() {
   const { isExpired, daysRemaining, isTrial, loading } = useTrialStatus();
+  const t = useTranslations("auth");
 
   return (
     <div className="space-y-8">
@@ -40,43 +27,52 @@ export default function UpgradePage() {
           <Sparkles className="h-8 w-8 text-white" />
         </div>
         <h1 className="text-2xl font-bold text-white">
-          {isExpired ? "Your Trial Has Ended" : "Upgrade to Premium"}
+          {isExpired ? t("upgrade.trialEndedTitle") : t("upgrade.title")}
         </h1>
         <p className="mt-2 text-slate-400">
           {isExpired
-            ? "Upgrade now to regain full access to your budget data"
+            ? t("upgrade.trialEndedSubtitle")
             : isTrial
-              ? `${daysRemaining} days left in your free trial`
-              : "Get lifetime access to all features"}
+              ? t("upgrade.daysLeft", { daysRemaining })
+              : t("upgrade.lifetimeAccess")}
         </p>
       </div>
 
       {/* Pricing Card */}
       <div className="rounded-xl border border-teal-500/20 bg-teal-500/5 p-6">
         <div className="text-center">
-          <div className="mb-2 text-sm font-medium text-teal-400">LIFETIME ACCESS</div>
+          <div className="mb-2 text-sm font-medium text-teal-400">
+            {t("upgrade.lifetimeAccessBadge")}
+          </div>
           <div className="flex items-baseline justify-center gap-1">
             <span className="text-4xl font-bold text-white">${APP_PRICE}</span>
-            <span className="text-slate-400">one-time</span>
+            <span className="text-slate-400">{t("upgrade.oneTime")}</span>
           </div>
-          <p className="mt-2 text-sm text-slate-400">Pay once, use forever. No subscriptions.</p>
+          <p className="mt-2 text-sm text-slate-400">{t("upgrade.payOnce")}</p>
         </div>
 
         <div className="my-6 border-t border-white/10" />
 
         {/* Features */}
         <ul className="space-y-3">
-          {features.map((feature) => (
-            <li key={feature.title} className="flex items-start gap-3">
-              <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-500/20">
-                <Check className="h-4 w-4 text-teal-400" />
-              </div>
-              <div>
-                <div className="text-sm font-medium text-white">{feature.title}</div>
-                <div className="text-xs text-slate-400">{feature.description}</div>
-              </div>
-            </li>
-          ))}
+          {featureKeys.map((key, index) => {
+            const Icon = featureIcons[index];
+            return (
+              <li key={key} className="flex items-start gap-3">
+                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-500/20">
+                  <Check className="h-4 w-4 text-teal-400" />
+                </div>
+                <div>
+                  <div className="text-sm font-medium text-white">
+                    {t(`upgrade.features.${key}.title`)}
+                  </div>
+                  <div className="text-xs text-slate-400">
+                    {t(`upgrade.features.${key}.description`)}
+                  </div>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </div>
 
@@ -86,12 +82,10 @@ export default function UpgradePage() {
         disabled={loading}
       >
         <CreditCard className="mr-2 h-5 w-5" />
-        Upgrade Now - ${APP_PRICE}
+        {t("upgrade.upgradeNow", { price: APP_PRICE })}
       </Button>
 
-      <p className="text-center text-xs text-slate-500">
-        Secure payment powered by Stripe. 30-day money-back guarantee.
-      </p>
+      <p className="text-center text-xs text-slate-500">{t("upgrade.securePayment")}</p>
 
       {/* Back to App Link */}
       {!isExpired && (
@@ -100,7 +94,7 @@ export default function UpgradePage() {
             href="/budget-app"
             className="text-sm text-slate-400 transition-colors hover:text-white"
           >
-            Continue with free trial ({daysRemaining} days left)
+            {t("upgrade.continueFreeTrial", { daysRemaining })}
           </Link>
         </div>
       )}
@@ -109,8 +103,7 @@ export default function UpgradePage() {
       {isExpired && (
         <div className="rounded-lg border border-rose-500/20 bg-rose-500/5 p-4 text-center">
           <p className="text-sm text-rose-300">
-            Your {TRIAL_DURATION_DAYS}-day trial has ended. Upgrade to regain access to adding
-            transactions, imports, and other features.
+            {t("upgrade.trialEndedMessage", { days: TRIAL_DURATION_DAYS })}
           </p>
         </div>
       )}

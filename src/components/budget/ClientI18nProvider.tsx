@@ -1,6 +1,6 @@
 "use client";
 
-import { DEFAULT_LOCALE } from "@/i18n/config";
+import { DEFAULT_LOCALE, LOCALE_METADATA, type SupportedLocale } from "@/i18n/config";
 import enMessages from "@/i18n/messages/en.json";
 import { getLocalePreferences } from "@/lib/locale-storage";
 import { NextIntlClientProvider } from "next-intl";
@@ -88,6 +88,15 @@ export function ClientI18nProvider({ children }: { children: ReactNode }) {
       }
     }
   }, [state.isReady, state.locale]);
+
+  // Update <html> lang and dir attributes when locale changes
+  useEffect(() => {
+    const lang = state.locale.split("-")[0];
+    const meta = LOCALE_METADATA[state.locale as SupportedLocale];
+    const dir = meta?.dir || "ltr";
+    document.documentElement.lang = lang;
+    document.documentElement.dir = dir;
+  }, [state.locale]);
 
   useEffect(() => {
     loadMessages();

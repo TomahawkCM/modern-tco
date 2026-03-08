@@ -33,6 +33,10 @@ import type { Loan, LoanType, PaymentFrequency } from "@/types/budget";
 import { createLoan, updateLoan } from "@/lib/loans/loan-db";
 import { calculateMonthlyPayment } from "@/lib/loans/calculations";
 import { db } from "@/lib/budget-db";
+import { useLocale, useTranslations } from "next-intl";
+import type { SupportedLocale } from "@/i18n/config";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 
 interface LoanFormProps {
   loan?: Loan; // If editing existing loan
@@ -41,6 +45,9 @@ interface LoanFormProps {
 
 export function LoanForm({ loan, onClose }: LoanFormProps) {
   const router = useRouter();
+  const t = useTranslations("loanForm");
+  const currency = useDefaultCurrency();
+  const locale = useLocale() as SupportedLocale;
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [accounts, setAccounts] = useState<{ id: string; name: string }[]>([]);
@@ -111,33 +118,33 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
   const loanTypes = [
     {
       type: "mortgage" as LoanType,
-      label: "Mortgage",
+      label: t("types.mortgage"),
       icon: Home,
-      description: "Home loans with principal and interest",
+      description: t("types.mortgageDescription"),
       color: "bg-white border-gray-200 hover:bg-gray-50",
       iconColor: "text-gray-700",
     },
     {
       type: "auto" as LoanType,
-      label: "Auto Loan",
+      label: t("types.autoLoan"),
       icon: Car,
-      description: "Vehicle financing",
+      description: t("types.autoLoanDescription"),
       color: "bg-white border-gray-200 hover:bg-gray-50",
       iconColor: "text-gray-700",
     },
     {
       type: "personal" as LoanType,
-      label: "Personal Loan",
+      label: t("types.personalLoan"),
       icon: User,
-      description: "Unsecured personal loans",
+      description: t("types.personalLoanDescription"),
       color: "bg-white border-gray-200 hover:bg-gray-50",
       iconColor: "text-gray-700",
     },
     {
       type: "student" as LoanType,
-      label: "Student Loan",
+      label: t("types.studentLoan"),
       icon: GraduationCap,
-      description: "Education loans",
+      description: t("types.studentLoanDescription"),
       color: "bg-white border-gray-200 hover:bg-gray-50",
       iconColor: "text-gray-700",
     },
@@ -211,7 +218,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
       if (onClose) onClose();
     } catch (error) {
       console.error("Error saving loan:", error);
-      alert("Failed to save loan. Please try again.");
+      alert(t("failedToSave"));
     } finally {
       setLoading(false);
     }
@@ -223,10 +230,8 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
         return (
           <div className="space-y-4">
             <div>
-              <h3 className="mb-2 text-lg font-semibold">Select Loan Type</h3>
-              <p className="mb-4 text-sm text-gray-600">
-                Choose the type of loan you want to track
-              </p>
+              <h3 className="mb-2 text-lg font-semibold">{t("selectLoanType")}</h3>
+              <p className="mb-4 text-sm text-gray-600">{t("selectLoanTypeDescription")}</p>
             </div>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -269,15 +274,13 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
         return (
           <div className="space-y-4">
             <div>
-              <h3 className="mb-2 text-lg font-semibold">Loan Details</h3>
-              <p className="mb-4 text-sm text-gray-600">
-                Enter the basic information about your loan
-              </p>
+              <h3 className="mb-2 text-lg font-semibold">{t("loanDetails")}</h3>
+              <p className="mb-4 text-sm text-gray-600">{t("loanDetailsDescription")}</p>
             </div>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="md:col-span-2">
-                <Label htmlFor="name">Loan Name *</Label>
+                <Label htmlFor="name">{t("loanName")} *</Label>
                 <Input
                   id="name"
                   value={name}
@@ -288,7 +291,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
               </div>
 
               <div>
-                <Label htmlFor="lender">Lender *</Label>
+                <Label htmlFor="lender">{t("lender")} *</Label>
                 <Input
                   id="lender"
                   value={lender}
@@ -299,7 +302,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
               </div>
 
               <div>
-                <Label htmlFor="originalPrincipal">Original Loan Amount *</Label>
+                <Label htmlFor="originalPrincipal">{t("originalLoanAmount")} *</Label>
                 <Input
                   id="originalPrincipal"
                   type="number"
@@ -313,7 +316,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
               </div>
 
               <div>
-                <Label htmlFor="interestRate">Interest Rate (%) *</Label>
+                <Label htmlFor="interestRate">{t("interestRate")} *</Label>
                 <Input
                   id="interestRate"
                   type="number"
@@ -328,7 +331,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
               </div>
 
               <div>
-                <Label htmlFor="termMonths">Loan Term (months) *</Label>
+                <Label htmlFor="termMonths">{t("loanTerm")} *</Label>
                 <Input
                   id="termMonths"
                   type="number"
@@ -344,7 +347,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
               </div>
 
               <div>
-                <Label htmlFor="startDate">Loan Start Date *</Label>
+                <Label htmlFor="startDate">{t("loanStartDate")} *</Label>
                 <Input
                   id="startDate"
                   type="date"
@@ -358,7 +361,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
               {loanType === "auto" && (
                 <>
                   <div>
-                    <Label htmlFor="vehicleMake">Vehicle Make</Label>
+                    <Label htmlFor="vehicleMake">{t("vehicleMake")}</Label>
                     <Input
                       id="vehicleMake"
                       value={vehicleMake}
@@ -368,7 +371,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                   </div>
 
                   <div>
-                    <Label htmlFor="vehicleModel">Vehicle Model</Label>
+                    <Label htmlFor="vehicleModel">{t("vehicleModel")}</Label>
                     <Input
                       id="vehicleModel"
                       value={vehicleModel}
@@ -378,7 +381,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                   </div>
 
                   <div>
-                    <Label htmlFor="vehicleYear">Vehicle Year</Label>
+                    <Label htmlFor="vehicleYear">{t("vehicleYear")}</Label>
                     <Input
                       id="vehicleYear"
                       type="number"
@@ -401,13 +404,13 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
         return (
           <div className="space-y-4">
             <div>
-              <h3 className="mb-2 text-lg font-semibold">Payment Information</h3>
-              <p className="mb-4 text-sm text-gray-600">Set up payment tracking</p>
+              <h3 className="mb-2 text-lg font-semibold">{t("paymentInformation")}</h3>
+              <p className="mb-4 text-sm text-gray-600">{t("paymentInformationDescription")}</p>
             </div>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div>
-                <Label htmlFor="currentBalance">Current Balance *</Label>
+                <Label htmlFor="currentBalance">{t("currentBalance")} *</Label>
                 <Input
                   id="currentBalance"
                   type="number"
@@ -419,30 +422,30 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                   required
                 />
                 <p className="mt-1 text-xs text-gray-500">
-                  Original: ${originalPrincipal.toLocaleString()}
+                  Original: {formatCurrency(originalPrincipal, currency, locale)}
                 </p>
               </div>
 
               <div>
-                <Label htmlFor="paymentFrequency">Payment Frequency *</Label>
+                <Label htmlFor="paymentFrequency">{t("paymentFrequency")} *</Label>
                 <Select
                   value={paymentFrequency}
                   onValueChange={(value) => setPaymentFrequency(value as PaymentFrequency)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select payment frequency" />
+                    <SelectValue placeholder={t("selectPaymentFrequency")} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="weekly">Weekly</SelectItem>
-                    <SelectItem value="bi-weekly">Bi-Weekly (Every 2 weeks)</SelectItem>
-                    <SelectItem value="monthly">Monthly</SelectItem>
+                    <SelectItem value="weekly">{t("weekly")}</SelectItem>
+                    <SelectItem value="bi-weekly">{t("biWeekly")}</SelectItem>
+                    <SelectItem value="monthly">{t("monthly")}</SelectItem>
                   </SelectContent>
                 </Select>
-                <p className="mt-1 text-xs text-gray-500">How often you make payments</p>
+                <p className="mt-1 text-xs text-gray-500">{t("frequencyHint")}</p>
               </div>
 
               <div>
-                <Label htmlFor="monthlyPayment">Payment Amount *</Label>
+                <Label htmlFor="monthlyPayment">{t("paymentAmount")} *</Label>
                 <Input
                   id="monthlyPayment"
                   type="number"
@@ -454,15 +457,16 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                   required
                 />
                 <p className="mt-1 text-xs text-gray-500">
-                  {paymentFrequency === "weekly" && "Weekly payment amount (P&I only)"}
-                  {paymentFrequency === "bi-weekly" && "Bi-weekly payment amount (P&I only)"}
-                  {paymentFrequency === "monthly" && "Monthly payment amount (P&I only)"}
-                  {monthlyPayment > 0 && ` • Auto-calculated: $${monthlyPayment.toLocaleString()}`}
+                  {paymentFrequency === "weekly" && t("weeklyPaymentHint")}
+                  {paymentFrequency === "bi-weekly" && t("biWeeklyPaymentHint")}
+                  {paymentFrequency === "monthly" && t("monthlyPaymentHint")}
+                  {monthlyPayment > 0 &&
+                    ` • Auto-calculated: ${formatCurrency(monthlyPayment, currency, locale)}`}
                 </p>
               </div>
 
               <div>
-                <Label htmlFor="nextPaymentDate">Next Payment Date *</Label>
+                <Label htmlFor="nextPaymentDate">{t("nextPaymentDate")} *</Label>
                 <Input
                   id="nextPaymentDate"
                   type="date"
@@ -476,7 +480,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
               {loanType === "mortgage" && (
                 <>
                   <div>
-                    <Label htmlFor="propertyTax">Monthly Property Tax</Label>
+                    <Label htmlFor="propertyTax">{t("monthlyPropertyTax")}</Label>
                     <Input
                       id="propertyTax"
                       type="number"
@@ -489,7 +493,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                   </div>
 
                   <div>
-                    <Label htmlFor="homeInsurance">Monthly Home Insurance</Label>
+                    <Label htmlFor="homeInsurance">{t("monthlyHomeInsurance")}</Label>
                     <Input
                       id="homeInsurance"
                       type="number"
@@ -502,7 +506,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                   </div>
 
                   <div>
-                    <Label htmlFor="pmi">Monthly PMI</Label>
+                    <Label htmlFor="pmi">{t("monthlyPMI")}</Label>
                     <Input
                       id="pmi"
                       type="number"
@@ -520,7 +524,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
               {loanType === "student" && (
                 <>
                   <div>
-                    <Label htmlFor="defermentEndDate">Deferment End Date</Label>
+                    <Label htmlFor="defermentEndDate">{t("defermentEndDate")}</Label>
                     <Input
                       id="defermentEndDate"
                       type="date"
@@ -538,7 +542,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                       className="h-4 w-4"
                     />
                     <Label htmlFor="subsidized" className="cursor-pointer">
-                      Subsidized Loan (gov't pays interest during deferment)
+                      {t("subsidizedLoan")}
                     </Label>
                   </div>
                 </>
@@ -551,22 +555,22 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
         return (
           <div className="space-y-4">
             <div>
-              <h3 className="mb-2 text-lg font-semibold">Optional Settings</h3>
-              <p className="mb-4 text-sm text-gray-600">Additional loan configuration</p>
+              <h3 className="mb-2 text-lg font-semibold">{t("optionalSettings")}</h3>
+              <p className="mb-4 text-sm text-gray-600">{t("optionalSettingsDescription")}</p>
             </div>
 
             <div className="space-y-4">
               <div>
-                <Label htmlFor="accountId">Link to Account (for auto-payment tracking)</Label>
+                <Label htmlFor="accountId">{t("linkToAccount")}</Label>
                 <Select
                   value={accountId || "none"}
                   onValueChange={(value) => setAccountId(value === "none" ? "" : value)}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select an account (optional)" />
+                    <SelectValue placeholder={t("selectAccountOptional")} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="none">No account linked</SelectItem>
+                    <SelectItem value="none">{t("noAccountLinked")}</SelectItem>
                     {accounts.map((account) => (
                       <SelectItem key={account.id} value={account.id}>
                         {account.name}
@@ -577,7 +581,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
               </div>
 
               <div>
-                <Label htmlFor="notes">Notes</Label>
+                <Label htmlFor="notes">{t("notes")}</Label>
                 <Textarea
                   id="notes"
                   value={notes}
@@ -618,9 +622,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
               </div>
             ))}
           </div>
-          <p className="mt-2 text-sm text-gray-500">
-            Step {step} of {totalSteps}
-          </p>
+          <p className="mt-2 text-sm text-gray-500">{t("stepOf", { step, totalSteps })}</p>
         </div>
       </div>
 
@@ -631,9 +633,9 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
       {!canGoNext && step < totalSteps && (
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
           <p className="text-sm text-amber-800">
-            {step === 1 && "⚠️ Please select a loan type to continue"}
-            {step === 2 && "⚠️ Please fill in all required fields (marked with *) to continue"}
-            {step === 3 && "⚠️ Please verify payment information to continue"}
+            {step === 1 && t("validation.selectType")}
+            {step === 2 && t("validation.fillRequired")}
+            {step === 3 && t("validation.verifyPayment")}
           </p>
         </div>
       )}
@@ -653,12 +655,12 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
           disabled={loading}
         >
           <ChevronLeft className="me-2 h-4 w-4" />
-          {step === 1 ? "Cancel" : "Back"}
+          {step === 1 ? t("cancel") : t("back")}
         </Button>
 
         {step < totalSteps ? (
           <Button onClick={() => setStep(step + 1)} disabled={!canGoNext || loading}>
-            Next
+            {t("next")}
             <ChevronRight className="ms-2 h-4 w-4" />
           </Button>
         ) : (
@@ -667,7 +669,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
             disabled={!canGoNext || loading}
             className="bg-teal-600 hover:bg-teal-700"
           >
-            {loading ? "Saving..." : loan ? "Update Loan" : "Create Loan"}
+            {loading ? t("saving") : loan ? t("updateLoan") : t("createLoan")}
           </Button>
         )}
       </div>

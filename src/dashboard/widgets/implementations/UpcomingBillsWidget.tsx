@@ -8,6 +8,7 @@
 
 import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import { db } from "@/lib/budget-db";
 import type { Subscription } from "@/types/budget";
 import { useLiveQuery } from "dexie-react-hooks";
@@ -24,6 +25,7 @@ interface UpcomingBillsWidgetProps {
 export function UpcomingBillsWidget({ config }: UpcomingBillsWidgetProps) {
   const t = useTranslations("dashboard.widgets.upcomingBills");
   const format = useFormatter();
+  const currency = useDefaultCurrency();
 
   // Fetch active/trial subscriptions
   const subscriptions =
@@ -116,6 +118,7 @@ export function UpcomingBillsWidget({ config }: UpcomingBillsWidgetProps) {
                 dueLabel={getDueDateLabel(bill.nextBillingDate)}
                 daysUntil={getDaysUntil(bill.nextBillingDate)}
                 format={format}
+                currency={currency}
               />
             ))}
           </div>
@@ -130,9 +133,10 @@ interface BillItemProps {
   dueLabel: string;
   daysUntil: number;
   format: ReturnType<typeof useFormatter>;
+  currency: string;
 }
 
-function BillItem({ bill, dueLabel, daysUntil, format }: BillItemProps) {
+function BillItem({ bill, dueLabel, daysUntil, format, currency }: BillItemProps) {
   const urgencyClass =
     daysUntil === 0 ? "text-red-400" : daysUntil <= 3 ? "text-amber-400" : "text-slate-400";
 
@@ -149,7 +153,7 @@ function BillItem({ bill, dueLabel, daysUntil, format }: BillItemProps) {
       </div>
       <div className="text-right">
         <p className="text-sm font-semibold text-white">
-          {format.number(bill.amount, { style: "currency", currency: "USD" })}
+          {format.number(bill.amount, { style: "currency", currency })}
         </p>
         <p className="text-xs capitalize text-slate-500">{bill.billingCycle}</p>
       </div>

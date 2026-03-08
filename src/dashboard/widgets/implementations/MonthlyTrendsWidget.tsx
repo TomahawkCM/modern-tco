@@ -11,8 +11,9 @@ import { GlassCard } from "@/components/budget/ui/GlassCard";
 import { db } from "@/lib/budget-db";
 import { useLiveQuery } from "dexie-react-hooks";
 import { LineChart, TrendingUp } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useMemo } from "react";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import {
   CartesianGrid,
   Legend,
@@ -39,6 +40,8 @@ interface MonthData {
 export function MonthlyTrendsWidget({ config }: MonthlyTrendsWidgetProps) {
   const t = useTranslations("dashboard.widgets.monthlyTrends");
   const format = useFormatter();
+  const locale = useLocale();
+  const currency = useDefaultCurrency();
 
   // Fetch transactions from last 6 months
   const transactions =
@@ -75,7 +78,7 @@ export function MonthlyTrendsWidget({ config }: MonthlyTrendsWidgetProps) {
       months.set(key, { income: 0, expenses: 0 });
 
       // Format month name (e.g., "Jan", "Feb")
-      const monthName = d.toLocaleDateString("en-US", { month: "short" });
+      const monthName = d.toLocaleDateString(locale, { month: "short" });
       monthNames.push(monthName);
     }
 
@@ -104,7 +107,7 @@ export function MonthlyTrendsWidget({ config }: MonthlyTrendsWidgetProps) {
         expenses: Math.round(data.expenses),
       };
     });
-  }, [transactions]);
+  }, [transactions, locale]);
 
   // Check if we have enough data (at least 2 months with transactions)
   const monthsWithData = monthlyData.filter((m) => m.income > 0 || m.expenses > 0).length;
@@ -161,7 +164,7 @@ export function MonthlyTrendsWidget({ config }: MonthlyTrendsWidgetProps) {
                   axisLine={{ stroke: "#475569" }}
                   tickLine={{ stroke: "#475569" }}
                   tickFormatter={(value) =>
-                    value >= 1000 ? `$${(value / 1000).toFixed(0)}k` : `$${value}`
+                    format.number(value, { style: "currency", currency, notation: "compact" })
                   }
                   width={50}
                 />
@@ -173,7 +176,7 @@ export function MonthlyTrendsWidget({ config }: MonthlyTrendsWidgetProps) {
                   }}
                   labelStyle={{ color: "#f1f5f9" }}
                   formatter={(value: number, name: string) => [
-                    format.number(value, { style: "currency", currency: "USD" }),
+                    format.number(value, { style: "currency", currency }),
                     name === "income" ? t("income") : t("expenses"),
                   ]}
                 />

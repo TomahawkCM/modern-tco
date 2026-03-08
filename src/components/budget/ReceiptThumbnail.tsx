@@ -8,7 +8,7 @@
  */
 
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { FileImage, X, Trash2, ZoomIn } from "lucide-react";
 import {
   getTransactionReceipts,
@@ -25,6 +25,7 @@ interface ReceiptThumbnailProps {
 
 export function ReceiptThumbnail({ transactionId, onReceiptDeleted }: ReceiptThumbnailProps) {
   const tAria = useTranslations("aria");
+  const locale = useLocale();
   const [receipts, setReceipts] = useState<Receipt[]>([]);
   const [thumbnailUrls, setThumbnailUrls] = useState<Record<string, string>>({});
   const [fullImageUrls, setFullImageUrls] = useState<Record<string, string>>({});
@@ -162,7 +163,7 @@ export function ReceiptThumbnail({ transactionId, onReceiptDeleted }: ReceiptThu
               <div className="flex-1">
                 <h3 className="font-semibold text-gray-900">{selectedReceipt.filename}</h3>
                 <p className="mt-2 text-sm text-gray-600">
-                  Uploaded {new Date(selectedReceipt.uploadedAt).toLocaleDateString()} •{" "}
+                  Uploaded {new Date(selectedReceipt.uploadedAt).toLocaleDateString(locale)} •{" "}
                   {(selectedReceipt.fileSize / 1024).toFixed(1)} KB
                 </p>
               </div>

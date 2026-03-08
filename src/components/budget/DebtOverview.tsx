@@ -6,6 +6,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import type { SupportedLocale } from "@/i18n/config";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import Link from "next/link";
 import { CreditCard, TrendingDown, Calendar, Plus, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,6 +24,9 @@ import {
 import { format } from "date-fns";
 
 export function DebtOverview() {
+  const t = useTranslations("debtOverview");
+  const currency = useDefaultCurrency();
+  const locale = useLocale() as SupportedLocale;
   const [loans, setLoans] = useState<Loan[]>([]);
   const [totalDebt, setTotalDebt] = useState(0);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
@@ -82,15 +89,13 @@ export function DebtOverview() {
               <CreditCard className="h-6 w-6 text-gray-700" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-gray-900">Debt Overview</h2>
-              <p className="text-sm text-gray-500">
-                {loans.length} active {loans.length === 1 ? "loan" : "loans"}
-              </p>
+              <h2 className="text-lg font-semibold text-gray-900">{t("title")}</h2>
+              <p className="text-sm text-gray-500">{t("activeLoans", { count: loans.length })}</p>
             </div>
           </div>
           <Link href="/budget-app/loans">
             <Button variant="ghost" size="sm">
-              View All
+              {t("viewAll")}
               <ArrowRight className="ms-2 h-4 w-4" />
             </Button>
           </Link>
@@ -100,22 +105,26 @@ export function DebtOverview() {
       {/* Summary Stats */}
       <div className="grid grid-cols-3 gap-4 bg-gray-50 p-6">
         <div>
-          <p className="mb-1 text-xs text-gray-500">Total Debt</p>
-          <p className="text-xl font-bold text-gray-900">${totalDebt.toLocaleString()}</p>
+          <p className="mb-1 text-xs text-gray-500">{t("totalDebt")}</p>
+          <p className="text-xl font-bold text-gray-900">
+            {formatCurrency(totalDebt, currency, locale)}
+          </p>
         </div>
         <div>
-          <p className="mb-1 text-xs text-gray-500">Monthly Payment</p>
-          <p className="text-xl font-bold text-gray-900">${monthlyPayment.toLocaleString()}</p>
+          <p className="mb-1 text-xs text-gray-500">{t("monthlyPayment")}</p>
+          <p className="text-xl font-bold text-gray-900">
+            {formatCurrency(monthlyPayment, currency, locale)}
+          </p>
         </div>
         <div>
-          <p className="mb-1 text-xs text-gray-500">Avg Rate</p>
+          <p className="mb-1 text-xs text-gray-500">{t("avgRate")}</p>
           <p className="text-xl font-bold text-gray-900">{avgRate.toFixed(2)}%</p>
         </div>
       </div>
 
       {/* Loan List */}
       <div className="space-y-3 p-6">
-        <h3 className="mb-3 text-sm font-semibold text-gray-700">Active Loans</h3>
+        <h3 className="mb-3 text-sm font-semibold text-gray-700">{t("activeLoansTitle")}</h3>
         {loans.slice(0, 3).map((loan) => {
           const progress = calculateProgress(loan);
 
@@ -137,9 +146,9 @@ export function DebtOverview() {
 
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-600">Balance</span>
+                  <span className="text-gray-600">{t("balance")}</span>
                   <span className="font-semibold text-gray-900">
-                    ${loan.currentBalance.toLocaleString()}
+                    {formatCurrency(loan.currentBalance, currency, locale)}
                   </span>
                 </div>
 
@@ -151,8 +160,8 @@ export function DebtOverview() {
                 </div>
 
                 <div className="flex items-center justify-between text-xs text-gray-500">
-                  <span>{progress.toFixed(1)}% paid off</span>
-                  <span>${loan.monthlyPayment.toLocaleString()}/mo</span>
+                  <span>{t("paidOff", { percent: progress.toFixed(1) })}</span>
+                  <span>{formatCurrency(loan.monthlyPayment, currency, locale)}/mo</span>
                 </div>
               </div>
             </Link>
@@ -162,7 +171,7 @@ export function DebtOverview() {
         {loans.length > 3 && (
           <Link href="/budget-app/loans">
             <Button variant="ghost" className="mt-2 w-full">
-              View {loans.length - 3} more {loans.length - 3 === 1 ? "loan" : "loans"}
+              {t("viewMore", { count: loans.length - 3 })}
             </Button>
           </Link>
         )}
@@ -173,7 +182,7 @@ export function DebtOverview() {
         <div className="border-t border-gray-200 bg-gray-50 p-6">
           <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-gray-700">
             <Calendar className="h-4 w-4" />
-            Upcoming Payments
+            {t("upcomingPayments")}
           </h3>
           <div className="space-y-2">
             {upcomingPayments.slice(0, 3).map((payment, index) => (
@@ -182,7 +191,9 @@ export function DebtOverview() {
                   <p className="font-medium text-gray-900">{payment.loanName}</p>
                   <p className="text-xs text-gray-500">{format(payment.date, "MMM d, yyyy")}</p>
                 </div>
-                <p className="font-semibold text-gray-900">${payment.amount.toLocaleString()}</p>
+                <p className="font-semibold text-gray-900">
+                  {formatCurrency(payment.amount, currency, locale)}
+                </p>
               </div>
             ))}
           </div>
@@ -195,7 +206,7 @@ export function DebtOverview() {
           <Link href="/budget-app/loans/new">
             <Button variant="outline" className="w-full">
               <Plus className="me-2 h-4 w-4" />
-              Add Loan
+              {t("addLoan")}
             </Button>
           </Link>
         </div>

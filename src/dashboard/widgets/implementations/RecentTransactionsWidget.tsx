@@ -1,5 +1,6 @@
 import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import { db } from "@/lib/budget-db";
 import { useLiveQuery } from "dexie-react-hooks";
 import { ArrowRight, Receipt } from "lucide-react";
@@ -14,6 +15,7 @@ interface RecentTransactionsWidgetProps {
 export function RecentTransactionsWidget({ config }: RecentTransactionsWidgetProps) {
   const t = useTranslations("dashboard.widgets.recentTransactions");
   const format = useFormatter();
+  const currency = useDefaultCurrency();
 
   // Fetch recent 5 transactions
   const transactions =
@@ -75,7 +77,7 @@ export function RecentTransactionsWidget({ config }: RecentTransactionsWidgetPro
                 <div
                   className={`whitespace-nowrap text-sm font-semibold ${transaction.amount < 0 ? "text-slate-200" : "text-emerald-400"}`}
                 >
-                  {format.number(transaction.amount, { style: "currency", currency: "USD" })}
+                  {format.number(transaction.amount, { style: "currency", currency })}
                 </div>
               </div>
             ))

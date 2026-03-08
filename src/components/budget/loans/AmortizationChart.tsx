@@ -27,6 +27,10 @@ import { generateAmortizationSchedule } from "@/lib/loans/calculations";
 import { format } from "date-fns";
 import { useThemeMode } from "@/hooks/useThemeMode";
 import { getChartPalette } from "@/lib/budget-chart-colors";
+import { useLocale, useTranslations } from "next-intl";
+import type { SupportedLocale } from "@/i18n/config";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 
 interface AmortizationChartProps {
   loan: Loan;
@@ -34,6 +38,10 @@ interface AmortizationChartProps {
 }
 
 export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartProps) {
+  const t = useTranslations("amortizationChart");
+  const currency = useDefaultCurrency();
+  const locale = useLocale() as SupportedLocale;
+
   // Get theme-aware chart colors
   const theme = useThemeMode();
   const palette = getChartPalette(theme);
@@ -72,11 +80,11 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
 
     return (
       <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-lg">
-        <p className="mb-2 font-semibold text-gray-900">Month {label}</p>
+        <p className="mb-2 font-semibold text-gray-900">{t("monthLabel", { month: label })}</p>
         {payload.map((entry: any, index: number) => (
           <div key={index} className="flex items-center justify-between gap-4 text-sm">
             <span style={{ color: entry.color }}>{entry.name}:</span>
-            <span className="font-medium">${entry.value.toLocaleString()}</span>
+            <span className="font-medium">{formatCurrency(entry.value, currency, locale)}</span>
           </div>
         ))}
       </div>
@@ -86,15 +94,15 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Loan Amortization Visualization</CardTitle>
-        <CardDescription>Visual breakdown of your loan over time</CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="balance" className="space-y-4">
           <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="balance">Balance Over Time</TabsTrigger>
-            <TabsTrigger value="breakdown">Payment Breakdown</TabsTrigger>
-            <TabsTrigger value="cumulative">Cumulative</TabsTrigger>
+            <TabsTrigger value="balance">{t("balanceOverTime")}</TabsTrigger>
+            <TabsTrigger value="breakdown">{t("paymentBreakdown")}</TabsTrigger>
+            <TabsTrigger value="cumulative">{t("cumulative")}</TabsTrigger>
           </TabsList>
 
           {/* Balance Over Time */}
@@ -117,7 +125,7 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
                   <YAxis
                     tick={{ fontSize: 12, fill: palette.text }}
                     stroke={palette.grid}
-                    tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
+                    tickFormatter={(value) => formatCurrency(value, currency, locale)}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Legend />
@@ -128,14 +136,12 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
                     strokeWidth={2}
                     fillOpacity={1}
                     fill="url(#colorBalance)"
-                    name="Remaining Balance"
+                    name={t("remainingBalance")}
                   />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
-            <div className="text-center text-sm text-gray-600">
-              Your balance decreases over time as you make payments
-            </div>
+            <div className="text-center text-sm text-gray-600">{t("balanceDescription")}</div>
           </TabsContent>
 
           {/* Payment Breakdown */}
@@ -152,7 +158,7 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
                   <YAxis
                     tick={{ fontSize: 12, fill: palette.text }}
                     stroke={palette.grid}
-                    tickFormatter={(value) => `$${value.toLocaleString()}`}
+                    tickFormatter={(value) => formatCurrency(value, currency, locale)}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Legend />
@@ -160,20 +166,18 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
                     dataKey="principal"
                     stackId="payment"
                     fill={palette.positive.hex}
-                    name="Principal"
+                    name={t("principal")}
                   />
                   <Bar
                     dataKey="interest"
                     stackId="payment"
                     fill={palette.negative.hex}
-                    name="Interest"
+                    name={t("interest")}
                   />
                 </BarChart>
               </ResponsiveContainer>
             </div>
-            <div className="text-center text-sm text-gray-600">
-              Early payments are mostly interest; later payments are mostly principal
-            </div>
+            <div className="text-center text-sm text-gray-600">{t("breakdownDescription")}</div>
           </TabsContent>
 
           {/* Cumulative */}
@@ -190,7 +194,7 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
                   <YAxis
                     tick={{ fontSize: 12, fill: palette.text }}
                     stroke={palette.grid}
-                    tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
+                    tickFormatter={(value) => formatCurrency(value, currency, locale)}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Legend />
@@ -200,7 +204,7 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
                     stroke={palette.positive.hex}
                     strokeWidth={2}
                     dot={false}
-                    name="Cumulative Principal"
+                    name={t("cumulativePrincipal")}
                   />
                   <Line
                     type="monotone"
@@ -208,14 +212,12 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
                     stroke={palette.negative.hex}
                     strokeWidth={2}
                     dot={false}
-                    name="Cumulative Interest"
+                    name={t("cumulativeInterest")}
                   />
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <div className="text-center text-sm text-gray-600">
-              Total principal paid vs total interest paid over the life of the loan
-            </div>
+            <div className="text-center text-sm text-gray-600">{t("cumulativeDescription")}</div>
           </TabsContent>
         </Tabs>
 
@@ -223,22 +225,23 @@ export function AmortizationChart({ loan, maxMonths = 360 }: AmortizationChartPr
         <div className="mt-6 grid grid-cols-3 gap-4 border-t border-gray-200 pt-6">
           <div className="text-center">
             <p className="text-2xl font-bold text-teal-600">{schedule.length}</p>
-            <p className="text-sm text-gray-500">Total Payments</p>
+            <p className="text-sm text-gray-500">{t("totalPayments")}</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-green-600">
-              ${Math.round(loan.currentBalance).toLocaleString()}
+              {formatCurrency(Math.round(loan.currentBalance), currency, locale)}
             </p>
-            <p className="text-sm text-gray-500">Principal</p>
+            <p className="text-sm text-gray-500">{t("principal")}</p>
           </div>
           <div className="text-center">
             <p className="text-2xl font-bold text-red-600">
-              $
-              {Math.round(
-                chartData[chartData.length - 1]?.cumulativeInterest || 0
-              ).toLocaleString()}
+              {formatCurrency(
+                Math.round(chartData[chartData.length - 1]?.cumulativeInterest || 0),
+                currency,
+                locale
+              )}
             </p>
-            <p className="text-sm text-gray-500">Total Interest</p>
+            <p className="text-sm text-gray-500">{t("totalInterest")}</p>
           </div>
         </div>
       </CardContent>

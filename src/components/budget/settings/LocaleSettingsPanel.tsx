@@ -8,6 +8,7 @@
  */
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   SUPPORTED_LOCALES,
   LOCALE_METADATA,
@@ -23,7 +24,13 @@ import {
 } from "@/lib/locale-storage";
 import { FormatPreview } from "./FormatPreview";
 
+// Derive unique currencies from all locale metadata
+const ALL_CURRENCIES = Array.from(
+  new Set(Object.values(LOCALE_METADATA).map((m) => m.currency))
+).sort();
+
 export function LocaleSettingsPanel() {
+  const t = useTranslations("localeSettings");
   const [preferences, setPreferences] = useState<LocalePreferences>(getLocalePreferences());
   const [hasChanges, setHasChanges] = useState(false);
 
@@ -45,12 +52,19 @@ export function LocaleSettingsPanel() {
 
   const handleLocaleChange = (locale: SupportedLocale) => {
     const updated = { ...preferences, locale };
+    // Auto-update currency if user hasn't explicitly chosen one
+    if (!preferences.currencyExplicitlySet) {
+      const localeCurrency = LOCALE_METADATA[locale]?.currency;
+      if (localeCurrency) {
+        updated.currency = localeCurrency;
+      }
+    }
     setPreferences(updated);
     setHasChanges(true);
   };
 
   const handleCurrencyChange = (currency: CurrencyCode) => {
-    const updated = { ...preferences, currency };
+    const updated = { ...preferences, currency, currencyExplicitlySet: true };
     setPreferences(updated);
     setHasChanges(true);
   };
@@ -72,6 +86,7 @@ export function LocaleSettingsPanel() {
       locale: browserLocale,
       currency: LOCALE_METADATA[browserLocale].currency as CurrencyCode,
       weekStart: 0,
+      currencyExplicitlySet: false,
     };
     setPreferences(defaultPreferences);
     setHasChanges(true);
@@ -81,10 +96,8 @@ export function LocaleSettingsPanel() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h2 className="mb-2 text-lg font-semibold">Locale & Formatting</h2>
-        <p className="text-sm text-muted-foreground">
-          Configure language, region, currency, and formatting preferences
-        </p>
+        <h2 className="mb-2 text-lg font-semibold">{t("title")}</h2>
+        <p className="text-sm text-muted-foreground">{t("subtitle")}</p>
       </div>
 
       {/* Settings Grid */}
@@ -92,7 +105,7 @@ export function LocaleSettingsPanel() {
         {/* Language Dropdown */}
         <div className="space-y-2">
           <label htmlFor="language" className="text-sm font-medium">
-            Language
+            {t("language")}
           </label>
           <select
             id="language"
@@ -111,7 +124,7 @@ export function LocaleSettingsPanel() {
         {/* Currency Dropdown */}
         <div className="space-y-2">
           <label htmlFor="currency" className="text-sm font-medium">
-            Currency
+            {t("currency")}
           </label>
           <select
             id="currency"
@@ -119,21 +132,18 @@ export function LocaleSettingsPanel() {
             onChange={(e) => handleCurrencyChange(e.target.value)}
             className="w-full rounded-md border bg-background px-3 py-2"
           >
-            <option value="USD">USD - US Dollar</option>
-            <option value="CAD">CAD - Canadian Dollar</option>
-            <option value="INR">INR - Indian Rupee</option>
-            <option value="KRW">KRW - Korean Won</option>
-            <option value="SGD">SGD - Singapore Dollar</option>
-            <option value="PHP">PHP - Philippine Peso</option>
-            <option value="EUR">EUR - Euro</option>
-            <option value="GBP">GBP - British Pound</option>
+            {ALL_CURRENCIES.map((code) => (
+              <option key={code} value={code}>
+                {code}
+              </option>
+            ))}
           </select>
         </div>
 
         {/* Week Start Dropdown */}
         <div className="space-y-2">
           <label htmlFor="weekStart" className="text-sm font-medium">
-            Week Starts On
+            {t("weekStartsOn")}
           </label>
           <select
             id="weekStart"
@@ -141,15 +151,15 @@ export function LocaleSettingsPanel() {
             onChange={(e) => handleWeekStartChange(Number(e.target.value) as 0 | 1)}
             className="w-full rounded-md border bg-background px-3 py-2"
           >
-            <option value={0}>Sunday</option>
-            <option value={1}>Monday</option>
+            <option value={0}>{t("sunday")}</option>
+            <option value={1}>{t("monday")}</option>
           </select>
         </div>
       </div>
 
       {/* Live Preview */}
       <div className="rounded-lg border bg-muted/50 p-4">
-        <h3 className="mb-3 text-sm font-medium">Format Preview</h3>
+        <h3 className="mb-3 text-sm font-medium">{t("formatPreview")}</h3>
         <FormatPreview
           locale={preferences.locale}
           currency={preferences.currency || LOCALE_METADATA[preferences.locale].currency}
@@ -163,18 +173,18 @@ export function LocaleSettingsPanel() {
           disabled={!hasChanges}
           className="rounded-md bg-primary px-4 py-2 text-primary-foreground transition-colors hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Save Changes
+          {t("saveChanges")}
         </button>
         <button
           onClick={handleReset}
           className="rounded-md border px-4 py-2 transition-colors hover:bg-muted/50"
         >
-          Reset to Browser Defaults
+          {t("resetToDefaults")}
         </button>
       </div>
 
       {hasChanges && (
-        <p className="text-sm text-amber-600 dark:text-amber-500">You have unsaved changes</p>
+        <p className="text-sm text-amber-600 dark:text-amber-500">{t("unsavedChanges")}</p>
       )}
     </div>
   );

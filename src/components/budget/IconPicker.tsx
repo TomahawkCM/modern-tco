@@ -97,6 +97,7 @@ interface IconPickerProps {
 
 export function IconPicker({ value, onChange, onClose }: IconPickerProps) {
   const tAria = useTranslations("aria");
+  const t = useTranslations("iconPicker");
   const [searchQuery, setSearchQuery] = useState("");
 
   // Filter icons based on search query
@@ -120,10 +121,8 @@ export function IconPicker({ value, onChange, onClose }: IconPickerProps) {
         <div className="border-b-2 border-gray-200 p-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Choose an Icon</h2>
-              <p className="mt-1 text-base text-gray-600">
-                Select an icon to represent your category
-              </p>
+              <h2 className="text-2xl font-bold text-gray-900">{t("title")}</h2>
+              <p className="mt-1 text-base text-gray-600">{t("subtitle")}</p>
             </div>
             <button
               onClick={onClose}
@@ -140,7 +139,7 @@ export function IconPicker({ value, onChange, onClose }: IconPickerProps) {
               <CurrentIcon className="h-7 w-7 text-teal-600" />
             </div>
             <div>
-              <p className="text-sm font-medium text-gray-700">Current Icon</p>
+              <p className="text-sm font-medium text-gray-700">{t("currentIcon")}</p>
               <p className="text-base font-bold text-gray-900">{value || "tag"}</p>
             </div>
           </div>
@@ -152,15 +151,15 @@ export function IconPicker({ value, onChange, onClose }: IconPickerProps) {
             <Search className="absolute start-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
             <Input
               type="text"
-              placeholder="Search icons by name or category..."
+              placeholder={t("searchPlaceholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="min-h-[48px] border-2 border-gray-300 py-3 ps-12 pe-4 text-base focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
+              className="min-h-[48px] border-2 border-gray-300 py-3 pe-4 ps-12 text-base focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
             />
           </div>
           {searchQuery && (
             <p className="mt-2 text-sm text-gray-600">
-              Found {filteredIcons.length} icon{filteredIcons.length !== 1 ? "s" : ""}
+              {t("foundCount", { count: filteredIcons.length })}
             </p>
           )}
         </div>
@@ -194,12 +193,10 @@ export function IconPicker({ value, onChange, onClose }: IconPickerProps) {
           ) : (
             <div className="py-12 text-center">
               <Search className="mx-auto h-16 w-16 text-gray-400" />
-              <p className="mt-4 text-lg font-medium text-gray-900">No icons found</p>
-              <p className="mt-2 text-base text-gray-600">
-                Try a different search term or browse all icons
-              </p>
+              <p className="mt-4 text-lg font-medium text-gray-900">{t("noIconsFound")}</p>
+              <p className="mt-2 text-base text-gray-600">{t("noIconsFoundHint")}</p>
               <Button onClick={() => setSearchQuery("")} className="mt-4" variant="outline">
-                Clear Search
+                {t("clearSearch")}
               </Button>
             </div>
           )}
@@ -208,9 +205,11 @@ export function IconPicker({ value, onChange, onClose }: IconPickerProps) {
         {/* Footer */}
         <div className="border-t-2 border-gray-200 bg-gray-50 p-6">
           <div className="flex items-center justify-between gap-4">
-            <p className="text-sm text-gray-600">{BUDGET_ICONS.length} icons available</p>
+            <p className="text-sm text-gray-600">
+              {t("iconsAvailable", { count: BUDGET_ICONS.length })}
+            </p>
             <Button onClick={onClose} variant="outline" className="min-h-[48px] px-6">
-              Close
+              {t("close")}
             </Button>
           </div>
         </div>

@@ -9,7 +9,7 @@
 
 import { useState, useEffect } from "react";
 import { X, Plus, Trash2, AlertCircle, CheckCircle } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import type { Transaction, Category } from "@/types/budget";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
 
@@ -35,6 +35,7 @@ export function SplitTransactionModal({
   onClose,
 }: SplitTransactionModalProps) {
   const t = useTranslations("splitTransaction");
+  const locale = useLocale();
   const originalAmount = Math.abs(transaction.amount);
 
   // Initialize with 2 splits (50/50)
@@ -201,7 +202,7 @@ export function SplitTransactionModal({
               <div>
                 <span className="text-gray-600">{t("date")}</span>
                 <span className="ms-2 font-semibold text-gray-900">
-                  {new Date(transaction.date).toLocaleDateString()}
+                  {new Date(transaction.date).toLocaleDateString(locale)}
                 </span>
               </div>
             </div>
@@ -283,7 +284,7 @@ export function SplitTransactionModal({
                                 updateSplit(split.id, "amount", parseFloat(e.target.value) || 0)
                               }
                               inputMode="decimal"
-                              className="h-12 w-full rounded-lg border border-gray-300 ps-8 pe-4 text-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
+                              className="h-12 w-full rounded-lg border border-gray-300 pe-4 ps-8 text-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
                               aria-required="true"
                               required
                             />

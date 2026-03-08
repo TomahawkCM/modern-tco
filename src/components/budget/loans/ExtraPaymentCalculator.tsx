@@ -14,12 +14,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import type { Loan } from "@/types/budget";
 import { calculateExtraPaymentImpact } from "@/lib/loans/calculations";
 import { format } from "date-fns";
+import { useLocale } from "next-intl";
+import type { SupportedLocale } from "@/i18n/config";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 
 interface ExtraPaymentCalculatorProps {
   loan: Loan;
 }
 
 export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
+  const currency = useDefaultCurrency();
+  const locale = useLocale() as SupportedLocale;
   const [extraMonthly, setExtraMonthly] = useState(0);
   const [oneTimeAmount, setOneTimeAmount] = useState(0);
   const [oneTimeMonth, setOneTimeMonth] = useState(1);
@@ -139,15 +145,20 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
           <Card className="border-s-4 border-green-500 bg-green-50 shadow-md">
             <CardContent className="p-5">
               <p className="mb-2 text-lg font-bold text-green-900">
-                💰 Great news! By paying $
-                {extraMonthly > 0 ? `$${extraMonthly.toLocaleString()} extra each month` : ""}
+                💰 Great news! By paying{" "}
+                {extraMonthly > 0
+                  ? `${formatCurrency(extraMonthly, currency, locale)} extra each month`
+                  : ""}
                 {extraMonthly > 0 && oneTimeAmount > 0 ? " plus " : ""}
-                {oneTimeAmount > 0 ? `a one-time $${oneTimeAmount.toLocaleString()} payment` : ""}:
+                {oneTimeAmount > 0
+                  ? `a one-time ${formatCurrency(oneTimeAmount, currency, locale)} payment`
+                  : ""}
+                :
               </p>
               <p className="text-base text-gray-800">
                 You'll save{" "}
                 <span className="font-bold text-green-600">
-                  ${scenario.totalInterestSaved.toLocaleString()}
+                  {formatCurrency(scenario.totalInterestSaved, currency, locale)}
                 </span>{" "}
                 in interest and pay off your loan{" "}
                 <span className="font-bold text-teal-600">
@@ -177,7 +188,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
               </CardHeader>
               <CardContent>
                 <p className="text-3xl font-bold text-green-600">
-                  ${scenario.totalInterestSaved.toLocaleString()}
+                  {formatCurrency(scenario.totalInterestSaved, currency, locale)}
                 </p>
                 <p className="mt-2 text-sm font-medium text-gray-600">Total interest reduction</p>
               </CardContent>
@@ -235,9 +246,7 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
                   <thead>
                     <tr className="border-b-2 border-gray-300 bg-gray-100">
                       <th className="px-3 py-4 text-start font-bold text-gray-900">Metric</th>
-                      <th className="px-3 py-4 text-end font-bold text-gray-900">
-                        Original Plan
-                      </th>
+                      <th className="px-3 py-4 text-end font-bold text-gray-900">Original Plan</th>
                       <th className="px-3 py-4 text-end font-bold text-green-700">
                         With Extra Payments
                       </th>
@@ -248,13 +257,13 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
                     <tr className="border-b border-gray-200 hover:bg-gray-50">
                       <td className="px-3 py-4 font-semibold text-gray-900">Total Interest</td>
                       <td className="px-3 py-4 text-end font-semibold text-gray-900">
-                        ${scenario.originalTotalInterest.toLocaleString()}
+                        {formatCurrency(scenario.originalTotalInterest, currency, locale)}
                       </td>
                       <td className="px-3 py-4 text-end font-semibold text-gray-900">
-                        ${scenario.newTotalInterest.toLocaleString()}
+                        {formatCurrency(scenario.newTotalInterest, currency, locale)}
                       </td>
                       <td className="px-3 py-4 text-end text-lg font-bold text-green-600">
-                        -${scenario.totalInterestSaved.toLocaleString()} ✓
+                        -{formatCurrency(scenario.totalInterestSaved, currency, locale)} ✓
                       </td>
                     </tr>
                     <tr className="border-b border-gray-200 hover:bg-gray-50">
@@ -272,13 +281,13 @@ export function ExtraPaymentCalculator({ loan }: ExtraPaymentCalculatorProps) {
                     <tr className="hover:bg-gray-50">
                       <td className="px-3 py-4 font-semibold text-gray-900">Monthly Payment</td>
                       <td className="px-3 py-4 text-end font-semibold text-gray-900">
-                        ${loan.monthlyPayment.toLocaleString()}
+                        {formatCurrency(loan.monthlyPayment, currency, locale)}
                       </td>
                       <td className="px-3 py-4 text-end font-semibold text-gray-900">
-                        ${(loan.monthlyPayment + extraMonthly).toLocaleString()}
+                        {formatCurrency(loan.monthlyPayment + extraMonthly, currency, locale)}
                       </td>
                       <td className="px-3 py-4 text-end font-semibold text-gray-600">
-                        +${extraMonthly.toLocaleString()}
+                        +{formatCurrency(extraMonthly, currency, locale)}
                       </td>
                     </tr>
                   </tbody>

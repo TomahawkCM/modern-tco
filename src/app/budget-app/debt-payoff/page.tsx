@@ -48,11 +48,15 @@ import type {
   StrategyResult,
 } from "@/lib/calculators/types";
 import type { DebtScenario } from "@/types/budget";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import type { SupportedLocale } from "@/i18n/config";
 import Link from "next/link";
 
 export default function DebtPayoffPage() {
   const t = useTranslations("debtPayoff");
+  const locale = useLocale() as SupportedLocale;
+  const currency = useDefaultCurrency();
 
   // State
   const [debts, setDebts] = useState<DebtAccount[]>([]);
@@ -72,7 +76,10 @@ export default function DebtPayoffPage() {
   const [loading, setLoading] = useState(true);
   const celebratedRef = useRef(false);
 
-  const fmtCurrency = useCallback((amount: number) => formatCurrency(amount, "USD", "en-US"), []);
+  const fmtCurrency = useCallback(
+    (amount: number) => formatCurrency(amount, currency, locale),
+    [currency, locale]
+  );
 
   // Load loans and scenarios on mount
   useEffect(() => {

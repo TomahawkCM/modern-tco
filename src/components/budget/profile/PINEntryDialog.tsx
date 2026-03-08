@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useRef, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -36,6 +37,7 @@ export function PINEntryDialog({
   onCancel,
   profileName,
 }: PINEntryDialogProps) {
+  const tPin = useTranslations("pinDialog");
   const {
     currentProfile,
     isLocked,
@@ -112,7 +114,7 @@ export function PINEntryDialog({
     onCancel?.();
   };
 
-  const displayName = profileName || currentProfile?.name || "Profile";
+  const displayName = profileName || currentProfile?.name || tPin("defaultProfileName");
   const avatarColor = currentProfile?.avatarColor || "#10b981";
 
   return (
@@ -139,9 +141,9 @@ export function PINEntryDialog({
           </div>
           <DialogTitle className="flex items-center justify-center gap-2">
             <Lock className="h-4 w-4" />
-            Unlock {displayName}
+            {tPin("unlockTitle", { name: displayName })}
           </DialogTitle>
-          <DialogDescription>Enter your PIN to access this profile</DialogDescription>
+          <DialogDescription>{tPin("unlockDescription")}</DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -156,7 +158,7 @@ export function PINEntryDialog({
               value={pin}
               onChange={(e) => handlePINChange(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Enter PIN"
+              placeholder={tPin("enterPinPlaceholder")}
               disabled={lockoutSeconds > 0}
               className="h-14 text-center text-2xl tracking-widest"
               autoComplete="off"
@@ -192,20 +194,22 @@ export function PINEntryDialog({
             <div className="flex items-center gap-2 rounded-lg bg-destructive/10 p-3 text-destructive">
               <AlertCircle className="h-4 w-4 flex-shrink-0" />
               <p className="text-sm">
-                {lockoutSeconds > 0 ? `Try again in ${lockoutSeconds} seconds` : contextError}
+                {lockoutSeconds > 0
+                  ? tPin("tryAgainIn", { seconds: lockoutSeconds })
+                  : contextError}
               </p>
             </div>
           )}
 
           {/* Submit Button */}
           <Button type="submit" className="w-full" disabled={pin.length < 4 || lockoutSeconds > 0}>
-            Unlock
+            {tPin("unlock")}
           </Button>
 
           {/* Cancel Link */}
           {onCancel && (
             <Button type="button" variant="ghost" className="w-full" onClick={handleCancel}>
-              Use Different Profile
+              {tPin("useDifferentProfile")}
             </Button>
           )}
         </form>

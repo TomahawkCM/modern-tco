@@ -19,7 +19,7 @@ import {
   FileText,
   Plus,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { extractReceiptData, type ExtractedReceiptData } from "@/lib/receipt-ocr";
 import { getPrivacySettings } from "@/lib/budget-privacy-settings";
 import { db } from "@/lib/budget-db";
@@ -29,6 +29,7 @@ import Link from "next/link";
 
 export default function ReceiptScannerPage() {
   const t = useTranslations("ocr");
+  const locale = useLocale();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -480,7 +481,9 @@ export default function ReceiptScannerPage() {
                 <div className="flex items-center justify-between border-b border-slate-700 pb-2">
                   <span className="text-slate-400">{t("dateLabel")}:</span>
                   <span className="font-medium text-white">
-                    {extractedData.date ? extractedData.date.toLocaleDateString() : t("notFound")}
+                    {extractedData.date
+                      ? extractedData.date.toLocaleDateString(locale)
+                      : t("notFound")}
                   </span>
                 </div>
               </div>

@@ -35,6 +35,7 @@ interface ProfileCreateDialogProps {
 
 export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCreateDialogProps) {
   const tAria = useTranslations("aria");
+  const tProfile = useTranslations("profileDialog");
   const { createProfile } = useProfile();
 
   const [name, setName] = useState("");
@@ -63,21 +64,21 @@ export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCr
 
   const validateForm = (): string | null => {
     if (!name.trim()) {
-      return "Please enter a name for the profile";
+      return tProfile("errorNameRequired");
     }
 
     if (name.trim().length > 30) {
-      return "Name must be 30 characters or less";
+      return tProfile("errorNameTooLong");
     }
 
     if (usePIN) {
       const pinValidation = isPINValid(pin);
       if (!pinValidation.valid) {
-        return pinValidation.error || "Invalid PIN";
+        return pinValidation.error || tProfile("errorInvalidPin");
       }
 
       if (pin !== confirmPIN) {
-        return "PINs do not match";
+        return tProfile("errorPinMismatch");
       }
     }
 
@@ -102,7 +103,7 @@ export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCr
       handleClose();
       onSuccess?.(profile.id);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to create profile");
+      setError(err instanceof Error ? err.message : tProfile("errorCreateFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -115,11 +116,9 @@ export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCr
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <User className="h-5 w-5" />
-              Create Profile
+              {tProfile("createTitle")}
             </DialogTitle>
-            <DialogDescription>
-              Add a new profile for a family member. Each profile can have its own private budgets.
-            </DialogDescription>
+            <DialogDescription>{tProfile("createDescription")}</DialogDescription>
           </DialogHeader>
 
           <div className="grid gap-4 py-4">
@@ -155,12 +154,12 @@ export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCr
 
             {/* Name Input */}
             <div className="grid gap-2">
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor="name">{tProfile("nameLabel")}</Label>
               <Input
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Enter profile name"
+                placeholder={tProfile("namePlaceholder")}
                 maxLength={30}
                 autoFocus
               />
@@ -172,7 +171,7 @@ export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCr
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <Lock className="h-4 w-4 text-muted-foreground" />
-                    <Label htmlFor="use-pin">Protect with PIN</Label>
+                    <Label htmlFor="use-pin">{tProfile("protectWithPin")}</Label>
                   </div>
                   <Switch id="use-pin" checked={usePIN} onCheckedChange={setUsePIN} />
                 </div>
@@ -181,7 +180,7 @@ export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCr
                 {usePIN && (
                   <div className="grid gap-3 rounded-lg border bg-muted/50 p-3">
                     <div className="grid gap-2">
-                      <Label htmlFor="pin">PIN (4-6 digits)</Label>
+                      <Label htmlFor="pin">{tProfile("pinLabel")}</Label>
                       <Input
                         id="pin"
                         type="password"
@@ -190,11 +189,11 @@ export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCr
                         maxLength={6}
                         value={pin}
                         onChange={(e) => setPIN(e.target.value.replace(/\D/g, ""))}
-                        placeholder="Enter PIN"
+                        placeholder={tProfile("enterPinPlaceholder")}
                       />
                     </div>
                     <div className="grid gap-2">
-                      <Label htmlFor="confirm-pin">Confirm PIN</Label>
+                      <Label htmlFor="confirm-pin">{tProfile("confirmPinLabel")}</Label>
                       <Input
                         id="confirm-pin"
                         type="password"
@@ -203,13 +202,10 @@ export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCr
                         maxLength={6}
                         value={confirmPIN}
                         onChange={(e) => setConfirmPIN(e.target.value.replace(/\D/g, ""))}
-                        placeholder="Confirm PIN"
+                        placeholder={tProfile("confirmPinPlaceholder")}
                       />
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      PIN protects access to this profile. Choose something memorable but not too
-                      simple.
-                    </p>
+                    <p className="text-xs text-muted-foreground">{tProfile("pinHelpText")}</p>
                   </div>
                 )}
               </>
@@ -221,11 +217,11 @@ export function ProfileCreateDialog({ open, onOpenChange, onSuccess }: ProfileCr
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={handleClose} disabled={isLoading}>
-              Cancel
+              {tProfile("cancel")}
             </Button>
             <Button type="submit" disabled={isLoading}>
               {isLoading && <Loader2 className="me-2 h-4 w-4 animate-spin" />}
-              Create Profile
+              {tProfile("createTitle")}
             </Button>
           </DialogFooter>
         </form>

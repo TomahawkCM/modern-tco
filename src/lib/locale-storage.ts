@@ -32,6 +32,9 @@ export interface LocalePreferences {
   /** User's timezone (IANA format) */
   timezone?: string;
 
+  /** Whether the user explicitly chose a currency (vs. auto-set from locale) */
+  currencyExplicitlySet?: boolean;
+
   /** Last updated timestamp */
   updatedAt?: number;
 }

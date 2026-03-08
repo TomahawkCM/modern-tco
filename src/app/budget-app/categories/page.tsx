@@ -6,11 +6,13 @@
  */
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { Plus, Edit, Trash2, Save, X } from "lucide-react";
 import { db, DEFAULT_CATEGORIES } from "@/lib/budget-db";
 import type { Category } from "@/types/budget";
 
 export default function CategoriesPage() {
+  const t = useTranslations("categories");
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -67,7 +69,7 @@ export default function CategoriesPage() {
 
   async function saveCategory() {
     if (!name.trim()) {
-      alert("Category name is required");
+      alert(t("nameRequired"));
       return;
     }
 
@@ -106,7 +108,7 @@ export default function CategoriesPage() {
       cancelEdit();
     } catch (error) {
       console.error("Error saving category:", error);
-      alert("Failed to save category");
+      alert(t("saveFailed"));
     }
   }
 
@@ -115,18 +117,18 @@ export default function CategoriesPage() {
     if (!category) return;
 
     if (category.isDefault) {
-      alert("Cannot delete default categories");
+      alert(t("cannotDeleteDefault"));
       return;
     }
 
-    if (!confirm(`Delete "${category.name}"? This cannot be undone.`)) return;
+    if (!confirm(t("deleteConfirm", { name: category.name }))) return;
 
     try {
       await db.categories.delete(id);
       await loadCategories();
     } catch (error) {
       console.error("Error deleting category:", error);
-      alert("Failed to delete category");
+      alert(t("deleteFailed"));
     }
   }
 
@@ -135,7 +137,7 @@ export default function CategoriesPage() {
       <div className="flex h-64 items-center justify-center">
         <div className="text-center">
           <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-teal-600 border-t-transparent"></div>
-          <p className="mt-4 text-gray-600">Loading categories...</p>
+          <p className="mt-4 text-gray-600">{t("loading")}</p>
         </div>
       </div>
     );
@@ -146,15 +148,15 @@ export default function CategoriesPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-white">Categories</h1>
-          <p className="mt-2 text-slate-400">Manage your budget categories and subcategories</p>
+          <h1 className="text-3xl font-bold text-white">{t("title")}</h1>
+          <p className="mt-2 text-slate-400">{t("subtitle")}</p>
         </div>
         <button
           onClick={startCreate}
           className="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-700"
         >
           <Plus className="h-4 w-4" />
-          New Category
+          {t("newCategory")}
         </button>
       </div>
 
@@ -162,27 +164,29 @@ export default function CategoriesPage() {
       {(showCreateForm || editingId) && (
         <div className="rounded-lg border-2 border-teal-500 bg-white p-6 shadow">
           <h2 className="mb-4 text-lg font-semibold text-gray-900">
-            {editingId ? "Edit Category" : "Create Category"}
+            {editingId ? t("editCategory") : t("createCategory")}
           </h2>
 
           <div className="space-y-4">
             {/* Name */}
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
-                Category Name *
+                {t("categoryNameLabel")}
               </label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g., Home Expenses"
+                placeholder={t("categoryNamePlaceholder")}
                 className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-teal-500"
               />
             </div>
 
             {/* Type */}
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">Type</label>
+              <label className="mb-2 block text-sm font-medium text-gray-700">
+                {t("typeLabel")}
+              </label>
               <div className="grid grid-cols-2 gap-4">
                 <button
                   type="button"
@@ -193,7 +197,7 @@ export default function CategoriesPage() {
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
-                  Expense
+                  {t("expense")}
                 </button>
                 <button
                   type="button"
@@ -204,7 +208,7 @@ export default function CategoriesPage() {
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
-                  Income
+                  {t("income")}
                 </button>
               </div>
             </div>
@@ -212,20 +216,22 @@ export default function CategoriesPage() {
             {/* Subcategories */}
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
-                Subcategories (comma-separated)
+                {t("subcategoriesLabel")}
               </label>
               <input
                 type="text"
                 value={subcategories}
                 onChange={(e) => setSubcategories(e.target.value)}
-                placeholder="e.g., Rent, Maintenance, Insurance"
+                placeholder={t("subcategoriesPlaceholder")}
                 className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:ring-2 focus:ring-teal-500"
               />
             </div>
 
             {/* Color */}
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">Color</label>
+              <label className="mb-2 block text-sm font-medium text-gray-700">
+                {t("colorLabel")}
+              </label>
               <input
                 type="color"
                 value={color}
@@ -242,7 +248,7 @@ export default function CategoriesPage() {
                 className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
               >
                 <X className="mr-2 inline h-4 w-4" />
-                Cancel
+                {t("cancel")}
               </button>
               <button
                 type="button"
@@ -250,7 +256,7 @@ export default function CategoriesPage() {
                 className="flex-1 rounded-lg bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-700"
               >
                 <Save className="mr-2 inline h-4 w-4" />
-                Save
+                {t("save")}
               </button>
             </div>
           </div>
@@ -261,13 +267,13 @@ export default function CategoriesPage() {
       <div className="divide-y divide-gray-200 rounded-lg bg-white shadow">
         {categories.length === 0 ? (
           <div className="py-12 text-center">
-            <p className="text-gray-500">No categories found</p>
+            <p className="text-gray-500">{t("noCategories")}</p>
             <button
               onClick={startCreate}
               className="mt-4 inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-700"
             >
               <Plus className="h-4 w-4" />
-              Create Your First Category
+              {t("createFirstCategory")}
             </button>
           </div>
         ) : (
@@ -291,11 +297,11 @@ export default function CategoriesPage() {
                             : "bg-red-100 text-red-800"
                         }`}
                       >
-                        {cat.type}
+                        {cat.type === "income" ? t("income") : t("expense")}
                       </span>
                       {cat.isDefault && (
                         <span className="inline-flex items-center rounded bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
-                          Default
+                          {t("default")}
                         </span>
                       )}
                     </div>
@@ -312,16 +318,16 @@ export default function CategoriesPage() {
                     <button
                       onClick={() => startEdit(cat)}
                       className="text-teal-600 hover:text-teal-700"
-                      title="Edit"
-                      aria-label="Edit category"
+                      title={t("edit")}
+                      aria-label={t("editCategoryAria")}
                     >
                       <Edit className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() => deleteCategory(cat.id)}
                       className="text-red-600 hover:text-red-700"
-                      title="Delete"
-                      aria-label="Delete category"
+                      title={t("delete")}
+                      aria-label={t("deleteCategoryAria")}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -336,8 +342,7 @@ export default function CategoriesPage() {
       {/* Info */}
       <div className="rounded-lg border border-teal-200 bg-teal-50 p-4">
         <p className="text-sm text-teal-800">
-          <strong>Tip:</strong> Default categories cannot be edited or deleted. Create custom
-          categories for your specific needs.
+          <strong>{t("tipLabel")}</strong> {t("tipText")}
         </p>
       </div>
     </div>

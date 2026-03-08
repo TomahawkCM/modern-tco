@@ -69,11 +69,9 @@ import {
   getSavedFilters,
   type AutocompleteSuggestion,
 } from "@/lib/search/autocomplete";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import { parseNaturalLanguage } from "@/lib/search/natural-language-parser";
-import {
-  highlightMatches,
-  getMatchIndicesForField,
-} from "@/lib/search/highlight-matches";
+import { highlightMatches, getMatchIndicesForField } from "@/lib/search/highlight-matches";
 
 interface CommandPaletteProps {
   open?: boolean;
@@ -103,12 +101,12 @@ function isTransactionSearchQuery(query: string): boolean {
 }
 
 // Format transaction amount using locale-aware formatting
-function formatAmount(amount: number, locale: string): string {
+function formatAmount(amount: number, locale: string, currency: string): string {
   const absAmount = Math.abs(amount);
   const sign = amount >= 0 ? "+" : "-";
   const formatted = new Intl.NumberFormat(locale, {
     style: "currency",
-    currency: "USD", // TODO: make configurable per user
+    currency,
     minimumFractionDigits: 2,
   }).format(absAmount);
   return `${sign}${formatted}`;
@@ -155,6 +153,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
   const router = useRouter();
   const { setTheme } = useTheme();
   const locale = useLocale();
+  const currency = useDefaultCurrency();
   const t = useTranslations("commandPalette");
   const tSearch = useTranslations("transactionSearch");
   const [internalOpen, setInternalOpen] = useState(false);
@@ -405,7 +404,7 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
                       result.item.amount >= 0 ? "text-green-600" : "text-red-600"
                     }`}
                   >
-                    {formatAmount(result.item.amount, locale)}
+                    {formatAmount(result.item.amount, locale, currency)}
                   </span>
                 </CommandItem>
               ))}
@@ -494,12 +493,14 @@ export function CommandPalette({ open: controlledOpen, onOpenChange }: CommandPa
               <ul className="space-y-1 text-xs">
                 <li>• {tSearch("searchTipChars")}</li>
                 <li>
-                  • {tSearch.rich("searchTipAmount", {
+                  •{" "}
+                  {tSearch.rich("searchTipAmount", {
                     code: (chunks) => <code className="rounded bg-muted px-1">{chunks}</code>,
                   })}
                 </li>
                 <li>
-                  • {tSearch.rich("searchTipNL", {
+                  •{" "}
+                  {tSearch.rich("searchTipNL", {
                     code: (chunks) => <code className="rounded bg-muted px-1">{chunks}</code>,
                   })}
                 </li>

@@ -159,9 +159,7 @@ export function SimpleFINSyncProgress({ progress, onCancel }: SimpleFINSyncProgr
             ) : (
               <RefreshCw className="h-5 w-5 animate-spin text-blue-500" />
             )}
-            <span>
-              {isComplete ? t("syncComplete") : isError ? t("syncFailed") : t("syncing")}
-            </span>
+            <span>{isComplete ? t("syncComplete") : isError ? t("syncFailed") : t("syncing")}</span>
           </div>
           {!isComplete && !isError && onCancel && (
             <Button variant="ghost" size="sm" onClick={onCancel}>
@@ -219,9 +217,7 @@ export function SimpleFINSyncResult({ result, onDismiss }: SimpleFINSyncResultPr
             ) : (
               <AlertCircle className="h-5 w-5 text-red-500" />
             )}
-            <span>
-              {result.success ? t("syncSuccessful") : t("syncCompletedWithErrors")}
-            </span>
+            <span>{result.success ? t("syncSuccessful") : t("syncCompletedWithErrors")}</span>
           </div>
           {onDismiss && (
             <Button variant="ghost" size="sm" onClick={onDismiss}>
@@ -312,6 +308,7 @@ export function SimpleFINAccountList({
   onToggleImport,
 }: SimpleFINAccountListProps) {
   const t = useTranslations("simplefinStatus");
+  const locale = useLocale();
 
   if (accounts.length === 0) {
     return (
@@ -341,7 +338,7 @@ export function SimpleFINAccountList({
                     })}
                   </span>
                   <span className="text-muted-foreground">
-                    {t("asOf", { date: account.lastBalanceDate.toLocaleDateString() })}
+                    {t("asOf", { date: account.lastBalanceDate.toLocaleDateString(locale) })}
                   </span>
                 </div>
               </div>
@@ -453,9 +450,7 @@ export function SimpleFINSyncIndicator({
             ) : (
               <RefreshCw className="h-4 w-4" />
             )}
-            <span className="hidden sm:inline">
-              {isSyncing ? t("syncing") : t("sync")}
-            </span>
+            <span className="hidden sm:inline">{isSyncing ? t("syncing") : t("sync")}</span>
           </Button>
         </TooltipTrigger>
         <TooltipContent>

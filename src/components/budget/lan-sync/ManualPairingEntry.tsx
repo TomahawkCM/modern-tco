@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Keyboard, AlertCircle, Loader2, CheckCircle2, HelpCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { PairingQRData } from "@/lib/lan-sync";
 import { PROTOCOL_VERSION, DEFAULT_SYNC_PORT } from "@/lib/lan-sync";
 
@@ -50,10 +51,10 @@ const CODE_REGEX = /^[A-Z0-9]{6}$/;
 
 function validateIP(ip: string): string | undefined {
   if (!ip.trim()) {
-    return "IP address is required";
+    return "ipRequired";
   }
   if (!IP_REGEX.test(ip.trim())) {
-    return "Invalid IP address format (e.g., 192.168.1.100)";
+    return "ipInvalid";
   }
   return undefined;
 }
@@ -64,18 +65,18 @@ function validatePort(port: string): string | undefined {
   }
   const portNum = parseInt(port, 10);
   if (isNaN(portNum) || portNum < 1 || portNum > 65535) {
-    return "Port must be between 1 and 65535";
+    return "portInvalid";
   }
   return undefined;
 }
 
 function validateCode(code: string): string | undefined {
   if (!code.trim()) {
-    return "Pairing code is required";
+    return "codeRequired";
   }
   const normalized = code.trim().toUpperCase().replace(/\s/g, "");
   if (!CODE_REGEX.test(normalized)) {
-    return "Pairing code must be 6 alphanumeric characters";
+    return "codeInvalid";
   }
   return undefined;
 }
@@ -91,6 +92,8 @@ export function ManualPairingEntry({
   seniorsMode = false,
   className = "",
 }: ManualPairingEntryProps) {
+  const t = useTranslations("manualPairing");
+
   // Form state
   const [ip, setIp] = useState("");
   const [port, setPort] = useState("");
@@ -116,8 +119,11 @@ export function ManualPairingEntry({
       e.preventDefault();
 
       if (!validateForm()) {
-        const errorMessages = Object.values(errors).filter(Boolean).join(", ");
-        onError?.(errorMessages || "Please fix the form errors");
+        const errorMessages = Object.values(errors)
+          .filter(Boolean)
+          .map((key) => t(key as string))
+          .join(", ");
+        onError?.(errorMessages || t("fixFormErrors"));
         return;
       }
 
@@ -133,7 +139,7 @@ export function ManualPairingEntry({
 
       onSubmit(pairingData);
     },
-    [ip, port, code, errors, validateForm, onSubmit, onError]
+    [ip, port, code, errors, validateForm, onSubmit, onError, t]
   );
 
   // Handle code input with auto-uppercase
@@ -181,9 +187,9 @@ export function ManualPairingEntry({
     <Card className={className}>
       <CardHeader className="text-center">
         <Keyboard className="mx-auto mb-2 h-12 w-12 text-muted-foreground" />
-        <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>Manual Entry</CardTitle>
+        <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>{t("title")}</CardTitle>
         <CardDescription className={seniorsMode ? "text-lg" : ""}>
-          Enter the connection details shown on the host device
+          {t("description")}
         </CardDescription>
       </CardHeader>
 
@@ -192,7 +198,7 @@ export function ManualPairingEntry({
           {/* IP Address */}
           <div className="space-y-2">
             <Label htmlFor="ip-address" className={labelSize}>
-              IP Address <span className="text-red-500">*</span>
+              {t("ipAddress")} <span className="text-red-500">*</span>
             </Label>
             <Input
               id="ip-address"
@@ -207,7 +213,7 @@ export function ManualPairingEntry({
             />
             {errors.ip && (
               <p id="ip-error" className="text-sm text-red-500" role="alert">
-                {errors.ip}
+                {t(errors.ip)}
               </p>
             )}
           </div>
@@ -215,9 +221,9 @@ export function ManualPairingEntry({
           {/* Port */}
           <div className="space-y-2">
             <Label htmlFor="port" className={labelSize}>
-              Port{" "}
+              {t("port")}{" "}
               <span className="font-normal text-muted-foreground">
-                (optional, default: {DEFAULT_SYNC_PORT})
+                ({t("optionalDefault", { port: DEFAULT_SYNC_PORT })})
               </span>
             </Label>
             <Input
@@ -234,7 +240,7 @@ export function ManualPairingEntry({
             />
             {errors.port && (
               <p id="port-error" className="text-sm text-red-500" role="alert">
-                {errors.port}
+                {t(errors.port)}
               </p>
             )}
           </div>
@@ -242,7 +248,7 @@ export function ManualPairingEntry({
           {/* Pairing Code */}
           <div className="space-y-2">
             <Label htmlFor="pairing-code" className={labelSize}>
-              Pairing Code <span className="text-red-500">*</span>
+              {t("pairingCode")} <span className="text-red-500">*</span>
             </Label>
             <Input
               id="pairing-code"
@@ -260,11 +266,11 @@ export function ManualPairingEntry({
             />
             {errors.code ? (
               <p id="code-error" className="text-sm text-red-500" role="alert">
-                {errors.code}
+                {t(errors.code)}
               </p>
             ) : (
               <p id="code-hint" className="text-sm text-muted-foreground">
-                6-character code shown on the host device
+                {t("codeHint")}
               </p>
             )}
           </div>
@@ -278,22 +284,20 @@ export function ManualPairingEntry({
             className="w-full"
           >
             <HelpCircle className="me-2 h-4 w-4" />
-            {showHelp ? "Hide Help" : "Where do I find these?"}
+            {showHelp ? t("hideHelp") : t("whereToFind")}
           </Button>
 
           {/* Help Content */}
           {showHelp && (
             <Alert>
               <HelpCircle className="h-4 w-4" />
-              <AlertTitle>Finding Connection Details</AlertTitle>
+              <AlertTitle>{t("helpTitle")}</AlertTitle>
               <AlertDescription className={seniorsMode ? "text-base" : "text-sm"}>
                 <ol className="mt-2 list-inside list-decimal space-y-1">
-                  <li>Open Budget App on the device you want to sync with</li>
-                  <li>Go to Settings → LAN Sync</li>
-                  <li>Tap &quot;Allow Connections&quot;</li>
-                  <li>
-                    The IP address, port, and pairing code will be displayed below the QR code
-                  </li>
+                  <li>{t("helpStep1")}</li>
+                  <li>{t("helpStep2")}</li>
+                  <li>{t("helpStep3")}</li>
+                  <li>{t("helpStep4")}</li>
                 </ol>
               </AlertDescription>
             </Alert>
@@ -309,12 +313,12 @@ export function ManualPairingEntry({
             {isSubmitting ? (
               <>
                 <Loader2 className={`me-2 animate-spin ${seniorsMode ? "h-6 w-6" : "h-4 w-4"}`} />
-                Connecting...
+                {t("connecting")}
               </>
             ) : (
               <>
                 <CheckCircle2 className={`me-2 ${seniorsMode ? "h-6 w-6" : "h-4 w-4"}`} />
-                Connect
+                {t("connect")}
               </>
             )}
           </Button>

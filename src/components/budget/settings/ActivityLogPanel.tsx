@@ -39,6 +39,7 @@ import {
   ArrowRightLeft,
   Clock,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import { getActivityLog, getActivityLogCount, formatActivityEntry } from "@/lib/activity-logger";
 import type { ActivityLogEntry, ActivityLogFilter } from "@/types/profile";
@@ -69,7 +70,10 @@ const ENTITY_ICONS: Record<ActivityLogEntry["entityType"], React.ReactNode> = {
   system: <History className="h-4 w-4" />,
 };
 
-function formatRelativeTime(date: Date): string {
+function formatRelativeTime(
+  date: Date,
+  t: (key: string, values?: Record<string, string | number | Date>) => string
+): string {
   const now = new Date();
   const diff = now.getTime() - date.getTime();
   const seconds = Math.floor(diff / 1000);
@@ -77,10 +81,10 @@ function formatRelativeTime(date: Date): string {
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
 
-  if (seconds < 60) return "Just now";
-  if (minutes < 60) return `${minutes}m ago`;
-  if (hours < 24) return `${hours}h ago`;
-  if (days < 7) return `${days}d ago`;
+  if (seconds < 60) return t("justNow");
+  if (minutes < 60) return t("minutesAgo", { count: minutes });
+  if (hours < 24) return t("hoursAgo", { count: hours });
+  if (days < 7) return t("daysAgo", { count: days });
 
   return date.toLocaleDateString(undefined, {
     month: "short",
@@ -90,6 +94,7 @@ function formatRelativeTime(date: Date): string {
 }
 
 export function ActivityLogPanel() {
+  const t = useTranslations("activityLog");
   const { profiles, currentProfile } = useProfile();
   const [entries, setEntries] = useState<ActivityLogEntry[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -161,9 +166,9 @@ export function ActivityLogPanel() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <History className="h-5 w-5" />
-            Activity Log
+            {t("title")}
           </CardTitle>
-          <CardDescription>Activity logging is not enabled.</CardDescription>
+          <CardDescription>{t("loggingNotEnabled")}</CardDescription>
         </CardHeader>
       </Card>
     );
@@ -176,15 +181,13 @@ export function ActivityLogPanel() {
           <div>
             <CardTitle className="flex items-center gap-2">
               <History className="h-5 w-5" />
-              Activity Log
+              {t("title")}
             </CardTitle>
-            <CardDescription>
-              Track changes made by all profiles ({totalCount} total entries)
-            </CardDescription>
+            <CardDescription>{t("description", { count: totalCount })}</CardDescription>
           </div>
           <Button variant="outline" size="sm" onClick={handleRefresh} disabled={isRefreshing}>
             <RefreshCw className={cn("me-2 h-4 w-4", isRefreshing && "animate-spin")} />
-            Refresh
+            {t("refresh")}
           </Button>
         </div>
       </CardHeader>
@@ -193,15 +196,15 @@ export function ActivityLogPanel() {
         <div className="flex flex-wrap gap-3">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4 text-muted-foreground" />
-            <span className="text-sm text-muted-foreground">Filter:</span>
+            <span className="text-sm text-muted-foreground">{t("filter")}</span>
           </div>
 
           <Select value={filterProfileId} onValueChange={setFilterProfileId}>
             <SelectTrigger className="w-[150px]">
-              <SelectValue placeholder="All profiles" />
+              <SelectValue placeholder={t("allProfiles")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All profiles</SelectItem>
+              <SelectItem value="all">{t("allProfiles")}</SelectItem>
               {profiles.map((profile) => (
                 <SelectItem key={profile.id} value={profile.id}>
                   {profile.name}
@@ -212,39 +215,39 @@ export function ActivityLogPanel() {
 
           <Select value={filterAction} onValueChange={setFilterAction}>
             <SelectTrigger className="w-[130px]">
-              <SelectValue placeholder="All actions" />
+              <SelectValue placeholder={t("allActions")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All actions</SelectItem>
-              <SelectItem value="create">Created</SelectItem>
-              <SelectItem value="update">Updated</SelectItem>
-              <SelectItem value="delete">Deleted</SelectItem>
-              <SelectItem value="login">Login</SelectItem>
-              <SelectItem value="logout">Logout</SelectItem>
-              <SelectItem value="export">Export</SelectItem>
-              <SelectItem value="import">Import</SelectItem>
+              <SelectItem value="all">{t("allActions")}</SelectItem>
+              <SelectItem value="create">{t("actionCreated")}</SelectItem>
+              <SelectItem value="update">{t("actionUpdated")}</SelectItem>
+              <SelectItem value="delete">{t("actionDeleted")}</SelectItem>
+              <SelectItem value="login">{t("actionLogin")}</SelectItem>
+              <SelectItem value="logout">{t("actionLogout")}</SelectItem>
+              <SelectItem value="export">{t("actionExport")}</SelectItem>
+              <SelectItem value="import">{t("actionImport")}</SelectItem>
             </SelectContent>
           </Select>
 
           <Select value={filterEntityType} onValueChange={setFilterEntityType}>
             <SelectTrigger className="w-[140px]">
-              <SelectValue placeholder="All types" />
+              <SelectValue placeholder={t("allTypes")} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All types</SelectItem>
-              <SelectItem value="transaction">Transactions</SelectItem>
-              <SelectItem value="budget">Budgets</SelectItem>
-              <SelectItem value="account">Accounts</SelectItem>
-              <SelectItem value="category">Categories</SelectItem>
-              <SelectItem value="profile">Profiles</SelectItem>
-              <SelectItem value="system">System</SelectItem>
+              <SelectItem value="all">{t("allTypes")}</SelectItem>
+              <SelectItem value="transaction">{t("typeTransactions")}</SelectItem>
+              <SelectItem value="budget">{t("typeBudgets")}</SelectItem>
+              <SelectItem value="account">{t("typeAccounts")}</SelectItem>
+              <SelectItem value="category">{t("typeCategories")}</SelectItem>
+              <SelectItem value="profile">{t("typeProfiles")}</SelectItem>
+              <SelectItem value="system">{t("typeSystem")}</SelectItem>
             </SelectContent>
           </Select>
 
           <div className="relative min-w-[200px] flex-1">
             <Search className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
-              placeholder="Search activities..."
+              placeholder={t("searchPlaceholder")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="ps-9"
@@ -263,7 +266,7 @@ export function ActivityLogPanel() {
           ) : entries.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center text-muted-foreground">
               <History className="mb-2 h-12 w-12 opacity-50" />
-              <p>No activity found</p>
+              <p>{t("noActivityFound")}</p>
               {(filterProfileId !== "all" ||
                 filterAction !== "all" ||
                 filterEntityType !== "all" ||
@@ -277,7 +280,7 @@ export function ActivityLogPanel() {
                     setSearchTerm("");
                   }}
                 >
-                  Clear filters
+                  {t("clearFilters")}
                 </Button>
               )}
             </div>
@@ -312,7 +315,7 @@ export function ActivityLogPanel() {
                           <span className="ms-1">{entry.entityType}</span>
                         </Badge>
                         <span className="text-xs text-muted-foreground">
-                          {formatRelativeTime(entry.timestamp)}
+                          {formatRelativeTime(entry.timestamp, t)}
                         </span>
                       </div>
                     </div>

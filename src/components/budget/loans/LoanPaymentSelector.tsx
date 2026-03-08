@@ -10,6 +10,10 @@ import { CreditCard, DollarSign, Percent, Calendar, ChevronDown } from "lucide-r
 import type { Loan } from "@/types/budget";
 import { calculatePaymentSplit } from "@/lib/loans/transaction-link-operations";
 import { format } from "date-fns";
+import { useLocale, useTranslations } from "next-intl";
+import type { SupportedLocale } from "@/i18n/config";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 
 interface LoanPaymentSelectorProps {
   loans: Loan[];
@@ -28,6 +32,9 @@ export function LoanPaymentSelector({
   date,
   disabled = false,
 }: LoanPaymentSelectorProps) {
+  const currency = useDefaultCurrency();
+  const locale = useLocale() as SupportedLocale;
+  const t = useTranslations("loanPaymentSelector");
   const [isExpanded, setIsExpanded] = useState(false);
   const [paymentSplit, setPaymentSplit] = useState<{
     principal: number;
@@ -60,7 +67,7 @@ export function LoanPaymentSelector({
         className="flex items-center gap-2 text-base font-semibold text-teal-600 hover:text-teal-700 disabled:cursor-not-allowed disabled:opacity-50"
       >
         <CreditCard className="h-5 w-5" />
-        <span>Link to Loan Payment</span>
+        <span>{t("linkToLoanPayment")}</span>
         <ChevronDown className={`h-4 w-4 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
         {selectedLoan && (
           <span className="ms-2 rounded-full bg-teal-100 px-2 py-0.5 text-xs font-medium text-teal-800">
@@ -74,7 +81,7 @@ export function LoanPaymentSelector({
           {/* Loan Selector */}
           <div>
             <label htmlFor="loan-select" className="mb-2 block text-sm font-medium text-foreground">
-              Select Loan
+              {t("selectLoan")}
             </label>
             <select
               id="loan-select"
@@ -83,10 +90,14 @@ export function LoanPaymentSelector({
               disabled={disabled}
               className="min-h-[48px] w-full rounded-lg border border-input bg-background px-4 text-base text-foreground focus:border-transparent focus:ring-2 focus:ring-teal-500 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              <option value="">-- No loan --</option>
+              <option value="">{t("noLoan")}</option>
               {loans.map((loan) => (
                 <option key={loan.id} value={loan.id}>
-                  {loan.name} ({loan.lender}) - ${loan.monthlyPayment.toFixed(2)}/mo
+                  {t("loanOption", {
+                    name: loan.name,
+                    lender: loan.lender,
+                    payment: formatCurrency(loan.monthlyPayment, currency, locale),
+                  })}
                 </option>
               ))}
             </select>
@@ -95,27 +106,27 @@ export function LoanPaymentSelector({
           {/* Payment Split Preview */}
           {selectedLoan && paymentSplit && (
             <div className="space-y-3 rounded-lg bg-muted/50 p-4">
-              <h4 className="text-sm font-semibold text-foreground">Payment Breakdown</h4>
+              <h4 className="text-sm font-semibold text-foreground">{t("paymentBreakdown")}</h4>
 
               {/* Loan Info */}
               <div className="grid grid-cols-2 gap-3 text-sm">
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <CreditCard className="h-4 w-4" />
-                  <span>Current Balance:</span>
+                  <span>{t("currentBalance")}</span>
                 </div>
                 <div className="font-medium text-foreground">
-                  ${selectedLoan.currentBalance.toLocaleString()}
+                  {formatCurrency(selectedLoan.currentBalance, currency, locale)}
                 </div>
 
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Percent className="h-4 w-4" />
-                  <span>Interest Rate:</span>
+                  <span>{t("interestRate")}</span>
                 </div>
                 <div className="font-medium text-foreground">{selectedLoan.interestRate}%</div>
 
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <Calendar className="h-4 w-4" />
-                  <span>Next Due:</span>
+                  <span>{t("nextDue")}</span>
                 </div>
                 <div className="font-medium text-foreground">
                   {format(new Date(selectedLoan.nextPaymentDate), "MMM d, yyyy")}
@@ -129,28 +140,28 @@ export function LoanPaymentSelector({
               <div className="grid grid-cols-2 gap-3 text-sm">
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <DollarSign className="h-4 w-4 text-teal-600" />
-                  <span>Principal:</span>
+                  <span>{t("principal")}</span>
                 </div>
                 <div className="font-semibold text-teal-600">
-                  ${paymentSplit.principal.toFixed(2)}
+                  {formatCurrency(paymentSplit.principal, currency, locale)}
                 </div>
 
                 <div className="flex items-center gap-2 text-muted-foreground">
                   <DollarSign className="h-4 w-4 text-red-600" />
-                  <span>Interest:</span>
+                  <span>{t("interest")}</span>
                 </div>
                 <div className="font-semibold text-red-600">
-                  ${paymentSplit.interest.toFixed(2)}
+                  {formatCurrency(paymentSplit.interest, currency, locale)}
                 </div>
 
                 {paymentSplit.extra > 0 && (
                   <>
                     <div className="flex items-center gap-2 text-muted-foreground">
                       <DollarSign className="h-4 w-4 text-green-600" />
-                      <span>Extra Principal:</span>
+                      <span>{t("extraPrincipal")}</span>
                     </div>
                     <div className="font-semibold text-green-600">
-                      ${paymentSplit.extra.toFixed(2)}
+                      {formatCurrency(paymentSplit.extra, currency, locale)}
                     </div>
                   </>
                 )}
@@ -159,13 +170,16 @@ export function LoanPaymentSelector({
               {/* New Balance Preview */}
               <div className="mt-3 border-t border-border pt-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Balance After Payment:</span>
+                  <span className="text-sm text-muted-foreground">{t("balanceAfterPayment")}</span>
                   <span className="text-base font-bold text-foreground">
-                    $
-                    {Math.max(
-                      0,
-                      selectedLoan.currentBalance - paymentSplit.principal - paymentSplit.extra
-                    ).toLocaleString()}
+                    {formatCurrency(
+                      Math.max(
+                        0,
+                        selectedLoan.currentBalance - paymentSplit.principal - paymentSplit.extra
+                      ),
+                      currency,
+                      locale
+                    )}
                   </span>
                 </div>
               </div>
@@ -175,8 +189,25 @@ export function LoanPaymentSelector({
                 <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2">
                   <p className="text-xs text-amber-800">
                     {amount > selectedLoan.monthlyPayment
-                      ? `This payment is $${(amount - selectedLoan.monthlyPayment).toFixed(2)} more than the regular monthly payment. The extra will be applied to principal.`
-                      : `This payment is $${(selectedLoan.monthlyPayment - amount).toFixed(2)} less than the regular monthly payment of $${selectedLoan.monthlyPayment.toFixed(2)}.`}
+                      ? t("paymentOverWarning", {
+                          amount: formatCurrency(
+                            amount - selectedLoan.monthlyPayment,
+                            currency,
+                            locale
+                          ),
+                        })
+                      : t("paymentUnderWarning", {
+                          amount: formatCurrency(
+                            selectedLoan.monthlyPayment - amount,
+                            currency,
+                            locale
+                          ),
+                          monthlyPayment: formatCurrency(
+                            selectedLoan.monthlyPayment,
+                            currency,
+                            locale
+                          ),
+                        })}
                   </p>
                 </div>
               )}

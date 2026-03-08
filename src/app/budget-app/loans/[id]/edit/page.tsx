@@ -6,6 +6,7 @@
 "use client";
 
 import { useState, useEffect, use } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -17,6 +18,7 @@ import { getLoan } from "@/lib/loans/loan-db";
 
 export default function EditLoanPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
+  const t = useTranslations("loans");
   const router = useRouter();
   const [loan, setLoan] = useState<Loan | null>(null);
   const [loading, setLoading] = useState(true);
@@ -42,7 +44,7 @@ export default function EditLoanPage({ params }: { params: Promise<{ id: string 
       <div className="flex min-h-[400px] items-center justify-center">
         <div className="text-center">
           <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-teal-500"></div>
-          <p className="text-gray-500">Loading loan...</p>
+          <p className="text-gray-500">{t("loadingLoan")}</p>
         </div>
       </div>
     );
@@ -51,10 +53,10 @@ export default function EditLoanPage({ params }: { params: Promise<{ id: string 
   if (!loan) {
     return (
       <div className="py-12 text-center">
-        <h2 className="mb-2 text-2xl font-bold text-gray-900">Loan not found</h2>
-        <p className="mb-6 text-gray-500">The loan you're trying to edit doesn't exist.</p>
+        <h2 className="mb-2 text-2xl font-bold text-gray-900">{t("loanNotFound")}</h2>
+        <p className="mb-6 text-gray-500">{t("loanNotFoundEditDescription")}</p>
         <Link href="/budget-app/loans">
-          <Button>Back to Loans</Button>
+          <Button>{t("backToLoans")}</Button>
         </Link>
       </div>
     );
@@ -70,7 +72,7 @@ export default function EditLoanPage({ params }: { params: Promise<{ id: string 
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-white">Edit Loan</h1>
+          <h1 className="text-3xl font-bold text-white">{t("editLoan")}</h1>
           <p className="mt-1 text-slate-400">{loan.name}</p>
         </div>
       </div>
@@ -78,7 +80,7 @@ export default function EditLoanPage({ params }: { params: Promise<{ id: string 
       {/* Form */}
       <Card>
         <CardHeader>
-          <CardTitle>Loan Information</CardTitle>
+          <CardTitle>{t("loanInformation")}</CardTitle>
         </CardHeader>
         <CardContent>
           <LoanForm loan={loan} />

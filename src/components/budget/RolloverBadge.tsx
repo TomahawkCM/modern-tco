@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 
 interface RolloverBadgeProps {
   amount: number;
@@ -12,11 +13,12 @@ interface RolloverBadgeProps {
 export function RolloverBadge({ amount, className }: RolloverBadgeProps) {
   const t = useTranslations("budget.rollover");
   const format = useFormatter();
+  const currency = useDefaultCurrency();
 
   if (amount === 0) return null;
 
   const isPositive = amount > 0;
-  const formattedAmount = format.number(Math.abs(amount), { style: "currency", currency: "USD" });
+  const formattedAmount = format.number(Math.abs(amount), { style: "currency", currency });
 
   return (
     <span

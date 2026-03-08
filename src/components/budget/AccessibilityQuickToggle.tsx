@@ -34,6 +34,7 @@ export function AccessibilityQuickToggle({
 }: AccessibilityQuickToggleProps) {
   const { settings, isSeniorsMode, toggleSeniorsMode, updateSetting } = useSeniorsMode();
   const tAria = useTranslations("aria");
+  const t = useTranslations("accessibilityToggle");
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -144,7 +145,7 @@ export function AccessibilityQuickToggle({
         >
           {/* Header */}
           <div className="mb-4 flex items-center justify-between">
-            <h3 className="text-sm font-semibold text-white">Accessibility</h3>
+            <h3 className="text-sm font-semibold text-white">{t("title")}</h3>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
@@ -164,9 +165,9 @@ export function AccessibilityQuickToggle({
                   htmlFor="seniors-mode-toggle"
                   className="block cursor-pointer text-sm font-medium text-white"
                 >
-                  Large Text Mode
+                  {t("largeTextMode")}
                 </label>
-                <p className="text-xs text-slate-400">Bigger text & touch targets</p>
+                <p className="text-xs text-slate-400">{t("largeTextModeDescription")}</p>
               </div>
               <button
                 id="seniors-mode-toggle"
@@ -196,9 +197,9 @@ export function AccessibilityQuickToggle({
                   htmlFor="high-contrast-toggle"
                   className="block cursor-pointer text-sm font-medium text-white"
                 >
-                  High Contrast
+                  {t("highContrast")}
                 </label>
-                <p className="text-xs text-slate-400">Enhanced color contrast</p>
+                <p className="text-xs text-slate-400">{t("highContrastDescription")}</p>
               </div>
               <button
                 id="high-contrast-toggle"
@@ -228,9 +229,9 @@ export function AccessibilityQuickToggle({
                   htmlFor="reduce-motion-toggle"
                   className="block cursor-pointer text-sm font-medium text-white"
                 >
-                  Reduce Motion
+                  {t("reduceMotion")}
                 </label>
-                <p className="text-xs text-slate-400">Minimize animations</p>
+                <p className="text-xs text-slate-400">{t("reduceMotionDescription")}</p>
               </div>
               <button
                 id="reduce-motion-toggle"
@@ -256,7 +257,7 @@ export function AccessibilityQuickToggle({
             {/* Text Size Controls */}
             <div className="border-t border-white/10 pt-2">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-white">Text Size</span>
+                <span className="text-sm font-medium text-white">{t("textSize")}</span>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
@@ -276,10 +277,10 @@ export function AccessibilityQuickToggle({
 
                   <span className="w-16 text-center text-sm text-slate-300">
                     {settings.fontSizeMultiplier === 1.0
-                      ? "Normal"
+                      ? t("sizeNormal")
                       : settings.fontSizeMultiplier === 1.25
-                        ? "Large"
-                        : "X-Large"}
+                        ? t("sizeLarge")
+                        : t("sizeXLarge")}
                   </span>
 
                   <button
@@ -326,7 +327,7 @@ export function AccessibilityQuickToggle({
             <div className="mt-4 border-t border-white/10 pt-3">
               <div className="flex items-center gap-2 text-xs text-teal-400">
                 <Check className="h-3 w-3" />
-                <span>Accessibility features active</span>
+                <span>{t("featuresActive")}</span>
               </div>
             </div>
           )}

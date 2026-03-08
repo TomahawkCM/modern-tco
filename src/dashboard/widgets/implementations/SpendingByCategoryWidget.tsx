@@ -8,6 +8,7 @@
 
 import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import { db } from "@/lib/budget-db";
 import { useLiveQuery } from "dexie-react-hooks";
 import { PieChart, ShoppingBag } from "lucide-react";
@@ -42,6 +43,7 @@ const DEFAULT_COLORS = [
 export function SpendingByCategoryWidget({ config }: SpendingByCategoryWidgetProps) {
   const t = useTranslations("dashboard.widgets.spendingByCategory");
   const format = useFormatter();
+  const currency = useDefaultCurrency();
 
   // Fetch categories for colors
   const categories = useLiveQuery(() => db.categories.toArray()) || [];
@@ -154,7 +156,7 @@ export function SpendingByCategoryWidget({ config }: SpendingByCategoryWidgetPro
                           <div className="rounded-lg border border-slate-700 bg-slate-800 p-2 shadow-lg">
                             <p className="text-sm font-medium text-white">{data.name}</p>
                             <p className="text-xs text-slate-400">
-                              {format.number(data.value, { style: "currency", currency: "USD" })} (
+                              {format.number(data.value, { style: "currency", currency })} (
                               {data.percentage.toFixed(1)}%)
                             </p>
                           </div>
@@ -169,7 +171,7 @@ export function SpendingByCategoryWidget({ config }: SpendingByCategoryWidgetPro
               <div className="-mt-[120px] mb-[60px] text-center">
                 <p className="text-xs text-slate-400">Total</p>
                 <p className="text-sm font-bold text-white">
-                  {format.number(totalSpending, { style: "currency", currency: "USD" })}
+                  {format.number(totalSpending, { style: "currency", currency })}
                 </p>
               </div>
             </div>
@@ -188,7 +190,7 @@ export function SpendingByCategoryWidget({ config }: SpendingByCategoryWidgetPro
                   <div className="flex items-center gap-2 text-right">
                     <span className="text-xs text-slate-400">{cat.percentage.toFixed(1)}%</span>
                     <span className="whitespace-nowrap text-sm font-medium text-white">
-                      {format.number(cat.value, { style: "currency", currency: "USD" })}
+                      {format.number(cat.value, { style: "currency", currency })}
                     </span>
                   </div>
                 </div>

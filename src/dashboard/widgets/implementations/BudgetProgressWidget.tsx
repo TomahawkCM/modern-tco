@@ -8,6 +8,7 @@
 
 import { EmptyState } from "@/components/budget/states/EmptyState";
 import { GlassCard } from "@/components/budget/ui/GlassCard";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import { db } from "@/lib/budget-db";
 import { useLiveQuery } from "dexie-react-hooks";
 import { Target, TrendingUp } from "lucide-react";
@@ -33,6 +34,7 @@ interface BudgetProgressItem {
 export function BudgetProgressWidget({ config }: BudgetProgressWidgetProps) {
   const t = useTranslations("dashboard.widgets.budgetProgress");
   const format = useFormatter();
+  const currency = useDefaultCurrency();
 
   // Fetch budgets
   const budgets = useLiveQuery(() => db.budgets.toArray()) || [];
@@ -132,7 +134,13 @@ export function BudgetProgressWidget({ config }: BudgetProgressWidgetProps) {
         ) : (
           <div className="custom-scrollbar max-h-[280px] space-y-4 overflow-y-auto pr-1">
             {budgetProgress.slice(0, 5).map((item) => (
-              <ProgressItem key={item.categoryName} item={item} format={format} t={t} />
+              <ProgressItem
+                key={item.categoryName}
+                item={item}
+                format={format}
+                t={t}
+                currency={currency}
+              />
             ))}
           </div>
         )}
@@ -145,9 +153,10 @@ interface ProgressItemProps {
   item: BudgetProgressItem;
   format: ReturnType<typeof useFormatter>;
   t: ReturnType<typeof useTranslations>;
+  currency: string;
 }
 
-function ProgressItem({ item, format, t }: ProgressItemProps) {
+function ProgressItem({ item, format, t, currency }: ProgressItemProps) {
   const barColor = item.isOverBudget
     ? "bg-red-500"
     : item.percentage > 80
@@ -169,11 +178,11 @@ function ProgressItem({ item, format, t }: ProgressItemProps) {
         </div>
         <div className="text-right">
           <span className={`text-xs font-medium ${textColor}`}>
-            {format.number(item.spent, { style: "currency", currency: "USD" })}
+            {format.number(item.spent, { style: "currency", currency })}
           </span>
           <span className="text-xs text-slate-500">
             {" / "}
-            {format.number(item.budgeted, { style: "currency", currency: "USD" })}
+            {format.number(item.budgeted, { style: "currency", currency })}
           </span>
         </div>
       </div>
@@ -193,14 +202,13 @@ function ProgressItem({ item, format, t }: ProgressItemProps) {
             {t("overBudget", {
               amount: format.number(Math.abs(item.remaining), {
                 style: "currency",
-                currency: "USD",
+                currency,
               }),
             })}
           </span>
         ) : (
           <span className="text-slate-500">
-            {t("remaining")}:{" "}
-            {format.number(item.remaining, { style: "currency", currency: "USD" })}
+            {t("remaining")}: {format.number(item.remaining, { style: "currency", currency })}
           </span>
         )}
         <span className="text-slate-400">{Math.round(item.percentage)}%</span>

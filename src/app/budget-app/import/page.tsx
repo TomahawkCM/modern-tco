@@ -8,7 +8,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Upload, FileText, CheckCircle, AlertCircle, Download, Eye, X, Check } from "lucide-react";
 import { db, saveImportMetadata, getImportHistory } from "@/lib/budget-db";
 import {
@@ -64,6 +64,7 @@ import BalanceReconciliationModal, {
 export default function ImportPage() {
   const router = useRouter();
   const locale = useLocale();
+  const t = useTranslations("import");
   const [file, setFile] = useState<File | null>(null);
   const [formatDetection, setFormatDetection] = useState<FormatDetectionResult | null>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -220,15 +221,17 @@ export default function ImportPage() {
 
       // Show warnings if confidence is low or format is unsupported
       if (!isFormatSupported(detection.format)) {
-        setError(`Unsupported file format: ${getFormatDisplayName(detection.format)}`);
+        setError(t("unsupportedFormat", { format: getFormatDisplayName(detection.format) }));
       } else if (detection.confidence < 0.5) {
-        setError(`Low confidence format detection. ${detection.suggestions?.join(" ")}`);
+        setError(
+          t("lowConfidenceDetection", { suggestions: detection.suggestions?.join(" ") || "" })
+        );
       }
 
       return detection;
     } catch (error) {
       console.error("[ImportPage] Format detection error:", error);
-      setError("Unable to detect file format. Please try a different file.");
+      setError(t("unableToDetectFormat"));
       setFormatDetection(null);
       return null;
     }
@@ -340,7 +343,7 @@ export default function ImportPage() {
     }
 
     if (!activeDetection) {
-      setError("Unable to detect file format. Please try a different file.");
+      setError(t("unableToDetectFormat"));
       return;
     }
 
@@ -385,8 +388,7 @@ export default function ImportPage() {
         // Validate OFX format
         const validation = validateOFXFile(text);
         if (!validation.isValid) {
-          const errorMsg = `Invalid OFX file:\n${validation.errors.join("\n")}`;
-          setError(errorMsg);
+          setError(t("invalidOFXFile", { errors: validation.errors.join("\n") }));
           return;
         }
 
@@ -532,8 +534,7 @@ export default function ImportPage() {
                 return;
               }
             } else {
-              const errorMsg = "Could not parse CSV file. Please check the file format.";
-              setError(errorMsg);
+              setError(t("couldNotParseCSV"));
               return;
             }
           } else {
@@ -552,14 +553,14 @@ export default function ImportPage() {
 
           const bankConfig = BANK_CONFIGS[bankKey];
           if (!bankConfig) {
-            setError("Invalid bank configuration. Please try selecting a different bank.");
+            setError(t("invalidBankConfig"));
             return;
           }
 
           // Parse CSV with the correct skipRows
           const rows = parseCSVContent(text, bankConfig.skipRows || 0);
           if (rows.length === 0) {
-            setError("No data found in CSV file. The file may be empty or incorrectly formatted.");
+            setError(t("noDataInCSV"));
             return;
           }
 
@@ -597,14 +598,7 @@ export default function ImportPage() {
 
         // Check for 0 transactions
         if (transactions.length === 0) {
-          setError(
-            "No transactions could be parsed from this file.\n\n" +
-              "Possible causes:\n" +
-              "• The file format may not be recognized\n" +
-              "• The date or amount columns may be empty\n" +
-              "• The file may contain only headers\n\n" +
-              "Try selecting a different bank format or contact support."
-          );
+          setError(t("noTransactionsParsed"));
           return;
         }
       }
@@ -808,9 +802,7 @@ export default function ImportPage() {
 
         console.log("[ImportPage] CAMT.053 parsing complete:", transactions.length, "transactions");
       } else {
-        setError(
-          `Unsupported file format: ${resolvedDetection.format}. Please use CSV, OFX, QFX, QIF, MT940, CAMT.053, or PDF files.`
-        );
+        setError(t("unsupportedFileFormat", { format: resolvedDetection.format }));
         return;
       }
 
@@ -1078,9 +1070,7 @@ export default function ImportPage() {
       // CRITICAL: Validate account is selected before importing
       if (!accountId || accountId.trim() === "") {
         console.error("[ImportPage] No account selected for import");
-        setError(
-          "Please select an account before importing transactions. Go to the Accounts page to create an account first."
-        );
+        setError(t("selectAccountFirst"));
         setIsProcessing(false);
         return;
       }
@@ -1438,9 +1428,7 @@ export default function ImportPage() {
 
     // If no transactions left, show error
     if (transactions.length === 0) {
-      setError(
-        "All transactions were removed during validation. Please try importing a different file."
-      );
+      setError(t("allTransactionsRemoved"));
       setIsProcessing(false);
       return;
     }
@@ -1464,7 +1452,7 @@ export default function ImportPage() {
     setShowValidationWarnings(false);
     setValidationResult(null);
     setPendingValidatedTransactions([]);
-    setError("Import cancelled due to validation issues. Please review your file and try again.");
+    setError(t("importCancelledValidation"));
     setIsProcessing(false);
   }
 
@@ -1718,7 +1706,7 @@ export default function ImportPage() {
       // Parse CSV with the custom mapping
       const rows = parseCSVContent(pendingCSVText, customConfig.skipRows);
       if (rows.length === 0) {
-        setError("No data found in CSV file after applying custom mapping.");
+        setError(t("noDataAfterMapping"));
         return;
       }
 
@@ -1773,7 +1761,7 @@ export default function ImportPage() {
       {/* Header */}
       <div>
         <div className="flex items-center gap-3">
-          <h1 className="text-3xl font-bold text-white">Import Transactions</h1>
+          <h1 className="text-3xl font-bold text-white">{t("title")}</h1>
           <HelpTooltip
             content={
               <>
@@ -1783,17 +1771,15 @@ export default function ImportPage() {
               </>
             }
             learnMoreUrl="/docs/user-guide#import-formats"
-            ariaLabel="More information about CSV and OFX file formats"
+            ariaLabel={t("formatInfoAriaLabel")}
             iconSize="h-5 w-5"
           />
         </div>
-        <p className="mt-2 text-slate-400">
-          Upload CSV, OFX, QFX, or PDF files from BMO, Home Trust, TD, Chase, and 15+ other banks
-        </p>
+        <p className="mt-2 text-slate-400">{t("subtitle")}</p>
         {formatDetection && file && (
           <div className="mt-3 space-y-1">
             <p className="flex items-center gap-2 text-sm font-medium">
-              <span className="text-slate-300">Detected Format:</span>
+              <span className="text-slate-300">{t("detectedFormat")}</span>
               <span className="text-teal-600">{getFormatDisplayName(formatDetection.format)}</span>
               <span
                 className={`rounded-full px-2 py-0.5 text-xs ${
@@ -1804,12 +1790,12 @@ export default function ImportPage() {
                       : "bg-red-100 text-red-800"
                 }`}
               >
-                {(formatDetection.confidence * 100).toFixed(0)}% confident
+                {t("percentConfident", { percent: (formatDetection.confidence * 100).toFixed(0) })}
               </span>
               {/* PDF-specific badges */}
               {formatDetection.format === "pdf" && pdfPageCount && (
                 <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800">
-                  {pdfPageCount} page{pdfPageCount !== 1 ? "s" : ""}
+                  {t("pageCount", { count: pdfPageCount })}
                 </span>
               )}
               {formatDetection.format === "pdf" && pdfOcrConfidence !== null && (
@@ -1836,31 +1822,22 @@ export default function ImportPage() {
             {/* PDF warnings */}
             {formatDetection.format === "pdf" && pdfPageCount && pdfPageCount > 10 && (
               <div className="rounded border border-orange-200 bg-orange-50 px-2 py-1 text-xs text-orange-700">
-                <p>
-                  ⚠️ Large PDF detected ({pdfPageCount} pages). Processing may take longer and use
-                  significant memory.
-                </p>
-                <p className="mt-1">
-                  💡 For very large statements, consider requesting a CSV export from your bank for
-                  faster processing.
-                </p>
+                <p>{t("largePdfWarning", { pages: pdfPageCount })}</p>
+                <p className="mt-1">{t("largePdfTip")}</p>
               </div>
             )}
             {formatDetection.format === "pdf" &&
               pdfOcrConfidence !== null &&
               pdfOcrConfidence < 0.7 && (
                 <div className="rounded border border-orange-200 bg-orange-50 px-2 py-1 text-xs text-orange-700">
-                  <p>
-                    ⚠️ Low OCR confidence ({(pdfOcrConfidence * 100).toFixed(0)}%). This may be a
-                    scanned/image-based PDF.
-                  </p>
-                  <p className="mt-1">💡 Please carefully review all transactions for accuracy.</p>
+                  <p>{t("lowOcrConfidence", { percent: (pdfOcrConfidence * 100).toFixed(0) })}</p>
+                  <p className="mt-1">{t("reviewTransactionsForAccuracy")}</p>
                 </div>
               )}
             {formatDetection.format === "pdf" && (
               <div className="flex items-center gap-2 text-xs">
                 <label htmlFor="ocr-language" className="text-slate-400">
-                  OCR Language:
+                  {t("ocrLanguage")}
                 </label>
                 <select
                   id="ocr-language"
@@ -1868,23 +1845,23 @@ export default function ImportPage() {
                   onChange={(e) => setOcrLanguageOverride(e.target.value)}
                   className="rounded border border-slate-300 bg-white px-2 py-1 text-xs text-slate-700"
                 >
-                  <option value="">Auto-detect ({locale})</option>
-                  <option value="eng">English</option>
-                  <option value="deu">German</option>
-                  <option value="fra">French</option>
-                  <option value="spa">Spanish</option>
-                  <option value="por">Portuguese</option>
-                  <option value="ita">Italian</option>
-                  <option value="nld">Dutch</option>
-                  <option value="rus">Russian</option>
-                  <option value="jpn">Japanese</option>
-                  <option value="chi_sim">Chinese (Simplified)</option>
-                  <option value="chi_tra">Chinese (Traditional)</option>
-                  <option value="kor">Korean</option>
-                  <option value="ara">Arabic</option>
-                  <option value="tur">Turkish</option>
-                  <option value="pol">Polish</option>
-                  <option value="hin">Hindi</option>
+                  <option value="">{t("autoDetect", { locale })}</option>
+                  <option value="eng">{t("langEnglish")}</option>
+                  <option value="deu">{t("langGerman")}</option>
+                  <option value="fra">{t("langFrench")}</option>
+                  <option value="spa">{t("langSpanish")}</option>
+                  <option value="por">{t("langPortuguese")}</option>
+                  <option value="ita">{t("langItalian")}</option>
+                  <option value="nld">{t("langDutch")}</option>
+                  <option value="rus">{t("langRussian")}</option>
+                  <option value="jpn">{t("langJapanese")}</option>
+                  <option value="chi_sim">{t("langChineseSimplified")}</option>
+                  <option value="chi_tra">{t("langChineseTraditional")}</option>
+                  <option value="kor">{t("langKorean")}</option>
+                  <option value="ara">{t("langArabic")}</option>
+                  <option value="tur">{t("langTurkish")}</option>
+                  <option value="pol">{t("langPolish")}</option>
+                  <option value="hin">{t("langHindi")}</option>
                 </select>
               </div>
             )}
@@ -1898,7 +1875,7 @@ export default function ImportPage() {
           <div className="flex items-start gap-3">
             <AlertCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-600" />
             <div className="flex-1">
-              <h3 className="mb-1 text-sm font-semibold text-red-800">Import Error</h3>
+              <h3 className="mb-1 text-sm font-semibold text-red-800">{t("importError")}</h3>
               <pre className="whitespace-pre-wrap rounded bg-red-100 p-2 font-mono text-sm text-red-700">
                 {error}
               </pre>
@@ -1907,25 +1884,25 @@ export default function ImportPage() {
                   onClick={() => setError(null)}
                   className="text-sm text-red-600 underline hover:text-red-800"
                 >
-                  Dismiss
+                  {t("dismiss")}
                 </button>
                 {pdfDiagnostics && (
                   <button
                     onClick={exportPDFDebugData}
                     className="text-sm text-blue-600 underline hover:text-blue-800"
                   >
-                    Export Debug Data
+                    {t("exportDebugData")}
                   </button>
                 )}
               </div>
               {pdfDiagnostics && (
                 <div className="mt-3 rounded bg-gray-50 p-2 text-xs text-gray-600">
-                  <p className="mb-1 font-semibold">💡 Troubleshooting tips:</p>
+                  <p className="mb-1 font-semibold">{t("troubleshootingTips")}</p>
                   <ul className="list-inside list-disc space-y-1">
-                    <li>Check browser console for detailed OCR logs</li>
-                    <li>Export debug data (button above) for support</li>
-                    <li>Try exporting as CSV instead of PDF from your bank</li>
-                    <li>Ensure PDF is text-based (not a scanned image)</li>
+                    <li>{t("tipCheckConsole")}</li>
+                    <li>{t("tipExportDebug")}</li>
+                    <li>{t("tipTryCSV")}</li>
+                    <li>{t("tipEnsureTextPDF")}</li>
                   </ul>
                 </div>
               )}
@@ -1942,10 +1919,8 @@ export default function ImportPage() {
           {/* Import History Section */}
           <div className="mb-6 overflow-hidden rounded-lg bg-white shadow-md">
             <div className="border-b-2 border-gray-200 bg-gray-50 p-6">
-              <h2 className="text-2xl font-bold text-gray-900">Recent Imports</h2>
-              <p className="mt-2 text-base text-gray-600">
-                View your import history and verify successful uploads
-              </p>
+              <h2 className="text-2xl font-bold text-gray-900">{t("recentImports")}</h2>
+              <p className="mt-2 text-base text-gray-600">{t("recentImportsSubtitle")}</p>
             </div>
 
             {importHistory.length > 0 ? (
@@ -1973,20 +1948,20 @@ export default function ImportPage() {
                             {isFullSuccess && (
                               <span className="inline-flex items-center gap-1 rounded-full border border-green-300 bg-green-100 px-2.5 py-0.5 text-xs font-semibold text-green-800">
                                 <Check className="h-3 w-3" />
-                                Success
+                                {t("success")}
                               </span>
                             )}
                             {isPartialImport && (
                               <span className="inline-flex items-center gap-1 rounded-full border border-yellow-300 bg-yellow-100 px-2.5 py-0.5 text-xs font-semibold text-yellow-800">
                                 <AlertCircle className="h-3 w-3" />
-                                Partial Import
+                                {t("partialImport")}
                               </span>
                             )}
                           </div>
 
                           {/* Import Date */}
                           <p className="mb-2 text-sm text-gray-600">
-                            Imported on{" "}
+                            {t("importedOn")}{" "}
                             {format(new Date(record.importDate), "MMM d, yyyy 'at' h:mm a")}
                           </p>
 
@@ -1995,13 +1970,19 @@ export default function ImportPage() {
                             <span className="flex items-center gap-1">
                               <CheckCircle className="h-4 w-4 text-green-600" />
                               <strong>{record.transactionCount}</strong>{" "}
-                              {record.transactionCount === 1 ? "transaction" : "transactions"} added
+                              {record.transactionCount === 1
+                                ? t("transactionSingular")
+                                : t("transactionsPlural")}{" "}
+                              {t("added")}
                             </span>
                             {record.duplicateCount > 0 && (
                               <span className="flex items-center gap-1 text-yellow-700">
                                 <AlertCircle className="h-4 w-4" />
                                 <strong>{record.duplicateCount}</strong>{" "}
-                                {record.duplicateCount === 1 ? "duplicate" : "duplicates"} skipped
+                                {record.duplicateCount === 1
+                                  ? t("duplicateSingular")
+                                  : t("duplicatesPlural")}{" "}
+                                {t("skipped")}
                               </span>
                             )}
                           </div>
@@ -2009,7 +1990,7 @@ export default function ImportPage() {
                           {/* Date Range */}
                           {record.dateRangeStart && record.dateRangeEnd && (
                             <p className="text-sm text-gray-600">
-                              <span className="font-medium">Transactions:</span>{" "}
+                              <span className="font-medium">{t("transactionsLabel")}:</span>{" "}
                               {format(new Date(record.dateRangeStart), "MMM d")} -{" "}
                               {format(new Date(record.dateRangeEnd), "MMM d, yyyy")}
                             </p>
@@ -2274,11 +2255,11 @@ export default function ImportPage() {
               <div className="rounded-lg bg-gray-50 p-4">
                 <p className="mb-2 text-base font-medium text-gray-700">Date Range</p>
                 <p className="mt-2 text-sm font-semibold text-gray-900">
-                  {summary.dateRange.earliest.toLocaleDateString()}
+                  {summary.dateRange.earliest.toLocaleDateString(locale)}
                 </p>
                 <p className="text-xs text-gray-500">to</p>
                 <p className="text-sm font-semibold text-gray-900">
-                  {summary.dateRange.latest.toLocaleDateString()}
+                  {summary.dateRange.latest.toLocaleDateString(locale)}
                 </p>
               </div>
             </div>
@@ -2371,7 +2352,7 @@ export default function ImportPage() {
                         <div className="flex-1">
                           <div className="mb-2 flex items-center gap-2">
                             <span className="text-sm font-medium text-gray-900">
-                              {tx.date.toLocaleDateString()}
+                              {tx.date.toLocaleDateString(locale)}
                             </span>
                             <span className="text-sm text-gray-600">{tx.description}</span>
                             <span
@@ -2411,7 +2392,9 @@ export default function ImportPage() {
                                   <div className="text-gray-600">
                                     <div>
                                       <strong>Date:</strong>{" "}
-                                      {matchedTransactions.get(index)!.date.toLocaleDateString()}
+                                      {matchedTransactions
+                                        .get(index)!
+                                        .date.toLocaleDateString(locale)}
                                     </div>
                                     <div>
                                       <strong>Description:</strong>{" "}
@@ -2531,7 +2514,7 @@ export default function ImportPage() {
                       }`}
                     >
                       <td className="whitespace-nowrap px-4 py-4 text-base font-medium text-gray-900">
-                        {tx.date.toLocaleDateString()}
+                        {tx.date.toLocaleDateString(locale)}
                       </td>
                       <td className="max-w-xs px-4 py-4 text-base text-gray-900">
                         <div className="flex flex-col gap-1">

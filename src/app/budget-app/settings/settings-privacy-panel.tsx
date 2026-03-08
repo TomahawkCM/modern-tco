@@ -21,6 +21,7 @@ import {
   BarChart3,
 } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface PrivacyControlsPanelProps {
   settings: PrivacySettings;
@@ -37,6 +38,7 @@ interface DeleteSelections {
 }
 
 export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyControlsPanelProps) {
+  const t = useTranslations("privacyPanel");
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [deleteSelections, setDeleteSelections] = useState<DeleteSelections>({
     transactions: false,
@@ -128,7 +130,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
       URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error exporting data:", error);
-      alert("Failed to export data. Please try again.");
+      alert(t("exportFailed"));
     }
   }
 
@@ -202,17 +204,17 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
       }
 
       const deletedItems = [
-        deleteSelections.transactions && "transactions",
-        deleteSelections.accounts && "accounts",
-        deleteSelections.balances && !deleteSelections.accounts && "account balances",
-        deleteSelections.categories && "categories",
-        deleteSelections.budgets && "budgets",
-        deleteSelections.privacySettings && "privacy settings",
+        deleteSelections.transactions && t("dataTransactions"),
+        deleteSelections.accounts && t("dataAccounts"),
+        deleteSelections.balances && !deleteSelections.accounts && t("dataAccountBalances"),
+        deleteSelections.categories && t("dataCategories"),
+        deleteSelections.budgets && t("dataBudgets"),
+        deleteSelections.privacySettings && t("dataPrivacySettings"),
       ]
         .filter(Boolean)
         .join(", ");
 
-      alert(`Successfully cleared: ${deletedItems}`);
+      alert(t("successfullyCleared", { items: deletedItems }));
 
       // Reset selections
       setDeleteSelections({
@@ -231,7 +233,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
       }
     } catch (error) {
       console.error("Error deleting data:", error);
-      alert("Failed to delete data. Please try again.");
+      alert(t("deleteFailed"));
     } finally {
       setIsDeleting(false);
     }
@@ -248,10 +250,8 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h2 className="text-xl font-semibold text-gray-900">Privacy & AI Controls</h2>
-        <p className="mt-1 text-sm text-gray-600">
-          Control how your data is processed and which AI features are enabled
-        </p>
+        <h2 className="text-xl font-semibold text-gray-900">{t("title")}</h2>
+        <p className="mt-1 text-sm text-gray-600">{t("subtitle")}</p>
       </div>
 
       {/* Privacy Notice */}
@@ -259,12 +259,8 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
         <div className="flex items-start gap-3">
           <Info className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" />
           <div className="flex-1">
-            <h3 className="mb-1 text-sm font-semibold text-blue-900">Privacy First</h3>
-            <p className="text-sm text-blue-800">
-              All processing happens in your browser. No transaction data is uploaded to servers. AI
-              features are opt-in and only send cleaned transaction descriptions (no account
-              numbers, names, or addresses) when enabled.
-            </p>
+            <h3 className="mb-1 text-sm font-semibold text-blue-900">{t("privacyFirst")}</h3>
+            <p className="text-sm text-blue-800">{t("privacyNotice")}</p>
           </div>
         </div>
       </div>
@@ -273,7 +269,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
       <div className="rounded-lg bg-white p-6 shadow">
         <div className="mb-4 flex items-center gap-2">
           <Brain className="h-5 w-5 text-purple-600" />
-          <h3 className="text-lg font-semibold text-gray-900">AI Features</h3>
+          <h3 className="text-lg font-semibold text-gray-900">{t("aiFeatures")}</h3>
         </div>
 
         {/* AI Features Master Switch */}
@@ -281,22 +277,17 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
           <div className="flex items-center justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <h4 className="font-medium text-gray-900">AI Features (Master Switch)</h4>
+                <h4 className="font-medium text-gray-900">{t("aiFeaturesTitle")}</h4>
                 {aiFeaturesEnabled && (
                   <span className="rounded-full bg-purple-100 px-2 py-0.5 text-xs text-purple-700">
-                    Active
+                    {t("active")}
                   </span>
                 )}
               </div>
-              <p className="mt-1 text-sm text-gray-600">
-                Enable AI Features powered by OpenAI for advanced functionality. When disabled, all
-                AI-dependent features are automatically disabled.
-              </p>
+              <p className="mt-1 text-sm text-gray-600">{t("aiFeaturesDescription")}</p>
               {aiFeaturesEnabled && (
                 <div className="mt-2 text-xs text-gray-500">
-                  <strong>What's sent:</strong> Only cleaned transaction descriptions (e.g.,
-                  "AMAZON.COM"). No account numbers, names, or addresses. Powered by OpenAI
-                  GPT-4o-mini.
+                  <strong>{t("whatsSent")}</strong> {t("whatsSentDescription")}
                 </div>
               )}
             </div>
@@ -309,42 +300,46 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
 
         {/* Smart Duplicate Detection */}
         <SettingRow
-          title="Smart Duplicate Detection"
-          description="Use AI to detect duplicate transactions even when merchant names differ (e.g., 'AMAZON PRIME' vs 'AMZN MKTP CA')"
+          title={t("smartDuplicateDetection")}
+          description={t("smartDuplicateDetectionDescription")}
           checked={settings.enableSmartDuplicateDetection}
           onChange={() => handleToggle("enableSmartDuplicateDetection")}
           disabled={!aiFeaturesEnabled}
           requiresAI={true}
+          requiresAILabel={t("requiresAIFeatures")}
         />
 
         {/* Anomaly Detection */}
         <SettingRow
-          title="Anomaly Detection"
-          description="Flag unusual spending patterns (e.g., 'Your Starbucks purchase of $85 is unusual')"
+          title={t("anomalyDetection")}
+          description={t("anomalyDetectionDescription")}
           checked={settings.enableAnomalyDetection}
           onChange={() => handleToggle("enableAnomalyDetection")}
           disabled={!aiFeaturesEnabled}
           requiresAI={true}
+          requiresAILabel={t("requiresAIFeatures")}
         />
 
         {/* Predictive Spending */}
         <SettingRow
-          title="Predictive Spending"
-          description="Forecast monthly spending by category using AI analysis"
+          title={t("predictiveSpending")}
+          description={t("predictiveSpendingDescription")}
           checked={settings.enablePredictiveSpending}
           onChange={() => handleToggle("enablePredictiveSpending")}
           disabled={!aiFeaturesEnabled}
           requiresAI={true}
+          requiresAILabel={t("requiresAIFeatures")}
         />
 
         {/* Natural Language Import */}
         <SettingRow
-          title="Natural Language Import"
-          description="Auto-configure bank imports using natural language (e.g., 'Import my TD checking account CSV')"
+          title={t("naturalLanguageImport")}
+          description={t("naturalLanguageImportDescription")}
           checked={settings.enableNaturalLanguageImport}
           onChange={() => handleToggle("enableNaturalLanguageImport")}
           disabled={!aiFeaturesEnabled}
           requiresAI={true}
+          requiresAILabel={t("requiresAIFeatures")}
         />
       </div>
 
@@ -352,7 +347,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
       <div className="rounded-lg bg-white p-6 shadow">
         <div className="mb-4 flex items-center gap-2">
           <MessageSquare className="h-5 w-5 text-indigo-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Budget Chatbot</h3>
+          <h3 className="text-lg font-semibold text-gray-900">{t("budgetChatbot")}</h3>
         </div>
 
         {/* Chatbot Master Switch */}
@@ -360,26 +355,22 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
           <div className="flex items-center justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-2">
-                <h4 className="font-medium text-gray-900">Enable Chatbot</h4>
+                <h4 className="font-medium text-gray-900">{t("enableChatbot")}</h4>
                 {settings.enableChatbot && (
                   <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-xs text-indigo-700">
-                    Active
+                    {t("active")}
                   </span>
                 )}
                 {!aiFeaturesEnabled && (
                   <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-700">
-                    Requires AI Features
+                    {t("requiresAIFeatures")}
                   </span>
                 )}
               </div>
-              <p className="mt-1 text-sm text-gray-600">
-                AI-powered assistant that can answer questions about your transactions, budgets, and
-                spending patterns. Conversations are processed via OpenAI API.
-              </p>
+              <p className="mt-1 text-sm text-gray-600">{t("chatbotDescription")}</p>
               {settings.enableChatbot && (
                 <div className="mt-2 text-xs text-gray-500">
-                  <strong>Privacy:</strong> Your financial data is sent to OpenAI to answer
-                  questions. OpenAI does not use API data to train models. You can disable anytime.
+                  <strong>{t("privacy")}</strong> {t("chatbotPrivacyNotice")}
                 </div>
               )}
             </div>
@@ -395,7 +386,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
         {settings.enableChatbot && (
           <>
             <div className="mb-6 border-b border-gray-200 pb-6">
-              <h4 className="mb-3 font-medium text-gray-900">Data Access Permission</h4>
+              <h4 className="mb-3 font-medium text-gray-900">{t("dataAccessPermission")}</h4>
               <div className="space-y-2">
                 <label className="flex cursor-pointer items-start gap-3 rounded-lg border-2 border-gray-200 bg-gray-50 p-3 transition-colors hover:border-indigo-500">
                   <input
@@ -407,10 +398,8 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
                     className="mt-1 text-indigo-600 focus:ring-indigo-500"
                   />
                   <div className="flex-1">
-                    <div className="font-medium text-gray-900">Read-Only (Recommended)</div>
-                    <div className="mt-1 text-sm text-gray-600">
-                      Chatbot can view data and answer questions but cannot modify anything
-                    </div>
+                    <div className="font-medium text-gray-900">{t("readOnlyRecommended")}</div>
+                    <div className="mt-1 text-sm text-gray-600">{t("readOnlyDescription")}</div>
                   </div>
                 </label>
                 <label className="flex cursor-pointer items-start gap-3 rounded-lg border-2 border-gray-200 bg-gray-50 p-3 transition-colors hover:border-indigo-500">
@@ -423,10 +412,8 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
                     className="mt-1 text-indigo-600 focus:ring-indigo-500"
                   />
                   <div className="flex-1">
-                    <div className="font-medium text-gray-900">Full Access</div>
-                    <div className="mt-1 text-sm text-gray-600">
-                      Chatbot can perform actions like adding transactions and creating budgets
-                    </div>
+                    <div className="font-medium text-gray-900">{t("fullAccess")}</div>
+                    <div className="mt-1 text-sm text-gray-600">{t("fullAccessDescription")}</div>
                   </div>
                 </label>
               </div>
@@ -434,7 +421,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
 
             {/* Conversation Retention */}
             <div className="mb-4">
-              <h4 className="mb-3 font-medium text-gray-900">Conversation History</h4>
+              <h4 className="mb-3 font-medium text-gray-900">{t("conversationHistory")}</h4>
               <div className="space-y-2">
                 <label className="flex cursor-pointer items-center gap-3 rounded-lg border-2 border-gray-200 bg-gray-50 p-3 transition-colors hover:border-indigo-500">
                   <input
@@ -445,7 +432,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
                     onChange={() => handleChatbotRetentionChange(7)}
                     className="text-indigo-600 focus:ring-indigo-500"
                   />
-                  <span className="text-gray-900">Delete after 7 days (Recommended)</span>
+                  <span className="text-gray-900">{t("deleteAfter7Days")}</span>
                 </label>
                 <label className="flex cursor-pointer items-center gap-3 rounded-lg border-2 border-gray-200 bg-gray-50 p-3 transition-colors hover:border-indigo-500">
                   <input
@@ -456,7 +443,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
                     onChange={() => handleChatbotRetentionChange(30)}
                     className="text-indigo-600 focus:ring-indigo-500"
                   />
-                  <span className="text-gray-900">Delete after 30 days</span>
+                  <span className="text-gray-900">{t("deleteAfter30Days")}</span>
                 </label>
                 <label className="flex cursor-pointer items-center gap-3 rounded-lg border-2 border-gray-200 bg-gray-50 p-3 transition-colors hover:border-indigo-500">
                   <input
@@ -467,13 +454,10 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
                     onChange={() => handleChatbotRetentionChange("forever")}
                     className="text-indigo-600 focus:ring-indigo-500"
                   />
-                  <span className="text-gray-900">Keep forever</span>
+                  <span className="text-gray-900">{t("keepForever")}</span>
                 </label>
               </div>
-              <p className="mt-2 text-xs text-gray-600">
-                Conversations are stored locally in your browser. You can manually delete them
-                anytime.
-              </p>
+              <p className="mt-2 text-xs text-gray-600">{t("conversationStorageNotice")}</p>
             </div>
           </>
         )}
@@ -483,19 +467,19 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
       <div className="rounded-lg bg-white p-6 shadow">
         <div className="mb-4 flex items-center gap-2">
           <BarChart3 className="h-5 w-5 text-blue-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Analytics & Monitoring</h3>
+          <h3 className="text-lg font-semibold text-gray-900">{t("analyticsAndMonitoring")}</h3>
         </div>
 
         <SettingRow
-          title="Enable Analytics"
-          description="Track feature usage and app performance using PostHog. No personal financial data (amounts, descriptions) is collected."
+          title={t("enableAnalytics")}
+          description={t("enableAnalyticsDescription")}
           checked={settings.enableAnalytics}
           onChange={() => handleToggle("enableAnalytics")}
         />
 
         <SettingRow
-          title="Enable Error Tracking"
-          description="Automatically report errors and crashes to Sentry to help improve the app. No financial data is included in error reports."
+          title={t("enableErrorTracking")}
+          description={t("enableErrorTrackingDescription")}
           checked={settings.enableErrorTracking}
           onChange={() => handleToggle("enableErrorTracking")}
         />
@@ -505,12 +489,12 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
       <div className="rounded-lg bg-white p-6 shadow">
         <div className="mb-4 flex items-center gap-2">
           <Eye className="h-5 w-5 text-teal-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Data Processing</h3>
+          <h3 className="text-lg font-semibold text-gray-900">{t("dataProcessing")}</h3>
         </div>
 
         <SettingRow
-          title="Receipt OCR"
-          description="Extract transaction details from receipt images using client-side OCR (Tesseract.js). No data leaves your device."
+          title={t("receiptOCR")}
+          description={t("receiptOCRDescription")}
           checked={settings.enableOCR}
           onChange={() => handleToggle("enableOCR")}
         />
@@ -520,12 +504,12 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
       <div className="rounded-lg bg-white p-6 shadow">
         <div className="mb-4 flex items-center gap-2">
           <Lock className="h-5 w-5 text-green-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Data Security</h3>
+          <h3 className="text-lg font-semibold text-gray-900">{t("dataSecurity")}</h3>
         </div>
 
         <SettingRow
-          title="Encrypt Stored Data"
-          description="Encrypt sensitive transaction data at rest using AES-GCM encryption. Requires key generation on first enable."
+          title={t("encryptStoredData")}
+          description={t("encryptStoredDataDescription")}
           checked={settings.enableEncryption}
           onChange={async () => {
             const newValue = !settings.enableEncryption;
@@ -533,9 +517,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
               // Enable encryption - check if encryption is available
               const { isEncryptionAvailable } = await import("@/lib/encryption");
               if (!isEncryptionAvailable()) {
-                alert(
-                  "Encryption is not available in this browser. Please use a modern browser with Web Crypto API support."
-                );
+                alert(t("encryptionNotAvailable"));
                 return;
               }
               // Generate encryption key if needed
@@ -545,7 +527,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
                 handleToggle("enableEncryption");
               } catch (error) {
                 console.error("Failed to initialize encryption:", error);
-                alert("Failed to enable encryption. Please try again.");
+                alert(t("encryptionFailed"));
               }
             } else {
               // Disable encryption (doesn't decrypt existing data, just stops encrypting new data)
@@ -556,7 +538,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
         {settings.enableEncryption && (
           <div className="mt-2 rounded bg-green-50 p-2 text-xs text-green-700">
             <CheckCircle2 className="mr-1 inline h-4 w-4" />
-            Encryption is active. Your data is encrypted in IndexedDB.
+            {t("encryptionActive")}
           </div>
         )}
       </div>
@@ -565,7 +547,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
       <div className="rounded-lg bg-white p-6 shadow">
         <div className="mb-4 flex items-center gap-2">
           <Shield className="h-5 w-5 text-gray-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Data Management</h3>
+          <h3 className="text-lg font-semibold text-gray-900">{t("dataManagement")}</h3>
         </div>
 
         <div className="space-y-4">
@@ -574,17 +556,15 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
             <div className="flex-1">
               <div className="flex items-center gap-2">
                 <Download className="h-5 w-5 text-gray-600" />
-                <h4 className="font-medium text-gray-900">Export All Data</h4>
+                <h4 className="font-medium text-gray-900">{t("exportAllData")}</h4>
               </div>
-              <p className="mt-1 text-sm text-gray-600">
-                Download all your accounts, transactions, categories, and budgets as JSON
-              </p>
+              <p className="mt-1 text-sm text-gray-600">{t("exportAllDataDescription")}</p>
             </div>
             <button
               onClick={handleExportData}
               className="rounded-lg bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-700"
             >
-              Export
+              {t("export")}
             </button>
           </div>
 
@@ -593,55 +573,56 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Trash2 className="h-5 w-5 text-red-600" />
-                <h4 className="font-medium text-gray-900">Delete Data</h4>
+                <h4 className="font-medium text-gray-900">{t("deleteData")}</h4>
               </div>
               <button
                 onClick={selectAllForDeletion}
                 className="text-sm text-red-600 underline hover:text-red-700"
               >
-                {Object.values(deleteSelections).every((v) => v) ? "Deselect All" : "Select All"}
+                {Object.values(deleteSelections).every((v) => v)
+                  ? t("deselectAll")
+                  : t("selectAll")}
               </button>
             </div>
 
-            <p className="mb-4 text-sm text-gray-600">
-              Select which data you want to permanently delete:
-            </p>
+            <p className="mb-4 text-sm text-gray-600">{t("selectDataToDelete")}</p>
 
             <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <DeleteCheckbox
-                label="Transactions"
-                description="All imported and manual transactions"
+                label={t("deleteTransactionsLabel")}
+                description={t("deleteTransactionsDescription")}
                 checked={deleteSelections.transactions}
                 onChange={() => toggleDeleteSelection("transactions")}
               />
               <DeleteCheckbox
-                label="Accounts"
-                description="Bank accounts and credit cards"
+                label={t("deleteAccountsLabel")}
+                description={t("deleteAccountsDescription")}
                 checked={deleteSelections.accounts}
                 onChange={() => toggleDeleteSelection("accounts")}
               />
               <DeleteCheckbox
-                label="Account Balances"
-                description="Reset all account balances to $0"
+                label={t("deleteBalancesLabel")}
+                description={t("deleteBalancesDescription")}
                 checked={deleteSelections.balances}
                 onChange={() => toggleDeleteSelection("balances")}
                 disabled={deleteSelections.accounts}
+                includedInLabel={t("includedInAccounts")}
               />
               <DeleteCheckbox
-                label="Categories"
-                description="Custom spending categories"
+                label={t("deleteCategoriesLabel")}
+                description={t("deleteCategoriesDescription")}
                 checked={deleteSelections.categories}
                 onChange={() => toggleDeleteSelection("categories")}
               />
               <DeleteCheckbox
-                label="Budgets"
-                description="Monthly budget allocations"
+                label={t("deleteBudgetsLabel")}
+                description={t("deleteBudgetsDescription")}
                 checked={deleteSelections.budgets}
                 onChange={() => toggleDeleteSelection("budgets")}
               />
               <DeleteCheckbox
-                label="Privacy Settings"
-                description="Reset all settings to defaults"
+                label={t("deletePrivacySettingsLabel")}
+                description={t("deletePrivacySettingsDescription")}
                 checked={deleteSelections.privacySettings}
                 onChange={() => toggleDeleteSelection("privacySettings")}
               />
@@ -651,10 +632,9 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
               <div className="mb-4 flex items-start gap-2 rounded-lg bg-red-100 p-3">
                 <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-600" />
                 <div>
-                  <p className="text-sm font-medium text-red-800">This action cannot be undone!</p>
+                  <p className="text-sm font-medium text-red-800">{t("cannotBeUndone")}</p>
                   <p className="mt-1 text-sm text-red-700">
-                    You are about to permanently delete {selectedCount} data type
-                    {selectedCount > 1 ? "s" : ""}. Click &quot;Confirm Delete&quot; to proceed.
+                    {t("confirmDeleteWarning", { count: selectedCount })}
                   </p>
                 </div>
               </div>
@@ -662,7 +642,7 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
 
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-500">
-                {hasAnySelection ? `${selectedCount} selected` : "Nothing selected"}
+                {hasAnySelection ? t("nSelected", { count: selectedCount }) : t("nothingSelected")}
               </span>
               <button
                 onClick={handleDeleteSelectedData}
@@ -674,10 +654,10 @@ export function PrivacyControlsPanel({ settings, onSettingsChange }: PrivacyCont
                 } ${isDeleting ? "cursor-wait opacity-50" : ""}`}
               >
                 {isDeleting
-                  ? "Deleting..."
+                  ? t("deleting")
                   : showConfirmDelete
-                    ? "Confirm Delete"
-                    : "Delete Selected"}
+                    ? t("confirmDelete")
+                    : t("deleteSelected")}
               </button>
             </div>
           </div>
@@ -694,6 +674,7 @@ interface SettingRowProps {
   onChange: () => void;
   disabled?: boolean;
   requiresAI?: boolean;
+  requiresAILabel?: string;
 }
 
 function SettingRow({
@@ -703,6 +684,7 @@ function SettingRow({
   onChange,
   disabled = false,
   requiresAI = false,
+  requiresAILabel,
 }: SettingRowProps) {
   return (
     <div className={`mb-4 pb-4 ${disabled ? "opacity-50" : ""}`}>
@@ -712,7 +694,7 @@ function SettingRow({
             <h4 className="font-medium text-gray-900">{title}</h4>
             {requiresAI && (
               <span className="rounded-full bg-purple-100 px-2 py-0.5 text-xs text-purple-700">
-                Requires AI Features
+                {requiresAILabel}
               </span>
             )}
           </div>
@@ -755,6 +737,7 @@ interface DeleteCheckboxProps {
   checked: boolean;
   onChange: () => void;
   disabled?: boolean;
+  includedInLabel?: string;
 }
 
 function DeleteCheckbox({
@@ -763,6 +746,7 @@ function DeleteCheckbox({
   checked,
   onChange,
   disabled = false,
+  includedInLabel,
 }: DeleteCheckboxProps) {
   return (
     <label
@@ -785,7 +769,9 @@ function DeleteCheckbox({
         <div className="text-sm font-medium text-gray-900">{label}</div>
         <div className="mt-0.5 text-xs text-gray-500">
           {description}
-          {disabled && <span className="italic text-gray-400"> (included in Accounts)</span>}
+          {disabled && includedInLabel && (
+            <span className="italic text-gray-400"> ({includedInLabel})</span>
+          )}
         </div>
       </div>
     </label>

@@ -13,7 +13,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { X, AlertTriangle, AlertCircle, Info, CheckCircle, Trash2 } from "lucide-react";
 import type { ValidationResult, ValidationIssue } from "@/lib/ai/smart-transaction-validator";
 import type { ParsedTransaction } from "@/types/budget";
@@ -42,6 +42,7 @@ export default function ValidationWarningsModal({
   onCancel,
 }: ValidationWarningsModalProps) {
   const t = useTranslations("validationWarnings");
+  const locale = useLocale();
   const [transactionsToRemove, setTransactionsToRemove] = useState<Set<number>>(new Set());
   const [expandedIssue, setExpandedIssue] = useState<number | null>(null);
 
@@ -194,7 +195,9 @@ export default function ValidationWarningsModal({
                               </span>
                               {issue.confidence && (
                                 <span className="text-xs text-gray-600">
-                                  {t("confidence", { percent: (issue.confidence * 100).toFixed(0) })}
+                                  {t("confidence", {
+                                    percent: (issue.confidence * 100).toFixed(0),
+                                  })}
                                 </span>
                               )}
                             </div>
@@ -218,13 +221,15 @@ export default function ValidationWarningsModal({
                                 <div className="grid grid-cols-2 gap-2">
                                   <div>
                                     <strong>{t("date")}</strong>{" "}
-                                    {issue.transaction.date.toLocaleDateString()}
+                                    {issue.transaction.date.toLocaleDateString(locale)}
                                   </div>
                                   <div>
-                                    <strong>{t("amount")}</strong> {issue.transaction.amount.toFixed(2)}
+                                    <strong>{t("amount")}</strong>{" "}
+                                    {issue.transaction.amount.toFixed(2)}
                                   </div>
                                   <div className="col-span-2">
-                                    <strong>{t("description")}</strong> {issue.transaction.description}
+                                    <strong>{t("description")}</strong>{" "}
+                                    {issue.transaction.description}
                                   </div>
                                 </div>
                               </div>

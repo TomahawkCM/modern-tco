@@ -6,7 +6,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import type { SupportedLocale } from "@/i18n/config";
+import { formatCurrency, getCurrencySymbol } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import { TrendingDown, DollarSign, Calendar, Percent, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -40,6 +43,8 @@ import { format, addMonths } from "date-fns";
 
 export function DebtAnalysis() {
   const t = useTranslations("debtAnalysis");
+  const currency = useDefaultCurrency();
+  const locale = useLocale() as SupportedLocale;
   const [loans, setLoans] = useState<Loan[]>([]);
   const [totalDebt, setTotalDebt] = useState(0);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
@@ -165,7 +170,7 @@ export function DebtAnalysis() {
           <div key={index}>
             <p className="mb-1 font-semibold text-gray-900">{entry.name}</p>
             <p className="text-sm" style={{ color: entry.color }}>
-              ${entry.value?.toLocaleString()}
+              {formatCurrency(entry.value ?? 0, currency, locale)}
             </p>
           </div>
         ))}
@@ -194,7 +199,7 @@ export function DebtAnalysis() {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${totalDebt.toLocaleString()}</div>
+            <div className="text-2xl font-bold">{formatCurrency(totalDebt, currency, locale)}</div>
             <p className="mt-1 text-xs text-muted-foreground">
               {t("cards.totalDebt.subtitle", {
                 count: loans.filter((l) => l.status === "active").length,
@@ -209,7 +214,9 @@ export function DebtAnalysis() {
             <TrendingDown className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${monthlyPayment.toLocaleString()}</div>
+            <div className="text-2xl font-bold">
+              {formatCurrency(monthlyPayment, currency, locale)}
+            </div>
             <p className="mt-1 text-xs text-muted-foreground">
               {t("cards.monthlyPayment.subtitle")}
             </p>
@@ -285,7 +292,7 @@ export function DebtAnalysis() {
                   />
                   <span className="text-sm capitalize text-gray-600">{item.type}</span>
                   <span className="ms-auto text-sm font-semibold text-gray-900">
-                    ${item.totalBalance.toLocaleString()}
+                    {formatCurrency(item.totalBalance, currency, locale)}
                   </span>
                 </div>
               ))}
@@ -308,7 +315,9 @@ export function DebtAnalysis() {
                   <YAxis
                     tick={{ fontSize: 12 }}
                     stroke="#999"
-                    tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
+                    tickFormatter={(value) =>
+                      `${getCurrencySymbol(currency, locale)}${(value / 1000).toFixed(0)}k`
+                    }
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Line
@@ -325,7 +334,11 @@ export function DebtAnalysis() {
 
             <div className="mt-4 text-center text-sm text-gray-600">
               {t("charts.projection.expectedReduction", {
-                amount: `$${(payoffProjection[0]?.balance - payoffProjection[12]?.balance).toLocaleString()}`,
+                amount: formatCurrency(
+                  payoffProjection[0]?.balance - payoffProjection[12]?.balance,
+                  currency,
+                  locale
+                ),
               })}
             </div>
           </CardContent>
@@ -365,10 +378,10 @@ export function DebtAnalysis() {
                   <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
                     <td className="px-4 py-3 font-medium text-gray-900">{loan.name}</td>
                     <td className="px-4 py-3 text-end text-gray-900">
-                      ${loan.balance.toLocaleString()}
+                      {formatCurrency(loan.balance, currency, locale)}
                     </td>
                     <td className="px-4 py-3 text-end text-gray-900">
-                      ${loan.payment.toLocaleString()}
+                      {formatCurrency(loan.payment, currency, locale)}
                     </td>
                     <td className="px-4 py-3 text-end text-gray-900">{loan.rate.toFixed(2)}%</td>
                     <td className="px-4 py-3 text-end font-semibold text-teal-600">
@@ -379,10 +392,10 @@ export function DebtAnalysis() {
                 <tr className="bg-gray-50 font-semibold">
                   <td className="px-4 py-3 text-gray-900">{t("comparison.total")}</td>
                   <td className="px-4 py-3 text-end text-gray-900">
-                    ${totalDebt.toLocaleString()}
+                    {formatCurrency(totalDebt, currency, locale)}
                   </td>
                   <td className="px-4 py-3 text-end text-gray-900">
-                    ${monthlyPayment.toLocaleString()}
+                    {formatCurrency(monthlyPayment, currency, locale)}
                   </td>
                   <td className="px-4 py-3 text-end text-gray-900">{avgRate.toFixed(2)}%</td>
                   <td className="px-4 py-3 text-end text-gray-900">100%</td>

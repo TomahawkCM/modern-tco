@@ -31,19 +31,31 @@ interface SubscriptionModalProps {
   isSaving?: boolean;
 }
 
-const BILLING_CYCLES: { value: BillingCycle; label: string; days: number }[] = [
-  { value: "weekly", label: "Weekly", days: 7 },
-  { value: "bi-weekly", label: "Bi-weekly (every 2 weeks)", days: 14 },
-  { value: "monthly", label: "Monthly", days: 30 },
-  { value: "quarterly", label: "Quarterly (3 months)", days: 90 },
-  { value: "annual", label: "Annual (12 months)", days: 365 },
+const BILLING_CYCLES: { value: BillingCycle; labelKey: string; days: number }[] = [
+  { value: "weekly", labelKey: "cycleWeekly", days: 7 },
+  { value: "bi-weekly", labelKey: "cycleBiWeekly", days: 14 },
+  { value: "monthly", labelKey: "cycleMonthly", days: 30 },
+  { value: "quarterly", labelKey: "cycleQuarterly", days: 90 },
+  { value: "annual", labelKey: "cycleAnnual", days: 365 },
 ];
 
-const STATUS_OPTIONS: { value: SubscriptionStatus; label: string; color: string }[] = [
-  { value: "active", label: "Active", color: "bg-green-100 text-green-800 border-green-200" },
-  { value: "trial", label: "Trial", color: "bg-blue-100 text-blue-800 border-blue-200" },
-  { value: "paused", label: "Paused", color: "bg-yellow-100 text-yellow-800 border-yellow-200" },
-  { value: "cancelled", label: "Cancelled", color: "bg-red-100 text-red-800 border-red-200" },
+const STATUS_OPTIONS: { value: SubscriptionStatus; labelKey: string; color: string }[] = [
+  {
+    value: "active",
+    labelKey: "statusActive",
+    color: "bg-green-100 text-green-800 border-green-200",
+  },
+  { value: "trial", labelKey: "statusTrial", color: "bg-blue-100 text-blue-800 border-blue-200" },
+  {
+    value: "paused",
+    labelKey: "statusPaused",
+    color: "bg-yellow-100 text-yellow-800 border-yellow-200",
+  },
+  {
+    value: "cancelled",
+    labelKey: "statusCancelled",
+    color: "bg-red-100 text-red-800 border-red-200",
+  },
 ];
 
 export function SubscriptionModal({
@@ -54,6 +66,7 @@ export function SubscriptionModal({
   isSaving = false,
 }: SubscriptionModalProps) {
   const tAria = useTranslations("aria");
+  const tSub = useTranslations("subscriptionModal");
   // Form state
   const [name, setName] = useState(subscription?.name || "");
   const [description, setDescription] = useState(subscription?.description || "");
@@ -146,17 +159,17 @@ export function SubscriptionModal({
 
     const amountNum = parseFloat(amount);
     if (isNaN(amountNum) || amountNum <= 0) {
-      alert("Please enter a valid amount");
+      alert(tSub("validationInvalidAmount"));
       return;
     }
 
     if (!name.trim()) {
-      alert("Please enter a subscription name");
+      alert(tSub("validationNameRequired"));
       return;
     }
 
     if (!nextBillingDate) {
-      alert("Please enter the next billing date");
+      alert(tSub("validationNextBillingRequired"));
       return;
     }
 
@@ -201,7 +214,7 @@ export function SubscriptionModal({
         <div className="flex-shrink-0 border-b border-border bg-card p-5 sm:p-6">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-foreground sm:text-2xl">
-              {subscription ? "Edit Subscription" : "Add Subscription"}
+              {subscription ? tSub("editTitle") : tSub("addTitle")}
             </h2>
             <button
               type="button"
@@ -224,14 +237,14 @@ export function SubscriptionModal({
                 className="mb-2 block text-base font-semibold text-foreground"
               >
                 <Tag className="me-2 inline-block h-4 w-4" />
-                Subscription Name *
+                {tSub("nameLabel")}
               </label>
               <input
                 id="sub-name"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g., Netflix, Spotify, Adobe CC"
+                placeholder={tSub("namePlaceholder")}
                 className="min-h-[48px] w-full rounded-lg border border-input bg-background px-4 text-base text-foreground focus:border-transparent focus:ring-2 focus:ring-teal-500"
                 required
               />
@@ -245,11 +258,11 @@ export function SubscriptionModal({
                   className="mb-2 block text-base font-semibold text-foreground"
                 >
                   <DollarSign className="me-2 inline-block h-4 w-4" />
-                  Amount *
+                  {tSub("amountLabel")}
                 </label>
                 <div className="relative">
                   <span className="absolute start-4 top-1/2 -translate-y-1/2 text-lg text-muted-foreground">
-                    $
+                    {tSub("currencySymbol")}
                   </span>
                   <input
                     id="sub-amount"
@@ -272,7 +285,7 @@ export function SubscriptionModal({
                   className="mb-2 block text-base font-semibold text-foreground"
                 >
                   <Calendar className="me-2 inline-block h-4 w-4" />
-                  Billing Cycle *
+                  {tSub("billingCycleLabel")}
                 </label>
                 <select
                   id="sub-cycle"
@@ -282,7 +295,7 @@ export function SubscriptionModal({
                 >
                   {BILLING_CYCLES.map((cycle) => (
                     <option key={cycle.value} value={cycle.value}>
-                      {cycle.label}
+                      {tSub(cycle.labelKey)}
                     </option>
                   ))}
                 </select>
@@ -291,7 +304,9 @@ export function SubscriptionModal({
 
             {/* Status */}
             <div>
-              <label className="mb-2 block text-base font-semibold text-foreground">Status</label>
+              <label className="mb-2 block text-base font-semibold text-foreground">
+                {tSub("statusLabel")}
+              </label>
               <div className="flex flex-wrap gap-2">
                 {STATUS_OPTIONS.map((opt) => (
                   <button
@@ -304,7 +319,7 @@ export function SubscriptionModal({
                         : "border-border bg-muted text-muted-foreground hover:bg-muted/80"
                     }`}
                   >
-                    {opt.label}
+                    {tSub(opt.labelKey)}
                   </button>
                 ))}
               </div>
@@ -317,7 +332,7 @@ export function SubscriptionModal({
                   htmlFor="sub-start"
                   className="mb-2 block text-base font-semibold text-foreground"
                 >
-                  Start Date *
+                  {tSub("startDateLabel")}
                 </label>
                 <input
                   id="sub-start"
@@ -334,7 +349,7 @@ export function SubscriptionModal({
                   htmlFor="sub-next"
                   className="mb-2 block text-base font-semibold text-foreground"
                 >
-                  Next Billing Date *
+                  {tSub("nextBillingDateLabel")}
                 </label>
                 <input
                   id="sub-next"
@@ -354,7 +369,7 @@ export function SubscriptionModal({
                   htmlFor="sub-trial"
                   className="mb-2 block text-base font-semibold text-foreground"
                 >
-                  Trial End Date
+                  {tSub("trialEndDateLabel")}
                 </label>
                 <input
                   id="sub-trial"
@@ -363,18 +378,18 @@ export function SubscriptionModal({
                   onChange={(e) => setTrialEndDate(e.target.value)}
                   className="min-h-[48px] w-full rounded-lg border border-input bg-background px-4 text-base text-foreground focus:border-transparent focus:ring-2 focus:ring-teal-500"
                 />
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Set when your free trial ends to track it
-                </p>
+                <p className="mt-1 text-xs text-muted-foreground">{tSub("trialEndDateHint")}</p>
               </div>
             )}
 
             {/* Category */}
             <div>
-              <label className="mb-2 block text-base font-semibold text-foreground">Category</label>
+              <label className="mb-2 block text-base font-semibold text-foreground">
+                {tSub("categoryLabel")}
+              </label>
               <CategoryCombobox
                 options={[
-                  { value: "", label: "None" },
+                  { value: "", label: tSub("categoryNone") },
                   ...filteredCategories.map((cat) => ({
                     value: cat.name,
                     label: cat.name,
@@ -382,17 +397,15 @@ export function SubscriptionModal({
                 ]}
                 value={category}
                 onChange={setCategory}
-                placeholder="Select category..."
+                placeholder={tSub("categoryPlaceholder")}
               />
             </div>
 
             {/* Auto-renew Toggle */}
             <div className="flex items-center justify-between rounded-lg bg-muted/50 p-4">
               <div>
-                <p className="font-medium text-foreground">Auto-renew</p>
-                <p className="text-sm text-muted-foreground">
-                  Will this subscription renew automatically?
-                </p>
+                <p className="font-medium text-foreground">{tSub("autoRenewLabel")}</p>
+                <p className="text-sm text-muted-foreground">{tSub("autoRenewDescription")}</p>
               </div>
               <button
                 type="button"
@@ -414,7 +427,7 @@ export function SubscriptionModal({
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Bell className="h-4 w-4 text-teal-500" />
-                  <p className="font-medium text-foreground">Reminders</p>
+                  <p className="font-medium text-foreground">{tSub("remindersLabel")}</p>
                 </div>
                 <button
                   type="button"
@@ -433,19 +446,19 @@ export function SubscriptionModal({
 
               {reminderEnabled && (
                 <div className="flex items-center gap-3">
-                  <span className="text-sm text-muted-foreground">Remind me</span>
+                  <span className="text-sm text-muted-foreground">{tSub("remindMe")}</span>
                   <select
                     value={reminderDaysBefore}
                     onChange={(e) => setReminderDaysBefore(e.target.value)}
                     className="rounded-lg border border-input bg-background px-3 py-1.5 text-sm text-foreground focus:ring-2 focus:ring-teal-500"
                   >
-                    <option value="1">1 day</option>
-                    <option value="3">3 days</option>
-                    <option value="5">5 days</option>
-                    <option value="7">1 week</option>
-                    <option value="14">2 weeks</option>
+                    <option value="1">{tSub("reminder1Day")}</option>
+                    <option value="3">{tSub("reminder3Days")}</option>
+                    <option value="5">{tSub("reminder5Days")}</option>
+                    <option value="7">{tSub("reminder1Week")}</option>
+                    <option value="14">{tSub("reminder2Weeks")}</option>
                   </select>
-                  <span className="text-sm text-muted-foreground">before billing</span>
+                  <span className="text-sm text-muted-foreground">{tSub("beforeBilling")}</span>
                 </div>
               )}
             </div>
@@ -470,7 +483,7 @@ export function SubscriptionModal({
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-                Advanced Options
+                {tSub("advancedOptions")}
               </button>
 
               {showAdvanced && (
@@ -482,14 +495,14 @@ export function SubscriptionModal({
                       className="mb-2 block text-sm font-medium text-foreground"
                     >
                       <FileText className="me-2 inline-block h-4 w-4" />
-                      Description
+                      {tSub("descriptionLabel")}
                     </label>
                     <input
                       id="sub-desc"
                       type="text"
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
-                      placeholder="e.g., Family plan, Pro tier"
+                      placeholder={tSub("descriptionPlaceholder")}
                       className="min-h-[44px] w-full rounded-lg border border-input bg-background px-4 text-base text-foreground focus:border-transparent focus:ring-2 focus:ring-teal-500"
                     />
                   </div>
@@ -501,14 +514,14 @@ export function SubscriptionModal({
                       className="mb-2 block text-sm font-medium text-foreground"
                     >
                       <CreditCard className="me-2 inline-block h-4 w-4" />
-                      Payment Method
+                      {tSub("paymentMethodLabel")}
                     </label>
                     <input
                       id="sub-payment"
                       type="text"
                       value={paymentMethod}
                       onChange={(e) => setPaymentMethod(e.target.value)}
-                      placeholder="e.g., Visa ending 1234"
+                      placeholder={tSub("paymentMethodPlaceholder")}
                       className="min-h-[44px] w-full rounded-lg border border-input bg-background px-4 text-base text-foreground focus:border-transparent focus:ring-2 focus:ring-teal-500"
                     />
                   </div>
@@ -520,7 +533,7 @@ export function SubscriptionModal({
                       className="mb-2 block text-sm font-medium text-foreground"
                     >
                       <LinkIcon className="me-2 inline-block h-4 w-4" />
-                      Website / Login URL
+                      {tSub("websiteUrlLabel")}
                     </label>
                     <input
                       id="sub-url"
@@ -538,13 +551,13 @@ export function SubscriptionModal({
                       htmlFor="sub-notes"
                       className="mb-2 block text-sm font-medium text-foreground"
                     >
-                      Notes
+                      {tSub("notesLabel")}
                     </label>
                     <textarea
                       id="sub-notes"
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
-                      placeholder="Any additional notes..."
+                      placeholder={tSub("notesPlaceholder")}
                       rows={3}
                       className="w-full resize-none rounded-lg border border-input bg-background px-4 py-3 text-base text-foreground focus:border-transparent focus:ring-2 focus:ring-teal-500"
                     />
@@ -556,7 +569,7 @@ export function SubscriptionModal({
                       htmlFor="sub-currency"
                       className="mb-2 block text-sm font-medium text-foreground"
                     >
-                      Currency
+                      {tSub("currencyLabel")}
                     </label>
                     <select
                       id="sub-currency"
@@ -564,10 +577,10 @@ export function SubscriptionModal({
                       onChange={(e) => setCurrency(e.target.value)}
                       className="min-h-[44px] w-full rounded-lg border border-input bg-background px-4 text-base text-foreground focus:border-transparent focus:ring-2 focus:ring-teal-500"
                     >
-                      <option value="CAD">CAD - Canadian Dollar</option>
-                      <option value="USD">USD - US Dollar</option>
-                      <option value="EUR">EUR - Euro</option>
-                      <option value="GBP">GBP - British Pound</option>
+                      <option value="CAD">{tSub("currencyCAD")}</option>
+                      <option value="USD">{tSub("currencyUSD")}</option>
+                      <option value="EUR">{tSub("currencyEUR")}</option>
+                      <option value="GBP">{tSub("currencyGBP")}</option>
                     </select>
                   </div>
                 </div>
@@ -581,7 +594,7 @@ export function SubscriptionModal({
                 onClick={onClose}
                 className="min-h-[48px] flex-1 rounded-lg border-2 border-border px-6 py-3 text-base font-semibold text-foreground transition-colors hover:bg-muted"
               >
-                Cancel
+                {tSub("cancel")}
               </button>
               <button
                 type="submit"
@@ -591,11 +604,11 @@ export function SubscriptionModal({
                 {isSaving && <Loader2 className="h-5 w-5 animate-spin" />}
                 {isSaving
                   ? subscription
-                    ? "Saving..."
-                    : "Adding..."
+                    ? tSub("saving")
+                    : tSub("adding")
                   : subscription
-                    ? "Save Changes"
-                    : "Add Subscription"}
+                    ? tSub("saveChanges")
+                    : tSub("addSubscription")}
               </button>
             </div>
           </form>

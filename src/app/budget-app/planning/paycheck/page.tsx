@@ -9,6 +9,7 @@
  */
 
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import {
   CalendarDays,
   CheckCircle2,
@@ -22,6 +23,9 @@ import {
   Wallet,
 } from "lucide-react";
 import { db } from "@/lib/budget-db";
+import { getCurrentCurrency, getCurrentLocale } from "@/lib/locale-storage";
+import { LOCALE_METADATA } from "@/i18n/config";
+import { formatCurrency as formatCurrencyUtil } from "@/i18n/utils/formatCurrency";
 import type {
   PaycheckPlan,
   Paycheck,
@@ -45,12 +49,16 @@ import { ConfirmDialog } from "@/components/budget/ConfirmDialog";
 
 const PAYCHECK_COUNT = 6;
 
-const SCHEDULE_OPTIONS: { value: PaycheckSchedule; label: string; description: string }[] = [
-  { value: "weekly", label: "Weekly", description: "Every week" },
-  { value: "biweekly", label: "Biweekly", description: "Every two weeks" },
-  { value: "semimonthly", label: "Semi-monthly", description: "1st and 15th" },
-  { value: "monthly", label: "Monthly", description: "Once a month" },
-  { value: "irregular", label: "Irregular", description: "Custom dates" },
+const SCHEDULE_OPTIONS: { value: PaycheckSchedule; labelKey: string; descriptionKey: string }[] = [
+  { value: "weekly", labelKey: "scheduleWeekly", descriptionKey: "scheduleWeeklyDesc" },
+  { value: "biweekly", labelKey: "scheduleBiweekly", descriptionKey: "scheduleBiweeklyDesc" },
+  {
+    value: "semimonthly",
+    labelKey: "scheduleSemimonthly",
+    descriptionKey: "scheduleSemimonthlyDesc",
+  },
+  { value: "monthly", labelKey: "scheduleMonthly", descriptionKey: "scheduleMonthlyDesc" },
+  { value: "irregular", labelKey: "scheduleIrregular", descriptionKey: "scheduleIrregularDesc" },
 ];
 
 // ---------------------------------------------------------------------------
@@ -58,17 +66,14 @@ const SCHEDULE_OPTIONS: { value: PaycheckSchedule; label: string; description: s
 // ---------------------------------------------------------------------------
 
 function formatCurrency(amount: number, currency: string = "CAD"): string {
-  return new Intl.NumberFormat("en-CA", {
-    style: "currency",
-    currency,
-    minimumFractionDigits: 2,
-  }).format(amount);
+  return formatCurrencyUtil(amount, getCurrentCurrency() || currency, getCurrentLocale());
 }
 
 function formatDate(dateStr: string): string {
   const [year, month, day] = dateStr.split("-").map(Number);
   const date = new Date(year, month - 1, day);
-  return date.toLocaleDateString("en-CA", {
+  const locale = getCurrentLocale();
+  return date.toLocaleDateString(locale, {
     weekday: "short",
     month: "short",
     day: "numeric",
@@ -88,6 +93,8 @@ function toISODateString(date: Date): string {
 // ---------------------------------------------------------------------------
 
 export default function PaycheckPlanningPage() {
+  const t = useTranslations("planning.paycheck");
+
   // Data state
   const [plan, setPlan] = useState<PaycheckPlan | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -235,7 +242,7 @@ export default function PaycheckPlanningPage() {
       <div className="flex h-64 items-center justify-center">
         <div className="text-center">
           <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-teal-600 border-t-transparent" />
-          <p className="mt-4 text-gray-600">Loading paycheck plan...</p>
+          <p className="mt-4 text-gray-600">{t("loading")}</p>
         </div>
       </div>
     );
@@ -247,16 +254,14 @@ export default function PaycheckPlanningPage() {
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-4xl font-bold text-white">Paycheck Planning</h1>
+            <h1 className="text-4xl font-bold text-white">{t("title")}</h1>
             <HelpTooltip
-              content="Allocate each paycheck to budget categories before payday. See exactly how much is left for discretionary spending."
-              ariaLabel="More information about paycheck planning"
+              content={t("helpTooltip")}
+              ariaLabel={t("helpTooltipAriaLabel")}
               iconSize="h-5 w-5"
             />
           </div>
-          <p className="mt-2 text-lg font-medium text-slate-400">
-            Plan where every dollar goes before you get paid
-          </p>
+          <p className="mt-2 text-lg font-medium text-slate-400">{t("subtitle")}</p>
         </div>
         <div className="flex gap-3">
           {plan && (
@@ -265,7 +270,7 @@ export default function PaycheckPlanningPage() {
               className="inline-flex min-h-[48px] items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-base font-semibold text-slate-300 transition-colors hover:bg-white/10 hover:text-white"
             >
               <Settings className="h-5 w-5" />
-              <span className="hidden sm:inline">Edit Schedule</span>
+              <span className="hidden sm:inline">{t("editSchedule")}</span>
             </button>
           )}
           {!plan && !showSetup && (
@@ -274,7 +279,7 @@ export default function PaycheckPlanningPage() {
               className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-teal-500 px-6 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
             >
               <Plus className="h-5 w-5" />
-              Set Up Plan
+              {t("setUpPlan")}
             </button>
           )}
         </div>
@@ -287,33 +292,36 @@ export default function PaycheckPlanningPage() {
             <div>
               <div className="mb-2 flex items-center gap-2">
                 <DollarSign className="h-5 w-5 text-teal-600" aria-hidden="true" />
-                <p className="text-base font-medium text-gray-700">Total Income</p>
+                <p className="text-base font-medium text-gray-700">{t("totalIncome")}</p>
               </div>
               <p className="text-3xl font-bold text-gray-900">
                 {formatCurrency(summaryStats.totalIncome, plan.paychecks[0]?.currency)}
               </p>
               <p className="mt-1 text-sm text-gray-500">
-                {plan.paychecks.length} paycheck{plan.paychecks.length !== 1 ? "s" : ""} planned
+                {t("paychecksPlanned", { count: plan.paychecks.length })}
               </p>
             </div>
             <div>
               <div className="mb-2 flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-blue-600" aria-hidden="true" />
-                <p className="text-base font-medium text-gray-700">Total Allocated</p>
+                <p className="text-base font-medium text-gray-700">{t("totalAllocated")}</p>
               </div>
               <p className="text-3xl font-bold text-blue-600">
                 {formatCurrency(summaryStats.totalAllocated, plan.paychecks[0]?.currency)}
               </p>
               <p className="mt-1 text-sm text-gray-500">
-                {summaryStats.totalIncome > 0
-                  ? `${Math.round((summaryStats.totalAllocated / summaryStats.totalIncome) * 100)}% of income`
-                  : "0% of income"}
+                {t("percentOfIncome", {
+                  percent:
+                    summaryStats.totalIncome > 0
+                      ? Math.round((summaryStats.totalAllocated / summaryStats.totalIncome) * 100)
+                      : 0,
+                })}
               </p>
             </div>
             <div>
               <div className="mb-2 flex items-center gap-2">
                 <PiggyBank className="h-5 w-5 text-green-600" aria-hidden="true" />
-                <p className="text-base font-medium text-gray-700">Safe to Spend</p>
+                <p className="text-base font-medium text-gray-700">{t("safeToSpend")}</p>
               </div>
               <p
                 className={`text-3xl font-bold ${
@@ -322,7 +330,7 @@ export default function PaycheckPlanningPage() {
               >
                 {formatCurrency(summaryStats.safeToSpend, plan.paychecks[0]?.currency)}
               </p>
-              <p className="mt-1 text-sm text-gray-500">Unallocated funds</p>
+              <p className="mt-1 text-sm text-gray-500">{t("unallocatedFunds")}</p>
             </div>
           </div>
         </div>
@@ -337,13 +345,14 @@ export default function PaycheckPlanningPage() {
             if (plan) setShowSetup(false);
           }}
           onDelete={plan ? () => setDeleteConfirmOpen(true) : undefined}
+          t={t}
         />
       )}
 
       {/* Paycheck Timeline */}
       {plan && !showSetup && plan.paychecks.length > 0 && (
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-white">Paycheck Timeline</h2>
+          <h2 className="text-xl font-semibold text-white">{t("paycheckTimeline")}</h2>
           <div className="space-y-4">
             {plan.paychecks.map((paycheck) => {
               const isActive = activePaycheck?.id === paycheck.id;
@@ -374,7 +383,7 @@ export default function PaycheckPlanningPage() {
                           <h3 className="text-lg font-bold text-gray-900">{paycheck.label}</h3>
                           {isActive && (
                             <span className="rounded-full bg-teal-100 px-2 py-0.5 text-xs font-semibold text-teal-700">
-                              Active
+                              {t("active")}
                             </span>
                           )}
                         </div>
@@ -399,18 +408,20 @@ export default function PaycheckPlanningPage() {
                           }`}
                         >
                           {unallocated > 0
-                            ? `${formatCurrency(unallocated, paycheck.currency)} unallocated`
+                            ? t("amountUnallocated", {
+                                amount: formatCurrency(unallocated, paycheck.currency),
+                              })
                             : unallocated === 0
-                              ? "Fully allocated"
-                              : `${formatCurrency(Math.abs(unallocated), paycheck.currency)} over-allocated`}
+                              ? t("fullyAllocated")
+                              : t("overAllocated", {
+                                  amount: formatCurrency(Math.abs(unallocated), paycheck.currency),
+                                })}
                         </p>
                       </div>
                       <button
                         onClick={() => setExpandedPaycheckId(isExpanded ? null : paycheck.id)}
                         className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg p-3 text-gray-500 transition-colors hover:bg-gray-100 hover:text-gray-700"
-                        aria-label={
-                          isExpanded ? "Collapse paycheck details" : "Expand paycheck details"
-                        }
+                        aria-label={isExpanded ? t("collapseDetails") : t("expandDetails")}
                       >
                         {isExpanded ? (
                           <ChevronUp className="h-5 w-5" />
@@ -439,7 +450,11 @@ export default function PaycheckPlanningPage() {
                         />
                       </div>
                       <div className="mt-1 flex justify-between text-xs text-gray-500">
-                        <span>{formatCurrency(allocated, paycheck.currency)} allocated</span>
+                        <span>
+                          {t("amountAllocated", {
+                            amount: formatCurrency(allocated, paycheck.currency),
+                          })}
+                        </span>
                         <span>{Math.round((allocated / paycheck.expectedAmount) * 100)}%</span>
                       </div>
                     </div>
@@ -465,7 +480,7 @@ export default function PaycheckPlanningPage() {
                                     }}
                                   />
                                   <span className="text-sm font-medium text-gray-700">
-                                    {category?.name ?? "Unknown Category"}
+                                    {category?.name ?? t("unknownCategory")}
                                   </span>
                                 </div>
                                 <span className="text-sm font-semibold text-gray-900">
@@ -476,17 +491,14 @@ export default function PaycheckPlanningPage() {
                           })}
                         </div>
                       ) : (
-                        <p className="text-sm italic text-gray-500">
-                          No allocations yet. Tap &quot;Allocate&quot; to assign funds to
-                          categories.
-                        </p>
+                        <p className="text-sm italic text-gray-500">{t("noAllocationsYet")}</p>
                       )}
                       <button
                         onClick={() => setAllocatingPaycheckId(paycheck.id)}
                         className="mt-4 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-lg bg-teal-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-600"
                       >
                         <DollarSign className="h-4 w-4" />
-                        {paycheck.allocations.length > 0 ? "Edit Allocations" : "Allocate"}
+                        {paycheck.allocations.length > 0 ? t("editAllocations") : t("allocate")}
                       </button>
                     </div>
                   )}
@@ -499,6 +511,7 @@ export default function PaycheckPlanningPage() {
                       budgets={budgets}
                       onSave={(allocations) => handleSaveAllocations(paycheck.id, allocations)}
                       onCancel={() => setAllocatingPaycheckId(null)}
+                      t={t}
                     />
                   )}
                 </div>
@@ -512,16 +525,14 @@ export default function PaycheckPlanningPage() {
       {plan && !showSetup && plan.paychecks.length === 0 && (
         <div className="rounded-lg bg-white p-8 text-center shadow">
           <Wallet className="mx-auto mb-4 h-12 w-12 text-gray-400" />
-          <h3 className="mb-2 text-lg font-semibold text-gray-900">No paychecks scheduled</h3>
-          <p className="mb-4 text-gray-600">
-            Your plan uses an irregular schedule. Update your setup to add paychecks.
-          </p>
+          <h3 className="mb-2 text-lg font-semibold text-gray-900">{t("noPaychecksScheduled")}</h3>
+          <p className="mb-4 text-gray-600">{t("irregularScheduleHint")}</p>
           <button
             onClick={() => setShowSetup(true)}
             className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-teal-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-teal-600"
           >
             <Settings className="h-4 w-4" />
-            Edit Schedule
+            {t("editSchedule")}
           </button>
         </div>
       )}
@@ -531,21 +542,26 @@ export default function PaycheckPlanningPage() {
         open={deleteConfirmOpen}
         onOpenChange={setDeleteConfirmOpen}
         onConfirm={handleDeletePlan}
-        title="Delete Paycheck Plan"
-        description="This will remove your entire paycheck plan, including all schedules and allocations."
+        title={t("deletePlanTitle")}
+        description={t("deletePlanDescription")}
         impact={
           plan
             ? {
-                title: "You will lose:",
+                title: t("youWillLose"),
                 items: [
-                  `${plan.paychecks.length} scheduled paycheck${plan.paychecks.length !== 1 ? "s" : ""}`,
-                  `All category allocations across paychecks`,
-                  `Schedule: ${SCHEDULE_OPTIONS.find((o) => o.value === plan.schedule)?.label ?? plan.schedule}`,
+                  t("scheduledPaychecks", { count: plan.paychecks.length }),
+                  t("allCategoryAllocations"),
+                  t("scheduleLabel", {
+                    schedule: t(
+                      SCHEDULE_OPTIONS.find((o) => o.value === plan.schedule)?.labelKey ??
+                        "scheduleIrregular"
+                    ),
+                  }),
                 ],
               }
             : undefined
         }
-        confirmLabel="Delete Plan"
+        confirmLabel={t("deletePlan")}
         variant="destructive"
         icon={<Trash2 className="h-5 w-5" />}
       />
@@ -562,6 +578,7 @@ function SetupForm({
   onSubmit,
   onCancel,
   onDelete,
+  t,
 }: {
   existingPlan: PaycheckPlan | null;
   onSubmit: (
@@ -572,6 +589,7 @@ function SetupForm({
   ) => Promise<void>;
   onCancel: () => void;
   onDelete?: () => void;
+  t: ReturnType<typeof useTranslations>;
 }) {
   const [schedule, setSchedule] = useState<PaycheckSchedule>(existingPlan?.schedule ?? "biweekly");
   const [firstDate, setFirstDate] = useState<string>(() => {
@@ -623,7 +641,7 @@ function SetupForm({
     <div className="rounded-lg bg-white p-6 shadow-md">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-xl font-semibold text-gray-900">
-          {existingPlan ? "Edit Paycheck Schedule" : "Set Up Paycheck Plan"}
+          {existingPlan ? t("editPaycheckSchedule") : t("setUpPaycheckPlan")}
         </h2>
         {onDelete && (
           <button
@@ -632,7 +650,7 @@ function SetupForm({
             className="inline-flex min-h-[48px] items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
           >
             <Trash2 className="h-4 w-4" />
-            Delete Plan
+            {t("deletePlan")}
           </button>
         )}
       </div>
@@ -641,10 +659,10 @@ function SetupForm({
         {/* Schedule Selector */}
         <div>
           <div className="mb-3 flex items-center gap-2">
-            <label className="block text-sm font-medium text-gray-700">Pay Frequency</label>
+            <label className="block text-sm font-medium text-gray-700">{t("payFrequency")}</label>
             <HelpTooltip
-              content="How often do you get paid? This determines when your paychecks are generated."
-              ariaLabel="More information about pay frequency"
+              content={t("payFrequencyHelp")}
+              ariaLabel={t("payFrequencyHelpAriaLabel")}
             />
           </div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
@@ -666,8 +684,8 @@ function SetupForm({
                   className="h-4 w-4 border-gray-300 text-teal-600 focus:ring-teal-500"
                 />
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">{option.label}</p>
-                  <p className="text-xs text-gray-500">{option.description}</p>
+                  <p className="text-sm font-semibold text-gray-900">{t(option.labelKey)}</p>
+                  <p className="text-xs text-gray-500">{t(option.descriptionKey)}</p>
                 </div>
               </label>
             ))}
@@ -677,7 +695,7 @@ function SetupForm({
         {/* First Paycheck Date */}
         <div>
           <label htmlFor="firstDate" className="mb-2 block text-sm font-medium text-gray-700">
-            First Paycheck Date
+            {t("firstPaycheckDate")}
           </label>
           <input
             id="firstDate"
@@ -692,7 +710,7 @@ function SetupForm({
         {/* Expected Amount */}
         <div>
           <label htmlFor="expectedAmount" className="mb-2 block text-sm font-medium text-gray-700">
-            Expected Amount (Net Pay)
+            {t("expectedAmountLabel")}
           </label>
           <div className="relative w-full max-w-xs">
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
@@ -713,7 +731,7 @@ function SetupForm({
         {/* Currency */}
         <div>
           <label htmlFor="currency" className="mb-2 block text-sm font-medium text-gray-700">
-            Currency
+            {t("currency")}
           </label>
           <select
             id="currency"
@@ -721,11 +739,11 @@ function SetupForm({
             onChange={(e) => setCurrency(e.target.value)}
             className="min-h-[48px] w-full max-w-xs rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
           >
-            <option value="CAD">CAD - Canadian Dollar</option>
-            <option value="USD">USD - US Dollar</option>
-            <option value="EUR">EUR - Euro</option>
-            <option value="GBP">GBP - British Pound</option>
-            <option value="AUD">AUD - Australian Dollar</option>
+            <option value="CAD">{t("currencyCAD")}</option>
+            <option value="USD">{t("currencyUSD")}</option>
+            <option value="EUR">{t("currencyEUR")}</option>
+            <option value="GBP">{t("currencyGBP")}</option>
+            <option value="AUD">{t("currencyAUD")}</option>
           </select>
         </div>
 
@@ -737,7 +755,7 @@ function SetupForm({
               onClick={onCancel}
               className="min-h-[48px] rounded-lg border border-gray-300 px-6 py-2.5 font-medium text-gray-700 transition-colors hover:bg-gray-50"
             >
-              Cancel
+              {t("cancel")}
             </button>
           )}
           <button
@@ -748,12 +766,12 @@ function SetupForm({
             {isSaving ? (
               <>
                 <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                Generating...
+                {t("generating")}
               </>
             ) : (
               <>
                 <CalendarDays className="h-5 w-5" />
-                {existingPlan ? "Regenerate Paychecks" : "Generate Paychecks"}
+                {existingPlan ? t("regeneratePaychecks") : t("generatePaychecks")}
               </>
             )}
           </button>
@@ -773,12 +791,14 @@ function AllocationEditor({
   budgets,
   onSave,
   onCancel,
+  t,
 }: {
   paycheck: Paycheck;
   categories: Category[];
   budgets: Budget[];
   onSave: (allocations: PaycheckAllocation[]) => Promise<void>;
   onCancel: () => void;
+  t: ReturnType<typeof useTranslations>;
 }) {
   // Build initial allocation map from existing allocations
   const [allocationMap, setAllocationMap] = useState<Record<string, string>>(() => {
@@ -860,7 +880,7 @@ function AllocationEditor({
             step="0.01"
             min="0"
             className="min-h-[48px] w-full rounded-lg border border-gray-300 py-2 pl-7 pr-2 text-right text-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
-            aria-label={`Allocation for ${category.name}`}
+            aria-label={t("allocationFor", { name: category.name })}
           />
         </div>
       </div>
@@ -885,10 +905,10 @@ function AllocationEditor({
           }`}
         >
           {remaining > 0
-            ? "Remaining to allocate"
+            ? t("remainingToAllocate")
             : remaining === 0
-              ? "Fully allocated!"
-              : "Over-allocated by"}
+              ? t("fullyAllocatedBang")
+              : t("overAllocatedBy")}
         </span>
         <span
           className={`text-lg font-bold ${
@@ -902,7 +922,7 @@ function AllocationEditor({
       {/* Categories with budgets */}
       {categoriesWithBudget.withBudget.length > 0 && (
         <div className="mb-4">
-          <h4 className="mb-2 text-sm font-semibold text-gray-700">Budgeted Categories</h4>
+          <h4 className="mb-2 text-sm font-semibold text-gray-700">{t("budgetedCategories")}</h4>
           <div className="space-y-2">{categoriesWithBudget.withBudget.map(renderCategoryRow)}</div>
         </div>
       )}
@@ -910,7 +930,7 @@ function AllocationEditor({
       {/* Categories without budgets */}
       {categoriesWithBudget.withoutBudget.length > 0 && (
         <div className="mb-4">
-          <h4 className="mb-2 text-sm font-semibold text-gray-700">Other Categories</h4>
+          <h4 className="mb-2 text-sm font-semibold text-gray-700">{t("otherCategories")}</h4>
           <div className="space-y-2">
             {categoriesWithBudget.withoutBudget.map(renderCategoryRow)}
           </div>
@@ -924,7 +944,7 @@ function AllocationEditor({
           onClick={onCancel}
           className="min-h-[48px] flex-1 rounded-lg border border-gray-300 px-4 py-2.5 font-medium text-gray-700 transition-colors hover:bg-gray-50"
         >
-          Cancel
+          {t("cancel")}
         </button>
         <button
           type="button"
@@ -935,12 +955,12 @@ function AllocationEditor({
           {isSaving ? (
             <>
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-              Saving...
+              {t("saving")}
             </>
           ) : (
             <>
               <CheckCircle2 className="h-4 w-4" />
-              Save Allocations
+              {t("saveAllocations")}
             </>
           )}
         </button>

@@ -34,6 +34,10 @@ import {
   Bot,
 } from "lucide-react";
 import { Suspense, useEffect, useState } from "react";
+import { useTranslations, useLocale } from "next-intl";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import type { SupportedLocale } from "@/i18n/config";
 import { useSearchParams } from "next/navigation";
 import { PrivacyControlsPanel } from "./settings-privacy-panel";
 import { AccessibilitySettingsPanel } from "@/components/budget/AccessibilitySettingsPanel";
@@ -82,17 +86,21 @@ export default function SettingsPage() {
 }
 
 function SettingsLoadingFallback() {
+  const t = useTranslations("settings");
   return (
     <div className="flex h-64 items-center justify-center">
       <div className="text-center">
         <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-teal-600 border-t-transparent"></div>
-        <p className="mt-4 text-gray-600">Loading settings...</p>
+        <p className="mt-4 text-gray-600">{t("loading")}</p>
       </div>
     </div>
   );
 }
 
 function SettingsContent() {
+  const t = useTranslations("settings");
+  const locale = useLocale() as SupportedLocale;
+  const defaultCurrency = useDefaultCurrency();
   const searchParams = useSearchParams();
   const initialTab = searchParams?.get("tab") as TabType | null;
   const [accounts, setAccounts] = useState<Account[]>([]);
@@ -168,19 +176,19 @@ function SettingsContent() {
       setEditingAccount(null);
     } catch (error) {
       console.error("Error saving account:", error);
-      alert("Failed to save account");
+      alert(t("accountSaveFailed"));
     }
   }
 
   async function deleteAccount(id: string) {
-    if (!confirm("Delete this account? Transactions will NOT be deleted.")) return;
+    if (!confirm(t("deleteAccountConfirm"))) return;
 
     try {
       await db.accounts.delete(id);
       await loadData();
     } catch (error) {
       console.error("Error deleting account:", error);
-      alert("Failed to delete account");
+      alert(t("accountDeleteFailed"));
     }
   }
 
@@ -203,7 +211,7 @@ function SettingsContent() {
       setEditingCategory(null);
     } catch (error) {
       console.error("Error saving category:", error);
-      alert("Failed to save category");
+      alert(t("categorySaveFailed"));
     }
   }
 
@@ -211,17 +219,11 @@ function SettingsContent() {
     const transactionCount = categoryTransactionCounts[id] || 0;
 
     if (transactionCount > 0) {
-      if (
-        !confirm(
-          `This category has ${transactionCount} transaction${
-            transactionCount !== 1 ? "s" : ""
-          }. Archive it? Transactions will be preserved but the category will be hidden.`
-        )
-      ) {
+      if (!confirm(t("archiveCategoryWithTransactions", { count: transactionCount }))) {
         return;
       }
     } else {
-      if (!confirm("Archive this category? You can restore it later.")) {
+      if (!confirm(t("archiveCategoryConfirm"))) {
         return;
       }
     }
@@ -234,7 +236,7 @@ function SettingsContent() {
       await loadData();
     } catch (error) {
       console.error("Error archiving category:", error);
-      alert("Failed to archive category");
+      alert(t("archiveFailed"));
     }
   }
 
@@ -247,7 +249,7 @@ function SettingsContent() {
       await loadData();
     } catch (error) {
       console.error("Error unarchiving category:", error);
-      alert("Failed to unarchive category");
+      alert(t("unarchiveFailed"));
     }
   }
 
@@ -280,7 +282,7 @@ function SettingsContent() {
       await loadData();
     } catch (error) {
       console.error("Error reordering categories:", error);
-      alert("Failed to reorder categories");
+      alert(t("reorderFailed"));
     }
   }
 
@@ -289,7 +291,7 @@ function SettingsContent() {
       <div className="flex h-64 items-center justify-center">
         <div className="text-center">
           <div className="mx-auto h-16 w-16 animate-spin rounded-full border-4 border-teal-600 border-t-transparent"></div>
-          <p className="mt-4 text-gray-600">Loading settings...</p>
+          <p className="mt-4 text-gray-600">{t("loading")}</p>
         </div>
       </div>
     );
@@ -299,14 +301,14 @@ function SettingsContent() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-white">Settings</h1>
-        <p className="mt-2 text-slate-400">Manage your accounts and categories</p>
+        <h1 className="text-3xl font-bold text-white">{t("title")}</h1>
+        <p className="mt-2 text-slate-400">{t("subtitle")}</p>
       </div>
 
       {/* Mobile Tab Selector */}
       <div className="md:hidden">
         <label htmlFor="settings-tab-select" className="sr-only">
-          Select settings section
+          {t("selectSection")}
         </label>
         <select
           id="settings-tab-select"
@@ -315,32 +317,32 @@ function SettingsContent() {
           className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
         >
           <option value="accounts" className="bg-slate-900">
-            Accounts ({accounts.length})
+            {t("tabAccounts")} ({accounts.length})
           </option>
           <option value="categories" className="bg-slate-900">
-            Categories ({categories.length})
+            {t("tabCategories")} ({categories.length})
           </option>
           <option value="notifications" className="bg-slate-900">
-            Notifications
+            {t("tabNotifications")}
           </option>
           <option value="privacy" className="bg-slate-900">
-            Privacy & AI
+            {t("tabPrivacy")}
           </option>
           <option value="accessibility" className="bg-slate-900">
-            Accessibility
+            {t("tabAccessibility")}
           </option>
           <option value="data" className="bg-slate-900">
-            Data
+            {t("tabData")}
           </option>
           <option value="locale" className="bg-slate-900">
-            Locale & Formatting
+            {t("tabLocale")}
           </option>
           <option value="profile" className="bg-slate-900">
-            Profiles
+            {t("tabProfiles")}
           </option>
           {isDev && (
             <option value="developer" className="bg-slate-900">
-              Developer Tools
+              {t("tabDevTools")}
             </option>
           )}
         </select>
@@ -359,7 +361,7 @@ function SettingsContent() {
           >
             <div className="flex items-center gap-2">
               <CreditCard className="h-4 w-4" />
-              <span>Accounts</span>
+              <span>{t("tabAccounts")}</span>
               <span className="text-xs opacity-70">({accounts.length})</span>
             </div>
           </button>
@@ -373,7 +375,7 @@ function SettingsContent() {
           >
             <div className="flex items-center gap-2">
               <Tag className="h-4 w-4" />
-              <span>Categories</span>
+              <span>{t("tabCategories")}</span>
               <span className="text-xs opacity-70">({categories.length})</span>
             </div>
           </button>
@@ -387,7 +389,7 @@ function SettingsContent() {
           >
             <div className="flex items-center gap-2">
               <Bell className="h-4 w-4" />
-              <span>Notifications</span>
+              <span>{t("tabNotifications")}</span>
             </div>
           </button>
           <button
@@ -400,7 +402,7 @@ function SettingsContent() {
           >
             <div className="flex items-center gap-2">
               <Shield className="h-4 w-4" />
-              <span>Privacy</span>
+              <span>{t("tabPrivacy")}</span>
             </div>
           </button>
           <button
@@ -413,7 +415,7 @@ function SettingsContent() {
           >
             <div className="flex items-center gap-2">
               <Eye className="h-4 w-4" />
-              <span>Accessibility</span>
+              <span>{t("tabAccessibility")}</span>
             </div>
           </button>
           <button
@@ -426,7 +428,7 @@ function SettingsContent() {
           >
             <div className="flex items-center gap-2">
               <Database className="h-4 w-4" />
-              <span>Data</span>
+              <span>{t("tabData")}</span>
             </div>
           </button>
           <button
@@ -439,7 +441,7 @@ function SettingsContent() {
           >
             <div className="flex items-center gap-2">
               <Globe className="h-4 w-4" />
-              <span>Locale</span>
+              <span>{t("tabLocale")}</span>
             </div>
           </button>
           <button
@@ -452,7 +454,7 @@ function SettingsContent() {
           >
             <div className="flex items-center gap-2">
               <Users className="h-4 w-4" />
-              <span>Profiles</span>
+              <span>{t("tabProfiles")}</span>
             </div>
           </button>
           {isDev && (
@@ -466,7 +468,7 @@ function SettingsContent() {
             >
               <div className="flex items-center gap-2">
                 <Wrench className="h-4 w-4" />
-                <span>Dev Tools</span>
+                <span>{t("tabDevTools")}</span>
               </div>
             </button>
           )}
@@ -477,7 +479,7 @@ function SettingsContent() {
       {activeTab === "accounts" && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-white">Your Accounts</h2>
+            <h2 className="text-xl font-semibold text-white">{t("yourAccounts")}</h2>
             <button
               onClick={() => {
                 setEditingAccount(null);
@@ -486,7 +488,7 @@ function SettingsContent() {
               className="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2 text-white transition-colors hover:bg-teal-700"
             >
               <Plus className="h-4 w-4" />
-              Add Account
+              {t("addAccount")}
             </button>
           </div>
 
@@ -504,8 +506,11 @@ function SettingsContent() {
                       </div>
                       <p className="mt-2 text-sm text-gray-600">{account.institution}</p>
                       <p className="mt-2 text-2xl font-bold text-gray-900">
-                        {account.currency} $
-                        {account.balance.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                        {formatCurrency(
+                          account.balance,
+                          account.currency || defaultCurrency,
+                          locale
+                        )}
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
@@ -532,14 +537,14 @@ function SettingsContent() {
           ) : (
             <div className="rounded-lg bg-white p-12 text-center shadow">
               <CreditCard className="mx-auto mb-4 h-16 w-16 text-gray-400" />
-              <h3 className="mb-2 text-xl font-semibold text-gray-900">No Accounts Yet</h3>
-              <p className="mb-6 text-gray-600">Add your bank accounts to get started</p>
+              <h3 className="mb-2 text-xl font-semibold text-gray-900">{t("noAccountsYet")}</h3>
+              <p className="mb-6 text-gray-600">{t("addAccountsToStart")}</p>
               <button
                 onClick={() => setShowAccountModal(true)}
                 className="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-6 py-2 text-white transition-colors hover:bg-teal-700"
               >
                 <Plus className="h-5 w-5" />
-                Add Your First Account
+                {t("addFirstAccount")}
               </button>
             </div>
           )}
@@ -551,10 +556,8 @@ function SettingsContent() {
         <div className="space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-bold text-white">Categories</h2>
-              <p className="mt-1 text-base text-slate-400">
-                Organize your transactions with custom categories • Drag to reorder
-              </p>
+              <h2 className="text-2xl font-bold text-white">{t("categoriesTitle")}</h2>
+              <p className="mt-1 text-base text-slate-400">{t("categoriesSubtitle")}</p>
             </div>
             <div className="flex items-center gap-3">
               <button
@@ -566,7 +569,7 @@ function SettingsContent() {
                 }`}
               >
                 <Archive className="h-5 w-5" />
-                {showArchivedCategories ? "Hide" : "Show"} Archived
+                {showArchivedCategories ? t("hideArchived") : t("showArchived")}
               </button>
               <button
                 onClick={() => {
@@ -576,7 +579,7 @@ function SettingsContent() {
                 className="inline-flex min-h-[48px] items-center gap-2 rounded-lg bg-teal-500 px-6 py-3 text-base font-semibold text-white shadow-md transition-all hover:bg-teal-600 hover:shadow-lg"
               >
                 <Plus className="h-6 w-6" />
-                Add Category
+                {t("addCategory")}
               </button>
             </div>
           </div>
@@ -616,12 +619,12 @@ function SettingsContent() {
             <div className="rounded-lg border-2 border-dashed border-gray-300 bg-white p-12 text-center shadow">
               <Tag className="mx-auto mb-4 h-16 w-16 text-gray-400" />
               <h3 className="mb-2 text-xl font-semibold text-gray-900">
-                {showArchivedCategories ? "No Archived Categories" : "No Categories Yet"}
+                {showArchivedCategories ? t("noArchivedCategories") : t("noCategoriesYet")}
               </h3>
               <p className="mb-6 text-gray-600">
                 {showArchivedCategories
-                  ? "Archived categories will appear here"
-                  : "Add your first category to organize transactions"}
+                  ? t("archivedCategoriesAppearHere")
+                  : t("addFirstCategoryToOrganize")}
               </p>
               {!showArchivedCategories && (
                 <button
@@ -629,7 +632,7 @@ function SettingsContent() {
                   className="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-6 py-2 text-white transition-colors hover:bg-teal-700"
                 >
                   <Plus className="h-5 w-5" />
-                  Add Your First Category
+                  {t("addFirstCategory")}
                 </button>
               )}
             </div>
@@ -682,8 +685,8 @@ function SettingsContent() {
       {activeTab === "data" && (
         <div className="space-y-6">
           <div>
-            <h2 className="text-2xl font-bold text-white">Data Management</h2>
-            <p className="mt-1 text-base text-slate-400">Export and import your budget data</p>
+            <h2 className="text-2xl font-bold text-white">{t("dataManagement")}</h2>
+            <p className="mt-1 text-base text-slate-400">{t("dataManagementSubtitle")}</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -694,17 +697,14 @@ function SettingsContent() {
                   <Download className="h-6 w-6 text-teal-400" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-white">Export Data</h3>
-                  <p className="mt-1 text-sm text-slate-400">
-                    Download all your budget data as a .budget file. Includes transactions,
-                    accounts, categories, and settings.
-                  </p>
+                  <h3 className="text-lg font-semibold text-white">{t("exportData")}</h3>
+                  <p className="mt-1 text-sm text-slate-400">{t("exportDataDescription")}</p>
                   <button
                     onClick={() => setShowExportDialog(true)}
                     className="mt-4 inline-flex items-center gap-2 rounded-lg bg-teal-500 px-4 py-2 font-medium text-white transition-colors hover:bg-teal-600"
                   >
                     <Download className="h-4 w-4" />
-                    Export Data
+                    {t("exportData")}
                   </button>
                 </div>
               </div>
@@ -717,17 +717,14 @@ function SettingsContent() {
                   <Upload className="h-6 w-6 text-gray-400" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-white">Import Data</h3>
-                  <p className="mt-1 text-sm text-slate-400">
-                    Restore your data from a .budget file. You can choose to merge with existing
-                    data or replace it.
-                  </p>
+                  <h3 className="text-lg font-semibold text-white">{t("importData")}</h3>
+                  <p className="mt-1 text-sm text-slate-400">{t("importDataDescription")}</p>
                   <button
                     onClick={() => setShowImportDialog(true)}
                     className="mt-4 inline-flex items-center gap-2 rounded-lg bg-gray-600 px-4 py-2 font-medium text-white transition-colors hover:bg-gray-700"
                   >
                     <Upload className="h-4 w-4" />
-                    Import Data
+                    {t("importData")}
                   </button>
                 </div>
               </div>
@@ -736,23 +733,23 @@ function SettingsContent() {
 
           {/* Info Section */}
           <div className="rounded-xl border border-white/10 bg-slate-800/50 p-6">
-            <h3 className="mb-4 text-lg font-semibold text-white">About .budget Files</h3>
+            <h3 className="mb-4 text-lg font-semibold text-white">{t("aboutBudgetFiles")}</h3>
             <ul className="space-y-3 text-sm text-slate-400">
               <li className="flex items-start gap-2">
                 <span className="mt-0.5 text-teal-400">•</span>
-                Your data is stored in a portable JSON format that can be opened by any text editor
+                {t("budgetFileInfo1")}
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-0.5 text-teal-400">•</span>
-                Optional password protection uses industry-standard AES-256 encryption
+                {t("budgetFileInfo2")}
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-0.5 text-teal-400">•</span>
-                Files include a checksum to detect corruption or tampering
+                {t("budgetFileInfo3")}
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-0.5 text-teal-400">•</span>
-                Receipt images can be included in the export (increases file size)
+                {t("budgetFileInfo4")}
               </li>
             </ul>
           </div>
@@ -798,6 +795,7 @@ function SortableCategoryItem({
   onArchive: () => void;
   onUnarchive: () => void;
 }) {
+  const t = useTranslations("settings");
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: category.id,
   });
@@ -825,8 +823,8 @@ function SortableCategoryItem({
             {...attributes}
             {...listeners}
             className="cursor-grab rounded-lg p-2 transition-colors hover:bg-gray-100 active:cursor-grabbing"
-            aria-label="Drag to reorder"
-            title="Drag to reorder"
+            aria-label={t("dragToReorder")}
+            title={t("dragToReorder")}
           >
             <GripVertical className="h-6 w-6 text-gray-400" />
           </button>
@@ -845,18 +843,19 @@ function SortableCategoryItem({
               <h3 className="text-xl font-bold text-gray-900">{category.name}</h3>
               {category.archived && (
                 <span className="rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-700">
-                  Archived
+                  {t("archived")}
                 </span>
               )}
               {category.isDefault && (
                 <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-semibold text-teal-600">
-                  Default
+                  {t("default")}
                 </span>
               )}
             </div>
             <p className="mt-1 text-base font-medium text-gray-600">
               <span className="capitalize">{category.type}</span> • {category.subcategories.length}{" "}
-              subcategories • {transactionCount} transaction{transactionCount !== 1 ? "s" : ""}
+              {t("subcategories")} • {transactionCount}{" "}
+              {transactionCount !== 1 ? t("transactions") : t("transaction")}
             </p>
             {category.subcategories.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-2">
@@ -880,8 +879,8 @@ function SortableCategoryItem({
               <button
                 onClick={onEdit}
                 className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg p-3 text-teal-600 transition-colors hover:bg-teal-50 hover:text-teal-700"
-                aria-label="Edit category"
-                title="Edit category"
+                aria-label={t("editCategory")}
+                title={t("editCategory")}
               >
                 <Edit className="h-6 w-6" />
               </button>
@@ -889,8 +888,8 @@ function SortableCategoryItem({
                 <button
                   onClick={onUnarchive}
                   className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg p-3 text-green-600 transition-colors hover:bg-green-50 hover:text-green-700"
-                  aria-label="Unarchive category"
-                  title="Unarchive category"
+                  aria-label={t("unarchiveCategory")}
+                  title={t("unarchiveCategory")}
                 >
                   <RotateCcw className="h-6 w-6" />
                 </button>
@@ -898,8 +897,8 @@ function SortableCategoryItem({
                 <button
                   onClick={onArchive}
                   className="flex min-h-[48px] min-w-[48px] items-center justify-center rounded-lg p-3 text-orange-600 transition-colors hover:bg-orange-50 hover:text-orange-700"
-                  aria-label="Archive category"
-                  title="Archive category"
+                  aria-label={t("archiveCategory")}
+                  title={t("archiveCategory")}
                 >
                   <Archive className="h-6 w-6" />
                 </button>
@@ -922,6 +921,7 @@ function AccountModal({
   onSave: (account: Account) => void;
   onClose: () => void;
 }) {
+  const t = useTranslations("settings");
   const [name, setName] = useState(account?.name || "");
   const [institution, setInstitution] = useState(account?.institution || "");
   const [type, setType] = useState<"checking" | "savings" | "credit">(account?.type || "checking");
@@ -950,51 +950,57 @@ function AccountModal({
       <div className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-lg bg-white shadow-xl">
         <div className="sticky top-0 border-b border-gray-200 bg-white p-4 sm:p-6">
           <h2 className="text-lg font-semibold text-gray-900 sm:text-xl">
-            {account ? "Edit Account" : "Add Account"}
+            {account ? t("editAccount") : t("addAccount")}
           </h2>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 p-4 sm:p-6">
           <div>
-            <label className="mb-2 block text-sm font-medium text-gray-700">Account Name</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">
+              {t("accountName")}
+            </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g., BMO Checking"
+              placeholder={t("accountNamePlaceholder")}
               className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:ring-2 focus:ring-teal-500"
               required
             />
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium text-gray-700">Institution</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">
+              {t("institution")}
+            </label>
             <input
               type="text"
               value={institution}
               onChange={(e) => setInstitution(e.target.value)}
-              placeholder="e.g., BMO, Home Trust"
+              placeholder={t("institutionPlaceholder")}
               className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:ring-2 focus:ring-teal-500"
               required
             />
           </div>
 
           <div>
-            <label className="mb-2 block text-sm font-medium text-gray-700">Account Type</label>
+            <label className="mb-2 block text-sm font-medium text-gray-700">
+              {t("accountType")}
+            </label>
             <select
               value={type}
               onChange={(e) => setType(e.target.value as "checking" | "savings" | "credit")}
               className="w-full rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-transparent focus:ring-2 focus:ring-teal-500"
             >
-              <option value="checking">Checking</option>
-              <option value="savings">Savings</option>
-              <option value="credit">Credit Card</option>
+              <option value="checking">{t("checking")}</option>
+              <option value="savings">{t("savings")}</option>
+              <option value="credit">{t("creditCard")}</option>
             </select>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">Balance</label>
+              <label className="mb-2 block text-sm font-medium text-gray-700">{t("balance")}</label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
                 <input
@@ -1010,7 +1016,9 @@ function AccountModal({
             </div>
 
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">Currency</label>
+              <label className="mb-2 block text-sm font-medium text-gray-700">
+                {t("currency")}
+              </label>
               <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
@@ -1028,13 +1036,13 @@ function AccountModal({
               onClick={onClose}
               className="flex-1 rounded-lg border border-gray-300 px-4 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-gray-50"
             >
-              Cancel
+              {t("cancel")}
             </button>
             <button
               type="submit"
               className="flex-1 rounded-lg bg-teal-600 px-4 py-3 text-base font-medium text-white transition-colors hover:bg-teal-700"
             >
-              {account ? "Update" : "Add"} Account
+              {account ? t("updateAccount") : t("addAccount")}
             </button>
           </div>
         </form>
@@ -1053,6 +1061,7 @@ function CategoryModal({
   onSave: (category: Category) => void;
   onClose: () => void;
 }) {
+  const t = useTranslations("settings");
   const [name, setName] = useState(category?.name || "");
   const [type, setType] = useState<"expense" | "income">(category?.type || "expense");
   const [color, setColor] = useState(category?.color || "#3b82f6");
@@ -1104,12 +1113,10 @@ function CategoryModal({
       <div className="max-h-[95vh] w-full max-w-lg overflow-y-auto rounded-lg bg-white shadow-xl">
         <div className="sticky top-0 z-10 border-b-2 border-gray-200 bg-white p-4 sm:p-6">
           <h2 className="text-xl font-bold text-gray-900 sm:text-2xl">
-            {category ? "Edit Category" : "Add Category"}
+            {category ? t("editCategory") : t("addCategory")}
           </h2>
           <p className="mt-1 text-sm text-gray-600 sm:text-base">
-            {category
-              ? "Update category details"
-              : "Create a new category for organizing transactions"}
+            {category ? t("updateCategoryDetails") : t("createCategoryDescription")}
           </p>
         </div>
 
@@ -1117,13 +1124,13 @@ function CategoryModal({
           {/* Category Name */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700 sm:text-base">
-              Category Name
+              {t("categoryName")}
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="e.g., Entertainment, Groceries, Salary"
+              placeholder={t("categoryNamePlaceholder")}
               className="min-h-[48px] w-full rounded-lg border-2 border-gray-300 px-4 py-3 text-base transition-all focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
               required
             />
@@ -1132,7 +1139,7 @@ function CategoryModal({
           {/* Type Selection */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700 sm:text-base">
-              Type
+              {t("type")}
             </label>
             <select
               value={type}
@@ -1147,7 +1154,7 @@ function CategoryModal({
           {/* Icon Picker */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700 sm:text-base">
-              Icon
+              {t("icon")}
             </label>
             <button
               type="button"
@@ -1162,7 +1169,7 @@ function CategoryModal({
               </div>
               <div className="flex-1 text-left">
                 <p className="text-sm font-medium text-gray-900 sm:text-base">{icon}</p>
-                <p className="text-xs text-gray-600 sm:text-sm">Tap to change icon</p>
+                <p className="text-xs text-gray-600 sm:text-sm">{t("tapToChangeIcon")}</p>
               </div>
             </button>
           </div>
@@ -1170,7 +1177,7 @@ function CategoryModal({
           {/* Color Picker with Presets */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700 sm:text-base">
-              Color
+              {t("color")}
             </label>
             <div className="space-y-3">
               {/* Custom Color Input */}
@@ -1185,13 +1192,15 @@ function CategoryModal({
                   <p className="text-sm font-medium text-gray-900 sm:text-base">
                     {color.toUpperCase()}
                   </p>
-                  <p className="text-xs text-gray-600 sm:text-sm">Tap to choose a custom color</p>
+                  <p className="text-xs text-gray-600 sm:text-sm">{t("tapToChooseColor")}</p>
                 </div>
               </div>
 
               {/* Preset Colors - Responsive grid */}
               <div>
-                <p className="mb-2 text-xs font-medium text-gray-700 sm:text-sm">Quick Presets:</p>
+                <p className="mb-2 text-xs font-medium text-gray-700 sm:text-sm">
+                  {t("quickPresets")}
+                </p>
                 <div className="grid grid-cols-7 gap-1.5 sm:gap-2">
                   {presetColors.map((presetColor) => (
                     <button
@@ -1215,19 +1224,18 @@ function CategoryModal({
           {/* Subcategories */}
           <div>
             <label className="mb-2 block text-sm font-semibold text-gray-700 sm:text-base">
-              Subcategories (Optional)
+              {t("subcategoriesOptional")}
             </label>
             <input
               type="text"
               value={subcategories}
               onChange={(e) => setSubcategories(e.target.value)}
-              placeholder="e.g., Movies, Games, Events"
+              placeholder={t("subcategoriesPlaceholder")}
               className="min-h-[48px] w-full rounded-lg border-2 border-gray-300 px-4 py-3 text-base transition-all focus:border-teal-500 focus:ring-2 focus:ring-teal-500/20"
             />
             <div className="mt-2 rounded border-l-4 border-teal-400 bg-teal-50 p-2 sm:p-3">
               <p className="text-xs text-gray-800 sm:text-sm">
-                <span className="font-semibold">Tip:</span> Separate with commas, e.g. "Movies,
-                Streaming, Concerts"
+                <span className="font-semibold">{t("tipLabel")}</span> {t("subcategoriesTip")}
               </p>
             </div>
           </div>
@@ -1239,13 +1247,13 @@ function CategoryModal({
               onClick={onClose}
               className="min-h-[48px] flex-1 rounded-lg border-2 border-gray-300 px-4 py-3 text-base font-semibold text-gray-700 shadow-sm transition-all hover:bg-gray-100 active:bg-gray-200 sm:px-6"
             >
-              Cancel
+              {t("cancel")}
             </button>
             <button
               type="submit"
               className="min-h-[48px] flex-1 rounded-lg bg-teal-500 px-4 py-3 text-base font-semibold text-white shadow-md transition-all hover:bg-teal-600 active:bg-teal-700 sm:px-6"
             >
-              {category ? "Update Category" : "Add Category"}
+              {category ? t("updateCategory") : t("addCategory")}
             </button>
           </div>
         </form>
@@ -1265,6 +1273,7 @@ function CategoryModal({
 
 // WebMCP Experimental Settings Section
 function WebMCPSettingsSection() {
+  const t = useTranslations("settings");
   const STORAGE_KEY = "budget-webmcp-enabled";
   const [enabled, setEnabled] = useState(false);
   const [hasSupport, setHasSupport] = useState(false);
@@ -1293,7 +1302,9 @@ function WebMCPSettingsSection() {
           <Bot className="h-5 w-5 text-purple-400" />
         </div>
         <div>
-          <h3 className="flex items-center gap-2 text-lg font-semibold text-white">Experimental</h3>
+          <h3 className="flex items-center gap-2 text-lg font-semibold text-white">
+            {t("experimental")}
+          </h3>
         </div>
       </div>
 
@@ -1301,21 +1312,14 @@ function WebMCPSettingsSection() {
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <span className="font-medium text-white">WebMCP AI Agent Tools</span>
+              <span className="font-medium text-white">{t("webmcpTitle")}</span>
               <span className="rounded-full bg-purple-500/20 px-2 py-0.5 text-xs font-semibold text-purple-300">
-                Experimental
+                {t("experimental")}
               </span>
             </div>
-            <p className="mt-1 text-sm text-slate-400">
-              Allow browser AI agents to interact with your budget data. Requires Chrome 146+ with
-              the WebMCP flag enabled.
-            </p>
+            <p className="mt-1 text-sm text-slate-400">{t("webmcpDescription")}</p>
             {!hasSupport && enabled && (
-              <p className="mt-2 text-xs text-amber-400">
-                Your browser does not support WebMCP yet. Enable{" "}
-                <code className="rounded bg-white/10 px-1">chrome://flags/#webmcp-for-testing</code>{" "}
-                in Chrome 146 Canary.
-              </p>
+              <p className="mt-2 text-xs text-amber-400">{t("webmcpNotSupported")}</p>
             )}
           </div>
           <button
@@ -1325,7 +1329,7 @@ function WebMCPSettingsSection() {
             }`}
             role="switch"
             aria-checked={enabled}
-            aria-label="Toggle WebMCP AI Agent Tools"
+            aria-label={t("toggleWebmcp")}
           >
             <span
               className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
@@ -1337,12 +1341,7 @@ function WebMCPSettingsSection() {
 
         {enabled && (
           <div className="rounded-lg border border-white/10 bg-slate-800/50 p-4">
-            <p className="text-xs text-slate-400">
-              When enabled, 9 tools are exposed to browser AI agents: search transactions, get
-              budget summary, spending by category, account balances, list categories, get
-              subscriptions, add transaction, categorize transaction, and set budget limit.
-              Encryption fields and bank identification data are never shared.
-            </p>
+            <p className="text-xs text-slate-400">{t("webmcpToolsDescription")}</p>
           </div>
         )}
       </div>

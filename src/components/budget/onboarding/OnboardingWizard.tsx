@@ -36,7 +36,7 @@ export function isOnboardingCompleted(): boolean {
 
 export function OnboardingWizard() {
   const router = useRouter();
-  const t = useTranslations();
+  const t = useTranslations("onboardingPage");
   const { currentProfile, updateProfile } = useProfile();
 
   const [step, setStep] = useState(1);
@@ -85,8 +85,8 @@ export function OnboardingWizard() {
   const steps = [
     {
       id: 1,
-      title: "Welcome to Budget App",
-      description: "Let's get your finances organized in minutes.",
+      title: t("steps.welcome.title"),
+      description: t("steps.welcome.description"),
       icon: Sparkles,
       content: (
         <div className="space-y-4 text-center">
@@ -95,40 +95,35 @@ export function OnboardingWizard() {
               <Sparkles className="h-12 w-12 text-teal-500" />
             </div>
           </div>
-          <p className="text-muted-foreground">
-            We'll help you set up your profile, choose your currency, and get ready to track your
-            spending.
-          </p>
+          <p className="text-muted-foreground">{t("steps.welcome.content")}</p>
         </div>
       ),
     },
     {
       id: 2,
-      title: "Create Your Profile",
-      description: "What should we call you?",
+      title: t("steps.profile.title"),
+      description: t("steps.profile.description"),
       icon: User,
       content: (
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Your Name</Label>
+            <Label htmlFor="name">{t("steps.profile.nameLabel")}</Label>
             <Input
               id="name"
-              placeholder="e.g. Alex"
+              placeholder={t("steps.profile.namePlaceholder")}
               value={name}
               onChange={(e) => setName(e.target.value)}
               autoFocus
             />
           </div>
-          <p className="text-sm text-muted-foreground">
-            This name will be used for your local profile. Your data stays on your device.
-          </p>
+          <p className="text-sm text-muted-foreground">{t("steps.profile.privacyNote")}</p>
         </div>
       ),
     },
     {
       id: 3,
-      title: "Currency & Region",
-      description: "Select your primary currency.",
+      title: t("steps.currency.title"),
+      description: t("steps.currency.description"),
       icon: Globe,
       content: (
         <div className="space-y-4">
@@ -144,16 +139,14 @@ export function OnboardingWizard() {
               </Button>
             ))}
           </div>
-          <p className="text-center text-sm text-muted-foreground">
-            You can add accounts in other currencies later.
-          </p>
+          <p className="text-center text-sm text-muted-foreground">{t("steps.currency.note")}</p>
         </div>
       ),
     },
     {
       id: 4,
-      title: "You're All Set!",
-      description: "Ready to start budgeting?",
+      title: t("steps.complete.title"),
+      description: t("steps.complete.description"),
       icon: Check,
       content: (
         <div className="space-y-4 text-center">
@@ -162,9 +155,7 @@ export function OnboardingWizard() {
               <Check className="h-12 w-12 text-green-500" />
             </div>
           </div>
-          <p className="text-muted-foreground">
-            Your profile is ready. Let's go to your dashboard.
-          </p>
+          <p className="text-muted-foreground">{t("steps.complete.content")}</p>
         </div>
       ),
     },
@@ -188,7 +179,7 @@ export function OnboardingWizard() {
               ))}
             </div>
             <span className="text-sm text-muted-foreground">
-              Step {step} of {totalSteps}
+              {t("stepCounter", { current: step, total: totalSteps })}
             </span>
           </div>
           <CardTitle className="flex items-center gap-2 text-2xl">
@@ -218,14 +209,14 @@ export function OnboardingWizard() {
             onClick={() => setStep(Math.max(1, step - 1))}
             disabled={step === 1}
           >
-            Back
+            {t("back")}
           </Button>
           <Button
             onClick={handleNext}
             className="min-w-[100px] bg-teal-600 text-white hover:bg-teal-700"
             disabled={loading || (step === 2 && !name)}
           >
-            {loading ? "Saving..." : step === totalSteps ? "Get Started" : "Next"}
+            {loading ? t("saving") : step === totalSteps ? t("getStarted") : t("next")}
             {step !== totalSteps && <ChevronRight className="ml-2 h-4 w-4" />}
           </Button>
         </CardFooter>

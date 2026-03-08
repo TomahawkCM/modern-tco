@@ -6,6 +6,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   Plus,
   Filter,
@@ -39,6 +40,7 @@ import { format } from "date-fns";
 import { PullToRefresh } from "@/components/budget/layout/PullToRefresh";
 
 export default function LoansPage() {
+  const t = useTranslations("loans");
   const [loans, setLoans] = useState<Loan[]>([]);
   const [filteredLoans, setFilteredLoans] = useState<Loan[]>([]);
   const [filterType, setFilterType] = useState<LoanType | "all">("all");
@@ -97,13 +99,7 @@ export default function LoansPage() {
   }
 
   function getLoanTypeLabel(type: LoanType): string {
-    const labels = {
-      mortgage: "Mortgage",
-      auto: "Auto Loan",
-      personal: "Personal Loan",
-      student: "Student Loan",
-    };
-    return labels[type];
+    return t(`loanType.${type}`);
   }
 
   function getStatusColor(status: LoanStatus): string {
@@ -125,7 +121,7 @@ export default function LoansPage() {
       <div className="flex min-h-[400px] items-center justify-center">
         <div className="text-center">
           <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-b-2 border-teal-600"></div>
-          <p className="text-gray-500">Loading loans...</p>
+          <p className="text-gray-500">{t("loading")}</p>
         </div>
       </div>
     );
@@ -133,207 +129,209 @@ export default function LoansPage() {
 
   return (
     <PullToRefresh onRefresh={loadLoans}>
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-white">Loans</h1>
-          <p className="mt-1 text-slate-400">Manage and track all your loans</p>
-        </div>
-        <Link href="/budget-app/loans/new">
-          <Button className="bg-teal-500 hover:bg-teal-700">
-            <Plus className="mr-2 h-4 w-4" />
-            Add Loan
-          </Button>
-        </Link>
-      </div>
-
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Debt</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">${totalDebt.toLocaleString()}</div>
-            <p className="mt-1 text-xs text-muted-foreground">
-              Across {loans.filter((l) => l.status === "active").length} active loans
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Monthly Payment</CardTitle>
-            <TrendingDown className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">${monthlyObligations.toLocaleString()}</div>
-            <p className="mt-1 text-xs text-muted-foreground">Total monthly obligations</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Avg Interest Rate</CardTitle>
-            <Percent className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{avgInterestRate.toFixed(2)}%</div>
-            <p className="mt-1 text-xs text-muted-foreground">Weighted average</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Debt-Free Date</CardTitle>
-            <Calendar className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {debtFreeDate ? format(debtFreeDate, "MMM yyyy") : "N/A"}
-            </div>
-            <p className="mt-1 text-xs text-muted-foreground">Estimated payoff</p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Filters */}
-      <div className="flex flex-col gap-4 sm:flex-row">
-        <div className="flex-1">
-          <label className="mb-2 block text-sm font-medium text-gray-700">
-            <Filter className="mr-2 inline h-4 w-4" />
-            Filter by Type
-          </label>
-          <Select
-            value={filterType}
-            onValueChange={(value) => setFilterType(value as LoanType | "all")}
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="mortgage">Mortgage</SelectItem>
-              <SelectItem value="auto">Auto Loan</SelectItem>
-              <SelectItem value="personal">Personal Loan</SelectItem>
-              <SelectItem value="student">Student Loan</SelectItem>
-            </SelectContent>
-          </Select>
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-white">{t("title")}</h1>
+            <p className="mt-1 text-slate-400">{t("subtitle")}</p>
+          </div>
+          <Link href="/budget-app/loans/new">
+            <Button className="bg-teal-500 hover:bg-teal-700">
+              <Plus className="mr-2 h-4 w-4" />
+              {t("addLoan")}
+            </Button>
+          </Link>
         </div>
 
-        <div className="flex-1">
-          <label className="mb-2 block text-sm font-medium text-gray-700">Filter by Status</label>
-          <Select
-            value={filterStatus}
-            onValueChange={(value) => setFilterStatus(value as LoanStatus | "all")}
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Statuses</SelectItem>
-              <SelectItem value="active">Active</SelectItem>
-              <SelectItem value="paid-off">Paid Off</SelectItem>
-              <SelectItem value="refinanced">Refinanced</SelectItem>
-              <SelectItem value="defaulted">Defaulted</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
-      {/* Loans List */}
-      {filteredLoans.length === 0 ? (
-        loans.length === 0 ? (
-          <EmptyStates.Loans />
-        ) : (
+        {/* Summary Cards */}
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card>
-            <CardContent className="flex flex-col items-center justify-center py-12">
-              <Filter className="mb-4 h-16 w-16 text-gray-300" />
-              <h3 className="mb-2 text-lg font-semibold text-gray-900">
-                No loans match your filters
-              </h3>
-              <p className="max-w-md text-center text-gray-500">
-                Try adjusting your filter criteria to see more loans.
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">{t("totalDebt")}</CardTitle>
+              <DollarSign className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">${totalDebt.toLocaleString()}</div>
+              <p className="mt-1 text-xs text-muted-foreground">
+                {t("acrossActiveLoans", {
+                  count: loans.filter((l) => l.status === "active").length,
+                })}
               </p>
             </CardContent>
           </Card>
-        )
-      ) : (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          {filteredLoans.map((loan) => {
-            const progress = calculateProgress(loan);
 
-            return (
-              <Link key={loan.id} href={`/budget-app/loans/${loan.id}`}>
-                <Card className="cursor-pointer transition-shadow hover:shadow-lg">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <CardTitle className="text-lg">{loan.name}</CardTitle>
-                        <CardDescription className="mt-1">{loan.lender}</CardDescription>
-                      </div>
-                      <div className="flex flex-col items-end gap-2">
-                        <span className="rounded-full bg-teal-100 px-2 py-1 text-xs font-medium text-teal-800">
-                          {getLoanTypeLabel(loan.type)}
-                        </span>
-                        <span
-                          className={`rounded-full px-2 py-1 text-xs font-medium ${getStatusColor(loan.status)}`}
-                        >
-                          {loan.status}
-                        </span>
-                      </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {/* Balance and Payment */}
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-sm text-gray-500">Current Balance</p>
-                          <p className="text-xl font-bold text-gray-900">
-                            ${loan.currentBalance.toLocaleString()}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-500">Monthly Payment</p>
-                          <p className="text-xl font-bold text-gray-900">
-                            ${loan.monthlyPayment.toLocaleString()}
-                          </p>
-                        </div>
-                      </div>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">{t("monthlyPayment")}</CardTitle>
+              <TrendingDown className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">${monthlyObligations.toLocaleString()}</div>
+              <p className="mt-1 text-xs text-muted-foreground">{t("totalMonthlyObligations")}</p>
+            </CardContent>
+          </Card>
 
-                      {/* Progress Bar */}
-                      <div>
-                        <div className="mb-1 flex justify-between text-sm text-gray-600">
-                          <span>{progress.toFixed(1)}% paid off</span>
-                          <span>{loan.interestRate.toFixed(2)}% APR</span>
-                        </div>
-                        <div className="h-2 w-full rounded-full bg-gray-200">
-                          <div
-                            className="h-2 rounded-full bg-teal-500 transition-all"
-                            style={{ width: `${progress}%` }}
-                          />
-                        </div>
-                      </div>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">{t("avgInterestRate")}</CardTitle>
+              <Percent className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{avgInterestRate.toFixed(2)}%</div>
+              <p className="mt-1 text-xs text-muted-foreground">{t("weightedAverage")}</p>
+            </CardContent>
+          </Card>
 
-                      {/* Next Payment */}
-                      <div className="flex items-center justify-between border-t border-gray-100 pt-2">
-                        <span className="text-sm text-gray-600">Next Payment:</span>
-                        <span className="text-sm font-medium text-gray-900">
-                          {format(loan.nextPaymentDate, "MMM d, yyyy")}
-                        </span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            );
-          })}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">{t("debtFreeDate")}</CardTitle>
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">
+                {debtFreeDate ? format(debtFreeDate, "MMM yyyy") : t("notAvailable")}
+              </div>
+              <p className="mt-1 text-xs text-muted-foreground">{t("estimatedPayoff")}</p>
+            </CardContent>
+          </Card>
         </div>
-      )}
-    </div>
+
+        {/* Filters */}
+        <div className="flex flex-col gap-4 sm:flex-row">
+          <div className="flex-1">
+            <label className="mb-2 block text-sm font-medium text-gray-700">
+              <Filter className="mr-2 inline h-4 w-4" />
+              {t("filterByType")}
+            </label>
+            <Select
+              value={filterType}
+              onValueChange={(value) => setFilterType(value as LoanType | "all")}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">{t("allTypes")}</SelectItem>
+                <SelectItem value="mortgage">{t("loanType.mortgage")}</SelectItem>
+                <SelectItem value="auto">{t("loanType.auto")}</SelectItem>
+                <SelectItem value="personal">{t("loanType.personal")}</SelectItem>
+                <SelectItem value="student">{t("loanType.student")}</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="flex-1">
+            <label className="mb-2 block text-sm font-medium text-gray-700">
+              {t("filterByStatus")}
+            </label>
+            <Select
+              value={filterStatus}
+              onValueChange={(value) => setFilterStatus(value as LoanStatus | "all")}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">{t("allStatuses")}</SelectItem>
+                <SelectItem value="active">{t("status.active")}</SelectItem>
+                <SelectItem value="paid-off">{t("status.paidOff")}</SelectItem>
+                <SelectItem value="refinanced">{t("status.refinanced")}</SelectItem>
+                <SelectItem value="defaulted">{t("status.defaulted")}</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        {/* Loans List */}
+        {filteredLoans.length === 0 ? (
+          loans.length === 0 ? (
+            <EmptyStates.Loans />
+          ) : (
+            <Card>
+              <CardContent className="flex flex-col items-center justify-center py-12">
+                <Filter className="mb-4 h-16 w-16 text-gray-300" />
+                <h3 className="mb-2 text-lg font-semibold text-gray-900">
+                  {t("noLoansMatchFilters")}
+                </h3>
+                <p className="max-w-md text-center text-gray-500">{t("tryAdjustingFilters")}</p>
+              </CardContent>
+            </Card>
+          )
+        ) : (
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            {filteredLoans.map((loan) => {
+              const progress = calculateProgress(loan);
+
+              return (
+                <Link key={loan.id} href={`/budget-app/loans/${loan.id}`}>
+                  <Card className="cursor-pointer transition-shadow hover:shadow-lg">
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <CardTitle className="text-lg">{loan.name}</CardTitle>
+                          <CardDescription className="mt-1">{loan.lender}</CardDescription>
+                        </div>
+                        <div className="flex flex-col items-end gap-2">
+                          <span className="rounded-full bg-teal-100 px-2 py-1 text-xs font-medium text-teal-800">
+                            {getLoanTypeLabel(loan.type)}
+                          </span>
+                          <span
+                            className={`rounded-full px-2 py-1 text-xs font-medium ${getStatusColor(loan.status)}`}
+                          >
+                            {loan.status}
+                          </span>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        {/* Balance and Payment */}
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm text-gray-500">{t("currentBalance")}</p>
+                            <p className="text-xl font-bold text-gray-900">
+                              ${loan.currentBalance.toLocaleString()}
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-gray-500">{t("monthlyPayment")}</p>
+                            <p className="text-xl font-bold text-gray-900">
+                              ${loan.monthlyPayment.toLocaleString()}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Progress Bar */}
+                        <div>
+                          <div className="mb-1 flex justify-between text-sm text-gray-600">
+                            <span>{t("percentPaidOff", { percent: progress.toFixed(1) })}</span>
+                            <span>{loan.interestRate.toFixed(2)}% APR</span>
+                          </div>
+                          <div className="h-2 w-full rounded-full bg-gray-200">
+                            <div
+                              className="h-2 rounded-full bg-teal-500 transition-all"
+                              style={{ width: `${progress}%` }}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Next Payment */}
+                        <div className="flex items-center justify-between border-t border-gray-100 pt-2">
+                          <span className="text-sm text-gray-600">{t("nextPayment")}:</span>
+                          <span className="text-sm font-medium text-gray-900">
+                            {format(loan.nextPaymentDate, "MMM d, yyyy")}
+                          </span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </PullToRefresh>
   );
 }

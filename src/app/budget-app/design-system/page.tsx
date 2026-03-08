@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -17,6 +18,7 @@ import {
 } from "@/components/ui/select";
 
 export default function DesignSystemPlayground() {
+  const t = useTranslations("designSystem");
   const [theme, setTheme] = useState<"light" | "dark" | "high-contrast">("light");
   const [reduceMotion, setReduceMotion] = useState(false);
   const [fontSize, setFontSize] = useState(18);
@@ -51,35 +53,33 @@ export default function DesignSystemPlayground() {
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <header className="mb-section">
-          <h1 className="mb-4 text-4xl font-bold text-foreground">Design System Playground</h1>
-          <p className="text-lg text-muted-foreground">
-            Interactive showcase of all components, design tokens, and accessibility features
-          </p>
+          <h1 className="mb-4 text-4xl font-bold text-foreground">{t("title")}</h1>
+          <p className="text-lg text-muted-foreground">{t("subtitle")}</p>
         </header>
 
         {/* Controls Panel */}
         <Card className="mb-section p-card">
-          <h2 className="mb-4 text-2xl font-semibold">Accessibility Controls</h2>
+          <h2 className="mb-4 text-2xl font-semibold">{t("accessibilityControls")}</h2>
 
           <div className="grid gap-6 md:grid-cols-3">
             {/* Theme Selector */}
             <div className="space-y-2">
-              <Label>Theme Mode</Label>
+              <Label>{t("themeMode")}</Label>
               <Select value={theme} onValueChange={(v) => applyTheme(v as typeof theme)}>
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="light">Light</SelectItem>
-                  <SelectItem value="dark">Dark</SelectItem>
-                  <SelectItem value="high-contrast">High Contrast</SelectItem>
+                  <SelectItem value="light">{t("light")}</SelectItem>
+                  <SelectItem value="dark">{t("dark")}</SelectItem>
+                  <SelectItem value="high-contrast">{t("highContrast")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
             {/* Font Size Slider */}
             <div className="space-y-2">
-              <Label>Base Font Size: {fontSize}px</Label>
+              <Label>{t("baseFontSize", { size: fontSize })}</Label>
               <input
                 type="range"
                 min="14"
@@ -97,18 +97,18 @@ export default function DesignSystemPlayground() {
                 checked={reduceMotion}
                 onCheckedChange={toggleReduceMotion}
               />
-              <Label htmlFor="reduce-motion">Reduce Motion</Label>
+              <Label htmlFor="reduce-motion">{t("reduceMotion")}</Label>
             </div>
           </div>
         </Card>
 
         {/* Design Tokens */}
         <section className="mb-section">
-          <h2 className="mb-subsection text-3xl font-bold">Design Tokens</h2>
+          <h2 className="mb-subsection text-3xl font-bold">{t("designTokens")}</h2>
 
           {/* Colors */}
           <Card className="mb-card-gap p-card">
-            <h3 className="mb-4 text-xl font-semibold">Colors</h3>
+            <h3 className="mb-4 text-xl font-semibold">{t("colors")}</h3>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 md:grid-cols-6">
               {[
                 { name: "Primary", var: "--primary" },
@@ -131,7 +131,7 @@ export default function DesignSystemPlayground() {
 
           {/* Spacing */}
           <Card className="mb-card-gap p-card">
-            <h3 className="mb-4 text-xl font-semibold">Spacing Tokens</h3>
+            <h3 className="mb-4 text-xl font-semibold">{t("spacingTokens")}</h3>
             <div className="space-y-3">
               {[
                 { name: "Touch Target (54px)", size: "touch" },
@@ -155,7 +155,7 @@ export default function DesignSystemPlayground() {
 
           {/* Shadows */}
           <Card className="mb-card-gap p-card">
-            <h3 className="mb-4 text-xl font-semibold">Shadow Tokens</h3>
+            <h3 className="mb-4 text-xl font-semibold">{t("shadowTokens")}</h3>
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
               {["xs", "sm", "md", "lg", "xl", "2xl", "focus"].map((shadow) => (
                 <div
@@ -170,10 +170,10 @@ export default function DesignSystemPlayground() {
 
           {/* Motion */}
           <Card className="p-card">
-            <h3 className="mb-4 text-xl font-semibold">Motion Tokens</h3>
+            <h3 className="mb-4 text-xl font-semibold">{t("motionTokens")}</h3>
             <div className="space-y-4">
               <div>
-                <p className="mb-2 text-sm font-medium">Duration Scale</p>
+                <p className="mb-2 text-sm font-medium">{t("durationScale")}</p>
                 <div className="flex gap-2">
                   {["instant", "fast", "normal", "slow", "slower"].map((duration) => (
                     <Button
@@ -188,7 +188,7 @@ export default function DesignSystemPlayground() {
                 </div>
               </div>
               <div>
-                <p className="mb-2 text-sm font-medium">Easing Curves</p>
+                <p className="mb-2 text-sm font-medium">{t("easingCurves")}</p>
                 <div className="flex gap-2">
                   {["default", "emphasized", "decelerate", "bounce"].map((easing) => (
                     <div
@@ -206,42 +206,42 @@ export default function DesignSystemPlayground() {
 
         {/* Component States */}
         <section className="mb-section">
-          <h2 className="mb-subsection text-3xl font-bold">Component States</h2>
+          <h2 className="mb-subsection text-3xl font-bold">{t("componentStates")}</h2>
 
           {/* Buttons */}
           <Card className="mb-card-gap p-card">
-            <h3 className="mb-4 text-xl font-semibold">Buttons</h3>
+            <h3 className="mb-4 text-xl font-semibold">{t("buttons")}</h3>
             <div className="space-y-4">
               {/* Variants */}
               <div>
-                <p className="mb-2 text-sm font-medium">Variants</p>
+                <p className="mb-2 text-sm font-medium">{t("variants")}</p>
                 <div className="flex flex-wrap gap-2">
-                  <Button>Primary</Button>
-                  <Button variant="secondary">Secondary</Button>
-                  <Button variant="outline">Outline</Button>
-                  <Button variant="ghost">Ghost</Button>
-                  <Button variant="destructive">Destructive</Button>
+                  <Button>{t("primary")}</Button>
+                  <Button variant="secondary">{t("secondary")}</Button>
+                  <Button variant="outline">{t("outline")}</Button>
+                  <Button variant="ghost">{t("ghost")}</Button>
+                  <Button variant="destructive">{t("destructive")}</Button>
                 </div>
               </div>
 
               {/* Sizes */}
               <div>
-                <p className="mb-2 text-sm font-medium">Sizes</p>
+                <p className="mb-2 text-sm font-medium">{t("sizes")}</p>
                 <div className="flex flex-wrap items-center gap-2">
-                  <Button size="sm">Small</Button>
-                  <Button size="default">Default</Button>
-                  <Button size="lg">Large</Button>
+                  <Button size="sm">{t("small")}</Button>
+                  <Button size="default">{t("default")}</Button>
+                  <Button size="lg">{t("large")}</Button>
                 </div>
               </div>
 
               {/* States */}
               <div>
-                <p className="mb-2 text-sm font-medium">States</p>
+                <p className="mb-2 text-sm font-medium">{t("states")}</p>
                 <div className="flex flex-wrap gap-2">
-                  <Button>Default</Button>
-                  <Button className="hover:bg-primary-foreground">Hover</Button>
-                  <Button className="ring-2 ring-ring ring-offset-2">Focus</Button>
-                  <Button disabled>Disabled</Button>
+                  <Button>{t("default")}</Button>
+                  <Button className="hover:bg-primary-foreground">{t("hover")}</Button>
+                  <Button className="ring-2 ring-ring ring-offset-2">{t("focus")}</Button>
+                  <Button disabled>{t("disabled")}</Button>
                 </div>
               </div>
             </div>
@@ -249,84 +249,84 @@ export default function DesignSystemPlayground() {
 
           {/* Inputs */}
           <Card className="mb-card-gap p-card">
-            <h3 className="mb-4 text-xl font-semibold">Inputs</h3>
+            <h3 className="mb-4 text-xl font-semibold">{t("inputs")}</h3>
             <div className="max-w-md space-y-4">
               <div>
-                <Label>Default Input</Label>
-                <Input placeholder="Enter text..." />
+                <Label>{t("defaultInput")}</Label>
+                <Input placeholder={t("enterText")} />
               </div>
               <div>
-                <Label>Disabled Input</Label>
-                <Input placeholder="Disabled..." disabled />
+                <Label>{t("disabledInput")}</Label>
+                <Input placeholder={t("disabledPlaceholder")} disabled />
               </div>
               <div>
-                <Label>Error Input</Label>
+                <Label>{t("errorInput")}</Label>
                 <Input
-                  placeholder="Invalid..."
+                  placeholder={t("invalidPlaceholder")}
                   className="border-destructive focus-visible:ring-destructive"
                 />
-                <p className="mt-1 text-sm text-destructive">Error message</p>
+                <p className="mt-1 text-sm text-destructive">{t("errorMessage")}</p>
               </div>
             </div>
           </Card>
 
           {/* Form Controls */}
           <Card className="mb-card-gap p-card">
-            <h3 className="mb-4 text-xl font-semibold">Form Controls</h3>
+            <h3 className="mb-4 text-xl font-semibold">{t("formControls")}</h3>
             <div className="grid gap-6 md:grid-cols-2">
               {/* Checkboxes */}
               <div className="space-y-2">
-                <p className="text-sm font-medium">Checkboxes</p>
+                <p className="text-sm font-medium">{t("checkboxes")}</p>
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
                     <Checkbox id="check1" />
-                    <Label htmlFor="check1">Unchecked</Label>
+                    <Label htmlFor="check1">{t("unchecked")}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Checkbox id="check2" defaultChecked />
-                    <Label htmlFor="check2">Checked</Label>
+                    <Label htmlFor="check2">{t("checked")}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Checkbox id="check3" disabled />
-                    <Label htmlFor="check3">Disabled</Label>
+                    <Label htmlFor="check3">{t("disabled")}</Label>
                   </div>
                 </div>
               </div>
 
               {/* Radio Buttons */}
               <div className="space-y-2">
-                <p className="text-sm font-medium">Radio Buttons</p>
+                <p className="text-sm font-medium">{t("radioButtons")}</p>
                 <RadioGroup defaultValue="option1">
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="option1" id="radio1" />
-                    <Label htmlFor="radio1">Option 1</Label>
+                    <Label htmlFor="radio1">{t("option1")}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="option2" id="radio2" />
-                    <Label htmlFor="radio2">Option 2</Label>
+                    <Label htmlFor="radio2">{t("option2")}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="option3" id="radio3" disabled />
-                    <Label htmlFor="radio3">Disabled</Label>
+                    <Label htmlFor="radio3">{t("disabled")}</Label>
                   </div>
                 </RadioGroup>
               </div>
 
               {/* Switches */}
               <div className="space-y-2">
-                <p className="text-sm font-medium">Switches</p>
+                <p className="text-sm font-medium">{t("switches")}</p>
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
                     <Switch id="switch1" />
-                    <Label htmlFor="switch1">Off</Label>
+                    <Label htmlFor="switch1">{t("off")}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Switch id="switch2" defaultChecked />
-                    <Label htmlFor="switch2">On</Label>
+                    <Label htmlFor="switch2">{t("on")}</Label>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Switch id="switch3" disabled />
-                    <Label htmlFor="switch3">Disabled</Label>
+                    <Label htmlFor="switch3">{t("disabled")}</Label>
                   </div>
                 </div>
               </div>
@@ -335,19 +335,19 @@ export default function DesignSystemPlayground() {
 
           {/* Cards */}
           <Card className="p-card">
-            <h3 className="mb-4 text-xl font-semibold">Cards</h3>
+            <h3 className="mb-4 text-xl font-semibold">{t("cards")}</h3>
             <div className="grid gap-4 md:grid-cols-3">
               <Card className="p-4">
-                <h4 className="mb-2 font-semibold">Default Card</h4>
-                <p className="text-sm text-muted-foreground">Basic card with default styles</p>
+                <h4 className="mb-2 font-semibold">{t("defaultCard")}</h4>
+                <p className="text-sm text-muted-foreground">{t("defaultCardDescription")}</p>
               </Card>
               <Card className="p-4 shadow-lg">
-                <h4 className="mb-2 font-semibold">Elevated Card</h4>
-                <p className="text-sm text-muted-foreground">Card with shadow-lg elevation</p>
+                <h4 className="mb-2 font-semibold">{t("elevatedCard")}</h4>
+                <p className="text-sm text-muted-foreground">{t("elevatedCardDescription")}</p>
               </Card>
               <Card className="border-2 border-primary p-4">
-                <h4 className="mb-2 font-semibold">Highlighted Card</h4>
-                <p className="text-sm text-muted-foreground">Card with primary border</p>
+                <h4 className="mb-2 font-semibold">{t("highlightedCard")}</h4>
+                <p className="text-sm text-muted-foreground">{t("highlightedCardDescription")}</p>
               </Card>
             </div>
           </Card>
@@ -355,39 +355,32 @@ export default function DesignSystemPlayground() {
 
         {/* Typography */}
         <section className="mb-section">
-          <h2 className="mb-subsection text-3xl font-bold">Typography</h2>
+          <h2 className="mb-subsection text-3xl font-bold">{t("typography")}</h2>
           <Card className="p-card">
             <div className="space-y-4">
               <div>
-                <h1 className="text-4xl font-bold">Heading 1 (48px)</h1>
+                <h1 className="text-4xl font-bold">{t("heading1")}</h1>
               </div>
               <div>
-                <h2 className="text-3xl font-bold">Heading 2 (36px)</h2>
+                <h2 className="text-3xl font-bold">{t("heading2")}</h2>
               </div>
               <div>
-                <h3 className="text-2xl font-semibold">Heading 3 (30px)</h3>
+                <h3 className="text-2xl font-semibold">{t("heading3")}</h3>
               </div>
               <div>
-                <h4 className="text-xl font-semibold">Heading 4 (24px)</h4>
+                <h4 className="text-xl font-semibold">{t("heading4")}</h4>
               </div>
               <div>
-                <h5 className="text-lg font-medium">Heading 5 (20px)</h5>
+                <h5 className="text-lg font-medium">{t("heading5")}</h5>
               </div>
               <div>
-                <p className="text-base">
-                  Body text (18px base) - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Designed for optimal readability with WCAG 2.2 AA compliance.
-                </p>
+                <p className="text-base">{t("bodyText")}</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">
-                  Small text (16px) - Secondary information and captions
-                </p>
+                <p className="text-sm text-muted-foreground">{t("smallText")}</p>
               </div>
               <div>
-                <p className="text-xs text-muted-foreground">
-                  Extra small text (14px) - Footnotes and legal text
-                </p>
+                <p className="text-xs text-muted-foreground">{t("extraSmallText")}</p>
               </div>
             </div>
           </Card>
@@ -396,36 +389,16 @@ export default function DesignSystemPlayground() {
         {/* Accessibility Info */}
         <section>
           <Card className="bg-muted p-card">
-            <h2 className="mb-4 text-2xl font-bold">Accessibility Guidelines</h2>
+            <h2 className="mb-4 text-2xl font-bold">{t("accessibilityGuidelines")}</h2>
             <ul className="space-y-2 text-sm">
-              <li>
-                ✅ <strong>WCAG 2.2 AA Compliant:</strong> Contrast ratios ≥4.5:1 for normal text,
-                ≥3:1 for large text
-              </li>
-              <li>
-                ✅ <strong>Touch Targets:</strong> Minimum 48×48px (54px with spacing) for all
-                interactive elements
-              </li>
-              <li>
-                ✅ <strong>Base Font Size:</strong> 18px for improved readability (seniors-friendly)
-              </li>
-              <li>
-                ✅ <strong>Reduced Motion:</strong> Automatic detection + manual toggle for
-                vestibular disorders
-              </li>
-              <li>
-                ✅ <strong>Focus Indicators:</strong> 3px ring with 50% opacity on all interactive
-                elements
-              </li>
-              <li>
-                ✅ <strong>Semantic HTML:</strong> Proper heading hierarchy and landmark regions
-              </li>
-              <li>
-                ✅ <strong>Keyboard Navigation:</strong> All functionality accessible via keyboard
-              </li>
-              <li>
-                ✅ <strong>High Contrast Mode:</strong> Removes shadows, increases border thickness
-              </li>
+              <li>{t("a11y.wcag")}</li>
+              <li>{t("a11y.touchTargets")}</li>
+              <li>{t("a11y.fontSize")}</li>
+              <li>{t("a11y.reducedMotion")}</li>
+              <li>{t("a11y.focusIndicators")}</li>
+              <li>{t("a11y.semanticHtml")}</li>
+              <li>{t("a11y.keyboardNav")}</li>
+              <li>{t("a11y.highContrast")}</li>
             </ul>
           </Card>
         </section>
