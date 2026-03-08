@@ -34,15 +34,17 @@ export default function SyncClientWrapper() {
     }
   }, [onboardingOpen]);
 
-  // Map lan state to banner props
+  // Map lan state to banner props — only show when sync is actively configured
   const health = lan?.state?.health;
-  const status = health === "healthy"
-    ? "synced"
-    : lan?.state?.isSyncing
-      ? "syncing"
-      : lan?.state?.error
-        ? "error"
-        : "warning";
+  const showSyncBanner = lan !== null && lan.state?.isEnabled;
+  const status =
+    health === "healthy"
+      ? "synced"
+      : lan?.state?.isSyncing
+        ? "syncing"
+        : lan?.state?.error
+          ? "error"
+          : "warning";
   const lastSync = lan?.state?.lastGlobalSyncAt
     ? new Date(lan.state.lastGlobalSyncAt).toLocaleString()
     : undefined;
@@ -57,18 +59,15 @@ export default function SyncClientWrapper() {
 
   return (
     <>
-      <SyncBanner
-        status={status as any}
-        lastSync={lastSync}
-        onRetry={() => lan?.syncAll?.()}
-        onDetails={() => setDetailsOpen(true)}
-      />
-      {detailsOpen && (
-        <SyncDetailsPanel
-          onClose={() => setDetailsOpen(false)}
-          history={[]}
+      {showSyncBanner && (
+        <SyncBanner
+          status={status as any}
+          lastSync={lastSync}
+          onRetry={() => lan?.syncAll?.()}
+          onDetails={() => setDetailsOpen(true)}
         />
       )}
+      {detailsOpen && <SyncDetailsPanel onClose={() => setDetailsOpen(false)} history={[]} />}
       {conflict && (
         <ConflictModal
           conflict={conflict}
