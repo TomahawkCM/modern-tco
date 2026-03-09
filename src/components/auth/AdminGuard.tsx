@@ -29,12 +29,6 @@ export function AdminGuard({
   const admins = useMemo(() => getAdminSet(), []);
   const email = (user?.email ?? "").toLowerCase();
 
-  // Debug logging
-  console.log("AdminGuard Debug:");
-  console.log("- Current User:", email);
-  console.log("- Allowed Admins:", Array.from(admins));
-  console.log("- Is Authorized:", admins.has(email));
-
   const allowed = !!email && (admins.size === 0 ? false : admins.has(email));
 
   if (!user) {
