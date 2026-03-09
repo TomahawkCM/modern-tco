@@ -74,22 +74,25 @@ function getHealthBadgeVariant(
   }
 }
 
-function getHealthLabel(health: SyncHealth): string {
+function getHealthLabel(health: SyncHealth, t: (key: string) => string): string {
   switch (health) {
     case "healthy":
-      return "Synced";
+      return t("synced");
     case "warning":
-      return "Partial Sync";
+      return t("partialSync");
     case "error":
-      return "Sync Error";
+      return t("syncError");
     case "offline":
     default:
-      return "Offline";
+      return t("offline");
   }
 }
 
-function formatLastSync(date: Date | null): string {
-  if (!date) return "Never";
+function formatLastSync(
+  date: Date | null,
+  t: (key: string, values?: Record<string, string | number>) => string
+): string {
+  if (!date) return t("never");
 
   const now = new Date();
   const diff = now.getTime() - date.getTime();
@@ -97,10 +100,10 @@ function formatLastSync(date: Date | null): string {
   const hours = Math.floor(diff / 3600000);
   const days = Math.floor(diff / 86400000);
 
-  if (minutes < 1) return "Just now";
-  if (minutes < 60) return `${minutes}m ago`;
-  if (hours < 24) return `${hours}h ago`;
-  return `${days}d ago`;
+  if (minutes < 1) return t("justNow");
+  if (minutes < 60) return t("minutesAgo", { minutes });
+  if (hours < 24) return t("hoursAgo", { hours });
+  return t("daysAgo", { days });
 }
 
 // ============================================================================
@@ -116,6 +119,7 @@ export function SyncStatusIndicator({
   onClick,
 }: SyncStatusIndicatorProps) {
   const tAria = useTranslations("aria");
+  const t = useTranslations("syncStatus");
   const { state } = useLANSync();
   const health = useSyncHealth();
   const stats = useSyncStats();
@@ -133,7 +137,7 @@ export function SyncStatusIndicator({
             <button
               onClick={onClick}
               className={cn("relative rounded-lg p-2 transition-colors hover:bg-accent", className)}
-              aria-label={tAria("syncStatus", { status: getHealthLabel(health) })}
+              aria-label={tAria("syncStatus", { status: getHealthLabel(health, t) })}
             >
               {isSyncing ? (
                 <RefreshCw className={cn(iconSize, "animate-spin text-primary")} />
@@ -166,15 +170,18 @@ export function SyncStatusIndicator({
           </TooltipTrigger>
           <TooltipContent>
             <div className="space-y-1">
-              <p className="font-medium">{getHealthLabel(health)}</p>
+              <p className="font-medium">{getHealthLabel(health, t)}</p>
               {state.isEnabled && (
                 <>
                   <p className="text-xs text-muted-foreground">
-                    {stats.connectedDevices}/{stats.totalDevices} devices connected
+                    {t("devicesConnected", {
+                      connected: stats.connectedDevices,
+                      total: stats.totalDevices,
+                    })}
                   </p>
                   {showLastSync && stats.lastSyncAt && (
                     <p className="text-xs text-muted-foreground">
-                      Last sync: {formatLastSync(stats.lastSyncAt)}
+                      {t("lastSync", { time: formatLastSync(stats.lastSyncAt, t) })}
                     </p>
                   )}
                 </>
@@ -203,7 +210,7 @@ export function SyncStatusIndicator({
         ) : (
           <Wifi className="h-3 w-3" />
         )}
-        <span>{getHealthLabel(health)}</span>
+        <span>{getHealthLabel(health, t)}</span>
         {showPending && stats.pendingChanges > 0 && (
           <span className="ms-1 text-xs opacity-75">({stats.pendingChanges})</span>
         )}
@@ -243,12 +250,12 @@ export function SyncStatusIndicator({
       {/* Status text */}
       <div className="min-w-0 flex-1">
         <p className={cn("truncate font-medium", textSize)}>
-          {isSyncing ? "Syncing..." : getHealthLabel(health)}
+          {isSyncing ? t("syncing") : getHealthLabel(health, t)}
         </p>
         {state.isEnabled && (
           <p className={cn("truncate text-muted-foreground", seniorsMode ? "text-sm" : "text-xs")}>
-            {stats.connectedDevices}/{stats.totalDevices} devices
-            {showLastSync && stats.lastSyncAt && <> · {formatLastSync(stats.lastSyncAt)}</>}
+            {t("devices", { connected: stats.connectedDevices, total: stats.totalDevices })}
+            {showLastSync && stats.lastSyncAt && <> · {formatLastSync(stats.lastSyncAt, t)}</>}
           </p>
         )}
       </div>
@@ -274,6 +281,7 @@ export interface CompactSyncIndicatorProps {
 }
 
 export function CompactSyncIndicator({ className, onClick }: CompactSyncIndicatorProps) {
+  const t = useTranslations("syncStatus");
   const { state } = useLANSync();
   const health = useSyncHealth();
   const isSyncing = useIsSyncing();
@@ -310,7 +318,7 @@ export function CompactSyncIndicator({ className, onClick }: CompactSyncIndicato
           </button>
         </TooltipTrigger>
         <TooltipContent>
-          <span>{getHealthLabel(health)}</span>
+          <span>{getHealthLabel(health, t)}</span>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

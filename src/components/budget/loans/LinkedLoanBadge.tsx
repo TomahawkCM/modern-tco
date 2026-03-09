@@ -6,6 +6,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { Link as LinkIcon, ExternalLink, Unlink, Loader2 } from "lucide-react";
 import {
   getLinkedLoanForTransaction,
@@ -27,6 +28,7 @@ export function LinkedLoanBadge({
   showUnlinkButton = true,
   size = "sm",
 }: LinkedLoanBadgeProps) {
+  const t = useTranslations("linkedLoan");
   const [linkedInfo, setLinkedInfo] = useState<LinkedLoanInfo | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isUnlinking, setIsUnlinking] = useState(false);
@@ -51,7 +53,7 @@ export function LinkedLoanBadge({
   async function handleUnlink() {
     if (!linkedInfo || isUnlinking) return;
 
-    if (!confirm("Unlink this transaction from the loan payment?")) return;
+    if (!confirm(t("unlinkConfirm"))) return;
 
     setIsUnlinking(true);
     try {
@@ -63,7 +65,7 @@ export function LinkedLoanBadge({
       onUnlink?.();
     } catch (error) {
       console.error("Error unlinking transaction:", error);
-      alert("Failed to unlink transaction. Please try again.");
+      alert(t("unlinkFailed"));
     } finally {
       setIsUnlinking(false);
     }
@@ -90,13 +92,13 @@ export function LinkedLoanBadge({
       className={`inline-flex items-center rounded-full bg-teal-100 font-medium text-teal-800 ${sizeClasses}`}
     >
       <LinkIcon className={iconSize} />
-      <span>Loan: {linkedInfo.loan.name}</span>
+      <span>{t("loanPrefix", { name: linkedInfo.loan.name })}</span>
 
       {/* View Loan Link */}
       <Link
         href={`/budget-app/loans/${linkedInfo.loan.id}`}
         className="text-teal-600 transition-colors hover:text-teal-800"
-        title="View loan details"
+        title={t("viewLoanDetails")}
         onClick={(e) => e.stopPropagation()}
       >
         <ExternalLink className={iconSize} />
@@ -112,7 +114,7 @@ export function LinkedLoanBadge({
           }}
           disabled={isUnlinking}
           className="text-teal-600 transition-colors hover:text-red-600 disabled:opacity-50"
-          title="Unlink from loan"
+          title={t("unlinkFromLoan")}
         >
           {isUnlinking ? (
             <Loader2 className={`${iconSize} animate-spin`} />
@@ -141,12 +143,13 @@ export function LinkedLoanBadgeInline({
   paymentId,
   onUnlink,
 }: LinkedLoanBadgeInlineProps) {
+  const t = useTranslations("linkedLoan");
   const [isUnlinking, setIsUnlinking] = useState(false);
 
   async function handleUnlink() {
     if (isUnlinking) return;
 
-    if (!confirm("Unlink this transaction from the loan payment?")) return;
+    if (!confirm(t("unlinkConfirm"))) return;
 
     setIsUnlinking(true);
     try {
@@ -157,7 +160,7 @@ export function LinkedLoanBadgeInline({
       onUnlink?.();
     } catch (error) {
       console.error("Error unlinking transaction:", error);
-      alert("Failed to unlink transaction. Please try again.");
+      alert(t("unlinkFailed"));
     } finally {
       setIsUnlinking(false);
     }
@@ -170,7 +173,7 @@ export function LinkedLoanBadgeInline({
       <Link
         href={`/budget-app/loans/${loanId}`}
         className="text-teal-600 hover:text-teal-800"
-        title="View loan"
+        title={t("viewLoan")}
         onClick={(e) => e.stopPropagation()}
       >
         <ExternalLink className="h-3 w-3" />
@@ -183,7 +186,7 @@ export function LinkedLoanBadgeInline({
         }}
         disabled={isUnlinking}
         className="text-teal-600 hover:text-red-600 disabled:opacity-50"
-        title="Unlink"
+        title={t("unlink")}
       >
         {isUnlinking ? (
           <Loader2 className="h-3 w-3 animate-spin" />

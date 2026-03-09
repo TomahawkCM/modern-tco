@@ -25,6 +25,7 @@ interface ReceiptThumbnailProps {
 
 export function ReceiptThumbnail({ transactionId, onReceiptDeleted }: ReceiptThumbnailProps) {
   const tAria = useTranslations("aria");
+  const t = useTranslations("receiptThumbnail");
   const locale = useLocale();
   const [receipts, setReceipts] = useState<Receipt[]>([]);
   const [thumbnailUrls, setThumbnailUrls] = useState<Record<string, string>>({});
@@ -73,7 +74,7 @@ export function ReceiptThumbnail({ transactionId, onReceiptDeleted }: ReceiptThu
   }
 
   async function handleDeleteReceipt(receipt: Receipt) {
-    if (!confirm(`Delete receipt "${receipt.filename}"?`)) return;
+    if (!confirm(t("deleteConfirm", { filename: receipt.filename }))) return;
 
     try {
       await deleteReceipt(receipt.id, transactionId);
@@ -90,7 +91,7 @@ export function ReceiptThumbnail({ transactionId, onReceiptDeleted }: ReceiptThu
       onReceiptDeleted?.();
     } catch (error) {
       console.error("Error deleting receipt:", error);
-      alert("Failed to delete receipt");
+      alert(t("deleteFailed"));
     }
   }
 
@@ -143,9 +144,7 @@ export function ReceiptThumbnail({ transactionId, onReceiptDeleted }: ReceiptThu
             </div>
           );
         })}
-        <div className="text-xs text-gray-500">
-          {receipts.length} {receipts.length === 1 ? "receipt" : "receipts"}
-        </div>
+        <div className="text-xs text-gray-500">{t("receiptCount", { count: receipts.length })}</div>
       </div>
 
       {/* Full Size Modal */}
@@ -163,22 +162,24 @@ export function ReceiptThumbnail({ transactionId, onReceiptDeleted }: ReceiptThu
               <div className="flex-1">
                 <h3 className="font-semibold text-gray-900">{selectedReceipt.filename}</h3>
                 <p className="mt-2 text-sm text-gray-600">
-                  Uploaded {new Date(selectedReceipt.uploadedAt).toLocaleDateString(locale)} •{" "}
-                  {(selectedReceipt.fileSize / 1024).toFixed(1)} KB
+                  {t("uploaded", {
+                    date: new Date(selectedReceipt.uploadedAt).toLocaleDateString(locale),
+                  })}{" "}
+                  • {t("fileSize", { size: (selectedReceipt.fileSize / 1024).toFixed(1) })}
                 </p>
               </div>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => handleDeleteReceipt(selectedReceipt)}
                   className="rounded-lg p-2 text-red-600 transition-colors hover:bg-red-50"
-                  title="Delete receipt"
+                  title={t("deleteReceipt")}
                 >
                   <Trash2 className="h-5 w-5" />
                 </button>
                 <button
                   onClick={closeFullSize}
                   className="rounded-lg p-2 text-gray-600 transition-colors hover:bg-gray-100"
-                  title="Close"
+                  title={t("close")}
                   aria-label={tAria("closeReceiptViewer")}
                 >
                   <X className="h-5 w-5" />
@@ -197,19 +198,19 @@ export function ReceiptThumbnail({ transactionId, onReceiptDeleted }: ReceiptThu
               ) : selectedReceipt.mimeType === "application/pdf" ? (
                 <div className="py-12 text-center">
                   <FileImage className="mx-auto mb-4 h-16 w-16 text-gray-400" />
-                  <p className="mb-4 text-gray-600">PDF Receipt</p>
+                  <p className="mb-4 text-gray-600">{t("pdfReceipt")}</p>
                   <a
                     href={fullImageUrls[selectedReceipt.id]}
                     download={selectedReceipt.filename}
                     className="inline-flex items-center gap-2 rounded-lg bg-teal-500 px-4 py-2 text-white transition-colors hover:bg-teal-600"
                   >
-                    Download PDF
+                    {t("downloadPdf")}
                   </a>
                 </div>
               ) : (
                 <div className="py-12 text-center">
                   <FileImage className="mx-auto mb-4 h-16 w-16 text-gray-400" />
-                  <p className="text-gray-600">Unsupported file type</p>
+                  <p className="text-gray-600">{t("unsupportedFileType")}</p>
                 </div>
               )}
             </div>

@@ -70,9 +70,9 @@ function ProductPreview() {
         {mode === "insights" ? (
           <div className="grid gap-4 lg:grid-cols-3">
             {[
-              { label: "Net worth", value: "$24,500", tone: "bg-white/5" },
-              { label: "Income", value: "$6,120", tone: "bg-emerald-500/10" },
-              { label: "Expenses", value: "$3,980", tone: "bg-rose-500/10" },
+              { label: t("demo.netWorth"), value: "$24,500", tone: "bg-white/5" },
+              { label: t("demo.income"), value: "$6,120", tone: "bg-emerald-500/10" },
+              { label: t("demo.expenses"), value: "$3,980", tone: "bg-rose-500/10" },
             ].map((m) => (
               <div
                 key={m.label}
@@ -92,9 +92,9 @@ function ProductPreview() {
             </div>
             <div className="mt-4 space-y-3">
               {[
-                { name: "Groceries", used: 72, color: "bg-emerald-400" },
-                { name: "Dining", used: 88, color: "bg-amber-300" },
-                { name: "Shopping", used: 112, color: "bg-rose-400" },
+                { name: t("demo.groceries"), used: 72, color: "bg-emerald-400" },
+                { name: t("demo.dining"), used: 88, color: "bg-amber-300" },
+                { name: t("demo.shopping"), used: 112, color: "bg-rose-400" },
               ].map((b) => (
                 <div key={b.name} className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
                   <div className="flex items-center justify-between text-sm">
@@ -119,9 +119,9 @@ function ProductPreview() {
             </div>
             <div className="mt-4 space-y-3">
               {[
-                { name: "Netflix", meta: "Monthly", amt: "$15.99" },
-                { name: "Spotify", meta: "Monthly", amt: "$10.99" },
-                { name: "Cloud storage", meta: "Yearly", amt: "$99.00" },
+                { name: t("demo.netflix"), meta: t("demo.monthly"), amt: "$15.99" },
+                { name: t("demo.spotify"), meta: t("demo.monthly"), amt: "$10.99" },
+                { name: t("demo.cloudStorage"), meta: t("demo.yearly"), amt: "$99.00" },
               ].map((s) => (
                 <div
                   key={s.name}
@@ -150,33 +150,33 @@ function ProductPreview() {
           <div className="mt-4 space-y-3">
             {[
               {
-                name: "Grocery Store",
-                meta: "Food • Today",
+                name: t("demo.groceryStore"),
+                meta: t("demo.foodToday"),
                 amt: "-$124.50",
                 amtClass: "text-white",
               },
               {
-                name: "Salary",
-                meta: "Income • Yesterday",
+                name: t("demo.salary"),
+                meta: t("demo.incomeYesterday"),
                 amt: "+$4,250.00",
                 amtClass: "text-emerald-400",
               },
               {
-                name: "Netflix",
-                meta: "Subscription • Oct 24",
+                name: t("demo.netflix"),
+                meta: t("demo.subscriptionOct24"),
                 amt: "-$15.99",
                 amtClass: "text-white",
               },
-            ].map((t) => (
+            ].map((tx) => (
               <div
-                key={t.name}
+                key={tx.name}
                 className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-3 py-2.5"
               >
                 <div className="min-w-0">
-                  <div className="truncate text-sm font-medium text-slate-200">{t.name}</div>
-                  <div className="text-xs text-slate-500">{t.meta}</div>
+                  <div className="truncate text-sm font-medium text-slate-200">{tx.name}</div>
+                  <div className="text-xs text-slate-500">{tx.meta}</div>
                 </div>
-                <div className={`ms-4 text-sm font-semibold ${t.amtClass}`}>{t.amt}</div>
+                <div className={`ms-4 text-sm font-semibold ${tx.amtClass}`}>{tx.amt}</div>
               </div>
             ))}
           </div>

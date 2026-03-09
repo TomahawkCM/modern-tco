@@ -269,7 +269,7 @@ function AdminDashboardContent() {
             <div className="mt-2 text-3xl font-bold text-blue-400">{paidUsers}</div>
           </GlassCard>
           <GlassCard className="p-6">
-            <h3 className="text-sm font-medium text-slate-400">Expired</h3>
+            <h3 className="text-sm font-medium text-slate-400">{t("expired")}</h3>
             <div className="mt-2 text-3xl font-bold text-rose-400">{expiredUsers}</div>
           </GlassCard>
         </div>
@@ -279,7 +279,7 @@ function AdminDashboardContent() {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <Input
-              placeholder="Search users..."
+              placeholder={t("searchUsers")}
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
@@ -302,18 +302,16 @@ function AdminDashboardContent() {
               URL.revokeObjectURL(url);
             }}
           >
-            Export Users CSV
+            {t("exportUsersCsv")}
           </Button>
         </div>
 
         {/* Bulk Actions */}
         <div className="rounded-lg border border-white/10 bg-white/5 p-4">
           <div className="mb-2 text-sm text-slate-400">
-            Bulk actions for {selectedUserIds.size} selected users
+            {t("bulkActionsFor", { count: selectedUserIds.size })}
             {adminRole !== "owner" && (
-              <span className="ml-2 text-xs text-amber-300">
-                Owner role required for bulk changes
-              </span>
+              <span className="ml-2 text-xs text-amber-300">{t("ownerRoleRequired")}</span>
             )}
           </div>
           <div className="flex flex-wrap gap-3">
@@ -334,7 +332,9 @@ function AdminDashboardContent() {
               size="sm"
               className="border-white/10 text-slate-300 hover:bg-white/10"
               onClick={async () => {
-                const ok = confirm(`Apply role "${bulkRole}" to ${selectedUserIds.size} users?`);
+                const ok = confirm(
+                  t("applyRoleConfirm", { role: bulkRole, count: selectedUserIds.size })
+                );
                 if (!ok) return;
                 await bulkUpdateUserRole(Array.from(selectedUserIds), bulkRole);
                 const refreshed = await getAdminUsersPage(
@@ -349,7 +349,7 @@ function AdminDashboardContent() {
               }}
               disabled={selectedUserIds.size === 0 || adminRole !== "owner"}
             >
-              Apply Role
+              {t("applyRole")}
             </Button>
             <Input
               type="number"
@@ -364,7 +364,7 @@ function AdminDashboardContent() {
               className="border-amber-500/30 text-amber-400 hover:bg-amber-500/10"
               onClick={async () => {
                 const ok = confirm(
-                  `Extend trial by ${bulkTrialDays} days for ${selectedUserIds.size} users?`
+                  t("extendTrialConfirm", { days: bulkTrialDays, count: selectedUserIds.size })
                 );
                 if (!ok) return;
                 await bulkExtendTrial(Array.from(selectedUserIds), bulkTrialDays);
@@ -380,14 +380,14 @@ function AdminDashboardContent() {
               }}
               disabled={selectedUserIds.size === 0 || adminRole !== "owner"}
             >
-              Extend Trial
+              {t("extendTrial")}
             </Button>
             <Button
               variant="outline"
               size="sm"
               className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
               onClick={async () => {
-                const ok = confirm(`Suspend ${selectedUserIds.size} users?`);
+                const ok = confirm(t("suspendConfirm", { count: selectedUserIds.size }));
                 if (!ok) return;
                 await bulkSuspendUsers(Array.from(selectedUserIds));
                 const refreshed = await getAdminUsersPage(
@@ -402,14 +402,14 @@ function AdminDashboardContent() {
               }}
               disabled={selectedUserIds.size === 0 || adminRole !== "owner"}
             >
-              Suspend
+              {t("suspend")}
             </Button>
             <Button
               variant="outline"
               size="sm"
               className="border-teal-500/30 text-teal-400 hover:bg-teal-500/10"
               onClick={async () => {
-                const ok = confirm(`Reactivate ${selectedUserIds.size} users?`);
+                const ok = confirm(t("reactivateConfirm", { count: selectedUserIds.size }));
                 if (!ok) return;
                 await bulkReactivateUsers(Array.from(selectedUserIds));
                 const refreshed = await getAdminUsersPage(
@@ -424,20 +424,20 @@ function AdminDashboardContent() {
               }}
               disabled={selectedUserIds.size === 0 || adminRole !== "owner"}
             >
-              Reactivate
+              {t("reactivate")}
             </Button>
             <Button
               variant="outline"
               size="sm"
               className="border-white/10 text-slate-300 hover:bg-white/10"
               onClick={async () => {
-                const ok = confirm(`Force logout ${selectedUserIds.size} users?`);
+                const ok = confirm(t("forceLogoutConfirm", { count: selectedUserIds.size }));
                 if (!ok) return;
                 await bulkForceLogout(Array.from(selectedUserIds));
               }}
               disabled={selectedUserIds.size === 0 || adminRole !== "owner"}
             >
-              Force Logout
+              {t("forceLogout")}
             </Button>
           </div>
         </div>
@@ -448,9 +448,7 @@ function AdminDashboardContent() {
             <ShieldAlert className="mb-2 h-5 w-5" />
             {error}
             {error.includes("SUPABASE_SERVICE_ROLE_KEY") && (
-              <p className="mt-2 text-sm text-slate-400">
-                Check your .env.local file to ensure the service role key is set.
-              </p>
+              <p className="mt-2 text-sm text-slate-400">{t("envCheckMessage")}</p>
             )}
             {error.includes("Unauthorized") && <SessionRefreshHelper />}
           </div>
@@ -464,7 +462,7 @@ function AdminDashboardContent() {
                 <TableHead className="text-slate-300">
                   <input
                     type="checkbox"
-                    aria-label="Select all users"
+                    aria-label={t("selectAllUsers")}
                     checked={
                       filteredUsers.length > 0 &&
                       filteredUsers.every((u) => selectedUserIds.has(u.id))
@@ -488,7 +486,7 @@ function AdminDashboardContent() {
                       setUserSortDir(userSortDir === "asc" ? "desc" : "asc");
                     }}
                   >
-                    User
+                    {t("userColumn")}
                   </button>
                 </TableHead>
                 <TableHead className="text-slate-300">
@@ -499,11 +497,11 @@ function AdminDashboardContent() {
                       setUserSortDir(userSortDir === "asc" ? "desc" : "asc");
                     }}
                   >
-                    Joined
+                    {t("joinedColumn")}
                   </button>
                 </TableHead>
-                <TableHead className="text-slate-300">Status</TableHead>
-                <TableHead className="text-slate-300">Trial Status</TableHead>
+                <TableHead className="text-slate-300">{t("statusColumn")}</TableHead>
+                <TableHead className="text-slate-300">{t("trialStatusColumn")}</TableHead>
                 <TableHead className="text-slate-300">
                   <button
                     className="underline"
@@ -512,17 +510,17 @@ function AdminDashboardContent() {
                       setUserSortDir(userSortDir === "asc" ? "desc" : "asc");
                     }}
                   >
-                    Last Login
+                    {t("lastLoginColumn")}
                   </button>
                 </TableHead>
-                <TableHead className="text-slate-300">Actions</TableHead>
+                <TableHead className="text-slate-300">{t("actionsColumn")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredUsers.length === 0 && !isLoading ? (
                 <TableRow>
                   <TableCell colSpan={7} className="h-24 text-center text-slate-500">
-                    No users found.
+                    {t("noUsersFound")}
                   </TableCell>
                 </TableRow>
               ) : (
@@ -546,7 +544,7 @@ function AdminDashboardContent() {
                     </TableCell>
                     <TableCell>
                       <div>
-                        <div className="font-medium text-white">{user.name || "Unknown"}</div>
+                        <div className="font-medium text-white">{user.name || t("unknown")}</div>
                         <div className="text-sm text-slate-400">{user.email}</div>
                       </div>
                     </TableCell>
@@ -556,20 +554,20 @@ function AdminDashboardContent() {
                     <TableCell>
                       {user.status.status === "active" ? (
                         <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/20 px-2.5 py-0.5 text-xs font-medium text-blue-400">
-                          Paid
+                          {t("paid")}
                         </span>
                       ) : user.status.status === "expired" ? (
                         <span className="inline-flex items-center gap-1 rounded-full bg-rose-500/20 px-2.5 py-0.5 text-xs font-medium text-rose-400">
-                          Expired
+                          {t("expired")}
                         </span>
                       ) : (
                         <span className="inline-flex items-center gap-1 rounded-full bg-teal-500/20 px-2.5 py-0.5 text-xs font-medium text-teal-400">
-                          Trial
+                          {t("trial")}
                         </span>
                       )}
                       {user.is_suspended && (
                         <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-rose-500/20 px-2.5 py-0.5 text-xs font-medium text-rose-400">
-                          Suspended
+                          {t("suspended")}
                         </span>
                       )}
                     </TableCell>
@@ -582,21 +580,21 @@ function AdminDashboardContent() {
                               user.status.daysRemaining < 3 ? "text-amber-400" : "text-slate-300"
                             }
                           >
-                            {user.status.daysRemaining} days left
+                            {t("daysLeft", { days: user.status.daysRemaining })}
                           </span>
                         </div>
                       )}
                       {!user.status.isTrial && user.status.isExpired && (
-                        <span className="text-slate-500">Trial ended</span>
+                        <span className="text-slate-500">{t("trialEnded")}</span>
                       )}
                       {user.status.status === "active" && (
-                        <span className="text-blue-400">Lifetime Access</span>
+                        <span className="text-blue-400">{t("lifetimeAccess")}</span>
                       )}
                     </TableCell>
                     <TableCell className="text-slate-300">
                       {user.last_login
                         ? new Date(user.last_login).toLocaleDateString(locale)
-                        : "Never"}
+                        : t("never")}
                     </TableCell>
                     <TableCell>
                       <div className="flex flex-wrap gap-2">
@@ -604,7 +602,9 @@ function AdminDashboardContent() {
                           value={user.role ?? "member"}
                           onChange={async (e) => {
                             const nextRole = e.target.value;
-                            const ok = confirm(`Change role for ${user.email} to "${nextRole}"?`);
+                            const ok = confirm(
+                              t("changeRoleConfirm", { email: user.email, role: nextRole })
+                            );
                             if (!ok) return;
                             await updateUserRole(user.id, nextRole);
                             const refreshed = await getAdminUsersPage(
@@ -631,7 +631,7 @@ function AdminDashboardContent() {
                           size="sm"
                           className="border-amber-500/30 text-amber-400 hover:bg-amber-500/10"
                           onClick={async () => {
-                            const ok = confirm(`Extend trial by 7 days for ${user.email}?`);
+                            const ok = confirm(t("extendTrialSingle", { email: user.email }));
                             if (!ok) return;
                             await extendUserTrial(user.id, 7);
                             const refreshed = await getAdminUsersPage(
@@ -646,20 +646,20 @@ function AdminDashboardContent() {
                           }}
                           disabled={adminRole !== "owner"}
                         >
-                          +7d Trial
+                          {t("plus7dTrial")}
                         </Button>
                         <Button
                           variant="outline"
                           size="sm"
                           className="border-white/10 text-slate-300 hover:bg-white/10"
                           onClick={async () => {
-                            const ok = confirm(`Force logout ${user.email}?`);
+                            const ok = confirm(t("forceLogoutSingle", { email: user.email }));
                             if (!ok) return;
                             await forceLogoutUser(user.id);
                           }}
                           disabled={adminRole !== "owner"}
                         >
-                          Force Logout
+                          {t("forceLogout")}
                         </Button>
                         {user.is_suspended ? (
                           <Button
@@ -667,7 +667,7 @@ function AdminDashboardContent() {
                             size="sm"
                             className="border-teal-500/30 text-teal-400 hover:bg-teal-500/10"
                             onClick={async () => {
-                              const ok = confirm(`Reactivate ${user.email}?`);
+                              const ok = confirm(t("reactivateSingle", { email: user.email }));
                               if (!ok) return;
                               await reactivateUser(user.id);
                               const refreshed = await getAdminUsersPage(
@@ -682,7 +682,7 @@ function AdminDashboardContent() {
                             }}
                             disabled={adminRole !== "owner"}
                           >
-                            Reactivate
+                            {t("reactivate")}
                           </Button>
                         ) : (
                           <Button
@@ -690,7 +690,7 @@ function AdminDashboardContent() {
                             size="sm"
                             className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
                             onClick={async () => {
-                              const ok = confirm(`Suspend ${user.email}?`);
+                              const ok = confirm(t("suspendSingle", { email: user.email }));
                               if (!ok) return;
                               await suspendUser(user.id);
                               const refreshed = await getAdminUsersPage(
@@ -705,7 +705,7 @@ function AdminDashboardContent() {
                             }}
                             disabled={adminRole !== "owner"}
                           >
-                            Suspend
+                            {t("suspend")}
                           </Button>
                         )}
                       </div>
@@ -719,7 +719,7 @@ function AdminDashboardContent() {
 
         <div className="flex items-center justify-between">
           <div className="text-sm text-slate-400">
-            Page {userPage} of {totalUserPages}
+            {t("pageOf", { page: userPage, total: totalUserPages })}
           </div>
           <div className="flex gap-2">
             <Button
@@ -729,7 +729,7 @@ function AdminDashboardContent() {
               onClick={() => setUserPage((p) => Math.max(1, p - 1))}
               disabled={userPage <= 1}
             >
-              Prev
+              {t("prev")}
             </Button>
             <Button
               variant="outline"
@@ -738,7 +738,7 @@ function AdminDashboardContent() {
               onClick={() => setUserPage((p) => Math.min(totalUserPages, p + 1))}
               disabled={userPage >= totalUserPages}
             >
-              Next
+              {t("next")}
             </Button>
           </div>
         </div>
@@ -747,27 +747,27 @@ function AdminDashboardContent() {
         <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-semibold">Family Groups</h2>
-              <p className="text-sm text-slate-400">Manage group membership and roles</p>
+              <h2 className="text-xl font-semibold">{t("familyGroups")}</h2>
+              <p className="text-sm text-slate-400">{t("manageGroupMembership")}</p>
             </div>
             <div className="text-sm text-slate-400">
-              {familyGroups.length} groups
+              {t("groupCount", { count: familyGroups.length })}
               {adminRole !== "owner" && (
-                <span className="ml-2 text-xs text-amber-300">Owner role required to edit</span>
+                <span className="ml-2 text-xs text-amber-300">{t("ownerRoleRequiredToEdit")}</span>
               )}
             </div>
           </div>
 
           <div className="mb-4 grid grid-cols-1 gap-3 md:grid-cols-3">
             <Input
-              placeholder="New group name"
+              placeholder={t("newGroupName")}
               value={newGroupName}
               onChange={(e) => setNewGroupName(e.target.value)}
               className="border-white/10 bg-white/5 text-white placeholder:text-slate-500"
               disabled={adminRole !== "owner"}
             />
             <Input
-              placeholder="Owner user id"
+              placeholder={t("ownerUserId")}
               value={newGroupOwnerId}
               onChange={(e) => setNewGroupOwnerId(e.target.value)}
               className="border-white/10 bg-white/5 text-white placeholder:text-slate-500"
@@ -785,7 +785,7 @@ function AdminDashboardContent() {
               className="bg-teal-600 text-white hover:bg-teal-700"
               disabled={adminRole !== "owner"}
             >
-              Create Group
+              {t("createGroup")}
             </Button>
           </div>
 
@@ -794,17 +794,17 @@ function AdminDashboardContent() {
               <Table>
                 <TableHeader className="bg-white/5">
                   <TableRow className="border-white/5 hover:bg-white/5">
-                    <TableHead className="text-slate-300">Group</TableHead>
-                    <TableHead className="text-slate-300">Owner</TableHead>
-                    <TableHead className="text-slate-300">Members</TableHead>
-                    <TableHead className="text-slate-300">Actions</TableHead>
+                    <TableHead className="text-slate-300">{t("groupColumn")}</TableHead>
+                    <TableHead className="text-slate-300">{t("ownerColumn")}</TableHead>
+                    <TableHead className="text-slate-300">{t("membersColumn")}</TableHead>
+                    <TableHead className="text-slate-300">{t("actionsColumn")}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {familyGroups.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={4} className="h-20 text-center text-slate-500">
-                        No family groups found.
+                        {t("noFamilyGroups")}
                       </TableCell>
                     </TableRow>
                   ) : (
@@ -829,7 +829,7 @@ function AdminDashboardContent() {
                               size="sm"
                               className="border-white/10 text-slate-300 hover:bg-white/10"
                               onClick={async () => {
-                                const nextName = prompt("Rename group", group.name);
+                                const nextName = prompt(t("renameGroup"), group.name);
                                 if (!nextName) return;
                                 await renameFamilyGroup(group.id, nextName);
                                 const refreshed = await getFamilyGroups();
@@ -837,14 +837,14 @@ function AdminDashboardContent() {
                               }}
                               disabled={adminRole !== "owner"}
                             >
-                              Rename
+                              {t("rename")}
                             </Button>
                             <Button
                               variant="outline"
                               size="sm"
                               className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
                               onClick={async () => {
-                                const ok = confirm(`Delete group "${group.name}" and all members?`);
+                                const ok = confirm(t("deleteGroupConfirm", { name: group.name }));
                                 if (!ok) return;
                                 await deleteFamilyGroup(group.id);
                                 if (selectedFamilyId === group.id) {
@@ -856,7 +856,7 @@ function AdminDashboardContent() {
                               }}
                               disabled={adminRole !== "owner"}
                             >
-                              Delete
+                              {t("delete")}
                             </Button>
                           </div>
                         </TableCell>
@@ -870,22 +870,22 @@ function AdminDashboardContent() {
             <div className="rounded-lg border border-white/10 bg-white/5 p-4">
               <div className="mb-3 text-sm text-slate-400">
                 {selectedFamilyId
-                  ? `Members for ${selectedFamilyId.slice(0, 8)}…`
-                  : "Select a group to view members"}
+                  ? t("membersFor", { id: selectedFamilyId.slice(0, 8) })
+                  : t("selectGroupToView")}
               </div>
               <Table>
                 <TableHeader className="bg-white/5">
                   <TableRow className="border-white/5 hover:bg-white/5">
-                    <TableHead className="text-slate-300">Member</TableHead>
-                    <TableHead className="text-slate-300">Role</TableHead>
-                    <TableHead className="text-slate-300">Actions</TableHead>
+                    <TableHead className="text-slate-300">{t("memberColumn")}</TableHead>
+                    <TableHead className="text-slate-300">{t("roleColumn")}</TableHead>
+                    <TableHead className="text-slate-300">{t("actionsColumn")}</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {familyMembers.length === 0 ? (
                     <TableRow>
                       <TableCell colSpan={3} className="h-20 text-center text-slate-500">
-                        {selectedFamilyId ? "No members found." : "No group selected."}
+                        {selectedFamilyId ? t("noMembers") : t("noGroupSelected")}
                       </TableCell>
                     </TableRow>
                   ) : (
@@ -903,7 +903,10 @@ function AdminDashboardContent() {
                             onChange={async (e) => {
                               const nextRole = e.target.value;
                               const ok = confirm(
-                                `Change role for ${member.user?.email ?? member.user_id} to "${nextRole}"?`
+                                t("changeMemberRole", {
+                                  email: member.user?.email ?? member.user_id,
+                                  role: nextRole,
+                                })
                               );
                               if (!ok) return;
                               await updateFamilyMemberRole(member.id, nextRole);
@@ -927,7 +930,7 @@ function AdminDashboardContent() {
                             className="border-rose-500/30 text-rose-400 hover:bg-rose-500/10"
                             onClick={async () => {
                               const ok = confirm(
-                                `Remove ${member.user?.email ?? member.user_id} from group?`
+                                t("removeMember", { email: member.user?.email ?? member.user_id })
                               );
                               if (!ok) return;
                               await removeFamilyMember(member.id);
@@ -936,7 +939,7 @@ function AdminDashboardContent() {
                             }}
                             disabled={adminRole !== "owner"}
                           >
-                            Remove
+                            {t("remove")}
                           </Button>
                         </TableCell>
                       </TableRow>
@@ -952,11 +955,11 @@ function AdminDashboardContent() {
         <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
           <div className="mb-4 flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-semibold">Audit Log</h2>
-              <p className="text-sm text-slate-400">Recent admin actions</p>
+              <h2 className="text-xl font-semibold">{t("auditLog")}</h2>
+              <p className="text-sm text-slate-400">{t("recentAdminActions")}</p>
             </div>
             <div className="flex items-center gap-3 text-sm text-slate-400">
-              <span>{auditLogs.length} entries</span>
+              <span>{t("entries", { count: auditLogs.length })}</span>
               <Button
                 variant="outline"
                 size="sm"
@@ -972,7 +975,7 @@ function AdminDashboardContent() {
                   URL.revokeObjectURL(url);
                 }}
               >
-                Export CSV
+                {t("exportCsv")}
               </Button>
               <Button
                 variant="outline"
@@ -994,13 +997,13 @@ function AdminDashboardContent() {
                   URL.revokeObjectURL(url);
                 }}
               >
-                Export JSON
+                {t("exportJson")}
               </Button>
             </div>
           </div>
           <div className="mb-4 flex flex-wrap gap-3">
             <Input
-              placeholder="Filter by action or metadata"
+              placeholder={t("filterByAction")}
               value={auditQuery}
               onChange={(e) => {
                 setAuditQuery(e.target.value);
@@ -1036,23 +1039,23 @@ function AdminDashboardContent() {
                 setAuditTotal(logs.total);
               }}
             >
-              Filter
+              {t("filter")}
             </Button>
           </div>
           <Table>
             <TableHeader className="bg-white/5">
               <TableRow className="border-white/5 hover:bg-white/5">
-                <TableHead className="text-slate-300">When</TableHead>
-                <TableHead className="text-slate-300">Actor</TableHead>
-                <TableHead className="text-slate-300">Action</TableHead>
-                <TableHead className="text-slate-300">Target</TableHead>
+                <TableHead className="text-slate-300">{t("whenColumn")}</TableHead>
+                <TableHead className="text-slate-300">{t("actorColumn")}</TableHead>
+                <TableHead className="text-slate-300">{t("actionColumn")}</TableHead>
+                <TableHead className="text-slate-300">{t("targetColumn")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {auditLogs.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={4} className="h-20 text-center text-slate-500">
-                    No audit entries yet.
+                    {t("noAuditEntries")}
                   </TableCell>
                 </TableRow>
               ) : (
@@ -1075,7 +1078,7 @@ function AdminDashboardContent() {
           </Table>
           <div className="mt-4 flex items-center justify-between">
             <div className="text-sm text-slate-400">
-              Page {auditPage} of {totalAuditPages}
+              {t("pageOf", { page: auditPage, total: totalAuditPages })}
             </div>
             <div className="flex gap-2">
               <Button
@@ -1085,7 +1088,7 @@ function AdminDashboardContent() {
                 onClick={() => setAuditPage((p) => Math.max(1, p - 1))}
                 disabled={auditPage <= 1}
               >
-                Prev
+                {t("prev")}
               </Button>
               <Button
                 variant="outline"
@@ -1094,7 +1097,7 @@ function AdminDashboardContent() {
                 onClick={() => setAuditPage((p) => Math.min(totalAuditPages, p + 1))}
                 disabled={auditPage >= totalAuditPages}
               >
-                Next
+                {t("next")}
               </Button>
             </div>
           </div>

@@ -8,6 +8,7 @@
  */
 
 import { Brain, Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface ConfidenceMeterProps {
   confidence: number; // 0-1
@@ -24,6 +25,7 @@ export function ConfidenceMeter({
   onLearnFromThis,
   showLearnButton = false,
 }: ConfidenceMeterProps) {
+  const t = useTranslations("confidenceMeter");
   const bars = 5;
   const filledBars = Math.ceil(confidence * bars);
 
@@ -43,10 +45,10 @@ export function ConfidenceMeter({
   };
 
   const getConfidenceLabel = () => {
-    if (confidence >= 0.9) return "Very Confident";
-    if (confidence >= 0.7) return "Confident";
-    if (confidence >= 0.5) return "Moderate";
-    return "Low Confidence";
+    if (confidence >= 0.9) return t("veryConfident");
+    if (confidence >= 0.7) return t("confident");
+    if (confidence >= 0.5) return t("moderate");
+    return t("lowConfidence");
   };
 
   const colorClass = getColor();
@@ -56,7 +58,7 @@ export function ConfidenceMeter({
     <div className="inline-flex items-center gap-4">
       {/* Category Badge */}
       <div className="flex items-center gap-2">
-        <span className="text-xs text-gray-600">Auto-categorized:</span>
+        <span className="text-xs text-gray-600">{t("autoCategorized")}</span>
         <span
           className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
             confidence >= 0.7 ? "bg-teal-100 text-teal-800" : "bg-yellow-100 text-yellow-800"
@@ -86,10 +88,10 @@ export function ConfidenceMeter({
         <button
           onClick={onLearnFromThis}
           className="inline-flex items-center gap-2 rounded px-2 py-1 text-xs font-medium text-teal-700 transition-colors hover:bg-teal-50 hover:text-teal-800"
-          title="Confirm this categorization to improve accuracy"
+          title={t("confirmCategorization")}
         >
           <Brain className="h-3 w-3" />
-          Learn from this
+          {t("learnFromThis")}
         </button>
       )}
     </div>

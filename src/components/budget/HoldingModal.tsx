@@ -48,6 +48,7 @@ const COMMON_SYMBOLS = [
 export function HoldingModal({ holding, account, onSave, onClose }: HoldingModalProps) {
   const locale = useLocale();
   const tAria = useTranslations("aria");
+  const t = useTranslations("holdingModal");
   const [symbol, setSymbol] = useState(holding?.symbol || "");
   const [quantity, setQuantity] = useState(holding?.quantity.toString() || "");
   const [purchasePrice, setPurchasePrice] = useState(holding?.purchasePrice.toString() || "");
@@ -77,7 +78,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
     e.preventDefault();
 
     if (!symbol.trim()) {
-      alert("Please enter a stock symbol");
+      alert(t("enterSymbol"));
       return;
     }
 
@@ -85,12 +86,12 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
     const priceNum = parseFloat(purchasePrice);
 
     if (isNaN(quantityNum) || quantityNum <= 0) {
-      alert("Please enter a valid quantity");
+      alert(t("validQuantity"));
       return;
     }
 
     if (isNaN(priceNum) || priceNum <= 0) {
-      alert("Please enter a valid purchase price");
+      alert(t("validPurchasePrice"));
       return;
     }
 
@@ -108,7 +109,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
       onClose();
     } catch (error) {
       console.error("Error saving holding:", error);
-      alert("Failed to save holding");
+      alert(t("failedToSave"));
     } finally {
       setIsSubmitting(false);
     }
@@ -122,7 +123,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
         <div className="flex items-center justify-between border-b border-gray-200 p-6">
           <div>
             <h2 className="text-xl font-bold text-gray-900">
-              {holding ? "Edit Holding" : "Add Holding"}
+              {holding ? t("editHolding") : t("addHolding")}
             </h2>
             <p className="mt-2 text-sm text-gray-600">{account.name}</p>
           </div>
@@ -140,7 +141,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
           {/* Stock Symbol with Autocomplete */}
           <div className="relative">
             <label htmlFor="symbol" className="mb-2 block text-sm font-medium text-gray-700">
-              Stock Symbol <span className="text-red-600">*</span>
+              {t("stockSymbol")} <span className="text-red-600">*</span>
             </label>
             <div className="relative">
               <input
@@ -153,7 +154,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
                 }}
                 onFocus={() => setShowSuggestions(true)}
                 onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                placeholder="e.g., AAPL, VGRO.TO, TD.TO"
+                placeholder={t("symbolPlaceholder")}
                 className="h-12 w-full rounded-lg border border-gray-300 px-4 pe-10 uppercase focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
                 required
               />
@@ -177,15 +178,13 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
               </div>
             )}
 
-            <p className="mt-2 text-xs text-gray-500">
-              Use .TO for Canadian stocks (e.g., TD.TO, VGRO.TO)
-            </p>
+            <p className="mt-2 text-xs text-gray-500">{t("canadianStockHint")}</p>
           </div>
 
           {/* Quantity */}
           <div>
             <label htmlFor="quantity" className="mb-2 block text-sm font-medium text-gray-700">
-              Number of Shares <span className="text-red-600">*</span>
+              {t("numberOfShares")} <span className="text-red-600">*</span>
             </label>
             <input
               id="quantity"
@@ -194,7 +193,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
               min="0"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
-              placeholder="100"
+              placeholder={t("quantityPlaceholder")}
               inputMode="decimal"
               className="h-12 w-full rounded-lg border border-gray-300 px-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
               required
@@ -207,7 +206,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
               htmlFor="purchase-price"
               className="mb-2 block text-sm font-medium text-gray-700"
             >
-              Purchase Price per Share <span className="text-red-600">*</span>
+              {t("purchasePricePerShare")} <span className="text-red-600">*</span>
             </label>
             <div className="relative">
               <span className="absolute start-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
@@ -218,9 +217,9 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
                 min="0"
                 value={purchasePrice}
                 onChange={(e) => setPurchasePrice(e.target.value)}
-                placeholder="50.00"
+                placeholder={t("pricePlaceholder")}
                 inputMode="decimal"
-                className="h-12 w-full rounded-lg border border-gray-300 ps-8 pe-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="h-12 w-full rounded-lg border border-gray-300 pe-4 ps-8 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
                 required
               />
             </div>
@@ -229,7 +228,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
           {/* Purchase Date */}
           <div>
             <label htmlFor="purchase-date" className="mb-2 block text-sm font-medium text-gray-700">
-              Purchase Date <span className="text-red-600">*</span>
+              {t("purchaseDate")} <span className="text-red-600">*</span>
             </label>
             <input
               id="purchase-date"
@@ -244,13 +243,13 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
           {/* Notes (Optional) */}
           <div>
             <label htmlFor="notes" className="mb-2 block text-sm font-medium text-gray-700">
-              Notes (Optional)
+              {t("notesOptional")}
             </label>
             <textarea
               id="notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="e.g., Part of retirement portfolio, employee stock purchase"
+              placeholder={t("notesPlaceholder")}
               rows={3}
               className="min-h-[48px] w-full resize-none rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
@@ -262,7 +261,7 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
             !isNaN(parseFloat(quantity)) &&
             !isNaN(parseFloat(purchasePrice)) && (
               <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
-                <div className="mb-2 text-sm text-gray-600">Total Investment</div>
+                <div className="mb-2 text-sm text-gray-600">{t("totalInvestment")}</div>
                 <div className="text-2xl font-bold text-gray-900">
                   $
                   {(parseFloat(quantity) * parseFloat(purchasePrice)).toLocaleString(locale, {
@@ -281,14 +280,14 @@ export function HoldingModal({ holding, account, onSave, onClose }: HoldingModal
               className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
               disabled={isSubmitting}
             >
-              Cancel
+              {t("cancel")}
             </button>
             <button
               type="submit"
               className="flex-1 rounded-lg bg-teal-500 px-4 py-2 text-white transition-colors hover:bg-teal-600 disabled:cursor-not-allowed disabled:opacity-50"
               disabled={isSubmitting}
             >
-              {isSubmitting ? "Saving..." : holding ? "Update Holding" : "Add Holding"}
+              {isSubmitting ? t("saving") : holding ? t("updateHolding") : t("addHolding")}
             </button>
           </div>
         </form>

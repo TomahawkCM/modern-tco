@@ -8,6 +8,7 @@
 "use client";
 
 import React, { useState, useCallback, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
   Dialog,
   DialogContent,
@@ -74,6 +75,8 @@ export function PairingDialog({
   deviceManager,
   seniorsMode = false,
 }: PairingDialogProps) {
+  const t = useTranslations("pairingDialog");
+
   // State
   const [mode, setMode] = useState<PairingMode>("scan");
   const [status, setStatus] = useState<PairingStatus>({ state: "idle" });
@@ -93,7 +96,7 @@ export function PairingDialog({
         console.error("Failed to initialize local device:", err);
         setStatus({
           state: "error",
-          message: "Failed to initialize device. Please try again.",
+          message: t("failedToInitialize"),
         });
       }
     };
@@ -104,7 +107,7 @@ export function PairingDialog({
   // Handle QR scan success
   const handleQRScan = useCallback(
     async (data: PairingQRData) => {
-      setStatus({ state: "connecting", message: "Connecting to device..." });
+      setStatus({ state: "connecting", message: t("connectingToDevice") });
 
       try {
         // Generate a device ID from the pairing code
@@ -143,7 +146,7 @@ export function PairingDialog({
   // Handle manual entry submit
   const handleManualSubmit = useCallback(
     async (data: PairingQRData) => {
-      setStatus({ state: "connecting", message: "Connecting to device..." });
+      setStatus({ state: "connecting", message: t("connectingToDevice") });
 
       try {
         // Generate a temporary device ID
@@ -152,7 +155,7 @@ export function PairingDialog({
         // Save to IndexedDB with placeholder public key (will be received during handshake)
         const pairedDevice = await deviceManager.addPairedDevice(
           deviceId,
-          "Pending Connection",
+          t("pendingConnection"),
           "" // Public key will be received during handshake
         );
 
@@ -161,7 +164,7 @@ export function PairingDialog({
 
         setStatus({
           state: "success",
-          message: "Device added. Connect to complete pairing.",
+          message: t("deviceAdded"),
           device: pairedDevice,
         });
 
@@ -203,7 +206,7 @@ export function PairingDialog({
             <>
               <Loader2 className="mx-auto h-12 w-12 animate-spin text-primary" />
               <p className={seniorsMode ? "text-xl" : "text-lg"}>
-                {status.message || "Connecting..."}
+                {status.message || t("connecting")}
               </p>
             </>
           )}
@@ -212,7 +215,7 @@ export function PairingDialog({
             <>
               <Loader2 className="mx-auto h-12 w-12 animate-spin text-primary" />
               <p className={seniorsMode ? "text-xl" : "text-lg"}>
-                {status.message || "Verifying connection..."}
+                {status.message || t("verifyingConnection")}
               </p>
             </>
           )}
@@ -221,7 +224,7 @@ export function PairingDialog({
             <>
               <CheckCircle2 className="mx-auto h-12 w-12 text-green-500" />
               <p className={`font-medium ${seniorsMode ? "text-xl" : "text-lg"}`}>
-                {status.message || "Pairing successful!"}
+                {status.message || t("pairingSuccessful")}
               </p>
               {status.device && (
                 <p className="text-muted-foreground">
@@ -234,16 +237,18 @@ export function PairingDialog({
           {status.state === "error" && (
             <>
               <AlertCircle className="mx-auto h-12 w-12 text-red-500" />
-              <p className={`font-medium ${seniorsMode ? "text-xl" : "text-lg"}`}>Pairing Failed</p>
+              <p className={`font-medium ${seniorsMode ? "text-xl" : "text-lg"}`}>
+                {t("pairingFailed")}
+              </p>
               <p className="max-w-xs text-muted-foreground">
-                {status.message || "An error occurred"}
+                {status.message || t("anErrorOccurred")}
               </p>
               <Button
                 variant="outline"
                 onClick={() => setStatus({ state: "idle" })}
                 className="mt-4"
               >
-                Try Again
+                {t("tryAgain")}
               </Button>
             </>
           )}
@@ -261,13 +266,13 @@ export function PairingDialog({
         <DialogHeader>
           <DialogTitle className={`flex items-center gap-2 ${seniorsMode ? "text-2xl" : ""}`}>
             <Wifi className={seniorsMode ? "h-7 w-7" : "h-5 w-5"} />
-            LAN Sync Pairing
+            {t("title")}
           </DialogTitle>
           <DialogDescription
             id="pairing-dialog-description"
             className={seniorsMode ? "text-lg" : ""}
           >
-            Connect to another device on your local network
+            {t("description")}
           </DialogDescription>
         </DialogHeader>
 
@@ -278,15 +283,15 @@ export function PairingDialog({
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="scan" className={seniorsMode ? "py-3 text-lg" : ""}>
                 <QrCode className={`me-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
-                Scan
+                {t("scan")}
               </TabsTrigger>
               <TabsTrigger value="manual" className={seniorsMode ? "py-3 text-lg" : ""}>
                 <Keyboard className={`me-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
-                Manual
+                {t("manual")}
               </TabsTrigger>
               <TabsTrigger value="host" className={seniorsMode ? "py-3 text-lg" : ""}>
                 <Monitor className={`me-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
-                Host
+                {t("host")}
               </TabsTrigger>
             </TabsList>
 
@@ -316,15 +321,13 @@ export function PairingDialog({
                   {!localIP && (
                     <Alert>
                       <AlertCircle className="h-4 w-4" />
-                      <AlertTitle>IP Address Required</AlertTitle>
+                      <AlertTitle>{t("ipAddressRequired")}</AlertTitle>
                       <AlertDescription className={seniorsMode ? "text-base" : ""}>
-                        <p className="mb-3">
-                          Enter your local IP address to allow other devices to connect.
-                        </p>
+                        <p className="mb-3">{t("ipAddressDescription")}</p>
                         <div className="flex gap-2">
                           <input
                             type="text"
-                            placeholder="192.168.1.100"
+                            placeholder={t("ipPlaceholder")}
                             className="flex-1 rounded-md border bg-background px-3 py-2"
                             onChange={(e) => setLocalIP(e.target.value)}
                             value={localIP}
@@ -339,7 +342,7 @@ export function PairingDialog({
                               }
                             }}
                           >
-                            Set
+                            {t("set")}
                           </Button>
                         </div>
                       </AlertDescription>
@@ -358,10 +361,9 @@ export function PairingDialog({
                   {pairingCode && localIP && (
                     <Alert className="border-green-500/50">
                       <CheckCircle2 className="h-4 w-4 text-green-500" />
-                      <AlertTitle>Ready for Connections</AlertTitle>
+                      <AlertTitle>{t("readyForConnections")}</AlertTitle>
                       <AlertDescription className={seniorsMode ? "text-base" : ""}>
-                        Other devices can now scan this QR code or enter the connection details
-                        manually.
+                        {t("readyDescription")}
                       </AlertDescription>
                     </Alert>
                   )}

@@ -82,9 +82,9 @@ export function AccountBalancesWidget({ config }: AccountBalancesWidgetProps) {
       return [
         {
           id: "virtual-default",
-          name: "All Transactions",
+          name: t("allTransactions"),
           type: "checking" as const,
-          institution: "Imported",
+          institution: t("imported"),
           balance: 0,
           currentBalance: transactionTotal,
           currency,

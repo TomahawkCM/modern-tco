@@ -285,7 +285,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                   id="name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g., Primary Mortgage, Car Loan"
+                  placeholder={t("namePlaceholder")}
                   required
                 />
               </div>
@@ -296,7 +296,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                   id="lender"
                   value={lender}
                   onChange={(e) => setLender(e.target.value)}
-                  placeholder="e.g., Wells Fargo, TD Bank"
+                  placeholder={t("lenderPlaceholder")}
                   required
                 />
               </div>
@@ -337,12 +337,12 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                   type="number"
                   value={termMonths || ""}
                   onChange={(e) => setTermMonths(parseInt(e.target.value) || 0)}
-                  placeholder="360 (30 years)"
+                  placeholder={t("termPlaceholder")}
                   min="1"
                   required
                 />
                 <p className="mt-1 text-xs text-gray-500">
-                  {termMonths > 0 ? `${(termMonths / 12).toFixed(1)} years` : ""}
+                  {termMonths > 0 ? t("termYears", { years: (termMonths / 12).toFixed(1) }) : ""}
                 </p>
               </div>
 
@@ -366,7 +366,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                       id="vehicleMake"
                       value={vehicleMake}
                       onChange={(e) => setVehicleMake(e.target.value)}
-                      placeholder="e.g., Honda, Toyota"
+                      placeholder={t("vehicleMakePlaceholder")}
                     />
                   </div>
 
@@ -376,7 +376,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                       id="vehicleModel"
                       value={vehicleModel}
                       onChange={(e) => setVehicleModel(e.target.value)}
-                      placeholder="e.g., Civic, Camry"
+                      placeholder={t("vehicleModelPlaceholder")}
                     />
                   </div>
 
@@ -422,7 +422,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                   required
                 />
                 <p className="mt-1 text-xs text-gray-500">
-                  Original: {formatCurrency(originalPrincipal, currency, locale)}
+                  {t("original", { amount: formatCurrency(originalPrincipal, currency, locale) })}
                 </p>
               </div>
 
@@ -461,7 +461,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                   {paymentFrequency === "bi-weekly" && t("biWeeklyPaymentHint")}
                   {paymentFrequency === "monthly" && t("monthlyPaymentHint")}
                   {monthlyPayment > 0 &&
-                    ` • Auto-calculated: ${formatCurrency(monthlyPayment, currency, locale)}`}
+                    ` • ${t("autoCalculated", { amount: formatCurrency(monthlyPayment, currency, locale) })}`}
                 </p>
               </div>
 
@@ -586,7 +586,7 @@ export function LoanForm({ loan, onClose }: LoanFormProps) {
                   id="notes"
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Add any additional notes about this loan..."
+                  placeholder={t("notesPlaceholder")}
                   rows={4}
                 />
               </div>

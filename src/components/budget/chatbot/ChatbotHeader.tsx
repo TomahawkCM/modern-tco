@@ -20,15 +20,13 @@ interface ChatbotHeaderProps {
   title?: string;
 }
 
-export const ChatbotHeader: React.FC<ChatbotHeaderProps> = ({
-  onClose,
-  title = "Budget Assistant",
-}) => {
+export const ChatbotHeader: React.FC<ChatbotHeaderProps> = ({ onClose, title }) => {
   const tAria = useTranslations("aria");
+  const tChat = useTranslations("chatbot.header");
   return (
     <header className="flex h-16 shrink-0 items-center justify-between border-b border-gray-200 bg-white px-4 sm:h-14 sm:px-4">
       <h2 id="chatbot-title" className="text-lg font-semibold text-gray-900">
-        {title}
+        {title || tChat("title")}
       </h2>
 
       <button

@@ -18,9 +18,10 @@ interface BreadcrumbProps {
 export function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
   const pathname = usePathname();
   const tAria = useTranslations("aria");
+  const tBreadcrumb = useTranslations("breadcrumb");
 
   // Auto-generate breadcrumbs from pathname if not provided
-  const breadcrumbItems = items || generateBreadcrumbs(pathname || "/budget-app");
+  const breadcrumbItems = items || generateBreadcrumbs(pathname || "/budget-app", tBreadcrumb);
 
   return (
     <nav aria-label={tAria("breadcrumb")} className={`mb-4 flex items-center text-sm ${className}`}>
@@ -33,7 +34,7 @@ export function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
             aria-label={tAria("home")}
           >
             <Home className="h-4 w-4" aria-hidden="true" />
-            <span className="sr-only">Home</span>
+            <span className="sr-only">{tBreadcrumb("home")}</span>
           </Link>
         </li>
 
@@ -70,7 +71,7 @@ export function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
  *   /budget-app/transactions → [{ label: "Transactions", href: "/budget-app/transactions" }]
  *   /budget-app/loans/123 → [{ label: "Loans", href: "/budget-app/loans" }, { label: "Details", href: "/budget-app/loans/123" }]
  */
-function generateBreadcrumbs(pathname: string): BreadcrumbItem[] {
+function generateBreadcrumbs(pathname: string, t: (key: string) => string): BreadcrumbItem[] {
   const segments = pathname.split("/").filter(Boolean);
 
   // Remove 'budget-app' prefix
@@ -98,24 +99,24 @@ function generateBreadcrumbs(pathname: string): BreadcrumbItem[] {
 
     // If it's a UUID or number (detail page), use generic "Details"
     if (/^[0-9a-f-]{36}$/.test(segment) || /^\d+$/.test(segment)) {
-      label = "Details";
+      label = t("details");
     }
 
     // Special labels for known routes
     const labelMap: Record<string, string> = {
-      ocr: "OCR",
-      future: "Future Plans",
-      retirement: "Retirement Planning",
-      "debt-payoff": "Debt Payoff Calculator",
-      "emergency-fund": "Emergency Fund",
-      "budget-analyzer": "Budget Analyzer",
-      "savings-goal": "Savings Goal",
-      "subscription-cost": "Subscription Cost",
-      "merchant-rules": "Merchant Rules",
-      "net-worth": "Net Worth",
-      new: "New",
-      edit: "Edit",
-      more: "More",
+      ocr: t("ocr"),
+      future: t("futurePlans"),
+      retirement: t("retirementPlanning"),
+      "debt-payoff": t("debtPayoffCalculator"),
+      "emergency-fund": t("emergencyFund"),
+      "budget-analyzer": t("budgetAnalyzer"),
+      "savings-goal": t("savingsGoal"),
+      "subscription-cost": t("subscriptionCost"),
+      "merchant-rules": t("merchantRules"),
+      "net-worth": t("netWorth"),
+      new: t("new"),
+      edit: t("edit"),
+      more: t("more"),
     };
 
     breadcrumbs.push({

@@ -169,7 +169,7 @@ export function SpendingByCategoryWidget({ config }: SpendingByCategoryWidgetPro
               </ResponsiveContainer>
               {/* Center total */}
               <div className="-mt-[120px] mb-[60px] text-center">
-                <p className="text-xs text-slate-400">Total</p>
+                <p className="text-xs text-slate-400">{t("total")}</p>
                 <p className="text-sm font-bold text-white">
                   {format.number(totalSpending, { style: "currency", currency })}
                 </p>
@@ -197,7 +197,7 @@ export function SpendingByCategoryWidget({ config }: SpendingByCategoryWidgetPro
               ))}
               {categoryData.length > 6 && (
                 <p className="text-center text-xs text-slate-500">
-                  +{categoryData.length - 6} more categories
+                  {t("moreCategories", { count: categoryData.length - 6 })}
                 </p>
               )}
             </div>

@@ -52,6 +52,7 @@ export function QRScanner({
   className = "",
 }: QRScannerProps) {
   const tAria = useTranslations("aria");
+  const t = useTranslations("qrScanner");
 
   // Refs
   const scannerRef = useRef<HTMLDivElement>(null);
@@ -130,7 +131,7 @@ export function QRScanner({
 
       if (!data) {
         setState("error");
-        const errorMsg = "Invalid QR code format. Please scan a Budget App pairing QR code.";
+        const errorMsg = t("invalidQrFormat");
         setCameraError({
           type: "unknown",
           message: errorMsg,
@@ -142,7 +143,7 @@ export function QRScanner({
       // Check expiry
       if (isPairingQRExpired(data)) {
         setState("error");
-        const errorMsg = "This QR code has expired. Please generate a new one on the host device.";
+        const errorMsg = t("qrExpired");
         setCameraError({
           type: "unknown",
           message: errorMsg,
@@ -168,7 +169,7 @@ export function QRScanner({
       if (err.name === "NotAllowedError" || err.message?.includes("Permission denied")) {
         error = {
           type: "permission_denied",
-          message: "Camera access was denied. Please allow camera access in your browser settings.",
+          message: t("permissionDenied"),
         };
       } else if (
         err.name === "NotFoundError" ||
@@ -176,7 +177,7 @@ export function QRScanner({
       ) {
         error = {
           type: "no_camera",
-          message: "No camera found on this device.",
+          message: t("noCamera"),
         };
       } else if (
         err.name === "NotReadableError" ||
@@ -184,13 +185,12 @@ export function QRScanner({
       ) {
         error = {
           type: "in_use",
-          message:
-            "Camera is in use by another application. Please close other apps using the camera.",
+          message: t("cameraInUse"),
         };
       } else {
         error = {
           type: "unknown",
-          message: err.message || "Failed to access camera. Please try again.",
+          message: err.message || t("cameraFailed"),
         };
       }
 
@@ -235,9 +235,9 @@ export function QRScanner({
       <Card className={`${className} border-green-500`}>
         <CardHeader className="text-center">
           <CheckCircle2 className="mx-auto mb-2 h-12 w-12 text-green-500" />
-          <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>Device Found!</CardTitle>
+          <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>{t("deviceFound")}</CardTitle>
           <CardDescription className={seniorsMode ? "text-lg" : ""}>
-            Ready to connect to {scannedData.deviceName}
+            {t("readyToConnect", { deviceName: scannedData.deviceName })}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2 text-center">
@@ -258,12 +258,12 @@ export function QRScanner({
       <Card className={className}>
         <CardHeader className="text-center">
           <CameraOff className="mx-auto mb-2 h-12 w-12 text-muted-foreground" />
-          <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>Camera Error</CardTitle>
+          <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>{t("cameraError")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
-            <AlertTitle>Error</AlertTitle>
+            <AlertTitle>{t("error")}</AlertTitle>
             <AlertDescription className={seniorsMode ? "text-lg" : ""}>
               {cameraError.message}
             </AlertDescription>
@@ -271,12 +271,12 @@ export function QRScanner({
 
           {cameraError.type === "permission_denied" && (
             <div className={`text-muted-foreground ${seniorsMode ? "text-lg" : "text-sm"}`}>
-              <p className="mb-2 font-medium">How to enable camera access:</p>
+              <p className="mb-2 font-medium">{t("howToEnableCamera")}</p>
               <ol className="list-inside list-decimal space-y-1">
-                <li>Click the lock/info icon in your browser address bar</li>
-                <li>Find &quot;Camera&quot; in the permissions</li>
-                <li>Change it to &quot;Allow&quot;</li>
-                <li>Refresh this page</li>
+                <li>{t("cameraStep1")}</li>
+                <li>{t("cameraStep2")}</li>
+                <li>{t("cameraStep3")}</li>
+                <li>{t("cameraStep4")}</li>
               </ol>
             </div>
           )}
@@ -284,7 +284,7 @@ export function QRScanner({
           <div className="flex justify-center gap-2">
             <Button variant="outline" size={seniorsMode ? "lg" : "default"} onClick={retryScanning}>
               <RefreshCw className={`me-2 ${seniorsMode ? "h-5 w-5" : "h-4 w-4"}`} />
-              Try Again
+              {t("tryAgain")}
             </Button>
           </div>
         </CardContent>
@@ -298,9 +298,9 @@ export function QRScanner({
       <Card className={className}>
         <CardHeader className="text-center">
           <Camera className="mx-auto mb-2 h-12 w-12 text-muted-foreground" />
-          <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>Scan QR Code</CardTitle>
+          <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>{t("scanQrCode")}</CardTitle>
           <CardDescription className={seniorsMode ? "text-lg" : ""}>
-            Scan the QR code displayed on the host device to connect
+            {t("scanDescription")}
           </CardDescription>
         </CardHeader>
         <CardContent className="flex justify-center">
@@ -310,7 +310,7 @@ export function QRScanner({
             className={seniorsMode ? "px-8 py-6 text-lg" : ""}
           >
             <Camera className={`me-2 ${seniorsMode ? "h-6 w-6" : "h-4 w-4"}`} />
-            Start Camera
+            {t("startCamera")}
           </Button>
         </CardContent>
       </Card>
@@ -322,12 +322,10 @@ export function QRScanner({
     <Card className={className}>
       <CardHeader className="text-center">
         <CardTitle className={seniorsMode ? "text-2xl" : "text-lg"}>
-          {isLoading ? "Starting Camera..." : "Point at QR Code"}
+          {isLoading ? t("startingCamera") : t("pointAtQrCode")}
         </CardTitle>
         <CardDescription className={seniorsMode ? "text-lg" : ""}>
-          {isLoading
-            ? "Please allow camera access when prompted"
-            : "Position the QR code within the frame"}
+          {isLoading ? t("allowCameraAccess") : t("positionQrCode")}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -350,14 +348,14 @@ export function QRScanner({
         {state === "scanning" && (
           <div className="flex items-center justify-center gap-2 text-muted-foreground">
             <Loader2 className="h-4 w-4 animate-spin" />
-            <span className={seniorsMode ? "text-lg" : "text-sm"}>Scanning for QR code...</span>
+            <span className={seniorsMode ? "text-lg" : "text-sm"}>{t("scanningForQr")}</span>
           </div>
         )}
 
         {/* Cancel button */}
         <div className="flex justify-center">
           <Button variant="outline" size={seniorsMode ? "lg" : "default"} onClick={stopScanner}>
-            Cancel
+            {t("cancel")}
           </Button>
         </div>
       </CardContent>
