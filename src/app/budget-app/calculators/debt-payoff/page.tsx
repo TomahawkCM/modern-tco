@@ -27,6 +27,9 @@ const DebtComparisonChart = lazy(() =>
       avalancheMonths,
       locale,
       currency,
+      totalInterestLabel,
+      snowballLabel,
+      avalancheLabel,
     }: {
       snowballInterest: number;
       avalancheInterest: number;
@@ -34,11 +37,14 @@ const DebtComparisonChart = lazy(() =>
       avalancheMonths: number;
       locale: SupportedLocale;
       currency: string;
+      totalInterestLabel: string;
+      snowballLabel: string;
+      avalancheLabel: string;
     }) => {
       const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
         mod;
       const data = [
-        { name: "Total Interest", Snowball: snowballInterest, Avalanche: avalancheInterest },
+        { name: totalInterestLabel, Snowball: snowballInterest, Avalanche: avalancheInterest },
       ];
       return (
         <div className="space-y-4">
@@ -66,8 +72,8 @@ const DebtComparisonChart = lazy(() =>
                 ]}
               />
               <Legend />
-              <Bar dataKey="Snowball" fill="#3b82f6" radius={[0, 4, 4, 0]} />
-              <Bar dataKey="Avalanche" fill="#22c55e" radius={[0, 4, 4, 0]} />
+              <Bar dataKey="Snowball" fill="#3b82f6" radius={[0, 4, 4, 0]} name={snowballLabel} />
+              <Bar dataKey="Avalanche" fill="#22c55e" radius={[0, 4, 4, 0]} name={avalancheLabel} />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -84,11 +90,17 @@ const DebtBalanceChart = lazy(() =>
       avalancheSchedule,
       locale,
       currency,
+      monthFormatter,
+      snowballLabel,
+      avalancheLabel,
     }: {
       snowballSchedule: { month: number; totalRemaining: number }[];
       avalancheSchedule: { month: number; totalRemaining: number }[];
       locale: SupportedLocale;
       currency: string;
+      monthFormatter: (label: number) => string;
+      snowballLabel: string;
+      avalancheLabel: string;
     }) => {
       const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
         mod;
@@ -131,7 +143,7 @@ const DebtBalanceChart = lazy(() =>
                 formatCurrency(value, currency, locale),
                 name,
               ]}
-              labelFormatter={(label: number) => `Month ${label}`}
+              labelFormatter={(label: number) => monthFormatter(label)}
             />
             <Legend />
             <Line
@@ -140,7 +152,7 @@ const DebtBalanceChart = lazy(() =>
               stroke="#3b82f6"
               strokeWidth={2}
               dot={false}
-              name="Snowball"
+              name={snowballLabel}
             />
             <Line
               type="monotone"
@@ -148,7 +160,7 @@ const DebtBalanceChart = lazy(() =>
               stroke="#22c55e"
               strokeWidth={2}
               dot={false}
-              name="Avalanche"
+              name={avalancheLabel}
             />
           </LineChart>
         </ResponsiveContainer>
@@ -439,6 +451,9 @@ export default function DebtPayoffCalculatorPage() {
                 avalancheMonths={result.avalanche.totalMonths}
                 locale={locale}
                 currency={currency}
+                totalInterestLabel={t("chart.totalInterest")}
+                snowballLabel={t("chart.snowball")}
+                avalancheLabel={t("chart.avalanche")}
               />
             </Suspense>
           </div>
@@ -456,6 +471,9 @@ export default function DebtPayoffCalculatorPage() {
                 avalancheSchedule={result.avalanche.schedule}
                 locale={locale}
                 currency={currency}
+                monthFormatter={(label: number) => t("chart.month", { n: label })}
+                snowballLabel={t("chart.snowball")}
+                avalancheLabel={t("chart.avalanche")}
               />
             </Suspense>
           </div>

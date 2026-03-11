@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "මුල් පිටුවට ආපසු යන්න"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "වසර {n}",
+      "yearLabel": "වසර",
+      "month": "මාසය {n}",
+      "monthYear": "මාසය {n} (වසර {y})",
+      "age": "වයස {n}",
+      "ageLabel": "වයස",
+      "contributions": "දායකත්වයන්",
+      "interestEarned": "උපයන ලද පොළිය",
+      "interest": "පොළිය",
+      "totalInterest": "මුළු පොළිය",
+      "snowball": "ස්නෝබෝල්",
+      "avalanche": "ඇවලාන්ච්",
+      "portfolio": "කළඹ",
+      "fireTarget": "FIRE ඉලක්කය",
+      "median50th": "මධ්‍යස්ථය (50 වන)",
+      "remainingBalance": "ඉතිරි ශේෂය",
+      "totalAssets": "මුළු වත්කම්",
+      "totalLiabilities": "මුළු වගකීම්",
+      "netWorth": "ශුද්ධ වටිනාකම",
+      "retirement": "විශ්‍රාමය"
+    },
+    "scenario": {
+      "compare": "අවස්ථා සංසන්දනය කරන්න ({count} සුරකින ලද)",
+      "selectUpTo": "සංසන්දනය කිරීමට අවස්ථා 3ක් දක්වා තෝරන්න:",
+      "duplicate": "අනුපිටපත",
+      "delete": "මකන්න",
+      "sideBySide": "පැත්තෙන් පැත්ත සංසන්දනය",
+      "field": "ක්ෂේත්‍රය",
+      "delta": "වෙනස",
+      "selectOneMore": "සංසන්දනය කිරීමට තවත් එක් අවස්ථාවක් තෝරන්න",
+      "copySuffix": "(delaysdelays)"
+    },
+    "openCalculator": "ගණක යන්ත්‍රය විවෘත කරන්න"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "මකන්න",
     "edit": "සංස්කරණය කරන්න",
     "loading": "ඉක්මනින් ලැබෙයි...",
-    "save": "සුරකින්න"
+    "save": "සුරකින්න",
+    "success": "සාර්ථකයි!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "අවශ්‍යය කරන්න",
     "finalConfirmation": "අවසන් තහවුරු කිරීම:",
     "processing": "සංස්කරණය කරමින්...",
-    "typeToConfirm": "මෙම ක්‍රියාව තහවුරු කිරීමට {text} ටයිප් කරන්න."
+    "typeToConfirm": "මෙම ක්‍රියාව තහවුරු කිරීමට {text} ටයිප් කරන්න.",
+    "confirmAction": "ක්‍රියාව තහවුරු කරන්න"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "සෞඛ්‍ය ලකුණු ඉතිහාසය",
+      "monthsOfData": "මාස {months} ක දත්ත",
+      "emptyTitle": "තවම ඉතිහාසයක් නැත",
+      "emptySubtitle": "ඔබේ පළමු මාසයෙන් පසු ඔබේ සෞඛ්‍ය ලකුණු ඉතිහාසය මෙහි පෙන්වනු ඇත",
+      "legendScore": "ලකුණු",
+      "legendTrend": "ප්‍රවණතාව",
+      "tooltipScore": "ලකුණු: {score}",
+      "tooltipTrend": "ප්‍රවණතාව: {direction}",
+      "loadingChart": "ප්‍රස්ථාරය පූරණය වෙමින්..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "ඔබේ අයවැය ඔබේම උපාංගයේ ජීවත් වේ",
+      "heroSubtitle": "වඩාත්ම පෞද්ගලික අයවැය යෙදුමට සාදරයෙන් පිළිගනිමු. ගිණුම් නැත, වලාකුළ නැත, සම්මුති නැත.",
+      "features": {
+        "yourDataTitle": "ඔබේ දත්ත, ඔබේ උපාංගය",
+        "yourDataDescription": "සියලුම මූල්‍ය දත්ත ඔබේ උපාංගයේ දේශීයව ගබඩා කර ඇත. වලාකුළු සේවාදායක නැත, තෙවන පාර්ශ්ව ප්‍රවේශය නැත.",
+        "encryptionTitle": "බැංකු මට්ටමේ සංකේතනය",
+        "encryptionDescription": "AES-256 සංකේතනය ඔබේ දත්ත ආරක්ෂා කරයි. යතුර ඔබ ළඟ පමණි—එය කිසිවිටෙක ඔබේ උපාංගයෙන් පිටතට නොයයි.",
+        "offlineTitle": "නොබැඳිව ක්‍රියා කරයි",
+        "offlineDescription": "අන්තර්ජාලයකින් තොරව සම්පූර්ණ ක්‍රියාකාරීත්වය. පෞද්ගලිකත්ව-සැලකිලිමත් පරිශීලකයන්ට වඩාත් සුදුසුයි.",
+        "zeroTrackingTitle": "ශුන්‍ය ලුහුබැඳීම",
+        "zeroTrackingDescription": "විශ්ලේෂණ නැත, ටෙලිමෙට්‍රි නැත, දත්ත එකතුවක් නැත. ඔබේ මූල්‍ය කටයුතු කිසිවෙකුගේ ව්‍යාපාරයක් නොවේ."
+      },
+      "whatsNext": "ඊළඟට කුමක්ද?",
+      "whatsNextIntro": "ඉදිරි මිනිත්තු කිහිපය තුළ, අපි ඔබට උදව් කරන්නෙමු:",
+      "step1": "ඔබේ පවතින ගනුදෙනු ආයාත කරන්න (බැංකු CSV, OFX, හෝ අතින්)",
+      "step2": "ඔබේ වියදම් ස්වයංක්‍රීයව වර්ගීකරණය කරන්න",
+      "step3": "සැබෑ වියදම් මත පදනම්ව ඔබේ පළමු අයවැය සාදන්න",
+      "step4": "බිල්පත් මතක් කිරීම් සකසන්න, එවිට ඔබ කිසි ගෙවීමක් මඟ හරින්නේ නැත",
+      "getStarted": "ආරම්භ කරමු"
+    },
+    "categoryMapping": {
+      "needsCategories": "ගනුදෙනු {count} කට ප්‍රවර්ග අවශ්‍යයි",
+      "allCategorized": "සියලුම ගනුදෙනු වර්ගීකරණය කර ඇත!",
+      "applySmartSuggestions": "ස්මාර්ට් යෝජනා යොදන්න",
+      "categorize": "වර්ගීකරණය කරන්න",
+      "percentMatch": "{percent}% ගැළපීම",
+      "rememberChoices": "මගේ ප්‍රවර්ග තේරීම් මතක තබන්න",
+      "rememberChoicesDescription": "අනාගතයේ සමාන ගනුදෙනු ස්වයංක්‍රීයව වර්ගීකරණය කරන්න",
+      "categorized": "{count} වර්ගීකරණය කළ",
+      "remaining": "{count} ඉතිරි",
+      "continue": "ඉදිරියට යන්න",
+      "continueAnyway": "කෙසේ හෝ ඉදිරියට යන්න",
+      "categories": {
+        "foodDining": "ආහාර සහ භෝජනය",
+        "transportation": "ප්‍රවාහනය",
+        "billsUtilities": "බිල්පත් සහ උපයෝගිතා",
+        "shopping": "සාප්පු සවාරි",
+        "entertainment": "විනෝදාත්මක",
+        "healthFitness": "සෞඛ්‍ය සහ යෝග්‍යතාව",
+        "personalCare": "පුද්ගලික සත්කාර",
+        "income": "ආදායම",
+        "transfers": "මාරු කිරීම්"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "පැතිකඩ මකා දැමීම අසාර්ථකයි",
+    "deleteTitle": "පැතිකඩ මකන්නද?",
+    "defaultProfile": "පෙරනිමි පැතිකඩ",
+    "cannotDeleteOnly": "මෙය එකම පැතිකඩයි. ඔබට එය මකා දැමිය නොහැක.",
+    "permanentWarning": "මෙය මෙම පැතිකඩ ස්ථිරවම මකා දමනු ඇත. මෙම පැතිකඩයේ ඕනෑම පුද්ගලික අයවැය සියලු පැතිකඩ සමඟ බෙදා ගනු ඇත.",
+    "cannotUndo": "මෙම ක්‍රියාව අහෝසි කළ නොහැක.",
+    "deleteButton": "පැතිකඩ මකන්න"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "බලන්න"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "මතක් කිරීම අක්‍රිය කරන්න",
+      "enableReminder": "මතක් කිරීම සක්‍රිය කරන්න",
+      "off": "අක්‍රිය"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "developerTools": {
+    "title": "සංවර්ධක මෙවලම්",
+    "subtitle": "ජාත්‍යන්තරකරණය පරීක්ෂා කිරීම සඳහා QA මෙවලම් (dev ප්‍රකාරය පමණි)",
+    "pseudoLocaleLabel": "ව්‍යාජ-ලොකේල් සක්‍රිය කරන්න (en-XA)",
+    "pseudoLocaleHelp": "සියලු පරිවර්තිත පෙළ උච්චාරණ අක්ෂර සමඟ ප්‍රතිස්ථාපනය කරයි. ඉතිරි සාමාන්‍ය ඉංග්‍රීසි පෙළ <strong>හාඩ්කෝඩඩ්</strong> වන අතර පරිවර්තන යතුරු බවට පරිවර්තනය කළ යුතුය.",
+    "pseudoLocaleExample": "උදාහරණය: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "\"[Ðášhƀóářð~~~]\" වෙනුවට \"Dashboard\" පෙනේ නම්, එය හාඩ්කෝඩඩ් ය!",
+    "infoPseudoLocale": "ව්‍යාජ-ලොකේල් සංවර්ධනය අතරතුර පරිවර්තනය නොකළ තන්තු හඳුනා ගැනීමට උපකාරී වේ",
+    "infoProduction": "නිෂ්පාදන ගොඩනැගීම් ස්වයංක්‍රීයව en-XA ලොකේල් බැහැර කරයි",
+    "infoSwitchBack": "සාමාන්‍ය සංවර්ධනය දිගටම කරගෙන යාමට සැබෑ ලොකේල් එකකට ආපසු මාරු වන්න"
+  },
+  "pageMetadata": {
+    "appName": "අයවැය යෙදුම",
+    "scenarios": "මොකද-නම් අවස්ථා",
+    "merchantRules": "වෙළෙන්දා නීති",
+    "more": "තව",
+    "netWorth": "ශුද්ධ වටිනාකම",
+    "properties": "දේපළ",
+    "propertyDetail": "දේපළ විස්තර",
+    "review": "ගනුදෙනු සමාලෝචනය",
+    "events": "සිදුවීම් අයවැය",
+    "landing": "BudgetPro - ඔබේ මුදල් පාලනය කරන්න",
+    "dashboard": "උපකරණ පුවරුව",
+    "transactions": "ගනුදෙනු",
+    "import": "ආයාතය",
+    "accounts": "ගිණුම්",
+    "budgets": "අයවැය",
+    "categories": "ප්‍රවර්ග",
+    "reports": "වාර්තා",
+    "settings": "සැකසීම්",
+    "subscriptions": "දායකත්ව",
+    "investments": "ආයෝජන",
+    "debtPayoff": "ණය ගෙවීම",
+    "loans": "ණය",
+    "calculators": "ගණක යන්ත්‍ර",
+    "planning": "සැලසුම්කරණය",
+    "ocr": "රිසිට්පත් ස්කෑනරය",
+    "export": "අපනයනය",
+    "fridayReview": "සතිපතා සමාලෝචනය",
+    "onboarding": "delaysdelays",
+    "offline": "delaysdelays delaysdelays",
+    "splits": "delaysdelays delaysdelays"
+  },
+  "balanceReconciliation": {
+    "title": "ශේෂ ප්‍රතිසන්ධානය",
+    "subtitle": "ඔබේ ආයාත කළ ගනුදෙනු ඔබේ සැබෑ ගිණුම් ශේෂය සමඟ ගළපන්න",
+    "transactionsImported": "ගනුදෙනු {count} ක් ආයාත කරන ලදී",
+    "netChange": "ශුද්ධ වෙනස",
+    "currentBalanceLabel": "වර්තමාන ශේෂය (බැංකුවෙන්)",
+    "currentBalanceLabelCredit": "වර්තමාන ශේෂය (ණය පත)",
+    "balanceHelperBank": "ඔබේ බැංකුවේ වෙබ් අඩවියේ හෝ යෙදුමේ පෙන්වන වර්තමාන ශේෂය ඇතුළත් කරන්න",
+    "balanceHelperCredit": "ඔබේ ණය පතේ වර්තමාන හිඟ ශේෂය ඇතුළත් කරන්න",
+    "startingBalance": "ආරම්භක ශේෂය",
+    "startingBalanceCredit": "ආරම්භක ශේෂය (ණය පත)",
+    "balanceMatchNote": "ඔබේ ගනුදෙනු ඉතිහාසය සම්පූර්ණ හා නිවැරදි බව සහතික කිරීමට මෙය උපකාරී වේ",
+    "negativeWarning": "මෙය සෘණ ආරම්භක ශේෂයක් ඇති කරයි. කරුණාකර ඔබේ වර්තමාන ශේෂය සත්‍යාපනය කරන්න.",
+    "skipForNow": "දැනට මඟ හරින්න",
+    "setBalance": "ශේෂය සකසන්න"
+  },
+  "recommendations": {
+    "title": "නිර්දේශ",
+    "subtitle": "ඔබේ මූල්‍ය සෞඛ්‍යය මත පදනම් වූ පුද්ගලික යෝජනා",
+    "emptyState": "තවම නිර්දේශ නැත. ඔබේ මූල්‍ය කටයුතු නිරීක්ෂණය කරගෙන යන්න!",
+    "viewAllFactors": "සියලුම සාධක බලන්න",
+    "factorLabels": {
+      "savingsRate": "ඉතිරි කිරීමේ අනුපාතය",
+      "debtToIncome": "ණය-ආදායම් අනුපාතය",
+      "budgetAdherence": "අයවැය පිළිපැදීම",
+      "emergencyFund": "හදිසි අරමුදල",
+      "investmentGrowth": "ආයෝජන වර්ධනය",
+      "expenseStability": "වියදම් ස්ථායිතාව"
+    },
+    "factorLinks": {
+      "savingsRate": "ඉතිරි කිරීමේ ඉඟි බලන්න",
+      "debtToIncome": "ණය කළමනාකරණය කරන්න",
+      "budgetAdherence": "අයවැය සකසන්න",
+      "emergencyFund": "හදිසි අරමුදලක් ගොඩනගන්න",
+      "investmentGrowth": "ආයෝජන උපාය මාර්ග",
+      "expenseStability": "වියදම් ස්ථාවර කරන්න"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "වෙළෙන්දා",
+    "amount": "මුදල",
+    "average": "සාමාන්‍ය",
+    "category": "ප්‍රවර්ගය",
+    "wasExpected": "මෙය අපේක්ෂිතද?",
+    "expected": "අපේක්ෂිත",
+    "unexpected": "අනපේක්ෂිත",
+    "markedExpected": "අපේක්ෂිත ලෙස සලකුණු කරන ලදී",
+    "markedUnexpected": "අනපේක්ෂිත ලෙස සලකුණු කරන ලදී",
+    "moreAnomalies": "තවත් විෂමතා {count} ක්",
+    "severity": {
+      "high": "delaysdelays",
+      "medium": "delaysdelays",
+      "low": "delaysdelays"
+    }
+  },
+  "pdfOcr": {
+    "processing": "PDF සැකසෙමින්...",
+    "cancel": "අවලංගු කරන්න",
+    "pageProgress": "පිටුව {current} / {total}",
+    "elapsed": "ගත වූ කාලය: {time}",
+    "remaining": "ඉතිරි කාලය: {time}",
+    "stages": {
+      "loading": "පූරණය වෙමින්",
+      "rendering": "රෙන්ඩරිං",
+      "preprocessing": "පූර්ව සැකසීම",
+      "ocr": "OCR",
+      "parsing": "විග්‍රහ කිරීම",
+      "complete": "සම්පූර්ණයි",
+      "error": "දෝෂය",
+      "cancelled": "අවලංගු කරන ලදී",
+      "enhance": "වැඩිදියුණු කිරීම"
+    },
+    "errorRetry": "OCR සැකසීම අසාර්ථක විය. ඔබට නැවත උත්සාහ කිරීමට අවශ්‍යද?",
+    "cancelledRetry": "OCR අවලංගු කරන ලදී. ඔබට නැවත ආරම්භ කිරීමට අවශ්‍යද?",
+    "retryButton": "OCR නැවත උත්සාහ කරන්න",
+    "completedSuccess": "OCR සාර්ථකව සම්පූර්ණ විය!",
+    "loadingChart": "ප්‍රස්ථාරය පූරණය වෙමින්..."
   }
 }

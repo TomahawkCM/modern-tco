@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "હોમ પર પાછા જાઓ"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "વર્ષ {n}",
+      "yearLabel": "વર્ષ",
+      "month": "મહિનો {n}",
+      "monthYear": "મહિનો {n} (વર્ષ {y})",
+      "age": "ઉંમર {n}",
+      "ageLabel": "ઉંમર",
+      "contributions": "યોગદાન",
+      "interestEarned": "કમાયેલું વ્યાજ",
+      "interest": "વ્યાજ",
+      "totalInterest": "કુલ વ્યાજ",
+      "snowball": "સ્નોબોલ",
+      "avalanche": "એવલાન્ચ",
+      "portfolio": "પોર્ટફોલિઓ",
+      "fireTarget": "FIRE લક્ષ્ય",
+      "median50th": "મધ્યક (૫૦મું)",
+      "remainingBalance": "બાકી બેલેન્સ",
+      "totalAssets": "કુલ સંપત્તિ",
+      "totalLiabilities": "કુલ જવાબદારીઓ",
+      "netWorth": "ચોખ્ખી સંપત્તિ",
+      "retirement": "નિવૃત્તિ"
+    },
+    "scenario": {
+      "compare": "પરિસ્થિતિઓની તુલના કરો ({count} સાચવેલ)",
+      "selectUpTo": "તુલના કરવા માટે ૩ સુધી પરિસ્થિતિઓ પસંદ કરો:",
+      "duplicate": "ડુપ્લિકેટ",
+      "delete": "કાઢી નાખો",
+      "sideBySide": "બાજુ-બાજુ તુલના",
+      "field": "ફીલ્ડ",
+      "delta": "ફરક",
+      "selectOneMore": "તુલના કરવા માટે એક વધુ પરિસ્થિતિ પસંદ કરો",
+      "copySuffix": "(નકલ)"
+    },
+    "openCalculator": "કેલ્ક્યુલેટર ખોલો"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "મિટાવો",
     "edit": "સંપાદિત કરો",
     "loading": "લોડ થઈ રહ્યું છે...",
-    "save": "સાચવો"
+    "save": "સાચવો",
+    "success": "સફળતા!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "પુષ્ટિ કરો",
     "finalConfirmation": "અંતિમ પુષ્ટિ:",
     "processing": "પ્રોસેસ થઈ રહ્યું છે...",
-    "typeToConfirm": "આ ક્રિયા પુષ્ટિ કરવા માટે {text} ટાઇપ કરો."
+    "typeToConfirm": "આ ક્રિયા પુષ્ટિ કરવા માટે {text} ટાઇપ કરો.",
+    "confirmAction": "ક્રિયા પુષ્ટિ કરો"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "આરોગ્ય સ્કોર ઇતિહાસ",
+      "monthsOfData": "{months} મહિનાનો ડેટા",
+      "emptyTitle": "હજુ સુધી કોઈ ઇતિહાસ નથી",
+      "emptySubtitle": "તમારા પહેલા મહિના પછી તમારો આરોગ્ય સ્કોર ઇતિહાસ અહીં દેખાશે",
+      "legendScore": "સ્કોર",
+      "legendTrend": "ટ્રેન્ડ",
+      "tooltipScore": "સ્કોર: {score}",
+      "tooltipTrend": "ટ્રેન્ડ: {direction}",
+      "loadingChart": "ચાર્ટ લોડ થઈ રહ્યો છે..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "તમારું બજેટ તમારા ઉપકરણ પર રહે છે",
+      "heroSubtitle": "સૌથી ખાનગી બજેટ એપમાં આપનું સ્વાગત છે. કોઈ ખાતા નહીં, કોઈ ક્લાઉડ નહીં, કોઈ સમાધાન નહીં.",
+      "features": {
+        "yourDataTitle": "તમારો ડેટા, તમારું ઉપકરણ",
+        "yourDataDescription": "બધો નાણાકીય ડેટા તમારા ઉપકરણ પર સ્થાનિક રીતે સંગ્રહિત છે. કોઈ ક્લાઉડ સર્વર નહીં, કોઈ તૃતીય-પક્ષ ઍક્સેસ નહીં.",
+        "encryptionTitle": "બેંક-ગ્રેડ એન્ક્રિપ્શન",
+        "encryptionDescription": "AES-256 એન્ક્રિપ્શન તમારા ડેટાનું રક્ષણ કરે છે. ફક્ત તમારી પાસે કી છે—તે ક્યારેય તમારું ઉપકરણ છોડતી નથી.",
+        "offlineTitle": "ઑફલાઇન કામ કરે છે",
+        "offlineDescription": "ઇન્ટરનેટ વિના સંપૂર્ણ કાર્યક્ષમતા. ગોપનીયતા-સભાન વપરાશકર્તાઓ માટે ઉત્તમ.",
+        "zeroTrackingTitle": "ઝીરો ટ્રેકિંગ",
+        "zeroTrackingDescription": "કોઈ એનાલિટિક્સ નહીં, કોઈ ટેલિમેટ્રી નહીં, કોઈ ડેટા સંગ્રહ નહીં. તમારી નાણાકીય બાબતો કોઈનો વ્યવસાય નથી."
+      },
+      "whatsNext": "આગળ શું?",
+      "whatsNextIntro": "આવનારી થોડી મિનિટોમાં, અમે તમને મદદ કરીશું:",
+      "step1": "તમારા હાલના વ્યવહારો આયાત કરો (બેંક CSV, OFX, અથવા મેન્યુઅલ)",
+      "step2": "તમારા ખર્ચને આપમેળે વર્ગીકૃત કરો",
+      "step3": "વાસ્તવિક ખર્ચ પર આધારિત તમારું પ્રથમ બજેટ બનાવો",
+      "step4": "બિલ રિમાઇન્ડર્સ સેટ કરો જેથી તમે કોઈ ચૂકવણી ચૂકશો નહીં",
+      "getStarted": "ચાલો શરૂ કરીએ"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} વ્યવહારોને કેટેગરીની જરૂર છે",
+      "allCategorized": "બધા વ્યવહારો વર્ગીકૃત છે!",
+      "applySmartSuggestions": "સ્માર્ટ સૂચનો લાગુ કરો",
+      "categorize": "વર્ગીકૃત કરો",
+      "percentMatch": "{percent}% મેળ",
+      "rememberChoices": "મારી કેટેગરી પસંદગીઓ યાદ રાખો",
+      "rememberChoicesDescription": "ભવિષ્યમાં સમાન વ્યવહારો આપમેળે વર્ગીકૃત કરો",
+      "categorized": "{count} વર્ગીકૃત",
+      "remaining": "{count} બાકી",
+      "continue": "ચાલુ રાખો",
+      "continueAnyway": "તેમ છતાં ચાલુ રાખો",
+      "categories": {
+        "foodDining": "ખોરાક અને ભોજન",
+        "transportation": "પરિવહન",
+        "billsUtilities": "બિલ અને ઉપયોગિતાઓ",
+        "shopping": "ખરીદી",
+        "entertainment": "મનોરંજન",
+        "healthFitness": "આરોગ્ય અને ફિટનેસ",
+        "personalCare": "વ્યક્તિગત સંભાળ",
+        "income": "આવક",
+        "transfers": "ટ્રાન્સફર"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "પ્રોફાઇલ કાઢી શકાઈ નહીં",
+    "deleteTitle": "પ્રોફાઇલ કાઢશો?",
+    "defaultProfile": "ડિફોલ્ટ પ્રોફાઇલ",
+    "cannotDeleteOnly": "આ એકમાત્ર પ્રોફાઇલ છે. તમે તેને કાઢી શકતા નથી.",
+    "permanentWarning": "આ પ્રોફાઇલ કાયમી ધોરણે કાઢી નાખશે. આ પ્રોફાઇલના કોઈપણ ખાનગી બજેટ બધા પ્રોફાઇલ સાથે શેર થશે.",
+    "cannotUndo": "આ ક્રિયા પૂર્વવત્ કરી શકાતી નથી.",
+    "deleteButton": "પ્રોફાઇલ કાઢો"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "જુઓ"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "રિમાઇન્ડર બંધ કરો",
+      "enableReminder": "રિમાઇન્ડર ચાલુ કરો",
+      "off": "બંધ"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "developerTools": {
+    "title": "ડેવલપર ટૂલ્સ",
+    "subtitle": "આંતરરાષ્ટ્રીયકરણ ટેસ્ટિંગ માટે QA ટૂલ્સ (ફક્ત ડેવ મોડ)",
+    "pseudoLocaleLabel": "સ્યુડો-લોકેલ સક્ષમ કરો (en-XA)",
+    "pseudoLocaleHelp": "બધા અનુવાદિત ટેક્સ્ટને ઉચ્ચારણ અક્ષરો સાથે બદલે છે. બાકીનું સાદું અંગ્રેજી ટેક્સ્ટ <strong>હાર્ડકોડેડ</strong> છે અને તેને અનુવાદ કીમાં રૂપાંતરિત કરવાની જરૂર છે.",
+    "pseudoLocaleExample": "ઉદાહરણ: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "જો તમે \"[Ðášhƀóářð~~~]\" ને બદલે \"Dashboard\" જુઓ છો, તો તે હાર્ડકોડેડ છે!",
+    "infoPseudoLocale": "સ્યુડો-લોકેલ ડેવલપમેન્ટ દરમિયાન અનુવાદ ન થયેલ સ્ટ્રિંગ્સ ઓળખવામાં મદદ કરે છે",
+    "infoProduction": "પ્રોડક્શન બિલ્ડ્સ આપમેળે en-XA લોકેલને બાકાત રાખે છે",
+    "infoSwitchBack": "સામાન્ય ડેવલપમેન્ટ ચાલુ રાખવા માટે વાસ્તવિક લોકેલ પર પાછા જાઓ"
+  },
+  "pageMetadata": {
+    "appName": "બજેટ એપ",
+    "scenarios": "વોટ-ઇફ પરિસ્થિતિઓ",
+    "merchantRules": "વેપારી નિયમો",
+    "more": "વધુ",
+    "netWorth": "ચોખ્ખી કિંમત",
+    "properties": "મિલકતો",
+    "propertyDetail": "મિલકત વિગતો",
+    "review": "વ્યવહારો સમીક્ષા",
+    "events": "ઇવેન્ટ બજેટ",
+    "landing": "BudgetPro - તમારા નાણાં પર કાબૂ મેળવો",
+    "dashboard": "ડેશબોર્ડ",
+    "transactions": "વ્યવહારો",
+    "import": "આયાત",
+    "accounts": "ખાતાઓ",
+    "budgets": "બજેટ",
+    "categories": "શ્રેણીઓ",
+    "reports": "અહેવાલો",
+    "settings": "સેટિંગ્સ",
+    "subscriptions": "સબસ્ક્રિપ્શન",
+    "investments": "રોકાણો",
+    "debtPayoff": "દેવું ચૂકવણી",
+    "loans": "લોન",
+    "calculators": "કેલ્ક્યુલેટર",
+    "planning": "આયોજન",
+    "ocr": "રસીદ સ્કેનર",
+    "export": "નિકાસ",
+    "fridayReview": "સાપ્તાહિક સમીક્ષા",
+    "onboarding": "શરૂઆત",
+    "offline": "ઑફલાઇન મોડ",
+    "splits": "વ્યવહારો વિભાજિત કરો"
+  },
+  "balanceReconciliation": {
+    "title": "બેલેન્સ સમાધાન",
+    "subtitle": "તમારા આયાત કરેલા વ્યવહારોને તમારા ખાતાના વાસ્તવિક બેલેન્સ સાથે મેળવો",
+    "transactionsImported": "{count} વ્યવહારો આયાત થયા",
+    "netChange": "ચોખ્ખો ફેરફાર",
+    "currentBalanceLabel": "વર્તમાન બેલેન્સ (બેંકમાંથી)",
+    "currentBalanceLabelCredit": "વર્તમાન બેલેન્સ (ક્રેડિટ કાર્ડ)",
+    "balanceHelperBank": "તમારી બેંકની વેબસાઇટ અથવા એપ પર દેખાતું વર્તમાન બેલેન્સ દાખલ કરો",
+    "balanceHelperCredit": "તમારા ક્રેડિટ કાર્ડ પરની વર્તમાન બાકી રકમ દાખલ કરો",
+    "startingBalance": "શરૂઆતનું બેલેન્સ",
+    "startingBalanceCredit": "શરૂઆતનું બેલેન્સ (ક્રેડિટ કાર્ડ)",
+    "balanceMatchNote": "આ તમારો વ્યવહાર ઇતિહાસ પૂર્ણ અને સચોટ છે તેની ખાતરી કરવામાં મદદ કરે છે",
+    "negativeWarning": "આનાથી નકારાત્મક શરૂઆતનું બેલેન્સ થશે. કૃપા કરીને તમારું વર્તમાન બેલેન્સ ચકાસો.",
+    "skipForNow": "હમણાં છોડો",
+    "setBalance": "બેલેન્સ સેટ કરો"
+  },
+  "recommendations": {
+    "title": "ભલામણો",
+    "subtitle": "તમારા નાણાકીય આરોગ્ય પર આધારિત વ્યક્તિગત સૂચનો",
+    "emptyState": "હજુ સુધી કોઈ ભલામણો નથી. તમારી નાણાકીય બાબતોનો ટ્રેક રાખતા રહો!",
+    "viewAllFactors": "બધા પરિબળો જુઓ",
+    "factorLabels": {
+      "savingsRate": "બચત દર",
+      "debtToIncome": "દેવું-આવક ગુણોત્તર",
+      "budgetAdherence": "બજેટ પાલન",
+      "emergencyFund": "ઈમરજન્સી ફંડ",
+      "investmentGrowth": "રોકાણ વૃદ્ધિ",
+      "expenseStability": "ખર્ચ સ્થિરતા"
+    },
+    "factorLinks": {
+      "savingsRate": "બચત ટિપ્સ જુઓ",
+      "debtToIncome": "દેવું વ્યવસ્થાપિત કરો",
+      "budgetAdherence": "બજેટ ગોઠવો",
+      "emergencyFund": "ઈમરજન્સી ફંડ બનાવો",
+      "investmentGrowth": "રોકાણ વ્યૂહરચનાઓ",
+      "expenseStability": "ખર્ચ સ્થિર કરો"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "વેપારી",
+    "amount": "રકમ",
+    "average": "સરેરાશ",
+    "category": "કેટેગરી",
+    "wasExpected": "શું આ અપેક્ષિત હતું?",
+    "expected": "અપેક્ષિત",
+    "unexpected": "અનપેક્ષિત",
+    "markedExpected": "અપેક્ષિત તરીકે ચિહ્નિત",
+    "markedUnexpected": "અનપેક્ષિત તરીકે ચિહ્નિત",
+    "moreAnomalies": "વધુ {count} વિસંગતતાઓ",
+    "severity": {
+      "high": "ઉચ્ચ",
+      "medium": "મધ્યમ",
+      "low": "નીચું"
+    }
+  },
+  "pdfOcr": {
+    "processing": "PDF પ્રોસેસ થઈ રહ્યું છે...",
+    "cancel": "રદ કરો",
+    "pageProgress": "પૃષ્ઠ {current} માંથી {total}",
+    "elapsed": "વીતેલો સમય: {time}",
+    "remaining": "બાકીનો સમય: {time}",
+    "stages": {
+      "loading": "લોડ થઈ રહ્યું છે",
+      "rendering": "રેન્ડરિંગ",
+      "preprocessing": "પ્રીપ્રોસેસિંગ",
+      "ocr": "OCR",
+      "parsing": "પાર્સિંગ",
+      "complete": "પૂર્ણ",
+      "error": "ભૂલ",
+      "cancelled": "રદ કરાયું",
+      "enhance": "સુધારણા"
+    },
+    "errorRetry": "OCR પ્રોસેસિંગ નિષ્ફળ થઈ. શું તમે ફરીથી પ્રયાસ કરવા માંગો છો?",
+    "cancelledRetry": "OCR રદ કરવામાં આવ્યું. શું તમે ફરીથી શરૂ કરવા માંગો છો?",
+    "retryButton": "OCR ફરી પ્રયાસ કરો",
+    "completedSuccess": "OCR સફળતાપૂર્વક પૂર્ણ થયું!",
+    "loadingChart": "ચાર્ટ લોડ થઈ રહ્યો છે..."
   }
 }

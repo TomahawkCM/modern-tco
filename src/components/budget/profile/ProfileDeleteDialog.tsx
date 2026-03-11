@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -35,6 +36,7 @@ export function ProfileDeleteDialog({
   profile,
   onSuccess,
 }: ProfileDeleteDialogProps) {
+  const t = useTranslations("profileDialog");
   const { deleteProfile, profiles } = useProfile();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -50,7 +52,7 @@ export function ProfileDeleteDialog({
       onOpenChange(false);
       onSuccess?.();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to delete profile");
+      setError(err instanceof Error ? err.message : t("errorDeleteFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -66,7 +68,7 @@ export function ProfileDeleteDialog({
         <AlertDialogHeader>
           <AlertDialogTitle className="flex items-center gap-2">
             <AlertTriangle className="h-5 w-5 text-destructive" />
-            Delete Profile?
+            {t("deleteTitle")}
           </AlertDialogTitle>
           <AlertDialogDescription asChild>
             <div className="space-y-3">
@@ -82,20 +84,17 @@ export function ProfileDeleteDialog({
                 <div>
                   <p className="font-medium text-foreground">{profile.name}</p>
                   {profile.isDefault && (
-                    <p className="text-xs text-muted-foreground">Default profile</p>
+                    <p className="text-xs text-muted-foreground">{t("defaultProfile")}</p>
                   )}
                 </div>
               </div>
 
               {isLastProfile ? (
-                <p className="text-destructive">This is the only profile. You cannot delete it.</p>
+                <p className="text-destructive">{t("cannotDeleteOnly")}</p>
               ) : (
                 <>
-                  <p>
-                    This will permanently delete this profile. Any private budgets owned by this
-                    profile will become shared with all profiles.
-                  </p>
-                  <p className="font-medium">This action cannot be undone.</p>
+                  <p>{t("permanentWarning")}</p>
+                  <p className="font-medium">{t("cannotUndo")}</p>
                 </>
               )}
 
@@ -105,14 +104,14 @@ export function ProfileDeleteDialog({
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={isLoading}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={isLoading}>{t("cancel")}</AlertDialogCancel>
           <AlertDialogAction
             onClick={handleDelete}
             disabled={isLoading || isLastProfile}
             className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
           >
             {isLoading && <Loader2 className="me-2 h-4 w-4 animate-spin" />}
-            Delete Profile
+            {t("deleteButton")}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

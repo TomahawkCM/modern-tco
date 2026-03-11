@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Kthehu në faqen kryesore"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Viti {n}",
+      "yearLabel": "Viti",
+      "month": "Muaji {n}",
+      "monthYear": "Muaji {n} (Viti {y})",
+      "age": "Mosha {n}",
+      "ageLabel": "Mosha",
+      "contributions": "Kontribute",
+      "interestEarned": "Interes i fituar",
+      "interest": "Interes",
+      "totalInterest": "Interesi total",
+      "snowball": "Topi i dëborës",
+      "avalanche": "Orteku",
+      "portfolio": "Portofoli",
+      "fireTarget": "Objektivi FIRE",
+      "median50th": "Mesore (e 50-ta)",
+      "remainingBalance": "Balanca e mbetur",
+      "totalAssets": "Totali i aktiveve",
+      "totalLiabilities": "Totali i detyrimeve",
+      "netWorth": "Vlera neto",
+      "retirement": "Pensionim"
+    },
+    "scenario": {
+      "compare": "Krahaso skenarët ({count} të ruajtur)",
+      "selectUpTo": "Zgjidhni deri në 3 skenarë për krahasim:",
+      "duplicate": "Dupliko",
+      "delete": "Fshi",
+      "sideBySide": "Krahasim krah për krah",
+      "field": "Fusha",
+      "delta": "Diferenca",
+      "selectOneMore": "Zgjidhni edhe një skenar për krahasim",
+      "copySuffix": "(kopje)"
+    },
+    "openCalculator": "Hap llogaritësin"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Fshi",
     "edit": "Redakto",
     "loading": "Duke ngarkuar...",
-    "save": "Ruaj"
+    "save": "Ruaj",
+    "success": "Sukses!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Konfirmo",
     "finalConfirmation": "Konfirmimi Final:",
     "processing": "Duke përpunuar...",
-    "typeToConfirm": "Shkruani {text} për të konfirmuar këtë veprim."
+    "typeToConfirm": "Shkruani {text} për të konfirmuar këtë veprim.",
+    "confirmAction": "Konfirmo veprimin"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Historia e pikëve",
+      "monthsOfData": "{count} {count, plural, =1 {muaj} other {muaj}} të dhëna",
+      "emptyTitle": "Historia e pikëve tuaja do të shfaqet këtu ndërsa grumbullohen të dhënat",
+      "emptySubtitle": "Kontrolloni përsëri muajin e ardhshëm!",
+      "legendScore": "Pikët",
+      "legendTrend": "Trendi",
+      "tooltipScore": "Pikët",
+      "tooltipTrend": "Trendi",
+      "loadingChart": "Po ngarkohet grafiku..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Buxheti juaj jeton në pajisjen TUAJ",
+      "heroSubtitle": "Mirë se vini në aplikacionin më privat të buxhetit. Pa llogari, pa cloud, pa kompromis.",
+      "features": {
+        "yourDataTitle": "Të dhënat tuaja, pajisja juaj",
+        "yourDataDescription": "Të gjitha të dhënat financiare ruhen lokalisht në pajisjen tuaj. Pa serverë cloud, pa akses nga palë të treta.",
+        "encryptionTitle": "Kriptim i nivelit bankar",
+        "encryptionDescription": "Kriptimi AES-256 mbron të dhënat tuaja. Vetëm ju keni çelësin — ai nuk largohet kurrë nga pajisja juaj.",
+        "offlineTitle": "Funksionon pa internet",
+        "offlineDescription": "Funksionalitet i plotë pa internet. Perfekt për përdoruesit e ndërgjegjshëm për privatësinë.",
+        "zeroTrackingTitle": "Zero gjurmim",
+        "zeroTrackingDescription": "Pa analitikë, pa telemetri, pa mbledhje të dhënash. Financat tuaja nuk janë puna e askujt."
+      },
+      "whatsNext": "Çfarë vjen më pas?",
+      "whatsNextIntro": "Në minutat e ardhshme, do t'ju ndihmojmë:",
+      "step1": "Importoni transaksionet ekzistuese (CSV bankar, OFX ose manual)",
+      "step2": "Kategorizoni automatikisht shpenzimet",
+      "step3": "Krijoni buxhetin tuaj të parë bazuar në shpenzimet aktuale",
+      "step4": "Vendosni kujtues faturash që të mos humbni asnjë pagesë",
+      "getStarted": "Le të fillojmë"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} transaksione kanë nevojë për kategori",
+      "allCategorized": "Të gjitha transaksionet janë kategorizuar!",
+      "applySmartSuggestions": "Apliko sugjerimet e zgjuara",
+      "categorize": "Kategorizo",
+      "percentMatch": "{percent}% përputhje",
+      "rememberChoices": "Mbaj mend zgjedhjet e mia të kategorisë",
+      "rememberChoicesDescription": "Kategorizo automatikisht transaksionet e ngjashme në të ardhmen",
+      "categorized": "{count} të kategorizuara",
+      "remaining": "{count} të mbetura",
+      "continue": "Vazhdo",
+      "continueAnyway": "Vazhdo gjithsesi",
+      "categories": {
+        "foodDining": "Ushqim & Restorant",
+        "transportation": "Transport",
+        "billsUtilities": "Fatura & Shërbime",
+        "shopping": "Blerje",
+        "entertainment": "Argëtim",
+        "healthFitness": "Shëndet & Fitnes",
+        "personalCare": "Kujdes personal",
+        "income": "Të ardhura",
+        "transfers": "Transferta"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Fshirja e profilit dështoi",
+    "deleteTitle": "Fshi profilin?",
+    "defaultProfile": "Profili parazgjedhur",
+    "cannotDeleteOnly": "Ky është profili i vetëm. Nuk mund ta fshini.",
+    "permanentWarning": "Kjo do ta fshijë përgjithmonë këtë profil. Çdo buxhet privat i këtij profili do të ndahet me të gjitha profilet.",
+    "cannotUndo": "Ky veprim nuk mund të zhbëhet.",
+    "deleteButton": "Fshi profilin"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Shiko"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Çaktivizo kujtesin",
+      "enableReminder": "Aktivizo kujtesin",
+      "off": "Joaktiv"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Importimi u përfundua!",
+    "subtitle": "Vendosni balancën e llogarisë për {accountName}",
+    "transactionsImported": "{count} transaksione u importuan",
+    "netChange": "Ndryshimi neto nga transaksionet:",
+    "currentBalanceLabel": "Cila është balanca aktuale e llogarisë suaj bankare?",
+    "currentBalanceLabelCredit": "Sa është shuma aktuale e borxhit tuaj?",
+    "balanceHelperBank": "Hapni aplikacionin tuaj bankar dhe vendosni balancën e shfaqur për këtë llogari",
+    "balanceHelperCredit": "Vendosni balancën aktuale të treguar në faturën e kartës suaj të kreditit (si numër pozitiv)",
+    "startingBalance": "Balanca juaj fillestare:",
+    "startingBalanceCredit": "Shuma juaj fillestare e borxhit:",
+    "balanceMatchNote": "Kjo do të përputhë balancën e llogarisë suaj me bankën.",
+    "negativeWarning": "Kjo rezulton në një balancë fillestare negative, gjë që është e pazakontë për llogaritë rrjedhëse/kursimi. Ju lutem kontrolloni sërish që balanca aktuale është e saktë.",
+    "skipForNow": "Kalo për momentin",
+    "setBalance": "Vendos balancën"
+  },
+  "recommendations": {
+    "title": "Rekomandimet kryesore",
+    "subtitle": "Mënyra për të përmirësuar shëndetin tuaj financiar",
+    "emptyState": "Shtoni më shumë të dhëna financiare për të marrë rekomandime të personalizuara",
+    "viewAllFactors": "Shiko të gjithë faktorët",
+    "factorLabels": {
+      "savingsRate": "Kursime",
+      "debtToIncome": "Borxh",
+      "budgetAdherence": "Buxhet",
+      "emergencyFund": "Fondi i emergjencës",
+      "investmentGrowth": "Investime",
+      "expenseStability": "Shpenzime"
+    },
+    "factorLinks": {
+      "savingsRate": "Shiko të ardhurat",
+      "debtToIncome": "Menaxho kreditë",
+      "budgetAdherence": "Rregulloni buxhetet",
+      "emergencyFund": "Planifiko kursimet",
+      "investmentGrowth": "Shiko portofolin",
+      "expenseStability": "Shiko raportet"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Tregtari:",
+    "amount": "Shuma:",
+    "average": "Mesatarja: {amount}",
+    "category": "Kategoria:",
+    "wasExpected": "A ishte e pritur?",
+    "expected": "E pritur",
+    "unexpected": "E papritur",
+    "markedExpected": "U shënua si e pritur",
+    "markedUnexpected": "U shënua si e papritur",
+    "moreAnomalies": "+{count} {count, plural, =1 {anomali} other {anomali}} të tjera",
+    "severity": {
+      "high": "E LARTË",
+      "medium": "MESATARE",
+      "low": "E ULËT"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Përpunim OCR",
+    "cancel": "Anulo",
+    "pageProgress": "Faqja {current} nga {total}",
+    "elapsed": "Koha e kaluar: {time}",
+    "remaining": "~{time} të mbetura",
+    "stages": {
+      "loading": "Po ngarkohet PDF",
+      "rendering": "Po përpunohen faqet",
+      "preprocessing": "Po përmirësohet imazhi",
+      "ocr": "Po nxirret teksti",
+      "parsing": "Po analizohen transaksionet",
+      "complete": "U përfundua",
+      "error": "Gabim",
+      "cancelled": "U anulua",
+      "enhance": "Përmirëso"
+    },
+    "errorRetry": "Përpunimi OCR dështoi. Dëshironi të provoni përsëri?",
+    "cancelledRetry": "OCR u anulua. Dëshironi të rifilloni?",
+    "retryButton": "Riprovo OCR",
+    "completedSuccess": "OCR u përfundua me sukses!",
+    "loadingChart": "Po ngarkohet grafiku..."
+  },
+  "developerTools": {
+    "title": "Mjetet e zhvilluesit",
+    "subtitle": "Mjete QA për testimin e ndërkombëtarizimit (vetëm modaliteti i zhvillimit)",
+    "pseudoLocaleLabel": "Aktivizo pseudo-lokalizimin (en-XA)",
+    "pseudoLocaleHelp": "Zëvendëson të gjithë tekstin e përkthyer me karaktere me theks. Çdo tekst i mbetur në anglisht të thjeshtë është <strong>i koduar fort</strong> dhe duhet të konvertohet në çelësa përkthimi.",
+    "pseudoLocaleExample": "Shembull: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Nëse shihni \"Dashboard\" në vend të \"[Ðášhƀóářð~~~]\", është i koduar fort!",
+    "infoPseudoLocale": "Pseudo-lokalizimi ndihmon në identifikimin e vargjeve të papërkthyera gjatë zhvillimit",
+    "infoProduction": "Ndërtimet e prodhimit automatikisht përjashtojnë lokalizimin en-XA",
+    "infoSwitchBack": "Kthehuni te një lokalizim i vërtetë për të vazhduar zhvillimin normal"
+  },
+  "pageMetadata": {
+    "appName": "Aplikacioni i buxhetit",
+    "scenarios": "Skenarë \"çka-nëse\"",
+    "merchantRules": "Rregullat e tregtarëve",
+    "more": "Më shumë",
+    "netWorth": "Vlera neto",
+    "properties": "Pronat",
+    "propertyDetail": "Detajet e pronës",
+    "review": "Rishikimi i transaksioneve",
+    "events": "Buxhetet e ngjarjeve",
+    "landing": "BudgetPro - Përvetësoni financat tuaja",
+    "dashboard": "Paneli",
+    "transactions": "Transaksionet",
+    "import": "Importo",
+    "accounts": "Llogaritë",
+    "budgets": "Buxhetet",
+    "categories": "Kategoritë",
+    "reports": "Raportet",
+    "settings": "Cilësimet",
+    "subscriptions": "Abonimet",
+    "investments": "Investimet",
+    "debtPayoff": "Shlyerja e borxheve",
+    "loans": "Kreditë",
+    "calculators": "Kalkulatorët",
+    "planning": "Planifikimi",
+    "ocr": "Skaneri i faturave",
+    "export": "Eksporto",
+    "fridayReview": "Rishikimi javor",
+    "onboarding": "Filloni",
+    "offline": "Modaliteti offline",
+    "splits": "Ndani transaksionet"
   }
 }

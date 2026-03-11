@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "ပင်မစာမျက်နှာသို့ ပြန်သွားမည်"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "နှစ် {n}",
+      "yearLabel": "နှစ်",
+      "month": "လ {n}",
+      "monthYear": "လ {n} (နှစ် {y})",
+      "age": "အသက် {n}",
+      "ageLabel": "အသက်",
+      "contributions": "ထည့်ဝင်ငွေ",
+      "interestEarned": "ရရှိသည့်အတိုး",
+      "interest": "အတိုး",
+      "totalInterest": "စုစုပေါင်းအတိုး",
+      "snowball": "စနိုးဘောလ်",
+      "avalanche": "အဗလန်း",
+      "portfolio": "ရင်းနှီးမြှုပ်နှံမှု",
+      "fireTarget": "FIRE ပန်းတိုင်",
+      "median50th": "အလယ်တန်းဖိုး (50)",
+      "remainingBalance": "ကျန်ရှိလက်ကျန်",
+      "totalAssets": "စုစုပေါင်းပိုင်ဆိုင်မှု",
+      "totalLiabilities": "စုစုပေါင်းတာဝန်",
+      "netWorth": "အသားတင်တန်ဖိုး",
+      "retirement": "အငြိမ်းစား"
+    },
+    "scenario": {
+      "compare": "အခြေအနေများ နှိုင်းယှဉ်ရန် ({count} သိမ်းဆည်းထားသည်)",
+      "selectUpTo": "နှိုင်းယှဉ်ရန် အခြေအနေ 3 ခုအထိ ရွေးချယ်ပါ:",
+      "duplicate": "ပွားယူ",
+      "delete": "ဖျက်ရန်",
+      "sideBySide": "ယှဉ်တွဲနှိုင်းယှဉ်ခြင်း",
+      "field": "အကွက်",
+      "delta": "ကွာခြားချက်",
+      "selectOneMore": "နှိုင်းယှဉ်ရန် အခြေအနေ တစ်ခု ထပ်ရွေးပါ",
+      "copySuffix": "(delaysdelays)"
+    },
+    "openCalculator": "ဂဏန်းတွက်စက် ဖွင့်ရန်"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "ဖျက်မည်",
     "edit": "ပြင်မည်",
     "loading": "လွှတ်တင်နေသည်...",
-    "save": "သိမ်းမည်"
+    "save": "သိမ်းမည်",
+    "success": "အောင်မြင်!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "အတည်ပြုမည်",
     "finalConfirmation": "နောက်ဆုံး အတည်ပြုချက်:",
     "processing": "လုပ်ဆောင်နေသည်...",
-    "typeToConfirm": "ဤလုပ်ဆောင်မှုကို အတည်ပြုရန် {text} ရိုက်ထည့်ပါ။"
+    "typeToConfirm": "ဤလုပ်ဆောင်မှုကို အတည်ပြုရန် {text} ရိုက်ထည့်ပါ။",
+    "confirmAction": "လုပ်ဆောင်ချက်ကို အတည်ပြုပါ"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "အမှတ်မှတ်တမ်း",
+      "monthsOfData": "ဒေတာ {count} {count, plural, =1 {လ} other {လ}}",
+      "emptyTitle": "ဒေတာစုဆောင်းရင်း သင့်အမှတ်မှတ်တမ်းကို ဤနေရာတွင် ပြသပါမည်",
+      "emptySubtitle": "လာမည့်လတွင် ပြန်ကြည့်ပါ!",
+      "legendScore": "အမှတ်",
+      "legendTrend": "လမ်းကြောင်း",
+      "tooltipScore": "အမှတ်",
+      "tooltipTrend": "လမ်းကြောင်း",
+      "loadingChart": "ဇယားဖွင့်နေသည်..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "သင့်ဘတ်ဂျက်သည် သင့်စက်ပေါ်တွင်ရှိသည်",
+      "heroSubtitle": "အကိုင်းဆုံး ကိုယ်ရေးကိုယ်တာဘတ်ဂျက်အက်ပ်မှ ကြိုဆိုပါသည်။ အကောင့်မလို၊ ကလောက်မလို၊ အလျှော့မပေး။",
+      "features": {
+        "yourDataTitle": "သင့်ဒေတာ၊ သင့်စက်",
+        "yourDataDescription": "ဘဏ္ဍာရေးဒေတာအားလုံးကို သင့်စက်ပေါ်တွင် သိမ်းဆည်းထားပါသည်။ ကလောက်ဆာဗာမရှိ၊ ပြင်ပဝင်ရောက်ခွင့်မရှိ။",
+        "encryptionTitle": "ဘဏ်အဆင့် ကုဒ်ဝှက်စနစ်",
+        "encryptionDescription": "AES-256 ကုဒ်ဝှက်စနစ်ဖြင့် သင့်ဒေတာကို ကာကွယ်ပါသည်။ သော့ကို သင်တစ်ဦးတည်းသာ ပိုင်ဆိုင်သည်—၎င်းသည် သင့်စက်မှ ဘယ်တော့မှ ထွက်မသွားပါ။",
+        "offlineTitle": "အော့ဖ်လိုင်းအလုပ်လုပ်သည်",
+        "offlineDescription": "အင်တာနက်မပါဘဲ အပြည့်အဝ အသုံးပြုနိုင်ပါသည်။ ကိုယ်ရေးကိုယ်တာကို ဂရုစိုက်သူများအတွက် သင့်တော်ပါသည်။",
+        "zeroTrackingTitle": "ခြေရာခံမှုလုံးဝမရှိ",
+        "zeroTrackingDescription": "ခွဲခြမ်းစိတ်ဖြာမှုမရှိ၊ အဝေးထိန်းစောင့်ကြည့်မှုမရှိ၊ ဒေတာစုဆောင်းမှုမရှိ။ သင့်ဘဏ္ဍာရေးကိစ္စသည် မည်သူ့ကိုမှ မသက်ဆိုင်ပါ။"
+      },
+      "whatsNext": "ဘာဆက်လုပ်မလဲ?",
+      "whatsNextIntro": "လာမည့်မိနစ်အနည်းငယ်အတွင်း ကူညီပေးပါမည်:",
+      "step1": "ရှိပြီးငွေလွှဲမှုများ တင်သွင်းပါ (ဘဏ် CSV, OFX သို့မဟုတ် ကိုယ်တိုင်ထည့်ပါ)",
+      "step2": "သင့်ကုန်ကျစရိတ်များကို အလိုအလျောက် အမျိုးအစားခွဲပါ",
+      "step3": "အမှန်တကယ် သုံးစွဲမှုအပေါ်အခြေခံ၍ ပထမဦးဆုံးဘတ်ဂျက်ကို ဖန်တီးပါ",
+      "step4": "ငွေပေးချေမှုမလွတ်စေရန် ဘီလ်သတိပေးချက်များ သတ်မှတ်ပါ",
+      "getStarted": "စတင်လိုက်ကြစို့"
+    },
+    "categoryMapping": {
+      "needsCategories": "ငွေလွှဲမှု {count} ခု အမျိုးအစားသတ်မှတ်ရန် လိုသည်",
+      "allCategorized": "ငွေလွှဲမှုအားလုံး အမျိုးအစားခွဲပြီးပါပြီ!",
+      "applySmartSuggestions": "စမတ်အကြံပြုချက်များ အသုံးပြုပါ",
+      "categorize": "အမျိုးအစားခွဲမည်",
+      "percentMatch": "{percent}% ကိုက်ညီ",
+      "rememberChoices": "ကျွန်ုပ်၏ အမျိုးအစားရွေးချယ်မှုများကို မှတ်ထားပါ",
+      "rememberChoicesDescription": "အနာဂတ်တွင် ဆင်တူသော ငွေလွှဲမှုများကို အလိုအလျောက် အမျိုးအစားခွဲပါ",
+      "categorized": "{count} ခု အမျိုးအစားခွဲပြီး",
+      "remaining": "{count} ခု ကျန်ရှိ",
+      "continue": "ဆက်သွားမည်",
+      "continueAnyway": "ဆက်သွားမည်",
+      "categories": {
+        "foodDining": "အစားအသောက်",
+        "transportation": "သယ်ယူပို့ဆောင်ရေး",
+        "billsUtilities": "ဘီလ်နှင့် အသုံးအဆောင်",
+        "shopping": "စျေးဝယ်",
+        "entertainment": "ဖျော်ဖြေရေး",
+        "healthFitness": "ကျန်းမာရေးနှင့် ကိုယ်ကာယလေ့ကျင့်ခန်း",
+        "personalCare": "ကိုယ်ပိုင်ပြုစုစောင့်ရှောက်မှု",
+        "income": "ဝင်ငွေ",
+        "transfers": "ငွေလွှဲခြင်း"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "ပရိုဖိုင်ကို ဖျက်၍မရပါ",
+    "deleteTitle": "ပရိုဖိုင်ကို ဖျက်မလား?",
+    "defaultProfile": "မူလပရိုဖိုင်",
+    "cannotDeleteOnly": "ဤပရိုဖိုင်သည် တစ်ခုတည်းသော ပရိုဖိုင်ဖြစ်ပါသည်။ ၎င်းကို ဖျက်၍မရပါ။",
+    "permanentWarning": "ဤပရိုဖိုင်ကို အပြီးတိုင်ဖျက်ပါမည်။ ဤပရိုဖိုင်ပိုင်ဆိုင်သည့် ပုဂ္ဂလိက ဘတ်ဂျက်များကို ပရိုဖိုင်အားလုံးနှင့် မျှဝေပါမည်။",
+    "cannotUndo": "ဤလုပ်ဆောင်ချက်ကို ပြန်ပြင်၍မရပါ။",
+    "deleteButton": "ပရိုဖိုင်ဖျက်ရန်"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "ကြည့်မည်"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "သတိပေးချက်ပိတ်မည်",
+      "enableReminder": "သတိပေးချက်ဖွင့်မည်",
+      "off": "ပိတ်"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "တင်သွင်းခြင်း ပြီးပါပြီ!",
+    "subtitle": "{accountName} အတွက် အကောင့်လက်ကျန်ကို သတ်မှတ်ပါ",
+    "transactionsImported": "ငွေလွှဲမှု {count} ခု တင်သွင်းပြီးပါပြီ",
+    "netChange": "ငွေလွှဲမှုများမှ အသားတင်ပြောင်းလဲမှု:",
+    "currentBalanceLabel": "သင့်လက်ရှိ ဘဏ်လက်ကျန်မည်မျှရှိပါသလဲ?",
+    "currentBalanceLabelCredit": "သင့်လက်ရှိ အကြွေးပမာဏ မည်မျှရှိပါသလဲ?",
+    "balanceHelperBank": "သင့်ဘဏ်အက်ပ်ကိုဖွင့်ပြီး ဤအကောင့်အတွက် ပြသထားသော လက်ကျန်ကို ထည့်သွင်းပါ",
+    "balanceHelperCredit": "သင့်ခရက်ဒစ်ကတ် ထုတ်ပြန်ချက်တွင် ပြသထားသော လက်ရှိလက်ကျန်ကို ထည့်ပါ (အပေါင်းကိန်းဖြင့်)",
+    "startingBalance": "သင့်စတင်လက်ကျန်:",
+    "startingBalanceCredit": "သင့်စတင်အကြွေးပမာဏ:",
+    "balanceMatchNote": "ဤအရာသည် သင့်အကောင့်လက်ကျန်ကို သင့်ဘဏ်နှင့် ကိုက်ညီစေပါမည်။",
+    "negativeWarning": "ဤရလဒ်သည် အနှုတ်စတင်လက်ကျန်ဖြစ်ပြီး ငွေစုစာရင်း/လက်ရှိစာရင်းများအတွက် ပုံမှန်မဟုတ်ပါ။ သင့်လက်ရှိလက်ကျန်ကို ပြန်စစ်ဆေးပါ။",
+    "skipForNow": "ယခုကျော်လိုက်ပါ",
+    "setBalance": "လက်ကျန်သတ်မှတ်မည်"
+  },
+  "recommendations": {
+    "title": "ထိပ်တန်းအကြံပြုချက်များ",
+    "subtitle": "သင့်ဘဏ္ဍာရေးကျန်းမာမှုကို တိုးတက်စေမည့်နည်းလမ်းများ",
+    "emptyState": "ကိုယ်ပိုင်အကြံပြုချက်များ ရရှိရန် ဘဏ္ဍာရေးအချက်အလက်များ ပိုမိုထည့်သွင်းပါ",
+    "viewAllFactors": "အချက်အားလုံးကိုကြည့်ပါ",
+    "factorLabels": {
+      "savingsRate": "စုဆောင်းငွေ",
+      "debtToIncome": "အကြွေး",
+      "budgetAdherence": "ဘတ်ဂျက်",
+      "emergencyFund": "အရေးပေါ်ရန်ပုံငွေ",
+      "investmentGrowth": "ရင်းနှီးမြှုပ်နှံမှု",
+      "expenseStability": "ကုန်ကျစရိတ်"
+    },
+    "factorLinks": {
+      "savingsRate": "ဝင်ငွေကြည့်ပါ",
+      "debtToIncome": "ချေးငွေများစီမံပါ",
+      "budgetAdherence": "ဘတ်ဂျက်ချိန်ညှိပါ",
+      "emergencyFund": "စုဆောင်းမှုအစီအစဉ်ချပါ",
+      "investmentGrowth": "ရင်းနှီးမြှုပ်နှံမှုကြည့်ပါ",
+      "expenseStability": "အစီရင်ခံစာကြည့်ပါ"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "ကုန်သည်:",
+    "amount": "ပမာဏ:",
+    "average": "ပျမ်းမျှ: {amount}",
+    "category": "အမျိုးအစား:",
+    "wasExpected": "ဤအရာကို မျှော်လင့်ထားပါသလား?",
+    "expected": "မျှော်လင့်ထားသည်",
+    "unexpected": "မမျှော်လင့်ထား",
+    "markedExpected": "မျှော်လင့်ထားသည်ဟု အမှတ်အသားပြုထားပါပြီ",
+    "markedUnexpected": "မမျှော်လင့်ထားဟု အမှတ်အသားပြုထားပါပြီ",
+    "moreAnomalies": "+{count} {count, plural, =1 {ပုံမှန်မဟုတ်မှု} other {ပုံမှန်မဟုတ်မှု}} နောက်ထပ်",
+    "severity": {
+      "high": "delaysdelays",
+      "medium": "delaysdelays",
+      "low": "delaysdelays"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR လုပ်ဆောင်နေသည်",
+    "cancel": "ပယ်ဖျက်",
+    "pageProgress": "စာမျက်နှာ {current} / {total}",
+    "elapsed": "ကုန်ဆုံးချိန်: {time}",
+    "remaining": "~{time} ကျန်ရှိသည်",
+    "stages": {
+      "loading": "PDF ဖွင့်နေသည်",
+      "rendering": "စာမျက်နှာများ ရေးဆွဲနေသည်",
+      "preprocessing": "ပုံကို မြှင့်တင်နေသည်",
+      "ocr": "စာသားထုတ်ယူနေသည်",
+      "parsing": "ငွေလွှဲမှုများ ခွဲခြမ်းနေသည်",
+      "complete": "ပြီးဆုံးပါပြီ",
+      "error": "အမှားအယွင်း",
+      "cancelled": "ပယ်ဖျက်ပြီး",
+      "enhance": "မြှင့်တင်"
+    },
+    "errorRetry": "OCR လုပ်ဆောင်မှု မအောင်မြင်ပါ။ ထပ်ကြိုးစားလိုပါသလား?",
+    "cancelledRetry": "OCR ကို ပယ်ဖျက်ထားပါသည်။ ပြန်စလိုပါသလား?",
+    "retryButton": "OCR ထပ်ကြိုးစားမည်",
+    "completedSuccess": "OCR အောင်မြင်စွာ ပြီးဆုံးပါပြီ!",
+    "loadingChart": "ဇယားဖွင့်နေသည်..."
+  },
+  "developerTools": {
+    "title": "ပရိုဂရမ်မာတူသမှန်းကရိယာများ",
+    "subtitle": "နိုင်ငံတကာရန်လုပ်နှန်း QA ကရိယာများ (developer မုဒ်သာ)",
+    "pseudoLocaleLabel": "Pseudo-Locale ကို ဖွင့်ရန် (en-XA)",
+    "pseudoLocaleHelp": "ဘာသာပြန်ထားသည့်စာသားတိုင်းကို သက်ကန်ပါသည့်စာလုံးများဖြင့်အစားထိးသည်။ ကျန်သည့်အင်္ဂလိပ်စာသားများမှာ <strong>ကုဒ်ထဲလျက်ထားသည်</strong> ဖြစ်သည့်အတွက် ဘာသာပြန်သည့်သော့ချက်များအဖြစ်ပြောင်းရန်လိုအပ်သည်။",
+    "pseudoLocaleExample": "ဥပမာ: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "\"[Ðášhƀóářð~~~]\" အစား \"Dashboard\" ကိုမြင်ရပါက ကုဒ်ထဲလျက်ထားခြင်းဖြစ်သည်!",
+    "infoPseudoLocale": "Pseudo-locale သည် ဖွံ့ှတ်သည်အချိန်တွင် မဘာသာပြန်ရသေးသည့်စာသားများကိုရှာဖွေအုပ်သည်",
+    "infoProduction": "Production build များသည် en-XA locale ကို အလိုအလျောက်ချန်လှတ်သည်",
+    "infoSwitchBack": "ပုံမှန်ဖွံ့ှတ်မှုကိုဆက်လက်ရန် တကယ် locale သို့ပြန်လှဲပါ"
+  },
+  "pageMetadata": {
+    "appName": "ဘတ်ဂျက်အပ်",
+    "scenarios": "ဘာ-ဆိုလျှင် အခြအအနေများ",
+    "merchantRules": "ကုန်သည်သူစည်းများ",
+    "more": "ပိုမို",
+    "netWorth": "အသားတန်ဖိုး",
+    "properties": "အိမ်ခြံအိုက်သည်းများ",
+    "propertyDetail": "အိမ်ခြံအိုက်သည်းအသေးစိတ်",
+    "review": "ငွေကြေးတိုင်း ပြန်သုံးသပ်ရန်",
+    "events": "ပွဲတော်ဘတ်ဂျက်များ",
+    "landing": "BudgetPro - သင့်ငွေကြေးများကို ကျွမ်းကျိုင်ပါ",
+    "dashboard": "ဒက်ရှ်ဘုတ်",
+    "transactions": "ငွေကြေးတိုင်းများ",
+    "import": "တင်သွင်းရန်",
+    "accounts": "အကောင့်များ",
+    "budgets": "ဘတ်ဂျက်များ",
+    "categories": "အမျိုးအစားများ",
+    "reports": "အစီရင်ခံများ",
+    "settings": "ဆက်တင်မှုများ",
+    "subscriptions": "စာရင်းသွင်းရမှုများ",
+    "investments": "ရင်းနှီးမြှုပ်နှံမှုများ",
+    "debtPayoff": "အကြွေဆပ်ရန်",
+    "loans": "ချေးငွေများ",
+    "calculators": "ဂဏန်းစက်များ",
+    "planning": "စီမံကိန်းရန်",
+    "ocr": "ပြေစာစကန်နာ",
+    "export": "ထုတ်ယူရန်",
+    "fridayReview": "အပတ်စဥ်သုံးသပ်ချက်",
+    "onboarding": "delaysdelays",
+    "offline": "delaysdelays delaysdelays",
+    "splits": "delaysdelays delaysdelays"
   }
 }

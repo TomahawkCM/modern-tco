@@ -26,10 +26,16 @@ const SavingsGrowthChart = lazy(() =>
       data,
       locale,
       currency,
+      monthFormatter,
+      contributionsLabel,
+      interestLabel,
     }: {
       data: { month: number; contributions: number; interest: number }[];
       locale: SupportedLocale;
       currency: string;
+      monthFormatter: (label: number) => string;
+      contributionsLabel: string;
+      interestLabel: string;
     }) => {
       const { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
         mod;
@@ -66,7 +72,7 @@ const SavingsGrowthChart = lazy(() =>
                 formatCurrency(value, currency, locale),
                 name,
               ]}
-              labelFormatter={(label: number) => `Month ${label}`}
+              labelFormatter={(label: number) => monthFormatter(label)}
             />
             <Legend />
             <Area
@@ -75,7 +81,7 @@ const SavingsGrowthChart = lazy(() =>
               stackId="1"
               stroke="#3b82f6"
               fill="url(#savContrib)"
-              name="Contributions"
+              name={contributionsLabel}
             />
             <Area
               type="monotone"
@@ -83,7 +89,7 @@ const SavingsGrowthChart = lazy(() =>
               stackId="1"
               stroke="#10b981"
               fill="url(#savInterest)"
-              name="Interest"
+              name={interestLabel}
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -379,6 +385,9 @@ export default function SavingsGoalCalculatorPage() {
               }))}
               locale={locale}
               currency={currency}
+              monthFormatter={(label: number) => t("chart.month", { n: label })}
+              contributionsLabel={t("chart.contributions")}
+              interestLabel={t("chart.interest")}
             />
           </Suspense>
         </div>

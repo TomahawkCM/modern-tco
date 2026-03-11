@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Späť na hlavnú stránku"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Rok {n}",
+      "yearLabel": "Rok",
+      "month": "Mesiac {n}",
+      "monthYear": "Mesiac {n} (Rok {y})",
+      "age": "Vek {n}",
+      "ageLabel": "Vek",
+      "contributions": "Vklady",
+      "interestEarned": "Získané úroky",
+      "interest": "Úroky",
+      "totalInterest": "Celkové úroky",
+      "snowball": "Snehová guľa",
+      "avalanche": "Lavína",
+      "portfolio": "Portfólio",
+      "fireTarget": "Cieľ FIRE",
+      "median50th": "Medián (50.)",
+      "remainingBalance": "Zostávajúci zostatok",
+      "totalAssets": "Celkové aktíva",
+      "totalLiabilities": "Celkové záväzky",
+      "netWorth": "Čisté imanie",
+      "retirement": "Dôchodok"
+    },
+    "scenario": {
+      "compare": "Porovnať scenáre ({count} uložených)",
+      "selectUpTo": "Vyberte až 3 scenáre na porovnanie:",
+      "duplicate": "Duplikovať",
+      "delete": "Odstrániť",
+      "sideBySide": "Porovnanie vedľa seba",
+      "field": "Pole",
+      "delta": "Rozdiel",
+      "selectOneMore": "Vyberte ešte jeden scenár na porovnanie",
+      "copySuffix": "(kópia)"
+    },
+    "openCalculator": "Otvoriť kalkulačku"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Odstrániť",
     "edit": "Upraviť",
     "loading": "Načítava sa...",
-    "save": "Uložiť"
+    "save": "Uložiť",
+    "success": "Úspech!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Potvrdiť",
     "finalConfirmation": "Konečné potvrdenie:",
     "processing": "Spracováva sa...",
-    "typeToConfirm": "Napíšte {text} na potvrdenie tejto akcie."
+    "typeToConfirm": "Napíšte {text} na potvrdenie tejto akcie.",
+    "confirmAction": "Potvrdiť akciu"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "História skóre",
+      "monthsOfData": "{count} {count, plural, =1 {mesiac} other {mesiacov}} údajov",
+      "emptyTitle": "História skóre sa tu zobrazí s pribúdajúcimi údajmi",
+      "emptySubtitle": "Skontrolujte budúci mesiac!",
+      "legendScore": "Skóre",
+      "legendTrend": "Trend",
+      "tooltipScore": "Skóre",
+      "tooltipTrend": "Trend",
+      "loadingChart": "Načítanie grafu..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Váš rozpočet žije na VAŠOM zariadení",
+      "heroSubtitle": "Vitajte v najsúkromnejšej rozpočtovej aplikácii. Bez účtov, bez cloudu, bez kompromisov.",
+      "features": {
+        "yourDataTitle": "Vaše údaje, vaše zariadenie",
+        "yourDataDescription": "Všetky finančné údaje sú uložené lokálne na vašom zariadení. Žiadne cloudové servery, žiadny prístup tretích strán.",
+        "encryptionTitle": "Šifrovanie bankovej úrovne",
+        "encryptionDescription": "Šifrovanie AES-256 chráni vaše údaje. Kľúč máte iba vy — nikdy neopustí vaše zariadenie.",
+        "offlineTitle": "Funguje offline",
+        "offlineDescription": "Plná funkčnosť bez internetu. Ideálne pre používateľov dbajúcich na súkromie.",
+        "zeroTrackingTitle": "Žiadne sledovanie",
+        "zeroTrackingDescription": "Žiadna analytika, žiadna telemetria, žiadny zber údajov. Vaše financie sa nikoho netýkajú."
+      },
+      "whatsNext": "Čo bude ďalej?",
+      "whatsNextIntro": "V nasledujúcich minútach vám pomôžeme:",
+      "step1": "Importovať existujúce transakcie (CSV, OFX alebo manuálne)",
+      "step2": "Automaticky kategorizovať vaše výdavky",
+      "step3": "Vytvoriť prvý rozpočet na základe skutočných výdavkov",
+      "step4": "Nastaviť pripomienky platieb",
+      "getStarted": "Začíname"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} transakcií potrebuje kategórie",
+      "allCategorized": "Všetky transakcie sú kategorizované!",
+      "applySmartSuggestions": "Použiť inteligentné návrhy",
+      "categorize": "Kategorizovať",
+      "percentMatch": "{percent}% zhoda",
+      "rememberChoices": "Zapamätať si moje voľby kategórií",
+      "rememberChoicesDescription": "Automaticky kategorizovať podobné transakcie v budúcnosti",
+      "categorized": "{count} kategorizovaných",
+      "remaining": "{count} zostáva",
+      "continue": "Pokračovať",
+      "continueAnyway": "Pokračovať napriek tomu",
+      "categories": {
+        "foodDining": "Jedlo a stravovanie",
+        "transportation": "Doprava",
+        "billsUtilities": "Účty a služby",
+        "shopping": "Nakupovanie",
+        "entertainment": "Zábava",
+        "healthFitness": "Zdravie a fitness",
+        "personalCare": "Osobná starostlivosť",
+        "income": "Príjmy",
+        "transfers": "Prevody"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Nepodarilo sa odstrániť profil",
+    "deleteTitle": "Odstrániť profil?",
+    "defaultProfile": "Predvolený profil",
+    "cannotDeleteOnly": "Toto je jediný profil. Nemôžete ho odstrániť.",
+    "permanentWarning": "Toto natrvalo odstráni tento profil. Všetky súkromné rozpočty tohto profilu budú zdieľané so všetkými profilmi.",
+    "cannotUndo": "Túto akciu nemožno vrátiť späť.",
+    "deleteButton": "Odstrániť profil"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Zobraziť"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Vypnúť pripomienku",
+      "enableReminder": "Zapnúť pripomienku",
+      "off": "Vyp."
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Import dokončený!",
+    "subtitle": "Nastavte zostatok účtu {accountName}",
+    "transactionsImported": "{count} transakcií importovaných",
+    "netChange": "Čistá zmena z transakcií:",
+    "currentBalanceLabel": "Aký je váš aktuálny zostatok na účte?",
+    "currentBalanceLabelCredit": "Aká je vaša aktuálna dlžná suma?",
+    "balanceHelperBank": "Otvorte svoju bankovú aplikáciu a zadajte zobrazený zostatok tohto účtu",
+    "balanceHelperCredit": "Zadajte aktuálny zostatok uvedený na výpise z kreditnej karty (ako kladné číslo)",
+    "startingBalance": "Váš počiatočný zostatok:",
+    "startingBalanceCredit": "Vaša počiatočná dlžná suma:",
+    "balanceMatchNote": "Tým sa zostatok vášho účtu zrovná s bankou.",
+    "negativeWarning": "Výsledkom je záporný počiatočný zostatok, čo je pri bežných/sporiacich účtoch neobvyklé. Skontrolujte prosím, či je váš aktuálny zostatok správny.",
+    "skipForNow": "Preskočiť",
+    "setBalance": "Nastaviť zostatok"
+  },
+  "recommendations": {
+    "title": "Hlavné odporúčania",
+    "subtitle": "Spôsoby, ako zlepšiť vaše finančné zdravie",
+    "emptyState": "Pridajte viac finančných údajov pre personalizované odporúčania",
+    "viewAllFactors": "Zobraziť všetky faktory",
+    "factorLabels": {
+      "savingsRate": "Úspory",
+      "debtToIncome": "Dlhy",
+      "budgetAdherence": "Rozpočet",
+      "emergencyFund": "Núdzový fond",
+      "investmentGrowth": "Investície",
+      "expenseStability": "Výdavky"
+    },
+    "factorLinks": {
+      "savingsRate": "Zobraziť príjmy",
+      "debtToIncome": "Spravovať pôžičky",
+      "budgetAdherence": "Upraviť rozpočty",
+      "emergencyFund": "Plánovať úspory",
+      "investmentGrowth": "Zobraziť portfólio",
+      "expenseStability": "Zobraziť prehľady"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Obchodník:",
+    "amount": "Suma:",
+    "average": "Priemer: {amount}",
+    "category": "Kategória:",
+    "wasExpected": "Bolo to očakávané?",
+    "expected": "Očakávané",
+    "unexpected": "Neočakávané",
+    "markedExpected": "Označené ako očakávané",
+    "markedUnexpected": "Označené ako neočakávané",
+    "moreAnomalies": "+{count} {count, plural, =1 {anomália} other {anomálií}} navyše",
+    "severity": {
+      "high": "VYSOKÁ",
+      "medium": "STREDNÁ",
+      "low": "NÍZKA"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Spracovanie OCR",
+    "cancel": "Zrušiť",
+    "pageProgress": "Strana {current} z {total}",
+    "elapsed": "Uplynulo: {time}",
+    "remaining": "~{time} zostáva",
+    "stages": {
+      "loading": "Načítanie PDF",
+      "rendering": "Vykresľovanie strán",
+      "preprocessing": "Vylepšovanie obrazu",
+      "ocr": "Extrakcia textu",
+      "parsing": "Analýza transakcií",
+      "complete": "Dokončené",
+      "error": "Chyba",
+      "cancelled": "Zrušené",
+      "enhance": "Vylepšiť"
+    },
+    "errorRetry": "Spracovanie OCR zlyhalo. Chcete to skúsiť znova?",
+    "cancelledRetry": "OCR bolo zrušené. Chcete reštartovať?",
+    "retryButton": "Opakovať OCR",
+    "completedSuccess": "OCR úspešne dokončené!",
+    "loadingChart": "Načítanie grafu..."
+  },
+  "developerTools": {
+    "title": "Vývojárske nástroje",
+    "subtitle": "QA nástroje na testovanie internacionalizácie (iba režim pre vývojárov)",
+    "pseudoLocaleLabel": "Povoliť pseudo-lokalizáciu (en-XA)",
+    "pseudoLocaleHelp": "Nahradí všetok preložený text akcentovanými znakmi. Akýkoľvek zostávajúci obyčajný anglický text je <strong>pevne zakódovaný</strong> a je potrebné ho previesť na prekladové kľúče.",
+    "pseudoLocaleExample": "Príklad: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Ak vidíte \"Dashboard\" namiesto \"[Ðášhƀóářð~~~]\", je to pevne zakódované!",
+    "infoPseudoLocale": "Pseudo-lokalizácia pomáha identifikovať nepreložené reťazce počas vývoja",
+    "infoProduction": "Produkčné zostavenia automaticky vylučujú lokalizáciu en-XA",
+    "infoSwitchBack": "Prepnite späť na skutočnú lokalizáciu pre pokračovanie v normálnom vývoji"
+  },
+  "pageMetadata": {
+    "appName": "Rozpočtová aplikácia",
+    "scenarios": "Scenáre čo-ak",
+    "merchantRules": "Pravidlá obchodníkov",
+    "more": "Viac",
+    "netWorth": "Čisté imanie",
+    "properties": "Nehnuteľnosti",
+    "propertyDetail": "Podrobnosti nehnuteľnosti",
+    "review": "Kontrola transakcií",
+    "events": "Rozpočty udalostí",
+    "landing": "BudgetPro - Ovládnite svoje financie",
+    "dashboard": "Prehľad",
+    "transactions": "Transakcie",
+    "import": "Import",
+    "accounts": "Účty",
+    "budgets": "Rozpočty",
+    "categories": "Kategórie",
+    "reports": "Správy",
+    "settings": "Nastavenia",
+    "subscriptions": "Predplatné",
+    "investments": "Investície",
+    "debtPayoff": "Splácanie dlhov",
+    "loans": "Pôžičky",
+    "calculators": "Kalkulačky",
+    "planning": "Plánovanie",
+    "ocr": "Skener účteniek",
+    "export": "Export",
+    "fridayReview": "Týždenný prehľad",
+    "onboarding": "Začíname",
+    "offline": "Offline režim",
+    "splits": "Rozdeliť transakcie"
   }
 }

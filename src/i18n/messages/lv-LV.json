@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Atpakaļ uz sākumu"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Gads {n}",
+      "yearLabel": "Gads",
+      "month": "Mēnesis {n}",
+      "monthYear": "Mēnesis {n} (gads {y})",
+      "age": "Vecums {n}",
+      "ageLabel": "Vecums",
+      "contributions": "Iemaksas",
+      "interestEarned": "Nopelnītie procenti",
+      "interest": "Procenti",
+      "totalInterest": "Procenti kopā",
+      "snowball": "Sniega bumba",
+      "avalanche": "Lavīna",
+      "portfolio": "Portfelis",
+      "fireTarget": "FIRE mērķis",
+      "median50th": "Mediāna (50.)",
+      "remainingBalance": "Atlikušais atlikums",
+      "totalAssets": "Aktīvi kopā",
+      "totalLiabilities": "Saistības kopā",
+      "netWorth": "Neto vērtība",
+      "retirement": "Pensija"
+    },
+    "scenario": {
+      "compare": "Salīdzināt scenārijus ({count} saglabāti)",
+      "selectUpTo": "Izvēlieties līdz 3 scenārijiem salīdzināšanai:",
+      "duplicate": "Dublēt",
+      "delete": "Dzēst",
+      "sideBySide": "Salīdzinājums blakus",
+      "field": "Lauks",
+      "delta": "Starpība",
+      "selectOneMore": "Izvēlieties vēl vienu scenāriju salīdzināšanai",
+      "copySuffix": "(kopija)"
+    },
+    "openCalculator": "Atvērt kalkulatoru"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Dzēst",
     "edit": "Rediģēt",
     "loading": "Ielādē...",
-    "save": "Saglabāt"
+    "save": "Saglabāt",
+    "success": "Veiksme!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Apstiprināt",
     "finalConfirmation": "Galīgā apstiprināšana:",
     "processing": "Apstrādā...",
-    "typeToConfirm": "Ierakstiet {text}, lai apstiprinātu šo darbību."
+    "typeToConfirm": "Ierakstiet {text}, lai apstiprinātu šo darbību.",
+    "confirmAction": "Apstiprināt darbību"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Rezultātu vēsture",
+      "monthsOfData": "{count} {count, plural, =1 {mēnesis} other {mēneši}} datu",
+      "emptyTitle": "Jūsu rezultātu vēsture parādīsies šeit, kad uzkrāsies dati",
+      "emptySubtitle": "Pārbaudiet nākammēnes!",
+      "legendScore": "Rezultāts",
+      "legendTrend": "Tendence",
+      "tooltipScore": "Rezultāts",
+      "tooltipTrend": "Tendence",
+      "loadingChart": "Diagrammas ielāde..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Jūsu budžets dzīvo JŪSU ierīcē",
+      "heroSubtitle": "Laipni lūdzam privātākajā budžeta lietotnē. Bez kontiem, bez mākoņa, bez kompromisiem.",
+      "features": {
+        "yourDataTitle": "Jūsu dati, jūsu ierīce",
+        "yourDataDescription": "Visi finanšu dati tiek glabāti lokāli jūsu ierīcē. Bez mākoņserveriem, bez trešo pušu piekļuves.",
+        "encryptionTitle": "Bankas līmeņa šifrēšana",
+        "encryptionDescription": "AES-256 šifrēšana aizsargā jūsu datus. Tikai jums ir atslēga — tā nekad neatstāj jūsu ierīci.",
+        "offlineTitle": "Darbojas bezsaistē",
+        "offlineDescription": "Pilna funkcionalitāte bez interneta. Ideāli privātumu vērtējošiem lietotājiem.",
+        "zeroTrackingTitle": "Nulle izsekošana",
+        "zeroTrackingDescription": "Bez analītikas, bez telemetrijas, bez datu vākšanas. Jūsu finanses nav neviena cita darīšana."
+      },
+      "whatsNext": "Kas tālāk?",
+      "whatsNextIntro": "Nākamo minūšu laikā mēs jums palīdzēsim:",
+      "step1": "Importēt esošos darījumus (bankas CSV, OFX vai manuāli)",
+      "step2": "Automātiski kategorizēt izdevumus",
+      "step3": "Izveidot pirmo budžetu, pamatojoties uz faktiskajiem izdevumiem",
+      "step4": "Iestatīt rēķinu atgādinājumus, lai nekad nepalaistu garām maksājumu",
+      "getStarted": "Sāksim"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} darījumiem nepieciešamas kategorijas",
+      "allCategorized": "Visi darījumi ir kategorizēti!",
+      "applySmartSuggestions": "Piemērot viedos ieteikumus",
+      "categorize": "Kategorizēt",
+      "percentMatch": "{percent}% atbilstība",
+      "rememberChoices": "Atcerēties manas kategoriju izvēles",
+      "rememberChoicesDescription": "Automātiski kategorizēt līdzīgus darījumus nākotnē",
+      "categorized": "{count} kategorizēti",
+      "remaining": "{count} atlikuši",
+      "continue": "Turpināt",
+      "continueAnyway": "Turpināt jebkurā gadījumā",
+      "categories": {
+        "foodDining": "Ēdiens un ēdināšana",
+        "transportation": "Transports",
+        "billsUtilities": "Rēķini un komunālie",
+        "shopping": "Iepirkšanās",
+        "entertainment": "Izklaide",
+        "healthFitness": "Veselība un fitness",
+        "personalCare": "Personīgā kopšana",
+        "income": "Ienākumi",
+        "transfers": "Pārskaitījumi"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Neizdevās dzēst profilu",
+    "deleteTitle": "Dzēst profilu?",
+    "defaultProfile": "Noklusējuma profils",
+    "cannotDeleteOnly": "Šis ir vienīgais profils. Jūs nevarat to dzēst.",
+    "permanentWarning": "Tas neatgriezeniski dzēsīs šo profilu. Jebkuri šī profila privātie budžeti tiks kopīgoti ar visiem profiliem.",
+    "cannotUndo": "Šo darbību nevar atsaukt.",
+    "deleteButton": "Dzēst profilu"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Skatīt"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Izslēgt atgādinājumu",
+      "enableReminder": "Ieslēgt atgādinājumu",
+      "off": "Izslēgts"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Importēšana pabeigta!",
+    "subtitle": "Iestatiet konta atlikumu kontam {accountName}",
+    "transactionsImported": "{count} darījumi importēti",
+    "netChange": "Neto izmaiņas no darījumiem:",
+    "currentBalanceLabel": "Kāds ir jūsu pašreizējais bankas konta atlikums?",
+    "currentBalanceLabelCredit": "Kāda ir jūsu pašreizējā parāda summa?",
+    "balanceHelperBank": "Atveriet savu bankas lietotni un ievadiet šim kontam parādīto atlikumu",
+    "balanceHelperCredit": "Ievadiet kredītkartes izrakstā norādīto pašreizējo atlikumu (kā pozitīvu skaitli)",
+    "startingBalance": "Jūsu sākuma atlikums:",
+    "startingBalanceCredit": "Jūsu sākuma parāda summa:",
+    "balanceMatchNote": "Tas saskaņos jūsu konta atlikumu ar banku.",
+    "negativeWarning": "Rezultāts ir negatīvs sākuma atlikums, kas ir neparasts norēķinu/uzkrājumu kontiem. Lūdzu, pārbaudiet, vai pašreizējais atlikums ir pareizs.",
+    "skipForNow": "Pagaidām izlaist",
+    "setBalance": "Iestatīt atlikumu"
+  },
+  "recommendations": {
+    "title": "Galvenie ieteikumi",
+    "subtitle": "Veidi, kā uzlabot jūsu finansiālo veselību",
+    "emptyState": "Pievienojiet vairāk finanšu datu, lai saņemtu personalizētus ieteikumus",
+    "viewAllFactors": "Skatīt visus faktorus",
+    "factorLabels": {
+      "savingsRate": "Ietaupījumi",
+      "debtToIncome": "Parāds",
+      "budgetAdherence": "Budžets",
+      "emergencyFund": "Ārkārtas fonds",
+      "investmentGrowth": "Investīcijas",
+      "expenseStability": "Izdevumi"
+    },
+    "factorLinks": {
+      "savingsRate": "Skatīt ienākumus",
+      "debtToIncome": "Pārvaldīt aizdevumus",
+      "budgetAdherence": "Pielāgot budžetus",
+      "emergencyFund": "Plānot ietaupījumus",
+      "investmentGrowth": "Skatīt portfeli",
+      "expenseStability": "Skatīt pārskatus"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Tirgotājs:",
+    "amount": "Summa:",
+    "average": "Vidējais: {amount}",
+    "category": "Kategorija:",
+    "wasExpected": "Vai tas bija gaidīts?",
+    "expected": "Gaidīts",
+    "unexpected": "Negaidīts",
+    "markedExpected": "Atzīmēts kā gaidīts",
+    "markedUnexpected": "Atzīmēts kā negaidīts",
+    "moreAnomalies": "+{count} {count, plural, =1 {anomālija} other {anomālijas}} vēl",
+    "severity": {
+      "high": "AUGSTS",
+      "medium": "VIDĒJS",
+      "low": "ZEMS"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR apstrāde",
+    "cancel": "Atcelt",
+    "pageProgress": "Lapa {current} no {total}",
+    "elapsed": "Pagājis: {time}",
+    "remaining": "~{time} atlicis",
+    "stages": {
+      "loading": "PDF ielāde",
+      "rendering": "Lapu renderēšana",
+      "preprocessing": "Attēla uzlabošana",
+      "ocr": "Teksta izvilkšana",
+      "parsing": "Darījumu analīze",
+      "complete": "Pabeigts",
+      "error": "Kļūda",
+      "cancelled": "Atcelts",
+      "enhance": "Uzlabot"
+    },
+    "errorRetry": "OCR apstrāde neizdevās. Vai vēlaties mēģināt vēlreiz?",
+    "cancelledRetry": "OCR tika atcelts. Vai vēlaties sākt no jauna?",
+    "retryButton": "Mēģināt OCR vēlreiz",
+    "completedSuccess": "OCR veiksmīgi pabeigts!",
+    "loadingChart": "Diagrammas ielāde..."
+  },
+  "developerTools": {
+    "title": "Izstrādātāja rīki",
+    "subtitle": "QA rīki internacionalizācijas testēšanai (tikai izstrādes režīms)",
+    "pseudoLocaleLabel": "Iespējot pseidolokalizāciju (en-XA)",
+    "pseudoLocaleHelp": "Aizstāj visu tulkoto tekstu ar akcentētām rakstzīmēm. Jebkurš atlikušais vienkāršais angļu teksts ir <strong>cietā kodējumā</strong> un jāpārveido par tulkošanas atslēgām.",
+    "pseudoLocaleExample": "Piemērs: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Ja redzat \"Dashboard\" nevis \"[Ðášhƀóářð~~~]\", tas ir cietā kodējumā!",
+    "infoPseudoLocale": "Pseidolokalizācija palīdz identificēt neiztulkotas virknes izstrādes laikā",
+    "infoProduction": "Produkcijas būvējumi automātiski izslēdz en-XA lokalizāciju",
+    "infoSwitchBack": "Pārslēdzieties atpakaļ uz īstu lokalizāciju, lai turpinātu parasto izstrādi"
+  },
+  "pageMetadata": {
+    "appName": "Budžeta lietotne",
+    "scenarios": "\"Kas-ja\" scenāriji",
+    "merchantRules": "Tirgotāju noteikumi",
+    "more": "Vairāk",
+    "netWorth": "Neto vērtība",
+    "properties": "Īpašumi",
+    "propertyDetail": "Īpašuma informācija",
+    "review": "Darījumu pārskats",
+    "events": "Pasākumu budžeti",
+    "landing": "BudgetPro - Pārvaldiet savas finanses",
+    "dashboard": "Panelis",
+    "transactions": "Darījumi",
+    "import": "Imports",
+    "accounts": "Konti",
+    "budgets": "Budžeti",
+    "categories": "Kategorijas",
+    "reports": "Atskaites",
+    "settings": "Iestatījumi",
+    "subscriptions": "Abonementi",
+    "investments": "Ieguldījumi",
+    "debtPayoff": "Parādu atmaksa",
+    "loans": "Aizdevumi",
+    "calculators": "Kalkulatori",
+    "planning": "Plānošana",
+    "ocr": "Čeku skeneris",
+    "export": "Eksports",
+    "fridayReview": "Nedēļas pārskats",
+    "onboarding": "Sākums",
+    "offline": "Bezsaistes režīms",
+    "splits": "Sadalīt darījumus"
   }
 }

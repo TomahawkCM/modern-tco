@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Ana Səhifəyə Qayıt"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "İl {n}",
+      "yearLabel": "İl",
+      "month": "Ay {n}",
+      "monthYear": "Ay {n} (İl {y})",
+      "age": "Yaş {n}",
+      "ageLabel": "Yaş",
+      "contributions": "Töhfələr",
+      "interestEarned": "Qazanılan Faiz",
+      "interest": "Faiz",
+      "totalInterest": "Ümumi Faiz",
+      "snowball": "Qar topu",
+      "avalanche": "Uçqun",
+      "portfolio": "Portfel",
+      "fireTarget": "FIRE Hədəfi",
+      "median50th": "Median (50-ci)",
+      "remainingBalance": "Qalan Balans",
+      "totalAssets": "Ümumi Aktivlər",
+      "totalLiabilities": "Ümumi Öhdəliklər",
+      "netWorth": "Xalis Dəyər",
+      "retirement": "Təqaüd"
+    },
+    "scenario": {
+      "compare": "Ssenariləri müqayisə et ({count} saxlanılıb)",
+      "selectUpTo": "Müqayisə üçün 3-ə qədər ssenaridə seçin:",
+      "duplicate": "Dublikat",
+      "delete": "Sil",
+      "sideBySide": "Yan-yana müqayisə",
+      "field": "Sahə",
+      "delta": "Fərq",
+      "selectOneMore": "Müqayisə üçün daha bir ssenari seçin",
+      "copySuffix": "(kopiya)"
+    },
+    "openCalculator": "Kalkulyatoru aç"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Sil",
     "edit": "Redaktə et",
     "loading": "Yüklənir...",
-    "save": "Saxla"
+    "save": "Saxla",
+    "success": "Uğur!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Təsdiq et",
     "finalConfirmation": "Son Təsdiq:",
     "processing": "İşlənir...",
-    "typeToConfirm": "Bu əməliyyatı təsdiq etmək üçün {text} yazın."
+    "typeToConfirm": "Bu əməliyyatı təsdiq etmək üçün {text} yazın.",
+    "confirmAction": "Fəaliyyəti Təsdiq Et"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Xal Tarixçəsi",
+      "monthsOfData": "{count} {count, plural, =1 {ay} other {ay}} məlumat",
+      "emptyTitle": "Məlumat toplanarkən xal tarixçəniz burada görünəcək",
+      "emptySubtitle": "Gələn ay yenidən yoxlayın!",
+      "legendScore": "Xal",
+      "legendTrend": "Trend",
+      "tooltipScore": "Xal",
+      "tooltipTrend": "Trend",
+      "loadingChart": "Qrafik yüklənir..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Büdcəniz ÖZ Cihazınızda Yaşayır",
+      "heroSubtitle": "İndiyə qədər olan ən məxfi büdcə tətbiqinə xoş gəlmisiniz. Hesab yoxdur, bulud yoxdur, kompromis yoxdur.",
+      "features": {
+        "yourDataTitle": "Sizin Məlumatınız, Sizin Cihazınız",
+        "yourDataDescription": "Bütün maliyyə məlumatları cihazınızda yerli olaraq saxlanılır. Bulud serverləri yoxdur, üçüncü tərəf çıxışı yoxdur.",
+        "encryptionTitle": "Bank Səviyyəsində Şifrələmə",
+        "encryptionDescription": "AES-256 şifrələməsi məlumatlarınızı qoruyur. Yalnız sizdə açar var — o heç vaxt cihazınızı tərk etmir.",
+        "offlineTitle": "Oflayn işləyir",
+        "offlineDescription": "İnternet olmadan tam funksionallıq. Məxfiliyə önəm verən istifadəçilər üçün mükəmməldir.",
+        "zeroTrackingTitle": "Sıfır İzləmə",
+        "zeroTrackingDescription": "Heç bir analitika, telemetriya, məlumat toplanması yoxdur. Sizin maliyyəniz heç kimin işi deyil."
+      },
+      "whatsNext": "Növbəti nədir?",
+      "whatsNextIntro": "Növbəti bir neçə dəqiqə ərzində biz sizə kömək edəcəyik:",
+      "step1": "Mövcud əməliyyatlarınızı idxal edin (bank CSV, OFX və ya əl ilə)",
+      "step2": "Xərclərinizi avtomatik olaraq kateqoriyaya ayırın",
+      "step3": "Faktiki xərclərə əsaslanaraq ilk büdcənizi yaradın",
+      "step4": "Siz heç bir ödənişi qaçırmamaq üçün hesab bildirişlərini qurun",
+      "getStarted": "Başlayaq"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} əməliyyatın kateqoriyaya ehtiyacı var",
+      "allCategorized": "Bütün əməliyyatlar kateqoriyalaşdırıldı!",
+      "applySmartSuggestions": "Ağıllı Təklifləri Tətbiq Et",
+      "categorize": "Kateqoriyalaşdır",
+      "percentMatch": "{percent}% uyğunluq",
+      "rememberChoices": "Kateqoriya seçimlərimi xatırla",
+      "rememberChoicesDescription": "Gələcəkdə oxşar əməliyyatları avtomatik kateqoriyalaşdır",
+      "categorized": "{count} kateqoriyalaşdırıldı",
+      "remaining": "{count} qaldı",
+      "continue": "Davam et",
+      "continueAnyway": "Yenə də davam et",
+      "categories": {
+        "foodDining": "Qida və Yemək",
+        "transportation": "Nəqliyyat",
+        "billsUtilities": "Hesablar və Kommunal Xidmətlər",
+        "shopping": "Alış-veriş",
+        "entertainment": "Əyləncə",
+        "healthFitness": "Sağlamlıq və Fitnes",
+        "personalCare": "Şəxsi Qulluq",
+        "income": "Gəlir",
+        "transfers": "Köçürmələr"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Profili silmək mümkün olmadı",
+    "deleteTitle": "Profil silinsin?",
+    "defaultProfile": "Standart profil",
+    "cannotDeleteOnly": "Bu yeganə profildir. Onu silə bilməzsiniz.",
+    "permanentWarning": "Bu profil həmişəlik silinəcək. Bu profilə aid olan hər hansı şəxsi büdcələr bütün profillərlə paylaşılacaq.",
+    "cannotUndo": "Bu əməliyyat geri qaytarıla bilməz.",
+    "deleteButton": "Profili sil"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Bax"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Bildirişi söndür",
+      "enableReminder": "Bildirişi aktivləşdir",
+      "off": "Söndürülüb"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "İdxal Tamamlandı!",
+    "subtitle": "{accountName} üçün hesab balansınızı təyin edin",
+    "transactionsImported": "{count} əməliyyat idxal edildi",
+    "netChange": "Əməliyyatlardan xalis dəyişiklik:",
+    "currentBalanceLabel": "Cari bank balansınız nə qədərdir?",
+    "currentBalanceLabelCredit": "Cari borcunuz nə qədərdir?",
+    "balanceHelperBank": "Bank tətbiqinizi açın və bu hesab üçün göstərilən balansı daxil edin",
+    "balanceHelperCredit": "Kredit kartı çıxarışınızda göstərilən cari balansı (müsbət rəqəm kimi) daxil edin",
+    "startingBalance": "Başlanğıc balansınız:",
+    "startingBalanceCredit": "Başlanğıc borc məbləği:",
+    "balanceMatchNote": "Bu, hesab balansınızın bankınızla uyğunlaşmasını təmin edəcək.",
+    "negativeWarning": "Bu, yoxlama/qənaət üçün qeyri-adi olan mənfi başlanğıc balansı ilə nəticələnir. Zəhmət olmasa cari balansınızın düzgünlüyünü iki dəfə yoxlayın.",
+    "skipForNow": "Hələlik keç",
+    "setBalance": "Balansı Təyin Et"
+  },
+  "recommendations": {
+    "title": "Əsas Tövsiyələr",
+    "subtitle": "Maliyyə sağlamlığınızı yaxşılaşdırma yolları",
+    "emptyState": "Fərdiləşdirilmiş tövsiyələr almaq üçün daha çox maliyyə məlumatı əlavə edin",
+    "viewAllFactors": "Bütün amillərə bax",
+    "factorLabels": {
+      "savingsRate": "Qənaətlər",
+      "debtToIncome": "Borc",
+      "budgetAdherence": "Büdcə",
+      "emergencyFund": "Təcili Fond",
+      "investmentGrowth": "İnvestisiyalar",
+      "expenseStability": "Xərclər"
+    },
+    "factorLinks": {
+      "savingsRate": "Gəlirə bax",
+      "debtToIncome": "Kreditləri idarə et",
+      "budgetAdherence": "Büdcələri düzəlt",
+      "emergencyFund": "Qənaətləri planlaşdır",
+      "investmentGrowth": "Portfelə bax",
+      "expenseStability": "Hesabatlara bax"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Satıcı:",
+    "amount": "Məbləğ:",
+    "average": "Orta: {amount}",
+    "category": "Kateqoriya:",
+    "wasExpected": "Bu gözlənilən idi?",
+    "expected": "Gözlənilən",
+    "unexpected": "Gözlənilməz",
+    "markedExpected": "Gözlənilən kimi qeyd edildi",
+    "markedUnexpected": "Gözlənilməz kimi qeyd edildi",
+    "moreAnomalies": "+{count} əlavə {count, plural, =1 {anomaliya} other {anomaliyalar}}",
+    "severity": {
+      "high": "YÜKSƏK",
+      "medium": "ORTA",
+      "low": "AŞAĞI"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR Emalı",
+    "cancel": "Ləğv et",
+    "pageProgress": "Səhifə {current} / {total}",
+    "elapsed": "Keçən vaxt: {time}",
+    "remaining": "Təxminən {time} qaldı",
+    "stages": {
+      "loading": "PDF yüklənir",
+      "rendering": "Səhifələr göstərilir",
+      "preprocessing": "Təsviri təkmilləşdirir",
+      "ocr": "Mətn çıxarılır",
+      "parsing": "Əməliyyatlar təhlil edilir",
+      "complete": "Tamamlandı",
+      "error": "Xəta",
+      "cancelled": "Ləğv edildi",
+      "enhance": "Təkmilləşdir"
+    },
+    "errorRetry": "OCR emalı uğursuz oldu. Yenidən cəhd etmək istərdinizmi?",
+    "cancelledRetry": "OCR ləğv edildi. Yenidən başlamaq istərdinizmi?",
+    "retryButton": "OCR yenidən cəhd et",
+    "completedSuccess": "OCR uğurla tamamlandı!",
+    "loadingChart": "Qrafik yüklənir..."
+  },
+  "developerTools": {
+    "title": "Tərtəbatçı Alətləri",
+    "subtitle": "Beynəlxalqılaşdırma sınağı üçün QA alətləri (yalnız dev rejimi)",
+    "pseudoLocaleLabel": "Psevdo-lokalizasiyanı aktivləşdir (en-XA)",
+    "pseudoLocaleHelp": "Bütün tərcümə edilmiş mətni aksent işarələri ilə əvəz edir. Qalan adi ingilis mətni <strong>kodlaşdırılmış</strong>dır və tərcümə açarlarına çevrilməlidir.",
+    "pseudoLocaleExample": "Nümunə: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Əəgər \"[Ðášhƀóářð~~~]\" əvəzinə \"Dashboard\" görürsünüzsə, o kodlaşdırılmışdır!",
+    "infoPseudoLocale": "Psevdo-lokal tərtəbat zamanı tərcümə edilməmiş sətirləri müəyyən etməyə kömək edir",
+    "infoProduction": "Prodakşn quraşdırmaları avtomatik olaraq en-XA lokalını xəric edir",
+    "infoSwitchBack": "Normal tərtəbatı davam etdirmək üçün həqiqi lokala qayıdın"
+  },
+  "pageMetadata": {
+    "appName": "Büdcə Tətbiqi",
+    "scenarios": "Bəs-Əgər Ssennarilər",
+    "merchantRules": "Tacür Qaydaları",
+    "more": "Daha çox",
+    "netWorth": "Xəalis dəyər",
+    "properties": "Əmlak",
+    "propertyDetail": "Əmlak Tefərrüatı",
+    "review": "Əməliyyatların Nəzərdən Keçirilməsi",
+    "events": "Tədbir Büdcələri",
+    "landing": "BudgetPro – Maliyyənizi İdarə Edin",
+    "dashboard": "İdarə Panelı",
+    "transactions": "Əməliyyatlar",
+    "import": "İdxal",
+    "accounts": "Hesablar",
+    "budgets": "Büdcələr",
+    "categories": "Kateqoriyalar",
+    "reports": "Hesabatlar",
+    "settings": "Parametrlər",
+    "subscriptions": "Abunəliklər",
+    "investments": "İnvestisiyalar",
+    "debtPayoff": "Borc Ödəməsi",
+    "loans": "Kreditlər",
+    "calculators": "Kalkulyatorlar",
+    "planning": "Planlaşdırma",
+    "ocr": "Qəbz Skaneri",
+    "export": "İxrac",
+    "fridayReview": "Həftəlik Nəzərdən Keçirmə",
+    "onboarding": "Başlanğıc",
+    "offline": "Oflayn rejim",
+    "splits": "Bölünmüş əməliyyatlar"
   }
 }

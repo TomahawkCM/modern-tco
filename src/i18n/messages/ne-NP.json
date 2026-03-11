@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "गृहपृष्ठमा फर्कनुहोस्"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "वर्ष {n}",
+      "yearLabel": "वर्ष",
+      "month": "महिना {n}",
+      "monthYear": "महिना {n} (वर्ष {y})",
+      "age": "उमेर {n}",
+      "ageLabel": "उमेर",
+      "contributions": "योगदान",
+      "interestEarned": "कमाइएको ब्याज",
+      "interest": "ब्याज",
+      "totalInterest": "कुल ब्याज",
+      "snowball": "स्नोबल",
+      "avalanche": "एभ्यालान्च",
+      "portfolio": "पोर्टफोलियो",
+      "fireTarget": "FIRE लक्ष्य",
+      "median50th": "मध्यक (५०औं)",
+      "remainingBalance": "बाँकी ब्यालेन्स",
+      "totalAssets": "कुल सम्पत्ति",
+      "totalLiabilities": "कुल दायित्व",
+      "netWorth": "कुल सम्पत्ति मूल्य",
+      "retirement": "सेवानिवृत्ति"
+    },
+    "scenario": {
+      "compare": "परिदृश्यहरू तुलना गर्नुहोस् ({count} सुरक्षित)",
+      "selectUpTo": "तुलना गर्न ३ वटासम्म परिदृश्यहरू छान्नुहोस्:",
+      "duplicate": "प्रतिलिपि",
+      "delete": "मेट्नुहोस्",
+      "sideBySide": "छेउ-छेउ तुलना",
+      "field": "फिल्ड",
+      "delta": "भिन्नता",
+      "selectOneMore": "तुलना गर्न एउटा थप परिदृश्य छान्नुहोस्",
+      "copySuffix": "(प्रतिलिpi)"
+    },
+    "openCalculator": "क्याल्कुलेटर खोल्नुहोस्"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "मेटाउनुहोस्",
     "edit": "सम्पादन गर्नुहोस्",
     "loading": "लोड हुँदै...",
-    "save": "सुरक्षित गर्नुहोस्"
+    "save": "सुरक्षित गर्नुहोस्",
+    "success": "सफलता!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "पुष्टि गर्नुहोस्",
     "finalConfirmation": "अन्तिम पुष्टि:",
     "processing": "प्रसंस्करण हुँदै...",
-    "typeToConfirm": "यस क्रियालाई पुष्टि गर्न {text} टाइप गर्नुहोस्।"
+    "typeToConfirm": "यस क्रियालाई पुष्टि गर्न {text} टाइप गर्नुहोस्।",
+    "confirmAction": "कार्य पुष्टि गर्नुहोस्"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "स्वास्थ्य स्कोर इतिहास",
+      "monthsOfData": "{months} महिनाको डाटा",
+      "emptyTitle": "अहिलेसम्म कुनै इतिहास छैन",
+      "emptySubtitle": "तपाईंको पहिलो महिनापछि तपाईंको स्वास्थ्य स्कोर इतिहास यहाँ देखा पर्नेछ",
+      "legendScore": "स्कोर",
+      "legendTrend": "प्रवृत्ति",
+      "tooltipScore": "स्कोर: {score}",
+      "tooltipTrend": "प्रवृत्ति: {direction}",
+      "loadingChart": "चार्ट लोड हुँदैछ..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "तपाईंको बजेट तपाईंकै उपकरणमा बस्छ",
+      "heroSubtitle": "सबैभन्दा निजी बजेट एपमा स्वागत छ। कुनै खाता छैन, क्लाउड छैन, कुनै सम्झौता छैन।",
+      "features": {
+        "yourDataTitle": "तपाईंको डाटा, तपाईंको उपकरण",
+        "yourDataDescription": "सबै वित्तीय डाटा तपाईंको उपकरणमा स्थानीय रूपमा भण्डारण गरिन्छ। कुनै क्लाउड सर्भर छैन, तेस्रो-पक्ष पहुँच छैन।",
+        "encryptionTitle": "बैंक-ग्रेड इन्क्रिप्सन",
+        "encryptionDescription": "AES-256 इन्क्रिप्सनले तपाईंको डाटाको सुरक्षा गर्छ। कुञ्जी तपाईंसँग मात्र छ—यो कहिल्यै तपाईंको उपकरण छोड्दैन।",
+        "offlineTitle": "अफलाइन काम गर्छ",
+        "offlineDescription": "इन्टरनेट बिना पूर्ण कार्यक्षमता। गोपनीयता-सचेत प्रयोगकर्ताहरूका लागि उपयुक्त।",
+        "zeroTrackingTitle": "शून्य ट्र्याकिङ",
+        "zeroTrackingDescription": "कुनै एनालिटिक्स छैन, कुनै टेलिमेट्री छैन, कुनै डाटा सङ्कलन छैन। तपाईंको वित्तीय कुरा कसैको कारोबार होइन।"
+      },
+      "whatsNext": "अब के?",
+      "whatsNextIntro": "अर्को केही मिनेटमा, हामी तपाईंलाई मद्दत गर्नेछौं:",
+      "step1": "तपाईंका अवस्थित कारोबारहरू आयात गर्नुहोस् (बैंक CSV, OFX, वा म्यानुअल)",
+      "step2": "तपाईंको खर्च स्वचालित रूपमा वर्गीकृत गर्नुहोस्",
+      "step3": "वास्तविक खर्चमा आधारित तपाईंको पहिलो बजेट बनाउनुहोस्",
+      "step4": "बिल रिमाइन्डरहरू सेट गर्नुहोस् ताकि तपाईंले कुनै भुक्तानी नछुटाउनुहोस्",
+      "getStarted": "सुरु गरौं"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} कारोबारहरूलाई वर्गीकरण चाहिन्छ",
+      "allCategorized": "सबै कारोबारहरू वर्गीकृत छन्!",
+      "applySmartSuggestions": "स्मार्ट सुझावहरू लागू गर्नुहोस्",
+      "categorize": "वर्गीकृत गर्नुहोस्",
+      "percentMatch": "{percent}% मिल्यो",
+      "rememberChoices": "मेरा वर्गीकरण छनोटहरू सम्झनुहोस्",
+      "rememberChoicesDescription": "भविष्यमा समान कारोबारहरू स्वचालित रूपमा वर्गीकृत गर्नुहोस्",
+      "categorized": "{count} वर्गीकृत",
+      "remaining": "{count} बाँकी",
+      "continue": "जारी राख्नुहोस्",
+      "continueAnyway": "जे भए पनि जारी राख्नुहोस्",
+      "categories": {
+        "foodDining": "खाना र भोजन",
+        "transportation": "यातायात",
+        "billsUtilities": "बिल र उपयोगिताहरू",
+        "shopping": "किनमेल",
+        "entertainment": "मनोरञ्जन",
+        "healthFitness": "स्वास्थ्य र फिटनेस",
+        "personalCare": "व्यक्तिगत हेरचाह",
+        "income": "आय",
+        "transfers": "स्थानान्तरण"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "प्रोफाइल मेटाउन असफल",
+    "deleteTitle": "प्रोफाइल मेटाउने?",
+    "defaultProfile": "पूर्वनिर्धारित प्रोफाइल",
+    "cannotDeleteOnly": "यो एकमात्र प्रोफाइल हो। तपाईं यसलाई मेटाउन सक्नुहुन्न।",
+    "permanentWarning": "यसले यो प्रोफाइल स्थायी रूपमा मेटाउनेछ। यस प्रोफाइलका कुनै पनि निजी बजेटहरू सबै प्रोफाइलहरूसँग साझा गरिनेछ।",
+    "cannotUndo": "यो कार्य पूर्ववत गर्न सकिँदैन।",
+    "deleteButton": "प्रोफाइल मेटाउनुहोस्"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "हेर्नुहोस्"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "रिमाइन्डर बन्द गर्नुहोस्",
+      "enableReminder": "रिमाइन्डर सक्रिय गर्नुहोस्",
+      "off": "बन्द"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "developerTools": {
+    "title": "डेभलपर उपकरणहरू",
+    "subtitle": "अन्तर्राष्ट्रीयकरण परीक्षणका लागि QA उपकरणहरू (डेभ मोड मात्र)",
+    "pseudoLocaleLabel": "स्यूडो-लोकेल सक्षम गर्नुहोस् (en-XA)",
+    "pseudoLocaleHelp": "सबै अनुवादित पाठलाई उच्चारण अक्षरहरूले प्रतिस्थापन गर्छ। बाँकी सादा अंग्रेजी पाठ <strong>हार्डकोडेड</strong> छ र अनुवाद कुञ्जीहरूमा रूपान्तरण गर्नुपर्छ।",
+    "pseudoLocaleExample": "उदाहरण: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "यदि तपाईंले \"[Ðášhƀóářð~~~]\" को सट्टा \"Dashboard\" देख्नुहुन्छ भने, यो हार्डकोडेड हो!",
+    "infoPseudoLocale": "स्यूडो-लोकेलले विकासको समयमा अनुवाद नभएका स्ट्रिङहरू पहिचान गर्न मद्दत गर्छ",
+    "infoProduction": "प्रोडक्सन बिल्डहरूले स्वचालित रूपमा en-XA लोकेल बहिष्कार गर्छन्",
+    "infoSwitchBack": "सामान्य विकास जारी राख्न वास्तविक लोकेलमा फर्कनुहोस्"
+  },
+  "pageMetadata": {
+    "appName": "बजेट एप",
+    "scenarios": "के-यदि परिदृश्यहरू",
+    "merchantRules": "व्यापारी नियमहरू",
+    "more": "थप",
+    "netWorth": "कुल सम्पत्ति",
+    "properties": "सम्पत्तिहरू",
+    "propertyDetail": "सम्पत्ति विवरण",
+    "review": "कारोबार समीक्षा",
+    "events": "कार्यक्रम बजेट",
+    "landing": "BudgetPro - आफ्नो वित्तमा महारत हासिल गर्नुहोस्",
+    "dashboard": "ड्यासबोर्ड",
+    "transactions": "कारोबारहरू",
+    "import": "आयात",
+    "accounts": "खाताहरू",
+    "budgets": "बजेटहरू",
+    "categories": "श्रेणीहरू",
+    "reports": "प्रतिवेदनहरू",
+    "settings": "सेटिङहरू",
+    "subscriptions": "सदस्यताहरू",
+    "investments": "लगानीहरू",
+    "debtPayoff": "ऋण भुक्तानी",
+    "loans": "ऋणहरू",
+    "calculators": "क्याल्कुलेटरहरू",
+    "planning": "योजना",
+    "ocr": "रसिद स्क्यानर",
+    "export": "निर्यात",
+    "fridayReview": "साप्ताहिक समीक्षा",
+    "onboarding": "सुरू गर्नdelays",
+    "offline": "अdelays मdelays",
+    "splits": "कdelays विdelays"
+  },
+  "balanceReconciliation": {
+    "title": "ब्यालेन्स मिलान",
+    "subtitle": "तपाईंका आयात गरिएका कारोबारहरूलाई तपाईंको वास्तविक खाता ब्यालेन्ससँग मिलाउनुहोस्",
+    "transactionsImported": "{count} कारोबारहरू आयात गरियो",
+    "netChange": "शुद्ध परिवर्तन",
+    "currentBalanceLabel": "हालको ब्यालेन्स (बैंकबाट)",
+    "currentBalanceLabelCredit": "हालको ब्यालेन्स (क्रेडिट कार्ड)",
+    "balanceHelperBank": "तपाईंको बैंकको वेबसाइट वा एपमा देखाइएको हालको ब्यालेन्स प्रविष्ट गर्नुहोस्",
+    "balanceHelperCredit": "तपाईंको क्रेडिट कार्डमा हालको बाँकी ब्यालेन्स प्रविष्ट गर्नुहोस्",
+    "startingBalance": "सुरुको ब्यालेन्स",
+    "startingBalanceCredit": "सुरुको ब्यालेन्स (क्रेडिट कार्ड)",
+    "balanceMatchNote": "यसले तपाईंको कारोबार इतिहास पूर्ण र सही छ भनेर सुनिश्चित गर्न मद्दत गर्छ",
+    "negativeWarning": "यसले ऋणात्मक सुरुको ब्यालेन्स हुनेछ। कृपया तपाईंको हालको ब्यालेन्स जाँच गर्नुहोस्।",
+    "skipForNow": "अहिलेलाई छोड्नुहोस्",
+    "setBalance": "ब्यालेन्स सेट गर्नुहोस्"
+  },
+  "recommendations": {
+    "title": "सिफारिसहरू",
+    "subtitle": "तपाईंको वित्तीय स्वास्थ्यमा आधारित व्यक्तिगत सुझावहरू",
+    "emptyState": "अहिलेसम्म कुनै सिफारिसहरू छैनन्। आफ्नो वित्तीय कुरा ट्र्याक गर्दै राख्नुहोस्!",
+    "viewAllFactors": "सबै कारकहरू हेर्नुहोस्",
+    "factorLabels": {
+      "savingsRate": "बचत दर",
+      "debtToIncome": "ऋण-आय अनुपात",
+      "budgetAdherence": "बजेट पालना",
+      "emergencyFund": "आपतकालीन कोष",
+      "investmentGrowth": "लगानी वृद्धि",
+      "expenseStability": "खर्च स्थिरता"
+    },
+    "factorLinks": {
+      "savingsRate": "बचत सुझावहरू हेर्नुहोस्",
+      "debtToIncome": "ऋण व्यवस्थापन गर्नुहोस्",
+      "budgetAdherence": "बजेट समायोजन गर्नुहोस्",
+      "emergencyFund": "आपतकालीन कोष बनाउनुहोस्",
+      "investmentGrowth": "लगानी रणनीतिहरू",
+      "expenseStability": "खर्च स्थिर गर्नुहोस्"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "व्यापारी",
+    "amount": "रकम",
+    "average": "औसत",
+    "category": "वर्ग",
+    "wasExpected": "के यो अपेक्षित थियो?",
+    "expected": "अपेक्षित",
+    "unexpected": "अनपेक्षित",
+    "markedExpected": "अपेक्षित भनी चिन्ह लगाइयो",
+    "markedUnexpected": "अनपेक्षित भनी चिन्ह लगाइयो",
+    "moreAnomalies": "{count} थप विसंगतिहरू",
+    "severity": {
+      "high": "उच्च",
+      "medium": "मध्यम",
+      "low": "न्यून"
+    }
+  },
+  "pdfOcr": {
+    "processing": "PDF प्रशोधन हुँदैछ...",
+    "cancel": "रद्द गर्नुहोस्",
+    "pageProgress": "पृष्ठ {current} मध्ये {total}",
+    "elapsed": "बितेको समय: {time}",
+    "remaining": "बाँकी समय: {time}",
+    "stages": {
+      "loading": "लोड हुँदैछ",
+      "rendering": "रेन्डरिङ",
+      "preprocessing": "प्रिप्रोसेसिङ",
+      "ocr": "OCR",
+      "parsing": "पार्सिङ",
+      "complete": "पूरा भयो",
+      "error": "त्रुटि",
+      "cancelled": "रद्द गरियो",
+      "enhance": "सुधार"
+    },
+    "errorRetry": "OCR प्रशोधन असफल भयो। के तपाईं पुनः प्रयास गर्न चाहनुहुन्छ?",
+    "cancelledRetry": "OCR रद्द गरियो। के तपाईं पुनः सुरु गर्न चाहनुहुन्छ?",
+    "retryButton": "OCR पुनः प्रयास गर्नुहोस्",
+    "completedSuccess": "OCR सफलतापूर्वक पूरा भयो!",
+    "loadingChart": "चार्ट लोड हुँदैछ..."
   }
 }

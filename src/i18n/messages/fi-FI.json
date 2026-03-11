@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Takaisin etusivulle"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Vuosi {n}",
+      "yearLabel": "Vuosi",
+      "month": "Kuukausi {n}",
+      "monthYear": "Kuukausi {n} (Vuosi {y})",
+      "age": "Ikä {n}",
+      "ageLabel": "Ikä",
+      "contributions": "Maksut",
+      "interestEarned": "Ansaittu korko",
+      "interest": "Korko",
+      "totalInterest": "Kokonaiskorko",
+      "snowball": "Lumipallo",
+      "avalanche": "Lumivyöry",
+      "portfolio": "Salkku",
+      "fireTarget": "FIRE-tavoite",
+      "median50th": "Mediaani (50.)",
+      "remainingBalance": "Jäljellä oleva saldo",
+      "totalAssets": "Varat yhteensä",
+      "totalLiabilities": "Velat yhteensä",
+      "netWorth": "Nettovarallisuus",
+      "retirement": "Eläke"
+    },
+    "scenario": {
+      "compare": "Vertaa skenaarioita ({count} tallennettua)",
+      "selectUpTo": "Valitse enintään 3 skenaariota vertailtavaksi:",
+      "duplicate": "Kopioi",
+      "delete": "Poista",
+      "sideBySide": "Rinnakkaisvertailu",
+      "field": "Kenttä",
+      "delta": "Ero",
+      "selectOneMore": "Valitse vielä yksi skenaario vertailtavaksi",
+      "copySuffix": "(kopio)"
+    },
+    "openCalculator": "Avaa laskin"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Poista",
     "edit": "Muokkaa",
     "loading": "Ladataan...",
-    "save": "Tallenna"
+    "save": "Tallenna",
+    "success": "Onnistui!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Vahvista",
     "finalConfirmation": "Lopullinen vahvistus:",
     "processing": "Käsitellään...",
-    "typeToConfirm": "Kirjoita {text} vahvistaaksesi tämän toiminnon."
+    "typeToConfirm": "Kirjoita {text} vahvistaaksesi tämän toiminnon.",
+    "confirmAction": "Vahvista toiminto"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Pistehistoria",
+      "monthsOfData": "{count} {count, plural, =1 {kuukausi} other {kuukautta}} dataa",
+      "emptyTitle": "Pistehistoriasi näkyy täällä datan kerääntyessä",
+      "emptySubtitle": "Tarkista ensi kuussa!",
+      "legendScore": "Pisteet",
+      "legendTrend": "Trendi",
+      "tooltipScore": "Pisteet",
+      "tooltipTrend": "Trendi",
+      "loadingChart": "Ladataan kaaviota..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Budjettisi on SINUN laitteellasi",
+      "heroSubtitle": "Tervetuloa yksityisimpään budjettisovellukseen koskaan. Ei tilejä, ei pilveä, ei kompromisseja.",
+      "features": {
+        "yourDataTitle": "Sinun tietosi, sinun laitteesi",
+        "yourDataDescription": "Kaikki taloustiedot tallennetaan paikallisesti laitteellesi. Ei pilvipalvelimia, ei kolmannen osapuolen pääsyä.",
+        "encryptionTitle": "Pankkitasoinen salaus",
+        "encryptionDescription": "AES-256-salaus suojaa tietosi. Vain sinulla on avain—se ei koskaan poistu laitteeltasi.",
+        "offlineTitle": "Toimii offline-tilassa",
+        "offlineDescription": "Täysi toiminnallisuus ilman internetiä. Täydellinen yksityisyystietoisille käyttäjille.",
+        "zeroTrackingTitle": "Ei seurantaa",
+        "zeroTrackingDescription": "Ei analytiikkaa, ei telemetriaa, ei tiedonkeruuta. Taloutesi ei kuulu kenellekään muulle."
+      },
+      "whatsNext": "Mitä seuraavaksi?",
+      "whatsNextIntro": "Seuraavien minuuttien aikana autamme sinua:",
+      "step1": "Tuomaan olemassa olevat tapahtumasi (pankin CSV, OFX tai manuaalisesti)",
+      "step2": "Luokittelemaan menosi automaattisesti",
+      "step3": "Luomaan ensimmäisen budjettisi todellisten menojen perusteella",
+      "step4": "Asettamaan laskumuistutukset, jotta et koskaan missää maksua",
+      "getStarted": "Aloitetaan"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} tapahtumaa tarvitsee kategorian",
+      "allCategorized": "Kaikki tapahtumat on luokiteltu!",
+      "applySmartSuggestions": "Käytä älykkäitä ehdotuksia",
+      "categorize": "Luokittele",
+      "percentMatch": "{percent}% osuma",
+      "rememberChoices": "Muista kategoriavalintani",
+      "rememberChoicesDescription": "Luokittele samankaltaiset tapahtumat automaattisesti tulevaisuudessa",
+      "categorized": "{count} luokiteltu",
+      "remaining": "{count} jäljellä",
+      "continue": "Jatka",
+      "continueAnyway": "Jatka silti",
+      "categories": {
+        "foodDining": "Ruoka & Ravintolat",
+        "transportation": "Liikenne",
+        "billsUtilities": "Laskut & Palvelut",
+        "shopping": "Ostokset",
+        "entertainment": "Viihde",
+        "healthFitness": "Terveys & Kuntoilu",
+        "personalCare": "Henkilökohtainen hoito",
+        "income": "Tulot",
+        "transfers": "Siirrot"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Profiilin poistaminen epäonnistui",
+    "deleteTitle": "Poista profiili?",
+    "defaultProfile": "Oletusprofiili",
+    "cannotDeleteOnly": "Tämä on ainoa profiili. Et voi poistaa sitä.",
+    "permanentWarning": "Tämä poistaa tämän profiilin pysyvästi. Kaikki tämän profiilin yksityiset budjetit jaetaan kaikkien profiilien kanssa.",
+    "cannotUndo": "Tätä toimintoa ei voi kumota.",
+    "deleteButton": "Poista profiili"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Näytä"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Poista muistutus käytöstä",
+      "enableReminder": "Ota muistutus käyttöön",
+      "off": "Pois"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Tuonti valmis!",
+    "subtitle": "Aseta tilisi saldo tilille {accountName}",
+    "transactionsImported": "{count} tapahtumaa tuotu",
+    "netChange": "Tapahtumien nettomuutos:",
+    "currentBalanceLabel": "Mikä on nykyinen pankkisaldosi?",
+    "currentBalanceLabelCredit": "Mikä on nykyinen velkasaldosi?",
+    "balanceHelperBank": "Avaa pankkisovelluksesi ja syötä tälle tilille näytetty saldo",
+    "balanceHelperCredit": "Syötä luottokorttilaskelmassasi näytetty nykyinen saldo (positiivisena lukuna)",
+    "startingBalance": "Alkusaldosi:",
+    "startingBalanceCredit": "Alkuvelkasi:",
+    "balanceMatchNote": "Tämä saa tilisi saldon vastaamaan pankkiasi.",
+    "negativeWarning": "Tämä johtaa negatiiviseen alkusaldoon, mikä on epätavallista käyttö-/säästötileille. Tarkista, että nykyinen saldosi on oikein.",
+    "skipForNow": "Ohita toistaiseksi",
+    "setBalance": "Aseta saldo"
+  },
+  "recommendations": {
+    "title": "Parhaat suositukset",
+    "subtitle": "Tapoja parantaa taloudellista terveyttäsi",
+    "emptyState": "Lisää enemmän taloustietoja saadaksesi henkilökohtaisia suosituksia",
+    "viewAllFactors": "Näytä kaikki tekijät",
+    "factorLabels": {
+      "savingsRate": "Säästäminen",
+      "debtToIncome": "Velka",
+      "budgetAdherence": "Budjetti",
+      "emergencyFund": "Hätärahasto",
+      "investmentGrowth": "Sijoitukset",
+      "expenseStability": "Menot"
+    },
+    "factorLinks": {
+      "savingsRate": "Näytä tulot",
+      "debtToIncome": "Hallitse lainoja",
+      "budgetAdherence": "Säädä budjetteja",
+      "emergencyFund": "Suunnittele säästämistä",
+      "investmentGrowth": "Näytä salkku",
+      "expenseStability": "Näytä raportit"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Kauppias:",
+    "amount": "Summa:",
+    "average": "Keskiarvo: {amount}",
+    "category": "Kategoria:",
+    "wasExpected": "Oliko tämä odotettua?",
+    "expected": "Odotettu",
+    "unexpected": "Odottamaton",
+    "markedExpected": "Merkitty odotetuksi",
+    "markedUnexpected": "Merkitty odottamattomaksi",
+    "moreAnomalies": "+{count} lisää {count, plural, =1 {poikkeama} other {poikkeamaa}}",
+    "severity": {
+      "high": "KORKEA",
+      "medium": "KESKITASO",
+      "low": "MATALA"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR-käsittely",
+    "cancel": "Peruuta",
+    "pageProgress": "Sivu {current}/{total}",
+    "elapsed": "Kulunut: {time}",
+    "remaining": "~{time} jäljellä",
+    "stages": {
+      "loading": "Ladataan PDF:ää",
+      "rendering": "Renderöidään sivuja",
+      "preprocessing": "Parannetaan kuvaa",
+      "ocr": "Poimitaan tekstiä",
+      "parsing": "Jäsennetään tapahtumia",
+      "complete": "Valmis",
+      "error": "Virhe",
+      "cancelled": "Peruutettu",
+      "enhance": "Paranna"
+    },
+    "errorRetry": "OCR-käsittely epäonnistui. Haluatko yrittää uudelleen?",
+    "cancelledRetry": "OCR peruutettiin. Haluatko aloittaa uudelleen?",
+    "retryButton": "Yritä OCR uudelleen",
+    "completedSuccess": "OCR valmis!",
+    "loadingChart": "Ladataan kaaviota..."
+  },
+  "developerTools": {
+    "title": "Kehittäjätyökalut",
+    "subtitle": "QA-työkalut kansainvälistämisen testaamiseen (vain kehittäjätila)",
+    "pseudoLocaleLabel": "Ota pseudolokaali käyttöön (en-XA)",
+    "pseudoLocaleHelp": "Korvaa kaiken käännetyn tekstin aksentoiduilla merkeillä. Jäljelle jäänyt tavallinen englanninkielinen teksti on <strong>kovakoodattu</strong> ja se on muunnettava käännösavaimiksi.",
+    "pseudoLocaleExample": "Esimerkki: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Jos näet \"Dashboard\" eikä \"[Ðášhƀóářð~~~]\", se on kovakoodattu!",
+    "infoPseudoLocale": "Pseudolokaali auttaa tunnistamaan kääntämättömät merkkijonot kehityksen aikana",
+    "infoProduction": "Tuotantokäännökset jättävät automaattisesti pois en-XA lokaalin",
+    "infoSwitchBack": "Vaihda takaisin oikeaan lokaaliin jatkaaksesi normaalia kehitystä"
+  },
+  "pageMetadata": {
+    "appName": "Budjettisovellus",
+    "scenarios": "Entä jos -skenaariot",
+    "merchantRules": "Kauppiassäännöt",
+    "more": "Lisää",
+    "netWorth": "Nettovarallisuus",
+    "properties": "Kiinteistöt",
+    "propertyDetail": "Kiinteistön tiedot",
+    "review": "Tarkista tapahtumat",
+    "events": "Tapahtumabudjetit",
+    "landing": "BudgetPro – Hallitse talouttasi",
+    "dashboard": "Koontinäyttö",
+    "transactions": "Tapahtumat",
+    "import": "Tuo",
+    "accounts": "Tilit",
+    "budgets": "Budjetit",
+    "categories": "Kategoriat",
+    "reports": "Raportit",
+    "settings": "Asetukset",
+    "subscriptions": "Tilaukset",
+    "investments": "Sijoitukset",
+    "debtPayoff": "Velanmaksu",
+    "loans": "Lainat",
+    "calculators": "Laskurit",
+    "planning": "Suunnittelu",
+    "ocr": "Kuittiskanneri",
+    "export": "Vie",
+    "fridayReview": "Viikkokatsaus",
+    "onboarding": "Aloitus",
+    "offline": "Offline-tila",
+    "splits": "Jaa tapahtumat"
   }
 }

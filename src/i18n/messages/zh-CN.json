@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "返回首页"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "第{n}年",
+      "yearLabel": "年份",
+      "month": "第{n}月",
+      "monthYear": "第{n}月（第{y}年）",
+      "age": "{n}岁",
+      "ageLabel": "年龄",
+      "contributions": "缴款",
+      "interestEarned": "利息收入",
+      "interest": "利息",
+      "totalInterest": "总利息",
+      "snowball": "雪球法",
+      "avalanche": "雪崩法",
+      "portfolio": "投资组合",
+      "fireTarget": "FIRE目标",
+      "median50th": "中位数（50%）",
+      "remainingBalance": "剩余余额",
+      "totalAssets": "总资产",
+      "totalLiabilities": "总负债",
+      "netWorth": "净资产",
+      "retirement": "退休"
+    },
+    "scenario": {
+      "compare": "比较方案（已保存 {count} 个）",
+      "selectUpTo": "选择最多 3 个方案进行比较：",
+      "duplicate": "复制",
+      "delete": "删除",
+      "sideBySide": "并排比较",
+      "field": "字段",
+      "delta": "差值",
+      "selectOneMore": "再选择一个方案进行比较",
+      "copySuffix": "(副本)"
+    },
+    "openCalculator": "打开计算器"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "删除",
     "edit": "编辑",
     "loading": "加载中...",
-    "save": "保存"
+    "save": "保存",
+    "success": "成功！"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "确认",
     "finalConfirmation": "最终确认：",
     "processing": "处理中...",
-    "typeToConfirm": "输入{text}以确认此操作。"
+    "typeToConfirm": "输入{text}以确认此操作。",
+    "confirmAction": "确认操作"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "评分历史",
+      "monthsOfData": "{count}个月的数据",
+      "emptyTitle": "随着数据积累，您的评分历史将显示在这里",
+      "emptySubtitle": "下个月再来看看！",
+      "legendScore": "评分",
+      "legendTrend": "趋势",
+      "tooltipScore": "评分",
+      "tooltipTrend": "趋势",
+      "loadingChart": "加载图表中..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3293,6 +3341,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "您的预算存储在您的设备上",
+      "heroSubtitle": "欢迎使用最私密的预算应用。无需账户，无需云端，绝不妥协。",
+      "features": {
+        "yourDataTitle": "您的数据，您的设备",
+        "yourDataDescription": "所有财务数据均存储在本地设备上。无云服务器，无第三方访问。",
+        "encryptionTitle": "银行级加密",
+        "encryptionDescription": "AES-256加密保护您的数据。只有您拥有密钥。",
+        "offlineTitle": "离线可用",
+        "offlineDescription": "无需互联网即可完整使用。非常适合注重隐私的用户。",
+        "zeroTrackingTitle": "零追踪",
+        "zeroTrackingDescription": "无分析、无遥测、无数据收集。您的财务与任何人无关。"
+      },
+      "whatsNext": "接下来？",
+      "whatsNextIntro": "在接下来的几分钟里，我们将帮助您：",
+      "step1": "导入现有交易（银行CSV、OFX或手动输入）",
+      "step2": "自动分类您的支出",
+      "step3": "基于实际支出创建第一个预算",
+      "step4": "设置账单提醒",
+      "getStarted": "开始吧！"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count}笔交易需要分类",
+      "allCategorized": "所有交易已分类！",
+      "applySmartSuggestions": "应用智能建议",
+      "categorize": "分类",
+      "percentMatch": "{percent}%匹配",
+      "rememberChoices": "记住我的分类选择",
+      "rememberChoicesDescription": "未来自动分类类似交易",
+      "categorized": "{count}笔已分类",
+      "remaining": "{count}笔剩余",
+      "continue": "继续",
+      "continueAnyway": "仍然继续",
+      "categories": {
+        "foodDining": "餐饮",
+        "transportation": "交通",
+        "billsUtilities": "账单和水电",
+        "shopping": "购物",
+        "entertainment": "娱乐",
+        "healthFitness": "健康和健身",
+        "personalCare": "个人护理",
+        "income": "收入",
+        "transfers": "转账"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3743,7 +3836,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "删除资料失败",
+    "deleteTitle": "删除资料？",
+    "defaultProfile": "默认资料",
+    "cannotDeleteOnly": "这是唯一的资料。您无法删除它。",
+    "permanentWarning": "这将永久删除此资料。此资料拥有的任何私人预算将与所有资料共享。",
+    "cannotUndo": "此操作无法撤销。",
+    "deleteButton": "删除资料"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3840,7 +3940,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "查看"
   },
   "receiptUpload": {
     "buttons": {
@@ -4503,6 +4604,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "禁用提醒",
+      "enableReminder": "启用提醒",
+      "off": "关"
     }
   },
   "subscriptionCostChart": {
@@ -5157,5 +5263,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "导入完成！",
+    "subtitle": "设置{accountName}的账户余额",
+    "transactionsImported": "已导入{count}笔交易",
+    "netChange": "交易净变动：",
+    "currentBalanceLabel": "您当前的银行余额是多少？",
+    "currentBalanceLabelCredit": "您当前的欠款金额是多少？",
+    "balanceHelperBank": "打开您的银行应用并输入显示的余额",
+    "balanceHelperCredit": "输入信用卡账单上的当前余额（正数）",
+    "startingBalance": "您的起始余额：",
+    "startingBalanceCredit": "您的起始欠款金额：",
+    "balanceMatchNote": "这将使您的账户余额与银行匹配。",
+    "negativeWarning": "这将导致负的起始余额，这对于活期/储蓄账户来说不常见。请仔细检查您的当前余额。",
+    "skipForNow": "暂时跳过",
+    "setBalance": "设置余额"
+  },
+  "recommendations": {
+    "title": "主要建议",
+    "subtitle": "改善财务健康的方法",
+    "emptyState": "添加更多财务数据以获得个性化建议",
+    "viewAllFactors": "查看所有因素",
+    "factorLabels": {
+      "savingsRate": "储蓄",
+      "debtToIncome": "债务",
+      "budgetAdherence": "预算",
+      "emergencyFund": "应急基金",
+      "investmentGrowth": "投资",
+      "expenseStability": "支出"
+    },
+    "factorLinks": {
+      "savingsRate": "查看收入",
+      "debtToIncome": "管理贷款",
+      "budgetAdherence": "调整预算",
+      "emergencyFund": "规划储蓄",
+      "investmentGrowth": "查看投资组合",
+      "expenseStability": "查看报告"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "商户：",
+    "amount": "金额：",
+    "average": "平均：{amount}",
+    "category": "类别：",
+    "wasExpected": "这是预期内的吗？",
+    "expected": "预期内",
+    "unexpected": "意外",
+    "markedExpected": "已标记为预期内",
+    "markedUnexpected": "已标记为意外",
+    "moreAnomalies": "+{count}个更多异常",
+    "severity": {
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR处理中",
+    "cancel": "取消",
+    "pageProgress": "第{current}页/共{total}页",
+    "elapsed": "已用时：{time}",
+    "remaining": "约剩余{time}",
+    "stages": {
+      "loading": "加载PDF",
+      "rendering": "渲染页面",
+      "preprocessing": "图像增强",
+      "ocr": "提取文本",
+      "parsing": "解析交易",
+      "complete": "完成",
+      "error": "错误",
+      "cancelled": "已取消",
+      "enhance": "增强"
+    },
+    "errorRetry": "OCR处理失败。是否重试？",
+    "cancelledRetry": "OCR已取消。是否重新开始？",
+    "retryButton": "重试OCR",
+    "completedSuccess": "OCR成功完成！",
+    "loadingChart": "加载图表中..."
+  },
+  "developerTools": {
+    "title": "开发者工具",
+    "subtitle": "用于测试国际化的QA工具（仅限开发模式）",
+    "pseudoLocaleLabel": "启用伪语言环境 (en-XA)",
+    "pseudoLocaleHelp": "将所有已翻译的文本替换为带重音的字符。任何剩余的纯英文文本都是<strong>硬编码</strong>的，需要转换为翻译键。",
+    "pseudoLocaleExample": "示例: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "如果您看到 \"Dashboard\" 而不是 \"[Ðášhƀóářð~~~]\"，说明它是硬编码的！",
+    "infoPseudoLocale": "伪语言环境有助于在开发过程中识别未翻译的字符串",
+    "infoProduction": "生产构建会自动排除 en-XA 语言环境",
+    "infoSwitchBack": "切换回真实语言环境以继续正常开发"
+  },
+  "pageMetadata": {
+    "appName": "预算应用",
+    "scenarios": "假设场景",
+    "merchantRules": "商户规则",
+    "more": "更多",
+    "netWorth": "净资产",
+    "properties": "房产",
+    "propertyDetail": "房产详情",
+    "review": "审核交易",
+    "events": "活动预算",
+    "landing": "BudgetPro – 掌控您的财务",
+    "dashboard": "仪表盘",
+    "transactions": "交易",
+    "import": "导入",
+    "accounts": "账户",
+    "budgets": "预算",
+    "categories": "分类",
+    "reports": "报告",
+    "settings": "设置",
+    "subscriptions": "订阅",
+    "investments": "投资",
+    "debtPayoff": "债务偿还",
+    "loans": "贷款",
+    "calculators": "计算器",
+    "planning": "规划",
+    "ocr": "收据扫描",
+    "export": "导出",
+    "fridayReview": "每周回顾",
+    "onboarding": "开始使用",
+    "offline": "离线模式",
+    "splits": "拆分交易"
   }
 }

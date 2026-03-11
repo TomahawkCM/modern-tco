@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "ወደ መነሻ ተመለስ"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "ዓመት {n}",
+      "yearLabel": "ዓመት",
+      "month": "ወር {n}",
+      "monthYear": "ወር {n} (ዓመት {y})",
+      "age": "ዕድሜ {n}",
+      "ageLabel": "ዕድሜ",
+      "contributions": "መዋጮዎች",
+      "interestEarned": "የተገኘ ወለድ",
+      "interest": "ወለድ",
+      "totalInterest": "ጠቅላላ ወለድ",
+      "snowball": "ስኖውቦል",
+      "avalanche": "አቫላንች",
+      "portfolio": "ፖርትፎሊዮ",
+      "fireTarget": "FIRE ግብ",
+      "median50th": "መካከለኛ (50ኛ)",
+      "remainingBalance": "ቀሪ ሂሳብ",
+      "totalAssets": "ጠቅላላ ንብረቶች",
+      "totalLiabilities": "ጠቅላላ እዳዎች",
+      "netWorth": "ጠቅላላ ሀብት",
+      "retirement": "ጡረታ"
+    },
+    "scenario": {
+      "compare": "ሁኔታዎችን ያወዳድሩ ({count} ተቀምጠዋል)",
+      "selectUpTo": "ለማወዳደር እስከ 3 ሁኔታዎች ይምረጡ:",
+      "duplicate": "ቅዳ",
+      "delete": "ሰርዝ",
+      "sideBySide": "ጎን ለጎን ማወዳደሪያ",
+      "field": "መስክ",
+      "delta": "ልዩነት",
+      "selectOneMore": "ለማወዳደር አንድ ተጨማሪ ሁኔታ ይምረጡ",
+      "copySuffix": "(ቅጂ)"
+    },
+    "openCalculator": "ካልኩሌተር ክፈት"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "ይሰርዝ",
     "edit": "ይሻሽሉ",
     "loading": "በመጫን...",
-    "save": "ይቀበሉ"
+    "save": "ይቀበሉ",
+    "success": "ስኬት!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "ይረጋገጡ",
     "finalConfirmation": "የመጨረሻ ይረጋገጡ:",
     "processing": "በማስተካከል...",
-    "typeToConfirm": "ይህን እንደሚያሳይ ይጻፉ {text} ይረጋገጡ."
+    "typeToConfirm": "ይህን እንደሚያሳይ ይጻፉ {text} ይረጋገጡ.",
+    "confirmAction": "ድርጊቱን ያረጋግጡ"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "የጤና ነጥብ ታሪክ",
+      "monthsOfData": "{months} ወራት ውሂብ",
+      "emptyTitle": "ገና ምንም ታሪክ የለም",
+      "emptySubtitle": "የጤና ነጥብ ታሪክዎ ከመጀመሪያው ወርዎ በኋላ እዚህ ይታያል",
+      "legendScore": "ነጥብ",
+      "legendTrend": "አዝማሚያ",
+      "tooltipScore": "ነጥብ: {score}",
+      "tooltipTrend": "አዝማሚያ: {direction}",
+      "loadingChart": "ሰንጠረዥ በመጫን ላይ..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "በጀትዎ በእርስዎ መሣሪያ ላይ ይኖራል",
+      "heroSubtitle": "ወደ ሚስጥራዊው የበጀት መተግበሪያ እንኳን በደህና መጡ። ምንም መለያ፣ ምንም ደመና፣ ምንም ስምምነት።",
+      "features": {
+        "yourDataTitle": "የእርስዎ ውሂብ፣ የእርስዎ መሣሪያ",
+        "yourDataDescription": "ሁሉም የፋይናንስ ውሂብ በመሣሪያዎ ላይ በአካባቢያዊ ሁኔታ ይከማቻል። ምንም የደመና አገልጋዮች፣ ምንም የሶስተኛ ወገን መዳረሻ።",
+        "encryptionTitle": "የባንክ ደረጃ ምስጠራ",
+        "encryptionDescription": "AES-256 ምስጠራ ውሂብዎን ይጠብቃል። ቁልፉ የእርስዎ ብቻ ነው—ከመሣሪያዎ ፈጽሞ አይወጣም።",
+        "offlineTitle": "ያለ ኢንተርኔት ይሠራል",
+        "offlineDescription": "ያለ ኢንተርኔት ሙሉ ተግባር። ለግላዊነት ንቁ ተጠቃሚዎች ፍጹም።",
+        "zeroTrackingTitle": "ዜሮ ክትትል",
+        "zeroTrackingDescription": "ምንም ትንተና፣ ምንም ቴሌሜትሪ፣ ምንም ውሂብ አሰባሰብ። ፋይናንስዎ የማንም ጉዳይ አይደለም።"
+      },
+      "whatsNext": "ቀጣዩ ምንድነው?",
+      "whatsNextIntro": "በሚቀጥሉት ጥቂት ደቂቃዎች እንረዳዎታለን:",
+      "step1": "ያሉዎትን ግብይቶች ያስገቡ (ባንክ CSV፣ OFX፣ ወይም በእጅ)",
+      "step2": "ወጪዎችዎን በራስ-ሰር ይመድቡ",
+      "step3": "በትክክለኛ ወጪ ላይ ተመስርቶ የመጀመሪያ በጀትዎን ይፍጠሩ",
+      "step4": "ክፍያ እንዳያመልጥዎ የሂሳብ ማስታወሻዎችን ያዘጋጁ",
+      "getStarted": "እንጀምር"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} ግብይቶች ምድቦች ያስፈልጋቸዋል",
+      "allCategorized": "ሁሉም ግብይቶች ተመድበዋል!",
+      "applySmartSuggestions": "ብልጥ ጥቆማዎችን ተግብር",
+      "categorize": "ምድብ",
+      "percentMatch": "{percent}% ተመሳሳይነት",
+      "rememberChoices": "የምድብ ምርጫዎቼን አስታውስ",
+      "rememberChoicesDescription": "ተመሳሳይ ግብይቶችን ወደፊት በራስ-ሰር ምድብ",
+      "categorized": "{count} ተመድበዋል",
+      "remaining": "{count} ቀሪ",
+      "continue": "ቀጥል",
+      "continueAnyway": "ያም ሆኖ ቀጥል",
+      "categories": {
+        "foodDining": "ምግብ እና ምግብ ቤት",
+        "transportation": "ትራንስፖርት",
+        "billsUtilities": "ሂሳቦች እና መገልገያዎች",
+        "shopping": "ግዢ",
+        "entertainment": "መዝናኛ",
+        "healthFitness": "ጤና እና ስፖርት",
+        "personalCare": "የግል እንክብካቤ",
+        "income": "ገቢ",
+        "transfers": "ዝውውሮች"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "መገለጫን ማጥፋት አልተሳካም",
+    "deleteTitle": "መገለጫ ይሰረዝ?",
+    "defaultProfile": "ነባሪ መገለጫ",
+    "cannotDeleteOnly": "ይህ ብቸኛው መገለጫ ነው። ሊሰርዙት አይችሉም።",
+    "permanentWarning": "ይህ መገለጫን ለዘላቂ ይሰርዛል። በዚህ መገለጫ የተያዙ ማንኛቸውም የግል በጀቶች ከሁሉም መገለጫዎች ጋር ይጋራሉ።",
+    "cannotUndo": "ይህ እርምጃ ሊቀለበስ አይችልም።",
+    "deleteButton": "መገለጫ ሰርዝ"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "ይመልከቱ"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "ማስታወሻ አሰናክል",
+      "enableReminder": "ማስታወሻ አንቃ",
+      "off": "ጠፍቷል"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "ሂሳብ ማስታረቅ",
+    "subtitle": "የገቡ ግብይቶችዎን ከትክክለኛው የሂሳብ ቀሪ ሂሳብ ጋር ያዛምዱ",
+    "transactionsImported": "{count} ግብይቶች ገብተዋል",
+    "netChange": "ጠቅላላ ለውጥ",
+    "currentBalanceLabel": "የአሁን ቀሪ ሂሳብ (ከባንክ)",
+    "currentBalanceLabelCredit": "የአሁን ቀሪ ሂሳብ (ክሬዲት ካርድ)",
+    "balanceHelperBank": "በባንክ ድረ-ገጽዎ ወይም መተግበሪያዎ ላይ የሚታየውን ቀሪ ሂሳብ ያስገቡ",
+    "balanceHelperCredit": "በክሬዲት ካርድዎ ላይ ያለውን ቀሪ ዕዳ ያስገቡ",
+    "startingBalance": "የመነሻ ቀሪ ሂሳብ",
+    "startingBalanceCredit": "የመነሻ ቀሪ ሂሳብ (ክሬዲት ካርድ)",
+    "balanceMatchNote": "ይህ የግብይት ታሪክዎ ሙሉ እና ትክክለኛ መሆኑን ለማረጋገጥ ይረዳል",
+    "negativeWarning": "ይህ አሉታዊ የመነሻ ቀሪ ሂሳብ ያስከትላል። እባክዎ ቀሪ ሂሳብዎን ያረጋግጡ።",
+    "skipForNow": "ለአሁን ዝለል",
+    "setBalance": "ቀሪ ሂሳብ አቀናብር"
+  },
+  "recommendations": {
+    "title": "ምክሮች",
+    "subtitle": "በፋይናንስ ጤናዎ ላይ ተመስርተው ግላዊ ጥቆማዎች",
+    "emptyState": "ገና ምንም ምክሮች የሉም። ፋይናንስዎን መከታተልዎን ይቀጥሉ!",
+    "viewAllFactors": "ሁሉንም ምክንያቶች ይመልከቱ",
+    "factorLabels": {
+      "savingsRate": "የቁጠባ መጠን",
+      "debtToIncome": "ዕዳ ለገቢ",
+      "budgetAdherence": "የበጀት ተገዢነት",
+      "emergencyFund": "የአደጋ ጊዜ ፈንድ",
+      "investmentGrowth": "የኢንቨስትመንት ዕድገት",
+      "expenseStability": "የወጪ መረጋጋት"
+    },
+    "factorLinks": {
+      "savingsRate": "የቁጠባ ምክሮችን ይመልከቱ",
+      "debtToIncome": "ዕዳ ያስተዳድሩ",
+      "budgetAdherence": "በጀት ያስተካክሉ",
+      "emergencyFund": "የአደጋ ጊዜ ፈንድ ይገንቡ",
+      "investmentGrowth": "የኢንቨስትመንት ስልቶች",
+      "expenseStability": "ወጪዎችን ያረጋጉ"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "ነጋዴ",
+    "amount": "መጠን",
+    "average": "አማካኝ",
+    "category": "ምድብ",
+    "wasExpected": "ይህ ይጠበቅ ነበር?",
+    "expected": "የሚጠበቅ",
+    "unexpected": "ያልተጠበቀ",
+    "markedExpected": "እንደሚጠበቅ ምልክት ተደርጓል",
+    "markedUnexpected": "እንደ ያልተጠበቀ ምልክት ተደርጓል",
+    "moreAnomalies": "{count} ተጨማሪ ያልተለመዱ",
+    "severity": {
+      "high": "ከፍተኛ",
+      "medium": "መካከለኛ",
+      "low": "ዝቅተኛ"
+    }
+  },
+  "pdfOcr": {
+    "processing": "PDF በማስኬድ ላይ...",
+    "cancel": "ሰርዝ",
+    "pageProgress": "ገጽ {current} ከ {total}",
+    "elapsed": "ያለፈ: {time}",
+    "remaining": "ቀሪ: {time}",
+    "stages": {
+      "loading": "በመጫን ላይ",
+      "rendering": "በማቅረብ ላይ",
+      "preprocessing": "ቅድመ ሂደት",
+      "ocr": "OCR",
+      "parsing": "በመተንተን ላይ",
+      "complete": "ተጠናቋል",
+      "error": "ስህተት",
+      "cancelled": "ተሰርዟል",
+      "enhance": "ማሻሻል"
+    },
+    "errorRetry": "OCR ሂደት አልተሳካም። እንደገና መሞከር ይፈልጋሉ?",
+    "cancelledRetry": "OCR ተሰርዟል። እንደገና ማስጀመር ይፈልጋሉ?",
+    "retryButton": "OCR እንደገና ሞክር",
+    "completedSuccess": "OCR በተሳካ ሁኔታ ተጠናቋል!",
+    "loadingChart": "ሰንጠረዥ በመጫን ላይ..."
+  },
+  "developerTools": {
+    "title": "የገንቢ መሳሪያዎች",
+    "subtitle": "ዓለም አቀፍ ስርዓት ለመፈተሽ QA መሳሪያዎች (የልማት ሁነታ ብቻ)",
+    "pseudoLocaleLabel": "የውሸት-ሎኬል አንቃ (en-XA)",
+    "pseudoLocaleHelp": "ሁሉንም የተተረጎመ ጽሑፍ በአክሰንት ቁምፊዎች ይተካል። ቀሪ ግልጽ እንግሊዝኛ ጽሑፍ <strong>ሃርድኮድድ</strong> ነው እና ወደ ትርጉም ቁልፎች መቀየር አለበት።",
+    "pseudoLocaleExample": "ምሳሌ: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "\"[Ðášhƀóářð~~~]\" ፋንታ \"Dashboard\" ካዩ፣ ሃርድኮድድ ነው!",
+    "infoPseudoLocale": "የውሸት-ሎኬል በልማት ወቅት ያልተተረጎሙ ሕብረቁምፊዎችን ለመለየት ይረዳል",
+    "infoProduction": "የምርት ግንባታዎች በራስ-ሰር en-XA ሎኬልን ያስቀራሉ",
+    "infoSwitchBack": "መደበኛ ልማትን ለመቀጠል ወደ እውነተኛ ሎኬል ይመለሱ"
+  },
+  "pageMetadata": {
+    "appName": "በጀት መተግበሪያ",
+    "scenarios": "ቢሆን-ኖሮ ሁኔታዎች",
+    "merchantRules": "የነጋዴ ደንቦች",
+    "more": "ተጨማሪ",
+    "netWorth": "ጠቅላላ ሀብት",
+    "properties": "ንብረቶች",
+    "propertyDetail": "የንብረት ዝርዝሮች",
+    "review": "ግብይቶችን ይገምግሙ",
+    "events": "የዝግጅት በጀቶች",
+    "landing": "BudgetPro - ገንዘብዎን ይቆጣጠሩ",
+    "dashboard": "ዳሽቦርድ",
+    "transactions": "ግብይቶች",
+    "import": "ማስመጣት",
+    "accounts": "ሂሳቦች",
+    "budgets": "በጀቶች",
+    "categories": "ምድቦች",
+    "reports": "ሪፖርቶች",
+    "settings": "ቅንብሮች",
+    "subscriptions": "ምዝገባዎች",
+    "investments": "ኢንቨስትመንቶች",
+    "debtPayoff": "ዕዳ መክፈል",
+    "loans": "ብድሮች",
+    "calculators": "ካልኩሌተሮች",
+    "planning": "ዕቅድ",
+    "ocr": "ደረሰኝ ስካነር",
+    "export": "ወደ ውጪ መላክ",
+    "fridayReview": "ሳምንታዊ ግምገማ",
+    "onboarding": "መጀመሪያ",
+    "offline": "ከመስመር ውጭ",
+    "splits": "ግብይቶችን ክፈል"
   }
 }

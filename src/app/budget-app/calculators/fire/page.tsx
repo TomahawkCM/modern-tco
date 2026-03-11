@@ -28,10 +28,18 @@ const FIREChart = lazy(() =>
       data,
       locale,
       currency,
+      ageLabel,
+      ageFormatter,
+      portfolioLabel,
+      fireTargetLabel,
     }: {
       data: { age: number; balance: number; fireTarget: number }[];
       locale: SupportedLocale;
       currency: string;
+      ageLabel: string;
+      ageFormatter: (label: number) => string;
+      portfolioLabel: string;
+      fireTargetLabel: string;
     }) => {
       const {
         AreaChart,
@@ -58,7 +66,12 @@ const FIREChart = lazy(() =>
               dataKey="age"
               stroke="#64748b"
               tick={{ fontSize: 12 }}
-              label={{ value: "Age", position: "insideBottomRight", offset: -5, fill: "#64748b" }}
+              label={{
+                value: ageLabel,
+                position: "insideBottomRight",
+                offset: -5,
+                fill: "#64748b",
+              }}
             />
             <YAxis
               stroke="#64748b"
@@ -78,7 +91,7 @@ const FIREChart = lazy(() =>
                 formatCurrency(value, currency, locale),
                 name,
               ]}
-              labelFormatter={(label: number) => `Age ${label}`}
+              labelFormatter={(label: number) => ageFormatter(label)}
             />
             <Legend />
             <Area
@@ -86,7 +99,7 @@ const FIREChart = lazy(() =>
               dataKey="balance"
               stroke="#f97316"
               fill="url(#colorBalance)"
-              name="Portfolio"
+              name={portfolioLabel}
             />
             <Area
               type="monotone"
@@ -94,7 +107,7 @@ const FIREChart = lazy(() =>
               stroke="#ef4444"
               fill="none"
               strokeDasharray="5 5"
-              name="FIRE Target"
+              name={fireTargetLabel}
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -396,7 +409,15 @@ export default function FIRECalculatorPage() {
         <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
           <h3 className="mb-4 text-lg font-semibold text-white">{t("fire.chartTitle")}</h3>
           <Suspense fallback={<ChartSkeleton />}>
-            <FIREChart data={chartData} locale={locale} currency={currency} />
+            <FIREChart
+              data={chartData}
+              locale={locale}
+              currency={currency}
+              ageLabel={t("chart.ageLabel")}
+              ageFormatter={(label: number) => t("chart.age", { n: label })}
+              portfolioLabel={t("chart.portfolio")}
+              fireTargetLabel={t("chart.fireTarget")}
+            />
           </Suspense>
         </div>
       )}

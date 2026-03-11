@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Kembali ke Beranda"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Tahun {n}",
+      "yearLabel": "Tahun",
+      "month": "Bulan {n}",
+      "monthYear": "Bulan {n} (Tahun {y})",
+      "age": "Usia {n}",
+      "ageLabel": "Usia",
+      "contributions": "Kontribusi",
+      "interestEarned": "Bunga Diperoleh",
+      "interest": "Bunga",
+      "totalInterest": "Total Bunga",
+      "snowball": "Snowball",
+      "avalanche": "Avalanche",
+      "portfolio": "Portofolio",
+      "fireTarget": "Target FIRE",
+      "median50th": "Median (ke-50)",
+      "remainingBalance": "Saldo Tersisa",
+      "totalAssets": "Total Aset",
+      "totalLiabilities": "Total Kewajiban",
+      "netWorth": "Kekayaan Bersih",
+      "retirement": "Pensiun"
+    },
+    "scenario": {
+      "compare": "Bandingkan skenario ({count} tersimpan)",
+      "selectUpTo": "Pilih hingga 3 skenario untuk dibandingkan:",
+      "duplicate": "Duplikat",
+      "delete": "Hapus",
+      "sideBySide": "Perbandingan berdampingan",
+      "field": "Bidang",
+      "delta": "Selisih",
+      "selectOneMore": "Pilih satu skenario lagi untuk dibandingkan",
+      "copySuffix": "(salinan)"
+    },
+    "openCalculator": "Buka kalkulator"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Hapus",
     "edit": "Edit",
     "loading": "Memuat...",
-    "save": "Simpan"
+    "save": "Simpan",
+    "success": "Berhasil!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Konfirmasi",
     "finalConfirmation": "Konfirmasi Akhir:",
     "processing": "Memproses...",
-    "typeToConfirm": "Ketik {text} untuk mengonfirmasi tindakan ini."
+    "typeToConfirm": "Ketik {text} untuk mengonfirmasi tindakan ini.",
+    "confirmAction": "Konfirmasi Tindakan"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Riwayat Skor",
+      "monthsOfData": "{count} {count, plural, =1 {bulan} other {bulan}} data",
+      "emptyTitle": "Riwayat skor Anda akan muncul di sini saat data terkumpul",
+      "emptySubtitle": "Periksa kembali bulan depan!",
+      "legendScore": "Skor",
+      "legendTrend": "Tren",
+      "tooltipScore": "Skor",
+      "tooltipTrend": "Tren",
+      "loadingChart": "Memuat grafik..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Anggaran Anda Ada di Perangkat ANDA",
+      "heroSubtitle": "Selamat datang di aplikasi anggaran paling privat. Tanpa akun, tanpa cloud, tanpa kompromi.",
+      "features": {
+        "yourDataTitle": "Data Anda, Perangkat Anda",
+        "yourDataDescription": "Semua data keuangan disimpan secara lokal di perangkat Anda. Tanpa server cloud, tanpa akses pihak ketiga.",
+        "encryptionTitle": "Enkripsi Tingkat Bank",
+        "encryptionDescription": "Enkripsi AES-256 melindungi data Anda. Hanya Anda yang memiliki kuncinya — tidak pernah meninggalkan perangkat Anda.",
+        "offlineTitle": "Berfungsi Offline",
+        "offlineDescription": "Fungsionalitas penuh tanpa internet. Sempurna untuk pengguna yang mengutamakan privasi.",
+        "zeroTrackingTitle": "Tanpa Pelacakan",
+        "zeroTrackingDescription": "Tanpa analitik, tanpa telemetri, tanpa pengumpulan data. Keuangan Anda bukan urusan siapa pun."
+      },
+      "whatsNext": "Apa Selanjutnya?",
+      "whatsNextIntro": "Dalam beberapa menit ke depan, kami akan membantu Anda:",
+      "step1": "Mengimpor transaksi yang ada (CSV bank, OFX, atau manual)",
+      "step2": "Mengkategorikan pengeluaran Anda secara otomatis",
+      "step3": "Membuat anggaran pertama berdasarkan pengeluaran aktual",
+      "step4": "Mengatur pengingat tagihan agar tidak pernah melewatkan pembayaran",
+      "getStarted": "Mari Mulai"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} transaksi memerlukan kategori",
+      "allCategorized": "Semua transaksi sudah dikategorikan!",
+      "applySmartSuggestions": "Terapkan Saran Cerdas",
+      "categorize": "Kategorikan",
+      "percentMatch": "{percent}% cocok",
+      "rememberChoices": "Ingat pilihan kategori saya",
+      "rememberChoicesDescription": "Kategorikan transaksi serupa secara otomatis di masa depan",
+      "categorized": "{count} dikategorikan",
+      "remaining": "{count} tersisa",
+      "continue": "Lanjutkan",
+      "continueAnyway": "Lanjutkan Saja",
+      "categories": {
+        "foodDining": "Makanan & Restoran",
+        "transportation": "Transportasi",
+        "billsUtilities": "Tagihan & Utilitas",
+        "shopping": "Belanja",
+        "entertainment": "Hiburan",
+        "healthFitness": "Kesehatan & Kebugaran",
+        "personalCare": "Perawatan Pribadi",
+        "income": "Pendapatan",
+        "transfers": "Transfer"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Gagal menghapus profil",
+    "deleteTitle": "Hapus profil?",
+    "defaultProfile": "Profil default",
+    "cannotDeleteOnly": "Ini adalah satu-satunya profil. Anda tidak dapat menghapusnya.",
+    "permanentWarning": "Ini akan menghapus profil ini secara permanen. Anggaran pribadi apa pun milik profil ini akan dibagikan dengan semua profil.",
+    "cannotUndo": "Tindakan ini tidak dapat dibatalkan.",
+    "deleteButton": "Hapus profil"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Lihat"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Nonaktifkan pengingat",
+      "enableReminder": "Aktifkan pengingat",
+      "off": "Mati"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Impor Selesai!",
+    "subtitle": "Tetapkan saldo akun Anda untuk {accountName}",
+    "transactionsImported": "{count} transaksi diimpor",
+    "netChange": "Perubahan bersih dari transaksi:",
+    "currentBalanceLabel": "Berapa saldo bank Anda saat ini?",
+    "currentBalanceLabelCredit": "Berapa jumlah terutang Anda saat ini?",
+    "balanceHelperBank": "Buka aplikasi bank Anda dan masukkan saldo yang ditampilkan untuk akun ini",
+    "balanceHelperCredit": "Masukkan saldo saat ini yang tertera pada laporan kartu kredit Anda (sebagai angka positif)",
+    "startingBalance": "Saldo awal Anda:",
+    "startingBalanceCredit": "Jumlah terutang awal Anda:",
+    "balanceMatchNote": "Ini akan mencocokkan saldo akun Anda dengan bank Anda.",
+    "negativeWarning": "Ini menghasilkan saldo awal negatif, yang tidak biasa untuk rekening giro/tabungan. Silakan periksa kembali apakah saldo Anda saat ini sudah benar.",
+    "skipForNow": "Lewati untuk sekarang",
+    "setBalance": "Tetapkan Saldo"
+  },
+  "recommendations": {
+    "title": "Rekomendasi Teratas",
+    "subtitle": "Cara meningkatkan kesehatan keuangan Anda",
+    "emptyState": "Tambahkan lebih banyak data keuangan untuk menerima rekomendasi yang dipersonalisasi",
+    "viewAllFactors": "Lihat semua faktor",
+    "factorLabels": {
+      "savingsRate": "Tabungan",
+      "debtToIncome": "Utang",
+      "budgetAdherence": "Anggaran",
+      "emergencyFund": "Dana Darurat",
+      "investmentGrowth": "Investasi",
+      "expenseStability": "Pengeluaran"
+    },
+    "factorLinks": {
+      "savingsRate": "Lihat Pendapatan",
+      "debtToIncome": "Kelola Pinjaman",
+      "budgetAdherence": "Sesuaikan Anggaran",
+      "emergencyFund": "Rencanakan Tabungan",
+      "investmentGrowth": "Lihat Portofolio",
+      "expenseStability": "Lihat Laporan"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Pedagang:",
+    "amount": "Jumlah:",
+    "average": "Rata-rata: {amount}",
+    "category": "Kategori:",
+    "wasExpected": "Apakah ini diharapkan?",
+    "expected": "Diharapkan",
+    "unexpected": "Tidak terduga",
+    "markedExpected": "Ditandai sebagai diharapkan",
+    "markedUnexpected": "Ditandai sebagai tidak terduga",
+    "moreAnomalies": "+{count} {count, plural, =1 {anomali} other {anomali}} lagi",
+    "severity": {
+      "high": "TINGGI",
+      "medium": "SEDANG",
+      "low": "RENDAH"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Pemrosesan OCR",
+    "cancel": "Batal",
+    "pageProgress": "Halaman {current} dari {total}",
+    "elapsed": "Berlalu: {time}",
+    "remaining": "~{time} tersisa",
+    "stages": {
+      "loading": "Memuat PDF",
+      "rendering": "Merender Halaman",
+      "preprocessing": "Meningkatkan Gambar",
+      "ocr": "Mengekstrak Teks",
+      "parsing": "Mengurai Transaksi",
+      "complete": "Selesai",
+      "error": "Kesalahan",
+      "cancelled": "Dibatalkan",
+      "enhance": "Tingkatkan"
+    },
+    "errorRetry": "Pemrosesan OCR gagal. Apakah Anda ingin mencoba lagi?",
+    "cancelledRetry": "OCR dibatalkan. Apakah Anda ingin memulai ulang?",
+    "retryButton": "Coba Ulang OCR",
+    "completedSuccess": "OCR berhasil diselesaikan!",
+    "loadingChart": "Memuat grafik..."
+  },
+  "developerTools": {
+    "title": "Alat Pengembang",
+    "subtitle": "Alat QA untuk menguji internasionalisasi (hanya mode pengembang)",
+    "pseudoLocaleLabel": "Aktifkan pseudo-locale (en-XA)",
+    "pseudoLocaleHelp": "Mengganti semua teks yang diterjemahkan dengan karakter beraksen. Teks bahasa Inggris biasa yang tersisa adalah <strong>dikodekan langsung</strong> dan perlu diubah menjadi kunci terjemahan.",
+    "pseudoLocaleExample": "Contoh: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Jika Anda melihat \"Dashboard\" alih-alih \"[Ðášhƀóářð~~~]\", itu dikodekan langsung!",
+    "infoPseudoLocale": "Pseudo-locale membantu mengidentifikasi string yang belum diterjemahkan selama pengembangan",
+    "infoProduction": "Build produksi secara otomatis mengecualikan locale en-XA",
+    "infoSwitchBack": "Beralih kembali ke locale asli untuk melanjutkan pengembangan normal"
+  },
+  "pageMetadata": {
+    "appName": "Aplikasi Anggaran",
+    "scenarios": "Skenario Bagaimana-Jika",
+    "merchantRules": "Aturan Pedagang",
+    "more": "Lainnya",
+    "netWorth": "Kekayaan Bersih",
+    "properties": "Properti",
+    "propertyDetail": "Detail Properti",
+    "review": "Tinjau Transaksi",
+    "events": "Anggaran Acara",
+    "landing": "BudgetPro – Kuasai Keuangan Anda",
+    "dashboard": "Dasbor",
+    "transactions": "Transaksi",
+    "import": "Impor",
+    "accounts": "Akun",
+    "budgets": "Anggaran",
+    "categories": "Kategori",
+    "reports": "Laporan",
+    "settings": "Pengaturan",
+    "subscriptions": "Langganan",
+    "investments": "Investasi",
+    "debtPayoff": "Pelunasan Utang",
+    "loans": "Pinjaman",
+    "calculators": "Kalkulator",
+    "planning": "Perencanaan",
+    "ocr": "Pemindai Struk",
+    "export": "Ekspor",
+    "fridayReview": "Tinjauan Mingguan",
+    "onboarding": "Memulai",
+    "offline": "Mode offline",
+    "splits": "Bagi transaksi"
   }
 }

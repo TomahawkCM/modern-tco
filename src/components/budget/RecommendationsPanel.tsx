@@ -18,6 +18,7 @@ import {
   PiggyBank,
   ChevronRight,
 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import type { HealthScoreResult, FactorType } from "@/lib/analytics/health-score";
 import { useSeniorsMode } from "@/hooks/useSeniorsMode";
@@ -28,46 +29,31 @@ interface RecommendationsPanelProps {
   className?: string;
 }
 
-// Map factor types to icons and app sections
-const FACTOR_CONFIG: Record<
-  FactorType,
-  { icon: typeof TrendingUp; label: string; link: string; linkLabel: string }
-> = {
+// Map factor types to icons and app sections (labels resolved via i18n)
+const FACTOR_CONFIG: Record<FactorType, { icon: typeof TrendingUp; link: string }> = {
   savingsRate: {
     icon: PiggyBank,
-    label: "Savings",
     link: "/budget-app/transactions?filter=income",
-    linkLabel: "View Income",
   },
   debtToIncome: {
     icon: CreditCard,
-    label: "Debt",
     link: "/budget-app/loans",
-    linkLabel: "Manage Loans",
   },
   budgetAdherence: {
     icon: Target,
-    label: "Budget",
     link: "/budget-app/budgets",
-    linkLabel: "Adjust Budgets",
   },
   emergencyFund: {
     icon: Shield,
-    label: "Emergency Fund",
     link: "/budget-app/planning/future",
-    linkLabel: "Plan Savings",
   },
   investmentGrowth: {
     icon: TrendingUp,
-    label: "Investments",
     link: "/budget-app/investments",
-    linkLabel: "View Portfolio",
   },
   expenseStability: {
     icon: BarChart3,
-    label: "Expenses",
     link: "/budget-app/reports",
-    linkLabel: "View Reports",
   },
 };
 
@@ -77,6 +63,7 @@ export function RecommendationsPanel({
   className,
 }: RecommendationsPanelProps) {
   const { isSeniorsMode } = useSeniorsMode();
+  const t = useTranslations("recommendations");
 
   // Get top recommendations sorted by lowest percentage (most room for improvement)
   const recommendations = useMemo(() => {
@@ -102,9 +89,7 @@ export function RecommendationsPanel({
         )}
       >
         <Lightbulb className="mb-3 h-12 w-12 text-slate-600" />
-        <p className="text-center text-slate-400">
-          Add more financial data to receive personalized recommendations
-        </p>
+        <p className="text-center text-slate-400">{t("emptyState")}</p>
       </div>
     );
   }
@@ -123,9 +108,9 @@ export function RecommendationsPanel({
         </div>
         <div>
           <h3 className={cn("font-semibold text-white", isSeniorsMode && "text-lg")}>
-            Top Recommendations
+            {t("title")}
           </h3>
-          <p className="text-xs text-slate-400">Ways to improve your financial health</p>
+          <p className="text-xs text-slate-400">{t("subtitle")}</p>
         </div>
       </div>
 
@@ -147,12 +132,12 @@ export function RecommendationsPanel({
                 <div
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
                   style={{
-                    backgroundColor: `${rec.config.label === "Savings" ? "#22c55e" : "#94a3b8"}20`,
+                    backgroundColor: `${rec.type === "savingsRate" ? "#22c55e" : "#94a3b8"}20`,
                   }}
                 >
                   <Icon
                     className="h-4 w-4"
-                    style={{ color: rec.config.label === "Savings" ? "#22c55e" : "#94a3b8" }}
+                    style={{ color: rec.type === "savingsRate" ? "#22c55e" : "#94a3b8" }}
                   />
                 </div>
 
@@ -161,7 +146,7 @@ export function RecommendationsPanel({
                   {/* Factor Label & Score */}
                   <div className="mb-1 flex items-center justify-between">
                     <span className={cn("font-medium text-white", isSeniorsMode && "text-base")}>
-                      {rec.config.label}
+                      {t(`factorLabels.${rec.type}`)}
                     </span>
                     <span
                       className={cn(
@@ -190,7 +175,7 @@ export function RecommendationsPanel({
                       isSeniorsMode ? "text-sm" : "text-xs"
                     )}
                   >
-                    {rec.config.linkLabel}
+                    {t(`factorLinks.${rec.type}`)}
                     <ChevronRight className="h-3 w-3" />
                   </Link>
                 </div>
@@ -224,7 +209,7 @@ export function RecommendationsPanel({
           href="/budget-app/reports"
           className="mt-4 flex items-center justify-center gap-2 text-sm text-slate-400 transition-colors hover:text-white"
         >
-          View all factors
+          {t("viewAllFactors")}
           <ChevronRight className="h-4 w-4" />
         </Link>
       )}

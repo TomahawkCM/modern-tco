@@ -6,6 +6,9 @@
 import { AlertTriangle, X, CheckCircle, XCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import type { SupportedLocale } from "@/i18n/config";
 import { storeAnomalyFeedback, getAnomalyFeedback } from "@/lib/budget-db";
 import type { AnomalyAlert } from "@/lib/analytics/anomaly-detector";
 
@@ -23,7 +26,9 @@ export function AnomalyAlerts({
   maxDisplay = 5,
 }: AnomalyAlertsProps) {
   const locale = useLocale();
+  const currency = useDefaultCurrency();
   const tAria = useTranslations("aria");
+  const t = useTranslations("anomalyAlerts");
   const [feedbackMap, setFeedbackMap] = useState<Map<string, boolean>>(new Map());
 
   // Load existing feedback - use stable reference for alerts
@@ -131,51 +136,59 @@ export function AnomalyAlerts({
               <div className="min-w-0 flex-1">
                 <div className="mb-1 flex items-center gap-2">
                   <span className={`rounded px-2 py-0.5 text-xs font-medium ${styles.badge}`}>
-                    {alert.severity.toUpperCase()}
+                    {t(`severity.${alert.severity}`)}
                   </span>
                   <span className="text-xs text-gray-500">{formattedDate}</span>
                 </div>
                 <p className={`text-sm font-medium ${styles.text} mb-1`}>{alert.reason}</p>
                 <div className="mb-3 space-y-0.5 text-xs text-gray-600">
                   <p>
-                    <span className="font-medium">Merchant:</span> {alert.merchant}
+                    <span className="font-medium">{t("merchant")}</span> {alert.merchant}
                   </p>
                   <p>
-                    <span className="font-medium">Amount:</span> ${alert.amount.toFixed(2)}{" "}
-                    (Average: ${alert.expectedRange.average.toFixed(2)})
+                    <span className="font-medium">{t("amount")}</span>{" "}
+                    {formatCurrency(alert.amount, currency, locale as SupportedLocale)} (
+                    {t("average", {
+                      amount: formatCurrency(
+                        alert.expectedRange.average,
+                        currency,
+                        locale as SupportedLocale
+                      ),
+                    })}
+                    )
                   </p>
                   <p>
-                    <span className="font-medium">Category:</span> {alert.category}
+                    <span className="font-medium">{t("category")}</span> {alert.category}
                   </p>
                 </div>
 
                 {/* User Feedback Buttons */}
                 {!feedbackMap.has(alert.transaction.id) ? (
                   <div className="flex items-center gap-2 border-t border-gray-200 pt-2">
-                    <span className="text-xs text-gray-600">Was this expected?</span>
+                    <span className="text-xs text-gray-600">{t("wasExpected")}</span>
                     <button
                       onClick={() => handleFeedback(alert, true)}
                       className="flex items-center gap-1 rounded bg-green-50 px-2 py-1 text-xs text-green-700 transition-colors hover:bg-green-100"
-                      title="Mark as expected"
+                      title={t("expected")}
                     >
                       <CheckCircle className="h-3 w-3" />
-                      Expected
+                      {t("expected")}
                     </button>
                     <button
                       onClick={() => handleFeedback(alert, false)}
                       className="flex items-center gap-1 rounded bg-red-50 px-2 py-1 text-xs text-red-700 transition-colors hover:bg-red-100"
-                      title="Mark as unexpected"
+                      title={t("unexpected")}
                     >
                       <XCircle className="h-3 w-3" />
-                      Unexpected
+                      {t("unexpected")}
                     </button>
                   </div>
                 ) : (
                   <div className="border-t border-gray-200 pt-2">
                     <span className="text-xs italic text-gray-500">
                       {feedbackMap.get(alert.transaction.id)
-                        ? "✓ Marked as expected"
-                        : "✓ Marked as unexpected"}
+                        ? `\u2713 ${t("markedExpected")}`
+                        : `\u2713 ${t("markedUnexpected")}`}
                     </span>
                   </div>
                 )}
@@ -187,7 +200,7 @@ export function AnomalyAlerts({
 
       {alerts.length > maxDisplay && (
         <p className="text-center text-xs text-gray-500">
-          +{alerts.length - maxDisplay} more anomaly{alerts.length - maxDisplay > 1 ? "ies" : "y"}
+          {t("moreAnomalies", { count: alerts.length - maxDisplay })}
         </p>
       )}
     </div>

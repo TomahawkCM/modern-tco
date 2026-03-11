@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Tilbage til forsiden"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "År {n}",
+      "yearLabel": "År",
+      "month": "Måned {n}",
+      "monthYear": "Måned {n} (År {y})",
+      "age": "Alder {n}",
+      "ageLabel": "Alder",
+      "contributions": "Indbetalinger",
+      "interestEarned": "Optjent rente",
+      "interest": "Rente",
+      "totalInterest": "Samlet rente",
+      "snowball": "Snebold",
+      "avalanche": "Lavine",
+      "portfolio": "Portefølje",
+      "fireTarget": "FIRE-mål",
+      "median50th": "Median (50.)",
+      "remainingBalance": "Resterende saldo",
+      "totalAssets": "Samlede aktiver",
+      "totalLiabilities": "Samlet gæld",
+      "netWorth": "Nettoformue",
+      "retirement": "Pension"
+    },
+    "scenario": {
+      "compare": "Sammenlign scenarier ({count} gemt)",
+      "selectUpTo": "Vælg op til 3 scenarier at sammenligne:",
+      "duplicate": "Dupliker",
+      "delete": "Slet",
+      "sideBySide": "Side om side-sammenligning",
+      "field": "Felt",
+      "delta": "Forskel",
+      "selectOneMore": "Vælg ét scenarie mere at sammenligne",
+      "copySuffix": "(kopi)"
+    },
+    "openCalculator": "Åbn lommeregner"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Slet",
     "edit": "Redigér",
     "loading": "Indlæser...",
-    "save": "Gem"
+    "save": "Gem",
+    "success": "Succes!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Bekræft",
     "finalConfirmation": "Endelig bekræftelse:",
     "processing": "Behandler...",
-    "typeToConfirm": "Skriv {text} for at bekræfte denne handling."
+    "typeToConfirm": "Skriv {text} for at bekræfte denne handling.",
+    "confirmAction": "Bekræft handling"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Scorehistorik",
+      "monthsOfData": "{count} {count, plural, =1 {måned} other {måneder}} med data",
+      "emptyTitle": "Din scorehistorik vises her, når der er indsamlet nok data",
+      "emptySubtitle": "Kom tilbage næste måned!",
+      "legendScore": "Score",
+      "legendTrend": "Trend",
+      "tooltipScore": "Score",
+      "tooltipTrend": "Trend",
+      "loadingChart": "Indlæser diagram..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Dit budget forbliver på DIN enhed",
+      "heroSubtitle": "Velkommen til den mest privatlivsvenlige budgetapp nogensinde. Ingen konti, ingen sky, ingen kompromiser.",
+      "features": {
+        "yourDataTitle": "Dine data, din enhed",
+        "yourDataDescription": "Alle økonomiske data gemmes lokalt på din enhed. Ingen cloud-servere, ingen tredjepartsadgang.",
+        "encryptionTitle": "Bankniveau-kryptering",
+        "encryptionDescription": "AES-256-kryptering beskytter dine data. Kun du har nøglen—den forlader aldrig din enhed.",
+        "offlineTitle": "Virker offline",
+        "offlineDescription": "Fuld funktionalitet uden internet. Perfekt til privatlivsbevidste brugere.",
+        "zeroTrackingTitle": "Ingen sporing",
+        "zeroTrackingDescription": "Ingen analyse, ingen telemetri, ingen dataindsamling. Din økonomi vedkommer ingen andre."
+      },
+      "whatsNext": "Hvad nu?",
+      "whatsNextIntro": "I løbet af de næste minutter hjælper vi dig med at:",
+      "step1": "Importere dine eksisterende transaktioner (bank-CSV, OFX eller manuelt)",
+      "step2": "Kategorisere dine udgifter automatisk",
+      "step3": "Oprette dit første budget baseret på faktiske udgifter",
+      "step4": "Opsætte regningspåmindelser, så du aldrig misser en betaling",
+      "getStarted": "Kom i gang"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} transaktioner mangler kategorier",
+      "allCategorized": "Alle transaktioner er kategoriseret!",
+      "applySmartSuggestions": "Anvend smarte forslag",
+      "categorize": "Kategoriser",
+      "percentMatch": "{percent}% match",
+      "rememberChoices": "Husk mine kategorivalg",
+      "rememberChoicesDescription": "Kategoriser lignende transaktioner automatisk i fremtiden",
+      "categorized": "{count} kategoriseret",
+      "remaining": "{count} tilbageværende",
+      "continue": "Fortsæt",
+      "continueAnyway": "Fortsæt alligevel",
+      "categories": {
+        "foodDining": "Mad & Restaurant",
+        "transportation": "Transport",
+        "billsUtilities": "Regninger & Forsyninger",
+        "shopping": "Shopping",
+        "entertainment": "Underholdning",
+        "healthFitness": "Sundhed & Fitness",
+        "personalCare": "Personlig pleje",
+        "income": "Indkomst",
+        "transfers": "Overførsler"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Kunne ikke slette profil",
+    "deleteTitle": "Slet profil?",
+    "defaultProfile": "Standardprofil",
+    "cannotDeleteOnly": "Dette er den eneste profil. Du kan ikke slette den.",
+    "permanentWarning": "Dette vil permanent slette denne profil. Alle private budgetter, der ejes af denne profil, vil blive delt med alle profiler.",
+    "cannotUndo": "Denne handling kan ikke fortrydes.",
+    "deleteButton": "Slet profil"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Vis"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Deaktiver påmindelse",
+      "enableReminder": "Aktiver påmindelse",
+      "off": "Fra"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Import færdig!",
+    "subtitle": "Angiv din kontosaldo for {accountName}",
+    "transactionsImported": "{count} transaktioner importeret",
+    "netChange": "Nettoændring fra transaktioner:",
+    "currentBalanceLabel": "Hvad er din nuværende banksaldo?",
+    "currentBalanceLabelCredit": "Hvad er dit nuværende skyldige beløb?",
+    "balanceHelperBank": "Åbn din bankapp og indtast den saldo, der vises for denne konto",
+    "balanceHelperCredit": "Indtast den aktuelle saldo vist på dit kreditkortudtog (som et positivt tal)",
+    "startingBalance": "Din startsaldo:",
+    "startingBalanceCredit": "Dit startgældsbeløb:",
+    "balanceMatchNote": "Dette får din kontosaldo til at matche din bank.",
+    "negativeWarning": "Dette resulterer i en negativ startsaldo, hvilket er usædvanligt for løn-/opsparingskonti. Dobbelttjek venligst, at din nuværende saldo er korrekt.",
+    "skipForNow": "Spring over for nu",
+    "setBalance": "Indstil saldo"
+  },
+  "recommendations": {
+    "title": "Topanbefalinger",
+    "subtitle": "Måder at forbedre din økonomiske sundhed",
+    "emptyState": "Tilføj flere økonomiske data for at modtage personlige anbefalinger",
+    "viewAllFactors": "Se alle faktorer",
+    "factorLabels": {
+      "savingsRate": "Opsparing",
+      "debtToIncome": "Gæld",
+      "budgetAdherence": "Budget",
+      "emergencyFund": "Nødfond",
+      "investmentGrowth": "Investeringer",
+      "expenseStability": "Udgifter"
+    },
+    "factorLinks": {
+      "savingsRate": "Se indkomst",
+      "debtToIncome": "Administrer lån",
+      "budgetAdherence": "Juster budgetter",
+      "emergencyFund": "Planlæg opsparing",
+      "investmentGrowth": "Se portefølje",
+      "expenseStability": "Se rapporter"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Forhandler:",
+    "amount": "Beløb:",
+    "average": "Gennemsnit: {amount}",
+    "category": "Kategori:",
+    "wasExpected": "Var dette forventet?",
+    "expected": "Forventet",
+    "unexpected": "Uventet",
+    "markedExpected": "Markeret som forventet",
+    "markedUnexpected": "Markeret som uventet",
+    "moreAnomalies": "+{count} flere {count, plural, =1 {afvigelse} other {afvigelser}}",
+    "severity": {
+      "high": "HØJ",
+      "medium": "MIDDEL",
+      "low": "LAV"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR-behandling",
+    "cancel": "Annuller",
+    "pageProgress": "Side {current} af {total}",
+    "elapsed": "Forløbet: {time}",
+    "remaining": "~{time} tilbage",
+    "stages": {
+      "loading": "Indlæser PDF",
+      "rendering": "Renderer sider",
+      "preprocessing": "Forbedrer billede",
+      "ocr": "Udtrækker tekst",
+      "parsing": "Analyserer transaktioner",
+      "complete": "Færdig",
+      "error": "Fejl",
+      "cancelled": "Annulleret",
+      "enhance": "Forbedre"
+    },
+    "errorRetry": "OCR-behandling mislykkedes. Vil du prøve igen?",
+    "cancelledRetry": "OCR blev annulleret. Vil du starte forfra?",
+    "retryButton": "Prøv OCR igen",
+    "completedSuccess": "OCR gennemført!",
+    "loadingChart": "Indlæser diagram..."
+  },
+  "developerTools": {
+    "title": "Udviklingsværktøjer",
+    "subtitle": "QA-værktøjer til test af internationalisering (kun udviklertilstand)",
+    "pseudoLocaleLabel": "Aktiver pseudo-locale (en-XA)",
+    "pseudoLocaleHelp": "Erstatter al oversat tekst med accentuerede tegn. Resterende almindelig engelsk tekst er <strong>hardkodet</strong> og skal konverteres til oversættelsesnøgler.",
+    "pseudoLocaleExample": "Eksempel: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Hvis du ser \"Dashboard\" i stedet for \"[Ðášhƀóářð~~~]\", er det hardkodet!",
+    "infoPseudoLocale": "Pseudo-locale hjælper med at identificere uoversatte strenge under udvikling",
+    "infoProduction": "Produktionsbygninger udelukker automatisk en-XA locale",
+    "infoSwitchBack": "Skift tilbage til en rigtig locale for at fortsætte normal udvikling"
+  },
+  "pageMetadata": {
+    "appName": "Budgetapp",
+    "scenarios": "Hvad-nu-hvis-scenarier",
+    "merchantRules": "Forhandlerregler",
+    "more": "Mere",
+    "netWorth": "Nettoformue",
+    "properties": "Ejendomme",
+    "propertyDetail": "Ejendomsdetaljer",
+    "review": "Gennemgå transaktioner",
+    "events": "Begivenhedsbudgetter",
+    "landing": "BudgetPro – Mestr din økonomi",
+    "dashboard": "Oversigt",
+    "transactions": "Transaktioner",
+    "import": "Importer",
+    "accounts": "Konti",
+    "budgets": "Budgetter",
+    "categories": "Kategorier",
+    "reports": "Rapporter",
+    "settings": "Indstillinger",
+    "subscriptions": "Abonnementer",
+    "investments": "Investeringer",
+    "debtPayoff": "Gældsafbetaling",
+    "loans": "Lån",
+    "calculators": "Beregningsværktøjer",
+    "planning": "Planlægning",
+    "ocr": "Kvitteringsscanner",
+    "export": "Eksporter",
+    "fridayReview": "Ugentlig gennemgang",
+    "onboarding": "Kom i gang",
+    "offline": "Offline tilstand",
+    "splits": "Opdel transaktioner"
   }
 }

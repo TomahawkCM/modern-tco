@@ -44,6 +44,8 @@ export function useToast() {
 
 export function ToastProvider({ children }: { children: ReactNode }) {
   const tAria = useTranslations("aria");
+  const tCommon = useTranslations("common");
+  const tDialog = useTranslations("dialog");
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [confirmDialog, setConfirmDialog] = useState<{
     message: string;
@@ -106,7 +108,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 
   // Phase 4.1.2: Success animation for important actions
   const successWithAnimation = useCallback((message?: string) => {
-    setSuccessAnimationMessage(message || "Success!");
+    setSuccessAnimationMessage(message || tCommon("success"));
     setShowSuccessAnimation(true);
   }, []);
 
@@ -154,7 +156,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
         >
           <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
             <h3 id="confirm-dialog-title" className="mb-4 text-lg font-semibold text-gray-900">
-              Confirm Action
+              {tDialog("confirmAction")}
             </h3>
             <p className="mb-6 text-gray-700">{confirmDialog.message}</p>
             <div className="flex gap-4">
@@ -162,13 +164,13 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 onClick={() => handleConfirm(false)}
                 className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 transition-colors hover:bg-gray-50"
               >
-                Cancel
+                {tDialog("cancel")}
               </button>
               <button
                 onClick={() => handleConfirm(true)}
                 className="flex-1 rounded-lg bg-teal-500 px-4 py-2 text-white transition-colors hover:bg-teal-600"
               >
-                Confirm
+                {tDialog("confirm")}
               </button>
             </div>
           </div>

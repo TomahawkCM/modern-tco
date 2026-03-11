@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Înapoi la pagina principală"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Anul {n}",
+      "yearLabel": "An",
+      "month": "Luna {n}",
+      "monthYear": "Luna {n} (Anul {y})",
+      "age": "Vârsta {n}",
+      "ageLabel": "Vârstă",
+      "contributions": "Contribuții",
+      "interestEarned": "Dobândă câștigată",
+      "interest": "Dobândă",
+      "totalInterest": "Dobândă totală",
+      "snowball": "Bulgăre de zăpadă",
+      "avalanche": "Avalanșă",
+      "portfolio": "Portofoliu",
+      "fireTarget": "Obiectiv FIRE",
+      "median50th": "Mediană (50)",
+      "remainingBalance": "Sold rămas",
+      "totalAssets": "Total active",
+      "totalLiabilities": "Total pasive",
+      "netWorth": "Avere netă",
+      "retirement": "Pensionare"
+    },
+    "scenario": {
+      "compare": "Comparați scenarii ({count} salvate)",
+      "selectUpTo": "Selectați până la 3 scenarii de comparat:",
+      "duplicate": "Duplicare",
+      "delete": "Ștergere",
+      "sideBySide": "Comparație alăturată",
+      "field": "Câmp",
+      "delta": "Diferență",
+      "selectOneMore": "Selectați încă un scenariu de comparat",
+      "copySuffix": "(copie)"
+    },
+    "openCalculator": "Deschide calculatorul"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Șterge",
     "edit": "Editează",
     "loading": "Se încarcă...",
-    "save": "Salvează"
+    "save": "Salvează",
+    "success": "Succes!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Confirmă",
     "finalConfirmation": "Confirmare Finală:",
     "processing": "Se procesează...",
-    "typeToConfirm": "Scrie {text} pentru a confirma această acțiune."
+    "typeToConfirm": "Scrie {text} pentru a confirma această acțiune.",
+    "confirmAction": "Confirmă acțiunea"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Istoricul scorului",
+      "monthsOfData": "{count} {count, plural, =1 {lună} other {luni}} de date",
+      "emptyTitle": "Istoricul scorului va apărea aici pe măsură ce datele se acumulează",
+      "emptySubtitle": "Reveniți luna viitoare!",
+      "legendScore": "Scor",
+      "legendTrend": "Tendință",
+      "tooltipScore": "Scor",
+      "tooltipTrend": "Tendință",
+      "loadingChart": "Se încarcă graficul..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Bugetul dvs. trăiește pe dispozitivul DVS.",
+      "heroSubtitle": "Bun venit în cea mai privată aplicație de buget. Fără conturi, fără cloud, fără compromisuri.",
+      "features": {
+        "yourDataTitle": "Datele dvs., dispozitivul dvs.",
+        "yourDataDescription": "Toate datele financiare sunt stocate local pe dispozitivul dvs. Fără servere cloud, fără acces al terților.",
+        "encryptionTitle": "Criptare de nivel bancar",
+        "encryptionDescription": "Criptarea AES-256 vă protejează datele. Doar dvs. aveți cheia — nu părăsește niciodată dispozitivul.",
+        "offlineTitle": "Funcționează offline",
+        "offlineDescription": "Funcționalitate completă fără internet. Perfect pentru utilizatorii preocupați de confidențialitate.",
+        "zeroTrackingTitle": "Zero urmărire",
+        "zeroTrackingDescription": "Fără analize, fără telemetrie, fără colectare de date. Finanțele dvs. nu privesc pe nimeni."
+      },
+      "whatsNext": "Ce urmează?",
+      "whatsNextIntro": "În următoarele minute, vă vom ajuta să:",
+      "step1": "Importați tranzacțiile existente (CSV, OFX sau manual)",
+      "step2": "Categorizați automat cheltuielile",
+      "step3": "Creați primul buget bazat pe cheltuieli reale",
+      "step4": "Configurați mementouri pentru facturi",
+      "getStarted": "Să începem"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} tranzacții necesită categorii",
+      "allCategorized": "Toate tranzacțiile sunt categorizate!",
+      "applySmartSuggestions": "Aplică sugestiile inteligente",
+      "categorize": "Categorizează",
+      "percentMatch": "{percent}% potrivire",
+      "rememberChoices": "Memorează alegerile mele de categorii",
+      "rememberChoicesDescription": "Categorizează automat tranzacțiile similare în viitor",
+      "categorized": "{count} categorizate",
+      "remaining": "{count} rămase",
+      "continue": "Continuă",
+      "continueAnyway": "Continuă oricum",
+      "categories": {
+        "foodDining": "Mâncare și restaurant",
+        "transportation": "Transport",
+        "billsUtilities": "Facturi și utilități",
+        "shopping": "Cumpărături",
+        "entertainment": "Divertisment",
+        "healthFitness": "Sănătate și fitness",
+        "personalCare": "Îngrijire personală",
+        "income": "Venituri",
+        "transfers": "Transferuri"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Nu s-a putut șterge profilul",
+    "deleteTitle": "Ștergeți profilul?",
+    "defaultProfile": "Profil implicit",
+    "cannotDeleteOnly": "Acesta este singurul profil. Nu îl puteți șterge.",
+    "permanentWarning": "Acest lucru va șterge definitiv acest profil. Orice bugete private deținute de acest profil vor fi partajate cu toate profilurile.",
+    "cannotUndo": "Această acțiune nu poate fi anulată.",
+    "deleteButton": "Șterge profilul"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Vizualizare"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Dezactivează mementoul",
+      "enableReminder": "Activează mementoul",
+      "off": "Oprit"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Import finalizat!",
+    "subtitle": "Setați soldul contului {accountName}",
+    "transactionsImported": "{count} tranzacții importate",
+    "netChange": "Modificare netă din tranzacții:",
+    "currentBalanceLabel": "Care este soldul dvs. bancar actual?",
+    "currentBalanceLabelCredit": "Care este suma dvs. curentă datorată?",
+    "balanceHelperBank": "Deschideți aplicația bancară și introduceți soldul afișat pentru acest cont",
+    "balanceHelperCredit": "Introduceți soldul actual afișat pe extrasul cardului de credit (ca număr pozitiv)",
+    "startingBalance": "Soldul dvs. inițial:",
+    "startingBalanceCredit": "Suma dvs. inițială datorată:",
+    "balanceMatchNote": "Aceasta va face ca soldul contului dvs. să corespundă cu banca.",
+    "negativeWarning": "Rezultatul este un sold inițial negativ, ceea ce este neobișnuit pentru conturile curente/de economii. Vă rugăm să verificați dacă soldul actual este corect.",
+    "skipForNow": "Omite deocamdată",
+    "setBalance": "Setează soldul"
+  },
+  "recommendations": {
+    "title": "Recomandări principale",
+    "subtitle": "Modalități de a vă îmbunătăți sănătatea financiară",
+    "emptyState": "Adăugați mai multe date financiare pentru recomandări personalizate",
+    "viewAllFactors": "Vezi toți factorii",
+    "factorLabels": {
+      "savingsRate": "Economii",
+      "debtToIncome": "Datorii",
+      "budgetAdherence": "Buget",
+      "emergencyFund": "Fond de urgență",
+      "investmentGrowth": "Investiții",
+      "expenseStability": "Cheltuieli"
+    },
+    "factorLinks": {
+      "savingsRate": "Vezi veniturile",
+      "debtToIncome": "Gestionează împrumuturile",
+      "budgetAdherence": "Ajustează bugetele",
+      "emergencyFund": "Planifică economiile",
+      "investmentGrowth": "Vezi portofoliul",
+      "expenseStability": "Vezi rapoartele"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Comerciant:",
+    "amount": "Sumă:",
+    "average": "Media: {amount}",
+    "category": "Categorie:",
+    "wasExpected": "A fost așteptat?",
+    "expected": "Așteptat",
+    "unexpected": "Neașteptat",
+    "markedExpected": "Marcat ca așteptat",
+    "markedUnexpected": "Marcat ca neașteptat",
+    "moreAnomalies": "+{count} {count, plural, =1 {anomalie} other {anomalii}} în plus",
+    "severity": {
+      "high": "RIDICAT",
+      "medium": "MEDIU",
+      "low": "SCĂZUT"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Procesare OCR",
+    "cancel": "Anulează",
+    "pageProgress": "Pagina {current} din {total}",
+    "elapsed": "Timpul scurs: {time}",
+    "remaining": "~{time} rămas",
+    "stages": {
+      "loading": "Încărcare PDF",
+      "rendering": "Randare pagini",
+      "preprocessing": "Îmbunătățire imagine",
+      "ocr": "Extragere text",
+      "parsing": "Analiză tranzacții",
+      "complete": "Finalizat",
+      "error": "Eroare",
+      "cancelled": "Anulat",
+      "enhance": "Îmbunătățește"
+    },
+    "errorRetry": "Procesarea OCR a eșuat. Doriți să reîncercați?",
+    "cancelledRetry": "OCR a fost anulat. Doriți să reporniți?",
+    "retryButton": "Reîncearcă OCR",
+    "completedSuccess": "OCR finalizat cu succes!",
+    "loadingChart": "Se încarcă graficul..."
+  },
+  "developerTools": {
+    "title": "Instrumente pentru dezvoltatori",
+    "subtitle": "Instrumente QA pentru testarea internaționalizării (doar modul dezvoltator)",
+    "pseudoLocaleLabel": "Activare pseudo-locale (en-XA)",
+    "pseudoLocaleHelp": "Înlocuiește tot textul tradus cu caractere accentuate. Orice text în engleză rămas neschimbat este <strong>codificat direct</strong> și trebuie convertit în chei de traducere.",
+    "pseudoLocaleExample": "Exemplu: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Dacă vedeți \"Dashboard\" în loc de \"[Ðášhƀóářð~~~]\", este codificat direct!",
+    "infoPseudoLocale": "Pseudo-locale ajută la identificarea șirurilor netraduse în timpul dezvoltării",
+    "infoProduction": "Build-urile de producție exclud automat locale-ul en-XA",
+    "infoSwitchBack": "Reveniți la un locale real pentru a continua dezvoltarea normală"
+  },
+  "pageMetadata": {
+    "appName": "Aplicație de buget",
+    "scenarios": "Scenarii ipotetice",
+    "merchantRules": "Reguli comercianți",
+    "more": "Mai mult",
+    "netWorth": "Valoare netă",
+    "properties": "Proprietăți",
+    "propertyDetail": "Detalii proprietate",
+    "review": "Verificare tranzacții",
+    "events": "Bugete pentru evenimente",
+    "landing": "BudgetPro – Stăpânește-ți finanțele",
+    "dashboard": "Tablou de bord",
+    "transactions": "Tranzacții",
+    "import": "Import",
+    "accounts": "Conturi",
+    "budgets": "Bugete",
+    "categories": "Categorii",
+    "reports": "Rapoarte",
+    "settings": "Setări",
+    "subscriptions": "Abonamente",
+    "investments": "Investiții",
+    "debtPayoff": "Achitare datorii",
+    "loans": "Împrumuturi",
+    "calculators": "Calculatoare",
+    "planning": "Planificare",
+    "ocr": "Scanner de chitanțe",
+    "export": "Export",
+    "fridayReview": "Revizuire săptămânală",
+    "onboarding": "Începeți",
+    "offline": "Mod offline",
+    "splits": "Împărțiți tranzacțiile"
   }
 }

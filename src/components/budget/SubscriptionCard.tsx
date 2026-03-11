@@ -14,8 +14,12 @@
 
 import type { SubscriptionPattern } from "@/lib/subscription-detector";
 import type { Subscription } from "@/types/budget";
-import { format, formatDistanceToNow, differenceInDays } from "date-fns";
-import { useTranslations } from "next-intl";
+import { differenceInDays } from "date-fns";
+import { useTranslations, useLocale } from "next-intl";
+import { formatRelativeTime } from "@/i18n/utils/formatDate";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import type { SupportedLocale } from "@/i18n/config";
 import {
   Calendar,
   TrendingUp,
@@ -66,6 +70,8 @@ export function SubscriptionCard({
   onToggleReminder,
 }: SubscriptionCardProps) {
   const t = useTranslations("subscriptionCard");
+  const locale = useLocale();
+  const currency = useDefaultCurrency();
   const [showMenu, setShowMenu] = useState(false);
 
   const intervalLabel = t(`interval.${subscription.interval_type}`);
@@ -330,7 +336,7 @@ export function SubscriptionCard({
           <div>
             <p className="text-xs text-muted-foreground">{t("stats.amount")}</p>
             <p className="text-base font-semibold text-foreground">
-              ${subscription.average_amount.toFixed(2)}
+              {formatCurrency(subscription.average_amount, currency, locale as SupportedLocale)}
             </p>
           </div>
         </div>
@@ -371,12 +377,16 @@ export function SubscriptionCard({
             <div>
               <p className="text-xs text-muted-foreground">{t("stats.nextCharge")}</p>
               <p className="text-sm font-medium text-foreground">
-                {format(new Date(subscription.next_expected_charge), "MMM d")}
+                {new Date(subscription.next_expected_charge).toLocaleDateString(locale, {
+                  month: "short",
+                  day: "numeric",
+                })}
               </p>
               <p className="text-xs text-muted-foreground">
-                {formatDistanceToNow(new Date(subscription.next_expected_charge), {
-                  addSuffix: true,
-                })}
+                {formatRelativeTime(
+                  new Date(subscription.next_expected_charge),
+                  locale as SupportedLocale
+                )}
               </p>
             </div>
           </div>
@@ -392,11 +402,13 @@ export function SubscriptionCard({
               {source === "auto-detected" ? t("stats.totalSpent") : t("stats.annualCost")}
             </p>
             <p className="text-base font-semibold text-foreground">
-              $
-              {(source === "auto-detected"
-                ? subscription.total_spent
-                : subscription.annual_cost_estimate
-              ).toFixed(2)}
+              {formatCurrency(
+                source === "auto-detected"
+                  ? subscription.total_spent
+                  : subscription.annual_cost_estimate,
+                currency,
+                locale as SupportedLocale
+              )}
             </p>
           </div>
         </div>
@@ -411,20 +423,32 @@ export function SubscriptionCard({
           <span className="font-medium text-foreground">
             {source === "auto-detected"
               ? t("details.charges", { count: subscription.occurrence_count })
-              : `$${subscription.annual_cost_estimate.toFixed(2)}`}
+              : formatCurrency(
+                  subscription.annual_cost_estimate,
+                  currency,
+                  locale as SupportedLocale
+                )}
           </span>
         </div>
         <div className="flex items-center justify-between text-sm">
           <span className="text-muted-foreground">{t("details.firstCharge")}:</span>
           <span className="font-medium text-foreground">
-            {format(new Date(subscription.first_charge), "MMM d, yyyy")}
+            {new Date(subscription.first_charge).toLocaleDateString(locale, {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            })}
           </span>
         </div>
         {subscription.last_charge && (
           <div className="flex items-center justify-between text-sm">
             <span className="text-muted-foreground">{t("details.lastCharge")}:</span>
             <span className="font-medium text-foreground">
-              {format(new Date(subscription.last_charge), "MMM d, yyyy")}
+              {new Date(subscription.last_charge).toLocaleDateString(locale, {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}
             </span>
           </div>
         )}
@@ -450,11 +474,15 @@ export function SubscriptionCard({
                   ? "text-teal-600 hover:bg-teal-500/10"
                   : "text-muted-foreground hover:bg-muted"
               }`}
-              title={manualSubscription.reminderEnabled ? "Disable reminder" : "Enable reminder"}
+              title={
+                manualSubscription.reminderEnabled
+                  ? t("reminderToggle.disableReminder")
+                  : t("reminderToggle.enableReminder")
+              }
             >
               {manualSubscription.reminderEnabled
                 ? t("details.daysBefore", { count: manualSubscription.reminderDaysBefore })
-                : "Off"}
+                : t("reminderToggle.off")}
             </button>
           </div>
         )}

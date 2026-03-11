@@ -74,7 +74,7 @@ export function ScenarioComparison({
     async (scenario: CalculatorScenario) => {
       await saveScenario({
         calculatorType: scenario.calculatorType,
-        name: `${scenario.name} (copy)`,
+        name: `${scenario.name} ${t("copySuffix")}`,
         input: { ...scenario.input },
         assumptions: scenario.assumptions ? { ...scenario.assumptions } : undefined,
       });
@@ -145,7 +145,7 @@ export function ScenarioComparison({
         <div className="flex items-center gap-2">
           <ArrowUpDown className="h-4 w-4 text-slate-400" />
           <span className="text-sm font-medium text-slate-300">
-            Compare Scenarios ({scenarios.length} saved)
+            {t("scenario.compare", { count: scenarios.length })}
           </span>
         </div>
         <ChevronDown
@@ -157,7 +157,7 @@ export function ScenarioComparison({
         <div className="space-y-4 border-t border-slate-700 p-4">
           {/* Scenario List */}
           <div className="space-y-2">
-            <p className="text-xs text-slate-500">Select up to 3 scenarios to compare:</p>
+            <p className="text-xs text-slate-500">{t("scenario.selectUpTo")}</p>
             {scenarios.map((scenario) => (
               <div
                 key={scenario.id}
@@ -182,7 +182,7 @@ export function ScenarioComparison({
                   />
                   <div>
                     <span className="text-sm font-medium text-white">{scenario.name}</span>
-                    <span className="ml-2 text-xs text-slate-500">
+                    <span className="ms-2 text-xs text-slate-500">
                       {new Date(scenario.updatedAt).toLocaleDateString(locale)}
                     </span>
                   </div>
@@ -191,14 +191,14 @@ export function ScenarioComparison({
                   <button
                     onClick={() => handleDuplicate(scenario)}
                     className="rounded p-1 text-slate-500 hover:text-slate-300"
-                    title="Duplicate"
+                    title={t("scenario.duplicate")}
                   >
                     <Copy className="h-3.5 w-3.5" />
                   </button>
                   <button
                     onClick={() => handleDelete(scenario.id!)}
                     className="rounded p-1 text-slate-500 hover:text-red-400"
-                    title="Delete"
+                    title={t("scenario.delete")}
                   >
                     <Trash2 className="h-3.5 w-3.5" />
                   </button>
@@ -212,13 +212,15 @@ export function ScenarioComparison({
             <div className="overflow-x-auto">
               <div className="mb-3 flex items-center gap-2">
                 <GitBranch className="h-4 w-4 text-teal-400" />
-                <span className="text-sm font-medium text-teal-400">Side-by-Side Comparison</span>
+                <span className="text-sm font-medium text-teal-400">
+                  {t("scenario.sideBySide")}
+                </span>
               </div>
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-slate-700">
                     <th className="py-2 text-left text-xs font-medium uppercase text-slate-500">
-                      Field
+                      {t("scenario.field")}
                     </th>
                     {selectedScenarios.map((s) => (
                       <th
@@ -230,7 +232,7 @@ export function ScenarioComparison({
                     ))}
                     {selectedScenarios.length === 2 && (
                       <th className="py-2 text-right text-xs font-medium uppercase text-slate-500">
-                        Delta
+                        {t("scenario.delta")}
                       </th>
                     )}
                   </tr>
@@ -273,9 +275,7 @@ export function ScenarioComparison({
           )}
 
           {selectedScenarios.length === 1 && (
-            <p className="text-center text-xs text-slate-500">
-              Select one more scenario to compare
-            </p>
+            <p className="text-center text-xs text-slate-500">{t("scenario.selectOneMore")}</p>
           )}
         </div>
       )}

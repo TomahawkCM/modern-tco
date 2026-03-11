@@ -124,7 +124,7 @@ export function ReceiptThumbnail({ transactionId, onReceiptDeleted }: ReceiptThu
               <button
                 onClick={() => openFullSize(receipt)}
                 className="relative h-12 w-12 overflow-hidden rounded border border-gray-300 transition-colors hover:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                title={`View ${receipt.filename}`}
+                title={`${t("view")} ${receipt.filename}`}
               >
                 {thumbnailUrl && !isPdf ? (
                   <img

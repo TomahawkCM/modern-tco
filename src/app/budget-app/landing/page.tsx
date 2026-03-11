@@ -6,8 +6,11 @@ import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, BarChart3, Lock, ShieldCheck, Sparkles, Zap } from "lucide-react";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import React, { useRef } from "react";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import type { SupportedLocale } from "@/i18n/config";
+import { getCurrencySymbol } from "@/i18n/utils/formatCurrency";
 import { CurrencyBackground } from "./CurrencyBackground";
 
 const featureConfig = [
@@ -107,6 +110,8 @@ const comparisonRows = ["dataPrivacy", "cost", "bankConnections", "storageLocati
 
 export default function BudgetAppLandingPage() {
   const t = useTranslations("landing");
+  const currency = useDefaultCurrency();
+  const locale = useLocale();
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
 
@@ -134,7 +139,9 @@ export default function BudgetAppLandingPage() {
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-yellow-400 to-amber-500 shadow-lg shadow-yellow-500/20">
-              <span className="text-lg font-bold text-black">$</span>
+              <span className="text-lg font-bold text-black">
+                {getCurrencySymbol(currency, locale as SupportedLocale)}
+              </span>
             </div>
             <span className="text-xl font-bold tracking-tight text-white">{t("brand.name")}</span>
           </div>
@@ -567,7 +574,9 @@ export default function BudgetAppLandingPage() {
             <div className="col-span-2 md:col-span-1">
               <div className="mb-4 flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-yellow-400 to-amber-600">
-                  <span className="text-lg font-bold text-black">$</span>
+                  <span className="text-lg font-bold text-black">
+                    {getCurrencySymbol(currency, locale as SupportedLocale)}
+                  </span>
                 </div>
                 <span className="text-xl font-bold text-white">{t("brand.name")}</span>
               </div>

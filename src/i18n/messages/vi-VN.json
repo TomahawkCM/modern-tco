@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Về trang chủ"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Năm {n}",
+      "yearLabel": "Năm",
+      "month": "Tháng {n}",
+      "monthYear": "Tháng {n} (Năm {y})",
+      "age": "Tuổi {n}",
+      "ageLabel": "Tuổi",
+      "contributions": "Đóng góp",
+      "interestEarned": "Lãi suất kiếm được",
+      "interest": "Lãi suất",
+      "totalInterest": "Tổng lãi suất",
+      "snowball": "Quả cầu tuyết",
+      "avalanche": "Tuyết lở",
+      "portfolio": "Danh mục đầu tư",
+      "fireTarget": "Mục tiêu FIRE",
+      "median50th": "Trung vị (50)",
+      "remainingBalance": "Số dư còn lại",
+      "totalAssets": "Tổng tài sản",
+      "totalLiabilities": "Tổng nợ phải trả",
+      "netWorth": "Giá trị tài sản ròng",
+      "retirement": "Hưu trí"
+    },
+    "scenario": {
+      "compare": "So sánh kịch bản ({count} đã lưu)",
+      "selectUpTo": "Chọn tối đa 3 kịch bản để so sánh:",
+      "duplicate": "Nhân bản",
+      "delete": "Xóa",
+      "sideBySide": "So sánh song song",
+      "field": "Trường",
+      "delta": "Chênh lệch",
+      "selectOneMore": "Chọn thêm một kịch bản để so sánh",
+      "copySuffix": "(bản sao)"
+    },
+    "openCalculator": "Mở máy tính"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Xóa",
     "edit": "Chỉnh sửa",
     "loading": "Đang tải...",
-    "save": "Lưu"
+    "save": "Lưu",
+    "success": "Thành công!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Xác nhận",
     "finalConfirmation": "Xác nhận cuối cùng:",
     "processing": "Đang xử lý...",
-    "typeToConfirm": "Gõ {text} để xác nhận hành động này."
+    "typeToConfirm": "Gõ {text} để xác nhận hành động này.",
+    "confirmAction": "Xác nhận hành động"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Lịch sử điểm",
+      "monthsOfData": "{count} {count, plural, =1 {tháng} other {tháng}} dữ liệu",
+      "emptyTitle": "Lịch sử điểm của bạn sẽ hiển thị ở đây khi dữ liệu tích lũy",
+      "emptySubtitle": "Hãy quay lại vào tháng sau!",
+      "legendScore": "Điểm",
+      "legendTrend": "Xu hướng",
+      "tooltipScore": "Điểm",
+      "tooltipTrend": "Xu hướng",
+      "loadingChart": "Đang tải biểu đồ..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Ngân sách của bạn nằm trên thiết bị CỦA BẠN",
+      "heroSubtitle": "Chào mừng đến với ứng dụng ngân sách riêng tư nhất. Không cần tài khoản, không đám mây, không thỏa hiệp.",
+      "features": {
+        "yourDataTitle": "Dữ liệu của bạn, thiết bị của bạn",
+        "yourDataDescription": "Tất cả dữ liệu tài chính được lưu trữ cục bộ trên thiết bị của bạn. Không có máy chủ đám mây, không có bên thứ ba truy cập.",
+        "encryptionTitle": "Mã hóa cấp ngân hàng",
+        "encryptionDescription": "Mã hóa AES-256 bảo vệ dữ liệu của bạn. Chỉ bạn mới có khóa—nó không bao giờ rời khỏi thiết bị của bạn.",
+        "offlineTitle": "Hoạt động ngoại tuyến",
+        "offlineDescription": "Đầy đủ chức năng mà không cần internet. Hoàn hảo cho người dùng quan tâm đến quyền riêng tư.",
+        "zeroTrackingTitle": "Không theo dõi",
+        "zeroTrackingDescription": "Không phân tích, không theo dõi từ xa, không thu thập dữ liệu. Tài chính của bạn không phải việc của ai khác."
+      },
+      "whatsNext": "Tiếp theo là gì?",
+      "whatsNextIntro": "Trong vài phút tới, chúng tôi sẽ giúp bạn:",
+      "step1": "Nhập các giao dịch hiện có (CSV ngân hàng, OFX, hoặc nhập thủ công)",
+      "step2": "Tự động phân loại chi tiêu của bạn",
+      "step3": "Tạo ngân sách đầu tiên dựa trên chi tiêu thực tế",
+      "step4": "Thiết lập nhắc nhở hóa đơn để không bỏ lỡ thanh toán",
+      "getStarted": "Bắt đầu nào"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} giao dịch cần phân loại",
+      "allCategorized": "Tất cả giao dịch đã được phân loại!",
+      "applySmartSuggestions": "Áp dụng gợi ý thông minh",
+      "categorize": "Phân loại",
+      "percentMatch": "Khớp {percent}%",
+      "rememberChoices": "Ghi nhớ lựa chọn danh mục của tôi",
+      "rememberChoicesDescription": "Tự động phân loại các giao dịch tương tự trong tương lai",
+      "categorized": "Đã phân loại {count}",
+      "remaining": "Còn lại {count}",
+      "continue": "Tiếp tục",
+      "continueAnyway": "Vẫn tiếp tục",
+      "categories": {
+        "foodDining": "Ăn uống",
+        "transportation": "Đi lại",
+        "billsUtilities": "Hóa đơn & Tiện ích",
+        "shopping": "Mua sắm",
+        "entertainment": "Giải trí",
+        "healthFitness": "Sức khỏe & Thể dục",
+        "personalCare": "Chăm sóc cá nhân",
+        "income": "Thu nhập",
+        "transfers": "Chuyển khoản"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Không thể xóa hồ sơ",
+    "deleteTitle": "Xóa hồ sơ?",
+    "defaultProfile": "Hồ sơ mặc định",
+    "cannotDeleteOnly": "Đây là hồ sơ duy nhất. Bạn không thể xóa nó.",
+    "permanentWarning": "Thao tác này sẽ xóa vĩnh viễn hồ sơ này. Bất kỳ ngân sách riêng tư nào thuộc hồ sơ này sẽ được chia sẻ với tất cả các hồ sơ.",
+    "cannotUndo": "Hành động này không thể hoàn tác.",
+    "deleteButton": "Xóa hồ sơ"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Xem"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Tắt nhắc nhở",
+      "enableReminder": "Bật nhắc nhở",
+      "off": "Tắt"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Nhập hoàn tất!",
+    "subtitle": "Đặt số dư tài khoản cho {accountName}",
+    "transactionsImported": "Đã nhập {count} giao dịch",
+    "netChange": "Thay đổi ròng từ các giao dịch:",
+    "currentBalanceLabel": "Số dư ngân hàng hiện tại của bạn là bao nhiêu?",
+    "currentBalanceLabelCredit": "Số tiền nợ hiện tại của bạn là bao nhiêu?",
+    "balanceHelperBank": "Mở ứng dụng ngân hàng và nhập số dư hiển thị cho tài khoản này",
+    "balanceHelperCredit": "Nhập số dư hiện tại trên sao kê thẻ tín dụng (dưới dạng số dương)",
+    "startingBalance": "Số dư ban đầu của bạn:",
+    "startingBalanceCredit": "Số tiền nợ ban đầu của bạn:",
+    "balanceMatchNote": "Điều này sẽ giúp số dư tài khoản khớp với ngân hàng của bạn.",
+    "negativeWarning": "Kết quả là số dư ban đầu âm, điều này bất thường đối với tài khoản thanh toán/tiết kiệm. Vui lòng kiểm tra lại số dư hiện tại.",
+    "skipForNow": "Bỏ qua",
+    "setBalance": "Đặt số dư"
+  },
+  "recommendations": {
+    "title": "Đề xuất hàng đầu",
+    "subtitle": "Cách cải thiện sức khỏe tài chính của bạn",
+    "emptyState": "Thêm dữ liệu tài chính để nhận đề xuất cá nhân hóa",
+    "viewAllFactors": "Xem tất cả yếu tố",
+    "factorLabels": {
+      "savingsRate": "Tiết kiệm",
+      "debtToIncome": "Nợ",
+      "budgetAdherence": "Ngân sách",
+      "emergencyFund": "Quỹ khẩn cấp",
+      "investmentGrowth": "Đầu tư",
+      "expenseStability": "Chi phí"
+    },
+    "factorLinks": {
+      "savingsRate": "Xem thu nhập",
+      "debtToIncome": "Quản lý khoản vay",
+      "budgetAdherence": "Điều chỉnh ngân sách",
+      "emergencyFund": "Lên kế hoạch tiết kiệm",
+      "investmentGrowth": "Xem danh mục đầu tư",
+      "expenseStability": "Xem báo cáo"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Đơn vị bán:",
+    "amount": "Số tiền:",
+    "average": "Trung bình: {amount}",
+    "category": "Danh mục:",
+    "wasExpected": "Giao dịch này có đúng dự kiến không?",
+    "expected": "Đúng dự kiến",
+    "unexpected": "Bất thường",
+    "markedExpected": "Đã đánh dấu là đúng dự kiến",
+    "markedUnexpected": "Đã đánh dấu là bất thường",
+    "moreAnomalies": "+{count} {count, plural, =1 {bất thường} other {bất thường}} khác",
+    "severity": {
+      "high": "CAO",
+      "medium": "TRUNG BÌNH",
+      "low": "THẤP"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Đang xử lý OCR",
+    "cancel": "Hủy",
+    "pageProgress": "Trang {current} / {total}",
+    "elapsed": "Đã trôi qua: {time}",
+    "remaining": "Còn ~{time}",
+    "stages": {
+      "loading": "Đang tải PDF",
+      "rendering": "Đang kết xuất trang",
+      "preprocessing": "Đang cải thiện hình ảnh",
+      "ocr": "Đang trích xuất văn bản",
+      "parsing": "Đang phân tích giao dịch",
+      "complete": "Hoàn tất",
+      "error": "Lỗi",
+      "cancelled": "Đã hủy",
+      "enhance": "Cải thiện"
+    },
+    "errorRetry": "Xử lý OCR thất bại. Bạn có muốn thử lại không?",
+    "cancelledRetry": "OCR đã bị hủy. Bạn có muốn bắt đầu lại không?",
+    "retryButton": "Thử lại OCR",
+    "completedSuccess": "OCR hoàn tất thành công!",
+    "loadingChart": "Đang tải biểu đồ..."
+  },
+  "developerTools": {
+    "title": "Công cụ nhà phát triển",
+    "subtitle": "Công cụ QA để kiểm tra quốc tế hóa (chỉ chế độ phát triển)",
+    "pseudoLocaleLabel": "Bật locale giả (en-XA)",
+    "pseudoLocaleHelp": "Thay thế tất cả văn bản đã dịch bằng các ký tự có dấu. Bất kỳ văn bản tiếng Anh thuần nào còn lại là <strong>mã hóa cứng</strong> và cần được chuyển đổi thành khóa dịch.",
+    "pseudoLocaleExample": "Ví dụ: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Nếu bạn thấy \"Dashboard\" thay vì \"[Ðášhƀóářð~~~]\", nó được mã hóa cứng!",
+    "infoPseudoLocale": "Locale giả giúp xác định các chuỗi chưa được dịch trong quá trình phát triển",
+    "infoProduction": "Bản build sản xuất tự động loại trừ locale en-XA",
+    "infoSwitchBack": "Chuyển về locale thực để tiếp tục phát triển bình thường"
+  },
+  "pageMetadata": {
+    "appName": "Ứng dụng ngân sách",
+    "scenarios": "Kịch bản giả định",
+    "merchantRules": "Quy tắc đối tác",
+    "more": "Thêm",
+    "netWorth": "Giá trị ròng",
+    "properties": "Bất động sản",
+    "propertyDetail": "Chi tiết bất động sản",
+    "review": "Xem lại giao dịch",
+    "events": "Ngân sách sự kiện",
+    "landing": "BudgetPro – Làm chủ tài chính của bạn",
+    "dashboard": "Bảng điều khiển",
+    "transactions": "Giao dịch",
+    "import": "Nhập",
+    "accounts": "Tài khoản",
+    "budgets": "Ngân sách",
+    "categories": "Danh mục",
+    "reports": "Báo cáo",
+    "settings": "Cài đặt",
+    "subscriptions": "Đăng ký",
+    "investments": "Đầu tư",
+    "debtPayoff": "Trả nợ",
+    "loans": "Khoản vay",
+    "calculators": "Máy tính",
+    "planning": "Lập kế hoạch",
+    "ocr": "Quét hóa đơn",
+    "export": "Xuất",
+    "fridayReview": "Đánh giá hàng tuần",
+    "onboarding": "Bắt đầu",
+    "offline": "Chế độ ngoại tuyến",
+    "splits": "Chia giao dịch"
   }
 }

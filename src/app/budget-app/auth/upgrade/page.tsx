@@ -4,7 +4,10 @@ import { Button } from "@/components/ui/button";
 import { useTrialStatus } from "@/hooks/useTrialStatus";
 import { APP_PRICE, TRIAL_DURATION_DAYS } from "@/lib/subscriptionService";
 import { Check, CreditCard, Lock, Shield, Sparkles, Zap } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { getCurrencySymbol } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import type { SupportedLocale } from "@/i18n/config";
 import Link from "next/link";
 
 const featureIcons = [Zap, Shield, Lock, CreditCard];
@@ -18,6 +21,8 @@ const featureKeys = [
 export default function UpgradePage() {
   const { isExpired, daysRemaining, isTrial, loading } = useTrialStatus();
   const t = useTranslations("auth");
+  const locale = useLocale();
+  const currency = useDefaultCurrency();
 
   return (
     <div className="space-y-8">
@@ -45,7 +50,10 @@ export default function UpgradePage() {
             {t("upgrade.lifetimeAccessBadge")}
           </div>
           <div className="flex items-baseline justify-center gap-1">
-            <span className="text-4xl font-bold text-white">${APP_PRICE}</span>
+            <span className="text-4xl font-bold text-white">
+              {getCurrencySymbol(currency, locale as SupportedLocale)}
+              {APP_PRICE}
+            </span>
             <span className="text-slate-400">{t("upgrade.oneTime")}</span>
           </div>
           <p className="mt-2 text-sm text-slate-400">{t("upgrade.payOnce")}</p>

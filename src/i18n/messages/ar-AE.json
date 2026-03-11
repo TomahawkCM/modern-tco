@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "العودة للرئيسية"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "السنة {n}",
+      "yearLabel": "السنة",
+      "month": "الشهر {n}",
+      "monthYear": "الشهر {n} (السنة {y})",
+      "age": "العمر {n}",
+      "ageLabel": "العمر",
+      "contributions": "المساهمات",
+      "interestEarned": "الفوائد المكتسبة",
+      "interest": "الفوائد",
+      "totalInterest": "إجمالي الفوائد",
+      "snowball": "كرة الثلج",
+      "avalanche": "الانهيار",
+      "portfolio": "المحفظة",
+      "fireTarget": "هدف FIRE",
+      "median50th": "الوسيط (50%)",
+      "remainingBalance": "الرصيد المتبقي",
+      "totalAssets": "إجمالي الأصول",
+      "totalLiabilities": "إجمالي الالتزامات",
+      "netWorth": "صافي الثروة",
+      "retirement": "التقاعد"
+    },
+    "scenario": {
+      "compare": "مقارنة السيناريوهات ({count} محفوظة)",
+      "selectUpTo": "اختر حتى 3 سيناريوهات للمقارنة:",
+      "duplicate": "تكرار",
+      "delete": "حذف",
+      "sideBySide": "مقارنة جنبًا إلى جنب",
+      "field": "الحقل",
+      "delta": "الفرق",
+      "selectOneMore": "اختر سيناريو إضافيًا للمقارنة",
+      "copySuffix": "(نسخة)"
+    },
+    "openCalculator": "فتح الآلة الحاسبة"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "حذف",
     "edit": "تعديل",
     "loading": "جارٍ التحميل...",
-    "save": "حفظ"
+    "save": "حفظ",
+    "success": "نجاح!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "تأكيد",
     "finalConfirmation": "التأكيد النهائي:",
     "processing": "جارٍ المعالجة...",
-    "typeToConfirm": "اكتب {text} لتأكيد هذا الإجراء."
+    "typeToConfirm": "اكتب {text} لتأكيد هذا الإجراء.",
+    "confirmAction": "تأكيد الإجراء"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "سجل النتيجة",
+      "monthsOfData": "{count} شهر من البيانات",
+      "emptyTitle": "سيظهر سجل نتيجتك هنا مع تراكم البيانات",
+      "emptySubtitle": "عد الشهر القادم!",
+      "legendScore": "النتيجة",
+      "legendTrend": "الاتجاه",
+      "tooltipScore": "النتيجة",
+      "tooltipTrend": "الاتجاه",
+      "loadingChart": "جاري تحميل الرسم البياني..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "ميزانيتك تعيش على جهازك",
+      "heroSubtitle": "مرحباً بك في أكثر تطبيق ميزانية خصوصية. بدون حسابات، بدون سحابة، بدون تنازلات.",
+      "features": {
+        "yourDataTitle": "بياناتك، جهازك",
+        "yourDataDescription": "جميع البيانات المالية مخزنة محلياً على جهازك. لا خوادم سحابية، لا وصول لأطراف ثالثة.",
+        "encryptionTitle": "تشفير بمستوى البنوك",
+        "encryptionDescription": "تشفير AES-256 يحمي بياناتك. أنت وحدك تملك المفتاح.",
+        "offlineTitle": "يعمل بدون إنترنت",
+        "offlineDescription": "وظائف كاملة بدون إنترنت. مثالي للمستخدمين المهتمين بالخصوصية.",
+        "zeroTrackingTitle": "صفر تتبع",
+        "zeroTrackingDescription": "لا تحليلات، لا قياس عن بُعد، لا جمع بيانات. شؤونك المالية ليست شأن أحد."
+      },
+      "whatsNext": "ما التالي؟",
+      "whatsNextIntro": "في الدقائق القادمة، سنساعدك في:",
+      "step1": "استيراد معاملاتك الحالية (CSV بنكي، OFX، أو يدوي)",
+      "step2": "تصنيف إنفاقك تلقائياً",
+      "step3": "إنشاء أول ميزانية بناءً على الإنفاق الفعلي",
+      "step4": "إعداد تذكيرات الفواتير",
+      "getStarted": "لنبدأ!"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} معاملة تحتاج تصنيف",
+      "allCategorized": "تم تصنيف جميع المعاملات!",
+      "applySmartSuggestions": "تطبيق الاقتراحات الذكية",
+      "categorize": "تصنيف",
+      "percentMatch": "{percent}% تطابق",
+      "rememberChoices": "تذكر اختياراتي",
+      "rememberChoicesDescription": "تصنيف المعاملات المماثلة تلقائياً في المستقبل",
+      "categorized": "{count} مصنفة",
+      "remaining": "{count} متبقية",
+      "continue": "متابعة",
+      "continueAnyway": "المتابعة على أي حال",
+      "categories": {
+        "foodDining": "طعام ومطاعم",
+        "transportation": "مواصلات",
+        "billsUtilities": "فواتير وخدمات",
+        "shopping": "تسوق",
+        "entertainment": "ترفيه",
+        "healthFitness": "صحة ولياقة",
+        "personalCare": "عناية شخصية",
+        "income": "دخل",
+        "transfers": "تحويلات"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "فشل حذف الملف الشخصي",
+    "deleteTitle": "حذف الملف الشخصي؟",
+    "defaultProfile": "الملف الشخصي الافتراضي",
+    "cannotDeleteOnly": "هذا هو الملف الشخصي الوحيد. لا يمكنك حذفه.",
+    "permanentWarning": "سيؤدي هذا إلى حذف هذا الملف الشخصي نهائياً. ستتم مشاركة أي ميزانيات خاصة يملكها هذا الملف الشخصي مع جميع الملفات الشخصية.",
+    "cannotUndo": "لا يمكن التراجع عن هذا الإجراء.",
+    "deleteButton": "حذف الملف الشخصي"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "عرض"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "تعطيل التذكير",
+      "enableReminder": "تفعيل التذكير",
+      "off": "معطل"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "اكتمل الاستيراد!",
+    "subtitle": "تعيين رصيد حساب {accountName}",
+    "transactionsImported": "تم استيراد {count} معاملة",
+    "netChange": "صافي التغيير من المعاملات:",
+    "currentBalanceLabel": "ما هو رصيدك البنكي الحالي؟",
+    "currentBalanceLabelCredit": "ما هو المبلغ المستحق حالياً؟",
+    "balanceHelperBank": "افتح تطبيق البنك وأدخل الرصيد المعروض",
+    "balanceHelperCredit": "أدخل الرصيد الحالي من كشف بطاقة الائتمان (كرقم موجب)",
+    "startingBalance": "رصيدك الابتدائي:",
+    "startingBalanceCredit": "مبلغك المستحق الابتدائي:",
+    "balanceMatchNote": "سيجعل هذا رصيد حسابك مطابقاً للبنك.",
+    "negativeWarning": "ينتج عن هذا رصيد ابتدائي سالب، وهو أمر غير معتاد للحسابات الجارية/التوفير. يرجى التحقق من رصيدك الحالي.",
+    "skipForNow": "تخطي الآن",
+    "setBalance": "تعيين الرصيد"
+  },
+  "recommendations": {
+    "title": "أهم التوصيات",
+    "subtitle": "طرق لتحسين صحتك المالية",
+    "emptyState": "أضف المزيد من البيانات المالية للحصول على توصيات مخصصة",
+    "viewAllFactors": "عرض جميع العوامل",
+    "factorLabels": {
+      "savingsRate": "المدخرات",
+      "debtToIncome": "الديون",
+      "budgetAdherence": "الميزانية",
+      "emergencyFund": "صندوق الطوارئ",
+      "investmentGrowth": "الاستثمارات",
+      "expenseStability": "المصروفات"
+    },
+    "factorLinks": {
+      "savingsRate": "عرض الدخل",
+      "debtToIncome": "إدارة القروض",
+      "budgetAdherence": "تعديل الميزانيات",
+      "emergencyFund": "تخطيط المدخرات",
+      "investmentGrowth": "عرض المحفظة",
+      "expenseStability": "عرض التقارير"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "التاجر:",
+    "amount": "المبلغ:",
+    "average": "المتوسط: {amount}",
+    "category": "الفئة:",
+    "wasExpected": "هل كان هذا متوقعاً؟",
+    "expected": "متوقع",
+    "unexpected": "غير متوقع",
+    "markedExpected": "تم التعليم كمتوقع",
+    "markedUnexpected": "تم التعليم كغير متوقع",
+    "moreAnomalies": "+{count} حالات شاذة أخرى",
+    "severity": {
+      "high": "عالي",
+      "medium": "متوسط",
+      "low": "منخفض"
+    }
+  },
+  "pdfOcr": {
+    "processing": "معالجة OCR",
+    "cancel": "إلغاء",
+    "pageProgress": "صفحة {current} من {total}",
+    "elapsed": "المنقضي: {time}",
+    "remaining": "~{time} متبقي",
+    "stages": {
+      "loading": "تحميل PDF",
+      "rendering": "عرض الصفحات",
+      "preprocessing": "تحسين الصورة",
+      "ocr": "استخراج النص",
+      "parsing": "تحليل المعاملات",
+      "complete": "مكتمل",
+      "error": "خطأ",
+      "cancelled": "ملغي",
+      "enhance": "تحسين"
+    },
+    "errorRetry": "فشلت معالجة OCR. هل تريد المحاولة مرة أخرى؟",
+    "cancelledRetry": "تم إلغاء OCR. هل تريد إعادة البدء؟",
+    "retryButton": "إعادة محاولة OCR",
+    "completedSuccess": "اكتملت معالجة OCR بنجاح!",
+    "loadingChart": "جاري تحميل الرسم البياني..."
+  },
+  "developerTools": {
+    "title": "أدوات المطور",
+    "subtitle": "أدوات ضمان الجودة لاختبار التدويل (وضع التطوير فقط)",
+    "pseudoLocaleLabel": "تفعيل اللغة الزائفة (en-XA)",
+    "pseudoLocaleHelp": "يستبدل جميع النصوص المترجمة بأحرف مُشكّلة. أي نص إنجليزي عادي متبقٍ هو <strong>مُضمّن في الكود</strong> ويحتاج إلى تحويله إلى مفاتيح ترجمة.",
+    "pseudoLocaleExample": "مثال: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "إذا رأيت \"Dashboard\" بدلاً من \"[Ðášhƀóářð~~~]\"، فهو مُضمّن في الكود!",
+    "infoPseudoLocale": "تساعد اللغة الزائفة في تحديد السلاسل النصية غير المترجمة أثناء التطوير",
+    "infoProduction": "تستثني بنيات الإنتاج تلقائياً لغة en-XA",
+    "infoSwitchBack": "عُد إلى لغة حقيقية لمتابعة التطوير العادي"
+  },
+  "pageMetadata": {
+    "appName": "تطبيق الميزانية",
+    "scenarios": "سيناريوهات افتراضية",
+    "merchantRules": "قواعد التجار",
+    "more": "المزيد",
+    "netWorth": "صافي الثروة",
+    "properties": "العقارات",
+    "propertyDetail": "تفاصيل العقار",
+    "review": "مراجعة المعاملات",
+    "events": "ميزانيات الفعاليات",
+    "landing": "BudgetPro – أتقن إدارة أموالك",
+    "dashboard": "لوحة المعلومات",
+    "transactions": "المعاملات",
+    "import": "استيراد",
+    "accounts": "الحسابات",
+    "budgets": "الميزانيات",
+    "categories": "الفئات",
+    "reports": "التقارير",
+    "settings": "الإعدادات",
+    "subscriptions": "الاشتراكات",
+    "investments": "الاستثمارات",
+    "debtPayoff": "سداد الديون",
+    "loans": "القروض",
+    "calculators": "الآلات الحاسبة",
+    "planning": "التخطيط",
+    "ocr": "ماسح الإيصالات",
+    "export": "تصدير",
+    "fridayReview": "المراجعة الأسبوعية",
+    "onboarding": "البدء",
+    "offline": "وضع عدم الاتصال",
+    "splits": "تقسيم المعاملات"
   }
 }

@@ -7,13 +7,19 @@ import { LogoMarquee } from "@/components/budget/landing/LogoMarquee";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { getCurrencySymbol } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import type { SupportedLocale } from "@/i18n/config";
 
 type PreviewMode = "insights" | "budgets" | "subscriptions";
 
 function ProductPreview() {
   const [mode, setMode] = useState<PreviewMode>("insights");
   const t = useTranslations("landing.heroSection");
+  const currency = useDefaultCurrency();
+  const locale = useLocale();
+  const sym = getCurrencySymbol(currency, locale as SupportedLocale);
 
   const modes: Array<{ id: PreviewMode; label: string }> = [
     { id: "insights", label: t("modes.insights") },
@@ -70,9 +76,9 @@ function ProductPreview() {
         {mode === "insights" ? (
           <div className="grid gap-4 lg:grid-cols-3">
             {[
-              { label: t("demo.netWorth"), value: "$24,500", tone: "bg-white/5" },
-              { label: t("demo.income"), value: "$6,120", tone: "bg-emerald-500/10" },
-              { label: t("demo.expenses"), value: "$3,980", tone: "bg-rose-500/10" },
+              { label: t("demo.netWorth"), value: `${sym}24,500`, tone: "bg-white/5" },
+              { label: t("demo.income"), value: `${sym}6,120`, tone: "bg-emerald-500/10" },
+              { label: t("demo.expenses"), value: `${sym}3,980`, tone: "bg-rose-500/10" },
             ].map((m) => (
               <div
                 key={m.label}
@@ -119,9 +125,9 @@ function ProductPreview() {
             </div>
             <div className="mt-4 space-y-3">
               {[
-                { name: t("demo.netflix"), meta: t("demo.monthly"), amt: "$15.99" },
-                { name: t("demo.spotify"), meta: t("demo.monthly"), amt: "$10.99" },
-                { name: t("demo.cloudStorage"), meta: t("demo.yearly"), amt: "$99.00" },
+                { name: t("demo.netflix"), meta: t("demo.monthly"), amt: `${sym}15.99` },
+                { name: t("demo.spotify"), meta: t("demo.monthly"), amt: `${sym}10.99` },
+                { name: t("demo.cloudStorage"), meta: t("demo.yearly"), amt: `${sym}99.00` },
               ].map((s) => (
                 <div
                   key={s.name}
@@ -152,19 +158,19 @@ function ProductPreview() {
               {
                 name: t("demo.groceryStore"),
                 meta: t("demo.foodToday"),
-                amt: "-$124.50",
+                amt: `-${sym}124.50`,
                 amtClass: "text-white",
               },
               {
                 name: t("demo.salary"),
                 meta: t("demo.incomeYesterday"),
-                amt: "+$4,250.00",
+                amt: `+${sym}4,250.00`,
                 amtClass: "text-emerald-400",
               },
               {
                 name: t("demo.netflix"),
                 meta: t("demo.subscriptionOct24"),
-                amt: "-$15.99",
+                amt: `-${sym}15.99`,
                 amtClass: "text-white",
               },
             ].map((tx) => (

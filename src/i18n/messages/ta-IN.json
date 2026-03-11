@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "முகப்புக்குத் திரும்பு"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "ஆண்டு {n}",
+      "yearLabel": "ஆண்டு",
+      "month": "மாதம் {n}",
+      "monthYear": "மாதம் {n} (ஆண்டு {y})",
+      "age": "வயது {n}",
+      "ageLabel": "வயது",
+      "contributions": "பங்களிப்புகள்",
+      "interestEarned": "ஈட்டிய வட்டி",
+      "interest": "வட்டி",
+      "totalInterest": "மொத்த வட்டி",
+      "snowball": "ஸ்னோபால்",
+      "avalanche": "அவலாஞ்ச்",
+      "portfolio": "போர்ட்ஃபோலியோ",
+      "fireTarget": "FIRE இலக்கு",
+      "median50th": "நடுநிலை (50வது)",
+      "remainingBalance": "மீதமுள்ள இருப்பு",
+      "totalAssets": "மொத்த சொத்துக்கள்",
+      "totalLiabilities": "மொத்த கடன்கள்",
+      "netWorth": "நிகர மதிப்பு",
+      "retirement": "ஓய்வு"
+    },
+    "scenario": {
+      "compare": "காட்சிகளை ஒப்பிடுக ({count} சேமிக்கப்பட்டவை)",
+      "selectUpTo": "ஒப்பிட 3 காட்சிகள் வரை தேர்ந்தெடுக்கவும்:",
+      "duplicate": "நகலெடு",
+      "delete": "நீக்கு",
+      "sideBySide": "பக்கவாட்டு ஒப்பீடு",
+      "field": "புலம்",
+      "delta": "வேறுபாடு",
+      "selectOneMore": "ஒப்பிட இன்னும் ஒரு காட்சியைத் தேர்ந்தெடுக்கவும்",
+      "copySuffix": "(delaysdelays)"
+    },
+    "openCalculator": "கணிப்பானைத் திறக்கவும்"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "அழிக்கவும்",
     "edit": "திருத்தவும்",
     "loading": "ஏற்றுகிறது...",
-    "save": "சேமிக்கவும்"
+    "save": "சேமிக்கவும்",
+    "success": "வெற்றி!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "உறுதிப்படுத்தவும்",
     "finalConfirmation": "இறுதி உறுதிப்படுத்தல்:",
     "processing": "செயலாக்கப்படுகிறது...",
-    "typeToConfirm": "இந்த நடவடிக்கையை உறுதிப்படுத்த {text} என تایپ செய்யவும்."
+    "typeToConfirm": "இந்த நடவடிக்கையை உறுதிப்படுத்த {text} என تایپ செய்யவும்.",
+    "confirmAction": "செயலை உறுதிப்படுத்தவும்"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "மதிப்பெண் வரலாறு",
+      "monthsOfData": "{count} {count, plural, =1 {மாத} other {மாதங்கள்}} தரவு",
+      "emptyTitle": "தரவு சேரும்போது உங்கள் மதிப்பெண் வரலாறு இங்கே தோன்றும்",
+      "emptySubtitle": "அடுத்த மாதம் மீண்டும் பாருங்கள்!",
+      "legendScore": "மதிப்பெண்",
+      "legendTrend": "போக்கு",
+      "tooltipScore": "மதிப்பெண்",
+      "tooltipTrend": "போக்கு",
+      "loadingChart": "விளக்கப்படம் ஏற்றப்படுகிறது..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "உங்கள் பட்ஜெட் உங்கள் சாதனத்தில் இருக்கிறது",
+      "heroSubtitle": "மிகவும் தனிப்பட்ட பட்ஜெட் பயன்பாட்டிற்கு வரவேற்கிறோம். கணக்குகள் இல்லை, கிளவுட் இல்லை, சமரசம் இல்லை.",
+      "features": {
+        "yourDataTitle": "உங்கள் தரவு, உங்கள் சாதனம்",
+        "yourDataDescription": "அனைத்து நிதித் தரவும் உங்கள் சாதனத்தில் உள்ளூரில் சேமிக்கப்படுகிறது. கிளவுட் சர்வர்கள் இல்லை, மூன்றாம் தரப்பு அணுகல் இல்லை.",
+        "encryptionTitle": "வங்கி-தர குறியாக்கம்",
+        "encryptionDescription": "AES-256 குறியாக்கம் உங்கள் தரவைப் பாதுகாக்கிறது. சாவி உங்களிடம் மட்டுமே உள்ளது—இது உங்கள் சாதனத்தை விட்டு வெளியேறாது.",
+        "offlineTitle": "ஆஃப்லைனில் வேலை செய்யும்",
+        "offlineDescription": "இணையம் இல்லாமல் முழு செயல்பாடு. தனியுரிமை உணர்வுள்ள பயனர்களுக்கு ஏற்றது.",
+        "zeroTrackingTitle": "சுழி கண்காணிப்பு",
+        "zeroTrackingDescription": "பகுப்பாய்வு இல்லை, டெலிமெட்ரி இல்லை, தரவு சேகரிப்பு இல்லை. உங்கள் நிதி யாருடைய விஷயமும் அல்ல."
+      },
+      "whatsNext": "அடுத்து என்ன?",
+      "whatsNextIntro": "அடுத்த சில நிமிடங்களில், நாங்கள் உங்களுக்கு உதவுவோம்:",
+      "step1": "உங்கள் ஏற்கனவே உள்ள பரிவர்த்தனைகளை இறக்குமதி செய்யுங்கள் (வங்கி CSV, OFX, அல்லது கைமுறை)",
+      "step2": "உங்கள் செலவுகளை தானாகவே வகைப்படுத்தவும்",
+      "step3": "உண்மையான செலவுகளின் அடிப்படையில் உங்கள் முதல் பட்ஜெட்டை உருவாக்கவும்",
+      "step4": "நினைவூட்டல்களை அமைக்கவும், நீங்கள் எந்த கட்டணத்தையும் தவறவிடாதீர்கள்",
+      "getStarted": "தொடங்குவோம்"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} பரிவர்த்தனைகளுக்கு வகைகள் தேவை",
+      "allCategorized": "அனைத்து பரிவர்த்தனைகளும் வகைப்படுத்தப்பட்டன!",
+      "applySmartSuggestions": "ஸ்மார்ட் பரிந்துரைகளைப் பயன்படுத்து",
+      "categorize": "வகைப்படுத்து",
+      "percentMatch": "{percent}% பொருத்தம்",
+      "rememberChoices": "என் வகை விருப்பங்களை நினைவில் கொள்",
+      "rememberChoicesDescription": "எதிர்காலத்தில் ஒத்த பரிவர்த்தனைகளை தானாக வகைப்படுத்து",
+      "categorized": "{count} வகைப்படுத்தப்பட்டவை",
+      "remaining": "{count} மீதமுள்ளவை",
+      "continue": "தொடரவும்",
+      "continueAnyway": "எப்படியும் தொடரவும்",
+      "categories": {
+        "foodDining": "உணவு & உணவகம்",
+        "transportation": "போக்குவரத்து",
+        "billsUtilities": "பில்கள் & பயன்பாடுகள்",
+        "shopping": "ஷாப்பிங்",
+        "entertainment": "பொழுதுபோக்கு",
+        "healthFitness": "ஆரோக்கியம் & உடற்பயிற்சி",
+        "personalCare": "தனிப்பட்ட பராமரிப்பு",
+        "income": "வருமானம்",
+        "transfers": "பணமாற்றங்கள்"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "சுயவிவரத்தை நீக்க இயலவில்லை",
+    "deleteTitle": "சுயவிவரத்தை நீக்கவா?",
+    "defaultProfile": "இயல்புநிலை சுயவிவரம்",
+    "cannotDeleteOnly": "இது ஒரே சுயவிவரம். இதை நீக்க முடியாது.",
+    "permanentWarning": "இது இந்த சுயவிவரத்தை நிரந்தரமாக நீக்கும். இந்த சுயவிவரத்தின் தனிப்பட்ட வரவு செலவுத் திட்டங்கள் அனைத்து சுயவிவரங்களுடனும் பகிரப்படும்.",
+    "cannotUndo": "இந்த செயலை மீட்க இயலாது.",
+    "deleteButton": "சுயவிவரத்தை நீக்கு"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "பார்"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "நினைவூட்டலை முடக்கு",
+      "enableReminder": "நினைவூட்டலை இயக்கு",
+      "off": "ஆஃப்"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "developerTools": {
+    "title": "டெவலப்பர் கருவிகள்",
+    "subtitle": "சர்வதேசமயமாக்கலைச் சோதிப்பதற்கான QA கருவிகள் (டெவ் பயன்முறை மட்டும்)",
+    "pseudoLocaleLabel": "போலி-லோகேலை இயக்கு (en-XA)",
+    "pseudoLocaleHelp": "அனைத்து மொழிபெயர்க்கப்பட்ட உரையையும் உச்சரிப்புக் குறி எழுத்துகளால் மாற்றும். மீதமுள்ள சாதாரண ஆங்கில உரை <strong>ஹார்ட்கோடட்</strong> ஆகும், மொழிபெயர்ப்பு விசைகளாக மாற்றப்பட வேண்டும்.",
+    "pseudoLocaleExample": "உதாரணம்: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "\"[Ðášhƀóářð~~~]\" என்பதற்குப் பதிலாக \"Dashboard\" என்று தெரிந்தால், அது ஹார்ட்கோடட்!",
+    "infoPseudoLocale": "போலி-லோகேல் மேம்பாட்டின் போது மொழிபெயர்க்கப்படாத சரங்களைக் கண்டறிய உதவுகிறது",
+    "infoProduction": "உற்பத்தி பில்ட்கள் தானாகவே en-XA லோகேலை விலக்கும்",
+    "infoSwitchBack": "இயல்பான மேம்பாட்டைத் தொடர ஒரு உண்மையான லோகேலுக்குத் திரும்பவும்"
+  },
+  "pageMetadata": {
+    "appName": "பட்ஜெட் ஆப்",
+    "scenarios": "வாட்-இஃப் சூழ்நிலைகள்",
+    "merchantRules": "வணிகர் விதிகள்",
+    "more": "மேலும்",
+    "netWorth": "நிகர மதிப்பு",
+    "properties": "சொத்துக்கள்",
+    "propertyDetail": "சொத்து விவரங்கள்",
+    "review": "பரிவர்த்தனைகளை மதிப்பாய்வு",
+    "events": "நிகழ்வு பட்ஜெட்டுகள்",
+    "landing": "BudgetPro - உங்கள் நிதியை கட்டுப்படுத்துங்கள்",
+    "dashboard": "டாஷ்போர்டு",
+    "transactions": "பரிவர்த்தனைகள்",
+    "import": "இறக்குமதி",
+    "accounts": "கணக்குகள்",
+    "budgets": "பட்ஜெட்டுகள்",
+    "categories": "வகைகள்",
+    "reports": "அறிக்கைகள்",
+    "settings": "அமைப்புகள்",
+    "subscriptions": "சந்தாக்கள்",
+    "investments": "முதலீடுகள்",
+    "debtPayoff": "கடன் அடைப்பு",
+    "loans": "கடன்கள்",
+    "calculators": "கால்குலேட்டர்கள்",
+    "planning": "திட்டமிடல்",
+    "ocr": "ரசீது ஸ்கேனர்",
+    "export": "ஏற்றுமதி",
+    "fridayReview": "வாராந்திர மதிப்பாய்வு",
+    "onboarding": "delaysdelays",
+    "offline": "delaysdelays delaysdelays",
+    "splits": "delaysdelays delaysdelays"
+  },
+  "balanceReconciliation": {
+    "title": "இறக்குமதி முடிந்தது!",
+    "subtitle": "{accountName} க்கான கணக்கு இருப்பை அமைக்கவும்",
+    "transactionsImported": "{count} பரிவர்த்தனைகள் இறக்குமதி செய்யப்பட்டன",
+    "netChange": "பரிவர்த்தனைகளிலிருந்து நிகர மாற்றம்:",
+    "currentBalanceLabel": "உங்கள் தற்போதைய வங்கி இருப்பு என்ன?",
+    "currentBalanceLabelCredit": "உங்கள் தற்போதைய கடன் தொகை என்ன?",
+    "balanceHelperBank": "உங்கள் வங்கி பயன்பாட்டைத் திறந்து இந்த கணக்கிற்கான இருப்பை உள்ளிடவும்",
+    "balanceHelperCredit": "உங்கள் கிரெடிட் கார்டு அறிக்கையில் காட்டப்பட்ட தற்போதைய இருப்பை உள்ளிடவும் (நேர்மறை எண்ணாக)",
+    "startingBalance": "உங்கள் தொடக்க இருப்பு:",
+    "startingBalanceCredit": "உங்கள் தொடக்க கடன் தொகை:",
+    "balanceMatchNote": "இது உங்கள் கணக்கு இருப்பை உங்கள் வங்கியுடன் பொருத்தும்.",
+    "negativeWarning": "இது எதிர்மறை தொடக்க இருப்பை ஏற்படுத்துகிறது, இது சேமிப்பு/செக்கிங் கணக்கிற்கு அசாதாரணமானது. உங்கள் தற்போதைய இருப்பு சரியானதா என்று சரிபார்க்கவும்.",
+    "skipForNow": "இப்போதைக்கு தவிர்",
+    "setBalance": "இருப்பை அமை"
+  },
+  "recommendations": {
+    "title": "முக்கிய பரிந்துரைகள்",
+    "subtitle": "உங்கள் நிதி ஆரோக்கியத்தை மேம்படுத்த வழிகள்",
+    "emptyState": "தனிப்பயன் பரிந்துரைகளைப் பெற மேலும் நிதித் தரவைச் சேர்க்கவும்",
+    "viewAllFactors": "அனைத்து காரணிகளையும் பார்",
+    "factorLabels": {
+      "savingsRate": "சேமிப்பு",
+      "debtToIncome": "கடன்",
+      "budgetAdherence": "பட்ஜெட்",
+      "emergencyFund": "அவசர நிதி",
+      "investmentGrowth": "முதலீடுகள்",
+      "expenseStability": "செலவுகள்"
+    },
+    "factorLinks": {
+      "savingsRate": "வருமானத்தைக் காண்",
+      "debtToIncome": "கடனை நிர்வகி",
+      "budgetAdherence": "பட்ஜெட்டை சரிசெய்",
+      "emergencyFund": "சேமிப்பைத் திட்டமிடு",
+      "investmentGrowth": "போர்ட்ஃபோலியோவைக் காண்",
+      "expenseStability": "அறிக்கைகளைக் காண்"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "வணிகர்:",
+    "amount": "தொகை:",
+    "average": "சராசரி: {amount}",
+    "category": "வகை:",
+    "wasExpected": "இது எதிர்பார்க்கப்பட்டதா?",
+    "expected": "எதிர்பார்க்கப்பட்டது",
+    "unexpected": "எதிர்பாராதது",
+    "markedExpected": "எதிர்பார்க்கப்பட்டது என குறிக்கப்பட்டது",
+    "markedUnexpected": "எதிர்பாராதது என குறிக்கப்பட்டது",
+    "moreAnomalies": "+{count} மேலும் {count, plural, =1 {முரண்பாடு} other {முரண்பாடுகள்}}",
+    "severity": {
+      "high": "delaysdelays",
+      "medium": "delaysdelays",
+      "low": "delaysdelays"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR செயலாக்கம்",
+    "cancel": "ரத்துசெய்",
+    "pageProgress": "பக்கம் {current} / {total}",
+    "elapsed": "கழிந்த நேரம்: {time}",
+    "remaining": "~{time} மீதம்",
+    "stages": {
+      "loading": "PDF ஏற்றப்படுகிறது",
+      "rendering": "பக்கங்கள் ரெண்டர் செய்யப்படுகின்றன",
+      "preprocessing": "படத்தை மேம்படுத்துகிறது",
+      "ocr": "உரை பிரித்தெடுக்கப்படுகிறது",
+      "parsing": "பரிவர்த்தனைகள் பாகுபடுத்தப்படுகின்றன",
+      "complete": "முடிந்தது",
+      "error": "பிழை",
+      "cancelled": "ரத்துசெய்யப்பட்டது",
+      "enhance": "மேம்படுத்து"
+    },
+    "errorRetry": "OCR செயலாக்கம் தோல்வியடைந்தது. மீண்டும் முயற்சிக்க விரும்புகிறீர்களா?",
+    "cancelledRetry": "OCR ரத்துசெய்யப்பட்டது. மீண்டும் தொடங்க விரும்புகிறீர்களா?",
+    "retryButton": "OCR மீண்டும் முயற்சி",
+    "completedSuccess": "OCR வெற்றிகரமாக முடிந்தது!",
+    "loadingChart": "விளக்கப்படம் ஏற்றப்படுகிறது..."
   }
 }

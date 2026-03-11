@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "На главную"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Год {n}",
+      "yearLabel": "Год",
+      "month": "Месяц {n}",
+      "monthYear": "Месяц {n} (Год {y})",
+      "age": "Возраст {n}",
+      "ageLabel": "Возраст",
+      "contributions": "Взносы",
+      "interestEarned": "Заработанные проценты",
+      "interest": "Проценты",
+      "totalInterest": "Итого процентов",
+      "snowball": "Снежный ком",
+      "avalanche": "Лавина",
+      "portfolio": "Портфель",
+      "fireTarget": "Цель FIRE",
+      "median50th": "Медиана (50-й)",
+      "remainingBalance": "Остаток",
+      "totalAssets": "Всего активов",
+      "totalLiabilities": "Всего обязательств",
+      "netWorth": "Чистая стоимость",
+      "retirement": "Пенсия"
+    },
+    "scenario": {
+      "compare": "Сравнить сценарии ({count} сохранено)",
+      "selectUpTo": "Выберите до 3 сценариев для сравнения:",
+      "duplicate": "Дублировать",
+      "delete": "Удалить",
+      "sideBySide": "Сравнение бок о бок",
+      "field": "Поле",
+      "delta": "Разница",
+      "selectOneMore": "Выберите ещё один сценарий для сравнения",
+      "copySuffix": "(копия)"
+    },
+    "openCalculator": "Открыть калькулятор"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Удалить",
     "edit": "Редактировать",
     "loading": "Загрузка...",
-    "save": "Сохранить"
+    "save": "Сохранить",
+    "success": "Успех!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Подтвердить",
     "finalConfirmation": "Финальное подтверждение:",
     "processing": "Обработка...",
-    "typeToConfirm": "Введите {text} для подтверждения этого действия."
+    "typeToConfirm": "Введите {text} для подтверждения этого действия.",
+    "confirmAction": "Подтвердить действие"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "История оценки",
+      "monthsOfData": "{count} {count, plural, one {месяц} few {месяца} many {месяцев} other {месяцев}} данных",
+      "emptyTitle": "История оценки появится здесь по мере накопления данных",
+      "emptySubtitle": "Вернитесь в следующем месяце!",
+      "legendScore": "Оценка",
+      "legendTrend": "Тренд",
+      "tooltipScore": "Оценка",
+      "tooltipTrend": "Тренд",
+      "loadingChart": "Загрузка диаграммы..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Ваш бюджет живёт на ВАШЕМ устройстве",
+      "heroSubtitle": "Добро пожаловать в самое приватное приложение для бюджета. Без аккаунтов, без облака, без компромиссов.",
+      "features": {
+        "yourDataTitle": "Ваши данные, ваше устройство",
+        "yourDataDescription": "Все финансовые данные хранятся локально на вашем устройстве. Никаких облачных серверов, никакого доступа третьих лиц.",
+        "encryptionTitle": "Банковское шифрование",
+        "encryptionDescription": "Шифрование AES-256 защищает ваши данные. Только у вас есть ключ.",
+        "offlineTitle": "Работает офлайн",
+        "offlineDescription": "Полная функциональность без интернета. Идеально для тех, кто заботится о конфиденциальности.",
+        "zeroTrackingTitle": "Нулевое отслеживание",
+        "zeroTrackingDescription": "Никакой аналитики, телеметрии, сбора данных. Ваши финансы — только ваше дело."
+      },
+      "whatsNext": "Что дальше?",
+      "whatsNextIntro": "В ближайшие минуты мы поможем вам:",
+      "step1": "Импортировать существующие транзакции (CSV, OFX или вручную)",
+      "step2": "Автоматически категоризировать расходы",
+      "step3": "Создать первый бюджет на основе реальных расходов",
+      "step4": "Настроить напоминания о счетах",
+      "getStarted": "Начнём!"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} транзакций нуждаются в категории",
+      "allCategorized": "Все транзакции категоризированы!",
+      "applySmartSuggestions": "Применить умные предложения",
+      "categorize": "Категоризировать",
+      "percentMatch": "{percent}% совпадение",
+      "rememberChoices": "Запомнить мой выбор категорий",
+      "rememberChoicesDescription": "Автоматически категоризировать похожие транзакции в будущем",
+      "categorized": "{count} категоризировано",
+      "remaining": "{count} осталось",
+      "continue": "Продолжить",
+      "continueAnyway": "Продолжить в любом случае",
+      "categories": {
+        "foodDining": "Еда и рестораны",
+        "transportation": "Транспорт",
+        "billsUtilities": "Счета и коммунальные услуги",
+        "shopping": "Покупки",
+        "entertainment": "Развлечения",
+        "healthFitness": "Здоровье и фитнес",
+        "personalCare": "Личная гигиена",
+        "income": "Доход",
+        "transfers": "Переводы"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Не удалось удалить профиль",
+    "deleteTitle": "Удалить профиль?",
+    "defaultProfile": "Профиль по умолчанию",
+    "cannotDeleteOnly": "Это единственный профиль. Вы не можете его удалить.",
+    "permanentWarning": "Это навсегда удалит этот профиль. Любые частные бюджеты этого профиля станут общими для всех профилей.",
+    "cannotUndo": "Это действие нельзя отменить.",
+    "deleteButton": "Удалить профиль"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Просмотр"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Отключить напоминание",
+      "enableReminder": "Включить напоминание",
+      "off": "Выкл"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Импорт завершён!",
+    "subtitle": "Установите баланс счёта {accountName}",
+    "transactionsImported": "Импортировано {count} транзакций",
+    "netChange": "Чистое изменение от транзакций:",
+    "currentBalanceLabel": "Каков ваш текущий банковский баланс?",
+    "currentBalanceLabelCredit": "Какова ваша текущая задолженность?",
+    "balanceHelperBank": "Откройте банковское приложение и введите отображаемый баланс",
+    "balanceHelperCredit": "Введите текущий баланс из выписки кредитной карты (положительное число)",
+    "startingBalance": "Ваш начальный баланс:",
+    "startingBalanceCredit": "Ваша начальная задолженность:",
+    "balanceMatchNote": "Это приведёт баланс вашего счёта в соответствие с банком.",
+    "negativeWarning": "Это приводит к отрицательному начальному балансу, что необычно для текущих/сберегательных счетов. Проверьте текущий баланс.",
+    "skipForNow": "Пропустить",
+    "setBalance": "Установить баланс"
+  },
+  "recommendations": {
+    "title": "Главные рекомендации",
+    "subtitle": "Способы улучшить финансовое здоровье",
+    "emptyState": "Добавьте больше финансовых данных для получения персональных рекомендаций",
+    "viewAllFactors": "Все факторы",
+    "factorLabels": {
+      "savingsRate": "Накопления",
+      "debtToIncome": "Долги",
+      "budgetAdherence": "Бюджет",
+      "emergencyFund": "Резервный фонд",
+      "investmentGrowth": "Инвестиции",
+      "expenseStability": "Расходы"
+    },
+    "factorLinks": {
+      "savingsRate": "Посмотреть доходы",
+      "debtToIncome": "Управление кредитами",
+      "budgetAdherence": "Настроить бюджеты",
+      "emergencyFund": "Планировать накопления",
+      "investmentGrowth": "Посмотреть портфель",
+      "expenseStability": "Посмотреть отчёты"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Продавец:",
+    "amount": "Сумма:",
+    "average": "Среднее: {amount}",
+    "category": "Категория:",
+    "wasExpected": "Это было ожидаемо?",
+    "expected": "Ожидаемо",
+    "unexpected": "Неожиданно",
+    "markedExpected": "Отмечено как ожидаемое",
+    "markedUnexpected": "Отмечено как неожиданное",
+    "moreAnomalies": "+{count} {count, plural, one {аномалия} few {аномалии} many {аномалий} other {аномалий}}",
+    "severity": {
+      "high": "ВЫСОКИЙ",
+      "medium": "СРЕДНИЙ",
+      "low": "НИЗКИЙ"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Обработка OCR",
+    "cancel": "Отмена",
+    "pageProgress": "Страница {current} из {total}",
+    "elapsed": "Прошло: {time}",
+    "remaining": "~{time} осталось",
+    "stages": {
+      "loading": "Загрузка PDF",
+      "rendering": "Отрисовка страниц",
+      "preprocessing": "Улучшение изображения",
+      "ocr": "Извлечение текста",
+      "parsing": "Анализ транзакций",
+      "complete": "Завершено",
+      "error": "Ошибка",
+      "cancelled": "Отменено",
+      "enhance": "Улучшить"
+    },
+    "errorRetry": "Обработка OCR не удалась. Повторить попытку?",
+    "cancelledRetry": "OCR был отменён. Начать заново?",
+    "retryButton": "Повторить OCR",
+    "completedSuccess": "OCR успешно завершён!",
+    "loadingChart": "Загрузка диаграммы..."
+  },
+  "developerTools": {
+    "title": "Инструменты разработчика",
+    "subtitle": "QA-инструменты для тестирования интернационализации (только режим разработки)",
+    "pseudoLocaleLabel": "Включить псевдо-локаль (en-XA)",
+    "pseudoLocaleHelp": "Заменяет весь переведённый текст символами с диакритическими знаками. Оставшийся обычный английский текст <strong>захардкожен</strong> и должен быть преобразован в ключи перевода.",
+    "pseudoLocaleExample": "Пример: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Если вы видите \"Dashboard\" вместо \"[Ðášhƀóářð~~~]\", это захардкожено!",
+    "infoPseudoLocale": "Псевдо-локаль помогает выявить непереведённые строки в процессе разработки",
+    "infoProduction": "Продакшен-сборки автоматически исключают локаль en-XA",
+    "infoSwitchBack": "Переключитесь обратно на реальную локаль для продолжения нормальной разработки"
+  },
+  "pageMetadata": {
+    "appName": "Приложение бюджета",
+    "scenarios": "Сценарии «что если»",
+    "merchantRules": "Правила продавцов",
+    "more": "Ещё",
+    "netWorth": "Чистые активы",
+    "properties": "Недвижимость",
+    "propertyDetail": "Детали недвижимости",
+    "review": "Проверка транзакций",
+    "events": "Бюджеты мероприятий",
+    "landing": "BudgetPro – Управляйте своими финансами",
+    "dashboard": "Панель управления",
+    "transactions": "Транзакции",
+    "import": "Импорт",
+    "accounts": "Счета",
+    "budgets": "Бюджеты",
+    "categories": "Категории",
+    "reports": "Отчёты",
+    "settings": "Настройки",
+    "subscriptions": "Подписки",
+    "investments": "Инвестиции",
+    "debtPayoff": "Погашение долгов",
+    "loans": "Кредиты",
+    "calculators": "Калькуляторы",
+    "planning": "Планирование",
+    "ocr": "Сканер чеков",
+    "export": "Экспорт",
+    "fridayReview": "Еженедельный обзор",
+    "onboarding": "Начало работы",
+    "offline": "Офлайн-режим",
+    "splits": "Разделить транзакции"
   }
 }

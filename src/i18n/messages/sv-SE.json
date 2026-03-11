@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Tillbaka till startsidan"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "År {n}",
+      "yearLabel": "År",
+      "month": "Månad {n}",
+      "monthYear": "Månad {n} (År {y})",
+      "age": "Ålder {n}",
+      "ageLabel": "Ålder",
+      "contributions": "Insättningar",
+      "interestEarned": "Intjänad ränta",
+      "interest": "Ränta",
+      "totalInterest": "Total ränta",
+      "snowball": "Snöboll",
+      "avalanche": "Lavin",
+      "portfolio": "Portfölj",
+      "fireTarget": "FIRE-mål",
+      "median50th": "Median (50:e)",
+      "remainingBalance": "Återstående saldo",
+      "totalAssets": "Totala tillgångar",
+      "totalLiabilities": "Totala skulder",
+      "netWorth": "Nettoförmögenhet",
+      "retirement": "Pension"
+    },
+    "scenario": {
+      "compare": "Jämför scenarier ({count} sparade)",
+      "selectUpTo": "Välj upp till 3 scenarier att jämföra:",
+      "duplicate": "Duplicera",
+      "delete": "Ta bort",
+      "sideBySide": "Jämförelse sida vid sida",
+      "field": "Fält",
+      "delta": "Skillnad",
+      "selectOneMore": "Välj ytterligare ett scenario att jämföra",
+      "copySuffix": "(kopia)"
+    },
+    "openCalculator": "Öppna kalkylator"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Ta bort",
     "edit": "Redigera",
     "loading": "Laddar...",
-    "save": "Spara"
+    "save": "Spara",
+    "success": "Framgång!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Bekräfta",
     "finalConfirmation": "Slutlig bekräftelse:",
     "processing": "Bearbetar...",
-    "typeToConfirm": "Skriv {text} för att bekräfta denna åtgärd."
+    "typeToConfirm": "Skriv {text} för att bekräfta denna åtgärd.",
+    "confirmAction": "Bekräfta åtgärd"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Poänghistorik",
+      "monthsOfData": "{count} {count, plural, =1 {månad} other {månader}} med data",
+      "emptyTitle": "Din poänghistorik visas här när data samlas in",
+      "emptySubtitle": "Kom tillbaka nästa månad!",
+      "legendScore": "Poäng",
+      "legendTrend": "Trend",
+      "tooltipScore": "Poäng",
+      "tooltipTrend": "Trend",
+      "loadingChart": "Laddar diagram..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Din budget finns på DIN enhet",
+      "heroSubtitle": "Välkommen till den mest integritetsvänliga budgetappen någonsin. Inga konton, inget moln, inga kompromisser.",
+      "features": {
+        "yourDataTitle": "Din data, din enhet",
+        "yourDataDescription": "All ekonomisk data lagras lokalt på din enhet. Inga molnservrar, ingen tredjepartsåtkomst.",
+        "encryptionTitle": "Bankgradig kryptering",
+        "encryptionDescription": "AES-256-kryptering skyddar din data. Bara du har nyckeln—den lämnar aldrig din enhet.",
+        "offlineTitle": "Fungerar offline",
+        "offlineDescription": "Full funktionalitet utan internet. Perfekt för integritetsmedvetna användare.",
+        "zeroTrackingTitle": "Ingen spårning",
+        "zeroTrackingDescription": "Ingen analys, ingen telemetri, ingen datainsamling. Din ekonomi angår ingen annan."
+      },
+      "whatsNext": "Vad händer nu?",
+      "whatsNextIntro": "Under de närmaste minuterna hjälper vi dig att:",
+      "step1": "Importera dina befintliga transaktioner (bank-CSV, OFX eller manuellt)",
+      "step2": "Kategorisera dina utgifter automatiskt",
+      "step3": "Skapa din första budget baserat på faktiska utgifter",
+      "step4": "Ställa in fakturapåminnelser så att du aldrig missar en betalning",
+      "getStarted": "Kom igång"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} transaktioner behöver kategorier",
+      "allCategorized": "Alla transaktioner är kategoriserade!",
+      "applySmartSuggestions": "Använd smarta förslag",
+      "categorize": "Kategorisera",
+      "percentMatch": "{percent}% träff",
+      "rememberChoices": "Kom ihåg mina kategorival",
+      "rememberChoicesDescription": "Kategorisera liknande transaktioner automatiskt i framtiden",
+      "categorized": "{count} kategoriserade",
+      "remaining": "{count} återstående",
+      "continue": "Fortsätt",
+      "continueAnyway": "Fortsätt ändå",
+      "categories": {
+        "foodDining": "Mat & Restaurang",
+        "transportation": "Transport",
+        "billsUtilities": "Räkningar & Förnödenheter",
+        "shopping": "Shopping",
+        "entertainment": "Underhållning",
+        "healthFitness": "Hälsa & Fitness",
+        "personalCare": "Personlig vård",
+        "income": "Inkomst",
+        "transfers": "Överföringar"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Kunde inte radera profilen",
+    "deleteTitle": "Radera profil?",
+    "defaultProfile": "Standardprofil",
+    "cannotDeleteOnly": "Detta är den enda profilen. Du kan inte radera den.",
+    "permanentWarning": "Detta kommer permanent radera denna profil. Alla privata budgetar som ägs av denna profil kommer att delas med alla profiler.",
+    "cannotUndo": "Denna åtgärd kan inte ångras.",
+    "deleteButton": "Radera profil"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Visa"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Inaktivera påminnelse",
+      "enableReminder": "Aktivera påminnelse",
+      "off": "Av"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Import klar!",
+    "subtitle": "Ange ditt kontosaldo för {accountName}",
+    "transactionsImported": "{count} transaktioner importerade",
+    "netChange": "Nettoförändring från transaktioner:",
+    "currentBalanceLabel": "Vad är ditt nuvarande banksaldo?",
+    "currentBalanceLabelCredit": "Vad är ditt nuvarande skuldsaldo?",
+    "balanceHelperBank": "Öppna din bankapp och ange saldot som visas för detta konto",
+    "balanceHelperCredit": "Ange det aktuella saldot som visas på ditt kreditkortsutdrag (som ett positivt tal)",
+    "startingBalance": "Ditt startsaldo:",
+    "startingBalanceCredit": "Din startskuld:",
+    "balanceMatchNote": "Detta gör att ditt kontosaldo matchar din bank.",
+    "negativeWarning": "Detta resulterar i ett negativt startsaldo, vilket är ovanligt för löne-/sparkonton. Dubbelkolla att ditt nuvarande saldo är korrekt.",
+    "skipForNow": "Hoppa över tillsvidare",
+    "setBalance": "Ange saldo"
+  },
+  "recommendations": {
+    "title": "Topprekommendationer",
+    "subtitle": "Sätt att förbättra din ekonomiska hälsa",
+    "emptyState": "Lägg till mer ekonomisk data för att få personliga rekommendationer",
+    "viewAllFactors": "Visa alla faktorer",
+    "factorLabels": {
+      "savingsRate": "Sparande",
+      "debtToIncome": "Skuld",
+      "budgetAdherence": "Budget",
+      "emergencyFund": "Nödfond",
+      "investmentGrowth": "Investeringar",
+      "expenseStability": "Utgifter"
+    },
+    "factorLinks": {
+      "savingsRate": "Visa inkomst",
+      "debtToIncome": "Hantera lån",
+      "budgetAdherence": "Justera budgetar",
+      "emergencyFund": "Planera sparande",
+      "investmentGrowth": "Visa portfölj",
+      "expenseStability": "Visa rapporter"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Handlare:",
+    "amount": "Belopp:",
+    "average": "Genomsnitt: {amount}",
+    "category": "Kategori:",
+    "wasExpected": "Var detta förväntat?",
+    "expected": "Förväntat",
+    "unexpected": "Oväntat",
+    "markedExpected": "Markerad som förväntad",
+    "markedUnexpected": "Markerad som oväntad",
+    "moreAnomalies": "+{count} fler {count, plural, =1 {avvikelse} other {avvikelser}}",
+    "severity": {
+      "high": "HÖG",
+      "medium": "MEDEL",
+      "low": "LÅG"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR-bearbetning",
+    "cancel": "Avbryt",
+    "pageProgress": "Sida {current} av {total}",
+    "elapsed": "Förfluten: {time}",
+    "remaining": "~{time} återstår",
+    "stages": {
+      "loading": "Laddar PDF",
+      "rendering": "Renderar sidor",
+      "preprocessing": "Förbättrar bild",
+      "ocr": "Extraherar text",
+      "parsing": "Tolkar transaktioner",
+      "complete": "Klar",
+      "error": "Fel",
+      "cancelled": "Avbruten",
+      "enhance": "Förbättra"
+    },
+    "errorRetry": "OCR-bearbetning misslyckades. Vill du försöka igen?",
+    "cancelledRetry": "OCR avbröts. Vill du starta om?",
+    "retryButton": "Försök OCR igen",
+    "completedSuccess": "OCR slutförd!",
+    "loadingChart": "Laddar diagram..."
+  },
+  "developerTools": {
+    "title": "Utvecklarverktyg",
+    "subtitle": "QA-verktyg för att testa internationalisering (endast utvecklarläge)",
+    "pseudoLocaleLabel": "Aktivera pseudo-locale (en-XA)",
+    "pseudoLocaleHelp": "Ersätter all översatt text med accentuerade tecken. Kvarvarande vanlig engelsk text är <strong>hårdkodad</strong> och behöver konverteras till översättningsnycklar.",
+    "pseudoLocaleExample": "Exempel: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Om du ser \"Dashboard\" istället för \"[Ðášhƀóářð~~~]\" är det hårdkodat!",
+    "infoPseudoLocale": "Pseudo-locale hjälper till att identifiera oöversatta strängar under utveckling",
+    "infoProduction": "Produktionsbyggen utesluter automatiskt en-XA locale",
+    "infoSwitchBack": "Byt tillbaka till en riktig locale för att fortsätta normal utveckling"
+  },
+  "pageMetadata": {
+    "appName": "Budgetapp",
+    "scenarios": "Tänk-om-scenarier",
+    "merchantRules": "Handlarregler",
+    "more": "Mer",
+    "netWorth": "Nettoförmögenhet",
+    "properties": "Fastigheter",
+    "propertyDetail": "Fastighetsdetaljer",
+    "review": "Granska transaktioner",
+    "events": "Evenemangsbudgetar",
+    "landing": "BudgetPro – Bemästra din ekonomi",
+    "dashboard": "Översikt",
+    "transactions": "Transaktioner",
+    "import": "Importera",
+    "accounts": "Konton",
+    "budgets": "Budgetar",
+    "categories": "Kategorier",
+    "reports": "Rapporter",
+    "settings": "Inställningar",
+    "subscriptions": "Prenumerationer",
+    "investments": "Investeringar",
+    "debtPayoff": "Skuldavbetalning",
+    "loans": "Lån",
+    "calculators": "Kalkylatorer",
+    "planning": "Planering",
+    "ocr": "Kvittoskanner",
+    "export": "Exportera",
+    "fridayReview": "Veckoöversikt",
+    "onboarding": "Kom igång",
+    "offline": "Offlineläge",
+    "splits": "Dela transaktioner"
   }
 }

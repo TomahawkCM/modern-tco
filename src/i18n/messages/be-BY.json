@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Назад на галоўную"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Год {n}",
+      "yearLabel": "Год",
+      "month": "Месяц {n}",
+      "monthYear": "Месяц {n} (Год {y})",
+      "age": "Узрост {n}",
+      "ageLabel": "Узрост",
+      "contributions": "Унёскі",
+      "interestEarned": "Зароблены працэнт",
+      "interest": "Працэнт",
+      "totalInterest": "Агульны працэнт",
+      "snowball": "Снежны ком",
+      "avalanche": "Лавіна",
+      "portfolio": "Партфоліа",
+      "fireTarget": "FIRE мэта",
+      "median50th": "Медыяна (50-я)",
+      "remainingBalance": "Рэшта балансу",
+      "totalAssets": "Агульныя актывы",
+      "totalLiabilities": "Агульныя абавязацельствы",
+      "netWorth": "Чыстая вартасць",
+      "retirement": "Пенсія"
+    },
+    "scenario": {
+      "compare": "Параўнаць сцэнарыі ({count} захаваных)",
+      "selectUpTo": "Абярыце да 3 сцэнарыяў для параўнання:",
+      "duplicate": "Дубляваць",
+      "delete": "Выдаліць",
+      "sideBySide": "Параўнанне побач",
+      "field": "Поле",
+      "delta": "Розніца",
+      "selectOneMore": "Абярыце яшчэ адзін сцэнарый для параўнання",
+      "copySuffix": "(копія)"
+    },
+    "openCalculator": "Адкрыць калькулятар"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Видалити",
     "edit": "Редагувати",
     "loading": "Завантаження...",
-    "save": "Зберегти"
+    "save": "Зберегти",
+    "success": "Поспех!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Підтвердити",
     "finalConfirmation": "Остаточне підтвердження:",
     "processing": "Обробка...",
-    "typeToConfirm": "Введіть {text}, щоб підтвердити цю дію."
+    "typeToConfirm": "Введіть {text}, щоб підтвердити цю дію.",
+    "confirmAction": "Пацвердзіць дзеянне"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Гісторыя ацэнкі",
+      "monthsOfData": "{count} {count, plural, =1 {месяц} other {месяцаў}} даных",
+      "emptyTitle": "Ваша гісторыя ацэнкі з'явіцца тут, калі назапасяцца даныя",
+      "emptySubtitle": "Праверце зноў у наступным месяцы!",
+      "legendScore": "Ацэнка",
+      "legendTrend": "Тэндэнцыя",
+      "tooltipScore": "Ацэнка",
+      "tooltipTrend": "Тэндэнцыя",
+      "loadingChart": "Загрузка графіка..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Ваш бюджэт жыве на ВАШАЙ прыладзе",
+      "heroSubtitle": "Вітаем у самай прыватнай бюджэтнай праграме. Без уліковых запісаў, без воблака, без кампрамісаў.",
+      "features": {
+        "yourDataTitle": "Вашы даныя, ваша прылада",
+        "yourDataDescription": "Усе фінансавыя даныя захоўваюцца лакальна на вашай прыладзе. Без воблачных сервераў, без доступу трэціх асоб.",
+        "encryptionTitle": "Шыфраванне банкаўскага ўзроўню",
+        "encryptionDescription": "AES-256 шыфраванне абараняе вашы даныя. Толькі вы маеце ключ — ён ніколі не пакідае вашу прыладу.",
+        "offlineTitle": "Працуе аўтаномна",
+        "offlineDescription": "Поўная функцыянальнасць без інтэрнэту. Ідэальна для карыстальнікаў, якія цэняць прыватнасць.",
+        "zeroTrackingTitle": "Нулявое адсочванне",
+        "zeroTrackingDescription": "Без аналітыкі, без тэлеметрыі, без збору даных. Вашы фінансы — гэта нічыя справа."
+      },
+      "whatsNext": "Што далей?",
+      "whatsNextIntro": "У наступныя некалькі хвілін мы дапаможам вам:",
+      "step1": "Імпартаваць існуючыя транзакцыі (банкаўскі CSV, OFX або ўручную)",
+      "step2": "Аўтаматычна катэгарызаваць вашы выдаткі",
+      "step3": "Стварыць свой першы бюджэт на аснове рэальных выдаткаў",
+      "step4": "Наладзіць напамінкі пра рахункі, каб ніколі не прапусціць аплату",
+      "getStarted": "Пачнём"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} транзакцый патрабуюць катэгорый",
+      "allCategorized": "Усе транзакцыі катэгарызаваны!",
+      "applySmartSuggestions": "Прымяніць разумныя прапановы",
+      "categorize": "Катэгарызаваць",
+      "percentMatch": "{percent}% супадзенне",
+      "rememberChoices": "Запомніць мой выбар катэгорый",
+      "rememberChoicesDescription": "Аўтаматычна катэгарызаваць падобныя транзакцыі ў будучыні",
+      "categorized": "{count} катэгарызавана",
+      "remaining": "{count} засталося",
+      "continue": "Працягнуць",
+      "continueAnyway": "Працягнуць у любым выпадку",
+      "categories": {
+        "foodDining": "Ежа і харчаванне",
+        "transportation": "Транспарт",
+        "billsUtilities": "Рахункі і камунальныя паслугі",
+        "shopping": "Пакупкі",
+        "entertainment": "Забавы",
+        "healthFitness": "Здароўе і фітнес",
+        "personalCare": "Асабісты догляд",
+        "income": "Даходы",
+        "transfers": "Пераводы"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Не ўдалося выдаліць профіль",
+    "deleteTitle": "Выдаліць профіль?",
+    "defaultProfile": "Прадвызначаны профіль",
+    "cannotDeleteOnly": "Гэта адзіны профіль. Вы не можаце яго выдаліць.",
+    "permanentWarning": "Гэта назаўжды выдаліць гэты профіль. Любыя прыватныя бюджэты, якія належаць гэтаму профілю, стануць агульнымі для ўсіх профіляў.",
+    "cannotUndo": "Гэта дзеянне нельга адмяніць.",
+    "deleteButton": "Выдаліць профіль"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Прагляд"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Адключыць напамінак",
+      "enableReminder": "Уключыць напамінак",
+      "off": "Выкл."
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Імпарт завершаны!",
+    "subtitle": "Устанавіце баланс рахунку для {accountName}",
+    "transactionsImported": "{count} транзакцый імпартавана",
+    "netChange": "Чыстае змяненне з транзакцый:",
+    "currentBalanceLabel": "Які ваш бягучы банкаўскі баланс?",
+    "currentBalanceLabelCredit": "Якая ваша бягучая запазычанасць?",
+    "balanceHelperBank": "Адкрыйце сваю банкаўскую праграму і ўвядзіце паказаны баланс для гэтага рахунку",
+    "balanceHelperCredit": "Увядзіце бягучы баланс з выпіскі вашай крэдытнай карты (як дадатны лік)",
+    "startingBalance": "Ваш пачатковы баланс:",
+    "startingBalanceCredit": "Ваша пачатковая запазычанасць:",
+    "balanceMatchNote": "Гэта дазволіць балансу вашага рахунку супадаць з банкам.",
+    "negativeWarning": "Гэта прыводзіць да адмоўнага пачатковага балансу, што незвычайна для бягучых/ашчадных рахункаў. Калі ласка, праверце, ці правільны ваш бягучы баланс.",
+    "skipForNow": "Прапусціць пакуль",
+    "setBalance": "Усталяваць баланс"
+  },
+  "recommendations": {
+    "title": "Лепшыя рэкамендацыі",
+    "subtitle": "Спосабы паляпшэння вашага фінансавага здароўя",
+    "emptyState": "Дадайце больш фінансавых даных для атрымання персаналізаваных рэкамендацый",
+    "viewAllFactors": "Праглядзець усе фактары",
+    "factorLabels": {
+      "savingsRate": "Зберажэнні",
+      "debtToIncome": "Доўг",
+      "budgetAdherence": "Бюджэт",
+      "emergencyFund": "Фонд на выпадак надзвычайных сітуацый",
+      "investmentGrowth": "Інвестыцыі",
+      "expenseStability": "Выдаткі"
+    },
+    "factorLinks": {
+      "savingsRate": "Праглядзець даходы",
+      "debtToIncome": "Кіраваць пазыкамі",
+      "budgetAdherence": "Адкарэктаваць бюджэты",
+      "emergencyFund": "Спланаваць зберажэнні",
+      "investmentGrowth": "Праглядзець партфоліа",
+      "expenseStability": "Праглядзець справаздачы"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Гандляр:",
+    "amount": "Сума:",
+    "average": "Сярэдняе: {amount}",
+    "category": "Катэгорыя:",
+    "wasExpected": "Ці было гэта чаканым?",
+    "expected": "Чаканае",
+    "unexpected": "Нечаканае",
+    "markedExpected": "Адзначана як чаканае",
+    "markedUnexpected": "Адзначана як нечаканае",
+    "moreAnomalies": "+{count} яшчэ {count, plural, =1 {анамалія} other {анамалій}}",
+    "severity": {
+      "high": "ВЫСОКІ",
+      "medium": "СЯРЭДНІ",
+      "low": "НІЗКІ"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR апрацоўка",
+    "cancel": "Скасаваць",
+    "pageProgress": "Старонка {current} з {total}",
+    "elapsed": "Прайшло: {time}",
+    "remaining": "~{time} засталося",
+    "stages": {
+      "loading": "Загрузка PDF",
+      "rendering": "Візуалізацыя старонак",
+      "preprocessing": "Паляпшэнне выявы",
+      "ocr": "Вылучэнне тэксту",
+      "parsing": "Аналіз транзакцый",
+      "complete": "Завершана",
+      "error": "Памылка",
+      "cancelled": "Скасавана",
+      "enhance": "Палепшыць"
+    },
+    "errorRetry": "OCR апрацоўка не атрымалася. Хочаце паспрабаваць зноў?",
+    "cancelledRetry": "OCR быў скасаваны. Хочаце перазапусціць?",
+    "retryButton": "Паўтарыць OCR",
+    "completedSuccess": "OCR паспяхова завершаны!",
+    "loadingChart": "Загрузка графіка..."
+  },
+  "developerTools": {
+    "title": "Інструменты распрацоўшчыка",
+    "subtitle": "QA інструменты для тэсціравання інтэрнацыяналізацыі (толькі рэжым распрацоўкі)",
+    "pseudoLocaleLabel": "Уключыць псеўда-лакалізацыю (en-XA)",
+    "pseudoLocaleHelp": "Замяняе ўвесь перакладзены тэкст акцэнтаванымі сімваламі. Любы астатні просты англійскі тэкст з'яўляецца <strong>жорстка закадзіраваным</strong> і яго трэба пераўтварыць у ключы перакладу.",
+    "pseudoLocaleExample": "Прыклад: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Калі вы бачыце \"Dashboard\" замест \"[Ðášhƀóářð~~~]\", гэта жорстка закадзіравана!",
+    "infoPseudoLocale": "Псеўда-лакалізацыя дапамагае выявіць неперакладзеныя радкі падчас распрацоўкі",
+    "infoProduction": "Прадукцыйныя зборкі аўтаматычна выключаюць лакалізацыю en-XA",
+    "infoSwitchBack": "Пераключыцеся назад на сапраўдную лакалізацыю для працягу звычайнай распрацоўкі"
+  },
+  "pageMetadata": {
+    "appName": "Праграма бюджэту",
+    "scenarios": "Сцэнарыі \"што-калі\"",
+    "merchantRules": "Правілы гандляроў",
+    "more": "Яшчэ",
+    "netWorth": "Чыстая вартасць",
+    "properties": "Нерухомасць",
+    "propertyDetail": "Падрабязнасці нерухомасці",
+    "review": "Прагляд транзакцый",
+    "events": "Бюджэты падзей",
+    "landing": "BudgetPro - Авалодайце сваімі фінансамі",
+    "dashboard": "Панэль кіравання",
+    "transactions": "Транзакцыі",
+    "import": "Імпарт",
+    "accounts": "Рахункі",
+    "budgets": "Бюджэты",
+    "categories": "Катэгорыі",
+    "reports": "Справаздачы",
+    "settings": "Налады",
+    "subscriptions": "Падпіскі",
+    "investments": "Інвестыцыі",
+    "debtPayoff": "Пагашэнне даўгоў",
+    "loans": "Пазыкі",
+    "calculators": "Калькулятары",
+    "planning": "Планаванне",
+    "ocr": "Сканер чэкаў",
+    "export": "Экспарт",
+    "fridayReview": "Тыднёвы агляд",
+    "onboarding": "Пачатак",
+    "offline": "Аўтаномны рэжым",
+    "splits": "Падзел транзакцый"
   }
 }

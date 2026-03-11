@@ -8,19 +8,24 @@
 import { cn } from "@/lib/utils";
 import { ArrowRight, Check, ChevronDown, Lightbulb, RefreshCw, Sparkles } from "lucide-react";
 import { useCallback, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import type { SupportedLocale } from "@/i18n/config";
 import type { StepProps } from "./OnboardingWizard";
 
 // Sample categories matching DEFAULT_CATEGORIES from budget-db.ts
+// Names are resolved via i18n in the component
 const CATEGORIES = [
-  { id: "food", name: "Food & Dining", icon: "🍽️", color: "#10b981" },
-  { id: "transport", name: "Transportation", icon: "🚗", color: "#3b82f6" },
-  { id: "bills", name: "Bills & Utilities", icon: "📄", color: "#ef4444" },
-  { id: "shopping", name: "Shopping", icon: "🛍️", color: "#8b5cf6" },
-  { id: "entertainment", name: "Entertainment", icon: "🎬", color: "#f59e0b" },
-  { id: "health", name: "Health & Fitness", icon: "💪", color: "#06b6d4" },
-  { id: "personal", name: "Personal Care", icon: "✨", color: "#ec4899" },
-  { id: "income", name: "Income", icon: "💰", color: "#22c55e" },
-  { id: "transfer", name: "Transfers", icon: "🔄", color: "#6b7280" },
+  { id: "food", nameKey: "foodDining", icon: "🍽️", color: "#10b981" },
+  { id: "transport", nameKey: "transportation", icon: "🚗", color: "#3b82f6" },
+  { id: "bills", nameKey: "billsUtilities", icon: "📄", color: "#ef4444" },
+  { id: "shopping", nameKey: "shopping", icon: "🛍️", color: "#8b5cf6" },
+  { id: "entertainment", nameKey: "entertainment", icon: "🎬", color: "#f59e0b" },
+  { id: "health", nameKey: "healthFitness", icon: "💪", color: "#06b6d4" },
+  { id: "personal", nameKey: "personalCare", icon: "✨", color: "#ec4899" },
+  { id: "income", nameKey: "income", icon: "💰", color: "#22c55e" },
+  { id: "transfer", nameKey: "transfers", icon: "🔄", color: "#6b7280" },
 ];
 
 // Simulated uncategorized transactions for demo
@@ -80,6 +85,9 @@ interface CategorizedTransaction {
 }
 
 export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
+  const locale = useLocale();
+  const currency = useDefaultCurrency();
+  const t = useTranslations("onboardingPage");
   const [transactions, setTransactions] = useState<CategorizedTransaction[]>(
     DEMO_TRANSACTIONS.map((t) => ({
       id: t.id,
@@ -131,8 +139,8 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
         <div>
           <p className="text-slate-400">
             {uncategorizedCount > 0
-              ? `${uncategorizedCount} transactions need categories`
-              : "All transactions are categorized!"}
+              ? t("categoryMapping.needsCategories", { count: uncategorizedCount })
+              : t("categoryMapping.allCategorized")}
           </p>
         </div>
 
@@ -149,7 +157,7 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
             )}
           >
             <Sparkles className="h-4 w-4" />
-            Apply Smart Suggestions
+            {t("categoryMapping.applySmartSuggestions")}
           </button>
         )}
       </div>
@@ -189,7 +197,12 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
                     transaction.amount > 0 ? "text-green-400" : "text-slate-400"
                   )}
                 >
-                  {transaction.amount > 0 ? "+" : ""}${Math.abs(transaction.amount).toFixed(2)}
+                  {transaction.amount > 0 ? "+" : ""}
+                  {formatCurrency(
+                    Math.abs(transaction.amount),
+                    currency,
+                    locale as SupportedLocale
+                  )}
                 </p>
               </div>
 
@@ -213,17 +226,23 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
                   {category ? (
                     <>
                       <span>{category.icon}</span>
-                      <span className="max-w-[100px] truncate">{category.name}</span>
+                      <span className="max-w-[100px] truncate">
+                        {t(`categoryMapping.categories.${category.nameKey}`)}
+                      </span>
                       {transaction.autoSuggested && (
                         <Lightbulb className="h-3 w-3 text-amber-400" />
                       )}
                     </>
                   ) : (
                     <>
-                      <span>Categorize</span>
+                      <span>{t("categoryMapping.categorize")}</span>
                       {suggestion && suggestion.confidence > 0.85 && (
                         <span className="text-xs text-slate-500">
-                          ({Math.round(suggestion.confidence * 100)}% match)
+                          (
+                          {t("categoryMapping.percentMatch", {
+                            percent: Math.round(suggestion.confidence * 100),
+                          })}
+                          )
                         </span>
                       )}
                     </>
@@ -246,7 +265,9 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
                         )}
                       >
                         <span>{cat.icon}</span>
-                        <span className="text-white">{cat.name}</span>
+                        <span className="text-white">
+                          {t(`categoryMapping.categories.${cat.nameKey}`)}
+                        </span>
                         {transaction.category === cat.id && (
                           <Check className="ms-auto h-3 w-3 text-teal-400" />
                         )}
@@ -280,9 +301,9 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
           />
         </button>
         <div>
-          <p className="text-sm text-white">Remember my category choices</p>
+          <p className="text-sm text-white">{t("categoryMapping.rememberChoices")}</p>
           <p className="text-xs text-slate-400">
-            Auto-categorize similar transactions in the future
+            {t("categoryMapping.rememberChoicesDescription")}
           </p>
         </div>
       </div>
@@ -292,10 +313,12 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
         <div className="flex items-center gap-2 text-sm text-slate-400">
           <div className="flex items-center gap-1">
             <Check className="h-4 w-4 text-teal-400" />
-            <span>{categorizedCount} categorized</span>
+            <span>{t("categoryMapping.categorized", { count: categorizedCount })}</span>
           </div>
           {uncategorizedCount > 0 && <span className="text-slate-600">•</span>}
-          {uncategorizedCount > 0 && <span>{uncategorizedCount} remaining</span>}
+          {uncategorizedCount > 0 && (
+            <span>{t("categoryMapping.remaining", { count: uncategorizedCount })}</span>
+          )}
         </div>
 
         <button
@@ -309,7 +332,9 @@ export function CategoryMappingStep({ onComplete, onSkip }: StepProps) {
               : "bg-slate-700 text-slate-300 hover:bg-slate-600"
           )}
         >
-          {categorizedCount === transactions.length ? "Continue" : "Continue Anyway"}
+          {categorizedCount === transactions.length
+            ? t("categoryMapping.continue")
+            : t("categoryMapping.continueAnyway")}
           <ArrowRight className="h-4 w-4" />
         </button>
       </div>

@@ -32,10 +32,18 @@ const CompoundInterestChart = lazy(() =>
       data,
       locale,
       currency,
+      yearLabel,
+      yearFormatter,
+      contributionsLabel,
+      interestEarnedLabel,
     }: {
       data: { period: number; contributions: number; interest: number }[];
       locale: SupportedLocale;
       currency: string;
+      yearLabel: string;
+      yearFormatter: (label: number) => string;
+      contributionsLabel: string;
+      interestEarnedLabel: string;
     }) => {
       const { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
         mod;
@@ -57,7 +65,12 @@ const CompoundInterestChart = lazy(() =>
               dataKey="period"
               stroke="#64748b"
               tick={{ fontSize: 12 }}
-              label={{ value: "Year", position: "insideBottomRight", offset: -5, fill: "#64748b" }}
+              label={{
+                value: yearLabel,
+                position: "insideBottomRight",
+                offset: -5,
+                fill: "#64748b",
+              }}
             />
             <YAxis
               stroke="#64748b"
@@ -77,7 +90,7 @@ const CompoundInterestChart = lazy(() =>
                 formatCurrency(value, currency, locale),
                 name,
               ]}
-              labelFormatter={(label: number) => `Year ${label}`}
+              labelFormatter={(label: number) => yearFormatter(label)}
             />
             <Legend />
             <Area
@@ -86,7 +99,7 @@ const CompoundInterestChart = lazy(() =>
               stackId="1"
               stroke="#3b82f6"
               fill="url(#colorContributions)"
-              name="Contributions"
+              name={contributionsLabel}
             />
             <Area
               type="monotone"
@@ -94,7 +107,7 @@ const CompoundInterestChart = lazy(() =>
               stackId="1"
               stroke="#10b981"
               fill="url(#colorInterest)"
-              name="Interest Earned"
+              name={interestEarnedLabel}
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -332,7 +345,15 @@ export default function CompoundInterestCalculatorPage() {
             />
           </div>
           <Suspense fallback={<ChartSkeleton />}>
-            <CompoundInterestChart data={chartData} locale={locale} currency={currency} />
+            <CompoundInterestChart
+              data={chartData}
+              locale={locale}
+              currency={currency}
+              yearLabel={t("chart.yearLabel")}
+              yearFormatter={(label: number) => t("chart.year", { n: label })}
+              contributionsLabel={t("chart.contributions")}
+              interestEarnedLabel={t("chart.interestEarned")}
+            />
           </Suspense>
         </div>
       )}

@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "მთავარ გვერდზე დაბრუნება"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "წელი {n}",
+      "yearLabel": "წელი",
+      "month": "თვე {n}",
+      "monthYear": "თვე {n} (წელი {y})",
+      "age": "ასაკი {n}",
+      "ageLabel": "ასაკი",
+      "contributions": "შენატანები",
+      "interestEarned": "მიღებული პროცენტი",
+      "interest": "პროცენტი",
+      "totalInterest": "სულ პროცენტი",
+      "snowball": "თოვლის გუნდა",
+      "avalanche": "ზვავი",
+      "portfolio": "პორტფოლიო",
+      "fireTarget": "FIRE სამიზნე",
+      "median50th": "მედიანა (50-ე)",
+      "remainingBalance": "დარჩენილი ბალანსი",
+      "totalAssets": "სულ აქტივები",
+      "totalLiabilities": "სულ ვალდებულებები",
+      "netWorth": "წმინდა ღირებულება",
+      "retirement": "პენსია"
+    },
+    "scenario": {
+      "compare": "სცენარების შედარება ({count} შენახული)",
+      "selectUpTo": "აირჩიეთ მაქსიმუმ 3 სცენარი შესადარებლად:",
+      "duplicate": "დუბლირება",
+      "delete": "წაშლა",
+      "sideBySide": "გვერდიგვერდ შედარება",
+      "field": "ველი",
+      "delta": "სხვაობა",
+      "selectOneMore": "აირჩიეთ კიდევ ერთი სცენარი შესადარებლად",
+      "copySuffix": "(ასdelays)"
+    },
+    "openCalculator": "კალკულატორის გახსნა"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "წაშლა",
     "edit": "რედაქტირება",
     "loading": "იტვირთება...",
-    "save": "შენახვა"
+    "save": "შენახვა",
+    "success": "წარმატება!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "დადასტურება",
     "finalConfirmation": "ბოლო დადასტურება:",
     "processing": "მიმდინარეობს...",
-    "typeToConfirm": "წერეთ {text} ამ მოქმედების დასადასტურებლად."
+    "typeToConfirm": "წერეთ {text} ამ მოქმედების დასადასტურებლად.",
+    "confirmAction": "მოქმედების დადასტურება"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "ქულების ისტორია",
+      "monthsOfData": "{count} {count, plural, =1 {თვის} other {თვის}} მონაცემები",
+      "emptyTitle": "თქვენი ქულების ისტორია აქ გამოჩნდება მონაცემების დაგროვებისას",
+      "emptySubtitle": "შეამოწმეთ მომდევნო თვეში!",
+      "legendScore": "ქულა",
+      "legendTrend": "ტრენდი",
+      "tooltipScore": "ქულა",
+      "tooltipTrend": "ტრენდი",
+      "loadingChart": "დიაგრამა იტვირთება..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "თქვენი ბიუჯეტი თქვენს მოწყობილობაზე ცხოვრობს",
+      "heroSubtitle": "მოგესალმებათ ყველაზე კონფიდენციალურ საბიუჯეტო აპლიკაციაში. არანაირი ანგარიშები, არანაირი ღრუბელი, არანაირი კომპრომისი.",
+      "features": {
+        "yourDataTitle": "თქვენი მონაცემები, თქვენი მოწყობილობა",
+        "yourDataDescription": "ყველა ფინანსური მონაცემი ინახება ლოკალურად თქვენს მოწყობილობაზე. არანაირი ღრუბლოვანი სერვერები, არანაირი მესამე მხარის წვდომა.",
+        "encryptionTitle": "საბანკო დონის დაშიფვრა",
+        "encryptionDescription": "AES-256 დაშიფვრა იცავს თქვენს მონაცემებს. მხოლოდ თქვენ გაქვთ გასაღები — ის არასოდეს ტოვებს თქვენს მოწყობილობას.",
+        "offlineTitle": "მუშაობს ხაზგარეშე",
+        "offlineDescription": "სრული ფუნქციონალი ინტერნეტის გარეშე. იდეალურია კონფიდენციალურობაზე ორიენტირებული მომხმარებლებისთვის.",
+        "zeroTrackingTitle": "ნულოვანი თვალყურის დევნება",
+        "zeroTrackingDescription": "არანაირი ანალიტიკა, არანაირი ტელემეტრია, არანაირი მონაცემთა შეგროვება. თქვენი ფინანსები არავის საქმეა."
+      },
+      "whatsNext": "რა არის შემდეგ?",
+      "whatsNextIntro": "მომდევნო რამდენიმე წუთში ჩვენ დაგეხმარებით:",
+      "step1": "არსებული ტრანზაქციების იმპორტი (საბანკო CSV, OFX ან ხელით)",
+      "step2": "თქვენი ხარჯების ავტომატური კატეგორიზაცია",
+      "step3": "თქვენი პირველი ბიუჯეტის შექმნა რეალური ხარჯების საფუძველზე",
+      "step4": "გადახდის შეხსენებების დაყენება, რათა არცერთი გადახდა არ გამოგრჩეთ",
+      "getStarted": "დავიწყოთ"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} ტრანზაქციას სჭირდება კატეგორია",
+      "allCategorized": "ყველა ტრანზაქცია კატეგორიზებულია!",
+      "applySmartSuggestions": "ჭკვიანი შეთავაზებების გამოყენება",
+      "categorize": "კატეგორიზაცია",
+      "percentMatch": "{percent}% დამთხვევა",
+      "rememberChoices": "ჩემი კატეგორიის არჩევანის დამახსოვრება",
+      "rememberChoicesDescription": "მომავალში მსგავსი ტრანზაქციების ავტომატური კატეგორიზაცია",
+      "categorized": "{count} კატეგორიზებული",
+      "remaining": "{count} დარჩენილი",
+      "continue": "გაგრძელება",
+      "continueAnyway": "მაინც გაგრძელება",
+      "categories": {
+        "foodDining": "საკვები და კვება",
+        "transportation": "ტრანსპორტი",
+        "billsUtilities": "გადასახადები და კომუნალური",
+        "shopping": "შოპინგი",
+        "entertainment": "გართობა",
+        "healthFitness": "ჯანმრთელობა და ფიტნესი",
+        "personalCare": "პირადი მოვლა",
+        "income": "შემოსავალი",
+        "transfers": "გადარიცხვები"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "პროფილის წაშლა ვერ მოხერხდა",
+    "deleteTitle": "პროფილის წაშლა?",
+    "defaultProfile": "ნაგულისხმევი პროფილი",
+    "cannotDeleteOnly": "ეს ერთადერთი პროფილია. თქვენ ვერ წაშლით მას.",
+    "permanentWarning": "ეს სამუდამოდ წაშლის ამ პროფილს. ამ პროფილის ნებისმიერი პირადი ბიუჯეტი გაზიარდება ყველა პროფილთან.",
+    "cannotUndo": "ეს მოქმედება ვერ გაუქმდება.",
+    "deleteButton": "პროფილის წაშლა"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "ნახვა"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "შეხსენების გამორთვა",
+      "enableReminder": "შეხსენების ჩართვა",
+      "off": "გამორთ."
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "იმპორტი დასრულებულია!",
+    "subtitle": "დააყენეთ ანგარიშის ბალანსი {accountName}-სთვის",
+    "transactionsImported": "{count} ტრანზაქცია იმპორტირებულია",
+    "netChange": "ტრანზაქციებიდან წმინდა ცვლილება:",
+    "currentBalanceLabel": "რა არის თქვენი მიმდინარე საბანკო ბალანსი?",
+    "currentBalanceLabelCredit": "რა არის თქვენი მიმდინარე დავალიანება?",
+    "balanceHelperBank": "გახსენით საბანკო აპლიკაცია და შეიყვანეთ ამ ანგარიშისთვის ნაჩვენები ბალანსი",
+    "balanceHelperCredit": "შეიყვანეთ თქვენი საკრედიტო ბარათის ამონაწერზე ნაჩვენები მიმდინარე ბალანსი (დადებითი რიცხვით)",
+    "startingBalance": "თქვენი საწყისი ბალანსი:",
+    "startingBalanceCredit": "თქვენი საწყისი დავალიანება:",
+    "balanceMatchNote": "ეს თქვენი ანგარიშის ბალანსს ბანკთან შეათანხმებს.",
+    "negativeWarning": "შედეგად მიღებულია უარყოფითი საწყისი ბალანსი, რაც უჩვეულოა მიმდინარე/შემნახველი ანგარიშებისთვის. გთხოვთ, გადაამოწმოთ თქვენი მიმდინარე ბალანსი.",
+    "skipForNow": "ახლა გამოტოვება",
+    "setBalance": "ბალანსის დაყენება"
+  },
+  "recommendations": {
+    "title": "მთავარი რეკომენდაციები",
+    "subtitle": "თქვენი ფინანსური ჯანმრთელობის გაუმჯობესების გზები",
+    "emptyState": "დაამატეთ მეტი ფინანსური მონაცემი პერსონალიზებული რეკომენდაციების მისაღებად",
+    "viewAllFactors": "ყველა ფაქტორის ნახვა",
+    "factorLabels": {
+      "savingsRate": "დანაზოგი",
+      "debtToIncome": "ვალი",
+      "budgetAdherence": "ბიუჯეტი",
+      "emergencyFund": "სარეზერვო ფონდი",
+      "investmentGrowth": "ინვესტიციები",
+      "expenseStability": "ხარჯები"
+    },
+    "factorLinks": {
+      "savingsRate": "შემოსავლის ნახვა",
+      "debtToIncome": "სესხების მართვა",
+      "budgetAdherence": "ბიუჯეტის კორექტირება",
+      "emergencyFund": "დანაზოგის დაგეგმვა",
+      "investmentGrowth": "პორტფოლიოს ნახვა",
+      "expenseStability": "ანგარიშების ნახვა"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "მერჩანტი:",
+    "amount": "თანხა:",
+    "average": "საშუალო: {amount}",
+    "category": "კატეგორია:",
+    "wasExpected": "ეს მოსალოდნელი იყო?",
+    "expected": "მოსალოდნელი",
+    "unexpected": "მოულოდნელი",
+    "markedExpected": "მოსალოდნელად მონიშნულია",
+    "markedUnexpected": "მოულოდნელად მონიშნულია",
+    "moreAnomalies": "+{count} დამატებით {count, plural, =1 {ანომალია} other {ანომალია}}",
+    "severity": {
+      "high": "მAGALI",
+      "medium": "საშუალო",
+      "low": "დABALI"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR დამუშავება",
+    "cancel": "გაუქმება",
+    "pageProgress": "გვერდი {current} / {total}",
+    "elapsed": "გასული: {time}",
+    "remaining": "~{time} დარჩენილი",
+    "stages": {
+      "loading": "PDF იტვირთება",
+      "rendering": "გვერდების რენდერი",
+      "preprocessing": "გამოსახულების გაუმჯობესება",
+      "ocr": "ტექსტის ამოღება",
+      "parsing": "ტრანზაქციების ანალიზი",
+      "complete": "დასრულებულია",
+      "error": "შეცდომა",
+      "cancelled": "გაუქმებულია",
+      "enhance": "გაუმჯობესება"
+    },
+    "errorRetry": "OCR დამუშავება ვერ მოხერხდა. გსურთ ხელახლა სცადოთ?",
+    "cancelledRetry": "OCR გაუქმებულია. გსურთ თავიდან დაწყება?",
+    "retryButton": "OCR-ის ხელახლა ცდა",
+    "completedSuccess": "OCR წარმატებით დასრულდა!",
+    "loadingChart": "დიაგრამა იტვირთება..."
+  },
+  "developerTools": {
+    "title": "დეველოპერის ხელსაწყოები",
+    "subtitle": "QA ხელსაწყოები ინტერნაციონალიზაციის ტესტირებისთვის (მხოლოდ dev რეჟიმი)",
+    "pseudoLocaleLabel": "ფსევდო-ლოკალის ჩართვა (en-XA)",
+    "pseudoLocaleHelp": "ყველა თარგმნილ ტექსტს ანაცვლებს აქცენტიანი სიმბოლოებით. დარჩენილი ჩვეულებრივი ინგლისური ტექსტი არის <strong>ჩაშენებული</strong> და საჭიროებს თარგმნის გასაღებებად გარდაქმნას.",
+    "pseudoLocaleExample": "მაგალითი: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "თუ ხედავთ \"Dashboard\"-ს \"[Ðášhƀóářð~~~]\"-ის ნაცვლად, ის ჩაშენებულია!",
+    "infoPseudoLocale": "ფსევდო-ლოკალი ეხმარება დეველოპმენტის დროს უთარგმნელი სტრიქონების იდენტიფიცირებას",
+    "infoProduction": "პროდაქშენ ბილდები ავტომატურად გამორიცხავენ en-XA ლოკალს",
+    "infoSwitchBack": "დაბრუნდით რეალურ ლოკალზე ნორმალური დეველოპმენტის გასაგრძელებლად"
+  },
+  "pageMetadata": {
+    "appName": "ბიუჯეტის აპი",
+    "scenarios": "რა-თუ სცენარები",
+    "merchantRules": "მოვაჭრის წესები",
+    "more": "მეტი",
+    "netWorth": "წმინდა ღირებულება",
+    "properties": "უძრავი ქონება",
+    "propertyDetail": "ქონების დეტალები",
+    "review": "ტრანზაქციების მიმოხილვა",
+    "events": "ღონისძიებების ბიუჯეტები",
+    "landing": "BudgetPro – მართეთ თქვენი ფინანსები",
+    "dashboard": "მთავარი პანელი",
+    "transactions": "ტრანზაქციები",
+    "import": "იმპორტი",
+    "accounts": "ანგარიშები",
+    "budgets": "ბიუჯეტები",
+    "categories": "კატეგორიები",
+    "reports": "ანგარიშგებები",
+    "settings": "პარამეტრები",
+    "subscriptions": "გამოწერები",
+    "investments": "ინვესტიციები",
+    "debtPayoff": "ვალის დაფარვა",
+    "loans": "სესხები",
+    "calculators": "კალკულატორები",
+    "planning": "დაგეგმვა",
+    "ocr": "ქვითრის სკანერი",
+    "export": "ექსპორტი",
+    "fridayReview": "ყოველკვირეული მიმოხილვა",
+    "onboarding": "დdelays",
+    "offline": "ოdelays delayssdkfj",
+    "splits": "delaysdelays"
   }
 }

@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "ກັບໄປໜ້າຫຼັກ"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "ປີ {n}",
+      "yearLabel": "ປີ",
+      "month": "ເດືອນ {n}",
+      "monthYear": "ເດືອນ {n} (ປີ {y})",
+      "age": "ອາຍຸ {n}",
+      "ageLabel": "ອາຍຸ",
+      "contributions": "ເງິນບໍລິຈາກ",
+      "interestEarned": "ດອກເບ້ຍທີ່ໄດ້ຮັບ",
+      "interest": "ດອກເບ້ຍ",
+      "totalInterest": "ດອກເບ້ຍລວມ",
+      "snowball": "ລູກບານຫິມະ",
+      "avalanche": "ຫິມະເລື່ອນ",
+      "portfolio": "ຫຼັກຊັບ",
+      "fireTarget": "ເປົ້າໝາຍ FIRE",
+      "median50th": "ຄ່າກາງ (50)",
+      "remainingBalance": "ຍອດເງິນທີ່ເຫຼືອ",
+      "totalAssets": "ຊັບສິນລວມ",
+      "totalLiabilities": "ໜີ້ສິນລວມ",
+      "netWorth": "ມູນຄ່າສຸດທິ",
+      "retirement": "ການບຳນານ"
+    },
+    "scenario": {
+      "compare": "ປຽບທຽບສະຖານະການ ({count} ບັນທຶກແລ້ວ)",
+      "selectUpTo": "ເລືອກສູງສຸດ 3 ສະຖານະການເພື່ອປຽບທຽບ:",
+      "duplicate": "ສຳເນົາ",
+      "delete": "ລຶບ",
+      "sideBySide": "ການປຽບທຽບຄຽງຄູ່ກັນ",
+      "field": "ຊ່ອງ",
+      "delta": "ຄວາມແຕກຕ່າງ",
+      "selectOneMore": "ເລືອກສະຖານະການອີກໜຶ່ງເພື່ອປຽບທຽບ",
+      "copySuffix": "(ສdelays)"
+    },
+    "openCalculator": "ເປີດເຄື່ອງຄິດໄລ່"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "ลบ",
     "edit": "แก้ไข",
     "loading": "กำลังโหลด...",
-    "save": "บันทึก"
+    "save": "บันทึก",
+    "success": "ສຳເລັດ!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "ยืนยัน",
     "finalConfirmation": "การยืนยันสุดท้าย:",
     "processing": "กำลังดำเนินการ...",
-    "typeToConfirm": "พิมพ์ {text} เพื่อยืนยันการกระทำนี้."
+    "typeToConfirm": "พิมพ์ {text} เพื่อยืนยันการกระทำนี้.",
+    "confirmAction": "ຢືນຢັນການດຳເນີນການ"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "ປະຫວັດຄະແນນ",
+      "monthsOfData": "{count} {count, plural, =1 {ເດືອນ} other {ເດືອນ}} ຂອງຂໍ້ມູນ",
+      "emptyTitle": "ປະຫວັດຄະແນນຂອງທ່ານຈະສະແດງຢູ່ນີ້ເມື່ອຂໍ້ມູນສະສົມ",
+      "emptySubtitle": "ກວດເບິ່ງອີກຄັ້ງໃນເດືອນໜ້າ!",
+      "legendScore": "ຄະແນນ",
+      "legendTrend": "ແນວໂນ້ມ",
+      "tooltipScore": "ຄະແນນ",
+      "tooltipTrend": "ແນວໂນ້ມ",
+      "loadingChart": "ກຳລັງໂຫຼດແຜນວາດ..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "ງົບປະມານຂອງທ່ານຢູ່ໃນອຸປະກອນຂອງທ່ານ",
+      "heroSubtitle": "ຍິນດີຕ້ອນຮັບສູ່ແອັບງົບປະມານທີ່ເປັນສ່ວນຕົວທີ່ສຸດ. ບໍ່ຕ້ອງມີບັນຊີ, ບໍ່ມີຄລາວ, ບໍ່ມີການປະນີປະນອມ.",
+      "features": {
+        "yourDataTitle": "ຂໍ້ມູນຂອງທ່ານ, ອຸປະກອນຂອງທ່ານ",
+        "yourDataDescription": "ຂໍ້ມູນການເງິນທັງໝົດຖືກເກັບໄວ້ໃນອຸປະກອນຂອງທ່ານ. ບໍ່ມີເຊີບເວີຄລາວ, ບໍ່ມີບຸກຄົນທີສາມເຂົ້າເຖິງ.",
+        "encryptionTitle": "ການເຂົ້າລະຫັດລະດັບທະນາຄານ",
+        "encryptionDescription": "ການເຂົ້າລະຫັດ AES-256 ປົກປ້ອງຂໍ້ມູນຂອງທ່ານ. ມີພຽງທ່ານເທົ່ານັ້ນທີ່ມີກະແຈ—ມັນບໍ່ເຄີຍອອກຈາກອຸປະກອນຂອງທ່ານ.",
+        "offlineTitle": "ໃຊ້ງານໄດ້ແບບອອບໄລນ໌",
+        "offlineDescription": "ມີຟັງຊັນຄົບຖ້ວນໂດຍບໍ່ຕ້ອງໃຊ້ອິນເຕີເນັດ. ເໝາະສຳລັບຜູ້ທີ່ໃສ່ໃຈຄວາມເປັນສ່ວນຕົວ.",
+        "zeroTrackingTitle": "ບໍ່ມີການຕິດຕາມ",
+        "zeroTrackingDescription": "ບໍ່ມີການວິເຄາະ, ບໍ່ມີການວັດແທກ, ບໍ່ມີການເກັບຂໍ້ມູນ. ການເງິນຂອງທ່ານບໍ່ແມ່ນເລື່ອງຂອງໃຜ."
+      },
+      "whatsNext": "ຂັ້ນຕອນຕໍ່ໄປ?",
+      "whatsNextIntro": "ໃນບໍ່ເທົ່ານາທີ, ພວກເຮົາຈະຊ່ວຍທ່ານ:",
+      "step1": "ນຳເຂົ້າທຸລະກຳທີ່ມີຢູ່ (CSV ທະນາຄານ, OFX, ຫຼືປ້ອນດ້ວຍຕົນເອງ)",
+      "step2": "ຈັດໝວດໝູ່ການໃຊ້ຈ່າຍຂອງທ່ານອັດຕະໂນມັດ",
+      "step3": "ສ້າງງົບປະມານທຳອິດຂອງທ່ານຈາກການໃຊ້ຈ່າຍຕົວຈິງ",
+      "step4": "ຕັ້ງການແຈ້ງເຕືອນບິນເພື່ອບໍ່ໃຫ້ພາດການຊຳລະ",
+      "getStarted": "ເລີ່ມຕົ້ນເລີຍ"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} ທຸລະກຳຕ້ອງການໝວດໝູ່",
+      "allCategorized": "ທຸລະກຳທັງໝົດຖືກຈັດໝວດໝູ່ແລ້ວ!",
+      "applySmartSuggestions": "ນຳໃຊ້ຄຳແນະນຳອັດສະລິຍະ",
+      "categorize": "ຈັດໝວດໝູ່",
+      "percentMatch": "ກົງກັນ {percent}%",
+      "rememberChoices": "ຈື່ຈຳຕົວເລືອກໝວດໝູ່ຂອງຂ້ອຍ",
+      "rememberChoicesDescription": "ຈັດໝວດໝູ່ທຸລະກຳທີ່ຄ້າຍຄືກັນອັດຕະໂນມັດໃນອະນາຄົດ",
+      "categorized": "ຈັດໝວດໝູ່ແລ້ວ {count}",
+      "remaining": "ເຫຼືອ {count}",
+      "continue": "ສືບຕໍ່",
+      "continueAnyway": "ສືບຕໍ່ຢ່າງໃດກໍ່ຕາມ",
+      "categories": {
+        "foodDining": "ອາຫານ ແລະ ເຄື່ອງດື່ມ",
+        "transportation": "ການຂົນສົ່ງ",
+        "billsUtilities": "ບິນ ແລະ ສາທາລະນູປະໂພກ",
+        "shopping": "ການຊື້ເຄື່ອງ",
+        "entertainment": "ບັນເທີງ",
+        "healthFitness": "ສຸຂະພາບ ແລະ ການອອກກຳລັງກາຍ",
+        "personalCare": "ການດູແລສ່ວນຕົວ",
+        "income": "ລາຍຮັບ",
+        "transfers": "ການໂອນເງິນ"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "ລຶບໂປຣໄຟລ໌ບໍ່ສຳເລັດ",
+    "deleteTitle": "ລຶບໂປຣໄຟລ໌?",
+    "defaultProfile": "ໂປຣໄຟລ໌ເລີ່ມຕົ້ນ",
+    "cannotDeleteOnly": "ນີ້ແມ່ນໂປຣໄຟລ໌ດຽວ. ທ່ານບໍ່ສາມາດລຶບມັນໄດ້.",
+    "permanentWarning": "ນີ້ຈະລຶບໂປຣໄຟລ໌ນີ້ຢ່າງຖາວອນ. ງົບປະມານສ່ວນຕົວທີ່ເປັນຂອງໂປຣໄຟລ໌ນີ້ຈະຖືກແບ່ງປັນກັບທຸກໂປຣໄຟລ໌.",
+    "cannotUndo": "ການກະທຳນີ້ບໍ່ສາມາດຍົກເລີກໄດ້.",
+    "deleteButton": "ລຶບໂປຣໄຟລ໌"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "ເບິ່ງ"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "ປິດການແຈ້ງເຕືອນ",
+      "enableReminder": "ເປີດການແຈ້ງເຕືອນ",
+      "off": "ປິດ"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "ການນຳເຂົ້າສຳເລັດ!",
+    "subtitle": "ຕັ້ງຍອດເງິນບັນຊີສຳລັບ {accountName}",
+    "transactionsImported": "ນຳເຂົ້າ {count} ທຸລະກຳແລ້ວ",
+    "netChange": "ການປ່ຽນແປງສຸດທິຈາກທຸລະກຳ:",
+    "currentBalanceLabel": "ຍອດເງິນໃນທະນາຄານປັດຈຸບັນຂອງທ່ານແມ່ນເທົ່າໃດ?",
+    "currentBalanceLabelCredit": "ຈຳນວນໜີ້ປັດຈຸບັນຂອງທ່ານແມ່ນເທົ່າໃດ?",
+    "balanceHelperBank": "ເປີດແອັບທະນາຄານຂອງທ່ານ ແລະ ໃສ່ຍອດເງິນທີ່ສະແດງສຳລັບບັນຊີນີ້",
+    "balanceHelperCredit": "ໃສ່ຍອດເງິນປັດຈຸບັນທີ່ສະແດງຢູ່ໃນໃບແຈ້ງໜີ້ບັດເຄຣດິດຂອງທ່ານ (ເປັນຕົວເລກບວກ)",
+    "startingBalance": "ຍອດເງິນເລີ່ມຕົ້ນຂອງທ່ານ:",
+    "startingBalanceCredit": "ຈຳນວນໜີ້ເລີ່ມຕົ້ນຂອງທ່ານ:",
+    "balanceMatchNote": "ນີ້ຈະເຮັດໃຫ້ຍອດເງິນບັນຊີຂອງທ່ານກົງກັບທະນາຄານຂອງທ່ານ.",
+    "negativeWarning": "ນີ້ໃຫ້ຜົນເປັນຍອດເງິນເລີ່ມຕົ້ນເປັນລົບ ເຊິ່ງຜິດປົກກະຕິສຳລັບບັນຊີຝາກ/ອອມ. ກະລຸນາກວດເບິ່ງຍອດເງິນປັດຈຸບັນຂອງທ່ານອີກຄັ້ງ.",
+    "skipForNow": "ຂ້າມໄປກ່ອນ",
+    "setBalance": "ຕັ້ງຍອດເງິນ"
+  },
+  "recommendations": {
+    "title": "ຄຳແນະນຳອັນດັບຕົ້ນ",
+    "subtitle": "ວິທີປັບປຸງສຸຂະພາບການເງິນຂອງທ່ານ",
+    "emptyState": "ເພີ່ມຂໍ້ມູນການເງິນເພີ່ມເຕີມເພື່ອຮັບຄຳແນະນຳສ່ວນຕົວ",
+    "viewAllFactors": "ເບິ່ງປັດໃຈທັງໝົດ",
+    "factorLabels": {
+      "savingsRate": "ການອອມ",
+      "debtToIncome": "ໜີ້ສິນ",
+      "budgetAdherence": "ງົບປະມານ",
+      "emergencyFund": "ກອງທຶນສຸກເສີນ",
+      "investmentGrowth": "ການລົງທຶນ",
+      "expenseStability": "ຄ່າໃຊ້ຈ່າຍ"
+    },
+    "factorLinks": {
+      "savingsRate": "ເບິ່ງລາຍຮັບ",
+      "debtToIncome": "ຈັດການເງິນກູ້",
+      "budgetAdherence": "ປັບງົບປະມານ",
+      "emergencyFund": "ວາງແຜນອອມເງິນ",
+      "investmentGrowth": "ເບິ່ງຫຼັກຊັບ",
+      "expenseStability": "ເບິ່ງບົດລາຍງານ"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "ຮ້ານຄ້າ:",
+    "amount": "ຈຳນວນ:",
+    "average": "ສະເລ່ຍ: {amount}",
+    "category": "ໝວດໝູ່:",
+    "wasExpected": "ທ່ານຄາດຫວັງບໍ?",
+    "expected": "ຄາດຫວັງ",
+    "unexpected": "ບໍ່ຄາດຄິດ",
+    "markedExpected": "ໝາຍວ່າຄາດຫວັງ",
+    "markedUnexpected": "ໝາຍວ່າບໍ່ຄາດຄິດ",
+    "moreAnomalies": "+{count} {count, plural, =1 {ຄວາມຜິດປົກກະຕິ} other {ຄວາມຜິດປົກກະຕິ}} ອີກ",
+    "severity": {
+      "high": "ສdelays",
+      "medium": "ປdelays",
+      "low": "ຕdelays"
+    }
+  },
+  "pdfOcr": {
+    "processing": "ການປະມວນຜົນ OCR",
+    "cancel": "ຍົກເລີກ",
+    "pageProgress": "ໜ້າ {current} ຈາກ {total}",
+    "elapsed": "ເວລາ: {time}",
+    "remaining": "~{time} ທີ່ເຫຼືອ",
+    "stages": {
+      "loading": "ກຳລັງໂຫຼດ PDF",
+      "rendering": "ກຳລັງສະແດງໜ້າ",
+      "preprocessing": "ກຳລັງປັບປຸງຮູບ",
+      "ocr": "ກຳລັງສະກັດຂໍ້ຄວາມ",
+      "parsing": "ກຳລັງວິເຄາະທຸລະກຳ",
+      "complete": "ສຳເລັດ",
+      "error": "ຜິດພາດ",
+      "cancelled": "ຍົກເລີກແລ້ວ",
+      "enhance": "ປັບປຸງ"
+    },
+    "errorRetry": "ການປະມວນຜົນ OCR ລົ້ມເຫຼວ. ທ່ານຕ້ອງການລອງໃໝ່ບໍ?",
+    "cancelledRetry": "OCR ຖືກຍົກເລີກ. ທ່ານຕ້ອງການເລີ່ມໃໝ່ບໍ?",
+    "retryButton": "ລອງ OCR ໃໝ່",
+    "completedSuccess": "OCR ສຳເລັດຮຽບຮ້ອຍ!",
+    "loadingChart": "ກຳລັງໂຫຼດແຜນວາດ..."
+  },
+  "developerTools": {
+    "title": "຀ຸດການນັກພັດທະນາ",
+    "subtitle": "຀ຸດການ QA ສໍາລັບທົດສອບການຫຼາຍພາສາ (ໂໝດນັກພັດທະນາເທົ່ານັ້ນ)",
+    "pseudoLocaleLabel": "ເປີດໃຊ້ Pseudo-Locale (en-XA)",
+    "pseudoLocaleHelp": "ແທນທີ່ຂໍ້ຄວາມທີ່ແປແລ້ວທັງໝົດດ້ວຍຕົວອັກສອນທີ່ມີສໍານຽງເສີຍງໄດ້້່່. ຂໍ້ຄວາມພາສາອັງກິດທໍາມະດາທີ່ຍັງເຫຼືອແມ່ນ <strong>ຖືກສີ້ງຮາດໂຄ້ດ</strong> ແລະຕ້ອງເປີ່ນເປັນຄີແປ.",
+    "pseudoLocaleExample": "ຕົວຢ່າງ: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "ຖ້າທ່ານເຫັນ \"Dashboard\" ແທນທີ່ \"[Ðášhƀóářð~~~]\" ມັນຖືກສີ້ງຮາດໂຄ້ດ!",
+    "infoPseudoLocale": "Pseudo-locale ຊ່ວຍລະບຸສາຍອັກສອນທີ່ຢັງບໍ່ໄດ້ແປໃນລະຫວ່າງການພັດທະນາ",
+    "infoProduction": "ການສ້າງລະບົບຜະລິດຕະພັນຈະຢົກເວັ້ນ locale en-XA ໂດຍອັດຕະໂນມັດ",
+    "infoSwitchBack": "ສັບປ່ຽນກັບໄປ locale ຈິງເພື່ອສືບຕໍ່ການພັດທະນາປົກກະຕິ"
+  },
+  "pageMetadata": {
+    "appName": "ແອັບງົບປະມານ",
+    "scenarios": "ສະຖານະການ ຖ້າ-ຫາກ",
+    "merchantRules": "ກົດລະບຽບຜູ້ຄ້າ",
+    "more": "ເພີ່ມເຕີມ",
+    "netWorth": "ມູນຄ່າສຸດທິ",
+    "properties": "ຊັບສິນ",
+    "propertyDetail": "ລາຍລະອຽດຊັບສິນ",
+    "review": "ກວດຄືນທຸລະກໍາ",
+    "events": "ງົບປະມານງານ",
+    "landing": "BudgetPro - ຄວບຄຸມການເງິນຂອງທ່ານ",
+    "dashboard": "ແຜງຄວບຄຸມ",
+    "transactions": "ທຸລະກໍາ",
+    "import": "ນໍາເຂົ້າ",
+    "accounts": "ບັນຊີ",
+    "budgets": "ງົບປະມານ",
+    "categories": "ໝວດໝູ່",
+    "reports": "ລາຍງານ",
+    "settings": "ການຕັ້ງຄ່າ",
+    "subscriptions": "ການສະໝັກ",
+    "investments": "ການລົງທຶນ",
+    "debtPayoff": "ການຊໍາລະໜີ້",
+    "loans": "ສິນເຊື່ອ",
+    "calculators": "ເຄື່ອງຄິດໄລ່",
+    "planning": "ການວາງແຜນ",
+    "ocr": "ເຄື່ອງສະແກນໃບເສັດ",
+    "export": "ສົ່ງອອກ",
+    "fridayReview": "ການທົບທວນປະຈໍາອາທິດ",
+    "onboarding": "ເdelaysdelays",
+    "offline": "ໂdelays ອdelays",
+    "splits": "ແdelays ທdelays"
   }
 }

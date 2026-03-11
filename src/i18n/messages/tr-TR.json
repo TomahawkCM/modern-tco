@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Ana sayfaya dön"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Yıl {n}",
+      "yearLabel": "Yıl",
+      "month": "Ay {n}",
+      "monthYear": "Ay {n} (Yıl {y})",
+      "age": "Yaş {n}",
+      "ageLabel": "Yaş",
+      "contributions": "Katkılar",
+      "interestEarned": "Kazanılan faiz",
+      "interest": "Faiz",
+      "totalInterest": "Toplam faiz",
+      "snowball": "Kartopu",
+      "avalanche": "Çığ",
+      "portfolio": "Portföy",
+      "fireTarget": "FIRE hedefi",
+      "median50th": "Medyan (50.)",
+      "remainingBalance": "Kalan bakiye",
+      "totalAssets": "Toplam varlıklar",
+      "totalLiabilities": "Toplam yükümlülükler",
+      "netWorth": "Net değer",
+      "retirement": "Emeklilik"
+    },
+    "scenario": {
+      "compare": "Senaryoları karşılaştır ({count} kayıtlı)",
+      "selectUpTo": "Karşılaştırmak için en fazla 3 senaryo seçin:",
+      "duplicate": "Çoğalt",
+      "delete": "Sil",
+      "sideBySide": "Yan yana karşılaştırma",
+      "field": "Alan",
+      "delta": "Fark",
+      "selectOneMore": "Karşılaştırmak için bir senaryo daha seçin",
+      "copySuffix": "(kopya)"
+    },
+    "openCalculator": "Hesap makinesini aç"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Sil",
     "edit": "Düzenle",
     "loading": "Yükleniyor...",
-    "save": "Kaydet"
+    "save": "Kaydet",
+    "success": "Başarılı!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Onayla",
     "finalConfirmation": "Son Onay:",
     "processing": "İşleniyor...",
-    "typeToConfirm": "Bu işlemi onaylamak için {text} yazın."
+    "typeToConfirm": "Bu işlemi onaylamak için {text} yazın.",
+    "confirmAction": "İşlemi onayla"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Puan geçmişi",
+      "monthsOfData": "{count} aylık veri",
+      "emptyTitle": "Veriler biriktikçe puan geçmişiniz burada görünecek",
+      "emptySubtitle": "Gelecek ay tekrar kontrol edin!",
+      "legendScore": "Puan",
+      "legendTrend": "Eğilim",
+      "tooltipScore": "Puan",
+      "tooltipTrend": "Eğilim",
+      "loadingChart": "Grafik yükleniyor..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Bütçeniz SİZİN cihazınızda yaşar",
+      "heroSubtitle": "En özel bütçe uygulamasına hoş geldiniz. Hesap yok, bulut yok, taviz yok.",
+      "features": {
+        "yourDataTitle": "Verileriniz, cihazınız",
+        "yourDataDescription": "Tüm finansal veriler cihazınızda yerel olarak depolanır. Bulut sunucusu yok, üçüncü taraf erişimi yok.",
+        "encryptionTitle": "Banka düzeyinde şifreleme",
+        "encryptionDescription": "AES-256 şifreleme verilerinizi korur. Anahtara yalnızca siz sahipsiniz.",
+        "offlineTitle": "Çevrimdışı çalışır",
+        "offlineDescription": "İnternetsiz tam işlevsellik. Gizliliğe önem veren kullanıcılar için mükemmel.",
+        "zeroTrackingTitle": "Sıfır izleme",
+        "zeroTrackingDescription": "Analitik yok, telemetri yok, veri toplama yok. Finanslarınız kimseyi ilgilendirmez."
+      },
+      "whatsNext": "Sırada ne var?",
+      "whatsNextIntro": "Önümüzdeki birkaç dakika içinde size yardımcı olacağız:",
+      "step1": "Mevcut işlemlerinizi içe aktarın (banka CSV, OFX veya manuel)",
+      "step2": "Harcamalarınızı otomatik kategorilendirin",
+      "step3": "Gerçek harcamalara dayalı ilk bütçenizi oluşturun",
+      "step4": "Fatura hatırlatıcıları ayarlayın",
+      "getStarted": "Başlayalım!"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} işlem kategoriye ihtiyaç duyuyor",
+      "allCategorized": "Tüm işlemler kategorilendi!",
+      "applySmartSuggestions": "Akıllı önerileri uygula",
+      "categorize": "Kategorile",
+      "percentMatch": "%{percent} eşleşme",
+      "rememberChoices": "Kategori seçimlerimi hatırla",
+      "rememberChoicesDescription": "Gelecekte benzer işlemleri otomatik kategorile",
+      "categorized": "{count} kategorilendi",
+      "remaining": "{count} kalan",
+      "continue": "Devam",
+      "continueAnyway": "Yine de devam et",
+      "categories": {
+        "foodDining": "Yiyecek ve Restoran",
+        "transportation": "Ulaşım",
+        "billsUtilities": "Faturalar",
+        "shopping": "Alışveriş",
+        "entertainment": "Eğlence",
+        "healthFitness": "Sağlık ve Fitness",
+        "personalCare": "Kişisel bakım",
+        "income": "Gelir",
+        "transfers": "Transferler"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Profil silinemedi",
+    "deleteTitle": "Profil silinsin mi?",
+    "defaultProfile": "Varsayılan profil",
+    "cannotDeleteOnly": "Bu tek profildir. Silemezsiniz.",
+    "permanentWarning": "Bu profil kalıcı olarak silinecektir. Bu profile ait özel bütçeler tüm profillerle paylaşılacaktır.",
+    "cannotUndo": "Bu işlem geri alınamaz.",
+    "deleteButton": "Profili sil"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Görüntüle"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Hatırlatıcıyı kapat",
+      "enableReminder": "Hatırlatıcıyı aç",
+      "off": "Kapalı"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "İçe aktarma tamamlandı!",
+    "subtitle": "{accountName} hesap bakiyesini ayarlayın",
+    "transactionsImported": "{count} işlem içe aktarıldı",
+    "netChange": "İşlemlerden net değişim:",
+    "currentBalanceLabel": "Mevcut banka bakiyeniz nedir?",
+    "currentBalanceLabelCredit": "Mevcut borç tutarınız nedir?",
+    "balanceHelperBank": "Banka uygulamanızı açın ve görüntülenen bakiyeyi girin",
+    "balanceHelperCredit": "Kredi kartı ekstrenizden mevcut bakiyeyi girin (pozitif sayı olarak)",
+    "startingBalance": "Başlangıç bakiyeniz:",
+    "startingBalanceCredit": "Başlangıç borç tutarınız:",
+    "balanceMatchNote": "Bu, hesap bakiyenizi bankanızla eşleştirecektir.",
+    "negativeWarning": "Bu, negatif bir başlangıç bakiyesi oluşturur. Vadesiz/tasarruf hesapları için olağandışıdır. Mevcut bakiyenizi kontrol edin.",
+    "skipForNow": "Şimdilik atla",
+    "setBalance": "Bakiye ayarla"
+  },
+  "recommendations": {
+    "title": "Öneriler",
+    "subtitle": "Finansal sağlığınızı iyileştirmenin yolları",
+    "emptyState": "Kişiselleştirilmiş öneriler almak için daha fazla finansal veri ekleyin",
+    "viewAllFactors": "Tüm faktörleri gör",
+    "factorLabels": {
+      "savingsRate": "Tasarruf",
+      "debtToIncome": "Borç",
+      "budgetAdherence": "Bütçe",
+      "emergencyFund": "Acil durum fonu",
+      "investmentGrowth": "Yatırımlar",
+      "expenseStability": "Harcamalar"
+    },
+    "factorLinks": {
+      "savingsRate": "Geliri gör",
+      "debtToIncome": "Kredileri yönet",
+      "budgetAdherence": "Bütçeleri ayarla",
+      "emergencyFund": "Tasarrufu planla",
+      "investmentGrowth": "Portföyü gör",
+      "expenseStability": "Raporları gör"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Satıcı:",
+    "amount": "Tutar:",
+    "average": "Ortalama: {amount}",
+    "category": "Kategori:",
+    "wasExpected": "Bu bekleniyor muydu?",
+    "expected": "Beklenen",
+    "unexpected": "Beklenmeyen",
+    "markedExpected": "Beklenen olarak işaretlendi",
+    "markedUnexpected": "Beklenmeyen olarak işaretlendi",
+    "moreAnomalies": "+{count} daha fazla anomali",
+    "severity": {
+      "high": "YÜKSEK",
+      "medium": "ORTA",
+      "low": "DÜŞÜK"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR İşleme",
+    "cancel": "İptal",
+    "pageProgress": "Sayfa {current}/{total}",
+    "elapsed": "Geçen: {time}",
+    "remaining": "~{time} kalan",
+    "stages": {
+      "loading": "PDF yükleniyor",
+      "rendering": "Sayfalar işleniyor",
+      "preprocessing": "Görüntü iyileştirme",
+      "ocr": "Metin çıkarma",
+      "parsing": "İşlem analizi",
+      "complete": "Tamamlandı",
+      "error": "Hata",
+      "cancelled": "İptal edildi",
+      "enhance": "İyileştir"
+    },
+    "errorRetry": "OCR işleme başarısız oldu. Tekrar denemek ister misiniz?",
+    "cancelledRetry": "OCR iptal edildi. Yeniden başlatmak ister misiniz?",
+    "retryButton": "OCR'ı tekrarla",
+    "completedSuccess": "OCR başarıyla tamamlandı!",
+    "loadingChart": "Grafik yükleniyor..."
+  },
+  "developerTools": {
+    "title": "Geliştirici Araçları",
+    "subtitle": "Uluslararasılaştırmayı test etmek için QA araçları (yalnızca geliştirici modu)",
+    "pseudoLocaleLabel": "Sahte yerel ayarı etkinleştir (en-XA)",
+    "pseudoLocaleHelp": "Tüm çevrilmiş metni aksanlı karakterlerle değiştirir. Kalan düz İngilizce metin <strong>sabit kodlanmış</strong>tır ve çeviri anahtarlarına dönüştürülmesi gerekir.",
+    "pseudoLocaleExample": "Örnek: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "\"[Ðášhƀóářð~~~]\" yerine \"Dashboard\" görüyorsanız, sabit kodlanmıştır!",
+    "infoPseudoLocale": "Sahte yerel ayar, geliştirme sırasında çevrilmemiş dizileri belirlemeye yardımcı olur",
+    "infoProduction": "Üretim derlemeleri en-XA yerel ayarını otomatik olarak hariç tutar",
+    "infoSwitchBack": "Normal geliştirmeye devam etmek için gerçek bir yerel ayara geri dönün"
+  },
+  "pageMetadata": {
+    "appName": "Bütçe Uygulaması",
+    "scenarios": "Ya Olsaydı Senaryoları",
+    "merchantRules": "Satıcı Kuralları",
+    "more": "Daha Fazla",
+    "netWorth": "Net Değer",
+    "properties": "Gayrimenkuller",
+    "propertyDetail": "Gayrimenkul Detayları",
+    "review": "İşlemleri İncele",
+    "events": "Etkinlik Bütçeleri",
+    "landing": "BudgetPro – Finanslarınızı Yönetin",
+    "dashboard": "Gösterge Paneli",
+    "transactions": "İşlemler",
+    "import": "İçe Aktar",
+    "accounts": "Hesaplar",
+    "budgets": "Bütçeler",
+    "categories": "Kategoriler",
+    "reports": "Raporlar",
+    "settings": "Ayarlar",
+    "subscriptions": "Abonelikler",
+    "investments": "Yatırımlar",
+    "debtPayoff": "Borç Ödeme",
+    "loans": "Krediler",
+    "calculators": "Hesap Makineleri",
+    "planning": "Planlama",
+    "ocr": "Fiş Tarayıcı",
+    "export": "Dışa Aktar",
+    "fridayReview": "Haftalık İnceleme",
+    "onboarding": "Başlangıç",
+    "offline": "Çevrimdışı mod",
+    "splits": "İşlemleri böl"
   }
 }

@@ -38,6 +38,7 @@ import { useEffect, useState } from "react";
 
 import { Breadcrumb } from "@/components/budget/Breadcrumb";
 import { ClientI18nProvider } from "@/components/budget/ClientI18nProvider";
+import { PageTitleSetter } from "@/components/budget/PageTitleSetter";
 import { WebMCPProvider } from "@/hooks/webmcp";
 
 export default function BudgetAppLayout({ children }: { children: React.ReactNode }) {
@@ -103,6 +104,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
               <ChatbotProvider>
                 <NotificationProvider>
                   <ClientI18nProvider>
+                    <PageTitleSetter />
                     <WebMCPProvider>
                       <ToastProvider>{children}</ToastProvider>
                     </WebMCPProvider>
@@ -124,6 +126,7 @@ export default function BudgetAppLayout({ children }: { children: React.ReactNod
             <ChatbotProvider>
               <NotificationProvider>
                 <ClientI18nProvider>
+                  <PageTitleSetter />
                   <WebMCPProvider>
                     <BudgetAccessibilityInitializer />
 

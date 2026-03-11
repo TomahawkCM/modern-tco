@@ -32,6 +32,7 @@ export type SupportedLocale =
   | "en-NZ"
   | "en-SG"
   | "en-US"
+  | "en-XA"
   | "en-ZA"
   | "es-AR"
   | "es-BO"
@@ -149,6 +150,7 @@ export const SUPPORTED_LOCALES: SupportedLocale[] = [
   "en-NZ",
   "en-SG",
   "en-US",
+  "en-XA",
   "en-ZA",
   "es-AR",
   "es-BO",
@@ -395,6 +397,12 @@ export const LOCALE_METADATA = {
   },
   "en-US": {
     label: "English (US)",
+    dir: "ltr",
+    currency: "USD",
+    numberingSystem: "standard",
+  },
+  "en-XA": {
+    label: "Pseudo-locale (Testing)",
     dir: "ltr",
     currency: "USD",
     numberingSystem: "standard",

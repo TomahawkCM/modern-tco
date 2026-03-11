@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Վերադառնալ գլխավոր էջ"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Տարի {n}",
+      "yearLabel": "Տարի",
+      "month": "Ամիս {n}",
+      "monthYear": "Ամիս {n} (Տարի {y})",
+      "age": "Տարիք {n}",
+      "ageLabel": "Տարիք",
+      "contributions": "Ներդրումներ",
+      "interestEarned": "Վաստակած տոկոսներ",
+      "interest": "Տոկոս",
+      "totalInterest": "Ընդհանուր տոկոսներ",
+      "snowball": "Ձնագնդի",
+      "avalanche": "Ձնահյուս",
+      "portfolio": "Պորտֆել",
+      "fireTarget": "FIRE Թիրախ",
+      "median50th": "Միջին (50-րդ)",
+      "remainingBalance": "Մնացորդ",
+      "totalAssets": "Ընդհանուր ակտիվներ",
+      "totalLiabilities": "Ընդհանուր պարտավորություններ",
+      "netWorth": "Զուտ կապիտալ",
+      "retirement": "Թոշակ"
+    },
+    "scenario": {
+      "compare": "Համեմատել սցենարները ({count} պահված)",
+      "selectUpTo": "Ընտրեք մինչև 3 սցենար համեմատելության համար.",
+      "duplicate": "Կրկնօրինակել",
+      "delete": "Ջնջել",
+      "sideBySide": "Կողք-կողքի համեմատություն",
+      "field": "Դաշտ",
+      "delta": "Տարբերություն",
+      "selectOneMore": "Ընտրեք ևս մեկ սցենար համեմատելության համար",
+      "copySuffix": "(պատճusage)"
+    },
+    "openCalculator": "Բացել հաշվիչը"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Удалить",
     "edit": "Редактировать",
     "loading": "Загрузка...",
-    "save": "Сохранить"
+    "save": "Сохранить",
+    "success": "Հաջողություն!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Подтвердить",
     "finalConfirmation": "Финальное подтверждение:",
     "processing": "Обработка...",
-    "typeToConfirm": "Введите {text} для подтверждения этого действия."
+    "typeToConfirm": "Введите {text} для подтверждения этого действия.",
+    "confirmAction": "Հաստատել գործողությունը"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Միավորների պատմություն",
+      "monthsOfData": "{count} {count, plural, =1 {ամսվա} other {ամսվա}} տվյալներ",
+      "emptyTitle": "Ձեր միավորների պատմությունը կհայտնվի այստեղ տվյալների կուտակման զուգընթաց",
+      "emptySubtitle": "Ստուգեք հաջորդ ամիս:",
+      "legendScore": "Միավոր",
+      "legendTrend": "Միտում",
+      "tooltipScore": "Միավոր",
+      "tooltipTrend": "Միտում",
+      "loadingChart": "Գծապատկերի բեռնում..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Ձեր բյուջեն ապրում է ՁԵՐ սարքում",
+      "heroSubtitle": "Բարի գալուստ երբևէ ստեղծված ամենագաղտնի բյուջեի հավելված: Ոչ մի հաշիվ, ոչ մի ամպ, ոչ մի փոխզիջում:",
+      "features": {
+        "yourDataTitle": "Ձեր տվյալները, ձեր սարքը",
+        "yourDataDescription": "Բոլոր ֆինանսական տվյալները պահվում են տեղայնորեն ձեր սարքում: Ոչ ամպային սերվերներ, ոչ երրորդ կողմի մուտք:",
+        "encryptionTitle": "Բանկային մակարդակի գաղտնագրում",
+        "encryptionDescription": "AES-256 գաղտնագրումը պաշտպանում է ձեր տվյալները: Միայն դուք ունեք բանալին՝ այն երբեք չի լքում ձեր սարքը:",
+        "offlineTitle": "Աշխատում է անցանց",
+        "offlineDescription": "Ամբողջական ֆունկցիոնալություն առանց ինտերնետի: Իդեալական է գաղտնիության մասին հոգացող օգտատերերի համար:",
+        "zeroTrackingTitle": "Զրո հետագծում",
+        "zeroTrackingDescription": "Ոչ մի վերլուծություն, ոչ մի հեռաչափություն, ոչ մի տվյալների հավաքագրում: Ձեր ֆինանսները ոչ մեկի գործը չեն:"
+      },
+      "whatsNext": "Ի՞նչ է հաջորդը:",
+      "whatsNextIntro": "Առաջիկա մի քանի րոպեների ընթացքում մենք կօգնենք ձեզ.",
+      "step1": "Ներմուծել ձեր առկա գործարքները (բանկի CSV, OFX կամ ձեռքով)",
+      "step2": "Ավտոմատ կերպով դասակարգել ձեր ծախսերը",
+      "step3": "Ստեղծել ձեր առաջին բյուջեն փաստացի ծախսերի հիման վրա",
+      "step4": "Սահմանել հաշիվների հիշեցումներ, որպեսզի երբեք չբացթողնեք վճարումը",
+      "getStarted": "Սկսենք"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} գործարք կարիք ունի կատեգորիաների",
+      "allCategorized": "Բոլոր գործարքները դասակարգված են:",
+      "applySmartSuggestions": "Կիրառել խելացի առաջարկություններ",
+      "categorize": "Դասակարգել",
+      "percentMatch": "{percent}% համընկնում",
+      "rememberChoices": "Հիշել իմ կատեգորիայի ընտրությունները",
+      "rememberChoicesDescription": "Ապագայում ինքնաբերաբար դասակարգել նմանատիպ գործարքները",
+      "categorized": "{count} դասակարգված",
+      "remaining": "{count} մնացած",
+      "continue": "Շարունակել",
+      "continueAnyway": "Շարունակել ամեն դեպքում",
+      "categories": {
+        "foodDining": "Սնունդ և Ճաշ",
+        "transportation": "Տրանսպորտ",
+        "billsUtilities": "Հաշիվներ և Կոմունալ ծառայություններ",
+        "shopping": "Գնումներ",
+        "entertainment": "Ժամանց",
+        "healthFitness": "Առողջություն և Ֆիթնես",
+        "personalCare": "Անձնական խնամք",
+        "income": "Եկամուտ",
+        "transfers": "Փոխանցումներ"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Չհաջողվեց պրոֆիլը ջնջել",
+    "deleteTitle": "Ջնջե՞լ պրոֆիլը՞",
+    "defaultProfile": "Լլուսալից պրոֆիլ",
+    "cannotDeleteOnly": "Սա միակ պրոֆիլն է։ Դուք չեք կարող ջնջել այն։",
+    "permanentWarning": "Սա ընդմիշտ կջնջի այս պրոֆիլը։ Այս պրոֆիլի ցանկացած անձնական բյուջեները կկիսվեն բոլոր պրոֆիլների հետ։",
+    "cannotUndo": "Այս գործողությունը հնարավոր չէ հետ վերածել։",
+    "deleteButton": "Ջնջել պրոֆիլը"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Դիտել"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Անջատել հիշեցումը",
+      "enableReminder": "Միացնել հիշեցումը",
+      "off": "Անջատված"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Ներմուծումն ավարտվեց:",
+    "subtitle": "Սահմանեք ձեր հաշվի մնացորդը {accountName}-ի համար",
+    "transactionsImported": "Ներմուծվել է {count} գործարք",
+    "netChange": "Զուտ փոփոխություն գործարքներից.",
+    "currentBalanceLabel": "Որքա՞ն է ձեր ընթացիկ բանկային մնացորդը:",
+    "currentBalanceLabelCredit": "Որքա՞ն է ձեր ընթացիկ պարտքի չափը:",
+    "balanceHelperBank": "Բացեք ձեր բանկային հավելվածը և մուտքագրեք այս հաշվի համար ցուցադրված մնացորդը",
+    "balanceHelperCredit": "Մուտքագրեք ընթացիկ մնացորդը, որը ցուցադրվում է ձեր վարկային քարտի քաղվածքում (որպես դրական թիվ)",
+    "startingBalance": "Ձեր սկզբնական մնացորդը.",
+    "startingBalanceCredit": "Ձեր սկզբնական պարտքի չափը.",
+    "balanceMatchNote": "Սա կհամապատասխանեցնի ձեր հաշվի մնացորդը ձեր բանկի հետ:",
+    "negativeWarning": "Սա հանգեցնում է բացասական սկզբնական մնացորդի, ինչը անսովոր է ընթացիկ/խնայողական հաշիվների համար: Խնդրում ենք կրկնակի ստուգել ձեր ընթացիկ մնացորդի ճշտությունը:",
+    "skipForNow": "Առայժմ բաց թողնել",
+    "setBalance": "Սահմանել մնացորդը"
+  },
+  "recommendations": {
+    "title": "Գլխավոր առաջարկություններ",
+    "subtitle": "Ձեր ֆինանսական առողջությունը բարելավելու ուղիներ",
+    "emptyState": "Ավելացրեք ավելի շատ ֆինանսական տվյալներ՝ անհատականացված առաջարկություններ ստանալու համար",
+    "viewAllFactors": "Դիտել բոլոր գործոնները",
+    "factorLabels": {
+      "savingsRate": "Խնայողություններ",
+      "debtToIncome": "Պարտք",
+      "budgetAdherence": "Բյուջե",
+      "emergencyFund": "Արտակարգ իրավիճակների հիմնադրամ",
+      "investmentGrowth": "Ներդրումներ",
+      "expenseStability": "Ծախսեր"
+    },
+    "factorLinks": {
+      "savingsRate": "Դիտել եկամուտը",
+      "debtToIncome": "Կառավարել վարկերը",
+      "budgetAdherence": "Կարգավորել բյուջեները",
+      "emergencyFund": "Պլանավորել խնայողությունները",
+      "investmentGrowth": "Դիտել պորտֆելը",
+      "expenseStability": "Դիտել հաշվետվությունները"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Վաճառող:",
+    "amount": "Գումար:",
+    "average": "Միջին՝ {amount}",
+    "category": "Կատեգորիա:",
+    "wasExpected": "Սա սպասվա՞ծ էր:",
+    "expected": "Սպասված",
+    "unexpected": "Անսպասելի",
+    "markedExpected": "Նշված է որպես սպասված",
+    "markedUnexpected": "Նշված է որպես անսպասելի",
+    "moreAnomalies": "+{count} ավելի {count, plural, =1 {անոմալիա} other {անոմալիաներ}}",
+    "severity": {
+      "high": "ԲԱՐՁՐ",
+      "medium": "ՄԻՋԻՆ",
+      "low": "ՑԱԾՐ"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR Մշակում",
+    "cancel": "Չեղարկել",
+    "pageProgress": "Էջ {current} / {total}-ից",
+    "elapsed": "Անցել է՝ {time}",
+    "remaining": "Մնացել է մոտ {time}",
+    "stages": {
+      "loading": "PDF-ի բեռնում",
+      "rendering": "Էջերի արտածում",
+      "preprocessing": "Պատկերի բարելավում",
+      "ocr": "Տեքստի արդյունահանում",
+      "parsing": "Գործարքների վերլուծություն",
+      "complete": "Ավարտված",
+      "error": "Սխալ",
+      "cancelled": "Չեղարկված",
+      "enhance": "Բարելավել"
+    },
+    "errorRetry": "OCR մշակումը ձախողվեց: Ցանկանու՞մ եք նորից փորձել:",
+    "cancelledRetry": "OCR-ը չեղարկվել է: Ցանկանու՞մ եք վերսկսել:",
+    "retryButton": "Նորից փորձել OCR",
+    "completedSuccess": "OCR-ը հաջողությամբ ավարտվեց:",
+    "loadingChart": "Գծապատկերի բեռնում..."
+  },
+  "developerTools": {
+    "title": "Ծրագրավորողի գործիքներ",
+    "subtitle": "QA գործիքներ միջազգայնացման փորձարկման համար (միայն dev ռեժիմ)",
+    "pseudoLocaleLabel": "Միացնել կեղծ-լոկալը (en-XA)",
+    "pseudoLocaleHelp": "Թարգմանված բոլոր տեքստերը փոխարինվում է շեշտակից նիշերով. Մնացած սովորական անգլերեն տեքստը <strong>ծրագրավորված</strong> է և պետք է փոխարկվի թարգմանական բանալիների.",
+    "pseudoLocaleExample": "Օրինակ: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Եթե տեսնում եք \"Dashboard\" \"[Ðášhƀóářð~~~]\"-ի փոխարեն՝ այն ծրագրավորված է!",
+    "infoPseudoLocale": "Կեղծ-լոկալը օգնում է բացահայտել չթարգմանված տողերը մշակման ընթացքում",
+    "infoProduction": "Պրոդակշն կառուցները ինքնաբերաբար բացառում են en-XA լոկալը",
+    "infoSwitchBack": "Վերադարձեք իրական լոկալին՝ սովորական մշակումը շարունակելու համար"
+  },
+  "pageMetadata": {
+    "appName": "Բյուջեի հավելված",
+    "scenarios": "Ինչ-եթե սցենարներ",
+    "merchantRules": "Առևտրականի կանոններ",
+    "more": "Ավելին",
+    "netWorth": "Զուտ արժեք",
+    "properties": "Գույք",
+    "propertyDetail": "Գույքի մանրամասներ",
+    "review": "Գործարքների վերանայում",
+    "events": "Միջոցառումների բյուջեներ",
+    "landing": "BudgetPro – Կառավարեք ձեր ֆինանսները",
+    "dashboard": "Վահանակ",
+    "transactions": "Գործարքներ",
+    "import": "Ներմուծում",
+    "accounts": "Հաշիվներ",
+    "budgets": "Բյուջեներ",
+    "categories": "Կատեգորիաներ",
+    "reports": "Հաշվետվություններ",
+    "settings": "Կարգավորումներ",
+    "subscriptions": "Բաժանորդագրություններ",
+    "investments": "Ներդրումներ",
+    "debtPayoff": "Պարտքի մարում",
+    "loans": "Վարկեր",
+    "calculators": "Հաշվիչներ",
+    "planning": "Պլանավորում",
+    "ocr": "Կտրոնի սկաներ",
+    "export": "Արտահանում",
+    "fridayReview": "Շաբաթական վերանայում",
+    "onboarding": "Սկsdեkmsdk",
+    "offline": "delaysdelays",
+    "splits": "delaysdelays"
   }
 }

@@ -2,13 +2,18 @@
 
 import { Button } from "@/components/ui/button";
 import { useLandingContent } from "@/components/budget/landing/content";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import type { SupportedLocale } from "@/i18n/config";
+import { getCurrencySymbol } from "@/i18n/utils/formatCurrency";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 export function LandingNav() {
   const content = useLandingContent();
   const t = useTranslations("landing.nav");
   const tAria = useTranslations("aria");
+  const currency = useDefaultCurrency();
+  const locale = useLocale();
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#070A12]/60 backdrop-blur-xl">
@@ -16,7 +21,9 @@ export function LandingNav() {
         <Link href="/budget-app/landing" className="flex items-center gap-3">
           <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 shadow-lg shadow-black/40">
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-teal-400/60 via-cyan-400/20 to-indigo-500/40 opacity-80" />
-            <span className="text-lg font-bold text-white">$</span>
+            <span className="text-lg font-bold text-white">
+              {getCurrencySymbol(currency, locale as SupportedLocale)}
+            </span>
           </div>
           <div className="leading-tight">
             <div className="text-sm font-semibold text-white">{content.brand.name}</div>

@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "홈으로 돌아가기"
   },
   "bottomSheet": {
     "close": "닫기",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "{n}년차",
+      "yearLabel": "연도",
+      "month": "{n}개월",
+      "monthYear": "{n}개월 ({y}년차)",
+      "age": "{n}세",
+      "ageLabel": "나이",
+      "contributions": "납입액",
+      "interestEarned": "획득 이자",
+      "interest": "이자",
+      "totalInterest": "총 이자",
+      "snowball": "스노우볼",
+      "avalanche": "애벌랜치",
+      "portfolio": "포트폴리오",
+      "fireTarget": "FIRE 목표",
+      "median50th": "중앙값 (50%)",
+      "remainingBalance": "잔여 잔액",
+      "totalAssets": "총 자산",
+      "totalLiabilities": "총 부채",
+      "netWorth": "순자산",
+      "retirement": "은퇴"
+    },
+    "scenario": {
+      "compare": "시나리오 비교 ({count}개 저장됨)",
+      "selectUpTo": "비교할 시나리오를 최대 3개 선택하세요:",
+      "duplicate": "복제",
+      "delete": "삭제",
+      "sideBySide": "나란히 비교",
+      "field": "항목",
+      "delta": "차이",
+      "selectOneMore": "비교할 시나리오를 하나 더 선택하세요",
+      "copySuffix": "(복사)"
+    },
+    "openCalculator": "계산기 열기"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "삭제",
     "edit": "편집",
     "loading": "로딩 중...",
-    "save": "저장"
+    "save": "저장",
+    "success": "성공!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "확인",
     "finalConfirmation": "최종 확인:",
     "processing": "처리 중...",
-    "typeToConfirm": "{text}을(를) 입력하여 이 작업을 확인하세요."
+    "typeToConfirm": "{text}을(를) 입력하여 이 작업을 확인하세요.",
+    "confirmAction": "작업 확인"
   },
   "draggableWidget": {
     "dragToReorder": "드래그하여 위젯 순서 변경"
@@ -2068,7 +2105,18 @@
     },
     "grade": "등급: {grade}",
     "missingFactors": "{count, plural, other {#개 요소 누락}}",
-    "title": "재무 건전성"
+    "title": "재무 건전성",
+    "history": {
+      "title": "점수 기록",
+      "monthsOfData": "{count}개월 데이터",
+      "emptyTitle": "데이터가 쌓이면 점수 기록이 여기에 표시됩니다",
+      "emptySubtitle": "다음 달에 다시 확인하세요!",
+      "legendScore": "점수",
+      "legendTrend": "추세",
+      "tooltipScore": "점수",
+      "tooltipTrend": "추세",
+      "loadingChart": "차트 로딩 중..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "당신의 예산은 당신의 기기에",
+      "heroSubtitle": "가장 프라이빗한 예산 앱에 오신 것을 환영합니다. 계정 불필요, 클라우드 불필요, 타협 없음.",
+      "features": {
+        "yourDataTitle": "당신의 데이터, 당신의 기기",
+        "yourDataDescription": "모든 재무 데이터는 기기에 로컬 저장됩니다. 클라우드 서버 없음, 제3자 접근 없음.",
+        "encryptionTitle": "은행급 암호화",
+        "encryptionDescription": "AES-256 암호화로 데이터를 보호합니다. 키는 오직 당신만 가지고 있습니다.",
+        "offlineTitle": "오프라인 작동",
+        "offlineDescription": "인터넷 없이 완전한 기능. 프라이버시를 중시하는 사용자에게 최적.",
+        "zeroTrackingTitle": "추적 제로",
+        "zeroTrackingDescription": "분석 없음, 텔레메트리 없음, 데이터 수집 없음. 당신의 재정은 누구의 일도 아닙니다."
+      },
+      "whatsNext": "다음은?",
+      "whatsNextIntro": "앞으로 몇 분 안에 도와드리겠습니다:",
+      "step1": "기존 거래 가져오기 (은행 CSV, OFX 또는 수동)",
+      "step2": "지출 자동 분류",
+      "step3": "실제 지출 기반 첫 예산 만들기",
+      "step4": "청구서 알림 설정",
+      "getStarted": "시작하기!"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count}건의 거래에 카테고리가 필요합니다",
+      "allCategorized": "모든 거래가 분류되었습니다!",
+      "applySmartSuggestions": "스마트 제안 적용",
+      "categorize": "분류",
+      "percentMatch": "{percent}% 일치",
+      "rememberChoices": "카테고리 선택 기억",
+      "rememberChoicesDescription": "향후 유사한 거래를 자동 분류",
+      "categorized": "{count}건 분류됨",
+      "remaining": "{count}건 남음",
+      "continue": "계속",
+      "continueAnyway": "그래도 계속",
+      "categories": {
+        "foodDining": "음식 및 외식",
+        "transportation": "교통",
+        "billsUtilities": "청구서 및 공과금",
+        "shopping": "쇼핑",
+        "entertainment": "엔터테인먼트",
+        "healthFitness": "건강 및 피트니스",
+        "personalCare": "개인 관리",
+        "income": "수입",
+        "transfers": "이체"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "프로필 삭제에 실패했습니다",
+    "deleteTitle": "프로필을 삭제하시겠습니까?",
+    "defaultProfile": "기본 프로필",
+    "cannotDeleteOnly": "유일한 프로필입니다. 삭제할 수 없습니다.",
+    "permanentWarning": "이 프로필이 영구적으로 삭제됩니다. 이 프로필의 비공개 예산은 모든 프로필과 공유됩니다.",
+    "cannotUndo": "이 작업은 취소할 수 없습니다.",
+    "deleteButton": "프로필 삭제"
   },
   "pullToRefresh": {
     "pull": "당겨서 새로고침",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "보기"
   },
   "receiptUpload": {
     "buttons": {
@@ -4512,6 +4613,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "알림 비활성화",
+      "enableReminder": "알림 활성화",
+      "off": "꺼짐"
     }
   },
   "subscriptionCostChart": {
@@ -5166,5 +5272,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "가져오기 완료!",
+    "subtitle": "{accountName} 계좌 잔액 설정",
+    "transactionsImported": "{count}건의 거래 가져옴",
+    "netChange": "거래의 순 변동:",
+    "currentBalanceLabel": "현재 은행 잔액은 얼마입니까?",
+    "currentBalanceLabelCredit": "현재 미결제 금액은 얼마입니까?",
+    "balanceHelperBank": "뱅킹 앱을 열고 표시된 잔액을 입력하세요",
+    "balanceHelperCredit": "신용카드 명세서의 현재 잔액을 입력하세요 (양수로)",
+    "startingBalance": "시작 잔액:",
+    "startingBalanceCredit": "시작 미결제 금액:",
+    "balanceMatchNote": "계좌 잔액이 은행과 일치하게 됩니다.",
+    "negativeWarning": "시작 잔액이 마이너스입니다. 입출금/저축 계좌에서는 일반적이지 않습니다. 현재 잔액을 다시 확인하세요.",
+    "skipForNow": "지금은 건너뛰기",
+    "setBalance": "잔액 설정"
+  },
+  "recommendations": {
+    "title": "주요 추천",
+    "subtitle": "재무 건전성을 개선하는 방법",
+    "emptyState": "맞춤 추천을 받으려면 더 많은 재무 데이터를 추가하세요",
+    "viewAllFactors": "모든 요소 보기",
+    "factorLabels": {
+      "savingsRate": "저축",
+      "debtToIncome": "부채",
+      "budgetAdherence": "예산",
+      "emergencyFund": "비상 자금",
+      "investmentGrowth": "투자",
+      "expenseStability": "지출"
+    },
+    "factorLinks": {
+      "savingsRate": "수입 보기",
+      "debtToIncome": "대출 관리",
+      "budgetAdherence": "예산 조정",
+      "emergencyFund": "저축 계획",
+      "investmentGrowth": "포트폴리오 보기",
+      "expenseStability": "보고서 보기"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "가맹점:",
+    "amount": "금액:",
+    "average": "평균: {amount}",
+    "category": "카테고리:",
+    "wasExpected": "예상한 것이었나요?",
+    "expected": "예상됨",
+    "unexpected": "예상 외",
+    "markedExpected": "예상됨으로 표시",
+    "markedUnexpected": "예상 외로 표시",
+    "moreAnomalies": "+{count}개 더 많은 이상 항목",
+    "severity": {
+      "high": "높음",
+      "medium": "중간",
+      "low": "낮음"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR 처리 중",
+    "cancel": "취소",
+    "pageProgress": "페이지 {current}/{total}",
+    "elapsed": "경과: {time}",
+    "remaining": "약 {time} 남음",
+    "stages": {
+      "loading": "PDF 로딩",
+      "rendering": "페이지 렌더링",
+      "preprocessing": "이미지 보정",
+      "ocr": "텍스트 추출",
+      "parsing": "거래 분석",
+      "complete": "완료",
+      "error": "오류",
+      "cancelled": "취소됨",
+      "enhance": "보정"
+    },
+    "errorRetry": "OCR 처리에 실패했습니다. 다시 시도하시겠습니까?",
+    "cancelledRetry": "OCR이 취소되었습니다. 다시 시작하시겠습니까?",
+    "retryButton": "OCR 재시도",
+    "completedSuccess": "OCR이 성공적으로 완료되었습니다!",
+    "loadingChart": "차트 로딩 중..."
+  },
+  "developerTools": {
+    "title": "개발자 도구",
+    "subtitle": "국제화 테스트용 QA 도구 (개발 모드 전용)",
+    "pseudoLocaleLabel": "의사 로케일 활성화 (en-XA)",
+    "pseudoLocaleHelp": "모든 번역된 텍스트를 악센트 문자로 대체합니다. 남아있는 일반 영어 텍스트는 <strong>하드코딩</strong>되어 있으며 번역 키로 변환해야 합니다.",
+    "pseudoLocaleExample": "예시: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "\"[Ðášhƀóářð~~~]\" 대신 \"Dashboard\"가 보이면, 하드코딩된 것입니다!",
+    "infoPseudoLocale": "의사 로케일은 개발 중 번역되지 않은 문자열을 식별하는 데 도움이 됩니다",
+    "infoProduction": "프로덕션 빌드에서는 en-XA 로케일이 자동으로 제외됩니다",
+    "infoSwitchBack": "정상적인 개발을 계속하려면 실제 로케일로 다시 전환하세요"
+  },
+  "pageMetadata": {
+    "appName": "가계부 앱",
+    "scenarios": "가정 시나리오",
+    "merchantRules": "가맹점 규칙",
+    "more": "더 보기",
+    "netWorth": "순자산",
+    "properties": "부동산",
+    "propertyDetail": "부동산 상세",
+    "review": "거래 검토",
+    "events": "이벤트 예산",
+    "landing": "BudgetPro – 재정을 완벽하게 관리하세요",
+    "dashboard": "대시보드",
+    "transactions": "거래",
+    "import": "가져오기",
+    "accounts": "계좌",
+    "budgets": "예산",
+    "categories": "카테고리",
+    "reports": "보고서",
+    "settings": "설정",
+    "subscriptions": "구독",
+    "investments": "투자",
+    "debtPayoff": "부채 상환",
+    "loans": "대출",
+    "calculators": "계산기",
+    "planning": "계획",
+    "ocr": "영수증 스캐너",
+    "export": "내보내기",
+    "fridayReview": "주간 리뷰",
+    "onboarding": "시작하기",
+    "offline": "오프라인 모드",
+    "splits": "거래 분할"
   }
 }

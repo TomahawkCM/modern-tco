@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Hasierara itzuli"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "{n}. urtea",
+      "yearLabel": "Urtea",
+      "month": "{n}. hilabetea",
+      "monthYear": "{n}. hilabetea ({y}. urtea)",
+      "age": "{n} urte",
+      "ageLabel": "Adina",
+      "contributions": "Ekarpenak",
+      "interestEarned": "Irabazitako interesak",
+      "interest": "Interesak",
+      "totalInterest": "Interes guztira",
+      "snowball": "Elur-bola",
+      "avalanche": "Elur-jauzia",
+      "portfolio": "Zorroa",
+      "fireTarget": "FIRE helburua",
+      "median50th": "Mediana (50.)",
+      "remainingBalance": "Geratzen den saldoa",
+      "totalAssets": "Aktiboak guztira",
+      "totalLiabilities": "Pasiboak guztira",
+      "netWorth": "Ondare garbia",
+      "retirement": "Erretiroa"
+    },
+    "scenario": {
+      "compare": "Eszenatokiak alderatu ({count} gordeta)",
+      "selectUpTo": "Hautatu gehienez 3 eszenatoki alderatzeko:",
+      "duplicate": "Bikoiztu",
+      "delete": "Ezabatu",
+      "sideBySide": "Albo-alboko alderaketa",
+      "field": "Eremua",
+      "delta": "Aldea",
+      "selectOneMore": "Hautatu eszenatoki bat gehiago alderatzeko",
+      "copySuffix": "(kopia)"
+    },
+    "openCalculator": "Kalkulagailua ireki"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Ezabatu",
     "edit": "Editatu",
     "loading": "Kargatzen...",
-    "save": "Gorde"
+    "save": "Gorde",
+    "success": "Arrakasta!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Berretsi",
     "finalConfirmation": "Azken Berrespena:",
     "processing": "Prozesatzen...",
-    "typeToConfirm": "Idatzi {text} ekintza hau berresteko."
+    "typeToConfirm": "Idatzi {text} ekintza hau berresteko.",
+    "confirmAction": "Ekintza berretsi"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Puntuazioaren historia",
+      "monthsOfData": "{count} {count, plural, =1 {hilabete} other {hilabete}}(ko) datuak",
+      "emptyTitle": "Puntuazioaren historia hemen agertuko da datuak pilatzen diren heinean",
+      "emptySubtitle": "Itzuli datorren hilabetean!",
+      "legendScore": "Puntuazioa",
+      "legendTrend": "Joera",
+      "tooltipScore": "Puntuazioa",
+      "tooltipTrend": "Joera",
+      "loadingChart": "Grafikoa kargatzen..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Zure aurrekontua ZURE gailuan bizi da",
+      "heroSubtitle": "Ongi etorri aurrekontu-aplikazio pribatuenera. Konturik ez, hodeirik ez, konpromisorik ez.",
+      "features": {
+        "yourDataTitle": "Zure datuak, zure gailua",
+        "yourDataDescription": "Finantza-datu guztiak zure gailuan gordetzen dira lokalki. Hodei-zerbitzaririk ez, hirugarrenen sarbiderik ez.",
+        "encryptionTitle": "Banku-mailako enkriptatzea",
+        "encryptionDescription": "AES-256 enkriptatzeaz babesten dira zure datuak. Zuk bakarrik daukazuz gakoa — inoiz ez du zure gailua uzten.",
+        "offlineTitle": "Lineaz kanpo funtzionatzen du",
+        "offlineDescription": "Funtzionalitate osoa internetik gabe. Ezin hobea pribatutasunaz arduratzen diren erabiltzaileentzat.",
+        "zeroTrackingTitle": "Zero jarraipena",
+        "zeroTrackingDescription": "Analisirik ez, telemetriarik ez, datu-bilketarik ez. Zure finantzak inoren kontua ez dira."
+      },
+      "whatsNext": "Zer dator orain?",
+      "whatsNextIntro": "Hurrengo minutuetan, honetan lagunduko dizugu:",
+      "step1": "Dauden transakzioak inportatu (CSV, OFX edo eskuz)",
+      "step2": "Zure gastuak automatikoki sailkatu",
+      "step3": "Benetako gastuetan oinarritutako lehen aurrekontua sortu",
+      "step4": "Faktura-oroigarriak konfiguratu",
+      "getStarted": "Has gaitezen"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} transakziok kategoriak behar dituzte",
+      "allCategorized": "Transakzio guztiak sailkatuta daude!",
+      "applySmartSuggestions": "Iradokizun adimendunak aplikatu",
+      "categorize": "Sailkatu",
+      "percentMatch": "{percent}% bat-etortzea",
+      "rememberChoices": "Gogoratu nire kategoria-aukerak",
+      "rememberChoicesDescription": "Automatikoki sailkatu antzeko transakzioak etorkizunean",
+      "categorized": "{count} sailkatuta",
+      "remaining": "{count} geratzen dira",
+      "continue": "Jarraitu",
+      "continueAnyway": "Jarraitu hala ere",
+      "categories": {
+        "foodDining": "Janaria eta jatetxeak",
+        "transportation": "Garraioa",
+        "billsUtilities": "Fakturak eta zerbitzuak",
+        "shopping": "Erosketak",
+        "entertainment": "Aisia",
+        "healthFitness": "Osasuna eta kirola",
+        "personalCare": "Zaintza pertsonala",
+        "income": "Diru-sarrerak",
+        "transfers": "Transferentziak"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Ezin izan da profila ezabatu",
+    "deleteTitle": "Profila ezabatu?",
+    "defaultProfile": "Profil lehenetsia",
+    "cannotDeleteOnly": "Hau da profil bakarra. Ezin duzu ezabatu.",
+    "permanentWarning": "Honek profil hau betirako ezabatuko du. Profil honek dituen aurrekontu pribatuak profil guztiekin partekatuko dira.",
+    "cannotUndo": "Ekintza hau ezin da desegin.",
+    "deleteButton": "Profila ezabatu"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Ikusi"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Oroigarria desaktibatu",
+      "enableReminder": "Oroigarria aktibatu",
+      "off": "Itzalita"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Inportazioa osatuta!",
+    "subtitle": "Ezarri {accountName} kontuaren saldoa",
+    "transactionsImported": "{count} transakzio inportatuta",
+    "netChange": "Aldaketa garbia transakzioetatik:",
+    "currentBalanceLabel": "Zein da zure uneko banku-saldoa?",
+    "currentBalanceLabelCredit": "Zein da zure uneko zor-kopurua?",
+    "balanceHelperBank": "Ireki zure banku-aplikazioa eta sartu kontu honetarako erakusten den saldoa",
+    "balanceHelperCredit": "Sartu kreditu-txartelaren laburpenean agertzen den uneko saldoa (zenbaki positibo gisa)",
+    "startingBalance": "Zure hasierako saldoa:",
+    "startingBalanceCredit": "Zure hasierako zor-kopurua:",
+    "balanceMatchNote": "Honek zure kontuaren saldoa bankuarekin bat etorraraziko du.",
+    "negativeWarning": "Honek hasierako saldo negatiboa ematen du, kontu korronte/aurrezki kontuetan ohikoa ez dena. Mesedez, egiaztatu zure uneko saldoa zuzena den.",
+    "skipForNow": "Saltatu oraingoz",
+    "setBalance": "Saldoa ezarri"
+  },
+  "recommendations": {
+    "title": "Gomendio nagusiak",
+    "subtitle": "Zure finantza-osasuna hobetzeko moduak",
+    "emptyState": "Gehitu finantza-datu gehiago gomendio pertsonalizatuak jasotzeko",
+    "viewAllFactors": "Ikusi faktore guztiak",
+    "factorLabels": {
+      "savingsRate": "Aurrezkiak",
+      "debtToIncome": "Zorra",
+      "budgetAdherence": "Aurrekontua",
+      "emergencyFund": "Larrialdi-funtsa",
+      "investmentGrowth": "Inbertsioak",
+      "expenseStability": "Gastuak"
+    },
+    "factorLinks": {
+      "savingsRate": "Ikusi diru-sarrerak",
+      "debtToIncome": "Kudeatu maileguak",
+      "budgetAdherence": "Doitu aurrekontuak",
+      "emergencyFund": "Planifikatu aurrezkiak",
+      "investmentGrowth": "Ikusi zorroa",
+      "expenseStability": "Ikusi txostenak"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Merkataria:",
+    "amount": "Zenbatekoa:",
+    "average": "Batez bestekoa: {amount}",
+    "category": "Kategoria:",
+    "wasExpected": "Espero zen?",
+    "expected": "Esperotakoa",
+    "unexpected": "Ustekabea",
+    "markedExpected": "Esperotako gisa markatuta",
+    "markedUnexpected": "Ustekabeko gisa markatuta",
+    "moreAnomalies": "+{count} {count, plural, =1 {anomalia} other {anomalia}} gehiago",
+    "severity": {
+      "high": "ALTUA",
+      "medium": "ERTAINA",
+      "low": "BAXUA"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR prozesatzea",
+    "cancel": "Utzi",
+    "pageProgress": "{current}. orrialdea {total}(e)tik",
+    "elapsed": "Igarotakoa: {time}",
+    "remaining": "~{time} geratzen da",
+    "stages": {
+      "loading": "PDF kargatzen",
+      "rendering": "Orrialdeak errendatzen",
+      "preprocessing": "Irudia hobetzen",
+      "ocr": "Testua erauzten",
+      "parsing": "Transakzioak aztertzen",
+      "complete": "Osatuta",
+      "error": "Errorea",
+      "cancelled": "Bertan behera utzia",
+      "enhance": "Hobetu"
+    },
+    "errorRetry": "OCR prozesamendua huts egin du. Berriro saiatu nahi duzu?",
+    "cancelledRetry": "OCR bertan behera utzi da. Berrabiarazi nahi duzu?",
+    "retryButton": "OCR berriro saiatu",
+    "completedSuccess": "OCR arrakastaz osatuta!",
+    "loadingChart": "Grafikoa kargatzen..."
+  },
+  "developerTools": {
+    "title": "Garatzaile Tresnak",
+    "subtitle": "QA tresnak nazioartekotze-probak egiteko (garapen modua soilik)",
+    "pseudoLocaleLabel": "Gaitu Pseudo-Locale (en-XA)",
+    "pseudoLocaleHelp": "Itzulitako testu guztia azentu-karaktereekin ordezkatzen du. Geratzen den ingelesezko testu arrunta <strong>gogor kodetuta</strong> dago eta itzulpen-gakoetara bihurtu behar da.",
+    "pseudoLocaleExample": "Adibidea: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "\"[Ðášhƀóářð~~~]\" ordez \"Dashboard\" ikusten baduzu, gogor kodetuta dago!",
+    "infoPseudoLocale": "Pseudo-locale-k itzuli gabeko kateak identifikatzen laguntzen du garapenean",
+    "infoProduction": "Produkzio-eraikuntzek automatikoki baztertzen dute en-XA locale-a",
+    "infoSwitchBack": "Aldatu berriro benetako locale batera garapen normala jarraitzeko"
+  },
+  "pageMetadata": {
+    "appName": "Aurrekontu Aplikazioa",
+    "scenarios": "Zer-Baldin Eszenatokiak",
+    "merchantRules": "Merkatari Arauak",
+    "more": "Gehiago",
+    "netWorth": "Balio Garbia",
+    "properties": "Jabetzak",
+    "propertyDetail": "Jabetza Xehetasunak",
+    "review": "Transakzioak Berrikusi",
+    "events": "Ekitaldi Aurrekontuak",
+    "landing": "BudgetPro - Menperatu Zure Finantzak",
+    "dashboard": "Aginte-panela",
+    "transactions": "Transakzioak",
+    "import": "Inportatu",
+    "accounts": "Kontuak",
+    "budgets": "Aurrekontuak",
+    "categories": "Kategoriak",
+    "reports": "Txostenak",
+    "settings": "Ezarpenak",
+    "subscriptions": "Harpidetzak",
+    "investments": "Inbertsioak",
+    "debtPayoff": "Zor Ordainketa",
+    "loans": "Maileguak",
+    "calculators": "Kalkulagailuak",
+    "planning": "Plangintza",
+    "ocr": "Ordainagiri Eskaneatzailea",
+    "export": "Esportatu",
+    "fridayReview": "Asteko Berrikuspena",
+    "onboarding": "Hastapenak",
+    "offline": "Lineaz kanpoko modua",
+    "splits": "Transakzioak banatu"
   }
 }

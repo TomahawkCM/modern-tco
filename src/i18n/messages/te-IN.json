@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "హోమ్‌కు తిరిగి వెళ్ళు"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "సంవత్సరం {n}",
+      "yearLabel": "సంవత్సరం",
+      "month": "నెల {n}",
+      "monthYear": "నెల {n} (సంవత్సరం {y})",
+      "age": "వయసు {n}",
+      "ageLabel": "వయసు",
+      "contributions": "విరాళాలు",
+      "interestEarned": "ఆర్జించిన వడ్డీ",
+      "interest": "వడ్డీ",
+      "totalInterest": "మొత్తం వడ్డీ",
+      "snowball": "స్నోబాల్",
+      "avalanche": "అవలాంచ్",
+      "portfolio": "పోర్ట్‌ఫోలియో",
+      "fireTarget": "FIRE లక్ష్యం",
+      "median50th": "మధ్యస్థ (50వ)",
+      "remainingBalance": "మిగిలిన బ్యాలెన్స్",
+      "totalAssets": "మొత్తం ఆస్తులు",
+      "totalLiabilities": "మొత్తం అప్పులు",
+      "netWorth": "నికర విలువ",
+      "retirement": "పదవీ విరమణ"
+    },
+    "scenario": {
+      "compare": "దృశ్యాలను పోల్చండి ({count} సేవ్ చేయబడ్డాయి)",
+      "selectUpTo": "పోల్చడానికి 3 దృశ్యాల వరకు ఎంచుకోండి:",
+      "duplicate": "నకలు",
+      "delete": "తొలగించు",
+      "sideBySide": "పక్కపక్కన పోలిక",
+      "field": "ఫీల్డ్",
+      "delta": "తేడా",
+      "selectOneMore": "పోల్చడానికి మరో దృశ్యాన్ని ఎంచుకోండి",
+      "copySuffix": "(delaysdelays)"
+    },
+    "openCalculator": "కాలిక్యులేటర్ తెరువు"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "తొలగించు",
     "edit": "సవరించు",
     "loading": "లోడ్ అవుతోంది...",
-    "save": "సేవ్"
+    "save": "సేవ్",
+    "success": "విజయం!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "నిర్ధారించండి",
     "finalConfirmation": "చివరి నిర్ధారణ:",
     "processing": "ప్రాసెసింగ్...",
-    "typeToConfirm": "ఈ చర్యను నిర్ధారించడానికి {text} టైప్ చేయండి."
+    "typeToConfirm": "ఈ చర్యను నిర్ధారించడానికి {text} టైప్ చేయండి.",
+    "confirmAction": "చర్యను నిర్ధారించండి"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "స్కోర్ చరిత్ర",
+      "monthsOfData": "{count} {count, plural, =1 {నెల} other {నెలల}} డేటా",
+      "emptyTitle": "డేటా పేరుకుపోయిన తర్వాత మీ స్కోర్ చరిత్ర ఇక్కడ కనిపిస్తుంది",
+      "emptySubtitle": "వచ్చే నెలలో మళ్ళీ చూడండి!",
+      "legendScore": "స్కోర్",
+      "legendTrend": "ధోరణి",
+      "tooltipScore": "స్కోర్",
+      "tooltipTrend": "ధోరణి",
+      "loadingChart": "చార్ట్ లోడ్ అవుతోంది..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "మీ బడ్జెట్ మీ పరికరంలో ఉంటుంది",
+      "heroSubtitle": "అత్యంత ప్రైవేట్ బడ్జెట్ యాప్‌కు స్వాగతం. ఖాతాలు లేవు, క్లౌడ్ లేదు, రాజీ లేదు.",
+      "features": {
+        "yourDataTitle": "మీ డేటా, మీ పరికరం",
+        "yourDataDescription": "అన్ని ఆర్థిక డేటా మీ పరికరంలో స్థానికంగా నిల్వ చేయబడుతుంది. క్లౌడ్ సర్వర్లు లేవు, మూడవ పక్షం యాక్సెస్ లేదు.",
+        "encryptionTitle": "బ్యాంక్-గ్రేడ్ ఎన్‌క్రిప్షన్",
+        "encryptionDescription": "AES-256 ఎన్‌క్రిప్షన్ మీ డేటాను రక్షిస్తుంది. మీ దగ్గర మాత్రమే కీ ఉంది—ఇది మీ పరికరాన్ని విడిచిపెట్టదు.",
+        "offlineTitle": "ఆఫ్‌లైన్‌లో పనిచేస్తుంది",
+        "offlineDescription": "ఇంటర్నెట్ లేకుండా పూర్తి కార్యాచరణ. గోప్యతా-అవగాహన ఉన్న వినియోగదారులకు అనువైనది.",
+        "zeroTrackingTitle": "జీరో ట్రాకింగ్",
+        "zeroTrackingDescription": "అనలిటిక్స్ లేవు, టెలిమెట్రీ లేదు, డేటా సేకరణ లేదు. మీ ఆర్థిక వ్యవహారాలు ఎవరి బిజినెస్ కాదు."
+      },
+      "whatsNext": "తదుపరి ఏమిటి?",
+      "whatsNextIntro": "తదుపరి కొన్ని నిమిషాల్లో, మేము మీకు సహాయం చేస్తాము:",
+      "step1": "మీ ఇప్పటికే ఉన్న లావాదేవీలను దిగుమతి చేయండి (బ్యాంక్ CSV, OFX, లేదా మాన్యువల్)",
+      "step2": "మీ ఖర్చులను ఆటోమేటిక్‌గా వర్గీకరించండి",
+      "step3": "నిజమైన ఖర్చుల ఆధారంగా మీ మొదటి బడ్జెట్‌ను సృష్టించండి",
+      "step4": "బిల్ రిమైండర్‌లు సెట్ చేయండి, మీరు ఏ చెల్లింపును మిస్ కాకుండా ఉండండి",
+      "getStarted": "ప్రారంభిద్దాం"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} లావాదేవీలకు వర్గాలు అవసరం",
+      "allCategorized": "అన్ని లావాదేవీలు వర్గీకరించబడ్డాయి!",
+      "applySmartSuggestions": "స్మార్ట్ సూచనలను వర్తింపజేయి",
+      "categorize": "వర్గీకరించు",
+      "percentMatch": "{percent}% సరిపోలిక",
+      "rememberChoices": "నా వర్గ ఎంపికలను గుర్తుంచుకో",
+      "rememberChoicesDescription": "భవిష్యత్తులో ఇలాంటి లావాదేవీలను ఆటోమేటిక్‌గా వర్గీకరించు",
+      "categorized": "{count} వర్గీకరించబడ్డాయి",
+      "remaining": "{count} మిగిలినవి",
+      "continue": "కొనసాగించు",
+      "continueAnyway": "ఎలాగైనా కొనసాగించు",
+      "categories": {
+        "foodDining": "ఆహారం & డైనింగ్",
+        "transportation": "రవాణా",
+        "billsUtilities": "బిల్లులు & యుటిలిటీలు",
+        "shopping": "షాపింగ్",
+        "entertainment": "వినోదం",
+        "healthFitness": "ఆరోగ్యం & ఫిట్‌నెస్",
+        "personalCare": "వ్యక్తిగత సంరక్షణ",
+        "income": "ఆదాయం",
+        "transfers": "బదిలీలు"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "ప్రొఫైల్ తొలగించడం విఫలమైంది",
+    "deleteTitle": "ప్రొఫైల్ తొలగించాలా?",
+    "defaultProfile": "డిఫాల్ట్ ప్రొఫైల్",
+    "cannotDeleteOnly": "ఇది ఏకైక ప్రొఫైల్. మీరు దీన్ని తొలగించలేరు.",
+    "permanentWarning": "ఇది ఈ ప్రొఫైల్‌ను శాశ్వతంగా తొలగిస్తుంది. ఈ ప్రొఫైల్ యొక్క ఏవైనా ప్రైవేట్ బడ్జెట్‌లు అన్ని ప్రొఫైల్‌లతో భాగస్వామ్యం చేయబడతాయి.",
+    "cannotUndo": "ఈ చర్యను రద్దు చేయలేరు.",
+    "deleteButton": "ప్రొఫైల్ తొలగించు"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "చూడు"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "రిమైండర్ ఆపివేయి",
+      "enableReminder": "రిమైండర్ ఆన్ చేయి",
+      "off": "ఆఫ్"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "developerTools": {
+    "title": "డెవలపర్ టూల్స్",
+    "subtitle": "అంతర్జాతీయీకరణ పరీక్ష కోసం QA టూల్స్ (డెవ్ మోడ్ మాత్రమే)",
+    "pseudoLocaleLabel": "సూడో-లొకేల్‌ను ప్రారంభించండి (en-XA)",
+    "pseudoLocaleHelp": "అనువదించబడిన మొత్తం టెక్స్ట్‌ను ఉచ్చారణ అక్షరాలతో భర్తీ చేస్తుంది. మిగిలిన సాధారణ ఆంగ్ల టెక్స్ట్ <strong>హార్డ్‌కోడెడ్</strong> మరియు అనువాద కీలుగా మార్చాలి.",
+    "pseudoLocaleExample": "ఉదాహరణ: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "\"[Ðášhƀóářð~~~]\" బదులు \"Dashboard\" కనిపిస్తే, అది హార్డ్‌కోడెడ్!",
+    "infoPseudoLocale": "సూడో-లొకేల్ డెవలప్‌మెంట్ సమయంలో అనువదించని స్ట్రింగ్‌లను గుర్తించడంలో సహాయపడుతుంది",
+    "infoProduction": "ప్రొడక్షన్ బిల్డ్‌లు స్వయంచాలకంగా en-XA లొకేల్‌ను మినహాయిస్తాయి",
+    "infoSwitchBack": "సాధారణ డెవలప్‌మెంట్ కొనసాగించడానికి నిజమైన లొకేల్‌కు తిరిగి మారండి"
+  },
+  "pageMetadata": {
+    "appName": "బడ్జెట్ యాప్",
+    "scenarios": "వాట్-ఇఫ్ దృశ్యాలు",
+    "merchantRules": "వ్యాపారి నియమాలు",
+    "more": "మరిన్ని",
+    "netWorth": "నికర విలువ",
+    "properties": "ఆస్తులు",
+    "propertyDetail": "ఆస్తి వివరాలు",
+    "review": "లావాదేవీలను సమీక్షించండి",
+    "events": "ఈవెంట్ బడ్జెట్‌లు",
+    "landing": "BudgetPro - మీ ఆర్థికాలను నేర్చుకోండి",
+    "dashboard": "డ్యాష్‌బోర్డ్",
+    "transactions": "లావాదేవీలు",
+    "import": "దిగుమతి",
+    "accounts": "ఖాతాలు",
+    "budgets": "బడ్జెట్‌లు",
+    "categories": "వర్గాలు",
+    "reports": "నివేదికలు",
+    "settings": "సెట్టింగ్‌లు",
+    "subscriptions": "చందాలు",
+    "investments": "పెట్టుబడులు",
+    "debtPayoff": "అప్పు తీర్పు",
+    "loans": "రుణాలు",
+    "calculators": "కాలిక్యులేటర్లు",
+    "planning": "ప్రణాళిక",
+    "ocr": "రసీదు స్కానర్",
+    "export": "ఎగుమతి",
+    "fridayReview": "వారపు సమీక్ష",
+    "onboarding": "delaysdelays",
+    "offline": "delaysdelays delaysdelays",
+    "splits": "delaysdelays delaysdelays"
+  },
+  "balanceReconciliation": {
+    "title": "దిగుమతి పూర్తయింది!",
+    "subtitle": "{accountName} కోసం ఖాతా బ్యాలెన్స్ సెట్ చేయండి",
+    "transactionsImported": "{count} లావాదేవీలు దిగుమతి చేయబడ్డాయి",
+    "netChange": "లావాదేవీల నుండి నికర మార్పు:",
+    "currentBalanceLabel": "మీ ప్రస్తుత బ్యాంక్ బ్యాలెన్స్ ఎంత?",
+    "currentBalanceLabelCredit": "మీ ప్రస్తుత బకాయి ఎంత?",
+    "balanceHelperBank": "మీ బ్యాంకింగ్ యాప్ తెరిచి ఈ ఖాతా కోసం చూపిన బ్యాలెన్స్ ఎంటర్ చేయండి",
+    "balanceHelperCredit": "మీ క్రెడిట్ కార్డ్ స్టేట్‌మెంట్‌లో చూపిన ప్రస్తుత బ్యాలెన్స్ ఎంటర్ చేయండి (పాజిటివ్ నంబర్‌గా)",
+    "startingBalance": "మీ ప్రారంభ బ్యాలెన్స్:",
+    "startingBalanceCredit": "మీ ప్రారంభ బకాయి:",
+    "balanceMatchNote": "ఇది మీ ఖాతా బ్యాలెన్స్‌ను మీ బ్యాంక్‌తో సరిపోల్చుతుంది.",
+    "negativeWarning": "ఇది నెగటివ్ ప్రారంభ బ్యాలెన్స్‌కు దారితీస్తుంది, ఇది చెకింగ్/సేవింగ్స్ కోసం అసాధారణం. దయచేసి మీ ప్రస్తుత బ్యాలెన్స్ సరైనదో తనిఖీ చేయండి.",
+    "skipForNow": "ప్రస్తుతానికి దాటవేయి",
+    "setBalance": "బ్యాలెన్స్ సెట్ చేయి"
+  },
+  "recommendations": {
+    "title": "ముఖ్య సిఫార్సులు",
+    "subtitle": "మీ ఆర్థిక ఆరోగ్యాన్ని మెరుగుపరచడానికి మార్గాలు",
+    "emptyState": "వ్యక్తిగతీకరించిన సిఫార్సులు పొందడానికి మరింత ఆర్థిక డేటాను జోడించండి",
+    "viewAllFactors": "అన్ని కారకాలను చూడు",
+    "factorLabels": {
+      "savingsRate": "పొదుపు",
+      "debtToIncome": "అప్పు",
+      "budgetAdherence": "బడ్జెట్",
+      "emergencyFund": "అత్యవసర నిధి",
+      "investmentGrowth": "పెట్టుబడులు",
+      "expenseStability": "ఖర్చులు"
+    },
+    "factorLinks": {
+      "savingsRate": "ఆదాయాన్ని చూడు",
+      "debtToIncome": "రుణాలను నిర్వహించు",
+      "budgetAdherence": "బడ్జెట్‌లను సర్దుబాటు చేయి",
+      "emergencyFund": "పొదుపు ప్రణాళిక వేయి",
+      "investmentGrowth": "పోర్ట్‌ఫోలియోను చూడు",
+      "expenseStability": "నివేదికలను చూడు"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "వ్యాపారి:",
+    "amount": "మొత్తం:",
+    "average": "సగటు: {amount}",
+    "category": "వర్గం:",
+    "wasExpected": "ఇది ఆశించినదా?",
+    "expected": "ఆశించినది",
+    "unexpected": "ఊహించనిది",
+    "markedExpected": "ఆశించినదిగా గుర్తించబడింది",
+    "markedUnexpected": "ఊహించనిదిగా గుర్తించబడింది",
+    "moreAnomalies": "+{count} మరిన్ని {count, plural, =1 {అసాధారణత} other {అసాధారణతలు}}",
+    "severity": {
+      "high": "delaysdelays",
+      "medium": "delaysdelays",
+      "low": "delaysdelays"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR ప్రాసెసింగ్",
+    "cancel": "రద్దు చేయి",
+    "pageProgress": "పేజీ {current} / {total}",
+    "elapsed": "గడిచిన సమయం: {time}",
+    "remaining": "~{time} మిగిలింది",
+    "stages": {
+      "loading": "PDF లోడ్ అవుతోంది",
+      "rendering": "పేజీలు రెండర్ అవుతున్నాయి",
+      "preprocessing": "చిత్రాన్ని మెరుగుపరుస్తోంది",
+      "ocr": "వచనం వెలికితీయబడుతోంది",
+      "parsing": "లావాదేవీలు పార్స్ అవుతున్నాయి",
+      "complete": "పూర్తయింది",
+      "error": "లోపం",
+      "cancelled": "రద్దు చేయబడింది",
+      "enhance": "మెరుగుపరచు"
+    },
+    "errorRetry": "OCR ప్రాసెసింగ్ విఫలమైంది. మళ్ళీ ప్రయత్నించాలనుకుంటున్నారా?",
+    "cancelledRetry": "OCR రద్దు చేయబడింది. మళ్ళీ ప్రారంభించాలనుకుంటున్నారా?",
+    "retryButton": "OCR మళ్ళీ ప్రయత్నించు",
+    "completedSuccess": "OCR విజయవంతంగా పూర్తయింది!",
+    "loadingChart": "చార్ట్ లోడ్ అవుతోంది..."
   }
 }

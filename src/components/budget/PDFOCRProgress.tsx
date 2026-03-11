@@ -13,6 +13,7 @@
  */
 
 import { useState, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -48,17 +49,6 @@ const stageIcons: Record<string, React.ReactNode> = {
   cancelled: <AlertTriangle className="h-5 w-5 text-yellow-500" />,
 };
 
-const stageLabels: Record<string, string> = {
-  loading: "Loading PDF",
-  rendering: "Rendering Pages",
-  preprocessing: "Enhancing Image",
-  ocr: "Extracting Text",
-  parsing: "Parsing Transactions",
-  complete: "Complete",
-  error: "Error",
-  cancelled: "Cancelled",
-};
-
 const stageColors: Record<string, string> = {
   loading: "bg-blue-500",
   rendering: "bg-purple-500",
@@ -76,6 +66,7 @@ export function PDFOCRProgress({
   onRetry,
   showDetails = true,
 }: PDFOCRProgressProps) {
+  const t = useTranslations("pdfOcr");
   const [elapsedTime, setElapsedTime] = useState(0);
 
   // Track elapsed time
@@ -126,7 +117,7 @@ export function PDFOCRProgress({
         <CardTitle className="flex items-center justify-between text-lg">
           <div className="flex items-center gap-2">
             {stageIcons[progress.stage]}
-            <span>OCR Processing</span>
+            <span>{t("processing")}</span>
           </div>
           {canCancel && (
             <Button
@@ -136,7 +127,7 @@ export function PDFOCRProgress({
               className="text-muted-foreground hover:text-destructive"
             >
               <X className="me-1 h-4 w-4" />
-              Cancel
+              {t("cancel")}
             </Button>
           )}
         </CardTitle>
@@ -145,7 +136,7 @@ export function PDFOCRProgress({
       <CardContent className="space-y-4">
         {/* Stage indicator */}
         <div className="flex items-center justify-between text-sm">
-          <span className="font-medium">{stageLabels[progress.stage]}</span>
+          <span className="font-medium">{t(`stages.${progress.stage}`)}</span>
           <span className="text-muted-foreground">{Math.round(progress.progress)}%</span>
         </div>
 
@@ -162,13 +153,13 @@ export function PDFOCRProgress({
         {progress.totalPages > 0 && (
           <div className="flex items-center justify-between text-sm text-muted-foreground">
             <span>
-              Page {progress.currentPage} of {progress.totalPages}
+              {t("pageProgress", { current: progress.currentPage, total: progress.totalPages })}
             </span>
             {isProcessing && (
               <span>
-                Elapsed: {formatTime(elapsedTime)}
+                {t("elapsed", { time: formatTime(elapsedTime) })}
                 {progress.estimatedTimeRemaining && progress.estimatedTimeRemaining > 0 && (
-                  <> | ~{formatTime(progress.estimatedTimeRemaining)} remaining</>
+                  <> | {t("remaining", { time: formatTime(progress.estimatedTimeRemaining) })}</>
                 )}
               </span>
             )}
@@ -213,9 +204,7 @@ export function PDFOCRProgress({
                     )}
                   </div>
                   <span className="mt-1 text-center text-[10px] text-muted-foreground">
-                    {stage === "preprocessing"
-                      ? "Enhance"
-                      : stage.charAt(0).toUpperCase() + stage.slice(1)}
+                    {stage === "preprocessing" ? t("stages.enhance") : t(`stages.${stage}`)}
                   </span>
                 </div>
               );
@@ -227,13 +216,11 @@ export function PDFOCRProgress({
         {canRetry && (
           <div className="flex flex-col items-center gap-3 border-t pt-4">
             <p className="text-center text-sm text-muted-foreground">
-              {progress.stage === "error"
-                ? "OCR processing failed. Would you like to try again?"
-                : "OCR was cancelled. Would you like to restart?"}
+              {progress.stage === "error" ? t("errorRetry") : t("cancelledRetry")}
             </p>
             <Button onClick={onRetry} variant="outline" size="sm">
               <RefreshCw className="me-2 h-4 w-4" />
-              Retry OCR
+              {t("retryButton")}
             </Button>
           </div>
         )}
@@ -242,7 +229,7 @@ export function PDFOCRProgress({
         {progress.stage === "complete" && (
           <div className="flex items-center gap-2 pt-2 text-green-600">
             <CheckCircle className="h-4 w-4" />
-            <span className="text-sm font-medium">OCR completed successfully!</span>
+            <span className="text-sm font-medium">{t("completedSuccess")}</span>
           </div>
         )}
       </CardContent>

@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Terug na tuisblad"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Jaar {n}",
+      "yearLabel": "Jaar",
+      "month": "Maand {n}",
+      "monthYear": "Maand {n} (Jaar {y})",
+      "age": "Ouderdom {n}",
+      "ageLabel": "Ouderdom",
+      "contributions": "Bydraes",
+      "interestEarned": "Rente verdien",
+      "interest": "Rente",
+      "totalInterest": "Totale rente",
+      "snowball": "Sneeubalmethode",
+      "avalanche": "Lawinemethode",
+      "portfolio": "Portefeulje",
+      "fireTarget": "FIRE-teiken",
+      "median50th": "Mediaan (50ste)",
+      "remainingBalance": "Oorblywende saldo",
+      "totalAssets": "Totale bates",
+      "totalLiabilities": "Totale laste",
+      "netWorth": "Netto waarde",
+      "retirement": "Aftrede"
+    },
+    "scenario": {
+      "compare": "Vergelyk scenario's ({count} gestoor)",
+      "selectUpTo": "Kies tot 3 scenario's om te vergelyk:",
+      "duplicate": "Dupliseer",
+      "delete": "Verwyder",
+      "sideBySide": "Sy-aan-sy-vergelyking",
+      "field": "Veld",
+      "delta": "Verskil",
+      "selectOneMore": "Kies nog een scenario om te vergelyk",
+      "copySuffix": "(kopie)"
+    },
+    "openCalculator": "Maak sakrekenaar oop"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Verwyder",
     "edit": "Wysig",
     "loading": "Laai...",
-    "save": "Stoor"
+    "save": "Stoor",
+    "success": "Sukses!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Bevestig",
     "finalConfirmation": "Finale Bevestiging:",
     "processing": "Verwerk...",
-    "typeToConfirm": "Tik {text} om hierdie aksie te bevestig."
+    "typeToConfirm": "Tik {text} om hierdie aksie te bevestig.",
+    "confirmAction": "Bevestig aksie"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Tellinggeskiedenis",
+      "monthsOfData": "{count} {count, plural, =1 {maand} other {maande}} se data",
+      "emptyTitle": "Jou tellinggeskiedenis sal hier verskyn soos data versamel word",
+      "emptySubtitle": "Kyk weer volgende maand!",
+      "legendScore": "Telling",
+      "legendTrend": "Tendens",
+      "tooltipScore": "Telling",
+      "tooltipTrend": "Tendens",
+      "loadingChart": "Laai grafiek..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Jou begroting bly op JOU toestel",
+      "heroSubtitle": "Welkom by die mees private begrotingstoepassing ooit. Geen rekeninge, geen wolk, geen kompromieë.",
+      "features": {
+        "yourDataTitle": "Jou data, jou toestel",
+        "yourDataDescription": "Alle finansiële data word plaaslik op jou toestel gestoor. Geen wolkbedieners, geen derdeparty-toegang nie.",
+        "encryptionTitle": "Bankvlak-enkripsie",
+        "encryptionDescription": "AES-256-enkripsie beskerm jou data. Net jy het die sleutel—dit verlaat nooit jou toestel nie.",
+        "offlineTitle": "Werk vanlyn",
+        "offlineDescription": "Volle funksionaliteit sonder internet. Perfek vir privaatheidbewuste gebruikers.",
+        "zeroTrackingTitle": "Geen nasporing",
+        "zeroTrackingDescription": "Geen analise, geen telemetrie, geen data-insameling nie. Jou finansies is niemand anders se saak nie."
+      },
+      "whatsNext": "Wat volgende?",
+      "whatsNextIntro": "In die volgende paar minute help ons jou om:",
+      "step1": "Jou bestaande transaksies in te voer (bank-CSV, OFX of handmatig)",
+      "step2": "Jou uitgawes outomaties te kategoriseer",
+      "step3": "Jou eerste begroting te skep gebaseer op werklike uitgawes",
+      "step4": "Rekeningherinnerings op te stel sodat jy nooit 'n betaling mis nie",
+      "getStarted": "Kom ons begin"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} transaksies benodig kategorieë",
+      "allCategorized": "Alle transaksies is gekategoriseer!",
+      "applySmartSuggestions": "Pas slim voorstelle toe",
+      "categorize": "Kategoriseer",
+      "percentMatch": "{percent}% passing",
+      "rememberChoices": "Onthou my kategoriekeuses",
+      "rememberChoicesDescription": "Kategoriseer soortgelyke transaksies outomaties in die toekoms",
+      "categorized": "{count} gekategoriseer",
+      "remaining": "{count} oorblywend",
+      "continue": "Gaan voort",
+      "continueAnyway": "Gaan in elk geval voort",
+      "categories": {
+        "foodDining": "Kos & Eetplekke",
+        "transportation": "Vervoer",
+        "billsUtilities": "Rekeninge & Nutsdienste",
+        "shopping": "Inkopies",
+        "entertainment": "Vermaak",
+        "healthFitness": "Gesondheid & Fiksheid",
+        "personalCare": "Persoonlike versorging",
+        "income": "Inkomste",
+        "transfers": "Oordragte"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Kon nie profiel uitvee nie",
+    "deleteTitle": "Verwyder profiel?",
+    "defaultProfile": "Verstekprofiel",
+    "cannotDeleteOnly": "Dit is die enigste profiel. Jy kan dit nie uitvee nie.",
+    "permanentWarning": "Dit sal hierdie profiel permanent uitvee. Enige private begrotings wat aan hierdie profiel behoort, sal met alle profiele gedeel word.",
+    "cannotUndo": "Hierdie aksie kan nie ongedaan gemaak word nie.",
+    "deleteButton": "Verwyder profiel"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Bekyk"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Deaktiveer herinnering",
+      "enableReminder": "Aktiveer herinnering",
+      "off": "Af"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Invoer voltooi!",
+    "subtitle": "Stel jou rekeningsaldo vir {accountName}",
+    "transactionsImported": "{count} transaksies ingevoer",
+    "netChange": "Netto verandering uit transaksies:",
+    "currentBalanceLabel": "Wat is jou huidige banksaldo?",
+    "currentBalanceLabelCredit": "Wat is jou huidige verskuldigde bedrag?",
+    "balanceHelperBank": "Maak jou bank-toepassing oop en voer die saldo in wat vir hierdie rekening gewys word",
+    "balanceHelperCredit": "Voer die huidige saldo in wat op jou kredietkaatstate verskyn (as 'n positiewe getal)",
+    "startingBalance": "Jou beginsaldo:",
+    "startingBalanceCredit": "Jou beginskuld:",
+    "balanceMatchNote": "Dit sal jou rekeningsaldo met jou bank laat ooreenstem.",
+    "negativeWarning": "Dit lei tot 'n negatiewe beginsaldo, wat ongewoon is vir tjek-/spaarrekeninge. Kontroleer asseblief dat jou huidige saldo korrek is.",
+    "skipForNow": "Slaan vir eers oor",
+    "setBalance": "Stel saldo"
+  },
+  "recommendations": {
+    "title": "Topaanbevelings",
+    "subtitle": "Maniere om jou finansiële gesondheid te verbeter",
+    "emptyState": "Voeg meer finansiële data by om gepersonaliseerde aanbevelings te ontvang",
+    "viewAllFactors": "Bekyk alle faktore",
+    "factorLabels": {
+      "savingsRate": "Besparings",
+      "debtToIncome": "Skuld",
+      "budgetAdherence": "Begroting",
+      "emergencyFund": "Noodfonds",
+      "investmentGrowth": "Beleggings",
+      "expenseStability": "Uitgawes"
+    },
+    "factorLinks": {
+      "savingsRate": "Bekyk inkomste",
+      "debtToIncome": "Bestuur lenings",
+      "budgetAdherence": "Pas begrotings aan",
+      "emergencyFund": "Beplan besparings",
+      "investmentGrowth": "Bekyk portefeulje",
+      "expenseStability": "Bekyk verslae"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Handelaar:",
+    "amount": "Bedrag:",
+    "average": "Gemiddeld: {amount}",
+    "category": "Kategorie:",
+    "wasExpected": "Was dit verwag?",
+    "expected": "Verwag",
+    "unexpected": "Onverwags",
+    "markedExpected": "Gemerk as verwag",
+    "markedUnexpected": "Gemerk as onverwags",
+    "moreAnomalies": "+{count} meer {count, plural, =1 {afwyking} other {afwykings}}",
+    "severity": {
+      "high": "HOOG",
+      "medium": "MEDIUM",
+      "low": "LAAG"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR-verwerking",
+    "cancel": "Kanselleer",
+    "pageProgress": "Bladsy {current} van {total}",
+    "elapsed": "Verloop: {time}",
+    "remaining": "~{time} oor",
+    "stages": {
+      "loading": "Laai PDF",
+      "rendering": "Render bladsye",
+      "preprocessing": "Verbeter beeld",
+      "ocr": "Onttrek teks",
+      "parsing": "Ontleed transaksies",
+      "complete": "Voltooi",
+      "error": "Fout",
+      "cancelled": "Gekanselleer",
+      "enhance": "Verbeter"
+    },
+    "errorRetry": "OCR-verwerking het misluk. Wil jy weer probeer?",
+    "cancelledRetry": "OCR is gekanselleer. Wil jy herbegin?",
+    "retryButton": "Probeer OCR weer",
+    "completedSuccess": "OCR suksesvol voltooi!",
+    "loadingChart": "Laai grafiek..."
+  },
+  "developerTools": {
+    "title": "Ontwikkelaargereedskap",
+    "subtitle": "QA-gereedskap vir die toets van internasionalisering (slegs ontwikkelingsmodus)",
+    "pseudoLocaleLabel": "Aktiveer Pseudo-Locale (en-XA)",
+    "pseudoLocaleHelp": "Vervang alle vertaalde teks met geaksentueerde karakters. Enige oorblywende gewone Engelse teks is <strong>hardgekodeer</strong> en moet na vertalingsleutels omgeskakel word.",
+    "pseudoLocaleExample": "Voorbeeld: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "As jy \"Dashboard\" sien in plaas van \"[Ðášhƀóářð~~~]\", is dit hardgekodeer!",
+    "infoPseudoLocale": "Pseudo-locale help om onvertaalde stringe tydens ontwikkeling te identifiseer",
+    "infoProduction": "Produksieboue sluit die en-XA locale outomaties uit",
+    "infoSwitchBack": "Skakel terug na 'n regte locale om normale ontwikkeling voort te sit"
+  },
+  "pageMetadata": {
+    "appName": "Begrotingstoep",
+    "scenarios": "Wat-As Scenario's",
+    "merchantRules": "Handelaarreëls",
+    "more": "Meer",
+    "netWorth": "Netto Waarde",
+    "properties": "Eiendomme",
+    "propertyDetail": "Eiendombesonderhede",
+    "review": "Hersien Transaksies",
+    "events": "Geleentheidsbegrotings",
+    "landing": "BudgetPro - Bemeester Jou Finansies",
+    "dashboard": "Kontroleskerm",
+    "transactions": "Transaksies",
+    "import": "Invoer",
+    "accounts": "Rekeninge",
+    "budgets": "Begrotings",
+    "categories": "Kategorieë",
+    "reports": "Verslae",
+    "settings": "Instellings",
+    "subscriptions": "Intekeninge",
+    "investments": "Beleggings",
+    "debtPayoff": "Skuldafbetaling",
+    "loans": "Lenings",
+    "calculators": "Sakrekenaars",
+    "planning": "Beplanning",
+    "ocr": "Kwitansieskandeerder",
+    "export": "Uitvoer",
+    "fridayReview": "Weeklikse Oorsig",
+    "onboarding": "Aan die gang",
+    "offline": "Vanlyn modus",
+    "splits": "Verdeel transaksies"
   }
 }

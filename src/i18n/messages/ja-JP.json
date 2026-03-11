@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "予算データへのフルアクセスを回復するには今すぐアップグレード",
       "trialEndedTitle": "トライアルが終了しました",
       "upgradeNow": "今すぐアップグレード - ${price}"
-    }
+    },
+    "backToHome": "ホームに戻る"
   },
   "bottomSheet": {
     "close": "閉じる",
@@ -1199,7 +1200,41 @@
       "assumptions": "前提条件",
       "formula": "計算式",
       "title": "仕組み"
-    }
+    },
+    "chart": {
+      "year": "{n}年目",
+      "yearLabel": "年",
+      "month": "{n}ヶ月目",
+      "monthYear": "{n}ヶ月目（{y}年目）",
+      "age": "{n}歳",
+      "ageLabel": "年齢",
+      "contributions": "拠出額",
+      "interestEarned": "獲得利息",
+      "interest": "利息",
+      "totalInterest": "利息合計",
+      "snowball": "スノーボール",
+      "avalanche": "アバランチ",
+      "portfolio": "ポートフォリオ",
+      "fireTarget": "FIRE目標",
+      "median50th": "中央値（50%）",
+      "remainingBalance": "残高",
+      "totalAssets": "総資産",
+      "totalLiabilities": "総負債",
+      "netWorth": "純資産",
+      "retirement": "退職"
+    },
+    "scenario": {
+      "compare": "シナリオを比較（{count}件保存済み）",
+      "selectUpTo": "比較するシナリオを最大3つ選択してください：",
+      "duplicate": "複製",
+      "delete": "削除",
+      "sideBySide": "並列比較",
+      "field": "項目",
+      "delta": "差分",
+      "selectOneMore": "比較するシナリオをもう1つ選択してください",
+      "copySuffix": "(コピー)"
+    },
+    "openCalculator": "計算ツールを開く"
   },
   "calendarExport": {
     "addToCalendar": "カレンダーに追加",
@@ -1414,7 +1449,8 @@
     "delete": "削除",
     "edit": "編集",
     "loading": "読み込み中...",
-    "save": "保存"
+    "save": "保存",
+    "success": "成功！"
   },
   "confidenceMeter": {
     "autoCategorized": "自動分類：",
@@ -1755,7 +1791,8 @@
     "confirm": "確認",
     "finalConfirmation": "最終確認:",
     "processing": "処理中...",
-    "typeToConfirm": "{text} と入力してこのアクションを確認してください。"
+    "typeToConfirm": "{text} と入力してこのアクションを確認してください。",
+    "confirmAction": "操作を確認"
   },
   "draggableWidget": {
     "dragToReorder": "ドラッグしてウィジェットを並べ替え"
@@ -2068,7 +2105,18 @@
     },
     "grade": "評価：{grade}",
     "missingFactors": "{count, plural, other {#個の要素が不足}}",
-    "title": "財務健全度"
+    "title": "財務健全度",
+    "history": {
+      "title": "スコア履歴",
+      "monthsOfData": "{count}ヶ月分のデータ",
+      "emptyTitle": "データが蓄積されるとスコア履歴がここに表示されます",
+      "emptySubtitle": "来月また確認してください！",
+      "legendScore": "スコア",
+      "legendTrend": "トレンド",
+      "tooltipScore": "スコア",
+      "tooltipTrend": "トレンド",
+      "loadingChart": "チャート読み込み中..."
+    }
   },
   "holdingModal": {
     "addHolding": "保有銘柄を追加",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "あなたの予算はあなたのデバイスに",
+      "heroSubtitle": "最もプライベートな予算アプリへようこそ。アカウント不要、クラウド不要、妥協なし。",
+      "features": {
+        "yourDataTitle": "あなたのデータ、あなたのデバイス",
+        "yourDataDescription": "すべての財務データはデバイスにローカル保存されます。クラウドサーバーもサードパーティアクセスもありません。",
+        "encryptionTitle": "銀行レベルの暗号化",
+        "encryptionDescription": "AES-256暗号化でデータを保護。鍵を持つのはあなただけです。",
+        "offlineTitle": "オフラインで動作",
+        "offlineDescription": "インターネットなしで完全に機能。プライバシーを重視するユーザーに最適。",
+        "zeroTrackingTitle": "追跡ゼロ",
+        "zeroTrackingDescription": "分析なし、テレメトリーなし、データ収集なし。あなたの財務は誰にも関係ありません。"
+      },
+      "whatsNext": "次は？",
+      "whatsNextIntro": "これから数分で、以下をお手伝いします：",
+      "step1": "既存の取引をインポート（銀行CSV、OFX、または手動）",
+      "step2": "支出を自動分類",
+      "step3": "実際の支出に基づいた最初の予算を作成",
+      "step4": "請求リマインダーを設定",
+      "getStarted": "始めましょう！"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count}件の取引にカテゴリが必要です",
+      "allCategorized": "すべての取引が分類されました！",
+      "applySmartSuggestions": "スマート提案を適用",
+      "categorize": "分類",
+      "percentMatch": "{percent}%一致",
+      "rememberChoices": "カテゴリ選択を記憶",
+      "rememberChoicesDescription": "今後類似の取引を自動分類",
+      "categorized": "{count}件分類済み",
+      "remaining": "{count}件残り",
+      "continue": "続ける",
+      "continueAnyway": "そのまま続ける",
+      "categories": {
+        "foodDining": "食事・外食",
+        "transportation": "交通",
+        "billsUtilities": "請求・光熱費",
+        "shopping": "ショッピング",
+        "entertainment": "エンターテイメント",
+        "healthFitness": "健康・フィットネス",
+        "personalCare": "パーソナルケア",
+        "income": "収入",
+        "transfers": "振替"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "プロフィールの削除に失敗しました",
+    "deleteTitle": "プロフィールを削除しますか？",
+    "defaultProfile": "デフォルトプロフィール",
+    "cannotDeleteOnly": "これは唯一のプロフィールです。削除できません。",
+    "permanentWarning": "このプロフィールは完全に削除されます。このプロフィールが所有するプライベート予算はすべてのプロフィールと共有されます。",
+    "cannotUndo": "この操作は元に戻せません。",
+    "deleteButton": "プロフィールを削除"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "表示"
   },
   "receiptUpload": {
     "buttons": {
@@ -4512,6 +4613,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "リマインダーを無効化",
+      "enableReminder": "リマインダーを有効化",
+      "off": "オフ"
     }
   },
   "subscriptionCostChart": {
@@ -5166,5 +5272,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "インポート完了！",
+    "subtitle": "{accountName}の口座残高を設定",
+    "transactionsImported": "{count}件の取引をインポート",
+    "netChange": "取引からの純変動額：",
+    "currentBalanceLabel": "現在の銀行残高はいくらですか？",
+    "currentBalanceLabelCredit": "現在の未払い額はいくらですか？",
+    "balanceHelperBank": "銀行アプリを開いて表示されている残高を入力してください",
+    "balanceHelperCredit": "クレジットカード明細の現在の残高を入力してください（正の数値で）",
+    "startingBalance": "開始残高：",
+    "startingBalanceCredit": "開始時の未払い額：",
+    "balanceMatchNote": "これにより口座残高が銀行と一致します。",
+    "negativeWarning": "開始残高がマイナスになります。普通預金口座では通常ありません。現在の残高を再確認してください。",
+    "skipForNow": "今はスキップ",
+    "setBalance": "残高を設定"
+  },
+  "recommendations": {
+    "title": "おすすめ",
+    "subtitle": "財務健全性を改善する方法",
+    "emptyState": "パーソナライズされた提案を受けるには、より多くの財務データを追加してください",
+    "viewAllFactors": "すべての要素を表示",
+    "factorLabels": {
+      "savingsRate": "貯蓄",
+      "debtToIncome": "負債",
+      "budgetAdherence": "予算",
+      "emergencyFund": "緊急資金",
+      "investmentGrowth": "投資",
+      "expenseStability": "支出"
+    },
+    "factorLinks": {
+      "savingsRate": "収入を表示",
+      "debtToIncome": "ローン管理",
+      "budgetAdherence": "予算を調整",
+      "emergencyFund": "貯蓄を計画",
+      "investmentGrowth": "ポートフォリオ表示",
+      "expenseStability": "レポート表示"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "加盟店：",
+    "amount": "金額：",
+    "average": "平均：{amount}",
+    "category": "カテゴリ：",
+    "wasExpected": "これは想定内でしたか？",
+    "expected": "想定内",
+    "unexpected": "想定外",
+    "markedExpected": "想定内としてマーク",
+    "markedUnexpected": "想定外としてマーク",
+    "moreAnomalies": "他{count}件の異常",
+    "severity": {
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR処理中",
+    "cancel": "キャンセル",
+    "pageProgress": "ページ {current}/{total}",
+    "elapsed": "経過：{time}",
+    "remaining": "残り約{time}",
+    "stages": {
+      "loading": "PDF読み込み中",
+      "rendering": "ページ描画中",
+      "preprocessing": "画像補正中",
+      "ocr": "テキスト抽出中",
+      "parsing": "取引分析中",
+      "complete": "完了",
+      "error": "エラー",
+      "cancelled": "キャンセル済み",
+      "enhance": "補正"
+    },
+    "errorRetry": "OCR処理に失敗しました。再試行しますか？",
+    "cancelledRetry": "OCRがキャンセルされました。再開しますか？",
+    "retryButton": "OCRを再試行",
+    "completedSuccess": "OCRが正常に完了しました！",
+    "loadingChart": "チャート読み込み中..."
+  },
+  "developerTools": {
+    "title": "開発者ツール",
+    "subtitle": "国際化テスト用QAツール（開発モードのみ）",
+    "pseudoLocaleLabel": "擬似ロケールを有効にする (en-XA)",
+    "pseudoLocaleHelp": "すべての翻訳テキストをアクセント付き文字に置き換えます。残っている通常の英語テキストは<strong>ハードコード</strong>されており、翻訳キーに変換する必要があります。",
+    "pseudoLocaleExample": "例: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "\"[Ðášhƀóářð~~~]\" の代わりに \"Dashboard\" が表示される場合、それはハードコードされています！",
+    "infoPseudoLocale": "擬似ロケールは開発中に未翻訳の文字列を特定するのに役立ちます",
+    "infoProduction": "本番ビルドでは en-XA ロケールは自動的に除外されます",
+    "infoSwitchBack": "通常の開発を続けるには、実際のロケールに戻してください"
+  },
+  "pageMetadata": {
+    "appName": "家計簿アプリ",
+    "scenarios": "もしもシナリオ",
+    "merchantRules": "加盟店ルール",
+    "more": "その他",
+    "netWorth": "純資産",
+    "properties": "不動産",
+    "propertyDetail": "不動産詳細",
+    "review": "取引の確認",
+    "events": "イベント予算",
+    "landing": "BudgetPro – 家計を完全管理",
+    "dashboard": "ダッシュボード",
+    "transactions": "取引",
+    "import": "インポート",
+    "accounts": "口座",
+    "budgets": "予算",
+    "categories": "カテゴリ",
+    "reports": "レポート",
+    "settings": "設定",
+    "subscriptions": "サブスクリプション",
+    "investments": "投資",
+    "debtPayoff": "債務返済",
+    "loans": "ローン",
+    "calculators": "計算ツール",
+    "planning": "プランニング",
+    "ocr": "レシートスキャナー",
+    "export": "エクスポート",
+    "fridayReview": "週次レビュー",
+    "onboarding": "使い方",
+    "offline": "オフラインモード",
+    "splits": "取引を分割"
   }
 }

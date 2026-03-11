@@ -76,7 +76,7 @@ export function ConfidenceMeter({
             <div
               key={index}
               className={`h-4 w-1.5 rounded-sm ${index < filledBars ? colorClass : "bg-gray-200"}`}
-              title={`${(confidence * 100).toFixed(0)}% confidence`}
+              title={t("confidence", { percent: (confidence * 100).toFixed(0) })}
             />
           ))}
         </div>
@@ -102,6 +102,7 @@ export function ConfidenceMeter({
  * Compact confidence indicator (for table cells)
  */
 export function CompactConfidenceMeter({ confidence }: { confidence: number }) {
+  const t = useTranslations("confidenceMeter");
   const bars = 5;
   const filledBars = Math.ceil(confidence * bars);
 
@@ -117,7 +118,7 @@ export function CompactConfidenceMeter({ confidence }: { confidence: number }) {
   return (
     <div
       className="inline-flex items-center gap-2"
-      title={`${(confidence * 100).toFixed(0)}% confidence`}
+      title={t("confidence", { percent: (confidence * 100).toFixed(0) })}
     >
       {Array.from({ length: bars }).map((_, index) => (
         <div

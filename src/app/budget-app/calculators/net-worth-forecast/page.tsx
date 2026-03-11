@@ -30,10 +30,20 @@ const NetWorthChart = lazy(() =>
       data,
       locale,
       currency,
+      yearLabel,
+      yearFormatter,
+      totalAssetsLabel,
+      totalLiabilitiesLabel,
+      netWorthLabel,
     }: {
       data: { year: number; totalAssets: number; totalLiabilities: number; netWorth: number }[];
       locale: SupportedLocale;
       currency: string;
+      yearLabel: string;
+      yearFormatter: (label: number) => string;
+      totalAssetsLabel: string;
+      totalLiabilitiesLabel: string;
+      netWorthLabel: string;
     }) => {
       const { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
         mod;
@@ -55,7 +65,12 @@ const NetWorthChart = lazy(() =>
               dataKey="year"
               stroke="#64748b"
               tick={{ fontSize: 12 }}
-              label={{ value: "Year", position: "insideBottomRight", offset: -5, fill: "#64748b" }}
+              label={{
+                value: yearLabel,
+                position: "insideBottomRight",
+                offset: -5,
+                fill: "#64748b",
+              }}
             />
             <YAxis
               stroke="#64748b"
@@ -75,7 +90,7 @@ const NetWorthChart = lazy(() =>
                 formatCurrency(value, currency, locale),
                 name,
               ]}
-              labelFormatter={(label: number) => `Year ${label}`}
+              labelFormatter={(label: number) => yearFormatter(label)}
             />
             <Legend />
             <Area
@@ -83,7 +98,7 @@ const NetWorthChart = lazy(() =>
               dataKey="totalAssets"
               stroke="#10b981"
               fill="url(#colorAssets)"
-              name="Total Assets"
+              name={totalAssetsLabel}
             />
             <Area
               type="monotone"
@@ -91,14 +106,14 @@ const NetWorthChart = lazy(() =>
               stroke="#ef4444"
               fill="none"
               strokeDasharray="3 3"
-              name="Total Liabilities"
+              name={totalLiabilitiesLabel}
             />
             <Area
               type="monotone"
               dataKey="netWorth"
               stroke="#3b82f6"
               fill="url(#colorNetWorth)"
-              name="Net Worth"
+              name={netWorthLabel}
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -441,7 +456,16 @@ export default function NetWorthForecastPage() {
             {t("netWorthForecast.chartTitle")}
           </h3>
           <Suspense fallback={<ChartSkeleton />}>
-            <NetWorthChart data={chartData} locale={locale} currency={currency} />
+            <NetWorthChart
+              data={chartData}
+              locale={locale}
+              currency={currency}
+              yearLabel={t("chart.yearLabel")}
+              yearFormatter={(label: number) => t("chart.year", { n: label })}
+              totalAssetsLabel={t("chart.totalAssets")}
+              totalLiabilitiesLabel={t("chart.totalLiabilities")}
+              netWorthLabel={t("chart.netWorth")}
+            />
           </Suspense>
         </div>
       )}

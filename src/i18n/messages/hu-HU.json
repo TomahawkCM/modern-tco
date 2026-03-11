@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Vissza a főoldalra"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "{n}. év",
+      "yearLabel": "Év",
+      "month": "{n}. hónap",
+      "monthYear": "{n}. hónap ({y}. év)",
+      "age": "{n} éves kor",
+      "ageLabel": "Életkor",
+      "contributions": "Befizetések",
+      "interestEarned": "Kamatjövedelem",
+      "interest": "Kamat",
+      "totalInterest": "Összes kamat",
+      "snowball": "Hógolyó",
+      "avalanche": "Lavina",
+      "portfolio": "Portfólió",
+      "fireTarget": "FIRE cél",
+      "median50th": "Medián (50.)",
+      "remainingBalance": "Fennmaradó egyenleg",
+      "totalAssets": "Összes eszköz",
+      "totalLiabilities": "Összes kötelezettség",
+      "netWorth": "Nettó vagyon",
+      "retirement": "Nyugdíj"
+    },
+    "scenario": {
+      "compare": "Forgatókönyvek összehasonlítása ({count} mentett)",
+      "selectUpTo": "Válasszon legfeljebb 3 forgatókönyvet az összehasonlításhoz:",
+      "duplicate": "Másolás",
+      "delete": "Törlés",
+      "sideBySide": "Egymás melletti összehasonlítás",
+      "field": "Mező",
+      "delta": "Különbség",
+      "selectOneMore": "Válasszon még egy forgatókönyvet az összehasonlításhoz",
+      "copySuffix": "(másolat)"
+    },
+    "openCalculator": "Számológép megnyitása"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Törlés",
     "edit": "Szerkesztés",
     "loading": "Betöltés...",
-    "save": "Mentés"
+    "save": "Mentés",
+    "success": "Siker!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Megerősítés",
     "finalConfirmation": "Végső megerősítés:",
     "processing": "Feldolgozás...",
-    "typeToConfirm": "Írja be {text} a művelet megerősítéséhez."
+    "typeToConfirm": "Írja be {text} a művelet megerősítéséhez.",
+    "confirmAction": "Művelet megerősítése"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Pontszám előzmények",
+      "monthsOfData": "{count} {count, plural, =1 {hónap} other {hónap}} adat",
+      "emptyTitle": "A pontszám előzmények itt jelennek meg az adatok gyarapodásával",
+      "emptySubtitle": "Nézzen vissza jövő hónapban!",
+      "legendScore": "Pontszám",
+      "legendTrend": "Trend",
+      "tooltipScore": "Pontszám",
+      "tooltipTrend": "Trend",
+      "loadingChart": "Diagram betöltése..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "A költségvetése az ÖN eszközén él",
+      "heroSubtitle": "Üdvözöljük a legprivátabb költségvetési alkalmazásban. Nincs fiók, nincs felhő, nincs kompromisszum.",
+      "features": {
+        "yourDataTitle": "Az Ön adatai, az Ön eszköze",
+        "yourDataDescription": "Minden pénzügyi adat helyben, az Ön eszközén tárolódik. Nincs felhőszerver, nincs harmadik fél hozzáférése.",
+        "encryptionTitle": "Banki szintű titkosítás",
+        "encryptionDescription": "AES-256 titkosítás védi adatait. Csak Önnél van a kulcs — soha nem hagyja el az eszközét.",
+        "offlineTitle": "Offline is működik",
+        "offlineDescription": "Teljes funkcionalitás internet nélkül. Tökéletes az adatvédelemre figyelő felhasználóknak.",
+        "zeroTrackingTitle": "Nulla nyomon követés",
+        "zeroTrackingDescription": "Nincs analitika, nincs telemetria, nincs adatgyűjtés. Az Ön pénzügyei senkire sem tartoznak."
+      },
+      "whatsNext": "Mi következik?",
+      "whatsNextIntro": "A következő percekben segítünk Önnek:",
+      "step1": "Meglévő tranzakciók importálása (CSV, OFX vagy kézi bevitel)",
+      "step2": "Kiadások automatikus kategorizálása",
+      "step3": "Első költségvetés létrehozása a tényleges kiadások alapján",
+      "step4": "Számlafizetési emlékeztetők beállítása",
+      "getStarted": "Kezdjük el"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} tranzakció kategorizálásra vár",
+      "allCategorized": "Minden tranzakció kategorizálva!",
+      "applySmartSuggestions": "Intelligens javaslatok alkalmazása",
+      "categorize": "Kategorizálás",
+      "percentMatch": "{percent}% egyezés",
+      "rememberChoices": "Kategóriaválasztások megjegyzése",
+      "rememberChoicesDescription": "Hasonló tranzakciók automatikus kategorizálása a jövőben",
+      "categorized": "{count} kategorizálva",
+      "remaining": "{count} hátralévő",
+      "continue": "Folytatás",
+      "continueAnyway": "Folytatás mindenképp",
+      "categories": {
+        "foodDining": "Étel és étkezés",
+        "transportation": "Közlekedés",
+        "billsUtilities": "Számlák és rezsi",
+        "shopping": "Vásárlás",
+        "entertainment": "Szórakozás",
+        "healthFitness": "Egészség és fitness",
+        "personalCare": "Személyes ápolás",
+        "income": "Bevétel",
+        "transfers": "Átutalások"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "A profil törlése nem sikerült",
+    "deleteTitle": "Profil törlése?",
+    "defaultProfile": "Alapértelmezett profil",
+    "cannotDeleteOnly": "Ez az egyetlen profil. Nem törölheti.",
+    "permanentWarning": "Ez véglegesen törli ezt a profilt. A profil privát költségvetései megosztásra kerülnek az összes profillal.",
+    "cannotUndo": "Ez a művelet nem vonható vissza.",
+    "deleteButton": "Profil törlése"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Megtekintés"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Emlékeztető kikapcsolása",
+      "enableReminder": "Emlékeztető bekapcsolása",
+      "off": "Ki"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Importálás kész!",
+    "subtitle": "Állítsa be a(z) {accountName} számla egyenlegét",
+    "transactionsImported": "{count} tranzakció importálva",
+    "netChange": "Nettó változás a tranzakciókból:",
+    "currentBalanceLabel": "Mennyi az aktuális bankszámla egyenlege?",
+    "currentBalanceLabelCredit": "Mennyi az aktuális tartozása?",
+    "balanceHelperBank": "Nyissa meg banki alkalmazását, és írja be az ehhez a számlához megjelenített egyenleget",
+    "balanceHelperCredit": "Adja meg a hitelkártya-kivonatán szereplő aktuális egyenleget (pozitív számként)",
+    "startingBalance": "Kezdő egyenlege:",
+    "startingBalanceCredit": "Kezdő tartozása:",
+    "balanceMatchNote": "Ezáltal a számla egyenlege megegyezik a bankjával.",
+    "negativeWarning": "Ez negatív kezdő egyenleget eredményez, ami folyó-/megtakarítási számláknál szokatlan. Kérjük, ellenőrizze, hogy az aktuális egyenleg helyes-e.",
+    "skipForNow": "Kihagyás most",
+    "setBalance": "Egyenleg beállítása"
+  },
+  "recommendations": {
+    "title": "Legfontosabb javaslatok",
+    "subtitle": "Módszerek pénzügyi helyzete javítására",
+    "emptyState": "Adjon hozzá több pénzügyi adatot a személyre szabott javaslatokhoz",
+    "viewAllFactors": "Összes tényező megtekintése",
+    "factorLabels": {
+      "savingsRate": "Megtakarítások",
+      "debtToIncome": "Adósság",
+      "budgetAdherence": "Költségvetés",
+      "emergencyFund": "Vészhelyzeti alap",
+      "investmentGrowth": "Befektetések",
+      "expenseStability": "Kiadások"
+    },
+    "factorLinks": {
+      "savingsRate": "Bevételek megtekintése",
+      "debtToIncome": "Hitelek kezelése",
+      "budgetAdherence": "Költségvetések módosítása",
+      "emergencyFund": "Megtakarítás tervezése",
+      "investmentGrowth": "Portfólió megtekintése",
+      "expenseStability": "Jelentések megtekintése"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Kereskedő:",
+    "amount": "Összeg:",
+    "average": "Átlag: {amount}",
+    "category": "Kategória:",
+    "wasExpected": "Várt volt ez?",
+    "expected": "Várt",
+    "unexpected": "Váratlan",
+    "markedExpected": "Megjelölve várt eseményként",
+    "markedUnexpected": "Megjelölve váratlan eseményként",
+    "moreAnomalies": "+{count} további {count, plural, =1 {anomália} other {anomália}}",
+    "severity": {
+      "high": "MAGAS",
+      "medium": "KÖZEPES",
+      "low": "ALACSONY"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR feldolgozás",
+    "cancel": "Mégse",
+    "pageProgress": "{current}. oldal / {total}",
+    "elapsed": "Eltelt: {time}",
+    "remaining": "~{time} van hátra",
+    "stages": {
+      "loading": "PDF betöltése",
+      "rendering": "Oldalak renderelése",
+      "preprocessing": "Kép javítása",
+      "ocr": "Szöveg kinyerése",
+      "parsing": "Tranzakciók elemzése",
+      "complete": "Kész",
+      "error": "Hiba",
+      "cancelled": "Megszakítva",
+      "enhance": "Javítás"
+    },
+    "errorRetry": "Az OCR feldolgozás sikertelen. Szeretné újra megpróbálni?",
+    "cancelledRetry": "Az OCR megszakítva. Szeretné újraindítani?",
+    "retryButton": "OCR újrapróbálása",
+    "completedSuccess": "OCR sikeresen befejezve!",
+    "loadingChart": "Diagram betöltése..."
+  },
+  "developerTools": {
+    "title": "Fejlesztői eszközök",
+    "subtitle": "QA eszközök az internacionalizáció teszteléséhez (csak fejlesztői mód)",
+    "pseudoLocaleLabel": "Pszeudo-locale engedélyezése (en-XA)",
+    "pseudoLocaleHelp": "Az összes lefordított szöveget ékezetes karakterekre cseréli. A megmaradt sima angol szöveg <strong>beégetett</strong>, és fordítási kulcsokká kell alakítani.",
+    "pseudoLocaleExample": "Példa: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Ha a \"[Ðášhƀóářð~~~]\" helyett \"Dashboard\"-ot lát, az beégetett!",
+    "infoPseudoLocale": "A pszeudo-locale segít azonosítani a lefordítatlan szövegeket a fejlesztés során",
+    "infoProduction": "Az éles buildek automatikusan kizárják az en-XA locale-t",
+    "infoSwitchBack": "Váltson vissza egy valódi locale-ra a normál fejlesztés folytatásához"
+  },
+  "pageMetadata": {
+    "appName": "Költségvetési alkalmazás",
+    "scenarios": "Mi lenne, ha forgatókönyvek",
+    "merchantRules": "Kereskedői szabályok",
+    "more": "Továbbiak",
+    "netWorth": "Nettó vagyon",
+    "properties": "Ingatlanok",
+    "propertyDetail": "Ingatlan részletei",
+    "review": "Tranzakciók áttekintése",
+    "events": "Esemény költségvetések",
+    "landing": "BudgetPro – Uralkodj a pénzügyeiden",
+    "dashboard": "Irányítópult",
+    "transactions": "Tranzakciók",
+    "import": "Importálás",
+    "accounts": "Számlák",
+    "budgets": "Költségvetések",
+    "categories": "Kategóriák",
+    "reports": "Jelentések",
+    "settings": "Beállítások",
+    "subscriptions": "Előfizetések",
+    "investments": "Befektetések",
+    "debtPayoff": "Adósságtörlesztés",
+    "loans": "Kölcsönök",
+    "calculators": "Számológépek",
+    "planning": "Tervezés",
+    "ocr": "Nyugtaszkenner",
+    "export": "Exportálás",
+    "fridayReview": "Heti áttekintés",
+    "onboarding": "Kezdés",
+    "offline": "Offline mód",
+    "splits": "Tranzakciók felosztása"
   }
 }

@@ -41,6 +41,9 @@ const RetirementChart = lazy(() =>
       currency,
       accumLabel,
       withdrawLabel,
+      ageLabel,
+      ageFormatter,
+      retirementLabel,
     }: {
       data: { age: number; balance: number; phase: string }[];
       retirementAge: number;
@@ -48,6 +51,9 @@ const RetirementChart = lazy(() =>
       currency: string;
       accumLabel: string;
       withdrawLabel: string;
+      ageLabel: string;
+      ageFormatter: (label: number) => string;
+      retirementLabel: string;
     }) => {
       const {
         AreaChart,
@@ -86,7 +92,12 @@ const RetirementChart = lazy(() =>
               dataKey="age"
               stroke="#64748b"
               tick={{ fontSize: 12 }}
-              label={{ value: "Age", position: "insideBottomRight", offset: -5, fill: "#64748b" }}
+              label={{
+                value: ageLabel,
+                position: "insideBottomRight",
+                offset: -5,
+                fill: "#64748b",
+              }}
             />
             <YAxis
               stroke="#64748b"
@@ -103,13 +114,13 @@ const RetirementChart = lazy(() =>
               }}
               labelStyle={{ color: "#94a3b8" }}
               formatter={(value: number) => [formatCurrency(value, currency, locale)]}
-              labelFormatter={(label: number) => `Age ${label}`}
+              labelFormatter={(label: number) => ageFormatter(label)}
             />
             <ReferenceLine
               x={retirementAge}
               stroke="#64748b"
               strokeDasharray="3 3"
-              label={{ value: "Retirement", fill: "#94a3b8", position: "top", fontSize: 12 }}
+              label={{ value: retirementLabel, fill: "#94a3b8", position: "top", fontSize: 12 }}
             />
             <Legend />
             <Area
@@ -535,6 +546,9 @@ export default function RetirementPlannerPage() {
               currency={currency}
               accumLabel={t("retirement.chartAccumulation")}
               withdrawLabel={t("retirement.chartWithdrawal")}
+              ageLabel={t("chart.ageLabel")}
+              ageFormatter={(label: number) => t("chart.age", { n: label })}
+              retirementLabel={t("chart.retirement")}
             />
           </Suspense>
         </div>

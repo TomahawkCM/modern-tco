@@ -13,7 +13,9 @@
 "use client";
 
 import React from "react";
-import { formatDistanceToNow } from "date-fns";
+import { useLocale } from "next-intl";
+import { formatRelativeTime } from "@/i18n/utils/formatDate";
+import type { SupportedLocale } from "@/i18n/config";
 
 interface MessageBubbleProps {
   role: "user" | "assistant";
@@ -28,6 +30,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
   timestamp,
   isError = false,
 }) => {
+  const locale = useLocale();
   const isUser = role === "user";
 
   return (
@@ -47,7 +50,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
       </div>
 
       <time className="mt-1 text-xs text-gray-500" dateTime={timestamp.toISOString()}>
-        {formatDistanceToNow(timestamp, { addSuffix: true })}
+        {formatRelativeTime(timestamp, locale as SupportedLocale)}
       </time>
     </div>
   );

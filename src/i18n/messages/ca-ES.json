@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Volver al inicio"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Año {n}",
+      "yearLabel": "Año",
+      "month": "Mes {n}",
+      "monthYear": "Mes {n} (Año {y})",
+      "age": "Edad {n}",
+      "ageLabel": "Edad",
+      "contributions": "Aportaciones",
+      "interestEarned": "Intereses ganados",
+      "interest": "Intereses",
+      "totalInterest": "Intereses totales",
+      "snowball": "Bola de nieve",
+      "avalanche": "Avalancha",
+      "portfolio": "Portafolio",
+      "fireTarget": "Objetivo FIRE",
+      "median50th": "Mediana (50°)",
+      "remainingBalance": "Saldo restante",
+      "totalAssets": "Total de activos",
+      "totalLiabilities": "Total de pasivos",
+      "netWorth": "Patrimonio neto",
+      "retirement": "Jubilación"
+    },
+    "scenario": {
+      "compare": "Comparar escenarios ({count} guardados)",
+      "selectUpTo": "Seleccione hasta 3 escenarios para comparar:",
+      "duplicate": "Duplicar",
+      "delete": "Eliminar",
+      "sideBySide": "Comparación lado a lado",
+      "field": "Campo",
+      "delta": "Diferencia",
+      "selectOneMore": "Seleccione un escenario más para comparar",
+      "copySuffix": "(còpia)"
+    },
+    "openCalculator": "Abrir calculadora"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Eliminar",
     "edit": "Editar",
     "loading": "Carregant...",
-    "save": "Desar"
+    "save": "Desar",
+    "success": "Èxit!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Confirmar",
     "finalConfirmation": "Confirmació Final:",
     "processing": "Processant...",
-    "typeToConfirm": "Escriu {text} per confirmar aquesta acció."
+    "typeToConfirm": "Escriu {text} per confirmar aquesta acció.",
+    "confirmAction": "Confirmar acción"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Historial de puntuación",
+      "monthsOfData": "{count} {count, plural, =1 {mes} other {meses}} de datos",
+      "emptyTitle": "Su historial de puntuación aparecerá aquí a medida que se acumulen datos",
+      "emptySubtitle": "¡Vuelva el próximo mes!",
+      "legendScore": "Puntuación",
+      "legendTrend": "Tendencia",
+      "tooltipScore": "Puntuación",
+      "tooltipTrend": "Tendencia",
+      "loadingChart": "Cargando gráfico..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Su presupuesto vive en SU dispositivo",
+      "heroSubtitle": "Bienvenido a la aplicación de presupuesto más privada. Sin cuentas, sin nube, sin compromisos.",
+      "features": {
+        "yourDataTitle": "Sus datos, su dispositivo",
+        "yourDataDescription": "Todos los datos financieros se almacenan localmente. Sin servidores en la nube, sin acceso de terceros.",
+        "encryptionTitle": "Cifrado de grado bancario",
+        "encryptionDescription": "El cifrado AES-256 protege sus datos. Solo usted tiene la clave.",
+        "offlineTitle": "Funciona sin conexión",
+        "offlineDescription": "Funcionalidad completa sin internet. Perfecto para usuarios preocupados por la privacidad.",
+        "zeroTrackingTitle": "Cero rastreo",
+        "zeroTrackingDescription": "Sin análisis, sin telemetría, sin recopilación de datos. Sus finanzas no son asunto de nadie."
+      },
+      "whatsNext": "¿Qué sigue?",
+      "whatsNextIntro": "En los próximos minutos, le ayudaremos a:",
+      "step1": "Importar sus transacciones existentes (CSV bancario, OFX o manual)",
+      "step2": "Categorizar automáticamente sus gastos",
+      "step3": "Crear su primer presupuesto basado en gastos reales",
+      "step4": "Configurar recordatorios de facturas",
+      "getStarted": "¡Empecemos!"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} transacciones necesitan categorías",
+      "allCategorized": "¡Todas las transacciones están categorizadas!",
+      "applySmartSuggestions": "Aplicar sugerencias inteligentes",
+      "categorize": "Categorizar",
+      "percentMatch": "{percent}% de coincidencia",
+      "rememberChoices": "Recordar mis elecciones de categoría",
+      "rememberChoicesDescription": "Categorizar automáticamente transacciones similares en el futuro",
+      "categorized": "{count} categorizadas",
+      "remaining": "{count} restantes",
+      "continue": "Continuar",
+      "continueAnyway": "Continuar de todos modos",
+      "categories": {
+        "foodDining": "Alimentación y Restaurantes",
+        "transportation": "Transporte",
+        "billsUtilities": "Facturas y Servicios",
+        "shopping": "Compras",
+        "entertainment": "Entretenimiento",
+        "healthFitness": "Salud y Fitness",
+        "personalCare": "Cuidado personal",
+        "income": "Ingresos",
+        "transfers": "Transferencias"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "No s'ha pogut eliminar el perfil",
+    "deleteTitle": "Eliminar perfil?",
+    "defaultProfile": "Perfil predeterminat",
+    "cannotDeleteOnly": "Aquest és l'únic perfil. No el podeu eliminar.",
+    "permanentWarning": "Això eliminarà permanentment aquest perfil. Qualsevol pressupost privat d'aquest perfil es compartirà amb tots els perfils.",
+    "cannotUndo": "Aquesta acció no es pot desfer.",
+    "deleteButton": "Eliminar perfil"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Ver"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Desactivar recordatorio",
+      "enableReminder": "Activar recordatorio",
+      "off": "Desactivado"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "developerTools": {
+    "title": "Eines de desenvolupador",
+    "subtitle": "Eines de QA per provar la internacionalització (només mode dev)",
+    "pseudoLocaleLabel": "Activa el pseudo-locale (en-XA)",
+    "pseudoLocaleHelp": "Substitueix tot el text traduït amb caràcters accentuats. El text en anglès pla restant està <strong>codificat de manera fixa</strong> i cal convertir-lo en claus de traducció.",
+    "pseudoLocaleExample": "Exemple: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Si veus \"Dashboard\" en comptes de \"[Ðášhƀóářð~~~]\", està codificat de manera fixa!",
+    "infoPseudoLocale": "El pseudo-locale ajuda a identificar cadenes no traduïdes durant el desenvolupament",
+    "infoProduction": "Les compilacions de producció exclouen automàticament la locale en-XA",
+    "infoSwitchBack": "Torna a una locale real per continuar amb el desenvolupament normal"
+  },
+  "pageMetadata": {
+    "appName": "Aplicació de Pressupost",
+    "scenarios": "Escenaris I-Si",
+    "merchantRules": "Regles de Comerciant",
+    "more": "Més",
+    "netWorth": "Patrimoni Net",
+    "properties": "Propietats",
+    "propertyDetail": "Detalls de la Propietat",
+    "review": "Revisar Transaccions",
+    "events": "Pressupostos d'Esdeveniments",
+    "landing": "BudgetPro - Domina les Teves Finances",
+    "dashboard": "Tauler",
+    "transactions": "Transaccions",
+    "import": "Importar",
+    "accounts": "Comptes",
+    "budgets": "Pressupostos",
+    "categories": "Categories",
+    "reports": "Informes",
+    "settings": "Configuració",
+    "subscriptions": "Subscripcions",
+    "investments": "Inversions",
+    "debtPayoff": "Amortització de Deute",
+    "loans": "Préstecs",
+    "calculators": "Calculadores",
+    "planning": "Planificació",
+    "ocr": "Escàner de Rebuts",
+    "export": "Exportar",
+    "fridayReview": "Revisió Setmanal",
+    "onboarding": "Inici",
+    "offline": "Mode fora de línia",
+    "splits": "Dividir transaccions"
+  },
+  "balanceReconciliation": {
+    "title": "¡Importación completada!",
+    "subtitle": "Establecer el saldo de su cuenta {accountName}",
+    "transactionsImported": "{count} transacciones importadas",
+    "netChange": "Cambio neto de transacciones:",
+    "currentBalanceLabel": "¿Cuál es su saldo bancario actual?",
+    "currentBalanceLabelCredit": "¿Cuál es su monto adeudado actual?",
+    "balanceHelperBank": "Abra su aplicación bancaria e ingrese el saldo mostrado",
+    "balanceHelperCredit": "Ingrese el saldo actual de su tarjeta de crédito (como número positivo)",
+    "startingBalance": "Su saldo inicial:",
+    "startingBalanceCredit": "Su monto adeudado inicial:",
+    "balanceMatchNote": "Esto hará que el saldo de su cuenta coincida con su banco.",
+    "negativeWarning": "Esto resulta en un saldo inicial negativo, lo cual es inusual para cuentas corrientes/de ahorro. Verifique su saldo actual.",
+    "skipForNow": "Omitir por ahora",
+    "setBalance": "Establecer saldo"
+  },
+  "recommendations": {
+    "title": "Principales recomendaciones",
+    "subtitle": "Formas de mejorar su salud financiera",
+    "emptyState": "Agregue más datos financieros para recibir recomendaciones personalizadas",
+    "viewAllFactors": "Ver todos los factores",
+    "factorLabels": {
+      "savingsRate": "Ahorro",
+      "debtToIncome": "Deudas",
+      "budgetAdherence": "Presupuesto",
+      "emergencyFund": "Fondo de emergencia",
+      "investmentGrowth": "Inversiones",
+      "expenseStability": "Gastos"
+    },
+    "factorLinks": {
+      "savingsRate": "Ver ingresos",
+      "debtToIncome": "Gestionar préstamos",
+      "budgetAdherence": "Ajustar presupuestos",
+      "emergencyFund": "Planificar ahorro",
+      "investmentGrowth": "Ver portafolio",
+      "expenseStability": "Ver informes"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Comercio:",
+    "amount": "Monto:",
+    "average": "Promedio: {amount}",
+    "category": "Categoría:",
+    "wasExpected": "¿Fue esperado?",
+    "expected": "Esperado",
+    "unexpected": "Inesperado",
+    "markedExpected": "Marcado como esperado",
+    "markedUnexpected": "Marcado como inesperado",
+    "moreAnomalies": "+{count} {count, plural, =1 {anomalía} other {anomalías}} más",
+    "severity": {
+      "high": "ALT",
+      "medium": "MITJÀ",
+      "low": "BAIX"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Procesamiento OCR",
+    "cancel": "Cancelar",
+    "pageProgress": "Página {current} de {total}",
+    "elapsed": "Transcurrido: {time}",
+    "remaining": "~{time} restante",
+    "stages": {
+      "loading": "Cargando PDF",
+      "rendering": "Renderizando páginas",
+      "preprocessing": "Mejorando imagen",
+      "ocr": "Extrayendo texto",
+      "parsing": "Analizando transacciones",
+      "complete": "Completado",
+      "error": "Error",
+      "cancelled": "Cancelado",
+      "enhance": "Mejorar"
+    },
+    "errorRetry": "El procesamiento OCR falló. ¿Desea intentar de nuevo?",
+    "cancelledRetry": "El OCR fue cancelado. ¿Desea reiniciar?",
+    "retryButton": "Reintentar OCR",
+    "completedSuccess": "¡OCR completado exitosamente!",
+    "loadingChart": "Cargando gráfico..."
   }
 }

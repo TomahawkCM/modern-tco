@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Bosh sahifaga qaytish"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "{n}-yil",
+      "yearLabel": "Yil",
+      "month": "{n}-oy",
+      "monthYear": "{n}-oy ({y}-yil)",
+      "age": "{n} yosh",
+      "ageLabel": "Yosh",
+      "contributions": "Hissalar",
+      "interestEarned": "Olingan foiz",
+      "interest": "Foiz",
+      "totalInterest": "Jami foiz",
+      "snowball": "Snowball",
+      "avalanche": "Avalanche",
+      "portfolio": "Portfel",
+      "fireTarget": "FIRE maqsadi",
+      "median50th": "Mediana (50-chi)",
+      "remainingBalance": "Qoldiq balans",
+      "totalAssets": "Jami aktivlar",
+      "totalLiabilities": "Jami majburiyatlar",
+      "netWorth": "Sof boylik",
+      "retirement": "Nafaqa"
+    },
+    "scenario": {
+      "compare": "Stsenariylarni solishtirish ({count} saqlangan)",
+      "selectUpTo": "Solishtirish uchun 3 tagacha stsenariy tanlang:",
+      "duplicate": "Nusxa olish",
+      "delete": "O'chirish",
+      "sideBySide": "Yonma-yon solishtirish",
+      "field": "Maydon",
+      "delta": "Farq",
+      "selectOneMore": "Solishtirish uchun yana bitta stsenariy tanlang",
+      "copySuffix": "(nusxa)"
+    },
+    "openCalculator": "Kalkulyatorni ochish"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "O'chirish",
     "edit": "Tahrirlash",
     "loading": "Yuklanmoqda...",
-    "save": "Saqlash"
+    "save": "Saqlash",
+    "success": "Muvaffaqiyat!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Tasdiqlash",
     "finalConfirmation": "Oxirgi tasdiq:",
     "processing": "Jarayon...",
-    "typeToConfirm": "Ushbu harakatni tasdiqlash uchun {text} ni yozing."
+    "typeToConfirm": "Ushbu harakatni tasdiqlash uchun {text} ni yozing.",
+    "confirmAction": "Amalni tasdiqlash"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Ball tarixi",
+      "monthsOfData": "{count} {count, plural, =1 {oy} other {oy}} ma'lumot",
+      "emptyTitle": "Ma'lumotlar to'plangani sari ball tarixingiz bu yerda ko'rinadi",
+      "emptySubtitle": "Keyingi oyda qayta tekshiring!",
+      "legendScore": "Ball",
+      "legendTrend": "Tendensiya",
+      "tooltipScore": "Ball",
+      "tooltipTrend": "Tendensiya",
+      "loadingChart": "Diagramma yuklanmoqda..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Byudjetingiz SIZNING qurilmangizda",
+      "heroSubtitle": "Eng maxfiy byudjet ilovasiga xush kelibsiz. Hisob yo'q, bulut yo'q, murosasiz.",
+      "features": {
+        "yourDataTitle": "Sizning ma'lumotingiz, sizning qurilmangiz",
+        "yourDataDescription": "Barcha moliyaviy ma'lumotlar qurilmangizda mahalliy saqlanadi. Bulutli serverlar yo'q, uchinchi tomon kirishi yo'q.",
+        "encryptionTitle": "Bank darajasidagi shifrlash",
+        "encryptionDescription": "AES-256 shifrlash ma'lumotlaringizni himoya qiladi. Faqat sizda kalit bor — u qurilmangizdan hech qachon chiqmaydi.",
+        "offlineTitle": "Oflayn ishlaydi",
+        "offlineDescription": "Internetsiz to'liq funksionallik. Maxfiylikka e'tibor beruvchi foydalanuvchilar uchun ideal.",
+        "zeroTrackingTitle": "Nol kuzatuv",
+        "zeroTrackingDescription": "Analitika yo'q, telemetriya yo'q, ma'lumot yig'ish yo'q. Moliyangiz hech kimning ishi emas."
+      },
+      "whatsNext": "Keyingi nima?",
+      "whatsNextIntro": "Keyingi bir necha daqiqada biz sizga yordam beramiz:",
+      "step1": "Mavjud tranzaksiyalaringizni import qilish (bank CSV, OFX yoki qo'lda)",
+      "step2": "Xarajatlaringizni avtomatik kategoriyalash",
+      "step3": "Haqiqiy xarajatlarga asoslangan birinchi byudjetingizni yaratish",
+      "step4": "To'lovni hech qachon o'tkazib yubormaslik uchun eslatmalarni sozlash",
+      "getStarted": "Boshlaylik"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} ta tranzaksiyaga kategoriya kerak",
+      "allCategorized": "Barcha tranzaksiyalar kategoriyalangan!",
+      "applySmartSuggestions": "Aqlli takliflarni qo'llash",
+      "categorize": "Kategoriyalash",
+      "percentMatch": "{percent}% moslik",
+      "rememberChoices": "Kategoriya tanlovlarimni eslab qolish",
+      "rememberChoicesDescription": "Kelajakda shunga o'xshash tranzaksiyalarni avtomatik kategoriyalash",
+      "categorized": "{count} ta kategoriyalangan",
+      "remaining": "{count} ta qoldi",
+      "continue": "Davom etish",
+      "continueAnyway": "Baribir davom etish",
+      "categories": {
+        "foodDining": "Oziq-ovqat",
+        "transportation": "Transport",
+        "billsUtilities": "To'lovlar va kommunal xizmatlar",
+        "shopping": "Xaridlar",
+        "entertainment": "Ko'ngilochar",
+        "healthFitness": "Sog'liq va fitnes",
+        "personalCare": "Shaxsiy parvarish",
+        "income": "Daromad",
+        "transfers": "O'tkazmalar"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Profilni o'chirib bo'lmadi",
+    "deleteTitle": "Profilni o'chirish?",
+    "defaultProfile": "Standart profil",
+    "cannotDeleteOnly": "Bu yagona profil. Uni o'chira olmaysiz.",
+    "permanentWarning": "Bu profilni butunlay o'chirib tashlaydi. Ushbu profilga tegishli barcha shaxsiy byudjetlar barcha profillar bilan baham ko'riladi.",
+    "cannotUndo": "Bu amalni qaytarib bo'lmaydi.",
+    "deleteButton": "Profilni o'chirish"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Ko'rish"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Eslatmani o'chirish",
+      "enableReminder": "Eslatmani yoqish",
+      "off": "O'chirilgan"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Import yakunlandi!",
+    "subtitle": "{accountName} hisobingiz balansini belgilang",
+    "transactionsImported": "{count} ta tranzaksiya import qilindi",
+    "netChange": "Tranzaksiyalardan sof o'zgarish:",
+    "currentBalanceLabel": "Hozirgi bank balansingiz qancha?",
+    "currentBalanceLabelCredit": "Hozirgi qarz miqdoringiz qancha?",
+    "balanceHelperBank": "Bank ilovasini oching va ushbu hisob uchun ko'rsatilgan balansni kiriting",
+    "balanceHelperCredit": "Kredit kartangiz hisobotidagi joriy balansni kiriting (musbat son sifatida)",
+    "startingBalance": "Boshlang'ich balansingiz:",
+    "startingBalanceCredit": "Boshlang'ich qarz miqdoringiz:",
+    "balanceMatchNote": "Bu hisobingiz balansini bankingizga moslashtiradi.",
+    "negativeWarning": "Bu salbiy boshlang'ich balansga olib keladi, bu tekshiruv/jamg'arma hisoblar uchun g'ayrioddiy. Joriy balansingiz to'g'riligini tekshiring.",
+    "skipForNow": "Hozircha o'tkazib yuborish",
+    "setBalance": "Balansni belgilash"
+  },
+  "recommendations": {
+    "title": "Eng yaxshi tavsiyalar",
+    "subtitle": "Moliyaviy salomatligingizni yaxshilash yo'llari",
+    "emptyState": "Shaxsiy tavsiyalar olish uchun ko'proq moliyaviy ma'lumot qo'shing",
+    "viewAllFactors": "Barcha omillarni ko'rish",
+    "factorLabels": {
+      "savingsRate": "Jamg'armalar",
+      "debtToIncome": "Qarz",
+      "budgetAdherence": "Byudjet",
+      "emergencyFund": "Favqulodda fond",
+      "investmentGrowth": "Investitsiyalar",
+      "expenseStability": "Xarajatlar"
+    },
+    "factorLinks": {
+      "savingsRate": "Daromadni ko'rish",
+      "debtToIncome": "Qarzlarni boshqarish",
+      "budgetAdherence": "Byudjetlarni sozlash",
+      "emergencyFund": "Jamg'armani rejalashtirish",
+      "investmentGrowth": "Portfelni ko'rish",
+      "expenseStability": "Hisobotlarni ko'rish"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Sotuvchi:",
+    "amount": "Summa:",
+    "average": "O'rtacha: {amount}",
+    "category": "Kategoriya:",
+    "wasExpected": "Bu kutilgan edimi?",
+    "expected": "Kutilgan",
+    "unexpected": "Kutilmagan",
+    "markedExpected": "Kutilgan deb belgilandi",
+    "markedUnexpected": "Kutilmagan deb belgilandi",
+    "moreAnomalies": "+{count} ta yana {count, plural, =1 {anomaliya} other {anomaliya}}",
+    "severity": {
+      "high": "YUQORI",
+      "medium": "O'RTA",
+      "low": "PAST"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR ishlov berish",
+    "cancel": "Bekor qilish",
+    "pageProgress": "Sahifa {current} / {total}",
+    "elapsed": "O'tgan vaqt: {time}",
+    "remaining": "~{time} qoldi",
+    "stages": {
+      "loading": "PDF yuklanmoqda",
+      "rendering": "Sahifalar chizilmoqda",
+      "preprocessing": "Rasm yaxshilanmoqda",
+      "ocr": "Matn ajratilmoqda",
+      "parsing": "Tranzaksiyalar tahlil qilinmoqda",
+      "complete": "Yakunlandi",
+      "error": "Xatolik",
+      "cancelled": "Bekor qilindi",
+      "enhance": "Yaxshilash"
+    },
+    "errorRetry": "OCR ishlov berish muvaffaqiyatsiz bo'ldi. Qayta urinib ko'rmoqchimisiz?",
+    "cancelledRetry": "OCR bekor qilindi. Qaytadan boshlamoqchimisiz?",
+    "retryButton": "OCR qayta urinish",
+    "completedSuccess": "OCR muvaffaqiyatli yakunlandi!",
+    "loadingChart": "Diagramma yuklanmoqda..."
+  },
+  "developerTools": {
+    "title": "Dasturchi asboblari",
+    "subtitle": "Xalqarolashtirish sinovlari uchun QA asboblar (faqat dev rejim)",
+    "pseudoLocaleLabel": "Psevdo-lokalni yoqish (en-XA)",
+    "pseudoLocaleHelp": "Barcha tarjima qilingan matnni urgʻuli belgilar bilan almashtiradi. Qolgan oddiy inglizcha matn <strong>qattiq kodlangan</strong> va tarjima kalitlariga oʻtkazilishi kerak.",
+    "pseudoLocaleExample": "Misol: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Agar \"[Ðášhƀóářð~~~]\" oʻrniga \"Dashboard\" koʻrsangiz, u qattiq kodlangan!",
+    "infoPseudoLocale": "Psevdo-lokal ishlab chiqish vaqtida tarjima qilinmagan satrlarni aniqlashga yordam beradi",
+    "infoProduction": "Prodakshn tuzilmalar en-XA lokalini avtomatik ravishda chiqarib tashlaydi",
+    "infoSwitchBack": "Oddiy ishlab chiqishni davom ettirish uchun haqiqiy lokalga qayting"
+  },
+  "pageMetadata": {
+    "appName": "Byudjet Ilovasi",
+    "scenarios": "Agar-boʻlsa stsenariylar",
+    "merchantRules": "Sotuvchi qoidalari",
+    "more": "Koʻproq",
+    "netWorth": "Sof boylik",
+    "properties": "Mulk",
+    "propertyDetail": "Mulk tafsilotlari",
+    "review": "Tranzaksiyalarni koʻrib chiqish",
+    "events": "Tadbir byudjetlari",
+    "landing": "BudgetPro – Moliyangizni boshqaring",
+    "dashboard": "Boshqaruv paneli",
+    "transactions": "Tranzaksiyalar",
+    "import": "Import",
+    "accounts": "Hisoblar",
+    "budgets": "Byudjetlar",
+    "categories": "Kategoriyalar",
+    "reports": "Hisobotlar",
+    "settings": "Sozlamalar",
+    "subscriptions": "Obunalar",
+    "investments": "Investitsiyalar",
+    "debtPayoff": "Qarz toʻlash",
+    "loans": "Kreditlar",
+    "calculators": "Kalkulyatorlar",
+    "planning": "Rejalashtirish",
+    "ocr": "Chek skaneri",
+    "export": "Eksport",
+    "fridayReview": "Haftalik koʻrib chiqish",
+    "onboarding": "Boshlash",
+    "offline": "Oflayn rejim",
+    "splits": "Tranzaktsiyalarni ajratish"
   }
 }

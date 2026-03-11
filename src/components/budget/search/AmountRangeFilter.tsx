@@ -70,7 +70,7 @@ export function AmountRangeFilter({
           maximumFractionDigits: 0,
         }).format(amount);
       } catch {
-        return `$${amount}`;
+        return `${currency} ${amount}`;
       }
     },
     [locale, currency]
@@ -79,11 +79,13 @@ export function AmountRangeFilter({
   // Get currency symbol for input fields
   const currencySymbol = useMemo(() => {
     try {
-      return new Intl.NumberFormat(locale, { style: "currency", currency })
-        .formatToParts(0)
-        .find((p) => p.type === "currency")?.value || "$";
+      return (
+        new Intl.NumberFormat(locale, { style: "currency", currency })
+          .formatToParts(0)
+          .find((p) => p.type === "currency")?.value || currency
+      );
     } catch {
-      return "$";
+      return currency;
     }
   }, [locale, currency]);
 
@@ -94,7 +96,7 @@ export function AmountRangeFilter({
         ...p,
         label:
           p.min === undefined
-            ? t("presetUnder", { amount: formatAmount(p.max!) })
+            ? t("presetUnder", { amount: formatAmount(p.max) })
             : p.max === undefined
               ? `${formatAmount(p.min)}+`
               : `${formatAmount(p.min)}–${formatAmount(p.max)}`,
@@ -301,7 +303,7 @@ export function AmountRangeFilter({
               min={min}
               max={max}
               step={step}
-              className="w-full rounded-lg border border-input bg-background py-2 ps-7 pe-3 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full rounded-lg border border-input bg-background py-2 pe-3 ps-7 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             />
           </div>
         </div>
@@ -322,7 +324,7 @@ export function AmountRangeFilter({
               min={min}
               max={max}
               step={step}
-              className="w-full rounded-lg border border-input bg-background py-2 ps-7 pe-3 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full rounded-lg border border-input bg-background py-2 pe-3 ps-7 text-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500"
             />
           </div>
         </div>

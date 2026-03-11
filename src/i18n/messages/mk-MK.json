@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Назад на почетна"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Година {n}",
+      "yearLabel": "Година",
+      "month": "Месец {n}",
+      "monthYear": "Месец {n} (Година {y})",
+      "age": "Возраст {n}",
+      "ageLabel": "Возраст",
+      "contributions": "Придонеси",
+      "interestEarned": "Заработена камата",
+      "interest": "Камата",
+      "totalInterest": "Вкупна камата",
+      "snowball": "Снежна топка",
+      "avalanche": "Лавина",
+      "portfolio": "Портфолио",
+      "fireTarget": "FIRE цел",
+      "median50th": "Медијана (50.)",
+      "remainingBalance": "Преостанато салдо",
+      "totalAssets": "Вкупни средства",
+      "totalLiabilities": "Вкупни обврски",
+      "netWorth": "Нето вредност",
+      "retirement": "Пензионирање"
+    },
+    "scenario": {
+      "compare": "Спореди сценарија ({count} зачувани)",
+      "selectUpTo": "Изберете до 3 сценарија за споредба:",
+      "duplicate": "Дуплирај",
+      "delete": "Избриши",
+      "sideBySide": "Споредба едно до друго",
+      "field": "Поле",
+      "delta": "Разлика",
+      "selectOneMore": "Изберете уште едно сценарио за споредба",
+      "copySuffix": "(копија)"
+    },
+    "openCalculator": "Отвори калкулатор"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Избриши",
     "edit": "Уреди",
     "loading": "Вчитување...",
-    "save": "Зачувај"
+    "save": "Зачувај",
+    "success": "Успех!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Потврди",
     "finalConfirmation": "Крајна потврда:",
     "processing": "Обработка...",
-    "typeToConfirm": "Напишете {text} за да ја потврдите оваа акција."
+    "typeToConfirm": "Напишете {text} за да ја потврдите оваа акција.",
+    "confirmAction": "Потврди дејство"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Историја на резултат",
+      "monthsOfData": "{count} {count, plural, =1 {месец} other {месеци}} податоци",
+      "emptyTitle": "Вашата историја на резултат ќе се појави овде кога ќе се накупат податоци",
+      "emptySubtitle": "Проверете повторно следниот месец!",
+      "legendScore": "Резултат",
+      "legendTrend": "Тренд",
+      "tooltipScore": "Резултат",
+      "tooltipTrend": "Тренд",
+      "loadingChart": "Вчитување графикон..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Вашиот буџет живее на ВАШИОТ уред",
+      "heroSubtitle": "Добредојдовте во најприватната буџетска апликација. Без сметки, без облак, без компромис.",
+      "features": {
+        "yourDataTitle": "Вашите податоци, вашиот уред",
+        "yourDataDescription": "Сите финансиски податоци се чуваат локално на вашиот уред. Без сервери во облак, без пристап на трети страни.",
+        "encryptionTitle": "Енкрипција на банкарско ниво",
+        "encryptionDescription": "AES-256 енкрипцијата ги штити вашите податоци. Само вие го имате клучот — никогаш не го напушта вашиот уред.",
+        "offlineTitle": "Работи офлајн",
+        "offlineDescription": "Полна функционалност без интернет. Совршено за корисници кои ја ценат приватноста.",
+        "zeroTrackingTitle": "Нулто следење",
+        "zeroTrackingDescription": "Без аналитика, без телеметрија, без собирање податоци. Вашите финансии не се ничија работа."
+      },
+      "whatsNext": "Што следи?",
+      "whatsNextIntro": "Во следните неколку минути ќе ви помогнеме да:",
+      "step1": "Увезете постоечки трансакции (банковен CSV, OFX или рачно)",
+      "step2": "Автоматски ги категоризирате вашите трошоци",
+      "step3": "Направите ваш прв буџет базиран на реални трошоци",
+      "step4": "Поставите потсетници за сметки за да не пропуштите плаќање",
+      "getStarted": "Да почнеме"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} трансакции имаат потреба од категории",
+      "allCategorized": "Сите трансакции се категоризирани!",
+      "applySmartSuggestions": "Примени паметни предлози",
+      "categorize": "Категоризирај",
+      "percentMatch": "{percent}% совпаѓање",
+      "rememberChoices": "Запамти го мојот избор на категории",
+      "rememberChoicesDescription": "Автоматски категоризирај слични трансакции во иднина",
+      "categorized": "{count} категоризирани",
+      "remaining": "{count} преостанати",
+      "continue": "Продолжи",
+      "continueAnyway": "Продолжи сепак",
+      "categories": {
+        "foodDining": "Храна и јадење",
+        "transportation": "Транспорт",
+        "billsUtilities": "Сметки и комуналии",
+        "shopping": "Купување",
+        "entertainment": "Забава",
+        "healthFitness": "Здравје и фитнес",
+        "personalCare": "Лична нега",
+        "income": "Приходи",
+        "transfers": "Трансфери"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Неуспешно бришење на профилот",
+    "deleteTitle": "Избриши профил?",
+    "defaultProfile": "Стандарден профил",
+    "cannotDeleteOnly": "Ова е единствениот профил. Не можете да го избришете.",
+    "permanentWarning": "Ова трајно ќе го избрише овој профил. Сите приватни буџети на овој профил ќе бидат споделени со сите профили.",
+    "cannotUndo": "Оваа акција не може да се поништи.",
+    "deleteButton": "Избриши профил"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Прегледај"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Исклучи потсетник",
+      "enableReminder": "Вклучи потсетник",
+      "off": "Исклучено"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Увозот заврши!",
+    "subtitle": "Поставете го салдото на сметката за {accountName}",
+    "transactionsImported": "{count} трансакции увезени",
+    "netChange": "Нето промена од трансакции:",
+    "currentBalanceLabel": "Колкав е вашиот тековен банковен салдо?",
+    "currentBalanceLabelCredit": "Колкав е вашиот тековен должен износ?",
+    "balanceHelperBank": "Отворете ја вашата банкарска апликација и внесете го прикажаниот салдо за оваа сметка",
+    "balanceHelperCredit": "Внесете го тековниот салдо од изводот на вашата кредитна картичка (како позитивен број)",
+    "startingBalance": "Вашето почетно салдо:",
+    "startingBalanceCredit": "Вашиот почетен должен износ:",
+    "balanceMatchNote": "Со ова салдото на вашата сметка ќе се совпаѓа со банката.",
+    "negativeWarning": "Ова резултира со негативно почетно салдо, што е невообичаено за тековни/штедни сметки. Ве молиме проверете дали вашето тековно салдо е точно.",
+    "skipForNow": "Прескокни засега",
+    "setBalance": "Постави салдо"
+  },
+  "recommendations": {
+    "title": "Најдобри препораки",
+    "subtitle": "Начини за подобрување на вашето финансиско здравје",
+    "emptyState": "Додадете повеќе финансиски податоци за персонализирани препораки",
+    "viewAllFactors": "Прикажи ги сите фактори",
+    "factorLabels": {
+      "savingsRate": "Заштеди",
+      "debtToIncome": "Долг",
+      "budgetAdherence": "Буџет",
+      "emergencyFund": "Фонд за итни случаи",
+      "investmentGrowth": "Инвестиции",
+      "expenseStability": "Трошоци"
+    },
+    "factorLinks": {
+      "savingsRate": "Прикажи приходи",
+      "debtToIncome": "Управувај со заеми",
+      "budgetAdherence": "Прилагоди буџети",
+      "emergencyFund": "Планирај заштеда",
+      "investmentGrowth": "Прикажи портфолио",
+      "expenseStability": "Прикажи извештаи"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Трговец:",
+    "amount": "Износ:",
+    "average": "Просек: {amount}",
+    "category": "Категорија:",
+    "wasExpected": "Дали ова беше очекувано?",
+    "expected": "Очекувано",
+    "unexpected": "Неочекувано",
+    "markedExpected": "Означено како очекувано",
+    "markedUnexpected": "Означено како неочекувано",
+    "moreAnomalies": "+{count} уште {count, plural, =1 {аномалија} other {аномалии}}",
+    "severity": {
+      "high": "ВИСОК",
+      "medium": "СРЕДЕН",
+      "low": "НИЗОК"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR обработка",
+    "cancel": "Откажи",
+    "pageProgress": "Страница {current} од {total}",
+    "elapsed": "Изминато: {time}",
+    "remaining": "~{time} преостанато",
+    "stages": {
+      "loading": "Вчитување PDF",
+      "rendering": "Прикажување страници",
+      "preprocessing": "Подобрување на слика",
+      "ocr": "Извлекување текст",
+      "parsing": "Анализирање трансакции",
+      "complete": "Завршено",
+      "error": "Грешка",
+      "cancelled": "Откажано",
+      "enhance": "Подобри"
+    },
+    "errorRetry": "OCR обработката не успеа. Дали сакате да пробате повторно?",
+    "cancelledRetry": "OCR беше откажан. Дали сакате да рестартирате?",
+    "retryButton": "Повтори OCR",
+    "completedSuccess": "OCR успешно завршен!",
+    "loadingChart": "Вчитување графикон..."
+  },
+  "developerTools": {
+    "title": "Развојни алатки",
+    "subtitle": "QA алатки за тестирање на интернационализација (само развоен режим)",
+    "pseudoLocaleLabel": "Овозможи псевдо-локализација (en-XA)",
+    "pseudoLocaleHelp": "Го заменува целиот преведен текст со акцентирани знаци. Секој преостанат обичен англиски текст е <strong>тврдо кодиран</strong> и треба да се претвори во преводни клучеви.",
+    "pseudoLocaleExample": "Пример: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Ако гледате \"Dashboard\" наместо \"[Ðášhƀóářð~~~]\", тоа е тврдо кодирано!",
+    "infoPseudoLocale": "Псевдо-локализацијата помага да се идентификуваат непреведени низи за време на развојот",
+    "infoProduction": "Продукциските верзии автоматски ја исклучуваат en-XA локализацијата",
+    "infoSwitchBack": "Вратете се на вистинска локализација за да продолжите со нормален развој"
+  },
+  "pageMetadata": {
+    "appName": "Апликација за буџет",
+    "scenarios": "Што-ако сценарија",
+    "merchantRules": "Правила за трговци",
+    "more": "Повеќе",
+    "netWorth": "Нето вредност",
+    "properties": "Имоти",
+    "propertyDetail": "Детали за имотот",
+    "review": "Преглед на трансакции",
+    "events": "Буџети за настани",
+    "landing": "BudgetPro - Совладајте ги вашите финансии",
+    "dashboard": "Контролна табла",
+    "transactions": "Трансакции",
+    "import": "Увоз",
+    "accounts": "Сметки",
+    "budgets": "Буџети",
+    "categories": "Категории",
+    "reports": "Извештаи",
+    "settings": "Поставки",
+    "subscriptions": "Претплати",
+    "investments": "Инвестиции",
+    "debtPayoff": "Отплата на долгови",
+    "loans": "Заеми",
+    "calculators": "Калкулатори",
+    "planning": "Планирање",
+    "ocr": "Скенер за сметки",
+    "export": "Извоз",
+    "fridayReview": "Неделен преглед",
+    "onboarding": "Почеток",
+    "offline": "Офлајн режим",
+    "splits": "Подели трансакции"
   }
 }

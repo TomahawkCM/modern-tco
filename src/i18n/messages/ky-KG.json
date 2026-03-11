@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Башкы бетке кайтуу"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "{n}-жыл",
+      "yearLabel": "Жыл",
+      "month": "{n}-ай",
+      "monthYear": "{n}-ай ({y}-жыл)",
+      "age": "{n} жаш",
+      "ageLabel": "Жаш",
+      "contributions": "Салымдар",
+      "interestEarned": "Алынган пайыздар",
+      "interest": "Пайыз",
+      "totalInterest": "Жалпы пайыз",
+      "snowball": "Snowball",
+      "avalanche": "Avalanche",
+      "portfolio": "Портфолио",
+      "fireTarget": "FIRE максаты",
+      "median50th": "Медиана (50-чи)",
+      "remainingBalance": "Калган баланс",
+      "totalAssets": "Жалпы активдер",
+      "totalLiabilities": "Жалпы милдеттенмелер",
+      "netWorth": "Таза байлык",
+      "retirement": "Пенсия"
+    },
+    "scenario": {
+      "compare": "Сценарийлерди салыштыруу ({count} сакталган)",
+      "selectUpTo": "Салыштыруу үчүн 3кө чейин сценарий тандаңыз:",
+      "duplicate": "Көчүрмө жасоо",
+      "delete": "Жок кылуу",
+      "sideBySide": "Катар салыштыруу",
+      "field": "Талаа",
+      "delta": "Айырма",
+      "selectOneMore": "Салыштыруу үчүн дагы бир сценарий тандаңыз",
+      "copySuffix": "(көчүрме)"
+    },
+    "openCalculator": "Калькуляторду ачуу"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Жок кылуу",
     "edit": "Редакциялоо",
     "loading": "Жүктөлүүдө...",
-    "save": "Сактоо"
+    "save": "Сактоо",
+    "success": "Ийгилик!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Тастыктоо",
     "finalConfirmation": "Акыркы тастыктоо:",
     "processing": "Обработка...",
-    "typeToConfirm": "Бул аракетти тастыктоо үчүн {text} жазыңыз."
+    "typeToConfirm": "Бул аракетти тастыктоо үчүн {text} жазыңыз.",
+    "confirmAction": "Аракетти ырастоо"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Упай тарыхы",
+      "monthsOfData": "{count} {count, plural, =1 {ай} other {ай}} маалымат",
+      "emptyTitle": "Маалыматтар топтолгон сайын упай тарыхыңыз бул жерде көрүнөт",
+      "emptySubtitle": "Кийинки айда кайра текшериңиз!",
+      "legendScore": "Упай",
+      "legendTrend": "Тенденция",
+      "tooltipScore": "Упай",
+      "tooltipTrend": "Тенденция",
+      "loadingChart": "Диаграмма жүктөлүүдө..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Бюджетиңиз СИЗДИН түзмөгүңүздө",
+      "heroSubtitle": "Эң купуя бюджет тиркемесине кош келиңиз. Каттоо жок, булут жок, компромисс жок.",
+      "features": {
+        "yourDataTitle": "Сиздин маалыматыңыз, сиздин түзмөгүңүз",
+        "yourDataDescription": "Бардык каржылык маалыматтар түзмөгүңүздө жергиликтүү сакталат. Булут серверлери жок, үчүнчү тараптын мүмкүнчүлүгү жок.",
+        "encryptionTitle": "Банк деңгээлиндеги шифрлөө",
+        "encryptionDescription": "AES-256 шифрлөө маалыматыңызды коргойт. Ачкыч сизде гана — ал түзмөгүңүздөн эч качан чыкпайт.",
+        "offlineTitle": "Оффлайн иштейт",
+        "offlineDescription": "Интернетсиз толук функционалдуулук. Купуялыкка маани берген колдонуучулар үчүн идеалдуу.",
+        "zeroTrackingTitle": "Нөлдүк байкоо",
+        "zeroTrackingDescription": "Аналитика жок, телеметрия жок, маалымат чогултуу жок. Сиздин каржыңыз — сиздин жеке ишиңиз."
+      },
+      "whatsNext": "Эмне кийинки?",
+      "whatsNextIntro": "Жакынкы бир нече мүнөттө биз сизге жардам беребиз:",
+      "step1": "Учурдагы транзакцияларыңызды импорттоо (банк CSV, OFX же кол менен)",
+      "step2": "Чыгымдарыңызды автоматтык түрдө категорияга бөлүү",
+      "step3": "Чыныгы чыгымдарга негизделген биринчи бюджетиңизди түзүү",
+      "step4": "Төлөмдөрдү эч качан өткөрүп жибербөө үчүн эскертмелерди орнотуу",
+      "getStarted": "Баштайлы"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} транзакцияга категория керек",
+      "allCategorized": "Бардык транзакциялар категорияланды!",
+      "applySmartSuggestions": "Акылдуу сунуштарды колдонуу",
+      "categorize": "Категориялоо",
+      "percentMatch": "{percent}% дал келүү",
+      "rememberChoices": "Категория тандоолорумду эстеп калуу",
+      "rememberChoicesDescription": "Келечекте окшош транзакцияларды автоматтык категориялоо",
+      "categorized": "{count} категорияланды",
+      "remaining": "{count} калды",
+      "continue": "Улантуу",
+      "continueAnyway": "Баары бир улантуу",
+      "categories": {
+        "foodDining": "Тамак-аш",
+        "transportation": "Транспорт",
+        "billsUtilities": "Эсептер жана коммуналдык",
+        "shopping": "Соода",
+        "entertainment": "Көңүл ачуу",
+        "healthFitness": "Ден соолук жана фитнес",
+        "personalCare": "Жеке кам көрүү",
+        "income": "Киреше",
+        "transfers": "Которуулар"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Профилди жоюу ишке ашкан жок",
+    "deleteTitle": "Профилди жоюу?",
+    "defaultProfile": "Демейки профил",
+    "cannotDeleteOnly": "Бул жалгыз профил. Аны жоё албайсыз.",
+    "permanentWarning": "Бул профилди биротоло жоёт. Бул профилге таандык бардык жеке бюджеттер бардык профилдер менен бөлүшүлөт.",
+    "cannotUndo": "Бул аракетти кайтаруу мүмкүн эмес.",
+    "deleteButton": "Профилди жоюу"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Көрүү"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Эскертмени өчүрүү",
+      "enableReminder": "Эскертмени күйгүзүү",
+      "off": "Өчүк"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Импорт аяктады!",
+    "subtitle": "{accountName} эсебиңиздин балансын коюңуз",
+    "transactionsImported": "{count} транзакция импорттолду",
+    "netChange": "Транзакциялардан таза өзгөрүү:",
+    "currentBalanceLabel": "Учурдагы банк балансыңыз канча?",
+    "currentBalanceLabelCredit": "Учурдагы карыз суммаңыз канча?",
+    "balanceHelperBank": "Банк тиркемеңизди ачып, бул эсеп үчүн көрсөтүлгөн балансты киргизиңиз",
+    "balanceHelperCredit": "Кредит картаңыздын көчүрмөсүндөгү учурдагы балансты киргизиңиз (оң сан катары)",
+    "startingBalance": "Баштапкы балансыңыз:",
+    "startingBalanceCredit": "Баштапкы карыз суммаңыз:",
+    "balanceMatchNote": "Бул эсебиңиздин балансын банкыңызга дал келтирет.",
+    "negativeWarning": "Бул терс баштапкы балансты берет, бул текшерүү/аманат эсептери үчүн адаттан тыш. Учурдагы балансыңыздын туура экенин текшериңиз.",
+    "skipForNow": "Азырынча өткөрүп жиберүү",
+    "setBalance": "Балансты коюу"
+  },
+  "recommendations": {
+    "title": "Эң мыкты сунуштар",
+    "subtitle": "Каржылык ден соолугуңузду жакшыртуу жолдору",
+    "emptyState": "Жекелештирилген сунуштарды алуу үчүн көбүрөөк каржылык маалымат кошуңуз",
+    "viewAllFactors": "Бардык факторлорду көрүү",
+    "factorLabels": {
+      "savingsRate": "Аманаттар",
+      "debtToIncome": "Карыз",
+      "budgetAdherence": "Бюджет",
+      "emergencyFund": "Шашылыш фонд",
+      "investmentGrowth": "Инвестициялар",
+      "expenseStability": "Чыгымдар"
+    },
+    "factorLinks": {
+      "savingsRate": "Кирешени көрүү",
+      "debtToIncome": "Карыздарды башкаруу",
+      "budgetAdherence": "Бюджеттерди тууралоо",
+      "emergencyFund": "Аманатты пландоо",
+      "investmentGrowth": "Портфолиону көрүү",
+      "expenseStability": "Отчетторду көрүү"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Соодагер:",
+    "amount": "Сумма:",
+    "average": "Орточо: {amount}",
+    "category": "Категория:",
+    "wasExpected": "Бул күтүлгөн беле?",
+    "expected": "Күтүлгөн",
+    "unexpected": "Күтүлбөгөн",
+    "markedExpected": "Күтүлгөн деп белгиленди",
+    "markedUnexpected": "Күтүлбөгөн деп белгиленди",
+    "moreAnomalies": "+{count} дагы {count, plural, =1 {аномалия} other {аномалия}}",
+    "severity": {
+      "high": "ЖОҒОРКУ",
+      "medium": "ОРТОЧО",
+      "low": "ТӨМӨН"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR иштетүү",
+    "cancel": "Жокко чыгаруу",
+    "pageProgress": "Барак {current} / {total}",
+    "elapsed": "Өткөн убакыт: {time}",
+    "remaining": "~{time} калды",
+    "stages": {
+      "loading": "PDF жүктөлүүдө",
+      "rendering": "Барактар чагылдырылууда",
+      "preprocessing": "Сүрөт жакшыртылууда",
+      "ocr": "Текст чыгарылууда",
+      "parsing": "Транзакциялар талданууда",
+      "complete": "Аяктады",
+      "error": "Ката",
+      "cancelled": "Жокко чыгарылды",
+      "enhance": "Жакшыртуу"
+    },
+    "errorRetry": "OCR иштетүү ишке ашкан жок. Кайра аракет кылгыңыз келеби?",
+    "cancelledRetry": "OCR жокко чыгарылды. Кайра баштагыңыз келеби?",
+    "retryButton": "OCR кайра аракет",
+    "completedSuccess": "OCR ийгиликтүү аяктады!",
+    "loadingChart": "Диаграмма жүктөлүүдө..."
+  },
+  "developerTools": {
+    "title": "Иштеп чыгуучу куралдары",
+    "subtitle": "Интернационалдаштырууну тесттөө үчүн QA куралдары (тек dev режими)",
+    "pseudoLocaleLabel": "Псевдо-локалды иштетүү (en-XA)",
+    "pseudoLocaleHelp": "Бардык котормо текстти басымдуу символдор менен алмаштырат. Қалган кадимки англис тексти <strong>каттуу коддолгон</strong> жана котормо килттерине айландыруу керек.",
+    "pseudoLocaleExample": "Мисал: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Эгер \"[Ðášhƀóářð~~~]\" ордуна \"Dashboard\" көрсөңүз, ол каттуу коддолгон!",
+    "infoPseudoLocale": "Псевдо-локал иштеп чыгуу кезинде которулбаган саптарды аныктоого жардам берет",
+    "infoProduction": "Продакшн куруулар en-XA локалын автоматтык түрдө алып таштайт",
+    "infoSwitchBack": "Кадимки иштеп чыгууну улантуу үчүн чыныгы локалга кайтыңыз"
+  },
+  "pageMetadata": {
+    "appName": "Бюджет Колдонмосу",
+    "scenarios": "Эгерде сценарийлер",
+    "merchantRules": "Соодагер эрежелери",
+    "more": "Көбүрөөк",
+    "netWorth": "Таза куну",
+    "properties": "Мүлк",
+    "propertyDetail": "Мүлк маалыматтары",
+    "review": "Транзакцияларды карап чыгуу",
+    "events": "Иш-чара бюджеттери",
+    "landing": "BudgetPro – Финансыңызды башкарыңыз",
+    "dashboard": "Башкаруу тактасы",
+    "transactions": "Транзакциялар",
+    "import": "Импорт",
+    "accounts": "Эсептер",
+    "budgets": "Бюджеттер",
+    "categories": "Категориялар",
+    "reports": "Отчеттор",
+    "settings": "Параметрлер",
+    "subscriptions": "Жазылуулар",
+    "investments": "Инвестициялар",
+    "debtPayoff": "Карызды төлөө",
+    "loans": "Насыялар",
+    "calculators": "Калькуляторлор",
+    "planning": "Пландоо",
+    "ocr": "Квитанция сканери",
+    "export": "Экспорт",
+    "fridayReview": "Жумалык карап чыгуу",
+    "onboarding": "Баshtau",
+    "offline": "Офлайн режим",
+    "splits": "Транзакцияларды бdölü"
   }
 }

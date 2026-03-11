@@ -7,6 +7,7 @@
  */
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 
@@ -37,6 +38,7 @@ export function CalculatorCard({
   color = "teal",
   className,
 }: CalculatorCardProps) {
+  const t = useTranslations("calculators");
   const colorStyles = {
     teal: {
       gradient: "from-teal-500/20 to-teal-600/10",
@@ -139,7 +141,7 @@ export function CalculatorCard({
 
         {/* Arrow */}
         <div className="mt-4 flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors group-hover:text-white">
-          <span>Open calculator</span>
+          <span>{t("openCalculator")}</span>
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </div>
       </div>

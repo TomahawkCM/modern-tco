@@ -27,7 +27,7 @@ import { ConfirmDialog } from "@/components/budget/ConfirmDialog";
 import { useToast } from "@/components/budget/Toast";
 import { getCurrentCurrency, getCurrentLocale } from "@/lib/locale-storage";
 import { LOCALE_METADATA } from "@/i18n/config";
-import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { formatCurrency, getCurrencySymbol } from "@/i18n/utils/formatCurrency";
 import { useTranslations } from "next-intl";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -622,7 +622,10 @@ export default function AccountsPage() {
                   </label>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-                      $
+                      {getCurrencySymbol(
+                        getCurrentCurrency() || LOCALE_METADATA[getCurrentLocale()].currency,
+                        getCurrentLocale()
+                      )}
                     </span>
                     <input
                       type="number"

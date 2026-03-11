@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Yn ôl i'r hafan"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Blwyddyn {n}",
+      "yearLabel": "Blwyddyn",
+      "month": "Mis {n}",
+      "monthYear": "Mis {n} (Blwyddyn {y})",
+      "age": "Oed {n}",
+      "ageLabel": "Oed",
+      "contributions": "Cyfraniadau",
+      "interestEarned": "Llog a enillwyd",
+      "interest": "Llog",
+      "totalInterest": "Cyfanswm llog",
+      "snowball": "Pelen eira",
+      "avalanche": "Eirlithriad",
+      "portfolio": "Portffolio",
+      "fireTarget": "Targed FIRE",
+      "median50th": "Canolrif (50fed)",
+      "remainingBalance": "Balans sy'n weddill",
+      "totalAssets": "Cyfanswm asedau",
+      "totalLiabilities": "Cyfanswm rhwymedigaethau",
+      "netWorth": "Gwerth net",
+      "retirement": "Ymddeoliad"
+    },
+    "scenario": {
+      "compare": "Cymharu senarios ({count} wedi'u cadw)",
+      "selectUpTo": "Dewiswch hyd at 3 senario i'w cymharu:",
+      "duplicate": "Dyblygu",
+      "delete": "Dileu",
+      "sideBySide": "Cymhariaeth ochr yn ochr",
+      "field": "Maes",
+      "delta": "Gwahaniaeth",
+      "selectOneMore": "Dewiswch un senario arall i'w gymharu",
+      "copySuffix": "(copi)"
+    },
+    "openCalculator": "Agor cyfrifiannell"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Dileu",
     "edit": "Golygu",
     "loading": "Llwytho...",
-    "save": "Cadw"
+    "save": "Cadw",
+    "success": "Llwyddiant!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Cadarnhau",
     "finalConfirmation": "Cadarnhad Terfynol:",
     "processing": "Prosesu...",
-    "typeToConfirm": "Teipiwch {text} i gadarnhau'r weithred hon."
+    "typeToConfirm": "Teipiwch {text} i gadarnhau'r weithred hon.",
+    "confirmAction": "Cadarnhau'r weithred"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Hanes sgôr",
+      "monthsOfData": "{count} {count, plural, =1 {mis} other {mis}} o ddata",
+      "emptyTitle": "Bydd eich hanes sgôr yn ymddangos yma wrth i ddata gronni",
+      "emptySubtitle": "Edrychwch eto fis nesaf!",
+      "legendScore": "Sgôr",
+      "legendTrend": "Tuedd",
+      "tooltipScore": "Sgôr",
+      "tooltipTrend": "Tuedd",
+      "loadingChart": "Llwytho siart..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Mae eich cyllideb yn byw ar EICH dyfais",
+      "heroSubtitle": "Croeso i'r ap cyllideb mwyaf preifat erioed. Dim cyfrifon, dim cwmwl, dim cyfaddawd.",
+      "features": {
+        "yourDataTitle": "Eich data, eich dyfais",
+        "yourDataDescription": "Mae'r holl ddata ariannol yn cael ei storio'n lleol ar eich dyfais. Dim gweinyddion cwmwl, dim mynediad trydydd parti.",
+        "encryptionTitle": "Amgryptio gradd banc",
+        "encryptionDescription": "Mae amgryptio AES-256 yn diogelu eich data. Dim ond chi sydd â'r allwedd — nid yw byth yn gadael eich dyfais.",
+        "offlineTitle": "Yn gweithio all-lein",
+        "offlineDescription": "Ymarferoldeb llawn heb y rhyngrwyd. Perffaith i ddefnyddwyr sy'n ymwybodol o breifatrwydd.",
+        "zeroTrackingTitle": "Dim olrhain",
+        "zeroTrackingDescription": "Dim dadansoddeg, dim telemetreg, dim casglu data. Nid busnes neb yw eich cyllid."
+      },
+      "whatsNext": "Beth sydd nesaf?",
+      "whatsNextIntro": "Yn y munudau nesaf, byddwn yn eich helpu i:",
+      "step1": "Mewnforio trafodion presennol (CSV banc, OFX neu â llaw)",
+      "step2": "Categoreiddio gwariant yn awtomatig",
+      "step3": "Creu eich cyllideb gyntaf yn seiliedig ar wariant gwirioneddol",
+      "step4": "Gosod nodiadau atgoffa biliau fel nad ydych byth yn colli taliad",
+      "getStarted": "Gadewch i ni ddechrau"
+    },
+    "categoryMapping": {
+      "needsCategories": "Mae {count} trafodion angen categorïau",
+      "allCategorized": "Mae pob trafodiad wedi'i gategoreiddio!",
+      "applySmartSuggestions": "Cymhwyso awgrymiadau clyfar",
+      "categorize": "Categoreiddio",
+      "percentMatch": "{percent}% cyfatebiaeth",
+      "rememberChoices": "Cofio fy newisiadau categori",
+      "rememberChoicesDescription": "Categoreiddio trafodion tebyg yn awtomatig yn y dyfodol",
+      "categorized": "{count} wedi'u categoreiddio",
+      "remaining": "{count} yn weddill",
+      "continue": "Parhau",
+      "continueAnyway": "Parhau beth bynnag",
+      "categories": {
+        "foodDining": "Bwyd a Bwyta Allan",
+        "transportation": "Cludiant",
+        "billsUtilities": "Biliau a Chyfleustodau",
+        "shopping": "Siopa",
+        "entertainment": "Adloniant",
+        "healthFitness": "Iechyd a Ffitrwydd",
+        "personalCare": "Gofal personol",
+        "income": "Incwm",
+        "transfers": "Trosglwyddiadau"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Methwyd â dileu proffil",
+    "deleteTitle": "Dileu proffil?",
+    "defaultProfile": "Proffil rhagosodedig",
+    "cannotDeleteOnly": "Dyma'r unig broffil. Ni allwch ei ddileu.",
+    "permanentWarning": "Bydd hyn yn dileu'r proffil hwn yn barhaol. Bydd unrhyw gyllidebau preifat sy'n eiddo i'r proffil hwn yn cael eu rhannu â phob proffil.",
+    "cannotUndo": "Ni ellir dadwneud y weithred hon.",
+    "deleteButton": "Dileu proffil"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Gweld"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Analluogi nodyn atgoffa",
+      "enableReminder": "Galluogi nodyn atgoffa",
+      "off": "Diffodd"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Mewnforio wedi'i gwblhau!",
+    "subtitle": "Gosodwch falans y cyfrif ar gyfer {accountName}",
+    "transactionsImported": "{count} trafodion wedi'u mewnforio",
+    "netChange": "Newid net o drafodion:",
+    "currentBalanceLabel": "Beth yw balans presennol eich cyfrif banc?",
+    "currentBalanceLabelCredit": "Beth yw'r swm presennol sy'n ddyledus?",
+    "balanceHelperBank": "Agorwch eich ap bancio a rhowch y balans a ddangosir ar gyfer y cyfrif hwn",
+    "balanceHelperCredit": "Rhowch y balans presennol a ddangosir ar eich datganiad cerdyn credyd (fel rhif positif)",
+    "startingBalance": "Eich balans cychwynnol:",
+    "startingBalanceCredit": "Eich swm dyledus cychwynnol:",
+    "balanceMatchNote": "Bydd hyn yn gwneud i falans eich cyfrif gyfateb i'ch banc.",
+    "negativeWarning": "Mae hyn yn arwain at falans cychwynnol negyddol, sy'n anarferol ar gyfer cyfrifon cyfredol/cynilo. Gwiriwch ddwywaith fod eich balans presennol yn gywir.",
+    "skipForNow": "Hepgor am nawr",
+    "setBalance": "Gosod balans"
+  },
+  "recommendations": {
+    "title": "Prif argymhellion",
+    "subtitle": "Ffyrdd o wella eich iechyd ariannol",
+    "emptyState": "Ychwanegwch fwy o ddata ariannol i dderbyn argymhellion personol",
+    "viewAllFactors": "Gweld yr holl ffactorau",
+    "factorLabels": {
+      "savingsRate": "Cynilion",
+      "debtToIncome": "Dyled",
+      "budgetAdherence": "Cyllideb",
+      "emergencyFund": "Cronfa argyfwng",
+      "investmentGrowth": "Buddsoddiadau",
+      "expenseStability": "Treuliau"
+    },
+    "factorLinks": {
+      "savingsRate": "Gweld incwm",
+      "debtToIncome": "Rheoli benthyciadau",
+      "budgetAdherence": "Addasu cyllidebau",
+      "emergencyFund": "Cynllunio cynilion",
+      "investmentGrowth": "Gweld portffolio",
+      "expenseStability": "Gweld adroddiadau"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Masnachwr:",
+    "amount": "Swm:",
+    "average": "Cyfartaledd: {amount}",
+    "category": "Categori:",
+    "wasExpected": "A oedd hyn yn ddisgwyliedig?",
+    "expected": "Disgwyliedig",
+    "unexpected": "Annisgwyl",
+    "markedExpected": "Wedi'i farcio fel disgwyliedig",
+    "markedUnexpected": "Wedi'i farcio fel annisgwyl",
+    "moreAnomalies": "+{count} {count, plural, =1 {anomaledd} other {anomaledd}} arall",
+    "severity": {
+      "high": "UCHEL",
+      "medium": "CANOLIG",
+      "low": "ISEL"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Prosesu OCR",
+    "cancel": "Canslo",
+    "pageProgress": "Tudalen {current} o {total}",
+    "elapsed": "Amser a aeth: {time}",
+    "remaining": "~{time} yn weddill",
+    "stages": {
+      "loading": "Llwytho PDF",
+      "rendering": "Rendro tudalennau",
+      "preprocessing": "Gwella delwedd",
+      "ocr": "Echdynnu testun",
+      "parsing": "Dadansoddi trafodion",
+      "complete": "Cwblhawyd",
+      "error": "Gwall",
+      "cancelled": "Canslwyd",
+      "enhance": "Gwella"
+    },
+    "errorRetry": "Methodd prosesu OCR. Hoffech chi drio eto?",
+    "cancelledRetry": "Canslwyd OCR. Hoffech chi ailddechrau?",
+    "retryButton": "Ailgeisio OCR",
+    "completedSuccess": "OCR wedi'i gwblhau'n llwyddiannus!",
+    "loadingChart": "Llwytho siart..."
+  },
+  "developerTools": {
+    "title": "Offer Datblygwr",
+    "subtitle": "Offer QA ar gyfer profi rhyngwladoli (modd datblygu yn unig)",
+    "pseudoLocaleLabel": "Galluogi ffug-leoliad (en-XA)",
+    "pseudoLocaleHelp": "Yn disodli'r holl destun wedi'i gyfieithu â nodau acennog. Mae unrhyw destun Saesneg plaen sy'n weddill wedi'i <strong>godio'n galed</strong> ac mae angen ei drosi'n allweddi cyfieithu.",
+    "pseudoLocaleExample": "Enghraifft: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Os gwelwch \"Dashboard\" yn lle \"[Ðášhƀóářð~~~]\", mae wedi'i godio'n galed!",
+    "infoPseudoLocale": "Mae ffug-leoliad yn helpu i nodi llinynnau heb eu cyfieithu yn ystod datblygiad",
+    "infoProduction": "Mae adeiladau cynhyrchu yn eithrio lleoliad en-XA yn awtomatig",
+    "infoSwitchBack": "Newidiwch yn ôl i leoliad go iawn i barhau â datblygiad arferol"
+  },
+  "pageMetadata": {
+    "appName": "Ap Cyllideb",
+    "scenarios": "Senarios Beth-Os",
+    "merchantRules": "Rheolau Masnachwyr",
+    "more": "Mwy",
+    "netWorth": "Gwerth Net",
+    "properties": "Eiddo",
+    "propertyDetail": "Manylion Eiddo",
+    "review": "Adolygu Trafodion",
+    "events": "Cyllidebau Digwyddiadau",
+    "landing": "BudgetPro - Meistrolwch Eich Cyllid",
+    "dashboard": "Dangosfwrdd",
+    "transactions": "Trafodion",
+    "import": "Mewnforio",
+    "accounts": "Cyfrifon",
+    "budgets": "Cyllidebau",
+    "categories": "Categorïau",
+    "reports": "Adroddiadau",
+    "settings": "Gosodiadau",
+    "subscriptions": "Tanysgrifiadau",
+    "investments": "Buddsoddiadau",
+    "debtPayoff": "Talu Dyledion",
+    "loans": "Benthyciadau",
+    "calculators": "Cyfrifianellau",
+    "planning": "Cynllunio",
+    "ocr": "Sganiwr Derbynebau",
+    "export": "Allforio",
+    "fridayReview": "Adolygiad Wythnosol",
+    "onboarding": "Dechrau",
+    "offline": "Modd all-lein",
+    "splits": "Rhannu trafodion"
   }
 }

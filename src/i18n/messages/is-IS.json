@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Til baka á forsíðu"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Ár {n}",
+      "yearLabel": "Ár",
+      "month": "Mánuður {n}",
+      "monthYear": "Mánuður {n} (Ár {y})",
+      "age": "Aldur {n}",
+      "ageLabel": "Aldur",
+      "contributions": "Framlög",
+      "interestEarned": "Áunnir vextir",
+      "interest": "Vextir",
+      "totalInterest": "Heildarvextir",
+      "snowball": "Snjóbolti",
+      "avalanche": "Snjóflóð",
+      "portfolio": "Safn",
+      "fireTarget": "FIRE-markmið",
+      "median50th": "Miðgildi (50.)",
+      "remainingBalance": "Eftirstöðvar",
+      "totalAssets": "Heildareignir",
+      "totalLiabilities": "Heildarskuldir",
+      "netWorth": "Hrein eign",
+      "retirement": "Eftirlaunagöngur"
+    },
+    "scenario": {
+      "compare": "Bera saman aðstæður ({count} vistaðar)",
+      "selectUpTo": "Veldu allt að 3 aðstæður til samanburðar:",
+      "duplicate": "Afrita",
+      "delete": "Eyða",
+      "sideBySide": "Samanburður hlið við hlið",
+      "field": "Reitur",
+      "delta": "Munur",
+      "selectOneMore": "Veldu eina aðstæðu til viðbótar til samanburðar",
+      "copySuffix": "(afrit)"
+    },
+    "openCalculator": "Opna reiknivél"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Eyða",
     "edit": "Breyta",
     "loading": "Hladar...",
-    "save": "Vista"
+    "save": "Vista",
+    "success": "Tókst!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Staðfesta",
     "finalConfirmation": "Loka staðfesting:",
     "processing": "Vinnur...",
-    "typeToConfirm": "Sláðu inn {text} til að staðfesta þessa aðgerð."
+    "typeToConfirm": "Sláðu inn {text} til að staðfesta þessa aðgerð.",
+    "confirmAction": "Staðfesta aðgerð"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Stigasaga",
+      "monthsOfData": "{count} {count, plural, =1 {mánuður} other {mánuðir}} af gögnum",
+      "emptyTitle": "Stigasaga þín birtist hér eftir því sem gögn safnast",
+      "emptySubtitle": "Komdu aftur næsta mánuð!",
+      "legendScore": "Stig",
+      "legendTrend": "Stefna",
+      "tooltipScore": "Stig",
+      "tooltipTrend": "Stefna",
+      "loadingChart": "Hleð graf..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Fjárhagsáætlun þín býr á ÞÍNU tæki",
+      "heroSubtitle": "Velkomin í einkaleyndasta fjárhagsáætlunarforritð nokkru sinni. Engir reikningar, ekkert ský, engin málamiðlun.",
+      "features": {
+        "yourDataTitle": "Þín gögn, þitt tæki",
+        "yourDataDescription": "Öll fjárhagsgögn eru geymð staðbundið á tækinu þínu. Engir skýjaþjónar, enginn aðgangur þriðja aðila.",
+        "encryptionTitle": "Dulkóðun á bankastigi",
+        "encryptionDescription": "AES-256-dulkóðun verndar gögnin þín. Aðeins þú hefur lykillinn—hann fer aldrei af tækinu þínu.",
+        "offlineTitle": "Virkar án nets",
+        "offlineDescription": "Full virkni án internets. Fullkomið fyrir notendur sem leggja áherslu á friðhelgi.",
+        "zeroTrackingTitle": "Engin rakning",
+        "zeroTrackingDescription": "Engin greining, engin fjarmæling, engin gagnasöfnun. Fjármál þín varða engan annan."
+      },
+      "whatsNext": "Hvað næst?",
+      "whatsNextIntro": "Næstu mínútur hjálpum við þér að:",
+      "step1": "Flytja inn fyrirliggjandi færslur (banka-CSV, OFX eða handvirkt)",
+      "step2": "Flokka útgjöld þín sjálfvirkt",
+      "step3": "Búa til fyrstu fjárhagsáætlun byggt á raunverulegum útgjöldum",
+      "step4": "Setja upp reikningsáminningar svo þú missir aldrei af greiðslu",
+      "getStarted": "Byrjum"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} færslur þurfa flokka",
+      "allCategorized": "Allar færslur eru flokkaðar!",
+      "applySmartSuggestions": "Nota snjöll tillögur",
+      "categorize": "Flokka",
+      "percentMatch": "{percent}% samsvörun",
+      "rememberChoices": "Muna flokkaval mín",
+      "rememberChoicesDescription": "Flokka svipaðar færslur sjálfvirkt í framtíðinni",
+      "categorized": "{count} flokkað",
+      "remaining": "{count} eftir",
+      "continue": "Halda áfram",
+      "continueAnyway": "Halda áfram samt",
+      "categories": {
+        "foodDining": "Matur & Veitingar",
+        "transportation": "Samgöngur",
+        "billsUtilities": "Reikningar & Veitur",
+        "shopping": "Innkaup",
+        "entertainment": "Afþreying",
+        "healthFitness": "Heilsa & Hreysti",
+        "personalCare": "Persónuleg umhirða",
+        "income": "Tekjur",
+        "transfers": "Millifærslur"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Ekki tókst að eyða sniði",
+    "deleteTitle": "Eyða sniði?",
+    "defaultProfile": "Sjálfgefið snið",
+    "cannotDeleteOnly": "Þetta er eina sniðið. Þú getur ekki eytt því.",
+    "permanentWarning": "Þetta mun eyða þessu sniði varanlega. Öll einkafjárhagsáætlanir í eigu þessa sniðs verða deild með öllum sniðum.",
+    "cannotUndo": "Ekki er hægt að afturkalla þessa aðgerð.",
+    "deleteButton": "Eyða sniði"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Skoða"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Slökkva á áminningu",
+      "enableReminder": "Kveikja á áminningu",
+      "off": "Slökkt"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Innflutningur lokið!",
+    "subtitle": "Stilltu reikningsstöðu þína fyrir {accountName}",
+    "transactionsImported": "{count} færslur fluttar inn",
+    "netChange": "Hrein breyting frá færslum:",
+    "currentBalanceLabel": "Hver er núverandi bankastöða þín?",
+    "currentBalanceLabelCredit": "Hver er núverandi skuldaþín?",
+    "balanceHelperBank": "Opnaðu bankaforrit og sláðu inn stöðuna sem sýnd er fyrir þennan reikning",
+    "balanceHelperCredit": "Sláðu inn núverandi stöðu sem birtist á kreditkortayfirliti (sem jákvæða tölu)",
+    "startingBalance": "Upphafsstaða þín:",
+    "startingBalanceCredit": "Upphafskuld þín:",
+    "balanceMatchNote": "Þetta lætur reikningsstöðu þína passa við bankann.",
+    "negativeWarning": "Þetta leiðir til neikvæðrar upphafsstöðu, sem er óvenjulegt fyrir tékka-/sparireikninga. Vinsamlegast athugaðu hvort núverandi staða sé rétt.",
+    "skipForNow": "Sleppa í bili",
+    "setBalance": "Stilla stöðu"
+  },
+  "recommendations": {
+    "title": "Helstu ráðleggingar",
+    "subtitle": "Leiðir til að bæta fjárhagslega heilsu þína",
+    "emptyState": "Bættu við fleiri fjárhagsgögnum til að fá sérsniðnar ráðleggingar",
+    "viewAllFactors": "Skoða alla þætti",
+    "factorLabels": {
+      "savingsRate": "Sparnaður",
+      "debtToIncome": "Skuldir",
+      "budgetAdherence": "Fjárhagsáætlun",
+      "emergencyFund": "Neyðarsjóður",
+      "investmentGrowth": "Fjárfestingar",
+      "expenseStability": "Útgjöld"
+    },
+    "factorLinks": {
+      "savingsRate": "Skoða tekjur",
+      "debtToIncome": "Stjórna lánum",
+      "budgetAdherence": "Breyta fjárhagsáætlunum",
+      "emergencyFund": "Skipuleggja sparnað",
+      "investmentGrowth": "Skoða safn",
+      "expenseStability": "Skoða skýrslur"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Söluaðili:",
+    "amount": "Upphæð:",
+    "average": "Meðaltal: {amount}",
+    "category": "Flokkur:",
+    "wasExpected": "Var þetta vænt?",
+    "expected": "Vænt",
+    "unexpected": "Óvænt",
+    "markedExpected": "Merkt sem vænt",
+    "markedUnexpected": "Merkt sem óvænt",
+    "moreAnomalies": "+{count} fleiri {count, plural, =1 {frávik} other {frávik}}",
+    "severity": {
+      "high": "HÁ",
+      "medium": "MEÐAL",
+      "low": "LÁG"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR-vinnsla",
+    "cancel": "Hætta við",
+    "pageProgress": "Síða {current} af {total}",
+    "elapsed": "Liðið: {time}",
+    "remaining": "~{time} eftir",
+    "stages": {
+      "loading": "Hleð PDF",
+      "rendering": "Teikna síður",
+      "preprocessing": "Bæti mynd",
+      "ocr": "Dreg út texta",
+      "parsing": "Greini færslur",
+      "complete": "Lokið",
+      "error": "Villa",
+      "cancelled": "Hætt við",
+      "enhance": "Bæta"
+    },
+    "errorRetry": "OCR-vinnsla mistókst. Viltu reyna aftur?",
+    "cancelledRetry": "OCR var hætt við. Viltu byrja aftur?",
+    "retryButton": "Reyna OCR aftur",
+    "completedSuccess": "OCR tókst!",
+    "loadingChart": "Hleð graf..."
+  },
+  "developerTools": {
+    "title": "Þróunarverkfæri",
+    "subtitle": "QA verkfæri til að prófa alþjóðavæðingu (aðeins þróunarhamur)",
+    "pseudoLocaleLabel": "Virkja gervi-staðfæringu (en-XA)",
+    "pseudoLocaleHelp": "Skiptir öllum þýddum texta út fyrir áhersluboðstafi. Allur eftirstandandi venjulegur enskur texti er <strong>harðkóðaður</strong> og þarf að breyta í þýðingarlykla.",
+    "pseudoLocaleExample": "Dæmi: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Ef þú sérð \"Dashboard\" í stað \"[Ðášhƀóářð~~~]\", þá er það harðkóðað!",
+    "infoPseudoLocale": "Gervi-staðfæring hjálpar til við að bera kennsl á óþýdda strengi meðan á þróun stendur",
+    "infoProduction": "Framleiðslubyggingar útiloka sjálfkrafa en-XA staðfæringuna",
+    "infoSwitchBack": "Skiptu aftur yfir í alvöru staðfæringu til að halda áfram eðlilegri þróun"
+  },
+  "pageMetadata": {
+    "appName": "Fjárhagsáætlunarforrit",
+    "scenarios": "Hvað-ef sviðsmyndir",
+    "merchantRules": "Reglur söluaðila",
+    "more": "Meira",
+    "netWorth": "Hrein eign",
+    "properties": "Eignir",
+    "propertyDetail": "Upplýsingar um eign",
+    "review": "Yfirfara færslur",
+    "events": "Viðburðaáætlanir",
+    "landing": "BudgetPro - Náðu tökum á fjármálum þínum",
+    "dashboard": "Yfirlitssíða",
+    "transactions": "Færslur",
+    "import": "Innflutningur",
+    "accounts": "Reikningar",
+    "budgets": "Fjárhagsáætlanir",
+    "categories": "Flokkar",
+    "reports": "Skýrslur",
+    "settings": "Stillingar",
+    "subscriptions": "Áskriftir",
+    "investments": "Fjárfestingar",
+    "debtPayoff": "Skuldalosun",
+    "loans": "Lán",
+    "calculators": "Reiknivélar",
+    "planning": "Skipulagning",
+    "ocr": "Kvittanaskanni",
+    "export": "Útflutningur",
+    "fridayReview": "Vikulegt yfirlit",
+    "onboarding": "Byrjun",
+    "offline": "Ótengdur hamur",
+    "splits": "Skipta viðskiptum"
   }
 }

@@ -10,8 +10,9 @@ import { Button } from "@/components/ui/button";
 import { Bell, Calendar, Target, AlertCircle, X, ExternalLink, Clock } from "lucide-react";
 import { SnoozeMenu } from "./SnoozeMenu";
 import type { InAppNotification, SnoozeDuration } from "@/types/notifications";
-import { useTranslations } from "next-intl";
-import { formatDistanceToNow } from "date-fns";
+import { useTranslations, useLocale } from "next-intl";
+import { formatRelativeTime } from "@/i18n/utils/formatDate";
+import type { SupportedLocale } from "@/i18n/config";
 import Link from "next/link";
 
 interface NotificationItemProps {
@@ -43,6 +44,7 @@ export function NotificationItem({
 }: NotificationItemProps) {
   const t = useTranslations("notifications");
   const tAria = useTranslations("aria");
+  const locale = useLocale();
   const Icon = typeIcons[notification.type] || Bell;
   const isUnread = notification.status === "unread";
   const isSnoozed = notification.status === "snoozed";
@@ -78,7 +80,10 @@ export function NotificationItem({
           handleClick();
         }
       }}
-      aria-label={tAria("notificationDescription", { title: notification.title, body: notification.body })}
+      aria-label={tAria("notificationDescription", {
+        title: notification.title,
+        body: notification.body,
+      })}
     >
       {/* Icon */}
       <div
@@ -134,16 +139,17 @@ export function NotificationItem({
         {/* Footer */}
         <div className="mt-2 flex items-center gap-3 text-xs text-slate-500">
           <span>
-            {formatDistanceToNow(new Date(notification.createdAt), {
-              addSuffix: true,
-            })}
+            {formatRelativeTime(new Date(notification.createdAt), locale as SupportedLocale)}
           </span>
 
           {isSnoozed && notification.snoozedUntil && (
             <span className="flex items-center gap-1">
               <Clock className="h-3 w-3" />
               {t("snoozedUntil", {
-                time: formatDistanceToNow(new Date(notification.snoozedUntil)),
+                time: formatRelativeTime(
+                  new Date(notification.snoozedUntil),
+                  locale as SupportedLocale
+                ),
               })}
             </span>
           )}

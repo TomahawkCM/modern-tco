@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Επιστροφή στην αρχική"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Έτος {n}",
+      "yearLabel": "Έτος",
+      "month": "Μήνας {n}",
+      "monthYear": "Μήνας {n} (Έτος {y})",
+      "age": "Ηλικία {n}",
+      "ageLabel": "Ηλικία",
+      "contributions": "Εισφορές",
+      "interestEarned": "Κερδισμένοι τόκοι",
+      "interest": "Τόκοι",
+      "totalInterest": "Συνολικοί τόκοι",
+      "snowball": "Χιονοστιβάδα",
+      "avalanche": "Κατολίσθηση",
+      "portfolio": "Χαρτοφυλάκιο",
+      "fireTarget": "Στόχος FIRE",
+      "median50th": "Διάμεσος (50ό)",
+      "remainingBalance": "Υπολειπόμενο υπόλοιπο",
+      "totalAssets": "Σύνολο ενεργητικού",
+      "totalLiabilities": "Σύνολο υποχρεώσεων",
+      "netWorth": "Καθαρή αξία",
+      "retirement": "Συνταξιοδότηση"
+    },
+    "scenario": {
+      "compare": "Σύγκριση σεναρίων ({count} αποθηκευμένα)",
+      "selectUpTo": "Επιλέξτε έως 3 σενάρια για σύγκριση:",
+      "duplicate": "Αντιγραφή",
+      "delete": "Διαγραφή",
+      "sideBySide": "Σύγκριση δίπλα-δίπλα",
+      "field": "Πεδίο",
+      "delta": "Διαφορά",
+      "selectOneMore": "Επιλέξτε ένα ακόμη σενάριο για σύγκριση",
+      "copySuffix": "(αντίγραφο)"
+    },
+    "openCalculator": "Άνοιγμα αριθμομηχανής"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Διαγραφή",
     "edit": "Επεξεργασία",
     "loading": "Φόρτωση...",
-    "save": "Αποθήκευση"
+    "save": "Αποθήκευση",
+    "success": "Επιτυχία!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Επιβεβαίωση",
     "finalConfirmation": "Τελική Επιβεβαίωση:",
     "processing": "Επεξεργασία...",
-    "typeToConfirm": "Πληκτρολογήστε {text} για να επιβεβαιώσετε αυτήν την ενέργεια."
+    "typeToConfirm": "Πληκτρολογήστε {text} για να επιβεβαιώσετε αυτήν την ενέργεια.",
+    "confirmAction": "Επιβεβαίωση ενέργειας"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Ιστορικό βαθμολογίας",
+      "monthsOfData": "{count} {count, plural, =1 {μήνας} other {μήνες}} δεδομένων",
+      "emptyTitle": "Το ιστορικό βαθμολογίας σας θα εμφανιστεί εδώ καθώς συγκεντρώνονται δεδομένα",
+      "emptySubtitle": "Ελέγξτε ξανά τον επόμενο μήνα!",
+      "legendScore": "Βαθμολογία",
+      "legendTrend": "Τάση",
+      "tooltipScore": "Βαθμολογία",
+      "tooltipTrend": "Τάση",
+      "loadingChart": "Φόρτωση γραφήματος..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Ο προϋπολογισμός σας ζει στη ΔΙΚΗ ΣΑΣ συσκευή",
+      "heroSubtitle": "Καλώς ήρθατε στην πιο ιδιωτική εφαρμογή προϋπολογισμού. Χωρίς λογαριασμούς, χωρίς cloud, χωρίς συμβιβασμούς.",
+      "features": {
+        "yourDataTitle": "Τα δεδομένα σας, η συσκευή σας",
+        "yourDataDescription": "Όλα τα οικονομικά δεδομένα αποθηκεύονται τοπικά στη συσκευή σας. Χωρίς διακομιστές cloud, χωρίς πρόσβαση τρίτων.",
+        "encryptionTitle": "Κρυπτογράφηση τραπεζικού επιπέδου",
+        "encryptionDescription": "Η κρυπτογράφηση AES-256 προστατεύει τα δεδομένα σας. Μόνο εσείς έχετε το κλειδί — δεν φεύγει ποτέ από τη συσκευή σας.",
+        "offlineTitle": "Λειτουργεί εκτός σύνδεσης",
+        "offlineDescription": "Πλήρης λειτουργικότητα χωρίς internet. Ιδανικό για χρήστες που ενδιαφέρονται για την ιδιωτικότητα.",
+        "zeroTrackingTitle": "Μηδενική παρακολούθηση",
+        "zeroTrackingDescription": "Χωρίς αναλύσεις, χωρίς τηλεμετρία, χωρίς συλλογή δεδομένων. Τα οικονομικά σας δεν αφορούν κανέναν."
+      },
+      "whatsNext": "Τι ακολουθεί;",
+      "whatsNextIntro": "Στα επόμενα λεπτά, θα σας βοηθήσουμε:",
+      "step1": "Εισαγωγή υπαρχουσών συναλλαγών (τραπεζικό CSV, OFX ή χειροκίνητα)",
+      "step2": "Αυτόματη κατηγοριοποίηση δαπανών",
+      "step3": "Δημιουργία του πρώτου σας προϋπολογισμού με βάση τα πραγματικά έξοδα",
+      "step4": "Ρύθμιση υπενθυμίσεων λογαριασμών για να μην χάσετε πληρωμή",
+      "getStarted": "Ας ξεκινήσουμε"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} συναλλαγές χρειάζονται κατηγορίες",
+      "allCategorized": "Όλες οι συναλλαγές έχουν κατηγοριοποιηθεί!",
+      "applySmartSuggestions": "Εφαρμογή έξυπνων προτάσεων",
+      "categorize": "Κατηγοριοποίηση",
+      "percentMatch": "{percent}% αντιστοίχιση",
+      "rememberChoices": "Αποθήκευση επιλογών κατηγοριών",
+      "rememberChoicesDescription": "Αυτόματη κατηγοριοποίηση παρόμοιων συναλλαγών στο μέλλον",
+      "categorized": "{count} κατηγοριοποιημένες",
+      "remaining": "{count} εκκρεμούν",
+      "continue": "Συνέχεια",
+      "continueAnyway": "Συνέχεια ούτως ή άλλως",
+      "categories": {
+        "foodDining": "Φαγητό & Εστίαση",
+        "transportation": "Μεταφορά",
+        "billsUtilities": "Λογαριασμοί & Υπηρεσίες",
+        "shopping": "Αγορές",
+        "entertainment": "Ψυχαγωγία",
+        "healthFitness": "Υγεία & Ευεξία",
+        "personalCare": "Προσωπική φροντίδα",
+        "income": "Εισόδημα",
+        "transfers": "Μεταφορές"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Αποτυχία διαγραφής προφίλ",
+    "deleteTitle": "Διαγραφή προφίλ;",
+    "defaultProfile": "Προεπιλεγμένο προφίλ",
+    "cannotDeleteOnly": "Αυτό είναι το μοναδικό προφίλ. Δεν μπορείτε να το διαγράψετε.",
+    "permanentWarning": "Αυτό θα διαγράψει μόνιμα αυτό το προφίλ. Τυχόν ιδιωτικοί προϋπολογισμοί που ανήκουν σε αυτό το προφίλ θα μοιραστούν με όλα τα προφίλ.",
+    "cannotUndo": "Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
+    "deleteButton": "Διαγραφή προφίλ"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Προβολή"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Απενεργοποίηση υπενθύμισης",
+      "enableReminder": "Ενεργοποίηση υπενθύμισης",
+      "off": "Ανενεργό"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Η εισαγωγή ολοκληρώθηκε!",
+    "subtitle": "Ορίστε το υπόλοιπο λογαριασμού για {accountName}",
+    "transactionsImported": "{count} συναλλαγές εισήχθησαν",
+    "netChange": "Καθαρή μεταβολή από συναλλαγές:",
+    "currentBalanceLabel": "Ποιο είναι το τρέχον υπόλοιπο του τραπεζικού σας λογαριασμού;",
+    "currentBalanceLabelCredit": "Ποιο είναι το τρέχον οφειλόμενο ποσό;",
+    "balanceHelperBank": "Ανοίξτε την τραπεζική σας εφαρμογή και εισάγετε το υπόλοιπο που εμφανίζεται για αυτόν τον λογαριασμό",
+    "balanceHelperCredit": "Εισάγετε το τρέχον υπόλοιπο της πιστωτικής σας κάρτας (ως θετικό αριθμό)",
+    "startingBalance": "Το αρχικό σας υπόλοιπο:",
+    "startingBalanceCredit": "Το αρχικό οφειλόμενο ποσό:",
+    "balanceMatchNote": "Αυτό θα συμφωνήσει το υπόλοιπο του λογαριασμού σας με την τράπεζα.",
+    "negativeWarning": "Αυτό οδηγεί σε αρνητικό αρχικό υπόλοιπο, κάτι ασυνήθιστο για λογαριασμούς τρεχούμενους/ταμιευτηρίου. Ελέγξτε ξανά ότι το τρέχον υπόλοιπο είναι σωστό.",
+    "skipForNow": "Παράλειψη προς το παρόν",
+    "setBalance": "Ορισμός υπολοίπου"
+  },
+  "recommendations": {
+    "title": "Κορυφαίες συστάσεις",
+    "subtitle": "Τρόποι βελτίωσης της οικονομικής σας υγείας",
+    "emptyState": "Προσθέστε περισσότερα οικονομικά δεδομένα για να λάβετε εξατομικευμένες συστάσεις",
+    "viewAllFactors": "Προβολή όλων των παραγόντων",
+    "factorLabels": {
+      "savingsRate": "Αποταμίευση",
+      "debtToIncome": "Χρέος",
+      "budgetAdherence": "Προϋπολογισμός",
+      "emergencyFund": "Αποθεματικό έκτακτης ανάγκης",
+      "investmentGrowth": "Επενδύσεις",
+      "expenseStability": "Έξοδα"
+    },
+    "factorLinks": {
+      "savingsRate": "Προβολή εισοδήματος",
+      "debtToIncome": "Διαχείριση δανείων",
+      "budgetAdherence": "Προσαρμογή προϋπολογισμών",
+      "emergencyFund": "Σχεδιασμός αποταμίευσης",
+      "investmentGrowth": "Προβολή χαρτοφυλακίου",
+      "expenseStability": "Προβολή αναφορών"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Έμπορος:",
+    "amount": "Ποσό:",
+    "average": "Μέσος όρος: {amount}",
+    "category": "Κατηγορία:",
+    "wasExpected": "Ήταν αναμενόμενο;",
+    "expected": "Αναμενόμενο",
+    "unexpected": "Μη αναμενόμενο",
+    "markedExpected": "Σημειώθηκε ως αναμενόμενο",
+    "markedUnexpected": "Σημειώθηκε ως μη αναμενόμενο",
+    "moreAnomalies": "+{count} ακόμη {count, plural, =1 {ανωμαλία} other {ανωμαλίες}}",
+    "severity": {
+      "high": "ΥΨΗΛΗ",
+      "medium": "ΜΕΣΑΙΑ",
+      "low": "ΧΑΜΗΛΗ"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Επεξεργασία OCR",
+    "cancel": "Ακύρωση",
+    "pageProgress": "Σελίδα {current} από {total}",
+    "elapsed": "Παρέλθον: {time}",
+    "remaining": "~{time} απομένουν",
+    "stages": {
+      "loading": "Φόρτωση PDF",
+      "rendering": "Απόδοση σελίδων",
+      "preprocessing": "Βελτίωση εικόνας",
+      "ocr": "Εξαγωγή κειμένου",
+      "parsing": "Ανάλυση συναλλαγών",
+      "complete": "Ολοκληρώθηκε",
+      "error": "Σφάλμα",
+      "cancelled": "Ακυρώθηκε",
+      "enhance": "Βελτίωση"
+    },
+    "errorRetry": "Η επεξεργασία OCR απέτυχε. Θέλετε να δοκιμάσετε ξανά;",
+    "cancelledRetry": "Η OCR ακυρώθηκε. Θέλετε να ξεκινήσετε ξανά;",
+    "retryButton": "Επανάληψη OCR",
+    "completedSuccess": "Η OCR ολοκληρώθηκε επιτυχώς!",
+    "loadingChart": "Φόρτωση γραφήματος..."
+  },
+  "developerTools": {
+    "title": "Εργαλεία ανάπτυξης",
+    "subtitle": "Εργαλεία QA για δοκιμή διεθνοποίησης (μόνο λειτουργία ανάπτυξης)",
+    "pseudoLocaleLabel": "Ενεργοποίηση ψευδο-locale (en-XA)",
+    "pseudoLocaleHelp": "Αντικαθιστά όλο το μεταφρασμένο κείμενο με χαρακτήρες με τόνους. Τυχόν εναπομείναν απλό αγγλικό κείμενο είναι <strong>σκληρά κωδικοποιημένο</strong> και πρέπει να μετατραπεί σε κλειδιά μετάφρασης.",
+    "pseudoLocaleExample": "Παράδειγμα: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Αν βλέπετε \"Dashboard\" αντί για \"[Ðášhƀóářð~~~]\", είναι σκληρά κωδικοποιημένο!",
+    "infoPseudoLocale": "Το ψευδο-locale βοηθά στον εντοπισμό αμετάφραστων συμβολοσειρών κατά την ανάπτυξη",
+    "infoProduction": "Τα builds παραγωγής αποκλείουν αυτόματα το locale en-XA",
+    "infoSwitchBack": "Επιστρέψτε σε ένα πραγματικό locale για να συνεχίσετε την κανονική ανάπτυξη"
+  },
+  "pageMetadata": {
+    "appName": "Εφαρμογή προϋπολογισμού",
+    "scenarios": "Σενάρια τι-θα-γινόταν-αν",
+    "merchantRules": "Κανόνες εμπόρων",
+    "more": "Περισσότερα",
+    "netWorth": "Καθαρή αξία",
+    "properties": "Ακίνητα",
+    "propertyDetail": "Λεπτομέρειες ακινήτου",
+    "review": "Έλεγχος συναλλαγών",
+    "events": "Προϋπολογισμοί εκδηλώσεων",
+    "landing": "BudgetPro – Κατακτήστε τα οικονομικά σας",
+    "dashboard": "Πίνακας ελέγχου",
+    "transactions": "Συναλλαγές",
+    "import": "Εισαγωγή",
+    "accounts": "Λογαριασμοί",
+    "budgets": "Προϋπολογισμοί",
+    "categories": "Κατηγορίες",
+    "reports": "Αναφορές",
+    "settings": "Ρυθμίσεις",
+    "subscriptions": "Συνδρομές",
+    "investments": "Επενδύσεις",
+    "debtPayoff": "Αποπληρωμή χρεών",
+    "loans": "Δάνεια",
+    "calculators": "Υπολογιστές",
+    "planning": "Σχεδιασμός",
+    "ocr": "Σαρωτής αποδείξεων",
+    "export": "Εξαγωγή",
+    "fridayReview": "Εβδομαδιαία ανασκόπηση",
+    "onboarding": "Ξεκινήστε",
+    "offline": "Λειτουργία εκτός σύνδεσης",
+    "splits": "Διαχωρισμός συναλλαγών"
   }
 }

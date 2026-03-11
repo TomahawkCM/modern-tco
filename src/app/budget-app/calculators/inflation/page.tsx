@@ -32,12 +32,16 @@ const InflationChart = lazy(() =>
       currency,
       nominalLabel,
       realLabel,
+      yearLabel,
+      yearFormatter,
     }: {
       data: { year: number; nominalValue: number; realValue: number }[];
       locale: SupportedLocale;
       currency: string;
       nominalLabel: string;
       realLabel: string;
+      yearLabel: string;
+      yearFormatter: (label: number) => string;
     }) => {
       const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
         mod;
@@ -49,7 +53,12 @@ const InflationChart = lazy(() =>
               dataKey="year"
               stroke="#64748b"
               tick={{ fontSize: 12 }}
-              label={{ value: "Year", position: "insideBottomRight", offset: -5, fill: "#64748b" }}
+              label={{
+                value: yearLabel,
+                position: "insideBottomRight",
+                offset: -5,
+                fill: "#64748b",
+              }}
             />
             <YAxis
               stroke="#64748b"
@@ -69,7 +78,7 @@ const InflationChart = lazy(() =>
                 formatCurrency(value, currency, locale),
                 name,
               ]}
-              labelFormatter={(label: number) => `Year ${label}`}
+              labelFormatter={(label: number) => yearFormatter(label)}
             />
             <Legend />
             <Line
@@ -296,6 +305,8 @@ export default function InflationCalculatorPage() {
               currency={currency}
               nominalLabel={t("inflation.chartNominal")}
               realLabel={t("inflation.chartReal")}
+              yearLabel={t("chart.yearLabel")}
+              yearFormatter={(label: number) => t("chart.year", { n: label })}
             />
           </Suspense>
         </div>

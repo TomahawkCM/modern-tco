@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Faça upgrade agora para recuperar acesso total aos seus dados de orçamento",
       "trialEndedTitle": "Seu Teste Terminou",
       "upgradeNow": "Fazer Upgrade - R${price}"
-    }
+    },
+    "backToHome": "Voltar ao início"
   },
   "bottomSheet": {
     "close": "Fechar",
@@ -1200,7 +1201,41 @@
       "assumptions": "Premissas",
       "formula": "Fórmula",
       "title": "Como Funciona"
-    }
+    },
+    "chart": {
+      "year": "Ano {n}",
+      "yearLabel": "Ano",
+      "month": "Mês {n}",
+      "monthYear": "Mês {n} (Ano {y})",
+      "age": "Idade {n}",
+      "ageLabel": "Idade",
+      "contributions": "Contribuições",
+      "interestEarned": "Juros ganhos",
+      "interest": "Juros",
+      "totalInterest": "Juros totais",
+      "snowball": "Bola de neve",
+      "avalanche": "Avalanche",
+      "portfolio": "Portfólio",
+      "fireTarget": "Meta FIRE",
+      "median50th": "Mediana (50º)",
+      "remainingBalance": "Saldo restante",
+      "totalAssets": "Total de ativos",
+      "totalLiabilities": "Total de passivos",
+      "netWorth": "Patrimônio líquido",
+      "retirement": "Aposentadoria"
+    },
+    "scenario": {
+      "compare": "Comparar cenários ({count} guardados)",
+      "selectUpTo": "Selecione até 3 cenários para comparar:",
+      "duplicate": "Duplicar",
+      "delete": "Eliminar",
+      "sideBySide": "Comparação lado a lado",
+      "field": "Campo",
+      "delta": "Diferença",
+      "selectOneMore": "Selecione mais um cenário para comparar",
+      "copySuffix": "(cópia)"
+    },
+    "openCalculator": "Abrir calculadora"
   },
   "calendarExport": {
     "addToCalendar": "Adicionar ao Calendário",
@@ -1415,7 +1450,8 @@
     "delete": "Excluir",
     "edit": "Editar",
     "loading": "Carregando...",
-    "save": "Salvar"
+    "save": "Salvar",
+    "success": "Sucesso!"
   },
   "confidenceMeter": {
     "autoCategorized": "Categorizado automaticamente:",
@@ -1756,7 +1792,8 @@
     "confirm": "Confirmar",
     "finalConfirmation": "Confirmação Final:",
     "processing": "Processando...",
-    "typeToConfirm": "Digite {text} para confirmar esta ação."
+    "typeToConfirm": "Digite {text} para confirmar esta ação.",
+    "confirmAction": "Confirmar ação"
   },
   "draggableWidget": {
     "dragToReorder": "Arraste para reordenar widget"
@@ -2070,7 +2107,18 @@
     },
     "grade": "Nota: {grade}",
     "missingFactors": "{count, plural, =1 {1 fator ausente} other {# fatores ausentes}}",
-    "title": "Saúde Financeira"
+    "title": "Saúde Financeira",
+    "history": {
+      "title": "Histórico de pontuação",
+      "monthsOfData": "{count} {count, plural, =1 {mês} other {meses}} de dados",
+      "emptyTitle": "Seu histórico de pontuação aparecerá aqui conforme os dados se acumulam",
+      "emptySubtitle": "Volte no próximo mês!",
+      "legendScore": "Pontuação",
+      "legendTrend": "Tendência",
+      "tooltipScore": "Pontuação",
+      "tooltipTrend": "Tendência",
+      "loadingChart": "Carregando gráfico..."
+    }
   },
   "holdingModal": {
     "addHolding": "Adicionar Ativo",
@@ -3304,6 +3352,51 @@
         "description": "Vamos organizar suas finanças em minutos.",
         "title": "Bem-vindo ao App de Orçamento"
       }
+    },
+    "welcome": {
+      "heroTitle": "Seu orçamento vive no SEU dispositivo",
+      "heroSubtitle": "Bem-vindo ao aplicativo de orçamento mais privado. Sem contas, sem nuvem, sem compromissos.",
+      "features": {
+        "yourDataTitle": "Seus dados, seu dispositivo",
+        "yourDataDescription": "Todos os dados financeiros são armazenados localmente. Sem servidores em nuvem, sem acesso de terceiros.",
+        "encryptionTitle": "Criptografia bancária",
+        "encryptionDescription": "A criptografia AES-256 protege seus dados. Apenas você tem a chave.",
+        "offlineTitle": "Funciona offline",
+        "offlineDescription": "Funcionalidade completa sem internet. Perfeito para usuários preocupados com privacidade.",
+        "zeroTrackingTitle": "Zero rastreamento",
+        "zeroTrackingDescription": "Sem análises, sem telemetria, sem coleta de dados. Suas finanças não são da conta de ninguém."
+      },
+      "whatsNext": "O que vem a seguir?",
+      "whatsNextIntro": "Nos próximos minutos, vamos ajudá-lo a:",
+      "step1": "Importar suas transações existentes (CSV bancário, OFX ou manual)",
+      "step2": "Categorizar automaticamente seus gastos",
+      "step3": "Criar seu primeiro orçamento baseado em gastos reais",
+      "step4": "Configurar lembretes de contas",
+      "getStarted": "Vamos começar!"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} transações precisam de categorias",
+      "allCategorized": "Todas as transações estão categorizadas!",
+      "applySmartSuggestions": "Aplicar sugestões inteligentes",
+      "categorize": "Categorizar",
+      "percentMatch": "{percent}% de correspondência",
+      "rememberChoices": "Lembrar minhas escolhas de categoria",
+      "rememberChoicesDescription": "Categorizar automaticamente transações semelhantes no futuro",
+      "categorized": "{count} categorizadas",
+      "remaining": "{count} restantes",
+      "continue": "Continuar",
+      "continueAnyway": "Continuar mesmo assim",
+      "categories": {
+        "foodDining": "Alimentação e Restaurantes",
+        "transportation": "Transporte",
+        "billsUtilities": "Contas e Serviços",
+        "shopping": "Compras",
+        "entertainment": "Entretenimento",
+        "healthFitness": "Saúde e Fitness",
+        "personalCare": "Cuidados pessoais",
+        "income": "Renda",
+        "transfers": "Transferências"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3754,7 +3847,14 @@
     "pinHelpText": "O PIN protege o acesso a este perfil. Escolha algo memorável, mas não muito simples.",
     "pinLabel": "PIN (4-6 dígitos)",
     "protectWithPin": "Proteger com PIN",
-    "saveChanges": "Salvar Alterações"
+    "saveChanges": "Salvar Alterações",
+    "errorDeleteFailed": "Falha ao excluir perfil",
+    "deleteTitle": "Excluir perfil?",
+    "defaultProfile": "Perfil padrão",
+    "cannotDeleteOnly": "Este é o único perfil. Você não pode excluí-lo.",
+    "permanentWarning": "Isso excluirá permanentemente este perfil. Quaisquer orçamentos privados deste perfil serão compartilhados com todos os perfis.",
+    "cannotUndo": "Esta ação não pode ser desfeita.",
+    "deleteButton": "Excluir perfil"
   },
   "pullToRefresh": {
     "pull": "Puxe para atualizar",
@@ -3852,7 +3952,8 @@
     "pdfReceipt": "Recibo em PDF",
     "receiptCount": "{count, plural, =1 {1 recibo} other {# recibos}}",
     "unsupportedFileType": "Tipo de arquivo não suportado",
-    "uploaded": "Enviado em {date}"
+    "uploaded": "Enviado em {date}",
+    "view": "Ver"
   },
   "receiptUpload": {
     "buttons": {
@@ -4515,6 +4616,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 dia restante no teste} other {# dias restantes no teste}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Desativar lembrete",
+      "enableReminder": "Ativar lembrete",
+      "off": "Desativado"
     }
   },
   "subscriptionCostChart": {
@@ -5169,5 +5275,126 @@
       "supportedFormats": "Formatos Suportados",
       "transactions": "Transações"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Importação concluída!",
+    "subtitle": "Definir o saldo da conta {accountName}",
+    "transactionsImported": "{count} transações importadas",
+    "netChange": "Variação líquida das transações:",
+    "currentBalanceLabel": "Qual é o seu saldo bancário atual?",
+    "currentBalanceLabelCredit": "Qual é o seu valor devido atual?",
+    "balanceHelperBank": "Abra seu aplicativo bancário e insira o saldo exibido",
+    "balanceHelperCredit": "Insira o saldo atual do extrato do cartão de crédito (como número positivo)",
+    "startingBalance": "Seu saldo inicial:",
+    "startingBalanceCredit": "Seu valor devido inicial:",
+    "balanceMatchNote": "Isso fará com que o saldo da sua conta corresponda ao do banco.",
+    "negativeWarning": "Isso resulta em um saldo inicial negativo, o que é incomum para contas correntes/poupança. Verifique seu saldo atual.",
+    "skipForNow": "Pular por enquanto",
+    "setBalance": "Definir saldo"
+  },
+  "recommendations": {
+    "title": "Principais recomendações",
+    "subtitle": "Formas de melhorar sua saúde financeira",
+    "emptyState": "Adicione mais dados financeiros para receber recomendações personalizadas",
+    "viewAllFactors": "Ver todos os fatores",
+    "factorLabels": {
+      "savingsRate": "Poupança",
+      "debtToIncome": "Dívidas",
+      "budgetAdherence": "Orçamento",
+      "emergencyFund": "Fundo de emergência",
+      "investmentGrowth": "Investimentos",
+      "expenseStability": "Despesas"
+    },
+    "factorLinks": {
+      "savingsRate": "Ver receitas",
+      "debtToIncome": "Gerenciar empréstimos",
+      "budgetAdherence": "Ajustar orçamentos",
+      "emergencyFund": "Planejar poupança",
+      "investmentGrowth": "Ver portfólio",
+      "expenseStability": "Ver relatórios"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Comerciante:",
+    "amount": "Valor:",
+    "average": "Média: {amount}",
+    "category": "Categoria:",
+    "wasExpected": "Isso era esperado?",
+    "expected": "Esperado",
+    "unexpected": "Inesperado",
+    "markedExpected": "Marcado como esperado",
+    "markedUnexpected": "Marcado como inesperado",
+    "moreAnomalies": "+{count} {count, plural, =1 {anomalia} other {anomalias}} a mais",
+    "severity": {
+      "high": "ALTO",
+      "medium": "MÉDIO",
+      "low": "BAIXO"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Processamento OCR",
+    "cancel": "Cancelar",
+    "pageProgress": "Página {current} de {total}",
+    "elapsed": "Decorrido: {time}",
+    "remaining": "~{time} restante",
+    "stages": {
+      "loading": "Carregando PDF",
+      "rendering": "Renderizando páginas",
+      "preprocessing": "Melhorando imagem",
+      "ocr": "Extraindo texto",
+      "parsing": "Analisando transações",
+      "complete": "Concluído",
+      "error": "Erro",
+      "cancelled": "Cancelado",
+      "enhance": "Melhorar"
+    },
+    "errorRetry": "O processamento OCR falhou. Deseja tentar novamente?",
+    "cancelledRetry": "O OCR foi cancelado. Deseja reiniciar?",
+    "retryButton": "Repetir OCR",
+    "completedSuccess": "OCR concluído com sucesso!",
+    "loadingChart": "Carregando gráfico..."
+  },
+  "developerTools": {
+    "title": "Ferramentas de desenvolvimento",
+    "subtitle": "Ferramentas QA para testar internacionalização (apenas modo de desenvolvimento)",
+    "pseudoLocaleLabel": "Ativar pseudo-locale (en-XA)",
+    "pseudoLocaleHelp": "Substitui todo o texto traduzido por caracteres acentuados. Qualquer texto em inglês restante é <strong>codificado diretamente</strong> e precisa ser convertido em chaves de tradução.",
+    "pseudoLocaleExample": "Exemplo: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Se você vê \"Dashboard\" em vez de \"[Ðášhƀóářð~~~]\", está codificado diretamente!",
+    "infoPseudoLocale": "O pseudo-locale ajuda a identificar strings não traduzidas durante o desenvolvimento",
+    "infoProduction": "Builds de produção excluem automaticamente o locale en-XA",
+    "infoSwitchBack": "Volte para um locale real para continuar o desenvolvimento normal"
+  },
+  "pageMetadata": {
+    "appName": "Aplicativo de orçamento",
+    "scenarios": "Cenários hipotéticos",
+    "merchantRules": "Regras de comerciantes",
+    "more": "Mais",
+    "netWorth": "Patrimônio líquido",
+    "properties": "Imóveis",
+    "propertyDetail": "Detalhes do imóvel",
+    "review": "Revisar transações",
+    "events": "Orçamentos de eventos",
+    "landing": "BudgetPro – Domine suas finanças",
+    "dashboard": "Painel",
+    "transactions": "Transações",
+    "import": "Importar",
+    "accounts": "Contas",
+    "budgets": "Orçamentos",
+    "categories": "Categorias",
+    "reports": "Relatórios",
+    "settings": "Configurações",
+    "subscriptions": "Assinaturas",
+    "investments": "Investimentos",
+    "debtPayoff": "Quitação de dívidas",
+    "loans": "Empréstimos",
+    "calculators": "Calculadoras",
+    "planning": "Planejamento",
+    "ocr": "Scanner de recibos",
+    "export": "Exportar",
+    "fridayReview": "Revisão semanal",
+    "onboarding": "Primeiros passos",
+    "offline": "Modo offline",
+    "splits": "Dividir transações"
   }
 }

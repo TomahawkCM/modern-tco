@@ -19,6 +19,9 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useFocusTrap } from "@/hooks/useFocusTrap";
+import { formatCurrency, getCurrencySymbol } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import type { SupportedLocale } from "@/i18n/config";
 
 interface BalanceReconciliationModalProps {
   open: boolean;
@@ -32,19 +35,6 @@ interface BalanceReconciliationModalProps {
   dateRangeEnd?: Date; // Latest transaction date
   onComplete: (startingBalance: number, currentBalance: number) => void;
   onSkip: () => void;
-}
-
-/**
- * Format a number as currency
- */
-function formatCurrency(amount: number, locale: string): string {
-  const formatter = new Intl.NumberFormat(locale, {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
-  });
-  return formatter.format(amount);
 }
 
 export function BalanceReconciliationModal({
@@ -61,7 +51,9 @@ export function BalanceReconciliationModal({
   onSkip,
 }: BalanceReconciliationModalProps) {
   const locale = useLocale();
+  const currency = useDefaultCurrency();
   const tAria = useTranslations("aria");
+  const t = useTranslations("balanceReconciliation");
   const [currentBalance, setCurrentBalance] = useState<string>("");
   const [calculatedStartingBalance, setCalculatedStartingBalance] = useState<number | null>(null);
   const modalRef = useFocusTrap(open);
@@ -141,11 +133,9 @@ export function BalanceReconciliationModal({
               </div>
               <div>
                 <h2 id="reconciliation-modal-title" className="text-lg font-bold text-foreground">
-                  Import Complete!
+                  {t("title")}
                 </h2>
-                <p className="text-sm text-muted-foreground">
-                  Set your account balance for {accountName}
-                </p>
+                <p className="text-sm text-muted-foreground">{t("subtitle", { accountName })}</p>
               </div>
             </div>
             <button
@@ -168,7 +158,7 @@ export function BalanceReconciliationModal({
               <div className="flex items-center gap-3">
                 <FileText className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm text-foreground">
-                  <span className="font-semibold">{transactionCount}</span> transactions imported
+                  {t("transactionsImported", { count: transactionCount })}
                 </span>
               </div>
             )}
@@ -188,12 +178,12 @@ export function BalanceReconciliationModal({
             <div className="flex items-start gap-3 border-t border-border pt-2">
               <Calculator className="mt-0.5 h-5 w-5 text-muted-foreground" />
               <div>
-                <p className="text-sm font-medium text-foreground">Net change from transactions:</p>
+                <p className="text-sm font-medium text-foreground">{t("netChange")}</p>
                 <p
                   className={`text-2xl font-bold ${transactionNetChange >= 0 ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
                 >
                   {transactionNetChange >= 0 ? "+" : ""}
-                  {formatCurrency(transactionNetChange, locale)}
+                  {formatCurrency(transactionNetChange, currency, locale as SupportedLocale)}
                 </p>
               </div>
             </div>
@@ -206,13 +196,11 @@ export function BalanceReconciliationModal({
                 htmlFor="current-balance"
                 className="mb-2 block text-base font-semibold text-foreground"
               >
-                {isCreditCard
-                  ? "What is your current amount owed?"
-                  : "What is your current bank balance?"}
+                {isCreditCard ? t("currentBalanceLabelCredit") : t("currentBalanceLabel")}
               </label>
               <div className="relative">
                 <span className="absolute start-4 top-1/2 -translate-y-1/2 text-lg text-muted-foreground">
-                  $
+                  {getCurrencySymbol(currency, locale as SupportedLocale)}
                 </span>
                 <input
                   id="current-balance"
@@ -232,11 +220,7 @@ export function BalanceReconciliationModal({
                 className="mt-2 flex items-start gap-2 text-sm text-muted-foreground"
               >
                 <Info className="mt-0.5 h-4 w-4 flex-shrink-0" />
-                <span>
-                  {isCreditCard
-                    ? "Enter the current balance shown on your credit card statement (as a positive number)"
-                    : "Open your banking app and enter the balance shown for this account"}
-                </span>
+                <span>{isCreditCard ? t("balanceHelperCredit") : t("balanceHelperBank")}</span>
               </p>
             </div>
 
@@ -249,13 +233,17 @@ export function BalanceReconciliationModal({
                   </div>
                   <div>
                     <p className="text-sm font-medium text-green-800 dark:text-green-200">
-                      {isCreditCard ? "Your starting amount owed:" : "Your starting balance:"}
+                      {isCreditCard ? t("startingBalanceCredit") : t("startingBalance")}
                     </p>
                     <p className="text-xl font-bold text-green-700 dark:text-green-300">
-                      {formatCurrency(Math.abs(calculatedStartingBalance), locale)}
+                      {formatCurrency(
+                        Math.abs(calculatedStartingBalance),
+                        currency,
+                        locale as SupportedLocale
+                      )}
                     </p>
                     <p className="mt-1 text-xs text-green-600 dark:text-green-400">
-                      This will make your account balance match your bank.
+                      {t("balanceMatchNote")}
                     </p>
                   </div>
                 </div>
@@ -270,8 +258,7 @@ export function BalanceReconciliationModal({
                   <div className="flex items-start gap-2">
                     <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-600 dark:text-amber-400" />
                     <p className="text-sm text-amber-800 dark:text-amber-200">
-                      This results in a negative starting balance, which is unusual for
-                      checking/savings. Please double-check your current balance is correct.
+                      {t("negativeWarning")}
                     </p>
                   </div>
                 </div>
@@ -284,14 +271,14 @@ export function BalanceReconciliationModal({
                 onClick={handleSkip}
                 className="flex-1 rounded-lg border-2 border-border px-4 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-muted"
               >
-                Skip for now
+                {t("skipForNow")}
               </button>
               <button
                 type="submit"
                 disabled={calculatedStartingBalance === null}
                 className="flex-1 rounded-lg bg-teal-500 px-4 py-3 text-base font-semibold text-white shadow-md transition-colors hover:bg-teal-600 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Set Balance
+                {t("setBalance")}
               </button>
             </div>
           </form>

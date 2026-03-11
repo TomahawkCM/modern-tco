@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "بازگشت به صفحه اصلی"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "سال {n}",
+      "yearLabel": "سال",
+      "month": "ماه {n}",
+      "monthYear": "ماه {n} (سال {y})",
+      "age": "سن {n}",
+      "ageLabel": "سن",
+      "contributions": "واریزی‌ها",
+      "interestEarned": "سود کسب شده",
+      "interest": "سود",
+      "totalInterest": "سود کل",
+      "snowball": "گلوله برفی",
+      "avalanche": "بهمن",
+      "portfolio": "سبد سرمایه‌گذاری",
+      "fireTarget": "هدف FIRE",
+      "median50th": "میانه (صدک ۵۰)",
+      "remainingBalance": "موجودی باقی‌مانده",
+      "totalAssets": "کل دارایی‌ها",
+      "totalLiabilities": "کل بدهی‌ها",
+      "netWorth": "ارزش خالص",
+      "retirement": "بازنشستگی"
+    },
+    "scenario": {
+      "compare": "مقایسه سناریوها ({count} ذخیره‌شده)",
+      "selectUpTo": "حداکثر ۳ سناریو برای مقایسه انتخاب کنید:",
+      "duplicate": "تکثیر",
+      "delete": "حذف",
+      "sideBySide": "مقایسه کنار هم",
+      "field": "فیلد",
+      "delta": "تفاوت",
+      "selectOneMore": "یک سناریوی دیگر برای مقایسه انتخاب کنید",
+      "copySuffix": "(کپی)"
+    },
+    "openCalculator": "باز کردن ماشین‌حساب"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "حذف",
     "edit": "ویرایش",
     "loading": "در حال بارگذاری...",
-    "save": "ذخیره"
+    "save": "ذخیره",
+    "success": "موفقیت!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "تأیید",
     "finalConfirmation": "تأیید نهایی:",
     "processing": "در حال پردازش...",
-    "typeToConfirm": "برای تأیید این عمل، {text} را تایپ کنید."
+    "typeToConfirm": "برای تأیید این عمل، {text} را تایپ کنید.",
+    "confirmAction": "تأیید عملیات"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "تاریخچه امتیاز",
+      "monthsOfData": "{count} {count, plural, =1 {ماه} other {ماه}} داده",
+      "emptyTitle": "تاریخچه امتیاز شما با جمع‌آوری داده‌ها اینجا نمایش داده خواهد شد",
+      "emptySubtitle": "ماه آینده دوباره بررسی کنید!",
+      "legendScore": "امتیاز",
+      "legendTrend": "روند",
+      "tooltipScore": "امتیاز",
+      "tooltipTrend": "روند",
+      "loadingChart": "بارگذاری نمودار..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "بودجه شما روی دستگاه خودتان زندگی می‌کند",
+      "heroSubtitle": "به خصوصی‌ترین اپلیکیشن بودجه خوش آمدید. بدون حساب کاربری، بدون فضای ابری، بدون مصالحه.",
+      "features": {
+        "yourDataTitle": "داده‌های شما، دستگاه شما",
+        "yourDataDescription": "تمام داده‌های مالی به صورت محلی روی دستگاه شما ذخیره می‌شوند. بدون سرور ابری، بدون دسترسی شخص ثالث.",
+        "encryptionTitle": "رمزنگاری سطح بانکی",
+        "encryptionDescription": "رمزنگاری AES-256 از داده‌های شما محافظت می‌کند. فقط شما کلید را دارید — هرگز از دستگاه شما خارج نمی‌شود.",
+        "offlineTitle": "بدون اینترنت کار می‌کند",
+        "offlineDescription": "عملکرد کامل بدون اینترنت. مناسب برای کاربرانی که به حریم خصوصی اهمیت می‌دهند.",
+        "zeroTrackingTitle": "بدون ردیابی",
+        "zeroTrackingDescription": "بدون تحلیل، بدون تله‌متری، بدون جمع‌آوری داده. امور مالی شما به کسی مربوط نیست."
+      },
+      "whatsNext": "مرحله بعد چیست؟",
+      "whatsNextIntro": "در چند دقیقه آینده، به شما کمک می‌کنیم:",
+      "step1": "وارد کردن تراکنش‌های موجود (CSV بانکی، OFX یا دستی)",
+      "step2": "دسته‌بندی خودکار هزینه‌ها",
+      "step3": "ایجاد اولین بودجه بر اساس هزینه‌های واقعی",
+      "step4": "تنظیم یادآوری قبض‌ها تا هیچ پرداختی را از دست ندهید",
+      "getStarted": "بیایید شروع کنیم"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} تراکنش نیاز به دسته‌بندی دارند",
+      "allCategorized": "همه تراکنش‌ها دسته‌بندی شده‌اند!",
+      "applySmartSuggestions": "اعمال پیشنهادات هوشمند",
+      "categorize": "دسته‌بندی",
+      "percentMatch": "{percent}% تطابق",
+      "rememberChoices": "انتخاب‌های دسته‌بندی من را به خاطر بسپار",
+      "rememberChoicesDescription": "دسته‌بندی خودکار تراکنش‌های مشابه در آینده",
+      "categorized": "{count} دسته‌بندی شده",
+      "remaining": "{count} باقی‌مانده",
+      "continue": "ادامه",
+      "continueAnyway": "ادامه به هر حال",
+      "categories": {
+        "foodDining": "غذا و رستوران",
+        "transportation": "حمل‌ونقل",
+        "billsUtilities": "قبوض و خدمات",
+        "shopping": "خرید",
+        "entertainment": "سرگرمی",
+        "healthFitness": "سلامت و تناسب اندام",
+        "personalCare": "مراقبت شخصی",
+        "income": "درآمد",
+        "transfers": "انتقال‌ها"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "حذف نمایه ناموفق بود",
+    "deleteTitle": "حذف نمایه؟",
+    "defaultProfile": "نمایه پیش‌فرض",
+    "cannotDeleteOnly": "این تنها نمایه است. نمی‌توانید آن را حذف کنید.",
+    "permanentWarning": "این نمایه برای همیشه حذف خواهد شد. هرگونه بودجه خصوصی متعلق به این نمایه با همه نمایه‌ها به اشتراک گذاشته می‌شود.",
+    "cannotUndo": "این عملیات قابل بازگشت نیست.",
+    "deleteButton": "حذف نمایه"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "مشاهده"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "غیرفعال کردن یادآوری",
+      "enableReminder": "فعال کردن یادآوری",
+      "off": "خاموش"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "واردات کامل شد!",
+    "subtitle": "موجودی حساب را برای {accountName} تنظیم کنید",
+    "transactionsImported": "{count} تراکنش وارد شد",
+    "netChange": "تغییر خالص از تراکنش‌ها:",
+    "currentBalanceLabel": "موجودی فعلی حساب بانکی شما چقدر است؟",
+    "currentBalanceLabelCredit": "مبلغ فعلی بدهی شما چقدر است؟",
+    "balanceHelperBank": "اپلیکیشن بانکی خود را باز کنید و موجودی نمایش داده شده برای این حساب را وارد کنید",
+    "balanceHelperCredit": "موجودی فعلی نمایش داده شده در صورتحساب کارت اعتباری خود را وارد کنید (به صورت عدد مثبت)",
+    "startingBalance": "موجودی اولیه شما:",
+    "startingBalanceCredit": "مبلغ بدهی اولیه شما:",
+    "balanceMatchNote": "این کار موجودی حساب شما را با بانک مطابقت می‌دهد.",
+    "negativeWarning": "این منجر به موجودی اولیه منفی می‌شود که برای حساب‌های جاری/پس‌انداز غیرعادی است. لطفاً موجودی فعلی خود را دوباره بررسی کنید.",
+    "skipForNow": "فعلاً رد شو",
+    "setBalance": "تنظیم موجودی"
+  },
+  "recommendations": {
+    "title": "توصیه‌های برتر",
+    "subtitle": "راه‌هایی برای بهبود سلامت مالی شما",
+    "emptyState": "داده‌های مالی بیشتری اضافه کنید تا توصیه‌های شخصی‌سازی شده دریافت کنید",
+    "viewAllFactors": "مشاهده همه عوامل",
+    "factorLabels": {
+      "savingsRate": "پس‌انداز",
+      "debtToIncome": "بدهی",
+      "budgetAdherence": "بودجه",
+      "emergencyFund": "صندوق اضطراری",
+      "investmentGrowth": "سرمایه‌گذاری‌ها",
+      "expenseStability": "هزینه‌ها"
+    },
+    "factorLinks": {
+      "savingsRate": "مشاهده درآمد",
+      "debtToIncome": "مدیریت وام‌ها",
+      "budgetAdherence": "تنظیم بودجه‌ها",
+      "emergencyFund": "برنامه‌ریزی پس‌انداز",
+      "investmentGrowth": "مشاهده سبد سرمایه‌گذاری",
+      "expenseStability": "مشاهده گزارش‌ها"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "فروشنده:",
+    "amount": "مبلغ:",
+    "average": "میانگین: {amount}",
+    "category": "دسته‌بندی:",
+    "wasExpected": "آیا این مورد انتظار بود؟",
+    "expected": "مورد انتظار",
+    "unexpected": "غیرمنتظره",
+    "markedExpected": "به عنوان مورد انتظار علامت‌گذاری شد",
+    "markedUnexpected": "به عنوان غیرمنتظره علامت‌گذاری شد",
+    "moreAnomalies": "+{count} {count, plural, =1 {ناهنجاری} other {ناهنجاری}} دیگر",
+    "severity": {
+      "high": "بالا",
+      "medium": "متوسط",
+      "low": "پایین"
+    }
+  },
+  "pdfOcr": {
+    "processing": "پردازش OCR",
+    "cancel": "لغو",
+    "pageProgress": "صفحه {current} از {total}",
+    "elapsed": "زمان سپری شده: {time}",
+    "remaining": "~{time} باقی‌مانده",
+    "stages": {
+      "loading": "بارگذاری PDF",
+      "rendering": "پردازش صفحات",
+      "preprocessing": "بهبود تصویر",
+      "ocr": "استخراج متن",
+      "parsing": "تحلیل تراکنش‌ها",
+      "complete": "کامل شد",
+      "error": "خطا",
+      "cancelled": "لغو شد",
+      "enhance": "بهبود"
+    },
+    "errorRetry": "پردازش OCR ناموفق بود. آیا می‌خواهید دوباره امتحان کنید؟",
+    "cancelledRetry": "OCR لغو شد. آیا می‌خواهید دوباره شروع کنید؟",
+    "retryButton": "تلاش مجدد OCR",
+    "completedSuccess": "OCR با موفقیت کامل شد!",
+    "loadingChart": "بارگذاری نمودار..."
+  },
+  "developerTools": {
+    "title": "ابزارهای توسعه‌دهنده",
+    "subtitle": "ابزارهای QA برای تست بین‌المللی‌سازی (فقط حالت توسعه)",
+    "pseudoLocaleLabel": "فعال‌سازی شبه-محلی (en-XA)",
+    "pseudoLocaleHelp": "تمام متن ترجمه‌شده را با نویسه‌های تاکیددار جایگزین می‌کند. هر متن انگلیسی ساده باقی‌مانده <strong>هاردکد شده</strong> است و باید به کلیدهای ترجمه تبدیل شود.",
+    "pseudoLocaleExample": "مثال: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "اگر \"Dashboard\" را به جای \"[Ðášhƀóářð~~~]\" می‌بینید، هاردکد شده است!",
+    "infoPseudoLocale": "شبه-محلی به شناسایی رشته‌های ترجمه‌نشده در حین توسعه کمک می‌کند",
+    "infoProduction": "نسخه‌های تولیدی به‌طور خودکار محلی en-XA را حذف می‌کنند",
+    "infoSwitchBack": "برای ادامه توسعه عادی به یک محلی واقعی بازگردید"
+  },
+  "pageMetadata": {
+    "appName": "اپلیکیشن بودجه",
+    "scenarios": "سناریوهای فرضی",
+    "merchantRules": "قوانین فروشندگان",
+    "more": "بیشتر",
+    "netWorth": "دارایی خالص",
+    "properties": "املاک",
+    "propertyDetail": "جزئیات ملک",
+    "review": "بررسی تراکنش‌ها",
+    "events": "بودجه رویدادها",
+    "landing": "BudgetPro - بر مالی خود مسلط شوید",
+    "dashboard": "داشبورد",
+    "transactions": "تراکنش‌ها",
+    "import": "وارد کردن",
+    "accounts": "حساب‌ها",
+    "budgets": "بودجه‌ها",
+    "categories": "دسته‌بندی‌ها",
+    "reports": "گزارش‌ها",
+    "settings": "تنظیمات",
+    "subscriptions": "اشتراک‌ها",
+    "investments": "سرمایه‌گذاری‌ها",
+    "debtPayoff": "پرداخت بدهی",
+    "loans": "وام‌ها",
+    "calculators": "ماشین‌حساب‌ها",
+    "planning": "برنامه‌ریزی",
+    "ocr": "اسکنر رسید",
+    "export": "خروجی",
+    "fridayReview": "بررسی هفتگی",
+    "onboarding": "شروع",
+    "offline": "حالت آفلاین",
+    "splits": "تقسیم تراکنش‌ها"
   }
 }

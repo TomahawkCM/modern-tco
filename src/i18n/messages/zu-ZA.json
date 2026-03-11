@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Buyela Ekhaya"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Unyaka {n}",
+      "yearLabel": "Unyaka",
+      "month": "Inyanga {n}",
+      "monthYear": "Inyanga {n} (Unyaka {y})",
+      "age": "Iminyaka {n}",
+      "ageLabel": "Iminyaka",
+      "contributions": "Iminikelo",
+      "interestEarned": "Inzuzo Etholakele",
+      "interest": "Inzuzo",
+      "totalInterest": "Inzuzo Yonke",
+      "snowball": "I-Snowball",
+      "avalanche": "I-Avalanche",
+      "portfolio": "Iphothifoliyo",
+      "fireTarget": "Umgomo we-FIRE",
+      "median50th": "Umaphakathi (Ama-50)",
+      "remainingBalance": "Ibhalansi Esele",
+      "totalAssets": "Impahla Yonke",
+      "totalLiabilities": "Izikweletu Zonke",
+      "netWorth": "Inani Eliphelele",
+      "retirement": "Umhlalaphansi"
+    },
+    "scenario": {
+      "compare": "Qhathanisa Izimo ({count} zigciniwe)",
+      "selectUpTo": "Khetha kuze kube izimo ezi-3 ukuze uqhathanise:",
+      "duplicate": "Phinda",
+      "delete": "Susa",
+      "sideBySide": "Ukuqhathanisa Uhlangothi Nohlangothi",
+      "field": "Inkambu",
+      "delta": "Umehluko",
+      "selectOneMore": "Khetha esinye isimo ukuze uqhathanise",
+      "copySuffix": "(ikhophi)"
+    },
+    "openCalculator": "Vula isibali"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Verwyder",
     "edit": "Wysig",
     "loading": "Laai...",
-    "save": "Stoor"
+    "save": "Stoor",
+    "success": "Impumelelo!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Bevestig",
     "finalConfirmation": "Finale Bevestiging:",
     "processing": "Verwerk...",
-    "typeToConfirm": "Tik {text} om hierdie aksie te bevestig."
+    "typeToConfirm": "Tik {text} om hierdie aksie te bevestig.",
+    "confirmAction": "Qinisekisa Isenzo"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Umlando Wamaphuzu Ezempilo",
+      "monthsOfData": "{months} Izinyanga Zedatha",
+      "emptyTitle": "Awukho Umlando Okwamanje",
+      "emptySubtitle": "Umlando wamaphuzu akho ezempilo uzovela lapha ngemva kwenyanga yakho yokuqala",
+      "legendScore": "Amaphuzu",
+      "legendTrend": "Isimo",
+      "tooltipScore": "Amaphuzu: {score}",
+      "tooltipTrend": "Isimo: {direction}",
+      "loadingChart": "Ilayisha ishadi..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Isabelomali Sakho Sihlala Kudivayisi YAKHO",
+      "heroSubtitle": "Siyakwamukela ku-app yesabelomali eyimfihlo kakhulu. Ayikho i-akhawunti, ayikho ifu, awukho umvumelwano.",
+      "features": {
+        "yourDataTitle": "Idatha Yakho, Idivayisi Yakho",
+        "yourDataDescription": "Yonke idatha yezezimali igcinwa endaweni kudivayisi yakho. Ayikho imininingwane yamafu, ayikho indawo yokungena yabantu besithathu.",
+        "encryptionTitle": "Ukubethela Kwezinga Lasebhange",
+        "encryptionDescription": "Ukubethela kwe-AES-256 kuvikela idatha yakho. Nguwe kuphela onesikhiye—asiphumi kudivayisi yakho.",
+        "offlineTitle": "Isebenza Ngaphandle Kwe-inthanethi",
+        "offlineDescription": "Umsebenzi ophelele ngaphandle kwe-inthanethi. Kulungele abasebenzisi abanaka ubumfihlo.",
+        "zeroTrackingTitle": "Ukuqapha Okuyiziro",
+        "zeroTrackingDescription": "Ayikho i-analytics, ayikho i-telemetry, ayikho ukuqoqwa kwedatha. Izezimali zakho aziyindaba kamuntu."
+      },
+      "whatsNext": "Okulandelayo Yini?",
+      "whatsNextIntro": "Emizuzwini embalwa ezayo, sizokusiza:",
+      "step1": "Ngenisa imisebenzi yakho ekhona (ibhange CSV, OFX, noma ngesandla)",
+      "step2": "Hlukanisa ukusebenzisa kwakho ngokuzenzakalela",
+      "step3": "Dala isabelomali sakho sokuqala ngokusekelwe ekusebenziseni kwangempela",
+      "step4": "Misa izikhumbuzo zamabhili ukuze ungalokothi uphuthelwe ukukhokha",
+      "getStarted": "Masiqale"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} imisebenzi idinga izigaba",
+      "allCategorized": "Yonke imisebenzi ihlukanisiwe!",
+      "applySmartSuggestions": "Sebenzisa Iziphakamiso Ezihlakaniphile",
+      "categorize": "Hlukanisa",
+      "percentMatch": "{percent}% ukufana",
+      "rememberChoices": "Khumbula ukukhetha kwami kwezigaba",
+      "rememberChoicesDescription": "Hlukanisa ngokuzenzakalela imisebenzi efanayo esikhathini esizayo",
+      "categorized": "{count} kuhlukanisiwe",
+      "remaining": "{count} okusele",
+      "continue": "Qhubeka",
+      "continueAnyway": "Qhubeka Noma Kunjalo",
+      "categories": {
+        "foodDining": "Ukudla Nokudlela",
+        "transportation": "Ezokuthutha",
+        "billsUtilities": "Ama-akhawunti Nezinsiza",
+        "shopping": "Ukuthenga",
+        "entertainment": "Ukuzijabulisa",
+        "healthFitness": "Impilo Nokuqeqesha",
+        "personalCare": "Ukunakekela Komuntu Siqu",
+        "income": "Imali Engenayo",
+        "transfers": "Ukudlulisa"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Yehlulekile ukususa iphrofayili",
+    "deleteTitle": "Susa iphrofayili?",
+    "defaultProfile": "Iphrofayili ezenzakalelayo",
+    "cannotDeleteOnly": "Lena kuphela kwephrofayili. Awukwazi ukuyisusa.",
+    "permanentWarning": "Lokhu kuzosusa leli phrofayili unomphela. Noma yiziphi izabelomali eziyimfihlo zaleli phrofayili zizokwabelana nawo wonke amaphrofayili.",
+    "cannotUndo": "Lesi senzo asikwazi ukuhlehliswa.",
+    "deleteButton": "Susa iphrofayili"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Buka"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Khubaza Isikhumbuzo",
+      "enableReminder": "Vumela Isikhumbuzo",
+      "off": "Kuvaliwe"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Ukuvumelanisa Kwebhalansi",
+    "subtitle": "Hlanganisa imisebenzi yakho engenisiwe nebhalansi ye-akhawunti yakho yangempela",
+    "transactionsImported": "{count} imisebenzi ingenisiwe",
+    "netChange": "Ushintsho Oluhlanzekile",
+    "currentBalanceLabel": "Ibhalansi Yamanje (kusuka ebhange)",
+    "currentBalanceLabelCredit": "Ibhalansi Yamanje (ikhadi lesikweletu)",
+    "balanceHelperBank": "Faka ibhalansi yamanje eboniswa kuwebhusayithi noma ku-app yakho yasebhange",
+    "balanceHelperCredit": "Faka ibhalansi yamanje esele ekhadini lakho lesikweletu",
+    "startingBalance": "Ibhalansi Yokuqala",
+    "startingBalanceCredit": "Ibhalansi Yokuqala (Ikhadi Lesikweletu)",
+    "balanceMatchNote": "Lokhu kusiza ukuqinisekisa ukuthi umlando wakho wemisebenzi uphelele futhi unembile",
+    "negativeWarning": "Lokhu kuzobangela ibhalansi yokuqala engaphansi kweziro. Sicela uqinisekise ibhalansi yakho yamanje.",
+    "skipForNow": "Yeqa Okwamanje",
+    "setBalance": "Setha Ibhalansi"
+  },
+  "recommendations": {
+    "title": "Izincomo",
+    "subtitle": "Iziphakamiso eziyinhloso ngokusekelwe empilweni yakho yezezimali",
+    "emptyState": "Azikho izincomo okwamanje. Qhubeka ulandelela izezimali zakho!",
+    "viewAllFactors": "Buka Zonke Izizathu",
+    "factorLabels": {
+      "savingsRate": "Izinga Lokonga",
+      "debtToIncome": "Isikweletu Kumholo",
+      "budgetAdherence": "Ukuhlala Esabelomalini",
+      "emergencyFund": "Isikhwama Sezimo Eziphuthumayo",
+      "investmentGrowth": "Ukukhula Kotshalomali",
+      "expenseStability": "Ukuzinza Kwezindleko"
+    },
+    "factorLinks": {
+      "savingsRate": "Buka amathiphu okonga",
+      "debtToIncome": "Phatha isikweletu",
+      "budgetAdherence": "Lungisa isabelomali",
+      "emergencyFund": "Yakha isikhwama sezimo eziphuthumayo",
+      "investmentGrowth": "Amasu otshalomali",
+      "expenseStability": "Zinzisa izindleko"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Umthengisi",
+    "amount": "Inani",
+    "average": "Isilinganiso",
+    "category": "Isigaba",
+    "wasExpected": "Ingabe lokhu bekulindelwe?",
+    "expected": "Okulindelwe",
+    "unexpected": "Okungalindelwe",
+    "markedExpected": "Kuphawulwe njengokulindelwe",
+    "markedUnexpected": "Kuphawulwe njengokungalindelwe",
+    "moreAnomalies": "{count} okunye okungajwayelekile",
+    "severity": {
+      "high": "PHEZULU",
+      "medium": "MAPHAKATHI",
+      "low": "PHANSI"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Icubungula i-PDF...",
+    "cancel": "Khansela",
+    "pageProgress": "Ikhasi {current} kwangu-{total}",
+    "elapsed": "Isikhathi esidlulile: {time}",
+    "remaining": "Okusele: {time}",
+    "stages": {
+      "loading": "Iyalayisha",
+      "rendering": "Iyaveza",
+      "preprocessing": "Ilungisa Ngaphambili",
+      "ocr": "I-OCR",
+      "parsing": "Iyahlaziya",
+      "complete": "Kuqediwe",
+      "error": "Iphutha",
+      "cancelled": "Kukhanseliwe",
+      "enhance": "Thuthukisa"
+    },
+    "errorRetry": "Ukucubungula kwe-OCR kuhlulekile. Ungathanda ukuzama futhi?",
+    "cancelledRetry": "I-OCR ikhanseliwe. Ungathanda ukuqala kabusha?",
+    "retryButton": "Phinda i-OCR",
+    "completedSuccess": "I-OCR iphumelele ngempumelelo!",
+    "loadingChart": "Ilayisha ishadi..."
+  },
+  "developerTools": {
+    "title": "Amathuluzi Okuthuthukisa",
+    "subtitle": "Amathuluzi e-QA okuhlola ukwenza izinto zibe zomhlaba wonke (imodi yokuthuthukisa kuphela)",
+    "pseudoLocaleLabel": "Vumela i-Pseudo-Locale (en-XA)",
+    "pseudoLocaleHelp": "Ishintsha wonke umbhalo ohunyushiwe ngezinhlamvu ezinomsindo. Umbhalo wesiNgisi osele ojwayelekile u-<strong>hardcoded</strong> futhi udinga ukuguqulwa kube okhiye bokuhumusha.",
+    "pseudoLocaleExample": "Isibonelo: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Uma ubona \"Dashboard\" esikhundleni sika-\"[Ðášhƀóářð~~~]\", i-hardcoded!",
+    "infoPseudoLocale": "I-pseudo-locale isiza ukuhlonza izinhlamvu ezingahunyushiwe ngesikhathi sokuthuthukisa",
+    "infoProduction": "Ukwakhiwa kokusebenza ngokuzenzakalelayo kukhipha i-locale ye-en-XA",
+    "infoSwitchBack": "Buyela ku-locale yangempela ukuze uqhubeke nokuthuthukisa okujwayelekile"
+  },
+  "pageMetadata": {
+    "appName": "Uhlelo Lokusebenza Lwesabelomali",
+    "scenarios": "Izimo Ze-What-If",
+    "merchantRules": "Imithetho Yomthengisi",
+    "more": "Okuningi",
+    "netWorth": "Inani Elicacile",
+    "properties": "Izakhiwo",
+    "propertyDetail": "Imininingwane Yesakhiwo",
+    "review": "Buyekeza Ukuthengiselana",
+    "events": "Izabelomali Zemicimbi",
+    "landing": "BudgetPro - Lawula Izimali Zakho",
+    "dashboard": "Ideshibhodi",
+    "transactions": "Ukuthengiselana",
+    "import": "Ngenisa",
+    "accounts": "Ama-akhawunti",
+    "budgets": "Izabelomali",
+    "categories": "Izigaba",
+    "reports": "Imibiko",
+    "settings": "Izilungiselelo",
+    "subscriptions": "Okubhaliswe",
+    "investments": "Ukutshalwa Kwezimali",
+    "debtPayoff": "Ukukhokha Isikweletu",
+    "loans": "Imalimboleko",
+    "calculators": "Izibali",
+    "planning": "Ukuhlela",
+    "ocr": "Isikena Samarisethi",
+    "export": "Thumela Ngaphandle",
+    "fridayReview": "Ukubuyekeza Kwamasonto",
+    "onboarding": "Ukuqala",
+    "offline": "Imodi engaxhunyiwe",
+    "splits": "Hlukanisa imisebenzi"
   }
 }

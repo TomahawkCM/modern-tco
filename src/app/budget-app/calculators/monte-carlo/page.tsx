@@ -34,6 +34,9 @@ const MonteCarloChart = lazy(() =>
       data,
       locale,
       currency,
+      yearLabel,
+      yearFormatter,
+      median50thLabel,
     }: {
       data: {
         year: number;
@@ -45,6 +48,9 @@ const MonteCarloChart = lazy(() =>
       }[];
       locale: SupportedLocale;
       currency: string;
+      yearLabel: string;
+      yearFormatter: (label: number) => string;
+      median50thLabel: string;
     }) => {
       const { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
         mod;
@@ -68,7 +74,7 @@ const MonteCarloChart = lazy(() =>
               stroke="#64748b"
               tick={{ fontSize: 12 }}
               label={{
-                value: "Year",
+                value: yearLabel,
                 position: "insideBottomRight",
                 offset: -5,
                 fill: "#64748b",
@@ -92,7 +98,7 @@ const MonteCarloChart = lazy(() =>
                 formatCurrency(value, currency, locale),
                 name,
               ]}
-              labelFormatter={(label: number) => `Year ${label}`}
+              labelFormatter={(label: number) => yearFormatter(label)}
             />
             <Legend />
 
@@ -141,7 +147,7 @@ const MonteCarloChart = lazy(() =>
               stroke="#8b5cf6"
               strokeWidth={2.5}
               fill="none"
-              name="Median (50th)"
+              name={median50thLabel}
               dot={false}
             />
           </AreaChart>
@@ -537,7 +543,14 @@ export default function MonteCarloPage() {
             </div>
           </div>
           <Suspense fallback={<ChartSkeleton />}>
-            <MonteCarloChart data={chartData} locale={locale} currency={currency} />
+            <MonteCarloChart
+              data={chartData}
+              locale={locale}
+              currency={currency}
+              yearLabel={t("chart.yearLabel")}
+              yearFormatter={(label: number) => t("chart.year", { n: label })}
+              median50thLabel={t("chart.median50th")}
+            />
           </Suspense>
         </div>
       )}

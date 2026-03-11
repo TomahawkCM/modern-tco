@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Назад на головну"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Рік {n}",
+      "yearLabel": "Рік",
+      "month": "Місяць {n}",
+      "monthYear": "Місяць {n} (Рік {y})",
+      "age": "Вік {n}",
+      "ageLabel": "Вік",
+      "contributions": "Внески",
+      "interestEarned": "Зароблені відсотки",
+      "interest": "Відсотки",
+      "totalInterest": "Загальні відсотки",
+      "snowball": "Сніжний ком",
+      "avalanche": "Лавина",
+      "portfolio": "Портфель",
+      "fireTarget": "FIRE ціль",
+      "median50th": "Медіана (50-та)",
+      "remainingBalance": "Залишок балансу",
+      "totalAssets": "Загальні активи",
+      "totalLiabilities": "Загальні зобов'язання",
+      "netWorth": "Чиста вартість",
+      "retirement": "Пенсія"
+    },
+    "scenario": {
+      "compare": "Порівняти сценарії ({count} збережених)",
+      "selectUpTo": "Виберіть до 3 сценаріїв для порівняння:",
+      "duplicate": "Дублювати",
+      "delete": "Видалити",
+      "sideBySide": "Порівняння пліч-о-пліч",
+      "field": "Поле",
+      "delta": "Різниця",
+      "selectOneMore": "Виберіть ще один сценарій для порівняння",
+      "copySuffix": "(копія)"
+    },
+    "openCalculator": "Відкрити калькулятор"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Видалити",
     "edit": "Редагувати",
     "loading": "Завантаження...",
-    "save": "Зберегти"
+    "save": "Зберегти",
+    "success": "Успіх!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Підтвердити",
     "finalConfirmation": "Остаточне підтвердження:",
     "processing": "Обробка...",
-    "typeToConfirm": "Введіть {text}, щоб підтвердити цю дію."
+    "typeToConfirm": "Введіть {text}, щоб підтвердити цю дію.",
+    "confirmAction": "Підтвердити дію"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Історія оцінки",
+      "monthsOfData": "{count} {count, plural, =1 {місяць} other {місяців}} даних",
+      "emptyTitle": "Ваша історія оцінки з'явиться тут, коли накопичаться дані",
+      "emptySubtitle": "Перевірте знову наступного місяця!",
+      "legendScore": "Оцінка",
+      "legendTrend": "Тенденція",
+      "tooltipScore": "Оцінка",
+      "tooltipTrend": "Тенденція",
+      "loadingChart": "Завантаження графіка..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Ваш бюджет живе на ВАШОМУ пристрої",
+      "heroSubtitle": "Ласкаво просимо до найприватнішого бюджетного додатку. Без облікових записів, без хмари, без компромісів.",
+      "features": {
+        "yourDataTitle": "Ваші дані, ваш пристрій",
+        "yourDataDescription": "Усі фінансові дані зберігаються локально на вашому пристрої. Без хмарних серверів, без доступу третіх осіб.",
+        "encryptionTitle": "Шифрування банківського рівня",
+        "encryptionDescription": "AES-256 шифрування захищає ваші дані. Тільки ви маєте ключ — він ніколи не залишає ваш пристрій.",
+        "offlineTitle": "Працює офлайн",
+        "offlineDescription": "Повна функціональність без інтернету. Ідеально для користувачів, які цінують приватність.",
+        "zeroTrackingTitle": "Нульове відстеження",
+        "zeroTrackingDescription": "Без аналітики, без телеметрії, без збору даних. Ваші фінанси — це нічия справа."
+      },
+      "whatsNext": "Що далі?",
+      "whatsNextIntro": "У наступні кілька хвилин ми допоможемо вам:",
+      "step1": "Імпортувати наявні транзакції (банківський CSV, OFX або вручну)",
+      "step2": "Автоматично категоризувати ваші витрати",
+      "step3": "Створити свій перший бюджет на основі реальних витрат",
+      "step4": "Налаштувати нагадування про рахунки, щоб ніколи не пропустити оплату",
+      "getStarted": "Почнімо"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} транзакцій потребують категорій",
+      "allCategorized": "Усі транзакції категоризовані!",
+      "applySmartSuggestions": "Застосувати розумні пропозиції",
+      "categorize": "Категоризувати",
+      "percentMatch": "{percent}% збіг",
+      "rememberChoices": "Запам'ятати мій вибір категорій",
+      "rememberChoicesDescription": "Автоматично категоризувати подібні транзакції в майбутньому",
+      "categorized": "{count} категоризовано",
+      "remaining": "{count} залишилось",
+      "continue": "Продовжити",
+      "continueAnyway": "Продовжити все одно",
+      "categories": {
+        "foodDining": "Їжа та харчування",
+        "transportation": "Транспорт",
+        "billsUtilities": "Рахунки та комунальні послуги",
+        "shopping": "Покупки",
+        "entertainment": "Розваги",
+        "healthFitness": "Здоров'я та фітнес",
+        "personalCare": "Особистий догляд",
+        "income": "Доходи",
+        "transfers": "Перекази"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Не вдалося видалити профіль",
+    "deleteTitle": "Видалити профіль?",
+    "defaultProfile": "Профіль за замовчуванням",
+    "cannotDeleteOnly": "Це єдиний профіль. Ви не можете його видалити.",
+    "permanentWarning": "Це назавжди видалить цей профіль. Будь-які приватні бюджети цього профілю стануть спільними для всіх профілів.",
+    "cannotUndo": "Цю дію неможливо скасувати.",
+    "deleteButton": "Видалити профіль"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Переглянути"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Вимкнути нагадування",
+      "enableReminder": "Увімкнути нагадування",
+      "off": "Вимк."
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Імпорт завершено!",
+    "subtitle": "Встановіть баланс рахунку для {accountName}",
+    "transactionsImported": "{count} транзакцій імпортовано",
+    "netChange": "Чиста зміна від транзакцій:",
+    "currentBalanceLabel": "Який ваш поточний банківський баланс?",
+    "currentBalanceLabelCredit": "Яка ваша поточна заборгованість?",
+    "balanceHelperBank": "Відкрийте свій банківський додаток і введіть показаний баланс для цього рахунку",
+    "balanceHelperCredit": "Введіть поточний баланс з виписки вашої кредитної картки (як додатне число)",
+    "startingBalance": "Ваш початковий баланс:",
+    "startingBalanceCredit": "Ваша початкова заборгованість:",
+    "balanceMatchNote": "Це дозволить балансу вашого рахунку відповідати банку.",
+    "negativeWarning": "Це призводить до від'ємного початкового балансу, що є незвичним для поточних/ощадних рахунків. Будь ласка, перевірте, чи правильний ваш поточний баланс.",
+    "skipForNow": "Пропустити поки що",
+    "setBalance": "Встановити баланс"
+  },
+  "recommendations": {
+    "title": "Найкращі рекомендації",
+    "subtitle": "Способи покращення вашого фінансового здоров'я",
+    "emptyState": "Додайте більше фінансових даних для отримання персоналізованих рекомендацій",
+    "viewAllFactors": "Переглянути всі фактори",
+    "factorLabels": {
+      "savingsRate": "Заощадження",
+      "debtToIncome": "Борг",
+      "budgetAdherence": "Бюджет",
+      "emergencyFund": "Фонд на випадок надзвичайних ситуацій",
+      "investmentGrowth": "Інвестиції",
+      "expenseStability": "Витрати"
+    },
+    "factorLinks": {
+      "savingsRate": "Переглянути доходи",
+      "debtToIncome": "Керувати позиками",
+      "budgetAdherence": "Скоригувати бюджети",
+      "emergencyFund": "Спланувати заощадження",
+      "investmentGrowth": "Переглянути портфель",
+      "expenseStability": "Переглянути звіти"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Продавець:",
+    "amount": "Сума:",
+    "average": "Середнє: {amount}",
+    "category": "Категорія:",
+    "wasExpected": "Чи було це очікуваним?",
+    "expected": "Очікуване",
+    "unexpected": "Неочікуване",
+    "markedExpected": "Позначено як очікуване",
+    "markedUnexpected": "Позначено як неочікуване",
+    "moreAnomalies": "+{count} ще {count, plural, =1 {аномалія} other {аномалій}}",
+    "severity": {
+      "high": "ВИСОКИЙ",
+      "medium": "СЕРЕДНІЙ",
+      "low": "НИЗЬКИЙ"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR обробка",
+    "cancel": "Скасувати",
+    "pageProgress": "Сторінка {current} з {total}",
+    "elapsed": "Минуло: {time}",
+    "remaining": "~{time} залишилось",
+    "stages": {
+      "loading": "Завантаження PDF",
+      "rendering": "Відтворення сторінок",
+      "preprocessing": "Покращення зображення",
+      "ocr": "Вилучення тексту",
+      "parsing": "Аналіз транзакцій",
+      "complete": "Завершено",
+      "error": "Помилка",
+      "cancelled": "Скасовано",
+      "enhance": "Покращити"
+    },
+    "errorRetry": "OCR обробка не вдалася. Бажаєте спробувати ще раз?",
+    "cancelledRetry": "OCR було скасовано. Бажаєте перезапустити?",
+    "retryButton": "Повторити OCR",
+    "completedSuccess": "OCR успішно завершено!",
+    "loadingChart": "Завантаження графіка..."
+  },
+  "developerTools": {
+    "title": "Інструменти розробника",
+    "subtitle": "QA інструменти для тестування інтернаціоналізації (лише режим розробки)",
+    "pseudoLocaleLabel": "Увімкнути псевдо-локалізацію (en-XA)",
+    "pseudoLocaleHelp": "Замінює весь перекладений текст на акцентовані символи. Будь-який залишковий звичайний англійський текст є <strong>жорстко закодованим</strong> і потребує перетворення на ключі перекладу.",
+    "pseudoLocaleExample": "Приклад: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Якщо ви бачите \"Dashboard\" замість \"[Ðášhƀóářð~~~]\", це жорстко закодовано!",
+    "infoPseudoLocale": "Псевдо-локалізація допомагає виявити неперекладені рядки під час розробки",
+    "infoProduction": "Продакшн-збірки автоматично виключають локалізацію en-XA",
+    "infoSwitchBack": "Переключіться назад на справжню локалізацію для продовження звичайної розробки"
+  },
+  "pageMetadata": {
+    "appName": "Додаток для бюджету",
+    "scenarios": "Сценарії \"що-якщо\"",
+    "merchantRules": "Правила торговців",
+    "more": "Більше",
+    "netWorth": "Чиста вартість",
+    "properties": "Нерухомість",
+    "propertyDetail": "Деталі нерухомості",
+    "review": "Перегляд транзакцій",
+    "events": "Бюджети подій",
+    "landing": "BudgetPro - Опануйте свої фінанси",
+    "dashboard": "Панель керування",
+    "transactions": "Транзакції",
+    "import": "Імпорт",
+    "accounts": "Рахунки",
+    "budgets": "Бюджети",
+    "categories": "Категорії",
+    "reports": "Звіти",
+    "settings": "Налаштування",
+    "subscriptions": "Підписки",
+    "investments": "Інвестиції",
+    "debtPayoff": "Погашення боргів",
+    "loans": "Позики",
+    "calculators": "Калькулятори",
+    "planning": "Планування",
+    "ocr": "Сканер чеків",
+    "export": "Експорт",
+    "fridayReview": "Тижневий огляд",
+    "onboarding": "Початок роботи",
+    "offline": "Офлайн-режим",
+    "splits": "Розділити транзакції"
   }
 }

@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Rudi Nyumbani"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Mwaka {n}",
+      "yearLabel": "Mwaka",
+      "month": "Mwezi {n}",
+      "monthYear": "Mwezi {n} (Mwaka {y})",
+      "age": "Umri {n}",
+      "ageLabel": "Umri",
+      "contributions": "Michango",
+      "interestEarned": "Riba Iliyopatikana",
+      "interest": "Riba",
+      "totalInterest": "Riba Jumla",
+      "snowball": "Snowball",
+      "avalanche": "Avalanche",
+      "portfolio": "Portfolio",
+      "fireTarget": "Lengo la FIRE",
+      "median50th": "Wastani (50)",
+      "remainingBalance": "Salio Lililobaki",
+      "totalAssets": "Mali Jumla",
+      "totalLiabilities": "Madeni Jumla",
+      "netWorth": "Thamani Halisi",
+      "retirement": "Kustaafu"
+    },
+    "scenario": {
+      "compare": "Linganisha hali ({count} zilizohifadhiwa)",
+      "selectUpTo": "Chagua hadi hali 3 kulinganisha:",
+      "duplicate": "Nakili",
+      "delete": "Futa",
+      "sideBySide": "Ulinganishaji wa pembeni kwa pembeni",
+      "field": "Sehemu",
+      "delta": "Tofauti",
+      "selectOneMore": "Chagua hali moja zaidi kulinganisha",
+      "copySuffix": "(nakala)"
+    },
+    "openCalculator": "Fungua kikokotoo"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Futa",
     "edit": "Hariri",
     "loading": "Inapakia...",
-    "save": "Hifadhi"
+    "save": "Hifadhi",
+    "success": "Imefanikiwa!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Thibitisha",
     "finalConfirmation": "Thibitisho la Mwisho:",
     "processing": "Inashughulikia...",
-    "typeToConfirm": "Andika {text} kuthibitisha hatua hii."
+    "typeToConfirm": "Andika {text} kuthibitisha hatua hii.",
+    "confirmAction": "Thibitisha Kitendo"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Historia ya Alama",
+      "monthsOfData": "{count, plural, =1 {mwezi} other {miezi}} {count} ya data",
+      "emptyTitle": "Historia ya alama yako itaonekana hapa data itakapokusanyika",
+      "emptySubtitle": "Rudi mwezi ujao!",
+      "legendScore": "Alama",
+      "legendTrend": "Mwelekeo",
+      "tooltipScore": "Alama",
+      "tooltipTrend": "Mwelekeo",
+      "loadingChart": "Inapakia chati..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Bajeti Yako Iko kwenye Kifaa CHAKO",
+      "heroSubtitle": "Karibu kwenye programu ya bajeti yenye faragha zaidi. Hakuna akaunti, hakuna wingu, hakuna maelewano.",
+      "features": {
+        "yourDataTitle": "Data Yako, Kifaa Chako",
+        "yourDataDescription": "Data yote ya kifedha imehifadhiwa ndani ya kifaa chako. Hakuna seva za wingu, hakuna ufikiaji wa mtu wa tatu.",
+        "encryptionTitle": "Usimbaji wa Kiwango cha Benki",
+        "encryptionDescription": "Usimbaji wa AES-256 unalinda data yako. Wewe pekee ndiye una ufunguo—haukutoki kwenye kifaa chako kamwe.",
+        "offlineTitle": "Inafanya Kazi Nje ya Mtandao",
+        "offlineDescription": "Utendaji kamili bila mtandao. Kamili kwa watumiaji wanaojali faragha.",
+        "zeroTrackingTitle": "Hakuna Ufuatiliaji",
+        "zeroTrackingDescription": "Hakuna uchanganuzi, hakuna telemetria, hakuna ukusanyaji wa data. Fedha zako si shughuli ya mtu mwingine."
+      },
+      "whatsNext": "Kinachofuata?",
+      "whatsNextIntro": "Katika dakika chache zijazo, tutakusaidia:",
+      "step1": "Ingiza miamala iliyopo (CSV ya benki, OFX, au mwenyewe)",
+      "step2": "Kategorisha matumizi yako kiotomatiki",
+      "step3": "Tengeneza bajeti yako ya kwanza kulingana na matumizi halisi",
+      "step4": "Weka vikumbusho vya bili ili usikose malipo",
+      "getStarted": "Tuanze"
+    },
+    "categoryMapping": {
+      "needsCategories": "Miamala {count} inahitaji kategoria",
+      "allCategorized": "Miamala yote imekategoriwa!",
+      "applySmartSuggestions": "Tumia Mapendekezo ya Akili",
+      "categorize": "Kategorisha",
+      "percentMatch": "Inalingana {percent}%",
+      "rememberChoices": "Kumbuka chaguo zangu za kategoria",
+      "rememberChoicesDescription": "Kategorisha miamala inayofanana kiotomatiki hapo baadaye",
+      "categorized": "{count} imekategoriwa",
+      "remaining": "{count} imebaki",
+      "continue": "Endelea",
+      "continueAnyway": "Endelea Hata Hivyo",
+      "categories": {
+        "foodDining": "Chakula na Kunywa",
+        "transportation": "Usafiri",
+        "billsUtilities": "Bili na Huduma",
+        "shopping": "Ununuzi",
+        "entertainment": "Burudani",
+        "healthFitness": "Afya na Mazoezi",
+        "personalCare": "Utunzaji Binafsi",
+        "income": "Mapato",
+        "transfers": "Uhamisho"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Imeshindwa kufuta wasifu",
+    "deleteTitle": "Futa wasifu?",
+    "defaultProfile": "Wasifu chaguo-msingi",
+    "cannotDeleteOnly": "Hii ndiyo wasifu pekee. Huwezi kuifuta.",
+    "permanentWarning": "Hii itafuta wasifu huu kabisa. Bajeti zozote za kibinafsi za wasifu huu zitashirikiwa na wasifu zote.",
+    "cannotUndo": "Kitendo hiki hakiwezi kutenduliwa.",
+    "deleteButton": "Futa wasifu"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Tazama"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Zima kikumbusho",
+      "enableReminder": "Washa kikumbusho",
+      "off": "Imezimwa"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Uingizaji Umekamilika!",
+    "subtitle": "Weka salio la akaunti kwa {accountName}",
+    "transactionsImported": "Miamala {count} imeingizwa",
+    "netChange": "Mabadiliko halisi kutoka kwa miamala:",
+    "currentBalanceLabel": "Salio la benki yako kwa sasa ni kiasi gani?",
+    "currentBalanceLabelCredit": "Kiasi cha deni lako kwa sasa ni kiasi gani?",
+    "balanceHelperBank": "Fungua programu yako ya benki na uingize salio linaloonyeshwa kwa akaunti hii",
+    "balanceHelperCredit": "Ingiza salio la sasa linaloonyeshwa kwenye taarifa ya kadi yako ya mkopo (kama nambari chanya)",
+    "startingBalance": "Salio lako la kuanzia:",
+    "startingBalanceCredit": "Kiasi chako cha deni la kuanzia:",
+    "balanceMatchNote": "Hii itafanya salio la akaunti yako lilingane na benki yako.",
+    "negativeWarning": "Hii inatoa salio la kuanzia hasi, ambalo si la kawaida kwa akaunti za hundi/akiba. Tafadhali hakiki salio lako la sasa.",
+    "skipForNow": "Ruka kwa sasa",
+    "setBalance": "Weka Salio"
+  },
+  "recommendations": {
+    "title": "Mapendekezo Bora",
+    "subtitle": "Njia za kuboresha afya yako ya kifedha",
+    "emptyState": "Ongeza data zaidi ya kifedha ili kupokea mapendekezo ya kibinafsi",
+    "viewAllFactors": "Tazama sababu zote",
+    "factorLabels": {
+      "savingsRate": "Akiba",
+      "debtToIncome": "Deni",
+      "budgetAdherence": "Bajeti",
+      "emergencyFund": "Akiba ya Dharura",
+      "investmentGrowth": "Uwekezaji",
+      "expenseStability": "Matumizi"
+    },
+    "factorLinks": {
+      "savingsRate": "Tazama Mapato",
+      "debtToIncome": "Simamia Mikopo",
+      "budgetAdherence": "Rekebisha Bajeti",
+      "emergencyFund": "Panga Akiba",
+      "investmentGrowth": "Tazama Portfolio",
+      "expenseStability": "Tazama Ripoti"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Muuzaji:",
+    "amount": "Kiasi:",
+    "average": "Wastani: {amount}",
+    "category": "Kategoria:",
+    "wasExpected": "Je, hii ilitarajiwa?",
+    "expected": "Ilitarajiwa",
+    "unexpected": "Haikutarajiwa",
+    "markedExpected": "Imewekwa alama kama ilitarajiwa",
+    "markedUnexpected": "Imewekwa alama kama haikutarajiwa",
+    "moreAnomalies": "+{count} {count, plural, =1 {hitilafu} other {hitilafu}} zaidi",
+    "severity": {
+      "high": "JUU",
+      "medium": "WASTANI",
+      "low": "CHINI"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Uchakataji wa OCR",
+    "cancel": "Ghairi",
+    "pageProgress": "Ukurasa {current} kati ya {total}",
+    "elapsed": "Muda uliopita: {time}",
+    "remaining": "~{time} iliyobaki",
+    "stages": {
+      "loading": "Inapakia PDF",
+      "rendering": "Inatengeneza Kurasa",
+      "preprocessing": "Inaboresha Picha",
+      "ocr": "Inachimbua Maandishi",
+      "parsing": "Inachambua Miamala",
+      "complete": "Imekamilika",
+      "error": "Kosa",
+      "cancelled": "Imeghairiwa",
+      "enhance": "Boresha"
+    },
+    "errorRetry": "Uchakataji wa OCR umeshindwa. Ungependa kujaribu tena?",
+    "cancelledRetry": "OCR imeghairiwa. Ungependa kuanza upya?",
+    "retryButton": "Jaribu OCR Tena",
+    "completedSuccess": "OCR imekamilika kwa mafanikio!",
+    "loadingChart": "Inapakia chati..."
+  },
+  "developerTools": {
+    "title": "Zana za Msanidi Programu",
+    "subtitle": "Zana za QA kwa ajili ya kujaribu utaifishaji (modi ya msanidi pekee)",
+    "pseudoLocaleLabel": "Washa Pseudo-Locale (en-XA)",
+    "pseudoLocaleHelp": "Inabadilisha maandishi yote yaliyotafsiriwa na herufi zenye lafudhi. Maandishi yoyote ya Kiingereza safi yaliyobaki yamewekwa <strong>msimbo mgumu</strong> na yanahitaji kubadilishwa kuwa funguo za tafsiri.",
+    "pseudoLocaleExample": "Mfano: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Ukiona \"Dashboard\" badala ya \"[Ðášhƀóářð~~~]\", ina msimbo mgumu!",
+    "infoPseudoLocale": "Pseudo-locale husaidia kutambua maandishi ambayo hayajatafsiriwa wakati wa utengenezaji",
+    "infoProduction": "Miundo ya uzalishaji inatenga locale ya en-XA kiotomatiki",
+    "infoSwitchBack": "Rudi kwa locale halisi ili kuendelea na utengenezaji wa kawaida"
+  },
+  "pageMetadata": {
+    "appName": "Programu ya Bajeti",
+    "scenarios": "Hali za Vipi-Kama",
+    "merchantRules": "Sheria za Wafanyabiashara",
+    "more": "Zaidi",
+    "netWorth": "Thamani Halisi",
+    "properties": "Mali",
+    "propertyDetail": "Maelezo ya Mali",
+    "review": "Kagua Miamala",
+    "events": "Bajeti za Matukio",
+    "landing": "BudgetPro - Dhibiti Fedha Zako",
+    "dashboard": "Dashibodi",
+    "transactions": "Miamala",
+    "import": "Ingiza",
+    "accounts": "Akaunti",
+    "budgets": "Bajeti",
+    "categories": "Kategoria",
+    "reports": "Ripoti",
+    "settings": "Mipangilio",
+    "subscriptions": "Usajili",
+    "investments": "Uwekezaji",
+    "debtPayoff": "Ulipaji wa Deni",
+    "loans": "Mikopo",
+    "calculators": "Vikokotoo",
+    "planning": "Kupanga",
+    "ocr": "Skana ya Risiti",
+    "export": "Hamisha",
+    "fridayReview": "Mapitio ya Kila Wiki",
+    "onboarding": "Kuanza",
+    "offline": "Hali ya nje ya mtandao",
+    "splits": "Gawanya miamala"
   }
 }

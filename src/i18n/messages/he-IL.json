@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "חזרה לדף הבית"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "שנה {n}",
+      "yearLabel": "שנה",
+      "month": "חודש {n}",
+      "monthYear": "חודש {n} (שנה {y})",
+      "age": "גיל {n}",
+      "ageLabel": "גיל",
+      "contributions": "הפקדות",
+      "interestEarned": "ריבית שנצברה",
+      "interest": "ריבית",
+      "totalInterest": "ריבית כוללת",
+      "snowball": "כדור שלג",
+      "avalanche": "מפולת",
+      "portfolio": "תיק השקעות",
+      "fireTarget": "יעד FIRE",
+      "median50th": "חציון (50)",
+      "remainingBalance": "יתרה נותרת",
+      "totalAssets": "סך נכסים",
+      "totalLiabilities": "סך התחייבויות",
+      "netWorth": "שווי נקי",
+      "retirement": "פרישה"
+    },
+    "scenario": {
+      "compare": "השוואת תרחישים ({count} שמורים)",
+      "selectUpTo": "בחרו עד 3 תרחישים להשוואה:",
+      "duplicate": "שכפל",
+      "delete": "מחק",
+      "sideBySide": "השוואה זה לצד זה",
+      "field": "שדה",
+      "delta": "הפרש",
+      "selectOneMore": "בחרו תרחיש נוסף להשוואה",
+      "copySuffix": "(עותק)"
+    },
+    "openCalculator": "פתח מחשבון"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "מחק",
     "edit": "ערוך",
     "loading": "טוען...",
-    "save": "שמור"
+    "save": "שמור",
+    "success": "הצלחה!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "אשר",
     "finalConfirmation": "אישור סופי:",
     "processing": "מעבד...",
-    "typeToConfirm": "הקלד {text} כדי לאשר פעולה זו."
+    "typeToConfirm": "הקלד {text} כדי לאשר פעולה זו.",
+    "confirmAction": "אישור פעולה"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "היסטוריית ציון",
+      "monthsOfData": "{count} {count, plural, =1 {חודש} other {חודשים}} של נתונים",
+      "emptyTitle": "היסטוריית הציון שלך תופיע כאן ככל שיצטברו נתונים",
+      "emptySubtitle": "בדוק שוב בחודש הבא!",
+      "legendScore": "ציון",
+      "legendTrend": "מגמה",
+      "tooltipScore": "ציון",
+      "tooltipTrend": "מגמה",
+      "loadingChart": "טוען תרשים..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "התקציב שלך חי על המכשיר שלך",
+      "heroSubtitle": "ברוכים הבאים לאפליקציית התקציב הפרטית ביותר. ללא חשבונות, ללא ענן, ללא פשרות.",
+      "features": {
+        "yourDataTitle": "הנתונים שלך, המכשיר שלך",
+        "yourDataDescription": "כל הנתונים הפיננסיים מאוחסנים מקומית במכשיר שלך. ללא שרתי ענן, ללא גישת צד שלישי.",
+        "encryptionTitle": "הצפנה ברמה בנקאית",
+        "encryptionDescription": "הצפנת AES-256 מגנה על הנתונים שלך. רק לך יש את המפתח — הוא לעולם לא עוזב את המכשיר שלך.",
+        "offlineTitle": "עובד ללא חיבור",
+        "offlineDescription": "פונקציונליות מלאה ללא אינטרנט. מושלם למשתמשים המקפידים על פרטיות.",
+        "zeroTrackingTitle": "ללא מעקב",
+        "zeroTrackingDescription": "ללא אנליטיקס, ללא טלמטריה, ללא איסוף נתונים. הכספים שלך הם עניין של אף אחד."
+      },
+      "whatsNext": "מה הלאה?",
+      "whatsNextIntro": "בדקות הקרובות, נעזור לך:",
+      "step1": "לייבא עסקאות קיימות (CSV בנקאי, OFX או ידני)",
+      "step2": "לסווג הוצאות באופן אוטומטי",
+      "step3": "ליצור את התקציב הראשון שלך על בסיס הוצאות בפועל",
+      "step4": "להגדיר תזכורות חשבונות כדי שלא תפספס תשלום",
+      "getStarted": "בואו נתחיל"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} עסקאות צריכות קטגוריות",
+      "allCategorized": "כל העסקאות סווגו!",
+      "applySmartSuggestions": "החל הצעות חכמות",
+      "categorize": "סיווג",
+      "percentMatch": "{percent}% התאמה",
+      "rememberChoices": "זכור את בחירות הקטגוריה שלי",
+      "rememberChoicesDescription": "סיווג אוטומטי של עסקאות דומות בעתיד",
+      "categorized": "{count} סווגו",
+      "remaining": "{count} נותרו",
+      "continue": "המשך",
+      "continueAnyway": "המשך בכל זאת",
+      "categories": {
+        "foodDining": "אוכל ומסעדות",
+        "transportation": "תחבורה",
+        "billsUtilities": "חשבונות ושירותים",
+        "shopping": "קניות",
+        "entertainment": "בידור",
+        "healthFitness": "בריאות וכושר",
+        "personalCare": "טיפוח אישי",
+        "income": "הכנסה",
+        "transfers": "העברות"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "מחיקת הפרופיל נכשלה",
+    "deleteTitle": "למחוק פרופיל?",
+    "defaultProfile": "פרופיל ברירת מחדל",
+    "cannotDeleteOnly": "זהו הפרופיל היחיד. לא ניתן למחוק אותו.",
+    "permanentWarning": "פעולה זו תמחק את הפרופיל לצמיתות. כל התקציבים הפרטיים של פרופיל זה ישותפו עם כל הפרופילים.",
+    "cannotUndo": "לא ניתן לבטל פעולה זו.",
+    "deleteButton": "מחק פרופיל"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "הצג"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "בטל תזכורת",
+      "enableReminder": "הפעל תזכורת",
+      "off": "כבוי"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "הייבוא הושלם!",
+    "subtitle": "הגדר את יתרת החשבון עבור {accountName}",
+    "transactionsImported": "{count} עסקאות יובאו",
+    "netChange": "שינוי נטו מעסקאות:",
+    "currentBalanceLabel": "מה יתרת חשבון הבנק הנוכחית שלך?",
+    "currentBalanceLabelCredit": "מה הסכום הנוכחי שאתה חייב?",
+    "balanceHelperBank": "פתח את אפליקציית הבנק שלך והזן את היתרה המוצגת עבור חשבון זה",
+    "balanceHelperCredit": "הזן את היתרה הנוכחית המוצגת בדוח כרטיס האשראי שלך (כמספר חיובי)",
+    "startingBalance": "היתרה ההתחלתית שלך:",
+    "startingBalanceCredit": "הסכום ההתחלתי שאתה חייב:",
+    "balanceMatchNote": "פעולה זו תתאים את יתרת החשבון שלך לבנק.",
+    "negativeWarning": "תוצאה זו היא יתרה התחלתית שלילית, דבר חריג עבור חשבון עובר ושב/חיסכון. אנא בדוק שנית שהיתרה הנוכחית נכונה.",
+    "skipForNow": "דלג לעת עתה",
+    "setBalance": "הגדר יתרה"
+  },
+  "recommendations": {
+    "title": "המלצות מובילות",
+    "subtitle": "דרכים לשפר את הבריאות הפיננסית שלך",
+    "emptyState": "הוסף נתונים פיננסיים נוספים כדי לקבל המלצות מותאמות אישית",
+    "viewAllFactors": "הצג את כל הגורמים",
+    "factorLabels": {
+      "savingsRate": "חיסכון",
+      "debtToIncome": "חוב",
+      "budgetAdherence": "תקציב",
+      "emergencyFund": "קרן חירום",
+      "investmentGrowth": "השקעות",
+      "expenseStability": "הוצאות"
+    },
+    "factorLinks": {
+      "savingsRate": "הצג הכנסה",
+      "debtToIncome": "ניהול הלוואות",
+      "budgetAdherence": "התאם תקציבים",
+      "emergencyFund": "תכנן חיסכון",
+      "investmentGrowth": "הצג תיק השקעות",
+      "expenseStability": "הצג דוחות"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "בית עסק:",
+    "amount": "סכום:",
+    "average": "ממוצע: {amount}",
+    "category": "קטגוריה:",
+    "wasExpected": "האם זה היה צפוי?",
+    "expected": "צפוי",
+    "unexpected": "לא צפוי",
+    "markedExpected": "סומן כצפוי",
+    "markedUnexpected": "סומן כלא צפוי",
+    "moreAnomalies": "+{count} {count, plural, =1 {חריגה} other {חריגות}} נוספות",
+    "severity": {
+      "high": "גבוה",
+      "medium": "בינוני",
+      "low": "נמוך"
+    }
+  },
+  "pdfOcr": {
+    "processing": "עיבוד OCR",
+    "cancel": "ביטול",
+    "pageProgress": "עמוד {current} מתוך {total}",
+    "elapsed": "זמן שחלף: {time}",
+    "remaining": "~{time} נותרו",
+    "stages": {
+      "loading": "טוען PDF",
+      "rendering": "מעבד עמודים",
+      "preprocessing": "משפר תמונה",
+      "ocr": "מחלץ טקסט",
+      "parsing": "מנתח עסקאות",
+      "complete": "הושלם",
+      "error": "שגיאה",
+      "cancelled": "בוטל",
+      "enhance": "שיפור"
+    },
+    "errorRetry": "עיבוד OCR נכשל. האם ברצונך לנסות שוב?",
+    "cancelledRetry": "ה-OCR בוטל. האם ברצונך להתחיל מחדש?",
+    "retryButton": "נסה OCR שוב",
+    "completedSuccess": "ה-OCR הושלם בהצלחה!",
+    "loadingChart": "טוען תרשים..."
+  },
+  "developerTools": {
+    "title": "כלי מפתחים",
+    "subtitle": "כלי QA לבדיקת בינלאומיות (מצב פיתוח בלבד)",
+    "pseudoLocaleLabel": "הפעל לוקאל מדומה (en-XA)",
+    "pseudoLocaleHelp": "מחליף את כל הטקסט המתורגם בתווים מוטעמים. כל טקסט אנגלי רגיל שנותר הוא <strong>מקודד קשיח</strong> וצריך להיות מומר למפתחות תרגום.",
+    "pseudoLocaleExample": "דוגמה: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "אם אתה רואה \"Dashboard\" במקום \"[Ðášhƀóářð~~~]\", זה מקודד קשיח!",
+    "infoPseudoLocale": "לוקאל מדומה עוזר לזהות מחרוזות לא מתורגמות במהלך הפיתוח",
+    "infoProduction": "בניות ייצור מדירות אוטומטית את הלוקאל en-XA",
+    "infoSwitchBack": "חזור ללוקאל אמיתי כדי להמשיך בפיתוח רגיל"
+  },
+  "pageMetadata": {
+    "appName": "אפליקציית תקציב",
+    "scenarios": "תרחישי מה-אם",
+    "merchantRules": "כללי סוחרים",
+    "more": "עוד",
+    "netWorth": "שווי נקי",
+    "properties": "נכסים",
+    "propertyDetail": "פרטי נכס",
+    "review": "בדיקת עסקאות",
+    "events": "תקציבי אירועים",
+    "landing": "BudgetPro – שלוט בכספים שלך",
+    "dashboard": "לוח בקרה",
+    "transactions": "עסקאות",
+    "import": "ייבוא",
+    "accounts": "חשבונות",
+    "budgets": "תקציבים",
+    "categories": "קטגוריות",
+    "reports": "דוחות",
+    "settings": "הגדרות",
+    "subscriptions": "מנויים",
+    "investments": "השקעות",
+    "debtPayoff": "פירעון חובות",
+    "loans": "הלוואות",
+    "calculators": "מחשבונים",
+    "planning": "תכנון",
+    "ocr": "סורק קבלות",
+    "export": "ייצוא",
+    "fridayReview": "סקירה שבועית",
+    "onboarding": "תחילת עבודה",
+    "offline": "מצב לא מקוון",
+    "splits": "פיצול עסקאות"
   }
 }

@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "กลับหน้าหลัก"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "ปีที่ {n}",
+      "yearLabel": "ปี",
+      "month": "เดือนที่ {n}",
+      "monthYear": "เดือนที่ {n} (ปีที่ {y})",
+      "age": "อายุ {n}",
+      "ageLabel": "อายุ",
+      "contributions": "เงินสมทบ",
+      "interestEarned": "ดอกเบี้ยที่ได้รับ",
+      "interest": "ดอกเบี้ย",
+      "totalInterest": "ดอกเบี้ยรวม",
+      "snowball": "สโนว์บอล",
+      "avalanche": "อะวาลานช์",
+      "portfolio": "พอร์ตการลงทุน",
+      "fireTarget": "เป้าหมาย FIRE",
+      "median50th": "มัธยฐาน (50)",
+      "remainingBalance": "ยอดคงเหลือ",
+      "totalAssets": "สินทรัพย์รวม",
+      "totalLiabilities": "หนี้สินรวม",
+      "netWorth": "มูลค่าสุทธิ",
+      "retirement": "เกษียณอายุ"
+    },
+    "scenario": {
+      "compare": "เปรียบเทียบสถานการณ์ ({count} ที่บันทึกไว้)",
+      "selectUpTo": "เลือกสถานการณ์สูงสุด 3 รายการเพื่อเปรียบเทียบ:",
+      "duplicate": "ทำซ้ำ",
+      "delete": "ลบ",
+      "sideBySide": "เปรียบเทียบแบบเคียงข้างกัน",
+      "field": "ฟิลด์",
+      "delta": "ผลต่าง",
+      "selectOneMore": "เลือกอีกหนึ่งสถานการณ์เพื่อเปรียบเทียบ",
+      "copySuffix": "(สำเนา)"
+    },
+    "openCalculator": "เปิดเครื่องคิดเลข"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "ลบ",
     "edit": "แก้ไข",
     "loading": "กำลังโหลด...",
-    "save": "บันทึก"
+    "save": "บันทึก",
+    "success": "สำเร็จ!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "ยืนยัน",
     "finalConfirmation": "การยืนยันสุดท้าย:",
     "processing": "กำลังดำเนินการ...",
-    "typeToConfirm": "พิมพ์ {text} เพื่อยืนยันการกระทำนี้."
+    "typeToConfirm": "พิมพ์ {text} เพื่อยืนยันการกระทำนี้.",
+    "confirmAction": "ยืนยันการดำเนินการ"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "ประวัติคะแนน",
+      "monthsOfData": "{count} {count, plural, =1 {เดือน} other {เดือน}} ของข้อมูล",
+      "emptyTitle": "ประวัติคะแนนจะปรากฏที่นี่เมื่อข้อมูลสะสมมากขึ้น",
+      "emptySubtitle": "กลับมาดูเดือนหน้า!",
+      "legendScore": "คะแนน",
+      "legendTrend": "แนวโน้ม",
+      "tooltipScore": "คะแนน",
+      "tooltipTrend": "แนวโน้ม",
+      "loadingChart": "กำลังโหลดแผนภูมิ..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "งบประมาณของคุณอยู่บนอุปกรณ์ของคุณ",
+      "heroSubtitle": "ยินดีต้อนรับสู่แอปงบประมาณที่เป็นส่วนตัวที่สุด ไม่ต้องมีบัญชี ไม่มีคลาวด์ ไม่มีการประนีประนอม",
+      "features": {
+        "yourDataTitle": "ข้อมูลของคุณ อุปกรณ์ของคุณ",
+        "yourDataDescription": "ข้อมูลการเงินทั้งหมดถูกจัดเก็บบนอุปกรณ์ของคุณ ไม่มีเซิร์ฟเวอร์คลาวด์ ไม่มีบุคคลที่สามเข้าถึง",
+        "encryptionTitle": "การเข้ารหัสระดับธนาคาร",
+        "encryptionDescription": "การเข้ารหัส AES-256 ปกป้องข้อมูลของคุณ คุณเท่านั้นที่มีกุญแจ—มันไม่เคยออกจากอุปกรณ์ของคุณ",
+        "offlineTitle": "ใช้งานออฟไลน์ได้",
+        "offlineDescription": "ใช้งานได้เต็มรูปแบบโดยไม่ต้องเชื่อมต่ออินเทอร์เน็ต เหมาะสำหรับผู้ที่ให้ความสำคัญกับความเป็นส่วนตัว",
+        "zeroTrackingTitle": "ไม่มีการติดตาม",
+        "zeroTrackingDescription": "ไม่มีการวิเคราะห์ ไม่มีการเก็บข้อมูลระยะไกล ไม่มีการเก็บรวบรวมข้อมูล เรื่องการเงินของคุณไม่ใช่เรื่องของใคร"
+      },
+      "whatsNext": "ขั้นตอนถัดไป",
+      "whatsNextIntro": "ในไม่กี่นาทีข้างหน้า เราจะช่วยคุณ:",
+      "step1": "นำเข้ารายการที่มีอยู่ (CSV ธนาคาร, OFX หรือกรอกเอง)",
+      "step2": "จัดหมวดหมู่การใช้จ่ายอัตโนมัติ",
+      "step3": "สร้างงบประมาณแรกจากการใช้จ่ายจริง",
+      "step4": "ตั้งการแจ้งเตือนบิลเพื่อไม่พลาดการชำระเงิน",
+      "getStarted": "เริ่มกันเลย"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} รายการต้องจัดหมวดหมู่",
+      "allCategorized": "รายการทั้งหมดถูกจัดหมวดหมู่แล้ว!",
+      "applySmartSuggestions": "ใช้คำแนะนำอัจฉริยะ",
+      "categorize": "จัดหมวดหมู่",
+      "percentMatch": "ตรงกัน {percent}%",
+      "rememberChoices": "จดจำตัวเลือกหมวดหมู่ของฉัน",
+      "rememberChoicesDescription": "จัดหมวดหมู่รายการที่คล้ายกันโดยอัตโนมัติในอนาคต",
+      "categorized": "จัดหมวดหมู่แล้ว {count} รายการ",
+      "remaining": "เหลืออีก {count} รายการ",
+      "continue": "ดำเนินการต่อ",
+      "continueAnyway": "ดำเนินการต่อ",
+      "categories": {
+        "foodDining": "อาหารและเครื่องดื่ม",
+        "transportation": "การเดินทาง",
+        "billsUtilities": "บิลและค่าสาธารณูปโภค",
+        "shopping": "ช้อปปิ้ง",
+        "entertainment": "ความบันเทิง",
+        "healthFitness": "สุขภาพและฟิตเนส",
+        "personalCare": "ดูแลส่วนบุคคล",
+        "income": "รายได้",
+        "transfers": "โอนเงิน"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "ลบโปรไฟล์ไม่สำเร็จ",
+    "deleteTitle": "ลบโปรไฟล์?",
+    "defaultProfile": "โปรไฟล์เริ่มต้น",
+    "cannotDeleteOnly": "นี่เป็นโปรไฟล์เดียว คุณไม่สามารถลบได้",
+    "permanentWarning": "การดำเนินการนี้จะลบโปรไฟล์นี้อย่างถาวร งบประมาณส่วนตัวของโปรไฟล์นี้จะถูกแชร์กับโปรไฟล์ทั้งหมด",
+    "cannotUndo": "การดำเนินการนี้ไม่สามารถย้อนกลับได้",
+    "deleteButton": "ลบโปรไฟล์"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "ดู"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "ปิดการแจ้งเตือน",
+      "enableReminder": "เปิดการแจ้งเตือน",
+      "off": "ปิด"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "นำเข้าเสร็จสิ้น!",
+    "subtitle": "ตั้งยอดเงินในบัญชีสำหรับ {accountName}",
+    "transactionsImported": "นำเข้า {count} รายการแล้ว",
+    "netChange": "ยอดเปลี่ยนแปลงสุทธิจากรายการ:",
+    "currentBalanceLabel": "ยอดเงินในบัญชีธนาคารปัจจุบันของคุณเท่าไร?",
+    "currentBalanceLabelCredit": "ยอดหนี้ปัจจุบันของคุณเท่าไร?",
+    "balanceHelperBank": "เปิดแอปธนาคารและกรอกยอดเงินที่แสดงสำหรับบัญชีนี้",
+    "balanceHelperCredit": "กรอกยอดเงินปัจจุบันที่แสดงในใบแจ้งยอดบัตรเครดิต (เป็นจำนวนบวก)",
+    "startingBalance": "ยอดเงินเริ่มต้นของคุณ:",
+    "startingBalanceCredit": "ยอดหนี้เริ่มต้นของคุณ:",
+    "balanceMatchNote": "ซึ่งจะทำให้ยอดเงินในบัญชีตรงกับธนาคารของคุณ",
+    "negativeWarning": "ผลลัพธ์เป็นยอดเงินเริ่มต้นติดลบ ซึ่งผิดปกติสำหรับบัญชีออมทรัพย์/เดินสะพัด กรุณาตรวจสอบยอดเงินปัจจุบันอีกครั้ง",
+    "skipForNow": "ข้ามไปก่อน",
+    "setBalance": "ตั้งยอดเงิน"
+  },
+  "recommendations": {
+    "title": "คำแนะนำยอดนิยม",
+    "subtitle": "วิธีปรับปรุงสุขภาพการเงินของคุณ",
+    "emptyState": "เพิ่มข้อมูลการเงินเพื่อรับคำแนะนำส่วนบุคคล",
+    "viewAllFactors": "ดูปัจจัยทั้งหมด",
+    "factorLabels": {
+      "savingsRate": "การออม",
+      "debtToIncome": "หนี้สิน",
+      "budgetAdherence": "งบประมาณ",
+      "emergencyFund": "เงินฉุกเฉิน",
+      "investmentGrowth": "การลงทุน",
+      "expenseStability": "ค่าใช้จ่าย"
+    },
+    "factorLinks": {
+      "savingsRate": "ดูรายได้",
+      "debtToIncome": "จัดการสินเชื่อ",
+      "budgetAdherence": "ปรับงบประมาณ",
+      "emergencyFund": "วางแผนออมเงิน",
+      "investmentGrowth": "ดูพอร์ตการลงทุน",
+      "expenseStability": "ดูรายงาน"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "ร้านค้า:",
+    "amount": "จำนวนเงิน:",
+    "average": "เฉลี่ย: {amount}",
+    "category": "หมวดหมู่:",
+    "wasExpected": "รายการนี้เป็นไปตามที่คาดไว้หรือไม่?",
+    "expected": "คาดไว้แล้ว",
+    "unexpected": "ไม่คาดคิด",
+    "markedExpected": "ทำเครื่องหมายว่าคาดไว้แล้ว",
+    "markedUnexpected": "ทำเครื่องหมายว่าไม่คาดคิด",
+    "moreAnomalies": "+{count} {count, plural, =1 {รายการผิดปกติ} other {รายการผิดปกติ}} เพิ่มเติม",
+    "severity": {
+      "high": "สูง",
+      "medium": "ปานกลาง",
+      "low": "ต่ำ"
+    }
+  },
+  "pdfOcr": {
+    "processing": "กำลังประมวลผล OCR",
+    "cancel": "ยกเลิก",
+    "pageProgress": "หน้า {current} จาก {total}",
+    "elapsed": "เวลาที่ผ่านไป: {time}",
+    "remaining": "เหลืออีก ~{time}",
+    "stages": {
+      "loading": "กำลังโหลด PDF",
+      "rendering": "กำลังเรนเดอร์หน้า",
+      "preprocessing": "กำลังปรับปรุงภาพ",
+      "ocr": "กำลังดึงข้อความ",
+      "parsing": "กำลังวิเคราะห์รายการ",
+      "complete": "เสร็จสิ้น",
+      "error": "ข้อผิดพลาด",
+      "cancelled": "ยกเลิกแล้ว",
+      "enhance": "ปรับปรุง"
+    },
+    "errorRetry": "การประมวลผล OCR ล้มเหลว คุณต้องการลองอีกครั้งหรือไม่?",
+    "cancelledRetry": "OCR ถูกยกเลิก คุณต้องการเริ่มใหม่หรือไม่?",
+    "retryButton": "ลอง OCR อีกครั้ง",
+    "completedSuccess": "OCR เสร็จสมบูรณ์!",
+    "loadingChart": "กำลังโหลดแผนภูมิ..."
+  },
+  "developerTools": {
+    "title": "เครื่องมือนักพัฒนา",
+    "subtitle": "เครื่องมือ QA สำหรับทดสอบความเป็นสากล (เฉพาะโหมด dev)",
+    "pseudoLocaleLabel": "เปิดใช้งานชุดภาษาเทียม (en-XA)",
+    "pseudoLocaleHelp": "แทนที่ข้อความที่แปลแล้วทั้งหมดด้วยอักขระมีเครื่องหมายเสริม ข้อความภาษาอังกฤษที่เหลืออยู่คือ <strong>ฝังตัวตายตัว</strong> และต้องแปลงเป็นคีย์แปลภาษา",
+    "pseudoLocaleExample": "ตัวอย่าง: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "หากคุณเห็น \"Dashboard\" แทนที่จะเป็น \"[Ðášhƀóářð~~~]\" แสดงว่ามันถูกฝังตัวตายตัว!",
+    "infoPseudoLocale": "ชุดภาษาเทียมช่วยระบุข้อความที่ยังไม่ได้แปลในระหว่างการพัฒนา",
+    "infoProduction": "บิลด์สำหรับโปรดักชันจะไม่รวม en-XA โดยอัตโนมัติ",
+    "infoSwitchBack": "สลับไปยังชุดภาษาจริงเพื่อพัฒนาต่อตามปกติ"
+  },
+  "pageMetadata": {
+    "appName": "แอปงบประมาณ",
+    "scenarios": "สถานการณ์สมมติ",
+    "merchantRules": "กฎร้านค้า",
+    "more": "เพิ่มเติม",
+    "netWorth": "มูลค่าสุทธิ",
+    "properties": "อสังหาริมทรัพย์",
+    "propertyDetail": "รายละเอียดอสังหาริมทรัพย์",
+    "review": "ตรวจสอบรายการ",
+    "events": "งบประมาณกิจกรรม",
+    "landing": "BudgetPro – จัดการการเงินของคุณ",
+    "dashboard": "แดชบอร์ด",
+    "transactions": "รายการ",
+    "import": "นำเข้า",
+    "accounts": "บัญชี",
+    "budgets": "งบประมาณ",
+    "categories": "หมวดหมู่",
+    "reports": "รายงาน",
+    "settings": "ตั้งค่า",
+    "subscriptions": "การสมัครสมาชิก",
+    "investments": "การลงทุน",
+    "debtPayoff": "ชำระหนี้",
+    "loans": "สินเชื่อ",
+    "calculators": "เครื่องคำนวณ",
+    "planning": "การวางแผน",
+    "ocr": "สแกนใบเสร็จ",
+    "export": "ส่งออก",
+    "fridayReview": "ทบทวนประจำสัปดาห์",
+    "onboarding": "เริ่มต้น",
+    "offline": "โหมดออฟไลน์",
+    "splits": "แยกรายการ"
   }
 }

@@ -42,6 +42,7 @@ const AmortizationChart = lazy(() =>
  */
 function ChartLoadingSkeleton({ height = 400 }: { height?: number }) {
   const tAria = useTranslations("aria");
+  const tPdfOcr = useTranslations("pdfOcr");
   return (
     <div
       className="flex w-full animate-pulse items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800"
@@ -70,7 +71,7 @@ function ChartLoadingSkeleton({ height = 400 }: { height?: number }) {
             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
           />
         </svg>
-        <span className="text-sm font-medium">Loading chart...</span>
+        <span className="text-sm font-medium">{tPdfOcr("loadingChart")}</span>
       </div>
     </div>
   );
@@ -200,6 +201,7 @@ interface LazyDashboardAreaChartProps {
 const DashboardAreaChartComponent = lazy(() =>
   import("recharts").then((mod) => {
     const DashboardAreaChart = ({ data, CustomTooltip }: LazyDashboardAreaChartProps) => {
+      const tWidgets = useTranslations("dashboard.widgets.monthlyTrends");
       const { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
         mod;
       return (
@@ -227,7 +229,7 @@ const DashboardAreaChartComponent = lazy(() =>
               strokeWidth={2}
               fillOpacity={1}
               fill="url(#colorIncome)"
-              name="Income"
+              name={tWidgets("income")}
             />
             <Area
               type="monotone"
@@ -236,7 +238,7 @@ const DashboardAreaChartComponent = lazy(() =>
               strokeWidth={2}
               fillOpacity={1}
               fill="url(#colorExpenses)"
-              name="Expenses"
+              name={tWidgets("expenses")}
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -275,11 +277,12 @@ interface ChartPalette {
 interface LazyReportsPieChartProps {
   data: ChartDataPoint[];
   palette: ChartPalette;
+  currencySymbol?: string;
 }
 
 const ReportsPieChartComponent = lazy(() =>
   import("recharts").then((mod) => {
-    const ReportsPieChart = ({ data, palette }: LazyReportsPieChartProps) => {
+    const ReportsPieChart = ({ data, palette, currencySymbol = "" }: LazyReportsPieChartProps) => {
       const { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } = mod;
       return (
         <ResponsiveContainer width="100%" height={300}>
@@ -303,7 +306,7 @@ const ReportsPieChartComponent = lazy(() =>
                 />
               ))}
             </Pie>
-            <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
+            <Tooltip formatter={(value: number) => `${currencySymbol}${value.toFixed(2)}`} />
           </PieChart>
         </ResponsiveContainer>
       );
@@ -328,11 +331,18 @@ interface LazyReportsBarChartProps {
   palette: ChartPalette;
   xKey: string;
   yKey: string;
+  currencySymbol?: string;
 }
 
 const ReportsBarChartComponent = lazy(() =>
   import("recharts").then((mod) => {
-    const ReportsBarChart = ({ data, palette, xKey, yKey }: LazyReportsBarChartProps) => {
+    const ReportsBarChart = ({
+      data,
+      palette,
+      xKey,
+      yKey,
+      currencySymbol = "",
+    }: LazyReportsBarChartProps) => {
       const { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } = mod;
       return (
         <ResponsiveContainer width="100%" height={300}>
@@ -340,7 +350,7 @@ const ReportsBarChartComponent = lazy(() =>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey={xKey} stroke={palette.grid} />
             <YAxis stroke={palette.grid} />
-            <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
+            <Tooltip formatter={(value: number) => `${currencySymbol}${value.toFixed(2)}`} />
             <Bar dataKey={yKey} fill={palette.data[1].hex} />
           </BarChart>
         </ResponsiveContainer>
@@ -366,11 +376,18 @@ interface LazyReportsLineChartProps {
   palette: ChartPalette;
   xKey: string;
   lines: Array<{ key: string; name: string; color: string }>;
+  currencySymbol?: string;
 }
 
 const ReportsLineChartComponent = lazy(() =>
   import("recharts").then((mod) => {
-    const ReportsLineChart = ({ data, palette, xKey, lines }: LazyReportsLineChartProps) => {
+    const ReportsLineChart = ({
+      data,
+      palette,
+      xKey,
+      lines,
+      currencySymbol = "",
+    }: LazyReportsLineChartProps) => {
       const { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
         mod;
       return (
@@ -379,7 +396,7 @@ const ReportsLineChartComponent = lazy(() =>
             <CartesianGrid strokeDasharray="3 3" stroke={palette.grid} />
             <XAxis dataKey={xKey} stroke={palette.grid} />
             <YAxis stroke={palette.grid} />
-            <Tooltip formatter={(value: number) => `$${value.toFixed(2)}`} />
+            <Tooltip formatter={(value: number) => `${currencySymbol}${value.toFixed(2)}`} />
             <Legend />
             {lines.map((line) => (
               <Line

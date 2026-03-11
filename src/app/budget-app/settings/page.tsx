@@ -36,7 +36,7 @@ import {
 import { Suspense, useEffect, useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
-import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { formatCurrency, getCurrencySymbol } from "@/i18n/utils/formatCurrency";
 import type { SupportedLocale } from "@/i18n/config";
 import { useSearchParams } from "next/navigation";
 import { PrivacyControlsPanel } from "./settings-privacy-panel";
@@ -922,6 +922,7 @@ function AccountModal({
   onClose: () => void;
 }) {
   const t = useTranslations("settings");
+  const modalLocale = useLocale() as SupportedLocale;
   const [name, setName] = useState(account?.name || "");
   const [institution, setInstitution] = useState(account?.institution || "");
   const [type, setType] = useState<"checking" | "savings" | "credit">(account?.type || "checking");
@@ -1002,7 +1003,9 @@ function AccountModal({
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">{t("balance")}</label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
+                  {getCurrencySymbol(currency, modalLocale)}
+                </span>
                 <input
                   type="number"
                   value={balance}

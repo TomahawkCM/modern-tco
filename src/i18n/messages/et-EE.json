@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Tagasi avalehele"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Aasta {n}",
+      "yearLabel": "Aasta",
+      "month": "Kuu {n}",
+      "monthYear": "Kuu {n} (aasta {y})",
+      "age": "Vanus {n}",
+      "ageLabel": "Vanus",
+      "contributions": "Sissemaksed",
+      "interestEarned": "Teenitud intress",
+      "interest": "Intress",
+      "totalInterest": "Intress kokku",
+      "snowball": "Lumepall",
+      "avalanche": "Laviin",
+      "portfolio": "Portfell",
+      "fireTarget": "FIRE eesmärk",
+      "median50th": "Mediaan (50.)",
+      "remainingBalance": "Jääk",
+      "totalAssets": "Varad kokku",
+      "totalLiabilities": "Kohustused kokku",
+      "netWorth": "Netoväärtus",
+      "retirement": "Pension"
+    },
+    "scenario": {
+      "compare": "Võrdle stsenaariume ({count} salvestatud)",
+      "selectUpTo": "Valige võrdlemiseks kuni 3 stsenaariumi:",
+      "duplicate": "Dubleeri",
+      "delete": "Kustuta",
+      "sideBySide": "Kõrvutiv võrdlus",
+      "field": "Väli",
+      "delta": "Vahe",
+      "selectOneMore": "Valige võrdlemiseks veel üks stsenaarium",
+      "copySuffix": "(koopia)"
+    },
+    "openCalculator": "Ava kalkulaator"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Kustuta",
     "edit": "Muuda",
     "loading": "Laadimine...",
-    "save": "Salvesta"
+    "save": "Salvesta",
+    "success": "Edu!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Kinnita",
     "finalConfirmation": "Lõplik kinnitamine:",
     "processing": "Töötlemine...",
-    "typeToConfirm": "Kinnita see toiming, kirjutades {text}."
+    "typeToConfirm": "Kinnita see toiming, kirjutades {text}.",
+    "confirmAction": "Kinnita toiming"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Skoori ajalugu",
+      "monthsOfData": "{count} {count, plural, =1 {kuu} other {kuud}} andmeid",
+      "emptyTitle": "Teie skoori ajalugu ilmub siia, kui andmed kogunevad",
+      "emptySubtitle": "Kontrollige järgmisel kuul uuesti!",
+      "legendScore": "Skoor",
+      "legendTrend": "Trend",
+      "tooltipScore": "Skoor",
+      "tooltipTrend": "Trend",
+      "loadingChart": "Diagrammi laadimine..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Teie eelarve elab TEIE seadmes",
+      "heroSubtitle": "Tere tulemast kõige privaatsemasse eelarverakendusse. Ilma kontodeta, ilma pilveta, ilma kompromissideta.",
+      "features": {
+        "yourDataTitle": "Teie andmed, teie seade",
+        "yourDataDescription": "Kõik finantsandmed salvestatakse kohalikult teie seadmesse. Ilma pilveserveriteta, ilma kolmandate osapoolte ligipääsuta.",
+        "encryptionTitle": "Pangatasemel krüpteering",
+        "encryptionDescription": "AES-256 krüpteering kaitseb teie andmeid. Ainult teil on võti — see ei lahku kunagi teie seadmest.",
+        "offlineTitle": "Töötab võrguühenduseta",
+        "offlineDescription": "Täisfunktsionaalsus ilma internetita. Ideaalne privaatsusteadlikele kasutajatele.",
+        "zeroTrackingTitle": "Null jälgimine",
+        "zeroTrackingDescription": "Ilma analüütikate, ilma telemeetriata, ilma andmekogumuseta. Teie rahaasjad ei puutu kedagi."
+      },
+      "whatsNext": "Mis järgneb?",
+      "whatsNextIntro": "Järgnevate minutite jooksul aitame teil:",
+      "step1": "Importida olemasolevad tehingud (panga CSV, OFX või käsitsi)",
+      "step2": "Kulutuste automaatne kategoriseerimine",
+      "step3": "Luua oma esimene eelarve tegelike kulutuste põhjal",
+      "step4": "Seadistada arve meeldetuletused, et te kunagi makset ei unustaks",
+      "getStarted": "Alustame"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} tehingut vajavad kategooriaid",
+      "allCategorized": "Kõik tehingud on kategoriseeritud!",
+      "applySmartSuggestions": "Rakenda nutikad soovitused",
+      "categorize": "Kategoriseeri",
+      "percentMatch": "{percent}% vastavus",
+      "rememberChoices": "Jäta minu kategooriavalikud meelde",
+      "rememberChoicesDescription": "Sarnaste tehingute automaatne kategoriseerimine tulevikus",
+      "categorized": "{count} kategoriseeritud",
+      "remaining": "{count} järelejäänud",
+      "continue": "Jätka",
+      "continueAnyway": "Jätka siiski",
+      "categories": {
+        "foodDining": "Toit ja söögikohad",
+        "transportation": "Transport",
+        "billsUtilities": "Arved ja kommunaalteenused",
+        "shopping": "Ostlemine",
+        "entertainment": "Meelelahutus",
+        "healthFitness": "Tervis ja fitness",
+        "personalCare": "Isiklik hooldus",
+        "income": "Sissetulek",
+        "transfers": "Ülekanded"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Profiili kustutamine ebaõnnestus",
+    "deleteTitle": "Kustuta profiil?",
+    "defaultProfile": "Vaikeprofiil",
+    "cannotDeleteOnly": "See on ainus profiil. Te ei saa seda kustutada.",
+    "permanentWarning": "See kustutab selle profiili jäädavalt. Kõik selle profiili privaatsed eelarved jagatakse kõigi profiilidega.",
+    "cannotUndo": "Seda toimingut ei saa tagasi võtta.",
+    "deleteButton": "Kustuta profiil"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Vaata"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Keela meeldetuletus",
+      "enableReminder": "Luba meeldetuletus",
+      "off": "Väljas"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Import lõpetatud!",
+    "subtitle": "Määra konto saldo kontole {accountName}",
+    "transactionsImported": "{count} tehingut imporditud",
+    "netChange": "Netomuutus tehingutest:",
+    "currentBalanceLabel": "Milline on teie praegune pangakonto saldo?",
+    "currentBalanceLabelCredit": "Milline on teie praegune võlasumma?",
+    "balanceHelperBank": "Avage oma pangarakendus ja sisestage selle konto kuvatav saldo",
+    "balanceHelperCredit": "Sisestage oma krediitkaardi väljavõttel näidatud praegune saldo (positiivse arvuna)",
+    "startingBalance": "Teie algsaldo:",
+    "startingBalanceCredit": "Teie algne võlasumma:",
+    "balanceMatchNote": "See viib teie konto saldo vastavusse pangaga.",
+    "negativeWarning": "Selle tulemuseks on negatiivne algsaldo, mis on arveldus-/hoiukontode puhul ebatavaline. Palun kontrollige, et praegune saldo on õige.",
+    "skipForNow": "Jäta praegu vahele",
+    "setBalance": "Määra saldo"
+  },
+  "recommendations": {
+    "title": "Peamised soovitused",
+    "subtitle": "Viisid oma rahalise tervise parandamiseks",
+    "emptyState": "Lisage rohkem finantsandmeid, et saada isikupärastatud soovitusi",
+    "viewAllFactors": "Vaata kõiki tegureid",
+    "factorLabels": {
+      "savingsRate": "Säästmine",
+      "debtToIncome": "Võlg",
+      "budgetAdherence": "Eelarve",
+      "emergencyFund": "Hädaabifond",
+      "investmentGrowth": "Investeeringud",
+      "expenseStability": "Kulud"
+    },
+    "factorLinks": {
+      "savingsRate": "Vaata sissetulekut",
+      "debtToIncome": "Halda laene",
+      "budgetAdherence": "Kohanda eelarveid",
+      "emergencyFund": "Planeeri säästmist",
+      "investmentGrowth": "Vaata portfelli",
+      "expenseStability": "Vaata aruandeid"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Kaupmees:",
+    "amount": "Summa:",
+    "average": "Keskmine: {amount}",
+    "category": "Kategooria:",
+    "wasExpected": "Kas see oli oodatud?",
+    "expected": "Oodatud",
+    "unexpected": "Ootamatu",
+    "markedExpected": "Märgitud oodatuks",
+    "markedUnexpected": "Märgitud ootamatuks",
+    "moreAnomalies": "+{count} {count, plural, =1 {anomaalia} other {anomaaliat}} veel",
+    "severity": {
+      "high": "KÕRGE",
+      "medium": "KESKMINE",
+      "low": "MADAL"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR töötlemine",
+    "cancel": "Tühista",
+    "pageProgress": "Lehekülg {current}/{total}",
+    "elapsed": "Kulunud: {time}",
+    "remaining": "~{time} jäänud",
+    "stages": {
+      "loading": "PDF laadimine",
+      "rendering": "Lehekülgede renderdamine",
+      "preprocessing": "Pildi parandamine",
+      "ocr": "Teksti eraldamine",
+      "parsing": "Tehingute analüüsimine",
+      "complete": "Lõpetatud",
+      "error": "Viga",
+      "cancelled": "Tühistatud",
+      "enhance": "Paranda"
+    },
+    "errorRetry": "OCR töötlemine ebaõnnestus. Kas soovite uuesti proovida?",
+    "cancelledRetry": "OCR tühistati. Kas soovite uuesti alustada?",
+    "retryButton": "Proovi OCR uuesti",
+    "completedSuccess": "OCR lõpetatud edukalt!",
+    "loadingChart": "Diagrammi laadimine..."
+  },
+  "developerTools": {
+    "title": "Arendustööriistad",
+    "subtitle": "QA tööriistad rahvusvahelistamise testimiseks (ainult arendusrežiim)",
+    "pseudoLocaleLabel": "Luba pseudo-lokaliseerimine (en-XA)",
+    "pseudoLocaleHelp": "Asendab kogu tõlgitud teksti rõhumärkidega tähemärkidega. Iga allesjäänud tavaline ingliskeelne tekst on <strong>kõvakodeeritud</strong> ja tuleb teisendada tõlkevõtmeteks.",
+    "pseudoLocaleExample": "Näide: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Kui näete \"Dashboard\" asemel \"[Ðášhƀóářð~~~]\", on see kõvakodeeritud!",
+    "infoPseudoLocale": "Pseudo-lokaliseerimine aitab tuvastada tõlkimata stringe arenduse ajal",
+    "infoProduction": "Tootmisversioonid välistavad automaatselt en-XA lokaliseerimise",
+    "infoSwitchBack": "Lülitage tagasi päris lokaliseerimisele, et jätkata tavalist arendust"
+  },
+  "pageMetadata": {
+    "appName": "Eelarverakendus",
+    "scenarios": "Mis-siis stsenaariumid",
+    "merchantRules": "Kaupmehe reeglid",
+    "more": "Rohkem",
+    "netWorth": "Netoväärtus",
+    "properties": "Kinnisvara",
+    "propertyDetail": "Kinnisvara üksikasjad",
+    "review": "Tehingute ülevaade",
+    "events": "Sündmuste eelarved",
+    "landing": "BudgetPro - Valitsege oma rahaasju",
+    "dashboard": "Töölaud",
+    "transactions": "Tehingud",
+    "import": "Import",
+    "accounts": "Kontod",
+    "budgets": "Eelarved",
+    "categories": "Kategooriad",
+    "reports": "Aruanded",
+    "settings": "Seaded",
+    "subscriptions": "Tellimused",
+    "investments": "Investeeringud",
+    "debtPayoff": "Võlgade tasumine",
+    "loans": "Laenud",
+    "calculators": "Kalkulaatorid",
+    "planning": "Planeerimine",
+    "ocr": "Kviitungiskanner",
+    "export": "Eksport",
+    "fridayReview": "Nädala ülevaade",
+    "onboarding": "Alustamine",
+    "offline": "Võrguühenduseta režiim",
+    "splits": "Jaga tehingud"
   }
 }

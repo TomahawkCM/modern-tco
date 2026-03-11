@@ -9,7 +9,7 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import type { HistoricalScore } from "@/lib/analytics/health-score";
 import { useSeniorsMode } from "@/hooks/useSeniorsMode";
@@ -28,9 +28,13 @@ const DynamicChart = dynamic(
       function HistoryChart({
         data,
         isSeniorsMode,
+        scoreLabel,
+        trendLabel,
       }: {
         data: ChartDataPoint[];
         isSeniorsMode: boolean;
+        scoreLabel: string;
+        trendLabel: string;
       }) {
         const {
           XAxis,
@@ -97,7 +101,7 @@ const DynamicChart = dynamic(
                 labelStyle={{ color: "#fff" }}
                 formatter={(value: number, name: string) => [
                   value.toFixed(1),
-                  name === "score" ? "Score" : "Trend",
+                  name === "score" ? scoreLabel : trendLabel,
                 ]}
               />
               <ReferenceLine y={80} stroke="#22c55e" strokeDasharray="5 5" opacity={0.5} />
@@ -112,7 +116,7 @@ const DynamicChart = dynamic(
                 strokeWidth={2}
                 strokeDasharray="5 5"
                 dot={false}
-                name="Trend"
+                name={trendLabel}
               />
 
               <Line
@@ -121,7 +125,7 @@ const DynamicChart = dynamic(
                 stroke="#14b8a6"
                 strokeWidth={3}
                 dot={{ r: 4, fill: "#14b8a6", stroke: "#fff", strokeWidth: 2 }}
-                name="Score"
+                name={scoreLabel}
                 animationDuration={1000}
               />
             </ComposedChart>
@@ -133,7 +137,9 @@ const DynamicChart = dynamic(
   {
     loading: () => (
       <div className="flex h-[300px] animate-pulse items-center justify-center rounded-lg bg-slate-800/50">
-        <p className="text-slate-400">Loading chart...</p>
+        <p className="text-slate-400">
+          {/* Loading placeholder - translated text in component below */}
+        </p>
       </div>
     ),
     ssr: false,
@@ -147,6 +153,7 @@ interface HealthScoreHistoryProps {
 
 export function HealthScoreHistory({ historicalScores, className }: HealthScoreHistoryProps) {
   const locale = useLocale();
+  const t = useTranslations("healthScore");
   const { isSeniorsMode } = useSeniorsMode();
 
   // Transform historical data for the chart
@@ -190,10 +197,8 @@ export function HealthScoreHistory({ historicalScores, className }: HealthScoreH
         )}
       >
         <TrendingUp className="mb-3 h-12 w-12 text-slate-600" />
-        <p className="text-center text-slate-400">
-          Your score history will appear here as data accumulates
-        </p>
-        <p className="mt-2 text-xs text-slate-500">Check back next month!</p>
+        <p className="text-center text-slate-400">{t("history.emptyTitle")}</p>
+        <p className="mt-2 text-xs text-slate-500">{t("history.emptySubtitle")}</p>
       </div>
     );
   }
@@ -208,10 +213,10 @@ export function HealthScoreHistory({ historicalScores, className }: HealthScoreH
       <div className="mb-4 flex items-center justify-between">
         <div>
           <h3 className={cn("font-semibold text-white", isSeniorsMode && "text-lg")}>
-            Score History
+            {t("history.title")}
           </h3>
           <p className="text-xs text-slate-400">
-            {chartData.length} month{chartData.length !== 1 ? "s" : ""} of data
+            {t("history.monthsOfData", { count: chartData.length })}
           </p>
         </div>
 
@@ -233,16 +238,21 @@ export function HealthScoreHistory({ historicalScores, className }: HealthScoreH
         </div>
       </div>
 
-      <DynamicChart data={chartData} isSeniorsMode={isSeniorsMode} />
+      <DynamicChart
+        data={chartData}
+        isSeniorsMode={isSeniorsMode}
+        scoreLabel={t("history.legendScore")}
+        trendLabel={t("history.legendTrend")}
+      />
 
       <div className="mt-4 flex items-center justify-center gap-6 text-xs text-slate-400">
         <div className="flex items-center gap-2">
           <div className="h-0.5 w-3 rounded bg-teal-500" />
-          <span>Score</span>
+          <span>{t("history.legendScore")}</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="h-0.5 w-3 rounded border-dashed bg-slate-400" />
-          <span>Trend</span>
+          <span>{t("history.legendTrend")}</span>
         </div>
       </div>
     </motion.div>

@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Grįžti į pradžią"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Metai {n}",
+      "yearLabel": "Metai",
+      "month": "Mėnuo {n}",
+      "monthYear": "Mėnuo {n} (metai {y})",
+      "age": "Amžius {n}",
+      "ageLabel": "Amžius",
+      "contributions": "Įnašai",
+      "interestEarned": "Uždirbtos palūkanos",
+      "interest": "Palūkanos",
+      "totalInterest": "Palūkanos iš viso",
+      "snowball": "Sniego gniūžtė",
+      "avalanche": "Lavina",
+      "portfolio": "Portfelis",
+      "fireTarget": "FIRE tikslas",
+      "median50th": "Mediana (50-asis)",
+      "remainingBalance": "Likutinis balansas",
+      "totalAssets": "Turtas iš viso",
+      "totalLiabilities": "Įsipareigojimai iš viso",
+      "netWorth": "Grynoji vertė",
+      "retirement": "Pensija"
+    },
+    "scenario": {
+      "compare": "Palyginti scenarijus ({count} išsaugotų)",
+      "selectUpTo": "Pasirinkite iki 3 scenarijų palyginimui:",
+      "duplicate": "Dubliuoti",
+      "delete": "Ištrinti",
+      "sideBySide": "Palyginimas greta",
+      "field": "Laukas",
+      "delta": "Skirtumas",
+      "selectOneMore": "Pasirinkite dar vieną scenarijų palyginimui",
+      "copySuffix": "(kopija)"
+    },
+    "openCalculator": "Atidaryti skaičiuoklę"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Ištrinti",
     "edit": "Redaguoti",
     "loading": "Kraunama...",
-    "save": "Išsaugoti"
+    "save": "Išsaugoti",
+    "success": "Sėkmė!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Patvirtinti",
     "finalConfirmation": "Galutinis patvirtinimas:",
     "processing": "Apdorojama...",
-    "typeToConfirm": "Įrašykite {text}, kad patvirtintumėte šią veiksmą."
+    "typeToConfirm": "Įrašykite {text}, kad patvirtintumėte šią veiksmą.",
+    "confirmAction": "Patvirtinti veiksmą"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Balo istorija",
+      "monthsOfData": "{count} {count, plural, =1 {mėnuo} other {mėnesių}} duomenų",
+      "emptyTitle": "Jūsų balo istorija bus rodoma čia, kai susikaups duomenys",
+      "emptySubtitle": "Patikrinkite kitą mėnesį!",
+      "legendScore": "Balas",
+      "legendTrend": "Tendencija",
+      "tooltipScore": "Balas",
+      "tooltipTrend": "Tendencija",
+      "loadingChart": "Įkeliama diagrama..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Jūsų biudžetas gyvena JŪSŲ įrenginyje",
+      "heroSubtitle": "Sveiki atvykę į privatžiausią biudžeto programėlę. Be paskyrų, be debesies, be kompromisų.",
+      "features": {
+        "yourDataTitle": "Jūsų duomenys, jūsų įrenginys",
+        "yourDataDescription": "Visi finansiniai duomenys saugomi lokaliai jūsų įrenginyje. Be debesų serverių, be trečiųjų šalių prieigos.",
+        "encryptionTitle": "Bankinio lygio šifravimas",
+        "encryptionDescription": "AES-256 šifravimas apsaugo jūsų duomenis. Tik jūs turite raktą — jis niekada nepalieka jūsų įrenginio.",
+        "offlineTitle": "Veikia neprisijungus",
+        "offlineDescription": "Pilnas funkcionalumas be interneto. Puikiai tinka privatumą vertintantiems naudotojams.",
+        "zeroTrackingTitle": "Jokio sekimo",
+        "zeroTrackingDescription": "Be analitikos, be telemetrijos, be duomenų rinkimo. Jūsų finansai — ne kieno nors reikalas."
+      },
+      "whatsNext": "Kas toliau?",
+      "whatsNextIntro": "Per artimiausias minutes padėsime jums:",
+      "step1": "Importuoti esamas operacijas (banko CSV, OFX arba rankiniu būdu)",
+      "step2": "Automatiškai suskirstyti išlaidas į kategorijas",
+      "step3": "Sukurti pirmąjį biudžetą pagal faktines išlaidas",
+      "step4": "Nustatyti sąskaitų priminimus, kad nepraleisite mokėjimo",
+      "getStarted": "Pradėkime"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} operacijų reikia kategorijų",
+      "allCategorized": "Visos operacijos suskirstytos!",
+      "applySmartSuggestions": "Taikyti išmaniuosius pasiūlymus",
+      "categorize": "Kategorizuoti",
+      "percentMatch": "{percent}% atitikimas",
+      "rememberChoices": "Atsiminti mano kategorijų pasirinkimus",
+      "rememberChoicesDescription": "Automatiškai kategorizuoti panašias operacijas ateityje",
+      "categorized": "{count} suskirstyta",
+      "remaining": "{count} liko",
+      "continue": "Tęsti",
+      "continueAnyway": "Tęsti vis tiek",
+      "categories": {
+        "foodDining": "Maistas ir maitinimas",
+        "transportation": "Transportas",
+        "billsUtilities": "Sąskaitos ir komunalinės paslaugos",
+        "shopping": "Apsipirkimas",
+        "entertainment": "Pramogos",
+        "healthFitness": "Sveikata ir sportas",
+        "personalCare": "Asmeninė priežiūra",
+        "income": "Pajamos",
+        "transfers": "Pervedimai"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Nepavyko ištrinti profilio",
+    "deleteTitle": "Ištrinti profilį?",
+    "defaultProfile": "Numatytasis profilis",
+    "cannotDeleteOnly": "Tai vienintelis profilis. Negalite jo ištrinti.",
+    "permanentWarning": "Tai visam laikui ištrins šį profilį. Visi šio profilio privatūs biudžetai bus bendrinami su visais profiliais.",
+    "cannotUndo": "Šio veiksmo negalima atšaukti.",
+    "deleteButton": "Ištrinti profilį"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Peržiūrėti"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Išjungti priminimą",
+      "enableReminder": "Įjungti priminimą",
+      "off": "Išjungta"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Importavimas baigtas!",
+    "subtitle": "Nustatykite sąskaitos balansą {accountName}",
+    "transactionsImported": "{count} operacijų importuota",
+    "netChange": "Grynasis pokytis iš operacijų:",
+    "currentBalanceLabel": "Koks yra jūsų dabartinis banko sąskaitos likutis?",
+    "currentBalanceLabelCredit": "Kokia yra jūsų dabartinė skolos suma?",
+    "balanceHelperBank": "Atidarykite savo banko programėlę ir įveskite šiai sąskaitai rodomą likutį",
+    "balanceHelperCredit": "Įveskite dabartinį kredito kortelės išraše rodomą likutį (kaip teigiamą skaičių)",
+    "startingBalance": "Jūsų pradinis likutis:",
+    "startingBalanceCredit": "Jūsų pradinė skolos suma:",
+    "balanceMatchNote": "Tai suderins jūsų sąskaitos likutį su banku.",
+    "negativeWarning": "Tai lemia neigiamą pradinį likutį, kas yra neįprasta einamosioms/taupymo sąskaitoms. Patikrinkite, ar dabartinis likutis teisingas.",
+    "skipForNow": "Praleisti kol kas",
+    "setBalance": "Nustatyti likutį"
+  },
+  "recommendations": {
+    "title": "Svarbiausios rekomendacijos",
+    "subtitle": "Būdai pagerinti jūsų finansinę sveikatą",
+    "emptyState": "Pridėkite daugiau finansinių duomenų, kad gautumėte asmenines rekomendacijas",
+    "viewAllFactors": "Peržiūrėti visus veiksnius",
+    "factorLabels": {
+      "savingsRate": "Taupymas",
+      "debtToIncome": "Skola",
+      "budgetAdherence": "Biudžetas",
+      "emergencyFund": "Atsargos fondas",
+      "investmentGrowth": "Investicijos",
+      "expenseStability": "Išlaidos"
+    },
+    "factorLinks": {
+      "savingsRate": "Peržiūrėti pajamas",
+      "debtToIncome": "Valdyti paskolas",
+      "budgetAdherence": "Koreguoti biudžetus",
+      "emergencyFund": "Planuoti taupymą",
+      "investmentGrowth": "Peržiūrėti portfelį",
+      "expenseStability": "Peržiūrėti ataskaitas"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Pardavėjas:",
+    "amount": "Suma:",
+    "average": "Vidurkis: {amount}",
+    "category": "Kategorija:",
+    "wasExpected": "Ar tai buvo tikėtina?",
+    "expected": "Tikėtina",
+    "unexpected": "Netikėta",
+    "markedExpected": "Pažymėta kaip tikėtina",
+    "markedUnexpected": "Pažymėta kaip netikėta",
+    "moreAnomalies": "+{count} {count, plural, =1 {anomalija} other {anomalijų}} daugiau",
+    "severity": {
+      "high": "AUKŠTAS",
+      "medium": "VIDUTINIS",
+      "low": "ŽEMAS"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR apdorojimas",
+    "cancel": "Atšaukti",
+    "pageProgress": "Puslapis {current} iš {total}",
+    "elapsed": "Praėjo: {time}",
+    "remaining": "~{time} liko",
+    "stages": {
+      "loading": "Įkeliamas PDF",
+      "rendering": "Atvaizduojami puslapiai",
+      "preprocessing": "Gerinamas vaizdas",
+      "ocr": "Ištraukiamas tekstas",
+      "parsing": "Analizuojamos operacijos",
+      "complete": "Baigta",
+      "error": "Klaida",
+      "cancelled": "Atšaukta",
+      "enhance": "Pagerinti"
+    },
+    "errorRetry": "OCR apdorojimas nepavyko. Ar norite bandyti dar kartą?",
+    "cancelledRetry": "OCR buvo atšauktas. Ar norite pradėti iš naujo?",
+    "retryButton": "Pakartoti OCR",
+    "completedSuccess": "OCR sėkmingai baigtas!",
+    "loadingChart": "Įkeliama diagrama..."
+  },
+  "developerTools": {
+    "title": "Kūrėjo įrankiai",
+    "subtitle": "QA įrankiai internacionalizacijos testavimui (tik kūrimo režimas)",
+    "pseudoLocaleLabel": "Įjungti pseudo-lokalizaciją (en-XA)",
+    "pseudoLocaleHelp": "Pakeičia visą išverstą tekstą kirčiuotais simboliais. Bet koks likęs paprastas angliškas tekstas yra <strong>užkoduotas</strong> ir turi būti konvertuotas į vertimo raktus.",
+    "pseudoLocaleExample": "Pavyzdys: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Jei matote \"Dashboard\" vietoj \"[Ðášhƀóářð~~~]\", tai yra užkoduota!",
+    "infoPseudoLocale": "Pseudo-lokalizacija padeda nustatyti neišverstas eilutes kūrimo metu",
+    "infoProduction": "Gamybinės versijos automatiškai neįtraukia en-XA lokalizacijos",
+    "infoSwitchBack": "Grįžkite prie tikros lokalizacijos, kad tęstumėte įprastą kūrimą"
+  },
+  "pageMetadata": {
+    "appName": "Biudžeto programėlė",
+    "scenarios": "„Kas-jei“ scenarijai",
+    "merchantRules": "Prekybininkų taisyklės",
+    "more": "Daugiau",
+    "netWorth": "Grynoji vertė",
+    "properties": "Nekilnojamasis turtas",
+    "propertyDetail": "Turto informacija",
+    "review": "Operacijų peržiūra",
+    "events": "Renginių biudžetai",
+    "landing": "BudgetPro - Valdykite savo finansus",
+    "dashboard": "Skydelis",
+    "transactions": "Operacijos",
+    "import": "Importas",
+    "accounts": "Sąskaitos",
+    "budgets": "Biudžetai",
+    "categories": "Kategorijos",
+    "reports": "Ataskaitos",
+    "settings": "Nustatymai",
+    "subscriptions": "Prenumeratos",
+    "investments": "Investicijos",
+    "debtPayoff": "Skolų grąžinimas",
+    "loans": "Paskolos",
+    "calculators": "Skaičiuotuvai",
+    "planning": "Planavimas",
+    "ocr": "Kvitų skaitytuvas",
+    "export": "Eksportas",
+    "fridayReview": "Savaitės apžvalga",
+    "onboarding": "Pradžia",
+    "offline": "Atsijungus",
+    "splits": "Padalinti operacijas"
   }
 }

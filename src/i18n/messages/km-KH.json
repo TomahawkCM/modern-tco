@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "ត្រឡប់ទៅទំព័រដើម"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "ឆ្នាំ {n}",
+      "yearLabel": "ឆ្នាំ",
+      "month": "ខែ {n}",
+      "monthYear": "ខែ {n} (ឆ្នាំ {y})",
+      "age": "អាយុ {n}",
+      "ageLabel": "អាយុ",
+      "contributions": "វិភាគទាន",
+      "interestEarned": "ការប្រាក់ដែលរកបាន",
+      "interest": "ការប្រាក់",
+      "totalInterest": "ការប្រាក់សរុប",
+      "snowball": "បាល់ព្រិល",
+      "avalanche": "ព្រិលបាត់បង់",
+      "portfolio": "ផលប័ត្រ",
+      "fireTarget": "គោលដៅ FIRE",
+      "median50th": "មធ្យមភាគ (50)",
+      "remainingBalance": "សមតុល្យនៅសល់",
+      "totalAssets": "ទ្រព្យសម្បត្តិសរុប",
+      "totalLiabilities": "បំណុលសរុប",
+      "netWorth": "តម្លៃសុទ្ធ",
+      "retirement": "ការចូលនិវត្តន៍"
+    },
+    "scenario": {
+      "compare": "ប្រៀបធៀបសេណារីយ៉ូ ({count} បានរក្សាទុក)",
+      "selectUpTo": "ជ្រើសរើសរហូតដល់ 3 សេណារីយ៉ូដើម្បីប្រៀបធៀប។",
+      "duplicate": "ចម្លង",
+      "delete": "លុប",
+      "sideBySide": "ការប្រៀបធៀបទល់មុខគ្នា",
+      "field": "វាល",
+      "delta": "ភាពខុសគ្នា",
+      "selectOneMore": "ជ្រើសរើសសេណារីយ៉ូមួយទៀតដើម្បីប្រៀបធៀប",
+      "copySuffix": "(ចម្លង)"
+    },
+    "openCalculator": "បើកម៉ាស៊ីនគិតលេខ"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "លុប",
     "edit": "កែប្រែ",
     "loading": "កំពុងផ្ទុក...",
-    "save": "រក្សាទុក"
+    "save": "រក្សាទុក",
+    "success": "ជោគជ័យ!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "បញ្ជាក់",
     "finalConfirmation": "ការបញ្ជាក់ចុងក្រោយ៖",
     "processing": "កំពុងដំណើរការ...",
-    "typeToConfirm": "វាយ {text} ដើម្បីបញ្ជាក់សកម្មភាពនេះ។"
+    "typeToConfirm": "វាយ {text} ដើម្បីបញ្ជាក់សកម្មភាពនេះ។",
+    "confirmAction": "បញ្ជាក់សកម្មភាព"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "ប្រវត្តិពិន្ទុ",
+      "monthsOfData": "{count} {count, plural, =1 {ខែ} other {ខែ}} នៃទិន្នន័យ",
+      "emptyTitle": "ប្រវត្តិពិន្ទុរបស់អ្នកនឹងបង្ហាញនៅទីនេះនៅពេលទិន្នន័យកើនឡើង",
+      "emptySubtitle": "ពិនិត្យមើលវិញនៅខែក្រោយ!",
+      "legendScore": "ពិន្ទុ",
+      "legendTrend": "និន្នាការ",
+      "tooltipScore": "ពិន្ទុ",
+      "tooltipTrend": "និន្នាការ",
+      "loadingChart": "កំពុងផ្ទុកតារាង..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "ថវិការបស់អ្នកស្ថិតនៅលើឧបករណ៍របស់អ្នក",
+      "heroSubtitle": "សូមស្វាគមន៍មកកាន់កម្មវិធីថវិកាដែលមានឯកជនភាពបំផុត។ គ្មានគណនី គ្មានពពក គ្មានការសម្របសម្រួល។",
+      "features": {
+        "yourDataTitle": "ទិន្នន័យរបស់អ្នក ឧបករណ៍របស់អ្នក",
+        "yourDataDescription": "ទិន្នន័យហិរញ្ញវត្ថុទាំងអស់ត្រូវបានរក្សាទុកនៅលើឧបករណ៍របស់អ្នក។ គ្មានម៉ាស៊ីនមេពពក គ្មានភាគីទីបីចូលប្រើ។",
+        "encryptionTitle": "ការអ៊ិនគ្រីបកម្រិតធនាគារ",
+        "encryptionDescription": "ការអ៊ិនគ្រីប AES-256 ការពារទិន្នន័យរបស់អ្នក។ មានតែអ្នកប៉ុណ្ណោះដែលមានសោ—វាមិនដែលចាកចេញពីឧបករណ៍របស់អ្នកឡើយ។",
+        "offlineTitle": "ដំណើរការដោយមិនភ្ជាប់អ៊ីនធឺណិត",
+        "offlineDescription": "មុខងារពេញលេញដោយមិនចាំបាច់ប្រើអ៊ីនធឺណិត។ ល្អឥតខ្ចោះសម្រាប់អ្នកប្រើប្រាស់ដែលយកចិត្តទុកដាក់ពីឯកជនភាព។",
+        "zeroTrackingTitle": "គ្មានការតាមដាន",
+        "zeroTrackingDescription": "គ្មានការវិភាគ គ្មានទេឡេម៉េទ្រី គ្មានការប្រមូលទិន្នន័យ។ ហិរញ្ញវត្ថុរបស់អ្នកមិនមែនជារឿងរបស់នរណាឡើយ។"
+      },
+      "whatsNext": "អ្វីបន្ទាប់?",
+      "whatsNextIntro": "ក្នុងរយៈពេលប៉ុន្មាននាទីខាងមុខ យើងនឹងជួយអ្នក:",
+      "step1": "នាំចូលប្រតិបត្តិការដែលមានស្រាប់ (CSV ធនាគារ, OFX ឬដោយដៃ)",
+      "step2": "ចាត់ថ្នាក់ការចំណាយរបស់អ្នកដោយស្វ័យប្រវត្តិ",
+      "step3": "បង្កើតថវិកាដំបូងរបស់អ្នកដោយផ្អែកលើការចំណាយជាក់ស្តែង",
+      "step4": "រៀបចំការរំលឹកវិក្កយបត្រដើម្បីកុំឱ្យខកខានការបង់ប្រាក់",
+      "getStarted": "ចាប់ផ្តើមភ្លាម"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} ប្រតិបត្តិការត្រូវការប្រភេទ",
+      "allCategorized": "ប្រតិបត្តិការទាំងអស់ត្រូវបានចាត់ថ្នាក់រួចហើយ!",
+      "applySmartSuggestions": "អនុវត្តការណែនាំឆ្លាតវៃ",
+      "categorize": "ចាត់ថ្នាក់",
+      "percentMatch": "ផ្គូផ្គង {percent}%",
+      "rememberChoices": "ចងចាំជម្រើសប្រភេទរបស់ខ្ញុំ",
+      "rememberChoicesDescription": "ចាត់ថ្នាក់ប្រតិបត្តិការស្រដៀងគ្នាដោយស្វ័យប្រវត្តិនាពេលអនាគត",
+      "categorized": "{count} បានចាត់ថ្នាក់",
+      "remaining": "{count} នៅសល់",
+      "continue": "បន្ត",
+      "continueAnyway": "បន្តទៅមុខ",
+      "categories": {
+        "foodDining": "អាហារ និងភេសជ្ជៈ",
+        "transportation": "ការដឹកជញ្ជូន",
+        "billsUtilities": "វិក្កយបត្រ និងប្រើប្រាស់សាធារណៈ",
+        "shopping": "ការទិញទំនិញ",
+        "entertainment": "កម្សាន្ត",
+        "healthFitness": "សុខភាព និងកាយសម្បទា",
+        "personalCare": "ការថែរក្សាផ្ទាល់ខ្លួន",
+        "income": "ចំណូល",
+        "transfers": "ការផ្ទេរប្រាក់"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "មិនអាចលុបប្រវត្តិរូបបានទេ",
+    "deleteTitle": "លុបប្រវត្តិរូប?",
+    "defaultProfile": "ប្រវត្តិរូបលំនាំដើម",
+    "cannotDeleteOnly": "នេះគឺជាប្រវត្តិរូបតែមួយគត់។ អ្នកមិនអាចលុបវាបានទេ។",
+    "permanentWarning": "នេះនឹងលុបប្រវត្តិរូបនេះជាអចិន្ត្រៃយ៍។ ថវិកាឯកជនណាមួយរបស់ប្រវត្តិរូបនេះនឹងត្រូវបែងចែកជាមួយប្រវត្តិរូបទាំងអស់។",
+    "cannotUndo": "សកម្មភាពនេះមិនអាចត្រឡប់វិញបានទេ។",
+    "deleteButton": "លុបប្រវត្តិរូប"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "មើល"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "បិទការរំលឹក",
+      "enableReminder": "បើកការរំលឹក",
+      "off": "បិទ"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "ការនាំចូលបានបញ្ចប់!",
+    "subtitle": "កំណត់សមតុល្យគណនីសម្រាប់ {accountName}",
+    "transactionsImported": "បាននាំចូល {count} ប្រតិបត្តិការ",
+    "netChange": "ការផ្លាស់ប្តូរសុទ្ធពីប្រតិបត្តិការ:",
+    "currentBalanceLabel": "សមតុល្យធនាគារបច្ចុប្បន្នរបស់អ្នកគឺប៉ុន្មាន?",
+    "currentBalanceLabelCredit": "ចំនួនបំណុលបច្ចុប្បន្នរបស់អ្នកគឺប៉ុន្មាន?",
+    "balanceHelperBank": "បើកកម្មវិធីធនាគាររបស់អ្នក ហើយបញ្ចូលសមតុល្យដែលបង្ហាញសម្រាប់គណនីនេះ",
+    "balanceHelperCredit": "បញ្ចូលសមតុល្យបច្ចុប្បន្នដែលបង្ហាញនៅលើវិក្កយបត្របណ្ណឥណទានរបស់អ្នក (ជាចំនួនវិជ្ជមាន)",
+    "startingBalance": "សមតុល្យចាប់ផ្តើមរបស់អ្នក:",
+    "startingBalanceCredit": "ចំនួនបំណុលចាប់ផ្តើមរបស់អ្នក:",
+    "balanceMatchNote": "នេះនឹងធ្វើឱ្យសមតុល្យគណនីរបស់អ្នកត្រូវគ្នានឹងធនាគាររបស់អ្នក។",
+    "negativeWarning": "នេះផ្តល់លទ្ធផលជាសមតុល្យចាប់ផ្តើមអវិជ្ជមាន ដែលមិនធម្មតាសម្រាប់គណនីសន្សំ/ចរន្ត។ សូមពិនិត្យសមតុល្យបច្ចុប្បន្នរបស់អ្នកម្តងទៀត។",
+    "skipForNow": "រំលងជាមុនសិន",
+    "setBalance": "កំណត់សមតុល្យ"
+  },
+  "recommendations": {
+    "title": "អនុសាសន៍កំពូល",
+    "subtitle": "វិធីកែលម្អសុខភាពហិរញ្ញវត្ថុរបស់អ្នក",
+    "emptyState": "បន្ថែមទិន្នន័យហិរញ្ញវត្ថុបន្ថែមដើម្បីទទួលបានអនុសាសន៍ផ្ទាល់ខ្លួន",
+    "viewAllFactors": "មើលកត្តាទាំងអស់",
+    "factorLabels": {
+      "savingsRate": "ការសន្សំ",
+      "debtToIncome": "បំណុល",
+      "budgetAdherence": "ថវិកា",
+      "emergencyFund": "មូលនិធិសង្គ្រោះបន្ទាន់",
+      "investmentGrowth": "ការវិនិយោគ",
+      "expenseStability": "ចំណាយ"
+    },
+    "factorLinks": {
+      "savingsRate": "មើលចំណូល",
+      "debtToIncome": "គ្រប់គ្រងប្រាក់កម្ចី",
+      "budgetAdherence": "កែសម្រួលថវិកា",
+      "emergencyFund": "រៀបចំផែនការសន្សំ",
+      "investmentGrowth": "មើលផលប័ត្រ",
+      "expenseStability": "មើលរបាយការណ៍"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "អ្នកលក់:",
+    "amount": "ចំនួន:",
+    "average": "មធ្យម: {amount}",
+    "category": "ប្រភេទ:",
+    "wasExpected": "តើនេះត្រូវបានរំពឹងទុកទេ?",
+    "expected": "រំពឹងទុក",
+    "unexpected": "មិនរំពឹងទុក",
+    "markedExpected": "បានសម្គាល់ថារំពឹងទុក",
+    "markedUnexpected": "បានសម្គាល់ថាមិនរំពឹងទុក",
+    "moreAnomalies": "+{count} {count, plural, =1 {ភាពមិនធម្មតា} other {ភាពមិនធម្មតា}} ទៀត",
+    "severity": {
+      "high": "ខ្ពស់",
+      "medium": "មធ្យម",
+      "low": "ទាប"
+    }
+  },
+  "pdfOcr": {
+    "processing": "ការដំណើរការ OCR",
+    "cancel": "បោះបង់",
+    "pageProgress": "ទំព័រ {current} នៃ {total}",
+    "elapsed": "រយៈពេល: {time}",
+    "remaining": "~{time} នៅសល់",
+    "stages": {
+      "loading": "កំពុងផ្ទុក PDF",
+      "rendering": "កំពុងបង្ហាញទំព័រ",
+      "preprocessing": "កំពុងកែលម្អរូបភាព",
+      "ocr": "កំពុងទាញយកអត្ថបទ",
+      "parsing": "កំពុងវិភាគប្រតិបត្តិការ",
+      "complete": "បានបញ្ចប់",
+      "error": "កំហុស",
+      "cancelled": "បានបោះបង់",
+      "enhance": "កែលម្អ"
+    },
+    "errorRetry": "ការដំណើរការ OCR បានបរាជ័យ។ តើអ្នកចង់ព្យាយាមម្តងទៀតទេ?",
+    "cancelledRetry": "OCR ត្រូវបានបោះបង់។ តើអ្នកចង់ចាប់ផ្តើមឡើងវិញទេ?",
+    "retryButton": "ព្យាយាម OCR ម្តងទៀត",
+    "completedSuccess": "OCR បានបញ្ចប់ដោយជោគជ័យ!",
+    "loadingChart": "កំពុងផ្ទុកតារាង..."
+  },
+  "developerTools": {
+    "title": "ក្រុមឧបករណ៍អ្នកទ្រៀតរចនា",
+    "subtitle": "ក្រុមឧបករណ៍ QA សម្រាប់សាកល្បងអ្នតរជាតិករណ៍ (របៀបអ្នកទ្រៀតរចនាតែប៉ុណ្ណោះ)",
+    "pseudoLocaleLabel": "បើក Pseudo-Locale (en-XA)",
+    "pseudoLocaleHelp": "ជំនួសអត្ថបទដែលបានបកប្រែទាំងអស់ដោយតួអក្សរដែលមានសម្លេង។ អត្ថបទជាភាសាអង់គ្លេសធម្មតាដែលនៅសល់គឺត្រូវបាន <strong>សរសេររឹង</strong> ហើយត្រូវប្តូរជាសោបកូនសោបបកប្រែ។",
+    "pseudoLocaleExample": "ឧទាហរណ៍: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "បើអ្នកឃើញ \"Dashboard\" ជំនួសឱយ \"[Ðášhƀóářð~~~]\" វាត្រូវបានសរសេររឹង!",
+    "infoPseudoLocale": "Pseudo-locale ជួយកំណត់អត្ថបទដែលមិនទាន់បានបកប្រែក្នុងពេលអភិវឌ្ឍន៍",
+    "infoProduction": "ការសរ់សង់ផលិតកម្មលើកចេញ locale en-XA ដោយស្វ័យប្រវត្តិ",
+    "infoSwitchBack": "ប្តូរត្រឡប់ទៅ locale ពិតប្រាកដដែលដើម្បីបន្តការអភិវឌ្ឍន៍ធម្មតា"
+  },
+  "pageMetadata": {
+    "appName": "កម្មវិធីថវិកា",
+    "scenarios": "សេនារីយ៉ូ បើសិនជា",
+    "merchantRules": "កត់វិន័យពាណិជ្ជករ",
+    "more": "ច្រើនជាង",
+    "netWorth": "តម្លៃសុទ្ធ",
+    "properties": "អចលនត្រូព",
+    "propertyDetail": "លម្អិតអចលនត្រូព",
+    "review": "ពិនិត្យប្រតិបត្តិការ",
+    "events": "ថវិកានៃពេលភាព",
+    "landing": "BudgetPro - គ្រប់គ្រងហិរញ្ញវត្ថុរបស់អ្នក",
+    "dashboard": "ផ្ទាំងគ្រប់គ្រង",
+    "transactions": "ប្រតិបត្តិការ",
+    "import": "នាំចូល",
+    "accounts": "គណនី",
+    "budgets": "ថវិកា",
+    "categories": "ប្រភេទ",
+    "reports": "របាយការណ៍",
+    "settings": "ការកំណត់",
+    "subscriptions": "ការជាវប្រែ",
+    "investments": "ការវិនិយោគ",
+    "debtPayoff": "ការសងប្រាក់បំណុល",
+    "loans": "ការកុ៌",
+    "calculators": "ម៉ាស៊ីនគិត",
+    "planning": "ការវាងផែនការ",
+    "ocr": "ម៉ាស៊ីនស្កេនបង្កាន់ដៃ",
+    "export": "នាំចេញ",
+    "fridayReview": "ការពិនិត្យប្រចាំសប្តាហ៍",
+    "onboarding": "ចាប់ផ្តើម",
+    "offline": "របៀបក្រៅបណ្ដdelays",
+    "splits": "បែrgdelaysdelays"
   }
 }

@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "ہوم پر واپس جائیں"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "سال {n}",
+      "yearLabel": "سال",
+      "month": "مہینہ {n}",
+      "monthYear": "مہینہ {n} (سال {y})",
+      "age": "عمر {n}",
+      "ageLabel": "عمر",
+      "contributions": "شراکتیں",
+      "interestEarned": "حاصل شدہ سود",
+      "interest": "سود",
+      "totalInterest": "کل سود",
+      "snowball": "سنو بال",
+      "avalanche": "ایوالانچ",
+      "portfolio": "پورٹ فولیو",
+      "fireTarget": "FIRE ہدف",
+      "median50th": "میڈین (50واں)",
+      "remainingBalance": "بقایا بیلنس",
+      "totalAssets": "کل اثاثے",
+      "totalLiabilities": "کل واجبات",
+      "netWorth": "خالص مالیت",
+      "retirement": "ریٹائرمنٹ"
+    },
+    "scenario": {
+      "compare": "منظرناموں کا موازنہ کریں ({count} محفوظ)",
+      "selectUpTo": "موازنے کے لیے 3 تک منظرنامے منتخب کریں:",
+      "duplicate": "نقل کریں",
+      "delete": "حذف کریں",
+      "sideBySide": "ساتھ ساتھ موازنہ",
+      "field": "فیلڈ",
+      "delta": "فرق",
+      "selectOneMore": "موازنے کے لیے ایک اور منظرنامہ منتخب کریں",
+      "copySuffix": "(کاپی)"
+    },
+    "openCalculator": "کیلکولیٹر کھولیں"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "حذف کریں",
     "edit": "ترمیم کریں",
     "loading": "لوڈ ہو رہا ہے...",
-    "save": "محفوظ کریں"
+    "save": "محفوظ کریں",
+    "success": "کامیابی!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "تصدیق کریں",
     "finalConfirmation": "آخری تصدیق:",
     "processing": "پروسیسنگ...",
-    "typeToConfirm": "اس عمل کی تصدیق کرنے کے لیے {text} لکھیں."
+    "typeToConfirm": "اس عمل کی تصدیق کرنے کے لیے {text} لکھیں.",
+    "confirmAction": "عمل کی تصدیق کریں"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "صحت کے اسکور کی تاریخ",
+      "monthsOfData": "{months} ماہ کا ڈیٹا",
+      "emptyTitle": "ابھی تک کوئی تاریخ نہیں",
+      "emptySubtitle": "آپ کے پہلے مہینے کے بعد آپ کے صحت اسکور کی تاریخ یہاں ظاہر ہوگی",
+      "legendScore": "اسکور",
+      "legendTrend": "رجحان",
+      "tooltipScore": "اسکور: {score}",
+      "tooltipTrend": "رجحان: {direction}",
+      "loadingChart": "چارٹ لوڈ ہو رہا ہے..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "آپ کا بجٹ آپ کے آلے پر رہتا ہے",
+      "heroSubtitle": "سب سے نجی بجٹ ایپ میں خوش آمدید۔ کوئی اکاؤنٹ نہیں، کوئی کلاؤڈ نہیں، کوئی سمجھوتہ نہیں۔",
+      "features": {
+        "yourDataTitle": "آپ کا ڈیٹا، آپ کا آلہ",
+        "yourDataDescription": "تمام مالیاتی ڈیٹا آپ کے آلے پر مقامی طور پر محفوظ ہے۔ کوئی کلاؤڈ سرورز نہیں، کوئی فریق ثالث رسائی نہیں۔",
+        "encryptionTitle": "بینک گریڈ انکرپشن",
+        "encryptionDescription": "AES-256 انکرپشن آپ کے ڈیٹا کی حفاظت کرتا ہے۔ صرف آپ کے پاس کلید ہے—یہ آپ کے آلے سے کبھی نہیں نکلتی۔",
+        "offlineTitle": "آف لائن کام کرتا ہے",
+        "offlineDescription": "انٹرنیٹ کے بغیر مکمل فعالیت۔ رازداری سے آگاہ صارفین کے لیے بہترین۔",
+        "zeroTrackingTitle": "صفر ٹریکنگ",
+        "zeroTrackingDescription": "کوئی تجزیات نہیں، کوئی ٹیلی میٹری نہیں، کوئی ڈیٹا جمع نہیں۔ آپ کے مالیات کسی کا کاروبار نہیں۔"
+      },
+      "whatsNext": "آگے کیا ہے؟",
+      "whatsNextIntro": "اگلے چند منٹوں میں، ہم آپ کی مدد کریں گے:",
+      "step1": "اپنے موجودہ لین دین درآمد کریں (بینک CSV، OFX، یا دستی)",
+      "step2": "اپنے اخراجات کو خودکار طور پر زمرہ بند کریں",
+      "step3": "اصل اخراجات کی بنیاد پر اپنا پہلا بجٹ بنائیں",
+      "step4": "بل کی یاد دہانیاں ترتیب دیں تاکہ آپ کبھی ادائیگی نہ بھولیں",
+      "getStarted": "آئیے شروع کریں"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} لین دین کو زمرہ جات کی ضرورت ہے",
+      "allCategorized": "تمام لین دین زمرہ بند ہیں!",
+      "applySmartSuggestions": "سمارٹ تجاویز لاگو کریں",
+      "categorize": "زمرہ بند کریں",
+      "percentMatch": "{percent}% مماثلت",
+      "rememberChoices": "میرے زمرہ کے انتخابات یاد رکھیں",
+      "rememberChoicesDescription": "مستقبل میں ملتے جلتے لین دین کو خودکار طور پر زمرہ بند کریں",
+      "categorized": "{count} زمرہ بند",
+      "remaining": "{count} باقی",
+      "continue": "جاری رکھیں",
+      "continueAnyway": "بہرحال جاری رکھیں",
+      "categories": {
+        "foodDining": "کھانا اور ڈائننگ",
+        "transportation": "نقل و حمل",
+        "billsUtilities": "بل اور یوٹیلٹیز",
+        "shopping": "خریداری",
+        "entertainment": "تفریح",
+        "healthFitness": "صحت اور فٹنس",
+        "personalCare": "ذاتی نگہداشت",
+        "income": "آمدنی",
+        "transfers": "منتقلی"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "پروفائل حذف نہیں ہو سکا",
+    "deleteTitle": "پروفائل حذف کریں؟",
+    "defaultProfile": "ڈیفالٹ پروفائل",
+    "cannotDeleteOnly": "یہ واحد پروفائل ہے۔ آپ اسے حذف نہیں کر سکتے۔",
+    "permanentWarning": "یہ اس پروفائل کو مستقل طور پر حذف کر دے گا۔ اس پروفائل کے کسی بھی نجی بجٹ کو تمام پروفائلز کے ساتھ شیئر کیا جائے گا۔",
+    "cannotUndo": "یہ عمل واپس نہیں کیا جا سکتا۔",
+    "deleteButton": "پروفائل حذف کریں"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "دیکھیں"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "یاد دہانی غیر فعال کریں",
+      "enableReminder": "یاد دہانی فعال کریں",
+      "off": "بند"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "بیلنس مطابقت",
+    "subtitle": "اپنے درآمد شدہ لین دین کو اپنے اصل اکاؤنٹ بیلنس سے ملائیں",
+    "transactionsImported": "{count} لین دین درآمد ہوئے",
+    "netChange": "خالص تبدیلی",
+    "currentBalanceLabel": "موجودہ بیلنس (بینک سے)",
+    "currentBalanceLabelCredit": "موجودہ بیلنس (کریڈٹ کارڈ)",
+    "balanceHelperBank": "اپنی بینک ویب سائٹ یا ایپ پر دکھایا گیا موجودہ بیلنس درج کریں",
+    "balanceHelperCredit": "اپنے کریڈٹ کارڈ پر موجودہ بقایا بیلنس درج کریں",
+    "startingBalance": "ابتدائی بیلنس",
+    "startingBalanceCredit": "ابتدائی بیلنس (کریڈٹ کارڈ)",
+    "balanceMatchNote": "اس سے آپ کے لین دین کی تاریخ مکمل اور درست ہونے کو یقینی بنانے میں مدد ملتی ہے",
+    "negativeWarning": "اس سے منفی ابتدائی بیلنس آئے گا۔ براہ کرم اپنا موجودہ بیلنس تصدیق کریں۔",
+    "skipForNow": "فی الحال چھوڑ دیں",
+    "setBalance": "بیلنس مقرر کریں"
+  },
+  "recommendations": {
+    "title": "سفارشات",
+    "subtitle": "آپ کی مالی صحت کی بنیاد پر ذاتی تجاویز",
+    "emptyState": "ابھی تک کوئی سفارشات نہیں۔ اپنے مالیات کو ٹریک کرتے رہیں!",
+    "viewAllFactors": "تمام عوامل دیکھیں",
+    "factorLabels": {
+      "savingsRate": "بچت کی شرح",
+      "debtToIncome": "قرض بمقابلہ آمدنی",
+      "budgetAdherence": "بجٹ کی پابندی",
+      "emergencyFund": "ایمرجنسی فنڈ",
+      "investmentGrowth": "سرمایہ کاری کی ترقی",
+      "expenseStability": "اخراجات کا استحکام"
+    },
+    "factorLinks": {
+      "savingsRate": "بچت کی تجاویز دیکھیں",
+      "debtToIncome": "قرض کا انتظام کریں",
+      "budgetAdherence": "بجٹ ایڈجسٹ کریں",
+      "emergencyFund": "ایمرجنسی فنڈ بنائیں",
+      "investmentGrowth": "سرمایہ کاری کی حکمت عملی",
+      "expenseStability": "اخراجات مستحکم کریں"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "تاجر",
+    "amount": "رقم",
+    "average": "اوسط",
+    "category": "زمرہ",
+    "wasExpected": "کیا یہ متوقع تھا؟",
+    "expected": "متوقع",
+    "unexpected": "غیر متوقع",
+    "markedExpected": "متوقع کے طور پر نشان زد",
+    "markedUnexpected": "غیر متوقع کے طور پر نشان زد",
+    "moreAnomalies": "{count} مزید بے قاعدگیاں",
+    "severity": {
+      "high": "اعلی",
+      "medium": "درمیانی",
+      "low": "کم"
+    }
+  },
+  "pdfOcr": {
+    "processing": "PDF پراسیسنگ ہو رہی ہے...",
+    "cancel": "منسوخ کریں",
+    "pageProgress": "صفحہ {current} از {total}",
+    "elapsed": "گزرا ہوا وقت: {time}",
+    "remaining": "باقی: {time}",
+    "stages": {
+      "loading": "لوڈ ہو رہا ہے",
+      "rendering": "رینڈرنگ",
+      "preprocessing": "پری پراسیسنگ",
+      "ocr": "OCR",
+      "parsing": "پارسنگ",
+      "complete": "مکمل",
+      "error": "خرابی",
+      "cancelled": "منسوخ",
+      "enhance": "بہتر بنائیں"
+    },
+    "errorRetry": "OCR پراسیسنگ ناکام ہوئی۔ کیا آپ دوبارہ کوشش کرنا چاہیں گے؟",
+    "cancelledRetry": "OCR منسوخ کر دیا گیا۔ کیا آپ دوبارہ شروع کرنا چاہیں گے؟",
+    "retryButton": "OCR دوبارہ کوشش کریں",
+    "completedSuccess": "OCR کامیابی سے مکمل ہوا!",
+    "loadingChart": "چارٹ لوڈ ہو رہا ہے..."
+  },
+  "developerTools": {
+    "title": "ڈویلپر ٹولز",
+    "subtitle": "بین الاقوامیت کی جانچ کے لیے QA ٹولز (صرف ڈیو موڈ)",
+    "pseudoLocaleLabel": "سوڈو-لوکیل فعال کریں (en-XA)",
+    "pseudoLocaleHelp": "تمام ترجمہ شدہ متن کو لہجہ دار حروف سے بدل دیتا ہے۔ باقی سادہ انگریزی متن <strong>ہارڈکوڈڈ</strong> ہے اور اسے ترجمہ کیز میں تبدیل کرنے کی ضرورت ہے۔",
+    "pseudoLocaleExample": "مثال: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "اگر آپ کو \"[Ðášhƀóářð~~~]\" کی بجائے \"Dashboard\" نظر آئے تو یہ ہارڈکوڈڈ ہے!",
+    "infoPseudoLocale": "سوڈو-لوکیل ترقی کے دوران غیر ترجمہ شدہ سٹرنگز کی شناخت میں مدد کرتا ہے",
+    "infoProduction": "پروڈکشن بلڈز خود بخود en-XA لوکیل کو خارج کر دیتے ہیں",
+    "infoSwitchBack": "عام ترقی جاری رکھنے کے لیے اصلی لوکیل پر واپس جائیں"
+  },
+  "pageMetadata": {
+    "appName": "بجٹ ایپ",
+    "scenarios": "واٹ-اف منظرنامے",
+    "merchantRules": "مرچنٹ قواعد",
+    "more": "مزید",
+    "netWorth": "مالیت",
+    "properties": "جائیدادیں",
+    "propertyDetail": "جائیداد کی تفصیلات",
+    "review": "لین دین کا جائزہ",
+    "events": "ایونٹ بجٹ",
+    "landing": "BudgetPro - اپنے مالیات پر عبور حاصل کریں",
+    "dashboard": "ڈیش بورڈ",
+    "transactions": "لین دین",
+    "import": "درآمد",
+    "accounts": "اکاؤنٹس",
+    "budgets": "بجٹ",
+    "categories": "زمرے",
+    "reports": "رپورٹیں",
+    "settings": "ترتیبات",
+    "subscriptions": "سبسکرپشنز",
+    "investments": "سرمایہ کاری",
+    "debtPayoff": "قرض کی ادائیگی",
+    "loans": "قرضے",
+    "calculators": "کیلکولیٹرز",
+    "planning": "منصوبہ بندی",
+    "ocr": "رسید اسکینر",
+    "export": "برآمد",
+    "fridayReview": "ہفتہ وار جائزہ",
+    "onboarding": "شروع کریں",
+    "offline": "آف لائن موード",
+    "splits": "لین دین تقسیم کریں"
   }
 }

@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Nazaj na začetno stran"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Leto {n}",
+      "yearLabel": "Leto",
+      "month": "Mesec {n}",
+      "monthYear": "Mesec {n} (Leto {y})",
+      "age": "Starost {n}",
+      "ageLabel": "Starost",
+      "contributions": "Prispevki",
+      "interestEarned": "Zaslužene obresti",
+      "interest": "Obresti",
+      "totalInterest": "Skupne obresti",
+      "snowball": "Snežna kepa",
+      "avalanche": "Plaz",
+      "portfolio": "Portfelj",
+      "fireTarget": "FIRE cilj",
+      "median50th": "Mediana (50.)",
+      "remainingBalance": "Preostalo stanje",
+      "totalAssets": "Skupna sredstva",
+      "totalLiabilities": "Skupne obveznosti",
+      "netWorth": "Neto vrednost",
+      "retirement": "Upokojitev"
+    },
+    "scenario": {
+      "compare": "Primerjaj scenarije ({count} shranjenih)",
+      "selectUpTo": "Izberite do 3 scenarije za primerjavo:",
+      "duplicate": "Podvoji",
+      "delete": "Izbriši",
+      "sideBySide": "Primerjava drug ob drugem",
+      "field": "Polje",
+      "delta": "Razlika",
+      "selectOneMore": "Izberite še en scenarij za primerjavo",
+      "copySuffix": "(kopija)"
+    },
+    "openCalculator": "Odpri kalkulator"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Izbriši",
     "edit": "Uredi",
     "loading": "Nalaganje...",
-    "save": "Shrani"
+    "save": "Shrani",
+    "success": "Uspeh!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Potrdi",
     "finalConfirmation": "Končna potrditev:",
     "processing": "Obdelava...",
-    "typeToConfirm": "Vnesite {text} za potrditev te akcije."
+    "typeToConfirm": "Vnesite {text} za potrditev te akcije.",
+    "confirmAction": "Potrdi dejanje"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Zgodovina ocene",
+      "monthsOfData": "{count} {count, plural, =1 {mesec} other {mesecev}} podatkov",
+      "emptyTitle": "Vaša zgodovina ocene se bo pojavila tukaj, ko se bodo podatki nabrali",
+      "emptySubtitle": "Preverite znova naslednji mesec!",
+      "legendScore": "Ocena",
+      "legendTrend": "Trend",
+      "tooltipScore": "Ocena",
+      "tooltipTrend": "Trend",
+      "loadingChart": "Nalaganje grafikona..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Vaš proračun živi na VAŠI napravi",
+      "heroSubtitle": "Dobrodošli v najbolj zasebni proračunski aplikaciji. Brez računov, brez oblaka, brez kompromisov.",
+      "features": {
+        "yourDataTitle": "Vaši podatki, vaša naprava",
+        "yourDataDescription": "Vsi finančni podatki so shranjeni lokalno na vaši napravi. Brez oblačnih strežnikov, brez dostopa tretjih oseb.",
+        "encryptionTitle": "Šifriranje bančne ravni",
+        "encryptionDescription": "AES-256 šifriranje ščiti vaše podatke. Samo vi imate ključ — nikoli ne zapusti vaše naprave.",
+        "offlineTitle": "Deluje brez povezave",
+        "offlineDescription": "Polna funkcionalnost brez interneta. Popolno za uporabnike, ki cenijo zasebnost.",
+        "zeroTrackingTitle": "Brez sledenja",
+        "zeroTrackingDescription": "Brez analitike, brez telemetrije, brez zbiranja podatkov. Vaše finance niso nikogaršnja stvar."
+      },
+      "whatsNext": "Kaj sledi?",
+      "whatsNextIntro": "V naslednjih nekaj minutah vam bomo pomagali:",
+      "step1": "Uvozite obstoječe transakcije (bančni CSV, OFX ali ročno)",
+      "step2": "Samodejno kategorizirajte svojo porabo",
+      "step3": "Ustvarite svoj prvi proračun na podlagi dejanske porabe",
+      "step4": "Nastavite opomnike za račune, da nikoli ne zamudite plačila",
+      "getStarted": "Začnimo"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} transakcij potrebuje kategorije",
+      "allCategorized": "Vse transakcije so kategorizirane!",
+      "applySmartSuggestions": "Uporabi pametne predloge",
+      "categorize": "Kategoriziraj",
+      "percentMatch": "{percent}% ujemanje",
+      "rememberChoices": "Zapomni si mojo izbiro kategorij",
+      "rememberChoicesDescription": "Samodejno kategoriziraj podobne transakcije v prihodnje",
+      "categorized": "{count} kategoriziranih",
+      "remaining": "{count} preostalih",
+      "continue": "Nadaljuj",
+      "continueAnyway": "Nadaljuj vseeno",
+      "categories": {
+        "foodDining": "Hrana in prehrana",
+        "transportation": "Prevoz",
+        "billsUtilities": "Računi in komunale",
+        "shopping": "Nakupovanje",
+        "entertainment": "Zabava",
+        "healthFitness": "Zdravje in fitnes",
+        "personalCare": "Osebna nega",
+        "income": "Dohodki",
+        "transfers": "Prenosi"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Brisanje profila ni uspelo",
+    "deleteTitle": "Izbrisati profil?",
+    "defaultProfile": "Privzeti profil",
+    "cannotDeleteOnly": "To je edini profil. Ne morete ga izbrisati.",
+    "permanentWarning": "To bo trajno izbrisalo ta profil. Vsi zasebni proračuni tega profila bodo deljeni z vsemi profili.",
+    "cannotUndo": "Tega dejanja ni mogoče razveljaviti.",
+    "deleteButton": "Izbriši profil"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Ogled"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "Onemogoči opomnik",
+      "enableReminder": "Omogoči opomnik",
+      "off": "Izklopljeno"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Uvoz končan!",
+    "subtitle": "Nastavite stanje računa za {accountName}",
+    "transactionsImported": "{count} transakcij uvoženih",
+    "netChange": "Neto sprememba iz transakcij:",
+    "currentBalanceLabel": "Kakšno je vaše trenutno bančno stanje?",
+    "currentBalanceLabelCredit": "Kakšen je vaš trenutni dolgovan znesek?",
+    "balanceHelperBank": "Odprite svojo bančno aplikacijo in vnesite prikazano stanje za ta račun",
+    "balanceHelperCredit": "Vnesite trenutno stanje z izpiska vaše kreditne kartice (kot pozitivno število)",
+    "startingBalance": "Vaše začetno stanje:",
+    "startingBalanceCredit": "Vaš začetni dolgovan znesek:",
+    "balanceMatchNote": "S tem se bo stanje vašega računa ujemalo z banko.",
+    "negativeWarning": "To povzroči negativno začetno stanje, kar je neobičajno za tekoče/varčevalne račune. Prosimo, preverite, ali je vaše trenutno stanje pravilno.",
+    "skipForNow": "Preskoči za zdaj",
+    "setBalance": "Nastavi stanje"
+  },
+  "recommendations": {
+    "title": "Najboljša priporočila",
+    "subtitle": "Načini za izboljšanje vašega finančnega zdravja",
+    "emptyState": "Dodajte več finančnih podatkov za prilagojena priporočila",
+    "viewAllFactors": "Prikaži vse dejavnike",
+    "factorLabels": {
+      "savingsRate": "Prihranki",
+      "debtToIncome": "Dolg",
+      "budgetAdherence": "Proračun",
+      "emergencyFund": "Sklad za nujne primere",
+      "investmentGrowth": "Naložbe",
+      "expenseStability": "Stroški"
+    },
+    "factorLinks": {
+      "savingsRate": "Prikaži dohodke",
+      "debtToIncome": "Upravljaj posojila",
+      "budgetAdherence": "Prilagodi proračune",
+      "emergencyFund": "Načrtuj varčevanje",
+      "investmentGrowth": "Prikaži portfelj",
+      "expenseStability": "Prikaži poročila"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Trgovec:",
+    "amount": "Znesek:",
+    "average": "Povprečje: {amount}",
+    "category": "Kategorija:",
+    "wasExpected": "Ali je bilo to pričakovano?",
+    "expected": "Pričakovano",
+    "unexpected": "Nepričakovano",
+    "markedExpected": "Označeno kot pričakovano",
+    "markedUnexpected": "Označeno kot nepričakovano",
+    "moreAnomalies": "+{count} še {count, plural, =1 {anomalija} other {anomalij}}",
+    "severity": {
+      "high": "VISOKA",
+      "medium": "SREDNJA",
+      "low": "NIZKA"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR obdelava",
+    "cancel": "Prekliči",
+    "pageProgress": "Stran {current} od {total}",
+    "elapsed": "Pretečeno: {time}",
+    "remaining": "~{time} preostalo",
+    "stages": {
+      "loading": "Nalaganje PDF",
+      "rendering": "Upodabljanje strani",
+      "preprocessing": "Izboljševanje slike",
+      "ocr": "Izvlečenje besedila",
+      "parsing": "Razčlenjevanje transakcij",
+      "complete": "Končano",
+      "error": "Napaka",
+      "cancelled": "Preklicano",
+      "enhance": "Izboljšaj"
+    },
+    "errorRetry": "OCR obdelava ni uspela. Ali želite poskusiti znova?",
+    "cancelledRetry": "OCR je bil preklican. Ali želite znova zagnati?",
+    "retryButton": "Ponovi OCR",
+    "completedSuccess": "OCR uspešno končan!",
+    "loadingChart": "Nalaganje grafikona..."
+  },
+  "developerTools": {
+    "title": "Razvojna orodja",
+    "subtitle": "QA orodja za testiranje internacionalizacije (samo razvojni način)",
+    "pseudoLocaleLabel": "Omogoči psevdo-lokalizacijo (en-XA)",
+    "pseudoLocaleHelp": "Zamenja vso prevedeno besedilo z naglašenimi znaki. Vsako preostalo navadno angleško besedilo je <strong>trdo kodirano</strong> in ga je treba pretvoriti v prevajalske ključe.",
+    "pseudoLocaleExample": "Primer: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Če vidite \"Dashboard\" namesto \"[Ðášhƀóářð~~~]\", je trdo kodirano!",
+    "infoPseudoLocale": "Psevdo-lokalizacija pomaga prepoznati neprevedene nize med razvojem",
+    "infoProduction": "Produkcijske gradnje samodejno izključijo lokalizacijo en-XA",
+    "infoSwitchBack": "Preklopite nazaj na pravo lokalizacijo za nadaljevanje normalnega razvoja"
+  },
+  "pageMetadata": {
+    "appName": "Aplikacija za proračun",
+    "scenarios": "Kaj-če scenariji",
+    "merchantRules": "Pravila trgovcev",
+    "more": "Več",
+    "netWorth": "Neto vrednost",
+    "properties": "Nepremičnine",
+    "propertyDetail": "Podrobnosti nepremičnine",
+    "review": "Pregled transakcij",
+    "events": "Proračuni za dogodke",
+    "landing": "BudgetPro - Obvladajte svoje finance",
+    "dashboard": "Nadzorna plošča",
+    "transactions": "Transakcije",
+    "import": "Uvoz",
+    "accounts": "Računi",
+    "budgets": "Proračuni",
+    "categories": "Kategorije",
+    "reports": "Poročila",
+    "settings": "Nastavitve",
+    "subscriptions": "Naročnine",
+    "investments": "Naložbe",
+    "debtPayoff": "Odplačevanje dolgov",
+    "loans": "Posojila",
+    "calculators": "Kalkulatorji",
+    "planning": "Načrtovanje",
+    "ocr": "Optični bralnik računov",
+    "export": "Izvoz",
+    "fridayReview": "Tedenski pregled",
+    "onboarding": "Začnite",
+    "offline": "Način brez povezave",
+    "splits": "Razdeli transakcije"
   }
 }

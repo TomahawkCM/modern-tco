@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "मुख्यपृष्ठावर परत जा"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "वर्ष {n}",
+      "yearLabel": "वर्ष",
+      "month": "महिना {n}",
+      "monthYear": "महिना {n} (वर्ष {y})",
+      "age": "वय {n}",
+      "ageLabel": "वय",
+      "contributions": "योगदान",
+      "interestEarned": "मिळालेले व्याज",
+      "interest": "व्याज",
+      "totalInterest": "एकूण व्याज",
+      "snowball": "स्नोबॉल",
+      "avalanche": "अॅव्हलांश",
+      "portfolio": "पोर्टफोलिओ",
+      "fireTarget": "FIRE लक्ष्य",
+      "median50th": "मध्यांक (५०वा)",
+      "remainingBalance": "उर्वरित शिल्लक",
+      "totalAssets": "एकूण मालमत्ता",
+      "totalLiabilities": "एकूण दायित्वे",
+      "netWorth": "निव्वळ संपत्ती",
+      "retirement": "निवृत्ती"
+    },
+    "scenario": {
+      "compare": "परिस्थितींची तुलना करा ({count} जतन केलेल्या)",
+      "selectUpTo": "तुलना करण्यासाठी ३ पर्यंत परिस्थिती निवडा:",
+      "duplicate": "प्रत बनवा",
+      "delete": "हटवा",
+      "sideBySide": "बाजूबाजूला तुलना",
+      "field": "फील्ड",
+      "delta": "फरक",
+      "selectOneMore": "तुलना करण्यासाठी आणखी एक परिस्थिती निवडा",
+      "copySuffix": "(प्रत)"
+    },
+    "openCalculator": "कॅल्क्युलेटर उघडा"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "हटवा",
     "edit": "संपादित करा",
     "loading": "लोड होत आहे...",
-    "save": "जतन करा"
+    "save": "जतन करा",
+    "success": "यशस्वी!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "पुष्टी करा",
     "finalConfirmation": "अंतिम पुष्टी:",
     "processing": "प्रक्रिया चालू आहे...",
-    "typeToConfirm": "या क्रियेला पुष्टी करण्यासाठी {text} टाइप करा."
+    "typeToConfirm": "या क्रियेला पुष्टी करण्यासाठी {text} टाइप करा.",
+    "confirmAction": "कृती पुष्टी करा"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "आरोग्य गुण इतिहास",
+      "monthsOfData": "{months} महिन्यांचा डेटा",
+      "emptyTitle": "अद्याप इतिहास नाही",
+      "emptySubtitle": "तुमच्या पहिल्या महिन्यानंतर तुमचा आरोग्य गुण इतिहास येथे दिसेल",
+      "legendScore": "गुण",
+      "legendTrend": "कल",
+      "tooltipScore": "गुण: {score}",
+      "tooltipTrend": "कल: {direction}",
+      "loadingChart": "तक्ता लोड होत आहे..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3293,6 +3341,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "तुमचे बजेट तुमच्या डिव्हाइसवर राहते",
+      "heroSubtitle": "सर्वात खाजगी बजेट अॅपमध्ये स्वागत. खाती नाहीत, क्लाउड नाही, तडजोड नाही.",
+      "features": {
+        "yourDataTitle": "तुमचा डेटा, तुमचे डिव्हाइस",
+        "yourDataDescription": "सर्व आर्थिक डेटा तुमच्या डिव्हाइसवर स्थानिकपणे साठवला जातो. क्लाउड सर्व्हर नाहीत, तृतीय-पक्ष प्रवेश नाही.",
+        "encryptionTitle": "बँक-ग्रेड एन्क्रिप्शन",
+        "encryptionDescription": "AES-256 एन्क्रिप्शन तुमच्या डेटाचे संरक्षण करते. फक्त तुमच्याकडे कळ आहे—ती तुमचे डिव्हाइस कधीही सोडत नाही.",
+        "offlineTitle": "ऑफलाइन काम करते",
+        "offlineDescription": "इंटरनेटशिवाय पूर्ण कार्यक्षमता. गोपनीयता-जागरूक वापरकर्त्यांसाठी उत्तम.",
+        "zeroTrackingTitle": "शून्य ट्रॅकिंग",
+        "zeroTrackingDescription": "विश्लेषण नाही, टेलिमेट्री नाही, डेटा संकलन नाही. तुमची आर्थिक बाब कुणाचीही नाही."
+      },
+      "whatsNext": "पुढे काय?",
+      "whatsNextIntro": "पुढच्या काही मिनिटांत, आम्ही तुम्हाला मदत करू:",
+      "step1": "तुमचे विद्यमान व्यवहार आयात करा (बँक CSV, OFX, किंवा मॅन्युअल)",
+      "step2": "तुमचा खर्च आपोआप वर्गीकृत करा",
+      "step3": "प्रत्यक्ष खर्चावर आधारित तुमचे पहिले बजेट तयार करा",
+      "step4": "बिल स्मरणपत्रे सेट करा जेणेकरून तुम्ही कोणताही भरणा चुकवणार नाही",
+      "getStarted": "सुरू करूया"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} व्यवहारांना वर्गवारी आवश्यक आहे",
+      "allCategorized": "सर्व व्यवहार वर्गीकृत आहेत!",
+      "applySmartSuggestions": "स्मार्ट सूचना लागू करा",
+      "categorize": "वर्गीकृत करा",
+      "percentMatch": "{percent}% जुळणी",
+      "rememberChoices": "माझ्या वर्गवारी निवडी लक्षात ठेवा",
+      "rememberChoicesDescription": "भविष्यात समान व्यवहार आपोआप वर्गीकृत करा",
+      "categorized": "{count} वर्गीकृत",
+      "remaining": "{count} शिल्लक",
+      "continue": "सुरू ठेवा",
+      "continueAnyway": "तरीही सुरू ठेवा",
+      "categories": {
+        "foodDining": "अन्न आणि जेवण",
+        "transportation": "वाहतूक",
+        "billsUtilities": "बिले आणि उपयोगिता",
+        "shopping": "खरेदी",
+        "entertainment": "मनोरंजन",
+        "healthFitness": "आरोग्य आणि फिटनेस",
+        "personalCare": "वैयक्तिक काळजी",
+        "income": "उत्पन्न",
+        "transfers": "हस्तांतरणे"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3743,7 +3836,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "प्रोफाइल हटवता आले नाही",
+    "deleteTitle": "प्रोफाइल हटवायचे?",
+    "defaultProfile": "डीफॉल्ट प्रोफाइल",
+    "cannotDeleteOnly": "हे एकमेव प्रोफाइल आहे. तुम्ही ते हटवू शकत नाही.",
+    "permanentWarning": "हे प्रोफाइल कायमचे हटवले जाईल. या प्रोफाइलच्या कोणत्याही खाजगी बजेट सर्व प्रोफाइलसह सामायिक केल्या जातील.",
+    "cannotUndo": "ही क्रिया पूर्ववत करता येत नाही.",
+    "deleteButton": "प्रोफाइल हटवा"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3840,7 +3940,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "पहा"
   },
   "receiptUpload": {
     "buttons": {
@@ -4442,6 +4543,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "स्मरणपत्र बंद करा",
+      "enableReminder": "स्मरणपत्र चालू करा",
+      "off": "बंद"
     }
   },
   "subscriptionCostChart": {
@@ -5096,5 +5202,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "developerTools": {
+    "title": "डेव्हलपर टूल्स",
+    "subtitle": "आंतरराष्ट्रीयीकरण चाचणीसाठी QA टूल्स (फक्त डेव्ह मोड)",
+    "pseudoLocaleLabel": "स्यूडो-लोकेल सक्षम करा (en-XA)",
+    "pseudoLocaleHelp": "सर्व अनुवादित मजकूर उच्चारण चिन्हांकित अक्षरांनी बदलतो. उर्वरित साधा इंग्रजी मजकूर <strong>हार्डकोडेड</strong> आहे आणि अनुवाद कीजमध्ये रूपांतरित करणे आवश्यक आहे.",
+    "pseudoLocaleExample": "उदाहरण: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "\"[Ðášhƀóářð~~~]\" ऐवजी \"Dashboard\" दिसत असल्यास, ते हार्डकोडेड आहे!",
+    "infoPseudoLocale": "स्यूडो-लोकेल विकासादरम्यान अनुवाद न झालेल्या स्ट्रिंग्ज ओळखण्यात मदत करतो",
+    "infoProduction": "प्रॉडक्शन बिल्ड आपोआप en-XA लोकेल वगळतात",
+    "infoSwitchBack": "सामान्य विकास सुरू ठेवण्यासाठी खऱ्या लोकेलवर परत जा"
+  },
+  "pageMetadata": {
+    "appName": "बजेट अॅप",
+    "scenarios": "वॉट-इफ परिस्थिती",
+    "merchantRules": "व्यापारी नियम",
+    "more": "अधिक",
+    "netWorth": "निव्वळ मूल्य",
+    "properties": "मालमत्ता",
+    "propertyDetail": "मालमत्ता तपशील",
+    "review": "व्यवहार पुनरावलोकन",
+    "events": "कार्यक्रम बजेट",
+    "landing": "BudgetPro - तुमचे वित्त नियंत्रित करा",
+    "dashboard": "डॅशबोर्ड",
+    "transactions": "व्यवहार",
+    "import": "आयात",
+    "accounts": "खाती",
+    "budgets": "बजेट",
+    "categories": "श्रेणी",
+    "reports": "अहवाल",
+    "settings": "सेटिंग्ज",
+    "subscriptions": "सबस्क्रिप्शन",
+    "investments": "गुंतवणूक",
+    "debtPayoff": "कर्ज फेडणे",
+    "loans": "कर्ज",
+    "calculators": "कॅल्क्युलेटर",
+    "planning": "नियोजन",
+    "ocr": "पावती स्कॅनर",
+    "export": "निर्यात",
+    "fridayReview": "साप्ताहिक पुनरावलोकन",
+    "onboarding": "सुरूdelays",
+    "offline": "ऑdelays मोdelays",
+    "splits": "व्यdelays विdelays"
+  },
+  "balanceReconciliation": {
+    "title": "शिल्लक जुळणी",
+    "subtitle": "तुमच्या आयात केलेल्या व्यवहारांची तुमच्या वास्तविक खात्याच्या शिल्लकशी जुळवणी करा",
+    "transactionsImported": "{count} व्यवहार आयात केले",
+    "netChange": "निव्वळ बदल",
+    "currentBalanceLabel": "सध्याची शिल्लक (बँकेकडून)",
+    "currentBalanceLabelCredit": "सध्याची शिल्लक (क्रेडिट कार्ड)",
+    "balanceHelperBank": "तुमच्या बँकेच्या वेबसाइट किंवा अॅपवर दिसणारी सध्याची शिल्लक प्रविष्ट करा",
+    "balanceHelperCredit": "तुमच्या क्रेडिट कार्डवरील सध्याची थकबाकी शिल्लक प्रविष्ट करा",
+    "startingBalance": "सुरुवातीची शिल्लक",
+    "startingBalanceCredit": "सुरुवातीची शिल्लक (क्रेडिट कार्ड)",
+    "balanceMatchNote": "हे तुमचा व्यवहार इतिहास पूर्ण आणि अचूक असल्याची खात्री करण्यास मदत करते",
+    "negativeWarning": "यामुळे ऋणात्मक सुरुवातीची शिल्लक होईल. कृपया तुमची सध्याची शिल्लक तपासा.",
+    "skipForNow": "सध्या वगळा",
+    "setBalance": "शिल्लक सेट करा"
+  },
+  "recommendations": {
+    "title": "शिफारशी",
+    "subtitle": "तुमच्या आर्थिक आरोग्यावर आधारित वैयक्तिक सूचना",
+    "emptyState": "अद्याप शिफारशी नाहीत. तुमच्या आर्थिक व्यवहारांचा मागोवा ठेवत राहा!",
+    "viewAllFactors": "सर्व घटक पहा",
+    "factorLabels": {
+      "savingsRate": "बचत दर",
+      "debtToIncome": "कर्ज-उत्पन्न गुणोत्तर",
+      "budgetAdherence": "बजेट पालन",
+      "emergencyFund": "आपत्कालीन निधी",
+      "investmentGrowth": "गुंतवणूक वाढ",
+      "expenseStability": "खर्च स्थिरता"
+    },
+    "factorLinks": {
+      "savingsRate": "बचत टिप्स पहा",
+      "debtToIncome": "कर्ज व्यवस्थापित करा",
+      "budgetAdherence": "बजेट समायोजित करा",
+      "emergencyFund": "आपत्कालीन निधी तयार करा",
+      "investmentGrowth": "गुंतवणूक धोरणे",
+      "expenseStability": "खर्च स्थिर करा"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "व्यापारी",
+    "amount": "रक्कम",
+    "average": "सरासरी",
+    "category": "वर्ग",
+    "wasExpected": "हे अपेक्षित होते का?",
+    "expected": "अपेक्षित",
+    "unexpected": "अनपेक्षित",
+    "markedExpected": "अपेक्षित म्हणून चिन्हांकित",
+    "markedUnexpected": "अनपेक्षित म्हणून चिन्हांकित",
+    "moreAnomalies": "आणखी {count} विसंगती",
+    "severity": {
+      "high": "उच्च",
+      "medium": "मध्यम",
+      "low": "कमी"
+    }
+  },
+  "pdfOcr": {
+    "processing": "PDF प्रक्रिया होत आहे...",
+    "cancel": "रद्द करा",
+    "pageProgress": "पृष्ठ {current} पैकी {total}",
+    "elapsed": "गेलेला वेळ: {time}",
+    "remaining": "उरलेला वेळ: {time}",
+    "stages": {
+      "loading": "लोड होत आहे",
+      "rendering": "रेंडरिंग",
+      "preprocessing": "प्रीप्रोसेसिंग",
+      "ocr": "OCR",
+      "parsing": "पार्सिंग",
+      "complete": "पूर्ण",
+      "error": "त्रुटी",
+      "cancelled": "रद्द केले",
+      "enhance": "सुधारणा"
+    },
+    "errorRetry": "OCR प्रक्रिया अयशस्वी झाली. तुम्ही पुन्हा प्रयत्न करू इच्छिता?",
+    "cancelledRetry": "OCR रद्द केले गेले. तुम्ही पुन्हा सुरू करू इच्छिता?",
+    "retryButton": "OCR पुन्हा प्रयत्न करा",
+    "completedSuccess": "OCR यशस्वीरित्या पूर्ण झाले!",
+    "loadingChart": "तक्ता लोड होत आहे..."
   }
 }

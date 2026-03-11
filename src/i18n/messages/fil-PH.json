@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "Bumalik sa Home"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "Taon {n}",
+      "yearLabel": "Taon",
+      "month": "Buwan {n}",
+      "monthYear": "Buwan {n} (Taon {y})",
+      "age": "Edad {n}",
+      "ageLabel": "Edad",
+      "contributions": "Mga Kontribusyon",
+      "interestEarned": "Nakuhang Interes",
+      "interest": "Interes",
+      "totalInterest": "Kabuuang Interes",
+      "snowball": "Snowball",
+      "avalanche": "Avalanche",
+      "portfolio": "Portfolio",
+      "fireTarget": "FIRE Target",
+      "median50th": "Median (ika-50)",
+      "remainingBalance": "Natitirang Balanse",
+      "totalAssets": "Kabuuang Asset",
+      "totalLiabilities": "Kabuuang Utang",
+      "netWorth": "Net Worth",
+      "retirement": "Pagreretiro"
+    },
+    "scenario": {
+      "compare": "Ihambing ang mga senaryo ({count} naka-save)",
+      "selectUpTo": "Pumili ng hanggang 3 senaryo na ihahambing:",
+      "duplicate": "I-duplicate",
+      "delete": "I-delete",
+      "sideBySide": "Paghahambing na magkatabi",
+      "field": "Field",
+      "delta": "Pagkakaiba",
+      "selectOneMore": "Pumili pa ng isang senaryo na ihahambing",
+      "copySuffix": "(kopya)"
+    },
+    "openCalculator": "Buksan ang calculator"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "Tanggalin",
     "edit": "I-edit",
     "loading": "Naglo-load...",
-    "save": "I-save"
+    "save": "I-save",
+    "success": "Tagumpay!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "Kumpirmahin",
     "finalConfirmation": "Pangwakas na Kumpirmasyon:",
     "processing": "Pinoproseso...",
-    "typeToConfirm": "I-type ang {text} upang kumpirmahin ang aksyon na ito."
+    "typeToConfirm": "I-type ang {text} upang kumpirmahin ang aksyon na ito.",
+    "confirmAction": "Kumpirmahin ang Aksyon"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "Kasaysayan ng Iskor",
+      "monthsOfData": "{count} {count, plural, =1 {buwan} other {buwan}} ng data",
+      "emptyTitle": "Ang kasaysayan ng iyong iskor ay lalabas dito habang naipon ang data",
+      "emptySubtitle": "Bumalik sa susunod na buwan!",
+      "legendScore": "Iskor",
+      "legendTrend": "Trend",
+      "tooltipScore": "Iskor",
+      "tooltipTrend": "Trend",
+      "loadingChart": "Nilo-load ang chart..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "Ang Iyong Badyet ay Nasa IYONG Device",
+      "heroSubtitle": "Maligayang pagdating sa pinakapribadong budget app. Walang account, walang cloud, walang kompromiso.",
+      "features": {
+        "yourDataTitle": "Ang Iyong Data, Ang Iyong Device",
+        "yourDataDescription": "Lahat ng datos pinansyal ay naka-store nang lokal sa iyong device. Walang cloud server, walang third-party access.",
+        "encryptionTitle": "Bank-Grade na Encryption",
+        "encryptionDescription": "Pinoprotektahan ng AES-256 encryption ang iyong data. Ikaw lang ang may susi—hindi ito aalis sa iyong device.",
+        "offlineTitle": "Gumagana Offline",
+        "offlineDescription": "Buong functionality kahit walang internet. Perpekto para sa mga privacy-conscious na user.",
+        "zeroTrackingTitle": "Walang Tracking",
+        "zeroTrackingDescription": "Walang analytics, walang telemetry, walang data collection. Ang iyong pinansya ay walang pakialam ng iba."
+      },
+      "whatsNext": "Ano ang Susunod?",
+      "whatsNextIntro": "Sa susunod na ilang minuto, tutulungan ka namin na:",
+      "step1": "I-import ang iyong mga kasalukuyang transaksyon (bank CSV, OFX, o manual)",
+      "step2": "Awtomatikong ikategorya ang iyong gastusin",
+      "step3": "Lumikha ng unang badyet batay sa aktwal na gastusin",
+      "step4": "Mag-set up ng mga bill reminder para hindi makalimutan ang bayaran",
+      "getStarted": "Magsimula Na"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} transaksyon ang nangangailangan ng kategorya",
+      "allCategorized": "Lahat ng transaksyon ay nakategorya na!",
+      "applySmartSuggestions": "Gamitin ang Smart Suggestions",
+      "categorize": "Ikategorya",
+      "percentMatch": "{percent}% tugma",
+      "rememberChoices": "Tandaan ang aking mga pagpili ng kategorya",
+      "rememberChoicesDescription": "Awtomatikong ikategorya ang mga katulad na transaksyon sa hinaharap",
+      "categorized": "{count} ang nakategorya",
+      "remaining": "{count} ang natitira",
+      "continue": "Magpatuloy",
+      "continueAnyway": "Magpatuloy Pa Rin",
+      "categories": {
+        "foodDining": "Pagkain at Kainan",
+        "transportation": "Transportasyon",
+        "billsUtilities": "Mga Bayarin at Utilidad",
+        "shopping": "Pamimili",
+        "entertainment": "Libangan",
+        "healthFitness": "Kalusugan at Fitness",
+        "personalCare": "Personal na Pangangalaga",
+        "income": "Kita",
+        "transfers": "Mga Transfer"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "Hindi nagawang burahin ang profile",
+    "deleteTitle": "Burahin ang profile?",
+    "defaultProfile": "Default na profile",
+    "cannotDeleteOnly": "Ito ang nag-iisang profile. Hindi mo ito maaaring burahin.",
+    "permanentWarning": "Permanenteng mabubura ang profile na ito. Anumang pribadong budget na pag-aari ng profile na ito ay magiging shared sa lahat ng profile.",
+    "cannotUndo": "Hindi na maaaring i-undo ang aksyong ito.",
+    "deleteButton": "Burahin ang profile"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "Tingnan"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "I-disable ang paalala",
+      "enableReminder": "I-enable ang paalala",
+      "off": "Naka-off"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "balanceReconciliation": {
+    "title": "Kumpleto na ang Pag-import!",
+    "subtitle": "Itakda ang balanse ng account para sa {accountName}",
+    "transactionsImported": "{count} transaksyon ang na-import",
+    "netChange": "Netong pagbabago mula sa mga transaksyon:",
+    "currentBalanceLabel": "Ano ang kasalukuyang balanse ng iyong bangko?",
+    "currentBalanceLabelCredit": "Ano ang kasalukuyang halaga ng iyong utang?",
+    "balanceHelperBank": "Buksan ang iyong banking app at ilagay ang balanseng ipinapakita para sa account na ito",
+    "balanceHelperCredit": "Ilagay ang kasalukuyang balanse sa iyong credit card statement (bilang positibong numero)",
+    "startingBalance": "Ang iyong panimulang balanse:",
+    "startingBalanceCredit": "Ang iyong panimulang halaga ng utang:",
+    "balanceMatchNote": "Gagawin nitong katugma ang balanse ng iyong account sa iyong bangko.",
+    "negativeWarning": "Nagreresulta ito sa negatibong panimulang balanse, na hindi pangkaraniwan para sa checking/savings. Pakisuri muli ang iyong kasalukuyang balanse.",
+    "skipForNow": "Laktawan muna",
+    "setBalance": "Itakda ang Balanse"
+  },
+  "recommendations": {
+    "title": "Mga Nangungunang Rekomendasyon",
+    "subtitle": "Mga paraan upang pagbutihin ang iyong kalusugang pinansyal",
+    "emptyState": "Magdagdag ng higit pang datos pinansyal upang makatanggap ng personalisadong mga rekomendasyon",
+    "viewAllFactors": "Tingnan lahat ng salik",
+    "factorLabels": {
+      "savingsRate": "Ipon",
+      "debtToIncome": "Utang",
+      "budgetAdherence": "Badyet",
+      "emergencyFund": "Pondo sa Emergency",
+      "investmentGrowth": "Pamumuhunan",
+      "expenseStability": "Gastusin"
+    },
+    "factorLinks": {
+      "savingsRate": "Tingnan ang Kita",
+      "debtToIncome": "Pamahalaan ang Utang",
+      "budgetAdherence": "Ayusin ang Badyet",
+      "emergencyFund": "Magplano ng Ipon",
+      "investmentGrowth": "Tingnan ang Portfolio",
+      "expenseStability": "Tingnan ang Ulat"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "Merchant:",
+    "amount": "Halaga:",
+    "average": "Average: {amount}",
+    "category": "Kategorya:",
+    "wasExpected": "Inaasahan ba ito?",
+    "expected": "Inaasahan",
+    "unexpected": "Hindi inaasahan",
+    "markedExpected": "Minarkahan bilang inaasahan",
+    "markedUnexpected": "Minarkahan bilang hindi inaasahan",
+    "moreAnomalies": "+{count} pang {count, plural, =1 {anomalya} other {anomalya}}",
+    "severity": {
+      "high": "MATAAS",
+      "medium": "KATAMTAMAN",
+      "low": "MABABA"
+    }
+  },
+  "pdfOcr": {
+    "processing": "Pinoproseso ang OCR",
+    "cancel": "Kanselahin",
+    "pageProgress": "Pahina {current} ng {total}",
+    "elapsed": "Lumipas: {time}",
+    "remaining": "~{time} ang natitira",
+    "stages": {
+      "loading": "Nilo-load ang PDF",
+      "rendering": "Nire-render ang mga Pahina",
+      "preprocessing": "Pine-enhance ang Larawan",
+      "ocr": "Kinukuha ang Teksto",
+      "parsing": "Pinapa-parse ang mga Transaksyon",
+      "complete": "Kumpleto",
+      "error": "Error",
+      "cancelled": "Nakansela",
+      "enhance": "I-enhance"
+    },
+    "errorRetry": "Nabigo ang pagproseso ng OCR. Gusto mo bang subukan muli?",
+    "cancelledRetry": "Nakansela ang OCR. Gusto mo bang i-restart?",
+    "retryButton": "I-retry ang OCR",
+    "completedSuccess": "Matagumpay na nakumpleto ang OCR!",
+    "loadingChart": "Nilo-load ang chart..."
+  },
+  "developerTools": {
+    "title": "Mga Kagamitan ng Developer",
+    "subtitle": "Mga kagamitan ng QA para sa pagsubok ng internationalization (dev mode lamang)",
+    "pseudoLocaleLabel": "I-enable ang Pseudo-Locale (en-XA)",
+    "pseudoLocaleHelp": "Pinapalitan ang lahat ng isinalin na teksto ng mga may-tuldik na karakter. Ang anumang natitirang plain na English na teksto ay <strong>naka-hardcode</strong> at kailangang i-convert sa mga translation key.",
+    "pseudoLocaleExample": "Halimbawa: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "Kung nakikita mo ang \"Dashboard\" sa halip na \"[Ðášhƀóářð~~~]\", naka-hardcode ito!",
+    "infoPseudoLocale": "Nakakatulong ang pseudo-locale na tukuyin ang mga hindi naisalin na string habang nag-develop",
+    "infoProduction": "Awtomatikong hindi isinasama ng production builds ang en-XA locale",
+    "infoSwitchBack": "Bumalik sa isang tunay na locale upang magpatuloy sa normal na development"
+  },
+  "pageMetadata": {
+    "appName": "Budget App",
+    "scenarios": "Mga Paano-Kung Senaryo",
+    "merchantRules": "Mga Panuntunan ng Merchant",
+    "more": "Higit Pa",
+    "netWorth": "Net Worth",
+    "properties": "Mga Ari-arian",
+    "propertyDetail": "Mga Detalye ng Ari-arian",
+    "review": "Suriin ang mga Transaksyon",
+    "events": "Mga Budget ng Kaganapan",
+    "landing": "BudgetPro - Pamahalaan ang Iyong Pananalapi",
+    "dashboard": "Dashboard",
+    "transactions": "Mga Transaksyon",
+    "import": "Mag-import",
+    "accounts": "Mga Account",
+    "budgets": "Mga Budget",
+    "categories": "Mga Kategorya",
+    "reports": "Mga Ulat",
+    "settings": "Mga Setting",
+    "subscriptions": "Mga Subscription",
+    "investments": "Mga Pamumuhunan",
+    "debtPayoff": "Pagbayad ng Utang",
+    "loans": "Mga Pautang",
+    "calculators": "Mga Calculator",
+    "planning": "Pagpaplano",
+    "ocr": "Receipt Scanner",
+    "export": "I-export",
+    "fridayReview": "Lingguhang Pagsusuri",
+    "onboarding": "Magsimula",
+    "offline": "Offline mode",
+    "splits": "Hatiin ang mga transaksyon"
   }
 }

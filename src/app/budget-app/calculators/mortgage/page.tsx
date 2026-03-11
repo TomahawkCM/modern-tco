@@ -29,10 +29,14 @@ const MortgageChart = lazy(() =>
       data,
       locale,
       currency,
+      monthYearFormatter,
+      remainingBalanceLabel,
     }: {
       data: { month: number; principal: number; interest: number; balance: number }[];
       locale: SupportedLocale;
       currency: string;
+      monthYearFormatter: (label: number) => string;
+      remainingBalanceLabel: string;
     }) => {
       const { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } =
         mod;
@@ -70,7 +74,7 @@ const MortgageChart = lazy(() =>
                 formatCurrency(value, currency, locale),
                 name,
               ]}
-              labelFormatter={(label: number) => `Month ${label} (Year ${Math.ceil(label / 12)})`}
+              labelFormatter={(label: number) => monthYearFormatter(label)}
             />
             <Legend />
             <Area
@@ -78,7 +82,7 @@ const MortgageChart = lazy(() =>
               dataKey="balance"
               stroke="#f59e0b"
               fill="url(#colorBalance)"
-              name="Remaining Balance"
+              name={remainingBalanceLabel}
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -420,7 +424,15 @@ export default function MortgageCalculatorPage() {
         <div className="rounded-xl border border-slate-700 bg-slate-800/50 p-6">
           <h3 className="mb-4 text-lg font-semibold text-white">{t("mortgage.scheduleTitle")}</h3>
           <Suspense fallback={<ChartSkeleton />}>
-            <MortgageChart data={chartData} locale={locale} currency={currency} />
+            <MortgageChart
+              data={chartData}
+              locale={locale}
+              currency={currency}
+              monthYearFormatter={(label: number) =>
+                t("chart.monthYear", { n: label, y: Math.ceil(label / 12) })
+              }
+              remainingBalanceLabel={t("chart.remainingBalance")}
+            />
           </Suspense>
         </div>
       )}

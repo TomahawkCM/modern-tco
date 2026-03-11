@@ -1,10 +1,18 @@
 "use client";
 
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import type { SupportedLocale } from "@/i18n/config";
+import { getCurrencySymbol } from "@/i18n/utils/formatCurrency";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
+  const t = useTranslations("auth");
+  const currency = useDefaultCurrency();
+  const locale = useLocale();
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#0f172a] p-4 text-white">
       {/* Dynamic Background */}
@@ -21,7 +29,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             className="mb-8 inline-flex items-center text-sm text-slate-400 transition-colors hover:text-white"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Home
+            {t("backToHome")}
           </Link>
 
           <motion.div
@@ -31,7 +39,9 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
             className="mb-8 flex justify-center"
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 shadow-lg shadow-teal-500/20">
-              <span className="text-2xl font-bold text-white">$</span>
+              <span className="text-2xl font-bold text-white">
+                {getCurrencySymbol(currency, locale as SupportedLocale)}
+              </span>
             </div>
           </motion.div>
         </div>

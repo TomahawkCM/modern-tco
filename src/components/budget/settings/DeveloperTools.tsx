@@ -9,6 +9,7 @@
  */
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { DEFAULT_LOCALE, type SupportedLocale } from "@/i18n/config";
 import {
   getLocalePreferences,
@@ -20,6 +21,7 @@ import {
 const PSEUDO_LOCALE = "en-XA" as SupportedLocale;
 
 export function DeveloperTools() {
+  const t = useTranslations("developerTools");
   const [preferences, setPreferences] = useState<LocalePreferences>(getLocalePreferences());
   const [isPseudoLocale, setIsPseudoLocale] = useState(preferences.locale === PSEUDO_LOCALE);
 
@@ -55,10 +57,8 @@ export function DeveloperTools() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h2 className="mb-2 text-lg font-semibold">Developer Tools</h2>
-        <p className="text-sm text-muted-foreground">
-          QA tools for testing internationalization (dev mode only)
-        </p>
+        <h2 className="mb-2 text-lg font-semibold">{t("title")}</h2>
+        <p className="text-sm text-muted-foreground">{t("subtitle")}</p>
       </div>
 
       {/* Pseudo-Locale Toggle */}
@@ -73,16 +73,16 @@ export function DeveloperTools() {
           />
           <div className="flex-1">
             <label htmlFor="pseudo-locale" className="block cursor-pointer text-sm font-medium">
-              Enable Pseudo-Locale (en-XA)
+              {t("pseudoLocaleLabel")}
             </label>
-            <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
-              Replaces all translated text with accented characters. Any remaining plain English
-              text is <strong>hardcoded</strong> and needs to be converted to translation keys.
-            </p>
+            <p
+              className="mt-1 text-xs text-gray-600 dark:text-gray-400"
+              dangerouslySetInnerHTML={{ __html: t("pseudoLocaleHelp") }}
+            />
             <div className="mt-3 rounded border bg-white p-3 text-xs dark:bg-gray-800">
-              <strong>Example:</strong> "Dashboard" → "[Ðášhƀóářð~~~]"
+              {t("pseudoLocaleExample")}
               <br />
-              If you see "Dashboard" instead of "[Ðášhƀóářð~~~]", it's hardcoded!
+              {t("pseudoLocaleInstruction")}
             </div>
           </div>
         </div>
@@ -90,9 +90,9 @@ export function DeveloperTools() {
 
       {/* Info */}
       <div className="space-y-1 text-xs text-gray-500 dark:text-gray-400">
-        <p>• Pseudo-locale helps identify untranslated strings during development</p>
-        <p>• Production builds automatically exclude en-XA locale</p>
-        <p>• Switch back to a real locale to continue normal development</p>
+        <p>• {t("infoPseudoLocale")}</p>
+        <p>• {t("infoProduction")}</p>
+        <p>• {t("infoSwitchBack")}</p>
       </div>
     </div>
   );

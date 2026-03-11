@@ -463,7 +463,8 @@
       "trialEndedSubtitle": "Upgrade now to regain full access to your budget data",
       "trialEndedTitle": "Your Trial Has Ended",
       "upgradeNow": "Upgrade Now - ${price}"
-    }
+    },
+    "backToHome": "ഹോമിലേക്ക് മടങ്ങുക"
   },
   "bottomSheet": {
     "close": "Close",
@@ -1199,7 +1200,41 @@
       "assumptions": "Assumptions",
       "formula": "Formula",
       "title": "How This Works"
-    }
+    },
+    "chart": {
+      "year": "വർഷം {n}",
+      "yearLabel": "വർഷം",
+      "month": "മാസം {n}",
+      "monthYear": "മാസം {n} (വർഷം {y})",
+      "age": "പ്രായം {n}",
+      "ageLabel": "പ്രായം",
+      "contributions": "സംഭാവനകൾ",
+      "interestEarned": "നേടിയ പലിശ",
+      "interest": "പലിശ",
+      "totalInterest": "ആകെ പലിശ",
+      "snowball": "സ്നോബോൾ",
+      "avalanche": "അവലാഞ്ച്",
+      "portfolio": "പോർട്ട്‌ഫോളിയോ",
+      "fireTarget": "FIRE ലക്ഷ്യം",
+      "median50th": "മധ്യമ (50-ാം)",
+      "remainingBalance": "ശേഷിക്കുന്ന ബാലൻസ്",
+      "totalAssets": "ആകെ ആസ്തികൾ",
+      "totalLiabilities": "ആകെ ബാധ്യതകൾ",
+      "netWorth": "അറ്റ ​​മൂല്യം",
+      "retirement": "വിരമിക്കൽ"
+    },
+    "scenario": {
+      "compare": "സാഹചര്യങ്ങൾ താരതമ്യം ചെയ്യുക ({count} സേവ് ചെയ്തവ)",
+      "selectUpTo": "താരതമ്യം ചെയ്യാൻ 3 സാഹചര്യങ്ങൾ വരെ തിരഞ്ഞെടുക്കുക:",
+      "duplicate": "പകർപ്പ്",
+      "delete": "ഇല്ലാതാക്കുക",
+      "sideBySide": "അടുത്തടുത്ത താരതമ്യം",
+      "field": "ഫീൽഡ്",
+      "delta": "വ്യത്യാസം",
+      "selectOneMore": "താരതമ്യം ചെയ്യാൻ ഒരു സാഹചര്യം കൂടി തിരഞ്ഞെടുക്കുക",
+      "copySuffix": "(പdelays)"
+    },
+    "openCalculator": "കാൽക്കുലേറ്റർ തുറക്കുക"
   },
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
@@ -1414,7 +1449,8 @@
     "delete": "കഴിവാക്കുക",
     "edit": "എഡിറ്റ് ചെയ്യുക",
     "loading": "ലോഡുചെയ്യുന്നു...",
-    "save": "സംരക്ഷിക്കുക"
+    "save": "സംരക്ഷിക്കുക",
+    "success": "വിജയം!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1755,7 +1791,8 @@
     "confirm": "സ്ഥിരീകരിക്കുക",
     "finalConfirmation": "അവസാന സ്ഥിരീകരണം:",
     "processing": "പ്രോസസിംഗ്...",
-    "typeToConfirm": "ഈ പ്രവർത്തനം സ്ഥിരീകരിക്കാൻ {text} ടൈപ്പ് ചെയ്യുക."
+    "typeToConfirm": "ഈ പ്രവർത്തനം സ്ഥിരീകരിക്കാൻ {text} ടൈപ്പ് ചെയ്യുക.",
+    "confirmAction": "പ്രവർത്തനം സ്ഥിരീകരിക്കുക"
   },
   "draggableWidget": {
     "dragToReorder": "Drag to reorder widget"
@@ -2068,7 +2105,18 @@
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health"
+    "title": "Financial Health",
+    "history": {
+      "title": "സ്കോർ ചരിത്രം",
+      "monthsOfData": "{count} {count, plural, =1 {മാസത്തെ} other {മാസങ്ങളുടെ}} ഡാറ്റ",
+      "emptyTitle": "ഡാറ്റ ശേഖരിക്കപ്പെടുന്നതോടെ നിങ്ങളുടെ സ്കോർ ചരിത്രം ഇവിടെ കാണാം",
+      "emptySubtitle": "അടുത്ത മാസം വീണ്ടും പരിശോധിക്കൂ!",
+      "legendScore": "സ്കോർ",
+      "legendTrend": "പ്രവണത",
+      "tooltipScore": "സ്കോർ",
+      "tooltipTrend": "പ്രവണത",
+      "loadingChart": "ചാർട്ട് ലോഡ് ചെയ്യുന്നു..."
+    }
   },
   "holdingModal": {
     "addHolding": "Add Holding",
@@ -3302,6 +3350,51 @@
         "description": "Let's get your finances organized in minutes.",
         "title": "Welcome to Budget App"
       }
+    },
+    "welcome": {
+      "heroTitle": "നിങ്ങളുടെ ബജറ്റ് നിങ്ങളുടെ ഉപകരണത്തിൽ ഇരിക്കുന്നു",
+      "heroSubtitle": "ഏറ്റവും സ്വകാര്യമായ ബജറ്റ് ആപ്പിലേക്ക് സ്വാഗതം. അക്കൗണ്ടുകളില്ല, ക്ലൗഡില്ല, വിട്ടുവീഴ്ചയില്ല.",
+      "features": {
+        "yourDataTitle": "നിങ്ങളുടെ ഡാറ്റ, നിങ്ങളുടെ ഉപകരണം",
+        "yourDataDescription": "എല്ലാ സാമ്പത്തിക ഡാറ്റയും നിങ്ങളുടെ ഉപകരണത്തിൽ പ്രാദേശികമായി സൂക്ഷിച്ചിരിക്കുന്നു. ക്ലൗഡ് സെർവറുകളില്ല, മൂന്നാം കക്ഷി ആക്സസ്സ് ഇല്ല.",
+        "encryptionTitle": "ബാങ്ക്-ഗ്രേഡ് എൻക്രിപ്ഷൻ",
+        "encryptionDescription": "AES-256 എൻക്രിപ്ഷൻ നിങ്ങളുടെ ഡാറ്റ സംരക്ഷിക്കുന്നു. നിങ്ങളുടെ കൈയിൽ മാത്രമാണ് കീ—അത് നിങ്ങളുടെ ഉപകരണം വിടുന്നില്ല.",
+        "offlineTitle": "ഓഫ്‌ലൈനിൽ പ്രവർത്തിക്കുന്നു",
+        "offlineDescription": "ഇന്റർനെറ്റ് ഇല്ലാതെ പൂർണ്ണ പ്രവർത്തനം. സ്വകാര്യത ബോധമുള്ള ഉപയോക്താക്കൾക്ക് അനുയോജ്യം.",
+        "zeroTrackingTitle": "സീറോ ട്രാക്കിംഗ്",
+        "zeroTrackingDescription": "അനലിറ്റിക്സ് ഇല്ല, ടെലിമെട്രി ഇല്ല, ഡാറ്റ ശേഖരണമില്ല. നിങ്ങളുടെ സാമ്പത്തിക കാര്യങ്ങൾ ആരുടെയും ബിസിനസ്സല്ല."
+      },
+      "whatsNext": "അടുത്തത് എന്താണ്?",
+      "whatsNextIntro": "അടുത്ത ഏതാനും മിനിറ്റുകളിൽ, ഞങ്ങൾ നിങ്ങളെ സഹായിക്കും:",
+      "step1": "നിങ്ങളുടെ നിലവിലുള്ള ഇടപാടുകൾ ഇമ്പോർട്ട് ചെയ്യുക (ബാങ്ക് CSV, OFX, അല്ലെങ്കിൽ മാനുവൽ)",
+      "step2": "നിങ്ങളുടെ ചെലവുകൾ സ്വയമേവ വർഗ്ഗീകരിക്കുക",
+      "step3": "യഥാർത്ഥ ചെലവുകളുടെ അടിസ്ഥാനത്തിൽ നിങ്ങളുടെ ആദ്യ ബജറ്റ് സൃഷ്ടിക്കുക",
+      "step4": "ബിൽ ഓർമ്മപ്പെടുത്തലുകൾ സജ്ജമാക്കുക, നിങ്ങൾ ഒരു പേയ്‌മെന്റും നഷ്ടപ്പെടുത്തരുത്",
+      "getStarted": "നമുക്ക് തുടങ്ങാം"
+    },
+    "categoryMapping": {
+      "needsCategories": "{count} ഇടപാടുകൾക്ക് വിഭാഗങ്ങൾ ആവശ്യമാണ്",
+      "allCategorized": "എല്ലാ ഇടപാടുകളും വർഗ്ഗീകരിച്ചു!",
+      "applySmartSuggestions": "സ്മാർട്ട് നിർദ്ദേശങ്ങൾ പ്രയോഗിക്കുക",
+      "categorize": "വർഗ്ഗീകരിക്കുക",
+      "percentMatch": "{percent}% പൊരുത്തം",
+      "rememberChoices": "എന്റെ വിഭാഗ തിരഞ്ഞെടുപ്പുകൾ ഓർക്കുക",
+      "rememberChoicesDescription": "ഭാവിയിൽ സമാനമായ ഇടപാടുകൾ സ്വയമേവ വർഗ്ഗീകരിക്കുക",
+      "categorized": "{count} വർഗ്ഗീകരിച്ചു",
+      "remaining": "{count} ശേഷിക്കുന്നു",
+      "continue": "തുടരുക",
+      "continueAnyway": "എന്തായാലും തുടരുക",
+      "categories": {
+        "foodDining": "ഭക്ഷണം & ഡൈനിംഗ്",
+        "transportation": "ഗതാഗതം",
+        "billsUtilities": "ബില്ലുകൾ & യൂട്ടിലിറ്റികൾ",
+        "shopping": "ഷോപ്പിംഗ്",
+        "entertainment": "വിനോദം",
+        "healthFitness": "ആരോഗ്യം & ഫിറ്റ്‌നസ്",
+        "personalCare": "വ്യക്തിഗത പരിചരണം",
+        "income": "വരുമാനം",
+        "transfers": "ട്രാൻസ്ഫറുകൾ"
+      }
     }
   },
   "overspendingAlerts": {
@@ -3752,7 +3845,14 @@
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "errorDeleteFailed": "പ്രൊഫൈൽ ഇല്ലാതാക്കൽ പരാജയപ്പെട്ടു",
+    "deleteTitle": "പ്രൊഫൈൽ ഇല്ലാതാക്കണോ?",
+    "defaultProfile": "ഡിഫോൾട്ട് പ്രൊഫൈൽ",
+    "cannotDeleteOnly": "ഇത് ഏക പ്രൊഫൈൽ ആണ്. നിങ്ങൾക്ക് ഇത് ഇല്ലാതാക്കാൻ കഴിയില്ല.",
+    "permanentWarning": "ഈ പ്രൊഫൈൽ ശാശ്വതമായി ഇല്ലാതാക്കപ്പെടും. ഈ പ്രൊഫൈലിന്റെ സ്വകാര്യ ബജറ്റുകൾ എല്ലാ പ്രൊഫൈലുകളുമായി പങ്കിടപ്പെടും.",
+    "cannotUndo": "ഈ പ്രവർത്തനം പഴയപടിയാക്കാൻ കഴിയില്ല.",
+    "deleteButton": "പ്രൊഫൈൽ ഇല്ലാതാക്കുക"
   },
   "pullToRefresh": {
     "pull": "Pull to refresh",
@@ -3849,7 +3949,8 @@
     "pdfReceipt": "PDF Receipt",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}"
+    "uploaded": "Uploaded {date}",
+    "view": "കാണുക"
   },
   "receiptUpload": {
     "buttons": {
@@ -4451,6 +4552,11 @@
     },
     "trial": {
       "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+    },
+    "reminderToggle": {
+      "disableReminder": "ഓർമ്മപ്പെടുത്തൽ ഓഫാക്കുക",
+      "enableReminder": "ഓർമ്മപ്പെടുത്തൽ ഓണാക്കുക",
+      "off": "ഓഫ്"
     }
   },
   "subscriptionCostChart": {
@@ -5105,5 +5211,126 @@
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
     }
+  },
+  "developerTools": {
+    "title": "ഡെവലപ്പർ ടൂൾസ്",
+    "subtitle": "അന്തർദേശീയവൽക്കരണം പരിശോധിക്കുന്നതിനുള്ള QA ടൂൾസ് (ഡെവ് മോഡ് മാത്രം)",
+    "pseudoLocaleLabel": "സ്യൂഡോ-ലൊക്കേൽ പ്രവർത്തനക്ഷമമാക്കുക (en-XA)",
+    "pseudoLocaleHelp": "എല്ലാ വിവർത്തനം ചെയ്ത ടെക്സ്റ്റും ആക്സന്റഡ് അക്ഷരങ്ങൾ ഉപയോഗിച്ച് മാറ്റിസ്ഥാപിക്കുന്നു. ബാക്കിയുള്ള സാധാരണ ഇംഗ്ലീഷ് ടെക്സ്റ്റ് <strong>ഹാർഡ്‌കോഡഡ്</strong> ആണ്, അത് വിവർത്തന കീകളിലേക്ക് മാറ്റേണ്ടതുണ്ട്.",
+    "pseudoLocaleExample": "ഉദാഹരണം: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
+    "pseudoLocaleInstruction": "\"[Ðášhƀóářð~~~]\" എന്നതിന് പകരം \"Dashboard\" കാണുകയാണെങ്കിൽ, അത് ഹാർഡ്‌കോഡഡ് ആണ്!",
+    "infoPseudoLocale": "സ്യൂഡോ-ലൊക്കേൽ ഡെവലപ്‌മെന്റ് സമയത്ത് വിവർത്തനം ചെയ്യാത്ത സ്ട്രിംഗുകൾ കണ്ടെത്താൻ സഹായിക്കുന്നു",
+    "infoProduction": "പ്രൊഡക്ഷൻ ബിൽഡുകൾ സ്വയമേവ en-XA ലൊക്കേൽ ഒഴിവാക്കുന്നു",
+    "infoSwitchBack": "സാധാരണ ഡെവലപ്‌മെന്റ് തുടരാൻ ഒരു യഥാർത്ഥ ലൊക്കേലിലേക്ക് തിരികെ മാറുക"
+  },
+  "pageMetadata": {
+    "appName": "ബജറ്റ് ആപ്പ്",
+    "scenarios": "വാട്ട്-ഇഫ് സാഹചര്യങ്ങൾ",
+    "merchantRules": "വ്യാപാരി നിയമങ്ങൾ",
+    "more": "കൂടുതൽ",
+    "netWorth": "മൊത്തം ആസ്തി",
+    "properties": "സ്വത്തുക്കൾ",
+    "propertyDetail": "സ്വത്ത് വിശദാംശങ്ങൾ",
+    "review": "ഇടപാടുകൾ അവലോകനം ചെയ്യുക",
+    "events": "ഇവന്റ് ബജറ്റുകൾ",
+    "landing": "BudgetPro - നിങ്ങളുടെ സാമ്പത്തികം നിയന്ത്രിക്കുക",
+    "dashboard": "ഡാഷ്‌ബോർഡ്",
+    "transactions": "ഇടപാടുകൾ",
+    "import": "ഇറക്കുമതി",
+    "accounts": "അക്കൗണ്ടുകൾ",
+    "budgets": "ബജറ്റുകൾ",
+    "categories": "വിഭാഗങ്ങൾ",
+    "reports": "റിപ്പോർട്ടുകൾ",
+    "settings": "ക്രമീകരണങ്ങൾ",
+    "subscriptions": "സബ്‌സ്‌ക്രിപ്ഷനുകൾ",
+    "investments": "നിക്ഷേപങ്ങൾ",
+    "debtPayoff": "കടം തിരിച്ചടവ്",
+    "loans": "വായ്പകൾ",
+    "calculators": "കാൽക്കുലേറ്ററുകൾ",
+    "planning": "ആസൂത്രണം",
+    "ocr": "രസീത് സ്കാനർ",
+    "export": "കയറ്റുമതി",
+    "fridayReview": "പ്രതിവാര അവലോകനം",
+    "onboarding": "ആdelays",
+    "offline": "ഓdelays delaysdelays",
+    "splits": "ഇdelays delaysdelays"
+  },
+  "balanceReconciliation": {
+    "title": "ഇമ്പോർട്ട് പൂർത്തിയായി!",
+    "subtitle": "{accountName} ന്റെ അക്കൗണ്ട് ബാലൻസ് സജ്ജമാക്കുക",
+    "transactionsImported": "{count} ഇടപാടുകൾ ഇമ്പോർട്ട് ചെയ്തു",
+    "netChange": "ഇടപാടുകളിൽ നിന്നുള്ള നെറ്റ് മാറ്റം:",
+    "currentBalanceLabel": "നിങ്ങളുടെ ഇപ്പോഴത്തെ ബാങ്ക് ബാലൻസ് എത്രയാണ്?",
+    "currentBalanceLabelCredit": "നിങ്ങളുടെ ഇപ്പോഴത്തെ ബാക്കി തുക എത്രയാണ്?",
+    "balanceHelperBank": "നിങ്ങളുടെ ബാങ്കിംഗ് ആപ്പ് തുറന്ന് ഈ അക്കൗണ്ടിന് കാണിക്കുന്ന ബാലൻസ് നൽകുക",
+    "balanceHelperCredit": "നിങ്ങളുടെ ക്രെഡിറ്റ് കാർഡ് സ്റ്റേറ്റ്‌മെന്റിൽ കാണിക്കുന്ന ഇപ്പോഴത്തെ ബാലൻസ് നൽകുക (പോസിറ്റീവ് നമ്പറായി)",
+    "startingBalance": "നിങ്ങളുടെ ആരംഭ ബാലൻസ്:",
+    "startingBalanceCredit": "നിങ്ങളുടെ ആരംഭ ബാക്കി തുക:",
+    "balanceMatchNote": "ഇത് നിങ്ങളുടെ അക്കൗണ്ട് ബാലൻസ് ബാങ്കുമായി പൊരുത്തപ്പെടുത്തും.",
+    "negativeWarning": "ഇത് നെഗറ്റീവ് ആരംഭ ബാലൻസ് ഉണ്ടാക്കുന്നു, ഇത് ചെക്കിംഗ്/സേവിംഗ്സിന് അസാധാരണമാണ്. നിങ്ങളുടെ ഇപ്പോഴത്തെ ബാലൻസ് ശരിയാണോ എന്ന് പരിശോധിക്കുക.",
+    "skipForNow": "ഇപ്പോൾ ഒഴിവാക്കുക",
+    "setBalance": "ബാലൻസ് സെറ്റ് ചെയ്യുക"
+  },
+  "recommendations": {
+    "title": "പ്രധാന ശുപാർശകൾ",
+    "subtitle": "നിങ്ങളുടെ സാമ്പത്തിക ആരോഗ്യം മെച്ചപ്പെടുത്താനുള്ള വഴികൾ",
+    "emptyState": "വ്യക്തിഗത ശുപാർശകൾ ലഭിക്കാൻ കൂടുതൽ സാമ്പത്തിക ഡാറ്റ ചേർക്കുക",
+    "viewAllFactors": "എല്ലാ ഘടകങ്ങളും കാണുക",
+    "factorLabels": {
+      "savingsRate": "സമ്പാദ്യം",
+      "debtToIncome": "കടം",
+      "budgetAdherence": "ബജറ്റ്",
+      "emergencyFund": "അടിയന്തര ഫണ്ട്",
+      "investmentGrowth": "നിക്ഷേപങ്ങൾ",
+      "expenseStability": "ചെലവുകൾ"
+    },
+    "factorLinks": {
+      "savingsRate": "വരുമാനം കാണുക",
+      "debtToIncome": "ലോണുകൾ നിയന്ത്രിക്കുക",
+      "budgetAdherence": "ബജറ്റ് ക്രമീകരിക്കുക",
+      "emergencyFund": "സമ്പാദ്യം ആസൂത്രണം ചെയ്യുക",
+      "investmentGrowth": "പോർട്ട്‌ഫോളിയോ കാണുക",
+      "expenseStability": "റിപ്പോർട്ടുകൾ കാണുക"
+    }
+  },
+  "anomalyAlerts": {
+    "merchant": "വ്യാപാരി:",
+    "amount": "തുക:",
+    "average": "ശരാശരി: {amount}",
+    "category": "വിഭാഗം:",
+    "wasExpected": "ഇത് പ്രതീക്ഷിച്ചതാണോ?",
+    "expected": "പ്രതീക്ഷിച്ചത്",
+    "unexpected": "അപ്രതീക്ഷിതം",
+    "markedExpected": "പ്രതീക്ഷിച്ചതായി അടയാളപ്പെടുത്തി",
+    "markedUnexpected": "അപ്രതീക്ഷിതമായി അടയാളപ്പെടുത്തി",
+    "moreAnomalies": "+{count} കൂടുതൽ {count, plural, =1 {അസാധാരണത} other {അസാധാരണതകൾ}}",
+    "severity": {
+      "high": "ഉdelays",
+      "medium": "ഇdelays",
+      "low": "തdelays"
+    }
+  },
+  "pdfOcr": {
+    "processing": "OCR പ്രോസസ്സിംഗ്",
+    "cancel": "റദ്ദാക്കുക",
+    "pageProgress": "പേജ് {current} / {total}",
+    "elapsed": "കഴിഞ്ഞ സമയം: {time}",
+    "remaining": "~{time} ശേഷിക്കുന്നു",
+    "stages": {
+      "loading": "PDF ലോഡ് ചെയ്യുന്നു",
+      "rendering": "പേജുകൾ റെൻഡർ ചെയ്യുന്നു",
+      "preprocessing": "ചിത്രം മെച്ചപ്പെടുത്തുന്നു",
+      "ocr": "ടെക്സ്റ്റ് എക്സ്ട്രാക്റ്റ് ചെയ്യുന്നു",
+      "parsing": "ഇടപാടുകൾ പാഴ്‌സ് ചെയ്യുന്നു",
+      "complete": "പൂർത്തിയായി",
+      "error": "പിശക്",
+      "cancelled": "റദ്ദാക്കി",
+      "enhance": "മെച്ചപ്പെടുത്തുക"
+    },
+    "errorRetry": "OCR പ്രോസസ്സിംഗ് പരാജയപ്പെട്ടു. വീണ്ടും ശ്രമിക്കണോ?",
+    "cancelledRetry": "OCR റദ്ദാക്കി. വീണ്ടും ആരംഭിക്കണോ?",
+    "retryButton": "OCR വീണ്ടും ശ്രമിക്കുക",
+    "completedSuccess": "OCR വിജയകരമായി പൂർത്തിയായി!",
+    "loadingChart": "ചാർട്ട് ലോഡ് ചെയ്യുന്നു..."
   }
 }

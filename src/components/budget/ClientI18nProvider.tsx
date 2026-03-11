@@ -56,7 +56,8 @@ export function ClientI18nProvider({ children }: { children: ReactNode }) {
 
     // For all English locales, use the en.json messages (they share the same keys)
     // This covers en-US, en-CA, en-GB, en-AU, etc.
-    if (targetLocale.startsWith("en-")) {
+    // Exception: en-XA is a pseudo-locale for i18n testing and needs its own file
+    if (targetLocale.startsWith("en-") && targetLocale !== "en-XA") {
       setState({
         locale: targetLocale,
         messages: enMessages,
@@ -78,12 +79,16 @@ export function ClientI18nProvider({ children }: { children: ReactNode }) {
           throw new Error("Invalid messages format");
         }
       } catch (error) {
-        console.error(`Failed to load messages for ${targetLocale}, falling back to en`, error);
-        // Fall back to default locale
-        setState({
-          locale: DEFAULT_LOCALE,
-          messages: enMessages,
-          isReady: true,
+        console.error(`Failed to load messages for ${targetLocale}`, error);
+        // Keep current locale messages instead of resetting to English
+        // This handles offline scenarios gracefully — user stays in their current language
+        setState((prev) => {
+          // Only fall back to English if we have no messages at all (initial load)
+          if (!prev.messages || prev.locale === DEFAULT_LOCALE) {
+            return { locale: DEFAULT_LOCALE, messages: enMessages, isReady: true };
+          }
+          // Otherwise keep current locale and messages
+          return { ...prev, isReady: true };
         });
       }
     }
