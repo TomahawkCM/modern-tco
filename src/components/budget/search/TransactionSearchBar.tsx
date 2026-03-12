@@ -247,8 +247,7 @@ export function TransactionSearchBar({
   const isDropdownVisible = showDropdown && showAnything;
 
   // Generate active descendant ID for ARIA
-  const activeDescendantId =
-    selectedIndex >= 0 ? `search-suggestion-${selectedIndex}` : undefined;
+  const activeDescendantId = selectedIndex >= 0 ? `search-suggestion-${selectedIndex}` : undefined;
 
   return (
     <div className={cn("relative", className)}>
@@ -275,7 +274,7 @@ export function TransactionSearchBar({
           placeholder={placeholder || t("placeholderExtended")}
           autoFocus={autoFocus}
           className={cn(
-            "w-full rounded-lg border border-input bg-background py-3 ps-10 pe-20 text-base text-foreground",
+            "w-full rounded-lg border border-input bg-background py-3 pe-20 ps-10 text-base text-foreground",
             "focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/20",
             "placeholder:text-muted-foreground",
             isLoading && "animate-pulse"
@@ -318,9 +317,9 @@ export function TransactionSearchBar({
       {/* Live region for screen reader announcements */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
         {resultCount !== undefined && value
-          ? `${resultCount} results found`
+          ? t("resultsFound", { count: resultCount })
           : isDropdownVisible && suggestions.length > 0
-            ? `${suggestions.length} suggestions available`
+            ? t("suggestionsAvailable", { count: suggestions.length })
             : ""}
       </div>
 

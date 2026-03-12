@@ -309,7 +309,7 @@ export function YNABMigrationWizard({
 
         setCategoryMappings(mappings);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to parse YNAB file");
+        setError(err instanceof Error ? err.message : t("errors.parseFailed"));
         setParsedData(null);
       } finally {
         setIsParsingFile(false);
@@ -427,7 +427,7 @@ export function YNABMigrationWizard({
         warnings,
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to generate preview");
+      setError(err instanceof Error ? err.message : t("errors.previewFailed"));
     }
   }, [parsedData, categoryMappings, options, existingAccounts]);
 
@@ -474,7 +474,9 @@ export function YNABMigrationWizard({
         warnings.push(...accountResult.warnings);
       } catch (err) {
         errors.push(
-          `Account import failed: ${err instanceof Error ? err.message : "Unknown error"}`
+          t("errors.accountImportFailed", {
+            details: err instanceof Error ? err.message : t("errors.unknownError"),
+          })
         );
       }
       totalProgress += stages[0].weight;
@@ -493,7 +495,9 @@ export function YNABMigrationWizard({
         warnings.push(...categoryResult.warnings);
       } catch (err) {
         errors.push(
-          `Category import failed: ${err instanceof Error ? err.message : "Unknown error"}`
+          t("errors.categoryImportFailed", {
+            details: err instanceof Error ? err.message : t("errors.unknownError"),
+          })
         );
       }
       totalProgress += stages[1].weight;
@@ -511,7 +515,9 @@ export function YNABMigrationWizard({
         warnings.push(...txResult.warnings);
       } catch (err) {
         errors.push(
-          `Transaction import failed: ${err instanceof Error ? err.message : "Unknown error"}`
+          t("errors.transactionImportFailed", {
+            details: err instanceof Error ? err.message : t("errors.unknownError"),
+          })
         );
       }
       totalProgress += stages[2].weight;
@@ -533,7 +539,9 @@ export function YNABMigrationWizard({
         warnings.push(...budgetResult.warnings);
       } catch (err) {
         errors.push(
-          `Budget import failed: ${err instanceof Error ? err.message : "Unknown error"}`
+          t("errors.budgetImportFailed", {
+            details: err instanceof Error ? err.message : t("errors.unknownError"),
+          })
         );
       }
       totalProgress = 100;
@@ -544,8 +552,8 @@ export function YNABMigrationWizard({
         success: errors.length === 0,
         message:
           errors.length === 0
-            ? "YNAB data imported successfully!"
-            : `Import completed with ${errors.length} error(s)`,
+            ? t("importSuccess")
+            : t("importWithErrors", { count: errors.length }),
         stats,
         errors,
         warnings,

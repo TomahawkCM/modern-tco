@@ -20,6 +20,8 @@ import {
   Plus,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import { extractReceiptData, type ExtractedReceiptData } from "@/lib/receipt-ocr";
 import { getPrivacySettings } from "@/lib/budget-privacy-settings";
 import { db } from "@/lib/budget-db";
@@ -30,6 +32,7 @@ import Link from "next/link";
 export default function ReceiptScannerPage() {
   const t = useTranslations("ocr");
   const locale = useLocale();
+  const currency = useDefaultCurrency();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -473,7 +476,7 @@ export default function ReceiptScannerPage() {
                   <span className="text-slate-400">{t("amountLabel")}:</span>
                   <span className="font-medium text-white">
                     {extractedData.amount !== null
-                      ? `$${extractedData.amount.toFixed(2)}`
+                      ? formatCurrency(extractedData.amount, currency, locale)
                       : t("notFound")}
                   </span>
                 </div>

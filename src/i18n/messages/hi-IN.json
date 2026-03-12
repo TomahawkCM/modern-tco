@@ -335,6 +335,14 @@
       "costByCategory": "श्रेणी अनुसार लागत",
       "potentialSavings": "संभावित बचत",
       "upcomingCharges": "आगामी शुल्क (अगले 30 दिन)"
+    },
+    "suggestions": {
+      "inactiveTitle": "Potentially cancelled subscriptions",
+      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
+      "trialsTitle": "Trials ending soon",
+      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
+      "highCostTitle": "High-cost subscriptions",
+      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
     }
   },
   "emptyStates": {
@@ -1767,7 +1775,9 @@
     "transactionCount": "{count} {count, plural, =1 {लेन-देन} other {लेन-देन}}",
     "usedTimes": "{count} {count, plural, =1 {बार} other {बार}} उपयोग किया गया",
     "noTransactionsYet": "अभी तक कोई लेन-देन नहीं",
-    "save": "सहेजें"
+    "save": "सहेजें",
+    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
+    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
   },
   "mobileNav": {
     "home": "होम",
@@ -1916,7 +1926,18 @@
       "whatNext": "आप आगे क्या करना चाहेंगे?",
       "viewTransactions": "लेन-देन देखें",
       "importAnother": "एक और आयात करें"
-    }
+    },
+    "errors": {
+      "parseFailed": "Failed to parse YNAB file",
+      "previewFailed": "Failed to generate preview",
+      "accountImportFailed": "Account import failed: {details}",
+      "categoryImportFailed": "Category import failed: {details}",
+      "transactionImportFailed": "Transaction import failed: {details}",
+      "unknownError": "Unknown error",
+      "budgetImportFailed": "Budget import failed: {details}"
+    },
+    "importSuccess": "YNAB data imported successfully!",
+    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
   },
   "simplefinSettings": {
     "connection": {

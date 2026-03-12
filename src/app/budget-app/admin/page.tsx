@@ -1062,7 +1062,7 @@ function AdminDashboardContent() {
                 auditLogs.map((log) => (
                   <TableRow key={log.id} className="border-white/5 hover:bg-white/5">
                     <TableCell className="text-slate-300">
-                      {new Date(log.created_at).toLocaleString()}
+                      {new Date(log.created_at).toLocaleString(locale)}
                     </TableCell>
                     <TableCell className="text-slate-300">
                       {log.actor?.email || log.actor_id || "-"}

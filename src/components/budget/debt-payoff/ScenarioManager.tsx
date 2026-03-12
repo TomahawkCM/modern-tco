@@ -7,7 +7,7 @@ import { TrendingDown, Snowflake, GripVertical, Trash2, CalendarDays } from "luc
 import { cn } from "@/lib/utils";
 import type { DebtScenario } from "@/types/budget";
 import type { DebtStrategy } from "@/lib/calculators/types";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const strategyIcons: Record<DebtStrategy, React.ComponentType<{ className?: string }>> = {
   avalanche: TrendingDown,
@@ -39,6 +39,7 @@ export function ScenarioManager({
   formatCurrency,
 }: ScenarioManagerProps) {
   const t = useTranslations("debtPayoff");
+  const locale = useLocale();
   const [confirmDelete, setConfirmDelete] = useState<number | null>(null);
 
   const handleDelete = useCallback(
@@ -84,7 +85,9 @@ export function ScenarioManager({
               onCheckedChange={() => onToggleSelect(scenario.id)}
               className="border-slate-600 data-[state=checked]:border-teal-600 data-[state=checked]:bg-teal-600"
             />
-            <Icon className={cn("h-4 w-4 shrink-0", strategyColors[scenario.strategy as DebtStrategy])} />
+            <Icon
+              className={cn("h-4 w-4 shrink-0", strategyColors[scenario.strategy as DebtStrategy])}
+            />
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-white">{scenario.name}</p>
               <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-slate-400">
@@ -95,7 +98,7 @@ export function ScenarioManager({
                   {formatCurrency(scenario.totalInterest)} {t("interest")}
                 </span>
                 <span>
-                  {debtFreeDate.toLocaleDateString(undefined, { year: "numeric", month: "short" })}
+                  {debtFreeDate.toLocaleDateString(locale, { year: "numeric", month: "short" })}
                 </span>
               </div>
             </div>

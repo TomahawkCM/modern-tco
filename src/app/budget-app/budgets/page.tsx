@@ -11,10 +11,12 @@ import { OverspendingAlerts } from "@/components/budget/OverspendingAlerts";
 import { useToast } from "@/components/budget/Toast";
 import { PullToRefresh } from "@/components/budget/layout/PullToRefresh";
 import { EmptyState } from "@/components/budget/states/EmptyState";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
 import { detectOverspending } from "@/lib/analytics/overspending-detector";
 import { db } from "@/lib/budget-db";
 import { subtractAmounts, sumAmounts } from "@/lib/money";
 import type { Budget, Category, Transaction } from "@/types/budget";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import { AlertCircle, Edit, Plus, Trash2, TrendingDown, TrendingUp } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -31,6 +33,7 @@ interface CategoryBudgetData {
 export default function BudgetsPage() {
   const toast = useToast();
   const locale = useLocale();
+  const currency = useDefaultCurrency();
   const t = useTranslations("budget.budgets");
   const [categories, setCategories] = useState<Category[]>([]);
   const [budgets, setBudgets] = useState<Budget[]>([]);
@@ -219,13 +222,16 @@ export default function BudgetsPage() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
             <div>
               <p className="mb-2 text-base font-medium text-gray-700">{t("totalBudgeted")}</p>
-              <p className="text-3xl font-bold text-gray-900">${totalBudgeted.toFixed(2)}</p>
+              <p className="text-3xl font-bold text-gray-900">
+                {formatCurrency(totalBudgeted, currency, locale)}
+              </p>
             </div>
             <div>
               <p className="mb-2 text-base font-medium text-gray-700">{t("totalSpent")}</p>
               <p className="flex items-center gap-2 text-3xl font-bold text-red-600">
                 <TrendingDown className="h-6 w-6" aria-hidden="true" />
-                <span className="sr-only">{t("totalExpenses")}: </span>${totalSpent.toFixed(2)}
+                <span className="sr-only">{t("totalExpenses")}: </span>
+                {formatCurrency(totalSpent, currency, locale)}
               </p>
             </div>
             <div>
@@ -238,7 +244,7 @@ export default function BudgetsPage() {
                 ) : (
                   <AlertCircle className="h-6 w-6" aria-hidden="true" />
                 )}
-                ${Math.abs(totalRemaining).toFixed(2)}
+                {formatCurrency(Math.abs(totalRemaining), currency, locale)}
               </p>
             </div>
             <div>
@@ -359,9 +365,9 @@ export default function BudgetsPage() {
                     <div>
                       <div className="mb-3 flex items-center justify-between">
                         <span className="text-base font-semibold text-gray-700">
-                          ${data.spent.toFixed(2)}{" "}
-                          <span className="font-normal text-gray-500">{t("of")}</span> $
-                          {data.budget.amount.toFixed(2)}
+                          {formatCurrency(data.spent, currency, locale)}{" "}
+                          <span className="font-normal text-gray-500">{t("of")}</span>{" "}
+                          {formatCurrency(data.budget.amount, currency, locale)}
                         </span>
                         <div className="flex items-center gap-2">
                           <span
@@ -412,7 +418,9 @@ export default function BudgetsPage() {
                         <>
                           <TrendingUp className="h-6 w-6 flex-shrink-0 text-green-600" />
                           <p className="text-base font-semibold text-green-700">
-                            {t("remainingThisMonth", { amount: `$${data.remaining.toFixed(2)}` })}
+                            {t("remainingThisMonth", {
+                              amount: formatCurrency(data.remaining, currency, locale),
+                            })}
                           </p>
                         </>
                       ) : (
@@ -420,7 +428,7 @@ export default function BudgetsPage() {
                           <AlertCircle className="h-6 w-6 flex-shrink-0 text-red-600" />
                           <p className="text-base font-semibold text-red-700">
                             {t("overBudgetThisMonth", {
-                              amount: `$${Math.abs(data.remaining).toFixed(2)}`,
+                              amount: formatCurrency(Math.abs(data.remaining), currency, locale),
                             })}
                           </p>
                         </>
@@ -485,20 +493,24 @@ export default function BudgetsPage() {
               ? {
                   title: t("youWillLose"),
                   items: [
-                    `${deletingBudget.data.category.name}: $${deletingBudget.budget.amount.toFixed(2)}/${deletingBudget.budget.period}`,
+                    `${deletingBudget.data.category.name}: ${formatCurrency(deletingBudget.budget.amount, currency, locale)}/${deletingBudget.budget.period}`,
                     t("currentProgress", {
                       percentage: deletingBudget.data.percentage.toFixed(0),
-                      spent: `$${deletingBudget.data.spent.toFixed(2)}`,
+                      spent: formatCurrency(deletingBudget.data.spent, currency, locale),
                     }),
                     t("transactionsWillBecomeUnbudgeted", {
                       count: deletingBudget.data.transactionCount,
                     }),
                     deletingBudget.data.remaining < 0
                       ? t("currentlyOverBudget", {
-                          amount: `$${Math.abs(deletingBudget.data.remaining).toFixed(2)}`,
+                          amount: formatCurrency(
+                            Math.abs(deletingBudget.data.remaining),
+                            currency,
+                            locale
+                          ),
                         })
                       : t("remainingBudget", {
-                          amount: `$${deletingBudget.data.remaining.toFixed(2)}`,
+                          amount: formatCurrency(deletingBudget.data.remaining, currency, locale),
                         }),
                   ],
                 }

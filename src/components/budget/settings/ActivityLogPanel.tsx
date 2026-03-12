@@ -39,7 +39,7 @@ import {
   ArrowRightLeft,
   Clock,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useProfile } from "@/contexts/ProfileContext";
 import { getActivityLog, getActivityLogCount, formatActivityEntry } from "@/lib/activity-logger";
 import type { ActivityLogEntry, ActivityLogFilter } from "@/types/profile";
@@ -72,7 +72,8 @@ const ENTITY_ICONS: Record<ActivityLogEntry["entityType"], React.ReactNode> = {
 
 function formatRelativeTime(
   date: Date,
-  t: (key: string, values?: Record<string, string | number | Date>) => string
+  t: (key: string, values?: Record<string, string | number | Date>) => string,
+  locale?: string
 ): string {
   const now = new Date();
   const diff = now.getTime() - date.getTime();
@@ -86,7 +87,7 @@ function formatRelativeTime(
   if (hours < 24) return t("hoursAgo", { count: hours });
   if (days < 7) return t("daysAgo", { count: days });
 
-  return date.toLocaleDateString(undefined, {
+  return date.toLocaleDateString(locale, {
     month: "short",
     day: "numeric",
     year: date.getFullYear() !== now.getFullYear() ? "numeric" : undefined,
@@ -95,6 +96,7 @@ function formatRelativeTime(
 
 export function ActivityLogPanel() {
   const t = useTranslations("activityLog");
+  const locale = useLocale();
   const { profiles, currentProfile } = useProfile();
   const [entries, setEntries] = useState<ActivityLogEntry[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -315,7 +317,7 @@ export function ActivityLogPanel() {
                           <span className="ms-1">{entry.entityType}</span>
                         </Badge>
                         <span className="text-xs text-muted-foreground">
-                          {formatRelativeTime(entry.timestamp, t)}
+                          {formatRelativeTime(entry.timestamp, t, locale)}
                         </span>
                       </div>
                     </div>

@@ -4576,6 +4576,14 @@
       "next30Days": "Next 30 Days",
       "projectedYearly": "Projected yearly spend",
       "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+    },
+    "suggestions": {
+      "inactiveTitle": "Potentially cancelled subscriptions",
+      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
+      "trialsTitle": "Trials ending soon",
+      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
+      "highCostTitle": "High-cost subscriptions",
+      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
     }
   },
   "subscriptionModal": {
@@ -4858,7 +4866,9 @@
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
     "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
-    "viewAllResults": "View all {count} results"
+    "viewAllResults": "View all {count} results",
+    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
+    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
   },
   "transactionTable": {
     "actions": {
@@ -5210,7 +5220,18 @@
       "parsing": "Parsing file...",
       "supportedFormats": "Supported Formats",
       "transactions": "Transactions"
-    }
+    },
+    "errors": {
+      "parseFailed": "Failed to parse YNAB file",
+      "previewFailed": "Failed to generate preview",
+      "accountImportFailed": "Account import failed: {details}",
+      "categoryImportFailed": "Category import failed: {details}",
+      "transactionImportFailed": "Transaction import failed: {details}",
+      "unknownError": "Unknown error",
+      "budgetImportFailed": "Budget import failed: {details}"
+    },
+    "importSuccess": "YNAB data imported successfully!",
+    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
   },
   "balanceReconciliation": {
     "title": "ការនាំចូលបានបញ្ចប់!",

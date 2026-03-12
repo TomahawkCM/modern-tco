@@ -28,6 +28,8 @@ import {
 import type { Transaction } from "@/types/budget";
 import { useThemeMode } from "@/hooks/useThemeMode";
 import { getChartPalette } from "@/lib/budget-chart-colors";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
 
 interface PredictiveSpendingChartProps {
   transactions: Transaction[];
@@ -44,6 +46,7 @@ export function PredictiveSpendingChart({
 }: PredictiveSpendingChartProps) {
   const t = useTranslations("predictiveSpendingChart");
   const locale = useLocale();
+  const currency = useDefaultCurrency();
   // Get theme-aware chart colors
   const theme = useThemeMode();
   const palette = getChartPalette(theme);
@@ -177,16 +180,18 @@ export function PredictiveSpendingChart({
         <div className="rounded-lg bg-white p-4 shadow-sm">
           <p className="mb-1 text-xs text-gray-600">{t("stats.nextMonth")}</p>
           <p className="text-2xl font-bold text-gray-900">
-            ${predictions[0]?.predictedAmount.toFixed(0) || "0"}
+            {formatCurrency(predictions[0]?.predictedAmount || 0, currency, locale)}
           </p>
           {predictions[0] && (
             <p className="mt-1 text-xs text-gray-500">
-              ±$
-              {(
+              ±
+              {formatCurrency(
                 (predictions[0].confidenceInterval.upper -
                   predictions[0].confidenceInterval.lower) /
-                2
-              ).toFixed(0)}
+                  2,
+                currency,
+                locale
+              )}
             </p>
           )}
         </div>
@@ -197,13 +202,14 @@ export function PredictiveSpendingChart({
         <div className="rounded-lg bg-white p-4 shadow-sm">
           <p className="mb-1 text-xs text-gray-600">{t("stats.threeMonthAvg")}</p>
           <p className="text-2xl font-bold text-gray-900">
-            $
-            {predictions.length > 0
-              ? (
-                  predictions.slice(0, 3).reduce((sum, p) => sum + p.predictedAmount, 0) /
-                  Math.min(3, predictions.length)
-                ).toFixed(0)
-              : "0"}
+            {formatCurrency(
+              predictions.length > 0
+                ? predictions.slice(0, 3).reduce((sum, p) => sum + p.predictedAmount, 0) /
+                    Math.min(3, predictions.length)
+                : 0,
+              currency,
+              locale
+            )}
           </p>
         </div>
       </div>
@@ -224,7 +230,7 @@ export function PredictiveSpendingChart({
               stroke={palette.grid}
               fontSize={12}
               tick={{ fill: palette.text }}
-              tickFormatter={(value) => `$${value.toFixed(0)}`}
+              tickFormatter={(value) => formatCurrency(value, currency, locale)}
             />
             <Tooltip
               contentStyle={{
@@ -233,7 +239,7 @@ export function PredictiveSpendingChart({
                 borderRadius: "8px",
               }}
               formatter={(value: number, name: string) => [
-                `$${value.toFixed(2)}`,
+                formatCurrency(value, currency, locale),
                 name === "actual" ? "Actual" : name === "predicted" ? "Predicted" : name,
               ]}
             />
@@ -310,11 +316,11 @@ export function PredictiveSpendingChart({
                       {pred.month.toLocaleDateString(locale, { month: "long", year: "numeric" })}
                     </td>
                     <td className="px-4 py-3 text-end text-sm font-medium text-gray-900">
-                      ${pred.predictedAmount.toFixed(2)}
+                      {formatCurrency(pred.predictedAmount, currency, locale)}
                     </td>
                     <td className="px-4 py-3 text-end text-sm text-gray-600">
-                      ${pred.confidenceInterval.lower.toFixed(0)} - $
-                      {pred.confidenceInterval.upper.toFixed(0)}
+                      {formatCurrency(pred.confidenceInterval.lower, currency, locale)} -{" "}
+                      {formatCurrency(pred.confidenceInterval.upper, currency, locale)}
                     </td>
                     <td className="px-4 py-3 text-end text-sm">
                       <span

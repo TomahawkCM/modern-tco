@@ -7,9 +7,11 @@
  * Shows warnings when user is projected to exceed budget
  */
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { AlertTriangle, TrendingUp } from "lucide-react";
 import type { OverspendingAlert } from "@/lib/analytics/overspending-detector";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 
 interface OverspendingAlertsProps {
   alerts: OverspendingAlert[];
@@ -17,6 +19,8 @@ interface OverspendingAlertsProps {
 
 export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
   const t = useTranslations("overspendingAlerts");
+  const currency = useDefaultCurrency();
+  const locale = useLocale();
   if (alerts.length === 0) {
     return null;
   }
@@ -68,20 +72,23 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
                     alert.severity === "danger" ? "text-red-800" : "text-amber-800"
                   }`}
                 >
-                  ⚠️ {t("exceededWarning", { amount: `$${alert.projectedOverage.toFixed(2)}` })}
+                  ⚠️{" "}
+                  {t("exceededWarning", {
+                    amount: formatCurrency(alert.projectedOverage, currency, locale),
+                  })}
                 </p>
 
                 <div className="grid grid-cols-2 gap-4 text-xs sm:grid-cols-4">
                   <div>
                     <div className="text-gray-600">{t("stats.budget")}</div>
                     <div className="font-semibold text-gray-900">
-                      ${alert.budgetAmount.toFixed(2)}
+                      {formatCurrency(alert.budgetAmount, currency, locale)}
                     </div>
                   </div>
                   <div>
                     <div className="text-gray-600">{t("stats.spentSoFar")}</div>
                     <div className="font-semibold text-gray-900">
-                      ${alert.currentSpent.toFixed(2)}
+                      {formatCurrency(alert.currentSpent, currency, locale)}
                     </div>
                   </div>
                   <div>
@@ -91,7 +98,7 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
                         alert.severity === "danger" ? "text-red-700" : "text-amber-700"
                       }`}
                     >
-                      ${alert.projectedSpending.toFixed(2)}
+                      {formatCurrency(alert.projectedSpending, currency, locale)}
                     </div>
                   </div>
                   <div>
@@ -129,10 +136,12 @@ export function OverspendingAlerts({ alerts }: OverspendingAlertsProps) {
                   <TrendingUp className="me-2 inline h-3 w-3" />
                   <span className="font-medium">{t("tip.label")}</span>{" "}
                   {t("tip.reduceSpending", {
-                    amount: `$${(
+                    amount: formatCurrency(
                       alert.budgetAmount /
-                      new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate()
-                    ).toFixed(2)}`,
+                        new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate(),
+                      currency,
+                      locale
+                    ),
                   })}
                 </div>
               </div>

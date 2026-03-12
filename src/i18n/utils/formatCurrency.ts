@@ -6,8 +6,6 @@
  * IMPORTANT: Never sum amounts across different currencies
  */
 
-import type { SupportedLocale } from "../config";
-
 // Common currency codes for type hints (any ISO 4217 code is valid)
 export type CurrencyCode = string;
 
@@ -63,7 +61,7 @@ export function getCurrencyDecimals(currency: string): number {
 export function formatCurrency(
   amount: number,
   currency: CurrencyCode,
-  locale: SupportedLocale = "en-US"
+  locale: string = "en-US"
 ): string {
   try {
     const decimals = getCurrencyDecimals(currency);
@@ -91,7 +89,7 @@ export function formatCurrency(
 export function formatCurrencyValue(
   amount: number,
   currency: CurrencyCode,
-  locale: SupportedLocale = "en-US"
+  locale: string = "en-US"
 ): string {
   try {
     const decimals = getCurrencyDecimals(currency);
@@ -109,10 +107,7 @@ export function formatCurrencyValue(
 /**
  * Get currency symbol for a currency code
  */
-export function getCurrencySymbol(
-  currency: CurrencyCode,
-  locale: SupportedLocale = "en-US"
-): string {
+export function getCurrencySymbol(currency: CurrencyCode, locale: string = "en-US"): string {
   try {
     const formatted = new Intl.NumberFormat(locale, {
       style: "currency",

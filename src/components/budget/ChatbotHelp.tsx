@@ -18,7 +18,9 @@
  */
 
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import {
   TrendingUp,
   DollarSign,
@@ -58,6 +60,8 @@ export function ChatbotHelp({
   className = "",
 }: ChatbotHelpProps) {
   const t = useTranslations("chatbotHelp");
+  const currency = useDefaultCurrency();
+  const locale = useLocale();
   const [suggestions, setSuggestions] = useState<SuggestedQuestion[]>([]);
   const [smartSuggestions, setSmartSuggestions] = useState<SuggestedQuestion[]>([]);
 
@@ -99,7 +103,7 @@ export function ChatbotHelp({
       if (recentLarge && Math.abs(recentLarge.amount) > 100) {
         smart.push({
           id: "recent-large",
-          question: `Tell me about my $${Math.abs(recentLarge.amount).toFixed(2)} ${recentLarge.category} expense`,
+          question: `Tell me about my ${formatCurrency(Math.abs(recentLarge.amount), currency, locale)} ${recentLarge.category} expense`,
           category: "spending",
           icon: AlertTriangle,
           badge: "Recent",
@@ -151,7 +155,7 @@ export function ChatbotHelp({
           category: "spending",
           icon: PieChart,
           badge: "Top Spending",
-          description: `$${topCategory[1].toFixed(2)} so far`,
+          description: `${formatCurrency(topCategory[1], currency, locale)} so far`,
         });
       }
 

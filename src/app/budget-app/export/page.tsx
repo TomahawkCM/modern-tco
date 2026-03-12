@@ -20,7 +20,7 @@ import {
   ChevronUp,
   Loader2,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { db } from "@/lib/budget-db";
 import {
   downloadExcelExport,
@@ -74,6 +74,7 @@ type SheetOptionKey = (typeof SHEET_OPTIONS)[number]["key"];
 
 export default function ExportPage() {
   const t = useTranslations("export");
+  const locale = useLocale();
   const [isExporting, setIsExporting] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
   const [exportStatus, setExportStatus] = useState<"idle" | "success" | "error">("idle");
@@ -247,7 +248,7 @@ export default function ExportPage() {
       // Create CSV header
       const headers = ["Date", "Description", "Category", "Subcategory", "Amount", "Notes"];
       const rows = transactions.map((tx) => [
-        new Date(tx.date).toLocaleDateString(),
+        new Date(tx.date).toLocaleDateString(locale),
         tx.description,
         tx.category || "",
         tx.subcategory || "",
@@ -295,7 +296,7 @@ export default function ExportPage() {
 
       // Confirm before importing
       const confirmed = confirm(
-        t("confirmImport", { date: new Date(data.exportDate).toLocaleDateString() })
+        t("confirmImport", { date: new Date(data.exportDate).toLocaleDateString(locale) })
       );
 
       if (!confirmed) {

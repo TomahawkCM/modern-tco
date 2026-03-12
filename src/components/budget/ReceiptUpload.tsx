@@ -8,7 +8,7 @@
  */
 
 import { useCallback, useState, useRef } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useDropzone } from "react-dropzone";
 import { Upload, FileImage, X, AlertCircle, CheckCircle, Camera, Sparkles } from "lucide-react";
 import { extractReceiptData, type ExtractedReceiptData } from "@/lib/receipt-ocr";
@@ -27,6 +27,7 @@ export function ReceiptUpload({
   onDataExtracted,
 }: ReceiptUploadProps) {
   const t = useTranslations("receiptUpload");
+  const locale = useLocale();
   const [preview, setPreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -298,7 +299,7 @@ export function ReceiptUpload({
                     {extractedData.date && (
                       <p>
                         <strong>{t("extracted.date")}</strong>{" "}
-                        {extractedData.date.toLocaleDateString()}
+                        {extractedData.date.toLocaleDateString(locale)}
                       </p>
                     )}
                     <p className="mt-2 text-teal-600">

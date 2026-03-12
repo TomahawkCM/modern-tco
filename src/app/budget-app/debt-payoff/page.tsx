@@ -450,7 +450,7 @@ export default function DebtPayoffPage() {
                     value={(() => {
                       const d = new Date();
                       d.setMonth(d.getMonth() + activeResult.totalMonths);
-                      return d.toLocaleDateString(undefined, { year: "numeric", month: "short" });
+                      return d.toLocaleDateString(locale, { year: "numeric", month: "short" });
                     })()}
                     icon={CalendarCheck}
                     variant="success"

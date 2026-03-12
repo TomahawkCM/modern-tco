@@ -29,6 +29,8 @@ import {
 } from "@/lib/analytics/trend-forecasting";
 import { useThemeMode } from "@/hooks/useThemeMode";
 import { getChartPalette } from "@/lib/budget-chart-colors";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
 
 interface SpendingTrendChartProps {
   transactions: { date: Date; amount: number }[];
@@ -43,6 +45,7 @@ export function SpendingTrendChart({
 }: SpendingTrendChartProps) {
   const t = useTranslations("spendingTrendChart");
   const locale = useLocale();
+  const currency = useDefaultCurrency();
   // Get theme-aware chart colors
   const theme = useThemeMode();
   const palette = getChartPalette(theme);
@@ -142,11 +145,15 @@ export function SpendingTrendChart({
         <div className="mb-6 grid grid-cols-3 gap-4 rounded-lg bg-gray-50 p-4">
           <div>
             <div className="mb-2 text-xs text-gray-600">{t("stats.avgMonthly")}</div>
-            <div className="text-lg font-bold text-gray-900">${stats.avgSpending.toFixed(0)}</div>
+            <div className="text-lg font-bold text-gray-900">
+              {formatCurrency(stats.avgSpending, currency, locale)}
+            </div>
           </div>
           <div>
             <div className="mb-2 text-xs text-gray-600">{t("stats.lastMonth")}</div>
-            <div className="text-lg font-bold text-gray-900">${stats.lastMonth.toFixed(0)}</div>
+            <div className="text-lg font-bold text-gray-900">
+              {formatCurrency(stats.lastMonth, currency, locale)}
+            </div>
           </div>
           <div>
             <div className="mb-2 text-xs text-gray-600">{t("stats.projected")}</div>
@@ -155,7 +162,7 @@ export function SpendingTrendChart({
                 stats.changeFromAvg > 0 ? "text-red-600" : "text-green-600"
               }`}
             >
-              ${stats.projectedNext.toFixed(0)}
+              {formatCurrency(stats.projectedNext, currency, locale)}
               <span className="ms-2 text-xs">
                 ({stats.changePercent >= 0 ? "+" : ""}
                 {stats.changePercent.toFixed(1)}%)
@@ -173,7 +180,7 @@ export function SpendingTrendChart({
           <YAxis
             stroke={palette.grid}
             tick={{ fontSize: 12 }}
-            tickFormatter={(value) => `$${value.toFixed(0)}`}
+            tickFormatter={(value) => formatCurrency(value, currency, locale)}
           />
           <Tooltip
             contentStyle={{
@@ -181,7 +188,7 @@ export function SpendingTrendChart({
               border: `1px solid ${palette.grid}`,
               borderRadius: "0.5rem",
             }}
-            formatter={(value: any) => [`$${value?.toFixed(2)}`, ""]}
+            formatter={(value: any) => [formatCurrency(value ?? 0, currency, locale), ""]}
           />
           <Legend />
 

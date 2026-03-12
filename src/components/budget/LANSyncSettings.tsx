@@ -72,8 +72,11 @@ export interface LANSyncSettingsProps {
 // Helper Functions
 // ============================================================================
 
-function formatLastSync(date: Date | null | undefined): string {
-  if (!date) return "Never synced";
+function formatLastSync(
+  date: Date | null | undefined,
+  t: (key: string, values?: Record<string, unknown>) => string
+): string {
+  if (!date) return t("time.neverSynced");
 
   const now = new Date();
   const diff = now.getTime() - date.getTime();
@@ -81,10 +84,10 @@ function formatLastSync(date: Date | null | undefined): string {
   const hours = Math.floor(diff / 3600000);
   const days = Math.floor(diff / 86400000);
 
-  if (minutes < 1) return "Just now";
-  if (minutes < 60) return `${minutes} minute${minutes !== 1 ? "s" : ""} ago`;
-  if (hours < 24) return `${hours} hour${hours !== 1 ? "s" : ""} ago`;
-  return `${days} day${days !== 1 ? "s" : ""} ago`;
+  if (minutes < 1) return t("time.justNow");
+  if (minutes < 60) return t("time.minutesAgo", { count: minutes });
+  if (hours < 24) return t("time.hoursAgo", { count: hours });
+  return t("time.daysAgo", { count: days });
 }
 
 function getDeviceIcon(deviceName: string) {
@@ -179,8 +182,8 @@ function DeviceCard({
           </div>
           <p className={cn("truncate text-muted-foreground", seniorsMode ? "text-sm" : "text-xs")}>
             {status?.lastSyncAt
-              ? t("time.lastSync", { time: formatLastSync(status.lastSyncAt) })
-              : formatLastSync(device.lastSyncAt)}
+              ? t("time.lastSync", { time: formatLastSync(status.lastSyncAt, t) })
+              : formatLastSync(device.lastSyncAt, t)}
           </p>
           {device.lastKnownIp && (
             <p

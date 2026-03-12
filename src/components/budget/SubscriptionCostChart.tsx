@@ -11,7 +11,9 @@
  */
 
 import { useMemo, lazy, Suspense } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
+import { formatCurrency } from "@/i18n/utils/formatCurrency";
 import type { Subscription } from "@/types/budget";
 import type { SubscriptionPattern } from "@/lib/subscription-detector";
 import {
@@ -75,6 +77,8 @@ export function SubscriptionCostChart({
   autoDetectedPatterns,
 }: SubscriptionCostChartProps) {
   const t = useTranslations("subscriptionCostChart");
+  const locale = useLocale();
+  const currency = useDefaultCurrency();
 
   // Calculate costs by category
   const categoryBreakdown = useMemo((): CategoryCost[] => {
@@ -179,8 +183,8 @@ export function SubscriptionCostChart({
       if (totalInactive > 0) {
         suggestions.push({
           type: "inactive",
-          title: "Potentially cancelled subscriptions",
-          description: `${inactivePatterns.length} subscription(s) haven't charged recently. Verify they're actually cancelled.`,
+          title: t("suggestions.inactiveTitle"),
+          description: t("suggestions.inactiveDescription", { count: inactivePatterns.length }),
           potentialSavings: totalInactive,
           subscriptionIds: inactivePatterns.map((p) => p.id),
         });
@@ -198,8 +202,8 @@ export function SubscriptionCostChart({
       const trialTotal = trialsSoon.reduce((sum, s) => sum + s.amount, 0);
       suggestions.push({
         type: "unused-trial",
-        title: "Trials ending soon",
-        description: `${trialsSoon.length} trial(s) ending in the next 7 days. Cancel if you're not using them.`,
+        title: t("suggestions.trialsTitle"),
+        description: t("suggestions.trialsDescription", { count: trialsSoon.length }),
         potentialSavings: trialTotal,
         subscriptionIds: trialsSoon.map((s) => s.id),
       });
@@ -223,9 +227,8 @@ export function SubscriptionCostChart({
     if (highCost.length > 0) {
       suggestions.push({
         type: "high-cost",
-        title: "High-cost subscriptions",
-        description:
-          "These subscriptions represent a large portion of your spending. Consider if you're getting full value.",
+        title: t("suggestions.highCostTitle"),
+        description: t("suggestions.highCostDescription"),
         potentialSavings: 0,
         subscriptionIds: highCost.map((s) => s.id),
       });
@@ -291,7 +294,9 @@ export function SubscriptionCostChart({
             </h3>
             <DollarSign className="h-5 w-5 text-green-500" />
           </div>
-          <p className="text-2xl font-bold text-foreground">${totals.monthly.toFixed(2)}</p>
+          <p className="text-2xl font-bold text-foreground">
+            {formatCurrency(totals.monthly, currency, locale)}
+          </p>
           <p className="mt-1 text-xs text-muted-foreground">
             {t("summary.activeSubscriptions", { count: totals.count })}
           </p>
@@ -302,7 +307,9 @@ export function SubscriptionCostChart({
             <h3 className="text-sm font-medium text-muted-foreground">{t("summary.annualCost")}</h3>
             <TrendingUp className="h-5 w-5 text-blue-500" />
           </div>
-          <p className="text-2xl font-bold text-foreground">${totals.annual.toFixed(2)}</p>
+          <p className="text-2xl font-bold text-foreground">
+            {formatCurrency(totals.annual, currency, locale)}
+          </p>
           <p className="mt-1 text-xs text-muted-foreground">{t("summary.projectedYearly")}</p>
         </div>
 
@@ -312,7 +319,11 @@ export function SubscriptionCostChart({
             <Calendar className="h-5 w-5 text-purple-500" />
           </div>
           <p className="text-2xl font-bold text-foreground">
-            ${upcomingCharges.reduce((sum, c) => sum + c.amount, 0).toFixed(2)}
+            {formatCurrency(
+              upcomingCharges.reduce((sum, c) => sum + c.amount, 0),
+              currency,
+              locale
+            )}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
             {t("summary.upcomingCharges", { count: upcomingCharges.length })}
@@ -334,7 +345,13 @@ export function SubscriptionCostChart({
             {/* Pie Chart */}
             <div className="h-64">
               <Suspense fallback={<ChartLoadingSkeleton />}>
-                <PieChartComponent data={pieData} />
+                <PieChartComponent
+                  data={pieData}
+                  tooltipFormatter={(value: number) => [
+                    `${formatCurrency(value, currency, locale)}/mo`,
+                    "Cost",
+                  ]}
+                />
               </Suspense>
             </div>
 
@@ -349,9 +366,11 @@ export function SubscriptionCostChart({
                   </div>
                   <div className="text-end">
                     <p className="text-sm font-semibold text-foreground">
-                      ${cat.monthly.toFixed(2)}/mo
+                      {formatCurrency(cat.monthly, currency, locale)}/mo
                     </p>
-                    <p className="text-xs text-muted-foreground">${cat.annual.toFixed(2)}/yr</p>
+                    <p className="text-xs text-muted-foreground">
+                      {formatCurrency(cat.annual, currency, locale)}/yr
+                    </p>
                   </div>
                 </div>
               ))}
@@ -399,7 +418,7 @@ export function SubscriptionCostChart({
                   {suggestion.potentialSavings > 0 && (
                     <div className="text-end">
                       <p className="text-lg font-bold text-green-600">
-                        ${suggestion.potentialSavings.toFixed(2)}
+                        {formatCurrency(suggestion.potentialSavings, currency, locale)}
                       </p>
                       <p className="text-xs text-muted-foreground">{t("perMonth")}</p>
                     </div>
@@ -446,7 +465,9 @@ export function SubscriptionCostChart({
                       </p>
                     </div>
                   </div>
-                  <p className="font-semibold text-foreground">${charge.amount.toFixed(2)}</p>
+                  <p className="font-semibold text-foreground">
+                    {formatCurrency(charge.amount, currency, locale)}
+                  </p>
                 </div>
               );
             })}
@@ -464,10 +485,16 @@ export function SubscriptionCostChart({
 }
 
 // Simple pie chart component (lazy loaded internally)
-function PieChartComponent({ data }: { data: { name: string; value: number; color: string }[] }) {
+function PieChartComponent({
+  data,
+  tooltipFormatter,
+}: {
+  data: { name: string; value: number; color: string }[];
+  tooltipFormatter: (value: number) => [string, string];
+}) {
   return (
     <Suspense fallback={<ChartLoadingSkeleton />}>
-      <LazyPieChart data={data} />
+      <LazyPieChart data={data} tooltipFormatter={tooltipFormatter} />
     </Suspense>
   );
 }
@@ -476,7 +503,13 @@ const LazyPieChart = lazy(() =>
   import("recharts").then((mod) => {
     const { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } = mod;
 
-    const Chart = ({ data }: { data: { name: string; value: number; color: string }[] }) => (
+    const Chart = ({
+      data,
+      tooltipFormatter,
+    }: {
+      data: { name: string; value: number; color: string }[];
+      tooltipFormatter: (value: number) => [string, string];
+    }) => (
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
@@ -493,7 +526,7 @@ const LazyPieChart = lazy(() =>
             ))}
           </Pie>
           <Tooltip
-            formatter={(value: number) => [`$${value.toFixed(2)}/mo`, "Cost"]}
+            formatter={(value: number) => tooltipFormatter(value)}
             contentStyle={{
               backgroundColor: "hsl(var(--card))",
               border: "1px solid hsl(var(--border))",
