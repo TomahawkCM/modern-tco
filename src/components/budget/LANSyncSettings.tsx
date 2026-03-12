@@ -74,7 +74,8 @@ export interface LANSyncSettingsProps {
 
 function formatLastSync(
   date: Date | null | undefined,
-  t: (key: string, values?: Record<string, unknown>) => string
+
+  t: (key: string, values?: Record<string, any>) => string
 ): string {
   if (!date) return t("time.neverSynced");
 
