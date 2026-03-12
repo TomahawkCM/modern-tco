@@ -92,3 +92,6 @@ test-results/
 # Legacy tool directories (no longer used)
 .serena/
 .specify/
+
+# Git worktrees
+.worktrees/
