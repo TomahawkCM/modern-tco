@@ -619,9 +619,9 @@
       "active": "Actif",
       "completed": "Terminé",
       "createEvent": "Créer un événement",
-      "daysLeft": "{count} days left",
+      "daysLeft": "{count} jours restants",
       "noEvents": "Aucun événement actif",
-      "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more",
+      "noEventsDescription": "Créez un budget événementiel pour suivre les dépenses pour les mariages, les vacances et plus encore",
       "planning": "Planification",
       "progress": "Progression",
       "remaining": "Restant",
@@ -659,13 +659,13 @@
       "assetBreakdown": "Répartition des actifs",
       "cashChecking": "Liquidités et comptes courants",
       "creditCards": "Cartes de crédit",
-      "history": "Historical Snapshots",
+      "history": "Instantanés historiques",
       "investments": "Investissements",
       "liabilityBreakdown": "Répartition des passifs",
       "loans": "Prêts",
-      "milestoneReached": "Milestone reached: {amount}!",
+      "milestoneReached": "Étape atteinte : {amount} !",
       "mortgage": "Hypothèque",
-      "noLiabilities": "No liabilities — great job!",
+      "noLiabilities": "Aucune dette — excellent travail !",
       "property": "Immobilier",
       "savings": "Épargne",
       "title": "Patrimoine net",
@@ -767,34 +767,34 @@
     "scenarios": {
       "_note": "Already internationalized in client.tsx using budget.scenarios namespace",
       "after": "Après",
-      "amountLabel": "Amount",
+      "amountLabel": "Montant",
       "annualSavings": "Épargne annuelle",
       "before": "Avant",
       "healthScore": "Score de santé",
       "impact": "Impact",
       "monthlyCashFlow": "Flux de trésorerie mensuel",
-      "run": "Run Scenario",
-      "subtitle": "Model financial changes and see their impact",
+      "run": "Exécuter le scénario",
+      "subtitle": "Modéliser les changements financiers et voir leur impact",
       "title": "Scénarios hypothétiques",
       "types": {
         "addExpense": {
-          "description": "See the impact of a new recurring expense",
+          "description": "Voir l'impact d'une nouvelle dépense récurrente",
           "title": "Ajouter une dépense"
         },
         "cancelSubscription": {
-          "description": "See savings from canceling a recurring charge",
+          "description": "Voir les économies réalisées en annulant un prélèvement récurrent",
           "title": "Annuler un abonnement"
         },
         "changeIncome": {
-          "description": "Model an income increase or decrease",
+          "description": "Modéliser une augmentation ou une baisse de revenus",
           "title": "Modifier les revenus"
         },
         "increaseSavings": {
-          "description": "See goal timeline acceleration",
+          "description": "Voir l'accélération du calendrier pour atteindre vos objectifs",
           "title": "Augmenter l'épargne"
         },
         "payOffDebt": {
-          "description": "Calculate interest savings from early payoff",
+          "description": "Calculer les économies d'intérêts grâce au remboursement anticipé",
           "title": "Rembourser une dette"
         }
       }

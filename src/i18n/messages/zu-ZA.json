@@ -227,8 +227,8 @@
   "aiColumnMapper": {
     "analyzing": "Analyzing CSV structure with AI...",
     "buttons": {
-      "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
+      "apply": "Hloka izicwangciso & Gcina",
+      "cancel": "Hamba"
     },
     "closeModal": "Close modal",
     "columnMappings": "Column Mappings",
@@ -246,16 +246,16 @@
       "title": "Detection Confidence"
     },
     "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
+      "amount": "I-amount",
+      "date": "Ukukhala",
+      "description": "Ukushabelana",
       "title": "Transaction Preview"
     },
     "samples": "Samples:",
     "saveConfig": {
-      "hint": "Next time you import from this bank, mappings will be automatic",
-      "label": "Save this bank configuration for future imports",
-      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+      "hint": "Kuleyo ukushusha, izicwangciso zokubhala izinto zokugcina ziyakwazanga",
+      "label": "Hloka i-configuration yobanki leyo kuleyo ukushusha",
+      "placeholder": "Faka isicatshini sesikheqo (e.g., My Local Credit Union)"
     },
     "subtitle": "Review AI-detected columns and adjust if needed",
     "title": "AI Column Mapping Wizard"
@@ -826,7 +826,7 @@
     "clearSelection": "Clear selection",
     "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
     "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
+    "deleteWarning": "Ukuba uqalela le nto, akukwazi ukuthola.",
     "export": "Export",
     "noSubcategory": "No subcategory",
     "selectAll": "Select all",
@@ -835,76 +835,76 @@
   },
   "calculators": {
     "budgetAnalyzer": {
-      "actual": "Actual",
-      "balanced": "Your Budget is Balanced!",
-      "description": "Analyze your spending against the popular budgeting rule",
-      "enterSpending": "Enter your monthly spending by category:",
-      "exceeding": "Exceeding",
-      "inputTitle": "Your Monthly Finances",
-      "monthlyIncome": "Monthly Net Income",
-      "monthlyIncomeHelp": "Your take-home pay after taxes",
-      "needs": "Needs",
-      "needsAdjustment": "Adjustments Recommended",
-      "needsDescription": "Housing, utilities, groceries, insurance, minimum debt payments",
-      "needsExamples": "rent, utilities, groceries",
-      "over": "Over",
-      "ruleExplanation": "The 50/30/20 Rule",
-      "savings": "Savings",
-      "savingsDescription": "Emergency fund, investments, retirement, extra debt payments",
-      "savingsExamples": "savings, investments, extra debt",
-      "subtitle": "See how your budget measures up",
-      "target": "Target",
-      "title": "50/30/20 Budget Analyzer",
-      "under": "On Track",
-      "variance": "Variance",
-      "wants": "Wants",
-      "wantsDescription": "Dining out, entertainment, shopping, subscriptions",
-      "wantsExamples": "dining, entertainment, shopping"
+      "actual": "Ezakwazanga",
+      "balanced": "Isabelomali Kukhona!",
+      "description": "Ukuhlanga okuqinisa ukuthuthuka kwezinto kwiisabelomali ekuhlanga",
+      "enterSpending": "Faka intengo yenu yenqanawa kusho kwiKategori:",
+      "exceeding": "Kusho kwiKategori",
+      "inputTitle": "Intengo Yenqanawa Yenqanawa",
+      "monthlyIncome": "Intengo Yenqanawa Yenqanawa",
+      "monthlyIncomeHelp": "Intengo yenu esekelwa kusuka izindawo",
+      "needs": "Izinto Ezakwazanga",
+      "needsAdjustment": "Izindleko Ezakwazanga Zikho",
+      "needsDescription": "Ukushaya, izindawo, izinto ezakwazanga, isabelomali, izindleko ezakwazanga",
+      "needsExamples": "ukushaya, izindawo, izinto ezakwazanga",
+      "over": "Kusho",
+      "ruleExplanation": "Isikhashana 50/30/20",
+      "savings": "Izindleko",
+      "savingsDescription": "Isabelomali esekelwa, izindleko, ukushaya kwezinto, izindleko ezakwazanga",
+      "savingsExamples": "izindleko, izindleko, izindleko ezakwazanga",
+      "subtitle": "Ukukhona kwindawo okuqinisa isabelomali",
+      "target": "Izinto Ezakwazanga",
+      "title": "50/30/20 Isabelomali Ekuhlanga",
+      "under": "Kusho kwiKategori",
+      "variance": "Ukukhawulela",
+      "wants": "Izinto Ezakwazanga",
+      "wantsDescription": "Ukushaya kwiinkondlo, isicathamiyo, ukushaya, izindleko",
+      "wantsExamples": "ukushaya kwiinkondlo, isicathamiyo, ukushaya"
     },
     "common": {
-      "back": "Back to calculators",
-      "calculate": "Calculate",
-      "months": "months",
-      "reset": "Reset",
-      "save": "Save Plan",
-      "years": "years"
+      "back": "Phinde Kwindawo Zokunciphisa",
+      "calculate": "Kunciphisa",
+      "months": "izimise",
+      "reset": "Hlanga",
+      "save": "Hlanga Plan",
+      "years": "izinyanga"
     },
     "compoundInterest": {
-      "annualRate": "Annual Interest Rate (%)",
-      "annualRateHelp": "Savings: 4-5%, Bonds: 5-6%, Stocks: 7-10%",
+      "annualRate": "Isicatshululo Esikhashana (℅)",
+      "annualRateHelp": "Izindleko: 4-5%, Izindleko: 5-6%, Izindleko: 7-10%",
       "assumptionCompounding": "Compounding",
       "assumptionReinvest": "All interest reinvested",
       "assumptionTiming": "Contributions at end of each period",
       "chartTitle": "Growth Over Time",
-      "compoundingFrequency": "Compounding Frequency",
-      "description": "See how your money grows with the power of compound interest",
+      "compoundingFrequency": "Ukuthuthuka Kwindawo",
+      "description": "Ukukhona kwindawo okuqinisa ukuthuthuka kwezinto kwiisicatshululo esikhashana",
       "effectiveRate": "Effective Annual Rate",
       "finalBalance": "Final Balance",
       "formulaExplanation": "FV = Future Value, PV = Present Value, r = annual rate, n = compounds per year, t = years, PMT = periodic payment",
       "formulaText": "FV = PV(1+r/n)^(nt) + PMT[((1+r/n)^(nt)-1)/(r/n)]",
       "frequency": {
         "annually": "Annually (1/yr)",
-        "daily": "Daily (365/yr)",
+        "daily": "Nkqubo (365/yr)",
         "monthly": "Monthly (12/yr)",
         "quarterly": "Quarterly (4/yr)",
         "semiannually": "Semi-annually (2/yr)",
         "weekly": "Weekly (52/yr)"
       },
-      "initialDeposit": "Initial Deposit",
-      "inputTitle": "Investment Details",
+      "initialDeposit": "Ukushaya Kwiqala",
+      "inputTitle": "Ukuthuthuka Kwindawo",
       "interestEarned": "Interest Earned",
-      "monthlyContribution": "Monthly Contribution",
+      "monthlyContribution": "Ukushaya Yenqanawa",
       "resultTitle": "Your Investment Growth",
-      "subtitle": "Watch your money grow over time",
-      "title": "Compound Interest Calculator",
+      "subtitle": "Ukukhona kwindawo okuqinisa ukuthuthuka kwezinto kwiisicatshululo esikhashana",
+      "title": "Isicatshululo Esikhashana",
       "totalContributions": "Total Contributions",
-      "years": "Investment Period (Years)"
+      "years": "Ukuthuthuka Kwindawo (Nqanawa)"
     },
     "debtPayoff": {
       "addDebt": "Add Debt",
       "apr": "APR (%)",
       "avalanche": "Avalanche Strategy",
-      "avalancheDescription": "Pay highest interest first to save the most money",
+      "avalancheDescription": "Phinda i-intengo engenayo kusho kwi-intengo ezingenayo ukubonga i-imali engenayo",
       "balance": "Balance",
       "debtName": "Name",
       "debtNamePlaceholder": "Debt {number}",
@@ -912,59 +912,59 @@
       "extraMonthlyPayment": "Extra Monthly Payment",
       "extraMonthlyPaymentHelp": "Additional amount you can pay beyond minimums each month",
       "minimumPayment": "Min Payment",
-      "month": "Month",
-      "morePsychological": "Motivational wins",
-      "payment": "Payment",
-      "paymentSchedule": "Payment Schedule",
-      "payoffDate": "Payoff Time",
-      "recommended": "Recommended",
-      "remaining": "Remaining",
+      "month": "Izikhathi",
+      "morePsychological": "Izinto ezibonakala",
+      "payment": "Ukuphinda",
+      "paymentSchedule": "Ukuphinda kwi-intengo",
+      "payoffDate": "Ukuphinda kwi-intengo",
+      "recommended": "Ezibonakala",
+      "remaining": "Ezakwazi",
       "removeDebt": "Remove debt",
-      "savingsDescription": "You'll save {amount} in interest and be debt-free {months} months sooner with the avalanche method",
-      "savingsTitle": "Interest Savings with Avalanche",
+      "savingsDescription": "Ukubonga {amount} kwi-intengo noma ukuphinda kwi-intengo {months} izikhathi ezimbili kusho kwi-avalanche method",
+      "savingsTitle": "Intengo Ezakwazi kwi-Avalanche",
       "snowball": "Snowball Strategy",
       "snowballDescription": "Pay smallest balance first for quick wins and motivation",
       "subtitle": "Find the fastest path to debt freedom",
       "title": "Debt Payoff Calculator",
-      "totalInterest": "Total Interest",
+      "totalInterest": "Intengo Ezakwazi",
       "yourDebts": "Your Debts"
     },
     "emergencyFund": {
-      "amountNeeded": "You need {amount} more to reach your goal",
-      "completionDate": "Estimated Completion",
-      "currentSavings": "Current Emergency Savings",
-      "description": "Calculate how much you need for financial security and track your progress",
-      "goalMet": "Goal Achieved!",
-      "goalProgress": "Building Your Safety Net",
-      "inputTitle": "Your Information",
-      "monthlyContribution": "Monthly Savings Amount",
-      "monthlyContributionHelp": "How much you can save towards your emergency fund each month",
-      "monthlyExpenses": "Monthly Expenses",
-      "monthlyExpensesHelp": "Include rent, utilities, groceries, insurance, and other essential costs",
-      "monthsToGoal": "Months to Reach Goal",
-      "progress": "Current Progress",
-      "resultsTitle": "Your Results",
-      "subtitle": "Build your financial safety net",
-      "targetAmount": "Target Emergency Fund",
-      "targetMonths": "Target Months of Coverage",
-      "targetMonthsHelp": "Experts recommend {months} months for most situations",
-      "tip1": "Keep your emergency fund in a high-yield savings account for easy access and better returns",
+      "amountNeeded": "Ukunciphisa {amount} kwaye ukunciphisa izinto zokunciphisa zokunciphisa",
+      "completionDate": "Ukunciphisa Okwesikhashana",
+      "currentSavings": "Izindleko Zokunciphisa Zokunciphisa",
+      "description": "Kunciphisa ngale kubekelwa ukukhuphela izinto zokuhlela kwaye ukukhangisa ukufuneka",
+      "goalMet": "Ukunciphisa Okwesikhashana!",
+      "goalProgress": "Hlanga Izinto Zokunciphisa Zokunciphisa",
+      "inputTitle": "Izinto Zokunciphisa Zokunciphisa",
+      "monthlyContribution": "Izindleko Zokunciphisa Zokunciphisa",
+      "monthlyContributionHelp": "Ngale kubekelwa ukunciphisa izindleko zokunciphisa zokunciphisa kwindawo",
+      "monthlyExpenses": "Izindleko Zokunciphisa Zokunciphisa",
+      "monthlyExpensesHelp": "Hlanga izindleko zokunciphisa zokunciphisa, izindleko zokunciphisa, izindleko zokunciphisa, izindleko zokunciphisa, kwaye izindleko ezinokwenzela",
+      "monthsToGoal": "Izimise Zokunciphisa Zokunciphisa",
+      "progress": "Izinto Zokunciphisa Zokunciphisa",
+      "resultsTitle": "Izinto Zokunciphisa Zokunciphisa",
+      "subtitle": "Hlanga Izinto Zokunciphisa Zokunciphisa",
+      "targetAmount": "Izindleko Zokunciphisa Zokunciphisa",
+      "targetMonths": "Izimise Zokunciphisa Zokunciphisa",
+      "targetMonthsHelp": "Izindlela zokunciphisa zokunciphisa zinokwenzela {months} izimise kwaye kubekelwa",
+      "tip1": "Hlanga izinto zokunciphisa zokunciphisa kwindawo ezinokwenzela ukukhuselela kwaye ukunciphisa izinto zokunciphisa zokunciphisa",
       "tip2": "Automate your contributions by setting up automatic transfers on payday",
       "tip3": "Start small if needed - even saving a little consistently adds up over time",
-      "tipsTitle": "Tips for Building Your Emergency Fund",
-      "title": "Emergency Fund Calculator"
+      "tipsTitle": "Iindlela Zokunciphisa Izinto Zokunciphisa",
+      "title": "Iindlela Zokunciphisa Izinto Zokunciphisa"
     },
     "hub": {
-      "accuracyDescription": "Using financial-grade arithmetic to avoid floating-point errors in all calculations.",
-      "accuracyTitle": "Precise Calculations",
-      "infoTitle": "About These Calculators",
-      "privacyDescription": "All calculations happen on your device. Your financial data never leaves your browser.",
-      "privacyTitle": "100% Private",
-      "sectionCore": "Core Calculators",
-      "sectionPlanning": "Financial Planning",
-      "sectionTools": "Tools & Links",
-      "subtitle": "Tools to help you plan and analyze your finances",
-      "title": "Financial Calculators"
+      "accuracyDescription": "Kunciphisa ukusebenza kwiintengo ezinokwenzela ukukhuselela izinto ezinokwenzela.",
+      "accuracyTitle": "Ukunciphisa Okwesikhashana",
+      "infoTitle": "Ngale Noma Ezinokwenzela",
+      "privacyDescription": "Ukunciphisa kuyakho kwindawo. Izinto zokuhlela ezinokwenzela ziyakho kwindawo kwindawo.",
+      "privacyTitle": "100% Phakamene",
+      "sectionCore": "Iindlela Zokunciphisa Ezinokwenzela",
+      "sectionPlanning": "Ukukhuphela Izinto Zokuhlela",
+      "sectionTools": "Iindlela Noma Amapheli",
+      "subtitle": "Iindlela Ezinokwenzela Ukukhuphela Noma Ukukhangisa Izinto Zokuhlela",
+      "title": "Iindlela Zokunciphisa Izinto Zokuhlela"
     },
     "inflation": {
       "assumptionCompound": "Inflation compounds annually",
@@ -1163,43 +1163,43 @@
       "totalContributions": "Total Contributions"
     },
     "subscriptionCost": {
-      "addSubscription": "Add Subscription",
-      "amount": "Amount",
-      "breakdown": "Essential vs Non-Essential",
-      "byCategory": "By Category",
-      "daily": "Daily",
-      "description": "Track and analyze the true cost of your subscriptions",
-      "essential": "Essential",
-      "essentialCost": "Essential",
+      "addSubscription": "Faka i-Subscription",
+      "amount": "I-Intengo",
+      "breakdown": "Ezibonakala vs Ezakwazi",
+      "byCategory": "Kusho kwiKategori",
+      "daily": "Izikhathi ezimbili",
+      "description": "Ukukhumbisa noma ukusheshana nezinto ezakwazi kwi-imali engenayo",
+      "essential": "Ezibonakala",
+      "essentialCost": "Ezibonakala",
       "frequency": {
-        "annual": "Annual",
-        "biweekly": "Bi-weekly",
-        "label": "Frequency",
-        "monthly": "Monthly",
-        "quarterly": "Quarterly",
-        "weekly": "Weekly"
+        "annual": "Izikhathi ezimbili",
+        "biweekly": "Izikhathi ezimbili",
+        "label": "Ukuphinda",
+        "monthly": "Izikhathi ezimbili",
+        "quarterly": "Izikhathi ezimbili",
+        "weekly": "Izikhathi ezimbili"
       },
-      "monthly": "Monthly",
-      "monthlyIncome": "Monthly Income",
-      "name": "Name",
+      "monthly": "Izikhathi ezimbili",
+      "monthlyIncome": "I-Intengo Ezakwazi kwi-izikhathi ezimbili",
+      "name": "Igama",
       "namePlaceholder": "e.g., Netflix, Spotify",
-      "nonEssentialCost": "Non-Essential",
+      "nonEssentialCost": "Ezakwazi",
       "perYear": "/year",
       "percentOfIncome": "% of Income",
-      "potentialSavings": "Potential Yearly Savings",
-      "potentialSavingsHelp": "If you cancelled all non-essential subscriptions",
-      "remove": "Remove subscription",
-      "showIncomePercent": "Show percentage of income",
-      "subtitle": "See where your recurring money goes",
-      "title": "Subscription Cost Calculator",
-      "totalCost": "Total Subscription Cost",
-      "yearly": "Yearly",
-      "yourSubscriptions": "Your Subscriptions"
+      "potentialSavings": "I-Intengo Ezakwazi kwi-Yearly",
+      "potentialSavingsHelp": "Ukunciphisa izinto ezakwazi kwi-essential subscriptions",
+      "remove": "Hlanga i-Subscription",
+      "showIncomePercent": "Phinda i-Percent of Income",
+      "subtitle": "Phinda izinto ezakwazi kwi-imali engenayo",
+      "title": "I-Intengo Zokuphinda kwi-Subscription",
+      "totalCost": "I-Intengo Ezakwazi kwi-Subscription",
+      "yearly": "Izikhathi ezimbili",
+      "yourSubscriptions": "I-Subscriptions Zako"
     },
     "transparency": {
-      "assumptions": "Assumptions",
-      "formula": "Formula",
-      "title": "How This Works"
+      "assumptions": "Izinto Ezakwazanga",
+      "formula": "Isicatshululo",
+      "title": "Ukukhona Kwindawo"
     },
     "chart": {
       "year": "Unyaka {n}",
@@ -1325,11 +1325,11 @@
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "Izinto",
+      "budget": "Isabelomali",
+      "income": "Imali engenayo",
+      "spending": "Ukuphuma kwindawo",
+      "trends": "Izindleko"
     }
   },
   "chatbotOptIn": {
@@ -1344,7 +1344,7 @@
       "search": "Search your financial data using natural language",
       "title": "What the Chatbot Can Do"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "Hlola i-chatbot opt-in dialog",
     "controls": {
       "dataAccess": {
         "fullAccess": {
@@ -1376,8 +1376,8 @@
       "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
       "title": "Privacy & Data Usage"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "I-AI-powered financial assistant",
+    "title": "Ukushishana kwindawo i-Budget Chatbot?"
   },
   "columnMapper": {
     "amount": "Amount",
@@ -1415,33 +1415,33 @@
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
+      "addTransaction": "Faka Intengo",
+      "budgets": "Isabelomali",
+      "categories": "Izicatshini",
+      "darkTheme": "Ukushayelela Okhulu",
       "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "exportData": "Hlanga Data",
+      "futurePlans": "Izinto ezinhlawu",
+      "highContrastTheme": "Ukushayelela Okhulu",
+      "importCsv": "Gcina CSV",
+      "investments": "Izintshukumo",
+      "lightTheme": "Ukushayelela Okhulu",
+      "loans": "Izilungu",
+      "newBudget": "Isabelomali Ene",
+      "reports": "Ireporthi",
+      "retirement": "Ukuthunyelwa",
+      "scanReceipt": "Hlala i-receipt",
+      "settings": "Iindlela",
+      "transactions": "Intengo"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "Ukushayelela",
+      "quickActions": "Iindlela ezinhlawu",
+      "tools": "Amalungu & Iindlela",
+      "tracking": "Ukushusha & Ukuhlanganisa",
+      "wealth": "Ukuthengiselwa & Ukuphatha"
     },
-    "noResults": "No results found.",
+    "noResults": "Amaqanda amandla.",
     "placeholder": "Type a command or search..."
   },
   "common": {
@@ -1465,101 +1465,101 @@
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "Faka Ikhawunti",
+        "allTransactions": "Zonke Izindleko",
+        "imported": "Ezimbini",
+        "netWorth": "Ukunciphisa Okwesibini",
+        "noAccounts": "Kungenzeka izikhawunti eziqalelwe",
+        "title": "Izikhawunti Zokunciphisa",
+        "viewAll": "Bala Zonke"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "createBudget": "Yenza Ibelomali",
+        "noBudgets": "Kungenzeka izibelomali",
+        "overBudget": "Ezimbini kwindlela {amount}",
+        "remaining": "Ezibini",
+        "spent": "Ezimbini",
+        "title": "Ukunciphisa Okwesibini",
+        "viewAll": "Bala Zonke Izibelomali"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "Ama isikondlo ezikhangela",
+        "title": "Isabelomali Sesikondlo",
+        "viewAll": "Bala Zonke"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "addTransactions": "Faka Izindleko",
+        "expenses": "Izindleko",
+        "income": "Imali Engenayo",
+        "net": "Okwesibini",
+        "noData": "Kungenzeka izindleko",
+        "thisMonth": "Emanzini",
+        "title": "Imali Engenayo vs Izindleko"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "Izindleko",
+        "income": "Imali Engenayo",
+        "lastSixMonths": "Zemanzini Ezintsha Zokunciphisa",
+        "needMoreData": "Faka izindleko zonke zemanzini ezintsha ukubalela izindleko",
+        "notEnoughData": "Kungenzeka ukunciphisa okwesibini",
+        "title": "Izindleko Zemanzini"
       },
       "netWorthMini": {
         "assets": "Assets",
         "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "title": "Ukunciphisa Okwesikwelo",
+        "viewDetails": "Bala Iindlela"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "Faka Iindleko",
+        "noTransactions": "Kungenzeka izindleko",
+        "title": "Izindleko Ezintsha",
+        "uncategorized": "Aqalelwe",
+        "viewAll": "Bala Zonke"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
-        "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
-        "overBudget": "{amount} over budget",
+        "caution": "Bala ukuspenda",
+        "createBudget": "Hlanga Isabelomali",
+        "dailyBudget": "Isabelomali esekela kusasa",
+        "danger": "Ezintsha kusabelomali",
+        "daysRemaining": "{days} days ezikwazi",
+        "noBudgets": "Ama isabelomali ezikwazi ukuspenda ezikhangela",
+        "noData": "Ama isabelomali ezikwazi ukuspenda ezikhangela",
+        "overBudget": "{amount} ezintsha kusabelomali",
         "perCategory": "Per category",
-        "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "remaining": "{amount} ezikwazi",
+        "safe": "Ezintsha",
+        "title": "Izinto ezikwazi ukuspenda",
+        "totalSafe": "Izinto ezikwazi ukuspenda ezikwazi",
+        "viewAll": "Bala Zonke"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
+        "addTransactions": "Faka Izindleko",
+        "moreCategories": "+{count} izindlela ezibini",
+        "noData": "Kungenzeka ukunciphisa okwesibini",
+        "thisMonth": "Emanzini",
+        "title": "Ukunciphisa Kwindlela",
         "total": "Total",
-        "uncategorized": "Uncategorized"
+        "uncategorized": "Aqalelwe"
       },
       "streaks": {
         "badges": "badges",
-        "dayStreak": "day streak",
+        "dayStreak": "izintsha zokusasa",
         "points": "points",
-        "title": "Streaks & Badges"
+        "title": "Izintsha nezindawo"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "addSubscription": "Faka Isicwangciso",
+        "dueIn": "Khangela {days} days",
+        "dueToday": "Khangela kusasa",
+        "dueTomorrow": "Khangela kusasa kusha",
+        "noBills": "Ama izindleko ezikhangela",
+        "title": "Izindleko ezikhangela",
+        "viewAll": "Bala Zonke"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
+        "title": "Ukunciphisa Okwesikwelo",
+        "viewFull": "Ukunciphisa Okwesikwelo",
         "vsLastWeek": "vs last week"
       }
     }
@@ -1853,41 +1853,41 @@
     }
   },
   "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
+    "aiAnalysis": "Ukukhona kwe-AI:",
+    "closeModal": "Hlanga Modal",
     "footer": {
       "close": "Close",
       "needHelp": "Need more help?",
       "viewGuide": "View troubleshooting guide"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "Ukukhona kufuneka! Sinekho {count} {count, plural, =1 {indlela} other {indlela}} ukukhona kwe-error.",
+      "cannotRecover": "Ukukhona akufuneka. Ukuqala ukukhona kwe-file kwe-bank okanye nika kushiselwa ngokhatsi kakhulu.",
+      "optionsTitle": "Iindlela Zokukhona"
     },
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "Amaqanda akukhona! Sinekho ukushaya le nto.",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
+      "autoFix": "UKUKHONA NGOKHATSISI",
+      "autoFixButton": "UKUKHONA NGOKHATSISI",
+      "confidence": "{percent}% ukukhona",
+      "fixing": "Ukukhona...",
+      "learnMore": "Hlanga Kuthi",
+      "technicalDetails": "Iindlela Zokukhona Teknikal"
     },
     "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
+      "category": "Iindlela: {category}",
+      "title": "Iindlela Zokukhona"
     },
     "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
+      "canRecover": "Ukukhona kufuneka:",
+      "errorCategory": "Iindlela Zokukhona:",
       "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "severity": "Ukukhona:",
+      "suggestions": "Iindlela Zokukhona:",
+      "title": "Iindlela Zokukhona Teknikal",
+      "yes": "E"
     },
-    "title": "Import Failed"
+    "title": "Ukukhona kufuneka"
   },
   "export": {
     "allDataDeleted": "All data has been deleted. The page will now refresh.",
@@ -1984,10 +1984,10 @@
       "success": "Export complete! Check your downloads folder."
     },
     "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
+      "accounts": "I-akhawunti",
+      "estimatedSize": "Ukunciphisa Ukunciphisa",
+      "title": "Inkcazelo yokuqala",
+      "transactions": "Intengo"
     },
     "exporting": {
       "pleaseWait": "Please wait, this may take a moment",
@@ -1995,27 +1995,27 @@
     },
     "format": {
       "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
+        "description": "Ukunciphisa ukunciphisa kwindawo",
+        "label": "Faili .budget"
       },
       "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
+        "description": "Ukunciphisa ukunciphisa kwindawo",
+        "label": "Faili CSV"
       },
       "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
+        "description": "Ukunciphisa ukunciphisa kwindawo",
+        "label": "Faili JSON"
       },
-      "label": "Export Format"
+      "label": "Ukunciphisa Ukunciphisa"
     },
     "options": {
       "encrypt": {
         "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
+        "label": "Hlola ngaphandle"
       },
       "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
+        "description": "Bekela izikhathi (ezikunciphisa ukunciphisa ukunciphisa faili)",
+        "label": "Bekela Izikhathi"
       }
     },
     "password": {
@@ -2030,22 +2030,22 @@
       "placeholder": "Enter password (min 8 characters)",
       "required": "Password is required for encryption"
     },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
+    "subtitle": "Bekela i-data yomali yakho",
+    "title": "Kunciphisa i-data"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
+    "account": "Iakhawunti",
+    "allAccounts": "Zonke izikhawunti",
+    "allCategories": "Zonke izicatshulwa",
+    "allTypes": "Zonke izinto ezinikezela",
+    "apply": "Hlola izifungo",
+    "category": "Isicatshulwa",
+    "clearFilters": "Hlula izifungo",
+    "dateRange": "Umlimo oluncinci",
+    "expense": "Izindleko",
+    "income": "Imali engenayo",
+    "search": "Funda izindleko...",
+    "type": "Ukunciphisa"
   },
   "footer": {
     "copyright": "© {year} {brandName}",
@@ -2217,49 +2217,49 @@
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "Fika",
+      "cancel": "Hlanga",
+      "done": "Kucela",
+      "import": "Kunciphisa i-data"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "{count} izinto ezikunciphiswe kwindawo",
+      "success": "Ukunciphisa Kucelwa!",
+      "withIssues": "Ukunciphisa Kucelwa Ngezinkcukacha"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} ezikwazile",
+      "handleLabel": "Hlola Izinkcukacha",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "Hlola ngekunciphiswe",
+        "label": "Hlola"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "Kunciphisa ngale i-entries ezinye",
+        "label": "Gcina i-entries ezinye"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "Hlola i-data ehlala",
+        "label": "Hlanga izikwazile"
       },
-      "title": "Conflicts Found"
+      "title": "Izinkcukacha zazikwazile"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
+      "decrypt": "Hlola & Fakwa",
+      "encrypted": "Le file lihlala",
+      "enterPassword": "Ngena i-password",
       "hint": "Hint: {hint}",
       "password": "Password"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "Sithole, leyo kungenza kwindawo",
+      "title": "Ukunciphisa i-data yakho..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "Ukunciphisa ukuthi kunciphiswe",
+      "exported": "Ezibonakala",
+      "fileInfo": "Inkcazelo yokuqala",
+      "version": "Ukunciphisa"
     },
     "selectFile": {
       "dragDrop": "or drag and drop here",
@@ -2625,7 +2625,7 @@
         "income": "Income",
         "incomeYesterday": "Income • Yesterday",
         "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "netWorth": "Net Worth",
         "netflix": "Netflix",
         "salary": "Salary",
         "shopping": "Shopping",
@@ -2787,7 +2787,7 @@
         },
         "pwaInstall": {
           "description": "Installeer soos 'n app en hou aan, selfs met onbetroubare internet.",
-          "title": "PWA install"
+          "title": "Install PWA"
         },
         "shortcuts": {
           "description": "Beweeg vinnig met soek en aksie snelkoppelinge ingebou in die UI.",
@@ -3920,17 +3920,17 @@
     "title": "Quick Categorize"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "Zonke",
+    "categories": "Izicatshulwa",
+    "clearFilters": "Hlula izifungo",
+    "moreCategories": "+{count} kusho",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "Ama-30 days kusho",
+      "last90": "Ama-90 days kusho",
+      "thisMonth": "Le mthetho",
+      "thisYear": "Le nkombo"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "Ukunciphisa okwesiklo"
   },
   "quickStats": {
     "balance": "Total Balance",
@@ -3954,43 +3954,43 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "Hlanga Receipt",
+      "chooseDifferent": "Hlanga Okhokha",
+      "extractData": "Hlanga Amaqanda",
+      "extracting": "Ekuhlanganiswa..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "Hlanga Photo ngokusebenza kamera",
+      "useDevice": "Sebenza kamera yokuqala ukukhona receipt"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "Input yokuqala kwenkosi",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "okanye <link>hlanga amaqanda</link>",
+      "dragDrop": "Hlanga & hlanga receipt yini kulo",
+      "dropHere": "Hlanga receipt yini kulo",
+      "supportedFormats": "Izinto ezikhuselela JPG, PNG, PDF • Max {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "Amaqanda akukhona ekuhlanganiswa kwe-receipt. Nika kushiselwa ngokhatsi.",
+      "extractionFailed": "Ukukhlanganiswa kwe-receipt kufuneka. Nika kushiselwa ngokhatsi kakhulu kakhulu.",
+      "invalidType": "Ukukhaliwe kwe ifayile. I-JPG, PNG, kwaye PDF ifayile zokhaliwe",
+      "ocrImagesOnly": "OCR yinkimbinkimbo kwe image files (JPG, PNG)",
+      "rejected": "Ifayile yahlanganiswa. Nceda ukhala kuleyo",
+      "tooLarge": "Ifayile yinkimbinkimbo. I-maximum size is {size}MB"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "Izinkathi:",
+      "confidence": "Ukukhona: {percent}%",
+      "date": "Ukukhona:",
+      "merchant": "Umkhakha:",
+      "title": "Amaqanda ekuhlanganiswa"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "Amaqanda akukhona ekuhlanganiswa",
+      "title": "Receipt PDF"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "Ipreview yoreceipt",
+    "removeFile": "Hlanga ifayile"
   },
   "recurringTransactions": {
     "confidence": "{percent}% confidence",
@@ -4005,12 +4005,12 @@
     "next": "Next: {date}",
     "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "hlokomela imvula",
+      "quarter": "hlokomela iquarter",
+      "twoWeeks": "hlokomela emanzini 2",
+      "week": "hlokomela emanzini"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
+    "showingPatterns": "{count, plural, =1 {Ukuvuyelwa 1 intengo elihlokomelanga} other {Ukuvuyelwa # intengo elihlokomelanga}}",
     "subtitle": "Detected subscriptions and bills",
     "title": "Recurring Transactions"
   },
@@ -4142,13 +4142,13 @@
     "yourAccounts": "Your Accounts"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "Hlola i-shortcuts help",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
+      "description": "I-Keyboard shortcuts zingumelwe kwindawo i-pages ezifakwe, kufuneka ukuphuma kwindawo i-forms. Hlola {key} kwindawo ukuphuma kwindawo i-help.",
       "title": "💡 Pro Tip"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "I-Productivity tips kwindawo i-power-user",
+    "title": "I-Keyboard Shortcuts"
   },
   "sidebar": {
     "actions": {
@@ -4267,7 +4267,7 @@
     "help": {
       "bridgeDashboard": "SimpleFIN Bridge Dashboard",
       "protocolDocs": "SimpleFIN Protocol Documentation",
-      "title": "Need Help?"
+      "title": "Ukuba Uyafuna Umfundiso?"
     },
     "sync": {
       "date": "{date}",
@@ -4365,47 +4365,47 @@
     "title": "Spending Trends & Forecast"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "Yakha i-split ({current}/{max})",
+    "amount": "Intengo",
     "buttons": {
       "cancel": "Cancel",
       "save": "Save Split",
       "saving": "Saving..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "Isicatshulwa",
+    "closeModal": "Hlula i-modal",
+    "date": "Umlimo: ",
+    "distributeEvenly": "Hlula kwindawo",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "Achaze kufuneka ukuphuma kwindawo i-split transaction"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "Yakha intengo kwindawo isicatshulwa (kufuneka ukhuphume kwindawo ${amount})",
+      "step2": "Hlola \"Distribute Evenly\" ukuphuma kwindawo i-splits kwindawo isicatshulwa",
+      "step3": "Yakha i-splits kwindawo 5 kwindawo i-transactions",
+      "step4": "Le transaction original ingumelwe kwindawo kufuneka ukuphuma kwindawo i-splits",
+      "title": "Ukuphuma kwindawo i-transactions:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "Ukuphuma kwindawo 5 i-splits",
+    "minSplitsRequired": "Ukuphuma kwindawo 2 i-splits",
+    "none": "Kungenzi",
+    "notes": "Izinto (Ezifakwe)",
+    "notesPlaceholder": "nqanu, Intengo yezikuphela, Ukuhlala kwindawo",
+    "originalAmount": "Izinkathi ezikhona: ",
+    "removeThisSplit": "Hlola i-split leyo",
+    "selectCategory": "Hlola isicatshulwa...",
+    "splitsCount": "Izindleko ({current}/{max})",
+    "subcategory": "Isicatshulwa",
+    "title": "Hlula Intengo",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
+      "adjustAmounts": "Hlola i-splits zingumelwe kwindawo le intengo yezikuphela.",
+      "amountsMustMatch": "I-splits zingumelwe kwindawo le intengo yezikuphela",
+      "categoryRequired": "Zingumelwe kwindawo isicatshulwa kwindawo i-splits",
+      "matchesOriginal": "✓ Ukuhlanganisa le transaction original",
+      "overBy": "Kuphuma kwindawo ${amount}",
+      "readyToSave": "I-splits zingumelwe kwindawo le transaction original. Ready to save!",
       "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "underBy": "Kuphuma kwindawo ${amount}"
     }
   },
   "splits": {
@@ -4576,14 +4576,6 @@
       "next30Days": "Next 30 Days",
       "projectedYearly": "Projected yearly spend",
       "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
-    },
-    "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
     }
   },
   "subscriptionModal": {
@@ -4749,11 +4741,11 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "Iakhawunti"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} ezinhliziyo",
+      "label": "Izinto ezinhliziyo"
     },
     "amount": {
       "label": "Amount",
@@ -4761,27 +4753,27 @@
       "validationError": "Please enter a valid amount"
     },
     "buttons": {
-      "add": "Add Transaction",
+      "add": "Faka Transaction",
       "adding": "Adding...",
-      "cancel": "Cancel",
+      "cancel": "Hlola",
       "update": "Update Transaction",
       "updating": "Updating..."
     },
     "category": {
       "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
+      "create": "Yenza",
+      "createNew": "+ Yenza Kategoriya New",
       "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "lastUsed": "Ukusebenza kusho: {category}",
+      "namePlaceholder": "Igama kategoriya...",
+      "selectPlaceholder": "Choseza kategoriya...",
+      "subcategoriesPlaceholder": "Izinkondlo (kusho, comma-separated)"
     },
     "closeModal": "Close modal",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "Kategoriya \"{name}\" yenzelwe!",
+      "failed": "Achaze kuyenza kategoriya",
+      "nameRequired": "Igama kategoriya kufuneka"
     },
     "date": {
       "label": "Date"
@@ -4795,27 +4787,27 @@
       "title": "Learned!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "Izinto",
+      "placeholder": "Faka izinto ezinhliziyo..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
+      "addNew": "Faka Intambo New",
+      "deleteConfirm": "Ukusho kungaba unokwenzela ukuhlola intambo le?",
+      "deleteFailed": "Achaze kuhlola intambo",
+      "deleteReceipt": "Hlola intambo",
+      "existing": "Izintambo ezinhliziyo ({count})",
+      "label": "Izintambo zokuthola",
       "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "remove": "Hlola",
+      "viewFull": "Bala intambo elikhulu"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "Izinkondlo",
+      "none": "Kusho",
+      "selectPlaceholder": "Choseza izinkondlo..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
+      "label": "Izintambo (comma-separated)",
       "placeholder": "e.g., groceries, weekly, essential"
     },
     "title": {
@@ -4866,25 +4858,23 @@
     },
     "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
     "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
-    "viewAllResults": "View all {count} results",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "viewAllResults": "View all {count} results"
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "Faka i-receipt",
+      "delete": "Dlula",
+      "edit": "Gcina",
+      "split": "Hlula"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "Akukho intengo ezinikezela ukusuka",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "Iakhawunti",
+      "actions": "Izinto ezinikezela",
+      "amount": "Izinkathi",
+      "category": "Isicatshulwa",
+      "date": "Umlimo",
+      "description": "Ukusheshana"
     }
   },
   "transactions": {
@@ -5083,16 +5073,16 @@
       "title": "Onlangse Transaksies"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "Bala izinto ezikwazi ukuspenda per category",
+      "title": "Izinto ezikwazi ukuspenda"
     },
     "spendingByCategory": {
       "description": "Sien waar jou geld heen gaan met visuele ontledings",
       "title": "Besteding per Kategori"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "Bala izintsha zokunciphisa nezindawo",
+      "title": "Izintsha nezindawo"
     },
     "upcomingBills": {
       "description": "Mis nooit 'n betaling nie met rekeningherinneringe",
@@ -5100,138 +5090,127 @@
     },
     "weeklyRecap": {
       "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "title": "Ukunciphisa Okwesikwelo"
     }
   },
   "ynabMigrationWizard": {
     "categoryStep": {
       "category": "{count, plural, =1 {1 category} other {# categories}}",
-      "createNew": "Create New",
-      "description": "Map YNAB categories to your existing categories or create new ones.",
-      "mapToExisting": "Map to Existing",
-      "selectCategory": "Select category...",
-      "skip": "Skip",
-      "title": "Category Mapping",
-      "willCreate": "Will create:"
+      "createNew": "Ukusebenza kwi-onesi",
+      "description": "Mapa i-YNAB categories kwi-categories ezingcinwe ngamva okanye ukusuka kwi-onesi.",
+      "mapToExisting": "Mapa kwi-onesi ezingcinwe",
+      "selectCategory": "Chose category...",
+      "skip": "Hlangana",
+      "title": "Ukunciphisa kwezinto zokunciphisa",
+      "willCreate": "Ukusebenza:"
     },
     "completeStep": {
       "errors": "Errors",
       "importAnother": "Import Another",
-      "success": "Import Complete!",
+      "success": "Ukukhuphatha Kukhona!",
       "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
       "viewTransactions": "View Transactions",
       "whatNext": "What would you like to do next?",
       "withIssues": "Import Completed with Issues"
     },
     "footer": {
-      "back": "Back",
-      "done": "Done",
-      "next": "Next",
-      "startImport": "Start Import"
+      "back": "Bala",
+      "done": "Kuthulwa",
+      "next": "Phinda",
+      "startImport": "Shaya ukunciphisa"
     },
     "header": {
-      "closeLabel": "Close wizard",
-      "subtitle": "Migrate your budget data seamlessly",
-      "title": "Import from YNAB"
+      "closeLabel": "Bala isicathamiyo",
+      "subtitle": "Hlokomela izinto zokunciphisa kwiisabelomali",
+      "title": "Ukunciphisa kwiYNAB"
     },
     "importingStep": {
-      "finishing": "Finishing up...",
-      "importingAccounts": "Importing accounts...",
-      "importingBudgets": "Importing budgets...",
-      "importingCategories": "Importing categories...",
-      "importingTransactions": "Importing transactions...",
-      "title": "Importing your YNAB data..."
+      "finishing": "Ukukhuphatha...",
+      "importingAccounts": "Ukukhuphatha i-akhawunti...",
+      "importingBudgets": "Ukukhuphatha i-isabelomali...",
+      "importingCategories": "Ukukhuphatha i-categories...",
+      "importingTransactions": "Ukukhuphatha i-intengo...",
+      "title": "Ukukhuphatha i-datala yomthetho yomthetho..."
     },
     "optionsStep": {
       "accountOptions": {
-        "includeClosedAccounts": "Include closed accounts",
-        "includeOffBudgetAccounts": "Include off-budget accounts",
-        "title": "Account Options"
+        "includeClosedAccounts": "Bekukhuphatha i-akhawunti ezingcinwe",
+        "includeOffBudgetAccounts": "Bekukhuphatha i-akhawunti ezingcinwe kwi-isabelomali",
+        "title": "I-Options eziqinileyo kwi-akhawunti"
       },
       "budgetOptions": {
-        "importGoals": "Import savings goals as future purchases",
-        "title": "Budget Options"
+        "importGoals": "Ukukhuphatha i-ikhatsiyo zokuhlala ngokwesikhashana",
+        "title": "I-Options eziqinileyo kwi-isabelomali"
       },
       "hiddenCategories": {
-        "archive": "Archive",
-        "archiveDesc": "Import as archived (recommended)",
-        "description": "How to handle YNAB categories marked as hidden?",
-        "import": "Import",
-        "importDesc": "Import as active categories",
-        "skip": "Skip",
-        "skipDesc": "Don't import hidden categories",
-        "title": "Hidden Categories"
+        "archive": "Ukukhuphatha",
+        "archiveDesc": "Ukukhuphatha ngokubanzi (ekhethiswa)",
+        "description": "Ukuphatha i-YNAB categories ezingcinwe?",
+        "import": "Ukukhuphatha",
+        "importDesc": "Ukukhuphatha ngokwesikhashana",
+        "skip": "Hlangana",
+        "skipDesc": "Akhuphatha i-categories ezingcinwe",
+        "title": "I-categories ezingcinwe"
       }
     },
     "previewStep": {
-      "accounts": "Accounts",
-      "allocations": "{count} allocations",
-      "budgetMonths": "Budget Months",
-      "categories": "Categories",
-      "dateRange": "Transaction Date Range",
-      "description": "Review the data that will be imported.",
-      "duplicates": "{count} duplicates",
-      "new": "{count} new",
-      "newMapped": "{created} new, {mapped} mapped",
-      "preparingPreview": "Preparing preview...",
-      "title": "Import Preview",
-      "transactions": "Transactions",
-      "warnings": "Warnings"
+      "accounts": "I-akhawunti",
+      "allocations": "{count} izikhuphatha",
+      "budgetMonths": "Izimini zokusebenza i-isabelomali",
+      "categories": "I-categories",
+      "dateRange": "Ukukhuphatha i-intengo kwi-ikhatsiyo",
+      "description": "Ukukhuphatha i-datala ezigcinwe.",
+      "duplicates": "{count} ezinye zokhuphatha",
+      "new": "{count} ezinye",
+      "newMapped": "{created} ezinye, {mapped} ezinye ezikhuphathwe",
+      "preparingPreview": "Ukukhuphatha ngqo...",
+      "title": "Ukukhuphatha Ngqo",
+      "transactions": "I-intengo",
+      "warnings": "I-ikhatsiyo"
     },
     "steps": {
       "categories": {
-        "description": "Map to existing categories",
-        "title": "Categories"
+        "description": "Hlokomela kwezinto ezikwenzelwe",
+        "title": "Izinto zokunciphisa"
       },
       "complete": {
-        "description": "Migration finished",
-        "title": "Complete"
+        "description": "Ukunciphisa kuthulwa",
+        "title": "Kuthulwa"
       },
       "importing": {
-        "description": "Processing your data",
-        "title": "Importing"
+        "description": "Ukunciphisa izikhathi zakho",
+        "title": "Ukunciphisa"
       },
       "options": {
-        "description": "Configure import settings",
-        "title": "Options"
+        "description": "Hlokomela izinto zokunciphisa",
+        "title": "Izinto zokunciphisa"
       },
       "preview": {
-        "description": "Review before import",
-        "title": "Preview"
+        "description": "Hlokomela kuzo kwiimpawu",
+        "title": "Ukushishana"
       },
       "upload": {
-        "description": "Select YNAB export file",
-        "title": "Upload"
+        "description": "Chosele file ekuhlanganiswa kwiYNAB",
+        "title": "Ukukhuphela"
       }
     },
     "uploadStep": {
-      "accounts": "Accounts",
-      "categories": "Categories",
-      "clickToSelect": "Click to select a file",
-      "dragAndDrop": "or drag and drop here",
-      "fileSummary": "File Summary",
-      "format": "Format",
-      "formatApiExport": "YNAB API Export",
-      "formatApiExportDesc": "JSON from nYNAB",
-      "formatCsv": "CSV Export",
-      "formatCsvDesc": "From YNAB web app",
-      "formatYfull": "Budget.yfull / Budget.ynab4",
-      "formatYfullDesc": "YNAB4 desktop export",
-      "parsing": "Parsing file...",
-      "supportedFormats": "Supported Formats",
-      "transactions": "Transactions"
-    },
-    "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
-    },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+      "accounts": "Iakhawunti",
+      "categories": "Izinto zokunciphisa",
+      "clickToSelect": "Hamba kuchosele ifayile",
+      "dragAndDrop": "okanye ukhuphela kulo",
+      "fileSummary": "Ukushishana kweifayile",
+      "format": "Ukunciphisa",
+      "formatApiExport": "Ukunciphisa kwiAPI kwiYNAB",
+      "formatApiExportDesc": "JSON kwiYNAB",
+      "formatCsv": "Ukunciphisa kwiCSV",
+      "formatCsvDesc": "KwiYNAB web app",
+      "formatYfull": "Isabelomali.yfull / Isabelomali.ynab4",
+      "formatYfullDesc": "Ukunciphisa kwiYNAB4 desktop",
+      "parsing": "Ukunciphisa ifayile...",
+      "supportedFormats": "Izinto ezikhuselelwa",
+      "transactions": "Intengo"
+    }
   },
   "balanceReconciliation": {
     "title": "Ukuvumelanisa Kwebhalansi",

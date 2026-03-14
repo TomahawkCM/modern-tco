@@ -619,9 +619,9 @@
       "active": "Ativo",
       "completed": "Concluído",
       "createEvent": "Criar Evento",
-      "daysLeft": "{count} days left",
+      "daysLeft": "{count} dias restantes",
       "noEvents": "Nenhum evento ativo",
-      "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more",
+      "noEventsDescription": "Crie um orçamento para eventos para acompanhar gastos em casamentos, férias e muito mais",
       "planning": "Planejamento",
       "progress": "Progresso",
       "remaining": "Restante",
@@ -659,13 +659,13 @@
       "assetBreakdown": "Detalhamento de Ativos",
       "cashChecking": "Dinheiro e Conta Corrente",
       "creditCards": "Cartões de Crédito",
-      "history": "Historical Snapshots",
+      "history": "Instantâneos históricos",
       "investments": "Investimentos",
       "liabilityBreakdown": "Detalhamento de Passivos",
       "loans": "Empréstimos",
-      "milestoneReached": "Milestone reached: {amount}!",
+      "milestoneReached": "Meta alcançada: {amount}!",
       "mortgage": "Financiamento Imobiliário",
-      "noLiabilities": "No liabilities — great job!",
+      "noLiabilities": "Sem passivos — excelente trabalho!",
       "property": "Imóveis",
       "savings": "Poupança",
       "title": "Patrimônio Líquido",
@@ -767,35 +767,35 @@
     "scenarios": {
       "_note": "Already internationalized in client.tsx using budget.scenarios namespace",
       "after": "Depois",
-      "amountLabel": "Amount",
-      "annualSavings": "Economia Anual",
+      "amountLabel": "Montante",
+      "annualSavings": "Poupança Anual",
       "before": "Antes",
       "healthScore": "Pontuação de Saúde",
-      "impact": "Impact",
+      "impact": "Impacto",
       "monthlyCashFlow": "Fluxo de Caixa Mensal",
-      "run": "Run Scenario",
-      "subtitle": "Model financial changes and see their impact",
+      "run": "Executar Cenário",
+      "subtitle": "Modelar alterações financeiras e ver o seu impacto",
       "title": "Cenários Hipotéticos",
       "types": {
         "addExpense": {
-          "description": "See the impact of a new recurring expense",
+          "description": "Ver o impacto de uma nova despesa recorrente",
           "title": "Adicionar Despesa"
         },
         "cancelSubscription": {
-          "description": "See savings from canceling a recurring charge",
-          "title": "Cancelar Assinatura"
+          "description": "Ver as poupanças obtidas ao cancelar um encargo recorrente",
+          "title": "Cancelar Subscrição"
         },
         "changeIncome": {
-          "description": "Model an income increase or decrease",
-          "title": "Alterar Receita"
+          "description": "Modelar um aumento ou diminuição de rendimento",
+          "title": "Alterar Rendimento"
         },
         "increaseSavings": {
-          "description": "See goal timeline acceleration",
+          "description": "Ver a aceleração do prazo para atingir os seus objetivos",
           "title": "Aumentar Poupança"
         },
         "payOffDebt": {
-          "description": "Calculate interest savings from early payoff",
-          "title": "Quitar Dívida"
+          "description": "Calcular as poupanças em juros com o pagamento antecipado",
+          "title": "Liquidar Dívida"
         }
       }
     },

@@ -619,9 +619,9 @@
       "active": "Aktiv",
       "completed": "Abgeschlossen",
       "createEvent": "Ereignis erstellen",
-      "daysLeft": "{count} days left",
+      "daysLeft": "{count} Tage verbleibend",
       "noEvents": "Keine aktiven Ereignisse",
-      "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more",
+      "noEventsDescription": "Erstellen Sie ein Ereignisbudget, um Ausgaben für Hochzeiten, Urlaube und mehr zu verfolgen",
       "planning": "In Planung",
       "progress": "Fortschritt",
       "remaining": "Verbleibend",
@@ -659,13 +659,13 @@
       "assetBreakdown": "Vermögensaufschlüsselung",
       "cashChecking": "Bargeld & Girokonto",
       "creditCards": "Kreditkarten",
-      "history": "Historical Snapshots",
+      "history": "Historische Momentaufnahmen",
       "investments": "Investitionen",
       "liabilityBreakdown": "Verbindlichkeitenaufschlüsselung",
       "loans": "Darlehen",
-      "milestoneReached": "Milestone reached: {amount}!",
+      "milestoneReached": "Meilenstein erreicht: {amount}!",
       "mortgage": "Hypothek",
-      "noLiabilities": "No liabilities — great job!",
+      "noLiabilities": "Keine Verbindlichkeiten — ausgezeichnet!",
       "property": "Immobilien",
       "savings": "Ersparnisse",
       "title": "Nettovermögen",
@@ -767,34 +767,34 @@
     "scenarios": {
       "_note": "Bereits internationalisiert in client.tsx mit budget.scenarios Namespace",
       "after": "Nachher",
-      "amountLabel": "Amount",
+      "amountLabel": "Betrag",
       "annualSavings": "Jährliche Ersparnisse",
       "before": "Vorher",
       "healthScore": "Gesundheitswert",
-      "impact": "Impact",
+      "impact": "Auswirkung",
       "monthlyCashFlow": "Monatlicher Cashflow",
-      "run": "Run Scenario",
-      "subtitle": "Model financial changes and see their impact",
+      "run": "Szenario ausführen",
+      "subtitle": "Finanzielle Änderungen modellieren und deren Auswirkungen sehen",
       "title": "Was-Wäre-Wenn-Szenarien",
       "types": {
         "addExpense": {
-          "description": "See the impact of a new recurring expense",
+          "description": "Auswirkung einer neuen wiederkehrenden Ausgabe sehen",
           "title": "Ausgabe hinzufügen"
         },
         "cancelSubscription": {
-          "description": "See savings from canceling a recurring charge",
+          "description": "Einsparungen durch Kündigung eines wiederkehrenden Abonnements berechnen",
           "title": "Abonnement kündigen"
         },
         "changeIncome": {
-          "description": "Model an income increase or decrease",
+          "description": "Einkommenserhöhung oder -verringerung modellieren",
           "title": "Einkommen ändern"
         },
         "increaseSavings": {
-          "description": "See goal timeline acceleration",
+          "description": "Beschleunigung des Ziel-Zeitplans durch höhere Ersparnisse sehen",
           "title": "Ersparnisse erhöhen"
         },
         "payOffDebt": {
-          "description": "Calculate interest savings from early payoff",
+          "description": "Zinseinsparungen durch vorzeitige Schuldentilgung berechnen",
           "title": "Schulden tilgen"
         }
       }
@@ -1453,13 +1453,20 @@
     "success": "Erfolg!"
   },
   "confidenceMeter": {
+    "aiPowered": "KI-unterstützt",
     "autoCategorized": "Automatisch kategorisiert:",
     "confidence": "Konfidenz",
     "confident": "Sicher",
     "confirmCategorization": "Bestätigen Sie diese Kategorisierung, um die Genauigkeit zu verbessern",
+    "high": "Hohe Konfidenz",
     "learnFromThis": "Daraus lernen",
+    "low": "Niedrige Konfidenz",
     "lowConfidence": "Niedrige Sicherheit",
+    "manualReview": "Manuelle Überprüfung empfohlen",
+    "medium": "Mittlere Konfidenz",
     "moderate": "Mäßig",
+    "percentConfident": "{percent}% sicher",
+    "verifyResults": "Ergebnisse überprüfen",
     "veryConfident": "Sehr sicher"
   },
   "dashboard": {

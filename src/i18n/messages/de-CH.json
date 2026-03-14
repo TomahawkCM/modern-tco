@@ -2,10 +2,10 @@
   "accessibilitySettings": {
     "fontSize": {
       "default": "Standard",
-      "description": "Passen Sie die Grundtextgröße für bessere Lesbarkeit an",
-      "extraLarge": "Extra groß",
-      "large": "Groß",
-      "title": "Schriftgröße"
+      "description": "Passen Sie die Grundtextgrösse für bessere Lesbarkeit an",
+      "extraLarge": "Extra gross",
+      "large": "Gross",
+      "title": "Schriftgrösse"
     },
     "infoBox": {
       "savedAutomatically": "Einstellungen werden automatisch gespeichert und bleiben sitzungsübergreifend erhalten",
@@ -31,7 +31,7 @@
       "toggleLabel": "Modus für reduzierte Bewegung umschalten"
     },
     "seniorsMode": {
-      "description": "Barrierefreiheitsverbesserung mit einem Klick: größerer Text, größere Berührungsziele und vereinfachte Oberfläche",
+      "description": "Barrierefreiheitsverbesserung mit einem Klick: grösserer Text, grössere Berührungsziele und vereinfachte Oberfläche",
       "title": "Seniorenmodus"
     },
     "themeMode": {
@@ -51,14 +51,14 @@
     "featuresActive": "Barrierefreiheitsfunktionen aktiv",
     "highContrast": "Hoher Kontrast",
     "highContrastDescription": "Verbesserter Farbkontrast",
-    "largeTextMode": "Großer Textmodus",
-    "largeTextModeDescription": "Größerer Text und Berührungsziele",
+    "largeTextMode": "Grosser Textmodus",
+    "largeTextModeDescription": "Grösserer Text und Berührungsziele",
     "reduceMotion": "Bewegung reduzieren",
     "reduceMotionDescription": "Animationen minimieren",
-    "sizeLarge": "Groß",
+    "sizeLarge": "Gross",
     "sizeNormal": "Normal",
-    "sizeXLarge": "Extra groß",
-    "textSize": "Textgröße",
+    "sizeXLarge": "Extra gross",
+    "textSize": "Textgrösse",
     "title": "Barrierefreiheit"
   },
   "accessibleChart": {
@@ -230,7 +230,7 @@
       "apply": "Zuordnungen anwenden & importieren",
       "cancel": "Abbrechen"
     },
-    "closeModal": "Modal schließen",
+    "closeModal": "Modal schliessen",
     "columnMappings": "Spaltenzuordnungen",
     "columnTypes": {
       "amount": "Betrag",
@@ -295,7 +295,7 @@
     "emptyAiResponse": "Leere Antwort von der KI",
     "failedToParseResponse": "KI-Antwort konnte nicht analysiert werden",
     "fileMustBePdf": "Datei muss ein PDF sein",
-    "fileTooLarge": "Datei zu groß. Maximum {maxSize}.",
+    "fileTooLarge": "Datei zu gross. Maximum {maxSize}.",
     "internalServerError": "Interner Serverfehler",
     "lowConfidence": "Niedrige Konfidenz – bitte Zuordnungen überprüfen",
     "missingHeaders": "Fehlende oder ungültige Kopfzeilen",
@@ -316,29 +316,29 @@
     "breadcrumb": "Brotkrümelnavigation",
     "chatMessages": "Chat-Nachrichten",
     "clearSearch": "Suche löschen",
-    "close": "Schließen",
-    "closeAccessibilityMenu": "Barrierefreiheitsmenü schließen",
-    "closeChatbot": "Chatbot schließen",
-    "closeHoldingModal": "Modal schließen",
-    "closeIconPicker": "Symbolauswahl schließen",
-    "closeModal": "Modal schließen",
-    "closeNotification": "Benachrichtigung schließen",
-    "closeOnboarding": "Onboarding-Assistent schließen",
-    "closeReceiptViewer": "Belegansicht schließen",
-    "closeSubscriptionModal": "Modal schließen",
+    "close": "Schliessen",
+    "closeAccessibilityMenu": "Barrierefreiheitsmenü schliessen",
+    "closeChatbot": "Chatbot schliessen",
+    "closeHoldingModal": "Modal schliessen",
+    "closeIconPicker": "Symbolauswahl schliessen",
+    "closeModal": "Modal schliessen",
+    "closeNotification": "Benachrichtigung schliessen",
+    "closeOnboarding": "Onboarding-Assistent schliessen",
+    "closeReceiptViewer": "Belegansicht schliessen",
+    "closeSubscriptionModal": "Modal schliessen",
     "copied": "Kopiert",
     "copyPairingCode": "Kopplungscode kopieren",
     "createBudget": "Budget erstellen",
     "dataTable": "{title} Datentabelle",
-    "decreaseTextSize": "Textgröße verringern",
+    "decreaseTextSize": "Textgrösse verringern",
     "deleteTransaction": "Transaktion löschen",
     "dismiss": "Verwerfen",
     "dismissAlert": "Warnung verwerfen",
     "dismissWelcome": "Willkommensbanner verwerfen",
-    "dragToClose": "Nach unten ziehen zum Schließen",
+    "dragToClose": "Nach unten ziehen zum Schliessen",
     "editTransaction": "Transaktion bearbeiten",
     "home": "Startseite",
-    "increaseTextSize": "Textgröße erhöhen",
+    "increaseTextSize": "Textgrösse erhöhen",
     "loadingChart": "Diagramm wird geladen...",
     "mainSidebar": "Hauptseitenleiste",
     "mobileNavigation": "Mobile Navigation",
@@ -467,8 +467,8 @@
     "backToHome": "Zurück zur Startseite"
   },
   "bottomSheet": {
-    "close": "Schließen",
-    "dragToClose": "Nach unten ziehen zum Schließen"
+    "close": "Schliessen",
+    "dragToClose": "Nach unten ziehen zum Schliessen"
   },
   "breadcrumb": {
     "budgetAnalyzer": "Budgetanalyse",
@@ -619,9 +619,9 @@
       "active": "Aktiv",
       "completed": "Abgeschlossen",
       "createEvent": "Ereignis erstellen",
-      "daysLeft": "{count} days left",
+      "daysLeft": "{count} Tage verbleibend",
       "noEvents": "Keine aktiven Ereignisse",
-      "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more",
+      "noEventsDescription": "Erstellen Sie ein Ereignisbudget, um Ausgaben für Hochzeiten, Urlaube und mehr zu verfolgen",
       "planning": "In Planung",
       "progress": "Fortschritt",
       "remaining": "Verbleibend",
@@ -635,7 +635,7 @@
       "badges": "Abzeichen",
       "currentStreak": "Aktuelle Serie",
       "longestStreak": "Beste: {count} Tage",
-      "noAchievements": "Aktionen abschließen, um Abzeichen zu verdienen",
+      "noAchievements": "Aktionen abschliessen, um Abzeichen zu verdienen",
       "points": "Punkte",
       "streaks": "Serien",
       "totalPoints": "Gesamtpunkte"
@@ -659,13 +659,13 @@
       "assetBreakdown": "Vermögensaufschlüsselung",
       "cashChecking": "Bargeld & Girokonto",
       "creditCards": "Kreditkarten",
-      "history": "Historical Snapshots",
+      "history": "Historische Momentaufnahmen",
       "investments": "Investitionen",
       "liabilityBreakdown": "Verbindlichkeitenaufschlüsselung",
       "loans": "Darlehen",
-      "milestoneReached": "Milestone reached: {amount}!",
+      "milestoneReached": "Meilenstein erreicht: {amount}!",
       "mortgage": "Hypothek",
-      "noLiabilities": "No liabilities — great job!",
+      "noLiabilities": "Keine Verbindlichkeiten — ausgezeichnet!",
       "property": "Immobilien",
       "savings": "Ersparnisse",
       "title": "Nettovermögen",
@@ -767,34 +767,34 @@
     "scenarios": {
       "_note": "Bereits internationalisiert in client.tsx mit budget.scenarios Namespace",
       "after": "Nachher",
-      "amountLabel": "Amount",
+      "amountLabel": "Betrag",
       "annualSavings": "Jährliche Ersparnisse",
       "before": "Vorher",
       "healthScore": "Gesundheitswert",
-      "impact": "Impact",
+      "impact": "Auswirkung",
       "monthlyCashFlow": "Monatlicher Cashflow",
-      "run": "Run Scenario",
-      "subtitle": "Model financial changes and see their impact",
+      "run": "Szenario ausführen",
+      "subtitle": "Finanzielle Änderungen modellieren und deren Auswirkungen sehen",
       "title": "Was-Wäre-Wenn-Szenarien",
       "types": {
         "addExpense": {
-          "description": "See the impact of a new recurring expense",
+          "description": "Sehen Sie die Auswirkung einer neuen wiederkehrenden Ausgabe",
           "title": "Ausgabe hinzufügen"
         },
         "cancelSubscription": {
-          "description": "See savings from canceling a recurring charge",
+          "description": "Sehen Sie die Ersparnisse durch Kündigung einer wiederkehrenden Gebühr",
           "title": "Abonnement kündigen"
         },
         "changeIncome": {
-          "description": "Model an income increase or decrease",
+          "description": "Modellieren Sie eine Einkommenserhöhung oder -senkung",
           "title": "Einkommen ändern"
         },
         "increaseSavings": {
-          "description": "See goal timeline acceleration",
+          "description": "Sehen Sie die Beschleunigung des Zielzeitplans",
           "title": "Ersparnisse erhöhen"
         },
         "payOffDebt": {
-          "description": "Calculate interest savings from early payoff",
+          "description": "Berechnen Sie Zinseinsparungen durch vorzeitige Tilgung",
           "title": "Schulden tilgen"
         }
       }
@@ -940,7 +940,7 @@
       "monthlyContribution": "Monatlicher Sparbetrag",
       "monthlyContributionHelp": "Wie viel Sie jeden Monat für Ihren Notfallfonds sparen können",
       "monthlyExpenses": "Monatliche Ausgaben",
-      "monthlyExpensesHelp": "Einschließlich Miete, Nebenkosten, Lebensmittel, Versicherung und andere wesentliche Kosten",
+      "monthlyExpensesHelp": "Einschliesslich Miete, Nebenkosten, Lebensmittel, Versicherung und andere wesentliche Kosten",
       "monthsToGoal": "Monate bis zum Ziel",
       "progress": "Aktueller Fortschritt",
       "resultsTitle": "Ihre Ergebnisse",
@@ -950,7 +950,7 @@
       "targetMonthsHelp": "Experten empfehlen {months} Monate für die meisten Situationen",
       "tip1": "Bewahren Sie Ihren Notfallfonds auf einem Tagesgeldkonto auf für einfachen Zugang und bessere Rendite",
       "tip2": "Automatisieren Sie Ihre Beiträge durch Einrichten automatischer Überweisungen am Zahltag",
-      "tip3": "Fangen Sie klein an – auch regelmäßiges Sparen kleiner Beträge summiert sich im Laufe der Zeit",
+      "tip3": "Fangen Sie klein an – auch regelmässiges Sparen kleiner Beträge summiert sich im Laufe der Zeit",
       "tipsTitle": "Tipps zum Aufbau Ihres Notfallfonds",
       "title": "Notfallfonds-Rechner"
     },
@@ -1190,7 +1190,7 @@
       "potentialSavingsHelp": "Wenn Sie alle nicht wesentlichen Abonnements kündigen würden",
       "remove": "Abonnement entfernen",
       "showIncomePercent": "Prozentsatz des Einkommens anzeigen",
-      "subtitle": "Sehen Sie, wohin Ihr wiederkehrendes Geld fließt",
+      "subtitle": "Sehen Sie, wohin Ihr wiederkehrendes Geld fliesst",
       "title": "Abonnementkostenrechner",
       "totalCost": "Gesamte Abonnementkosten",
       "yearly": "Jährlich",
@@ -1344,7 +1344,7 @@
       "search": "Ihre Finanzdaten mit natürlicher Sprache durchsuchen",
       "title": "Was der Chatbot kann"
     },
-    "closeDialog": "Chatbot-Opt-in-Dialog schließen",
+    "closeDialog": "Chatbot-Opt-in-Dialog schliessen",
     "controls": {
       "dataAccess": {
         "fullAccess": {
@@ -1372,7 +1372,7 @@
     "privacy": {
       "dataSent": "Finanzdaten werden an die API gesendet, um Ihre Fragen zu beantworten",
       "disable": "Sie können den Chatbot jederzeit unter Einstellungen → Datenschutz deaktivieren",
-      "noTraining": "OpenAI verwendet API-Daten nicht zum Trainieren von Modellen (gemäß ihrer Richtlinie)",
+      "noTraining": "OpenAI verwendet API-Daten nicht zum Trainieren von Modellen (gemäss ihrer Richtlinie)",
       "processedBy": "Ihre Konversationen werden von der GPT-4 API von OpenAI verarbeitet",
       "title": "Datenschutz & Datennutzung"
     },
@@ -1459,7 +1459,7 @@
     "confirmCategorization": "Bestätigen Sie diese Kategorisierung, um die Genauigkeit zu verbessern",
     "learnFromThis": "Daraus lernen",
     "lowConfidence": "Niedrige Sicherheit",
-    "moderate": "Mäßig",
+    "moderate": "Mässig",
     "veryConfident": "Sehr sicher"
   },
   "dashboard": {
@@ -1710,18 +1710,18 @@
   "designSystem": {
     "a11y": {
       "focusIndicators": "Fokus-Indikatoren: 3px Ring mit 50% Deckkraft auf allen interaktiven Elementen",
-      "fontSize": "Basis-Schriftgröße: 18px für verbesserte Lesbarkeit (seniorenfreundlich)",
+      "fontSize": "Basis-Schriftgrösse: 18px für verbesserte Lesbarkeit (seniorenfreundlich)",
       "highContrast": "Hoher Kontrast-Modus: Entfernt Schatten, erhöht Rahmendicke",
       "keyboardNav": "Tastaturnavigation: Alle Funktionen per Tastatur erreichbar",
       "reducedMotion": "Reduzierte Bewegung: Automatische Erkennung + manuelle Umschaltung bei vestibulären Störungen",
       "semanticHtml": "Semantisches HTML: Korrekte Überschriftenhierarchie und Landmarken-Bereiche",
       "touchTargets": "Touch-Ziele: Mindestens 48x48px (54px mit Abstand) für alle interaktiven Elemente",
-      "wcag": "WCAG 2.2 AA-konform: Kontrastverhältnisse ≥4,5:1 für normalen Text, ≥3:1 für großen Text"
+      "wcag": "WCAG 2.2 AA-konform: Kontrastverhältnisse ≥4,5:1 für normalen Text, ≥3:1 für grossen Text"
     },
     "accessibilityControls": "Barrierefreiheits-Steuerung",
     "accessibilityGuidelines": "Barrierefreiheits-Richtlinien",
-    "baseFontSize": "Basis-Schriftgröße: {size}px",
-    "bodyText": "Fließtext (18px Basis) – Lorem ipsum dolor sit amet, consectetur adipiscing elit. Optimiert für beste Lesbarkeit mit WCAG 2.2 AA-Konformität.",
+    "baseFontSize": "Basis-Schriftgrösse: {size}px",
+    "bodyText": "Fliesstext (18px Basis) – Lorem ipsum dolor sit amet, consectetur adipiscing elit. Optimiert für beste Lesbarkeit mit WCAG 2.2 AA-Konformität.",
     "buttons": "Schaltflächen",
     "cards": "Karten",
     "checkboxes": "Kontrollkästchen",
@@ -1745,7 +1745,7 @@
     "enterText": "Text eingeben...",
     "errorInput": "Fehlerhafte Eingabe",
     "errorMessage": "Fehlermeldung",
-    "extraSmallText": "Sehr kleiner Text (14px) – Fußnoten und rechtliche Hinweise",
+    "extraSmallText": "Sehr kleiner Text (14px) – Fussnoten und rechtliche Hinweise",
     "focus": "Fokus",
     "formControls": "Formular-Steuerelemente",
     "ghost": "Transparent",
@@ -1760,7 +1760,7 @@
     "hover": "Hover",
     "inputs": "Eingabefelder",
     "invalidPlaceholder": "Ungültig...",
-    "large": "Groß",
+    "large": "Gross",
     "light": "Hell",
     "motionTokens": "Animations-Token",
     "off": "Aus",
@@ -1773,7 +1773,7 @@
     "reduceMotion": "Bewegung reduzieren",
     "secondary": "Sekundär",
     "shadowTokens": "Schatten-Token",
-    "sizes": "Größen",
+    "sizes": "Grössen",
     "small": "Klein",
     "smallText": "Kleiner Text (16px) – Sekundäre Informationen und Bildunterschriften",
     "spacingTokens": "Abstands-Token",
@@ -1854,9 +1854,9 @@
   },
   "errorRecovery": {
     "aiAnalysis": "KI-Analyse:",
-    "closeModal": "Modal schließen",
+    "closeModal": "Modal schliessen",
     "footer": {
-      "close": "Schließen",
+      "close": "Schliessen",
       "needHelp": "Benötigen Sie weitere Hilfe?",
       "viewGuide": "Fehlerbehebungsanleitung anzeigen"
     },
@@ -1923,7 +1923,7 @@
     "failedToExportCsv": "CSV-Export fehlgeschlagen",
     "failedToExportExcel": "Excel-Arbeitsmappe konnte nicht exportiert werden",
     "failedToImport": "Daten konnten nicht importiert werden. Bitte überprüfen Sie das Dateiformat.",
-    "fullBackupDescription": "Exportieren Sie alle Daten einschließlich Konten, Transaktionen, Budgets, Ziele und Einstellungen. Verwenden Sie dies für vollständige Sicherungen, die später wiederhergestellt werden können.",
+    "fullBackupDescription": "Exportieren Sie alle Daten einschliesslich Konten, Transaktionen, Budgets, Ziele und Einstellungen. Verwenden Sie dies für vollständige Sicherungen, die später wiederhergestellt werden können.",
     "fullBackupTitle": "Vollständige Sicherung (JSON)",
     "importData": "Daten importieren",
     "importJson": "JSON importieren",
@@ -1963,9 +1963,9 @@
     "startDate": "Startdatum",
     "subtitle": "Sichern Sie Ihre Daten oder exportieren Sie in verschiedene Formate",
     "tipExcel": "<strong>Excel-Export</strong> eignet sich am besten für Analysen und zum Teilen – enthält Formatierung, Formeln und mehrere Blätter",
-    "tipJson": "<strong>JSON-Sicherung</strong> eignet sich am besten zur Datenwiederherstellung – erstellen Sie regelmäßig Sicherungen an einem sicheren Ort",
+    "tipJson": "<strong>JSON-Sicherung</strong> eignet sich am besten zur Datenwiederherstellung – erstellen Sie regelmässig Sicherungen an einem sicheren Ort",
     "tipLocalStorage": "Alle Daten werden lokal im IndexedDB Ihres Browsers gespeichert",
-    "tipRegularBackup": "Sichern Sie Ihre Daten regelmäßig (wöchentlich empfohlen)",
+    "tipRegularBackup": "Sichern Sie Ihre Daten regelmässig (wöchentlich empfohlen)",
     "tipSafeLocation": "Bewahren Sie Sicherungen an einem sicheren Ort auf (Cloud-Speicher, externe Festplatte)",
     "tipTestBackups": "Testen Sie Ihre Sicherungen durch Importieren, um sicherzustellen, dass sie funktionieren",
     "title": "Export & Sicherung",
@@ -1985,7 +1985,7 @@
     },
     "dataSummary": {
       "accounts": "Konten",
-      "estimatedSize": "Gesch. Größe",
+      "estimatedSize": "Gesch. Grösse",
       "title": "Datenübersicht",
       "transactions": "Transaktionen"
     },
@@ -2014,7 +2014,7 @@
         "label": "Mit Passwort verschlüsseln"
       },
       "includeReceipts": {
-        "description": "Belegbilder anhängen (erhöht die Dateigröße)",
+        "description": "Belegbilder anhängen (erhöht die Dateigrösse)",
         "label": "Belege einbeziehen"
       }
     },
@@ -2060,7 +2060,7 @@
   "fridayReview": {
     "back": "Zurück",
     "backToDashboard": "Zurück zum Dashboard",
-    "closeReview": "Rückblick schließen",
+    "closeReview": "Rückblick schliessen",
     "continue": "Weiter",
     "done": "Fertig",
     "goToStep": "Zu {step} gehen",
@@ -2142,7 +2142,7 @@
   },
   "iconPicker": {
     "clearSearch": "Suche leeren",
-    "close": "Schließen",
+    "close": "Schliessen",
     "currentIcon": "Aktuelles Symbol",
     "foundCount": "{count} Symbol(e) gefunden",
     "iconsAvailable": "{count} Symbole verfügbar",
@@ -2184,8 +2184,8 @@
     "langRussian": "Russisch",
     "langSpanish": "Spanisch",
     "langTurkish": "Türkisch",
-    "largePdfTip": "Für sehr große Kontoauszüge sollten Sie einen CSV-Export von Ihrer Bank anfordern, um die Verarbeitung zu beschleunigen.",
-    "largePdfWarning": "Großes PDF erkannt ({pages} Seiten). Die Verarbeitung kann länger dauern und viel Speicher benötigen.",
+    "largePdfTip": "Für sehr grosse Kontoauszüge sollten Sie einen CSV-Export von Ihrer Bank anfordern, um die Verarbeitung zu beschleunigen.",
+    "largePdfWarning": "Grosses PDF erkannt ({pages} Seiten). Die Verarbeitung kann länger dauern und viel Speicher benötigen.",
     "lowConfidenceDetection": "Niedrige Konfidenz bei der Formaterkennung. {suggestions}",
     "lowOcrConfidence": "Niedrige OCR-Konfidenz ({percent}%). Dies könnte ein gescanntes/bildbasiertes PDF sein.",
     "noDataAfterMapping": "Keine Daten in der CSV-Datei nach Anwendung der benutzerdefinierten Zuordnung gefunden.",
@@ -2275,7 +2275,7 @@
       "saving": "Wird gespeichert...",
       "update": "Konto aktualisieren"
     },
-    "closeModal": "Modal schließen",
+    "closeModal": "Modal schliessen",
     "errors": {
       "saveFailed": "Konto konnte nicht gespeichert werden"
     },
@@ -2472,7 +2472,7 @@
         "settings": "Zugänglichkeitseinstellungen"
       },
       "description": "Der Seniorenmodus bietet vereinfachte Navigation und grössere Touch-Ziele. Tastenkombinationen, Fokuszustände und klarer Kontrast helfen jedem, schneller voranzukommen.",
-      "title": "Standardmäßig zugänglich"
+      "title": "Standardmässig zugänglich"
     },
     "brand": {
       "name": "BudgetPro",
@@ -2519,7 +2519,7 @@
         "q": "Ist meine Daten wirklich privat?"
       },
       "1": {
-        "a": "Sie können jederzeit ein vollständiges JSON-Backup exportieren. Wir empfehlen auch regelmäßige CSV-Exporte.",
+        "a": "Sie können jederzeit ein vollständiges JSON-Backup exportieren. Wir empfehlen auch regelmässige CSV-Exporte.",
         "q": "Wie sichere ich meine Daten?"
       },
       "2": {
@@ -3024,7 +3024,7 @@
     "title": "Kredite",
     "tooltip": {
       "amortizationAria": "Weitere Informationen zur Tilgung und Kreditrückzahlung",
-      "amortizationBody": "Wie Ihr Kredit im Laufe der Zeit abbezahlt wird. Jede Zahlung deckt zuerst die Zinsen, dann die Tilgung. Der Plan zeigt genau, wie viel monatlich wohin fließt. Frühe Zahlungen sind hauptsächlich Zinsen!",
+      "amortizationBody": "Wie Ihr Kredit im Laufe der Zeit abbezahlt wird. Jede Zahlung deckt zuerst die Zinsen, dann die Tilgung. Der Plan zeigt genau, wie viel monatlich wohin fliesst. Frühe Zahlungen sind hauptsächlich Zinsen!",
       "amortizationTitle": "Tilgung",
       "aprAria": "Weitere Informationen zum effektiven Jahreszins",
       "aprExplained": "Der effektive Jahreszins ist der jährliche Kostensatz für geliehenes Geld. Beispiel: 5% auf 10.000 € = 500 € Zinsen pro Jahr. Niedriger Zinssatz = weniger Gesamtkosten.",
@@ -3229,7 +3229,7 @@
     "dateRequired": "Datum *",
     "descriptionLabel": "Beschreibung",
     "descriptionPlaceholder": "Optionale Beschreibung",
-    "errorFileSize": "Dateigröße muss unter 10 MB liegen",
+    "errorFileSize": "Dateigrösse muss unter 10 MB liegen",
     "errorInvalidFileType": "Bitte wählen Sie eine gültige Bilddatei oder PDF (PNG, JPG, GIF, WebP, PDF)",
     "errorLowConfidence": "Niedrige Erkennungssicherheit. Bitte überprüfen und korrigieren Sie die extrahierten Daten vor dem Speichern.",
     "errorNoAccount": "Kein Konto gefunden. Bitte erstellen Sie zuerst ein Konto.",
@@ -3419,7 +3419,7 @@
     "connecting": "Wird verbunden...",
     "connectingToDevice": "Verbindung zum Gerät wird hergestellt...",
     "description": "Verbinden Sie sich mit einem anderen Gerät in Ihrem lokalen Netzwerk",
-    "deviceAdded": "Gerät hinzugefügt. Verbinden, um die Kopplung abzuschließen.",
+    "deviceAdded": "Gerät hinzugefügt. Verbinden, um die Kopplung abzuschliessen.",
     "failedToInitialize": "Gerät konnte nicht initialisiert werden. Bitte versuchen Sie es erneut.",
     "host": "Host",
     "ipAddressDescription": "Geben Sie Ihre lokale IP-Adresse ein, damit andere Geräte sich verbinden können.",
@@ -3593,7 +3593,7 @@
       "currencyGBP": "GBP – Britisches Pfund",
       "currencyUSD": "USD – US-Dollar",
       "deletePlan": "Plan löschen",
-      "deletePlanDescription": "Dies entfernt Ihren gesamten Gehaltsplan, einschließlich aller Zeitpläne und Zuweisungen.",
+      "deletePlanDescription": "Dies entfernt Ihren gesamten Gehaltsplan, einschliesslich aller Zeitpläne und Zuweisungen.",
       "deletePlanTitle": "Gehaltsplan löschen",
       "editAllocations": "Zuweisungen bearbeiten",
       "editPaycheckSchedule": "Gehaltszeitplan bearbeiten",
@@ -3607,7 +3607,7 @@
       "generating": "Wird generiert...",
       "helpTooltip": "Weisen Sie jedes Gehalt vor dem Zahltag Budgetkategorien zu. Sehen Sie genau, wie viel für freie Ausgaben übrig bleibt.",
       "helpTooltipAriaLabel": "Weitere Informationen zur Gehaltsplanung",
-      "irregularScheduleHint": "Ihr Plan verwendet einen unregelmäßigen Zeitplan. Aktualisieren Sie Ihre Einstellungen, um Gehälter hinzuzufügen.",
+      "irregularScheduleHint": "Ihr Plan verwendet einen unregelmässigen Zeitplan. Aktualisieren Sie Ihre Einstellungen, um Gehälter hinzuzufügen.",
       "loading": "Gehaltsplan wird geladen...",
       "noAllocationsYet": "Noch keine Zuweisungen. Tippen Sie auf „Zuweisen“, um Kategorien Mittel zuzuordnen.",
       "noPaychecksScheduled": "Keine Gehälter geplant",
@@ -3627,7 +3627,7 @@
       "saving": "Wird gespeichert...",
       "scheduleBiweekly": "Zweiwöchentlich",
       "scheduleBiweeklyDesc": "Alle zwei Wochen",
-      "scheduleIrregular": "Unregelmäßig",
+      "scheduleIrregular": "Unregelmässig",
       "scheduleIrregularDesc": "Benutzerdefinierte Termine",
       "scheduleLabel": "Zeitplan: {schedule}",
       "scheduleMonthly": "Monatlich",
@@ -3863,7 +3863,7 @@
       "install": "Installieren",
       "notNow": "Nicht jetzt"
     },
-    "close": "Installationshinweis schließen",
+    "close": "Installationshinweis schliessen",
     "description": "Zum Startbildschirm hinzufügen für schnellen Zugriff und Offline-Nutzung",
     "features": {
       "fastSecure": "Schnell & sicher",
@@ -3881,7 +3881,7 @@
     "allowCameraAccess": "Bitte erlauben Sie den Kamerazugriff, wenn Sie dazu aufgefordert werden",
     "cameraError": "Kamerafehler",
     "cameraFailed": "Kamerazugriff fehlgeschlagen. Bitte versuchen Sie es erneut.",
-    "cameraInUse": "Kamera wird von einer anderen Anwendung verwendet. Bitte schließen Sie andere Apps, die die Kamera nutzen.",
+    "cameraInUse": "Kamera wird von einer anderen Anwendung verwendet. Bitte schliessen Sie andere Apps, die die Kamera nutzen.",
     "cameraStep1": "Klicken Sie auf das Schloss-/Info-Symbol in der Adressleiste Ihres Browsers",
     "cameraStep2": "Suchen Sie \"Kamera\" in den Berechtigungen",
     "cameraStep3": "Ändern Sie es auf \"Erlauben\"",
@@ -3940,7 +3940,7 @@
     "savingsRateDescription": "Prozentsatz des in diesem Monat gesparten Einkommens"
   },
   "receiptThumbnail": {
-    "close": "Schließen",
+    "close": "Schliessen",
     "deleteConfirm": "Beleg \"{filename}\" löschen?",
     "deleteFailed": "Beleg konnte nicht gelöscht werden",
     "deleteReceipt": "Beleg löschen",
@@ -3976,7 +3976,7 @@
       "invalidType": "Ungültiger Dateityp. Nur JPG-, PNG- und PDF-Dateien sind erlaubt",
       "ocrImagesOnly": "OCR wird nur für Bilddateien (JPG, PNG) unterstützt",
       "rejected": "Datei wurde abgelehnt. Bitte versuchen Sie es erneut",
-      "tooLarge": "Datei ist zu groß. Maximale Größe ist {size}MB"
+      "tooLarge": "Datei ist zu gross. Maximale Grösse ist {size}MB"
     },
     "extracted": {
       "amount": "Betrag:",
@@ -4026,7 +4026,7 @@
     "incomeVsExpenses": "Einnahmen vs. Ausgaben (Letzte 6 Monate)",
     "loading": "Berichte werden geladen...",
     "moneyFlow": "Geldfluss",
-    "moneyFlowDescription": "Visualisieren Sie, wie Einnahmen in Kategorien und Ersparnisse fließen",
+    "moneyFlowDescription": "Visualisieren Sie, wie Einnahmen in Kategorien und Ersparnisse fliessen",
     "net": "Netto",
     "netSavings": "Netto-Ersparnisse",
     "noDataAvailable": "Keine Daten verfügbar",
@@ -4071,7 +4071,7 @@
     "budgetFileInfo1": "Ihre Daten werden in einem portablen JSON-Format gespeichert, das von jedem Texteditor geöffnet werden kann",
     "budgetFileInfo2": "Optionaler Passwortschutz verwendet branchenübliche AES-256-Verschlüsselung",
     "budgetFileInfo3": "Dateien enthalten eine Prüfsumme zur Erkennung von Beschädigung oder Manipulation",
-    "budgetFileInfo4": "Belegbilder können in den Export einbezogen werden (erhöht die Dateigröße)",
+    "budgetFileInfo4": "Belegbilder können in den Export einbezogen werden (erhöht die Dateigrösse)",
     "cancel": "Abbrechen",
     "categoriesSubtitle": "Organisieren Sie Ihre Transaktionen mit benutzerdefinierten Kategorien • Zum Sortieren ziehen",
     "categoriesTitle": "Kategorien",
@@ -4142,9 +4142,9 @@
     "yourAccounts": "Ihre Konten"
   },
   "shortcutsModal": {
-    "close": "Tastaturkürzel-Hilfe schließen",
+    "close": "Tastaturkürzel-Hilfe schliessen",
     "proTip": {
-      "description": "Tastaturkürzel funktionieren auf jeder Seite, außer wenn Sie in Formulare tippen. Drücken Sie jederzeit {key}, um diese Hilfe zu sehen.",
+      "description": "Tastaturkürzel funktionieren auf jeder Seite, ausser wenn Sie in Formulare tippen. Drücken Sie jederzeit {key}, um diese Hilfe zu sehen.",
       "title": "💡 Profi-Tipp"
     },
     "subtitle": "Produktivitätstipps für Fortgeschrittene",
@@ -4196,7 +4196,7 @@
     "automaticSyncDescription": "Transaktionen werden täglich synchronisiert. Manueller Import jederzeit möglich.",
     "back": "Zurück",
     "cancel": "Abbrechen",
-    "completeSetup": "Einrichtung abschließen",
+    "completeSetup": "Einrichtung abschliessen",
     "connect": "Verbinden",
     "connectYourBank": "Bank verbinden",
     "connecting": "Wird verbunden...",
@@ -4373,15 +4373,15 @@
       "saving": "Wird gespeichert..."
     },
     "category": "Kategorie",
-    "closeModal": "Modal schließen",
+    "closeModal": "Modal schliessen",
     "date": "Datum:",
-    "distributeEvenly": "Gleichmäßig verteilen",
+    "distributeEvenly": "Gleichmässig verteilen",
     "errors": {
       "saveFailed": "Aufgeteilte Transaktion konnte nicht gespeichert werden"
     },
     "help": {
       "step1": "Geben Sie den Betrag für jede Kategorie ein (muss insgesamt ${amount} ergeben)",
-      "step2": "Verwenden Sie \"Gleichmäßig verteilen\", um den Betrag gleichmäßig auf alle Kategorien zu verteilen",
+      "step2": "Verwenden Sie \"Gleichmässig verteilen\", um den Betrag gleichmässig auf alle Kategorien zu verteilen",
       "step3": "Fügen Sie bis zu 5 Aufteilungen pro Transaktion hinzu",
       "step4": "Die Originaltransaktion wird ausgeblendet und durch die Aufteilungen ersetzt",
       "title": "So teilen Sie Transaktionen auf:"
@@ -4464,7 +4464,7 @@
         },
         "equal": {
           "description": "Jeder zahlt den gleichen Betrag",
-          "label": "Gleichmäßig teilen"
+          "label": "Gleichmässig teilen"
         },
         "percentage": {
           "description": "Prozentuale Anteile pro Person festlegen",
@@ -4522,7 +4522,7 @@
     "interval": {
       "annual": "Jährlich",
       "bi-weekly": "Zweiwöchentlich",
-      "irregular": "Unregelmäßig",
+      "irregular": "Unregelmässig",
       "monthly": "Monatlich",
       "quarterly": "Vierteljährlich",
       "weekly": "Wöchentlich"
@@ -4777,7 +4777,7 @@
       "selectPlaceholder": "Kategorie auswählen...",
       "subcategoriesPlaceholder": "Unterkategorien (optional, kommagetrennt)"
     },
-    "closeModal": "Modal schließen",
+    "closeModal": "Modal schliessen",
     "createCategory": {
       "created": "Kategorie \"{name}\" erstellt!",
       "failed": "Kategorie konnte nicht erstellt werden",
@@ -5001,7 +5001,7 @@
     "aiAnalysis": "KI-Analyse:",
     "amount": "Betrag:",
     "cancelImport": "Import abbrechen",
-    "closeModal": "Modal schließen",
+    "closeModal": "Modal schliessen",
     "confidence": "{percent}% Konfidenz",
     "continueWithAll": "Mit allen fortfahren",
     "criticalIssues": "Kritische Probleme",
@@ -5130,7 +5130,7 @@
       "startImport": "Import starten"
     },
     "header": {
-      "closeLabel": "Assistenten schließen",
+      "closeLabel": "Assistenten schliessen",
       "subtitle": "Migrieren Sie Ihre Budgetdaten nahtlos",
       "title": "Aus YNAB importieren"
     },
@@ -5145,7 +5145,7 @@
     "optionsStep": {
       "accountOptions": {
         "includeClosedAccounts": "Geschlossene Konten einbeziehen",
-        "includeOffBudgetAccounts": "Konten außerhalb des Budgets einbeziehen",
+        "includeOffBudgetAccounts": "Konten ausserhalb des Budgets einbeziehen",
         "title": "Kontooptionen"
       },
       "budgetOptions": {
@@ -5319,7 +5319,7 @@
     "pseudoLocaleExample": "Beispiel: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
     "pseudoLocaleInstruction": "Wenn Sie \"Dashboard\" statt \"[Ðášhƀóářð~~~]\" sehen, ist es hartcodiert!",
     "infoPseudoLocale": "Pseudo-Locale hilft bei der Identifizierung nicht übersetzter Zeichenketten während der Entwicklung",
-    "infoProduction": "Produktions-Builds schließen die en-XA-Locale automatisch aus",
+    "infoProduction": "Produktions-Builds schliessen die en-XA-Locale automatisch aus",
     "infoSwitchBack": "Wechseln Sie zurück zu einer echten Locale, um die normale Entwicklung fortzusetzen"
   },
   "pageMetadata": {
