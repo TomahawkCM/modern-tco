@@ -1,78 +1,78 @@
 {
   "accessibilitySettings": {
     "fontSize": {
-      "default": "Default",
-      "description": "Adjust the base text size for better readability",
-      "extraLarge": "Extra Large",
-      "large": "Large",
-      "title": "Font Size"
+      "default": "Zadano",
+      "description": "Prilagodite osnovnu veličinu teksta za bolju čitljivost",
+      "extraLarge": "Izvanredno veliko",
+      "large": "Veliko",
+      "title": "Veličina fonta"
     },
     "infoBox": {
-      "savedAutomatically": "Settings are saved automatically and persist across sessions",
-      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
-      "storedLocally": "Your preferences are stored locally and never sent to servers",
-      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
-      "title": "About Accessibility Settings"
+      "savedAutomatically": "Postavke se automatski spremaju i traju između sesija",
+      "seniorsOptimization": "Seniors Mode pruža optimizaciju pristupačnosti jednim klikom",
+      "storedLocally": "Vaše postavke pohranjene su lokalno i nikad se ne šalju na poslužitelje",
+      "syncAcrossTabs": "Promjene se sinkroniziraju u svim otvorenim karticama u stvarnom vremenu",
+      "title": "O postavkama pristupačnosti"
     },
     "presets": {
-      "full": "Full",
-      "fullDesc": "Maximum accessibility",
-      "mild": "Mild",
-      "mildDesc": "Slightly enhanced",
-      "moderate": "Moderate",
-      "moderateDesc": "Recommended for most",
-      "off": "Off",
-      "offDesc": "Standard interface",
-      "title": "Quick Presets:"
+      "full": "Puno",
+      "fullDesc": "Maksimalna pristupačnost",
+      "mild": "Blago",
+      "mildDesc": "Blago poboljšano",
+      "moderate": "Umjereno",
+      "moderateDesc": "Preporučeno za većinu",
+      "off": "Isključeno",
+      "offDesc": "Standardno sučelje",
+      "title": "Brze postavke:"
     },
     "reducedMotion": {
-      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
-      "title": "Reduced Motion",
-      "toggleLabel": "Toggle reduced motion mode"
+      "description": "Minimizirajte animacije za smirenije iskustvo. Korisno za korisnike s vestibularnim poremećajima ili osjetljivošću na pokret.",
+      "title": "Smanjeno kretanje",
+      "toggleLabel": "Uključi/isključi način smanjenog kretanja"
     },
     "seniorsMode": {
-      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
+      "description": "Jednoklikno poboljšanje pristupačnosti s većim tekstom, većim područjima dodira i pojednostavljenim sučeljem",
       "title": "Seniors Mode"
     },
     "themeMode": {
-      "auto": "Auto",
-      "autoDesc": "Match system",
-      "dark": "Dark",
-      "darkDesc": "Easy on eyes",
-      "description": "Choose your preferred color scheme for the budget app",
-      "highContrast": "High Contrast",
-      "highContrastDesc": "Maximum visibility",
-      "light": "Light",
-      "lightDesc": "Bright and clear",
-      "title": "Theme Mode"
+      "auto": "Automatski",
+      "autoDesc": "Prati sustav",
+      "dark": "Tamno",
+      "darkDesc": "Ugodno za oči",
+      "description": "Odaberite željenu shemu boja za aplikaciju proračuna",
+      "highContrast": "Visoki kontrast",
+      "highContrastDesc": "Maksimalna vidljivost",
+      "light": "Svjetlo",
+      "lightDesc": "Svjetlo i jasno",
+      "title": "Način teme"
     }
   },
   "accessibilityToggle": {
-    "featuresActive": "Accessibility features active",
-    "highContrast": "High Contrast",
-    "highContrastDescription": "Enhanced color contrast",
-    "largeTextMode": "Large Text Mode",
-    "largeTextModeDescription": "Bigger text & touch targets",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDescription": "Minimize animations",
-    "sizeLarge": "Large",
-    "sizeNormal": "Normal",
-    "sizeXLarge": "X-Large",
-    "textSize": "Text Size",
-    "title": "Accessibility"
+    "featuresActive": "Aktivne značajke pristupačnosti",
+    "highContrast": "Visoki kontrast",
+    "highContrastDescription": "Poboljšani kontrast boja",
+    "largeTextMode": "Način velikog teksta",
+    "largeTextModeDescription": "Veći tekst i područja dodira",
+    "reduceMotion": "Smanji kretanje",
+    "reduceMotionDescription": "Minimiziraj animacije",
+    "sizeLarge": "Veliko",
+    "sizeNormal": "Normalno",
+    "sizeXLarge": "Izuzetno veliko",
+    "textSize": "Veličina teksta",
+    "title": "Pristupačnost"
   },
   "accessibleChart": {
     "buttons": {
-      "chart": "Chart",
-      "showChart": "Show chart view",
-      "showTable": "Show data table view",
-      "table": "Table"
+      "chart": "Graf",
+      "showChart": "Prikaži grafički prikaz",
+      "showTable": "Prikaži tablični prikaz podataka",
+      "table": "Tablica"
     },
     "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
     "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
     "footer": {
-      "average": "Average:",
-      "total": "Total:"
+      "average": "Prosjek:",
+      "total": "Ukupno:"
     },
     "keyboardNav": {
       "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
@@ -84,13 +84,13 @@
       "lowest": "Lowest value: {label} at {value}.",
       "total": "Total: {value}."
     },
-    "switchedToChart": "Switched to chart view",
-    "switchedToTable": "Switched to table view",
+    "switchedToChart": "Prebačeno na grafički prikaz",
+    "switchedToTable": "Prebačeno na tablični prikaz",
     "tableHeaders": {
-      "additionalInfo": "Additional Info",
-      "category": "Category",
-      "period": "Period",
-      "value": "Value"
+      "additionalInfo": "Dodatne informacije",
+      "category": "Kategorija",
+      "period": "Razdoblje",
+      "value": "Vrijednost"
     }
   },
   "actions": {
@@ -102,13 +102,13 @@
     "saveChanges": "Spremi promjene"
   },
   "activityLog": {
-    "actionCreated": "Created",
-    "actionDeleted": "Deleted",
-    "actionExport": "Export",
-    "actionImport": "Import",
+    "actionCreated": "Stvoreno",
+    "actionDeleted": "Obrisano",
+    "actionExport": "Izvezi",
+    "actionImport": "Uvezi",
     "actionLogin": "Login",
     "actionLogout": "Logout",
-    "actionUpdated": "Updated",
+    "actionUpdated": "Ažurirano",
     "allActions": "All actions",
     "allProfiles": "All profiles",
     "allTypes": "All types",
@@ -117,92 +117,92 @@
     "description": "Track changes made by all profiles ({count} total entries)",
     "filter": "Filter:",
     "hoursAgo": "{count}h ago",
-    "justNow": "Just now",
-    "loggingNotEnabled": "Activity logging is not enabled.",
+    "justNow": "Upravo sada",
+    "loggingNotEnabled": "Bilježenje aktivnosti nije omogućeno.",
     "minutesAgo": "{count}m ago",
-    "noActivityFound": "No activity found",
-    "refresh": "Refresh",
-    "searchPlaceholder": "Search activities...",
-    "title": "Activity Log",
-    "typeAccounts": "Accounts",
-    "typeBudgets": "Budgets",
-    "typeCategories": "Categories",
+    "noActivityFound": "Nije pronađena aktivnost",
+    "refresh": "Osvježi",
+    "searchPlaceholder": "Pretraži aktivnosti...",
+    "title": "Dnevnik aktivnosti",
+    "typeAccounts": "Računi",
+    "typeBudgets": "Proračuni",
+    "typeCategories": "Kategorije",
     "typeProfiles": "Profiles",
     "typeSystem": "System",
-    "typeTransactions": "Transactions"
+    "typeTransactions": "Transakcije"
   },
   "admin": {
-    "actionColumn": "Action",
-    "actionsColumn": "Actions",
+    "actionColumn": "Radnja",
+    "actionsColumn": "Radnje",
     "activeTrials": "Active Trials",
-    "actorColumn": "Actor",
-    "applyRole": "Apply Role",
+    "actorColumn": "Izvršitelj",
+    "applyRole": "Primijeni ulogu",
     "applyRoleConfirm": "Apply role \"{role}\" to {count} users?",
-    "auditLog": "Audit Log",
+    "auditLog": "Revizijski zapisnik",
     "bulkActionsFor": "Bulk actions for {count} selected users",
     "changeMemberRole": "Change role for {email} to \"{role}\"?",
     "changeRoleConfirm": "Change role for {email} to \"{role}\"?",
-    "createGroup": "Create Group",
+    "createGroup": "Stvori grupu",
     "daysLeft": "{days} days left",
-    "delete": "Delete",
+    "delete": "Obriši",
     "deleteGroupConfirm": "Delete group \"{name}\" and all members?",
     "entries": "{count} entries",
     "envCheckMessage": "Check your .env.local file to ensure the service role key is set.",
-    "expired": "Expired",
+    "expired": "Isteklo",
     "exportCsv": "Export CSV",
     "exportJson": "Export JSON",
-    "exportUsersCsv": "Export Users CSV",
-    "extendTrial": "Extend Trial",
+    "exportUsersCsv": "Izvezi korisnike CSV",
+    "extendTrial": "Produlji probno",
     "extendTrialConfirm": "Extend trial by {days} days for {count} users?",
     "extendTrialSingle": "Extend trial by 7 days for {email}?",
-    "familyGroups": "Family Groups",
-    "filter": "Filter",
+    "familyGroups": "Obiteljske grupe",
+    "filter": "Filtar",
     "filterByAction": "Filter by action or metadata",
-    "forceLogout": "Force Logout",
+    "forceLogout": "Prisilan odjava",
     "forceLogoutConfirm": "Force logout {count} users?",
     "forceLogoutSingle": "Force logout {email}?",
-    "groupColumn": "Group",
+    "groupColumn": "Grupa",
     "groupCount": "{count} groups",
     "joinedColumn": "Joined",
     "lastLoginColumn": "Last Login",
-    "lifetimeAccess": "Lifetime Access",
+    "lifetimeAccess": "Doživotni pristup",
     "manageGroupMembership": "Manage group membership and roles",
     "memberColumn": "Member",
-    "membersColumn": "Members",
+    "membersColumn": "Članovi",
     "membersFor": "Members for {id}...",
-    "never": "Never",
+    "never": "Nikad",
     "newGroupName": "New group name",
-    "next": "Next",
+    "next": "Sljedeće",
     "noAuditEntries": "No audit entries yet.",
     "noFamilyGroups": "No family groups found.",
     "noGroupSelected": "No group selected.",
     "noMembers": "No members found.",
     "noUsersFound": "No users found.",
-    "ownerColumn": "Owner",
+    "ownerColumn": "Vlasnik",
     "ownerRoleRequired": "Owner role required for bulk changes",
     "ownerRoleRequiredToEdit": "Owner role required to edit",
     "ownerUserId": "Owner user id",
     "pageOf": "Page {page} of {total}",
-    "paid": "Paid",
+    "paid": "Plaćeno",
     "paidPlans": "Paid Plans",
     "plus7dTrial": "+7d Trial",
     "prev": "Prev",
-    "reactivate": "Reactivate",
+    "reactivate": "Reaktiviraj",
     "reactivateConfirm": "Reactivate {count} users?",
     "reactivateSingle": "Reactivate {email}?",
     "recentAdminActions": "Recent admin actions",
-    "refresh": "Refresh",
-    "remove": "Remove",
+    "refresh": "Osvježi",
+    "remove": "Ukloni",
     "removeMember": "Remove {email} from group?",
-    "rename": "Rename",
+    "rename": "Preimenuj",
     "renameGroup": "Rename group",
     "roleAdmin": "admin",
     "roleChild": "child",
-    "roleColumn": "Role",
+    "roleColumn": "Uloga",
     "roleMember": "member",
     "roleOwner": "owner",
     "roleViewer": "viewer",
-    "searchUsers": "Search users...",
+    "searchUsers": "Pretraži korisnike...",
     "selectAllUsers": "Select all users",
     "selectGroupToView": "Select a group to view members",
     "sessionRefreshMessage": "Your session needs to be refreshed. Please sign out and sign back in to establish a new session.",
@@ -213,14 +213,14 @@
     "suspend": "Suspend",
     "suspendConfirm": "Suspend {count} users?",
     "suspendSingle": "Suspend {email}?",
-    "suspended": "Suspended",
+    "suspended": "Suspendiran",
     "targetColumn": "Target",
     "title": "Admin Dashboard",
     "totalUsers": "Total Users",
-    "trial": "Trial",
+    "trial": "Probno",
     "trialEnded": "Trial ended",
     "trialStatusColumn": "Trial Status",
-    "unknown": "Unknown",
+    "unknown": "Nepoznato",
     "userColumn": "User",
     "whenColumn": "When"
   },
@@ -228,17 +228,17 @@
     "analyzing": "Analyzing CSV structure with AI...",
     "buttons": {
       "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
+      "cancel": "Odustani"
     },
     "closeModal": "Close modal",
     "columnMappings": "Column Mappings",
     "columnTypes": {
-      "amount": "Amount",
-      "balance": "Balance",
-      "credit": "Credit",
-      "date": "Date",
-      "debit": "Debit",
-      "description": "Description",
+      "amount": "Iznos",
+      "balance": "Stanje",
+      "credit": "Odobrenje",
+      "date": "Datum",
+      "debit": "Terećenje",
+      "description": "Opis",
       "ignore": "Ignore"
     },
     "confidence": {
@@ -246,9 +246,9 @@
       "title": "Detection Confidence"
     },
     "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
+      "amount": "Iznos",
+      "date": "Datum",
+      "description": "Opis",
       "title": "Transaction Preview"
     },
     "samples": "Samples:",
@@ -279,9 +279,9 @@
     "totalPayments": "Total Payments"
   },
   "amountFilter": {
-    "clear": "Clear",
+    "clear": "Očisti",
     "maxLabel": "Maximum amount",
-    "maxPlaceholder": "Max",
+    "maxPlaceholder": "Maks",
     "maxThumb": "Maximum amount",
     "minLabel": "Minimum amount",
     "minPlaceholder": "Min",
@@ -316,7 +316,7 @@
     "breadcrumb": "Breadcrumb",
     "chatMessages": "Chat messages",
     "clearSearch": "Clear search",
-    "close": "Close",
+    "close": "Zatvori",
     "closeAccessibilityMenu": "Close accessibility menu",
     "closeChatbot": "Close chatbot",
     "closeHoldingModal": "Close modal",
@@ -332,18 +332,18 @@
     "dataTable": "{title} data table",
     "decreaseTextSize": "Decrease text size",
     "deleteTransaction": "Delete transaction",
-    "dismiss": "Dismiss",
+    "dismiss": "Odbaci",
     "dismissAlert": "Dismiss alert",
     "dismissWelcome": "Dismiss welcome banner",
     "dragToClose": "Drag down to close",
     "editTransaction": "Edit transaction",
-    "home": "Home",
+    "home": "Početna",
     "increaseTextSize": "Increase text size",
-    "loadingChart": "Loading chart...",
+    "loadingChart": "Učitavanje grafa...",
     "mainSidebar": "Glavna bočna traka",
     "mobileNavigation": "Mobilna navigacija",
     "notificationDescription": "{title}. {body}",
-    "notifications": "Notifications",
+    "notifications": "Obavijesti",
     "openChatbot": "Open AI chatbot",
     "pairingCode": "Pairing code: {code}",
     "primaryNav": "Primary",
@@ -365,7 +365,7 @@
     "toggleSeniorsMode": "Toggle Seniors Mode",
     "typeQuestion": "Type your question",
     "unreadNotifications": "{count, plural, =1 {1 unread notification} other {# unread notifications}}",
-    "welcomeBudgetApp": "Welcome to Budget App"
+    "welcomeBudgetApp": "Dobrodošli u aplikaciju za proračun"
   },
   "auth": {
     "forgotPassword": {
@@ -373,59 +373,59 @@
       "checkEmailTitle": "Check Your Email",
       "checkSpam": "Didn't receive the email? Check your spam folder or try again.",
       "defaultError": "Failed to send reset email",
-      "emailLabel": "Email",
+      "emailLabel": "E-pošta",
       "emailPlaceholder": "you@example.com",
       "rememberPassword": "Remember your password?",
       "resetLinkSent": "We've sent a password reset link to {email}",
       "sendResetLink": "Send Reset Link",
       "signInLink": "Sign in",
       "subtitle": "Enter your email and we'll send you a reset link",
-      "title": "Reset Password"
+      "title": "Poništi lozinku"
     },
     "login": {
       "defaultError": "Failed to sign in",
-      "emailLabel": "Email",
+      "emailLabel": "E-pošta",
       "emailPlaceholder": "you@example.com",
       "forgotPassword": "Forgot password?",
       "noAccount": "Don't have an account?",
-      "passwordLabel": "Password",
-      "signInButton": "Sign In",
+      "passwordLabel": "Lozinka",
+      "signInButton": "Prijava",
       "startFreeTrial": "Start your free trial",
       "subtitle": "Sign in to your BudgetPro account",
       "title": "Welcome Back"
     },
     "resetPassword": {
-      "confirmPasswordLabel": "Confirm Password",
+      "confirmPasswordLabel": "Potvrdi lozinku",
       "defaultError": "Failed to reset password",
       "invalidLinkDescription": "This password reset link is invalid or has expired. Please request a new one.",
       "invalidLinkTitle": "Invalid or Expired Link",
-      "newPasswordLabel": "New Password",
+      "newPasswordLabel": "Nova lozinka",
       "passwordHint": "Must be at least 8 characters",
       "passwordTooShort": "Password must be at least 8 characters",
       "passwordsMismatch": "Passwords do not match",
       "requestNewLink": "Request New Link",
-      "resetButton": "Reset Password",
+      "resetButton": "Poništi lozinku",
       "subtitle": "Enter your new password below",
       "successDescription": "Your password has been successfully reset. Redirecting you to sign in...",
       "successTitle": "Password Updated",
       "title": "Set New Password"
     },
     "signup": {
-      "confirmPasswordLabel": "Confirm Password",
+      "confirmPasswordLabel": "Potvrdi lozinku",
       "confirmPasswordPlaceholder": "Re-enter your password",
       "createAccountButton": "Create Account",
       "defaultError": "Failed to create account",
-      "emailLabel": "Email",
+      "emailLabel": "E-pošta",
       "emailPlaceholder": "you@example.com",
       "fullNameLabel": "Full Name",
       "fullNamePlaceholder": "John Doe",
       "hasAccount": "Already have an account?",
-      "passwordLabel": "Password",
+      "passwordLabel": "Lozinka",
       "passwordPlaceholder": "Create a strong password",
       "passwordTooShort": "Password must be at least 8 characters long.",
       "passwordsMismatch": "Passwords do not match. Please re-enter your password.",
       "returnToLogin": "Return to Login",
-      "signInLink": "Sign In",
+      "signInLink": "Prijava",
       "subtitle": "Create your account to get started.",
       "title": "Start Free Trial",
       "verifyEmailActivate": "Please check your inbox to activate your 7-day free trial.",
@@ -467,21 +467,21 @@
     "backToHome": "Povratak na početnu"
   },
   "bottomSheet": {
-    "close": "Close",
+    "close": "Zatvori",
     "dragToClose": "Drag down to close"
   },
   "breadcrumb": {
     "budgetAnalyzer": "Budget Analyzer",
     "debtPayoffCalculator": "Debt Payoff Calculator",
-    "details": "Details",
-    "edit": "Edit",
+    "details": "Detalji",
+    "edit": "Uredi",
     "emergencyFund": "Emergency Fund",
-    "futurePlans": "Future Plans",
-    "home": "Home",
+    "futurePlans": "Budući planovi",
+    "home": "Početna",
     "merchantRules": "Merchant Rules",
-    "more": "More",
-    "netWorth": "Net Worth",
-    "new": "New",
+    "more": "Više",
+    "netWorth": "Neto vrijednost",
+    "new": "Novo",
     "ocr": "OCR",
     "retirementPlanning": "Retirement Planning",
     "savingsGoal": "Savings Goal",
@@ -494,13 +494,13 @@
       "accountNameLabel": "Account Name *",
       "accountNamePlaceholder": "e.g., BMO Chequing",
       "accountType": {
-        "checking": "Checking",
-        "credit": "Credit Card",
-        "savings": "Savings"
+        "checking": "Tekući račun",
+        "credit": "Kreditna kartica",
+        "savings": "Štednja"
       },
-      "accountTypeLabel": "Account Type",
+      "accountTypeLabel": "Vrsta računa",
       "accountUpdated": "Account updated",
-      "addAccount": "Add Account",
+      "addAccount": "Dodaj račun",
       "addFirstAccount": "Add Your First Account",
       "allTransactionsCleared": "All transactions cleared. You can now re-import your statements.",
       "assignCount": "Assign {count, plural, one {# Transaction} other {# Transactions}}",
@@ -510,22 +510,22 @@
       "assignedTransactions": "Assigned {count} transactions to {name}",
       "assigning": "Assigning...",
       "balanceExplanation": "This is added to your transaction totals to show your current balance",
-      "cancel": "Cancel",
+      "cancel": "Odustani",
       "chooseAccount": "Choose an account...",
       "clearAllConfirm": "Clear All Transactions",
       "clearAllDescription": "This will permanently delete ALL transactions from the database. Your accounts and their starting balances will be preserved. You can then re-import your bank statements fresh. This action cannot be undone.",
       "clearAllTitle": "Clear All Transactions",
       "clearAllTransactions": "Clear all transactions and start fresh",
       "clickToView": "Click to view",
-      "create": "Create",
+      "create": "Stvori",
       "createdAccount": "Created account: {names}",
       "current": "Current",
       "dataManagement": "Data Management",
-      "delete": "Delete",
+      "delete": "Obriši",
       "deleteAccountDescription": "Are you sure you want to delete \"{name}\"? This will not delete associated transactions.",
       "deleteAccountTitle": "Delete Account",
       "dismissReminder": "Dismiss reminder",
-      "edit": "Edit",
+      "edit": "Uredi",
       "editAccount": "Edit Account",
       "enterBankBalance": "Enter your current bank balance to ensure accurate account totals.",
       "failedToAssign": "Failed to assign transactions",
@@ -551,23 +551,23 @@
       "startingBalanceLabel": "Starting Balance",
       "startingBalanceSetTo": "Starting balance set to {amount}",
       "subtitle": "Manage your bank accounts and starting balances",
-      "title": "Accounts",
+      "title": "Računi",
       "totalStartingBalance": "Total Starting Balance",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
       "unassignedClickToAssign": "Click below to automatically assign them to your accounts.",
       "unassignedCreateFirst": "Create an account first, then they will be automatically assigned.",
       "unassignedDescription": "These transactions were imported before accounts were set up.",
       "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
-      "update": "Update"
+      "update": "Ažuriraj"
     },
     "budgets": {
       "addBudget": "Add Budget",
-      "amountLabel": "Amount",
+      "amountLabel": "Iznos",
       "annual": "Annual",
       "budgetAlerts": "⚠️ Budget Alerts",
       "budgetDeleted": "Budget deleted successfully",
-      "cancel": "Cancel",
-      "categoryLabel": "Category",
+      "cancel": "Odustani",
+      "categoryLabel": "Kategorija",
       "createFirstBudget": "Create First Budget",
       "currentProgress": "Current progress: {percentage}% spent ({spent})",
       "currentlyOverBudget": "Currently {amount} over budget",
@@ -582,18 +582,18 @@
       "helpTooltip": "Set spending limits for each category. Track your progress with color-coded alerts: Green = On Track, Yellow = Warning (80%), Red = Over Budget (100%).",
       "helpTooltipAriaLabel": "More information about budgets",
       "loading": "Loading budgets...",
-      "monthly": "Monthly",
+      "monthly": "Mjesečno",
       "noBudgetsDescription": "Create a budget to track your spending limits and goals.",
-      "noBudgetsSet": "No budgets set",
-      "of": "of",
+      "noBudgetsSet": "Nema postavljenih proračuna",
+      "of": "od",
       "overBudgetThisMonth": "{amount} over budget this month",
       "overallProgress": "Overall Progress",
       "periodHelpTooltip": "Monthly budgets reset each month. Annual budgets divide the total across 12 months. Example: $1,200 annual = $100 per month.",
       "periodHelpTooltipAriaLabel": "More information about budget periods",
-      "periodLabel": "Period",
+      "periodLabel": "Razdoblje",
       "progressHelpTooltip": "Budget Progress: Green (On Track) = 0-79% spent. Yellow (Warning) = 80-99% spent. Red (Over) = 100%+ spent. Colors update automatically as you spend.",
       "progressHelpTooltipAriaLabel": "More information about budget progress and alert thresholds",
-      "remaining": "Remaining",
+      "remaining": "Preostalo",
       "remainingBudget": "{amount} remaining budget",
       "remainingThisMonth": "{amount} remaining this month",
       "rolloverDisabled": "Budget resets each month regardless of spending",
@@ -606,7 +606,7 @@
       "statusOnTrack": "✓ On Track",
       "statusOver": "✖ Over",
       "statusWarning": "⚠ Warning",
-      "title": "Budgets",
+      "title": "Proračuni",
       "totalBudgeted": "Total Budgeted",
       "totalExpenses": "Total expenses",
       "totalSpent": "Total Spent",
@@ -616,18 +616,18 @@
     },
     "events": {
       "_note": "Already internationalized in client.tsx using budget.events namespace",
-      "active": "Active",
-      "completed": "Completed",
+      "active": "Aktivan",
+      "completed": "Završeno",
       "createEvent": "Create Event",
       "daysLeft": "{count} days left",
-      "noEvents": "No active events",
+      "noEvents": "Nema aktivnih događaja",
       "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more",
       "planning": "Planning",
       "progress": "Progress",
-      "remaining": "Remaining",
+      "remaining": "Preostalo",
       "suggestedTemplates": "Suggested Templates",
       "tagTransaction": "Tag to event",
-      "title": "Event Budgets",
+      "title": "Proračuni za događaje",
       "untagTransaction": "Remove from event"
     },
     "gamification": {
@@ -642,11 +642,11 @@
     },
     "merchantRules": {
       "applied": "Applied {count} times",
-      "category": "Category",
+      "category": "Kategorija",
       "createRule": "Always categorize {merchant} as {category}?",
       "deleteRule": "Delete Rule",
       "description": "Auto-categorize transactions by merchant",
-      "merchant": "Merchant",
+      "merchant": "Trgovac",
       "no": "No, just this time",
       "noRules": "No merchant rules yet",
       "noRulesDescription": "Rules are created when you re-categorize transactions",
@@ -660,15 +660,15 @@
       "cashChecking": "Cash & Checking",
       "creditCards": "Credit Cards",
       "history": "Historical Snapshots",
-      "investments": "Investments",
+      "investments": "Ulaganja",
       "liabilityBreakdown": "Liability Breakdown",
-      "loans": "Loans",
+      "loans": "Krediti",
       "milestoneReached": "Milestone reached: {amount}!",
       "mortgage": "Mortgage",
       "noLiabilities": "No liabilities — great job!",
       "property": "Property",
-      "savings": "Savings",
-      "title": "Net Worth",
+      "savings": "Štednja",
+      "title": "Neto vrijednost",
       "totalAssets": "Total Assets",
       "totalLiabilities": "Total Liabilities",
       "totalNetWorth": "Total Net Worth",
@@ -687,8 +687,8 @@
       "annualROI": "Annual ROI",
       "appreciation": "Appreciation",
       "backToProperties": "Back to Properties",
-      "currentBalance": "Current Balance",
-      "currentValue": "Current Value",
+      "currentBalance": "Trenutno stanje",
+      "currentValue": "Trenutna vrijednost",
       "equity": "Equity",
       "interestRate": "Interest Rate",
       "lender": "Lender",
@@ -700,12 +700,12 @@
       "noProperties": "No properties tracked",
       "noPropertiesDescription": "Add your first property to track equity and appreciation",
       "notFound": "Property not found",
-      "notes": "Notes",
+      "notes": "Bilješke",
       "occupancyRate": "Occupancy Rate",
       "propertyTax": "Property Tax",
       "purchasePrice": "Purchase Price",
       "rentalROI": "Rental ROI",
-      "title": "Properties",
+      "title": "Nekretnine",
       "totalAppreciation": "Total Appreciation",
       "totalProperties": "Total Properties",
       "totalValue": "Total Value"
@@ -720,8 +720,8 @@
       "gross": "Gross",
       "grossVsNet": "Gross vs Net",
       "markExpecting": "Expect Refund",
-      "net": "Net",
-      "notes": "Notes",
+      "net": "Neto",
+      "notes": "Bilješke",
       "notesPlaceholder": "Any additional details about this refund...",
       "partial": "Partial refund",
       "received": "Refund received",
@@ -736,7 +736,7 @@
       "approveKey": "Approve (→/A)",
       "noDescription": "No description",
       "progress": "{reviewed} of {total} reviewed",
-      "skip": "Skip",
+      "skip": "Preskoči",
       "skipKey": "Skip (←/F)",
       "subtitle": "Categorize your uncategorized transactions",
       "swipeLeft": "Swipe left to skip",
@@ -761,15 +761,15 @@
       "perCategory": "By Category",
       "remaining": "remaining",
       "safe": "On Track",
-      "title": "Safe to Spend",
+      "title": "Sigurno za trošenje",
       "totalSafe": "Total Safe to Spend"
     },
     "scenarios": {
       "_note": "Already internationalized in client.tsx using budget.scenarios namespace",
-      "after": "After",
+      "after": "Nakon",
       "amountLabel": "Amount",
       "annualSavings": "Annual Savings",
-      "before": "Before",
+      "before": "Prije",
       "healthScore": "Health Score",
       "impact": "Impact",
       "monthlyCashFlow": "Monthly Cash Flow",
@@ -801,10 +801,10 @@
     },
     "templates": {
       "backToSchool": "Back to School",
-      "categories": "Categories",
+      "categories": "Kategorije",
       "holidaySeason": "Holiday Season",
       "homeImprovement": "Home Improvement",
-      "preview": "Preview",
+      "preview": "Pregled",
       "summerTravel": "Summer Travel",
       "taxSeason": "Tax Season",
       "title": "Budget Templates",
@@ -813,9 +813,9 @@
     },
     "weeklyRecap": {
       "dismissed": "Dismissed for this week",
-      "lastWeek": "Last week",
-      "thisWeek": "This week",
-      "title": "Weekly Recap",
+      "lastWeek": "Prošli tjedan",
+      "thisWeek": "Ovaj tjedan",
+      "title": "Tjedni sažetak",
       "topCategories": "Top Categories",
       "viewFullReview": "View Full Review"
     }
@@ -825,9 +825,9 @@
     "categorize": "Categorize",
     "clearSelection": "Clear selection",
     "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
+    "delete": "Obriši",
     "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
+    "export": "Izvezi",
     "noSubcategory": "No subcategory",
     "selectAll": "Select all",
     "selectCategory": "Select category...",
@@ -835,7 +835,7 @@
   },
   "calculators": {
     "budgetAnalyzer": {
-      "actual": "Actual",
+      "actual": "Stvarno",
       "balanced": "Your Budget is Balanced!",
       "description": "Analyze your spending against the popular budgeting rule",
       "enterSpending": "Enter your monthly spending by category:",
@@ -849,7 +849,7 @@
       "needsExamples": "rent, utilities, groceries",
       "over": "Over",
       "ruleExplanation": "The 50/30/20 Rule",
-      "savings": "Savings",
+      "savings": "Štednja",
       "savingsDescription": "Emergency fund, investments, retirement, extra debt payments",
       "savingsExamples": "savings, investments, extra debt",
       "subtitle": "See how your budget measures up",
@@ -865,7 +865,7 @@
       "back": "Back to calculators",
       "calculate": "Calculate",
       "months": "months",
-      "reset": "Reset",
+      "reset": "Poništi",
       "save": "Save Plan",
       "years": "years"
     },
@@ -905,20 +905,20 @@
       "apr": "APR (%)",
       "avalanche": "Avalanche Strategy",
       "avalancheDescription": "Pay highest interest first to save the most money",
-      "balance": "Balance",
-      "debtName": "Name",
+      "balance": "Stanje",
+      "debtName": "Naziv",
       "debtNamePlaceholder": "Debt {number}",
       "description": "Compare snowball vs avalanche strategies to pay off debt faster",
       "extraMonthlyPayment": "Extra Monthly Payment",
       "extraMonthlyPaymentHelp": "Additional amount you can pay beyond minimums each month",
       "minimumPayment": "Min Payment",
-      "month": "Month",
+      "month": "Mjesec",
       "morePsychological": "Motivational wins",
-      "payment": "Payment",
+      "payment": "Plaćanje",
       "paymentSchedule": "Payment Schedule",
       "payoffDate": "Payoff Time",
       "recommended": "Recommended",
-      "remaining": "Remaining",
+      "remaining": "Preostalo",
       "removeDebt": "Remove debt",
       "savingsDescription": "You'll save {amount} in interest and be debt-free {months} months sooner with the avalanche method",
       "savingsTitle": "Interest Savings with Avalanche",
@@ -994,7 +994,7 @@
       "tableNominal": "Nominal Value",
       "tableReal": "Real Value",
       "tableTitle": "Year-by-Year Breakdown",
-      "tableYear": "Year",
+      "tableYear": "Godina",
       "timeHorizon": "Time Horizon (Years)",
       "title": "Inflation Impact Calculator"
     },
@@ -1074,10 +1074,10 @@
       "monthlyPayment": "Monthly Payment",
       "payoffMonths": "Payoff Time",
       "resultTitle": "Payment Summary",
-      "scheduleBalance": "Balance",
+      "scheduleBalance": "Stanje",
       "scheduleInterest": "Interest",
-      "scheduleMonth": "Month",
-      "schedulePayment": "Payment",
+      "scheduleMonth": "Mjesec",
+      "schedulePayment": "Plaćanje",
       "schedulePrincipal": "Principal",
       "scheduleTitle": "Amortization Schedule",
       "showFullSchedule": "Show Full Schedule",
@@ -1091,7 +1091,7 @@
     },
     "netWorth": {
       "description": "View your complete financial picture with assets and liabilities",
-      "title": "Net Worth"
+      "title": "Neto vrijednost"
     },
     "property": {
       "description": "Track property values, vehicles, and other assets",
@@ -1116,7 +1116,7 @@
       "formulaText": "Accumulation: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | Withdrawal: Balance_n = Balance_(n-1)(1+r) - W",
       "heroInsufficient": "Your savings may run out at age {age}",
       "heroInsufficientBadge": "Action Needed",
-      "heroNeutralBadge": "Close",
+      "heroNeutralBadge": "Zatvori",
       "heroSufficient": "Your savings will last {years} years in retirement",
       "heroSufficientBadge": "On Track",
       "inflationRate": "Inflation Rate (%)",
@@ -1163,25 +1163,25 @@
       "totalContributions": "Total Contributions"
     },
     "subscriptionCost": {
-      "addSubscription": "Add Subscription",
-      "amount": "Amount",
+      "addSubscription": "Dodaj pretplatu",
+      "amount": "Iznos",
       "breakdown": "Essential vs Non-Essential",
       "byCategory": "By Category",
-      "daily": "Daily",
+      "daily": "Dnevno",
       "description": "Track and analyze the true cost of your subscriptions",
       "essential": "Essential",
       "essentialCost": "Essential",
       "frequency": {
         "annual": "Annual",
-        "biweekly": "Bi-weekly",
-        "label": "Frequency",
-        "monthly": "Monthly",
-        "quarterly": "Quarterly",
-        "weekly": "Weekly"
+        "biweekly": "Svaka dva tjedna",
+        "label": "Učestalost",
+        "monthly": "Mjesečno",
+        "quarterly": "Kvartalno",
+        "weekly": "Tjedno"
       },
-      "monthly": "Monthly",
+      "monthly": "Mjesečno",
       "monthlyIncome": "Monthly Income",
-      "name": "Name",
+      "name": "Naziv",
       "namePlaceholder": "e.g., Netflix, Spotify",
       "nonEssentialCost": "Non-Essential",
       "perYear": "/year",
@@ -1193,7 +1193,7 @@
       "subtitle": "See where your recurring money goes",
       "title": "Subscription Cost Calculator",
       "totalCost": "Total Subscription Cost",
-      "yearly": "Yearly",
+      "yearly": "Godišnje",
       "yourSubscriptions": "Your Subscriptions"
     },
     "transparency": {
@@ -1239,7 +1239,7 @@
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
     "dialog": {
-      "cancel": "Cancel",
+      "cancel": "Odustani",
       "description": "Add bill reminders to your calendar",
       "deselectAll": "Deselect all",
       "export": "Export {count} subscription(s)",
@@ -1257,42 +1257,42 @@
     "selectSubscriptions": "Select Subscriptions..."
   },
   "categories": {
-    "cancel": "Cancel",
+    "cancel": "Odustani",
     "cannotDeleteDefault": "Cannot delete default categories",
     "categoryNameLabel": "Category Name *",
     "categoryNamePlaceholder": "e.g., Home Expenses",
     "colorLabel": "Color",
     "createCategory": "Create Category",
     "createFirstCategory": "Create Your First Category",
-    "default": "Default",
-    "delete": "Delete",
+    "default": "Zadano",
+    "delete": "Obriši",
     "deleteCategoryAria": "Delete category",
     "deleteConfirm": "Delete \"{name}\"? This cannot be undone.",
     "deleteFailed": "Failed to delete category",
-    "edit": "Edit",
+    "edit": "Uredi",
     "editCategory": "Edit Category",
     "editCategoryAria": "Edit category",
-    "expense": "Expense",
-    "income": "Income",
+    "expense": "Rashod",
+    "income": "Prihod",
     "loading": "Loading categories...",
     "nameRequired": "Category name is required",
     "newCategory": "New Category",
     "noCategories": "No categories found",
-    "save": "Save",
+    "save": "Spremi",
     "saveFailed": "Failed to save category",
     "subcategoriesLabel": "Subcategories (comma-separated)",
     "subcategoriesPlaceholder": "e.g., Rent, Maintenance, Insurance",
     "subtitle": "Manage your budget categories and subcategories",
     "tipLabel": "Tip:",
     "tipText": "Default categories cannot be edited or deleted. Create custom categories for your specific needs.",
-    "title": "Categories",
-    "typeLabel": "Type"
+    "title": "Kategorije",
+    "typeLabel": "Vrsta"
   },
   "chatbot": {
     "buttons": {
       "clearHistory": "Clear chat history",
       "exportConversation": "Export conversation",
-      "send": "Send"
+      "send": "Pošalji"
     },
     "disabled": {
       "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
@@ -1319,17 +1319,17 @@
     },
     "messages": {
       "dataAccessed": "Data accessed:",
-      "error": "Error",
+      "error": "Greška",
       "thinking": "Thinking..."
     }
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "Radnje",
+      "budget": "Proračun",
+      "income": "Prihod",
+      "spending": "Potrošnja",
+      "trends": "Trendovi"
     }
   },
   "chatbotOptIn": {
@@ -1380,22 +1380,22 @@
     "title": "Enable Budget Chatbot?"
   },
   "columnMapper": {
-    "amount": "Amount",
+    "amount": "Iznos",
     "amountColumn": "Amount Column",
     "applyMapping": "Apply Mapping",
     "bankStatementFormat": "Bank Statement Format",
-    "cancel": "Cancel",
+    "cancel": "Odustani",
     "columnNumber": "Column {number}",
     "creditColumn": "Credit Column",
-    "date": "Date",
+    "date": "Datum",
     "dateColumn": "Date Column",
     "debitColumn": "Debit Column",
     "debitCreditColumns": "Debit/Credit Columns (e.g., Home Trust)",
-    "delete": "Delete",
+    "delete": "Obriši",
     "description": "Auto-detection confidence is low. Please manually map columns.",
     "descriptionColumn": "Description Column",
-    "descriptionHeader": "Description",
-    "dismiss": "Dismiss",
+    "descriptionHeader": "Opis",
+    "dismiss": "Odbaci",
     "lastUsed": "Last used: {date}",
     "mapColumnsToFields": "Map Columns to Fields",
     "pdfPreview": "PDF Data Preview (First 5 Rows)",
@@ -1409,39 +1409,39 @@
     "useSavedMapping": "Use Saved Mapping"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "Nema pronađenih rezultata.",
+    "search": "Pretraži...",
+    "select": "Odaberite..."
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
+      "addTransaction": "Dodaj transakciju",
+      "budgets": "Proračuni",
+      "categories": "Kategorije",
       "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
+      "dashboard": "Nadzorna ploča",
       "exportData": "Export Data",
-      "futurePlans": "Future Plans",
+      "futurePlans": "Budući planovi",
       "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
+      "importCsv": "Uvezi CSV",
+      "investments": "Ulaganja",
       "lightTheme": "Light Theme",
-      "loans": "Loans",
+      "loans": "Krediti",
       "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "reports": "Izvještaji",
+      "retirement": "Mirovina",
+      "scanReceipt": "Skeniraj račun",
+      "settings": "Postavke",
+      "transactions": "Transakcije"
     },
     "groups": {
-      "appearance": "Appearance",
+      "appearance": "Izgled",
       "quickActions": "Quick Actions",
       "tools": "Tools & Settings",
       "tracking": "Tracking & Analysis",
       "wealth": "Wealth & Planning"
     },
-    "noResults": "No results found.",
+    "noResults": "Nema pronađenih rezultata.",
     "placeholder": "Type a command or search..."
   },
   "common": {
@@ -1459,122 +1459,122 @@
     "confirmCategorization": "Confirm this categorization to improve accuracy",
     "learnFromThis": "Learn from this",
     "lowConfidence": "Low Confidence",
-    "moderate": "Moderate",
+    "moderate": "Umjereno",
     "veryConfident": "Very Confident"
   },
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "Dodaj račun",
+        "allTransactions": "Sve transakcije",
+        "imported": "Uvezeno",
+        "netWorth": "Neto vrijednost",
+        "noAccounts": "Još nema dodanih računa",
+        "title": "Stanja računa",
+        "viewAll": "Prikaži sve"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
+        "createBudget": "Stvori proračun",
+        "noBudgets": "Nema postavljenih proračuna",
         "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "remaining": "Preostalo",
+        "spent": "Potrošeno",
+        "title": "Napredak proračuna",
+        "viewAll": "Prikaži sve proračune"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "Nema aktivnih događaja",
+        "title": "Proračuni za događaje",
+        "viewAll": "Prikaži sve"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "addTransactions": "Dodaj transakcije",
+        "expenses": "Rashodi",
+        "income": "Prihod",
+        "net": "Neto",
+        "noData": "Još nema transakcija",
+        "thisMonth": "Ovaj mjesec",
+        "title": "Prihodi vs Rashodi"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "Rashodi",
+        "income": "Prihod",
+        "lastSixMonths": "Posljednjih 6 mjeseci",
+        "needMoreData": "Dodajte transakcije za 2+ mjeseca za pregled trendova",
+        "notEnoughData": "Nedovoljno povijesti",
+        "title": "Mjesečni trendovi"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "assets": "Imovina",
+        "liabilities": "Obveze",
+        "title": "Neto vrijednost",
+        "viewDetails": "Prikaži detalje"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "Dodaj transakciju",
+        "noTransactions": "Još nema transakcija",
+        "title": "Nedavne transakcije",
+        "uncategorized": "Nekategorizirano",
+        "viewAll": "Prikaži sve"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
+        "caution": "Pažljivo trošite",
+        "createBudget": "Stvori proračun",
+        "dailyBudget": "Dnevni proračun",
+        "danger": "Prekoračen proračun",
         "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
+        "noBudgets": "Proračuni još nisu postavljeni",
+        "noData": "Proračuni još nisu postavljeni",
         "overBudget": "{amount} over budget",
-        "perCategory": "Per category",
+        "perCategory": "Po kategoriji",
         "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "safe": "Na dobrom putu",
+        "title": "Sigurno za trošenje",
+        "totalSafe": "Ukupno sigurno za trošenje",
+        "viewAll": "Prikaži sve"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
+        "addTransactions": "Dodaj transakcije",
         "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "total": "Total",
-        "uncategorized": "Uncategorized"
+        "noData": "Još nema praćene potrošnje",
+        "thisMonth": "Ovaj mjesec",
+        "title": "Potrošnja po kategoriji",
+        "total": "Ukupno",
+        "uncategorized": "Nekategorizirano"
       },
       "streaks": {
         "badges": "badges",
         "dayStreak": "day streak",
         "points": "points",
-        "title": "Streaks & Badges"
+        "title": "Nizovi i značke"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
+        "addSubscription": "Dodaj pretplatu",
         "dueIn": "Due in {days} days",
         "dueToday": "Due today",
         "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "noBills": "Nema nadolazećih računa",
+        "title": "Nadolazeći računi",
+        "viewAll": "Prikaži sve"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
+        "title": "Tjedni sažetak",
+        "viewFull": "Potpuni pregled",
         "vsLastWeek": "vs last week"
       }
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
+    "alwaysVisible": "Uvijek vidljivo",
+    "ariaLabel": "Prilagodi izgled nadzorne ploče",
+    "button": "Prilagodi",
+    "description": "Prikaži ili sakrij widgete. Povlačite widgete na nadzornoj ploči za promjenu redoslijeda.",
+    "reorderDescription": "Za promjenu redoslijeda widgeta, povlačite ih izravno na nadzornoj ploči. Koristite miš ili dodir za hvatanje ručke (⋮⋮) na svakoj kartici.",
+    "reorderTitle": "Promijeni redoslijed widgeta",
+    "resetButton": "Vrati na zadano",
+    "title": "Prilagodi nadzornu ploču",
     "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
+    "widgetVisibility": "Vidljivost widgeta",
     "widgetsVisible": "{visible} of {total} widgets visible"
   },
   "debtAnalysis": {
@@ -1610,17 +1610,17 @@
     "comparison": {
       "description": "Side-by-side comparison of your active loans",
       "headers": {
-        "balance": "Balance",
+        "balance": "Stanje",
         "interestRate": "Interest Rate",
-        "loan": "Loan",
+        "loan": "Kredit",
         "monthlyPayment": "Monthly Payment",
         "percentOfTotal": "% of Total Debt"
       },
       "title": "Loan Comparison",
-      "total": "Total"
+      "total": "Ukupno"
     },
     "empty": {
-      "addFirstLoan": "Add Your First Loan",
+      "addFirstLoan": "Dodajte prvi kredit",
       "description": "You don't have any active loans. Add a loan to see debt analytics.",
       "title": "No Debt to Analyze"
     },
@@ -1633,13 +1633,13 @@
     "activeLoansTitle": "Active Loans",
     "addLoan": "Add Loan",
     "avgRate": "Avg Rate",
-    "balance": "Balance",
+    "balance": "Stanje",
     "monthlyPayment": "Monthly Payment",
     "paidOff": "{percent}% paid off",
     "title": "Debt Overview",
     "totalDebt": "Total Debt",
     "upcomingPayments": "Upcoming Payments",
-    "viewAll": "View All",
+    "viewAll": "Prikaži sve",
     "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
   },
   "debtPayoff": {
@@ -1647,11 +1647,11 @@
     "addDebtTitle": "Add Debt",
     "addManually": "Add Manually",
     "apr": "APR %",
-    "balance": "Balance",
+    "balance": "Stanje",
     "baselineComparison": "By using this strategy, you save {interest} in interest and pay off {months} months sooner compared to minimum payments only.",
-    "cancel": "Cancel",
+    "cancel": "Odustani",
     "debtFreeDate": "Debt-Free Date",
-    "debtName": "Name",
+    "debtName": "Naziv",
     "debtNamePlaceholder": "e.g. Credit Card, Car Loan",
     "debtOverview": "Debt Overview",
     "goToLoans": "Go to Loans",
@@ -1662,7 +1662,7 @@
     "payoffChart": "Payoff Chart",
     "payoffTimeline": "Payoff Timeline",
     "results": "Results",
-    "save": "Save",
+    "save": "Spremi",
     "saveScenarioTitle": "Save Scenario",
     "savedScenarios": "Saved Scenarios",
     "scenarioNamePlaceholder": "e.g. Aggressive avalanche plan",
@@ -1676,7 +1676,7 @@
     "weightedApr": "Weighted APR"
   },
   "debug": {
-    "actions": "Actions",
+    "actions": "Radnje",
     "backToDashboard": "Back to Dashboard",
     "clearAllData": "Clear All Data (Dangerous!)",
     "clearConfirm": "Clear ALL data? This cannot be undone!",
@@ -1686,13 +1686,13 @@
     "databaseInfo": "Database Information",
     "devIsolationNote": "Development data is isolated from production. Test freely without affecting real users.",
     "development": "DEVELOPMENT",
-    "error": "Error",
+    "error": "Greška",
     "exportAllData": "Export All Data (Backup)",
     "exportFailed": "Export failed: {error}",
     "exportSuccess": "Data exported successfully!",
     "importCsvData": "Import CSV Data",
     "loading": "Loading database information...",
-    "name": "Name",
+    "name": "Naziv",
     "noDataFound": "No Data Found",
     "noDataReason": "Your transactions are not showing up. This could be because:",
     "noDataReason1": "Data was cleared during development",
@@ -1705,7 +1705,7 @@
     "title": "Database Debug",
     "titleFull": "Database Debug & Recovery",
     "totalRecords": "Total Records",
-    "version": "Version"
+    "version": "Verzija"
   },
   "designSystem": {
     "a11y": {
@@ -1728,14 +1728,14 @@
     "checked": "Checked",
     "colors": "Colors",
     "componentStates": "Component States",
-    "dark": "Dark",
-    "default": "Default",
+    "dark": "Tamno",
+    "default": "Zadano",
     "defaultCard": "Default Card",
     "defaultCardDescription": "Basic card with default styles",
     "defaultInput": "Default Input",
     "designTokens": "Design Tokens",
     "destructive": "Destructive",
-    "disabled": "Disabled",
+    "disabled": "Onemogućeno",
     "disabledInput": "Disabled Input",
     "disabledPlaceholder": "Disabled...",
     "durationScale": "Duration Scale",
@@ -1754,23 +1754,23 @@
     "heading3": "Heading 3 (30px)",
     "heading4": "Heading 4 (24px)",
     "heading5": "Heading 5 (20px)",
-    "highContrast": "High Contrast",
+    "highContrast": "Visoki kontrast",
     "highlightedCard": "Highlighted Card",
     "highlightedCardDescription": "Card with primary border",
     "hover": "Hover",
     "inputs": "Inputs",
     "invalidPlaceholder": "Invalid...",
-    "large": "Large",
-    "light": "Light",
+    "large": "Veliko",
+    "light": "Svjetlo",
     "motionTokens": "Motion Tokens",
-    "off": "Off",
-    "on": "On",
+    "off": "Isključeno",
+    "on": "Na",
     "option1": "Option 1",
     "option2": "Option 2",
     "outline": "Outline",
     "primary": "Primary",
     "radioButtons": "Radio Buttons",
-    "reduceMotion": "Reduce Motion",
+    "reduceMotion": "Smanji kretanje",
     "secondary": "Secondary",
     "shadowTokens": "Shadow Tokens",
     "sizes": "Sizes",
@@ -1780,7 +1780,7 @@
     "states": "States",
     "subtitle": "Interactive showcase of all components, design tokens, and accessibility features",
     "switches": "Switches",
-    "themeMode": "Theme Mode",
+    "themeMode": "Način teme",
     "title": "Design System Playground",
     "typography": "Typography",
     "unchecked": "Unchecked",
@@ -1795,7 +1795,7 @@
     "confirmAction": "Potvrdi radnju"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "Povuci za promjenu redoslijeda widgeta"
   },
   "duration": {
     "months": "{count, plural, =1 {1 month} other {# months}}",
@@ -1804,59 +1804,59 @@
   },
   "emptyStates": {
     "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
+      "description": "Stvorite proračune za praćenje potrošnje u različitim kategorijama i ostvarivanje financijskih ciljeva.",
+      "heading": "Nema stvorenih proračuna",
+      "primaryCta": "Stvorite svoj prvi proračun"
     },
     "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
+      "description": "Stvorite prilagođene kategorije za organiziranje transakcija izvan zadanih.",
+      "heading": "Nema prilagođenih kategorija",
+      "primaryCta": "Dodaj kategoriju"
     },
     "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
+      "description": "Počnite uvozom bankovnih transakcija ili ručnim dodavanjem računa za financijski pregled.",
+      "heading": "Dobrodošli u aplikaciju za proračun!",
+      "primaryCta": "Uvezi CSV",
+      "secondaryCta": "Dodaj transakciju"
     },
     "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
+      "description": "Postavite financijske ciljeve poput kupnje kuće, štednje za obrazovanje ili planiranja odmora.",
+      "heading": "Nema budućih planova",
+      "primaryCta": "Stvori cilj"
     },
     "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
+      "description": "Pratite investicijske račune i udjele za praćenje performansi portfelja i neto vrijednosti.",
+      "heading": "Nema praćenih ulaganja",
+      "primaryCta": "Dodaj investicijski račun"
     },
     "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
+      "description": "Pratite kredite, hipoteke i dugove za vizualizaciju napretka i planiranje plaćanja.",
+      "heading": "Nema praćenih kredita",
+      "primaryCta": "Dodajte prvi kredit"
     },
     "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
+      "description": "Dodajte transakcije i proračune za generiranje uvida o obrascima potrošnje i trendovima.",
+      "heading": "Nema podataka za izvještaj",
+      "primaryCta": "Dodaj transakcije",
+      "secondaryCta": "Uvezi CSV"
     },
     "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
+      "description": "Planirajte mirovinu praćenjem računa, procjenom potreba i vizualizacijom mirovinskog plana.",
+      "heading": "Nema mirovinskih planova",
+      "primaryCta": "Počni planirati"
     },
     "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
+      "description": "Počnite pratiti potrošnju dodavanjem prve transakcije. Možete dodati ručno ili uvesti iz CSV datoteke.",
+      "heading": "Još nema transakcija",
+      "primaryCta": "Dodaj transakciju",
+      "secondaryCta": "Uvezi CSV"
     }
   },
   "errorRecovery": {
     "aiAnalysis": "AI Analysis:",
     "closeModal": "Close modal",
     "footer": {
-      "close": "Close",
+      "close": "Zatvori",
       "needHelp": "Need more help?",
       "viewGuide": "View troubleshooting guide"
     },
@@ -1881,11 +1881,11 @@
     "technical": {
       "canRecover": "Can Recover:",
       "errorCategory": "Error Category:",
-      "no": "No",
+      "no": "Ne",
       "severity": "Severity:",
       "suggestions": "Suggestions:",
       "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "yes": "Da"
     },
     "title": "Import Failed"
   },
@@ -1900,17 +1900,17 @@
     "dataExportedSuccess": "Data exported successfully!",
     "dataImportedSuccess": "Data imported successfully! Refresh the page to see changes.",
     "dateRange": "Date Range",
-    "dateRange_all": "All Time",
+    "dateRange_all": "Sve vrijeme",
     "dateRange_custom": "Custom Range",
     "dateRange_last12months": "Last 12 Months",
     "dateRange_last3months": "Last 3 Months",
-    "dateRange_last6months": "Last 6 Months",
+    "dateRange_last6months": "Posljednjih 6 mjeseci",
     "dateRange_ytd": "Year to Date",
     "deleteAllData": "Delete All Data",
     "deleteAllDataDescription": "Permanently delete all accounts, transactions, budgets, and settings. This action cannot be undone.",
     "deleteEverything": "Delete Everything",
-    "deselectAll": "Deselect All",
-    "endDate": "End Date",
+    "deselectAll": "Poništi odabir svega",
+    "endDate": "Datum završetka",
     "excelExportedSuccess": "Excel workbook exported successfully! ({sheets} sheets, {size} KB)",
     "excelWorkbookDescription": "Comprehensive Excel workbook with 12 sheets: Dashboard, Transactions, Monthly Summary, Category Analysis, Accounts, Budgets, Subscriptions, Loans, Investments, Net Worth, Goals, and Data Dictionary. Includes professional formatting, formulas, and charts.",
     "excelWorkbookTitle": "Financial Summary Workbook (Excel)",
@@ -1925,7 +1925,7 @@
     "failedToImport": "Failed to import data. Please check the file format.",
     "fullBackupDescription": "Export all data including accounts, transactions, budgets, goals, and settings. Use this for complete backups that can be restored later.",
     "fullBackupTitle": "Full Backup (JSON)",
-    "importData": "Import Data",
+    "importData": "Uvezi podatke",
     "importJson": "Import JSON",
     "importing": "Importing...",
     "invalidBackupFormat": "Invalid backup file format",
@@ -1934,33 +1934,33 @@
     "restoreDescription": "Import a previously exported JSON backup file",
     "restoreFromBackup": "Restore from Backup",
     "restoreWarning": "Warning: This will replace ALL existing data with the backup",
-    "selectAll": "Select All",
-    "sheetAccounts": "Accounts",
+    "selectAll": "Odaberi sve",
+    "sheetAccounts": "Računi",
     "sheetAccountsDesc": "All accounts with balances",
-    "sheetBudgets": "Budgets",
+    "sheetBudgets": "Proračuni",
     "sheetBudgetsDesc": "Budget vs actual comparison",
     "sheetCategoryAnalysis": "Category Analysis",
     "sheetCategoryAnalysisDesc": "Spending by category",
-    "sheetDashboard": "Dashboard",
+    "sheetDashboard": "Nadzorna ploča",
     "sheetDashboardDesc": "Executive summary with key metrics",
     "sheetDataDictionary": "Data Dictionary",
     "sheetDataDictionaryDesc": "Field explanations",
-    "sheetGoals": "Goals",
+    "sheetGoals": "Ciljevi",
     "sheetGoalsDesc": "Savings goals progress",
-    "sheetInvestments": "Investments",
+    "sheetInvestments": "Ulaganja",
     "sheetInvestmentsDesc": "Portfolio holdings",
-    "sheetLoans": "Loans",
+    "sheetLoans": "Krediti",
     "sheetLoansDesc": "Debt with amortization schedules",
     "sheetMonthlySummary": "Monthly Summary",
     "sheetMonthlySummaryDesc": "Month-by-month overview",
-    "sheetNetWorth": "Net Worth",
+    "sheetNetWorth": "Neto vrijednost",
     "sheetNetWorthDesc": "Assets vs liabilities",
-    "sheetSubscriptions": "Subscriptions",
+    "sheetSubscriptions": "Pretplate",
     "sheetSubscriptionsDesc": "Recurring costs tracking",
-    "sheetTransactions": "Transactions",
+    "sheetTransactions": "Transakcije",
     "sheetTransactionsDesc": "Complete transaction history",
     "sheetsToInclude": "{selected} of {total}",
-    "startDate": "Start Date",
+    "startDate": "Datum početka",
     "subtitle": "Backup your data or export to different formats",
     "tipExcel": "<strong>Excel export</strong> is best for analysis and sharing - it includes formatting, formulas, and multiple sheets",
     "tipJson": "<strong>JSON backup</strong> is best for restoring data - keep regular backups in a safe location",
@@ -1974,9 +1974,9 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
+      "cancel": "Odustani",
       "done": "Done!",
-      "download": "Download",
+      "download": "Preuzmi",
       "export": "Export Data"
     },
     "complete": {
@@ -1984,10 +1984,10 @@
       "success": "Export complete! Check your downloads folder."
     },
     "dataSummary": {
-      "accounts": "Accounts",
+      "accounts": "Računi",
       "estimatedSize": "Est. Size",
       "title": "Data Summary",
-      "transactions": "Transactions"
+      "transactions": "Transakcije"
     },
     "exporting": {
       "pleaseWait": "Please wait, this may take a moment",
@@ -2019,12 +2019,12 @@
       }
     },
     "password": {
-      "confirm": "Confirm Password",
+      "confirm": "Potvrdi lozinku",
       "confirmPlaceholder": "Confirm password",
       "hint": "Password Hint (Optional)",
       "hintNote": "This hint will be stored unencrypted in the file",
       "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
+      "label": "Lozinka",
       "minLength": "Password must be at least 8 characters",
       "mismatch": "Passwords do not match",
       "placeholder": "Enter password (min 8 characters)",
@@ -2034,18 +2034,18 @@
     "title": "Export Data"
   },
   "filters": {
-    "account": "Account",
+    "account": "Račun",
     "allAccounts": "All accounts",
     "allCategories": "All categories",
     "allTypes": "All types",
     "apply": "Apply filters",
-    "category": "Category",
+    "category": "Kategorija",
     "clearFilters": "Clear filters",
     "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
+    "expense": "Rashod",
+    "income": "Prihod",
     "search": "Search transactions...",
-    "type": "Type"
+    "type": "Vrsta"
   },
   "footer": {
     "copyright": "© {year} {brandName}",
@@ -2058,11 +2058,11 @@
     "tagline": "Premium proračun s jednokratnim nadogradnjama."
   },
   "fridayReview": {
-    "back": "Back",
+    "back": "Natrag",
     "backToDashboard": "Back to Dashboard",
     "closeReview": "Close review",
-    "continue": "Continue",
-    "done": "Done",
+    "continue": "Nastavi",
+    "done": "Gotovo",
     "goToStep": "Go to {step}",
     "loading": "Loading your weekly review...",
     "placeholderContent": "Step content will be implemented in subsequent tasks (F-021 through F-025).",
@@ -2088,7 +2088,7 @@
       },
       "upcoming": {
         "subtitle": "Heads up for next week.",
-        "title": "Upcoming Bills"
+        "title": "Nadolazeći računi"
       },
       "welcome": {
         "subtitle": "Let's check in on your week.",
@@ -2100,12 +2100,12 @@
   "healthScore": {
     "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "Dodajte transakcije za pregled vaše",
+      "line2": "Ocjene financijskog zdravlja"
     },
     "grade": "Grade: {grade}",
     "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "title": "Financijsko zdravlje",
     "history": {
       "title": "Povijest rezultata",
       "monthsOfData": "{count} {count, plural, =1 {mjesec} other {mjeseci}} podataka",
@@ -2121,7 +2121,7 @@
   "holdingModal": {
     "addHolding": "Add Holding",
     "canadianStockHint": "Use .TO for Canadian stocks (e.g., TD.TO, VGRO.TO)",
-    "cancel": "Cancel",
+    "cancel": "Odustani",
     "editHolding": "Edit Holding",
     "enterSymbol": "Please enter a stock symbol",
     "failedToSave": "Failed to save holding",
@@ -2142,7 +2142,7 @@
   },
   "iconPicker": {
     "clearSearch": "Clear Search",
-    "close": "Close",
+    "close": "Zatvori",
     "currentIcon": "Current Icon",
     "foundCount": "Found {count} icon(s)",
     "iconsAvailable": "{count} icons available",
@@ -2158,7 +2158,7 @@
     "autoDetect": "Auto-detect ({locale})",
     "couldNotParseCSV": "Could not parse CSV file. Please check the file format.",
     "detectedFormat": "Detected Format:",
-    "dismiss": "Dismiss",
+    "dismiss": "Odbaci",
     "duplicateSingular": "duplicate",
     "duplicatesPlural": "duplicates",
     "exportDebugData": "Export Debug Data",
@@ -2208,7 +2208,7 @@
     "tipTryCSV": "Try exporting as CSV instead of PDF from your bank",
     "title": "Import Transactions",
     "transactionSingular": "transaction",
-    "transactionsLabel": "Transactions",
+    "transactionsLabel": "Transakcije",
     "transactionsPlural": "transactions",
     "troubleshootingTips": "💡 Troubleshooting tips:",
     "unableToDetectFormat": "Unable to detect file format. Please try a different file.",
@@ -2217,10 +2217,10 @@
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "Natrag",
+      "cancel": "Odustani",
+      "done": "Gotovo",
+      "import": "Uvezi podatke"
     },
     "complete": {
       "itemsImported": "{count} items imported successfully",
@@ -2249,7 +2249,7 @@
       "encrypted": "This file is encrypted",
       "enterPassword": "Enter password",
       "hint": "Hint: {hint}",
-      "password": "Password"
+      "password": "Lozinka"
     },
     "importing": {
       "pleaseWait": "Please wait, this may take a moment",
@@ -2259,18 +2259,18 @@
       "dataToImport": "Data to Import",
       "exported": "Exported",
       "fileInfo": "File Information",
-      "version": "Version"
+      "version": "Verzija"
     },
     "selectFile": {
       "dragDrop": "or drag and drop here",
       "label": "Click to select a .budget file"
     },
     "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "title": "Uvezi podatke"
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
+      "cancel": "Odustani",
       "create": "Create Account",
       "saving": "Saving...",
       "update": "Update Account"
@@ -2289,7 +2289,7 @@
         "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
       },
       "name": {
-        "label": "Account Name",
+        "label": "Naziv računa",
         "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
       },
       "type": {
@@ -2299,11 +2299,11 @@
           "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
           "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
         },
-        "label": "Account Type"
+        "label": "Vrsta računa"
       }
     },
     "title": {
-      "add": "Add Investment Account",
+      "add": "Dodaj investicijski račun",
       "edit": "Edit Investment Account"
     },
     "validation": {
@@ -2311,35 +2311,35 @@
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "Nema udjela za vizualizaciju. Dodajte udjele za prikaz grafova.",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "Dobitak",
+      "loss": "Gubitak"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
-      "total": "Total"
+      "allocation": "Raspodjela",
+      "costBasis": "Osnovna cijena",
+      "currentValue": "Trenutna vrijednost",
+      "gainLoss": "Dobitak/Gubitak",
+      "percentReturn": "% Povrat",
+      "symbol": "Simbol",
+      "total": "Ukupno"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "Raspodjela po vrsti računa",
+      "gainLoss": "Dobitak/Gubitak po udjelu",
+      "performanceSummary": "Sažetak performansi",
+      "portfolioAllocation": "Raspodjela portfelja po udjelu"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
+      "costBasis": "Osnovna cijena",
+      "currentValue": "Trenutna vrijednost",
       "percentOfPortfolio": "{percent}% of portfolio"
     }
   },
   "investments": {
-    "account": "Account",
-    "addAccount": "Add Account",
+    "account": "Račun",
+    "addAccount": "Dodaj račun",
     "addFirstHolding": "Add Your First Holding",
     "addHolding": "Add Holding",
     "confirmDeleteAccount": {
@@ -2372,7 +2372,7 @@
       "partialPriceFetch": "Fetched {fetched}/{total} prices. Using purchase prices for missing data.",
       "unableToFetchPrices": "Unable to fetch market prices. Using purchase prices."
     },
-    "gainLoss": "Gain/Loss",
+    "gainLoss": "Dobitak/Gubitak",
     "hideDetails": "Hide Details",
     "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
     "loading": "Loading investments...",
@@ -2381,20 +2381,20 @@
     "portfolioAnalysis": "Portfolio Analysis",
     "portfolioAnalysisSubtitle": "Visual breakdown of your investments",
     "pricesUpdated": "Market prices updated {time}",
-    "refresh": "Refresh",
+    "refresh": "Osvježi",
     "refreshPrices": "Refresh Prices",
     "refreshPricesTitle": "Refresh market prices",
     "return": "Return",
     "showDetails": "Show Details",
     "subtitle": "Track your RRSP, TFSA, and investment accounts",
     "table": {
-      "actions": "Actions",
+      "actions": "Radnje",
       "currentPrice": "Current Price",
-      "gainLoss": "Gain/Loss",
+      "gainLoss": "Dobitak/Gubitak",
       "purchasePrice": "Purchase Price",
       "shares": "Shares",
-      "symbol": "Symbol",
-      "value": "Value"
+      "symbol": "Simbol",
+      "value": "Vrijednost"
     },
     "title": "Investment Portfolio",
     "toasts": {
@@ -2405,20 +2405,20 @@
     },
     "totalCost": "Total Cost",
     "totalValue": "Total Value",
-    "value": "Value"
+    "value": "Vrijednost"
   },
   "lanSync": {
     "description": "Sync your budget data across devices on your local network",
     "device": {
-      "connect": "Connect",
-      "connected": "Connected",
-      "disconnect": "Disconnect",
+      "connect": "Poveži",
+      "connected": "Spojeno",
+      "disconnect": "Odspoji",
       "removeDevice": "Remove Device",
-      "sync": "Sync",
+      "sync": "Sinkroniziraj",
       "syncing": "Syncing..."
     },
-    "disabled": "Disabled",
-    "enabled": "Enabled",
+    "disabled": "Onemogućeno",
+    "enabled": "Omogućeno",
     "howItWorks": {
       "step1": {
         "description": "Scan a QR code or enter connection details to pair devices on the same network",
@@ -2444,16 +2444,16 @@
       "title": "Paired Devices"
     },
     "removeDialog": {
-      "cancel": "Cancel",
+      "cancel": "Odustani",
       "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
-      "remove": "Remove",
+      "remove": "Ukloni",
       "title": "Remove Device"
     },
     "syncAll": "Sync All",
     "time": {
       "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
       "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
-      "justNow": "Just now",
+      "justNow": "Upravo sada",
       "lastSync": "Last sync: {time}",
       "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
       "neverSynced": "Never synced"
@@ -2476,7 +2476,7 @@
     },
     "brand": {
       "name": "BudgetPro",
-      "product": "Budget App"
+      "product": "Aplikacija za proračun"
     },
     "comparison": {
       "bankConnections": {
@@ -2618,20 +2618,20 @@
       "demo": {
         "cloudStorage": "Cloud storage",
         "dining": "Dining",
-        "expenses": "Expenses",
+        "expenses": "Rashodi",
         "foodToday": "Food • Today",
         "groceries": "Groceries",
         "groceryStore": "Grocery Store",
-        "income": "Income",
+        "income": "Prihod",
         "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
+        "monthly": "Mjesečno",
         "netWorth": "Net worth",
         "netflix": "Netflix",
         "salary": "Salary",
-        "shopping": "Shopping",
+        "shopping": "Kupovina",
         "spotify": "Spotify",
         "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "yearly": "Godišnje"
       },
       "modes": {
         "budgets": "Proračuni",
@@ -2817,7 +2817,7 @@
   },
   "linkToLoan": {
     "bestMatch": "Best Match",
-    "cancel": "Cancel",
+    "cancel": "Odustani",
     "extra": "Extra",
     "interest": "Interest",
     "linkError": "Failed to link transaction. Please try again.",
@@ -2833,7 +2833,7 @@
   },
   "linkedLoan": {
     "loanPrefix": "Loan: {name}",
-    "unlink": "Unlink",
+    "unlink": "Odvoji",
     "unlinkConfirm": "Unlink this transaction from the loan payment?",
     "unlinkFailed": "Failed to unlink transaction. Please try again.",
     "unlinkFromLoan": "Unlink from loan",
@@ -2842,12 +2842,12 @@
   },
   "loanForm": {
     "autoCalculated": "Auto-calculated: {amount}",
-    "back": "Back",
+    "back": "Natrag",
     "biWeekly": "Bi-Weekly (Every 2 weeks)",
     "biWeeklyPaymentHint": "Bi-weekly payment amount (P&I only)",
-    "cancel": "Cancel",
+    "cancel": "Odustani",
     "createLoan": "Create Loan",
-    "currentBalance": "Current Balance",
+    "currentBalance": "Trenutno stanje",
     "defermentEndDate": "Deferment End Date",
     "failedToSave": "Failed to save loan. Please try again.",
     "frequencyHint": "How often you make payments",
@@ -2860,16 +2860,16 @@
     "loanName": "Loan Name",
     "loanStartDate": "Loan Start Date",
     "loanTerm": "Loan Term (months)",
-    "monthly": "Monthly",
+    "monthly": "Mjesečno",
     "monthlyHomeInsurance": "Monthly Home Insurance",
     "monthlyPMI": "Monthly PMI",
     "monthlyPaymentHint": "Monthly payment amount (P&I only)",
     "monthlyPropertyTax": "Monthly Property Tax",
     "namePlaceholder": "e.g., Primary Mortgage, Car Loan",
-    "next": "Next",
+    "next": "Sljedeće",
     "nextPaymentDate": "Next Payment Date",
     "noAccountLinked": "No account linked",
-    "notes": "Notes",
+    "notes": "Bilješke",
     "notesPlaceholder": "Add any additional notes about this loan...",
     "optionalSettings": "Optional Settings",
     "optionalSettingsDescription": "Additional loan configuration",
@@ -2909,7 +2909,7 @@
     "vehicleModel": "Vehicle Model",
     "vehicleModelPlaceholder": "e.g., Civic, Camry",
     "vehicleYear": "Vehicle Year",
-    "weekly": "Weekly",
+    "weekly": "Tjedno",
     "weeklyPaymentHint": "Weekly payment amount (P&I only)"
   },
   "loanPaymentSelector": {
@@ -2933,7 +2933,7 @@
     "addLoan": "Add Loan",
     "addNewLoan": "Add New Loan",
     "allStatuses": "All Statuses",
-    "allTypes": "All Types",
+    "allTypes": "Sve vrste",
     "amortizationDescription": "Month-by-month breakdown showing how your loan gets paid off",
     "amortizationSchedule": "Amortization Schedule",
     "amortizationTip": "Notice how early payments are mostly interest (red), but later payments are mostly principal (teal). Making extra payments early can save you thousands in interest!",
@@ -2941,20 +2941,20 @@
     "annualPercentageRate": "Annual Percentage Rate",
     "avgInterestRate": "Avg Interest Rate",
     "backToLoans": "Back to Loans",
-    "cancel": "Cancel",
+    "cancel": "Odustani",
     "colorKey": "Color Key",
     "costAnalysis": "Cost Analysis",
     "costAnalysisDescription": "See the total cost of this loan over its lifetime",
     "costExplanation": "You borrowed ${borrowed}, but you'll pay ${totalPay} total. The extra ${interestAmount} is interest at {rate}% APR over {years} years.",
     "costOfBorrowing": "Cost of borrowing",
-    "currentBalance": "Current Balance",
+    "currentBalance": "Trenutno stanje",
     "debtFreeDate": "Debt-Free Date",
-    "delete": "Delete",
+    "delete": "Obriši",
     "deleteError": "Failed to delete loan. Please try again.",
     "deleteLoan": "Delete Loan",
     "deleteLoanConfirmDescription": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
     "deleteLoanConfirmTitle": "Delete Loan?",
-    "edit": "Edit",
+    "edit": "Uredi",
     "editLoan": "Edit Loan",
     "estimatedPayoff": "Estimated payoff",
     "extraCostAbovePrincipal": "Extra cost above principal",
@@ -2983,8 +2983,8 @@
     "monthlyPaymentsCount": "{count} monthly payments",
     "nextPayment": "Next Payment",
     "noLoansMatchFilters": "No loans match your filters",
-    "notAvailable": "N/A",
-    "notes": "Notes",
+    "notAvailable": "N/P",
+    "notes": "Bilješke",
     "originalPrincipal": "Original Principal",
     "overYears": "Over {years} years",
     "payoffDate": "Payoff Date",
@@ -2996,9 +2996,9 @@
     "propertyTax": "Property Tax",
     "scrollToSeeMore": "Scroll down to see more",
     "showingPayments": "Showing first {shown} of {total} payments",
-    "startDate": "Start Date",
+    "startDate": "Datum početka",
     "status": {
-      "active": "Active",
+      "active": "Aktivan",
       "defaulted": "Defaulted",
       "paidOff": "Paid Off",
       "refinanced": "Refinanced"
@@ -3006,22 +3006,22 @@
     "statusLabel": "Status",
     "subtitle": "Manage and track all your loans",
     "table": {
-      "date": "Date",
+      "date": "Datum",
       "interest": "Interest",
-      "month": "Month",
-      "payment": "Payment",
+      "month": "Mjesec",
+      "payment": "Plaćanje",
       "principal": "Principal",
-      "remaining": "Remaining"
+      "remaining": "Preostalo"
     },
     "tabs": {
       "amortizationSchedule": "Amortization Schedule",
       "charts": "Charts",
       "extraPaymentCalculator": "Extra Payment Calculator",
-      "overview": "Overview",
+      "overview": "Pregled",
       "paymentHistory": "Payment History"
     },
     "tip": "Tip",
-    "title": "Loans",
+    "title": "Krediti",
     "tooltip": {
       "amortizationAria": "More information about amortization and loan payoff",
       "amortizationBody": "How your loan gets paid off over time. Each payment covers interest first, then principal. The schedule shows exactly how much goes to each, month by month. Early payments are mostly interest!",
@@ -3048,14 +3048,14 @@
     "youvePaid": "You've paid ${amount} so far"
   },
   "localeSettings": {
-    "currency": "Currency",
+    "currency": "Valuta",
     "formatPreview": "Format Preview",
-    "language": "Language",
-    "monday": "Monday",
+    "language": "Jezik",
+    "monday": "Ponedjeljak",
     "resetToDefaults": "Reset to Browser Defaults",
-    "saveChanges": "Save Changes",
+    "saveChanges": "Spremi promjene",
     "subtitle": "Configure language, region, currency, and formatting preferences",
-    "sunday": "Sunday",
+    "sunday": "Nedjelja",
     "title": "Locale & Formatting",
     "unsavedChanges": "You have unsaved changes",
     "weekStartsOn": "Week Starts On"
@@ -3064,7 +3064,7 @@
     "codeHint": "6-character code shown on the host device",
     "codeInvalid": "Pairing code must be 6 alphanumeric characters",
     "codeRequired": "Pairing code is required",
-    "connect": "Connect",
+    "connect": "Poveži",
     "connecting": "Connecting...",
     "description": "Enter the connection details shown on the host device",
     "fixFormErrors": "Please fix the form errors",
@@ -3074,7 +3074,7 @@
     "helpStep4": "The IP address, port, and pairing code will be displayed below the QR code",
     "helpTitle": "Finding Connection Details",
     "hideHelp": "Hide Help",
-    "ipAddress": "IP Address",
+    "ipAddress": "IP adresa",
     "ipInvalid": "Invalid IP address format (e.g., 192.168.1.100)",
     "ipRequired": "IP address is required",
     "optionalDefault": "optional, default: {port}",
@@ -3097,7 +3097,7 @@
       "trackingAnalysis": "Tracking & Analysis",
       "wealthPlanning": "Wealth & Planning"
     },
-    "title": "More"
+    "title": "Više"
   },
   "nav": {
     "about": "O aplikaciji",
@@ -3158,9 +3158,9 @@
       "enable": "Enable Push Notifications",
       "notSupported": "Not supported in this browser",
       "states": {
-        "default": "Not set",
-        "denied": "Blocked",
-        "granted": "Enabled",
+        "default": "Nije postavljeno",
+        "denied": "Blokirano",
+        "granted": "Omogućeno",
         "unsupported": "Unsupported"
       },
       "title": "Push Notifications"
@@ -3181,11 +3181,11 @@
       "description": "Send a test notification to verify your settings",
       "title": "Test Notification"
     },
-    "title": "Notifications"
+    "title": "Obavijesti"
   },
   "notifications": {
     "clearAll": "Clear all",
-    "dismiss": "Dismiss",
+    "dismiss": "Odbaci",
     "empty": "No notifications",
     "emptyAll": "You're all caught up!",
     "emptySnoozed": "No snoozed notifications",
@@ -3201,11 +3201,11 @@
     },
     "snoozedUntil": "Snoozed for {time}",
     "tabs": {
-      "all": "All",
+      "all": "Sve",
       "snoozed": "Snoozed",
-      "unread": "Unread"
+      "unread": "Nepročitano"
     },
-    "title": "Notifications",
+    "title": "Obavijesti",
     "types": {
       "bill_reminder": "Bill Reminder",
       "budget_alert": "Budget Alert",
@@ -3214,20 +3214,20 @@
     }
   },
   "ocr": {
-    "amountLabel": "Amount",
+    "amountLabel": "Iznos",
     "amountRequired": "Amount *",
     "bestResultPage": "Best result from page {page}",
-    "cancel": "Cancel",
-    "categoryLabel": "Category",
+    "cancel": "Odustani",
+    "categoryLabel": "Kategorija",
     "categoryNamePlaceholder": "Category name",
-    "clear": "Clear",
+    "clear": "Očisti",
     "clickToUpload": "Click to upload",
-    "confidence": "Confidence",
-    "create": "Create",
+    "confidence": "Pouzdanost",
+    "create": "Stvori",
     "createNewCategory": "+ Create new category",
-    "dateLabel": "Date",
+    "dateLabel": "Datum",
     "dateRequired": "Date *",
-    "descriptionLabel": "Description",
+    "descriptionLabel": "Opis",
     "descriptionPlaceholder": "Optional description",
     "errorFileSize": "File size must be less than 10MB",
     "errorInvalidFileType": "Please select a valid image file or PDF (PNG, JPG, GIF, WebP, PDF)",
@@ -3237,10 +3237,10 @@
     "errorRequiredFields": "Please fill in merchant, amount, and date",
     "errorSaveFailed": "Failed to save transaction. Please try again.",
     "goToSettings": "Go to Settings",
-    "merchantLabel": "Merchant",
+    "merchantLabel": "Trgovac",
     "merchantPlaceholder": "e.g. Walmart, Amazon",
     "merchantRequired": "Merchant *",
-    "none": "None",
+    "none": "Ništa",
     "notFound": "Not found",
     "ocrDisabled": "OCR is Disabled",
     "ocrDisabledDescription": "Receipt scanning is currently disabled in your privacy settings. Enable OCR processing to use this feature.",
@@ -3251,11 +3251,11 @@
     "privacyNote": "Privacy Note",
     "privacyNoteDescription": "All OCR processing happens locally in your browser. Your receipt images are never uploaded to any server.",
     "processedPages": "{count} pages processed",
-    "processing": "Processing...",
+    "processing": "Obrada...",
     "processingPage": "Processing page {current} of {total}...",
     "receiptDateAriaLabel": "Receipt date",
     "saveTransaction": "Save Transaction",
-    "scanReceipt": "Scan Receipt",
+    "scanReceipt": "Skeniraj račun",
     "selectCategory": "Select a category",
     "selectSubcategory": "Select a subcategory",
     "subcategoriesPlaceholder": "Subcategories (comma-separated)",
@@ -3322,9 +3322,9 @@
     }
   },
   "onboardingPage": {
-    "back": "Back",
-    "getStarted": "Get Started",
-    "next": "Next",
+    "back": "Natrag",
+    "getStarted": "Početak",
+    "next": "Sljedeće",
     "saving": "Saving...",
     "stepCounter": "Step {current} of {total}",
     "steps": {
@@ -3348,7 +3348,7 @@
       "welcome": {
         "content": "We'll help you set up your profile, choose your currency, and get ready to track your spending.",
         "description": "Let's get your finances organized in minutes.",
-        "title": "Welcome to Budget App"
+        "title": "Dobrodošli u aplikaciju za proračun"
       }
     },
     "welcome": {
@@ -3404,7 +3404,7 @@
       "label": "Current progress"
     },
     "stats": {
-      "budget": "Budget",
+      "budget": "Proračun",
       "daysLeft": "Days Left",
       "projectedTotal": "Projected Total",
       "spentSoFar": "Spent So Far"
@@ -3439,18 +3439,18 @@
     "verifyingConnection": "Verifying connection..."
   },
   "paymentHistoryPanel": {
-    "actions": "Actions",
+    "actions": "Radnje",
     "addPayment": "Add Payment",
     "addPaymentError": "Failed to add payment. Please try again.",
-    "amount": "Amount",
+    "amount": "Iznos",
     "balanceAfter": "Balance After",
-    "cancel": "Cancel",
-    "date": "Date",
-    "delete": "Delete",
+    "cancel": "Odustani",
+    "date": "Datum",
+    "delete": "Obriši",
     "deleteConfirm": "Delete this payment record? This action cannot be undone.",
     "deleteError": "Failed to delete payment. Please try again.",
     "description": "Track your loan payments and link to transactions",
-    "dismiss": "Dismiss",
+    "dismiss": "Odbaci",
     "dismissThisMatch": "Dismiss this match",
     "dismissed": "{count} dismissed",
     "emptyState": "No payment history yet",
@@ -3471,28 +3471,28 @@
     "notesLabel": "Notes (Optional)",
     "notesPlaceholder": "Payment notes...",
     "paymentAmount": "Payment Amount",
-    "paymentDate": "Payment Date",
+    "paymentDate": "Datum plaćanja",
     "principal": "Principal",
     "savePayment": "Save Payment",
     "status": "Status",
     "suggestedMatches": "Suggested Transaction Matches",
     "suggestedMatchesDescription": "We found {count, plural, one {# transaction} other {# transactions}} that might be loan payments",
     "title": "Payment History",
-    "uncategorized": "Uncategorized",
+    "uncategorized": "Nekategorizirano",
     "unlinkConfirm": "Unlink this payment from the transaction?",
     "unlinkError": "Failed to unlink payment. Please try again.",
-    "view": "View",
+    "view": "Pregled",
     "viewTransaction": "View transaction"
   },
   "pinDialog": {
-    "cancel": "Cancel",
+    "cancel": "Odustani",
     "changeDescription": "Change the PIN for this profile.",
     "changePin": "Change PIN",
     "confirmNewPinLabel": "Confirm New PIN",
     "confirmNewPinPlaceholder": "Confirm new PIN",
-    "continue": "Continue",
+    "continue": "Nastavi",
     "currentPinLabel": "Current PIN",
-    "defaultProfileName": "Profile",
+    "defaultProfileName": "Profil",
     "enterCurrentPinPlaceholder": "Enter current PIN",
     "enterNewPinPlaceholder": "Enter new PIN",
     "enterPinPlaceholder": "Enter PIN",
@@ -3509,7 +3509,7 @@
     "setDescription": "Set a PIN to protect this profile from unauthorized access.",
     "setPin": "Set PIN",
     "tryAgainIn": "Try again in {seconds} seconds",
-    "unlock": "Unlock",
+    "unlock": "Otključaj",
     "unlockDescription": "Enter your PIN to access this profile",
     "unlockTitle": "Unlock {name}",
     "useDifferentProfile": "Use Different Profile",
@@ -3523,20 +3523,20 @@
       "addGoal": "Add Goal",
       "addNewGoal": "Add New Goal",
       "atCurrentRate": "At current rate, goal will take {months} months (est. {date})",
-      "completed": "Completed",
+      "completed": "Završeno",
       "completedGoals": "Completed Goals",
       "createFirstGoal": "Create Your First Goal",
       "currentSavingsLabel": "Current Savings",
       "currentSavingsValue": "Current savings: {amount}",
-      "delete": "Delete",
+      "delete": "Obriši",
       "deleteGoal": "Delete Goal",
       "deleteGoalAriaLabel": "Delete goal",
       "deleteGoalDescription": "Are you sure you want to delete this savings goal? This action cannot be undone.",
       "deleteGoalTitle": "Delete Savings Goal",
-      "descriptionLabel": "Description",
+      "descriptionLabel": "Opis",
       "descriptionPlaceholder": "What are you saving for?",
       "descriptionValue": "Description: {description}",
-      "edit": "Edit",
+      "edit": "Uredi",
       "editGoal": "Edit Goal",
       "editGoalAriaLabel": "Edit goal",
       "emptyDescription": "Start planning for your future purchases by creating your first savings goal. Track your progress and stay on target.",
@@ -3554,13 +3554,13 @@
       "monthsCount": "{count} months",
       "noActiveGoals": "No Active Goals",
       "onTrack": "On track! Goal will be reached by {date}",
-      "overdue": "Overdue",
+      "overdue": "Zakašnjelo",
       "pleaseSelectDate": "Please select a target date",
       "priorityHigh": "High",
       "priorityLabel": "Priority",
       "priorityLow": "Low",
       "priorityMedium": "Medium",
-      "remaining": "Remaining",
+      "remaining": "Preostalo",
       "savingsOf": "{current} of {target}",
       "startPlanning": "Start planning for your future purchases by adding a new savings goal.",
       "subtitle": "Plan and track savings for future purchases",
@@ -3577,16 +3577,16 @@
       "youWillLose": "You will lose"
     },
     "paycheck": {
-      "active": "Active",
+      "active": "Aktivan",
       "allCategoryAllocations": "All category allocations across paychecks",
       "allocate": "Allocate",
       "allocationFor": "Allocation for {name}",
       "amountAllocated": "{amount} allocated",
       "amountUnallocated": "{amount} unallocated",
       "budgetedCategories": "Budgeted Categories",
-      "cancel": "Cancel",
+      "cancel": "Odustani",
       "collapseDetails": "Collapse paycheck details",
-      "currency": "Currency",
+      "currency": "Valuta",
       "currencyAUD": "AUD - Australian Dollar",
       "currencyCAD": "CAD - Canadian Dollar",
       "currencyEUR": "EUR - Euro",
@@ -3622,7 +3622,7 @@
       "percentOfIncome": "{percent}% of income",
       "regeneratePaychecks": "Regenerate Paychecks",
       "remainingToAllocate": "Remaining to allocate",
-      "safeToSpend": "Safe to Spend",
+      "safeToSpend": "Sigurno za trošenje",
       "saveAllocations": "Save Allocations",
       "saving": "Saving...",
       "scheduleBiweekly": "Biweekly",
@@ -3630,11 +3630,11 @@
       "scheduleIrregular": "Irregular",
       "scheduleIrregularDesc": "Custom dates",
       "scheduleLabel": "Schedule: {schedule}",
-      "scheduleMonthly": "Monthly",
+      "scheduleMonthly": "Mjesečno",
       "scheduleMonthlyDesc": "Once a month",
-      "scheduleSemimonthly": "Semi-monthly",
+      "scheduleSemimonthly": "Dva puta mjesečno",
       "scheduleSemimonthlyDesc": "1st and 15th",
-      "scheduleWeekly": "Weekly",
+      "scheduleWeekly": "Tjedno",
       "scheduleWeeklyDesc": "Every week",
       "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
       "setUpPaycheckPlan": "Set Up Paycheck Plan",
@@ -3657,7 +3657,7 @@
       "currentAgeYears": "Current age: {age} years",
       "currentSavings": "Current Savings",
       "currentSavingsAmount": "Current savings: {amount}",
-      "delete": "Delete",
+      "delete": "Obriši",
       "deletePlan": "Delete Plan",
       "deleteRetirementPlan": "Delete Retirement Plan",
       "deleteRetirementPlanDescription": "This will permanently remove this retirement plan and all its projections.",
@@ -3716,29 +3716,29 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "Stvarno",
+      "confidenceInterval": "Interval pouzdanosti",
+      "predicted": "Predviđeno"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "Nema dostupnih podataka za prognoze",
+    "predictionUnavailable": "Prognoza nedostupna",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "Prosj. pouzdanost",
+      "nextMonth": "Sljedeći mjesec",
+      "threeMonthAvg": "Prosj. 3 mj."
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "Pouzdanost",
+      "month": "Mjesec",
+      "predicted": "Predviđeno",
+      "range": "Raspon",
+      "title": "Mjesečne prognoze"
     },
     "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "trainingModel": "Treniranje modela i generiranje prognoza..."
   },
   "privacyPanel": {
-    "active": "Active",
+    "active": "Aktivan",
     "aiFeatures": "AI Features",
     "aiFeaturesDescription": "Enable AI Features powered by OpenAI for advanced functionality. When disabled, all AI-dependent features are automatically disabled.",
     "aiFeaturesTitle": "AI Features (Master Switch)",
@@ -3764,24 +3764,24 @@
     "dataSecurity": "Data Security",
     "dataTransactions": "transactions",
     "deleteAccountsDescription": "Bank accounts and credit cards",
-    "deleteAccountsLabel": "Accounts",
+    "deleteAccountsLabel": "Računi",
     "deleteAfter30Days": "Delete after 30 days",
     "deleteAfter7Days": "Delete after 7 days (Recommended)",
     "deleteBalancesDescription": "Reset all account balances to $0",
-    "deleteBalancesLabel": "Account Balances",
+    "deleteBalancesLabel": "Stanja računa",
     "deleteBudgetsDescription": "Monthly budget allocations",
-    "deleteBudgetsLabel": "Budgets",
+    "deleteBudgetsLabel": "Proračuni",
     "deleteCategoriesDescription": "Custom spending categories",
-    "deleteCategoriesLabel": "Categories",
+    "deleteCategoriesLabel": "Kategorije",
     "deleteData": "Delete Data",
     "deleteFailed": "Failed to delete data. Please try again.",
     "deletePrivacySettingsDescription": "Reset all settings to defaults",
     "deletePrivacySettingsLabel": "Privacy Settings",
     "deleteSelected": "Delete Selected",
     "deleteTransactionsDescription": "All imported and manual transactions",
-    "deleteTransactionsLabel": "Transactions",
+    "deleteTransactionsLabel": "Transakcije",
     "deleting": "Deleting...",
-    "deselectAll": "Deselect All",
+    "deselectAll": "Poništi odabir svega",
     "enableAnalytics": "Enable Analytics",
     "enableAnalyticsDescription": "Track feature usage and app performance using PostHog. No personal financial data (amounts, descriptions) is collected.",
     "enableChatbot": "Enable Chatbot",
@@ -3792,7 +3792,7 @@
     "encryptionActive": "Encryption is active. Your data is encrypted in IndexedDB.",
     "encryptionFailed": "Failed to enable encryption. Please try again.",
     "encryptionNotAvailable": "Encryption is not available in this browser. Please use a modern browser with Web Crypto API support.",
-    "export": "Export",
+    "export": "Izvezi",
     "exportAllData": "Export All Data",
     "exportAllDataDescription": "Download all your accounts, transactions, categories, and budgets as JSON",
     "exportFailed": "Failed to export data. Please try again.",
@@ -3814,7 +3814,7 @@
     "receiptOCR": "Receipt OCR",
     "receiptOCRDescription": "Extract transaction details from receipt images using client-side OCR (Tesseract.js). No data leaves your device.",
     "requiresAIFeatures": "Requires AI Features",
-    "selectAll": "Select All",
+    "selectAll": "Odaberi sve",
     "selectDataToDelete": "Select which data you want to permanently delete:",
     "smartDuplicateDetection": "Smart Duplicate Detection",
     "smartDuplicateDetectionDescription": "Use AI to detect duplicate transactions even when merchant names differ (e.g., 'AMAZON PRIME' vs 'AMZN MKTP CA')",
@@ -3825,7 +3825,7 @@
     "whatsSentDescription": "Only cleaned transaction descriptions (e.g., \"AMAZON.COM\"). No account numbers, names, or addresses. Powered by OpenAI GPT-4o-mini."
   },
   "profileDialog": {
-    "cancel": "Cancel",
+    "cancel": "Odustani",
     "confirmPinLabel": "Confirm PIN",
     "confirmPinPlaceholder": "Confirm PIN",
     "createDescription": "Add a new profile for a family member. Each profile can have its own private budgets.",
@@ -3840,12 +3840,12 @@
     "errorNameTooLong": "Name must be 30 characters or less",
     "errorPinMismatch": "PINs do not match",
     "errorUpdateFailed": "Failed to update profile",
-    "nameLabel": "Name",
+    "nameLabel": "Naziv",
     "namePlaceholder": "Enter profile name",
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
     "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes",
+    "saveChanges": "Spremi promjene",
     "errorDeleteFailed": "Brisanje profila nije uspjelo",
     "deleteTitle": "Obrisati profil?",
     "defaultProfile": "Zadani profil",
@@ -3860,22 +3860,22 @@
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "Instaliraj",
+      "notNow": "Ne sada"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "Zatvori upit za instalaciju",
+    "description": "Dodajte na početni zaslon za brzi pristup i korištenje bez interneta",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "Brzo i sigurno",
+      "noAppStore": "Nije potrebna trgovina aplikacija",
+      "offline": "Radi bez interneta"
     },
     "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosForFullExperience": "za puno iskustvo aplikacije s bržim učitavanjem.",
+    "iosTap": "Dodirnite",
+    "iosThen": "zatim",
+    "iosTitle": "Instalirajte aplikaciju za proračun",
+    "title": "Instalirajte aplikaciju za proračun"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3886,9 +3886,9 @@
     "cameraStep2": "Find \"Camera\" in the permissions",
     "cameraStep3": "Change it to \"Allow\"",
     "cameraStep4": "Refresh this page",
-    "cancel": "Cancel",
+    "cancel": "Odustani",
     "deviceFound": "Device Found!",
-    "error": "Error",
+    "error": "Greška",
     "howToEnableCamera": "How to enable camera access:",
     "invalidQrFormat": "Invalid QR code format. Please scan a Budget App pairing QR code.",
     "noCamera": "No camera found on this device.",
@@ -3907,8 +3907,8 @@
   "quickCategorize": {
     "buttons": {
       "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "cancel": "Odustani",
+      "save": "Spremi"
     },
     "clickToSelect": "Click a category to select",
     "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
@@ -3920,27 +3920,27 @@
     "title": "Quick Categorize"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
+    "all": "Sve",
+    "categories": "Kategorije",
+    "clearFilters": "Očisti filtre",
     "moreCategories": "+{count} more",
     "presets": {
       "last30": "Last 30 Days",
       "last90": "Last 90 Days",
-      "thisMonth": "This Month",
+      "thisMonth": "Ovaj mjesec",
       "thisYear": "This Year"
     },
     "timePeriod": "Time Period"
   },
   "quickStats": {
     "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
+    "expenses": "Rashodi",
+    "income": "Prihod",
     "savingsRate": "Savings Rate",
     "savingsRateDescription": "Percentage of income saved this month"
   },
   "receiptThumbnail": {
-    "close": "Close",
+    "close": "Zatvori",
     "deleteConfirm": "Delete receipt \"{filename}\"?",
     "deleteFailed": "Failed to delete receipt",
     "deleteReceipt": "Delete receipt",
@@ -3954,7 +3954,7 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
+      "attachReceipt": "Priloži račun",
       "chooseDifferent": "Choose Different",
       "extractData": "Extract Data",
       "extracting": "Extracting..."
@@ -3996,10 +3996,10 @@
     "confidence": "{percent}% confidence",
     "estimatedMonthly": "Estimated Monthly",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "Svaka dva tjedna",
+      "monthly": "Mjesečno",
+      "quarterly": "Kvartalno",
+      "weekly": "Tjedno"
     },
     "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
     "next": "Next: {date}",
@@ -4016,48 +4016,48 @@
   },
   "reports": {
     "addTransactionsToSeeFlow": "Add income and expense transactions to see your money flow",
-    "amount": "Amount",
-    "category": "Category",
+    "amount": "Iznos",
+    "category": "Kategorija",
     "categoryBreakdown": "Category Breakdown",
     "downloadPng": "Download as PNG",
     "downloadSvg": "Download as SVG",
-    "expenses": "Expenses",
-    "income": "Income",
+    "expenses": "Rashodi",
+    "income": "Prihod",
     "incomeVsExpenses": "Income vs Expenses (Last 6 Months)",
     "loading": "Loading reports...",
     "moneyFlow": "Money Flow",
     "moneyFlowDescription": "Visualize how income flows to categories and savings",
-    "net": "Net",
+    "net": "Neto",
     "netSavings": "Net Savings",
     "noDataAvailable": "No data available",
     "noSpendingData": "No spending data available",
     "noTrendData": "No trend data available",
     "percentOfTotal": "% of Total",
     "savingsRate": "Savings Rate",
-    "spendingByCategory": "Spending by Category",
+    "spendingByCategory": "Potrošnja po kategoriji",
     "subtitle": "Visualize your financial data",
     "timeRange": {
-      "all": "All",
-      "month": "Month",
-      "quarter": "Quarter",
-      "year": "Year"
+      "all": "Sve",
+      "month": "Mjesec",
+      "quarter": "Kvartal",
+      "year": "Godina"
     },
     "title": "Reports & Insights",
     "topCategories": "Top 5 Categories",
     "totalExpenses": "Total Expenses",
     "totalIncome": "Total Income",
-    "transactions": "Transactions"
+    "transactions": "Transakcije"
   },
   "settings": {
     "aboutBudgetFiles": "About .budget Files",
     "accountDeleteFailed": "Failed to delete account",
-    "accountName": "Account Name",
+    "accountName": "Naziv računa",
     "accountNamePlaceholder": "e.g., BMO Checking",
     "accountSaveFailed": "Failed to save account",
-    "accountType": "Account Type",
-    "addAccount": "Add Account",
+    "accountType": "Vrsta računa",
+    "addAccount": "Dodaj račun",
     "addAccountsToStart": "Add your bank accounts to get started",
-    "addCategory": "Add Category",
+    "addCategory": "Dodaj kategoriju",
     "addFirstAccount": "Add Your First Account",
     "addFirstCategory": "Add Your First Category",
     "addFirstCategoryToOrganize": "Add your first category to organize transactions",
@@ -4065,27 +4065,27 @@
     "archiveCategoryConfirm": "Archive this category? You can restore it later.",
     "archiveCategoryWithTransactions": "This category has {count} transaction(s). Archive it? Transactions will be preserved but the category will be hidden.",
     "archiveFailed": "Failed to archive category",
-    "archived": "Archived",
+    "archived": "Arhivirano",
     "archivedCategoriesAppearHere": "Archived categories will appear here",
-    "balance": "Balance",
+    "balance": "Stanje",
     "budgetFileInfo1": "Your data is stored in a portable JSON format that can be opened by any text editor",
     "budgetFileInfo2": "Optional password protection uses industry-standard AES-256 encryption",
     "budgetFileInfo3": "Files include a checksum to detect corruption or tampering",
     "budgetFileInfo4": "Receipt images can be included in the export (increases file size)",
-    "cancel": "Cancel",
+    "cancel": "Odustani",
     "categoriesSubtitle": "Organize your transactions with custom categories • Drag to reorder",
-    "categoriesTitle": "Categories",
+    "categoriesTitle": "Kategorije",
     "categoryName": "Category Name",
     "categoryNamePlaceholder": "e.g., Entertainment, Groceries, Salary",
     "categorySaveFailed": "Failed to save category",
-    "checking": "Checking",
+    "checking": "Tekući račun",
     "color": "Color",
     "createCategoryDescription": "Create a new category for organizing transactions",
-    "creditCard": "Credit Card",
-    "currency": "Currency",
+    "creditCard": "Kreditna kartica",
+    "currency": "Valuta",
     "dataManagement": "Data Management",
     "dataManagementSubtitle": "Export and import your budget data",
-    "default": "Default",
+    "default": "Zadano",
     "deleteAccountConfirm": "Delete this account? Transactions will NOT be deleted.",
     "dragToReorder": "Drag to reorder",
     "editAccount": "Edit Account",
@@ -4095,7 +4095,7 @@
     "exportDataDescription": "Download all your budget data as a .budget file. Includes transactions, accounts, categories, and settings.",
     "hideArchived": "Hide Archived",
     "icon": "Icon",
-    "importData": "Import Data",
+    "importData": "Uvezi podatke",
     "importDataDescription": "Restore your data from a .budget file. You can choose to merge with existing data or replace it.",
     "institution": "Institution",
     "institutionPlaceholder": "e.g., BMO, Home Trust",
@@ -4103,9 +4103,9 @@
     "noAccountsYet": "No Accounts Yet",
     "noArchivedCategories": "No Archived Categories",
     "noCategoriesYet": "No Categories Yet",
-    "quickPresets": "Quick Presets:",
+    "quickPresets": "Brze postavke:",
     "reorderFailed": "Failed to reorder categories",
-    "savings": "Savings",
+    "savings": "Štednja",
     "selectSection": "Select settings section",
     "showArchived": "Show Archived",
     "subcategories": "subcategories",
@@ -4113,23 +4113,23 @@
     "subcategoriesPlaceholder": "e.g., Movies, Games, Events",
     "subcategoriesTip": "Separate with commas, e.g. \"Movies, Streaming, Concerts\"",
     "subtitle": "Manage your accounts and categories",
-    "tabAccessibility": "Accessibility",
-    "tabAccounts": "Accounts",
-    "tabCategories": "Categories",
-    "tabData": "Data",
+    "tabAccessibility": "Pristupačnost",
+    "tabAccounts": "Računi",
+    "tabCategories": "Kategorije",
+    "tabData": "Podaci",
     "tabDevTools": "Developer Tools",
     "tabLocale": "Locale & Formatting",
-    "tabNotifications": "Notifications",
+    "tabNotifications": "Obavijesti",
     "tabPrivacy": "Privacy & AI",
     "tabProfiles": "Profiles",
     "tapToChangeIcon": "Tap to change icon",
     "tapToChooseColor": "Tap to choose a custom color",
     "tipLabel": "Tip:",
-    "title": "Settings",
+    "title": "Postavke",
     "toggleWebmcp": "Toggle WebMCP AI Agent Tools",
     "transaction": "transaction",
     "transactions": "transactions",
-    "type": "Type",
+    "type": "Vrsta",
     "unarchiveCategory": "Unarchive category",
     "unarchiveFailed": "Failed to unarchive category",
     "updateAccount": "Update Account",
@@ -4161,7 +4161,7 @@
       "showLess": "Prikaži manje"
     },
     "appSubtitle": "Premium financije",
-    "appTitle": "Budget App",
+    "appTitle": "Aplikacija za proračun",
     "navigation": {
       "accounts": "Računi",
       "budgets": "Proračuni",
@@ -4194,10 +4194,10 @@
     "autoImportDescription": "Automatically import transactions from your bank accounts",
     "automaticSync": "Automatic Sync",
     "automaticSyncDescription": "Transactions sync daily. Manual import anytime.",
-    "back": "Back",
-    "cancel": "Cancel",
+    "back": "Natrag",
+    "cancel": "Odustani",
     "completeSetup": "Complete Setup",
-    "connect": "Connect",
+    "connect": "Poveži",
     "connectYourBank": "Connect Your Bank",
     "connecting": "Connecting...",
     "connectingTitle": "Connecting...",
@@ -4206,13 +4206,13 @@
     "createNewAccount": "Create new account",
     "dialogDescription": "Link your bank accounts via SimpleFIN Bridge",
     "dialogTitle": "Connect Bank Account",
-    "done": "Done",
+    "done": "Gotovo",
     "enterItHere": "Enter it here",
     "enterTokenError": "Please enter your SimpleFIN setup token",
     "failedToSave": "Failed to save connection",
     "fetchingAccounts": "Fetching your bank accounts from SimpleFIN",
     "genericError": "An error occurred while connecting",
-    "getStarted": "Get Started",
+    "getStarted": "Početak",
     "importTo": "Import to:",
     "importTransactions": "Import transactions",
     "instruction1": "Click the button below to open SimpleFIN Bridge",
@@ -4251,16 +4251,16 @@
     "connection": {
       "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
       "connectButton": "Connect Bank Account",
-      "connected": "Connected",
+      "connected": "Spojeno",
       "description": "Connect your bank accounts to automatically import transactions",
       "notConnected": "Not Connected",
       "notConnectedDesc": "Connect your bank accounts to start importing transactions",
       "title": "SimpleFIN Connection"
     },
     "disconnect": {
-      "button": "Disconnect",
-      "cancel": "Cancel",
-      "confirm": "Disconnect",
+      "button": "Odspoji",
+      "cancel": "Odustani",
+      "confirm": "Odspoji",
       "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
       "dialogTitle": "Disconnect SimpleFIN?"
     },
@@ -4274,7 +4274,7 @@
       "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
       "lastSynced": "Last synced: {time}",
       "lessThanHour": "Less than an hour ago",
-      "never": "Never",
+      "never": "Nikad",
       "syncNow": "Sync Now",
       "syncing": "Syncing..."
     },
@@ -4313,30 +4313,30 @@
     }
   },
   "simplefinStatus": {
-    "active": "Active",
+    "active": "Aktivan",
     "asOf": "as of {date}",
-    "cancel": "Cancel",
-    "connected": "Connected",
+    "cancel": "Odustani",
+    "connected": "Spojeno",
     "connecting": "Connecting...",
-    "disconnected": "Disconnected",
-    "dismiss": "Dismiss",
-    "error": "Error",
+    "disconnected": "Odspojeno",
+    "dismiss": "Odbaci",
+    "error": "Greška",
     "errorsLabel": "Errors:",
-    "expired": "Expired",
+    "expired": "Isteklo",
     "hoursAgo": "{hours}h ago",
-    "imported": "Imported",
+    "imported": "Uvezeno",
     "justNow": "just now",
     "lastSynced": "Last synced: {time}",
     "minutesAgo": "{minutes}m ago",
     "neverSynced": "Never synced",
     "noBankAccounts": "No bank accounts connected",
-    "pause": "Pause",
+    "pause": "Pauziraj",
     "paused": "Paused",
     "processing": "Processing: {account}",
-    "resume": "Resume",
+    "resume": "Nastavi",
     "skippedDuplicates": "Skipped (duplicates)",
     "statusLabel": "SimpleFIN: {status}",
-    "sync": "Sync",
+    "sync": "Sinkroniziraj",
     "syncComplete": "Sync Complete",
     "syncCompletedWithErrors": "Sync Completed with Errors",
     "syncFailed": "Sync Failed",
@@ -4347,32 +4347,32 @@
     "syncedYesterday": "Synced yesterday",
     "syncing": "Syncing...",
     "transactionsCount": "({count} transactions)",
-    "unlink": "Unlink",
+    "unlink": "Odvoji",
     "warningsLabel": "Warnings:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "Prognoza temeljena na linearnoj regresiji posljednjih {months} mjeseci",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "Stvarna potrošnja",
+      "projected": "Projektirano"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "Nedovoljno podataka za generiranje trendova. Dodajte barem 2 mjeseca transakcija.",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "Prosj. mjesečno",
+      "lastMonth": "Prošli mjesec",
+      "projected": "Projektirano"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "Trendovi i prognoza potrošnje"
   },
   "splitTransaction": {
     "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "amount": "Iznos",
     "buttons": {
-      "cancel": "Cancel",
+      "cancel": "Odustani",
       "save": "Save Split",
       "saving": "Saving..."
     },
-    "category": "Category",
+    "category": "Kategorija",
     "closeModal": "Close modal",
     "date": "Date:",
     "distributeEvenly": "Distribute Evenly",
@@ -4388,7 +4388,7 @@
     },
     "maxSplitsReached": "Maximum 5 splits allowed",
     "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
+    "none": "Ništa",
     "notes": "Notes (Optional)",
     "notesPlaceholder": "e.g., Business expense, Personal use",
     "originalAmount": "Original Amount:",
@@ -4396,7 +4396,7 @@
     "selectCategory": "Select category...",
     "splitsCount": "Splits ({current}/{max})",
     "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "title": "Podijeli transakciju",
     "validation": {
       "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
       "amountsMustMatch": "Split amounts must equal the original transaction amount",
@@ -4404,7 +4404,7 @@
       "matchesOriginal": "✓ Matches original",
       "overBy": "Over by ${amount}",
       "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
+      "total": "Ukupno:",
       "underBy": "Under by ${amount}"
     }
   },
@@ -4414,20 +4414,20 @@
     "addPerson": "Add Person",
     "allSettledUp": "All settled up",
     "allSettledUpWith": "All settled up with {name}!",
-    "amount": "Amount",
-    "back": "Back",
+    "amount": "Iznos",
+    "back": "Natrag",
     "backToSplits": "Back to Splits",
     "confirmRemovePerson": {
-      "confirmLabel": "Remove",
+      "confirmLabel": "Ukloni",
       "description": "Are you sure you want to remove this person? All their split records will be deleted.",
       "descriptionNamed": "Are you sure you want to remove {name}? All their split records will be deleted.",
       "title": "Remove Person"
     },
-    "continue": "Continue",
+    "continue": "Nastavi",
     "creating": "Creating...",
     "emoji": "Emoji",
     "helpTooltip": "Split transactions with friends and family. Track who owes what and settle debts via Cash, E-Transfer, Venmo, or PayPal.",
-    "name": "Name",
+    "name": "Naziv",
     "namePlaceholder": "e.g., Alice, Bob",
     "netBalance": "Net Balance",
     "noPeopleDescription": "Add people you split expenses with. Track shared bills, dinners, and more.",
@@ -4444,9 +4444,9 @@
     "settled": "Settled",
     "settledHistory": "Settled History ({count})",
     "settlementMethods": {
-      "cash": "Cash",
+      "cash": "Gotovina",
       "eTransfer": "E-Transfer",
-      "other": "Other",
+      "other": "Ostalo",
       "paypal": "PayPal",
       "venmo": "Venmo"
     },
@@ -4495,14 +4495,14 @@
   "subscriptionCard": {
     "badges": {
       "aiVerified": "AI Verified",
-      "cancelled": "Cancelled",
+      "cancelled": "Otkazano",
       "paused": "Paused",
-      "trial": "Trial"
+      "trial": "Probno"
     },
     "buttons": {
       "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
+      "edit": "Uredi",
+      "transactions": "Transakcije"
     },
     "confidence": {
       "high": "High",
@@ -4516,26 +4516,26 @@
       "firstCharge": "First Charge",
       "lastCharge": "Last Charge",
       "occurrences": "Occurrences",
-      "payment": "Payment",
-      "reminder": "Reminder"
+      "payment": "Plaćanje",
+      "reminder": "Podsjetnik"
     },
     "interval": {
       "annual": "Annual",
-      "bi-weekly": "Bi-weekly",
+      "bi-weekly": "Svaka dva tjedna",
       "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "monthly": "Mjesečno",
+      "quarterly": "Kvartalno",
+      "weekly": "Tjedno"
     },
     "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
     "menu": {
       "cancelSubscription": "Cancel Subscription",
       "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
+      "delete": "Obriši",
+      "edit": "Uredi",
       "notSubscription": "Not a Subscription",
-      "pause": "Pause",
-      "resume": "Resume",
+      "pause": "Pauziraj",
+      "resume": "Nastavi",
       "viewTransactions": "View Transactions"
     },
     "source": {
@@ -4544,9 +4544,9 @@
       "merged": "Tracked"
     },
     "stats": {
-      "amount": "Amount",
-      "annualCost": "Annual Cost",
-      "frequency": "Frequency",
+      "amount": "Iznos",
+      "annualCost": "Godišnji trošak",
+      "frequency": "Učestalost",
       "nextCharge": "Next Charge",
       "totalSpent": "Total Spent"
     },
@@ -4560,35 +4560,35 @@
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
+    "emptyState": "Nema aktivnih pretplata za analizu",
+    "loadingChart": "Učitavanje grafa...",
     "moreCharges": "+{count} more charges",
     "perMonth": "/month",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "Trošak po kategoriji",
+      "potentialSavings": "Potencijalne uštedine",
+      "upcomingCharges": "Nadolazeće naplate (sljedećih 30 dana)"
     },
     "summary": {
       "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
+      "annualCost": "Godišnji trošak",
+      "monthlyCost": "Mjesečni trošak",
+      "next30Days": "Sljedećih 30 dana",
+      "projectedYearly": "Projektirana godišnja potrošnja",
       "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
+      "inactiveTitle": "Potencijalno otkazane pretplate",
       "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
+      "trialsTitle": "Probna razdoblja uskoro završavaju",
       "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "highCostTitle": "Pretplate visokih troškova",
+      "highCostDescription": "Ove pretplate čine veliki dio vaše potrošnje. Razmislite dobivate li punu vrijednost."
     }
   },
   "subscriptionModal": {
-    "addSubscription": "Add Subscription",
-    "addTitle": "Add Subscription",
+    "addSubscription": "Dodaj pretplatu",
+    "addTitle": "Dodaj pretplatu",
     "adding": "Adding...",
     "advancedOptions": "Advanced Options",
     "amountLabel": "Amount *",
@@ -4596,28 +4596,28 @@
     "autoRenewLabel": "Auto-renew",
     "beforeBilling": "before billing",
     "billingCycleLabel": "Billing Cycle *",
-    "cancel": "Cancel",
-    "categoryLabel": "Category",
-    "categoryNone": "None",
+    "cancel": "Odustani",
+    "categoryLabel": "Kategorija",
+    "categoryNone": "Ništa",
     "categoryPlaceholder": "Select category...",
     "currencyCAD": "CAD - Canadian Dollar",
     "currencyEUR": "EUR - Euro",
     "currencyGBP": "GBP - British Pound",
-    "currencyLabel": "Currency",
+    "currencyLabel": "Valuta",
     "currencySymbol": "$",
     "currencyUSD": "USD - US Dollar",
     "cycleAnnual": "Annual (12 months)",
     "cycleBiWeekly": "Bi-weekly (every 2 weeks)",
-    "cycleMonthly": "Monthly",
+    "cycleMonthly": "Mjesečno",
     "cycleQuarterly": "Quarterly (3 months)",
-    "cycleWeekly": "Weekly",
-    "descriptionLabel": "Description",
+    "cycleWeekly": "Tjedno",
+    "descriptionLabel": "Opis",
     "descriptionPlaceholder": "e.g., Family plan, Pro tier",
     "editTitle": "Edit Subscription",
     "nameLabel": "Subscription Name *",
     "namePlaceholder": "e.g., Netflix, Spotify, Adobe CC",
     "nextBillingDateLabel": "Next Billing Date *",
-    "notesLabel": "Notes",
+    "notesLabel": "Bilješke",
     "notesPlaceholder": "Any additional notes...",
     "paymentMethodLabel": "Payment Method",
     "paymentMethodPlaceholder": "e.g., Visa ending 1234",
@@ -4627,15 +4627,15 @@
     "reminder2Weeks": "2 weeks",
     "reminder3Days": "3 days",
     "reminder5Days": "5 days",
-    "remindersLabel": "Reminders",
-    "saveChanges": "Save Changes",
+    "remindersLabel": "Podsjetnici",
+    "saveChanges": "Spremi promjene",
     "saving": "Saving...",
     "startDateLabel": "Start Date *",
-    "statusActive": "Active",
-    "statusCancelled": "Cancelled",
+    "statusActive": "Aktivan",
+    "statusCancelled": "Otkazano",
     "statusLabel": "Status",
     "statusPaused": "Paused",
-    "statusTrial": "Trial",
+    "statusTrial": "Probno",
     "trialEndDateHint": "Set when your free trial ends to track it",
     "trialEndDateLabel": "Trial End Date",
     "validationInvalidAmount": "Please enter a valid amount",
@@ -4644,11 +4644,11 @@
     "websiteUrlLabel": "Website / Login URL"
   },
   "subscriptions": {
-    "addSubscription": "Add Subscription",
+    "addSubscription": "Dodaj pretplatu",
     "allCategories": "All Categories",
     "clearFilters": "Clear filters",
     "deleteConfirmDescription": "Are you sure you want to delete this subscription? This action cannot be undone.",
-    "deleteConfirmLabel": "Delete",
+    "deleteConfirmLabel": "Obriši",
     "deleteConfirmTitle": "Delete Subscription",
     "deleteError": "Failed to delete subscription",
     "dismissError": "Failed to dismiss subscription",
@@ -4668,29 +4668,29 @@
     "saveError": "Failed to save subscription",
     "searchPlaceholder": "Search subscriptions...",
     "sort": {
-      "amount": "Amount",
+      "amount": "Iznos",
       "ascending": "Sort ascending",
       "dateAdded": "Date Added",
       "descending": "Sort descending",
-      "name": "Name",
+      "name": "Naziv",
       "nextBilling": "Next Billing"
     },
     "stats": {
-      "active": "Active",
+      "active": "Aktivan",
       "annual": "Annual",
       "estimatedCost": "Estimated cost",
       "inactive": "{count} inactive",
-      "monthly": "Monthly",
+      "monthly": "Mjesečno",
       "next7Days": "Next 7 Days",
       "projectedSpend": "Projected spend",
       "upcomingCharges": "Upcoming charges"
     },
     "subtitle": "Manage your recurring payments and subscriptions",
-    "title": "Subscriptions",
+    "title": "Pretplate",
     "viewMode": {
-      "active": "Active",
-      "all": "All",
-      "analysis": "Analysis",
+      "active": "Aktivan",
+      "all": "Sve",
+      "analysis": "Analiza",
       "detected": "Detected",
       "manual": "Manual"
     }
@@ -4700,11 +4700,11 @@
     "devices": "{connected}/{total} devices",
     "devicesConnected": "{connected}/{total} devices connected",
     "hoursAgo": "{hours}h ago",
-    "justNow": "Just now",
+    "justNow": "Upravo sada",
     "lastSync": "Last sync: {time}",
     "minutesAgo": "{minutes}m ago",
-    "never": "Never",
-    "offline": "Offline",
+    "never": "Nikad",
+    "offline": "Izvan mreže",
     "partialSync": "Partial Sync",
     "syncError": "Sync Error",
     "synced": "Synced",
@@ -4715,7 +4715,7 @@
     "learnMore": "Saznajte više →"
   },
   "trainMl": {
-    "confidence": "Confidence",
+    "confidence": "Pouzdanost",
     "failedToLoadModel": "Failed to load model: {error}",
     "finalLoss": "Final Loss",
     "howItWorks": "How it works",
@@ -4749,29 +4749,29 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "Račun"
     },
     "advancedOptions": {
       "available": "{count} available",
       "label": "Advanced Options"
     },
     "amount": {
-      "label": "Amount",
+      "label": "Iznos",
       "placeholder": "0.00",
       "validationError": "Please enter a valid amount"
     },
     "buttons": {
-      "add": "Add Transaction",
+      "add": "Dodaj transakciju",
       "adding": "Adding...",
-      "cancel": "Cancel",
+      "cancel": "Odustani",
       "update": "Update Transaction",
       "updating": "Updating..."
     },
     "category": {
       "aiCategorizing": "AI categorizing...",
-      "create": "Create",
+      "create": "Stvori",
       "createNew": "+ Create New Category",
-      "label": "Category",
+      "label": "Kategorija",
       "lastUsed": "Using last: {category}",
       "namePlaceholder": "Category name...",
       "selectPlaceholder": "Select category...",
@@ -4784,10 +4784,10 @@
       "nameRequired": "Category name is required"
     },
     "date": {
-      "label": "Date"
+      "label": "Datum"
     },
     "description": {
-      "label": "Description",
+      "label": "Opis",
       "placeholder": "e.g., Grocery shopping at Sobeys"
     },
     "learned": {
@@ -4795,7 +4795,7 @@
       "title": "Learned!"
     },
     "notes": {
-      "label": "Notes",
+      "label": "Bilješke",
       "placeholder": "Add any additional notes..."
     },
     "receipts": {
@@ -4806,12 +4806,12 @@
       "existing": "Existing receipts ({count})",
       "label": "Receipt Attachments",
       "newFile": "New: {filename}",
-      "remove": "Remove",
+      "remove": "Ukloni",
       "viewFull": "View full receipt"
     },
     "subcategory": {
       "label": "Subcategory",
-      "none": "None",
+      "none": "Ništa",
       "selectPlaceholder": "Select subcategory..."
     },
     "tags": {
@@ -4819,28 +4819,28 @@
       "placeholder": "e.g., groceries, weekly, essential"
     },
     "title": {
-      "add": "Add Transaction",
+      "add": "Dodaj transakciju",
       "edit": "Edit Transaction"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "Rashod",
+      "income": "Prihod",
+      "label": "Vrsta"
     }
   },
   "transactionSearch": {
     "amountRangeLabel": "Amount range",
-    "clearRecent": "Clear",
+    "clearRecent": "Očisti",
     "filterName": "Filter name",
     "noResults": "No transactions found",
     "noResultsDescription": "Try a different search or adjust your filters",
-    "noTransactionsYet": "No transactions yet",
+    "noTransactionsYet": "Još nema transakcija",
     "placeholder": "Search transactions...",
     "placeholderExtended": "Try 'coffee last week' or 'amount:>50'",
     "recentSearchLabel": "Recent search",
     "recentSearches": "Recent Searches",
     "resultCount": "{count} {count, plural, =1 {result} other {results}}",
-    "save": "Save",
+    "save": "Spremi",
     "saveFilter": "Save Filter",
     "savedFilters": "Saved Filters",
     "searchFilterLabel": "Search filter",
@@ -4851,9 +4851,9 @@
     "searchingFor": "Searching for: {query}",
     "suggestions": {
       "amounts": "Amount Ranges",
-      "categories": "Categories",
+      "categories": "Kategorije",
       "merchants": "Merchants",
-      "recent": "Recent"
+      "recent": "Nedavno"
     },
     "suggestionsHeading": "Suggestions",
     "tips": {
@@ -4873,29 +4873,29 @@
   "transactionTable": {
     "actions": {
       "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
+      "delete": "Obriši",
+      "edit": "Uredi",
       "split": "Split"
     },
     "emptyState": "No transactions to display",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "Račun",
+      "actions": "Radnje",
+      "amount": "Iznos",
+      "category": "Kategorija",
+      "date": "Datum",
+      "description": "Opis"
     }
   },
   "transactions": {
-    "actions": "Actions",
-    "addTransaction": "Add Transaction",
+    "actions": "Radnje",
+    "addTransaction": "Dodaj transakciju",
     "allAccounts": "All Accounts",
     "allCategories": "All Categories",
     "allSplitItemsRemoved": "All split items will be removed",
-    "amount": "Amount",
+    "amount": "Iznos",
     "applyToSelected": "Apply to Selected",
-    "balance": "Balance",
+    "balance": "Stanje",
     "balanceTooltip": "Starting balance: {startingBalance} + Net change: {netChange}",
     "bulkCategorizeDescription": "Apply \"{category}{subcategory, select, other { - {subcategory}}}\" to {count} transaction(s)?",
     "bulkCategorizeSuccess": "Successfully categorized {count} transaction(s)",
@@ -4905,11 +4905,11 @@
     "categoriesAndNotesLost": "Categories and notes from splits will be lost",
     "categorize": "Categorize",
     "categorizedAs": "Categorized as {category}{subcategory, select, other { - {subcategory}}}",
-    "category": "Category",
-    "clearFilters": "Clear Filters",
-    "currentBalance": "Current Balance",
-    "date": "Date",
-    "delete": "Delete",
+    "category": "Kategorija",
+    "clearFilters": "Očisti filtre",
+    "currentBalance": "Trenutno stanje",
+    "date": "Datum",
+    "delete": "Obriši",
     "deleteCannotBeUndone": "This action cannot be undone.",
     "deleteImpactAmount": "{amount} {type} from {date}",
     "deleteImpactCategory": "Category: {category}{subcategory, select, other { - {subcategory}}}",
@@ -4918,11 +4918,11 @@
     "deleteImpactSplit": "(This is a split transaction)",
     "deleteTransaction": "Delete transaction",
     "deleteTransactionTitle": "Delete Transaction",
-    "description": "Description",
-    "edit": "Edit",
+    "description": "Opis",
+    "edit": "Uredi",
     "editTransaction": "Edit transaction",
     "existingCategoriesReplaced": "Any existing categories will be replaced",
-    "expenseLabel": "Expense",
+    "expenseLabel": "Rashod",
     "failedToBulkCategorize": "Failed to bulk categorize transactions",
     "failedToCategorize": "Failed to categorize transactions",
     "failedToCategorizeSingle": "Failed to categorize transaction",
@@ -4935,21 +4935,21 @@
     "filterByCategoryInfo": "More information about filtering by category",
     "foundMatchingTransactions": "✓ Found {count} matching \"{vendor}\" transactions ({time}s)",
     "fromDate": "From Date",
-    "importCSV": "Import CSV",
-    "incomeLabel": "Income",
+    "importCSV": "Uvezi CSV",
+    "incomeLabel": "Prihod",
     "lastSplitItemRestore": "This is the last split item. Restore the original transaction?",
-    "negative": "Negative",
+    "negative": "Negativno",
     "newestFirst": "Newest First",
     "noMatchingTransactions": "No other \"{vendor}\" transactions found ({time}s)",
-    "noTransactionsDescription": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-    "noTransactionsYet": "No Transactions Yet",
+    "noTransactionsDescription": "Počnite pratiti potrošnju dodavanjem prve transakcije. Možete dodati ručno ili uvesti iz CSV datoteke.",
+    "noTransactionsYet": "Još nema transakcija",
     "oldestFirst": "Oldest First",
     "originalTransactionRestored": "The original transaction will be restored",
     "pleaseSelectCategory": "Please select a category",
     "pleaseSelectTransactions": "Please select transactions to categorize",
-    "positive": "Positive",
+    "positive": "Pozitivno",
     "quickCategorize": "Quick Categorize",
-    "receipt": "Receipt",
+    "receipt": "Račun",
     "restoreOriginal": "Restore Original",
     "restoreOriginalDescription": "This will restore the original unsplit transaction and remove all split items.",
     "restoreOriginalTitle": "Restore Original Transaction",
@@ -4969,7 +4969,7 @@
     "splitTransactionsHelp": "Divide a single purchase across multiple categories. Example: Grocery store visit ($100) → Groceries ($80) + Household ($20). Click the Split button on any transaction to divide it.",
     "splitTransactionsLabel": "Split Transactions",
     "thisWillUpdate": "This will update:",
-    "title": "Transactions",
+    "title": "Transakcije",
     "toDate": "To Date",
     "totalExpenses": "Total Expenses",
     "totalIncome": "Total Income",
@@ -4978,7 +4978,7 @@
     "transactionFeaturesInfo": "More information about transaction features",
     "transactionSaved": "Transaction saved successfully",
     "transactionUnsplit": "Transaction unsplit successfully",
-    "uncategorized": "Uncategorized",
+    "uncategorized": "Nekategorizirano",
     "unsplit": "Unsplit",
     "unsplitTransaction": "Unsplit transaction",
     "usingBasicMatching": "Using basic matching for {vendor} transactions",
@@ -4989,7 +4989,7 @@
   "trialBanner": {
     "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
     "daysRemaining": "{count} days remaining in your free trial",
-    "dismiss": "Dismiss",
+    "dismiss": "Odbaci",
     "expired": "Your trial has expired",
     "expiredDescription": "App is in read-only mode. Upgrade to continue managing your finances.",
     "upgrade": "Upgrade - {price}",
@@ -5014,7 +5014,7 @@
     "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
     "marked": "Marked",
     "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
-    "remove": "Remove",
+    "remove": "Ukloni",
     "removeAndContinue": "Remove {count} & Continue",
     "suggestion": "Suggestion:",
     "title": "Transaction Validation Results",
@@ -5029,7 +5029,7 @@
     "automaticProtection": "Automatic Protection",
     "bankGradeSecurity": "Bank-Grade Security",
     "chooseProtection": "Choose how you want to protect your data:",
-    "confirmPassword": "Confirm Password",
+    "confirmPassword": "Potvrdi lozinku",
     "confirmYourPassword": "Confirm your password",
     "enableEncryption": "Enable Encryption",
     "enterStrongPassword": "Enter a strong password",
@@ -5063,8 +5063,8 @@
       "title": "Napredak proračuna"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "Pratite potrošnju za događaje i projekte",
+      "title": "Proračuni za događaje"
     },
     "incomeVsExpenses": {
       "description": "Usporedite svoje prihode i troškove tijekom vremena",
@@ -5075,32 +5075,32 @@
       "title": "Mjesečni trendovi"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "Brzi pregled ukupne neto vrijednosti",
+      "title": "Neto vrijednost"
     },
     "recentTransactions": {
       "description": "Brzi pregled vaše najnovije financijske aktivnosti",
       "title": "Nedavne transakcije"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "Pogledajte koliko možete sigurno potrošiti po kategoriji",
+      "title": "Sigurno za trošenje"
     },
     "spendingByCategory": {
       "description": "Pogledajte gdje odlazi vaš novac uz vizualne prikaze",
       "title": "Troškovi po kategoriji"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "Pratite nizove i dostignuća",
+      "title": "Nizovi i značke"
     },
     "upcomingBills": {
       "description": "Nikada ne propustite uplatu uz podsjetnike za račune",
       "title": "Nadolazeći računi"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "Sažetak tjednih obrazaca potrošnje",
+      "title": "Tjedni sažetak"
     }
   },
   "ynabMigrationWizard": {
@@ -5110,7 +5110,7 @@
       "description": "Map YNAB categories to your existing categories or create new ones.",
       "mapToExisting": "Map to Existing",
       "selectCategory": "Select category...",
-      "skip": "Skip",
+      "skip": "Preskoči",
       "title": "Category Mapping",
       "willCreate": "Will create:"
     },
@@ -5124,9 +5124,9 @@
       "withIssues": "Import Completed with Issues"
     },
     "footer": {
-      "back": "Back",
-      "done": "Done",
-      "next": "Next",
+      "back": "Natrag",
+      "done": "Gotovo",
+      "next": "Sljedeće",
       "startImport": "Start Import"
     },
     "header": {
@@ -5153,21 +5153,21 @@
         "title": "Budget Options"
       },
       "hiddenCategories": {
-        "archive": "Archive",
+        "archive": "Arhiviraj",
         "archiveDesc": "Import as archived (recommended)",
         "description": "How to handle YNAB categories marked as hidden?",
-        "import": "Import",
+        "import": "Uvezi",
         "importDesc": "Import as active categories",
-        "skip": "Skip",
+        "skip": "Preskoči",
         "skipDesc": "Don't import hidden categories",
         "title": "Hidden Categories"
       }
     },
     "previewStep": {
-      "accounts": "Accounts",
+      "accounts": "Računi",
       "allocations": "{count} allocations",
       "budgetMonths": "Budget Months",
-      "categories": "Categories",
+      "categories": "Kategorije",
       "dateRange": "Transaction Date Range",
       "description": "Review the data that will be imported.",
       "duplicates": "{count} duplicates",
@@ -5175,17 +5175,17 @@
       "newMapped": "{created} new, {mapped} mapped",
       "preparingPreview": "Preparing preview...",
       "title": "Import Preview",
-      "transactions": "Transactions",
+      "transactions": "Transakcije",
       "warnings": "Warnings"
     },
     "steps": {
       "categories": {
         "description": "Map to existing categories",
-        "title": "Categories"
+        "title": "Kategorije"
       },
       "complete": {
         "description": "Migration finished",
-        "title": "Complete"
+        "title": "Završi"
       },
       "importing": {
         "description": "Processing your data",
@@ -5197,7 +5197,7 @@
       },
       "preview": {
         "description": "Review before import",
-        "title": "Preview"
+        "title": "Pregled"
       },
       "upload": {
         "description": "Select YNAB export file",
@@ -5205,8 +5205,8 @@
       }
     },
     "uploadStep": {
-      "accounts": "Accounts",
-      "categories": "Categories",
+      "accounts": "Računi",
+      "categories": "Kategorije",
       "clickToSelect": "Click to select a file",
       "dragAndDrop": "or drag and drop here",
       "fileSummary": "File Summary",
@@ -5219,7 +5219,7 @@
       "formatYfullDesc": "YNAB4 desktop export",
       "parsing": "Parsing file...",
       "supportedFormats": "Supported Formats",
-      "transactions": "Transactions"
+      "transactions": "Transakcije"
     },
     "errors": {
       "parseFailed": "Failed to parse YNAB file",
