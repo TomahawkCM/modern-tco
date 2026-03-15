@@ -1,7 +1,7 @@
 {
   "accessibilitySettings": {
     "fontSize": {
-      "default": "Default",
+      "default": "Standaard",
       "description": "Adjust the base text size for better readability",
       "extraLarge": "Extra Large",
       "large": "Large",
@@ -88,7 +88,7 @@
     "switchedToTable": "Switched to table view",
     "tableHeaders": {
       "additionalInfo": "Additional Info",
-      "category": "Category",
+      "category": "Categorie",
       "period": "Period",
       "value": "Value"
     }
@@ -104,10 +104,10 @@
   "activityLog": {
     "actionCreated": "Created",
     "actionDeleted": "Deleted",
-    "actionExport": "Export",
-    "actionImport": "Import",
-    "actionLogin": "Login",
-    "actionLogout": "Logout",
+    "actionExport": "Exporteren",
+    "actionImport": "Importeren",
+    "actionLogin": "Inloggen",
+    "actionLogout": "Uitloggen",
     "actionUpdated": "Updated",
     "allActions": "All actions",
     "allProfiles": "All profiles",
@@ -121,19 +121,19 @@
     "loggingNotEnabled": "Activity logging is not enabled.",
     "minutesAgo": "{count}m ago",
     "noActivityFound": "No activity found",
-    "refresh": "Refresh",
+    "refresh": "Vernieuwen",
     "searchPlaceholder": "Search activities...",
     "title": "Activity Log",
-    "typeAccounts": "Accounts",
-    "typeBudgets": "Budgets",
-    "typeCategories": "Categories",
+    "typeAccounts": "Rekeningen",
+    "typeBudgets": "Budgetten",
+    "typeCategories": "Categorieën",
     "typeProfiles": "Profiles",
     "typeSystem": "System",
-    "typeTransactions": "Transactions"
+    "typeTransactions": "Transacties"
   },
   "admin": {
     "actionColumn": "Action",
-    "actionsColumn": "Actions",
+    "actionsColumn": "Acties",
     "activeTrials": "Active Trials",
     "actorColumn": "Actor",
     "applyRole": "Apply Role",
@@ -144,7 +144,7 @@
     "changeRoleConfirm": "Change role for {email} to \"{role}\"?",
     "createGroup": "Create Group",
     "daysLeft": "{days} days left",
-    "delete": "Delete",
+    "delete": "Verwijderen",
     "deleteGroupConfirm": "Delete group \"{name}\" and all members?",
     "entries": "{count} entries",
     "envCheckMessage": "Check your .env.local file to ensure the service role key is set.",
@@ -156,7 +156,7 @@
     "extendTrialConfirm": "Extend trial by {days} days for {count} users?",
     "extendTrialSingle": "Extend trial by 7 days for {email}?",
     "familyGroups": "Family Groups",
-    "filter": "Filter",
+    "filter": "Filteren",
     "filterByAction": "Filter by action or metadata",
     "forceLogout": "Force Logout",
     "forceLogoutConfirm": "Force logout {count} users?",
@@ -172,7 +172,7 @@
     "membersFor": "Members for {id}...",
     "never": "Never",
     "newGroupName": "New group name",
-    "next": "Next",
+    "next": "Volgende",
     "noAuditEntries": "No audit entries yet.",
     "noFamilyGroups": "No family groups found.",
     "noGroupSelected": "No group selected.",
@@ -191,10 +191,10 @@
     "reactivateConfirm": "Reactivate {count} users?",
     "reactivateSingle": "Reactivate {email}?",
     "recentAdminActions": "Recent admin actions",
-    "refresh": "Refresh",
+    "refresh": "Vernieuwen",
     "remove": "Remove",
     "removeMember": "Remove {email} from group?",
-    "rename": "Rename",
+    "rename": "Hernoemen",
     "renameGroup": "Rename group",
     "roleAdmin": "admin",
     "roleChild": "child",
@@ -228,17 +228,17 @@
     "analyzing": "Analyzing CSV structure with AI...",
     "buttons": {
       "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
+      "cancel": "Annuleren"
     },
     "closeModal": "Close modal",
     "columnMappings": "Column Mappings",
     "columnTypes": {
-      "amount": "Amount",
-      "balance": "Balance",
+      "amount": "Bedrag",
+      "balance": "Saldo",
       "credit": "Credit",
-      "date": "Date",
+      "date": "Datum",
       "debit": "Debit",
-      "description": "Description",
+      "description": "Omschrijving",
       "ignore": "Ignore"
     },
     "confidence": {
@@ -246,9 +246,9 @@
       "title": "Detection Confidence"
     },
     "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
+      "amount": "Bedrag",
+      "date": "Datum",
+      "description": "Omschrijving",
       "title": "Transaction Preview"
     },
     "samples": "Samples:",
@@ -269,7 +269,7 @@
     "cumulativeInterest": "Cumulative Interest",
     "cumulativePrincipal": "Cumulative Principal",
     "description": "Visual breakdown of your loan over time",
-    "interest": "Interest",
+    "interest": "Rente",
     "monthLabel": "Month {month}",
     "paymentBreakdown": "Payment Breakdown",
     "principal": "Principal",
@@ -279,7 +279,7 @@
     "totalPayments": "Total Payments"
   },
   "amountFilter": {
-    "clear": "Clear",
+    "clear": "Wissen",
     "maxLabel": "Maximum amount",
     "maxPlaceholder": "Max",
     "maxThumb": "Maximum amount",
@@ -316,7 +316,7 @@
     "breadcrumb": "Breadcrumb",
     "chatMessages": "Chat messages",
     "clearSearch": "Clear search",
-    "close": "Close",
+    "close": "Sluiten",
     "closeAccessibilityMenu": "Close accessibility menu",
     "closeChatbot": "Close chatbot",
     "closeHoldingModal": "Close modal",
@@ -343,7 +343,7 @@
     "mainSidebar": "Hoofdsidebar",
     "mobileNavigation": "Mobiele navigatie",
     "notificationDescription": "{title}. {body}",
-    "notifications": "Notifications",
+    "notifications": "Meldingen",
     "openChatbot": "Open AI chatbot",
     "pairingCode": "Pairing code: {code}",
     "primaryNav": "Primary",
@@ -373,7 +373,7 @@
       "checkEmailTitle": "Check Your Email",
       "checkSpam": "Didn't receive the email? Check your spam folder or try again.",
       "defaultError": "Failed to send reset email",
-      "emailLabel": "Email",
+      "emailLabel": "E-mail",
       "emailPlaceholder": "you@example.com",
       "rememberPassword": "Remember your password?",
       "resetLinkSent": "We've sent a password reset link to {email}",
@@ -384,12 +384,12 @@
     },
     "login": {
       "defaultError": "Failed to sign in",
-      "emailLabel": "Email",
+      "emailLabel": "E-mail",
       "emailPlaceholder": "you@example.com",
       "forgotPassword": "Forgot password?",
       "noAccount": "Don't have an account?",
-      "passwordLabel": "Password",
-      "signInButton": "Sign In",
+      "passwordLabel": "Wachtwoord",
+      "signInButton": "Inloggen",
       "startFreeTrial": "Start your free trial",
       "subtitle": "Sign in to your BudgetPro account",
       "title": "Welcome Back"
@@ -415,17 +415,17 @@
       "confirmPasswordPlaceholder": "Re-enter your password",
       "createAccountButton": "Create Account",
       "defaultError": "Failed to create account",
-      "emailLabel": "Email",
+      "emailLabel": "E-mail",
       "emailPlaceholder": "you@example.com",
       "fullNameLabel": "Full Name",
       "fullNamePlaceholder": "John Doe",
       "hasAccount": "Already have an account?",
-      "passwordLabel": "Password",
+      "passwordLabel": "Wachtwoord",
       "passwordPlaceholder": "Create a strong password",
       "passwordTooShort": "Password must be at least 8 characters long.",
       "passwordsMismatch": "Passwords do not match. Please re-enter your password.",
       "returnToLogin": "Return to Login",
-      "signInLink": "Sign In",
+      "signInLink": "Inloggen",
       "subtitle": "Create your account to get started.",
       "title": "Start Free Trial",
       "verifyEmailActivate": "Please check your inbox to activate your 7-day free trial.",
@@ -467,21 +467,21 @@
     "backToHome": "Terug naar startpagina"
   },
   "bottomSheet": {
-    "close": "Close",
+    "close": "Sluiten",
     "dragToClose": "Drag down to close"
   },
   "breadcrumb": {
     "budgetAnalyzer": "Budget Analyzer",
     "debtPayoffCalculator": "Debt Payoff Calculator",
     "details": "Details",
-    "edit": "Edit",
+    "edit": "Bewerken",
     "emergencyFund": "Emergency Fund",
     "futurePlans": "Future Plans",
     "home": "Home",
     "merchantRules": "Merchant Rules",
-    "more": "More",
-    "netWorth": "Net Worth",
-    "new": "New",
+    "more": "Meer",
+    "netWorth": "Vermogen",
+    "new": "Nieuw",
     "ocr": "OCR",
     "retirementPlanning": "Retirement Planning",
     "savingsGoal": "Savings Goal",
@@ -496,7 +496,7 @@
       "accountType": {
         "checking": "Checking",
         "credit": "Credit Card",
-        "savings": "Savings"
+        "savings": "Spaargeld"
       },
       "accountTypeLabel": "Account Type",
       "accountUpdated": "Account updated",
@@ -510,22 +510,22 @@
       "assignedTransactions": "Assigned {count} transactions to {name}",
       "assigning": "Assigning...",
       "balanceExplanation": "This is added to your transaction totals to show your current balance",
-      "cancel": "Cancel",
+      "cancel": "Annuleren",
       "chooseAccount": "Choose an account...",
       "clearAllConfirm": "Clear All Transactions",
       "clearAllDescription": "This will permanently delete ALL transactions from the database. Your accounts and their starting balances will be preserved. You can then re-import your bank statements fresh. This action cannot be undone.",
       "clearAllTitle": "Clear All Transactions",
       "clearAllTransactions": "Clear all transactions and start fresh",
       "clickToView": "Click to view",
-      "create": "Create",
+      "create": "Aanmaken",
       "createdAccount": "Created account: {names}",
       "current": "Current",
       "dataManagement": "Data Management",
-      "delete": "Delete",
+      "delete": "Verwijderen",
       "deleteAccountDescription": "Are you sure you want to delete \"{name}\"? This will not delete associated transactions.",
       "deleteAccountTitle": "Delete Account",
       "dismissReminder": "Dismiss reminder",
-      "edit": "Edit",
+      "edit": "Bewerken",
       "editAccount": "Edit Account",
       "enterBankBalance": "Enter your current bank balance to ensure accurate account totals.",
       "failedToAssign": "Failed to assign transactions",
@@ -551,23 +551,23 @@
       "startingBalanceLabel": "Starting Balance",
       "startingBalanceSetTo": "Starting balance set to {amount}",
       "subtitle": "Manage your bank accounts and starting balances",
-      "title": "Accounts",
+      "title": "Rekeningen",
       "totalStartingBalance": "Total Starting Balance",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
       "unassignedClickToAssign": "Click below to automatically assign them to your accounts.",
       "unassignedCreateFirst": "Create an account first, then they will be automatically assigned.",
       "unassignedDescription": "These transactions were imported before accounts were set up.",
       "unassignedTitle": "{count, plural, one {# transaction needs} other {# transactions need}} account assignment",
-      "update": "Update"
+      "update": "Bijwerken"
     },
     "budgets": {
       "addBudget": "Add Budget",
-      "amountLabel": "Amount",
-      "annual": "Annual",
+      "amountLabel": "Bedrag",
+      "annual": "Jaarlijks",
       "budgetAlerts": "⚠️ Budget Alerts",
       "budgetDeleted": "Budget deleted successfully",
-      "cancel": "Cancel",
-      "categoryLabel": "Category",
+      "cancel": "Annuleren",
+      "categoryLabel": "Categorie",
       "createFirstBudget": "Create First Budget",
       "currentProgress": "Current progress: {percentage}% spent ({spent})",
       "currentlyOverBudget": "Currently {amount} over budget",
@@ -582,7 +582,7 @@
       "helpTooltip": "Set spending limits for each category. Track your progress with color-coded alerts: Green = On Track, Yellow = Warning (80%), Red = Over Budget (100%).",
       "helpTooltipAriaLabel": "More information about budgets",
       "loading": "Loading budgets...",
-      "monthly": "Monthly",
+      "monthly": "Maandelijks",
       "noBudgetsDescription": "Create a budget to track your spending limits and goals.",
       "noBudgetsSet": "No budgets set",
       "of": "of",
@@ -606,7 +606,7 @@
       "statusOnTrack": "✓ On Track",
       "statusOver": "✖ Over",
       "statusWarning": "⚠ Warning",
-      "title": "Budgets",
+      "title": "Budgetten",
       "totalBudgeted": "Total Budgeted",
       "totalExpenses": "Total expenses",
       "totalSpent": "Total Spent",
@@ -642,11 +642,11 @@
     },
     "merchantRules": {
       "applied": "Applied {count} times",
-      "category": "Category",
+      "category": "Categorie",
       "createRule": "Always categorize {merchant} as {category}?",
       "deleteRule": "Delete Rule",
       "description": "Auto-categorize transactions by merchant",
-      "merchant": "Merchant",
+      "merchant": "Handelaar",
       "no": "No, just this time",
       "noRules": "No merchant rules yet",
       "noRulesDescription": "Rules are created when you re-categorize transactions",
@@ -660,15 +660,15 @@
       "cashChecking": "Cash & Checking",
       "creditCards": "Credit Cards",
       "history": "Historical Snapshots",
-      "investments": "Investments",
+      "investments": "Investeringen",
       "liabilityBreakdown": "Liability Breakdown",
-      "loans": "Loans",
+      "loans": "Leningen",
       "milestoneReached": "Milestone reached: {amount}!",
       "mortgage": "Mortgage",
       "noLiabilities": "No liabilities — great job!",
       "property": "Property",
-      "savings": "Savings",
-      "title": "Net Worth",
+      "savings": "Spaargeld",
+      "title": "Vermogen",
       "totalAssets": "Total Assets",
       "totalLiabilities": "Total Liabilities",
       "totalNetWorth": "Total Net Worth",
@@ -689,7 +689,7 @@
       "backToProperties": "Back to Properties",
       "currentBalance": "Current Balance",
       "currentValue": "Current Value",
-      "equity": "Equity",
+      "equity": "Eigen vermogen",
       "interestRate": "Interest Rate",
       "lender": "Lender",
       "loanDetails": "Loan Details",
@@ -700,7 +700,7 @@
       "noProperties": "No properties tracked",
       "noPropertiesDescription": "Add your first property to track equity and appreciation",
       "notFound": "Property not found",
-      "notes": "Notes",
+      "notes": "Notities",
       "occupancyRate": "Occupancy Rate",
       "propertyTax": "Property Tax",
       "purchasePrice": "Purchase Price",
@@ -721,7 +721,7 @@
       "grossVsNet": "Gross vs Net",
       "markExpecting": "Expect Refund",
       "net": "Net",
-      "notes": "Notes",
+      "notes": "Notities",
       "notesPlaceholder": "Any additional details about this refund...",
       "partial": "Partial refund",
       "received": "Refund received",
@@ -736,7 +736,7 @@
       "approveKey": "Approve (→/A)",
       "noDescription": "No description",
       "progress": "{reviewed} of {total} reviewed",
-      "skip": "Skip",
+      "skip": "Overslaan",
       "skipKey": "Skip (←/F)",
       "subtitle": "Categorize your uncategorized transactions",
       "swipeLeft": "Swipe left to skip",
@@ -801,10 +801,10 @@
     },
     "templates": {
       "backToSchool": "Back to School",
-      "categories": "Categories",
+      "categories": "Categorieën",
       "holidaySeason": "Holiday Season",
       "homeImprovement": "Home Improvement",
-      "preview": "Preview",
+      "preview": "Voorbeeld",
       "summerTravel": "Summer Travel",
       "taxSeason": "Tax Season",
       "title": "Budget Templates",
@@ -825,9 +825,9 @@
     "categorize": "Categorize",
     "clearSelection": "Clear selection",
     "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
+    "delete": "Verwijderen",
     "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
+    "export": "Exporteren",
     "noSubcategory": "No subcategory",
     "selectAll": "Select all",
     "selectCategory": "Select category...",
@@ -849,7 +849,7 @@
       "needsExamples": "rent, utilities, groceries",
       "over": "Over",
       "ruleExplanation": "The 50/30/20 Rule",
-      "savings": "Savings",
+      "savings": "Spaargeld",
       "savingsDescription": "Emergency fund, investments, retirement, extra debt payments",
       "savingsExamples": "savings, investments, extra debt",
       "subtitle": "See how your budget measures up",
@@ -865,7 +865,7 @@
       "back": "Back to calculators",
       "calculate": "Calculate",
       "months": "months",
-      "reset": "Reset",
+      "reset": "Opnieuw instellen",
       "save": "Save Plan",
       "years": "years"
     },
@@ -905,8 +905,8 @@
       "apr": "APR (%)",
       "avalanche": "Avalanche Strategy",
       "avalancheDescription": "Pay highest interest first to save the most money",
-      "balance": "Balance",
-      "debtName": "Name",
+      "balance": "Saldo",
+      "debtName": "Naam",
       "debtNamePlaceholder": "Debt {number}",
       "description": "Compare snowball vs avalanche strategies to pay off debt faster",
       "extraMonthlyPayment": "Extra Monthly Payment",
@@ -914,10 +914,10 @@
       "minimumPayment": "Min Payment",
       "month": "Month",
       "morePsychological": "Motivational wins",
-      "payment": "Payment",
+      "payment": "Betaling",
       "paymentSchedule": "Payment Schedule",
       "payoffDate": "Payoff Time",
-      "recommended": "Recommended",
+      "recommended": "Aanbevolen",
       "remaining": "Remaining",
       "removeDebt": "Remove debt",
       "savingsDescription": "You'll save {amount} in interest and be debt-free {months} months sooner with the avalanche method",
@@ -1074,10 +1074,10 @@
       "monthlyPayment": "Monthly Payment",
       "payoffMonths": "Payoff Time",
       "resultTitle": "Payment Summary",
-      "scheduleBalance": "Balance",
-      "scheduleInterest": "Interest",
+      "scheduleBalance": "Saldo",
+      "scheduleInterest": "Rente",
       "scheduleMonth": "Month",
-      "schedulePayment": "Payment",
+      "schedulePayment": "Betaling",
       "schedulePrincipal": "Principal",
       "scheduleTitle": "Amortization Schedule",
       "showFullSchedule": "Show Full Schedule",
@@ -1091,7 +1091,7 @@
     },
     "netWorth": {
       "description": "View your complete financial picture with assets and liabilities",
-      "title": "Net Worth"
+      "title": "Vermogen"
     },
     "property": {
       "description": "Track property values, vehicles, and other assets",
@@ -1116,7 +1116,7 @@
       "formulaText": "Accumulation: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | Withdrawal: Balance_n = Balance_(n-1)(1+r) - W",
       "heroInsufficient": "Your savings may run out at age {age}",
       "heroInsufficientBadge": "Action Needed",
-      "heroNeutralBadge": "Close",
+      "heroNeutralBadge": "Sluiten",
       "heroSufficient": "Your savings will last {years} years in retirement",
       "heroSufficientBadge": "On Track",
       "inflationRate": "Inflation Rate (%)",
@@ -1164,24 +1164,24 @@
     },
     "subscriptionCost": {
       "addSubscription": "Add Subscription",
-      "amount": "Amount",
+      "amount": "Bedrag",
       "breakdown": "Essential vs Non-Essential",
       "byCategory": "By Category",
-      "daily": "Daily",
+      "daily": "Dagelijks",
       "description": "Track and analyze the true cost of your subscriptions",
       "essential": "Essential",
       "essentialCost": "Essential",
       "frequency": {
-        "annual": "Annual",
+        "annual": "Jaarlijks",
         "biweekly": "Bi-weekly",
         "label": "Frequency",
-        "monthly": "Monthly",
-        "quarterly": "Quarterly",
-        "weekly": "Weekly"
+        "monthly": "Maandelijks",
+        "quarterly": "Kwartaallijks",
+        "weekly": "Wekelijks"
       },
-      "monthly": "Monthly",
+      "monthly": "Maandelijks",
       "monthlyIncome": "Monthly Income",
-      "name": "Name",
+      "name": "Naam",
       "namePlaceholder": "e.g., Netflix, Spotify",
       "nonEssentialCost": "Non-Essential",
       "perYear": "/year",
@@ -1193,7 +1193,7 @@
       "subtitle": "See where your recurring money goes",
       "title": "Subscription Cost Calculator",
       "totalCost": "Total Subscription Cost",
-      "yearly": "Yearly",
+      "yearly": "Jaarlijks",
       "yourSubscriptions": "Your Subscriptions"
     },
     "transparency": {
@@ -1214,7 +1214,7 @@
       "totalInterest": "Totale rente",
       "snowball": "Sneeuwbal",
       "avalanche": "Lawine",
-      "portfolio": "Portfolio",
+      "portfolio": "Portefeuille",
       "fireTarget": "FIRE-doel",
       "median50th": "Mediaan (50e)",
       "remainingBalance": "Resterend saldo",
@@ -1239,7 +1239,7 @@
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
     "dialog": {
-      "cancel": "Cancel",
+      "cancel": "Annuleren",
       "description": "Add bill reminders to your calendar",
       "deselectAll": "Deselect all",
       "export": "Export {count} subscription(s)",
@@ -1257,35 +1257,35 @@
     "selectSubscriptions": "Select Subscriptions..."
   },
   "categories": {
-    "cancel": "Cancel",
+    "cancel": "Annuleren",
     "cannotDeleteDefault": "Cannot delete default categories",
     "categoryNameLabel": "Category Name *",
     "categoryNamePlaceholder": "e.g., Home Expenses",
     "colorLabel": "Color",
     "createCategory": "Create Category",
     "createFirstCategory": "Create Your First Category",
-    "default": "Default",
-    "delete": "Delete",
+    "default": "Standaard",
+    "delete": "Verwijderen",
     "deleteCategoryAria": "Delete category",
     "deleteConfirm": "Delete \"{name}\"? This cannot be undone.",
     "deleteFailed": "Failed to delete category",
-    "edit": "Edit",
+    "edit": "Bewerken",
     "editCategory": "Edit Category",
     "editCategoryAria": "Edit category",
-    "expense": "Expense",
-    "income": "Income",
+    "expense": "Uitgave",
+    "income": "Inkomsten",
     "loading": "Loading categories...",
     "nameRequired": "Category name is required",
     "newCategory": "New Category",
     "noCategories": "No categories found",
-    "save": "Save",
+    "save": "Opslaan",
     "saveFailed": "Failed to save category",
     "subcategoriesLabel": "Subcategories (comma-separated)",
     "subcategoriesPlaceholder": "e.g., Rent, Maintenance, Insurance",
     "subtitle": "Manage your budget categories and subcategories",
     "tipLabel": "Tip:",
     "tipText": "Default categories cannot be edited or deleted. Create custom categories for your specific needs.",
-    "title": "Categories",
+    "title": "Categorieën",
     "typeLabel": "Type"
   },
   "chatbot": {
@@ -1319,16 +1319,16 @@
     },
     "messages": {
       "dataAccessed": "Data accessed:",
-      "error": "Error",
+      "error": "Fout",
       "thinking": "Thinking..."
     }
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
+      "actions": "Acties",
       "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
+      "income": "Inkomsten",
+      "spending": "Uitgaven",
       "trends": "Trends"
     }
   },
@@ -1380,21 +1380,21 @@
     "title": "Enable Budget Chatbot?"
   },
   "columnMapper": {
-    "amount": "Amount",
+    "amount": "Bedrag",
     "amountColumn": "Amount Column",
     "applyMapping": "Apply Mapping",
     "bankStatementFormat": "Bank Statement Format",
-    "cancel": "Cancel",
+    "cancel": "Annuleren",
     "columnNumber": "Column {number}",
     "creditColumn": "Credit Column",
-    "date": "Date",
+    "date": "Datum",
     "dateColumn": "Date Column",
     "debitColumn": "Debit Column",
     "debitCreditColumns": "Debit/Credit Columns (e.g., Home Trust)",
-    "delete": "Delete",
+    "delete": "Verwijderen",
     "description": "Auto-detection confidence is low. Please manually map columns.",
     "descriptionColumn": "Description Column",
-    "descriptionHeader": "Description",
+    "descriptionHeader": "Omschrijving",
     "dismiss": "Dismiss",
     "lastUsed": "Last used: {date}",
     "mapColumnsToFields": "Map Columns to Fields",
@@ -1416,23 +1416,23 @@
   "commandPalette": {
     "commands": {
       "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
+      "budgets": "Budgetten",
+      "categories": "Categorieën",
       "darkTheme": "Dark Theme",
       "dashboard": "Dashboard",
       "exportData": "Export Data",
       "futurePlans": "Future Plans",
       "highContrastTheme": "High-Contrast Theme",
       "importCsv": "Import CSV",
-      "investments": "Investments",
+      "investments": "Investeringen",
       "lightTheme": "Light Theme",
-      "loans": "Loans",
+      "loans": "Leningen",
       "newBudget": "New Budget",
-      "reports": "Reports",
+      "reports": "Rapporten",
       "retirement": "Retirement",
       "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "settings": "Instellingen",
+      "transactions": "Transacties"
     },
     "groups": {
       "appearance": "Appearance",
@@ -1468,7 +1468,7 @@
         "addAccount": "Add Account",
         "allTransactions": "All Transactions",
         "imported": "Imported",
-        "netWorth": "Net Worth",
+        "netWorth": "Vermogen",
         "noAccounts": "No accounts added yet",
         "title": "Account Balances",
         "viewAll": "View All"
@@ -1489,16 +1489,16 @@
       },
       "incomeVsExpenses": {
         "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
+        "expenses": "Uitgaven",
+        "income": "Inkomsten",
         "net": "Net",
         "noData": "No transactions yet",
-        "thisMonth": "This Month",
+        "thisMonth": "Deze maand",
         "title": "Income vs Expenses"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
+        "expenses": "Uitgaven",
+        "income": "Inkomsten",
         "lastSixMonths": "Last 6 Months",
         "needMoreData": "Add transactions for 2+ months to see trends",
         "notEnoughData": "Not enough history",
@@ -1507,7 +1507,7 @@
       "netWorthMini": {
         "assets": "Assets",
         "liabilities": "Liabilities",
-        "title": "Net Worth",
+        "title": "Vermogen",
         "viewDetails": "View Details"
       },
       "recentTransactions": {
@@ -1537,9 +1537,9 @@
         "addTransactions": "Add Transactions",
         "moreCategories": "+{count} more categories",
         "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
+        "thisMonth": "Deze maand",
         "title": "Spending by Category",
-        "total": "Total",
+        "total": "Totaal",
         "uncategorized": "Uncategorized"
       },
       "streaks": {
@@ -1610,14 +1610,14 @@
     "comparison": {
       "description": "Side-by-side comparison of your active loans",
       "headers": {
-        "balance": "Balance",
+        "balance": "Saldo",
         "interestRate": "Interest Rate",
-        "loan": "Loan",
+        "loan": "Lening",
         "monthlyPayment": "Monthly Payment",
         "percentOfTotal": "% of Total Debt"
       },
       "title": "Loan Comparison",
-      "total": "Total"
+      "total": "Totaal"
     },
     "empty": {
       "addFirstLoan": "Add Your First Loan",
@@ -1633,7 +1633,7 @@
     "activeLoansTitle": "Active Loans",
     "addLoan": "Add Loan",
     "avgRate": "Avg Rate",
-    "balance": "Balance",
+    "balance": "Saldo",
     "monthlyPayment": "Monthly Payment",
     "paidOff": "{percent}% paid off",
     "title": "Debt Overview",
@@ -1647,11 +1647,11 @@
     "addDebtTitle": "Add Debt",
     "addManually": "Add Manually",
     "apr": "APR %",
-    "balance": "Balance",
+    "balance": "Saldo",
     "baselineComparison": "By using this strategy, you save {interest} in interest and pay off {months} months sooner compared to minimum payments only.",
-    "cancel": "Cancel",
+    "cancel": "Annuleren",
     "debtFreeDate": "Debt-Free Date",
-    "debtName": "Name",
+    "debtName": "Naam",
     "debtNamePlaceholder": "e.g. Credit Card, Car Loan",
     "debtOverview": "Debt Overview",
     "goToLoans": "Go to Loans",
@@ -1662,7 +1662,7 @@
     "payoffChart": "Payoff Chart",
     "payoffTimeline": "Payoff Timeline",
     "results": "Results",
-    "save": "Save",
+    "save": "Opslaan",
     "saveScenarioTitle": "Save Scenario",
     "savedScenarios": "Saved Scenarios",
     "scenarioNamePlaceholder": "e.g. Aggressive avalanche plan",
@@ -1676,7 +1676,7 @@
     "weightedApr": "Weighted APR"
   },
   "debug": {
-    "actions": "Actions",
+    "actions": "Acties",
     "backToDashboard": "Back to Dashboard",
     "clearAllData": "Clear All Data (Dangerous!)",
     "clearConfirm": "Clear ALL data? This cannot be undone!",
@@ -1686,13 +1686,13 @@
     "databaseInfo": "Database Information",
     "devIsolationNote": "Development data is isolated from production. Test freely without affecting real users.",
     "development": "DEVELOPMENT",
-    "error": "Error",
+    "error": "Fout",
     "exportAllData": "Export All Data (Backup)",
     "exportFailed": "Export failed: {error}",
     "exportSuccess": "Data exported successfully!",
     "importCsvData": "Import CSV Data",
     "loading": "Loading database information...",
-    "name": "Name",
+    "name": "Naam",
     "noDataFound": "No Data Found",
     "noDataReason": "Your transactions are not showing up. This could be because:",
     "noDataReason1": "Data was cleared during development",
@@ -1729,7 +1729,7 @@
     "colors": "Colors",
     "componentStates": "Component States",
     "dark": "Dark",
-    "default": "Default",
+    "default": "Standaard",
     "defaultCard": "Default Card",
     "defaultCardDescription": "Basic card with default styles",
     "defaultInput": "Default Input",
@@ -1856,7 +1856,7 @@
     "aiAnalysis": "AI Analysis:",
     "closeModal": "Close modal",
     "footer": {
-      "close": "Close",
+      "close": "Sluiten",
       "needHelp": "Need more help?",
       "viewGuide": "View troubleshooting guide"
     },
@@ -1881,11 +1881,11 @@
     "technical": {
       "canRecover": "Can Recover:",
       "errorCategory": "Error Category:",
-      "no": "No",
+      "no": "Nee",
       "severity": "Severity:",
       "suggestions": "Suggestions:",
       "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "yes": "Ja"
     },
     "title": "Import Failed"
   },
@@ -1929,15 +1929,15 @@
     "importJson": "Import JSON",
     "importing": "Importing...",
     "invalidBackupFormat": "Invalid backup file format",
-    "options": "Options",
-    "recommended": "Recommended",
+    "options": "Opties",
+    "recommended": "Aanbevolen",
     "restoreDescription": "Import a previously exported JSON backup file",
     "restoreFromBackup": "Restore from Backup",
     "restoreWarning": "Warning: This will replace ALL existing data with the backup",
     "selectAll": "Select All",
-    "sheetAccounts": "Accounts",
+    "sheetAccounts": "Rekeningen",
     "sheetAccountsDesc": "All accounts with balances",
-    "sheetBudgets": "Budgets",
+    "sheetBudgets": "Budgetten",
     "sheetBudgetsDesc": "Budget vs actual comparison",
     "sheetCategoryAnalysis": "Category Analysis",
     "sheetCategoryAnalysisDesc": "Spending by category",
@@ -1945,19 +1945,19 @@
     "sheetDashboardDesc": "Executive summary with key metrics",
     "sheetDataDictionary": "Data Dictionary",
     "sheetDataDictionaryDesc": "Field explanations",
-    "sheetGoals": "Goals",
+    "sheetGoals": "Doelen",
     "sheetGoalsDesc": "Savings goals progress",
-    "sheetInvestments": "Investments",
+    "sheetInvestments": "Investeringen",
     "sheetInvestmentsDesc": "Portfolio holdings",
-    "sheetLoans": "Loans",
+    "sheetLoans": "Leningen",
     "sheetLoansDesc": "Debt with amortization schedules",
     "sheetMonthlySummary": "Monthly Summary",
     "sheetMonthlySummaryDesc": "Month-by-month overview",
-    "sheetNetWorth": "Net Worth",
+    "sheetNetWorth": "Vermogen",
     "sheetNetWorthDesc": "Assets vs liabilities",
     "sheetSubscriptions": "Subscriptions",
     "sheetSubscriptionsDesc": "Recurring costs tracking",
-    "sheetTransactions": "Transactions",
+    "sheetTransactions": "Transacties",
     "sheetTransactionsDesc": "Complete transaction history",
     "sheetsToInclude": "{selected} of {total}",
     "startDate": "Start Date",
@@ -1974,9 +1974,9 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
+      "cancel": "Annuleren",
       "done": "Done!",
-      "download": "Download",
+      "download": "Downloaden",
       "export": "Export Data"
     },
     "complete": {
@@ -1984,10 +1984,10 @@
       "success": "Export complete! Check your downloads folder."
     },
     "dataSummary": {
-      "accounts": "Accounts",
+      "accounts": "Rekeningen",
       "estimatedSize": "Est. Size",
       "title": "Data Summary",
-      "transactions": "Transactions"
+      "transactions": "Transacties"
     },
     "exporting": {
       "pleaseWait": "Please wait, this may take a moment",
@@ -2024,7 +2024,7 @@
       "hint": "Password Hint (Optional)",
       "hintNote": "This hint will be stored unencrypted in the file",
       "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
+      "label": "Wachtwoord",
       "minLength": "Password must be at least 8 characters",
       "mismatch": "Passwords do not match",
       "placeholder": "Enter password (min 8 characters)",
@@ -2034,16 +2034,16 @@
     "title": "Export Data"
   },
   "filters": {
-    "account": "Account",
+    "account": "Rekening",
     "allAccounts": "All accounts",
     "allCategories": "All categories",
     "allTypes": "All types",
     "apply": "Apply filters",
-    "category": "Category",
+    "category": "Categorie",
     "clearFilters": "Clear filters",
     "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
+    "expense": "Uitgave",
+    "income": "Inkomsten",
     "search": "Search transactions...",
     "type": "Type"
   },
@@ -2058,11 +2058,11 @@
     "tagline": "Premium budgettering met een eenmalige upgrade."
   },
   "fridayReview": {
-    "back": "Back",
+    "back": "Terug",
     "backToDashboard": "Back to Dashboard",
     "closeReview": "Close review",
-    "continue": "Continue",
-    "done": "Done",
+    "continue": "Doorgaan",
+    "done": "Klaar",
     "goToStep": "Go to {step}",
     "loading": "Loading your weekly review...",
     "placeholderContent": "Step content will be implemented in subsequent tasks (F-021 through F-025).",
@@ -2121,7 +2121,7 @@
   "holdingModal": {
     "addHolding": "Add Holding",
     "canadianStockHint": "Use .TO for Canadian stocks (e.g., TD.TO, VGRO.TO)",
-    "cancel": "Cancel",
+    "cancel": "Annuleren",
     "editHolding": "Edit Holding",
     "enterSymbol": "Please enter a stock symbol",
     "failedToSave": "Failed to save holding",
@@ -2142,7 +2142,7 @@
   },
   "iconPicker": {
     "clearSearch": "Clear Search",
-    "close": "Close",
+    "close": "Sluiten",
     "currentIcon": "Current Icon",
     "foundCount": "Found {count} icon(s)",
     "iconsAvailable": "{count} icons available",
@@ -2201,14 +2201,14 @@
     "selectAccountFirst": "Please select an account before importing transactions. Go to the Accounts page to create an account first.",
     "skipped": "skipped",
     "subtitle": "Upload CSV, OFX, QFX, or PDF files from BMO, Home Trust, TD, Chase, and 15+ other banks",
-    "success": "Success",
+    "success": "Succes",
     "tipCheckConsole": "Check browser console for detailed OCR logs",
     "tipEnsureTextPDF": "Ensure PDF is text-based (not a scanned image)",
     "tipExportDebug": "Export debug data (button above) for support",
     "tipTryCSV": "Try exporting as CSV instead of PDF from your bank",
     "title": "Import Transactions",
     "transactionSingular": "transaction",
-    "transactionsLabel": "Transactions",
+    "transactionsLabel": "Transacties",
     "transactionsPlural": "transactions",
     "troubleshootingTips": "💡 Troubleshooting tips:",
     "unableToDetectFormat": "Unable to detect file format. Please try a different file.",
@@ -2217,9 +2217,9 @@
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
+      "back": "Terug",
+      "cancel": "Annuleren",
+      "done": "Klaar",
       "import": "Import Data"
     },
     "complete": {
@@ -2249,7 +2249,7 @@
       "encrypted": "This file is encrypted",
       "enterPassword": "Enter password",
       "hint": "Hint: {hint}",
-      "password": "Password"
+      "password": "Wachtwoord"
     },
     "importing": {
       "pleaseWait": "Please wait, this may take a moment",
@@ -2270,7 +2270,7 @@
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
+      "cancel": "Annuleren",
       "create": "Create Account",
       "saving": "Saving...",
       "update": "Update Account"
@@ -2314,7 +2314,7 @@
     "emptyState": "No holdings to visualize. Add holdings to see charts.",
     "legend": {
       "gain": "Gain",
-      "loss": "Loss"
+      "loss": "Verlies"
     },
     "tableHeaders": {
       "allocation": "Allocation",
@@ -2323,7 +2323,7 @@
       "gainLoss": "Gain/Loss",
       "percentReturn": "% Return",
       "symbol": "Symbol",
-      "total": "Total"
+      "total": "Totaal"
     },
     "titles": {
       "accountTypeAllocation": "Allocation by Account Type",
@@ -2338,7 +2338,7 @@
     }
   },
   "investments": {
-    "account": "Account",
+    "account": "Rekening",
     "addAccount": "Add Account",
     "addFirstHolding": "Add Your First Holding",
     "addHolding": "Add Holding",
@@ -2381,14 +2381,14 @@
     "portfolioAnalysis": "Portfolio Analysis",
     "portfolioAnalysisSubtitle": "Visual breakdown of your investments",
     "pricesUpdated": "Market prices updated {time}",
-    "refresh": "Refresh",
+    "refresh": "Vernieuwen",
     "refreshPrices": "Refresh Prices",
     "refreshPricesTitle": "Refresh market prices",
     "return": "Return",
     "showDetails": "Show Details",
     "subtitle": "Track your RRSP, TFSA, and investment accounts",
     "table": {
-      "actions": "Actions",
+      "actions": "Acties",
       "currentPrice": "Current Price",
       "gainLoss": "Gain/Loss",
       "purchasePrice": "Purchase Price",
@@ -2444,7 +2444,7 @@
       "title": "Paired Devices"
     },
     "removeDialog": {
-      "cancel": "Cancel",
+      "cancel": "Annuleren",
       "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
       "remove": "Remove",
       "title": "Remove Device"
@@ -2618,20 +2618,20 @@
       "demo": {
         "cloudStorage": "Cloud storage",
         "dining": "Dining",
-        "expenses": "Expenses",
+        "expenses": "Uitgaven",
         "foodToday": "Food • Today",
         "groceries": "Groceries",
         "groceryStore": "Grocery Store",
-        "income": "Income",
+        "income": "Inkomsten",
         "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
+        "monthly": "Maandelijks",
         "netWorth": "Net worth",
         "netflix": "Netflix",
         "salary": "Salary",
         "shopping": "Shopping",
         "spotify": "Spotify",
         "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "yearly": "Jaarlijks"
       },
       "modes": {
         "budgets": "Budgetten",
@@ -2817,9 +2817,9 @@
   },
   "linkToLoan": {
     "bestMatch": "Best Match",
-    "cancel": "Cancel",
+    "cancel": "Annuleren",
     "extra": "Extra",
-    "interest": "Interest",
+    "interest": "Rente",
     "linkError": "Failed to link transaction. Please try again.",
     "linkPayment": "Link Payment",
     "linking": "Linking...",
@@ -2842,10 +2842,10 @@
   },
   "loanForm": {
     "autoCalculated": "Auto-calculated: {amount}",
-    "back": "Back",
+    "back": "Terug",
     "biWeekly": "Bi-Weekly (Every 2 weeks)",
     "biWeeklyPaymentHint": "Bi-weekly payment amount (P&I only)",
-    "cancel": "Cancel",
+    "cancel": "Annuleren",
     "createLoan": "Create Loan",
     "currentBalance": "Current Balance",
     "defermentEndDate": "Deferment End Date",
@@ -2860,16 +2860,16 @@
     "loanName": "Loan Name",
     "loanStartDate": "Loan Start Date",
     "loanTerm": "Loan Term (months)",
-    "monthly": "Monthly",
+    "monthly": "Maandelijks",
     "monthlyHomeInsurance": "Monthly Home Insurance",
     "monthlyPMI": "Monthly PMI",
     "monthlyPaymentHint": "Monthly payment amount (P&I only)",
     "monthlyPropertyTax": "Monthly Property Tax",
     "namePlaceholder": "e.g., Primary Mortgage, Car Loan",
-    "next": "Next",
+    "next": "Volgende",
     "nextPaymentDate": "Next Payment Date",
     "noAccountLinked": "No account linked",
-    "notes": "Notes",
+    "notes": "Notities",
     "notesPlaceholder": "Add any additional notes about this loan...",
     "optionalSettings": "Optional Settings",
     "optionalSettingsDescription": "Additional loan configuration",
@@ -2909,7 +2909,7 @@
     "vehicleModel": "Vehicle Model",
     "vehicleModelPlaceholder": "e.g., Civic, Camry",
     "vehicleYear": "Vehicle Year",
-    "weekly": "Weekly",
+    "weekly": "Wekelijks",
     "weeklyPaymentHint": "Weekly payment amount (P&I only)"
   },
   "loanPaymentSelector": {
@@ -2941,7 +2941,7 @@
     "annualPercentageRate": "Annual Percentage Rate",
     "avgInterestRate": "Avg Interest Rate",
     "backToLoans": "Back to Loans",
-    "cancel": "Cancel",
+    "cancel": "Annuleren",
     "colorKey": "Color Key",
     "costAnalysis": "Cost Analysis",
     "costAnalysisDescription": "See the total cost of this loan over its lifetime",
@@ -2949,12 +2949,12 @@
     "costOfBorrowing": "Cost of borrowing",
     "currentBalance": "Current Balance",
     "debtFreeDate": "Debt-Free Date",
-    "delete": "Delete",
+    "delete": "Verwijderen",
     "deleteError": "Failed to delete loan. Please try again.",
     "deleteLoan": "Delete Loan",
     "deleteLoanConfirmDescription": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
     "deleteLoanConfirmTitle": "Delete Loan?",
-    "edit": "Edit",
+    "edit": "Bewerken",
     "editLoan": "Edit Loan",
     "estimatedPayoff": "Estimated payoff",
     "extraCostAbovePrincipal": "Extra cost above principal",
@@ -2984,7 +2984,7 @@
     "nextPayment": "Next Payment",
     "noLoansMatchFilters": "No loans match your filters",
     "notAvailable": "N/A",
-    "notes": "Notes",
+    "notes": "Notities",
     "originalPrincipal": "Original Principal",
     "overYears": "Over {years} years",
     "payoffDate": "Payoff Date",
@@ -3006,10 +3006,10 @@
     "statusLabel": "Status",
     "subtitle": "Manage and track all your loans",
     "table": {
-      "date": "Date",
-      "interest": "Interest",
+      "date": "Datum",
+      "interest": "Rente",
       "month": "Month",
-      "payment": "Payment",
+      "payment": "Betaling",
       "principal": "Principal",
       "remaining": "Remaining"
     },
@@ -3021,7 +3021,7 @@
       "paymentHistory": "Payment History"
     },
     "tip": "Tip",
-    "title": "Loans",
+    "title": "Leningen",
     "tooltip": {
       "amortizationAria": "More information about amortization and loan payoff",
       "amortizationBody": "How your loan gets paid off over time. Each payment covers interest first, then principal. The schedule shows exactly how much goes to each, month by month. Early payments are mostly interest!",
@@ -3048,9 +3048,9 @@
     "youvePaid": "You've paid ${amount} so far"
   },
   "localeSettings": {
-    "currency": "Currency",
+    "currency": "Valuta",
     "formatPreview": "Format Preview",
-    "language": "Language",
+    "language": "Taal",
     "monday": "Monday",
     "resetToDefaults": "Reset to Browser Defaults",
     "saveChanges": "Save Changes",
@@ -3097,7 +3097,7 @@
       "trackingAnalysis": "Tracking & Analysis",
       "wealthPlanning": "Wealth & Planning"
     },
-    "title": "More"
+    "title": "Meer"
   },
   "nav": {
     "about": "Over",
@@ -3181,7 +3181,7 @@
       "description": "Send a test notification to verify your settings",
       "title": "Test Notification"
     },
-    "title": "Notifications"
+    "title": "Meldingen"
   },
   "notifications": {
     "clearAll": "Clear all",
@@ -3201,11 +3201,11 @@
     },
     "snoozedUntil": "Snoozed for {time}",
     "tabs": {
-      "all": "All",
+      "all": "Alles",
       "snoozed": "Snoozed",
       "unread": "Unread"
     },
-    "title": "Notifications",
+    "title": "Meldingen",
     "types": {
       "bill_reminder": "Bill Reminder",
       "budget_alert": "Budget Alert",
@@ -3214,20 +3214,20 @@
     }
   },
   "ocr": {
-    "amountLabel": "Amount",
+    "amountLabel": "Bedrag",
     "amountRequired": "Amount *",
     "bestResultPage": "Best result from page {page}",
-    "cancel": "Cancel",
-    "categoryLabel": "Category",
+    "cancel": "Annuleren",
+    "categoryLabel": "Categorie",
     "categoryNamePlaceholder": "Category name",
-    "clear": "Clear",
+    "clear": "Wissen",
     "clickToUpload": "Click to upload",
     "confidence": "Confidence",
-    "create": "Create",
+    "create": "Aanmaken",
     "createNewCategory": "+ Create new category",
-    "dateLabel": "Date",
+    "dateLabel": "Datum",
     "dateRequired": "Date *",
-    "descriptionLabel": "Description",
+    "descriptionLabel": "Omschrijving",
     "descriptionPlaceholder": "Optional description",
     "errorFileSize": "File size must be less than 10MB",
     "errorInvalidFileType": "Please select a valid image file or PDF (PNG, JPG, GIF, WebP, PDF)",
@@ -3237,10 +3237,10 @@
     "errorRequiredFields": "Please fill in merchant, amount, and date",
     "errorSaveFailed": "Failed to save transaction. Please try again.",
     "goToSettings": "Go to Settings",
-    "merchantLabel": "Merchant",
+    "merchantLabel": "Handelaar",
     "merchantPlaceholder": "e.g. Walmart, Amazon",
     "merchantRequired": "Merchant *",
-    "none": "None",
+    "none": "Geen",
     "notFound": "Not found",
     "ocrDisabled": "OCR is Disabled",
     "ocrDisabledDescription": "Receipt scanning is currently disabled in your privacy settings. Enable OCR processing to use this feature.",
@@ -3259,7 +3259,7 @@
     "selectCategory": "Select a category",
     "selectSubcategory": "Select a subcategory",
     "subcategoriesPlaceholder": "Subcategories (comma-separated)",
-    "subcategoryLabel": "Subcategory",
+    "subcategoryLabel": "Subcategorie",
     "subtitle": "Upload a receipt image to automatically extract transaction data",
     "supportedFormats": "PNG, JPG, GIF, WebP, or PDF up to 10MB",
     "title": "Receipt Scanner",
@@ -3322,9 +3322,9 @@
     }
   },
   "onboardingPage": {
-    "back": "Back",
+    "back": "Terug",
     "getStarted": "Get Started",
-    "next": "Next",
+    "next": "Volgende",
     "saving": "Saving...",
     "stepCounter": "Step {current} of {total}",
     "steps": {
@@ -3439,14 +3439,14 @@
     "verifyingConnection": "Verifying connection..."
   },
   "paymentHistoryPanel": {
-    "actions": "Actions",
+    "actions": "Acties",
     "addPayment": "Add Payment",
     "addPaymentError": "Failed to add payment. Please try again.",
-    "amount": "Amount",
+    "amount": "Bedrag",
     "balanceAfter": "Balance After",
-    "cancel": "Cancel",
-    "date": "Date",
-    "delete": "Delete",
+    "cancel": "Annuleren",
+    "date": "Datum",
+    "delete": "Verwijderen",
     "deleteConfirm": "Delete this payment record? This action cannot be undone.",
     "deleteError": "Failed to delete payment. Please try again.",
     "description": "Track your loan payments and link to transactions",
@@ -3458,7 +3458,7 @@
     "extra": "Extra",
     "extraPrincipalLabel": "Extra Principal (Optional)",
     "highConfidence": "High Confidence",
-    "interest": "Interest",
+    "interest": "Rente",
     "linkPayment": "Link Payment",
     "linkTransactionError": "Failed to link transaction. Please try again.",
     "linked": "Linked",
@@ -3481,18 +3481,18 @@
     "uncategorized": "Uncategorized",
     "unlinkConfirm": "Unlink this payment from the transaction?",
     "unlinkError": "Failed to unlink payment. Please try again.",
-    "view": "View",
+    "view": "Bekijken",
     "viewTransaction": "View transaction"
   },
   "pinDialog": {
-    "cancel": "Cancel",
+    "cancel": "Annuleren",
     "changeDescription": "Change the PIN for this profile.",
     "changePin": "Change PIN",
     "confirmNewPinLabel": "Confirm New PIN",
     "confirmNewPinPlaceholder": "Confirm new PIN",
-    "continue": "Continue",
+    "continue": "Doorgaan",
     "currentPinLabel": "Current PIN",
-    "defaultProfileName": "Profile",
+    "defaultProfileName": "Profiel",
     "enterCurrentPinPlaceholder": "Enter current PIN",
     "enterNewPinPlaceholder": "Enter new PIN",
     "enterPinPlaceholder": "Enter PIN",
@@ -3528,15 +3528,15 @@
       "createFirstGoal": "Create Your First Goal",
       "currentSavingsLabel": "Current Savings",
       "currentSavingsValue": "Current savings: {amount}",
-      "delete": "Delete",
+      "delete": "Verwijderen",
       "deleteGoal": "Delete Goal",
       "deleteGoalAriaLabel": "Delete goal",
       "deleteGoalDescription": "Are you sure you want to delete this savings goal? This action cannot be undone.",
       "deleteGoalTitle": "Delete Savings Goal",
-      "descriptionLabel": "Description",
+      "descriptionLabel": "Omschrijving",
       "descriptionPlaceholder": "What are you saving for?",
       "descriptionValue": "Description: {description}",
-      "edit": "Edit",
+      "edit": "Bewerken",
       "editGoal": "Edit Goal",
       "editGoalAriaLabel": "Edit goal",
       "emptyDescription": "Start planning for your future purchases by creating your first savings goal. Track your progress and stay on target.",
@@ -3584,9 +3584,9 @@
       "amountAllocated": "{amount} allocated",
       "amountUnallocated": "{amount} unallocated",
       "budgetedCategories": "Budgeted Categories",
-      "cancel": "Cancel",
+      "cancel": "Annuleren",
       "collapseDetails": "Collapse paycheck details",
-      "currency": "Currency",
+      "currency": "Valuta",
       "currencyAUD": "AUD - Australian Dollar",
       "currencyCAD": "CAD - Canadian Dollar",
       "currencyEUR": "EUR - Euro",
@@ -3630,11 +3630,11 @@
       "scheduleIrregular": "Irregular",
       "scheduleIrregularDesc": "Custom dates",
       "scheduleLabel": "Schedule: {schedule}",
-      "scheduleMonthly": "Monthly",
+      "scheduleMonthly": "Maandelijks",
       "scheduleMonthlyDesc": "Once a month",
       "scheduleSemimonthly": "Semi-monthly",
       "scheduleSemimonthlyDesc": "1st and 15th",
-      "scheduleWeekly": "Weekly",
+      "scheduleWeekly": "Wekelijks",
       "scheduleWeeklyDesc": "Every week",
       "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
       "setUpPaycheckPlan": "Set Up Paycheck Plan",
@@ -3657,7 +3657,7 @@
       "currentAgeYears": "Current age: {age} years",
       "currentSavings": "Current Savings",
       "currentSavingsAmount": "Current savings: {amount}",
-      "delete": "Delete",
+      "delete": "Verwijderen",
       "deletePlan": "Delete Plan",
       "deleteRetirementPlan": "Delete Retirement Plan",
       "deleteRetirementPlanDescription": "This will permanently remove this retirement plan and all its projections.",
@@ -3764,22 +3764,22 @@
     "dataSecurity": "Data Security",
     "dataTransactions": "transactions",
     "deleteAccountsDescription": "Bank accounts and credit cards",
-    "deleteAccountsLabel": "Accounts",
+    "deleteAccountsLabel": "Rekeningen",
     "deleteAfter30Days": "Delete after 30 days",
     "deleteAfter7Days": "Delete after 7 days (Recommended)",
     "deleteBalancesDescription": "Reset all account balances to $0",
     "deleteBalancesLabel": "Account Balances",
     "deleteBudgetsDescription": "Monthly budget allocations",
-    "deleteBudgetsLabel": "Budgets",
+    "deleteBudgetsLabel": "Budgetten",
     "deleteCategoriesDescription": "Custom spending categories",
-    "deleteCategoriesLabel": "Categories",
+    "deleteCategoriesLabel": "Categorieën",
     "deleteData": "Delete Data",
     "deleteFailed": "Failed to delete data. Please try again.",
     "deletePrivacySettingsDescription": "Reset all settings to defaults",
     "deletePrivacySettingsLabel": "Privacy Settings",
     "deleteSelected": "Delete Selected",
     "deleteTransactionsDescription": "All imported and manual transactions",
-    "deleteTransactionsLabel": "Transactions",
+    "deleteTransactionsLabel": "Transacties",
     "deleting": "Deleting...",
     "deselectAll": "Deselect All",
     "enableAnalytics": "Enable Analytics",
@@ -3792,7 +3792,7 @@
     "encryptionActive": "Encryption is active. Your data is encrypted in IndexedDB.",
     "encryptionFailed": "Failed to enable encryption. Please try again.",
     "encryptionNotAvailable": "Encryption is not available in this browser. Please use a modern browser with Web Crypto API support.",
-    "export": "Export",
+    "export": "Exporteren",
     "exportAllData": "Export All Data",
     "exportAllDataDescription": "Download all your accounts, transactions, categories, and budgets as JSON",
     "exportFailed": "Failed to export data. Please try again.",
@@ -3825,7 +3825,7 @@
     "whatsSentDescription": "Only cleaned transaction descriptions (e.g., \"AMAZON.COM\"). No account numbers, names, or addresses. Powered by OpenAI GPT-4o-mini."
   },
   "profileDialog": {
-    "cancel": "Cancel",
+    "cancel": "Annuleren",
     "confirmPinLabel": "Confirm PIN",
     "confirmPinPlaceholder": "Confirm PIN",
     "createDescription": "Add a new profile for a family member. Each profile can have its own private budgets.",
@@ -3840,7 +3840,7 @@
     "errorNameTooLong": "Name must be 30 characters or less",
     "errorPinMismatch": "PINs do not match",
     "errorUpdateFailed": "Failed to update profile",
-    "nameLabel": "Name",
+    "nameLabel": "Naam",
     "namePlaceholder": "Enter profile name",
     "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
     "pinLabel": "PIN (4-6 digits)",
@@ -3886,9 +3886,9 @@
     "cameraStep2": "Find \"Camera\" in the permissions",
     "cameraStep3": "Change it to \"Allow\"",
     "cameraStep4": "Refresh this page",
-    "cancel": "Cancel",
+    "cancel": "Annuleren",
     "deviceFound": "Device Found!",
-    "error": "Error",
+    "error": "Fout",
     "howToEnableCamera": "How to enable camera access:",
     "invalidQrFormat": "Invalid QR code format. Please scan a Budget App pairing QR code.",
     "noCamera": "No camera found on this device.",
@@ -3907,8 +3907,8 @@
   "quickCategorize": {
     "buttons": {
       "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "cancel": "Annuleren",
+      "save": "Opslaan"
     },
     "clickToSelect": "Click a category to select",
     "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
@@ -3920,27 +3920,27 @@
     "title": "Quick Categorize"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
+    "all": "Alles",
+    "categories": "Categorieën",
     "clearFilters": "Clear Filters",
     "moreCategories": "+{count} more",
     "presets": {
       "last30": "Last 30 Days",
       "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "thisMonth": "Deze maand",
+      "thisYear": "Dit jaar"
     },
     "timePeriod": "Time Period"
   },
   "quickStats": {
     "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
+    "expenses": "Uitgaven",
+    "income": "Inkomsten",
     "savingsRate": "Savings Rate",
     "savingsRateDescription": "Percentage of income saved this month"
   },
   "receiptThumbnail": {
-    "close": "Close",
+    "close": "Sluiten",
     "deleteConfirm": "Delete receipt \"{filename}\"?",
     "deleteFailed": "Failed to delete receipt",
     "deleteReceipt": "Delete receipt",
@@ -3997,9 +3997,9 @@
     "estimatedMonthly": "Estimated Monthly",
     "frequency": {
       "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "monthly": "Maandelijks",
+      "quarterly": "Kwartaallijks",
+      "weekly": "Wekelijks"
     },
     "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
     "next": "Next: {date}",
@@ -4016,20 +4016,20 @@
   },
   "reports": {
     "addTransactionsToSeeFlow": "Add income and expense transactions to see your money flow",
-    "amount": "Amount",
-    "category": "Category",
+    "amount": "Bedrag",
+    "category": "Categorie",
     "categoryBreakdown": "Category Breakdown",
     "downloadPng": "Download as PNG",
     "downloadSvg": "Download as SVG",
-    "expenses": "Expenses",
-    "income": "Income",
+    "expenses": "Uitgaven",
+    "income": "Inkomsten",
     "incomeVsExpenses": "Income vs Expenses (Last 6 Months)",
     "loading": "Loading reports...",
     "moneyFlow": "Money Flow",
     "moneyFlowDescription": "Visualize how income flows to categories and savings",
     "net": "Net",
     "netSavings": "Net Savings",
-    "noDataAvailable": "No data available",
+    "noDataAvailable": "Geen gegevens beschikbaar",
     "noSpendingData": "No spending data available",
     "noTrendData": "No trend data available",
     "percentOfTotal": "% of Total",
@@ -4037,16 +4037,16 @@
     "spendingByCategory": "Spending by Category",
     "subtitle": "Visualize your financial data",
     "timeRange": {
-      "all": "All",
+      "all": "Alles",
       "month": "Month",
-      "quarter": "Quarter",
+      "quarter": "Kwartaal",
       "year": "Year"
     },
     "title": "Reports & Insights",
     "topCategories": "Top 5 Categories",
     "totalExpenses": "Total Expenses",
     "totalIncome": "Total Income",
-    "transactions": "Transactions"
+    "transactions": "Transacties"
   },
   "settings": {
     "aboutBudgetFiles": "About .budget Files",
@@ -4067,14 +4067,14 @@
     "archiveFailed": "Failed to archive category",
     "archived": "Archived",
     "archivedCategoriesAppearHere": "Archived categories will appear here",
-    "balance": "Balance",
+    "balance": "Saldo",
     "budgetFileInfo1": "Your data is stored in a portable JSON format that can be opened by any text editor",
     "budgetFileInfo2": "Optional password protection uses industry-standard AES-256 encryption",
     "budgetFileInfo3": "Files include a checksum to detect corruption or tampering",
     "budgetFileInfo4": "Receipt images can be included in the export (increases file size)",
-    "cancel": "Cancel",
+    "cancel": "Annuleren",
     "categoriesSubtitle": "Organize your transactions with custom categories • Drag to reorder",
-    "categoriesTitle": "Categories",
+    "categoriesTitle": "Categorieën",
     "categoryName": "Category Name",
     "categoryNamePlaceholder": "e.g., Entertainment, Groceries, Salary",
     "categorySaveFailed": "Failed to save category",
@@ -4082,10 +4082,10 @@
     "color": "Color",
     "createCategoryDescription": "Create a new category for organizing transactions",
     "creditCard": "Credit Card",
-    "currency": "Currency",
+    "currency": "Valuta",
     "dataManagement": "Data Management",
     "dataManagementSubtitle": "Export and import your budget data",
-    "default": "Default",
+    "default": "Standaard",
     "deleteAccountConfirm": "Delete this account? Transactions will NOT be deleted.",
     "dragToReorder": "Drag to reorder",
     "editAccount": "Edit Account",
@@ -4105,7 +4105,7 @@
     "noCategoriesYet": "No Categories Yet",
     "quickPresets": "Quick Presets:",
     "reorderFailed": "Failed to reorder categories",
-    "savings": "Savings",
+    "savings": "Spaargeld",
     "selectSection": "Select settings section",
     "showArchived": "Show Archived",
     "subcategories": "subcategories",
@@ -4114,18 +4114,18 @@
     "subcategoriesTip": "Separate with commas, e.g. \"Movies, Streaming, Concerts\"",
     "subtitle": "Manage your accounts and categories",
     "tabAccessibility": "Accessibility",
-    "tabAccounts": "Accounts",
-    "tabCategories": "Categories",
+    "tabAccounts": "Rekeningen",
+    "tabCategories": "Categorieën",
     "tabData": "Data",
     "tabDevTools": "Developer Tools",
     "tabLocale": "Locale & Formatting",
-    "tabNotifications": "Notifications",
+    "tabNotifications": "Meldingen",
     "tabPrivacy": "Privacy & AI",
     "tabProfiles": "Profiles",
     "tapToChangeIcon": "Tap to change icon",
     "tapToChooseColor": "Tap to choose a custom color",
     "tipLabel": "Tip:",
-    "title": "Settings",
+    "title": "Instellingen",
     "toggleWebmcp": "Toggle WebMCP AI Agent Tools",
     "transaction": "transaction",
     "transactions": "transactions",
@@ -4194,8 +4194,8 @@
     "autoImportDescription": "Automatically import transactions from your bank accounts",
     "automaticSync": "Automatic Sync",
     "automaticSyncDescription": "Transactions sync daily. Manual import anytime.",
-    "back": "Back",
-    "cancel": "Cancel",
+    "back": "Terug",
+    "cancel": "Annuleren",
     "completeSetup": "Complete Setup",
     "connect": "Connect",
     "connectYourBank": "Connect Your Bank",
@@ -4206,7 +4206,7 @@
     "createNewAccount": "Create new account",
     "dialogDescription": "Link your bank accounts via SimpleFIN Bridge",
     "dialogTitle": "Connect Bank Account",
-    "done": "Done",
+    "done": "Klaar",
     "enterItHere": "Enter it here",
     "enterTokenError": "Please enter your SimpleFIN setup token",
     "failedToSave": "Failed to save connection",
@@ -4259,7 +4259,7 @@
     },
     "disconnect": {
       "button": "Disconnect",
-      "cancel": "Cancel",
+      "cancel": "Annuleren",
       "confirm": "Disconnect",
       "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
       "dialogTitle": "Disconnect SimpleFIN?"
@@ -4315,12 +4315,12 @@
   "simplefinStatus": {
     "active": "Active",
     "asOf": "as of {date}",
-    "cancel": "Cancel",
+    "cancel": "Annuleren",
     "connected": "Connected",
     "connecting": "Connecting...",
     "disconnected": "Disconnected",
     "dismiss": "Dismiss",
-    "error": "Error",
+    "error": "Fout",
     "errorsLabel": "Errors:",
     "expired": "Expired",
     "hoursAgo": "{hours}h ago",
@@ -4359,20 +4359,20 @@
     "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
     "stats": {
       "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
+      "lastMonth": "Vorige maand",
       "projected": "Projected"
     },
     "title": "Spending Trends & Forecast"
   },
   "splitTransaction": {
     "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "amount": "Bedrag",
     "buttons": {
-      "cancel": "Cancel",
+      "cancel": "Annuleren",
       "save": "Save Split",
       "saving": "Saving..."
     },
-    "category": "Category",
+    "category": "Categorie",
     "closeModal": "Close modal",
     "date": "Date:",
     "distributeEvenly": "Distribute Evenly",
@@ -4388,14 +4388,14 @@
     },
     "maxSplitsReached": "Maximum 5 splits allowed",
     "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
+    "none": "Geen",
     "notes": "Notes (Optional)",
     "notesPlaceholder": "e.g., Business expense, Personal use",
     "originalAmount": "Original Amount:",
     "removeThisSplit": "Remove this split",
     "selectCategory": "Select category...",
     "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
+    "subcategory": "Subcategorie",
     "title": "Split Transaction",
     "validation": {
       "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
@@ -4414,8 +4414,8 @@
     "addPerson": "Add Person",
     "allSettledUp": "All settled up",
     "allSettledUpWith": "All settled up with {name}!",
-    "amount": "Amount",
-    "back": "Back",
+    "amount": "Bedrag",
+    "back": "Terug",
     "backToSplits": "Back to Splits",
     "confirmRemovePerson": {
       "confirmLabel": "Remove",
@@ -4423,11 +4423,11 @@
       "descriptionNamed": "Are you sure you want to remove {name}? All their split records will be deleted.",
       "title": "Remove Person"
     },
-    "continue": "Continue",
+    "continue": "Doorgaan",
     "creating": "Creating...",
     "emoji": "Emoji",
     "helpTooltip": "Split transactions with friends and family. Track who owes what and settle debts via Cash, E-Transfer, Venmo, or PayPal.",
-    "name": "Name",
+    "name": "Naam",
     "namePlaceholder": "e.g., Alice, Bob",
     "netBalance": "Net Balance",
     "noPeopleDescription": "Add people you split expenses with. Track shared bills, dinners, and more.",
@@ -4446,7 +4446,7 @@
     "settlementMethods": {
       "cash": "Cash",
       "eTransfer": "E-Transfer",
-      "other": "Other",
+      "other": "Overige",
       "paypal": "PayPal",
       "venmo": "Venmo"
     },
@@ -4501,8 +4501,8 @@
     },
     "buttons": {
       "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
+      "edit": "Bewerken",
+      "transactions": "Transacties"
     },
     "confidence": {
       "high": "High",
@@ -4516,23 +4516,23 @@
       "firstCharge": "First Charge",
       "lastCharge": "Last Charge",
       "occurrences": "Occurrences",
-      "payment": "Payment",
+      "payment": "Betaling",
       "reminder": "Reminder"
     },
     "interval": {
-      "annual": "Annual",
+      "annual": "Jaarlijks",
       "bi-weekly": "Bi-weekly",
       "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "monthly": "Maandelijks",
+      "quarterly": "Kwartaallijks",
+      "weekly": "Wekelijks"
     },
     "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
     "menu": {
       "cancelSubscription": "Cancel Subscription",
       "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
+      "delete": "Verwijderen",
+      "edit": "Bewerken",
       "notSubscription": "Not a Subscription",
       "pause": "Pause",
       "resume": "Resume",
@@ -4544,7 +4544,7 @@
       "merged": "Tracked"
     },
     "stats": {
-      "amount": "Amount",
+      "amount": "Bedrag",
       "annualCost": "Annual Cost",
       "frequency": "Frequency",
       "nextCharge": "Next Charge",
@@ -4596,28 +4596,28 @@
     "autoRenewLabel": "Auto-renew",
     "beforeBilling": "before billing",
     "billingCycleLabel": "Billing Cycle *",
-    "cancel": "Cancel",
-    "categoryLabel": "Category",
-    "categoryNone": "None",
+    "cancel": "Annuleren",
+    "categoryLabel": "Categorie",
+    "categoryNone": "Geen",
     "categoryPlaceholder": "Select category...",
     "currencyCAD": "CAD - Canadian Dollar",
     "currencyEUR": "EUR - Euro",
     "currencyGBP": "GBP - British Pound",
-    "currencyLabel": "Currency",
+    "currencyLabel": "Valuta",
     "currencySymbol": "$",
     "currencyUSD": "USD - US Dollar",
     "cycleAnnual": "Annual (12 months)",
     "cycleBiWeekly": "Bi-weekly (every 2 weeks)",
-    "cycleMonthly": "Monthly",
+    "cycleMonthly": "Maandelijks",
     "cycleQuarterly": "Quarterly (3 months)",
-    "cycleWeekly": "Weekly",
-    "descriptionLabel": "Description",
+    "cycleWeekly": "Wekelijks",
+    "descriptionLabel": "Omschrijving",
     "descriptionPlaceholder": "e.g., Family plan, Pro tier",
     "editTitle": "Edit Subscription",
     "nameLabel": "Subscription Name *",
     "namePlaceholder": "e.g., Netflix, Spotify, Adobe CC",
     "nextBillingDateLabel": "Next Billing Date *",
-    "notesLabel": "Notes",
+    "notesLabel": "Notities",
     "notesPlaceholder": "Any additional notes...",
     "paymentMethodLabel": "Payment Method",
     "paymentMethodPlaceholder": "e.g., Visa ending 1234",
@@ -4648,7 +4648,7 @@
     "allCategories": "All Categories",
     "clearFilters": "Clear filters",
     "deleteConfirmDescription": "Are you sure you want to delete this subscription? This action cannot be undone.",
-    "deleteConfirmLabel": "Delete",
+    "deleteConfirmLabel": "Verwijderen",
     "deleteConfirmTitle": "Delete Subscription",
     "deleteError": "Failed to delete subscription",
     "dismissError": "Failed to dismiss subscription",
@@ -4668,19 +4668,19 @@
     "saveError": "Failed to save subscription",
     "searchPlaceholder": "Search subscriptions...",
     "sort": {
-      "amount": "Amount",
+      "amount": "Bedrag",
       "ascending": "Sort ascending",
       "dateAdded": "Date Added",
       "descending": "Sort descending",
-      "name": "Name",
+      "name": "Naam",
       "nextBilling": "Next Billing"
     },
     "stats": {
       "active": "Active",
-      "annual": "Annual",
+      "annual": "Jaarlijks",
       "estimatedCost": "Estimated cost",
       "inactive": "{count} inactive",
-      "monthly": "Monthly",
+      "monthly": "Maandelijks",
       "next7Days": "Next 7 Days",
       "projectedSpend": "Projected spend",
       "upcomingCharges": "Upcoming charges"
@@ -4689,7 +4689,7 @@
     "title": "Subscriptions",
     "viewMode": {
       "active": "Active",
-      "all": "All",
+      "all": "Alles",
       "analysis": "Analysis",
       "detected": "Detected",
       "manual": "Manual"
@@ -4749,29 +4749,29 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "Rekening"
     },
     "advancedOptions": {
       "available": "{count} available",
       "label": "Advanced Options"
     },
     "amount": {
-      "label": "Amount",
+      "label": "Bedrag",
       "placeholder": "0.00",
       "validationError": "Please enter a valid amount"
     },
     "buttons": {
       "add": "Add Transaction",
       "adding": "Adding...",
-      "cancel": "Cancel",
+      "cancel": "Annuleren",
       "update": "Update Transaction",
       "updating": "Updating..."
     },
     "category": {
       "aiCategorizing": "AI categorizing...",
-      "create": "Create",
+      "create": "Aanmaken",
       "createNew": "+ Create New Category",
-      "label": "Category",
+      "label": "Categorie",
       "lastUsed": "Using last: {category}",
       "namePlaceholder": "Category name...",
       "selectPlaceholder": "Select category...",
@@ -4784,10 +4784,10 @@
       "nameRequired": "Category name is required"
     },
     "date": {
-      "label": "Date"
+      "label": "Datum"
     },
     "description": {
-      "label": "Description",
+      "label": "Omschrijving",
       "placeholder": "e.g., Grocery shopping at Sobeys"
     },
     "learned": {
@@ -4795,7 +4795,7 @@
       "title": "Learned!"
     },
     "notes": {
-      "label": "Notes",
+      "label": "Notities",
       "placeholder": "Add any additional notes..."
     },
     "receipts": {
@@ -4810,8 +4810,8 @@
       "viewFull": "View full receipt"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
+      "label": "Subcategorie",
+      "none": "Geen",
       "selectPlaceholder": "Select subcategory..."
     },
     "tags": {
@@ -4823,14 +4823,14 @@
       "edit": "Edit Transaction"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
+      "expense": "Uitgave",
+      "income": "Inkomsten",
       "label": "Type"
     }
   },
   "transactionSearch": {
     "amountRangeLabel": "Amount range",
-    "clearRecent": "Clear",
+    "clearRecent": "Wissen",
     "filterName": "Filter name",
     "noResults": "No transactions found",
     "noResultsDescription": "Try a different search or adjust your filters",
@@ -4840,7 +4840,7 @@
     "recentSearchLabel": "Recent search",
     "recentSearches": "Recent Searches",
     "resultCount": "{count} {count, plural, =1 {result} other {results}}",
-    "save": "Save",
+    "save": "Opslaan",
     "saveFilter": "Save Filter",
     "savedFilters": "Saved Filters",
     "searchFilterLabel": "Search filter",
@@ -4851,7 +4851,7 @@
     "searchingFor": "Searching for: {query}",
     "suggestions": {
       "amounts": "Amount Ranges",
-      "categories": "Categories",
+      "categories": "Categorieën",
       "merchants": "Merchants",
       "recent": "Recent"
     },
@@ -4873,29 +4873,29 @@
   "transactionTable": {
     "actions": {
       "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
+      "delete": "Verwijderen",
+      "edit": "Bewerken",
       "split": "Split"
     },
     "emptyState": "No transactions to display",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "Rekening",
+      "actions": "Acties",
+      "amount": "Bedrag",
+      "category": "Categorie",
+      "date": "Datum",
+      "description": "Omschrijving"
     }
   },
   "transactions": {
-    "actions": "Actions",
+    "actions": "Acties",
     "addTransaction": "Add Transaction",
     "allAccounts": "All Accounts",
     "allCategories": "All Categories",
     "allSplitItemsRemoved": "All split items will be removed",
-    "amount": "Amount",
+    "amount": "Bedrag",
     "applyToSelected": "Apply to Selected",
-    "balance": "Balance",
+    "balance": "Saldo",
     "balanceTooltip": "Starting balance: {startingBalance} + Net change: {netChange}",
     "bulkCategorizeDescription": "Apply \"{category}{subcategory, select, other { - {subcategory}}}\" to {count} transaction(s)?",
     "bulkCategorizeSuccess": "Successfully categorized {count} transaction(s)",
@@ -4905,11 +4905,11 @@
     "categoriesAndNotesLost": "Categories and notes from splits will be lost",
     "categorize": "Categorize",
     "categorizedAs": "Categorized as {category}{subcategory, select, other { - {subcategory}}}",
-    "category": "Category",
+    "category": "Categorie",
     "clearFilters": "Clear Filters",
     "currentBalance": "Current Balance",
-    "date": "Date",
-    "delete": "Delete",
+    "date": "Datum",
+    "delete": "Verwijderen",
     "deleteCannotBeUndone": "This action cannot be undone.",
     "deleteImpactAmount": "{amount} {type} from {date}",
     "deleteImpactCategory": "Category: {category}{subcategory, select, other { - {subcategory}}}",
@@ -4918,11 +4918,11 @@
     "deleteImpactSplit": "(This is a split transaction)",
     "deleteTransaction": "Delete transaction",
     "deleteTransactionTitle": "Delete Transaction",
-    "description": "Description",
-    "edit": "Edit",
+    "description": "Omschrijving",
+    "edit": "Bewerken",
     "editTransaction": "Edit transaction",
     "existingCategoriesReplaced": "Any existing categories will be replaced",
-    "expenseLabel": "Expense",
+    "expenseLabel": "Uitgave",
     "failedToBulkCategorize": "Failed to bulk categorize transactions",
     "failedToCategorize": "Failed to categorize transactions",
     "failedToCategorizeSingle": "Failed to categorize transaction",
@@ -4936,7 +4936,7 @@
     "foundMatchingTransactions": "✓ Found {count} matching \"{vendor}\" transactions ({time}s)",
     "fromDate": "From Date",
     "importCSV": "Import CSV",
-    "incomeLabel": "Income",
+    "incomeLabel": "Inkomsten",
     "lastSplitItemRestore": "This is the last split item. Restore the original transaction?",
     "negative": "Negative",
     "newestFirst": "Newest First",
@@ -4949,7 +4949,7 @@
     "pleaseSelectTransactions": "Please select transactions to categorize",
     "positive": "Positive",
     "quickCategorize": "Quick Categorize",
-    "receipt": "Receipt",
+    "receipt": "Bon",
     "restoreOriginal": "Restore Original",
     "restoreOriginalDescription": "This will restore the original unsplit transaction and remove all split items.",
     "restoreOriginalTitle": "Restore Original Transaction",
@@ -4969,7 +4969,7 @@
     "splitTransactionsHelp": "Divide a single purchase across multiple categories. Example: Grocery store visit ($100) → Groceries ($80) + Household ($20). Click the Split button on any transaction to divide it.",
     "splitTransactionsLabel": "Split Transactions",
     "thisWillUpdate": "This will update:",
-    "title": "Transactions",
+    "title": "Transacties",
     "toDate": "To Date",
     "totalExpenses": "Total Expenses",
     "totalIncome": "Total Income",
@@ -5039,7 +5039,7 @@
     "passwordProtection": "Password Protection",
     "passwordWarning": "If you forget this password, your data cannot be recovered. We cannot reset it for you.",
     "passwordsDoNotMatch": "Passwords do not match",
-    "recommended": "Recommended",
+    "recommended": "Aanbevolen",
     "settingUp": "Setting Up...",
     "setupError": "Failed to set up vault. Please try again.",
     "strengthFair": "Fair",
@@ -5076,7 +5076,7 @@
     },
     "netWorthMini": {
       "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "title": "Vermogen"
     },
     "recentTransactions": {
       "description": "Snelle weergave van je laatste financiële activiteiten",
@@ -5110,7 +5110,7 @@
       "description": "Map YNAB categories to your existing categories or create new ones.",
       "mapToExisting": "Map to Existing",
       "selectCategory": "Select category...",
-      "skip": "Skip",
+      "skip": "Overslaan",
       "title": "Category Mapping",
       "willCreate": "Will create:"
     },
@@ -5124,9 +5124,9 @@
       "withIssues": "Import Completed with Issues"
     },
     "footer": {
-      "back": "Back",
-      "done": "Done",
-      "next": "Next",
+      "back": "Terug",
+      "done": "Klaar",
+      "next": "Volgende",
       "startImport": "Start Import"
     },
     "header": {
@@ -5153,21 +5153,21 @@
         "title": "Budget Options"
       },
       "hiddenCategories": {
-        "archive": "Archive",
+        "archive": "Archiveren",
         "archiveDesc": "Import as archived (recommended)",
         "description": "How to handle YNAB categories marked as hidden?",
-        "import": "Import",
+        "import": "Importeren",
         "importDesc": "Import as active categories",
-        "skip": "Skip",
+        "skip": "Overslaan",
         "skipDesc": "Don't import hidden categories",
         "title": "Hidden Categories"
       }
     },
     "previewStep": {
-      "accounts": "Accounts",
+      "accounts": "Rekeningen",
       "allocations": "{count} allocations",
       "budgetMonths": "Budget Months",
-      "categories": "Categories",
+      "categories": "Categorieën",
       "dateRange": "Transaction Date Range",
       "description": "Review the data that will be imported.",
       "duplicates": "{count} duplicates",
@@ -5175,13 +5175,13 @@
       "newMapped": "{created} new, {mapped} mapped",
       "preparingPreview": "Preparing preview...",
       "title": "Import Preview",
-      "transactions": "Transactions",
+      "transactions": "Transacties",
       "warnings": "Warnings"
     },
     "steps": {
       "categories": {
         "description": "Map to existing categories",
-        "title": "Categories"
+        "title": "Categorieën"
       },
       "complete": {
         "description": "Migration finished",
@@ -5193,20 +5193,20 @@
       },
       "options": {
         "description": "Configure import settings",
-        "title": "Options"
+        "title": "Opties"
       },
       "preview": {
         "description": "Review before import",
-        "title": "Preview"
+        "title": "Voorbeeld"
       },
       "upload": {
         "description": "Select YNAB export file",
-        "title": "Upload"
+        "title": "Uploaden"
       }
     },
     "uploadStep": {
-      "accounts": "Accounts",
-      "categories": "Categories",
+      "accounts": "Rekeningen",
+      "categories": "Categorieën",
       "clickToSelect": "Click to select a file",
       "dragAndDrop": "or drag and drop here",
       "fileSummary": "File Summary",
@@ -5219,7 +5219,7 @@
       "formatYfullDesc": "YNAB4 desktop export",
       "parsing": "Parsing file...",
       "supportedFormats": "Supported Formats",
-      "transactions": "Transactions"
+      "transactions": "Transacties"
     },
     "errors": {
       "parseFailed": "Failed to parse YNAB file",

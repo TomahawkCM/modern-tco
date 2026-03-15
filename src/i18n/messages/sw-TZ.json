@@ -1,50 +1,50 @@
 {
   "accessibilitySettings": {
     "fontSize": {
-      "default": "Default",
-      "description": "Adjust the base text size for better readability",
-      "extraLarge": "Extra Large",
-      "large": "Large",
-      "title": "Font Size"
+      "default": "Kawaida",
+      "description": "Rekebisha ukubwa wa msingi wa maandishi kwa usomaji bora",
+      "extraLarge": "Kubwa Sana",
+      "large": "Kubwa",
+      "title": "Ukubwa wa Maandishi"
     },
     "infoBox": {
-      "savedAutomatically": "Settings are saved automatically and persist across sessions",
-      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
-      "storedLocally": "Your preferences are stored locally and never sent to servers",
-      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
-      "title": "About Accessibility Settings"
+      "savedAutomatically": "Mipangilio inahifadhiwa kiotomatiki na inabaki kati ya vikao",
+      "seniorsOptimization": "Hali ya Wazee hutoa uboreshaji wa ufikiaji kwa kubonyeza mara moja",
+      "storedLocally": "Mapendeleo yako yanahifadhiwa ndani ya kifaa na hayatumwa kamwe kwa seva",
+      "syncAcrossTabs": "Mabadiliko yanasawazishwa kwenye vichupo vyote vilivyofunguliwa kwa wakati halisi",
+      "title": "Kuhusu Mipangilio ya Ufikiaji"
     },
     "presets": {
-      "full": "Full",
-      "fullDesc": "Maximum accessibility",
-      "mild": "Mild",
-      "mildDesc": "Slightly enhanced",
-      "moderate": "Moderate",
-      "moderateDesc": "Recommended for most",
-      "off": "Off",
-      "offDesc": "Standard interface",
-      "title": "Quick Presets:"
+      "full": "Kamili",
+      "fullDesc": "Ufikiaji wa juu zaidi",
+      "mild": "Nyepesi",
+      "mildDesc": "Iliyoboreshwa kidogo",
+      "moderate": "Ya Kati",
+      "moderateDesc": "Inayopendekezwa kwa wengi",
+      "off": "Zima",
+      "offDesc": "Kiolesura cha kawaida",
+      "title": "Mipangilio ya Haraka:"
     },
     "reducedMotion": {
-      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
-      "title": "Reduced Motion",
-      "toggleLabel": "Toggle reduced motion mode"
+      "description": "Punguza mwonekano na mabadiliko kwa uzoefu wa utulivu. Husaidia watumiaji wenye matatizo ya vestibular au unyeti wa mwonekano.",
+      "title": "Mwonekano Uliopunguzwa",
+      "toggleLabel": "Geuza hali ya mwonekano uliopunguzwa"
     },
     "seniorsMode": {
-      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
-      "title": "Seniors Mode"
+      "description": "Uboreshaji wa ufikiaji kwa kubonyeza mara moja na maandishi makubwa, vifungo vikubwa vya kugusa, na kiolesura kilichorahisishwa",
+      "title": "Hali ya Wazee"
     },
     "themeMode": {
-      "auto": "Auto",
-      "autoDesc": "Match system",
-      "dark": "Dark",
-      "darkDesc": "Easy on eyes",
-      "description": "Choose your preferred color scheme for the budget app",
-      "highContrast": "High Contrast",
-      "highContrastDesc": "Maximum visibility",
-      "light": "Light",
-      "lightDesc": "Bright and clear",
-      "title": "Theme Mode"
+      "auto": "Otomatiki",
+      "autoDesc": "Linganisha mfumo",
+      "dark": "Giza",
+      "darkDesc": "Laini kwa macho",
+      "description": "Chagua mpango wako wa rangi unaopendwa kwa programu ya bajeti",
+      "highContrast": "Tofauti ya Juu",
+      "highContrastDesc": "Uonekano wa juu zaidi",
+      "light": "Mwanga",
+      "lightDesc": "Angavu na wazi",
+      "title": "Hali ya Mandhari"
     }
   },
   "accessibilityToggle": {
