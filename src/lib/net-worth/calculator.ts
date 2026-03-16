@@ -18,6 +18,7 @@ export interface NetWorthBreakdown {
     property: number;
     other: number;
     total: number;
+    items?: { id: string; label: string; value: number }[];
   };
   liabilities: {
     creditCards: number;
@@ -25,6 +26,7 @@ export interface NetWorthBreakdown {
     mortgage: number;
     other: number;
     total: number;
+    items?: { id: string; label: string; value: number }[];
   };
   netWorth: number;
 }
@@ -33,21 +35,33 @@ export interface NetWorthBreakdown {
  * Calculate current net worth from all data sources.
  */
 export async function calculateCurrentNetWorth(): Promise<NetWorthBreakdown> {
-  const [accounts, loans, holdings, properties] = await Promise.all([
+  const [accounts, loans, holdings, properties, transactions] = await Promise.all([
     db.accounts.toArray(),
     db.loans.toArray(),
     db.holdings.toArray(),
     db.properties.toArray(),
+    db.transactions.toArray(),
   ]);
 
-  // Assets
-  const cashChecking = accounts
-    .filter((a: Account) => a.type === "checking")
-    .reduce((sum: number, a: Account) => sum + a.balance, 0);
+  const accountBalances = new Map<string, number>();
+  for (const account of accounts) {
+    const accTxs = transactions.filter((tx) => !tx.isSplit && tx.accountId === account.id);
+    const txTotal = accTxs.reduce((sum, tx) => sum + tx.amount, 0);
+    accountBalances.set(account.id, account.balance + txTotal);
+  }
 
-  const savings = accounts
-    .filter((a: Account) => a.type === "savings")
-    .reduce((sum: number, a: Account) => sum + a.balance, 0);
+  // Assets
+  const checkingAccounts = accounts.filter((a: Account) => a.type === "checking");
+  const cashChecking = checkingAccounts.reduce(
+    (sum: number, a: Account) => sum + accountBalances.get(a.id)!,
+    0
+  );
+
+  const savingsAccounts = accounts.filter((a: Account) => a.type === "savings");
+  const savings = savingsAccounts.reduce(
+    (sum: number, a: Account) => sum + accountBalances.get(a.id)!,
+    0
+  );
 
   // Use currentPrice (market value) when available, fall back to purchasePrice (cost basis)
   const investments = holdings.reduce(
@@ -58,9 +72,11 @@ export async function calculateCurrentNetWorth(): Promise<NetWorthBreakdown> {
   const propertyValue = properties.reduce((sum, p) => sum + p.currentValue, 0);
 
   // Liabilities
-  const creditCards = accounts
-    .filter((a: Account) => a.type === "credit")
-    .reduce((sum: number, a: Account) => sum + Math.abs(a.balance), 0);
+  const creditAccounts = accounts.filter((a: Account) => a.type === "credit");
+  const creditCards = creditAccounts.reduce(
+    (sum: number, a: Account) => sum + Math.abs(accountBalances.get(a.id)!),
+    0
+  );
 
   const activeLoanBalance = loans
     .filter((l: Loan) => l.status === "active" && l.type !== "mortgage")
@@ -73,6 +89,38 @@ export async function calculateCurrentNetWorth(): Promise<NetWorthBreakdown> {
   const totalAssets = cashChecking + savings + investments + propertyValue;
   const totalLiabilities = creditCards + activeLoanBalance + mortgageBalance;
 
+  const assetItems: { id: string; label: string; value: number }[] = [];
+  checkingAccounts.forEach((a) => {
+    const val = accountBalances.get(a.id)!;
+    if (val !== 0) assetItems.push({ id: a.id, label: a.name, value: val });
+  });
+  savingsAccounts.forEach((a) => {
+    const val = accountBalances.get(a.id)!;
+    if (val !== 0) assetItems.push({ id: a.id, label: a.name, value: val });
+  });
+  if (investments > 0)
+    assetItems.push({ id: "investments", label: "Investments", value: investments });
+  if (propertyValue > 0)
+    assetItems.push({ id: "property", label: "Property", value: propertyValue });
+
+  const liabilityItems: { id: string; label: string; value: number }[] = [];
+  creditAccounts.forEach((a) => {
+    const val = Math.abs(accountBalances.get(a.id)!);
+    if (val !== 0) liabilityItems.push({ id: a.id, label: a.name, value: val });
+  });
+  loans
+    .filter((l) => l.status === "active" && l.type !== "mortgage")
+    .forEach((l) => {
+      if (l.currentBalance > 0)
+        liabilityItems.push({ id: l.id, label: l.name, value: l.currentBalance });
+    });
+  loans
+    .filter((l) => l.status === "active" && l.type === "mortgage")
+    .forEach((l) => {
+      if (l.currentBalance > 0)
+        liabilityItems.push({ id: l.id, label: l.name, value: l.currentBalance });
+    });
+
   return {
     assets: {
       cashChecking: roundToCents(cashChecking),
@@ -81,6 +129,7 @@ export async function calculateCurrentNetWorth(): Promise<NetWorthBreakdown> {
       property: roundToCents(propertyValue),
       other: 0,
       total: roundToCents(totalAssets),
+      items: assetItems,
     },
     liabilities: {
       creditCards: roundToCents(creditCards),
@@ -88,6 +137,7 @@ export async function calculateCurrentNetWorth(): Promise<NetWorthBreakdown> {
       mortgage: roundToCents(mortgageBalance),
       other: 0,
       total: roundToCents(totalLiabilities),
+      items: liabilityItems,
     },
     netWorth: roundToCents(totalAssets - totalLiabilities),
   };

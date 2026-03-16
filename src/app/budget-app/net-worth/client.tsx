@@ -1,44 +1,39 @@
 "use client";
 
 import { GlassCard } from "@/components/budget/ui/GlassCard";
-import {
-  calculateCurrentNetWorth,
-  NET_WORTH_MILESTONES,
-  detectMilestones,
-} from "@/lib/net-worth/calculator";
+import { calculateCurrentNetWorth, detectMilestones } from "@/lib/net-worth/calculator";
 import { getHistoricalSnapshots, takeMonthlySnapshot } from "@/lib/net-worth/snapshot-store";
 import { useDefaultCurrency } from "@/hooks/useDefaultCurrency";
 import { Landmark, TrendingUp, TrendingDown, Target } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import type { NetWorthBreakdown } from "@/lib/net-worth/calculator";
-import type { StoredNetWorthSnapshot } from "@/types/budget";
+import { useLiveQuery } from "dexie-react-hooks";
 
 export function ClientNetWorth() {
   const t = useTranslations("budget.netWorth");
   const format = useFormatter();
   const currency = useDefaultCurrency();
-  const [breakdown, setBreakdown] = useState<NetWorthBreakdown | null>(null);
-  const [snapshots, setSnapshots] = useState<StoredNetWorthSnapshot[]>([]);
+
+  const breakdown = useLiveQuery(() => calculateCurrentNetWorth());
+  const snapshots = useLiveQuery(() => getHistoricalSnapshots()) || [];
+
   const [milestones, setMilestones] = useState<number[]>([]);
 
   useEffect(() => {
-    async function load() {
-      const [bd, snaps] = await Promise.all([calculateCurrentNetWorth(), getHistoricalSnapshots()]);
-      setBreakdown(bd);
-      setSnapshots(snaps);
-
+    async function handleSnapshots() {
       // Take monthly snapshot if needed
       await takeMonthlySnapshot();
-
-      // Detect milestones
-      if (snaps.length > 0) {
-        const prev = snaps[snaps.length - 1].netWorth;
-        setMilestones(detectMilestones(bd.netWorth, prev));
-      }
     }
-    load();
+    handleSnapshots();
   }, []);
+
+  useEffect(() => {
+    // Detect milestones
+    if (breakdown && snapshots.length > 0) {
+      const prev = snapshots[snapshots.length - 1].netWorth;
+      setMilestones(detectMilestones(breakdown.netWorth, prev));
+    }
+  }, [breakdown?.netWorth, snapshots]);
 
   const fmtCurrency = (v: number) => format.number(v, { style: "currency", currency });
 
@@ -107,15 +102,21 @@ export function ClientNetWorth() {
       <GlassCard className="p-5">
         <h2 className="mb-4 text-lg font-semibold text-white">{t("assetBreakdown")}</h2>
         <div className="space-y-3">
-          {[
-            { label: t("cashChecking"), value: breakdown.assets.cashChecking },
-            { label: t("savings"), value: breakdown.assets.savings },
-            { label: t("investments"), value: breakdown.assets.investments },
-            { label: t("property"), value: breakdown.assets.property },
-          ]
-            .filter((item) => item.value > 0)
-            .map((item) => (
-              <div key={item.label} className="flex items-center justify-between">
+          {(
+            breakdown.assets.items || [
+              {
+                id: "cashChecking",
+                label: t("cashChecking"),
+                value: breakdown.assets.cashChecking,
+              },
+              { id: "savings", label: t("savings"), value: breakdown.assets.savings },
+              { id: "investments", label: t("investments"), value: breakdown.assets.investments },
+              { id: "property", label: t("property"), value: breakdown.assets.property },
+            ]
+          )
+            .filter((item) => item.value !== 0)
+            .map((item, idx) => (
+              <div key={item.id ?? item.label + idx} className="flex items-center justify-between">
                 <span className="text-sm text-slate-300">{item.label}</span>
                 <span className="text-sm font-medium text-emerald-400">
                   {fmtCurrency(item.value)}
@@ -129,14 +130,20 @@ export function ClientNetWorth() {
       <GlassCard className="p-5">
         <h2 className="mb-4 text-lg font-semibold text-white">{t("liabilityBreakdown")}</h2>
         <div className="space-y-3">
-          {[
-            { label: t("creditCards"), value: breakdown.liabilities.creditCards },
-            { label: t("loans"), value: breakdown.liabilities.loans },
-            { label: t("mortgage"), value: breakdown.liabilities.mortgage },
-          ]
-            .filter((item) => item.value > 0)
-            .map((item) => (
-              <div key={item.label} className="flex items-center justify-between">
+          {(
+            breakdown.liabilities.items || [
+              {
+                id: "creditCards",
+                label: t("creditCards"),
+                value: breakdown.liabilities.creditCards,
+              },
+              { id: "loans", label: t("loans"), value: breakdown.liabilities.loans },
+              { id: "mortgage", label: t("mortgage"), value: breakdown.liabilities.mortgage },
+            ]
+          )
+            .filter((item) => item.value !== 0)
+            .map((item, idx) => (
+              <div key={item.id ?? item.label + idx} className="flex items-center justify-between">
                 <span className="text-sm text-slate-300">{item.label}</span>
                 <span className="text-sm font-medium text-red-400">{fmtCurrency(item.value)}</span>
               </div>
