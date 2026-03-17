@@ -63,34 +63,34 @@
   },
   "accessibleChart": {
     "buttons": {
-      "chart": "Chart",
-      "showChart": "Show chart view",
-      "showTable": "Show data table view",
-      "table": "Table"
+      "chart": "დიაგრამა",
+      "showChart": "დიაგრამის ხედის ჩვენება",
+      "showTable": "ცხრილის ხედის ჩვენება",
+      "table": "ცხრილი"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
-    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "chartDescription": "{description}. {dataPoints} მონაცემთა წერტილი ნაჩვენებია. {dataList}. დააჭირეთ ცხრილის ღილაკს მონაცემების ცხრილის ფორმატში სანახავად კლავიატურის ნავიგაციის მხარდაჭერით.",
+    "chartTypeDescription": "ეს არის {chartType} დიაგრამა {dataPoints} მონაცემთა წერტილებით.",
     "footer": {
-      "average": "Average:",
-      "total": "Total:"
+      "average": "საშუალო:",
+      "total": "ჯამი:"
     },
     "keyboardNav": {
-      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
-      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+      "srOnly": "გამოიყენეთ ისრის ღილაკები რიგებს შორის ნავიგაციისთვის. დააჭირეთ Tab შემდეგ ელემენტზე გადასასვლელად.",
+      "visual": "გამოიყენეთ ← → ან ↑ ↓ ნავიგაციისთვის • Home/End დასაწყისზე/ბოლოზე გადასასვლელად"
     },
     "summary": {
-      "average": "Average: {value}.",
-      "highest": "Highest value: {label} at {value}.",
-      "lowest": "Lowest value: {label} at {value}.",
-      "total": "Total: {value}."
+      "average": "საშუალო: {value}.",
+      "highest": "უმაღლესი მნიშვნელობა: {label} - {value}.",
+      "lowest": "უდაბლესი მნიშვნელობა: {label} - {value}.",
+      "total": "ჯამი: {value}."
     },
-    "switchedToChart": "Switched to chart view",
-    "switchedToTable": "Switched to table view",
+    "switchedToChart": "გადართვა დიაგრამის ხედზე",
+    "switchedToTable": "გადართვა ცხრილის ხედზე",
     "tableHeaders": {
-      "additionalInfo": "Additional Info",
-      "category": "Category",
-      "period": "Period",
-      "value": "Value"
+      "additionalInfo": "დამატებითი ინფორმაცია",
+      "category": "კატეგორია",
+      "period": "პერიოდი",
+      "value": "მნიშვნელობა"
     }
   },
   "actions": {
@@ -467,8 +467,8 @@
     "backToHome": "მთავარ გვერდზე დაბრუნება"
   },
   "bottomSheet": {
-    "close": "Close",
-    "dragToClose": "Drag down to close"
+    "close": "დახურვა",
+    "dragToClose": "გადმოწიეთ ქვემოთ დასახურად"
   },
   "breadcrumb": {
     "budgetAnalyzer": "Budget Analyzer",
@@ -821,17 +821,17 @@
     }
   },
   "bulkActions": {
-    "applyTo": "Apply to {count}",
-    "categorize": "Categorize",
-    "clearSelection": "Clear selection",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
-    "noSubcategory": "No subcategory",
-    "selectAll": "Select all",
-    "selectCategory": "Select category...",
-    "selected": "{count} selected"
+    "applyTo": "{count}-ზე მინიჭება",
+    "categorize": "კატეგორიზაცია",
+    "clearSelection": "არჩევანის გასუფთავება",
+    "confirmDelete": "წავშალოთ {count, plural, =1 {1 ტრანზაქცია} other {# ტრანზაქცია}}?",
+    "delete": "წაშლა",
+    "deleteWarning": "ეს მოქმედება შეუქცევადია.",
+    "export": "ექსპორტი",
+    "noSubcategory": "ქვეკატეგორიის გარეშე",
+    "selectAll": "ყველას არჩევა",
+    "selectCategory": "აირჩიეთ კატეგორია...",
+    "selected": "{count} არჩეული"
   },
   "calculators": {
     "budgetAnalyzer": {
@@ -1290,94 +1290,94 @@
   },
   "chatbot": {
     "buttons": {
-      "clearHistory": "Clear chat history",
-      "exportConversation": "Export conversation",
-      "send": "Send"
+      "clearHistory": "ჩატის ისტორიის გასუფთავება",
+      "exportConversation": "საუბრის ექსპორტი",
+      "send": "გაგზავნა"
     },
     "disabled": {
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot",
-      "title": "Chatbot Disabled"
+      "description": "ჩართეთ ჩატბოტი პარამეტრები → კონფიდენციალურობა → ბიუჯეტის ჩატბოტი, დასაწყებად.",
+      "enableButton": "ჩატბოტის ჩართვა",
+      "title": "ჩატბოტი გამორთულია"
     },
     "emptyState": {
-      "description": "Ask me anything about your finances. Here are some examples:",
+      "description": "მკითხეთ რამე თქვენი ფინანსების შესახებ. აი რამდენიმე მაგალითი:",
       "examples": {
-        "balance": "What's my total account balance?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "spending": "How much did I spend this month?"
+        "balance": "რა არის ჩემი მთლიანი ანგარიშის ბალანსი?",
+        "budget": "რომელიმე კატეგორიაში ბიუჯეტს ვჭარბობ?",
+        "groceries": "მაჩვენე ბოლო სასურსათო შენაძენები",
+        "spending": "რამდენი დავხარჯე ამ თვეში?"
       },
-      "title": "Start a Conversation"
+      "title": "საუბრის დაწყება"
     },
     "header": {
-      "subtitle": "Ask me about your finances",
-      "title": "Budget Assistant"
+      "subtitle": "მკითხეთ თქვენი ფინანსების შესახებ",
+      "title": "ბიუჯეტის ასისტენტი"
     },
     "input": {
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
-      "placeholder": "Ask about your finances..."
+      "disclaimer": "მუშაობს OpenAI GPT-4-ით. თქვენი მონაცემები უსაფრთხოდ მუშავდება და სწავლებისთვის არ გამოიყენება.",
+      "placeholder": "იკითხეთ ფინანსების შესახებ..."
     },
     "messages": {
-      "dataAccessed": "Data accessed:",
-      "error": "Error",
-      "thinking": "Thinking..."
+      "dataAccessed": "წვდომა მოხდა მონაცემებზე:",
+      "error": "შეცდომა",
+      "thinking": "ფიქრობს..."
     }
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "მოქმედებები",
+      "budget": "ბიუჯეტი",
+      "income": "შემოსავალი",
+      "spending": "ხარჯვა",
+      "trends": "ტენდენციები"
     }
   },
   "chatbotOptIn": {
     "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
+      "decline": "არა, მადლობა",
+      "enable": "ჩატბოტის ჩართვა"
     },
     "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
+      "actions": "არასავალდებულოდ ასრულებს მოქმედებებს, როგორიცაა ტრანზაქციების დამატება ან ბიუჯეტების შექმნა",
+      "answer": "პასუხობს კითხვებს ტრანზაქციების, ბიუჯეტებისა და ხარჯვის შაბლონების შესახებ",
+      "insights": "აწვდის ანალიტიკას და რეკომენდაციებს თქვენი მონაცემების საფუძველზე",
+      "search": "ეძებს ფინანსურ მონაცემებს ბუნებრივი ენით",
+      "title": "რისი გაკეთება შეუძლია ჩატბოტს"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "ჩატბოტის ოფციონის დიალოგის დახურვა",
     "controls": {
       "dataAccess": {
         "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
+          "description": "ჩატბოტს შეუძლია მოქმედებების შესრულება, როგორიცაა ტრანზაქციების დამატება, ბიუჯეტების შექმნა და თქვენს მონაცემებში ცვლილებების შეტანა",
+          "title": "სრული წვდომა"
         },
-        "label": "What can the chatbot do with your data?",
+        "label": "რისი გაკეთება შეუძლია ჩატბოტს თქვენს მონაცემებთან?",
         "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
+          "description": "ჩატბოტს შეუძლია თქვენი მონაცემების ნახვა და კითხვებზე პასუხი, მაგრამ ვერ შეძლებს ტრანზაქციების/ბიუჯეტების დამატებას, რედაქტირებას ან წაშლას",
+          "title": "მხოლოდ წაკითხვა (რეკომენდებული)"
         }
       },
       "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+        "days30": "30 დღე",
+        "days7": "7 დღე (რეკომენდებული)",
+        "forever": "სამუდამოდ შენახვა",
+        "label": "რამდენ ხანს შევინახოთ თქვენი საუბრები?",
+        "note": "საუბრები ინახება ლოკალურად თქვენს ბრაუზერში. წაშლა ნებისმიერ დროს შეგიძლიათ პარამეტრები → კონფიდენციალურობა."
       },
-      "title": "Privacy Controls"
+      "title": "კონფიდენციალურობის კონტროლი"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>თქვენი უფლებები:</strong> ჩატბოტის ჩართვით თქვენ ეთანხმებით ფინანსური მონაცემების დამუშავებას OpenAI-ის API-ით. თანხმობის გაუქმება ნებისმიერ დროს შეგიძლიათ ჩატბოტის გამორთვით პარამეტრები → კონფიდენციალურობა. თქვენი მონაცემები მუშავდება კონფიდენციალურობის პოლიტიკისა და GDPR მოთხოვნების შესაბამისად. თქვენ გაქვთ უფლება საუბრის ისტორიაზე წვდომის, წაშლისა და ექსპორტის."
     },
     "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
+      "dataSent": "ფინანსური მონაცემები იგზავნება API-ზე თქვენს კითხვებზე საპასუხოდ",
+      "disable": "ჩატბოტის გამორთვა ნებისმიერ დროს შეგიძლიათ პარამეტრები → კონფიდენციალურობა",
+      "noTraining": "OpenAI არ იყენებს API მონაცემებს მოდელების სასწავლოდ (მათი პოლიტიკის მიხედვით)",
+      "processedBy": "თქვენი საუბრები მუშავდება OpenAI-ის GPT-4 API-ით",
+      "title": "კონფიდენციალურობა და მონაცემთა გამოყენება"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "AI-ით მართული ფინანსური ასისტენტი",
+    "title": "ჩართოთ ბიუჯეტის ჩატბოტი?"
   },
   "columnMapper": {
     "amount": "Amount",
@@ -1409,40 +1409,40 @@
     "useSavedMapping": "Use Saved Mapping"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "შედეგები არ მოიძებნა.",
+    "search": "ძიება...",
+    "select": "აირჩიეთ..."
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "addTransaction": "ტრანზაქციის დამატება",
+      "budgets": "ბიუჯეტები",
+      "categories": "კატეგორიები",
+      "darkTheme": "მუქი თემა",
+      "dashboard": "დაშბორდი",
+      "exportData": "მონაცემების ექსპორტი",
+      "futurePlans": "სამომავლო გეგმები",
+      "highContrastTheme": "მაღალი კონტრასტის თემა",
+      "importCsv": "CSV იმპორტი",
+      "investments": "ინვესტიციები",
+      "lightTheme": "ღია თემა",
+      "loans": "სესხები",
+      "newBudget": "ახალი ბიუჯეტი",
+      "reports": "ანგარიშგები",
+      "retirement": "პენსია",
+      "scanReceipt": "ქვითრის სკანირება",
+      "settings": "პარამეტრები",
+      "transactions": "ტრანზაქციები"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "გარეგნობა",
+      "quickActions": "სწრაფი მოქმედებები",
+      "tools": "ხელსაწყოები და პარამეტრები",
+      "tracking": "თვალყურის დევნება და ანალიზი",
+      "wealth": "ქონება და დაგეგმვა"
     },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
+    "noResults": "შედეგები არ მოიძებნა.",
+    "placeholder": "აკრიფეთ ბრძანება ან მოძებნეთ..."
   },
   "common": {
     "cancel": "გაუქმება",
@@ -1465,117 +1465,117 @@
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "ანგარიშის დამატება",
+        "allTransactions": "ყველა ტრანზაქცია",
+        "imported": "იმპორტირებული",
+        "netWorth": "წმინდა ღირებულება",
+        "noAccounts": "ჯერ ანგარიშები არ არის დამატებული",
+        "title": "ანგარიშების ბალანსი",
+        "viewAll": "ყველას ნახვა"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "createBudget": "ბიუჯეტის შექმნა",
+        "noBudgets": "ბიუჯეტები არ არის დაყენებული",
+        "overBudget": "ბიუჯეტი გადაჭარბებულია {amount}-ით",
+        "remaining": "დარჩენილი",
+        "spent": "დახარჯული",
+        "title": "ბიუჯეტის პროგრესი",
+        "viewAll": "ყველა ბიუჯეტის ნახვა"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "აქტიური ღონისძიებები არ არის",
+        "title": "ღონისძიების ბიუჯეტები",
+        "viewAll": "ყველას ნახვა"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "addTransactions": "ტრანზაქციების დამატება",
+        "expenses": "ხარჯები",
+        "income": "შემოსავალი",
+        "net": "წმინდა",
+        "noData": "ჯერ ტრანზაქციები არ არის",
+        "thisMonth": "ეს თვე",
+        "title": "შემოსავალი vs ხარჯები"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "ხარჯები",
+        "income": "შემოსავალი",
+        "lastSixMonths": "ბოლო 6 თვე",
+        "needMoreData": "ტენდენციების სანახავად დაამატეთ ტრანზაქციები 2+ თვის განმავლობაში",
+        "notEnoughData": "საკმარისი ისტორია არ არის",
+        "title": "ყოველთვიური ტენდენციები"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "assets": "აქტივები",
+        "liabilities": "ვალდებულებები",
+        "title": "წმინდა ღირებულება",
+        "viewDetails": "დეტალების ნახვა"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "ტრანზაქციის დამატება",
+        "noTransactions": "ჯერ ტრანზაქციები არ არის",
+        "title": "ბოლო ტრანზაქციები",
+        "uncategorized": "კატეგორიის გარეშე",
+        "viewAll": "ყველას ნახვა"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
-        "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
-        "overBudget": "{amount} over budget",
-        "perCategory": "Per category",
-        "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "caution": "ხარჯების კონტროლი",
+        "createBudget": "ბიუჯეტის შექმნა",
+        "dailyBudget": "ყოველდღიური ბიუჯეტი",
+        "danger": "ბიუჯეტის გადაჭარბება",
+        "daysRemaining": "{days} დღე დარჩა",
+        "noBudgets": "ბიუჯეტები ჯერ არ არის დაყენებული",
+        "noData": "ბიუჯეტები ჯერ არ არის დაყენებული",
+        "overBudget": "{amount} ბიუჯეტის ზემოთ",
+        "perCategory": "კატეგორიების მიხედვით",
+        "remaining": "{amount} დარჩენილია",
+        "safe": "გეგმის მიხედვით",
+        "title": "უსაფრთხოდ დასახარჯი",
+        "totalSafe": "ჯამი უსაფრთხოდ დასახარჯი",
+        "viewAll": "ყველას ნახვა"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "total": "Total",
-        "uncategorized": "Uncategorized"
+        "addTransactions": "ტრანზაქციების დამატება",
+        "moreCategories": "+{count} სხვა კატეგორია",
+        "noData": "ხარჯების თვალყურის დევნება ჯერ არ დაწყებულა",
+        "thisMonth": "ეს თვე",
+        "title": "ხარჯები კატეგორიების მიხედვით",
+        "total": "ჯამი",
+        "uncategorized": "კატეგორიის გარეშე"
       },
       "streaks": {
-        "badges": "badges",
-        "dayStreak": "day streak",
-        "points": "points",
-        "title": "Streaks & Badges"
+        "badges": "სამკერდე ნიშნები",
+        "dayStreak": "დღიური სერია",
+        "points": "ქულები",
+        "title": "სერიები და სამკერდე ნიშნები"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "addSubscription": "გამოწერის დამატება",
+        "dueIn": "ვადა {days} დღეში",
+        "dueToday": "ვადა დღეს",
+        "dueTomorrow": "ვადა ხვალ",
+        "noBills": "მომავალი გადასახადები არ არის",
+        "title": "მომავალი გადასახადები",
+        "viewAll": "ყველას ნახვა"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
-        "vsLastWeek": "vs last week"
+        "title": "კვირის მიმოხილვა",
+        "viewFull": "სრული მიმოხილვა",
+        "vsLastWeek": "გასული კვირის წინააღმდეგ"
       }
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "ყოველთვის ჩანს",
+    "ariaLabel": "დაშბორდის განლაგების მორგება",
+    "button": "მორგება",
+    "description": "დაშბორდის ვიჯეტების ჩვენება ან დამალვა. გადაათრიეთ ვიჯეტები დაშბორდზე მათი თანმიმდევრობის შესაცვლელად.",
+    "reorderDescription": "ვიჯეტების თანმიმდევრობის შესაცვლელად, გადაათრიეთ ვიჯეტები პირდაპირ დაშბორდზე. გამოიყენეთ თქვენი მაუსი ან შეხება (⋮⋮) ხელით სახელურის ასაღებად.",
+    "reorderTitle": "ვიჯეტების გადალაგება",
+    "resetButton": "ნაგულისხმევზე დაბრუნება",
+    "title": "დაშბორდის მორგება",
+    "toggleVisibility": "{name}-ის ხილვადობის გადართვა",
+    "widgetVisibility": "ვიჯეტების ხილვადობა",
+    "widgetsVisible": "{visible} {total}-დან ვიჯეტი ჩანს"
   },
   "debtAnalysis": {
     "cards": {
@@ -1789,13 +1789,13 @@
   "dialog": {
     "cancel": "გაუქმება",
     "confirm": "დადასტურება",
-    "finalConfirmation": "ბოლო დადასტურება:",
-    "processing": "მიმდინარეობს...",
-    "typeToConfirm": "წერეთ {text} ამ მოქმედების დასადასტურებლად.",
+    "finalConfirmation": "საბოლოო დადასტურება:",
+    "processing": "მუშავდება...",
+    "typeToConfirm": "აკრიფეთ {text} ამ მოქმედების დასადასტურებლად.",
     "confirmAction": "მოქმედების დადასტურება"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "გადაათრიეთ ვიჯეტის გადასალაგებლად"
   },
   "duration": {
     "months": "{count, plural, =1 {1 month} other {# months}}",
@@ -1804,52 +1804,52 @@
   },
   "emptyStates": {
     "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
+      "description": "შექმენით ბიუჯეტები სხვადასხვა კატეგორიაში ხარჯების თვალყურის დევნებისთვის და ფინანსური მიზნების მისაღწევად.",
+      "heading": "ბიუჯეტები არ არის შექმნილი",
+      "primaryCta": "შექმენით პირველი ბიუჯეტი"
     },
     "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
+      "description": "შექმენით პერსონალური კატეგორიები ტრანზაქციების ორგანიზებისთვის ნაგულისხმევების მიღმა.",
+      "heading": "პერსონალური კატეგორიები არ არის",
+      "primaryCta": "კატეგორიის დამატება"
     },
     "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
+      "description": "დაიწყეთ ბანკის ტრანზაქციების იმპორტით ან ანგარიშების ხელით დამატებით თქვენი ფინანსური მიმოხილვის სანახავად.",
+      "heading": "კეთილი იყოს თქვენი მობრძანება ბიუჯეტის აპში!",
+      "primaryCta": "CSV იმპორტი",
+      "secondaryCta": "ტრანზაქციის დამატება"
     },
     "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
+      "description": "დააყენეთ ფინანსური მიზნები, როგორიცაა სახლის ყიდვა, განათლებისთვის დაზოგვა ან შვებულების დაგეგმვა.",
+      "heading": "მომავალი გეგმები არ არის",
+      "primaryCta": "მიზნის შექმნა"
     },
     "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
+      "description": "თვალყური ადევნეთ საინვესტიციო ანგარიშებს და ჰოლდინგებს პორტფელის შესრულების მონიტორინგისთვის.",
+      "heading": "ინვესტიციები არ არის თვალყურის ქვეშ",
+      "primaryCta": "საინვესტიციო ანგარიშის დამატება"
     },
     "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
+      "description": "თვალყური ადევნეთ სესხებს, იპოთეკას და ვალებს გადახდის პროგრესის ვიზუალიზაციისთვის.",
+      "heading": "სესხები არ არის თვალყურის ქვეშ",
+      "primaryCta": "დაამატეთ პირველი სესხი"
     },
     "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
+      "description": "დაამატეთ ტრანზაქციები და ბიუჯეტები ხარჯვის შაბლონებისა და ტენდენციების შესახებ ინფორმაციული მოხსენებების გენერირებისთვის.",
+      "heading": "მოხსენებისთვის მონაცემები არ არის",
+      "primaryCta": "ტრანზაქციების დამატება",
+      "secondaryCta": "CSV იმპორტი"
     },
     "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
+      "description": "დაგეგმეთ პენსია ანგარიშების თვალყურის დევნებით, საჭიროებების შეფასებით და საპენსიო ვადების ვიზუალიზაციით.",
+      "heading": "საპენსიო გეგმები არ არის",
+      "primaryCta": "დაგეგმვის დაწყება"
     },
     "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
+      "description": "დაიწყეთ ხარჯების თვალყურის დევნება პირველი ტრანზაქციის დამატებით. შეგიძლიათ ხელით დამატება ან CSV ფაილიდან იმპორტი.",
+      "heading": "ჯერ ტრანზაქციები არ არის",
+      "primaryCta": "ტრანზაქციის დამატება",
+      "secondaryCta": "CSV იმპორტი"
     }
   },
   "errorRecovery": {
@@ -1974,85 +1974,85 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
-      "done": "Done!",
-      "download": "Download",
-      "export": "Export Data"
+      "cancel": "გაუქმება",
+      "done": "დასრულებულია!",
+      "download": "ჩამოტვირთვა",
+      "export": "მონაცემების ექსპორტი"
     },
     "complete": {
-      "download": "Your file is ready to download",
-      "success": "Export complete! Check your downloads folder."
+      "download": "თქვენი ფაილი მზად არის ჩამოსატვირთად",
+      "success": "ექსპორტი დასრულებულია! შეამოწმეთ ჩამოტვირთვების საქაღალდე."
     },
     "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
+      "accounts": "ანგარიშები",
+      "estimatedSize": "სავარაუდო ზომა",
+      "title": "მონაცემების შეჯამება",
+      "transactions": "ტრანზაქციები"
     },
     "exporting": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Exporting..."
+      "pleaseWait": "გთხოვთ დაელოდოთ, ამას შეიძლება გარკვეული დრო დასჭირდეს",
+      "title": "ექსპორტირება..."
     },
     "format": {
       "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
+        "description": "სრული სარეზერვო ასლი ყველა მონაცემით",
+        "label": ".budget ფაილი"
       },
       "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
+        "description": "ელცხრილთან თავსებადი ფორმატი",
+        "label": "CSV ფაილი"
       },
       "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
+        "description": "დეველოპერებისთვის მოსახერხებელი ფორმატი",
+        "label": "JSON ფაილი"
       },
-      "label": "Export Format"
+      "label": "ექსპორტის ფორმატი"
     },
     "options": {
       "encrypt": {
-        "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
+        "description": "დაიცავით მონაცემები AES-256 დაშიფვრით",
+        "label": "პაროლით დაშიფვრა"
       },
       "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
+        "description": "ქვითრის სურათების მიმაგრება (ფაილის ზომა იზრდება)",
+        "label": "ქვითრების ჩართვა"
       }
     },
     "password": {
-      "confirm": "Confirm Password",
-      "confirmPlaceholder": "Confirm password",
-      "hint": "Password Hint (Optional)",
-      "hintNote": "This hint will be stored unencrypted in the file",
-      "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
-      "minLength": "Password must be at least 8 characters",
-      "mismatch": "Passwords do not match",
-      "placeholder": "Enter password (min 8 characters)",
-      "required": "Password is required for encryption"
+      "confirm": "პაროლის დადასტურება",
+      "confirmPlaceholder": "დაადასტურეთ პაროლი",
+      "hint": "პაროლის მინიშნება (არასავალდებულო)",
+      "hintNote": "ეს მინიშნება ფაილში დაუშიფრავად შეინახება",
+      "hintPlaceholder": "მინიშნება პაროლის გასახსენებლად",
+      "label": "პაროლი",
+      "minLength": "პაროლი მინიმუმ 8 სიმბოლო უნდა იყოს",
+      "mismatch": "პაროლები არ ემთხვევა",
+      "placeholder": "შეიყვანეთ პაროლი (მინ. 8 სიმბოლო)",
+      "required": "დაშიფვრისთვის პაროლი სავალდებულოა"
     },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
+    "subtitle": "ჩამოტვირთეთ თქვენი ბიუჯეტის მონაცემები",
+    "title": "მონაცემების ექსპორტი"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
+    "account": "ანგარიში",
+    "allAccounts": "ყველა ანგარიში",
+    "allCategories": "ყველა კატეგორია",
+    "allTypes": "ყველა ტიპი",
+    "apply": "ფილტრების მინიჭება",
+    "category": "კატეგორია",
+    "clearFilters": "ფილტრების გასუფთავება",
+    "dateRange": "თარიღის დიაპაზონი",
+    "expense": "ხარჯი",
+    "income": "შემოსავალი",
+    "search": "ტრანზაქციების ძიება...",
+    "type": "ტიპი"
   },
   "footer": {
     "copyright": "© {year} {brandName}",
     "links": {
       "login": "შესვლა",
       "settings": "პარამეტრები",
-      "signup": "დაიწყეთ საცდელი ვერსია",
+      "signup": "საცდელის დაწყება",
       "upgrade": "განახლება"
     },
     "tagline": "პრემიუმ ბიუჯეტირება ერთჯერადი განახლებით."
@@ -2098,23 +2098,23 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "ფინანსური ჯანმრთელობის ქულა: {score} 100-დან. {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "დაამატეთ ტრანზაქციები რომ ნახოთ თქვენი",
+      "line2": "ფინანსური ჯანმრთელობის ქულა"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "შეფასება: {grade}",
+    "missingFactors": "{count, plural, =1 {1 ფაქტორი აკლია} other {# ფაქტორი აკლია}}",
+    "title": "ფინანსური ჯანმრთელობა",
     "history": {
-      "title": "ქულების ისტორია",
+      "title": "ქულის ისტორია",
       "monthsOfData": "{count} {count, plural, =1 {თვის} other {თვის}} მონაცემები",
-      "emptyTitle": "თქვენი ქულების ისტორია აქ გამოჩნდება მონაცემების დაგროვებისას",
+      "emptyTitle": "თქვენი ქულის ისტორია აქ გამოჩნდება მონაცემების დაგროვებისას",
       "emptySubtitle": "შეამოწმეთ მომდევნო თვეში!",
       "legendScore": "ქულა",
-      "legendTrend": "ტრენდი",
+      "legendTrend": "ტენდენცია",
       "tooltipScore": "ქულა",
-      "tooltipTrend": "ტრენდი",
+      "tooltipTrend": "ტენდენცია",
       "loadingChart": "დიაგრამა იტვირთება..."
     }
   },
@@ -2217,56 +2217,56 @@
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "უკან",
+      "cancel": "გაუქმება",
+      "done": "დასრულება",
+      "import": "მონაცემების იმპორტი"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "{count} ელემენტი წარმატებით იმპორტირებულია",
+      "success": "იმპორტი დასრულებულია!",
+      "withIssues": "იმპორტი დასრულდა პრობლემებით"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} არსებული",
+      "handleLabel": "კონფლიქტების მართვა",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "იმპორტირებულით ჩანაცვლება",
+        "label": "გადაწერა"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "ახალ ჩანაწერებად იმპორტი",
+        "label": "ახლის შექმნა"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "მიმდინარე მონაცემების შენარჩუნება",
+        "label": "არსებულის გამოტოვება"
       },
-      "title": "Conflicts Found"
+      "title": "კონფლიქტები ნაპოვნია"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "decrypt": "გაშიფვრა და გაგრძელება",
+      "encrypted": "ეს ფაილი დაშიფრულია",
+      "enterPassword": "შეიყვანეთ პაროლი",
+      "hint": "მინიშნება: {hint}",
+      "password": "პაროლი"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "გთხოვთ დაელოდოთ, ამას შეიძლება გარკვეული დრო დასჭირდეს",
+      "title": "თქვენი მონაცემების იმპორტირება..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "იმპორტის მონაცემები",
+      "exported": "ექსპორტირებული",
+      "fileInfo": "ფაილის ინფორმაცია",
+      "version": "ვერსია"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "ან გადმოათრიეთ აქ",
+      "label": "დააწკაპუნეთ .budget ფაილის ასარჩევად"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": ".budget ფაილიდან აღდგენა",
+    "title": "მონაცემების იმპორტი"
   },
   "investmentAccountModal": {
     "buttons": {
@@ -2311,30 +2311,30 @@
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "ვიზუალიზაციისთვის ჰოლდინგები არ არის. დაამატეთ ჰოლდინგები დიაგრამების სანახავად.",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "მოგება",
+      "loss": "ზარალი"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
-      "total": "Total"
+      "allocation": "განაწილება",
+      "costBasis": "ღირებულების ბაზისი",
+      "currentValue": "მიმდინარე ღირებულება",
+      "gainLoss": "მოგება/ზარალი",
+      "percentReturn": "% უკუგება",
+      "symbol": "სიმბოლო",
+      "total": "ჯამი"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "განაწილება ანგარიშის ტიპის მიხედვით",
+      "gainLoss": "მოგება/ზარალი ჰოლდინგების მიხედვით",
+      "performanceSummary": "შესრულების შეჯამება",
+      "portfolioAllocation": "პორტფელის განაწილება ჰოლდინგების მიხედვით"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "ღირებულების ბაზისი",
+      "currentValue": "მიმდინარე ღირებულება",
+      "percentOfPortfolio": "პორტფელის {percent}%"
     }
   },
   "investments": {
@@ -3093,11 +3093,11 @@
   },
   "morePage": {
     "groups": {
-      "toolsSettings": "Tools & Settings",
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning"
+      "toolsSettings": "ხელსაწყოები და პარამეტრები",
+      "trackingAnalysis": "თვალყურის დევნება და ანალიზი",
+      "wealthPlanning": "ქონება და დაგეგმვა"
     },
-    "title": "More"
+    "title": "მეტი"
   },
   "nav": {
     "about": "შესახებ",
@@ -3283,42 +3283,42 @@
     "tryAgain": "Try Again"
   },
   "onboarding": {
-    "dontShowAgain": "ამ ტურის განმეორება აღარ",
+    "dontShowAgain": "აღარ აჩვენო ეს ტური",
     "navigation": {
-      "getStarted": "დაიწყეთ",
+      "getStarted": "დაწყება",
       "next": "შემდეგი",
       "previous": "წინა",
       "startTour": "ტურის დაწყება"
     },
     "quickTip": "💡 სწრაფი რჩევა",
     "skipTour": "ტურის გამოტოვება",
-    "stepCounter": "ნაბიჯი {current}/{total}",
+    "stepCounter": "ნაბიჯი {current} {total}-დან",
     "steps": {
       "budgets": {
-        "description": "შექმენით ბიუჯეტები სხვადასხვა ხარჯების კატეგორიებისთვის. მოიწვდეთ თქვენი პროგრესი მთელი თვის განმავლობაში და მიიღეთ შეტყობინებები, როდესაც თქვენი ზღვარი უახლოვდება.",
-        "title": "🎯 დააყენეთ თქვენი ბიუჯეტები"
+        "description": "განსაზღვრეთ თქვენი ფინანსური ზღვრები. დააყენეთ პერსონალური ლიმიტები და მიიღეთ რეალურ დროში შეტყობინებები.",
+        "title": "ზუსტი ბიუჯეტირება"
       },
       "categorize": {
-        "description": "გადახედეთ და დაარეგულირეთ ტრანზაქციების კატეგორიები. ჩვენი ჭკვიანი კატეგორიზაცია სწავლობს თქვენს კორექტირებებს, რათა დროთა განმავლობაში გაუმჯობესდეს. გამოიყენეთ მასობრივი მოქმედებები, რათა ერთდროულად კატეგორიზირდეთ რამდენიმე ტრანზაქცია!",
-        "title": "🏷️ კატეგორიზაცია და ორგანიზება"
+        "description": "ჩვენი AI სწავლობს თქვენი ჩვევებიდან. ერთხელ კატეგორიზაცია და მომავალში მსგავს ტრანზაქციებს ავტომატურად დაამუშავებს.",
+        "title": "ჭკვიანი კატეგორიზაცია"
       },
       "import": {
-        "description": "დაიწყეთ თქვენი ბანკის ტრანზაქციების იმპორტით CSV ფაილიდან. ჩვენ ვუჭერთ მხარს BMO-ს, Home Trust-ს და ბევრ სხვა ბანკს. აპლიკაცია ავტომატურად კატეგორიზირებს თქვენს ტრანზაქციებს!",
-        "title": "📥 იმპორტირება თქვენი ტრანზაქციები"
+        "description": "შეუფერხებლად შემოიტანეთ თქვენი ტრანზაქციების ისტორია. მხარდაჭერილია ძირითადი ბანკები, ჭკვიანი ავტო-ამოცნობით.",
+        "title": "მონაცემების მარტივი იმპორტი"
       },
       "reports": {
-        "description": "ვიზუალიზაცია თქვენი ხარჯვის პატერნების, თქვენი წმინდა ღირებულების ტრეკინგი და ინფორმირებული ფინანსური გადაწყვეტილებების მიღება. თქვენი დაშბორდი ავტომატურად განახლდება ყოველი ტრანზაქციის შემდეგ!",
-        "title": "📊 ნახეთ რეპორტები და ანალიტიკა"
+        "description": "გახსენით თქვენი მონაცემების ძალა. ვიზუალიზაცია ტენდენციების, წმინდა ღირებულების თვალყურის დევნება და ყოვლისმომცველი ანალიტიკა.",
+        "title": "ღრმა ანალიტიკა"
       },
       "welcome": {
-        "description": "მოდი სწრაფი ტური გავატაროთ, რათა დაგეხმაროთ თქვენი საოჯახო ფინანსების მართვაში. ეს არ წაგართმევს ბევრ დროს!",
-        "title": "👋 კეთილი იყოს თქვენი მობრძანება ბიუჯეტების აპლიკაციაში!"
+        "description": "გამოცადეთ თქვენი ქონების მართვის ჭკვიანი გზა. მოდით მოკლე მოგზაურობა გავაკეთოთ თქვენს ახალ ფინანსურ ცენტრში.",
+        "title": "კეთილი იყოს თქვენი მობრძანება ფინანსურ სიცხადეში"
       }
     },
     "tips": {
-      "budgets": "დააყენეთ რეალისტური ბიუჯეტები და ჩვენ შეგატყობინებთ, თუ თქვენ ხართ ზედმეტ ხარჯზე.",
-      "categorize": "გამოიყენეთ სწრაფი კატეგორიზაციის ღილაკი ან აირჩიეთ რამდენიმე ტრანზაქცია მასობრივი კატეგორიზაციისთვის.",
-      "import": "გადაიტანეთ და ჩააგდეთ თქვენი CSV ფაილი ან დააწკაპუნეთ ბრაუზერისთვის. ჩვენ ავტომატურად ვაღმერთებთ BMO-ს და Home Trust-ის ფორმატებს!"
+      "budgets": "დააყენეთ ყოველთვიური ლიმიტები ხარჯვის სიჩქარის რეალურ დროში ვიზუალიზაციისთვის.",
+      "categorize": "აირჩიეთ რამდენიმე ტრანზაქცია კატეგორიების ნაყარად მისანიჭებლად — ეფექტურობა მთავარია.",
+      "import": "უბრალოდ გადაათრიეთ თქვენი CSV ფაილი. ფორმატირებას ავტომატურად დავამუშავებთ."
     }
   },
   "onboardingPage": {
@@ -3716,26 +3716,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "ფაქტობრივი",
+      "confidenceInterval": "სანდოობის ინტერვალი",
+      "predicted": "პროგნოზირებული"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "პროგნოზებისთვის მონაცემები მიუწვდომელია",
+    "predictionUnavailable": "პროგნოზი მიუწვდომელია",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "საშ. სანდოობა",
+      "nextMonth": "მომდევნო თვე",
+      "threeMonthAvg": "3-თვიანი საშუალო"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "სანდოობა",
+      "month": "თვე",
+      "predicted": "პროგნოზირებული",
+      "range": "დიაპაზონი",
+      "title": "ყოველთვიური პროგნოზები"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "ხარჯვის პროგნოზი: {category}",
+    "trainingModel": "მოდელის სწავლება და პროგნოზების გენერირება..."
   },
   "privacyPanel": {
     "active": "Active",
@@ -3855,27 +3855,27 @@
     "deleteButton": "პროფილის წაშლა"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "გადმოწიეთ განსაახლებლად",
+    "release": "გაუშვით განსაახლებლად"
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "დაყენება",
+      "notNow": "არა ახლა"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "დაყენების მოთხოვნის დახურვა",
+    "description": "დაამატეთ მთავარ ეკრანზე სწრაფი წვდომისა და ოფლაინ გამოყენებისთვის",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "სწრაფი და უსაფრთხო",
+      "noAppStore": "App Store არ არის საჭირო",
+      "offline": "ოფლაინ მუშაობს"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"მთავარ ეკრანზე დამატება\"",
+    "iosForFullExperience": "სრული აპის გამოცდილებისთვის უფრო სწრაფი ჩატვირთვით.",
+    "iosTap": "დააჭირეთ",
+    "iosThen": "შემდეგ",
+    "iosTitle": "ბიუჯეტის აპის დაყენება",
+    "title": "ბიუჯეტის აპის დაყენება"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3906,38 +3906,38 @@
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "კატეგორიის მინიჭება",
+      "cancel": "გაუქმება",
+      "save": "შენახვა"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "clickToSelect": "დააწკაპუნეთ კატეგორიის ასარჩევად",
+    "description": "აირჩიეთ კატეგორია {count, plural, =1 {ამ ტრანზაქციისთვის} other {# ტრანზაქციისთვის}}",
+    "general": "ზოგადი",
+    "noResults": "კატეგორიები არ მოიძებნა",
+    "pressEnter": "დააჭირეთ ↵ Enter",
+    "saving": "შენახვა...",
+    "searchPlaceholder": "კატეგორიების ძიება...",
+    "title": "სწრაფი კატეგორიზაცია"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "ყველა",
+    "categories": "კატეგორიები",
+    "clearFilters": "ფილტრების გასუფთავება",
+    "moreCategories": "+{count} სხვა",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "ბოლო 30 დღე",
+      "last90": "ბოლო 90 დღე",
+      "thisMonth": "ეს თვე",
+      "thisYear": "ეს წელი"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "დროის პერიოდი"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "balance": "მთლიანი ბალანსი",
+    "expenses": "ხარჯები",
+    "income": "შემოსავალი",
+    "savingsRate": "დაზოგვის მაჩვენებელი",
+    "savingsRateDescription": "ამ თვეში შენახული შემოსავლის პროცენტი"
   },
   "receiptThumbnail": {
     "close": "Close",
@@ -3954,43 +3954,43 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "ქვითრის მიმაგრება",
+      "chooseDifferent": "სხვას არჩევა",
+      "extractData": "მონაცემების ამოღება",
+      "extracting": "ამოღება..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "ფოტოს გადაღება კამერით",
+      "useDevice": "გამოიყენეთ მოწყობილობის კამერა ქვითრის გადასაღებად"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "კამერით გადაღების ველი",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "ან <link>აირჩიეთ ფაილები</link>",
+      "dragDrop": "გადმოათრიეთ ქვითარი აქ",
+      "dropHere": "ჩააგდეთ ქვითარი აქ",
+      "supportedFormats": "მხარდაჭერილია JPG, PNG, PDF • მაქს {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "ქვითრიდან მონაცემების ამოღება ვერ მოხერხდა. გთხოვთ ხელით შეიყვანოთ.",
+      "extractionFailed": "მონაცემების ამოღება ვერ მოხერხდა. გთხოვთ სცადოთ თავიდან ან ხელით შეიყვანოთ.",
+      "invalidType": "არასწორი ფაილის ტიპი. მხოლოდ JPG, PNG და PDF ფაილებია დაშვებული",
+      "ocrImagesOnly": "OCR მხოლოდ სურათის ფაილებისთვისაა (JPG, PNG)",
+      "rejected": "ფაილი უარყოფილია. გთხოვთ სცადოთ თავიდან",
+      "tooLarge": "ფაილი ძალიან დიდია. მაქსიმალური ზომა {size}MB"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "თანხა:",
+      "confidence": "სანდოობა: {percent}%",
+      "date": "თარიღი:",
+      "merchant": "მოვაჭრე:",
+      "title": "მონაცემები ამოღებულია"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "წინასწარი ხედი მიუწვდომელია",
+      "title": "PDF ქვითარი"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "ქვითრის წინასწარი ხედი",
+    "removeFile": "ფაილის წაშლა"
   },
   "recurringTransactions": {
     "confidence": "{percent}% confidence",
@@ -4142,26 +4142,26 @@
     "yourAccounts": "Your Accounts"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "მალსახმობების დახმარების დახურვა",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "კლავიატურის მალსახმობები მუშაობს ყველა გვერდზე, გარდა ფორმებში აკრეფისა. დააჭირეთ {key} ნებისმიერ დროს ამ დახმარების სანახავად.",
+      "title": "💡 პროფესიონალური რჩევა"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "პროფესიონალური მომხმარებლის პროდუქტიულობის რჩევები",
+    "title": "კლავიატურის მალსახმობები"
   },
   "sidebar": {
     "actions": {
-      "backToHome": "მთავარ გვერდზე დაბრუნება",
+      "backToHome": "მთავარზე დაბრუნება",
       "collapseSidebar": "გვერდითი პანელის შეკუმშვა",
-      "expandSidebar": "გვერდითი პანელის გაფართოება",
-      "importCsv": "CSV-ის იმპორტი",
+      "expandSidebar": "გვერდითი პანელის გაშლა",
+      "importCsv": "CSV იმპორტი",
       "settings": "პარამეტრები",
       "showAllItems": "ყველა ელემენტის ჩვენება",
-      "showLess": "მცირე ჩვენება"
+      "showLess": "ნაკლების ჩვენება"
     },
     "appSubtitle": "პრემიუმ ფინანსები",
-    "appTitle": "ბიუჯეტების აპლიკაცია",
+    "appTitle": "ბიუჯეტის აპი",
     "navigation": {
       "accounts": "ანგარიშები",
       "budgets": "ბიუჯეტები",
@@ -4169,23 +4169,23 @@
       "categories": "კატეგორიები",
       "dashboard": "დაშბორდი",
       "events": "ღონისძიებები",
-      "futurePlans": "მომავალი გეგმები",
-      "import": "CSV-ის იმპორტი",
+      "futurePlans": "სამომავლო გეგმები",
+      "import": "CSV იმპორტი",
       "investments": "ინვესტიციები",
       "loans": "სესხები",
-      "netWorth": "წმინდა აქტივები",
-      "properties": "ძირითადი",
-      "reminders": "მახსოვრობა",
-      "reports": "რეპორტები",
+      "netWorth": "წმინდა ღირებულება",
+      "properties": "ქონება",
+      "reminders": "შეხსენებები",
+      "reports": "ანგარიშგები",
       "retirement": "პენსია",
-      "scanReceipt": "ბილეთის სკანირება",
+      "scanReceipt": "ქვითრის სკანირება",
       "scenarios": "რა-თუ",
       "settings": "პარამეტრები",
-      "subscriptions": "წევრიანობები",
+      "subscriptions": "გამოწერები",
       "transactions": "ტრანზაქციები"
     },
-    "search": "ძებნა...",
-    "shortcuts": "შორტკატები"
+    "search": "ძიება...",
+    "shortcuts": "მალსახმობები"
   },
   "simplefinConnect": {
     "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
@@ -4351,61 +4351,61 @@
     "warningsLabel": "Warnings:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "პროგნოზი ბოლო {months} თვის ხაზოვანი რეგრესიის საფუძველზე",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "ფაქტობრივი ხარჯვა",
+      "projected": "პროგნოზირებული"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "ტენდენციების გენერირებისთვის საკმარისი მონაცემები არ არის. დაამატეთ მინიმუმ 2 თვის ტრანზაქციები.",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "საშ. ყოველთვიური",
+      "lastMonth": "გასული თვე",
+      "projected": "პროგნოზირებული"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "ხარჯვის ტენდენციები და პროგნოზი"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "გაყოფის დამატება ({current}/{max})",
+    "amount": "თანხა",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "გაუქმება",
+      "save": "გაყოფის შენახვა",
+      "saving": "შენახვა..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "კატეგორია",
+    "closeModal": "ფანჯრის დახურვა",
+    "date": "თარიღი:",
+    "distributeEvenly": "თანაბრად განაწილება",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "გაყოფილი ტრანზაქციის შენახვა ვერ მოხერხდა"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "შეიყვანეთ თანხა ყოველი კატეგორიისთვის (ჯამი უნდა იყოს ${amount})",
+      "step2": "გამოიყენეთ \"თანაბრად განაწილება\" ყველა კატეგორიაზე თანაბრად გასაყოფად",
+      "step3": "დაამატეთ მაქსიმუმ 5 გაყოფა ტრანზაქციაზე",
+      "step4": "ორიგინალი ტრანზაქცია დაიმალება და გაყოფილი ელემენტებით ჩანაცვლდება",
+      "title": "როგორ გავყოთ ტრანზაქციები:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "მაქსიმუმ 5 გაყოფა დაშვებულია",
+    "minSplitsRequired": "მინიმუმ 2 გაყოფა სავალდებულოა",
+    "none": "არცერთი",
+    "notes": "შენიშვნები (არასავალდებულო)",
+    "notesPlaceholder": "მაგ., სამსახურის ხარჯი, პირადი მოხმარება",
+    "originalAmount": "ორიგინალი თანხა:",
+    "removeThisSplit": "ამ გაყოფის წაშლა",
+    "selectCategory": "აირჩიეთ კატეგორია...",
+    "splitsCount": "გაყოფები ({current}/{max})",
+    "subcategory": "ქვეკატეგორია",
+    "title": "ტრანზაქციის გაყოფა",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "შეასწორეთ გაყოფის თანხები ორიგინალ თანხასთან შესაბამისობისთვის.",
+      "amountsMustMatch": "გაყოფის თანხები ორიგინალი ტრანზაქციის თანხის ტოლი უნდა იყოს",
+      "categoryRequired": "ყველა გაყოფას კატეგორია უნდა ჰქონდეს",
+      "matchesOriginal": "✓ ემთხვევა ორიგინალს",
+      "overBy": "მეტია ${amount}-ით",
+      "readyToSave": "გაყოფის თანხები ემთხვევა ორიგინალ ტრანზაქციას. მზად არის შესანახად!",
+      "total": "ჯამი:",
+      "underBy": "ნაკლებია ${amount}-ით"
     }
   },
   "splits": {
@@ -4560,30 +4560,30 @@
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "ანალიზისთვის აქტიური გამოწერები არ არის",
+    "loadingChart": "დიაგრამა იტვირთება...",
+    "moreCharges": "+{count} სხვა გადასახადი",
+    "perMonth": "/თვე",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "ღირებულება კატეგორიების მიხედვით",
+      "potentialSavings": "პოტენციური დანაზოგი",
+      "upcomingCharges": "მომავალი გადასახადები (მომდევნო 30 დღე)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {1 აქტიური გამოწერა} other {# აქტიური გამოწერა}}",
+      "annualCost": "წლიური ღირებულება",
+      "monthlyCost": "ყოველთვიური ღირებულება",
+      "next30Days": "მომდევნო 30 დღე",
+      "projectedYearly": "პროგნოზირებული წლიური ხარჯი",
+      "upcomingCharges": "{count, plural, =1 {1 მომავალი გადასახადი} other {# მომავალი გადასახადი}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "შესაძლოა გაუქმებული გამოწერები",
+      "inactiveDescription": "{count, plural, =1 {1 გამოწერა არ} other {# გამოწერა არ}} ჩამოჭრა ბოლო პერიოდში. გადაამოწმეთ, რომ ნამდვილად გაუქმებულია.",
+      "trialsTitle": "საცდელი პერიოდები მთავრდება მალე",
+      "trialsDescription": "{count, plural, =1 {1 საცდელი პერიოდი} other {# საცდელი პერიოდი}} მთავრდება მომდევნო 7 დღეში. გააუქმეთ თუ არ იყენებთ.",
+      "highCostTitle": "ძვირადღირებული გამოწერები",
+      "highCostDescription": "ეს გამოწერები თქვენი ხარჯების დიდ ნაწილს წარმოადგენს. განიხილეთ იღებთ თუ არა სრულ სარგებელს."
     }
   },
   "subscriptionModal": {
@@ -4711,8 +4711,8 @@
     "syncing": "Syncing..."
   },
   "tooltip": {
-    "ariaLabel": "მეტი ინფორმაცია",
-    "learnMore": "მეტი ინფორმაცია →"
+    "ariaLabel": "დამატებითი ინფორმაცია",
+    "learnMore": "გაიგეთ მეტი →"
   },
   "trainMl": {
     "confidence": "Confidence",
@@ -4749,83 +4749,83 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "ანგარიში"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} ხელმისაწვდომია",
+      "label": "დამატებითი პარამეტრები"
     },
     "amount": {
-      "label": "Amount",
+      "label": "თანხა",
       "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "validationError": "გთხოვთ შეიყვანოთ სწორი თანხა"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "ტრანზაქციის დამატება",
+      "adding": "დამატება...",
+      "cancel": "გაუქმება",
+      "update": "ტრანზაქციის განახლება",
+      "updating": "განახლება..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "AI კატეგორიზაცია...",
+      "create": "შექმნა",
+      "createNew": "+ ახალი კატეგორიის შექმნა",
+      "label": "კატეგორია",
+      "lastUsed": "ბოლოს გამოყენებული: {category}",
+      "namePlaceholder": "კატეგორიის სახელი...",
+      "selectPlaceholder": "აირჩიეთ კატეგორია...",
+      "subcategoriesPlaceholder": "ქვეკატეგორიები (არასავალდებულო, მძიმით გამოყოფილი)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "ფანჯრის დახურვა",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "კატეგორია \"{name}\" შეიქმნა!",
+      "failed": "კატეგორიის შექმნა ვერ მოხერხდა",
+      "nameRequired": "კატეგორიის სახელი სავალდებულოა"
     },
     "date": {
-      "label": "Date"
+      "label": "თარიღი"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "აღწერა",
+      "placeholder": "მაგ., სასურსათო საყიდლები"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "3 მსგავსი კორექტირების შემდეგ, ამ მოვაჭრის მომავალი ტრანზაქციები ავტომატურად კატეგორიზდება.",
+      "title": "შეისწავლა!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "შენიშვნები",
+      "placeholder": "დაამატეთ დამატებითი შენიშვნები..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "ახალი ქვითრის დამატება",
+      "deleteConfirm": "ნამდვილად გსურთ ამ ქვითრის წაშლა?",
+      "deleteFailed": "ქვითრის წაშლა ვერ მოხერხდა",
+      "deleteReceipt": "ქვითრის წაშლა",
+      "existing": "არსებული ქვითრები ({count})",
+      "label": "ქვითრის დანართები",
+      "newFile": "ახალი: {filename}",
+      "remove": "წაშლა",
+      "viewFull": "სრული ქვითრის ნახვა"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "ქვეკატეგორია",
+      "none": "არცერთი",
+      "selectPlaceholder": "აირჩიეთ ქვეკატეგორია..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "თეგები (მძიმით გამოყოფილი)",
+      "placeholder": "მაგ., სასურსათო, ყოველკვირეული, აუცილებელი"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "ტრანზაქციის დამატება",
+      "edit": "ტრანზაქციის რედაქტირება"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "ხარჯი",
+      "income": "შემოსავალი",
+      "label": "ტიპი"
     }
   },
   "transactionSearch": {
@@ -4872,19 +4872,19 @@
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "ქვითრის მიმაგრება",
+      "delete": "წაშლა",
+      "edit": "რედაქტირება",
+      "split": "გაყოფა"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "ტრანზაქციები საჩვენებლად არ არის",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "ანგარიში",
+      "actions": "მოქმედებები",
+      "amount": "თანხა",
+      "category": "კატეგორია",
+      "date": "თარიღი",
+      "description": "აღწერა"
     }
   },
   "transactions": {
@@ -5055,52 +5055,52 @@
   },
   "widget": {
     "accountBalances": {
-      "description": "მიმდინარე ბალანსები ყველა ანგარიშზე",
-      "title": "ანგარიშების ბალანსები"
+      "description": "ყველა ანგარიშის მიმდინარე ბალანსი",
+      "title": "ანგარიშების ბალანსი"
     },
     "budgetProgress": {
-      "description": "მოიწვდეთ, როგორ მიდიხართ თქვენი ბიუჯეტის მიზნების მიმართ",
+      "description": "თვალი ადევნეთ თქვენი ბიუჯეტის მიზნებს",
       "title": "ბიუჯეტის პროგრესი"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "თვალი ადევნეთ ხარჯებს ღონისძიებებისა და პროექტებისთვის",
+      "title": "ღონისძიების ბიუჯეტები"
     },
     "incomeVsExpenses": {
-      "description": "შედარეთ თქვენი შემოსავალი და ხარჯები დროში",
+      "description": "შეადარეთ შემოსავლები და ხარჯები დროის განმავლობაში",
       "title": "შემოსავალი vs ხარჯები"
     },
     "monthlyTrends": {
-      "description": "ვიზუალიზაცია თქვენი ფინანსური პატერნების თვეში",
-      "title": "თვიური ტენდენციები"
+      "description": "ვიზუალიზაცია თქვენი ფინანსური ტენდენციების თვეების მიხედვით",
+      "title": "ყოველთვიური ტენდენციები"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "თქვენი ჯამური წმინდა ღირებულების სწრაფი ხედი",
+      "title": "წმინდა ღირებულება"
     },
     "recentTransactions": {
-      "description": "სწრაფი ხედი თქვენი ბოლო ფინანსური აქტივობების",
+      "description": "თქვენი უახლესი ფინანსური აქტივობის სწრაფი ხედი",
       "title": "ბოლო ტრანზაქციები"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "ნახეთ რამდენის დახარჯვა შეგიძლიათ უსაფრთხოდ კატეგორიების მიხედვით",
+      "title": "უსაფრთხოდ დასახარჯი"
     },
     "spendingByCategory": {
-      "description": "იხილეთ, სად მიდის თქვენი თანხა ვიზუალური გაწვდებით",
+      "description": "ნახეთ სად მიდის თქვენი ფული ვიზუალური ანალიზით",
       "title": "ხარჯები კატეგორიების მიხედვით"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "თვალი ადევნეთ ჩართულობის სერიებს და მიღწევებს",
+      "title": "სერიები და სამკერდე ნიშნები"
     },
     "upcomingBills": {
-      "description": "არ გამოტოვოთ გადახდა გადასახადების გახსენების საშუალებით",
+      "description": "არასოდეს გამოტოვოთ გადახდა შეხსენებებით",
       "title": "მომავალი გადასახადები"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "ყოველკვირეული ხარჯვის შაბლონების შეჯამება",
+      "title": "კვირის მიმოხილვა"
     }
   },
   "ynabMigrationWizard": {

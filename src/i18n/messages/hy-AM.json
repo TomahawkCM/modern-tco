@@ -63,34 +63,34 @@
   },
   "accessibleChart": {
     "buttons": {
-      "chart": "Chart",
-      "showChart": "Show chart view",
-      "showTable": "Show data table view",
-      "table": "Table"
+      "chart": "Գծագիր",
+      "showChart": "Ցույց տալ գծագիրը",
+      "showTable": "Ցույց տալ աղյուսակը",
+      "table": "Աղյուսակ"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
-    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "chartDescription": "{description}։ {dataPoints} տվյալների կետեր ցույց է տրված։ {dataList}։ Սեղմեք Աղյուսակ կոճակը՝ տվյալները աղյուսակի տեսքով դիտելու համար՝ ստեղնաշարի նավիգացիայի աջակցությամբ։",
+    "chartTypeDescription": "Սա {chartType} գծագիր է՝ {dataPoints} տվյալների կետերով։",
     "footer": {
-      "average": "Average:",
-      "total": "Total:"
+      "average": "Միջինը՝",
+      "total": "Ընդամենը՝"
     },
     "keyboardNav": {
-      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
-      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+      "srOnly": "Օգտագործեք սլաքները տողերի միջև տեղաշարժվելու համար։ Tab սեղմեք հաջորդ տարրին անցնելու համար։",
+      "visual": "Օգտագործեք ← → կամ ↑ ↓ ստեղները տեղաշարժվելու համար • Home/End սկիզբ կամ վերջ անցնելու համար"
     },
     "summary": {
-      "average": "Average: {value}.",
-      "highest": "Highest value: {label} at {value}.",
-      "lowest": "Lowest value: {label} at {value}.",
-      "total": "Total: {value}."
+      "average": "Միջինը՝ {value}։",
+      "highest": "Ամենաբարձ արժեքը՝ {label}՝ {value}։",
+      "lowest": "Ամենացածր արժեքը՝ {label}՝ {value}։",
+      "total": "Ընդամենը՝ {value}։"
     },
-    "switchedToChart": "Switched to chart view",
-    "switchedToTable": "Switched to table view",
+    "switchedToChart": "Անցվել է գծագրի տեսքին",
+    "switchedToTable": "Անցվել է աղյուսակի տեսքին",
     "tableHeaders": {
-      "additionalInfo": "Additional Info",
-      "category": "Category",
-      "period": "Period",
-      "value": "Value"
+      "additionalInfo": "Լրացուցիչ տեղեկություն",
+      "category": "Կատեգորիա",
+      "period": "Պերիոդ",
+      "value": "Արժեք"
     }
   },
   "actions": {
@@ -1409,9 +1409,9 @@
     "useSavedMapping": "Use Saved Mapping"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "Արդյունքներ չեն գտնվել։",
+    "search": "Փնտրեք...",
+    "select": "Ընտրեք..."
   },
   "commandPalette": {
     "commands": {
@@ -1465,117 +1465,117 @@
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "Ավելացնել հաշիվ",
+        "allTransactions": "Բոլոր գործարքները",
+        "imported": "Ներմուծված",
+        "netWorth": "Զուտ արժեք",
+        "noAccounts": "Հաշիվներ դեռ չեն ավելացվել",
+        "title": "Հաշիվների մնացորդներ",
+        "viewAll": "Տեսնել բոլորը"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "createBudget": "Ստեղծել բյոջե",
+        "noBudgets": "Բյոջեներ սահմանված չեն",
+        "overBudget": "Բյոջեն գերազանցված է {amount}-ով",
+        "remaining": "Մնացած",
+        "spent": "Ծախսված",
+        "title": "Բյոջեի ընթացք",
+        "viewAll": "Տեսնել բոլոր բյոջեները"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "Ակտիվ միջոցառումներ չկան",
+        "title": "Միջոցառման բյոջեներ",
+        "viewAll": "Տեսնել բոլորը"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "addTransactions": "Ավելացնել գործարքներ",
+        "expenses": "Ծախսեր",
+        "income": "Եկամուտ",
+        "net": "Զուտ",
+        "noData": "Գործարքներ դեռ չկան",
+        "thisMonth": "Այս ամիս",
+        "title": "Եկամուտներ ընդ. ծախսեր"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "Ծախսեր",
+        "income": "Եկամուտ",
+        "lastSixMonths": "Վերջին 6 ամիս",
+        "needMoreData": "Ավելացրեք գործարքներ 2+ ամիս միտումները տեսնելու համար",
+        "notEnoughData": "Բավարար պատմություն չկա",
+        "title": "Ամսական միտումներ"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "assets": "Ակտիվներ",
+        "liabilities": "Պարտավորություններ",
+        "title": "Զուտ արժեք",
+        "viewDetails": "Տեսնել մանրամասները"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "Ավելացնել գործարք",
+        "noTransactions": "Գործարքներ դեռ չկան",
+        "title": "Վերջին գործարքներ",
+        "uncategorized": "Անկատեգորիա",
+        "viewAll": "Տեսնել բոլորը"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
-        "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
-        "overBudget": "{amount} over budget",
-        "perCategory": "Per category",
-        "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "caution": "Հետեվեք ծախսերը",
+        "createBudget": "Ստեղծել բյոջե",
+        "dailyBudget": "Օրական բյոջե",
+        "danger": "Բյոջեն գերազանցված է",
+        "daysRemaining": "{days} օր մնացել է",
+        "noBudgets": "Բյոջեներ դեռ սահմանված չեն",
+        "noData": "Բյոջեներ դեռ սահմանված չեն",
+        "overBudget": "{amount} բյոջեն գերազանցված է",
+        "perCategory": "Ըստ կատեգորիաների",
+        "remaining": "{amount} մնացել է",
+        "safe": "Ընթացքում է",
+        "title": "Անվտանգ ծախսելու համար",
+        "totalSafe": "Ընդամենը՝ անվտանգ ծախսելու համար",
+        "viewAll": "Տեսնել բոլորը"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "total": "Total",
-        "uncategorized": "Uncategorized"
+        "addTransactions": "Ավելացնել գործարքներ",
+        "moreCategories": "+{count} այլ կատեգորիաներ",
+        "noData": "Ծախսեր դեռ չեն հետեվվում",
+        "thisMonth": "Այս ամիս",
+        "title": "Ծախսերը ըստ կատեգորիաների",
+        "total": "Ընդամենը",
+        "uncategorized": "Անկատեգորիա"
       },
       "streaks": {
-        "badges": "badges",
-        "dayStreak": "day streak",
-        "points": "points",
-        "title": "Streaks & Badges"
+        "badges": "կրծանիշներ",
+        "dayStreak": "օրերի հաջորդականություն",
+        "points": "միավորներ",
+        "title": "Հաջորդականություններ և կրծանիշներ"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "addSubscription": "Ավելացնել բաժանորդագրություն",
+        "dueIn": "Վճարման ժամկետը՝ {days} օր",
+        "dueToday": "Վճարման ժամկետը՝ այսօր",
+        "dueTomorrow": "Վճարման ժամկետը՝ վաղը",
+        "noBills": "Առաջիկա վճարներ չկան",
+        "title": "Առաջիկա վճարներ",
+        "viewAll": "Տեսնել բոլորը"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
-        "vsLastWeek": "vs last week"
+        "title": "Շաբաթական ամփոփում",
+        "viewFull": "Լիարժեք վերլուծություն",
+        "vsLastWeek": "նախորդ շաբաթվա համեմատ"
       }
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "Միշտ տեսանելի",
+    "ariaLabel": "Հարմարեցնել վահանակի դասավորությունը",
+    "button": "Հարմարեցնել",
+    "description": "Ցույց տալ կամ թաքցրեք վահանակի վիջեթները։ Քաշեք վիջեթները վահանակի վրա՝ դրանց վերադասավորելու համար։",
+    "reorderDescription": "Վիջեթների հերթականությունը փոխելու համար քաշեք վիջեթները անմիջապես ձեր վահանակի վրա։ Օգտագործեք մկնիկը կամ հպումը՝ յուրաքանչյուր վիջեթի քարտի (⋮⋮) քաշելու բռնակը բռնելու համար։",
+    "reorderTitle": "Վերադասավորել վիջեթները",
+    "resetButton": "Վերականգնել լրիվ արժեքները",
+    "title": "Հարմարեցնել վահանակը",
+    "toggleVisibility": "Փոխել {name} տեսանելիությունը",
+    "widgetVisibility": "Վիջեթի տեսանելիություն",
+    "widgetsVisible": "{visible}՝ {total} վիջեթից տեսանելի է"
   },
   "debtAnalysis": {
     "cards": {
@@ -1795,7 +1795,7 @@
     "confirmAction": "Հաստատել գործողությունը"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "Քաշեք վերադասավորելու համար"
   },
   "duration": {
     "months": "{count, plural, =1 {1 month} other {# months}}",
@@ -1804,52 +1804,52 @@
   },
   "emptyStates": {
     "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
+      "description": "Ստեղծեք բյոջեներ՝ տարբեր կատեգորիաներում ծախսերը հետեվելու և ձեր ֆինանսական նպատակներին հասնելու համար։",
+      "heading": "Բյոջեներ չեն ստեղծվել",
+      "primaryCta": "Ստեղծեք ձեր առաջին բյոջեն"
     },
     "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
+      "description": "Ստեղծեք հատուկ կատեգորիաներ՝ ձեր գործարքները լրիվ արժեքներից դուրս կազմակերպելու համար։",
+      "heading": "Հատուկ կատեգորիաներ չկան",
+      "primaryCta": "Ավելացնել կատեգորիա"
     },
     "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
+      "description": "Սկսեք՝ ներմուծելով ձեր բանկային գործարքները կամ ձեռքով ավելացնելով հաշիվներ՝ ձեր ֆինանսական ամփոփումը տեսնելու համար։",
+      "heading": "Բարի գալուստ ձեր բյոջեի հավելված։",
+      "primaryCta": "Ներմուծել CSV",
+      "secondaryCta": "Ավելացնել գործարք"
     },
     "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
+      "description": "Սահմանեք ֆինանսական նպատակներ՝ օրինակ՝ տուն գնել՝ կրթության համար խնայել կամ արձակուրդ պլանավորել։",
+      "heading": "Ապագայի պլաններ չկան",
+      "primaryCta": "Ստեղծել նպատակ"
     },
     "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
+      "description": "Հետեվեք ձեր ներդրումային հաշիվներն ու պորտֆելը՝ կատարողականությունը հետեվելու և զուտ արժեքը հաշվարկելու համար։",
+      "heading": "Ներդրումներ չեն հետեվվում",
+      "primaryCta": "Ավելացնել ներդրումային հաշիվ"
     },
     "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
+      "description": "Հետեվեք ձեր վարկերը՝ հիպոթեկները և պարտքերը՝ մարման ընթացքը պատկերացնելու և վճարները պլանավորելու համար։",
+      "heading": "Վարկեր չեն հետեվվում",
+      "primaryCta": "Ավելացնեք ձեր առաջին վարկը"
     },
     "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
+      "description": "Ավելացրեք գործարքներ և բյոջեներ՝ ձեր ծախսերի օրինաչափերի և միտումների մասին հաշվետվություններ ստեղծելու համար։",
+      "heading": "Տվյալներ չկան հաշվետվության համար",
+      "primaryCta": "Ավելացնել գործարքներ",
+      "secondaryCta": "Ներմուծել CSV"
     },
     "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
+      "description": "Պլանավորեք կենսաառությունը՝ հետեվելով հաշիվները՝ գնահատելով կարիքները և պատկերացնելով ձեր կենսաառության ժամանակացույցը։",
+      "heading": "Կենսաառության պլաններ չկան",
+      "primaryCta": "Սկսել պլանավորել"
     },
     "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
+      "description": "Սկսեք ձեր ծախսերը հետեվել՝ ավելացնելով ձեր առաջին գործարքը։ Կարող եք ավելացնել ձեռքով կամ ներմուծել CSV ֆայլից։",
+      "heading": "Գործարքներ դեռ չկան",
+      "primaryCta": "Ավելացնել գործարք",
+      "secondaryCta": "Ներմուծել CSV"
     }
   },
   "errorRecovery": {
@@ -2098,14 +2098,14 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "Ֆինանսական առողջության միավոր՝ {score} 100-ից։ {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "Ավելացրեք գործարքներ՝ տեսնելու ձեր",
+      "line2": "Ֆինանսական առողջության միավորը"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "Գնահատական՝ {grade}",
+    "missingFactors": "{count, plural, =1 {1 գործոն բացակայում է} other {# գործոն բացակայում է}}",
+    "title": "Ֆինանսական առողջություն",
     "history": {
       "title": "Միավորների պատմություն",
       "monthsOfData": "{count} {count, plural, =1 {ամսվա} other {ամսվա}} տվյալներ",
@@ -2311,30 +2311,30 @@
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "Պորտֆելի մասեր չկան գծագրեր ցույց տալու համար։ Ավելացրեք պորտֆելի մասեր։",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "Շահույթ",
+      "loss": "Վնաս"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
-      "total": "Total"
+      "allocation": "Բաշխում",
+      "costBasis": "Ծախսի հիմք",
+      "currentValue": "Ընթացիկ արժեք",
+      "gainLoss": "Շահույթ/վնաս",
+      "percentReturn": "% վերադարձ",
+      "symbol": "Սիմվոլ",
+      "total": "Ընդամենը"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "Բաշխումը ըստ հաշվի տեսակի",
+      "gainLoss": "Շահույթ/վնաս ըստ պորտֆելի մասերի",
+      "performanceSummary": "Կատարողականության ամփոփում",
+      "portfolioAllocation": "Պորտֆելի բաշխումը ըստ պորտֆելի մասերի"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "Ծախսի հիմք",
+      "currentValue": "Ընթացիկ արժեք",
+      "percentOfPortfolio": "Պորտֆելի {percent}%"
     }
   },
   "investments": {
@@ -3716,26 +3716,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "Փաստացի",
+      "confidenceInterval": "Վստահության միջակայք",
+      "predicted": "Կանխատեսվող"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "Տվյալներ չկան կանխատեսումների համար",
+    "predictionUnavailable": "Կանխատեսումը հասանելի չէ",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "Միջին վստահություն",
+      "nextMonth": "Հաջորդ ամիս",
+      "threeMonthAvg": "3 ամսվա միջին"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "Վստահություն",
+      "month": "Ամիս",
+      "predicted": "Կանխատեսվող",
+      "range": "Տիապաստոն",
+      "title": "Ամսական կանխատեսումներ"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "Ծախսերի կանխատեսում՝ {category}",
+    "trainingModel": "Մոդելը ուսուցվում է և կանխատեսումներ է ստեղծում..."
   },
   "privacyPanel": {
     "active": "Active",
@@ -3860,22 +3860,22 @@
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "Տեղադրել",
+      "notNow": "Ոչ հիմա"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "Փակել տեղադրման հարցումը",
+    "description": "Ավելացրեք ձեր գլխավոր էկրանին՝ արագ մուտքի և անցանց օգտագործման համար",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "Արագ և անվտանգ",
+      "noAppStore": "Հավելվածների խանութ անհրաժեշտ չէ",
+      "offline": "Աշխատում է անցանց"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"Ավելացնել գլխավոր էկրանին\"",
+    "iosForFullExperience": "լիարժեք հավելվածի փորձառության համար՝ ավելի արագ բեռնման հնարավորությամբ։",
+    "iosTap": "Սեղմեք",
+    "iosThen": "ապա",
+    "iosTitle": "Տեղադրել Budget App",
+    "title": "Տեղադրել Budget App"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -4351,18 +4351,18 @@
     "warningsLabel": "Warnings:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "Կանխատեսումը հիմնված է վերջին {months} ամիսների գծային րեգրեսիայի վրա",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "Փաստացի ծախսեր",
+      "projected": "Կանխատեսվող"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "Բավարար տվյալներ չկան միտումներ ստեղծելու համար։ Ավելացրեք առնվազն 2 ամսվա գործարքներ։",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "Միջին ամսական",
+      "lastMonth": "Նախորդ ամիս",
+      "projected": "Կանխատեսվող"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "Ծախսերի միտումներ և կանխատեսում"
   },
   "splitTransaction": {
     "addSplit": "Add Split ({current}/{max})",
@@ -4560,30 +4560,30 @@
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "Ակտիվ բաժանորդագրություններ չկան վերլուծելու համար",
+    "loadingChart": "Գծագիրը բեռնվում է...",
+    "moreCharges": "+{count} այլ վճարներ",
+    "perMonth": "/ամիս",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "Ծախսը ըստ կատեգորիաների",
+      "potentialSavings": "Հնարավոր խնայողություններ",
+      "upcomingCharges": "Առաջիկա վճարներ (հաջորդ 30 օր)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {1 ակտիվ բաժանորդագրություն} other {# ակտիվ բաժանորդագրություն}}",
+      "annualCost": "Տարեկան ծախս",
+      "monthlyCost": "Ամսական ծախս",
+      "next30Days": "Հաջորդ 30 օրը",
+      "projectedYearly": "Կանխատեսվող տարեկան ծախս",
+      "upcomingCharges": "{count, plural, =1 {1 առաջիկա վճար} other {# առաջիկա վճար}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Հնարավորաբար չեղարկված բաժանորդագրություններ",
+      "inactiveDescription": "{count, plural, =1 {1 բաժանորդագրություն վերջերս չի գանձառվել} other {# բաժանորդագրություն վերջերս չեն գանձառվել}}։ Ստուգեք՝ իսկապես չեղարկված են։",
+      "trialsTitle": "Փորձաշրջանները ավարտվում են շուտով",
+      "trialsDescription": "{count, plural, =1 {1 փորձաշրջան} other {# փորձաշրջան}} ավարտվում է հաջորդ 7 օրվա ընթացքում։ Չեղարկեք՝ եթե չեք օգտագործում։",
+      "highCostTitle": "Բարձր արժեքով բաժանորդագրություններ",
+      "highCostDescription": "Այս բաժանորդագրությունները կազմում են ձեր ծախսերի մեծ մասը։ Հաշվի առեք՝ արդյոք լիարժեք օգտվում եք դրանցից։"
     }
   },
   "subscriptionModal": {
@@ -5063,8 +5063,8 @@
       "title": "Прогресс бюджета"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "Հետեվեք ծախսերը միջոցառումների և նախագծերի համար",
+      "title": "Միջոցառման բյոջեներ"
     },
     "incomeVsExpenses": {
       "description": "Сравните свои доходы и расходы с течением времени",
@@ -5075,32 +5075,32 @@
       "title": "Месячные тренды"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "Արագ հայացք՝ ձեր ընդհանուր զուտ արժեքին",
+      "title": "Զուտ արժեք"
     },
     "recentTransactions": {
       "description": "Быстрый обзор вашей последней финансовой активности",
       "title": "Недавние транзакции"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "Տեսեք՝ որքան կարող եք անվտանգ ծախսել յուրաքանչյուր կատեգորիայում",
+      "title": "Անվտանգ ծախսելու համար"
     },
     "spendingByCategory": {
       "description": "Посмотрите, куда уходят ваши деньги с помощью визуальных разбивок",
       "title": "Расходы по категориям"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "Հետեվեք ձեր ներգրավվածության հաջորդականություններն ու նվաճումները",
+      "title": "Հաջորդականություններ և կրծանիշներ"
     },
     "upcomingBills": {
       "description": "Никогда не пропустите платеж с напоминаниями о счетах",
       "title": "Предстоящие счета"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "Շաբաթական ծախսերի օրինաչափերի ամփոփում",
+      "title": "Շաբաթական ամփոփում"
     }
   },
   "ynabMigrationWizard": {

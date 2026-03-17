@@ -94,11 +94,11 @@
     }
   },
   "actions": {
-    "addTransaction": "Ychwanegu Tranzaciwn",
-    "editDashboard": "Golygu Panel",
-    "import": "Mewngofnodi",
-    "importData": "Mewngofnodi Data",
-    "resetDefaults": "Ail-osod i'r Rhagfynegiadau",
+    "addTransaction": "Ychwanegu Trafodiad",
+    "editDashboard": "Golygu'r Panel",
+    "import": "Mewnforio",
+    "importData": "Mewnforio Data",
+    "resetDefaults": "Ailosod i Ddiofyn",
     "saveChanges": "Cadw Newidiadau"
   },
   "activityLog": {
@@ -225,40 +225,40 @@
     "whenColumn": "When"
   },
   "aiColumnMapper": {
-    "analyzing": "Analyzing CSV structure with AI...",
+    "analyzing": "Yn dadansoddi strwythur CSV gydag AI...",
     "buttons": {
-      "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
+      "apply": "Cymhwyso Mapiau a Mewnforio",
+      "cancel": "Canslo"
     },
-    "closeModal": "Close modal",
-    "columnMappings": "Column Mappings",
+    "closeModal": "Cau ffenestr",
+    "columnMappings": "Mapiau Colofnau",
     "columnTypes": {
-      "amount": "Amount",
-      "balance": "Balance",
-      "credit": "Credit",
-      "date": "Date",
-      "debit": "Debit",
-      "description": "Description",
-      "ignore": "Ignore"
+      "amount": "Swm",
+      "balance": "Balans",
+      "credit": "Credyd",
+      "date": "Dyddiad",
+      "debit": "Debyd",
+      "description": "Disgrifiad",
+      "ignore": "Anwybyddu"
     },
     "confidence": {
-      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
-      "title": "Detection Confidence"
+      "analyzed": "Dadansoddodd AI {columnCount} colofn a {rowCount} rhes sampl",
+      "title": "Hyder Canfod"
     },
     "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
-      "title": "Transaction Preview"
+      "amount": "Swm",
+      "date": "Dyddiad",
+      "description": "Disgrifiad",
+      "title": "Rhagolwg Trafodion"
     },
-    "samples": "Samples:",
+    "samples": "Samplau:",
     "saveConfig": {
-      "hint": "Next time you import from this bank, mappings will be automatic",
-      "label": "Save this bank configuration for future imports",
-      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+      "hint": "Y tro nesaf y byddwch yn mewnforio o'r banc hwn, bydd y mapiau'n awtomatig",
+      "label": "Cadw'r ffurfweddiad banc hwn ar gyfer mewnforion yn y dyfodol",
+      "placeholder": "Rhowch enw banc (e.e., Fy Undeb Credyd Lleol)"
     },
-    "subtitle": "Review AI-detected columns and adjust if needed",
-    "title": "AI Column Mapping Wizard"
+    "subtitle": "Adolygwch y colofnau a ganfuwyd gan AI ac addaswch os oes angen",
+    "title": "Dewin Mapio Colofnau AI"
   },
   "amortizationChart": {
     "balanceDescription": "Your balance decreases over time as you make payments",
@@ -289,24 +289,24 @@
     "title": "Amount Range"
   },
   "apiErrors": {
-    "aiAnalysisUnavailable": "AI analysis unavailable, using pattern matching",
-    "aiApiError": "AI API error: {message}",
-    "autoDetectionUnavailable": "Auto-detection unavailable - using column order guess",
-    "emptyAiResponse": "Empty response from AI",
-    "failedToParseResponse": "Failed to parse AI response",
-    "fileMustBePdf": "File must be a PDF",
-    "fileTooLarge": "File too large. Maximum {maxSize}.",
-    "internalServerError": "Internal server error",
-    "lowConfidence": "Low confidence - please verify mappings",
-    "missingHeaders": "Missing or invalid headers",
-    "missingSampleData": "Missing or invalid sample data",
-    "noAiResponse": "No response from AI model",
-    "noApiKey": "AI API key not configured. AI extraction requires an active subscription.",
-    "noFileProvided": "No file provided",
-    "rateLimitExceeded": "Rate limit exceeded. Please try again later.",
-    "responseValidationIssues": "Response structure validation had issues",
-    "unknownError": "An unknown error occurred",
-    "verifyMappings": "Please verify all mappings before importing"
+    "aiAnalysisUnavailable": "Dadansoddiad AI ddim ar gael, yn defnyddio paru patrwm",
+    "aiApiError": "Gwall API AI: {message}",
+    "autoDetectionUnavailable": "Hunan-ganfod ddim ar gael - yn defnyddio dyfalu trefn colofnau",
+    "emptyAiResponse": "Ymateb gwag gan AI",
+    "failedToParseResponse": "Methwyd â dosrannu ymateb AI",
+    "fileMustBePdf": "Rhaid i'r ffeil fod yn PDF",
+    "fileTooLarge": "Ffeil yn rhy fawr. Uchafswm {maxSize}.",
+    "internalServerError": "Gwall gweinydd mewnol",
+    "lowConfidence": "Hyder isel - gwiriwch y mapiau",
+    "missingHeaders": "Penawdau ar goll neu annilys",
+    "missingSampleData": "Data sampl ar goll neu annilys",
+    "noAiResponse": "Dim ymateb gan y model AI",
+    "noApiKey": "Allwedd API AI heb ei ffurfweddu. Mae echdynnu AI angen tanysgrifiad gweithredol.",
+    "noFileProvided": "Dim ffeil wedi'i darparu",
+    "rateLimitExceeded": "Terfyn cyfradd wedi'i ragori. Ceisiwch eto'n ddiweddarach.",
+    "responseValidationIssues": "Roedd problemau dilysu strwythur yr ymateb",
+    "unknownError": "Digwyddodd gwall anhysbys",
+    "verifyMappings": "Gwiriwch bob mapiaid cyn mewnforio"
   },
   "aria": {
     "accessibilitySettings": "Accessibility settings",
@@ -467,8 +467,8 @@
     "backToHome": "Yn ôl i'r hafan"
   },
   "bottomSheet": {
-    "close": "Close",
-    "dragToClose": "Drag down to close"
+    "close": "Cau",
+    "dragToClose": "Llusgwch i lawr i gau"
   },
   "breadcrumb": {
     "budgetAnalyzer": "Budget Analyzer",
@@ -821,17 +821,17 @@
     }
   },
   "bulkActions": {
-    "applyTo": "Apply to {count}",
-    "categorize": "Categorize",
-    "clearSelection": "Clear selection",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
-    "noSubcategory": "No subcategory",
-    "selectAll": "Select all",
-    "selectCategory": "Select category...",
-    "selected": "{count} selected"
+    "applyTo": "Cymhwyso i {count}",
+    "categorize": "Categoreiddio",
+    "clearSelection": "Clirio'r dewis",
+    "confirmDelete": "Dileu {count, plural, =1 {1 trafodiad} other {# trafodiad}}?",
+    "delete": "Dileu",
+    "deleteWarning": "Ni ellir dadwneud y weithred hon.",
+    "export": "Allforio",
+    "noSubcategory": "Dim is-gategori",
+    "selectAll": "Dewis popeth",
+    "selectCategory": "Dewiswch gategori...",
+    "selected": "{count} wedi'u dewis"
   },
   "calculators": {
     "budgetAnalyzer": {
@@ -1290,94 +1290,94 @@
   },
   "chatbot": {
     "buttons": {
-      "clearHistory": "Clear chat history",
-      "exportConversation": "Export conversation",
-      "send": "Send"
+      "clearHistory": "Clirio hanes sgwrsio",
+      "exportConversation": "Allforio sgwrs",
+      "send": "Anfon"
     },
     "disabled": {
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot",
-      "title": "Chatbot Disabled"
+      "description": "Galluogwch y bot sgwrsio yn Gosodiadau → Preifatrwydd → Bot Sgwrsio Cyllideb i ddechrau.",
+      "enableButton": "Galluogi Bot Sgwrsio",
+      "title": "Bot Sgwrsio Wedi'i Analluogi"
     },
     "emptyState": {
-      "description": "Ask me anything about your finances. Here are some examples:",
+      "description": "Gofynnwch unrhyw beth i mi am eich cyllid. Dyma rai enghreifftiau:",
       "examples": {
-        "balance": "What's my total account balance?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "spending": "How much did I spend this month?"
+        "balance": "Beth yw fy malans cyfrif cyfan?",
+        "budget": "Ydw i dros y gyllideb mewn unrhyw gategorïau?",
+        "groceries": "Dangoswch fy mhryniannau bwydydd diweddar",
+        "spending": "Faint wnes i wario y mis hwn?"
       },
-      "title": "Start a Conversation"
+      "title": "Dechrau Sgwrs"
     },
     "header": {
-      "subtitle": "Ask me about your finances",
-      "title": "Budget Assistant"
+      "subtitle": "Gofynnwch i mi am eich cyllid",
+      "title": "Cynorthwyydd Cyllideb"
     },
     "input": {
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
-      "placeholder": "Ask about your finances..."
+      "disclaimer": "Wedi'i bweru gan OpenAI GPT-4. Mae eich data'n cael ei brosesu'n ddiogel ac nid yw'n cael ei ddefnyddio ar gyfer hyfforddiant.",
+      "placeholder": "Gofynnwch am eich cyllid..."
     },
     "messages": {
-      "dataAccessed": "Data accessed:",
-      "error": "Error",
-      "thinking": "Thinking..."
+      "dataAccessed": "Data a gyrchwyd:",
+      "error": "Gwall",
+      "thinking": "Yn meddwl..."
     }
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "Gweithredoedd",
+      "budget": "Cyllideb",
+      "income": "Incwm",
+      "spending": "Gwariant",
+      "trends": "Tueddiadau"
     }
   },
   "chatbotOptIn": {
     "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
+      "decline": "Dim Diolch",
+      "enable": "Galluogi Bot Sgwrsio"
     },
     "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
+      "actions": "Yn dewisol, cyflawni gweithredoedd fel ychwanegu trafodion neu greu cyllidebau",
+      "answer": "Ateb cwestiynau am eich trafodion, cyllidebau, a phatrymau gwariant",
+      "insights": "Darparu mewnwelediadau ac argymhellion yn seiliedig ar eich data",
+      "search": "Chwilio eich data ariannol gan ddefnyddio iaith naturiol",
+      "title": "Beth All y Bot Sgwrsio Wneud"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "Cau deialog optio i mewn bot sgwrsio",
     "controls": {
       "dataAccess": {
         "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
+          "description": "Gall y bot sgwrsio gyflawni gweithredoedd fel ychwanegu trafodion, creu cyllidebau, a gwneud newidiadau i'ch data",
+          "title": "Mynediad Llawn"
         },
-        "label": "What can the chatbot do with your data?",
+        "label": "Beth all y bot sgwrsio wneud gyda'ch data?",
         "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
+          "description": "Gall y bot sgwrsio weld eich data ac ateb cwestiynau, ond ni all ychwanegu, golygu, na dileu trafodion/cyllidebau",
+          "title": "Darllen yn Unig (Argymhellwyd)"
         }
       },
       "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+        "days30": "30 diwrnod",
+        "days7": "7 diwrnod (Argymhellwyd)",
+        "forever": "Cadw am byth",
+        "label": "Am ba hyd y dylem gadw eich sgyrsiau?",
+        "note": "Mae sgyrsiau'n cael eu storio'n lleol yn eich porwr. Gallwch eu dileu unrhyw bryd yn Gosodiadau → Preifatrwydd."
       },
-      "title": "Privacy Controls"
+      "title": "Rheolaethau Preifatrwydd"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>Eich Hawliau:</strong> Drwy alluogi'r bot sgwrsio, rydych yn cydsynio i brosesu eich data ariannol drwy API OpenAI. Gallwch dynnu cydsyniad yn ôl unrhyw bryd drwy analluogi'r bot sgwrsio yn Gosodiadau → Preifatrwydd. Mae eich data'n cael ei brosesu yn unol â'n Polisi Preifatrwydd a gofynion GDPR. Mae gennych yr hawl i gael mynediad at, dileu, ac allforio eich hanes sgwrsiau unrhyw bryd."
     },
     "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
+      "dataSent": "Anfonir data ariannol i'r API i ateb eich cwestiynau",
+      "disable": "Gallwch analluogi'r bot sgwrsio unrhyw bryd yn Gosodiadau → Preifatrwydd",
+      "noTraining": "Nid yw OpenAI yn defnyddio data API i hyfforddi modelau (yn ôl eu polisi)",
+      "processedBy": "Mae eich sgyrsiau'n cael eu prosesu gan API GPT-4 OpenAI",
+      "title": "Preifatrwydd a Defnydd Data"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "Cynorthwyydd ariannol wedi'i bweru gan AI",
+    "title": "Galluogi Bot Sgwrsio Cyllideb?"
   },
   "columnMapper": {
     "amount": "Amount",
@@ -1409,46 +1409,46 @@
     "useSavedMapping": "Use Saved Mapping"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "Dim canlyniadau wedi'u canfod.",
+    "search": "Chwilio...",
+    "select": "Dewiswch..."
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "addTransaction": "Ychwanegu Trafodiad",
+      "budgets": "Cyllidebau",
+      "categories": "Categorïau",
+      "darkTheme": "Thema Tywyll",
+      "dashboard": "Panel",
+      "exportData": "Allforio Data",
+      "futurePlans": "Cynlluniau i'r Dyfodol",
+      "highContrastTheme": "Thema Cyferbyniad Uchel",
+      "importCsv": "Mewnforio CSV",
+      "investments": "Buddsoddiadau",
+      "lightTheme": "Thema Golau",
+      "loans": "Benthyciadau",
+      "newBudget": "Cyllideb Newydd",
+      "reports": "Adroddiadau",
+      "retirement": "Ymddeoliad",
+      "scanReceipt": "Sganio Derbynneb",
+      "settings": "Gosodiadau",
+      "transactions": "Trafodion"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "Ymddangosiad",
+      "quickActions": "Gweithredoedd Cyflym",
+      "tools": "Offer a Gosodiadau",
+      "tracking": "Olrhain a Dadansoddi",
+      "wealth": "Cyfoeth a Chynllunio"
     },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
+    "noResults": "Dim canlyniadau wedi'u canfod.",
+    "placeholder": "Teipiwch orchymyn neu chwiliwch..."
   },
   "common": {
-    "cancel": "Diddymu",
+    "cancel": "Canslo",
     "delete": "Dileu",
     "edit": "Golygu",
-    "loading": "Llwytho...",
+    "loading": "Yn llwytho...",
     "save": "Cadw",
     "success": "Llwyddiant!"
   },
@@ -1465,168 +1465,168 @@
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "Ychwanegu Cyfrif",
+        "allTransactions": "Pob Trafodiad",
+        "imported": "Mewnforiwyd",
+        "netWorth": "Gwerth Net",
+        "noAccounts": "Dim cyfrifon wedi'u hychwanegu eto",
+        "title": "Balansau Cyfrifon",
+        "viewAll": "Gweld Popeth"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "createBudget": "Creu Cyllideb",
+        "noBudgets": "Dim cyllidebau wedi'u gosod",
+        "overBudget": "Dros y gyllideb o {amount}",
+        "remaining": "Yn weddill",
+        "spent": "Gwariwyd",
+        "title": "Cynnydd Cyllideb",
+        "viewAll": "Gweld Pob Cyllideb"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "Dim digwyddiadau gweithredol",
+        "title": "Cyllidebau Digwyddiad",
+        "viewAll": "Gweld Popeth"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
+        "addTransactions": "Ychwanegu Trafodion",
+        "expenses": "Treuliau",
+        "income": "Incwm",
         "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "noData": "Dim trafodion eto",
+        "thisMonth": "Y Mis Hwn",
+        "title": "Incwm yn erbyn Treuliau"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "Treuliau",
+        "income": "Incwm",
+        "lastSixMonths": "Y 6 Mis Diwethaf",
+        "needMoreData": "Ychwanegwch drafodion am 2+ mis i weld tueddiadau",
+        "notEnoughData": "Dim digon o hanes",
+        "title": "Tueddiadau Misol"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "assets": "Asedau",
+        "liabilities": "Rhwymedigaethau",
+        "title": "Gwerth Net",
+        "viewDetails": "Gweld Manylion"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "Ychwanegu Trafodiad",
+        "noTransactions": "Dim trafodion eto",
+        "title": "Trafodion Diweddar",
+        "uncategorized": "Heb gategori",
+        "viewAll": "Gweld Popeth"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
-        "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
-        "overBudget": "{amount} over budget",
-        "perCategory": "Per category",
-        "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "caution": "Gwyliwch y gwariant",
+        "createBudget": "Creu Cyllideb",
+        "dailyBudget": "Cyllideb ddyddiol",
+        "danger": "Dros y gyllideb",
+        "daysRemaining": "{days} diwrnod ar ôl",
+        "noBudgets": "Dim cyllidebau wedi'u sefydlu eto",
+        "noData": "Dim cyllidebau wedi'u sefydlu eto",
+        "overBudget": "{amount} dros y gyllideb",
+        "perCategory": "Fesul categori",
+        "remaining": "{amount} yn weddill",
+        "safe": "Ar y trywydd iawn",
+        "title": "Diogel i'w Wario",
+        "totalSafe": "Cyfanswm diogel i'w wario",
+        "viewAll": "Gweld Popeth"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "total": "Total",
-        "uncategorized": "Uncategorized"
+        "addTransactions": "Ychwanegu Trafodion",
+        "moreCategories": "+{count} categori arall",
+        "noData": "Dim gwariant wedi'i dracio eto",
+        "thisMonth": "Y Mis Hwn",
+        "title": "Gwariant fesul Categori",
+        "total": "Cyfanswm",
+        "uncategorized": "Heb gategori"
       },
       "streaks": {
-        "badges": "badges",
-        "dayStreak": "day streak",
-        "points": "points",
-        "title": "Streaks & Badges"
+        "badges": "bathodynnau",
+        "dayStreak": "cyfres diwrnod",
+        "points": "pwyntiau",
+        "title": "Cyfresau a Bathodynnau"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "addSubscription": "Ychwanegu Tanysgrifiad",
+        "dueIn": "Yn ddyledus mewn {days} diwrnod",
+        "dueToday": "Yn ddyledus heddiw",
+        "dueTomorrow": "Yn ddyledus yfory",
+        "noBills": "Dim biliau sydd i ddod",
+        "title": "Biliau Sydd i Ddod",
+        "viewAll": "Gweld Popeth"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
-        "vsLastWeek": "vs last week"
+        "title": "Crynodeb Wythnosol",
+        "viewFull": "Adolygiad Llawn",
+        "vsLastWeek": "o gymharu â'r wythnos ddiwethaf"
       }
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "Gweladwy bob amser",
+    "ariaLabel": "Addasu cynllun y panel",
+    "button": "Addasu",
+    "description": "Dangos neu guddio teclynnau panel. Llusgwch declynnau ar y panel i'w hail-drefnu.",
+    "reorderDescription": "I newid trefn teclynnau, llusgwch a gollyngwch declynnau yn uniongyrchol ar eich panel. Defnyddiwch eich llygoden neu gyffyrddiad i afael yn y ddolen lusgo (⋮⋮) ar bob cerdyn teclyn.",
+    "reorderTitle": "Ail-drefnu Teclynnau",
+    "resetButton": "Ailosod i Ddiofyn",
+    "title": "Addasu'r Panel",
+    "toggleVisibility": "Toglo gwelededd {name}",
+    "widgetVisibility": "Gwelededd Teclynnau",
+    "widgetsVisible": "{visible} o {total} teclyn yn weladwy"
   },
   "debtAnalysis": {
     "cards": {
       "avgRate": {
-        "subtitle": "Weighted average",
-        "title": "Avg Interest Rate"
+        "subtitle": "Cyfartaledd pwysol",
+        "title": "Cyfradd Llog Gyfartalog"
       },
       "debtFreeDate": {
-        "subtitle": "Estimated payoff",
-        "title": "Debt-Free Date"
+        "subtitle": "Amcangyfrif talu'n ôl",
+        "title": "Dyddiad Di-ddyled"
       },
       "monthlyPayment": {
-        "subtitle": "Total monthly obligations",
-        "title": "Monthly Payment"
+        "subtitle": "Cyfanswm rhwymedigaethau misol",
+        "title": "Taliad Misol"
       },
       "totalDebt": {
-        "subtitle": "Across {count} active loans",
-        "title": "Total Debt"
+        "subtitle": "Ar draws {count} benthyciad gweithredol",
+        "title": "Cyfanswm Dyled"
       }
     },
     "charts": {
       "byType": {
-        "description": "Distribution of debt across loan types",
-        "title": "Debt by Type"
+        "description": "Dosbarthiad dyled ar draws mathau o fenthyciad",
+        "title": "Dyled fesul Math"
       },
       "projection": {
-        "description": "Expected debt reduction over the next year",
-        "expectedReduction": "Expected reduction: {amount} over 12 months",
-        "title": "12-Month Payoff Projection"
+        "description": "Gostyngiad dyled disgwyliedig dros y flwyddyn nesaf",
+        "expectedReduction": "Gostyngiad disgwyliedig: {amount} dros 12 mis",
+        "title": "Rhagamcaniad Talu 12 Mis"
       }
     },
     "comparison": {
-      "description": "Side-by-side comparison of your active loans",
+      "description": "Cymhariaeth ochr yn ochr o'ch benthyciadau gweithredol",
       "headers": {
-        "balance": "Balance",
-        "interestRate": "Interest Rate",
-        "loan": "Loan",
-        "monthlyPayment": "Monthly Payment",
-        "percentOfTotal": "% of Total Debt"
+        "balance": "Balans",
+        "interestRate": "Cyfradd Llog",
+        "loan": "Benthyciad",
+        "monthlyPayment": "Taliad Misol",
+        "percentOfTotal": "% o Gyfanswm Dyled"
       },
-      "title": "Loan Comparison",
-      "total": "Total"
+      "title": "Cymhariaeth Benthyciadau",
+      "total": "Cyfanswm"
     },
     "empty": {
-      "addFirstLoan": "Add Your First Loan",
-      "description": "You don't have any active loans. Add a loan to see debt analytics.",
-      "title": "No Debt to Analyze"
+      "addFirstLoan": "Ychwanegwch Eich Benthyciad Cyntaf",
+      "description": "Does gennych chi ddim benthyciadau gweithredol. Ychwanegwch fenthyciad i weld dadansoddeg dyled.",
+      "title": "Dim Dyled i'w Dadansoddi"
     },
-    "subtitle": "Comprehensive view of your loans and obligations",
-    "title": "Debt Analysis",
-    "viewAllLoans": "View All Loans"
+    "subtitle": "Golwg gynhwysfawr ar eich benthyciadau a'ch rhwymedigaethau",
+    "title": "Dadansoddiad Dyled",
+    "viewAllLoans": "Gweld Pob Benthyciad"
   },
   "debtOverview": {
     "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
@@ -1787,107 +1787,107 @@
     "variants": "Variants"
   },
   "dialog": {
-    "cancel": "Diddymu",
+    "cancel": "Canslo",
     "confirm": "Cadarnhau",
     "finalConfirmation": "Cadarnhad Terfynol:",
-    "processing": "Prosesu...",
+    "processing": "Yn prosesu...",
     "typeToConfirm": "Teipiwch {text} i gadarnhau'r weithred hon.",
-    "confirmAction": "Cadarnhau'r weithred"
+    "confirmAction": "Cadarnhau Gweithred"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "Llusgwch i ail-drefnu teclyn"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
-    "yearsAndMonths": "{years}y {months}m"
+    "months": "{count, plural, =1 {1 mis} other {# mis}}",
+    "years": "{count, plural, =1 {1 flwyddyn} other {# blynedd}}",
+    "yearsAndMonths": "{years}b {months}m"
   },
   "emptyStates": {
     "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
+      "description": "Crëwch gyllidebau i olrhain gwariant mewn categorïau gwahanol a chyflawni eich nodau ariannol.",
+      "heading": "Dim Cyllidebau Wedi'u Creu",
+      "primaryCta": "Crëwch Eich Cyllideb Gyntaf"
     },
     "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
+      "description": "Crëwch gategorïau personol i drefnu eich trafodion y tu hwnt i'r rhai diofyn.",
+      "heading": "Dim Categorïau Personol",
+      "primaryCta": "Ychwanegu Categori"
     },
     "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
+      "description": "Dechreuwch drwy fewnforio trafodion banc neu ychwanegu cyfrifon â llaw i weld eich trosolwg ariannol.",
+      "heading": "Croeso i'ch Ap Cyllideb!",
+      "primaryCta": "Mewnforio CSV",
+      "secondaryCta": "Ychwanegu Trafodiad"
     },
     "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
+      "description": "Gosodwch nodau ariannol fel prynu tŷ, cynilo ar gyfer addysg, neu gynllunio gwyliau.",
+      "heading": "Dim Cynlluniau i'r Dyfodol",
+      "primaryCta": "Creu Nod"
     },
     "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
+      "description": "Olrhainwch eich cyfrifon buddsoddi a'ch daliadau i fonitro perfformiad portffolio a gwerth net.",
+      "heading": "Dim Buddsoddiadau'n Cael eu Holrhain",
+      "primaryCta": "Ychwanegu Cyfrif Buddsoddi"
     },
     "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
+      "description": "Olrhainwch eich benthyciadau, morgeisi, a dyledion i ddelweddu cynnydd talu a chynllunio taliadau.",
+      "heading": "Dim Benthyciadau'n Cael eu Holrhain",
+      "primaryCta": "Ychwanegwch Eich Benthyciad Cyntaf"
     },
     "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
+      "description": "Ychwanegwch drafodion a chyllidebau i gynhyrchu adroddiadau craff am eich patrymau a'ch tueddiadau gwariant.",
+      "heading": "Dim Data i Adrodd Arno",
+      "primaryCta": "Ychwanegu Trafodion",
+      "secondaryCta": "Mewnforio CSV"
     },
     "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
+      "description": "Cynlluniwch ar gyfer ymddeoliad drwy olrhain cyfrifon, amcangyfrif anghenion, a delweddu eich llinell amser ymddeoliad.",
+      "heading": "Dim Cynlluniau Ymddeol",
+      "primaryCta": "Dechrau Cynllunio"
     },
     "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
+      "description": "Dechreuwch olrhain eich gwariant drwy ychwanegu eich trafodiad cyntaf. Gallwch ychwanegu â llaw neu fewnforio o ffeil CSV.",
+      "heading": "Dim Trafodion Eto",
+      "primaryCta": "Ychwanegu Trafodiad",
+      "secondaryCta": "Mewnforio CSV"
     }
   },
   "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
+    "aiAnalysis": "Dadansoddiad AI:",
+    "closeModal": "Cau ffenestr",
     "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "close": "Cau",
+      "needHelp": "Angen mwy o gymorth?",
+      "viewGuide": "Gweld canllaw datrys problemau"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "Newyddion da! Daethom o hyd i {count} {count, plural, =1 {ffordd} other {ffordd}} i adfer o'r gwall hwn.",
+      "cannotRecover": "Nid yw adfer yn bosibl. Bydd angen i chi ail-allforio'r ffeil o'ch banc neu roi cynnig ar fformat gwahanol.",
+      "optionsTitle": "Opsiynau Adfer"
     },
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "Peidiwch â phoeni! Gallwn eich helpu i drwsio hyn.",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
+      "autoFix": "AWTODWRSIO",
+      "autoFixButton": "Awtodwrsio",
+      "confidence": "{percent}% hyder",
+      "fixing": "Yn trwsio...",
+      "learnMore": "Dysgu Mwy",
+      "technicalDetails": "Manylion Technegol"
     },
     "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
+      "category": "Categori: {category}",
+      "title": "Crynodeb Gwallau"
     },
     "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
-      "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "canRecover": "Gellir Adfer:",
+      "errorCategory": "Categori Gwall:",
+      "no": "Na ellir",
+      "severity": "Difrifoldeb:",
+      "suggestions": "Awgrymiadau:",
+      "title": "Manylion Technegol Uwch",
+      "yes": "Gellir"
     },
-    "title": "Import Failed"
+    "title": "Methwyd â Mewnforio"
   },
   "export": {
     "allDataDeleted": "All data has been deleted. The page will now refresh.",
@@ -1974,88 +1974,88 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
-      "done": "Done!",
-      "download": "Download",
-      "export": "Export Data"
+      "cancel": "Canslo",
+      "done": "Gorffen!",
+      "download": "Lawrlwytho",
+      "export": "Allforio Data"
     },
     "complete": {
-      "download": "Your file is ready to download",
-      "success": "Export complete! Check your downloads folder."
+      "download": "Mae eich ffeil yn barod i'w lawrlwytho",
+      "success": "Allforio wedi'i gwblhau! Gwiriwch eich ffolder lawrlwythiadau."
     },
     "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
+      "accounts": "Cyfrifon",
+      "estimatedSize": "Maint Amcan.",
+      "title": "Crynodeb Data",
+      "transactions": "Trafodion"
     },
     "exporting": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Exporting..."
+      "pleaseWait": "Arhoswch, gall hyn gymryd eiliad",
+      "title": "Yn allforio..."
     },
     "format": {
       "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
+        "description": "Copi wrth gefn cyflawn yn cynnwys yr holl ddata",
+        "label": "Ffeil .budget"
       },
       "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
+        "description": "Fformat cydweddol â thaenlenni",
+        "label": "Ffeil CSV"
       },
       "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
+        "description": "Fformat cyfeillgar i ddatblygwyr",
+        "label": "Ffeil JSON"
       },
-      "label": "Export Format"
+      "label": "Fformat Allforio"
     },
     "options": {
       "encrypt": {
-        "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
+        "description": "Amddiffyn eich data gydag amgryptiad AES-256",
+        "label": "Amgryptio gyda Chyfrinair"
       },
       "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
+        "description": "Atodi delweddau derbynneb (yn cynyddu maint y ffeil)",
+        "label": "Cynnwys Derbynebau"
       }
     },
     "password": {
-      "confirm": "Confirm Password",
-      "confirmPlaceholder": "Confirm password",
-      "hint": "Password Hint (Optional)",
-      "hintNote": "This hint will be stored unencrypted in the file",
-      "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
-      "minLength": "Password must be at least 8 characters",
-      "mismatch": "Passwords do not match",
-      "placeholder": "Enter password (min 8 characters)",
-      "required": "Password is required for encryption"
+      "confirm": "Cadarnhau Cyfrinair",
+      "confirmPlaceholder": "Cadarnhau cyfrinair",
+      "hint": "Awgrym Cyfrinair (Dewisol)",
+      "hintNote": "Bydd yr awgrym hwn yn cael ei storio heb ei amgryptio yn y ffeil",
+      "hintPlaceholder": "Awgrym i'ch helpu i gofio",
+      "label": "Cyfrinair",
+      "minLength": "Rhaid i'r cyfrinair fod o leiaf 8 nod",
+      "mismatch": "Nid yw'r cyfrineiriau'n cyfateb",
+      "placeholder": "Rhowch gyfrinair (o leiaf 8 nod)",
+      "required": "Mae cyfrinair yn ofynnol ar gyfer amgryptio"
     },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
+    "subtitle": "Lawrlwythwch eich data cyllideb",
+    "title": "Allforio Data"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
+    "account": "Cyfrif",
+    "allAccounts": "Pob cyfrif",
+    "allCategories": "Pob categori",
+    "allTypes": "Pob math",
+    "apply": "Cymhwyso hidlwyr",
+    "category": "Categori",
+    "clearFilters": "Clirio hidlwyr",
+    "dateRange": "Ystod dyddiad",
+    "expense": "Traul",
+    "income": "Incwm",
+    "search": "Chwilio trafodion...",
+    "type": "Math"
   },
   "footer": {
     "copyright": "© {year} {brandName}",
     "links": {
       "login": "Mewngofnodi",
       "settings": "Gosodiadau",
-      "signup": "Dechrau prawf",
-      "upgrade": "Gwelliant"
+      "signup": "Dechrau treial",
+      "upgrade": "Uwchraddio"
     },
-    "tagline": "Cyllidebu premiwm gyda gwelliant unwaith."
+    "tagline": "Cyllidebu premiwm gydag uwchraddiad unwaith."
   },
   "fridayReview": {
     "back": "Back",
@@ -2098,24 +2098,24 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "Sgôr Iechyd Ariannol: {score} allan o 100. {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "Ychwanegwch drafodion i weld eich",
+      "line2": "Sgôr Iechyd Ariannol"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "Gradd: {grade}",
+    "missingFactors": "{count, plural, =1 {1 ffactor ar goll} other {# ffactor ar goll}}",
+    "title": "Iechyd Ariannol",
     "history": {
-      "title": "Hanes sgôr",
+      "title": "Hanes Sgôr",
       "monthsOfData": "{count} {count, plural, =1 {mis} other {mis}} o ddata",
       "emptyTitle": "Bydd eich hanes sgôr yn ymddangos yma wrth i ddata gronni",
-      "emptySubtitle": "Edrychwch eto fis nesaf!",
+      "emptySubtitle": "Dewch yn ôl y mis nesaf!",
       "legendScore": "Sgôr",
       "legendTrend": "Tuedd",
       "tooltipScore": "Sgôr",
       "tooltipTrend": "Tuedd",
-      "loadingChart": "Llwytho siart..."
+      "loadingChart": "Yn llwytho siart..."
     }
   },
   "holdingModal": {
@@ -2217,124 +2217,124 @@
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "Nôl",
+      "cancel": "Canslo",
+      "done": "Gorffen",
+      "import": "Mewnforio Data"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "{count} eitem wedi'u mewnforio'n llwyddiannus",
+      "success": "Mewnforio Wedi'i Gwblhau!",
+      "withIssues": "Mewnforio Wedi'i Gwblhau gyda Phroblemau"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} presennol",
+      "handleLabel": "Delio â Gwrthdrawiadau",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "Disodli gyda'r data mewnforiwyd",
+        "label": "Trosysgrifo"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "Mewnforio fel cofnodion newydd",
+        "label": "Creu newydd"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "Cadw'r data presennol",
+        "label": "Hepgor y rhai presennol"
       },
-      "title": "Conflicts Found"
+      "title": "Gwrthdrawiadau Wedi'u Canfod"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "decrypt": "Dadgryptio a Pharhau",
+      "encrypted": "Mae'r ffeil hon wedi'i hamgryptio",
+      "enterPassword": "Rhowch gyfrinair",
+      "hint": "Awgrym: {hint}",
+      "password": "Cyfrinair"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "Arhoswch, gall hyn gymryd eiliad",
+      "title": "Yn mewnforio eich data..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "Data i'w Fewnforio",
+      "exported": "Allforiwyd",
+      "fileInfo": "Gwybodaeth Ffeil",
+      "version": "Fersiwn"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "neu llusgwch a gollyngwch yma",
+      "label": "Cliciwch i ddewis ffeil .budget"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": "Adfer o ffeil .budget",
+    "title": "Mewnforio Data"
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
+      "cancel": "Canslo",
+      "create": "Creu Cyfrif",
+      "saving": "Yn cadw...",
+      "update": "Diweddaru Cyfrif"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Cau ffenestr",
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "Methwyd â chadw'r cyfrif"
     },
     "fields": {
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "Rhif Cyfrif (Dewisol)",
+        "placeholder": "e.e., 4 digid olaf: 1234"
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "Sefydliad Ariannol (Dewisol)",
+        "placeholder": "e.e., Questrade, Wealthsimple, TD Direct"
       },
       "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "label": "Enw'r Cyfrif",
+        "placeholder": "e.e., Fy RRSP, Cynilion TFSA, Stoc Cwmni"
       },
       "type": {
         "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+          "Company shares": "Stoc cyflogeion neu opsiynau stoc",
+          "Non-registered": "Cyfrif buddsoddi trethadwy",
+          "RRSP": "Cynllun Cynilo Ymddeoliad Cofrestredig - Twf treth-ohiriedig",
+          "TFSA": "Cyfrif Cynilo Di-dreth - Twf a thynnu'n ôl di-dreth"
         },
-        "label": "Account Type"
+        "label": "Math o Gyfrif"
       }
     },
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "Ychwanegu Cyfrif Buddsoddi",
+      "edit": "Golygu Cyfrif Buddsoddi"
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "Rhowch enw cyfrif"
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "Dim daliadau i'w delweddu. Ychwanegwch ddaliadau i weld siartiau.",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "Elw",
+      "loss": "Colled"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
+      "allocation": "Dyraniad",
+      "costBasis": "Sail Cost",
+      "currentValue": "Gwerth Presennol",
+      "gainLoss": "Elw/Colled",
+      "percentReturn": "% Enillion",
       "symbol": "Symbol",
-      "total": "Total"
+      "total": "Cyfanswm"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "Dyraniad fesul Math o Gyfrif",
+      "gainLoss": "Elw/Colled fesul Daliad",
+      "performanceSummary": "Crynodeb Perfformiad",
+      "portfolioAllocation": "Dyraniad Portffolio fesul Daliad"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "Sail Cost",
+      "currentValue": "Gwerth Presennol",
+      "percentOfPortfolio": "{percent}% o'r portffolio"
     }
   },
   "investments": {
@@ -2408,62 +2408,62 @@
     "value": "Value"
   },
   "lanSync": {
-    "description": "Sync your budget data across devices on your local network",
+    "description": "Cydamserwch eich data cyllideb ar draws dyfeisiau ar eich rhwydwaith lleol",
     "device": {
-      "connect": "Connect",
-      "connected": "Connected",
-      "disconnect": "Disconnect",
-      "removeDevice": "Remove Device",
-      "sync": "Sync",
-      "syncing": "Syncing..."
+      "connect": "Cysylltu",
+      "connected": "Wedi cysylltu",
+      "disconnect": "Datgysylltu",
+      "removeDevice": "Tynnu Dyfais",
+      "sync": "Cydamseru",
+      "syncing": "Yn cydamseru..."
     },
-    "disabled": "Disabled",
-    "enabled": "Enabled",
+    "disabled": "Analluogwyd",
+    "enabled": "Galluogwyd",
     "howItWorks": {
       "step1": {
-        "description": "Scan a QR code or enter connection details to pair devices on the same network",
-        "title": "Pair Devices"
+        "description": "Sganiwch god QR neu rhowch fanylion cysylltu i baru dyfeisiau ar yr un rhwydwaith",
+        "title": "Paru Dyfeisiau"
       },
       "step2": {
-        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
-        "title": "Sync Securely"
+        "description": "Mae data wedi'i amgryptio pen-i-ben ac yn cydamseru'n uniongyrchol rhwng dyfeisiau - dim cwmwl yn ofynnol",
+        "title": "Cydamseru'n Ddiogel"
       },
       "step3": {
-        "description": "Changes sync automatically when devices are connected on the same network",
-        "title": "Automatic Updates"
+        "description": "Mae newidiadau'n cydamseru'n awtomatig pan fydd dyfeisiau wedi'u cysylltu ar yr un rhwydwaith",
+        "title": "Diweddariadau Awtomatig"
       },
-      "title": "How LAN Sync Works"
+      "title": "Sut Mae LAN Sync yn Gweithio"
     },
     "pairedDevices": {
-      "addDevice": "Add Device",
-      "addFirstDevice": "Add Your First Device",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
-      "emptyDescription": "Pair a device to start syncing your budget data",
-      "emptyTitle": "No devices paired",
-      "noDevices": "No devices paired yet",
-      "title": "Paired Devices"
+      "addDevice": "Ychwanegu Dyfais",
+      "addFirstDevice": "Ychwanegwch Eich Dyfais Gyntaf",
+      "deviceCount": "{count, plural, =1 {1 dyfais wedi'i pharu} other {# dyfais wedi'u paru}}",
+      "emptyDescription": "Parwch ddyfais i ddechrau cydamseru eich data cyllideb",
+      "emptyTitle": "Dim dyfeisiau wedi'u paru",
+      "noDevices": "Dim dyfeisiau wedi'u paru eto",
+      "title": "Dyfeisiau Wedi'u Paru"
     },
     "removeDialog": {
-      "cancel": "Cancel",
-      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
-      "remove": "Remove",
-      "title": "Remove Device"
+      "cancel": "Canslo",
+      "description": "Ydych chi'n siŵr eich bod am dynnu \"{deviceName}\"? Bydd hyn yn dadbaru'r ddyfais a bydd angen i chi baru eto i gydamseru data.",
+      "remove": "Tynnu",
+      "title": "Tynnu Dyfais"
     },
-    "syncAll": "Sync All",
+    "syncAll": "Cydamseru Popeth",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
-      "justNow": "Just now",
-      "lastSync": "Last sync: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
-      "neverSynced": "Never synced"
+      "daysAgo": "{count, plural, =1 {1 diwrnod yn ôl} other {# diwrnod yn ôl}}",
+      "hoursAgo": "{count, plural, =1 {1 awr yn ôl} other {# awr yn ôl}}",
+      "justNow": "Newydd nawr",
+      "lastSync": "Cydamseru diwethaf: {time}",
+      "minutesAgo": "{count, plural, =1 {1 munud yn ôl} other {# munud yn ôl}}",
+      "neverSynced": "Heb gydamseru erioed"
     },
     "title": "LAN Sync"
   },
   "landing": {
     "accessibility": {
       "badges": {
-        "keyboardFirst": "Bysellfwrdd yn gyntaf",
+        "keyboardFirst": "Bysellfwrdd-yn-gyntaf",
         "largeTouchTargets": "Targedau cyffwrdd mawr",
         "seniorsMode": "Modd Henoed"
       },
@@ -2471,7 +2471,7 @@
         "openApp": "Agor yr ap",
         "settings": "Gosodiadau hygyrchedd"
       },
-      "description": "Mae Modd Henoed yn darparu navigasiwn syml a thargedau cyffwrdd mwy. Mae llwybrau bysellfwrdd, gwahanol ddiffygion, a chontrast clir yn helpu pawb i symud yn gyflym.",
+      "description": "Mae Modd Henoed yn darparu llywio symlach a thargedau cyffwrdd mwy. Mae llwybrau byr bysellfwrdd, cyflyrau ffocws, a chyferbyniad clir yn helpu pawb symud yn gyflymach.",
       "title": "Hygyrch yn ddiofyn"
     },
     "brand": {
@@ -2480,22 +2480,22 @@
     },
     "comparison": {
       "bankConnections": {
-        "cloud": "Cymhwyso Casglu",
+        "cloud": "Casgliad Gorfodol",
         "feature": "Cysylltiadau Banc",
-        "local": "CSV / Llaw yn Unig",
-        "sync": "Dewisol (Ddirwyn)"
+        "local": "CSV / Â Llaw yn Unig",
+        "sync": "Dewisol (Amgryptedig)"
       },
       "cost": {
-        "cloud": "$100+/blwyddyn Aelodaeth",
+        "cloud": "$100+/blwyddyn Tanysgrifiad",
         "feature": "Cost",
         "local": "Am Ddim Am Byth",
-        "sync": "Gwelliant Unwaith"
+        "sync": "Uwchraddiad Unwaith"
       },
       "dataPrivacy": {
         "cloud": "Gweladwy gan Weithwyr",
         "feature": "Preifatrwydd Data",
         "local": "100% Preifat (Lleol)",
-        "sync": "Ddirwyn o Ddiwedd i Ddiwedd"
+        "sync": "Amgryptiad Pen-i-Ben"
       },
       "headers": {
         "cloud": "Ap Cwmwl Nodweddiadol",
@@ -2504,86 +2504,86 @@
         "sync": "BudgetPro Sync (Pro)"
       },
       "offlineMode": {
-        "feature": "Modd Offlin"
+        "feature": "Modd All-lein"
       },
       "storageLocation": {
         "cloud": "Eu Cronfa Ddata",
         "feature": "Lleoliad Storio",
         "local": "Eich Dyfais",
-        "sync": "Cwmwl Dim Gwybodaeth"
+        "sync": "Cwmwl Di-wybodaeth"
       }
     },
     "faq": {
       "0": {
-        "a": "Ie. Yn y Protocol Lleol, ni fydd data byth yn gadael eich dyfais. Mae'n byw yn IndexedDB o fewn eich porwr.",
-        "q": "A yw fy data yn wirioneddol breifat?"
+        "a": "Ydy. Yn y Protocol Lleol, nid yw data byth yn gadael eich dyfais. Mae'n byw yn IndexedDB o fewn eich porwr.",
+        "q": "A yw fy nata'n wirioneddol breifat?"
       },
       "1": {
-        "a": "Gallwch allforio copi llawn JSON unrhyw bryd. Rydym hefyd yn argymell allforion CSV rheolaidd.",
-        "q": "Sut alla i gefnogi fy data?"
+        "a": "Gallwch allforio copi wrth gefn JSON llawn ar unrhyw adeg. Rydym hefyd yn argymell allforion CSV rheolaidd.",
+        "q": "Sut ydw i'n gwneud copi wrth gefn o'm data?"
       },
       "2": {
-        "a": "Yn dod yn fuan: Aelodaeth ddewisol i syncronize data wedi'i ddirwyn yn ddiogel rhwng dyfeisiau trwy Supabase.",
+        "a": "Yn dod yn fuan: Tanysgrifiad dewisol i gydamseru data amgryptedig rhwng dyfeisiau drwy Supabase.",
         "q": "Beth yw 'Sync' Pro?"
       },
       "3": {
-        "a": "Na. Credwn fod mewngofnodi llaw yn ddiogelach, yn fwy dibynadwy, ac yn adeiladu ymwybyddiaeth ariannol well.",
-        "q": "A ydych yn cysylltu â banciau?"
+        "a": "Na. Rydym yn credu bod mewnforio â llaw yn fwy diogel, yn fwy dibynadwy, ac yn meithrin gwell ymwybyddiaeth ariannol.",
+        "q": "Ydych chi'n cysylltu â banciau?"
       }
     },
     "faqSection": {
-      "description": "Atebion syml i gwestiynau cyffredin am brofion, prisiau, a mynediad.",
+      "description": "Atebion syml i gwestiynau cyffredin am dreialon, prisiau, a mynediad.",
       "title": "Cwestiynau Cyffredin"
     },
     "features": {
       "0": {
-        "description": "Gwerth net, llif arian, a dadansoddiad categorïau. Amser llwytho ar unwaith.",
+        "description": "Gwerth net, llif arian, a dadansoddiad categori. Amseroedd llwytho ar unwaith.",
         "href": "/budget-app",
         "title": "Panel Lleol"
       },
       "1": {
-        "description": "Mapydd CSV clyfar ar gyfer BMO, Home Trust, a fformatau arferadwy.",
+        "description": "Mapiwr CSV deallus ar gyfer BMO, Home Trust, a fformatau personol addasadwy.",
         "href": "/budget-app/import",
-        "title": "Wizzard Mewngofnodi"
+        "title": "Dewin Mewnforio"
       },
       "2": {
-        "description": "Sganio derbynneb yn lleol gyda Tesseract.js. Dim prosesu cwmwl.",
+        "description": "Sganio derbynebau'n lleol gyda Tesseract.js. Dim prosesu cwmwl.",
         "href": "/budget-app/ocr",
         "title": "OCR Derbynneb"
       },
       "3": {
-        "description": "Cyllidebau seiliedig ar sero neu drosglwyddo gyda rheolaeth fanwl ar gategorïau.",
+        "description": "Cyllidebu seiliedig ar sero neu gario drosodd gyda rheolaeth gategori fanwl.",
         "href": "/budget-app/budgets",
-        "title": "Cyllidebau Categorïau"
+        "title": "Cyllidebau Categori"
       },
       "4": {
-        "description": "Proffilio eich dyddiad rhyddhad gyda gweledigaethau llog cymcompound.",
+        "description": "Rhagamcanwch eich dyddiad rhyddid gyda delweddau llog cyfansawdd.",
         "href": "/budget-app/planning/retirement",
         "title": "Cyfrifiannell Ymddeoliad"
       },
       "5": {
-        "description": "Clo cwsmer yn ddewisol ar gyfer haen ychwanegol o ddiogelwch.",
+        "description": "Amgryptio dewisol ochr y cleient am haen ychwanegol o ddiogelwch.",
         "href": "/budget-app/settings",
-        "title": "Clo Preifatrwydd"
+        "title": "Tarian Preifatrwydd"
       }
     },
     "featuresDeepDive": {
-      "cta": "Dechrau prawf am ddim",
-      "description": "Peidiwch â phwytho gyda fformiwla torri. Cael y hyblygrwydd o reolaeth law gyda chyflymder ap modern.",
+      "cta": "Dechrau treial am ddim",
+      "description": "Stopiwch ymladd â fformwlâu wedi torri. Cael hyblygrwydd rheolaeth â llaw gyda chyflymder ap modern.",
       "explore": "Archwilio",
-      "heading1": "Pŵer Taflen Waith.",
+      "heading1": "Pŵer Taenlen.",
       "heading2": "Symlrwydd Ap."
     },
     "footer": {
-      "allRightsReserved": "Pob hawl wedi'u cadw.",
+      "allRightsReserved": "Cedwir pob hawl.",
       "api": "API",
-      "changelog": "Newidiadau",
+      "changelog": "Cofnod newidiadau",
       "community": "Cymuned",
       "cookiePolicy": "Polisi Cwcis",
       "documentation": "Dogfennaeth",
       "download": "Lawrlwytho",
       "features": "Nodweddion",
-      "helpCenter": "Canolfan Cymorth",
+      "helpCenter": "Canolfan Gymorth",
       "legal": "Cyfreithiol",
       "pricing": "Prisiau",
       "privacyPolicy": "Polisi Preifatrwydd",
@@ -2592,9 +2592,9 @@
       "termsOfService": "Telerau Gwasanaeth"
     },
     "hero": {
-      "badge": "Preifatrwydd yn Gyntaf • Dim ond Lleol • Dim Olrhain",
-      "finePrint": "Dim angen credydau banc. Dim cyfrif angen ar gyfer modd lleol.",
-      "headline": "Meistrwch Eich Arian heb Werthu Eich Data.",
+      "badge": "Preifatrwydd-Yn-Gyntaf • Lleol-Yn-Unig • Dim Olrhain",
+      "finePrint": "Dim angen manylion banc. Dim angen cyfrif ar gyfer modd lleol.",
+      "headline": "Meistrolwch Eich Arian heb Werthu Eich Data.",
       "primaryCta": {
         "href": "/budget-app/auth/signup",
         "label": "Dechrau Protocol Lleol (Am Ddim)"
@@ -2603,12 +2603,12 @@
         "href": "/budget-app/auth/login",
         "label": "Mewngofnodi"
       },
-      "subhead": "Pŵer taflen waith. Symlrwydd ap. Profwch eglurder ariannol gyda'r unig ap cyllideb sy'n gwarantu nad yw eich data byth yn gadael eich dyfais."
+      "subhead": "Pŵer taenlen. Symlrwydd ap. Profwch eglurder ariannol gyda'r unig ap cyllideb sy'n gwarantu nad yw eich data byth yn gadael eich dyfais."
     },
     "heroSection": {
       "badges": {
-        "noSubscriptions": "Dim aelodaeth",
-        "offlineReady": "Parod ar gyfer offlin",
+        "noSubscriptions": "Dim tanysgrifiadau",
+        "offlineReady": "Yn barod all-lein",
         "seniorsMode": "Modd Henoed"
       },
       "cta": {
@@ -2616,51 +2616,51 @@
         "viewPricing": "Gweld prisiau"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "Storio cwmwl",
+        "dining": "Bwyta Allan",
+        "expenses": "Treuliau",
+        "foodToday": "Bwyd • Heddiw",
+        "groceries": "Bwydydd",
+        "groceryStore": "Siop Fwyd",
+        "income": "Incwm",
+        "incomeYesterday": "Incwm • Ddoe",
+        "monthly": "Misol",
+        "netWorth": "Gwerth net",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "Cyflog",
+        "shopping": "Siopa",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "Tanysgrifiad • Hyd 24",
+        "yearly": "Blynyddol"
       },
       "modes": {
         "budgets": "Cyllidebau",
         "dashboard": "Panel",
-        "subscriptions": "Aelodaeth"
+        "subscriptions": "Tanysgrifiadau"
       },
       "preview": {
-        "categoryBudgets": "Cyllidebau categorïau",
+        "categoryBudgets": "Cyllidebau categori",
         "livePreview": "Rhagolwg byw",
-        "recentTransactions": "Transacsiynau diweddar",
-        "recurring": "Ailadrodd"
+        "recentTransactions": "Trafodion diweddar",
+        "recurring": "Cylchol"
       }
     },
     "howItWorks": {
       "0": {
-        "description": "Tynnu a gollwng CSVs neu sganio derbynneb. Mae AI yn mapio'r colofnau yn lleol.",
-        "title": "Mewngofnodi"
+        "description": "Llusgwch a gollyngwch CSVs neu sganiwch dderbynebau. Mae AI yn mapio'r colofnau'n lleol.",
+        "title": "Mewnforio"
       },
       "1": {
-        "description": "Categorïo cyflym gyda rheolau clyfar a gweithredoedd màs.",
+        "description": "Categoreiddio cyflym gyda rheolau deallus a gweithredoedd swmp.",
         "title": "Adolygu"
       },
       "2": {
-        "description": "Rhowch swydd i bob punt a rhagfynegi eich gwerth net yn y dyfodol.",
+        "description": "Pennwch swydd i bob doler a rhagolygwch eich gwerth net yn y dyfodol.",
         "title": "Cynllunio"
       }
     },
     "howItWorksSection": {
-      "description": "Llif gwaith sy'n eich cyrraedd i eglurder yn gyflym, heb eich cloi i mewn i system gymhleth.",
+      "description": "Llif gwaith sy'n eich cyrraedd at eglurder yn gyflym, heb eich cloi i mewn i system gymhleth.",
       "title": "Sut mae'n gweithio"
     },
     "marquee": {
@@ -2676,43 +2676,43 @@
       ]
     },
     "nav": {
-      "tagline": "Cyllidebu Premiwm"
+      "tagline": "Cyllidebu premiwm"
     },
     "outcomes": {
       "0": {
-        "description": "Dim mwy o gysylltiadau torri nac ail-gydweithio. Chi sy'n rheoli'r mewnbwn data.",
-        "title": "Peidiwch â Phwytho gyda Chasglwyr"
+        "description": "Dim mwy o gysylltiadau wedi torri na dolen ail-awdurdodi. Chi sy'n rheoli'r data.",
+        "title": "Stopiwch Ymladd Casglwyr"
       },
       "1": {
-        "description": "Nid ydym yn gwerthu eich data oherwydd nad oes gennym hi. Pwynt.",
-        "title": "Preifatrwydd trwy Ddylunio"
+        "description": "Dydyn ni ddim yn gwerthu eich data oherwydd does gennym ni mohono. Pwynt.",
+        "title": "Preifatrwydd drwy Ddyluniad"
       },
       "2": {
-        "description": "Modelu ymddeoliad, talu benthyciadau, a nodau arbedion mewn un golwg integredig.",
-        "title": "Cynllunio ar gyfer y Dyfodol"
+        "description": "Modelwch ymddeoliad, talu benthyciadau, a nodau cynilo mewn un golwg integredig.",
+        "title": "Cynllunio i'r Dyfodol"
       },
       "3": {
-        "description": "Darganfod draeniau ailadrodd ar eich poced y mae apiau eraill yn eu colli.",
-        "title": "Llofnod Cyllideb"
+        "description": "Canfod taliadau cylchol sy'n draenio eich waled y mae apiau eraill yn eu methu.",
+        "title": "Lladdwr Tanysgrifiadau"
       }
     },
     "outcomesSection": {
-      "description": "Mae'r rhan fwyaf o apiau cyllidebu yn eich gwneud chi i wneud y gwaith. Mae BudgetPro wedi'i ddylunio i leihau rhwystrau tra'n eich cadw chi yn rheoli.",
-      "title": "Adeiladwyd ar gyfer bywyd go iawn, nid taflenni gwaith"
+      "description": "Mae'r rhan fwyaf o apiau cyllidebu yn gwneud i chi wneud y gwaith. Dyluniwyd BudgetPro i leihau ffrithiant tra'n eich cadw yn rheoli.",
+      "title": "Adeiladwyd ar gyfer bywyd go iawn, nid taenlenni"
     },
     "preview": {
       "balanceAmount": "£24,500.00",
       "balanceChange": "+12.5%",
       "currencySymbol": "£",
-      "expenses": "Gwariant",
+      "expenses": "Treuliau",
       "expensesAmount": "£1,250.00",
       "expensesChange": "-5.2%",
       "live": "Byw",
       "overview": "Trosolwg",
-      "recentTransactions": "Transacsiynau Diweddar",
-      "savingsGoal": "Cynllun Arbedion",
+      "recentTransactions": "Trafodion Diweddar",
+      "savingsGoal": "Nod Cynilo",
       "savingsPercent": "85%",
-      "totalBalance": "Cyfanswm Balans",
+      "totalBalance": "Balans Cyfan",
       "tx0Amount": "-£124.50",
       "tx0Date": "Heddiw, 2:30 PM",
       "tx0Name": "Siop Fwyd",
@@ -2720,98 +2720,98 @@
       "tx1Date": "Ddoe, 9:00 AM",
       "tx1Name": "Tech Solutions Inc.",
       "tx2Amount": "-£15.99",
-      "tx2Date": "Hydref 24, 2025",
-      "tx2Name": "Cofrestriad Netflix",
-      "vsLastMonth": "yn erbyn mis diwethaf",
-      "welcomeBack": "Croeso'n ôl, Alex"
+      "tx2Date": "Hyd 24, 2025",
+      "tx2Name": "Tanysgrifiad Netflix",
+      "vsLastMonth": "o gymharu â'r mis diwethaf",
+      "welcomeBack": "Croeso nôl, Alex"
     },
     "pricing": {
       "cta": {
         "href": "/budget-app/auth/signup",
         "label": "Dechrau Protocol Lleol"
       },
-      "description": "Dechreuwch gyda'r Protocol Lleol pwerus. Gwellwch yn ddiweddarach os bydd angen syncronize ar gyfer sawl dyfais.",
-      "eyebrow": "Prisiau Teg",
-      "guarantee": "Dim angen cerdyn credyd ar gyfer Protocol Lleol.",
+      "description": "Dechreuwch gyda'r Protocol Lleol pwerus. Uwchraddiwch yn ddiweddarach os oes angen sync aml-ddyfais.",
+      "eyebrow": "Prisio Teg",
+      "guarantee": "Dim cerdyn credyd yn ofynnol ar gyfer Protocol Lleol.",
       "priceLabel": "Am Ddim Am Byth",
       "secondary": {
         "href": "#pricing",
         "label": "Gweld Nodweddion Pro"
       },
-      "title": "Lleol yw Am Ddim. Syncronize yw Pro."
+      "title": "Mae Lleol am Ddim. Sync yw Pro."
     },
     "pricingSection": {
-      "features": "Yn cynnwys transacsiynau, cyfrifon, cyllidebau, a galluoedd allforio lleol di-limit.",
-      "productDescription": "Y profiad cyllidebu cyflawn, yn rhedeg yn llwyr ar eich dyfais.",
+      "features": "Yn cynnwys trafodion, cyfrifon, cyllidebau diderfyn, a galluoedd copi wrth gefn lleol llawn.",
+      "productDescription": "Y profiad cyllidebu cyflawn, yn rhedeg yn gyfan gwbl ar eich dyfais.",
       "productName": "Protocol Lleol",
-      "recommended": "Argymhellir",
+      "recommended": "Argymhellwyd",
       "whyChoose": "Pam dewis Protocol Lleol?",
-      "whyChooseDescription": "Gweld sut rydym yn cymharu â'r cewri cwmwl."
+      "whyChooseDescription": "Gweld sut rydym yn cymharu â chawrion y cwmwl."
     },
     "security": {
       "buttons": {
-        "offline": "Cymorth Offlin",
+        "offline": "Cefnogaeth all-lein",
         "privacy": "Preifatrwydd a gosodiadau"
       },
       "cards": {
         "aiControls": {
-          "description": "Togglwch nodweddion pŵer AI (fel canfod anomalia) a rheoli mynediad chatbot o'r gosodiadau.",
+          "description": "Toglwch nodweddion wedi'u pweru gan AI (fel canfod anghysondebau) a rheolwch fynediad bot sgwrsio o'r gosodiadau.",
           "title": "Rheolaethau nodweddion AI"
         },
         "encryption": {
-          "description": "Mae'r ap yn cynnwys haen ddirwyn i ddiogelu cofrestriadau cyllideb sensitif pan fydd yn cael ei galluogi.",
-          "title": "Cymorth Ddirwyn"
+          "description": "Mae'r ap yn cynnwys haen amgryptio i amddiffyn cofnodion cyllideb sensitif pan fydd wedi'i alluogi.",
+          "title": "Cefnogaeth amgryptio"
         },
         "exportDelete": {
-          "description": "Allforiwch eich data a gosodiadau preifatrwydd, neu dileu data lleol yn uniongyrchol o'r ap.",
+          "description": "Allforiwch eich data a'ch gosodiadau preifatrwydd, neu dilewch data lleol yn uniongyrchol o'r ap.",
           "title": "Allforio a dileu"
         },
         "localStorage": {
-          "description": "Mae eich data cyllideb yn cael ei storio yn eich porwr (IndexedDB) felly mae'r ap yn aros yn gyflym ac yn ddefnyddiol yn offlin.",
-          "title": "Storfa Leol"
+          "description": "Mae eich data cyllideb yn cael ei storio yn eich porwr (IndexedDB) fel bod yr ap yn aros yn gyflym ac yn ddefnyddiadwy all-lein.",
+          "title": "Storio lleol"
         }
       },
-      "description": "Mae'r Ap Cyllideb yn storio eich data yn lleol (barod ar gyfer offlin) ac yn rhoi rheolaethau i chi ar gyfer nodweddion AI, allforio, a dileu.",
-      "title": "Preifatrwydd yn gyntaf trwy ddylunio"
+      "description": "Mae'r Ap Cyllideb yn storio eich data'n lleol (yn barod all-lein) ac yn rhoi rheolyddion i chi ar gyfer nodweddion AI, allforio, a dileu.",
+      "title": "Preifatrwydd-yn-gyntaf drwy ddyluniad"
     },
     "socialProof": {
-      "description": "Y manylion sy'n gwneud cyllidebu'n glynu: mewngofnodi, llwybrau, navigasiwn symudol, a pherfformiad parod ar gyfer offlin.",
+      "description": "Y manylion sy'n gwneud cyllidebu'n glynu: cyflwyniad, llwybrau byr, llywio symudol, a pherfformiad yn barod all-lein.",
       "features": {
         "mobileUx": {
-          "description": "Navigasiwn isaf a phatrwm ymatebol sy'n teimlo'n frodorol.",
-          "title": "UX symudol yn gyntaf"
+          "description": "Llywio gwaelod a chynlluniau ymatebol sy'n teimlo'n frodorol.",
+          "title": "UX symudol-yn-gyntaf"
         },
         "onboarding": {
-          "description": "Mae taith arweiniol yn helpu defnyddwyr newydd i ddod i werth yn gyflym.",
-          "title": "Daith mewngofnodi"
+          "description": "Mae taith dywys yn helpu defnyddwyr newydd gyrraedd gwerth yn gyflym.",
+          "title": "Taith gyflwyno"
         },
         "pwaInstall": {
-          "description": "Gosod fel ap a pharhau hyd yn oed gyda rhyngrwyd ansicr.",
+          "description": "Gosodwch fel ap a pharhau hyd yn oed gyda rhyngrwyd anwastad.",
           "title": "Gosod PWA"
         },
         "shortcuts": {
-          "description": "Symud yn gyflym gyda chwilio a llwybrau gweithredu wedi'u hadeiladu i mewn i'r UI.",
-          "title": "Llwybrau bysellfwrdd"
+          "description": "Symudwch yn gyflym gyda chwiliad a llwybrau byr gweithredu wedi'u hadeiladu i'r UI.",
+          "title": "Llwybrau byr bysellfwrdd"
         }
       },
-      "title": "Polish Premiwm, wedi'i adeiladu i mewn"
+      "title": "Gorffeniad premiwm, wedi'i adeiladu i mewn"
     },
     "trust": {
       "0": {
-        "description": "Mae data yn aros yn IndexedDB eich porwr. Ni allwn ei weld yn llythrennol.",
+        "description": "Mae data'n aros yn IndexedDB eich porwr. Ni allwn ei weld yn llythrennol.",
         "title": "Eich Dyfais, Eich Data"
       },
       "1": {
-        "description": "Golygu màs, troi, a dadansoddi fel pro heb y penblethau fformiwla.",
-        "title": "Pŵer Taflen Waith"
+        "description": "Golygu mewn swmp, pivot, a dadansoddi fel pro heb y cur pen fformwlâu.",
+        "title": "Pŵer Taenlen"
       },
       "2": {
-        "description": "Dim oedi. Mae'n gweithio ar ben mynydd neu yn nhunell metro.",
-        "title": "Cyflymder Offlin"
+        "description": "Dim oedi. Yn gweithio ar ben mynydd neu mewn twnnel tanddaearol.",
+        "title": "Cyflymder All-lein"
       },
       "3": {
-        "description": "Mae'r wizzard mewngofnodi yn gwneud yr Adolygiad Arian Gwener yn arfer boddhaol.",
-        "title": "Ritualau Llaw"
+        "description": "Mae'r dewin mewnforio yn gwneud yr Adolygiad Arian Dydd Gwener yn arfer boddhaol.",
+        "title": "Defodau â Llaw"
       }
     }
   },
@@ -3085,7 +3085,7 @@
     "whereToFind": "Where do I find these?"
   },
   "mobileNav": {
-    "accounts": "Arian",
+    "accounts": "Cyfrifon",
     "activity": "Gweithgaredd",
     "budget": "Cyllideb",
     "home": "Cartref",
@@ -3093,25 +3093,25 @@
   },
   "morePage": {
     "groups": {
-      "toolsSettings": "Tools & Settings",
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning"
+      "toolsSettings": "Offer a Gosodiadau",
+      "trackingAnalysis": "Olrhain a Dadansoddi",
+      "wealthPlanning": "Cyfoeth a Chynllunio"
     },
-    "title": "More"
+    "title": "Mwy"
   },
   "nav": {
-    "about": "Ynghylch",
+    "about": "Amdanom",
     "accounts": "Cyfrifon",
     "budgets": "Cyllidebau",
     "categories": "Categorïau",
     "dashboard": "Panel",
     "export": "Allforio",
-    "goals": "Cyrchfannau",
+    "goals": "Nodau",
     "help": "Cymorth",
-    "import": "Mewngofnodi",
+    "import": "Mewnforio",
     "reports": "Adroddiadau",
     "settings": "Gosodiadau",
-    "transactions": "Transacsiynau"
+    "transactions": "Trafodion"
   },
   "notificationSettings": {
     "emailNotifications": {
@@ -3285,40 +3285,40 @@
   "onboarding": {
     "dontShowAgain": "Peidiwch â dangos y daith hon eto",
     "navigation": {
-      "getStarted": "Dechrau",
+      "getStarted": "Dechreuwch",
       "next": "Nesaf",
       "previous": "Blaenorol",
       "startTour": "Dechrau'r Daith"
     },
-    "quickTip": "💡 Tip Cyflym",
-    "skipTour": "Skipio'r daith",
+    "quickTip": "💡 Awgrym Cyflym",
+    "skipTour": "Hepgor y daith",
     "stepCounter": "Cam {current} o {total}",
     "steps": {
       "budgets": {
-        "description": "Creu cyllidebau ar gyfer categorïau gwariant gwahanol. Olrhain eich cynnydd trwy gydol y mis a chael rhybuddion pan fyddwch yn agos at eich terfynau.",
-        "title": "🎯 Gosod Eich Cyllidebau"
+        "description": "Diffiniwch eich ffiniau ariannol. Gosodwch derfynau personol a derbyniwch rybuddion amser real i aros yn berffaith ar y trywydd iawn.",
+        "title": "Cyllidebu Manwl"
       },
       "categorize": {
-        "description": "Adolygwch a addaswch gategorïau'r transacsiynau. Mae ein categorïo clyfar yn dysgu o'ch cywiriadau i wella dros amser. Defnyddiwch weithredoedd màs i gategoreiddio sawl transaciwn ar unwaith!",
-        "title": "🏷️ Categorïo a Threfnu"
+        "description": "Mae ein AI yn dysgu o'ch arferion. Categoreiddiwch unwaith, a byddwn yn trin trafodion tebyg yn awtomatig yn y dyfodol.",
+        "title": "Categoreiddio Deallus"
       },
       "import": {
-        "description": "Dechreuwch trwy fewngofnodi eich transacsiynau banc o ffeil CSV. Rydym yn cefnogi BMO, Home Trust, a llawer o fanciau eraill. Bydd yr ap yn categorïo eich transacsiynau yn awtomatig!",
-        "title": "📥 Mewngofnodi Eich Transacsiynau"
+        "description": "Dewch â'ch hanes trafodion i mewn yn ddi-dor. Rydym yn cefnogi banciau mawr gan gynnwys BMO a Home Trust, gyda hunan-ganfyddiad deallus.",
+        "title": "Mewnforio Data'n Ddiymdrech"
       },
       "reports": {
-        "description": "Gweledoli eich patrymau gwariant, olrhain eich gwerth net, a gwneud penderfyniadau ariannol gwybodus. Mae eich panel yn diweddaru'n awtomatig gyda phob transaciwn!",
-        "title": "📊 Gweld Adroddiadau a Gwybodaeth"
+        "description": "Datglowch bŵer eich data. Delweddwch dueddiadau, olrhainwch werth net, a gwnewch benderfyniadau wedi'u cefnogi gan ddadansoddiad cynhwysfawr.",
+        "title": "Mewnwelediadau Dwfn"
       },
       "welcome": {
-        "description": "Gadewch i ni gymryd taith gyflym i'ch helpu i ddechrau rheoli eich cyllid cartref. Ni fydd hyn yn cymryd hir!",
-        "title": "👋 Croeso i'r Ap Cyllideb!"
+        "description": "Profwch ffordd ddoethach o reoli eich cyfoeth. Gadewch i ni fynd ar daith fer drwy eich canolfan reoli ariannol newydd.",
+        "title": "Croeso i Eglurder Ariannol"
       }
     },
     "tips": {
-      "budgets": "Gosod cyllidebau realistig a byddwn yn rhybuddio chi os ydych ar y trywydd i wario gormod.",
-      "categorize": "Defnyddiwch y botwm categorïo cyflym neu ddewiswch sawl transaciwn ar gyfer categorïo màs.",
-      "import": "Tynnu a gollwng eich ffeil CSV neu glicio i chwilio. Rydym yn awtomatig yn darganfod fformatau BMO a Home Trust!"
+      "budgets": "Gosodwch derfynau misol i ddelweddu cyflymder eich gwariant mewn amser real.",
+      "categorize": "Dewiswch drafodion lluosog i gymhwyso categorïau mewn swmp—effeithlonrwydd yw'r allwedd.",
+      "import": "Llusgwch a gollyngwch eich ffeil CSV yn syml. Byddwn yn trin y fformatio'n awtomatig."
     }
   },
   "onboardingPage": {
@@ -3398,20 +3398,20 @@
     }
   },
   "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "Ar y gyfradd hon, byddwch yn mynd dros eich cyllideb o {amount} y mis hwn.",
+    "percentOfBudget": "{percent}% o'r gyllideb",
     "progress": {
-      "label": "Current progress"
+      "label": "Cynnydd presennol"
     },
     "stats": {
-      "budget": "Budget",
-      "daysLeft": "Days Left",
-      "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "budget": "Cyllideb",
+      "daysLeft": "Diwrnodau ar Ôl",
+      "projectedTotal": "Cyfanswm Rhagamcanol",
+      "spentSoFar": "Gwariant Hyd Yma"
     },
     "tip": {
-      "label": "Tip:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "label": "Awgrym:",
+      "reduceSpending": "Gostyngwch wariant dyddiol i {amount} i aros o fewn y gyllideb."
     }
   },
   "pairingDialog": {
@@ -3716,26 +3716,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "Gwirioneddol",
+      "confidenceInterval": "Cyfwng Hyder",
+      "predicted": "Rhagwelwyd"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "Dim data ar gael ar gyfer rhagfynegiadau",
+    "predictionUnavailable": "Rhagfynegiad Ddim ar Gael",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "Hyder Cyf",
+      "nextMonth": "Mis Nesaf",
+      "threeMonthAvg": "Cyf 3 Mis"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "Hyder",
+      "month": "Mis",
+      "predicted": "Rhagwelwyd",
+      "range": "Ystod",
+      "title": "Rhagfynegiadau Misol"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "Rhagolwg Gwariant: {category}",
+    "trainingModel": "Yn hyfforddi model ac yn cynhyrchu rhagfynegiadau..."
   },
   "privacyPanel": {
     "active": "Active",
@@ -3855,27 +3855,27 @@
     "deleteButton": "Dileu proffil"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "Tynnwch i adnewyddu",
+    "release": "Rhyddhewch i adnewyddu"
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "Gosod",
+      "notNow": "Dim nawr"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "Cau'r anogwr gosod",
+    "description": "Ychwanegwch at eich sgrin gartref ar gyfer mynediad cyflym a defnydd all-lein",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "Cyflym a diogel",
+      "noAppStore": "Dim angen siop apiau",
+      "offline": "Yn gweithio all-lein"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"Ychwanegu at y Sgrin Gartref\"",
+    "iosForFullExperience": "ar gyfer y profiad ap llawn gyda llwytho cyflymach.",
+    "iosTap": "Tapiwch",
+    "iosThen": "yna",
+    "iosTitle": "Gosod Ap Cyllideb",
+    "title": "Gosod Ap Cyllideb"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3906,38 +3906,38 @@
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "Cymhwyso Categori",
+      "cancel": "Canslo",
+      "save": "Cadw"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "clickToSelect": "Cliciwch gategori i'w ddewis",
+    "description": "Dewiswch gategori ar gyfer {count, plural, =1 {y trafodiad hwn} other {# trafodiad}}",
+    "general": "Cyffredinol",
+    "noResults": "Dim categorïau wedi'u canfod",
+    "pressEnter": "Pwyswch ↵ Enter",
+    "saving": "Yn cadw...",
+    "searchPlaceholder": "Chwilio categorïau...",
+    "title": "Categoreiddio Cyflym"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "Popeth",
+    "categories": "Categorïau",
+    "clearFilters": "Clirio Hidlwyr",
+    "moreCategories": "+{count} arall",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "Y 30 Diwrnod Diwethaf",
+      "last90": "Y 90 Diwrnod Diwethaf",
+      "thisMonth": "Y Mis Hwn",
+      "thisYear": "Eleni"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "Cyfnod Amser"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "balance": "Balans Cyfan",
+    "expenses": "Treuliau",
+    "income": "Incwm",
+    "savingsRate": "Cyfradd Cynilo",
+    "savingsRateDescription": "Canran o incwm a gynilwyd y mis hwn"
   },
   "receiptThumbnail": {
     "close": "Close",
@@ -3954,65 +3954,65 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "Atodi Derbynneb",
+      "chooseDifferent": "Dewis Un Gwahanol",
+      "extractData": "Echdynnu Data",
+      "extracting": "Yn echdynnu..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "Tynnu Llun gyda Camera",
+      "useDevice": "Defnyddiwch gamera eich dyfais i ddal derbynneb"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "Mewnbwn camera",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "neu <link>porwch ffeiliau</link>",
+      "dragDrop": "Llusgwch a gollyngwch y dderbynneb yma",
+      "dropHere": "Gollyngwch y dderbynneb yma",
+      "supportedFormats": "Cefnogir JPG, PNG, PDF • Uchafswm {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "Methwyd ag echdynnu data o'r dderbynneb. Rhowch y data â llaw.",
+      "extractionFailed": "Methwyd ag echdynnu data. Rhowch gynnig arall arni neu rhowch y data â llaw.",
+      "invalidType": "Math ffeil annilys. Dim ond ffeiliau JPG, PNG, a PDF sy'n cael eu caniatáu",
+      "ocrImagesOnly": "Cefnogir OCR ar gyfer ffeiliau delwedd yn unig (JPG, PNG)",
+      "rejected": "Gwrthodwyd y ffeil. Rhowch gynnig arall arni",
+      "tooLarge": "Mae'r ffeil yn rhy fawr. Uchafswm maint yw {size}MB"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "Swm:",
+      "confidence": "Hyder: {percent}%",
+      "date": "Dyddiad:",
+      "merchant": "Masnachwr:",
+      "title": "Data Wedi'i Echdynnu"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "Rhagolwg ddim ar gael",
+      "title": "Derbynneb PDF"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "Rhagolwg derbynneb",
+    "removeFile": "Tynnu ffeil"
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
-    "estimatedMonthly": "Estimated Monthly",
+    "confidence": "{percent}% hyder",
+    "estimatedMonthly": "Amcangyfrif Misol",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "Bob Pythefnos",
+      "monthly": "Misol",
+      "quarterly": "Chwarterol",
+      "weekly": "Wythnosol"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "next": "Next: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "inDays": "{count, plural, =0 {(heddiw)} =1 {(mewn 1 diwrnod)} other {(mewn # diwrnod)}}",
+    "next": "Nesaf: {date}",
+    "occurrences": "{count, plural, =1 {1 achlysur wedi'i ganfod} other {# achlysur wedi'u canfod}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "y mis",
+      "quarter": "y chwarter",
+      "twoWeeks": "bob 2 wythnos",
+      "week": "yr wythnos"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
+    "showingPatterns": "{count, plural, =1 {Yn dangos 1 patrwm trafodiad cylchol} other {Yn dangos # patrwm trafodiad cylchol}}",
+    "subtitle": "Tanysgrifiadau a biliau a ganfuwyd",
+    "title": "Trafodion Cylchol"
   },
   "reports": {
     "addTransactionsToSeeFlow": "Add income and expense transactions to see your money flow",
@@ -4142,20 +4142,20 @@
     "yourAccounts": "Your Accounts"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "Cau cymorth llwybrau byr",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "Mae llwybrau byr bysellfwrdd yn gweithio ar unrhyw dudalen ac eithrio wrth deipio mewn ffurflenni. Pwyswch {key} unrhyw bryd i weld y cymorth hwn.",
+      "title": "💡 Awgrym Pro"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "Awgrymiau cynhyrchedd pŵer-ddefnyddiwr",
+    "title": "Llwybrau Byr Bysellfwrdd"
   },
   "sidebar": {
     "actions": {
-      "backToHome": "Yn ôl i'r Cartref",
-      "collapseSidebar": "Cuddio'r bar ochr",
+      "backToHome": "Nôl i'r Cartref",
+      "collapseSidebar": "Crebachu'r bar ochr",
       "expandSidebar": "Ehangu'r bar ochr",
-      "importCsv": "Mewngofnodi CSV",
+      "importCsv": "Mewnforio CSV",
       "settings": "Gosodiadau",
       "showAllItems": "Dangos Pob Eitem",
       "showLess": "Dangos Llai"
@@ -4163,29 +4163,29 @@
     "appSubtitle": "Cyllid Premiwm",
     "appTitle": "Ap Cyllideb",
     "navigation": {
-      "accounts": "Arian",
+      "accounts": "Cyfrifon",
       "budgets": "Cyllidebau",
-      "calculators": "Cyfrifwyr",
+      "calculators": "Cyfrifianellau",
       "categories": "Categorïau",
-      "dashboard": "Dangosfwrdd",
+      "dashboard": "Panel",
       "events": "Digwyddiadau",
-      "futurePlans": "Cynlluniau yn y Dyfodol",
-      "import": "Mewnosod CSV",
+      "futurePlans": "Cynlluniau i'r Dyfodol",
+      "import": "Mewnforio CSV",
       "investments": "Buddsoddiadau",
       "loans": "Benthyciadau",
       "netWorth": "Gwerth Net",
       "properties": "Eiddo",
-      "reminders": "Atgoffa",
+      "reminders": "Nodiadau Atgoffa",
       "reports": "Adroddiadau",
       "retirement": "Ymddeoliad",
       "scanReceipt": "Sganio Derbynneb",
-      "scenarios": "Beth os",
+      "scenarios": "Beth-Os",
       "settings": "Gosodiadau",
-      "subscriptions": "Aelodaeth",
-      "transactions": "Transacsiynau"
+      "subscriptions": "Tanysgrifiadau",
+      "transactions": "Trafodion"
     },
     "search": "Chwilio...",
-    "shortcuts": "Llwybrau"
+    "shortcuts": "Llwybrau Byr"
   },
   "simplefinConnect": {
     "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
@@ -4313,99 +4313,99 @@
     }
   },
   "simplefinStatus": {
-    "active": "Active",
-    "asOf": "as of {date}",
-    "cancel": "Cancel",
-    "connected": "Connected",
-    "connecting": "Connecting...",
-    "disconnected": "Disconnected",
-    "dismiss": "Dismiss",
-    "error": "Error",
-    "errorsLabel": "Errors:",
-    "expired": "Expired",
-    "hoursAgo": "{hours}h ago",
-    "imported": "Imported",
-    "justNow": "just now",
-    "lastSynced": "Last synced: {time}",
-    "minutesAgo": "{minutes}m ago",
-    "neverSynced": "Never synced",
-    "noBankAccounts": "No bank accounts connected",
-    "pause": "Pause",
-    "paused": "Paused",
-    "processing": "Processing: {account}",
-    "resume": "Resume",
-    "skippedDuplicates": "Skipped (duplicates)",
+    "active": "Gweithredol",
+    "asOf": "fel ar {date}",
+    "cancel": "Canslo",
+    "connected": "Cysylltwyd",
+    "connecting": "Yn cysylltu...",
+    "disconnected": "Datgysylltwyd",
+    "dismiss": "Diswyddo",
+    "error": "Gwall",
+    "errorsLabel": "Gwallau:",
+    "expired": "Wedi Dod i Ben",
+    "hoursAgo": "{hours}a yn ôl",
+    "imported": "Mewnforiwyd",
+    "justNow": "newydd nawr",
+    "lastSynced": "Cydamseriad diwethaf: {time}",
+    "minutesAgo": "{minutes}m yn ôl",
+    "neverSynced": "Heb gydamseru erioed",
+    "noBankAccounts": "Dim cyfrifon banc wedi'u cysylltu",
+    "pause": "Atal",
+    "paused": "Wedi'i Atal",
+    "processing": "Yn prosesu: {account}",
+    "resume": "Ailddechrau",
+    "skippedDuplicates": "Hepgorwyd (dyblygiaeth)",
     "statusLabel": "SimpleFIN: {status}",
-    "sync": "Sync",
-    "syncComplete": "Sync Complete",
-    "syncCompletedWithErrors": "Sync Completed with Errors",
-    "syncFailed": "Sync Failed",
-    "syncSuccessful": "Sync Successful",
-    "syncedDaysAgo": "Synced {days}d ago",
-    "syncedHoursAgo": "Synced {hours}h ago",
-    "syncedJustNow": "Synced just now",
-    "syncedYesterday": "Synced yesterday",
-    "syncing": "Syncing...",
-    "transactionsCount": "({count} transactions)",
-    "unlink": "Unlink",
-    "warningsLabel": "Warnings:"
+    "sync": "Cydamseru",
+    "syncComplete": "Cydamseru Wedi'i Gwblhau",
+    "syncCompletedWithErrors": "Cydamseru Wedi'i Gwblhau gyda Gwallau",
+    "syncFailed": "Cydamseru Wedi Methu",
+    "syncSuccessful": "Cydamseru'n Llwyddiannus",
+    "syncedDaysAgo": "Cydamseriad {days}d yn ôl",
+    "syncedHoursAgo": "Cydamseriad {hours}a yn ôl",
+    "syncedJustNow": "Cydamseriad newydd nawr",
+    "syncedYesterday": "Cydamseriad ddoe",
+    "syncing": "Yn cydamseru...",
+    "transactionsCount": "({count} trafodiad)",
+    "unlink": "Dadgysylltu",
+    "warningsLabel": "Rhybuddion:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "Rhagolwg yn seiliedig ar atchweliad llinol o'r {months} mis diwethaf",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "Gwariant Gwirioneddol",
+      "projected": "Rhagwelwyd"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "Dim digon o ddata i gynhyrchu tueddiadau. Ychwanegwch o leiaf 2 fis o drafodion.",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "Cyf Misol",
+      "lastMonth": "Mis Diwethaf",
+      "projected": "Rhagwelwyd"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "Tueddiadau a Rhagolygon Gwariant"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "Ychwanegu Rhaniad ({current}/{max})",
+    "amount": "Swm",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "Canslo",
+      "save": "Cadw Rhaniad",
+      "saving": "Yn cadw..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "Categori",
+    "closeModal": "Cau ffenestr",
+    "date": "Dyddiad:",
+    "distributeEvenly": "Dosbarthu'n Gyfartal",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "Methwyd â chadw'r trafodiad rhaniad"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "Rhowch y swm ar gyfer pob categori (rhaid iddynt gyfansymio i ${amount})",
+      "step2": "Defnyddiwch \"Dosbarthu'n Gyfartal\" i rannu'n gyfartal ar draws pob categori",
+      "step3": "Ychwanegwch hyd at 5 rhaniad fesul trafodiad",
+      "step4": "Bydd y trafodiad gwreiddiol yn cael ei guddio a'i ddisodli gydag eitemau rhaniad",
+      "title": "Sut i rannu trafodion:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "Uchafswm o 5 rhaniad yn cael eu caniatáu",
+    "minSplitsRequired": "Isafswm o 2 raniad yn ofynnol",
+    "none": "Dim",
+    "notes": "Nodiadau (Dewisol)",
+    "notesPlaceholder": "e.e., Traul busnes, Defnydd personol",
+    "originalAmount": "Swm Gwreiddiol:",
+    "removeThisSplit": "Tynnu'r rhaniad hwn",
+    "selectCategory": "Dewiswch gategori...",
+    "splitsCount": "Rhanniadau ({current}/{max})",
+    "subcategory": "Is-gategori",
+    "title": "Rhannu Trafodiad",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "Addaswch symiau'r rhaniadau i gyfateb swm y trafodiad gwreiddiol.",
+      "amountsMustMatch": "Rhaid i symiau'r rhaniadau fod yn hafal i swm y trafodiad gwreiddiol",
+      "categoryRequired": "Rhaid i bob rhaniad gael categori",
+      "matchesOriginal": "✓ Yn cyfateb i'r gwreiddiol",
+      "overBy": "Dros o ${amount}",
+      "readyToSave": "Mae symiau'r rhaniadau yn cyfateb i'r trafodiad gwreiddiol. Yn barod i gadw!",
+      "total": "Cyfanswm:",
+      "underBy": "O dan o ${amount}"
     }
   },
   "splits": {
@@ -4494,96 +4494,96 @@
   },
   "subscriptionCard": {
     "badges": {
-      "aiVerified": "AI Verified",
-      "cancelled": "Cancelled",
-      "paused": "Paused",
-      "trial": "Trial"
+      "aiVerified": "Dilysiad AI",
+      "cancelled": "Wedi'i Ganslo",
+      "paused": "Wedi'i Atal",
+      "trial": "Treial"
     },
     "buttons": {
-      "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
+      "claimManage": "Hawlio a Rheoli",
+      "edit": "Golygu",
+      "transactions": "Trafodion"
     },
     "confidence": {
-      "high": "High",
-      "label": "Detection Confidence",
-      "low": "Low",
-      "medium": "Medium"
+      "high": "Uchel",
+      "label": "Hyder Canfod",
+      "low": "Isel",
+      "medium": "Canolig"
     },
     "details": {
-      "charges": "{count} charges",
-      "daysBefore": "{count} days before",
-      "firstCharge": "First Charge",
-      "lastCharge": "Last Charge",
-      "occurrences": "Occurrences",
-      "payment": "Payment",
-      "reminder": "Reminder"
+      "charges": "{count} taliad",
+      "daysBefore": "{count} diwrnod cyn",
+      "firstCharge": "Taliad Cyntaf",
+      "lastCharge": "Taliad Diwethaf",
+      "occurrences": "Achlysuron",
+      "payment": "Taliad",
+      "reminder": "Nodyn Atgoffa"
     },
     "interval": {
-      "annual": "Annual",
-      "bi-weekly": "Bi-weekly",
-      "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "annual": "Blynyddol",
+      "bi-weekly": "Bob Pythefnos",
+      "irregular": "Afreolaidd",
+      "monthly": "Misol",
+      "quarterly": "Chwarterol",
+      "weekly": "Wythnosol"
     },
-    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "lowConfidenceWarning": "Canfuwyd y tanysgrifiad hwn gyda hyder isel. Hawliwch ef i'w ddilysu a'i reoli â llaw.",
     "menu": {
-      "cancelSubscription": "Cancel Subscription",
-      "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
-      "notSubscription": "Not a Subscription",
-      "pause": "Pause",
-      "resume": "Resume",
-      "viewTransactions": "View Transactions"
+      "cancelSubscription": "Canslo Tanysgrifiad",
+      "claimManage": "Hawlio a Rheoli",
+      "delete": "Dileu",
+      "edit": "Golygu",
+      "notSubscription": "Ddim yn Danysgrifiad",
+      "pause": "Atal",
+      "resume": "Ailddechrau",
+      "viewTransactions": "Gweld Trafodion"
     },
     "source": {
-      "auto-detected": "Auto-detected",
-      "manual": "Manual",
-      "merged": "Tracked"
+      "auto-detected": "Hunan-ganfuwyd",
+      "manual": "Â Llaw",
+      "merged": "Olrheiniwyd"
     },
     "stats": {
-      "amount": "Amount",
-      "annualCost": "Annual Cost",
-      "frequency": "Frequency",
-      "nextCharge": "Next Charge",
-      "totalSpent": "Total Spent"
+      "amount": "Swm",
+      "annualCost": "Cost Flynyddol",
+      "frequency": "Amlder",
+      "nextCharge": "Taliad Nesaf",
+      "totalSpent": "Cyfanswm Gwariant"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {1 diwrnod ar ôl yn y treial} other {# diwrnod ar ôl yn y treial}}"
     },
     "reminderToggle": {
       "disableReminder": "Analluogi nodyn atgoffa",
       "enableReminder": "Galluogi nodyn atgoffa",
-      "off": "Diffodd"
+      "off": "I ffwrdd"
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "Dim tanysgrifiadau gweithredol i'w dadansoddi",
+    "loadingChart": "Yn llwytho siart...",
+    "moreCharges": "+{count} taliad arall",
+    "perMonth": "/mis",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "Cost fesul Categori",
+      "potentialSavings": "Arbedion Posib",
+      "upcomingCharges": "Taliadau Sydd i Ddod (Y 30 Diwrnod Nesaf)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {1 tanysgrifiad gweithredol} other {# tanysgrifiad gweithredol}}",
+      "annualCost": "Cost Flynyddol",
+      "monthlyCost": "Cost Misol",
+      "next30Days": "Y 30 Diwrnod Nesaf",
+      "projectedYearly": "Gwariant blynyddol rhagamcanol",
+      "upcomingCharges": "{count, plural, =1 {1 taliad sydd i ddod} other {# taliad sydd i ddod}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Tanysgrifiadau a allai fod wedi'u canslo",
+      "inactiveDescription": "{count, plural, =1 {Nid yw 1 tanysgrifiad wedi} other {Nid yw # tanysgrifiad wedi}} godi tâl yn ddiweddar. Gwiriwch eu bod wedi'u canslo.",
+      "trialsTitle": "Treialon yn dod i ben yn fuan",
+      "trialsDescription": "{count, plural, =1 {1 treial} other {# treial}} yn dod i ben yn y 7 diwrnod nesaf. Canslwch os nad ydych yn eu defnyddio.",
+      "highCostTitle": "Tanysgrifiadau cost uchel",
+      "highCostDescription": "Mae'r tanysgrifiadau hyn yn cynrychioli cyfran fawr o'ch gwariant. Ystyriwch a ydych yn cael gwerth llawn."
     }
   },
   "subscriptionModal": {
@@ -4749,83 +4749,83 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "Cyfrif"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} ar gael",
+      "label": "Opsiynau Uwch"
     },
     "amount": {
-      "label": "Amount",
+      "label": "Swm",
       "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "validationError": "Rhowch swm dilys"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "Ychwanegu Trafodiad",
+      "adding": "Yn ychwanegu...",
+      "cancel": "Canslo",
+      "update": "Diweddaru Trafodiad",
+      "updating": "Yn diweddaru..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "AI yn categoreiddio...",
+      "create": "Creu",
+      "createNew": "+ Creu Categori Newydd",
+      "label": "Categori",
+      "lastUsed": "Yn defnyddio'r diwethaf: {category}",
+      "namePlaceholder": "Enw categori...",
+      "selectPlaceholder": "Dewiswch gategori...",
+      "subcategoriesPlaceholder": "Is-gategorïau (dewisol, wedi'u gwahanu â choma)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Cau ffenestr",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "Categori \"{name}\" wedi'i greu!",
+      "failed": "Methwyd â chreu categori",
+      "nameRequired": "Mae angen enw categori"
     },
     "date": {
-      "label": "Date"
+      "label": "Dyddiad"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "Disgrifiad",
+      "placeholder": "e.e., Siopa bwydydd yn Sobeys"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "Ar ôl 3 cywiriad tebyg, bydd trafodion yn y dyfodol o'r masnachwr hwn yn cael eu categoreiddio'n awtomatig.",
+      "title": "Wedi Dysgu!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "Nodiadau",
+      "placeholder": "Ychwanegwch unrhyw nodiadau ychwanegol..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "Ychwanegu Derbynneb Newydd",
+      "deleteConfirm": "Ydych chi'n siŵr eich bod am ddileu'r dderbynneb hon?",
+      "deleteFailed": "Methwyd â dileu'r dderbynneb",
+      "deleteReceipt": "Dileu derbynneb",
+      "existing": "Derbynebau presennol ({count})",
+      "label": "Atodiadau Derbynneb",
+      "newFile": "Newydd: {filename}",
+      "remove": "Tynnu",
+      "viewFull": "Gweld derbynneb lawn"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "Is-gategori",
+      "none": "Dim",
+      "selectPlaceholder": "Dewiswch is-gategori..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "Tagiau (wedi'u gwahanu â choma)",
+      "placeholder": "e.e., bwydydd, wythnosol, hanfodol"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "Ychwanegu Trafodiad",
+      "edit": "Golygu Trafodiad"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "Traul",
+      "income": "Incwm",
+      "label": "Math"
     }
   },
   "transactionSearch": {
@@ -4872,19 +4872,19 @@
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "Atodi derbynneb",
+      "delete": "Dileu",
+      "edit": "Golygu",
+      "split": "Rhannu"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "Dim trafodion i'w dangos",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "Cyfrif",
+      "actions": "Gweithredoedd",
+      "amount": "Swm",
+      "category": "Categori",
+      "date": "Dyddiad",
+      "description": "Disgrifiad"
     }
   },
   "transactions": {
@@ -4987,40 +4987,40 @@
     "youWillLose": "You will lose:"
   },
   "trialBanner": {
-    "daysLeft": "{count, plural, =0 {Your trial ends today!} =1 {Only 1 day left in your trial} other {# days left in your trial}}",
-    "daysRemaining": "{count} days remaining in your free trial",
-    "dismiss": "Dismiss",
-    "expired": "Your trial has expired",
-    "expiredDescription": "App is in read-only mode. Upgrade to continue managing your finances.",
-    "upgrade": "Upgrade - {price}",
-    "upgradeNow": "Upgrade Now - {price}",
-    "upgradePrompt": "Upgrade now to keep full access to your budget data.",
-    "viewPricing": "View pricing"
+    "daysLeft": "{count, plural, =0 {Mae eich treial yn dod i ben heddiw!} =1 {Dim ond 1 diwrnod ar ôl yn eich treial} other {# diwrnod ar ôl yn eich treial}}",
+    "daysRemaining": "{count} diwrnod yn weddill yn eich treial am ddim",
+    "dismiss": "Diswyddo",
+    "expired": "Mae eich treial wedi dod i ben",
+    "expiredDescription": "Mae'r ap yn y modd darllen-yn-unig. Uwchraddiwch i barhau i reoli eich cyllid.",
+    "upgrade": "Uwchraddio - {price}",
+    "upgradeNow": "Uwchraddio Nawr - {price}",
+    "upgradePrompt": "Uwchraddiwch nawr i gadw mynediad llawn i'ch data cyllideb.",
+    "viewPricing": "Gweld prisiau"
   },
   "validationWarnings": {
-    "aiAnalysis": "AI Analysis:",
-    "amount": "Amount:",
-    "cancelImport": "Cancel Import",
-    "closeModal": "Close modal",
-    "confidence": "{percent}% confidence",
-    "continueWithAll": "Continue with All",
-    "criticalIssues": "Critical Issues",
-    "date": "Date:",
-    "description": "Description:",
-    "hideDetails": "Hide Transaction Details",
-    "ignoreAllContinue": "Ignore All & Continue",
-    "informational": "Informational",
-    "issuesDetected": "Issues Detected",
-    "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
-    "marked": "Marked",
-    "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
-    "remove": "Remove",
-    "removeAndContinue": "Remove {count} & Continue",
-    "suggestion": "Suggestion:",
-    "title": "Transaction Validation Results",
-    "transactionNumber": "Transaction #{number}",
-    "viewDetails": "View Transaction Details",
-    "warnings": "Warnings"
+    "aiAnalysis": "Dadansoddiad AI:",
+    "amount": "Swm:",
+    "cancelImport": "Canslo'r Mewnforiad",
+    "closeModal": "Cau ffenestr",
+    "confidence": "{percent}% hyder",
+    "continueWithAll": "Parhau gyda'r Cyfan",
+    "criticalIssues": "Materion Difrifol",
+    "date": "Dyddiad:",
+    "description": "Disgrifiad:",
+    "hideDetails": "Cuddio Manylion Trafodiad",
+    "ignoreAllContinue": "Anwybyddu Popeth a Pharhau",
+    "informational": "Gwybodaeth",
+    "issuesDetected": "Materion Canfuwyd",
+    "issuesFound": "Daethom o hyd i {count, plural, =1 {1 mater} other {# mater}} sydd angen eich sylw",
+    "marked": "Marciwyd",
+    "removalNote": "{count, plural, =1 {Bydd 1 trafodiad} other {Bydd # trafodiad}} yn cael eu tynnu o'r mewnforiad os byddwch yn parhau.",
+    "remove": "Tynnu",
+    "removeAndContinue": "Tynnu {count} a Pharhau",
+    "suggestion": "Awgrym:",
+    "title": "Canlyniadau Dilysu Trafodion",
+    "transactionNumber": "Trafodiad #{number}",
+    "viewDetails": "Gweld Manylion Trafodiad",
+    "warnings": "Rhybuddion"
   },
   "vaultSetup": {
     "aes256Description": "Your data is encrypted with AES-256 encryption",
@@ -5050,57 +5050,57 @@
     "zeroKnowledge": "Zero Knowledge"
   },
   "welcome": {
-    "subtitle": "Dechreuwch trwy ychwanegu eich tranzaciwn cyntaf neu fewngofnodi data o'ch banc",
+    "subtitle": "Dechreuwch drwy ychwanegu eich trafodiad cyntaf neu fewnforio data o'ch banc",
     "title": "Croeso i'r Ap Cyllideb"
   },
   "widget": {
     "accountBalances": {
       "description": "Balansau presennol ar draws eich holl gyfrifon",
-      "title": "Balansau Cyfrif"
+      "title": "Balansau Cyfrifon"
     },
     "budgetProgress": {
-      "description": "Olrhain sut rydych chi'n gwneud yn erbyn eich nodau cyllideb",
+      "description": "Olrhain sut rydych yn gwneud yn erbyn eich nodau cyllideb",
       "title": "Cynnydd Cyllideb"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "Olrhain gwariant ar gyfer digwyddiadau a phrosiectau",
+      "title": "Cyllidebau Digwyddiad"
     },
     "incomeVsExpenses": {
       "description": "Cymharu eich enillion a'ch gwariant dros amser",
-      "title": "Incwm yn erbyn Gwariant"
+      "title": "Incwm yn erbyn Treuliau"
     },
     "monthlyTrends": {
-      "description": "Gweledoli eich patrymau ariannol mis wrth fis",
-      "title": "Tuedd Misol"
+      "description": "Delweddu eich patrymau ariannol fis ar ôl mis",
+      "title": "Tueddiadau Misol"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "Golwg gyflym ar eich gwerth net cyfan",
+      "title": "Gwerth Net"
     },
     "recentTransactions": {
-      "description": "Golwg gyflym ar eich gweithgaredd ariannol diweddar",
-      "title": "Transacsiynau Diweddar"
+      "description": "Golwg gyflym ar eich gweithgaredd ariannol diweddaraf",
+      "title": "Trafodion Diweddar"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "Gweld faint allwch chi wario'n ddiogel fesul categori",
+      "title": "Diogel i'w Wario"
     },
     "spendingByCategory": {
       "description": "Gweld ble mae eich arian yn mynd gyda dadansoddiadau gweledol",
-      "title": "Gwariant yn ôl Categorïau"
+      "title": "Gwariant fesul Categori"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "Olrhain eich cyfresau ymgysylltiad a'ch cyflawniadau",
+      "title": "Cyfresau a Bathodynnau"
     },
     "upcomingBills": {
-      "description": "Peidiwch â cholli taliad gyda rhybuddion biliau",
-      "title": "Biliau yn Dod i Fyny"
+      "description": "Peidiwch byth â methu taliad gyda nodiadau atgoffa biliau",
+      "title": "Biliau Sydd i Ddod"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "Crynodeb o'ch patrymau gwariant wythnosol",
+      "title": "Crynodeb Wythnosol"
     }
   },
   "ynabMigrationWizard": {

@@ -48,18 +48,18 @@
     }
   },
   "accessibilityToggle": {
-    "featuresActive": "Accessibility features active",
-    "highContrast": "High Contrast",
-    "highContrastDescription": "Enhanced color contrast",
-    "largeTextMode": "Large Text Mode",
-    "largeTextModeDescription": "Bigger text & touch targets",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDescription": "Minimize animations",
-    "sizeLarge": "Large",
-    "sizeNormal": "Normal",
-    "sizeXLarge": "X-Large",
-    "textSize": "Text Size",
-    "title": "Accessibility"
+    "featuresActive": "Pieejamības funkcijas aktīvas",
+    "highContrast": "Augsts kontrasts",
+    "highContrastDescription": "Uzlabots krāsu kontrasts",
+    "largeTextMode": "Liela teksta režīms",
+    "largeTextModeDescription": "Lielāks teksts un skārienjutīgās zonas",
+    "reduceMotion": "Samazināt kustību",
+    "reduceMotionDescription": "Minimizēt animācijas",
+    "sizeLarge": "Liels",
+    "sizeNormal": "Normāls",
+    "sizeXLarge": "Ļoti liels",
+    "textSize": "Teksta izmērs",
+    "title": "Pieejamība"
   },
   "accessibleChart": {
     "chartTypeDescription": "Šī ir {chartType} diagramma ar {dataPoints} datu punktiem.",
@@ -261,52 +261,52 @@
     }
   },
   "amortizationChart": {
-    "balanceDescription": "Your balance decreases over time as you make payments",
-    "balanceOverTime": "Balance Over Time",
-    "breakdownDescription": "Early payments are mostly interest; later payments are mostly principal",
-    "cumulative": "Cumulative",
-    "cumulativeDescription": "Total principal paid vs total interest paid over the life of the loan",
-    "cumulativeInterest": "Cumulative Interest",
-    "cumulativePrincipal": "Cumulative Principal",
-    "description": "Visual breakdown of your loan over time",
-    "interest": "Interest",
-    "monthLabel": "Month {month}",
-    "paymentBreakdown": "Payment Breakdown",
-    "principal": "Principal",
-    "remainingBalance": "Remaining Balance",
-    "title": "Loan Amortization Visualization",
-    "totalInterest": "Total Interest",
-    "totalPayments": "Total Payments"
+    "balanceDescription": "Jūsu atlikums samazinās laika gaitā, veicot maksājumus",
+    "balanceOverTime": "Atlikums laika gaitā",
+    "breakdownDescription": "Agrīnie maksājumi lielākoties ir procenti; vēlākie maksājumi lielākoties ir pamatsumma",
+    "cumulative": "Kumulatīvs",
+    "cumulativeDescription": "Kopējā samaksātā pamatsumma pret kopējiem procentiem aizdevuma laikā",
+    "cumulativeInterest": "Kumulatīvie procenti",
+    "cumulativePrincipal": "Kumulatīvā pamatsumma",
+    "description": "Vizuāls jūsu aizdevuma sadalījums laika gaitā",
+    "interest": "Procenti",
+    "monthLabel": "Mēnesis {month}",
+    "paymentBreakdown": "Maksājuma sadalījums",
+    "principal": "Pamatsumma",
+    "remainingBalance": "Atlikušais atlikums",
+    "title": "Aizdevuma amortizācijas vizualizācija",
+    "totalInterest": "Kopējie procenti",
+    "totalPayments": "Kopējie maksājumi"
   },
   "amountFilter": {
-    "clear": "Clear",
-    "maxLabel": "Maximum amount",
-    "maxPlaceholder": "Max",
-    "maxThumb": "Maximum amount",
-    "minLabel": "Minimum amount",
+    "clear": "Notīrīt",
+    "maxLabel": "Maksimālā summa",
+    "maxPlaceholder": "Maks",
+    "maxThumb": "Maksimālā summa",
+    "minLabel": "Minimālā summa",
     "minPlaceholder": "Min",
-    "minThumb": "Minimum amount",
-    "title": "Amount Range"
+    "minThumb": "Minimālā summa",
+    "title": "Summas diapazons"
   },
   "apiErrors": {
-    "aiAnalysisUnavailable": "AI analysis unavailable, using pattern matching",
-    "aiApiError": "AI API error: {message}",
-    "autoDetectionUnavailable": "Auto-detection unavailable - using column order guess",
-    "emptyAiResponse": "Empty response from AI",
-    "failedToParseResponse": "Failed to parse AI response",
-    "fileMustBePdf": "File must be a PDF",
-    "fileTooLarge": "File too large. Maximum {maxSize}.",
-    "internalServerError": "Internal server error",
-    "lowConfidence": "Low confidence - please verify mappings",
-    "missingHeaders": "Missing or invalid headers",
-    "missingSampleData": "Missing or invalid sample data",
-    "noAiResponse": "No response from AI model",
-    "noApiKey": "AI API key not configured. AI extraction requires an active subscription.",
-    "noFileProvided": "No file provided",
-    "rateLimitExceeded": "Rate limit exceeded. Please try again later.",
-    "responseValidationIssues": "Response structure validation had issues",
-    "unknownError": "An unknown error occurred",
-    "verifyMappings": "Please verify all mappings before importing"
+    "aiAnalysisUnavailable": "MI analīze nav pieejama, tiek izmantota modeļu atpazīšana",
+    "aiApiError": "MI API kļūda: {message}",
+    "autoDetectionUnavailable": "Automātiskā noteikšana nav pieejama — tiek izmantots kolonnu secības minējums",
+    "emptyAiResponse": "Tukša atbilde no MI",
+    "failedToParseResponse": "Neizdevās parsēt MI atbildi",
+    "fileMustBePdf": "Failam jābūt PDF formātā",
+    "fileTooLarge": "Fails ir pārāk liels. Maksimums {maxSize}.",
+    "internalServerError": "Iekšēja servera kļūda",
+    "lowConfidence": "Zema ticamība — lūdzu, pārbaudiet kartējumus",
+    "missingHeaders": "Trūkstoši vai nederīgi galvenes",
+    "missingSampleData": "Trūkstoši vai nederīgi paraugu dati",
+    "noAiResponse": "Nav atbildes no MI modeļa",
+    "noApiKey": "MI API atslēga nav konfigurēta. MI izvilkšanai nepieciešams aktīvs abonements.",
+    "noFileProvided": "Fails nav norādīts",
+    "rateLimitExceeded": "Pieprasījumu limits pārsniegts. Lūdzu, mēģiniet vēlāk.",
+    "responseValidationIssues": "Atbildes struktūras validācijai bija problēmas",
+    "unknownError": "Radās nezināma kļūda",
+    "verifyMappings": "Lūdzu, pārbaudiet visus kartējumus pirms importēšanas"
   },
   "aria": {
     "accessibilitySettings": "Pieejamības iestatījumi",
@@ -467,25 +467,25 @@
     "backToHome": "Atpakaļ uz sākumu"
   },
   "bottomSheet": {
-    "close": "Close",
-    "dragToClose": "Drag down to close"
+    "close": "Aizvērt",
+    "dragToClose": "Velciet uz leju, lai aizvērtu"
   },
   "breadcrumb": {
-    "budgetAnalyzer": "Budget Analyzer",
-    "debtPayoffCalculator": "Debt Payoff Calculator",
-    "details": "Details",
-    "edit": "Edit",
-    "emergencyFund": "Emergency Fund",
-    "futurePlans": "Future Plans",
-    "home": "Home",
-    "merchantRules": "Merchant Rules",
-    "more": "More",
-    "netWorth": "Net Worth",
-    "new": "New",
+    "budgetAnalyzer": "Budžeta analizators",
+    "debtPayoffCalculator": "Parādu atmaksas kalkulators",
+    "details": "Detaļas",
+    "edit": "Rediģēt",
+    "emergencyFund": "Ārkārtas fonds",
+    "futurePlans": "Nākotnes plāni",
+    "home": "Sākums",
+    "merchantRules": "Tirgotāju noteikumi",
+    "more": "Vairāk",
+    "netWorth": "Neto vērtība",
+    "new": "Jauns",
     "ocr": "OCR",
-    "retirementPlanning": "Retirement Planning",
-    "savingsGoal": "Savings Goal",
-    "subscriptionCost": "Subscription Cost"
+    "retirementPlanning": "Pensijas plānošana",
+    "savingsGoal": "Uzkrājumu mērķis",
+    "subscriptionCost": "Abonementu izmaksas"
   },
   "budget": {
     "accounts": {
@@ -826,11 +826,11 @@
     "delete": "Dzēst",
     "export": "Eksportēt",
     "clearSelection": "Notīrīt atlasi",
-    "selectAll": "Atlasīt visu",
+    "selectAll": "Atlasīt visus",
     "selectCategory": "Izvēlēties kategoriju...",
     "noSubcategory": "Nav apakškategorijas",
     "applyTo": "Piemērot {count}",
-    "confirmDelete": "Dzēst {count, plural, =1 {1 transakciju} other {# transakcijas}}?",
+    "confirmDelete": "Dzēst {count, plural, =1 {1 darījumu} other {# darījumus}}?",
     "deleteWarning": "Šo darbību nevar atsaukt."
   },
   "calculators": {
@@ -956,7 +956,21 @@
       "cheapest": "Lētākais",
       "chartTitle": "Izmaksu sadalījums",
       "dailyCost": "Dienas izmaksas",
-      "tip": "Pārskatiet savus abonementus regulāri, lai pārliecinātos, ka tos visus izmantojat"
+      "tip": "Pārskatiet savus abonementus regulāri, lai pārliecinātos, ka tos visus izmantojat",
+      "essential": "Būtisks",
+      "remove": "Noņemt abonementu",
+      "showIncomePercent": "Rādīt procentu no ienākumiem",
+      "monthlyIncome": "Ikmēneša ienākumi",
+      "totalCost": "Kopējās abonementu izmaksas",
+      "daily": "Dienā",
+      "percentOfIncome": "% no ienākumiem",
+      "breakdown": "Būtiskie pret nebūtiskajiem",
+      "essentialCost": "Būtiskie",
+      "nonEssentialCost": "Nebūtiskie",
+      "potentialSavings": "Iespējamie gada ietaupījumi",
+      "perYear": "/gadā",
+      "potentialSavingsHelp": "Ja atceltu visus nebūtiskos abonementus",
+      "byCategory": "Pēc kategorijas"
     },
     "compoundInterest": {
       "title": "Salikto procentu kalkulators",
@@ -1095,7 +1109,44 @@
     },
     "retirement": {
       "title": "Pensijas plānotājs",
-      "description": "Plānojiet savu pensiju ar visaptverošu uzkrājumu un izņemšanas prognozi"
+      "description": "Plānojiet savu pensiju ar visaptverošu uzkrājumu un izņemšanas prognozi",
+      "subtitle": "Nodrošiniet savu finansiālo nākotni",
+      "inputTitle": "Jūsu dati",
+      "currentAge": "Pašreizējais vecums",
+      "retirementAge": "Pensionēšanās vecums",
+      "currentSavings": "Pašreizējie pensijas uzkrājumi",
+      "monthlyContribution": "Ikmēneša iemaksa",
+      "desiredIncome": "Vēlamie ikmēneša ienākumi (šodienas dolāros)",
+      "desiredIncomeHelp": "Cik daudz vēlaties tērēt mēnesī pensijā, šodienas dolāros",
+      "advancedTitle": "Papildu iestatījumi",
+      "preRetirementReturn": "Ienesīgums pirms pensijas (%)",
+      "preRetirementReturnHelp": "Gaidāmais gada ienesīgums uzkrāšanas fāzē (akcijas vid. ~7-10%)",
+      "postRetirementReturn": "Ienesīgums pēc pensijas (%)",
+      "postRetirementReturnHelp": "Gaidāmais gada ienesīgums izņemšanas fāzē (konservatīvs ~4-5%)",
+      "inflationRate": "Inflācijas līmenis (%)",
+      "lifeExpectancy": "Paredzamais dzīves ilgums",
+      "socialSecurity": "Sociālā nodrošinājuma / pensija (mēnesī)",
+      "socialSecurityAge": "Sociālā nodrošinājuma sākuma vecums",
+      "heroSufficient": "Jūsu uzkrājumi pietiks {years} gadiem pensijā",
+      "heroInsufficient": "Jūsu uzkrājumi var beigties {age} gadu vecumā",
+      "heroSufficientBadge": "Pareizā virzienā",
+      "heroInsufficientBadge": "Nepieciešama rīcība",
+      "heroNeutralBadge": "Tuvu",
+      "resultTitle": "Pensijas prognoze",
+      "balanceAtRetirement": "Atlikums pensionējoties",
+      "monthlyWithdrawal": "Ikmēneša izņemšana (pensionējoties)",
+      "yearsMoneyLasts": "Cik gadus pietiks naudai",
+      "shortfall": "Iztrūkums dzīves beigās",
+      "surplus": "Pārpalikums dzīves beigās",
+      "chartTitle": "Portfeļa atlikums laika gaitā",
+      "chartAccumulation": "Uzkrāšanas fāze",
+      "chartWithdrawal": "Izņemšanas fāze",
+      "formulaText": "Uzkrāšana: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | Izņemšana: Atlikums_n = Atlikums_(n-1)(1+r) - W",
+      "formulaExplanation": "Divfāžu simulācija: uzkrājumu audzēšana līdz pensijai, tad izņemšana ar inflācijai pielāgotiem maksājumiem",
+      "assumptionInflation": "Inflācijas līmenis",
+      "assumptionPreReturn": "Ienesīgums pirms pensijas",
+      "assumptionPostReturn": "Ienesīgums pēc pensijas",
+      "assumptionSS": "Sociālais nodrošinājums iekļauts no {age} gadu vecuma"
     },
     "loanTracker": {
       "title": "Aizdevumu izsekotājs",
@@ -1180,28 +1231,70 @@
     "monteCarlo": {
       "title": "Montekarlo simulators",
       "description": "Pārbaudiet savu finanšu plānu ar varbūtības modelēšanu",
-      "subtitle": "Palaidiet tūkstošiem tirgus simulāciju, lai redzētu, kā jūsu plāns iztur"
+      "subtitle": "Palaidiet tūkstošiem tirgus simulāciju, lai redzētu, kā jūsu plāns iztur",
+      "scenarioMode": "Scenārija režīms",
+      "modeAccumulation": "Uzkrāšana (akumulācija)",
+      "modeWithdrawal": "Tēriņi (izņemšana)",
+      "inputTitle": "Simulācijas parametri",
+      "initialBalance": "Sākuma portfeļa atlikums",
+      "monthlyContribution": "Ikmēneša iemaksa",
+      "monthlyWithdrawal": "Ikmēneša izņemšana",
+      "expectedReturn": "Gaidāmais gada ienesīgums (%)",
+      "expectedReturnHelp": "Akcijas: 7-10%, Obligācijas: 3-5%, Sabalansēts: 5-7%",
+      "volatility": "Gada svārstīgums / standartnovirze (%)",
+      "volatilityHelp": "S&P 500 vēsturiskais: ~15%. Augstāks = plašāks rezultātu diapazons.",
+      "inflationRate": "Inflācijas līmenis (%)",
+      "timeHorizon": "Laika horizonts (gadi)",
+      "simulations": "Simulāciju skaits",
+      "simulationsHelp": "Vairāk simulāciju = precīzāki procentīli, bet lēnāk",
+      "heroTitle": "Simulācijas rezultāti",
+      "successRateLabel": "Veiksmes rādītājs",
+      "successRateDescription": "Veiktas {total} simulācijas, {failures} izsīka nauda",
+      "badgeStrong": "Stabils plāns",
+      "badgeCaution": "Nepieciešama pārskatīšana",
+      "badgeRisk": "Augsts risks",
+      "resultsTitle": "Rezultātu sadalījums",
+      "medianFinal": "Mediānas gala atlikums",
+      "p90Final": "Labākais gadījums (90. procentīle)",
+      "p10Final": "Sliktākais gadījums (10. procentīle)",
+      "totalSimulations": "Veikto simulāciju skaits",
+      "chartTitle": "Procentīļu joslas laika gaitā",
+      "assumptionReturns": "Ienesīguma sadalījums",
+      "assumptionReturnsValue": "Normālsadalījums (Box-Muller)",
+      "assumptionVolatility": "Svārstīgums (standartnovirze)",
+      "assumptionInflation": "Inflācijas korekcija",
+      "assumptionInflationApplied": "Piemērota izņemšanām (kumulatīvi)",
+      "assumptionInflationNone": "Netiek piemērota uzkrāšanas režīmā",
+      "assumptionPRNG": "Nejaušo skaitļu ģenerators",
+      "assumptionPRNGValue": "Sēklu PRNG (Mulberry32) — deterministisks",
+      "formulaText": "Mēneša ienesīgums = Normal(μ/12, σ/√12); Atlikums_t = Atlikums_(t-1) × (1 + r_t) + C - W",
+      "formulaExplanation": "Katru mēnesi tiek iegūts nejaušs ienesīgums no normālsadalījuma. Iemaksas tiek pievienotas, inflācijai pielāgotas izņemšanas atņemtas. Atkārtots N simulācijās."
+    },
+    "transparency": {
+      "title": "Kā tas darbojas",
+      "assumptions": "Pieņēmumi",
+      "formula": "Formula"
     }
   },
   "calendarExport": {
-    "addToCalendar": "Add to Calendar",
+    "addToCalendar": "Pievienot kalendāram",
     "dialog": {
-      "cancel": "Cancel",
-      "description": "Add bill reminders to your calendar",
-      "deselectAll": "Deselect all",
-      "export": "Export {count} subscription(s)",
-      "exportMethod": "Export Method",
-      "exporting": "Exporting...",
-      "selectAll": "Select all",
-      "selectSubscriptions": "Select Subscriptions",
-      "title": "Export to Calendar"
+      "cancel": "Atcelt",
+      "description": "Pievienojiet rēķinu atgādinājumus savam kalendāram",
+      "deselectAll": "Noņemt atlasi visiem",
+      "export": "Eksportēt {count} abonementu(-s)",
+      "exportMethod": "Eksporta metode",
+      "exporting": "Eksportē...",
+      "selectAll": "Atlasīt visus",
+      "selectSubscriptions": "Izvēlēties abonementus",
+      "title": "Eksportēt uz kalendāru"
     },
-    "downloadAllICS": "Download All as ICS",
-    "downloadICS": "Download ICS File",
-    "exportToCalendar": "Export to Calendar",
+    "downloadAllICS": "Lejupielādēt visus kā ICS",
+    "downloadICS": "Lejupielādēt ICS failu",
+    "exportToCalendar": "Eksportēt uz kalendāru",
     "googleCalendar": "Google Calendar",
     "outlookCalendar": "Outlook Calendar",
-    "selectSubscriptions": "Select Subscriptions..."
+    "selectSubscriptions": "Izvēlēties abonementus..."
   },
   "categories": {
     "title": "Kategorijas",
@@ -1236,44 +1329,44 @@
   },
   "chatbot": {
     "buttons": {
-      "clearHistory": "Clear chat history",
-      "exportConversation": "Export conversation",
-      "send": "Send"
+      "clearHistory": "Dzēst tērzēšanas vēsturi",
+      "exportConversation": "Eksportēt sarunu",
+      "send": "Nosūtīt"
     },
     "disabled": {
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot",
-      "title": "Chatbot Disabled"
+      "description": "Aktivizējiet tērzēšanas robotu sadaļā Iestatījumi → Privātums → Budžeta tērzēšanas robots.",
+      "enableButton": "Aktivizēt tērzēšanas robotu",
+      "title": "Tērzēšanas robots atspējots"
     },
     "emptyState": {
-      "description": "Ask me anything about your finances. Here are some examples:",
+      "description": "Jautājiet man jebko par jūsu finansēm. Šeit ir daži piemēri:",
       "examples": {
-        "balance": "What's my total account balance?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "spending": "How much did I spend this month?"
+        "balance": "Kāds ir mans kopējais konta atlikums?",
+        "budget": "Vai es kādā kategorijā esmu pārsniedzis budžetu?",
+        "groceries": "Parādiet manus nesenākos pārtikas pirkumus",
+        "spending": "Cik es iztērēju šomēnes?"
       },
-      "title": "Start a Conversation"
+      "title": "Sāciet sarunu"
     },
     "header": {
-      "subtitle": "Ask me about your finances",
-      "title": "Budget Assistant"
+      "subtitle": "Jautājiet man par jūsu finansēm",
+      "title": "Budžeta palīgs"
     },
     "input": {
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
-      "placeholder": "Ask about your finances..."
+      "disclaimer": "Darbina OpenAI GPT-4. Jūsu dati tiek apstrādāti droši un netiek izmantoti apmācībai.",
+      "placeholder": "Jautājiet par savām finansēm..."
     },
     "messages": {
-      "dataAccessed": "Data accessed:",
-      "error": "Error",
-      "thinking": "Thinking..."
+      "dataAccessed": "Piekļuves dati:",
+      "error": "Kļūda",
+      "thinking": "Domā..."
     }
   },
   "chatbotHelp": {
     "tabs": {
       "spending": "Tēriņi",
       "budget": "Budžets",
-      "income": "Ieņēmumi",
+      "income": "Ienākumi",
       "trends": "Tendences",
       "actions": "Darbības"
     }
@@ -1281,13 +1374,13 @@
   "chatbotOptIn": {
     "title": "Aktivizēt budžeta tērzēšanas robotu?",
     "subtitle": "MI vadīts finanšu palīgs",
-    "closeDialog": "Aizvērt tērzēšanas robota piekrišanas dialogu",
+    "closeDialog": "Aizvērt tērzēšanas robota aktivizēšanas logu",
     "capabilities": {
-      "title": "Ko tērzēšanas robots spēj",
-      "answer": "Atbildēt uz jautājumiem par jūsu transakcijām, budžetiem un tēriņu modeļiem",
+      "title": "Ko tērzēšanas robots var darīt",
+      "answer": "Atbildēt uz jautājumiem par jūsu darījumiem, budžetiem un tēriņu modeļiem",
       "search": "Meklēt jūsu finanšu datos, izmantojot dabisko valodu",
-      "insights": "Sniegt ieskatus un ieteikumus, balstoties uz jūsu datiem",
-      "actions": "Pēc izvēles veikt darbības, piemēram, pievienot transakcijas vai izveidot budžetus"
+      "insights": "Sniegt ieskatus un ieteikumus, pamatojoties uz jūsu datiem",
+      "actions": "Pēc izvēles veikt darbības, piemēram, pievienot darījumus vai veidot budžetus"
     },
     "privacy": {
       "title": "Privātums un datu izmantošana",
@@ -1297,28 +1390,28 @@
       "disable": "Jūs varat jebkurā laikā deaktivizēt tērzēšanas robotu sadaļā Iestatījumi → Privātums"
     },
     "controls": {
-      "title": "Privātuma kontrole",
+      "title": "Privātuma kontroles",
       "dataAccess": {
         "label": "Ko tērzēšanas robots var darīt ar jūsu datiem?",
         "readOnly": {
           "title": "Tikai lasīšana (ieteicams)",
-          "description": "Tērzēšanas robots var skatīt jūsu datus un atbildēt uz jautājumiem, bet nevar pievienot, rediģēt vai dzēst transakcijas/budžetus"
+          "description": "Tērzēšanas robots var apskatīt jūsu datus un atbildēt uz jautājumiem, bet nevar pievienot, rediģēt vai dzēst darījumus/budžetus"
         },
         "fullAccess": {
           "title": "Pilna piekļuve",
-          "description": "Tērzēšanas robots var veikt darbības, piemēram, pievienot transakcijas, izveidot budžetus un veikt izmaiņas jūsu datos"
+          "description": "Tērzēšanas robots var veikt darbības, piemēram, pievienot darījumus, veidot budžetus un veikt izmaiņas datos"
         }
       },
       "retention": {
-        "label": "Cik ilgi saglabāt jūsu sarunas?",
+        "label": "Cik ilgi saglabāt sarunas?",
         "days7": "7 dienas (ieteicams)",
         "days30": "30 dienas",
-        "forever": "Glabāt vienmēr",
-        "note": "Sarunas tiek glabātas lokāli jūsu pārlūkā. Jūs varat tās dzēst jebkurā laikā sadaļā Iestatījumi → Privātums."
+        "forever": "Glabāt mūžīgi",
+        "note": "Sarunas tiek glabātas lokāli jūsu pārlūkā. Varat tās dzēst jebkurā laikā sadaļā Iestatījumi → Privātums."
       }
     },
     "gdpr": {
-      "notice": "<strong>Jūsu tiesības:</strong> Aktivizējot tērzēšanas robotu, jūs piekrītat savu finanšu datu apstrādei, izmantojot OpenAI API. Jūs varat jebkurā laikā atsaukt piekrišanu, deaktivizējot tērzēšanas robotu sadaļā Iestatījumi → Privātums. Jūsu dati tiek apstrādāti saskaņā ar mūsu Privātuma politiku un GDPR prasībām. Jums ir tiesības piekļūt, dzēst un eksportēt savu sarunu vēsturi jebkurā laikā."
+      "notice": "<strong>Jūsu tiesības:</strong> Aktivizējot tērzēšanas robotu, jūs piekrītat savu finanšu datu apstrādei caur OpenAI API. Jūs varat jebkurā laikā atsaukt piekrišanu, deaktivizējot tērzēšanas robotu sadaļā Iestatījumi → Privātums. Jūsu dati tiek apstrādāti saskaņā ar mūsu Privātuma politiku un VDAR prasībām. Jums ir tiesības piekļūt, dzēst un eksportēt savu sarunu vēsturi jebkurā laikā."
     },
     "buttons": {
       "decline": "Nē, paldies",
@@ -1363,15 +1456,15 @@
     "placeholder": "Ievadiet komandu vai meklējiet...",
     "noResults": "Rezultāti nav atrasti.",
     "groups": {
-      "tracking": "Izsekošana un analīze",
-      "wealth": "Labklājība un plānošana",
+      "tracking": "Uzskaite un analīze",
+      "wealth": "Bagātība un plānošana",
       "tools": "Rīki un iestatījumi",
       "quickActions": "Ātrās darbības",
       "appearance": "Izskats"
     },
     "commands": {
       "dashboard": "Vadības panelis",
-      "transactions": "Transakcijas",
+      "transactions": "Darījumi",
       "scanReceipt": "Skenēt čeku",
       "budgets": "Budžeti",
       "reports": "Pārskati",
@@ -1383,7 +1476,7 @@
       "importCsv": "Importēt CSV",
       "exportData": "Eksportēt datus",
       "settings": "Iestatījumi",
-      "addTransaction": "Pievienot transakciju",
+      "addTransaction": "Pievienot darījumu",
       "newBudget": "Jauns budžets",
       "lightTheme": "Gaišā tēma",
       "darkTheme": "Tumšā tēma",
@@ -1514,32 +1607,32 @@
     "button": "Pielāgot",
     "ariaLabel": "Pielāgot vadības paneļa izkārtojumu",
     "title": "Pielāgot vadības paneli",
-    "description": "Rādīt vai slēpt vadības paneļa logrīkus. Velciet logrīkus vadības panelī, lai mainītu to secību.",
+    "description": "Rādiet vai slēpiet vadības paneļa logrīkus. Velciet logrīkus uz vadības paneļa, lai pārkārtotu.",
     "widgetsVisible": "{visible} no {total} logrīkiem redzami",
     "widgetVisibility": "Logrīku redzamība",
     "alwaysVisible": "Vienmēr redzams",
     "toggleVisibility": "Pārslēgt {name} redzamību",
     "reorderTitle": "Pārkārtot logrīkus",
-    "reorderDescription": "Lai mainītu logrīku secību, velciet un nometiet logrīkus tieši vadības panelī. Izmantojiet peli vai skārienekrānu, lai satvertu vilkšanas turi (⋮⋮) uz katras logrīka kartes.",
+    "reorderDescription": "Lai mainītu logrīku secību, velciet un nometiet logrīkus tieši uz vadības paneļa. Izmantojiet peli vai pieskārienu, lai satvertu vilkšanas rokturi (⋮⋮) uz katra logrīka kartes.",
     "resetButton": "Atjaunot noklusējuma iestatījumus"
   },
   "debtAnalysis": {
     "title": "Parādu analīze",
-    "subtitle": "Visaptverošs pārskats par jūsu aizdevumiem un saistībām",
+    "subtitle": "Visaptverošs jūsu aizdevumu un saistību pārskats",
     "viewAllLoans": "Skatīt visus aizdevumus",
     "empty": {
       "title": "Nav parādu analīzei",
-      "description": "Jums nav aktīvu aizdevumu. Pievienojiet aizdevumu, lai redzētu parādu analītiku.",
-      "addFirstLoan": "Pievienot pirmo aizdevumu"
+      "description": "Jums nav aktīvu aizdevumu. Pievienojiet aizdevumu, lai redzētu parādu analīzi.",
+      "addFirstLoan": "Pievienojiet savu pirmo aizdevumu"
     },
     "cards": {
       "totalDebt": {
         "title": "Kopējais parāds",
-        "subtitle": "Pa {count} aktīviem aizdevumiem"
+        "subtitle": "No {count} aktīvajiem aizdevumiem"
       },
       "monthlyPayment": {
-        "title": "Mēneša maksājums",
-        "subtitle": "Kopējās mēneša saistības"
+        "title": "Ikmēneša maksājums",
+        "subtitle": "Kopējās ikmēneša saistības"
       },
       "avgRate": {
         "title": "Vid. procentu likme",
@@ -1552,7 +1645,7 @@
     },
     "charts": {
       "byType": {
-        "title": "Parāds pa veidiem",
+        "title": "Parāds pēc veida",
         "description": "Parādu sadalījums pa aizdevumu veidiem"
       },
       "projection": {
@@ -1563,11 +1656,11 @@
     },
     "comparison": {
       "title": "Aizdevumu salīdzinājums",
-      "description": "Jūsu aktīvo aizdevumu salīdzinājums blakus",
+      "description": "Jūsu aktīvo aizdevumu blakus salīdzinājums",
       "headers": {
         "loan": "Aizdevums",
-        "balance": "Bilance",
-        "monthlyPayment": "Mēneša maksājums",
+        "balance": "Atlikums",
+        "monthlyPayment": "Ikmēneša maksājums",
         "interestRate": "Procentu likme",
         "percentOfTotal": "% no kopējā parāda"
       },
@@ -1716,7 +1809,7 @@
     "cancel": "Atcelt",
     "processing": "Apstrādā...",
     "finalConfirmation": "Galīgais apstiprinājums:",
-    "typeToConfirm": "Ievadiet {text}, lai apstiprinātu šo darbību.",
+    "typeToConfirm": "Ierakstiet {text}, lai apstiprinātu šo darbību.",
     "confirmAction": "Apstiprināt darbību"
   },
   "draggableWidget": {
@@ -1729,57 +1822,57 @@
   },
   "emptyStates": {
     "transactions": {
-      "heading": "Vēl nav transakciju",
-      "description": "Sāciet izsekot savus tēriņus, pievienojot pirmo transakciju. Varat pievienot manuāli vai importēt no CSV faila.",
-      "primaryCta": "Pievienot transakciju",
+      "heading": "Vēl nav darījumu",
+      "description": "Sāciet izsekot savus tēriņus, pievienojot pirmo darījumu. Varat pievienot manuāli vai importēt no CSV faila.",
+      "primaryCta": "Pievienot darījumu",
       "secondaryCta": "Importēt CSV"
     },
     "budgets": {
-      "heading": "Nav izveidoti budžeti",
-      "description": "Izveidojiet budžetus, lai izsekotu tēriņus dažādās kategorijās un sasniegtu savus finanšu mērķus.",
-      "primaryCta": "Izveidot pirmo budžetu"
+      "heading": "Nav izveidotu budžetu",
+      "description": "Izveidojiet budžetus, lai sekotu tēriņiem dažādās kategorijās un sasniegtu savus finanšu mērķus.",
+      "primaryCta": "Izveidojiet savu pirmo budžetu"
     },
     "loans": {
-      "heading": "Nav izsekoti aizdevumi",
+      "heading": "Nav izsekotu aizdevumu",
       "description": "Izsekojiet savus aizdevumus, hipotēkas un parādus, lai vizualizētu atmaksas progresu un plānotu maksājumus.",
-      "primaryCta": "Pievienot pirmo aizdevumu"
+      "primaryCta": "Pievienojiet savu pirmo aizdevumu"
     },
     "investments": {
-      "heading": "Nav izsekoti ieguldījumi",
-      "description": "Izsekojiet savus ieguldījumu kontus un turējumus, lai uzraudzītu portfeļa veiktspēju un neto vērtību.",
+      "heading": "Nav izsekotu ieguldījumu",
+      "description": "Izsekojiet savus ieguldījumu kontus un pozīcijas, lai uzraudzītu portfeļa darbību un neto vērtību.",
       "primaryCta": "Pievienot ieguldījumu kontu"
     },
     "futurePlans": {
       "heading": "Nav nākotnes plānu",
-      "description": "Uzstādiet finanšu mērķus, piemēram, mājas iegādi, uzkrājumus izglītībai vai atvaļinājuma plānošanu.",
+      "description": "Iestatiet finanšu mērķus, piemēram, mājas iegādi, izglītības uzkrāšanu vai atvaļinājuma plānošanu.",
       "primaryCta": "Izveidot mērķi"
     },
     "retirement": {
       "heading": "Nav pensijas plānu",
-      "description": "Plānojiet pensiju, izsekojot kontus, novērtējot vajadzības un vizualizējot savu pensionēšanās laika grafiku.",
+      "description": "Plānojiet pensiju, izsekojot kontus, novērtējot vajadzības un vizualizējot pensionēšanās laika grafiku.",
       "primaryCta": "Sākt plānošanu"
     },
     "reports": {
-      "heading": "Nav datu pārskatam",
-      "description": "Pievienojiet transakcijas un budžetus, lai ģenerētu noderīgus pārskatus par jūsu tēriņu modeļiem un tendencēm.",
-      "primaryCta": "Pievienot transakcijas",
+      "heading": "Nav datu pārskatiem",
+      "description": "Pievienojiet darījumus un budžetus, lai ģenerētu informatīvus pārskatus par tēriņu modeļiem un tendencēm.",
+      "primaryCta": "Pievienot darījumus",
       "secondaryCta": "Importēt CSV"
     },
     "categories": {
       "heading": "Nav pielāgotu kategoriju",
-      "description": "Izveidojiet pielāgotas kategorijas, lai organizētu transakcijas ārpus noklusējuma kategorijām.",
+      "description": "Izveidojiet pielāgotas kategorijas, lai organizētu darījumus ārpus noklusējuma kategorijām.",
       "primaryCta": "Pievienot kategoriju"
     },
     "dashboard": {
       "heading": "Laipni lūdzam jūsu budžeta lietotnē!",
-      "description": "Sāciet, importējot bankas transakcijas vai pievienojot kontus manuāli, lai redzētu savu finanšu pārskatu.",
+      "description": "Sāciet, importējot bankas darījumus vai pievienojot kontus manuāli, lai redzētu savu finanšu pārskatu.",
       "primaryCta": "Importēt CSV",
-      "secondaryCta": "Pievienot transakciju"
+      "secondaryCta": "Pievienot darījumu"
     }
   },
   "errorRecovery": {
-    "title": "Importēšana neizdevās",
-    "subtitle": "Neuztraucieties! Mēs varam palīdzēt to novērst.",
+    "title": "Imports neizdevās",
+    "subtitle": "Neuztraucieties! Mēs varam palīdzēt to labot.",
     "closeModal": "Aizvērt logu",
     "summary": {
       "title": "Kļūdu kopsavilkums",
@@ -1788,22 +1881,22 @@
     "aiAnalysis": "MI analīze:",
     "recovery": {
       "canRecover": "Labas ziņas! Mēs atradām {count} {count, plural, =1 {veidu} other {veidus}}, kā atgūties no šīs kļūdas.",
-      "cannotRecover": "Atgūšana nav iespējama. Jums būs jāeksportē fails no jauna no savas bankas vai jāizmēģina cits formāts.",
+      "cannotRecover": "Atgūšana nav iespējama. Jums būs jāeksportē fails no bankas vēlreiz vai jāizmēģina cits formāts.",
       "optionsTitle": "Atgūšanas opcijas"
     },
     "suggestions": {
       "autoFix": "AUTO-LABOJUMS",
       "confidence": "{percent}% ticamība",
-      "technicalDetails": "Tehniskās detaļas",
+      "technicalDetails": "Tehniskā detaļas",
       "fixing": "Labo...",
       "autoFixButton": "Auto-labojums",
       "learnMore": "Uzzināt vairāk"
     },
     "technical": {
-      "title": "Detalizēta tehniskā informācija",
+      "title": "Papildu tehniskā informācija",
       "errorCategory": "Kļūdas kategorija:",
       "severity": "Nopietnība:",
-      "canRecover": "Var atgūties:",
+      "canRecover": "Var atgūt:",
       "suggestions": "Ieteikumi:",
       "yes": "Jā",
       "no": "Nē"
@@ -1855,22 +1948,22 @@
   },
   "exportDialog": {
     "title": "Eksportēt datus",
-    "subtitle": "Lejupielādēt savus budžeta datus",
+    "subtitle": "Lejupielādēt jūsu budžeta datus",
     "dataSummary": {
       "title": "Datu kopsavilkums",
-      "transactions": "Transakcijas",
+      "transactions": "Darījumi",
       "accounts": "Konti",
-      "estimatedSize": "Aptuvens izmērs"
+      "estimatedSize": "Apl. izmērs"
     },
     "format": {
       "label": "Eksporta formāts",
       "budget": {
         "label": ".budget fails",
-        "description": "Pilna dublējumkopija ar visiem datiem"
+        "description": "Pilna dublējumkopija, ieskaitot visus datus"
       },
       "csv": {
         "label": "CSV fails",
-        "description": "Izklājlapu saderīgs formāts"
+        "description": "Izklājlapām saderīgs formāts"
       },
       "json": {
         "label": "JSON fails",
@@ -1884,15 +1977,15 @@
       },
       "encrypt": {
         "label": "Šifrēt ar paroli",
-        "description": "Aizsargājiet savus datus ar AES-256 šifrēšanu"
+        "description": "Aizsargāt datus ar AES-256 šifrēšanu"
       }
     },
     "password": {
       "label": "Parole",
-      "placeholder": "Ievadiet paroli (min. 8 rakstzīmes)",
+      "placeholder": "Ievadiet paroli (min 8 rakstzīmes)",
       "confirm": "Apstiprināt paroli",
       "confirmPlaceholder": "Apstipriniet paroli",
-      "hint": "Paroles norāde (neobligāta)",
+      "hint": "Paroles norāde (neobligāti)",
       "hintPlaceholder": "Norāde, kas palīdzēs atcerēties",
       "hintNote": "Šī norāde tiks saglabāta nešifrēta failā",
       "mismatch": "Paroles nesakrīt",
@@ -1901,10 +1994,10 @@
     },
     "exporting": {
       "title": "Eksportē...",
-      "pleaseWait": "Lūdzu uzgaidiet, tas var aizņemt brīdi"
+      "pleaseWait": "Lūdzu, uzgaidiet, tas var aizņemt brīdi"
     },
     "complete": {
-      "success": "Eksportēšana pabeigta! Pārbaudiet lejupielāžu mapi.",
+      "success": "Eksports pabeigts! Pārbaudiet lejupielāžu mapi.",
       "download": "Jūsu fails ir gatavs lejupielādei"
     },
     "buttons": {
@@ -1915,7 +2008,7 @@
     }
   },
   "filters": {
-    "search": "Meklēt transakcijas...",
+    "search": "Meklēt darījumus...",
     "dateRange": "Datumu diapazons",
     "category": "Kategorija",
     "account": "Konts",
@@ -1923,13 +2016,13 @@
     "allCategories": "Visas kategorijas",
     "allAccounts": "Visi konti",
     "allTypes": "Visi veidi",
-    "income": "Ieņēmumi",
+    "income": "Ienākums",
     "expense": "Izdevums",
     "clearFilters": "Notīrīt filtrus",
     "apply": "Piemērot filtrus"
   },
   "footer": {
-    "tagline": "Augstākās klases budžeta vadība ar vienreizēju jaunināšanu.",
+    "tagline": "Premium budžeta plānošana ar vienreizēju jauninājumu.",
     "links": {
       "login": "Pieslēgties",
       "signup": "Sākt izmēģinājumu",
@@ -1979,18 +2072,18 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "title": "Finanšu veselība",
-    "ariaLabel": "Finanšu veselības rādītājs: {score} no 100. {interpretation}",
-    "grade": "Pakāpe: {grade}",
+    "title": "Finansiālā veselība",
+    "ariaLabel": "Finansiālās veselības rādītājs: {score} no 100. {interpretation}",
+    "grade": "Novērtējums: {grade}",
     "missingFactors": "{count, plural, =1 {1 trūkstošs faktors} other {# trūkstoši faktori}}",
     "emptyState": {
-      "line1": "Pievienojiet transakcijas, lai redzētu savu",
-      "line2": "Finanšu veselības rādītāju"
+      "line1": "Pievienojiet darījumus, lai redzētu jūsu",
+      "line2": "Finansiālās veselības rādītāju"
     },
     "history": {
       "title": "Rādītāja vēsture",
       "monthsOfData": "{count} {count, plural, =1 {mēnesis} other {mēneši}} datu",
-      "emptyTitle": "Jūsu rādītāja vēsture parādīsies, kad uzkrāsies dati",
+      "emptyTitle": "Jūsu rādītāja vēsture parādīsies šeit, datu uzkrājoties",
       "emptySubtitle": "Pārbaudiet nākammēnes!",
       "legendScore": "Rādītājs",
       "legendTrend": "Tendence",
@@ -2161,7 +2254,7 @@
     },
     "conflicts": {
       "title": "Atrasti konflikti",
-      "existing": "{count} esoši",
+      "existing": "{count} esošie",
       "handleLabel": "Apstrādāt konfliktus",
       "skip": {
         "label": "Izlaist esošos",
@@ -2178,12 +2271,12 @@
     },
     "importing": {
       "title": "Importē jūsu datus...",
-      "pleaseWait": "Lūdzu uzgaidiet, tas var aizņemt brīdi"
+      "pleaseWait": "Lūdzu, uzgaidiet, tas var aizņemt brīdi"
     },
     "complete": {
-      "success": "Importēšana pabeigta!",
+      "success": "Imports pabeigts!",
       "itemsImported": "{count} vienumi veiksmīgi importēti",
-      "withIssues": "Importēšana pabeigta ar problēmām"
+      "withIssues": "Imports pabeigts ar problēmām"
     },
     "buttons": {
       "cancel": "Atcelt",
@@ -2194,53 +2287,53 @@
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
+      "cancel": "Atcelt",
+      "create": "Izveidot kontu",
+      "saving": "Saglabā...",
+      "update": "Atjaunināt kontu"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Aizvērt logu",
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "Neizdevās saglabāt kontu"
     },
     "fields": {
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "Konta numurs (neobligāti)",
+        "placeholder": "piem., Pēdējie 4 cipari: 1234"
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "Finanšu iestāde (neobligāti)",
+        "placeholder": "piem., Questrade, Wealthsimple, TD Direct"
       },
       "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "label": "Konta nosaukums",
+        "placeholder": "piem., Mans RRSP, TFSA krājumi, Uzņēmuma akcijas"
       },
       "type": {
         "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+          "Company shares": "Darbinieku akciju iegādes programma vai akciju opcijas",
+          "Non-registered": "Apliekamais ieguldījumu konts",
+          "RRSP": "Reģistrēts pensiju krājkonts — nodokļu atliktā izaugsme",
+          "TFSA": "Beznodevkļu krājkonts — beznodevkļu izaugsme un izņemšana"
         },
-        "label": "Account Type"
+        "label": "Konta veids"
       }
     },
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "Pievienot ieguldījumu kontu",
+      "edit": "Rediģēt ieguldījumu kontu"
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "Lūdzu, ievadiet konta nosaukumu"
     }
   },
   "investmentCharts": {
-    "emptyState": "Nav turējumu vizualizēšanai. Pievienojiet turējumus, lai redzētu diagrammas.",
+    "emptyState": "Nav pozīciju vizualizēšanai. Pievienojiet pozīcijas, lai redzētu diagrammas.",
     "titles": {
-      "portfolioAllocation": "Portfeļa sadalījums pa turējumiem",
-      "accountTypeAllocation": "Sadalījums pa kontu veidiem",
-      "gainLoss": "Peļņa/zaudējumi pa turējumiem",
-      "performanceSummary": "Veiktspējas kopsavilkums"
+      "portfolioAllocation": "Portfeļa sadalījums pēc pozīcijām",
+      "accountTypeAllocation": "Sadalījums pēc konta veida",
+      "gainLoss": "Peļņa/zaudējumi pa pozīcijām",
+      "performanceSummary": "Darbības kopsavilkums"
     },
     "tooltip": {
       "percentOfPortfolio": "{percent}% no portfeļa",
@@ -2256,7 +2349,7 @@
       "costBasis": "Izmaksu bāze",
       "currentValue": "Pašreizējā vērtība",
       "gainLoss": "Peļņa/zaudējumi",
-      "percentReturn": "% atdeve",
+      "percentReturn": "% ienesīgums",
       "allocation": "Sadalījums",
       "total": "Kopā"
     }
@@ -2359,7 +2452,7 @@
     "hero": {
       "badge": "Privātums vispirms • Tikai lokāli • Bez izsekošanas",
       "headline": "Pārvaldiet savu naudu, nepārdodot savus datus.",
-      "subhead": "Izklājlapas iespējas. Lietotnes vienkāršība. Izbaudiet finanšu skaidrību ar vienīgo budžeta lietotni, kas garantē, ka jūsu dati nekad neatstāj jūsu ierīci.",
+      "subhead": "Izklājlapas spēks. Lietotnes vienkāršība. Izbaudiet finanšu skaidrību ar vienīgo budžeta lietotni, kas garantē, ka jūsu dati nekad nepamet jūsu ierīci.",
       "primaryCta": {
         "label": "Sākt lokālo protokolu (bezmaksas)",
         "href": "/budget-app/auth/signup"
@@ -2376,8 +2469,8 @@
         "description": "Dati paliek jūsu pārlūka IndexedDB. Mēs burtiski nevaram tos redzēt."
       },
       "1": {
-        "title": "Izklājlapas iespējas",
-        "description": "Vairumrediģēšana, šķērsanalīze un analīze kā profesionālim bez formulu galvassāpēm."
+        "title": "Izklājlapas spēks",
+        "description": "Masveida rediģēšana, šķērsgriezumu analīze un profesionāla analīze bez formulu galvassāpēm."
       },
       "2": {
         "title": "Bezsaistes ātrums",
@@ -2385,12 +2478,12 @@
       },
       "3": {
         "title": "Manuālie rituāli",
-        "description": "Importa vednis padara piektdienas naudas pārskatu par apmierinošu ieradumu."
+        "description": "Importēšanas vednis padara piektdienas naudas pārskatu par apmierinošu ieradumu."
       }
     },
     "outcomes": {
       "0": {
-        "title": "Beidz cīnīties ar agregatoriem",
+        "title": "Beidziet cīnīties ar agregātoriem",
         "description": "Vairs nav bojātu savienojumu vai atkārtotas autorizācijas cilpu. Jūs kontrolējat datu ievadi."
       },
       "1": {
@@ -2398,33 +2491,33 @@
         "description": "Mēs nepārdodam jūsu datus, jo mums to nav. Punkts."
       },
       "2": {
-        "title": "Nākotnei droša plānošana",
-        "description": "Modelējiet pensiju, aizdevumu atmaksu un uzkrājumu mērķus vienā integrētā skatā."
+        "title": "Nākotnē droša plānošana",
+        "description": "Modelējiet pensiju, aizdevumu atmaksas un uzkrājumu mērķus vienā integrētā skatā."
       },
       "3": {
-        "title": "Abonementu iznīcinātājs",
-        "description": "Pamaniet regulārus izdevumus, ko citas lietotnes palaiž garām."
+        "title": "Abonementu slepkava",
+        "description": "Atklājiet regulārus naudas aizplūšanas, ko citas lietotnes palaiž garām."
       }
     },
     "features": {
       "0": {
         "title": "Lokālais vadības panelis",
-        "description": "Neto vērtība, naudas plūsma un kategoriju sadalījums. Tūlītējas ielādes.",
+        "description": "Neto vērtība, naudas plūsma un kategoriju sadalījums. Tūlītēji ielādes laiki.",
         "href": "/budget-app"
       },
       "1": {
-        "title": "Importa vednis",
+        "title": "Importēšanas vednis",
         "description": "Gudrs CSV kartētājs BMO, Home Trust un pielāgojamiem formātiem.",
         "href": "/budget-app/import"
       },
       "2": {
         "title": "Čeku OCR",
-        "description": "Skenējiet čekus lokāli ar Tesseract.js. Bez mākoņu apstrādes.",
+        "description": "Skenējiet čekus lokāli ar Tesseract.js. Bez mākoņapstrādes.",
         "href": "/budget-app/ocr"
       },
       "3": {
         "title": "Kategoriju budžeti",
-        "description": "Nulles bāzes vai pārneses budžeta plānošana ar detalizētu kategoriju kontroli.",
+        "description": "Nulles bāzes vai pārnesuma budžeta plānošana ar detalizētu kategoriju kontroli.",
         "href": "/budget-app/budgets"
       },
       "4": {
@@ -2445,18 +2538,18 @@
       },
       "1": {
         "title": "Pārskatīt",
-        "description": "Ātra kategorizēšana ar gudriem noteikumiem un vairuma darbībām."
+        "description": "Ātra kategorizēšana ar gudriem noteikumiem un masveida darbībām."
       },
       "2": {
         "title": "Plānot",
-        "description": "Piešķiriet katram dolāram darbu un prognozējiet savu nākotnes neto vērtību."
+        "description": "Piešķiriet katram dolāram uzdevumu un prognozējiet savu nākotnes neto vērtību."
       }
     },
     "pricing": {
-      "eyebrow": "Godīga cena",
-      "title": "Lokāli — bezmaksas. Sinhronizācija — Pro.",
+      "eyebrow": "Godīga cenu politika",
+      "title": "Lokālais ir bezmaksas. Sinhronizācija ir Pro.",
       "description": "Sāciet ar jaudīgo lokālo protokolu. Jauniniet vēlāk, ja nepieciešama vairāku ierīču sinhronizācija.",
-      "priceLabel": "Bezmaksas uz visiem laikiem",
+      "priceLabel": "Bezmaksas uz mūžu",
       "cta": {
         "label": "Sākt lokālo protokolu",
         "href": "/budget-app/auth/signup"
@@ -2470,7 +2563,7 @@
     "faq": {
       "0": {
         "q": "Vai mani dati tiešām ir privāti?",
-        "a": "Jā. Lokālajā protokolā dati nekad neatstāj jūsu ierīci. Tie atrodas IndexedDB jūsu pārlūkā."
+        "a": "Jā. Lokālajā protokolā dati nekad nepamet jūsu ierīci. Tie atrodas IndexedDB jūsu pārlūkā."
       },
       "1": {
         "q": "Kā dublēt savus datus?",
@@ -2478,57 +2571,57 @@
       },
       "2": {
         "q": "Kas ir 'Sync' Pro?",
-        "a": "Drīzumā: neobligāts abonements, lai sinhronizētu šifrētus datus starp ierīcēm, izmantojot Supabase."
+        "a": "Drīzumā: izvēles abonements šifrētu datu sinhronizācijai starp ierīcēm caur Supabase."
       },
       "3": {
-        "q": "Vai jūs savienojaties ar bankām?",
-        "a": "Nē. Mēs uzskatām, ka manuālais imports ir drošāks, uzticamāks un veido labāku finanšu apziņu."
+        "q": "Vai jūs pieslēdzaties bankām?",
+        "a": "Nē. Mēs uzskatām, ka manuāla importēšana ir drošāka, uzticamāka un veido labāku finanšu apziņu."
       }
     },
     "security": {
       "title": "Privātums vispirms pēc dizaina",
-      "description": "Budžeta lietotne glabā jūsu datus lokāli (gatava darbam bezsaistē) un sniedz jums kontroli pār MI funkcijām, eksportēšanu un dzēšanu.",
+      "description": "Budžeta lietotne glabā jūsu datus lokāli (bezsaistē gatava) un sniedz kontroles MI funkcijām, eksportēšanai un dzēšanai.",
       "buttons": {
         "privacy": "Privātums un iestatījumi",
         "offline": "Bezsaistes atbalsts"
       },
       "cards": {
         "localStorage": {
-          "title": "Lokālā glabātuve",
-          "description": "Jūsu budžeta dati tiek glabāti pārlūkā (IndexedDB), tāpēc lietotne ir ātra un darbojas bezsaistē."
+          "title": "Lokālā glabāšana",
+          "description": "Jūsu budžeta dati tiek glabāti jūsu pārlūkā (IndexedDB), tāpēc lietotne ir ātra un lietojama bezsaistē."
         },
         "encryption": {
           "title": "Šifrēšanas atbalsts",
-          "description": "Lietotnē ir šifrēšanas slānis jutīgu budžeta ierakstu aizsardzībai, kad tas ir aktivizēts."
+          "description": "Lietotne ietver šifrēšanas slāni sensitīvu budžeta ierakstu aizsardzībai, kad tas ir aktivizēts."
         },
         "aiControls": {
-          "title": "MI funkciju kontrole",
-          "description": "Pārslēdziet MI vadītas funkcijas (piemēram, anomāliju noteikšanu) un pārvaldiet tērzēšanas robota piekļuvi iestatījumos."
+          "title": "MI funkciju kontroles",
+          "description": "Pārslēdziet MI funkcijas (piemēram, anomāliju noteikšanu) un pārvaldiet tērzēšanas robota piekļuvi iestatījumos."
         },
         "exportDelete": {
           "title": "Eksportēt un dzēst",
-          "description": "Eksportējiet savus datus un privātuma iestatījumus vai dzēsiet lokālos datus tieši no lietotnes."
+          "description": "Eksportējiet savus datus un privātuma iestatījumus, vai dzēsiet lokālos datus tieši no lietotnes."
         }
       }
     },
     "comparison": {
       "headers": {
         "feature": "Funkcija",
-        "local": "BudgetPro lokālais",
+        "local": "BudgetPro Local",
         "sync": "BudgetPro Sync (Pro)",
-        "cloud": "Tipiska mākoņu lietotne"
+        "cloud": "Tipiska mākoņlietotne"
       },
       "dataPrivacy": {
         "feature": "Datu privātums",
         "local": "100% privāts (lokāls)",
-        "sync": "Pilna šifrēšana",
+        "sync": "Šifrēts no gala līdz galam",
         "cloud": "Redzams darbiniekiem"
       },
       "cost": {
-        "feature": "Cena",
-        "local": "Bezmaksas uz visiem laikiem",
-        "sync": "Vienreizēja jaunināšana",
-        "cloud": "100+ $/gadā abonements"
+        "feature": "Izmaksas",
+        "local": "Bezmaksas uz mūžu",
+        "sync": "Vienreizējs jauninājums",
+        "cloud": "100+$/gadā abonements"
       },
       "offlineMode": {
         "feature": "Bezsaistes režīms"
@@ -2536,7 +2629,7 @@
       "bankConnections": {
         "feature": "Bankas savienojumi",
         "local": "Tikai CSV / manuāli",
-        "sync": "Izvēles (šifrēts)",
+        "sync": "Neobligāts (šifrēts)",
         "cloud": "Obligāta agregācija"
       },
       "storageLocation": {
@@ -2547,20 +2640,20 @@
       }
     },
     "socialProof": {
-      "title": "Premium apdare, iebūvēta",
-      "description": "Detaļas, kas padara budžeta plānošanu noturīgu: ievads, saīsnes, mobilā navigācija un bezsaistes veiktspēja.",
+      "title": "Premium kvalitāte, iebūvēta",
+      "description": "Detaļas, kas padara budžeta plānošanu pievilcīgu: ievads, saīsnes, mobilā navigācija un bezsaistes gatavība.",
       "features": {
         "onboarding": {
-          "title": "Ievada apskats",
-          "description": "Vadīts apskats palīdz jauniem lietotājiem ātri sasniegt vērtību."
+          "title": "Ievada apskate",
+          "description": "Vadīta apskate palīdz jauniem lietotājiem ātri sasniegt vērtību."
         },
         "shortcuts": {
           "title": "Tastatūras saīsnes",
-          "description": "Darbs ātri ar meklēšanas un darbību saīsnēm, kas iebūvētas saskarnē."
+          "description": "Strādājiet ātri ar meklēšanas un darbību saīsnēm, kas iebūvētas saskarnē."
         },
         "mobileUx": {
-          "title": "Mobilais dizains",
-          "description": "Apakšējā navigācija un responsīvi izkārtojumi, kas izskatās kā vietēji."
+          "title": "Mobilais UX vispirms",
+          "description": "Apakšējā navigācija un responsīvi izkārtojumi, kas jūtas dabiski."
         },
         "pwaInstall": {
           "title": "PWA instalēšana",
@@ -2573,8 +2666,8 @@
       "productName": "Lokālais protokols",
       "productDescription": "Pilnīga budžeta plānošanas pieredze, kas darbojas pilnībā jūsu ierīcē.",
       "whyChoose": "Kāpēc izvēlēties lokālo protokolu?",
-      "whyChooseDescription": "Skatiet, kā mēs salīdzinām ar mākoņu gigantiem.",
-      "features": "Ietver neierobežotas transakcijas, kontus, budžetus un pilnas lokālās dublēšanas iespējas."
+      "whyChooseDescription": "Skatiet, kā mēs salīdzināmies ar mākoņu gigantiem.",
+      "features": "Ietver neierobežotus darījumus, kontus, budžetus un pilnas lokālās dublēšanas iespējas."
     },
     "heroSection": {
       "cta": {
@@ -2583,12 +2676,12 @@
       },
       "badges": {
         "noSubscriptions": "Bez abonementiem",
-        "offlineReady": "Gatavs bezsaistei",
+        "offlineReady": "Bezsaistē gatavs",
         "seniorsMode": "Senioru režīms"
       },
       "preview": {
-        "livePreview": "Tiešraides priekšskatījums",
-        "recentTransactions": "Nesenās transakcijas",
+        "livePreview": "Tiešais priekšskatījums",
+        "recentTransactions": "Nesenie darījumi",
         "categoryBudgets": "Kategoriju budžeti",
         "recurring": "Regulārie"
       },
@@ -2599,7 +2692,7 @@
       },
       "demo": {
         "netWorth": "Neto vērtība",
-        "income": "Ieņēmumi",
+        "income": "Ienākumi",
         "expenses": "Izdevumi",
         "groceries": "Pārtika",
         "dining": "Ēdināšana",
@@ -2607,13 +2700,13 @@
         "groceryStore": "Pārtikas veikals",
         "foodToday": "Ēdiens • Šodien",
         "salary": "Alga",
-        "incomeYesterday": "Ieņēmumi • Vakar",
+        "incomeYesterday": "Ienākumi • Vakar",
         "netflix": "Netflix",
         "subscriptionOct24": "Abonements • 24. okt.",
         "spotify": "Spotify",
         "monthly": "Ikmēneša",
-        "cloudStorage": "Mākoņu krātuve",
-        "yearly": "Ikgadējs"
+        "cloudStorage": "Mākoņkrātuve",
+        "yearly": "Gadā"
       }
     },
     "featuresDeepDive": {
@@ -2625,10 +2718,10 @@
     },
     "accessibility": {
       "title": "Pieejams pēc noklusējuma",
-      "description": "Senioru režīms nodrošina vienkāršotu navigāciju un lielākus skārienekrāna mērķus. Tastatūras saīsnes, fokusa stāvokļi un skaidrs kontrasts palīdz visiem strādāt ātrāk.",
+      "description": "Senioru režīms nodrošina vienkāršotu navigāciju un lielākus skārienjutīgos mērķus. Tastatūras saīsnes, fokusa stāvokļi un skaidrs kontrasts palīdz ikvienam strādāt ātrāk.",
       "badges": {
         "seniorsMode": "Senioru režīms",
-        "largeTouchTargets": "Lieli skārienmērķi",
+        "largeTouchTargets": "Lieli skārienekrāna mērķi",
         "keyboardFirst": "Tastatūra vispirms"
       },
       "buttons": {
@@ -2638,15 +2731,15 @@
     },
     "faqSection": {
       "title": "BUJ",
-      "description": "Vienkāršas atbildes uz biežāk uzdotajiem jautājumiem par izmēģinājumiem, cenām un piekļuvi."
+      "description": "Vienkāršas atbildes uz biežiem jautājumiem par izmēģinājumiem, cenām un piekļuvi."
     },
     "outcomesSection": {
-      "title": "Veidots reālai dzīvei, nevis izklājlapām",
-      "description": "Lielākā daļa budžeta lietotņu liek jums veikt darbu. BudgetPro ir izstrādāts, lai samazinātu berzi, vienlaikus saglabājot kontroli."
+      "title": "Veidots reālajai dzīvei, nevis izklājlapām",
+      "description": "Lielākā daļa budžeta lietotņu liek jums veikt darbu. BudgetPro ir izstrādāts, lai samazinātu berzi, vienlaikus saglabājot jūsu kontroli."
     },
     "howItWorksSection": {
       "title": "Kā tas darbojas",
-      "description": "Darba plūsma, kas ātri noved pie skaidrības, nepiesaistot jūs sarežģītai sistēmai."
+      "description": "Darba plūsma, kas ātri nodrošina skaidrību, neieslogojot jūs sarežģītā sistēmā."
     },
     "nav": {
       "tagline": "Premium budžeta plānošana"
@@ -2666,12 +2759,12 @@
     "preview": {
       "overview": "Pārskats",
       "welcomeBack": "Laipni lūdzam atpakaļ, Alex",
-      "live": "Tiešraide",
-      "totalBalance": "Kopējā bilance",
+      "live": "Tiešsaistē",
+      "totalBalance": "Kopējais atlikums",
       "expenses": "Izdevumi",
       "savingsGoal": "Uzkrājumu mērķis",
-      "vsLastMonth": "salīdzinot ar pagājušo mēnesi",
-      "recentTransactions": "Nesenās transakcijas",
+      "vsLastMonth": "pret pagājušo mēnesi",
+      "recentTransactions": "Nesenie darījumi",
       "tx0Name": "Pārtikas veikals",
       "tx0Date": "Šodien, 14:30",
       "tx0Amount": "-124,50 €",
@@ -2679,7 +2772,7 @@
       "tx1Date": "Vakar, 9:00",
       "tx1Amount": "+4 250,00 €",
       "tx2Name": "Netflix abonements",
-      "tx2Date": "24. okt. 2025",
+      "tx2Date": "2025. gada 24. okt.",
       "tx2Amount": "-15,99 €",
       "balanceAmount": "24 500,00 €",
       "balanceChange": "+12,5%",
@@ -2691,7 +2784,7 @@
     "footer": {
       "product": "Produkts",
       "resources": "Resursi",
-      "legal": "Juridiski",
+      "legal": "Juridiskā informācija",
       "features": "Funkcijas",
       "pricing": "Cenas",
       "download": "Lejupielādēt",
@@ -2701,8 +2794,8 @@
       "community": "Kopiena",
       "helpCenter": "Palīdzības centrs",
       "privacyPolicy": "Privātuma politika",
-      "termsOfService": "Pakalpojumu noteikumi",
-      "cookiePolicy": "Sīkdatņu politika",
+      "termsOfService": "Lietošanas noteikumi",
+      "cookiePolicy": "Sīkfailu politika",
       "allRightsReserved": "Visas tiesības aizsargātas."
     }
   },
@@ -2925,18 +3018,18 @@
   },
   "mobileNav": {
     "accounts": "Konti",
-    "activity": "Darbība",
+    "activity": "Aktivitāte",
     "budget": "Budžets",
     "home": "Sākums",
     "more": "Vairāk"
   },
   "morePage": {
     "groups": {
-      "toolsSettings": "Tools & Settings",
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning"
+      "toolsSettings": "Rīki un iestatījumi",
+      "trackingAnalysis": "Uzskaite un analīze",
+      "wealthPlanning": "Bagātība un plānošana"
     },
-    "title": "More"
+    "title": "Vairāk"
   },
   "nav": {
     "about": "Par",
@@ -2961,10 +3054,10 @@
     },
     "pushPermission": {
       "title": "Push paziņojumi",
-      "description": "Saņemt paziņojumus arī tad, kad lietotne ir aizvērta",
+      "description": "Saņemiet paziņojumus pat tad, kad lietotne ir aizvērta",
       "enable": "Aktivizēt push paziņojumus",
       "notSupported": "Nav atbalstīts šajā pārlūkā",
-      "deniedHint": "Aktivizēt pārlūka iestatījumos",
+      "deniedHint": "Aktivizējiet pārlūka iestatījumos",
       "states": {
         "granted": "Aktivizēts",
         "denied": "Bloķēts",
@@ -2977,20 +3070,20 @@
       "description": "Izvēlieties, kādus paziņojumus vēlaties saņemt",
       "billReminders": {
         "title": "Rēķinu atgādinājumi",
-        "description": "Saņemiet paziņojumu pirms abonementu termiņa"
+        "description": "Saņemiet paziņojumus pirms abonementu termiņiem"
       },
       "budgetAlerts": {
         "title": "Budžeta brīdinājumi",
-        "description": "Brīdinājumi, tuvojoties budžeta limitiem"
+        "description": "Brīdinājumi, tuvojoties budžeta limitam"
       },
       "goalMilestones": {
         "title": "Mērķu atskaites punkti",
-        "description": "Atzīmējiet uzkrājumu atskaites punktu sasniegšanu"
+        "description": "Sviniet, kad sasniedzat uzkrājumu mērķus"
       }
     },
     "quietHours": {
-      "title": "Klusās stundas",
-      "description": "Nav paziņojumu šajā laika logā",
+      "title": "Klusuma stundas",
+      "description": "Bez paziņojumiem šajā laika periodā",
       "start": "Sākuma laiks",
       "end": "Beigu laiks"
     },
@@ -3006,14 +3099,14 @@
     },
     "infoBox": {
       "storedLocally": "Paziņojumu iestatījumi tiek glabāti lokāli jūsu ierīcē.",
-      "pushExplanation": "Push paziņojumiem nepieciešama pārlūka atļauja un tie darbojas arī tad, kad lietotne ir aizvērta.",
-      "emailExplanation": "E-pasta paziņojumi tiek sūtīti, izmantojot mūsu drošo e-pasta servisu, un tiem nepieciešama derīga e-pasta adrese."
+      "pushExplanation": "Push paziņojumiem nepieciešama pārlūka atļauja, un tie darbojas pat tad, kad lietotne ir aizvērta.",
+      "emailExplanation": "E-pasta paziņojumi tiek nosūtīti caur mūsu drošo e-pasta servisu un prasa derīgu e-pasta adresi."
     },
     "emailNotifications": {
       "title": "E-pasta paziņojumi",
-      "description": "Saņemt paziņojumus pa e-pastu",
+      "description": "Saņemiet paziņojumus pa e-pastu",
       "emailAddress": "E-pasta adrese",
-      "invalidEmail": "Lūdzu ievadiet derīgu e-pasta adresi",
+      "invalidEmail": "Lūdzu, ievadiet derīgu e-pasta adresi",
       "types": "E-pasta paziņojumu veidi",
       "testEmail": "Testa e-pasts",
       "testEmailDescription": "Nosūtiet testa e-pastu, lai pārbaudītu iestatījumus",
@@ -3023,33 +3116,33 @@
     }
   },
   "notifications": {
-    "clearAll": "Clear all",
-    "dismiss": "Dismiss",
-    "empty": "No notifications",
-    "emptyAll": "You're all caught up!",
-    "emptySnoozed": "No snoozed notifications",
-    "emptyUnread": "No unread notifications",
-    "markAllRead": "Mark all read",
-    "snooze": "Snooze",
+    "clearAll": "Dzēst visus",
+    "dismiss": "Noraidīt",
+    "empty": "Nav paziņojumu",
+    "emptyAll": "Jūs esat visu izlasījis!",
+    "emptySnoozed": "Nav atliktu paziņojumu",
+    "emptyUnread": "Nav nelasītu paziņojumu",
+    "markAllRead": "Atzīmēt visus kā lasītus",
+    "snooze": "Atlikt",
     "snoozeOptions": {
-      "1day": "1 day",
-      "1hour": "1 hour",
-      "1week": "1 week",
-      "3days": "3 days",
-      "3hours": "3 hours"
+      "1day": "1 dienu",
+      "1hour": "1 stundu",
+      "1week": "1 nedēļu",
+      "3days": "3 dienas",
+      "3hours": "3 stundas"
     },
-    "snoozedUntil": "Snoozed for {time}",
+    "snoozedUntil": "Atlikts uz {time}",
     "tabs": {
-      "all": "All",
-      "snoozed": "Snoozed",
-      "unread": "Unread"
+      "all": "Visi",
+      "snoozed": "Atlikti",
+      "unread": "Nelasīti"
     },
-    "title": "Notifications",
+    "title": "Paziņojumi",
     "types": {
-      "bill_reminder": "Bill Reminder",
-      "budget_alert": "Budget Alert",
-      "goal_milestone": "Goal Milestone",
-      "system": "System"
+      "bill_reminder": "Rēķina atgādinājums",
+      "budget_alert": "Budžeta brīdinājums",
+      "goal_milestone": "Mērķa atskaites punkts",
+      "system": "Sistēma"
     }
   },
   "ocr": {
@@ -3109,42 +3202,42 @@
     "tryAgain": "Try Again"
   },
   "onboarding": {
-    "skipTour": "Izlaist apskatu",
-    "stepCounter": "{current}. solis no {total}",
-    "dontShowAgain": "Nerādīt šo apskatu vēlreiz",
+    "skipTour": "Izlaist apskati",
+    "stepCounter": "Solis {current} no {total}",
+    "dontShowAgain": "Nerādīt šo apskati vēlreiz",
     "quickTip": "💡 Ātrs padoms",
     "navigation": {
       "previous": "Iepriekšējais",
       "next": "Nākamais",
-      "getStarted": "Sākt darbu",
-      "startTour": "Sākt apskatu"
+      "getStarted": "Sākt",
+      "startTour": "Sākt apskati"
     },
     "steps": {
       "welcome": {
         "title": "Laipni lūdzam finanšu skaidrībā",
-        "description": "Iepazīstiet gudrāku veidu, kā pārvaldīt savu labklājību. Ļaujiet mums īsi iepazīstināt ar jūsu jauno finanšu vadības centru."
+        "description": "Izbaudiet gudrāku veidu, kā pārvaldīt savu bagātību. Veiksim īsu ceļojumu pa jūsu jauno finanšu komandcentru."
       },
       "import": {
         "title": "Vienkārša datu importēšana",
-        "description": "Vienmērīgi ienesiet savu transakciju vēsturi. Mēs atbalstām lielākās bankas, ieskaitot BMO un Home Trust, ar inteliģentu automātisko noteikšanu."
+        "description": "Nemanāmi importējiet savu darījumu vēsturi. Mēs atbalstām lielākās bankas, tostarp BMO un Home Trust, ar inteliģentu automātisko noteikšanu."
       },
       "categorize": {
         "title": "Gudra kategorizēšana",
-        "description": "Mūsu MI mācās no jūsu paradumiem. Kategorizējiet vienu reizi, un mēs nākotnē automātiski apstrādāsim līdzīgas transakcijas."
+        "description": "Mūsu MI mācās no jūsu ieradumiem. Kategorizējiet vienreiz, un mēs turpmāk automātiski apstrādāsim līdzīgus darījumus."
       },
       "budgets": {
         "title": "Precīza budžeta plānošana",
-        "description": "Definējiet savas finanšu robežas. Iestatiet pielāgotus limitus un saņemiet reāllaika brīdinājumus, lai vienmēr paliktu uz pareizā ceļa."
+        "description": "Nosakiet savas finanšu robežas. Iestatiet pielāgotus limitus un saņemiet reāllaika brīdinājumus, lai vienmēr iekļautos budžetā."
       },
       "reports": {
         "title": "Dziļa izpratne",
-        "description": "Atveriet savu datu spēku. Vizualizējiet tendences, izsekojiet neto vērtību un pieņemiet lēmumus, balstoties uz visaptverošu analītiku."
+        "description": "Atbrīvojiet savu datu potenciālu. Vizualizējiet tendences, sekojiet neto vērtībai un pieņemiet lēmumus, pamatojoties uz visaptverošu analīzi."
       }
     },
     "tips": {
       "import": "Vienkārši velciet un nometiet savu CSV failu. Mēs automātiski apstrādāsim formatēšanu.",
-      "categorize": "Atlasiet vairākas transakcijas, lai piemērotu kategorijas vairumā — efektivitāte ir atslēga.",
-      "budgets": "Iestatiet mēneša limitus, lai vizualizētu savu tēriņu ātrumu reāllaikā."
+      "categorize": "Atlasiet vairākus darījumus, lai piemērotu kategorijas masveidā — efektivitāte ir svarīga.",
+      "budgets": "Iestatiet ikmēneša limitus, lai reāllaikā vizualizētu savu tēriņu ātrumu."
     }
   },
   "onboardingPage": {
@@ -3224,20 +3317,20 @@
     }
   },
   "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "Ar šādu tempu jūs pārsniegsiet budžetu par {amount} šomēnes.",
+    "percentOfBudget": "{percent}% no budžeta",
     "progress": {
-      "label": "Current progress"
+      "label": "Pašreizējais progress"
     },
     "stats": {
-      "budget": "Budget",
-      "daysLeft": "Days Left",
-      "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "budget": "Budžets",
+      "daysLeft": "Atlikušās dienas",
+      "projectedTotal": "Prognozētā kopsumma",
+      "spentSoFar": "Iztērēts līdz šim"
     },
     "tip": {
-      "label": "Tip:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "label": "Padoms:",
+      "reduceSpending": "Samaziniet ikdienas tēriņus līdz {amount}, lai iekļautos budžetā."
     }
   },
   "pairingDialog": {
@@ -3597,15 +3690,15 @@
     "stats": {
       "nextMonth": "Nākamais mēnesis",
       "avgConfidence": "Vid. ticamība",
-      "threeMonthAvg": "3 mēnešu vidējais"
+      "threeMonthAvg": "3 mēn. vidējais"
     },
     "legend": {
       "confidenceInterval": "Ticamības intervāls",
-      "actual": "Faktiskais",
-      "predicted": "Prognozēts"
+      "actual": "Faktiskie",
+      "predicted": "Prognozētie"
     },
     "table": {
-      "title": "Mēneša prognozes",
+      "title": "Ikmēneša prognozes",
       "month": "Mēnesis",
       "predicted": "Prognozēts",
       "range": "Diapazons",
@@ -3706,12 +3799,12 @@
     "deleteButton": "Dzēst profilu"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "Velciet, lai atsvaidzinātu",
+    "release": "Atlaidiet, lai atsvaidzinātu"
   },
   "pwaInstall": {
     "title": "Instalēt budžeta lietotni",
-    "description": "Pievienojiet sākuma ekrānam ātrai piekļuvei un lietošanai bezsaistē",
+    "description": "Pievienojiet sākuma ekrānam ātrai piekļuvei un bezsaistes lietošanai",
     "close": "Aizvērt instalēšanas uzvedni",
     "buttons": {
       "install": "Instalēt",
@@ -3719,14 +3812,14 @@
     },
     "features": {
       "offline": "Darbojas bezsaistē",
-      "fastSecure": "Ātrs un drošs",
+      "fastSecure": "Ātri un droši",
       "noAppStore": "Nav nepieciešams lietotņu veikals"
     },
     "iosTitle": "Instalēt budžeta lietotni",
     "iosTap": "Pieskarieties",
-    "iosThen": "pēc tam",
+    "iosThen": "tad",
     "iosAddToHome": "\"Pievienot sākuma ekrānam\"",
-    "iosForFullExperience": "lai iegūtu pilnu lietotnes pieredzi ar ātrāku ielādi."
+    "iosForFullExperience": "pilnai lietotnes pieredzei ar ātrāku ielādi."
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3757,7 +3850,7 @@
   },
   "quickCategorize": {
     "title": "Ātrā kategorizēšana",
-    "description": "Izvēlieties kategoriju {count, plural, =1 {šai transakcijai} other {# transakcijām}}",
+    "description": "Izvēlieties kategoriju {count, plural, =1 {šim darījumam} other {# darījumiem}}",
     "searchPlaceholder": "Meklēt kategorijas...",
     "noResults": "Kategorijas nav atrastas",
     "general": "Vispārīgi",
@@ -3779,16 +3872,16 @@
       "thisYear": "Šis gads"
     },
     "categories": "Kategorijas",
-    "all": "Visi",
-    "moreCategories": "+{count} vairāk",
+    "all": "Visas",
+    "moreCategories": "+{count} vēl",
     "clearFilters": "Notīrīt filtrus"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "balance": "Kopējais atlikums",
+    "expenses": "Izdevumi",
+    "income": "Ienākumi",
+    "savingsRate": "Uzkrājumu likme",
+    "savingsRateDescription": "Šomēnes ietaupīto ienākumu procentuālā daļa"
   },
   "receiptThumbnail": {
     "close": "Close",
@@ -3804,26 +3897,26 @@
     "view": "Skatīt"
   },
   "receiptUpload": {
-    "cameraInputLabel": "Kameras uztveršanas ievade",
+    "cameraInputLabel": "Kameras uztvērēja ievade",
     "removeFile": "Noņemt failu",
     "receiptPreview": "Čeka priekšskatījums",
     "errors": {
       "tooLarge": "Fails ir pārāk liels. Maksimālais izmērs ir {size}MB",
-      "invalidType": "Nederīgs faila tips. Atļauti tikai JPG, PNG un PDF faili",
-      "rejected": "Fails tika noraidīts. Lūdzu mēģiniet vēlreiz",
+      "invalidType": "Nederīgs faila veids. Atļauti tikai JPG, PNG un PDF faili",
+      "rejected": "Fails tika noraidīts. Lūdzu, mēģiniet vēlreiz",
       "ocrImagesOnly": "OCR tiek atbalstīts tikai attēlu failiem (JPG, PNG)",
-      "couldNotExtract": "Neizdevās izvilkt datus no čeka. Lūdzu ievadiet manuāli.",
-      "extractionFailed": "Neizdevās izvilkt datus. Lūdzu mēģiniet vēlreiz vai ievadiet manuāli."
+      "couldNotExtract": "Neizdevās izvilkt datus no čeka. Lūdzu, ievadiet manuāli.",
+      "extractionFailed": "Neizdevās izvilkt datus. Lūdzu, mēģiniet vēlreiz vai ievadiet manuāli."
     },
     "dropzone": {
       "dropHere": "Nometiet čeku šeit",
       "dragDrop": "Velciet un nometiet čeku šeit",
       "browseFiles": "vai <link>pārlūkojiet failus</link>",
-      "supportedFormats": "Atbalsta JPG, PNG, PDF • Maks. {size}MB"
+      "supportedFormats": "Atbalsta JPG, PNG, PDF • Maks {size}MB"
     },
     "camera": {
       "takePhoto": "Uzņemt foto ar kameru",
-      "useDevice": "Izmantojiet ierīces kameru čeka uzņemšanai"
+      "useDevice": "Izmantojiet ierīces kameru, lai uzņemtu čeku"
     },
     "pdf": {
       "title": "PDF čeks",
@@ -3844,26 +3937,26 @@
     }
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
-    "estimatedMonthly": "Estimated Monthly",
+    "confidence": "{percent}% ticamība",
+    "estimatedMonthly": "Aplēstie mēneša izdevumi",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "Ik divas nedēļas",
+      "monthly": "Ikmēneša",
+      "quarterly": "Reizi ceturksnī",
+      "weekly": "Iknedēļas"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "next": "Next: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "inDays": "{count, plural, =0 {(šodien)} =1 {(pēc 1 dienas)} other {(pēc # dienām)}}",
+    "next": "Nākamais: {date}",
+    "occurrences": "{count, plural, =1 {Konstatēts 1 gadījums} other {Konstatēti # gadījumi}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "mēnesī",
+      "quarter": "ceturksnī",
+      "twoWeeks": "2 nedēļās",
+      "week": "nedēļā"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
+    "showingPatterns": "{count, plural, =1 {Rāda 1 regulāro darījumu modeli} other {Rāda # regulāro darījumu modeļus}}",
+    "subtitle": "Atklātie abonementi un rēķini",
+    "title": "Regulārie darījumi"
   },
   "reports": {
     "title": "Pārskati",
@@ -3950,21 +4043,21 @@
   },
   "shortcutsModal": {
     "title": "Tastatūras saīsnes",
-    "subtitle": "Produktivitātes padomi pieredzējušiem lietotājiem",
-    "close": "Aizvērt saīšņu palīdzību",
+    "subtitle": "Pieredzējušu lietotāju produktivitātes padomi",
+    "close": "Aizvērt saīsņu palīdzību",
     "proTip": {
       "title": "💡 Profesionāla padoms",
-      "description": "Tastatūras saīsnes darbojas jebkurā lapā, izņemot, kad rakstāt formās. Nospiediet {key} jebkurā laikā, lai redzētu šo palīdzību."
+      "description": "Tastatūras saīsnes darbojas jebkurā lapā, izņemot rakstīšanu formās. Nospiediet {key} jebkurā laikā, lai redzētu šo palīdzību."
     }
   },
   "sidebar": {
     "appTitle": "Budžeta lietotne",
-    "appSubtitle": "Premium finanšu pārvaldība",
+    "appSubtitle": "Premium finanses",
     "search": "Meklēt...",
     "shortcuts": "Saīsnes",
     "navigation": {
       "dashboard": "Vadības panelis",
-      "transactions": "Transakcijas",
+      "transactions": "Darījumi",
       "accounts": "Konti",
       "scanReceipt": "Skenēt čeku",
       "categories": "Kategorijas",
@@ -3980,7 +4073,7 @@
       "netWorth": "Neto vērtība",
       "properties": "Īpašumi",
       "events": "Pasākumi",
-      "scenarios": "Kas-ja",
+      "scenarios": "Ja-tad",
       "import": "Importēt CSV",
       "settings": "Iestatījumi"
     },
@@ -4151,7 +4244,7 @@
   },
   "spendingTrendChart": {
     "title": "Tēriņu tendences un prognoze",
-    "notEnoughData": "Nepietiekami dati tendenču ģenerēšanai. Pievienojiet vismaz 2 mēnešu transakcijas.",
+    "notEnoughData": "Nepietiek datu tendenču ģenerēšanai. Pievienojiet vismaz 2 mēnešu darījumus.",
     "stats": {
       "avgMonthly": "Vid. mēnesī",
       "lastMonth": "Pagājušais mēnesis",
@@ -4161,10 +4254,10 @@
       "actualSpending": "Faktiskie tēriņi",
       "projected": "Prognozēts"
     },
-    "forecastFooter": "Prognoze balstīta uz pēdējo {months} mēnešu lineāro regresiju"
+    "forecastFooter": "Prognoze balstīta uz lineāro regresiju pēdējo {months} mēnešu datos"
   },
   "splitTransaction": {
-    "title": "Sadalīt transakciju",
+    "title": "Sadalīt darījumu",
     "closeModal": "Aizvērt logu",
     "originalAmount": "Sākotnējā summa:",
     "date": "Datums:",
@@ -4174,7 +4267,7 @@
     "amount": "Summa",
     "subcategory": "Apakškategorija",
     "notes": "Piezīmes (neobligāti)",
-    "notesPlaceholder": "piem., Biznesa izdevums, Personīgais lietojums",
+    "notesPlaceholder": "piem., Biznesa izdevumi, Personīgais lietojums",
     "selectCategory": "Izvēlēties kategoriju...",
     "none": "Nav",
     "removeThisSplit": "Noņemt šo sadalījumu",
@@ -4183,12 +4276,12 @@
     "minSplitsRequired": "Nepieciešami vismaz 2 sadalījumi",
     "validation": {
       "total": "Kopā:",
-      "matchesOriginal": "✓ Sakrīt ar oriģinālu",
-      "overBy": "Pārsniedz par ${amount}",
-      "underBy": "Trūkst ${amount}",
-      "readyToSave": "Sadalījumu summas sakrīt ar sākotnējo transakciju. Gatavs saglabāšanai!",
-      "adjustAmounts": "Pielāgojiet sadalījumu summas, lai sakrittu ar sākotnējo transakcijas summu.",
-      "amountsMustMatch": "Sadalījumu summām jāsakrīt ar sākotnējo transakcijas summu",
+      "matchesOriginal": "✓ Atbilst oriģinālam",
+      "overBy": "Par ${amount} vairāk",
+      "underBy": "Par ${amount} mazāk",
+      "readyToSave": "Sadalījumu summas atbilst sākotnējam darījumam. Gatavs saglabāšanai!",
+      "adjustAmounts": "Pielāgojiet sadalījumu summas, lai tās atbilstu sākotnējā darījuma summai.",
+      "amountsMustMatch": "Sadalījumu summām jābūt vienādām ar sākotnējā darījuma summu",
       "categoryRequired": "Visiem sadalījumiem jābūt kategorijai"
     },
     "buttons": {
@@ -4197,14 +4290,14 @@
       "save": "Saglabāt sadalījumu"
     },
     "help": {
-      "title": "Kā sadalīt transakcijas:",
+      "title": "Kā sadalīt darījumus:",
       "step1": "Ievadiet summu katrai kategorijai (kopā jābūt ${amount})",
-      "step2": "Izmantojiet \"Sadalīt vienmērīgi\", lai vienādi sadalītu pa visām kategorijām",
-      "step3": "Pievienojiet līdz 5 sadalījumiem vienā transakcijā",
-      "step4": "Sākotnējā transakcija tiks paslēpta un aizstāta ar sadalītajiem ierakstiem"
+      "step2": "Izmantojiet \"Sadalīt vienmērīgi\", lai sadalītu vienādi visās kategorijās",
+      "step3": "Pievienojiet līdz 5 sadalījumiem vienā darījumā",
+      "step4": "Sākotnējais darījums tiks paslēpts un aizstāts ar sadalītajiem ierakstiem"
     },
     "errors": {
-      "saveFailed": "Neizdevās saglabāt sadalīto transakciju"
+      "saveFailed": "Neizdevās saglabāt sadalīto darījumu"
     }
   },
   "splits": {
@@ -4349,12 +4442,12 @@
     "perMonth": "/mēnesī",
     "moreCharges": "+{count} vēl maksājumi",
     "summary": {
-      "monthlyCost": "Mēneša izmaksas",
+      "monthlyCost": "Ikmēneša izmaksas",
       "annualCost": "Gada izmaksas",
       "next30Days": "Nākamās 30 dienas",
       "activeSubscriptions": "{count, plural, =1 {1 aktīvs abonements} other {# aktīvi abonementi}}",
       "projectedYearly": "Prognozētie gada tēriņi",
-      "upcomingCharges": "{count, plural, =1 {1 gaidāms maksājums} other {# gaidāmi maksājumi}}"
+      "upcomingCharges": "{count, plural, =1 {1 gaidāmais maksājums} other {# gaidāmie maksājumi}}"
     },
     "sections": {
       "costByCategory": "Izmaksas pa kategorijām",
@@ -4362,12 +4455,12 @@
       "upcomingCharges": "Gaidāmie maksājumi (nākamās 30 dienas)"
     },
     "suggestions": {
-      "inactiveTitle": "Iespējami atcelti abonementi",
-      "inactiveDescription": "{count, plural, =1 {1 abonements nav} other {# abonementi nav}} nesen iekasēts. Pārbaudiet, vai tie tiešām ir atcelti.",
-      "trialsTitle": "Drīzumā beidzas izmēģinājuma periodi",
+      "inactiveTitle": "Iespējams atcelti abonementi",
+      "inactiveDescription": "{count, plural, =1 {1 abonements nav} other {# abonementi nav}} nesen veicis maksājumu. Pārbaudiet, vai tie tiešām ir atcelti.",
+      "trialsTitle": "Drīz beidzas izmēģinājumi",
       "trialsDescription": "{count, plural, =1 {1 izmēģinājums} other {# izmēģinājumi}} beidzas nākamo 7 dienu laikā. Atceliet, ja neizmantojat.",
       "highCostTitle": "Dārgi abonementi",
-      "highCostDescription": "Šie abonementi veido lielu daļu no jūsu tēriņiem. Pārdomājiet, vai saņemat pilnu vērtību."
+      "highCostDescription": "Šie abonementi veido lielu daļu no jūsu tēriņiem. Apsveriet, vai saņemat pilnu vērtību."
     }
   },
   "subscriptionModal": {
@@ -4529,27 +4622,27 @@
   },
   "transactionModal": {
     "title": {
-      "edit": "Rediģēt transakciju",
-      "add": "Pievienot transakciju"
+      "edit": "Rediģēt darījumu",
+      "add": "Pievienot darījumu"
     },
     "closeModal": "Aizvērt logu",
     "learned": {
       "title": "Iemācīts!",
-      "description": "Pēc 3 līdzīgiem labojumiem nākamās transakcijas no šī tirgotāja tiks automātiski kategorizētas."
+      "description": "Pēc 3 līdzīgiem labojumiem nākotnes darījumi no šī tirgotāja tiks automātiski kategorizēti."
     },
     "type": {
       "label": "Veids",
       "expense": "Izdevums",
-      "income": "Ieņēmums"
+      "income": "Ienākums"
     },
     "description": {
       "label": "Apraksts",
-      "placeholder": "piem., Pārtikas iepirkšanās Maxima"
+      "placeholder": "piem., Iepirkšanās pārtikas veikalā"
     },
     "amount": {
       "label": "Summa",
-      "placeholder": "0.00",
-      "validationError": "Lūdzu ievadiet derīgu summu"
+      "placeholder": "0,00",
+      "validationError": "Lūdzu, ievadiet derīgu summu"
     },
     "date": {
       "label": "Datums"
@@ -4571,7 +4664,7 @@
     },
     "advancedOptions": {
       "label": "Papildu opcijas",
-      "available": "{count} pieejamas"
+      "available": "{count} pieejams"
     },
     "account": {
       "label": "Konts"
@@ -4582,10 +4675,10 @@
     },
     "tags": {
       "label": "Birkas (atdalītas ar komatu)",
-      "placeholder": "piem., pārtika, iknedēļas, būtisks"
+      "placeholder": "piem., pārtika, iknedēļas, būtiski"
     },
     "receipts": {
-      "label": "Čeka pielikumi",
+      "label": "Čeku pielikumi",
       "existing": "Esošie čeki ({count})",
       "viewFull": "Skatīt pilnu čeku",
       "deleteReceipt": "Dzēst čeku",
@@ -4597,8 +4690,8 @@
     },
     "buttons": {
       "cancel": "Atcelt",
-      "update": "Atjaunināt transakciju",
-      "add": "Pievienot transakciju",
+      "update": "Atjaunināt darījumu",
+      "add": "Pievienot darījumu",
       "updating": "Atjaunina...",
       "adding": "Pievieno..."
     },
@@ -4609,13 +4702,13 @@
     }
   },
   "transactionSearch": {
-    "placeholder": "Meklēt transakcijas...",
+    "placeholder": "Meklēt darījumus...",
     "placeholderExtended": "Mēģiniet 'kafija pagājušā nedēļā' vai 'summa:>50'",
-    "noResults": "Transakcijas nav atrastas",
-    "noResultsDescription": "Mēģiniet citu meklēšanu vai pielāgojiet filtrus",
+    "noResults": "Darījumi nav atrasti",
+    "noResultsDescription": "Mēģiniet citu meklējumu vai pielāgojiet filtrus",
     "resultCount": "{count} {count, plural, =1 {rezultāts} other {rezultāti}}",
     "searchingFor": "Meklē: {query}",
-    "recentSearches": "Nesenās meklēšanas",
+    "recentSearches": "Nesenie meklējumi",
     "savedFilters": "Saglabātie filtri",
     "clearRecent": "Notīrīt",
     "saveFilter": "Saglabāt filtru",
@@ -4624,31 +4717,31 @@
       "merchants": "Tirgotāji",
       "categories": "Kategorijas",
       "amounts": "Summu diapazoni",
-      "recent": "Nesenais"
+      "recent": "Nesenie"
     },
     "tips": {
       "title": "Meklēšanas padomi",
-      "fuzzy": "Kļūdu tolerants: 'starbukcs' atrod 'Starbucks'",
-      "amount": "Summa: '€50-100' vai 'summa:>50'",
-      "date": "Datums: 'pagājušā nedēļa', 'šis mēnesis', 'datums:pēdējās30'",
+      "fuzzy": "Kļūdām tolerants: 'starbukcs' atrod 'Starbucks'",
+      "amount": "Summa: '$50-100' vai 'summa:>50'",
+      "date": "Datums: 'pagājušā nedēļā', 'šomēnes', 'datums:pēdējās30'",
       "category": "Kategorija: 'pārtika' vai 'kategorija:ēdiens'",
-      "type": "Veids: 'veids:ieņēmumi' vai 'veids:izdevumi'"
+      "type": "Veids: 'veids:ienākums' vai 'veids:izdevums'"
     },
     "suggestionsHeading": "Ieteikumi",
     "viewAllResults": "Skatīt visus {count} rezultātus",
     "searchTipsIntro": "Meklēšanas padomi:",
-    "searchTipChars": "Ievadiet 3+ rakstzīmes, lai meklētu transakcijas",
-    "searchTipAmount": "Izmantojiet <code>€50-100</code> summu diapazoniem",
-    "searchTipNL": "Mēģiniet <code>kafija pagājušā nedēļā</code> dabiskajā valodā",
-    "recentSearchLabel": "Nesenā meklēšana",
+    "searchTipChars": "Ievadiet 3+ rakstzīmes, lai meklētu darījumus",
+    "searchTipAmount": "Izmantojiet <code>$50-100</code> summu diapazoniem",
+    "searchTipNL": "Mēģiniet <code>kafija pagājušā nedēļā</code> dabiskai valodai",
+    "recentSearchLabel": "Nesenais meklējums",
     "searchFilterLabel": "Meklēšanas filtrs",
-    "amountRangeLabel": "Summu diapazons",
-    "transactionCount": "{count} {count, plural, =1 {transakcija} other {transakcijas}}",
+    "amountRangeLabel": "Summas diapazons",
+    "transactionCount": "{count} {count, plural, =1 {darījums} other {darījumi}}",
     "usedTimes": "Izmantots {count} {count, plural, =1 {reizi} other {reizes}}",
-    "noTransactionsYet": "Vēl nav transakciju",
+    "noTransactionsYet": "Vēl nav darījumu",
     "save": "Saglabāt",
-    "resultsFound": "Atrasti {count} {count, plural, =1 {rezultāts} other {rezultāti}}",
-    "suggestionsAvailable": "Pieejami {count} {count, plural, =1 {ieteikums} other {ieteikumi}}"
+    "resultsFound": "{count} {count, plural, =1 {rezultāts} other {rezultāti}} atrasti",
+    "suggestionsAvailable": "{count} {count, plural, =1 {ieteikums} other {ieteikumi}} pieejami"
   },
   "transactionTable": {
     "headers": {
@@ -4659,7 +4752,7 @@
       "account": "Konts",
       "actions": "Darbības"
     },
-    "emptyState": "Nav transakciju attēlošanai",
+    "emptyState": "Nav darījumu attēlošanai",
     "actions": {
       "edit": "Rediģēt",
       "delete": "Dzēst",
@@ -4782,27 +4875,27 @@
   "widget": {
     "spendingByCategory": {
       "title": "Tēriņi pa kategorijām",
-      "description": "Skatiet, kur noiet jūsu nauda, ar vizuālu sadalījumu"
+      "description": "Skatiet, kur aiziet jūsu nauda, ar vizuāliem sadalījumiem"
     },
     "recentTransactions": {
-      "title": "Nesenās transakcijas",
-      "description": "Ātrais skats uz jūsu jaunāko finanšu aktivitāti"
+      "title": "Nesenie darījumi",
+      "description": "Ātra jūsu jaunāko finanšu aktivitāšu apskate"
     },
     "budgetProgress": {
       "title": "Budžeta progress",
-      "description": "Sekojiet, kā jums sokas pret budžeta mērķiem"
+      "description": "Sekojiet, kā jums veicas ar budžeta mērķiem"
     },
     "accountBalances": {
-      "title": "Kontu bilances",
-      "description": "Pašreizējās bilances visos jūsu kontos"
+      "title": "Kontu atlikumi",
+      "description": "Pašreizējie atlikumi visos jūsu kontos"
     },
     "incomeVsExpenses": {
-      "title": "Ieņēmumi pret izdevumiem",
+      "title": "Ienākumi pret izdevumiem",
       "description": "Salīdziniet savus ienākumus un tēriņus laika gaitā"
     },
     "monthlyTrends": {
-      "title": "Mēneša tendences",
-      "description": "Vizualizējiet finanšu modeļus mēnesi pa mēnesim"
+      "title": "Ikmēneša tendences",
+      "description": "Vizualizējiet savas finanšu tendences mēnesi pēc mēneša"
     },
     "upcomingBills": {
       "title": "Gaidāmie rēķini",
@@ -4818,11 +4911,11 @@
     },
     "weeklyRecap": {
       "title": "Nedēļas kopsavilkums",
-      "description": "Jūsu nedēļas tēriņu modeļu kopsavilkums"
+      "description": "Jūsu nedēļas tēriņu kopsavilkums"
     },
     "netWorthMini": {
       "title": "Neto vērtība",
-      "description": "Ātrais skats uz jūsu kopējo neto vērtību"
+      "description": "Ātra jūsu kopējās neto vērtības apskate"
     },
     "eventBudget": {
       "title": "Pasākumu budžeti",

@@ -467,25 +467,25 @@
     "backToHome": "Нүүр хуудас руу буцах"
   },
   "bottomSheet": {
-    "close": "Close",
-    "dragToClose": "Drag down to close"
+    "close": "Хаах",
+    "dragToClose": "Хаахын тулд доош чирнэ үү"
   },
   "breadcrumb": {
-    "budgetAnalyzer": "Budget Analyzer",
-    "debtPayoffCalculator": "Debt Payoff Calculator",
-    "details": "Details",
-    "edit": "Edit",
-    "emergencyFund": "Emergency Fund",
-    "futurePlans": "Future Plans",
-    "home": "Home",
-    "merchantRules": "Merchant Rules",
-    "more": "More",
-    "netWorth": "Net Worth",
-    "new": "New",
+    "budgetAnalyzer": "Төсвийн шинжээч",
+    "debtPayoffCalculator": "Өрийн төлөлтийн тооцоолуур",
+    "details": "Дэлгэрэнгүй",
+    "edit": "Засах",
+    "emergencyFund": "Яаралтай сан",
+    "futurePlans": "Ирээдүйн төлөвлөгөө",
+    "home": "Нүүр",
+    "merchantRules": "Худалдаачийн дүрэм",
+    "more": "Цааш",
+    "netWorth": "Цэвэр хөрөнгө",
+    "new": "Шинэ",
     "ocr": "OCR",
-    "retirementPlanning": "Retirement Planning",
-    "savingsGoal": "Savings Goal",
-    "subscriptionCost": "Subscription Cost"
+    "retirementPlanning": "Тэтгэврийн төлөвлөлт",
+    "savingsGoal": "Хуримтлалын зорилго",
+    "subscriptionCost": "Захиалгын зардал"
   },
   "budget": {
     "accounts": {
@@ -836,30 +836,30 @@
   "calculators": {
     "budgetAnalyzer": {
       "actual": "Бодит",
-      "balanced": "Таны төсөв тэнцвэртэй байна!",
-      "description": "Зарлагаа алдартай төсвийн дүрмийн дагуу шинжлэх",
-      "enterSpending": "Ангилал бүрийн сарын зарлагаа оруулна уу:",
+      "balanced": "Таны төсөв тэнцвэртэй!",
+      "description": "Зарцуулалтаа алдартай төсвийн дүрмээр шинжлэнэ",
+      "enterSpending": "Ангилалаар сарын зарцуулалтаа оруулна уу:",
       "exceeding": "Хэтэрсэн",
       "inputTitle": "Таны сарын санхүү",
       "monthlyIncome": "Сарын цэвэр орлого",
-      "monthlyIncomeHelp": "Татварын дараах цэвэр орлого",
+      "monthlyIncomeHelp": "Татварын дараах гар дээрх цалин",
       "needs": "Хэрэгцээ",
       "needsAdjustment": "Тохируулга шаардлагатай",
-      "needsDescription": "Орон сууц, цахилгаан, хүнс, даатгал, доод өрийн төлбөр",
-      "needsExamples": "түрээс, цахилгаан, хүнс",
+      "needsDescription": "Орон сууц, нийтийн аж ахуй, хүнс, даатгал, доод төлбөрүүд",
+      "needsExamples": "түрээс, нийтийн аж ахуй, хүнс",
       "over": "Хэтэрсэн",
       "ruleExplanation": "50/30/20 Дүрэм",
-      "savings": "Хадгаламж",
-      "savingsDescription": "Онцгой байдлын сан, хөрөнгө оруулалт, тэтгэвэр, нэмэлт өрийн төлбөр",
-      "savingsExamples": "хадгаламж, хөрөнгө оруулалт, нэмэлт өр",
-      "subtitle": "Төсвөө хэрхэн хэмждэгийг хар",
-      "target": "Зорилт",
+      "savings": "Хуримтлал",
+      "savingsDescription": "Яаралтай сан, хөрөнгө оруулалт, тэтгэвэр, нэмэлт өрийн төлбөр",
+      "savingsExamples": "хуримтлал, хөрөнгө оруулалт, нэмэлт өр",
+      "subtitle": "Таны төсөв хэрхэн хэмжигддэгийг харна уу",
+      "target": "Зорилтот",
       "title": "50/30/20 Төсвийн шинжээч",
-      "under": "Хэвийн",
+      "under": "Зөв замд",
       "variance": "Зөрүү",
       "wants": "Хүсэл",
-      "wantsDescription": "Гаднах хоол, зугаа цэнгэл, дэлгүүр, захиалга",
-      "wantsExamples": "хоол, зугаа, дэлгүүр"
+      "wantsDescription": "Зоогийн газар, зугаа цэнгэл, дэлгүүр хэсэх, захиалга",
+      "wantsExamples": "зоогийн газар, зугаа цэнгэл, дэлгүүр"
     },
     "common": {
       "back": "Тооцоолуур руу буцах",
@@ -870,116 +870,116 @@
       "years": "жил"
     },
     "compoundInterest": {
-      "annualRate": "Жилийн хүүгийн хувь (%)",
+      "annualRate": "Жилийн хүү (%)",
       "annualRateHelp": "Хадгаламж: 4-5%, Бонд: 5-6%, Хувьцаа: 7-10%",
       "assumptionCompounding": "Нийлмэл",
       "assumptionReinvest": "Бүх хүү дахин хөрөнгө оруулсан",
-      "assumptionTiming": "Хугацааны эцэст хувь нэмэр",
-      "chartTitle": "Цаг хугацааны өсөлт",
+      "assumptionTiming": "Хуримтлал хугацааны төгсгөлд",
+      "chartTitle": "Хугацааны өсөлт",
       "compoundingFrequency": "Нийлмэл давтамж",
-      "description": "Нийлмэл хүүгийн хүчээр мөнгө хэрхэн өсдөгийг харах",
+      "description": "Нийлмэл хүүний хүчээр мөнгө хэрхэн өсдөгийг харна уу",
       "effectiveRate": "Бодит жилийн хувь",
       "finalBalance": "Эцсийн үлдэгдэл",
-      "formulaExplanation": "FV = Ирээдүйн үнэ, PV = Өнөөгийн үнэ, r = жилийн хувь, n = жилд нийлмэл тоо, t = жил, PMT = тогтмол төлбөр",
+      "formulaExplanation": "FV = Ирээдүйн үнэ цэнэ, PV = Одоогийн үнэ цэнэ, r = жилийн хувь, n = жилд нийлмэл тоо, t = жил, PMT = тогтмол төлбөр",
       "formulaText": "FV = PV(1+r/n)^(nt) + PMT[((1+r/n)^(nt)-1)/(r/n)]",
       "frequency": {
-        "annually": "Жилд (1/жил)",
+        "annually": "Жил бүр (1/жил)",
         "daily": "Өдөр бүр (365/жил)",
         "monthly": "Сар бүр (12/жил)",
         "quarterly": "Улирал бүр (4/жил)",
-        "semiannually": "Хагас жил бүр (2/жил)",
+        "semiannually": "Хагас жил тутам (2/жил)",
         "weekly": "Долоо хоног бүр (52/жил)"
       },
       "initialDeposit": "Анхны хадгаламж",
-      "inputTitle": "Хөрөнгө оруулалтын мэдээлэл",
+      "inputTitle": "Хөрөнгө оруулалтын дэлгэрэнгүй",
       "interestEarned": "Олсон хүү",
-      "monthlyContribution": "Сарын хувь нэмэр",
+      "monthlyContribution": "Сарын хуримтлал",
       "resultTitle": "Таны хөрөнгө оруулалтын өсөлт",
-      "subtitle": "Мөнгө цаг хугацааны явцад хэрхэн өсдөгийг харах",
-      "title": "Нийлмэл хүүгийн тооцоолуур",
-      "totalContributions": "Нийт хувь нэмэр",
-      "years": "Хөрөнгө оруулалтын хугацаа (жил)"
+      "subtitle": "Мөнгө хэрхэн өсдөгийг хянана уу",
+      "title": "Нийлмэл хүүний тооцоолуур",
+      "totalContributions": "Нийт хуримтлал",
+      "years": "Хөрөнгө оруулалтын хугацаа (Жил)"
     },
     "debtPayoff": {
       "addDebt": "Өр нэмэх",
       "apr": "Жилийн хүү (%)",
-      "avalanche": "Avalanche стратеги",
-      "avalancheDescription": "Хамгийн их мөнгө хэмнэхийн тулд хамгийн өндөр хүүтэй өрийг эхлээд төлөх",
+      "avalanche": "Хималын стратеги",
+      "avalancheDescription": "Хамгийн өндөр хүүг эхлээд төлж, хамгийн их мөнгө хэмнэнэ",
       "balance": "Үлдэгдэл",
       "debtName": "Нэр",
       "debtNamePlaceholder": "Өр {number}",
-      "description": "Өрөө хурдан төлөхийн тулд snowball ба avalanche стратегийг харьцуулах",
+      "description": "Өрөө хурдан төлөхийн тулд цасан бөмбөг болон хималын стратегийг харьцуулна уу",
       "extraMonthlyPayment": "Нэмэлт сарын төлбөр",
-      "extraMonthlyPaymentHelp": "Доод хэмжээнээс давж сар бүр нэмж төлөх боломжтой дүн",
+      "extraMonthlyPaymentHelp": "Доод төлбөрөөс гадна сар бүр нэмж төлөх боломжтой дүн",
       "minimumPayment": "Доод төлбөр",
       "month": "Сар",
-      "morePsychological": "Урам зоригийн ялалт",
+      "morePsychological": "Сэтгэл зүйн ялалт",
       "payment": "Төлбөр",
       "paymentSchedule": "Төлбөрийн хуваарь",
-      "payoffDate": "Төлж дуусах хугацаа",
-      "recommended": "Зөвлөсөн",
-      "remaining": "Үлдсэн",
+      "payoffDate": "Төлөлтийн хугацаа",
+      "recommended": "Зөвлөдөг",
+      "remaining": "Үлдэгдэл",
       "removeDebt": "Өр устгах",
-      "savingsDescription": "Avalanche аргаар {amount} хүүг хэмнэж, {months} сараар өмнө өрөөс чөлөөлөгдөнө",
-      "savingsTitle": "Avalanche-ийн хүүний хэмнэлт",
-      "snowball": "Snowball стратеги",
-      "snowballDescription": "Хурдан ялалт, урам зориг авахын тулд хамгийн бага үлдэгдэлтэй өрийг эхлээд төлөх",
-      "subtitle": "Өрөөс чөлөөлөгдөх хамгийн хурдан замыг олох",
-      "title": "Өрийн эргэн төлөлтийн тооцоолуур",
+      "savingsDescription": "Хималын аргаар {amount} хүүний хэмнэлт олж, {months} сар эрт өргүй болно",
+      "savingsTitle": "Хималын арга замаар хүүний хэмнэлт",
+      "snowball": "Цасан бөмбөг стратеги",
+      "snowballDescription": "Хамгийн бага үлдэгдлийг эхлээд төлж, хурдан ялалт авна",
+      "subtitle": "Өрийн эрх чөлөөнд хамгийн хурдан зам олно уу",
+      "title": "Өрийн төлөлтийн тооцоолуур",
       "totalInterest": "Нийт хүү",
       "yourDebts": "Таны өрүүд"
     },
     "emergencyFund": {
-      "amountNeeded": "Зорилгодоо хүрэхийн тулд {amount} нэмж хэрэгтэй",
-      "completionDate": "Таамагласан гүйцэтгэл",
-      "currentSavings": "Одоогийн онцгой байдлын хадгаламж",
-      "description": "Санхүүгийн аюулгүй байдалд хэр их хэрэгтэйг тооцоолж, явцыг хянах",
-      "goalMet": "Зорилгод хүрсэн!",
-      "goalProgress": "Аюулгүй байдлын тор бүтээж байна",
+      "amountNeeded": "Зорилгодоо хүрэхэд {amount} дутуу байна",
+      "completionDate": "Таамагласан дуусах огноо",
+      "currentSavings": "Одоогийн яаралтай хуримтлал",
+      "description": "Санхүүгийн аюулгүй байдалд хэр их хэрэгтэйг тооцоолж, явцыг хянана уу",
+      "goalMet": "Зорилгодоо хүрсэн!",
+      "goalProgress": "Аюулгүйн торыг бүрдүүлж байна",
       "inputTitle": "Таны мэдээлэл",
-      "monthlyContribution": "Сарын хадгаламжийн дүн",
-      "monthlyContributionHelp": "Онцгой байдлын сандаа сар бүр хэдийг хадгалах боломжтой",
+      "monthlyContribution": "Сарын хуримтлалын дүн",
+      "monthlyContributionHelp": "Сар бүр яаралтай санд хэдэн төгрөг хуримтлуулах боломжтой",
       "monthlyExpenses": "Сарын зардал",
-      "monthlyExpensesHelp": "Түрээс, цахилгаан, хүнсний бүтээгдэхүүн, даатгал болон бусад зайлшгүй зардлыг оруулна уу",
-      "monthsToGoal": "Зорилгод хүрэх хугацаа (сар)",
+      "monthlyExpensesHelp": "Түрээс, нийтийн аж ахуй, хүнс, даатгал, бусад зайлшгүй зардлыг оруулна уу",
+      "monthsToGoal": "Зорилгодоо хүрэх сар",
       "progress": "Одоогийн явц",
       "resultsTitle": "Таны үр дүн",
-      "subtitle": "Санхүүгийн аюулгүй байдлын торыг бүтээх",
-      "targetAmount": "Зорилтот онцгой байдлын сан",
-      "targetMonths": "Зорилтот хамрах сарууд",
-      "targetMonthsHelp": "Мэргэжилтнүүд ихэнх тохиолдолд {months} сарыг зөвлөдөг",
-      "tip1": "Хялбар хандалт, сайн өгөөжийн тулд онцгой байдлын сангаа өндөр хүүтэй хадгаламжийн дансанд байлгаарай",
-      "tip2": "Цалингийн өдөр автомат шилжүүлэг тохируулж хувь нэмрээ автоматжуулаарай",
-      "tip3": "Шаардлагатай бол жижигээр эхэлж болно - бага боловч тогтмол хадгалсан нь цаг хугацааны явцад хуримтлагдана",
-      "tipsTitle": "Онцгой байдлын сан бүрдүүлэх зөвлөмж",
-      "title": "Онцгой байдлын сангийн тооцоолуур"
+      "subtitle": "Санхүүгийн аюулгүйн торыг бүрдүүл",
+      "targetAmount": "Зорилтот яаралтай сан",
+      "targetMonths": "Зорилтот хамрах сарын тоо",
+      "targetMonthsHelp": "Мэргэжилтнүүд ихэнх нөхцөлд {months} сар санал болгодог",
+      "tip1": "Яаралтай сангаа хялбар хандалт, илүү өгөөжийн хадгаламжийн дансанд хадгална уу",
+      "tip2": "Цалингийн өдөр автомат шилжүүлэг тохируулж хуримтлалаа автоматжуулна уу",
+      "tip3": "Шаардлагатай бол бага дүнгээс эхлэх - бага ч тогтмол хуримтлуулах нь хуримтлагдана",
+      "tipsTitle": "Яаралтай сан бүрдүүлэх зөвлөмж",
+      "title": "Яаралтай сангийн тооцоолуур"
     },
     "hub": {
-      "accuracyDescription": "Бүх тооцоолол дахь хөвөгч цэгийн алдааг арилгахын тулд санхүүгийн зэргийн арифметик ашигладаг.",
-      "accuracyTitle": "Нарийвчлалтай тооцоолол",
-      "infoTitle": "Эдгээр тооцоолууруудын тухай",
-      "privacyDescription": "Бүх тооцоолол таны төхөөрөмж дээр хийгддэг. Таны санхүүгийн мэдээлэл хэзээ ч браузераас гарахгүй.",
-      "privacyTitle": "100% Нууц",
-      "sectionCore": "Үндсэн тооцоолуурууд",
+      "accuracyDescription": "Бүх тооцоололд хөвөгч цэгийн алдаанаас зайлсхийхийн тулд санхүүгийн зэрэглэлийн арифметик ашиглана.",
+      "accuracyTitle": "Нарийвчилсан тооцоолол",
+      "infoTitle": "Эдгээр тооцоолуурын тухай",
+      "privacyDescription": "Бүх тооцоолол таны төхөөрөмж дээр хийгддэг. Таны санхүүгийн мэдээлэл хөтчөөс хэзээ ч гарахгүй.",
+      "privacyTitle": "100% Нууцлагдсан",
+      "sectionCore": "Үндсэн тооцоолуур",
       "sectionPlanning": "Санхүүгийн төлөвлөлт",
-      "sectionTools": "Хэрэгсэл & Холбоосууд",
+      "sectionTools": "Хэрэгсэл & Холбоос",
       "subtitle": "Санхүүгээ төлөвлөж, шинжлэхэд тусалдаг хэрэгслүүд",
-      "title": "Санхүүгийн тооцоолуурууд"
+      "title": "Санхүүгийн тооцоолуур"
     },
     "inflation": {
-      "assumptionCompound": "Инфляци жил бүр нийлмэлддэг",
+      "assumptionCompound": "Инфляци жил бүр нийлмэлээр",
       "assumptionConstant": "Тогтмол жилийн инфляцийн хувь",
-      "chartNominal": "Нэрлэсэн үнэ (өөрчлөгдөөгүй)",
+      "chartNominal": "Нэрлэсэн үнэ цэнэ (өөрчлөгдөөгүй)",
       "chartReal": "Бодит худалдан авах чадвар",
-      "chartTitle": "Худалдан авах чадвар цаг хугацааны туршид",
+      "chartTitle": "Хугацааны туршид худалдан авах чадвар",
       "currentAmount": "Одоогийн дүн",
-      "description": "Инфляци таны худалдан авах чадварыг цаг хугацааны явцад хэрхэн элэгддэгийг хар",
-      "formulaExplanation": "Үнийн өсөлтөд тохируулсан, ирээдүйд таны мөнгө бодитоор юу худалдаж авахыг харуулна",
-      "formulaText": "Real Value = Nominal Value / (1 + inflation)^years",
-      "heroDescription": "Таны {amount} {years} жилийн дараа {futureAmount}-ийн худалдан авах чадвартай болно",
-      "heroTitle": "Худалдан авах чадварын нөлөөлөл",
+      "description": "Инфляци хугацааны туршид худалдан авах чадварыг хэрхэн бууруулдагийг харна уу",
+      "formulaExplanation": "Ирээдүйд таны мөнгө үнэхээр юу худалдаж авахыг, үнийн өсөлтийг тооцон харуулна",
+      "formulaText": "Бодит үнэ цэнэ = Нэрлэсэн үнэ цэнэ / (1 + инфляци)^жил",
+      "heroDescription": "Таны {amount} нь {years} жилийн дараа {futureAmount}-ийн худалдан авах чадвартай болно",
+      "heroTitle": "Худалдан авах чадварт нөлөөлөх",
       "inflationRate": "Жилийн инфляцийн хувь (%)",
-      "inflationRateHelp": "Түүхэн дундаж: ~3%",
+      "inflationRateHelp": "АНУ-ын түүхэн дундаж: ~3%",
       "inputTitle": "Нөлөөг тооцоолох",
       "powerLost": "Алдагдсан худалдан авах чадвар",
       "powerRemaining": "Үлдсэн худалдан авах чадвар",
@@ -988,18 +988,18 @@
       "presetLow": "Бага (2%)",
       "presets": "Урьдчилсан тохиргоо",
       "purchasingPower": "Ирээдүйн худалдан авах чадвар",
-      "resultTitle": "Дэлгэрэнгүй задаргаа",
-      "subtitle": "Инфляцийн бодит зардлыг ойлгох",
-      "tableLost": "Алдсан үнэ",
-      "tableNominal": "Нэрлэсэн үнэ",
-      "tableReal": "Бодит үнэ",
-      "tableTitle": "Жил тутмын задаргаа",
+      "resultTitle": "Нарийвчилсан задаргаа",
+      "subtitle": "Инфляцийн бодит зардлыг ойлго",
+      "tableLost": "Алдагдсан үнэ цэнэ",
+      "tableNominal": "Нэрлэсэн үнэ цэнэ",
+      "tableReal": "Бодит үнэ цэнэ",
+      "tableTitle": "Жил бүрийн задаргаа",
       "tableYear": "Жил",
-      "timeHorizon": "Цаг хугацааны хүрээ (жил)",
-      "title": "Инфляцийн нөлөөллийн тооцоолуур"
+      "timeHorizon": "Хугацааны хэтийн төлөв (Жил)",
+      "title": "Инфляцийн нөлөөний тооцоолуур"
     },
     "loanTracker": {
-      "description": "Бүх зээл, төлбөр, эргэн төлөлтийн явцыг хянах",
+      "description": "Бүх зээл, төлбөр, төлөлтийн явцыг хянана",
       "title": "Зээлийн хянагч"
     },
     "monteCarlo": {
@@ -1011,91 +1011,91 @@
       "assumptionReturns": "Өгөөжийн хуваарилалт",
       "assumptionReturnsValue": "Хэвийн хуваарилалт (Box-Muller)",
       "assumptionVolatility": "Хэлбэлзэл (стд хазайлт)",
-      "badgeCaution": "Хянах шаардлагатай",
-      "badgeRisk": "Өндөр эрсдэлтэй",
-      "badgeStrong": "Бат бөх төлөвлөгөө",
-      "chartTitle": "Хувийн зурвасууд цаг хугацааны туршид",
-      "description": "Магадлалын загварчлалаар санхүүгийн төлөвлөгөөгөө шалгах",
+      "badgeCaution": "Шалгах шаардлагатай",
+      "badgeRisk": "Өндөр эрсдэл",
+      "badgeStrong": "Хүчтэй төлөвлөгөө",
+      "chartTitle": "Хугацааны хувийн зурвас",
+      "description": "Магадлалын загварчлалаар санхүүгийн төлөвлөгөөг стресс тест хийнэ",
       "expectedReturn": "Хүлээгдэж буй жилийн өгөөж (%)",
       "expectedReturnHelp": "Хувьцаа: 7-10%, Бонд: 3-5%, Тэнцвэртэй: 5-7%",
       "formulaExplanation": "Сар бүр хэвийн хуваарилалтаас санамсаргүй өгөөж авна. Хувь нэмэр нэмэгдэж, инфляцид тохируулсан зарцуулалт хасагдана. N симуляцид давтана.",
       "formulaText": "Monthly return = Normal(μ/12, σ/√12); Balance_t = Balance_(t-1) × (1 + r_t) + C - W",
       "heroTitle": "Симуляцийн үр дүн",
       "inflationRate": "Инфляцийн хувь (%)",
-      "initialBalance": "Эхлэх багцын үлдэгдэл",
+      "initialBalance": "Эхний багцын үлдэгдэл",
       "inputTitle": "Симуляцийн параметрүүд",
-      "medianFinal": "Медиан эцсийн үлдэгдэл",
-      "modeAccumulation": "Хадгалах (Хуримтлуулах)",
-      "modeWithdrawal": "Зарцуулах (Буулгах)",
-      "monthlyContribution": "Сарын хувь нэмэр",
-      "monthlyWithdrawal": "Сарын зарцуулалт",
+      "medianFinal": "Дундаж эцсийн үлдэгдэл",
+      "modeAccumulation": "Хуримтлуулах (Хуримтлал)",
+      "modeWithdrawal": "Зарцуулах (Зарлага)",
+      "monthlyContribution": "Сарын хуримтлал",
+      "monthlyWithdrawal": "Сарын зарлага",
       "p10Final": "Хамгийн муу (10-р хувь)",
       "p90Final": "Хамгийн сайн (90-р хувь)",
-      "resultsTitle": "Үр дүнгийн хуваарилалт",
+      "resultsTitle": "Үр дүнгийн тархалт",
       "scenarioMode": "Хувилбарын горим",
       "simulations": "Симуляцийн тоо",
-      "simulationsHelp": "Олон симуляци = илүү нарийвчлалтай хувь, гэхдээ удаан",
-      "subtitle": "Таны төлөвлөгөө хэрхэн тэсвэрлэхийг харахын тулд мянган зах зээлийн симуляци ажиллуул",
-      "successRateDescription": "{total} симуляци ажилсан, {failures} мөнгө дууссан",
+      "simulationsHelp": "Илүү олон симуляци = илүү нарийвчилсан хувиар, гэхдээ удаан",
+      "subtitle": "Таны төлөвлөгөө хэрхэн тэсвэрлэхийг мянган зах зээлийн симуляцаар шалгана",
+      "successRateDescription": "{total} симуляци хийсэн, {failures} мөнгө дууссан",
       "successRateLabel": "Амжилтын хувь",
-      "timeHorizon": "Цаг хугацааны хүрээ (жил)",
-      "title": "Monte Carlo симулятор",
-      "totalSimulations": "Ажилсан симуляци",
-      "volatility": "Жилийн хэлбэлзэл / Стд хазайлт (%)",
-      "volatilityHelp": "S&P 500 түүхэн: ~15%. Өндөр = өргөн үр дүнгийн хүрээ."
+      "timeHorizon": "Хугацааны хэтийн төлөв (Жил)",
+      "title": "Монте Карло симулятор",
+      "totalSimulations": "Хийсэн симуляцийн тоо",
+      "volatility": "Жилийн хэлбэлзэл / Стандарт хазайлт (%)",
+      "volatilityHelp": "S&P 500 түүхэн: ~15%. Өндөр = илүү өргөн үр дүнгийн хүрээ."
     },
     "mortgage": {
-      "affordabilityTitle": "Таны боломж",
+      "affordabilityTitle": "Таны чадвар",
       "annualIncome": "Жилийн нийт орлого",
-      "annualRate": "Хүүгийн хувь (%)",
-      "annualRateHelp": "Одоогийн дундаж: 30 жилийн тогтмол 6-7%",
-      "assumptionFixedRate": "Бүх хугацаанд тогтмол хүүгийн хувь",
-      "assumptionNoEscrow": "Татвар, даатгал, HOA ороогүй",
-      "description": "Төлбөр тооцоолох эсвэл хэр их байшин худалдан авах боломжтойг мэдэх",
-      "downPayment": "Урьдчилгаа",
-      "downPaymentAmount": "Урьдчилгааны дүн",
-      "downPaymentPercent": "Урьдчилгаа (%)",
-      "dtiRatio": "Өр-Орлогын харьцаа",
+      "annualRate": "Хүү (%)",
+      "annualRateHelp": "Одоогийн дундаж: 30 жилийн тогтмол хүүтэй 6-7%",
+      "assumptionFixedRate": "Бүх хугацаанд тогтмол хүү",
+      "assumptionNoEscrow": "Татвар, даатгал, HOA-г оруулаагүй",
+      "description": "Төлбөр тооцоолох эсвэл ямар хэмжээний орон сууцны төлбөр хариуцаж чадахыг олж мэдэх",
+      "downPayment": "Урьдчилгаа төлбөр",
+      "downPaymentAmount": "Урьдчилгаа төлбөр",
+      "downPaymentPercent": "Урьдчилгаа төлбөр (%)",
+      "dtiRatio": "Өр-орлогын харьцаа",
       "extraPayment": "Нэмэлт сарын төлбөр",
-      "extraPaymentHelp": "Сар бүр үндсэн зээлд нэмж төлөх дүн",
-      "formulaExplanation": "M = Сарын төлбөр, P = Үндсэн зээл, i = Сарын хүүгийн хувь, n = Нийт төлбөрийн тоо",
+      "extraPaymentHelp": "Сар бүр үндсэн өрөнд нэмж хийх төлбөр",
+      "formulaExplanation": "M = Сарын төлбөр, P = Үндсэн өр, i = Сарын хүү, n = Нийт төлбөрийн тоо",
       "formulaText": "M = P[i(1+i)^n] / [(1+i)^n - 1]",
       "hideFullSchedule": "Бүрэн хуваарийг нуух",
-      "homePrice": "Байшны үнэ",
-      "inputTitle": "Зээлийн мэдээлэл",
+      "homePrice": "Орон сууцны үнэ",
+      "inputTitle": "Зээлийн дэлгэрэнгүй",
       "loanAmount": "Зээлийн дүн",
-      "maxDTI": "Дээд DTI харьцаа (%)",
-      "maxHomePrice": "Дээд байшны үнэ",
-      "maxLoanAmount": "Дээд зээлийн дүн",
-      "modeAffordability": "Юу худалдан авах боломжтой вэ?",
+      "maxDTI": "Хамгийн их DTI харьцаа (%)",
+      "maxHomePrice": "Хамгийн их орон сууцны үнэ",
+      "maxLoanAmount": "Хамгийн их зээлийн дүн",
+      "modeAffordability": "Би юу хариуцаж чадах вэ?",
       "modePayment": "Төлбөр тооцоолох",
-      "monthlyDebts": "Сарын өрийн төлбөр",
-      "monthlyDebtsHelp": "Машины зээл, оюутны зээл, зээлийн карт гэх мэт",
+      "monthlyDebts": "Сарын өрийн төлбөрүүд",
+      "monthlyDebtsHelp": "Автомашины зээл, оюутны зээл, кредит карт гэх мэт.",
       "monthlyPayment": "Сарын төлбөр",
-      "payoffMonths": "Төлж дуусах хугацаа",
-      "resultTitle": "Төлбөрийн тойм",
+      "payoffMonths": "Төлөлтийн хугацаа",
+      "resultTitle": "Төлбөрийн хураангуй",
       "scheduleBalance": "Үлдэгдэл",
       "scheduleInterest": "Хүү",
       "scheduleMonth": "Сар",
       "schedulePayment": "Төлбөр",
-      "schedulePrincipal": "Үндсэн зээл",
-      "scheduleTitle": "Амортизацийн хуваарь",
-      "showFullSchedule": "Бүрэн хуваарь харуулах",
-      "subtitle": "Байшин худалдан авахаа итгэлтэйгээр төлөвлөх",
+      "schedulePrincipal": "Үндсэн өр",
+      "scheduleTitle": "Хорогдуулалтын хуваарь",
+      "showFullSchedule": "Бүрэн хуваарийг харуулах",
+      "subtitle": "Орон сууцны худалдан авалтаа итгэлтэйгээр төлөвлө",
       "term": "Зээлийн хугацаа",
       "term15": "15 жил",
       "term30": "30 жил",
       "title": "Ипотекийн тооцоолуур",
       "totalCost": "Зээлийн нийт зардал",
-      "totalInterest": "Төлсөн нийт хүү"
+      "totalInterest": "Нийт төлсөн хүү"
     },
     "netWorth": {
-      "description": "Хөрөнгө ба өр төлбөрийн бүрэн санхүүгийн зургийг харах",
+      "description": "Хөрөнгө болон өр төлбөрийн бүрэн санхүүгийн дүр зургийг харна уу",
       "title": "Цэвэр хөрөнгө"
     },
     "property": {
-      "description": "Үл хөдлөх хөрөнгө, тээврийн хэрэгсэл, бусад хөрөнгийг хянах",
-      "title": "Хөрөнгө & Эд зүйлс"
+      "description": "Үл хөдлөх хөрөнгийн үнэ цэнэ, тээврийн хэрэгсэл, бусад хөрөнгийг хянана",
+      "title": "Өмч & хөрөнгө"
     },
     "retirement": {
       "advancedTitle": "Нарийвчилсан тохиргоо",
@@ -1103,135 +1103,135 @@
       "assumptionPostReturn": "Тэтгэврийн дараах өгөөж",
       "assumptionPreReturn": "Тэтгэврийн өмнөх өгөөж",
       "assumptionSS": "Нийгмийн даатгал {age} наснаас эхэлсэн",
-      "balanceAtRetirement": "Тэтгэврийн үеийн үлдэгдэл",
-      "chartAccumulation": "Хуримтлуулах үе",
-      "chartTitle": "Багцын үлдэгдэл цаг хугацааны туршид",
-      "chartWithdrawal": "Зарцуулах үе",
+      "balanceAtRetirement": "Тэтгэвэрт гарах үеийн үлдэгдэл",
+      "chartAccumulation": "Хуримтлалын шат",
+      "chartTitle": "Хөрөнгийн сангийн үлдэгдэл хугацааны туршид",
+      "chartWithdrawal": "Зарлагын шат",
       "currentAge": "Одоогийн нас",
-      "currentSavings": "Одоогийн тэтгэврийн хадгаламж",
-      "description": "Хадгаламж болон зарцуулалтын иж бүрэн таамаглалтай тэтгэврийн төлөвлөгөө гарга",
-      "desiredIncome": "Хүсэж буй сарын орлого (өнөөдрийн үнээр)",
-      "desiredIncomeHelp": "Тэтгэвэрт сард хэдийг зарцуулахыг хүсэж буй, өнөөдрийн үнээр",
+      "currentSavings": "Одоогийн тэтгэврийн хуримтлал",
+      "description": "Тэтгэврийн хуримтлал, зарлагын дэлгэрэнгүй таамаглалтай тэтгэвэр төлөвлөх",
+      "desiredIncome": "Хүссэн сарын орлого (өнөөдрийн үнээр)",
+      "desiredIncomeHelp": "Тэтгэвэрт сар бүр зарцуулахыг хүссэн дүн, өнөөдрийн үнээр",
       "formulaExplanation": "Хоёр үе шаттай симуляци: тэтгэвэр хүртэл хадгаламж өсгөх, дараа нь инфляцид тохируулсан зарцуулалтаар буулгах",
       "formulaText": "Accumulation: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | Withdrawal: Balance_n = Balance_(n-1)(1+r) - W",
-      "heroInsufficient": "Таны хадгаламж {age} насанд дуусаж магадгүй",
-      "heroInsufficientBadge": "Арга хэмжээ авах",
+      "heroInsufficient": "Таны хуримтлал {age} насанд дуусч магадгүй",
+      "heroInsufficientBadge": "Арга хэмжээ шаардлагатай",
       "heroNeutralBadge": "Ойрхон",
-      "heroSufficient": "Таны хадгаламж тэтгэвэрт {years} жил хүрнэ",
-      "heroSufficientBadge": "Хэвийн",
+      "heroSufficient": "Таны хуримтлал тэтгэвэрт {years} жил хүрэлцэнэ",
+      "heroSufficientBadge": "Зөв замд",
       "inflationRate": "Инфляцийн хувь (%)",
       "inputTitle": "Таны мэдээлэл",
       "lifeExpectancy": "Дундаж наслалт",
-      "monthlyContribution": "Сарын хувь нэмэр",
-      "monthlyWithdrawal": "Сарын зарцуулалт (тэтгэврийн үед)",
+      "monthlyContribution": "Сарын хуримтлал",
+      "monthlyWithdrawal": "Сарын зарлага (тэтгэвэрт гарах үед)",
       "postRetirementReturn": "Тэтгэврийн дараах өгөөж (%)",
-      "postRetirementReturnHelp": "Зарцуулах үеийн хүлээгдэж буй жилийн өгөөж (болгоомжтой ~4-5%)",
+      "postRetirementReturnHelp": "Зарцуулах үеийн хүлээгдэж буй жилийн өгөөж (консерватив ~4-5%)",
       "preRetirementReturn": "Тэтгэврийн өмнөх өгөөж (%)",
-      "preRetirementReturnHelp": "Хадгалах үеийн хүлээгдэж буй жилийн өгөөж (хувьцааны дундаж ~7-10%)",
+      "preRetirementReturnHelp": "Хуримтлуулах үеийн хүлээгдэж буй жилийн өгөөж (хувьцаа дундаж ~7-10%)",
       "resultTitle": "Тэтгэврийн таамаглал",
       "retirementAge": "Тэтгэврийн нас",
-      "shortfall": "Дундаж наслалтад хүрэхгүй дүн",
-      "socialSecurity": "Нийгмийн даатгал / Тэтгэвэр (сарын)",
-      "socialSecurityAge": "Нийгмийн даатгал эхлэх нас",
-      "subtitle": "Санхүүгийн ирээдүйгээ баталгаажуулах",
+      "shortfall": "Дундаж наслалтад хүрэхэд дутагдал",
+      "socialSecurity": "Нийгмийн хамгаалал / Тэтгэвэр (сард)",
+      "socialSecurityAge": "Нийгмийн хамгааллын эхлэх нас",
+      "subtitle": "Санхүүгийн ирээдүйгээ хамгаал",
       "surplus": "Дундаж наслалтад илүүдэл",
       "title": "Тэтгэврийн төлөвлөгч",
       "yearsMoneyLasts": "Мөнгө хүрэх жил"
     },
     "savingsGoal": {
-      "currentSavings": "Одоогийн хадгаламж",
-      "description": "Нийлмэл хүүгийн таамаглалтай хадгаламжаа төлөвлөх",
+      "currentSavings": "Одоогийн хуримтлал",
+      "description": "Нийлмэл хүүний тооцоотой хуримтлалаа төлөвлөнө",
       "expectedReturn": "Хүлээгдэж буй жилийн өгөөж (%)",
-      "expectedReturnHelp": "Өндөр хүүтэй хадгаламж: 4-5%, Хөрөнгө оруулалт: 6-8%",
-      "goalAmount": "Зорилгын дүн",
-      "inMonths": "{months} сард",
-      "inputTitle": "Зорилгын мэдээлэл",
+      "expectedReturnHelp": "Хадгаламж: 4-5%, Хөрөнгө оруулалт: 6-8%",
+      "goalAmount": "Зорилтот дүн",
+      "inMonths": "{months} сарын дотор",
+      "inputTitle": "Зорилгын дэлгэрэнгүй",
       "interestEarned": "Олсон хүү",
-      "modeHowMuch": "Сард хэдийг хадгалах вэ?",
+      "modeHowMuch": "Сар бүр хэдэн төгрөг хуримтлуулах вэ?",
       "modeWhen": "Зорилгодоо хэзээ хүрэх вэ?",
-      "monthlyContribution": "Сарын хувь нэмэр",
+      "monthlyContribution": "Сарын хуримтлал",
       "perMonth": "сард",
       "progress": "Одоогийн явц",
       "projectedAmount": "Таамагласан нийт",
-      "projectionTitle": "Хадгаламжийн таамаглал",
-      "resultHowMuchTitle": "Шаардлагатай сарын хадгаламж",
-      "resultWhenTitle": "Та зорилгодоо хүрнэ",
-      "subtitle": "Санхүүгийн зорилгодоо хурдан хүрэх",
+      "projectionTitle": "Хуримтлалын таамаглал",
+      "resultHowMuchTitle": "Шаардлагатай сарын хуримтлал",
+      "resultWhenTitle": "Зорилгодоо хүрнэ",
+      "subtitle": "Санхүүгийн зорилгодоо хурдан хүрнэ үү",
       "targetDate": "Зорилтот огноо",
       "timelineTitle": "Өсөлтийн хуваарь",
-      "title": "Хадгаламжийн зорилгын тооцоолуур",
-      "totalContributions": "Нийт хувь нэмэр"
+      "title": "Хуримтлалын зорилгын тооцоолуур",
+      "totalContributions": "Нийт хуримтлал"
     },
     "subscriptionCost": {
       "addSubscription": "Захиалга нэмэх",
       "amount": "Дүн",
-      "breakdown": "Зайлшгүй ба Зайлшгүй бус",
+      "breakdown": "Зайлшгүй ба зайлшгүй бус",
       "byCategory": "Ангилалаар",
-      "daily": "Өдрийн",
-      "description": "Захиалгуудын бодит өртгийг хянаж, шинжлэх",
+      "daily": "Өдөр бүр",
+      "description": "Захиалгуудын бодит зардлыг хянаж, шинжлэнэ",
       "essential": "Зайлшгүй",
       "essentialCost": "Зайлшгүй",
       "frequency": {
-        "annual": "Жилийн",
-        "biweekly": "14 хоног тутам",
+        "annual": "Жил бүр",
+        "biweekly": "Хоёр долоо хоног тутам",
         "label": "Давтамж",
-        "monthly": "Сарын",
-        "quarterly": "Улирлын",
-        "weekly": "Долоо хоногийн"
+        "monthly": "Сар бүр",
+        "quarterly": "Улирал бүр",
+        "weekly": "Долоо хоног бүр"
       },
-      "monthly": "Сарын",
+      "monthly": "Сар бүр",
       "monthlyIncome": "Сарын орлого",
       "name": "Нэр",
-      "namePlaceholder": "жнь: Netflix, Spotify",
+      "namePlaceholder": "жнь., Netflix, Spotify",
       "nonEssentialCost": "Зайлшгүй бус",
       "perYear": "/жил",
       "percentOfIncome": "Орлогын %",
       "potentialSavings": "Боломжит жилийн хэмнэлт",
-      "potentialSavingsHelp": "Бүх зайлшгүй бус захиалгыг цуцалсан бол",
+      "potentialSavingsHelp": "Бүх зайлшгүй бус захиалгыг цуцалвал",
       "remove": "Захиалга устгах",
       "showIncomePercent": "Орлогын хувийг харуулах",
-      "subtitle": "Давтагдах зарлага хаана очдогийг хар",
+      "subtitle": "Давтагдах зарцуулалтаа хаашаа явж байгааг харна уу",
       "title": "Захиалгын зардлын тооцоолуур",
       "totalCost": "Нийт захиалгын зардал",
-      "yearly": "Жилийн",
+      "yearly": "Жил бүр",
       "yourSubscriptions": "Таны захиалгууд"
     },
     "transparency": {
       "assumptions": "Таамаглалууд",
       "formula": "Томъёо",
-      "title": "Яаж ажилладаг"
+      "title": "Хэрхэн ажилладаг"
     },
     "chart": {
-      "year": "{n}-р жил",
+      "year": "Жил {n}",
       "yearLabel": "Жил",
-      "month": "{n}-р сар",
-      "monthYear": "{n}-р сар ({y}-р жил)",
-      "age": "{n} нас",
+      "month": "Сар {n}",
+      "monthYear": "Сар {n} (Жил {y})",
+      "age": "Нас {n}",
       "ageLabel": "Нас",
-      "contributions": "Хувь нэмэр",
+      "contributions": "Хуримтлал",
       "interestEarned": "Олсон хүү",
       "interest": "Хүү",
       "totalInterest": "Нийт хүү",
-      "snowball": "Snowball",
-      "avalanche": "Avalanche",
+      "snowball": "Цасан бөмбөг",
+      "avalanche": "Хималай",
       "portfolio": "Багц",
       "fireTarget": "FIRE зорилт",
-      "median50th": "Медиан (50-р)",
-      "remainingBalance": "Үлдэгдэл баланс",
+      "median50th": "Дундаж (50-р)",
+      "remainingBalance": "Үлдэгдэл",
       "totalAssets": "Нийт хөрөнгө",
-      "totalLiabilities": "Нийт өр төлбөр",
+      "totalLiabilities": "Нийт өр",
       "netWorth": "Цэвэр хөрөнгө",
       "retirement": "Тэтгэвэр"
     },
     "scenario": {
-      "compare": "Хувилбаруудыг харьцуулах ({count} хадгалсан)",
-      "selectUpTo": "Харьцуулахын тулд 3 хүртэл хувилбар сонгоно уу:",
+      "compare": "Хувилбар харьцуулах ({count} хадгалсан)",
+      "selectUpTo": "Харьцуулах 3 хүртэл хувилбар сонгоно уу:",
       "duplicate": "Хуулбарлах",
       "delete": "Устгах",
-      "sideBySide": "Зэрэгцүүлсэн харьцуулалт",
+      "sideBySide": "Зэрэгцээ харьцуулалт",
       "field": "Талбар",
       "delta": "Зөрүү",
-      "selectOneMore": "Харьцуулахын тулд нэг хувилбар нэмж сонгоно уу",
+      "selectOneMore": "Харьцуулахын тулд дахин нэг хувилбар сонгоно уу",
       "copySuffix": "(хуулбар)"
     },
     "openCalculator": "Тооцоолуур нээх"
@@ -1566,67 +1566,67 @@
   },
   "dashboardCustomizer": {
     "alwaysVisible": "Үргэлж харагдана",
-    "ariaLabel": "Самбарын байршлыг тохируулах",
+    "ariaLabel": "Хянах самбарын байрлалыг тохируулах",
     "button": "Тохируулах",
-    "description": "Самбарын виджетүүдийг харуулах эсвэл нуух. Дарааллыг өөрчлөхийн тулд виджетүүдийг чирнэ үү.",
-    "reorderDescription": "Виджетийн дарааллыг өөрчлөхийн тулд виджетүүдийг самбар дээр шууд чирж тавина уу. Виджет карт бүрийн чирэх бариулыг (⋮⋮) хулгана эсвэл хүрэлтээр барина уу.",
-    "reorderTitle": "Виджетийн дараалал өөрчлөх",
+    "description": "Хянах самбарын виджетүүдийг харуулах эсвэл нуух. Виджетүүдийг чирээд дараалалд оруулна уу.",
+    "reorderDescription": "Виджетийн дарааллыг өөрчлөхийн тулд хянах самбар дээр виджетүүдийг чирээд тавина уу. Виджет карт дээрх бариулыг (⋮⋮) хулганаар эсвэл мэдрэгч дэлгэцээр бариарай.",
+    "reorderTitle": "Виджетүүдийн дарааллыг өөрчлөх",
     "resetButton": "Анхдагч болгох",
-    "title": "Самбар тохируулах",
-    "toggleVisibility": "{name} харагдацыг сэлгэх",
+    "title": "Хянах самбарыг тохируулах",
+    "toggleVisibility": "{name}-ийн харагдацыг сэлгэх",
     "widgetVisibility": "Виджетийн харагдац",
-    "widgetsVisible": "{total}-с {visible} виджет харагдаж байна"
+    "widgetsVisible": "{total}-ийн {visible} виджет харагдаж байна"
   },
   "debtAnalysis": {
     "cards": {
       "avgRate": {
-        "subtitle": "Weighted average",
-        "title": "Avg Interest Rate"
+        "subtitle": "Жигнэсэн дундаж",
+        "title": "Дундаж хүү"
       },
       "debtFreeDate": {
-        "subtitle": "Estimated payoff",
-        "title": "Debt-Free Date"
+        "subtitle": "Таамагласан төлөлт",
+        "title": "Өргүй болох огноо"
       },
       "monthlyPayment": {
-        "subtitle": "Total monthly obligations",
-        "title": "Monthly Payment"
+        "subtitle": "Нийт сарын үүрэг",
+        "title": "Сарын төлбөр"
       },
       "totalDebt": {
-        "subtitle": "Across {count} active loans",
-        "title": "Total Debt"
+        "subtitle": "{count} идэвхтэй зээлийн дүнгээр",
+        "title": "Нийт өр"
       }
     },
     "charts": {
       "byType": {
-        "description": "Distribution of debt across loan types",
-        "title": "Debt by Type"
+        "description": "Зээлийн төрлөөр өрийн тархалт",
+        "title": "Төрлөөр өр"
       },
       "projection": {
-        "description": "Expected debt reduction over the next year",
-        "expectedReduction": "Expected reduction: {amount} over 12 months",
-        "title": "12-Month Payoff Projection"
+        "description": "Дараагийн жилийн өрийн бууралт",
+        "expectedReduction": "Хүлээгдэж буй бууралт: 12 сарын хугацаанд {amount}",
+        "title": "12 сарын төлөлтийн таамаглал"
       }
     },
     "comparison": {
-      "description": "Side-by-side comparison of your active loans",
+      "description": "Идэвхтэй зээлүүдийн зэрэгцээ харьцуулалт",
       "headers": {
-        "balance": "Balance",
-        "interestRate": "Interest Rate",
-        "loan": "Loan",
-        "monthlyPayment": "Monthly Payment",
-        "percentOfTotal": "% of Total Debt"
+        "balance": "Үлдэгдэл",
+        "interestRate": "Хүү",
+        "loan": "Зээл",
+        "monthlyPayment": "Сарын төлбөр",
+        "percentOfTotal": "Нийт өрийн %"
       },
-      "title": "Loan Comparison",
-      "total": "Total"
+      "title": "Зээлийн харьцуулалт",
+      "total": "Нийт"
     },
     "empty": {
-      "addFirstLoan": "Add Your First Loan",
-      "description": "You don't have any active loans. Add a loan to see debt analytics.",
-      "title": "No Debt to Analyze"
+      "addFirstLoan": "Анхны зээлээ нэмэх",
+      "description": "Идэвхтэй зээл алга. Зээлийн шинжилгээг харахын тулд зээл нэмнэ үү.",
+      "title": "Шинжлэх өр алга"
     },
-    "subtitle": "Comprehensive view of your loans and obligations",
-    "title": "Debt Analysis",
-    "viewAllLoans": "View All Loans"
+    "subtitle": "Зээл болон үүргийн дэлгэрэнгүй тойм",
+    "title": "Өрийн шинжилгээ",
+    "viewAllLoans": "Бүх зээлийг харах"
   },
   "debtOverview": {
     "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
@@ -1789,8 +1789,8 @@
   "dialog": {
     "cancel": "Цуцлах",
     "confirm": "Баталгаажуулах",
-    "finalConfirmation": "Сүүлийн баталгаажуулалт:",
-    "processing": "Ажиглаж байна...",
+    "finalConfirmation": "Эцсийн баталгаажуулалт:",
+    "processing": "Боловсруулж байна...",
     "typeToConfirm": "Энэ үйлдлийг баталгаажуулахын тулд {text} гэж бичнэ үү.",
     "confirmAction": "Үйлдлийг баталгаажуулах"
   },
@@ -1804,49 +1804,49 @@
   },
   "emptyStates": {
     "budgets": {
-      "description": "Янз бүрийн ангилалын зарлагыг хянаж, санхүүгийн зорилгодоо хүрэхийн тулд төсөв үүсгэнэ үү.",
-      "heading": "Төсөв үүсгэгдээгүй",
+      "description": "Төсөв үүсгэж, янз бүрийн ангиллын зарцуулалтыг хянаж, санхүүгийн зорилгодоо хүрнэ үү.",
+      "heading": "Төсөв үүсгээгүй байна",
       "primaryCta": "Анхны төсвөө үүсгэх"
     },
     "categories": {
-      "description": "Гүйлгээнүүдээ анхдагч ангилалаас цааш зохион байгуулахын тулд тусгай ангилал үүсгэнэ үү.",
-      "heading": "Тусгай ангилал байхгүй",
+      "description": "Анхдагч ангиллаас гадна гүйлгээгээ ангилах тусгай ангилал үүсгэнэ үү.",
+      "heading": "Тусгай ангилал алга",
       "primaryCta": "Ангилал нэмэх"
     },
     "dashboard": {
-      "description": "Санхүүгийн тоймоо харахын тулд банкны гүйлгээгээ импортлох эсвэл дансаа гараар нэмж эхлэнэ үү.",
+      "description": "Банкны гүйлгээгээ импортлох эсвэл дансаа гараар нэмж санхүүгийн тойм харна уу.",
       "heading": "Төсвийн аппд тавтай морил!",
       "primaryCta": "CSV импортлох",
       "secondaryCta": "Гүйлгээ нэмэх"
     },
     "futurePlans": {
-      "description": "Байшин худалдан авах, боловсролын хадгаламж, амралтын аялал зэрэг санхүүгийн зорилго тавина уу.",
-      "heading": "Ирээдүйн төлөвлөгөө байхгүй",
+      "description": "Байшин худалдан авах, боловсрол хуримтлуулах, амралт төлөвлөх зэрэг санхүүгийн зорилго тавина уу.",
+      "heading": "Ирээдүйн төлөвлөгөө алга",
       "primaryCta": "Зорилго үүсгэх"
     },
     "investments": {
-      "description": "Хөрөнгө оруулалтын данс, хувьцааны гүйцэтгэл, цэвэр хөрөнгөө хянахын тулд хөрөнгө оруулалтаа бүртгэнэ үү.",
-      "heading": "Хөрөнгө оруулалт бүртгэгдээгүй",
+      "description": "Хөрөнгө оруулалтын данс, хөрөнгийг хянаж, багцын гүйцэтгэл болон цэвэр хөрөнгийг мөшгих боломжтой.",
+      "heading": "Хөрөнгө оруулалт хянагдаагүй байна",
       "primaryCta": "Хөрөнгө оруулалтын данс нэмэх"
     },
     "loans": {
-      "description": "Зээл, ипотек, өр төлбөрөө бүртгэж, эргэн төлөлтийн явцыг харна уу.",
-      "heading": "Зээл бүртгэгдээгүй",
+      "description": "Зээл, ипотек, өрийг хянаж, төлөлтийн явцыг дүрслэж, төлбөрийн төлөвлөгөө гарганa уу.",
+      "heading": "Зээл хянагдаагүй байна",
       "primaryCta": "Анхны зээлээ нэмэх"
     },
     "reports": {
-      "description": "Зарлагын хэв маяг, чиг хандлагын талаар тайлан гаргахын тулд гүйлгээ болон төсөв нэмнэ үү.",
-      "heading": "Тайлагнах мэдээлэл байхгүй",
+      "description": "Зарцуулалтын хэв маяг, чиг хандлагын талаар тайлан гаргахын тулд гүйлгээ болон төсөв нэмнэ үү.",
+      "heading": "Мэдээлэх мэдээлэл алга",
       "primaryCta": "Гүйлгээ нэмэх",
       "secondaryCta": "CSV импортлох"
     },
     "retirement": {
-      "description": "Данс хянах, хэрэгцээгээ тооцоолох, тэтгэврийн хуваарийг төсөөлөх замаар тэтгэвэрт гарах төлөвлөгөө гарга.",
-      "heading": "Тэтгэврийн төлөвлөгөө байхгүй",
-      "primaryCta": "Төлөвлөж эхлэх"
+      "description": "Тэтгэврийн дансуудыг хянаж, хэрэгцээг тооцоолж, тэтгэврийн хуваарийг дүрслэн төлөвлөнө үү.",
+      "heading": "Тэтгэврийн төлөвлөгөө алга",
+      "primaryCta": "Төлөвлөгөө эхлэх"
     },
     "transactions": {
-      "description": "Зарлагаа хянаж эхлэхийн тулд анхны гүйлгээгээ нэмнэ үү. Гараар эсвэл CSV файлаас импортлож болно.",
+      "description": "Эхний гүйлгээгээ нэмж зарцуулалтаа хянаж эхэлнэ үү. Гараар нэмэх эсвэл CSV файлаас импортлох боломжтой.",
       "heading": "Гүйлгээ байхгүй байна",
       "primaryCta": "Гүйлгээ нэмэх",
       "secondaryCta": "CSV импортлох"
@@ -2052,10 +2052,10 @@
     "links": {
       "login": "Нэвтрэх",
       "settings": "Тохиргоо",
-      "signup": "Судалгааг эхлэх",
+      "signup": "Туршилт эхлэх",
       "upgrade": "Шинэчлэх"
     },
-    "tagline": "Нэг удаагийн шинэчлэлтээр дээд зэргийн төсөвлөлт."
+    "tagline": "Нэг удаагийн шинэчлэлтэй дээд зэргийн төсөвлөлт."
   },
   "fridayReview": {
     "back": "Back",
@@ -2100,22 +2100,22 @@
   "healthScore": {
     "ariaLabel": "Санхүүгийн эрүүл мэндийн оноо: 100-аас {score}. {interpretation}",
     "emptyState": {
-      "line1": "Таны санхүүгийн эрүүл мэндийн оноог харахын тулд",
-      "line2": "гүйлгээ нэмнэ үү"
+      "line1": "Гүйлгээ нэмж харна уу",
+      "line2": "Санхүүгийн эрүүл мэндийн оноо"
     },
-    "grade": "Зэрэг: {grade}",
+    "grade": "Зэрэглэл: {grade}",
     "missingFactors": "{count, plural, =1 {1 хүчин зүйл дутуу} other {# хүчин зүйл дутуу}}",
     "title": "Санхүүгийн эрүүл мэнд",
     "history": {
-      "title": "Оноо түүх",
-      "monthsOfData": "{count} {count, plural, =1 {сар} other {сар}}-ын мэдээлэл",
-      "emptyTitle": "Мэдээлэл хуримтлагдах тусам оноо түүх энд харагдана",
-      "emptySubtitle": "Дараа сард дахин шалгана уу!",
+      "title": "Онооны түүх",
+      "monthsOfData": "{count} {count, plural, =1 {сарын} other {сарын}} мэдээлэл",
+      "emptyTitle": "Мэдээлэл хуримтлагдахад онооны түүх энд харагдана",
+      "emptySubtitle": "Дараагийн сард дахин шалгаарай!",
       "legendScore": "Оноо",
       "legendTrend": "Чиг хандлага",
       "tooltipScore": "Оноо",
       "tooltipTrend": "Чиг хандлага",
-      "loadingChart": "График ачиж байна..."
+      "loadingChart": "График ачааллаж байна..."
     }
   },
   "holdingModal": {
@@ -2311,30 +2311,30 @@
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "Дүрслэх хөрөнгө алга. Хөрөнгө нэмж графикуудыг харна уу.",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "Ашиг",
+      "loss": "Алдагдал"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
-      "total": "Total"
+      "allocation": "Хуваарилалт",
+      "costBasis": "Өртгийн суурь",
+      "currentValue": "Одоогийн үнэ цэнэ",
+      "gainLoss": "Ашиг/Алдагдал",
+      "percentReturn": "% Өгөөж",
+      "symbol": "Тэмдэг",
+      "total": "Нийт"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "Дансны төрлөөр хуваарилалт",
+      "gainLoss": "Ашиг/Алдагдал",
+      "performanceSummary": "Гүйцэтгэлийн хураангуй",
+      "portfolioAllocation": "Хөрөнгийн сангийн хуваарилалт"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "Өртгийн суурь",
+      "currentValue": "Одоогийн үнэ цэнэ",
+      "percentOfPortfolio": "Хөрөнгийн сангийн {percent}%"
     }
   },
   "investments": {
@@ -2463,16 +2463,16 @@
   "landing": {
     "accessibility": {
       "badges": {
-        "keyboardFirst": "Товчлуурын анхдагч",
-        "largeTouchTargets": "Том хүрэх зорилтууд",
-        "seniorsMode": "Ахмадын горим"
+        "keyboardFirst": "Гар-тэргүүлсэн",
+        "largeTouchTargets": "Том мэдрэх зорилт",
+        "seniorsMode": "Ахмад горим"
       },
       "buttons": {
         "openApp": "Аппыг нээх",
-        "settings": "Хандалтын тохиргоо"
+        "settings": "Хүртээмжийн тохиргоо"
       },
-      "description": "Ахмадын горим нь хялбар навигаци болон том хүрэх зорилтуудыг хангадаг. Товчлуурын товчлуурууд, анхаарал төвлөрүүлэх, тод контраст нь бүх хүнд хурдан шилжихэд тусалдаг.",
-      "title": "Анхнаас нь хандалттай"
+      "description": "Ахмад горим нь хялбаршуулсан навигаци болон том мэдрэх зорилтуудыг хангадаг. Гарын товчлол, фокус, тод тодосгол нь бүх хүнд тусалдаг.",
+      "title": "Анхдагч хүртээмж"
     },
     "brand": {
       "name": "BudgetPro",
@@ -2480,111 +2480,111 @@
     },
     "comparison": {
       "bankConnections": {
-        "cloud": "Албадан агрегат",
-        "feature": "Банкны холболтууд",
-        "local": "CSV / Гар аргаар л",
-        "sync": "Сонголттой (Шифрлэгдсэн)"
+        "cloud": "Заавал агрегаци",
+        "feature": "Банкны холболт",
+        "local": "Зөвхөн CSV / Гар",
+        "sync": "Нэмэлт (Шифрлэгдсэн)"
       },
       "cost": {
-        "cloud": "$100+/жилд гишүүнчлэл",
+        "cloud": "$100+/жил Захиалга",
         "feature": "Зардал",
-        "local": "Үнэгүй мөнх",
+        "local": "Үүрд үнэгүй",
         "sync": "Нэг удаагийн шинэчлэлт"
       },
       "dataPrivacy": {
-        "cloud": "Ажилчид үзэж болно",
-        "feature": "Өгөгдлийн нууцлал",
-        "local": "100% Нууц (Оронд)",
-        "sync": "Эцсийн шифрлэлтэй"
+        "cloud": "Ажилтнууд харах боломжтой",
+        "feature": "Мэдээллийн нууцлал",
+        "local": "100% Нууцлагдсан (Локал)",
+        "sync": "Төгсгөлөөс төгсгөл шифрлэлт"
       },
       "headers": {
-        "cloud": "Энгийн Үүл Апп",
-        "feature": "Онцлог",
-        "local": "BudgetPro Оронд",
-        "sync": "BudgetPro Синк (Мэргэжлийн)"
+        "cloud": "Ердийн үүлэн апп",
+        "feature": "Боломж",
+        "local": "BudgetPro Локал",
+        "sync": "BudgetPro Синх (Pro)"
       },
       "offlineMode": {
         "feature": "Офлайн горим"
       },
       "storageLocation": {
-        "cloud": "Тэдний өгөгдлийн сан",
-        "feature": "Хадгалах байршил",
+        "cloud": "Тэдний мэдээллийн сан",
+        "feature": "Хадгалалтын байршил",
         "local": "Таны төхөөрөмж",
-        "sync": "Тодорхойлсон мэдлэггүй үүл"
+        "sync": "Тэг-мэдлэгийн үүл"
       }
     },
     "faq": {
       "0": {
-        "a": "Тийм. Оронд-Луужин протоколд өгөгдөл таны төхөөрөмжөөс хэзээ ч гарахгүй. Энэ нь таны браузерийн IndexedDB-д амьдардаг.",
-        "q": "Миний өгөгдөл үнэхээр нууцалсан уу?"
+        "a": "Тийм. Локал горимд мэдээлэл таны төхөөрөмжөөс хэзээ ч гарахгүй. IndexedDB-д хадгалагдана.",
+        "q": "Миний мэдээлэл үнэхээр нууцлагдсан уу?"
       },
       "1": {
-        "a": "Та хэзээ ч бүрэн JSON нөөцлөлтийг экспортлох боломжтой. Бид мөн тогтмол CSV экспортлохыг санал болгож байна.",
-        "q": "Миний өгөгдлийг хэрхэн нөөцлөх вэ?"
+        "a": "Хүссэн үедээ бүрэн JSON нөөцлөлт экспортлох боломжтой. Мөн тогтмол CSV экспорт хийхийг зөвлөдөг.",
+        "q": "Мэдээллээ хэрхэн нөөцлөх вэ?"
       },
       "2": {
-        "a": "Ирэхэд: Төхөөрөмжүүдийн хооронд шифрлэгдсэн өгөгдлийг синк хийх сонголттой гишүүнчлэл.",
-        "q": "'Синк' мэргэжлийн юу вэ?"
+        "a": "Удахгүй гарна: Supabase-ээр дамжуулан шифрлэгдсэн мэдээллийг төхөөрөмжүүд хооронд синхрончлох нэмэлт захиалга.",
+        "q": "'Sync' Pro гэж юу вэ?"
       },
       "3": {
-        "a": "Үгүй. Бид гар аргаар импортлох нь аюулгүй, илүү найдвартай, мөн санхүүгийн мэдлэгийг бий болгодог гэж үздэг.",
-        "q": "Та банктай холбогддог уу?"
+        "a": "Үгүй. Гар импорт нь илүү аюулгүй, найдвартай, санхүүгийн мэдлэг нэмдэг гэж бид үздэг.",
+        "q": "Банктай холбогддог уу?"
       }
     },
     "faqSection": {
-      "description": "Судалгаа, үнэ, болон хандалтын талаархи нийтлэг асуултуудад хялбар хариултууд.",
+      "description": "Туршилт, үнэ, хандалтын талаарх энгийн хариултууд.",
       "title": "Түгээмэл асуултууд"
     },
     "features": {
       "0": {
-        "description": "Цэвэр хөрөнгө, мөнгөний урсгал, болон ангиллын задрал. Шуурхай ачааллын хугацаа.",
+        "description": "Цэвэр хөрөнгө, мөнгөн урсгал, ангиллын задаргаа. Шуурхай ачааллал.",
         "href": "/budget-app",
-        "title": "Оронд-Луужин Тохиргоо"
+        "title": "Локал хянах самбар"
       },
       "1": {
-        "description": "BMO, Home Trust, болон өөрийн тохиргооны форматыг ухаалаг CSV маппер.",
+        "description": "BMO, Home Trust болон тохируулах боломжтой форматуудад зориулсан ухаалаг CSV зурагч.",
         "href": "/budget-app/import",
-        "title": "Импортын шидэт"
+        "title": "Импортын шидтэн"
       },
       "2": {
-        "description": "Баримтыг Tesseract.js-ээр орон дотор скан хийх. Үүлний боловсруулалтгүй.",
+        "description": "Tesseract.js ашиглан баримтыг локал уншуулна. Үүлэн боловсруулалт байхгүй.",
         "href": "/budget-app/ocr",
-        "title": "Баримт OCR"
+        "title": "Баримтын OCR"
       },
       "3": {
-        "description": "Тодорхой ангиллын хяналтаар 0-ээс эхлэх эсвэл шилжүүлэх төсөв.",
+        "description": "Тэг суурьтай эсвэл шилжүүлгийн төсөвлөлт нарийвчилсан ангиллын хяналттай.",
         "href": "/budget-app/budgets",
         "title": "Ангиллын төсөв"
       },
       "4": {
-        "description": "Нийтлэг хүүгийн визуалчлалтайгаар чөлөөт хугацааг төсөөлөх.",
+        "description": "Нийлмэл хүүний дүрслэлтэй чөлөөт огноогоо тооцоолно.",
         "href": "/budget-app/planning/retirement",
-        "title": "Тэтгэвэр тооцоологч"
+        "title": "Тэтгэврийн тооцоолуур"
       },
       "5": {
-        "description": "Нэмэлт аюулгүй байдлын давхаргад зориулсан сонголттой хэрэглэгчийн талын шифрлэлтийг агуулдаг.",
+        "description": "Нэмэлт хамгаалалтын давхаргад зориулсан нэмэлт клиент талын шифрлэлт.",
         "href": "/budget-app/settings",
-        "title": "Нууцлалын хамгаалалт"
+        "title": "Нууцлалын бамбай"
       }
     },
     "featuresDeepDive": {
-      "cta": "Үнэгүй туршилтыг эхлүүлэх",
-      "description": "Эрх чөлөөтэй хяналтыг хурдан, орчин үеийн аппын хурдтайгаар авах.",
+      "cta": "Үнэгүй туршилт эхлэх",
+      "description": "Эвдэрсэн томъёотой тэмцэхээ боль. Гар хяналтын уян хатан байдлыг орчин үеийн аппын хурдтай хослуул.",
       "explore": "Судлах",
-      "heading1": "Графикийн хүч.",
-      "heading2": "Аппын хялбар байдал."
+      "heading1": "Хүснэгтийн хүч.",
+      "heading2": "Аппын энгийн байдал."
     },
     "footer": {
       "allRightsReserved": "Бүх эрх хуулиар хамгаалагдсан.",
       "api": "API",
-      "changelog": "Өөрчлөлтийн жагсаалт",
+      "changelog": "Өөрчлөлтийн бүртгэл",
       "community": "Нийгэмлэг",
-      "cookiePolicy": "Кукийн бодлого",
+      "cookiePolicy": "Күүкийн бодлого",
       "documentation": "Баримт бичиг",
-      "download": "Татаж авах",
-      "features": "Онцлог",
-      "helpCenter": "Туслах төв",
-      "legal": "Хууль",
+      "download": "Татах",
+      "features": "Боломжууд",
+      "helpCenter": "Тусламжийн төв",
+      "legal": "Хууль эрх зүй",
       "pricing": "Үнэ",
       "privacyPolicy": "Нууцлалын бодлого",
       "product": "Бүтээгдэхүүн",
@@ -2592,76 +2592,76 @@
       "termsOfService": "Үйлчилгээний нөхцөл"
     },
     "hero": {
-      "badge": "Нууцлал-Эхлэгч • Оронд-Луужин • Тогтмол Хяналтгүй",
-      "finePrint": "Банкны мэдээлэл шаардлагагүй. Оронд-Луужин горимд данс шаардлагагүй.",
-      "headline": "Мөнгөө удирдах, мэдээллээ зарахгүйгээр.",
+      "badge": "Нууцлал-тэргүүлсэн • Зөвхөн локал • Хяналтгүй",
+      "finePrint": "Банкны нэвтрэх мэдээлэл шаардлагагүй. Локал горимд бүртгэл шаардлагагүй.",
+      "headline": "Мэдээллээ зарахгүйгээр мөнгөө эзэмш.",
       "primaryCta": {
         "href": "/budget-app/auth/signup",
-        "label": "Оронд-Луужин протоколыг эхлүүлэх (Үнэгүй)"
+        "label": "Локал горимыг эхлэх (Үнэгүй)"
       },
       "secondaryCta": {
         "href": "/budget-app/auth/login",
         "label": "Нэвтрэх"
       },
-      "subhead": "Графикийн хүч. Аппын хялбар байдал. Таны өгөгдөл хэзээ ч төхөөрөмжөөсөө гарахгүй гэдгийг баталгаажуулсан цорын ганц төсвийн апп-тай санхүүгийн тодорхой байдлыг мэдрээрэй."
+      "subhead": "Хүснэгтийн хүч. Аппын энгийн байдал. Таны мэдээлэл төхөөрөмжөөс хэзээ ч гарахгүй гэдгийг баталгаажуулдаг цорын ганц төсвийн апп."
     },
     "heroSection": {
       "badges": {
-        "noSubscriptions": "Гишүүнчлэлгүй",
-        "offlineReady": "Офлайн-д бэлэн",
-        "seniorsMode": "Ахмадын горим"
+        "noSubscriptions": "Захиалгагүй",
+        "offlineReady": "Офлайн бэлэн",
+        "seniorsMode": "Ахмад горим"
       },
       "cta": {
-        "heading": "Тодорхой байдлын төлөө, эмх замбараагүй байдлын төлөө биш.",
-        "viewPricing": "Үнэ харах"
+        "heading": "Эмх замбараатай байхад зориулсан, хаосад биш.",
+        "viewPricing": "Үнийг харах"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "Үүлэн хадгалалт",
+        "dining": "Зоогийн газар",
+        "expenses": "Зарлага",
+        "foodToday": "Хоол • Өнөөдөр",
+        "groceries": "Хүнсний бүтээгдэхүүн",
+        "groceryStore": "Хүнсний дэлгүүр",
+        "income": "Орлого",
+        "incomeYesterday": "Орлого • Өчигдөр",
+        "monthly": "Сар бүр",
+        "netWorth": "Цэвэр хөрөнгө",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "Цалин",
+        "shopping": "Дэлгүүр",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "Захиалга • 10 сар 24",
+        "yearly": "Жил бүр"
       },
       "modes": {
         "budgets": "Төсөв",
-        "dashboard": "Тохиргоо",
-        "subscriptions": "Гишүүнчлэл"
+        "dashboard": "Хянах самбар",
+        "subscriptions": "Захиалга"
       },
       "preview": {
         "categoryBudgets": "Ангиллын төсөв",
-        "livePreview": "Амьд урьдчилсан",
+        "livePreview": "Шууд урьдчилж харах",
         "recentTransactions": "Сүүлийн гүйлгээ",
-        "recurring": "Давтагдсан"
+        "recurring": "Давтагдах"
       }
     },
     "howItWorks": {
       "0": {
-        "description": "CSV-ийг чирж, хаяж эсвэл баримтыг скан хийх. AI нь багануудыг орон дотор маплана.",
-        "title": "Импорт"
+        "description": "CSV чирэх эсвэл баримт уншуулах. AI баганыг локал зураглана.",
+        "title": "Импортлох"
       },
       "1": {
-        "description": "Ухаалаг дүрмүүд болон багц үйлдлүүдтэйгээр хурдан ангилах.",
-        "title": "Хянах"
+        "description": "Ухаалаг дүрэм болон нийт үйлдэлтэй хурдан ангилал.",
+        "title": "Шалгах"
       },
       "2": {
-        "description": "Бүх долларыг ажилд томилж, ирээдүйн цэвэр хөрөнгийг төсөөлөх.",
+        "description": "Доллар бүрд ажил оноож, ирээдүйн цэвэр хөрөнгийг таамаглана.",
         "title": "Төлөвлөх"
       }
     },
     "howItWorksSection": {
-      "description": "Танд хурдан тодорхой байдлыг олгох ажиллах урсгал, төвөгтэй системд хязгаарлахгүй.",
-      "title": "Яаж ажилладаг"
+      "description": "Ойлгомжтой байдалд хурдан хүрдэг, нарийн системд түгжихгүй ажлын урсгал.",
+      "title": "Хэрхэн ажилладаг"
     },
     "marquee": {
       "logos": [
@@ -2680,73 +2680,73 @@
     },
     "outcomes": {
       "0": {
-        "description": "Алдагдсан холбоос эсвэл дахин баталгаажуулах циклийг зогсоо. Та өгөгдлийг оруулах хяналтыг барьж байна.",
-        "title": "Агрегаторуудтай тэмцэхээ боль"
+        "description": "Тасарсан холболт, дахин баталгаажуулалт байхгүй. Мэдээллийн оруулалтыг та хянана.",
+        "title": "Агрегатортай тэмцэхээ боль"
       },
       "1": {
-        "description": "Бид таны өгөгдлийг зарахгүй, учир нь бид үүнийг эзэмшдэггүй. Цаг хугацаа.",
-        "title": "Нууцлал дизайнаар"
+        "description": "Бид мэдээллийг зарахгүй, учир нь бидэнд байхгүй. Цэг.",
+        "title": "Нууцлалын дизайн"
       },
       "2": {
-        "description": "Тэтгэвэр, зээлийн төлбөр, болон хадгаламжийн зорилтуудыг нэгтгэсэн харагдацад загварчлах.",
-        "title": "Ирээдүйн төлөвлөлт"
+        "description": "Тэтгэвэр, зээлийн төлөлт, хуримтлалын зорилгыг нэг нэгдсэн харагдацад загварчлах.",
+        "title": "Ирээдүйд чиглэсэн төлөвлөлт"
       },
       "3": {
-        "description": "Бусад апп-ууд алдаж буй давтагдсан зардлуудыг олж харах.",
-        "title": "Гишүүнчлэлийн устгах"
+        "description": "Бусад апп алддаг давтагдах зарцуулалтыг олж тогтооно.",
+        "title": "Захиалгын хянагч"
       }
     },
     "outcomesSection": {
-      "description": "Ихэнх төсвийн апп-ууд таныг ажиллуулахыг шаардаж байна. BudgetPro нь танд хяналтыг хадгалахын зэрэгцээ саад бэрхшээлийг бууруулахад зориулагдсан.",
-      "title": "Жинхэнэ амьдралд зориулан бүтээгдсэн, графикт биш"
+      "description": "Ихэнх төсөвлөлтийн апп нь танд ажлыг хийлгэдэг. BudgetPro нь таныг хяналтдаа байлгахын зэрэгцээ саадыг багасгахад зориулагдсан.",
+      "title": "Бодит амьдралд зориулсан, хүснэгтэнд биш"
     },
     "preview": {
-      "balanceAmount": "₮24,500,000.00",
+      "balanceAmount": "$24,500.00",
       "balanceChange": "+12.5%",
-      "currencySymbol": "₮",
-      "expenses": "Зардал",
-      "expensesAmount": "₮1,250,000.00",
+      "currencySymbol": "$",
+      "expenses": "Зарлага",
+      "expensesAmount": "$1,250.00",
       "expensesChange": "-5.2%",
-      "live": "Амьд",
+      "live": "Шууд",
       "overview": "Тойм",
       "recentTransactions": "Сүүлийн гүйлгээ",
-      "savingsGoal": "Хадгаламжийн зорилго",
+      "savingsGoal": "Хуримтлалын зорилго",
       "savingsPercent": "85%",
-      "totalBalance": "Нийт тэнцэл",
-      "tx0Amount": "-₮124,500.00",
+      "totalBalance": "Нийт үлдэгдэл",
+      "tx0Amount": "-$124.50",
       "tx0Date": "Өнөөдөр, 14:30",
       "tx0Name": "Хүнсний дэлгүүр",
-      "tx1Amount": "+₮4,250,000.00",
+      "tx1Amount": "+$4,250.00",
       "tx1Date": "Өчигдөр, 09:00",
-      "tx1Name": "Техник шийдлүүд ХХК",
-      "tx2Amount": "-₮15,990.00",
-      "tx2Date": "2025 оны 10-р сарын 24",
+      "tx1Name": "Tech Solutions Inc.",
+      "tx2Amount": "-$15.99",
+      "tx2Date": "2025 оны 10 сарын 24",
       "tx2Name": "Netflix захиалга",
-      "vsLastMonth": "сүүлийн сарынхаа",
-      "welcomeBack": "Сайн уу, Алекс"
+      "vsLastMonth": "өнгөрсөн сартай харьцуулахад",
+      "welcomeBack": "Тавтай морил, Алекс"
     },
     "pricing": {
       "cta": {
         "href": "/budget-app/auth/signup",
-        "label": "Оронд-Луужин протоколыг эхлүүлэх"
+        "label": "Локал горимыг эхлэх"
       },
-      "description": "Хүчирхэг Оронд-Луужин протоколоос эхлээрэй. Хожим олон төхөөрөмжийн синк хэрэгтэй бол шинэчлэх.",
+      "description": "Хүчирхэг Локал горимоос эхлэх. Олон төхөөрөмжийн синх хэрэгтэй бол дараа нь шинэчлэх.",
       "eyebrow": "Шударга үнэ",
-      "guarantee": "Оронд-Луужин протоколд кредит карт шаардлагагүй.",
-      "priceLabel": "Үнэгүй мөнх",
+      "guarantee": "Локал горимд банкны карт шаардлагагүй.",
+      "priceLabel": "Үүрд үнэгүй",
       "secondary": {
         "href": "#pricing",
-        "label": "Мэргэжлийн онцлогийг харах"
+        "label": "Pro боломжуудыг харах"
       },
-      "title": "Оронд-Луужин үнэгүй. Синк нь мэргэжлийн."
+      "title": "Локал нь үнэгүй. Синх нь Pro."
     },
     "pricingSection": {
-      "features": "Хязгааргүй гүйлгээ, данс, төсөв, болон бүрэн орон доторх нөөцлөлтийн чадварыг агуулдаг.",
-      "productDescription": "Таны төхөөрөмж дээр бүрэн ажилладаг төсвийн туршлага.",
-      "productName": "Оронд-Луужин протокол",
-      "recommended": "Зөвлөсөн",
-      "whyChoose": "Яагаад Оронд-Луужин протоколыг сонгох вэ?",
-      "whyChooseDescription": "Бид үүлний аваргуудтай хэрхэн өрсөлддөгийг хараарай."
+      "features": "Хязгааргүй гүйлгээ, данс, төсөв, бүрэн локал нөөцлөлтийн боломжийг агуулна.",
+      "productDescription": "Таны төхөөрөмж дээр бүрэн ажилладаг төсөвлөлтийн бүрэн туршлага.",
+      "productName": "Локал горим",
+      "recommended": "Санал болгосон",
+      "whyChoose": "Яагаад Локал горимыг сонгох вэ?",
+      "whyChooseDescription": "Бид үүлэн аварга компаниудтай хэрхэн харьцуулагдахыг харна уу."
     },
     "security": {
       "buttons": {
@@ -2755,63 +2755,63 @@
       },
       "cards": {
         "aiControls": {
-          "description": "AI-д суурилсан функцүүд (жишээ нь, гажиг илрүүлэлт) болон чатботын хандалтыг тохиргооноос удирдах.",
-          "title": "AI функцийн хяналтууд"
+          "description": "AI-д суурилсан функцуудыг (аномали илрүүлэлт гэх мэт) сэлгэж, чатботын хандалтыг тохиргооноос удирдана.",
+          "title": "AI функцийн хяналт"
         },
         "encryption": {
-          "description": "Апп нь идэвхжүүлсэн үед мэдрэмтгий төсвийн бичлэгийг хамгаалахын тулд шифрлэлийн давхаргыг агуулдаг.",
-          "title": "Шифрлэлийн дэмжлэг"
+          "description": "Апп нь идэвхжүүлсэн үед нууц мэдээллийг хамгаалах шифрлэлтийн давхарга агуулдаг.",
+          "title": "Шифрлэлтийн дэмжлэг"
         },
         "exportDelete": {
-          "description": "Өгөгдөл болон нууцлалын тохиргоог экспортлох, эсвэл апп-аас шууд орон доторх өгөгдлийг устгах.",
+          "description": "Мэдээлэл болон нууцлалын тохиргоог экспортлох эсвэл локал мэдээллийг аппаас шууд устгах.",
           "title": "Экспорт & устгах"
         },
         "localStorage": {
-          "description": "Таны төсвийн өгөгдөл таны браузерийн (IndexedDB) дотор хадгалагдана, ингэснээр апп хурдан, офлайн-д ашиглахад хялбар байна.",
-          "title": "Оронд хадгалах"
+          "description": "Төсвийн мэдээлэл хөтөч дотор (IndexedDB) хадгалагддаг тул апп хурдан, офлайн ажилладаг.",
+          "title": "Локал хадгалалт"
         }
       },
-      "description": "Төсвийн апп таны өгөгдлийг орон дотор хадгалж (офлайн-д бэлэн) AI функцийг, экспортлох, устгах хяналтыг өгдөг.",
-      "title": "Нууцлал дизайнаар"
+      "description": "Төсвийн апп нь мэдээллийг локал хадгалж (офлайн бэлэн), AI функцууд, экспорт, устгах хяналтыг өгдөг.",
+      "title": "Нууцлал-тэргүүлсэн дизайн"
     },
     "socialProof": {
-      "description": "Төсвийг барихад шаардлагатай нарийн ширийн зүйлс: танилцуулга, товчлуурууд, гар утасны навигаци, офлайн-д бэлэн гүйцэтгэл.",
+      "description": "Төсөвлөлтийг тогтмол болгодог нарийн ширийн зүйлс: танилцуулга, товчлол, мобайл навигаци, офлайн бэлэн байдал.",
       "features": {
         "mobileUx": {
-          "description": "Доод навигаци болон үндсэн мэдрэмжтэй хариу үйлдэлтэй загвар.",
-          "title": "Гар утасны анхны UX"
+          "description": "Доод навигаци болон уян хариу харагдац нь хэрэглэгчийн мэт мэдрэмж төрүүлнэ.",
+          "title": "Мобайл-тэргүүлсэн UX"
         },
         "onboarding": {
-          "description": "Шинэ хэрэглэгчид хурдан үнэ цэнийг олоход туслах зааварчилгаа.",
-          "title": "Танилцуулгын туршилт"
+          "description": "Шинэ хэрэглэгчдэд хурдан үнэ цэнэд хүрэхэд тусалдаг удирдамж аялал.",
+          "title": "Танилцуулах аялал"
         },
         "pwaInstall": {
-          "description": "Апп шиг суулгаж, интернетийн хомсдолтой ч үргэлжлүүлэн ажиллах.",
-          "title": "PWA суулгах"
+          "description": "Апп шиг суулгаж, интернет тасарсан ч үргэлжлүүлэн хэрэглэ.",
+          "title": "PWA суулгалт"
         },
         "shortcuts": {
-          "description": "UI-д оруулсан хайлт болон үйлдлийн товчлууруудтай хурдан шилжих.",
-          "title": "Товчлуурын товчлуурууд"
+          "description": "UI-д суурилуулсан хайлт болон үйлдлийн товчлолоор хурдан ажилла.",
+          "title": "Гарын товчлол"
         }
       },
-      "title": "Дээд зэргийн өнгөлгөө, дотор нь"
+      "title": "Суурилуулсан дээд зэргийн чанар"
     },
     "trust": {
       "0": {
-        "description": "Мэдээлэл таны браузерийн IndexedDB-д хадгалагдана. Бид үүнийг харах боломжгүй.",
-        "title": "Таны төхөөрөмж, Таны өгөгдөл"
+        "description": "Мэдээлэл таны хөтчийн IndexedDB-д хадгалагдана. Бид шууд харах боломжгүй.",
+        "title": "Таны төхөөрөмж, таны мэдээлэл"
       },
       "1": {
-        "description": "Олон гүйлгээг засах, эргүүлэх, мэргэжлийнх шиг анализ хийх.",
-        "title": "Графикийн хүч"
+        "description": "Томоор засах, шинжлэх, ангилах - томъёоны толгойн өвчингүйгээр мэргэжлийн түвшинд.",
+        "title": "Хүснэгтийн хүч"
       },
       "2": {
-        "description": "Тогтмол хүлээлтгүй. Уулын орой дээр эсвэл метроны хонгилд ажиллана.",
+        "description": "Тэг хоцрогдол. Уулын оройд эсвэл метроны хонгилд ажиллана.",
         "title": "Офлайн хурд"
       },
       "3": {
-        "description": "Импортын шидэт нь Бямба гаригийн мөнгөний тоймыг сэтгэл ханамжтай зуршил болгоно.",
-        "title": "Гар аргаар зан үйл"
+        "description": "Импортын шидтэн нь Баасны мөнгөний тоймыг сэтгэл хангалуун зуршил болгодог.",
+        "title": "Гар ажиллагаа"
       }
     }
   },
@@ -3085,19 +3085,19 @@
     "whereToFind": "Үүнийг хаанаас олох вэ?"
   },
   "mobileNav": {
-    "accounts": "Данснууд",
+    "accounts": "Данс",
     "activity": "Үйл ажиллагаа",
     "budget": "Төсөв",
     "home": "Нүүр",
-    "more": "Илүү"
+    "more": "Цааш"
   },
   "morePage": {
     "groups": {
       "toolsSettings": "Хэрэгсэл & Тохиргоо",
       "trackingAnalysis": "Хяналт & Шинжилгээ",
-      "wealthPlanning": "Хөрөнгө & Төлөвлөлт"
+      "wealthPlanning": "Баялаг & Төлөвлөлт"
     },
-    "title": "Нэмэлт"
+    "title": "Цааш"
   },
   "nav": {
     "about": "Тухай",
@@ -3283,42 +3283,42 @@
     "tryAgain": "Дахин оролдох"
   },
   "onboarding": {
-    "dontShowAgain": "Энэ туршилтыг дахин харуулахгүй",
+    "dontShowAgain": "Энэ аялалыг дахин бүү харуулаарай",
     "navigation": {
-      "getStarted": "Эхлэх",
+      "getStarted": "Эхэлцгээе",
       "next": "Дараагийн",
       "previous": "Өмнөх",
-      "startTour": "Туршилтыг эхлүүлэх"
+      "startTour": "Аялал эхлэх"
     },
-    "quickTip": "💡 Түргэн зөвлөгөө",
-    "skipTour": "Туршилтыг алгасах",
-    "stepCounter": "Алхам {current} из {total}",
+    "quickTip": "💡 Түргэн зөвлөмж",
+    "skipTour": "Аялалыг алгасах",
+    "stepCounter": "{total} алхмын {current}",
     "steps": {
       "budgets": {
-        "description": "Төсвийн янз бүрийн ангилалд төсөв бий болгоорой. Сар бүрийн явцынхаа хянаж, хязгаараа давж гарах үед анхааруулга авна.",
-        "title": "🎯 Төсвөө тогтоох"
+        "description": "Санхүүгийн хязгаараа тодорхойлно уу. Тусгай хязгаар тавьж, бодит цагийн сэрэмжлүүлэг авна уу.",
+        "title": "Нарийвчилсан төсөвлөлт"
       },
       "categorize": {
-        "description": "Гүйлгээний ангиллыг хянах ба засах. Бидний ухаалаг ангилал таны засваруудыг суралцаж, цаг хугацааны явцад сайжирна. Олон гүйлгээг нэг дор ангилахын тулд багц үйлдлүүдийг ашиглаарай!",
-        "title": "🏷️ Ангилах & Зохион байгуулах"
+        "description": "Манай AI таны зуршлаас суралцдаг. Нэг удаа ангилбал ирээдүйд ижил гүйлгээг автоматаар зохицуулна.",
+        "title": "Ухаалаг ангилал"
       },
       "import": {
-        "description": "Эхлээд банкны гүйлгээ импортлоорой. Бид BMO, Home Trust болон бусад олон банкинд дэмжлэг үзүүлдэг. Апп таны гүйлгээг автоматаар ангилна!",
-        "title": "📥 Гүйлгээ импортлох"
+        "description": "Гүйлгээний түүхийг саадгүй оруулна уу. BMO, Home Trust зэрэг томоохон банкуудыг автомат илрүүлэлтээр дэмждэг.",
+        "title": "Хялбар мэдээлэл импортлох"
       },
       "reports": {
-        "description": "Таны зарлагын хэв маягийг визуалчлах, цэвэр хөрөнгийг хянах, болон санхүүгийн шийдвэр гаргахад туслах. Таны тохиргоо гүйлгээ бүрийн дараа автоматаар шинэчлэгдэнэ!",
-        "title": "📊 Тайлан & Мэдээлэл харах"
+        "description": "Мэдээллийнхээ хүчийг нээнэ үү. Чиг хандлагыг дүрслэж, цэвэр хөрөнгийг хянаж, дэлгэрэнгүй аналитик дээр суурилсан шийдвэр гарга.",
+        "title": "Гүнзгий шинжилгээ"
       },
       "welcome": {
-        "description": "Таны гэрийн санхүүг удирдахад туслах түргэн туршилтыг хийцгээе. Энэ удаа удаан хугацаа шаардахгүй!",
-        "title": "👋 Төсвийн апп-д тавтай морилно уу!"
+        "description": "Хөрөнгөө удирдах ухаалаг арга замыг туршаарай. Шинэ санхүүгийн удирдлагын төв рүү богино аялал хийцгээе.",
+        "title": "Санхүүгийн ойлголтод тавтай морил"
       }
     },
     "tips": {
-      "budgets": "Бодит төсвийг тогтоож, хэтрэх магадлалтай бол анхааруулга өгнө.",
-      "categorize": "Түргэн ангилах товчийг ашиглах эсвэл олон гүйлгээг багц ангилалд оруулах.",
-      "import": "CSV файлаа чирж, хаяж эсвэл хайж олоход дарна уу. Бид BMO болон Home Trust форматыг автоматаар илрүүлдэг!"
+      "budgets": "Сарын хязгаар тогтоож, зарцуулалтын хурдыг бодит цагт хянана уу.",
+      "categorize": "Олон гүйлгээг сонгож, ангиллыг нэг дор хэрэглэнэ үү—үр ашиг чухал.",
+      "import": "CSV файлаа чирээд тавихад хангалттай. Формаатыг автоматаар зохицуулна."
     }
   },
   "onboardingPage": {
@@ -3716,26 +3716,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "Бодит",
+      "confidenceInterval": "Итгэлцлийн интервал",
+      "predicted": "Таамагласан"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "Таамаглалд зориулсан мэдээлэл алга",
+    "predictionUnavailable": "Таамаглал боломжгүй",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "Дундаж итгэлцэл",
+      "nextMonth": "Дараагийн сар",
+      "threeMonthAvg": "3 сарын дундаж"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "Итгэлцэл",
+      "month": "Сар",
+      "predicted": "Таамагласан",
+      "range": "Хүрээ",
+      "title": "Сарын таамаглалууд"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "Зарцуулалтын таамаглал: {category}",
+    "trainingModel": "Загвар сургаж, таамаглал боловсруулж байна..."
   },
   "privacyPanel": {
     "active": "Идэвхтэй",
@@ -3855,27 +3855,27 @@
     "deleteButton": "Профайл устгах"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "Шинэчлэхийн тулд чирнэ үү",
+    "release": "Шинэчлэхийн тулд суллана уу"
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "Суулгах",
+      "notNow": "Одоо биш"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "Суулгах мэдэгдлийг хаах",
+    "description": "Түргэн хандалт болон офлайн хэрэглээнд зориулж нүүр дэлгэцэнд нэмнэ үү",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "Хурдан & аюулгүй",
+      "noAppStore": "Апп дэлгүүр шаардлагагүй",
+      "offline": "Офлайн ажилладаг"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"Нүүр дэлгэцэнд нэмэх\"",
+    "iosForFullExperience": "илүү хурдан ачааллалттай бүрэн аппын туршлагыг авахын тулд.",
+    "iosTap": "дарна уу",
+    "iosThen": "дараа нь",
+    "iosTitle": "Төсвийн апп суулгах",
+    "title": "Төсвийн апп суулгах"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3933,11 +3933,11 @@
     "timePeriod": "Time Period"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "balance": "Нийт үлдэгдэл",
+    "expenses": "Зарлага",
+    "income": "Орлого",
+    "savingsRate": "Хуримтлалын хувь",
+    "savingsRateDescription": "Энэ сард хуримтлуулсан орлогын хувь"
   },
   "receiptThumbnail": {
     "close": "Close",
@@ -4152,40 +4152,40 @@
   },
   "sidebar": {
     "actions": {
-      "backToHome": "Нүүр хуудас руу буцах",
-      "collapseSidebar": "Хажуугийн цэсийг хаах",
-      "expandSidebar": "Хажуугийн цэсийг өргөжүүлэх",
+      "backToHome": "Нүүр хуудас руу",
+      "collapseSidebar": "Хажуугийн самбарыг хаах",
+      "expandSidebar": "Хажуугийн самбарыг нээх",
       "importCsv": "CSV импортлох",
       "settings": "Тохиргоо",
-      "showAllItems": "Бүх зүйлийг харах",
-      "showLess": "Бага харах"
+      "showAllItems": "Бүгдийг харуулах",
+      "showLess": "Бага харуулах"
     },
     "appSubtitle": "Дээд зэргийн санхүү",
     "appTitle": "Төсвийн апп",
     "navigation": {
-      "accounts": "Данснууд",
+      "accounts": "Данс",
       "budgets": "Төсөв",
-      "calculators": "Тоолуур",
+      "calculators": "Тооцоолуур",
       "categories": "Ангилал",
-      "dashboard": "Тойм",
-      "events": "Үйл явдлууд",
+      "dashboard": "Хянах самбар",
+      "events": "Арга хэмжээ",
       "futurePlans": "Ирээдүйн төлөвлөгөө",
       "import": "CSV импортлох",
       "investments": "Хөрөнгө оруулалт",
       "loans": "Зээл",
       "netWorth": "Цэвэр хөрөнгө",
-      "properties": "Мэдээлэл",
-      "reminders": "Сануулах",
+      "properties": "Өмч хөрөнгө",
+      "reminders": "Сануулга",
       "reports": "Тайлан",
       "retirement": "Тэтгэвэр",
-      "scanReceipt": "Баримт скан хийх",
-      "scenarios": "Юу болох вэ",
+      "scanReceipt": "Баримт уншуулах",
+      "scenarios": "Таамаглал",
       "settings": "Тохиргоо",
-      "subscriptions": "Гишүүнчлэл",
+      "subscriptions": "Захиалга",
       "transactions": "Гүйлгээ"
     },
     "search": "Хайх...",
-    "shortcuts": "Товчлуурууд"
+    "shortcuts": "Товчлол"
   },
   "simplefinConnect": {
     "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
@@ -4351,18 +4351,18 @@
     "warningsLabel": "Warnings:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "Таамаглал нь сүүлийн {months} сарын шугаман регрессид суурилсан",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "Бодит зарцуулалт",
+      "projected": "Таамаглал"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "Чиг хандлага боловсруулахад хангалттай мэдээлэл алга. Дор хаяж 2 сарын гүйлгээ нэмнэ үү.",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "Сарын дундаж",
+      "lastMonth": "Өнгөрсөн сар",
+      "projected": "Таамаглал"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "Зарцуулалтын чиг хандлага & Таамаглал"
   },
   "splitTransaction": {
     "addSplit": "Add Split ({current}/{max})",
@@ -4560,30 +4560,30 @@
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "Шинжлэх идэвхтэй захиалга алга",
+    "loadingChart": "График ачааллаж байна...",
+    "moreCharges": "+{count} нэмэлт төлбөр",
+    "perMonth": "/сар",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "Ангилалаар зардал",
+      "potentialSavings": "Боломжит хэмнэлт",
+      "upcomingCharges": "Удахгүй ирэх төлбөрүүд (Дараагийн 30 хоног)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {1 идэвхтэй захиалга} other {# идэвхтэй захиалга}}",
+      "annualCost": "Жилийн зардал",
+      "monthlyCost": "Сарын зардал",
+      "next30Days": "Дараагийн 30 хоног",
+      "projectedYearly": "Таамагласан жилийн зарцуулалт",
+      "upcomingCharges": "{count, plural, =1 {1 удахгүй ирэх төлбөр} other {# удахгүй ирэх төлбөр}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Цуцалсан байж болох захиалгууд",
+      "inactiveDescription": "{count, plural, =1 {1 захиалга сүүлийн үед} other {# захиалга сүүлийн үед}} төлбөр хийгээгүй. Үнэхээр цуцлагдсан эсэхийг шалгана уу.",
+      "trialsTitle": "Удахгүй дуусах туршилтууд",
+      "trialsDescription": "{count, plural, =1 {1 туршилт} other {# туршилт}} дараагийн 7 хоногт дуусна. Ашиглаагүй бол цуцална уу.",
+      "highCostTitle": "Өндөр зардалтай захиалгууд",
+      "highCostDescription": "Эдгээр захиалгууд нь зарцуулалтын ихэнх хэсгийг бүрдүүлдэг. Бүрэн үнэ цэнэ авч байгаа эсэхийг шалгана уу."
     }
   },
   "subscriptionModal": {
@@ -4711,7 +4711,7 @@
     "syncing": "Syncing..."
   },
   "tooltip": {
-    "ariaLabel": "Нэмэлт мэдээлэл",
+    "ariaLabel": "Дэлгэрэнгүй мэдээлэл",
     "learnMore": "Дэлгэрэнгүй →"
   },
   "trainMl": {
@@ -5063,8 +5063,8 @@
       "title": "Төсвийн прогресс"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "Арга хэмжээ болон төслийн зарцуулалтыг хянана уу",
+      "title": "Арга хэмжээний төсөв"
     },
     "incomeVsExpenses": {
       "description": "Таны орлого, зарлага хоорондын харьцааг харьцуулах",
@@ -5075,32 +5075,32 @@
       "title": "Сар бүрийн хандлага"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "Нийт цэвэр хөрөнгийн товч харагдац",
+      "title": "Цэвэр хөрөнгө"
     },
     "recentTransactions": {
       "description": "Таны сүүлийн санхүүгийн үйл ажиллагааг хурдан харах",
       "title": "Сүүлийн гүйлгээ"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "Ангилал тус бүрээр аюулгүй зарцуулах боломжтой дүнг харна уу",
+      "title": "Зарцуулах боломжтой"
     },
     "spendingByCategory": {
       "description": "Таны мөнгө хаашаа явж байгааг график байдлаар харна уу",
       "title": "Ангилаар зарлага"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "Идэвхтэй байдлын цуваа болон амжилтаа хянана уу",
+      "title": "Цуваа & Цом"
     },
     "upcomingBills": {
       "description": "Төлбөрийн сануулгатайгаар төлбөрөө хэзээ ч алдахгүй",
       "title": "Ирэх төлбөрүүд"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "Долоо хоног бүрийн зарцуулалтын хураангуй",
+      "title": "Долоо хоногийн тойм"
     }
   },
   "ynabMigrationWizard": {
@@ -5234,56 +5234,56 @@
     "importWithErrors": "Импорт {count, plural, =1 {1 алдаатай} other {# алдаатай}} дууслаа"
   },
   "balanceReconciliation": {
-    "title": "Импорт дууссан!",
-    "subtitle": "{accountName} дансны балансыг тохируулна уу",
+    "title": "Импорт дууслаа!",
+    "subtitle": "{accountName}-ийн дансны үлдэгдлийг тохируулна уу",
     "transactionsImported": "{count} гүйлгээ импортлогдсон",
     "netChange": "Гүйлгээний цэвэр өөрчлөлт:",
-    "currentBalanceLabel": "Одоогийн банкны балансаа хэд вэ?",
-    "currentBalanceLabelCredit": "Одоогийн төлбөл зохих дүн хэд вэ?",
-    "balanceHelperBank": "Банкны аппликейшнээ нээж, энэ дансны баланс хэд байгааг оруулна уу",
-    "balanceHelperCredit": "Кредит картын хуулга дээрх одоогийн балансыг оруулна уу (эерэг тоогоор)",
-    "startingBalance": "Эхлэлийн баланс:",
-    "startingBalanceCredit": "Эхлэлийн зээлийн дүн:",
-    "balanceMatchNote": "Энэ нь таны дансны балансыг банктай тааруулна.",
-    "negativeWarning": "Үүний үр дүнд сөрөг эхлэлийн баланс гарч байна, энэ нь хадгаламж/харилцах дансны хувьд ер бусын юм. Одоогийн балансаа дахин шалгана уу.",
+    "currentBalanceLabel": "Одоогийн банкны үлдэгдэл хэд вэ?",
+    "currentBalanceLabelCredit": "Одоогийн өрийн дүн хэд вэ?",
+    "balanceHelperBank": "Банкны аппыг нээж, энэ дансны үлдэгдлийг оруулна уу",
+    "balanceHelperCredit": "Кредит картын хуулгад харагдсан одоогийн үлдэгдлийг эерэг тоогоор оруулна уу",
+    "startingBalance": "Таны эхний үлдэгдэл:",
+    "startingBalanceCredit": "Таны эхний өрийн дүн:",
+    "balanceMatchNote": "Энэ нь таны дансны үлдэгдлийг банктай тааруулна.",
+    "negativeWarning": "Энэ нь сөрөг эхний үлдэгдэл үүсгэж байна, харилцах/хуримтлалын дансанд ер бусын зүйл. Одоогийн үлдэгдлээ дахин шалгана уу.",
     "skipForNow": "Одоохондоо алгасах",
-    "setBalance": "Баланс тохируулах"
+    "setBalance": "Үлдэгдэл тохируулах"
   },
   "recommendations": {
-    "title": "Шилдэг зөвлөмжүүд",
-    "subtitle": "Санхүүгийн эрүүл мэндээ сайжруулах арга замууд",
-    "emptyState": "Хувийн зөвлөмж авахын тулд илүү их санхүүгийн мэдээлэл нэмнэ үү",
+    "title": "Шилдэг зөвлөмж",
+    "subtitle": "Санхүүгийн эрүүл мэндийг сайжруулах арга замууд",
+    "emptyState": "Хувийн зөвлөмж авахын тулд илүү санхүүгийн мэдээлэл нэмнэ үү",
     "viewAllFactors": "Бүх хүчин зүйлийг харах",
     "factorLabels": {
       "savingsRate": "Хуримтлал",
-      "debtToIncome": "Зээл",
+      "debtToIncome": "Өр",
       "budgetAdherence": "Төсөв",
-      "emergencyFund": "Нөөц сан",
+      "emergencyFund": "Яаралтай сан",
       "investmentGrowth": "Хөрөнгө оруулалт",
-      "expenseStability": "Зардал"
+      "expenseStability": "Зарлага"
     },
     "factorLinks": {
       "savingsRate": "Орлого харах",
-      "debtToIncome": "Зээлийг удирдах",
-      "budgetAdherence": "Төсвийг тохируулах",
+      "debtToIncome": "Зээл удирдах",
+      "budgetAdherence": "Төсөв тохируулах",
       "emergencyFund": "Хуримтлал төлөвлөх",
-      "investmentGrowth": "Багцыг харах",
+      "investmentGrowth": "Багц харах",
       "expenseStability": "Тайлан харах"
     }
   },
   "anomalyAlerts": {
-    "merchant": "Худалдаачин:",
+    "merchant": "Худалдаач:",
     "amount": "Дүн:",
     "average": "Дундаж: {amount}",
     "category": "Ангилал:",
-    "wasExpected": "Энэ нь хүлээгдэж байсан уу?",
-    "expected": "Хүлээгдэж байсан",
+    "wasExpected": "Хүлээгдсэн үү?",
+    "expected": "Хүлээгдсэн",
     "unexpected": "Гэнэтийн",
-    "markedExpected": "Хүлээгдэж байсан гэж тэмдэглэсэн",
+    "markedExpected": "Хүлээгдсэн гэж тэмдэглэсэн",
     "markedUnexpected": "Гэнэтийн гэж тэмдэглэсэн",
     "moreAnomalies": "+{count} нэмэлт {count, plural, =1 {аномали} other {аномали}}",
     "severity": {
-      "high": "ӨNDÖR",
+      "high": "ӨНДӨР",
       "medium": "ДУНД",
       "low": "БАГА"
     }
@@ -5291,67 +5291,67 @@
   "pdfOcr": {
     "processing": "OCR боловсруулалт",
     "cancel": "Цуцлах",
-    "pageProgress": "Хуудас {current} / {total}",
-    "elapsed": "Зарцуулсан: {time}",
+    "pageProgress": "Хуудас {current}/{total}",
+    "elapsed": "Өнгөрсөн: {time}",
     "remaining": "~{time} үлдсэн",
     "stages": {
-      "loading": "PDF ачиж байна",
-      "rendering": "Хуудас зурж байна",
+      "loading": "PDF ачааллаж байна",
+      "rendering": "Хуудсуудыг дүрсэлж байна",
       "preprocessing": "Зургийг сайжруулж байна",
-      "ocr": "Текст задалж байна",
-      "parsing": "Гүйлгээ задалж байна",
+      "ocr": "Текст задлаж байна",
+      "parsing": "Гүйлгээ задлаж байна",
       "complete": "Дууссан",
       "error": "Алдаа",
       "cancelled": "Цуцлагдсан",
       "enhance": "Сайжруулах"
     },
-    "errorRetry": "OCR боловсруулалт амжилтгүй боллоо. Дахин оролдох уу?",
+    "errorRetry": "OCR боловсруулалт амжилтгүй. Дахин оролдох уу?",
     "cancelledRetry": "OCR цуцлагдсан. Дахин эхлүүлэх үү?",
     "retryButton": "OCR дахин оролдох",
-    "completedSuccess": "OCR амжилттай дууссан!",
-    "loadingChart": "График ачиж байна..."
+    "completedSuccess": "OCR амжилттай дууслаа!",
+    "loadingChart": "График ачааллаж байна..."
   },
   "developerTools": {
     "title": "Хөгжүүлэгчийн хэрэгслүүд",
-    "subtitle": "Олон улсчлалыг тестлэх QA хэрэгслүүд (зөвхөн dev режим)",
-    "pseudoLocaleLabel": "Хуурамч локальд идэвхжүүлэх (en-XA)",
-    "pseudoLocaleHelp": "Орчуулсан бүх текстийг өргөтгөлтэй тэмдэгтүүдээр солино. Үлдсэн энгийн англи текст нь <strong>хатуу кодлогдсон</strong> бөгөөд орчуулгын түлхүүр рүү хөрвүүлэх шаардлагатай.",
+    "subtitle": "Олон улсчлалын QA хэрэгслүүд (хөгжүүлэлтийн горим)",
+    "pseudoLocaleLabel": "Хуурамч хэл идэвхжүүлэх (en-XA)",
+    "pseudoLocaleHelp": "Бүх орчуулсан текстийг тэмдэгт бүхий тэмдэгтүүдээр сольно. Үлдсэн энгийн англи текст <strong>хатуу кодлогдсон</strong> бөгөөд орчуулгын түлхүүрүүд рүү хөрвүүлэх шаардлагатай.",
     "pseudoLocaleExample": "Жишээ: \"Dashboard\" → \"[Ðášhƀóářð~~~]\"",
-    "pseudoLocaleInstruction": "Хэрэв \"[Ðášhƀóářð~~~]\"-ийн оронд \"Dashboard\" харагдаж байвал, энэ нь хатуу кодлогдсон!",
-    "infoPseudoLocale": "Хуурамч локаль нь хөгжүүлэлтийн үед орчуулагдаагүй мөрүүдийг илрүүлэхэд тусална",
-    "infoProduction": "Продакшн билдүүд en-XA локальд автоматаар хасна",
-    "infoSwitchBack": "Хэвийн хөгжүүлэлтийг үргэлжлүүлэхийн тулд жинхэнэ локаль руу буцаарай"
+    "pseudoLocaleInstruction": "\"Dashboard\"-ийн оронд \"[Ðášhƀóářð~~~]\" харагдахгүй бол хатуу кодлогдсон!",
+    "infoPseudoLocale": "Хуурамч хэл нь хөгжүүлэлтийн үед орчуулагдаагүй мөрүүдийг тодорхойлоход тусалдаг",
+    "infoProduction": "Продакшн бүтээлтүүд en-XA хэлийг автоматаар хассан",
+    "infoSwitchBack": "Хэвийн хөгжүүлэлтийг үргэлжлүүлэхийн тулд жинхэнэ хэл рүү буцна уу"
   },
   "pageMetadata": {
-    "appName": "Төсвийн Апп",
-    "scenarios": "Төсөөлөл сценариуд",
-    "merchantRules": "Худалдаачны дүрмүүд",
-    "more": "Илүү",
-    "netWorth": "Цэвэр өртөг",
-    "properties": "Үл хөдлөх хөрөнгө",
-    "propertyDetail": "Үл хөдлөх хөрөнгийн дэлгэрэнгүй",
-    "review": "Гүйлгээнүүдийг шалгах",
+    "appName": "Төсвийн апп",
+    "scenarios": "Таамаглалын хувилбар",
+    "merchantRules": "Худалдаачийн дүрэм",
+    "more": "Цааш",
+    "netWorth": "Цэвэр хөрөнгө",
+    "properties": "Өмч хөрөнгө",
+    "propertyDetail": "Өмчийн дэлгэрэнгүй",
+    "review": "Гүйлгээ шалгах",
     "events": "Арга хэмжээний төсөв",
-    "landing": "BudgetPro – Санхүүгээ удирдаарай",
-    "dashboard": "Хяналтын самбар",
-    "transactions": "Гүйлгээнүүд",
+    "landing": "BudgetPro - Санхүүгээ эзэмш",
+    "dashboard": "Хянах самбар",
+    "transactions": "Гүйлгээ",
     "import": "Импорт",
-    "accounts": "Данснууд",
+    "accounts": "Данс",
     "budgets": "Төсөв",
-    "categories": "Ангилалууд",
-    "reports": "Тайлангууд",
+    "categories": "Ангилал",
+    "reports": "Тайлан",
     "settings": "Тохиргоо",
-    "subscriptions": "Бүртгэлүүд",
+    "subscriptions": "Захиалга",
     "investments": "Хөрөнгө оруулалт",
-    "debtPayoff": "Өрийн төлбөр",
+    "debtPayoff": "Өрийн төлөлт",
     "loans": "Зээл",
     "calculators": "Тооцоолуур",
     "planning": "Төлөвлөлт",
-    "ocr": "Баримтын сканнер",
+    "ocr": "Баримт уншуулагч",
     "export": "Экспорт",
-    "fridayReview": "Долоо хоногийн шалгалт",
-    "onboarding": "Эхлэdelays",
+    "fridayReview": "Долоо хоногийн тойм",
+    "onboarding": "Эхлэл",
     "offline": "Офлайн горим",
-    "splits": "Гүйлгdelays хуваа"
+    "splits": "Гүйлгээ хуваах"
   }
 }

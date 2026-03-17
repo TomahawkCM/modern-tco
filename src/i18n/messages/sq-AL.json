@@ -63,34 +63,34 @@
   },
   "accessibleChart": {
     "buttons": {
-      "chart": "Chart",
-      "showChart": "Show chart view",
-      "showTable": "Show data table view",
-      "table": "Table"
+      "chart": "Grafiku",
+      "showChart": "Shfaq pamjen e grafikut",
+      "showTable": "Shfaq pamjen e tabelës së të dhënave",
+      "table": "Tabela"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
-    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "chartDescription": "{description}. {dataPoints} pika të dhënash të shfaqura. {dataList}. Shtypni butonin Tabela për të parë të dhënat në format tabele me mbështetje për navigim me tastierë.",
+    "chartTypeDescription": "Ky është një grafik {chartType} me {dataPoints} pika të dhënash.",
     "footer": {
-      "average": "Average:",
-      "total": "Total:"
+      "average": "Mesatarja:",
+      "total": "Totali:"
     },
     "keyboardNav": {
-      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
-      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+      "srOnly": "Përdorni tastet e shigjetave për të naviguar midis rreshtave. Shtypni Tab për të naviguar te elementi tjetër.",
+      "visual": "Përdorni ← → ose ↑ ↓ për të naviguar • Home/End për të shkuar në fillim/fund"
     },
     "summary": {
-      "average": "Average: {value}.",
-      "highest": "Highest value: {label} at {value}.",
-      "lowest": "Lowest value: {label} at {value}.",
-      "total": "Total: {value}."
+      "average": "Mesatarja: {value}.",
+      "highest": "Vlera më e lartë: {label} me {value}.",
+      "lowest": "Vlera më e ulët: {label} me {value}.",
+      "total": "Totali: {value}."
     },
-    "switchedToChart": "Switched to chart view",
-    "switchedToTable": "Switched to table view",
+    "switchedToChart": "Ndërruar në pamjen e grafikut",
+    "switchedToTable": "Ndërruar në pamjen e tabelës",
     "tableHeaders": {
-      "additionalInfo": "Additional Info",
-      "category": "Category",
-      "period": "Period",
-      "value": "Value"
+      "additionalInfo": "Informacion Shtesë",
+      "category": "Kategoria",
+      "period": "Periudha",
+      "value": "Vlera"
     }
   },
   "actions": {
@@ -225,40 +225,40 @@
     "whenColumn": "When"
   },
   "aiColumnMapper": {
-    "analyzing": "Analyzing CSV structure with AI...",
+    "analyzing": "Duke analizuar strukturën e CSV me IA...",
     "buttons": {
-      "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
+      "apply": "Apliko Hartëzimet & Importo",
+      "cancel": "Anulo"
     },
-    "closeModal": "Close modal",
-    "columnMappings": "Column Mappings",
+    "closeModal": "Mbyll dritaren",
+    "columnMappings": "Hartëzimet e Kolonave",
     "columnTypes": {
-      "amount": "Amount",
-      "balance": "Balance",
-      "credit": "Credit",
-      "date": "Date",
-      "debit": "Debit",
-      "description": "Description",
-      "ignore": "Ignore"
+      "amount": "Shuma",
+      "balance": "Bilanci",
+      "credit": "Kredi",
+      "date": "Data",
+      "debit": "Debi",
+      "description": "Përshkrimi",
+      "ignore": "Injoro"
     },
     "confidence": {
-      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
-      "title": "Detection Confidence"
+      "analyzed": "IA analizoi {columnCount} kolona dhe {rowCount} rreshta mostrë",
+      "title": "Besueshmëria e Zbulimit"
     },
     "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
-      "title": "Transaction Preview"
+      "amount": "Shuma",
+      "date": "Data",
+      "description": "Përshkrimi",
+      "title": "Pamja Paraprake e Transaksionit"
     },
-    "samples": "Samples:",
+    "samples": "Mostra:",
     "saveConfig": {
-      "hint": "Next time you import from this bank, mappings will be automatic",
-      "label": "Save this bank configuration for future imports",
-      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+      "hint": "Herën tjetër që importoni nga kjo bankë, hartëzimet do të jenë automatike",
+      "label": "Ruaj këtë konfigurim banke për importet e ardhshme",
+      "placeholder": "Vendosni emrin e bankës (p.sh., Banka Ime Lokale)"
     },
-    "subtitle": "Review AI-detected columns and adjust if needed",
-    "title": "AI Column Mapping Wizard"
+    "subtitle": "Rishikoni kolonat e zbuluara nga IA dhe rregulloni nëse nevojitet",
+    "title": "Magjistari i Hartëzimit të Kolonave me IA"
   },
   "amortizationChart": {
     "balanceDescription": "Your balance decreases over time as you make payments",
@@ -821,17 +821,17 @@
     }
   },
   "bulkActions": {
-    "applyTo": "Apply to {count}",
-    "categorize": "Categorize",
-    "clearSelection": "Clear selection",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
-    "noSubcategory": "No subcategory",
-    "selectAll": "Select all",
-    "selectCategory": "Select category...",
-    "selected": "{count} selected"
+    "applyTo": "Apliko te {count}",
+    "categorize": "Kategorizo",
+    "clearSelection": "Pastro zgjedhjen",
+    "confirmDelete": "Fshi {count, plural, =1 {1 transaksion} other {# transaksione}}?",
+    "delete": "Fshi",
+    "deleteWarning": "Ky veprim nuk mund të zhbëhet.",
+    "export": "Eksporto",
+    "noSubcategory": "Pa nënkategori",
+    "selectAll": "Zgjidh të gjitha",
+    "selectCategory": "Zgjidh kategorinë...",
+    "selected": "{count} të zgjedhura"
   },
   "calculators": {
     "budgetAnalyzer": {
@@ -862,12 +862,12 @@
       "wantsExamples": "dining, entertainment, shopping"
     },
     "common": {
-      "back": "Back to calculators",
-      "calculate": "Calculate",
-      "months": "months",
-      "reset": "Reset",
-      "save": "Save Plan",
-      "years": "years"
+      "back": "Kthehu te llogaritësit",
+      "calculate": "Llogarit",
+      "months": "muaj",
+      "reset": "Rivendos",
+      "save": "Ruaj Planin",
+      "years": "vite"
     },
     "compoundInterest": {
       "annualRate": "Annual Interest Rate (%)",
@@ -930,41 +930,41 @@
       "yourDebts": "Your Debts"
     },
     "emergencyFund": {
-      "amountNeeded": "You need {amount} more to reach your goal",
-      "completionDate": "Estimated Completion",
-      "currentSavings": "Current Emergency Savings",
-      "description": "Calculate how much you need for financial security and track your progress",
-      "goalMet": "Goal Achieved!",
-      "goalProgress": "Building Your Safety Net",
-      "inputTitle": "Your Information",
-      "monthlyContribution": "Monthly Savings Amount",
-      "monthlyContributionHelp": "How much you can save towards your emergency fund each month",
-      "monthlyExpenses": "Monthly Expenses",
-      "monthlyExpensesHelp": "Include rent, utilities, groceries, insurance, and other essential costs",
-      "monthsToGoal": "Months to Reach Goal",
-      "progress": "Current Progress",
-      "resultsTitle": "Your Results",
-      "subtitle": "Build your financial safety net",
-      "targetAmount": "Target Emergency Fund",
-      "targetMonths": "Target Months of Coverage",
-      "targetMonthsHelp": "Experts recommend {months} months for most situations",
-      "tip1": "Keep your emergency fund in a high-yield savings account for easy access and better returns",
-      "tip2": "Automate your contributions by setting up automatic transfers on payday",
-      "tip3": "Start small if needed - even saving a little consistently adds up over time",
-      "tipsTitle": "Tips for Building Your Emergency Fund",
-      "title": "Emergency Fund Calculator"
+      "amountNeeded": "Ju duhen {amount} më shumë për të arritur objektivin tuaj",
+      "completionDate": "Përfundimi i Vlerësuar",
+      "currentSavings": "Kursimet Aktuale të Emergjencës",
+      "description": "Llogaritni sa keni nevojë për sigurinë financiare dhe ndiqni progresin tuaj",
+      "goalMet": "Objektivi u Arrit!",
+      "goalProgress": "Duke Ndërtuar Rrjetën Tuaj të Sigurisë",
+      "inputTitle": "Informacioni Juaj",
+      "monthlyContribution": "Shuma Mujore e Kursimeve",
+      "monthlyContributionHelp": "Sa mund të kurseni drejt fondit tuaj të emergjencës çdo muaj",
+      "monthlyExpenses": "Shpenzimet Mujore",
+      "monthlyExpensesHelp": "Përfshini qiranë, shërbimet, ushqimet, sigurimet dhe kostot e tjera thelbësore",
+      "monthsToGoal": "Muajt për të Arritur Objektivin",
+      "progress": "Progresi Aktual",
+      "resultsTitle": "Rezultatet Tuaja",
+      "subtitle": "Ndërtoni rrjetën tuaj të sigurisë financiare",
+      "targetAmount": "Fondi Synuar i Emergjencës",
+      "targetMonths": "Muajt e Synuar të Mbulimit",
+      "targetMonthsHelp": "Ekspertët rekomandojnë {months} muaj për shumicën e situatave",
+      "tip1": "Mbajeni fondin tuaj të emergjencës në një llogari kursimesh me rendiment të lartë për qasje të lehtë dhe kthime më të mira",
+      "tip2": "Automatizoni kontributet tuaja duke vendosur transferta automatike në ditën e pagës",
+      "tip3": "Filloni me pak nëse nevojitet - edhe kursimi i pakë me konsistencë shtohet me kalimin e kohës",
+      "tipsTitle": "Këshilla për Ndërtimin e Fondit të Emergjencës",
+      "title": "Llogaritësi i Fondit të Emergjencës"
     },
     "hub": {
-      "accuracyDescription": "Using financial-grade arithmetic to avoid floating-point errors in all calculations.",
-      "accuracyTitle": "Precise Calculations",
-      "infoTitle": "About These Calculators",
-      "privacyDescription": "All calculations happen on your device. Your financial data never leaves your browser.",
+      "accuracyDescription": "Duke përdorur aritmetikë të nivelit financiar për të shmangur gabimet e pikës së lëvizshme në të gjitha llogaritjet.",
+      "accuracyTitle": "Llogaritje Precize",
+      "infoTitle": "Rreth Këtyre Llogaritësve",
+      "privacyDescription": "Të gjitha llogaritjet ndodhin në pajisjen tuaj. Të dhënat tuaja financiare nuk largohen kurrë nga shfletuesi juaj.",
       "privacyTitle": "100% Private",
-      "sectionCore": "Core Calculators",
-      "sectionPlanning": "Financial Planning",
-      "sectionTools": "Tools & Links",
-      "subtitle": "Tools to help you plan and analyze your finances",
-      "title": "Financial Calculators"
+      "sectionCore": "Llogaritësit Kryesorë",
+      "sectionPlanning": "Planifikimi Financiar",
+      "sectionTools": "Mjete & Lidhje",
+      "subtitle": "Mjete për t'ju ndihmuar të planifikoni dhe analizoni financat tuaja",
+      "title": "Llogaritësit Financiarë"
     },
     "inflation": {
       "assumptionCompound": "Inflation compounds annually",
@@ -1139,28 +1139,28 @@
       "yearsMoneyLasts": "Years Money Lasts"
     },
     "savingsGoal": {
-      "currentSavings": "Current Savings",
-      "description": "Plan your savings with compound interest projections",
-      "expectedReturn": "Expected Annual Return (%)",
-      "expectedReturnHelp": "High-yield savings: 4-5%, Investments: 6-8%",
-      "goalAmount": "Goal Amount",
-      "inMonths": "In {months} months",
-      "inputTitle": "Goal Details",
-      "interestEarned": "Interest Earned",
-      "modeHowMuch": "How much should I save monthly?",
-      "modeWhen": "When will I reach my goal?",
-      "monthlyContribution": "Monthly Contribution",
-      "perMonth": "per month",
-      "progress": "Current Progress",
-      "projectedAmount": "Projected Total",
-      "projectionTitle": "Savings Projection",
-      "resultHowMuchTitle": "Monthly Savings Needed",
-      "resultWhenTitle": "You'll Reach Your Goal",
-      "subtitle": "Reach your financial goals faster",
-      "targetDate": "Target Date",
-      "timelineTitle": "Growth Timeline",
-      "title": "Savings Goal Calculator",
-      "totalContributions": "Total Contributions"
+      "currentSavings": "Kursimet Aktuale",
+      "description": "Planifikoni kursimet tuaja me projeksione të interesit të përbërë",
+      "expectedReturn": "Kthimi Vjetor i Pritshëm (%)",
+      "expectedReturnHelp": "Kursime me rendiment të lartë: 4-5%, Investime: 6-8%",
+      "goalAmount": "Shuma e Objektivit",
+      "inMonths": "Në {months} muaj",
+      "inputTitle": "Detajet e Objektivit",
+      "interestEarned": "Interesi i Fituar",
+      "modeHowMuch": "Sa duhet të kursej mujor?",
+      "modeWhen": "Kur do ta arrij objektivin tim?",
+      "monthlyContribution": "Kontributi Mujor",
+      "perMonth": "në muaj",
+      "progress": "Progresi Aktual",
+      "projectedAmount": "Totali i Projektuar",
+      "projectionTitle": "Projeksioni i Kursimeve",
+      "resultHowMuchTitle": "Kursimet Mujore të Nevojshme",
+      "resultWhenTitle": "Do ta Arrini Objektivin Tuaj",
+      "subtitle": "Arrini objektivat tuaja financiare më shpejt",
+      "targetDate": "Data e Synuar",
+      "timelineTitle": "Kronologjia e Rritjes",
+      "title": "Llogaritësi i Objektivit të Kursimeve",
+      "totalContributions": "Kontributet Totale"
     },
     "subscriptionCost": {
       "addSubscription": "Add Subscription",
@@ -1290,94 +1290,94 @@
   },
   "chatbot": {
     "buttons": {
-      "clearHistory": "Clear chat history",
-      "exportConversation": "Export conversation",
-      "send": "Send"
+      "clearHistory": "Pastro historinë e bisedave",
+      "exportConversation": "Eksporto bisedën",
+      "send": "Dërgo"
     },
     "disabled": {
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot",
-      "title": "Chatbot Disabled"
+      "description": "Aktivizoni chatbotin te Cilësimet → Privatësia → Chatboti i Buxhetit për të filluar.",
+      "enableButton": "Aktivizo Chatbotin",
+      "title": "Chatboti i Çaktivizuar"
     },
     "emptyState": {
-      "description": "Ask me anything about your finances. Here are some examples:",
+      "description": "Pyesni çfarëdo rreth financave tuaja. Ja disa shembuj:",
       "examples": {
-        "balance": "What's my total account balance?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "spending": "How much did I spend this month?"
+        "balance": "Sa është bilanci im total i llogarisë?",
+        "budget": "A jam mbi buxhet në ndonjë kategori?",
+        "groceries": "Më trego blerjet e fundit të ushqimeve",
+        "spending": "Sa shpenzova këtë muaj?"
       },
-      "title": "Start a Conversation"
+      "title": "Filloni një Bisedë"
     },
     "header": {
-      "subtitle": "Ask me about your finances",
-      "title": "Budget Assistant"
+      "subtitle": "Pyesni për financat tuaja",
+      "title": "Asistenti i Buxhetit"
     },
     "input": {
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
-      "placeholder": "Ask about your finances..."
+      "disclaimer": "I mundësuar nga OpenAI GPT-4. Të dhënat tuaja përpunohen në mënyrë të sigurt dhe nuk përdoren për trajnim.",
+      "placeholder": "Pyesni rreth financave tuaja..."
     },
     "messages": {
-      "dataAccessed": "Data accessed:",
-      "error": "Error",
-      "thinking": "Thinking..."
+      "dataAccessed": "Të dhënat e aksesuar:",
+      "error": "Gabim",
+      "thinking": "Duke menduar..."
     }
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "Veprimet",
+      "budget": "Buxheti",
+      "income": "Të Ardhurat",
+      "spending": "Shpenzimet",
+      "trends": "Tendencat"
     }
   },
   "chatbotOptIn": {
     "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
+      "decline": "Jo Faleminderit",
+      "enable": "Aktivizo Chatbotin"
     },
     "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
+      "actions": "Opsionalisht kryen veprime si shtimi i transaksioneve ose krijimi i buxheteve",
+      "answer": "Përgjigjet pyetjeve rreth transaksioneve, buxheteve dhe modeleve të shpenzimeve tuaja",
+      "insights": "Ofron njohuri dhe rekomandime bazuar në të dhënat tuaja",
+      "search": "Kërkon të dhënat tuaja financiare duke përdorur gjuhën natyrale",
+      "title": "Çfarë Mund të Bëjë Chatboti"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "Mbyll dialogun e pranimit të chatbotit",
     "controls": {
       "dataAccess": {
         "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
+          "description": "Chatboti mund të kryejë veprime si shtimi i transaksioneve, krijimi i buxheteve dhe bërja e ndryshimeve në të dhënat tuaja",
+          "title": "Qasje e Plotë"
         },
-        "label": "What can the chatbot do with your data?",
+        "label": "Çfarë mund të bëjë chatboti me të dhënat tuaja?",
         "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
+          "description": "Chatboti mund të shikojë të dhënat tuaja dhe t'u përgjigjet pyetjeve, por nuk mund të shtojë, redaktojë ose fshijë transaksione/buxhete",
+          "title": "Vetëm Lexim (Rekomanduar)"
         }
       },
       "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+        "days30": "30 ditë",
+        "days7": "7 ditë (Rekomanduar)",
+        "forever": "Mbaj përgjithmonë",
+        "label": "Për sa kohë duhet t'i ruajmë bisedat tuaja?",
+        "note": "Bisedat ruhen lokalisht në shfletuesin tuaj. Mund t'i fshini në çdo kohë te Cilësimet → Privatësia."
       },
-      "title": "Privacy Controls"
+      "title": "Kontrollet e Privatësisë"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>Të Drejtat Tuaja:</strong> Duke aktivizuar chatbotin, ju pranoni përpunimin e të dhënave tuaja financiare nëpërmjet API-së së OpenAI. Mund ta tërhiqni pëlqimin në çdo kohë duke çaktivizuar chatbotin te Cilësimet → Privatësia. Të dhënat tuaja përpunohen në përputhje me Politikën tonë të Privatësisë dhe kërkesat e GDPR. Keni të drejtë të aksesoni, fshini dhe eksportoni historinë tuaj të bisedave në çdo kohë."
     },
     "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
+      "dataSent": "Të dhënat financiare dërgohen te API-ja për t'iu përgjigjur pyetjeve tuaja",
+      "disable": "Mund ta çaktivizoni chatbotin në çdo kohë te Cilësimet → Privatësia",
+      "noTraining": "OpenAI nuk i përdor të dhënat e API-së për të trajnuar modelet (sipas politikës së tyre)",
+      "processedBy": "Bisedat tuaja përpunohen nga API-ja GPT-4 e OpenAI",
+      "title": "Privatësia & Përdorimi i të Dhënave"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "Asistent financiar i mundësuar nga IA",
+    "title": "Aktivizo Chatbotin e Buxhetit?"
   },
   "columnMapper": {
     "amount": "Amount",
@@ -1409,40 +1409,40 @@
     "useSavedMapping": "Use Saved Mapping"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "Nuk u gjetën rezultate.",
+    "search": "Kërko...",
+    "select": "Zgjidhni..."
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "addTransaction": "Shto Transaksion",
+      "budgets": "Buxhetet",
+      "categories": "Kategoritë",
+      "darkTheme": "Tema e Errët",
+      "dashboard": "Paneli",
+      "exportData": "Eksporto Të Dhënat",
+      "futurePlans": "Planet për të Ardhmen",
+      "highContrastTheme": "Tema me Kontrast të Lartë",
+      "importCsv": "Importo CSV",
+      "investments": "Investimet",
+      "lightTheme": "Tema e Ndritshme",
+      "loans": "Huat",
+      "newBudget": "Buxhet i Ri",
+      "reports": "Raportet",
+      "retirement": "Pensioni",
+      "scanReceipt": "Skano Faturën",
+      "settings": "Cilësimet",
+      "transactions": "Transaksionet"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "Pamja",
+      "quickActions": "Veprime të Shpejta",
+      "tools": "Mjetet & Cilësimet",
+      "tracking": "Ndjekja & Analiza",
+      "wealth": "Pasuria & Planifikimi"
     },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
+    "noResults": "Nuk u gjetën rezultate.",
+    "placeholder": "Shkruani një komandë ose kërkoni..."
   },
   "common": {
     "cancel": "Anulo",
@@ -1465,168 +1465,168 @@
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "Shto Llogari",
+        "allTransactions": "Të Gjitha Transaksionet",
+        "imported": "Të Importuara",
+        "netWorth": "Vlera Neto",
+        "noAccounts": "Nuk ka llogari të shtuara ende",
+        "title": "Bilancet e Llogarive",
+        "viewAll": "Shiko të Gjitha"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "createBudget": "Krijo Buxhet",
+        "noBudgets": "Nuk ka buxhete të caktuara",
+        "overBudget": "Mbi buxhet me {amount}",
+        "remaining": "Mbetur",
+        "spent": "Shpenzuar",
+        "title": "Progresi i Buxhetit",
+        "viewAll": "Shiko të Gjitha Buxhetet"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "Nuk ka ngjarje aktive",
+        "title": "Buxhetet e Ngjarjeve",
+        "viewAll": "Shiko të Gjitha"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "addTransactions": "Shto Transaksione",
+        "expenses": "Shpenzime",
+        "income": "Të Ardhura",
+        "net": "Neto",
+        "noData": "Nuk ka transaksione ende",
+        "thisMonth": "Këtë Muaj",
+        "title": "Të Ardhurat kundrejt Shpenzimeve"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "Shpenzime",
+        "income": "Të Ardhura",
+        "lastSixMonths": "6 Muajt e Fundit",
+        "needMoreData": "Shtoni transaksione për 2+ muaj për të parë tendencat",
+        "notEnoughData": "Jo mjaft histori",
+        "title": "Tendencat Mujore"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "assets": "Pasuritë",
+        "liabilities": "Detyrimet",
+        "title": "Vlera Neto",
+        "viewDetails": "Shiko Detajet"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "Shto Transaksion",
+        "noTransactions": "Nuk ka transaksione ende",
+        "title": "Transaksionet e Fundit",
+        "uncategorized": "Pa kategori",
+        "viewAll": "Shiko të Gjitha"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
-        "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
-        "overBudget": "{amount} over budget",
-        "perCategory": "Per category",
-        "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "caution": "Kujdes me shpenzimet",
+        "createBudget": "Krijo Buxhet",
+        "dailyBudget": "Buxheti ditor",
+        "danger": "Mbi buxhet",
+        "daysRemaining": "{days} ditë të mbetura",
+        "noBudgets": "Nuk ka buxhete të ngritura ende",
+        "noData": "Nuk ka buxhete të ngritura ende",
+        "overBudget": "{amount} mbi buxhet",
+        "perCategory": "Sipas kategorisë",
+        "remaining": "{amount} mbetur",
+        "safe": "Në rrugë",
+        "title": "E Sigurt për Shpenzim",
+        "totalSafe": "Totali i sigurt për shpenzim",
+        "viewAll": "Shiko të Gjitha"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "total": "Total",
-        "uncategorized": "Uncategorized"
+        "addTransactions": "Shto Transaksione",
+        "moreCategories": "+{count} kategori të tjera",
+        "noData": "Nuk ka shpenzime të regjistruara ende",
+        "thisMonth": "Këtë Muaj",
+        "title": "Shpenzimet sipas Kategorisë",
+        "total": "Totali",
+        "uncategorized": "Pa kategori"
       },
       "streaks": {
-        "badges": "badges",
-        "dayStreak": "day streak",
-        "points": "points",
-        "title": "Streaks & Badges"
+        "badges": "medalje",
+        "dayStreak": "ditë rresht",
+        "points": "pikë",
+        "title": "Seria & Medaljet"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "addSubscription": "Shto Abonim",
+        "dueIn": "Afati në {days} ditë",
+        "dueToday": "Afati sot",
+        "dueTomorrow": "Afati nesër",
+        "noBills": "Nuk ka fatura të ardhshme",
+        "title": "Faturat e Ardhshme",
+        "viewAll": "Shiko të Gjitha"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
-        "vsLastWeek": "vs last week"
+        "title": "Përmbledhja Javore",
+        "viewFull": "Rishikimi i Plotë",
+        "vsLastWeek": "krahasuar me javën e kaluar"
       }
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "Gjithmonë e dukshme",
+    "ariaLabel": "Personalizo pamjen e panelit",
+    "button": "Personalizo",
+    "description": "Shfaqni ose fshihni miniaplikacionet e panelit. Tërhiqni miniaplikacionet në panel për t'i rirenditur.",
+    "reorderDescription": "Për të ndryshuar renditjen e miniaplikacioneve, tërhiqni dhe lëshoni miniaplikacionet drejtpërdrejt në panelin tuaj. Përdorni miun ose prekjen për të kapur dorezën e tërheqjes (⋮⋮) në çdo kartë miniaplikacioni.",
+    "reorderTitle": "Rirendit Miniaplikacionet",
+    "resetButton": "Rikthe Parazgjedhjet",
+    "title": "Personalizo Panelin",
+    "toggleVisibility": "Ndërro dukshmërinë e {name}",
+    "widgetVisibility": "Dukshmëria e Miniaplikacioneve",
+    "widgetsVisible": "{visible} nga {total} miniaplikacione të dukshme"
   },
   "debtAnalysis": {
     "cards": {
       "avgRate": {
-        "subtitle": "Weighted average",
-        "title": "Avg Interest Rate"
+        "subtitle": "Mesatare e ponderuar",
+        "title": "Norma Mesatare e Interesit"
       },
       "debtFreeDate": {
-        "subtitle": "Estimated payoff",
-        "title": "Debt-Free Date"
+        "subtitle": "Shlyerja e vlerësuar",
+        "title": "Data Pa Borxh"
       },
       "monthlyPayment": {
-        "subtitle": "Total monthly obligations",
-        "title": "Monthly Payment"
+        "subtitle": "Detyrimet totale mujore",
+        "title": "Pagesa Mujore"
       },
       "totalDebt": {
-        "subtitle": "Across {count} active loans",
-        "title": "Total Debt"
+        "subtitle": "Në {count} hua aktive",
+        "title": "Borxhi Total"
       }
     },
     "charts": {
       "byType": {
-        "description": "Distribution of debt across loan types",
-        "title": "Debt by Type"
+        "description": "Shpërndarja e borxhit ndërmjet llojeve të huave",
+        "title": "Borxhi sipas Llojit"
       },
       "projection": {
-        "description": "Expected debt reduction over the next year",
-        "expectedReduction": "Expected reduction: {amount} over 12 months",
-        "title": "12-Month Payoff Projection"
+        "description": "Ulja e pritshme e borxhit gjatë vitit të ardhshëm",
+        "expectedReduction": "Ulja e pritshme: {amount} gjatë 12 muajve",
+        "title": "Projeksioni i Shlyerjes 12-Mujore"
       }
     },
     "comparison": {
-      "description": "Side-by-side comparison of your active loans",
+      "description": "Krahasim krah për krah i huave tuaja aktive",
       "headers": {
-        "balance": "Balance",
-        "interestRate": "Interest Rate",
-        "loan": "Loan",
-        "monthlyPayment": "Monthly Payment",
-        "percentOfTotal": "% of Total Debt"
+        "balance": "Bilanci",
+        "interestRate": "Norma e Interesit",
+        "loan": "Hua",
+        "monthlyPayment": "Pagesa Mujore",
+        "percentOfTotal": "% e Borxhit Total"
       },
-      "title": "Loan Comparison",
-      "total": "Total"
+      "title": "Krahasimi i Huave",
+      "total": "Totali"
     },
     "empty": {
-      "addFirstLoan": "Add Your First Loan",
-      "description": "You don't have any active loans. Add a loan to see debt analytics.",
-      "title": "No Debt to Analyze"
+      "addFirstLoan": "Shtoni Huanë Tuaj të Parë",
+      "description": "Nuk keni hua aktive. Shtoni një hua për të parë analitikën e borxhit.",
+      "title": "Nuk Ka Borxh për të Analizuar"
     },
-    "subtitle": "Comprehensive view of your loans and obligations",
-    "title": "Debt Analysis",
-    "viewAllLoans": "View All Loans"
+    "subtitle": "Pamje gjithëpërfshirëse e huave dhe detyrimeve tuaja",
+    "title": "Analiza e Borxhit",
+    "viewAllLoans": "Shiko të Gjitha Huat"
   },
   "debtOverview": {
     "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
@@ -1789,13 +1789,13 @@
   "dialog": {
     "cancel": "Anulo",
     "confirm": "Konfirmo",
-    "finalConfirmation": "Konfirmimi Final:",
+    "finalConfirmation": "Konfirmimi Përfundimtar:",
     "processing": "Duke përpunuar...",
     "typeToConfirm": "Shkruani {text} për të konfirmuar këtë veprim.",
-    "confirmAction": "Konfirmo veprimin"
+    "confirmAction": "Konfirmo Veprimin"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "Tërhiqni për të rirenditur miniaplikacionin"
   },
   "duration": {
     "months": "{count, plural, =1 {1 month} other {# months}}",
@@ -1804,90 +1804,90 @@
   },
   "emptyStates": {
     "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
+      "description": "Krijoni buxhete për të ndjekur shpenzimet në kategori të ndryshme dhe për të arritur objektivat tuaja financiare.",
+      "heading": "Nuk Ka Buxhete të Krijuara",
+      "primaryCta": "Krijoni Buxhetin Tuaj të Parë"
     },
     "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
+      "description": "Krijoni kategori të personalizuara për të organizuar transaksionet tuaja përtej atyre të paracaktuara.",
+      "heading": "Nuk Ka Kategori të Personalizuara",
+      "primaryCta": "Shto Kategori"
     },
     "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
+      "description": "Filloni duke importuar transaksionet tuaja bankare ose duke shtuar llogari manualisht për të parë pasqyrën tuaj financiare.",
+      "heading": "Mirë se Vini në Aplikacionin Tuaj të Buxhetit!",
+      "primaryCta": "Importo CSV",
+      "secondaryCta": "Shto Transaksion"
     },
     "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
+      "description": "Vendosni objektiva financiare si blerja e një shtëpie, kursimi për arsimin ose planifikimi i një pushimi.",
+      "heading": "Nuk Ka Plane për të Ardhmen",
+      "primaryCta": "Krijoni një Objektiv"
     },
     "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
+      "description": "Ndiqni llogaritë e investimeve dhe aksionet tuaja për të monitoruar performancën e portofolit dhe vlerën neto.",
+      "heading": "Nuk Ka Investime të Ndjekura",
+      "primaryCta": "Shto Llogari Investimi"
     },
     "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
+      "description": "Ndiqni huat, hipotekat dhe borxhet tuaja për të vizualizuar progresin e shlyerjes dhe për të planifikuar pagesat.",
+      "heading": "Nuk Ka Hua të Ndjekura",
+      "primaryCta": "Shtoni Huanë Tuaj të Parë"
     },
     "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
+      "description": "Shtoni transaksione dhe buxhete për të gjeneruar raporte të dobishme rreth modeleve dhe tendencave tuaja të shpenzimeve.",
+      "heading": "Nuk Ka të Dhëna për Raport",
+      "primaryCta": "Shto Transaksione",
+      "secondaryCta": "Importo CSV"
     },
     "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
+      "description": "Planifikoni pensionin duke ndjekur llogaritë, duke vlerësuar nevojat dhe duke vizualizuar kronologjinë tuaj të pensionit.",
+      "heading": "Nuk Ka Plane Pensioni",
+      "primaryCta": "Filloni Planifikimin"
     },
     "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
+      "description": "Filloni të ndiqni shpenzimet tuaja duke shtuar transaksionin tuaj të parë. Mund ta shtoni manualisht ose ta importoni nga një skedar CSV.",
+      "heading": "Nuk Ka Transaksione Ende",
+      "primaryCta": "Shto Transaksion",
+      "secondaryCta": "Importo CSV"
     }
   },
   "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
+    "aiAnalysis": "Analiza e IA:",
+    "closeModal": "Mbyll dritaren",
     "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "close": "Mbyll",
+      "needHelp": "Keni nevojë për më shumë ndihmë?",
+      "viewGuide": "Shiko udhëzuesin e zgjidhjes së problemeve"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "Lajm i mirë! Gjetëm {count} {count, plural, =1 {mënyrë} other {mënyra}} për të rimëkëmbur nga ky gabim.",
+      "cannotRecover": "Rimëkëmbja nuk është e mundur. Duhet të rieksportoni skedarin nga banka juaj ose të provoni një format tjetër.",
+      "optionsTitle": "Opsionet e Rimëkëmbjes"
     },
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "Mos u shqetësoni! Mund t'ju ndihmojmë ta rregulloni.",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
+      "autoFix": "RREGULLIM AUTOMATIK",
+      "autoFixButton": "Rregullim Automatik",
+      "confidence": "{percent}% besueshmëri",
+      "fixing": "Duke rregulluar...",
+      "learnMore": "Mëso Më Shumë",
+      "technicalDetails": "Detaje Teknike"
     },
     "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
+      "category": "Kategoria: {category}",
+      "title": "Përmbledhja e Gabimit"
     },
     "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
-      "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "canRecover": "Mund të Rimëkëmbet:",
+      "errorCategory": "Kategoria e Gabimit:",
+      "no": "Jo",
+      "severity": "Ashpërsia:",
+      "suggestions": "Sugjerime:",
+      "title": "Detaje Teknike të Avancuara",
+      "yes": "Po"
     },
-    "title": "Import Failed"
+    "title": "Importimi Dështoi"
   },
   "export": {
     "allDataDeleted": "All data has been deleted. The page will now refresh.",
@@ -1974,88 +1974,88 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
-      "done": "Done!",
-      "download": "Download",
-      "export": "Export Data"
+      "cancel": "Anulo",
+      "done": "Përfunduar!",
+      "download": "Shkarko",
+      "export": "Eksporto Të Dhënat"
     },
     "complete": {
-      "download": "Your file is ready to download",
-      "success": "Export complete! Check your downloads folder."
+      "download": "Skedari juaj është gati për shkarkim",
+      "success": "Eksportimi përfundoi! Kontrolloni dosjen e shkarkimeve tuaja."
     },
     "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
+      "accounts": "Llogaritë",
+      "estimatedSize": "Madhësia e Vlerësuar",
+      "title": "Përmbledhja e të Dhënave",
+      "transactions": "Transaksionet"
     },
     "exporting": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Exporting..."
+      "pleaseWait": "Ju lutem prisni, kjo mund të marrë një moment",
+      "title": "Duke eksportuar..."
     },
     "format": {
       "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
+        "description": "Kopje e plotë rezervë duke përfshirë të gjitha të dhënat",
+        "label": "Skedar .budget"
       },
       "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
+        "description": "Format i pajtueshëm me tabelat",
+        "label": "Skedar CSV"
       },
       "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
+        "description": "Format miqësor për zhvilluesit",
+        "label": "Skedar JSON"
       },
-      "label": "Export Format"
+      "label": "Formati i Eksportimit"
     },
     "options": {
       "encrypt": {
-        "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
+        "description": "Mbroni të dhënat tuaja me enkriptim AES-256",
+        "label": "Enkripto me Fjalëkalim"
       },
       "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
+        "description": "Bashkëngjit imazhet e faturave (rrit madhësinë e skedarit)",
+        "label": "Përfshi Faturat"
       }
     },
     "password": {
-      "confirm": "Confirm Password",
-      "confirmPlaceholder": "Confirm password",
-      "hint": "Password Hint (Optional)",
-      "hintNote": "This hint will be stored unencrypted in the file",
-      "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
-      "minLength": "Password must be at least 8 characters",
-      "mismatch": "Passwords do not match",
-      "placeholder": "Enter password (min 8 characters)",
-      "required": "Password is required for encryption"
+      "confirm": "Konfirmo Fjalëkalimin",
+      "confirmPlaceholder": "Konfirmoni fjalëkalimin",
+      "hint": "Sugjerim Fjalëkalimi (Opsional)",
+      "hintNote": "Ky sugjerim do të ruhet i paenkriptuar në skedar",
+      "hintPlaceholder": "Një sugjerim për t'ju ndihmuar të mbani mend",
+      "label": "Fjalëkalimi",
+      "minLength": "Fjalëkalimi duhet të jetë të paktën 8 karaktere",
+      "mismatch": "Fjalëkalimet nuk përputhen",
+      "placeholder": "Vendosni fjalëkalimin (min 8 karaktere)",
+      "required": "Fjalëkalimi kërkohet për enkriptim"
     },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
+    "subtitle": "Shkarkoni të dhënat tuaja të buxhetit",
+    "title": "Eksporto Të Dhënat"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
+    "account": "Llogaria",
+    "allAccounts": "Të gjitha llogaritë",
+    "allCategories": "Të gjitha kategoritë",
+    "allTypes": "Të gjitha llojet",
+    "apply": "Apliko filtrat",
+    "category": "Kategoria",
+    "clearFilters": "Pastro filtrat",
+    "dateRange": "Diapazoni i datave",
+    "expense": "Shpenzim",
+    "income": "Të Ardhura",
+    "search": "Kërko transaksione...",
+    "type": "Lloji"
   },
   "footer": {
     "copyright": "© {year} {brandName}",
     "links": {
-      "login": "Hyni",
+      "login": "Hyr",
       "settings": "Cilësimet",
-      "signup": "Filloni provën",
+      "signup": "Fillo provën",
       "upgrade": "Përmirëso"
     },
-    "tagline": "Buxhetim premium me një përmirësim një herë."
+    "tagline": "Buxhetim premium me një përmirësim të vetëm."
   },
   "fridayReview": {
     "back": "Back",
@@ -2098,24 +2098,24 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "Rezultati i Shëndetit Financiar: {score} nga 100. {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "Shtoni transaksione për të parë",
+      "line2": "Rezultatin e Shëndetit Financiar"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "Nota: {grade}",
+    "missingFactors": "{count, plural, =1 {1 faktor mungon} other {# faktorë mungojnë}}",
+    "title": "Shëndeti Financiar",
     "history": {
-      "title": "Historia e pikëve",
+      "title": "Historia e Rezultatit",
       "monthsOfData": "{count} {count, plural, =1 {muaj} other {muaj}} të dhëna",
-      "emptyTitle": "Historia e pikëve tuaja do të shfaqet këtu ndërsa grumbullohen të dhënat",
-      "emptySubtitle": "Kontrolloni përsëri muajin e ardhshëm!",
-      "legendScore": "Pikët",
-      "legendTrend": "Trendi",
-      "tooltipScore": "Pikët",
-      "tooltipTrend": "Trendi",
-      "loadingChart": "Po ngarkohet grafiku..."
+      "emptyTitle": "Historia e rezultatit tuaj do të shfaqet këtu ndërsa grumbullohen të dhënat",
+      "emptySubtitle": "Kontrolloni muajin e ardhshëm!",
+      "legendScore": "Rezultati",
+      "legendTrend": "Tendenca",
+      "tooltipScore": "Rezultati",
+      "tooltipTrend": "Tendenca",
+      "loadingChart": "Duke ngarkuar grafikun..."
     }
   },
   "holdingModal": {
@@ -2217,124 +2217,124 @@
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "Prapa",
+      "cancel": "Anulo",
+      "done": "Përfunduar",
+      "import": "Importo Të Dhënat"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "{count} artikuj u importuan me sukses",
+      "success": "Importimi Përfundoi!",
+      "withIssues": "Importimi Përfundoi me Probleme"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} ekzistuese",
+      "handleLabel": "Trajto Konfliktet",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "Zëvendëso me të importuarat",
+        "label": "Mbishkruaj"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "Importo si hyrje të reja",
+        "label": "Krijo të re"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "Mbaj të dhënat aktuale",
+        "label": "Kalo ekzistueset"
       },
-      "title": "Conflicts Found"
+      "title": "U Gjetën Konflikte"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "decrypt": "Dekripto & Vazhdo",
+      "encrypted": "Ky skedar është i enkriptuar",
+      "enterPassword": "Vendosni fjalëkalimin",
+      "hint": "Sugjerim: {hint}",
+      "password": "Fjalëkalimi"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "Ju lutem prisni, kjo mund të marrë një moment",
+      "title": "Duke importuar të dhënat tuaja..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "Të Dhënat për Import",
+      "exported": "Eksportuar",
+      "fileInfo": "Informacioni i Skedarit",
+      "version": "Versioni"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "ose tërhiqni dhe lëshoni këtu",
+      "label": "Klikoni për të zgjedhur një skedar .budget"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": "Rikthe nga skedari .budget",
+    "title": "Importo Të Dhënat"
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
+      "cancel": "Anulo",
+      "create": "Krijo Llogari",
+      "saving": "Duke ruajtur...",
+      "update": "Përditëso Llogarinë"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Mbyll dritaren",
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "Dështoi ruajtja e llogarisë"
     },
     "fields": {
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "Numri i Llogarisë (Opsional)",
+        "placeholder": "p.sh., 4 shifrat e fundit: 1234"
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "Institucioni Financiar (Opsional)",
+        "placeholder": "p.sh., Questrade, Wealthsimple, TD Direct"
       },
       "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "label": "Emri i Llogarisë",
+        "placeholder": "p.sh., RRSP-ja Ime, TFSA, Aksionet e Kompanisë"
       },
       "type": {
         "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+          "Company shares": "Blerje aksionesh punonjësi ose opsione aksionesh",
+          "Non-registered": "Llogari investimi e taksueshme",
+          "RRSP": "Plani i Regjistruar i Kursimeve të Pensionit - Rritje me taksim të shtyrë",
+          "TFSA": "Llogari Kursimesh Pa Taksa - Rritje dhe tërheqje pa taksa"
         },
-        "label": "Account Type"
+        "label": "Lloji i Llogarisë"
       }
     },
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "Shto Llogari Investimi",
+      "edit": "Redakto Llogarinë e Investimit"
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "Ju lutem vendosni emrin e llogarisë"
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "Nuk ka aksione për të vizualizuar. Shtoni aksione për të parë grafikët.",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "Fitim",
+      "loss": "Humbje"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
-      "total": "Total"
+      "allocation": "Ndarja",
+      "costBasis": "Kostoja Bazë",
+      "currentValue": "Vlera Aktuale",
+      "gainLoss": "Fitimi/Humbja",
+      "percentReturn": "% Kthimi",
+      "symbol": "Simboli",
+      "total": "Totali"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "Ndarja sipas Llojit të Llogarisë",
+      "gainLoss": "Fitimi/Humbja sipas Aksionit",
+      "performanceSummary": "Përmbledhja e Performancës",
+      "portfolioAllocation": "Ndarja e Portofolit sipas Aksionit"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "Kostoja Bazë",
+      "currentValue": "Vlera Aktuale",
+      "percentOfPortfolio": "{percent}% e portofolit"
     }
   },
   "investments": {
@@ -2408,71 +2408,71 @@
     "value": "Value"
   },
   "lanSync": {
-    "description": "Sync your budget data across devices on your local network",
+    "description": "Sinkronizoni të dhënat e buxhetit tuaj mes pajisjeve në rrjetin tuaj lokal",
     "device": {
-      "connect": "Connect",
-      "connected": "Connected",
-      "disconnect": "Disconnect",
-      "removeDevice": "Remove Device",
-      "sync": "Sync",
-      "syncing": "Syncing..."
+      "connect": "Lidhu",
+      "connected": "I lidhur",
+      "disconnect": "Shkëputu",
+      "removeDevice": "Hiq Pajisjen",
+      "sync": "Sinkronizo",
+      "syncing": "Duke sinkronizuar..."
     },
-    "disabled": "Disabled",
-    "enabled": "Enabled",
+    "disabled": "Çaktivizuar",
+    "enabled": "Aktivizuar",
     "howItWorks": {
       "step1": {
-        "description": "Scan a QR code or enter connection details to pair devices on the same network",
-        "title": "Pair Devices"
+        "description": "Skanoni një kod QR ose vendosni detajet e lidhjes për të çiftëzuar pajisjet në të njëjtin rrjet",
+        "title": "Çiftëzoni Pajisjet"
       },
       "step2": {
-        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
-        "title": "Sync Securely"
+        "description": "Të dhënat janë të enkriptuara skaj-më-skaj dhe sinkronizohen drejtpërdrejt mes pajisjeve - pa nevojë për cloud",
+        "title": "Sinkronizoni në Mënyrë të Sigurt"
       },
       "step3": {
-        "description": "Changes sync automatically when devices are connected on the same network",
-        "title": "Automatic Updates"
+        "description": "Ndryshimet sinkronizohen automatikisht kur pajisjet janë të lidhura në të njëjtin rrjet",
+        "title": "Përditësime Automatike"
       },
-      "title": "How LAN Sync Works"
+      "title": "Si Funksionon Sinkronizimi LAN"
     },
     "pairedDevices": {
-      "addDevice": "Add Device",
-      "addFirstDevice": "Add Your First Device",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
-      "emptyDescription": "Pair a device to start syncing your budget data",
-      "emptyTitle": "No devices paired",
-      "noDevices": "No devices paired yet",
-      "title": "Paired Devices"
+      "addDevice": "Shto Pajisje",
+      "addFirstDevice": "Shtoni Pajisjen Tuaj të Parë",
+      "deviceCount": "{count, plural, =1 {1 pajisje e çiftëzuar} other {# pajisje të çiftëzuara}}",
+      "emptyDescription": "Çiftëzoni një pajisje për të filluar sinkronizimin e të dhënave të buxhetit tuaj",
+      "emptyTitle": "Nuk ka pajisje të çiftëzuara",
+      "noDevices": "Nuk ka pajisje të çiftëzuara ende",
+      "title": "Pajisjet e Çiftëzuara"
     },
     "removeDialog": {
-      "cancel": "Cancel",
-      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
-      "remove": "Remove",
-      "title": "Remove Device"
+      "cancel": "Anulo",
+      "description": "Jeni të sigurt që dëshironi të hiqni \"{deviceName}\"? Kjo do ta çiftëzojë pajisjen dhe do t'ju duhet të çiftëzoni përsëri për të sinkronizuar të dhënat.",
+      "remove": "Hiq",
+      "title": "Hiq Pajisjen"
     },
-    "syncAll": "Sync All",
+    "syncAll": "Sinkronizo të Gjitha",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
-      "justNow": "Just now",
-      "lastSync": "Last sync: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
-      "neverSynced": "Never synced"
+      "daysAgo": "{count, plural, =1 {1 ditë më parë} other {# ditë më parë}}",
+      "hoursAgo": "{count, plural, =1 {1 orë më parë} other {# orë më parë}}",
+      "justNow": "Pikërisht tani",
+      "lastSync": "Sinkronizimi i fundit: {time}",
+      "minutesAgo": "{count, plural, =1 {1 minutë më parë} other {# minuta më parë}}",
+      "neverSynced": "Kurrë i pasinkronizuar"
     },
-    "title": "LAN Sync"
+    "title": "Sinkronizimi LAN"
   },
   "landing": {
     "accessibility": {
       "badges": {
         "keyboardFirst": "Tastiera e parë",
-        "largeTouchTargets": "Objektiva të mëdhenj për prekjen",
-        "seniorsMode": "Modaliteti për të Moshuarit"
+        "largeTouchTargets": "Zona të mëdha prekjeje",
+        "seniorsMode": "Mënyra e Moshuarve"
       },
       "buttons": {
         "openApp": "Hapni aplikacionin",
         "settings": "Cilësimet e aksesueshmërisë"
       },
-      "description": "Modaliteti për të moshuarit ofron navigim të thjeshtuar dhe objektiva më të mëdhenj për prekjen. Shkurtoret e tastierës, shtetet e fokusit dhe kontrasti i qartë ndihmojnë të gjithë të lëvizin më shpejt.",
-      "title": "E aksesueshme nga default"
+      "description": "Mënyra e Moshuarve ofron navigim të thjeshtuar dhe zona prekjeje më të mëdha. Shkurtoret e tastierës, gjendjet e fokusit dhe kontrasti i qartë ndihmojnë të gjithë të lëvizin më shpejt.",
+      "title": "E aksesueshme si parazgjedhje"
     },
     "brand": {
       "name": "BudgetPro",
@@ -2481,110 +2481,110 @@
     "comparison": {
       "bankConnections": {
         "cloud": "Agregim i Detyrueshëm",
-        "feature": "Lidhjet me Bankat",
-        "local": "CSV / Vetëm Manual",
-        "sync": "Opsional (Të Kriptuara)"
+        "feature": "Lidhjet Bankare",
+        "local": "Vetëm CSV / Manual",
+        "sync": "Opsionale (E Enkriptuar)"
       },
       "cost": {
-        "cloud": "$100+/vit Abonim",
-        "feature": "Kosto",
+        "cloud": "Abonim mbi $100/vit",
+        "feature": "Kostoja",
         "local": "Falas Përgjithmonë",
-        "sync": "Përmirësim një herë"
+        "sync": "Përmirësim Njëherësh"
       },
       "dataPrivacy": {
-        "cloud": "I Shikueshëm nga Punonjësit",
+        "cloud": "E Shikueshme nga Punonjësit",
         "feature": "Privatësia e të Dhënave",
-        "local": "100% Private (Lokal)",
-        "sync": "Kriptim nga Fundi në Fund"
+        "local": "100% Private (Lokale)",
+        "sync": "Enkriptim Skaj-më-Skaj"
       },
       "headers": {
-        "cloud": "Aplikacioni Tipik në Cloud",
+        "cloud": "Aplikacion Tipik Cloud",
         "feature": "Veçoria",
         "local": "BudgetPro Lokal",
         "sync": "BudgetPro Sync (Pro)"
       },
       "offlineMode": {
-        "feature": "Modaliteti Offline"
+        "feature": "Mënyra Jashtë Linje"
       },
       "storageLocation": {
-        "cloud": "Baza e të Dhënave të Tyre",
-        "feature": "Vendi i Ruajtjes",
+        "cloud": "Baza e tyre e të Dhënave",
+        "feature": "Vendndodhja e Ruajtjes",
         "local": "Pajisja Juaj",
-        "sync": "Cloud Zero-Dijeni"
+        "sync": "Cloud Zero-Njohuri"
       }
     },
     "faq": {
       "0": {
-        "a": "Po. Në Protokollin Lokal, të dhënat kurrë nuk dalin nga pajisja juaj. Ato jetojnë në IndexedDB brenda shfletuesit tuaj.",
-        "q": "A janë të dhënat e mia vërtet private?"
+        "a": "Po. Në Protokollin Lokal, të dhënat nuk largohen kurrë nga pajisja juaj. Ato jetojnë në IndexedDB brenda shfletuesit tuaj.",
+        "q": "A janë vërtet private të dhënat e mia?"
       },
       "1": {
-        "a": "Mund të eksportoni një kopje rezervë të plotë JSON në çdo kohë. Ne gjithashtu rekomandojmë eksporte të rregullta CSV.",
-        "q": "Si mund të bëj kopje rezervë të të dhënave të mia?"
+        "a": "Mund të eksportoni një kopje rezervë të plotë JSON në çdo kohë. Gjithashtu rekomandojmë eksportime të rregullta CSV.",
+        "q": "Si ta bëj kopje rezervë të dhënat e mia?"
       },
       "2": {
-        "a": "Po vjen së shpejti: Një abonim opsional për të sinkronizuar të dhëna të kriptuara midis pajisjeve përmes Supabase.",
+        "a": "Së shpejti: Një abonim opsional për të sinkronizuar të dhëna të enkriptuara mes pajisjeve nëpërmjet Supabase.",
         "q": "Çfarë është 'Sync' Pro?"
       },
       "3": {
-        "a": "Jo. Ne besojmë se importi manual është më i sigurt, më i besueshëm dhe ndihmon në ndërtimin e vetëdijes financiare më të mirë.",
-        "q": "A lidhemi me bankat?"
+        "a": "Jo. Ne besojmë se importi manual është më i sigurt, më i besueshëm dhe ndërton ndërgjegjësim më të mirë financiar.",
+        "q": "A lidheni me banka?"
       }
     },
     "faqSection": {
-      "description": "Përgjigje të thjeshta për pyetje të zakonshme rreth provave, çmimeve dhe aksesit.",
+      "description": "Përgjigje të thjeshta për pyetjet e zakonshme rreth provave, çmimeve dhe qasjes.",
       "title": "FAQ"
     },
     "features": {
       "0": {
-        "description": "Pasuria neto, fluksi i parasë dhe ndarja sipas kategorive. Koha e ngarkesës menjëherë.",
+        "description": "Vlera neto, rrjedha e parave dhe ndarja sipas kategorive. Koha e ngarkimit të menjëhershëm.",
         "href": "/budget-app",
         "title": "Paneli Lokal"
       },
       "1": {
-        "description": "Hartues i zgjuar CSV për BMO, Home Trust dhe formate të personalizueshme.",
+        "description": "Hartëzues i zgjuar CSV për BMO, Home Trust dhe formate të personalizuara.",
         "href": "/budget-app/import",
-        "title": "Asistenti i Importit"
+        "title": "Magjistari i Importit"
       },
       "2": {
-        "description": "Skano faturat lokalisht me Tesseract.js. Nuk ka përpunim në cloud.",
+        "description": "Skanoni faturat lokalisht me Tesseract.js. Pa përpunim në cloud.",
         "href": "/budget-app/ocr",
-        "title": "OCR për Faturat"
+        "title": "OCR Faturash"
       },
       "3": {
-        "description": "Buxhetim zero-bazuar ose me rrotullim me kontroll të hollësishëm të kategorive.",
+        "description": "Buxhetim zero-bazë ose me mbartje me kontroll granular të kategorive.",
         "href": "/budget-app/budgets",
-        "title": "Buxhetet e Kategorive"
+        "title": "Buxhete Kategorish"
       },
       "4": {
         "description": "Projektoni datën tuaj të lirisë me vizualizime të interesit të përbërë.",
         "href": "/budget-app/planning/retirement",
-        "title": "Kalkulatori i Pensionit"
+        "title": "Llogaritësi i Pensionit"
       },
       "5": {
-        "description": "Kriptimi opsional nga ana e klientit për një shtresë shtesë sigurie.",
+        "description": "Enkriptim opsional në anën e klientit për një shtresë shtesë sigurie.",
         "href": "/budget-app/settings",
-        "title": "Mbrojtja e Privatësisë"
+        "title": "Mburoja e Privatësisë"
       }
     },
     "featuresDeepDive": {
-      "cta": "Nisni provën falas",
-      "description": "Ndaluar luftimin me formula të prishura. Merrni fleksibilitetin e kontrollit manual me shpejtësinë e një aplikacioni modern.",
+      "cta": "Filloni provën falas",
+      "description": "Ndaloni luftën me formula të prishura. Merrni fleksibilitetin e kontrollit manual me shpejtësinë e një aplikacioni modern.",
       "explore": "Eksploroni",
-      "heading1": "Përparësitë e Spreadsheet.",
+      "heading1": "Fuqia e Tabelës Llogaritëse.",
       "heading2": "Thjeshtësia e Aplikacionit."
     },
     "footer": {
       "allRightsReserved": "Të gjitha të drejtat e rezervuara.",
       "api": "API",
       "changelog": "Regjistri i Ndryshimeve",
-      "community": "Bashkësia",
+      "community": "Komuniteti",
       "cookiePolicy": "Politika e Cookies",
       "documentation": "Dokumentacioni",
       "download": "Shkarko",
-      "features": "Karakteristikat",
+      "features": "Veçoritë",
       "helpCenter": "Qendra e Ndihmës",
-      "legal": "Ligji",
+      "legal": "Ligjore",
       "pricing": "Çmimet",
       "privacyPolicy": "Politika e Privatësisë",
       "product": "Produkti",
@@ -2592,46 +2592,46 @@
       "termsOfService": "Kushtet e Shërbimit"
     },
     "hero": {
-      "badge": "Privatësia e Parë • Vetëm Lokal • Zero Ndjekje",
-      "finePrint": "Nuk kërkohen kredenciale bankare. Nuk nevojitet llogari për modalitetin lokal.",
-      "headline": "Menaxhoni Paratë Tuaja pa Shitur të Dhënat Tuaja.",
+      "badge": "Privatësi e Parë • Vetëm Lokale • Zero Gjurmim",
+      "finePrint": "Nuk kërkohen kredencialet bankare. Nuk nevojitet llogari për mënyrën lokale.",
+      "headline": "Zotëroni Paratë Tuaja pa Shitur të Dhënat Tuaja.",
       "primaryCta": {
         "href": "/budget-app/auth/signup",
-        "label": "Nisni Protokollin Lokal (Falë)"
+        "label": "Filloni Protokollin Lokal (Falas)"
       },
       "secondaryCta": {
         "href": "/budget-app/auth/login",
-        "label": "Hyni"
+        "label": "Hyr"
       },
-      "subhead": "Përparësitë e një spreadsheet. Thjeshtësia e një aplikacioni. Përjetoni qartësinë financiare me aplikacionin e vetëm të buxhetit që garanton se të dhënat tuaja nuk do të dalin kurrë nga pajisja juaj."
+      "subhead": "Fuqia e një tabele llogaritëse. Thjeshtësia e një aplikacioni. Përjetoni qartësinë financiare me aplikacionin e vetëm të buxhetit që garanton se të dhënat tuaja nuk largohen kurrë nga pajisja juaj."
     },
     "heroSection": {
       "badges": {
         "noSubscriptions": "Pa abonime",
-        "offlineReady": "Gatishmëri offline",
-        "seniorsMode": "Modaliteti për të Moshuarit"
+        "offlineReady": "Gati jashtë linje",
+        "seniorsMode": "Mënyra e Moshuarve"
       },
       "cta": {
-        "heading": "E ndërtuar për qartësi, jo kaos.",
-        "viewPricing": "Shihni çmimin"
+        "heading": "Ndërtuar për qartësi, jo kaos.",
+        "viewPricing": "Shiko çmimet"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "Ruajtje cloud",
+        "dining": "Restorante",
+        "expenses": "Shpenzime",
+        "foodToday": "Ushqim • Sot",
+        "groceries": "Ushqime",
+        "groceryStore": "Dyqani i Ushqimeve",
+        "income": "Të ardhura",
+        "incomeYesterday": "Të ardhura • Dje",
+        "monthly": "Mujor",
+        "netWorth": "Vlera neto",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "Rroga",
+        "shopping": "Blerje",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "Abonim • 24 Tetor",
+        "yearly": "Vjetor"
       },
       "modes": {
         "budgets": "Buxhetet",
@@ -2640,177 +2640,177 @@
       },
       "preview": {
         "categoryBudgets": "Buxhetet e kategorive",
-        "livePreview": "Parapamje e drejtpërdrejtë",
+        "livePreview": "Pamje live",
         "recentTransactions": "Transaksionet e fundit",
-        "recurring": "Përsëritëse"
+        "recurring": "Të përsëritura"
       }
     },
     "howItWorks": {
       "0": {
-        "description": "Tërhiqni dhe lëshoni CSV ose skanoni faturat. AI harton kolonat lokalisht.",
-        "title": "Importoni"
+        "description": "Tërhiqni & lëshoni CSV ose skanoni faturat. IA harton kolonat lokalisht.",
+        "title": "Importo"
       },
       "1": {
-        "description": "Kategorizim i shpejtë me rregulla inteligjente dhe veprime masive.",
-        "title": "Rishikoni"
+        "description": "Kategorizim i shpejtë me rregulla të zgjuara dhe veprime në masë.",
+        "title": "Rishiko"
       },
       "2": {
-        "description": "Caktoni çdo dollar një punë dhe parashikoni pasurinë tuaj neto të ardhshme.",
-        "title": "Planifikoni"
+        "description": "Caktoni çdo dollar një punë dhe parashikoni vlerën tuaj neto të ardhshme.",
+        "title": "Planifiko"
       }
     },
     "howItWorksSection": {
-      "description": "Një rrjedhë pune që ju çon në qartësi shpejt, pa ju bllokuar në një sistem të komplikuar.",
+      "description": "Një rrjedhë pune që ju çon në qartësi shpejt, pa ju mbyllur në një sistem të komplikuar.",
       "title": "Si funksionon"
     },
     "marquee": {
       "logos": [
         "Buxhetimi",
         "Abonimet",
-        "Kreditë",
-        "Faturat OCR",
+        "Huat",
+        "OCR Faturash",
         "Raportet",
         "Planifikimi",
-        "Offline",
-        "Modaliteti për të Moshuarit"
+        "Jashtë Linje",
+        "Mënyra e Moshuarve"
       ]
     },
     "nav": {
-      "tagline": "Buxhetim Premium"
+      "tagline": "Buxhetim premium"
     },
     "outcomes": {
       "0": {
-        "description": "Nuk ka më lidhje të prishura ose cikle ri-autentikimi. Ju kontrolloni inputin e të dhënave.",
-        "title": "Ndaluar Luftimin me Agregatorët"
+        "description": "Jo më lidhje të prishura ose cikle ri-autentikimi. Ju kontrolloni hyrjen e të dhënave.",
+        "title": "Ndaloni Luftën me Agregatorët"
       },
       "1": {
-        "description": "Ne nuk e shesim të dhënat tuaja sepse nuk i kemi ato. Pikë.",
-        "title": "Privatësia me Dizajn"
+        "description": "Ne nuk i shesim të dhënat tuaja sepse nuk i kemi. Pikë.",
+        "title": "Privatësi nga Dizajni"
       },
       "2": {
-        "description": "Modeloni pensionin, shlyerjen e kredive dhe objektivat e kursimeve në një pamje të integruar.",
-        "title": "Planifikimi i Ardhshëm"
+        "description": "Modeloni pensionin, shlyerjen e huave dhe objektivat e kursimeve në një pamje të integruar.",
+        "title": "Planifikim i Qëndrueshëm për të Ardhmen"
       },
       "3": {
-        "description": "Zbuloni shpenzimet e përsëritura që aplikacionet e tjera i humbasin.",
+        "description": "Zbuloni harkimet e përsëritura në portofolin tuaj që aplikacionet e tjera i humbasin.",
         "title": "Vrasësi i Abonimeve"
       }
     },
     "outcomesSection": {
-      "description": "Shumica e aplikacioneve të buxhetimit ju bëjnë të bëni punën. BudgetPro është projektuar për të reduktuar fërkimin duke ju mbajtur në kontroll.",
-      "title": "E ndërtuar për jetën reale, jo për spreadsheet"
+      "description": "Shumica e aplikacioneve të buxhetit ju bëjnë të bëni punën. BudgetPro është projektuar për të ulur fërkimin ndërsa ju mban në kontroll.",
+      "title": "Ndërtuar për jetën reale, jo për tabelat llogaritëse"
     },
     "preview": {
-      "balanceAmount": "24.500,00 ALL",
-      "balanceChange": "+12,5%",
-      "currencySymbol": "ALL",
-      "expenses": "Shpenzimet",
-      "expensesAmount": "1.250,00 ALL",
-      "expensesChange": "-5,2%",
-      "live": "Në kohë reale",
-      "overview": "Përmbledhje",
+      "balanceAmount": "$24,500.00",
+      "balanceChange": "+12.5%",
+      "currencySymbol": "$",
+      "expenses": "Shpenzime",
+      "expensesAmount": "$1,250.00",
+      "expensesChange": "-5.2%",
+      "live": "Live",
+      "overview": "Pasqyrë",
       "recentTransactions": "Transaksionet e Fundit",
-      "savingsGoal": "Qëllimi i Kursimeve",
+      "savingsGoal": "Objektivi i Kursimeve",
       "savingsPercent": "85%",
       "totalBalance": "Bilanci Total",
-      "tx0Amount": "-12.500,00 ALL",
-      "tx0Date": "Sot, 14:30",
+      "tx0Amount": "-$124.50",
+      "tx0Date": "Sot, 2:30 PM",
       "tx0Name": "Dyqani i Ushqimeve",
-      "tx1Amount": "+425.000,00 ALL",
-      "tx1Date": "Dje, 09:00",
+      "tx1Amount": "+$4,250.00",
+      "tx1Date": "Dje, 9:00 AM",
       "tx1Name": "Tech Solutions Inc.",
-      "tx2Amount": "-1.500,00 ALL",
-      "tx2Date": "24 Tetor, 2025",
+      "tx2Amount": "-$15.99",
+      "tx2Date": "24 Tetor 2025",
       "tx2Name": "Abonimi Netflix",
       "vsLastMonth": "kundrejt muajit të kaluar",
-      "welcomeBack": "Mirë se erdhët përsëri, Alex"
+      "welcomeBack": "Mirë se u kthyet, Alex"
     },
     "pricing": {
       "cta": {
         "href": "/budget-app/auth/signup",
-        "label": "Nisni Protokollin Lokal"
+        "label": "Filloni Protokollin Lokal"
       },
-      "description": "Filloni me Protokollin Lokal të fuqishëm. Përmirësoni më vonë nëse keni nevojë për sinkronizim në shumë pajisje.",
-      "eyebrow": "Çmimi i Drejtë",
+      "description": "Filloni me Protokollin Lokal të fuqishëm. Përmirësoni më vonë nëse keni nevojë për sinkronizim mes pajisjeve.",
+      "eyebrow": "Çmim i Drejtë",
       "guarantee": "Nuk kërkohet kartë krediti për Protokollin Lokal.",
       "priceLabel": "Falas Përgjithmonë",
       "secondary": {
         "href": "#pricing",
-        "label": "Shihni Veçoritë Pro"
+        "label": "Shiko Veçoritë Pro"
       },
-      "title": "Lokal është Falas. Sinkronizimi është Pro."
+      "title": "Lokale Falas. Sinkronizimi Pro."
     },
     "pricingSection": {
-      "features": "Përfshin transaksione, llogari, buxhete dhe kapacitete të plota rezervë lokale pa kufizim.",
-      "productDescription": "Përvoja e plotë e buxhetimit, që funksionon plotësisht në pajisjen tuaj.",
+      "features": "Përfshin transaksione, llogari, buxhete pa limit dhe mundësi të plota kopje rezervë lokale.",
+      "productDescription": "Përvoja e plotë e buxhetimit, duke funksionuar tërësisht në pajisjen tuaj.",
       "productName": "Protokolli Lokal",
-      "recommended": "Të rekomanduara",
+      "recommended": "Rekomanduar",
       "whyChoose": "Pse të zgjidhni Protokollin Lokal?",
-      "whyChooseDescription": "Shihni si jemi ne në krahasim me gjigantët e cloud."
+      "whyChooseDescription": "Shikoni si dalim kundrejt gjigandëve të cloud."
     },
     "security": {
       "buttons": {
-        "offline": "Mbështetje offline",
+        "offline": "Mbështetja jashtë linje",
         "privacy": "Privatësia & cilësimet"
       },
       "cards": {
         "aiControls": {
-          "description": "Ndizni veçoritë e fuqizuara nga AI (si zbulimi i anomalisë) dhe menaxhoni aksesin në chatbot nga cilësimet.",
-          "title": "Kontrolli i veçorive të AI"
+          "description": "Aktivizoni/çaktivizoni veçoritë e mundësuara nga IA (si zbulimi i anomalive) dhe menaxhoni qasjen e chatbotit nga cilësimet.",
+          "title": "Kontrollet e veçorive IA"
         },
         "encryption": {
-          "description": "Aplikacioni përfshin një shtresë kriptimi për të mbrojtur regjistrat e ndjeshëm të buxhetit kur është e aktivizuar.",
-          "title": "Mbështetje për Kriptimin"
+          "description": "Aplikacioni përfshin një shtresë enkriptimi për të mbrojtur regjistrat e ndjeshëm të buxhetit kur aktivizohet.",
+          "title": "Mbështetja e enkriptimit"
         },
         "exportDelete": {
-          "description": "Eksportoni të dhënat tuaja dhe cilësimet e privatësisë, ose fshini të dhënat lokale direkt nga aplikacioni.",
+          "description": "Eksportoni të dhënat tuaja dhe cilësimet e privatësisë, ose fshini të dhënat lokale drejtpërdrejt nga aplikacioni.",
           "title": "Eksporto & fshi"
         },
         "localStorage": {
-          "description": "Të dhënat tuaja të buxhetit ruhen në shfletuesin tuaj (IndexedDB) kështu që aplikacioni mbetet i shpejtë dhe i përdorshëm offline.",
-          "title": "Ruajtja Lokale"
+          "description": "Të dhënat e buxhetit tuaj ruhen në shfletuesin tuaj (IndexedDB) kështu që aplikacioni qëndron i shpejtë dhe i përdorshëm jashtë linje.",
+          "title": "Ruajtja lokale"
         }
       },
-      "description": "Aplikacioni i Buxhetit ruan të dhënat tuaja lokalisht (gatishmëri offline) dhe ju jep kontroll mbi veçoritë e AI, eksportimin dhe fshirjen.",
-      "title": "Privatësia e Parë me Dizajn"
+      "description": "Aplikacioni i Buxhetit ruan të dhënat tuaja lokalisht (gati jashtë linje) dhe ju jep kontrolle për veçoritë e IA, eksportimin dhe fshirjen.",
+      "title": "Privatësi e parë nga dizajni"
     },
     "socialProof": {
-      "description": "Detajet që e bëjnë buxhetimin të qëndrojë: onboarding, shkurtore, navigim mobil dhe performancë të gatshme offline.",
+      "description": "Detajet që e bëjnë buxhetimin të qëndrueshëm: hyrje, shkurtoret, navigimi celular dhe performanca gati jashtë linje.",
       "features": {
         "mobileUx": {
-          "description": "Navigimi në fund dhe format e përgjegjshme që ndihen natyrale.",
-          "title": "UX i Parë për Mobil"
+          "description": "Navigimi në fund dhe pamjet responsive që ndihen native.",
+          "title": "UX e parë celulare"
         },
         "onboarding": {
           "description": "Një tur i udhëhequr ndihmon përdoruesit e rinj të arrijnë vlerën shpejt.",
-          "title": "Tur i Onboarding"
+          "title": "Turi hyrës"
         },
         "pwaInstall": {
-          "description": "Instaloni si një aplikacion dhe vazhdoni edhe me internet të dobët.",
+          "description": "Instaloni si aplikacion dhe vazhdoni edhe me internet të dobët.",
           "title": "Instalimi PWA"
         },
         "shortcuts": {
-          "description": "Lëvizni shpejt me kërkimin dhe shkurtoret e veprimit të ndërtuara në UI.",
-          "title": "Shkurtore të Tastierës"
+          "description": "Lëvizni shpejt me shkurtoret e kërkimit dhe veprimit të ndërtuara në ndërfaqe.",
+          "title": "Shkurtoret e tastierës"
         }
       },
-      "title": "Polish Premium, e ndërtuar brenda"
+      "title": "Shkëlqim premium, i ndërtuar brenda"
     },
     "trust": {
       "0": {
-        "description": "Të dhënat qëndrojnë në IndexedDB të shfletuesit tuaj. Ne në të vërtetë nuk mund ta shohim atë.",
+        "description": "Të dhënat qëndrojnë në IndexedDB të shfletuesit tuaj. Ne fjalë për fjalë nuk mund t'i shohim.",
         "title": "Pajisja Juaj, Të Dhënat Tuaja"
       },
       "1": {
-        "description": "Redaktoni masivisht, pivotoni dhe analizoni si një profesionist pa dhimbjet e kokës nga formulat.",
-        "title": "Përparësitë e Spreadsheet"
+        "description": "Redaktoni në masë, analizoni si profesionist pa dhimbjet e kokës me formula.",
+        "title": "Fuqia e Tabelës Llogaritëse"
       },
       "2": {
-        "description": "Zero vonesë. Funksionon në një majë mali ose në një tunel metro.",
-        "title": "Shpejtësia Offline"
+        "description": "Zero vonesë. Funksionon në majën e malit ose në tunelin e metrosë.",
+        "title": "Shpejtësi Jashtë Linje"
       },
       "3": {
-        "description": "Asistenti i importit e bën Rishikimin e Parave të Premtes një zakon të këndshëm.",
+        "description": "Magjistari i importit e bën Rishikimin e Parave të Premtes një zakon të kënaqshëm.",
         "title": "Ritualet Manuale"
       }
     }
@@ -3283,42 +3283,42 @@
     "tryAgain": "Try Again"
   },
   "onboarding": {
-    "dontShowAgain": "Mos e shfaq këtë tur më",
+    "dontShowAgain": "Mos e shfaq më këtë tur",
     "navigation": {
-      "getStarted": "Nisni",
-      "next": "Tjetër",
-      "previous": "Para",
-      "startTour": "Nisni Turin"
+      "getStarted": "Filloni",
+      "next": "Tjetri",
+      "previous": "I Mëparshmi",
+      "startTour": "Fillo Turin"
     },
-    "quickTip": "💡 Këshill i Shpejtë",
-    "skipTour": "Anulo turin",
+    "quickTip": "💡 Këshillë e Shpejtë",
+    "skipTour": "Kalo turin",
     "stepCounter": "Hapi {current} nga {total}",
     "steps": {
       "budgets": {
-        "description": "Krijoni buxhete për kategori të ndryshme shpenzimesh. Ndjekni progresin tuaj gjatë muajit dhe merrni njoftime kur po i afroheni kufijve tuaj.",
-        "title": "🎯 Vendosni Buxhetet Tuaja"
+        "description": "Përcaktoni kufijtë tuaj financiarë. Vendosni limite të personalizuara dhe merrni njoftime në kohë reale për të qëndruar në rrugë.",
+        "title": "Buxhetim Preciz"
       },
       "categorize": {
-        "description": "Rishikoni dhe rregulloni kategoritë e transaksioneve. Kategorizimi ynë inteligjent mëson nga korrigjimet tuaja për të përmirësuar me kalimin e kohës. Përdorni veprime masive për të kategorizuar shumë transaksione njëherësh!",
-        "title": "🏷️ Kategorizoni & Organizoni"
+        "description": "IA jonë mëson nga zakonet tuaja. Kategorizoni një herë, dhe ne do t'i trajtojmë transaksionet e ngjashme automatikisht në të ardhmen.",
+        "title": "Kategorizim i Zgjuar"
       },
       "import": {
-        "description": "Filloni duke importuar transaksionet tuaja nga banka nga një skedar CSV. Ne mbështesim BMO, Home Trust dhe shumë banka të tjera. Aplikacioni do të kategorizojë automatikisht transaksionet tuaja!",
-        "title": "📥 Importoni Transaksionet Tuaja"
+        "description": "Sillni pa probleme historinë tuaj të transaksioneve. Mbështesim bankat kryesore duke përfshirë BMO dhe Home Trust, me zbulim të zgjuar automatik.",
+        "title": "Import i Pa Mundim i të Dhënave"
       },
       "reports": {
-        "description": "Vizualizoni modelet tuaja të shpenzimeve, ndjekni pasurinë tuaj neto dhe merrni vendime financiare të informuara. Paneli juaj përditësohet automatikisht me çdo transaksion!",
-        "title": "📊 Shihni Raportet & Njohuritë"
+        "description": "Zhbllokoni fuqinë e të dhënave tuaja. Vizualizoni tendencat, ndiqni vlerën neto dhe merrni vendime të mbështetura nga analiza gjithëpërfshirëse.",
+        "title": "Njohuri të Thella"
       },
       "welcome": {
-        "description": "Le të bëjmë një tur të shpejtë për t'ju ndihmuar të filloni me menaxhimin e financave tuaja familjare. Kjo nuk do të zgjasë gjatë!",
-        "title": "👋 Mirë se vini në Aplikacionin e Buxhetit!"
+        "description": "Përjetoni një mënyrë më të zgjuar për të menaxhuar pasurinë tuaj. Le të bëjmë një udhëtim të shkurtër nëpër qendrën tuaj të re financiare.",
+        "title": "Mirë se Vini në Qartësinë Financiare"
       }
     },
     "tips": {
-      "budgets": "Vendosni buxhete realiste dhe ne do t'ju njoftojmë nëse jeni në rrugën për të shpenzuar më shumë.",
-      "categorize": "Përdorni butonin e shpejtë për kategorizim ose zgjidhni shumë transaksione për kategorizim masiv.",
-      "import": "Tërhiqni dhe lëshoni skedarin tuaj CSV ose klikoni për të kërkuar. Ne auto-detectojmë formatet BMO dhe Home Trust!"
+      "budgets": "Vendosni limite mujore për të vizualizuar shpejtësinë e shpenzimeve tuaja në kohë reale.",
+      "categorize": "Zgjidhni transaksione të shumëfishta për të aplikuar kategoritë në masë—efikasiteti është çelësi.",
+      "import": "Thjesht tërhiqni & lëshoni skedarin tuaj CSV. Ne do ta trajtojmë formatimin automatikisht."
     }
   },
   "onboardingPage": {
@@ -3398,20 +3398,20 @@
     }
   },
   "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "Me këtë ritëm, do ta kaloni buxhetin tuaj me {amount} këtë muaj.",
+    "percentOfBudget": "{percent}% e buxhetit",
     "progress": {
-      "label": "Current progress"
+      "label": "Progresi aktual"
     },
     "stats": {
-      "budget": "Budget",
-      "daysLeft": "Days Left",
-      "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "budget": "Buxheti",
+      "daysLeft": "Ditë të Mbetura",
+      "projectedTotal": "Totali i Parashikuar",
+      "spentSoFar": "Shpenzuar Deri Tani"
     },
     "tip": {
-      "label": "Tip:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "label": "Këshillë:",
+      "reduceSpending": "Ulni shpenzimin ditor në {amount} për të qëndruar brenda buxhetit."
     }
   },
   "pairingDialog": {
@@ -3716,26 +3716,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "Aktual",
+      "confidenceInterval": "Intervali i Besueshmërisë",
+      "predicted": "I Parashikuar"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "Nuk ka të dhëna të disponueshme për parashikime",
+    "predictionUnavailable": "Parashikimi i Padisponueshëm",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "Besueshmëria Mesatare",
+      "nextMonth": "Muaji i Ardhshëm",
+      "threeMonthAvg": "Mesatarja 3-Mujore"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "Besueshmëria",
+      "month": "Muaji",
+      "predicted": "I Parashikuar",
+      "range": "Diapazoni",
+      "title": "Parashikimet Mujore"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "Parashikimi i Shpenzimeve: {category}",
+    "trainingModel": "Duke trajnuar modelin dhe duke gjeneruar parashikime..."
   },
   "privacyPanel": {
     "active": "Active",
@@ -3860,22 +3860,22 @@
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "Instalo",
+      "notNow": "Jo tani"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "Mbyll mesazhin e instalimit",
+    "description": "Shtojeni në ekranin kryesor për qasje të shpejtë dhe përdorim jashtë linje",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "I shpejtë & i sigurt",
+      "noAppStore": "Nuk nevojitet dyqan aplikacionesh",
+      "offline": "Funksionon jashtë linje"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"Shto në Ekranin Kryesor\"",
+    "iosForFullExperience": "për përvojën e plotë të aplikacionit me ngarkim më të shpejtë.",
+    "iosTap": "Prekni",
+    "iosThen": "pastaj",
+    "iosTitle": "Instalo Aplikacionin e Buxhetit",
+    "title": "Instalo Aplikacionin e Buxhetit"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3906,31 +3906,31 @@
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "Apliko Kategorinë",
+      "cancel": "Anulo",
+      "save": "Ruaj"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "clickToSelect": "Klikoni një kategori për ta zgjedhur",
+    "description": "Zgjidhni një kategori për {count, plural, =1 {këtë transaksion} other {# transaksione}}",
+    "general": "Të Përgjithshme",
+    "noResults": "Nuk u gjetën kategori",
+    "pressEnter": "Shtypni ↵ Enter",
+    "saving": "Duke ruajtur...",
+    "searchPlaceholder": "Kërko kategoritë...",
+    "title": "Kategorizim i Shpejtë"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "Të Gjitha",
+    "categories": "Kategoritë",
+    "clearFilters": "Pastro Filtrat",
+    "moreCategories": "+{count} të tjera",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "30 Ditët e Fundit",
+      "last90": "90 Ditët e Fundit",
+      "thisMonth": "Këtë Muaj",
+      "thisYear": "Këtë Vit"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "Periudha Kohore"
   },
   "quickStats": {
     "balance": "Total Balance",
@@ -3954,65 +3954,65 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "Bashkëngjit Faturën",
+      "chooseDifferent": "Zgjidhni Tjetër",
+      "extractData": "Nxirr Të Dhënat",
+      "extracting": "Duke nxjerrur..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "Bëni Foto me Kamerë",
+      "useDevice": "Përdorni kamerën e pajisjes suaj për të kapur faturën"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "Hyrja e kamerës",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "ose <link>shfletoni skedarët</link>",
+      "dragDrop": "Tërhiqni & lëshoni faturën këtu",
+      "dropHere": "Lëshojeni faturën këtu",
+      "supportedFormats": "Mbështet JPG, PNG, PDF • Maks {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "Nuk mund të nxirreshin të dhëna nga fatura. Ju lutem vendosni manualisht.",
+      "extractionFailed": "Dështoi nxjerrja e të dhënave. Ju lutem provoni përsëri ose vendosni manualisht.",
+      "invalidType": "Lloj skedari i pavlefshëm. Lejohen vetëm skedarë JPG, PNG dhe PDF",
+      "ocrImagesOnly": "OCR mbështetet vetëm për skedarë imazhi (JPG, PNG)",
+      "rejected": "Skedari u refuzua. Ju lutem provoni përsëri",
+      "tooLarge": "Skedari është shumë i madh. Madhësia maksimale është {size}MB"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "Shuma:",
+      "confidence": "Besueshmëria: {percent}%",
+      "date": "Data:",
+      "merchant": "Tregtari:",
+      "title": "Të Dhënat u Nxorën"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "Pamja paraprake nuk disponohet",
+      "title": "Faturë PDF"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "Pamja paraprake e faturës",
+    "removeFile": "Hiq skedarin"
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
-    "estimatedMonthly": "Estimated Monthly",
+    "confidence": "{percent}% besueshmëri",
+    "estimatedMonthly": "Mujore e Vlerësuar",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "Dy-javore",
+      "monthly": "Mujore",
+      "quarterly": "Tremujore",
+      "weekly": "Javore"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "next": "Next: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "inDays": "{count, plural, =0 {(sot)} =1 {(në 1 ditë)} other {(në # ditë)}}",
+    "next": "Tjetra: {date}",
+    "occurrences": "{count, plural, =1 {1 ndodhi e zbuluar} other {# ndodhi të zbuluara}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "në muaj",
+      "quarter": "në tremujor",
+      "twoWeeks": "në 2 javë",
+      "week": "në javë"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
+    "showingPatterns": "{count, plural, =1 {Duke shfaqur 1 model transaksioni të përsëritur} other {Duke shfaqur # modele transaksionesh të përsëritura}}",
+    "subtitle": "Abonimet dhe faturat e zbuluara",
+    "title": "Transaksionet e Përsëritura"
   },
   "reports": {
     "addTransactionsToSeeFlow": "Add income and expense transactions to see your money flow",
@@ -4142,50 +4142,50 @@
     "yourAccounts": "Your Accounts"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "Mbyll ndihmën e shkurtoreve",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "Shkurtoret e tastierës funksionojnë në çdo faqe përveç kur shkruani në formularë. Shtypni {key} në çdo kohë për të parë këtë ndihmë.",
+      "title": "💡 Këshillë Pro"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "Këshilla produktiviteti për përdoruesit e avancuar",
+    "title": "Shkurtoret e Tastierës"
   },
   "sidebar": {
     "actions": {
-      "backToHome": "Kthehu në Shtëpi",
-      "collapseSidebar": "Përkul anën",
-      "expandSidebar": "Zgjero anën",
+      "backToHome": "Kthehu në Fillim",
+      "collapseSidebar": "Mbyll shiritin anësor",
+      "expandSidebar": "Zgjero shiritin anësor",
       "importCsv": "Importo CSV",
       "settings": "Cilësimet",
-      "showAllItems": "Trego Të Gjitha Artikujt",
-      "showLess": "Trego Më Pak"
+      "showAllItems": "Shfaq të Gjitha Artikujt",
+      "showLess": "Shfaq Më Pak"
     },
-    "appSubtitle": "Financë Premium",
+    "appSubtitle": "Financa Premium",
     "appTitle": "Aplikacioni i Buxhetit",
     "navigation": {
       "accounts": "Llogaritë",
       "budgets": "Buxhetet",
       "calculators": "Llogaritësit",
       "categories": "Kategoritë",
-      "dashboard": "Pllaka e Kontrollit",
+      "dashboard": "Paneli",
       "events": "Ngjarjet",
-      "futurePlans": "Planet e Ardhshme",
+      "futurePlans": "Planet për të Ardhmen",
       "import": "Importo CSV",
       "investments": "Investimet",
-      "loans": "Kreditë",
+      "loans": "Huat",
       "netWorth": "Vlera Neto",
       "properties": "Pronat",
-      "reminders": "Kujtesat",
+      "reminders": "Kujtuesit",
       "reports": "Raportet",
       "retirement": "Pensioni",
       "scanReceipt": "Skano Faturën",
-      "scenarios": "Çfarë-Nëse",
+      "scenarios": "Sikur-Nëse",
       "settings": "Cilësimet",
       "subscriptions": "Abonimet",
       "transactions": "Transaksionet"
     },
     "search": "Kërko...",
-    "shortcuts": "Shkurtore"
+    "shortcuts": "Shkurtoret"
   },
   "simplefinConnect": {
     "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
@@ -4351,61 +4351,61 @@
     "warningsLabel": "Warnings:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "Parashikimi bazuar në regresionin linear të {months} muajve të fundit",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "Shpenzimi Aktual",
+      "projected": "I Parashikuar"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "Jo mjaft të dhëna për të gjeneruar tendenca. Shtoni të paktën 2 muaj transaksionesh.",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "Mesatarja Mujore",
+      "lastMonth": "Muaji i Kaluar",
+      "projected": "I Parashikuar"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "Tendencat e Shpenzimeve & Parashikimi"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "Shto Ndarje ({current}/{max})",
+    "amount": "Shuma",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "Anulo",
+      "save": "Ruaj Ndarjen",
+      "saving": "Duke ruajtur..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "Kategoria",
+    "closeModal": "Mbyll dritaren",
+    "date": "Data:",
+    "distributeEvenly": "Shpërndaj Barabartë",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "Dështoi ruajtja e transaksionit të ndarë"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "Vendosni shumën për çdo kategori (duhet të totalizojë ${amount})",
+      "step2": "Përdorni \"Shpërndaj Barabartë\" për të ndarë në mënyrë të barabartë ndërmjet të gjitha kategorive",
+      "step3": "Shtoni deri në 5 ndarje për transaksion",
+      "step4": "Transaksioni origjinal do të fshihet dhe do të zëvendësohet me artikujt e ndarë",
+      "title": "Si të ndani transaksione:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "Maksimumi 5 ndarje të lejuara",
+    "minSplitsRequired": "Minimumi 2 ndarje të nevojshme",
+    "none": "Asnjë",
+    "notes": "Shënime (Opsionale)",
+    "notesPlaceholder": "p.sh., Shpenzim biznesi, Përdorim personal",
+    "originalAmount": "Shuma Origjinale:",
+    "removeThisSplit": "Hiq këtë ndarje",
+    "selectCategory": "Zgjidhni kategorinë...",
+    "splitsCount": "Ndarjet ({current}/{max})",
+    "subcategory": "Nënkategoria",
+    "title": "Ndaj Transaksionin",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "Rregulloni shumat e ndarjes për t'u përputhur me shumën origjinale të transaksionit.",
+      "amountsMustMatch": "Shumat e ndarjes duhet të barazohen me shumën origjinale të transaksionit",
+      "categoryRequired": "Të gjitha ndarjet duhet të kenë një kategori",
+      "matchesOriginal": "✓ Përputhet me origjinalin",
+      "overBy": "Mbi me ${amount}",
+      "readyToSave": "Shumat e ndarjes përputhen me transaksionin origjinal. Gati për ruajtje!",
+      "total": "Totali:",
+      "underBy": "Nën me ${amount}"
     }
   },
   "splits": {
@@ -4494,96 +4494,96 @@
   },
   "subscriptionCard": {
     "badges": {
-      "aiVerified": "AI Verified",
-      "cancelled": "Cancelled",
-      "paused": "Paused",
-      "trial": "Trial"
+      "aiVerified": "I Verifikuar nga IA",
+      "cancelled": "I Anuluar",
+      "paused": "I Ndalur",
+      "trial": "Provë"
     },
     "buttons": {
-      "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
+      "claimManage": "Merr & Menaxho",
+      "edit": "Redakto",
+      "transactions": "Transaksionet"
     },
     "confidence": {
-      "high": "High",
-      "label": "Detection Confidence",
-      "low": "Low",
-      "medium": "Medium"
+      "high": "E Lartë",
+      "label": "Besueshmëria e Zbulimit",
+      "low": "E Ulët",
+      "medium": "Mesatare"
     },
     "details": {
-      "charges": "{count} charges",
-      "daysBefore": "{count} days before",
-      "firstCharge": "First Charge",
-      "lastCharge": "Last Charge",
-      "occurrences": "Occurrences",
-      "payment": "Payment",
-      "reminder": "Reminder"
+      "charges": "{count} pagesa",
+      "daysBefore": "{count} ditë para",
+      "firstCharge": "Pagesa e Parë",
+      "lastCharge": "Pagesa e Fundit",
+      "occurrences": "Ndodhitë",
+      "payment": "Pagesa",
+      "reminder": "Kujtues"
     },
     "interval": {
-      "annual": "Annual",
-      "bi-weekly": "Bi-weekly",
-      "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "annual": "Vjetore",
+      "bi-weekly": "Dy-javore",
+      "irregular": "E parregullt",
+      "monthly": "Mujore",
+      "quarterly": "Tremujore",
+      "weekly": "Javore"
     },
-    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "lowConfidenceWarning": "Ky abonim u zbulua me besueshmëri të ulët. Merreni për ta verifikuar dhe menaxhuar manualisht.",
     "menu": {
-      "cancelSubscription": "Cancel Subscription",
-      "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
-      "notSubscription": "Not a Subscription",
-      "pause": "Pause",
-      "resume": "Resume",
-      "viewTransactions": "View Transactions"
+      "cancelSubscription": "Anulo Abonimin",
+      "claimManage": "Merr & Menaxho",
+      "delete": "Fshi",
+      "edit": "Redakto",
+      "notSubscription": "Nuk Është Abonim",
+      "pause": "Ndalo",
+      "resume": "Vazhdo",
+      "viewTransactions": "Shiko Transaksionet"
     },
     "source": {
-      "auto-detected": "Auto-detected",
+      "auto-detected": "I zbuluar automatikisht",
       "manual": "Manual",
-      "merged": "Tracked"
+      "merged": "I ndjekur"
     },
     "stats": {
-      "amount": "Amount",
-      "annualCost": "Annual Cost",
-      "frequency": "Frequency",
-      "nextCharge": "Next Charge",
-      "totalSpent": "Total Spent"
+      "amount": "Shuma",
+      "annualCost": "Kostoja Vjetore",
+      "frequency": "Frekuenca",
+      "nextCharge": "Pagesa e Radhës",
+      "totalSpent": "Totali i Shpenzuar"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {1 ditë e mbetur në provë} other {# ditë të mbetura në provë}}"
     },
     "reminderToggle": {
-      "disableReminder": "Çaktivizo kujtesin",
-      "enableReminder": "Aktivizo kujtesin",
-      "off": "Joaktiv"
+      "disableReminder": "Çaktivizo kujtuesin",
+      "enableReminder": "Aktivizo kujtuesin",
+      "off": "Çaktivizuar"
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "Nuk ka abonime aktive për të analizuar",
+    "loadingChart": "Duke ngarkuar grafikun...",
+    "moreCharges": "+{count} pagesa të tjera",
+    "perMonth": "/muaj",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "Kostoja sipas Kategorisë",
+      "potentialSavings": "Kursimet e Mundshme",
+      "upcomingCharges": "Pagesat e Ardhshme (30 Ditët e Ardhshme)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {1 abonim aktiv} other {# abonime aktive}}",
+      "annualCost": "Kostoja Vjetore",
+      "monthlyCost": "Kostoja Mujore",
+      "next30Days": "30 Ditët e Ardhshme",
+      "projectedYearly": "Shpenzimi vjetor i parashikuar",
+      "upcomingCharges": "{count, plural, =1 {1 pagesë e ardhshme} other {# pagesa të ardhshme}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Abonime potencialisht të anuluara",
+      "inactiveDescription": "{count, plural, =1 {1 abonim nuk ka} other {# abonime nuk kanë}} paguar kohët e fundit. Verifikoni nëse janë anuluar vërtet.",
+      "trialsTitle": "Prova që mbarojnë së shpejti",
+      "trialsDescription": "{count, plural, =1 {1 provë} other {# prova}} që mbaron në 7 ditët e ardhshme. Anuloni nëse nuk i përdorni.",
+      "highCostTitle": "Abonime me kosto të lartë",
+      "highCostDescription": "Këto abonime përfaqësojnë një pjesë të madhe të shpenzimeve tuaja. Merrni parasysh nëse po merrni vlerën e plotë."
     }
   },
   "subscriptionModal": {
@@ -4749,83 +4749,83 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "Llogaria"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} të disponueshme",
+      "label": "Opsione të Avancuara"
     },
     "amount": {
-      "label": "Amount",
+      "label": "Shuma",
       "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "validationError": "Ju lutem vendosni një shumë të vlefshme"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "Shto Transaksion",
+      "adding": "Duke shtuar...",
+      "cancel": "Anulo",
+      "update": "Përditëso Transaksionin",
+      "updating": "Duke përditësuar..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "IA duke kategorizuar...",
+      "create": "Krijo",
+      "createNew": "+ Krijo Kategori të Re",
+      "label": "Kategoria",
+      "lastUsed": "Duke përdorur të fundit: {category}",
+      "namePlaceholder": "Emri i kategorisë...",
+      "selectPlaceholder": "Zgjidhni kategorinë...",
+      "subcategoriesPlaceholder": "Nënkategoritë (opsionale, të ndara me presje)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Mbyll dritaren",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "Kategoria \"{name}\" u krijua!",
+      "failed": "Dështoi krijimi i kategorisë",
+      "nameRequired": "Emri i kategorisë kërkohet"
     },
     "date": {
-      "label": "Date"
+      "label": "Data"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "Përshkrimi",
+      "placeholder": "p.sh., Blerje ushqimesh në supermarket"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "Pas 3 korrigjimeve të ngjashme, transaksionet e ardhshme nga ky tregtar do të kategorizohen automatikisht.",
+      "title": "Mësuar!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "Shënime",
+      "placeholder": "Shtoni shënime shtesë..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "Shto Faturë të Re",
+      "deleteConfirm": "Jeni të sigurt që dëshironi të fshini këtë faturë?",
+      "deleteFailed": "Dështoi fshirja e faturës",
+      "deleteReceipt": "Fshi faturën",
+      "existing": "Faturat ekzistuese ({count})",
+      "label": "Bashkëngjitjet e Faturës",
+      "newFile": "E re: {filename}",
+      "remove": "Hiq",
+      "viewFull": "Shiko faturën e plotë"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "Nënkategoria",
+      "none": "Asnjë",
+      "selectPlaceholder": "Zgjidhni nënkategorinë..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "Etiketat (të ndara me presje)",
+      "placeholder": "p.sh., ushqime, javore, thelbësore"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "Shto Transaksion",
+      "edit": "Redakto Transaksionin"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "Shpenzim",
+      "income": "Të Ardhura",
+      "label": "Lloji"
     }
   },
   "transactionSearch": {
@@ -4872,19 +4872,19 @@
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "Bashkëngjit faturën",
+      "delete": "Fshi",
+      "edit": "Redakto",
+      "split": "Ndaj"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "Nuk ka transaksione për t'u shfaqur",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "Llogaria",
+      "actions": "Veprimet",
+      "amount": "Shuma",
+      "category": "Kategoria",
+      "date": "Data",
+      "description": "Përshkrimi"
     }
   },
   "transactions": {
@@ -5059,48 +5059,48 @@
       "title": "Bilancet e Llogarive"
     },
     "budgetProgress": {
-      "description": "Ndjekni se si po e menaxhoni buxhetin tuaj",
+      "description": "Ndiqni si po ecni kundrejt objektivave tuaja buxhetore",
       "title": "Progresi i Buxhetit"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "Ndiqni shpenzimet për ngjarje dhe projekte",
+      "title": "Buxhetet e Ngjarjeve"
     },
     "incomeVsExpenses": {
       "description": "Krahasoni të ardhurat dhe shpenzimet tuaja me kalimin e kohës",
-      "title": "Të Ardhurat vs Shpenzimet"
+      "title": "Të Ardhurat kundrejt Shpenzimeve"
     },
     "monthlyTrends": {
       "description": "Vizualizoni modelet tuaja financiare muaj pas muaji",
-      "title": "Tendencat Muajore"
+      "title": "Tendencat Mujore"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "Pamje e shpejtë e vlerës suaj totale neto",
+      "title": "Vlera Neto"
     },
     "recentTransactions": {
       "description": "Pamje e shpejtë e aktivitetit tuaj financiar të fundit",
       "title": "Transaksionet e Fundit"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "Shikoni sa mund të shpenzoni në mënyrë të sigurt sipas kategorisë",
+      "title": "E Sigurt për Shpenzim"
     },
     "spendingByCategory": {
-      "description": "Shihni ku shkojnë paratë tuaja me ndarje vizuale",
+      "description": "Shikoni ku shkojnë paratë tuaja me grafikë vizuale",
       "title": "Shpenzimet sipas Kategorisë"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "Ndiqni seritë tuaja të angazhimit dhe arritjet",
+      "title": "Seria & Medaljet"
     },
     "upcomingBills": {
-      "description": "Kurrë mos humbisni një pagesë me kujtesat për faturat",
-      "title": "Faturat në Vijim"
+      "description": "Mos humbisni asnjë pagesë me kujtuesit e faturave",
+      "title": "Faturat e Ardhshme"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "Përmbledhje e modeleve tuaja javore të shpenzimeve",
+      "title": "Përmbledhja Javore"
     }
   },
   "ynabMigrationWizard": {

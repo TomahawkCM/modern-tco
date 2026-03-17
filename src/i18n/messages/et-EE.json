@@ -105,7 +105,7 @@
     "actionCreated": "Loodud",
     "actionDeleted": "Kustutatud",
     "actionExport": "Eksport",
-    "actionImport": "Import",
+    "actionImport": "Impordi",
     "actionLogin": "Sisselogimine",
     "actionLogout": "Väljalogimine",
     "actionUpdated": "Uuendatud",
@@ -498,7 +498,7 @@
         "credit": "Credit Card",
         "savings": "Savings"
       },
-      "accountTypeLabel": "Account Type",
+      "accountTypeLabel": "Konto tüüp",
       "accountUpdated": "Account updated",
       "addAccount": "Add Account",
       "addFirstAccount": "Add Your First Account",
@@ -510,22 +510,22 @@
       "assignedTransactions": "Assigned {count} transactions to {name}",
       "assigning": "Assigning...",
       "balanceExplanation": "This is added to your transaction totals to show your current balance",
-      "cancel": "Cancel",
+      "cancel": "Tühista",
       "chooseAccount": "Choose an account...",
       "clearAllConfirm": "Clear All Transactions",
       "clearAllDescription": "This will permanently delete ALL transactions from the database. Your accounts and their starting balances will be preserved. You can then re-import your bank statements fresh. This action cannot be undone.",
       "clearAllTitle": "Clear All Transactions",
       "clearAllTransactions": "Clear all transactions and start fresh",
       "clickToView": "Click to view",
-      "create": "Create",
+      "create": "Loo",
       "createdAccount": "Created account: {names}",
       "current": "Current",
       "dataManagement": "Data Management",
-      "delete": "Delete",
+      "delete": "Kustuta",
       "deleteAccountDescription": "Are you sure you want to delete \"{name}\"? This will not delete associated transactions.",
       "deleteAccountTitle": "Delete Account",
       "dismissReminder": "Dismiss reminder",
-      "edit": "Edit",
+      "edit": "Muuda",
       "editAccount": "Edit Account",
       "enterBankBalance": "Enter your current bank balance to ensure accurate account totals.",
       "failedToAssign": "Failed to assign transactions",
@@ -533,7 +533,7 @@
       "failedToDelete": "Failed to delete account",
       "failedToLoad": "Failed to load accounts",
       "failedToMigrate": "Failed to migrate transactions",
-      "failedToSave": "Failed to save account",
+      "failedToSave": "Konto salvestamine ebaõnnestus",
       "failedToUpdateBalance": "Failed to update account balance",
       "institutionLabel": "Institution",
       "institutionPlaceholder": "e.g., BMO, TD, RBC",
@@ -551,7 +551,7 @@
       "startingBalanceLabel": "Starting Balance",
       "startingBalanceSetTo": "Starting balance set to {amount}",
       "subtitle": "Manage your bank accounts and starting balances",
-      "title": "Accounts",
+      "title": "Kontod",
       "totalStartingBalance": "Total Starting Balance",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
       "unassignedClickToAssign": "Click below to automatically assign them to your accounts.",
@@ -562,12 +562,12 @@
     },
     "budgets": {
       "addBudget": "Add Budget",
-      "amountLabel": "Amount",
-      "annual": "Annual",
+      "amountLabel": "Summa",
+      "annual": "Aastane",
       "budgetAlerts": "⚠️ Budget Alerts",
       "budgetDeleted": "Budget deleted successfully",
-      "cancel": "Cancel",
-      "categoryLabel": "Category",
+      "cancel": "Tühista",
+      "categoryLabel": "Kategooria",
       "createFirstBudget": "Create First Budget",
       "currentProgress": "Current progress: {percentage}% spent ({spent})",
       "currentlyOverBudget": "Currently {amount} over budget",
@@ -576,13 +576,13 @@
       "deleteBudgetDescription": "This will remove the budget limit for this category. Transactions will not be deleted.",
       "deleteBudgetTitle": "Delete Budget",
       "editBudget": "Edit budget",
-      "enterValidAmount": "Please enter a valid amount",
+      "enterValidAmount": "Palun sisestage kehtiv summa",
       "failedToDelete": "Failed to delete budget",
       "failedToSave": "Failed to save budget",
       "helpTooltip": "Set spending limits for each category. Track your progress with color-coded alerts: Green = On Track, Yellow = Warning (80%), Red = Over Budget (100%).",
       "helpTooltipAriaLabel": "More information about budgets",
       "loading": "Loading budgets...",
-      "monthly": "Monthly",
+      "monthly": "Igakuine",
       "noBudgetsDescription": "Create a budget to track your spending limits and goals.",
       "noBudgetsSet": "No budgets set",
       "of": "of",
@@ -606,10 +606,10 @@
       "statusOnTrack": "✓ On Track",
       "statusOver": "✖ Over",
       "statusWarning": "⚠ Warning",
-      "title": "Budgets",
+      "title": "Eelarved",
       "totalBudgeted": "Total Budgeted",
       "totalExpenses": "Total expenses",
-      "totalSpent": "Total Spent",
+      "totalSpent": "Kokku kulutatud",
       "transactionCount": "{count, plural, one {# transaction} other {# transactions}}",
       "transactionsWillBecomeUnbudgeted": "{count, plural, one {# transaction will become unbudgeted} other {# transactions will become unbudgeted}}",
       "youWillLose": "You will lose:"
@@ -622,7 +622,7 @@
       "daysLeft": "{count} days left",
       "noEvents": "No active events",
       "noEventsDescription": "Create an event budget to track spending for weddings, holidays, and more",
-      "planning": "Planning",
+      "planning": "Planeerimine",
       "progress": "Progress",
       "remaining": "Remaining",
       "suggestedTemplates": "Suggested Templates",
@@ -642,7 +642,7 @@
     },
     "merchantRules": {
       "applied": "Applied {count} times",
-      "category": "Category",
+      "category": "Kategooria",
       "createRule": "Always categorize {merchant} as {category}?",
       "deleteRule": "Delete Rule",
       "description": "Auto-categorize transactions by merchant",
@@ -660,15 +660,15 @@
       "cashChecking": "Cash & Checking",
       "creditCards": "Credit Cards",
       "history": "Historical Snapshots",
-      "investments": "Investments",
+      "investments": "Investeeringud",
       "liabilityBreakdown": "Liability Breakdown",
-      "loans": "Loans",
+      "loans": "Laenud",
       "milestoneReached": "Milestone reached: {amount}!",
       "mortgage": "Mortgage",
       "noLiabilities": "No liabilities — great job!",
       "property": "Property",
       "savings": "Savings",
-      "title": "Net Worth",
+      "title": "Netoväärtus",
       "totalAssets": "Total Assets",
       "totalLiabilities": "Total Liabilities",
       "totalNetWorth": "Total Net Worth",
@@ -688,24 +688,24 @@
       "appreciation": "Appreciation",
       "backToProperties": "Back to Properties",
       "currentBalance": "Current Balance",
-      "currentValue": "Current Value",
+      "currentValue": "Praegune väärtus",
       "equity": "Equity",
-      "interestRate": "Interest Rate",
+      "interestRate": "Intressimäär",
       "lender": "Lender",
       "loanDetails": "Loan Details",
       "monthlyIncome": "Monthly Income",
-      "monthlyPayment": "Monthly Payment",
+      "monthlyPayment": "Igakuine makse",
       "monthlyROI": "Monthly ROI",
       "mortgageBalance": "Mortgage Balance",
       "noProperties": "No properties tracked",
       "noPropertiesDescription": "Add your first property to track equity and appreciation",
       "notFound": "Property not found",
-      "notes": "Notes",
+      "notes": "Märkmed",
       "occupancyRate": "Occupancy Rate",
       "propertyTax": "Property Tax",
       "purchasePrice": "Purchase Price",
       "rentalROI": "Rental ROI",
-      "title": "Properties",
+      "title": "Kinnisvara",
       "totalAppreciation": "Total Appreciation",
       "totalProperties": "Total Properties",
       "totalValue": "Total Value"
@@ -721,7 +721,7 @@
       "grossVsNet": "Gross vs Net",
       "markExpecting": "Expect Refund",
       "net": "Net",
-      "notes": "Notes",
+      "notes": "Märkmed",
       "notesPlaceholder": "Any additional details about this refund...",
       "partial": "Partial refund",
       "received": "Refund received",
@@ -736,7 +736,7 @@
       "approveKey": "Approve (→/A)",
       "noDescription": "No description",
       "progress": "{reviewed} of {total} reviewed",
-      "skip": "Skip",
+      "skip": "Jäta vahele",
       "skipKey": "Skip (←/F)",
       "subtitle": "Categorize your uncategorized transactions",
       "swipeLeft": "Swipe left to skip",
@@ -783,7 +783,7 @@
         },
         "cancelSubscription": {
           "description": "See savings from canceling a recurring charge",
-          "title": "Cancel Subscription"
+          "title": "Tühista tellimus"
         },
         "changeIncome": {
           "description": "Model an income increase or decrease",
@@ -801,10 +801,10 @@
     },
     "templates": {
       "backToSchool": "Back to School",
-      "categories": "Categories",
+      "categories": "Kategooriad",
       "holidaySeason": "Holiday Season",
       "homeImprovement": "Home Improvement",
-      "preview": "Preview",
+      "preview": "Eelvaade",
       "summerTravel": "Summer Travel",
       "taxSeason": "Tax Season",
       "title": "Budget Templates",
@@ -821,17 +821,17 @@
     }
   },
   "bulkActions": {
-    "applyTo": "Apply to {count}",
-    "categorize": "Categorize",
-    "clearSelection": "Clear selection",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
-    "noSubcategory": "No subcategory",
-    "selectAll": "Select all",
-    "selectCategory": "Select category...",
-    "selected": "{count} selected"
+    "applyTo": "Rakenda {count} kirjele",
+    "categorize": "Kategoriseeri",
+    "clearSelection": "Tühjenda valik",
+    "confirmDelete": "Kustuta {count, plural, =1 {1 tehing} other {# tehingut}}?",
+    "delete": "Kustuta",
+    "deleteWarning": "Seda toimingut ei saa tagasi võtta.",
+    "export": "Ekspordi",
+    "noSubcategory": "Alamkategooria puudub",
+    "selectAll": "Vali kõik",
+    "selectCategory": "Vali kategooria...",
+    "selected": "{count} valitud"
   },
   "calculators": {
     "budgetAnalyzer": {
@@ -905,7 +905,7 @@
       "apr": "APR (%)",
       "avalanche": "Avalanche Strategy",
       "avalancheDescription": "Pay highest interest first to save the most money",
-      "balance": "Balance",
+      "balance": "Saldo",
       "debtName": "Name",
       "debtNamePlaceholder": "Debt {number}",
       "description": "Compare snowball vs avalanche strategies to pay off debt faster",
@@ -914,10 +914,10 @@
       "minimumPayment": "Min Payment",
       "month": "Month",
       "morePsychological": "Motivational wins",
-      "payment": "Payment",
+      "payment": "Makse",
       "paymentSchedule": "Payment Schedule",
       "payoffDate": "Payoff Time",
-      "recommended": "Recommended",
+      "recommended": "Soovitatav",
       "remaining": "Remaining",
       "removeDebt": "Remove debt",
       "savingsDescription": "You'll save {amount} in interest and be debt-free {months} months sooner with the avalanche method",
@@ -1071,13 +1071,13 @@
       "modePayment": "Calculate Payment",
       "monthlyDebts": "Monthly Debt Payments",
       "monthlyDebtsHelp": "Car loans, student loans, credit cards, etc.",
-      "monthlyPayment": "Monthly Payment",
+      "monthlyPayment": "Igakuine makse",
       "payoffMonths": "Payoff Time",
       "resultTitle": "Payment Summary",
-      "scheduleBalance": "Balance",
+      "scheduleBalance": "Saldo",
       "scheduleInterest": "Interest",
       "scheduleMonth": "Month",
-      "schedulePayment": "Payment",
+      "schedulePayment": "Makse",
       "schedulePrincipal": "Principal",
       "scheduleTitle": "Amortization Schedule",
       "showFullSchedule": "Show Full Schedule",
@@ -1091,7 +1091,7 @@
     },
     "netWorth": {
       "description": "View your complete financial picture with assets and liabilities",
-      "title": "Net Worth"
+      "title": "Netoväärtus"
     },
     "property": {
       "description": "Track property values, vehicles, and other assets",
@@ -1116,7 +1116,7 @@
       "formulaText": "Accumulation: FV = PV(1+r)^n + PMT[((1+r)^n-1)/r] | Withdrawal: Balance_n = Balance_(n-1)(1+r) - W",
       "heroInsufficient": "Your savings may run out at age {age}",
       "heroInsufficientBadge": "Action Needed",
-      "heroNeutralBadge": "Close",
+      "heroNeutralBadge": "Sulge",
       "heroSufficient": "Your savings will last {years} years in retirement",
       "heroSufficientBadge": "On Track",
       "inflationRate": "Inflation Rate (%)",
@@ -1150,9 +1150,9 @@
       "modeHowMuch": "How much should I save monthly?",
       "modeWhen": "When will I reach my goal?",
       "monthlyContribution": "Monthly Contribution",
-      "perMonth": "per month",
+      "perMonth": "kuus",
       "progress": "Current Progress",
-      "projectedAmount": "Projected Total",
+      "projectedAmount": "Prognoositud kogusumma",
       "projectionTitle": "Savings Projection",
       "resultHowMuchTitle": "Monthly Savings Needed",
       "resultWhenTitle": "You'll Reach Your Goal",
@@ -1164,7 +1164,7 @@
     },
     "subscriptionCost": {
       "addSubscription": "Add Subscription",
-      "amount": "Amount",
+      "amount": "Summa",
       "breakdown": "Essential vs Non-Essential",
       "byCategory": "By Category",
       "daily": "Daily",
@@ -1172,14 +1172,14 @@
       "essential": "Essential",
       "essentialCost": "Essential",
       "frequency": {
-        "annual": "Annual",
-        "biweekly": "Bi-weekly",
-        "label": "Frequency",
-        "monthly": "Monthly",
-        "quarterly": "Quarterly",
-        "weekly": "Weekly"
+        "annual": "Aastane",
+        "biweekly": "Kahenädalane",
+        "label": "Sagedus",
+        "monthly": "Igakuine",
+        "quarterly": "Kvartaalne",
+        "weekly": "Iganädalane"
       },
-      "monthly": "Monthly",
+      "monthly": "Igakuine",
       "monthlyIncome": "Monthly Income",
       "name": "Name",
       "namePlaceholder": "e.g., Netflix, Spotify",
@@ -1193,7 +1193,7 @@
       "subtitle": "See where your recurring money goes",
       "title": "Subscription Cost Calculator",
       "totalCost": "Total Subscription Cost",
-      "yearly": "Yearly",
+      "yearly": "Aastane",
       "yourSubscriptions": "Your Subscriptions"
     },
     "transparency": {
@@ -1239,13 +1239,13 @@
   "calendarExport": {
     "addToCalendar": "Add to Calendar",
     "dialog": {
-      "cancel": "Cancel",
+      "cancel": "Tühista",
       "description": "Add bill reminders to your calendar",
       "deselectAll": "Deselect all",
       "export": "Export {count} subscription(s)",
       "exportMethod": "Export Method",
-      "exporting": "Exporting...",
-      "selectAll": "Select all",
+      "exporting": "Eksportimine...",
+      "selectAll": "Vali kõik",
       "selectSubscriptions": "Select Subscriptions",
       "title": "Export to Calendar"
     },
@@ -1257,7 +1257,7 @@
     "selectSubscriptions": "Select Subscriptions..."
   },
   "categories": {
-    "cancel": "Cancel",
+    "cancel": "Tühista",
     "cannotDeleteDefault": "Cannot delete default categories",
     "categoryNameLabel": "Category Name *",
     "categoryNamePlaceholder": "e.g., Home Expenses",
@@ -1265,136 +1265,136 @@
     "createCategory": "Create Category",
     "createFirstCategory": "Create Your First Category",
     "default": "Default",
-    "delete": "Delete",
+    "delete": "Kustuta",
     "deleteCategoryAria": "Delete category",
     "deleteConfirm": "Delete \"{name}\"? This cannot be undone.",
     "deleteFailed": "Failed to delete category",
-    "edit": "Edit",
+    "edit": "Muuda",
     "editCategory": "Edit Category",
     "editCategoryAria": "Edit category",
-    "expense": "Expense",
-    "income": "Income",
+    "expense": "Kulu",
+    "income": "Tulu",
     "loading": "Loading categories...",
-    "nameRequired": "Category name is required",
+    "nameRequired": "Kategooria nimi on nõutav",
     "newCategory": "New Category",
-    "noCategories": "No categories found",
-    "save": "Save",
+    "noCategories": "Kategooriaid ei leitud",
+    "save": "Salvesta",
     "saveFailed": "Failed to save category",
     "subcategoriesLabel": "Subcategories (comma-separated)",
     "subcategoriesPlaceholder": "e.g., Rent, Maintenance, Insurance",
     "subtitle": "Manage your budget categories and subcategories",
-    "tipLabel": "Tip:",
+    "tipLabel": "Nõuanne:",
     "tipText": "Default categories cannot be edited or deleted. Create custom categories for your specific needs.",
-    "title": "Categories",
-    "typeLabel": "Type"
+    "title": "Kategooriad",
+    "typeLabel": "Tüüp"
   },
   "chatbot": {
     "buttons": {
-      "clearHistory": "Clear chat history",
-      "exportConversation": "Export conversation",
-      "send": "Send"
+      "clearHistory": "Tühjenda vestlusajalugu",
+      "exportConversation": "Ekspordi vestlus",
+      "send": "Saada"
     },
     "disabled": {
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot",
-      "title": "Chatbot Disabled"
+      "description": "Lubaga vestlusrobot menüüs Seaded → Privaatsus → Eelarve vestlusrobot.",
+      "enableButton": "Luba vestlusrobot",
+      "title": "Vestlusrobot keelatud"
     },
     "emptyState": {
-      "description": "Ask me anything about your finances. Here are some examples:",
+      "description": "Küsige minult midagi oma rahaasjade kohta. Siin on mõned näited:",
       "examples": {
-        "balance": "What's my total account balance?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "spending": "How much did I spend this month?"
+        "balance": "Milline on minu konto kogusaldo?",
+        "budget": "Kas ma olen mõnes kategoorias üle eelarve?",
+        "groceries": "Näita mulle minu hiljutisi toidukaupade oste",
+        "spending": "Kui palju ma sel kuul kulutasin?"
       },
-      "title": "Start a Conversation"
+      "title": "Alusta vestlust"
     },
     "header": {
-      "subtitle": "Ask me about your finances",
-      "title": "Budget Assistant"
+      "subtitle": "Küsige minult oma rahaasjade kohta",
+      "title": "Eelarve assistent"
     },
     "input": {
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
-      "placeholder": "Ask about your finances..."
+      "disclaimer": "Põhineb OpenAI GPT-4-l. Teie andmeid töödeldakse turvaliselt ja neid ei kasutata treenimiseks.",
+      "placeholder": "Küsige oma rahaasjade kohta..."
     },
     "messages": {
-      "dataAccessed": "Data accessed:",
-      "error": "Error",
-      "thinking": "Thinking..."
+      "dataAccessed": "Andmetele ligi pääsetud:",
+      "error": "Viga",
+      "thinking": "Mõtlemine..."
     }
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "Toimingud",
+      "budget": "Eelarve",
+      "income": "Tulu",
+      "spending": "Kulutused",
+      "trends": "Trendid"
     }
   },
   "chatbotOptIn": {
     "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
+      "decline": "Ei, aitäh",
+      "enable": "Luba vestlusrobot"
     },
     "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
+      "actions": "Valikuliselt sooritab toiminguid nagu tehingute lisamine või eelarvete loomine",
+      "answer": "Vastake küsimustele teie tehingute, eelarvete ja kulutuste mustrite kohta",
+      "insights": "Pakub ülevaateid ja soovitusi teie andmete põhjal",
+      "search": "Otsige oma finantsandmeid loomuliku keele abil",
+      "title": "Mida vestlusrobot teha saab"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "Sule vestlusroboti nõusoleku dialoog",
     "controls": {
       "dataAccess": {
         "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
+          "description": "Vestlusrobot saab sooritada toiminguid nagu tehingute lisamine, eelarvete loomine ja andmete muutmine",
+          "title": "Täielik juurdepääs"
         },
-        "label": "What can the chatbot do with your data?",
+        "label": "Mida saab vestlusrobot teie andmetega teha?",
         "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
+          "description": "Vestlusrobot saab vaadata teie andmeid ja vastata küsimustele, kuid ei saa lisada, muuta ega kustutada tehinguid/eelarveid",
+          "title": "Ainult lugemine (soovitatav)"
         }
       },
       "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+        "days30": "30 päeva",
+        "days7": "7 päeva (soovitatav)",
+        "forever": "Säilita igavesti",
+        "label": "Kui kaua peaksime teie vestlusi säilitama?",
+        "note": "Vestlused salvestatakse kohalikult teie brauserisse. Saate need igal ajal kustutada menüüs Seaded → Privaatsus."
       },
-      "title": "Privacy Controls"
+      "title": "Privaatsuse kontrollid"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>Teie õigused:</strong> Vestlusroboti lubamisega nõustute oma finantsandmete töötlemisega OpenAI API kaudu. Saate nõusoleku igal ajal tagasi võtta, keelates vestlusroboti menüüs Seaded → Privaatsus. Teie andmeid töödeldakse vastavalt meie privaatsuspoliitikale ja GDPR-i nõuetele. Teil on õigus igal ajal oma vestlusajalugu vaadata, kustutada ja eksportida."
     },
     "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
+      "dataSent": "Finantsandmed saadetakse API-le teie küsimustele vastamiseks",
+      "disable": "Saate vestlusroboti igal ajal keelata menüüs Seaded → Privaatsus",
+      "noTraining": "OpenAI ei kasuta API andmeid mudelite treenimiseks (vastavalt nende poliitikale)",
+      "processedBy": "Teie vestlusi töötleb OpenAI GPT-4 API",
+      "title": "Privaatsus ja andmete kasutamine"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "Tehisintellektil põhinev finantsassistent",
+    "title": "Luba eelarve vestlusrobot?"
   },
   "columnMapper": {
-    "amount": "Amount",
+    "amount": "Summa",
     "amountColumn": "Amount Column",
     "applyMapping": "Apply Mapping",
     "bankStatementFormat": "Bank Statement Format",
-    "cancel": "Cancel",
+    "cancel": "Tühista",
     "columnNumber": "Column {number}",
     "creditColumn": "Credit Column",
-    "date": "Date",
+    "date": "Kuupäev",
     "dateColumn": "Date Column",
     "debitColumn": "Debit Column",
     "debitCreditColumns": "Debit/Credit Columns (e.g., Home Trust)",
-    "delete": "Delete",
+    "delete": "Kustuta",
     "description": "Auto-detection confidence is low. Please manually map columns.",
     "descriptionColumn": "Description Column",
-    "descriptionHeader": "Description",
+    "descriptionHeader": "Kirjeldus",
     "dismiss": "Dismiss",
     "lastUsed": "Last used: {date}",
     "mapColumnsToFields": "Map Columns to Fields",
@@ -1409,40 +1409,40 @@
     "useSavedMapping": "Use Saved Mapping"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "Tulemusi ei leitud.",
+    "search": "Otsi...",
+    "select": "Vali..."
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "addTransaction": "Lisa tehing",
+      "budgets": "Eelarved",
+      "categories": "Kategooriad",
+      "darkTheme": "Tume teema",
+      "dashboard": "Armatuurlaud",
+      "exportData": "Ekspordi andmed",
+      "futurePlans": "Tulevikuplaanid",
+      "highContrastTheme": "Kõrge kontrastsusega teema",
+      "importCsv": "Impordi CSV",
+      "investments": "Investeeringud",
+      "lightTheme": "Hele teema",
+      "loans": "Laenud",
+      "newBudget": "Uus eelarve",
+      "reports": "Aruanded",
+      "retirement": "Pension",
+      "scanReceipt": "Skanni kviitung",
+      "settings": "Seaded",
+      "transactions": "Tehingud"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "Välimus",
+      "quickActions": "Kiirtoimingud",
+      "tools": "Tööriistad ja seaded",
+      "tracking": "Jälgimine ja analüüs",
+      "wealth": "Vara ja planeerimine"
     },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
+    "noResults": "Tulemusi ei leitud.",
+    "placeholder": "Sisestage käsk või otsige..."
   },
   "common": {
     "cancel": "Tühista",
@@ -1454,7 +1454,7 @@
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
-    "confidence": "{percent}% confidence",
+    "confidence": "{percent}% usaldusväärsus",
     "confident": "Confident",
     "confirmCategorization": "Confirm this categorization to improve accuracy",
     "learnFromThis": "Learn from this",
@@ -1580,64 +1580,64 @@
   "debtAnalysis": {
     "cards": {
       "avgRate": {
-        "subtitle": "Weighted average",
-        "title": "Avg Interest Rate"
+        "subtitle": "Kaalutud keskmine",
+        "title": "Keskmine intressimäär"
       },
       "debtFreeDate": {
-        "subtitle": "Estimated payoff",
-        "title": "Debt-Free Date"
+        "subtitle": "Hinnanguline tagasimaksmine",
+        "title": "Võlavaba kuupäev"
       },
       "monthlyPayment": {
-        "subtitle": "Total monthly obligations",
-        "title": "Monthly Payment"
+        "subtitle": "Igakuised kohustused kokku",
+        "title": "Igakuine makse"
       },
       "totalDebt": {
-        "subtitle": "Across {count} active loans",
-        "title": "Total Debt"
+        "subtitle": "{count} aktiivse laenu vahel",
+        "title": "Koguvõlg"
       }
     },
     "charts": {
       "byType": {
-        "description": "Distribution of debt across loan types",
-        "title": "Debt by Type"
+        "description": "Võla jaotus laenutüüpide lõikes",
+        "title": "Võlg tüübi järgi"
       },
       "projection": {
-        "description": "Expected debt reduction over the next year",
-        "expectedReduction": "Expected reduction: {amount} over 12 months",
-        "title": "12-Month Payoff Projection"
+        "description": "Eeldatav võla vähenemine järgmise aasta jooksul",
+        "expectedReduction": "Eeldatav vähenemine: {amount} 12 kuu jooksul",
+        "title": "12-kuuline tagasimakse prognoos"
       }
     },
     "comparison": {
-      "description": "Side-by-side comparison of your active loans",
+      "description": "Teie aktiivsete laenude kõrvuti võrdlus",
       "headers": {
-        "balance": "Balance",
-        "interestRate": "Interest Rate",
-        "loan": "Loan",
-        "monthlyPayment": "Monthly Payment",
-        "percentOfTotal": "% of Total Debt"
+        "balance": "Saldo",
+        "interestRate": "Intressimäär",
+        "loan": "Laen",
+        "monthlyPayment": "Igakuine makse",
+        "percentOfTotal": "% koguvõlast"
       },
-      "title": "Loan Comparison",
-      "total": "Total"
+      "title": "Laenude võrdlus",
+      "total": "Kokku"
     },
     "empty": {
-      "addFirstLoan": "Add Your First Loan",
-      "description": "You don't have any active loans. Add a loan to see debt analytics.",
-      "title": "No Debt to Analyze"
+      "addFirstLoan": "Lisage oma esimene laen",
+      "description": "Teil pole aktiivseid laene. Lisage laen võlaanalüütika nägemiseks.",
+      "title": "Analüüsitavat võlga pole"
     },
-    "subtitle": "Comprehensive view of your loans and obligations",
-    "title": "Debt Analysis",
-    "viewAllLoans": "View All Loans"
+    "subtitle": "Terviklik ülevaade teie laenudest ja kohustustest",
+    "title": "Võlaanalüüs",
+    "viewAllLoans": "Vaata kõiki laene"
   },
   "debtOverview": {
     "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
     "activeLoansTitle": "Active Loans",
     "addLoan": "Add Loan",
     "avgRate": "Avg Rate",
-    "balance": "Balance",
-    "monthlyPayment": "Monthly Payment",
+    "balance": "Saldo",
+    "monthlyPayment": "Igakuine makse",
     "paidOff": "{percent}% paid off",
     "title": "Debt Overview",
-    "totalDebt": "Total Debt",
+    "totalDebt": "Koguvõlg",
     "upcomingPayments": "Upcoming Payments",
     "viewAll": "View All",
     "viewMore": "{count, plural, one {View # more loan} other {View # more loans}}"
@@ -1647,10 +1647,10 @@
     "addDebtTitle": "Add Debt",
     "addManually": "Add Manually",
     "apr": "APR %",
-    "balance": "Balance",
+    "balance": "Saldo",
     "baselineComparison": "By using this strategy, you save {interest} in interest and pay off {months} months sooner compared to minimum payments only.",
-    "cancel": "Cancel",
-    "debtFreeDate": "Debt-Free Date",
+    "cancel": "Tühista",
+    "debtFreeDate": "Võlavaba kuupäev",
     "debtName": "Name",
     "debtNamePlaceholder": "e.g. Credit Card, Car Loan",
     "debtOverview": "Debt Overview",
@@ -1662,21 +1662,21 @@
     "payoffChart": "Payoff Chart",
     "payoffTimeline": "Payoff Timeline",
     "results": "Results",
-    "save": "Save",
+    "save": "Salvesta",
     "saveScenarioTitle": "Save Scenario",
     "savedScenarios": "Saved Scenarios",
     "scenarioNamePlaceholder": "e.g. Aggressive avalanche plan",
     "strategyConfig": "Strategy",
     "subtitle": "Plan your path to becoming debt-free",
     "title": "Debt Payoff",
-    "totalDebt": "Total Debt",
+    "totalDebt": "Koguvõlg",
     "totalInterestLabel": "Total Interest",
     "totalMinPayments": "Total Min. Payments",
     "totalPaid": "Total Paid",
     "weightedApr": "Weighted APR"
   },
   "debug": {
-    "actions": "Actions",
+    "actions": "Toimingud",
     "backToDashboard": "Back to Dashboard",
     "clearAllData": "Clear All Data (Dangerous!)",
     "clearConfirm": "Clear ALL data? This cannot be undone!",
@@ -1686,7 +1686,7 @@
     "databaseInfo": "Database Information",
     "devIsolationNote": "Development data is isolated from production. Test freely without affecting real users.",
     "development": "DEVELOPMENT",
-    "error": "Error",
+    "error": "Viga",
     "exportAllData": "Export All Data (Backup)",
     "exportFailed": "Export failed: {error}",
     "exportSuccess": "Data exported successfully!",
@@ -1705,7 +1705,7 @@
     "title": "Database Debug",
     "titleFull": "Database Debug & Recovery",
     "totalRecords": "Total Records",
-    "version": "Version"
+    "version": "Versioon"
   },
   "designSystem": {
     "a11y": {
@@ -1735,7 +1735,7 @@
     "defaultInput": "Default Input",
     "designTokens": "Design Tokens",
     "destructive": "Destructive",
-    "disabled": "Disabled",
+    "disabled": "Keelatud",
     "disabledInput": "Disabled Input",
     "disabledPlaceholder": "Disabled...",
     "durationScale": "Duration Scale",
@@ -1763,7 +1763,7 @@
     "large": "Large",
     "light": "Light",
     "motionTokens": "Motion Tokens",
-    "off": "Off",
+    "off": "Väljas",
     "on": "On",
     "option1": "Option 1",
     "option2": "Option 2",
@@ -1804,90 +1804,90 @@
   },
   "emptyStates": {
     "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
+      "description": "Looge eelarveid, et jälgida kulutusi erinevates kategooriates ja saavutada oma finantseesmärke.",
+      "heading": "Eelarveid pole loodud",
+      "primaryCta": "Looge oma esimene eelarve"
     },
     "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
+      "description": "Looge kohandatud kategooriaid, et korraldada oma tehinguid vaikekategooriate kõrval.",
+      "heading": "Kohandatud kategooriaid pole",
+      "primaryCta": "Lisa kategooria"
     },
     "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
+      "description": "Alustage pangaülekannete importimisega või kontode käsitsi lisamisega, et näha oma finantsülevaadet.",
+      "heading": "Tere tulemast oma eelarverakendusse!",
+      "primaryCta": "Impordi CSV",
+      "secondaryCta": "Lisa tehing"
     },
     "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
+      "description": "Seadke finantseesmärke, nagu maja ostmine, hariduse jaoks säästmine või puhkuse planeerimine.",
+      "heading": "Tulevikuplaane pole",
+      "primaryCta": "Loo eesmärk"
     },
     "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
+      "description": "Jälgige oma investeerimiskontosid ja positsioone portfelli tootluse ja netoväärtuse jälgimiseks.",
+      "heading": "Investeeringuid ei jälgita",
+      "primaryCta": "Lisa investeerimiskonto"
     },
     "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
+      "description": "Jälgige oma laene, hüpoteeke ja võlgu, et visualiseerida tagasimaksmise edenemist ja planeerida makseid.",
+      "heading": "Laene ei jälgita",
+      "primaryCta": "Lisage oma esimene laen"
     },
     "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
+      "description": "Lisage tehinguid ja eelarveid, et luua kasulikke aruandeid oma kulutuste mustrite ja trendide kohta.",
+      "heading": "Andmeid aruandluseks pole",
+      "primaryCta": "Lisa tehinguid",
+      "secondaryCta": "Impordi CSV"
     },
     "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
+      "description": "Planeerige pensionile jäämist, jälgides kontosid, hinnates vajadusi ja visualiseerides oma pensioniaja ajakava.",
+      "heading": "Pensioniplaan puudub",
+      "primaryCta": "Alusta planeerimist"
     },
     "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
+      "description": "Alustage oma kulutuste jälgimist, lisades oma esimese tehingu. Saate lisada käsitsi või importida CSV-failist.",
+      "heading": "Tehinguid veel pole",
+      "primaryCta": "Lisa tehing",
+      "secondaryCta": "Impordi CSV"
     }
   },
   "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
+    "aiAnalysis": "Tehisintellekti analüüs:",
+    "closeModal": "Sule modaal",
     "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "close": "Sulge",
+      "needHelp": "Vajate rohkem abi?",
+      "viewGuide": "Vaata veaotsingu juhendit"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "Hea uudis! Leidsime {count} {count, plural, =1 {viisi} other {viisi}} sellest veast taastumiseks.",
+      "cannotRecover": "Taastumine pole võimalik. Peate faili pangast uuesti eksportima või proovima teist vormingut.",
+      "optionsTitle": "Taastamise valikud"
     },
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "Ärge muretsege! Saame aidata teil seda parandada.",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
+      "autoFix": "AUTOMAATNE PARANDUS",
+      "autoFixButton": "Automaatne parandus",
+      "confidence": "{percent}% usaldusväärsus",
+      "fixing": "Parandamine...",
+      "learnMore": "Lisateave",
+      "technicalDetails": "Tehnilised üksikasjad"
     },
     "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
+      "category": "Kategooria: {category}",
+      "title": "Vea kokkuvõte"
     },
     "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
-      "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "canRecover": "Taastumine võimalik:",
+      "errorCategory": "Vea kategooria:",
+      "no": "Ei",
+      "severity": "Tõsidus:",
+      "suggestions": "Soovitused:",
+      "title": "Täpsemad tehnilised üksikasjad",
+      "yes": "Jah"
     },
-    "title": "Import Failed"
+    "title": "Import ebaõnnestus"
   },
   "export": {
     "allDataDeleted": "All data has been deleted. The page will now refresh.",
@@ -1915,7 +1915,7 @@
     "excelWorkbookDescription": "Comprehensive Excel workbook with 12 sheets: Dashboard, Transactions, Monthly Summary, Category Analysis, Accounts, Budgets, Subscriptions, Loans, Investments, Net Worth, Goals, and Data Dictionary. Includes professional formatting, formulas, and charts.",
     "excelWorkbookTitle": "Financial Summary Workbook (Excel)",
     "exportCsv": "Export CSV",
-    "exportData": "Export Data",
+    "exportData": "Ekspordi andmed",
     "exportExcel": "Export Excel",
     "exportJson": "Export JSON",
     "failedToClearData": "Failed to clear data",
@@ -1925,39 +1925,39 @@
     "failedToImport": "Failed to import data. Please check the file format.",
     "fullBackupDescription": "Export all data including accounts, transactions, budgets, goals, and settings. Use this for complete backups that can be restored later.",
     "fullBackupTitle": "Full Backup (JSON)",
-    "importData": "Import Data",
+    "importData": "Impordi andmed",
     "importJson": "Import JSON",
     "importing": "Importing...",
     "invalidBackupFormat": "Invalid backup file format",
-    "options": "Options",
-    "recommended": "Recommended",
+    "options": "Valikud",
+    "recommended": "Soovitatav",
     "restoreDescription": "Import a previously exported JSON backup file",
     "restoreFromBackup": "Restore from Backup",
     "restoreWarning": "Warning: This will replace ALL existing data with the backup",
     "selectAll": "Select All",
-    "sheetAccounts": "Accounts",
+    "sheetAccounts": "Kontod",
     "sheetAccountsDesc": "All accounts with balances",
-    "sheetBudgets": "Budgets",
+    "sheetBudgets": "Eelarved",
     "sheetBudgetsDesc": "Budget vs actual comparison",
     "sheetCategoryAnalysis": "Category Analysis",
     "sheetCategoryAnalysisDesc": "Spending by category",
-    "sheetDashboard": "Dashboard",
+    "sheetDashboard": "Armatuurlaud",
     "sheetDashboardDesc": "Executive summary with key metrics",
     "sheetDataDictionary": "Data Dictionary",
     "sheetDataDictionaryDesc": "Field explanations",
     "sheetGoals": "Goals",
     "sheetGoalsDesc": "Savings goals progress",
-    "sheetInvestments": "Investments",
+    "sheetInvestments": "Investeeringud",
     "sheetInvestmentsDesc": "Portfolio holdings",
-    "sheetLoans": "Loans",
+    "sheetLoans": "Laenud",
     "sheetLoansDesc": "Debt with amortization schedules",
     "sheetMonthlySummary": "Monthly Summary",
     "sheetMonthlySummaryDesc": "Month-by-month overview",
-    "sheetNetWorth": "Net Worth",
+    "sheetNetWorth": "Netoväärtus",
     "sheetNetWorthDesc": "Assets vs liabilities",
-    "sheetSubscriptions": "Subscriptions",
+    "sheetSubscriptions": "Tellimused",
     "sheetSubscriptionsDesc": "Recurring costs tracking",
-    "sheetTransactions": "Transactions",
+    "sheetTransactions": "Tehingud",
     "sheetTransactionsDesc": "Complete transaction history",
     "sheetsToInclude": "{selected} of {total}",
     "startDate": "Start Date",
@@ -1974,78 +1974,78 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
-      "done": "Done!",
-      "download": "Download",
-      "export": "Export Data"
+      "cancel": "Tühista",
+      "done": "Valmis!",
+      "download": "Laadi alla",
+      "export": "Ekspordi andmed"
     },
     "complete": {
-      "download": "Your file is ready to download",
-      "success": "Export complete! Check your downloads folder."
+      "download": "Teie fail on allalaadimiseks valmis",
+      "success": "Eksport lõpetatud! Kontrollige oma allalaadimiste kausta."
     },
     "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
+      "accounts": "Kontod",
+      "estimatedSize": "Hinnang. suurus",
+      "title": "Andmete kokkuvõte",
+      "transactions": "Tehingud"
     },
     "exporting": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Exporting..."
+      "pleaseWait": "Palun oodake, see võib võtta hetke",
+      "title": "Eksportimine..."
     },
     "format": {
       "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
+        "description": "Täielik varukoopia kõigi andmetega",
+        "label": ".budget fail"
       },
       "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
+        "description": "Tabelarvutusega ühilduv vorming",
+        "label": "CSV-fail"
       },
       "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
+        "description": "Arendajasõbralik vorming",
+        "label": "JSON-fail"
       },
-      "label": "Export Format"
+      "label": "Ekspordi vorming"
     },
     "options": {
       "encrypt": {
-        "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
+        "description": "Kaitske oma andmeid AES-256 krüptimisega",
+        "label": "Krüpti parooliga"
       },
       "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
+        "description": "Lisa kviitungi pildid (suurendab faili suurust)",
+        "label": "Kaasa kviitungid"
       }
     },
     "password": {
-      "confirm": "Confirm Password",
-      "confirmPlaceholder": "Confirm password",
-      "hint": "Password Hint (Optional)",
-      "hintNote": "This hint will be stored unencrypted in the file",
-      "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
-      "minLength": "Password must be at least 8 characters",
-      "mismatch": "Passwords do not match",
-      "placeholder": "Enter password (min 8 characters)",
-      "required": "Password is required for encryption"
+      "confirm": "Kinnita parool",
+      "confirmPlaceholder": "Kinnita parool",
+      "hint": "Parooli vihje (valikuline)",
+      "hintNote": "See vihje salvestatakse failis krüptimata kujul",
+      "hintPlaceholder": "Vihje, mis aitab teil meeles pidada",
+      "label": "Parool",
+      "minLength": "Parool peab olema vähemalt 8 tähemärki",
+      "mismatch": "Paroolid ei kattu",
+      "placeholder": "Sisestage parool (vähemalt 8 tähemärki)",
+      "required": "Krüptimiseks on parool nõutav"
     },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
+    "subtitle": "Laadige alla oma eelarve andmed",
+    "title": "Ekspordi andmed"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
+    "account": "Konto",
+    "allAccounts": "Kõik kontod",
+    "allCategories": "Kõik kategooriad",
+    "allTypes": "Kõik tüübid",
+    "apply": "Rakenda filtrid",
+    "category": "Kategooria",
+    "clearFilters": "Tühjenda filtrid",
+    "dateRange": "Kuupäevavahemik",
+    "expense": "Kulu",
+    "income": "Tulu",
+    "search": "Otsi tehinguid...",
+    "type": "Tüüp"
   },
   "footer": {
     "copyright": "© {year} {brandName}",
@@ -2058,15 +2058,15 @@
     "tagline": "Premium eelarvestamine ühe korra uuendamisega."
   },
   "fridayReview": {
-    "back": "Back",
+    "back": "Tagasi",
     "backToDashboard": "Back to Dashboard",
     "closeReview": "Close review",
     "continue": "Continue",
-    "done": "Done",
+    "done": "Valmis",
     "goToStep": "Go to {step}",
     "loading": "Loading your weekly review...",
     "placeholderContent": "Step content will be implemented in subsequent tasks (F-021 through F-025).",
-    "stepCounter": "Step {current} of {total}",
+    "stepCounter": "Samm {current}/{total}",
     "stepLabel": "Step {current}: {title}",
     "stepProgress": "Step {current} of {total}: {title}",
     "steps": {
@@ -2121,18 +2121,18 @@
   "holdingModal": {
     "addHolding": "Add Holding",
     "canadianStockHint": "Use .TO for Canadian stocks (e.g., TD.TO, VGRO.TO)",
-    "cancel": "Cancel",
+    "cancel": "Tühista",
     "editHolding": "Edit Holding",
     "enterSymbol": "Please enter a stock symbol",
     "failedToSave": "Failed to save holding",
-    "notesOptional": "Notes (Optional)",
+    "notesOptional": "Märkmed (valikuline)",
     "notesPlaceholder": "e.g., Part of retirement portfolio, employee stock purchase",
     "numberOfShares": "Number of Shares",
     "pricePlaceholder": "50.00",
     "purchaseDate": "Purchase Date",
     "purchasePricePerShare": "Purchase Price per Share",
     "quantityPlaceholder": "100",
-    "saving": "Saving...",
+    "saving": "Salvestamine...",
     "stockSymbol": "Stock Symbol",
     "symbolPlaceholder": "e.g., AAPL, VGRO.TO, TD.TO",
     "totalInvestment": "Total Investment",
@@ -2142,7 +2142,7 @@
   },
   "iconPicker": {
     "clearSearch": "Clear Search",
-    "close": "Close",
+    "close": "Sulge",
     "currentIcon": "Current Icon",
     "foundCount": "Found {count} icon(s)",
     "iconsAvailable": "{count} icons available",
@@ -2208,7 +2208,7 @@
     "tipTryCSV": "Try exporting as CSV instead of PDF from your bank",
     "title": "Import Transactions",
     "transactionSingular": "transaction",
-    "transactionsLabel": "Transactions",
+    "transactionsLabel": "Tehingud",
     "transactionsPlural": "transactions",
     "troubleshootingTips": "💡 Troubleshooting tips:",
     "unableToDetectFormat": "Unable to detect file format. Please try a different file.",
@@ -2217,128 +2217,128 @@
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "Tagasi",
+      "cancel": "Tühista",
+      "done": "Valmis",
+      "import": "Impordi andmed"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "{count} kirjet edukalt imporditud",
+      "success": "Import lõpetatud!",
+      "withIssues": "Import lõpetatud probleemidega"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} olemasolevat",
+      "handleLabel": "Lahenda konfliktid",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "Asenda imporditud andmetega",
+        "label": "Kirjuta üle"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "Impordi uute kirjetena",
+        "label": "Loo uued"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "Säilita praegused andmed",
+        "label": "Jäta olemasolevad vahele"
       },
-      "title": "Conflicts Found"
+      "title": "Leiti konflikte"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "decrypt": "Dekrüpti ja jätka",
+      "encrypted": "See fail on krüptitud",
+      "enterPassword": "Sisestage parool",
+      "hint": "Vihje: {hint}",
+      "password": "Parool"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "Palun oodake, see võib võtta hetke",
+      "title": "Andmete importimine..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "Imporditavad andmed",
+      "exported": "Eksporditud",
+      "fileInfo": "Faili teave",
+      "version": "Versioon"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "või lohistage siia",
+      "label": "Klõpsake .budget faili valimiseks"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": "Taasta .budget failist",
+    "title": "Impordi andmed"
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
+      "cancel": "Tühista",
+      "create": "Loo konto",
+      "saving": "Salvestamine...",
+      "update": "Uuenda konto"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Sule modaal",
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "Konto salvestamine ebaõnnestus"
     },
     "fields": {
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "Kontonumber (valikuline)",
+        "placeholder": "nt Viimased 4 numbrit: 1234"
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "Finantsasutus (valikuline)",
+        "placeholder": "nt Questrade, Wealthsimple, TD Direct"
       },
       "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "label": "Konto nimi",
+        "placeholder": "nt Minu RRSP, TFSA säästud, ettevõtte aktsia"
       },
       "type": {
         "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+          "Company shares": "Töötajate aktsiate ostmine või aktsiaoptsioonid",
+          "Non-registered": "Maksustatav investeerimiskonto",
+          "RRSP": "Registreeritud pensionisäästuplaan — maksusoodustusega kasv",
+          "TFSA": "Maksuvaba säästukonto — maksuvaba kasv ja väljamaksed"
         },
-        "label": "Account Type"
+        "label": "Konto tüüp"
       }
     },
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "Lisa investeerimiskonto",
+      "edit": "Muuda investeerimiskontot"
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "Palun sisestage konto nimi"
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "Positsioone pole visualiseerimiseks. Lisage positsioone diagrammide nägemiseks.",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "Kasum",
+      "loss": "Kahjum"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
-      "total": "Total"
+      "allocation": "Jaotus",
+      "costBasis": "Soetusmaksumus",
+      "currentValue": "Praegune väärtus",
+      "gainLoss": "Kasum/kahjum",
+      "percentReturn": "% tootlus",
+      "symbol": "Sümbol",
+      "total": "Kokku"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "Jaotus konto tüübi järgi",
+      "gainLoss": "Kasum/kahjum positsioonide kaupa",
+      "performanceSummary": "Tootluse kokkuvõte",
+      "portfolioAllocation": "Portfelli jaotus positsioonide kaupa"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "Soetusmaksumus",
+      "currentValue": "Praegune väärtus",
+      "percentOfPortfolio": "{percent}% portfellist"
     }
   },
   "investments": {
-    "account": "Account",
+    "account": "Konto",
     "addAccount": "Add Account",
     "addFirstHolding": "Add Your First Holding",
     "addHolding": "Add Holding",
@@ -2362,7 +2362,7 @@
       "impactTitle": "You will lose:",
       "title": "Delete Holding"
     },
-    "cost": "Cost",
+    "cost": "Hind",
     "deleteAccount": "Delete account",
     "deleteHolding": "Delete holding",
     "editAccount": "Edit account",
@@ -2372,7 +2372,7 @@
       "partialPriceFetch": "Fetched {fetched}/{total} prices. Using purchase prices for missing data.",
       "unableToFetchPrices": "Unable to fetch market prices. Using purchase prices."
     },
-    "gainLoss": "Gain/Loss",
+    "gainLoss": "Kasum/kahjum",
     "hideDetails": "Hide Details",
     "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
     "loading": "Loading investments...",
@@ -2388,12 +2388,12 @@
     "showDetails": "Show Details",
     "subtitle": "Track your RRSP, TFSA, and investment accounts",
     "table": {
-      "actions": "Actions",
+      "actions": "Toimingud",
       "currentPrice": "Current Price",
-      "gainLoss": "Gain/Loss",
+      "gainLoss": "Kasum/kahjum",
       "purchasePrice": "Purchase Price",
       "shares": "Shares",
-      "symbol": "Symbol",
+      "symbol": "Sümbol",
       "value": "Value"
     },
     "title": "Investment Portfolio",
@@ -2408,57 +2408,57 @@
     "value": "Value"
   },
   "lanSync": {
-    "description": "Sync your budget data across devices on your local network",
+    "description": "Sünkroonige oma eelarve andmed seadmete vahel kohalikus võrgus",
     "device": {
-      "connect": "Connect",
-      "connected": "Connected",
-      "disconnect": "Disconnect",
-      "removeDevice": "Remove Device",
-      "sync": "Sync",
-      "syncing": "Syncing..."
+      "connect": "Ühenda",
+      "connected": "Ühendatud",
+      "disconnect": "Katkesta ühendus",
+      "removeDevice": "Eemalda seade",
+      "sync": "Sünkrooni",
+      "syncing": "Sünkroonimine..."
     },
-    "disabled": "Disabled",
-    "enabled": "Enabled",
+    "disabled": "Keelatud",
+    "enabled": "Lubatud",
     "howItWorks": {
       "step1": {
-        "description": "Scan a QR code or enter connection details to pair devices on the same network",
-        "title": "Pair Devices"
+        "description": "Skannige QR-koodi või sisestage ühenduse andmed samas võrgus olevate seadmete sidumiseks",
+        "title": "Siduge seadmed"
       },
       "step2": {
-        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
-        "title": "Sync Securely"
+        "description": "Andmed on täielikult krüptitud ja sünkroonitakse otse seadmete vahel — pilve pole vaja",
+        "title": "Sünkroonige turvaliselt"
       },
       "step3": {
-        "description": "Changes sync automatically when devices are connected on the same network",
-        "title": "Automatic Updates"
+        "description": "Muudatused sünkroonitakse automaatselt, kui seadmed on samas võrgus ühendatud",
+        "title": "Automaatsed uuendused"
       },
-      "title": "How LAN Sync Works"
+      "title": "Kuidas LAN-sünkroonimine töötab"
     },
     "pairedDevices": {
-      "addDevice": "Add Device",
-      "addFirstDevice": "Add Your First Device",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
-      "emptyDescription": "Pair a device to start syncing your budget data",
-      "emptyTitle": "No devices paired",
-      "noDevices": "No devices paired yet",
-      "title": "Paired Devices"
+      "addDevice": "Lisa seade",
+      "addFirstDevice": "Lisage oma esimene seade",
+      "deviceCount": "{count, plural, =1 {1 seade seotud} other {# seadet seotud}}",
+      "emptyDescription": "Siduge seade eelarve andmete sünkroonimise alustamiseks",
+      "emptyTitle": "Seadmeid pole seotud",
+      "noDevices": "Seadmeid pole veel seotud",
+      "title": "Seotud seadmed"
     },
     "removeDialog": {
-      "cancel": "Cancel",
-      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
-      "remove": "Remove",
-      "title": "Remove Device"
+      "cancel": "Tühista",
+      "description": "Kas olete kindel, et soovite eemaldada \"{deviceName}\"? See eemaldab seadme sidumise ja peate andmete sünkroonimiseks uuesti siduma.",
+      "remove": "Eemalda",
+      "title": "Eemalda seade"
     },
-    "syncAll": "Sync All",
+    "syncAll": "Sünkrooni kõik",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
-      "justNow": "Just now",
-      "lastSync": "Last sync: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
-      "neverSynced": "Never synced"
+      "daysAgo": "{count, plural, =1 {1 päev tagasi} other {# päeva tagasi}}",
+      "hoursAgo": "{count, plural, =1 {1 tund tagasi} other {# tundi tagasi}}",
+      "justNow": "Just praegu",
+      "lastSync": "Viimane sünkroonimine: {time}",
+      "minutesAgo": "{count, plural, =1 {1 minut tagasi} other {# minutit tagasi}}",
+      "neverSynced": "Pole kunagi sünkroonitud"
     },
-    "title": "LAN Sync"
+    "title": "LAN-sünkroonimine"
   },
   "landing": {
     "accessibility": {
@@ -2616,22 +2616,22 @@
         "viewPricing": "Vaata hindu"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "Pilvesalvestus",
+        "dining": "Toitlustus",
+        "expenses": "Kulud",
+        "foodToday": "Toit • Täna",
+        "groceries": "Toidukaubad",
+        "groceryStore": "Toidupood",
+        "income": "Tulu",
+        "incomeYesterday": "Tulu • Eile",
+        "monthly": "Igakuine",
+        "netWorth": "Netoväärtus",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "Palk",
+        "shopping": "Ostlemine",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "Tellimus • 24. okt",
+        "yearly": "Aastane"
       },
       "modes": {
         "budgets": "Eelarved",
@@ -2787,7 +2787,7 @@
         },
         "pwaInstall": {
           "description": "Installi nagu rakendus ja jätka isegi katkendliku internetiühenduse korral.",
-          "title": "PWA install"
+          "title": "PWA paigaldus"
         },
         "shortcuts": {
           "description": "Liigu kiiresti otsingu ja tegevuse otseteede abil, mis on rakenduses sisse ehitatud.",
@@ -2817,7 +2817,7 @@
   },
   "linkToLoan": {
     "bestMatch": "Best Match",
-    "cancel": "Cancel",
+    "cancel": "Tühista",
     "extra": "Extra",
     "interest": "Interest",
     "linkError": "Failed to link transaction. Please try again.",
@@ -2842,10 +2842,10 @@
   },
   "loanForm": {
     "autoCalculated": "Auto-calculated: {amount}",
-    "back": "Back",
+    "back": "Tagasi",
     "biWeekly": "Bi-Weekly (Every 2 weeks)",
     "biWeeklyPaymentHint": "Bi-weekly payment amount (P&I only)",
-    "cancel": "Cancel",
+    "cancel": "Tühista",
     "createLoan": "Create Loan",
     "currentBalance": "Current Balance",
     "defermentEndDate": "Deferment End Date",
@@ -2860,16 +2860,16 @@
     "loanName": "Loan Name",
     "loanStartDate": "Loan Start Date",
     "loanTerm": "Loan Term (months)",
-    "monthly": "Monthly",
+    "monthly": "Igakuine",
     "monthlyHomeInsurance": "Monthly Home Insurance",
     "monthlyPMI": "Monthly PMI",
     "monthlyPaymentHint": "Monthly payment amount (P&I only)",
     "monthlyPropertyTax": "Monthly Property Tax",
     "namePlaceholder": "e.g., Primary Mortgage, Car Loan",
-    "next": "Next",
+    "next": "Järgmine",
     "nextPaymentDate": "Next Payment Date",
     "noAccountLinked": "No account linked",
-    "notes": "Notes",
+    "notes": "Märkmed",
     "notesPlaceholder": "Add any additional notes about this loan...",
     "optionalSettings": "Optional Settings",
     "optionalSettingsDescription": "Additional loan configuration",
@@ -2879,7 +2879,7 @@
     "paymentFrequency": "Payment Frequency",
     "paymentInformation": "Payment Information",
     "paymentInformationDescription": "Set up payment tracking",
-    "saving": "Saving...",
+    "saving": "Salvestamine...",
     "selectAccountOptional": "Select an account (optional)",
     "selectLoanType": "Select Loan Type",
     "selectLoanTypeDescription": "Choose the type of loan you want to track",
@@ -2909,7 +2909,7 @@
     "vehicleModel": "Vehicle Model",
     "vehicleModelPlaceholder": "e.g., Civic, Camry",
     "vehicleYear": "Vehicle Year",
-    "weekly": "Weekly",
+    "weekly": "Iganädalane",
     "weeklyPaymentHint": "Weekly payment amount (P&I only)"
   },
   "loanPaymentSelector": {
@@ -2929,7 +2929,7 @@
     "selectLoan": "Select Loan"
   },
   "loans": {
-    "acrossActiveLoans": "Across {count} active loans",
+    "acrossActiveLoans": "{count} aktiivse laenu vahel",
     "addLoan": "Add Loan",
     "addNewLoan": "Add New Loan",
     "allStatuses": "All Statuses",
@@ -2939,31 +2939,31 @@
     "amortizationTip": "Notice how early payments are mostly interest (red), but later payments are mostly principal (teal). Making extra payments early can save you thousands in interest!",
     "amountYouBorrowed": "Amount you borrowed",
     "annualPercentageRate": "Annual Percentage Rate",
-    "avgInterestRate": "Avg Interest Rate",
+    "avgInterestRate": "Keskmine intressimäär",
     "backToLoans": "Back to Loans",
-    "cancel": "Cancel",
+    "cancel": "Tühista",
     "colorKey": "Color Key",
     "costAnalysis": "Cost Analysis",
     "costAnalysisDescription": "See the total cost of this loan over its lifetime",
     "costExplanation": "You borrowed ${borrowed}, but you'll pay ${totalPay} total. The extra ${interestAmount} is interest at {rate}% APR over {years} years.",
     "costOfBorrowing": "Cost of borrowing",
     "currentBalance": "Current Balance",
-    "debtFreeDate": "Debt-Free Date",
-    "delete": "Delete",
+    "debtFreeDate": "Võlavaba kuupäev",
+    "delete": "Kustuta",
     "deleteError": "Failed to delete loan. Please try again.",
     "deleteLoan": "Delete Loan",
     "deleteLoanConfirmDescription": "Are you sure you want to delete \"{name}\"? This action cannot be undone.",
     "deleteLoanConfirmTitle": "Delete Loan?",
-    "edit": "Edit",
+    "edit": "Muuda",
     "editLoan": "Edit Loan",
-    "estimatedPayoff": "Estimated payoff",
+    "estimatedPayoff": "Hinnanguline tagasimaksmine",
     "extraCostAbovePrincipal": "Extra cost above principal",
     "filterByStatus": "Filter by Status",
     "filterByType": "Filter by Type",
     "finalPaymentMonth": "Final payment month",
     "firstPaymentDate": "First payment date",
     "homeInsurance": "Home Insurance",
-    "interestRate": "Interest Rate",
+    "interestRate": "Intressimäär",
     "loading": "Loading loans...",
     "loadingLoan": "Loading loan...",
     "loanDetails": "Loan Details",
@@ -2979,12 +2979,12 @@
       "student": "Student Loan"
     },
     "monthlyEscrowBreakdown": "Monthly Escrow Breakdown",
-    "monthlyPayment": "Monthly Payment",
+    "monthlyPayment": "Igakuine makse",
     "monthlyPaymentsCount": "{count} monthly payments",
     "nextPayment": "Next Payment",
     "noLoansMatchFilters": "No loans match your filters",
     "notAvailable": "N/A",
-    "notes": "Notes",
+    "notes": "Märkmed",
     "originalPrincipal": "Original Principal",
     "overYears": "Over {years} years",
     "payoffDate": "Payoff Date",
@@ -3006,10 +3006,10 @@
     "statusLabel": "Status",
     "subtitle": "Manage and track all your loans",
     "table": {
-      "date": "Date",
+      "date": "Kuupäev",
       "interest": "Interest",
       "month": "Month",
-      "payment": "Payment",
+      "payment": "Makse",
       "principal": "Principal",
       "remaining": "Remaining"
     },
@@ -3017,11 +3017,11 @@
       "amortizationSchedule": "Amortization Schedule",
       "charts": "Charts",
       "extraPaymentCalculator": "Extra Payment Calculator",
-      "overview": "Overview",
+      "overview": "Ülevaade",
       "paymentHistory": "Payment History"
     },
     "tip": "Tip",
-    "title": "Loans",
+    "title": "Laenud",
     "tooltip": {
       "amortizationAria": "More information about amortization and loan payoff",
       "amortizationBody": "How your loan gets paid off over time. Each payment covers interest first, then principal. The schedule shows exactly how much goes to each, month by month. Early payments are mostly interest!",
@@ -3035,14 +3035,14 @@
       "principalVsInterestBody": "Your payment splits between the loan balance (principal) and borrowing cost (interest). Early payments are mostly interest. Later payments are mostly principal. See the Amortization Schedule tab for the full breakdown.",
       "principalVsInterestTitle": "Principal vs Interest"
     },
-    "totalDebt": "Total Debt",
+    "totalDebt": "Koguvõlg",
     "totalInterest": "Total Interest",
-    "totalMonthlyObligations": "Total monthly obligations",
+    "totalMonthlyObligations": "Igakuised kohustused kokku",
     "totalWithEscrow": "${amount} total with escrow",
     "totalYoullPay": "Total You'll Pay",
     "tryAdjustingFilters": "Try adjusting your filter criteria to see more loans.",
     "vehicle": "Vehicle",
-    "weightedAverage": "Weighted average",
+    "weightedAverage": "Kaalutud keskmine",
     "whatThisMeans": "What this means",
     "yearsCount": "{years} years",
     "youvePaid": "You've paid ${amount} so far"
@@ -3064,7 +3064,7 @@
     "codeHint": "6-character code shown on the host device",
     "codeInvalid": "Pairing code must be 6 alphanumeric characters",
     "codeRequired": "Pairing code is required",
-    "connect": "Connect",
+    "connect": "Ühenda",
     "connecting": "Connecting...",
     "description": "Enter the connection details shown on the host device",
     "fixFormErrors": "Please fix the form errors",
@@ -3093,9 +3093,9 @@
   },
   "morePage": {
     "groups": {
-      "toolsSettings": "Tools & Settings",
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning"
+      "toolsSettings": "Tööriistad ja seaded",
+      "trackingAnalysis": "Jälgimine ja analüüs",
+      "wealthPlanning": "Vara ja planeerimine"
     },
     "title": "More"
   },
@@ -3108,7 +3108,7 @@
     "export": "Eksport",
     "goals": "Eesmärgid",
     "help": "Abi",
-    "import": "Import",
+    "import": "Impordi",
     "reports": "Aruanded",
     "settings": "Seaded",
     "transactions": "Tehingud"
@@ -3160,7 +3160,7 @@
       "states": {
         "default": "Not set",
         "denied": "Blocked",
-        "granted": "Enabled",
+        "granted": "Lubatud",
         "unsupported": "Unsupported"
       },
       "title": "Push Notifications"
@@ -3201,7 +3201,7 @@
     },
     "snoozedUntil": "Snoozed for {time}",
     "tabs": {
-      "all": "All",
+      "all": "Kõik",
       "snoozed": "Snoozed",
       "unread": "Unread"
     },
@@ -3214,20 +3214,20 @@
     }
   },
   "ocr": {
-    "amountLabel": "Amount",
+    "amountLabel": "Summa",
     "amountRequired": "Amount *",
     "bestResultPage": "Best result from page {page}",
-    "cancel": "Cancel",
-    "categoryLabel": "Category",
+    "cancel": "Tühista",
+    "categoryLabel": "Kategooria",
     "categoryNamePlaceholder": "Category name",
     "clear": "Clear",
     "clickToUpload": "Click to upload",
     "confidence": "Confidence",
-    "create": "Create",
+    "create": "Loo",
     "createNewCategory": "+ Create new category",
-    "dateLabel": "Date",
+    "dateLabel": "Kuupäev",
     "dateRequired": "Date *",
-    "descriptionLabel": "Description",
+    "descriptionLabel": "Kirjeldus",
     "descriptionPlaceholder": "Optional description",
     "errorFileSize": "File size must be less than 10MB",
     "errorInvalidFileType": "Please select a valid image file or PDF (PNG, JPG, GIF, WebP, PDF)",
@@ -3240,7 +3240,7 @@
     "merchantLabel": "Merchant",
     "merchantPlaceholder": "e.g. Walmart, Amazon",
     "merchantRequired": "Merchant *",
-    "none": "None",
+    "none": "Puudub",
     "notFound": "Not found",
     "ocrDisabled": "OCR is Disabled",
     "ocrDisabledDescription": "Receipt scanning is currently disabled in your privacy settings. Enable OCR processing to use this feature.",
@@ -3251,15 +3251,15 @@
     "privacyNote": "Privacy Note",
     "privacyNoteDescription": "All OCR processing happens locally in your browser. Your receipt images are never uploaded to any server.",
     "processedPages": "{count} pages processed",
-    "processing": "Processing...",
+    "processing": "Töötlemine...",
     "processingPage": "Processing page {current} of {total}...",
     "receiptDateAriaLabel": "Receipt date",
     "saveTransaction": "Save Transaction",
-    "scanReceipt": "Scan Receipt",
+    "scanReceipt": "Skanni kviitung",
     "selectCategory": "Select a category",
     "selectSubcategory": "Select a subcategory",
     "subcategoriesPlaceholder": "Subcategories (comma-separated)",
-    "subcategoryLabel": "Subcategory",
+    "subcategoryLabel": "Alamkategooria",
     "subtitle": "Upload a receipt image to automatically extract transaction data",
     "supportedFormats": "PNG, JPG, GIF, WebP, or PDF up to 10MB",
     "title": "Receipt Scanner",
@@ -3322,11 +3322,11 @@
     }
   },
   "onboardingPage": {
-    "back": "Back",
-    "getStarted": "Get Started",
-    "next": "Next",
-    "saving": "Saving...",
-    "stepCounter": "Step {current} of {total}",
+    "back": "Tagasi",
+    "getStarted": "Alusta",
+    "next": "Järgmine",
+    "saving": "Salvestamine...",
+    "stepCounter": "Samm {current}/{total}",
     "steps": {
       "complete": {
         "content": "Your profile is ready. Let's go to your dashboard.",
@@ -3398,20 +3398,20 @@
     }
   },
   "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "Sellise tempoga ületate oma eelarvet {amount} võrra sel kuul.",
+    "percentOfBudget": "{percent}% eelarvest",
     "progress": {
-      "label": "Current progress"
+      "label": "Praegune edenemine"
     },
     "stats": {
-      "budget": "Budget",
-      "daysLeft": "Days Left",
-      "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "budget": "Eelarve",
+      "daysLeft": "Päevi jäänud",
+      "projectedTotal": "Prognoositud kogusumma",
+      "spentSoFar": "Senini kulutatud"
     },
     "tip": {
-      "label": "Tip:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "label": "Nõuanne:",
+      "reduceSpending": "Vähendage igapäevaseid kulutusi {amount}-ni, et jääda eelarve piiridesse."
     }
   },
   "pairingDialog": {
@@ -3425,7 +3425,7 @@
     "ipAddressDescription": "Enter your local IP address to allow other devices to connect.",
     "ipAddressRequired": "IP Address Required",
     "ipPlaceholder": "192.168.1.100",
-    "manual": "Manual",
+    "manual": "Käsitsi",
     "pairingFailed": "Pairing Failed",
     "pairingSuccessful": "Pairing successful!",
     "pendingConnection": "Pending Connection",
@@ -3439,14 +3439,14 @@
     "verifyingConnection": "Verifying connection..."
   },
   "paymentHistoryPanel": {
-    "actions": "Actions",
+    "actions": "Toimingud",
     "addPayment": "Add Payment",
     "addPaymentError": "Failed to add payment. Please try again.",
-    "amount": "Amount",
+    "amount": "Summa",
     "balanceAfter": "Balance After",
-    "cancel": "Cancel",
-    "date": "Date",
-    "delete": "Delete",
+    "cancel": "Tühista",
+    "date": "Kuupäev",
+    "delete": "Kustuta",
     "deleteConfirm": "Delete this payment record? This action cannot be undone.",
     "deleteError": "Failed to delete payment. Please try again.",
     "description": "Track your loan payments and link to transactions",
@@ -3466,9 +3466,9 @@
     "loading": "Loading payment history...",
     "loanPaymentCategory": "Loan Payment - {name}",
     "lowConfidence": "Low Confidence",
-    "manual": "Manual",
+    "manual": "Käsitsi",
     "mediumConfidence": "Medium Confidence",
-    "notesLabel": "Notes (Optional)",
+    "notesLabel": "Märkmed (valikuline)",
     "notesPlaceholder": "Payment notes...",
     "paymentAmount": "Payment Amount",
     "paymentDate": "Payment Date",
@@ -3485,7 +3485,7 @@
     "viewTransaction": "View transaction"
   },
   "pinDialog": {
-    "cancel": "Cancel",
+    "cancel": "Tühista",
     "changeDescription": "Change the PIN for this profile.",
     "changePin": "Change PIN",
     "confirmNewPinLabel": "Confirm New PIN",
@@ -3528,15 +3528,15 @@
       "createFirstGoal": "Create Your First Goal",
       "currentSavingsLabel": "Current Savings",
       "currentSavingsValue": "Current savings: {amount}",
-      "delete": "Delete",
+      "delete": "Kustuta",
       "deleteGoal": "Delete Goal",
       "deleteGoalAriaLabel": "Delete goal",
       "deleteGoalDescription": "Are you sure you want to delete this savings goal? This action cannot be undone.",
       "deleteGoalTitle": "Delete Savings Goal",
-      "descriptionLabel": "Description",
+      "descriptionLabel": "Kirjeldus",
       "descriptionPlaceholder": "What are you saving for?",
       "descriptionValue": "Description: {description}",
-      "edit": "Edit",
+      "edit": "Muuda",
       "editGoal": "Edit Goal",
       "editGoalAriaLabel": "Edit goal",
       "emptyDescription": "Start planning for your future purchases by creating your first savings goal. Track your progress and stay on target.",
@@ -3556,10 +3556,10 @@
       "onTrack": "On track! Goal will be reached by {date}",
       "overdue": "Overdue",
       "pleaseSelectDate": "Please select a target date",
-      "priorityHigh": "High",
+      "priorityHigh": "Kõrge",
       "priorityLabel": "Priority",
-      "priorityLow": "Low",
-      "priorityMedium": "Medium",
+      "priorityLow": "Madal",
+      "priorityMedium": "Keskmine",
       "remaining": "Remaining",
       "savingsOf": "{current} of {target}",
       "startPlanning": "Start planning for your future purchases by adding a new savings goal.",
@@ -3584,7 +3584,7 @@
       "amountAllocated": "{amount} allocated",
       "amountUnallocated": "{amount} unallocated",
       "budgetedCategories": "Budgeted Categories",
-      "cancel": "Cancel",
+      "cancel": "Tühista",
       "collapseDetails": "Collapse paycheck details",
       "currency": "Currency",
       "currencyAUD": "AUD - Australian Dollar",
@@ -3624,17 +3624,17 @@
       "remainingToAllocate": "Remaining to allocate",
       "safeToSpend": "Safe to Spend",
       "saveAllocations": "Save Allocations",
-      "saving": "Saving...",
+      "saving": "Salvestamine...",
       "scheduleBiweekly": "Biweekly",
       "scheduleBiweeklyDesc": "Every two weeks",
-      "scheduleIrregular": "Irregular",
+      "scheduleIrregular": "Ebaregulaarne",
       "scheduleIrregularDesc": "Custom dates",
       "scheduleLabel": "Schedule: {schedule}",
-      "scheduleMonthly": "Monthly",
+      "scheduleMonthly": "Igakuine",
       "scheduleMonthlyDesc": "Once a month",
       "scheduleSemimonthly": "Semi-monthly",
       "scheduleSemimonthlyDesc": "1st and 15th",
-      "scheduleWeekly": "Weekly",
+      "scheduleWeekly": "Iganädalane",
       "scheduleWeeklyDesc": "Every week",
       "scheduledPaychecks": "{count, plural, one {# scheduled paycheck} other {# scheduled paychecks}}",
       "setUpPaycheckPlan": "Set Up Paycheck Plan",
@@ -3657,7 +3657,7 @@
       "currentAgeYears": "Current age: {age} years",
       "currentSavings": "Current Savings",
       "currentSavingsAmount": "Current savings: {amount}",
-      "delete": "Delete",
+      "delete": "Kustuta",
       "deletePlan": "Delete Plan",
       "deleteRetirementPlan": "Delete Retirement Plan",
       "deleteRetirementPlanDescription": "This will permanently remove this retirement plan and all its projections.",
@@ -3705,7 +3705,7 @@
       "stockOptionsVested": "Stock Options (Vested)",
       "subtitle": "Plan your retirement with compound interest projections",
       "tfsaBalance": "TFSA Balance",
-      "title": "Retirement Calculator",
+      "title": "Pensioniealkulaator",
       "toReachGoal": "To reach your goal, you could:",
       "workMoreYears": "Work {years, plural, one {# more year} other {# more years}}",
       "yearAge": "{year} (Age {age})",
@@ -3764,27 +3764,27 @@
     "dataSecurity": "Data Security",
     "dataTransactions": "transactions",
     "deleteAccountsDescription": "Bank accounts and credit cards",
-    "deleteAccountsLabel": "Accounts",
+    "deleteAccountsLabel": "Kontod",
     "deleteAfter30Days": "Delete after 30 days",
     "deleteAfter7Days": "Delete after 7 days (Recommended)",
     "deleteBalancesDescription": "Reset all account balances to $0",
     "deleteBalancesLabel": "Account Balances",
     "deleteBudgetsDescription": "Monthly budget allocations",
-    "deleteBudgetsLabel": "Budgets",
+    "deleteBudgetsLabel": "Eelarved",
     "deleteCategoriesDescription": "Custom spending categories",
-    "deleteCategoriesLabel": "Categories",
+    "deleteCategoriesLabel": "Kategooriad",
     "deleteData": "Delete Data",
     "deleteFailed": "Failed to delete data. Please try again.",
     "deletePrivacySettingsDescription": "Reset all settings to defaults",
     "deletePrivacySettingsLabel": "Privacy Settings",
     "deleteSelected": "Delete Selected",
     "deleteTransactionsDescription": "All imported and manual transactions",
-    "deleteTransactionsLabel": "Transactions",
+    "deleteTransactionsLabel": "Tehingud",
     "deleting": "Deleting...",
     "deselectAll": "Deselect All",
     "enableAnalytics": "Enable Analytics",
     "enableAnalyticsDescription": "Track feature usage and app performance using PostHog. No personal financial data (amounts, descriptions) is collected.",
-    "enableChatbot": "Enable Chatbot",
+    "enableChatbot": "Luba vestlusrobot",
     "enableErrorTracking": "Enable Error Tracking",
     "enableErrorTrackingDescription": "Automatically report errors and crashes to Sentry to help improve the app. No financial data is included in error reports.",
     "encryptStoredData": "Encrypt Stored Data",
@@ -3792,15 +3792,15 @@
     "encryptionActive": "Encryption is active. Your data is encrypted in IndexedDB.",
     "encryptionFailed": "Failed to enable encryption. Please try again.",
     "encryptionNotAvailable": "Encryption is not available in this browser. Please use a modern browser with Web Crypto API support.",
-    "export": "Export",
+    "export": "Ekspordi",
     "exportAllData": "Export All Data",
     "exportAllDataDescription": "Download all your accounts, transactions, categories, and budgets as JSON",
     "exportFailed": "Failed to export data. Please try again.",
-    "fullAccess": "Full Access",
+    "fullAccess": "Täielik juurdepääs",
     "fullAccessDescription": "Chatbot can perform actions like adding transactions and creating budgets",
     "includedInAccounts": "included in Accounts",
-    "keepForever": "Keep forever",
-    "nSelected": "{count} selected",
+    "keepForever": "Säilita igavesti",
+    "nSelected": "{count} valitud",
     "naturalLanguageImport": "Natural Language Import",
     "naturalLanguageImportDescription": "Auto-configure bank imports using natural language (e.g., 'Import my TD checking account CSV')",
     "nothingSelected": "Nothing selected",
@@ -3810,8 +3810,8 @@
     "privacyFirst": "Privacy First",
     "privacyNotice": "All processing happens in your browser. No transaction data is uploaded to servers. AI features are opt-in and only send cleaned transaction descriptions (no account numbers, names, or addresses) when enabled.",
     "readOnlyDescription": "Chatbot can view data and answer questions but cannot modify anything",
-    "readOnlyRecommended": "Read-Only (Recommended)",
-    "receiptOCR": "Receipt OCR",
+    "readOnlyRecommended": "Ainult lugemine (soovitatav)",
+    "receiptOCR": "Kviitungi OCR",
     "receiptOCRDescription": "Extract transaction details from receipt images using client-side OCR (Tesseract.js). No data leaves your device.",
     "requiresAIFeatures": "Requires AI Features",
     "selectAll": "Select All",
@@ -3825,7 +3825,7 @@
     "whatsSentDescription": "Only cleaned transaction descriptions (e.g., \"AMAZON.COM\"). No account numbers, names, or addresses. Powered by OpenAI GPT-4o-mini."
   },
   "profileDialog": {
-    "cancel": "Cancel",
+    "cancel": "Tühista",
     "confirmPinLabel": "Confirm PIN",
     "confirmPinPlaceholder": "Confirm PIN",
     "createDescription": "Add a new profile for a family member. Each profile can have its own private budgets.",
@@ -3860,22 +3860,22 @@
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "Paigalda",
+      "notNow": "Mitte praegu"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "Sule paigaldusviip",
+    "description": "Lisage avakuvale kiireks juurdepääsuks ja võrguühenduseta kasutamiseks",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "Kiire ja turvaline",
+      "noAppStore": "Rakenduspoodi pole vaja",
+      "offline": "Töötab võrguühenduseta"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"Lisa avakuvale\"",
+    "iosForFullExperience": "täielikuks rakenduskogemuseks kiirema laadimisega.",
+    "iosTap": "Puudutage",
+    "iosThen": "seejärel",
+    "iosTitle": "Paigalda eelarverakendus",
+    "title": "Paigalda eelarverakendus"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3886,9 +3886,9 @@
     "cameraStep2": "Find \"Camera\" in the permissions",
     "cameraStep3": "Change it to \"Allow\"",
     "cameraStep4": "Refresh this page",
-    "cancel": "Cancel",
+    "cancel": "Tühista",
     "deviceFound": "Device Found!",
-    "error": "Error",
+    "error": "Viga",
     "howToEnableCamera": "How to enable camera access:",
     "invalidQrFormat": "Invalid QR code format. Please scan a Budget App pairing QR code.",
     "noCamera": "No camera found on this device.",
@@ -3906,47 +3906,47 @@
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "Rakenda kategooria",
+      "cancel": "Tühista",
+      "save": "Salvesta"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "clickToSelect": "Klõpsake kategooria valimiseks",
+    "description": "Valige kategooria {count, plural, =1 {selle tehingu} other {# tehingu}} jaoks",
+    "general": "Üldine",
+    "noResults": "Kategooriaid ei leitud",
+    "pressEnter": "Vajutage ↵ Enter",
+    "saving": "Salvestamine...",
+    "searchPlaceholder": "Otsi kategooriaid...",
+    "title": "Kiire kategoriseerimine"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "Kõik",
+    "categories": "Kategooriad",
+    "clearFilters": "Tühjenda filtrid",
+    "moreCategories": "+{count} veel",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "Viimased 30 päeva",
+      "last90": "Viimased 90 päeva",
+      "thisMonth": "See kuu",
+      "thisYear": "See aasta"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "Ajaperiood"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
+    "balance": "Kogu saldo",
+    "expenses": "Kulud",
+    "income": "Tulu",
     "savingsRate": "Savings Rate",
     "savingsRateDescription": "Percentage of income saved this month"
   },
   "receiptThumbnail": {
-    "close": "Close",
+    "close": "Sulge",
     "deleteConfirm": "Delete receipt \"{filename}\"?",
-    "deleteFailed": "Failed to delete receipt",
-    "deleteReceipt": "Delete receipt",
+    "deleteFailed": "Kviitungi kustutamine ebaõnnestus",
+    "deleteReceipt": "Kustuta kviitung",
     "downloadPdf": "Download PDF",
     "fileSize": "{size} KB",
-    "pdfReceipt": "PDF Receipt",
+    "pdfReceipt": "PDF-kviitung",
     "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
     "unsupportedFileType": "Unsupported file type",
     "uploaded": "Uploaded {date}",
@@ -3954,75 +3954,75 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "Lisa kviitung",
+      "chooseDifferent": "Vali teine",
+      "extractData": "Eralda andmed",
+      "extracting": "Eraldamine..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "Tehke foto kaameraga",
+      "useDevice": "Kasutage oma seadme kaamerat kviitungi jäädvustamiseks"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "Kaamera sisend",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "või <link>sirvige faile</link>",
+      "dragDrop": "Lohistage kviitung siia",
+      "dropHere": "Lohistage kviitung siia",
+      "supportedFormats": "Toetab JPG, PNG, PDF • Maks {size} MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "Kviitungist ei õnnestunud andmeid eraldada. Palun sisestage käsitsi.",
+      "extractionFailed": "Andmete eraldamine ebaõnnestus. Palun proovige uuesti või sisestage käsitsi.",
+      "invalidType": "Kehtetu failitüüp. Lubatud on ainult JPG, PNG ja PDF failid",
+      "ocrImagesOnly": "OCR on toetatud ainult pildifailide puhul (JPG, PNG)",
+      "rejected": "Fail lükati tagasi. Palun proovige uuesti",
+      "tooLarge": "Fail on liiga suur. Maksimaalne suurus on {size} MB"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "Summa:",
+      "confidence": "Usaldusväärsus: {percent}%",
+      "date": "Kuupäev:",
+      "merchant": "Kaupmees:",
+      "title": "Andmed eraldatud"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "Eelvaade pole saadaval",
+      "title": "PDF-kviitung"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "Kviitungi eelvaade",
+    "removeFile": "Eemalda fail"
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
-    "estimatedMonthly": "Estimated Monthly",
+    "confidence": "{percent}% usaldusväärsus",
+    "estimatedMonthly": "Hinnanguline igakuine",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "Kahenädalane",
+      "monthly": "Igakuine",
+      "quarterly": "Kvartaalne",
+      "weekly": "Iganädalane"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "next": "Next: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "inDays": "{count, plural, =0 {(täna)} =1 {(1 päeva pärast)} other {(# päeva pärast)}}",
+    "next": "Järgmine: {date}",
+    "occurrences": "{count, plural, =1 {1 esinemine tuvastatud} other {# esinemist tuvastatud}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "kuus",
+      "quarter": "kvartalis",
+      "twoWeeks": "2 nädala kohta",
+      "week": "nädalas"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
+    "showingPatterns": "{count, plural, =1 {Näidatakse 1 korduva tehingu mustrit} other {Näidatakse # korduva tehingu mustrit}}",
+    "subtitle": "Tuvastatud tellimused ja arved",
+    "title": "Korduvad tehingud"
   },
   "reports": {
     "addTransactionsToSeeFlow": "Add income and expense transactions to see your money flow",
-    "amount": "Amount",
-    "category": "Category",
+    "amount": "Summa",
+    "category": "Kategooria",
     "categoryBreakdown": "Category Breakdown",
     "downloadPng": "Download as PNG",
     "downloadSvg": "Download as SVG",
-    "expenses": "Expenses",
-    "income": "Income",
+    "expenses": "Kulud",
+    "income": "Tulu",
     "incomeVsExpenses": "Income vs Expenses (Last 6 Months)",
     "loading": "Loading reports...",
     "moneyFlow": "Money Flow",
@@ -4037,7 +4037,7 @@
     "spendingByCategory": "Spending by Category",
     "subtitle": "Visualize your financial data",
     "timeRange": {
-      "all": "All",
+      "all": "Kõik",
       "month": "Month",
       "quarter": "Quarter",
       "year": "Year"
@@ -4046,18 +4046,18 @@
     "topCategories": "Top 5 Categories",
     "totalExpenses": "Total Expenses",
     "totalIncome": "Total Income",
-    "transactions": "Transactions"
+    "transactions": "Tehingud"
   },
   "settings": {
     "aboutBudgetFiles": "About .budget Files",
     "accountDeleteFailed": "Failed to delete account",
-    "accountName": "Account Name",
+    "accountName": "Konto nimi",
     "accountNamePlaceholder": "e.g., BMO Checking",
-    "accountSaveFailed": "Failed to save account",
-    "accountType": "Account Type",
+    "accountSaveFailed": "Konto salvestamine ebaõnnestus",
+    "accountType": "Konto tüüp",
     "addAccount": "Add Account",
     "addAccountsToStart": "Add your bank accounts to get started",
-    "addCategory": "Add Category",
+    "addCategory": "Lisa kategooria",
     "addFirstAccount": "Add Your First Account",
     "addFirstCategory": "Add Your First Category",
     "addFirstCategoryToOrganize": "Add your first category to organize transactions",
@@ -4067,14 +4067,14 @@
     "archiveFailed": "Failed to archive category",
     "archived": "Archived",
     "archivedCategoriesAppearHere": "Archived categories will appear here",
-    "balance": "Balance",
+    "balance": "Saldo",
     "budgetFileInfo1": "Your data is stored in a portable JSON format that can be opened by any text editor",
     "budgetFileInfo2": "Optional password protection uses industry-standard AES-256 encryption",
     "budgetFileInfo3": "Files include a checksum to detect corruption or tampering",
     "budgetFileInfo4": "Receipt images can be included in the export (increases file size)",
-    "cancel": "Cancel",
+    "cancel": "Tühista",
     "categoriesSubtitle": "Organize your transactions with custom categories • Drag to reorder",
-    "categoriesTitle": "Categories",
+    "categoriesTitle": "Kategooriad",
     "categoryName": "Category Name",
     "categoryNamePlaceholder": "e.g., Entertainment, Groceries, Salary",
     "categorySaveFailed": "Failed to save category",
@@ -4091,11 +4091,11 @@
     "editAccount": "Edit Account",
     "editCategory": "Edit category",
     "experimental": "Experimental",
-    "exportData": "Export Data",
+    "exportData": "Ekspordi andmed",
     "exportDataDescription": "Download all your budget data as a .budget file. Includes transactions, accounts, categories, and settings.",
     "hideArchived": "Hide Archived",
     "icon": "Icon",
-    "importData": "Import Data",
+    "importData": "Impordi andmed",
     "importDataDescription": "Restore your data from a .budget file. You can choose to merge with existing data or replace it.",
     "institution": "Institution",
     "institutionPlaceholder": "e.g., BMO, Home Trust",
@@ -4114,8 +4114,8 @@
     "subcategoriesTip": "Separate with commas, e.g. \"Movies, Streaming, Concerts\"",
     "subtitle": "Manage your accounts and categories",
     "tabAccessibility": "Accessibility",
-    "tabAccounts": "Accounts",
-    "tabCategories": "Categories",
+    "tabAccounts": "Kontod",
+    "tabCategories": "Kategooriad",
     "tabData": "Data",
     "tabDevTools": "Developer Tools",
     "tabLocale": "Locale & Formatting",
@@ -4124,15 +4124,15 @@
     "tabProfiles": "Profiles",
     "tapToChangeIcon": "Tap to change icon",
     "tapToChooseColor": "Tap to choose a custom color",
-    "tipLabel": "Tip:",
-    "title": "Settings",
+    "tipLabel": "Nõuanne:",
+    "title": "Seaded",
     "toggleWebmcp": "Toggle WebMCP AI Agent Tools",
     "transaction": "transaction",
     "transactions": "transactions",
-    "type": "Type",
+    "type": "Tüüp",
     "unarchiveCategory": "Unarchive category",
     "unarchiveFailed": "Failed to unarchive category",
-    "updateAccount": "Update Account",
+    "updateAccount": "Uuenda konto",
     "updateCategory": "Update Category",
     "updateCategoryDetails": "Update category details",
     "webmcpDescription": "Allow browser AI agents to interact with your budget data. Requires Chrome 146+ with the WebMCP flag enabled.",
@@ -4142,13 +4142,13 @@
     "yourAccounts": "Your Accounts"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "Sule otseteede abi",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "Klaviatuuri otseteed töötavad igal lehel, välja arvatud vormide täitmisel. Vajutage igal ajal {key}, et näha seda abi.",
+      "title": "💡 Pro nõuanne"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "Võimsa kasutaja tootlikkuse nõuanded",
+    "title": "Klaviatuuri otseteed"
   },
   "sidebar": {
     "actions": {
@@ -4192,12 +4192,12 @@
     "alreadyHaveToken": "Already have a token?",
     "asOf": "as of {date}",
     "autoImportDescription": "Automatically import transactions from your bank accounts",
-    "automaticSync": "Automatic Sync",
+    "automaticSync": "Automaatne sünkroonimine",
     "automaticSyncDescription": "Transactions sync daily. Manual import anytime.",
-    "back": "Back",
-    "cancel": "Cancel",
+    "back": "Tagasi",
+    "cancel": "Tühista",
     "completeSetup": "Complete Setup",
-    "connect": "Connect",
+    "connect": "Ühenda",
     "connectYourBank": "Connect Your Bank",
     "connecting": "Connecting...",
     "connectingTitle": "Connecting...",
@@ -4205,14 +4205,14 @@
     "connectionSuccessful": "Connection Successful!",
     "createNewAccount": "Create new account",
     "dialogDescription": "Link your bank accounts via SimpleFIN Bridge",
-    "dialogTitle": "Connect Bank Account",
-    "done": "Done",
+    "dialogTitle": "Ühenda pangakonto",
+    "done": "Valmis",
     "enterItHere": "Enter it here",
     "enterTokenError": "Please enter your SimpleFIN setup token",
     "failedToSave": "Failed to save connection",
     "fetchingAccounts": "Fetching your bank accounts from SimpleFIN",
     "genericError": "An error occurred while connecting",
-    "getStarted": "Get Started",
+    "getStarted": "Alusta",
     "importTo": "Import to:",
     "importTransactions": "Import transactions",
     "instruction1": "Click the button below to open SimpleFIN Bridge",
@@ -4225,7 +4225,7 @@
     "linkToBudgetDescription": "Map bank accounts to your budget accounts.",
     "noAccountsFound": "No accounts found. Please ensure you have connected bank accounts in SimpleFIN Bridge.",
     "openBridge": "Open SimpleFIN Bridge",
-    "saving": "Saving...",
+    "saving": "Salvestamine...",
     "securePrivate": "Secure & Private",
     "securePrivateDescription": "SimpleFIN never sees your login credentials. You control access.",
     "selectAccount": "Select account",
@@ -4245,98 +4245,98 @@
   },
   "simplefinSettings": {
     "connectedAccounts": {
-      "description": "Manage your linked bank accounts",
-      "title": "Connected Accounts"
+      "description": "Hallake oma seotud pangakontosid",
+      "title": "Ühendatud kontod"
     },
     "connection": {
-      "accountsLinked": "{count, plural, =1 {1 account linked} other {# accounts linked}}",
-      "connectButton": "Connect Bank Account",
-      "connected": "Connected",
-      "description": "Connect your bank accounts to automatically import transactions",
-      "notConnected": "Not Connected",
-      "notConnectedDesc": "Connect your bank accounts to start importing transactions",
-      "title": "SimpleFIN Connection"
+      "accountsLinked": "{count, plural, =1 {1 konto seotud} other {# kontot seotud}}",
+      "connectButton": "Ühenda pangakonto",
+      "connected": "Ühendatud",
+      "description": "Ühendage oma pangakontod tehingute automaatseks importimiseks",
+      "notConnected": "Pole ühendatud",
+      "notConnectedDesc": "Ühendage oma pangakontod tehingute importimise alustamiseks",
+      "title": "SimpleFIN-i ühendus"
     },
     "disconnect": {
-      "button": "Disconnect",
-      "cancel": "Cancel",
-      "confirm": "Disconnect",
-      "dialogDescription": "This will remove the connection to your bank accounts. Your existing transactions will not be deleted, but new transactions will no longer sync automatically.",
-      "dialogTitle": "Disconnect SimpleFIN?"
+      "button": "Katkesta ühendus",
+      "cancel": "Tühista",
+      "confirm": "Katkesta ühendus",
+      "dialogDescription": "See eemaldab ühenduse teie pangakontodega. Teie olemasolevaid tehinguid ei kustutata, kuid uued tehingud ei sünkroonitu enam automaatselt.",
+      "dialogTitle": "Katkesta SimpleFIN-i ühendus?"
     },
     "help": {
-      "bridgeDashboard": "SimpleFIN Bridge Dashboard",
-      "protocolDocs": "SimpleFIN Protocol Documentation",
-      "title": "Need Help?"
+      "bridgeDashboard": "SimpleFIN Bridge'i armatuurlaud",
+      "protocolDocs": "SimpleFIN-i protokolli dokumentatsioon",
+      "title": "Vajate abi?"
     },
     "sync": {
       "date": "{date}",
-      "hoursAgo": "{hours, plural, =1 {1 hour ago} other {# hours ago}}",
-      "lastSynced": "Last synced: {time}",
-      "lessThanHour": "Less than an hour ago",
-      "never": "Never",
-      "syncNow": "Sync Now",
-      "syncing": "Syncing..."
+      "hoursAgo": "{hours, plural, =1 {1 tund tagasi} other {# tundi tagasi}}",
+      "lastSynced": "Viimati sünkroonitud: {time}",
+      "lessThanHour": "Vähem kui tund tagasi",
+      "never": "Kunagi",
+      "syncNow": "Sünkrooni kohe",
+      "syncing": "Sünkroonimine..."
     },
     "syncSettings": {
       "autoCategorize": {
-        "description": "Automatically categorize imported transactions using AI",
-        "label": "Auto-Categorize"
+        "description": "Kategoriseerige imporditud tehingud automaatselt tehisintellekti abil",
+        "label": "Automaatne kategoriseerimine"
       },
       "autoSync": {
-        "description": "Automatically sync transactions on a schedule",
-        "label": "Automatic Sync"
+        "description": "Sünkroonige tehinguid automaatselt ajakava alusel",
+        "label": "Automaatne sünkroonimine"
       },
-      "description": "Configure how and when transactions are synced",
+      "description": "Seadistage, kuidas ja millal tehinguid sünkroonitakse",
       "frequency": {
-        "every12Hours": "Every 12 hours",
-        "every2Days": "Every 2 days",
-        "every6Hours": "Every 6 hours",
-        "hint": "SimpleFIN allows up to 24 requests per day. Daily sync is recommended.",
-        "label": "Sync Frequency",
-        "onceDaily": "Once daily"
+        "every12Hours": "Iga 12 tunni tagant",
+        "every2Days": "Iga 2 päeva tagant",
+        "every6Hours": "Iga 6 tunni tagant",
+        "hint": "SimpleFIN lubab kuni 24 päringut päevas. Igapäevane sünkroonimine on soovitatav.",
+        "label": "Sünkroonimise sagedus",
+        "onceDaily": "Kord päevas"
       },
       "notifications": {
-        "description": "Show notification when sync completes",
-        "label": "Sync Notifications"
+        "description": "Näita teadet sünkroonimise lõpetamisel",
+        "label": "Sünkroonimise teated"
       },
       "pendingTransactions": {
-        "description": "Include transactions that haven't posted yet",
-        "label": "Import Pending Transactions"
+        "description": "Kaasa tehingud, mis pole veel postitatud",
+        "label": "Impordi ootel tehingud"
       },
-      "title": "Sync Settings",
+      "title": "Sünkroonimise seaded",
       "transactionHistory": {
-        "days": "{count} days",
-        "hint": "How many days of transaction history to fetch (max 60 days per SimpleFIN)",
-        "label": "Transaction History"
+        "days": "{count} päeva",
+        "hint": "Mitu päeva tehinguajalugu tuua (maks 60 päeva SimpleFIN-i kohta)",
+        "label": "Tehingute ajalugu"
       }
     }
   },
   "simplefinStatus": {
     "active": "Active",
     "asOf": "as of {date}",
-    "cancel": "Cancel",
-    "connected": "Connected",
+    "cancel": "Tühista",
+    "connected": "Ühendatud",
     "connecting": "Connecting...",
     "disconnected": "Disconnected",
     "dismiss": "Dismiss",
-    "error": "Error",
+    "error": "Viga",
     "errorsLabel": "Errors:",
     "expired": "Expired",
     "hoursAgo": "{hours}h ago",
     "imported": "Imported",
     "justNow": "just now",
-    "lastSynced": "Last synced: {time}",
+    "lastSynced": "Viimati sünkroonitud: {time}",
     "minutesAgo": "{minutes}m ago",
-    "neverSynced": "Never synced",
+    "neverSynced": "Pole kunagi sünkroonitud",
     "noBankAccounts": "No bank accounts connected",
-    "pause": "Pause",
-    "paused": "Paused",
+    "pause": "Peata",
+    "paused": "Peatatud",
     "processing": "Processing: {account}",
-    "resume": "Resume",
+    "resume": "Jätka",
     "skippedDuplicates": "Skipped (duplicates)",
     "statusLabel": "SimpleFIN: {status}",
-    "sync": "Sync",
+    "sync": "Sünkrooni",
     "syncComplete": "Sync Complete",
     "syncCompletedWithErrors": "Sync Completed with Errors",
     "syncFailed": "Sync Failed",
@@ -4345,7 +4345,7 @@
     "syncedHoursAgo": "Synced {hours}h ago",
     "syncedJustNow": "Synced just now",
     "syncedYesterday": "Synced yesterday",
-    "syncing": "Syncing...",
+    "syncing": "Sünkroonimine...",
     "transactionsCount": "({count} transactions)",
     "unlink": "Unlink",
     "warningsLabel": "Warnings:"
@@ -4365,47 +4365,47 @@
     "title": "Kulutuste trendid ja prognoos"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "Lisa jagamine ({current}/{max})",
+    "amount": "Summa",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "Tühista",
+      "save": "Salvesta jagamine",
+      "saving": "Salvestamine..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "Kategooria",
+    "closeModal": "Sule modaal",
+    "date": "Kuupäev:",
+    "distributeEvenly": "Jaota võrdselt",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "Jagatud tehingu salvestamine ebaõnnestus"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "Sisestage summa iga kategooria jaoks (kokku peab olema ${amount})",
+      "step2": "Kasutage \"Jaota võrdselt\", et jagada võrdselt kõigi kategooriate vahel",
+      "step3": "Lisage kuni 5 jagamist tehingu kohta",
+      "step4": "Algne tehing peidetakse ja asendatakse jagatud kirjetega",
+      "title": "Kuidas tehinguid jagada:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "Maksimaalselt 5 jagamist lubatud",
+    "minSplitsRequired": "Minimaalselt 2 jagamist nõutud",
+    "none": "Puudub",
+    "notes": "Märkmed (valikuline)",
+    "notesPlaceholder": "nt Ärikulu, Isiklik kasutus",
+    "originalAmount": "Algne summa:",
+    "removeThisSplit": "Eemalda see jagamine",
+    "selectCategory": "Vali kategooria...",
+    "splitsCount": "Jagamised ({current}/{max})",
+    "subcategory": "Alamkategooria",
+    "title": "Jaga tehing",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "Kohandage jagamise summasid, et need kattuks algse tehingu summaga.",
+      "amountsMustMatch": "Jagamise summad peavad olema võrdsed algse tehingu summaga",
+      "categoryRequired": "Kõigil jagamistel peab olema kategooria",
+      "matchesOriginal": "✓ Kattub algnega",
+      "overBy": "Üle ${amount} võrra",
+      "readyToSave": "Jagamise summad kattuvad algse tehinguga. Valmis salvestamiseks!",
+      "total": "Kokku:",
+      "underBy": "Alla ${amount} võrra"
     }
   },
   "splits": {
@@ -4414,11 +4414,11 @@
     "addPerson": "Add Person",
     "allSettledUp": "All settled up",
     "allSettledUpWith": "All settled up with {name}!",
-    "amount": "Amount",
-    "back": "Back",
+    "amount": "Summa",
+    "back": "Tagasi",
     "backToSplits": "Back to Splits",
     "confirmRemovePerson": {
-      "confirmLabel": "Remove",
+      "confirmLabel": "Eemalda",
       "description": "Are you sure you want to remove this person? All their split records will be deleted.",
       "descriptionNamed": "Are you sure you want to remove {name}? All their split records will be deleted.",
       "title": "Remove Person"
@@ -4476,9 +4476,9 @@
       "percentagesCorrect": "Percentages add up to 100%",
       "previewSplit": "Preview Split",
       "remaining": "Remaining: {amount}",
-      "searchTransactions": "Search transactions...",
+      "searchTransactions": "Otsi tehinguid...",
       "selectTransaction": "Select a transaction",
-      "step": "Step {current} of {total}",
+      "step": "Samm {current}/{total}",
       "title": "Split a Transaction",
       "whoToSplitWith": "Who to split with?"
     },
@@ -4494,64 +4494,64 @@
   },
   "subscriptionCard": {
     "badges": {
-      "aiVerified": "AI Verified",
-      "cancelled": "Cancelled",
-      "paused": "Paused",
-      "trial": "Trial"
+      "aiVerified": "Tehisintellekt kinnitatud",
+      "cancelled": "Tühistatud",
+      "paused": "Peatatud",
+      "trial": "Prooviversioon"
     },
     "buttons": {
-      "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
+      "claimManage": "Nõua ja halda",
+      "edit": "Muuda",
+      "transactions": "Tehingud"
     },
     "confidence": {
-      "high": "High",
-      "label": "Detection Confidence",
-      "low": "Low",
-      "medium": "Medium"
+      "high": "Kõrge",
+      "label": "Tuvastamise usaldusväärsus",
+      "low": "Madal",
+      "medium": "Keskmine"
     },
     "details": {
-      "charges": "{count} charges",
-      "daysBefore": "{count} days before",
-      "firstCharge": "First Charge",
-      "lastCharge": "Last Charge",
-      "occurrences": "Occurrences",
-      "payment": "Payment",
-      "reminder": "Reminder"
+      "charges": "{count} makset",
+      "daysBefore": "{count} päeva enne",
+      "firstCharge": "Esimene makse",
+      "lastCharge": "Viimane makse",
+      "occurrences": "Esinemised",
+      "payment": "Makse",
+      "reminder": "Meeldetuletus"
     },
     "interval": {
-      "annual": "Annual",
-      "bi-weekly": "Bi-weekly",
-      "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "annual": "Aastane",
+      "bi-weekly": "Kahenädalane",
+      "irregular": "Ebaregulaarne",
+      "monthly": "Igakuine",
+      "quarterly": "Kvartaalne",
+      "weekly": "Iganädalane"
     },
-    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "lowConfidenceWarning": "See tellimus tuvastati madala usaldusväärsusega. Nõudke see kinnitamiseks ja käsitsi haldamiseks.",
     "menu": {
-      "cancelSubscription": "Cancel Subscription",
-      "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
-      "notSubscription": "Not a Subscription",
-      "pause": "Pause",
-      "resume": "Resume",
-      "viewTransactions": "View Transactions"
+      "cancelSubscription": "Tühista tellimus",
+      "claimManage": "Nõua ja halda",
+      "delete": "Kustuta",
+      "edit": "Muuda",
+      "notSubscription": "Pole tellimus",
+      "pause": "Peata",
+      "resume": "Jätka",
+      "viewTransactions": "Vaata tehinguid"
     },
     "source": {
-      "auto-detected": "Auto-detected",
-      "manual": "Manual",
-      "merged": "Tracked"
+      "auto-detected": "Automaatselt tuvastatud",
+      "manual": "Käsitsi",
+      "merged": "Jälgitud"
     },
     "stats": {
-      "amount": "Amount",
-      "annualCost": "Annual Cost",
-      "frequency": "Frequency",
-      "nextCharge": "Next Charge",
-      "totalSpent": "Total Spent"
+      "amount": "Summa",
+      "annualCost": "Aastane kulu",
+      "frequency": "Sagedus",
+      "nextCharge": "Järgmine makse",
+      "totalSpent": "Kokku kulutatud"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {1 päev prooviversiooni} other {# päeva prooviversiooni}}"
     },
     "reminderToggle": {
       "disableReminder": "Keela meeldetuletus",
@@ -4560,46 +4560,46 @@
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "Aktiivseid tellimusi analüüsimiseks pole",
+    "loadingChart": "Diagrammi laadimine...",
+    "moreCharges": "+{count} laengut veel",
+    "perMonth": "/kuu",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "Kulu kategooriate kaupa",
+      "potentialSavings": "Võimalik kokkuhoid",
+      "upcomingCharges": "Eelseisvad maksed (järgmised 30 päeva)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {1 aktiivne tellimus} other {# aktiivset tellimust}}",
+      "annualCost": "Aastane kulu",
+      "monthlyCost": "Igakuine kulu",
+      "next30Days": "Järgmised 30 päeva",
+      "projectedYearly": "Prognoositud aastane kulu",
+      "upcomingCharges": "{count, plural, =1 {1 eelseisev makse} other {# eelseisvat makset}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Potentsiaalselt tühistatud tellimused",
+      "inactiveDescription": "{count, plural, =1 {1 tellimus ei ole} other {# tellimust ei ole}} hiljuti tasunud. Kontrollige, kas need on tõesti tühistatud.",
+      "trialsTitle": "Prooviversioonid lõpevad peagi",
+      "trialsDescription": "{count, plural, =1 {1 prooviversioon} other {# prooviversiooni}} lõpeb järgmise 7 päeva jooksul. Tühistage, kui te neid ei kasuta.",
+      "highCostTitle": "Kõrge hinnaga tellimused",
+      "highCostDescription": "Need tellimused moodustavad suure osa teie kulutustest. Kaaluge, kas saate täielikku väärtust."
     }
   },
   "subscriptionModal": {
     "addSubscription": "Add Subscription",
     "addTitle": "Add Subscription",
-    "adding": "Adding...",
-    "advancedOptions": "Advanced Options",
+    "adding": "Lisamine...",
+    "advancedOptions": "Täpsemad valikud",
     "amountLabel": "Amount *",
     "autoRenewDescription": "Will this subscription renew automatically?",
     "autoRenewLabel": "Auto-renew",
     "beforeBilling": "before billing",
     "billingCycleLabel": "Billing Cycle *",
-    "cancel": "Cancel",
-    "categoryLabel": "Category",
-    "categoryNone": "None",
-    "categoryPlaceholder": "Select category...",
+    "cancel": "Tühista",
+    "categoryLabel": "Kategooria",
+    "categoryNone": "Puudub",
+    "categoryPlaceholder": "Vali kategooria...",
     "currencyCAD": "CAD - Canadian Dollar",
     "currencyEUR": "EUR - Euro",
     "currencyGBP": "GBP - British Pound",
@@ -4608,16 +4608,16 @@
     "currencyUSD": "USD - US Dollar",
     "cycleAnnual": "Annual (12 months)",
     "cycleBiWeekly": "Bi-weekly (every 2 weeks)",
-    "cycleMonthly": "Monthly",
+    "cycleMonthly": "Igakuine",
     "cycleQuarterly": "Quarterly (3 months)",
-    "cycleWeekly": "Weekly",
-    "descriptionLabel": "Description",
+    "cycleWeekly": "Iganädalane",
+    "descriptionLabel": "Kirjeldus",
     "descriptionPlaceholder": "e.g., Family plan, Pro tier",
     "editTitle": "Edit Subscription",
     "nameLabel": "Subscription Name *",
     "namePlaceholder": "e.g., Netflix, Spotify, Adobe CC",
     "nextBillingDateLabel": "Next Billing Date *",
-    "notesLabel": "Notes",
+    "notesLabel": "Märkmed",
     "notesPlaceholder": "Any additional notes...",
     "paymentMethodLabel": "Payment Method",
     "paymentMethodPlaceholder": "e.g., Visa ending 1234",
@@ -4627,18 +4627,18 @@
     "reminder2Weeks": "2 weeks",
     "reminder3Days": "3 days",
     "reminder5Days": "5 days",
-    "remindersLabel": "Reminders",
+    "remindersLabel": "Meeldetuletused",
     "saveChanges": "Save Changes",
-    "saving": "Saving...",
+    "saving": "Salvestamine...",
     "startDateLabel": "Start Date *",
     "statusActive": "Active",
-    "statusCancelled": "Cancelled",
+    "statusCancelled": "Tühistatud",
     "statusLabel": "Status",
-    "statusPaused": "Paused",
-    "statusTrial": "Trial",
+    "statusPaused": "Peatatud",
+    "statusTrial": "Prooviversioon",
     "trialEndDateHint": "Set when your free trial ends to track it",
     "trialEndDateLabel": "Trial End Date",
-    "validationInvalidAmount": "Please enter a valid amount",
+    "validationInvalidAmount": "Palun sisestage kehtiv summa",
     "validationNameRequired": "Please enter a subscription name",
     "validationNextBillingRequired": "Please enter the next billing date",
     "websiteUrlLabel": "Website / Login URL"
@@ -4646,9 +4646,9 @@
   "subscriptions": {
     "addSubscription": "Add Subscription",
     "allCategories": "All Categories",
-    "clearFilters": "Clear filters",
+    "clearFilters": "Tühjenda filtrid",
     "deleteConfirmDescription": "Are you sure you want to delete this subscription? This action cannot be undone.",
-    "deleteConfirmLabel": "Delete",
+    "deleteConfirmLabel": "Kustuta",
     "deleteConfirmTitle": "Delete Subscription",
     "deleteError": "Failed to delete subscription",
     "dismissError": "Failed to dismiss subscription",
@@ -4668,7 +4668,7 @@
     "saveError": "Failed to save subscription",
     "searchPlaceholder": "Search subscriptions...",
     "sort": {
-      "amount": "Amount",
+      "amount": "Summa",
       "ascending": "Sort ascending",
       "dateAdded": "Date Added",
       "descending": "Sort descending",
@@ -4677,22 +4677,22 @@
     },
     "stats": {
       "active": "Active",
-      "annual": "Annual",
+      "annual": "Aastane",
       "estimatedCost": "Estimated cost",
       "inactive": "{count} inactive",
-      "monthly": "Monthly",
+      "monthly": "Igakuine",
       "next7Days": "Next 7 Days",
       "projectedSpend": "Projected spend",
       "upcomingCharges": "Upcoming charges"
     },
     "subtitle": "Manage your recurring payments and subscriptions",
-    "title": "Subscriptions",
+    "title": "Tellimused",
     "viewMode": {
       "active": "Active",
-      "all": "All",
+      "all": "Kõik",
       "analysis": "Analysis",
       "detected": "Detected",
-      "manual": "Manual"
+      "manual": "Käsitsi"
     }
   },
   "syncStatus": {
@@ -4700,15 +4700,15 @@
     "devices": "{connected}/{total} devices",
     "devicesConnected": "{connected}/{total} devices connected",
     "hoursAgo": "{hours}h ago",
-    "justNow": "Just now",
-    "lastSync": "Last sync: {time}",
+    "justNow": "Just praegu",
+    "lastSync": "Viimane sünkroonimine: {time}",
     "minutesAgo": "{minutes}m ago",
-    "never": "Never",
-    "offline": "Offline",
+    "never": "Kunagi",
+    "offline": "Võrguühenduseta",
     "partialSync": "Partial Sync",
     "syncError": "Sync Error",
     "synced": "Synced",
-    "syncing": "Syncing..."
+    "syncing": "Sünkroonimine..."
   },
   "tooltip": {
     "ariaLabel": "Rohkem teavet",
@@ -4718,7 +4718,7 @@
     "confidence": "Confidence",
     "failedToLoadModel": "Failed to load model: {error}",
     "finalLoss": "Final Loss",
-    "howItWorks": "How it works",
+    "howItWorks": "Kuidas see töötab",
     "howStep1": "Generates ~350 training examples from 35 categorization rules",
     "howStep2": "Trains a neural network (64→32 neurons) using TensorFlow.js",
     "howStep3": "Achieves 90%+ accuracy on test set",
@@ -4740,7 +4740,7 @@
     "trainingFailed": "Training Failed",
     "trainingInProgress": "Training in progress... This may take 30-60 seconds.",
     "trainingModel": "Training Model...",
-    "unknownError": "Unknown error",
+    "unknownError": "Tundmatu viga",
     "useStep1": "<strong>1. Train Model:</strong> Click \"Train Model\" to generate training data and train the neural network (30-60s)",
     "useStep2": "<strong>2. Automatic Integration:</strong> The model is automatically used as a fallback when rule-based categorization fails",
     "useStep3": "<strong>3. Hybrid System:</strong> Rules are tried first (fast), ML is used for unknown patterns",
@@ -4749,83 +4749,83 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "Konto"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} saadaval",
+      "label": "Täpsemad valikud"
     },
     "amount": {
-      "label": "Amount",
-      "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "label": "Summa",
+      "placeholder": "0,00",
+      "validationError": "Palun sisestage kehtiv summa"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "Lisa tehing",
+      "adding": "Lisamine...",
+      "cancel": "Tühista",
+      "update": "Uuenda tehingut",
+      "updating": "Uuendamine..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "Tehisintellekt kategoriseerib...",
+      "create": "Loo",
+      "createNew": "+ Loo uus kategooria",
+      "label": "Kategooria",
+      "lastUsed": "Kasutades viimast: {category}",
+      "namePlaceholder": "Kategooria nimi...",
+      "selectPlaceholder": "Vali kategooria...",
+      "subcategoriesPlaceholder": "Alamkategooriad (valikuline, komadega eraldatud)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Sule modaal",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "Kategooria \"{name}\" loodud!",
+      "failed": "Kategooria loomine ebaõnnestus",
+      "nameRequired": "Kategooria nimi on nõutav"
     },
     "date": {
-      "label": "Date"
+      "label": "Kuupäev"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "Kirjeldus",
+      "placeholder": "nt Toidupood Prismas"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "Pärast 3 sarnast parandust kategoriseeritakse tulevased tehingud sellelt kaupmehelt automaatselt.",
+      "title": "Õpitud!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "Märkmed",
+      "placeholder": "Lisage täiendavaid märkmeid..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "Lisa uus kviitung",
+      "deleteConfirm": "Kas olete kindel, et soovite selle kviitungi kustutada?",
+      "deleteFailed": "Kviitungi kustutamine ebaõnnestus",
+      "deleteReceipt": "Kustuta kviitung",
+      "existing": "Olemasolevad kviitungid ({count})",
+      "label": "Kviitungi manused",
+      "newFile": "Uus: {filename}",
+      "remove": "Eemalda",
+      "viewFull": "Vaata täielikku kviitungit"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "Alamkategooria",
+      "none": "Puudub",
+      "selectPlaceholder": "Vali alamkategooria..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "Sildid (komadega eraldatud)",
+      "placeholder": "nt toidukaubad, iganädalane, hädavajalik"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "Lisa tehing",
+      "edit": "Muuda tehingut"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "Kulu",
+      "income": "Tulu",
+      "label": "Tüüp"
     }
   },
   "transactionSearch": {
@@ -4835,12 +4835,12 @@
     "noResults": "No transactions found",
     "noResultsDescription": "Try a different search or adjust your filters",
     "noTransactionsYet": "No transactions yet",
-    "placeholder": "Search transactions...",
+    "placeholder": "Otsi tehinguid...",
     "placeholderExtended": "Try 'coffee last week' or 'amount:>50'",
     "recentSearchLabel": "Recent search",
     "recentSearches": "Recent Searches",
     "resultCount": "{count} {count, plural, =1 {result} other {results}}",
-    "save": "Save",
+    "save": "Salvesta",
     "saveFilter": "Save Filter",
     "savedFilters": "Saved Filters",
     "searchFilterLabel": "Search filter",
@@ -4851,7 +4851,7 @@
     "searchingFor": "Searching for: {query}",
     "suggestions": {
       "amounts": "Amount Ranges",
-      "categories": "Categories",
+      "categories": "Kategooriad",
       "merchants": "Merchants",
       "recent": "Recent"
     },
@@ -4872,30 +4872,30 @@
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "Lisa kviitung",
+      "delete": "Kustuta",
+      "edit": "Muuda",
+      "split": "Jaga"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "Tehinguid pole kuvamiseks",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "Konto",
+      "actions": "Toimingud",
+      "amount": "Summa",
+      "category": "Kategooria",
+      "date": "Kuupäev",
+      "description": "Kirjeldus"
     }
   },
   "transactions": {
-    "actions": "Actions",
-    "addTransaction": "Add Transaction",
+    "actions": "Toimingud",
+    "addTransaction": "Lisa tehing",
     "allAccounts": "All Accounts",
     "allCategories": "All Categories",
     "allSplitItemsRemoved": "All split items will be removed",
-    "amount": "Amount",
+    "amount": "Summa",
     "applyToSelected": "Apply to Selected",
-    "balance": "Balance",
+    "balance": "Saldo",
     "balanceTooltip": "Starting balance: {startingBalance} + Net change: {netChange}",
     "bulkCategorizeDescription": "Apply \"{category}{subcategory, select, other { - {subcategory}}}\" to {count} transaction(s)?",
     "bulkCategorizeSuccess": "Successfully categorized {count} transaction(s)",
@@ -4903,14 +4903,14 @@
     "bulkCategorized": "Categorized {count} transactions as {category}{subcategory, select, other { - {subcategory}}}",
     "bulkCategoryLabel": "Category: {category}{subcategory, select, other { - {subcategory}}}",
     "categoriesAndNotesLost": "Categories and notes from splits will be lost",
-    "categorize": "Categorize",
+    "categorize": "Kategoriseeri",
     "categorizedAs": "Categorized as {category}{subcategory, select, other { - {subcategory}}}",
-    "category": "Category",
-    "clearFilters": "Clear Filters",
+    "category": "Kategooria",
+    "clearFilters": "Tühjenda filtrid",
     "currentBalance": "Current Balance",
-    "date": "Date",
-    "delete": "Delete",
-    "deleteCannotBeUndone": "This action cannot be undone.",
+    "date": "Kuupäev",
+    "delete": "Kustuta",
+    "deleteCannotBeUndone": "Seda toimingut ei saa tagasi võtta.",
     "deleteImpactAmount": "{amount} {type} from {date}",
     "deleteImpactCategory": "Category: {category}{subcategory, select, other { - {subcategory}}}",
     "deleteImpactDescription": "Description: \"{description}\"",
@@ -4918,11 +4918,11 @@
     "deleteImpactSplit": "(This is a split transaction)",
     "deleteTransaction": "Delete transaction",
     "deleteTransactionTitle": "Delete Transaction",
-    "description": "Description",
-    "edit": "Edit",
+    "description": "Kirjeldus",
+    "edit": "Muuda",
     "editTransaction": "Edit transaction",
     "existingCategoriesReplaced": "Any existing categories will be replaced",
-    "expenseLabel": "Expense",
+    "expenseLabel": "Kulu",
     "failedToBulkCategorize": "Failed to bulk categorize transactions",
     "failedToCategorize": "Failed to categorize transactions",
     "failedToCategorizeSingle": "Failed to categorize transaction",
@@ -4935,20 +4935,20 @@
     "filterByCategoryInfo": "More information about filtering by category",
     "foundMatchingTransactions": "✓ Found {count} matching \"{vendor}\" transactions ({time}s)",
     "fromDate": "From Date",
-    "importCSV": "Import CSV",
-    "incomeLabel": "Income",
+    "importCSV": "Impordi CSV",
+    "incomeLabel": "Tulu",
     "lastSplitItemRestore": "This is the last split item. Restore the original transaction?",
     "negative": "Negative",
     "newestFirst": "Newest First",
     "noMatchingTransactions": "No other \"{vendor}\" transactions found ({time}s)",
-    "noTransactionsDescription": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-    "noTransactionsYet": "No Transactions Yet",
+    "noTransactionsDescription": "Alustage oma kulutuste jälgimist, lisades oma esimese tehingu. Saate lisada käsitsi või importida CSV-failist.",
+    "noTransactionsYet": "Tehinguid veel pole",
     "oldestFirst": "Oldest First",
     "originalTransactionRestored": "The original transaction will be restored",
     "pleaseSelectCategory": "Please select a category",
     "pleaseSelectTransactions": "Please select transactions to categorize",
     "positive": "Positive",
-    "quickCategorize": "Quick Categorize",
+    "quickCategorize": "Kiire kategoriseerimine",
     "receipt": "Receipt",
     "restoreOriginal": "Restore Original",
     "restoreOriginalDescription": "This will restore the original unsplit transaction and remove all split items.",
@@ -4964,12 +4964,12 @@
     "showingTransactionsFor": "Showing transactions for",
     "sortByAmount": "Sort by Amount",
     "sortByDate": "Sort by Date",
-    "split": "Split",
+    "split": "Jaga",
     "splitTransaction": "Split transaction",
     "splitTransactionsHelp": "Divide a single purchase across multiple categories. Example: Grocery store visit ($100) → Groceries ($80) + Household ($20). Click the Split button on any transaction to divide it.",
     "splitTransactionsLabel": "Split Transactions",
     "thisWillUpdate": "This will update:",
-    "title": "Transactions",
+    "title": "Tehingud",
     "toDate": "To Date",
     "totalExpenses": "Total Expenses",
     "totalIncome": "Total Income",
@@ -4995,17 +4995,17 @@
     "upgrade": "Upgrade - {price}",
     "upgradeNow": "Upgrade Now - {price}",
     "upgradePrompt": "Upgrade now to keep full access to your budget data.",
-    "viewPricing": "View pricing"
+    "viewPricing": "Vaata hinnastamist"
   },
   "validationWarnings": {
-    "aiAnalysis": "AI Analysis:",
-    "amount": "Amount:",
+    "aiAnalysis": "Tehisintellekti analüüs:",
+    "amount": "Summa:",
     "cancelImport": "Cancel Import",
-    "closeModal": "Close modal",
-    "confidence": "{percent}% confidence",
+    "closeModal": "Sule modaal",
+    "confidence": "{percent}% usaldusväärsus",
     "continueWithAll": "Continue with All",
     "criticalIssues": "Critical Issues",
-    "date": "Date:",
+    "date": "Kuupäev:",
     "description": "Description:",
     "hideDetails": "Hide Transaction Details",
     "ignoreAllContinue": "Ignore All & Continue",
@@ -5014,13 +5014,13 @@
     "issuesFound": "We found {count, plural, =1 {1 issue} other {# issues}} that need your attention",
     "marked": "Marked",
     "removalNote": "{count, plural, =1 {1 transaction} other {# transactions}} will be removed from the import if you proceed.",
-    "remove": "Remove",
+    "remove": "Eemalda",
     "removeAndContinue": "Remove {count} & Continue",
     "suggestion": "Suggestion:",
     "title": "Transaction Validation Results",
     "transactionNumber": "Transaction #{number}",
     "viewDetails": "View Transaction Details",
-    "warnings": "Warnings"
+    "warnings": "Hoiatused"
   },
   "vaultSetup": {
     "aes256Description": "Your data is encrypted with AES-256 encryption",
@@ -5029,7 +5029,7 @@
     "automaticProtection": "Automatic Protection",
     "bankGradeSecurity": "Bank-Grade Security",
     "chooseProtection": "Choose how you want to protect your data:",
-    "confirmPassword": "Confirm Password",
+    "confirmPassword": "Kinnita parool",
     "confirmYourPassword": "Confirm your password",
     "enableEncryption": "Enable Encryption",
     "enterStrongPassword": "Enter a strong password",
@@ -5038,8 +5038,8 @@
     "passwordDescription": "Create a master password to encrypt your vault. More secure if you share this device with others.",
     "passwordProtection": "Password Protection",
     "passwordWarning": "If you forget this password, your data cannot be recovered. We cannot reset it for you.",
-    "passwordsDoNotMatch": "Passwords do not match",
-    "recommended": "Recommended",
+    "passwordsDoNotMatch": "Paroolid ei kattu",
+    "recommended": "Soovitatav",
     "settingUp": "Setting Up...",
     "setupError": "Failed to set up vault. Please try again.",
     "strengthFair": "Fair",
@@ -5105,133 +5105,133 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
-      "createNew": "Create New",
-      "description": "Map YNAB categories to your existing categories or create new ones.",
-      "mapToExisting": "Map to Existing",
-      "selectCategory": "Select category...",
-      "skip": "Skip",
-      "title": "Category Mapping",
-      "willCreate": "Will create:"
+      "category": "{count, plural, =1 {1 kategooria} other {# kategooriat}}",
+      "createNew": "Loo uus",
+      "description": "Kaardistage YNAB kategooriaid oma olemasolevatele kategooriatele või looge uued.",
+      "mapToExisting": "Kaardista olemasolevale",
+      "selectCategory": "Vali kategooria...",
+      "skip": "Jäta vahele",
+      "title": "Kategooria kaardistamine",
+      "willCreate": "Loob:"
     },
     "completeStep": {
-      "errors": "Errors",
-      "importAnother": "Import Another",
-      "success": "Import Complete!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
-      "viewTransactions": "View Transactions",
-      "whatNext": "What would you like to do next?",
-      "withIssues": "Import Completed with Issues"
+      "errors": "Vead",
+      "importAnother": "Impordi veel",
+      "success": "Import lõpetatud!",
+      "successMessage": "{count, plural, =1 {1 kirje imporditud} other {# kirjet imporditud}} edukalt YNAB-ist.",
+      "viewTransactions": "Vaata tehinguid",
+      "whatNext": "Mida soovite järgmisena teha?",
+      "withIssues": "Import lõpetatud probleemidega"
     },
     "footer": {
-      "back": "Back",
-      "done": "Done",
-      "next": "Next",
-      "startImport": "Start Import"
+      "back": "Tagasi",
+      "done": "Valmis",
+      "next": "Järgmine",
+      "startImport": "Alusta importimist"
     },
     "header": {
-      "closeLabel": "Close wizard",
-      "subtitle": "Migrate your budget data seamlessly",
-      "title": "Import from YNAB"
+      "closeLabel": "Sule viisard",
+      "subtitle": "Migreerige oma eelarve andmed sujuvalt",
+      "title": "Impordi YNAB-ist"
     },
     "importingStep": {
-      "finishing": "Finishing up...",
-      "importingAccounts": "Importing accounts...",
-      "importingBudgets": "Importing budgets...",
-      "importingCategories": "Importing categories...",
-      "importingTransactions": "Importing transactions...",
-      "title": "Importing your YNAB data..."
+      "finishing": "Lõpetamine...",
+      "importingAccounts": "Kontode importimine...",
+      "importingBudgets": "Eelarvete importimine...",
+      "importingCategories": "Kategooriate importimine...",
+      "importingTransactions": "Tehingute importimine...",
+      "title": "Teie YNAB andmete importimine..."
     },
     "optionsStep": {
       "accountOptions": {
-        "includeClosedAccounts": "Include closed accounts",
-        "includeOffBudgetAccounts": "Include off-budget accounts",
-        "title": "Account Options"
+        "includeClosedAccounts": "Kaasa suletud kontod",
+        "includeOffBudgetAccounts": "Kaasa eelarvevälised kontod",
+        "title": "Konto valikud"
       },
       "budgetOptions": {
-        "importGoals": "Import savings goals as future purchases",
-        "title": "Budget Options"
+        "importGoals": "Impordi säästmise eesmärgid tulevaste ostudena",
+        "title": "Eelarve valikud"
       },
       "hiddenCategories": {
-        "archive": "Archive",
-        "archiveDesc": "Import as archived (recommended)",
-        "description": "How to handle YNAB categories marked as hidden?",
-        "import": "Import",
-        "importDesc": "Import as active categories",
-        "skip": "Skip",
-        "skipDesc": "Don't import hidden categories",
-        "title": "Hidden Categories"
+        "archive": "Arhiveeri",
+        "archiveDesc": "Impordi arhiveerituna (soovitatav)",
+        "description": "Kuidas käsitleda YNAB-is peidetuna märgitud kategooriaid?",
+        "import": "Impordi",
+        "importDesc": "Impordi aktiivsete kategooriatena",
+        "skip": "Jäta vahele",
+        "skipDesc": "Ära impordi peidetud kategooriaid",
+        "title": "Peidetud kategooriad"
       }
     },
     "previewStep": {
-      "accounts": "Accounts",
-      "allocations": "{count} allocations",
-      "budgetMonths": "Budget Months",
-      "categories": "Categories",
-      "dateRange": "Transaction Date Range",
-      "description": "Review the data that will be imported.",
-      "duplicates": "{count} duplicates",
-      "new": "{count} new",
-      "newMapped": "{created} new, {mapped} mapped",
-      "preparingPreview": "Preparing preview...",
-      "title": "Import Preview",
-      "transactions": "Transactions",
-      "warnings": "Warnings"
+      "accounts": "Kontod",
+      "allocations": "{count} eraldust",
+      "budgetMonths": "Eelarve kuud",
+      "categories": "Kategooriad",
+      "dateRange": "Tehingute kuupäevavahemik",
+      "description": "Vaadake üle andmed, mis imporditakse.",
+      "duplicates": "{count} duplikaati",
+      "new": "{count} uut",
+      "newMapped": "{created} uut, {mapped} kaardistatud",
+      "preparingPreview": "Eelvaate ettevalmistamine...",
+      "title": "Importimise eelvaade",
+      "transactions": "Tehingud",
+      "warnings": "Hoiatused"
     },
     "steps": {
       "categories": {
-        "description": "Map to existing categories",
-        "title": "Categories"
+        "description": "Kaardista olemasolevatele kategooriatele",
+        "title": "Kategooriad"
       },
       "complete": {
-        "description": "Migration finished",
-        "title": "Complete"
+        "description": "Migratsioon lõpetatud",
+        "title": "Lõpetatud"
       },
       "importing": {
-        "description": "Processing your data",
-        "title": "Importing"
+        "description": "Teie andmete töötlemine",
+        "title": "Importimine"
       },
       "options": {
-        "description": "Configure import settings",
-        "title": "Options"
+        "description": "Seadista importimise seaded",
+        "title": "Valikud"
       },
       "preview": {
-        "description": "Review before import",
-        "title": "Preview"
+        "description": "Vaadake üle enne importimist",
+        "title": "Eelvaade"
       },
       "upload": {
-        "description": "Select YNAB export file",
-        "title": "Upload"
+        "description": "Valige YNAB eksportfail",
+        "title": "Üleslaadimine"
       }
     },
     "uploadStep": {
-      "accounts": "Accounts",
-      "categories": "Categories",
-      "clickToSelect": "Click to select a file",
-      "dragAndDrop": "or drag and drop here",
-      "fileSummary": "File Summary",
-      "format": "Format",
-      "formatApiExport": "YNAB API Export",
-      "formatApiExportDesc": "JSON from nYNAB",
-      "formatCsv": "CSV Export",
-      "formatCsvDesc": "From YNAB web app",
+      "accounts": "Kontod",
+      "categories": "Kategooriad",
+      "clickToSelect": "Klõpsake faili valimiseks",
+      "dragAndDrop": "või lohistage siia",
+      "fileSummary": "Faili kokkuvõte",
+      "format": "Vorming",
+      "formatApiExport": "YNAB API eksport",
+      "formatApiExportDesc": "JSON nYNAB-ist",
+      "formatCsv": "CSV eksport",
+      "formatCsvDesc": "YNAB veebirakendusest",
       "formatYfull": "Budget.yfull / Budget.ynab4",
-      "formatYfullDesc": "YNAB4 desktop export",
-      "parsing": "Parsing file...",
-      "supportedFormats": "Supported Formats",
-      "transactions": "Transactions"
+      "formatYfullDesc": "YNAB4 töölaua eksport",
+      "parsing": "Faili parsimine...",
+      "supportedFormats": "Toetatud vormingud",
+      "transactions": "Tehingud"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "YNAB faili parsimine ebaõnnestus",
+      "previewFailed": "Eelvaate loomine ebaõnnestus",
+      "accountImportFailed": "Konto importimine ebaõnnestus: {details}",
+      "categoryImportFailed": "Kategooria importimine ebaõnnestus: {details}",
+      "transactionImportFailed": "Tehingu importimine ebaõnnestus: {details}",
+      "unknownError": "Tundmatu viga",
+      "budgetImportFailed": "Eelarve importimine ebaõnnestus: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "YNAB andmed edukalt imporditud!",
+    "importWithErrors": "Import lõpetatud {count, plural, =1 {1 veaga} other {# veaga}}"
   },
   "balanceReconciliation": {
     "title": "Import lõpetatud!",
@@ -5335,7 +5335,7 @@
     "landing": "BudgetPro - Valitsege oma rahaasju",
     "dashboard": "Töölaud",
     "transactions": "Tehingud",
-    "import": "Import",
+    "import": "Impordi",
     "accounts": "Kontod",
     "budgets": "Eelarved",
     "categories": "Kategooriad",
