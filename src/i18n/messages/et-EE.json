@@ -1450,7 +1450,7 @@
     "edit": "Muuda",
     "loading": "Laadimine...",
     "save": "Salvesta",
-    "success": "Edu!"
+    "success": "Õnnestus!"
   },
   "confidenceMeter": {
     "autoCategorized": "Auto-categorized:",
@@ -1465,117 +1465,117 @@
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "Lisa konto",
+        "allTransactions": "Kõik tehingud",
+        "imported": "Imporditud",
+        "netWorth": "Netoväärtus",
+        "noAccounts": "Kontosid pole veel lisatud",
+        "title": "Kontosaldod",
+        "viewAll": "Vaata kõiki"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "createBudget": "Loo eelarve",
+        "noBudgets": "Eelarveid pole seatud",
+        "overBudget": "Eelarvest üle {amount} võrra",
+        "remaining": "Järelejäänud",
+        "spent": "Kulutatud",
+        "title": "Eelarve edenemine",
+        "viewAll": "Vaata kõiki eelarveid"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "Aktiivseid sündmusi pole",
+        "title": "Sündmuste eelarved",
+        "viewAll": "Vaata kõiki"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "addTransactions": "Lisa tehinguid",
+        "expenses": "Kulud",
+        "income": "Tulud",
+        "net": "Neto",
+        "noData": "Tehinguid pole veel",
+        "thisMonth": "See kuu",
+        "title": "Tulud vs kulud"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "Kulud",
+        "income": "Tulud",
+        "lastSixMonths": "Viimased 6 kuud",
+        "needMoreData": "Lisage tehinguid 2+ kuu kohta, et näha trende",
+        "notEnoughData": "Pole piisavalt ajalugu",
+        "title": "Igakuised trendid"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "assets": "Varad",
+        "liabilities": "Kohustused",
+        "title": "Netoväärtus",
+        "viewDetails": "Vaata üksikasju"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "Lisa tehing",
+        "noTransactions": "Tehinguid pole veel",
+        "title": "Hiljutised tehingud",
+        "uncategorized": "Kategoriseerimata",
+        "viewAll": "Vaata kõiki"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
-        "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
-        "overBudget": "{amount} over budget",
-        "perCategory": "Per category",
-        "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "caution": "Jälgi kulutusi",
+        "createBudget": "Loo eelarve",
+        "dailyBudget": "Päevaeelarve",
+        "danger": "Eelarvest üle",
+        "daysRemaining": "{days} päeva jäänud",
+        "noBudgets": "Eelarveid pole veel seadistatud",
+        "noData": "Eelarveid pole veel seadistatud",
+        "overBudget": "{amount} eelarvest üle",
+        "perCategory": "Kategooria kaupa",
+        "remaining": "{amount} järelejäänud",
+        "safe": "Graafikus",
+        "title": "Ohutu kulutada",
+        "totalSafe": "Ohutult kulutatav kokku",
+        "viewAll": "Vaata kõiki"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "total": "Total",
-        "uncategorized": "Uncategorized"
+        "addTransactions": "Lisa tehinguid",
+        "moreCategories": "+{count} kategooriat veel",
+        "noData": "Kulutusi pole veel jälgitud",
+        "thisMonth": "See kuu",
+        "title": "Kulutused kategooriate kaupa",
+        "total": "Kokku",
+        "uncategorized": "Kategoriseerimata"
       },
       "streaks": {
-        "badges": "badges",
-        "dayStreak": "day streak",
-        "points": "points",
-        "title": "Streaks & Badges"
+        "badges": "märki",
+        "dayStreak": "päeva seeriat",
+        "points": "punkti",
+        "title": "Seeria ja märgid"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "addSubscription": "Lisa tellimus",
+        "dueIn": "Tähtaeg {days} päeva pärast",
+        "dueToday": "Tähtaeg täna",
+        "dueTomorrow": "Tähtaeg homme",
+        "noBills": "Tulevasi arveid pole",
+        "title": "Tulevased arved",
+        "viewAll": "Vaata kõiki"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
-        "vsLastWeek": "vs last week"
+        "title": "Nädala kokkuvõte",
+        "viewFull": "Täielik ülevaade",
+        "vsLastWeek": "võrreldes eelmise nädalaga"
       }
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "Alati nähtav",
+    "ariaLabel": "Kohanda töölaua paigutust",
+    "button": "Kohanda",
+    "description": "Näidake või peitke töölaua vidinaid. Lohistage vidinaid töölual nende ümberjärjestamiseks.",
+    "reorderDescription": "Vidinate järjekorra muutmiseks lohistage vidinaid otse oma töölual.",
+    "reorderTitle": "Järjesta vidinad ümber",
+    "resetButton": "Lähtesta vaikeväärtustele",
+    "title": "Kohanda töölaud",
+    "toggleVisibility": "Lülita {name} nähtavus",
+    "widgetVisibility": "Vidina nähtavus",
+    "widgetsVisible": "{visible}/{total} vidinat nähtaval"
   },
   "debtAnalysis": {
     "cards": {
@@ -1795,7 +1795,7 @@
     "confirmAction": "Kinnita toiming"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "Lohistage vidina ümberjärjestamiseks"
   },
   "duration": {
     "months": "{count, plural, =1 {1 month} other {# months}}",
@@ -2098,19 +2098,19 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "Finantsseisundi skoor: {score} 100-st. {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "Lisage tehinguid, et näha oma",
+      "line2": "finantsseisundi skoori"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "Hinne: {grade}",
+    "missingFactors": "{count, plural, =1 {1 tegur puudub} other {# tegurit puudub}}",
+    "title": "Finantsseisund",
     "history": {
       "title": "Skoori ajalugu",
       "monthsOfData": "{count} {count, plural, =1 {kuu} other {kuud}} andmeid",
-      "emptyTitle": "Teie skoori ajalugu ilmub siia, kui andmed kogunevad",
-      "emptySubtitle": "Kontrollige järgmisel kuul uuesti!",
+      "emptyTitle": "Teie skoori ajalugu ilmub siia andmete kogunemisel",
+      "emptySubtitle": "Vaadake järgmisel kuul uuesti!",
       "legendScore": "Skoor",
       "legendTrend": "Trend",
       "tooltipScore": "Skoor",
@@ -3104,11 +3104,11 @@
     "accounts": "Kontod",
     "budgets": "Eelarved",
     "categories": "Kategooriad",
-    "dashboard": "Armatuurlaud",
-    "export": "Ekspordi",
+    "dashboard": "Töölaud",
+    "export": "Eksport",
     "goals": "Eesmärgid",
     "help": "Abi",
-    "import": "Impordi",
+    "import": "Import",
     "reports": "Aruanded",
     "settings": "Seaded",
     "transactions": "Tehingud"
@@ -3716,26 +3716,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "Tegelik",
+      "confidenceInterval": "Usaldusintervall",
+      "predicted": "Prognoositud"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "Prognooside jaoks pole andmeid saadaval",
+    "predictionUnavailable": "Prognoos pole saadaval",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "Keskmine usaldusväärsus",
+      "nextMonth": "Järgmine kuu",
+      "threeMonthAvg": "3 kuu keskmine"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "Usaldusväärsus",
+      "month": "Kuu",
+      "predicted": "Prognoositud",
+      "range": "Vahemik",
+      "title": "Igakuised prognoosid"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "Kulutuste prognoos: {category}",
+    "trainingModel": "Mudeli treenimine ja prognooside genereerimine..."
   },
   "privacyPanel": {
     "active": "Active",
@@ -4351,18 +4351,18 @@
     "warningsLabel": "Warnings:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "Prognoos põhineb viimase {months} kuu lineaarsel regressioonil",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "Tegelikud kulutused",
+      "projected": "Prognoositud"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "Pole piisavalt andmeid trendide genereerimiseks. Lisage vähemalt 2 kuu tehinguid.",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "Keskmine kuus",
+      "lastMonth": "Eelmine kuu",
+      "projected": "Prognoositud"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "Kulutuste trendid ja prognoos"
   },
   "splitTransaction": {
     "addSplit": "Add Split ({current}/{max})",
@@ -5050,57 +5050,57 @@
     "zeroKnowledge": "Zero Knowledge"
   },
   "welcome": {
-    "subtitle": "Alusta, lisades oma esimese tehingu või importides andmeid oma pangast",
-    "title": "Tere tulemast eelarve rakendusse"
+    "subtitle": "Alustage oma esimese tehingu lisamisest või importige andmeid oma pangast",
+    "title": "Tere tulemast eelarverakendusse"
   },
   "widget": {
     "accountBalances": {
-      "description": "Praegused jäägid kõigis sinu kontodes",
-      "title": "Kontode jäägid"
+      "description": "Praegused saldod kõigil teie kontodel",
+      "title": "Kontosaldod"
     },
     "budgetProgress": {
-      "description": "Jälgi, kuidas sul läheb sinu eelarve eesmärkide täitmisel",
+      "description": "Jälgige, kuidas teil eelarve eesmärkidega läheb",
       "title": "Eelarve edenemine"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "Jälgige sündmuste ja projektide kulutusi",
+      "title": "Sündmuste eelarved"
     },
     "incomeVsExpenses": {
-      "description": "Võrdle oma teenuseid ja kulutusi ajas",
-      "title": "Sissetulekud vs Kulud"
+      "description": "Võrrelge oma tulusid ja kulutusi ajas",
+      "title": "Tulud vs kulud"
     },
     "monthlyTrends": {
-      "description": "Visualiseeri oma finantsmustreid kuu kaupa",
-      "title": "Kuu trendid"
+      "description": "Visualiseerige oma finantsilisi mustreid kuude kaupa",
+      "title": "Igakuised trendid"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "Kiire ülevaade teie kogu netoväärtusest",
+      "title": "Netoväärtus"
     },
     "recentTransactions": {
-      "description": "Kiire ülevaade sinu viimastest finantstegevustest",
+      "description": "Kiire ülevaade teie viimastest finantstehingutest",
       "title": "Hiljutised tehingud"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "Vaadake, kui palju saate ohutult kategooria kaupa kulutada",
+      "title": "Ohutu kulutada"
     },
     "spendingByCategory": {
-      "description": "Vaata, kuhu su raha läheb visuaalsete jaotuste abil",
+      "description": "Vaadake visuaalseid jaotusi, kuhu teie raha läheb",
       "title": "Kulutused kategooriate kaupa"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "Jälgige oma aktiivsusseeriat ja saavutusi",
+      "title": "Seeria ja märgid"
     },
     "upcomingBills": {
-      "description": "Ära jäta maksetest ilma arve meeldetuletustega",
+      "description": "Ärge jätke kunagi makset vahele arve meeldetuletustega",
       "title": "Tulevased arved"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "Nädala kulutuste mustrite kokkuvõte",
+      "title": "Nädala kokkuvõte"
     }
   },
   "ynabMigrationWizard": {

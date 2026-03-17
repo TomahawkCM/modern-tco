@@ -2098,14 +2098,14 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "Alama ya Afya ya Kifedha: {score} kati ya 100. {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "Ongeza miamala kuona yako",
+      "line2": "Alama ya Afya ya Kifedha"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "Daraja: {grade}",
+    "missingFactors": "{count, plural, =1 {Sababu 1 inakosekana} other {Sababu # zinakosekana}}",
+    "title": "Afya ya Kifedha",
     "history": {
       "title": "Historia ya Alama",
       "monthsOfData": "{count, plural, =1 {mwezi} other {miezi}} {count} ya data",
@@ -2119,346 +2119,346 @@
     }
   },
   "holdingModal": {
-    "addHolding": "Add Holding",
-    "canadianStockHint": "Use .TO for Canadian stocks (e.g., TD.TO, VGRO.TO)",
-    "cancel": "Cancel",
-    "editHolding": "Edit Holding",
-    "enterSymbol": "Please enter a stock symbol",
-    "failedToSave": "Failed to save holding",
-    "notesOptional": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Part of retirement portfolio, employee stock purchase",
-    "numberOfShares": "Number of Shares",
+    "addHolding": "Ongeza Hisa",
+    "canadianStockHint": "Tumia .TO kwa hisa za Kanada (mfano, TD.TO, VGRO.TO)",
+    "cancel": "Ghairi",
+    "editHolding": "Hariri Hisa",
+    "enterSymbol": "Tafadhali weka ishara ya hisa",
+    "failedToSave": "Imeshindwa kuhifadhi hisa",
+    "notesOptional": "Maelezo (Hiari)",
+    "notesPlaceholder": "mfano, Sehemu ya kwingineko ya kustaafu, ununuzi wa hisa za mfanyakazi",
+    "numberOfShares": "Idadi ya Hisa",
     "pricePlaceholder": "50.00",
-    "purchaseDate": "Purchase Date",
-    "purchasePricePerShare": "Purchase Price per Share",
+    "purchaseDate": "Tarehe ya Ununuzi",
+    "purchasePricePerShare": "Bei ya Ununuzi kwa Hisa",
     "quantityPlaceholder": "100",
-    "saving": "Saving...",
-    "stockSymbol": "Stock Symbol",
-    "symbolPlaceholder": "e.g., AAPL, VGRO.TO, TD.TO",
-    "totalInvestment": "Total Investment",
-    "updateHolding": "Update Holding",
-    "validPurchasePrice": "Please enter a valid purchase price",
-    "validQuantity": "Please enter a valid quantity"
+    "saving": "Inahifadhi...",
+    "stockSymbol": "Ishara ya Hisa",
+    "symbolPlaceholder": "mfano, AAPL, VGRO.TO, TD.TO",
+    "totalInvestment": "Uwekezaji Jumla",
+    "updateHolding": "Sasisha Hisa",
+    "validPurchasePrice": "Tafadhali weka bei halali ya ununuzi",
+    "validQuantity": "Tafadhali weka idadi halali"
   },
   "iconPicker": {
-    "clearSearch": "Clear Search",
-    "close": "Close",
-    "currentIcon": "Current Icon",
-    "foundCount": "Found {count} icon(s)",
-    "iconsAvailable": "{count} icons available",
-    "noIconsFound": "No icons found",
-    "noIconsFoundHint": "Try a different search term or browse all icons",
-    "searchPlaceholder": "Search icons by name or category...",
-    "subtitle": "Select an icon to represent your category",
-    "title": "Choose an Icon"
+    "clearSearch": "Futa Utafutaji",
+    "close": "Funga",
+    "currentIcon": "Ikoni ya Sasa",
+    "foundCount": "Imepatikana ikoni {count}",
+    "iconsAvailable": "Ikoni {count} zinapatikana",
+    "noIconsFound": "Hakuna ikoni zilizopatikana",
+    "noIconsFoundHint": "Jaribu neno lingine la utafutaji au vinjari ikoni zote",
+    "searchPlaceholder": "Tafuta ikoni kwa jina au kategoria...",
+    "subtitle": "Chagua ikoni kuwakilisha kategoria yako",
+    "title": "Chagua Ikoni"
   },
   "import": {
-    "added": "added",
-    "allTransactionsRemoved": "All transactions were removed during validation. Please try importing a different file.",
-    "autoDetect": "Auto-detect ({locale})",
-    "couldNotParseCSV": "Could not parse CSV file. Please check the file format.",
-    "detectedFormat": "Detected Format:",
-    "dismiss": "Dismiss",
-    "duplicateSingular": "duplicate",
-    "duplicatesPlural": "duplicates",
-    "exportDebugData": "Export Debug Data",
-    "formatInfoAriaLabel": "More information about CSV and OFX file formats",
-    "importCancelledValidation": "Import cancelled due to validation issues. Please review your file and try again.",
-    "importError": "Import Error",
-    "importedOn": "Imported on",
-    "invalidBankConfig": "Invalid bank configuration. Please try selecting a different bank.",
-    "invalidOFXFile": "Invalid OFX file:\n{errors}",
-    "langArabic": "Arabic",
-    "langChineseSimplified": "Chinese (Simplified)",
-    "langChineseTraditional": "Chinese (Traditional)",
-    "langDutch": "Dutch",
-    "langEnglish": "English",
-    "langFrench": "French",
-    "langGerman": "German",
-    "langHindi": "Hindi",
-    "langItalian": "Italian",
-    "langJapanese": "Japanese",
-    "langKorean": "Korean",
-    "langPolish": "Polish",
-    "langPortuguese": "Portuguese",
-    "langRussian": "Russian",
-    "langSpanish": "Spanish",
-    "langTurkish": "Turkish",
-    "largePdfTip": "💡 For very large statements, consider requesting a CSV export from your bank for faster processing.",
-    "largePdfWarning": "⚠️ Large PDF detected ({pages} pages). Processing may take longer and use significant memory.",
-    "lowConfidenceDetection": "Low confidence format detection. {suggestions}",
-    "lowOcrConfidence": "⚠️ Low OCR confidence ({percent}%). This may be a scanned/image-based PDF.",
-    "noDataAfterMapping": "No data found in CSV file after applying custom mapping.",
-    "noDataInCSV": "No data found in CSV file. The file may be empty or incorrectly formatted.",
-    "noTransactionsParsed": "No transactions could be parsed from this file.\n\nPossible causes:\n• The file format may not be recognized\n• The date or amount columns may be empty\n• The file may contain only headers\n\nTry selecting a different bank format or contact support.",
-    "ocrLanguage": "OCR Language:",
-    "pageCount": "{count} pages",
-    "partialImport": "Partial Import",
-    "percentConfident": "{percent}% confident",
-    "recentImports": "Recent Imports",
-    "recentImportsSubtitle": "View your import history and verify successful uploads",
-    "reviewTransactionsForAccuracy": "💡 Please carefully review all transactions for accuracy.",
-    "selectAccountFirst": "Please select an account before importing transactions. Go to the Accounts page to create an account first.",
-    "skipped": "skipped",
-    "subtitle": "Upload CSV, OFX, QFX, or PDF files from BMO, Home Trust, TD, Chase, and 15+ other banks",
-    "success": "Success",
-    "tipCheckConsole": "Check browser console for detailed OCR logs",
-    "tipEnsureTextPDF": "Ensure PDF is text-based (not a scanned image)",
-    "tipExportDebug": "Export debug data (button above) for support",
-    "tipTryCSV": "Try exporting as CSV instead of PDF from your bank",
-    "title": "Import Transactions",
-    "transactionSingular": "transaction",
-    "transactionsLabel": "Transactions",
-    "transactionsPlural": "transactions",
-    "troubleshootingTips": "💡 Troubleshooting tips:",
-    "unableToDetectFormat": "Unable to detect file format. Please try a different file.",
-    "unsupportedFileFormat": "Unsupported file format: {format}. Please use CSV, OFX, QFX, QIF, MT940, CAMT.053, or PDF files.",
-    "unsupportedFormat": "Unsupported file format: {format}"
+    "added": "imeongezwa",
+    "allTransactionsRemoved": "Miamala yote imeondolewa wakati wa uthibitishaji. Tafadhali jaribu kuagiza faili nyingine.",
+    "autoDetect": "Gundua kiotomatiki ({locale})",
+    "couldNotParseCSV": "Haikuweza kuchambua faili ya CSV. Tafadhali angalia muundo wa faili.",
+    "detectedFormat": "Muundo Uliogunduliwa:",
+    "dismiss": "Ondoa",
+    "duplicateSingular": "nakala",
+    "duplicatesPlural": "nakala",
+    "exportDebugData": "Hamisha Data ya Utatuzi",
+    "formatInfoAriaLabel": "Taarifa zaidi kuhusu miundo ya faili za CSV na OFX",
+    "importCancelledValidation": "Uagizaji umeghairiwa kutokana na matatizo ya uthibitishaji. Tafadhali kagua faili yako na ujaribu tena.",
+    "importError": "Hitilafu ya Uagizaji",
+    "importedOn": "Imeagizwa tarehe",
+    "invalidBankConfig": "Usanidi wa benki si sahihi. Tafadhali jaribu kuchagua benki nyingine.",
+    "invalidOFXFile": "Faili ya OFX si sahihi:\n{errors}",
+    "langArabic": "Kiarabu",
+    "langChineseSimplified": "Kichina (Kilichorahisishwa)",
+    "langChineseTraditional": "Kichina (Cha Jadi)",
+    "langDutch": "Kiholanzi",
+    "langEnglish": "Kiingereza",
+    "langFrench": "Kifaransa",
+    "langGerman": "Kijerumani",
+    "langHindi": "Kihindi",
+    "langItalian": "Kiitaliano",
+    "langJapanese": "Kijapani",
+    "langKorean": "Kikorea",
+    "langPolish": "Kipolandi",
+    "langPortuguese": "Kireno",
+    "langRussian": "Kirusi",
+    "langSpanish": "Kihispania",
+    "langTurkish": "Kituruki",
+    "largePdfTip": "💡 Kwa taarifa kubwa sana, fikiria kuomba hamishaji ya CSV kutoka benki yako kwa uchakataji wa haraka.",
+    "largePdfWarning": "⚠️ PDF kubwa imegunduliwa (kurasa {pages}). Uchakataji unaweza kuchukua muda mrefu na kutumia kumbukumbu nyingi.",
+    "lowConfidenceDetection": "Ugunduzi wa muundo wenye uhakika mdogo. {suggestions}",
+    "lowOcrConfidence": "⚠️ Uhakika mdogo wa OCR ({percent}%). Hii inaweza kuwa PDF iliyoskaniwa/ya picha.",
+    "noDataAfterMapping": "Hakuna data iliyopatikana katika faili ya CSV baada ya kutumia ramani maalum.",
+    "noDataInCSV": "Hakuna data iliyopatikana katika faili ya CSV. Faili inaweza kuwa tupu au imeundwa vibaya.",
+    "noTransactionsParsed": "Hakuna miamala iliyoweza kuchambuliwa kutoka faili hii.\n\nSababu zinazowezekana:\n• Muundo wa faili huenda haujatambuliwa\n• Safu za tarehe au kiasi zinaweza kuwa tupu\n• Faili inaweza kuwa na vichwa pekee\n\nJaribu kuchagua muundo tofauti wa benki au wasiliana na msaada.",
+    "ocrLanguage": "Lugha ya OCR:",
+    "pageCount": "Kurasa {count}",
+    "partialImport": "Uagizaji wa Sehemu",
+    "percentConfident": "{percent}% uhakika",
+    "recentImports": "Uagizaji wa Hivi Karibuni",
+    "recentImportsSubtitle": "Tazama historia yako ya uagizaji na uthibitishe upakiaji uliofanikiwa",
+    "reviewTransactionsForAccuracy": "💡 Tafadhali kagua miamala yote kwa makini kwa usahihi.",
+    "selectAccountFirst": "Tafadhali chagua akaunti kabla ya kuagiza miamala. Nenda kwenye ukurasa wa Akaunti kuunda akaunti kwanza.",
+    "skipped": "imerukwa",
+    "subtitle": "Pakia faili za CSV, OFX, QFX, au PDF kutoka BMO, Home Trust, TD, Chase, na benki 15+ nyingine",
+    "success": "Imefanikiwa",
+    "tipCheckConsole": "Angalia konsoli ya kivinjari kwa kumbukumbu za kina za OCR",
+    "tipEnsureTextPDF": "Hakikisha PDF ni ya maandishi (si picha iliyoskaniwa)",
+    "tipExportDebug": "Hamisha data ya utatuzi (kitufe hapo juu) kwa msaada",
+    "tipTryCSV": "Jaribu kuhamisha kama CSV badala ya PDF kutoka benki yako",
+    "title": "Agiza Miamala",
+    "transactionSingular": "muamala",
+    "transactionsLabel": "Miamala",
+    "transactionsPlural": "miamala",
+    "troubleshootingTips": "💡 Vidokezo vya utatuzi:",
+    "unableToDetectFormat": "Haiwezi kugundua muundo wa faili. Tafadhali jaribu faili nyingine.",
+    "unsupportedFileFormat": "Muundo wa faili hauauniwi: {format}. Tafadhali tumia faili za CSV, OFX, QFX, QIF, MT940, CAMT.053, au PDF.",
+    "unsupportedFormat": "Muundo wa faili hauauniwi: {format}"
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "Rudi",
+      "cancel": "Ghairi",
+      "done": "Imekamilika",
+      "import": "Agiza Data"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "Vipengele {count} vimeagizwa kwa mafanikio",
+      "success": "Uagizaji Umekamilika!",
+      "withIssues": "Uagizaji Umekamilika na Matatizo"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} zilizopo",
+      "handleLabel": "Shughulikia Migongano",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "Badilisha na iliyoagizwa",
+        "label": "Andika juu"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "Agiza kama maingizo mapya",
+        "label": "Unda mpya"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "Hifadhi data ya sasa",
+        "label": "Ruka zilizopo"
       },
-      "title": "Conflicts Found"
+      "title": "Migongano Imepatikana"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "decrypt": "Fungua na Endelea",
+      "encrypted": "Faili hii imesimbwa",
+      "enterPassword": "Weka nenosiri",
+      "hint": "Kidokezo: {hint}",
+      "password": "Nenosiri"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "Tafadhali subiri, hii inaweza kuchukua muda",
+      "title": "Inaagiza data yako..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "Data ya Kuagiza",
+      "exported": "Imehamishwa",
+      "fileInfo": "Taarifa za Faili",
+      "version": "Toleo"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "au buruta na udondoshe hapa",
+      "label": "Bonyeza kuchagua faili ya .budget"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": "Rejesha kutoka faili ya .budget",
+    "title": "Agiza Data"
   },
   "investmentAccountModal": {
     "buttons": {
-      "cancel": "Cancel",
-      "create": "Create Account",
-      "saving": "Saving...",
-      "update": "Update Account"
+      "cancel": "Ghairi",
+      "create": "Unda Akaunti",
+      "saving": "Inahifadhi...",
+      "update": "Sasisha Akaunti"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Funga dirisha",
     "errors": {
-      "saveFailed": "Failed to save account"
+      "saveFailed": "Imeshindwa kuhifadhi akaunti"
     },
     "fields": {
       "accountNumber": {
-        "label": "Account Number (Optional)",
-        "placeholder": "e.g., Last 4 digits: 1234"
+        "label": "Nambari ya Akaunti (Hiari)",
+        "placeholder": "mfano, Nambari 4 za mwisho: 1234"
       },
       "institution": {
-        "label": "Financial Institution (Optional)",
-        "placeholder": "e.g., Questrade, Wealthsimple, TD Direct"
+        "label": "Taasisi ya Kifedha (Hiari)",
+        "placeholder": "mfano, Questrade, Wealthsimple, TD Direct"
       },
       "name": {
-        "label": "Account Name",
-        "placeholder": "e.g., My RRSP, TFSA Savings, Company Stock"
+        "label": "Jina la Akaunti",
+        "placeholder": "mfano, RRSP Yangu, Akiba ya TFSA, Hisa za Kampuni"
       },
       "type": {
         "descriptions": {
-          "Company shares": "Employee stock purchase or stock options",
-          "Non-registered": "Taxable investment account",
-          "RRSP": "Registered Retirement Savings Plan - Tax-deferred growth",
-          "TFSA": "Tax-Free Savings Account - Tax-free growth and withdrawals"
+          "Company shares": "Ununuzi wa hisa za mfanyakazi au chaguzi za hisa",
+          "Non-registered": "Akaunti ya uwekezaji inayotozwa kodi",
+          "RRSP": "Mpango wa Akiba ya Kustaafu Uliosajiliwa - Ukuaji unaochelesha kodi",
+          "TFSA": "Akaunti ya Akiba Isiyo na Kodi - Ukuaji na uondoaji bila kodi"
         },
-        "label": "Account Type"
+        "label": "Aina ya Akaunti"
       }
     },
     "title": {
-      "add": "Add Investment Account",
-      "edit": "Edit Investment Account"
+      "add": "Ongeza Akaunti ya Uwekezaji",
+      "edit": "Hariri Akaunti ya Uwekezaji"
     },
     "validation": {
-      "nameRequired": "Please enter an account name"
+      "nameRequired": "Tafadhali weka jina la akaunti"
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "Hakuna hisa za kuonyesha. Ongeza hisa kuona chati.",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "Faida",
+      "loss": "Hasara"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
-      "total": "Total"
+      "allocation": "Mgawanyo",
+      "costBasis": "Gharama ya Msingi",
+      "currentValue": "Thamani ya Sasa",
+      "gainLoss": "Faida/Hasara",
+      "percentReturn": "% Mapato",
+      "symbol": "Ishara",
+      "total": "Jumla"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "Mgawanyo kwa Aina ya Akaunti",
+      "gainLoss": "Faida/Hasara kwa Hisa",
+      "performanceSummary": "Muhtasari wa Utendaji",
+      "portfolioAllocation": "Mgawanyo wa Kwingineko kwa Hisa"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "Gharama ya Msingi",
+      "currentValue": "Thamani ya Sasa",
+      "percentOfPortfolio": "{percent}% ya kwingineko"
     }
   },
   "investments": {
-    "account": "Account",
-    "addAccount": "Add Account",
-    "addFirstHolding": "Add Your First Holding",
-    "addHolding": "Add Holding",
+    "account": "Akaunti",
+    "addAccount": "Ongeza Akaunti",
+    "addFirstHolding": "Ongeza Hisa Yako ya Kwanza",
+    "addHolding": "Ongeza Hisa",
     "confirmDeleteAccount": {
-      "confirmLabel": "Delete Account & Holdings",
-      "description": "This will permanently delete the account and all associated holdings.",
-      "impactAccount": "Account: {name}",
-      "impactHistory": "All transaction history",
-      "impactHoldings": "{count, plural, one {# holding} other {# holdings}}",
-      "impactTitle": "You will lose:",
-      "impactValue": "Total value: {value}",
-      "title": "Delete Investment Account"
+      "confirmLabel": "Futa Akaunti na Hisa",
+      "description": "Hii itafuta kabisa akaunti na hisa zote zinazohusiana.",
+      "impactAccount": "Akaunti: {name}",
+      "impactHistory": "Historia yote ya miamala",
+      "impactHoldings": "{count, plural, one {Hisa #} other {Hisa #}}",
+      "impactTitle": "Utapoteza:",
+      "impactValue": "Thamani jumla: {value}",
+      "title": "Futa Akaunti ya Uwekezaji"
     },
     "confirmDeleteHolding": {
-      "confirmLabel": "Delete Holding",
-      "description": "This will permanently remove this holding from your portfolio.",
-      "impactCurrentValue": "Current value: {value}",
-      "impactPurchasePrice": "Purchase price: {price}",
-      "impactShares": "{count} shares",
-      "impactSymbol": "Symbol: {symbol}",
-      "impactTitle": "You will lose:",
-      "title": "Delete Holding"
+      "confirmLabel": "Futa Hisa",
+      "description": "Hii itaondoa kabisa hisa hii kutoka kwingineko yako.",
+      "impactCurrentValue": "Thamani ya sasa: {value}",
+      "impactPurchasePrice": "Bei ya ununuzi: {price}",
+      "impactShares": "Hisa {count}",
+      "impactSymbol": "Ishara: {symbol}",
+      "impactTitle": "Utapoteza:",
+      "title": "Futa Hisa"
     },
-    "cost": "Cost",
-    "deleteAccount": "Delete account",
-    "deleteHolding": "Delete holding",
-    "editAccount": "Edit account",
-    "editHolding": "Edit holding",
+    "cost": "Gharama",
+    "deleteAccount": "Futa akaunti",
+    "deleteHolding": "Futa hisa",
+    "editAccount": "Hariri akaunti",
+    "editHolding": "Hariri hisa",
     "errors": {
-      "failedToLoadPrices": "Failed to load market prices. Using purchase prices.",
-      "partialPriceFetch": "Fetched {fetched}/{total} prices. Using purchase prices for missing data.",
-      "unableToFetchPrices": "Unable to fetch market prices. Using purchase prices."
+      "failedToLoadPrices": "Imeshindwa kupakia bei za soko. Inatumia bei za ununuzi.",
+      "partialPriceFetch": "Imepatikana bei {fetched}/{total}. Inatumia bei za ununuzi kwa data inayokosekana.",
+      "unableToFetchPrices": "Haiwezi kupata bei za soko. Inatumia bei za ununuzi."
     },
-    "gainLoss": "Gain/Loss",
-    "hideDetails": "Hide Details",
-    "holdingsCount": "{count, plural, one {# holding} other {# holdings}}",
-    "loading": "Loading investments...",
-    "marketDataNotice": "Market Data Notice",
-    "noHoldings": "No holdings in this account yet.",
-    "portfolioAnalysis": "Portfolio Analysis",
-    "portfolioAnalysisSubtitle": "Visual breakdown of your investments",
-    "pricesUpdated": "Market prices updated {time}",
-    "refresh": "Refresh",
-    "refreshPrices": "Refresh Prices",
-    "refreshPricesTitle": "Refresh market prices",
-    "return": "Return",
-    "showDetails": "Show Details",
-    "subtitle": "Track your RRSP, TFSA, and investment accounts",
+    "gainLoss": "Faida/Hasara",
+    "hideDetails": "Ficha Maelezo",
+    "holdingsCount": "{count, plural, one {Hisa #} other {Hisa #}}",
+    "loading": "Inapakia uwekezaji...",
+    "marketDataNotice": "Taarifa ya Data ya Soko",
+    "noHoldings": "Hakuna hisa katika akaunti hii bado.",
+    "portfolioAnalysis": "Uchambuzi wa Kwingineko",
+    "portfolioAnalysisSubtitle": "Mgawanyo wa kuona wa uwekezaji wako",
+    "pricesUpdated": "Bei za soko zimesasishwa {time}",
+    "refresh": "Sasisha",
+    "refreshPrices": "Sasisha Bei",
+    "refreshPricesTitle": "Sasisha bei za soko",
+    "return": "Mapato",
+    "showDetails": "Onyesha Maelezo",
+    "subtitle": "Fuatilia akaunti zako za RRSP, TFSA, na uwekezaji",
     "table": {
-      "actions": "Actions",
-      "currentPrice": "Current Price",
-      "gainLoss": "Gain/Loss",
-      "purchasePrice": "Purchase Price",
-      "shares": "Shares",
-      "symbol": "Symbol",
-      "value": "Value"
+      "actions": "Vitendo",
+      "currentPrice": "Bei ya Sasa",
+      "gainLoss": "Faida/Hasara",
+      "purchasePrice": "Bei ya Ununuzi",
+      "shares": "Hisa",
+      "symbol": "Ishara",
+      "value": "Thamani"
     },
-    "title": "Investment Portfolio",
+    "title": "Kwingineko ya Uwekezaji",
     "toasts": {
-      "accountDeleted": "Investment account deleted successfully",
-      "failedDeleteAccount": "Failed to delete account",
-      "failedDeleteHolding": "Failed to delete holding",
-      "holdingDeleted": "Holding deleted successfully"
+      "accountDeleted": "Akaunti ya uwekezaji imefutwa kwa mafanikio",
+      "failedDeleteAccount": "Imeshindwa kufuta akaunti",
+      "failedDeleteHolding": "Imeshindwa kufuta hisa",
+      "holdingDeleted": "Hisa imefutwa kwa mafanikio"
     },
-    "totalCost": "Total Cost",
-    "totalValue": "Total Value",
-    "value": "Value"
+    "totalCost": "Gharama Jumla",
+    "totalValue": "Thamani Jumla",
+    "value": "Thamani"
   },
   "lanSync": {
-    "description": "Sync your budget data across devices on your local network",
+    "description": "Sawazisha data yako ya bajeti kwenye vifaa katika mtandao wako wa ndani",
     "device": {
-      "connect": "Connect",
-      "connected": "Connected",
-      "disconnect": "Disconnect",
-      "removeDevice": "Remove Device",
-      "sync": "Sync",
-      "syncing": "Syncing..."
+      "connect": "Unganisha",
+      "connected": "Imeunganishwa",
+      "disconnect": "Tenganisha",
+      "removeDevice": "Ondoa Kifaa",
+      "sync": "Sawazisha",
+      "syncing": "Inasawazisha..."
     },
-    "disabled": "Disabled",
-    "enabled": "Enabled",
+    "disabled": "Imezimwa",
+    "enabled": "Imewashwa",
     "howItWorks": {
       "step1": {
-        "description": "Scan a QR code or enter connection details to pair devices on the same network",
-        "title": "Pair Devices"
+        "description": "Skani msimbo wa QR au weka maelezo ya muunganisho kuoanisha vifaa kwenye mtandao mmoja",
+        "title": "Oanisha Vifaa"
       },
       "step2": {
-        "description": "Data is encrypted end-to-end and syncs directly between devices - no cloud required",
-        "title": "Sync Securely"
+        "description": "Data imesimbwa mwisho-hadi-mwisho na inasawazishwa moja kwa moja kati ya vifaa - hakuna wingu linalohitajika",
+        "title": "Sawazisha kwa Usalama"
       },
       "step3": {
-        "description": "Changes sync automatically when devices are connected on the same network",
-        "title": "Automatic Updates"
+        "description": "Mabadiliko yanasawazishwa kiotomatiki vifaa vinapounganishwa kwenye mtandao mmoja",
+        "title": "Masasisho ya Kiotomatiki"
       },
-      "title": "How LAN Sync Works"
+      "title": "Jinsi Usawazishaji wa LAN Unavyofanya Kazi"
     },
     "pairedDevices": {
-      "addDevice": "Add Device",
-      "addFirstDevice": "Add Your First Device",
-      "deviceCount": "{count, plural, =1 {1 device paired} other {# devices paired}}",
-      "emptyDescription": "Pair a device to start syncing your budget data",
-      "emptyTitle": "No devices paired",
-      "noDevices": "No devices paired yet",
-      "title": "Paired Devices"
+      "addDevice": "Ongeza Kifaa",
+      "addFirstDevice": "Ongeza Kifaa Chako cha Kwanza",
+      "deviceCount": "{count, plural, =1 {Kifaa 1 kimeoanishwa} other {Vifaa # vimeoanishwa}}",
+      "emptyDescription": "Oanisha kifaa kuanza kusawazisha data yako ya bajeti",
+      "emptyTitle": "Hakuna vifaa vilivyooanishwa",
+      "noDevices": "Hakuna vifaa vilivyooanishwa bado",
+      "title": "Vifaa Vilivyooanishwa"
     },
     "removeDialog": {
-      "cancel": "Cancel",
-      "description": "Are you sure you want to remove \"{deviceName}\"? This will unpair the device and you'll need to pair again to sync data.",
-      "remove": "Remove",
-      "title": "Remove Device"
+      "cancel": "Ghairi",
+      "description": "Una uhakika unataka kuondoa \"{deviceName}\"? Hii itaondoa uoanishaji wa kifaa na utahitaji kuoanisha tena kusawazisha data.",
+      "remove": "Ondoa",
+      "title": "Ondoa Kifaa"
     },
-    "syncAll": "Sync All",
+    "syncAll": "Sawazisha Zote",
     "time": {
-      "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}",
-      "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
-      "justNow": "Just now",
-      "lastSync": "Last sync: {time}",
-      "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
-      "neverSynced": "Never synced"
+      "daysAgo": "{count, plural, =1 {siku 1 iliyopita} other {siku # zilizopita}}",
+      "hoursAgo": "{count, plural, =1 {saa 1 iliyopita} other {masaa # yaliyopita}}",
+      "justNow": "Sasa hivi",
+      "lastSync": "Usawazishaji wa mwisho: {time}",
+      "minutesAgo": "{count, plural, =1 {dakika 1 iliyopita} other {dakika # zilizopita}}",
+      "neverSynced": "Haijasawazishwa kamwe"
     },
-    "title": "LAN Sync"
+    "title": "Usawazishaji wa LAN"
   },
   "landing": {
     "accessibility": {
@@ -3115,73 +3115,73 @@
   },
   "notificationSettings": {
     "emailNotifications": {
-      "description": "Receive notifications via email",
-      "emailAddress": "Email Address",
-      "invalidEmail": "Please enter a valid email address",
-      "sendTest": "Send Test",
-      "testEmail": "Test Email",
-      "testEmailDescription": "Send a test email to verify your settings",
-      "testEmailFailed": "Failed to send",
-      "testEmailSent": "Email sent!",
-      "title": "Email Notifications",
-      "types": "Email notification types"
+      "description": "Pokea arifa kupitia barua pepe",
+      "emailAddress": "Anwani ya Barua Pepe",
+      "invalidEmail": "Tafadhali weka anwani halali ya barua pepe",
+      "sendTest": "Tuma Jaribio",
+      "testEmail": "Jaribio la Barua Pepe",
+      "testEmailDescription": "Tuma barua pepe ya jaribio kuthibitisha mipangilio yako",
+      "testEmailFailed": "Imeshindwa kutuma",
+      "testEmailSent": "Barua pepe imetumwa!",
+      "title": "Arifa za Barua Pepe",
+      "types": "Aina za arifa za barua pepe"
     },
     "infoBox": {
-      "emailExplanation": "Email notifications are sent via our secure email service and require a valid email address.",
-      "pushExplanation": "Push notifications require browser permission and work even when the app is closed.",
-      "storedLocally": "Notification settings are stored locally on your device."
+      "emailExplanation": "Arifa za barua pepe zinatumwa kupitia huduma yetu salama ya barua pepe na zinahitaji anwani halali ya barua pepe.",
+      "pushExplanation": "Arifa za kusukuma zinahitaji ruhusa ya kivinjari na zinafanya kazi hata programu imefungwa.",
+      "storedLocally": "Mipangilio ya arifa inahifadhiwa ndani ya kifaa chako."
     },
     "masterToggle": {
-      "description": "Turn all notifications on or off",
-      "title": "Enable Notifications"
+      "description": "Washa au zima arifa zote",
+      "title": "Wezesha Arifa"
     },
-    "notAvailable": "Notification settings are not available.",
+    "notAvailable": "Mipangilio ya arifa haipatikani.",
     "notificationTypes": {
       "billReminders": {
-        "description": "Get notified before subscriptions are due",
-        "title": "Bill Reminders"
+        "description": "Pokea arifa kabla ya usajili kufika muda",
+        "title": "Vikumbusho vya Bili"
       },
       "budgetAlerts": {
-        "description": "Alerts when approaching budget limits",
-        "title": "Budget Alerts"
+        "description": "Tahadhari unapokaribia mipaka ya bajeti",
+        "title": "Tahadhari za Bajeti"
       },
-      "description": "Choose which notifications you want to receive",
+      "description": "Chagua arifa unazotaka kupokea",
       "goalMilestones": {
-        "description": "Celebrate when you hit savings milestones",
-        "title": "Goal Milestones"
+        "description": "Sherehekea unapofika hatua za akiba",
+        "title": "Hatua za Malengo"
       },
-      "title": "Notification Types"
+      "title": "Aina za Arifa"
     },
     "pushPermission": {
-      "deniedHint": "Enable in browser settings",
-      "description": "Receive notifications even when the app is closed",
-      "enable": "Enable Push Notifications",
-      "notSupported": "Not supported in this browser",
+      "deniedHint": "Wezesha katika mipangilio ya kivinjari",
+      "description": "Pokea arifa hata programu imefungwa",
+      "enable": "Wezesha Arifa za Kusukuma",
+      "notSupported": "Haiauni katika kivinjari hiki",
       "states": {
-        "default": "Not set",
-        "denied": "Blocked",
-        "granted": "Enabled",
-        "unsupported": "Unsupported"
+        "default": "Haijawekwa",
+        "denied": "Imezuiwa",
+        "granted": "Imewezeshwa",
+        "unsupported": "Haiauni"
       },
-      "title": "Push Notifications"
+      "title": "Arifa za Kusukuma"
     },
     "quietHours": {
-      "description": "No notifications during this time window",
-      "end": "End time",
-      "start": "Start time",
-      "title": "Quiet Hours"
+      "description": "Hakuna arifa wakati wa dirisha hili la muda",
+      "end": "Muda wa mwisho",
+      "start": "Muda wa kuanza",
+      "title": "Masaa ya Utulivu"
     },
     "reminderDays": {
-      "daysBeforeDue": "days before due date",
-      "description": "How many days before a bill is due to remind you",
-      "title": "Default Reminder"
+      "daysBeforeDue": "siku kabla ya tarehe ya mwisho",
+      "description": "Siku ngapi kabla ya bili kufika muda kukumbushwa",
+      "title": "Kikumbusho Chaguo-msingi"
     },
     "testNotification": {
-      "button": "Send Test",
-      "description": "Send a test notification to verify your settings",
-      "title": "Test Notification"
+      "button": "Tuma Jaribio",
+      "description": "Tuma arifa ya jaribio kuthibitisha mipangilio yako",
+      "title": "Jaribio la Arifa"
     },
-    "title": "Notifications"
+    "title": "Arifa"
   },
   "notifications": {
     "clearAll": "Futa zote",
@@ -3716,136 +3716,136 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "Halisi",
+      "confidenceInterval": "Kipimo cha Uhakika",
+      "predicted": "Iliyotabiriwa"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "Hakuna data inayopatikana kwa utabiri",
+    "predictionUnavailable": "Utabiri Haupatikani",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "Wastani wa Uhakika",
+      "nextMonth": "Mwezi Ujao",
+      "threeMonthAvg": "Wastani wa Miezi 3"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "Uhakika",
+      "month": "Mwezi",
+      "predicted": "Iliyotabiriwa",
+      "range": "Masafa",
+      "title": "Utabiri wa Kila Mwezi"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "Utabiri wa Matumizi: {category}",
+    "trainingModel": "Kufundisha modeli na kutengeneza utabiri..."
   },
   "privacyPanel": {
-    "active": "Active",
-    "aiFeatures": "AI Features",
-    "aiFeaturesDescription": "Enable AI Features powered by OpenAI for advanced functionality. When disabled, all AI-dependent features are automatically disabled.",
-    "aiFeaturesTitle": "AI Features (Master Switch)",
-    "analyticsAndMonitoring": "Analytics & Monitoring",
-    "anomalyDetection": "Anomaly Detection",
-    "anomalyDetectionDescription": "Flag unusual spending patterns (e.g., 'Your Starbucks purchase of $85 is unusual')",
-    "budgetChatbot": "Budget Chatbot",
-    "cannotBeUndone": "This action cannot be undone!",
-    "chatbotDescription": "AI-powered assistant that can answer questions about your transactions, budgets, and spending patterns. Conversations are processed via OpenAI API.",
-    "chatbotPrivacyNotice": "Your financial data is sent to OpenAI to answer questions. OpenAI does not use API data to train models. You can disable anytime.",
-    "confirmDelete": "Confirm Delete",
-    "confirmDeleteWarning": "You are about to permanently delete {count, plural, one {# data type} other {# data types}}. Click \"Confirm Delete\" to proceed.",
-    "conversationHistory": "Conversation History",
-    "conversationStorageNotice": "Conversations are stored locally in your browser. You can manually delete them anytime.",
-    "dataAccessPermission": "Data Access Permission",
-    "dataAccountBalances": "account balances",
-    "dataAccounts": "accounts",
-    "dataBudgets": "budgets",
-    "dataCategories": "categories",
-    "dataManagement": "Data Management",
-    "dataPrivacySettings": "privacy settings",
-    "dataProcessing": "Data Processing",
-    "dataSecurity": "Data Security",
-    "dataTransactions": "transactions",
-    "deleteAccountsDescription": "Bank accounts and credit cards",
-    "deleteAccountsLabel": "Accounts",
-    "deleteAfter30Days": "Delete after 30 days",
-    "deleteAfter7Days": "Delete after 7 days (Recommended)",
-    "deleteBalancesDescription": "Reset all account balances to $0",
-    "deleteBalancesLabel": "Account Balances",
-    "deleteBudgetsDescription": "Monthly budget allocations",
-    "deleteBudgetsLabel": "Budgets",
-    "deleteCategoriesDescription": "Custom spending categories",
-    "deleteCategoriesLabel": "Categories",
-    "deleteData": "Delete Data",
-    "deleteFailed": "Failed to delete data. Please try again.",
-    "deletePrivacySettingsDescription": "Reset all settings to defaults",
-    "deletePrivacySettingsLabel": "Privacy Settings",
-    "deleteSelected": "Delete Selected",
-    "deleteTransactionsDescription": "All imported and manual transactions",
-    "deleteTransactionsLabel": "Transactions",
-    "deleting": "Deleting...",
-    "deselectAll": "Deselect All",
-    "enableAnalytics": "Enable Analytics",
-    "enableAnalyticsDescription": "Track feature usage and app performance using PostHog. No personal financial data (amounts, descriptions) is collected.",
-    "enableChatbot": "Enable Chatbot",
-    "enableErrorTracking": "Enable Error Tracking",
-    "enableErrorTrackingDescription": "Automatically report errors and crashes to Sentry to help improve the app. No financial data is included in error reports.",
-    "encryptStoredData": "Encrypt Stored Data",
-    "encryptStoredDataDescription": "Encrypt sensitive transaction data at rest using AES-GCM encryption. Requires key generation on first enable.",
-    "encryptionActive": "Encryption is active. Your data is encrypted in IndexedDB.",
-    "encryptionFailed": "Failed to enable encryption. Please try again.",
-    "encryptionNotAvailable": "Encryption is not available in this browser. Please use a modern browser with Web Crypto API support.",
-    "export": "Export",
-    "exportAllData": "Export All Data",
-    "exportAllDataDescription": "Download all your accounts, transactions, categories, and budgets as JSON",
-    "exportFailed": "Failed to export data. Please try again.",
-    "fullAccess": "Full Access",
-    "fullAccessDescription": "Chatbot can perform actions like adding transactions and creating budgets",
-    "includedInAccounts": "included in Accounts",
-    "keepForever": "Keep forever",
-    "nSelected": "{count} selected",
-    "naturalLanguageImport": "Natural Language Import",
-    "naturalLanguageImportDescription": "Auto-configure bank imports using natural language (e.g., 'Import my TD checking account CSV')",
-    "nothingSelected": "Nothing selected",
-    "predictiveSpending": "Predictive Spending",
-    "predictiveSpendingDescription": "Forecast monthly spending by category using AI analysis",
-    "privacy": "Privacy:",
-    "privacyFirst": "Privacy First",
-    "privacyNotice": "All processing happens in your browser. No transaction data is uploaded to servers. AI features are opt-in and only send cleaned transaction descriptions (no account numbers, names, or addresses) when enabled.",
-    "readOnlyDescription": "Chatbot can view data and answer questions but cannot modify anything",
-    "readOnlyRecommended": "Read-Only (Recommended)",
-    "receiptOCR": "Receipt OCR",
-    "receiptOCRDescription": "Extract transaction details from receipt images using client-side OCR (Tesseract.js). No data leaves your device.",
-    "requiresAIFeatures": "Requires AI Features",
-    "selectAll": "Select All",
-    "selectDataToDelete": "Select which data you want to permanently delete:",
-    "smartDuplicateDetection": "Smart Duplicate Detection",
-    "smartDuplicateDetectionDescription": "Use AI to detect duplicate transactions even when merchant names differ (e.g., 'AMAZON PRIME' vs 'AMZN MKTP CA')",
-    "subtitle": "Control how your data is processed and which AI features are enabled",
-    "successfullyCleared": "Successfully cleared: {items}",
-    "title": "Privacy & AI Controls",
-    "whatsSent": "What's sent:",
-    "whatsSentDescription": "Only cleaned transaction descriptions (e.g., \"AMAZON.COM\"). No account numbers, names, or addresses. Powered by OpenAI GPT-4o-mini."
+    "active": "Hai",
+    "aiFeatures": "Vipengele vya AI",
+    "aiFeaturesDescription": "Wezesha Vipengele vya AI vinavyoendeshwa na OpenAI kwa utendaji wa hali ya juu. Vinapozimwa, vipengele vyote vinavyotegemea AI vinazimwa kiotomatiki.",
+    "aiFeaturesTitle": "Vipengele vya AI (Swichi Kuu)",
+    "analyticsAndMonitoring": "Uchambuzi na Ufuatiliaji",
+    "anomalyDetection": "Ugunduzi wa Upekee",
+    "anomalyDetectionDescription": "Weka alama kwenye mifumo isiyo ya kawaida ya matumizi (mfano, 'Ununuzi wako wa Starbucks wa $85 si wa kawaida')",
+    "budgetChatbot": "Chatbot ya Bajeti",
+    "cannotBeUndone": "Kitendo hiki hakiwezi kutendeka upya!",
+    "chatbotDescription": "Msaidizi unaotumia AI anayeweza kujibu maswali kuhusu miamala yako, bajeti, na mifumo ya matumizi. Mazungumzo yanachakatwa kupitia OpenAI API.",
+    "chatbotPrivacyNotice": "Data yako ya kifedha inatumwa kwa OpenAI kujibu maswali. OpenAI haitumii data ya API kufundisha modeli. Unaweza kuzima wakati wowote.",
+    "confirmDelete": "Thibitisha Kufuta",
+    "confirmDeleteWarning": "Unakaribia kufuta kabisa {count, plural, one {aina # ya data} other {aina # za data}}. Bonyeza \"Thibitisha Kufuta\" kuendelea.",
+    "conversationHistory": "Historia ya Mazungumzo",
+    "conversationStorageNotice": "Mazungumzo yanahifadhiwa ndani ya kivinjari chako. Unaweza kuyafuta kwa mkono wakati wowote.",
+    "dataAccessPermission": "Ruhusa ya Ufikiaji wa Data",
+    "dataAccountBalances": "salio za akaunti",
+    "dataAccounts": "akaunti",
+    "dataBudgets": "bajeti",
+    "dataCategories": "kategoria",
+    "dataManagement": "Usimamizi wa Data",
+    "dataPrivacySettings": "mipangilio ya faragha",
+    "dataProcessing": "Uchakataji wa Data",
+    "dataSecurity": "Usalama wa Data",
+    "dataTransactions": "miamala",
+    "deleteAccountsDescription": "Akaunti za benki na kadi za mkopo",
+    "deleteAccountsLabel": "Akaunti",
+    "deleteAfter30Days": "Futa baada ya siku 30",
+    "deleteAfter7Days": "Futa baada ya siku 7 (Inayopendekezwa)",
+    "deleteBalancesDescription": "Weka upya salio zote za akaunti kuwa $0",
+    "deleteBalancesLabel": "Salio za Akaunti",
+    "deleteBudgetsDescription": "Mgawanyo wa bajeti ya mwezi",
+    "deleteBudgetsLabel": "Bajeti",
+    "deleteCategoriesDescription": "Kategoria maalum za matumizi",
+    "deleteCategoriesLabel": "Kategoria",
+    "deleteData": "Futa Data",
+    "deleteFailed": "Imeshindwa kufuta data. Tafadhali jaribu tena.",
+    "deletePrivacySettingsDescription": "Weka upya mipangilio yote kuwa chaguo-msingi",
+    "deletePrivacySettingsLabel": "Mipangilio ya Faragha",
+    "deleteSelected": "Futa Zilizochaguliwa",
+    "deleteTransactionsDescription": "Miamala yote iliyoagizwa na ya mkono",
+    "deleteTransactionsLabel": "Miamala",
+    "deleting": "Inafuta...",
+    "deselectAll": "Ondoa Chaguo Zote",
+    "enableAnalytics": "Wezesha Uchambuzi",
+    "enableAnalyticsDescription": "Fuatilia matumizi ya vipengele na utendaji wa programu kwa kutumia PostHog. Hakuna data ya kifedha ya kibinafsi (kiasi, maelezo) inayokusanywa.",
+    "enableChatbot": "Wezesha Chatbot",
+    "enableErrorTracking": "Wezesha Ufuatiliaji wa Hitilafu",
+    "enableErrorTrackingDescription": "Ripoti kiotomatiki hitilafu na kuanguka kwa Sentry kusaidia kuboresha programu. Hakuna data ya kifedha inayojumuishwa katika ripoti za hitilafu.",
+    "encryptStoredData": "Simba Data Iliyohifadhiwa",
+    "encryptStoredDataDescription": "Simba data nyeti ya miamala iliyohifadhiwa kwa kutumia usimbaji wa AES-GCM. Inahitaji kutengeneza ufunguo wakati wa kuwasha kwa mara ya kwanza.",
+    "encryptionActive": "Usimbaji uko hai. Data yako imesimbwa katika IndexedDB.",
+    "encryptionFailed": "Imeshindwa kuwezesha usimbaji. Tafadhali jaribu tena.",
+    "encryptionNotAvailable": "Usimbaji haupatikani katika kivinjari hiki. Tafadhali tumia kivinjari cha kisasa chenye msaada wa Web Crypto API.",
+    "export": "Hamisha",
+    "exportAllData": "Hamisha Data Yote",
+    "exportAllDataDescription": "Pakua akaunti zako zote, miamala, kategoria, na bajeti kama JSON",
+    "exportFailed": "Imeshindwa kuhamisha data. Tafadhali jaribu tena.",
+    "fullAccess": "Ufikiaji Kamili",
+    "fullAccessDescription": "Chatbot inaweza kutekeleza vitendo kama kuongeza miamala na kuunda bajeti",
+    "includedInAccounts": "imejumuishwa katika Akaunti",
+    "keepForever": "Hifadhi milele",
+    "nSelected": "{count} zimechaguliwa",
+    "naturalLanguageImport": "Uagizaji wa Lugha ya Kawaida",
+    "naturalLanguageImportDescription": "Sanidi kiotomatiki uagizaji wa benki kwa kutumia lugha ya kawaida (mfano, 'Agiza CSV ya akaunti yangu ya TD')",
+    "nothingSelected": "Hakuna kilichochaguliwa",
+    "predictiveSpending": "Matumizi ya Utabiri",
+    "predictiveSpendingDescription": "Tabiri matumizi ya mwezi kwa kategoria kwa kutumia uchambuzi wa AI",
+    "privacy": "Faragha:",
+    "privacyFirst": "Faragha Kwanza",
+    "privacyNotice": "Uchakataji wote hufanyika katika kivinjari chako. Hakuna data ya miamala inayopakiwa kwa seva. Vipengele vya AI ni vya kuchagua na hutuma maelezo ya miamala yaliyosafishwa (hakuna nambari za akaunti, majina, au anwani) yanapowezesha.",
+    "readOnlyDescription": "Chatbot inaweza kutazama data na kujibu maswali lakini haiwezi kubadilisha chochote",
+    "readOnlyRecommended": "Kusoma Tu (Inayopendekezwa)",
+    "receiptOCR": "OCR ya Risiti",
+    "receiptOCRDescription": "Toa maelezo ya muamala kutoka picha za risiti kwa kutumia OCR ya upande wa mteja (Tesseract.js). Hakuna data inayotoka kwenye kifaa chako.",
+    "requiresAIFeatures": "Inahitaji Vipengele vya AI",
+    "selectAll": "Chagua Zote",
+    "selectDataToDelete": "Chagua data unayotaka kufuta kabisa:",
+    "smartDuplicateDetection": "Ugunduzi Mzuri wa Nakala",
+    "smartDuplicateDetectionDescription": "Tumia AI kugundua miamala ya nakala hata wakati majina ya wafanyabiashara yanatofautiana (mfano, 'AMAZON PRIME' dhidi ya 'AMZN MKTP CA')",
+    "subtitle": "Dhibiti jinsi data yako inavyochakatwa na vipengele vipi vya AI vimewezeshwa",
+    "successfullyCleared": "Imefutwa kwa mafanikio: {items}",
+    "title": "Faragha na Udhibiti wa AI",
+    "whatsSent": "Kinachotumwa:",
+    "whatsSentDescription": "Maelezo ya miamala yaliyosafishwa pekee (mfano, \"AMAZON.COM\"). Hakuna nambari za akaunti, majina, au anwani. Inaendeshwa na OpenAI GPT-4o-mini."
   },
   "profileDialog": {
-    "cancel": "Cancel",
-    "confirmPinLabel": "Confirm PIN",
-    "confirmPinPlaceholder": "Confirm PIN",
-    "createDescription": "Add a new profile for a family member. Each profile can have its own private budgets.",
-    "createTitle": "Create Profile",
-    "defaultProfileNote": "This is the default profile and will be selected on app start.",
-    "editDescription": "Update the profile name and avatar color.",
-    "editTitle": "Edit Profile",
-    "enterPinPlaceholder": "Enter PIN",
-    "errorCreateFailed": "Failed to create profile",
-    "errorInvalidPin": "Invalid PIN",
-    "errorNameRequired": "Please enter a name for the profile",
-    "errorNameTooLong": "Name must be 30 characters or less",
-    "errorPinMismatch": "PINs do not match",
-    "errorUpdateFailed": "Failed to update profile",
-    "nameLabel": "Name",
-    "namePlaceholder": "Enter profile name",
-    "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
-    "pinLabel": "PIN (4-6 digits)",
-    "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes",
+    "cancel": "Ghairi",
+    "confirmPinLabel": "Thibitisha PIN",
+    "confirmPinPlaceholder": "Thibitisha PIN",
+    "createDescription": "Ongeza wasifu mpya kwa mwanafamilia. Kila wasifu unaweza kuwa na bajeti zake za kibinafsi.",
+    "createTitle": "Unda Wasifu",
+    "defaultProfileNote": "Huu ni wasifu chaguo-msingi na utachaguliwa programu inapoanza.",
+    "editDescription": "Sasisha jina la wasifu na rangi ya avatar.",
+    "editTitle": "Hariri Wasifu",
+    "enterPinPlaceholder": "Weka PIN",
+    "errorCreateFailed": "Imeshindwa kuunda wasifu",
+    "errorInvalidPin": "PIN si sahihi",
+    "errorNameRequired": "Tafadhali weka jina la wasifu",
+    "errorNameTooLong": "Jina lazima liwe herufi 30 au chini",
+    "errorPinMismatch": "PIN hazilingani",
+    "errorUpdateFailed": "Imeshindwa kusasisha wasifu",
+    "nameLabel": "Jina",
+    "namePlaceholder": "Weka jina la wasifu",
+    "pinHelpText": "PIN inalinda ufikiaji wa wasifu huu. Chagua kitu kinachokumbukika lakini si rahisi sana.",
+    "pinLabel": "PIN (tarakimu 4-6)",
+    "protectWithPin": "Linda kwa PIN",
+    "saveChanges": "Hifadhi Mabadiliko",
     "errorDeleteFailed": "Imeshindwa kufuta wasifu",
     "deleteTitle": "Futa wasifu?",
     "defaultProfile": "Wasifu chaguo-msingi",
@@ -3855,164 +3855,164 @@
     "deleteButton": "Futa wasifu"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "Vuta kusasisha",
+    "release": "Achia kusasisha"
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "Sakinisha",
+      "notNow": "Si sasa"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "Funga kidokezo cha usakinishaji",
+    "description": "Ongeza kwenye skrini yako ya nyumbani kwa ufikiaji wa haraka na matumizi nje ya mtandao",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "Haraka na salama",
+      "noAppStore": "Hakuna duka la programu linalohitajika",
+      "offline": "Inafanya kazi nje ya mtandao"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"Ongeza kwenye Skrini ya Nyumbani\"",
+    "iosForFullExperience": "kwa uzoefu kamili wa programu na upakiaji wa haraka.",
+    "iosTap": "Gusa",
+    "iosThen": "kisha",
+    "iosTitle": "Sakinisha Programu ya Bajeti",
+    "title": "Sakinisha Programu ya Bajeti"
   },
   "qrScanner": {
-    "allowCameraAccess": "Please allow camera access when prompted",
-    "cameraError": "Camera Error",
-    "cameraFailed": "Failed to access camera. Please try again.",
-    "cameraInUse": "Camera is in use by another application. Please close other apps using the camera.",
-    "cameraStep1": "Click the lock/info icon in your browser address bar",
-    "cameraStep2": "Find \"Camera\" in the permissions",
-    "cameraStep3": "Change it to \"Allow\"",
-    "cameraStep4": "Refresh this page",
-    "cancel": "Cancel",
-    "deviceFound": "Device Found!",
-    "error": "Error",
-    "howToEnableCamera": "How to enable camera access:",
-    "invalidQrFormat": "Invalid QR code format. Please scan a Budget App pairing QR code.",
-    "noCamera": "No camera found on this device.",
-    "permissionDenied": "Camera access was denied. Please allow camera access in your browser settings.",
-    "pointAtQrCode": "Point at QR Code",
-    "positionQrCode": "Position the QR code within the frame",
-    "qrExpired": "This QR code has expired. Please generate a new one on the host device.",
-    "readyToConnect": "Ready to connect to {deviceName}",
-    "scanDescription": "Scan the QR code displayed on the host device to connect",
-    "scanQrCode": "Scan QR Code",
-    "scanningForQr": "Scanning for QR code...",
-    "startCamera": "Start Camera",
-    "startingCamera": "Starting Camera...",
-    "tryAgain": "Try Again"
+    "allowCameraAccess": "Tafadhali ruhusu ufikiaji wa kamera unapoombwa",
+    "cameraError": "Hitilafu ya Kamera",
+    "cameraFailed": "Imeshindwa kufikia kamera. Tafadhali jaribu tena.",
+    "cameraInUse": "Kamera inatumika na programu nyingine. Tafadhali funga programu nyingine zinazotumia kamera.",
+    "cameraStep1": "Bonyeza ikoni ya kufuli/taarifa kwenye bar ya anwani ya kivinjari",
+    "cameraStep2": "Tafuta \"Kamera\" katika ruhusa",
+    "cameraStep3": "Ibadilishe kuwa \"Ruhusu\"",
+    "cameraStep4": "Sasisha ukurasa huu",
+    "cancel": "Ghairi",
+    "deviceFound": "Kifaa Kimepatikana!",
+    "error": "Hitilafu",
+    "howToEnableCamera": "Jinsi ya kuwezesha ufikiaji wa kamera:",
+    "invalidQrFormat": "Muundo wa msimbo wa QR si sahihi. Tafadhali skani msimbo wa QR wa uoanishaji wa Programu ya Bajeti.",
+    "noCamera": "Hakuna kamera iliyopatikana kwenye kifaa hiki.",
+    "permissionDenied": "Ufikiaji wa kamera umekataliwa. Tafadhali ruhusu ufikiaji wa kamera katika mipangilio ya kivinjari chako.",
+    "pointAtQrCode": "Elekeza kwenye Msimbo wa QR",
+    "positionQrCode": "Weka msimbo wa QR ndani ya fremu",
+    "qrExpired": "Msimbo huu wa QR umeisha muda. Tafadhali tengeneza mpya kwenye kifaa cha mwenyeji.",
+    "readyToConnect": "Tayari kuunganisha na {deviceName}",
+    "scanDescription": "Skani msimbo wa QR unaoonyeshwa kwenye kifaa cha mwenyeji kuunganisha",
+    "scanQrCode": "Skani Msimbo wa QR",
+    "scanningForQr": "Inatafuta msimbo wa QR...",
+    "startCamera": "Anza Kamera",
+    "startingCamera": "Inaanzisha Kamera...",
+    "tryAgain": "Jaribu Tena"
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "Tumia Kategoria",
+      "cancel": "Ghairi",
+      "save": "Hifadhi"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "clickToSelect": "Bonyeza kategoria kuchagua",
+    "description": "Chagua kategoria kwa {count, plural, =1 {muamala huu} other {miamala #}}",
+    "general": "Jumla",
+    "noResults": "Hakuna kategoria zilizopatikana",
+    "pressEnter": "Bonyeza ↵ Enter",
+    "saving": "Inahifadhi...",
+    "searchPlaceholder": "Tafuta kategoria...",
+    "title": "Panga Haraka"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "Zote",
+    "categories": "Kategoria",
+    "clearFilters": "Futa Vichujio",
+    "moreCategories": "+{count} zaidi",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "Siku 30 Zilizopita",
+      "last90": "Siku 90 Zilizopita",
+      "thisMonth": "Mwezi Huu",
+      "thisYear": "Mwaka Huu"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "Kipindi cha Muda"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "balance": "Salio Jumla",
+    "expenses": "Matumizi",
+    "income": "Mapato",
+    "savingsRate": "Kiwango cha Akiba",
+    "savingsRateDescription": "Asilimia ya mapato iliyohifadhiwa mwezi huu"
   },
   "receiptThumbnail": {
-    "close": "Close",
-    "deleteConfirm": "Delete receipt \"{filename}\"?",
-    "deleteFailed": "Failed to delete receipt",
-    "deleteReceipt": "Delete receipt",
-    "downloadPdf": "Download PDF",
+    "close": "Funga",
+    "deleteConfirm": "Futa risiti \"{filename}\"?",
+    "deleteFailed": "Imeshindwa kufuta risiti",
+    "deleteReceipt": "Futa risiti",
+    "downloadPdf": "Pakua PDF",
     "fileSize": "{size} KB",
-    "pdfReceipt": "PDF Receipt",
-    "receiptCount": "{count, plural, =1 {1 receipt} other {# receipts}}",
-    "unsupportedFileType": "Unsupported file type",
-    "uploaded": "Uploaded {date}",
+    "pdfReceipt": "Risiti ya PDF",
+    "receiptCount": "{count, plural, =1 {Risiti 1} other {Risiti #}}",
+    "unsupportedFileType": "Aina ya faili haiauni",
+    "uploaded": "Imepakiwa {date}",
     "view": "Tazama"
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "Ambatisha Risiti",
+      "chooseDifferent": "Chagua Nyingine",
+      "extractData": "Toa Data",
+      "extracting": "Inatoa..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "Piga Picha kwa Kamera",
+      "useDevice": "Tumia kamera ya kifaa chako kupiga risiti"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "Kipimo cha kamera",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "au <link>vinjari faili</link>",
+      "dragDrop": "Buruta na udondoshe risiti hapa",
+      "dropHere": "Dondosha risiti hapa",
+      "supportedFormats": "Inasaidia JPG, PNG, PDF • Upeo {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "Haikuweza kutoa data kutoka kwenye risiti. Tafadhali weka kwa mkono.",
+      "extractionFailed": "Imeshindwa kutoa data. Tafadhali jaribu tena au weka kwa mkono.",
+      "invalidType": "Aina ya faili si sahihi. Faili za JPG, PNG, na PDF pekee zinaruhusiwa",
+      "ocrImagesOnly": "OCR inasaidiwa kwa faili za picha pekee (JPG, PNG)",
+      "rejected": "Faili imekataliwa. Tafadhali jaribu tena",
+      "tooLarge": "Faili ni kubwa sana. Ukubwa wa juu ni {size}MB"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "Kiasi:",
+      "confidence": "Uhakika: {percent}%",
+      "date": "Tarehe:",
+      "merchant": "Muuzaji:",
+      "title": "Data Imetolewa"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "Hakiki haipatikani",
+      "title": "Risiti ya PDF"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "Hakiki ya risiti",
+    "removeFile": "Ondoa faili"
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
-    "estimatedMonthly": "Estimated Monthly",
+    "confidence": "{percent}% uhakika",
+    "estimatedMonthly": "Makadirio ya Mwezi",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "Kila Wiki Mbili",
+      "monthly": "Kila Mwezi",
+      "quarterly": "Kila Robo Mwaka",
+      "weekly": "Kila Wiki"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "next": "Next: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "inDays": "{count, plural, =0 {(leo)} =1 {(baada ya siku 1)} other {(baada ya siku #)}}",
+    "next": "Ijayo: {date}",
+    "occurrences": "{count, plural, =1 {Tukio 1 limegunduliwa} other {Matukio # yamegunduliwa}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "kwa mwezi",
+      "quarter": "kwa robo mwaka",
+      "twoWeeks": "kwa wiki 2",
+      "week": "kwa wiki"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
+    "showingPatterns": "{count, plural, =1 {Inaonyesha muundo 1 wa muamala wa kujirudia} other {Inaonyesha mifumo # ya miamala ya kujirudia}}",
+    "subtitle": "Usajili na bili zilizogunduliwa",
+    "title": "Miamala ya Kujirudia"
   },
   "reports": {
     "addTransactionsToSeeFlow": "Ongeza miamala ya mapato na matumizi kuona mtiririko wa pesa zako",
@@ -4188,60 +4188,60 @@
     "shortcuts": "Njia Fupi"
   },
   "simplefinConnect": {
-    "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
-    "alreadyHaveToken": "Already have a token?",
-    "asOf": "as of {date}",
-    "autoImportDescription": "Automatically import transactions from your bank accounts",
-    "automaticSync": "Automatic Sync",
-    "automaticSyncDescription": "Transactions sync daily. Manual import anytime.",
-    "back": "Back",
-    "cancel": "Cancel",
-    "completeSetup": "Complete Setup",
-    "connect": "Connect",
-    "connectYourBank": "Connect Your Bank",
-    "connecting": "Connecting...",
-    "connectingTitle": "Connecting...",
-    "connectionFailed": "Connection Failed",
-    "connectionSuccessful": "Connection Successful!",
-    "createNewAccount": "Create new account",
-    "dialogDescription": "Link your bank accounts via SimpleFIN Bridge",
-    "dialogTitle": "Connect Bank Account",
-    "done": "Done",
-    "enterItHere": "Enter it here",
-    "enterTokenError": "Please enter your SimpleFIN setup token",
-    "failedToSave": "Failed to save connection",
-    "fetchingAccounts": "Fetching your bank accounts from SimpleFIN",
-    "genericError": "An error occurred while connecting",
-    "getStarted": "Get Started",
-    "importTo": "Import to:",
-    "importTransactions": "Import transactions",
-    "instruction1": "Click the button below to open SimpleFIN Bridge",
-    "instruction2": "Sign in or create an account",
-    "instruction3": "Connect your bank accounts",
-    "instruction4": "Copy the Setup Token provided",
-    "instruction5": "Return here and paste the token",
-    "learnMore": "Learn more",
-    "linkToBudget": "Link to Budget",
-    "linkToBudgetDescription": "Map bank accounts to your budget accounts.",
-    "noAccountsFound": "No accounts found. Please ensure you have connected bank accounts in SimpleFIN Bridge.",
-    "openBridge": "Open SimpleFIN Bridge",
-    "saving": "Saving...",
-    "securePrivate": "Secure & Private",
-    "securePrivateDescription": "SimpleFIN never sees your login credentials. You control access.",
-    "selectAccount": "Select account",
-    "setupToken": "Setup Token",
-    "step1Description": "Create or sign into your SimpleFIN account",
-    "step1Title": "Step 1: Get Setup Token",
-    "step2Description": "Paste the token from SimpleFIN Bridge",
-    "step2Title": "Step 2: Enter Setup Token",
-    "step3Description": "Choose which accounts to sync and where to import transactions",
-    "step3Title": "Step 3: Link Accounts",
-    "subscriptionDescription": "SimpleFIN costs $1.50/month for up to 25 bank connections.",
-    "subscriptionTitle": "SimpleFIN Bridge Subscription",
-    "syncDescription": "Your transactions will be automatically synced daily. You can also sync manually from the Import page.",
-    "tokenHint": "The token is a long string starting with letters and numbers",
-    "tryAgain": "Try Again",
-    "unexpectedError": "An unexpected error occurred"
+    "accountsConnected": "{count, plural, one {Akaunti # imeunganishwa} other {Akaunti # zimeunganishwa}}",
+    "alreadyHaveToken": "Tayari una tokeni?",
+    "asOf": "kufikia {date}",
+    "autoImportDescription": "Agiza miamala kiotomatiki kutoka akaunti zako za benki",
+    "automaticSync": "Usawazishaji wa Kiotomatiki",
+    "automaticSyncDescription": "Miamala inasawazishwa kila siku. Uagizaji wa mkono wakati wowote.",
+    "back": "Rudi",
+    "cancel": "Ghairi",
+    "completeSetup": "Kamilisha Usanidi",
+    "connect": "Unganisha",
+    "connectYourBank": "Unganisha Benki Yako",
+    "connecting": "Inaunganisha...",
+    "connectingTitle": "Inaunganisha...",
+    "connectionFailed": "Muunganisho Umeshindwa",
+    "connectionSuccessful": "Muunganisho Umefanikiwa!",
+    "createNewAccount": "Unda akaunti mpya",
+    "dialogDescription": "Unganisha akaunti zako za benki kupitia SimpleFIN Bridge",
+    "dialogTitle": "Unganisha Akaunti ya Benki",
+    "done": "Imekamilika",
+    "enterItHere": "Weka hapa",
+    "enterTokenError": "Tafadhali weka tokeni yako ya usanidi wa SimpleFIN",
+    "failedToSave": "Imeshindwa kuhifadhi muunganisho",
+    "fetchingAccounts": "Inapata akaunti zako za benki kutoka SimpleFIN",
+    "genericError": "Hitilafu imetokea wakati wa kuunganisha",
+    "getStarted": "Anza",
+    "importTo": "Agiza kwa:",
+    "importTransactions": "Agiza miamala",
+    "instruction1": "Bonyeza kitufe hapa chini kufungua SimpleFIN Bridge",
+    "instruction2": "Ingia au unda akaunti",
+    "instruction3": "Unganisha akaunti zako za benki",
+    "instruction4": "Nakili Tokeni ya Usanidi iliyotolewa",
+    "instruction5": "Rudi hapa na ubandike tokeni",
+    "learnMore": "Jifunze zaidi",
+    "linkToBudget": "Unganisha na Bajeti",
+    "linkToBudgetDescription": "Ramani akaunti za benki kwa akaunti zako za bajeti.",
+    "noAccountsFound": "Hakuna akaunti zilizopatikana. Tafadhali hakikisha umeunganisha akaunti za benki katika SimpleFIN Bridge.",
+    "openBridge": "Fungua SimpleFIN Bridge",
+    "saving": "Inahifadhi...",
+    "securePrivate": "Salama na ya Faragha",
+    "securePrivateDescription": "SimpleFIN haioni kamwe kitambulisho chako cha kuingia. Unadhibiti ufikiaji.",
+    "selectAccount": "Chagua akaunti",
+    "setupToken": "Tokeni ya Usanidi",
+    "step1Description": "Unda au ingia kwenye akaunti yako ya SimpleFIN",
+    "step1Title": "Hatua ya 1: Pata Tokeni ya Usanidi",
+    "step2Description": "Bandika tokeni kutoka SimpleFIN Bridge",
+    "step2Title": "Hatua ya 2: Weka Tokeni ya Usanidi",
+    "step3Description": "Chagua akaunti za kusawazisha na mahali pa kuagiza miamala",
+    "step3Title": "Hatua ya 3: Unganisha Akaunti",
+    "subscriptionDescription": "SimpleFIN inagharimu $1.50/mwezi kwa hadi muunganisho 25 wa benki.",
+    "subscriptionTitle": "Usajili wa SimpleFIN Bridge",
+    "syncDescription": "Miamala yako itasawazishwa kiotomatiki kila siku. Unaweza pia kusawazisha kwa mkono kutoka ukurasa wa Uagizaji.",
+    "tokenHint": "Tokeni ni mfuatano mrefu unaoanza na herufi na nambari",
+    "tryAgain": "Jaribu Tena",
+    "unexpectedError": "Hitilafu isiyotarajiwa imetokea"
   },
   "simplefinSettings": {
     "connectedAccounts": {
@@ -4351,207 +4351,207 @@
     "warningsLabel": "Warnings:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "Utabiri unategemea uchanganuzi wa mstari wa miezi {months} iliyopita",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "Matumizi Halisi",
+      "projected": "Inayotarajiwa"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "Hakuna data ya kutosha kutengeneza mwenendo. Ongeza angalau miezi 2 ya miamala.",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "Wastani wa Mwezi",
+      "lastMonth": "Mwezi Uliopita",
+      "projected": "Inayotarajiwa"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "Mwenendo wa Matumizi na Utabiri"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "Ongeza Mgawanyo ({current}/{max})",
+    "amount": "Kiasi",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "Ghairi",
+      "save": "Hifadhi Mgawanyo",
+      "saving": "Inahifadhi..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "Kategoria",
+    "closeModal": "Funga dirisha",
+    "date": "Tarehe:",
+    "distributeEvenly": "Gawanya Sawa",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "Imeshindwa kuhifadhi muamala wa mgawanyo"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "Weka kiasi kwa kila kategoria (lazima jumla iwe ${amount})",
+      "step2": "Tumia \"Gawanya Sawa\" kugawanya kwa usawa katika kategoria zote",
+      "step3": "Ongeza hadi mgawanyo 5 kwa muamala",
+      "step4": "Muamala wa asili utafichwa na kubadilishwa na vipengele vya mgawanyo",
+      "title": "Jinsi ya kugawanya miamala:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "Mgawanyo 5 ndio wa juu zaidi",
+    "minSplitsRequired": "Mgawanyo 2 ndio wa chini zaidi",
+    "none": "Hakuna",
+    "notes": "Maelezo (Hiari)",
+    "notesPlaceholder": "mfano, Gharama ya biashara, Matumizi ya kibinafsi",
+    "originalAmount": "Kiasi cha Asili:",
+    "removeThisSplit": "Ondoa mgawanyo huu",
+    "selectCategory": "Chagua kategoria...",
+    "splitsCount": "Mgawanyo ({current}/{max})",
+    "subcategory": "Kategoria Ndogo",
+    "title": "Gawanya Muamala",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "Rekebisha kiasi cha mgawanyo kulingana na kiasi cha muamala wa asili.",
+      "amountsMustMatch": "Kiasi cha mgawanyo lazima kilingane na kiasi cha muamala wa asili",
+      "categoryRequired": "Mgawanyo wote lazima uwe na kategoria",
+      "matchesOriginal": "✓ Inalingana na asili",
+      "overBy": "Zaidi kwa ${amount}",
+      "readyToSave": "Kiasi cha mgawanyo kinalingana na muamala wa asili. Tayari kuhifadhi!",
+      "total": "Jumla:",
+      "underBy": "Chini kwa ${amount}"
     }
   },
   "splits": {
-    "addAPerson": "Add a Person",
-    "addFirstPerson": "Add Your First Person",
-    "addPerson": "Add Person",
-    "allSettledUp": "All settled up",
-    "allSettledUpWith": "All settled up with {name}!",
-    "amount": "Amount",
-    "back": "Back",
-    "backToSplits": "Back to Splits",
+    "addAPerson": "Ongeza Mtu",
+    "addFirstPerson": "Ongeza Mtu Wako wa Kwanza",
+    "addPerson": "Ongeza Mtu",
+    "allSettledUp": "Yote yamemaliza",
+    "allSettledUpWith": "Yote yamemaliza na {name}!",
+    "amount": "Kiasi",
+    "back": "Rudi",
+    "backToSplits": "Rudi kwenye Mgawanyo",
     "confirmRemovePerson": {
-      "confirmLabel": "Remove",
-      "description": "Are you sure you want to remove this person? All their split records will be deleted.",
-      "descriptionNamed": "Are you sure you want to remove {name}? All their split records will be deleted.",
-      "title": "Remove Person"
+      "confirmLabel": "Ondoa",
+      "description": "Una uhakika unataka kuondoa mtu huyu? Rekodi zote za mgawanyo wake zitafutwa.",
+      "descriptionNamed": "Una uhakika unataka kuondoa {name}? Rekodi zote za mgawanyo wake zitafutwa.",
+      "title": "Ondoa Mtu"
     },
-    "continue": "Continue",
-    "creating": "Creating...",
+    "continue": "Endelea",
+    "creating": "Inaunda...",
     "emoji": "Emoji",
-    "helpTooltip": "Split transactions with friends and family. Track who owes what and settle debts via Cash, E-Transfer, Venmo, or PayPal.",
-    "name": "Name",
-    "namePlaceholder": "e.g., Alice, Bob",
-    "netBalance": "Net Balance",
-    "noPeopleDescription": "Add people you split expenses with. Track shared bills, dinners, and more.",
-    "noPeopleTitle": "No people yet",
-    "noPeopleYet": "No people added yet",
-    "noSplitsYet": "No splits yet",
-    "owedToYou": "Owed to You",
-    "owesYou": "Owes you {amount}",
-    "owesYouLabel": "Owes you",
-    "paymentMethod": "Payment Method",
-    "people": "People ({count})",
-    "settleAmount": "Settle {amount}",
-    "settleUp": "Settle Up",
-    "settled": "Settled",
-    "settledHistory": "Settled History ({count})",
+    "helpTooltip": "Gawanya miamala na marafiki na familia. Fuatilia nani anadaiwa nini na lipa madeni kupitia Taslimu, E-Transfer, Venmo, au PayPal.",
+    "name": "Jina",
+    "namePlaceholder": "mfano, Alice, Bob",
+    "netBalance": "Salio Halisi",
+    "noPeopleDescription": "Ongeza watu unaogawanya nao gharama. Fuatilia bili, chakula cha jioni, na mengineyo.",
+    "noPeopleTitle": "Hakuna watu bado",
+    "noPeopleYet": "Hakuna watu walioongezwa bado",
+    "noSplitsYet": "Hakuna mgawanyo bado",
+    "owedToYou": "Unadaiwa",
+    "owesYou": "Anakudai {amount}",
+    "owesYouLabel": "Anakudai",
+    "paymentMethod": "Njia ya Malipo",
+    "people": "Watu ({count})",
+    "settleAmount": "Lipa {amount}",
+    "settleUp": "Maliza Malipo",
+    "settled": "Imelipwa",
+    "settledHistory": "Historia ya Malipo ({count})",
     "settlementMethods": {
-      "cash": "Cash",
+      "cash": "Taslimu",
       "eTransfer": "E-Transfer",
-      "other": "Other",
+      "other": "Nyingine",
       "paypal": "PayPal",
       "venmo": "Venmo"
     },
-    "settling": "Settling...",
-    "splitATransaction": "Split a Transaction",
+    "settling": "Inalipa...",
+    "splitATransaction": "Gawanya Muamala",
     "splitFlow": {
-      "amountsCorrect": "Amounts add up correctly",
-      "confirmDescription": "This will create {count, plural, one {# split} other {# splits}} for this transaction. Each person's share will be tracked until settled.",
-      "confirmSplit": "Confirm Split",
-      "howToSplit": "How to split?",
+      "amountsCorrect": "Kiasi kinajumlishwa kwa usahihi",
+      "confirmDescription": "Hii itaunda {count, plural, one {mgawanyo #} other {mgawanyo #}} kwa muamala huu. Sehemu ya kila mtu itafuatiliwa hadi ilipwe.",
+      "confirmSplit": "Thibitisha Mgawanyo",
+      "howToSplit": "Jinsi ya kugawanya?",
       "modes": {
         "custom": {
-          "description": "Set specific amounts for each person",
-          "label": "Custom Amounts"
+          "description": "Weka kiasi maalum kwa kila mtu",
+          "label": "Kiasi Maalum"
         },
         "equal": {
-          "description": "Everyone pays the same amount",
-          "label": "Split Equally"
+          "description": "Kila mtu analipa kiasi sawa",
+          "label": "Gawanya Sawa"
         },
         "percentage": {
-          "description": "Set percentage shares for each person",
-          "label": "By Percentage"
+          "description": "Weka asilimia kwa kila mtu",
+          "label": "Kwa Asilimia"
         }
       },
-      "noTransactions": "No transactions found",
-      "percentageTotal": "Total: {sum}% (must equal 100%)",
-      "percentagesCorrect": "Percentages add up to 100%",
-      "previewSplit": "Preview Split",
-      "remaining": "Remaining: {amount}",
-      "searchTransactions": "Search transactions...",
-      "selectTransaction": "Select a transaction",
-      "step": "Step {current} of {total}",
-      "title": "Split a Transaction",
-      "whoToSplitWith": "Who to split with?"
+      "noTransactions": "Hakuna miamala iliyopatikana",
+      "percentageTotal": "Jumla: {sum}% (lazima iwe 100%)",
+      "percentagesCorrect": "Asilimia zinajumlishwa hadi 100%",
+      "previewSplit": "Hakiki Mgawanyo",
+      "remaining": "Imebaki: {amount}",
+      "searchTransactions": "Tafuta miamala...",
+      "selectTransaction": "Chagua muamala",
+      "step": "Hatua {current} ya {total}",
+      "title": "Gawanya Muamala",
+      "whoToSplitWith": "Gawanya na nani?"
     },
-    "subtitle": "Track shared expenses and settle up with friends",
-    "title": "Expense Splitting",
-    "total": "total",
-    "unknownTransaction": "Unknown transaction",
-    "unsettledSplitCount": "{count, plural, one {# unsettled split} other {# unsettled splits}}",
-    "unsettledSplits": "Unsettled Splits ({count})",
-    "via": "via",
-    "youOwe": "You owe {amount}",
-    "youOweLabel": "You Owe"
+    "subtitle": "Fuatilia gharama za pamoja na maliza malipo na marafiki",
+    "title": "Ugawanyaji wa Gharama",
+    "total": "jumla",
+    "unknownTransaction": "Muamala usiojulikana",
+    "unsettledSplitCount": "{count, plural, one {Mgawanyo # usiomaliza} other {Mgawanyo # usiomaliza}}",
+    "unsettledSplits": "Mgawanyo Usiomaliza ({count})",
+    "via": "kupitia",
+    "youOwe": "Unadaiwa {amount}",
+    "youOweLabel": "Unadaiwa"
   },
   "subscriptionCard": {
     "badges": {
-      "aiVerified": "AI Verified",
-      "cancelled": "Cancelled",
-      "paused": "Paused",
-      "trial": "Trial"
+      "aiVerified": "AI Imethibitishwa",
+      "cancelled": "Imefutwa",
+      "paused": "Imesimamishwa",
+      "trial": "Jaribio"
     },
     "buttons": {
-      "claimManage": "Claim & Manage",
-      "edit": "Edit",
-      "transactions": "Transactions"
+      "claimManage": "Dai na Simamia",
+      "edit": "Hariri",
+      "transactions": "Miamala"
     },
     "confidence": {
-      "high": "High",
-      "label": "Detection Confidence",
-      "low": "Low",
-      "medium": "Medium"
+      "high": "Juu",
+      "label": "Uhakika wa Ugunduzi",
+      "low": "Chini",
+      "medium": "Kati"
     },
     "details": {
-      "charges": "{count} charges",
-      "daysBefore": "{count} days before",
-      "firstCharge": "First Charge",
-      "lastCharge": "Last Charge",
-      "occurrences": "Occurrences",
-      "payment": "Payment",
-      "reminder": "Reminder"
+      "charges": "Malipo {count}",
+      "daysBefore": "Siku {count} kabla",
+      "firstCharge": "Malipo ya Kwanza",
+      "lastCharge": "Malipo ya Mwisho",
+      "occurrences": "Matukio",
+      "payment": "Malipo",
+      "reminder": "Kikumbusho"
     },
     "interval": {
-      "annual": "Annual",
-      "bi-weekly": "Bi-weekly",
-      "irregular": "Irregular",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "annual": "Kila Mwaka",
+      "bi-weekly": "Kila Wiki Mbili",
+      "irregular": "Isiyo ya Kawaida",
+      "monthly": "Kila Mwezi",
+      "quarterly": "Kila Robo Mwaka",
+      "weekly": "Kila Wiki"
     },
-    "lowConfidenceWarning": "This subscription was detected with low confidence. Claim it to verify and manage manually.",
+    "lowConfidenceWarning": "Usajili huu uligunduliwa kwa uhakika mdogo. Udai ili kuthibitisha na kusimamia kwa mkono.",
     "menu": {
-      "cancelSubscription": "Cancel Subscription",
-      "claimManage": "Claim & Manage",
-      "delete": "Delete",
-      "edit": "Edit",
-      "notSubscription": "Not a Subscription",
-      "pause": "Pause",
-      "resume": "Resume",
-      "viewTransactions": "View Transactions"
+      "cancelSubscription": "Futa Usajili",
+      "claimManage": "Dai na Simamia",
+      "delete": "Futa",
+      "edit": "Hariri",
+      "notSubscription": "Si Usajili",
+      "pause": "Simamisha",
+      "resume": "Endelea",
+      "viewTransactions": "Tazama Miamala"
     },
     "source": {
-      "auto-detected": "Auto-detected",
-      "manual": "Manual",
-      "merged": "Tracked"
+      "auto-detected": "Imegunduliwa kiotomatiki",
+      "manual": "Kwa Mkono",
+      "merged": "Inafuatiliwa"
     },
     "stats": {
-      "amount": "Amount",
-      "annualCost": "Annual Cost",
-      "frequency": "Frequency",
-      "nextCharge": "Next Charge",
-      "totalSpent": "Total Spent"
+      "amount": "Kiasi",
+      "annualCost": "Gharama ya Mwaka",
+      "frequency": "Mara",
+      "nextCharge": "Malipo Yajayo",
+      "totalSpent": "Jumla Iliyotumika"
     },
     "trial": {
-      "daysLeft": "{count, plural, =1 {1 day left in trial} other {# days left in trial}}"
+      "daysLeft": "{count, plural, =1 {Siku 1 imebaki ya jaribio} other {Siku # zimebaki za jaribio}}"
     },
     "reminderToggle": {
       "disableReminder": "Zima kikumbusho",
@@ -4560,331 +4560,331 @@
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "Hakuna usajili hai wa kuchambua",
+    "loadingChart": "Inapakia chati...",
+    "moreCharges": "+{count} malipo zaidi",
+    "perMonth": "/mwezi",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "Gharama kwa Kategoria",
+      "potentialSavings": "Akiba Inayowezekana",
+      "upcomingCharges": "Malipo Yanayokuja (Siku 30 Zijazo)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {Usajili 1 hai} other {Usajili # hai}}",
+      "annualCost": "Gharama ya Mwaka",
+      "monthlyCost": "Gharama ya Mwezi",
+      "next30Days": "Siku 30 Zijazo",
+      "projectedYearly": "Matumizi yanayotarajiwa ya mwaka",
+      "upcomingCharges": "{count, plural, =1 {Malipo 1 yanayokuja} other {Malipo # yanayokuja}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Usajili unaoweza kuwa umefutwa",
+      "inactiveDescription": "{count, plural, =1 {Usajili 1 hauja} other {Usajili # hawaja}}lipishwa hivi karibuni. Hakikisha kweli umefutwa.",
+      "trialsTitle": "Majaribio yanayoisha hivi karibuni",
+      "trialsDescription": "{count, plural, =1 {Jaribio 1} other {Majaribio #}} yanaisha ndani ya siku 7. Futa kama huyatumii.",
+      "highCostTitle": "Usajili wa gharama kubwa",
+      "highCostDescription": "Usajili huu unawakilisha sehemu kubwa ya matumizi yako. Fikiria kama unapata thamani kamili."
     }
   },
   "subscriptionModal": {
-    "addSubscription": "Add Subscription",
-    "addTitle": "Add Subscription",
-    "adding": "Adding...",
-    "advancedOptions": "Advanced Options",
-    "amountLabel": "Amount *",
-    "autoRenewDescription": "Will this subscription renew automatically?",
-    "autoRenewLabel": "Auto-renew",
-    "beforeBilling": "before billing",
-    "billingCycleLabel": "Billing Cycle *",
-    "cancel": "Cancel",
-    "categoryLabel": "Category",
-    "categoryNone": "None",
-    "categoryPlaceholder": "Select category...",
-    "currencyCAD": "CAD - Canadian Dollar",
+    "addSubscription": "Ongeza Usajili",
+    "addTitle": "Ongeza Usajili",
+    "adding": "Inaongeza...",
+    "advancedOptions": "Chaguzi za Hali ya Juu",
+    "amountLabel": "Kiasi *",
+    "autoRenewDescription": "Je, usajili huu utajirudia kiotomatiki?",
+    "autoRenewLabel": "Jirudia kiotomatiki",
+    "beforeBilling": "kabla ya malipo",
+    "billingCycleLabel": "Mzunguko wa Malipo *",
+    "cancel": "Ghairi",
+    "categoryLabel": "Kategoria",
+    "categoryNone": "Hakuna",
+    "categoryPlaceholder": "Chagua kategoria...",
+    "currencyCAD": "CAD - Dola ya Kanada",
     "currencyEUR": "EUR - Euro",
-    "currencyGBP": "GBP - British Pound",
-    "currencyLabel": "Currency",
+    "currencyGBP": "GBP - Pauni ya Uingereza",
+    "currencyLabel": "Sarafu",
     "currencySymbol": "$",
-    "currencyUSD": "USD - US Dollar",
-    "cycleAnnual": "Annual (12 months)",
-    "cycleBiWeekly": "Bi-weekly (every 2 weeks)",
-    "cycleMonthly": "Monthly",
-    "cycleQuarterly": "Quarterly (3 months)",
-    "cycleWeekly": "Weekly",
-    "descriptionLabel": "Description",
-    "descriptionPlaceholder": "e.g., Family plan, Pro tier",
-    "editTitle": "Edit Subscription",
-    "nameLabel": "Subscription Name *",
-    "namePlaceholder": "e.g., Netflix, Spotify, Adobe CC",
-    "nextBillingDateLabel": "Next Billing Date *",
-    "notesLabel": "Notes",
-    "notesPlaceholder": "Any additional notes...",
-    "paymentMethodLabel": "Payment Method",
-    "paymentMethodPlaceholder": "e.g., Visa ending 1234",
-    "remindMe": "Remind me",
-    "reminder1Day": "1 day",
-    "reminder1Week": "1 week",
-    "reminder2Weeks": "2 weeks",
-    "reminder3Days": "3 days",
-    "reminder5Days": "5 days",
-    "remindersLabel": "Reminders",
-    "saveChanges": "Save Changes",
-    "saving": "Saving...",
-    "startDateLabel": "Start Date *",
-    "statusActive": "Active",
-    "statusCancelled": "Cancelled",
-    "statusLabel": "Status",
-    "statusPaused": "Paused",
-    "statusTrial": "Trial",
-    "trialEndDateHint": "Set when your free trial ends to track it",
-    "trialEndDateLabel": "Trial End Date",
-    "validationInvalidAmount": "Please enter a valid amount",
-    "validationNameRequired": "Please enter a subscription name",
-    "validationNextBillingRequired": "Please enter the next billing date",
-    "websiteUrlLabel": "Website / Login URL"
+    "currencyUSD": "USD - Dola ya Marekani",
+    "cycleAnnual": "Kila Mwaka (miezi 12)",
+    "cycleBiWeekly": "Kila Wiki Mbili (kila wiki 2)",
+    "cycleMonthly": "Kila Mwezi",
+    "cycleQuarterly": "Kila Robo Mwaka (miezi 3)",
+    "cycleWeekly": "Kila Wiki",
+    "descriptionLabel": "Maelezo",
+    "descriptionPlaceholder": "mfano, Mpango wa Familia, Kiwango cha Pro",
+    "editTitle": "Hariri Usajili",
+    "nameLabel": "Jina la Usajili *",
+    "namePlaceholder": "mfano, Netflix, Spotify, Adobe CC",
+    "nextBillingDateLabel": "Tarehe ya Malipo Yajayo *",
+    "notesLabel": "Maelezo",
+    "notesPlaceholder": "Maelezo yoyote ya ziada...",
+    "paymentMethodLabel": "Njia ya Malipo",
+    "paymentMethodPlaceholder": "mfano, Visa inayoishia 1234",
+    "remindMe": "Nikumbushe",
+    "reminder1Day": "Siku 1",
+    "reminder1Week": "Wiki 1",
+    "reminder2Weeks": "Wiki 2",
+    "reminder3Days": "Siku 3",
+    "reminder5Days": "Siku 5",
+    "remindersLabel": "Vikumbusho",
+    "saveChanges": "Hifadhi Mabadiliko",
+    "saving": "Inahifadhi...",
+    "startDateLabel": "Tarehe ya Kuanza *",
+    "statusActive": "Hai",
+    "statusCancelled": "Imefutwa",
+    "statusLabel": "Hali",
+    "statusPaused": "Imesimamishwa",
+    "statusTrial": "Jaribio",
+    "trialEndDateHint": "Weka wakati jaribio lako la bure linaisha kulifuatilia",
+    "trialEndDateLabel": "Tarehe ya Mwisho wa Jaribio",
+    "validationInvalidAmount": "Tafadhali weka kiasi halali",
+    "validationNameRequired": "Tafadhali weka jina la usajili",
+    "validationNextBillingRequired": "Tafadhali weka tarehe ya malipo yajayo",
+    "websiteUrlLabel": "Tovuti / URL ya Kuingia"
   },
   "subscriptions": {
-    "addSubscription": "Add Subscription",
-    "allCategories": "All Categories",
-    "clearFilters": "Clear filters",
-    "deleteConfirmDescription": "Are you sure you want to delete this subscription? This action cannot be undone.",
-    "deleteConfirmLabel": "Delete",
-    "deleteConfirmTitle": "Delete Subscription",
-    "deleteError": "Failed to delete subscription",
-    "dismissError": "Failed to dismiss subscription",
+    "addSubscription": "Ongeza Usajili",
+    "allCategories": "Kategoria Zote",
+    "clearFilters": "Futa vichujio",
+    "deleteConfirmDescription": "Una uhakika unataka kufuta usajili huu? Kitendo hiki hakiwezi kutendeka upya.",
+    "deleteConfirmLabel": "Futa",
+    "deleteConfirmTitle": "Futa Usajili",
+    "deleteError": "Imeshindwa kufuta usajili",
+    "dismissError": "Imeshindwa kuondoa usajili",
     "empty": {
-      "noMatching": "No matching subscriptions",
-      "noMatchingDescription": "Try adjusting your filters or search query.",
-      "noSubscriptions": "No subscriptions yet",
-      "noSubscriptionsDescription": "Add your subscriptions manually or import transactions to auto-detect recurring payments."
+      "noMatching": "Hakuna usajili unaolingana",
+      "noMatchingDescription": "Jaribu kurekebisha vichujio vyako au swali la utafutaji.",
+      "noSubscriptions": "Hakuna usajili bado",
+      "noSubscriptionsDescription": "Ongeza usajili wako kwa mkono au agiza miamala kugundua malipo ya kujirudia kiotomatiki."
     },
     "help": {
-      "description": "Manual: Add subscriptions you want to track precisely. Auto-detected: We analyze your transactions to find recurring patterns. Claim auto-detected subscriptions to manage them manually with reminders and more control.",
-      "title": "Smart Subscription Management"
+      "description": "Kwa Mkono: Ongeza usajili unaotaka kufuatilia kwa usahihi. Imegunduliwa kiotomatiki: Tunachambua miamala yako kupata mifumo ya kujirudia. Dai usajili uliogunduliwa kiotomatiki kuusimamia kwa mkono na vikumbusho na udhibiti zaidi.",
+      "title": "Usimamizi Mzuri wa Usajili"
     },
-    "importTransactions": "Import Transactions",
-    "loading": "Loading subscriptions...",
-    "refreshAutoDetection": "Refresh auto-detection",
-    "saveError": "Failed to save subscription",
-    "searchPlaceholder": "Search subscriptions...",
+    "importTransactions": "Agiza Miamala",
+    "loading": "Inapakia usajili...",
+    "refreshAutoDetection": "Sasisha ugunduzi wa kiotomatiki",
+    "saveError": "Imeshindwa kuhifadhi usajili",
+    "searchPlaceholder": "Tafuta usajili...",
     "sort": {
-      "amount": "Amount",
-      "ascending": "Sort ascending",
-      "dateAdded": "Date Added",
-      "descending": "Sort descending",
-      "name": "Name",
-      "nextBilling": "Next Billing"
+      "amount": "Kiasi",
+      "ascending": "Panga kupanda",
+      "dateAdded": "Tarehe ya Kuongezwa",
+      "descending": "Panga kushuka",
+      "name": "Jina",
+      "nextBilling": "Malipo Yajayo"
     },
     "stats": {
-      "active": "Active",
-      "annual": "Annual",
-      "estimatedCost": "Estimated cost",
-      "inactive": "{count} inactive",
-      "monthly": "Monthly",
-      "next7Days": "Next 7 Days",
-      "projectedSpend": "Projected spend",
-      "upcomingCharges": "Upcoming charges"
+      "active": "Hai",
+      "annual": "Kila Mwaka",
+      "estimatedCost": "Gharama inayokadiriwa",
+      "inactive": "{count} isiyo hai",
+      "monthly": "Kila Mwezi",
+      "next7Days": "Siku 7 Zijazo",
+      "projectedSpend": "Matumizi yanayotarajiwa",
+      "upcomingCharges": "Malipo yanayokuja"
     },
-    "subtitle": "Manage your recurring payments and subscriptions",
-    "title": "Subscriptions",
+    "subtitle": "Simamia malipo yako ya kujirudia na usajili",
+    "title": "Usajili",
     "viewMode": {
-      "active": "Active",
-      "all": "All",
-      "analysis": "Analysis",
-      "detected": "Detected",
-      "manual": "Manual"
+      "active": "Hai",
+      "all": "Zote",
+      "analysis": "Uchambuzi",
+      "detected": "Zilizogunduliwa",
+      "manual": "Kwa Mkono"
     }
   },
   "syncStatus": {
-    "daysAgo": "{days}d ago",
-    "devices": "{connected}/{total} devices",
-    "devicesConnected": "{connected}/{total} devices connected",
-    "hoursAgo": "{hours}h ago",
-    "justNow": "Just now",
-    "lastSync": "Last sync: {time}",
-    "minutesAgo": "{minutes}m ago",
-    "never": "Never",
-    "offline": "Offline",
-    "partialSync": "Partial Sync",
-    "syncError": "Sync Error",
-    "synced": "Synced",
-    "syncing": "Syncing..."
+    "daysAgo": "siku {days} zilizopita",
+    "devices": "Vifaa {connected}/{total}",
+    "devicesConnected": "Vifaa {connected}/{total} vimeunganishwa",
+    "hoursAgo": "masaa {hours} yaliyopita",
+    "justNow": "Sasa hivi",
+    "lastSync": "Usawazishaji wa mwisho: {time}",
+    "minutesAgo": "dakika {minutes} zilizopita",
+    "never": "Kamwe",
+    "offline": "Nje ya Mtandao",
+    "partialSync": "Usawazishaji wa Sehemu",
+    "syncError": "Hitilafu ya Usawazishaji",
+    "synced": "Imesawazishwa",
+    "syncing": "Inasawazisha..."
   },
   "tooltip": {
     "ariaLabel": "Maelezo zaidi",
     "learnMore": "Jifunze zaidi →"
   },
   "trainMl": {
-    "confidence": "Confidence",
-    "failedToLoadModel": "Failed to load model: {error}",
-    "finalLoss": "Final Loss",
-    "howItWorks": "How it works",
-    "howStep1": "Generates ~350 training examples from 35 categorization rules",
-    "howStep2": "Trains a neural network (64→32 neurons) using TensorFlow.js",
-    "howStep3": "Achieves 90%+ accuracy on test set",
-    "howStep4": "Saves model to IndexedDB for fast predictions",
-    "howStep5": "Fallback for transactions that don't match rules",
-    "howToUse": "How to Use",
-    "loadSavedModel": "Load Saved Model",
-    "lowerIsBetter": "Lower is better",
-    "modelLoadedSuccess": "Model loaded successfully!",
-    "modelSavedReady": "Model saved to IndexedDB and ready for predictions.",
-    "noSavedModel": "No saved model found. Please train first.",
-    "subtitle": "Train a neural network to categorize transactions",
-    "targetAccuracy": "Target: ≥90%",
-    "testAccuracy": "Test Accuracy",
-    "testPredictions": "Test Predictions",
-    "title": "ML Categorization Model",
-    "trainModel": "Train Model",
-    "trainingComplete": "Training Complete!",
-    "trainingFailed": "Training Failed",
-    "trainingInProgress": "Training in progress... This may take 30-60 seconds.",
-    "trainingModel": "Training Model...",
-    "unknownError": "Unknown error",
-    "useStep1": "<strong>1. Train Model:</strong> Click \"Train Model\" to generate training data and train the neural network (30-60s)",
-    "useStep2": "<strong>2. Automatic Integration:</strong> The model is automatically used as a fallback when rule-based categorization fails",
-    "useStep3": "<strong>3. Hybrid System:</strong> Rules are tried first (fast), ML is used for unknown patterns",
-    "useStep4": "<strong>4. Model Persistence:</strong> Trained model is saved to IndexedDB and loads automatically",
-    "useStep5": "<strong>5. Retraining:</strong> Run training again to update the model with new data"
+    "confidence": "Uhakika",
+    "failedToLoadModel": "Imeshindwa kupakia modeli: {error}",
+    "finalLoss": "Hasara ya Mwisho",
+    "howItWorks": "Jinsi inavyofanya kazi",
+    "howStep1": "Inatengeneza ~350 mifano ya mafunzo kutoka sheria 35 za upangaji",
+    "howStep2": "Inafundisha mtandao wa neva (neuroni 64→32) kwa kutumia TensorFlow.js",
+    "howStep3": "Inafikia usahihi wa 90%+ kwenye seti ya majaribio",
+    "howStep4": "Inahifadhi modeli katika IndexedDB kwa utabiri wa haraka",
+    "howStep5": "Njia mbadala kwa miamala isiyolingana na sheria",
+    "howToUse": "Jinsi ya Kutumia",
+    "loadSavedModel": "Pakia Modeli Iliyohifadhiwa",
+    "lowerIsBetter": "Chini ndio bora",
+    "modelLoadedSuccess": "Modeli imepakiwa kwa mafanikio!",
+    "modelSavedReady": "Modeli imehifadhiwa katika IndexedDB na iko tayari kwa utabiri.",
+    "noSavedModel": "Hakuna modeli iliyohifadhiwa iliyopatikana. Tafadhali fundisha kwanza.",
+    "subtitle": "Fundisha mtandao wa neva kupanga miamala",
+    "targetAccuracy": "Lengo: ≥90%",
+    "testAccuracy": "Usahihi wa Majaribio",
+    "testPredictions": "Utabiri wa Majaribio",
+    "title": "Modeli ya Upangaji wa ML",
+    "trainModel": "Fundisha Modeli",
+    "trainingComplete": "Mafunzo Yamekamilika!",
+    "trainingFailed": "Mafunzo Yameshindwa",
+    "trainingInProgress": "Mafunzo yanaendelea... Hii inaweza kuchukua sekunde 30-60.",
+    "trainingModel": "Inafundisha Modeli...",
+    "unknownError": "Hitilafu isiyojulikana",
+    "useStep1": "<strong>1. Fundisha Modeli:</strong> Bonyeza \"Fundisha Modeli\" kutengeneza data ya mafunzo na kufundisha mtandao wa neva (sekunde 30-60)",
+    "useStep2": "<strong>2. Ushirikiano wa Kiotomatiki:</strong> Modeli hutumika kiotomatiki kama njia mbadala upangaji wa sheria unaposhindwa",
+    "useStep3": "<strong>3. Mfumo wa Mchanganyiko:</strong> Sheria hujaribiwa kwanza (haraka), ML hutumika kwa mifumo isiyojulikana",
+    "useStep4": "<strong>4. Kudumu kwa Modeli:</strong> Modeli iliyofundishwa huhifadhiwa katika IndexedDB na hupakia kiotomatiki",
+    "useStep5": "<strong>5. Kufundisha Upya:</strong> Endesha mafunzo tena kusasisha modeli na data mpya"
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "Akaunti"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} zinapatikana",
+      "label": "Chaguzi za Hali ya Juu"
     },
     "amount": {
-      "label": "Amount",
+      "label": "Kiasi",
       "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "validationError": "Tafadhali weka kiasi halali"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "Ongeza Muamala",
+      "adding": "Inaongeza...",
+      "cancel": "Ghairi",
+      "update": "Sasisha Muamala",
+      "updating": "Inasasisha..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "AI inapanga...",
+      "create": "Unda",
+      "createNew": "+ Unda Kategoria Mpya",
+      "label": "Kategoria",
+      "lastUsed": "Inatumia mwisho: {category}",
+      "namePlaceholder": "Jina la kategoria...",
+      "selectPlaceholder": "Chagua kategoria...",
+      "subcategoriesPlaceholder": "Kategoria ndogo (hiari, zitenganishwe kwa koma)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Funga dirisha",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "Kategoria \"{name}\" imeundwa!",
+      "failed": "Imeshindwa kuunda kategoria",
+      "nameRequired": "Jina la kategoria linahitajika"
     },
     "date": {
-      "label": "Date"
+      "label": "Tarehe"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "Maelezo",
+      "placeholder": "mfano, Ununuzi wa mboga dukani"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "Baada ya marekebisho 3 yanayofanana, miamala ya baadaye kutoka kwa muuzaji huyu itapangwa kiotomatiki.",
+      "title": "Imejifunza!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "Maelezo",
+      "placeholder": "Ongeza maelezo yoyote ya ziada..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "Ongeza Risiti Mpya",
+      "deleteConfirm": "Una uhakika unataka kufuta risiti hii?",
+      "deleteFailed": "Imeshindwa kufuta risiti",
+      "deleteReceipt": "Futa risiti",
+      "existing": "Risiti zilizopo ({count})",
+      "label": "Viambatanisho vya Risiti",
+      "newFile": "Mpya: {filename}",
+      "remove": "Ondoa",
+      "viewFull": "Tazama risiti kamili"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "Kategoria Ndogo",
+      "none": "Hakuna",
+      "selectPlaceholder": "Chagua kategoria ndogo..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "Lebo (zitenganishwe kwa koma)",
+      "placeholder": "mfano, mboga, wiki, muhimu"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "Ongeza Muamala",
+      "edit": "Hariri Muamala"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "Matumizi",
+      "income": "Mapato",
+      "label": "Aina"
     }
   },
   "transactionSearch": {
-    "amountRangeLabel": "Amount range",
-    "clearRecent": "Clear",
-    "filterName": "Filter name",
-    "noResults": "No transactions found",
-    "noResultsDescription": "Try a different search or adjust your filters",
-    "noTransactionsYet": "No transactions yet",
-    "placeholder": "Search transactions...",
-    "placeholderExtended": "Try 'coffee last week' or 'amount:>50'",
-    "recentSearchLabel": "Recent search",
-    "recentSearches": "Recent Searches",
-    "resultCount": "{count} {count, plural, =1 {result} other {results}}",
-    "save": "Save",
-    "saveFilter": "Save Filter",
-    "savedFilters": "Saved Filters",
-    "searchFilterLabel": "Search filter",
-    "searchTipAmount": "Use <code>$50-100</code> for amount ranges",
-    "searchTipChars": "Type 3+ characters to search transactions",
-    "searchTipNL": "Try <code>coffee last week</code> for natural language",
-    "searchTipsIntro": "Search Tips:",
-    "searchingFor": "Searching for: {query}",
+    "amountRangeLabel": "Masafa ya kiasi",
+    "clearRecent": "Futa",
+    "filterName": "Jina la kichujio",
+    "noResults": "Hakuna miamala iliyopatikana",
+    "noResultsDescription": "Jaribu utafutaji tofauti au rekebisha vichujio vyako",
+    "noTransactionsYet": "Hakuna miamala bado",
+    "placeholder": "Tafuta miamala...",
+    "placeholderExtended": "Jaribu 'kahawa wiki iliyopita' au 'kiasi:>50'",
+    "recentSearchLabel": "Utafutaji wa hivi karibuni",
+    "recentSearches": "Utafutaji wa Hivi Karibuni",
+    "resultCount": "{count, plural, =1 {Matokeo 1} other {Matokeo #}}",
+    "save": "Hifadhi",
+    "saveFilter": "Hifadhi Kichujio",
+    "savedFilters": "Vichujio Vilivyohifadhiwa",
+    "searchFilterLabel": "Kichujio cha utafutaji",
+    "searchTipAmount": "Tumia <code>$50-100</code> kwa masafa ya kiasi",
+    "searchTipChars": "Andika herufi 3+ kutafuta miamala",
+    "searchTipNL": "Jaribu <code>kahawa wiki iliyopita</code> kwa lugha ya kawaida",
+    "searchTipsIntro": "Vidokezo vya Utafutaji:",
+    "searchingFor": "Inatafuta: {query}",
     "suggestions": {
-      "amounts": "Amount Ranges",
-      "categories": "Categories",
-      "merchants": "Merchants",
-      "recent": "Recent"
+      "amounts": "Masafa ya Kiasi",
+      "categories": "Kategoria",
+      "merchants": "Wafanyabiashara",
+      "recent": "Za Hivi Karibuni"
     },
-    "suggestionsHeading": "Suggestions",
+    "suggestionsHeading": "Mapendekezo",
     "tips": {
-      "amount": "Amount: '$50-100' or 'amount:>50'",
-      "category": "Category: 'groceries' or 'category:food'",
-      "date": "Date: 'last week', 'this month', 'date:last30'",
-      "fuzzy": "Typo-tolerant: 'starbukcs' finds 'Starbucks'",
-      "title": "Search Tips",
-      "type": "Type: 'type:income' or 'type:expense'"
+      "amount": "Kiasi: '$50-100' au 'kiasi:>50'",
+      "category": "Kategoria: 'mboga' au 'kategoria:chakula'",
+      "date": "Tarehe: 'wiki iliyopita', 'mwezi huu', 'tarehe:siku30'",
+      "fuzzy": "Inavumilia makosa: 'starbukcs' hupata 'Starbucks'",
+      "title": "Vidokezo vya Utafutaji",
+      "type": "Aina: 'aina:mapato' au 'aina:matumizi'"
     },
-    "transactionCount": "{count} {count, plural, =1 {transaction} other {transactions}}",
-    "usedTimes": "Used {count} {count, plural, =1 {time} other {times}}",
-    "viewAllResults": "View all {count} results",
-    "resultsFound": "{count} {count, plural, =1 {result} other {results}} found",
-    "suggestionsAvailable": "{count} {count, plural, =1 {suggestion} other {suggestions}} available"
+    "transactionCount": "{count, plural, =1 {Muamala 1} other {Miamala #}}",
+    "usedTimes": "Imetumika {count, plural, =1 {mara 1} other {mara #}}",
+    "viewAllResults": "Tazama matokeo yote {count}",
+    "resultsFound": "{count, plural, =1 {Tokeo 1} other {Matokeo #}} yamepatikana",
+    "suggestionsAvailable": "{count, plural, =1 {Pendekezo 1} other {Mapendekezo #}} yanapatikana"
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "Ambatisha risiti",
+      "delete": "Futa",
+      "edit": "Hariri",
+      "split": "Gawanya"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "Hakuna miamala ya kuonyesha",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "Akaunti",
+      "actions": "Vitendo",
+      "amount": "Kiasi",
+      "category": "Kategoria",
+      "date": "Tarehe",
+      "description": "Maelezo"
     }
   },
   "transactions": {
@@ -5099,139 +5099,139 @@
       "title": "Bili Zinazokuja"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "Muhtasari wa mifumo yako ya matumizi ya wiki",
+      "title": "Muhtasari wa Wiki"
     }
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
-      "createNew": "Create New",
-      "description": "Map YNAB categories to your existing categories or create new ones.",
-      "mapToExisting": "Map to Existing",
-      "selectCategory": "Select category...",
-      "skip": "Skip",
-      "title": "Category Mapping",
-      "willCreate": "Will create:"
+      "category": "{count, plural, =1 {Kategoria 1} other {Kategoria #}}",
+      "createNew": "Unda Mpya",
+      "description": "Ramani kategoria za YNAB kwa kategoria zako zilizopo au unda mpya.",
+      "mapToExisting": "Ramani kwa Zilizopo",
+      "selectCategory": "Chagua kategoria...",
+      "skip": "Ruka",
+      "title": "Ulinganishaji wa Kategoria",
+      "willCreate": "Itaunda:"
     },
     "completeStep": {
-      "errors": "Errors",
-      "importAnother": "Import Another",
-      "success": "Import Complete!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
-      "viewTransactions": "View Transactions",
-      "whatNext": "What would you like to do next?",
-      "withIssues": "Import Completed with Issues"
+      "errors": "Hitilafu",
+      "importAnother": "Agiza Nyingine",
+      "success": "Uagizaji Umekamilika!",
+      "successMessage": "{count, plural, =1 {Kipengele 1 kimeagizwa} other {Vipengele # vimeagizwa}} kwa mafanikio kutoka YNAB.",
+      "viewTransactions": "Tazama Miamala",
+      "whatNext": "Ungependa kufanya nini sasa?",
+      "withIssues": "Uagizaji Umekamilika na Matatizo"
     },
     "footer": {
-      "back": "Back",
-      "done": "Done",
-      "next": "Next",
-      "startImport": "Start Import"
+      "back": "Rudi",
+      "done": "Imekamilika",
+      "next": "Endelea",
+      "startImport": "Anza Uagizaji"
     },
     "header": {
-      "closeLabel": "Close wizard",
-      "subtitle": "Migrate your budget data seamlessly",
-      "title": "Import from YNAB"
+      "closeLabel": "Funga mchawi",
+      "subtitle": "Hamisha data yako ya bajeti kwa urahisi",
+      "title": "Agiza kutoka YNAB"
     },
     "importingStep": {
-      "finishing": "Finishing up...",
-      "importingAccounts": "Importing accounts...",
-      "importingBudgets": "Importing budgets...",
-      "importingCategories": "Importing categories...",
-      "importingTransactions": "Importing transactions...",
-      "title": "Importing your YNAB data..."
+      "finishing": "Inamaliza...",
+      "importingAccounts": "Inaagiza akaunti...",
+      "importingBudgets": "Inaagiza bajeti...",
+      "importingCategories": "Inaagiza kategoria...",
+      "importingTransactions": "Inaagiza miamala...",
+      "title": "Inaagiza data yako ya YNAB..."
     },
     "optionsStep": {
       "accountOptions": {
-        "includeClosedAccounts": "Include closed accounts",
-        "includeOffBudgetAccounts": "Include off-budget accounts",
-        "title": "Account Options"
+        "includeClosedAccounts": "Jumuisha akaunti zilizofungwa",
+        "includeOffBudgetAccounts": "Jumuisha akaunti zisizo za bajeti",
+        "title": "Chaguzi za Akaunti"
       },
       "budgetOptions": {
-        "importGoals": "Import savings goals as future purchases",
-        "title": "Budget Options"
+        "importGoals": "Agiza malengo ya akiba kama ununuzi wa baadaye",
+        "title": "Chaguzi za Bajeti"
       },
       "hiddenCategories": {
-        "archive": "Archive",
-        "archiveDesc": "Import as archived (recommended)",
-        "description": "How to handle YNAB categories marked as hidden?",
-        "import": "Import",
-        "importDesc": "Import as active categories",
-        "skip": "Skip",
-        "skipDesc": "Don't import hidden categories",
-        "title": "Hidden Categories"
+        "archive": "Hifadhi",
+        "archiveDesc": "Agiza kama zilizohifadhiwa (inayopendekezwa)",
+        "description": "Jinsi ya kushughulikia kategoria za YNAB zilizowekwa alama kuwa zilizofichwa?",
+        "import": "Agiza",
+        "importDesc": "Agiza kama kategoria hai",
+        "skip": "Ruka",
+        "skipDesc": "Usiagize kategoria zilizofichwa",
+        "title": "Kategoria Zilizofichwa"
       }
     },
     "previewStep": {
-      "accounts": "Accounts",
-      "allocations": "{count} allocations",
-      "budgetMonths": "Budget Months",
-      "categories": "Categories",
-      "dateRange": "Transaction Date Range",
-      "description": "Review the data that will be imported.",
-      "duplicates": "{count} duplicates",
-      "new": "{count} new",
-      "newMapped": "{created} new, {mapped} mapped",
-      "preparingPreview": "Preparing preview...",
-      "title": "Import Preview",
-      "transactions": "Transactions",
-      "warnings": "Warnings"
+      "accounts": "Akaunti",
+      "allocations": "Mgawanyo {count}",
+      "budgetMonths": "Miezi ya Bajeti",
+      "categories": "Kategoria",
+      "dateRange": "Masafa ya Tarehe za Miamala",
+      "description": "Kagua data itakayoagizwa.",
+      "duplicates": "Nakala {count}",
+      "new": "{count} mpya",
+      "newMapped": "{created} mpya, {mapped} zilizounganishwa",
+      "preparingPreview": "Inaandaa hakiki...",
+      "title": "Hakiki ya Uagizaji",
+      "transactions": "Miamala",
+      "warnings": "Onyo"
     },
     "steps": {
       "categories": {
-        "description": "Map to existing categories",
-        "title": "Categories"
+        "description": "Ramani kwa kategoria zilizopo",
+        "title": "Kategoria"
       },
       "complete": {
-        "description": "Migration finished",
-        "title": "Complete"
+        "description": "Uhamishaji umekamilika",
+        "title": "Imekamilika"
       },
       "importing": {
-        "description": "Processing your data",
-        "title": "Importing"
+        "description": "Inachakata data yako",
+        "title": "Inaagiza"
       },
       "options": {
-        "description": "Configure import settings",
-        "title": "Options"
+        "description": "Sanidi mipangilio ya uagizaji",
+        "title": "Chaguzi"
       },
       "preview": {
-        "description": "Review before import",
-        "title": "Preview"
+        "description": "Kagua kabla ya kuagiza",
+        "title": "Hakiki"
       },
       "upload": {
-        "description": "Select YNAB export file",
-        "title": "Upload"
+        "description": "Chagua faili ya YNAB iliyohamishwa",
+        "title": "Pakia"
       }
     },
     "uploadStep": {
-      "accounts": "Accounts",
-      "categories": "Categories",
-      "clickToSelect": "Click to select a file",
-      "dragAndDrop": "or drag and drop here",
-      "fileSummary": "File Summary",
-      "format": "Format",
-      "formatApiExport": "YNAB API Export",
-      "formatApiExportDesc": "JSON from nYNAB",
-      "formatCsv": "CSV Export",
-      "formatCsvDesc": "From YNAB web app",
+      "accounts": "Akaunti",
+      "categories": "Kategoria",
+      "clickToSelect": "Bonyeza kuchagua faili",
+      "dragAndDrop": "au buruta na udondoshe hapa",
+      "fileSummary": "Muhtasari wa Faili",
+      "format": "Muundo",
+      "formatApiExport": "Uhamishaji wa YNAB API",
+      "formatApiExportDesc": "JSON kutoka nYNAB",
+      "formatCsv": "Uhamishaji wa CSV",
+      "formatCsvDesc": "Kutoka programu ya YNAB ya wavuti",
       "formatYfull": "Budget.yfull / Budget.ynab4",
-      "formatYfullDesc": "YNAB4 desktop export",
-      "parsing": "Parsing file...",
-      "supportedFormats": "Supported Formats",
-      "transactions": "Transactions"
+      "formatYfullDesc": "Uhamishaji wa YNAB4 wa kompyuta",
+      "parsing": "Inachambua faili...",
+      "supportedFormats": "Miundo Inayoauni",
+      "transactions": "Miamala"
     },
     "errors": {
-      "parseFailed": "Failed to parse YNAB file",
-      "previewFailed": "Failed to generate preview",
-      "accountImportFailed": "Account import failed: {details}",
-      "categoryImportFailed": "Category import failed: {details}",
-      "transactionImportFailed": "Transaction import failed: {details}",
-      "unknownError": "Unknown error",
-      "budgetImportFailed": "Budget import failed: {details}"
+      "parseFailed": "Imeshindwa kuchambua faili ya YNAB",
+      "previewFailed": "Imeshindwa kutengeneza hakiki",
+      "accountImportFailed": "Uagizaji wa akaunti umeshindwa: {details}",
+      "categoryImportFailed": "Uagizaji wa kategoria umeshindwa: {details}",
+      "transactionImportFailed": "Uagizaji wa miamala umeshindwa: {details}",
+      "unknownError": "Hitilafu isiyojulikana",
+      "budgetImportFailed": "Uagizaji wa bajeti umeshindwa: {details}"
     },
-    "importSuccess": "YNAB data imported successfully!",
-    "importWithErrors": "Import completed with {count, plural, =1 {1 error} other {# errors}}"
+    "importSuccess": "Data ya YNAB imeagizwa kwa mafanikio!",
+    "importWithErrors": "Uagizaji umekamilika na {count, plural, =1 {hitilafu 1} other {hitilafu #}}"
   },
   "balanceReconciliation": {
     "title": "Uingizaji Umekamilika!",
