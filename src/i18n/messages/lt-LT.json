@@ -63,34 +63,34 @@
   },
   "accessibleChart": {
     "buttons": {
-      "chart": "Chart",
-      "showChart": "Show chart view",
-      "showTable": "Show data table view",
-      "table": "Table"
+      "chart": "Diagrama",
+      "showChart": "Rodyti diagramos rodinį",
+      "showTable": "Rodyti duomenų lentelės rodinį",
+      "table": "Lentelė"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
-    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "chartDescription": "{description}. Rodoma {dataPoints} duomenų taškų. {dataList}. Paspauskite mygtuką Lentelė, kad peržiūrėtumėte duomenis lentelės formatu su klaviatūros navigacijos palaikymu.",
+    "chartTypeDescription": "Tai {chartType} diagrama su {dataPoints} duomenų taškais.",
     "footer": {
-      "average": "Average:",
-      "total": "Total:"
+      "average": "Vidurkis:",
+      "total": "Iš viso:"
     },
     "keyboardNav": {
-      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
-      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+      "srOnly": "Naudokite rodyklių klavišus naršymui tarp eilučių. Paspauskite Tab, kad pereitumėte prie kito elemento.",
+      "visual": "Naudokite ← → arba ↑ ↓ klavišus naršymui • Home/End peršokti į pradžią/pabaigą"
     },
     "summary": {
-      "average": "Average: {value}.",
-      "highest": "Highest value: {label} at {value}.",
-      "lowest": "Lowest value: {label} at {value}.",
-      "total": "Total: {value}."
+      "average": "Vidurkis: {value}.",
+      "highest": "Didžiausia reikšmė: {label} – {value}.",
+      "lowest": "Mažiausia reikšmė: {label} – {value}.",
+      "total": "Iš viso: {value}."
     },
-    "switchedToChart": "Switched to chart view",
-    "switchedToTable": "Switched to table view",
+    "switchedToChart": "Perjungta į diagramos rodinį",
+    "switchedToTable": "Perjungta į lentelės rodinį",
     "tableHeaders": {
-      "additionalInfo": "Additional Info",
-      "category": "Category",
-      "period": "Period",
-      "value": "Value"
+      "additionalInfo": "Papildoma informacija",
+      "category": "Kategorija",
+      "period": "Laikotarpis",
+      "value": "Reikšmė"
     }
   },
   "actions": {

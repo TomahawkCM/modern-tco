@@ -63,34 +63,34 @@
   },
   "accessibleChart": {
     "buttons": {
-      "chart": "Chart",
-      "showChart": "Show chart view",
-      "showTable": "Show data table view",
-      "table": "Table"
+      "chart": "Grafikoa",
+      "showChart": "Grafiko ikuspegia erakutsi",
+      "showTable": "Datu-taularen ikuspegia erakutsi",
+      "table": "Taula"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
-    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "chartDescription": "{description}. {dataPoints} datu-puntu erakusten dira. {dataList}. Sakatu Taula botoia datuak taula formatuan ikusteko teklatu-nabigazio euskarriarekin.",
+    "chartTypeDescription": "Hau {chartType} grafiko bat da {dataPoints} datu-puntuekin.",
     "footer": {
-      "average": "Average:",
-      "total": "Total:"
+      "average": "Batez bestekoa:",
+      "total": "Guztira:"
     },
     "keyboardNav": {
-      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
-      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+      "srOnly": "Erabili gezi-teklak lerroen artean nabigatzeko. Sakatu Tab hurrengo elementura joateko.",
+      "visual": "Erabili ← → edo ↑ ↓ teklak nabigatzeko • Home/End hasierara/amaierara joateko"
     },
     "summary": {
-      "average": "Average: {value}.",
-      "highest": "Highest value: {label} at {value}.",
-      "lowest": "Lowest value: {label} at {value}.",
-      "total": "Total: {value}."
+      "average": "Batez bestekoa: {value}.",
+      "highest": "Baliorik altuena: {label}, {value}.",
+      "lowest": "Baliorik baxuena: {label}, {value}.",
+      "total": "Guztira: {value}."
     },
-    "switchedToChart": "Switched to chart view",
-    "switchedToTable": "Switched to table view",
+    "switchedToChart": "Grafiko ikuspegira aldatu da",
+    "switchedToTable": "Taula ikuspegira aldatu da",
     "tableHeaders": {
-      "additionalInfo": "Additional Info",
-      "category": "Category",
-      "period": "Period",
-      "value": "Value"
+      "additionalInfo": "Informazio Gehigarria",
+      "category": "Kategoria",
+      "period": "Aldia",
+      "value": "Balioa"
     }
   },
   "actions": {
@@ -225,40 +225,40 @@
     "whenColumn": "When"
   },
   "aiColumnMapper": {
-    "analyzing": "Analyzing CSV structure with AI...",
+    "analyzing": "CSV egitura AArekin aztertzen...",
     "buttons": {
-      "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
+      "apply": "Mapaketak Aplikatu eta Inportatu",
+      "cancel": "Utzi"
     },
-    "closeModal": "Close modal",
-    "columnMappings": "Column Mappings",
+    "closeModal": "Leihoa itxi",
+    "columnMappings": "Zutabeen Mapaketak",
     "columnTypes": {
-      "amount": "Amount",
-      "balance": "Balance",
-      "credit": "Credit",
-      "date": "Date",
-      "debit": "Debit",
-      "description": "Description",
-      "ignore": "Ignore"
+      "amount": "Zenbatekoa",
+      "balance": "Saldoa",
+      "credit": "Ordainketa",
+      "date": "Data",
+      "debit": "Zordunketa",
+      "description": "Deskribapena",
+      "ignore": "Baztertu"
     },
     "confidence": {
-      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
-      "title": "Detection Confidence"
+      "analyzed": "AAk {columnCount} zutabe eta {rowCount} lagin-lerro aztertu ditu",
+      "title": "Detekzio Konfiantza"
     },
     "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
-      "title": "Transaction Preview"
+      "amount": "Zenbatekoa",
+      "date": "Data",
+      "description": "Deskribapena",
+      "title": "Transakzioen Aurrebista"
     },
-    "samples": "Samples:",
+    "samples": "Laginak:",
     "saveConfig": {
-      "hint": "Next time you import from this bank, mappings will be automatic",
-      "label": "Save this bank configuration for future imports",
-      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+      "hint": "Hurrengo aldian banku honetatik inportatzen duzunean, mapaketak automatikoak izango dira",
+      "label": "Bankuaren konfigurazioa gorde etorkizuneko inportazioetarako",
+      "placeholder": "Sartu bankuaren izena (adib., Nire Kreditu Kooperatiba)"
     },
-    "subtitle": "Review AI-detected columns and adjust if needed",
-    "title": "AI Column Mapping Wizard"
+    "subtitle": "Berrikusi AAk detektatutako zutabeak eta doitu behar izanez gero",
+    "title": "AA Zutabe Mapeatzeko Morroia"
   },
   "amortizationChart": {
     "balanceDescription": "Your balance decreases over time as you make payments",
@@ -821,17 +821,17 @@
     }
   },
   "bulkActions": {
-    "applyTo": "Apply to {count}",
-    "categorize": "Categorize",
-    "clearSelection": "Clear selection",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
-    "noSubcategory": "No subcategory",
-    "selectAll": "Select all",
-    "selectCategory": "Select category...",
-    "selected": "{count} selected"
+    "applyTo": "{count}-(r)i aplikatu",
+    "categorize": "Kategorizatu",
+    "clearSelection": "Hautaketa garbitu",
+    "confirmDelete": "{count, plural, =1 {Transakzio 1 ezabatu} other {# transakzio ezabatu}}?",
+    "delete": "Ezabatu",
+    "deleteWarning": "Ekintza hau ezin da desegin.",
+    "export": "Esportatu",
+    "noSubcategory": "Azpikategoriarik ez",
+    "selectAll": "Denak hautatu",
+    "selectCategory": "Kategoria hautatu...",
+    "selected": "{count} hautatuak"
   },
   "calculators": {
     "budgetAnalyzer": {
@@ -1325,59 +1325,59 @@
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "Ekintzak",
+      "budget": "Aurrekontua",
+      "income": "Sarrerak",
+      "spending": "Gastuak",
+      "trends": "Joerak"
     }
   },
   "chatbotOptIn": {
     "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
+      "decline": "Ez, Eskerrik Asko",
+      "enable": "Chatbota Gaitu"
     },
     "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
+      "actions": "Aukeran, ekintzak burutu, hala nola transakzioak gehitu edo aurrekontuak sortu",
+      "answer": "Zure transakzioei, aurrekontuei eta gastu-ereduei buruzko galderei erantzun",
+      "insights": "Zure datuetan oinarritutako ikuspegiak eta gomendioak eman",
+      "search": "Zure finantza-datuak bilatu hizkuntza naturalarekin",
+      "title": "Zer Egin Dezake Chatbotak"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "Chatbot gaitzeko elkarrizketa itxi",
     "controls": {
       "dataAccess": {
         "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
+          "description": "Chatbotak ekintzak egin ditzake, hala nola transakzioak gehitu, aurrekontuak sortu eta zure datuetan aldaketak egin",
+          "title": "Sarbide Osoa"
         },
-        "label": "What can the chatbot do with your data?",
+        "label": "Zer egin dezake chatbotak zure datuekin?",
         "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
+          "description": "Chatbotak zure datuak ikusi eta galderei erantzun diezake, baina ezin du transakziorik/aurrekonturik gehitu, editatu edo ezabatu",
+          "title": "Irakurtzea Bakarrik (Gomendatua)"
         }
       },
       "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+        "days30": "30 egun",
+        "days7": "7 egun (Gomendatua)",
+        "forever": "Betirako gorde",
+        "label": "Zenbat denbora gorde behar ditugu zure elkarrizketak?",
+        "note": "Elkarrizketak zure nabigatzailean lokalki gordetzen dira. Edozein unetan ezabatu ditzakezu Ezarpenak → Pribatutasuna atalean."
       },
-      "title": "Privacy Controls"
+      "title": "Pribatutasun Kontrolak"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>Zure Eskubideak:</strong> Chatbota gaitzean, zure finantza-datuak OpenAIren APIaren bidez prozesatzeko baimena ematen duzu. Baimena edozein unetan kendu dezakezu chatbota desgaituz Ezarpenak → Pribatutasuna atalean. Zure datuak gure Pribatutasun Politikaren eta GDBBren eskakizunen arabera prozesatzen dira. Eskubidea duzu zure elkarrizketa-historia edozein unetan atzitzeko, ezabatzeko eta esportatzeko."
     },
     "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
+      "dataSent": "Finantza-datuak APIra bidaltzen dira zure galderei erantzuteko",
+      "disable": "Chatbota edozein unetan desgaitu dezakezu Ezarpenak → Pribatutasuna atalean",
+      "noTraining": "OpenAIk ez ditu API datuak erabiltzen ereduak entrenatzeko (euren politikaren arabera)",
+      "processedBy": "Zure elkarrizketak OpenAIren GPT-4 APIak prozesatzen ditu",
+      "title": "Pribatutasuna eta Datuen Erabilera"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "AAz bultzatutako finantza-laguntzailea",
+    "title": "Aurrekontu Chatbota Gaitu?"
   },
   "columnMapper": {
     "amount": "Amount",
@@ -1409,40 +1409,40 @@
     "useSavedMapping": "Use Saved Mapping"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "Ez da emaitzarik aurkitu.",
+    "search": "Bilatu...",
+    "select": "Hautatu..."
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "addTransaction": "Transakzioa Gehitu",
+      "budgets": "Aurrekontuak",
+      "categories": "Kategoriak",
+      "darkTheme": "Gai Iluna",
+      "dashboard": "Aginte-Panela",
+      "exportData": "Datuak Esportatu",
+      "futurePlans": "Etorkizuneko Planak",
+      "highContrastTheme": "Kontraste Handiko Gaia",
+      "importCsv": "CSV Inportatu",
+      "investments": "Inbertsioak",
+      "lightTheme": "Gai Argia",
+      "loans": "Maileguak",
+      "newBudget": "Aurrekontu Berria",
+      "reports": "Txostenak",
+      "retirement": "Erretiroa",
+      "scanReceipt": "Tiketa Eskaneatu",
+      "settings": "Ezarpenak",
+      "transactions": "Transakzioak"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "Itxura",
+      "quickActions": "Ekintza Azkarrak",
+      "tools": "Tresnak eta Ezarpenak",
+      "tracking": "Jarraipena eta Analisia",
+      "wealth": "Aberastasuna eta Planifikazioa"
     },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
+    "noResults": "Ez da emaitzarik aurkitu.",
+    "placeholder": "Idatzi komando bat edo bilatu..."
   },
   "common": {
     "cancel": "Ezeztatu",
@@ -1465,168 +1465,168 @@
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "Kontua Gehitu",
+        "allTransactions": "Transakzio Guztiak",
+        "imported": "Inportatuak",
+        "netWorth": "Ondare Garbia",
+        "noAccounts": "Ez da konturik gehitu oraindik",
+        "title": "Kontuen Saldoak",
+        "viewAll": "Denak Ikusi"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "createBudget": "Aurrekontua Sortu",
+        "noBudgets": "Ez da aurrekonturik ezarri",
+        "overBudget": "Aurrekontua gainditu da {amount}-(e)tan",
+        "remaining": "Geratzen dena",
+        "spent": "Gastatua",
+        "title": "Aurrekontuaren Aurrerapena",
+        "viewAll": "Aurrekontu Guztiak Ikusi"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "Ez dago ekitaldi aktiborik",
+        "title": "Ekitaldien Aurrekontuak",
+        "viewAll": "Denak Ikusi"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "addTransactions": "Transakzioak Gehitu",
+        "expenses": "Gastuak",
+        "income": "Sarrerak",
+        "net": "Garbia",
+        "noData": "Ez dago transakziorik oraindik",
+        "thisMonth": "Hilabete Honetan",
+        "title": "Sarrerak vs Gastuak"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "Gastuak",
+        "income": "Sarrerak",
+        "lastSixMonths": "Azken 6 Hilabeteak",
+        "needMoreData": "Gehitu 2+ hilabeteko transakzioak joerak ikusteko",
+        "notEnoughData": "Ez dago nahikoa historia",
+        "title": "Hileko Joerak"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "assets": "Aktiboak",
+        "liabilities": "Pasiboak",
+        "title": "Ondare Garbia",
+        "viewDetails": "Xehetasunak Ikusi"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "Transakzioa Gehitu",
+        "noTransactions": "Ez dago transakziorik oraindik",
+        "title": "Azken Transakzioak",
+        "uncategorized": "Kategorizatu gabea",
+        "viewAll": "Denak Ikusi"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
-        "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
-        "overBudget": "{amount} over budget",
-        "perCategory": "Per category",
-        "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "caution": "Kontuz gastuekin",
+        "createBudget": "Aurrekontua Sortu",
+        "dailyBudget": "Eguneko aurrekontua",
+        "danger": "Aurrekontua gainditua",
+        "daysRemaining": "{days} egun geratzen dira",
+        "noBudgets": "Ez da aurrekonturik ezarri oraindik",
+        "noData": "Ez da aurrekonturik ezarri oraindik",
+        "overBudget": "Aurrekontua {amount}-(e)tan gainditu da",
+        "perCategory": "Kategoriaka",
+        "remaining": "{amount} geratzen da",
+        "safe": "Bidean",
+        "title": "Gastatzeko Segurua",
+        "totalSafe": "Gastatzeko seguru guztira",
+        "viewAll": "Denak Ikusi"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "total": "Total",
-        "uncategorized": "Uncategorized"
+        "addTransactions": "Transakzioak Gehitu",
+        "moreCategories": "+{count} kategoria gehiago",
+        "noData": "Ez da gasturik jarraitu oraindik",
+        "thisMonth": "Hilabete Honetan",
+        "title": "Gastua Kategoriaren Arabera",
+        "total": "Guztira",
+        "uncategorized": "Kategorizatu gabea"
       },
       "streaks": {
-        "badges": "badges",
-        "dayStreak": "day streak",
-        "points": "points",
-        "title": "Streaks & Badges"
+        "badges": "bereizgarriak",
+        "dayStreak": "eguneko segida",
+        "points": "puntuak",
+        "title": "Segidak eta Bereizgarriak"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "addSubscription": "Harpidetza Gehitu",
+        "dueIn": "{days} egun barru",
+        "dueToday": "Gaur ordaindu behar da",
+        "dueTomorrow": "Bihar ordaindu behar da",
+        "noBills": "Ez dago hurrengo fakturarik",
+        "title": "Hurrengo Fakturak",
+        "viewAll": "Denak Ikusi"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
-        "vsLastWeek": "vs last week"
+        "title": "Asteko Laburpena",
+        "viewFull": "Berrikuste Osoa",
+        "vsLastWeek": "aurreko astearekin alderatuta"
       }
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "Beti ikusgai",
+    "ariaLabel": "Aginte-panelaren diseinua pertsonalizatu",
+    "button": "Pertsonalizatu",
+    "description": "Erakutsi edo ezkutatu aginte-paneleko widgetak. Arrastatu widgetak aginte-panelean beraien ordena aldatzeko.",
+    "reorderDescription": "Widget-en ordena aldatzeko, arrastatu eta jaregin widgetak zuzenean zure aginte-panelean. Erabili sagua edo ukimena widget txartel bakoitzeko arrastatzeko heldulekua (⋮⋮) hartzeko.",
+    "reorderTitle": "Widgetak Berrordenatu",
+    "resetButton": "Lehenetsitakoak Berrezarri",
+    "title": "Aginte-Panela Pertsonalizatu",
+    "toggleVisibility": "{name} ikusgarritasuna aldatu",
+    "widgetVisibility": "Widget-en Ikusgarritasuna",
+    "widgetsVisible": "{visible}/{total} widget ikusgai"
   },
   "debtAnalysis": {
     "cards": {
       "avgRate": {
-        "subtitle": "Weighted average",
-        "title": "Avg Interest Rate"
+        "subtitle": "Batez besteko haztatua",
+        "title": "Batez besteko Interes Tasa"
       },
       "debtFreeDate": {
-        "subtitle": "Estimated payoff",
-        "title": "Debt-Free Date"
+        "subtitle": "Aurreikusitako ordainketa",
+        "title": "Zorrik Gabeko Data"
       },
       "monthlyPayment": {
-        "subtitle": "Total monthly obligations",
-        "title": "Monthly Payment"
+        "subtitle": "Hileko betebehar osoa",
+        "title": "Hileko Ordainketa"
       },
       "totalDebt": {
-        "subtitle": "Across {count} active loans",
-        "title": "Total Debt"
+        "subtitle": "{count} mailegu aktiboen artean",
+        "title": "Zor Osoa"
       }
     },
     "charts": {
       "byType": {
-        "description": "Distribution of debt across loan types",
-        "title": "Debt by Type"
+        "description": "Zorraren banaketa mailegu moten artean",
+        "title": "Zorra Motaren Arabera"
       },
       "projection": {
-        "description": "Expected debt reduction over the next year",
-        "expectedReduction": "Expected reduction: {amount} over 12 months",
-        "title": "12-Month Payoff Projection"
+        "description": "Aurreikusitako zor murrizketa hurrengo urtean",
+        "expectedReduction": "Aurreikusitako murrizketa: {amount} 12 hilabetetan",
+        "title": "12 Hilabeteko Ordainketa Proiekzioa"
       }
     },
     "comparison": {
-      "description": "Side-by-side comparison of your active loans",
+      "description": "Zure mailegu aktiboen alde-aldeko konparazioa",
       "headers": {
-        "balance": "Balance",
-        "interestRate": "Interest Rate",
-        "loan": "Loan",
-        "monthlyPayment": "Monthly Payment",
-        "percentOfTotal": "% of Total Debt"
+        "balance": "Saldoa",
+        "interestRate": "Interes Tasa",
+        "loan": "Mailegua",
+        "monthlyPayment": "Hileko Ordainketa",
+        "percentOfTotal": "Zor Osoaren %"
       },
-      "title": "Loan Comparison",
-      "total": "Total"
+      "title": "Maileguen Konparazioa",
+      "total": "Guztira"
     },
     "empty": {
-      "addFirstLoan": "Add Your First Loan",
-      "description": "You don't have any active loans. Add a loan to see debt analytics.",
-      "title": "No Debt to Analyze"
+      "addFirstLoan": "Zure Lehen Mailegua Gehitu",
+      "description": "Ez duzu mailegu aktiborik. Gehitu mailegu bat zorren analitikak ikusteko.",
+      "title": "Ez Dago Zorrik Aztertzeko"
     },
-    "subtitle": "Comprehensive view of your loans and obligations",
-    "title": "Debt Analysis",
-    "viewAllLoans": "View All Loans"
+    "subtitle": "Zure maileguen eta betebeharren ikuspegi integrala",
+    "title": "Zorren Analisia",
+    "viewAllLoans": "Mailegu Guztiak Ikusi"
   },
   "debtOverview": {
     "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
@@ -1787,15 +1787,15 @@
     "variants": "Variants"
   },
   "dialog": {
-    "cancel": "Ezeztatu",
+    "cancel": "Utzi",
     "confirm": "Berretsi",
     "finalConfirmation": "Azken Berrespena:",
     "processing": "Prozesatzen...",
     "typeToConfirm": "Idatzi {text} ekintza hau berresteko.",
-    "confirmAction": "Ekintza berretsi"
+    "confirmAction": "Ekintza Berretsi"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "Arrastatu widgeta berrordenatzeko"
   },
   "duration": {
     "months": "{count, plural, =1 {1 month} other {# months}}",
@@ -1804,90 +1804,90 @@
   },
   "emptyStates": {
     "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
+      "description": "Sortu aurrekontuak kategoria desberdinetan gastuak jarraitzeko eta zure finantza-helburuak lortzeko.",
+      "heading": "Ez Da Aurrekonturik Sortu",
+      "primaryCta": "Zure Lehen Aurrekontua Sortu"
     },
     "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
+      "description": "Sortu kategoria pertsonalizatuak zure transakzioak lehenetsiez haratagoko antolatzen.",
+      "heading": "Ez Dago Kategoria Pertsonalizaturik",
+      "primaryCta": "Kategoria Gehitu"
     },
     "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
+      "description": "Hasi zure bankuko transakzioak inportatuz edo kontuak eskuz gehituz zure finantza-ikuspegi orokorra ikusteko.",
+      "heading": "Ongi Etorri Zure Aurrekontu Aplikaziora!",
+      "primaryCta": "CSV Inportatu",
+      "secondaryCta": "Transakzioa Gehitu"
     },
     "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
+      "description": "Ezarri finantza-helburuak, hala nola etxe bat erostea, hezkuntzarako aurreztea edo oporrak planifikatzea.",
+      "heading": "Ez Dago Etorkizuneko Planik",
+      "primaryCta": "Helburua Sortu"
     },
     "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
+      "description": "Jarraitu zure inbertsio-kontuak eta edukitzak zorroaren errendimendua eta ondare garbia kontrolatzeko.",
+      "heading": "Ez Da Inbertsiorik Jarraitzen",
+      "primaryCta": "Inbertsio-Kontua Gehitu"
     },
     "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
+      "description": "Jarraitu zure maileguak, hipotekak eta zorrak ordainketa-aurrerapena ikusteko eta ordainketak planifikatzeko.",
+      "heading": "Ez Da Mailegutik Jarraitzen",
+      "primaryCta": "Zure Lehen Mailegua Gehitu"
     },
     "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
+      "description": "Gehitu transakzioak eta aurrekontuak zure gastu-ereduei eta joerei buruzko txosten erabilgarriak sortzeko.",
+      "heading": "Ez Dago Daturik Txostenetarako",
+      "primaryCta": "Transakzioak Gehitu",
+      "secondaryCta": "CSV Inportatu"
     },
     "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
+      "description": "Planifikatu erretiroa kontuak jarraituz, beharrak kalkulatuz eta zure erretiro-denbora-lerroa bistaratuz.",
+      "heading": "Ez Dago Erretiro-Planik",
+      "primaryCta": "Planifikatzen Hasi"
     },
     "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
+      "description": "Hasi zure gastuak jarraituz zure lehen transakzioa gehituz. Eskuz gehitu dezakezu edo CSV fitxategi batetik inportatu.",
+      "heading": "Ez Dago Transakziorik Oraindik",
+      "primaryCta": "Transakzioa Gehitu",
+      "secondaryCta": "CSV Inportatu"
     }
   },
   "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
+    "aiAnalysis": "AA Analisia:",
+    "closeModal": "Leihoa itxi",
     "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "close": "Itxi",
+      "needHelp": "Laguntza gehiago behar?",
+      "viewGuide": "Arazoak konpontzeko gida ikusi"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "Berri onak! {count} {count, plural, =1 {modu} other {modu}} aurkitu dugu errore honetatik berreskuratzeko.",
+      "cannotRecover": "Ezin da berreskuratu. Fitxategia zure bankutik berriro esportatu beharko duzu edo beste formatu bat probatu.",
+      "optionsTitle": "Berreskuratze Aukerak"
     },
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "Ez kezkatu! Konpontzeko laguntza eman diezazukegu.",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
+      "autoFix": "AUTO-KONPONDU",
+      "autoFixButton": "Auto-Konpondu",
+      "confidence": "%{percent} konfiantza",
+      "fixing": "Konpontzen...",
+      "learnMore": "Ikasi Gehiago",
+      "technicalDetails": "Xehetasun Teknikoak"
     },
     "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
+      "category": "Kategoria: {category}",
+      "title": "Erroreen Laburpena"
     },
     "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
-      "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "canRecover": "Berreskuratu Daiteke:",
+      "errorCategory": "Errore Kategoria:",
+      "no": "Ez",
+      "severity": "Larritasuna:",
+      "suggestions": "Iradokizunak:",
+      "title": "Xehetasun Tekniko Aurreratuak",
+      "yes": "Bai"
     },
-    "title": "Import Failed"
+    "title": "Inportazioak Huts Egin Du"
   },
   "export": {
     "allDataDeleted": "All data has been deleted. The page will now refresh.",
@@ -1974,78 +1974,78 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
-      "done": "Done!",
-      "download": "Download",
-      "export": "Export Data"
+      "cancel": "Utzi",
+      "done": "Egina!",
+      "download": "Deskargatu",
+      "export": "Datuak Esportatu"
     },
     "complete": {
-      "download": "Your file is ready to download",
-      "success": "Export complete! Check your downloads folder."
+      "download": "Zure fitxategia deskargatzeko prest dago",
+      "success": "Esportazioa osatua! Begiratu zure deskargen karpeta."
     },
     "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
+      "accounts": "Kontuak",
+      "estimatedSize": "Tamaina Estimatua",
+      "title": "Datuen Laburpena",
+      "transactions": "Transakzioak"
     },
     "exporting": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Exporting..."
+      "pleaseWait": "Mesedez, itxaron. Momentu bat iraun dezake",
+      "title": "Esportatzen..."
     },
     "format": {
       "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
+        "description": "Babeskopia osoa datu guztiekin",
+        "label": ".budget fitxategia"
       },
       "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
+        "description": "Kalkulu-orriekin bateragarria",
+        "label": "CSV fitxategia"
       },
       "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
+        "description": "Garatzaileentzako formatua",
+        "label": "JSON fitxategia"
       },
-      "label": "Export Format"
+      "label": "Esportazio Formatua"
     },
     "options": {
       "encrypt": {
-        "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
+        "description": "Babestu zure datuak AES-256 enkriptazioarekin",
+        "label": "Pasahitzarekin Enkriptatu"
       },
       "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
+        "description": "Tiketa-irudiak erantsi (fitxategiaren tamaina handitzen du)",
+        "label": "Tiketak Sartu"
       }
     },
     "password": {
-      "confirm": "Confirm Password",
-      "confirmPlaceholder": "Confirm password",
-      "hint": "Password Hint (Optional)",
-      "hintNote": "This hint will be stored unencrypted in the file",
-      "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
-      "minLength": "Password must be at least 8 characters",
-      "mismatch": "Passwords do not match",
-      "placeholder": "Enter password (min 8 characters)",
-      "required": "Password is required for encryption"
+      "confirm": "Pasahitza Berretsi",
+      "confirmPlaceholder": "Pasahitza berretsi",
+      "hint": "Pasahitz Pista (Aukerakoa)",
+      "hintNote": "Pista hau enkriptatu gabe gordeko da fitxategian",
+      "hintPlaceholder": "Gogoratzeko laguntza bat",
+      "label": "Pasahitza",
+      "minLength": "Pasahitzak gutxienez 8 karaktere izan behar ditu",
+      "mismatch": "Pasahitzak ez datoz bat",
+      "placeholder": "Sartu pasahitza (gutxienez 8 karaktere)",
+      "required": "Pasahitza beharrezkoa da enkriptaziorako"
     },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
+    "subtitle": "Deskargatu zure aurrekontu-datuak",
+    "title": "Datuak Esportatu"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
+    "account": "Kontua",
+    "allAccounts": "Kontu guztiak",
+    "allCategories": "Kategoria guztiak",
+    "allTypes": "Mota guztiak",
+    "apply": "Iragazkiak aplikatu",
+    "category": "Kategoria",
+    "clearFilters": "Iragazkiak garbitu",
+    "dateRange": "Data-tartea",
+    "expense": "Gastua",
+    "income": "Sarrera",
+    "search": "Transakzioak bilatu...",
+    "type": "Mota"
   },
   "footer": {
     "copyright": "© {year} {brandName}",
@@ -2053,9 +2053,9 @@
       "login": "Saioa hasi",
       "settings": "Ezarpenak",
       "signup": "Probatu hasi",
-      "upgrade": "Eguneratu"
+      "upgrade": "Bertsio-berritu"
     },
-    "tagline": "Premium aurrekontuak, aldaketa bat eginez."
+    "tagline": "Aurrekontu premiuma behin-behineko bertsio-berritzeekin."
   },
   "fridayReview": {
     "back": "Back",
@@ -2098,19 +2098,19 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "Finantza Osasunaren Puntuazioa: {score} 100etik. {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "Gehitu transakzioak zure",
+      "line2": "Finantza Osasun Puntuazioa ikusteko"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "Nota: {grade}",
+    "missingFactors": "{count, plural, =1 {Faktore 1 falta da} other {# faktore falta dira}}",
+    "title": "Finantza Osasuna",
     "history": {
-      "title": "Puntuazioaren historia",
-      "monthsOfData": "{count} {count, plural, =1 {hilabete} other {hilabete}}(ko) datuak",
-      "emptyTitle": "Puntuazioaren historia hemen agertuko da datuak pilatzen diren heinean",
-      "emptySubtitle": "Itzuli datorren hilabetean!",
+      "title": "Puntuazio Historia",
+      "monthsOfData": "{count} {count, plural, =1 {hilabete} other {hilabete}} datuak",
+      "emptyTitle": "Zure puntuazio-historia hemen agertuko da datuak metatzen diren heinean",
+      "emptySubtitle": "Begiratu hurrengo hilean!",
       "legendScore": "Puntuazioa",
       "legendTrend": "Joera",
       "tooltipScore": "Puntuazioa",
@@ -2217,56 +2217,56 @@
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "Atzera",
+      "cancel": "Utzi",
+      "done": "Egina",
+      "import": "Datuak Inportatu"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "{count} elementu arrakastaz inportatu dira",
+      "success": "Inportazioa Osatua!",
+      "withIssues": "Inportazioa Arazoekin Osatua"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} existitzen dira",
+      "handleLabel": "Gatazkak Kudeatu",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "Inportatutakoekin ordezkatu",
+        "label": "Gainidatzi"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "Sarrera berri gisa inportatu",
+        "label": "Berria sortu"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "Uneko datuak mantendu",
+        "label": "Existitzenak saltatu"
       },
-      "title": "Conflicts Found"
+      "title": "Gatazkak Aurkituak"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "decrypt": "Deszifratu eta Jarraitu",
+      "encrypted": "Fitxategi hau enkriptatuta dago",
+      "enterPassword": "Sartu pasahitza",
+      "hint": "Pista: {hint}",
+      "password": "Pasahitza"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "Mesedez, itxaron. Momentu bat iraun dezake",
+      "title": "Zure datuak inportatzen..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "Inportatzeko Datuak",
+      "exported": "Esportatua",
+      "fileInfo": "Fitxategiaren Informazioa",
+      "version": "Bertsioa"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "edo arrastatu eta jaregin hemen",
+      "label": "Egin klik .budget fitxategi bat hautatzeko"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": ".budget fitxategitik berrezarri",
+    "title": "Datuak Inportatu"
   },
   "investmentAccountModal": {
     "buttons": {
@@ -2311,30 +2311,30 @@
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "Ez dago ikuskatzerik. Gehitu edukitzak grafikoak ikusteko.",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "Irabazia",
+      "loss": "Galera"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
-      "total": "Total"
+      "allocation": "Banaketa",
+      "costBasis": "Kostu Oinarria",
+      "currentValue": "Uneko Balioa",
+      "gainLoss": "Irabazi/Galera",
+      "percentReturn": "% Itzulera",
+      "symbol": "Sinboloa",
+      "total": "Guztira"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "Banaketa Kontu Motaren Arabera",
+      "gainLoss": "Irabazi/Galera Edukitzaren Arabera",
+      "performanceSummary": "Errendimendu Laburpena",
+      "portfolioAllocation": "Zorroaren Banaketa Edukitzaren Arabera"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "Kostu Oinarria",
+      "currentValue": "Uneko Balioa",
+      "percentOfPortfolio": "Zorroaren %{percent}"
     }
   },
   "investments": {
@@ -2464,15 +2464,15 @@
     "accessibility": {
       "badges": {
         "keyboardFirst": "Teklatua lehenik",
-        "largeTouchTargets": "Ukitzeko helburu handiak",
+        "largeTouchTargets": "Ukimen-xede handiak",
         "seniorsMode": "Adinekoen Modua"
       },
       "buttons": {
         "openApp": "Aplikazioa ireki",
-        "settings": "Irisgarritasun ezarpenak"
+        "settings": "Irisgarritasun-ezarpenak"
       },
-      "description": "Adinekoen Moduak nabigazioa sinplifikatu eta ukipen helburu handiagoak eskaintzen ditu. Teklatuko laburbideak, fokua eta kontraste argiak laguntzen dute denei azkarrago mugitzen.",
-      "title": "Lehenik eta behin irisgarria"
+      "description": "Adinekoen Moduak nabigazio sinplifikatua eta ukimen-xede handiagoak eskaintzen ditu. Teklatu laster-teklak, foku-egoerak eta kontraste argia denei azkarrago mugitzen laguntzen die.",
+      "title": "Lehenetsi irisgarria"
     },
     "brand": {
       "name": "BudgetPro",
@@ -2480,115 +2480,115 @@
     },
     "comparison": {
       "bankConnections": {
-        "cloud": "Nahitaezko Agregazioa",
-        "feature": "Banku Konektzioak",
-        "local": "CSV / Eskuzko Bakarrik",
+        "cloud": "Derrigorrezko Agregazioa",
+        "feature": "Banku Konexioak",
+        "local": "CSV / Eskuzkoa Bakarrik",
         "sync": "Aukerakoa (Enkriptatua)"
       },
       "cost": {
-        "cloud": "$100+/urteko Harpidetza",
+        "cloud": "100€+/urteko Harpidetza",
         "feature": "Kostua",
-        "local": "Doan Betirako",
-        "sync": "Aldaketa Bat"
+        "local": "Betirako Doakoa",
+        "sync": "Behin-behineko Bertsio-berritzea"
       },
       "dataPrivacy": {
-        "cloud": "Langileek Ikusi Dezakete",
-        "feature": "Datu Pribatutasuna",
-        "local": "100% Pribatu (Tokikoa)",
-        "sync": "End-to-End Enkriptatua"
+        "cloud": "Langileek Ikus Dezakete",
+        "feature": "Datuen Pribatutasuna",
+        "local": "100% Pribatua (Lokala)",
+        "sync": "Muturretik Muturrera Enkriptatua"
       },
       "headers": {
-        "cloud": "Aplikazio Hodeiko Ohikoa",
-        "feature": "Ezaugarri",
-        "local": "BudgetPro Tokikoa",
-        "sync": "BudgetPro Sinkronizatu (Pro)"
+        "cloud": "Hodei Aplikazio Tipikoa",
+        "feature": "Ezaugarria",
+        "local": "BudgetPro Lokala",
+        "sync": "BudgetPro Sinkro (Pro)"
       },
       "offlineMode": {
-        "feature": "Offline Modua"
+        "feature": "Lineaz Kanpoko Modua"
       },
       "storageLocation": {
-        "cloud": "Haien Datubasea",
-        "feature": "Biltegiratze Lekua",
+        "cloud": "Haien Datu-Basea",
+        "feature": "Biltegiratze Kokapena",
         "local": "Zure Gailua",
-        "sync": "Zero-Knowledge Hodeia"
+        "sync": "Zero-Ezagutza Hodeia"
       }
     },
     "faq": {
       "0": {
-        "a": "Bai. Tokiko Protokoloan, datuak inoiz ez dira zure gailutik ateratzen. Zure nabigatzailean IndexedDB-n bizi da.",
+        "a": "Bai. Protokolo Lokalean, datuak ez dira inoiz zure gailutik ateratzen. IndexedDB-n bizi dira zure nabigatzailearen barruan.",
         "q": "Nire datuak benetan pribatuak al dira?"
       },
       "1": {
-        "a": "Edozein unetan JSON backup osoa esportatu dezakezu. Halaber, CSV esportazioak egitea gomendatzen dugu.",
-        "q": "Nola babestu ditzaket nire datuak?"
+        "a": "Edozein unetan JSON babeskopia osoa esportatu dezakezu. CSV esportazioak ere gomendatzen ditugu.",
+        "q": "Nola egiten dut nire datuen babeskopia?"
       },
       "2": {
-        "a": "Laster etorriko da: gailuen artean enkriptatutako datuak sinkronizatzeko aukera ematen duen harpidetza bat.",
-        "q": "'Sinkronizatu' Pro zer da?"
+        "a": "Laster etorriko da: Aukerako harpidetza enkriptatutako datuak gailuen artean sinkronizatzeko Supabase bidez.",
+        "q": "Zer da 'Sinkronizazio' Pro?"
       },
       "3": {
-        "a": "Ez. Uste dugu eskuzko inportazioa segurua, fidagarria eta finantza kontzientzia hobea eraikitzen duela.",
+        "a": "Ez. Uste dugu eskuzko inportazioa seguruagoa, fidagarriagoa eta finantza-kontzientzia hobea sortzen duela.",
         "q": "Bankuekin konektatzen al zarete?"
       }
     },
     "faqSection": {
-      "description": "Probaldien, prezioen eta sarbidearen inguruko galdera ohikoen erantzun sinpleak.",
+      "description": "Probaldiez, prezioez eta sarbideaz ohiko galderetarako erantzun sinpleak.",
       "title": "FAQ"
     },
     "features": {
       "0": {
-        "description": "Net worth, cash flow eta kategoriaren banaketa. Instant kargatzeko denbora.",
+        "description": "Ondare garbia, diru-fluxua eta kategoria-banaketa. Berehala kargatzen da.",
         "href": "/budget-app",
-        "title": "Tokiko Etxeko Orria"
+        "title": "Aginte-Panel Lokala"
       },
       "1": {
-        "description": "BMO, Home Trust eta pertsonalizatutako formatuentzako smart CSV mapper.",
+        "description": "CSV mapeatzaile adimentsua BMO, Home Trust eta formatu pertsonalizagarrietarako.",
         "href": "/budget-app/import",
-        "title": "Inportazio Magoa"
+        "title": "Inportazio Morroia"
       },
       "2": {
-        "description": "Tiketak lokalki eskaneatu Tesseract.js-rekin. Ez da hodeiko prozesamendurik.",
+        "description": "Eskaneatu tiketak lokalki Tesseract.js-ekin. Hodeiko prozesamendurik ez.",
         "href": "/budget-app/ocr",
-        "title": "Tiketak OCR"
+        "title": "Tiketa OCR"
       },
       "3": {
-        "description": "Zero oinarritutako edo biribilketa aurrekontuak kontrol kategoria finarekin.",
+        "description": "Zero-oinarrizko edo rollover aurrekontua kategoria-kontrol zehaztasunarekin.",
         "href": "/budget-app/budgets",
         "title": "Kategoria Aurrekontuak"
       },
       "4": {
-        "description": "Zure askatasun data proiektatu interes konposatuaren irudikapenekin.",
+        "description": "Proiektatu zure askatasun-data interes konposatu bistaratzearekin.",
         "href": "/budget-app/planning/retirement",
         "title": "Erretiro Kalkulagailua"
       },
       "5": {
-        "description": "Segurtasun maila gehigarri bat lortzeko aukera ematen duen bezero aldagaiaren enkriptatzea.",
+        "description": "Bezero-aldeko enkriptazio aukerakoa segurtasun-geruza gehigarri baterako.",
         "href": "/budget-app/settings",
-        "title": "Pribatutasun Iragazkia"
+        "title": "Pribatutasun Ezkutua"
       }
     },
     "featuresDeepDive": {
-      "cta": "Hasi doako probaldia",
-      "description": "Gelditu hautsi formulak borrokan. Lortu eskuzko kontrolaren malgutasuna modernoa den aplikazioaren abiadurarekin.",
-      "explore": "Aztertu",
-      "heading1": "Spreadsheet Indarra.",
-      "heading2": "Aplikazio Sinpletasuna."
+      "cta": "Doako proba hasi",
+      "description": "Utzi formula hautsiekin borrokatzeari. Lortu eskuzko kontrolaren malgutasuna aplikazio moderno baten abiadurarekin.",
+      "explore": "Esploratu",
+      "heading1": "Kalkulu-Orriaren Ahalmena.",
+      "heading2": "Aplikazioaren Sinpletasuna."
     },
     "footer": {
       "allRightsReserved": "Eskubide guztiak erreserbatuta.",
       "api": "API",
-      "changelog": "Aldaketen Egutegia",
+      "changelog": "Aldaketa-erregistroa",
       "community": "Komunitatea",
       "cookiePolicy": "Cookie Politika",
       "documentation": "Dokumentazioa",
-      "download": "Kargatu",
+      "download": "Deskargatu",
       "features": "Ezaugarriak",
       "helpCenter": "Laguntza Zentroa",
-      "legal": "Legal",
+      "legal": "Legala",
       "pricing": "Prezioak",
       "privacyPolicy": "Pribatutasun Politika",
-      "product": "Produktu",
-      "resources": "Iturriak",
+      "product": "Produktua",
+      "resources": "Baliabideak",
       "termsOfService": "Zerbitzu Baldintzak"
     },
     "hero": {
@@ -2607,98 +2607,98 @@
     },
     "heroSection": {
       "badges": {
-        "noSubscriptions": "Ez da harpidetzarik",
-        "offlineReady": "Offline prest",
+        "noSubscriptions": "Harpidetzarik gabe",
+        "offlineReady": "Lineaz kanpo prest",
         "seniorsMode": "Adinekoen Modua"
       },
       "cta": {
-        "heading": "Argitasunerako eraikia, ez kaosa.",
-        "viewPricing": "Ikusi prezioak"
+        "heading": "Argitasunerako eraikia, ez kaosarako.",
+        "viewPricing": "Prezioak ikusi"
       },
       "demo": {
-        "cloudStorage": "Cloud storage",
-        "dining": "Dining",
-        "expenses": "Expenses",
-        "foodToday": "Food • Today",
-        "groceries": "Groceries",
-        "groceryStore": "Grocery Store",
-        "income": "Income",
-        "incomeYesterday": "Income • Yesterday",
-        "monthly": "Monthly",
-        "netWorth": "Net worth",
+        "cloudStorage": "Hodei biltegiratzea",
+        "dining": "Jatetxea",
+        "expenses": "Gastuak",
+        "foodToday": "Janaria • Gaur",
+        "groceries": "Janaria",
+        "groceryStore": "Janari Denda",
+        "income": "Sarrerak",
+        "incomeYesterday": "Sarrera • Atzo",
+        "monthly": "Hilero",
+        "netWorth": "Ondare garbia",
         "netflix": "Netflix",
-        "salary": "Salary",
-        "shopping": "Shopping",
+        "salary": "Soldata",
+        "shopping": "Erosketak",
         "spotify": "Spotify",
-        "subscriptionOct24": "Subscription • Oct 24",
-        "yearly": "Yearly"
+        "subscriptionOct24": "Harpidetza • Urr 24",
+        "yearly": "Urtero"
       },
       "modes": {
         "budgets": "Aurrekontuak",
-        "dashboard": "Etxeko orria",
+        "dashboard": "Aginte-Panela",
         "subscriptions": "Harpidetzak"
       },
       "preview": {
         "categoryBudgets": "Kategoria aurrekontuak",
-        "livePreview": "Aurrez aurreko ikuskizuna",
+        "livePreview": "Zuzeneko aurrebista",
         "recentTransactions": "Azken transakzioak",
-        "recurring": "Errepikakorrak"
+        "recurring": "Errepikakorra"
       }
     },
     "howItWorks": {
       "0": {
-        "description": "Arrastatu eta utzi CSV-ak edo eskaneatu tiketak. AI-k zutabeak lokalki mapatzen ditu.",
+        "description": "Arrastatu eta jaregin CSVak edo eskaneatu tiketak. AAk zutabeak lokalki mapeatzen ditu.",
         "title": "Inportatu"
       },
       "1": {
-        "description": "Azkar kategoriza adimen arau eta ekintza masiboekin.",
+        "description": "Kategorizazio azkarra arau adimentsuekin eta multzo-ekintzekin.",
         "title": "Berrikusi"
       },
       "2": {
-        "description": "Dolar bakoitzari lana esleitu eta zure etorkizuneko net worth-a aurreikusi.",
-        "title": "Plangintza"
+        "description": "Esleitu dolar bakoitzari lan bat eta aurreikusi zure etorkizuneko ondare garbia.",
+        "title": "Planifikatu"
       }
     },
     "howItWorksSection": {
-      "description": "Argitasunera azkar iristen zaituen lan-fluxua, sistema konplexu batean itxita geratu gabe.",
-      "title": "Nola funtzionatzen duen"
+      "description": "Argitasunera azkar iristen laguntzen dizun lan-fluxua, sistema konplikatu batean blokeatu gabe.",
+      "title": "Nola funtzionatzen du"
     },
     "marquee": {
       "logos": [
-        "Aurrekontuak",
+        "Aurrekontua",
         "Harpidetzak",
         "Maileguak",
         "OCR Tiketak",
         "Txostenak",
-        "Plangintza",
-        "Offline",
+        "Planifikazioa",
+        "Lineaz kanpo",
         "Adinekoen Modua"
       ]
     },
     "nav": {
-      "tagline": "Premium aurrekontuak"
+      "tagline": "Aurrekontu premiuma"
     },
     "outcomes": {
       "0": {
-        "description": "Ez da gehiago konexio hautsi edo berriro egiaztatu beharrik. Zure datuen sarrera kontrolatzen duzu.",
-        "title": "Gelditu Agregatzaileekin Borrokan"
+        "description": "Ez dago konexio hautsiekin edo berrautentifikazio-begizekin. Zuk kontrolatzen dituzu datuen sarrera.",
+        "title": "Utzi Agregatzaileekin Borrokatzeari"
       },
       "1": {
-        "description": "Ez dugu zure datuak saltzen, ez dugulako. Puntua.",
-        "title": "Pribatutasuna Diseinuan"
+        "description": "Ez ditugu zure datuak saltzen ez ditugulako. Puntua.",
+        "title": "Pribatutasuna Diseinuz"
       },
       "2": {
-        "description": "Erretiroa, maileguak ordaintzea eta aurrezki helburuak irudikatu ikuspegi integratu batean.",
-        "title": "Etorkizuneko Plangintza"
+        "description": "Modelatu erretiroa, maileguen ordainketa eta aurrezki helburuak ikuspegi integratu batean.",
+        "title": "Etorkizunerako Prestatutako Planifikazioa"
       },
       "3": {
-        "description": "Beste aplikazioek galtzen dituzten zure poltsikoan eragiten duten errepikako drainak ikusi.",
-        "title": "Harpidetzaren Hiltzailea"
+        "description": "Aurkitu zure diru-zorroan beste aplikazioek ikusten ez dituzten ohiko gastuak.",
+        "title": "Harpidetza Hiltzailea"
       }
     },
     "outcomesSection": {
-      "description": "Aurrekontu aplikazio gehienek lan egin behar zaituzte. BudgetPro-k frikzioa murrizteko diseinatuta dago, kontrola mantenduz.",
-      "title": "Erealitatearentzat eraikia, ez spreadsheetentzat"
+      "description": "Aurrekontu-aplikazio gehienek lana egitera behartzen zaituzte. BudgetPro marruskadurak murrizteko diseinatuta dago kontrola mantenduz.",
+      "title": "Bizi errealerako eraikia, ez kalkulu-orrietarako"
     },
     "preview": {
       "balanceAmount": "24.500,00 €",
@@ -2707,111 +2707,111 @@
       "expenses": "Gastuak",
       "expensesAmount": "1.250,00 €",
       "expensesChange": "-5,2%",
-      "live": "Bizi",
-      "overview": "Laburpena",
-      "recentTransactions": "Transakzio Recentak",
+      "live": "Zuzenean",
+      "overview": "Ikuspegi Orokorra",
+      "recentTransactions": "Azken Transakzioak",
       "savingsGoal": "Aurrezki Helburua",
       "savingsPercent": "85%",
-      "totalBalance": "Guztira",
+      "totalBalance": "Saldo Osoa",
       "tx0Amount": "-124,50 €",
       "tx0Date": "Gaur, 14:30",
-      "tx0Name": "Elikagai Denda",
+      "tx0Name": "Janari Denda",
       "tx1Amount": "+4.250,00 €",
-      "tx1Date": "Atzo, 09:00",
-      "tx1Name": "Teknologia Soluzioak S.A.",
+      "tx1Date": "Atzo, 9:00",
+      "tx1Name": "Tech Solutions Inc.",
       "tx2Amount": "-15,99 €",
-      "tx2Date": "2025eko urriaren 24a",
+      "tx2Date": "Urr 24, 2025",
       "tx2Name": "Netflix Harpidetza",
-      "vsLastMonth": "aurreko hilabetearekin",
+      "vsLastMonth": "aurreko hilarekin alderatuta",
       "welcomeBack": "Ongi etorri berriro, Alex"
     },
     "pricing": {
       "cta": {
         "href": "/budget-app/auth/signup",
-        "label": "Hasi Tokiko Protokoloa"
+        "label": "Protokolo Lokala Hasi"
       },
-      "description": "Hasi indartsu Tokiko Protokoloarekin. Eguneratu gero behar baduzu gailu anitzeko sinkronizaziorako.",
-      "eyebrow": "Prezio Justua",
-      "guarantee": "Ez da kreditu txartelik behar Tokiko Protokoloarentzat.",
-      "priceLabel": "Doan Betirako",
+      "description": "Hasi Protokolo Lokalarekin. Bertsio-berritu geroago gailu arteko sinkronizazioa behar baduzu.",
+      "eyebrow": "Prezioak Justua",
+      "guarantee": "Ez da kreditu-txartelik behar Protokolo Lokalerako.",
+      "priceLabel": "Betirako Doakoa",
       "secondary": {
         "href": "#pricing",
-        "label": "Ikusi Pro Ezaugarriak"
+        "label": "Pro Ezaugarriak Ikusi"
       },
-      "title": "Tokikoa Doan. Sinkronizazioa Pro."
+      "title": "Lokala Doakoa Da. Sinkronizazioa Pro da."
     },
     "pricingSection": {
-      "features": "Mugagabeak diren transakzioak, kontuak, aurrekontuak eta tokiko backup gaitasun osoak barne.",
-      "productDescription": "Aurrekontu esperientzia osoa, zure gailuan bakarrik funtzionatzen duena.",
-      "productName": "Tokiko Protokoloa",
+      "features": "Transakzio, kontu, aurrekontu mugagabeak eta babeskopia lokal osoko gaitasunak barne.",
+      "productDescription": "Aurrekontu-esperientzia osoa, zure gailuan soilik exekutatzen dena.",
+      "productName": "Protokolo Lokala",
       "recommended": "Gomendatua",
-      "whyChoose": "Zergatik aukeratu Tokiko Protokoloa?",
-      "whyChooseDescription": "Ikusi nola konparatzen garen hodeiko erraldoiekin."
+      "whyChoose": "Zergatik aukeratu Protokolo Lokala?",
+      "whyChooseDescription": "Ikusi hodei erraldoiekin nola konparatzen dugun."
     },
     "security": {
       "buttons": {
-        "offline": "Offline laguntza",
+        "offline": "Lineaz kanpoko euskarria",
         "privacy": "Pribatutasuna eta ezarpenak"
       },
       "cards": {
         "aiControls": {
-          "description": "AI-indarrezko ezaugarriak (anomalien detekzioa bezalakoak) aktibatu edo desaktibatu eta txatboten sarbidea kudeatu ezarpenetatik.",
-          "title": "AI ezaugarri kontrolak"
+          "description": "Aktibatu/Desaktibatu AAz bultzatutako ezaugarriak (anomalien detekzioa bezala) eta kudeatu chatbot sarbidea ezarpenetatik.",
+          "title": "AA ezaugarrien kontrolak"
         },
         "encryption": {
-          "description": "Aplikazioak aurrekontu erregistro sentikorren babesa emateko enkriptatze geruza bat du aktibatuta dagoenean.",
-          "title": "Enkriptatze laguntza"
+          "description": "Aplikazioak enkriptazio-geruza bat dauka aurrekontu-erregistro sentikorrak gaitzen direnean babesteko.",
+          "title": "Enkriptazio euskarria"
         },
         "exportDelete": {
-          "description": "Zure datuak eta pribatutasun ezarpenak esportatu, edo lokaleko datuak zuzenean aplikaziotik ezabatu.",
+          "description": "Esportatu zure datuak eta pribatutasun-ezarpenak, edo ezabatu datu lokalak zuzenean aplikaziotik.",
           "title": "Esportatu eta ezabatu"
         },
         "localStorage": {
-          "description": "Zure aurrekontu datuak zure nabigatzailean (IndexedDB) gordetzen dira, beraz aplikazioa azkar eta offline erabilgarria mantentzen da.",
-          "title": "Tokiko biltegiratzea"
+          "description": "Zure aurrekontu-datuak zure nabigatzailean gordetzen dira (IndexedDB) aplikazioa azkar eta lineaz kanpo erabilgarri mantentzeko.",
+          "title": "Biltegiratze lokala"
         }
       },
-      "description": "Aurrekontu Aplikazioak zure datuak lokalmente (offline prest) gordetzen ditu eta AI ezaugarrietarako, esportatzeko eta ezabatzeko kontrolak ematen dizkizu.",
-      "title": "Pribatutasuna lehenik diseinatuta"
+      "description": "Aurrekontu Aplikazioak zure datuak lokalki gordetzen ditu (lineaz kanpo prest) eta kontrolak ematen dizkizu AA ezaugarrietarako, esportaziorako eta ezabatzeko.",
+      "title": "Pribatutasuna lehenik diseinuz"
     },
     "socialProof": {
-      "description": "Aurrekontuak iraunarazteko xehetasunak: onboarding, laburbideak, mugikorreko nabigazioa eta offline prestako errendimendua.",
+      "description": "Aurrekontua atxikitzeko xehetasunak: harrera, laster-teklak, mugikorreko nabigazioa eta lineaz kanpoko errendimendua.",
       "features": {
         "mobileUx": {
-          "description": "Beheko nabigazioa eta erantzunkorrak diren diseinuak natiboak diruditenak.",
-          "title": "Mugikorreko UX-a lehenik"
+          "description": "Beheko nabigazioa eta diseinu moldagarriak jatorrizko izaera dute.",
+          "title": "Mugikorra-lehenik UX"
         },
         "onboarding": {
-          "description": "Gidatutako bisita batek erabiltzaile berriei balioa azkar lortzen laguntzen die.",
-          "title": "Onboarding bisita"
+          "description": "Bisita gidatu batek erabiltzaile berriei azkar balioetara iristea laguntzen die.",
+          "title": "Harrera bisita"
         },
         "pwaInstall": {
-          "description": "Aplikazio gisa instalatu eta jarraitu, interneteko konexioa txikia denean ere.",
+          "description": "Instalatu aplikazio bat bezala eta jarraitu internet arazoekin ere.",
           "title": "PWA instalazioa"
         },
         "shortcuts": {
-          "description": "Azkar mugitu bilaketa eta ekintza laburbideekin UI-n integratuta.",
-          "title": "Teklatuko laburbideak"
+          "description": "Mugitu azkar bilaketa eta ekintza laster-teklekin UIan integratuta.",
+          "title": "Teklatu laster-teklak"
         }
       },
-      "title": "Premium distira, barnean eraikia"
+      "title": "Kalitatezko akaberak, barneratuta"
     },
     "trust": {
       "0": {
-        "description": "Datuak zure nabigatzaileko IndexedDB-n geratzen dira. Benetan ezin dugu ikusi.",
+        "description": "Datuak zure nabigatzailearen IndexedDB-n geratzen dira. Ezin ditugu ikusi.",
         "title": "Zure Gailua, Zure Datuak"
       },
       "1": {
-        "description": "Masiboki editatu, pivotatu eta analisi egin profesional baten moduan formula buruhausteak gabe.",
-        "title": "Spreadsheet Indarra"
+        "description": "Multzoka editatu, pibot-tau eta aztertu formula-buruhauste gabe.",
+        "title": "Kalkulu-Orriaren Ahalmena"
       },
       "2": {
-        "description": "Zero latentziarekin. Mendi gailurrean edo metro tunel batean funtzionatzen du.",
-        "title": "Offline Abiadura"
+        "description": "Zero latentzia. Mendi gainean edo metroko tunelean funtzionatzen du.",
+        "title": "Lineaz Kanpoko Abiadura"
       },
       "3": {
-        "description": "Inportazio magoak ostiraleko diru azterketa ohitura atsegin bat bihurtzen du.",
-        "title": "Eskuzko Erritualak"
+        "description": "Inportazio-morroiak Ostiraleko Diru Berrikuspena ohitura atsegin bihurtzen du.",
+        "title": "Eskuzko Ohiturak"
       }
     }
   },
@@ -3290,35 +3290,35 @@
       "previous": "Aurrekoa",
       "startTour": "Bisita Hasi"
     },
-    "quickTip": "💡 Azkarra Aholkua",
-    "skipTour": "Bisita salto",
-    "stepCounter": "Pauso {current} / {total}",
+    "quickTip": "💡 Aholku Azkarra",
+    "skipTour": "Bisita saltatu",
+    "stepCounter": "{current}/{total} urratsa",
     "steps": {
       "budgets": {
-        "description": "Gastu kategorietarako aurrekontuak sortu. Hilabetean zehar zure aurrerapena jarraitu eta muga gainditzen ari zarenean ohartarazpenak jaso.",
-        "title": "🎯 Ezarri Zure Aurrekontuak"
+        "description": "Definitu zure finantza-mugak. Ezarri muga pertsonalizatuak eta jaso denbora errealeko alertak bideari jarraitzeko.",
+        "title": "Aurrekontu Zehatza"
       },
       "categorize": {
-        "description": "Transakzioen kategorien berrikusketa eta egokitzapena. Gure adimen artifizialak zure zuzenketetatik ikasten du denboran zehar hobetzeko. Erabili ekintza masiboak transakzio anitz kategorizatzea azkartzeko!",
-        "title": "🏷️ Kategoriza eta Antolatu"
+        "description": "Gure AAk zure ohituretatik ikasten du. Kategorizatu behin, eta etorkizunean antzeko transakzioak automatikoki kudeatuko ditugu.",
+        "title": "Kategorizazio Adimentsua"
       },
       "import": {
-        "description": "Hasi zure banku transakzioak CSV fitxategi batetik inportatuz. BMO, Home Trust eta beste banku askoren formatuak onartzen ditugu. Aplikazioak automatikoki kategorizatuko ditu zure transakzioak!",
-        "title": "📥 Inportatu Zure Transakzioak"
+        "description": "Ekarri zure transakzio-historia modu ezin hobean. Banku nagusiak onartzen ditugu, besteak beste BMO eta Home Trust, detekzio automatiko adimenduarekin.",
+        "title": "Datuen Inportazio Erraza"
       },
       "reports": {
-        "description": "Zure gastu patroiak irudikatu, zure net worth jarraitu eta finantza erabakiak informaturik hartu. Zure etxeko orria automatikoki eguneratzen da transakzio bakoitzarekin!",
-        "title": "📊 Ikusi Txostenak eta Ikuspegiak"
+        "description": "Askatu zure datuen ahalmena. Bistaratu joerak, jarraitu ondare garbia eta hartu erabakiak analitika integralean oinarrituta.",
+        "title": "Ikuspegi Sakonak"
       },
       "welcome": {
-        "description": "Hasteko, azkar bisita bat egingo dugu etxeko finantzak kudeatzen laguntzeko. Ez da luze iraunduko!",
-        "title": "👋 Ongi Etorri Aurrekontu Aplikaziora!"
+        "description": "Esperimentatu zure aberastasuna kudeatzeko modu adimentsuago bat. Egin bisita labur bat zure finantza-komando zentro berritik.",
+        "title": "Ongi Etorri Finantza Argitasunera"
       }
     },
     "tips": {
-      "budgets": "Ezarri errealistak diren aurrekontuak eta muga gainditzeko arriskuan bazaude ohartaraziko zaitugu.",
-      "categorize": "Erabili azkar kategoriza botoia edo hautatu hainbat transakzio masiboki kategorizatzea.",
-      "import": "Arrastatu eta utzi zure CSV fitxategia edo klikatu nabigatzeko. BMO eta Home Trust formatuak automatikoki detektatzen ditugu!"
+      "budgets": "Ezarri hileko mugak zure gastu-abiadura denbora errealean ikusteko.",
+      "categorize": "Hautatu hainbat transakzio kategoriak multzoka aplikatzeko — eraginkortasuna gakoa da.",
+      "import": "Arrastatu eta jaregin zure CSV fitxategia. Formatua automatikoki kudeatuko dugu."
     }
   },
   "onboardingPage": {
@@ -3716,26 +3716,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "Erreala",
+      "confidenceInterval": "Konfiantza Tartea",
+      "predicted": "Aurreikusitakoa"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "Ez dago daturik aurreikuspenak egiteko",
+    "predictionUnavailable": "Aurreikuspena Ez Dago Eskuragarri",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "Batez besteko Konfiantza",
+      "nextMonth": "Hurrengo Hilabetea",
+      "threeMonthAvg": "3 Hilabeteko Batez bestekoa"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "Konfiantza",
+      "month": "Hilabetea",
+      "predicted": "Aurreikusitakoa",
+      "range": "Tartea",
+      "title": "Hileko Aurreikuspenak"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "Gastu Aurreikuspena: {category}",
+    "trainingModel": "Eredua entrenatzen eta aurreikuspenak sortzen..."
   },
   "privacyPanel": {
     "active": "Active",
@@ -3860,22 +3860,22 @@
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "Instalatu",
+      "notNow": "Orain ez"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "Instalazio-gonbita itxi",
+    "description": "Gehitu zure hasiera-pantailara sarbide azkarra eta lineaz kanpoko erabilera izateko",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "Azkarra eta segurua",
+      "noAppStore": "Ez da app dendarik behar",
+      "offline": "Lineaz kanpo funtzionatzen du"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"Hasiera-Pantailara Gehitu\"",
+    "iosForFullExperience": "aplikazioaren esperientzia osoa izateko karga azkarragoarekin.",
+    "iosTap": "Sakatu",
+    "iosThen": "gero",
+    "iosTitle": "Aurrekontu Aplikazioa Instalatu",
+    "title": "Aurrekontu Aplikazioa Instalatu"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3906,31 +3906,31 @@
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "Kategoria Aplikatu",
+      "cancel": "Utzi",
+      "save": "Gorde"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "clickToSelect": "Egin klik kategoria bat hautatzeko",
+    "description": "Hautatu kategoria bat {count, plural, =1 {transakzio honetarako} other {# transakzioetarako}}",
+    "general": "Orokorra",
+    "noResults": "Ez da kategoriarik aurkitu",
+    "pressEnter": "Sakatu ↵ Sartu",
+    "saving": "Gordetzen...",
+    "searchPlaceholder": "Kategoriak bilatu...",
+    "title": "Kategorizazio Azkarra"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "Denak",
+    "categories": "Kategoriak",
+    "clearFilters": "Iragazkiak Garbitu",
+    "moreCategories": "+{count} gehiago",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "Azken 30 Egunak",
+      "last90": "Azken 90 Egunak",
+      "thisMonth": "Hilabete Honetan",
+      "thisYear": "Aurten"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "Denbora-Tartea"
   },
   "quickStats": {
     "balance": "Total Balance",
@@ -3954,43 +3954,43 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "Tiketa Erantsi",
+      "chooseDifferent": "Beste Bat Aukeratu",
+      "extractData": "Datuak Atera",
+      "extracting": "Ateratzen..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "Argazkia Atera Kamerarekin",
+      "useDevice": "Erabili zure gailuaren kamera tiketa harrapatzeko"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "Kamera-harrapaketa sarrera",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "edo <link>arakatu fitxategiak</link>",
+      "dragDrop": "Arrastatu eta jaregin tiketa hemen",
+      "dropHere": "Jaregin tiketa hemen",
+      "supportedFormats": "JPG, PNG, PDF onartzen ditu • Gehienez {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "Ezin izan dira datuak tiketetatik atera. Mesedez, sartu eskuz.",
+      "extractionFailed": "Datuak ateratzeak huts egin du. Mesedez, saiatu berriro edo sartu eskuz.",
+      "invalidType": "Fitxategi mota baliogabea. JPG, PNG eta PDF fitxategiak bakarrik onartzen dira",
+      "ocrImagesOnly": "OCR irudi fitxategietarako bakarrik da (JPG, PNG)",
+      "rejected": "Fitxategia baztertu da. Mesedez, saiatu berriro",
+      "tooLarge": "Fitxategia handiegia da. Gehienezko tamaina {size}MB da"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "Zenbatekoa:",
+      "confidence": "Konfiantza: {percent}%",
+      "date": "Data:",
+      "merchant": "Merkataria:",
+      "title": "Datuak Aterata"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "Aurrebista ez dago eskuragarri",
+      "title": "PDF Tiketa"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "Tiketaren aurrebista",
+    "removeFile": "Fitxategia kendu"
   },
   "recurringTransactions": {
     "confidence": "{percent}% confidence",
@@ -4142,50 +4142,50 @@
     "yourAccounts": "Your Accounts"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "Laster-teklen laguntza itxi",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "Teklatu laster-teklak edozein orritan funtzionatzen dute inprimakietan idazten ez den bitartean. Sakatu {key} edozein unetan laguntza hau ikusteko.",
+      "title": "💡 Aholkua"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "Erabiltzaile aurreratuen produktibitate aholkuak",
+    "title": "Teklatu Laster-Teklak"
   },
   "sidebar": {
     "actions": {
-      "backToHome": "Hasierara itzuli",
-      "collapseSidebar": "Alboko barra itxi",
-      "expandSidebar": "Alboko barra zabaldu",
+      "backToHome": "Hasierara Itzuli",
+      "collapseSidebar": "Albo-barra tolestu",
+      "expandSidebar": "Albo-barra zabaldu",
       "importCsv": "CSV Inportatu",
       "settings": "Ezarpenak",
-      "showAllItems": "Elementu Guztiak Ikusi",
-      "showLess": "Gutxiago Ikusi"
+      "showAllItems": "Elementu Guztiak Erakutsi",
+      "showLess": "Gutxiago Erakutsi"
     },
-    "appSubtitle": "Premium Finantzak",
+    "appSubtitle": "Finantza Premiuma",
     "appTitle": "Aurrekontu Aplikazioa",
     "navigation": {
       "accounts": "Kontuak",
       "budgets": "Aurrekontuak",
       "calculators": "Kalkulagailuak",
-      "categories": "Kategoriek",
-      "dashboard": "Kontrol Panel",
-      "events": "Gertakariak",
-      "futurePlans": "Etorkizuneko Plangintza",
+      "categories": "Kategoriak",
+      "dashboard": "Aginte-Panela",
+      "events": "Ekitaldiak",
+      "futurePlans": "Etorkizuneko Planak",
       "import": "CSV Inportatu",
       "investments": "Inbertsioak",
       "loans": "Maileguak",
-      "netWorth": "Hautemangarria",
-      "properties": "Proiektuak",
-      "reminders": "Gogorarazleak",
+      "netWorth": "Ondare Garbia",
+      "properties": "Ondasunak",
+      "reminders": "Gogorazpenak",
       "reports": "Txostenak",
       "retirement": "Erretiroa",
-      "scanReceipt": "Tiketak Eskaneatu",
-      "scenarios": "Zer-eta",
+      "scanReceipt": "Tiketa Eskaneatu",
+      "scenarios": "Zer-Baldintzak",
       "settings": "Ezarpenak",
       "subscriptions": "Harpidetzak",
       "transactions": "Transakzioak"
     },
     "search": "Bilatu...",
-    "shortcuts": "Laburbideak"
+    "shortcuts": "Laster-teklak"
   },
   "simplefinConnect": {
     "accountsConnected": "{count, plural, one {# account connected} other {# accounts connected}}",
@@ -4351,61 +4351,61 @@
     "warningsLabel": "Warnings:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "Aurreikuspena azken {months} hilabeteetako erregresio linealean oinarritua",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "Benetako Gastua",
+      "projected": "Aurreikusitakoa"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "Ez dago nahikoa datu joerak sortzeko. Gehitu gutxienez 2 hilabeteko transakzioak.",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "Batez bestekoa Hileko",
+      "lastMonth": "Azken Hilabetea",
+      "projected": "Aurreikusitakoa"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "Gastu Joerak eta Aurreikuspena"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "Zatia Gehitu ({current}/{max})",
+    "amount": "Zenbatekoa",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "Utzi",
+      "save": "Zatiketa Gorde",
+      "saving": "Gordetzen..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "Kategoria",
+    "closeModal": "Leihoa itxi",
+    "date": "Data:",
+    "distributeEvenly": "Modu Berdinean Banatu",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "Ezin izan da zatitutako transakzioa gorde"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "Sartu zenbatekoa kategoria bakoitzerako (guztira ${amount} izan behar du)",
+      "step2": "Erabili \"Modu Berdinean Banatu\" kategoria guztietan berdin zatitzeko",
+      "step3": "Gehitu 5 zati gehienez transakzio bakoitzeko",
+      "step4": "Jatorrizko transakzioa ezkutatuko da eta zatitutako elementuekin ordezkatuko da",
+      "title": "Nola zatitu transakzioak:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "Gehienez 5 zati onartzen dira",
+    "minSplitsRequired": "Gutxienez 2 zati behar dira",
+    "none": "Bat ere ez",
+    "notes": "Oharrak (Aukerakoa)",
+    "notesPlaceholder": "adib., Enpresa-gastua, Erabilera pertsonala",
+    "originalAmount": "Jatorrizko Zenbatekoa:",
+    "removeThisSplit": "Zati hau kendu",
+    "selectCategory": "Kategoria hautatu...",
+    "splitsCount": "Zatiak ({current}/{max})",
+    "subcategory": "Azpikategoria",
+    "title": "Transakzioa Zatitu",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "Doitu zatien zenbatekoak jatorrizko transakzioaren zenbatekoarekin bat etortzeko.",
+      "amountsMustMatch": "Zatien zenbatekoek jatorrizko transakzioaren zenbatekoaren berdina izan behar dute",
+      "categoryRequired": "Zati guztiek kategoria bat izan behar dute",
+      "matchesOriginal": "✓ Jatorrizkoarekin bat dator",
+      "overBy": "${amount} gehiegi",
+      "readyToSave": "Zatien zenbatekoak jatorrizko transakzioarekin bat datoz. Gordetzeko prest!",
+      "total": "Guztira:",
+      "underBy": "${amount} gutxiegi"
     }
   },
   "splits": {
@@ -4560,30 +4560,30 @@
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "Ez dago harpidetza aktiborik aztertzeko",
+    "loadingChart": "Grafikoa kargatzen...",
+    "moreCharges": "+{count} kobrantza gehiago",
+    "perMonth": "/hilabetean",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "Kostua Kategoriaren Arabera",
+      "potentialSavings": "Aurrezki Potentzialak",
+      "upcomingCharges": "Hurrengo Kobratzak (Hurrengo 30 Egunak)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {Harpidetza aktibo 1} other {# harpidetza aktibo}}",
+      "annualCost": "Urteko Kostua",
+      "monthlyCost": "Hileko Kostua",
+      "next30Days": "Hurrengo 30 Egunak",
+      "projectedYearly": "Aurreikusitako urteko gastua",
+      "upcomingCharges": "{count, plural, =1 {Hurrengo kobrantza 1} other {# hurrengo kobrantza}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Beharbada baliogabetutako harpidetzak",
+      "inactiveDescription": "{count, plural, =1 {Harpidetza 1 ez du} other {# harpidetzak ez dute}} duela gutxi kobratu. Egiaztatu benetan baliogabetuta dauden.",
+      "trialsTitle": "Laster amaituko diren probaldiak",
+      "trialsDescription": "{count, plural, =1 {Probaldi 1} other {# probaldi}} hurrengo 7 egunetan amaituko da. Ezeztatu erabiltzen ez badituzu.",
+      "highCostTitle": "Kostu handiko harpidetzak",
+      "highCostDescription": "Harpidetza hauek zure gastuen zati handi bat dira. Pentsatu balio osoa lortzen ari zarzen."
     }
   },
   "subscriptionModal": {
@@ -4712,7 +4712,7 @@
   },
   "tooltip": {
     "ariaLabel": "Informazio gehiago",
-    "learnMore": "Gehiago ikasi →"
+    "learnMore": "Ikasi gehiago →"
   },
   "trainMl": {
     "confidence": "Confidence",
@@ -4749,83 +4749,83 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "Kontua"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} eskuragarri",
+      "label": "Aukera Aurreratuak"
     },
     "amount": {
-      "label": "Amount",
-      "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "label": "Zenbatekoa",
+      "placeholder": "0,00",
+      "validationError": "Mesedez, sartu baliozko zenbateko bat"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "Transakzioa Gehitu",
+      "adding": "Gehitzen...",
+      "cancel": "Utzi",
+      "update": "Transakzioa Eguneratu",
+      "updating": "Eguneratzen..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "AA kategorizatzen...",
+      "create": "Sortu",
+      "createNew": "+ Kategoria Berria Sortu",
+      "label": "Kategoria",
+      "lastUsed": "Azkena erabilia: {category}",
+      "namePlaceholder": "Kategoriaren izena...",
+      "selectPlaceholder": "Kategoria hautatu...",
+      "subcategoriesPlaceholder": "Azpikategoriak (aukerakoa, komaz bereizita)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Leihoa itxi",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "\"{name}\" kategoria sortu da!",
+      "failed": "Ezin izan da kategoria sortu",
+      "nameRequired": "Kategoriaren izena beharrezkoa da"
     },
     "date": {
-      "label": "Date"
+      "label": "Data"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "Deskribapena",
+      "placeholder": "adib., Erosketak Sobeysen"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "3 zuzenketak antzeko ondoren, merkatari honetako etorkizuneko transakzioak automatikoki kategorizatuko dira.",
+      "title": "Ikasia!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "Oharrak",
+      "placeholder": "Gehitu ohar gehigarriak..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "Tiketa Berria Gehitu",
+      "deleteConfirm": "Ziur zaude tiketa hau ezabatu nahi duzula?",
+      "deleteFailed": "Ezin izan da tiketa ezabatu",
+      "deleteReceipt": "Tiketa ezabatu",
+      "existing": "Dauden tiketak ({count})",
+      "label": "Tiketa Eranskinak",
+      "newFile": "Berria: {filename}",
+      "remove": "Kendu",
+      "viewFull": "Tiketa osoa ikusi"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "Azpikategoria",
+      "none": "Bat ere ez",
+      "selectPlaceholder": "Azpikategoria hautatu..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "Etiketak (komaz bereizita)",
+      "placeholder": "adib., janaria, astero, funtsezkoa"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "Transakzioa Gehitu",
+      "edit": "Transakzioa Editatu"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "Gastua",
+      "income": "Sarrera",
+      "label": "Mota"
     }
   },
   "transactionSearch": {
@@ -4872,19 +4872,19 @@
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "Tiketa erantsi",
+      "delete": "Ezabatu",
+      "edit": "Editatu",
+      "split": "Zatitu"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "Ez dago transakziorik bistaratzeko",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "Kontua",
+      "actions": "Ekintzak",
+      "amount": "Zenbatekoa",
+      "category": "Kategoria",
+      "date": "Data",
+      "description": "Deskribapena"
     }
   },
   "transactions": {
@@ -5055,52 +5055,52 @@
   },
   "widget": {
     "accountBalances": {
-      "description": "Zure kontu guztietako balantze eguneratuak",
-      "title": "Kontu Balantzeak"
+      "description": "Zure kontu guztien uneko saldoak",
+      "title": "Kontuen Saldoak"
     },
     "budgetProgress": {
-      "description": "Zure aurrekontu helburuekin nola doazen jarraitu",
-      "title": "Aurrekontu Aurrerapena"
+      "description": "Jarraitu zure aurrekontu-helburuen aurrerapena",
+      "title": "Aurrekontuaren Aurrerapena"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "Jarraitu ekitaldi eta proiektuen gastuak",
+      "title": "Ekitaldien Aurrekontuak"
     },
     "incomeVsExpenses": {
-      "description": "Zure irabaziak eta gastuak denboran zehar konparatu",
-      "title": "Sarrera vs Gastuak"
+      "description": "Konparatu zure irabaziak eta gastuak denboran zehar",
+      "title": "Sarrerak vs Gastuak"
     },
     "monthlyTrends": {
-      "description": "Zure finantza patroiak hilean hilean irudikatu",
-      "title": "Hileko Joera"
+      "description": "Bistaratu zure finantza-ereduak hilabetez hilabete",
+      "title": "Hileko Joerak"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "Zure ondare garbi osoaren ikuspegi azkarra",
+      "title": "Ondare Garbia"
     },
     "recentTransactions": {
-      "description": "Azken finantza jardueraren ikuspegi azkarra",
+      "description": "Zure azken finantza-jardueren ikuspegi azkarra",
       "title": "Azken Transakzioak"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "Ikusi zenbat gaста dezakezu kategoria bakoitzean",
+      "title": "Gastatzeko Segurua"
     },
     "spendingByCategory": {
-      "description": "Ikusi nora doan zure dirua irudizko banaketan",
-      "title": "Kategorien Araberako Gastuak"
+      "description": "Ikusi nora doan zure dirua banaketa bisualekin",
+      "title": "Gastua Kategoriaren Arabera"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "Jarraitu zure inplikazio-segidak eta lorpenak",
+      "title": "Segidak eta Bereizgarriak"
     },
     "upcomingBills": {
-      "description": "Ez galdu ordainketa bat ere faktura gogorarazleekin",
+      "description": "Ez galdu inoiz ordainketarik faktura-gogorazpenei esker",
       "title": "Hurrengo Fakturak"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "Zure asteko gastu-ereduen laburpena",
+      "title": "Asteko Laburpena"
     }
   },
   "ynabMigrationWizard": {

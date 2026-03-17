@@ -63,34 +63,34 @@
   },
   "accessibleChart": {
     "buttons": {
-      "chart": "Chart",
-      "showChart": "Show chart view",
-      "showTable": "Show data table view",
-      "table": "Table"
+      "chart": "Γράφημα",
+      "showChart": "Εμφάνιση γραφήματος",
+      "showTable": "Εμφάνιση πίνακα δεδομένων",
+      "table": "Πίνακας"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
-    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "chartDescription": "{description}. {dataPoints} σημεία δεδομένων. {dataList}. Πατήστε το κουμπί Πίνακας για προβολή δεδομένων σε μορφή πίνακα με υποστήριξη πλοήγησης μέσω πληκτρολογίου.",
+    "chartTypeDescription": "Αυτό είναι ένα γράφημα {chartType} με {dataPoints} σημεία δεδομένων.",
     "footer": {
-      "average": "Average:",
-      "total": "Total:"
+      "average": "Μέσος όρος:",
+      "total": "Σύνολο:"
     },
     "keyboardNav": {
-      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
-      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+      "srOnly": "Χρησιμοποιήστε τα βελάκια για πλοήγηση μεταξύ γραμμών. Πατήστε Tab για μετάβαση στο επόμενο στοιχείο.",
+      "visual": "Χρησιμοποιήστε ← → ή ↑ ↓ για πλοήγηση • Home/End για μετάβαση στην αρχή/τέλος"
     },
     "summary": {
-      "average": "Average: {value}.",
-      "highest": "Highest value: {label} at {value}.",
-      "lowest": "Lowest value: {label} at {value}.",
-      "total": "Total: {value}."
+      "average": "Μέσος όρος: {value}.",
+      "highest": "Υψηλότερη τιμή: {label} στο {value}.",
+      "lowest": "Χαμηλότερη τιμή: {label} στο {value}.",
+      "total": "Σύνολο: {value}."
     },
-    "switchedToChart": "Switched to chart view",
-    "switchedToTable": "Switched to table view",
+    "switchedToChart": "Μετάβαση σε προβολή γραφήματος",
+    "switchedToTable": "Μετάβαση σε προβολή πίνακα",
     "tableHeaders": {
-      "additionalInfo": "Additional Info",
-      "category": "Category",
-      "period": "Period",
-      "value": "Value"
+      "additionalInfo": "Πρόσθετες Πληροφορίες",
+      "category": "Κατηγορία",
+      "period": "Περίοδος",
+      "value": "Τιμή"
     }
   },
   "actions": {
@@ -225,40 +225,40 @@
     "whenColumn": "When"
   },
   "aiColumnMapper": {
-    "analyzing": "Analyzing CSV structure with AI...",
+    "analyzing": "Ανάλυση δομής CSV με AI...",
     "buttons": {
-      "apply": "Apply Mappings & Import",
-      "cancel": "Cancel"
+      "apply": "Εφαρμογή Αντιστοιχίσεων & Εισαγωγή",
+      "cancel": "Ακύρωση"
     },
-    "closeModal": "Close modal",
-    "columnMappings": "Column Mappings",
+    "closeModal": "Κλείσιμο παραθύρου",
+    "columnMappings": "Αντιστοιχίσεις Στηλών",
     "columnTypes": {
-      "amount": "Amount",
-      "balance": "Balance",
-      "credit": "Credit",
-      "date": "Date",
-      "debit": "Debit",
-      "description": "Description",
-      "ignore": "Ignore"
+      "amount": "Ποσό",
+      "balance": "Υπόλοιπο",
+      "credit": "Πίστωση",
+      "date": "Ημερομηνία",
+      "debit": "Χρέωση",
+      "description": "Περιγραφή",
+      "ignore": "Αγνόηση"
     },
     "confidence": {
-      "analyzed": "AI analyzed {columnCount} columns and {rowCount} sample rows",
-      "title": "Detection Confidence"
+      "analyzed": "Η AI ανέλυσε {columnCount} στήλες και {rowCount} δείγματα γραμμών",
+      "title": "Εμπιστοσύνη Ανίχνευσης"
     },
     "preview": {
-      "amount": "Amount",
-      "date": "Date",
-      "description": "Description",
-      "title": "Transaction Preview"
+      "amount": "Ποσό",
+      "date": "Ημερομηνία",
+      "description": "Περιγραφή",
+      "title": "Προεπισκόπηση Συναλλαγών"
     },
-    "samples": "Samples:",
+    "samples": "Δείγματα:",
     "saveConfig": {
-      "hint": "Next time you import from this bank, mappings will be automatic",
-      "label": "Save this bank configuration for future imports",
-      "placeholder": "Enter bank name (e.g., My Local Credit Union)"
+      "hint": "Την επόμενη φορά που θα εισαγάγετε από αυτή την τράπεζα, οι αντιστοιχίσεις θα γίνουν αυτόματα",
+      "label": "Αποθήκευση ρυθμίσεων τράπεζας για μελλοντικές εισαγωγές",
+      "placeholder": "Εισάγετε όνομα τράπεζας (π.χ., Τράπεζα Πειραιώς)"
     },
-    "subtitle": "Review AI-detected columns and adjust if needed",
-    "title": "AI Column Mapping Wizard"
+    "subtitle": "Ελέγξτε τις στήλες που εντόπισε η AI και προσαρμόστε αν χρειαστεί",
+    "title": "Οδηγός Αντιστοίχισης Στηλών AI"
   },
   "amortizationChart": {
     "balanceDescription": "Your balance decreases over time as you make payments",
@@ -467,8 +467,8 @@
     "backToHome": "Επιστροφή στην αρχική"
   },
   "bottomSheet": {
-    "close": "Close",
-    "dragToClose": "Drag down to close"
+    "close": "Κλείσιμο",
+    "dragToClose": "Σύρετε προς τα κάτω για κλείσιμο"
   },
   "breadcrumb": {
     "budgetAnalyzer": "Budget Analyzer",
@@ -821,17 +821,17 @@
     }
   },
   "bulkActions": {
-    "applyTo": "Apply to {count}",
-    "categorize": "Categorize",
-    "clearSelection": "Clear selection",
-    "confirmDelete": "Delete {count, plural, =1 {1 transaction} other {# transactions}}?",
-    "delete": "Delete",
-    "deleteWarning": "This action cannot be undone.",
-    "export": "Export",
-    "noSubcategory": "No subcategory",
-    "selectAll": "Select all",
-    "selectCategory": "Select category...",
-    "selected": "{count} selected"
+    "applyTo": "Εφαρμογή σε {count}",
+    "categorize": "Κατηγοριοποίηση",
+    "clearSelection": "Εκκαθάριση επιλογής",
+    "confirmDelete": "Διαγραφή {count, plural, =1 {1 συναλλαγής} other {# συναλλαγών}};",
+    "delete": "Διαγραφή",
+    "deleteWarning": "Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
+    "export": "Εξαγωγή",
+    "noSubcategory": "Χωρίς υποκατηγορία",
+    "selectAll": "Επιλογή όλων",
+    "selectCategory": "Επιλέξτε κατηγορία...",
+    "selected": "{count} επιλεγμένα"
   },
   "calculators": {
     "budgetAnalyzer": {
@@ -1290,94 +1290,94 @@
   },
   "chatbot": {
     "buttons": {
-      "clearHistory": "Clear chat history",
-      "exportConversation": "Export conversation",
-      "send": "Send"
+      "clearHistory": "Εκκαθάριση ιστορικού",
+      "exportConversation": "Εξαγωγή συνομιλίας",
+      "send": "Αποστολή"
     },
     "disabled": {
-      "description": "Enable the chatbot in Settings → Privacy → Budget Chatbot to get started.",
-      "enableButton": "Enable Chatbot",
-      "title": "Chatbot Disabled"
+      "description": "Ενεργοποιήστε το chatbot στις Ρυθμίσεις → Απόρρητο → Budget Chatbot.",
+      "enableButton": "Ενεργοποίηση Chatbot",
+      "title": "Chatbot Απενεργοποιημένο"
     },
     "emptyState": {
-      "description": "Ask me anything about your finances. Here are some examples:",
+      "description": "Ρωτήστε οτιδήποτε σχετικά με τα οικονομικά σας. Μερικά παραδείγματα:",
       "examples": {
-        "balance": "What's my total account balance?",
-        "budget": "Am I over budget in any categories?",
-        "groceries": "Show me my recent grocery purchases",
-        "spending": "How much did I spend this month?"
+        "balance": "Ποιο είναι το συνολικό υπόλοιπό μου;",
+        "budget": "Υπερβαίνω τον προϋπολογισμό σε κάποια κατηγορία;",
+        "groceries": "Δείξε μου τις πρόσφατες αγορές τροφίμων",
+        "spending": "Πόσα ξόδεψα αυτόν τον μήνα;"
       },
-      "title": "Start a Conversation"
+      "title": "Ξεκινήστε μια Συνομιλία"
     },
     "header": {
-      "subtitle": "Ask me about your finances",
-      "title": "Budget Assistant"
+      "subtitle": "Ρωτήστε με για τα οικονομικά σας",
+      "title": "Οικονομικός Βοηθός"
     },
     "input": {
-      "disclaimer": "Powered by OpenAI GPT-4. Your data is processed securely and not used for training.",
-      "placeholder": "Ask about your finances..."
+      "disclaimer": "Τροφοδοτείται από OpenAI GPT-4. Τα δεδομένα σας επεξεργάζονται με ασφάλεια.",
+      "placeholder": "Ρωτήστε για τα οικονομικά σας..."
     },
     "messages": {
-      "dataAccessed": "Data accessed:",
-      "error": "Error",
-      "thinking": "Thinking..."
+      "dataAccessed": "Πρόσβαση δεδομένων:",
+      "error": "Σφάλμα",
+      "thinking": "Σκέφτομαι..."
     }
   },
   "chatbotHelp": {
     "tabs": {
-      "actions": "Actions",
-      "budget": "Budget",
-      "income": "Income",
-      "spending": "Spending",
-      "trends": "Trends"
+      "actions": "Ενέργειες",
+      "budget": "Προϋπολογισμός",
+      "income": "Έσοδα",
+      "spending": "Δαπάνες",
+      "trends": "Τάσεις"
     }
   },
   "chatbotOptIn": {
     "buttons": {
-      "decline": "No Thanks",
-      "enable": "Enable Chatbot"
+      "decline": "Όχι, Ευχαριστώ",
+      "enable": "Ενεργοποίηση Chatbot"
     },
     "capabilities": {
-      "actions": "Optionally perform actions like adding transactions or creating budgets",
-      "answer": "Answer questions about your transactions, budgets, and spending patterns",
-      "insights": "Provide insights and recommendations based on your data",
-      "search": "Search your financial data using natural language",
-      "title": "What the Chatbot Can Do"
+      "actions": "Προαιρετικά εκτελεί ενέργειες όπως προσθήκη συναλλαγών ή δημιουργία προϋπολογισμών",
+      "answer": "Απαντά ερωτήσεις σχετικά με τις συναλλαγές, προϋπολογισμούς και μοτίβα δαπανών σας",
+      "insights": "Παρέχει αναλύσεις και συστάσεις βασισμένες στα δεδομένα σας",
+      "search": "Αναζητά οικονομικά δεδομένα χρησιμοποιώντας φυσική γλώσσα",
+      "title": "Τι Μπορεί να Κάνει το Chatbot"
     },
-    "closeDialog": "Close chatbot opt-in dialog",
+    "closeDialog": "Κλείσιμο διαλόγου chatbot",
     "controls": {
       "dataAccess": {
         "fullAccess": {
-          "description": "Chatbot can perform actions like adding transactions, creating budgets, and making changes to your data",
-          "title": "Full Access"
+          "description": "Το chatbot μπορεί να εκτελεί ενέργειες όπως προσθήκη συναλλαγών και δημιουργία προϋπολογισμών",
+          "title": "Πλήρης Πρόσβαση"
         },
-        "label": "What can the chatbot do with your data?",
+        "label": "Τι μπορεί να κάνει το chatbot με τα δεδομένα σας;",
         "readOnly": {
-          "description": "Chatbot can view your data and answer questions, but cannot add, edit, or delete transactions/budgets",
-          "title": "Read-Only (Recommended)"
+          "description": "Το chatbot μπορεί να δει δεδομένα και να απαντά σε ερωτήσεις, αλλά δεν μπορεί να τροποποιήσει τίποτα",
+          "title": "Μόνο Ανάγνωση (Συνιστάται)"
         }
       },
       "retention": {
-        "days30": "30 days",
-        "days7": "7 days (Recommended)",
-        "forever": "Keep forever",
-        "label": "How long should we keep your conversations?",
-        "note": "Conversations are stored locally in your browser. You can delete them anytime in Settings → Privacy."
+        "days30": "30 ημέρες",
+        "days7": "7 ημέρες (Συνιστάται)",
+        "forever": "Για πάντα",
+        "label": "Πόσο καιρό να διατηρούνται οι συνομιλίες;",
+        "note": "Οι συνομιλίες αποθηκεύονται τοπικά στον browser σας. Μπορείτε να τις διαγράψετε οποτεδήποτε."
       },
-      "title": "Privacy Controls"
+      "title": "Ρυθμίσεις Απορρήτου"
     },
     "gdpr": {
-      "notice": "<strong>Your Rights:</strong> By enabling the chatbot, you consent to processing your financial data via OpenAI's API. You can withdraw consent anytime by disabling the chatbot in Settings → Privacy. Your data is processed in accordance with our Privacy Policy and GDPR requirements. You have the right to access, delete, and export your conversation history at any time."
+      "notice": "<strong>Τα Δικαιώματά σας:</strong> Ενεργοποιώντας το chatbot, συναινείτε στην επεξεργασία δεδομένων μέσω OpenAI API. Μπορείτε να αποσύρετε τη συγκατάθεσή σας απενεργοποιώντας το chatbot. Τα δεδομένα σας επεξεργάζονται σύμφωνα με την Πολιτική Απορρήτου και τις απαιτήσεις GDPR. Έχετε δικαίωμα πρόσβασης, διαγραφής και εξαγωγής ιστορικού."
     },
     "privacy": {
-      "dataSent": "Financial data is sent to the API to answer your questions",
-      "disable": "You can disable the chatbot anytime in Settings → Privacy",
-      "noTraining": "OpenAI does not use API data to train models (as of their policy)",
-      "processedBy": "Your conversations are processed by OpenAI's GPT-4 API",
-      "title": "Privacy & Data Usage"
+      "dataSent": "Οικονομικά δεδομένα αποστέλλονται στο API για απαντήσεις",
+      "disable": "Μπορείτε να απενεργοποιήσετε το chatbot οποτεδήποτε στις Ρυθμίσεις → Απόρρητο",
+      "noTraining": "Το OpenAI δεν χρησιμοποιεί δεδομένα API για εκπαίδευση μοντέλων",
+      "processedBy": "Οι συνομιλίες σας επεξεργάζονται από το OpenAI GPT-4 API",
+      "title": "Απόρρητο & Χρήση Δεδομένων"
     },
-    "subtitle": "AI-powered financial assistant",
-    "title": "Enable Budget Chatbot?"
+    "subtitle": "Οικονομικός βοηθός με τεχνητή νοημοσύνη",
+    "title": "Ενεργοποίηση Budget Chatbot;"
   },
   "columnMapper": {
     "amount": "Amount",
@@ -1409,40 +1409,40 @@
     "useSavedMapping": "Use Saved Mapping"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "Δεν βρέθηκαν αποτελέσματα.",
+    "search": "Αναζήτηση...",
+    "select": "Επιλέξτε..."
   },
   "commandPalette": {
     "commands": {
-      "addTransaction": "Add Transaction",
-      "budgets": "Budgets",
-      "categories": "Categories",
-      "darkTheme": "Dark Theme",
-      "dashboard": "Dashboard",
-      "exportData": "Export Data",
-      "futurePlans": "Future Plans",
-      "highContrastTheme": "High-Contrast Theme",
-      "importCsv": "Import CSV",
-      "investments": "Investments",
-      "lightTheme": "Light Theme",
-      "loans": "Loans",
-      "newBudget": "New Budget",
-      "reports": "Reports",
-      "retirement": "Retirement",
-      "scanReceipt": "Scan Receipt",
-      "settings": "Settings",
-      "transactions": "Transactions"
+      "addTransaction": "Προσθήκη Συναλλαγής",
+      "budgets": "Προϋπολογισμοί",
+      "categories": "Κατηγορίες",
+      "darkTheme": "Σκοτεινό Θέμα",
+      "dashboard": "Πίνακας Ελέγχου",
+      "exportData": "Εξαγωγή Δεδομένων",
+      "futurePlans": "Μελλοντικά Σχέδια",
+      "highContrastTheme": "Θέμα Υψηλής Αντίθεσης",
+      "importCsv": "Εισαγωγή CSV",
+      "investments": "Επενδύσεις",
+      "lightTheme": "Φωτεινό Θέμα",
+      "loans": "Δάνεια",
+      "newBudget": "Νέος Προϋπολογισμός",
+      "reports": "Αναφορές",
+      "retirement": "Συνταξιοδότηση",
+      "scanReceipt": "Σάρωση Απόδειξης",
+      "settings": "Ρυθμίσεις",
+      "transactions": "Συναλλαγές"
     },
     "groups": {
-      "appearance": "Appearance",
-      "quickActions": "Quick Actions",
-      "tools": "Tools & Settings",
-      "tracking": "Tracking & Analysis",
-      "wealth": "Wealth & Planning"
+      "appearance": "Εμφάνιση",
+      "quickActions": "Γρήγορες Ενέργειες",
+      "tools": "Εργαλεία & Ρυθμίσεις",
+      "tracking": "Παρακολούθηση & Ανάλυση",
+      "wealth": "Πλούτος & Σχεδιασμός"
     },
-    "noResults": "No results found.",
-    "placeholder": "Type a command or search..."
+    "noResults": "Δεν βρέθηκαν αποτελέσματα.",
+    "placeholder": "Πληκτρολογήστε εντολή ή αναζητήστε..."
   },
   "common": {
     "cancel": "Ακύρωση",
@@ -1465,168 +1465,168 @@
   "dashboard": {
     "widgets": {
       "accountBalances": {
-        "addAccount": "Add Account",
-        "allTransactions": "All Transactions",
-        "imported": "Imported",
-        "netWorth": "Net Worth",
-        "noAccounts": "No accounts added yet",
-        "title": "Account Balances",
-        "viewAll": "View All"
+        "addAccount": "Προσθήκη Λογαριασμού",
+        "allTransactions": "Όλες οι Συναλλαγές",
+        "imported": "Εισαγμένες",
+        "netWorth": "Καθαρή Αξία",
+        "noAccounts": "Δεν έχουν προστεθεί λογαριασμοί",
+        "title": "Υπόλοιπα Λογαριασμών",
+        "viewAll": "Προβολή Όλων"
       },
       "budgetProgress": {
-        "createBudget": "Create Budget",
-        "noBudgets": "No budgets set",
-        "overBudget": "Over budget by {amount}",
-        "remaining": "Remaining",
-        "spent": "Spent",
-        "title": "Budget Progress",
-        "viewAll": "View All Budgets"
+        "createBudget": "Δημιουργία Προϋπολογισμού",
+        "noBudgets": "Δεν έχουν οριστεί προϋπολογισμοί",
+        "overBudget": "Υπέρβαση κατά {amount}",
+        "remaining": "Υπόλοιπο",
+        "spent": "Δαπανήθηκαν",
+        "title": "Πρόοδος Προϋπολογισμού",
+        "viewAll": "Προβολή Όλων"
       },
       "eventBudget": {
-        "noEvents": "No active events",
-        "title": "Event Budgets",
-        "viewAll": "View All"
+        "noEvents": "Δεν υπάρχουν ενεργές εκδηλώσεις",
+        "title": "Προϋπολογισμοί Εκδηλώσεων",
+        "viewAll": "Προβολή Όλων"
       },
       "incomeVsExpenses": {
-        "addTransactions": "Add Transactions",
-        "expenses": "Expenses",
-        "income": "Income",
-        "net": "Net",
-        "noData": "No transactions yet",
-        "thisMonth": "This Month",
-        "title": "Income vs Expenses"
+        "addTransactions": "Προσθήκη Συναλλαγών",
+        "expenses": "Έξοδα",
+        "income": "Έσοδα",
+        "net": "Καθαρά",
+        "noData": "Δεν υπάρχουν συναλλαγές",
+        "thisMonth": "Αυτό τον Μήνα",
+        "title": "Έσοδα vs Έξοδα"
       },
       "monthlyTrends": {
-        "expenses": "Expenses",
-        "income": "Income",
-        "lastSixMonths": "Last 6 Months",
-        "needMoreData": "Add transactions for 2+ months to see trends",
-        "notEnoughData": "Not enough history",
-        "title": "Monthly Trends"
+        "expenses": "Έξοδα",
+        "income": "Έσοδα",
+        "lastSixMonths": "Τελευταίοι 6 Μήνες",
+        "needMoreData": "Προσθέστε συναλλαγές για 2+ μήνες για να δείτε τάσεις",
+        "notEnoughData": "Ανεπαρκές ιστορικό",
+        "title": "Μηνιαίες Τάσεις"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
-        "title": "Net Worth",
-        "viewDetails": "View Details"
+        "assets": "Ενεργητικό",
+        "liabilities": "Υποχρεώσεις",
+        "title": "Καθαρή Αξία",
+        "viewDetails": "Προβολή Λεπτομερειών"
       },
       "recentTransactions": {
-        "addTransaction": "Add Transaction",
-        "noTransactions": "No transactions yet",
-        "title": "Recent Transactions",
-        "uncategorized": "Uncategorized",
-        "viewAll": "View All"
+        "addTransaction": "Προσθήκη Συναλλαγής",
+        "noTransactions": "Δεν υπάρχουν συναλλαγές",
+        "title": "Πρόσφατες Συναλλαγές",
+        "uncategorized": "Χωρίς κατηγορία",
+        "viewAll": "Προβολή Όλων"
       },
       "safeToSpend": {
-        "caution": "Watch spending",
-        "createBudget": "Create Budget",
-        "dailyBudget": "Daily budget",
-        "danger": "Over budget",
-        "daysRemaining": "{days} days left",
-        "noBudgets": "No budgets set up yet",
-        "noData": "No budgets set up yet",
-        "overBudget": "{amount} over budget",
-        "perCategory": "Per category",
-        "remaining": "{amount} remaining",
-        "safe": "On track",
-        "title": "Safe to Spend",
-        "totalSafe": "Total safe to spend",
-        "viewAll": "View All"
+        "caution": "Προσοχή στις δαπάνες",
+        "createBudget": "Δημιουργία Προϋπολογισμού",
+        "dailyBudget": "Ημερήσιος προϋπολογισμός",
+        "danger": "Υπέρβαση προϋπολογισμού",
+        "daysRemaining": "{days} ημέρες απομένουν",
+        "noBudgets": "Δεν έχουν ρυθμιστεί προϋπολογισμοί",
+        "noData": "Δεν έχουν ρυθμιστεί προϋπολογισμοί",
+        "overBudget": "υπέρβαση κατά {amount}",
+        "perCategory": "Ανά κατηγορία",
+        "remaining": "απομένουν {amount}",
+        "safe": "Εντός στόχου",
+        "title": "Ασφαλές για Δαπάνη",
+        "totalSafe": "Συνολικό ασφαλές για δαπάνη",
+        "viewAll": "Προβολή Όλων"
       },
       "spendingByCategory": {
-        "addTransactions": "Add Transactions",
-        "moreCategories": "+{count} more categories",
-        "noData": "No spending tracked yet",
-        "thisMonth": "This Month",
-        "title": "Spending by Category",
-        "total": "Total",
-        "uncategorized": "Uncategorized"
+        "addTransactions": "Προσθήκη Συναλλαγών",
+        "moreCategories": "+{count} ακόμη κατηγορίες",
+        "noData": "Δεν έχουν καταγραφεί δαπάνες",
+        "thisMonth": "Αυτό τον Μήνα",
+        "title": "Δαπάνες ανά Κατηγορία",
+        "total": "Σύνολο",
+        "uncategorized": "Χωρίς κατηγορία"
       },
       "streaks": {
-        "badges": "badges",
-        "dayStreak": "day streak",
-        "points": "points",
-        "title": "Streaks & Badges"
+        "badges": "σήματα",
+        "dayStreak": "ημέρες σερί",
+        "points": "πόντοι",
+        "title": "Σερί & Σήματα"
       },
       "upcomingBills": {
-        "addSubscription": "Add Subscription",
-        "dueIn": "Due in {days} days",
-        "dueToday": "Due today",
-        "dueTomorrow": "Due tomorrow",
-        "noBills": "No upcoming bills",
-        "title": "Upcoming Bills",
-        "viewAll": "View All"
+        "addSubscription": "Προσθήκη Συνδρομής",
+        "dueIn": "Λήξη σε {days} ημέρες",
+        "dueToday": "Λήγει σήμερα",
+        "dueTomorrow": "Λήγει αύριο",
+        "noBills": "Δεν υπάρχουν επερχόμενοι λογαριασμοί",
+        "title": "Επερχόμενοι Λογαριασμοί",
+        "viewAll": "Προβολή Όλων"
       },
       "weeklyRecap": {
-        "title": "Weekly Recap",
-        "viewFull": "Full Review",
-        "vsLastWeek": "vs last week"
+        "title": "Εβδομαδιαία Ανασκόπηση",
+        "viewFull": "Πλήρης Ανασκόπηση",
+        "vsLastWeek": "σε σχέση με την περασμένη εβδομάδα"
       }
     }
   },
   "dashboardCustomizer": {
-    "alwaysVisible": "Always visible",
-    "ariaLabel": "Customize dashboard layout",
-    "button": "Customize",
-    "description": "Show or hide dashboard widgets. Drag widgets on the dashboard to reorder them.",
-    "reorderDescription": "To change widget order, drag and drop widgets directly on your dashboard. Use your mouse or touch to grab the drag handle (⋮⋮) on each widget card.",
-    "reorderTitle": "Reorder Widgets",
-    "resetButton": "Reset to Defaults",
-    "title": "Customize Dashboard",
-    "toggleVisibility": "Toggle {name} visibility",
-    "widgetVisibility": "Widget Visibility",
-    "widgetsVisible": "{visible} of {total} widgets visible"
+    "alwaysVisible": "Πάντα ορατό",
+    "ariaLabel": "Προσαρμογή διάταξης πίνακα ελέγχου",
+    "button": "Προσαρμογή",
+    "description": "Εμφάνιση ή απόκρυψη widget πίνακα ελέγχου. Σύρετε τα widget στον πίνακα ελέγχου για αναδιάταξη.",
+    "reorderDescription": "Για αλλαγή σειράς widget, σύρετε και αφήστε τα widget απευθείας στον πίνακα ελέγχου. Χρησιμοποιήστε το ποντίκι ή αφή για να πιάσετε τη λαβή μεταφοράς (⋮⋮) σε κάθε κάρτα widget.",
+    "reorderTitle": "Αναδιάταξη Widget",
+    "resetButton": "Επαναφορά στις Προεπιλογές",
+    "title": "Προσαρμογή Πίνακα Ελέγχου",
+    "toggleVisibility": "Εναλλαγή ορατότητας {name}",
+    "widgetVisibility": "Ορατότητα Widget",
+    "widgetsVisible": "{visible} από {total} widget ορατά"
   },
   "debtAnalysis": {
     "cards": {
       "avgRate": {
-        "subtitle": "Weighted average",
-        "title": "Avg Interest Rate"
+        "subtitle": "Σταθμισμένος μέσος",
+        "title": "Μέσο Επιτόκιο"
       },
       "debtFreeDate": {
-        "subtitle": "Estimated payoff",
-        "title": "Debt-Free Date"
+        "subtitle": "Εκτιμώμενη αποπληρωμή",
+        "title": "Ημερομηνία Αποπληρωμής"
       },
       "monthlyPayment": {
-        "subtitle": "Total monthly obligations",
-        "title": "Monthly Payment"
+        "subtitle": "Συνολικές μηνιαίες υποχρεώσεις",
+        "title": "Μηνιαία Πληρωμή"
       },
       "totalDebt": {
-        "subtitle": "Across {count} active loans",
-        "title": "Total Debt"
+        "subtitle": "Σε {count} ενεργά δάνεια",
+        "title": "Συνολικό Χρέος"
       }
     },
     "charts": {
       "byType": {
-        "description": "Distribution of debt across loan types",
-        "title": "Debt by Type"
+        "description": "Κατανομή χρέους ανά τύπο δανείου",
+        "title": "Χρέος ανά Τύπο"
       },
       "projection": {
-        "description": "Expected debt reduction over the next year",
-        "expectedReduction": "Expected reduction: {amount} over 12 months",
-        "title": "12-Month Payoff Projection"
+        "description": "Αναμενόμενη μείωση χρέους τον επόμενο χρόνο",
+        "expectedReduction": "Αναμενόμενη μείωση: {amount} σε 12 μήνες",
+        "title": "Πρόβλεψη Αποπληρωμής 12 Μηνών"
       }
     },
     "comparison": {
-      "description": "Side-by-side comparison of your active loans",
+      "description": "Σύγκριση ενεργών δανείων",
       "headers": {
-        "balance": "Balance",
-        "interestRate": "Interest Rate",
-        "loan": "Loan",
-        "monthlyPayment": "Monthly Payment",
-        "percentOfTotal": "% of Total Debt"
+        "balance": "Υπόλοιπο",
+        "interestRate": "Επιτόκιο",
+        "loan": "Δάνειο",
+        "monthlyPayment": "Μηνιαία Πληρωμή",
+        "percentOfTotal": "% Συνολικού Χρέους"
       },
-      "title": "Loan Comparison",
-      "total": "Total"
+      "title": "Σύγκριση Δανείων",
+      "total": "Σύνολο"
     },
     "empty": {
-      "addFirstLoan": "Add Your First Loan",
-      "description": "You don't have any active loans. Add a loan to see debt analytics.",
-      "title": "No Debt to Analyze"
+      "addFirstLoan": "Προσθήκη Πρώτου Δανείου",
+      "description": "Δεν έχετε ενεργά δάνεια. Προσθέστε δάνειο για αναλυτικά χρέους.",
+      "title": "Δεν Υπάρχει Χρέος για Ανάλυση"
     },
-    "subtitle": "Comprehensive view of your loans and obligations",
-    "title": "Debt Analysis",
-    "viewAllLoans": "View All Loans"
+    "subtitle": "Συνολική εικόνα δανείων και υποχρεώσεων",
+    "title": "Ανάλυση Χρέους",
+    "viewAllLoans": "Προβολή Όλων των Δανείων"
   },
   "debtOverview": {
     "activeLoans": "{count, plural, one {# active loan} other {# active loans}}",
@@ -1791,103 +1791,103 @@
     "confirm": "Επιβεβαίωση",
     "finalConfirmation": "Τελική Επιβεβαίωση:",
     "processing": "Επεξεργασία...",
-    "typeToConfirm": "Πληκτρολογήστε {text} για να επιβεβαιώσετε αυτήν την ενέργεια.",
-    "confirmAction": "Επιβεβαίωση ενέργειας"
+    "typeToConfirm": "Πληκτρολογήστε {text} για επιβεβαίωση αυτής της ενέργειας.",
+    "confirmAction": "Επιβεβαίωση Ενέργειας"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "Σύρετε για αναδιάταξη widget"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
-    "yearsAndMonths": "{years}y {months}m"
+    "months": "{count, plural, =1 {1 μήνας} other {# μήνες}}",
+    "years": "{count, plural, =1 {1 έτος} other {# έτη}}",
+    "yearsAndMonths": "{years}χ {months}μ"
   },
   "emptyStates": {
     "budgets": {
-      "description": "Create budgets to track spending in different categories and achieve your financial goals.",
-      "heading": "No Budgets Created",
-      "primaryCta": "Create Your First Budget"
+      "description": "Δημιουργήστε προϋπολογισμούς για παρακολούθηση δαπανών σε διαφορετικές κατηγορίες και επίτευξη οικονομικών στόχων.",
+      "heading": "Δεν Υπάρχουν Προϋπολογισμοί",
+      "primaryCta": "Δημιουργία Πρώτου Προϋπολογισμού"
     },
     "categories": {
-      "description": "Create custom categories to organize your transactions beyond the default ones.",
-      "heading": "No Custom Categories",
-      "primaryCta": "Add Category"
+      "description": "Δημιουργήστε προσαρμοσμένες κατηγορίες για οργάνωση συναλλαγών πέρα από τις προεπιλεγμένες.",
+      "heading": "Δεν Υπάρχουν Προσαρμοσμένες Κατηγορίες",
+      "primaryCta": "Προσθήκη Κατηγορίας"
     },
     "dashboard": {
-      "description": "Get started by importing your bank transactions or adding accounts manually to see your financial overview.",
-      "heading": "Welcome to Your Budget App!",
-      "primaryCta": "Import CSV",
-      "secondaryCta": "Add Transaction"
+      "description": "Ξεκινήστε εισάγοντας τραπεζικές συναλλαγές ή προσθέτοντας λογαριασμούς χειροκίνητα για οικονομική επισκόπηση.",
+      "heading": "Καλώς ήρθατε στο Budget App!",
+      "primaryCta": "Εισαγωγή CSV",
+      "secondaryCta": "Προσθήκη Συναλλαγής"
     },
     "futurePlans": {
-      "description": "Set financial goals like buying a house, saving for education, or planning a vacation.",
-      "heading": "No Future Plans",
-      "primaryCta": "Create a Goal"
+      "description": "Ορίστε οικονομικούς στόχους όπως αγορά σπιτιού, αποταμίευση για εκπαίδευση ή σχεδιασμό διακοπών.",
+      "heading": "Δεν Υπάρχουν Μελλοντικά Σχέδια",
+      "primaryCta": "Δημιουργία Στόχου"
     },
     "investments": {
-      "description": "Track your investment accounts and holdings to monitor portfolio performance and net worth.",
-      "heading": "No Investments Tracked",
-      "primaryCta": "Add Investment Account"
+      "description": "Παρακολουθήστε επενδυτικούς λογαριασμούς και τίτλους για παρακολούθηση απόδοσης χαρτοφυλακίου και καθαρής αξίας.",
+      "heading": "Δεν Παρακολουθούνται Επενδύσεις",
+      "primaryCta": "Προσθήκη Επενδυτικού Λογαριασμού"
     },
     "loans": {
-      "description": "Track your loans, mortgages, and debts to visualize payoff progress and plan payments.",
-      "heading": "No Loans Tracked",
-      "primaryCta": "Add Your First Loan"
+      "description": "Παρακολουθήστε δάνεια, υποθήκες και χρέη για να δείτε την πρόοδο αποπληρωμής και να σχεδιάσετε πληρωμές.",
+      "heading": "Δεν Παρακολουθούνται Δάνεια",
+      "primaryCta": "Προσθήκη Πρώτου Δανείου"
     },
     "reports": {
-      "description": "Add transactions and budgets to generate insightful reports about your spending patterns and trends.",
-      "heading": "No Data to Report",
-      "primaryCta": "Add Transactions",
-      "secondaryCta": "Import CSV"
+      "description": "Προσθέστε συναλλαγές και προϋπολογισμούς για αναφορές σχετικά με τα μοτίβα και τις τάσεις δαπανών σας.",
+      "heading": "Δεν Υπάρχουν Δεδομένα Αναφοράς",
+      "primaryCta": "Προσθήκη Συναλλαγών",
+      "secondaryCta": "Εισαγωγή CSV"
     },
     "retirement": {
-      "description": "Plan for retirement by tracking accounts, estimating needs, and visualizing your retirement timeline.",
-      "heading": "No Retirement Plans",
-      "primaryCta": "Start Planning"
+      "description": "Σχεδιάστε τη συνταξιοδότησή σας παρακολουθώντας λογαριασμούς, εκτιμώντας ανάγκες και οπτικοποιώντας το χρονοδιάγραμμα.",
+      "heading": "Δεν Υπάρχουν Σχέδια Συνταξιοδότησης",
+      "primaryCta": "Έναρξη Σχεδιασμού"
     },
     "transactions": {
-      "description": "Start tracking your spending by adding your first transaction. You can add manually or import from a CSV file.",
-      "heading": "No Transactions Yet",
-      "primaryCta": "Add Transaction",
-      "secondaryCta": "Import CSV"
+      "description": "Ξεκινήστε την παρακολούθηση δαπανών προσθέτοντας την πρώτη σας συναλλαγή. Μπορείτε να την προσθέσετε χειροκίνητα ή να εισαγάγετε από αρχείο CSV.",
+      "heading": "Δεν Υπάρχουν Συναλλαγές",
+      "primaryCta": "Προσθήκη Συναλλαγής",
+      "secondaryCta": "Εισαγωγή CSV"
     }
   },
   "errorRecovery": {
-    "aiAnalysis": "AI Analysis:",
-    "closeModal": "Close modal",
+    "aiAnalysis": "Ανάλυση AI:",
+    "closeModal": "Κλείσιμο παραθύρου",
     "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "close": "Κλείσιμο",
+      "needHelp": "Χρειάζεστε βοήθεια;",
+      "viewGuide": "Οδηγός αντιμετώπισης προβλημάτων"
     },
     "recovery": {
-      "canRecover": "Good news! We found {count} {count, plural, =1 {way} other {ways}} to recover from this error.",
-      "cannotRecover": "Recovery not possible. You'll need to re-export the file from your bank or try a different format.",
-      "optionsTitle": "Recovery Options"
+      "canRecover": "Καλά νέα! Βρήκαμε {count} {count, plural, =1 {τρόπο} other {τρόπους}} ανάκτησης.",
+      "cannotRecover": "Ανάκτηση αδύνατη. Χρειάζεται επανεξαγωγή αρχείου ή διαφορετική μορφή.",
+      "optionsTitle": "Επιλογές Ανάκτησης"
     },
-    "subtitle": "Don't worry! We can help you fix this.",
+    "subtitle": "Μην ανησυχείτε! Μπορούμε να σας βοηθήσουμε.",
     "suggestions": {
-      "autoFix": "AUTO-FIX",
-      "autoFixButton": "Auto-Fix",
-      "confidence": "{percent}% confidence",
-      "fixing": "Fixing...",
-      "learnMore": "Learn More",
-      "technicalDetails": "Technical Details"
+      "autoFix": "ΑΥΤΟ-ΔΙΟΡΘΩΣΗ",
+      "autoFixButton": "Αυτό-Διόρθωση",
+      "confidence": "{percent}% εμπιστοσύνη",
+      "fixing": "Διόρθωση...",
+      "learnMore": "Μάθετε Περισσότερα",
+      "technicalDetails": "Τεχνικές Λεπτομέρειες"
     },
     "summary": {
-      "category": "Category: {category}",
-      "title": "Error Summary"
+      "category": "Κατηγορία: {category}",
+      "title": "Σύνοψη Σφάλματος"
     },
     "technical": {
-      "canRecover": "Can Recover:",
-      "errorCategory": "Error Category:",
-      "no": "No",
-      "severity": "Severity:",
-      "suggestions": "Suggestions:",
-      "title": "Advanced Technical Details",
-      "yes": "Yes"
+      "canRecover": "Ανάκτηση:",
+      "errorCategory": "Κατηγορία Σφάλματος:",
+      "no": "Όχι",
+      "severity": "Σοβαρότητα:",
+      "suggestions": "Προτάσεις:",
+      "title": "Προηγμένες Τεχνικές Λεπτομέρειες",
+      "yes": "Ναι"
     },
-    "title": "Import Failed"
+    "title": "Αποτυχία Εισαγωγής"
   },
   "export": {
     "allDataDeleted": "All data has been deleted. The page will now refresh.",
@@ -1974,88 +1974,88 @@
   },
   "exportDialog": {
     "buttons": {
-      "cancel": "Cancel",
-      "done": "Done!",
-      "download": "Download",
-      "export": "Export Data"
+      "cancel": "Ακύρωση",
+      "done": "Τέλος!",
+      "download": "Λήψη",
+      "export": "Εξαγωγή Δεδομένων"
     },
     "complete": {
-      "download": "Your file is ready to download",
-      "success": "Export complete! Check your downloads folder."
+      "download": "Το αρχείο σας είναι έτοιμο για λήψη",
+      "success": "Η εξαγωγή ολοκληρώθηκε! Ελέγξτε τον φάκελο λήψεων."
     },
     "dataSummary": {
-      "accounts": "Accounts",
-      "estimatedSize": "Est. Size",
-      "title": "Data Summary",
-      "transactions": "Transactions"
+      "accounts": "Λογαριασμοί",
+      "estimatedSize": "Εκτ. Μέγεθος",
+      "title": "Σύνοψη Δεδομένων",
+      "transactions": "Συναλλαγές"
     },
     "exporting": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Exporting..."
+      "pleaseWait": "Παρακαλώ περιμένετε, μπορεί να πάρει λίγο",
+      "title": "Εξαγωγή..."
     },
     "format": {
       "budget": {
-        "description": "Complete backup including all data",
-        "label": ".budget file"
+        "description": "Πλήρες αντίγραφο ασφαλείας με όλα τα δεδομένα",
+        "label": "Αρχείο .budget"
       },
       "csv": {
-        "description": "Spreadsheet-compatible format",
-        "label": "CSV file"
+        "description": "Μορφή συμβατή με υπολογιστικά φύλλα",
+        "label": "Αρχείο CSV"
       },
       "json": {
-        "description": "Developer-friendly format",
-        "label": "JSON file"
+        "description": "Φιλική μορφή για προγραμματιστές",
+        "label": "Αρχείο JSON"
       },
-      "label": "Export Format"
+      "label": "Μορφή Εξαγωγής"
     },
     "options": {
       "encrypt": {
-        "description": "Protect your data with AES-256 encryption",
-        "label": "Encrypt with Password"
+        "description": "Προστατέψτε τα δεδομένα σας με κρυπτογράφηση AES-256",
+        "label": "Κρυπτογράφηση με Κωδικό"
       },
       "includeReceipts": {
-        "description": "Attach receipt images (increases file size)",
-        "label": "Include Receipts"
+        "description": "Επισύναψη εικόνων αποδείξεων (αυξάνει το μέγεθος αρχείου)",
+        "label": "Συμπερίληψη Αποδείξεων"
       }
     },
     "password": {
-      "confirm": "Confirm Password",
-      "confirmPlaceholder": "Confirm password",
-      "hint": "Password Hint (Optional)",
-      "hintNote": "This hint will be stored unencrypted in the file",
-      "hintPlaceholder": "A hint to help you remember",
-      "label": "Password",
-      "minLength": "Password must be at least 8 characters",
-      "mismatch": "Passwords do not match",
-      "placeholder": "Enter password (min 8 characters)",
-      "required": "Password is required for encryption"
+      "confirm": "Επιβεβαίωση Κωδικού",
+      "confirmPlaceholder": "Επιβεβαιώστε τον κωδικό",
+      "hint": "Υπόδειξη Κωδικού (Προαιρετικά)",
+      "hintNote": "Αυτή η υπόδειξη θα αποθηκευτεί χωρίς κρυπτογράφηση",
+      "hintPlaceholder": "Μια υπόδειξη για υπενθύμιση",
+      "label": "Κωδικός",
+      "minLength": "Ο κωδικός πρέπει να είναι τουλάχιστον 8 χαρακτήρες",
+      "mismatch": "Οι κωδικοί δεν ταιριάζουν",
+      "placeholder": "Εισάγετε κωδικό (τουλ. 8 χαρακτήρες)",
+      "required": "Ο κωδικός απαιτείται για κρυπτογράφηση"
     },
-    "subtitle": "Download your budget data",
-    "title": "Export Data"
+    "subtitle": "Λήψη δεδομένων προϋπολογισμού",
+    "title": "Εξαγωγή Δεδομένων"
   },
   "filters": {
-    "account": "Account",
-    "allAccounts": "All accounts",
-    "allCategories": "All categories",
-    "allTypes": "All types",
-    "apply": "Apply filters",
-    "category": "Category",
-    "clearFilters": "Clear filters",
-    "dateRange": "Date range",
-    "expense": "Expense",
-    "income": "Income",
-    "search": "Search transactions...",
-    "type": "Type"
+    "account": "Λογαριασμός",
+    "allAccounts": "Όλοι οι λογαριασμοί",
+    "allCategories": "Όλες οι κατηγορίες",
+    "allTypes": "Όλοι οι τύποι",
+    "apply": "Εφαρμογή φίλτρων",
+    "category": "Κατηγορία",
+    "clearFilters": "Εκκαθάριση φίλτρων",
+    "dateRange": "Εύρος ημερομηνιών",
+    "expense": "Έξοδα",
+    "income": "Έσοδα",
+    "search": "Αναζήτηση συναλλαγών...",
+    "type": "Τύπος"
   },
   "footer": {
     "copyright": "© {year} {brandName}",
     "links": {
       "login": "Σύνδεση",
       "settings": "Ρυθμίσεις",
-      "signup": "Ξεκινήστε δοκιμή",
+      "signup": "Έναρξη δοκιμής",
       "upgrade": "Αναβάθμιση"
     },
-    "tagline": "Προηγμένος προϋπολογισμός με μία μόνο αναβάθμιση."
+    "tagline": "Premium προϋπολογισμός με εφάπαξ αναβάθμιση."
   },
   "fridayReview": {
     "back": "Back",
@@ -2098,18 +2098,18 @@
     "title": "Friday Review"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "Βαθμολογία Οικονομικής Υγείας: {score} στα 100. {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "Προσθέστε συναλλαγές για να δείτε τη",
+      "line2": "Βαθμολογία Οικονομικής Υγείας"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "Βαθμός: {grade}",
+    "missingFactors": "{count, plural, =1 {1 παράγοντας λείπει} other {# παράγοντες λείπουν}}",
+    "title": "Οικονομική Υγεία",
     "history": {
-      "title": "Ιστορικό βαθμολογίας",
+      "title": "Ιστορικό Βαθμολογίας",
       "monthsOfData": "{count} {count, plural, =1 {μήνας} other {μήνες}} δεδομένων",
-      "emptyTitle": "Το ιστορικό βαθμολογίας σας θα εμφανιστεί εδώ καθώς συγκεντρώνονται δεδομένα",
+      "emptyTitle": "Το ιστορικό βαθμολογίας σας θα εμφανιστεί εδώ καθώς συσσωρεύονται δεδομένα",
       "emptySubtitle": "Ελέγξτε ξανά τον επόμενο μήνα!",
       "legendScore": "Βαθμολογία",
       "legendTrend": "Τάση",
@@ -2217,56 +2217,56 @@
   },
   "importDialog": {
     "buttons": {
-      "back": "Back",
-      "cancel": "Cancel",
-      "done": "Done",
-      "import": "Import Data"
+      "back": "Πίσω",
+      "cancel": "Ακύρωση",
+      "done": "Τέλος",
+      "import": "Εισαγωγή Δεδομένων"
     },
     "complete": {
-      "itemsImported": "{count} items imported successfully",
-      "success": "Import Complete!",
-      "withIssues": "Import Completed with Issues"
+      "itemsImported": "{count} στοιχεία εισήχθησαν επιτυχώς",
+      "success": "Η Εισαγωγή Ολοκληρώθηκε!",
+      "withIssues": "Η Εισαγωγή Ολοκληρώθηκε με Προβλήματα"
     },
     "conflicts": {
-      "existing": "{count} existing",
-      "handleLabel": "Handle Conflicts",
+      "existing": "{count} υπάρχοντα",
+      "handleLabel": "Διαχείριση Συγκρούσεων",
       "overwrite": {
-        "description": "Replace with imported",
-        "label": "Overwrite"
+        "description": "Αντικατάσταση με εισαγόμενα",
+        "label": "Αντικατάσταση"
       },
       "rename": {
-        "description": "Import as new entries",
-        "label": "Create new"
+        "description": "Εισαγωγή ως νέες εγγραφές",
+        "label": "Δημιουργία νέων"
       },
       "skip": {
-        "description": "Keep current data",
-        "label": "Skip existing"
+        "description": "Διατήρηση τρεχόντων δεδομένων",
+        "label": "Παράλειψη υπαρχόντων"
       },
-      "title": "Conflicts Found"
+      "title": "Βρέθηκαν Συγκρούσεις"
     },
     "encryption": {
-      "decrypt": "Decrypt & Continue",
-      "encrypted": "This file is encrypted",
-      "enterPassword": "Enter password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "decrypt": "Αποκρυπτογράφηση & Συνέχεια",
+      "encrypted": "Αυτό το αρχείο είναι κρυπτογραφημένο",
+      "enterPassword": "Εισάγετε κωδικό",
+      "hint": "Υπόδειξη: {hint}",
+      "password": "Κωδικός"
     },
     "importing": {
-      "pleaseWait": "Please wait, this may take a moment",
-      "title": "Importing your data..."
+      "pleaseWait": "Παρακαλώ περιμένετε, μπορεί να πάρει λίγο",
+      "title": "Εισαγωγή δεδομένων..."
     },
     "preview": {
-      "dataToImport": "Data to Import",
-      "exported": "Exported",
-      "fileInfo": "File Information",
-      "version": "Version"
+      "dataToImport": "Δεδομένα προς Εισαγωγή",
+      "exported": "Εξαγωγή",
+      "fileInfo": "Πληροφορίες Αρχείου",
+      "version": "Έκδοση"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "ή σύρετε και αφήστε εδώ",
+      "label": "Κάντε κλικ για επιλογή αρχείου .budget"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": "Επαναφορά από αρχείο .budget",
+    "title": "Εισαγωγή Δεδομένων"
   },
   "investmentAccountModal": {
     "buttons": {
@@ -2311,30 +2311,30 @@
     }
   },
   "investmentCharts": {
-    "emptyState": "No holdings to visualize. Add holdings to see charts.",
+    "emptyState": "Δεν υπάρχουν τίτλοι για οπτικοποίηση. Προσθέστε τίτλους για να δείτε γραφήματα.",
     "legend": {
-      "gain": "Gain",
-      "loss": "Loss"
+      "gain": "Κέρδος",
+      "loss": "Ζημία"
     },
     "tableHeaders": {
-      "allocation": "Allocation",
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "gainLoss": "Gain/Loss",
-      "percentReturn": "% Return",
-      "symbol": "Symbol",
-      "total": "Total"
+      "allocation": "Κατανομή",
+      "costBasis": "Κόστος Κτήσης",
+      "currentValue": "Τρέχουσα Αξία",
+      "gainLoss": "Κέρδος/Ζημία",
+      "percentReturn": "% Απόδοσης",
+      "symbol": "Σύμβολο",
+      "total": "Σύνολο"
     },
     "titles": {
-      "accountTypeAllocation": "Allocation by Account Type",
-      "gainLoss": "Gain/Loss by Holding",
-      "performanceSummary": "Performance Summary",
-      "portfolioAllocation": "Portfolio Allocation by Holding"
+      "accountTypeAllocation": "Κατανομή ανά Τύπο Λογαριασμού",
+      "gainLoss": "Κέρδος/Ζημία ανά Τίτλο",
+      "performanceSummary": "Σύνοψη Απόδοσης",
+      "portfolioAllocation": "Κατανομή Χαρτοφυλακίου ανά Τίτλο"
     },
     "tooltip": {
-      "costBasis": "Cost Basis",
-      "currentValue": "Current Value",
-      "percentOfPortfolio": "{percent}% of portfolio"
+      "costBasis": "Κόστος Κτήσης",
+      "currentValue": "Τρέχουσα Αξία",
+      "percentOfPortfolio": "{percent}% του χαρτοφυλακίου"
     }
   },
   "investments": {
@@ -3087,17 +3087,17 @@
   "mobileNav": {
     "accounts": "Λογαριασμοί",
     "activity": "Δραστηριότητα",
-    "budget": "Προϋπολογισμός",
+    "budget": "Προϋπολ.",
     "home": "Αρχική",
     "more": "Περισσότερα"
   },
   "morePage": {
     "groups": {
-      "toolsSettings": "Tools & Settings",
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning"
+      "toolsSettings": "Εργαλεία & Ρυθμίσεις",
+      "trackingAnalysis": "Παρακολούθηση & Ανάλυση",
+      "wealthPlanning": "Πλούτος & Σχεδιασμός"
     },
-    "title": "More"
+    "title": "Περισσότερα"
   },
   "nav": {
     "about": "Σχετικά",
@@ -3271,54 +3271,54 @@
     "viewRawOcrText": "View raw OCR text"
   },
   "offline": {
-    "backOnline": "You're back online! Click refresh to reload the page.",
-    "connectionRestored": "Connection restored",
-    "goToDashboard": "Go to Dashboard",
-    "lostConnection": "It looks like you've lost your internet connection. The page you're trying to reach isn't available offline yet.",
-    "noConnection": "No internet connection",
-    "offlineFeatures": "Offline Features",
-    "offlineFeaturesDescription": "Once you visit a page while online, it will be available offline. All your data is stored locally on your device.",
-    "reloadPage": "Reload Page",
-    "title": "You're Offline",
-    "tryAgain": "Try Again"
+    "backOnline": "Είστε πάλι online! Κάντε κλικ για ανανέωση.",
+    "connectionRestored": "Η σύνδεση αποκαταστάθηκε",
+    "goToDashboard": "Πίνακας Ελέγχου",
+    "lostConnection": "Φαίνεται ότι χάσατε τη σύνδεσή σας. Η σελίδα δεν είναι ακόμα διαθέσιμη εκτός σύνδεσης.",
+    "noConnection": "Χωρίς σύνδεση στο διαδίκτυο",
+    "offlineFeatures": "Λειτουργίες Εκτός Σύνδεσης",
+    "offlineFeaturesDescription": "Μόλις επισκεφτείτε μια σελίδα ενώ είστε online, θα είναι διαθέσιμη εκτός σύνδεσης. Όλα τα δεδομένα σας αποθηκεύονται τοπικά.",
+    "reloadPage": "Επαναφόρτωση Σελίδας",
+    "title": "Είστε Εκτός Σύνδεσης",
+    "tryAgain": "Δοκιμάστε Ξανά"
   },
   "onboarding": {
-    "dontShowAgain": "Μην ξαναδείτε αυτήν την περιήγηση",
+    "dontShowAgain": "Να μην εμφανιστεί ξανά",
     "navigation": {
       "getStarted": "Ξεκινήστε",
       "next": "Επόμενο",
       "previous": "Προηγούμενο",
-      "startTour": "Ξεκινήστε την Περιήγηση"
+      "startTour": "Έναρξη Περιήγησης"
     },
     "quickTip": "💡 Γρήγορη Συμβουλή",
     "skipTour": "Παράλειψη περιήγησης",
     "stepCounter": "Βήμα {current} από {total}",
     "steps": {
       "budgets": {
-        "description": "Δημιουργήστε προϋπολογισμούς για διαφορετικές κατηγορίες δαπανών. Παρακολουθήστε την πρόοδό σας καθ' όλη τη διάρκεια του μήνα και λάβετε ειδοποιήσεις όταν πλησιάζετε στα όριά σας.",
-        "title": "🎯 Ορίστε τους Προϋπολογισμούς σας"
+        "description": "Ορίστε τα οικονομικά σας όρια. Θέστε προσαρμοσμένα όρια και λαμβάνετε ειδοποιήσεις σε πραγματικό χρόνο.",
+        "title": "Ακριβής Προϋπολογισμός"
       },
       "categorize": {
-        "description": "Εξετάστε και προσαρμόστε τις κατηγορίες συναλλαγών. Η έξυπνη κατηγοριοποίηση μας μαθαίνει από τις διορθώσεις σας για να βελτιώνεται με την πάροδο του χρόνου. Χρησιμοποιήστε μαζικές ενέργειες για να κατηγοριοποιήσετε πολλές συναλλαγές ταυτόχρονα!",
-        "title": "🏷️ Κατηγοριοποιήστε & Οργανώστε"
+        "description": "Η τεχνητή νοημοσύνη μαθαίνει από τις συνήθειές σας. Κατηγοριοποιήστε μία φορά κι εμείς θα χειριστούμε αυτόματα παρόμοιες συναλλαγές.",
+        "title": "Έξυπνη Κατηγοριοποίηση"
       },
       "import": {
-        "description": "Ξεκινήστε εισάγοντας τις τραπεζικές σας συναλλαγές από ένα αρχείο CSV. Υποστηρίζουμε τις BMO, Home Trust και πολλές άλλες τράπεζες. Η εφαρμογή θα κατηγοριοποιήσει αυτόματα τις συναλλαγές σας!",
-        "title": "📥 Εισαγάγετε τις Συναλλαγές σας"
+        "description": "Εισαγάγετε απρόσκοπτα το ιστορικό συναλλαγών σας. Υποστηρίζουμε μεγάλες τράπεζες με έξυπνη αυτόματη ανίχνευση.",
+        "title": "Εύκολη Εισαγωγή Δεδομένων"
       },
       "reports": {
-        "description": "Οπτικοποιήστε τα μοτίβα δαπανών σας, παρακολουθήστε την καθαρή σας αξία και λάβετε ενημερωμένες χρηματοοικονομικές αποφάσεις. Ο πίνακας ελέγχου σας ενημερώνεται αυτόματα με κάθε συναλλαγή!",
-        "title": "📊 Δείτε Αναφορές & Στοιχεία"
+        "description": "Αξιοποιήστε τη δύναμη των δεδομένων σας. Οπτικοποιήστε τάσεις, παρακολουθήστε καθαρή αξία και λάβετε αποφάσεις βασισμένες σε αναλυτικά.",
+        "title": "Βαθιά Ανάλυση"
       },
       "welcome": {
-        "description": "Ας κάνουμε μια γρήγορη περιήγηση για να σας βοηθήσουμε να ξεκινήσετε με τη διαχείριση των οικονομικών σας. Δεν θα πάρει πολύ!",
-        "title": "👋 Καλώς ήρθατε στην Εφαρμογή Προϋπολογισμού!"
+        "description": "Ζήστε έναν πιο έξυπνο τρόπο διαχείρισης πλούτου. Ας κάνουμε μια σύντομη περιήγηση στο νέο σας κέντρο ελέγχου.",
+        "title": "Καλώς ήρθατε στην Οικονομική Σαφήνεια"
       }
     },
     "tips": {
-      "budgets": "Ορίστε ρεαλιστικούς προϋπολογισμούς και θα σας ειδοποιήσουμε αν είστε σε καλό δρόμο για να υπερβείτε τα όρια.",
-      "categorize": "Χρησιμοποιήστε το κουμπί γρήγορης κατηγοριοποίησης ή επιλέξτε πολλές συναλλαγές για μαζική κατηγοριοποίηση.",
-      "import": "Σύρετε και αποθέστε το αρχείο CSV σας ή κάντε κλικ για να περιηγηθείτε. Ανιχνεύουμε αυτόματα τις μορφές BMO και Home Trust!"
+      "budgets": "Ορίστε μηνιαία όρια για να βλέπετε την ταχύτητα δαπανών σε πραγματικό χρόνο.",
+      "categorize": "Επιλέξτε πολλαπλές συναλλαγές για μαζική κατηγοριοποίηση — η αποτελεσματικότητα μετράει.",
+      "import": "Απλά σύρετε και αφήστε το αρχείο CSV. Θα χειριστούμε τη μορφοποίηση αυτόματα."
     }
   },
   "onboardingPage": {
@@ -3398,20 +3398,20 @@
     }
   },
   "overspendingAlerts": {
-    "exceededWarning": "At this rate, you'll exceed your budget by {amount} this month.",
-    "percentOfBudget": "{percent}% of budget",
+    "exceededWarning": "Με αυτό τον ρυθμό, θα υπερβείτε τον προϋπολογισμό κατά {amount} αυτόν τον μήνα.",
+    "percentOfBudget": "{percent}% του προϋπολογισμού",
     "progress": {
-      "label": "Current progress"
+      "label": "Τρέχουσα πρόοδος"
     },
     "stats": {
-      "budget": "Budget",
-      "daysLeft": "Days Left",
-      "projectedTotal": "Projected Total",
-      "spentSoFar": "Spent So Far"
+      "budget": "Προϋπολογισμός",
+      "daysLeft": "Υπολ. Ημέρες",
+      "projectedTotal": "Προβλεπόμενο Σύνολο",
+      "spentSoFar": "Δαπανήθηκαν μέχρι τώρα"
     },
     "tip": {
-      "label": "Tip:",
-      "reduceSpending": "Reduce daily spending to {amount} to stay within budget."
+      "label": "Συμβουλή:",
+      "reduceSpending": "Μειώστε ημερήσιες δαπάνες σε {amount} για να παραμείνετε εντός προϋπολογισμού."
     }
   },
   "pairingDialog": {
@@ -3716,26 +3716,26 @@
   },
   "predictiveSpendingChart": {
     "legend": {
-      "actual": "Actual",
-      "confidenceInterval": "Confidence Interval",
-      "predicted": "Predicted"
+      "actual": "Πραγματικό",
+      "confidenceInterval": "Διάστημα Εμπιστοσύνης",
+      "predicted": "Προβλεπόμενο"
     },
-    "noData": "No data available for predictions",
-    "predictionUnavailable": "Prediction Unavailable",
+    "noData": "Δεν υπάρχουν διαθέσιμα δεδομένα για προβλέψεις",
+    "predictionUnavailable": "Μη Διαθέσιμη Πρόβλεψη",
     "stats": {
-      "avgConfidence": "Avg Confidence",
-      "nextMonth": "Next Month",
-      "threeMonthAvg": "3-Month Avg"
+      "avgConfidence": "Μέση Εμπιστοσύνη",
+      "nextMonth": "Επόμενος Μήνας",
+      "threeMonthAvg": "Μ.Ο. 3 Μηνών"
     },
     "table": {
-      "confidence": "Confidence",
-      "month": "Month",
-      "predicted": "Predicted",
-      "range": "Range",
-      "title": "Monthly Predictions"
+      "confidence": "Εμπιστοσύνη",
+      "month": "Μήνας",
+      "predicted": "Προβλεπόμενο",
+      "range": "Εύρος",
+      "title": "Μηνιαίες Προβλέψεις"
     },
-    "title": "Spending Forecast: {category}",
-    "trainingModel": "Training model and generating predictions..."
+    "title": "Πρόβλεψη Δαπανών: {category}",
+    "trainingModel": "Εκπαίδευση μοντέλου και δημιουργία προβλέψεων..."
   },
   "privacyPanel": {
     "active": "Active",
@@ -3855,27 +3855,27 @@
     "deleteButton": "Διαγραφή προφίλ"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "Τραβήξτε για ανανέωση",
+    "release": "Αφήστε για ανανέωση"
   },
   "pwaInstall": {
     "buttons": {
-      "install": "Install",
-      "notNow": "Not now"
+      "install": "Εγκατάσταση",
+      "notNow": "Όχι τώρα"
     },
-    "close": "Close install prompt",
-    "description": "Add to your home screen for quick access and offline use",
+    "close": "Κλείσιμο μηνύματος εγκατάστασης",
+    "description": "Προσθήκη στην αρχική οθόνη για γρήγορη πρόσβαση και χρήση εκτός σύνδεσης",
     "features": {
-      "fastSecure": "Fast & secure",
-      "noAppStore": "No app store needed",
-      "offline": "Works offline"
+      "fastSecure": "Γρήγορο & ασφαλές",
+      "noAppStore": "Δεν χρειάζεται app store",
+      "offline": "Λειτουργεί εκτός σύνδεσης"
     },
-    "iosAddToHome": "\"Add to Home Screen\"",
-    "iosForFullExperience": "for the full app experience with faster loading.",
-    "iosTap": "Tap",
-    "iosThen": "then",
-    "iosTitle": "Install Budget App",
-    "title": "Install Budget App"
+    "iosAddToHome": "\"Προσθήκη στην Αρχική Οθόνη\"",
+    "iosForFullExperience": "για πλήρη εμπειρία εφαρμογής με ταχύτερη φόρτωση.",
+    "iosTap": "Πατήστε",
+    "iosThen": "και μετά",
+    "iosTitle": "Εγκατάσταση Budget App",
+    "title": "Εγκατάσταση Budget App"
   },
   "qrScanner": {
     "allowCameraAccess": "Please allow camera access when prompted",
@@ -3906,38 +3906,38 @@
   },
   "quickCategorize": {
     "buttons": {
-      "apply": "Apply Category",
-      "cancel": "Cancel",
-      "save": "Save"
+      "apply": "Εφαρμογή Κατηγορίας",
+      "cancel": "Ακύρωση",
+      "save": "Αποθήκευση"
     },
-    "clickToSelect": "Click a category to select",
-    "description": "Select a category for {count, plural, =1 {this transaction} other {# transactions}}",
-    "general": "General",
-    "noResults": "No categories found",
-    "pressEnter": "Press ↵ Enter",
-    "saving": "Saving...",
-    "searchPlaceholder": "Search categories...",
-    "title": "Quick Categorize"
+    "clickToSelect": "Κάντε κλικ σε μια κατηγορία",
+    "description": "Επιλέξτε κατηγορία για {count, plural, =1 {αυτή τη συναλλαγή} other {# συναλλαγές}}",
+    "general": "Γενικά",
+    "noResults": "Δεν βρέθηκαν κατηγορίες",
+    "pressEnter": "Πατήστε ↵ Enter",
+    "saving": "Αποθήκευση...",
+    "searchPlaceholder": "Αναζήτηση κατηγοριών...",
+    "title": "Γρήγορη Κατηγοριοποίηση"
   },
   "quickFilters": {
-    "all": "All",
-    "categories": "Categories",
-    "clearFilters": "Clear Filters",
-    "moreCategories": "+{count} more",
+    "all": "Όλα",
+    "categories": "Κατηγορίες",
+    "clearFilters": "Εκκαθάριση Φίλτρων",
+    "moreCategories": "+{count} ακόμη",
     "presets": {
-      "last30": "Last 30 Days",
-      "last90": "Last 90 Days",
-      "thisMonth": "This Month",
-      "thisYear": "This Year"
+      "last30": "Τελευταίες 30 Ημέρες",
+      "last90": "Τελευταίες 90 Ημέρες",
+      "thisMonth": "Αυτός ο Μήνας",
+      "thisYear": "Αυτό το Έτος"
     },
-    "timePeriod": "Time Period"
+    "timePeriod": "Χρονική Περίοδος"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "balance": "Συνολικό Υπόλοιπο",
+    "expenses": "Έξοδα",
+    "income": "Έσοδα",
+    "savingsRate": "Ποσοστό Αποταμίευσης",
+    "savingsRateDescription": "Ποσοστό εσόδων που αποταμιεύθηκε αυτόν τον μήνα"
   },
   "receiptThumbnail": {
     "close": "Close",
@@ -3954,65 +3954,65 @@
   },
   "receiptUpload": {
     "buttons": {
-      "attachReceipt": "Attach Receipt",
-      "chooseDifferent": "Choose Different",
-      "extractData": "Extract Data",
-      "extracting": "Extracting..."
+      "attachReceipt": "Επισύναψη Απόδειξης",
+      "chooseDifferent": "Επιλέξτε Διαφορετικό",
+      "extractData": "Εξαγωγή Δεδομένων",
+      "extracting": "Εξαγωγή..."
     },
     "camera": {
-      "takePhoto": "Take Photo with Camera",
-      "useDevice": "Use your device camera to capture receipt"
+      "takePhoto": "Λήψη Φωτογραφίας με Κάμερα",
+      "useDevice": "Χρησιμοποιήστε την κάμερα για λήψη απόδειξης"
     },
-    "cameraInputLabel": "Camera capture input",
+    "cameraInputLabel": "Λήψη με κάμερα",
     "dropzone": {
-      "browseFiles": "or <link>browse files</link>",
-      "dragDrop": "Drag & drop receipt here",
-      "dropHere": "Drop the receipt here",
-      "supportedFormats": "Supports JPG, PNG, PDF • Max {size}MB"
+      "browseFiles": "ή <link>αναζητήστε αρχεία</link>",
+      "dragDrop": "Σύρετε & αφήστε απόδειξη εδώ",
+      "dropHere": "Αφήστε την απόδειξη εδώ",
+      "supportedFormats": "Υποστηρίζει JPG, PNG, PDF • Μέγ. {size}MB"
     },
     "errors": {
-      "couldNotExtract": "Could not extract data from receipt. Please enter manually.",
-      "extractionFailed": "Failed to extract data. Please try again or enter manually.",
-      "invalidType": "Invalid file type. Only JPG, PNG, and PDF files are allowed",
-      "ocrImagesOnly": "OCR is only supported for image files (JPG, PNG)",
-      "rejected": "File was rejected. Please try again",
-      "tooLarge": "File is too large. Maximum size is {size}MB"
+      "couldNotExtract": "Δεν ήταν δυνατή η εξαγωγή δεδομένων. Εισάγετε χειροκίνητα.",
+      "extractionFailed": "Αποτυχία εξαγωγής δεδομένων. Δοκιμάστε ξανά ή εισάγετε χειροκίνητα.",
+      "invalidType": "Μη έγκυρος τύπος αρχείου. Επιτρέπονται μόνο JPG, PNG και PDF",
+      "ocrImagesOnly": "Η OCR υποστηρίζεται μόνο για αρχεία εικόνας (JPG, PNG)",
+      "rejected": "Το αρχείο απορρίφθηκε. Δοκιμάστε ξανά",
+      "tooLarge": "Το αρχείο είναι πολύ μεγάλο. Μέγιστο μέγεθος {size}MB"
     },
     "extracted": {
-      "amount": "Amount:",
-      "confidence": "Confidence: {percent}%",
-      "date": "Date:",
-      "merchant": "Merchant:",
-      "title": "Data Extracted"
+      "amount": "Ποσό:",
+      "confidence": "Εμπιστοσύνη: {percent}%",
+      "date": "Ημερομηνία:",
+      "merchant": "Έμπορος:",
+      "title": "Εξαγωγή Δεδομένων"
     },
     "pdf": {
-      "noPreview": "Preview not available",
-      "title": "PDF Receipt"
+      "noPreview": "Η προεπισκόπηση δεν είναι διαθέσιμη",
+      "title": "Απόδειξη PDF"
     },
-    "receiptPreview": "Receipt preview",
-    "removeFile": "Remove file"
+    "receiptPreview": "Προεπισκόπηση απόδειξης",
+    "removeFile": "Αφαίρεση αρχείου"
   },
   "recurringTransactions": {
-    "confidence": "{percent}% confidence",
-    "estimatedMonthly": "Estimated Monthly",
+    "confidence": "{percent}% εμπιστοσύνη",
+    "estimatedMonthly": "Εκτιμώμενο Μηνιαίο",
     "frequency": {
-      "biweekly": "Bi-weekly",
-      "monthly": "Monthly",
-      "quarterly": "Quarterly",
-      "weekly": "Weekly"
+      "biweekly": "Δεκαπενθήμερη",
+      "monthly": "Μηνιαία",
+      "quarterly": "Τριμηνιαία",
+      "weekly": "Εβδομαδιαία"
     },
-    "inDays": "{count, plural, =0 {(today)} =1 {(in 1 day)} other {(in # days)}}",
-    "next": "Next: {date}",
-    "occurrences": "{count, plural, =1 {1 occurrence detected} other {# occurrences detected}}",
+    "inDays": "{count, plural, =0 {(σήμερα)} =1 {(σε 1 ημέρα)} other {(σε # ημέρες)}}",
+    "next": "Επόμενη: {date}",
+    "occurrences": "{count, plural, =1 {1 εμφάνιση ανιχνεύτηκε} other {# εμφανίσεις ανιχνεύτηκαν}}",
     "perPeriod": {
-      "month": "per month",
-      "quarter": "per quarter",
-      "twoWeeks": "per 2 weeks",
-      "week": "per week"
+      "month": "ανά μήνα",
+      "quarter": "ανά τρίμηνο",
+      "twoWeeks": "ανά 2 εβδομάδες",
+      "week": "ανά εβδομάδα"
     },
-    "showingPatterns": "{count, plural, =1 {Showing 1 recurring transaction pattern} other {Showing # recurring transaction patterns}}",
-    "subtitle": "Detected subscriptions and bills",
-    "title": "Recurring Transactions"
+    "showingPatterns": "{count, plural, =1 {Εμφανίζεται 1 μοτίβο επαναλαμβανόμενων συναλλαγών} other {Εμφανίζονται # μοτίβα επαναλαμβανόμενων συναλλαγών}}",
+    "subtitle": "Ανιχνευθείσες συνδρομές και λογαριασμοί",
+    "title": "Επαναλαμβανόμενες Συναλλαγές"
   },
   "reports": {
     "addTransactionsToSeeFlow": "Add income and expense transactions to see your money flow",
@@ -4142,33 +4142,33 @@
     "yourAccounts": "Your Accounts"
   },
   "shortcutsModal": {
-    "close": "Close shortcuts help",
+    "close": "Κλείσιμο βοήθειας συντομεύσεων",
     "proTip": {
-      "description": "Keyboard shortcuts work on any page except when typing in forms. Press {key} anytime to see this help.",
-      "title": "💡 Pro Tip"
+      "description": "Οι συντομεύσεις λειτουργούν σε κάθε σελίδα εκτός φορμών. Πατήστε {key} οποτεδήποτε για αυτή τη βοήθεια.",
+      "title": "💡 Επαγγελματική Συμβουλή"
     },
-    "subtitle": "Power-user productivity tips",
-    "title": "Keyboard Shortcuts"
+    "subtitle": "Συμβουλές παραγωγικότητας για προχωρημένους",
+    "title": "Συντομεύσεις Πληκτρολογίου"
   },
   "sidebar": {
     "actions": {
       "backToHome": "Επιστροφή στην Αρχική",
       "collapseSidebar": "Σύμπτυξη πλαϊνής μπάρας",
-      "expandSidebar": "Επέκταση πλαϊνής μπάρας",
+      "expandSidebar": "Ανάπτυξη πλαϊνής μπάρας",
       "importCsv": "Εισαγωγή CSV",
       "settings": "Ρυθμίσεις",
-      "showAllItems": "Εμφάνιση Όλων των Στοιχείων",
-      "showLess": "Εμφάνιση Λιγότερων"
+      "showAllItems": "Εμφάνιση Όλων",
+      "showLess": "Λιγότερα"
     },
-    "appSubtitle": "Προηγμένα Χρηματοοικονομικά",
-    "appTitle": "Εφαρμογή Προϋπολογισμού",
+    "appSubtitle": "Premium Οικονομικά",
+    "appTitle": "Budget App",
     "navigation": {
       "accounts": "Λογαριασμοί",
       "budgets": "Προϋπολογισμοί",
       "calculators": "Υπολογιστές",
       "categories": "Κατηγορίες",
       "dashboard": "Πίνακας Ελέγχου",
-      "events": "Γεγονότα",
+      "events": "Εκδηλώσεις",
       "futurePlans": "Μελλοντικά Σχέδια",
       "import": "Εισαγωγή CSV",
       "investments": "Επενδύσεις",
@@ -4179,7 +4179,7 @@
       "reports": "Αναφορές",
       "retirement": "Συνταξιοδότηση",
       "scanReceipt": "Σάρωση Απόδειξης",
-      "scenarios": "Σενάρια",
+      "scenarios": "Τι-Αν",
       "settings": "Ρυθμίσεις",
       "subscriptions": "Συνδρομές",
       "transactions": "Συναλλαγές"
@@ -4351,61 +4351,61 @@
     "warningsLabel": "Warnings:"
   },
   "spendingTrendChart": {
-    "forecastFooter": "Forecast based on linear regression of last {months} months",
+    "forecastFooter": "Πρόβλεψη βασισμένη σε γραμμική παλινδρόμηση των τελευταίων {months} μηνών",
     "legend": {
-      "actualSpending": "Actual Spending",
-      "projected": "Projected"
+      "actualSpending": "Πραγματικές Δαπάνες",
+      "projected": "Προβλεπόμενο"
     },
-    "notEnoughData": "Not enough data to generate trends. Add at least 2 months of transactions.",
+    "notEnoughData": "Ανεπαρκή δεδομένα για δημιουργία τάσεων. Προσθέστε τουλάχιστον 2 μήνες συναλλαγών.",
     "stats": {
-      "avgMonthly": "Avg Monthly",
-      "lastMonth": "Last Month",
-      "projected": "Projected"
+      "avgMonthly": "Μέσος Μηνιαίος",
+      "lastMonth": "Τελευταίος Μήνας",
+      "projected": "Προβλεπόμενο"
     },
-    "title": "Spending Trends & Forecast"
+    "title": "Τάσεις & Πρόβλεψη Δαπανών"
   },
   "splitTransaction": {
-    "addSplit": "Add Split ({current}/{max})",
-    "amount": "Amount",
+    "addSplit": "Προσθήκη Μέρους ({current}/{max})",
+    "amount": "Ποσό",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "Ακύρωση",
+      "save": "Αποθήκευση Διαχωρισμού",
+      "saving": "Αποθήκευση..."
     },
-    "category": "Category",
-    "closeModal": "Close modal",
-    "date": "Date:",
-    "distributeEvenly": "Distribute Evenly",
+    "category": "Κατηγορία",
+    "closeModal": "Κλείσιμο παραθύρου",
+    "date": "Ημερομηνία:",
+    "distributeEvenly": "Ομοιόμορφη Κατανομή",
     "errors": {
-      "saveFailed": "Failed to save split transaction"
+      "saveFailed": "Αποτυχία αποθήκευσης διαχωρισμένης συναλλαγής"
     },
     "help": {
-      "step1": "Enter the amount for each category (must total ${amount})",
-      "step2": "Use \"Distribute Evenly\" to split equally across all categories",
-      "step3": "Add up to 5 splits per transaction",
-      "step4": "The original transaction will be hidden and replaced with split items",
-      "title": "How to split transactions:"
+      "step1": "Εισάγετε το ποσό για κάθε κατηγορία (σύνολο ${amount})",
+      "step2": "Χρησιμοποιήστε \"Ομοιόμορφη Κατανομή\" για ίση κατανομή",
+      "step3": "Προσθέστε έως 5 μέρη ανά συναλλαγή",
+      "step4": "Η αρχική συναλλαγή θα κρυφτεί και θα αντικατασταθεί",
+      "title": "Πώς να διαχωρίσετε συναλλαγές:"
     },
-    "maxSplitsReached": "Maximum 5 splits allowed",
-    "minSplitsRequired": "Minimum 2 splits required",
-    "none": "None",
-    "notes": "Notes (Optional)",
-    "notesPlaceholder": "e.g., Business expense, Personal use",
-    "originalAmount": "Original Amount:",
-    "removeThisSplit": "Remove this split",
-    "selectCategory": "Select category...",
-    "splitsCount": "Splits ({current}/{max})",
-    "subcategory": "Subcategory",
-    "title": "Split Transaction",
+    "maxSplitsReached": "Μέγιστο 5 μέρη επιτρέπονται",
+    "minSplitsRequired": "Απαιτούνται τουλάχιστον 2 μέρη",
+    "none": "Καμία",
+    "notes": "Σημειώσεις (Προαιρετικά)",
+    "notesPlaceholder": "π.χ., Επαγγελματικό έξοδο, Προσωπική χρήση",
+    "originalAmount": "Αρχικό Ποσό:",
+    "removeThisSplit": "Αφαίρεση αυτού του μέρους",
+    "selectCategory": "Επιλέξτε κατηγορία...",
+    "splitsCount": "Μέρη ({current}/{max})",
+    "subcategory": "Υποκατηγορία",
+    "title": "Διαχωρισμός Συναλλαγής",
     "validation": {
-      "adjustAmounts": "Adjust split amounts to match the original transaction amount.",
-      "amountsMustMatch": "Split amounts must equal the original transaction amount",
-      "categoryRequired": "All splits must have a category",
-      "matchesOriginal": "✓ Matches original",
-      "overBy": "Over by ${amount}",
-      "readyToSave": "Split amounts match the original transaction. Ready to save!",
-      "total": "Total:",
-      "underBy": "Under by ${amount}"
+      "adjustAmounts": "Προσαρμόστε τα ποσά ώστε να ταιριάζουν με το αρχικό ποσό.",
+      "amountsMustMatch": "Τα ποσά πρέπει να ισούνται με το αρχικό ποσό",
+      "categoryRequired": "Όλα τα μέρη πρέπει να έχουν κατηγορία",
+      "matchesOriginal": "✓ Ταιριάζει με το αρχικό",
+      "overBy": "Υπέρβαση κατά ${amount}",
+      "readyToSave": "Τα ποσά ταιριάζουν με την αρχική συναλλαγή. Έτοιμο για αποθήκευση!",
+      "total": "Σύνολο:",
+      "underBy": "Υπολείπεται κατά ${amount}"
     }
   },
   "splits": {
@@ -4560,30 +4560,30 @@
     }
   },
   "subscriptionCostChart": {
-    "emptyState": "No active subscriptions to analyze",
-    "loadingChart": "Loading chart...",
-    "moreCharges": "+{count} more charges",
-    "perMonth": "/month",
+    "emptyState": "Δεν υπάρχουν ενεργές συνδρομές για ανάλυση",
+    "loadingChart": "Φόρτωση γραφήματος...",
+    "moreCharges": "+{count} ακόμη χρεώσεις",
+    "perMonth": "/μήνα",
     "sections": {
-      "costByCategory": "Cost by Category",
-      "potentialSavings": "Potential Savings",
-      "upcomingCharges": "Upcoming Charges (Next 30 Days)"
+      "costByCategory": "Κόστος ανά Κατηγορία",
+      "potentialSavings": "Πιθανή Εξοικονόμηση",
+      "upcomingCharges": "Επερχόμενες Χρεώσεις (Επόμενες 30 Ημέρες)"
     },
     "summary": {
-      "activeSubscriptions": "{count, plural, =1 {1 active subscription} other {# active subscriptions}}",
-      "annualCost": "Annual Cost",
-      "monthlyCost": "Monthly Cost",
-      "next30Days": "Next 30 Days",
-      "projectedYearly": "Projected yearly spend",
-      "upcomingCharges": "{count, plural, =1 {1 upcoming charge} other {# upcoming charges}}"
+      "activeSubscriptions": "{count, plural, =1 {1 ενεργή συνδρομή} other {# ενεργές συνδρομές}}",
+      "annualCost": "Ετήσιο Κόστος",
+      "monthlyCost": "Μηνιαίο Κόστος",
+      "next30Days": "Επόμενες 30 Ημέρες",
+      "projectedYearly": "Προβλεπόμενη ετήσια δαπάνη",
+      "upcomingCharges": "{count, plural, =1 {1 επερχόμενη χρέωση} other {# επερχόμενες χρεώσεις}}"
     },
     "suggestions": {
-      "inactiveTitle": "Potentially cancelled subscriptions",
-      "inactiveDescription": "{count, plural, =1 {1 subscription has not} other {# subscriptions have not}} charged recently. Verify they are actually cancelled.",
-      "trialsTitle": "Trials ending soon",
-      "trialsDescription": "{count, plural, =1 {1 trial} other {# trials}} ending in the next 7 days. Cancel if you are not using them.",
-      "highCostTitle": "High-cost subscriptions",
-      "highCostDescription": "These subscriptions represent a large portion of your spending. Consider if you are getting full value."
+      "inactiveTitle": "Πιθανά ακυρωμένες συνδρομές",
+      "inactiveDescription": "{count, plural, =1 {1 συνδρομή δεν έχει} other {# συνδρομές δεν έχουν}} χρεωθεί πρόσφατα. Βεβαιωθείτε ότι έχουν ακυρωθεί.",
+      "trialsTitle": "Δοκιμές που λήγουν σύντομα",
+      "trialsDescription": "{count, plural, =1 {1 δοκιμή} other {# δοκιμές}} λήγουν τις επόμενες 7 ημέρες. Ακυρώστε αν δεν τις χρησιμοποιείτε.",
+      "highCostTitle": "Συνδρομές υψηλού κόστους",
+      "highCostDescription": "Αυτές οι συνδρομές αντιπροσωπεύουν μεγάλο μέρος των δαπανών σας. Αξιολογήστε αν αξιοποιείτε πλήρως."
     }
   },
   "subscriptionModal": {
@@ -4749,83 +4749,83 @@
   },
   "transactionModal": {
     "account": {
-      "label": "Account"
+      "label": "Λογαριασμός"
     },
     "advancedOptions": {
-      "available": "{count} available",
-      "label": "Advanced Options"
+      "available": "{count} διαθέσιμες",
+      "label": "Σύνθετες Επιλογές"
     },
     "amount": {
-      "label": "Amount",
-      "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "label": "Ποσό",
+      "placeholder": "0,00",
+      "validationError": "Παρακαλώ εισάγετε έγκυρο ποσό"
     },
     "buttons": {
-      "add": "Add Transaction",
-      "adding": "Adding...",
-      "cancel": "Cancel",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "add": "Προσθήκη Συναλλαγής",
+      "adding": "Προσθήκη...",
+      "cancel": "Ακύρωση",
+      "update": "Ενημέρωση Συναλλαγής",
+      "updating": "Ενημέρωση..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
-      "create": "Create",
-      "createNew": "+ Create New Category",
-      "label": "Category",
-      "lastUsed": "Using last: {category}",
-      "namePlaceholder": "Category name...",
-      "selectPlaceholder": "Select category...",
-      "subcategoriesPlaceholder": "Subcategories (optional, comma-separated)"
+      "aiCategorizing": "AI κατηγοριοποίηση...",
+      "create": "Δημιουργία",
+      "createNew": "+ Δημιουργία Νέας Κατηγορίας",
+      "label": "Κατηγορία",
+      "lastUsed": "Τελευταία χρήση: {category}",
+      "namePlaceholder": "Όνομα κατηγορίας...",
+      "selectPlaceholder": "Επιλέξτε κατηγορία...",
+      "subcategoriesPlaceholder": "Υποκατηγορίες (προαιρετικά, χωρισμένες με κόμμα)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Κλείσιμο παραθύρου",
     "createCategory": {
-      "created": "Category \"{name}\" created!",
-      "failed": "Failed to create category",
-      "nameRequired": "Category name is required"
+      "created": "Η κατηγορία \"{name}\" δημιουργήθηκε!",
+      "failed": "Αποτυχία δημιουργίας κατηγορίας",
+      "nameRequired": "Απαιτείται όνομα κατηγορίας"
     },
     "date": {
-      "label": "Date"
+      "label": "Ημερομηνία"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "Περιγραφή",
+      "placeholder": "π.χ., Ψώνια στο σουπερμάρκετ"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "Μετά από 3 παρόμοιες διορθώσεις, οι μελλοντικές συναλλαγές από αυτόν τον έμπορο θα κατηγοριοποιούνται αυτόματα.",
+      "title": "Εκμάθηση!"
     },
     "notes": {
-      "label": "Notes",
-      "placeholder": "Add any additional notes..."
+      "label": "Σημειώσεις",
+      "placeholder": "Προσθέστε τυχόν σημειώσεις..."
     },
     "receipts": {
-      "addNew": "Add New Receipt",
-      "deleteConfirm": "Are you sure you want to delete this receipt?",
-      "deleteFailed": "Failed to delete receipt",
-      "deleteReceipt": "Delete receipt",
-      "existing": "Existing receipts ({count})",
-      "label": "Receipt Attachments",
-      "newFile": "New: {filename}",
-      "remove": "Remove",
-      "viewFull": "View full receipt"
+      "addNew": "Προσθήκη Νέας Απόδειξης",
+      "deleteConfirm": "Σίγουρα θέλετε να διαγράψετε αυτή την απόδειξη;",
+      "deleteFailed": "Αποτυχία διαγραφής απόδειξης",
+      "deleteReceipt": "Διαγραφή απόδειξης",
+      "existing": "Υπάρχουσες αποδείξεις ({count})",
+      "label": "Συνημμένα Αποδείξεων",
+      "newFile": "Νέο: {filename}",
+      "remove": "Αφαίρεση",
+      "viewFull": "Προβολή πλήρους απόδειξης"
     },
     "subcategory": {
-      "label": "Subcategory",
-      "none": "None",
-      "selectPlaceholder": "Select subcategory..."
+      "label": "Υποκατηγορία",
+      "none": "Καμία",
+      "selectPlaceholder": "Επιλέξτε υποκατηγορία..."
     },
     "tags": {
-      "label": "Tags (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "label": "Ετικέτες (χωρισμένες με κόμμα)",
+      "placeholder": "π.χ., τρόφιμα, εβδομαδιαία, απαραίτητα"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "Προσθήκη Συναλλαγής",
+      "edit": "Επεξεργασία Συναλλαγής"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "Έξοδο",
+      "income": "Έσοδο",
+      "label": "Τύπος"
     }
   },
   "transactionSearch": {
@@ -4872,19 +4872,19 @@
   },
   "transactionTable": {
     "actions": {
-      "attachReceipt": "Attach receipt",
-      "delete": "Delete",
-      "edit": "Edit",
-      "split": "Split"
+      "attachReceipt": "Επισύναψη απόδειξης",
+      "delete": "Διαγραφή",
+      "edit": "Επεξεργασία",
+      "split": "Διαχωρισμός"
     },
-    "emptyState": "No transactions to display",
+    "emptyState": "Δεν υπάρχουν συναλλαγές",
     "headers": {
-      "account": "Account",
-      "actions": "Actions",
-      "amount": "Amount",
-      "category": "Category",
-      "date": "Date",
-      "description": "Description"
+      "account": "Λογαριασμός",
+      "actions": "Ενέργειες",
+      "amount": "Ποσό",
+      "category": "Κατηγορία",
+      "date": "Ημερομηνία",
+      "description": "Περιγραφή"
     }
   },
   "transactions": {
@@ -5051,7 +5051,7 @@
   },
   "welcome": {
     "subtitle": "Ξεκινήστε προσθέτοντας την πρώτη σας συναλλαγή ή εισάγοντας δεδομένα από την τράπεζά σας",
-    "title": "Καλώς ήρθατε στην Εφαρμογή Προϋπολογισμού"
+    "title": "Καλώς ήρθατε στο Budget App"
   },
   "widget": {
     "accountBalances": {
@@ -5059,48 +5059,48 @@
       "title": "Υπόλοιπα Λογαριασμών"
     },
     "budgetProgress": {
-      "description": "Παρακολουθήστε την πρόοδό σας σε σχέση με τους στόχους προϋπολογισμού",
+      "description": "Παρακολουθήστε πώς τα πάτε σε σχέση με τους στόχους σας",
       "title": "Πρόοδος Προϋπολογισμού"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "Παρακολούθηση δαπανών για εκδηλώσεις και έργα",
+      "title": "Προϋπολογισμοί Εκδηλώσεων"
     },
     "incomeVsExpenses": {
-      "description": "Συγκρίνετε τα έσοδά σας και τις δαπάνες σας με την πάροδο του χρόνου",
-      "title": "Έσοδα vs Δαπάνες"
+      "description": "Συγκρίνετε τα κέρδη και τις δαπάνες σας στο χρόνο",
+      "title": "Έσοδα vs Έξοδα"
     },
     "monthlyTrends": {
-      "description": "Οπτικοποιήστε τα χρηματοοικονομικά σας μοτίβα μήνα με μήνα",
+      "description": "Οπτικοποιήστε τα οικονομικά σας μοτίβα μήνα προς μήνα",
       "title": "Μηνιαίες Τάσεις"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "Γρήγορη προβολή της συνολικής σας καθαρής αξίας",
+      "title": "Καθαρή Αξία"
     },
     "recentTransactions": {
-      "description": "Γρήγορη προβολή της τελευταίας σας χρηματοοικονομικής δραστηριότητας",
+      "description": "Γρήγορη προβολή της πρόσφατης οικονομικής δραστηριότητάς σας",
       "title": "Πρόσφατες Συναλλαγές"
     },
     "safeToSpend": {
-      "description": "See how much you can safely spend per category",
-      "title": "Safe to Spend"
+      "description": "Δείτε πόσα μπορείτε να ξοδέψετε ανά κατηγορία",
+      "title": "Ασφαλές για Δαπάνη"
     },
     "spendingByCategory": {
-      "description": "Δείτε πού πηγαίνουν τα χρήματά σας με οπτικές αναλύσεις",
+      "description": "Δείτε πού πηγαίνουν τα χρήματά σας με οπτική ανάλυση",
       "title": "Δαπάνες ανά Κατηγορία"
     },
     "streaks": {
-      "description": "Track your engagement streaks and achievements",
-      "title": "Streaks & Badges"
+      "description": "Παρακολουθήστε τα σερί και τα επιτεύγματά σας",
+      "title": "Σερί & Σήματα"
     },
     "upcomingBills": {
-      "description": "Μην χάσετε ποτέ μια πληρωμή με υπενθυμίσεις λογαριασμών",
+      "description": "Μην χάσετε ποτέ μια πληρωμή με υπενθυμίσεις",
       "title": "Επερχόμενοι Λογαριασμοί"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
-      "title": "Weekly Recap"
+      "description": "Σύνοψη εβδομαδιαίων μοτίβων δαπανών",
+      "title": "Εβδομαδιαία Ανασκόπηση"
     }
   },
   "ynabMigrationWizard": {
