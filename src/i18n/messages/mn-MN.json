@@ -1,65 +1,65 @@
 {
   "accessibilitySettings": {
     "fontSize": {
-      "default": "Default",
-      "description": "Adjust the base text size for better readability",
-      "extraLarge": "Extra Large",
-      "large": "Large",
-      "title": "Font Size"
+      "default": "Стандарт",
+      "description": "Уншихад хялбар болгохын тулд үндсэн текстийн хэмжээг тохируулна уу",
+      "extraLarge": "Маш том",
+      "large": "Том",
+      "title": "Фонтын хэмжээ"
     },
     "infoBox": {
-      "savedAutomatically": "Settings are saved automatically and persist across sessions",
-      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
-      "storedLocally": "Your preferences are stored locally and never sent to servers",
-      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
-      "title": "About Accessibility Settings"
+      "savedAutomatically": "Тохиргоо автоматаар хадгалагдаж, сешнүүдэд хадгалагдана",
+      "seniorsOptimization": "Ахмад горим нь нэг товшилтоор хүртээмжийг оновчилдог",
+      "storedLocally": "Таны тохиргоо төхөөрөмжид хадгалагдаж, серверт илгээгддэггүй",
+      "syncAcrossTabs": "Өөрчлөлтүүд бүх нээлттэй таб дээр бодит цагийн горимд синхрончлогддог",
+      "title": "Хүртээмжийн тохиргооны тухай"
     },
     "presets": {
-      "full": "Full",
-      "fullDesc": "Maximum accessibility",
-      "mild": "Mild",
-      "mildDesc": "Slightly enhanced",
-      "moderate": "Moderate",
-      "moderateDesc": "Recommended for most",
-      "off": "Off",
-      "offDesc": "Standard interface",
-      "title": "Quick Presets:"
+      "full": "Бүрэн",
+      "fullDesc": "Дээд зэргийн хүртээмж",
+      "mild": "Бага",
+      "mildDesc": "Бага зэрэг сайжруулсан",
+      "moderate": "Дунд",
+      "moderateDesc": "Ихэнх хүмүүст тохиромжтой",
+      "off": "Унтраах",
+      "offDesc": "Стандарт интерфейс",
+      "title": "Түргэн тохиргоо:"
     },
     "reducedMotion": {
-      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
-      "title": "Reduced Motion",
-      "toggleLabel": "Toggle reduced motion mode"
+      "description": "Тайван туршлага авахын тулд хөдөлгөөнт дүрс болон шилжилтийг багасгана. Вестибуляр эмгэг эсвэл хөдөлгөөнд мэдрэмтгий хэрэглэгчдэд тустай.",
+      "title": "Хөдөлгөөнийг багасгах",
+      "toggleLabel": "Хөдөлгөөн багасгах горимыг сэлгэх"
     },
     "seniorsMode": {
-      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
-      "title": "Seniors Mode"
+      "description": "Нэг товшилтоор хүртээмжийг сайжруулах: том текст, том товчлуур, хялбаршуулсан интерфейс",
+      "title": "Ахмад горим"
     },
     "themeMode": {
-      "auto": "Auto",
-      "autoDesc": "Match system",
-      "dark": "Dark",
-      "darkDesc": "Easy on eyes",
-      "description": "Choose your preferred color scheme for the budget app",
-      "highContrast": "High Contrast",
-      "highContrastDesc": "Maximum visibility",
-      "light": "Light",
-      "lightDesc": "Bright and clear",
-      "title": "Theme Mode"
+      "auto": "Авто",
+      "autoDesc": "Системтэй тохирох",
+      "dark": "Бараан",
+      "darkDesc": "Нүдэнд зөөлөн",
+      "description": "Төсвийн аппын өнгөний схемийг сонгоно уу",
+      "highContrast": "Өндөр тодосгол",
+      "highContrastDesc": "Хамгийн сайн харагдац",
+      "light": "Цайвар",
+      "lightDesc": "Тод, цэлмэг",
+      "title": "Загварын горим"
     }
   },
   "accessibilityToggle": {
-    "featuresActive": "Accessibility features active",
-    "highContrast": "High Contrast",
-    "highContrastDescription": "Enhanced color contrast",
-    "largeTextMode": "Large Text Mode",
-    "largeTextModeDescription": "Bigger text & touch targets",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDescription": "Minimize animations",
-    "sizeLarge": "Large",
-    "sizeNormal": "Normal",
-    "sizeXLarge": "X-Large",
-    "textSize": "Text Size",
-    "title": "Accessibility"
+    "featuresActive": "Хүртээмжийн функцууд идэвхтэй",
+    "highContrast": "Өндөр тодосгол",
+    "highContrastDescription": "Сайжруулсан өнгөний тодосгол",
+    "largeTextMode": "Том текст горим",
+    "largeTextModeDescription": "Том текст, том товчлуур",
+    "reduceMotion": "Хөдөлгөөн багасгах",
+    "reduceMotionDescription": "Хөдөлгөөнт дүрсийг багасгах",
+    "sizeLarge": "Том",
+    "sizeNormal": "Хэвийн",
+    "sizeXLarge": "Маш том",
+    "textSize": "Текстийн хэмжээ",
+    "title": "Хүртээмж"
   },
   "accessibleChart": {
     "buttons": {

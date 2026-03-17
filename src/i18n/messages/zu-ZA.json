@@ -63,34 +63,34 @@
   },
   "accessibleChart": {
     "buttons": {
-      "chart": "Chart",
-      "showChart": "Show chart view",
-      "showTable": "Show data table view",
-      "table": "Table"
+      "chart": "Ishathi",
+      "showChart": "Bonisa ukubuka kweshathi",
+      "showTable": "Bonisa ukubuka kwethebula ledatha",
+      "table": "Ithebula"
     },
-    "chartDescription": "{description}. {dataPoints} data points shown. {dataList}. Press the Table button to view data in a table format with keyboard navigation support.",
-    "chartTypeDescription": "This is a {chartType} chart with {dataPoints} data points.",
+    "chartDescription": "{description}. Amaphuzu edatha angu-{dataPoints} aboniswe. {dataList}. Cindezela inkinobho Yethebula ukuze ubone idatha ngefomethi yethebula ngosizo lokuzulazula kwekhibhodi.",
+    "chartTypeDescription": "Leli yishathi ye-{chartType} enamaphuzu edatha angu-{dataPoints}.",
     "footer": {
-      "average": "Average:",
-      "total": "Total:"
+      "average": "Isilinganiso:",
+      "total": "Isamba:"
     },
     "keyboardNav": {
-      "srOnly": "Use arrow keys to navigate between rows. Press Tab to navigate to the next element.",
-      "visual": "Use ← → or ↑ ↓ keys to navigate • Home/End to jump to start/end"
+      "srOnly": "Sebenzisa izihluthulelo zemicibisholo ukuze uzulazule phakathi kwemigqa. Cindezela u-Tab ukuze uye esicini esilandelayo.",
+      "visual": "Sebenzisa ← → noma ↑ ↓ izihluthulelo ukuze uzulazule • Home/End ukuze uye ekuqaleni/ekugcineni"
     },
     "summary": {
-      "average": "Average: {value}.",
-      "highest": "Highest value: {label} at {value}.",
-      "lowest": "Lowest value: {label} at {value}.",
-      "total": "Total: {value}."
+      "average": "Isilinganiso: {value}.",
+      "highest": "Inani eliphezulu: {label} nge-{value}.",
+      "lowest": "Inani eliphansi: {label} nge-{value}.",
+      "total": "Isamba: {value}."
     },
-    "switchedToChart": "Switched to chart view",
-    "switchedToTable": "Switched to table view",
+    "switchedToChart": "Kushintshwe kubukwa kweshathi",
+    "switchedToTable": "Kushintshwe kubukwa kwethebula",
     "tableHeaders": {
-      "additionalInfo": "Additional Info",
-      "category": "Category",
-      "period": "Period",
-      "value": "Value"
+      "additionalInfo": "Ulwazi Olwengeziwe",
+      "category": "Isigaba",
+      "period": "Inkathi",
+      "value": "Inani"
     }
   },
   "actions": {
@@ -1505,8 +1505,8 @@
         "title": "Izindleko Zemanzini"
       },
       "netWorthMini": {
-        "assets": "Assets",
-        "liabilities": "Liabilities",
+        "assets": "Impahla",
+        "liabilities": "Izikweletu",
         "title": "Ukunciphisa Okwesikwelo",
         "viewDetails": "Bala Iindlela"
       },
@@ -1526,7 +1526,7 @@
         "noBudgets": "Ama isabelomali ezikwazi ukuspenda ezikhangela",
         "noData": "Ama isabelomali ezikwazi ukuspenda ezikhangela",
         "overBudget": "{amount} ezintsha kusabelomali",
-        "perCategory": "Per category",
+        "perCategory": "Ngesigaba",
         "remaining": "{amount} ezikwazi",
         "safe": "Ezintsha",
         "title": "Izinto ezikwazi ukuspenda",
@@ -1539,13 +1539,13 @@
         "noData": "Kungenzeka ukunciphisa okwesibini",
         "thisMonth": "Emanzini",
         "title": "Ukunciphisa Kwindlela",
-        "total": "Total",
+        "total": "Isamba",
         "uncategorized": "Aqalelwe"
       },
       "streaks": {
-        "badges": "badges",
+        "badges": "amabheji",
         "dayStreak": "izintsha zokusasa",
-        "points": "points",
+        "points": "amaphuzu",
         "title": "Izintsha nezindawo"
       },
       "upcomingBills": {
@@ -1560,7 +1560,7 @@
       "weeklyRecap": {
         "title": "Ukunciphisa Okwesikwelo",
         "viewFull": "Ukunciphisa Okwesikwelo",
-        "vsLastWeek": "vs last week"
+        "vsLastWeek": "vs isonto eledlule"
       }
     }
   },
@@ -1795,7 +1795,7 @@
     "confirmAction": "Qinisekisa Isenzo"
   },
   "draggableWidget": {
-    "dragToReorder": "Drag to reorder widget"
+    "dragToReorder": "Hudula ukuhlela kabusha i-widget"
   },
   "duration": {
     "months": "{count, plural, =1 {1 month} other {# months}}",
@@ -2832,13 +2832,13 @@
     "title": "Link to Loan"
   },
   "linkedLoan": {
-    "loanPrefix": "Loan: {name}",
-    "unlink": "Unlink",
-    "unlinkConfirm": "Unlink this transaction from the loan payment?",
-    "unlinkFailed": "Failed to unlink transaction. Please try again.",
-    "unlinkFromLoan": "Unlink from loan",
-    "viewLoan": "View loan",
-    "viewLoanDetails": "View loan details"
+    "loanPrefix": "Isikweletu: {name}",
+    "unlink": "Susa Ukuxhuma",
+    "unlinkConfirm": "Susa ukuxhuma kulo msebenzi kwenkokhelo yesikweletu?",
+    "unlinkFailed": "Yehlulekile ukususa ukuxhuma komsebenzi. Sicela uzame futhi.",
+    "unlinkFromLoan": "Susa ukuxhuma kwesikweletu",
+    "viewLoan": "Buka isikweletu",
+    "viewLoanDetails": "Buka imininingwane yesikweletu"
   },
   "loanForm": {
     "autoCalculated": "Kubalwe ngokuzenzakalelayo: {amount}",
@@ -3104,7 +3104,7 @@
     "accounts": "Rekeninge",
     "budgets": "Begrotings",
     "categories": "Kategoriewe",
-    "dashboard": "Dashboard",
+    "dashboard": "Idashibhodi",
     "export": "Uitvoer",
     "goals": "Doelwitte",
     "help": "Hulp",
@@ -3322,33 +3322,33 @@
     }
   },
   "onboardingPage": {
-    "back": "Back",
-    "getStarted": "Get Started",
-    "next": "Next",
-    "saving": "Saving...",
-    "stepCounter": "Step {current} of {total}",
+    "back": "Emuva",
+    "getStarted": "Qala",
+    "next": "Okulandelayo",
+    "saving": "Kulondolozwa...",
+    "stepCounter": "Isinyathelo {current} kwengu-{total}",
     "steps": {
       "complete": {
-        "content": "Your profile is ready. Let's go to your dashboard.",
-        "description": "Ready to start budgeting?",
-        "title": "You're All Set!"
+        "content": "Iphrofayili yakho ilungile. Asiye kwidashibhodi yakho.",
+        "description": "Ulungele ukuqala ukwenza isabelo?",
+        "title": "Usilungile!"
       },
       "currency": {
-        "description": "Select your primary currency.",
-        "note": "You can add accounts in other currencies later.",
-        "title": "Currency & Region"
+        "description": "Khetha imali yakho eyinhloko.",
+        "note": "Ungengeza ama-akhawunti ngemali eminye kamuva.",
+        "title": "Imali Nesifunda"
       },
       "profile": {
-        "description": "What should we call you?",
-        "nameLabel": "Your Name",
-        "namePlaceholder": "e.g. Alex",
-        "privacyNote": "This name will be used for your local profile. Your data stays on your device.",
-        "title": "Create Your Profile"
+        "description": "Kufanele sikubize ngokuthini?",
+        "nameLabel": "Igama Lakho",
+        "namePlaceholder": "isib. Alex",
+        "privacyNote": "Leli gama lizosetshenziswa kophrofayili yakho yangasese. Idatha yakho ihlala edivayisini yakho.",
+        "title": "Dala Iphrofayili Yakho"
       },
       "welcome": {
-        "content": "We'll help you set up your profile, choose your currency, and get ready to track your spending.",
-        "description": "Let's get your finances organized in minutes.",
-        "title": "Welcome to Budget App"
+        "content": "Sizokusiza usethe iphrofayili yakho, ukhethe imali yakho, futhi ulungele ukulandelela ukuchitha kwakho.",
+        "description": "Ake sihlele izimali zakho ngokushesha.",
+        "title": "Siyakwamukela ku-Budget App"
       }
     },
     "welcome": {
@@ -3825,27 +3825,27 @@
     "whatsSentDescription": "Izincazelo zemisebenzi ezihlanzwe kuphela (isib., \"AMAZON.COM\"). Awekho amanombolo e-akhawunti, amagama, noma amakheli. Kusetshenziswa i-OpenAI GPT-4o-mini."
   },
   "profileDialog": {
-    "cancel": "Cancel",
-    "confirmPinLabel": "Confirm PIN",
-    "confirmPinPlaceholder": "Confirm PIN",
-    "createDescription": "Add a new profile for a family member. Each profile can have its own private budgets.",
-    "createTitle": "Create Profile",
-    "defaultProfileNote": "This is the default profile and will be selected on app start.",
-    "editDescription": "Update the profile name and avatar color.",
-    "editTitle": "Edit Profile",
-    "enterPinPlaceholder": "Enter PIN",
-    "errorCreateFailed": "Failed to create profile",
-    "errorInvalidPin": "Invalid PIN",
-    "errorNameRequired": "Please enter a name for the profile",
-    "errorNameTooLong": "Name must be 30 characters or less",
-    "errorPinMismatch": "PINs do not match",
-    "errorUpdateFailed": "Failed to update profile",
-    "nameLabel": "Name",
-    "namePlaceholder": "Enter profile name",
-    "pinHelpText": "PIN protects access to this profile. Choose something memorable but not too simple.",
-    "pinLabel": "PIN (4-6 digits)",
-    "protectWithPin": "Protect with PIN",
-    "saveChanges": "Save Changes",
+    "cancel": "Khansela",
+    "confirmPinLabel": "Qinisekisa PIN",
+    "confirmPinPlaceholder": "Qinisekisa PIN",
+    "createDescription": "Engeza iphrofayili entsha yelunga lomndeni. Iphrofayili ngayinye ingaba nezabelo zayo eziyimfihlo.",
+    "createTitle": "Dala Iphrofayili",
+    "defaultProfileNote": "Lena yiphrofayili ezenzakalelayo futhi izokhethelwa lapho i-app iqala.",
+    "editDescription": "Buyekeza igama lephrofayili nombala we-avatar.",
+    "editTitle": "Hlela Iphrofayili",
+    "enterPinPlaceholder": "Faka PIN",
+    "errorCreateFailed": "Yehlulekile ukudala iphrofayili",
+    "errorInvalidPin": "PIN engavumelekile",
+    "errorNameRequired": "Sicela ufake igama lephrofayili",
+    "errorNameTooLong": "Igama kumele libe izinhlamvu ezingu-30 noma ngaphansi",
+    "errorPinMismatch": "Ama-PIN awahambelani",
+    "errorUpdateFailed": "Yehlulekile ukubuyekeza iphrofayili",
+    "nameLabel": "Igama",
+    "namePlaceholder": "Faka igama lephrofayili",
+    "pinHelpText": "I-PIN ivikela ukufinyelela kule phrofayili. Khetha okuyisikhumbuzo kodwa okungalula kakhulu.",
+    "pinLabel": "PIN (izinombolo ezingu-4-6)",
+    "protectWithPin": "Vikela nge-PIN",
+    "saveChanges": "Londoloza Izinguquko",
     "errorDeleteFailed": "Yehlulekile ukususa iphrofayili",
     "deleteTitle": "Susa iphrofayili?",
     "defaultProfile": "Iphrofayili ezenzakalelayo",
@@ -4145,7 +4145,7 @@
     "close": "Hlola i-shortcuts help",
     "proTip": {
       "description": "I-Keyboard shortcuts zingumelwe kwindawo i-pages ezifakwe, kufuneka ukuphuma kwindawo i-forms. Hlola {key} kwindawo ukuphuma kwindawo i-help.",
-      "title": "💡 Pro Tip"
+      "title": "💡 Icebo"
     },
     "subtitle": "I-Productivity tips kwindawo i-power-user",
     "title": "I-Keyboard Shortcuts"
@@ -4170,7 +4170,7 @@
       "dashboard": "I-Dashboard",
       "events": "Imicimbi",
       "futurePlans": "Toekomstige Planne",
-      "import": "Import CSV",
+      "import": "Ngenisa CSV",
       "investments": "Beleggings",
       "loans": "Lenings",
       "netWorth": "Inani Eliphelele",
@@ -4748,43 +4748,43 @@
       "label": "Izinto ezinhliziyo"
     },
     "amount": {
-      "label": "Amount",
+      "label": "Inani",
       "placeholder": "0.00",
-      "validationError": "Please enter a valid amount"
+      "validationError": "Sicela ufake inani elivumelekile"
     },
     "buttons": {
       "add": "Faka Transaction",
-      "adding": "Adding...",
+      "adding": "Kwengezwa...",
       "cancel": "Hlola",
-      "update": "Update Transaction",
-      "updating": "Updating..."
+      "update": "Buyekeza Umsebenzi",
+      "updating": "Kubuyekezwa..."
     },
     "category": {
-      "aiCategorizing": "AI categorizing...",
+      "aiCategorizing": "I-AI iyahlukanisa...",
       "create": "Yenza",
       "createNew": "+ Yenza Kategoriya New",
-      "label": "Category",
+      "label": "Isigaba",
       "lastUsed": "Ukusebenza kusho: {category}",
       "namePlaceholder": "Igama kategoriya...",
       "selectPlaceholder": "Choseza kategoriya...",
       "subcategoriesPlaceholder": "Izinkondlo (kusho, comma-separated)"
     },
-    "closeModal": "Close modal",
+    "closeModal": "Vala i-modal",
     "createCategory": {
       "created": "Kategoriya \"{name}\" yenzelwe!",
       "failed": "Achaze kuyenza kategoriya",
       "nameRequired": "Igama kategoriya kufuneka"
     },
     "date": {
-      "label": "Date"
+      "label": "Usuku"
     },
     "description": {
-      "label": "Description",
-      "placeholder": "e.g., Grocery shopping at Sobeys"
+      "label": "Incazelo",
+      "placeholder": "isib., Ukuthenga ukudla kwa-Sobeys"
     },
     "learned": {
-      "description": "After 3 similar corrections, future transactions from this merchant will auto-categorize.",
-      "title": "Learned!"
+      "description": "Ngemva kokulungiswa okufanayo oku-3, imisebenzi yesikhathi esizayo yalo mthengisi izohlukaniswa ngokuzenzakalelayo.",
+      "title": "Kufundiwe!"
     },
     "notes": {
       "label": "Izinto",
@@ -4797,7 +4797,7 @@
       "deleteReceipt": "Hlola intambo",
       "existing": "Izintambo ezinhliziyo ({count})",
       "label": "Izintambo zokuthola",
-      "newFile": "New: {filename}",
+      "newFile": "Okusha: {filename}",
       "remove": "Hlola",
       "viewFull": "Bala intambo elikhulu"
     },
@@ -4808,16 +4808,16 @@
     },
     "tags": {
       "label": "Izintambo (comma-separated)",
-      "placeholder": "e.g., groceries, weekly, essential"
+      "placeholder": "isib., ukudla, ngesonto, okubalulekile"
     },
     "title": {
-      "add": "Add Transaction",
-      "edit": "Edit Transaction"
+      "add": "Engeza Umsebenzi",
+      "edit": "Hlela Umsebenzi"
     },
     "type": {
-      "expense": "Expense",
-      "income": "Income",
-      "label": "Type"
+      "expense": "Izindleko",
+      "income": "Imali Engenayo",
+      "label": "Uhlobo"
     }
   },
   "transactionSearch": {
@@ -5095,7 +5095,7 @@
   },
   "ynabMigrationWizard": {
     "categoryStep": {
-      "category": "{count, plural, =1 {1 category} other {# categories}}",
+      "category": "{count, plural, =1 {1 isigaba} other {# izigaba}}",
       "createNew": "Ukusebenza kwi-onesi",
       "description": "Mapa i-YNAB categories kwi-categories ezingcinwe ngamva okanye ukusuka kwi-onesi.",
       "mapToExisting": "Mapa kwi-onesi ezingcinwe",
@@ -5105,13 +5105,13 @@
       "willCreate": "Ukusebenza:"
     },
     "completeStep": {
-      "errors": "Errors",
-      "importAnother": "Import Another",
+      "errors": "Amaphutha",
+      "importAnother": "Ngenisa Okunye",
       "success": "Ukukhuphatha Kukhona!",
-      "successMessage": "{count, plural, =1 {1 item imported} other {# items imported}} successfully from YNAB.",
-      "viewTransactions": "View Transactions",
-      "whatNext": "What would you like to do next?",
-      "withIssues": "Import Completed with Issues"
+      "successMessage": "{count, plural, =1 {1 into ingenisiwe} other {# izinto zingenisiwe}} ngempumelelo kusuka ku-YNAB.",
+      "viewTransactions": "Buka Imisebenzi",
+      "whatNext": "Ufuna ukwenzani ngokulandelayo?",
+      "withIssues": "Ukungenisa Kuqedile Ngezinkinga"
     },
     "footer": {
       "back": "Bala",

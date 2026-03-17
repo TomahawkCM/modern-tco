@@ -1,65 +1,65 @@
 {
   "accessibilitySettings": {
     "fontSize": {
-      "default": "Default",
-      "description": "Adjust the base text size for better readability",
-      "extraLarge": "Extra Large",
-      "large": "Large",
-      "title": "Font Size"
+      "default": "Numatytasis",
+      "description": "Koreguokite bazinį teksto dydį geresniam skaitomumui",
+      "extraLarge": "Labai didelis",
+      "large": "Didelis",
+      "title": "Šrifto dydis"
     },
     "infoBox": {
-      "savedAutomatically": "Settings are saved automatically and persist across sessions",
-      "seniorsOptimization": "Seniors Mode provides one-click accessibility optimization",
-      "storedLocally": "Your preferences are stored locally and never sent to servers",
-      "syncAcrossTabs": "Changes sync across all open tabs in real-time",
-      "title": "About Accessibility Settings"
+      "savedAutomatically": "Nustatymai išsaugomi automatiškai ir išlieka tarp sesijų",
+      "seniorsOptimization": "Vyresnių žmonių režimas suteikia vienu spustelėjimu pritaikomumą",
+      "storedLocally": "Jūsų nuostatos saugomos vietinėje atmintyje ir niekada nesiunčiamos į serverius",
+      "syncAcrossTabs": "Pakeitimai sinchronizuojami visuose atidarytuose skirtukuose realiuoju laiku",
+      "title": "Apie pritaikomumo nustatymus"
     },
     "presets": {
-      "full": "Full",
-      "fullDesc": "Maximum accessibility",
-      "mild": "Mild",
-      "mildDesc": "Slightly enhanced",
-      "moderate": "Moderate",
-      "moderateDesc": "Recommended for most",
-      "off": "Off",
-      "offDesc": "Standard interface",
-      "title": "Quick Presets:"
+      "full": "Pilnas",
+      "fullDesc": "Maksimalus pritaikomumas",
+      "mild": "Švelnus",
+      "mildDesc": "Šiek tiek pagerintas",
+      "moderate": "Vidutinis",
+      "moderateDesc": "Rekomenduojama daugumai",
+      "off": "Išjungta",
+      "offDesc": "Standartinė sąsaja",
+      "title": "Greiti nustatymai:"
     },
     "reducedMotion": {
-      "description": "Minimize animations and transitions for a calmer experience. Helpful for users with vestibular disorders or motion sensitivity.",
-      "title": "Reduced Motion",
-      "toggleLabel": "Toggle reduced motion mode"
+      "description": "Sumažinkite animacijas ir perėjimus ramesniam naudojimui. Naudinga vartotojams su vestibuliariniais sutrikimais ar jautrumu judesiui.",
+      "title": "Sumažintas judėjimas",
+      "toggleLabel": "Perjungti sumažinto judėjimo režimą"
     },
     "seniorsMode": {
-      "description": "One-click accessibility enhancement with larger text, bigger touch targets, and simplified interface",
-      "title": "Seniors Mode"
+      "description": "Vienu spustelėjimu pritaikomumo patobulinimas su didesniu tekstu, didesnėmis lietimo zonomis ir supaprastinta sąsaja",
+      "title": "Vyresnių žmonių režimas"
     },
     "themeMode": {
-      "auto": "Auto",
-      "autoDesc": "Match system",
-      "dark": "Dark",
-      "darkDesc": "Easy on eyes",
-      "description": "Choose your preferred color scheme for the budget app",
-      "highContrast": "High Contrast",
-      "highContrastDesc": "Maximum visibility",
-      "light": "Light",
-      "lightDesc": "Bright and clear",
-      "title": "Theme Mode"
+      "auto": "Automatinis",
+      "autoDesc": "Pagal sistemą",
+      "dark": "Tamsi",
+      "darkDesc": "Lengva akims",
+      "description": "Pasirinkite norimą spalvų schemą biudžeto programėlei",
+      "highContrast": "Didelis kontrastas",
+      "highContrastDesc": "Maksimalus matomumas",
+      "light": "Šviesi",
+      "lightDesc": "Ryški ir aiški",
+      "title": "Temos režimas"
     }
   },
   "accessibilityToggle": {
-    "featuresActive": "Accessibility features active",
-    "highContrast": "High Contrast",
-    "highContrastDescription": "Enhanced color contrast",
-    "largeTextMode": "Large Text Mode",
-    "largeTextModeDescription": "Bigger text & touch targets",
-    "reduceMotion": "Reduce Motion",
-    "reduceMotionDescription": "Minimize animations",
-    "sizeLarge": "Large",
-    "sizeNormal": "Normal",
-    "sizeXLarge": "X-Large",
-    "textSize": "Text Size",
-    "title": "Accessibility"
+    "featuresActive": "Pritaikomumo funkcijos aktyvios",
+    "highContrast": "Didelis kontrastas",
+    "highContrastDescription": "Padidintas spalvų kontrastas",
+    "largeTextMode": "Didelio teksto režimas",
+    "largeTextModeDescription": "Didesnis tekstas ir lietimo zonos",
+    "reduceMotion": "Sumažinti judėjimą",
+    "reduceMotionDescription": "Sumažinti animacijas",
+    "sizeLarge": "Didelis",
+    "sizeNormal": "Normalus",
+    "sizeXLarge": "Labai didelis",
+    "textSize": "Teksto dydis",
+    "title": "Pritaikomumas"
   },
   "accessibleChart": {
     "buttons": {
