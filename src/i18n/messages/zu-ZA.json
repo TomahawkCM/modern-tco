@@ -467,8 +467,8 @@
     "backToHome": "Buyela Ekhaya"
   },
   "bottomSheet": {
-    "close": "Close",
-    "dragToClose": "Drag down to close"
+    "close": "Vala",
+    "dragToClose": "Hudulela phansi ukuze uvale"
   },
   "breadcrumb": {
     "budgetAnalyzer": "Budget Analyzer",
@@ -1409,9 +1409,9 @@
     "useSavedMapping": "Sebenzisa Ukumapa Okulondoloziwe"
   },
   "combobox": {
-    "noResults": "No results found.",
-    "search": "Search...",
-    "select": "Select..."
+    "noResults": "Awekho imiphumela etholakele.",
+    "search": "Sesha...",
+    "select": "Khetha..."
   },
   "commandPalette": {
     "commands": {
@@ -1419,7 +1419,7 @@
       "budgets": "Isabelomali",
       "categories": "Izicatshini",
       "darkTheme": "Ukushayelela Okhulu",
-      "dashboard": "Dashboard",
+      "dashboard": "Idashibhodi",
       "exportData": "Hlanga Data",
       "futurePlans": "Izinto ezinhlawu",
       "highContrastTheme": "Ukushayelela Okhulu",
@@ -1442,7 +1442,7 @@
       "wealth": "Ukuthengiselwa & Ukuphatha"
     },
     "noResults": "Amaqanda amandla.",
-    "placeholder": "Type a command or search..."
+    "placeholder": "Bhala umyalo noma usesha..."
   },
   "common": {
     "cancel": "Kanselleer",
@@ -1798,8 +1798,8 @@
     "dragToReorder": "Hudula ukuhlela kabusha i-widget"
   },
   "duration": {
-    "months": "{count, plural, =1 {1 month} other {# months}}",
-    "years": "{count, plural, =1 {1 year} other {# years}}",
+    "months": "{count, plural, =1 {1 inyanga} other {# izinyanga}}",
+    "years": "{count, plural, =1 {1 unyaka} other {# iminyaka}}",
     "yearsAndMonths": "{years}y {months}m"
   },
   "emptyStates": {
@@ -1856,9 +1856,9 @@
     "aiAnalysis": "Ukukhona kwe-AI:",
     "closeModal": "Hlanga Modal",
     "footer": {
-      "close": "Close",
-      "needHelp": "Need more help?",
-      "viewGuide": "View troubleshooting guide"
+      "close": "Vala",
+      "needHelp": "Usadinga usizo?",
+      "viewGuide": "Buka umhlahlandlela wokulungisa"
     },
     "recovery": {
       "canRecover": "Ukukhona kufuneka! Sinekho {count} {count, plural, =1 {indlela} other {indlela}} ukukhona kwe-error.",
@@ -1881,7 +1881,7 @@
     "technical": {
       "canRecover": "Ukukhona kufuneka:",
       "errorCategory": "Iindlela Zokukhona:",
-      "no": "No",
+      "no": "Cha",
       "severity": "Ukukhona:",
       "suggestions": "Iindlela Zokukhona:",
       "title": "Iindlela Zokukhona Teknikal",
@@ -2098,14 +2098,14 @@
     "title": "Ukubuyekeza KwangoLwesihlanu"
   },
   "healthScore": {
-    "ariaLabel": "Financial Health Score: {score} out of 100. {interpretation}",
+    "ariaLabel": "Amamaki Empilo Yezezimali: {score} kwengu-100. {interpretation}",
     "emptyState": {
-      "line1": "Add transactions to see your",
-      "line2": "Financial Health Score"
+      "line1": "Engeza imisebenzi ukuze ubone",
+      "line2": "Amamaki Empilo Yakho Yezezimali"
     },
-    "grade": "Grade: {grade}",
-    "missingFactors": "{count, plural, =1 {1 factor missing} other {# factors missing}}",
-    "title": "Financial Health",
+    "grade": "Izinga: {grade}",
+    "missingFactors": "{count, plural, =1 {1 isici esintulekayo} other {# izici ezintulekayo}}",
+    "title": "Impilo Yezezimali",
     "history": {
       "title": "Umlando Wamaphuzu",
       "monthsOfData": "{count} {count, plural, =1 {inyanga} other {izinyanga}} zedatha",
@@ -2248,8 +2248,8 @@
       "decrypt": "Hlola & Fakwa",
       "encrypted": "Le file lihlala",
       "enterPassword": "Ngena i-password",
-      "hint": "Hint: {hint}",
-      "password": "Password"
+      "hint": "Icebo: {hint}",
+      "password": "Iphasiwedi"
     },
     "importing": {
       "pleaseWait": "Sithole, leyo kungenza kwindawo",
@@ -2262,11 +2262,11 @@
       "version": "Ukunciphisa"
     },
     "selectFile": {
-      "dragDrop": "or drag and drop here",
-      "label": "Click to select a .budget file"
+      "dragDrop": "noma hudula ubeke lapha",
+      "label": "Chofoza ukukhetha ifayela le-.budget"
     },
-    "subtitle": "Restore from .budget file",
-    "title": "Import Data"
+    "subtitle": "Buyisela kusuka kufayela le-.budget",
+    "title": "Ngenisa Idatha"
   },
   "investmentAccountModal": {
     "buttons": {
@@ -3093,11 +3093,11 @@
   },
   "morePage": {
     "groups": {
-      "toolsSettings": "Tools & Settings",
-      "trackingAnalysis": "Tracking & Analysis",
-      "wealthPlanning": "Wealth & Planning"
+      "toolsSettings": "Amathuluzi Nezilungiselelo",
+      "trackingAnalysis": "Ukulandelela Nokuhlaziya",
+      "wealthPlanning": "Ingcebo Nokuhlela"
     },
-    "title": "More"
+    "title": "Okwengeziwe"
   },
   "nav": {
     "about": "Oor",
@@ -3855,8 +3855,8 @@
     "deleteButton": "Susa iphrofayili"
   },
   "pullToRefresh": {
-    "pull": "Pull to refresh",
-    "release": "Release to refresh"
+    "pull": "Donsa ukuze ubuyekeze",
+    "release": "Khulula ukuze ubuyekeze"
   },
   "pwaInstall": {
     "buttons": {
@@ -3933,11 +3933,11 @@
     "timePeriod": "Ukunciphisa okwesiklo"
   },
   "quickStats": {
-    "balance": "Total Balance",
-    "expenses": "Expenses",
-    "income": "Income",
-    "savingsRate": "Savings Rate",
-    "savingsRateDescription": "Percentage of income saved this month"
+    "balance": "Ibhalansi Yonke",
+    "expenses": "Izindleko",
+    "income": "Imali Engenayo",
+    "savingsRate": "Izinga Lokulondoloza",
+    "savingsRateDescription": "Iphasenti lemali engenayo elondoloziwe kule nyanga"
   },
   "receiptThumbnail": {
     "close": "Close",
@@ -4368,9 +4368,9 @@
     "addSplit": "Yakha i-split ({current}/{max})",
     "amount": "Intengo",
     "buttons": {
-      "cancel": "Cancel",
-      "save": "Save Split",
-      "saving": "Saving..."
+      "cancel": "Khansela",
+      "save": "Londoloza Ukuhlukanisa",
+      "saving": "Kulondolozwa..."
     },
     "category": "Isicatshulwa",
     "closeModal": "Hlula i-modal",
@@ -4404,7 +4404,7 @@
       "matchesOriginal": "✓ Ukuhlanganisa le transaction original",
       "overBy": "Kuphuma kwindawo ${amount}",
       "readyToSave": "I-splits zingumelwe kwindawo le transaction original. Ready to save!",
-      "total": "Total:",
+      "total": "Isamba:",
       "underBy": "Kuphuma kwindawo ${amount}"
     }
   },
@@ -5053,8 +5053,8 @@
       "title": "Begroting Voortgang"
     },
     "eventBudget": {
-      "description": "Track spending for events and projects",
-      "title": "Event Budgets"
+      "description": "Landelela ukuchitha kwemicimbi namaphrojekthi",
+      "title": "Izabelo Zemicimbi"
     },
     "incomeVsExpenses": {
       "description": "Vergelyk jou verdienste en besteding oor tyd",
@@ -5065,8 +5065,8 @@
       "title": "Maandelikse Tendense"
     },
     "netWorthMini": {
-      "description": "Quick view of your total net worth",
-      "title": "Net Worth"
+      "description": "Ukubuka okusheshayo kwengcebo yakho ehlanzekile yonke",
+      "title": "Ingcebo Ehlanzekile"
     },
     "recentTransactions": {
       "description": "Vinige oorsig van jou jongste finansiële aktiwiteite",
@@ -5089,7 +5089,7 @@
       "title": "Komende Rekeninge"
     },
     "weeklyRecap": {
-      "description": "Summary of your weekly spending patterns",
+      "description": "Isifinyezo sezimo zakho zokuchitha ngesonto",
       "title": "Ukunciphisa Okwesikwelo"
     }
   },
